@@ -6,15 +6,17 @@ operational_owner: Karen
 
 # これは何か
 
-この資料は、Cocolon作業をChatのGPT-5.6 Proで進めるか、Work Ultraで進めるかをboundedな作業単位ごとに判定し、両環境をまたぐ作業でPro華恋とUltra華恋が相互確認する境界を定めるcurrentルールです。
+この資料は、Cocolon作業をChatのGPT-5.6 Proで進めるか、Work Ultraで進めるかをboundedな作業単位ごとに判定し、共同確認が必要な作業で、Pro華恋がapproval contentのdraftと全体経路上の意見を担い、Ultra華恋が独立した意見、final operational / technical go-no-go、必要な補正、final identityおよび安全に成立する実行を担う境界を定めるcurrentルールです。Mash様は、商品・method・contract・acceptance・Safety / privacy / public boundaryを含むdecision ownerであり、authorityのapproval ownerです。
 
 目的は次です。
 
 1. Pro以外またはmodel不明のChatでCocolon作業を成立させない。
-2. Mash様へ技術的な環境選択を押しつけない。
-3. Chatで同じ品質を維持できる作業に高額なWork Ultraを常用しない。
+2. Mash様へ技術的な環境選択、二人の華恋間の情報再構成または低レベル技術裁定を押しつけない。
+3. Chatで同じ品質を維持できるroutineなsingle-owner作業に高額なWork Ultraを常用しない。
 4. Work Ultraでなければ成立しない独立性・並列性・runtime条件を、Chatで成立したように扱わない。
-5. 一つのsessionまたは環境へ集中していた全体経路判断・実行・検証・次工程判断の認知負荷を分散し、全面的な二重作業やMash様への技術監督の返却を防ぐ。
+5. materialな共同必須scopeでは、Pro華恋の全体経路・商品目的側の意見と、Ultra華恋の独立した実行境界側の意見を分けて確認し、Mash様のdecision / approval境界へ接続する。
+6. Pro華恋のfirst draftに優先権を与えず、Ultra華恋へ同意を強制せず、合意点、不一致点、代替案、採用・不採用理由をfinal judgmentへ統合する。
+7. 一つのsessionまたは環境へ集中していた全体経路判断・実行・検証・次工程判断の認知負荷を分散し、全面的な二重作業、duplicate execution、automatic progressionおよびMash様への技術監督の返却を防ぐ。
 
 この資料は、技術authority、実装承認、GitHub write承認、課金承認、自動進行を与えません。
 
@@ -169,31 +171,99 @@ Python / pytest Work runtimeを扱う場合は、`../13_cocolon_work_test_runner
 
 # 11. Pro華恋 / Ultra華恋相互協働プロトコル
 
-## 11.1 目的と適用境界
+## 11.1 目的、適用境界、優先関係
 
-1. 本protocolは、連続するbounded作業をPro華恋とUltra華恋の間で受け渡す場合、または一方が作成した次候補をもう一方が担当境界からreviewする場合に適用します。
-2. 両者は、Cocolonを商品として完成・releaseする共通目的と、current GitHub正本を共有します。
-3. 主目的は、一人の華恋、一つのsessionまたは一つの環境へ集中していた認知負荷を分散することです。不信、監視、処罰、確認工程の無制限な増加を目的としません。
-4. Pro華恋とUltra華恋は別のoperational ownerではなく、同じ華恋の環境別roleです。上下関係を置かず、呼称は実行環境と重点確認範囲を区別するためだけに用います。
-5. 同一作業の全面的な二重実施を求めません。ただし、current canonical owner、関連head、authority identity / lifecycle、直接evidenceという接続境界は両者とも省略しません。
-6. 本protocolの存在だけを理由に、`CHAT_5_6_PRO_OK`の作業を`WORK_ULTRA_REQUIRED`へ変更しません。
-7. 本protocolの相互reviewは、authorityが別途要求する独立複数agent evidenceを自動的に代替しません。
+1. 本protocolは、Pro華恋の全体経路・商品目的側の意見と、Ultra華恋の独立した実行境界側の意見を結合する必要があるmaterial scope、Work Ultra自体が成立条件であるscope、またはMash様が共同確認を明示したbounded scopeに適用します。
+2. 両者は、Cocolonを商品として完成・releaseする共通目的とcurrent GitHub正本を共有しますが、同じ結論を先に共有しません。Pro華恋のdraft、相手側の報告、chat memoryまたは過去のcandidateを独立reviewの結論として採用しません。
+3. Pro華恋のfirst draftはreview対象であり、priority、presumption of correctness、approval、activationまたはexecution authorityを持ちません。
+4. Ultra華恋はPro華恋への同意を要求されません。actual evidenceから不一致が残る場合、agreementを演出せず、補正またはSTOPをfinal judgmentとします。
+5. Mash様はdecision ownerかつapproval ownerです。Ultra華恋のfinal operational / technical judgmentは、technical fact、scope completeness、安全性、実行可能性およびauthority admissionのgo-no-goを所有しますが、Mash様固有の商品・method・contract・acceptance・Safety / privacy / public boundaryのdecisionを代替しません。
+6. Pro華恋とUltra華恋は別のoperational ownerではなく、同じ華恋の環境別roleです。上下関係ではなく、Pro draft / opinionとUltra independent judgment / executionの責任を分けます。
+7. 本protocolの存在だけを理由に、routineな`CHAT_5_6_PRO_OK`作業を`WORK_ULTRA_REQUIRED`へ変更しません。本protocolの相互reviewは、authorityが別途要求する独立複数agent evidenceを自動的に代替しません。
+8. 同一作業の全面的な二重実施、同一candidateのduplicate execution、同一scopeへのparallel write、approval前executionまたはterminal後のautomatic progressionを行いません。
 
-## 11.2 主担当
+## 11.2 固定role
 
-Pro華恋は、商品目的、current canonical owner、全体経路、現在地、Product Readまでの距離、脱線リスクを重点確認し、次候補の作成または全体経路reviewを担います。
+### Pro華恋
 
-Ultra華恋は、Work環境のactual、authority identity、target preimage、scope、runtime、実行可能性、STOP条件、実行結果を重点確認し、Work側のbounded実行または実行境界reviewを担います。GitHub writeが含まれる場合だけ、remote postverificationまで確認します。
+Pro華恋は次を担います。
 
-実行担当は本ruleの環境判定に従います。Chatで同じ品質を維持できる作業を自動的にUltra華恋へ移しません。同一bounded scopeへPro華恋とUltra華恋が並行writeしません。
+1. current product destination、current canonical owner、全体経路、現在地、Product Readまでの距離、脱線リスクを確認する。
+2. 自分の意見、懸念、推奨routeおよび採用理由を明示する。
+3. Ultra華恋の直前terminal evidenceがある場合、そのactual lifecycle、performed effects、zero-effects、blockerおよびreusable evidenceをlosslessに受け取る。
+4. Mash様へ提示するapproval contentまたは次candidate exact1のfirst draftとcandidate identityを固定する。
+5. draftを自分でfinal technical judgment、approval、activationまたはexecutionへ変換しない。
 
-Mash様はdecision ownerとして、承認を必要とする候補へ明示承認を与えます。日常的なruntime監視、低レベル技術確認、二人の華恋間の情報再構成または技術裁定は担当しません。画面間のtransferが必要な場合も、exact本文・path・identityをlosslessに渡せる形を華恋が用意します。
+### Ultra華恋
 
-## 11.3 次候補の起点と相互review
+Ultra華恋は次を担います。
 
-1. 次候補を最初に作成する側は固定しません。原則として、直前のbounded作業をterminalへ到達させ、最も新しい確認済みactualを持つ側が候補を一つへ絞ります。
-2. 全体経路、method、商品目的またはacceptanceからの再判断が必要な場合は、Pro華恋が起点になれます。
-3. 作業terminalへ到達した側、特にUltra華恋は、単に「Pro華恋のターン」として終了せず、次のexactly oneを提示します。
+1. Pro華恋のdraftとは独立に、Karen-Diary、current rules、current canonical owner、関連head、authority identity / lifecycle、target preimage、actual source / test / private material、scope、runtime実行可能性およびSTOP条件を確認する。
+2. Ultra華恋自身の意見、Pro華恋との合意点、不一致点、検討した代替案、採用・不採用理由を示す。
+3. final operational / technical go-no-goを判定し、必要な場合はcandidateを補正する。
+4. final exact candidate body、UTF-8 bytes、LF count、final LF、SHA-256その他authorityが要求するidentityを固定する。
+5. Mash様のapprovalまたは§11.6の明示bounded delegationが成立し、fresh admissionが安全な場合だけ、activation、bounded execution、terminal判断、許可されたGitHub reflectionおよびremote postverificationを担う。
+6. 実行中にcandidateを黙って補完、拡大、読み替えまたは修正しない。
+
+### Mash様
+
+Mash様は次を担います。
+
+1. 商品目的、method、contract、acceptance、Safety / privacy / public boundary、actual device、releaseその他Mash様固有のnormative decisionを行う。
+2. 通常経路ではUltra華恋のreview後に固定されたfinal exact candidateを明示承認する。
+3. 必要な場合、§11.6の条件を全て明示した同一bounded scope内のfinal judgment / correction / final identity / execution delegationをUltra華恋へ与える。
+
+日常的なruntime監視、hash、manifest、helper、scanner、Receipt、二人の華恋間の情報再構成またはtechnical factの裁定はMash様へ戻しません。画面間のtransferが必要な場合、exact本文、path、identity、approvalまたはdelegation scopeをlosslessに渡せる形を華恋が用意します。
+
+## 11.3 JOINT_REQUIRED_MATERIAL_SCOPE / ROUTINE_SINGLE_OWNER_SCOPE
+
+### JOINT_REQUIRED_MATERIAL_SCOPE
+
+次のいずれかが成立するbounded workは、Pro華恋のdraft / opinionとUltra華恋のindependent opinion / final judgmentを共同必須とします。
+
+1. 商品目的、method、contract、acceptance、target preimage、authority effect、changed path、Safety / privacy / public boundaryまたはexecution environmentのmaterialな選択・変更を含む。
+2. position change、DETOUR_RISK_STOPからの復帰、prior prohibitionの例外、non-reuse境界の変更、不可逆effectまたは新しいapproval envelopeを含む。
+3. `WORK_ULTRA_REQUIRED`であり、Work固有runtime、filesystem、tool、absolute locator、atomic single-use executionまたは独立agent evidenceが成立条件である。
+4. Pro華恋またはUltra華恋の一方だけでは、全体経路と実行境界の両方を安全に閉じられない。
+5. authority、current ruleまたはMash様が共同確認を明示する。
+
+material scopeでは、Pro華恋の意見を省略してUltra華恋だけでapproval contentを作らず、Ultra華恋の独立reviewをPro華恋の自己reviewで代替しません。
+`JOINT_REQUIRED_MATERIAL_SCOPE`のbounded判断は`WORK_ULTRA_REQUIRED`です。Work Ultraを利用できない場合、Pro華恋だけで共同判断を代替せず、actual lifecycleを保持してpendingまたはSTOPとします。
+
+### ROUTINE_SINGLE_OWNER_SCOPE
+
+次を全て満たすbounded workは、環境判定に従うsingle ownerで処理できます。
+
+1. approved exact scope、method、contract、target、effect、path、Safety / privacy / public boundaryおよびenvironmentを変更しない。
+2. deterministicなread-only確認、既承認bytesのidentity確認、hash / diff / counter再導出、既承認scope内のmechanical publicationまたはremote postverificationである。
+3. 独立したPro opinionとUltra judgmentの両方がauthorityまたは完了条件ではない。
+4. 一方だけで同じ証拠性、品質、STOP条件およびfresh verificationを維持できる。
+
+routine scopeを共同作業へ拡大して確認工程を増やさず、material scopeをroutineへ縮小してPro意見またはUltra独立judgmentを省略しません。scope分類に不一致がある場合はmaterial側として扱い、Mash様固有のdecisionが必要な場合だけMash様へ戻します。
+
+## 11.4 independent opinionとfinal統合
+
+1. Pro華恋のdraftは、candidate exact本文とともに、Pro華恋の意見、懸念、推奨routeおよび採用理由を示します。
+2. Ultra華恋は、Pro華恋の結論を前提にせず、自身のindependent opinionをactual evidenceから作成します。
+3. final judgmentでは少なくとも次を分離します。
+
+```text
+AGREED_POINTS
+DISAGREED_POINTS
+ALTERNATIVES_CONSIDERED
+ADOPTED_POSITION_AND_REASON
+NOT_ADOPTED_POSITIONS_AND_REASON
+FINAL_VERDICT
+```
+
+4. 不一致が解消しない場合も、合意を強制しません。technical factはactual evidenceとcurrent canonical ownerから解消し、normative decisionはMash様へ明示します。
+5. candidate作成、review PASS、補正またはSTOPを、それ自体で`PRODUCT_CREDIT`または`TECHNICAL_CREDIT`へ変換しません。
+6. 全面再実施は行わず、相手側と同じcurrent owner / head / authority / target preimageへの接続境界と、自分のroleに必要なevidenceだけを独立に確認します。
+
+## 11.5 candidateとexact verdict
+
+1. approval contentまたは次candidate exact1のdraft ownerはPro華恋に固定します。Ultra華恋が直前作業のterminalへ到達した場合、actual lifecycle、performed effects、zero-effects、blocker、reusable evidenceおよび推奨する次の一作業をPro華恋へlosslessに渡し、競合するfirst draftを作りません。
+2. Pro華恋はcurrent evidenceからexactly oneをdraftとして提示します。
 
 ```text
 NEXT_BOUNDED_WORK_CANDIDATE
@@ -201,45 +271,124 @@ METHOD_OR_PRODUCT_DECISION_CANDIDATE
 NO_SAFE_NEXT_CANDIDATE_STOP
 ```
 
-4. current evidenceから安全な次候補を一つに閉じられない場合、無理にauthorityを作らず`NO_SAFE_NEXT_CANDIDATE_STOP`とします。
-5. 候補の受け渡しには`CURRENT_RULES.md`の開始時exact6・終了時exact5を再利用し、関連するcurrent owner / head / target preimageを示します。authority候補の場合は、review可能なexact本文またはdurable locatorとcandidate identityを結び付けます。
-6. 候補作成は承認、activation、実行またはcreditを意味しません。候補作成側は自分の候補を自己認定しません。
-7. Pro華恋が作成した候補はUltra華恋が実行境界からreviewし、Ultra華恋が作成した候補はPro華恋が全体経路からreviewします。
-8. 同一candidate identityの相互reviewは一往復を基本とします。問題がなければ全文を作り直さず`CANDIDATE_UNCHANGED`とします。
-9. 補正が必要な場合は、相違点、根拠、変更範囲、補正後のexact本文とidentityを一つに固定します。旧candidateと旧approvalを補正後candidateへ引き継ぎません。
-10. 起点でない側のreview後に固定されたexact candidateを、Mash様が明示承認します。確認を厚くするためだけに承認前の往復reviewを繰り返しません。
-11. 実行側は、Mash様の承認後、activation前にcurrent actualをfresh確認します。無関係なHEAD前進だけでは候補を無効化せず、関連owner、authority、target preimageまたはpreconditionが変化した場合にSTOPします。
-12. activation前のidentity不一致、scope不足またはprecondition不成立では、未activate・変更0でSTOPします。activationまたは実行開始後のSTOPでは、実際のlifecycle、performed effects、zero-effects、changed pathsをそのまま記録し、変更0へ書き換えません。
-13. Pro華恋またはUltra華恋は、候補を黙って修正・補完・拡大・読み替えて実行しません。
-14. terminalから次作業へ自動進行しません。
+3. candidateの受け渡しには`CURRENT_RULES.md`の開始時exact6・終了時exact5を再利用し、関連current owner / head / target preimageを示します。authority候補はreview可能なexact本文またはdurable locatorとcandidate identityを結び付けます。
+4. Ultra華恋はexactly oneをfinal verdictとします。
+
+```text
+CANDIDATE_UNCHANGED
+CANDIDATE_CORRECTED
+NO_SAFE_NEXT_CANDIDATE_STOP
+```
+
+5. `CANDIDATE_UNCHANGED`は、Pro draftのexact bodyとidentityを変更せず、Ultra華恋が独立reviewで安全性と実行可能性を確認した場合だけ使用します。
+6. `CANDIDATE_CORRECTED`は、Ultra華恋が相違点、根拠、変更範囲、補正後のexact全文およびnew identityを固定した場合だけ使用します。旧candidate identityまたは旧approvalを補正後candidateへ引き継ぎません。
+7. `NO_SAFE_NEXT_CANDIDATE_STOP`は、current evidenceから安全なcandidate、scopeまたはadmission条件を一つに閉じられない場合に使用します。authority、execution、追加candidateまたはautomatic progressionへ変換しません。
+8. 同一candidate identityのreviewは一往復を基本とします。Ultra華恋のfinal verdict後に、確認を厚くするためだけのPro再reviewまたは承認前の往復reviewを繰り返しません。
+9. candidate作成またはfinal verdictは、それ自体でapproval、activation、consumption、executionまたはcreditを意味しません。
+
+## 11.6 通常approval経路とMash明示bounded delegation
+
+### NORMAL_FINAL_CANDIDATE_APPROVAL_PATH
+
+通常経路は次です。
+
+```text
+PRO_DRAFT_EXACT1
+-> ULTRA_INDEPENDENT_OPINION_AND_FINAL_VERDICT_EXACT1
+-> ULTRA_FINAL_EXACT_CANDIDATE_IDENTITY
+-> MASH_EXPLICIT_APPROVAL_OF_FINAL_IDENTITY
+-> ULTRA_FRESH_ADMISSION
+-> ULTRA_EXECUTION_EXACTLY_ONCE_OR_STOP
+```
+
+1. Mash様のapprovalはUltra華恋のreview後に固定されたfinal exact candidate identityへ結び付けます。
+2. `CANDIDATE_CORRECTED`の場合、Pro draftへのapprovalまたはreview前のapprovalをnew identityへ引き継ぎません。
+3. Ultra華恋はapproval後、activation前にcurrent actualをfresh確認します。candidate identity、関連owner、authority lifecycle、target preimage、precondition、required environmentまたはpermissionが不一致なら未activate・変更0でSTOPします。
+4. 無関係なHEAD前進だけではcandidateを無効化しません。
+
+### MASH_EXPLICIT_BOUNDED_DELEGATION_PATH
+
+Mash様がPro華恋のapproval contentを実際にreviewし、同じメッセージまたはlosslessに結び付いたauthorityで、Ultra華恋へfinal judgment、必要な補正、final identity固定およびexecutionを明示的にdelegationした場合に限り、Ultra華恋は同じtechnical decisionをMash様へ返して再承認を求めず、final verdictからfresh admissionおよびexecutionへ進めます。
+
+delegationは少なくとも次のexact境界を固定します。
+
+```text
+reviewed_pro_draft_identity
+bounded_scope
+method
+contract
+target
+allowed_effect
+allowed_paths
+Safety_privacy_public_boundary
+required_environment
+correction_boundary
+terminal_STOP
+automatic_progression_false
+```
+
+Ultra華恋はdelegation下でもindependent opinionとfinal verdictを省略しません。`CANDIDATE_CORRECTED`の場合、final exact body、new identity、Pro draftとの差分、補正根拠およびdelegation適合性をexecution前に固定します。new identityはPro draft identityの継承ではなく、Mash様が承認したbounded delegation envelope内のfinal identityです。
+
+delegationで許可される補正は、同じbounded scope内でtechnical completeness、安全性または実行可能性を成立させるnon-expansive correctionだけです。次のいずれかを追加、変更、置換、弱化または迂回する補正はdelegation外です。
+
+```text
+scope
+method
+contract
+target
+effect
+changed path set
+Safety / privacy / public boundary
+required environment
+approval owner
+acceptance condition
+non-reuse / retry / STOP boundary
+```
+
+delegation外の変更、Mash様固有のdecision、別authority、追加permission、不可逆scope拡大または安全に閉じられない不一致が必要になった場合、Ultra華恋はactivation / executionを行わず、final exact candidateまたは`NO_SAFE_NEXT_CANDIDATE_STOP`をMash様へ返します。
+
+bounded delegationは、approval ownerの移転、白紙委任、Pro draftの自動採用、Ultra華恋の自己approval、duplicate execution、retry、next Gateまたはautomatic progressionを意味しません。一回のbounded scopeのsuccessまたはterminal STOPで終了します。
+
+## 11.7 execution、fresh admission、single terminal
+
+1. JOINT_REQUIRED_MATERIAL_SCOPEのexecution ownerはUltra華恋です。Pro華恋のexecution countは0です。
+2. Ultra華恋は、NORMAL pathのMash final-identity approvalまたは有効なMASH_EXPLICIT_BOUNDED_DELEGATION、eligible Work environment、fresh precondition、authority identityおよびrequired permissionが全て成立した場合だけ実行します。
+3. activation前のidentity不一致、scope不足またはprecondition不成立では、未activate・process 0・network 0・runtime effect 0・GitHub write 0でSTOPします。
+4. activationまたはexecution開始後のSTOPでは、actual lifecycle、performed effects、zero-effects、changed pathsおよびcreditをそのまま記録し、変更0へ書き換えません。
+5. 同じcandidate、authority、targetまたはeffectをPro華恋とUltra華恋が二重実行しません。同一scopeへのparallel writeを行いません。
+6. Ultra華恋はexecution中にcandidateを黙って修正、補完、拡大または読み替えません。補正が必要と判明した場合、authorityのactual lifecycleとSTOP境界に従います。
+7. retry、fallback、repair、reacquisitionまたは別environmentへのswitchは、final approved authorityまたはbounded delegationがexactに許可する場合だけ行います。
+8. terminalから次candidate、次authority、次Gate、Product ReadまたはGitHub writeへ自動進行しません。
 
 ```text
 automatic_progression: false
 ```
 
-## 11.4 共有記憶と負荷分散
+## 11.8 shared memoryと負荷分散
 
 1. 二人の共有記憶の正本はcurrent GitHubです。関連head、current canonical owner、authority lifecycle、latest Receipt、actual source / test / evidence、changed pathsを会話より優先します。
-2. chat、添付説明、相手側の報告は背景または候補であり、current actualの代替にしません。
-3. 過去履歴全文、repository全体、全実行log、同じ推論を毎回二重化しません。全面確認が完了条件として必要な場合だけ、その根拠とbounded scopeを示します。
+2. chat、添付説明、相手側の報告は背景またはcandidateであり、current actualの代替にしません。
+3. 過去履歴全文、repository全体、全実行logまたは同じ推論を毎回二重化しません。全面確認が完了条件として必要な場合だけ、その根拠とbounded scopeを示します。
 4. Pro華恋は低レベル実行を全面再実施せず、Ultra華恋は商品構想やroadmapを毎回再設計しません。
-5. 既存のReceiptとcurrent ownerで復元できる場合、協働専用Handoff、candidate専用rule、追加scanner、helperまたはcarrierを作りません。
-6. Pro華恋とUltra華恋の交代、session変更、Handoffまたはcandidate identity変更によって、`ADMINISTRATIVE_ONLY`の連続数や同一blocker familyのSTOP回数をリセットしません。
+5. 既存Receiptとcurrent ownerで復元できる場合、協働専用Handoff、candidate専用rule、追加scanner、helperまたはcarrierを作りません。
+6. Pro華恋とUltra華恋の交代、session変更、candidate identity変更またはbounded delegationによって、`ADMINISTRATIVE_ONLY`の連続数、同一blocker familyのSTOP回数、non-reuse、retry禁止またはprior effectをリセットしません。
 
-## 11.5 意見不一致と運用評価
+## 11.9 disagreement、STOP、運用評価
 
 1. technical factの不一致は、actual evidenceとcurrent canonical ownerから解消します。解消できる技術確認をMash様の選択問題へ変換しません。
-2. 商品目的、method、contract、acceptance、Safety / privacy / public boundary、actual device、release等の規範判断だけをMash様へ提示します。
-3. 相手側の不備または不一致を検出したSTOPは、相互確認が機能した事実ですが、それ自体を`PRODUCT_CREDIT`または`TECHNICAL_CREDIT`へ変換しません。個人の失敗判定にも使いません。
-4. candidate作成、review PASS、STOP、Handoff、Receiptまたは文書追加を、それ自体で進捗にしません。
-5. 運用評価のための新しいscorecard、authority、ruleまたは補助systemを作りません。既存のprimary outcomeと`DETOUR_RISK_STOP`から判断します。
-6. 次の状態は、このprotocolが目的を外している兆候です。
+2. 商品目的、method、contract、acceptance、Safety / privacy / public boundary、actual device、releaseその他Mash様固有のnormative decisionだけをMash様へ提示します。
+3. Ultra華恋はPro華恋へ同意する義務を負わず、Pro華恋も不一致を隠してapproval draftを作りません。両意見、代替案および採用理由を記録し、final verdictを一つへ閉じられない場合は`NO_SAFE_NEXT_CANDIDATE_STOP`とします。
+4. 相手側の不備または不一致を検出したSTOPは、相互確認が機能した事実ですが、それ自体を`PRODUCT_CREDIT`または`TECHNICAL_CREDIT`へ変換しません。個人の失敗判定にも使いません。
+5. candidate作成、review PASS、STOP、Handoff、Receiptまたは文書追加を、それ自体で進捗にしません。
+6. 運用評価のための新しいscorecard、authority、ruleまたは補助systemを作りません。既存のprimary outcomeと`DETOUR_RISK_STOP`から判断します。
+7. 次の状態は、本protocolが目的を外している兆候です。
 
 - Mash様の再説明、技術監視または情報再構成が増えた。
 - 同じ資料、実行または推論を全面的に二重実施している。
-- candidateの根拠なき作り直しや相互reviewの往復が続いている。
+- Pro draftへの根拠なき優先、Ultra華恋への同意強制またはreview往復が続いている。
+- candidateの根拠なき作り直し、duplicate executionまたはparallel writeが生じている。
 - 協働用の文書、authorityまたは補助経路の増加が主作業になった。
 - `ADMINISTRATIVE_ONLY`だけが増え、本筋のcreditもblocker縮小も成立していない。
 - Product Readまでの必須作業数が、承認済み理由なく増えている。
 
-7. 上記兆候が`CURRENT_RULES.md`の`DETOUR_RISK_STOP`条件へ到達した場合、新しい連携systemを追加せず、本筋へ戻す推奨経路exact1を提示してSTOPします。
+8. 上記兆候が`CURRENT_RULES.md`の`DETOUR_RISK_STOP`条件へ到達した場合、新しい連携systemを追加せず、本筋へ戻す推奨経路exact1を提示してSTOPします。
