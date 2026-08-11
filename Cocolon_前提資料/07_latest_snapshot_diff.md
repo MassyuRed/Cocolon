@@ -40345,3 +40345,50 @@ NEXT_ADMINISTRATIVE_METHOD_DECISION_CANDIDATE_INACTIVE
 CURRENT_AUTHORITY_STOP
 AUTOMATIC_PROGRESSION_FALSE
 ```
+
+# 2026-08-11 milestone — canonical-preimage Gate B authority activated-unconsumed command construction STOP
+
+Mashのsingle-use approval本文 `NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_DIRECT_NATIVE_PROCESS_RUNTIME_READINESS_CANONICAL_PREIMAGE_FROZEN_FRESH_ADMISSION_V1` は、UTF-8 16,427 bytes、LF 301、final LF absent、SHA-256 `ad40bf50a80f10dc07dd7369b31e42cc53c10e7dc5d9a9760ad41b39b3e1cd61` と一致しました。旧readiness-observation method-decision candidateは未承認・未activateのhistoryとして保持し、approvalまたはidentityを継承していません。
+
+Pro華恋の相互reviewは `CANDIDATE_UNCHANGED`、Ultra華恋の内部監査は `PASS_INTERNAL_CONSISTENCY` でした。private lossless process body exact2はbytes / LF / SHA-256 full matchで、関連owner・target preimage・comparator・formal lockもentry actualと一致しました。40-field canonical preimage schemaはruntime、network、wheel、venv、install、probe、smokeより前にauthority本文でfreeze済みでした。activation precondition exact8を満たし、activation exact1を行いました。
+
+phase 01の外部static-compile launcher construction exact1は、Python processを作る前の未設定shell positional argument参照により終了しました。consumption boundaryであるfirst synthetic owner launch requestには到達していません。
+
+```text
+primary=BLOCKER_NARROWED
+terminal=ACTIVATED_UNCONSUMED_COMMAND_CONSTRUCTION_ERROR
+reason=STATIC_COMPILE_COMMAND_CONSTRUCTION_ERROR
+safe_detail=SHELL_POSITIONAL_ARGUMENT_UNBOUND_BEFORE_PYTHON_LAUNCH
+activation_count=1
+consumption_count=0
+static_compile_python_process_count=0
+static_compile_process_body_count=0
+synthetic_owner_process_count=0
+synthetic_independent_process_count=0
+network_process_count=0
+accepted_wheel_count=0
+fresh_root_count=0
+fresh_venv_count=0
+fresh_install_count=0
+current_owner_process_count=0
+pytest_version_probe_count=0
+required_role_smoke_process_count=0
+current_independent_process_count=0
+reconciliation_count=0
+canonical_preimage_instance_build_count=0
+runtime_readiness_observation_id_derivation_count=0
+runtime_effect_count=0
+runtime_ready=false
+readiness_credit=0
+gate_b_closed=false
+technical_credit=0
+product_credit=0
+gate_c_authorized=false
+automatic_progression=false
+```
+
+authorityのno-retry / no-fallback / no-repair境界により、retry、reacquisition、root repair、fallback、interpreter switch、process body repair、second method repair、third normal authorityは全て0です。prior root、wheel、runtime output、runtime identity、readiness observation、credit、および今回のprivate preparationは再利用しません。
+
+sole next candidateは `NLS_V3_STEP11_CYCLE001_G4_GATE_B_EXTERNAL_PHASE1_INVOCATION_CONSTRUCTION_EXACT1_SINGLE_EXCEPTION_AND_ONE_FRESH_CANONICAL_PREIMAGE_ADMISSION_METHOD_OR_PRODUCT_DECISION_V1`、classification `METHOD_OR_PRODUCT_DECISION_CANDIDATE`、state `DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED` です。外部phase1 invocation / launcher construction exact1のsingle exceptionとone fresh single-use operationを許可するかをMashが決める境界で、通常の第三technical authority、repair、またはapproval継承ではありません。repeat failureは `DETOUR_RISK_STOP_NO_FURTHER_NORMAL_AUTHORITY` です。
+
+publication scopeは本Receipt ADD exact1と、08 current state、本07 milestone、Current Closure Route、Current Alignment、current roadmapのMODIFY exact5、合計exact6です。Receipt-only finalizationを除く他path変更は0です。current authorityはpublication後STOPし、G4-Cは別Mash明示承認が必要です。

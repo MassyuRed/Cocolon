@@ -1,0 +1,330 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.g4.post_g6_shared_structural_correction.gate_b.direct_native.runtime_readiness_canonical_preimage_frozen_fresh_admission.activated_unconsumed_command_construction_error.body_free_receipt.v1",
+  "date": "2026-08-11",
+  "body_free": true,
+  "public_safe": true,
+  "authority": {
+    "authority_id": "NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_DIRECT_NATIVE_PROCESS_RUNTIME_READINESS_CANONICAL_PREIMAGE_FROZEN_FRESH_ADMISSION_V1",
+    "authority_version": 1,
+    "approval_text_identity": {
+      "utf8_bytes": 16427,
+      "lf_count": 301,
+      "final_lf": false,
+      "sha256": "ad40bf50a80f10dc07dd7369b31e42cc53c10e7dc5d9a9760ad41b39b3e1cd61"
+    },
+    "approval_count": 1,
+    "activation_count": 1,
+    "consumption_count": 0,
+    "single_use": true,
+    "authority_lifecycle": "CLOSED_ACTIVATED_UNCONSUMED_COMMAND_CONSTRUCTION_ERROR_STAGE1_PREPARED",
+    "current_authority": "NONE",
+    "automatic_progression": false
+  },
+  "mutual_review": {
+    "pro_karen_candidate_result": "CANDIDATE_UNCHANGED",
+    "ultra_karen_internal_consistency_result": "PASS_INTERNAL_CONSISTENCY",
+    "process_body_exact2_private_availability": "AVAILABLE_EXACT2_FULL_MATCH",
+    "review_disagreement_count": 0
+  },
+  "entry": {
+    "cocolon_commit_sha1": "14958298fde2b394aba13b706710fb5fcf944f4e",
+    "cocolon_tree_sha1": "e4af8002e14acab08846f4931430b6a4216ad64b",
+    "mashos_api_commit_sha1": "45bf98f9034261d3adb3e808d6d759f2334e2d25",
+    "mashos_api_tree_sha1": "23f1684ed5430cafef955d7af9fc6bde75a4c62f",
+    "related_remote_drift_count": 0,
+    "target_preimages": [
+      {
+        "path": "Cocolon_前提資料/08_cycle001_current_state.md",
+        "blob_sha1": "7d9a44090d9a2b7daabe386bf559bfce5cafeeb5"
+      },
+      {
+        "path": "Cocolon_前提資料/07_latest_snapshot_diff.md",
+        "blob_sha1": "4bea3e61db434bb8182981efac3fdb33c814d682"
+      },
+      {
+        "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CurrentClosureRoute.md",
+        "blob_sha1": "b1b2e4e5e740b3c1b37384012dc8bc0619244cd0"
+      },
+      {
+        "path": "Cocolon_前提資料/Cocolon_EmlisAI_NLSv3_CurrentAlignment.md",
+        "blob_sha1": "b153a305bb7adb72d5253d9cdd92d57f54325a04"
+      },
+      {
+        "path": "Cocolon_前提資料/Cocolon_EmlisAI_longterm_roadmap_CURRENT.md",
+        "blob_sha1": "b1a498a69463a36dc36a6dd143f11af5d24adac9"
+      },
+      {
+        "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_DirectNativeProcessFreshRuntimeReadiness_V1_BodyFree_Receipt_20260811.json",
+        "blob_sha1": "54ceb52c9b51d36b5aabdd5273d47b1b9954ae54"
+      },
+      {
+        "path": "Cocolon_前提資料/13_cocolon_work_test_runner_runtime_continuity.md",
+        "blob_sha1": "9886ce0a7093ef824ff5065ddb2e17e990095619"
+      },
+      {
+        "path": "Cocolon_前提資料/work_attitude_rules_for_karen/16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt",
+        "blob_sha1": "1ddb5138e9a368adac89f0dc01bdd39494248c14"
+      }
+    ]
+  },
+  "activation_preconditions": {
+    "01_CURRENT_GITHUB_ACTUAL_FRESH_READ": "SATISFIED",
+    "02_RELATED_OWNER_AND_TARGET_PREIMAGE_UNCHANGED": "SATISFIED",
+    "03_CURRENT_AUTHORITY_NONE": "SATISFIED",
+    "04_PROCESS_BODY_EXACT2_PRIVATE_BYTES_AVAILABLE": "SATISFIED",
+    "05_PROCESS_BODY_EXACT2_IDENTITY_FULL_MATCH": "SATISFIED",
+    "06_READINESS_PREIMAGE_SCHEMA_FROZEN_BEFORE_EFFECT": "SATISFIED",
+    "07_COMPARATOR_AND_FROZEN_LOCK_UNCHANGED": "SATISFIED",
+    "08_NO_RETIRED_HELPER_SCANNER_CARRIER_ROUTE": "SATISFIED"
+  },
+  "technical_contract": {
+    "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.g4.gate_b.direct_native_technical_authority_contract.v1",
+    "raw_sha256": "03986f1f1c23295b4d4a75faa01251d92b8899bcac5bf307756d71d56fbf1aba",
+    "direct_process_body_count": 2,
+    "process_body_source": "PREDECESSOR_FROZEN_PRIVATE_LOSSLESS_BYTES",
+    "refreeze_rule": "IDENTICAL_BYTES_ONLY",
+    "process_body_mutation_count": 0,
+    "owner": {
+      "role": "DIRECT_NATIVE_OWNER",
+      "raw_sha256": "205fb8ef73227ccd5edd7aaf8b0fcfbf013ce1a92698531d9a8799c2d99ae4e7",
+      "bytes": 52194,
+      "lf_count": 1154,
+      "availability": "FULL_MATCH"
+    },
+    "independent": {
+      "role": "DIRECT_NATIVE_INDEPENDENT",
+      "raw_sha256": "0760dd753eb32c40d762e02e54aa4a45182cd1506fa96273a9c2da5e569e6af6",
+      "bytes": 53980,
+      "lf_count": 1173,
+      "availability": "FULL_MATCH"
+    },
+    "shared_process_module_count": 0,
+    "helper_count": 0,
+    "scanner_count": 0,
+    "carrier_count": 0
+  },
+  "readiness_preimage_schema": {
+    "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.g4.gate_b.runtime_readiness_observation_preimage.v1",
+    "frozen_before_runtime_network_wheel_venv_install_probe_smoke": true,
+    "encoding": "UTF-8",
+    "bom": "ABSENT",
+    "record_separator": "LF",
+    "key_value_separator": "EQUALS",
+    "final_lf": "ABSENT",
+    "field_count": 40,
+    "fields_in_canonical_order": [
+      "schema_version",
+      "authority_id",
+      "technical_contract_raw_sha256",
+      "owner_process_body_raw_sha256",
+      "independent_process_body_raw_sha256",
+      "comparator_schema",
+      "comparator_expected_sha256",
+      "accepted_wheel_count",
+      "accepted_wheel_manifest_sha256",
+      "materialization_event_id",
+      "logical_runtime_id",
+      "runtime_content_identity",
+      "runtime_root_identity_sha256",
+      "runtime_instance_observation_id",
+      "execution_order",
+      "owner_process_count",
+      "owner_result",
+      "owner_output_sha256",
+      "pytest_version_probe_count",
+      "pytest_version",
+      "pytest_version_stdout_sha256",
+      "pytest_version_stderr_bytes",
+      "required_role_smoke_process_count",
+      "required_role_smoke_inline_program_observed_sha256",
+      "required_role_smoke_program_preimage_class",
+      "required_role_smoke_output_sha256",
+      "required_role_direct_load_count",
+      "required_role_public_api_call_count",
+      "required_role_effect_count",
+      "independent_process_count",
+      "independent_result",
+      "independent_output_sha256",
+      "runtime_identity_exact19_full_match",
+      "runtime_identity_exact19_sha256",
+      "canonical_diagnostic_full_match",
+      "canonical_diagnostic_sha256",
+      "current_comparator_match",
+      "installed_file_manifest_sha256",
+      "full_runtime_root_manifest_sha256",
+      "full_runtime_root_pre_post_match"
+    ],
+    "empty_representation": "EMPTY_FORBIDDEN",
+    "not_applicable_representation": "NOT_APPLICABLE",
+    "observation_id_rule": "LOWERCASE_HEX_SHA256_OF_EXACT_PREIMAGE_BYTES",
+    "instance_preimage_built": false,
+    "runtime_readiness_observation_id_derived": false
+  },
+  "phase_01_terminal": {
+    "phase": "FREEZE_AND_STATIC_VALIDATE_IDENTICAL_PROCESS_BODY_EXACT2",
+    "identical_process_body_refreeze_result": "FULL_MATCH",
+    "external_launcher_construction_attempt_count": 1,
+    "static_compile_python_process_launch_count": 0,
+    "static_compile_process_body_count": 0,
+    "synthetic_owner_launch_request_count": 0,
+    "authority_consumption_boundary_reached": false,
+    "reason_code": "STATIC_COMPILE_COMMAND_CONSTRUCTION_ERROR",
+    "safe_detail_code": "SHELL_POSITIONAL_ARGUMENT_UNBOUND_BEFORE_PYTHON_LAUNCH",
+    "result": "STOP"
+  },
+  "unexecuted_phases": {
+    "synthetic_owner_process_count": 0,
+    "synthetic_independent_process_count": 0,
+    "configured_acquisition_process_count": 0,
+    "network_process_count": 0,
+    "accepted_wheel_count": 0,
+    "fresh_root_count": 0,
+    "fresh_venv_count": 0,
+    "fresh_install_count": 0,
+    "current_owner_process_count": 0,
+    "pytest_version_probe_count": 0,
+    "required_role_smoke_process_count": 0,
+    "current_independent_process_count": 0,
+    "reconciliation_count": 0,
+    "canonical_preimage_instance_build_count": 0,
+    "readiness_observation_id_derivation_count": 0
+  },
+  "gate_b_terminal": {
+    "primary_outcome": "BLOCKER_NARROWED",
+    "terminal": "ACTIVATED_UNCONSUMED_COMMAND_CONSTRUCTION_ERROR",
+    "phase": "PHASE_01",
+    "reason_code": "STATIC_COMPILE_COMMAND_CONSTRUCTION_ERROR",
+    "safe_detail_code": "SHELL_POSITIONAL_ARGUMENT_UNBOUND_BEFORE_PYTHON_LAUNCH",
+    "runtime_effect_count": 0,
+    "runtime_ready": false,
+    "runtime_ready_count": 0,
+    "readiness_credit": 0,
+    "gate_b_closed": false,
+    "gate_b_closure_count": 0,
+    "technical_credit_count": 0,
+    "product_credit_count": 0,
+    "cycle001_status": "NOT_ACCEPTED",
+    "current_authority": "NONE",
+    "current_authority_stop": true,
+    "gate_c_authorized": false,
+    "automatic_progression": false
+  },
+  "terminal_nonreuse": {
+    "predecessor_root_reuse_count": 0,
+    "predecessor_wheel_reuse_count": 0,
+    "predecessor_runtime_output_reuse_count": 0,
+    "predecessor_runtime_identity_reuse_count": 0,
+    "predecessor_readiness_observation_reuse_count": 0,
+    "predecessor_readiness_credit_reuse_count": 0,
+    "predecessor_gate_credit_reuse_count": 0,
+    "current_private_preparation_reusable": false
+  },
+  "zero_effects": {
+    "retry_count": 0,
+    "reacquisition_count": 0,
+    "root_repair_count": 0,
+    "fallback_count": 0,
+    "interpreter_switch_count": 0,
+    "process_body_repair_count": 0,
+    "second_method_repair_count": 0,
+    "third_normal_authority_count": 0,
+    "helper_creation_or_execution_count": 0,
+    "scanner_creation_or_execution_count": 0,
+    "carrier_creation_or_execution_count": 0,
+    "target_import_count": 0,
+    "target_collection_count": 0,
+    "target_call_count": 0,
+    "targeted_pytest_count": 0,
+    "gate_c_or_later_execution_count": 0,
+    "production_source_change_count": 0,
+    "protected_test_change_count": 0,
+    "fixture_change_count": 0,
+    "sample_change_count": 0,
+    "corpus_change_count": 0,
+    "comparator_change_count": 0,
+    "formal_lock_change_count": 0,
+    "rules_change_count": 0,
+    "plan_change_count": 0,
+    "mashos_api_change_count": 0,
+    "result_artifact_count": 0,
+    "handoff_artifact_count": 0
+  },
+  "next_boundary": {
+    "candidate_exact1": "NLS_V3_STEP11_CYCLE001_G4_GATE_B_EXTERNAL_PHASE1_INVOCATION_CONSTRUCTION_EXACT1_SINGLE_EXCEPTION_AND_ONE_FRESH_CANONICAL_PREIMAGE_ADMISSION_METHOD_OR_PRODUCT_DECISION_V1",
+    "candidate_kind": "METHOD_OR_PRODUCT_DECISION",
+    "classification": "METHOD_OR_PRODUCT_DECISION_CANDIDATE",
+    "state": "DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "inherited_approval_count": 0,
+    "execution_count": 0,
+    "decision_question": "WHETHER_TO_AUTHORIZE_ONE_EXTERNAL_PHASE1_INVOCATION_CONSTRUCTION_EXACT1_EXCEPTION_AND_ONE_FRESH_SINGLE_USE_GATE_B_OPERATION",
+    "permitted_candidate_scope_if_separately_approved": "EXTERNAL_PHASE1_INVOCATION_OR_LAUNCHER_CONSTRUCTION_EXACT1_ONLY",
+    "process_body_schema_comparator_lock_role_meaning_change_count": 0,
+    "normal_third_authority_created": false,
+    "repeat_failure_terminal": "DETOUR_RISK_STOP_NO_FURTHER_NORMAL_AUTHORITY"
+  },
+  "publication_scope": {
+    "repository": "MassyuRed/Cocolon",
+    "stage": "STAGE1",
+    "state": "STAGE1_PREPARED_NOT_YET_REMOTE_POSTVERIFIED",
+    "changed_path_count": 6,
+    "modified_path_count": 5,
+    "new_path_count": 1,
+    "deleted_path_count": 0,
+    "renamed_path_count": 0,
+    "changed_paths": [
+      {
+        "change": "ADD",
+        "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_DirectNativeProcessRuntimeReadinessCanonicalPreimageFrozenFreshAdmission_V1_BodyFree_Receipt_20260811.json",
+        "entry_blob_sha1": null
+      },
+      {
+        "change": "MODIFY",
+        "path": "Cocolon_前提資料/08_cycle001_current_state.md",
+        "entry_blob_sha1": "7d9a44090d9a2b7daabe386bf559bfce5cafeeb5"
+      },
+      {
+        "change": "MODIFY",
+        "path": "Cocolon_前提資料/07_latest_snapshot_diff.md",
+        "entry_blob_sha1": "4bea3e61db434bb8182981efac3fdb33c814d682"
+      },
+      {
+        "change": "MODIFY",
+        "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CurrentClosureRoute.md",
+        "entry_blob_sha1": "b1b2e4e5e740b3c1b37384012dc8bc0619244cd0"
+      },
+      {
+        "change": "MODIFY",
+        "path": "Cocolon_前提資料/Cocolon_EmlisAI_NLSv3_CurrentAlignment.md",
+        "entry_blob_sha1": "b153a305bb7adb72d5253d9cdd92d57f54325a04"
+      },
+      {
+        "change": "MODIFY",
+        "path": "Cocolon_前提資料/Cocolon_EmlisAI_longterm_roadmap_CURRENT.md",
+        "entry_blob_sha1": "b1a498a69463a36dc36a6dd143f11af5d24adac9"
+      }
+    ]
+  },
+  "privacy": {
+    "process_body_published": false,
+    "synthetic_body_published": false,
+    "absolute_runtime_path_published": false,
+    "concrete_manifest_rows_published": false,
+    "configured_route_or_url_published": false,
+    "credential_or_environment_value_published": false,
+    "raw_process_output_published": false,
+    "wheel_or_runtime_body_published": false
+  },
+  "remote_postverify": {
+    "stage": "STAGE1",
+    "result": "PENDING",
+    "publication_commit_sha1": null,
+    "publication_tree_sha1": null,
+    "changed_paths_exact6": false,
+    "unauthorized_path_count": null,
+    "remote_prepared_byte_mismatch_count": null,
+    "final_head_contains_all": false,
+    "receipt_finalization_self_identity": "OMITTED_TO_AVOID_SELF_REFERENCE"
+  },
+  "receipt_self_hash_schema": "SHA256_UTF8_COMPACT_SORTED_KEY_JSON_NO_FINAL_LF_WITH_receipt_logical_sha256_EMPTY_STRING",
+  "receipt_logical_sha256": "ec307ed621c6c3f98b40bcfee56a586d45262a98ef0102bec669632eccab3972"
+}

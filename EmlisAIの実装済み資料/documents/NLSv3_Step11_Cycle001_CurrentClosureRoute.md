@@ -5,7 +5,7 @@ canonical_path: "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Cu
 revision_date: "2026-08-11"
 status: "CURRENT_EFFECTIVE"
 normative_status: "CURRENT_DERIVATIVE_OWNER"
-effective_when: "GATE_B_DIRECT_NATIVE_TERMINAL_PUBLICATION_REMOTE_POSTVERIFIED"
+effective_when: "GATE_B_CANONICAL_PREIMAGE_AUTHORITY_PHASE1_COMMAND_STOP_REMOTE_POSTVERIFIED"
 decision_owner: "Mash"
 operation_owner: "Karen"
 repository: "MassyuRed/Cocolon"
@@ -14,12 +14,12 @@ body_free: true
 technical_authority: false
 cycle001: "NOT_ACCEPTED"
 current_selected_lane: "POST_G6_SHARED_STRUCTURAL_CORRECTION"
-current_selected_method: "NONE_PENDING_MASH_METHOD_DECISION"
+current_selected_method: "NONE_PENDING_MASH_METHOD_OR_PRODUCT_DECISION"
 current_first_unfinished_gate: "G4_GATE_B_RUNTIME_READINESS_ADMISSION"
 current_runtime_ready: false
 current_readiness_credit: 0
 automatic_progression: false
-next_administrative_authority_separate_approval_required: true
+next_method_or_product_decision_separate_approval_required: true
 ---
 
 # NLS v3 Step 11 Cycle001 Current Closure Route
@@ -517,5 +517,39 @@ PRODUCT_READ_TECHNICAL_GATE_BOUNDARY_EXACT3
 CYCLE_ACCEPTANCE_MINIMUM_KNOWN_BOUNDARY_EXACT11
 RETIRED_ROUTE_NOT_REACTIVATED
 CURRENT_NAVIGATION_OWNER_08
+AUTOMATIC_PROGRESSION_FALSE
+```
+
+## 10. 2026-08-11 current terminal update — canonical-preimage authority phase1 command STOP
+
+本sectionは、上記のhistorical factsを消さず、これより前のcurrent method / next-candidate表記だけをcurrent actualへ更新します。
+
+- latest authority: `NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_DIRECT_NATIVE_PROCESS_RUNTIME_READINESS_CANONICAL_PREIMAGE_FROZEN_FRESH_ADMISSION_V1`
+- lifecycle: `CLOSED_ACTIVATED_UNCONSUMED_COMMAND_CONSTRUCTION_ERROR_REMOTE_POSTVERIFIED`
+- primary / reason / safe detail: `BLOCKER_NARROWED` / `STATIC_COMPILE_COMMAND_CONSTRUCTION_ERROR` / `SHELL_POSITIONAL_ARGUMENT_UNBOUND_BEFORE_PYTHON_LAUNCH`
+- activation / consumption: `1 / 0`
+- Python static compile / synthetic / network / runtime / readiness observation id: `0 / 0 / 0 / 0 / 0`
+- Runtime READY / readiness credit / Gate B closure / technical credit / product credit: `false / 0 / false / 0 / 0`
+- current authority: `NONE`
+- current selected method: `NONE_PENDING_MASH_METHOD_OR_PRODUCT_DECISION`
+- first unfinished Gate: `G4_GATE_B_RUNTIME_READINESS_ADMISSION`
+
+`NLS_V3_STEP11_CYCLE001_G4_GATE_B_EXTERNAL_PHASE1_INVOCATION_CONSTRUCTION_EXACT1_SINGLE_EXCEPTION_AND_ONE_FRESH_CANONICAL_PREIMAGE_ADMISSION_METHOD_OR_PRODUCT_DECISION_V1` は `METHOD_OR_PRODUCT_DECISION_CANDIDATE`、`DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED` です。current-specific no-repair境界を外部phase1 invocation / launcher construction exact1だけについて一回明示overrideするかを決める候補であり、承認・activation・executionは0です。通常のthird authority、process-body repair、helper/scanner/carrier、fallback、reuse、Gate C authorizationはありません。
+
+routeは引き続き `G4-B → G4-C → G5 → G6 Product Read` exact4です。current authorityはSTOP済みで、automatic progressionはfalseです。
+
+```text
+LATEST_AUTHORITY_ACTIVATED_UNCONSUMED_COMMAND_CONSTRUCTION_ERROR
+BLOCKER_NARROWED
+CURRENT_FIRST_UNFINISHED_GATE_G4_GATE_B
+CURRENT_SELECTED_METHOD_NONE_PENDING_MASH_METHOD_OR_PRODUCT_DECISION
+NEXT_METHOD_OR_PRODUCT_DECISION_CANDIDATE_INACTIVE
+RUNTIME_READY_FALSE
+READINESS_CREDIT_0
+GATE_B_NOT_CLOSED
+TECHNICAL_CREDIT_0
+PRODUCT_CREDIT_0
+CURRENT_AUTHORITY_STOP
+GATE_C_NOT_AUTHORIZED
 AUTOMATIC_PROGRESSION_FALSE
 ```
