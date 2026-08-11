@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_chat_work_environment_rule_index
 title: "GPT-5.6 Pro / Work Ultra 実行環境ルール索引"
-revision_date: "2026-08-07"
+revision_date: "2026-08-11"
 normative_status: "CURRENT_INDEX"
 decision_owner: "Mash"
 operational_owner: "Karen"
@@ -10,7 +10,7 @@ canonical_rule: "work_attitude_rules_for_karen/18_chat_work_environment_selectio
 
 # 1. この索引の役割
 
-この資料は、Cocolon作業で使用できるmodel / environmentのcurrent canonical ruleを、前提資料側から見つけるためのindexです。
+この資料は、Cocolon作業で使用できるmodel / environmentと、Pro華恋・Ultra華恋・Mash様の三者role / 三段階scope classificationのcurrent canonical ruleを、前提資料側から見つけるためのindexです。
 
 本文を重複所有しません。current canonical ruleは次です。
 
@@ -21,6 +21,8 @@ canonical_rule: "work_attitude_rules_for_karen/18_chat_work_environment_selectio
 - ChatでCocolon作業を行うmodelは`GPT-5.6 Pro`。
 - Pro以外またはmodel identity不明では`MODEL_OR_ENVIRONMENT_NOT_ELIGIBLE_STOP`。
 - non-Proまたはmodel不明で作られたCocolon成果物は、Pro再監査まで`UNTRUSTED_NOT_ADOPTED_UNTIL_PRO_REAUDIT`。
+- bounded workは`ROUTINE_SINGLE_OWNER_SCOPE` / `JOINT_WITHIN_EXISTING_DELEGATION_SCOPE` / `MASH_DECISION_AND_APPROVAL_REQUIRED_SCOPE`からexactly oneへ分類する。
+- LEVEL_1 / LEVEL_2はRule 18のallowed standing delegation内だけで作業ごとの新しい事前approvalを省略し、LEVEL_3はfirst effect前のMash明示decision / approvalを必要とする。
 - Work Ultraは、独立agent、分割不能監査、Work固有runtime等、環境自体が成立条件の場合だけ使用する。
 
 # 3. いつ必須か
@@ -39,7 +41,7 @@ bounded作業単位ごとに次のいずれかを判定します。
 |---|---|
 | `work_attitude_rules_for_karen/00_read_first.txt` | current入口とmodel gate |
 | `work_attitude_rules_for_karen/CURRENT_RULES.md` | current一般行動rule |
-| `work_attitude_rules_for_karen/18_chat_work_environment_selection_rule_2026_08_06.txt` | model / environment canonical rule |
+| `work_attitude_rules_for_karen/18_chat_work_environment_selection_rule_2026_08_06.txt` | model / environment + three-role / three-tier workflow canonical rule |
 | `work_attitude_rules_for_karen/09_work_start_checklist.txt` | 作業開始前の実行Gate |
 | `work_attitude_rules_for_karen/99_integrated_paste_each_time.txt` | 出力直前Gate |
 | `work_attitude_rules_for_karen/manifest.json` | activation mapとcurrent owner |

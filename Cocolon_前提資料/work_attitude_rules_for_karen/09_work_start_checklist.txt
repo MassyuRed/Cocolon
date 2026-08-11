@@ -12,11 +12,14 @@ general_rule_owner: CURRENT_RULES.md
 
 ## 0. exact start record
 
-Workを起動する前に、次のexact10 fieldsをcurrent actualで埋める。
+Workを起動する前に、次のexact13 fieldsをcurrent actualで埋める。
 
 - [ ] `product_destination`: 最終商品目的と今回の接続を平易に示した。
 - [ ] `current_gate_or_subgate`: Current Closure Route上のexact1へ対応付けた。
 - [ ] `exact_work`: 今回行う一つのbounded作業を示した。
+- [ ] `scope_classification`: Rule 18のLEVEL_1 / LEVEL_2 / LEVEL_3からexact1を固定した。
+- [ ] `approval_or_delegation_basis`: 個別Mash approval、Rule 18 standing delegation、effect 0 read-onlyのいずれかをcurrent ownerへ結び付けた。
+- [ ] `execution_owner`: single ownerまたはUltra華恋を一人に固定した。
 - [ ] `success_credit`: 成功時に増えるprimary creditを示した。
 - [ ] `completion_condition`: 今回の完了を観測可能に定義した。
 - [ ] `stop_condition`: terminal STOPと`DETOUR_RISK_STOP`境界を示した。
@@ -32,6 +35,7 @@ Workを起動する前に、次のexact10 fieldsをcurrent actualで埋める。
 - [ ] 実際のChat modelが`GPT-5.6 Pro`と確認できる。
 - [ ] non-Proまたはmodel不明の成果物を採用していない。
 - [ ] 今回のbounded作業単位を`CHAT_5_6_PRO_OK` / `WORK_ULTRA_REQUIRED`で判定した。
+- [ ] Rule 18の三段階scope classificationをexactly oneへ固定し、scope分類とenvironment判定を混同していない。
 - [ ] Work不可を理由に品質条件を弱めていない。
 
 不成立時:
@@ -44,6 +48,15 @@ Workを起動する前に、次のexact10 fieldsをcurrent actualで埋める。
 - [ ] 成果物、対象scope、非対象scopeを特定した。
 - [ ] 完了条件と停止条件を特定した。
 - [ ] 不足情報を隠すための代替作業を発明していない。
+
+## B2. three-tier collaboration / permission
+
+- [ ] `ROUTINE_SINGLE_OWNER_SCOPE`ではdeterministic condition、single owner、effect 0またはvalid standing delegationを確認した。
+- [ ] `JOINT_WITHIN_EXISTING_DELEGATION_SCOPE`ではPro華恋の`PRODUCT_ROUTE_ALIGNED`とUltra華恋の`TECHNICALLY_ADMISSIBLE`が同じfresh owner / head / targetで成立した。
+- [ ] `MASH_DECISION_AND_APPROVAL_REQUIRED_SCOPE`ではfirst effect前のMash明示decision / approvalをexact scopeまたはfinal identityへ結び付けた。
+- [ ] Rule 18 standing delegationのallowed scope、prohibited scope、separate-approval ownerを確認した。
+- [ ] scope上昇条件、permission不足またはPro / Ultra gate不成立時は、追加effect前にSTOPする。
+- [ ] post-work reportを事後approval、scope超過の治癒またはnext work permissionへ変換しない。
 
 ## C. read order / source
 
@@ -110,8 +123,8 @@ Workを起動する前に、次のexact10 fieldsをcurrent actualで埋める。
 ## H. artifact / GitHub / continuity
 
 - [ ] material artifactのdurable ownerを特定した。
-- [ ] GitHub writeがMash様の承認scope内か確認した。
-- [ ] 承認がない場合、local-only完成扱いをせず`DURABLE_WRITE_APPROVAL_REQUIRED`で止める。
+- [ ] GitHub writeが個別Mash approvalまたはRule 18の有効なstanding delegation scope内か確認した。
+- [ ] 個別approvalも有効なstanding delegationもない場合、local-only完成扱いをせず`DURABLE_WRITE_APPROVAL_REQUIRED`で止める。
 - [ ] write前のlatest head / target path / preimageを確認する。
 - [ ] write後のremote bytes / changed paths / final headを確認する。
 - [ ] secret / body-full private evidenceをpublic GitHubへ出さない。

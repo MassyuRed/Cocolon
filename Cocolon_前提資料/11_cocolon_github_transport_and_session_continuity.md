@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_github_transport_and_session_continuity
 title: "Cocolon GitHub reflection contract / historical transport record"
-revision_date: "2026-07-27"
+revision_date: "2026-08-11"
 repository_scope: "MassyuRed/Cocolon"
 secret_material_allowed: false
 ---
@@ -23,19 +23,21 @@ normative_status: `CURRENT`
 ## 1. 作業者
 
 Cocolonとmashos-apiへ書き込む作業者は華恋だけとする。
-書き込みは、Mash様が承認した作業範囲に限る。
+書き込みは、Mash様の個別approvalまたはRule 18の有効なLEVEL_1 / LEVEL_2 standing delegationで許可されたbounded scopeに限る。scope classificationだけでwrite権限を生成しない。
 他の作業者が同時に書き込むことを、事実確認なしに前提へ入れない。
 将来の複数人作業や大規模運用を理由に、現在の書き込み条件を厳しくしない。
+
+Rule 18 standing delegationをpermission basisにできるのは、同ruleのallowed / prohibited scopeを満たし、first effect前にbounded work、repository、exact paths、effect、verification、STOPおよびexecution ownerを固定した場合だけとする。rule、authority、Gate、protected / frozen owner、contract、method family、Safety / privacy / public boundary、production deployment、user data、account、payment、release、delete、rename、history rewrite、retry / reactivationまたは個別ownerがseparate Mash approvalを要求するeffectには使用しない。
 
 ## 2. 書き込み前に確認すること
 
 華恋は書き込み直前に、次だけを確認する。
 
 - 現在のGitHub最新版。
-- 承認された対象ファイル。
+- 個別approvalまたは有効なstanding delegationで許可された対象ファイル。
 - 新規ファイルなら、同じexact pathに既存ファイルがないこと。
 - 修正ファイルなら、現在の内容が作業時に確認した内容と一致すること。
-- 承認外のファイルを変更しないこと。
+- permission basis外のファイルを変更しないこと。
 
 ## 3. 書き込み方法
 
@@ -43,7 +45,7 @@ Cocolonとmashos-apiへ書き込む作業者は華恋だけとする。
 特定の鍵、特定の通信方法、特定のコマンドを必須にしない。
 GitHub機能の都合で複数回の書き込みになることを許容する。
 「一回の承認につき必ず一つのcommitにまとめる」とは要求しない。
-承認されたファイル以外を混ぜない。
+permission basisで許可されたファイル以外を混ぜない。
 
 ## 4. 書き込み後に確認すること
 
@@ -51,8 +53,8 @@ GitHub機能の都合で複数回の書き込みになることを許容する�
 
 - 対象ファイルが存在すること。
 - 対象ファイルの内容が、作成した成果物と一致すること。
-- 華恋が今回生成したwrite commit群のchanged-path setに、承認外のファイルが含まれていないこと。
-- GitHubの最新版に、承認された全成果物が含まれていること。
+- 華恋が今回生成したwrite commit群のchanged-path setに、permission basis外のファイルが含まれていないこと。
+- GitHubの最新版に、permission basisで許可された全成果物が含まれていること。
 
 対象ファイルと今回のwrite commit群のchanged-path setを確認できればよく、repository全体、全tree、全blob、全unchanged pathを毎回取得・検証する必要はない。
 
@@ -61,11 +63,11 @@ GitHub機能の都合で複数回の書き込みになることを許容する�
 華恋が停止してよいのは、次の事実が確認された場合だけとする。
 
 - 対象ファイルが、確認後に別内容へ変更されていた。
-- 承認外のファイルを変更しなければ完了できない。
+- permission basis外のファイルを変更しなければ完了できない。
 - GitHubへの書き込みが実際に失敗した。
 - 書き込み結果が成功か失敗か確認できない。
 - 書き込み権限が実際にない。
-- 削除、履歴の書き換え、承認外の不可逆操作が必要になった。
+- 削除、履歴の書き換え、許可外の不可逆操作が必要になった。
 
 最新版が進んでいても、対象ファイルに衝突がなければ、最新版を読み直して続行する。最新版が変わったことだけでは停止しない。
 

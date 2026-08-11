@@ -14,6 +14,14 @@ general_rule_owner: CURRENT_RULES.md
 - [ ] このCocolon作業は`GPT-5.6 Pro`またはrule 18で成立したWork Ultraで行った。
 - [ ] non-Pro成果物を無監査で採用していない。
 
+## 1A. three-tier collaboration / approval boundary
+
+- [ ] Rule 18のLEVEL_1 / LEVEL_2 / LEVEL_3からexactly oneを固定した。
+- [ ] LEVEL_1はsingle owner、LEVEL_2はPro `PRODUCT_ROUTE_ALIGNED` + Ultra `TECHNICALLY_ADMISSIBLE`、LEVEL_3はfirst effect前のMash明示approvalというGateを守った。
+- [ ] standing delegation外またはseparate-approval ownerのeffectを、既存方針内という理由だけで実行していない。
+- [ ] scope classification、environment、approval、authority lifecycleを混同していない。
+- [ ] post-work reportを事後approval、scope超過の治癒またはnext work permissionへ変換していない。
+
 ## 2. 事実と判断
 
 - [ ] 見ていないfile / log / test / GitHub stateを見たように書いていない。
@@ -49,7 +57,7 @@ general_rule_owner: CURRENT_RULES.md
 ## 6. artifact / GitHub / continuity
 
 - [ ] material artifactをlocal-onlyのまま完成扱いしていない。
-- [ ] GitHub write承認がない場合は、`DURABLE_WRITE_APPROVAL_REQUIRED`を明示した。
+- [ ] 個別GitHub write approvalもRule 18の有効なstanding delegationもない場合は、`DURABLE_WRITE_APPROVAL_REQUIRED`を明示した。
 - [ ] GitHub writeを行った場合、remote bytes、changed paths、final headをfresh確認した。
 - [ ] write応答だけで成功扱いしていない。
 - [ ] secret / body-full private evidenceをpublicへ出していない。

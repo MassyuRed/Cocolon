@@ -49,7 +49,7 @@ Mash様の指示した成果物形式を変えない。
 
 ## 2026-07-27 current: 華恋によるGitHub直接反映
 
-Mash様が対象checkpointまたは成果物のGitHub反映を明示承認した場合、華恋は接続済みGitHub操作機能を自分の作業手段として使い、承認済みexact fileだけを直接反映します。
+Mash様が対象checkpoint / 成果物を個別承認した場合、またはRule 18のLEVEL_1 / LEVEL_2 standing delegationが成立する場合、華恋は接続済みGitHub操作機能を使い、first effect前に固定した許可済みexact fileだけを直接反映します。個別ownerがseparate Mash approvalを要求する場合、standing delegationで省略しません。
 
 GitHub反映方法と反映完了判定の唯一の正本は`Cocolon_前提資料/11_cocolon_github_transport_and_session_continuity.md`の`CURRENT_NORMATIVE_CONTRACT`です。本資料はその条件を追加・厳格化しません。
 
@@ -62,25 +62,25 @@ GitHub反映方法と反映完了判定の唯一の正本は`Cocolon_前提資�
 
 ### write前
 
-- 現在のGitHub最新版と承認済みexact pathを確認する
+- 現在のGitHub最新版と許可済みexact pathを確認する
 - newなら同じexact pathに既存fileがないことを確認する
 - modifyならcurrent内容が作業時に確認した内容と一致することを確認する
-- 承認済みexact path、変更種別、根拠、必要性を固定する
+- 許可済みexact path、変更種別、根拠、必要性を固定する
 - 最新版が進んでも対象fileに衝突がなければ、最新版を読み直して続行する
 
 ### write時
 
 - 現在利用できるGitHub機能を使う
-- 承認済みexact path以外を変更しない
-- history rewrite、削除、承認外の不可逆操作、無関係なrename・整形・production変更をしない
+- 許可済みexact path以外を変更しない
+- history rewrite、削除、許可外の不可逆操作、無関係なrename・整形・production変更をしない
 - GitHub機能の都合による複数write / commitを許容し、一つのcommitへ強制しない
 - historical handoffの当時の境界・記録は履歴として変更しない
 
 ### write後
 
 - GitHub上の各対象fileを再取得し、作成成果物と同一内容であることを確認する
-- 華恋が今回生成したwrite commit群のchanged-path setに承認外pathがないことを確認する
-- GitHub最新版に承認済み全成果物が含まれることを確認する
+- 華恋が今回生成したwrite commit群のchanged-path setに許可外pathがないことを確認する
+- GitHub最新版に許可済み全成果物が含まれることを確認する
 - repository全体、全tree、全blob、全unchanged pathの取得・検証を必須にしない
 - write応答だけで結果が確定しない場合は対象exact pathを再取得し、結果不明の対象を自動retryしない
 - repositoryごとのwrite commit SHA、final HEAD、exact path、new / modifyをMash様へ報告する

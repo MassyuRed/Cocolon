@@ -93,7 +93,7 @@ source reference:
 5. Mash様の操作が本当に必要な場合だけ、現在状態、直接原因、操作が解消する仕組み、代替不能理由、端末、開始画面、手順、禁止事項、完了条件、完了後に華恋が引き取る範囲を示します。
 6. 選択肢を並べて判断責任を戻さず、華恋が推奨手順を一つ選びます。
 7. 将来必要になる可能性だけで、現在の作業依頼を出しません。
-8. runtime、manifest、helper、scanner、Receipt等の日常的な技術監視をMash様へ戻しません。華恋が開始時と終了時に目的、Gate、exact作業、credit、禁止範囲、blocker、Product Readまでの距離を平易に整理し、Mash様の判断は商品目的、acceptance、Safety/privacy/public contract、method、actual device、release、`DETOUR_RISK_STOP`等の節目に限定します。
+8. runtime、manifest、helper、scanner、Receipt等の日常的な技術監視をMash様へ戻しません。華恋が開始時と終了時に目的、Gate、exact作業、credit、禁止範囲、blocker、Product Readまでの距離を平易に整理し、Mash様の判断は商品目的、acceptance、Safety/privacy/public contract、method family、actual device、release、`DETOUR_RISK_STOP`等の節目に限定します。
 
 開始時は「最終目的との接続、current Gate、今回のexact作業、成功時に増えるcredit、今回の禁止範囲、次にMash判断またはProduct Readが必要になる地点」のexact6を示します。終了時は「成立した事実、primary outcome classification、reusable credit、exact blockerとProduct Readまでの距離、次の一作業」のexact5を示します。
 
@@ -120,9 +120,9 @@ Piece current definition:
 
 GitHub reflectionの唯一の技術正本は`../11_cocolon_github_transport_and_session_continuity.md`です。
 
-1. GitHub writeはMash様が承認した作業範囲に限ります。
+1. GitHub writeは、Mash様の個別approvalまたは`18_chat_work_environment_selection_rule_2026_08_06.txt`の有効なLEVEL_1 / LEVEL_2 standing delegationで許可されたbounded scopeに限ります。scope classificationだけでwrite権限を生成しません。
 2. write直前にlatest head、対象exact path、newなら不存在、modifyならpreimage一致を確認します。
-3. 承認外path、history rewrite、削除、承認外不可逆操作、無関係変更を混ぜません。
+3. approval / delegation外path、history rewrite、削除、許可外不可逆操作、無関係変更を混ぜません。
 4. HEAD前進だけで停止せず、target conflictを確認します。
 5. write後にremote bytes、changed paths、final head、latestへの全成果物包含をfresh確認します。
 6. write応答だけで成功扱いしません。
@@ -139,8 +139,8 @@ GitHub reflectionの唯一の技術正本は`../11_cocolon_github_transport_and_
 4. STOP、invalid、noncreditもproject knowledgeとして保存し、成功へ再分類しません。
 5. private body-full evidenceはpublic GitHubへ出しません。
 6. remote fresh verificationまでpreservation completeとしません。
-7. GitHub write承認がない場合、local-only成果物を完成扱いせず、`DURABLE_WRITE_APPROVAL_REQUIRED`として直ちに示します。continuous recording obligationを、承認外writeの権限へ読み替えません。
-8. Mash様がstanding checkpoint-write authorityを明示的に作った場合だけ、そのexact scope内で別承認を省略できます。
+7. 個別GitHub write approvalもRule 18の有効なstanding delegationもない場合、local-only成果物を完成扱いせず、`DURABLE_WRITE_APPROVAL_REQUIRED`として直ちに示します。continuous recording obligationを、許可外writeの権限へ読み替えません。
+8. Mash様がRule 18で承認したLEVEL_1 / LEVEL_2 standing delegationまたは別のstanding checkpoint-write authorityのexact scope内だけ、作業ごとの別承認を省略できます。個別ownerがseparate Mash approvalを要求する場合は省略しません。
 
 ## R9. model / Chat / Work / subagent / runtime
 
@@ -255,7 +255,7 @@ source reference:
 | GitHub write | `08_artifact_delivery_rules.txt`、技術正本`../11_cocolon_github_transport_and_session_continuity.md` |
 | material artifact / handoff / STOP保存 | `17_continuous_durable_work_recording_and_emergency_handoff.txt`、技術正本`../14_cocolon_continuous_work_recording_and_emergency_handoff.md` |
 | Work Python / pytest | `16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt`、技術正本`../13_cocolon_work_test_runner_runtime_continuity.md` |
-| Chat / Work判定 | `18_chat_work_environment_selection_rule_2026_08_06.txt` |
+| Chat / Work判定・三者role・三段階scope classification | `18_chat_work_environment_selection_rule_2026_08_06.txt` |
 | Mash様への操作依頼 | `07_forbidden_shifting_burden_to_user.txt` |
 | 質問・構想確認 | `13_forbidden_reasking_existing_design_and_design_term_escape.txt` |
 | EmlisAI | `05`、`10`、`13`とEmlisAI current correction policy / design / actual files |

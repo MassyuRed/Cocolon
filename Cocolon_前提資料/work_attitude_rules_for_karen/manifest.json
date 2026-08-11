@@ -1,8 +1,8 @@
 {
   "schema_version": "cocolon.work_attitude_rules.current.v2",
-  "revision_date": "2026-08-10",
+  "revision_date": "2026-08-11",
   "normative_status": "CURRENT",
-  "status": "PHASE4_PREPARED_NOT_PUBLISHED",
+  "status": "CURRENT_EFFECTIVE",
   "effective_when": "PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
@@ -10,7 +10,8 @@
     "chat_required_model": "GPT-5.6 Pro",
     "non_pro_or_unknown": "MODEL_OR_ENVIRONMENT_NOT_ELIGIBLE_STOP",
     "non_pro_artifact_state": "UNTRUSTED_NOT_ADOPTED_UNTIL_PRO_REAUDIT",
-    "work_ultra_rule": "18_chat_work_environment_selection_rule_2026_08_06.txt"
+    "work_ultra_rule": "18_chat_work_environment_selection_rule_2026_08_06.txt",
+    "three_tier_workflow_rule": "18_chat_work_environment_selection_rule_2026_08_06.txt"
   },
   "current_entry": "00_read_first.txt",
   "current_general_rule_owner": "CURRENT_RULES.md",
@@ -51,7 +52,10 @@
     "current_state": "08 current-only replace",
     "milestone_history": "07 milestone-only append",
     "execution_plan": "route / evidence history; not daily current owner",
-    "automatic_progression": false
+    "automatic_progression": false,
+    "scope_classification": "exact1 of ROUTINE_SINGLE_OWNER_SCOPE / JOINT_WITHIN_EXISTING_DELEGATION_SCOPE / MASH_DECISION_AND_APPROVAL_REQUIRED_SCOPE",
+    "level2_standing_delegation": "Rule18 allowed scope only; Pro PRODUCT_ROUTE_ALIGNED + Ultra TECHNICALLY_ADMISSIBLE; Ultra execution owner; post-work plain-language report",
+    "level3": "Mash explicit decision / approval before first effect"
   },
   "current_reference_files": {
     "01_cocolon_business_life_funding_source.txt": "product / life-funding premise",
@@ -70,14 +74,15 @@
     "15_trust_based_joint_development_boundary_2026_06_05.txt": "trust and invisible-work boundary",
     "16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt": "Work pytest behavioral gate",
     "17_continuous_durable_work_recording_and_emergency_handoff.txt": "durable recording behavioral gate",
-    "18_chat_work_environment_selection_rule_2026_08_06.txt": "Chat / Work / model environment"
+    "18_chat_work_environment_selection_rule_2026_08_06.txt": "Chat / Work / model environment + three-role / three-tier workflow"
   },
   "activation": {
     "all_cocolon_work": [
       "00_read_first.txt",
       "CURRENT_RULES.md",
       "09_work_start_checklist.txt",
-      "99_integrated_paste_each_time.txt"
+      "99_integrated_paste_each_time.txt",
+      "18_chat_work_environment_selection_rule_2026_08_06.txt"
     ],
     "github_write": [
       "08_artifact_delivery_rules.txt",
@@ -107,10 +112,12 @@
     ]
   },
   "github_write_boundary": {
-    "explicit_mash_approved_scope_required": true,
+    "per_task_mash_approval_or_valid_rule18_standing_delegation_required": true,
     "continuous_recording_is_not_automatic_write_authority": true,
-    "missing_write_approval_state": "DURABLE_WRITE_APPROVAL_REQUIRED",
-    "standing_checkpoint_write_authority": "only_when_Mash_explicitly_defines_exact_scope"
+    "missing_write_permission_state": "DURABLE_WRITE_APPROVAL_REQUIRED",
+    "standing_checkpoint_write_authority": "separate mechanism; only when Mash explicitly defines exact scope",
+    "approval_basis": "Mash per-task explicit approval or valid Rule18 LEVEL_1 / LEVEL_2 standing delegation",
+    "three_tier_standing_delegation": "only Rule18 allowed scope; exact repository / paths / effects fixed before first write; separate-approval owners excluded"
   },
   "piece_definition": {
     "qna_is_piece_identity": false,
