@@ -23,10 +23,10 @@ status:
 CURRENT_EFFECTIVE
 
 effective_when:
-PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED
+GATE_B_DIRECT_NATIVE_TERMINAL_PUBLICATION_REMOTE_POSTVERIFIED
 
 source_cocolon_commit:
-5abf4a211b971f1fe65313e46522bcf5973d7324
+d420d612b7ef778a452341287e3c5081cd7cd836
 
 source_mashos_api_commit:
 45bf98f9034261d3adb3e808d6d759f2334e2d25
@@ -52,8 +52,8 @@ current結論は次のとおりです。
 | Step 4〜10 | actual ownerと既存evidenceは存在するが、Cycle001 product acceptanceとreleaseは未成立 | `IMPLEMENTED_BUT_NOT_ACCEPTED` |
 | Step 11 Cycle001 | G5 machine GREENを保持したままG6 Product Read REJECT。Cycle001は`NOT_ACCEPTED` | `ACTUAL_NONCONFORMANCE` |
 | 1000件、saturation、Cycle002〜010、shadow、actual device、owner switch、question-system handoff | 完了evidenceを確認していない。条件は削減しない | `UNVERIFIED` |
-| current comparator / runtime | comparator V2はcurrentだが、Phase 8 Gate B V2はpre-freeze actual-callでprojection helperのconcrete Path type拒否を検出。Gate Bは未閉鎖、Runtime READY / readiness creditは`false / 0` | `ACTUAL_NONCONFORMANCE`。acceptance / product / technical creditなし |
-| current Gate B method | V1 / V2 session-local helper routeをretireし、`GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1`をselected methodとするMash method decisionがapproved | `SUPERSEDED_BY_APPROVED_DESIGN`。technical executionとcreditは0 |
+| current comparator / runtime | comparator V2下でowner / independent exact19、probe、role smoke、full-root reconciliationは成立したが、authority-frozen readiness observation canonical preimage欠落でadmission停止。Gate B未閉鎖、Runtime READY / readiness creditは`false / 0` | `ACTUAL_NONCONFORMANCE`。component evidenceはblocker narrowingのみ |
+| current Gate B method | V1 / V2 helper routeをretire後、`GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1`はpost-preflight typed failureでclosed consumed | `ACTUAL_NONCONFORMANCE`。current selected methodはNONE pending administrative decision |
 | currentに残る商品設計・acceptance・Safety/privacy/public contract変更判断 | 0件 | `REQUIRES_MASH_DECISION = 0` |
 
 `IMPLEMENTED`、machine test GREEN、runtime probe成功、Product Read PASS、Cycle acceptance、releaseは別のclaimです。相互に変換しません。
@@ -110,9 +110,9 @@ current next actionは本資料から発行しません。current navigationは`
 
 | owner / evidence | identity |
 |---|---|
-| Cocolon source commit | `5abf4a211b971f1fe65313e46522bcf5973d7324` |
-| `07_latest_snapshot_diff.md` | blob `1deef41fb50bce45d7f6ebae8ecc08aede5d8ba7` |
-| `08_cycle001_current_state.md` | blob `21b823eb24f4acc279f59df9309fb56de913cab8` |
+| Cocolon Gate B entry commit | `d420d612b7ef778a452341287e3c5081cd7cd836` |
+| `07_latest_snapshot_diff.md` entry | blob `97ffed7c9c887b57e40c95014ab104c301502390` |
+| `08_cycle001_current_state.md` entry | blob `2fde6c8b1026ae1d6928151e01cb9c59ca72ebbd` |
 | current append-grown Execution and Closure Plan | blob `daa92c0a04482177df1f6f68e77c8f3641b084ff` |
 | mashos-api source commit | `45bf98f9034261d3adb3e808d6d759f2334e2d25` |
 | G5 exact24 GREEN Receipt | blob `0d716942582b54bdc7c643e759ad9185a77b236c` |
@@ -121,6 +121,7 @@ current next actionは本資料から発行しません。current navigationは`
 | comparator V2 owner | blob `3b9b332b1eea402dc18b7e7ceb8528e8f3bac678` |
 | Gate B V1 Receipt | blob `c2a0ca0c41b4c043d2195b3db1889a76aaab2933` |
 | latest Gate B V2 terminal Receipt | blob `d06b9ec45f3bd99710497d5c4e7d3967a223241f` |
+| current Gate B terminal Receipt | `NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_DirectNativeProcessFreshRuntimeReadiness_V1_BodyFree_Receipt_20260811.json` |
 
 本資料作成時にはsource / test / fixture / runtimeを実行・変更していません。`mashos-api`のstatusはpinned treeと既存evidenceをread-onlyで対応付けたものです。既存test fileの存在を、このPhaseでのfresh pytest成功へ読み替えません。
 
@@ -155,7 +156,7 @@ classificationはclaim単位です。同じsectionにnormative claimとhistorica
 | D10 | §§15〜16 RED / mutation / metamorphic / body-free receipt / change ledger | `UNCHANGED_NORMATIVE` | evidence validityとbody-free境界として有効です。過去の個別test結果は各Receiptのscope内だけで読みます。 |
 | D11 | §§17〜18のCycle001 evaluation / 100件batch acceptance / Product QA | `ACTUAL_NONCONFORMANCE` | Cycle001はG6で受入未達です。G5のmachine GREENをProduct Read PASSへ変換しません。 |
 | D12 | §18.9の1000件 / saturation、Cycle002〜010 | `UNVERIFIED` | 到達・完了は未確認です。denominatorとsaturation条件を削減しません。 |
-| D13 | §19 runtime / shadow / actual device / owner switch / question-system boundary | `UNVERIFIED` | current runtime READYはfalse、readiness creditは0です。shadow、actual-device、owner switch、question-system handoffの完了証拠はありません。 |
+| D13 | §19 runtime / shadow / actual device / owner switch / question-system boundary | `ACTUAL_NONCONFORMANCE` for current readiness; otherwise `UNVERIFIED` | current runtime READYはfalse、readiness creditは0です。shadow、actual-device、owner switch、question-system handoffの完了証拠はありません。 |
 | D14 | §20のfile responsibility | `HISTORICAL_STATUS_ONLY` | 責任分離の思想は有効ですが、候補file名・旧ownerはcurrent actual owner mapへ置き換えて読みます。 |
 | D15 | §21のStep順序をcurrent operational routeとして読むこと | `SUPERSEDED_BY_APPROVED_DESIGN` | architecture responsibility sequenceは保持します。Step11途中のG0〜G10 / post-G6 recoveryがcurrent operational routeです。 |
 | D16 | §22 completion / normal correction / batch reject / method STOP | `UNCHANGED_NORMATIVE` | G6 ordinary REJECTはshared structural correctionであり、method STOPではありません。 |
@@ -179,7 +180,7 @@ classificationはclaim単位です。同じsectionにnormative claimとhistorica
 | 7 | Typed Surface AST / Canonical Renderer | `IMPLEMENTED_BUT_NOT_ACCEPTED` | AST / renderer moduleとtest ownerは存在 | `emlis_ai_typed_surface_ast_v3.py` blob `102f11d3…`、`emlis_ai_canonical_renderer_v3.py` blob `ea4f2dd6…` | `test_emlis_nls_v3_s7_typed_ast_canonical_renderer.py` blob `4e032cff…` |
 | 8 | Body-only Parser / Independent Matcher | `IMPLEMENTED_BUT_NOT_ACCEPTED` | baseline ownerとcurrent Step11 inverse ownerが存在。独立性は受入条件として保持 | baseline: `emlis_ai_body_semantic_atom_parser_v3.py` blob `1fcea670…`、`emlis_ai_independent_semantic_matcher_v3.py` blob `3e5db444…`; Step11: `emlis_ai_step11_natural_surface_matcher_v3.py` blob `9d7a82fc…` | baseline test blob `0adcaad5…`、protected Step11 test blob `c302dd99…`、G5/G6 Receipts |
 | 9 | Hard Gate / Selector / Recovery | `IMPLEMENTED_BUT_NOT_ACCEPTED` | baseline ownerとcurrent Step11 hard-gate ownerが存在。machine passをproduct PASSにしない | `emlis_ai_semantic_hard_gate_v3.py` blob `0f83c662…`、`emlis_ai_lexicographic_selector_v3.py` blob `10ab91cc…`、`emlis_ai_bounded_recovery_v3.py` blob `51e1fe37…`、Step11 gate blob `b5dadd0e…` | baseline test blob `5414c672…`、G5 exact24 GREEN Receipt、G6 REJECT Receipt |
-| 10 | dormant runtime integration / batch runner / evidence tooling | `IMPLEMENTED_BUT_NOT_ACCEPTED` | dormant / offline adapterとtoolsは存在するが、current runtime admission / readiness creditは0 | `emlis_ai_dormant_runtime_adapter_v3.py` blob `a4ae12bb…`、`emlis_ai_step10_evidence_v3.py` blob `f259eaae…`、Step11 runtime adapter blob `36b057c6…`、runner blob `e84b7394…` | Step10 test blob `f53f1d75…`、latest Gate B V2 Receipt blob `d06b9ec4…` |
+| 10 | dormant runtime integration / batch runner / evidence tooling | `IMPLEMENTED_BUT_NOT_ACCEPTED` | dormant / offline adapterとtoolsは存在するが、current runtime admission / readiness creditは0。Cycle acceptanceは未成立 | `emlis_ai_dormant_runtime_adapter_v3.py` blob `a4ae12bb…`、`emlis_ai_step10_evidence_v3.py` blob `f259eaae…`、Step11 runtime adapter blob `36b057c6…`、runner blob `e84b7394…` | Step10 test blob `f53f1d75…`、current Gate B terminal Receipt |
 
 Step 0〜3の`IMPLEMENTED_AND_VERIFIED`は、それぞれのcheckpoint claimに限ります。Step 4〜10の存在・既存test evidence、Step 8/9のmachine proof、Step 10のtooling存在を、Cycle001 `ACCEPTED`、Runtime READY、actual-device pass、owner switch、releaseへ拡張しません。
 
@@ -296,52 +297,64 @@ V2 refreezeはcomparator identityをcurrent actualへversionedに結び直した
 
 ### 9.2 latest Gate B result
 
-latest one-shot Gate Bで確認されたscopeは次です。
+direct-native one-shot Gate Bで確認されたscopeは次です。
 
 | item | result |
 |---|---|
-| static compile | VALID |
-| pre-freeze actual entrypoint call | INVALID before configuration / runtime read |
-| configured acquisition / network | `0 / 0` |
-| wheel / runtime root / venv / install | `0 / 0 / 0 / 0` |
-| owner / pytest probe / role smoke / independent / reconciliation | `0 / 0 / 0 / 0 / 0` |
+| frozen direct process body / static independent audit | exact2 / PASS exact3 |
+| same-body synthetic actual-call | owner / independent `VALID / VALID / FULL_MATCH` |
+| configured acquisition / network process / accepted wheels | `1 / 1 / 5` |
+| fresh runtime root / venv / install | `1 / 1 / 1` |
+| current owner / pytest version probe / role smoke / independent / reconciliation | `VALID / VALID / VALID / VALID / FULL_MATCH` |
+| current comparator / pre-post full-root | `MATCH / MATCH` |
+| readiness observation canonical preimage | `NOT_FROZEN_BY_INDIVIDUAL_AUTHORITY` |
 | Runtime READY / readiness credit | `false / 0` |
 | Gate B | `NOT_CLOSED` |
-| Gate C / target / protected test / production / Product Read | `0` |
+| technical / product credit | `0 / 0` |
+| product credit | `0` |
+| Gate C / target / targeted pytest / protected test / production / Product Read | `0` |
 | Cycle001 | `NOT_ACCEPTED` |
 
-typed failureは次です。
+terminalは次です。
 
 ```text
-PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID
-PROJECTION_HELPER_CONFIG_PATH_RUNTIME_TYPE_CHECK_INVALID
-CONFIG_PATH_TYPE_INVALID
+RUNTIME_READINESS_OBSERVATION_IDENTITY_NOT_FROZEN
+AUTHORITY_CANONICAL_PREIMAGE_SCHEMA_MISSING
+BLOCKER_NARROWED
+RUNTIME_READY_FALSE
+READINESS_CREDIT_0
+GATE_B_NOT_CLOSED
+CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
 ```
 
-projection verifierの`run(Path)`がCLIから渡されたactual `pathlib.PosixPath`を拒否し、runtime effectより前に停止しました。helperはfreeze、修正、再実行していません。Gate B V1のunsupported `Path.read_text(newline=...)`とGate B V2のconcrete Path type拒否は、同じhelper API / runtime type contract familyの2回連続STOPです。
+owner / independentはstrict UTF-8 JSON stdin、plain string runtime-root、非共有implementation / coverage /
+filesystem traversalで独立導出し、exact19とcanonical diagnosticを完全一致させました。しかしRule 13 §5が
+個別authorityに要求するreadiness identityのfield order、separator、encoding、empty / NOT_APPLICABLE表現が
+freezeされていません。post-hoc hashで補完せず、fresh root / wheel / readiness / component outputはnonreusable、
+retry、reacquisition、repair、fallback、source / test / fixture / sample / corpus変更は0です。
 
-preflight STOPはblockerを狭めた過去authorityのterminal事実であり、Runtime READY、product credit、technical creditではありません。
+### 9.3 closed method and next decision boundary
 
-### 9.3 approved method replacement
-
-Mashが`DETOUR_RISK_STOP`に対してapprovedとしたmethod exact1は次です。
+Mashが`DETOUR_RISK_STOP`に対してapprovedとしたmethod exact1は閉じました。
 
 ```text
-SESSION_LOCAL_HELPER_ROUTE_RETIRE
-REPLACEMENT_METHOD = GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
+SESSION_LOCAL_HELPER_ROUTE = RETIRED
+GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1 = CLOSED_CONSUMED_POST_PREFLIGHT_TYPED_FAILURE
+CURRENT_SELECTED_METHOD = NONE_PENDING_MASH_METHOD_DECISION
 ```
 
-future technical authorityでは、direct native owner process exact1とdirect native independent process exact1を、strict UTF-8 JSON stdinとplain string runtime-rootで直接起動するcontractです。persisted helper / scanner / carrierはexact0、owner / independent implementation、coverage計算、filesystem traversalは非共有、共有可能なものはfrozen comparator schemaだけです。same process body exact2のsynthetic mini-root actual-call preflightをruntime effect前に必要とします。
+next administrative authority candidate exact1:
 
 ```text
-next technical authority candidate exact1:
-NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_DIRECT_NATIVE_PROCESS_FRESH_RUNTIME_READINESS_V1
+NLS_V3_STEP11_CYCLE001_G4_GATE_B_RUNTIME_READINESS_OBSERVATION_CANONICAL_PREIMAGE_METHOD_DECISION_V1
 
 state:
 DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
 ```
 
-本method reflectionはprocess bodyの実装 / freeze / execution、runtime、pytest、Gate Bを実行しません。Gate Bは未閉鎖、Runtime READY false、readiness credit 0のままです。
+本資料は次候補をactivateまたは実行しません。candidateはbody-free Rule 13 §5 field closureを判断する
+administrative design-only候補で、retroactive credit、runtime、network、process、pytest、Gate B、Gate Cは0です。
 
 ## 10. original implementation orderとcurrent recovery route
 
@@ -369,15 +382,19 @@ current G4 comparator V2:
 CURRENT_REFROZEN
 
 latest G4 Gate B:
-CLOSED_UNCONSUMED_PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID
+CLOSED_CONSUMED_POST_PREFLIGHT_RUNTIME_READINESS_OBSERVATION_IDENTITY_NOT_FROZEN
 
 Gate B V1 / V2 helper route:
 RETIRED
 
-current selected method:
-GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
+last selected method:
+GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1 / CLOSED_CONSUMED_POST_PREFLIGHT_TYPED_FAILURE
 
-next direct-native Gate B technical authority candidate:
+current selected method:
+NONE_PENDING_MASH_METHOD_DECISION
+
+next administrative authority candidate:
+NLS_V3_STEP11_CYCLE001_G4_GATE_B_RUNTIME_READINESS_OBSERVATION_CANONICAL_PREIMAGE_METHOD_DECISION_V1 /
 DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
 
 automatic progression:
@@ -398,6 +415,7 @@ false
 | G6でMAJOR familyが残りcontrolsも基準未達 | `ACTUAL_NONCONFORMANCE` | current product qualityが受入条件を満たしていません。approved deviationではありません。 |
 | Gate B V1 / V2 helper API/runtime type failure | `ACTUAL_NONCONFORMANCE` | helper routeの2回連続STOPです。Runtime READY / product / technical creditを付与しません。 |
 | session-local helper route退役とdirect native method選定 | `SUPERSEDED_BY_APPROVED_DESIGN` | `GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1`はapproved methodです。Gate B実行またはreadiness creditではありません。 |
+| direct-native Gate B readiness observation schema gap | `ACTUAL_NONCONFORMANCE` | component checksは成立したが、authority-frozen readiness preimage欠落でadmission停止。Gate B / readiness / product / technical creditは0。 |
 | 1000件、saturation、shadow、actual device、owner switch未完了 | `UNVERIFIED` | future requirementを削除・免除・達成扱いしません。 |
 
 actual nonconformanceを「current実装だから正しい」としてdesignへ昇格しません。approved supersessionはMash承認済み範囲だけに限定し、product goal、acceptance、Safety/privacy/public contractを暗黙に変更しません。
@@ -430,7 +448,7 @@ actual nonconformanceを「current実装だから正しい」としてdesignへ�
 ### 13.1 current actual nonconformance
 
 1. G6 Product Readが受入条件を満たしていません。
-2. latest Gate B V2はpre-freeze actual-callで停止し、Gate Bは未閉鎖、Runtime READY / readiness creditは`false / 0`です。
+2. latest direct-native Gate Bはcomponent checks成立後、readiness observation canonical preimage未freezeで停止し、Gate Bは未閉鎖、Runtime READY / readiness creditは`false / 0`です。
 3. Cycle001は`NOT_ACCEPTED`です。
 
 これらはcorrection対象ですが、原設計を緩める根拠ではありません。
@@ -450,7 +468,11 @@ actual nonconformanceを「current実装だから正しい」としてdesignへ�
 
 ### 13.3 `REQUIRES_MASH_DECISION`
 
-このalignmentを成立させるためのcurrent product / design `REQUIRES_MASH_DECISION`はexact0です。`DETOUR_RISK_STOP`に必要だったmethod decisionは、session-local helper route退役と`GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1`選定としてapproved済みです。次のtechnical authority候補は別のMash承認が必要であり、本資料でactivateしません。次の場合は新たなMash判断が必要です。
+このalignmentを成立させるためのcurrent product / acceptance / Safety/privacy/public contract変更
+`REQUIRES_MASH_DECISION`はexact0です。一方、readiness evidence schemaを閉じるadministrative method decision候補は
+exact1で、別のMash承認が必要です。本資料でactivateしません。候補はRule 13 §5の全適用field、canonical
+preimage、schema-level NOT_APPLICABLE、nonretroactive boundary、future technical methodをbody-freeで判断し、
+runtime / network / process / pytest / Gate B effectを持ちません。次の場合も新たなMash判断が必要です。
 
 - model-free方式の§22.5 STOP条件が実証された場合。
 - 1000件、denominator、Product Readまたはacceptance条件を変更する場合。
@@ -459,7 +481,7 @@ actual nonconformanceを「current実装だから正しい」としてdesignへ�
 - actual implementation divergenceをapproved designへ格上げする場合。
 - approved direct native methodから別技術laneへ再度変更する場合。
 
-G6 REJECTはproduct goal / acceptance / Safety/privacy/public contract変更判断を発生させていません。Gate B helper failureはmethod decisionを発生させましたが、approvedはhelper route退役とdirect native methodへの置換だけで、original acceptanceとproduct contractは不変です。
+G6 REJECTとGate B typed failureはproduct goal / acceptance / Safety/privacy/public contract変更判断を発生させていません。original acceptanceとproduct contractは不変です。
 
 ## 14. non-change boundary
 
@@ -473,22 +495,22 @@ current append-grown Plan:
 UNCHANGED
 
 07 / 08:
-SYNCHRONIZED_ONLY_BY_CURRENT_METHOD_REFLECTION_AUTHORITY
+SYNCHRONIZED_ONLY_BY_CURRENT_GATE_B_TERMINAL_AUTHORITY
 
 rules:
-SYNCHRONIZED_ONLY_BY_CURRENT_METHOD_REFLECTION_AUTHORITY
+UNCHANGED
 
 mashos-api source / test / fixture:
 UNCHANGED
 
-runtime / pytest / Gate B / Gate C:
-NOT_EXECUTED
+runtime / pytest / Gate B:
+REFLECTED_SEPARATE_AUTHORITY_POST_PREFLIGHT_TYPED_FAILURE
 
 Product Read / acceptance / release:
 NOT_EXECUTED_NOT_GRANTED
 
-Gate B / Gate C:
-NOT_EXECUTED_NOT_AUTHORIZED_BY_THIS_DOCUMENT
+Gate C:
+NOT_EXECUTED_NOT_AUTHORIZED
 
 automatic progression:
 false
@@ -523,18 +545,22 @@ CURRENT_COMPARATOR_V2_0EBA095E_PRESERVED
 GATE_B_V1_INDEPENDENT_IDENTITY_DERIVATION_INVALID_RETIRED
 PHASE8_PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID_PRESERVED
 SESSION_LOCAL_HELPER_ROUTE_RETIRED
-GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1_SELECTED
-NEXT_DIRECT_NATIVE_GATE_B_AUTHORITY_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1_CLOSED_CONSUMED_POST_PREFLIGHT_TYPED_FAILURE
+RUNTIME_READINESS_OBSERVATION_IDENTITY_NOT_FROZEN
+AUTHORITY_CANONICAL_PREIMAGE_SCHEMA_MISSING
+BLOCKER_NARROWED
+NEXT_READINESS_OBSERVATION_SCHEMA_METHOD_DECISION_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
 GATE_B_NOT_CLOSED
 RUNTIME_READY_FALSE
 READINESS_CREDIT_ZERO
-METHOD_REFLECTION_PRODUCT_CREDIT_ZERO
-METHOD_REFLECTION_TECHNICAL_CREDIT_ZERO
+CURRENT_GATE_B_PRODUCT_CREDIT_ZERO
+CURRENT_GATE_B_TECHNICAL_CREDIT_ZERO
 CYCLE001_NOT_ACCEPTED
 THOUSAND_SATURATION_ACTUAL_DEVICE_OWNER_SWITCH_UNVERIFIED
 APPROVED_SUPERSESSION_NOT_EQUAL_ACTUAL_NONCONFORMANCE
-PRODUCT_OR_DESIGN_REQUIRES_MASH_DECISION_EXACT0
+PRODUCT_OR_ACCEPTANCE_REQUIRES_MASH_DECISION_EXACT0
+ADMINISTRATIVE_METHOD_DECISION_CANDIDATE_EXACT1
 SOURCE_TEST_FIXTURE_UNCHANGED
-NO_RUNTIME_OR_GATE_EXECUTION
+GATE_C_AND_LATER_EXECUTION_ZERO
 AUTOMATIC_PROGRESSION_FALSE
 ```

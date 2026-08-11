@@ -5,7 +5,7 @@ canonical_path: "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Cu
 revision_date: "2026-08-11"
 status: "CURRENT_EFFECTIVE"
 normative_status: "CURRENT_DERIVATIVE_OWNER"
-effective_when: "PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED"
+effective_when: "GATE_B_DIRECT_NATIVE_TERMINAL_PUBLICATION_REMOTE_POSTVERIFIED"
 decision_owner: "Mash"
 operation_owner: "Karen"
 repository: "MassyuRed/Cocolon"
@@ -14,12 +14,12 @@ body_free: true
 technical_authority: false
 cycle001: "NOT_ACCEPTED"
 current_selected_lane: "POST_G6_SHARED_STRUCTURAL_CORRECTION"
-current_selected_method: "GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1"
-current_first_unfinished_gate: "G4_GATE_B_DIRECT_NATIVE_PROCESS_FRESH_RUNTIME_READINESS_V1"
+current_selected_method: "NONE_PENDING_MASH_METHOD_DECISION"
+current_first_unfinished_gate: "G4_GATE_B_RUNTIME_READINESS_ADMISSION"
 current_runtime_ready: false
 current_readiness_credit: 0
 automatic_progression: false
-next_technical_authority_separate_approval_required: true
+next_administrative_authority_separate_approval_required: true
 ---
 
 # NLS v3 Step 11 Cycle001 Current Closure Route
@@ -46,9 +46,9 @@ technical authorityではありません。source、test、fixture、runtime、P
 ## 1. source observation
 
 ```text
-Cocolon method-reflection entry commit / tree:
-5abf4a211b971f1fe65313e46522bcf5973d7324 /
-7da13adad9c38365b1c7999d8f7cf0265b089d54
+Cocolon Gate B entry commit / tree:
+d420d612b7ef778a452341287e3c5081cd7cd836 /
+9f928b42feb6b4f7f136c5f1cbfc207dd5ce7d87
 
 Phase 8 entry / final:
 c5009a2d5281bc74d48fb189e97453367ddacba0 /
@@ -152,7 +152,8 @@ false
 | comparator | `CURRENT_COMPARATOR_V2_REFROZEN` | canonical schema V1不変、current expected identity固定 |
 | Gate B V1 helper route | `CLOSED_CONSUMED_TYPED_FAILURE_RETIRED` | unsupported `Path.read_text(newline=...)`でidentity導出前に停止。readiness credit 0 |
 | Gate B V2 helper route | `CLOSED_UNCONSUMED_PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID_RETIRED` | actual `pathlib.PosixPath`拒否をruntime effect前に検出。readiness credit 0 |
-| method decision | `APPROVED_METHOD_REPLACEMENT` | session-local helper routeをretireし、`GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1`をselected methodとする。product / technical credit 0 |
+| method decision | `APPROVED_METHOD_REPLACEMENT` | session-local helper routeをretireし、`GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1`をselected methodとした。decision自体のproduct / technical credit 0 |
+| direct-native Gate B | `CLOSED_CONSUMED_POST_PREFLIGHT_TYPED_FAILURE` | component exact19/probe/smokeは成立したが、readiness observation canonical preimage未freezeでadmission停止。credit 0 |
 
 G5のtechnical credit:
 
@@ -209,7 +210,10 @@ current Gate:
 G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B
 
 Gate B:
-NOT_CLOSED
+CLOSED_AUTHORITY_BUT_GATE_NOT_CLOSED
+
+Gate C:
+NOT_AUTHORIZED_NOT_EXECUTED
 
 DETOUR_RISK_STOP:
 RESOLVED_BY_APPROVED_METHOD_DECISION
@@ -217,11 +221,17 @@ RESOLVED_BY_APPROVED_METHOD_DECISION
 retired route:
 SESSION_LOCAL_HELPER_ROUTE
 
-selected method:
-GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
+last method:
+GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1 / CLOSED_CONSUMED_POST_PREFLIGHT_TYPED_FAILURE
 
-next technical authority candidate exact1:
+current selected method:
+NONE_PENDING_MASH_METHOD_DECISION
+
+last technical authority:
 NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_DIRECT_NATIVE_PROCESS_FRESH_RUNTIME_READINESS_V1
+
+next administrative authority candidate exact1:
+NLS_V3_STEP11_CYCLE001_G4_GATE_B_RUNTIME_READINESS_OBSERVATION_CANONICAL_PREIMAGE_METHOD_DECISION_V1
 
 state:
 DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
@@ -231,27 +241,31 @@ NLS_V3_INSTALLED_FILE_MANIFEST_CANONICAL_V1 /
 0eba095e4c173b4b69f68532fd66cf2c871ab9edef64d91754b52ed7daee15c5
 
 last terminal / safe detail:
-PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID /
-PROJECTION_HELPER_CONFIG_PATH_RUNTIME_TYPE_CHECK_INVALID
+RUNTIME_READINESS_OBSERVATION_IDENTITY_NOT_FROZEN /
+AUTHORITY_CANONICAL_PREIMAGE_SCHEMA_MISSING
 
 runtime READY / readiness credit:
 false / 0
 
-process body implementation / freeze / execution:
-0 / 0 / 0
+process body identity / actual-call:
+exact2 / owner exact2 + independent exact2
 
 product credit / technical credit:
 0 / 0
 ```
 
-Gate B V2のpre-freeze actual-callはprojection verifierのconcrete Path type拒否を検出し、wheel取得、runtime root、venv、install、pytestより前に停止しました。V1 / V2の個別VALIDまたはblocker narrowingをRuntime READYへ合算しません。approved method decisionはhelper routeをretireし、次のfresh Gate Bに用いるmethodを一意にしただけです。
+Gate B direct-native V1は、same-body synthetic preflight、fresh exact5/root、owner / independent exact19、
+pytest version probe、required-role smoke、full-root reconciliationまでは成立しました。しかしRule 13 §5が
+個別authorityでのfreezeを要求する`runtime_readiness_observation_id` canonical preimage schemaがauthority本文に
+なく、実行後のhashで補完できません。component evidenceはblocker narrowingだけに保持し、runtime READY、
+readiness credit、Gate B closureへ変換しません。
 
 ---
 
 ## 4. current route and distance
 
 ```text
-CURRENT G4-B  direct native process + fresh runtime readiness
+CURRENT G4-B  runtime readiness observation identity admission
   -> G4-C     post-G6 causal RED freeze
   -> G5       bounded implementation / GREEN-only
   -> G6       representative Product Read
@@ -268,13 +282,13 @@ CURRENT G4-B  direct native process + fresh runtime readiness
 
 ### Product Read distance
 
-STOP / loopが増えない最短経路は、G4-B、G4-C、G5、G6のexact4 authority boundaryです。Product Read実行前に閉じるtechnical Gateはexact3です。helper route退役とdirect native method選定はこのdistanceを増減させず、creditにも変換しません。
+STOP / loopが増えない最短経路は、G4-B、G4-C、G5、G6のexact4 authority boundaryです。Product Read実行前に閉じるtechnical Gateはexact3です。今回のcomponent PASSはGate B closureではないためdistanceを進めません。
 
 ### Cycle acceptance distance
 
 G6 PASS後もG7a、G7b、G7c、G7d、G8、G9、G10が残ります。current GateからG10までの最短known sequential boundaryはexact11です。
 
-この数は最短routeの位置表現です。進捗率や工数へ変換しません。REJECT、new RC、typed STOP、DETOUR_RISK_STOPで増えます。
+current GateからG10までの最短known sequential boundaryはexact11です。この数は最短routeの位置表現であり、進捗率や工数へ変換しません。REJECT、new RC、typed STOPで増えます。
 
 ---
 
@@ -282,8 +296,8 @@ G6 PASS後もG7a、G7b、G7c、G7d、G8、G9、G10が残ります。current Gate
 
 | Gate | Entry | Exit | STOP / branch |
 |---|---|---|---|
-| **G4-B current** | direct-native technical authority別承認、comparator V2 `0eba095e...`不変、process body exact2 frozen、same bodyのsynthetic mini-root actual-call preflight、prior root / wheel / helper / readiness reuse0 | direct owner / direct independent `VALID / VALID / FULL_MATCH`、pytest probe / role smoke VALID、full-root reconciliation一致、`RUNTIME_READY_CURRENT_SESSION` | `DIRECT_NATIVE_PROCESS_ROUTE_INVALID`、identity/schema/scope conflict、owner-only admission。helper fallback / second method repair / third normal authorityは0。Gate Cへ自動進行0 |
-| **G4-C RED-only** | Gate B READY postverified、post-G6 G3 contract / test preimage / ordered exact24一致、別承認 | first22 PASS + new exact2 causal RED、`22 PASS / 2 CAUSAL_RED / 0 UNEXPECTED / 0 ERROR`、production change0 | symbol-only / unconditional RED、exceptionをpositive credit化、case cue、historical exact2 / full52混入、scope外変更 |
+| **G4-B current** | authority-bound comparator/process/input/output/readiness identity schemas、same-body synthetic preflight、prior reuse0 | direct owner / independent `VALID / VALID / FULL_MATCH`、probe/smoke VALID、full-root一致、authority-frozen readiness observation identity、`RUNTIME_READY_CURRENT_SESSION` | current authorityはreadiness preimage未freezeでtyped STOP。retry / reacquisition / root repair / fallback / body repair / third normal authority0 |
+| **G4-C blocked RED-only** | Gate B READY postverified、post-G6 G3 contract / test preimage / ordered exact24一致、別承認 | first22 PASS + new exact2 causal RED、`22 PASS / 2 CAUSAL_RED / 0 UNEXPECTED / 0 ERROR`、production change0 | Gate B未閉鎖中は候補化・実行しない。symbol-only / unconditional RED、case cue、historical exact2 / full52混入禁止 |
 | **G5 GREEN-only** | G4 RED bytes / denominator / mutable exact3 / body budget / preimages一致、別承認 | same exact24 `24 PASS / 0 FAIL`、semantic / Safety / privacy / resource非回帰、production exact1 postverified | mutable exact3外、test / fixture / sample / Parser / Matcher / API / DB / RN変更、case branch、machine GREENの商品PASS化 |
 | **G6 Product Read** | G5 production blob、exact10 / exact8 / controls / 12 axes一致、private read + body-free publication、別承認 | §5.1 threshold全成立 | MAJOR残存はshared correctionへreturn。case cue、contract破壊、cumulative rerun不能だけmethod STOP候補 |
 | **G7a** | G6 PASS、R5 fresh canonical prerequisite evidence、別承認 | final body bytesだけからtyped witnessを一意回収、forward / inverse independence・mutation・privacy・resource GREEN | metadata / hidden marker / body外proof、historical G1/G2 backfillが必要 |
@@ -386,9 +400,9 @@ persisted helper / scanner / carrier:
 exact0
 ```
 
-future technical authorityは、同じauthority本文にfreezeしたprocess body exact2をstrict UTF-8 JSON stdinとplain string runtime-rootで直接起動します。ownerは`importlib.metadata`側、independentは`dist-info / RECORD / actual filesystem`側から別手順で導出し、implementation、coverage計算、filesystem traversalを共有しません。共有はfrozen comparator schemaだけです。
+Gate B technical authorityは、同じauthority本文にfreezeしたprocess body exact2をstrict UTF-8 JSON stdinとplain string runtime-rootで直接起動しました。ownerは`importlib.metadata`側、independentは`dist-info / RECORD / actual filesystem`側から別手順で導出し、implementation、coverage計算、filesystem traversalを共有していません。共有はfrozen comparator schemaだけです。
 
-runtime effect前にsame process body exact2をsynthetic mini-rootへactual-callし、strict output schemaを検証します。preflight不成立時は`DIRECT_NATIVE_PROCESS_ROUTE_INVALID`でSTOPし、helper fallback、別scanner、別carrier、process body修正、second method repair、third normal authorityへ進みません。本fileはprocess bodyを実装・freeze・実行しません。
+runtime effect前にsame process body exact2をsynthetic mini-rootへactual-callし、strict output schemaを検証しました。preflight成立後もfailed artifact reuse、helper fallback、別scanner、別carrier、process body修正、second method repair、third normal authorityは0です。本file自体はprocess bodyを実装・freeze・実行しません。
 
 ---
 
@@ -406,7 +420,7 @@ runtime effect前にsame process body exact2をsynthetic mini-rootへactual-call
 | Gate B V1 session-local helper route | `CLOSED_CONSUMED_TYPED_FAILURE_RETIRED` | repair、reuse、reactivation、fallback |
 | Gate B V2 session-local helper route | `CLOSED_UNCONSUMED_PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID_RETIRED` | helper修正、V3化、reuse、rerun |
 | authority-local / session-local helper method | `RETIRED_BY_APPROVED_METHOD_DECISION` | persisted helper、追加scanner、追加carrierへの名称変更 |
-| direct native process method V1 | `CURRENT_SELECTED_METHOD_NOT_EXECUTED` | method approvalのGate B / readiness creditへの変換 |
+| direct native process method V1 | `CLOSED_CONSUMED_POST_PREFLIGHT_TYPED_FAILURE` | closed authority、fresh wheel/root/runtime、component outputsのretry / reuse / reactivation |
 | installed identity `9c6925ed...` | `HISTORICAL_NONCURRENT` | current comparatorへの復帰 |
 | comparator V2 `0eba095e...` | `CURRENT_REFROZEN` | fresh evidenceなしの変更 |
 | initial G3 / G4 / G5 / G6 | `CLOSED_PRESERVED_AS_CLASSIFIED` | post-G6 correctionによるreopen / reclassify |
@@ -423,37 +437,51 @@ retired routeを消去せず、再利用できる事実とcurrent actionとし�
 
 本fileはGate sequence、entry / exit / STOP、retired route、acceptance distanceが変わる節目だけ更新します。current positionをPlan / 本file / `08`へ三重保持しません。
 
-Phase 8 Gate B V2は実行されましたが、pre-freeze actual-callで`PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID`となり、Gate Bを閉じていません。V1 / V2 helper routeの連続STOPによる`DETOUR_RISK_STOP`は、Mashのapproved method decisionにより次のように解消しました。
+Phase 8 Gate B V2はpre-freeze actual-callで`PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID`となり、
+V1 / V2 helper routeの連続STOPによる`DETOUR_RISK_STOP`は、Mashのapproved method decisionにより
+次のように解消しました。
 
 ```text
 DETOUR_RISK_STOP = RESOLVED_BY_APPROVED_METHOD_DECISION
 SESSION_LOCAL_HELPER_ROUTE = RETIRED
-CURRENT_SELECTED_METHOD = GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
+LAST_SELECTED_METHOD = GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
+LAST_SELECTED_METHOD_LIFECYCLE = CLOSED_CONSUMED_POST_PREFLIGHT_TYPED_FAILURE
+CURRENT_SELECTED_METHOD = NONE_PENDING_MASH_METHOD_DECISION
+RUNTIME_READY = FALSE
+READINESS_CREDIT = 0
+GATE_B = NOT_CLOSED
 ```
 
-次のtechnical authority候補はexact1だけです。
+Gate B direct-native authorityはcomponent checksを成立させましたが、authority-frozen readiness observation
+identityを成立させられずtyped STOPしました。次のadministrative authority候補はexact1だけです。
 
 ```text
-NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_DIRECT_NATIVE_PROCESS_FRESH_RUNTIME_READINESS_V1
+NLS_V3_STEP11_CYCLE001_G4_GATE_B_RUNTIME_READINESS_OBSERVATION_CANONICAL_PREIMAGE_METHOD_DECISION_V1
 
 state:
 DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
 ```
 
-本method reflectionは候補を作成・実行・activateしません。次authorityの成功時creditは、direct owner / independent `VALID / VALID / FULL_MATCH`、probe / required-role smoke / full-root reconciliationが完全に成立した場合のruntime readiness exact1 / Gate B closureに限ります。
+本publicationは次候補を作成・実行・activateしません。closed authority、fresh wheel/root/runtime、
+component outputのreuse、retry、reacquisition、root repair、fallback、interpreter switch、body repair、
+second method repair、third normal authorityへ進みません。
 
-next technical success terminal candidate:
+Gate B typed terminal:
 
 ```text
-TECHNICAL_CREDIT
-RUNTIME_READY_EXACT1
-GATE_B_CLOSED
-NEXT_GATE_SEPARATE_APPROVAL_REQUIRED
+RUNTIME_READINESS_OBSERVATION_IDENTITY_NOT_FROZEN
+AUTHORITY_CANONICAL_PREIMAGE_SCHEMA_MISSING
+BLOCKER_NARROWED
+RUNTIME_READY_FALSE
+READINESS_CREDIT_0
+GATE_B_NOT_CLOSED
 CURRENT_AUTHORITY_STOP
 AUTOMATIC_PROGRESSION_FALSE
 ```
 
-禁止範囲は、Gate C以降、protected-test / production mutation、fixture / sample / corpus変更、Product Read、exact24 / full52 / exact100、mashos-api write、failed artifact reuse、helper / scanner / carrier fallback、second method repair、third normal authority、automatic progressionです。
+Gate C以降、protected-test / production mutation、fixture / sample / corpus変更、Product Read、exact24 /
+full52 / exact100、mashos-api write、failed artifact reuse、helper / scanner / carrier fallback、second method repair、
+third normal authority、automatic progressionは0です。
 
 ---
 
@@ -472,18 +500,22 @@ PHASE8_PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID_PRESERVED
 DETOUR_RISK_STOP_RESOLVED_BY_APPROVED_METHOD_DECISION
 SESSION_LOCAL_HELPER_ROUTE_RETIRED
 GATE_B_V1_V2_HELPER_ROUTES_RETIRED
-CURRENT_SELECTED_METHOD_GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
-NEXT_TECHNICAL_AUTHORITY_DIRECT_NATIVE_GATE_B_V1_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
-GATE_B_NOT_CLOSED
+LAST_SELECTED_METHOD_GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
+CURRENT_SELECTED_METHOD_NONE_PENDING_MASH_METHOD_DECISION
+GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1_CLOSED_CONSUMED_POST_PREFLIGHT_TYPED_FAILURE
+RUNTIME_READINESS_OBSERVATION_IDENTITY_NOT_FROZEN
+AUTHORITY_CANONICAL_PREIMAGE_SCHEMA_MISSING
+BLOCKER_NARROWED
 RUNTIME_READY_FALSE
 READINESS_CREDIT_0
-METHOD_REFLECTION_PRODUCT_CREDIT_0
-METHOD_REFLECTION_TECHNICAL_CREDIT_0
+GATE_B_NOT_CLOSED
+PRODUCT_CREDIT_0
+NEXT_ADMINISTRATIVE_AUTHORITY_READINESS_OBSERVATION_SCHEMA_METHOD_DECISION_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+GATE_C_NOT_AUTHORIZED
 PRODUCT_READ_MINIMUM_BOUNDARY_EXACT4
 PRODUCT_READ_TECHNICAL_GATE_BOUNDARY_EXACT3
 CYCLE_ACCEPTANCE_MINIMUM_KNOWN_BOUNDARY_EXACT11
 RETIRED_ROUTE_NOT_REACTIVATED
 CURRENT_NAVIGATION_OWNER_08
-WORK_TECHNICAL_EXECUTION_NOT_RESUMED
 AUTOMATIC_PROGRESSION_FALSE
 ```

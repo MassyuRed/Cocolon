@@ -40237,3 +40237,111 @@ automatic progression: false
 
 The body-free Receipt is the durable result owner. This section does not issue or execute the next
 technical authority and does not convert the method decision into product or technical credit.
+
+# 2026-08-11 milestone — direct-native Gate B post-preflight readiness identity typed STOP prepared
+
+```text
+status: GATE_B_DIRECT_NATIVE_TERMINAL_PREPARED
+effective_when: GATE_B_DIRECT_NATIVE_TERMINAL_PUBLICATION_REMOTE_POSTVERIFIED
+current_navigation_owner: 08_cycle001_current_state.md
+current_active_authority: NONE
+automatic_progression: false
+```
+
+Mash approved and activated the single-use technical authority
+`NLS_V3_STEP11_CYCLE001_G4_POST_G6_SHARED_STRUCTURAL_CORRECTION_GATE_B_DIRECT_NATIVE_PROCESS_FRESH_RUNTIME_READINESS_V1`.
+Entry Cocolon was `d420d612b7ef778a452341287e3c5081cd7cd836`, tree
+`9f928b42feb6b4f7f136c5f1cbfc207dd5ce7d87`; mashos-api remained
+`45bf98f9034261d3adb3e808d6d759f2334e2d25`, tree
+`23f1684ed5430cafef955d7af9fc6bde75a4c62f`.
+
+The direct-native component route ran once without retry:
+
+| component | actual |
+|---|---|
+| frozen process bodies | owner exact1 / independent exact1 |
+| independent static audit | PASS exact3 |
+| same-body synthetic actual-call | owner / independent `VALID / VALID / FULL_MATCH` |
+| configured acquisition / network process / accepted wheels | `1 / 1 / 5` |
+| fresh root / venv / install | `1 / 1 / 1` |
+| current owner / pytest version probe / required-role smoke / current independent | `VALID / VALID / VALID / VALID` |
+| exact19 / canonical diagnostic / comparator / pre-post full-root | `FULL_MATCH / FULL_MATCH / MATCH / MATCH` |
+| target import / collection / call / targeted pytest | `0 / 0 / 0 / 0` |
+| Gate C and later execution | `0` |
+
+The component facts did not admit runtime readiness. Rule 13 §5 requires each individual authority to
+freeze the canonical field order, separator, encoding, and empty / `NOT_APPLICABLE` representation for
+`runtime_readiness_observation_id`. That canonical preimage schema was absent from the activated
+authority. A post-hoc hash is not used for admission or retroactive credit.
+
+```text
+terminal: POST_PREFLIGHT_TYPED_FAILURE
+reason: RUNTIME_READINESS_OBSERVATION_IDENTITY_NOT_FROZEN
+safe detail: AUTHORITY_CANONICAL_PREIMAGE_SCHEMA_MISSING
+primary outcome: BLOCKER_NARROWED
+runtime READY / readiness credit: false / 0
+Gate B closed / technical credit / product credit: false / 0 / 0
+Cycle001: NOT_ACCEPTED
+authority lifecycle: CLOSED_CONSUMED_POST_PREFLIGHT_TYPED_FAILURE
+current authority: NONE
+```
+
+The fresh wheel set, root, runtime observation, component outputs, and closed authority are nonreusable.
+Retry, reacquisition, rematerialization, root repair, interpreter switch, process-body repair, helper /
+scanner / carrier fallback, second method repair, third normal authority, and automatic progression are 0.
+
+The prepared body-free Receipt is:
+
+```text
+path:
+EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_GateB_DirectNativeProcessFreshRuntimeReadiness_V1_BodyFree_Receipt_20260811.json
+
+stage1 raw SHA-256:
+f64d2a98524d797a4d9d16767a0282cf13d64d9c8bcff50784f0e85172fe46c3
+
+stage1 logical receipt SHA-256:
+a9d804c562cfa9611ba6d7667f864944da4aeab694890e2a50eb23b7fc8be960
+
+stage1 bytes / LF / mode:
+11247 / 256 / 100644
+```
+
+The authorized Stage 1 publication union is exact6: this Receipt ADD exact1 plus MODIFY exact5 for
+`08_cycle001_current_state.md`, this 07 milestone, Current Closure Route, Current Alignment, and current
+roadmap. Result, Handoff, Plan, rules, source, test, fixture, sample, corpus, and mashos-api changes are 0.
+This prepared milestone does not claim GitHub publication or remote postverify; the Receipt-only
+finalization stage owns those remote facts after verification.
+
+The sole next candidate is administrative and inactive:
+
+```text
+next exact1:
+NLS_V3_STEP11_CYCLE001_G4_GATE_B_RUNTIME_READINESS_OBSERVATION_CANONICAL_PREIMAGE_METHOD_DECISION_V1
+
+classification:
+ADMINISTRATIVE_METHOD_DECISION_CANDIDATE
+
+state:
+DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
+
+execution / runtime / network / pytest / Gate B / Gate C credit:
+0 / 0 / 0 / 0 / 0 / 0
+```
+
+The candidate must close the full Rule 13 §5 readiness-evidence field set and canonical preimage boundary,
+declare schema-level `NOT_APPLICABLE` reasons where valid, prohibit retroactive derivation from this
+attempt, and leave any future technical authority separately unapproved.
+
+```text
+DIRECT_NATIVE_COMPONENT_EVIDENCE_VALID_NONCREDIT
+RUNTIME_READINESS_OBSERVATION_IDENTITY_NOT_FROZEN
+AUTHORITY_CANONICAL_PREIMAGE_SCHEMA_MISSING
+BLOCKER_NARROWED
+GATE_B_NOT_CLOSED
+RUNTIME_READY_FALSE
+READINESS_CREDIT_0
+CURRENT_AUTHORITY_CLOSED_CONSUMED_POST_PREFLIGHT_TYPED_FAILURE
+NEXT_ADMINISTRATIVE_METHOD_DECISION_CANDIDATE_INACTIVE
+CURRENT_AUTHORITY_STOP
+AUTOMATIC_PROGRESSION_FALSE
+```
