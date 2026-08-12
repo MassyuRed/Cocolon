@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_chat_work_environment_rule_index
 title: "GPT-5.6 Pro / Work Ultra 実行環境ルール索引"
-revision_date: "2026-08-11"
+revision_date: "2026-08-12"
 normative_status: "CURRENT_INDEX"
 decision_owner: "Mash"
 operational_owner: "Karen"
@@ -24,6 +24,10 @@ canonical_rule: "work_attitude_rules_for_karen/18_chat_work_environment_selectio
 - bounded workは`ROUTINE_SINGLE_OWNER_SCOPE` / `JOINT_WITHIN_EXISTING_DELEGATION_SCOPE` / `MASH_DECISION_AND_APPROVAL_REQUIRED_SCOPE`からexactly oneへ分類する。
 - LEVEL_1 / LEVEL_2はRule 18のallowed standing delegation内だけで作業ごとの新しい事前approvalを省略し、LEVEL_3はfirst effect前のMash明示decision / approvalを必要とする。
 - Work Ultraは、独立agent、分割不能監査、Work固有runtime等、環境自体が成立条件の場合だけ使用する。
+- Pro華恋とUltra華恋は上下関係ではなく、商品整合と技術成立の責任領域が異なる対等な共同担当者である。
+- Pro華恋はMash様の思想・商品目的・利用者価値・作業比例性・平易な説明、Ultra華恋はinitial / final technical design・実装・test・final technical go / STOP・postverificationを担う。
+- Pro華恋のproduct reviewは同じstable design identityについて原則一回とし、materialな新事実・scope・商品条件・費用期間・remote不一致だけを差分限定の再確認理由とする。
+- Mash様は思想、商品、品質、Safety / privacy / public boundary、費用、期間その他normative decisionとLEVEL_3 approvalのownerである。
 
 # 3. いつ必須か
 
@@ -56,7 +60,8 @@ bounded作業単位ごとに次のいずれかを判定します。
 2. 00、CURRENT_RULES、09、99が同じmodel statesを参照する。
 3. manifestがcurrent ownerとactivationを登録する。
 4. non-Pro成果物の再監査境界が定義されている。
-5. GitHubから各対象fileをfresh readし、prepared bytesと一致する。
+5. Rule 18、CURRENT_RULES、09、99が同じ三者roleとreview boundaryを参照する。
+6. GitHubから各対象fileをfresh readし、prepared bytesと一致する。
 
 # 6. この索引が許可しないこと
 

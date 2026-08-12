@@ -1,6 +1,6 @@
 {
-  "schema_version": "cocolon.work_attitude_rules.current.v2",
-  "revision_date": "2026-08-11",
+  "schema_version": "cocolon.work_attitude_rules.current.v3",
+  "revision_date": "2026-08-12",
   "normative_status": "CURRENT",
   "status": "CURRENT_EFFECTIVE",
   "effective_when": "PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED",
@@ -54,8 +54,13 @@
     "execution_plan": "route / evidence history; not daily current owner",
     "automatic_progression": false,
     "scope_classification": "exact1 of ROUTINE_SINGLE_OWNER_SCOPE / JOINT_WITHIN_EXISTING_DELEGATION_SCOPE / MASH_DECISION_AND_APPROVAL_REQUIRED_SCOPE",
-    "level2_standing_delegation": "Rule18 allowed scope only; Pro PRODUCT_ROUTE_ALIGNED + Ultra TECHNICALLY_ADMISSIBLE; Ultra execution owner; post-work plain-language report",
-    "level3": "Mash explicit decision / approval before first effect"
+    "role_relationship": "Pro Karen and Ultra Karen are peer collaborators with different responsibility domains; Mash is normative decision owner",
+    "pro_role": "Mash intent / product purpose / user value / proportionality / one aggregated product-route review / plain-language explanation",
+    "ultra_role": "fresh actual / initial and final technical design / implementation / test / final technical go-or-stop / execution / postverification",
+    "stable_design_review": "Pro review exact1 by default; bounded delta-only re-review only for material fresh actual, scope, product condition, cost-duration or remote-result change",
+    "technical_candidate_owner": "Ultra Karen",
+    "level2_standing_delegation": "Rule18 allowed scope only; Pro product-route alignment + Ultra initial/final technical design and TECHNICALLY_ADMISSIBLE; Ultra execution owner; post-work plain-language report",
+    "level3": "Pro plain-language decision brief + Ultra final technical body + Mash explicit decision / approval before first effect"
   },
   "current_reference_files": {
     "01_cocolon_business_life_funding_source.txt": "product / life-funding premise",
@@ -106,6 +111,10 @@
       "11_cocolon_area_specific_do_not_break.txt",
       "../../Cocolon_Piece/00_read_first.md",
       "../../Cocolon_Piece/manifest.json"
+    ],
+    "analysis": [
+      "11_cocolon_area_specific_do_not_break.txt",
+      "../../Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md"
     ],
     "api_db_rn_iap_account": [
       "../05_cocolon_rule_file_index.md"

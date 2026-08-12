@@ -1,6 +1,6 @@
 # Cocolon作業開始チェックリスト
 
-revision_date: 2026-08-11
+revision_date: 2026-08-12
 normative_status: CURRENT_EXECUTION_GATE
 status: CURRENT_EFFECTIVE
 effective_when: PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED
@@ -52,8 +52,10 @@ Workを起動する前に、次のexact13 fieldsをcurrent actualで埋める。
 ## B2. three-tier collaboration / permission
 
 - [ ] `ROUTINE_SINGLE_OWNER_SCOPE`ではdeterministic condition、single owner、effect 0またはvalid standing delegationを確認した。
-- [ ] `JOINT_WITHIN_EXISTING_DELEGATION_SCOPE`ではPro華恋の`PRODUCT_ROUTE_ALIGNED`とUltra華恋の`TECHNICALLY_ADMISSIBLE`が同じfresh owner / head / targetで成立した。
-- [ ] `MASH_DECISION_AND_APPROVAL_REQUIRED_SCOPE`ではfirst effect前のMash明示decision / approvalをexact scopeまたはfinal identityへ結び付けた。
+- [ ] `JOINT_WITHIN_EXISTING_DELEGATION_SCOPE`では、Pro華恋が目的・Mash条件・利用者価値・whole-route fitを整理し、Ultra華恋がfresh actualからinitial / final technical designと`TECHNICALLY_ADMISSIBLE`またはSTOPを所有した。
+- [ ] `MASH_DECISION_AND_APPROVAL_REQUIRED_SCOPE`では、Pro華恋のplain-language decision briefとUltra華恋のfinal technical bodyを分離し、first effect前のMash明示decision / approvalをexact scopeまたはfinal identityへ結び付けた。
+- [ ] Pro華恋のreviewは同じstable design identityについて原則一回であり、再確認がある場合はmaterialな新事実・scope・商品条件・費用期間・remote不一致の該当差分だけに限定した。
+- [ ] Pro華恋が変更path、test実装、処理順または競合technical design全文を先に固定しておらず、Ultra華恋がPro指摘の反映 / 不採用理由を明示した。
 - [ ] Rule 18 standing delegationのallowed scope、prohibited scope、separate-approval ownerを確認した。
 - [ ] scope上昇条件、permission不足またはPro / Ultra gate不成立時は、追加effect前にSTOPする。
 - [ ] post-work reportを事後approval、scope超過の治癒またはnext work permissionへ変換しない。

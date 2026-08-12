@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_piece_read_first
 title: "Cocolon Piece — Read First"
-revision_date: "2026-08-08 JST"
+revision_date: "2026-08-12 JST"
 decision_owner: "Mash"
 workstream: "Cocolon / Piece"
 document_status: "CURRENT_PIECE_WORKSTREAM_ENTRY"
@@ -74,9 +74,15 @@ PCE-9A B02-A M0/M1 Tracked Migration + Legacy Bridge:
   NOT_ACTIVATED
   SEPARATE_MASH_APPROVAL_REQUIRED
 
-Analysis Pro-First roadmap:
+Analysis roadmap:
   NOT_ACTIVATED
   SEPARATE_MASH_APPROVAL_REQUIRED
+
+Analysis current role alignment:
+  Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md
+  PRO_PRODUCT_ALIGNMENT_AND_EXPLANATION
+  ULTRA_INITIAL_FINAL_TECHNICAL_DESIGN_AND_EXECUTION
+  FUTURE_UNEXECUTED_STAGES_ONLY
 
 automatic progression:
   false
@@ -462,6 +468,7 @@ EmlisAI current executable Work-required task
 6. B01 RED test and pure contract owner at their pinned mashos-api commits
 7. exact target/current files for the separately approved B2-A packet
 8. PCE-7 RED/test matrix rows assigned to B2-A
+9. Analysis作業の場合だけ、`Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md`
 
 ## 13. Prohibited
 
@@ -479,6 +486,7 @@ EmlisAI current executable Work-required task
 - rollbackでold Q&Aを復活させる。
 - actual-device/Work evidenceをChatの推測で完了にする。
 - PCE-U1、Analysisまたはproductionへautomatic progressionする。
+- historical `Cocolon_Piece_Analysis_ProFirst_Design_Workstream_Handoff_20260807`を書き換え、current role ownerとして再利用する。
 
 ## 14. Current actual basis
 

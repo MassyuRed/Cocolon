@@ -1,19 +1,19 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v13",
-  "generated_at": "2026-08-08 JST",
+  "schema_version": "cocolon.piece.workstream_manifest.v14",
+  "generated_at": "2026-08-12 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v12",
-    "predecessor_blob": "186cdcff58223cf886ffdff5fe8f9aa1e7a19fa6",
-    "predecessor_head": "4979d8cf3590ec4e4a34db73dc583a953c89bf4e",
-    "carry_forward": "PCE-0 through PCE-8 detailed identities remain in immutable predecessor, canonical phase artifacts and 07N checkpoint"
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v13",
+    "predecessor_blob": "9df6e5ce25d127550e71c322ae6a1de46876c661",
+    "predecessor_head": "b3263b25a2105c9358318efdd1f2c274e052bdfb",
+    "carry_forward": "PCE-0 through PCE-9A B01 identities remain unchanged; this revision adds prospective Analysis role alignment only"
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "bbfa8ec99f986ff49a75ce25237fce34e181b993"
+    "git_blob_sha1": "96dd9c99fa27d539a02551b5343a749e88025099"
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -55,6 +55,20 @@
     "analysis_roadmap": "NOT_ACTIVATED_SEPARATE_MASH_APPROVAL_REQUIRED",
     "next_piece_group": "B2_A_M0_TRACKED_BASELINE_AND_M1_LEGACY_READ_BRIDGE",
     "automatic_packet_progression": false
+  },
+  "analysis_role_alignment": {
+    "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
+    "git_blob_sha1": "a5b69381c360081eba9f24e1d92b586fa78fd309",
+    "raw_sha256": "4f346bbd882f7e882bbf9686117c895da71af362a438e070067369ae676093c8",
+    "utf8_bytes": 5238,
+    "state": "CURRENT_PROSPECTIVE_ONLY_NOT_ACTIVATED_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "historical_pro_first_bundle_mutation_count": 0,
+    "pro_role": "PRODUCT_PURPOSE_USER_VALUE_PROPORTIONALITY_SINGLE_PRODUCT_REVIEW_AND_PLAIN_LANGUAGE_EXPLANATION",
+    "ultra_role": "FRESH_ACTUAL_INITIAL_AND_FINAL_TECHNICAL_DESIGN_EXECUTION_TEST_AND_POSTVERIFY",
+    "mash_role": "NORMATIVE_PRODUCT_QUALITY_SAFETY_PRIVACY_PUBLIC_COST_DURATION_DECISION_OWNER",
+    "analysis_activation_count": 0,
+    "implementation_test_runtime_effect": "0 / 0 / 0",
+    "automatic_progression": false
   },
   "fixed_contracts": {
     "pce1_to_pce8_owner": "immutable predecessor manifest v12 and canonical phase artifacts",
@@ -179,5 +193,17 @@
     "emlis_ai_state_effect": 0,
     "analysis_runtime_effect": 0,
     "release_effect": 0
+  },
+  "role_alignment_sync_effects": {
+    "classification": "ADMINISTRATIVE_POLICY_ALIGNMENT_ONLY",
+    "base_cocolon_head": "b3263b25a2105c9358318efdd1f2c274e052bdfb",
+    "current_policy_owner_change_count": 6,
+    "piece_current_entry_and_manifest_change_count": 2,
+    "analysis_overlay_add_count": 1,
+    "stage1_changed_path_count": 9,
+    "historical_bundle_change_count": 0,
+    "cycle001_state_change_count": 0,
+    "source_test_runtime_change_count": "0 / 0 / 0",
+    "automatic_progression": false
   }
 }

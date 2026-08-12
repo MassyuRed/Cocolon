@@ -1,6 +1,6 @@
 # Cocolon出力前Gate
 
-revision_date: 2026-08-11
+revision_date: 2026-08-12
 normative_status: CURRENT_OUTPUT_GATE
 status: CURRENT_EFFECTIVE
 effective_when: PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED
@@ -17,7 +17,9 @@ general_rule_owner: CURRENT_RULES.md
 ## 1A. three-tier collaboration / approval boundary
 
 - [ ] Rule 18のLEVEL_1 / LEVEL_2 / LEVEL_3からexactly oneを固定した。
-- [ ] LEVEL_1はsingle owner、LEVEL_2はPro `PRODUCT_ROUTE_ALIGNED` + Ultra `TECHNICALLY_ADMISSIBLE`、LEVEL_3はfirst effect前のMash明示approvalというGateを守った。
+- [ ] LEVEL_1はsingle owner、LEVEL_2はProの商品・route整合 + Ultraのinitial / final technical design・`TECHNICALLY_ADMISSIBLE`、LEVEL_3はPro decision brief + Ultra final technical body + first effect前のMash明示approvalというGateを守った。
+- [ ] Pro華恋のreviewは同じstable design identityについて原則一回で、materialな新事実・scope・商品条件・費用期間・remote不一致以外の再往復を増やしていない。
+- [ ] Pro華恋が競合technical design全文を作る形、Ultra華恋が後から添削する形、またはPro華恋を単なる伝言係にする形へ戻していない。
 - [ ] standing delegation外またはseparate-approval ownerのeffectを、既存方針内という理由だけで実行していない。
 - [ ] scope classification、environment、approval、authority lifecycleを混同していない。
 - [ ] post-work reportを事後approval、scope超過の治癒またはnext work permissionへ変換していない。
