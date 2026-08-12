@@ -1,0 +1,164 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.g4b.fd9_privileged_proof_cwd_order_and_typed_evidence.v6.body_free_receipt.v1",
+  "date": "2026-08-12",
+  "body_free": true,
+  "public_safe": true,
+  "authority": {
+    "authority_id": "NLS_V3_STEP11_CYCLE001_G4B_V6_FD9_PRIVILEGED_PROOF_CWD_ORDER_AND_TYPED_PREEXEC_EVIDENCE_CORRECTION_CANDIDATE",
+    "authority_class": "SINGLE_USE_BOUNDED_CORRECTION_AUTHORITY",
+    "approval_path": "MASH_EXPLICIT_FORWARD_BOUNDED_DELEGATION",
+    "approval_count": 1,
+    "activation_count": 1,
+    "consumption_count": 1,
+    "execution_owner": "Ultra Karen",
+    "authority_lifecycle": "CLOSED_CONSUMED_CORRECTION_STOP",
+    "retry_count": 0,
+    "fallback_count": 0,
+    "repair_count": 0,
+    "automatic_progression": false
+  },
+  "approval_binding": {
+    "ultra_initial_design_sha256": "b99d5d42386af48fbde2bd911797542686aa2c02dcc6994652e608329f1a5148",
+    "pro_single_product_route_review_sha256": "06b0d4b2bb90e832a63b34be9a1fa4000d6fec97f2bb065fdce03c2ba09095af",
+    "ultra_final_body_library_file_id": "libfile_f3c05c3e4670819194a8b076db6df07e",
+    "ultra_final_body_utf8_bytes": 33268,
+    "ultra_final_body_lf_count": 698,
+    "ultra_final_body_cr_count": 0,
+    "ultra_final_body_final_lf": true,
+    "ultra_final_body_sha256": "f9eb0d883a1f1691e50db0a90b4a09b76a7d42d41bcf225e01d436841b3b9c89"
+  },
+  "admitted_remote_preimages": {
+    "mashos_api_head_sha1": "e96df82e790d32779940d7972a340be319553137",
+    "mashos_api_tree_sha1": "f5411c83851b042d0bb0f2203646858716d3cc9f",
+    "mashos_api_exact3_blob_sha1": [
+      "9e186bdbd38bc9d23cc43f80dc147b9d88b183d9",
+      "8c4af77f755a200c8a4d19d0b205f256b4fb3c1c",
+      "309a6bf8db810ef52a3f56bc8205be86c11c296d"
+    ],
+    "cocolon_head_sha1": "339c4040310ded843d34ec9d5d241670424779c9",
+    "cocolon_tree_sha1": "d8d9b902539357ea7069d9e6ce1ee2e33dabf168",
+    "receipt_path_preexisting": false
+  },
+  "local_exact3_final_states": [
+    {
+      "path": "ai/tools/emlis_nls_v3_s11_g4b_runtime_preparation_contract_v1.py",
+      "state": "FINAL_HASH",
+      "utf8_bytes": 73834,
+      "raw_sha256": "966587a6457dc6376d53272e96019909d4c11ec98acc4c85d337f300ea462816",
+      "git_blob_sha1": "61a502cde4f3d515507ff774e460ac33b94b6ee7"
+    },
+    {
+      "path": "ai/tools/emlis_nls_v3_s11_g4b_runtime_acquisition_v1.py",
+      "state": "FINAL_HASH",
+      "utf8_bytes": 43593,
+      "raw_sha256": "de39e53edf88018c0c87179e0a5760986f995537867c588102679a704e5b007b",
+      "git_blob_sha1": "2cda248b3b9364415fdde91f14553f3dfc67261f"
+    },
+    {
+      "path": "ai/tests/test_emlis_nls_v3_s11_g4b_runtime_preparation_controller_v1.py",
+      "state": "FINAL_HASH",
+      "utf8_bytes": 119728,
+      "raw_sha256": "cdf9e3f4e9795294bb3e60c56d443f2599e7af26b008e7109a1b91fe882132c3",
+      "git_blob_sha1": "4bc80e99637c4acd5cc6aabc1ab7c9200e965c1d"
+    }
+  ],
+  "local_scope_verification": {
+    "materialized_path_count": 13,
+    "changed_path_count": 3,
+    "protected_unchanged_path_count": 10,
+    "extra_path_count": 0,
+    "unauthorized_change_count": 0,
+    "protected_mashos_blob_sha1": [
+      "0822fcb010985cd0d384f250a9e8a1fe16dc8fd4",
+      "259e8f2c96e87b2f1fa66349c880cc57ac0fc7e4",
+      "11d3a8d38ecab6cafe1d53ca6e3d6810f234cefb",
+      "8bdf4ebd99705d8fb6a158fbd499e9ecdd9fe6ea",
+      "756c6849f00a02d69dd99b1dc7c455dac72d2aad",
+      "39bb37cf83d9e7fea15ed537df069dd9057b5b12",
+      "c86fdd2e8fc843eb0a25964b4fe9b9cf92cd6d2a",
+      "43a90bc0416aa564de014f4f140bdc801b5eeb0b",
+      "42cfb13bf553714409b45539738e3e492f9fe388",
+      "7086adc197993d1e458b8fbfc45137ccf779e95d"
+    ]
+  },
+  "authoritative_execution": {
+    "control_interpreter_sha256": "9ed008e5a8685235361f0c53771b520ab082dd99a877ad2fd796a93fa4c0b488",
+    "cwd_binding": "ADMITTED_MASHOS_API_MATERIALIZATION_ROOT",
+    "portable_exact18": {
+      "launch_count": 1,
+      "pass": 18,
+      "fail": 0,
+      "error": 0,
+      "skip": 0,
+      "return_code": 0,
+      "captured_output_bytes": 117,
+      "captured_output_sha256": "28a8f32568bca03db22f915c6de5563c20c4ef2b2026e4cf709e344a9821a331"
+    },
+    "privileged_actual_dac_exact1": {
+      "launch_count": 1,
+      "return_code": 71,
+      "result": "TYPED_PREEXEC_STOP",
+      "captured_stdout_bytes": 0,
+      "captured_stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "captured_stderr_bytes": 308,
+      "captured_stderr_sha256": "e653c9c12737152f6a781f3c02b801b2e09ff07e0344e44d862dc97aeacf68cf",
+      "event_sequence": [],
+      "diagnostic_variant": "DIAGNOSTIC_EXACT9",
+      "diagnostic": {
+        "schema_version": "g4b.v6.privileged_diagnostic.v1",
+        "terminal_class": "STOP",
+        "stage": "CREDENTIAL_AND_AUTHORITY_DROP",
+        "reason_class": "WORK_PRIVILEGE_OR_OS_SURFACE",
+        "safe_errno": 1,
+        "safe_internal_reason": null,
+        "execve_request_count": 0,
+        "postexec_entry_count": 0,
+        "child_exit_class": "CHILD_NONZERO"
+      }
+    }
+  },
+  "terminal": {
+    "primary_outcome": "BLOCKER_NARROWED",
+    "reusable_completion_credit": 0,
+    "blocker": "WORK_PRIVILEGE_SURFACE_DENIED_DURING_CREDENTIAL_AND_AUTHORITY_DROP_BEFORE_EXECVE_REQUEST",
+    "product_quality_pass": false,
+    "runtime_ready": false,
+    "readiness_observation_id": "NOT_DERIVED",
+    "gate_b": "OPEN",
+    "readiness_gate_b_technical_product_credit": "0 / 0 / 0",
+    "gate_c": "NOT_AUTHORIZED",
+    "automatic_progression": false
+  },
+  "publication": {
+    "mashos_api_ref_update_count": 0,
+    "mashos_api_changed_path_count": 0,
+    "cocolon_alignment_or_decision_change_count": 0,
+    "cocolon_receipt_add_count": 1,
+    "receipt_only_branch": true,
+    "final_cocolon_head_tree_and_receipt_blob": "OMITTED_TO_AVOID_SELF_REFERENCE__OWNED_BY_GITHUB_AND_EXTERNAL_POSTVERIFY",
+    "unauthorized_change_count": 0
+  },
+  "later_live_boundary": {
+    "later_live_authority": "NOT_AUTHORED_NOT_APPROVED",
+    "later_live_authority_id": "NOT_DERIVED",
+    "later_live_activation_count": 0,
+    "later_live_consumption_count": 0,
+    "network_effect_count": 0,
+    "pypi_effect_count": 0,
+    "wheel_effect_count": 0,
+    "live_platform_source_open_count": 0,
+    "live_fd9_mapping_count": 0,
+    "live_controller_count": 0,
+    "existing_checker_live_execution_count": 0,
+    "automatic_progression": false
+  },
+  "next_boundary": {
+    "v6_reopen_retry_repair_reactivation_permitted": false,
+    "new_technical_authority_created_by_this_receipt": false,
+    "new_ultra_initial_design_required_for_any_successor": true,
+    "pro_single_product_route_review_required_for_successor": true,
+    "separate_mash_level3_approval_required_for_successor": true,
+    "current_authority_stop": true,
+    "automatic_progression": false
+  }
+}
