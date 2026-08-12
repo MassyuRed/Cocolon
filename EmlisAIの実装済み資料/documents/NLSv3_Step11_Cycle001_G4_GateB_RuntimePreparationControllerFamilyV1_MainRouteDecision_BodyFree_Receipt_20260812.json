@@ -1,0 +1,55 @@
+{
+  "schema_version": "cocolon.body_free_receipt.v1",
+  "receipt_id": "NLS_V3_STEP11_CYCLE001_G4_GATE_B_RUNTIME_PREPARATION_CONTROLLER_FAMILY_V1_MAIN_ROUTE_DECISION_BODY_FREE_RECEIPT_20260812",
+  "receipt_role": "MAIN_ROUTE_DECISION_DURABLE_REFLECTION",
+  "authority_class": "LEVEL_3_MASH_APPROVED_BOUNDED_WORK",
+  "approved_candidate_id": "NLS_V3_STEP11_CYCLE001_G4_GATE_B_RUNTIME_PREPARATION_CONTROLLER_FAMILY_V1_FUNCTIONAL_EXACT7_JOINT_IMPLEMENTATION_CANDIDATE_CORRECTED_DRAFT_V3",
+  "approved_candidate_identity": {
+    "utf8_bytes": 105223,
+    "lf_count": 2462,
+    "final_lf_present": true,
+    "sha256": "3eae1025095726a29ec01d37ab4e5056270d115722a746d95ab7744e1aa03bf2"
+  },
+  "pro_exact_body_judgment": "PRO_EXACT_BODY_CONFIRMED_NO_CORRECTION",
+  "ultra_judgment": "PASS",
+  "primary_outcome": "ADMINISTRATIVE_ONLY",
+  "terminal": "MAIN_ROUTE_DECISION_REFLECTION_PREPARED_FOR_REMOTE_POSTVERIFY",
+  "base_observation": {
+    "cocolon_head": "04bde6c42715f34aedfc9b4909f6e5ee527181d9",
+    "cocolon_tree": "6041c6a4f940b12b508f3e92083beaef274e4226",
+    "mashos_api_head": "00a8979e08c7ac4a131cfdf9ada21aaa57d73676",
+    "mashos_api_tree": "3ac627bceacf902e5cc55f1258604e9232c350b9"
+  },
+  "changed_paths": [
+    "Cocolon_前提資料/08_cycle001_current_state.md",
+    "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CurrentClosureRoute.md",
+    "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_GateB_RuntimePreparationControllerFamilyV1_MainRouteDecision_20260812.md",
+    "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_GateB_RuntimePreparationControllerFamilyV1_MainRouteDecision_BodyFree_Receipt_20260812.json"
+  ],
+  "protected_owner_state": {
+    "existing_checker": "IMPLEMENTED_UNEXECUTED",
+    "formal_full46_lock": "UNCHANGED",
+    "runtime_ready": false,
+    "gate_b": "OPEN",
+    "readiness_credit": 0,
+    "technical_credit": 0,
+    "product_credit": 0,
+    "gate_c": "NOT_AUTHORIZED"
+  },
+  "effects": {
+    "mashos_api_source_write": 0,
+    "implementation": 0,
+    "test": 0,
+    "network": 0,
+    "pypi": 0,
+    "wheel_acquisition": 0,
+    "runtime_materialization": 0,
+    "live_checker": 0,
+    "hundred_case_verification": 0
+  },
+  "next_authorized_work": "V3_FUNCTIONAL_EXACT7_IMPLEMENTATION_AFTER_DECISION_REFLECTION_REMOTE_POSTVERIFY_PASS",
+  "automatic_progression": false,
+  "private_locator_or_body_published": false,
+  "terminal_commit_identity": "OMITTED_TO_AVOID_SELF_REFERENCE",
+  "remote_postverify_contract": "FRESH_READ_ALL_EXACT4_BYTES_AND_CHANGED_PATH_UNION_BEFORE_IMPLEMENTATION"
+}

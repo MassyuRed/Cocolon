@@ -2,10 +2,10 @@
 doc_id: nlsv3_step11_cycle001_current_closure_route
 title: "NLS v3 Step 11 Cycle001 Current Closure Route"
 canonical_path: "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CurrentClosureRoute.md"
-revision_date: "2026-08-11"
+revision_date: "2026-08-12"
 status: "CURRENT_EFFECTIVE"
 normative_status: "CURRENT_DERIVATIVE_OWNER"
-effective_when: "G4B_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1_EXACT11_IMPLEMENTATION_REMOTE_POSTVERIFIED"
+effective_when: "G4B_RUNTIME_PREPARATION_CONTROLLER_FAMILY_V1_MAIN_ROUTE_DECISION_REMOTE_POSTVERIFIED"
 decision_owner: "Mash"
 operation_owner: "Karen"
 repository: "MassyuRed/Cocolon"
@@ -14,12 +14,12 @@ body_free: true
 technical_authority: false
 cycle001: "NOT_ACCEPTED"
 current_selected_lane: "POST_G6_SHARED_STRUCTURAL_CORRECTION"
-current_selected_method: "GATE_B_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1"
+current_selected_method: "GATE_B_RUNTIME_PREPARATION_CONTROLLER_FAMILY_V1_THEN_GITHUB_TRACKED_ADMISSION_CHECKER_V1"
 current_first_unfinished_gate: "G4_GATE_B_RUNTIME_READINESS_ADMISSION"
 current_runtime_ready: false
 current_readiness_credit: 0
 automatic_progression: false
-next_technical_authority_separate_approval_required: true
+next_technical_authority_separate_approval_required: false
 ---
 
 # NLS v3 Step 11 Cycle001 Current Closure Route
@@ -233,6 +233,47 @@ AUTOMATIC_PROGRESSION_FALSE
 ```
 
 ---
+
+## 2.2 2026-08-12 current main-route decision — dedicated controller family V1
+
+Mash様は、corrected exact3を含むV3 exact body（105223 bytes / LF2462 / final LF /
+SHA-256 `3eae1025095726a29ec01d37ab4e5056270d115722a746d95ab7744e1aa03bf2`）を
+current G4-B functional exact7のfinal implementation designとして承認しました。
+
+```text
+current selected route:
+DEFINE_ONE_CANONICAL_EXACT5_DERIVED_ACQUISITION_LOCK_AND_ONE_EXPLICIT_OFFICIAL_PYPI_EXACT2_HOST_HASH_LOCKED_ONE_SHOT_ACQUISITION_POLICY_THEN_IMPLEMENT_ONE_DEDICATED_G4B_RUNTIME_PREPARATION_CONTROLLER_FAMILY_V1
+
+functional exact7:
+APPROVED_IMPLEMENTATION_PENDING
+
+decision reflection:
+ADMINISTRATIVE_ONLY_REMOTE_REFLECTION
+
+existing checker:
+IMPLEMENTED_UNEXECUTED
+
+Runtime READY / Gate B / credits:
+false / OPEN / 0-0-0
+
+Gate C / automatic progression:
+NOT_AUTHORIZED / false
+```
+
+new familyはcanonical exact5 derived acquisition lock、immutable contract / policy、
+acquisition、materialization、checker admission bridge、official controller、focused stdlib
+unittestのfunctional exact7です。historical recovery moduleをcurrent G4-B用にimport / wrapper /
+改造しません。formal full46はFORMAL_PROVENANCE_LOCK、new exact5は
+DERIVED_ACQUISITION_LOCK_V1という別roleです。existing checker exact5とRule 13 / Rule 16の
+procedure ID exact2は変更しません。
+
+future acquisition routeはofficial PyPI primary exact1とhost exact2だけを許すone-shot policyです。
+Work proxy / custom CAはprivate transport bindingでありpublic locator / port / raw bytesを記録しません。
+live network、wheel、runtime、checkerは本reflectionで0であり、別承認まで実行しません。
+
+corrected exact3は、P2をstdlib unittest exact18とすること、path role exact20のsemantic correction、
+およびonline acquisitionのfind-links 0とoffline P4 private wheel rootだけのlocal
+`--find-links` exceptionです。
 
 ## 3. current state and reusable credit
 
@@ -550,57 +591,45 @@ retired routeを消去せず、再利用できる事実とcurrent actionとし�
 
 ## 8. navigation and next technical boundary
 
-`08_cycle001_current_state.md`だけが、current observation、recovery lineage、last reusable technical credit、current first unfinished Gate、blocker、next exact1、Product Read distance、Mash decision stateを持ちます。
+`08_cycle001_current_state.md`だけがcurrent Gate、blocker、next exact1を持つnavigation ownerです。
+本fileはmain route、Gate entry / exit / STOP、retired routeを所有します。
 
-本fileはGate sequence、entry / exit / STOP、retired route、acceptance distanceが変わる節目だけ更新します。current positionをPlan / 本file / `08`へ三重保持しません。
-
-Phase 8 Gate B V2はpre-freeze actual-callで`PREFREEZE_EXECUTABLE_PREFLIGHT_INVALID`となり、
-V1 / V2 helper routeの連続STOPによる`DETOUR_RISK_STOP`は、Mashのapproved method decisionにより
-次のように解消しました。
+2026-08-12のLEVEL_3 decisionにより、同じblocker familyでの通常authority反復ではなく、
+新しいauxiliary preparation family exact1をmain routeとして選択しました。
 
 ```text
-DETOUR_RISK_STOP = RESOLVED_BY_APPROVED_METHOD_DECISION
-SESSION_LOCAL_HELPER_ROUTE = RETIRED
-LAST_SELECTED_METHOD = GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1
-LAST_SELECTED_METHOD_LIFECYCLE = CLOSED_CONSUMED_POST_PREFLIGHT_TYPED_FAILURE
-CURRENT_SELECTED_METHOD = NONE_PENDING_MASH_METHOD_DECISION
+CURRENT_SELECTED_METHOD =
+GATE_B_RUNTIME_PREPARATION_CONTROLLER_FAMILY_V1_THEN_GITHUB_TRACKED_ADMISSION_CHECKER_V1
+
+MAIN_ROUTE_DECISION =
+REMOTE_REFLECTED
+
+FUNCTIONAL_EXACT7 =
+APPROVED_IMPLEMENTATION_PENDING
+
+NEXT_BOUNDED_WORK =
+V3_FUNCTIONAL_EXACT7_SOURCE_IMPLEMENTATION_AND_STDLIB_UNITTEST_EXACT18
+
+LIVE_NETWORK_RUNTIME_ADMISSION =
+SEPARATE_MASH_APPROVAL_REQUIRED
+
+EXISTING_CHECKER =
+IMPLEMENTED_UNEXECUTED
+
 RUNTIME_READY = FALSE
+GATE_B = OPEN
 READINESS_CREDIT = 0
-GATE_B = NOT_CLOSED
+TECHNICAL_CREDIT = 0
+PRODUCT_CREDIT = 0
+GATE_C = NOT_AUTHORIZED
+AUTOMATIC_PROGRESSION = FALSE
 ```
 
-Gate B direct-native authorityはcomponent checksを成立させましたが、authority-frozen readiness observation
-identityを成立させられずtyped STOPしました。次のadministrative authority候補はexact1だけです。
+decision reflectionのremote postverify PASS後だけ、mashos-api ADD exact7とfocused stdlib unittest
+exact18へ進みます。source implementationのremote postverify後もGate Bを閉じません。
+official PyPI host exact2 exception、network、wheel、live runtime、existing checker execution、
+same-session handoffは別のlive authorityが必要です。
 
-```text
-NLS_V3_STEP11_CYCLE001_G4_GATE_B_RUNTIME_READINESS_OBSERVATION_CANONICAL_PREIMAGE_METHOD_DECISION_V1
-
-state:
-DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
-```
-
-本publicationは次候補を作成・実行・activateしません。closed authority、fresh wheel/root/runtime、
-component outputのreuse、retry、reacquisition、root repair、fallback、interpreter switch、body repair、
-second method repair、third normal authorityへ進みません。
-
-Gate B typed terminal:
-
-```text
-RUNTIME_READINESS_OBSERVATION_IDENTITY_NOT_FROZEN
-AUTHORITY_CANONICAL_PREIMAGE_SCHEMA_MISSING
-BLOCKER_NARROWED
-RUNTIME_READY_FALSE
-READINESS_CREDIT_0
-GATE_B_NOT_CLOSED
-CURRENT_AUTHORITY_STOP
-AUTOMATIC_PROGRESSION_FALSE
-```
-
-Gate C以降、protected-test / production mutation、fixture / sample / corpus変更、Product Read、exact24 /
-full52 / exact100、mashos-api write、failed artifact reuse、helper / scanner / carrier fallback、second method repair、
-third normal authority、automatic progressionは0です。
-
----
 
 ## 9. historical closure statement before tracked checker V1
 
