@@ -1,0 +1,180 @@
+{
+  "schema_version": "cocolon.body_free_receipt.v1",
+  "receipt_id": "NLS_V3_STEP11_CYCLE001_G4_GATE_B_RUNTIME_PREPARATION_CONTROLLER_FAMILY_V1_IMPLEMENTATION_BODY_FREE_RECEIPT_20260812",
+  "receipt_role": "FUNCTIONAL_EXACT7_IMPLEMENTATION_DURABLE_REFLECTION",
+  "authority_class": "LEVEL_3_MASH_APPROVED_BOUNDED_IMPLEMENTATION_WORK",
+  "approved_candidate_id": "NLS_V3_STEP11_CYCLE001_G4_GATE_B_RUNTIME_PREPARATION_CONTROLLER_FAMILY_V1_FUNCTIONAL_EXACT7_JOINT_IMPLEMENTATION_CANDIDATE_CORRECTED_DRAFT_V3",
+  "approved_candidate_identity": {
+    "utf8_bytes": 105223,
+    "lf_count": 2462,
+    "final_lf_present": true,
+    "sha256": "3eae1025095726a29ec01d37ab4e5056270d115722a746d95ab7744e1aa03bf2"
+  },
+  "pro_exact_body_judgment": "PRO_EXACT_BODY_CONFIRMED_NO_CORRECTION",
+  "ultra_judgment": "PASS",
+  "primary_outcome": "BLOCKER_NARROWED",
+  "terminal": "G4B_RUNTIME_PREPARATION_CONTROLLER_FAMILY_V1_IMPLEMENTATION_REFLECTION_PREPARED_FOR_REMOTE_POSTVERIFY",
+  "main_route_decision_reflection": {
+    "cocolon_commit": "169925b5c25ec22244519893bdbfd1195f2c16ef",
+    "state": "REMOTE_POSTVERIFIED"
+  },
+  "mashos_api_publication": {
+    "base_commit": "00a8979e08c7ac4a131cfdf9ada21aaa57d73676",
+    "base_tree": "3ac627bceacf902e5cc55f1258604e9232c350b9",
+    "terminal_commit": "e96df82e790d32779940d7972a340be319553137",
+    "terminal_tree": "f5411c83851b042d0bb0f2203646858716d3cc9f",
+    "changed_path_count": 7,
+    "add_count": 7,
+    "modify_count": 0,
+    "delete_count": 0,
+    "remote_changed_path_union_exact": true,
+    "remote_bytes_exact": true
+  },
+  "functional_exact7": [
+    {
+      "role": "DERIVED_ACQUISITION_LOCK_V1",
+      "path": "ai/configs/emlis_nls_v3_s11_g4b_runtime_preparation_exact5_lock_v1.json",
+      "utf8_bytes": 5139,
+      "lf_count": 1,
+      "final_lf_present": true,
+      "sha256": "8c0e3482089e6420f624e93ba974897e01ee777740e8b7af133e1a6c293767c8",
+      "git_blob": "259e8f2c96e87b2f1fa66349c880cc57ac0fc7e4"
+    },
+    {
+      "role": "IMMUTABLE_CONTRACT_POLICY",
+      "path": "ai/tools/emlis_nls_v3_s11_g4b_runtime_preparation_contract_v1.py",
+      "utf8_bytes": 60951,
+      "lf_count": 1329,
+      "final_lf_present": true,
+      "sha256": "3b440081b559e2ac25aff42fefc320148a8ca8a79cf253f703c559104e2d4de8",
+      "git_blob": "9e186bdbd38bc9d23cc43f80dc147b9d88b183d9"
+    },
+    {
+      "role": "ACQUISITION",
+      "path": "ai/tools/emlis_nls_v3_s11_g4b_runtime_acquisition_v1.py",
+      "utf8_bytes": 30229,
+      "lf_count": 740,
+      "final_lf_present": true,
+      "sha256": "b5f844f62031faf05a3fa1dcf17dd0e901288c64c3767edbd7baac5d724edd4f",
+      "git_blob": "8c4af77f755a200c8a4d19d0b205f256b4fb3c1c"
+    },
+    {
+      "role": "MATERIALIZATION",
+      "path": "ai/tools/emlis_nls_v3_s11_g4b_runtime_materialization_v1.py",
+      "utf8_bytes": 45708,
+      "lf_count": 1128,
+      "final_lf_present": true,
+      "sha256": "c42effc4af3b160a881742852076544aca1c078af5ae19a1a05e333d97c7ae48",
+      "git_blob": "11d3a8d38ecab6cafe1d53ca6e3d6810f234cefb"
+    },
+    {
+      "role": "CHECKER_ADMISSION_BRIDGE",
+      "path": "ai/tools/emlis_nls_v3_s11_g4b_runtime_admission_bridge_v1.py",
+      "utf8_bytes": 36937,
+      "lf_count": 922,
+      "final_lf_present": true,
+      "sha256": "2afa3581ac6fe8e1d4777863cfdb5e7d1293e510d555e62bb473e7cc5dc42a4b",
+      "git_blob": "8bdf4ebd99705d8fb6a158fbd499e9ecdd9fe6ea"
+    },
+    {
+      "role": "OFFICIAL_CONTROLLER",
+      "path": "ai/tools/emlis_nls_v3_s11_g4b_runtime_preparation_controller_v1.py",
+      "utf8_bytes": 106789,
+      "lf_count": 2667,
+      "final_lf_present": true,
+      "sha256": "42cd5f212fa46d3833d13dfcb5660d2358641cff9fe62acdb9862cbb9f43e2ed",
+      "git_blob": "756c6849f00a02d69dd99b1dc7c455dac72d2aad"
+    },
+    {
+      "role": "FOCUSED_STDLIB_UNITTEST",
+      "path": "ai/tests/test_emlis_nls_v3_s11_g4b_runtime_preparation_controller_v1.py",
+      "utf8_bytes": 71311,
+      "lf_count": 1321,
+      "final_lf_present": true,
+      "sha256": "e56ca38dd542f564bb6eb577339fd367a95ffea440cab5dc9a3fcfba705d281d",
+      "git_blob": "309a6bf8db810ef52a3f56bc8205be86c11c296d"
+    }
+  ],
+  "verification": {
+    "final_authoritative_test_process_count": 1,
+    "framework": "PYTHON_STDLIB_UNITTEST",
+    "expected_test_count": 18,
+    "passed": 18,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "final_result": "PASS",
+    "independent_final_audit": "PASS_PUBLISH_BLOCKER_0",
+    "temporary_artifact_postcondition": "ABSENT"
+  },
+  "protected_unchanged": [
+    {
+      "role": "FORMAL_PROVENANCE_LOCK_FULL46",
+      "git_blob": "0822fcb010985cd0d384f250a9e8a1fe16dc8fd4"
+    },
+    {
+      "role": "EXISTING_CHECKER_CONTRACT",
+      "git_blob": "39bb37cf83d9e7fea15ed537df069dd9057b5b12"
+    },
+    {
+      "role": "EXISTING_CHECKER",
+      "git_blob": "c86fdd2e8fc843eb0a25964b4fe9b9cf92cd6d2a"
+    },
+    {
+      "role": "EXISTING_CHECKER_OWNER",
+      "git_blob": "43a90bc0416aa564de014f4f140bdc801b5eeb0b"
+    },
+    {
+      "role": "EXISTING_CHECKER_INDEPENDENT",
+      "git_blob": "42cfb13bf553714409b45539738e3e492f9fe388"
+    },
+    {
+      "role": "EXISTING_CHECKER_DEDICATED_TEST",
+      "git_blob": "7086adc197993d1e458b8fbfc45137ccf779e95d"
+    }
+  ],
+  "cocolon_reflection": {
+    "base_commit": "169925b5c25ec22244519893bdbfd1195f2c16ef",
+    "changed_paths": [
+      "Cocolon_前提資料/08_cycle001_current_state.md",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_CurrentClosureRoute.md",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_GateB_RuntimePreparationControllerFamilyV1_Implementation_BodyFree_Receipt_20260812.json"
+    ],
+    "expected_target_git_blobs": {
+      "current_state": "3c8122eb42562a47f7e8e5ca60e8f59a9fc92061",
+      "current_closure_route": "2bd5502a760cc00dd0455d0e0c2b1cd865294b63"
+    },
+    "terminal_commit_identity": "OMITTED_TO_AVOID_SELF_REFERENCE",
+    "remote_postverify_contract": "FRESH_READ_ALL_EXACT3_BYTES_AND_CHANGED_PATH_UNION"
+  },
+  "protected_owner_state": {
+    "functional_exact7": "IMPLEMENTED_VERIFIED_REMOTE_POSTVERIFIED",
+    "existing_checker": "IMPLEMENTED_UNEXECUTED",
+    "formal_full46_lock": "UNCHANGED",
+    "runtime_ready": false,
+    "readiness_observation_id": "NOT_DERIVED",
+    "gate_b": "OPEN",
+    "readiness_credit": 0,
+    "technical_credit": 0,
+    "product_credit": 0,
+    "gate_c": "NOT_AUTHORIZED",
+    "current_authority": "NONE"
+  },
+  "effects": {
+    "production_emlis_source_change": 0,
+    "hundred_case_runner_change": 0,
+    "sample_change": 0,
+    "fixture_change": 0,
+    "corpus_change": 0,
+    "network": 0,
+    "pypi": 0,
+    "wheel_acquisition": 0,
+    "live_runtime_materialization": 0,
+    "live_checker": 0,
+    "hundred_case_verification": 0,
+    "gate_c_or_later": 0
+  },
+  "next_candidate": "ONE_SHOT_LIVE_NETWORK_RUNTIME_READINESS_ADMISSION_DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED",
+  "automatic_progression": false,
+  "private_locator_or_body_published": false
+}

@@ -5,7 +5,7 @@ canonical_path: "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Cu
 revision_date: "2026-08-12"
 status: "CURRENT_EFFECTIVE"
 normative_status: "CURRENT_DERIVATIVE_OWNER"
-effective_when: "G4B_RUNTIME_PREPARATION_CONTROLLER_FAMILY_V1_MAIN_ROUTE_DECISION_REMOTE_POSTVERIFIED"
+effective_when: "G4B_RUNTIME_PREPARATION_CONTROLLER_FAMILY_V1_IMPLEMENTATION_REMOTE_POSTVERIFIED"
 decision_owner: "Mash"
 operation_owner: "Karen"
 repository: "MassyuRed/Cocolon"
@@ -19,7 +19,7 @@ current_first_unfinished_gate: "G4_GATE_B_RUNTIME_READINESS_ADMISSION"
 current_runtime_ready: false
 current_readiness_credit: 0
 automatic_progression: false
-next_technical_authority_separate_approval_required: false
+next_technical_authority_separate_approval_required: true
 ---
 
 # NLS v3 Step 11 Cycle001 Current Closure Route
@@ -61,6 +61,10 @@ mashos-api checker implementation base head / tree:
 mashos-api checker implementation current head / tree:
 00a8979e08c7ac4a131cfdf9ada21aaa57d73676 /
 3ac627bceacf902e5cc55f1258604e9232c350b9
+
+mashos-api runtime preparation implementation current head / tree:
+e96df82e790d32779940d7972a340be319553137 /
+f5411c83851b042d0bb0f2203646858716d3cc9f
 ```
 
 Phase 2はoriginal planning baseline exact3だけを追加しました。そのoriginal bytesとoriginal G0〜G10 acceptanceは不変です。Phase 8はpre-freeze actual-call terminalと`08`のbody-free記録だけをpublicationし、source、test、fixture、sample、mashos-api、runtime stateを変更していません。
@@ -245,7 +249,7 @@ current selected route:
 DEFINE_ONE_CANONICAL_EXACT5_DERIVED_ACQUISITION_LOCK_AND_ONE_EXPLICIT_OFFICIAL_PYPI_EXACT2_HOST_HASH_LOCKED_ONE_SHOT_ACQUISITION_POLICY_THEN_IMPLEMENT_ONE_DEDICATED_G4B_RUNTIME_PREPARATION_CONTROLLER_FAMILY_V1
 
 functional exact7:
-APPROVED_IMPLEMENTATION_PENDING
+IMPLEMENTED_VERIFIED_REMOTE_POSTVERIFIED
 
 decision reflection:
 ADMINISTRATIVE_ONLY_REMOTE_REFLECTION
@@ -274,6 +278,48 @@ live network、wheel、runtime、checkerは本reflectionで0であり、別承�
 corrected exact3は、P2をstdlib unittest exact18とすること、path role exact20のsemantic correction、
 およびonline acquisitionのfind-links 0とoffline P4 private wheel rootだけのlocal
 `--find-links` exceptionです。
+
+## 2.3 2026-08-12 functional exact7 implementation — remote postverified
+
+Approved V3 functional exact7 was added to mashos-api as exact7 files and remote postverified.
+
+```text
+implementation terminal:
+G4B_RUNTIME_PREPARATION_CONTROLLER_FAMILY_V1_IMPLEMENTED_VERIFIED_REMOTE_POSTVERIFIED
+
+mashos-api commit / tree:
+e96df82e790d32779940d7972a340be319553137 /
+f5411c83851b042d0bb0f2203646858716d3cc9f
+
+mashos-api ADD / MODIFY / DELETE:
+exact7 / 0 / 0
+
+focused stdlib unittest exact18:
+18 PASS / 0 FAIL / 0 ERROR
+
+protected formal full46 / existing checker exact5:
+UNCHANGED / UNCHANGED
+
+existing checker:
+IMPLEMENTED_UNEXECUTED
+
+network / PyPI / wheel / live runtime / live checker / exact100:
+0 / 0 / 0 / 0 / 0 / 0
+
+Runtime READY / Gate B / credits:
+false / OPEN / 0-0-0
+
+Gate C / automatic progression:
+NOT_AUTHORIZED / false
+
+current authority:
+NONE
+```
+
+The exact7 implementation closes only the tracked preparation-controller source and its focused
+effect-free tests. It does not establish current package availability, a fresh runtime, readiness,
+checker validity, or same-session handoff. The next live authority remains inactive and requires
+separate Mash approval.
 
 ## 3. current state and reusable credit
 
@@ -605,13 +651,13 @@ MAIN_ROUTE_DECISION =
 REMOTE_REFLECTED
 
 FUNCTIONAL_EXACT7 =
-APPROVED_IMPLEMENTATION_PENDING
+IMPLEMENTED_VERIFIED_REMOTE_POSTVERIFIED
 
-NEXT_BOUNDED_WORK =
-V3_FUNCTIONAL_EXACT7_SOURCE_IMPLEMENTATION_AND_STDLIB_UNITTEST_EXACT18
+NEXT_TECHNICAL_AUTHORITY_CANDIDATE =
+ONE_SHOT_LIVE_NETWORK_RUNTIME_READINESS_ADMISSION / DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
 
 LIVE_NETWORK_RUNTIME_ADMISSION =
-SEPARATE_MASH_APPROVAL_REQUIRED
+NOT_AUTHORIZED / SEPARATE_MASH_APPROVAL_REQUIRED
 
 EXISTING_CHECKER =
 IMPLEMENTED_UNEXECUTED
@@ -625,10 +671,9 @@ GATE_C = NOT_AUTHORIZED
 AUTOMATIC_PROGRESSION = FALSE
 ```
 
-decision reflectionのremote postverify PASS後だけ、mashos-api ADD exact7とfocused stdlib unittest
-exact18へ進みます。source implementationのremote postverify後もGate Bを閉じません。
-official PyPI host exact2 exception、network、wheel、live runtime、existing checker execution、
-same-session handoffは別のlive authorityが必要です。
+functional exact7のsource implementationとfocused stdlib unittest exact18はremote postverify済みです。
+この完了後もGate Bを閉じません。official PyPI host exact2 exception、network、wheel、live runtime、
+existing checker execution、same-session handoffは別のlive authorityが必要です。
 
 
 ## 9. historical closure statement before tracked checker V1
