@@ -1,0 +1,171 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.g4b.qualified_runner_v6_postimage_verification_and_publication.v7.body_free_receipt.v1",
+  "date": "2026-08-12",
+  "body_free": true,
+  "public_safe": true,
+  "authority": {
+    "authority_id": "NLS_V3_STEP11_CYCLE001_G4B_V7_QUALIFIED_RUNNER_V6_POSTIMAGE_VERIFICATION_AND_PUBLICATION",
+    "authority_class": "SINGLE_USE_BOUNDED_SUCCESSOR_VERIFICATION_AND_PUBLICATION_AUTHORITY",
+    "approval_basis": "MASH_CURRENT_DIRECT_COMPLETE_IN_THIS_SESSION_INSTRUCTION",
+    "approval_count": 1,
+    "activation_count": 1,
+    "consumption_count": 1,
+    "execution_owner": "Ultra Karen",
+    "authority_lifecycle": "CLOSED_CONSUMED_CORRECTION_PASS",
+    "retry_count": 0,
+    "fallback_count": 0,
+    "repair_count": 0,
+    "automatic_progression": false
+  },
+  "predecessor": {
+    "v6_authority_lifecycle": "CLOSED_CONSUMED_CORRECTION_STOP",
+    "v6_activation_count": 1,
+    "v6_consumption_count": 1,
+    "v6_authority_inherited": false,
+    "v6_receipt_path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4B_FD9PrivilegedProofCwdOrderAndTypedEvidenceV6_BodyFree_Receipt_20260812.json",
+    "v6_receipt_blob_sha1": "bff7ac3812b6d62fe0a9abd754a08a74b54c8513",
+    "v6_receipt_immutable": true
+  },
+  "root_cause": {
+    "prior_environment": "WORK_USER_NAMESPACE_POLICY_MISMATCH",
+    "setgroups_policy": "deny",
+    "uid_map": "0 0 1",
+    "gid_map": "0 0 1",
+    "fixed_uid_gid_65534_mapped": false,
+    "earliest_operation": "setgroups_empty",
+    "safe_errno": 1,
+    "source_order_defect": false,
+    "missing_capability_bits": false
+  },
+  "authoritative_runner": {
+    "branch": "agent/g4b-v7-exact3-verification-r8",
+    "commit_sha1": "d204df94b21acef430bd3142a791a51a560c08b5",
+    "tree_sha1": "92806c50981f347ad12ab8c239552d5e5114d4af",
+    "workflow_run_id": 31608210201,
+    "workflow_job_id": 94152538969,
+    "runner_image": "ubuntu-24.04",
+    "same_job_fresh_admission": true,
+    "setgroups_policy": "allow",
+    "uid_gid_65534_transition": "PASS",
+    "control_interpreter_sha256": "9ed008e5a8685235361f0c53771b520ab082dd99a877ad2fd796a93fa4c0b488"
+  },
+  "authoritative_execution": {
+    "portable_exact18": {
+      "launch_count": 1,
+      "pass": 18,
+      "fail": 0,
+      "error": 0,
+      "skip": 0,
+      "return_code": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stderr_sha256": "92fa9df2805dcb9d7895c25cf8f9f2763c83465b7c296e8a188b5f4abb034e3"
+    },
+    "privileged_actual_dac_exact1": {
+      "launch_count": 1,
+      "return_code": 0,
+      "result": "PASS",
+      "pass_token_count": 1,
+      "execve_requested_count": 1,
+      "postexec_entered_count": 1,
+      "diagnostic_count": 0,
+      "stdout_bytes": 46,
+      "stdout_sha256": "8ae31e36990085e4817f3770b7187a2ca1c6525ed110b2d13c26bef8cd7a19f7",
+      "stderr_bytes": 236,
+      "stderr_sha256": "31f526c858bacf895d9462b4478efa547a064d93c699dd1fe372f3f318b78009"
+    }
+  },
+  "mashos_api_publication": {
+    "pre_head_sha1": "e96df82e790d32779940d7972a340be319553137",
+    "pre_tree_sha1": "f5411c83851b042d0bb0f2203646858716d3cc9f",
+    "final_head_sha1": "99afecb1a30880bf42b9fde4932e5bba7e01e7d4",
+    "final_tree_sha1": "6f92113264ffef515bd2feba3c7e8ba82d0c0188",
+    "direct_child": true,
+    "changed_path_count": 3,
+    "changed_paths": [
+      {
+        "path": "ai/tools/emlis_nls_v3_s11_g4b_runtime_preparation_contract_v1.py",
+        "utf8_bytes": 73834,
+        "raw_sha256": "966587a6457dc6376d53272e96019909d4c11ec98acc4c85d337f300ea462816",
+        "git_blob_sha1": "61a502cde4f3d515507ff774e460ac33b94b6ee7"
+      },
+      {
+        "path": "ai/tools/emlis_nls_v3_s11_g4b_runtime_acquisition_v1.py",
+        "utf8_bytes": 43593,
+        "raw_sha256": "de39e53edf88018c0c87179e0a5760986f995537867c588102679a704e5b007b",
+        "git_blob_sha1": "2cda248b3b9364415fdde91f14553f3dfc67261f"
+      },
+      {
+        "path": "ai/tests/test_emlis_nls_v3_s11_g4b_runtime_preparation_controller_v1.py",
+        "utf8_bytes": 127056,
+        "raw_sha256": "24a4fc72ec454f1a32d1d91a602ddd8e7cc98712076677213c67a4aeebe420f0",
+        "git_blob_sha1": "7d3c5e5e90afc34948ba1ccb8b5a85ab65040654"
+      }
+    ],
+    "protected_unchanged_path_count": 10,
+    "remote_blobs_exact_match": true,
+    "unauthorized_change_count": 0
+  },
+  "cocolon_publication": {
+    "pre_head_sha1": "bda9f951f80210f86727d2553250290b54232de5",
+    "pre_tree_sha1": "881bb83faab24127afa20a6ee9cbf44f23d1e9c9",
+    "modify_count": 9,
+    "add_count": 2,
+    "delete_count": 0,
+    "changed_path_count": 11,
+    "two_repository_changed_path_union_count": 14,
+    "admitted_existing_exact9_blob_sha1": [
+      "3c8122eb42562a47f7e8e5ca60e8f59a9fc92061",
+      "2bd5502a760cc00dd0455d0e0c2b1cd865294b63",
+      "4dfe6bee5ce43f1517302f98c7d059edeae0aa92",
+      "504ee063ea47d3128c6631400b408641d1e7605f",
+      "3492ada4ba49179daf95c4046055acb066dd922e",
+      "5554dc5b715ca815efa531e57ba2459716e40cdb",
+      "4f07b91eab9f6bfda7c822e735d1eda91b5e7de8",
+      "958e5c61d5e37515f36ae4934e7c3e493be904b3",
+      "98f779473e254de0d775abcaa8de246045b12a1e"
+    ],
+    "protected_rule18_blob_sha1": "c137403e0869a8c5f2070fd4146b37df19a248f3",
+    "protected_role_alignment_receipt_blob_sha1": "a3aad09d6e82ee1a84b44bb53b882547ed971657",
+    "v6_receipt_unchanged": true,
+    "rule18_unchanged": true,
+    "role_alignment_receipt_unchanged": true,
+    "final_cocolon_head_tree_and_changed_blob_identities": "OMITTED_TO_AVOID_SELF_REFERENCE__OWNED_BY_GITHUB_AND_EXTERNAL_POSTVERIFY",
+    "unauthorized_change_count": 0
+  },
+  "terminal": {
+    "primary_outcome": "TECHNICAL_CREDIT",
+    "credit_scope": "REUSABLE_CONSUMER_SIDE_SOURCE_CONTRACT_PORTABLE_TEST_AND_ACTUAL_DAC_EVIDENCE_ONLY",
+    "functional_preparation_state": "CONTROLLER_FAMILY_V1_FUNCTIONAL_EXACT7_WITH_PLATFORM_OPENED_EXEC_TIME_INHERITED_READ_ONLY_FD_MAPPING_V1_IMPLEMENTED_VERIFIED_REMOTE_POSTVERIFIED",
+    "live_runtime_execution_state": "UNEXECUTED",
+    "later_live_authority": "NOT_AUTHORED_NOT_APPROVED",
+    "runtime_ready": false,
+    "readiness_observation_id": "NOT_DERIVED",
+    "gate_b": "OPEN",
+    "readiness_gate_b_technical_product_credit": "0 / 0 / 0",
+    "gate_c": "NOT_AUTHORIZED",
+    "automatic_progression": false
+  },
+  "forbidden_effects": {
+    "live_platform_source_open_count": 0,
+    "live_fd9_mapping_count": 0,
+    "live_controller_count": 0,
+    "existing_checker_live_execution_count": 0,
+    "product_or_live_runtime_network_effect_count": 0,
+    "gate_b_closure_count": 0,
+    "gate_c_or_later_count": 0,
+    "github_actions_control_plane_checkout_and_pinned_interpreter_provisioning": "DISCLOSED_NONPRODUCT_RUNNER_EFFECT",
+    "product_or_live_runtime_pypi_effect_count": 0,
+    "product_or_live_runtime_wheel_effect_count": 0,
+    "github_actions_checkout_count": 1,
+    "runner_provisioning_pinned_interpreter_archive_fetch_count": 1,
+    "runner_provisioning_pinned_pip_wheel_fetch_count": 1
+  },
+  "next_boundary": {
+    "next_exact1": "NLS_V3_STEP11_CYCLE001_G4_GATE_B_PLATFORM_EXEC_TIME_FD_MAPPING_SURFACE_AND_ONE_SHOT_LIVE_NETWORK_RUNTIME_READINESS_ADMISSION_CANDIDATE",
+    "candidate_class": "TECHNICAL_AUTHORITY_CANDIDATE",
+    "candidate_scope": "LEVEL_3_MASH_DECISION_AND_APPROVAL_REQUIRED_SCOPE",
+    "candidate_state": "DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "automatic_progression": false,
+    "current_authority_stop": true
+  }
+}
