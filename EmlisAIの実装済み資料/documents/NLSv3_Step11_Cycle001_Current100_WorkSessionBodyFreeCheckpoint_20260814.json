@@ -1,145 +1,237 @@
 {
-  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.current100.work_session_body_free_checkpoint.v1",
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.current100.response1_body_free_checkpoint.v2",
   "created_at_jst": "2026-08-14",
   "body_free": true,
   "decision_owner": "Mash",
   "operation_owner": "Karen",
+  "response_scope": "RESPONSE1_RECONSTRUCT_REAL_FILES_START_MACHINE_RECOVERY_ONLY",
+  "response_route": "B_COHERENT_TEST_RUNNER_AND_REMOTE_RESTART_MATERIAL",
+  "response1_completion": "COMPLETE_WITHOUT_PRODUCTION_RECOVERY_CREDIT",
   "cycle_state": "CYCLE001_NOT_ACCEPTED",
   "automatic_progression": false,
-  "checkpoint_classification": "SESSION_INTERRUPTED_MATERIAL_BYTES_NOT_RECOVERED",
-  "durable_baseline": {
-    "mashos_api_commit": "6e8d42a6738f45f71fc6f00246fe54475c4c6b9c",
-    "cocolon_commit_before_checkpoint": "fae4e9766bf5eaed0431d5da75a4491a7b67b75d",
-    "mashos_api_paths": [
-      "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
-      "ai/tests/test_emlis_nls_v3_s11_cycle001_g4c_product_surface_red.py",
+  "cycle002_started": false,
+  "remote_preimage": {
+    "mashos_api": "6e8d42a6738f45f71fc6f00246fe54475c4c6b9c",
+    "cocolon": "0386d0af5602f1cf828b396595c4136a3b439ddd"
+  },
+  "durable_heads": {
+    "mashos_api": "d3066e38383b884406737efb976d745df0a5a74f",
+    "cocolon": "CONTAINING_COMMIT"
+  },
+  "adopted_execution_plan": "EmlisAIの実装済み資料/documents/Cocolon_EmlisAI_NLSv3_Cycle001_Remaining60_ThreeResponseExecutionPlan_20260814.md",
+  "mashos_api_change": {
+    "commit": "d3066e38383b884406737efb976d745df0a5a74f",
+    "production_paths": [],
+    "changed_paths": [
       "ai/tests/test_emlis_nls_v3_step11_current_rc_g8_run.py",
       "ai/tools/emlis_nls_v3_step11_current_rc_g8_run.py"
-    ]
+    ],
+    "checker_controller_fd_added": false,
+    "external_dependency_added": false,
+    "implementation_credit": [
+      "EVIDENCE_ENVELOPE_V3_CLOSURE_HMAC_STATE_INTEGRITY"
+    ],
+    "product_or_machine_recovery_credit": 0
   },
-  "initial_durable_run": {
-    "run_id": "cycle001-g8-20260813-01",
+  "evidence_envelope_v3": {
+    "status": "IMPLEMENTED_TESTED_REMOTE_POSTVERIFIED",
+    "exact_ordered_case_count": 100,
+    "state_exclusivity": true,
+    "exception_accounting": true,
+    "public_failure_allowlist": true,
+    "frozen_case_id_manifest_commitment_and_input_binding": true,
+    "transitive_runtime_fixture_schema_closure": true,
+    "source_checks": [
+      "BEFORE_EXACT100_LOAD",
+      "AFTER_EXACT100_LOAD",
+      "AFTER_EXECUTION",
+      "BEFORE_WRITE",
+      "AFTER_WRITE"
+    ],
+    "case_hmac_binds_private_row_and_run_identity": true,
+    "run_hmac_non_circular": true,
+    "canonical_disk_reread": true,
+    "output_boundary": "EXISTING_OUTSIDE_REPO_0700_DIRECTORY_EXISTING_0600_PAIR_HELPERS",
+    "no_overwrite": true,
+    "exact_directory_entries": true,
+    "postwrite_failure_pair_cleanup": true,
+    "candidate_envelope_independent_recomputation": false
+  },
+  "focused_results": {
+    "existing_runner_baseline": "4 passed in 38.15s",
+    "existing_g4c_product_causal": "2 passed in 567.18s",
+    "existing_owner_order_support": "4 passed in 0.62s",
+    "response1_evidence_v3": "14 passed in 38.46s",
+    "py_compile": "PASS",
+    "git_diff_check": "PASS",
+    "adversarial_review": "NO_BLOCKING_DEFECT_IN_RESPONSE1_RUNNER_UNIT_EXCLUDING_EXPLICIT_DEFERS"
+  },
+  "fresh_exact100": {
+    "execution_status": "EXECUTED_AND_PAIR_REVERIFIED",
+    "run_id": "cycle001-r1-evidence-v3-20260814-02",
+    "schema_version": "cocolon.emlis.nls_v3.current_rc.g8.body_free_exact100.v3",
+    "source_closure_sha256": "f9aa7dcc385dd075fe4f916e1ead1db98e401a07d18f8aa8e6cca6abe85f7710",
+    "source_closure_file_count": 135,
     "case_count": 100,
     "selected": 45,
     "no_valid_candidate": 2,
     "fail_close": 53,
+    "exception_count": 46,
     "output_present": 52,
     "output_missing": 48,
-    "source_closure_sha256": "f2d7e83aa17296ac6d8ec1a83024e489eeaac155038ede4261252866a773b3dc",
-    "private_result_sha256": "4556258eaf57ac2d3f5bdc8b494d59bf034a6fd740c3ef180d64e57257c5f628",
-    "body_free_result_sha256": "3877e5e2be37454c30c409a2855fa8d7ae5537704191e4ec1c140b3b293afab5",
-    "hmac_verified": 100
+    "body_free_core_sha256": "200304909cc89fc31edb5bf76217e28beee85dceac82da4663cb81cb66647a94",
+    "run_hmac": "cd77aea8cb70c2c08bf91e3d7b99824415aced847d5375b4c5412d3900d64dd6",
+    "private_result_sha256": "5717eaa487de745c0d6c305b473e16387fa723029e2358ba67237df1cd04bda1",
+    "body_free_result_sha256": "a17dbf368010b78906ae55898f6b92c1293a2e1c8217fcf80131b17c9b031403",
+    "body_free_artifact": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Current100_Response1_FreshExact100_BodyFree_Result_20260814.json",
+    "pair_verified_cases": 100,
+    "reason_counts": {
+      "CURRENT_RC_G8_SELECTED": 45,
+      "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED": 26,
+      "STEP11_INPUT_SPECIFIC_ANCHOR_UNRESOLVED": 10,
+      "CURRENT_RC_G8_INVERSE_REJECTED": 7,
+      "STEP11_GROUNDED_PHRASE_AMBIGUOUS": 3,
+      "STEP11_RELATION_MULTI_EDGE_LOCAL_ANAPHORA_AMBIGUOUS": 3,
+      "CURRENT_RC_G8_CASE_REJECTED": 3,
+      "CURRENT_RC_G8_NO_VALID_CANDIDATE": 2,
+      "STEP11_RC0031_OWNER_ROLE_TYPED_RECOMPOSITION_INVALID": 1
+    },
+    "acceptance_evidence_status": "TECHNICAL_DIAGNOSTIC_NOT_CYCLE_ACCEPTANCE",
+    "private_pair_status": "TEMPORARY_ONLY_DELETED_AFTER_BODY_FREE_CHECKPOINT",
+    "commitment_key_status": "TEMPORARY_ONLY_DELETED_NOT_DURABLE_NOT_PUBLIC"
   },
-  "initial_product_read": {
-    "read_count": 100,
-    "pass": 0,
-    "minor": 2,
-    "major": 40,
-    "blocker": 58,
-    "g10_true": 7,
-    "g10_false": 7,
-    "result": "CYCLE001_NOT_ACCEPTED"
+  "durable_product_baseline": {
+    "machine_selected": 45,
+    "machine_no_valid_candidate": 2,
+    "machine_fail_close": 53,
+    "output_present": 52,
+    "output_missing": 48,
+    "product_read_pass": 0,
+    "product_read_minor": 2,
+    "product_read_major": 40,
+    "product_read_blocker": 58,
+    "product_read_100_status": "UNCHANGED_PRIOR_DURABLE_RESULT",
+    "cycle001_observation_product_quality_reached": false
   },
-  "session_reported_runs": [
+  "causal_blocker": {
+    "largest_reason_code": "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED",
+    "count": 26,
+    "reproduction": "BODY_FREE_CAUSAL_REPRODUCED_BEFORE_CURRENT_BUILDER",
+    "locus": "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py:2321-2349",
+    "fact": "CURRENT_SINGLE_ANCHOR_CONTRACT_REJECTS_ADDITIONAL_REQUIRED_GENERIC_OWNER_BEFORE_RECOVERY_SUFFIX",
+    "response1_decision": "DO_NOT_WEAKEN_GATE_OR_MODIFY_PROTECTED_OWNER_REGION",
+    "required_restart_decision": "RULE18_COMPLIANT_PRE_SEAM_OWNER_AUTHORITY_LANE"
+  },
+  "change_families": [
     {
-      "label": "r1",
-      "evidence_status": "SESSION_REPORTED_EXACT_BYTES_NOT_RECOVERED",
-      "case_count": 100,
-      "selected": 88,
-      "no_valid_candidate": 2,
-      "fail_close": 10,
-      "output_present": 88,
-      "run_id": null,
-      "source_closure_sha256": null,
-      "case_hmac_set": null,
-      "run_hmac": null
+      "id": "TYPED_CONCISE_OWNER_AUTHORITY",
+      "status": "DEFERRED_PROTECTED_PRE_SEAM_AND_LOST_DOWNSTREAM_DELTA",
+      "reason": "26_CASE_SINGLE_ANCHOR_FAILURE_OCCURS_BEFORE_RECOVERY_SUFFIX; GENERIC_LABEL_CHANGE_WOULD_WEAKEN_GATE",
+      "restart": "DECIDE_RULE18_COMPLIANT_PRE_SEAM_OWNER_AUTHORITY; REBUILD ONLY FROM ACCEPTED_TYPED_OWNER_BINDING"
     },
     {
-      "label": "r2",
-      "evidence_status": "SESSION_REPORTED_EXACT_BYTES_NOT_RECOVERED",
-      "case_count": 100,
-      "selected": 92,
-      "no_valid_candidate": 0,
-      "fail_close": 8,
-      "output_present": 92,
-      "run_id": null,
-      "source_closure_sha256": null,
-      "case_hmac_set": null,
-      "run_hmac": null
+      "id": "REFINED_SEMANTIC_UNIT_LINEAGE_BRIDGE",
+      "status": "DEFERRED_LATE_DELTA_NOT_RECOVERED",
+      "reason": "SOURCE_SPAN_HASH_AUTHORITY_EXISTS_BUT_EXACT_PARENT_UNIT_BRIDGE_IS_NOT_DURABLE",
+      "restart": "ADD_PURE_EXACT1_SPAN_OFFSET_HASH_OWNER_INTERSECTION_WITNESS_AND_CAUSAL_TESTS"
+    },
+    {
+      "id": "MULTIPLE_UNKNOWN_TARGET_SEPARATION",
+      "status": "DEFERRED_LATE_DELTA_NOT_RECOVERED",
+      "reason": "SOURCE_UNKNOWN_AUTHORITY_EXISTS_BUT_ID_TARGET_PRESERVING_PARTITION_BYTES_ARE_NOT_DURABLE",
+      "restart": "PARTITION_BY_SOURCE_UNKNOWN_ID_DIMENSION_EXACT_OWNER_TUPLE_WITHOUT_TEXT_SELECTORS"
+    },
+    {
+      "id": "UNKNOWN_OWNER_INTRODUCTION_ORDER",
+      "status": "DEFERRED_LATE_DELTA_NOT_RECOVERED",
+      "reason": "TYPED_OWNER_INCIDENCE_EXISTS_BUT_TARGET_CONTEXT_ORDER_DELTA_IS_NOT_DURABLE",
+      "restart": "REBUILD_ORDER_FROM_TYPED_UNKNOWN_AND_OWNER_INCIDENCE; TEST_REVERSE_AND_CONTEXT_LOSS"
+    },
+    {
+      "id": "ROLE_AWARE_CONSTRUCTION_INSTANCE_RENDERING",
+      "status": "DEFERRED_LATE_DELTA_NOT_RECOVERED",
+      "reason": "INSTANCE_ROLE_AUTHORITY_EXISTS_BUT_ROOT_AND_NON_ROOT_REALIZATION_DELTA_IS_NOT_DURABLE",
+      "restart": "NORMALIZE_ONE_INSTANCE_WITNESS; FORBID_SLOT_SURFACE_DUPLICATION"
+    },
+    {
+      "id": "ORDERED_SLOT_OWNER_INCIDENCE_INVERSE",
+      "status": "DEFERRED_LATE_DELTA_NOT_RECOVERED",
+      "reason": "CURRENT_PLAN_COLLAPSES_CONSTRUCTION_OWNER_TO_SCALAR; TUPLE_INCIDENCE_INVERSE_IS_NOT_DURABLE",
+      "restart": "EXACTLY_MATCH_INSTANCE_SLOT_ROLE_PARTICIPATION_OWNER_ORDINALS; REJECT_REORDER_EXTRA_MISSING"
+    },
+    {
+      "id": "SAME_GROUP_BASE_FINITE_HEAD_SUBSET",
+      "status": "DEFERRED_LATE_DELTA_NOT_RECOVERED",
+      "reason": "CONSTRUCTION_ONLY_SAME_GROUP_BASE_HEAD_SELECTION_IS_NOT_DURABLE",
+      "restart": "SELECT_ONLY_UNIQUE_SAME_GROUP_BASE_HEAD_WITH_EXACT_LINEAGE_AND_FULL_INSTANCE_INCIDENCE"
+    },
+    {
+      "id": "FINITE_ATOM_SENTENCE_PARTITION",
+      "status": "DEFERRED_LATE_DELTA_NOT_RECOVERED",
+      "reason": "FINITE_MAX3_EXISTS_BUT_DETERMINISTIC_MULTI_SENTENCE_PARTITION_IS_NOT_DURABLE",
+      "restart": "PARTITION_STABLE_ORDER_AT_MAX3_AND_RECOMPUTE_CAPACITY_PER_SENTENCE"
+    },
+    {
+      "id": "TYPED_RELATION_JUNCTION",
+      "status": "DEFERRED_LATE_DELTA_NOT_RECOVERED",
+      "reason": "TYPED_ENDPOINT_AUTHORITY_EXISTS_BUT_ENDPOINT_INCIDENCE_JUNCTION_DELTA_IS_NOT_DURABLE",
+      "restart": "NORMALIZE_EXACT2_TYPED_ENDPOINTS; REJECT_DIRECTION_REVERSAL_AMBIGUITY_AND_SYNTHETIC_OWNER"
+    },
+    {
+      "id": "DIMENSION_SCOPE_AND_LONG_JOIN_PARSING",
+      "status": "DEFERRED_LATE_DELTA_NOT_RECOVERED",
+      "reason": "JOIN_AUTHORITIES_EXIST_BUT_LONG_FIRST_TOKENIZATION_AND_SENTENCE_SCOPE_RESET_ARE_NOT_DURABLE",
+      "restart": "TOKENIZE_LONGEST_DELIMITER_FIRST; RESET_DIMENSION_EPOCH_AT_GRAMMATICAL_SENTENCE"
+    },
+    {
+      "id": "CANDIDATE_ENVELOPE_INDEPENDENT_RECOMPUTATION",
+      "status": "DEFERRED_INDEPENDENT_RUNNER_DELTA_NOT_IMPLEMENTED",
+      "reason": "CURRENT_INVERSE_EXPECTATIONS_STILL_USE_CANDIDATE_SURFACE_REALIZATION_PLAN",
+      "restart": "INDEPENDENTLY_RECOMPUTE_ID_SOURCE_HASH_COUNTERS_BOUNDARY_REPLAN_PLAN_AST_AND_CANONICAL_HEAD"
+    },
+    {
+      "id": "EVIDENCE_ENVELOPE_V3_CLOSURE_HMAC_STATE_INTEGRITY",
+      "status": "IMPLEMENTED_TESTED_REMOTE_POSTVERIFIED",
+      "reason": "COHERENT_RESPONSE1_B_ROUTE_RUNNER_UNIT",
+      "restart": "USE_DURABLE_RUNNER_AS_RESPONSE2_EVIDENCE_BASE; DO_NOT_CREDIT_CANDIDATE_ENVELOPE"
     }
   ],
-  "last_operation": {
-    "operation": "FIXED_CLOSURE_8_CASE_REMEASUREMENT",
-    "result": "RESULT_UNKNOWN_NOT_PERSISTED",
-    "running_process_observed_at_checkpoint": false
+  "protected_constraints": {
+    "path": "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+    "frozen_prefix_bytes": 537842,
+    "frozen_prefix_sha256": "18ad33095754c0132d22a7f2e004f00d5e1655a825e366ade5778adb1bc134d4",
+    "frozen_prefix_git_blob_sha1": "478454a1c5fb5b15e0c281ae93a63aa058bf8e26",
+    "suffix_max_bytes": 11090,
+    "suffix_marker": "# rc0031 experiment-only owner-role inflection / typed recomposition (append-only B6 private consumer)",
+    "masked_suffix_sha256": "c448d8f514669a7b0379e3a85b79fc5aabf29d00cbe002725592f74e9f60fc1d",
+    "mutable_functions_exact3": [
+      "_rc0031_rt_cluster",
+      "_step11_rc0031_product_render_cluster",
+      "_step11_rc0031_build_owner_role_inflected_typed_recomposition_candidate"
+    ],
+    "immutable_function": "_rc0031_rt_plan",
+    "current_input_load_and_forward_exact1": true,
+    "base_recovery_call_exact1": true
   },
-  "session_change_families": [
-    "TYPED_CONCISE_OWNER_AUTHORITY",
-    "REFINED_SEMANTIC_UNIT_LINEAGE_BRIDGE",
-    "MULTIPLE_UNKNOWN_TARGET_SEPARATION",
-    "UNKNOWN_OWNER_INTRODUCTION_ORDER",
-    "ROLE_AWARE_CONSTRUCTION_INSTANCE_RENDERING",
-    "ORDERED_SLOT_OWNER_INCIDENCE_INVERSE",
-    "SAME_GROUP_BASE_FINITE_HEAD_SUBSET",
-    "FINITE_ATOM_SENTENCE_PARTITION",
-    "TYPED_RELATION_JUNCTION",
-    "DIMENSION_SCOPE_AND_LONG_JOIN_PARSING",
-    "CANDIDATE_ENVELOPE_INDEPENDENT_RECOMPUTATION",
-    "EVIDENCE_ENVELOPE_V3_CLOSURE_HMAC_STATE_INTEGRITY"
-  ],
-  "focused_results_session_reported": {
-    "lineage_bridge_causal_green": "14/14",
-    "concise_owner_authority_causal_green": "4/4",
-    "bridge_and_trusted_focused_green": "18/18",
-    "role_aware_instance_green": "3/3",
-    "independent_expected_set_parser_green": "8/8",
-    "evidence_envelope_v3_green": "14/14",
-    "residual_subset_selected_all_checks_green": "12/12"
+  "response2_restart": {
+    "exact_mashos_api_head": "d3066e38383b884406737efb976d745df0a5a74f",
+    "first_action": "DECIDE_RULE18_COMPLIANT_PRE_SEAM_OWNER_AUTHORITY_FOR_THE_26_CASE_BLOCKER",
+    "second_action": "ADD_PURE_RECOVERY_HELPER_AND_FOCUSED_CAUSAL_TESTS_FOR_TYPED_LINEAGE_UNKNOWN_CONSTRUCTION_PARTITION_RELATION_AND_DIMENSION_FAMILIES",
+    "third_action": "CONNECT_ONLY_THROUGH_AUTHORIZED_MUTABLE_SEAM_WITH_BASE_RECOVERY_CALL_EXACT1",
+    "fourth_action": "IMPLEMENT_CANDIDATE_ENVELOPE_INDEPENDENT_RECOMPUTATION_WITHOUT_USING_FINAL_PLAN_AS_ORACLE",
+    "fifth_action": "RUN_NEW_ID_FRESH_EXACT100_THEN_BEGIN_BODY_FULL_PRODUCT_READ_ONLY_AFTER_MACHINE_ACCOUNTING",
+    "proposed_helper_path": "ai/services/ai_inference/emlis_ai_step11_cycle001_product_recovery_v3.py",
+    "proposed_test_path": "ai/tests/test_emlis_nls_v3_s11_cycle001_product_recovery_v3.py",
+    "proposed_status": "NOT_CREATED_IN_RESPONSE1"
   },
-  "product_state_after_r2": {
-    "body_full_read_100": "NOT_EXECUTED",
-    "product_acceptance": "NOT_PROVED",
-    "cycle001_observation_product_quality_reached": false,
-    "known_concern_families": [
-      "TYPE_LABEL_ENUMERATION",
-      "UNIFORM_NOMINALIZATION",
-      "MECHANICAL_MODIFIER_CONCATENATION",
-      "RECEPTION_RESUMMARY_OR_DUPLICATION",
-      "SINGLE_SENTENCE_SKELETON_CONCENTRATION",
-      "TYPED_OWNER_PHRASE_NATURALNESS",
-      "LOCAL_DIMENSION_AND_RECEPTION_LAYOUT"
-    ]
-  },
-  "unrecovered_material": [
-    "SESSION_LATE_PRODUCTION_SOURCE_BYTES",
-    "SESSION_LATE_TEST_BYTES",
-    "EVIDENCE_ENVELOPE_V3_RUNNER_BYTES",
-    "R1_PRIVATE_AND_BODY_FREE_PAIR_BYTES",
-    "R2_PRIVATE_AND_BODY_FREE_PAIR_BYTES",
-    "R1_R2_RUN_IDS",
-    "R1_R2_SOURCE_CLOSURE_HASHES",
-    "R1_R2_CASE_AND_RUN_HMACS",
-    "FINAL_8_CASE_REMEASUREMENT_RESULT"
-  ],
-  "restart_order": [
-    "READ_CURRENT_HANDOFF_CHECKPOINT_RULES_AND_CURRENT_STATE",
-    "FETCH_FRESH_REMOTE_BASELINES",
-    "ONE_TIME_EXACT_BYTE_RECOVERY_CHECK",
-    "REIMPLEMENT_COMMON_CHANGE_FAMILIES_FROM_6E8D42A_IF_NOT_RECOVERED",
-    "RUN_FOCUSED_CAUSAL_AND_EVIDENCE_TESTS",
-    "RUN_FRESH_EXACT100_WITH_NEW_ID_CLOSURE_AND_HMAC_PAIR",
-    "CONTINUE_MACHINE_LOOP_UNTIL_100_0_0",
-    "READ_BODY_FULL_100_ON_12_AXES",
-    "CONTINUE_PRODUCT_CORRECTION_UNTIL_BLOCKER_MAJOR_ZERO",
-    "PUBLISH_MATERIAL_DIFF_AND_BODY_FREE_EVIDENCE_WITH_REMOTE_POSTVERIFY"
-  ],
   "forbidden": [
+    "RETRY_EXACT_BYTES_RECOVERY",
     "RESTART_G4B_CHECKER_CONTROLLER_FD",
     "RESTART_G0_G10_PROOF_OF_PROOF",
-    "INFER_UNKNOWN_RUN_IDENTITIES_OR_RESULTS",
-    "CONVERT_MACHINE_GREEN_TO_PRODUCT_PASS",
-    "CASE_SPECIFIC_OR_FIXED_RESPONSE_PRODUCTION_BRANCH",
-    "PUBLIC_BODY_FULL_RAW_INPUT_RAW_OUTPUT_OR_KEY",
+    "CASE_INPUT_TEXT_OR_EXPECTED_OUTPUT_PRODUCTION_SELECTOR",
+    "WEAKEN_GATE_SAFETY_MEANING_OR_PRODUCT_READ",
+    "PUBLIC_RAW_INPUT_OUTPUT_PRIVATE_NOTE_OR_KEY",
+    "COUNT_MACHINE_GREEN_AS_PRODUCT_PASS",
     "AUTOMATIC_CYCLE002_START"
   ]
 }

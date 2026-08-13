@@ -2,9 +2,9 @@
 doc_id: cocolon_cycle001_current_state
 title: "Cycle001 現在地 — 単一ナビゲーション正本"
 revision_date: "2026-08-14"
-status: "CURRENT100_RESTART_CHECKPOINT_PUBLISHED"
+status: "RESPONSE1_B_ROUTE_RUNNER_DURABLE_MACHINE_UNCHANGED"
 normative_status: "CURRENT_CYCLE001_NAVIGATION_OWNER"
-effective_when: "CURRENT100_WORK_SESSION_HANDOFF_REMOTE_POSTVERIFIED"
+effective_when: "RESPONSE1_REMOTE_POSTVERIFIED"
 decision_owner: "Mash"
 operational_owner: "Karen"
 technical_authority: false
@@ -15,153 +15,170 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-Mash様の2026-08-13 current explicit instructionにより、安全装置の追加開発を停止し、既存checker / controller / FD codeは削除・変更せず保持しました。prior G4-Bは `DETOUR_RISK_STOP` として閉じ、commit、Python / dependency、runner起動、private body保護、結果保存だけの一回限りpreflightへ戻しました。
+Cycle001 残り60％・3回答分割計画の第1回答だけを実行した。
 
-そのpreflightはPASSし、新しい安全装置を挟まず G4-C → G5 → G6 → G8 → G9 → G10 を完了しました。userが明示したcurrent sequenceが、このoperationに限りold G7a–d entry sequenceをsupersedeします。これはG7 technical evidenceを遡及成立させません。
+失われた後半source bytesは回収せず、mashos-api 6e8d42a6738f45f71fc6f00246fe54475c4c6b9c のactual sourceから再調査した。production 11 change familyは、安全にcurrent mainへ昇格できるcoherent deltaが成立しなかったため変更していない。代わりに計画4.4 Bに従い、exact100 runner / evidence envelope v3 と focused testsをcoherentなactual fileとしてGitHubへ保存した。
 
-```text
-CURRENT_PRODUCT_WORKSTREAM = P3_PRODUCT_READ_FEEL_V1
-G4_B = CLOSED_MINIMAL_PREFLIGHT_PASS
-PRIOR_G4_B = DETOUR_RISK_STOP
-SAFETY_DEVICE_FURTHER_DEVELOPMENT = STOPPED
-EXISTING_CHECKER_CONTROLLER_FD_CODE = RETAINED_UNCHANGED
-G4_C = CAUSAL_RED_FIXED
-G5 = PRODUCTION_GREEN
-G6 = PRODUCT_ACCEPTANCE_REJECTED
-G8 = EXACT100_EXECUTED_RESULTS_SAVED
-G9 = EXACT100_ALL_READ
-G10 = ACCEPTANCE_RECOMPUTED
-CORPUS_INVALID = FALSE
-CYCLE001 = NOT_ACCEPTED
-CURRENT_ROUTE = RETURN_TO_SHARED_STRUCTURAL_CORRECTION
-CURRENT_AUTHORITY = STOP
-NLS_V3_METHOD_STOP = FALSE
-AUTOMATIC_PROGRESSION = FALSE
-```
+現在の結論は次である。
 
-## 1. G4-B minimal one-shot preflight
+    RESPONSE1_ROUTE = B_COHERENT_TEST_RUNNER_AND_REMOTE_RESTART_MATERIAL
+    RESPONSE1 = COMPLETE
+    PRODUCTION_CHANGE = NONE
+    EVIDENCE_ENVELOPE_V3 = IMPLEMENTED_TESTED_REMOTE_POSTVERIFIED
+    MACHINE_SELECTED / NO_VALID / FAIL_CLOSE = 45 / 2 / 53
+    OUTPUT_PRESENT / MISSING = 52 / 48
+    PRODUCT_READ_PASS / MINOR / MAJOR / BLOCKER = 0 / 2 / 40 / 58
+    CYCLE001 = NOT_ACCEPTED
+    CURRENT_ROUTE = RESPONSE2_SHARED_STRUCTURAL_CORRECTION
+    AUTOMATIC_PROGRESSION = FALSE
+    CYCLE002_STARTED = FALSE
 
-```text
-FIXED_MASHOS_API_PREDECESSOR = 99afecb1a30880bf42b9fde4932e5bba7e01e7d4
-PYTHON = CPYTHON_3_12_13
-PYTEST = 8_4_1
-EXACT_DEPENDENCY_HASHES_MATCH = TRUE
-RUNNER_HELP_LAUNCH = PASS
-PRIVATE_BODY_PROTECTION = PASS
-RESULT_SAVING = PASS
-G4_B_RESULT = PASS
-NEW_CHECKER_CONTROLLER_FD_CHANGE_COUNT = 0
-```
+この第1回答完了は、60％の商品進捗credit、machine回復、Cycle001完了を意味しない。remoteだけから迷わず再開できるB-route checkpointの成立を意味する。
 
-## 2. G4-C / G5
+## 1. Remote exact state
 
-G4-C exact2はpre-fix productionに対して意図した因果RED exact2を実測しました。G5はNatural Surface production owner exact1のbounded exact3だけを修正し、dependent dimension cue、plan-owned bound group、Reception focusのproduct realizationを成立させました。
+開始preimage:
 
-```text
-G4_C_RED = 2_FAILED_AS_EXPECTED / 593.71s
-G5_FOCUSED_GREEN = 2_PASSED / 535.00s
-POST_G6_ORDERED_REGRESSION = 24_PASSED / 809.21s
-RUNNER_FOCUSED = 4_PASSED / 39.73s
-MASHOS_API_COMMIT = 6e8d42a6738f45f71fc6f00246fe54475c4c6b9c
-MASHOS_API_CHANGED_PATHS = 4
-CHECKER_CONTROLLER_FD_CHANGED = FALSE
-```
+- mashos-api: 6e8d42a6738f45f71fc6f00246fe54475c4c6b9c
+- Cocolon: 0386d0af5602f1cf828b396595c4136a3b439ddd
 
-## 3. G6 Product Read
+第1回答でpostverify済みのmashos-api head:
 
-actual exact10 / unique8をprivate boundaryで全読しました。axis6のinput-specific bindingは10/10へ改善しましたが、severityと旧concern familiesは改善しませんでした。
+- mashos-api: d3066e38383b884406737efb976d745df0a5a74f
+- changed paths:
+  - ai/tools/emlis_nls_v3_step11_current_rc_g8_run.py
+  - ai/tests/test_emlis_nls_v3_step11_current_rc_g8_run.py
+- production changed paths: 0
+- checker / controller / FD追加: 0
+- 外部dependency追加: 0
 
-```text
-CANDIDATE_PASS_MINOR_MAJOR_BLOCKER = 0 / 2 / 8 / 0
-UNIQUE_PASS_MINOR_MAJOR_BLOCKER = 0 / 2 / 6 / 0
-G6_PRODUCT_RESULT = REJECT
-G6_REASON = LOCAL_AXIS6_IMPROVEMENT_WITHOUT_SEVERITY_IMPROVEMENT
-```
+Cocolon final headは、この文書を含むcommitである。実値はremote postverify結果を正とする。
 
-## 4. G8 exact100
+採用済み実行計画:
 
-run ID `cycle001-g8-20260813-01` でcurrent productionをexact100実行し、body-full private resultとHMAC body-free resultを0600 / no-overwrite boundaryへ保存しました。独立再検算は順序、source closure、private↔summary、HMAC 100/100、mode、owner、nlinkを全てPASSしました。
+- ../EmlisAIの実装済み資料/documents/Cocolon_EmlisAI_NLSv3_Cycle001_Remaining60_ThreeResponseExecutionPlan_20260814.md
 
-```text
-EXACT100 = 100
-SELECTED / NO_VALID / FAIL_CLOSE = 45 / 2 / 53
-BASE_PIPELINE_FAILURE / CURRENT_DOWNSTREAM_FAILURE = 42 / 11
-OUTPUT_PRESENT / OUTPUT_MISSING = 52 / 48
-HMAC_VERIFIED = 100 / 100
-G8_RESULT = SAVED_AND_INDEPENDENTLY_VERIFIED
-```
+## 2. Implemented family
 
-## 5. G9 all100 Product QA
+実装済みと数えるfamilyは一つだけである。
 
-current batch001のinput / outputを100件全読し、frozen semantic contract / coverageと照合し、全rowへ12 axes、severity、reason code、shared causeを付与しました。machine selectedをProduct PASSへ変換していません。
+EVIDENCE_ENVELOPE_V3_CLOSURE_HMAC_STATE_INTEGRITY:
 
-```text
-G9_READ = 100 / 100
-PASS / MINOR / MAJOR / BLOCKER = 0 / 2 / 40 / 58
-UNRESOLVED_MAJOR = 40
-UNRESOLVED_BLOCKER = 58
-OUTPUT_CHANGE_REVIEW_COMPLETE = TRUE
-G9_RESULT = COMPLETE_REJECT
-```
+- exact ordered100とselected / no-valid / fail-closeの状態排他
+- exception accountingとpublic reason allowlist
+- frozen case ID / manifest commitment / canonical source inputのexact binding
+- actual runtime Python、fixture、manifest、coverage、duplicate、registry、schema、I/O helperのsource closure
+- exact100 load前後、execution後、write前後のclosure再照合
+- private rowをrun identityへ結ぶcase HMAC
+- private / body-free coreを結ぶ非循環run HMAC
+- canonical UTF-8 disk rereadとprivate / body-free projection再検証
+- existing 0700 directory / 0600 pair helper、no-overwrite、exact two entries
+- postwrite失敗時の新規pair cleanup
 
-## 6. G10 acceptance recomputation
+candidate envelopeの独立再計算はこのfamilyの成立範囲に含めない。current inverse expectationはcandidate surface_realization_planを参照するため、bodyとplanの協調改変、candidate ID、source hash、counter、boundary、replan、AST、canonical headの独立再導出はResponse2へ残る。
 
-corpus invalidation exact6は全てfalseです。したがって `REJECTED_INVALID_CORPUS` ではありません。Detailed Design §18.8 exact14をcase rowsから再計算した結果は7/14です。
+## 3. Focused evidence
 
-```text
-EXACT14_VECTOR = TTTFFFTFFTTTFF
-TRUE / FALSE = 7 / 7
-FALSE_CONDITIONS = 4,5,6,8,9,13,14
-CYCLE001 = NOT_ACCEPTED
-PRIMARY_OUTCOME = CYCLE001_NOT_ACCEPTED
-NEXT_ROUTE = RETURN_TO_SHARED_STRUCTURAL_CORRECTION
-NLS_V3_METHOD_STOP = FALSE
-```
+Freshに確認したbody-free結果:
 
-false根拠は、initial result lock false、cumulative exception 53、Hard Gate equivalent 45/100かつSafety委譲なし、BLOCKER 58、MAJOR 40、MINOR2が同一common structural residueでNOTE分離なし、G1 NOT_PROVED / G2 FAILEDです。
+- existing runner baseline: 4 passed in 38.15s
+- existing G4-C product causal: 2 passed in 567.18s
+- existing owner-order support: 4 passed in 0.62s
+- Response1 evidence v3 focused: 14 passed in 38.46s
+- py_compile: PASS
+- git diff --check: PASS
+- adversarial review: 明示deferを除くResponse1 runner unitにblocking defectなし
 
-## 7. Privacy and durable evidence
+Response1 evidence v3の14 GREENはrunner単位の技術creditであり、production 11 family、candidate envelope、Product ReadのGREENではない。
 
-raw input、raw output、識別可能なparaphrase、commitment keyはGitHubへ保存しません。G6 private packet、G8 private exact100、G9 body-free exact100 ledger、G10 body-free auditはprivate durable storageへ保存済みです。
+## 4. Fresh exact100
 
-Public body-free Receipt:
-`../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4BToG10_Exact100Closure_BodyFree_Receipt_20260813.json`
+run ID cycle001-r1-evidence-v3-20260814-02 を新規に使用した。以前のv3 runは流用していない。
 
-```text
-PUBLIC_BODY_FULL_COUNT = 0
-PRIVATE_DURABLE_ARTIFACT_COUNT = 4
-CURRENT_AUTHORITY_STOP
-AUTOMATIC_PROGRESSION_FALSE
-```
+    SCHEMA = cocolon.emlis.nls_v3.current_rc.g8.body_free_exact100.v3
+    SOURCE_CLOSURE_SHA256 = f9aa7dcc385dd075fe4f916e1ead1db98e401a07d18f8aa8e6cca6abe85f7710
+    SOURCE_CLOSURE_FILE_COUNT = 135
+    CASE_COUNT = 100
+    SELECTED / NO_VALID / FAIL_CLOSE = 45 / 2 / 53
+    EXCEPTION_COUNT = 46
+    OUTPUT_PRESENT / MISSING = 52 / 48
+    BODY_FREE_SHA256 = a17dbf368010b78906ae55898f6b92c1293a2e1c8217fcf80131b17c9b031403
+    PAIR_VERIFIED = 100 / 100
 
-## 8. Current precedence — 2026-08-14 work-session preservation
+body-free result:
 
-この節は、§0のcurrent routeとauthorityについて、次セッションの再開navigationだけを
-supersedeする。§1–§7の初回durable evidenceと不受理判定は維持する。
+- ../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Current100_Response1_FreshExact100_BodyFree_Result_20260814.json
 
-同一Workセッションでは初回45/2/53からmachine収束を継続し、r1とr2の集計が報告された。
-ただし、後半production/test/runnerのexact bytes、r1/r2 result pair、run identityは
-workspace、GitHub、確認可能なdurable storageから回収できなかった。したがって、
-後半修正をGitHub反映済みとは扱わず、r1/r2を再現可能なacceptance evidenceへ昇格しない。
+最大reason familyは STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED の26件である。次いで input anchor unresolved 10件、inverse rejected 7件である。
 
-```text
-LATEST_DURABLE_MASHOS_API_BASELINE = 6e8d42a6738f45f71fc6f00246fe54475c4c6b9c
-SESSION_REPORTED_R1_SELECTED / NO_VALID / FAIL_CLOSE / OUTPUT = 88 / 2 / 10 / 88
-SESSION_REPORTED_R2_SELECTED / NO_VALID / FAIL_CLOSE / OUTPUT = 92 / 0 / 8 / 92
-FINAL_8_CASE_REMEASUREMENT = RESULT_UNKNOWN_NOT_PERSISTED
-UNRECOVERED_MATERIAL_DIFF = TRUE
-R2_PRODUCT_READ_100 = NOT_EXECUTED
-CYCLE001 = NOT_ACCEPTED
-CURRENT_ROUTE = ONE_TIME_RECOVERY_CHECK_THEN_REIMPLEMENT_FROM_6E8D42A
-AUTOMATIC_PROGRESSION = FALSE
-```
+fresh runはtechnical diagnosticであり、Cycle acceptance evidenceへは昇格しない。private pairとcommitment keyは一時boundaryだけで使用し、public GitHubへ保存しない。
 
-次セッションは、次のbody-free正本から開始する。
+## 5. Production family disposition
 
-- Work-session handoff:
-  `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Current100_WorkSessionEmergencyHandoff_20260814.md`
-- Machine-readable checkpoint:
-  `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Current100_WorkSessionBodyFreeCheckpoint_20260814.json`
+次の11 familyはすべて DEFERRED_WITH_REMOTE_EXACT_RESTART であり、implemented creditは0である。
 
-このcheckpoint自体はCycle001進捗または商品品質creditではない。private本文、raw
-input/output、識別可能なparaphrase、commitment keyは引き続きpublic GitHubへ出さない。
+1. TYPED_CONCISE_OWNER_AUTHORITY
+2. REFINED_SEMANTIC_UNIT_LINEAGE_BRIDGE
+3. MULTIPLE_UNKNOWN_TARGET_SEPARATION
+4. UNKNOWN_OWNER_INTRODUCTION_ORDER
+5. ROLE_AWARE_CONSTRUCTION_INSTANCE_RENDERING
+6. ORDERED_SLOT_OWNER_INCIDENCE_INVERSE
+7. SAME_GROUP_BASE_FINITE_HEAD_SUBSET
+8. FINITE_ATOM_SENTENCE_PARTITION
+9. TYPED_RELATION_JUNCTION
+10. DIMENSION_SCOPE_AND_LONG_JOIN_PARSING
+11. CANDIDATE_ENVELOPE_INDEPENDENT_RECOMPUTATION
+
+採用しなかった共通理由:
+
+- session late source bytesはdurableでなく、推測で復元しない。
+- natural_surface_v3のprefixとsuffix契約はprotected testでfreezeされている。
+- current最大26件はrecovery suffix到達前のsingle-anchor contractでfail-closeする。
+- generic label化、semantic equivalence、Gate / Safety / Product Read条件の弱化は行わない。
+- case ID、入力固有語、expected final textによるproduction分岐は行わない。
+- 壊れた途中productionをmainへ昇格しない。
+
+各familyのexact reason、protected hash、restart actionはmachine-readable checkpointを正とする。
+
+- ../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Current100_WorkSessionBodyFreeCheckpoint_20260814.json
+
+## 6. Largest causal blocker
+
+事実:
+
+- STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED は26件。
+- representative body-free reproductionではcurrent builder到達前にfail-closeした。
+- locusは ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py の現行2321–2349。
+- single-anchor contractが追加required generic ownerをrejectする。
+- protected owner領域とcurrent suffixを推測で書き換えるcoherent production deltaはResponse1で成立しなかった。
+
+判断:
+
+- Response1ではGateを弱めずproduction変更を見送る。
+- Response2の最初に、Rule18とprotected contractに適合するpre-seam owner authority laneを決める。
+- downstream concise ownerは、accepted typed owner bindingからexactに再構築し、26件解消creditとは分離する。
+
+## 7. Response2 exact restart
+
+Response2は mashos-api d3066e38383b884406737efb976d745df0a5a74f から開始する。
+
+順序:
+
+1. 26件を閉じるRule18-compliant pre-seam owner authorityを決める。
+2. pure recovery helperとfocused causal testsを作る。
+3. refined lineage、unknown separation/order、construction instance/slot incidence、finite head/partition、relation junction、dimension scopeをcommon authorityだけで再構築する。
+4. authorized mutable seamにだけ接続し、base recovery call exact1とcurrent_input forward exact1を維持する。
+5. candidate envelopeをfinal planをoracleにせず独立再計算する。
+6. new run IDでfresh exact100を実行する。
+7. machine accounting後にのみbody-full Product Readへ進む。
+
+proposed pathはまだ作成していない:
+
+- ai/services/ai_inference/emlis_ai_step11_cycle001_product_recovery_v3.py
+- ai/tests/test_emlis_nls_v3_s11_cycle001_product_recovery_v3.py
+
+## 8. Privacy and stop boundary
+
+public GitHubへraw input、raw output、識別可能なparaphrase、private note、commitment keyを保存しない。r1 88/2/10とr2 92/0/8はsession-reported参考値のままで、current evidenceへ昇格しない。
+
+第2回答、Product Read再評価、Cycle001 acceptance再計算、Cycle002は開始していない。
