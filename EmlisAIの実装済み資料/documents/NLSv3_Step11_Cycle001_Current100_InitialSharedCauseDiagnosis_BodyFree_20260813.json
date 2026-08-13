@@ -1,0 +1,83 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.cycle001.current100.initial_shared_cause_diagnosis.body_free.v1",
+  "cycle_id": "CYCLE001",
+  "scope": "CURRENT_EXACT100",
+  "body_free": true,
+  "source_run_id": "cycle001-g8-20260813-01",
+  "source_private_result_sha256": "4556258eaf57ac2d3f5bdc8b494d59bf034a6fd740c3ef180d64e57257c5f628",
+  "source_product_qa_ledger_sha256": "da118385938f223fdcd7711ba2793c56670566a66fe1530a769306c6146c6bb8",
+  "initial_counts": {
+    "valid": 100,
+    "selected": 45,
+    "no_valid_candidate": 2,
+    "fail_close": 53,
+    "output_present": 52,
+    "output_missing": 48,
+    "PASS": 0,
+    "MINOR": 2,
+    "MAJOR": 40,
+    "BLOCKER": 58
+  },
+  "output_missing_shared_causes": [
+    {
+      "reason_code": "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED",
+      "count": 26,
+      "owner": "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+      "cause": "single visible-source binding left additional required generic owners unbound"
+    },
+    {
+      "reason_code": "STEP11_INPUT_SPECIFIC_ANCHOR_UNRESOLVED",
+      "count": 10,
+      "owner": "ai/services/ai_inference/emlis_ai_step11_grounded_lexicalization_v3.py",
+      "cause": "bounded anchor selection could not bind each required owner"
+    },
+    {
+      "reason_code": "STEP11_GROUNDED_PHRASE_AMBIGUOUS",
+      "count": 3,
+      "owner": "ai/services/ai_inference/emlis_ai_step11_grounded_lexicalization_v3.py",
+      "cause": "grounded phrase ownership collision lacked unique owner-lineage resolution"
+    },
+    {
+      "reason_code": "STEP11_RELATION_MULTI_EDGE_LOCAL_ANAPHORA_AMBIGUOUS",
+      "count": 3,
+      "owner": "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+      "cause": "multi-edge graph had no deterministic literal endpoint allocation"
+    },
+    {
+      "reason_code": "STEP11_RC0031_PRODUCT_OWNER_EXPRESSION_INVALID",
+      "count": 3,
+      "owner": "ai/services/ai_inference/emlis_ai_step11_grounded_lexicalization_v3.py",
+      "cause": "long source fragment grammatical-head exact-range authority was not uniquely derived"
+    },
+    {
+      "reason_code": "STEP11_RC0031_OWNER_ROLE_TYPED_RECOMPOSITION_INVALID",
+      "count": 1,
+      "owner": "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+      "cause": "construction-only cluster reached a plan requiring one finite semantic head"
+    },
+    {
+      "reason_code": "V3_NO_VALID_CANDIDATE",
+      "count": 2,
+      "owner": "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+      "cause": "valid App-Reachable inputs produced no forward candidate satisfying existing hard gates"
+    }
+  ],
+  "output_present_shared_causes": {
+    "current_inverse_rejection": 7,
+    "semantic_failure": 36,
+    "input_specific_reception_unbound": 42,
+    "section_semantic_duplicate": 13,
+    "depth_mismatch": 32,
+    "surface_unnatural_or_repetitive": 52,
+    "immediate_observation_not_read": 52,
+    "distribution_overconcentrated": 3
+  },
+  "correction_integrity": {
+    "gate_relaxation_allowed": false,
+    "runner_failure_to_selected_rewrite_allowed": false,
+    "case_id_or_family_production_branch_allowed": false,
+    "fixed_final_response_allowed": false,
+    "machine_green_counts_as_product_read_pass": false
+  },
+  "next_route": "SHARED_STRUCTURAL_OWNER_CORRECTION_AND_CUMULATIVE_RERUN"
+}
