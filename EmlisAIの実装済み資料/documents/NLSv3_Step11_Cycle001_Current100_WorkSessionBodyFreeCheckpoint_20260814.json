@@ -1,0 +1,145 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.current100.work_session_body_free_checkpoint.v1",
+  "created_at_jst": "2026-08-14",
+  "body_free": true,
+  "decision_owner": "Mash",
+  "operation_owner": "Karen",
+  "cycle_state": "CYCLE001_NOT_ACCEPTED",
+  "automatic_progression": false,
+  "checkpoint_classification": "SESSION_INTERRUPTED_MATERIAL_BYTES_NOT_RECOVERED",
+  "durable_baseline": {
+    "mashos_api_commit": "6e8d42a6738f45f71fc6f00246fe54475c4c6b9c",
+    "cocolon_commit_before_checkpoint": "fae4e9766bf5eaed0431d5da75a4491a7b67b75d",
+    "mashos_api_paths": [
+      "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+      "ai/tests/test_emlis_nls_v3_s11_cycle001_g4c_product_surface_red.py",
+      "ai/tests/test_emlis_nls_v3_step11_current_rc_g8_run.py",
+      "ai/tools/emlis_nls_v3_step11_current_rc_g8_run.py"
+    ]
+  },
+  "initial_durable_run": {
+    "run_id": "cycle001-g8-20260813-01",
+    "case_count": 100,
+    "selected": 45,
+    "no_valid_candidate": 2,
+    "fail_close": 53,
+    "output_present": 52,
+    "output_missing": 48,
+    "source_closure_sha256": "f2d7e83aa17296ac6d8ec1a83024e489eeaac155038ede4261252866a773b3dc",
+    "private_result_sha256": "4556258eaf57ac2d3f5bdc8b494d59bf034a6fd740c3ef180d64e57257c5f628",
+    "body_free_result_sha256": "3877e5e2be37454c30c409a2855fa8d7ae5537704191e4ec1c140b3b293afab5",
+    "hmac_verified": 100
+  },
+  "initial_product_read": {
+    "read_count": 100,
+    "pass": 0,
+    "minor": 2,
+    "major": 40,
+    "blocker": 58,
+    "g10_true": 7,
+    "g10_false": 7,
+    "result": "CYCLE001_NOT_ACCEPTED"
+  },
+  "session_reported_runs": [
+    {
+      "label": "r1",
+      "evidence_status": "SESSION_REPORTED_EXACT_BYTES_NOT_RECOVERED",
+      "case_count": 100,
+      "selected": 88,
+      "no_valid_candidate": 2,
+      "fail_close": 10,
+      "output_present": 88,
+      "run_id": null,
+      "source_closure_sha256": null,
+      "case_hmac_set": null,
+      "run_hmac": null
+    },
+    {
+      "label": "r2",
+      "evidence_status": "SESSION_REPORTED_EXACT_BYTES_NOT_RECOVERED",
+      "case_count": 100,
+      "selected": 92,
+      "no_valid_candidate": 0,
+      "fail_close": 8,
+      "output_present": 92,
+      "run_id": null,
+      "source_closure_sha256": null,
+      "case_hmac_set": null,
+      "run_hmac": null
+    }
+  ],
+  "last_operation": {
+    "operation": "FIXED_CLOSURE_8_CASE_REMEASUREMENT",
+    "result": "RESULT_UNKNOWN_NOT_PERSISTED",
+    "running_process_observed_at_checkpoint": false
+  },
+  "session_change_families": [
+    "TYPED_CONCISE_OWNER_AUTHORITY",
+    "REFINED_SEMANTIC_UNIT_LINEAGE_BRIDGE",
+    "MULTIPLE_UNKNOWN_TARGET_SEPARATION",
+    "UNKNOWN_OWNER_INTRODUCTION_ORDER",
+    "ROLE_AWARE_CONSTRUCTION_INSTANCE_RENDERING",
+    "ORDERED_SLOT_OWNER_INCIDENCE_INVERSE",
+    "SAME_GROUP_BASE_FINITE_HEAD_SUBSET",
+    "FINITE_ATOM_SENTENCE_PARTITION",
+    "TYPED_RELATION_JUNCTION",
+    "DIMENSION_SCOPE_AND_LONG_JOIN_PARSING",
+    "CANDIDATE_ENVELOPE_INDEPENDENT_RECOMPUTATION",
+    "EVIDENCE_ENVELOPE_V3_CLOSURE_HMAC_STATE_INTEGRITY"
+  ],
+  "focused_results_session_reported": {
+    "lineage_bridge_causal_green": "14/14",
+    "concise_owner_authority_causal_green": "4/4",
+    "bridge_and_trusted_focused_green": "18/18",
+    "role_aware_instance_green": "3/3",
+    "independent_expected_set_parser_green": "8/8",
+    "evidence_envelope_v3_green": "14/14",
+    "residual_subset_selected_all_checks_green": "12/12"
+  },
+  "product_state_after_r2": {
+    "body_full_read_100": "NOT_EXECUTED",
+    "product_acceptance": "NOT_PROVED",
+    "cycle001_observation_product_quality_reached": false,
+    "known_concern_families": [
+      "TYPE_LABEL_ENUMERATION",
+      "UNIFORM_NOMINALIZATION",
+      "MECHANICAL_MODIFIER_CONCATENATION",
+      "RECEPTION_RESUMMARY_OR_DUPLICATION",
+      "SINGLE_SENTENCE_SKELETON_CONCENTRATION",
+      "TYPED_OWNER_PHRASE_NATURALNESS",
+      "LOCAL_DIMENSION_AND_RECEPTION_LAYOUT"
+    ]
+  },
+  "unrecovered_material": [
+    "SESSION_LATE_PRODUCTION_SOURCE_BYTES",
+    "SESSION_LATE_TEST_BYTES",
+    "EVIDENCE_ENVELOPE_V3_RUNNER_BYTES",
+    "R1_PRIVATE_AND_BODY_FREE_PAIR_BYTES",
+    "R2_PRIVATE_AND_BODY_FREE_PAIR_BYTES",
+    "R1_R2_RUN_IDS",
+    "R1_R2_SOURCE_CLOSURE_HASHES",
+    "R1_R2_CASE_AND_RUN_HMACS",
+    "FINAL_8_CASE_REMEASUREMENT_RESULT"
+  ],
+  "restart_order": [
+    "READ_CURRENT_HANDOFF_CHECKPOINT_RULES_AND_CURRENT_STATE",
+    "FETCH_FRESH_REMOTE_BASELINES",
+    "ONE_TIME_EXACT_BYTE_RECOVERY_CHECK",
+    "REIMPLEMENT_COMMON_CHANGE_FAMILIES_FROM_6E8D42A_IF_NOT_RECOVERED",
+    "RUN_FOCUSED_CAUSAL_AND_EVIDENCE_TESTS",
+    "RUN_FRESH_EXACT100_WITH_NEW_ID_CLOSURE_AND_HMAC_PAIR",
+    "CONTINUE_MACHINE_LOOP_UNTIL_100_0_0",
+    "READ_BODY_FULL_100_ON_12_AXES",
+    "CONTINUE_PRODUCT_CORRECTION_UNTIL_BLOCKER_MAJOR_ZERO",
+    "PUBLISH_MATERIAL_DIFF_AND_BODY_FREE_EVIDENCE_WITH_REMOTE_POSTVERIFY"
+  ],
+  "forbidden": [
+    "RESTART_G4B_CHECKER_CONTROLLER_FD",
+    "RESTART_G0_G10_PROOF_OF_PROOF",
+    "INFER_UNKNOWN_RUN_IDENTITIES_OR_RESULTS",
+    "CONVERT_MACHINE_GREEN_TO_PRODUCT_PASS",
+    "CASE_SPECIFIC_OR_FIXED_RESPONSE_PRODUCTION_BRANCH",
+    "PUBLIC_BODY_FULL_RAW_INPUT_RAW_OUTPUT_OR_KEY",
+    "AUTOMATIC_CYCLE002_START"
+  ]
+}
