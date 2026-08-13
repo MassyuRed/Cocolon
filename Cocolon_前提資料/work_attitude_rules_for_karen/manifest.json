@@ -1,9 +1,9 @@
 {
   "schema_version": "cocolon.work_attitude_rules.current.v3",
-  "revision_date": "2026-08-12",
+  "revision_date": "2026-08-13",
   "normative_status": "CURRENT",
   "status": "CURRENT_EFFECTIVE",
-  "effective_when": "PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED",
+  "effective_when": "NECESSITY_PRODUCT_DIRECTNESS_AND_MINIMUM_SAFETY_BOUNDARY_REMOTE_POSTVERIFIED",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "model_gate": {
@@ -44,6 +44,9 @@
     "start_gate": "09_work_start_checklist.txt",
     "terminal_primary_outcome": "exact1 of PRODUCT_CREDIT / TECHNICAL_CREDIT / BLOCKER_NARROWED / ADMINISTRATIVE_ONLY",
     "detour_risk_stop": "CURRENT_RULES.md R10.2 exact6",
+    "necessity_and_minimum_safety": "CURRENT_RULES.md R1.1 / R1.2 / R10.5",
+    "completion_definition": "CURRENT_RULES.md R1.3 / R11 + current product canonical owner",
+    "violation_correction": "CURRENT_RULES.md R1.3 / R10.5 + 10_stop_judgment_and_unwritten_rules.txt observable-effect recovery",
     "bounded_mechanical_repair": "CURRENT_RULES.md R10.3 Mash-approved new authority exact1; repair exact1 + same-Gate fresh rerun exact1",
     "receipt": "body-free exact1 mandatory per authority terminal",
     "result": "conditional when Receipt cannot restore cause / judgment / restart condition",

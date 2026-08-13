@@ -1,9 +1,9 @@
 # Cocolon出力前Gate
 
-revision_date: 2026-08-12
+revision_date: 2026-08-13
 normative_status: CURRENT_OUTPUT_GATE
 status: CURRENT_EFFECTIVE
-effective_when: PHASE5_CHECKPOINT_B_ATOMIC_CURRENT_OWNER_CUTOVER_REMOTE_POSTVERIFIED
+effective_when: NECESSITY_PRODUCT_DIRECTNESS_AND_MINIMUM_SAFETY_BOUNDARY_REMOTE_POSTVERIFIED
 general_rule_owner: CURRENT_RULES.md
 
 出力直前に、今回の応答について次を確認します。
@@ -56,6 +56,15 @@ general_rule_owner: CURRENT_RULES.md
 - [ ] fixture green、pytest green、表示成功だけを商品完成と呼んでいない。
 - [ ] machine GREEN、Product Read、runtime readinessを別claim / 別creditとして報告した。
 
+## 5A. 必要性・安全・比例性の事後照合
+
+- [ ] 実行した作業はR1.1のexact3から一つへ分類され、current未完了条件を実際に減らした。
+- [ ] `evidence_before / evidence_after`、actual result、変化したGate / 商品状態を示せる。
+- [ ] directな商品・受入作業より大きい補助機構、proof-of-proof、未承認の永続systemを増やしていない。
+- [ ] actual所要、追加費用、Mash様の確認・操作負担を隠さず、意図や「安全」で結果を正当化していない。
+- [ ] 安全作業なら具体的被害と最小対策を示し、被害防止creditを商品品質creditへ変換していない。
+- [ ] 成功しても商品状態もnext Gateも変わらなかった作業を「必要だった」と事後再分類していない。
+
 ## 6. artifact / GitHub / continuity
 
 - [ ] material artifactをlocal-onlyのまま完成扱いしていない。
@@ -76,43 +85,28 @@ general_rule_owner: CURRENT_RULES.md
 - [ ] authority terminalならprimary outcomeを`PRODUCT_CREDIT` / `TECHNICAL_CREDIT` / `BLOCKER_NARROWED` / `ADMINISTRATIVE_ONLY`からexact1で報告した。
 - [ ] `DETOUR_RISK_STOP` exact6を確認し、該当時に第三の通常authorityや追加helper chainを提案していない。
 - [ ] `BOUNDED_MECHANICAL_REPAIR`を使った場合、prior failureを閉じ、Mash様が明示承認したnew authority exact1でrepair exact1 + same-Gate fresh rerun exact1の上限とsecond failure STOPを守った。
-- [ ] current G4-Bでは`08_cycle001_current_state.md`のmethod ownerと照合し、retired authority-local / session-local helper route、helper修正 / V3、追加scanner / carrier、third normal helper authorityをcurrent nextに戻していない。
-- [ ] `GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1`の技術実行は別のMash明示authorityに分離し、method reflectionをGate B closed、runtime READY、readiness / technical / product creditへ変換していない。
+- [ ] prior G4-B `DETOUR_RISK_STOP`後のchecker / controller / FD routeをcurrent nextへ戻していない。
+- [ ] Cycle001 `NOT_ACCEPTED`のnext workを、G9で観測したbase-pipeline rejection / product-surface residueの直接修正と再Product Readへ接続している。
 - [ ] 長い謝罪、宣誓、対策羅列で成果物を代替していない。
 
 一つでも必要項目が不成立なら、該当する完了・反映・判断を報告しません。
 
-CURRENT G4-B COMPLETION PRECEDENCE — V7
+CURRENT NECESSITY / CYCLE001 OUTPUT PRECEDENCE — 2026-08-13
 
-- [ ] current G4-B completion uses controller-family V1 platform-opened exec-time inherited read-only FD mapping then tracked checker.
-- [ ] source/test/actual-DAC technical credit is not reported as Runtime READY, readiness credit, Gate-B technical/product credit, Product Read or Cycle001 acceptance.
-- [ ] later-live authority remains separate, inactive and Mash Level-3 gated.
+- [ ] prior G4-B is `DETOUR_RISK_STOP`; further checker / controller / FD development remains stopped.
+- [ ] G4-B through G10 completion is not used to claim Cycle001 acceptance or Cocolon completion.
+- [ ] G8 exact100 and G9 all100 are reported as product evidence: selected 45 / no-valid 2 / fail-close 53 and PASS 0 / MINOR 2 / MAJOR 40 / BLOCKER 58.
+- [ ] G10 is reported as `TTTFFFTFFTTTFF`, 7/14, `CYCLE001_NOT_ACCEPTED`.
+- [ ] the next route is shared structural correction and re-Product Read, not another safety mechanism.
 
 ```text
-CURRENT_PRECEDENCE_EFFECTIVE_DATE = 2026-08-12
+CURRENT_PRECEDENCE_EFFECTIVE_DATE = 2026-08-13
 CURRENT_NAVIGATION_OWNER = Cocolon_前提資料/08_cycle001_current_state.md
-CURRENT_SELECTED_METHOD = GATE_B_RUNTIME_PREPARATION_CONTROLLER_FAMILY_V1_USING_PLATFORM_OPENED_EXEC_TIME_INHERITED_READ_ONLY_FD_MAPPING_V1_THEN_GITHUB_TRACKED_RUNTIME_ADMISSION_CHECKER_V1
-FUNCTIONAL_PREPARATION_STATE = CONTROLLER_FAMILY_V1_FUNCTIONAL_EXACT7_WITH_PLATFORM_OPENED_EXEC_TIME_INHERITED_READ_ONLY_FD_MAPPING_V1_IMPLEMENTED_VERIFIED_REMOTE_POSTVERIFIED
-LIVE_RUNTIME_EXECUTION_STATE = UNEXECUTED
-CURRENT_BLOCKER = PLATFORM_EXEC_TIME_FD_MAPPING_SURFACE_AND_ALL_OTHER_ONE_SHOT_LIVE_PRECONDITIONS_NOT_FRESHLY_ESTABLISHED
-CURRENT_AUTHORITY = NONE
-LATER_LIVE_AUTHORITY = NOT_AUTHORED_NOT_APPROVED
-NEXT_EXACT1 = NLS_V3_STEP11_CYCLE001_G4_GATE_B_PLATFORM_EXEC_TIME_FD_MAPPING_SURFACE_AND_ONE_SHOT_LIVE_NETWORK_RUNTIME_READINESS_ADMISSION_CANDIDATE
-NEXT_CANDIDATE_CLASS = TECHNICAL_AUTHORITY_CANDIDATE
-NEXT_CANDIDATE_SCOPE = LEVEL_3_MASH_DECISION_AND_APPROVAL_REQUIRED_SCOPE
-NEXT_CANDIDATE_STATE = DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED
-RUNTIME_READY = FALSE
-READINESS_OBSERVATION_ID = NOT_DERIVED
-GATE_B = OPEN
-READINESS_GATE_B_TECHNICAL_PRODUCT_CREDIT = 0 / 0 / 0
-GATE_C = NOT_AUTHORIZED
+PRIOR_G4_B = DETOUR_RISK_STOP
+SAFETY_DEVICE_FURTHER_DEVELOPMENT = STOPPED
+G4_B_TO_G10 = COMPLETED
+CYCLE001 = NOT_ACCEPTED
+CURRENT_ROUTE = RETURN_TO_SHARED_STRUCTURAL_CORRECTION
+CURRENT_AUTHORITY = STOP
 AUTOMATIC_PROGRESSION = FALSE
 ```
-
-V7の`TECHNICAL_CREDIT`はconsumer-side source / contract / portable test / actual-DACの再利用可能な補正証拠だけを指します。Gate-B admissionのtechnical creditではなく、上記のGate creditは`0 / 0 / 0`のままです。
-
-Evidence:
-- mashos-api final head / tree: `99afecb1a30880bf42b9fde4932e5bba7e01e7d4` / `6f92113264ffef515bd2feba3c7e8ba82d0c0188`
-- qualified-runner Actions run / job: `31608210201` / `94152538969`
-- V7 Decision: `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4B_QualifiedRunnerV6PostimageVerificationAndPublicationV7_Decision_20260812.md`
-- V7 Receipt: `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4B_QualifiedRunnerV6PostimageVerificationAndPublicationV7_BodyFree_Receipt_20260812.json`
