@@ -1,0 +1,2004 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.g9.product_read.body_free.v1",
+  "run_id": "cycle001-g8-20260813-01",
+  "source_g8_private_sha256": "4556258eaf57ac2d3f5bdc8b494d59bf034a6fd740c3ef180d64e57257c5f628",
+  "source_g8_body_free_sha256": "3877e5e2be37454c30c409a2855fa8d7ae5537704191e4ec1c140b3b293afab5",
+  "review_axis_authority": "Detailed Design section 18.4 exact12 axes",
+  "review_axis_count": 12,
+  "review_complete": true,
+  "case_count": 100,
+  "output_change_review_complete": true,
+  "aggregate": {
+    "severity_counts": {
+      "PASS": 0,
+      "MINOR": 2,
+      "MAJOR": 40,
+      "BLOCKER": 58
+    },
+    "disposition_counts": {
+      "selected": 45,
+      "no_valid_candidate": 2,
+      "fail_close": 53
+    },
+    "output_present_count": 52,
+    "output_missing_count": 48,
+    "unresolved_blocker_count": 58,
+    "unresolved_major_count": 40,
+    "shared_cause_counts": {
+      "BASE_PIPELINE_REJECTION": 42,
+      "CURRENT_RC_DOWNSTREAM_REJECTION": 4,
+      "CURRENT_RC_PRODUCT_SURFACE_RESIDUE": 52,
+      "NO_OUTPUT_NO_VALID_CANDIDATE": 2
+    },
+    "failed_axis_counts": {
+      "1": 76,
+      "2": 33,
+      "3": 0,
+      "4": 16,
+      "5": 0,
+      "6": 90,
+      "7": 13,
+      "8": 52,
+      "9": 3,
+      "10": 32,
+      "11": 1,
+      "12": 100
+    }
+  },
+  "shard_sources": [
+    {
+      "ordinal_start": 1,
+      "ordinal_end": 34,
+      "case_count": 34
+    },
+    {
+      "ordinal_start": 35,
+      "ordinal_end": 67,
+      "case_count": 33
+    },
+    {
+      "ordinal_start": 68,
+      "ordinal_end": 100,
+      "case_count": 33
+    }
+  ],
+  "rows": [
+    {
+      "case_id": "nls3s_b001_0001",
+      "disposition": "selected",
+      "failed_axes": [
+        6,
+        7,
+        8,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "SECTIONS_SEMANTICALLY_DUPLICATED",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0002",
+      "disposition": "selected",
+      "failed_axes": [
+        6,
+        7,
+        8,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "SECTIONS_SEMANTICALLY_DUPLICATED",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0003",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        2,
+        6,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0004",
+      "disposition": "selected",
+      "failed_axes": [
+        6,
+        7,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "SECTIONS_SEMANTICALLY_DUPLICATED",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0005",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_RC0031_OWNER_ROLE_TYPED_RECOMPOSITION_INVALID"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "CURRENT_RC_DOWNSTREAM_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0006",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        4,
+        6,
+        7,
+        8,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "REQUIRED_MEANING_MISSING",
+        "SECTIONS_SEMANTICALLY_DUPLICATED",
+        "SURFACE_UNNATURAL_OR_REPETITIVE",
+        "UNKNOWN_BOUNDARY_FILLED"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0007",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        2,
+        6,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0008",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_INPUT_SPECIFIC_ANCHOR_UNRESOLVED"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0009",
+      "disposition": "selected",
+      "failed_axes": [
+        2,
+        6,
+        8,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0010",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        2,
+        4,
+        6,
+        8,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SURFACE_UNNATURAL_OR_REPETITIVE",
+        "UNKNOWN_BOUNDARY_FILLED"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0011",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        2,
+        4,
+        6,
+        8,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SURFACE_UNNATURAL_OR_REPETITIVE",
+        "UNKNOWN_BOUNDARY_FILLED"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0012",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        2,
+        6,
+        8,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0013",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        2,
+        4,
+        6,
+        7,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SECTIONS_SEMANTICALLY_DUPLICATED",
+        "SURFACE_UNNATURAL_OR_REPETITIVE",
+        "UNKNOWN_BOUNDARY_FILLED"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0014",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SURFACE_UNNATURAL_OR_REPETITIVE",
+        "UNKNOWN_BOUNDARY_FILLED"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0015",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0016",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        2,
+        6,
+        8,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0017",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        2,
+        4,
+        6,
+        8,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SURFACE_UNNATURAL_OR_REPETITIVE",
+        "UNKNOWN_BOUNDARY_FILLED"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0018",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0019",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SURFACE_UNNATURAL_OR_REPETITIVE",
+        "UNKNOWN_BOUNDARY_FILLED"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0020",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        2,
+        6,
+        7,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "CURRENT_RC_G8_INVERSE_REJECTED",
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SECTIONS_SEMANTICALLY_DUPLICATED",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0021",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0022",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_INPUT_SPECIFIC_ANCHOR_UNRESOLVED"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0023",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_RC0031_CANDIDATE_INPUT_INVALID"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "CURRENT_RC_DOWNSTREAM_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0024",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_INPUT_SPECIFIC_ANCHOR_UNRESOLVED"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0025",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SURFACE_UNNATURAL_OR_REPETITIVE",
+        "UNKNOWN_BOUNDARY_FILLED"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0026",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        2,
+        4,
+        6,
+        7,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SECTIONS_SEMANTICALLY_DUPLICATED",
+        "SURFACE_UNNATURAL_OR_REPETITIVE",
+        "UNKNOWN_BOUNDARY_FILLED"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0027",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        2,
+        4,
+        6,
+        7,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "CURRENT_RC_G8_INVERSE_REJECTED",
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SECTIONS_SEMANTICALLY_DUPLICATED",
+        "SURFACE_UNNATURAL_OR_REPETITIVE",
+        "UNKNOWN_BOUNDARY_FILLED"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0028",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        2,
+        4,
+        6,
+        8,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SURFACE_UNNATURAL_OR_REPETITIVE",
+        "UNKNOWN_BOUNDARY_FILLED"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0029",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SURFACE_UNNATURAL_OR_REPETITIVE",
+        "UNKNOWN_BOUNDARY_FILLED"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0030",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SURFACE_UNNATURAL_OR_REPETITIVE",
+        "UNKNOWN_BOUNDARY_FILLED"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0031",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0032",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0033",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        2,
+        4,
+        6,
+        8,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SURFACE_UNNATURAL_OR_REPETITIVE",
+        "UNKNOWN_BOUNDARY_FILLED"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0034",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_INPUT_SPECIFIC_ANCHOR_UNRESOLVED"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0035",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        2,
+        6,
+        8,
+        9,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SURFACE_DISTRIBUTION_OVERCONCENTRATED",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0036",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        2,
+        6,
+        7,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "CURRENT_RC_G8_INVERSE_REJECTED",
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SECTIONS_SEMANTICALLY_DUPLICATED",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0037",
+      "disposition": "selected",
+      "failed_axes": [
+        6,
+        8,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0038",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_INPUT_SPECIFIC_ANCHOR_UNRESOLVED"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0039",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0040",
+      "disposition": "selected",
+      "failed_axes": [
+        6,
+        7,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "SECTIONS_SEMANTICALLY_DUPLICATED",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0041",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0042",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_GROUNDED_PHRASE_AMBIGUOUS"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0043",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        2,
+        6,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0044",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        2,
+        6,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0045",
+      "disposition": "selected",
+      "failed_axes": [
+        6,
+        8,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0046",
+      "disposition": "selected",
+      "failed_axes": [
+        2,
+        6,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0047",
+      "disposition": "selected",
+      "failed_axes": [
+        2,
+        6,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0048",
+      "disposition": "selected",
+      "failed_axes": [
+        6,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0049",
+      "disposition": "selected",
+      "failed_axes": [
+        2,
+        6,
+        7,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "SECTIONS_SEMANTICALLY_DUPLICATED",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0050",
+      "disposition": "fail_close",
+      "failed_axes": [
+        6,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "CURRENT_RC_G8_INVERSE_REJECTED",
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0051",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_INPUT_SPECIFIC_ANCHOR_UNRESOLVED"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0052",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_INPUT_SPECIFIC_ANCHOR_UNRESOLVED"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0053",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        2,
+        6,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0054",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_INPUT_SPECIFIC_ANCHOR_UNRESOLVED"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0055",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        2,
+        6,
+        7,
+        8,
+        9,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SECTIONS_SEMANTICALLY_DUPLICATED",
+        "SURFACE_DISTRIBUTION_OVERCONCENTRATED",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0056",
+      "disposition": "selected",
+      "failed_axes": [
+        6,
+        7,
+        8,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "SECTIONS_SEMANTICALLY_DUPLICATED",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0057",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0058",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0059",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0060",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0061",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0062",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0063",
+      "disposition": "selected",
+      "failed_axes": [
+        1,
+        2,
+        6,
+        8,
+        9,
+        10,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "REQUIRED_MEANING_MISSING",
+        "SURFACE_DISTRIBUTION_OVERCONCENTRATED",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0064",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_RELATION_MULTI_EDGE_LOCAL_ANAPHORA_AMBIGUOUS"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0065",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_GROUNDED_PHRASE_AMBIGUOUS"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0066",
+      "disposition": "fail_close",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "output_present": false,
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_GROUNDED_PHRASE_AMBIGUOUS"
+      ],
+      "severity": "BLOCKER",
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0067",
+      "disposition": "selected",
+      "failed_axes": [
+        2,
+        6,
+        8,
+        12
+      ],
+      "output_present": true,
+      "reason_codes": [
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "severity": "MAJOR",
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0068",
+      "output_present": false,
+      "disposition": "fail_close",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_RELATION_MULTI_EDGE_LOCAL_ANAPHORA_AMBIGUOUS"
+      ],
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0069",
+      "output_present": false,
+      "disposition": "no_valid_candidate",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "reason_codes": [
+        "NO_RESPONSE",
+        "NO_VALID_CANDIDATE"
+      ],
+      "shared_cause": "NO_OUTPUT_NO_VALID_CANDIDATE"
+    },
+    {
+      "case_id": "nls3s_b001_0070",
+      "output_present": false,
+      "disposition": "fail_close",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_INPUT_SPECIFIC_ANCHOR_UNRESOLVED"
+      ],
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0071",
+      "output_present": true,
+      "disposition": "selected",
+      "severity": "MAJOR",
+      "failed_axes": [
+        8,
+        10,
+        12
+      ],
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0072",
+      "output_present": false,
+      "disposition": "fail_close",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0073",
+      "output_present": false,
+      "disposition": "fail_close",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0074",
+      "output_present": false,
+      "disposition": "fail_close",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0075",
+      "output_present": false,
+      "disposition": "fail_close",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_RC0031_CANDIDATE_INPUT_INVALID"
+      ],
+      "shared_cause": "CURRENT_RC_DOWNSTREAM_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0076",
+      "output_present": false,
+      "disposition": "fail_close",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_RELATION_MULTI_EDGE_LOCAL_ANAPHORA_AMBIGUOUS"
+      ],
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0077",
+      "output_present": false,
+      "disposition": "fail_close",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0078",
+      "output_present": false,
+      "disposition": "fail_close",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_RC0031_CANDIDATE_INPUT_INVALID"
+      ],
+      "shared_cause": "CURRENT_RC_DOWNSTREAM_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0079",
+      "output_present": true,
+      "disposition": "fail_close",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        8,
+        10,
+        12
+      ],
+      "reason_codes": [
+        "CURRENT_RC_G8_INVERSE_REJECTED",
+        "DEPTH_MISMATCH",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0080",
+      "output_present": false,
+      "disposition": "fail_close",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_INPUT_SPECIFIC_ANCHOR_UNRESOLVED"
+      ],
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0081",
+      "output_present": false,
+      "disposition": "fail_close",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0082",
+      "output_present": false,
+      "disposition": "no_valid_candidate",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "reason_codes": [
+        "NO_RESPONSE",
+        "NO_VALID_CANDIDATE"
+      ],
+      "shared_cause": "NO_OUTPUT_NO_VALID_CANDIDATE"
+    },
+    {
+      "case_id": "nls3s_b001_0083",
+      "output_present": false,
+      "disposition": "fail_close",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0084",
+      "output_present": false,
+      "disposition": "fail_close",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0085",
+      "output_present": true,
+      "disposition": "selected",
+      "severity": "MAJOR",
+      "failed_axes": [
+        8,
+        12
+      ],
+      "reason_codes": [
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0086",
+      "output_present": false,
+      "disposition": "fail_close",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0087",
+      "output_present": true,
+      "disposition": "fail_close",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        8,
+        12
+      ],
+      "reason_codes": [
+        "CURRENT_RC_G8_INVERSE_REJECTED",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "REQUIRED_MEANING_MISSING",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0088",
+      "output_present": false,
+      "disposition": "fail_close",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0089",
+      "output_present": true,
+      "disposition": "selected",
+      "severity": "MAJOR",
+      "failed_axes": [
+        8,
+        12
+      ],
+      "reason_codes": [
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0090",
+      "output_present": true,
+      "disposition": "selected",
+      "severity": "MINOR",
+      "failed_axes": [
+        8,
+        12
+      ],
+      "reason_codes": [
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0091",
+      "output_present": false,
+      "disposition": "fail_close",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0092",
+      "output_present": false,
+      "disposition": "fail_close",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0093",
+      "output_present": false,
+      "disposition": "fail_close",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0094",
+      "output_present": true,
+      "disposition": "selected",
+      "severity": "MAJOR",
+      "failed_axes": [
+        8,
+        10,
+        12
+      ],
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0095",
+      "output_present": true,
+      "disposition": "selected",
+      "severity": "MINOR",
+      "failed_axes": [
+        8,
+        12
+      ],
+      "reason_codes": [
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0096",
+      "output_present": true,
+      "disposition": "selected",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        2,
+        4,
+        8,
+        11,
+        12
+      ],
+      "reason_codes": [
+        "FALSE_UNDERSTANDING_COMPLETION",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "SURFACE_UNNATURAL_OR_REPETITIVE",
+        "UNKNOWN_BOUNDARY_FILLED"
+      ],
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0097",
+      "output_present": false,
+      "disposition": "fail_close",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        6,
+        12
+      ],
+      "reason_codes": [
+        "EXECUTION_EXCEPTION",
+        "NO_RESPONSE",
+        "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED"
+      ],
+      "shared_cause": "BASE_PIPELINE_REJECTION"
+    },
+    {
+      "case_id": "nls3s_b001_0098",
+      "output_present": true,
+      "disposition": "selected",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        2,
+        8,
+        10,
+        12
+      ],
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0099",
+      "output_present": true,
+      "disposition": "selected",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        2,
+        4,
+        6,
+        8,
+        10,
+        12
+      ],
+      "reason_codes": [
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "RELATION_DIRECTION_REVERSED",
+        "SURFACE_UNNATURAL_OR_REPETITIVE",
+        "UNKNOWN_BOUNDARY_FILLED"
+      ],
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    },
+    {
+      "case_id": "nls3s_b001_0100",
+      "output_present": true,
+      "disposition": "fail_close",
+      "severity": "BLOCKER",
+      "failed_axes": [
+        1,
+        6,
+        8,
+        10,
+        12
+      ],
+      "reason_codes": [
+        "CURRENT_RC_G8_INVERSE_REJECTED",
+        "DEPTH_MISMATCH",
+        "EMLIS_RECEPTION_UNBOUND",
+        "IMMEDIATE_OBSERVATION_NOT_READ",
+        "REQUIRED_MEANING_MISSING",
+        "SURFACE_UNNATURAL_OR_REPETITIVE"
+      ],
+      "shared_cause": "CURRENT_RC_PRODUCT_SURFACE_RESIDUE"
+    }
+  ]
+}
