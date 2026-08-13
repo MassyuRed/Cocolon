@@ -145,7 +145,9 @@ runner証跡は次を満たす方向へ更新した。
 6. execution前、execution後、write直前でsource closure一致を確認する。
 7. private row、body-free row、run全体を非循環HMACで結び、canonical rereadでround-tripを
    検証する。
-8. fresh run ID、既存0600 key、fresh0700 private directory、no-overwriteを要求する。
+8. fresh run ID、approved private storageから回収・検証できたvalid 0600 key、
+   fresh0700 private directory、no-overwriteを要求する。keyを回収できない場合は、
+   current contractに従ってprivate boundary内でnew keyをprovisionする。
 9. public reasonをallowlist化し、本文・例外本文・candidate固有本文をstdout/public artifactへ
    出さない。
 
@@ -295,9 +297,10 @@ ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py and/or foc
    過去sessionと同一bytesであるとは主張しない。
 5. focused testsで、lineage、unknown、concise owner、construction instance、typed junction、
    finite partition、base-head subset、candidate envelope、evidence envelopeを確認する。
-6. new run ID、fresh source closure、existing valid 0600 key、fresh0700 output directoryで
-   exact100を実行し、private/body-free pair、case/run HMAC、pre/post/write closureを
-   canonical rereadする。
+6. new run ID、fresh source closure、approved private storageから回収・検証できたvalid
+   0600 key、fresh0700 output directoryでexact100を実行する。keyを回収できない場合は、
+   current contractに従ってprivate boundary内でnew keyをprovisionする。その上で
+   private/body-free pair、case/run HMAC、pre/post/write closureをcanonical rereadする。
 7. selected/output 100、no-valid/fail-close/exception 0までmachine correction loopを継続する。
 8. そのclosureの本文100件を12軸で全読し、shared Product Read原因を共通renderer/
    Reception ownerへ戻して修正する。
@@ -324,4 +327,3 @@ ai/tests/test_emlis_nls_v3_s11_rc0031_forward_inverse_independence.py and/or foc
 このhandoffとJSONは、失われたsource bytesの代用品ではない。次セッションが誤った
 baseline、誤ったPASS、stale workspace、private publicationから再開することを防ぎ、
 2026-08-14時点の最短のproduct-direct再開地点を固定するための資料である。
-
