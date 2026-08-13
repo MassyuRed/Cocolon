@@ -1,10 +1,10 @@
 ---
 doc_id: cocolon_cycle001_current_state
 title: "Cycle001 現在地 — 単一ナビゲーション正本"
-revision_date: "2026-08-13"
-status: "G10_RECOMPUTED_CYCLE001_NOT_ACCEPTED"
+revision_date: "2026-08-14"
+status: "CURRENT100_RESTART_CHECKPOINT_PUBLISHED"
 normative_status: "CURRENT_CYCLE001_NAVIGATION_OWNER"
-effective_when: "G4B_TO_G10_EXACT100_BODY_FREE_RECEIPT_REMOTE_POSTVERIFIED"
+effective_when: "CURRENT100_WORK_SESSION_HANDOFF_REMOTE_POSTVERIFIED"
 decision_owner: "Mash"
 operational_owner: "Karen"
 technical_authority: false
@@ -133,3 +133,35 @@ PRIVATE_DURABLE_ARTIFACT_COUNT = 4
 CURRENT_AUTHORITY_STOP
 AUTOMATIC_PROGRESSION_FALSE
 ```
+
+## 8. Current precedence — 2026-08-14 work-session preservation
+
+この節は、§0のcurrent routeとauthorityについて、次セッションの再開navigationだけを
+supersedeする。§1–§7の初回durable evidenceと不受理判定は維持する。
+
+同一Workセッションでは初回45/2/53からmachine収束を継続し、r1とr2の集計が報告された。
+ただし、後半production/test/runnerのexact bytes、r1/r2 result pair、run identityは
+workspace、GitHub、確認可能なdurable storageから回収できなかった。したがって、
+後半修正をGitHub反映済みとは扱わず、r1/r2を再現可能なacceptance evidenceへ昇格しない。
+
+```text
+LATEST_DURABLE_MASHOS_API_BASELINE = 6e8d42a6738f45f71fc6f00246fe54475c4c6b9c
+SESSION_REPORTED_R1_SELECTED / NO_VALID / FAIL_CLOSE / OUTPUT = 88 / 2 / 10 / 88
+SESSION_REPORTED_R2_SELECTED / NO_VALID / FAIL_CLOSE / OUTPUT = 92 / 0 / 8 / 92
+FINAL_8_CASE_REMEASUREMENT = RESULT_UNKNOWN_NOT_PERSISTED
+UNRECOVERED_MATERIAL_DIFF = TRUE
+R2_PRODUCT_READ_100 = NOT_EXECUTED
+CYCLE001 = NOT_ACCEPTED
+CURRENT_ROUTE = ONE_TIME_RECOVERY_CHECK_THEN_REIMPLEMENT_FROM_6E8D42A
+AUTOMATIC_PROGRESSION = FALSE
+```
+
+次セッションは、次のbody-free正本から開始する。
+
+- Work-session handoff:
+  `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Current100_WorkSessionEmergencyHandoff_20260814.md`
+- Machine-readable checkpoint:
+  `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Current100_WorkSessionBodyFreeCheckpoint_20260814.json`
+
+このcheckpoint自体はCycle001進捗または商品品質creditではない。private本文、raw
+input/output、識別可能なparaphrase、commitment keyは引き続きpublic GitHubへ出さない。
