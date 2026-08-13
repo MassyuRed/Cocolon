@@ -1,11 +1,11 @@
 ---
 document_id: Cocolon_EmlisAI_longterm_roadmap_CURRENT
 canonical_path: Cocolon_前提資料/Cocolon_EmlisAI_longterm_roadmap_CURRENT.md
-revision_date: 2026-08-11
-observation_date: 2026-08-11 JST
+revision_date: 2026-08-13
+observation_date: 2026-08-13 JST
 status: CURRENT_EFFECTIVE
 document_role: EmlisAI_LONG_TERM_PRODUCT_CURRENT_ALIGNMENT
-effective_when: GATE_B_CANONICAL_PREIMAGE_AUTHORITY_PHASE1_COMMAND_STOP_REMOTE_POSTVERIFIED
+effective_when: G4B_TO_G10_EXACT100_BODY_FREE_RECEIPT_REMOTE_POSTVERIFIED
 decision_owner: Mash
 operation_owner: Karen
 body_policy: BODY_FREE
@@ -17,7 +17,7 @@ automatic_progression: false
 
 ## 0. この文書の結論
 
-2026-08-11 JST時点のcurrent product workstreamは、**P3: Product Read Feel v1** です。
+2026-08-13 JST時点のcurrent product workstreamは、**P3: Product Read Feel v1** です。
 
 NLS v3 Step 11 Cycle001は、P3の「読まれた感・自然さ・non-template」を成立させるためのshared structural correction / cumulative product-quality routeです。**Cycle001の累積loopをP7と同一視しません。P7はcurrent Phaseではなく、将来Phaseかつcurrent completion `UNVERIFIED`です。**
 
@@ -29,11 +29,14 @@ NLS_V3_STEP11_CYCLE001 = NOT_ACCEPTED
 G5_TECHNICAL_GATE = GREEN
 G6_PRODUCT_READ_GATE = REJECTED
 CURRENT_CORRECTION_LANE = SHARED_STRUCTURAL_CORRECTION
-CURRENT_GATE_B = NOT_CLOSED
-LAST_GATE_B_METHOD = GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1 / CLOSED_CONSUMED_POST_PREFLIGHT_TYPED_FAILURE
-CURRENT_SELECTED_METHOD = NONE_PENDING_MASH_METHOD_DECISION
-CURRENT_FIRST_UNFINISHED_GATE = G4_B_RUNTIME_READINESS_ADMISSION
+CURRENT_GATE_B = CLOSED_MINIMAL_PREFLIGHT_PASS
+LAST_GATE_B_METHOD = PRIOR_DETOUR_RISK_STOP_THEN_MINIMUM_PREFLIGHT
+CURRENT_SELECTED_METHOD = RETURN_TO_SHARED_STRUCTURAL_CORRECTION
+CURRENT_FIRST_UNFINISHED_GATE = G4_C_NEXT_CORRECTION_LOOP_UNSELECTED
 RUNTIME_READY / READINESS_CREDIT = FALSE / 0
+G8_EXACT100 = COMPLETE
+G9_ALL100_READ = COMPLETE
+G10_ACCEPTANCE = 7 / 14
 P7_LONG_RUN_PHASE = FUTURE_UNVERIFIED
 PRODUCT_COMPLETE = FALSE
 RELEASE_READY = FALSE
@@ -474,3 +477,27 @@ Evidence:
 - qualified-runner Actions run / job: `31608210201` / `94152538969`
 - V7 Decision: `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4B_QualifiedRunnerV6PostimageVerificationAndPublicationV7_Decision_20260812.md`
 - V7 Receipt: `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4B_QualifiedRunnerV6PostimageVerificationAndPublicationV7_BodyFree_Receipt_20260812.json`
+
+## Current precedence update — 2026-08-13 exact100 and acceptance recomputation
+
+P3 Product Read Feel v1 remains the current workstream. The exact100 run and
+all100 Product QA are complete, but Cycle001 is not accepted.
+
+```text
+G4_B_MINIMUM_PREFLIGHT = PASS
+G5_TECHNICAL_GATE = GREEN
+G6_PRODUCT_READ_GATE = REJECTED
+G8_EXACT100 = COMPLETE
+G9_ALL100_READ = COMPLETE
+G10_ACCEPTANCE = 7 / 14
+G9_PASS_MINOR_MAJOR_BLOCKER = 0 / 2 / 40 / 58
+CORPUS_INVALID = FALSE
+CURRENT_CORRECTION_LANE = SHARED_STRUCTURAL_CORRECTION
+NLS_V3_STEP11_CYCLE001 = NOT_ACCEPTED
+P3_PRODUCT_COMPLETE = FALSE
+RELEASE_READY = FALSE
+AUTOMATIC_PROGRESSION = FALSE
+```
+
+This result is a product rejection on a valid frozen corpus, not a corpus
+invalidation and not an NLS v3 method STOP.

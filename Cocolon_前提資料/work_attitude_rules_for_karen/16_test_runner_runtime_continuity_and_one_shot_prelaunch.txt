@@ -349,3 +349,23 @@ Evidence:
 - qualified-runner Actions run / job: `31608210201` / `94152538969`
 - V7 Decision: `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4B_QualifiedRunnerV6PostimageVerificationAndPublicationV7_Decision_20260812.md`
 - V7 Receipt: `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4B_QualifiedRunnerV6PostimageVerificationAndPublicationV7_BodyFree_Receipt_20260812.json`
+
+CURRENT G4-B MINIMUM PREFLIGHT PRECEDENCE — 2026-08-13
+
+Mash様のcurrent explicit instructionにより、V7 preparation ingressのcurrent operationを
+置換します。checker / controller / FD codeは保持し、追加開発を停止します。prior G4-Bは
+DETOUR_RISK_STOPです。
+
+確認対象はcommit、Python/dependency、runner起動、private body保護、結果保存だけです。
+一回限りpreflight PASS後は新しい安全装置を追加せずG4-Cへ進みます。このoperationの
+actualはG4-C/G5/G6/G8/G9/G10まで完了し、Cycle001はNOT_ACCEPTEDです。
+
+```text
+MINIMUM_PREFLIGHT_PASS
+CHECKER_CONTROLLER_FD_CHANGED_0
+PRIVATE_BODY_PUBLICATION_0
+G8_EXACT100_SAVED
+G9_ALL100_READ
+G10_RECOMPUTED
+CURRENT_AUTHORITY_STOP
+```

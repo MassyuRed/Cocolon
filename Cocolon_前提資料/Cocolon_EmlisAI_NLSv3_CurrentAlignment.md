@@ -8,7 +8,7 @@ document_role:
 NLS_V3_CURRENT_ALIGNMENT_OWNER
 
 revision_date:
-2026-08-11
+2026-08-13
 
 decision_owner:
 Mash
@@ -23,13 +23,13 @@ status:
 CURRENT_EFFECTIVE
 
 effective_when:
-GATE_B_CANONICAL_PREIMAGE_AUTHORITY_PHASE1_COMMAND_STOP_REMOTE_POSTVERIFIED
+G4B_TO_G10_EXACT100_BODY_FREE_RECEIPT_REMOTE_POSTVERIFIED
 
 source_cocolon_commit:
 14958298fde2b394aba13b706710fb5fcf944f4e
 
 source_mashos_api_commit:
-45bf98f9034261d3adb3e808d6d759f2334e2d25
+6e8d42a6738f45f71fc6f00246fe54475c4c6b9c
 
 body_free:
 true
@@ -40,7 +40,7 @@ false
 
 ## 0. 結論
 
-原Detailed Designは、変更・追記・遡及補正を行わないimmutable baselineです。本資料は、その原本にある規範、作成時点のstatus、実装順序を、2026-08-11のcurrent actualへ対応付けるderivative ownerです。原本を置き換えず、原本の要求を弱めません。
+原Detailed Designは、変更・追記・遡及補正を行わないimmutable baselineです。本資料は、その原本にある規範、作成時点のstatus、実装順序を、2026-08-13のcurrent actualへ対応付けるderivative ownerです。原本を置き換えず、原本の要求を弱めません。
 
 current結論は次のとおりです。
 
@@ -50,10 +50,10 @@ current結論は次のとおりです。
 | 原本headerの`implementation_not_started`、Step 0未開始、旧head・旧owner、§28の当時のnext | 原本作成時点の記録であり、current instructionではない | `HISTORICAL_STATUS_ONLY` / `SUPERSEDED_BY_APPROVED_DESIGN` |
 | Step 0〜3 | actual ownerと既存のcheckpoint-bounded test/fixture evidenceが存在 | `IMPLEMENTED_AND_VERIFIED` |
 | Step 4〜10 | actual ownerと既存evidenceは存在するが、Cycle001 product acceptanceとreleaseは未成立 | `IMPLEMENTED_BUT_NOT_ACCEPTED` |
-| Step 11 Cycle001 | G5 machine GREENを保持したままG6 Product Read REJECT。Cycle001は`NOT_ACCEPTED` | `ACTUAL_NONCONFORMANCE` |
+| Step 11 Cycle001 | G5 machine GREEN、G6 Product Read REJECT、G8 exact100、G9 all100 read、G10 exact14 7/14。Cycle001は`NOT_ACCEPTED` | `ACTUAL_NONCONFORMANCE` |
 | 1000件、saturation、Cycle002〜010、shadow、actual device、owner switch、question-system handoff | 完了evidenceを確認していない。条件は削減しない | `UNVERIFIED` |
-| current comparator / runtime | comparator V2下でowner / independent exact19、probe、role smoke、full-root reconciliationは成立したが、authority-frozen readiness observation canonical preimage欠落でadmission停止。Gate B未閉鎖、Runtime READY / readiness creditは`false / 0` | `ACTUAL_NONCONFORMANCE`。component evidenceはblocker narrowingのみ |
-| current Gate B method | V1 / V2 helper routeをretire後、`GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1`はpost-preflight typed failureでclosed consumed | `ACTUAL_NONCONFORMANCE`。current selected methodはNONE pending administrative decision |
+| current comparator / runtime | Mash様指定のcommit、Python/dependency、runner起動、private body保護、結果保存のminimum preflightはPASS。一般runtime readinessへの拡張claimはしない | `CURRENT_EXPLICIT_SCOPE_PASS` |
+| current Gate B method | prior checker/controller/FD routeを`DETOUR_RISK_STOP`とし追加開発停止。既存codeは保持し、minimum preflightでclosed | `CURRENT_EXPLICIT_ROUTE_SUPERSESSION` |
 | currentに残る商品設計・acceptance・Safety/privacy/public contract変更判断 | 0件 | `REQUIRES_MASH_DECISION = 0` |
 
 `IMPLEMENTED`、machine test GREEN、runtime probe成功、Product Read PASS、Cycle acceptance、releaseは別のclaimです。相互に変換しません。
@@ -632,3 +632,25 @@ Evidence:
 - qualified-runner Actions run / job: `31608210201` / `94152538969`
 - V7 Decision: `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4B_QualifiedRunnerV6PostimageVerificationAndPublicationV7_Decision_20260812.md`
 - V7 Receipt: `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4B_QualifiedRunnerV6PostimageVerificationAndPublicationV7_BodyFree_Receipt_20260812.json`
+
+## 17. Current product alignment — G10 recomputed 2026-08-13
+
+Mash様のcurrent explicit sequenceにより、prior G4-Bを `DETOUR_RISK_STOP` とし、
+minimum preflight PASS後にG4-C/G5/G6/G8/G9/G10を完了しました。既存checker /
+controller / FD codeは保持し、追加開発は停止しています。
+
+```text
+MASHOS_API_CURRENT_PRODUCT_COMMIT = 6e8d42a6738f45f71fc6f00246fe54475c4c6b9c
+G6_PRODUCT_READ = REJECTED
+G8_EXACT100_SELECTED_NO_VALID_FAIL_CLOSE = 45 / 2 / 53
+G9_PASS_MINOR_MAJOR_BLOCKER = 0 / 2 / 40 / 58
+G10_EXACT14 = TTTFFFTFFTTTFF
+CORPUS_INVALID = FALSE
+CYCLE001 = NOT_ACCEPTED
+PRODUCT_COMPLETE = FALSE
+NEXT = RETURN_TO_SHARED_STRUCTURAL_CORRECTION
+AUTOMATIC_PROGRESSION = FALSE
+```
+
+Machine GREENとselectedはProduct PASSではありません。NLS v3 method STOPはfalseで、
+未解決の共通構造原因へ通常correction loopで戻ります。

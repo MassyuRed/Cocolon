@@ -1,0 +1,218 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.step11.cycle001.g4b_to_g10.body_free_receipt.v1",
+  "created_at_jst": "2026-08-13",
+  "body_free": true,
+  "decision_owner": "Mash",
+  "operation_owner": "Karen",
+  "primary_outcome": "CYCLE001_NOT_ACCEPTED",
+  "secondary_outcomes": [
+    "G4B_DETOUR_RISK_STOP_SUPERSEDED_BY_MINIMAL_PREFLIGHT_PASS",
+    "G4C_CAUSAL_RED_FIXED",
+    "G5_PRODUCTION_GREEN",
+    "G6_PRODUCT_ACCEPTANCE_REJECTED",
+    "G8_EXACT100_RESULTS_SAVED",
+    "G9_EXACT100_ALL_READ",
+    "G10_ACCEPTANCE_RECOMPUTED_7_OF_14",
+    "RETURN_TO_SHARED_STRUCTURAL_CORRECTION",
+    "CURRENT_AUTHORITY_STOP",
+    "NLS_V3_METHOD_STOP_FALSE"
+  ],
+  "user_instruction_precedence": {
+    "effective_date": "2026-08-13",
+    "safety_development_state": "STOPPED_NOT_DELETED",
+    "prior_g4b": "DETOUR_RISK_STOP",
+    "g4b_completion_scope": [
+      "COMMIT",
+      "PYTHON_AND_DEPENDENCIES",
+      "RUNNER_LAUNCH",
+      "PRIVATE_BODY_PROTECTION",
+      "RESULT_SAVING"
+    ],
+    "g7_route": "EXPLICITLY_SUPERSEDED_FOR_THIS_SEQUENCE"
+  },
+  "g4b_preflight": {
+    "result": "PASS",
+    "fixed_mashos_api_predecessor": "99afecb1a30880bf42b9fde4932e5bba7e01e7d4",
+    "python_version": "3.12.13",
+    "pytest_version": "8.4.1",
+    "exact_dependency_hashes_match": true,
+    "runner_help_launch": true,
+    "private_output_boundary_verified": true,
+    "result_saving_verified": true,
+    "new_checker_controller_fd_change_count": 0
+  },
+  "g4c_g5": {
+    "causal_red": {
+      "test_count": 2,
+      "result": "RED_AS_EXPECTED",
+      "elapsed_seconds": 593.71,
+      "reason_codes": [
+        "OWNED_ROOT_TYPED_DEPENDENT_SURFACE_REALIZATION_NOT_PROVED",
+        "INTEGRATED_RECEPTION_PRODUCT_SURFACE_REALIZATION_NOT_PROVED"
+      ]
+    },
+    "production_change_count": 1,
+    "focused_green": {
+      "passed": 2,
+      "failed": 0,
+      "elapsed_seconds": 535
+    },
+    "ordered_regression": {
+      "passed": 24,
+      "failed": 0,
+      "elapsed_seconds": 809.21
+    },
+    "runner_focused": {
+      "passed": 4,
+      "failed": 0,
+      "elapsed_seconds": 39.73
+    },
+    "mashos_api_commit": "6e8d42a6738f45f71fc6f00246fe54475c4c6b9c",
+    "changed_path_count": 4
+  },
+  "g6": {
+    "output_context_count": 10,
+    "unique_case_count": 8,
+    "candidate_severity": {
+      "PASS": 0,
+      "MINOR": 2,
+      "MAJOR": 8,
+      "BLOCKER": 0
+    },
+    "unique_severity": {
+      "PASS": 0,
+      "MINOR": 2,
+      "MAJOR": 6,
+      "BLOCKER": 0
+    },
+    "product_result": "REJECT",
+    "reason": "LOCAL_AXIS6_IMPROVEMENT_WITHOUT_SEVERITY_IMPROVEMENT",
+    "private_packet_sha256": "83979b7c2d09728b4b859048aab295a4020ec4a1e374081274583c26181a8f53"
+  },
+  "g8": {
+    "run_id": "cycle001-g8-20260813-01",
+    "case_count": 100,
+    "disposition_counts": {
+      "selected": 45,
+      "no_valid_candidate": 2,
+      "fail_close": 53
+    },
+    "failure_partition": {
+      "base_pipeline": 42,
+      "current_downstream": 11
+    },
+    "source_closure_sha256": "f2d7e83aa17296ac6d8ec1a83024e489eeaac155038ede4261252866a773b3dc",
+    "private_result_sha256": "4556258eaf57ac2d3f5bdc8b494d59bf034a6fd740c3ef180d64e57257c5f628",
+    "body_free_result_sha256": "3877e5e2be37454c30c409a2855fa8d7ae5537704191e4ec1c140b3b293afab5",
+    "hmac_verified_count": 100,
+    "result": "SAVED_AND_INDEPENDENTLY_VERIFIED"
+  },
+  "g9": {
+    "case_count": 100,
+    "all_input_output_read": true,
+    "review_axis_count": 12,
+    "severity_counts": {
+      "PASS": 0,
+      "MINOR": 2,
+      "MAJOR": 40,
+      "BLOCKER": 58
+    },
+    "output_present_count": 52,
+    "output_missing_count": 48,
+    "body_free_ledger_sha256": "da118385938f223fdcd7711ba2793c56670566a66fe1530a769306c6146c6bb8",
+    "result": "COMPLETE_REJECT"
+  },
+  "g10": {
+    "corpus_invalidation_result": "PASS_NOT_REJECTED_INVALID_CORPUS",
+    "invalidator_count": 0,
+    "exact14_vector": "TTTFFFTFFTTTFF",
+    "true_count": 7,
+    "false_count": 7,
+    "conditions": [
+      {
+        "condition": 1,
+        "value": true,
+        "evidence_code": "MANIFEST_VALID_SAMPLE_EXACT100"
+      },
+      {
+        "condition": 2,
+        "value": true,
+        "evidence_code": "APP_REACHABLE_PROJECTION_100_OF_100"
+      },
+      {
+        "condition": 3,
+        "value": true,
+        "evidence_code": "EXACT_DUPLICATE_ZERO"
+      },
+      {
+        "condition": 4,
+        "value": false,
+        "evidence_code": "INITIAL_RESULT_LOCK_FALSE"
+      },
+      {
+        "condition": 5,
+        "value": false,
+        "evidence_code": "CUMULATIVE_EXCEPTION_NONZERO_53"
+      },
+      {
+        "condition": 6,
+        "value": false,
+        "evidence_code": "HARD_GATE_EQUIVALENT_45_OF_100_NO_DELEGATION_EVIDENCE"
+      },
+      {
+        "condition": 7,
+        "value": true,
+        "evidence_code": "INVALID_CONTRACT_DEFINED16_REJECTED16_EXPECTED_MATCH16"
+      },
+      {
+        "condition": 8,
+        "value": false,
+        "evidence_code": "UNRESOLVED_BLOCKER_58"
+      },
+      {
+        "condition": 9,
+        "value": false,
+        "evidence_code": "UNRESOLVED_MAJOR_40"
+      },
+      {
+        "condition": 10,
+        "value": true,
+        "evidence_code": "CURRENT_MUTABLE_EXACT3_CASE_EXPECTED_FIXED_TEXT_SELECTOR_ZERO"
+      },
+      {
+        "condition": 11,
+        "value": true,
+        "evidence_code": "OUTPUT_CHANGE_REVIEW_COVERED_BY_ALL100_READ"
+      },
+      {
+        "condition": 12,
+        "value": true,
+        "evidence_code": "HMAC_VERIFIED_RUN_AND_REVIEW_ROWS_RECOMPUTABLE"
+      },
+      {
+        "condition": 13,
+        "value": false,
+        "evidence_code": "MINOR2_COMMON_PRODUCT_SURFACE_RESIDUE_NOT_NOTE_SEPARATED"
+      },
+      {
+        "condition": 14,
+        "value": false,
+        "evidence_code": "G1_NOT_PROVED_G2_FAILED_R5_FRESH_COMPLETION_RECEIPT_ZERO"
+      }
+    ],
+    "result": "CYCLE001_NOT_ACCEPTED"
+  },
+  "privacy": {
+    "raw_input_in_public_artifact": false,
+    "raw_output_in_public_artifact": false,
+    "identifiable_paraphrase_in_public_artifact": false,
+    "commitment_key_in_public_artifact": false,
+    "private_artifacts_persisted_count": 4
+  },
+  "checker_controller_fd": {
+    "deleted_count": 0,
+    "modified_count": 0,
+    "added_count": 0,
+    "further_development_state": "STOPPED"
+  }
+}

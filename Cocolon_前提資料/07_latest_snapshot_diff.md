@@ -40392,3 +40392,29 @@ authorityのno-retry / no-fallback / no-repair境界により、retry、reacquis
 sole next candidateは `NLS_V3_STEP11_CYCLE001_G4_GATE_B_EXTERNAL_PHASE1_INVOCATION_CONSTRUCTION_EXACT1_SINGLE_EXCEPTION_AND_ONE_FRESH_CANONICAL_PREIMAGE_ADMISSION_METHOD_OR_PRODUCT_DECISION_V1`、classification `METHOD_OR_PRODUCT_DECISION_CANDIDATE`、state `DEFINED_INACTIVE_SEPARATE_MASH_APPROVAL_REQUIRED` です。外部phase1 invocation / launcher construction exact1のsingle exceptionとone fresh single-use operationを許可するかをMashが決める境界で、通常の第三technical authority、repair、またはapproval継承ではありません。repeat failureは `DETOUR_RISK_STOP_NO_FURTHER_NORMAL_AUTHORITY` です。
 
 publication scopeは本Receipt ADD exact1と、08 current state、本07 milestone、Current Closure Route、Current Alignment、current roadmapのMODIFY exact5、合計exact6です。Receipt-only finalizationを除く他path変更は0です。current authorityはpublication後STOPし、G4-Cは別Mash明示承認が必要です。
+
+# 2026-08-13 milestone — detour stop, product repair, exact100, all100 read, G10 recomputation
+
+Mash様のcurrent explicit instructionは安全装置の追加開発を停止し、prior G4-Bを
+`DETOUR_RISK_STOP`、G4-B exitをminimum one-shot preflightへ置換しました。既存checker /
+controller / FD codeは削除・変更していません。
+
+preflight PASS後、G4-C causal RED exact2、G5 production fix、G6 actual Product Read、
+G8 exact100、G9 all100 input/output read、G10 exact14 recomputationを完了しました。
+
+```text
+MASHOS_API_COMMIT = 6e8d42a6738f45f71fc6f00246fe54475c4c6b9c
+G5_FOCUSED = 2_PASS
+ORDERED_REGRESSION = 24_PASS
+G6 = REJECT
+G8_SELECTED_NO_VALID_FAIL_CLOSE = 45 / 2 / 53
+G9_PASS_MINOR_MAJOR_BLOCKER = 0 / 2 / 40 / 58
+G10_VECTOR = TTTFFFTFFTTTFF
+CORPUS_INVALID = FALSE
+CYCLE001 = NOT_ACCEPTED
+NEXT = RETURN_TO_SHARED_STRUCTURAL_CORRECTION
+CURRENT_AUTHORITY_STOP
+```
+
+Body-full evidence and key remain private; public GitHub receives only body-free
+counts, axes, reason codes, hashes, and the terminal Receipt.

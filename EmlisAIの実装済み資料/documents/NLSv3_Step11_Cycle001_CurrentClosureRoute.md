@@ -777,3 +777,44 @@ Evidence:
 - qualified-runner Actions run / job: `31608210201` / `94152538969`
 - V7 Decision: `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4B_QualifiedRunnerV6PostimageVerificationAndPublicationV7_Decision_20260812.md`
 - V7 Receipt: `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4B_QualifiedRunnerV6PostimageVerificationAndPublicationV7_BodyFree_Receipt_20260812.json`
+
+## 12. Current precedence — Mash 2026-08-13 product-route reset and G10 terminal
+
+This section supersedes the current operational method in §11. It preserves all
+historical source and receipts but stops further checker / controller / FD safety
+development. Existing safety code is retained unmodified. The prior G4-B path is
+classified as `DETOUR_RISK_STOP`; G4-B exit is reduced to one minimum preflight
+covering only commit, Python/dependencies, runner launch, private-body protection,
+and result saving.
+
+Mash's explicit current sequence is:
+`G4-B -> G4-C -> G5 -> G6 -> G8 -> G9 -> G10`. For this operation only, that
+explicit sequence supersedes the old G7a-d entry requirement. It does not claim
+G7 technical completion or reuse G7 credit.
+
+```text
+CURRENT_PRECEDENCE_EFFECTIVE_DATE = 2026-08-13
+SAFETY_DEVICE_FURTHER_DEVELOPMENT = STOPPED
+EXISTING_CHECKER_CONTROLLER_FD_CODE = RETAINED_UNCHANGED
+PRIOR_G4_B = DETOUR_RISK_STOP
+G4_B_MINIMAL_PREFLIGHT = PASS
+G4_C_CAUSAL_RED = FIXED
+G5_PRODUCTION = GREEN
+G6_PRODUCT_READ = REJECTED
+G8_EXACT100 = EXECUTED_AND_SAVED
+G9_ALL100 = READ
+G10_EXACT14_VECTOR = TTTFFFTFFTTTFF
+G10_TRUE_FALSE = 7 / 7
+CORPUS_INVALID = FALSE
+CYCLE001 = NOT_ACCEPTED
+NEXT_ROUTE = RETURN_TO_SHARED_STRUCTURAL_CORRECTION
+NLS_V3_METHOD_STOP = FALSE
+CURRENT_AUTHORITY = STOP
+AUTOMATIC_PROGRESSION = FALSE
+```
+
+Current product evidence is `PASS/MINOR/MAJOR/BLOCKER = 0/2/40/58`.
+The exact100 machine run is `selected/no-valid/fail-close = 45/2/53`.
+Raw input/output, identifiable paraphrase, and commitment key remain outside
+public GitHub. The body-free terminal receipt is
+`NLSv3_Step11_Cycle001_G4BToG10_Exact100Closure_BodyFree_Receipt_20260813.json`.

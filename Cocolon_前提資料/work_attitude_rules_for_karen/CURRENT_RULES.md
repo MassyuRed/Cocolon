@@ -349,3 +349,15 @@ Evidence:
 - qualified-runner Actions run / job: `31608210201` / `94152538969`
 - V7 Decision: `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4B_QualifiedRunnerV6PostimageVerificationAndPublicationV7_Decision_20260812.md`
 - V7 Receipt: `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4B_QualifiedRunnerV6PostimageVerificationAndPublicationV7_BodyFree_Receipt_20260812.json`
+
+### R10.5 current G4-B detour stop and exact100 product-route precedence — 2026-08-13
+
+Mash様のcurrent explicit instructionにより、R10.4とそのV7 ingress precedenceのcurrent
+operationを置換します。checker / controller / FD safety codeは削除せず、追加開発を停止します。
+prior G4-Bを `DETOUR_RISK_STOP` とし、G4-B completionはcommit、Python/dependency、
+runner起動、private body保護、結果保存だけの一回限りminimum preflightです。
+
+preflight PASS後は新しい安全装置を挟まず `G4-C -> G5 -> G6 -> G8 -> G9 -> G10`
+へ進みます。このoperationに限り明示sequenceがold G7a-d entryをsupersedeしますが、
+G7 completion / creditを遡及成立させません。actual終端はG10 exact14 7/14、
+`CYCLE001_NOT_ACCEPTED`、shared structural correction return、authority STOPです。

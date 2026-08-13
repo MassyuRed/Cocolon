@@ -830,3 +830,23 @@ Evidence:
 - qualified-runner Actions run / job: `31608210201` / `94152538969`
 - V7 Decision: `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4B_QualifiedRunnerV6PostimageVerificationAndPublicationV7_Decision_20260812.md`
 - V7 Receipt: `EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4B_QualifiedRunnerV6PostimageVerificationAndPublicationV7_BodyFree_Receipt_20260812.json`
+
+### 7.8 Current G4-B minimal preflight precedence — 2026-08-13
+
+Mash様のcurrent explicit instructionにより§7.7のcurrent ingress routeを置換します。
+既存checker / controller / FD codeは削除・変更せず、追加開発を停止します。prior G4-Bは
+`DETOUR_RISK_STOP`、current G4-B completionはexact100 runnerへ到達するための一回限り
+minimum preflightです。
+
+```text
+CHECK_SCOPE = COMMIT / PYTHON_DEPENDENCY / RUNNER_LAUNCH / PRIVATE_BODY_PROTECTION / RESULT_SAVING
+RESULT = PASS
+PYTHON = 3.12.13
+PYTEST = 8.4.1
+NEW_CHECKER_CONTROLLER_FD = 0
+NEXT = G4_C_WITHOUT_NEW_SAFETY_DEVICE
+```
+
+このprecedenceは一般runtime continuity contractを削除せず、current operationだけの
+proportionality correctionです。G8 body-full resultはrepository外0600、public evidenceは
+body-freeです。
