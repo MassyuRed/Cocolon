@@ -59,6 +59,7 @@ main merged = FALSE
 repository = MassyuRed/Cocolon
 main/base = de9c3d985053bbaaa7fc0d396e688cc2097ece40
 checkpoint branch = agent/cycle001-response3-acceptance-20260814
+draft PR = https://github.com/MassyuRed/Cocolon/pull/29
 checkpoint changed paths = exact2
 ```
 

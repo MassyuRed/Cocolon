@@ -198,7 +198,7 @@
     "repository": "MassyuRed/Cocolon",
     "branch": "agent/cycle001-response3-acceptance-20260814",
     "base_commit": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
-    "draft_pull_request": "COCOLON_DRAFT_PR_PENDING_PUBLICATION",
+    "draft_pull_request": "https://github.com/MassyuRed/Cocolon/pull/29",
     "changed_paths": [
       "Cocolon_前提資料/08_cycle001_current_state.md",
       "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Response3_ProductQualityWIP_SessionTransition_BodyFree_Receipt_20260815.json"
