@@ -1,0 +1,343 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.cycle001.response3.step1.intermediate_gate_separation.no_safe_current_candidate.final.body_free.decision.v1",
+  "recorded_at_jst": "2026-08-15",
+  "status": "RESPONSE3_STEP1_INTERMEDIATE_GATE_SEPARATION_NO_SAFE_CURRENT_CANDIDATE_APPROVED_STOP",
+  "privacy_class": "BODY_FREE_PUBLIC_GITHUB_SAFE",
+  "decision_owner": "Mash",
+  "technical_design_owner": "Ultra華恋",
+  "product_route_review_owner": "Pro華恋",
+  "operational_owner": "Karen",
+  "primary_outcome": "BLOCKER_NARROWED",
+  "product_credit_count": 0,
+  "technical_credit_count": 0,
+  "necessity_classification": "MANDATORY_DAMAGE_PREVENTION",
+  "automatic_progression": false,
+  "approval_identity": {
+    "approval_level": "LEVEL_3",
+    "approval_owner": "Mash",
+    "approval_kind": "EXPLICIT_ADOPTION_OF_BOUNDED_NO_SAFE_STOP_DECISION",
+    "approved_design_input_name": "Ultra華恋_FinalTechnicalDesign_ProAggregatedReviewApplied_20260815.txt",
+    "approved_design_sha256": "f349b2347a8a81368db662f8743842bc6ec419934ce875463ec8cc27e9e2b7ce",
+    "approved_design_utf8_byte_count": 21265,
+    "approved_design_lf_count": 495,
+    "approved_design_final_lf": true,
+    "design_lifecycle_before_approval": "DESIGN_ONLY_NOT_AN_APPROVAL_NOT_AN_EXECUTION_AUTHORITY",
+    "separate_mash_approval_received": true,
+    "single_use": true,
+    "consumption_state": "CONSUMED_BY_THIS_DECISION_PUBLICATION",
+    "approval_preimage_cocolon_head": "8eea97b597a3d8d783ca519c31b421196b9ecc3c",
+    "approved_cocolon_changed_path_count": 2,
+    "approved_mashos_changed_path_count": 0,
+    "dependency_effect_allowed": false,
+    "implementation_effect_allowed": false,
+    "acceptance_contract_change_allowed": false,
+    "route_u_effect_allowed": false,
+    "route_c_effect_allowed": false,
+    "step2_or_step3_effect_allowed": false,
+    "merge_ready_or_deploy_effect_allowed": false,
+    "retry_allowed": false,
+    "automatic_progression": false
+  },
+  "cycle_state": {
+    "response1": "COMPLETE",
+    "response2": "COMPLETE_AND_MERGED",
+    "response3": "WIP_STEP1_STOPPED_NO_SAFE_CURRENT_INTERMEDIATE_GATE_CORRECTION",
+    "step1": "FORMAL_LEXICAL_AUTHORITY_UNRESOLVED",
+    "step2": "NOT_STARTED_FORBIDDEN",
+    "step3": "NOT_STARTED_FORBIDDEN",
+    "cycle001": "NOT_ACCEPTED",
+    "cycle002": "NOT_STARTED"
+  },
+  "remote_preimages": {
+    "mashos_api": {
+      "repository": "MassyuRed/mashos-api",
+      "branch": "agent/cycle001-response3-product-quality-20260814",
+      "base_commit": "a8ca4ddf7b7ae76bf7b3d73e74e3a5808d623428",
+      "head_commit": "958c1b53f5b5894691e0b10e2d991fb8236d9f6f",
+      "tree": "15b89d0f33a8c53c0d8ec7bae294a485cfed06ed",
+      "draft_pull_request": "https://github.com/MassyuRed/mashos-api/pull/2",
+      "pull_request_state": "OPEN_DRAFT_UNMERGED",
+      "draft_pr_changed_path_count": 13
+    },
+    "cocolon": {
+      "repository": "MassyuRed/Cocolon",
+      "branch": "agent/cycle001-response3-acceptance-20260814",
+      "base_commit": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
+      "head_commit": "8eea97b597a3d8d783ca519c31b421196b9ecc3c",
+      "tree": "6f69b32419679d34c466001f9f958a760ce5a725",
+      "draft_pull_request": "https://github.com/MassyuRed/Cocolon/pull/29",
+      "pull_request_state": "OPEN_DRAFT_UNMERGED",
+      "draft_pr_changed_path_count": 5,
+      "current_state_preimage_blob": "4ad77cad720e3fb2775679dd012bfa2d19cf6fda",
+      "new_decision_receipt_preimage_state": "ABSENT_404"
+    }
+  },
+  "immutable_references": [
+    {
+      "role": "IMMEDIATE_HISTORICAL_PREDECESSOR",
+      "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Response3_Step1_SudachiDirectWheelContinuation_Terminal_BodyFree_Receipt_20260815.json",
+      "git_blob": "0c94c2ffd2ac14ff910f7363a4b5bcc849b7ed97",
+      "lifecycle": "HISTORICAL_IMMUTABLE_NOT_MODIFIED",
+      "prior_next_action_state": "CONSUMED_BY_THIS_LEVEL3_DECISION"
+    },
+    {
+      "role": "EARLIER_STEP1_TERMINAL_RECEIPT",
+      "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Response3_Step1_ObservationMeaningFoundation_Terminal_BodyFree_Receipt_20260815.json",
+      "git_blob": "64b5e24d8e5a8a86a6b822ccd68e751aeb3053bd",
+      "lifecycle": "HISTORICAL_IMMUTABLE_NOT_MODIFIED"
+    },
+    {
+      "role": "RESPONSE3_WIP_SESSION_RECEIPT",
+      "path": "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Response3_ProductQualityWIP_SessionTransition_BodyFree_Receipt_20260815.json",
+      "git_blob": "1d8368fbc3e7e108230641b406265512ee499f22",
+      "lifecycle": "HISTORICAL_IMMUTABLE_NOT_MODIFIED"
+    },
+    {
+      "role": "ACTIVE_THREE_STEP_PLAN",
+      "path": "EmlisAIの実装済み資料/documents/Cocolon_EmlisAI_NLSv3_Cycle001_Response3_ThreeStepSessionSafeExecutionAndRestartPlan_20260815.md",
+      "git_blob": "a5d97d6affffaad9fb09b891f8764dfda8a68d48",
+      "lifecycle": "ACTIVE_UNCHANGED"
+    }
+  ],
+  "final_product_acceptance_conditions": {
+    "state": "UNCHANGED",
+    "conditions": [
+      "P1_PRIMARY_INPUT_MEANING_PRESERVED",
+      "P2_UNSUPPORTED_CAUSE_PERSONALITY_DIAGNOSIS_OR_CLAIM_NOT_PROMOTED",
+      "P3_RELATION_UNKNOWN_SELF_DENIAL_FALSE_UNDERSTANDING_AND_FALSE_COMPLETION_BOUNDARIES_PRESERVED",
+      "P4_RAW_SOURCE_CLAUSE_SUMMARY_WHOLE_NOMINAL_FIXED_RESPONSE_AND_CASE_FAMILY_BRANCH_NOT_USED_AS_MEANING_SUBSTITUTE",
+      "P5_NATURAL_NONTEMPLATE_OBSERVATION_RECEPTION_AND_BODY_FULL_READ_SHAPE_PROVED",
+      "P6_MACHINE_GREEN_NOT_PROMOTED_TO_PRODUCT_PASS",
+      "P7_CURRENT100_FINAL_EXACT100_ALL100_PRODUCT_READ_AND_ZERO_UNRESOLVED_BLOCKER_MAJOR_NOT_WEAKENED"
+    ]
+  },
+  "intermediate_gate_separation": {
+    "final_technical_route": "BOUNDED_NO_SAFE_NEXT_CANDIDATE_STOP",
+    "final_technical_code": "NO_SAFE_STEP1_INTERMEDIATE_GATE_CORRECTION_FOR_CURRENT_ACTUAL_V1",
+    "terminal_code": "NO_SAFE_STEP1_INTERMEDIATE_GATE_CORRECTION_FOR_CURRENT_ACTUAL",
+    "subreason": "CURRENT_SEMANTIC_AUTHORITY_DOES_NOT_DETERMINE_VISIBLE_PREDICATE_ARGUMENT_CLAIMS",
+    "pro_review_material_correction": "APPLIED",
+    "step1_intermediate_formal_parse_gate": "SEPARATED_FROM_FINAL_PRODUCT_ACCEPTANCE",
+    "maximum_safe_gate_correction": "SEMANTIC_PROJECTION_EQUIVALENCE_SUBSTITUTION_V1",
+    "maximum_safe_gate_correction_current_result": "INSUFFICIENT_FOR_CURRENT251",
+    "new_dependency_adoption": "NOT_RECOMMENDED",
+    "implementation": "DO_NOT_START",
+    "scope": "CURRENT_RESPONSE3_STEP1_ONLY",
+    "method_stop": false,
+    "global_nls_v3_impossibility_claimed": false
+  },
+  "semantic_projection_equivalence_substitution": {
+    "lifecycle": "THEORETICAL_MAXIMUM_SAFE_GATE_CORRECTION_NOT_IMPLEMENTED_NOT_EXECUTED_NOT_ADMITTED",
+    "visible_claim_projection_dimensions": [
+      "OWNER_SPECIFIC_PREDICATE_IDENTITY",
+      "PREDICATE_INFLECTION_AND_LIFECYCLE",
+      "ARGUMENT_ROLE_AND_TARGET",
+      "POLARITY_MODALITY_AND_TEMPORAL_SCOPE",
+      "RELATION_ENDPOINT_AND_DIRECTION",
+      "UNKNOWN_TARGET",
+      "FORBIDDEN_CLAIM_BOUNDARY",
+      "EMITTED_SEMANTIC_AST_AND_CLAIM_SET"
+    ],
+    "components_prohibited_from_consuming_attachment_choice": [
+      "RENDERER",
+      "SELECTOR",
+      "VALIDATOR",
+      "MATCHER",
+      "RUNNER"
+    ],
+    "required_conditions": [
+      "OWNER_EXACTLY_BOUND_TO_VALIDATED_OBLIGATION_AND_SOURCE_RANGE",
+      "LOSSLESS_OFFSET_PRESERVING_LEXICAL_WITNESS",
+      "VISIBLE_CLAIM_PROJECTION_SET_CARDINALITY_EXACT1",
+      "ATTACHMENT_CHOICE_HEURISTICS_EXPECTED_ANSWER_CASE_FAMILY_ORDINAL_AND_PRODUCT_READ_SELECTOR_ZERO",
+      "VISIBLE_CLAIM_CHANGING_ALTERNATIVE_FAILS_CLOSED",
+      "PRODUCT_READ_EVALUATES_OUTPUT_AND_DOES_NOT_SELECT_ATTACHMENT",
+      "REQUIRED_ACTIVE_OWNER_COVERAGE_251_OF_251_AND_UNRESOLVED_PROJECTION_ZERO",
+      "P1_THROUGH_P7_AND_REPLAY_BRANCH_PROHIBITIONS_UNCHANGED"
+    ],
+    "required_machine_results": {
+      "attachment_choice_consumed": 0,
+      "semantic_projection_conflict": 0,
+      "ambiguous_lexeme_consumed": 0,
+      "unresolved_required_active_owner": 0,
+      "raw_full_clause_whole_nominal_replay": 0,
+      "predicate_candidate_permutation_output_drift": 0,
+      "argument_edge_alternative_output_drift": 0,
+      "independent_body_only_visible_inverse": "GREEN"
+    }
+  },
+  "current_actual_application": {
+    "case_count": 100,
+    "required_visible_owner_count": 245,
+    "active_optional_visible_owner_count": 6,
+    "required_active_visible_owner_count": 251,
+    "credit_only_owner_count": 107,
+    "upstream_supplied_exact_source_range_count": 251,
+    "unique_source_range_count": 251,
+    "overlapping_source_range_count": 0,
+    "sudachi_lossless_source_scalar_count": 6133,
+    "source_scalar_denominator": 6133,
+    "sudachi_lossless_source_utf8_byte_count": 18399,
+    "source_utf8_byte_denominator": 18399,
+    "single_predicate_head_candidate_owner_count": 30,
+    "single_candidate_is_governing_predicate_authority": false,
+    "morphology_underdetermined_predicate_head_owner_count": 221,
+    "morphology_underdetermined_is_true_japanese_syntax_ambiguity_claim": false,
+    "distinct_lemma_alternative_owner_count": 221,
+    "distinct_head_inflection_alternative_owner_count": 220,
+    "prototype_alternative_head_sensitive_marker_count": 411,
+    "prototype_alternative_head_sensitive_owner_count": 174,
+    "prototype_sensitivity_is_formal_syntax_ground_truth": false,
+    "safe_substitution_eligible_owner_upper_bound": "LESS_THAN_OR_EQUAL_TO_30_OF_251",
+    "fail_close_unresolved_owner_lower_bound": "GREATER_THAN_OR_EQUAL_TO_221_OF_251",
+    "lexical_open_slot_denominator": "NOT_ESTABLISHED",
+    "ambiguity_zero": "NOT_ESTABLISHED",
+    "unresolved_zero": "NOT_ESTABLISHED",
+    "step1_completion": false
+  },
+  "causal_product_mapping": [
+    {
+      "rejected_route": "AUTHORITY_FREE_ONE_BEST_PREDICATE_OR_ARGUMENT",
+      "visible_failure": "OWNER_PREDICATE_ARGUMENT_OR_SCOPE_CAN_CHANGE",
+      "violated_product_conditions": ["P1", "P2", "P3"]
+    },
+    {
+      "rejected_route": "OMIT_DISPUTED_PREDICATE_OR_ARGUMENT",
+      "visible_failure": "PRIMARY_OWNER_SPECIFIC_MEANING_IS_LOST",
+      "violated_product_conditions": ["P1", "P5"]
+    },
+    {
+      "rejected_route": "EMIT_ALL_CANDIDATES_AS_COEQUAL",
+      "visible_failure": "UNSUPPORTED_MULTIPLE_CLAIMS_OR_SCOPES_ARE_ASSERTED",
+      "violated_product_conditions": ["P2", "P3"]
+    },
+    {
+      "rejected_route": "RESTORE_RAW_SOURCE_CLAUSE_OR_PHRASE",
+      "visible_failure": "OBSERVATION_RETURNS_TO_SOURCE_REPLAY",
+      "violated_product_conditions": ["P4", "P5"]
+    },
+    {
+      "rejected_route": "USE_PRIVATE_PRODUCT_READ_TO_SELECT_ATTACHMENT",
+      "visible_failure": "OFFLINE_REVIEW_BECOMES_RUNTIME_OR_EXPECTED_ANSWER_AUTHORITY",
+      "violated_product_conditions": ["P2", "P4", "P6"]
+    },
+    {
+      "rejected_route": "REDUCE_UNRESOLVED_OWNER_SET_OR_DENOMINATOR",
+      "visible_failure": "STEP2_BEGINS_WITHOUT_REQUIRED_MEANING_COVERAGE",
+      "violated_product_conditions": ["P1", "P7"]
+    }
+  ],
+  "terminal_effects": {
+    "mashos_api_changed_path_count": 0,
+    "cocolon_changed_path_count": 2,
+    "production_source_changed_path_count": 0,
+    "test_changed_path_count": 0,
+    "runner_changed_path_count": 0,
+    "requirements_or_lock_changed_path_count": 0,
+    "runtime_image_or_deployment_changed_path_count": 0,
+    "database_api_or_rn_changed_path_count": 0,
+    "candidate_identity_changed": false,
+    "dependency_adopted": false,
+    "implementation_started": false,
+    "step2_started": false,
+    "step3_started": false,
+    "cycle001_accepted": false
+  },
+  "verification_and_nonclaims": {
+    "new_machine_run": "NOT_RUN",
+    "new_representative_product_read": "NOT_RUN",
+    "final_fresh_exact100": "NOT_RUN",
+    "all100_body_full_product_read": "NOT_RUN",
+    "postchange_candidate": "NOT_CREATED",
+    "parser_admission": "NOT_ESTABLISHED",
+    "predicate_authority_251_of_251": "NOT_ESTABLISHED",
+    "argument_or_open_slot_authority_251_of_251": "NOT_ESTABLISHED",
+    "independent_visible_inverse": "NOT_PROVED",
+    "product_pass": "NOT_CLAIMED",
+    "cycle001_acceptance": "NOT_PROVED"
+  },
+  "established_conditions": [
+    "FINAL_PRODUCT_ACCEPTANCE_CONDITIONS_UNCHANGED",
+    "STEP1_GATE_SEPARATED_FROM_FINAL_PRODUCT_ACCEPTANCE",
+    "SEMANTIC_PROJECTION_EQUIVALENCE_DEFINED_AS_MAXIMUM_SAFE_CORRECTION",
+    "CURRENT251_RESULT_INSUFFICIENT_FOR_SEMANTIC_PROJECTION_EQUIVALENCE",
+    "SAFE_ELIGIBLE_UPPER_BOUND_LESS_THAN_OR_EQUAL_TO_30_OF_251",
+    "FAIL_CLOSE_UNRESOLVED_LOWER_BOUND_GREATER_THAN_OR_EQUAL_TO_221_OF_251",
+    "NO_SAFE_CURRENT_INTERMEDIATE_GATE_CANDIDATE",
+    "MASHOS_API_REMOTE_WRITE_ZERO",
+    "DEPENDENCY_AND_IMPLEMENTATION_EFFECT_ZERO",
+    "STEP2_AND_STEP3_NONPROGRESSION"
+  ],
+  "unestablished_conditions": [
+    "OWNER_BOUND_FORMAL_LEXICAL_AUTHORITY_251_OF_251",
+    "UNIQUE_PREDICATE_LEMMA_AND_INFLECTION_AUTHORITY_251_OF_251",
+    "ARGUMENT_OR_OPEN_SLOT_AUTHORITY_251_OF_251",
+    "AMBIGUITY_ZERO",
+    "UNRESOLVED_ZERO",
+    "CURRENT100_POSTCHANGE_MACHINE_AND_PRODUCT_READ",
+    "FINAL_FRESH_EXACT100",
+    "ALL100_BODY_FULL_PRODUCT_READ",
+    "CYCLE001_ACCEPTANCE"
+  ],
+  "privacy_and_exclusions": {
+    "raw_input_public": false,
+    "raw_output_public": false,
+    "identifiable_paraphrase_public": false,
+    "private_note_public": false,
+    "case_id_public": false,
+    "commitment_or_verification_key_public": false,
+    "credential_secret_or_environment_value_public": false,
+    "new_private_evidence_produced": false,
+    "private_evidence_location_public": false,
+    "excluded_globs": [
+      "private_material/**",
+      "**/__pycache__/**",
+      "*.pyc",
+      ".pytest_cache/**",
+      ".ruff_cache/**"
+    ]
+  },
+  "restart": {
+    "last_completed_step": "STEP0_RESPONSE3_WIP_CHECKPOINT",
+    "current_step": "STEP1_TERMINAL_STOP_NO_SAFE_CURRENT_CANDIDATE",
+    "first_unfinished_gate": "FORMAL_OWNER_BOUND_LEXICAL_OBSERVATION_WITNESS_AUTHORITY_251_OF_251",
+    "authorized_next_product_work": "NONE_CURRENTLY",
+    "first_action": "NONE_AWAIT_MASH_FUTURE_DIRECTION",
+    "route_u": {
+      "name": "UPSTREAM_AUTHORITATIVE_ATTACHMENT_PRODUCER_CONTRACT",
+      "current_repository_authority_exists": false,
+      "new_mash_level3_decision_required": true,
+      "authorized_by_this_decision": false
+    },
+    "route_c": {
+      "name": "FINAL_PRODUCT_CONTRACT_CHANGE",
+      "recommendation": "NOT_RECOMMENDED",
+      "new_mash_level3_decision_required": true,
+      "authorized_by_this_decision": false
+    },
+    "dependency_or_retry_authorized": false,
+    "step2_start_authorized": false,
+    "step3_start_authorized": false,
+    "cycle002_start_authorized": false,
+    "automatic_progression": false
+  },
+  "cocolon_publication": {
+    "repository": "MassyuRed/Cocolon",
+    "branch": "agent/cycle001-response3-acceptance-20260814",
+    "base_commit": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
+    "preimage_commit": "8eea97b597a3d8d783ca519c31b421196b9ecc3c",
+    "preimage_tree": "6f69b32419679d34c466001f9f958a760ce5a725",
+    "draft_pull_request": "https://github.com/MassyuRed/Cocolon/pull/29",
+    "publication_commit_changed_path_count": 2,
+    "publication_commit_changed_paths": [
+      "Cocolon_前提資料/08_cycle001_current_state.md",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Response3_Step1_IntermediateGateSeparation_NoSafeCurrentCandidate_Final_BodyFree_Decision_20260815.json"
+    ],
+    "draft_pr_changed_path_count_expected": 6,
+    "containing_commit_identity": "THE_REMOTE_BRANCH_HEAD_COMMIT_THAT_CONTAINS_THIS_EXACT_RECEIPT_BLOB",
+    "remote_preimage_verified": true,
+    "new_path_absence_verified": true,
+    "self_referential_future_commit_or_blob_claimed": false,
+    "postverify_rule": "FRESH_REMOTE_BRANCH_HEAD_PR_HEAD_COMMIT_PATH_SET_PR_FULL_PATH_SET_TARGET_BYTES_AND_IMMUTABLE_REFERENCE_BLOBS_ARE_AUTHORITATIVE"
+  }
+}
