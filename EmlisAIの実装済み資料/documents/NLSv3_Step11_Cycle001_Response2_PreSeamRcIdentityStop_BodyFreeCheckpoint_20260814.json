@@ -1,0 +1,118 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.cycle001.response2.pre_seam_rc_identity_stop.body_free.v1",
+  "recorded_at_jst": "2026-08-14",
+  "status": "RESPONSE2_PRE_SEAM_RC_IDENTITY_AUTHORITY_STOP",
+  "privacy_class": "BODY_FREE_PUBLIC_GITHUB_SAFE",
+  "decision_owner": "Mash",
+  "operational_owner": "Karen",
+  "automatic_progression": false,
+  "response1_confirmation": {
+    "status": "COMPLETE_B_ROUTE_ONLY",
+    "mashos_api_head": "d3066e38383b884406737efb976d745df0a5a74f",
+    "cocolon_head": "98fc91181ae0e55ee6540753bb1c4bfd328cd62a",
+    "run_id": "cycle001-r1-evidence-v3-20260814-02",
+    "selected_count": 45,
+    "no_valid_candidate_count": 2,
+    "fail_close_count": 53,
+    "output_present_count": 52,
+    "output_missing_count": 48,
+    "exception_count": 46,
+    "pair_verified_count": 100,
+    "body_free_sha256": "a17dbf368010b78906ae55898f6b92c1293a2e1c8217fcf80131b17c9b031403"
+  },
+  "response2_bounded_unit": {
+    "name": "machine100_all100_product_read_first_product_fix",
+    "started": true,
+    "first_action": "DECIDE_RULE18_COMPLIANT_PRE_SEAM_OWNER_AUTHORITY_FOR_THE_26_CASE_BLOCKER",
+    "machine100_reached": false,
+    "all100_product_read_started": false,
+    "product_fix_accepted": false,
+    "cycle001_accepted": false
+  },
+  "body_free_diagnosis": {
+    "basis": "CURRENT_MAIN_UPSTREAM_TYPED_ARTIFACT_AND_ALL_DISCOURSE_PLAN_DIRECT_BUILD_DIAGNOSTIC",
+    "old_gate_consulted_for_availability_count": false,
+    "old_selector_consulted_for_availability_count": false,
+    "exact100_denominator": 100,
+    "successor_snapshot_available_count": 100,
+    "lexical_atom_specs_available_count": 100,
+    "one_or_more_canonical_rc0027_natural_candidate_count": 58,
+    "zero_canonical_rc0027_natural_candidate_count": 42,
+    "canonical_candidate_count_distribution": {
+      "0": 42,
+      "1": 23,
+      "2": 12,
+      "3": 6,
+      "4": 6,
+      "6": 1,
+      "9": 1,
+      "12": 9
+    },
+    "zero_candidate_reason_counts": {
+      "STEP11_REQUIRED_OWNER_INPUT_SPECIFICITY_UNRESOLVED": 26,
+      "STEP11_INPUT_SPECIFIC_ANCHOR_UNRESOLVED": 10,
+      "STEP11_GROUNDED_PHRASE_AMBIGUOUS": 3,
+      "STEP11_RELATION_MULTI_EDGE_LOCAL_ANAPHORA_AMBIGUOUS": 3
+    },
+    "additional_observed_families": {
+      "CURRENT_RC_G8_INVERSE_REJECTED": 7,
+      "STEP11_RC0031_PRODUCT_OWNER_EXPRESSION_INVALID": 3,
+      "RC0031_CONSTRUCTION_ONLY_FINITE_HEAD_UNRESOLVED": 1,
+      "BASE_RUNTIME_NO_VALID_CANDIDATE": 2
+    },
+    "interpretation": "THE_42_CASE_BLOCKER_PRECEDES_THE_AUTHORIZED_RC0031_SUFFIX_AND_CANNOT_BE_RECOVERED_BY_A_RUNNER_ONLY_OR_SUFFIX_ONLY_ACCEPTANCE_RELAXATION"
+  },
+  "protected_contract": {
+    "path": "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+    "current_git_blob": "190721486330ca8b407bc746a344003848392beb",
+    "protected_prefix_byte_count": 537842,
+    "protected_prefix_sha256": "18ad33095754c0132d22a7f2e004f00d5e1655a825e366ade5778adb1bc134d4",
+    "protected_prefix_git_blob": "478454a1c5fb5b15e0c281ae93a63aa058bf8e26",
+    "masked_suffix_sha256": "c448d8f514669a7b0379e3a85b79fc5aabf29d00cbe002725592f74e9f60fc1d",
+    "base_candidate_version_fixed_inside_prefix": "nls_v3_rc_0027",
+    "final_candidate_version_fixed_inside_prefix": "nls_v3_rc_0031_proposition_surface_experiment",
+    "new_recovery_candidate_version_allocated": false
+  },
+  "rejected_non_durable_attempt": {
+    "accepted_into_main": false,
+    "committed": false,
+    "pushed": false,
+    "working_tree_removed": true,
+    "reasons": [
+      "GLOBAL_RUNTIME_MONKEYPATCH_OF_PROTECTED_OWNER_FUNCTIONS",
+      "OLD_GATE_AND_PATCHED_VALIDATOR_USED_AS_ACCEPTANCE_ORACLE",
+      "RAW_SUBSTRING_ANCHOR_WITHOUT_UPSTREAM_TYPED_SPAN_AUTHORITY",
+      "LOSSY_RELATION_JUNCTION_MERGE",
+      "RC0027_VERSION_IDENTITY_IMPERSONATION",
+      "REPRESENTATIVE_RECOVERY_NOT_CLOSED"
+    ],
+    "runner_measurement_patch_reverted": true
+  },
+  "rule18_stop": {
+    "classification": "LEVEL3_EXPLICIT_PRE_AUTHORIZATION_REQUIRED",
+    "reason": "A_TEXT_AFFECTING_RECOVERY_REQUIRES_A_NEW_RC_IDENTITY_BUT_THE_CURRENT_PROTECTED_VALIDATOR_FIXES_RC0027_AND_RC0031_AND_NO_RECOVERY_RC_IDENTITY_OR_ALLOWLISTED_PROTECTED_PREIMAGE_CHANGE_HAS_BEEN_ALLOCATED",
+    "silent_resolution_forbidden": true,
+    "required_exact_authority": [
+      "ALLOCATE_A_DISTINCT_RECOVERY_CANDIDATE_VERSION_AND_SCHEMA",
+      "AUTHORIZE_EXACT_PROTECTED_CONTRACT_PATHS_AND_SYMBOLS_NEEDED_TO_VALIDATE_THAT_VERSION",
+      "AUTHORIZE_THE_CORRESPONDING_PROTECTED_TEST_PREIMAGE_UPDATE",
+      "PRESERVE_SOURCE_BOUND_TYPED_OWNER_RELATION_UNKNOWN_CONSTRUCTION_AND_DIMENSION_ENVELOPE",
+      "PROHIBIT_CASE_CORPUS_EXPECTED_TEXT_AND_FINAL_PLAN_ORACLES"
+    ]
+  },
+  "restart": {
+    "mashos_api_exact_head": "d3066e38383b884406737efb976d745df0a5a74f",
+    "cocolon_containing_commit": "REMOTE_POSTVERIFY_REQUIRED",
+    "first_action_after_authority": "IMPLEMENT_PURE_REQUEST_LOCAL_SOURCE_BOUND_RECOVERY_OWNER_WITH_DISTINCT_IDENTITY_AND_CAUSAL_NEGATIVE_TESTS",
+    "machine_accounting_before_product_read": true,
+    "fresh_run_id_required": true,
+    "all100_body_full_product_read_required_after_machine100": true
+  },
+  "privacy": {
+    "raw_input_persisted_publicly": false,
+    "raw_output_persisted_publicly": false,
+    "private_review_notes_created": false,
+    "commitment_key_created": false,
+    "new_private_pair_created": false
+  }
+}
