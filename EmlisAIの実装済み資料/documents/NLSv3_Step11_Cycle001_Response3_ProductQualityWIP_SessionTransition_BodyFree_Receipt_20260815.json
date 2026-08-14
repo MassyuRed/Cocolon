@@ -1,0 +1,209 @@
+{
+  "schema_version": "cocolon.emlis.nls_v3.cycle001.response3.product_quality_wip.session_transition.body_free.v1",
+  "recorded_at_jst": "2026-08-15",
+  "status": "RESPONSE3_PRODUCT_QUALITY_WIP_REMOTE_PRESERVED_NOT_ACCEPTED",
+  "privacy_class": "BODY_FREE_PUBLIC_GITHUB_SAFE",
+  "decision_owner": "Mash",
+  "operational_owner": "Karen",
+  "primary_outcome": "ADMINISTRATIVE_ONLY",
+  "necessity_classification": "MANDATORY_DAMAGE_PREVENTION",
+  "automatic_progression": false,
+  "cycle_state": {
+    "response1": "COMPLETE",
+    "response2": "COMPLETE_AND_MERGED",
+    "response3": "WIP_REMOTE_PRESERVED_NOT_MERGE_READY",
+    "cycle001": "NOT_ACCEPTED",
+    "cycle002": "NOT_STARTED"
+  },
+  "remote_baselines": {
+    "mashos_api_main": "a8ca4ddf7b7ae76bf7b3d73e74e3a5808d623428",
+    "cocolon_main": "de9c3d985053bbaaa7fc0d396e688cc2097ece40"
+  },
+  "mashos_wip_publication": {
+    "repository": "MassyuRed/mashos-api",
+    "branch": "agent/cycle001-response3-product-quality-20260814",
+    "base_commit": "a8ca4ddf7b7ae76bf7b3d73e74e3a5808d623428",
+    "commit": "958c1b53f5b5894691e0b10e2d991fb8236d9f6f",
+    "tree": "15b89d0f33a8c53c0d8ec7bae294a485cfed06ed",
+    "draft_pull_request": "https://github.com/MassyuRed/mashos-api/pull/2",
+    "main_merged": false,
+    "commit_ahead_by": 1,
+    "commit_behind_by": 0,
+    "changed_path_count": 13,
+    "production_path_count": 6,
+    "test_path_count": 6,
+    "tool_path_count": 1,
+    "additions": 8929,
+    "deletions": 1235,
+    "patch_sha256": "585f46e2f53c62a92969321c1d3d8abbe73046d7b62d079801fed56031258248",
+    "remote_branch_head_verified": true,
+    "remote_compare_verified": true,
+    "remote_tree_complete": true,
+    "remote_blob_identity_verified_count": 13,
+    "remote_changed_paths_verified_count": 13,
+    "paths": [
+      {
+        "path": "ai/services/ai_inference/emlis_ai_grounded_observation_semantic_restatement_v3.py",
+        "sha256": "ef4ad5c4dad699387433412d39a17b59ecf39477731889e3e1f9748781547024",
+        "git_blob": "8fec7f4699e1661d8a3110f3bdc4d84dfd0d9dd1"
+      },
+      {
+        "path": "ai/services/ai_inference/emlis_ai_grounded_relation_construction_authority_successor_v3.py",
+        "sha256": "74ed9008b6746020e326e2e3790fa667e5ab245f2ef1c6202ab6e4cceafdd292",
+        "git_blob": "3ac4c4f1fa041cfdf5bce91105a72985594d6bf5"
+      },
+      {
+        "path": "ai/services/ai_inference/emlis_ai_step11_cycle001_product_recovery_v3.py",
+        "sha256": "ef29a731fb7c6df0b7444b1e503f447e6131430f22400471e8eb0a97dda982ee",
+        "git_blob": "c900153cceab5f58e94cdc5433397568e8478dd5"
+      },
+      {
+        "path": "ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py",
+        "sha256": "ab59773ebcda5b7b02ee9ca57577f3ef1e146b873d7e21f7d354216c9ad5a762",
+        "git_blob": "44b691ae0110b5c31f641fa8c611219dc00826eb"
+      },
+      {
+        "path": "ai/services/ai_inference/emlis_ai_step11_rc0028_experiment_surface_catalog_v3.py",
+        "sha256": "79d7da86c85ee25c70f3f737c9bfaec0f70627e37c66b5c633a2ee738f90a895",
+        "git_blob": "ccaeadb166f8c918be5fafcbc7b4c51b6579c5a7"
+      },
+      {
+        "path": "ai/services/ai_inference/emlis_ai_step11_semantic_overlay_v3.py",
+        "sha256": "99012a30d626ef24e47b61cade4e178e18aeea7e14d7643b3098fc27b5f45cc2",
+        "git_blob": "fd4ff39388987b2abcd27a641743706c23fdf6c9"
+      },
+      {
+        "path": "ai/tests/test_emlis_ai_grounded_observation_semantic_restatement.py",
+        "sha256": "f7a5b80e298daf579008dcc136b0187f5c70c00b43a2ad3ed93fb4e44ee50168",
+        "git_blob": "36b511f301dc097db03da394a2196a8b320b3ba9"
+      },
+      {
+        "path": "ai/tests/test_emlis_nls_v3_s11_cycle001_product_recovery_v3.py",
+        "sha256": "15b0861a37874ce0226b1cb92eaa10305234a09db5670b766cdfc36276273c00",
+        "git_blob": "056d7fa3e0d85ccb56d974c97f7fb95b757ebc8f"
+      },
+      {
+        "path": "ai/tests/test_emlis_nls_v3_s11_rc0019_overlay.py",
+        "sha256": "9dbf5b507071af0b88698dc2d8dbcf47ea1d4487cef59cb99d8cf606b164f43f",
+        "git_blob": "69a40f49d27aa7ba92826a0b711822a13f92ac04"
+      },
+      {
+        "path": "ai/tests/test_emlis_nls_v3_s11_rc0028_e0b_downstream_red.py",
+        "sha256": "4feb2152882e7f69b1b54b04956f0bff52e9b0506198f556b751057347abaa00",
+        "git_blob": "0ee1a502b5cd04b7479ea113d2db3cde8ea4529b"
+      },
+      {
+        "path": "ai/tests/test_emlis_nls_v3_s11_rc0028_successor_authority.py",
+        "sha256": "43d94ebe5329b0f1e65ab427168f63cc182dfda990d8fd7433ed124de7e9d35b",
+        "git_blob": "77a6184cd3fe8d51581fec86a2b0ac6227ac169a"
+      },
+      {
+        "path": "ai/tests/test_emlis_nls_v3_step11_current_rc_g8_run.py",
+        "sha256": "18cde70cc324beccb4ddb388805c094bc71747ad2c6194c513b1f6350adf1ddf",
+        "git_blob": "fdbe525a84655d98d31a52e561e49730fd0be8ba"
+      },
+      {
+        "path": "ai/tools/emlis_nls_v3_step11_current_rc_g8_run.py",
+        "sha256": "aba71e073ab670f840c45fff8f6f762b4215950f6efad0263820a7c92f28b24d",
+        "git_blob": "5dd6a4153b9ea993754cd9180d9030e02463dddf"
+      }
+    ]
+  },
+  "candidate_identity": {
+    "version_id": "nls_v3_rc_0036_cycle001_product_quality",
+    "schema_version": "cocolon.emlis.nls_v3.step11.cycle001_product_quality_candidate.rc0036.v1"
+  },
+  "current_evidence": {
+    "representative_case_count": 12,
+    "representative_public_build_strict_green_count": 12,
+    "representative_visible_inverse_green_count": 12,
+    "independent_product_read": {
+      "pass": 0,
+      "minor": 6,
+      "major": 6,
+      "blocker": 0,
+      "acceptance": "RED"
+    },
+    "final_fresh_exact100_current_wip": "NOT_RUN",
+    "current_runner_exact100_synchronization": "NOT_PROVED",
+    "all100_body_full_product_read_current_wip": "NOT_RUN"
+  },
+  "checkpoint_verification": {
+    "py_compile_passed_postimage_count": 13,
+    "python_ast_parse_passed_postimage_count": 13,
+    "git_diff_check": "PASS",
+    "pytest": "NOT_RUN_NO_MODULE_NAMED_PYTEST",
+    "added_line_secret_or_private_material_findings": 0,
+    "new_external_import_count": 0,
+    "binary_or_mode_change_count": 0
+  },
+  "current_blocker": {
+    "code": "OBSERVATION_EXACT_SOURCE_REPLAY_NOT_PROVED",
+    "first_unfinished_gate": "FORMAL_OWNER_BOUND_LEXICAL_OBSERVATION_WITNESS_AUTHORITY_251_OF_251",
+    "visible_owner_count": 251,
+    "safe_lossless_owner_authority_count": 54,
+    "unresolved_owner_authority_count": 197,
+    "current_recovery_source_sha256": "ef29a731fb7c6df0b7444b1e503f447e6131430f22400471e8eb0a97dda982ee",
+    "production_admission": "STOP"
+  },
+  "nonadopted_morphology_probes": [
+    {
+      "candidate": "SudachiPy 0.6.11 + sudachidict_core 20260723",
+      "offset_component_coverage": "251/251",
+      "standalone_finite_witness_coverage": "245/251",
+      "installed_size_observed": "approximately 212 MB",
+      "max_rss_observed": "approximately 87 MB",
+      "status": "NOT_ADOPTED"
+    },
+    {
+      "candidate": "GiNZA",
+      "installed_size_observed": "approximately 452 MB",
+      "max_rss_observed": "approximately 435 MB",
+      "package_count_observed": 49,
+      "compatibility_note": "spaCy 3.8.15 model-load incompatibility; 3.7.5 trial still left semantic gaps",
+      "status": "NOT_ADOPTED"
+    }
+  ],
+  "dependency_and_scope": {
+    "tracked_dependency_change_count": 0,
+    "requirements_or_lock_changed": false,
+    "database_or_api_changed": false,
+    "checker_controller_fd_added": false
+  },
+  "privacy_and_exclusions": {
+    "raw_input_public": false,
+    "raw_output_public": false,
+    "identifiable_paraphrase_public": false,
+    "private_note_public": false,
+    "commitment_key_public": false,
+    "excluded_globs": [
+      "private_material/**",
+      "**/__pycache__/**",
+      "*.pyc",
+      ".ruff_cache/**"
+    ],
+    "untracked_generated_bytecode_excluded_count": 144
+  },
+  "restart": {
+    "preimage_commit": "958c1b53f5b5894691e0b10e2d991fb8236d9f6f",
+    "verify_exact_path_count": 13,
+    "first_action": "RESOLVE_FORMAL_OWNER_BOUND_LEXICAL_OBSERVATION_WITNESS_AUTHORITY_WITHOUT_RAW_SOURCE_REPLAY",
+    "go_condition": "VISIBLE_OWNER_WITNESS_251_OF_251_AND_LOSSLESS_SCALAR_COVERAGE_251_OF_251_AND_AMBIGUOUS_ZERO_AND_FULL_FINITE_REPLAY_ZERO",
+    "representative_machine_and_product_read_before_exact100": true,
+    "fresh_exact100_after_representative_common_major_resolution": true,
+    "cycle001_acceptance_forbidden_until_product_pass": true,
+    "cycle002_start_forbidden": true
+  },
+  "cocolon_publication": {
+    "repository": "MassyuRed/Cocolon",
+    "branch": "agent/cycle001-response3-acceptance-20260814",
+    "base_commit": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
+    "draft_pull_request": "COCOLON_DRAFT_PR_PENDING_PUBLICATION",
+    "changed_paths": [
+      "Cocolon_前提資料/08_cycle001_current_state.md",
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Response3_ProductQualityWIP_SessionTransition_BodyFree_Receipt_20260815.json"
+    ],
+    "containing_commit_identity": "THE_REMOTE_BRANCH_HEAD_COMMIT_THAT_CONTAINS_THIS_RECEIPT",
+    "postverify_rule": "FRESH_REMOTE_BRANCH_HEAD_PR_HEAD_CHANGED_PATHS_AND_BLOB_IDENTITIES_ARE_AUTHORITATIVE"
+  }
+}
