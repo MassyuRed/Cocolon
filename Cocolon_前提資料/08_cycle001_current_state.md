@@ -2,9 +2,9 @@
 doc_id: cocolon_cycle001_current_state
 title: "Cycle001 現在地 — 単一ナビゲーション正本"
 revision_date: "2026-08-14"
-status: "RESPONSE2_PRE_SEAM_RC_IDENTITY_AUTHORITY_STOP"
+status: "RESPONSE2_MACHINE100_PRODUCT_READ100_PRODUCT_FIX_STARTED_DRAFT_PR_REMOTE_DURABLE"
 normative_status: "CURRENT_CYCLE001_NAVIGATION_OWNER"
-effective_when: "RESPONSE2_RULE18_STOP_CHECKPOINT_REMOTE_POSTVERIFIED"
+effective_when: "RESPONSE2_DRAFT_PR_REMOTE_POSTVERIFIED_MAIN_MERGE_PENDING"
 decision_owner: "Mash"
 operational_owner: "Karen"
 technical_authority: false
@@ -15,28 +15,30 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-Cycle001 残り60％・3回答分割計画の第1回答は、B-route technical durabilityとして完了済みであることを再確認した。第2回答は開始し、26件blockerのpre-seam owner authorityをRule18に照らして調査した。
+Cycle001 残り60％・3回答分割計画の第1回答は、B-route technical durabilityとして完了済みである。第2回答は、Mashの明示承認を受けてdistinct recovery identity `nls_v3_rc_0035_cycle001_product_recovery`を割り当て、pure / request-local / source-bound recoveryとして再開した。
 
-失われた後半source bytesは回収せず、mashos-api 6e8d42a6738f45f71fc6f00246fe54475c4c6b9c のactual sourceから再調査した。production 11 change familyは、安全にcurrent mainへ昇格できるcoherent deltaが成立しなかったため変更していない。代わりに計画4.4 Bに従い、exact100 runner / evidence envelope v3 と focused testsをcoherentなactual fileとしてGitHubへ保存した。
+旧rc0027 / rc0031 identityの偽装、old Gate / selector / final plan oracle、global monkeypatch、case / corpus / expected text runtime branchは使用していない。protected変更はrc0035 constantsとidentity primitiveの最小追加、および対応するprotected test preimage更新に限定した。旧rc0031 identity bytesと既存suffix masked hashは不変である。
 
-その結果、upstream typed successor / lexical authorityは100/100成立する一方、現行の正規rc0027 natural candidateが1件以上成立するのは58/100で、42/100はauthorized rc0031 suffix到達前に閉じることが確定した。text-affecting recoveryは新RC / run IDを必要とするが、現protected prefixはrc0027 / rc0031 identityとvalidatorを固定し、新recovery RC identityは未割当である。旧RCへの識別子偽装やruntime monkeypatchは許容できないため、Rule18 Level3の事前明示承認が必要なSTOPである。
+fresh run `cycle001-r2-rc0035-20260814-01` はmachine100を成立させた。その後に同じ100件を本文あり・12軸・分離2-pass・全100横断distribution passで実読した。結果はPASS 0 / MINOR 0 / MAJOR 97 / BLOCKER 3であり、machine GREENはProduct PASSではない。最初の共通商品修正として、全visible ownerのsource-bound referent injectivityをactual code / causal testsへ実装したが、generic Reception / surface / distribution / owner / depth familyは未解消である。
 
 現在の結論は次である。
 
     RESPONSE1_ROUTE = B_COHERENT_TEST_RUNNER_AND_REMOTE_RESTART_MATERIAL
     RESPONSE1 = COMPLETE
-    RESPONSE2 = STARTED_AND_RULE18_STOPPED_BEFORE_MACHINE100
-    PRODUCTION_CHANGE = NONE
-    EVIDENCE_ENVELOPE_V3 = IMPLEMENTED_TESTED_REMOTE_POSTVERIFIED
-    MACHINE_SELECTED / NO_VALID / FAIL_CLOSE = 45 / 2 / 53
-    OUTPUT_PRESENT / MISSING = 52 / 48
-    PRODUCT_READ_PASS / MINOR / MAJOR / BLOCKER = 0 / 2 / 40 / 58
+    RESPONSE2_STAGE_GOAL = REACHED
+    RECOVERY_CANDIDATE = NLS_V3_RC_0035_CYCLE001_PRODUCT_RECOVERY
+    MACHINE_SELECTED / NO_VALID / FAIL_CLOSE = 100 / 0 / 0
+    OUTPUT_PRESENT / MISSING = 100 / 0
+    EXCEPTION = 0
+    PRODUCT_READ_PASS / MINOR / MAJOR / BLOCKER = 0 / 0 / 97 / 3
+    FIRST_COMMON_PRODUCT_CORRECTION = STARTED
+    MASHOS_API_DRAFT_PR = https://github.com/MassyuRed/mashos-api/pull/1
+    MAIN_MERGE = PENDING
     CYCLE001 = NOT_ACCEPTED
-    CURRENT_ROUTE = AWAIT_EXACT_LEVEL3_RECOVERY_RC_IDENTITY_AUTHORITY
     AUTOMATIC_PROGRESSION = FALSE
     CYCLE002_STARTED = FALSE
 
-第2回答のmachine100、all100 Product Read、商品修正開始は成立していない。machine GREENを偽造するacceptance緩和は行わず、不適格な試作helperとrunner測定patchはcommit前に作業treeから除去した。
+§1–§8はResponse1およびResponse2 Rule18 STOPまでの履歴である。現在の正本状態とResponse3 exact restartは§9、およびmachine-readable Response2 checkpointを正とする。
 
 ## 1. Remote exact state
 
@@ -201,3 +203,108 @@ machine-readable checkpoint:
 public GitHubへraw input、raw output、識別可能なparaphrase、private note、commitment keyを保存しない。r1 88/2/10とr2 92/0/8はsession-reported参考値のままで、current evidenceへ昇格しない。
 
 新しいprivate pair / commitment key / private Product Read packetは作っていない。machine100未成立のため、all100 body-full Product Read、Cycle001 acceptance再計算、Cycle002開始へ自動進行しない。
+
+## 9. Response2 completion state — current authority
+
+§7–§8のRule18 STOPは、Mashの明示承認とrc0035実装により解除された。履歴として保持するが、現在の実行判断には本節を使用する。
+
+### 9.1 Distinct recovery and protected boundary
+
+- recovery version: `nls_v3_rc_0035_cycle001_product_recovery`
+- candidate schema: `cocolon.emlis.nls_v3.step11.cycle001_product_recovery_candidate.rc0035.v1`
+- base head: `d3066e38383b884406737efb976d745df0a5a74f`
+- candidate head: `fb96fd763d62e92578b9d0df2c4b4d70d88e5ea3`
+- candidate branch: `codex/cycle001-response2-rc0035-20260814`
+- draft PR: https://github.com/MassyuRed/mashos-api/pull/1
+- main merge: pending
+
+protected productionへの追加は、rc0035 version / schema constantsとcandidate identity primitiveだけである。legacy rc0031 identityはbyte-exact不変、既存mutable suffixのmasked SHA256も不変である。対応するprotected test preimageは機械再計算した値へ更新した。
+
+pure recoveryはcurrent input、normalized evidence、successor snapshot、lexical atom specs、owner / root / relation / construction / semantic-link / unknown / Reception / dimension lineageをrequest-local source envelopeへ結ぶ。旧runtime、Gate、selector、final plan、別case、expected text、raw heuristic substringはacceptance authorityに使用しない。
+
+### 9.2 Fresh exact100 machine result
+
+run ID `cycle001-r2-rc0035-20260814-01`:
+
+    CASE_COUNT = 100
+    SELECTED / NO_VALID / FAIL_CLOSE = 100 / 0 / 0
+    EXCEPTION = 0
+    OUTPUT_PRESENT / MISSING = 100 / 0
+    ALL_MACHINE_CHECKS_TRUE = 100 / 100
+    EXACT_RC0035_IDENTITY = 100 / 100
+    SOURCE_CLOSURE_SHA256 = de398205f05411c3edba83f9c04273630d16048f887aa7e2bb4e27dc68f14eaa
+    BODY_FREE_SHA256 = 4ce7c80d3751286da1883b5906cebc4afb70af8732a908415518e4456e7d8663
+
+body-free result:
+
+- ../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Response2_FreshExact100_BodyFree_Result_20260814.json
+
+machine acceptanceは、candidate-attached planをexpected oracleにせず、projected current inputからsource envelopeとvisible inverse expectationを独立再構築する。coordinated rehash mutation 7種、cross-request input swap、all-visible owner collision、forbidden runtime import、private pair mutationをcausal negative testで拒否した。
+
+### 9.3 All100 body-full Product Read
+
+同じrunの100件を全件読み、各shard内でaxes1–6とaxes7–12を分離2-passし、最後に全100横断のdistribution passを行った。
+
+    PRODUCT_READ_PASS / MINOR / MAJOR / BLOCKER = 0 / 0 / 97 / 3
+
+failure axis counts:
+
+- PRIMARY_MEANING_RETAINED: 19
+- RELATION_DIRECTION_CORRECT: 15
+- NO_CAUSE_PERSONALITY_DIAGNOSIS_PROMOTION: 12
+- UNKNOWN_BOUNDARY_PRESERVED: 1
+- SELF_DENIAL_NOT_ADOPTED_OR_AMPLIFIED: 1
+- BOUND_EMLIS_RECEPTION: 100
+- SECTION_SEMANTIC_DISTINCTNESS: 0
+- NATURAL_NON_REPETITIVE_SURFACE: 100
+- DISTRIBUTION_NOT_OVERCONCENTRATED: 100
+- DEPTH_PROPORTIONAL: 81
+- NO_FALSE_UNDERSTANDING_COMPLETION: 0
+- IMMEDIATE_OBSERVATION_FEELS_READ: 100
+
+body-free ledger:
+
+- ../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Response2_ProductRead100_BodyFree_Ledger_20260814.json
+
+private runner pair、全100 Product Read packet、shard decisions、verification keyはapproved private durable destinationへ保存した。public GitHubへraw input、raw output、identifiable paraphrase、private note、keyは保存しない。
+
+### 9.4 First common product correction
+
+最初の共通商品修正は `ALL_VISIBLE_SOURCE_BOUND_OWNER_REFERENT_INJECTIVITY` である。participant ownerだけでなく全visible ownerを同じ一意性集合へ入れ、typed incident role authorityで中立に修飾する。owner ID、ordinal、raw引用、case分岐は使わず、authorityがなければfail-closeする。exact100でvisible referent collisionは0になった。
+
+これは商品修正の開始であり、Product PASSではない。Product Readでは次が未解消である。
+
+- GENERIC_RECEPTION_REALIZATION_PATTERN: 100
+- GENERIC_SURFACE_REALIZATION_PATTERN: 100
+- GENERIC_DISTRIBUTION_PATTERN: 100
+- GENERIC_OWNER_REALIZATION_PATTERN: 100
+- GENERIC_DEPTH_PATTERN: 81
+- GENERIC_RELATION_REALIZATION_PATTERN: 25
+- GENERIC_UNKNOWN_BOUNDARY_PATTERN: 1
+
+### 9.5 Verification and known baseline
+
+- Python 3.12.13 focused integration: 50 passed / 0 failed
+- py_compile: PASS
+- git diff --check: PASS
+- final adversarial review blocking finding: 0
+- legacy protected RED `STEP11_RC0031_P3_B6_OWNER_ROLE_TYPED_PREDECESSOR_OR_BOUNDARY_DRIFT`: candidate headとbase d3066e3で同一、Response2起因ではない
+
+machine-readable current checkpoint:
+
+- ../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Response2_Machine100_ProductRead100_ProductFixStarted_BodyFreeCheckpoint_20260814.json
+
+### 9.6 Exact Response3 restart
+
+Response2のstage goal、すなわちmachine100、all100 Product Read、shared cause分類、最初の共通商品修正開始は到達した。ただしmashos-api変更はdraft PRでありmain mergeは未了、Product Readは3 BLOCKER / 97 MAJORである。Cycle001は受理せず、Cycle002を開始しない。
+
+Response3は、PR merge / remote postverify後、またはcandidate headをexplicit preimageとして次の順序で再開する。
+
+1. 次のtext-affecting RC identityを割り当てる。
+2. source-native input-specific Receptionをvisible productへ結ぶ。
+3. concentrated root predicate / skeletonをtyped product authorityで分散する。
+4. generic owner / relation / depth causeを共通修正する。
+5. fresh run IDでmachine100を再成立させる。
+6. changed output、既存BLOCKER / MAJOR、affected familyを本文ありで再読する。
+
+Cycle001 acceptanceは、残るB/Mを失わず、Product Readで合格するまで禁止する。
