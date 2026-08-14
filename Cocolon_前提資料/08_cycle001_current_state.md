@@ -16,9 +16,12 @@ Cycle001 Response1とResponse2は完了し、Response2のmashos-api / Cocolon変
 
 Response3は商品品質修正の途中である。current sourceのexact bytesはGitHub上のWIP branch / Draft PRへ保存したが、final exact100とall100 Product Readは未実行であり、Cycle001は受入れていない。Cycle002も開始していない。
 
+Response3の残作業を3つのsession-safe Stepへ分ける実行・再開計画draftを作成した。Step 1はまだ開始しておらず、Mashの明示的なStep開始を要する。
+
 ```text
 RESPONSE2 = COMPLETE_AND_MERGED
 RESPONSE3 = WIP_REMOTE_PRESERVED_NOT_MERGE_READY
+RESPONSE3_STEP_PLAN = DRAFT_PUBLISHED_AWAITING_MASH_STEP1_START
 CYCLE001 = NOT_ACCEPTED
 CYCLE002 = NOT_STARTED
 AUTOMATIC_PROGRESSION = FALSE
@@ -60,10 +63,12 @@ repository = MassyuRed/Cocolon
 main/base = de9c3d985053bbaaa7fc0d396e688cc2097ece40
 checkpoint branch = agent/cycle001-response3-acceptance-20260814
 draft PR = https://github.com/MassyuRed/Cocolon/pull/29
-checkpoint changed paths = exact2
+checkpoint changed paths = exact3
+Response3 three-step plan = EmlisAIの実装済み資料/documents/Cocolon_EmlisAI_NLSv3_Cycle001_Response3_ThreeStepSessionSafeExecutionAndRestartPlan_20260815.md
+plan SHA-256 = 7aa13c5e4d303d4f254c38cb8c7099110cb96ccde391d494ba38ce9798e5305d
 ```
 
-Cocolon側のremote branch head、Draft PRおよびexact2 changed pathsは、本fileを含むcheckpoint publicationのfresh postverify結果を正とする。
+Cocolon側のremote branch head、Draft PRおよびexact3 changed pathsは、本fileを含むcheckpoint publicationのfresh postverify結果を正とする。
 
 ## 2. Response3 WIP scope
 
@@ -151,10 +156,10 @@ Read-only morphology probeの結果:
 
 新セッションは次の順序だけで再開する。
 
-1. 本fileとResponse3 body-free ReceiptをGitHubからfresh取得する。
+1. 本file、Response3 body-free Receipt、Response3 three-step execution / restart planをGitHubからfresh取得する。
 2. `MassyuRed/mashos-api`のWIP commit `958c1b53f5b5894691e0b10e2d991fb8236d9f6f`を取得し、parent、tree、exact13 changed pathsを再確認する。
 3. `ai/services/ai_inference/emlis_ai_step11_cycle001_product_recovery_v3.py`のSHA-256が`ef29a731fb7c6df0b7444b1e503f447e6131430f22400471e8eb0a97dda982ee`であることを確認する。
-4. first unfinished gateだけを扱う。parser/dependencyを採用する場合は、separate bounded experimentとしてscope、lock、size、morphology round-trip、残6 ownerのauthorityを先に判断する。
+4. MashがStep 1開始を明示した後だけ、three-step planのStep 1とfirst unfinished gateを扱う。parser/dependencyを採用する場合は、separate bounded experimentとしてscope、lock、size、morphology round-trip、残6 ownerのauthorityを先に判断する。
 5. production接続前にrequired / active visible owner 251/251、lossless scalar coverage、ambiguous / unresolved 0、full finite source replay 0をupstream単体で証明する。
 6. その後だけObservation ASTへ接続し、代表machine/strictと独立Product Readを再実行する。
 7. 代表の共通MAJORが解消した後だけfresh run IDでfinal exact100を実行し、all100 Product ReadとCycle001受入を再計算する。
@@ -172,5 +177,6 @@ Read-only morphology probeの結果:
 ## 7. Machine-readable restart owner
 
 - `../EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Response3_ProductQualityWIP_SessionTransition_BodyFree_Receipt_20260815.json`
+- `../EmlisAIの実装済み資料/documents/Cocolon_EmlisAI_NLSv3_Cycle001_Response3_ThreeStepSessionSafeExecutionAndRestartPlan_20260815.md`
 
-この`08`と上記Receipt、mashos-api WIP commit / Draft PRだけをcurrent restart ownerとして使用する。既存のEmergency Handoff、07、old Plan、old Receiptのnext actionをcurrentへ戻さない。
+この`08`、上記Receipt、three-step plan、mashos-api WIP commit / Draft PRだけをcurrent restart setとして使用する。three-step planはcurrent navigation ownerではなく、`08`が指すResponse3実行粒度のdraftである。既存のEmergency Handoff、07、old Plan、old Receiptのnext actionをcurrentへ戻さない。

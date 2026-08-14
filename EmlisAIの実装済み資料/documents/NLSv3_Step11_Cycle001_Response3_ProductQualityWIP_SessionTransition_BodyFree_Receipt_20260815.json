@@ -12,6 +12,7 @@
     "response1": "COMPLETE",
     "response2": "COMPLETE_AND_MERGED",
     "response3": "WIP_REMOTE_PRESERVED_NOT_MERGE_READY",
+    "response3_three_step_plan": "DRAFT_PUBLISHED_AWAITING_MASH_STEP1_START",
     "cycle001": "NOT_ACCEPTED",
     "cycle002": "NOT_STARTED"
   },
@@ -128,6 +129,17 @@
     "current_runner_exact100_synchronization": "NOT_PROVED",
     "all100_body_full_product_read_current_wip": "NOT_RUN"
   },
+  "response3_three_step_execution_and_restart_plan": {
+    "path": "EmlisAIの実装済み資料/documents/Cocolon_EmlisAI_NLSv3_Cycle001_Response3_ThreeStepSessionSafeExecutionAndRestartPlan_20260815.md",
+    "sha256": "7aa13c5e4d303d4f254c38cb8c7099110cb96ccde391d494ba38ce9798e5305d",
+    "git_blob": "a5d97d6affffaad9fb09b891f8764dfda8a68d48",
+    "status": "MASH_REQUESTED_DRAFT_FOR_REVIEW",
+    "current_navigation_owner": "Cocolon_前提資料/08_cycle001_current_state.md",
+    "step_count": 3,
+    "current_step": "STEP1_NOT_STARTED",
+    "automatic_progression": false,
+    "cycle002_progression": false
+  },
   "checkpoint_verification": {
     "py_compile_passed_postimage_count": 13,
     "python_ast_parse_passed_postimage_count": 13,
@@ -187,6 +199,9 @@
   "restart": {
     "preimage_commit": "958c1b53f5b5894691e0b10e2d991fb8236d9f6f",
     "verify_exact_path_count": 13,
+    "response3_step_plan_path": "EmlisAIの実装済み資料/documents/Cocolon_EmlisAI_NLSv3_Cycle001_Response3_ThreeStepSessionSafeExecutionAndRestartPlan_20260815.md",
+    "current_step": "STEP1_NOT_STARTED",
+    "step_start_requires_mash_instruction": true,
     "first_action": "RESOLVE_FORMAL_OWNER_BOUND_LEXICAL_OBSERVATION_WITNESS_AUTHORITY_WITHOUT_RAW_SOURCE_REPLAY",
     "go_condition": "VISIBLE_OWNER_WITNESS_251_OF_251_AND_LOSSLESS_SCALAR_COVERAGE_251_OF_251_AND_AMBIGUOUS_ZERO_AND_FULL_FINITE_REPLAY_ZERO",
     "representative_machine_and_product_read_before_exact100": true,
@@ -199,9 +214,11 @@
     "branch": "agent/cycle001-response3-acceptance-20260814",
     "base_commit": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
     "draft_pull_request": "https://github.com/MassyuRed/Cocolon/pull/29",
+    "changed_path_count": 3,
     "changed_paths": [
       "Cocolon_前提資料/08_cycle001_current_state.md",
-      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Response3_ProductQualityWIP_SessionTransition_BodyFree_Receipt_20260815.json"
+      "EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_Response3_ProductQualityWIP_SessionTransition_BodyFree_Receipt_20260815.json",
+      "EmlisAIの実装済み資料/documents/Cocolon_EmlisAI_NLSv3_Cycle001_Response3_ThreeStepSessionSafeExecutionAndRestartPlan_20260815.md"
     ],
     "containing_commit_identity": "THE_REMOTE_BRANCH_HEAD_COMMIT_THAT_CONTAINS_THIS_RECEIPT",
     "postverify_rule": "FRESH_REMOTE_BRANCH_HEAD_PR_HEAD_CHANGED_PATHS_AND_BLOB_IDENTITIES_ARE_AUTHORITATIVE"
