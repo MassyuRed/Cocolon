@@ -1,5 +1,5 @@
 work_attitude_rules_for_karen
-revision_date: 2026-08-11
+revision_date: 2026-08-15
 created_at: 2026-05-17 18:58:26 JST
 format: UTF-8 text / Notepad向け
 normative_status: CURRENT_ENTRY
@@ -32,13 +32,14 @@ non-Pro成果物は`UNTRUSTED_NOT_ADOPTED`として扱い、最後のPro verifie
    - `memory/mash_and_karen.md`
 2. 本fileを読む。
 3. `CURRENT_RULES.md`と`18_chat_work_environment_selection_rule_2026_08_06.txt`を読む。
-4. Cycle001作業の場合、`../08_cycle001_current_state.md`を読み、current head、current recovery lineage、last reusable technical credit、first unfinished technical gateを固定する。
+4. Cycle001作業の場合、fresh applicable refの`../08_cycle001_current_state.md`を解決し、current head、current recovery lineage、last reusable technical credit、first unfinished technical gateを固定する。2026-08-15監査時点ではCocolon Draft PR #29 head `0854e21f92f841fd2cfdcef08b9e3117fc93f96a`がworking currentであり、merge後またはhead更新後はfresh refを再確認する。
 5. `09_work_start_checklist.txt`を今回の作業について埋める。
 6. `../07_latest_snapshot_diff.md`のEOF側最後の完全なcurrent sectionと、latest durable task handoffを確認する。ただしCycle001の次作業は`08_cycle001_current_state.md`から選び、07やhistorical Handoffの古い`next authority`から選ばない。
 7. GitHub上の`Cocolon` / `mashos-api` current head、対象path、指定predecessorを確認する。
 8. `manifest.json`のactivation mapから、今回必要な専門ruleだけを読む。
-9. 前提資料を地図、実ファイル・contract・test・logを現物として両方確認する。
-10. 出力直前に`99_integrated_paste_each_time.txt`を通す。
+9. EmlisAI / Piece / 分析構造 / CMEEを触る場合、`../current_structure/00_three_core_and_cmee_read_first.md`と対象mapを読み、商品目的、current route、owner path、保護境界、current / futureを固定する。
+10. 前提資料を地図、実ファイル・contract・test・logを現物として両方確認する。
+11. 出力直前に`99_integrated_paste_each_time.txt`を通す。
 
 # 2. current ownerと優先関係
 
@@ -49,7 +50,7 @@ non-Pro成果物は`UNTRUSTED_NOT_ADOPTED`として扱い、最後のPro verifie
 ## Cycle001 current navigation
 
 - `../08_cycle001_current_state.md`
-- Cycle001の次作業選択では、このfileが唯一のcurrent navigation ownerです。
+- Cycle001の次作業選択では、fresh applicable refのこのfileが唯一のcurrent navigation ownerです。mainがDraftより古い場合、mainをcurrentとして採用しません。監査時点のSHAを将来へ固定しません。
 - `../07_latest_snapshot_diff.md`、Plan、Handoff、receipt、過去authorityの`next authority`は証拠・履歴であり、このfileと一致しない限りcurrent next actionへ採用しません。
 
 ## 実行Gate
@@ -62,6 +63,16 @@ non-Pro成果物は`UNTRUSTED_NOT_ADOPTED`として扱い、最後のPro verifie
 - GitHub reflection: `../11_cocolon_github_transport_and_session_continuity.md`
 - Work Python / pytest runtime: `../13_cocolon_work_test_runner_runtime_continuity.md`
 - durable recording: `../14_cocolon_continuous_work_recording_and_emergency_handoff.md`
+
+## 三大中核構造とCMEEのcurrent structure
+
+- 共通入口: `../current_structure/00_three_core_and_cmee_read_first.md`
+- EmlisAI: `../current_structure/01_emlis_ai_current_structure.md`
+- Piece: `../current_structure/02_piece_current_structure.md`
+- 分析構造: `../current_structure/03_analysis_current_structure.md`
+- CMEE: `../current_structure/04_cmee_current_structure.md`
+
+このmap群はcurrent全体構造のrouting ownerであり、各product canonical owner、actual source / test、Cycle001の`08`を上書きしません。
 
 ## 優先順位
 
@@ -86,17 +97,19 @@ non-Pro成果物は`UNTRUSTED_NOT_ADOPTED`として扱い、最後のPro verifie
 - material artifactのdurable ownerと、GitHub writeの個別approvalまたはRule 18 standing delegation basisの有無。
 - Cycle001の場合、current recovery lineage、最後に再利用できる技術credit、最初の未完了技術gate、直接扱う実ファイル / test / receipt。
 - Cycle001の場合、historicalな完了済み判断やretired経路を次作業へ戻していないこと。
+- EmlisAI / Piece / 分析構造 / CMEEに影響する場合、対象current structure map exact1以上を固定し、構造変更なら同じwrite unitでmapを更新すること。対象domain内で構造差分がない場合は`STRUCTURE_MAP_DELTA_NONE`と理由を作業記録またはPR説明へ一行残すこと。対象外のCocolon作業では`NOT_APPLICABLE`とする。
 
 # 4. Piece current definition
 
-PieceはQ&Aそのものではありません。Q&AはPieceの一形式です。
+PieceはQ&Aそのものではありません。現行ユーザー表示に残るQ&Aはpre-release legacyであり、新Pieceのactive formatではありません。
 
 current Pieceは、ユーザーの考えや価値観を他者に伝えるための文章へ整形し、画像化する機能です。
 
 Piece作業では次をcurrent ownerとして確認します。
 
-- `Cocolon_Piece/00_read_first.md`
-- `Cocolon_Piece/manifest.json`
+- `../current_structure/02_piece_current_structure.md`
+- `../../Cocolon_Piece/00_read_first.md`
+- `../../Cocolon_Piece/manifest.json`
 
 # 5. ruleを増殖させない
 
@@ -121,3 +134,4 @@ Piece作業では次をcurrent ownerとして確認します。
 - Cycle001では、`08_cycle001_current_state.md`が示すfirst unfinished technical gate以外へ逸れていない。
 
 これらを満たした場合だけ完了を報告します。
+

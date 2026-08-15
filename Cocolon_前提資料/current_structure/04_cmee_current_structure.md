@@ -1,0 +1,372 @@
+---
+doc_id: cocolon_meaning_experience_engine_current_structure
+title: "CMEE — Current Structure"
+revision_date: "2026-08-15 JST"
+document_role: "CMEE_CURRENT_STRUCTURE_AND_PREPARATION_OWNER"
+effective_when: "MERGED_TO_COCOLON_MAIN"
+publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
+design_state: "FINAL_TECHNICAL_DESIGN_CANDIDATE"
+implementation_state: "NOT_STARTED"
+runtime_effect: 0
+automatic_progression: false
+---
+
+# CMEE — Current Structure
+
+## 0. Current conclusion
+
+正式推奨名称:
+
+> Cocolon Meaning Experience Engine V1  
+> Cocolon 三大中核構造共通・意味体験生成エンジン V1  
+> 略称 CMEE V1
+
+CMEEは、EmlisAI、Piece、分析構造の三商品から必要能力を逆算した共有生成中枢である。
+G0–G10の補助経路またはcurrent text guardを拡大して作るのではない。
+
+Current state:
+
+    final technical design candidate
+    not approved for implementation
+    not implemented
+    not production connected
+    not Cycle001 proven
+    Piece not connected
+    Analysis not connected
+    automatic progression false
+
+## 1. Product-first derivation
+
+CMEEが支えるproduct job exact3:
+
+1. EmlisAI: 入力を読まれた形の観測へ変え、必要な場合だけ一点を問い、回答分だけ観測を深める。
+2. Piece: 本人の意味を、他者が単独で受け取れるcanonical textと画像artifactへ変える。
+3. 分析構造: 蓄積入力から現在の自己構造routeを根拠付きで形にし、観測と分離したIF routeを扱う。
+
+必要な共通flow:
+
+    user-owned source
+      -> source roles and evidence
+      -> provisional grounded meaning
+      -> core-owned product intent
+      -> experience / artifact plan
+      -> text, visual card, map, route
+      -> positive source / meaning trace
+      -> machine verification
+      -> core-specific human Product Read
+
+## 2. CMEEの位置づけ
+
+CMEEはengineering上first-classのshared technical coreである。
+ただし独立したuser-facing purpose、release、acceptanceを持たないため、商品構造上の第四中核ではない。
+
+CMEEは文章生成だけに限定しない。primary artifactはcoreごとに異なる。
+
+| Core | Primary artifact |
+|---|---|
+| EmlisAI | observation／reception／clarification lifecycle |
+| Piece | PieceArtifactSpec + derived RenderedPieceExport |
+| Analysis | ObservedSelfStructureMap／IfRouteSimulation／SavedRouteIntent |
+
+## 3. CMEEが所有する責任
+
+### 3.1 Source and evidence
+
+- SourceEnvelope
+- source role、version、owner、stage、privacy、lineage
+- EvidenceGraph
+- body-full private materialとbody-free public telemetryの分離
+- cross-core source mixing rejection
+
+### 3.2 Japanese meaning infrastructure
+
+- predicate／argument attachment
+- actor／referent
+- lemma／inflection
+- polarity、modality、temporal／topic scope
+- relation endpoint／direction
+- unknown、conflict、provenance、fail-close
+
+これはlanguage-preservation infrastructureであり、人間理解の完成、本人の真実、隠れた原因を所有しない。
+
+### 3.3 Plan and realization
+
+- core-neutral artifact envelope
+- SemanticDutyPlan／must-realize duty
+- text／visual／graph projection plans
+- plan-owned Japanese realization
+- clause、particle、inflection、connective、sentence boundary
+- candidate generation／comparison
+- positive realization trace
+
+### 3.4 Trust and improvement
+
+- grounding、no-added-claim、no-mixing
+- overclaim／diagnosis／unsupported future rejection
+- Japanese coherence／non-template signals
+- sentence／block／node／edgeからplan／meaning／sourceへのtrace
+- body-free quality report
+- causal localization、batch／version diff
+- release／migration／incident時だけのOptional Reproducibility Capsule
+
+## 4. CMEEが所有しない責任
+
+各product coreへ残すもの:
+
+- allowed sourceとsource eligibility
+- 何を観測／表現／主張するか
+- claim selection、attention、depth
+- tone、voice、format、visible hierarchy
+- core-specific artifact lifecycle
+- API、DB、RN、public route
+- human Product Read、actual device read、product acceptance
+
+CMEEは一つの共通voice、万能template、core横断body reuseを作らない。
+
+## 5. User meaning sovereignty
+
+ユーザー本人が、自分の言葉の意味を最終的に確定できる主体である。
+
+CMEEの内部graphは:
+
+- source-bound
+- provisional
+- product-scoped
+- correctable
+- unknown-capable
+
+であり、本人の絶対的真実ではない。
+
+user-confirmed、user-corrected、unknown、hypothesisのlineageを分け、original sourceを書き換えない。
+
+Candidate selectionはhard validity constraintsを先に適用し、有効候補の中で意味保持をnaturalness、shortness、appearance、machine score、resource costより先に置く。
+faithfulなrouteが比例的scopeで作れない場合、安価なmeaning-loss candidateを選ばずSTOP／redesignする。
+
+## 6. Logical architecture
+
+    Core Source Adapter
+      -> SourceEnvelope
+      -> Meaning Authority Provider
+      -> GroundedMeaningGraph
+      -> Core Product Intent Compiler
+      -> ExperiencePlan / ArtifactPlan
+      -> Realization Candidate Set
+      -> Positive Trace + Guard Pipeline
+      -> GenerationArtifactBundle
+      -> Core Lifecycle Adapter
+
+GenerationArtifactBundle minimum identity:
+
+- artifact_id
+- artifact_version
+- artifact_kind
+- core_id
+- product_job
+- epistemic_partition
+- source commitments
+- semantic_graph_ref
+- artifact_plan_id
+- primary artifact
+- companion artifacts
+- realization trace
+- quality report
+- parent／projection lineage
+- generated／rejected／unavailable status
+
+## 7. Current actual shared subsystem
+
+Current mashos-apiにはcocolon_text_generation_coreが存在する。
+
+| Responsibility | Path | Actual role |
+|---|---|---|
+| shared types | ai/services/ai_inference/cocolon_text_generation_core/types.py | SHARED_SUBSYSTEM |
+| evidence | ai/services/ai_inference/cocolon_text_generation_core/evidence.py | SHARED_SUBSYSTEM |
+| phrase units | ai/services/ai_inference/cocolon_text_generation_core/phrase_units.py | SHARED_SUBSYSTEM |
+| sentence plan | ai/services/ai_inference/cocolon_text_generation_core/sentence_plan.py | SHARED_SUBSYSTEM |
+| composer | ai/services/ai_inference/cocolon_text_generation_core/composer.py | caller-supplied candidate validator |
+| result／policies | ai/services/ai_inference/cocolon_text_generation_core/result.py、ai/services/ai_inference/cocolon_text_generation_core/policies.py | SHARED_SUBSYSTEM |
+| guards | ai/services/ai_inference/cocolon_text_generation_core/guards/ | grounding、coherence、must-keep、overclaim、template echo |
+| adapters | ai/services/ai_inference/cocolon_text_generation_core/adapters/emlis_observation_composer.py、ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer.py、ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer.py | current guard adapters |
+| boundary test | ai/tests/test_cocolon_text_generation_core_boundary.py | exact3 output boundary |
+
+CoreTextComposerはcandidateを生成せず、missing candidateをfail-closeする。
+これはCMEEの再利用subsystem候補であり、CMEE全体またはJapanese meaning authorityではない。
+
+## 8. Exactly one host recommendation
+
+Final design candidateの推奨route:
+
+    CMEE_V1A_OUTER_HOST_STRANGLER_ROUTE_V1
+
+同じmashos-api process内に、outer hostとして次を設計候補とする。
+
+    ai/services/ai_inference/cocolon_meaning_experience_engine/
+
+ただし空package、typesだけ、adapterだけを先に作らない。
+最初のimplementation packetはEmlis observationのsourceからsurface／traceまでのvertical sliceとatomicでなければならない。
+
+Current cocolon_text_generation_coreは初期段階でdownstream candidate validation／common guard subsystemとして保持する。
+PR #2のCycle001 recovery builderをCMEE wrapperまたはhostへ昇格しない。
+
+cutover時:
+
+- CMEE callable／runner ingress exact1
+- old direct active ingress exact0
+- parallel engine／fallback／mirror route 0
+- old codeの後続除去は、既にunreachable／reference-onlyとなったものだけ
+
+Phase 0でouter host、callable、import ingress、meaning provider、exact change pathsが一意にならない場合、NO_SAFE_CMEE_V1A_CANDIDATE_STOPとする。
+
+## 9. Current PR #2／G0–G10／CQIF disposition
+
+### mashos-api Draft PR #2
+
+- private／experimental Cycle001 WIP
+- runtime_connected false
+- CMEE hostではない
+- reusable source／evidence／plan knowledgeはsymbol単位で再評価する
+- 5900行級recovery builderを丸ごとwrapしない
+
+### G0–G10 assets
+
+KEEP／EXTRACT:
+
+- source lineage
+- semantic evidence
+- plan-owned realization
+- causal RED／GREEN
+- human Product Read separation
+- batch evaluationの最小責任
+- privacy／body-free telemetry
+
+OPTIONAL CAPSULE:
+
+- environment fingerprint
+- artifact／hash／transport／epoch／recovery
+- release candidate、migration、重大incident、forensic／security時だけ
+
+RETIRE FROM DAILY AUTHORITY:
+
+- inspector／scanner／harness常時運用
+- per-step SHA authority chain
+- mandatory runtime identity
+- controller／FD proof
+- transport proofをproduct validityにする経路
+- technical GREENを進捗代替にする経路
+- duplicate Receipt／Result／Handoff／Plan／snapshot
+
+### CQIF
+
+Cocolon_Quality_Intelligence_Foundation_CrossCore_ApplicationPlan_20260814.mdはnon-normative proposalである。
+CMEEが推奨top-level architectureをsupersedeし、CQIFはquality plane／asset recoveryのhistorical design sourceとして保持する。並列active ownerにしない。
+
+## 10. Current design owner
+
+Full design candidate:
+
+[Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md](../designs/cmee/Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md)
+
+Lifecycle:
+
+    FINAL_TECHNICAL_DESIGN_CANDIDATE
+    implementation approval NOT_YET
+    production / test / dependency / DB / API / RN effect 0
+    Cycle001 restart effect 0
+
+このcurrent structure mapとfull designがmergeされても、Phase 0またはimplementationの承認にはならない。
+
+## 11. Implementation order
+
+1. CMEE three-core architecture defined
+2. one bounded Phase 0でEmlis V1-A exact routeまたはSTOP
+3. separate Mash LEVEL_3でprovider／resource／dependency／exact path承認
+4. disabled Emlis vertical candidate
+5. separate current 08／planに従うCycle001 Step1 re-entry
+6. Cycle001 product proof
+7. Emlis question system
+8. Piece visual artifact
+9. Analysis observed route
+10. Analysis IF route
+11. second actual consumerでshared contractをformalize
+12. three-core operational proof
+
+CMEE phaseは上位migration順であり、Cycle001の08／active planを置き換えない。
+
+## 12. Anti-bloat boundaries
+
+新しいshared componentは、人間用のwork説明として次を全て示す。
+
+1. actual core consumer
+2. three-core quality criterion
+3. observed product failure／acceptance gap
+4. output／artifactを変える因果
+5. next actual run／Product Read
+6. stop／retire condition
+7. duplicate ownerがないこと
+
+これを新しいruntime Gate、checker、schema、Receipt、dashboardへしない。
+
+さらに:
+
+- new production symbolのcriterion mapping 100%
+- orphan module／metric／field 0
+- shared-only implementation packet 0
+- foundation-only packetをProduct Readなしで連続させない
+- active duplicate owner 0
+- formal shared APIはsecond actual consumer前にfreezeしない
+- Emlis-only providerをthree-core universal truthへ昇格しない
+- external network／storage write 0 default
+- API／DB／RN／public route effect 0 default
+- two correction cyclesでnamed MAJOR／BLOCKERが減らなければDETOUR_RISK_STOP
+
+規模そのものを禁止しない。三商品の品質へ届く因果とactual improvementがない肥大だけを止める。
+
+## 13. Current gaps
+
+1. Phase 0 route fit-gap documentは未作成。
+2. Japanese predicate／argument attachment provider exact1は未選択。
+3. CMEE package、callable、runner ingressは存在しない。
+4. Emlis vertical slice、Piece adapter、Analysis adapterは未実装。
+5. current text coreとPR #2 assetのsymbol-level dispositionはPhase 0で確定が必要。
+6. Cycle001はFORMAL_LEXICAL_AUTHORITY_UNRESOLVEDで停止中。
+7. full designはcandidateでありMash implementation approvalを消費していない。
+
+## 14. History and design pointers
+
+- full CMEE final technical design candidate
+- Cocolon_前提資料/Cocolon_Quality_Intelligence_Foundation_CrossCore_ApplicationPlan_20260814.md
+- Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_安全装置全履歴_20260701_20260813.md
+- Cocolon_前提資料/audits/emlis_ai/Cocolon_Cycle001_PostG2_SystemArchitecture_Reusability_Audit_20260814.md
+- existing cocolon_text_generation_core and its boundary test
+- mashos-api Draft PR #2 as experimental asset／failure knowledge
+
+## 15. Map update triggers
+
+次を変更するworkは、このfileを同じwrite unitで更新する。
+
+- CMEE host／package／callable／runner ingress
+- Japanese meaning provider／dependency／resource boundary
+- common protocol／artifact identity
+- Emlis／Piece／Analysis adapter connection
+- current text core／PR #2／G0–G10 asset disposition
+- active owner cutover／retirement
+- implementation phase／proof state
+- CMEEのauthority boundaryまたはanti-bloat boundary
+
+内部logicのみで構造が不変ならSTRUCTURE_MAP_DELTA_NONEと理由を記す。
+
+## 16. Last verified refs
+
+    Cocolon main
+      de9c3d985053bbaaa7fc0d396e688cc2097ece40
+
+    Cocolon Draft PR #29
+      0854e21f92f841fd2cfdcef08b9e3117fc93f96a
+
+    mashos-api main
+      a8ca4ddf7b7ae76bf7b3d73e74e3a5808d623428
+
+    mashos-api Draft PR #2
+      958c1b53f5b5894691e0b10e2d991fb8236d9f6f
+
+次回はfresh refと実fileを再確認する。

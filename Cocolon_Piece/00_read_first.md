@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_piece_read_first
 title: "Cocolon Piece — Read First"
-revision_date: "2026-08-12 JST"
+revision_date: "2026-08-15 JST"
 decision_owner: "Mash"
 workstream: "Cocolon / Piece"
 document_status: "CURRENT_PIECE_WORKSTREAM_ENTRY"
@@ -19,7 +19,10 @@ Piece workstream:
 EmlisAI implementation history:
   EmlisAIの実装済み資料/
 
-current Piece premise:
+current Piece structure map:
+  Cocolon_前提資料/current_structure/02_piece_current_structure.md
+
+current Piece premise / historical phase closure:
   Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md
 ```
 
@@ -71,8 +74,12 @@ PCE-9A B01-I Contract Owner Implementation:
   COMPLETE_CODE_DISABLED_TARGETED_GREEN
 
 PCE-9A B02-A M0/M1 Tracked Migration + Legacy Bridge:
-  NOT_ACTIVATED
-  SEPARATE_MASH_APPROVAL_REQUIRED
+  CAUSAL_RED_TEST_FROZEN_PRESENT
+  EXECUTION_CREDIT_UNVERIFIED
+  IMPLEMENTATION_ARTIFACTS_NOT_MATERIALIZED
+  DISPOSABLE_DATABASE_GREEN_NOT_RUN_NOT_CREDIT
+  PRODUCTION_APPLY_NOT_AUTHORIZED
+  IMPLEMENTATION_REQUIRES_SEPARATE_MASH_APPROVAL
 
 Analysis roadmap:
   NOT_ACTIVATED
@@ -405,7 +412,7 @@ API registration / DB / migration / RN / runtime connection:
 
 ```text
 01 B1      COMPLETE
-02 B2-A    NEXT_INACTIVE
+02 B2-A    CAUSAL_RED_TEST_FROZEN_PRESENT__EXECUTION_UNVERIFIED__IMPLEMENTATION_INACTIVE
 03 B2-B    NOT_ACTIVATED
 04 B3      NOT_ACTIVATED
 05 B4      NOT_ACTIVATED
@@ -427,7 +434,7 @@ API registration / DB / migration / RN / runtime connection:
 21 PCE-U1  NOT_ACTIVATED
 ```
 
-B2-AはM0 tracked migration baselineとM1 legacy read bridge/current caller rebindを扱う。B1完了による自動activationはない。
+B2-AはM0 tracked migration baselineとM1 legacy read bridge/current caller rebindを扱う。causal RED test bytesはcurrent mashos-api mainに存在するが、durable execution creditは未確認である。M0/M1 implementation、disposable PostgreSQL GREEN、production applyは未成立であり、B1完了またはtest存在による自動activationはない。
 
 ## 11. Environment assignment
 
@@ -461,14 +468,15 @@ EmlisAI current executable Work-required task
 ## 12. Read order
 
 1. `Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt`
-2. `Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md`
-3. `Cocolon_Piece/manifest.json`
-4. revised clean-cutover roadmap
-5. PCE-1 through PCE-8 canonical artifacts
-6. B01 RED test and pure contract owner at their pinned mashos-api commits
-7. exact target/current files for the separately approved B2-A packet
-8. PCE-7 RED/test matrix rows assigned to B2-A
-9. Analysis作業の場合だけ、`Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md`
+2. `Cocolon_前提資料/current_structure/02_piece_current_structure.md`
+3. `Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md`
+4. `Cocolon_Piece/manifest.json`
+5. revised clean-cutover roadmap
+6. PCE-1 through PCE-8 canonical artifacts
+7. B01 RED test and pure contract owner at their pinned mashos-api commits
+8. B02-A frozen causal RED test bytes and exact target/current files for a separately approved implementation packet
+9. PCE-7 RED/test matrix rows assigned to B02-A
+10. Analysis作業の場合だけ、`Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md`
 
 ## 13. Prohibited
 
@@ -491,13 +499,21 @@ EmlisAI current executable Work-required task
 ## 14. Current actual basis
 
 ```text
-Cocolon pre-sync head / tree:
-  4979d8cf3590ec4e4a34db73dc583a953c89bf4e
-  315d0984c453d428348e33494c487341eba00285
+Cocolon audited main head / tree:
+  de9c3d985053bbaaa7fc0d396e688cc2097ece40
+  4e7901f8b3e10d20f242e19be91f6c725f625b2a
 
 mashos-api current head / tree:
-  7a10fc593b123cb9d9b02147c4b345894dba0c0b
-  842715d588c0573f0de5411dae62b8b8bb22f3a4
+  a8ca4ddf7b7ae76bf7b3d73e74e3a5808d623428
+  a7f782e48e8ac0c97992c74e5a0c5a828f1a9e00
+
+B02-A causal RED test:
+  ai/tests/piece_v2/db/test_b02_m0_m1_legacy_bridge.py
+  FROZEN_PRESENT
+  EXECUTION_CREDIT_UNVERIFIED
+
+B02-A implementation required exact5:
+  absent
 
 current user-visible product:
   old Q&A Piece flow
@@ -526,11 +542,13 @@ environment:
   ISOLATED_DB_REQUIRED for honest migration GREEN
 
 state:
-  NOT_ACTIVATED
+  CAUSAL_RED_TEST_FROZEN_PRESENT
+  EXECUTION_CREDIT_UNVERIFIED
+  IMPLEMENTATION_NOT_ACTIVATED
   SEPARATE_MASH_APPROVAL_REQUIRED
 
 expected first lifecycle:
-  packet-scoped causal RED / migration-preflight freeze
+  bounded M0/M1 implementation + isolated migration GREEN
 
 production DB apply:
   exact0 until separately approved
@@ -549,7 +567,8 @@ B01 API / DB / migration / RN / runtime connection:
   exact0
 
 this state-sync Cocolon documentation:
-  reflected
+  STAGED_IN_DOCS_DRAFT
+  EFFECTIVE_WHEN_MERGED
 
 this state-sync production source / DB / API / RN / runtime:
   exact0
@@ -563,3 +582,5 @@ release effect:
 automatic progression:
   false
 ```
+
+
