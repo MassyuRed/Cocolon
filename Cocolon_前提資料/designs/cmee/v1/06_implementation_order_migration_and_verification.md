@@ -6,6 +6,7 @@
 - current provider admission: `NO_SAFE_CMEE_V1A_CANDIDATE_STOP`
 - L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
 - current L3-R state: `L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP`
+- current P0-R1 executor candidate state: `P0R1_GITHUB_HOSTED_EXECUTOR_FINAL_TECHNICAL_PROPORTIONALITY_STOP`
 - automatic progression: `false`
 
 ---
@@ -32,6 +33,8 @@ NO_SAFE_CMEE_V1A_CANDIDATE_STOP
 これはCMEE全体の不可能判定ではない。current formal contractのまま、provisional parserをauthorityへ昇格して実装を始めないためのbounded STOPである。
 
 2026-08-15 JST、MashはL3-Rのrouteとして`ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`を選択し、`CMEE_V1_L3R_ROUTE_B_BOUNDED_PREFLIGHT_TECHNICAL_BODY` v1.0.0（canonical SHA-256 `4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901`）を承認した。L3-R exitは成立した。P0 exact1はactivation Gateで`P0_ACTIVATION_PRECONDITION_STOP`となり、current stateは`L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP`である。implementation effectは0である。
+
+後続のreviewed GitHub-hosted P0-R1 executor candidateは、minimum-compliant residual 32–52 focused hoursがcurrent one-shot evidence価値に比例しないため、`NO_SAFE_NEXT_CANDIDATE_STOP / FINAL_TECHNICAL_PROPORTIONALITY_STOP / DETOUR_RISK_STOP`としてpre-executionで棄却した。P0-R1 execution、provider/resource/platform evidence、implementation creditは0であり、Route BまたはKWJAのFAILではない。
 
 ## 1. Mash LEVEL_3 route decision
 
@@ -78,6 +81,7 @@ MashはRoute B directionに加えてapproved body v1.0.0へbounded preflightとe
 | D0 | 詳細設計publication | user request | exact7 docs + map sync remote verified | 0 |
 | L3-R | Route A / B + bounded preflight authorization | D0 | `L3R_ROUTE_B_APPROVED_P0_AUTHORIZED_NOT_STARTED` | 0 |
 | P0 | provider/resource preflight | L3-R | measured provider / platform / resource evidence or STOP | 0 |
+| P0-R1 | current executor blocker recovery assessment | P0 activation terminal + reviewed executor candidate | `P0R1_GITHUB_HOSTED_EXECUTOR_FINAL_TECHNICAL_PROPORTIONALITY_STOP`、execution 0 | 0 |
 | L3-I | dependency/resource/I1 allowlist decision | P0 PASS | exact adoption and implementation packet approved or STOP | 0 |
 | I1 | Emlis disabled vertical | L3-I | candidate ready disabled | production 0 |
 | I2 | representative correction | I1 | machine + Product Read packet | production 0 |
@@ -606,6 +610,7 @@ NO_SAFE_CMEE_V1A_CANDIDATE_STOP
 CMEE_L3R_ROUTE_B_SELECTED_BOUNDED_PREFLIGHT_NOT_AUTHORIZED_STOP
 CMEE_L3R_ROUTE_B_APPROVED_P0_AUTHORIZED_NOT_STARTED
 CMEE_L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP
+P0R1_GITHUB_HOSTED_EXECUTOR_FINAL_TECHNICAL_PROPORTIONALITY_STOP
 CMEE_V1A_EMLIS_OBSERVATION_CANDIDATE_READY_DISABLED_NOT_ADMITTED
 CMEE_V1A_CYCLE001_PROVEN
 CMEE_V1A_EMLIS_OBSERVATION_PRODUCTION_OPERATIONAL
@@ -616,7 +621,7 @@ CMEE_V1E_ANALYSIS_IF_ROUTE_OPERATIONAL
 CMEE_V1_THREE_CORE_OPERATIONAL
 ```
 
-今回のterminal publication targetは、同じDraft PR上の`CMEE_L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP`である。P0 authorityは消費済みで、retry / fallback / automatic progressionは0。Draft publicationはimplementation admission、dependency adoption、L3-I、Cycle001 effectにはならず、merge後のfresh verificationでだけ`CMEE_DETAILED_DESIGN_CURRENT_OWNER_MERGED`になり得る。
+既存P0 terminalは同じDraft PR上の`CMEE_L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP`として保持する。今回のdocs-only reflection targetは別axisの`P0R1_GITHUB_HOSTED_EXECUTOR_FINAL_TECHNICAL_PROPORTIONALITY_STOP`である。P0-R1 execution、retry、fallback、automatic progressionは0。Draft publicationはimplementation admission、dependency adoption、L3-I、Cycle001 effectにはならず、merge後のfresh verificationでだけ`CMEE_DETAILED_DESIGN_CURRENT_OWNER_MERGED`になり得る。
 
 各stateは別であり、前のstateを次へ自動変換しない。
 
@@ -671,3 +676,30 @@ automatic_progression = false
 ```
 
 P0はcurrent executorのactivation preconditionを満たせず、後段effect 0でterminalとなった。これはprovider/resource/platform evidence PASSでもKWJA capability FAILでもない。current authorityは再利用せず、別executorで再試行するにはnew LEVEL_3 technical bodyとMash判断が必要である。
+
+## 19. P0-R1 GitHub-hosted executor final proportionality STOP
+
+Final technical body:
+
+[CMEE V1 P0-R1 GitHub-hosted bounded executor — Final Technical Body](../CMEE_V1_P0R1_GitHubHosted_BoundedExecutor_TechnicalBody_20260815.md)
+
+```text
+body_id = CMEE_V1_P0R1_GITHUB_HOSTED_BOUNDED_EXECUTOR_FINAL_TECHNICAL_BODY
+body_version = 1.0.0
+body_canonical_sha256 = d5637c8303e377e2bda11977425f209c139911acbb56542e8526ee0afa00be70
+docs_reflection_approval = DOCS_REFLECTION_ONLY
+approval_token = CMEE_V1_P0R1_GITHUB_HOSTED_EXECUTOR_FINAL_PROPORTIONALITY_STOP_V1_APPROVED_FOR_DOCS_REFLECTION_ONLY
+p0r1_executor_candidate_state = P0R1_GITHUB_HOSTED_EXECUTOR_FINAL_TECHNICAL_PROPORTIONALITY_STOP
+rule18_verdict = NO_SAFE_NEXT_CANDIDATE_STOP
+ultra_final_technical_judgment = FINAL_TECHNICAL_PROPORTIONALITY_STOP
+work_rule_stop_classification = DETOUR_RISK_STOP
+candidate = REJECTED_PRE_EXECUTION
+P0_R1_execution = 0
+provider_resource_platform_evidence = 0
+ROUTE_B_FAILURE = NOT_ESTABLISHED
+KWJA_FAILURE = NOT_ESTABLISHED
+implementation / dependency / L3-I / I1 / Product Read / Cycle001 / production = NOT_AUTHORIZED
+automatic_progression = false
+```
+
+このpacketはexecutorを実装・実行するpacketではなく、reviewed candidateをproduct-proportional admission前に棄却したdocs-only terminal reflectionである。既存P0 result、Route B contract、KWJA candidate identity、synthetic exact12は変更しない。別executorまたはP0 boundary、provider、model、version、task、corpus、Route B contractの変更はnew Mash LEVEL_3 decisionを要し、本stateからalternate candidateへ自動進行しない。

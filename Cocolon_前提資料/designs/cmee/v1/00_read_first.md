@@ -12,6 +12,7 @@
 - Cycle001 restart effect: `0`
 - L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
 - L3-R packet state: `L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP`
+- P0-R1 executor candidate state: `P0R1_GITHUB_HOSTED_EXECUTOR_FINAL_TECHNICAL_PROPORTIONALITY_STOP`
 - automatic progression: `false`
 
 ---
@@ -128,11 +129,13 @@ current orthogonal state:
 document_lifecycle = DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE
 route_selection = ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION
 l3r_state = L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP
+p0r1_executor_candidate_state = P0R1_GITHUB_HOSTED_EXECUTOR_FINAL_TECHNICAL_PROPORTIONALITY_STOP
+p0r1_execution = 0
 provider_admission = NO_SAFE_CMEE_V1A_CANDIDATE_STOP
 runtime_state = NOT_IMPLEMENTED
 production_state = NOT_CONNECTED
 cycle_state = NOT_REOPENED
-next_decision = REMAIN_STOPPED_OR_NEW_MASH_LEVEL3_COMPLIANT_EXECUTOR_BODY
+next_decision = REMAIN_STOPPED_UNLESS_NEW_MASH_LEVEL3_ROUTE_DECISION
 automatic_progression = false
 ```
 
@@ -195,7 +198,7 @@ target listはautomatic transitionではない。design merge、preflight、depe
 - current CMEE structure mapが同じwrite unitで同期する。
 - remote bytesとchanged pathsをpostverifyする。
 
-本suiteのprimary outcomeは`BLOCKER_NARROWED`である。Route B selectionとbounded preflight technical body v1.0.0の承認によりL3-Rは成立した。P0 exact1はactivation preconditionでterminalとなり、current stateは`L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP`である。これはproduct / implementation creditではなく、商品出力、Product Read、runtime readiness、Cycle creditは増えない。
+本suiteのprimary outcomeは`BLOCKER_NARROWED`である。Route B selectionとbounded preflight technical body v1.0.0の承認によりL3-Rは成立した。P0 exact1はactivation preconditionでterminalとなり、current stateは`L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP`である。後続のreviewed GitHub-hosted P0-R1 executor candidateも比例性STOPでpre-execution rejectされ、P0-R1 executionは0である。これはproduct / implementation creditではなく、商品出力、Product Read、runtime readiness、Cycle creditは増えない。
 
 ## 10. Approved L3-R identity and activation boundary
 
@@ -230,3 +233,27 @@ automatic_progression = false
 ```
 
 このterminalはKWJA capability、license/provenance、resource cost、Route B product sufficiencyのFAILではない。current executorのactivation precondition不成立で後段を未実行のまま閉じた結果である。
+
+## 12. P0-R1 executor final technical judgment
+
+[CMEE V1 P0-R1 GitHub-hosted bounded executor — Final Technical Body](../CMEE_V1_P0R1_GitHubHosted_BoundedExecutor_TechnicalBody_20260815.md)
+
+```text
+body_id = CMEE_V1_P0R1_GITHUB_HOSTED_BOUNDED_EXECUTOR_FINAL_TECHNICAL_BODY
+body_version = 1.0.0
+body_canonical_sha256 = d5637c8303e377e2bda11977425f209c139911acbb56542e8526ee0afa00be70
+docs_reflection_approval = DOCS_REFLECTION_ONLY
+approval_token = CMEE_V1_P0R1_GITHUB_HOSTED_EXECUTOR_FINAL_PROPORTIONALITY_STOP_V1_APPROVED_FOR_DOCS_REFLECTION_ONLY
+p0r1_executor_candidate_state = P0R1_GITHUB_HOSTED_EXECUTOR_FINAL_TECHNICAL_PROPORTIONALITY_STOP
+rule18_verdict = NO_SAFE_NEXT_CANDIDATE_STOP
+work_rule_stop_classification = DETOUR_RISK_STOP
+candidate = REJECTED_PRE_EXECUTION
+P0_R1_execution = 0
+ROUTE_B_FAILURE = NOT_ESTABLISHED
+KWJA_FAILURE = NOT_ESTABLISHED
+provider_resource_platform_evidence = 0
+L3-I / dependency / implementation / I1 / Product Read / Cycle001 / production = NOT_AUTHORIZED
+automatic_progression = false
+```
+
+Final bodyは、reviewed current GitHub-hosted executor candidateの技術的成立可能性と商品経路への比例性を分離し、minimum-compliant residual 32–52 focused hoursがcurrent one-shot evidence価値に比例しないためSTOPした。既存P0 terminalを置き換えず、Route B、KWJA、meaning sovereignty、owner denominator、clarification exact1、supplemental lineageを保持する。別executorまたはP0 boundary、provider、model、version、task、corpus、Route B contractを変える場合はnew Mash LEVEL_3 decisionへ戻る。

@@ -9,6 +9,7 @@ design_state: "FINAL_TECHNICAL_DESIGN_CANDIDATE"
 detailed_design_state: "DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE_STOP_BEFORE_IMPLEMENTATION"
 l3r_route_selection: "ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION"
 l3r_packet_state: "L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP"
+p0r1_executor_candidate_state: "P0R1_GITHUB_HOSTED_EXECUTOR_FINAL_TECHNICAL_PROPORTIONALITY_STOP"
 implementation_state: "NOT_STARTED"
 runtime_effect: 0
 automatic_progression: false
@@ -35,6 +36,8 @@ Current state:
     L3-R route selection = ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION
     L3-R bounded preflight authorization = GRANTED_BY_APPROVED_BODY_V1
     P0 = P0_ACTIVATION_PRECONDITION_STOP
+    P0-R1 GitHub-hosted executor candidate = REJECTED_PRE_EXECUTION
+    P0-R1 final judgment = NO_SAFE_NEXT_CANDIDATE_STOP / DETOUR_RISK_STOP
     not approved for implementation
     not implemented
     not production connected
@@ -148,6 +151,7 @@ CMEEの内部graphは:
 user-confirmed、user-corrected、unknown、hypothesisのlineageを分け、original sourceを書き換えない。
 
 2026-08-15 JST、MashはL3-Rのrouteとして`ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`を選択し、続いて`CMEE_V1_L3R_ROUTE_B_BOUNDED_PREFLIGHT_TECHNICAL_BODY` v1.0.0（canonical SHA-256 `4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901`）を承認した。provider proposalをmeaning authorityへ昇格せず、ambiguityに依存しないlimited observation、original-input lifecycle全体で最大一回のuser clarification、または`UNAVAILABLE`で閉じる。L3-Rは成立した。P0 exact1はactivation Gateで`P0_ACTIVATION_PRECONDITION_STOP`となり、authorityは消費済みである。dependency採用、implementation、L3-I、runtime、Cycle001再入場は未承認のままである。
+同日、Mashは`CMEE_V1_P0R1_GITHUB_HOSTED_BOUNDED_EXECUTOR_FINAL_TECHNICAL_BODY` v1.0.0（canonical SHA-256 `d5637c8303e377e2bda11977425f209c139911acbb56542e8526ee0afa00be70`）のdocs-only reflectionを承認した。reviewed GitHub-hosted executor candidateは、approved isolationを保持したminimum-compliant residualでも32–52 focused hoursを要し、current one-shot evidence価値に比例しないため、`NO_SAFE_NEXT_CANDIDATE_STOP / FINAL_TECHNICAL_PROPORTIONALITY_STOP / DETOUR_RISK_STOP`としてpre-executionで棄却した。P0-R1 executionは0であり、この判断をRoute B、KWJA、provider capabilityの失敗へ変換しない。
 
 Candidate selectionはhard validity constraintsを先に適用し、有効候補の中で意味保持をnaturalness、shortness、appearance、machine score、resource costより先に置く。
 faithfulなrouteが比例的scopeで作れない場合、安価なmeaning-loss candidateを選ばずSTOP／redesignする。
@@ -288,6 +292,10 @@ Full design candidate:
 
 [Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md](../designs/cmee/Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md)
 
+Final P0-R1 executor judgment:
+
+[CMEE V1 P0-R1 GitHub-hosted bounded executor — Final Technical Body](../designs/cmee/CMEE_V1_P0R1_GitHubHosted_BoundedExecutor_TechnicalBody_20260815.md)
+
 Detailed implementation design suite:
 
 [CMEE V1 詳細設計 — Read First](../designs/cmee/v1/00_read_first.md)
@@ -315,8 +323,8 @@ Lifecycle:
 1. CMEE three-core architecture and detailed suite defined
 2. Phase 0 current result `NO_SAFE_CMEE_V1A_CANDIDATE_STOP`
 3. Mash L3-R: Route B selectionとbounded preflight technical body v1.0.0を承認済み（2026-08-15 JST）。L3-R成立、P0 exact1はactivation precondition STOPでterminal
-4. approved bodyのfresh docs reflection後だけ、P0でprovider／resource／platformをbounded preflightし、PASSまたはcause-specific STOP
-5. separate Mash L3-Iでexact dependency hashes／resource lock／I1 changed-path allowlistを承認
+4. P0 exact1はactivation Gateで`P0_ACTIVATION_PRECONDITION_STOP`となり、provider／resource／platform evidence 0のままauthority消費済み。後続のGitHub-hosted P0-R1 executor candidateも`FINAL_TECHNICAL_PROPORTIONALITY_STOP`でpre-execution rejectし、P0-R1 execution 0、next candidate 0
+5. 将来、separate P0 PASS evidenceが得られた場合だけ、separate Mash L3-Iでexact dependency hashes／resource lock／I1 changed-path allowlistを承認
 6. disabled Emlis vertical candidate
 7. representative machine verification + body-full Product Read + bounded correction（I2）
 8. separate fresh applicable 08判断に従うCycle001 Step1 re-entry（planは08が指すrestart / evidence bundle）
@@ -370,6 +378,7 @@ CMEE phaseは上位migration順であり、Cycle001のfresh applicable 08 exact1
 5. current text coreとPR #2 assetのsymbol-level dispositionはPhase 0で確定が必要。
 6. Cycle001はFORMAL_LEXICAL_AUTHORITY_UNRESOLVEDで停止中。
 7. L3-Rはapproved body identityへ固定され、P0 exact1はactivation Gateで消費・terminal。implementation / dependency / L3-I / Cycle approvalは消費していない。
+8. reviewed GitHub-hosted P0-R1 executor candidateは比例性STOPでpre-execution reject。別executor、P0 boundary、provider、model、version、task、corpus、Route B contractの変更はnew Mash LEVEL_3 decisionを要する。
 
 ## 14. History and design pointers
 
@@ -451,3 +460,29 @@ automatic_progression = false
 ```
 
 current Work executorはapproved acquisition channelを提供せず、activation cp312 childも開始前に停止した。後段のisolation、license/provenance、package/resource、synthetic exact12は未評価であり、未実行をFAIL/PASSへ変換しない。P0 authorityは消費済みで再利用しない。
+
+## 19. P0-R1 GitHub-hosted executor final proportionality STOP
+
+Final technical body:
+
+[CMEE V1 P0-R1 GitHub-hosted bounded executor — Final Technical Body](../designs/cmee/CMEE_V1_P0R1_GitHubHosted_BoundedExecutor_TechnicalBody_20260815.md)
+
+```text
+body_id = CMEE_V1_P0R1_GITHUB_HOSTED_BOUNDED_EXECUTOR_FINAL_TECHNICAL_BODY
+body_version = 1.0.0
+body_canonical_sha256 = d5637c8303e377e2bda11977425f209c139911acbb56542e8526ee0afa00be70
+docs_reflection_approval = DOCS_REFLECTION_ONLY
+approval_token = CMEE_V1_P0R1_GITHUB_HOSTED_EXECUTOR_FINAL_PROPORTIONALITY_STOP_V1_APPROVED_FOR_DOCS_REFLECTION_ONLY
+p0r1_executor_candidate_state = P0R1_GITHUB_HOSTED_EXECUTOR_FINAL_TECHNICAL_PROPORTIONALITY_STOP
+rule18_verdict = NO_SAFE_NEXT_CANDIDATE_STOP
+work_rule_stop_classification = DETOUR_RISK_STOP
+candidate = REJECTED_PRE_EXECUTION
+P0_R1_execution = 0
+provider_resource_platform_evidence = 0
+ROUTE_B_FAILURE = NOT_ESTABLISHED
+KWJA_FAILURE = NOT_ESTABLISHED
+reusable_execution_product_cycle_credit = 0
+automatic_progression = false
+```
+
+このSTOPはreviewed current GitHub-hosted executor candidateだけを棄却し、GitHub-hosted runner一般、Route B、KWJAまたはCMEEを失敗判定しない。既存P0 terminalは`P0_ACTIVATION_PRECONDITION_STOP`のままである。別executorまたはP0 boundary、provider、model、version、task、corpus、Route B contractを変える場合はnew Mash LEVEL_3 decisionへ戻り、自動でalternate candidateを作らない。
