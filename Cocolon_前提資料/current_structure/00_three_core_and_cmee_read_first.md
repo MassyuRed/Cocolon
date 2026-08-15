@@ -36,7 +36,7 @@ CMEEは設計候補がlocal artifactに留まり、GitHub上のdurable ownerが�
 | EmlisAI構造 | [01_emlis_ai_current_structure.md](01_emlis_ai_current_structure.md) | 入力を「読まれた形」の観測へ変え、必要な場合だけ一点を問い、回答分だけ観測を深める | production観測／受け取りはCURRENT_ACTUAL。問い／refined observationはDESIGNED_NOT_IMPLEMENTED |
 | Piece構造 | [02_piece_current_structure.md](02_piece_current_structure.md) | 保存済み入力を、他者が単独で受け取れるcanonical textと画像artifactへ変える | current user-visibleはold Q&A。Piece V2はCODE_DISABLED／DESIGNED_NOT_IMPLEMENTED |
 | 分析構造 | [03_analysis_current_structure.md](03_analysis_current_structure.md) | 蓄積入力から現在の自己構造routeを根拠付きで示し、観測routeと分離したIF routeを扱う | current Watashi Mapはpresentation-oriented。evidence graph／IF routeはDESIGNED_NOT_IMPLEMENTED |
-| CMEE | [04_cmee_current_structure.md](04_cmee_current_structure.md) | exact3の商品に共通するsource・意味・plan・realization・traceを持つ共有生成中枢 | FINAL_TECHNICAL_DESIGN_CANDIDATE／NOT_IMPLEMENTED／NOT_PRODUCTION_CONNECTED |
+| CMEE | [04_cmee_current_structure.md](04_cmee_current_structure.md) | exact3の商品に共通するsource・意味・plan・realization・traceを持つ共有生成中枢 | DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE／NO_SAFE_CMEE_V1A_CANDIDATE_STOP／NOT_IMPLEMENTED／NOT_PRODUCTION_CONNECTED |
 
 CMEEは技術上first-classに育てる共有Engine targetであるが、独立したuser-facing商品目的を持たないため、商品構造上の「第四の中核」ではない。商品中核はEmlisAI／Piece／分析構造のexact3である。
 
@@ -52,6 +52,8 @@ CMEEは技術上first-classに育てる共有Engine targetであるが、独立�
 6. mapが指定するproduct/design owner
 7. mapが指定する実際のsource、contract、test、RN、API、DB owner
 8. Cycle001の場合だけ、Draftを含むfreshな../08_cycle001_current_state.md
+
+CMEEの詳細設計へ入る場合は、04 mapから [CMEE V1 詳細設計 — Read First](../designs/cmee/v1/00_read_first.md) を開き、shared／schema／対象core／実装順の順で読む。
 
 前提資料だけで実装事実を決めない。前提資料を地図、GitHubの実ファイルを現物として両方確認する。
 

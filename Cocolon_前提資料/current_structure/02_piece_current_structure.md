@@ -166,7 +166,8 @@ V2 activation時:
 - dual-run／coexistence renderer 0
 - old preview／generation／API／RN／Nexus entry到達可能性0
 - Nexus renderer exact1
-- rollbackはnew Piece safe-disabledであり、old Q&Aを復活させない
+- 初回V2 activation前に、旧Q&A reachability 0、明示UNAVAILABLE、quota 0、single ownerを満たすpre-admitted V2 rollback targetを別Mash判断で固定する。なければ`NO_SAFE_PIECE_V1C_FIRST_CUTOVER_STOP`
+- 以後のrollbackはdeploy / git revertでlast admitted single-owner V2 versionへ戻し、old Q&Aを復活させない。generic runtime safe-disableはpublic behavior / owner exact1を別承認するまで未採用
 
 shared tableのnon-Piece row／consumerは、exact Piece predicateとwriter／reader dependency mapなしに破壊しない。
 
@@ -189,6 +190,12 @@ shared tableのnon-Piece row／consumerは、exact Piece predicateとwriter／re
 4. B02-Aはcausal RED test bytesだけが先行し、durable execution creditは未確認、implementation required artifactsはabsent。
 5. Piece current entry／manifestのB02-A stateはこのmapと同じwrite unitで同期済みであり、mergeまでDRAFT_CANDIDATEである。
 6. CMEE Piece adapter／runtime activationは別Mash判断まで開始しない。
+
+CMEE Piece detailed design candidate:
+
+[CMEE V1-C — Piece Semantic Visual Artifact 詳細設計](../designs/cmee/v1/03_piece_v1c_detailed_design.md)
+
+このpointerはPiece V2 activation、old Q&A cutover、API／DB／RN／Nexus／renderer変更を承認しない。
 
 ## 9. History pointers
 

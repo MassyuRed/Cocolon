@@ -6,6 +6,7 @@ document_role: "CMEE_CURRENT_STRUCTURE_AND_PREPARATION_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
 design_state: "FINAL_TECHNICAL_DESIGN_CANDIDATE"
+detailed_design_state: "DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE_STOP_BEFORE_IMPLEMENTATION"
 implementation_state: "NOT_STARTED"
 runtime_effect: 0
 automatic_progression: false
@@ -27,6 +28,8 @@ G0–G10の補助経路またはcurrent text guardを拡大して作るのでは
 Current state:
 
     final technical design candidate
+    detailed implementation design candidate
+    Phase 0 provider result = NO_SAFE_CMEE_V1A_CANDIDATE_STOP
     not approved for implementation
     not implemented
     not production connected
@@ -66,7 +69,7 @@ CMEEは文章生成だけに限定しない。primary artifactはcoreごとに�
 |---|---|
 | EmlisAI | observation／reception／clarification lifecycle |
 | Piece | PieceArtifactSpec + derived RenderedPieceExport |
-| Analysis | ObservedSelfStructureMap／IfRouteSimulation／SavedRouteIntent |
+| Analysis | ObservedSelfStructureMap／IfScenarioCandidateSet（1–3 parallel simulations）／SavedRouteIntent |
 
 ## 3. CMEEが所有する責任
 
@@ -146,7 +149,8 @@ faithfulなrouteが比例的scopeで作れない場合、安価なmeaning-loss c
 
     Core Source Adapter
       -> SourceEnvelope
-      -> Meaning Authority Provider
+      -> Japanese Structure Candidate Provider
+      -> independent Attachment Admission Assessor
       -> GroundedMeaningGraph
       -> Core Product Intent Compiler
       -> ExperiencePlan / ArtifactPlan
@@ -165,13 +169,18 @@ GenerationArtifactBundle minimum identity:
 - epistemic_partition
 - source commitments
 - semantic_graph_ref
-- artifact_plan_id
+- experience_plan_ref
 - primary artifact
 - companion artifacts
 - realization trace
 - quality report
 - parent／projection lineage
-- generated／rejected／unavailable status
+- bundle status = generated／limited（visible artifactあり）
+
+Non-generated resultとquestion stateはouter `EngineOutcome`が所有する。
+
+- outcome status = generated／question_pending／limited／rejected／unavailable／separate_safety
+- rejected／unavailable／separate_safetyはempty primary artifactを作らない
 
 ## 7. Current actual shared subsystem
 
@@ -191,6 +200,12 @@ Current mashos-apiにはcocolon_text_generation_coreが存在する。
 
 CoreTextComposerはcandidateを生成せず、missing candidateをfail-closeする。
 これはCMEEの再利用subsystem候補であり、CMEE全体またはJapanese meaning authorityではない。
+
+adapter lifecycleを混同しない。
+
+- Emlis adapterはcaller-supplied candidateを検査するlimited-composer接続であり、CMEE observation generation ownerではない。
+- Piece / Analysis adapterはevidence / supplied-candidate guard boundaryのskeletonで、future V2 Pieceまたはevidence-bound Analysis routeへ未接続である。
+- exact3 adapterが存在しても、三中核CMEE implementation、Piece V2 activation、Analysis observed / IF graph authorityが成立したことにはならない。
 
 ## 8. Exactly one host recommendation
 
@@ -266,6 +281,19 @@ Full design candidate:
 
 [Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md](../designs/cmee/Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md)
 
+Detailed implementation design suite:
+
+[CMEE V1 詳細設計 — Read First](../designs/cmee/v1/00_read_first.md)
+
+children:
+
+1. `01_shared_kernel_and_runtime_contracts.md`
+2. `02_emlis_v1a_detailed_design.md`
+3. `03_piece_v1c_detailed_design.md`
+4. `04_analysis_v1d_v1e_detailed_design.md`
+5. `05_json_schema_and_versioning.md`
+6. `06_implementation_order_migration_and_verification.md`
+
 Lifecycle:
 
     FINAL_TECHNICAL_DESIGN_CANDIDATE
@@ -273,24 +301,29 @@ Lifecycle:
     production / test / dependency / DB / API / RN effect 0
     Cycle001 restart effect 0
 
-このcurrent structure mapとfull designがmergeされても、Phase 0またはimplementationの承認にはならない。
+このcurrent structure map、full design、detail suiteがmergeされても、implementation、dependency、Route A / B、Cycle再入場の承認にはならない。
 
 ## 11. Implementation order
 
-1. CMEE three-core architecture defined
-2. one bounded Phase 0でEmlis V1-A exact routeまたはSTOP
-3. separate Mash LEVEL_3でprovider／resource／dependency／exact path承認
-4. disabled Emlis vertical candidate
-5. separate current 08／planに従うCycle001 Step1 re-entry
-6. Cycle001 product proof
-7. Emlis question system
-8. Piece visual artifact
-9. Analysis observed route
-10. Analysis IF route
-11. second actual consumerでshared contractをformalize
-12. three-core operational proof
+1. CMEE three-core architecture and detailed suite defined
+2. Phase 0 current result `NO_SAFE_CMEE_V1A_CANDIDATE_STOP`
+3. Mash L3-RでRoute A formal authorityまたはRoute B provisional + user resolutionとbounded preflight scopeを判断
+4. P0でprovider／resource／platformをread-only measured preflightし、PASSまたはSTOP
+5. separate Mash L3-Iでexact dependency hashes／resource lock／I1 changed-path allowlistを承認
+6. disabled Emlis vertical candidate
+7. representative machine verification + body-full Product Read + bounded correction（I2）
+8. separate fresh applicable 08判断に従うCycle001 Step1 re-entry（planは08が指すrestart / evidence bundle）
+9. Cycle001 product proof
+10. separate E0 approval、ReplyEnvelope / passed-only mapping、protected tests、actual-device proofによるEmlis Observation production cutover
+11. `CMEE_V1A_EMLIS_OBSERVATION_PRODUCTION_OPERATIONAL`
+12. separate V1-B approvalによるEmlis question / refinement operationalization
+13. Piece visual artifact
+14. Analysis observed route
+15. Analysis IF route
+16. second actual consumerでshared contractをformalize
+17. three-core operational proof
 
-CMEE phaseは上位migration順であり、Cycle001の08／active planを置き換えない。
+CMEE phaseは上位migration順であり、Cycle001のfresh applicable 08 exact1を置き換えない。active planは同格navigation ownerではない。
 
 ## 12. Anti-bloat boundaries
 
@@ -323,17 +356,18 @@ CMEE phaseは上位migration順であり、Cycle001の08／active planを置き�
 
 ## 13. Current gaps
 
-1. Phase 0 route fit-gap documentは未作成。
-2. Japanese predicate／argument attachment provider exact1は未選択。
+1. detailed fit-gapで、current formal contractを満たすsafe provider exact1は確認できず、Phase 0 terminalは`NO_SAFE_CMEE_V1A_CANDIDATE_STOP`。
+2. Route A formal authorityまたはRoute B provisional + user sovereign resolutionのnew Mash LEVEL_3 judgmentが未実施。
 3. CMEE package、callable、runner ingressは存在しない。
 4. Emlis vertical slice、Piece adapter、Analysis adapterは未実装。
 5. current text coreとPR #2 assetのsymbol-level dispositionはPhase 0で確定が必要。
 6. Cycle001はFORMAL_LEXICAL_AUTHORITY_UNRESOLVEDで停止中。
-7. full designはcandidateでありMash implementation approvalを消費していない。
+7. full / detailed designはcandidateでありMash implementation / dependency / Cycle approvalを消費していない。
 
 ## 14. History and design pointers
 
 - full CMEE final technical design candidate
+- CMEE V1 detailed implementation design suite under Cocolon_前提資料/designs/cmee/v1/
 - Cocolon_前提資料/Cocolon_Quality_Intelligence_Foundation_CrossCore_ApplicationPlan_20260814.md
 - Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_安全装置全履歴_20260701_20260813.md
 - Cocolon_前提資料/audits/emlis_ai/Cocolon_Cycle001_PostG2_SystemArchitecture_Reusability_Audit_20260814.md

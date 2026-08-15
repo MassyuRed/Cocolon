@@ -168,6 +168,8 @@ observed claim、simulated route、saved intentをgrounded source roleへ入れ�
 
 latest pointer、history item、detail、text、graphは同じcanonical artifact_id@versionへ解決する。period artifact同士を同じidentityにしない。
 
+future `watashi.map.v2`では、private canonical stored artifactとAPI / RN向けsafe projectionを分ける。projectionは`projection_of = artifact_id@version`で同一identityへ戻れるが、raw body、private source ID、private evidence locator、source digestを持たない。access policyはAnalysis ownerに残り、audienceごとのprojection bytesがprivate stored JSONと同一である必要はない。
+
 ## 6. Observed／annotation／IFの型分離
 
 ### Observed path nodes
@@ -255,6 +257,12 @@ missing reasonとscopeを持つ別claim／gap marker。observed factを作るた
 4. IF route／HypotheticalScenarioGraph／SavedRouteIntentのruntime ownerはexact0。
 5. Analysis専用Product Read packetとactual-device IF map verificationは未実行。
 6. CMEE Analysis connectionはfuture phaseであり、このmap作成から開始しない。
+
+CMEE Analysis detailed design candidate:
+
+[CMEE V1-D / V1-E — Analysis Observed / IF Route 詳細設計](../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md)
+
+このpointerはcurrent Watashi Mapの置換、observed／IF runtime activation、API／DB／RN変更を承認しない。
 
 ## 10. History pointers
 

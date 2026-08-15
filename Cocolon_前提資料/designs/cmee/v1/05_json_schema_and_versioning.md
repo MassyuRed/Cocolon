@@ -1,0 +1,2205 @@
+# CMEE V1 — JSON Schema / Identity / Versioning 詳細設計
+
+- document id: `cocolon.cmee.v1.schema_and_versioning.detailed_design`
+- lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
+- schema registration: `NOT_REGISTERED`
+- runtime serialization effect: `0`
+- DB / API effect: `0`
+
+---
+
+## 0. Purpose
+
+本fileは、Python contractとdurable artifact identityのずれを防ぐため、CMEE V1のschema shapeを固定する。
+
+ここにあるschemaはimplementation candidateであり、production registry、API wire、DB columnを作らない。Phaseごとにactual consumerと一緒にmaterializeし、unused schema fileを先行作成しない。
+
+## 1. Schema catalog
+
+| Schema ID | Privacy | Lifecycle |
+|---|---|---|
+| `cocolon.cmee.generation_request_meta.v1alpha1` | internal body-free request metadata | V1-A candidate |
+| `cocolon.cmee.source_envelope_meta.v1alpha1` | body-free | V1-A candidate |
+| `cocolon.cmee.evidence_span.v1alpha1` | private body-full | V1-A candidate |
+| `cocolon.cmee.japanese_attachment_set.v1alpha1` | private body-full | provider admission candidate |
+| `cocolon.cmee.japanese_attachment_admission.v1alpha1` | internal body-free assessment | provider admission candidate |
+| `cocolon.cmee.grounded_meaning_graph.v1alpha1` | private body-full | V1-A candidate |
+| `cocolon.cmee.hypothetical_scenario_graph.v1alpha1` | private body-full | V1-E future |
+| `cocolon.cmee.experience_plan.v1alpha1` | private body-full | V1-A candidate |
+| `cocolon.cmee.generation_artifact_bundle.v1alpha1` | private bundle + explicit public projection | V1-A candidate |
+| `cocolon.cmee.engine_outcome.v1alpha1` | internal response envelope | V1-A candidate |
+| `cocolon.cmee.clarification_request.v1alpha1` | private interaction artifact | V1-A offline candidate; V1-B / V1-E operational future |
+| `cocolon.cmee.positive_realization_trace.v1alpha1` | private body-full | V1-A candidate |
+| `cocolon.cmee.body_free_quality_report.v1alpha1` | body-free | V1-A candidate |
+| `cocolon.cmee.failure_envelope.v1alpha1` | body-free | V1-A candidate |
+| `cocolon.cmee.piece_visual_card_payload.v1alpha1` | private primary payload | V1-C future |
+| `cocolon.cmee.analysis_source_set.v1alpha1` | internal body-free lineage | V1-D future |
+| `cocolon.cmee.analysis_observed_map_payload.v1alpha1` | private primary payload | V1-D future |
+| `cocolon.cmee.analysis_visual_plan.v1alpha1` | private product projection | V1-D future |
+| `cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1` | audience-authorized product projection | V1-D future |
+| `cocolon.cmee.analysis_period_comparison.v1alpha1` | private comparison claim | V1-D future |
+| `cocolon.cmee.analysis_if_route_payload.v1alpha1` | private primary payload | V1-E future |
+| `cocolon.cmee.analysis_if_scenario_candidate_set.v1alpha1` | private primary payload | V1-E future |
+| `cocolon.cmee.analysis_saved_route_intent_payload.v1alpha1` | private primary payload | V1-E future |
+| `cocolon.cmee.analysis_if_safe_projection.v1alpha1` | audience-authorized product projection | V1-E future |
+| `cocolon.cmee.analysis_saved_intent_safe_projection.v1alpha1` | owner-authorized product projection | V1-E future |
+
+`v1alpha1`は「契約なし」を意味しない。discriminator、privacy、identity、required fieldsはstrictに守り、互換性のない変更は新schema IDへ進める。
+
+## 2. Runtime-only private material
+
+raw bodyはJSON durable contractへしない。
+
+```python
+@dataclass(frozen=True, slots=True, repr=False)
+class SourceFieldPrivate:
+    field_id: str
+    raw_utf8_body: str
+    raw_utf8_sha256: str
+    codepoint_length: int
+    utf8_byte_length: int
+
+@dataclass(frozen=True, slots=True, repr=False)
+class SourceMaterialPrivate:
+    source_id: str
+    source_version: str
+    authenticated_owner_private: str
+    fields_private: Mapping[str, SourceFieldPrivate]
+    structured_private: Mapping[str, object]
+
+@dataclass(frozen=True, slots=True, repr=False)
+class CoreSourceInputPrivate:
+    input_ref: str
+    core_id: CoreId
+    source_type: str
+    requested_role_hint: str
+    material_private: SourceMaterialPrivate
+
+@dataclass(frozen=True, slots=True, repr=False)
+class SourceEnvelope:
+    meta: SourceEnvelopeMeta
+    material_private: SourceMaterialPrivate
+```
+
+constraints:
+
+- request-local
+- CMEE persistence 0
+- public serializer 0
+- log / exception repr 0
+- body-free report projection 0
+- raw bodyをtrim / whitespace normalize / punctuation rewriteしてからhashしない
+- source body digestもpublic reportへ0。durable product identityで必要な場合はprivate artifact storage ownerが管理する
+- `structured_private`はauthentication / entitlement / source-stage等の非意味control metadataだけを持つ。visible claim、predicate / argument、user selection、condition、note等のmeaning-bearing値は必ず`fields_private`へcanonical fieldとして置き、body hash、EvidenceSpan、source commitmentへbindする。`structured_private`からmeaning graphへ直接edgeを作ることは0
+
+## 3. `SourceEnvelopeMeta`
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cocolon.cmee.source_envelope_meta.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "source_id",
+    "core_id",
+    "source_type",
+    "source_role",
+    "source_version",
+    "stage",
+    "privacy_class",
+    "owner_scope",
+    "parent_source_refs",
+    "material_present"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "cocolon.cmee.source_envelope_meta.v1alpha1"
+    },
+    "source_id": {"type": "string", "minLength": 1},
+    "core_id": {"enum": ["EMLIS_AI", "PIECE", "ANALYSIS"]},
+    "source_type": {"type": "string", "minLength": 1},
+    "source_role": {
+      "enum": [
+        "ORIGINAL_INPUT",
+        "OWNED_HISTORY_RECORD",
+        "SUPPLEMENTAL_ANSWER",
+        "PERIOD_METADATA",
+        "USER_CORRECTION",
+        "SIMULATION_SESSION_MATERIAL"
+      ]
+    },
+    "source_version": {"type": "string", "minLength": 1},
+    "stage": {"type": "string", "minLength": 1},
+    "privacy_class": {
+      "const": "PRIVATE_BODY_FULL_REQUEST_LOCAL"
+    },
+    "owner_scope": {
+      "const": "AUTHENTICATED_SAME_OWNER"
+    },
+    "parent_source_refs": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1},
+      "uniqueItems": true
+    },
+    "material_present": {
+      "type": "object",
+      "additionalProperties": {"type": ["boolean", "integer"]}
+    }
+  }
+}
+```
+
+body-free `SourceEnvelopeMeta`はraw user ID、raw text、private locator、source range、identifiable paraphraseを持たない。
+
+`SourceEnvelopeMeta`はinternal body-freeであり、public-safe telemetryではない。opaque `source_id`も相関可能なためpublic reportへ出さない。public-safe projectionはanonymous count、reason code、schema / provider / policy versionだけである。
+
+### 3.1 `GenerationRequestMeta`
+
+```json
+{
+  "$id": "cocolon.cmee.generation_request_meta.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request_id",
+    "core_id",
+    "product_job",
+    "operation_kind",
+    "core_request_ref",
+    "source_input_refs",
+    "locale",
+    "execution_scope",
+    "policy_versions"
+  ],
+  "properties": {
+    "request_id": {"type": "string", "minLength": 1},
+    "core_id": {"enum": ["EMLIS_AI", "PIECE", "ANALYSIS"]},
+    "product_job": {
+      "enum": ["OBSERVE_AND_CLARIFY", "EXPRESS_AND_SHARE", "MAP_AND_EXPLORE"]
+    },
+    "operation_kind": {
+      "enum": [
+        "EMLIS_OBSERVATION", "PIECE_COMPILE",
+        "ANALYSIS_OBSERVED_MAP", "ANALYSIS_IF_ROUTE", "ANALYSIS_SAVE_ROUTE_INTENT"
+      ]
+    },
+    "core_request_ref": {"type": "string", "minLength": 1},
+    "source_input_refs": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "locale": {"const": "ja-JP"},
+    "execution_scope": {"enum": ["OFFLINE_CANDIDATE", "CYCLE", "PRODUCTION"]},
+    "policy_versions": {"type": "object", "additionalProperties": {"type": "string"}}
+  }
+}
+```
+
+JSONはbodyを持たないmetadata projectionであり、単独ではengine invocationではない。runtime public callableが受けるPython `GenerationRequest`はrequest-local / nonserializableである。
+
+```python
+@dataclass(frozen=True, slots=True, repr=False)
+class GenerationRequest:
+    meta: GenerationRequestMeta
+    source_inputs_private: tuple[CoreSourceInputPrivate, ...]
+    core_payload_private: CoreRequestPayloadPrivate
+```
+
+`CoreRequestPayloadPrivate`は次のclosed runtime unionである。
+
+```text
+EmlisObservationRequestPrivate
+PieceGenerationRequestPrivate
+AnalysisObservedMapRequestPrivate
+AnalysisIfRouteRequestPrivate
+AnalysisSaveRouteIntentRequestPrivate
+```
+
+discriminator consistency:
+
+| core_id / product_job / operation_kind | private payload |
+|---|---|
+| `EMLIS_AI / OBSERVE_AND_CLARIFY / EMLIS_OBSERVATION` | `EmlisObservationRequestPrivate` |
+| `PIECE / EXPRESS_AND_SHARE / PIECE_COMPILE` | `PieceGenerationRequestPrivate` |
+| `ANALYSIS / MAP_AND_EXPLORE / ANALYSIS_OBSERVED_MAP` | `AnalysisObservedMapRequestPrivate` |
+| `ANALYSIS / MAP_AND_EXPLORE / ANALYSIS_IF_ROUTE` | `AnalysisIfRouteRequestPrivate` |
+| `ANALYSIS / MAP_AND_EXPLORE / ANALYSIS_SAVE_ROUTE_INTENT` | `AnalysisSaveRouteIntentRequestPrivate` |
+
+`meta.core_request_ref`はprivate payload IDとexact matchし、`meta.source_input_refs`と`source_inputs_private`もexact ID setで一致させる。Core adapterがowner / role / versionをadmitした後だけ`SourceEnvelope(meta, material_private)`を作る。mismatched unionは`REJECTED`、raw sourceをglobal registry、body-free JSON、loggerから解決することは0である。
+
+Analysis private payloadのminimum shapeは次である。いずれもrequest-local / nonserializableであり、derived artifact refをmeaning-bearing sourceへ変換しない。
+
+```text
+AnalysisObservedMapRequestPrivate:
+  core_request_id
+  period_start / period_end
+  saved_record_members[]
+  comparison_previous_artifact_ref?
+  analysis_policy_version
+
+AnalysisIfRouteRequestPrivate:
+  core_request_id
+  base_observed_map_ref
+  base_route_ref
+  branch_point_id
+  branch_intent_source_ref
+  constraint_source_refs[]
+  requested_candidate_count = 1..3
+  analysis_if_policy_version
+
+AnalysisSaveRouteIntentRequestPrivate:
+  core_request_id
+  source_scenario_set_ref
+  selected_scenario_ref
+  user_selection_source_ref
+  optional_user_note_source_ref?
+  save_policy_version
+```
+
+`ANALYSIS_SAVE_ROUTE_INTENT`の`source_inputs_private`には、ユーザーが選択したという真正な操作materialを`SIMULATION_SESSION_MATERIAL`としてexact1含める。optional noteも別SourceEnvelopeにする。scenario set / scenario graph / simulation artifactは`parent_artifact_refs`でありsourceではない。
+
+## 4. `EvidenceSpan`
+
+private-only conceptual schema:
+
+```json
+{
+  "$id": "cocolon.cmee.evidence_span.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "evidence_id",
+    "source_id",
+    "source_version",
+    "source_field",
+    "source_body_sha256",
+    "scalar_range",
+    "utf8_byte_range",
+    "role"
+  ],
+  "properties": {
+    "evidence_id": {"type": "string"},
+    "source_id": {"type": "string"},
+    "source_version": {"type": "string"},
+    "source_field": {"type": "string"},
+    "source_body_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "scalar_range": {
+      "type": "array",
+      "prefixItems": [
+        {"type": "integer", "minimum": 0},
+        {"type": "integer", "minimum": 0}
+      ],
+      "items": false
+    },
+    "utf8_byte_range": {
+      "type": "array",
+      "prefixItems": [
+        {"type": "integer", "minimum": 0},
+        {"type": "integer", "minimum": 0}
+      ],
+      "items": false
+    },
+    "role": {
+      "enum": ["MEANING", "CONTEXT", "CONDITION", "UNKNOWN_BOUNDARY"]
+    }
+  }
+}
+```
+
+validatorは`start < end`、scalarとUTF-8 rangeの同一substring、source version一致、overlap policyをcodeで検証する。
+
+## 5. `JapaneseAttachmentSet`
+
+このschemaはcandidate providerのruntime-only payloadをshared kernelがsource / provider / resource identityへbindし、独立recomputeしたdigestを付けたprivate body-full sealed setである。provider自身はset ID、digest、source bindings、formal admissionを決めない。lemma、surface、rangeをpublic reportへ投影しない。`owner_id`はuser ownerと混同しないよう`meaning_owner_id`とする。
+
+```json
+{
+  "$id": "cocolon.cmee.japanese_attachment_set.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "attachment_set_id",
+    "canonical_private_digest",
+    "provider_identity",
+    "source_bindings",
+    "owners"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "cocolon.cmee.japanese_attachment_set.v1alpha1"
+    },
+    "attachment_set_id": {"type": "string", "minLength": 1},
+    "canonical_private_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "provider_identity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider_id", "provider_version", "resource_lock_ref"],
+      "properties": {
+        "provider_id": {"type": "string"},
+        "provider_version": {"type": "string"},
+        "resource_lock_ref": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+      }
+    },
+    "source_bindings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/sourceBinding"},
+      "uniqueItems": true
+    },
+    "owners": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/owner"}
+    }
+  },
+  "$defs": {
+    "sourceBinding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "source_version", "field_body_digests"],
+      "properties": {
+        "source_id": {"type": "string"},
+        "source_version": {"type": "string"},
+        "field_body_digests": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["source_field", "body_sha256"],
+            "properties": {
+              "source_field": {"type": "string"},
+              "body_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+            }
+          }
+        }
+      }
+    },
+    "owner": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "meaning_owner_id",
+        "source_range",
+        "resolution",
+        "predicate_candidates",
+        "argument_candidates",
+        "open_slot_candidates",
+        "scope_candidates",
+        "ambiguity_reasons",
+        "unresolved_reasons",
+        "producer_provenance"
+      ],
+      "properties": {
+        "meaning_owner_id": {"type": "string"},
+        "source_range": {"$ref": "cocolon.cmee.evidence_span.v1alpha1"},
+        "resolution": {"enum": ["UNIQUE", "AMBIGUOUS", "UNRESOLVED"]},
+        "predicate_candidates": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/predicate"}
+        },
+        "argument_candidates": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/argument"}
+        },
+        "open_slot_candidates": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/openSlot"}
+        },
+        "scope_candidates": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/scope"}
+        },
+        "ambiguity_reasons": {"type": "array", "items": {"type": "string"}},
+        "unresolved_reasons": {"type": "array", "items": {"type": "string"}},
+        "producer_provenance": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mechanism", "source_ref", "candidate_generation_ref"],
+          "properties": {
+            "mechanism": {
+              "enum": [
+                "UPSTREAM_EXACT_ATTACHMENT",
+                "STATISTICAL_PROPOSAL_ONLY"
+              ]
+            },
+            "source_ref": {"type": "string"},
+            "candidate_generation_ref": {"type": "string"}
+          }
+        }
+      }
+    },
+    "range": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_field", "scalar", "utf8_byte"],
+      "properties": {
+        "source_field": {"type": "string"},
+        "scalar": {
+          "type": "array",
+          "prefixItems": [{"type": "integer"}, {"type": "integer"}],
+          "items": false
+        },
+        "utf8_byte": {
+          "type": "array",
+          "prefixItems": [{"type": "integer"}, {"type": "integer"}],
+          "items": false
+        }
+      }
+    },
+    "predicate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "predicate_id", "token_range", "lemma", "inflection",
+        "polarity", "modality", "temporal_scope", "lifecycle_scope", "provenance"
+      ],
+      "properties": {
+        "predicate_id": {"type": "string"},
+        "token_range": {"$ref": "#/$defs/range"},
+        "lemma": {"type": "string"},
+        "inflection": {"type": "string"},
+        "polarity": {"type": "string"},
+        "modality": {"type": "string"},
+        "temporal_scope": {"type": "string"},
+        "lifecycle_scope": {"type": "string"},
+        "provenance": {"type": "string"}
+      }
+    },
+    "argument": {
+      "oneOf": [
+        {"$ref": "#/$defs/explicitArgument"},
+        {"$ref": "#/$defs/implicitArgument"}
+      ]
+    },
+    "explicitArgument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "argument_id", "span", "case_marker", "case_role", "governing_predicate_ref",
+        "attachment_kind", "resolution", "provenance"
+      ],
+      "properties": {
+        "argument_id": {"type": "string"},
+        "span": {"$ref": "#/$defs/range"},
+        "case_marker": {"type": ["string", "null"]},
+        "case_role": {"type": "string"},
+        "governing_predicate_ref": {"type": "string"},
+        "attachment_kind": {"const": "EXPLICIT"},
+        "resolution": {"enum": ["UNIQUE", "AMBIGUOUS", "UNRESOLVED"]},
+        "provenance": {"type": "string"}
+      }
+    },
+    "implicitArgument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "argument_id", "span", "case_marker", "case_role", "governing_predicate_ref",
+        "attachment_kind", "open_slot_candidate_ref", "referent_candidate_refs",
+        "resolution", "provenance"
+      ],
+      "properties": {
+        "argument_id": {"type": "string"},
+        "span": {"type": "null"},
+        "case_marker": {"type": "null"},
+        "case_role": {"type": "string"},
+        "governing_predicate_ref": {"type": "string"},
+        "attachment_kind": {"enum": ["ZERO", "OMITTED"]},
+        "open_slot_candidate_ref": {"type": "string"},
+        "referent_candidate_refs": {
+          "type": "array",
+          "items": {"type": "string"},
+          "uniqueItems": true
+        },
+        "resolution": {"enum": ["UNIQUE", "AMBIGUOUS", "UNRESOLVED"]},
+        "provenance": {"type": "string"}
+      }
+    },
+    "openSlot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "slot_id", "role", "governing_predicate_ref", "denominator_member",
+        "status", "reason_code", "provenance"
+      ],
+      "properties": {
+        "slot_id": {"type": "string"},
+        "role": {"type": "string"},
+        "governing_predicate_ref": {"type": "string"},
+        "denominator_member": {"type": "boolean"},
+        "status": {"enum": ["EXPLICIT_UNKNOWN", "CLOSED_NONE", "UNRESOLVED"]},
+        "reason_code": {"type": "string"},
+        "provenance": {"type": "string"}
+      }
+    },
+    "scope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["scope_id", "scope_kind", "scope_value", "resolution", "provenance"],
+      "properties": {
+        "scope_id": {"type": "string"},
+        "scope_kind": {"enum": ["TOPIC", "TEMPORAL", "MODALITY", "LIFECYCLE"]},
+        "scope_value": {"type": "string"},
+        "resolution": {"enum": ["UNIQUE", "AMBIGUOUS", "UNRESOLVED"]},
+        "provenance": {"type": "string"}
+      }
+    }
+  }
+}
+```
+
+### 5.1 `JapaneseAttachmentAdmission`
+
+候補producerから独立したCMEE assessorが次を生成する。
+
+```json
+{
+  "$id": "cocolon.cmee.japanese_attachment_admission.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "admission_id",
+    "attachment_set_ref",
+    "attachment_set_digest",
+    "approved_contract_version",
+    "resource_lock_ref",
+    "closure_status",
+    "candidate_set_completeness",
+    "open_slot_denominator_state",
+    "admitted_owner_refs",
+    "ambiguity_count",
+    "unresolved_count",
+    "independent_mutation_result",
+    "reason_codes"
+  ],
+  "properties": {
+    "admission_id": {"type": "string"},
+    "attachment_set_ref": {"type": "string"},
+    "attachment_set_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "approved_contract_version": {"type": "string"},
+    "resource_lock_ref": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "closure_status": {
+      "enum": ["FORMAL_CLOSED", "PROVISIONAL_ONLY", "UNRESOLVED", "UNAVAILABLE"]
+    },
+    "candidate_set_completeness": {
+      "enum": ["FORMALLY_COMPLETE", "NOT_PROVED"]
+    },
+    "open_slot_denominator_state": {
+      "enum": ["ESTABLISHED", "NOT_ESTABLISHED"]
+    },
+    "admitted_owner_refs": {
+      "type": "array", "items": {"type": "string"}, "uniqueItems": true
+    },
+    "ambiguity_count": {"type": "integer", "minimum": 0},
+    "unresolved_count": {"type": "integer", "minimum": 0},
+    "independent_mutation_result": {"enum": ["GREEN", "RED", "NOT_RUN"]},
+    "reason_codes": {"type": "array", "items": {"type": "string"}}
+  }
+}
+```
+
+`closure_status=FORMAL_CLOSED` requires code-level cross-field constraints:
+
+- CMEE shared kernelが`canonical_private_digest` fieldを除くclosed canonical private set bytesを独立recomputeし、sealed setのdigestとexact match
+- `attachment_set_ref` / `attachment_set_digest`がprivate set identityとexact match
+- set-level source ID / version / field body digestがEvidenceSpanとexact match
+- set provider identity / resource lock、admission context、approved lock identityがexact match
+- candidate set completeness `FORMALLY_COMPLETE`
+- formal open-slot denominator `ESTABLISHED`
+- required / active meaning owner全件`UNIQUE`
+- exact predicate range、authoritative lemma / inflection
+- argument span / case role / governing predicate edge
+- polarity / modality / temporal / lifecycle scope
+- ambiguity / unresolved reason 0
+- independent mutation rejection GREEN
+- `admitted_owner_refs`はsealed set内owner IDのunique subsetで、approved contractがrequired / activeと定めるowner setにexact match
+- `ambiguity_count` / `unresolved_count`はsealed setからassessorが再導出した値とexact match
+
+JSON Schemaのshape validationだけでformal authorityを証明しない。
+
+## 6. `GroundedMeaningGraph`
+
+```json
+{
+  "$id": "cocolon.cmee.grounded_meaning_graph.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "graph_id",
+    "graph_version",
+    "core_id",
+    "source_refs",
+    "attachment_admission_ref",
+    "epistemic_partition",
+    "nodes",
+    "edges",
+    "status"
+  ],
+  "properties": {
+    "graph_id": {"type": "string"},
+    "graph_version": {"type": "integer", "minimum": 1},
+    "core_id": {"enum": ["EMLIS_AI", "PIECE", "ANALYSIS"]},
+    "source_refs": {"type": "array", "items": {"type": "string"}},
+    "attachment_admission_ref": {"type": "string"},
+    "epistemic_partition": {
+      "const": "SOURCE_BOUND_PROVISIONAL"
+    },
+    "nodes": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/node"}
+    },
+    "edges": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/edge"}
+    },
+    "status": {"enum": ["GROUNDED", "PARTIAL", "UNAVAILABLE"]}
+  },
+  "$defs": {
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "node_id", "kind", "epistemic_state", "evidence_refs",
+        "polarity", "modality", "temporal_scope", "forbidden_promotions"
+      ],
+      "properties": {
+        "node_id": {"type": "string"},
+        "kind": {"type": "string"},
+        "epistemic_state": {
+          "enum": [
+            "SOURCE_EXPLICIT", "FORMAL_DERIVED", "USER_CONFIRMED",
+            "USER_CORRECTED", "UNKNOWN", "CONFLICT"
+          ]
+        },
+        "evidence_refs": {"type": "array", "items": {"type": "string"}},
+        "polarity": {"type": "string"},
+        "modality": {"type": "string"},
+        "temporal_scope": {"type": "string"},
+        "forbidden_promotions": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "edge_id", "edge_type", "from_node_ref", "to_node_ref",
+        "direction", "epistemic_state", "evidence_refs", "provenance"
+      ],
+      "properties": {
+        "edge_id": {"type": "string"},
+        "edge_type": {"type": "string"},
+        "from_node_ref": {"type": "string"},
+        "to_node_ref": {"type": "string"},
+        "direction": {"type": "string"},
+        "epistemic_state": {
+          "enum": [
+            "SOURCE_EXPLICIT", "FORMAL_DERIVED", "USER_CONFIRMED",
+            "USER_CORRECTED", "UNKNOWN", "CONFLICT"
+          ]
+        },
+        "evidence_refs": {"type": "array", "items": {"type": "string"}},
+        "provenance": {"type": "string"}
+      }
+    }
+  }
+}
+```
+
+graphはuser truthではない。user correctionはoriginal graphをin-place変更せず、新source / graph versionとderivation lineageを作る。
+
+## 7. `HypotheticalScenarioGraph`
+
+```json
+{
+  "$id": "cocolon.cmee.hypothetical_scenario_graph.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "scenario_graph_id",
+    "scenario_graph_version",
+    "base_observed_map_ref",
+    "base_route_ref",
+    "branch_point_id",
+    "branch_intent_source_ref",
+    "constraint_source_refs",
+    "nodes",
+    "edges",
+    "unmodelled_factors",
+    "status"
+  ],
+  "properties": {
+    "scenario_graph_id": {"type": "string"},
+    "scenario_graph_version": {"type": "integer", "minimum": 1},
+    "base_observed_map_ref": {"type": "string"},
+    "base_route_ref": {"type": "string"},
+    "branch_point_id": {"type": "string"},
+    "branch_intent_source_ref": {"type": "string"},
+    "constraint_source_refs": {
+      "type": "array",
+      "items": {"type": "string"},
+      "uniqueItems": true
+    },
+    "nodes": {"type": "array", "items": {"$ref": "#/$defs/node"}},
+    "edges": {"type": "array", "items": {"$ref": "#/$defs/edge"}},
+    "unmodelled_factors": {"type": "array", "items": {"type": "string"}},
+    "status": {"const": "GENERATED"}
+  },
+  "$defs": {
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_id", "step_kind", "origin", "source_refs", "unknown_reasons"],
+      "properties": {
+        "node_id": {"type": "string"},
+        "step_kind": {"type": "string"},
+        "origin": {
+          "enum": ["OBSERVED_ANCHOR", "USER_CHOICE", "SIMULATED_EXTENSION", "UNKNOWN"]
+        },
+        "source_refs": {"type": "array", "items": {"type": "string"}},
+        "unknown_reasons": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "edge": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["edge_id", "edge_type", "from_node_ref", "to_node_ref", "condition_refs"],
+      "properties": {
+        "edge_id": {"type": "string"},
+        "edge_type": {"const": "SIMULATED_TRANSITION"},
+        "from_node_ref": {"type": "string"},
+        "to_node_ref": {"type": "string"},
+        "condition_refs": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}
+```
+
+scenario nodeは`origin = OBSERVED_ANCHOR | USER_CHOICE | SIMULATED_EXTENSION | UNKNOWN`を必須にする。observed graph nodeへIF fieldを追加しない。`rank`、`score`、`probability`、`optimality`はadditional propertiesとして拒否する。
+
+## 8. `ExperiencePlan`
+
+```json
+{
+  "$id": "cocolon.cmee.experience_plan.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "plan_id",
+    "plan_version",
+    "core_id",
+    "product_job",
+    "semantic_graph_ref",
+    "duties",
+    "ordering",
+    "interaction_acts",
+    "artifact_plans",
+    "surface_constraints",
+    "forbidden_promotions",
+    "fallback_disposition"
+  ],
+  "properties": {
+    "plan_id": {"type": "string"},
+    "plan_version": {"type": "integer", "minimum": 1},
+    "core_id": {"enum": ["EMLIS_AI", "PIECE", "ANALYSIS"]},
+    "product_job": {
+      "enum": ["OBSERVE_AND_CLARIFY", "EXPRESS_AND_SHARE", "MAP_AND_EXPLORE"]
+    },
+    "semantic_graph_ref": {"type": "string"},
+    "duties": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "duty_id", "duty_kind", "semantic_refs", "retention",
+          "allowed_operations", "forbidden_operations"
+        ],
+        "properties": {
+          "duty_id": {"type": "string"},
+          "duty_kind": {"type": "string"},
+          "semantic_refs": {"type": "array", "items": {"type": "string"}},
+          "retention": {"enum": ["REQUIRED", "OPTIONAL", "DEFERRED"]},
+          "allowed_operations": {"type": "array", "items": {"type": "string"}},
+          "forbidden_operations": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "ordering": {"type": "array", "items": {"type": "string"}},
+    "interaction_acts": {"type": "array", "items": {"type": "string"}},
+    "artifact_plans": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "artifact_plan_id", "artifact_kind", "primary_duty_refs",
+          "companion_duty_refs", "projection_kind", "constraint_refs"
+        ],
+        "properties": {
+          "artifact_plan_id": {"type": "string"},
+          "artifact_kind": {"type": "string"},
+          "primary_duty_refs": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "companion_duty_refs": {"type": "array", "items": {"type": "string"}},
+          "projection_kind": {"type": "string"},
+          "constraint_refs": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    },
+    "surface_constraints": {"type": "array", "items": {"type": "string"}},
+    "forbidden_promotions": {"type": "array", "items": {"type": "string"}},
+    "fallback_disposition": {
+      "enum": ["LIMITED", "UNAVAILABLE", "ASK", "REJECT"]
+    }
+  }
+}
+```
+
+## 9. `GenerationArtifactBundle`
+
+```json
+{
+  "$id": "cocolon.cmee.generation_artifact_bundle.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "artifact_id",
+    "artifact_version",
+    "artifact_kind",
+    "epistemic_partition",
+    "core_id",
+    "product_job",
+    "source_commitments",
+    "semantic_graph_ref",
+    "experience_plan_ref",
+    "parent_artifact_refs",
+    "derivation_lineage",
+    "primary_artifact",
+    "companion_artifacts",
+    "realization_trace_ref",
+    "quality_report_ref",
+    "lifecycle_bindings",
+    "status"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "cocolon.cmee.generation_artifact_bundle.v1alpha1"
+    },
+    "artifact_id": {"type": "string"},
+    "artifact_version": {"type": "integer", "minimum": 1},
+    "artifact_kind": {
+      "enum": [
+        "EMLIS_CONVERSATIONAL_OBSERVATION",
+        "PIECE_VISUAL_CARD_SPEC",
+        "ANALYSIS_OBSERVED_SELF_STRUCTURE_MAP",
+        "ANALYSIS_IF_SCENARIO_SET",
+        "ANALYSIS_SAVED_ROUTE_INTENT"
+      ]
+    },
+    "epistemic_partition": {
+      "enum": ["SOURCE_BOUND_PROVISIONAL", "OBSERVED", "HYPOTHETICAL", "USER_SAVED_INTENT"]
+    },
+    "core_id": {"enum": ["EMLIS_AI", "PIECE", "ANALYSIS"]},
+    "product_job": {
+      "enum": ["OBSERVE_AND_CLARIFY", "EXPRESS_AND_SHARE", "MAP_AND_EXPLORE"]
+    },
+    "source_commitments": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/sourceCommitmentRef"}
+    },
+    "semantic_graph_ref": {
+      "oneOf": [
+        {"type": "string", "pattern": "^grounded:"},
+        {"type": "string", "pattern": "^hypothetical:"},
+        {"type": "string", "pattern": "^scenario-set:"}
+      ]
+    },
+    "experience_plan_ref": {"type": "string"},
+    "parent_artifact_refs": {"type": "array", "items": {"type": "string"}},
+    "derivation_lineage": {"type": "array", "items": {"type": "string"}},
+    "primary_artifact": {
+      "oneOf": [
+        {"$ref": "#/$defs/emlis"},
+        {"$ref": "#/$defs/piece"},
+        {"$ref": "#/$defs/observedMap"},
+        {"$ref": "#/$defs/ifScenarioSet"},
+        {"$ref": "#/$defs/savedIntent"}
+      ]
+    },
+    "companion_artifacts": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/companionArtifactRef"}
+    },
+    "realization_trace_ref": {"type": "string"},
+    "quality_report_ref": {"type": "string"},
+    "lifecycle_bindings": {"$ref": "#/$defs/lifecycleBindings"},
+    "status": {"enum": ["GENERATED", "LIMITED"]}
+  },
+  "$defs": {
+    "sourceCommitmentRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "source_version", "commitment_id", "private_digest_ref"],
+      "properties": {
+        "source_id": {"type": "string"},
+        "source_version": {"type": "string"},
+        "commitment_id": {"type": "string"},
+        "private_digest_ref": {"type": "string"}
+      }
+    },
+    "companionArtifactRef": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_ref", "artifact_kind", "relation"],
+      "properties": {
+        "artifact_ref": {"type": "string"},
+        "artifact_kind": {"type": "string"},
+        "relation": {"enum": ["CLARIFIES", "PROJECTS", "DERIVES_FROM", "CONTINUES"]}
+      }
+    },
+    "lifecycleBindings": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_content_hash", "version_set", "storage_owner", "projection_refs"],
+      "properties": {
+        "canonical_content_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+        "version_set": {"type": "object", "additionalProperties": {"type": "string"}},
+        "storage_owner": {"type": "string"},
+        "projection_refs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    },
+    "emlis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "kind", "observation_stage", "sufficiency_decision",
+        "observation_blocks", "reception_block"
+      ],
+      "properties": {
+        "kind": {"const": "EMLIS_CONVERSATIONAL_OBSERVATION"},
+        "observation_stage": {"enum": ["NORMAL", "PRE_QUESTION", "REFINED"]},
+        "sufficiency_decision": {
+          "enum": ["SUFFICIENT", "LIMITED", "ASK"]
+        },
+        "observation_blocks": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/visibleBlock"}
+        },
+        "reception_block": {"$ref": "#/$defs/receptionBlock"}
+      }
+    },
+    "visibleBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["block_id", "visible_text", "duty_refs", "visible_text_private_hash"],
+      "properties": {
+        "block_id": {"type": "string"},
+        "visible_text": {"type": "string", "minLength": 1},
+        "duty_refs": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+        "visible_text_private_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+      }
+    },
+    "receptionBlock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["block_id", "visible_text", "bound_observation_duty_refs", "visible_text_private_hash"],
+      "properties": {
+        "block_id": {"type": "string"},
+        "visible_text": {"type": "string", "minLength": 1},
+        "bound_observation_duty_refs": {
+          "type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true
+        },
+        "visible_text_private_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+      }
+    },
+    "piece": {"$ref": "cocolon.cmee.piece_visual_card_payload.v1alpha1"},
+    "observedMap": {"$ref": "cocolon.cmee.analysis_observed_map_payload.v1alpha1"},
+    "ifScenarioSet": {"$ref": "cocolon.cmee.analysis_if_scenario_candidate_set.v1alpha1"},
+    "savedIntent": {"$ref": "cocolon.cmee.analysis_saved_route_intent_payload.v1alpha1"}
+  }
+}
+```
+
+実装時は次のvariant matrixをcode-level validatorとmutation testでexactに固定する。
+
+| artifact_kind | core / product job | epistemic_partition | semantic_graph_ref |
+|---|---|---|---|
+| `EMLIS_CONVERSATIONAL_OBSERVATION` | `EMLIS_AI / OBSERVE_AND_CLARIFY` | `SOURCE_BOUND_PROVISIONAL` | `grounded:` |
+| `PIECE_VISUAL_CARD_SPEC` | `PIECE / EXPRESS_AND_SHARE` | `SOURCE_BOUND_PROVISIONAL` | `grounded:` |
+| `ANALYSIS_OBSERVED_SELF_STRUCTURE_MAP` | `ANALYSIS / MAP_AND_EXPLORE` | `OBSERVED` | `grounded:` |
+| `ANALYSIS_IF_SCENARIO_SET` | `ANALYSIS / MAP_AND_EXPLORE` | `HYPOTHETICAL` | `scenario-set:` and primary candidate set ID exact match |
+| `ANALYSIS_SAVED_ROUTE_INTENT` | `ANALYSIS / MAP_AND_EXPLORE` | `USER_SAVED_INTENT` | selected `hypothetical:` graph; source scenario setはparent ref |
+
+`artifact_kind`、`primary_artifact.kind`、core、product job、partition、graph prefix / identityの一つでも不一致ならREJECTする。PieceをHYPOTHETICALにする、observed mapをscenario setへbindする、SavedRouteIntentをobserved graphへbindする等はschema shapeが通ってもadmitしない。
+
+`source_commitments`はprivate bundle内でSource ID / version / private digest refを固定する。public API / telemetryへこのobjectをそのまま投影しない。public-safe reportはanonymous countsとapproved provider / schema / artifact identityだけを持つ。
+
+### 9.1 `ClarificationRequest`
+
+問いの要否、prompt、source lifecycleはcore ownerが決める。EmlisとAnalysisでreason code / policyを共有しない。
+
+```json
+{
+  "$id": "cocolon.cmee.clarification_request.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "clarification_id", "core_id", "parent_request_ref", "target_unknown_ref",
+    "reason_code", "prompt_private", "skip_allowed", "max_answer_count",
+    "answer_source_role", "status"
+  ],
+  "properties": {
+    "clarification_id": {"type": "string"},
+    "core_id": {"enum": ["EMLIS_AI", "ANALYSIS"]},
+    "parent_request_ref": {"type": "string"},
+    "target_unknown_ref": {"type": "string"},
+    "reason_code": {"type": "string"},
+    "prompt_private": {"type": "string", "minLength": 1},
+    "skip_allowed": {"const": true},
+    "max_answer_count": {"const": 1},
+    "answer_source_role": {"enum": ["SUPPLEMENTAL_ANSWER", "SIMULATION_SESSION_MATERIAL"]},
+    "status": {"enum": ["PENDING", "ANSWERED", "SKIPPED", "EXPIRED"]}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"core_id": {"const": "EMLIS_AI"}}, "required": ["core_id"]},
+      "then": {"properties": {"answer_source_role": {"const": "SUPPLEMENTAL_ANSWER"}}}
+    },
+    {
+      "if": {"properties": {"core_id": {"const": "ANALYSIS"}}, "required": ["core_id"]},
+      "then": {"properties": {"answer_source_role": {"const": "SIMULATION_SESSION_MATERIAL"}}}
+    }
+  ]
+}
+```
+
+`prompt_private`はbody-full artifactでpublic telemetryへ0。Analysis IFでbranch point / intent / constraint不足時はgraph / primary artifactを捏造せず、このrequestをouter outcomeへ返す。
+
+### 9.2 `EngineOutcome`
+
+`GenerationArtifactBundle`はvisible artifactが存在する結果だけを表す。非生成結果をempty primary artifactで表現しない。
+
+```json
+{
+  "$id": "cocolon.cmee.engine_outcome.v1alpha1",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "artifact_bundle", "clarification_request", "failure"],
+      "properties": {
+        "status": {"const": "GENERATED"},
+        "artifact_bundle": {
+          "allOf": [
+            {"$ref": "cocolon.cmee.generation_artifact_bundle.v1alpha1"},
+            {"properties": {"status": {"const": "GENERATED"}}, "required": ["status"]}
+          ]
+        },
+        "clarification_request": {"type": "null"},
+        "failure": {"type": "null"}
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "artifact_bundle", "clarification_request", "failure"],
+      "properties": {
+        "status": {"const": "LIMITED"},
+        "artifact_bundle": {
+          "allOf": [
+            {"$ref": "cocolon.cmee.generation_artifact_bundle.v1alpha1"},
+            {"properties": {"status": {"const": "LIMITED"}}, "required": ["status"]}
+          ]
+        },
+        "clarification_request": {"type": "null"},
+        "failure": {"type": "null"}
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "artifact_bundle", "clarification_request", "failure"],
+      "properties": {
+        "status": {"const": "QUESTION_PENDING"},
+        "artifact_bundle": {
+          "allOf": [
+            {"$ref": "cocolon.cmee.generation_artifact_bundle.v1alpha1"},
+            {
+              "properties": {
+                "status": {"const": "LIMITED"},
+                "core_id": {"const": "EMLIS_AI"},
+                "artifact_kind": {"const": "EMLIS_CONVERSATIONAL_OBSERVATION"},
+                "primary_artifact": {
+                  "properties": {
+                    "kind": {"const": "EMLIS_CONVERSATIONAL_OBSERVATION"},
+                    "observation_stage": {"const": "PRE_QUESTION"},
+                    "sufficiency_decision": {"const": "ASK"}
+                  },
+                  "required": ["kind", "observation_stage", "sufficiency_decision", "observation_blocks", "reception_block"]
+                }
+              },
+              "required": ["status", "core_id", "artifact_kind", "primary_artifact"]
+            }
+          ]
+        },
+        "clarification_request": {
+          "allOf": [
+            {"$ref": "cocolon.cmee.clarification_request.v1alpha1"},
+            {"properties": {"core_id": {"const": "EMLIS_AI"}}, "required": ["core_id"]}
+          ]
+        },
+        "failure": {"type": "null"}
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "artifact_bundle", "clarification_request", "failure"],
+      "properties": {
+        "status": {"const": "QUESTION_PENDING"},
+        "artifact_bundle": {"type": "null"},
+        "clarification_request": {
+          "allOf": [
+            {"$ref": "cocolon.cmee.clarification_request.v1alpha1"},
+            {"properties": {"core_id": {"const": "ANALYSIS"}}, "required": ["core_id"]}
+          ]
+        },
+        "failure": {"type": "null"}
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "artifact_bundle", "clarification_request", "failure"],
+      "properties": {
+        "status": {"enum": ["REJECTED", "UNAVAILABLE", "SEPARATE_SAFETY"]},
+        "artifact_bundle": {"type": "null"},
+        "clarification_request": {"type": "null"},
+        "failure": {"$ref": "cocolon.cmee.failure_envelope.v1alpha1"}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"status": {"const": "REJECTED"}}, "required": ["status"]},
+          "then": {
+            "properties": {
+              "failure": {
+                "allOf": [
+                  {"$ref": "cocolon.cmee.failure_envelope.v1alpha1"},
+                  {"properties": {"disposition": {"const": "REJECTED"}}, "required": ["disposition"]}
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {"properties": {"status": {"const": "UNAVAILABLE"}}, "required": ["status"]},
+          "then": {
+            "properties": {
+              "failure": {
+                "allOf": [
+                  {"$ref": "cocolon.cmee.failure_envelope.v1alpha1"},
+                  {"properties": {"disposition": {"const": "UNAVAILABLE"}}, "required": ["disposition"]}
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {"properties": {"status": {"const": "SEPARATE_SAFETY"}}, "required": ["status"]},
+          "then": {
+            "properties": {
+              "failure": {
+                "allOf": [
+                  {"$ref": "cocolon.cmee.failure_envelope.v1alpha1"},
+                  {"properties": {"disposition": {"const": "SEPARATE_SAFETY"}}, "required": ["disposition"]}
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
+Analysis partial observed mapは`GENERATED`でありfailureではない。outer `GENERATED | LIMITED`はbundle statusとexact matchする。Emlis `QUESTION_PENDING`は`LIMITED`のpre-question observation bundle、Observation block、bound Receptionを必須とする。Analysis IF情報不足はbundle null exact1とする。どちらもtyped clarificationを必須とし、Analysisのstorage / latest mutationは0である。Schemaに加え、artifact kind / primary variant / core IDの全一致をcode-level validatorでも固定する。
+
+### 9.3 Piece contract profile
+
+CMEEは既存Piece V2 contractと並列のidentityを作らない。canonical wire formatはlowercase `short_essay | quote | declaration`である。
+
+| Existing contract | CMEE relation |
+|---|---|
+| `piece.record.v2` | record lifecycleとimmutable saved identityはPiece ownerに残す |
+| `piece.content_payload.v1` | canonical `piece_text`とformatをCMEE artifactから供給する |
+| `piece.content_meaning.v1` | source-bound meaning dutyへadaptし、二重meaning ownerを作らない |
+| `piece.public_safety_transformation.v1` | Piece publicization policyとしてPiece compilerから呼ぶ |
+| `piece.visual_recipe.v1` | Piece-owned recipe selection resultをartifactへbindする |
+
+```json
+{
+  "$id": "cocolon.cmee.piece_visual_card_payload.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "kind", "format", "canonical_piece_text",
+    "piece_text_hash", "body_blocks", "visual_recipe_ref", "visual_recipe_hash",
+    "layout_plan", "version_set"
+  ],
+  "properties": {
+    "kind": {"const": "PIECE_VISUAL_CARD_SPEC"},
+    "format": {"enum": ["short_essay", "quote", "declaration"]},
+    "canonical_piece_text": {"type": "string", "minLength": 1},
+    "piece_text_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "body_blocks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["block_id", "block_role", "visible_text", "duty_refs"],
+        "properties": {
+          "block_id": {"type": "string"},
+          "block_role": {"type": "string"},
+          "visible_text": {"type": "string", "minLength": 1},
+          "duty_refs": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+        }
+      }
+    },
+    "visual_recipe_ref": {"type": "string"},
+    "visual_recipe_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "layout_plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["block_order", "wrap_policy", "minimum_font_policy", "no_clip", "no_ellipsis"],
+      "properties": {
+        "block_order": {"type": "array", "items": {"type": "string"}},
+        "wrap_policy": {"type": "string"},
+        "minimum_font_policy": {"type": "string"},
+        "no_clip": {"const": true},
+        "no_ellipsis": {"const": true}
+      }
+    },
+    "version_set": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "piece_contract_version", "meaning_schema_version", "artifact_plan_version",
+        "visual_recipe_version", "template_version", "layout_contract_version",
+        "export_contract_version", "renderer_version"
+      ],
+      "properties": {
+        "piece_contract_version": {"type": "string"},
+        "meaning_schema_version": {"type": "string"},
+        "artifact_plan_version": {"type": "string"},
+        "visual_recipe_version": {"type": "string"},
+        "template_version": {"type": "string"},
+        "layout_contract_version": {"type": "string"},
+        "export_contract_version": {"type": "string"},
+        "renderer_version": {"type": "string"}
+      }
+    }
+  }
+}
+```
+
+### 9.4 Analysis source-set profile
+
+`PERIOD_RECORD_IDENTITY`はrecord membershipであり、本文roleを潰すcontainerではない。各included recordはoriginalとoptional supplementalを別`SourceEnvelope`へbindする。
+
+```json
+{
+  "$id": "cocolon.cmee.analysis_source_set.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source_set_id", "source_set_version", "owner_scope", "period",
+    "members", "dedupe_policy_version", "comparability_policy_version"
+  ],
+  "properties": {
+    "source_set_id": {"type": "string"},
+    "source_set_version": {"type": "integer", "minimum": 1},
+    "owner_scope": {"const": "AUTHENTICATED_SAME_OWNER"},
+    "period": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start", "end"],
+      "properties": {
+        "start": {"type": "string", "format": "date-time"},
+        "end": {"type": "string", "format": "date-time"}
+      }
+    },
+    "members": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "saved_record_ref", "saved_record_version", "member_role", "source_commitment",
+          "inclusion_status", "inclusion_or_exclusion_reason", "child_source_envelope_refs"
+        ],
+        "properties": {
+          "saved_record_ref": {"type": "string"},
+          "saved_record_version": {"type": "string"},
+          "member_role": {"const": "PERIOD_RECORD_IDENTITY"},
+          "source_commitment": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["source_id", "source_version", "commitment_id", "private_digest_ref"],
+            "properties": {
+              "source_id": {"type": "string"},
+              "source_version": {"type": "string"},
+              "commitment_id": {"type": "string"},
+              "private_digest_ref": {"type": "string"}
+            }
+          },
+          "inclusion_status": {"enum": ["INCLUDED", "EXCLUDED"]},
+          "inclusion_or_exclusion_reason": {"type": "string"},
+          "child_source_envelope_refs": {
+            "type": "array",
+            "items": {"type": "string"},
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "dedupe_policy_version": {"type": "string"},
+    "comparability_policy_version": {"type": "string"}
+  }
+}
+```
+
+included memberは`child_source_envelope_refs`に`ORIGINAL_INPUT` exact1と、存在する場合だけ`SUPPLEMENTAL_ANSWER`を別refで持つ。question decision、Emlis visible body、Piece artifact、simulation outputはperiod observed sourceにできない。
+
+### 9.5 Analysis observed-map and visual profiles
+
+```json
+{
+  "$id": "cocolon.cmee.analysis_observed_map_payload.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "kind", "wire_kind", "source_set_ref", "period", "route_graph",
+    "annotation_claims", "unknown_gaps", "conflict_refs", "comparison_availability",
+    "period_comparisons",
+    "text_projection_ref", "visual_projection_ref"
+  ],
+  "properties": {
+    "kind": {"const": "ANALYSIS_OBSERVED_SELF_STRUCTURE_MAP"},
+    "wire_kind": {"const": "watashi.map.v2"},
+    "source_set_ref": {"type": "string"},
+    "period": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start", "end"],
+      "properties": {
+        "start": {"type": "string", "format": "date-time"},
+        "end": {"type": "string", "format": "date-time"}
+      }
+    },
+    "route_graph": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["nodes", "edges"],
+      "properties": {
+        "nodes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["node_id", "node_kind", "evidence_refs"],
+            "properties": {
+              "node_id": {"type": "string"},
+              "node_kind": {
+                "enum": [
+                  "SCENE", "ROLE", "ATTENTION_OR_THOUGHT",
+                  "ACTION_OR_NONACTION", "IMMEDIATE_RESULT_OR_AFTERMATH"
+                ]
+              },
+              "evidence_refs": {"type": "array", "minItems": 1, "items": {"type": "string"}}
+            }
+          }
+        },
+        "edges": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["edge_id", "edge_type", "from_node_ref", "to_node_ref", "direction", "evidence_refs"],
+                "properties": {
+                  "edge_id": {"type": "string"},
+                  "edge_type": {"const": "OBSERVED_ORDER"},
+                  "from_node_ref": {"type": "string"},
+                  "to_node_ref": {"type": "string"},
+                  "direction": {"const": "DIRECTED"},
+                  "evidence_refs": {"type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true}
+                }
+              },
+              {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["edge_id", "edge_type", "node_refs", "direction", "evidence_refs"],
+                "properties": {
+                  "edge_id": {"type": "string"},
+                  "edge_type": {"const": "REPEATED_COOCCURRENCE"},
+                  "node_refs": {"type": "array", "minItems": 2, "items": {"type": "string"}, "uniqueItems": true},
+                  "direction": {"const": "UNDIRECTED"},
+                  "evidence_refs": {"type": "array", "minItems": 2, "items": {"type": "string"}, "uniqueItems": true}
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    "annotation_claims": {"type": "array", "items": {"$ref": "#/$defs/annotation"}},
+    "unknown_gaps": {"type": "array", "items": {"$ref": "#/$defs/unknownGap"}},
+    "conflict_refs": {"type": "array", "items": {"type": "string"}},
+    "comparison_availability": {"enum": ["NO_PREVIOUS", "COMPARISON_PRESENT"]},
+    "period_comparisons": {
+      "type": "array",
+      "maxItems": 1,
+      "items": {"$ref": "cocolon.cmee.analysis_period_comparison.v1alpha1"}
+    },
+    "text_projection_ref": {"type": "string"},
+    "visual_projection_ref": {"type": "string"}
+  },
+  "$defs": {
+    "annotation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "annotation_id", "kind", "target_ref", "annotation_state",
+        "evidence_refs", "uncertainty", "alternative_explanations", "forbidden_promotions"
+      ],
+      "properties": {
+        "annotation_id": {"type": "string"},
+        "kind": {"enum": ["PROTECTIVE", "BURDEN"]},
+        "target_ref": {"type": "string"},
+        "annotation_state": {
+          "enum": ["SOURCE_EXPLICIT_ANNOTATION", "EVIDENCE_BOUND_INTERPRETIVE_HYPOTHESIS"]
+        },
+        "evidence_refs": {
+          "type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true
+        },
+        "uncertainty": {"type": "string"},
+        "alternative_explanations": {"type": "array", "items": {"type": "string"}},
+        "forbidden_promotions": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "unknownGap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["gap_id", "between_node_refs", "missing_scope", "reason_code", "source_set_ref"],
+      "properties": {
+        "gap_id": {"type": "string"},
+        "between_node_refs": {
+          "type": "array", "minItems": 1, "maxItems": 2,
+          "items": {"type": "string"}, "uniqueItems": true
+        },
+        "missing_scope": {"type": "string"},
+        "reason_code": {"type": "string"},
+        "source_set_ref": {"type": "string"}
+      }
+    }
+  }
+}
+```
+
+`REPEATED_COOCCURRENCE`のevidenceはdistinct source exact2以上であることをcode-level validatorで確認する。`UNKNOWN_GAP`はobserved edgeではなく別marker、protective / burdenはroute nodeではなくannotationである。`comparison_availability=NO_PREVIOUS`では`period_comparisons` exact0、`COMPARISON_PRESENT`ではexact1とし、comparison objectを同じimmutable canonical stored JSONへ含める。
+
+```json
+{
+  "$id": "cocolon.cmee.analysis_period_comparison.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "comparison_id", "current_artifact_ref", "current_source_set_ref",
+    "previous_artifact_ref", "previous_source_set_ref", "comparability_state",
+    "reason_codes", "change_claims"
+  ],
+  "properties": {
+    "comparison_id": {"type": "string"},
+    "current_artifact_ref": {"type": "string"},
+    "current_source_set_ref": {"type": "string"},
+    "previous_artifact_ref": {"type": "string"},
+    "previous_source_set_ref": {"type": "string"},
+    "comparability_state": {"enum": ["COMPARABLE", "NOT_COMPARABLE"]},
+    "reason_codes": {"type": "array", "items": {"type": "string"}},
+    "change_claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["change_id", "change_kind", "current_ref", "previous_ref", "evidence_refs"],
+        "properties": {
+          "change_id": {"type": "string"},
+          "change_kind": {
+            "enum": [
+              "ROUTE_EVIDENCE_CHANGED", "ANNOTATION_EVIDENCE_CHANGED",
+              "UNKNOWN_SCOPE_CHANGED", "CONFLICT_STATE_CHANGED"
+            ]
+          },
+          "current_ref": {"type": "string"},
+          "previous_ref": {"type": "string"},
+          "evidence_refs": {
+            "type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+`NOT_COMPARABLE`では`change_claims` exact0とし、reason codeを1件以上要求する。`COMPARABLE`でもchangeをimprovement / deterioration / causeへ自動昇格しない。このcross-field ruleはcode-level validatorで固定する。
+
+```json
+{
+  "$id": "cocolon.cmee.analysis_visual_plan.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "projection_id", "projection_of", "node_specs", "edge_specs", "lane_specs",
+    "group_specs", "evidence_badges", "unknown_badges", "branch_markers",
+    "style_tokens", "accessibility_linear_order", "text_fallback_ref"
+  ],
+  "properties": {
+    "projection_id": {"type": "string"},
+    "projection_of": {"type": "string"},
+    "node_specs": {"type": "array", "items": {"$ref": "#/$defs/nodeSpec"}},
+    "edge_specs": {"type": "array", "items": {"$ref": "#/$defs/edgeSpec"}},
+    "lane_specs": {"type": "array", "items": {"$ref": "#/$defs/laneSpec"}},
+    "group_specs": {"type": "array", "items": {"$ref": "#/$defs/groupSpec"}},
+    "evidence_badges": {"type": "array", "items": {"$ref": "#/$defs/badgeSpec"}},
+    "unknown_badges": {"type": "array", "items": {"$ref": "#/$defs/badgeSpec"}},
+    "branch_markers": {"type": "array", "items": {"$ref": "#/$defs/branchMarker"}},
+    "style_tokens": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["theme_ref", "layout_policy_ref", "accessibility_policy_ref"],
+      "properties": {
+        "theme_ref": {"type": "string"},
+        "layout_policy_ref": {"type": "string"},
+        "accessibility_policy_ref": {"type": "string"}
+      }
+    },
+    "accessibility_linear_order": {"type": "array", "items": {"type": "string"}},
+    "text_fallback_ref": {"type": "string"}
+  },
+  "$defs": {
+    "nodeSpec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["node_ref", "lane_ref", "display_role", "label_ref"],
+      "properties": {
+        "node_ref": {"type": "string"},
+        "lane_ref": {"type": "string"},
+        "display_role": {"enum": ["OBSERVED", "SIMULATED", "UNKNOWN", "ANNOTATION"]},
+        "label_ref": {"type": "string"}
+      }
+    },
+    "edgeSpec": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["edge_ref", "display_role", "from_ref", "to_ref", "line_style", "label_ref"],
+          "properties": {
+            "edge_ref": {"type": "string"},
+            "display_role": {"enum": ["OBSERVED_ORDER", "SIMULATED_TRANSITION"]},
+            "from_ref": {"type": "string"},
+            "to_ref": {"type": "string"},
+            "line_style": {"enum": ["SOLID", "DASHED", "DOTTED"]},
+            "label_ref": {"type": "string"}
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["edge_ref", "display_role", "endpoint_refs", "line_style", "label_ref"],
+          "properties": {
+            "edge_ref": {"type": "string"},
+            "display_role": {"const": "REPEATED_COOCCURRENCE"},
+            "endpoint_refs": {
+              "type": "array", "minItems": 2, "items": {"type": "string"}, "uniqueItems": true
+            },
+            "line_style": {"enum": ["SOLID", "DOTTED"]},
+            "label_ref": {"type": "string"}
+          }
+        }
+      ]
+    },
+    "laneSpec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lane_ref", "lane_role", "label_ref"],
+      "properties": {
+        "lane_ref": {"type": "string"},
+        "lane_role": {"enum": ["OBSERVED", "SIMULATED", "ANNOTATION"]},
+        "label_ref": {"type": "string"}
+      }
+    },
+    "groupSpec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["group_ref", "member_refs", "display_role", "label_ref"],
+      "properties": {
+        "group_ref": {"type": "string"},
+        "member_refs": {
+          "type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true
+        },
+        "display_role": {"enum": ["OBSERVED_CLUSTER", "SIMULATED_SCENARIO", "ANNOTATION_GROUP"]},
+        "label_ref": {"type": "string"}
+      }
+    },
+    "branchMarker": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["branch_point_ref", "selected_node_ref", "marker_role", "label_ref"],
+      "properties": {
+        "branch_point_ref": {"type": "string"},
+        "selected_node_ref": {"type": "string"},
+        "marker_role": {"const": "USER_SELECTED_BRANCH"},
+        "label_ref": {"type": "string"}
+      }
+    },
+    "badgeSpec": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["target_ref", "badge_kind", "label_ref"],
+      "properties": {
+        "target_ref": {"type": "string"},
+        "badge_kind": {"enum": ["EVIDENCE", "UNKNOWN", "CONFLICT", "HYPOTHESIS"]},
+        "label_ref": {"type": "string"}
+      }
+    }
+  }
+}
+```
+
+`AnalysisVisualPlan`はprivate planである。API / RNへは次のsafe projectionだけを渡し、private source / evidence identityを除外する。
+
+```json
+{
+  "$id": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "wire_kind", "projection_of", "artifact_version",
+    "period_label", "period_comparison", "nodes", "edges", "annotation_badges",
+    "unknown_gaps", "conflict_badges", "accessibility_linear_order"
+  ],
+  "properties": {
+    "schema_version": {"const": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1"},
+    "wire_kind": {"const": "watashi.map.v2"},
+    "projection_of": {"type": "string", "minLength": 1},
+    "artifact_version": {"type": "integer", "minimum": 1},
+    "period_label": {"type": "string"},
+    "period_comparison": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "reason_codes", "safe_change_kinds"],
+      "properties": {
+        "state": {"enum": ["NO_PREVIOUS", "COMPARABLE", "NOT_COMPARABLE"]},
+        "reason_codes": {"type": "array", "items": {"type": "string"}},
+        "safe_change_kinds": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "ROUTE_EVIDENCE_CHANGED", "ANNOTATION_EVIDENCE_CHANGED",
+              "UNKNOWN_SCOPE_CHANGED", "CONFLICT_STATE_CHANGED"
+            ]
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["node_ref", "node_kind", "visible_label", "evidence_badge_count"],
+        "properties": {
+          "node_ref": {"type": "string"},
+          "node_kind": {"type": "string"},
+          "visible_label": {"type": "string"},
+          "evidence_badge_count": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["edge_ref", "edge_kind", "from_ref", "to_ref", "visible_label"],
+            "properties": {
+              "edge_ref": {"type": "string"},
+              "edge_kind": {"const": "OBSERVED_ORDER"},
+              "from_ref": {"type": "string"},
+              "to_ref": {"type": "string"},
+              "visible_label": {"type": "string"}
+            }
+          },
+          {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["edge_ref", "edge_kind", "endpoint_refs", "visible_label"],
+            "properties": {
+              "edge_ref": {"type": "string"},
+              "edge_kind": {"const": "REPEATED_COOCCURRENCE"},
+              "endpoint_refs": {
+                "type": "array", "minItems": 2, "items": {"type": "string"}, "uniqueItems": true
+              },
+              "visible_label": {"type": "string"}
+            }
+          }
+        ]
+      }
+    },
+    "annotation_badges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["annotation_ref", "target_ref", "kind", "visible_label"],
+        "properties": {
+          "annotation_ref": {"type": "string"},
+          "target_ref": {"type": "string"},
+          "kind": {"enum": ["PROTECTIVE", "BURDEN"]},
+          "visible_label": {"type": "string"}
+        }
+      }
+    },
+    "unknown_gaps": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["gap_ref", "between_node_refs", "visible_label"],
+        "properties": {
+          "gap_ref": {"type": "string"},
+          "between_node_refs": {
+            "type": "array", "minItems": 1, "maxItems": 2,
+            "items": {"type": "string"}, "uniqueItems": true
+          },
+          "visible_label": {"type": "string"}
+        }
+      }
+    },
+    "conflict_badges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["conflict_ref", "target_refs", "visible_label"],
+        "properties": {
+          "conflict_ref": {"type": "string"},
+          "target_refs": {
+            "type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true
+          },
+          "visible_label": {"type": "string"}
+        }
+      }
+    },
+    "accessibility_linear_order": {"type": "array", "items": {"type": "string"}}
+  }
+}
+```
+
+このprojectionはaccess policyを置き換えない。`projection_of`はcanonical `artifact_id@version`へ解決し、raw body、private source ID、private evidence locator、source digestを持たない。latest / history / detailの各viewは同じcanonical identityを参照するが、audienceごとのauthorized projection bytesまで同一である必要はない。`NO_PREVIOUS`と`NOT_COMPARABLE`では`safe_change_kinds` exact0、`NOT_COMPARABLE`ではreason code exact1以上とする。`COMPARABLE`だけがsafe change kindを持てるが、改善・悪化・原因・達成labelへ変換しない。
+
+### 9.6 Analysis IF-route profile
+
+```json
+{
+  "$id": "cocolon.cmee.analysis_if_route_payload.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "kind", "wire_kind", "scenario_artifact_ref",
+    "base_observed_map_ref", "base_route_ref", "branch_point_id",
+    "scenario_graph_ref", "branch_intent_source_ref", "condition_refs",
+    "unmodelled_factor_refs", "text_projection_ref", "visual_projection_ref",
+    "scenario_display_label"
+  ],
+  "properties": {
+    "kind": {"const": "ANALYSIS_IF_ROUTE_SIMULATION"},
+    "wire_kind": {"const": "watashi.if-route.v1"},
+    "scenario_artifact_ref": {"type": "string", "pattern": "^analysis-if-scenario:"},
+    "base_observed_map_ref": {"type": "string"},
+    "base_route_ref": {"type": "string"},
+    "branch_point_id": {"type": "string"},
+    "scenario_graph_ref": {"type": "string", "pattern": "^hypothetical:"},
+    "branch_intent_source_ref": {"type": "string"},
+    "condition_refs": {"type": "array", "items": {"type": "string"}},
+    "unmodelled_factor_refs": {"type": "array", "items": {"type": "string"}},
+    "text_projection_ref": {"type": "string"},
+    "visual_projection_ref": {"type": "string"},
+    "scenario_display_label": {"type": "string", "minLength": 1}
+  }
+}
+```
+
+`HypotheticalScenarioGraph`のstrict `origin` / `SIMULATED_TRANSITION` contractを参照し、scenario同士のrank / score / probability / optimalityを追加しない。
+
+```json
+{
+  "$id": "cocolon.cmee.analysis_if_scenario_candidate_set.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "kind", "wire_kind", "candidate_set_id", "base_observed_map_ref",
+    "base_route_ref", "scenarios", "display_order", "selection_policy"
+  ],
+  "properties": {
+    "kind": {"const": "ANALYSIS_IF_SCENARIO_SET"},
+    "wire_kind": {"const": "watashi.if-route-set.v1"},
+    "candidate_set_id": {"type": "string", "pattern": "^scenario-set:"},
+    "base_observed_map_ref": {"type": "string"},
+    "base_route_ref": {"type": "string"},
+    "scenarios": {
+      "type": "array", "minItems": 1, "maxItems": 3,
+      "items": {"$ref": "cocolon.cmee.analysis_if_route_payload.v1alpha1"}
+    },
+    "display_order": {
+      "type": "array", "minItems": 1, "maxItems": 3,
+      "items": {"type": "string", "pattern": "^analysis-if-scenario:"},
+      "uniqueItems": true
+    },
+    "selection_policy": {"const": "PARALLEL_NOT_RANKED"}
+  }
+}
+```
+
+`scenarios[].scenario_artifact_ref` setと`display_order`はexact matchし、全scenarioが同じ`base_observed_map_ref` / `base_route_ref`へbindする。`display_order`はUI上の安定表示順だけであり、rank、score、probability、best flagではない。Bundleのprimary artifactはこのcandidate set exact1で、個々のscenarioはその内包artifactである。意味の異なるscenarioを`companion_artifacts`の曖昧な並びへ逃がさない。
+
+```json
+{
+  "$id": "cocolon.cmee.analysis_saved_route_intent_payload.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "kind", "wire_kind", "source_scenario_set_ref", "selected_scenario_ref",
+    "selection_source_ref", "user_note_source_ref", "saved_at"
+  ],
+  "properties": {
+    "kind": {"const": "ANALYSIS_SAVED_ROUTE_INTENT"},
+    "wire_kind": {"const": "watashi.saved-route-intent.v1"},
+    "source_scenario_set_ref": {"type": "string", "pattern": "^scenario-set:"},
+    "selected_scenario_ref": {"type": "string", "pattern": "^analysis-if-scenario:"},
+    "selection_source_ref": {"type": "string"},
+    "user_note_source_ref": {"type": ["string", "null"]},
+    "saved_at": {"type": "string", "format": "date-time"}
+  }
+}
+```
+
+validatorは`selected_scenario_ref`が`source_scenario_set_ref`のmember exact1であること、Bundleの`parent_artifact_refs`にscenario setがあること、`source_commitments`にuser selection SourceEnvelope exact1とoptional note sourceだけがあることを確認する。scenario / simulation artifactをsource commitmentへ入れない。
+
+```json
+{
+  "$id": "cocolon.cmee.analysis_if_safe_projection.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "wire_kind", "projection_of", "base_observed_map_ref",
+    "base_route_ref", "selection_policy", "scenarios"
+  ],
+  "properties": {
+    "schema_version": {"const": "cocolon.cmee.analysis_if_safe_projection.v1alpha1"},
+    "wire_kind": {"const": "watashi.if-route-set.v1"},
+    "projection_of": {"type": "string"},
+    "base_observed_map_ref": {"type": "string"},
+    "base_route_ref": {"type": "string"},
+    "selection_policy": {"const": "PARALLEL_NOT_RANKED"},
+    "scenarios": {
+      "type": "array", "minItems": 1, "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "scenario_ref", "branch_point_ref", "visible_label", "nodes", "edges",
+          "required_conditions", "frictions", "unmodelled_factors"
+        ],
+        "properties": {
+          "scenario_ref": {"type": "string"},
+          "branch_point_ref": {"type": "string"},
+          "visible_label": {"type": "string"},
+          "nodes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["node_ref", "origin", "visible_label"],
+              "properties": {
+                "node_ref": {"type": "string"},
+                "origin": {"enum": ["OBSERVED_ANCHOR", "USER_CHOICE", "SIMULATED_EXTENSION", "UNKNOWN"]},
+                "visible_label": {"type": "string"}
+              }
+            }
+          },
+          "edges": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["edge_ref", "from_ref", "to_ref", "visible_condition_labels"],
+              "properties": {
+                "edge_ref": {"type": "string"},
+                "from_ref": {"type": "string"},
+                "to_ref": {"type": "string"},
+                "visible_condition_labels": {"type": "array", "items": {"type": "string"}}
+              }
+            }
+          },
+          "required_conditions": {"type": "array", "items": {"type": "string"}},
+          "frictions": {"type": "array", "items": {"type": "string"}},
+          "unmodelled_factors": {"type": "array", "items": {"type": "string"}}
+        }
+      }
+    }
+  }
+}
+```
+
+```json
+{
+  "$id": "cocolon.cmee.analysis_saved_intent_safe_projection.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version", "wire_kind", "projection_of", "source_scenario_set_ref",
+    "selected_scenario_ref", "visible_note", "saved_at"
+  ],
+  "properties": {
+    "schema_version": {"const": "cocolon.cmee.analysis_saved_intent_safe_projection.v1alpha1"},
+    "wire_kind": {"const": "watashi.saved-route-intent.v1"},
+    "projection_of": {"type": "string"},
+    "source_scenario_set_ref": {"type": "string"},
+    "selected_scenario_ref": {"type": "string"},
+    "visible_note": {"type": ["string", "null"]},
+    "saved_at": {"type": "string", "format": "date-time"}
+  }
+}
+```
+
+IF setとSavedRouteIntentのstorage / API / RN identityはobserved `watashi.map.v2`と別namespaceにする。Analysis lifecycle storage / access ownerだけがimmutable persistenceとauthorized safe projectionを行い、CMEE kernelはDB ownerにならない。view-time regeneration、observed payloadへのinline mutation、v1 fallback、rank / score / probability fieldは0である。
+
+## 10. `PositiveRealizationTrace`
+
+```json
+{
+  "$id": "cocolon.cmee.positive_realization_trace.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["trace_id", "artifact_ref", "units", "required_duty_coverage"],
+  "properties": {
+    "trace_id": {"type": "string"},
+    "artifact_ref": {"type": "string"},
+    "units": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "visible_artifact_unit_ref", "plan_duty_ref", "semantic_node_or_edge_refs",
+          "attachment_witness_refs", "source_evidence_refs", "realization_operation",
+          "coverage_status"
+        ],
+        "properties": {
+          "visible_artifact_unit_ref": {"type": "string"},
+          "plan_duty_ref": {"type": "string"},
+          "semantic_node_or_edge_refs": {"type": "array", "items": {"type": "string"}},
+          "attachment_witness_refs": {"type": "array", "items": {"type": "string"}},
+          "source_evidence_refs": {"type": "array", "items": {"type": "string"}},
+          "realization_operation": {"type": "string"},
+          "coverage_status": {"enum": ["COVERED", "UNCOVERED", "INVALID"]}
+        }
+      }
+    },
+    "required_duty_coverage": {"enum": ["COMPLETE", "INCOMPLETE"]}
+  }
+}
+```
+
+visible unitからsource evidenceまで連続しない場合はinvalid。全文を一つ目のsource spanへbindしない。trace body / source range / visible textをpublic GitHubへ出さない。
+
+## 11. Body-free report
+
+```json
+{
+  "$id": "cocolon.cmee.body_free_quality_report.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "core_id",
+    "product_job",
+    "artifact_kind",
+    "status",
+    "schema_versions",
+    "provider_identity_digest",
+    "policy_versions",
+    "check_results",
+    "metrics",
+    "reason_codes",
+    "body_free"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "cocolon.cmee.body_free_quality_report.v1alpha1"
+    },
+    "core_id": {"enum": ["EMLIS_AI", "PIECE", "ANALYSIS"]},
+    "product_job": {
+      "enum": ["OBSERVE_AND_CLARIFY", "EXPRESS_AND_SHARE", "MAP_AND_EXPLORE"]
+    },
+    "artifact_kind": {"type": "string"},
+    "status": {
+      "enum": ["GENERATED", "QUESTION_PENDING", "LIMITED", "REJECTED", "UNAVAILABLE", "SEPARATE_SAFETY"]
+    },
+    "schema_versions": {"type": "object", "additionalProperties": {"type": "string"}},
+    "provider_identity_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "policy_versions": {"type": "object", "additionalProperties": {"type": "string"}},
+    "check_results": {"type": "object", "additionalProperties": {"type": "boolean"}},
+    "metrics": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
+    "reason_codes": {"type": "array", "items": {"type": "string"}},
+    "body_free": {"const": true}
+  }
+}
+```
+
+public reportにraw input / output、lemma、surface、exact source range、user ID、case ID、private path、Product Read本文を含めない。
+
+## 12. Failure envelope
+
+```json
+{
+  "$id": "cocolon.cmee.failure_envelope.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "failure_id",
+    "core_id",
+    "stage",
+    "reason_code",
+    "disposition",
+    "retryable",
+    "fallback_used",
+    "body_free"
+  ],
+  "properties": {
+    "failure_id": {"type": "string"},
+    "core_id": {"enum": ["EMLIS_AI", "PIECE", "ANALYSIS"]},
+    "stage": {
+      "enum": [
+        "SOURCE_ADMISSION", "EVIDENCE_BINDING", "LINGUISTIC_PROVIDER",
+        "ATTACHMENT_ADMISSION", "MEANING_ASSEMBLY", "CORE_INTENT", "PLAN",
+        "REALIZATION", "HARD_VALIDITY", "TRACE", "ARTIFACT_IDENTITY"
+      ]
+    },
+    "reason_code": {"type": "string"},
+    "disposition": {"enum": ["REJECTED", "UNAVAILABLE", "SEPARATE_SAFETY"]},
+    "retryable": {"type": "boolean"},
+    "fallback_used": {"const": false},
+    "body_free": {"const": true}
+  }
+}
+```
+
+runtime retryやfallback authorityは別policyで勝手に追加しない。provider / resource mismatchはfail-closeである。`LIMITED`はartifactあり / failure nullのEngineOutcomeであり、このfailure schemaへ入れない。work-level `STOP`はdesign / navigation stateで、runtime FailureEnvelopeへ入れない。
+
+## 13. Canonical identity
+
+canonical identity material:
+
+```text
+schema version set
+core id / product job
+source commitment IDs and versions
+semantic graph identity
+experience plan identity
+canonical primary artifact bytes or canonical graph form
+recipe / layout / projection version set
+policy version set
+```
+
+exclude:
+
+- generated timestamp if not product identity
+- request-local path
+- private user ID
+- process ID / host
+- log sequence
+- unordered map serialization
+- public telemetry transport metadata
+
+canonical JSONはUTF-8、sorted object keys、no insignificant whitespace、array order semantic、numbers normalizedの一つのimplementationをowner exact1にする。
+
+## 14. Versioning rules
+
+1. schema IDはmeaning contractを表す。incompatible field semanticsはnew schema ID。
+2. required field追加、enum narrowing、identity material変更はbreaking。
+3. optional field追加もconsumerがunknown fieldを拒否する間はschema revisionを上げる。
+4. core extensionをshared schemaへ昇格するのは第2 actual consumerで一致責任を証明した後。
+5. Emlis-only fieldを`shared`と呼んでfreezeしない。
+6. Piece recipe / renderer、Analysis graph projection、Emlis response mappingはcore version ownerを保持する。
+7. preview / saved / history / latestが参照するartifact versionをsilent upgradeしない。
+8. old version migrationはnew artifactを作り、in-place meaning mutationをしない。
+
+## 15. Schema verification
+
+minimum tests:
+
+- canonical examples validate
+- required field missing RED
+- additional property RED
+- wrong core / artifact discriminator RED
+- artifact variant / product job / epistemic partition / semantic graph prefix mismatch RED
+- original / supplemental / simulation source role swap RED
+- user owner field in body-free projection RED
+- `FORMAL_CLOSED` with incomplete candidate set RED
+- attachment set ID / private digest / source versionとadmissionのswap RED
+- admitted owner set duplicate / required-active mismatch RED
+- admission ambiguity / unresolved count differs from sealed set re-derivation RED
+- open-slot denominator absent RED
+- EXPLICIT argument span absent、ZERO / OMITTED argument span non-null RED
+- observed claim without evidence ref RED
+- `REPEATED_COOCCURRENCE` with fewer than two distinct source evidence refs RED
+- `NOT_COMPARABLE` with change claim、またはreason 0 RED
+- `NO_PREVIOUS` with comparison object / safe change kind RED
+- IF graph inserted into grounded graph RED
+- Analysis IF `QUESTION_PENDING` with fabricated empty graph / artifact RED
+- IF scenario set count 0 / 4、base map mismatch、display-order membership mismatch RED
+- IF scenario set with rank / score / probability / best flag RED
+- SavedRouteIntent selected scenario outside source set RED
+- SavedRouteIntent missing user selection source commitment RED
+- simulation artifact used as SavedRouteIntent source commitment RED
+- IF / SavedRouteIntent wire or storage identity mixed with `watashi.map.v2` RED
+- safe projection cooccurrence represented by directed from/to RED
+- safe projection annotation / unknown / conflict target correspondence lost RED
+- Piece compacted whitespace hash mismatch RED
+- initial Piece cutover without pre-admitted V2 rollback target RED
+- watashi.map.v2 safe projectionにprivate source ID / evidence locator / digestがある場合RED
+- body-free report raw body / private locator key RED
+- EngineOutcome status / FailureEnvelope disposition mismatch RED
+- canonical identity invariant under object key ordering
+- canonical identity changes under semantic array ordering / version change
+
+test fixtureをproduction schema ownerにしない。actual implementationでPython dataclass、validator、JSON schemaのthree-way consistencyを検証する。

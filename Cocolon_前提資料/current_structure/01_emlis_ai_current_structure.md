@@ -227,6 +227,12 @@ Route Uまたはcontract変更は別Mash LEVEL_3判断が必要であり、こ�
 5. active planの一部metadataにdraft lifecycle表記が残るため、current actual判断では08とremote factsを優先する。
 6. CMEEは設計候補であり、Emlis V1-A implementation／Cycle re-entryは未承認。
 
+CMEE Emlis detailed design candidate:
+
+[CMEE V1-A — EmlisAI Observation Vertical 詳細設計](../designs/cmee/v1/02_emlis_v1a_detailed_design.md)
+
+このpointerはcurrent production ownerまたはCycle navigationを変更しない。provider / acceptance contractのcurrent resultは`NO_SAFE_CMEE_V1A_CANDIDATE_STOP`であり、new Mash LEVEL_3判断までimplementationを開始しない。
+
 ## 9. History pointers
 
 - 2026-05〜07の実装経緯: EmlisAIの実装済み資料/
