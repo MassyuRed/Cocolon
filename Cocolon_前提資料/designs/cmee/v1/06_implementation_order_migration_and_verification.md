@@ -3,7 +3,9 @@
 - document id: `cocolon.cmee.v1.implementation_migration_verification.detailed_design`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - current implementation admission: `STOP_BEFORE_IMPLEMENTATION`
-- current terminal code: `NO_SAFE_CMEE_V1A_CANDIDATE_STOP`
+- current provider admission: `NO_SAFE_CMEE_V1A_CANDIDATE_STOP`
+- L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
+- current L3-R state: `ROUTE_B_SELECTED_BOUNDED_PREFLIGHT_NOT_AUTHORIZED_STOP`
 - automatic progression: `false`
 
 ---
@@ -29,11 +31,13 @@ NO_SAFE_CMEE_V1A_CANDIDATE_STOP
 
 これはCMEE全体の不可能判定ではない。current formal contractのまま、provisional parserをauthorityへ昇格して実装を始めないためのbounded STOPである。
 
-## 1. Next Mash LEVEL_3 decision exact2 routes
+2026-08-15 JST、MashはL3-Rのrouteとして`ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`を選択した。route ambiguityは解消したが、L3-Rが要求するbounded preflight exact bodyは未承認である。したがってcurrent L3-R stateは`ROUTE_B_SELECTED_BOUNDED_PREFLIGHT_NOT_AUTHORIZED_STOP`、P0 / implementation effectは0である。
 
-再開には、Mashによるnew LEVEL_3判断が必要である。
+## 1. Mash LEVEL_3 route decision
 
-### Route A — formal closureを維持
+exact2候補に対するMash判断はRoute B selectionで確定した。
+
+### Route A — formal closureを維持（NOT_SELECTED）
 
 ```text
 ROUTE_A_FORMAL_CLOSED_ATTACHMENT_AUTHORITY
@@ -51,7 +55,7 @@ required:
 
 これを満たすauthorityが提示できなければRoute AはSTOPする。
 
-### Route B — provisional language analysis + explicit product resolution
+### Route B — provisional language analysis + explicit product resolution（SELECTED）
 
 ```text
 ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION
@@ -65,7 +69,7 @@ acceptance contractを明示的に変更し、provider outputを`PROVISIONAL_ONL
 
 one-bestをsilent authorityにしない。user answerはperson truthの全部ではなく、対象unknownについてのuser-owned correction / confirmationである。
 
-Ultra華恋のtechnical recommendationはRoute Bだが、この文書は承認ではない。Mash判断前はcurrent STOPを維持する。
+MashはRoute B directionを選択した。この選択はprovider proposalを`PROVISIONAL_ONLY`に留め、limited observation / user sovereign clarification / `UNAVAILABLE`で閉じるroute-level semanticsだけを承認する。bounded preflight、exact cross-field acceptance contract、P0、dependency、implementation、runtime、Cycle001変更は承認しない。
 
 ## 2. Work packet overview
 
@@ -113,14 +117,25 @@ D0はproduct / technical implementation credit 0である。
 
 ## 4. L3-R — authority route and bounded preflight decision
 
-Mash decision must first fix the acceptance route and a bounded preflight scope. P0より前にunmeasured package hash、resource size、RSS、latencyを採用済みとはしない。
+Mash decision must fix the acceptance route and a bounded preflight scope. P0より前にunmeasured package hash、resource size、RSS、latencyを採用済みとはしない。
 
-L3-R must fix:
+Current fixed fields:
 
 ```text
-route_id
-approval_owner
-approved acceptance semantics
+route_id = ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION
+approval_owner = Mash
+route_selection_date = 2026-08-15 JST
+route_level_semantics = provisional provider + ambiguity-independent limited observation | target exact1 user clarification | unavailable
+```
+
+The route selection does not prove candidate-set completeness, does not make one-best / score / empty ambiguity list authoritative, and does not permit per-owner omission or denominator shrink. A supplemental answer must remain a new caller-supplied source bound to the target unknown only; original source / graph / admission are immutable. These clauses set direction, not executable admission.
+
+L3-R must still fix:
+
+```text
+approved cross-field acceptance semantics, including required / active owner exact coverage
+provisional epistemic representation that cannot alone support visible claims
+original-input lifecycle clarification request maximum exact1
 provider / resolver responsibility
 preflight candidate package set
 preflight exact local / temporary paths
@@ -132,6 +147,8 @@ retry authority
 post-preflight approval requirements
 automatic progression = false
 ```
+
+Until every remaining field is approved in one bounded technical body, the L3-R exit is not met and P0 is forbidden. The current outcome is `BLOCKER_NARROWED`, not product / technical implementation credit.
 
 P0 PASS後、Mashのseparate `L3-I`でexact dependency versions / hashes、resource lock、repo changed-path allowlist、I1 implementation scopeを承認する。L3-I前にrequirements、lock、production source、test、runnerを書かない。
 
@@ -592,6 +609,7 @@ internal logicだけでarchitecture role不変ならmapをchurnせず、PR説明
 CMEE_DETAILED_DESIGN_DRAFT_PR_REMOTE_VERIFIED_NOT_CURRENT
 CMEE_DETAILED_DESIGN_CURRENT_OWNER_MERGED
 NO_SAFE_CMEE_V1A_CANDIDATE_STOP
+CMEE_L3R_ROUTE_B_SELECTED_BOUNDED_PREFLIGHT_NOT_AUTHORIZED_STOP
 CMEE_V1A_EMLIS_OBSERVATION_CANDIDATE_READY_DISABLED_NOT_ADMITTED
 CMEE_V1A_CYCLE001_PROVEN
 CMEE_V1A_EMLIS_OBSERVATION_PRODUCTION_OPERATIONAL
@@ -602,6 +620,6 @@ CMEE_V1E_ANALYSIS_IF_ROUTE_OPERATIONAL
 CMEE_V1_THREE_CORE_OPERATIONAL
 ```
 
-本turnのpublication targetは`CMEE_DETAILED_DESIGN_DRAFT_PR_REMOTE_VERIFIED_NOT_CURRENT`である。Draft PRへremote publishされてもcurrent ownerにはならず、merge後のfresh verificationでだけ`CMEE_DETAILED_DESIGN_CURRENT_OWNER_MERGED`になり得る。
+本turnのpublication targetは、同じDraft PR上の`CMEE_L3R_ROUTE_B_SELECTED_BOUNDED_PREFLIGHT_NOT_AUTHORIZED_STOP`である。D0 publicationとRoute B selectionがremote publishされてもcurrent owner、P0 authorization、implementation admissionにはならず、merge後のfresh verificationでだけ`CMEE_DETAILED_DESIGN_CURRENT_OWNER_MERGED`になり得る。
 
 各stateは別であり、前のstateを次へ自動変換しない。

@@ -7,6 +7,8 @@ effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
 design_state: "FINAL_TECHNICAL_DESIGN_CANDIDATE"
 detailed_design_state: "DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE_STOP_BEFORE_IMPLEMENTATION"
+l3r_route_selection: "ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION"
+l3r_packet_state: "ROUTE_B_SELECTED_BOUNDED_PREFLIGHT_NOT_AUTHORIZED_STOP"
 implementation_state: "NOT_STARTED"
 runtime_effect: 0
 automatic_progression: false
@@ -30,6 +32,9 @@ Current state:
     final technical design candidate
     detailed implementation design candidate
     Phase 0 provider result = NO_SAFE_CMEE_V1A_CANDIDATE_STOP
+    L3-R route selection = ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION
+    L3-R bounded preflight authorization = NOT_GRANTED
+    P0 = NOT_STARTED
     not approved for implementation
     not implemented
     not production connected
@@ -141,6 +146,8 @@ CMEEの内部graphは:
 であり、本人の絶対的真実ではない。
 
 user-confirmed、user-corrected、unknown、hypothesisのlineageを分け、original sourceを書き換えない。
+
+2026-08-15 JST、MashはL3-Rのrouteとして`ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`を選択した。provider proposalをmeaning authorityへ昇格せず、ambiguityに依存しないlimited observation、一点のuser clarification、または`UNAVAILABLE`で閉じる方向を採る。このroute選択だけではbounded preflight、P0、dependency、implementation、runtime、Cycle001再入場を承認しない。
 
 Candidate selectionはhard validity constraintsを先に適用し、有効候補の中で意味保持をnaturalness、shortness、appearance、machine score、resource costより先に置く。
 faithfulなrouteが比例的scopeで作れない場合、安価なmeaning-loss candidateを選ばずSTOP／redesignする。
@@ -301,14 +308,14 @@ Lifecycle:
     production / test / dependency / DB / API / RN effect 0
     Cycle001 restart effect 0
 
-このcurrent structure map、full design、detail suiteがmergeされても、implementation、dependency、Route A / B、Cycle再入場の承認にはならない。
+このcurrent structure map、full design、detail suiteがmergeされても、Route Bのroute選択を除き、bounded preflight、P0、implementation、dependency、L3-I、Cycle再入場の承認にはならない。
 
 ## 11. Implementation order
 
 1. CMEE three-core architecture and detailed suite defined
 2. Phase 0 current result `NO_SAFE_CMEE_V1A_CANDIDATE_STOP`
-3. Mash L3-RでRoute A formal authorityまたはRoute B provisional + user resolutionとbounded preflight scopeを判断
-4. P0でprovider／resource／platformをread-only measured preflightし、PASSまたはSTOP
+3. Mash L3-R route selection: Route B provisional + user sovereign resolutionを選択済み（2026-08-15 JST）。bounded preflight scopeは未承認のためL3-Rは未完了
+4. separate Mash LEVEL_3でbounded preflight exact bodyを承認した場合だけ、P0でprovider／resource／platformをread-only measured preflightし、PASSまたはSTOP
 5. separate Mash L3-Iでexact dependency hashes／resource lock／I1 changed-path allowlistを承認
 6. disabled Emlis vertical candidate
 7. representative machine verification + body-full Product Read + bounded correction（I2）
@@ -357,12 +364,12 @@ CMEE phaseは上位migration順であり、Cycle001のfresh applicable 08 exact1
 ## 13. Current gaps
 
 1. detailed fit-gapで、current formal contractを満たすsafe provider exact1は確認できず、Phase 0 terminalは`NO_SAFE_CMEE_V1A_CANDIDATE_STOP`。
-2. Route A formal authorityまたはRoute B provisional + user sovereign resolutionのnew Mash LEVEL_3 judgmentが未実施。
+2. Route B selectionは完了したが、provider / resolver責任、candidate package / resource identity、temp path、categorical ceiling、network / storage / secret effect、failure / privacy / retryを閉じるbounded preflight LEVEL_3 bodyは未承認。
 3. CMEE package、callable、runner ingressは存在しない。
 4. Emlis vertical slice、Piece adapter、Analysis adapterは未実装。
 5. current text coreとPR #2 assetのsymbol-level dispositionはPhase 0で確定が必要。
 6. Cycle001はFORMAL_LEXICAL_AUTHORITY_UNRESOLVEDで停止中。
-7. full / detailed designはcandidateでありMash implementation / dependency / Cycle approvalを消費していない。
+7. full / detailed designと今回のRoute B selectionはcandidate / route directionだけであり、Mash bounded preflight / P0 / implementation / dependency / L3-I / Cycle approvalを消費していない。
 
 ## 14. History and design pointers
 

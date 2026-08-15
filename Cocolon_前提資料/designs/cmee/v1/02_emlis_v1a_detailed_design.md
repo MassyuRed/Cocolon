@@ -5,6 +5,8 @@
 - runtime state: `NOT_IMPLEMENTED`
 - production admission: `false`
 - Cycle001 effect: `0`
+- L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
+- L3-R packet state: `ROUTE_B_SELECTED_BOUNDED_PREFLIGHT_NOT_AUTHORIZED_STOP`
 
 ---
 
@@ -153,8 +155,8 @@ V1-A runtime policy:
 | Resolution | Normal observation use |
 |---|---|
 | `UNIQUE` | 必要条件にすぎない。matching `JapaneseAttachmentAdmission`がapproved route contract下で当該owner / witnessをadmitした場合だけrequired dutyへ使用可能 |
-| `AMBIGUOUS` | current Route A contractではimplementation STOP。Route B承認後だけ、ambiguityに依存しないlimited claimまたはASK |
-| `UNRESOLVED` | current Route A contractではimplementation STOP。Route B承認後だけ、unresolved部分を言い切らずlimited / unavailable / separate safety |
+| `AMBIGUOUS` | selected Route B directionではambiguityに依存しないmeaningful limited claimまたは一点のsemantic clarificationだけを候補化できる。ただしbounded preflightとexact acceptance contractが未承認のためimplementation STOP |
+| `UNRESOLVED` | selected Route B directionではunresolved部分を言い切らずlimited / one clarification / unavailable / separate safetyだけを候補化できる。ただしbounded preflightとexact acceptance contractが未承認のためimplementation STOP |
 
 parserのone-bestだけで`UNIQUE`にしない。user clarificationはmeaning choiceを追加できるが、parserの過去outputをretroactive truthへしない。
 
@@ -163,13 +165,13 @@ independent admission closure:
 | Status | Visible authority |
 |---|---|
 | `FORMAL_CLOSED` | independent assessorがcurrent formal contractを全条件で満たすmatching setとしてsealした場合だけ |
-| `PROVISIONAL_ONLY` | current contractではvisible disputed claimへ使用不可 |
+| `PROVISIONAL_ONLY` | Route B選択後も単独ではvisible authorityにならない。source-explicitまたはtarget exact1のuser-owned supplemental evidenceに独立してgroundできないdisputed claimへ使用不可 |
 | `UNRESOLVED` | visible candidateなし |
 | `UNAVAILABLE` | meaning payloadなし |
 
 providerのcandidate-local `UNIQUE`またはempty ambiguity listはadmissionではない。attachment set ID / digest、source version、resource lock、approved contract、formal denominator、independent mutation evidenceが一致しなければvisible dutyへ使用しない。
 
-official候補のcurrent comparisonでは`FORMAL_CLOSED`を成立させるconcrete providerが確認できていない。このためcurrent implementation admissionは`NO_SAFE_CMEE_V1A_CANDIDATE_STOP`である。
+official候補のcurrent comparisonでは`FORMAL_CLOSED`を成立させるconcrete providerが確認できていない。Route Bは選択済みだが、per-owner disposition、provisional epistemic representation、one-clarification lifecycleを含むexact acceptance contractとbounded preflightが未承認であるため、current implementation admissionは`NO_SAFE_CMEE_V1A_CANDIDATE_STOP`のままである。
 
 ## 6. `EmlisMeaningGraph` extension
 
@@ -314,7 +316,7 @@ Machineはread-feeling、自然さ、非template、また入力したさをPASS�
 |---|---|
 | source role / version invalid | `REJECTED` |
 | provider identity mismatch | `UNAVAILABLE` and no fallback |
-| material attachment ambiguity | current Route AではSTOP。Route B承認後だけ`LIMITED` or `ASK`, never guessed |
+| material attachment ambiguity | selected Route B directionではmeaningful ambiguity-independent `LIMITED`、original input lifecycle全体で最大一回・target unknown exact1のclarification、または`UNAVAILABLE`; never guessed。exact contract承認前はimplementation STOP |
 | no meaningful grounded claim | `UNAVAILABLE` |
 | high-care adjacency | `SEPARATE_SAFETY` |
 | candidate hard-invalid | reject candidate; valid candidate 0なら`UNAVAILABLE` |
@@ -387,7 +389,7 @@ raw bodyをGitHubへ保存しない。
 
 別Mash判断後、fresh applicable `08_cycle001_current_state.md`だけをtechnical navigation ownerとして従う。08が指すactive planはrestart / evidence bundleであり、同格のnavigation ownerではない。CMEE設計もCycle navigation ownerではない。
 
-current Route A formal contractを維持する場合、Step1 completionは少なくとも次を必要とする。
+非選択のRoute A formal contractを採る場合、Step1 completionは少なくとも次を必要とする。
 
 ```text
 owner-bound authority 251/251
@@ -401,7 +403,7 @@ forbidden replay / append 0
 relation / unknown / self-denial / lifecycle preserved
 ```
 
-Route Bが承認された場合、Step1 completionは承認後に改訂されたacceptance contractとfresh `08`を参照する。このdetail suiteだけで251 denominator、visible claim authority、Cycle acceptanceを緩和しない。
+Route B directionは選択済みだが、Cycle001のStep1 contract変更は未承認である。適用にはseparate C0とfresh `08`判断を必要とし、このdetail suiteまたはL3-R selection receiptだけで251 denominator、visible claim authority、P1–P7、Cycle acceptanceを緩和しない。
 
 ### Production cutover
 
@@ -433,7 +435,7 @@ CMEE_V1A_EMLIS_OBSERVATION_CANDIDATE_READY_DISABLED_NOT_ADMITTED
 
 このstateをCycle proof、production admission、Emlis question completionへ変換しない。
 
-currentではprovider / acceptance-contract decisionが未承認なため、このstateへの実装を開始しない。CMEE implementation prerequisiteは、`06_implementation_order_migration_and_verification.md`の`L3-R` Route A / B判断、`P0` measured PASS、separate `L3-I` exact adoption / I1 allowlist approvalの全てである。
+currentではRoute B directionだけが選択済みで、bounded preflight / exact acceptance contractは未承認であるため、このstateへの実装を開始しない。CMEE implementation prerequisiteは、`06_implementation_order_migration_and_verification.md`のremaining `L3-R` bounded preflight approval、`P0` measured PASS、separate `L3-I` exact adoption / I1 allowlist approvalの全てである。
 
 Cycle001のcurrent first unfinished gateはfresh applicable `08`が示す`FORMAL_OWNER_BOUND_LEXICAL_OBSERVATION_WITNESS_AUTHORITY_251_OF_251`であり、現時点のauthorized next product workは0である。CMEE prerequisiteをCycleのnavigation stateへ読み替えない。
 
