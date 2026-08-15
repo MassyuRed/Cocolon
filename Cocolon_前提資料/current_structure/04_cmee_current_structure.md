@@ -8,7 +8,7 @@ publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
 design_state: "FINAL_TECHNICAL_DESIGN_CANDIDATE"
 detailed_design_state: "DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE_STOP_BEFORE_IMPLEMENTATION"
 l3r_route_selection: "ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION"
-l3r_packet_state: "L3R_ROUTE_B_APPROVED_P0_AUTHORIZED_NOT_STARTED"
+l3r_packet_state: "L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP"
 implementation_state: "NOT_STARTED"
 runtime_effect: 0
 automatic_progression: false
@@ -34,7 +34,7 @@ Current state:
     Phase 0 provider result = NO_SAFE_CMEE_V1A_CANDIDATE_STOP
     L3-R route selection = ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION
     L3-R bounded preflight authorization = GRANTED_BY_APPROVED_BODY_V1
-    P0 = NOT_STARTED
+    P0 = P0_ACTIVATION_PRECONDITION_STOP
     not approved for implementation
     not implemented
     not production connected
@@ -147,7 +147,7 @@ CMEEの内部graphは:
 
 user-confirmed、user-corrected、unknown、hypothesisのlineageを分け、original sourceを書き換えない。
 
-2026-08-15 JST、MashはL3-Rのrouteとして`ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`を選択し、続いて`CMEE_V1_L3R_ROUTE_B_BOUNDED_PREFLIGHT_TECHNICAL_BODY` v1.0.0（canonical SHA-256 `4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901`）を承認した。provider proposalをmeaning authorityへ昇格せず、ambiguityに依存しないlimited observation、original-input lifecycle全体で最大一回のuser clarification、または`UNAVAILABLE`で閉じる。L3-Rは成立し、P0 exact1は承認済み・未開始である。dependency採用、implementation、L3-I、runtime、Cycle001再入場は未承認のままである。
+2026-08-15 JST、MashはL3-Rのrouteとして`ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`を選択し、続いて`CMEE_V1_L3R_ROUTE_B_BOUNDED_PREFLIGHT_TECHNICAL_BODY` v1.0.0（canonical SHA-256 `4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901`）を承認した。provider proposalをmeaning authorityへ昇格せず、ambiguityに依存しないlimited observation、original-input lifecycle全体で最大一回のuser clarification、または`UNAVAILABLE`で閉じる。L3-Rは成立した。P0 exact1はactivation Gateで`P0_ACTIVATION_PRECONDITION_STOP`となり、authorityは消費済みである。dependency採用、implementation、L3-I、runtime、Cycle001再入場は未承認のままである。
 
 Candidate selectionはhard validity constraintsを先に適用し、有効候補の中で意味保持をnaturalness、shortness、appearance、machine score、resource costより先に置く。
 faithfulなrouteが比例的scopeで作れない場合、安価なmeaning-loss candidateを選ばずSTOP／redesignする。
@@ -314,7 +314,7 @@ Lifecycle:
 
 1. CMEE three-core architecture and detailed suite defined
 2. Phase 0 current result `NO_SAFE_CMEE_V1A_CANDIDATE_STOP`
-3. Mash L3-R: Route B selectionとbounded preflight technical body v1.0.0を承認済み（2026-08-15 JST）。L3-R成立、P0 exact1 authorized not started
+3. Mash L3-R: Route B selectionとbounded preflight technical body v1.0.0を承認済み（2026-08-15 JST）。L3-R成立、P0 exact1はactivation precondition STOPでterminal
 4. approved bodyのfresh docs reflection後だけ、P0でprovider／resource／platformをbounded preflightし、PASSまたはcause-specific STOP
 5. separate Mash L3-Iでexact dependency hashes／resource lock／I1 changed-path allowlistを承認
 6. disabled Emlis vertical candidate
@@ -364,12 +364,12 @@ CMEE phaseは上位migration順であり、Cycle001のfresh applicable 08 exact1
 ## 13. Current gaps
 
 1. detailed fit-gapで、current formal contractを満たすsafe provider exact1は確認できず、Phase 0 terminalは`NO_SAFE_CMEE_V1A_CANDIDATE_STOP`。
-2. Route B bounded preflight technical body v1.0.0は承認済み。P0 exact1のexecution terminalとbody-free evidenceは未取得。
+2. Route B bounded preflight technical body v1.0.0は承認済み。P0 exact1は`P0_ACTIVATION_PRECONDITION_STOP`でterminalとなり、provider/resource/platform measurement evidenceは未取得。
 3. CMEE package、callable、runner ingressは存在しない。
 4. Emlis vertical slice、Piece adapter、Analysis adapterは未実装。
 5. current text coreとPR #2 assetのsymbol-level dispositionはPhase 0で確定が必要。
 6. Cycle001はFORMAL_LEXICAL_AUTHORITY_UNRESOLVEDで停止中。
-7. L3-Rはapproved body identityへ固定され、P0 exact1だけが承認済み・未開始。implementation / dependency / L3-I / Cycle approvalは消費していない。
+7. L3-Rはapproved body identityへ固定され、P0 exact1はactivation Gateで消費・terminal。implementation / dependency / L3-I / Cycle approvalは消費していない。
 
 ## 14. History and design pointers
 
@@ -422,8 +422,8 @@ Canonical body:
 body_version = 1.0.0
 body_canonical_sha256 = 4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901
 route_contract_id = cocolon.cmee.v1a.acceptance.route_b.v1
-current_state = L3R_ROUTE_B_APPROVED_P0_AUTHORIZED_NOT_STARTED
-P0_execution = 0
+current_state = L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP
+P0_execution = 1_TERMINAL_AT_ACTIVATION_GATE
 dependency_adoption = 0
 implementation = 0
 Cycle001_effect = 0
@@ -431,3 +431,23 @@ automatic_progression = false
 ```
 
 承認済みP0はKWJA 2.5.1 / base / char+word / CPUのexact1候補だけをsynthetic exact12で一回測る。temporary root、acquisition allowlist、license/provenance hard gate、OS/runner isolation、resource ceiling、retry、cleanup、terminalはcanonical bodyを正本とする。P0 PASSもprovider/resource/platform evidenceだけであり、L3-I、I1、Product Read、production、Cycle creditへ換算しない。
+
+## 18. P0 actual terminal — 2026-08-15 JST
+
+Body-free result:
+
+[CMEE V1 P0 KWJA 2.5.1 Base Body-Free Result](../designs/cmee/CMEE_V1_P0_KWJA251_Base_BodyFree_Result_20260815.json)
+
+```text
+terminal = P0_ACTIVATION_PRECONDITION_STOP
+P0_execution_count = 1
+activation_python_child_started = false
+temp_root_created = 0
+network / download / install / load / inference = 0 / 0 / 0 / 0 / 0
+retry / fallback = 0 / 0
+provider_resource_platform_evidence = 0
+primary_outcome = BLOCKER_NARROWED
+automatic_progression = false
+```
+
+current Work executorはapproved acquisition channelを提供せず、activation cp312 childも開始前に停止した。後段のisolation、license/provenance、package/resource、synthetic exact12は未評価であり、未実行をFAIL/PASSへ変換しない。P0 authorityは消費済みで再利用しない。

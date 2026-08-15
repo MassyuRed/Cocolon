@@ -5,7 +5,7 @@
 - current implementation admission: `STOP_BEFORE_IMPLEMENTATION`
 - current provider admission: `NO_SAFE_CMEE_V1A_CANDIDATE_STOP`
 - L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
-- current L3-R state: `L3R_ROUTE_B_APPROVED_P0_AUTHORIZED_NOT_STARTED`
+- current L3-R state: `L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP`
 - automatic progression: `false`
 
 ---
@@ -31,7 +31,7 @@ NO_SAFE_CMEE_V1A_CANDIDATE_STOP
 
 これはCMEE全体の不可能判定ではない。current formal contractのまま、provisional parserをauthorityへ昇格して実装を始めないためのbounded STOPである。
 
-2026-08-15 JST、MashはL3-Rのrouteとして`ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`を選択し、`CMEE_V1_L3R_ROUTE_B_BOUNDED_PREFLIGHT_TECHNICAL_BODY` v1.0.0（canonical SHA-256 `4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901`）を承認した。L3-R exitは成立し、current stateは`L3R_ROUTE_B_APPROVED_P0_AUTHORIZED_NOT_STARTED`である。P0 executionは0、implementation effectは0である。
+2026-08-15 JST、MashはL3-Rのrouteとして`ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`を選択し、`CMEE_V1_L3R_ROUTE_B_BOUNDED_PREFLIGHT_TECHNICAL_BODY` v1.0.0（canonical SHA-256 `4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901`）を承認した。L3-R exitは成立した。P0 exact1はactivation Gateで`P0_ACTIVATION_PRECONDITION_STOP`となり、current stateは`L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP`である。implementation effectは0である。
 
 ## 1. Mash LEVEL_3 route decision
 
@@ -138,7 +138,7 @@ body_version = 1.0.0
 body_canonical_sha256 = 4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901
 route_contract_id = cocolon.cmee.v1a.acceptance.route_b.v1
 preflight_candidate = kwja==2.5.1 / base / char,word / cpu
-P0_execution = AUTHORIZED_EXACT1_NOT_STARTED
+P0_execution = CONSUMED_EXACT1_P0_ACTIVATION_PRECONDITION_STOP
 automatic_progression = false
 ```
 
@@ -605,6 +605,7 @@ CMEE_DETAILED_DESIGN_CURRENT_OWNER_MERGED
 NO_SAFE_CMEE_V1A_CANDIDATE_STOP
 CMEE_L3R_ROUTE_B_SELECTED_BOUNDED_PREFLIGHT_NOT_AUTHORIZED_STOP
 CMEE_L3R_ROUTE_B_APPROVED_P0_AUTHORIZED_NOT_STARTED
+CMEE_L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP
 CMEE_V1A_EMLIS_OBSERVATION_CANDIDATE_READY_DISABLED_NOT_ADMITTED
 CMEE_V1A_CYCLE001_PROVEN
 CMEE_V1A_EMLIS_OBSERVATION_PRODUCTION_OPERATIONAL
@@ -615,7 +616,7 @@ CMEE_V1E_ANALYSIS_IF_ROUTE_OPERATIONAL
 CMEE_V1_THREE_CORE_OPERATIONAL
 ```
 
-今回のpublication targetは、同じDraft PR上の`CMEE_L3R_ROUTE_B_APPROVED_P0_AUTHORIZED_NOT_STARTED`である。approved bodyのdocs-only exact7をremote fresh verifyした後だけP0 exact1を開始できる。Draft publicationはimplementation admission、dependency adoption、L3-I、Cycle001 effectにはならず、merge後のfresh verificationでだけ`CMEE_DETAILED_DESIGN_CURRENT_OWNER_MERGED`になり得る。
+今回のterminal publication targetは、同じDraft PR上の`CMEE_L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP`である。P0 authorityは消費済みで、retry / fallback / automatic progressionは0。Draft publicationはimplementation admission、dependency adoption、L3-I、Cycle001 effectにはならず、merge後のfresh verificationでだけ`CMEE_DETAILED_DESIGN_CURRENT_OWNER_MERGED`になり得る。
 
 各stateは別であり、前のstateを次へ自動変換しない。
 
@@ -649,3 +650,24 @@ P0_RESULT_UNKNOWN_STOP
 ```
 
 terminal後はexact rootだけcleanupし、body-free result + current map/read-first/order exact4だけを同Draft PRへ反映する。P0でRoute B owner disposition、meaning sufficiency、Product Read、Cycle acceptanceは評価しない。
+
+## 18. P0 actual execution terminal
+
+Result owner:
+
+[CMEE V1 P0 KWJA 2.5.1 Base Body-Free Result](../CMEE_V1_P0_KWJA251_Base_BodyFree_Result_20260815.json)
+
+```text
+P0_execution_count = 1
+terminal = P0_ACTIVATION_PRECONDITION_STOP
+approved_acquisition_host_access = UNAVAILABLE_IN_CURRENT_EXECUTOR
+activation_python_child_started = false
+temp_root / network / package / checkpoint / install / load / inference = 0
+isolation / license-provenance / binary closure / capability = NOT_EVALUATED_DUE_EARLIER_STOP
+route_b_owner_disposition_evaluation = NOT_EVALUATED_IN_P0
+route_b_sufficiency_evaluation = NOT_EVALUATED_IN_P0
+primary_outcome = BLOCKER_NARROWED
+automatic_progression = false
+```
+
+P0はcurrent executorのactivation preconditionを満たせず、後段effect 0でterminalとなった。これはprovider/resource/platform evidence PASSでもKWJA capability FAILでもない。current authorityは再利用せず、別executorで再試行するにはnew LEVEL_3 technical bodyとMash判断が必要である。

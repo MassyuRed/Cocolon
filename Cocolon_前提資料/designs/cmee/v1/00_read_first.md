@@ -11,7 +11,7 @@
 - dependency / production / test / runner / API / DB / RN effect: `0`
 - Cycle001 restart effect: `0`
 - L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
-- L3-R packet state: `L3R_ROUTE_B_APPROVED_P0_AUTHORIZED_NOT_STARTED`
+- L3-R packet state: `L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP`
 - automatic progression: `false`
 
 ---
@@ -92,7 +92,7 @@ route候補は次のexact2であり、2026-08-15 JSTのMash LEVEL_3判断でRout
 1. `ROUTE_A_FORMAL_CLOSED_ATTACHMENT_AUTHORITY`: current formal closureを満たす別authorityを提示する。
 2. `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`: provisional analysisをlimited observation / user clarification / unavailableへ明示的にbindするよう受入契約を変更する。
 
-Mashはroute directionに加えて、`CMEE_V1_L3R_ROUTE_B_BOUNDED_PREFLIGHT_TECHNICAL_BODY` v1.0.0（canonical SHA-256 `4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901`）を承認した。provider / resolver責任、Route B cross-field semantics、KWJA exact1候補、temp path、categorical ceiling、network / storage / secret effect、failure / ambiguity / OOV、privacy、retry、post-preflight境界は同bodyへ固定され、L3-R exitは成立した。P0 exact1はdocs reflectionのfresh verification後だけ開始できる。
+Mashはroute directionに加えて、`CMEE_V1_L3R_ROUTE_B_BOUNDED_PREFLIGHT_TECHNICAL_BODY` v1.0.0（canonical SHA-256 `4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901`）を承認した。provider / resolver責任、Route B cross-field semantics、KWJA exact1候補、temp path、categorical ceiling、network / storage / secret effect、failure / ambiguity / OOV、privacy、retry、post-preflight境界は同bodyへ固定され、L3-R exitは成立した。P0 exact1はdocs reflectionのfresh verification後にactivateされ、`P0_ACTIVATION_PRECONDITION_STOP`でterminalとなった。
 
 approval orderは`L3-R route + bounded preflight authorization -> P0 measured evidence -> L3-I dependency/resource/I1 exact allowlist -> I1`である。いずれのrouteでもwheel / model / transitive lock、resource identity、license、installed size、max RSS、latency、CPython / OS / architecture、runtime network 0をP0 evidence後のL3-Iでfresh固定する。one-best arc、model score、Product Read、first / last / nearest heuristicはambiguityを消すauthorityにならない。
 
@@ -127,12 +127,12 @@ current orthogonal state:
 ```text
 document_lifecycle = DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE
 route_selection = ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION
-l3r_state = L3R_ROUTE_B_APPROVED_P0_AUTHORIZED_NOT_STARTED
+l3r_state = L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP
 provider_admission = NO_SAFE_CMEE_V1A_CANDIDATE_STOP
 runtime_state = NOT_IMPLEMENTED
 production_state = NOT_CONNECTED
 cycle_state = NOT_REOPENED
-next_decision = EXECUTE_APPROVED_P0_EXACT1_OR_CAUSE_SPECIFIC_STOP
+next_decision = REMAIN_STOPPED_OR_NEW_MASH_LEVEL3_COMPLIANT_EXECUTOR_BODY
 automatic_progression = false
 ```
 
@@ -195,7 +195,7 @@ target listはautomatic transitionではない。design merge、preflight、depe
 - current CMEE structure mapが同じwrite unitで同期する。
 - remote bytesとchanged pathsをpostverifyする。
 
-本suiteのprimary outcomeは`BLOCKER_NARROWED`である。Route B selectionとbounded preflight technical body v1.0.0の承認によりL3-Rは成立し、current stateは`L3R_ROUTE_B_APPROVED_P0_AUTHORIZED_NOT_STARTED`である。これはproduct / implementation creditではなく、商品出力、Product Read、runtime readiness、Cycle creditは増えない。
+本suiteのprimary outcomeは`BLOCKER_NARROWED`である。Route B selectionとbounded preflight technical body v1.0.0の承認によりL3-Rは成立した。P0 exact1はactivation preconditionでterminalとなり、current stateは`L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP`である。これはproduct / implementation creditではなく、商品出力、Product Read、runtime readiness、Cycle creditは増えない。
 
 ## 10. Approved L3-R identity and activation boundary
 
@@ -207,9 +207,26 @@ Canonical body:
 approval_token = CMEE_V1_L3R_ROUTE_B_TECHNICAL_BODY_V1_APPROVED
 body_version = 1.0.0
 body_canonical_sha256 = 4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901
-P0 = AUTHORIZED_EXACT1_NOT_STARTED
+P0 = CONSUMED_EXACT1_P0_ACTIVATION_PRECONDITION_STOP
 implementation_approval = 0
 automatic_progression = false
 ```
 
-P0はcanonical bodyのexact candidate / path / network / isolation / evidence / terminalだけを一回実行する。PASSでもseparate L3-I前にdependency、requirements、lock、source、test、runnerを書かない。
+P0はcanonical bodyのactivation Gateでterminalとなった。dependency、requirements、lock、source、test、runner writeは0で、separate L3-Iは未承認のままである。
+
+## 11. P0 body-free terminal
+
+[CMEE V1 P0 KWJA 2.5.1 Base Body-Free Result](../CMEE_V1_P0_KWJA251_Base_BodyFree_Result_20260815.json)
+
+```text
+terminal = P0_ACTIVATION_PRECONDITION_STOP
+authority = CONSUMED_TERMINAL
+platform_tuple = NOT_RECORDED_BY_P0
+temp_root_created = 0
+network / acquisition / install / load / inference = 0
+Route B disposition / sufficiency = NOT_EVALUATED_IN_P0
+L3-I / implementation / Cycle001 = NOT_AUTHORIZED
+automatic_progression = false
+```
+
+このterminalはKWJA capability、license/provenance、resource cost、Route B product sufficiencyのFAILではない。current executorのactivation precondition不成立で後段を未実行のまま閉じた結果である。
