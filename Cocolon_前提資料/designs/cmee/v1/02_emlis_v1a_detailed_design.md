@@ -6,7 +6,7 @@
 - production admission: `false`
 - Cycle001 effect: `0`
 - L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
-- L3-R packet state: `ROUTE_B_SELECTED_BOUNDED_PREFLIGHT_NOT_AUTHORIZED_STOP`
+- L3-R packet state: `L3R_ROUTE_B_APPROVED_P0_AUTHORIZED_NOT_STARTED`
 
 ---
 
@@ -88,7 +88,7 @@ V1-A/I1–I2およびCycle offlineで`QUESTION_PENDING`を検証する場合、r
 
 ## 3. Proposed V1-A module topology
 
-Mashの`L3-R` route / bounded preflight authorization、`P0` measured PASS、separate `L3-I` exact provider / dependency / resource / changed-path / I1 approvalの三境界が順に成立した後だけ、最初のimplementation packetでactual observation verticalと同時にmaterializeする候補を示す。`L3-R`だけでI1へ進めず、current STOP中は作成しない。
+Mashの`L3-R` route / bounded preflight authorizationはapproved body v1.0.0で成立した。次に`P0` measured PASSとseparate `L3-I` exact provider / dependency / resource / changed-path / I1 approvalが順に成立した後だけ、最初のimplementation packetでactual observation verticalと同時にmaterializeする候補を示す。`L3-R`だけでI1へ進めず、current STOP中は作成しない。
 
 ```text
 ai/services/ai_inference/cocolon_meaning_experience_engine/__init__.py
@@ -155,8 +155,8 @@ V1-A runtime policy:
 | Resolution | Normal observation use |
 |---|---|
 | `UNIQUE` | 必要条件にすぎない。matching `JapaneseAttachmentAdmission`がapproved route contract下で当該owner / witnessをadmitした場合だけrequired dutyへ使用可能 |
-| `AMBIGUOUS` | selected Route B directionではambiguityに依存しないmeaningful limited claimまたは一点のsemantic clarificationだけを候補化できる。ただしbounded preflightとexact acceptance contractが未承認のためimplementation STOP |
-| `UNRESOLVED` | selected Route B directionではunresolved部分を言い切らずlimited / one clarification / unavailable / separate safetyだけを候補化できる。ただしbounded preflightとexact acceptance contractが未承認のためimplementation STOP |
+| `AMBIGUOUS` | approved Route B contractではambiguityに依存しないmeaningful limited claimまたはoriginal-input lifecycle全体で最大一回・target exact1のsemantic clarificationだけを候補化できる。P0 / L3-I / implementationは別Gate |
+| `UNRESOLVED` | approved Route B contractではunresolved部分を言い切らずlimited / one clarification / unavailable / separate safetyだけを候補化できる。P0 / L3-I / implementationは別Gate |
 
 parserのone-bestだけで`UNIQUE`にしない。user clarificationはmeaning choiceを追加できるが、parserの過去outputをretroactive truthへしない。
 
@@ -171,7 +171,7 @@ independent admission closure:
 
 providerのcandidate-local `UNIQUE`またはempty ambiguity listはadmissionではない。attachment set ID / digest、source version、resource lock、approved contract、formal denominator、independent mutation evidenceが一致しなければvisible dutyへ使用しない。
 
-official候補のcurrent comparisonでは`FORMAL_CLOSED`を成立させるconcrete providerが確認できていない。Route Bは選択済みだが、per-owner disposition、provisional epistemic representation、one-clarification lifecycleを含むexact acceptance contractとbounded preflightが未承認であるため、current implementation admissionは`NO_SAFE_CMEE_V1A_CANDIDATE_STOP`のままである。
+official候補のcurrent comparisonでは`FORMAL_CLOSED`を成立させるconcrete providerが確認できていない。Route Bのper-owner disposition、provisional graph隔離、one-clarification lifecycleを含むexact acceptance contractとbounded preflightはapproved body v1.0.0へ固定された。ただしP0 evidenceとseparate L3-Iは未成立のため、current implementation admissionは`NO_SAFE_CMEE_V1A_CANDIDATE_STOP`のままである。
 
 ## 6. `EmlisMeaningGraph` extension
 
@@ -316,7 +316,7 @@ Machineはread-feeling、自然さ、非template、また入力したさをPASS�
 |---|---|
 | source role / version invalid | `REJECTED` |
 | provider identity mismatch | `UNAVAILABLE` and no fallback |
-| material attachment ambiguity | selected Route B directionではmeaningful ambiguity-independent `LIMITED`、original input lifecycle全体で最大一回・target unknown exact1のclarification、または`UNAVAILABLE`; never guessed。exact contract承認前はimplementation STOP |
+| material attachment ambiguity | approved Route B contractではmeaningful ambiguity-independent `LIMITED`、original input lifecycle全体で最大一回・target unknown exact1のclarification、または`UNAVAILABLE`; never guessed。P0 / L3-I前はimplementation STOP |
 | no meaningful grounded claim | `UNAVAILABLE` |
 | high-care adjacency | `SEPARATE_SAFETY` |
 | candidate hard-invalid | reject candidate; valid candidate 0なら`UNAVAILABLE` |
@@ -435,7 +435,7 @@ CMEE_V1A_EMLIS_OBSERVATION_CANDIDATE_READY_DISABLED_NOT_ADMITTED
 
 このstateをCycle proof、production admission、Emlis question completionへ変換しない。
 
-currentではRoute B directionだけが選択済みで、bounded preflight / exact acceptance contractは未承認であるため、このstateへの実装を開始しない。CMEE implementation prerequisiteは、`06_implementation_order_migration_and_verification.md`のremaining `L3-R` bounded preflight approval、`P0` measured PASS、separate `L3-I` exact adoption / I1 allowlist approvalの全てである。
+currentではRoute B bounded preflight / exact acceptance contractがapproved body v1.0.0へ固定され、L3-Rは成立した。ただしこのstateへの実装は開始しない。remaining CMEE implementation prerequisiteは、`06_implementation_order_migration_and_verification.md`の`P0` measured PASSと、separate `L3-I` exact adoption / I1 allowlist approvalである。
 
 Cycle001のcurrent first unfinished gateはfresh applicable `08`が示す`FORMAL_OWNER_BOUND_LEXICAL_OBSERVATION_WITNESS_AUTHORITY_251_OF_251`であり、現時点のauthorized next product workは0である。CMEE prerequisiteをCycleのnavigation stateへ読み替えない。
 
@@ -446,3 +446,20 @@ CMEE_V1A_EMLIS_OBSERVATION_PRODUCTION_OPERATIONAL
 ```
 
 このstateもV1-B question operationalを含まない。
+
+## 17. Approved Route B Emlis resolution contract
+
+Emlis resolverはrequired/active owner全件のexact-one dispositionを入力とし、provider proposalをmeaning authorityへしない。visible graphはsource-explicitまたはtarget-exact1 user supplemental evidenceだけで支える。
+
+```text
+contract_id = cocolon.cmee.v1a.acceptance.route_b.v1
+GENERATED = all required visible duties source/user grounded; unresolved required duty 0
+LIMITED = meaningful source-bound observation >= 1 + bound Reception + explicit unknown
+QUESTION_PENDING = PRE_QUESTION LIMITED + material target unknown exact1
+UNAVAILABLE = no meaningful safe visible claim
+max_clarification_requests_per_original_lifecycle = 1
+fallback = 0
+automatic_retry = 0
+```
+
+question prompt/options/need、fixture、expected text、Product Readはsemantic sourceではない。answerはnew `SUPPLEMENTAL_ANSWER` SourceEnvelopeとしてnew graph version/deltaへbindし、originalと非target unknownを不変に保つ。ambiguous answer、skip、unknownでは再質問せず、prior LIMITEDまたはUNAVAILABLEで閉じる。V1-A offline contractであり、production interactive questionはV1-Bの別承認まで0である。

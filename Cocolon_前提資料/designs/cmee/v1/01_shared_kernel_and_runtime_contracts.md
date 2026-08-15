@@ -560,3 +560,44 @@ Shared kernelを完成と数えるminimum:
 - human Product Read packetを生成できる
 
 schema / interface testだけではcompletion 0である。
+
+## 15. Route B v1 approved acceptance supplement
+
+Canonical contractは`cocolon.cmee.v1a.acceptance.route_b.v1`。承認identityはtechnical body v1.0.0 / canonical SHA-256 `4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901`である。
+
+### 15.1 Owner universe and exact-one disposition
+
+source adapter / core obligation ownerはprovider実行前に`required_owner_refs`、`active_optional_owner_refs`、`credit_only_owner_refs`、`owner_universe_digest`をsource versionとobligation versionへbindする。`U = required ∪ active_optional`とし、resolver output `D`は次を満たす。
+
+```text
+set(D.meaning_owner_id) = U
+len(D) = len(U)
+duplicate_owner_count = 0
+missing_owner_count = 0
+denominator_shrink = 0
+```
+
+各ownerはexact1の`RouteBOwnerDisposition`を持つ。`route_b_disposition`は`SOURCE_EXPLICIT_VISIBLE | SUPPLEMENTAL_USER_VISIBLE | UNKNOWN_PRESERVED_LIMITED | CLARIFICATION_TARGET | NOT_VISIBLE_UNRESOLVED | SEPARATE_SAFETY` exact6。provider omissionはowner omissionにせず、`MISSING_OR_INVALID / NOT_VISIBLE_UNRESOLVED`として残す。positive visible claimは最初のexact2 dispositionだけが持てる。
+
+### 15.2 Provisional graph boundary
+
+provider proposalはrequest-local `JapaneseAttachmentCandidateSet` / `JapaneseAttachmentAdmission`だけに保持し、`GroundedMeaningGraph`へ入れない。`closure_status=PROVISIONAL_ONLY`、`candidate_set_completeness=NOT_PROVED`、`open_slot_denominator_state=NOT_ESTABLISHED`である。Route B proposalから`FORMAL_DERIVED`または`FORMAL_CLOSED`を作らず、provisional epistemic enumも追加しない。visible positive semanticsは`SOURCE_EXPLICIT`、target exact1の`USER_CONFIRMED / USER_CORRECTED`、または将来別契約でformal closureしたevidenceだけである。
+
+### 15.3 Outcome invariants
+
+- `GENERATED`: 全required visible dutyがsource/user evidenceだけで成立し、unresolved required duty exact0。
+- `LIMITED`: 入力固有でsource-boundなmeaningful Observation exact1以上 + bound Reception + unknown明示。raw replay、generic empathy、fixed template、薄い要約は禁止。
+- `QUESTION_PENDING`: 上記LIMITEDをPRE_QUESTIONとして保持し、materialなtarget unknown exact1へClarificationRequest exact1をbindする。question-onlyは禁止。
+- `UNAVAILABLE`: safeでmeaningfulなvisible claimがない。artifact / question / fallbackはnull。
+- `REJECTED`: source role/version/lineage/privacy/contract identity hard-invalid。
+- `SEPARATE_SAFETY`: high-care materialを既存separate ownerへ分離。
+
+### 15.4 One clarification and immutable refinement
+
+clarification requestはcanonical original `SourceEnvelope` lifecycle全体で最大exact1。発行時にbudgetを消費し、retry、regeneration、skip、expiry、ambiguous answerでも復活しない。re-ask、second unknown、question rallyは0。問いはsemantic difference exact1を自然・非leadingに尋ね、parser用語やannotation選択を強要せず、skip / unknownを許す。
+
+answerはauthenticated caller-supplied private `SUPPLEMENTAL_ANSWER` SourceEnvelope exact1だけ。original bytes/digest/version、attachment set/admission、original graphをin-place変更せず、新graph version/deltaのtarget unknown exact1だけを`USER_CONFIRMED`または`USER_CORRECTED`へできる。他unknownやprovider ambiguityへ一般化せず、proposalをretroactive formal化しない。
+
+### 15.5 Failure, OOV, privacy, and P0 separation
+
+provider/resource mismatch、crash、invalid payloadは`UNAVAILABLE`、fallback 0、automatic retry 0。OOVはliteral source spanとしてだけ保持でき、relation/lemma/normalization/meaningを推測しない。raw input/output、question、parser output、surface/lemma/range、private identityはpublic禁止。P0では`route_b_owner_disposition_evaluation`と`route_b_sufficiency_evaluation`をともに`NOT_EVALUATED_IN_P0`とする。

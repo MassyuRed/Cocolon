@@ -2203,3 +2203,27 @@ minimum tests:
 - canonical identity changes under semantic array ordering / version change
 
 test fixtureをproduction schema ownerにしない。actual implementationでPython dataclass、validator、JSON schemaのthree-way consistencyを検証する。
+
+## 16. Route B v1alpha2 frozen semantic delta
+
+L3-R approved contract `cocolon.cmee.v1a.acceptance.route_b.v1`は、actual schema fileをまだ作らず、次のfuture schema semanticsだけを固定する。
+
+| Schema candidate | Frozen delta |
+|---|---|
+| `JapaneseAttachmentAdmission v1alpha2` | owner universe identity、required/active exact coverage、`RouteBOwnerDisposition[]` |
+| `GroundedMeaningGraph v1alpha2` | `parent_graph_ref`、`refinement_target_ref`。provisional epistemic enum追加なし |
+| `ClarificationRequest v1alpha2` | original lifecycle ref、ordinal exact1、lifecycle-wide consumed budget、target range/ref |
+| `EngineOutcome v1alpha2` | 上記version参照、refined再質問禁止、owner dispositionとglobal outcomeの一致 |
+| `SourceEnvelopeMeta` | existing `parent_source_refs`を利用し、shape変更なし |
+
+Cross-field validators must enforce:
+
+1. resolver owner set = required ∪ active_optional、duplicate/missing/denominator shrink exact0。
+2. positive visible claimは`SOURCE_EXPLICIT_VISIBLE | SUPPLEMENTAL_USER_VISIBLE`だけ。
+3. provisional proposalはCandidateSet/Admission外へ出さず、`FORMAL_DERIVED / FORMAL_CLOSED`を生成しない。
+4. `GENERATED`はunresolved required duty exact0。`LIMITED`はmeaningful source-bound observation + bound Reception。`QUESTION_PENDING`はそのPRE_QUESTION artifact + target exact1。meaningful claim 0なら`UNAVAILABLE`。
+5. clarification requestはoriginal lifecycle全体でexact1以下。発行後budgetは復活せず、REFINEDから再質問しない。
+6. supplemental answerはcaller-supplied SourceEnvelope exact1、新graph version、target-only effect。original bytes/digest/version/graph/admissionはimmutable。
+7. trace visible unitはsource-explicit/user evidenceへ連続するかhard-invalid。provider proposal単独のattachment witnessはvisible authorityにならない。
+
+L3-I / I1前のschema registration、JSON schema file、Python dataclass、DB/API wire effectは0。field semantics、enum、cross-field invariantを変更する場合はこのL3-R approvalを流用しない。

@@ -5,7 +5,7 @@
 - current implementation admission: `STOP_BEFORE_IMPLEMENTATION`
 - current provider admission: `NO_SAFE_CMEE_V1A_CANDIDATE_STOP`
 - L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
-- current L3-R state: `ROUTE_B_SELECTED_BOUNDED_PREFLIGHT_NOT_AUTHORIZED_STOP`
+- current L3-R state: `L3R_ROUTE_B_APPROVED_P0_AUTHORIZED_NOT_STARTED`
 - automatic progression: `false`
 
 ---
@@ -31,7 +31,7 @@ NO_SAFE_CMEE_V1A_CANDIDATE_STOP
 
 これはCMEE全体の不可能判定ではない。current formal contractのまま、provisional parserをauthorityへ昇格して実装を始めないためのbounded STOPである。
 
-2026-08-15 JST、MashはL3-Rのrouteとして`ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`を選択した。route ambiguityは解消したが、L3-Rが要求するbounded preflight exact bodyは未承認である。したがってcurrent L3-R stateは`ROUTE_B_SELECTED_BOUNDED_PREFLIGHT_NOT_AUTHORIZED_STOP`、P0 / implementation effectは0である。
+2026-08-15 JST、MashはL3-Rのrouteとして`ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`を選択し、`CMEE_V1_L3R_ROUTE_B_BOUNDED_PREFLIGHT_TECHNICAL_BODY` v1.0.0（canonical SHA-256 `4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901`）を承認した。L3-R exitは成立し、current stateは`L3R_ROUTE_B_APPROVED_P0_AUTHORIZED_NOT_STARTED`である。P0 executionは0、implementation effectは0である。
 
 ## 1. Mash LEVEL_3 route decision
 
@@ -69,14 +69,14 @@ acceptance contractを明示的に変更し、provider outputを`PROVISIONAL_ONL
 
 one-bestをsilent authorityにしない。user answerはperson truthの全部ではなく、対象unknownについてのuser-owned correction / confirmationである。
 
-MashはRoute B directionを選択した。この選択はprovider proposalを`PROVISIONAL_ONLY`に留め、limited observation / user sovereign clarification / `UNAVAILABLE`で閉じるroute-level semanticsだけを承認する。bounded preflight、exact cross-field acceptance contract、P0、dependency、implementation、runtime、Cycle001変更は承認しない。
+MashはRoute B directionに加えてapproved body v1.0.0へbounded preflightとexact cross-field acceptance contractを固定し、P0 exact1を承認した。provider proposalは`PROVISIONAL_ONLY`に留め、limited observation / user sovereign clarification / `UNAVAILABLE`で閉じる。dependency、implementation、L3-I、runtime、Cycle001変更は承認しない。
 
 ## 2. Work packet overview
 
 | Packet | Goal | Entry | Exit | Product / runtime effect |
 |---|---|---|---|---|
 | D0 | 詳細設計publication | user request | exact7 docs + map sync remote verified | 0 |
-| L3-R | Route A / B + bounded preflight authorization | D0 | one route and preflight scope approved or STOP | 0 |
+| L3-R | Route A / B + bounded preflight authorization | D0 | `L3R_ROUTE_B_APPROVED_P0_AUTHORIZED_NOT_STARTED` | 0 |
 | P0 | provider/resource preflight | L3-R | measured provider / platform / resource evidence or STOP | 0 |
 | L3-I | dependency/resource/I1 allowlist decision | P0 PASS | exact adoption and implementation packet approved or STOP | 0 |
 | I1 | Emlis disabled vertical | L3-I | candidate ready disabled | production 0 |
@@ -130,25 +130,19 @@ route_level_semantics = provisional provider + ambiguity-independent limited obs
 
 The route selection does not prove candidate-set completeness, does not make one-best / score / empty ambiguity list authoritative, and does not permit per-owner omission or denominator shrink. A supplemental answer must remain a new caller-supplied source bound to the target unknown only; original source / graph / admission are immutable. These clauses set direction, not executable admission.
 
-L3-R must still fix:
+L3-R approved identity:
 
 ```text
-approved cross-field acceptance semantics, including required / active owner exact coverage
-provisional epistemic representation that cannot alone support visible claims
-original-input lifecycle clarification request maximum exact1
-provider / resolver responsibility
-preflight candidate package set
-preflight exact local / temporary paths
-preflight resource and platform ceiling
-runtime network / storage / secret effects
-failure / ambiguity / OOV behavior
-privacy boundary
-retry authority
-post-preflight approval requirements
-automatic progression = false
+body_id = CMEE_V1_L3R_ROUTE_B_BOUNDED_PREFLIGHT_TECHNICAL_BODY
+body_version = 1.0.0
+body_canonical_sha256 = 4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901
+route_contract_id = cocolon.cmee.v1a.acceptance.route_b.v1
+preflight_candidate = kwja==2.5.1 / base / char,word / cpu
+P0_execution = AUTHORIZED_EXACT1_NOT_STARTED
+automatic_progression = false
 ```
 
-Until every remaining field is approved in one bounded technical body, the L3-R exit is not met and P0 is forbidden. The current outcome is `BLOCKER_NARROWED`, not product / technical implementation credit.
+per-owner exact coverage、provisional graph隔離、outcome cross-fields、one-clarification lifecycle、supplemental immutability、provider/resolver責任、candidate/resource/path、network/storage/secret、failure/OOV/privacy、retry、terminalはcanonical technical bodyを正本とする。L3-Rのprimary outcomeは`BLOCKER_NARROWED`であり、product / technical implementation creditは0である。
 
 P0 PASS後、Mashのseparate `L3-I`でexact dependency versions / hashes、resource lock、repo changed-path allowlist、I1 implementation scopeを承認する。L3-I前にrequirements、lock、production source、test、runnerを書かない。
 
@@ -176,7 +170,7 @@ Route Aでは、statistical parserのone-bestやscoreだけでは`FORMAL_CLOSED`
 
 Route Bでは、approved providerを`PROVISIONAL_ONLY` producerとして固定し、ambiguous / unresolvedをvisible claimへsilent promotionしない。
 
-current comparison candidate identityは次である。すべて`PROVISIONAL_ONLY / NOT_APPROVED`であり、package setをimplementation authorityへ昇格しない。
+historical comparison candidate identityは以下のとおりだが、approved P0 execution candidateは`kwja==2.5.1` exact1だけである。GiNZA stackとの比較、combined stack、silent substitutionは0。いずれもdependency / implementation authorityへ昇格しない。
 
 ```text
 ginza==5.2.0
@@ -610,6 +604,7 @@ CMEE_DETAILED_DESIGN_DRAFT_PR_REMOTE_VERIFIED_NOT_CURRENT
 CMEE_DETAILED_DESIGN_CURRENT_OWNER_MERGED
 NO_SAFE_CMEE_V1A_CANDIDATE_STOP
 CMEE_L3R_ROUTE_B_SELECTED_BOUNDED_PREFLIGHT_NOT_AUTHORIZED_STOP
+CMEE_L3R_ROUTE_B_APPROVED_P0_AUTHORIZED_NOT_STARTED
 CMEE_V1A_EMLIS_OBSERVATION_CANDIDATE_READY_DISABLED_NOT_ADMITTED
 CMEE_V1A_CYCLE001_PROVEN
 CMEE_V1A_EMLIS_OBSERVATION_PRODUCTION_OPERATIONAL
@@ -620,6 +615,37 @@ CMEE_V1E_ANALYSIS_IF_ROUTE_OPERATIONAL
 CMEE_V1_THREE_CORE_OPERATIONAL
 ```
 
-本turnのpublication targetは、同じDraft PR上の`CMEE_L3R_ROUTE_B_SELECTED_BOUNDED_PREFLIGHT_NOT_AUTHORIZED_STOP`である。D0 publicationとRoute B selectionがremote publishされてもcurrent owner、P0 authorization、implementation admissionにはならず、merge後のfresh verificationでだけ`CMEE_DETAILED_DESIGN_CURRENT_OWNER_MERGED`になり得る。
+今回のpublication targetは、同じDraft PR上の`CMEE_L3R_ROUTE_B_APPROVED_P0_AUTHORIZED_NOT_STARTED`である。approved bodyのdocs-only exact7をremote fresh verifyした後だけP0 exact1を開始できる。Draft publicationはimplementation admission、dependency adoption、L3-I、Cycle001 effectにはならず、merge後のfresh verificationでだけ`CMEE_DETAILED_DESIGN_CURRENT_OWNER_MERGED`になり得る。
 
 各stateは別であり、前のstateを次へ自動変換しない。
+
+## 17. Approved P0 bounded envelope
+
+Canonical body:
+
+[CMEE V1 L3-R Route B Bounded Preflight Technical Body v1](../CMEE_V1_L3R_RouteB_BoundedPreflight_TechnicalBody_20260815.md)
+
+P0 candidate exact1は`kwja==2.5.1`、model `base`、tasks `char,word`、CPU、worker 0、batch 1、torch compile false。exact temp rootは`/tmp/cocolon-cmee-v1a-p0-kwja251-base/`で、activation時に既存なら触らずSTOPする。all cache/outputは同root配下、repository/home writeは0。
+
+checkpoint body取得前にcheckpoint-specific licenseとpublisher integrityのmetadata hard gateを行う。accepted publisher evidenceは`PUBLISHER_MANIFEST_SHA256 | VERIFIED_SIGNED_CHECKSUM | PINNED_PUBLISHER_REPO_MAPPING` exact3だけで、official domain、TLS URL、self-measured SHA、version map、foundation model card license単独は不可。gate未成立ならcheckpoint download/load 0で`P0_LICENSE_OR_PROVENANCE_UNRESOLVED_STOP`。
+
+load/measurementはOS/runnerがegress deny、secret-free、root外write deny、repository/home read deny、child-process deny、privilege-escalation denyを強制できる場合だけ。不能なら`P0_ISOLATION_NOT_ENFORCEABLE_STOP`。synthetic exact12、cold load exact1、sequential run exact1、90分以内。同一URL artifact acquisition failureだけretry max1、install/load/inference/case retry 0。
+
+P0 terminalはexact1。
+
+```text
+P0_PASS_EVIDENCE_READY_L3I_NOT_AUTHORIZED_STOP
+P0_ACTIVATION_PRECONDITION_STOP
+P0_ISOLATION_NOT_ENFORCEABLE_STOP
+P0_PACKAGE_BINARY_CLOSURE_STOP
+P0_RESOURCE_IDENTITY_STOP
+P0_LICENSE_OR_PROVENANCE_UNRESOLVED_STOP
+P0_ACQUISITION_NETWORK_SCOPE_STOP
+P0_OFFLINE_RUNTIME_NETWORK_ATTEMPT_STOP
+P0_PLATFORM_OR_RESOURCE_LIMIT_STOP
+P0_PROVIDER_OUTPUT_CAPABILITY_STOP
+P0_PRIVACY_OR_STORAGE_BOUNDARY_STOP
+P0_RESULT_UNKNOWN_STOP
+```
+
+terminal後はexact rootだけcleanupし、body-free result + current map/read-first/order exact4だけを同Draft PRへ反映する。P0でRoute B owner disposition、meaning sufficiency、Product Read、Cycle acceptanceは評価しない。

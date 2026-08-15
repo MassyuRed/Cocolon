@@ -11,7 +11,7 @@
 - dependency / production / test / runner / API / DB / RN effect: `0`
 - Cycle001 restart effect: `0`
 - L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
-- L3-R packet state: `ROUTE_B_SELECTED_BOUNDED_PREFLIGHT_NOT_AUTHORIZED_STOP`
+- L3-R packet state: `L3R_ROUTE_B_APPROVED_P0_AUTHORIZED_NOT_STARTED`
 - automatic progression: `false`
 
 ---
@@ -92,7 +92,7 @@ route候補は次のexact2であり、2026-08-15 JSTのMash LEVEL_3判断でRout
 1. `ROUTE_A_FORMAL_CLOSED_ATTACHMENT_AUTHORITY`: current formal closureを満たす別authorityを提示する。
 2. `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`: provisional analysisをlimited observation / user clarification / unavailableへ明示的にbindするよう受入契約を変更する。
 
-Mashの選択はroute directionだけを承認する。provider / resolver責任、candidate package / resource identity、exact temp path、categorical ceiling、network / storage / secret effect、failure / ambiguity / OOV、privacy、retry、post-preflight approvalを閉じるbounded preflight bodyは未承認であり、L3-R exitは未成立、P0開始は不可である。
+Mashはroute directionに加えて、`CMEE_V1_L3R_ROUTE_B_BOUNDED_PREFLIGHT_TECHNICAL_BODY` v1.0.0（canonical SHA-256 `4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901`）を承認した。provider / resolver責任、Route B cross-field semantics、KWJA exact1候補、temp path、categorical ceiling、network / storage / secret effect、failure / ambiguity / OOV、privacy、retry、post-preflight境界は同bodyへ固定され、L3-R exitは成立した。P0 exact1はdocs reflectionのfresh verification後だけ開始できる。
 
 approval orderは`L3-R route + bounded preflight authorization -> P0 measured evidence -> L3-I dependency/resource/I1 exact allowlist -> I1`である。いずれのrouteでもwheel / model / transitive lock、resource identity、license、installed size、max RSS、latency、CPython / OS / architecture、runtime network 0をP0 evidence後のL3-Iでfresh固定する。one-best arc、model score、Product Read、first / last / nearest heuristicはambiguityを消すauthorityにならない。
 
@@ -127,12 +127,12 @@ current orthogonal state:
 ```text
 document_lifecycle = DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE
 route_selection = ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION
-l3r_state = ROUTE_B_SELECTED_BOUNDED_PREFLIGHT_NOT_AUTHORIZED_STOP
+l3r_state = L3R_ROUTE_B_APPROVED_P0_AUTHORIZED_NOT_STARTED
 provider_admission = NO_SAFE_CMEE_V1A_CANDIDATE_STOP
 runtime_state = NOT_IMPLEMENTED
 production_state = NOT_CONNECTED
 cycle_state = NOT_REOPENED
-next_decision = MASH_LEVEL3_BOUNDED_PREFLIGHT_AUTHORIZATION
+next_decision = EXECUTE_APPROVED_P0_EXACT1_OR_CAUSE_SPECIFIC_STOP
 automatic_progression = false
 ```
 
@@ -195,4 +195,21 @@ target listはautomatic transitionではない。design merge、preflight、depe
 - current CMEE structure mapが同じwrite unitで同期する。
 - remote bytesとchanged pathsをpostverifyする。
 
-本suiteのprimary outcomeは`BLOCKER_NARROWED`である。Route B selectionによりroute ambiguityは解消したが、bounded preflight exact bodyは未承認である。`DOCUMENTED_DETAILED_DESIGN_CANDIDATE`と`ROUTE_B_SELECTED_BOUNDED_PREFLIGHT_NOT_AUTHORIZED_STOP`はsecondary lifecycle / decision stateでありproduct / implementation creditではない。商品出力、Product Read、runtime readinessは増えない。
+本suiteのprimary outcomeは`BLOCKER_NARROWED`である。Route B selectionとbounded preflight technical body v1.0.0の承認によりL3-Rは成立し、current stateは`L3R_ROUTE_B_APPROVED_P0_AUTHORIZED_NOT_STARTED`である。これはproduct / implementation creditではなく、商品出力、Product Read、runtime readiness、Cycle creditは増えない。
+
+## 10. Approved L3-R identity and activation boundary
+
+Canonical body:
+
+[CMEE V1 L3-R Route B Bounded Preflight Technical Body v1](../CMEE_V1_L3R_RouteB_BoundedPreflight_TechnicalBody_20260815.md)
+
+```text
+approval_token = CMEE_V1_L3R_ROUTE_B_TECHNICAL_BODY_V1_APPROVED
+body_version = 1.0.0
+body_canonical_sha256 = 4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901
+P0 = AUTHORIZED_EXACT1_NOT_STARTED
+implementation_approval = 0
+automatic_progression = false
+```
+
+P0はcanonical bodyのexact candidate / path / network / isolation / evidence / terminalだけを一回実行する。PASSでもseparate L3-I前にdependency、requirements、lock、source、test、runnerを書かない。
