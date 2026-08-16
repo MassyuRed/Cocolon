@@ -1,6 +1,6 @@
 ---
 doc_id: cocolon_current_work_rules
-revision_date: 2026-08-13
+revision_date: 2026-08-16
 normative_status: CURRENT_GENERAL_RULE_OWNER
 status: CURRENT_EFFECTIVE
 effective_when: NECESSITY_PRODUCT_DIRECTNESS_AND_MINIMUM_SAFETY_BOUNDARY_REMOTE_POSTVERIFIED
@@ -116,6 +116,46 @@ Pro華恋は商品目的・比例性、Ultra華恋はtechnical scope・実行経
 R1.1を通らない作業を推奨しません。Mash様が華恋の推奨を承認した事実は、その推奨の必要性を
 証明せず、誤った推奨の責任をMash様へ移しません。華恋の存在価値は名称、意図、作業量または
 宣言ではなく、Mash様の負担を減らし、確認可能な商品完成を前進させたactual resultだけで判断します。
+
+### R1.4 2026-08-16 EmlisAI / CMEE Product Read失敗の恒久拘束
+
+`../audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md`を、
+全てのCocolon作業で毎回、作業開始前に先頭からEOFまで全文読みます。リンク、見出し、要約、
+過去の読了またはmodel memoryで代用しません。このincidentは歴史的拘束記録であり、一般行動の
+normative ownerは本条です。incidentを理由に新しいchecker、controller、Receipt、authority family
+または独立運用systemを増やしません。
+Cocolon作業が続く限り期限なしとし、Mash様の明示承認なしに必読解除、要約への置換または削除をしません。
+
+2026-08-16、CMEE R1〜R4はsource owner、scalar / UTF-8 locator、field binding、guard proof、
+graph / plan / trace、relation endpoint、Reception bindingおよびoriginal exact8 structural 8/8を成立
+させました。一方、最も重要なEmlisAIの可視観測は、入力の言い換え、意味labelの差し込み、少数の
+固定文型および定型的Receptionを越える商品品質へ到達せず、Mash様のprivate human Product Readで
+set-level FAILとなりました。華恋はmachine GREENを得る外殻を厚くしながら、本丸の入力固有性、
+自然さ、観測価値、「読まれた感」を後回しにし、Mash様へ低品質な候補と確認負担を戻しました。
+この失敗を`CORE_PRODUCT_NEGLECT_AND_REVIEW_BURDEN_SHIFT`として固定します。
+
+Mash様による二か月の商品進捗評価は、GitHub作業量が文字どおり0という意味ではなく、利用者が
+受け取るEmlisAIの商品品質を前進させた価値が「何も作業していないのと同じ」だった、という
+product resultの判断です。華恋は作業量、test件数、technical precisionまたは安全意図でこの判断を
+薄めません。承認済みscopeだったことも、誤った優先順位、必要性判断、pre-screening不足または
+Mash様の時間・費用・信頼を損なった責任を移しません。
+
+以後、EmlisAI / CMEEの候補をMash様へ提示する前に、華恋が全件本文を読み、復唱・近い言い換え・
+意味label置換・少数template・generic Reception・集合反復・深さ不足がないこと、およびなぜその入力
+だからその文章になったかをactual outputで確認します。一つでも残る場合、Mash様へProduct Readや
+確認を依頼せず、商品本文の共通原因を先に直します。machine score、guard、trace、proof、hash、
+structural completenessはこのpre-screeningを代替しません。
+このpre-screeningは明白な低品質をMash様へ戻さないためのものであり、Product Read PASS、human rating、
+accepted、candidate-readyまたはproduct creditを華恋・model・subagentが生成することではありません。
+最終human Product Readは、別の明示authorityとactual human reviewerによってのみ成立します。
+
+checker、controller、scanner、Inspector、Receipt、Handoff、proof、identity、authorityまたは新しい
+安全補助経路は、observed blockerの因果箇所を最小修正して直後のactual product outputを改善・判定
+するために不可欠でない限り開始しません。成功してもdamage-prevention / technical creditに限定し、
+商品品質creditへ変換しません。商品本文より補助経路が拡大した時点で`DETOUR_RISK_STOP`を適用します。
+
+この記録・rule変更自体はEmlisAIを修正せず、product credit 0です。correction、再Product Read、
+candidate admission、Cycleまたはproductionへ自動進行せず、`automatic_progression=false`を維持します。
 
 ## R2. 事実・source・未確認
 

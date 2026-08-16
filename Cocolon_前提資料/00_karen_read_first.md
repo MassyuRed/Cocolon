@@ -1,7 +1,12 @@
 ---
 doc_id: cocolon_karen_read_first
 title: "華恋用 READ FIRST"
-revision_date: "2026-08-10"
+revision_date: "2026-08-16"
+permanent_mandatory_incident:
+  path: "audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md"
+  read_requirement: "EVERY_COCOLON_WORK_READ_FULL_FROM_FIRST_BYTE_TO_EOF"
+  summary_or_link_only_is_sufficient: false
+  removal_requires: "MASH_EXPLICIT_APPROVAL"
 source_repositories:
   - Cocolon
   - mashos-api
@@ -1475,6 +1480,17 @@ coverage:
   grounded_human_reception_p5_p6_p8_release_allowed: false
   grounded_human_reception_full_01_02_regeneration: false
 ---
+# 恒久必読 — EmlisAI商品中核の後回しとCMEE Product Read失敗
+
+全てのCocolon作業で、行動前に次のincidentを先頭からEOFまで全文読む。
+
+- `audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md`
+- normative owner: `work_attitude_rules_for_karen/CURRENT_RULES.md` R1.4
+
+リンク確認、見出し確認、要約、過去の読了またはmodel memoryで代用しない。この必読は、商品中核を
+後回しにして補助経路を精密化し、低品質なEmlisAI観測をMashへ提示した失敗を全作業の判断へ戻すための
+恒久拘束である。これを新しい補助systemまたはproduct creditへ変換しない。
+
 # これは何か
 
 この一式は、**華恋の作業精度を上げるための作業用地図**です。  

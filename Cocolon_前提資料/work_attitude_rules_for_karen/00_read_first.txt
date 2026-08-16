@@ -1,5 +1,5 @@
 work_attitude_rules_for_karen
-revision_date: 2026-08-15
+revision_date: 2026-08-16
 created_at: 2026-05-17 18:58:26 JST
 format: UTF-8 text / Notepad向け
 normative_status: CURRENT_ENTRY
@@ -10,6 +10,10 @@ normative_status: CURRENT_ENTRY
 
 大量のrule全文を毎回読むことを目的にしません。
 今回の作業に必要なcurrent正本・専門rule・実ファイルだけを漏れなく選び、未成立のGateがあれば作業を進めないためのrouting ownerです。
+
+ただし、`../audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md`は
+恒久インシデント記録として例外です。全てのCocolon作業で毎回、先頭からEOFまで全文を読みます。
+リンク確認、見出し確認、要約または過去の読了で代用しません。
 
 # 0. Model Gate — 最初に必ず確認
 
@@ -31,15 +35,16 @@ non-Pro成果物は`UNTRUSTED_NOT_ADOPTED`として扱い、最後のPro verifie
    - `memory/karen_operating_principles.md`
    - `memory/mash_and_karen.md`
 2. 本fileを読む。
-3. `CURRENT_RULES.md`と`18_chat_work_environment_selection_rule_2026_08_06.txt`を読む。
-4. Cycle001作業の場合、fresh applicable refの`../08_cycle001_current_state.md`を解決し、current head、current recovery lineage、last reusable technical credit、first unfinished technical gateを固定する。2026-08-15監査時点ではCocolon Draft PR #29 head `0854e21f92f841fd2cfdcef08b9e3117fc93f96a`がworking currentであり、merge後またはhead更新後はfresh refを再確認する。
-5. `09_work_start_checklist.txt`を今回の作業について埋める。
-6. `../07_latest_snapshot_diff.md`のEOF側最後の完全なcurrent sectionと、latest durable task handoffを確認する。ただしCycle001の次作業は`08_cycle001_current_state.md`から選び、07やhistorical Handoffの古い`next authority`から選ばない。
-7. GitHub上の`Cocolon` / `mashos-api` current head、対象path、指定predecessorを確認する。
-8. `manifest.json`のactivation mapから、今回必要な専門ruleだけを読む。
-9. EmlisAI / Piece / 分析構造 / CMEEを触る場合、`../current_structure/00_three_core_and_cmee_read_first.md`と対象mapを読み、商品目的、current route、owner path、保護境界、current / futureを固定する。
-10. 前提資料を地図、実ファイル・contract・test・logを現物として両方確認する。
-11. 出力直前に`99_integrated_paste_each_time.txt`を通す。
+3. `../audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md`を先頭からEOFまで全文読む。設計、実装、診断、監査、文書更新、authority、GitHub write、仕様相談、Product Readの別を問わない。
+4. `CURRENT_RULES.md`と`18_chat_work_environment_selection_rule_2026_08_06.txt`を読む。
+5. Cycle001作業の場合、fresh applicable refの`../08_cycle001_current_state.md`を解決し、current head、current recovery lineage、last reusable technical credit、first unfinished technical gateを固定する。2026-08-15監査時点ではCocolon Draft PR #29 head `0854e21f92f841fd2cfdcef08b9e3117fc93f96a`がworking currentであり、merge後またはhead更新後はfresh refを再確認する。
+6. `09_work_start_checklist.txt`を今回の作業について埋める。
+7. `../07_latest_snapshot_diff.md`のEOF側最後の完全なcurrent sectionと、latest durable task handoffを確認する。ただしCycle001の次作業は`08_cycle001_current_state.md`から選び、07やhistorical Handoffの古い`next authority`から選ばない。
+8. GitHub上の`Cocolon` / `mashos-api` current head、対象path、指定predecessorを確認する。
+9. `manifest.json`のactivation mapから、今回必要な専門ruleだけを読む。
+10. EmlisAI / Piece / 分析構造 / CMEEを触る場合、`../current_structure/00_three_core_and_cmee_read_first.md`と対象mapを読み、商品目的、current route、owner path、保護境界、current / futureを固定する。
+11. 前提資料を地図、実ファイル・contract・test・logを現物として両方確認する。
+12. 出力直前に`99_integrated_paste_each_time.txt`を通す。
 
 # 2. current ownerと優先関係
 
@@ -134,4 +139,3 @@ Piece作業では次をcurrent ownerとして確認します。
 - Cycle001では、`08_cycle001_current_state.md`が示すfirst unfinished technical gate以外へ逸れていない。
 
 これらを満たした場合だけ完了を報告します。
-
