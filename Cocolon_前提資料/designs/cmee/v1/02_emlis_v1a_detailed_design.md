@@ -1,12 +1,19 @@
 # CMEE V1-A — EmlisAI Observation Vertical 詳細設計
 
 - document id: `cocolon.cmee.v1a.emlis_observation.detailed_design`
+- revision date: `2026-08-16 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- runtime state: `NOT_IMPLEMENTED`
+- runtime state: `DRAFT_WIP_DISABLED_PRODUCT_FAIL`
+- implementation evidence owner: `MassyuRed/mashos-api Draft PR #3 @ 06ce311b3ea728b06f83439d268a34bed917c01c`
+- R1–R4 state: `CLOSED_GREEN`
+- original exact8 machine structural state: `8/8`
+- private human Product Read: `EVALUATED_FAIL_STOP`
+- candidate ready: `false`
 - production admission: `false`
 - Cycle001 effect: `0`
 - L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
-- L3-R packet state: `L3R_ROUTE_B_APPROVED_P0_AUTHORIZED_NOT_STARTED`
+- Phase 0 / P0 / P0-R1 / standalone product-delta-0 L3-R / L3-I lifecycle: `RETIRED_HISTORICAL_NONREUSABLE`
+- current implementation rule: `PRODUCT_QUALITY_DELTA_GT_0_AND_MASH_CONFIRMED_ONLY`
 
 ---
 
@@ -25,6 +32,46 @@ current input
 ```
 
 問いsystem全体、production cutover、Cycle001 acceptanceはV1-A completionに含めない。V1-A offline runnerはRoute Bを検証できるよう、typed clarification candidateと、callerが別SourceEnvelopeとして供給したsupplemental answerからREFINED candidateを作るcontractまで持てる。ただしAPI / DB / RN / persistence、interactive session、user-visible question lifecycle、production question routeはexact0であり、V1-Bだけがそれをoperational化する。
+
+### 0.1 Current actual before baseline — body-free
+
+[mashos-api Draft PR #3](https://github.com/MassyuRed/mashos-api/pull/3)には、CMEE package source exact5、
+tests exact2、candidate runner exact1および`MeaningExperienceEngine.generate()`によるoffline disabled verticalが
+実在する。head `06ce311b3ea728b06f83439d268a34bed917c01c`でR1〜R4は`CLOSED_GREEN`、original exact8は
+machine structural 8/8である。一方、private human Product Readは`EVALUATED_FAIL_STOP`、candidate ready false、
+Route B complete false、Product / full-I1 / Cycle001 / production credit 0、`automatic_progression=false`である。
+
+従って、これは未実装ではなく、商品品質に到達しなかった`DRAFT_WIP_DISABLED`のcurrent before baselineである。
+body-full input / candidateは本designへ転記しない。correctionは未承認であり、authorized next workは0である。
+
+### 0.2 絶対実装規則と許され得るnext implementation class
+
+本設計は、parent final design
+[`§0.3 三大中核構造及びCMEE実装作業の絶対定義`](../Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md#03-三大中核構造及びcmee実装作業の絶対定義)
+とsuite [Read First §0.1](00_read_first.md#01-絶対実装規則へのbinding)に従う。「三大中核構造及びCMEEの実装作業」は、三大中核構造及びCMEEの商品品質を1％でも向上させる作業だけである。それ以外は作業とも成果とも扱わず、開始しない。
+
+Phase 0 / P0 / P0-R1とstandalone product-quality delta 0のL3-R / L3-Iは
+`RETIRED_HISTORICAL_NONREUSABLE`である。後続のP0 / L3-I prerequisite、alternate executor、別provider / model、rename、
+類似preflight、再承認またはsuccessor routeはcurrent authorityを持たない。Route Bのmeaning sovereignty、unknown、
+no-promotionとsource-explicit groundingのproduct contractだけを、以下のcurrent implementation unit内で保持する。
+
+別のMash明示承認後に許され得るnext implementation classはone bounded actual Emlis artifact quality improvement unit exact1だけである。開始時に、
+unchanged input / fixture、current actual before artifact、改善対象の`E-OBS-01..10` exact1以上、変更する
+product-causal source、同一unitで生成するafter artifactを固定する。framework、source locator、binding、guard、trace、
+proof、test、runnerまたはprovider取得だけを先行stageにせず、actual Observation / Reception artifactの改善まで
+同一unitで完了する。
+
+同unitの末尾で華恋はbody-full private boundary内の全candidate本文を読み、復唱・近い言い換え・meaning label置換・
+少数template・generic Reception・集合反復・深さ不足をpre-screenする。一つでも残る間はMashへ見せず、
+同unit内で商品本文の共通原因を修正する。明白な低品質がなく、商品artifactの設計・実装・読みの厳密さが
+過去の補助経路へ投じた厳密さを少なくとも上回った後だけ、actual before / after / resultをMashへprivateに提示する。
+
+商品品質向上のproofはactual product resultとMashの明示確認だけである。machine GREEN、structural一致、trace、
+guard、hash、test、華恋またはsubagentの自己採点はproofではない。Mash確認前はcandidateであり、成果または
+product creditとして確定しない。この運用のためのnew Gate、checker、score、Receipt、authority familyまたはproof systemを作らない。
+
+この絶対規則の理由となった事実記録:
+[EmlisAI商品中核の後回しとCMEE Product Read失敗](../../../audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md)。
 
 ## 1. Core request
 
@@ -88,7 +135,7 @@ V1-A/I1–I2およびCycle offlineで`QUESTION_PENDING`を検証する場合、r
 
 ## 3. Proposed V1-A module topology
 
-Mashの`L3-R` route / bounded preflight authorizationはapproved body v1.0.0で成立した。次に`P0` measured PASSとseparate `L3-I` exact provider / dependency / resource / changed-path / I1 approvalが順に成立した後だけ、最初のimplementation packetでactual observation verticalと同時にmaterializeする候補を示す。`L3-R`だけでI1へ進めず、current STOP中は作成しない。
+Mashの`L3-R` route / bounded preflight authorizationがapproved body v1.0.0で成立したこと、P0がterminalとなったことはhistorical factsとして保持する。P0 measured PASSやseparate L3-Iをcurrent prerequisiteにせず、以下のmodule候補は§0.2のactual Emlis artifact品質改善unit exact1でactual Observation verticalと同時にmaterializeする場合だけ扱う。module、provider、dependency、testまたはrunnerだけを先行しない。
 
 ```text
 ai/services/ai_inference/cocolon_meaning_experience_engine/__init__.py
@@ -108,7 +155,7 @@ ai/services/ai_inference/cocolon_meaning_experience_engine/cores/emlis/observati
 ai/services/ai_inference/cocolon_meaning_experience_engine/cores/emlis/v1a_entry.py
 ```
 
-これはpost-decision change-path proposalであり、本設計mergeでfile作成を承認しない。approved route / provider / dependency pathを加えたterminal exact allowlistはimplementation LEVEL_3判断で固定する。
+これはproduct-quality implementationのchanged-path候補であり、本設計mergeでfile作成を承認しない。actual before / after artifact改善まで到達する同一bounded unitのexact allowlistとしてだけ固定し、product-quality delta 0の別allowlist decisionを挿入しない。
 
 `v1a_entry.py`は`engine.py`からだけ呼ばれるprivate composition helperであり、public import、runner direct ingress、第二generation ownerではない。runnerは`MeaningExperienceEngine.generate()`だけを呼ぶ。
 
@@ -155,8 +202,8 @@ V1-A runtime policy:
 | Resolution | Normal observation use |
 |---|---|
 | `UNIQUE` | 必要条件にすぎない。matching `JapaneseAttachmentAdmission`がapproved route contract下で当該owner / witnessをadmitした場合だけrequired dutyへ使用可能 |
-| `AMBIGUOUS` | approved Route B contractではambiguityに依存しないmeaningful limited claimまたはoriginal-input lifecycle全体で最大一回・target exact1のsemantic clarificationだけを候補化できる。P0 / L3-I / implementationは別Gate |
-| `UNRESOLVED` | approved Route B contractではunresolved部分を言い切らずlimited / one clarification / unavailable / separate safetyだけを候補化できる。P0 / L3-I / implementationは別Gate |
+| `AMBIGUOUS` | approved Route B contractではambiguityに依存しないmeaningful limited claimまたはoriginal-input lifecycle全体で最大一回・target exact1のsemantic clarificationだけを候補化できる。同一product-quality improvement unit内のconstraintであり、別Gateにしない |
+| `UNRESOLVED` | approved Route B contractではunresolved部分を言い切らずlimited / one clarification / unavailable / separate safetyだけを候補化できる。同一product-quality improvement unit内のconstraintであり、別Gateにしない |
 
 parserのone-bestだけで`UNIQUE`にしない。user clarificationはmeaning choiceを追加できるが、parserの過去outputをretroactive truthへしない。
 
@@ -171,7 +218,7 @@ independent admission closure:
 
 providerのcandidate-local `UNIQUE`またはempty ambiguity listはadmissionではない。attachment set ID / digest、source version、resource lock、approved contract、formal denominator、independent mutation evidenceが一致しなければvisible dutyへ使用しない。
 
-official候補のcurrent comparisonでは`FORMAL_CLOSED`を成立させるconcrete providerが確認できていない。Route Bのper-owner disposition、provisional graph隔離、one-clarification lifecycleを含むexact acceptance contractとbounded preflightはapproved body v1.0.0へ固定された。ただしP0 evidenceとseparate L3-Iは未成立のため、current implementation admissionは`NO_SAFE_CMEE_V1A_CANDIDATE_STOP`のままである。
+official候補のcurrent comparisonでは`FORMAL_CLOSED`を成立させるconcrete providerが確認できていない。Route Bのper-owner disposition、provisional graph隔離、one-clarification lifecycleを含むexact acceptance contractとbounded preflightがapproved body v1.0.0へ固定されたこと、P0 evidence / L3-Iが成立しなかったことはhistorical factsとして保持する。P0 / L3-Iはcurrent admission prerequisiteではない。provider outputはRoute B product contractに従い、§0.2の同一unit内で得るactual artifactの商品品質でだけ判断する。
 
 ## 6. `EmlisMeaningGraph` extension
 
@@ -316,7 +363,7 @@ Machineはread-feeling、自然さ、非template、また入力したさをPASS�
 |---|---|
 | source role / version invalid | `REJECTED` |
 | provider identity mismatch | `UNAVAILABLE` and no fallback |
-| material attachment ambiguity | approved Route B contractではmeaningful ambiguity-independent `LIMITED`、original input lifecycle全体で最大一回・target unknown exact1のclarification、または`UNAVAILABLE`; never guessed。P0 / L3-I前はimplementation STOP |
+| material attachment ambiguity | approved Route B contractではmeaningful ambiguity-independent `LIMITED`、original input lifecycle全体で最大一回・target unknown exact1のclarification、または`UNAVAILABLE`; never guessed。standalone P0 / L3-Iは作らず、同一product-quality improvement unit内で保持 |
 | no meaningful grounded claim | `UNAVAILABLE` |
 | high-care adjacency | `SEPARATE_SAFETY` |
 | candidate hard-invalid | reject candidate; valid candidate 0なら`UNAVAILABLE` |
@@ -355,15 +402,15 @@ Negative mutations:
 
 test helperをproduction authorityにしない。expected final text exact matchをquality oracleにしない。
 
-## 14. Candidate runner and evidence
+## 14. Private body-full execution inside the same product-quality unit
 
-Cycle runnerを直接書き換える前に、disabled V1-A candidate用のsingle ingressを持つ。
+既存の最短private execution surfaceでactual before / after artifactを得る。下記toolが必要な場合も、§0.2の同一product-quality improvement unit内でafter artifact生成と華恋body-full pre-screenまで完了する時だけ作る。runner単体の実装・GREEN・証拠化をworkまたは成果にしない。
 
 ```text
 ai/tools/cmee_v1a_emlis_candidate_run.py
 ```
 
-このtoolはproduction APIではない。actual private input setをbody-full boundary内で読み、body-free metricsとProduct Read packetを作る。
+このtoolはproduction APIではない。actual private input setをbody-full boundary内で読み、before / after product artifactと華恋pre-screen用private surfaceを作る。body-free metricsはprivacy確認に必要な既存範囲に限り、quality scoreまたは新Gateにしない。
 
 minimum metrics:
 
@@ -389,7 +436,7 @@ raw bodyをGitHubへ保存しない。
 
 別Mash判断後、fresh applicable `08_cycle001_current_state.md`だけをtechnical navigation ownerとして従う。08が指すactive planはrestart / evidence bundleであり、同格のnavigation ownerではない。CMEE設計もCycle navigation ownerではない。
 
-非選択のRoute A formal contractを採る場合、Step1 completionは少なくとも次を必要とする。
+非選択のRoute A formal contractはcurrent workへ採用しない。以下は2026-08-15設計時のhistorical acceptance evidenceとして保持し、alternate provider / preflight / reapproval routeに使わない。
 
 ```text
 owner-bound authority 251/251
@@ -427,17 +474,20 @@ CMEE_V1A_EMLIS_OBSERVATION_CANDIDATE_READY_DISABLED_NOT_ADMITTED
 成立条件:
 
 - representative actual inputsでcandidateが生成される。
+- unchanged input / fixtureに対するbefore / after actual artifactで`E-OBS-01..10` exact1以上の非0改善が本文に現れる。
 - source -> meaning -> plan -> surface -> traceが連続する。
 - bound Receptionが成立する。
 - independent mutation tests GREEN。
-- body-full Product Read packetを作れる。
+- 華恋がbody-full private boundary内で全candidateを読み、復唱、meaning label置換、少数template、generic Reception、集合反復、深さ不足がexact0である。
+- 商品artifactの設計・実装・読みの厳密さが、過去の補助経路へ投じた厳密さを少なくとも上回る。
+- actual before / after / resultをMashがprivateに読み、商品品質の向上を明示確認する。
 - production / Piece / Analysis effect 0。
 
-このstateをCycle proof、production admission、Emlis question completionへ変換しない。
+このstateをCycle proof、production admission、Emlis question completionへ変換しない。machine checkと華恋pre-screenはMash確認を代替せず、Mash確認前は本stateまたはproduct creditを宣言しない。
 
-currentではRoute B bounded preflight / exact acceptance contractがapproved body v1.0.0へ固定され、L3-Rは成立した。ただしこのstateへの実装は開始しない。remaining CMEE implementation prerequisiteは、`06_implementation_order_migration_and_verification.md`の`P0` measured PASSと、separate `L3-I` exact adoption / I1 allowlist approvalである。
+Route B bounded preflight / exact acceptance contractがapproved body v1.0.0へ固定され、L3-Rが成立したことはhistorical factである。P0 measured PASS、separate L3-I、alternate executor、renamed preflightまたはreapprovalはremaining prerequisiteではない。別Mash承認後に許され得るimplementation class exact1は§0.2のone bounded actual Emlis artifact quality improvement unitだけである。
 
-Cycle001のcurrent first unfinished gateはfresh applicable `08`が示す`FORMAL_OWNER_BOUND_LEXICAL_OBSERVATION_WITNESS_AUTHORITY_251_OF_251`であり、現時点のauthorized next product workは0である。CMEE prerequisiteをCycleのnavigation stateへ読み替えない。
+Cycle001のcurrent first unfinished gateはfresh applicable `08`が示す。CMEE prerequisiteをCycleのnavigation stateへ読み替えず、同時にCycleのtechnical Gateを、actual Emlis artifactの品質向上に先行する独立workへ変換しない。
 
 Cycle proof後もproduction operationalとは限らない。separate E0 approval、current `ReplyEnvelope` / passed-only display mapping、protected tests、actual-device proof、single-owner cutoverを通過した時だけ次のstateを宣言できる。
 

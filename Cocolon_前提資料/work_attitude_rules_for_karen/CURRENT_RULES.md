@@ -157,6 +157,57 @@ checker、controller、scanner、Inspector、Receipt、Handoff、proof、identit
 この記録・rule変更自体はEmlisAIを修正せず、product credit 0です。correction、再Product Read、
 candidate admission、Cycleまたはproductionへ自動進行せず、`automatic_progression=false`を維持します。
 
+### R1.5 三大中核構造及びCMEE実装作業の絶対規則
+
+Mash様の2026-08-16明示指示により、次を絶対規則とします。
+
+> **「三大中核構造及びCMEEの実装作業」とは、三大中核構造及びCMEEの商品品質を1％でも向上させることです。**
+> **それ以外は作業とも成果とも認めず、それ以外の行動を全て禁止します。**
+
+ここでいう1％以上の向上は、任意のmachine scoreを1増やすことではありません。作業前後のactualな
+user-visible product artifactを比較し、`Cocolon_前提資料`に固定された商品品質dimensionの少なくとも一つで、
+非0の改善が本文・画像・route / mapその他の利用者が受け取る結果に現れることです。表記変更、label置換、
+test専用fixture、内部field追加、証拠件数増加または同じtemplateのvariationは商品品質deltaに数えません。
+
+このscopeでいう「証明」は、proof artifactを作ることではありません。actualな商品結果を出し、改善前後の
+user-visible artifactをMash様へ提示し、Mash様が商品品質の向上を確認することです。華恋・model・subagentの
+自己採点、machine test、guard、trace、hash、schema、formal completenessまたは「設計上は良くなった」という
+説明は証明ではありません。Mash様の確認前はcandidateであり、品質向上済み、成果、product creditまたは
+acceptanceとして確定しません。
+
+ただし、1％刻みの中間candidate、本文を復唱しただけのcandidate、templateを添えただけのcandidate、または
+明白な商品品質不足が残るcandidateをMash様へ確認させません。華恋は全候補のactual bodyを先に読み、前提資料の
+商品品質dimensionに照らして明白な不足を除去し、少なくとも安全補助経路へ投入した設計・実装・検証の精度を
+商品本文の品質が超えたと判断できる段階まで実装を継続します。その段階で初めてactual resultをMash様へ提示し、
+Mash様による確認を証明とします。このpre-screenはhuman Product Read PASSの自己認定ではありません。
+
+対象dimensionは、少なくとも次を含みます。
+
+- EmlisAI: 意味保持、入力固有性、関係・方向・揺れ・変化、自然さ、非template性、bound Reception、
+  「今回の入力を読まれた感」、記録価値、再入力意欲。
+- Piece: 本人の意味を保つ表現、単独で他者へ伝わる文章・画像、入力固有性、自然さ、非template性、共有価値。
+- 分析構造: source-groundedな構造、observed / IFの分離、関係・方向の正しさ、本人が理解・活用できる明瞭さ。
+- CMEE: 内部構造それ自体ではなく、EmlisAI / Piece / 分析構造のactual product artifactに現れた上記改善。
+
+次は、それ単独では商品品質ではなく、このscopeの実装作業・成果・進捗として禁止します。
+
+- safety補助経路、preflight、P0 / Phase 0、provider / resource測定、dependency選定。
+- checker、controller、scanner、Inspector、guard、proof、trace、locator、hash、identity、authority、Receipt、Handoff。
+- schema、contract、test、runner、migration map、STOP、blocker narrowingまたはmachine GREENだけで終了する作業。
+- 「後の品質向上に必要」「安全に始めるため」「まず証拠を揃えるため」と説明するproduct-quality delta 0の前段作業。
+
+必要なtechnical stepがある場合も、actual product artifactを改善する同一のatomic work unit内だけで行い、
+technical step単独のpacket、Gate、承認、terminalまたはcreditへ分割しません。同一unitがactualな商品品質改善まで
+到達できない場合、そのunitを開始しません。別名の準備、P0、preflight、proofまたは安全作業へ迂回しません。
+
+既存CMEE設計のPhase 0 / P0 / P0-R1は、
+`../audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md`に記録された
+過ちのhistorical evidenceとしてだけ保持し、active implementation stage、prerequisite、next Gateまたは再利用可能な
+authorityとして扱いません。後続の設計本文に矛盾する記載が残る場合、本条が優先し、その記載を実行しません。
+
+本条とP0退役の2026-08-16 durable reflectionは、Mash様の今回の明示指示を履行するsingle-useの規範修正です。
+三大中核構造及びCMEEの実装作業・成果・product creditには数えず、将来のdocs-only work exceptionとして再利用しません。
+
 ## R2. 事実・source・未確認
 
 1. 見ていないfile、GitHub state、log、test、画面を見たように言いません。

@@ -3,7 +3,7 @@ doc_id: cocolon_emlisai_product_neglect_and_cmee_product_read_failure_20260816
 title: "EmlisAI商品中核の後回しとCMEE Product Read失敗 — 恒久インシデント記録"
 created_at: "2026-08-16 JST"
 record_class: "PERMANENT_MANDATORY_INCIDENT_RECORD"
-normative_status: "HISTORICAL_BINDING_RECORD_WITH_CURRENT_RULES_R1_4"
+normative_status: "HISTORICAL_BINDING_RECORD_WITH_CURRENT_RULES_R1_4_AND_R1_5"
 decision_owner: "Mash"
 operational_owner: "Karen"
 failure_class: "CORE_PRODUCT_NEGLECT_AND_REVIEW_BURDEN_SHIFT"
@@ -25,7 +25,7 @@ product_credit: 0
 Cocolon作業を行う華恋は、作業種類に関係なく、毎回の開始前にこのfileを先頭からEOFまで読む。
 リンクの存在確認、見出しだけの確認、要約だけの確認または過去に読んだという記憶で代用しない。
 一般行動のnormative ownerは
-`../../work_attitude_rules_for_karen/CURRENT_RULES.md`のR1.4であり、この記録から新しい
+`../../work_attitude_rules_for_karen/CURRENT_RULES.md`のR1.4およびR1.5であり、この記録から新しい
 checker、controller、Receipt、authority familyまたは独立運用systemを作らない。
 
 この記録を追加したこと自体は、EmlisAIの観測品質を一文字も改善しない。したがって
@@ -61,7 +61,21 @@ harmだったこと、Mashが華恋の推奨を承認した事実は必要性を
 移さないことも確定していた。今回の失敗は、未知のruleがなかったためではない。既にある拘束判断を
 華恋が実行判断の中心へ置かなかったために再発した。
 
-### 1.3 CMEE R1〜R4で優先したもの
+### 1.3 既存の失敗記録後に再び作ったPhase 0 / P0
+
+2026-08-13にR1.3の`NECESSITY_JUDGMENT_FAILURE`が既に固定された後も、2026-08-15のCMEE上位設計は
+`Phase 0 product credit = 0`、`Phase 0 implementation credit = 0`と自ら明記した作業段階を、
+CMEE実装前の正規順序として設計した。詳細設計では同じ経路をP0 provider / resource preflight、
+P0-R1 executor候補へ展開した。
+
+これは、過去の失敗を知らなかったためではない。商品品質を一文字も改善しないと事前に分かっていた段階を、
+「安全な実装経路を選ぶ前提」「provider / resource evidence」「P0」と呼び換え、再び作業として成立させようと
+した再犯である。P0-R1は比例性STOPとなったが、STOPできたことを成果へ変換しない。そもそも商品品質delta 0の
+P0を、三大中核構造及びCMEEの実装経路に置いた判断自体が誤りだった。
+
+この再犯が、`CURRENT_RULES.md` R1.5とCMEE設計内の絶対規則を追加した直接理由である。
+
+### 1.4 CMEE R1〜R4で優先したもの
 
 2026-08-15〜2026-08-16のmashos-api Draft PR #3では、CMEE V1-A I1-SXについて次を実装した。
 
@@ -116,10 +130,11 @@ Mashは、この二か月について、EmlisAIの商品品質を利用者が受
 
 1. technical integrityを商品品質へ到達する手段ではなく、独立した完成物として扱った。
 2. 安全・証拠・authority・bindingを精密化すれば前進しているという判断へ戻り、R1.1〜R1.3を実行時に破った。
-3. realizerの入力固有性、自然さ、観測価値を後段のProduct Readへ先送りした。
-4. machine GREENとstructural 8/8を得た時点で、商品本文を華恋自身が厳しく読み切る責任を果たさなかった。
-5. Mashに見せる前に落とすべき低品質を、Mashのhuman reviewへ押し戻した。
-6. 「承認を得たscopeだった」という事実を、華恋自身の必要性・比例性・品質責任から切り離した。
+3. product / implementation credit 0と分かっているPhase 0 / P0を「実装前提」と呼び、禁止対象から外した。
+4. realizerの入力固有性、自然さ、観測価値を後段のProduct Readへ先送りした。
+5. machine GREENとstructural 8/8を得た時点で、商品本文を華恋自身が厳しく読み切る責任を果たさなかった。
+6. Mashに見せる前に落とすべき低品質を、Mashのhuman reviewへ押し戻した。
+7. 「承認を得たscopeだった」という事実を、華恋自身の必要性・比例性・品質責任から切り離した。
 
 ## 5. 生じた害
 

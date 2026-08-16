@@ -1,17 +1,23 @@
 ---
 doc_id: cocolon_meaning_experience_engine_current_structure
 title: "CMEE — Current Structure"
-revision_date: "2026-08-15 JST"
-document_role: "CMEE_CURRENT_STRUCTURE_AND_PREPARATION_OWNER"
+revision_date: "2026-08-16 JST"
+document_role: "CMEE_CURRENT_STRUCTURE_AND_PRODUCT_QUALITY_ROUTE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
 design_state: "FINAL_TECHNICAL_DESIGN_CANDIDATE"
-detailed_design_state: "DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE_STOP_BEFORE_IMPLEMENTATION"
-l3r_route_selection: "ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION"
-l3r_packet_state: "L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP"
-p0r1_executor_candidate_state: "P0R1_GITHUB_HOSTED_EXECUTOR_FINAL_TECHNICAL_PROPORTIONALITY_STOP"
-implementation_state: "NOT_STARTED"
-runtime_effect: 0
+detailed_design_state: "DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE_DIRECT_PRODUCT_QUALITY_ONLY"
+historical_l3r_route_selection: "ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION"
+historical_l3r_packet_state: "L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP"
+historical_p0r1_executor_candidate_state: "P0R1_GITHUB_HOSTED_EXECUTOR_FINAL_TECHNICAL_PROPORTIONALITY_STOP"
+preproduct_zero_delta_stage_lifecycle: "RETIRED_HISTORICAL_NONREUSABLE"
+current_authorized_next_work: "NONE"
+only_admissible_next_implementation_class: "BOUNDED_ACTUAL_THREE_CORE_PRODUCT_ARTIFACT_IMPROVEMENT_ONLY"
+implementation_state: "DRAFT_WIP_DISABLED"
+candidate_state: "GENERATED_FOR_PRODUCT_READ_DISABLED_PRODUCT_FAIL"
+candidate_ready: false
+product_read_state: "EVALUATED_FAIL_STOP"
+production_runtime_effect: 0
 automatic_progression: false
 ---
 
@@ -32,19 +38,42 @@ Current state:
 
     final technical design candidate
     detailed implementation design candidate
-    Phase 0 provider result = NO_SAFE_CMEE_V1A_CANDIDATE_STOP
-    L3-R route selection = ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION
-    L3-R bounded preflight authorization = GRANTED_BY_APPROVED_BODY_V1
-    P0 = P0_ACTIVATION_PRECONDITION_STOP
-    P0-R1 GitHub-hosted executor candidate = REJECTED_PRE_EXECUTION
-    P0-R1 final judgment = NO_SAFE_NEXT_CANDIDATE_STOP / DETOUR_RISK_STOP
-    not approved for implementation
-    not implemented
+    absolute implementation rule = PRODUCT_QUALITY_DELTA_GT_0_AND_MASH_CONFIRMED_ONLY
+    Phase 0 / P0 / P0-R1 = RETIRED_HISTORICAL_NONREUSABLE
+    product-delta-0 standalone L3-R / L3-I = RETIRED_HISTORICAL_NONREUSABLE
+    historical Route B product contract = RETAINED_CONSTRAINT_ONLY
+    mashos-api Draft PR #3 = R1-R4 CLOSED_GREEN / machine structural exact8 8/8
+    implementation state = DRAFT_WIP_DISABLED
+    Product Read = EVALUATED_FAIL_STOP
+    candidate ready = false / product credit 0
+    current authorized next work = NONE
+    only admissible future class = ONE_BOUNDED_ACTUAL_THREE_CORE_PRODUCT_ARTIFACT_IMPROVEMENT_UNIT
     not production connected
     not Cycle001 proven
     Piece not connected
     Analysis not connected
     automatic progression false
+
+Current implementation rule owner:
+
+- [Final Technical Design §0.3](../designs/cmee/Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md#03-三大中核構造及びcmee実装作業の絶対定義)
+- [EmlisAI商品中核の後回しとCMEE Product Read失敗](../audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md)
+
+Mashの2026-08-16明示指示により、三大中核構造及びCMEEの実装作業は、既存core quality
+contractの未達exact1以上を、before / afterのactual user-visible product artifactで非0に改善する
+同一bounded unitだけである。CMEE内部の構造、test、proof、traceまたはsafety精度ではなく、
+EmlisAI / Piece / 分析構造のactual product artifactに現れた改善だけを対象とする。
+
+consumer core、unchanged input / fixture、before artifact、未達quality criterion、product-causal source、
+after artifactを作業開始前に固定できない場合は開始しない。必要なtechnical stepは同じunit内の
+従属制約とし、単独stage、Gate、成果またはcreditへ分割しない。新しいchecker、Gate、score、
+Receipt、authority familyまたはproof systemは作らない。
+
+KarenはMashへ提示する前にactual bodyを全件読み、復唱、label置換、template、generic Reception、
+集合反復、深さ不足その他の明白な低品質が残る候補をMashへ戻さない。商品本文が補助経路へ
+投入した精度・検証密度を上回った後だけbefore / after resultをMashへ提示する。Karen、model、
+subagentはhuman PASSを自己attestせず、Mashの確認前は成果、product creditまたはacceptanceとして
+確定しない。
 
 ## 1. Product-first derivation
 
@@ -150,8 +179,13 @@ CMEEの内部graphは:
 
 user-confirmed、user-corrected、unknown、hypothesisのlineageを分け、original sourceを書き換えない。
 
-2026-08-15 JST、MashはL3-Rのrouteとして`ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`を選択し、続いて`CMEE_V1_L3R_ROUTE_B_BOUNDED_PREFLIGHT_TECHNICAL_BODY` v1.0.0（canonical SHA-256 `4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901`）を承認した。provider proposalをmeaning authorityへ昇格せず、ambiguityに依存しないlimited observation、original-input lifecycle全体で最大一回のuser clarification、または`UNAVAILABLE`で閉じる。L3-Rは成立した。P0 exact1はactivation Gateで`P0_ACTIVATION_PRECONDITION_STOP`となり、authorityは消費済みである。dependency採用、implementation、L3-I、runtime、Cycle001再入場は未承認のままである。
-同日、Mashは`CMEE_V1_P0R1_GITHUB_HOSTED_BOUNDED_EXECUTOR_FINAL_TECHNICAL_BODY` v1.0.0（canonical SHA-256 `d5637c8303e377e2bda11977425f209c139911acbb56542e8526ee0afa00be70`）のdocs-only reflectionを承認した。reviewed GitHub-hosted executor candidateは、approved isolationを保持したminimum-compliant residualでも32–52 focused hoursを要し、current one-shot evidence価値に比例しないため、`NO_SAFE_NEXT_CANDIDATE_STOP / FINAL_TECHNICAL_PROPORTIONALITY_STOP / DETOUR_RISK_STOP`としてpre-executionで棄却した。P0-R1 executionは0であり、この判断をRoute B、KWJA、provider capabilityの失敗へ変換しない。
+Historical fact: 2026-08-15 JST、MashはL3-Rのrouteとして`ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`を選択し、続いて`CMEE_V1_L3R_ROUTE_B_BOUNDED_PREFLIGHT_TECHNICAL_BODY` v1.0.0（canonical SHA-256 `4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901`）を承認した。provider proposalをmeaning authorityへ昇格せず、ambiguityに依存しないlimited observation、original-input lifecycle全体で最大一回のuser clarification、または`UNAVAILABLE`で閉じるproduct contractは現在も保持する。P0 exact1がactivation Gateで`P0_ACTIVATION_PRECONDITION_STOP`となった事実も保持する。
+Historical fact: 同日、Mashは`CMEE_V1_P0R1_GITHUB_HOSTED_BOUNDED_EXECUTOR_FINAL_TECHNICAL_BODY` v1.0.0（canonical SHA-256 `d5637c8303e377e2bda11977425f209c139911acbb56542e8526ee0afa00be70`）のdocs-only reflectionを承認した。reviewed GitHub-hosted executor candidateは、approved isolationを保持したminimum-compliant residualでも32–52 focused hoursを要し、current one-shot evidence価値に比例しないため、`NO_SAFE_NEXT_CANDIDATE_STOP / FINAL_TECHNICAL_PROPORTIONALITY_STOP / DETOUR_RISK_STOP`としてpre-executionで棄却した。P0-R1 executionは0であり、この判断をRoute B、KWJA、provider capabilityの失敗へ変換しない。
+
+上記のPhase 0 / P0 / P0-R1とproduct-quality delta 0のstand-alone L3-R / L3-Iは全て
+`RETIRED_HISTORICAL_NONREUSABLE`である。historical bodyとresultは削除・改変せず証拠として保持するが、
+current prerequisite、next Gate、reusable authorityまたはimplementation creditにしない。別executor、別provider、
+別model、rename、類似preflightまたはnew approvalによる復活は0である。
 
 Candidate selectionはhard validity constraintsを先に適用し、有効候補の中で意味保持をnaturalness、shortness、appearance、machine score、resource costより先に置く。
 faithfulなrouteが比例的scopeで作れない場合、安価なmeaning-loss candidateを選ばずSTOP／redesignする。
@@ -228,8 +262,10 @@ Final design candidateの推奨route:
 
     ai/services/ai_inference/cocolon_meaning_experience_engine/
 
-ただし空package、typesだけ、adapterだけを先に作らない。
-最初のimplementation packetはEmlis observationのsourceからsurface／traceまでのvertical sliceとatomicでなければならない。
+このhostはmashos-api Draft PR #3でdisabled verticalとして既にmaterializeされ、current Product Read failed beforeに含まれる。
+ここでのfuture設計対象はpackage新設ではなく、商品品質correctionとproduction / cutover境界である。
+空package、typesだけ、adapterだけを成果にしない。別Mash承認後のcorrectionはEmlis observationの
+sourceからactual surface／Reception／human readまでを一巡し、商品品質を非0改善する同一unitでなければならない。
 
 Current cocolon_text_generation_coreは初期段階でdownstream candidate validation／common guard subsystemとして保持する。
 PR #2のCycle001 recovery builderをCMEE wrapperまたはhostへ昇格しない。
@@ -241,7 +277,9 @@ cutover時:
 - parallel engine／fallback／mirror route 0
 - old codeの後続除去は、既にunreachable／reference-onlyとなったものだけ
 
-Phase 0でouter host、callable、import ingress、meaning provider、exact change pathsが一意にならない場合、NO_SAFE_CMEE_V1A_CANDIDATE_STOPとする。
+outer host、callable、import ingress、meaning provider、exact change pathsは、actual product artifactを改善する
+最初のbounded implementation unit内で必要な範囲だけ固定する。同一unitでactual improvementまで
+到達できない場合は開始せず、Phase 0 / P0または類似の先行作業へ分割しない。
 
 ## 9. Current PR #2／G0–G10／CQIF disposition
 
@@ -292,7 +330,7 @@ Full design candidate:
 
 [Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md](../designs/cmee/Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md)
 
-Final P0-R1 executor judgment:
+Historical P0-R1 executor judgment:
 
 [CMEE V1 P0-R1 GitHub-hosted bounded executor — Final Technical Body](../designs/cmee/CMEE_V1_P0R1_GitHubHosted_BoundedExecutor_TechnicalBody_20260815.md)
 
@@ -316,29 +354,19 @@ Lifecycle:
     production / test / dependency / DB / API / RN effect 0
     Cycle001 restart effect 0
 
-このcurrent structure map、full design、detail suiteのmerge自体は実装承認にならない。L3-R bounded preflightとP0 exact1の承認は上記canonical bodyにだけ由来し、dependency採用、implementation、L3-I、Cycle再入場は未承認である。
+このcurrent structure map、full design、detail suiteのmerge自体は実装承認または商品品質向上にならない。
+historical L3-R / P0 / P0-R1 bodyは実行権限を生成せず、standalone L3-Iもcurrent prerequisiteではない。
+実装はFinal Technical Design §0.3に合致するactual product-quality unitの別のMash承認なしに開始しない。
 
 ## 11. Implementation order
 
-1. CMEE three-core architecture and detailed suite defined
-2. Phase 0 current result `NO_SAFE_CMEE_V1A_CANDIDATE_STOP`
-3. Mash L3-R: Route B selectionとbounded preflight technical body v1.0.0を承認済み（2026-08-15 JST）。L3-R成立、P0 exact1はactivation precondition STOPでterminal
-4. P0 exact1はactivation Gateで`P0_ACTIVATION_PRECONDITION_STOP`となり、provider／resource／platform evidence 0のままauthority消費済み。後続のGitHub-hosted P0-R1 executor candidateも`FINAL_TECHNICAL_PROPORTIONALITY_STOP`でpre-execution rejectし、P0-R1 execution 0、next candidate 0
-5. 将来、separate P0 PASS evidenceが得られた場合だけ、separate Mash L3-Iでexact dependency hashes／resource lock／I1 changed-path allowlistを承認
-6. disabled Emlis vertical candidate
-7. representative machine verification + body-full Product Read + bounded correction（I2）
-8. separate fresh applicable 08判断に従うCycle001 Step1 re-entry（planは08が指すrestart / evidence bundle）
-9. Cycle001 product proof
-10. separate E0 approval、ReplyEnvelope / passed-only mapping、protected tests、actual-device proofによるEmlis Observation production cutover
-11. `CMEE_V1A_EMLIS_OBSERVATION_PRODUCTION_OPERATIONAL`
-12. separate V1-B approvalによるEmlis question / refinement operationalization
-13. Piece visual artifact
-14. Analysis observed route
-15. Analysis IF route
-16. second actual consumerでshared contractをformalize
-17. three-core operational proof
-
-CMEE phaseは上位migration順であり、Cycle001のfresh applicable 08 exact1を置き換えない。active planは同格navigation ownerではない。
+1. Phase 0 / P0 / P0-R1とproduct-delta-0 standalone L3-R / L3-Iは歴史証拠としてのみ保持し、current routeから退役。
+2. currentなnext workは、consumer core exact1のactual product artifactを非0に改善するone bounded implementation unit exact1だけ。
+3. source / provider / dependency / resource / test / runner / privacy / Safetyは、同一unitでactual resultまで届けるための必要最小な従属制約としてだけ扱う。
+4. Karenがunchanged input / fixtureのbefore / after actual bodyを全件pre-screenし、明白な低品質が残る場合はMashへ提示せず、同一unit内で商品本文の原因を修正する。
+5. 商品artifactの品質が補助経路へ投入した精度・検証密度を上回った後だけMashへbefore / after resultを提示する。
+6. Mashの確認後だけ商品品質向上、成果またはproduct creditを確定する。Karen / model / subagentはhuman PASSを自己attestしない。
+7. 確認後もCycle001、production cutover、Emlis question、Piece、Analysisまたは次のunitへ自動進行しない。
 
 ## 12. Anti-bloat boundaries
 
@@ -365,24 +393,32 @@ CMEE phaseは上位migration順であり、Cycle001のfresh applicable 08 exact1
 - Emlis-only providerをthree-core universal truthへ昇格しない
 - external network／storage write 0 default
 - API／DB／RN／public route effect 0 default
-- two correction cyclesでnamed MAJOR／BLOCKERが減らなければDETOUR_RISK_STOP
+- actual before / after artifactの品質delta 0なら作業、成果、technical creditとして閉じない
+- product-delta-0のcorrection、preflight、proofまたは測定を次の独立unitへ送らない
 
-規模そのものを禁止しない。三商品の品質へ届く因果とactual improvementがない肥大だけを止める。
+規模の大小ではなく、三商品のactual artifactに非0の品質向上を出さない実装行動を全て禁止する。
 
 ## 13. Current gaps
 
-1. detailed fit-gapで、current formal contractを満たすsafe provider exact1は確認できず、Phase 0 terminalは`NO_SAFE_CMEE_V1A_CANDIDATE_STOP`。
-2. Route B bounded preflight technical body v1.0.0は承認済み。P0 exact1は`P0_ACTIVATION_PRECONDITION_STOP`でterminalとなり、provider/resource/platform measurement evidenceは未取得。
-3. CMEE package、callable、runner ingressは存在しない。
-4. Emlis vertical slice、Piece adapter、Analysis adapterは未実装。
-5. current text coreとPR #2 assetのsymbol-level dispositionはPhase 0で確定が必要。
-6. Cycle001はFORMAL_LEXICAL_AUTHORITY_UNRESOLVEDで停止中。
-7. L3-Rはapproved body identityへ固定され、P0 exact1はactivation Gateで消費・terminal。implementation / dependency / L3-I / Cycle approvalは消費していない。
-8. reviewed GitHub-hosted P0-R1 executor candidateは比例性STOPでpre-execution reject。別executor、P0 boundary、provider、model、version、task、corpus、Route B contractの変更はnew Mash LEVEL_3 decisionを要する。
+1. CMEEによるactual three-core product artifactのMash-confirmed品質向上は未成立。
+2. mashos-api Draft PR #3 head `06ce311b3ea728b06f83439d268a34bed917c01c`には、CMEE source exact5、tests exact2、runner exact1、offline callable verticalが実在し、R1〜R4 / machine structural exact8 8/8まで成立している。
+3. 同verticalはprivate human Product Read `EVALUATED_FAIL_STOP`、candidate ready false、Route B complete false、Product / full-I1 / Cycle001 / production credit 0である。現在の不足はpackageではなく、入力固有の観測、自然さ、非template性、読まれた感を含むactual Emlis artifactの商品品質である。
+4. current text coreとPR #2 assetのsymbol-level dispositionは、direct product unitに必要なsymbolだけ同一unit内で行う。別作業へしない。
+5. Cycle001は`FORMAL_LEXICAL_AUTHORITY_UNRESOLVED`で停止中だが、このblockerの証明強化をproduct-delta-0の独立作業へしない。
+6. correction authorityは0。別のMash明示承認がある場合だけ、current failed exact8をbeforeとするone bounded actual Emlis product-quality unitを開始できる。
+
+Historical gapsとterminal事実:
+
+- detailed fit-gapでsafe provider exact1は確認できず、Phase 0 terminalは`NO_SAFE_CMEE_V1A_CANDIDATE_STOP`だった。
+- P0 exact1は`P0_ACTIVATION_PRECONDITION_STOP`でterminalとなり、provider/resource/platform measurement evidenceは未取得だった。
+- P0-R1 executor candidateは比例性STOPでpre-execution rejectだった。
+- 上記は現在のprerequisite、next Gateまたはalternate routeではない。
 
 ## 14. History and design pointers
 
 - full CMEE final technical design candidate
+- Final Technical Design §0.3 absolute implementation rule
+- Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md
 - CMEE V1 detailed implementation design suite under Cocolon_前提資料/designs/cmee/v1/
 - Cocolon_前提資料/Cocolon_Quality_Intelligence_Foundation_CrossCore_ApplicationPlan_20260814.md
 - Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_安全装置全履歴_20260701_20260813.md
@@ -402,6 +438,7 @@ CMEE phaseは上位migration順であり、Cycle001のfresh applicable 08 exact1
 - active owner cutover／retirement
 - implementation phase／proof state
 - CMEEのauthority boundaryまたはanti-bloat boundary
+- absolute product-quality work boundary
 
 内部logicのみで構造が不変ならSTRUCTURE_MAP_DELTA_NONEと理由を記す。
 
@@ -421,7 +458,11 @@ CMEE phaseは上位migration順であり、Cycle001のfresh applicable 08 exact1
 
 次回はfresh refと実fileを再確認する。
 
-## 17. L3-R approved bounded-preflight envelope
+## 17. Historical L3-R approved bounded-preflight envelope — retired/nonreusable
+
+本章から§19は、2026-08-15のbodyとterminal事実を保存するhistorical evidenceである。
+Phase 0 / P0 / P0-R1、product-quality delta 0のstand-alone L3-R / L3-Iは
+`RETIRED_HISTORICAL_NONREUSABLE`であり、current implementation prerequisite、next Gateまたはreusable authorityではない。
 
 Canonical body:
 
@@ -439,9 +480,12 @@ Cycle001_effect = 0
 automatic_progression = false
 ```
 
-承認済みP0はKWJA 2.5.1 / base / char+word / CPUのexact1候補だけをsynthetic exact12で一回測る。temporary root、acquisition allowlist、license/provenance hard gate、OS/runner isolation、resource ceiling、retry、cleanup、terminalはcanonical bodyを正本とする。P0 PASSもprovider/resource/platform evidenceだけであり、L3-I、I1、Product Read、production、Cycle creditへ換算しない。
+当時の承認済みP0はKWJA 2.5.1 / base / char+word / CPUのexact1候補だけをsynthetic exact12で
+一回測るbodyだった。そのbodyとidentityは履歴として保持するが、execution、reapproval、retry、
+rename、alternate executor / providerまたはsuccessor P0は0である。Route Bのmeaning sovereignty、unknown、
+no-promotion条件だけをdirect product-quality unit内の不変制約として保持する。
 
-## 18. P0 actual terminal — 2026-08-15 JST
+## 18. Historical P0 actual terminal — 2026-08-15 JST
 
 Body-free result:
 
@@ -459,9 +503,9 @@ primary_outcome = BLOCKER_NARROWED
 automatic_progression = false
 ```
 
-current Work executorはapproved acquisition channelを提供せず、activation cp312 childも開始前に停止した。後段のisolation、license/provenance、package/resource、synthetic exact12は未評価であり、未実行をFAIL/PASSへ変換しない。P0 authorityは消費済みで再利用しない。
+current Work executorはapproved acquisition channelを提供せず、activation cp312 childも開始前に停止した。後段のisolation、license/provenance、package/resource、synthetic exact12は未評価であり、未実行をFAIL/PASSへ変換しない。P0 authorityは消費済みで、current authority、product credit、implementation prerequisiteまたはretryは0である。
 
-## 19. P0-R1 GitHub-hosted executor final proportionality STOP
+## 19. Historical P0-R1 GitHub-hosted executor final proportionality STOP
 
 Final technical body:
 
@@ -485,4 +529,4 @@ reusable_execution_product_cycle_credit = 0
 automatic_progression = false
 ```
 
-このSTOPはreviewed current GitHub-hosted executor candidateだけを棄却し、GitHub-hosted runner一般、Route B、KWJAまたはCMEEを失敗判定しない。既存P0 terminalは`P0_ACTIVATION_PRECONDITION_STOP`のままである。別executorまたはP0 boundary、provider、model、version、task、corpus、Route B contractを変える場合はnew Mash LEVEL_3 decisionへ戻り、自動でalternate candidateを作らない。
+このSTOPはreviewed GitHub-hosted executor candidateだけを棄却し、GitHub-hosted runner一般、Route B、KWJAまたはCMEEを失敗判定したものではなかった。当時の「別executor等はnew Mash LEVEL_3 decisionへ戻る」というfuture routeはFinal Technical Design §0.3がsupersedeした。別executor、P0 boundary、provider、model、version、task、corpus、rename、類似preflightまたはsuccessorによるP0 / P0-R1の再承認・復活は0である。
