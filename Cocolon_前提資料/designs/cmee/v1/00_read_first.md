@@ -1,10 +1,11 @@
 # CMEE V1 詳細設計 — Read First
 
 - document id: `cocolon.cmee.v1.detailed_design.read_first`
-- revision date: `2026-08-16 JST`
+- revision date: `2026-08-17 JST`
 - decision owner: `Mash`
 - technical design owner: `Ultra華恋`
 - architecture parent: [Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md](../Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md)
+- NLSv3 inheritance input: [NLSv3_to_CMEE_Disposition_Phase1_20260817.md](../NLSv3_to_CMEE_Disposition_Phase1_20260817.md)
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - effective when: `MERGED_TO_COCOLON_MAIN_AS_DESIGN_OWNER`
 - implementation approval: `NOT_GRANTED_BY_THIS_SUITE`
@@ -14,6 +15,7 @@
 - Phase 0 / P0 / P0-R1 / standalone product-delta-0 L3-R / L3-I lifecycle: `RETIRED_HISTORICAL_NONREUSABLE`
 - current implementation rule: `PRODUCT_QUALITY_DELTA_GT_0_AND_MASH_CONFIRMED_ONLY`
 - current implementation state: `DRAFT_WIP_DISABLED_PRODUCT_FAIL`
+- Phase 2 design correction state: `TOP_LEVEL_NAVIGATION_ALIGNED`
 - current authorized next implementation: `NONE`
 - automatic progression: `false`
 
@@ -60,32 +62,82 @@ product creditへ変換しない。この規則のためのnew Gate、checker、
 この規則の理由となった事実記録:
 [EmlisAI商品中核の後回しとCMEE Product Read失敗](../../../audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md)。
 
-## 1. 読む順 exact7
+### 0.2 NLSv3継承に関する第2段階の境界
+
+第1段階の事実整理は、
+[NLSv3 → CMEE Disposition表](../NLSv3_to_CMEE_Disposition_Phase1_20260817.md)
+が所有する。同表は`REVIEWED_NONAUTHORITY / NLSV3_TO_CMEE_MIGRATION_INPUT`であり、設計正本、実装承認、
+Cycle001再開authorityまたはproduction cutover authorityではない。第2段階では同表の分類とevidence indexを根拠に、
+既存のFinal／Detailed Design ownerだけを必要な範囲で補正する。
+
+NLSv3は捨てない。同時に、NLSv3とCMEEを二つの現役EmlisAI生成エンジンとして残さない。継承は大規模な
+PR #2 recovery／surface実装をCMEEから丸ごと呼ぶwrapper方式ではなく、責任・使えるsymbol・test vector・corpus・
+failure knowledge・Product Read方法を、それぞれのcurrent CMEE ownerへ移す方式とする。
+
+継承区分は次のとおりである。
+
+1. 三商品で共通するsource identity、evidence、meaning、unknown、semantic duty、plan、trace、artifact identity、machine／human分離はshared ownerへ置く。
+2. App-Reachable Input、Observation、bound Reception、Emlisの声・距離・深さ、自然な日本語、body-only reverse、current100商品評価はEmlis routeへ置く。
+3. Pieceには完成物から意味を戻す思想をtext＋visual用へ改良し、Analysisにはnode／edge／direction／IF provenance用へ改良して置く。
+4. NLSv3の失敗case、mutation、回帰test、corpus、changed-output rereadはtest／failure knowledgeとして保持する。
+5. Gate、Receipt、controller、executor、FD、長いauthority chain等の運用外殻はhistorical evidenceとして保持し、current routeへ復活させない。
+
+切替はexact2の別境界で行う。
+
+```text
+A. Cycle001 candidate ingress cutover
+   CMEE Cycle candidate ingress exact1
+   NLSv3 direct recovery ingress 0
+
+B. Production generation cutover
+   Cycle proofと別のMash判断後
+   CMEE Emlis generation owner exact1
+   current production direct generation ingress 0
+```
+
+AとBを同一承認または同時cutoverへまとめない。第2段階のdesign correction自体から、A、B、実装、runner、
+Product Read、PieceまたはAnalysis activationへ自動進行しない。
+
+第2段階の整理順は次のexact5とする。
+
+1. Final Designと本Read Firstで最上位の継承方針・読み順を揃える。
+2. shared kernelとschemaで共通責任、identity、lineageの置き場所を揃える。
+3. Emlis detailで商品中核、body-only reverse、natural／anti-template、separate safetyを揃える。
+4. migration designでasset単位の移管、二段階cutover、旧owner退役を揃える。
+5. Piece／Analysis detailへ将来改良する確認責任だけを明記する。
+
+一つのphase資料を新設せず、既存ownerを順に修正する。第3段階のcurrent structure map／商品経路地図修正は、
+上記design ownerの責任境界が揃った後に別write unitで行う。
+
+## 1. 読む順 exact8
 
 1. 本file
-2. [01_shared_kernel_and_runtime_contracts.md](01_shared_kernel_and_runtime_contracts.md)
-3. [05_json_schema_and_versioning.md](05_json_schema_and_versioning.md)
-4. 実装対象coreの詳細設計
+2. [NLSv3 → CMEE Disposition表](../NLSv3_to_CMEE_Disposition_Phase1_20260817.md)
+3. [01_shared_kernel_and_runtime_contracts.md](01_shared_kernel_and_runtime_contracts.md)
+4. [05_json_schema_and_versioning.md](05_json_schema_and_versioning.md)
+5. 実装対象coreの詳細設計
    - [02_emlis_v1a_detailed_design.md](02_emlis_v1a_detailed_design.md)
    - [03_piece_v1c_detailed_design.md](03_piece_v1c_detailed_design.md)
    - [04_analysis_v1d_v1e_detailed_design.md](04_analysis_v1d_v1e_detailed_design.md)
-5. [06_implementation_order_migration_and_verification.md](06_implementation_order_migration_and_verification.md)
-6. `../../../current_structure/04_cmee_current_structure.md`
-7. 対象coreのcurrent structure mapとactual source / contract / test
+6. [06_implementation_order_migration_and_verification.md](06_implementation_order_migration_and_verification.md)
+7. `../../../current_structure/04_cmee_current_structure.md`
+8. 対象coreのcurrent structure mapとactual source / contract / test
 
-このsuiteだけでcurrent実装状態を決めない。current structure mapを地図、GitHubのactual source / testを現物として両方確認する。
+Disposition表だけでcurrent実装状態や移管完了を決めない。本suiteだけでcurrent実装状態を決めず、current structure mapを地図、
+GitHubのactual source / testを現物として両方確認する。
 
 ## 2. 文書別authority
 
 | File | Owns | Does not own |
 |---|---|---|
-| `00_read_first.md` | 読み順、lifecycle、suite全体の非影響 | runtime contract詳細 |
+| `00_read_first.md` | 読み順、lifecycle、suite全体の非影響、NLSv3継承の第2段階routing | runtime contract詳細、asset単位の最終移管 |
+| `../NLSv3_to_CMEE_Disposition_Phase1_20260817.md` | 第1段階の分類、受け皿、重複・欠落、evidence index | design authority、implementation authority、移管完了claim |
 | `01_shared_kernel_and_runtime_contracts.md` | shared logical architecture、ports、pipeline、failure | core固有商品判断 |
 | `02_emlis_v1a_detailed_design.md` | Emlis observation vertical、question lifecycle、Cycle境界 | Piece / Analysis activation |
 | `03_piece_v1c_detailed_design.md` | share artifact、visual spec、identity、clean cutover | renderer implementation / DB activation |
 | `04_analysis_v1d_v1e_detailed_design.md` | observed route、IF graph、projection、identity | current Watashi Mapの無承認置換 |
 | `05_json_schema_and_versioning.md` | canonical draft schemas、identity、versioning | production schema registration |
-| `06_implementation_order_migration_and_verification.md` | current product-quality implementation unitとretired historical packet記録、migration | 実装開始authority |
+| `06_implementation_order_migration_and_verification.md` | current product-quality implementation unit、NLSv3 asset migration、二段階cutover、retired historical packet記録 | 実装開始authority |
 
 ## 3. Fixed architecture decisions
 
@@ -99,6 +151,8 @@ product creditへ変換しない。この規則のためのnew Gate、checker、
 8. user source、provisional meaning、hypothesis、simulation、saved intentを型で分離する。
 9. original sourceをuser correctionやsupplemental answerでretroactive mutationしない。
 10. API / DB / RLS / RN / public routeはcore lifecycle ownerに残し、CMEE packageの初期実装で変更しない。
+11. NLSv3は責任・symbol・test・corpus・failure knowledgeをowner単位でCMEEへ継承し、PR #2全体をCMEE hostへwrapしない。
+12. Cycle001 candidate ingress cutoverとproduction generation cutoverは別approval・別write unitとし、最終的にactive Emlis generation owner exact1へ収束する。
 
 ## 4. Historical Japanese linguistic provider recommendation state
 
