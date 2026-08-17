@@ -1,18 +1,21 @@
 # CMEE V1 — JSON Schema / Identity / Versioning 詳細設計
 
 - document id: `cocolon.cmee.v1.schema_and_versioning.detailed_design`
+- revision date: `2026-08-17 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
+- Phase 2 product-route verdict: `ADOPT_WITH_BOUNDED_CORRECTIONS_REFLECTED`
+- canonical field / ref / schema / version owner: `THIS_FILE`
 - schema registration: `NOT_REGISTERED`
-- runtime serialization effect: `0`
+- runtime serialization / implementation / cutover effect: `0`
 - DB / API effect: `0`
 
 ---
 
 ## 0. Purpose
 
-本fileは、Python contractとdurable artifact identityのずれを防ぐため、CMEE V1のschema shapeを固定する。
+本fileはCMEE V1中心設計exact3におけるcanonical field名、required／optional、ref encoding、schema ID、version、identity material、machine-only projectionのsole ownerである。Final Technical Designはauthority／cutover、`01_shared_kernel_and_runtime_contracts.md`はruntime semantics／validation、各core designはproduct duty／human Product Readを所有し、本fileのfield shapeを重複定義しない。
 
-ここにあるschemaはimplementation candidateであり、production registry、API wire、DB columnを作らない。Phaseごとにactual consumerと一緒にmaterializeし、unused schema fileを先行作成しない。
+ここにあるschemaはimplementation candidateであり、production registry、API wire、DB columnを作らない。Phaseごとにactual consumerと一緒にmaterializeし、unused schema fileを先行作成しない。current PR #3の実装shapeはWIP evidenceであり、本fileと同名のsecond schema ownerにはしない。
 
 ## 1. Schema catalog
 
@@ -21,6 +24,7 @@
 | `cocolon.cmee.generation_request_meta.v1alpha1` | internal body-free request metadata | V1-A candidate |
 | `cocolon.cmee.source_envelope_meta.v1alpha1` | body-free | V1-A candidate |
 | `cocolon.cmee.evidence_span.v1alpha1` | private body-full | V1-A candidate |
+| `cocolon.cmee.evidence_graph.v1alpha1` | private body-full aggregate | V1-A candidate |
 | `cocolon.cmee.japanese_attachment_set.v1alpha1` | private body-full | provider admission candidate |
 | `cocolon.cmee.japanese_attachment_admission.v1alpha1` | internal body-free assessment | provider admission candidate |
 | `cocolon.cmee.grounded_meaning_graph.v1alpha1` | private body-full | V1-A candidate |
@@ -140,7 +144,7 @@ constraints:
     },
     "parent_source_refs": {
       "type": "array",
-      "items": {"type": "string", "minLength": 1},
+      "items": {"type": "string", "pattern": "^source:[^@]+@[^@]+$"},
       "uniqueItems": true
     },
     "material_present": {
@@ -200,6 +204,8 @@ body-free `SourceEnvelopeMeta`はraw user ID、raw text、private locator、sour
 ```
 
 JSONはbodyを持たないmetadata projectionであり、単独ではengine invocationではない。runtime public callableが受けるPython `GenerationRequest`はrequest-local / nonserializableである。
+
+`execution_scope`はrequest-local ingress routing contextに限る。Final Design／migration ownerが別に承認したentryを選ぶためにだけ使い、cutover approval、generation owner、meaning claim、relation、epistemic state、duty、trace、artifact bytesを決めない。`GroundedMeaningGraph`、`ExperiencePlan`、`GenerationArtifactBundle`のmeaning、artifact identity／lineage、machine reportのevaluated identity、human Product Read identityへ含めない。同じsource／meaning／plan／artifact bytesはlaneだけで別identityにならない。
 
 ```python
 @dataclass(frozen=True, slots=True, repr=False)
@@ -262,31 +268,34 @@ AnalysisSaveRouteIntentRequestPrivate:
 
 `ANALYSIS_SAVE_ROUTE_INTENT`の`source_inputs_private`には、ユーザーが選択したという真正な操作materialを`SIMULATION_SESSION_MATERIAL`としてexact1含める。optional noteも別SourceEnvelopeにする。scenario set / scenario graph / simulation artifactは`parent_artifact_refs`でありsourceではない。
 
-## 4. `EvidenceSpan`
+## 4. `EvidenceSpan` and `EvidenceGraph`
 
-private-only conceptual schema:
+`SourceEnvelopeMeta`のlogical source identityと、`SourceMaterialPrivate`のcontent-bound fieldを分ける。Evidenceはfield-relative Unicode scalar range、source全体でのabsolute UTF-8 byte range、field digest、literal digestへ同時にbindする。
 
 ```json
 {
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "cocolon.cmee.evidence_span.v1alpha1",
   "type": "object",
   "additionalProperties": false,
   "required": [
     "evidence_id",
-    "source_id",
-    "source_version",
+    "evidence_version",
+    "source_ref",
     "source_field",
-    "source_body_sha256",
+    "source_field_sha256",
+    "literal_utf8_sha256",
     "scalar_range",
-    "utf8_byte_range",
+    "absolute_utf8_byte_range",
     "role"
   ],
   "properties": {
-    "evidence_id": {"type": "string"},
-    "source_id": {"type": "string"},
-    "source_version": {"type": "string"},
-    "source_field": {"type": "string"},
-    "source_body_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "evidence_id": {"type": "string", "minLength": 1},
+    "evidence_version": {"type": "integer", "minimum": 1},
+    "source_ref": {"type": "string", "pattern": "^source:[^@]+@[^@]+$"},
+    "source_field": {"type": "string", "minLength": 1},
+    "source_field_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "literal_utf8_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
     "scalar_range": {
       "type": "array",
       "prefixItems": [
@@ -295,7 +304,7 @@ private-only conceptual schema:
       ],
       "items": false
     },
-    "utf8_byte_range": {
+    "absolute_utf8_byte_range": {
       "type": "array",
       "prefixItems": [
         {"type": "integer", "minimum": 0},
@@ -310,7 +319,68 @@ private-only conceptual schema:
 }
 ```
 
-validatorは`start < end`、scalarとUTF-8 rangeの同一substring、source version一致、overlap policyをcodeで検証する。
+validatorは`start < end`、scalar rangeとabsolute UTF-8 rangeが同じliteral bytesを指すこと、field／literal digest、source version、role、overlap policyをcodeで再検証する。
+
+### 4.1 `EvidenceGraph`
+
+`EvidenceGraph`はS2のprivate aggregate contractであり、EvidenceSpanのsecond identity ownerではない。
+
+```json
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cocolon.cmee.evidence_graph.v1alpha1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_graph_id",
+    "evidence_graph_version",
+    "source_bindings",
+    "required_source_refs",
+    "unknown_boundary_evidence_refs",
+    "spans"
+  ],
+  "properties": {
+    "schema_version": {"const": "cocolon.cmee.evidence_graph.v1alpha1"},
+    "evidence_graph_id": {"type": "string", "minLength": 1},
+    "evidence_graph_version": {"type": "integer", "minimum": 1},
+    "source_bindings": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_ref", "source_role"],
+        "properties": {
+          "source_ref": {"type": "string", "pattern": "^source:[^@]+@[^@]+$"},
+          "source_role": {
+            "enum": [
+              "ORIGINAL_INPUT", "OWNED_HISTORY_RECORD", "SUPPLEMENTAL_ANSWER",
+              "PERIOD_METADATA", "USER_CORRECTION", "SIMULATION_SESSION_MATERIAL"
+            ]
+          }
+        }
+      }
+    },
+    "required_source_refs": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^source:[^@]+@[^@]+$"},
+      "uniqueItems": true
+    },
+    "unknown_boundary_evidence_refs": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^evidence:[^@]+@[^@]+$"},
+      "uniqueItems": true
+    },
+    "spans": {
+      "type": "array",
+      "items": {"$ref": "cocolon.cmee.evidence_span.v1alpha1"}
+    }
+  }
+}
+```
+
+`evidence:<evidence_id>@<evidence_version>`と`evidence-graph:<graph_id>@<graph_version>`をcanonical refsとする。`source_bindings`はsource identity／roleをfreezeし、required source refsはbindingsのsubset、unknown-boundary refsは`spans`内の`UNKNOWN_BOUNDARY`へ解決しなければならない。foreign source、duplicate evidence ID、unresolved ref、source version mismatchをrejectする。graphはrequest-local private body-fullでraw bodyを複製せず、public reportへsource ref、range、digestまたはliteralを出さない。
 
 ## 5. `JapaneseAttachmentSet`
 
@@ -634,6 +704,8 @@ JSON Schemaのshape validationだけでformal authorityを証明しない。
     "graph_version",
     "core_id",
     "source_refs",
+    "evidence_graph_ref",
+    "meaning_derivation_mode",
     "attachment_admission_ref",
     "epistemic_partition",
     "nodes",
@@ -644,21 +716,51 @@ JSON Schemaのshape validationだけでformal authorityを証明しない。
     "graph_id": {"type": "string"},
     "graph_version": {"type": "integer", "minimum": 1},
     "core_id": {"enum": ["EMLIS_AI", "PIECE", "ANALYSIS"]},
-    "source_refs": {"type": "array", "items": {"type": "string"}},
-    "attachment_admission_ref": {"type": "string"},
-    "epistemic_partition": {
-      "const": "SOURCE_BOUND_PROVISIONAL"
-    },
-    "nodes": {
+    "source_refs": {
       "type": "array",
-      "items": {"$ref": "#/$defs/node"}
+      "minItems": 1,
+      "items": {"type": "string", "pattern": "^source:[^@]+@[^@]+$"},
+      "uniqueItems": true
     },
-    "edges": {
-      "type": "array",
-      "items": {"$ref": "#/$defs/edge"}
+    "evidence_graph_ref": {
+      "type": "string",
+      "pattern": "^evidence-graph:[^@]+@[^@]+$"
     },
+    "meaning_derivation_mode": {
+      "enum": ["SOURCE_OR_USER_EVIDENCE_ONLY", "FORMAL_ATTACHMENT_ADMITTED"]
+    },
+    "attachment_admission_ref": {
+      "type": ["string", "null"],
+      "pattern": "^attachment-admission:[^@]+@[^@]+$"
+    },
+    "epistemic_partition": {"const": "SOURCE_BOUND_PROVISIONAL"},
+    "nodes": {"type": "array", "items": {"$ref": "#/$defs/node"}},
+    "edges": {"type": "array", "items": {"$ref": "#/$defs/edge"}},
     "status": {"enum": ["GROUNDED", "PARTIAL", "UNAVAILABLE"]}
   },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"meaning_derivation_mode": {"const": "SOURCE_OR_USER_EVIDENCE_ONLY"}},
+        "required": ["meaning_derivation_mode"]
+      },
+      "then": {"properties": {"attachment_admission_ref": {"type": "null"}}}
+    },
+    {
+      "if": {
+        "properties": {"meaning_derivation_mode": {"const": "FORMAL_ATTACHMENT_ADMITTED"}},
+        "required": ["meaning_derivation_mode"]
+      },
+      "then": {
+        "properties": {
+          "attachment_admission_ref": {
+            "type": "string",
+            "pattern": "^attachment-admission:[^@]+@[^@]+$"
+          }
+        }
+      }
+    }
+  ],
   "$defs": {
     "node": {
       "type": "object",
@@ -676,7 +778,10 @@ JSON Schemaのshape validationだけでformal authorityを証明しない。
             "USER_CORRECTED", "UNKNOWN", "CONFLICT"
           ]
         },
-        "evidence_refs": {"type": "array", "items": {"type": "string"}},
+        "evidence_refs": {
+          "type": "array",
+          "items": {"type": "string", "pattern": "^evidence:[^@]+@[^@]+$"}
+        },
         "polarity": {"type": "string"},
         "modality": {"type": "string"},
         "temporal_scope": {"type": "string"},
@@ -702,7 +807,10 @@ JSON Schemaのshape validationだけでformal authorityを証明しない。
             "USER_CORRECTED", "UNKNOWN", "CONFLICT"
           ]
         },
-        "evidence_refs": {"type": "array", "items": {"type": "string"}},
+        "evidence_refs": {
+          "type": "array",
+          "items": {"type": "string", "pattern": "^evidence:[^@]+@[^@]+$"}
+        },
         "provenance": {"type": "string"}
       }
     }
@@ -710,7 +818,9 @@ JSON Schemaのshape validationだけでformal authorityを証明しない。
 }
 ```
 
-graphはuser truthではない。user correctionはoriginal graphをin-place変更せず、新source / graph versionとderivation lineageを作る。
+`SOURCE_OR_USER_EVIDENCE_ONLY`ではvisible claim全量を`SOURCE_EXPLICIT | USER_CONFIRMED | USER_CORRECTED`へ限定し、provider-derived meaning／relation／attachmentを0にする。required source coverage、unknown preservation、polarity／modality／time、evidence binding、no-added-claimをcross-field validatorで確認する。
+
+`FORMAL_DERIVED` node／edgeが一つでもあればmodeを`FORMAL_ATTACHMENT_ADMITTED`、version-qualified admission refをnon-nullとし、formal admissionとevidenceを両方要求する。provider-required routeのfailure後にmodeをsource-onlyへ変えない。graphはuser truthではなく、user correctionはoriginal graphをin-place変更せずnew source／graph versionとderivation lineageを作る。
 
 ## 7. `HypotheticalScenarioGraph`
 
@@ -735,10 +845,10 @@ graphはuser truthではない。user correctionはoriginal graphをin-place変�
   "properties": {
     "scenario_graph_id": {"type": "string"},
     "scenario_graph_version": {"type": "integer", "minimum": 1},
-    "base_observed_map_ref": {"type": "string"},
-    "base_route_ref": {"type": "string"},
+    "base_observed_map_ref": {"type": "string", "pattern": "^artifact:[^@]+@[^@]+$"},
+    "base_route_ref": {"type": "string", "pattern": "^route:[^@]+@[^@]+$"},
     "branch_point_id": {"type": "string"},
-    "branch_intent_source_ref": {"type": "string"},
+    "branch_intent_source_ref": {"type": "string", "pattern": "^source:[^@]+@[^@]+$"},
     "constraint_source_refs": {
       "type": "array",
       "items": {"type": "string"},
@@ -810,7 +920,7 @@ scenario nodeは`origin = OBSERVED_ANCHOR | USER_CHOICE | SIMULATED_EXTENSION | 
     "product_job": {
       "enum": ["OBSERVE_AND_CLARIFY", "EXPRESS_AND_SHARE", "MAP_AND_EXPLORE"]
     },
-    "semantic_graph_ref": {"type": "string"},
+    "semantic_graph_ref": {"type": "string", "pattern": "^(grounded|hypothetical):[^@]+@[^@]+$"},
     "duties": {
       "type": "array",
       "items": {
@@ -823,7 +933,7 @@ scenario nodeは`origin = OBSERVED_ANCHOR | USER_CHOICE | SIMULATED_EXTENSION | 
         "properties": {
           "duty_id": {"type": "string"},
           "duty_kind": {"type": "string"},
-          "semantic_refs": {"type": "array", "items": {"type": "string"}},
+          "semantic_refs": {"type": "array", "items": {"type": "string", "pattern": "^(node|edge):[^@]+@[^@]+$"}},
           "retention": {"enum": ["REQUIRED", "OPTIONAL", "DEFERRED"]},
           "allowed_operations": {"type": "array", "items": {"type": "string"}},
           "forbidden_operations": {"type": "array", "items": {"type": "string"}}
@@ -861,6 +971,10 @@ scenario nodeは`origin = OBSERVED_ANCHOR | USER_CHOICE | SIMULATED_EXTENSION | 
 }
 ```
 
+`ExperiencePlan.duties[]`はshared plan-dutyのsole canonical recordである。source coverage denominator、meaning graph、core product taxonomyまたはhuman Product Readをdutiesへ混ぜない。current PR #3の`SourceOwnerUniverse`と`RouteBOwnerDisposition`はcatalogへshared schemaとして追加せず、Emlis provisional specializationとして§16で扱う。
+
+plan／graph／semantic refsはversion-qualifiedにする。同一plan内のlocal duty ID／artifact-plan IDはそのplan versionのnamespace内だけで有効であり、別planからbare IDで参照しない。
+
 ## 9. `GenerationArtifactBundle`
 
 ```json
@@ -884,7 +998,7 @@ scenario nodeは`origin = OBSERVED_ANCHOR | USER_CHOICE | SIMULATED_EXTENSION | 
     "primary_artifact",
     "companion_artifacts",
     "realization_trace_ref",
-    "quality_report_ref",
+    "machine_quality_report_ref",
     "lifecycle_bindings",
     "status"
   ],
@@ -917,14 +1031,14 @@ scenario nodeは`origin = OBSERVED_ANCHOR | USER_CHOICE | SIMULATED_EXTENSION | 
     },
     "semantic_graph_ref": {
       "oneOf": [
-        {"type": "string", "pattern": "^grounded:"},
-        {"type": "string", "pattern": "^hypothetical:"},
-        {"type": "string", "pattern": "^scenario-set:"}
+        {"type": "string", "pattern": "^grounded:[^@]+@[^@]+$"},
+        {"type": "string", "pattern": "^hypothetical:[^@]+@[^@]+$"},
+        {"type": "string", "pattern": "^scenario-set:[^@]+@[^@]+$"}
       ]
     },
-    "experience_plan_ref": {"type": "string"},
-    "parent_artifact_refs": {"type": "array", "items": {"type": "string"}},
-    "derivation_lineage": {"type": "array", "items": {"type": "string"}},
+    "experience_plan_ref": {"type": "string", "pattern": "^plan:[^@]+@[^@]+$"},
+    "parent_artifact_refs": {"type": "array", "items": {"type": "string", "pattern": "^artifact:[^@]+@[^@]+$"}},
+    "derivation_lineage": {"type": "array", "items": {"type": "string", "pattern": "^artifact:[^@]+@[^@]+$"}},
     "primary_artifact": {
       "oneOf": [
         {"$ref": "#/$defs/emlis"},
@@ -938,8 +1052,8 @@ scenario nodeは`origin = OBSERVED_ANCHOR | USER_CHOICE | SIMULATED_EXTENSION | 
       "type": "array",
       "items": {"$ref": "#/$defs/companionArtifactRef"}
     },
-    "realization_trace_ref": {"type": "string"},
-    "quality_report_ref": {"type": "string"},
+    "realization_trace_ref": {"type": "string", "pattern": "^trace:[^@]+@[^@]+$"},
+    "machine_quality_report_ref": {"type": "string", "pattern": "^machine-report:[^@]+@[^@]+$"},
     "lifecycle_bindings": {"$ref": "#/$defs/lifecycleBindings"},
     "status": {"enum": ["GENERATED", "LIMITED"]}
   },
@@ -960,7 +1074,7 @@ scenario nodeは`origin = OBSERVED_ANCHOR | USER_CHOICE | SIMULATED_EXTENSION | 
       "additionalProperties": false,
       "required": ["artifact_ref", "artifact_kind", "relation"],
       "properties": {
-        "artifact_ref": {"type": "string"},
+        "artifact_ref": {"type": "string", "pattern": "^artifact:[^@]+@[^@]+$"},
         "artifact_kind": {"type": "string"},
         "relation": {"enum": ["CLARIFIES", "PROJECTS", "DERIVES_FROM", "CONTINUES"]}
       }
@@ -973,7 +1087,7 @@ scenario nodeは`origin = OBSERVED_ANCHOR | USER_CHOICE | SIMULATED_EXTENSION | 
         "canonical_content_hash": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
         "version_set": {"type": "object", "additionalProperties": {"type": "string"}},
         "storage_owner": {"type": "string"},
-        "projection_refs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+        "projection_refs": {"type": "array", "items": {"type": "string", "pattern": "^artifact:[^@]+@[^@]+$"}, "uniqueItems": true}
       }
     },
     "emlis": {
@@ -1042,6 +1156,8 @@ scenario nodeは`origin = OBSERVED_ANCHOR | USER_CHOICE | SIMULATED_EXTENSION | 
 `artifact_kind`、`primary_artifact.kind`、core、product job、partition、graph prefix / identityの一つでも不一致ならREJECTする。PieceをHYPOTHETICALにする、observed mapをscenario setへbindする、SavedRouteIntentをobserved graphへbindする等はschema shapeが通ってもadmitしない。
 
 `source_commitments`はprivate bundle内でSource ID / version / private digest refを固定する。public API / telemetryへこのobjectをそのまま投影しない。public-safe reportはanonymous countsとapproved provider / schema / artifact identityだけを持つ。
+
+`GenerationArtifactBundle`はvisible artifactがある`GENERATED | LIMITED`だけを持つ。`machine_quality_report_ref`は`MACHINE_ONLY` reportへのversion-qualified参照であり、human Product Read verdictではない。human evaluationはimmutable `artifact:<artifact_id>@<artifact_version>`を外側から参照し、bundle、status、canonical identityまたはlineageをmutateしない。`execution_scope`、A／B lane、cutover stateはbundle fieldにもidentity materialにも含めない。
 
 ### 9.1 `ClarificationRequest`
 
@@ -1233,6 +1349,8 @@ scenario nodeは`origin = OBSERVED_ANCHOR | USER_CHOICE | SIMULATED_EXTENSION | 
 ```
 
 Analysis partial observed mapは`GENERATED`でありfailureではない。outer `GENERATED | LIMITED`はbundle statusとexact matchする。Emlis `QUESTION_PENDING`は`LIMITED`のpre-question observation bundle、Observation block、bound Receptionを必須とする。Analysis IF情報不足はbundle null exact1とする。どちらもtyped clarificationを必須とし、Analysisのstorage / latest mutationは0である。Schemaに加え、artifact kind / primary variant / core IDの全一致をcode-level validatorでも固定する。
+
+`SEPARATE_SAFETY`はartifact bundle nullのtyped non-generation outcomeだけを表す。public safe response、current production safety owner、B cutover admissibilityまたはproduction ingress authorityを意味しない。このschemaからsafe-response／public-behavior mappingを作らず、Final／migration ownerがB前にsingle owner、silent empty 0、fallback／dual-run 0を別判断で固定する。
 
 ### 9.3 Piece contract profile
 
@@ -1578,7 +1696,7 @@ included memberは`child_source_envelope_refs`に`ORIGINAL_INPUT` exact1と、�
   ],
   "properties": {
     "projection_id": {"type": "string"},
-    "projection_of": {"type": "string"},
+    "projection_of": {"type": "string", "pattern": "^artifact:[^@]+@[^@]+$"},
     "node_specs": {"type": "array", "items": {"$ref": "#/$defs/nodeSpec"}},
     "edge_specs": {"type": "array", "items": {"$ref": "#/$defs/edgeSpec"}},
     "lane_specs": {"type": "array", "items": {"$ref": "#/$defs/laneSpec"}},
@@ -1705,7 +1823,7 @@ included memberは`child_source_envelope_refs`に`ORIGINAL_INPUT` exact1と、�
   "properties": {
     "schema_version": {"const": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1"},
     "wire_kind": {"const": "watashi.map.v2"},
-    "projection_of": {"type": "string", "minLength": 1},
+    "projection_of": {"type": "string", "pattern": "^artifact:[^@]+@[^@]+$"},
     "artifact_version": {"type": "integer", "minimum": 1},
     "period_label": {"type": "string"},
     "period_comparison": {
@@ -1843,11 +1961,11 @@ included memberは`child_source_envelope_refs`に`ORIGINAL_INPUT` exact1と、�
     "kind": {"const": "ANALYSIS_IF_ROUTE_SIMULATION"},
     "wire_kind": {"const": "watashi.if-route.v1"},
     "scenario_artifact_ref": {"type": "string", "pattern": "^analysis-if-scenario:"},
-    "base_observed_map_ref": {"type": "string"},
-    "base_route_ref": {"type": "string"},
+    "base_observed_map_ref": {"type": "string", "pattern": "^artifact:[^@]+@[^@]+$"},
+    "base_route_ref": {"type": "string", "pattern": "^route:[^@]+@[^@]+$"},
     "branch_point_id": {"type": "string"},
     "scenario_graph_ref": {"type": "string", "pattern": "^hypothetical:"},
-    "branch_intent_source_ref": {"type": "string"},
+    "branch_intent_source_ref": {"type": "string", "pattern": "^source:[^@]+@[^@]+$"},
     "condition_refs": {"type": "array", "items": {"type": "string"}},
     "unmodelled_factor_refs": {"type": "array", "items": {"type": "string"}},
     "text_projection_ref": {"type": "string"},
@@ -1872,8 +1990,8 @@ included memberは`child_source_envelope_refs`に`ORIGINAL_INPUT` exact1と、�
     "kind": {"const": "ANALYSIS_IF_SCENARIO_SET"},
     "wire_kind": {"const": "watashi.if-route-set.v1"},
     "candidate_set_id": {"type": "string", "pattern": "^scenario-set:"},
-    "base_observed_map_ref": {"type": "string"},
-    "base_route_ref": {"type": "string"},
+    "base_observed_map_ref": {"type": "string", "pattern": "^artifact:[^@]+@[^@]+$"},
+    "base_route_ref": {"type": "string", "pattern": "^route:[^@]+@[^@]+$"},
     "scenarios": {
       "type": "array", "minItems": 1, "maxItems": 3,
       "items": {"$ref": "cocolon.cmee.analysis_if_route_payload.v1alpha1"}
@@ -1902,8 +2020,8 @@ included memberは`child_source_envelope_refs`に`ORIGINAL_INPUT` exact1と、�
   "properties": {
     "kind": {"const": "ANALYSIS_SAVED_ROUTE_INTENT"},
     "wire_kind": {"const": "watashi.saved-route-intent.v1"},
-    "source_scenario_set_ref": {"type": "string", "pattern": "^scenario-set:"},
-    "selected_scenario_ref": {"type": "string", "pattern": "^analysis-if-scenario:"},
+    "source_scenario_set_ref": {"type": "string", "pattern": "^scenario-set:[^@]+@[^@]+$"},
+    "selected_scenario_ref": {"type": "string", "pattern": "^analysis-if-scenario:[^@]+@[^@]+$"},
     "selection_source_ref": {"type": "string"},
     "user_note_source_ref": {"type": ["string", "null"]},
     "saved_at": {"type": "string", "format": "date-time"}
@@ -1925,9 +2043,9 @@ validatorは`selected_scenario_ref`が`source_scenario_set_ref`のmember exact1�
   "properties": {
     "schema_version": {"const": "cocolon.cmee.analysis_if_safe_projection.v1alpha1"},
     "wire_kind": {"const": "watashi.if-route-set.v1"},
-    "projection_of": {"type": "string"},
-    "base_observed_map_ref": {"type": "string"},
-    "base_route_ref": {"type": "string"},
+    "projection_of": {"type": "string", "pattern": "^artifact:[^@]+@[^@]+$"},
+    "base_observed_map_ref": {"type": "string", "pattern": "^artifact:[^@]+@[^@]+$"},
+    "base_route_ref": {"type": "string", "pattern": "^route:[^@]+@[^@]+$"},
     "selection_policy": {"const": "PARALLEL_NOT_RANKED"},
     "scenarios": {
       "type": "array", "minItems": 1, "maxItems": 3,
@@ -1991,9 +2109,9 @@ validatorは`selected_scenario_ref`が`source_scenario_set_ref`のmember exact1�
   "properties": {
     "schema_version": {"const": "cocolon.cmee.analysis_saved_intent_safe_projection.v1alpha1"},
     "wire_kind": {"const": "watashi.saved-route-intent.v1"},
-    "projection_of": {"type": "string"},
-    "source_scenario_set_ref": {"type": "string"},
-    "selected_scenario_ref": {"type": "string"},
+    "projection_of": {"type": "string", "pattern": "^artifact:[^@]+@[^@]+$"},
+    "source_scenario_set_ref": {"type": "string", "pattern": "^scenario-set:[^@]+@[^@]+$"},
+    "selected_scenario_ref": {"type": "string", "pattern": "^analysis-if-scenario:[^@]+@[^@]+$"},
     "visible_note": {"type": ["string", "null"]},
     "saved_at": {"type": "string", "format": "date-time"}
   }
@@ -2009,29 +2127,67 @@ IF setとSavedRouteIntentのstorage / API / RN identityはobserved `watashi.map.
   "$id": "cocolon.cmee.positive_realization_trace.v1alpha1",
   "type": "object",
   "additionalProperties": false,
-  "required": ["trace_id", "artifact_ref", "units", "required_duty_coverage"],
+  "required": [
+    "trace_id", "trace_version", "artifact_ref", "units", "required_duty_coverage"
+  ],
   "properties": {
     "trace_id": {"type": "string"},
-    "artifact_ref": {"type": "string"},
+    "trace_version": {"type": "integer", "minimum": 1},
+    "artifact_ref": {"type": "string", "pattern": "^artifact:[^@]+@[^@]+$"},
     "units": {
       "type": "array",
       "items": {
         "type": "object",
         "additionalProperties": false,
         "required": [
-          "visible_artifact_unit_ref", "plan_duty_ref", "semantic_node_or_edge_refs",
-          "attachment_witness_refs", "source_evidence_refs", "realization_operation",
-          "coverage_status"
+          "visible_artifact_unit_ref", "unit_role", "plan_duty_ref",
+          "semantic_node_or_edge_refs", "attachment_witness_refs",
+          "source_evidence_refs", "constrained_owner_refs",
+          "realization_operation", "coverage_status"
         ],
         "properties": {
           "visible_artifact_unit_ref": {"type": "string"},
-          "plan_duty_ref": {"type": "string"},
-          "semantic_node_or_edge_refs": {"type": "array", "items": {"type": "string"}},
-          "attachment_witness_refs": {"type": "array", "items": {"type": "string"}},
-          "source_evidence_refs": {"type": "array", "items": {"type": "string"}},
+          "unit_role": {
+            "enum": ["SEMANTIC_REALIZATION", "UNKNOWN_DISCLOSURE", "RECEPTION"]
+          },
+          "plan_duty_ref": {"type": "string", "pattern": "^duty:[^@]+@[^@]+$"},
+          "semantic_node_or_edge_refs": {
+            "type": "array",
+            "items": {"type": "string", "pattern": "^(node|edge):[^@]+@[^@]+$"}
+          },
+          "attachment_witness_refs": {
+            "type": "array",
+            "items": {"type": "string", "pattern": "^attachment-witness:[^@]+@[^@]+$"}
+          },
+          "source_evidence_refs": {
+            "type": "array",
+            "minItems": 1,
+            "items": {"type": "string", "pattern": "^evidence:[^@]+@[^@]+$"}
+          },
+          "constrained_owner_refs": {
+            "type": "array",
+            "items": {"type": "string", "pattern": "^owner:[^@]+@[^@]+$"}
+          },
           "realization_operation": {"type": "string"},
           "coverage_status": {"enum": ["COVERED", "UNCOVERED", "INVALID"]}
-        }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {"unit_role": {"const": "UNKNOWN_DISCLOSURE"}},
+              "required": ["unit_role"]
+            },
+            "then": {
+              "properties": {
+                "semantic_node_or_edge_refs": {"maxItems": 0},
+                "constrained_owner_refs": {"minItems": 1}
+              }
+            },
+            "else": {
+              "properties": {"semantic_node_or_edge_refs": {"minItems": 1}}
+            }
+          }
+        ]
       }
     },
     "required_duty_coverage": {"enum": ["COMPLETE", "INCOMPLETE"]}
@@ -2039,9 +2195,11 @@ IF setとSavedRouteIntentのstorage / API / RN identityはobserved `watashi.map.
 }
 ```
 
-visible unitからsource evidenceまで連続しない場合はinvalid。全文を一つ目のsource spanへbindしない。trace body / source range / visible textをpublic GitHubへ出さない。
+visible unitからplan duty、meaning、EvidenceGraph内EvidenceSpanまで連続しない場合はinvalid。`UNKNOWN_DISCLOSURE`はfake UNKNOWN nodeを作らず、semantic refs exact0、constrained owner refs exact1以上、evidence exact1以上で「何を確定しなかったか」を示す。provider proposal単独のattachment witnessはvisible authorityにならない。
 
-## 11. Body-free report
+current PR #3の`VisibleUnitTrace`はこのcanonical traceへのV1-A provisional implementation mappingでありsecond schema ownerではない。`CommonGuardProof`はmachine guard evidence、Emlis body-only inverseはEmlis core-owned completed-body verification、human Product Readはexternal evaluationであり、いずれもPositiveRealizationTraceを代替しない。trace body、source range、visible textをpublic GitHubへ出さない。
+
+## 11. Body-free machine report
 
 ```json
 {
@@ -2050,10 +2208,15 @@ visible unitからsource evidenceまで連続しない場合はinvalid。全文�
   "additionalProperties": false,
   "required": [
     "schema_version",
+    "report_id",
+    "report_version",
+    "assessment_scope",
+    "evaluated_artifact_ref",
     "core_id",
     "product_job",
     "artifact_kind",
     "status",
+    "meaning_derivation_mode",
     "schema_versions",
     "provider_identity_digest",
     "policy_versions",
@@ -2066,26 +2229,55 @@ visible unitからsource evidenceまで連続しない場合はinvalid。全文�
     "schema_version": {
       "const": "cocolon.cmee.body_free_quality_report.v1alpha1"
     },
+    "report_id": {"type": "string", "minLength": 1},
+    "report_version": {"type": "integer", "minimum": 1},
+    "assessment_scope": {"const": "MACHINE_ONLY"},
+    "evaluated_artifact_ref": {
+      "type": ["string", "null"],
+      "pattern": "^artifact:[^@]+@[^@]+$"
+    },
     "core_id": {"enum": ["EMLIS_AI", "PIECE", "ANALYSIS"]},
     "product_job": {
       "enum": ["OBSERVE_AND_CLARIFY", "EXPRESS_AND_SHARE", "MAP_AND_EXPLORE"]
     },
-    "artifact_kind": {"type": "string"},
+    "artifact_kind": {"type": ["string", "null"]},
     "status": {
       "enum": ["GENERATED", "QUESTION_PENDING", "LIMITED", "REJECTED", "UNAVAILABLE", "SEPARATE_SAFETY"]
     },
+    "meaning_derivation_mode": {
+      "enum": ["SOURCE_OR_USER_EVIDENCE_ONLY", "FORMAL_ATTACHMENT_ADMITTED", "NOT_REACHED"]
+    },
     "schema_versions": {"type": "object", "additionalProperties": {"type": "string"}},
-    "provider_identity_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+    "provider_identity_digest": {
+      "type": ["string", "null"],
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
     "policy_versions": {"type": "object", "additionalProperties": {"type": "string"}},
     "check_results": {"type": "object", "additionalProperties": {"type": "boolean"}},
     "metrics": {"type": "object", "additionalProperties": {"type": "integer", "minimum": 0}},
     "reason_codes": {"type": "array", "items": {"type": "string"}},
     "body_free": {"const": true}
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"meaning_derivation_mode": {"const": "FORMAL_ATTACHMENT_ADMITTED"}},
+        "required": ["meaning_derivation_mode"]
+      },
+      "then": {
+        "properties": {
+          "provider_identity_digest": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}
+        }
+      },
+      "else": {"properties": {"provider_identity_digest": {"type": "null"}}}
+    }
+  ]
 }
 ```
 
-public reportにraw input / output、lemma、surface、exact source range、user ID、case ID、private path、Product Read本文を含めない。
+`machine-report:<report_id>@<report_version>`をcanonical report refとする。provider digestがnullなのはpreselected source／user evidence routeまたはprovider stage未到達だけであり、provider-required routeのfailure後にnullへ切り替えて成功扱いしない。`FORMAL_DERIVED` claim、attachment witnessまたはprovider-derived relationがあるreportはformal mode／non-null provider identity／formal admissionを必須にする。
+
+このreportは`MACHINE_ONLY` sidecar evidenceで、canonical artifact meaning／identity materialではない。human Product Read verdict、acceptance、actual-device result、Cycle／production approvalをfieldへ追加しない。human Product Readはimmutable artifact ref／canonical content hashを外側から評価し、reportまたはartifactをmutateしない。public reportにraw input／output、lemma、surface、exact source range、user ID、case ID、private path、Product Read本文を含めない。
 
 ## 12. Failure envelope
 
@@ -2125,14 +2317,15 @@ public reportにraw input / output、lemma、surface、exact source range、user
 
 runtime retryやfallback authorityは別policyで勝手に追加しない。provider / resource mismatchはfail-closeである。`LIMITED`はartifactあり / failure nullのEngineOutcomeであり、このfailure schemaへ入れない。work-level `STOP`はdesign / navigation stateで、runtime FailureEnvelopeへ入れない。
 
-## 13. Canonical identity
+## 13. Canonical identity and references
 
-canonical identity material:
+canonical artifact identity material:
 
 ```text
 schema version set
 core id / product job
 source commitment IDs and versions
+evidence graph identity
 semantic graph identity
 experience plan identity
 canonical primary artifact bytes or canonical graph form
@@ -2140,28 +2333,40 @@ recipe / layout / projection version set
 policy version set
 ```
 
-exclude:
+EvidenceGraph→GroundedMeaningGraph→ExperiencePlan→PositiveRealizationTrace→GenerationArtifactBundleの参照は`<type>:<id>@<version>`でversion-qualifiedにする。別artifact／graph／plan／trace／reportからbare IDを参照しない。Source commitmentのID／version pairも同じ論理referenceを一意に指す。
+
+provider identityはprocessing provenanceであり、それだけでsemantic authorityにならない。formal-derived claimがprovider admissionへ依存する場合は、version-qualified admission／graph identityを通じてtransitively固定する。
+
+canonical artifact identityから除外する:
 
 - generated timestamp if not product identity
-- request-local path
+- request-local path／request ID
 - private user ID
-- process ID / host
-- log sequence
+- process ID／host／log sequence
 - unordered map serialization
 - public telemetry transport metadata
+- `execution_scope`、CYCLE／PRODUCTION lane、A／B cutover state
+- machine report result／machine verdict
+- human Product Read verdict／record／actual-device result
+- NLSv3 old RC番号、Gate、Receipt、controller、executor、FD、旧approval identity
+
+`machine-report:<id>@<version>`はsidecar machine evidenceへのrefであり、artifact semantic identity materialではない。human evaluationは`artifact:<artifact_id>@<artifact_version>`とprivate canonical content hashへ外側からbindし、artifact identityまたはlineageをmutateしない。
 
 canonical JSONはUTF-8、sorted object keys、no insignificant whitespace、array order semantic、numbers normalizedの一つのimplementationをowner exact1にする。
 
 ## 14. Versioning rules
 
 1. schema IDはmeaning contractを表す。incompatible field semanticsはnew schema ID。
-2. required field追加、enum narrowing、identity material変更はbreaking。
+2. required field追加、enum narrowing、nullable／non-null変更、identity material変更はbreaking。
 3. optional field追加もconsumerがunknown fieldを拒否する間はschema revisionを上げる。
-4. core extensionをshared schemaへ昇格するのは第2 actual consumerで一致責任を証明した後。
-5. Emlis-only fieldを`shared`と呼んでfreezeしない。
-6. Piece recipe / renderer、Analysis graph projection、Emlis response mappingはcore version ownerを保持する。
-7. preview / saved / history / latestが参照するartifact versionをsilent upgradeしない。
-8. old version migrationはnew artifactを作り、in-place meaning mutationをしない。
+4. version-qualified refのtarget schema／versionをsilent rewriteしない。
+5. core extensionをshared schemaへ昇格するのは第2 actual consumerで一致責任を証明した後。
+6. Emlis-only fieldまたはtypeを`shared`と呼んでfreezeしない。
+7. Piece recipe／renderer、Analysis graph projection、Emlis response mappingはcore version ownerを保持する。
+8. preview／saved／history／latestが参照するartifact versionをsilent upgradeしない。
+9. old version migrationはnew artifactを作り、in-place meaning mutationをしない。
+
+本2026-08-17 correctionで`EvidenceGraph`、nullable provider path、trace role、machine-only report、version-qualified refsを加えたschemaはすべて`NOT_REGISTERED / runtime effect 0`である。既存registered consumerとの互換性を主張せず、最初にmaterializeするschemaは本補正shapeを使う。もし旧draft shapeが既にruntime registry／wireへmaterializeされていることをfresh確認した場合は、同じIDをmutateせずnew schema IDへ上げる。§16のhistorical L3-R identityをv1alpha2 shared schema approvalとして流用しない。
 
 ## 15. Schema verification
 
@@ -2197,33 +2402,52 @@ minimum tests:
 - Piece compacted whitespace hash mismatch RED
 - initial Piece cutover without pre-admitted V2 rollback target RED
 - watashi.map.v2 safe projectionにprivate source ID / evidence locator / digestがある場合RED
-- body-free report raw body / private locator key RED
-- EngineOutcome status / FailureEnvelope disposition mismatch RED
+- body-free report raw body／private locator／human Product Read field RED
+- body-free report `assessment_scope != MACHINE_ONLY` RED
+- source-only mode with non-null provider／attachment witness／`FORMAL_DERIVED` RED
+- formal mode with null admission／provider identity RED
+- provider-required failure followed by source-only fallback RED
+- source-only mode missing required coverage／unknown／polarity／modality／time／evidence／no-added-claim RED
+- EvidenceSpan unresolved、foreign source、source version／role／field digest／literal digest mismatch RED
+- EvidenceGraph required source missing、unknown-boundary ref mismatch RED
+- PositiveRealizationTrace role invariant、version-qualified ref、EvidenceGraph resolution mismatch RED
+- `SourceOwnerUniverse`／`RouteBOwnerDisposition`をPiece／Analysis shared schemaとして使用した場合RED
+- `execution_scope`またはA／B laneだけでartifact hash／meaning／lineageが変わる場合RED
+- machine reportまたはhuman Product Read verdictがcanonical artifact identityを変える場合RED
+- `SEPARATE_SAFETY`がartifact／public safe response／production ingress authorityを持つ場合RED
+- EngineOutcome status／FailureEnvelope disposition mismatch RED
+- version-required external refがbare IDの場合RED
 - canonical identity invariant under object key ordering
-- canonical identity changes under semantic array ordering / version change
+- canonical identity changes under semantic array ordering／semantic version change
 
 test fixtureをproduction schema ownerにしない。actual implementationでPython dataclass、validator、JSON schemaのthree-way consistencyを検証する。
 
-## 16. Route B v1alpha2 frozen semantic delta
+## 16. Emlis V1-A retained Route B semantics — non-shared provisional profile
 
-L3-R approved contract `cocolon.cmee.v1a.acceptance.route_b.v1`は、actual schema fileをまだ作らず、次のfuture schema semanticsだけを固定する。
+旧L3-R technical body、P0、P0-R1、L3-I／I1、旧Gate、Receipt、controller、executor、FD、approval orderはhistorical operational shellであり、current schema registration、runtime implementation prerequisiteまたはversion authorityへ移さない。旧approval identityをv1alpha2 shared schemaの承認として流用しない。
 
-| Schema candidate | Frozen delta |
-|---|---|
-| `JapaneseAttachmentAdmission v1alpha2` | owner universe identity、required/active exact coverage、`RouteBOwnerDisposition[]` |
-| `GroundedMeaningGraph v1alpha2` | `parent_graph_ref`、`refinement_target_ref`。provisional epistemic enum追加なし |
-| `ClarificationRequest v1alpha2` | original lifecycle ref、ordinal exact1、lifecycle-wide consumed budget、target range/ref |
-| `EngineOutcome v1alpha2` | 上記version参照、refined再質問禁止、owner dispositionとglobal outcomeの一致 |
-| `SourceEnvelopeMeta` | existing `parent_source_refs`を利用し、shape変更なし |
+### 16.1 Provisional type boundary
 
-Cross-field validators must enforce:
+current PR #3の`SourceOwnerUniverse`はgeneric coverage conceptのcurrent Emlis shape、`RouteBOwnerDisposition`はEmlis／Route B core-owned specializationである。
 
-1. resolver owner set = required ∪ active_optional、duplicate/missing/denominator shrink exact0。
-2. positive visible claimは`SOURCE_EXPLICIT_VISIBLE | SUPPLEMENTAL_USER_VISIBLE`だけ。
-3. provisional proposalはCandidateSet/Admission外へ出さず、`FORMAL_DERIVED / FORMAL_CLOSED`を生成しない。
-4. `GENERATED`はunresolved required duty exact0。`LIMITED`はmeaningful source-bound observation + bound Reception。`QUESTION_PENDING`はそのPRE_QUESTION artifact + target exact1。meaningful claim 0なら`UNAVAILABLE`。
-5. clarification requestはoriginal lifecycle全体でexact1以下。発行後budgetは復活せず、REFINEDから再質問しない。
-6. supplemental answerはcaller-supplied SourceEnvelope exact1、新graph version、target-only effect。original bytes/digest/version/graph/admissionはimmutable。
-7. trace visible unitはsource-explicit/user evidenceへ連続するかhard-invalid。provider proposal単独のattachment witnessはvisible authorityにならない。
+```text
+SourceOwnerUniverse = PROVISIONAL_EMLIS_SPECIALIZATION
+RouteBOwnerDisposition = PROVISIONAL_EMLIS_SPECIALIZATION
+promotion = NOT_YET_PROMOTED_TO_CROSS_CORE_SHARED_FINAL
+```
 
-L3-I / I1前のschema registration、JSON schema file、Python dataclass、DB/API wire effectは0。field semantics、enum、cross-field invariantを変更する場合はこのL3-R approvalを流用しない。
+このため両typeを§1 shared catalog、EvidenceGraph `$defs`またはPiece／Analysis required fieldへ追加しない。`ExperiencePlan.duties[]`だけをshared plan-duty recordとする。promotionは第2 actual productが同じ責任を実証した後のbreaking design／schema decisionに限る。
+
+### 16.2 Retained Emlis semantic constraints
+
+Emlis provisional profileは、source／supplemental role分離、owner coverage、unknown／conflict、no-promotion、one clarification、immutable target-only refinement、no fallbackを保持できる。source coverage denominatorとproduct plan duty、positive trace、machine report、human Product Readを別ownerにする。
+
+providerなしrouteは`SOURCE_OR_USER_EVIDENCE_ONLY`だけで、visible claim全量がdirect EvidenceSpanへbindし、provider-derived meaning／relation／attachment exact0、required source coverage、unknown、polarity／modality／time、no-added-claimを満たす。provider-required failure後のsilent switchは禁止する。`FORMAL_DERIVED`にはnon-null formal admission、provider identity、evidence bindingを必須にする。
+
+clarificationはoriginal source lifecycle全体でexact1以下とし、authenticated supplemental answerをnew SourceEnvelope／new graph versionとしてtarget unknown exact1だけへ適用する。original bytes／digest／version、prior graph、prior artifact identityをin-place変更しない。
+
+### 16.3 Current Cycle contract and schema separation
+
+251-owner、Cycle001のfresh denominator／acceptance、current100評価条件はCMEE implementation prerequisiteまたはshared schema constantではない。一方、本設計からhistorical-only、unnecessary、relaxedまたはretiredとも決めない。Cycle適用時はfresh Cycle001 current ownerに従い、source-only modeまたは`execution_scope=CYCLE`をacceptance PASSへ変換しない。
+
+本sectionのschema registration、Python dataclass、JSON schema file、DB／API wire、implementation、Cycle／production effectは0である。最初のactual materializationは§14のpre-registration correction ruleに従い、別Mash実装承認なしに開始しない。

@@ -1,8 +1,11 @@
 # CMEE V1 Shared Kernel / Runtime Contracts 詳細設計
 
 - document id: `cocolon.cmee.v1.shared_kernel.detailed_design`
+- revision date: `2026-08-17 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- implementation effect: `0`
+- Phase 2 product-route verdict: `ADOPT_WITH_BOUNDED_CORRECTIONS_REFLECTED`
+- canonical field / ref / version owner: `05_json_schema_and_versioning.md`
+- implementation / cutover / dependency effect: `0`
 - parent: `00_read_first.md`
 
 ---
@@ -47,9 +50,9 @@ ai/services/ai_inference/cocolon_meaning_experience_engine/
 
 `contracts.py`はimmutable type / enum / serialization、`engine.py`はorchestrationだけを所有する。file責任がactual code量・循環import・reviewabilityの観点で分割を必要とする場合は、Phase implementation approvalでexact pathを再固定する。future directoryを空で作らない。
 
-## 2. Single active host
+## 2. Single active host per lifecycle lane
 
-V1-Aのpublic import boundaryはexact1とする。
+V1-AのCMEE public import boundaryはexact1とする。
 
 ```python
 from cocolon_meaning_experience_engine import (
@@ -64,10 +67,31 @@ outcome = MeaningExperienceEngine.generate(request)
 - core adapterからkernel private moduleへ直接import
 - runnerからold recovery builderとCMEEを同時にactive call
 - CMEE失敗時のlegacy fallback
-- shadow / mirror generation
+- shadow／mirror／dual-run generation
 - candidate bodyを生成後metadataだけCMEEで包むこと
+- PR #2 large recovery／surface／semantic-overlayをCMEE subengineまたはwrapperとして呼ぶこと
 
-既存production I5はV1-A candidateがdisabledの間そのまま維持する。cutover時は同一packetでnew active ingress exact1、old direct active ingress exact0にする。
+NLSv3はcontainer単位ではなく責任単位で継承する。
+
+| Owner | 継承する責任 | 明示的な非owner |
+|---|---|---|
+| CMEE shared kernel | source identity／role／version／privacy、evidence binding、source-bound meaning／unknown／epistemic state、generic `ExperiencePlan.duties[]`、positive trace、hard validity、artifact identity／schema／lineage | Emlisの声・観測・問い・Product Read・safety public mapping |
+| CMEE Emlis route | Emlis input projection、Observation／Reception、sufficiency／clarification、voice／distance／depth／naturalness、body-only inverse、Emlis Product Read、safety triage／public mapping | Piece／Analysis product judgment |
+| future Piece／Analysis routes | 各productで実測後に改良したmeaning／verification／Product Read | Emlis shapeのcopy、V1 runtime materialization |
+| test／failure knowledge | usable mutation vector、regression、naturalness／anti-template failure knowledge | generation authority、runtime fallback、active engine |
+
+NLSv3の旧ownerは移管完了後にactive generation authorityを持たない。knowledge／historyの保持をactive owner維持と解釈しない。
+
+### 2.1 A／B lane ownership
+
+A／BのauthorizationはFinal Technical Designとmigration ownerが持ち、本shared contractまたは`execution_scope`はcutover approvalを持たない。
+
+| Point | Cycle candidate lane | Production generation lane | Production safety |
+|---|---|---|---|
+| after A | CMEE ingress exact1／NLSv3 direct recovery 0 | current I5 exact1／CMEE 0 | current owner unchanged／CMEE production safety effect 0 |
+| after B | CMEE ingress exact1／NLSv3 direct recovery 0 | CMEE Emlis exact1／current direct 0 | separately fixed public mapping and single safety owner exact1 |
+
+AとBを同時cutover／同一approvalにしない。`EngineOutcome.SEPARATE_SAFETY`はshared outcome semanticsであり、current production safety ownerを代替しない。Bより前にcurrent safe response／public behavior mapping、single owner、silent empty 0、fallback／dual-run 0を別判断で固定する。
 
 ## 3. Request-local execution model
 
@@ -101,6 +125,8 @@ global mutable candidate cache、cross-request source、process-wide monkeypatch
 
 許可するcacheは、immutable external model instanceのread-only load cacheだけである。cacheはsource、owner、candidate、decision、traceを保持しない。model identity mismatch時はprocessをfail-closeし、新resourceをruntime downloadしない。
 
+`GenerationRequestMeta.execution_scope`等のlane値を保持する場合、それはrequest-local ingress routing contextに限る。許可済みentry laneの選択には使えるが、meaning claim、relation、epistemic state、duty、trace bindingまたはcanonical artifact materialを選択・変更してはならない。`GroundedMeaningGraph`、`ExperiencePlan`、`GenerationArtifactBundle`の意味、artifact digest／identity／lineage、Product Read対象identityへ含めない。
+
 ## 4. Pipeline stages exact11
 
 | Stage | Input | Output | Failure owner |
@@ -108,16 +134,29 @@ global mutable candidate cache、cross-request source、process-wide monkeypatch
 | S0 Source admission | core request | `AdmittedCoreSourceInput[]` | core adapter |
 | S1 Source freeze | admitted private inputs | `SourceEnvelope[]` | shared kernel |
 | S2 Evidence binding | source envelopes | `EvidenceGraph` | shared kernel |
-| S3 Linguistic proposals / sealing | request-wide exact source spans | provider candidate payload -> sealed `JapaneseAttachmentSet` exact1 | candidate provider + shared kernel sealer |
-| S4 Independent admission | set + lock + denominator + mutation evidence | `JapaneseAttachmentAdmission` | CMEE assessor |
-| S5 Meaning assembly | evidence + admitted attachments | `GroundedMeaningGraph` | shared + core extension |
+| S3 Linguistic proposals／sealing — provider-required route only | request-wide exact source spans | provider candidate payload → sealed `JapaneseAttachmentSet` exact1 | candidate provider + shared kernel sealer |
+| S4 Independent admission — provider-required route only | set + lock + denominator + mutation evidence | `JapaneseAttachmentAdmission` | CMEE assessor |
+| S5 Meaning assembly | evidence + `AdmittedJapaneseAttachmentView` OR verified `SourceExplicitNoProviderContext` | `GroundedMeaningGraph` | shared + core extension |
 | S6 Core intent | meaning graph | `CoreProductIntent` | core compiler |
 | S7 Plan | intent + duties | `ExperiencePlan` | core compiler + shared envelope |
 | S8 Realization | plan | `RealizationCandidateSet` | modality realizer |
-| S9 Validity / selection | candidates | selected candidate or no result | trust + comparator |
-| S10 Trace / artifact | selected candidate | `GenerationArtifactBundle` | shared kernel |
+| S9 Validity／selection | candidates | selected candidate or no result | trust + core comparator |
+| S10 Trace／artifact | selected candidate | `GenerationArtifactBundle` | shared kernel |
 
-S3とS4を同一にしない。candidate providerは自分をformal authorityに認定できない。parser outputはlanguage proposalであり、core meaningまたはuser truthではない。
+S3とS4を同一にしない。candidate providerは自分をformal authorityに認定できず、parser outputはlanguage proposalであってcore meaningまたはuser truthではない。
+
+### 4.1 Provider route preselection
+
+meaning authority routeはprovider invocation前にexact1選び、request途中で切り替えない。
+
+| Route | Use | Required invariants |
+|---|---|---|
+| `FORMAL_ATTACHMENT_ROUTE` | `FORMAL_DERIVED`、provider-derived meaning／relation／attachmentを一つでも使う | S3／S4必須、formal admission成立 |
+| `SOURCE_EXPLICIT_NO_PROVIDER_ROUTE` | visible claim全量が`SOURCE_EXPLICIT`またはauthenticated supplemental evidenceへbindした`USER_CONFIRMED / USER_CORRECTED`だけ | provider-derived usage 0、required source coverage、unknown preservation、polarity／modality／time、evidence binding、no-added-claim |
+
+source-explicit routeではS3／S4を`NOT_APPLICABLE_PRESELECTED_SOURCE_EXPLICIT_ROUTE`として記録し、providerを呼ばない。`None`、empty attachmentまたはprovider未設定を暗黙のsource-explicit authorityにしない。
+
+provider-required routeのprovider／resource mismatch、crashまたはinvalid payload後にsource-explicit routeへsilent switch、fallback、retryしない。route selectionをCycle001の251-owner denominator、fresh current100、acceptance contractの緩和または自動PASSへ変換しない。
 
 ## 5. Port contracts
 
@@ -263,7 +302,7 @@ class CoreMeaningCompiler(Protocol):
     def compile(
         self,
         evidence: EvidenceGraph,
-        admitted_attachments: AdmittedJapaneseAttachmentView,
+        attachment_context: AdmittedJapaneseAttachmentView | SourceExplicitNoProviderContext,
     ) -> GroundedMeaningGraph: ...
 ```
 
@@ -280,7 +319,21 @@ AdmittedJapaneseAttachmentView
     provider / resource lock exact match
 ```
 
-ID / digest mismatch、別requestのset swap、admissionだけの再利用はfail-closeする。coreはproduct taxonomyとsource policyを所有するが、syntax candidateのambiguous stateを勝手にuniqueへ変えない。
+`SourceExplicitNoProviderContext`はroute selectorがprovider実行前にだけsealするrequest-local／nonserializable markerである。
+
+```text
+SourceExplicitNoProviderContext
+  route = SOURCE_EXPLICIT_NO_PROVIDER_ROUTE
+  provider_derived_meaning_relation_attachment_count = 0
+  source_coverage = PASS
+  unknown_preservation = PASS
+  polarity_modality_time = PASS
+  evidence_binding = PASS
+  no_added_claim = PASS
+  selected_before_provider_invocation = true
+```
+
+ID／digest mismatch、別requestのset swap、admissionだけの再利用、provider failure由来のroute changeはfail-closeする。coreはproduct taxonomyとsource policyを所有するが、syntax candidateのambiguous stateを勝手にuniqueへ変えない。
 
 ### 5.5 `CoreIntentCompiler`
 
@@ -343,41 +396,46 @@ CONFLICT
 
 Analysisの`INTERPRETIVE_HYPOTHESIS`はseparate annotation claim、`SIMULATED`はseparate `HypotheticalScenarioGraph`へ置く。GroundedMeaningGraphへ混ぜない。`USER_CORRECTED`はoriginal sourceをmutationせず、新source lineageを参照する。
 
-## 7. Planning contract
+## 7. Planning and coverage ownership
 
-`ExperiencePlan`は完成文ではなくsemantic dutiesを所有する。
-
-```text
-required_duties[]
-optional_duties[]
-deferred_duties[]
-forbidden_promotions[]
-interaction_acts[]
-artifact_plans[]
-ordering_constraints[]
-surface_constraints
-fallback_disposition
-```
-
-Duty:
+`ExperiencePlan`は完成文ではなくproduct realization dutiesを所有し、canonical field shapeは`05_json_schema_and_versioning.md`の`duties[]` exact1とする。
 
 ```text
-duty_id
-meaning_refs[]
-artifact_role
-requiredness
-allowed_realization_operations[]
-forbidden_realization_operations[]
+ExperiencePlan
+  duties[]:
+    duty_id
+    duty_kind
+    semantic_refs[]
+    retention = REQUIRED | OPTIONAL | DEFERRED
+    allowed_operations[]
+    forbidden_operations[]
+  ordering[]
+  interaction_acts[]
+  artifact_plans[]
+  surface_constraints[]
+  forbidden_promotions[]
+  fallback_disposition
 ```
+
+shared ownerはgeneric duty envelope、meaning refs、retention、ordering、artifact bindingまでである。何をObservation、Reception、Piece expression、Analysis node／edgeとして選ぶかはcore ownerが決める。
+
+source coverageとplan dutyを混ぜない。
+
+1. `SourceEnvelope / EvidenceGraph`: admitted sourceとexact evidence。
+2. generic source-coverage concept: admitted source materialのcoverage denominator。
+3. `GroundedMeaningGraph`: source-bound meaning／unknown／conflict。
+4. `ExperiencePlan.duties[]`: product artifactで実現するsole plan-duty record。
+
+current PR #3の`SourceOwnerUniverse`はgeneric source-coverage conceptのEmlis V1-A current shape、`RouteBOwnerDisposition`はEmlis／Route B core-owned shapeである。両方を`PROVISIONAL_EMLIS_SPECIALIZATION / NOT_YET_PROMOTED_TO_CROSS_CORE_SHARED_FINAL`とし、Piece／Analysisへ要求しない。第2 actual productが同じ責任を実証した後の別design changeだけがpromotionできる。
 
 forbidden operations default:
 
 - source clause replay
 - whole nominal replay as meaning proof
 - fixed response
-- case / family lookup
+- case／family lookup
 - summary append
-- ordinal / owner ID surface
+- ordinal／owner ID surface
 - relation direction reversal
 - unknown completion
 
@@ -413,20 +471,30 @@ Fidelity ordering:
 
 score合算でhard failureを埋めない。valid candidateが0なら`UNAVAILABLE`またはcore-owned `ASK`である。
 
-## 9. Positive realization trace
+shared selectionはhard validityとmeaning fidelityのprotocolだけを所有する。Emlis natural／anti-template comparator、Piece visual／share judgment、Analysis route readabilityとhuman Product Readはcore-ownedであり、shared numeric scoreまたはmachine reportへ統合しない。
 
-各visible unitをplan dutyへ、plan dutyをmeaning / evidenceへ戻せなければ生成成功にしない。
+## 9. Positive realization trace and distinct evidence families
+
+各visible unitをplan dutyへ、plan dutyをmeaning／evidenceへ戻せなければ生成成功にしない。
 
 ```text
 RealizationTraceItem
-  trace_id
-  artifact_unit_ref
-  artifact_range_or_node_ref
+  visible_artifact_unit_ref
+  unit_role = SEMANTIC_REALIZATION | UNKNOWN_DISCLOSURE | RECEPTION
   plan_duty_ref
-  meaning_refs[]
-  evidence_refs[]
-  operation
+  semantic_node_or_edge_refs[]
+  source_evidence_refs[]
+  constrained_owner_refs[]
+  attachment_witness_refs[]
+  realization_operation
+  coverage_status
 ```
+
+role-aware invariant:
+
+- `SEMANTIC_REALIZATION`／`RECEPTION`: semantic ref exact1以上、source／user evidenceへ連続。
+- `UNKNOWN_DISCLOSURE`: semantic refs exact0を許し、evidence refまたはconstrained owner ref exact1以上で何を確定しなかったかを示す。fake UNKNOWN nodeを作らない。
+- provider proposal単独のattachment witnessはvisible meaning authorityにならない。
 
 禁止:
 
@@ -435,11 +503,21 @@ RealizationTraceItem
 - expected textとの一致をmeaning preservationにする
 - hidden metadataへrequired dutyを置きvisible realizationと数える
 
-trace verificationはrenderer / generatorと別functionで行う。ただし新しい独立service、control plane、remote verifierは作らない。
+evidence familyを相互代替しない。
+
+| Evidence | Owner／meaning | Not a substitute for |
+|---|---|---|
+| `PositiveRealizationTrace` | shared semantic lineage | human Product Read、guard proof |
+| current PR #3 `VisibleUnitTrace` | V1-A provisional implementation mapping of positive trace | second canonical trace owner |
+| `CommonGuardProof` | common guard実行のmachine evidence | semantic trace、meaning authority、Product Read PASS |
+| Emlis body-only inverse | Emlis core-owned completed-body reverse verification | shared trace／guard |
+| human Product Read | core-owned reading of immutable artifact | machine report |
+
+trace verificationはrenderer／generatorと別functionで行うが、独立service、control plane、remote verifierは作らない。
 
 ## 10. Error and failure semantics
 
-公開可能なstatus:
+`GenerationArtifactBundle`はvisible artifactがある`GENERATED | LIMITED`だけを持つ。outer `EngineOutcome`は次のexact6を所有する。
 
 ```text
 GENERATED
@@ -449,6 +527,8 @@ UNAVAILABLE
 REJECTED
 SEPARATE_SAFETY
 ```
+
+`QUESTION_PENDING`はtyped clarificationとcore policyに応じたoptional LIMITED artifactを持てる。`UNAVAILABLE`、`REJECTED`、`SEPARATE_SAFETY`はempty primary artifactを作らない。`SEPARATE_SAFETY`はnormal generationへ混ぜないshared result shapeであり、Emlis production safety triage、safe responseまたはpublic mappingのownerではない。
 
 内部failure layer:
 
@@ -481,7 +561,9 @@ POSITIVE_TRACE_INCOMPLETE
 NO_VALID_CANDIDATE
 ```
 
-public body-free reportにはlayer、reason code、counts、schema / provider / policy versionsだけを出す。raw surface、lemma、source range、private pathをpublic reportへ出さない。
+public body-free reportにはlayer、reason code、anonymous counts、schema／provider／policy versionsだけを出し、raw surface、lemma、source range、private pathを出さない。`BodyFreeQualityReport`は`MACHINE_ONLY`であり、human verdict／product acceptanceを含めず、artifactをmutateしない。
+
+human Product Readはimmutable `artifact_id@artifact_version`をengine外から読むcore-owned evaluationである。machine reportからPASSへ変換せず、修正はnew generation／new artifact versionとして作る。
 
 ## 11. Existing text core integration
 
@@ -490,7 +572,8 @@ public body-free reportにはlayer、reason code、counts、schema / provider / 
 ```text
 CMEE selected text candidate
 -> existing common guards
--> CMEE trust reportへ結果を統合
+-> CommonGuardProof（machine evidence）
+-> shared machine trust result
 ```
 
 再利用候補:
@@ -518,7 +601,10 @@ CMEEは新しいDB ownerにならない。
 - 各core serviceが既存または別承認されたlifecycleへ保存する。
 - `artifact_id@artifact_version`はcanonical semantic payloadから作る。
 - volatile runtime fields、body locator、timing、debug dataをidentity materialへ入れない。
-- projectionは`projection_of`でcanonical artifactへ戻す。
+- `execution_scope`、CYCLE／PRODUCTION lane、cutover stateをidentity materialへ入れない。
+- machine verdict、`BodyFreeQualityReport`、human Product Read verdictをcanonical semantic payload／lineage materialへ入れない。
+- old NLS RC、Gate、Receipt、controller、executor、FD identityをartifact version／parent refへ使わない。
+- projectionはversion-qualified `projection_of`でcanonical artifactへ戻す。
 - Piece image binaryはderived、Analysis text / graphはprojection、Emlis visible textはConversationalObservationのprimary projectionである。
 
 ## 13. Performance and resource boundaries
@@ -557,47 +643,49 @@ Shared kernelを完成と数えるminimum:
 - existing text guardsをsubsystemとして利用または明示不採用
 - Piece / Analysis runtime exact0
 - active duplicate owner 0
-- human Product Read packetを生成できる
+- immutable artifactと`MACHINE_ONLY` reportをhuman Product Read ownerへ渡せる（human verdictは生成しない）
 
 schema / interface testだけではcompletion 0である。
 
-## 15. Route B v1 approved acceptance supplement
+## 15. Emlis V1-A Route B retained semantic constraints
 
-Canonical contractは`cocolon.cmee.v1a.acceptance.route_b.v1`。承認identityはtechnical body v1.0.0 / canonical SHA-256 `4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901`である。
+旧L3-R／P0／P0-R1のpacket、body identity、Gate、Receipt、controller、executor、FD、旧approval orderはhistorical operational shellであり、shared kernelのruntime／implementation prerequisite／authorityへ移さない。ここで保持するのはmeaning sovereignty、unknown、no-promotion、one clarification、immutable refinement、no fallback等のusable semantic／failure knowledgeだけである。
 
-### 15.1 Owner universe and exact-one disposition
+### 15.1 Provisional Emlis coverage specialization
 
-source adapter / core obligation ownerはprovider実行前に`required_owner_refs`、`active_optional_owner_refs`、`credit_only_owner_refs`、`owner_universe_digest`をsource versionとobligation versionへbindする。`U = required ∪ active_optional`とし、resolver output `D`は次を満たす。
+current PR #3の`SourceOwnerUniverse`はgeneric coverage概念のcurrent Emlis shape、`RouteBOwnerDisposition`はEmlis／Route B core-owned shapeである。
 
 ```text
-set(D.meaning_owner_id) = U
-len(D) = len(U)
-duplicate_owner_count = 0
-missing_owner_count = 0
-denominator_shrink = 0
+SourceOwnerUniverse.status = PROVISIONAL_EMLIS_SPECIALIZATION
+RouteBOwnerDisposition.status = PROVISIONAL_EMLIS_SPECIALIZATION
+promotion = NOT_YET_PROMOTED_TO_CROSS_CORE_SHARED_FINAL
 ```
 
-各ownerはexact1の`RouteBOwnerDisposition`を持つ。`route_b_disposition`は`SOURCE_EXPLICIT_VISIBLE | SUPPLEMENTAL_USER_VISIBLE | UNKNOWN_PRESERVED_LIMITED | CLARIFICATION_TARGET | NOT_VISIBLE_UNRESOLVED | SEPARATE_SAFETY` exact6。provider omissionはowner omissionにせず、`MISSING_OR_INVALID / NOT_VISIBLE_UNRESOLVED`として残す。positive visible claimは最初のexact2 dispositionだけが持てる。
+Piece／Analysisにこれらのtype、owner denominatorまたはdisposition enumを要求しない。shared final promotionは第2 actual productで同じ責任が実証された後の別design changeだけで行う。`ExperiencePlan.duties[]`はplan dutyのcanonical shared ownerであり、source coverage denominatorまたはRoute B dispositionではない。
 
-### 15.2 Provisional graph boundary
+Emlis V1-A／Route B内でowner universeを使う場合、required／active／credit-onlyをsource versionとobligation versionへbindし、duplicate、missing、denominator shrinkを0にする。これはEmlis product admission semanticsであり、251というcurrent Cycle denominatorをshared runtime constantへしない。
 
-provider proposalはrequest-local `JapaneseAttachmentCandidateSet` / `JapaneseAttachmentAdmission`だけに保持し、`GroundedMeaningGraph`へ入れない。`closure_status=PROVISIONAL_ONLY`、`candidate_set_completeness=NOT_PROVED`、`open_slot_denominator_state=NOT_ESTABLISHED`である。Route B proposalから`FORMAL_DERIVED`または`FORMAL_CLOSED`を作らず、provisional epistemic enumも追加しない。visible positive semanticsは`SOURCE_EXPLICIT`、target exact1の`USER_CONFIRMED / USER_CORRECTED`、または将来別契約でformal closureしたevidenceだけである。
+### 15.2 Source-explicit and provider-required dispositions
+
+preselected source-explicit routeはprovider omissionまたはfailureではない。visible claim全量がsource／user evidenceで成立する時、source-explicit／supplemental visible dispositionを使える。unknown ownerはunknownのまま保持し、generic fillerへ変えない。
+
+provider-required routeでproviderがmissing／invalidならroute変更せず、`NOT_VISIBLE_UNRESOLVED`または`UNAVAILABLE`へfail-closeする。provider omissionをowner omissionにせず、provider failure後のsilent source-explicit fallbackを禁止する。positive visible claimへprovider proposalだけを使わず、`FORMAL_DERIVED`にはformal admissionを必須にする。
 
 ### 15.3 Outcome invariants
 
-- `GENERATED`: 全required visible dutyがsource/user evidenceだけで成立し、unresolved required duty exact0。
+- `GENERATED`: 全required visible dutyがsource／user evidence、またはformal-admitted evidenceで成立し、unresolved required duty exact0。
 - `LIMITED`: 入力固有でsource-boundなmeaningful Observation exact1以上 + bound Reception + unknown明示。raw replay、generic empathy、fixed template、薄い要約は禁止。
-- `QUESTION_PENDING`: 上記LIMITEDをPRE_QUESTIONとして保持し、materialなtarget unknown exact1へClarificationRequest exact1をbindする。question-onlyは禁止。
-- `UNAVAILABLE`: safeでmeaningfulなvisible claimがない。artifact / question / fallbackはnull。
-- `REJECTED`: source role/version/lineage/privacy/contract identity hard-invalid。
-- `SEPARATE_SAFETY`: high-care materialを既存separate ownerへ分離。
+- `QUESTION_PENDING`: LIMITED PRE_QUESTION artifactとmaterial target unknown exact1へbindしたClarificationRequest。question-onlyは禁止。
+- `UNAVAILABLE`: safeでmeaningfulなvisible claimがない。artifact／question／fallbackはnull。
+- `REJECTED`: source role／version／lineage／privacy／contract identity hard-invalid。
+- `SEPARATE_SAFETY`: high-care materialを既存separate ownerへ分離。production safety ownerの代替ではない。
 
 ### 15.4 One clarification and immutable refinement
 
-clarification requestはcanonical original `SourceEnvelope` lifecycle全体で最大exact1。発行時にbudgetを消費し、retry、regeneration、skip、expiry、ambiguous answerでも復活しない。re-ask、second unknown、question rallyは0。問いはsemantic difference exact1を自然・非leadingに尋ね、parser用語やannotation選択を強要せず、skip / unknownを許す。
+clarification requestはcanonical original `SourceEnvelope` lifecycle全体で最大exact1。発行時にbudgetを消費し、retry、regeneration、skip、expiry、ambiguous answerでも復活しない。answerはauthenticated caller-supplied private `SUPPLEMENTAL_ANSWER` SourceEnvelope exact1だけで、original bytes／digest／version、attachment set／admission、original graphをin-place変更しない。target unknown exact1だけをnew graph versionで`USER_CONFIRMED / USER_CORRECTED`にできる。
 
-answerはauthenticated caller-supplied private `SUPPLEMENTAL_ANSWER` SourceEnvelope exact1だけ。original bytes/digest/version、attachment set/admission、original graphをin-place変更せず、新graph version/deltaのtarget unknown exact1だけを`USER_CONFIRMED`または`USER_CORRECTED`へできる。他unknownやprovider ambiguityへ一般化せず、proposalをretroactive formal化しない。
+### 15.5 Failure knowledgeとcurrent Cycle contractの分離
 
-### 15.5 Failure, OOV, privacy, and P0 separation
+provider／resource mismatch、crash、invalid payloadはprovider-required routeで`UNAVAILABLE`、fallback 0、automatic retry 0。OOVはliteral source spanとしてだけ保持し、relation／lemma／normalization／meaningを推測しない。raw input／output、question、parser output、surface／lemma／range、private identityはpublic禁止。
 
-provider/resource mismatch、crash、invalid payloadは`UNAVAILABLE`、fallback 0、automatic retry 0。OOVはliteral source spanとしてだけ保持でき、relation/lemma/normalization/meaningを推測しない。raw input/output、question、parser output、surface/lemma/range、private identityはpublic禁止。P0では`route_b_owner_disposition_evaluation`と`route_b_sufficiency_evaluation`をともに`NOT_EVALUATED_IN_P0`とする。
+一方、251-owner、Cycle001のfresh current denominator／acceptance、current100評価条件はCMEE implementation prerequisiteではないが、本設計からhistorical-only、unnecessaryまたはretiredとは決めない。本設計はそれらを変更・緩和・退役せず、Cycle適用時はfresh Cycle001 current ownerに従う。
