@@ -355,33 +355,13 @@ realizerはplanにないsemantic edgeを作らない。text / visual / graphは�
 
 ## 6. Meaning graph boundary
 
-`GroundedMeaningGraph`はprovisional / source-boundである。
+`GroundedMeaningGraph`はprovisional／source-boundである。exact field名、required／optional、ref encodingは`05_json_schema_and_versioning.md`のsole authorityに従い、本sectionはruntime semanticsだけを所有する。
 
-Node minimum:
-
-```text
-node_id
-kind
-source_evidence_refs[]
-epistemic_state
-scope
-provenance
-attributes
-```
-
-Edge minimum:
-
-```text
-edge_id
-kind
-from_node_id
-to_node_id
-source_evidence_refs[]
-direction
-epistemic_state
-scope
-provenance
-```
+| Element | Runtime semantic minimum |
+|---|---|
+| node | typed meaning unit、EvidenceGraph内evidenceへのversion-qualified binding、epistemic state、polarity、modality、temporal scope、forbidden promotion |
+| edge | typed relation、exact endpoints／direction、EvidenceGraph内evidenceへのversion-qualified binding、epistemic state、provenance |
+| graph | source refs、EvidenceGraph ref、derivation mode、conditional attachment admission、statusを一つのimmutable versionへbind |
 
 epistemic state:
 
@@ -394,7 +374,9 @@ UNKNOWN
 CONFLICT
 ```
 
-Analysisの`INTERPRETIVE_HYPOTHESIS`はseparate annotation claim、`SIMULATED`はseparate `HypotheticalScenarioGraph`へ置く。GroundedMeaningGraphへ混ぜない。`USER_CORRECTED`はoriginal sourceをmutationせず、新source lineageを参照する。
+`SOURCE_OR_USER_EVIDENCE_ONLY` modeでは`FORMAL_DERIVED`を0、attachment admission refをnullとし、§4.1のsource coverage／unknown／polarity／modality／time／evidence／no-added-claimを再検証する。`FORMAL_DERIVED`が一つでもあれば`FORMAL_ATTACHMENT_ADMITTED` modeとnon-null formal admissionを必須にする。provider failure後にmodeを変えない。
+
+Analysisの`INTERPRETIVE_HYPOTHESIS`はseparate annotation claim、`SIMULATED`はseparate `HypotheticalScenarioGraph`へ置き、GroundedMeaningGraphへ混ぜない。`USER_CORRECTED`はoriginal sourceをmutationせず、新source lineageとnew graph versionを参照する。
 
 ## 7. Planning and coverage ownership
 
@@ -493,7 +475,7 @@ RealizationTraceItem
 role-aware invariant:
 
 - `SEMANTIC_REALIZATION`／`RECEPTION`: semantic ref exact1以上、source／user evidenceへ連続。
-- `UNKNOWN_DISCLOSURE`: semantic refs exact0を許し、evidence refまたはconstrained owner ref exact1以上で何を確定しなかったかを示す。fake UNKNOWN nodeを作らない。
+- `UNKNOWN_DISCLOSURE`: semantic refs exact0とし、source evidence ref、constrained owner refをそれぞれexact1以上持って何を確定しなかったかを示す。fake UNKNOWN nodeを作らない。
 - provider proposal単独のattachment witnessはvisible meaning authorityにならない。
 
 禁止:

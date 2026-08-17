@@ -360,7 +360,8 @@ validatorは`start < end`、scalar rangeとabsolute UTF-8 rangeが同じliteral 
             ]
           }
         }
-      }
+      },
+      "uniqueItems": true
     },
     "required_source_refs": {
       "type": "array",
@@ -374,7 +375,8 @@ validatorは`start < end`、scalar rangeとabsolute UTF-8 rangeが同じliteral 
     },
     "spans": {
       "type": "array",
-      "items": {"$ref": "cocolon.cmee.evidence_span.v1alpha1"}
+      "items": {"$ref": "cocolon.cmee.evidence_span.v1alpha1"},
+      "uniqueItems": true
     }
   }
 }
@@ -2333,7 +2335,7 @@ recipe / layout / projection version set
 policy version set
 ```
 
-EvidenceGraph→GroundedMeaningGraph→ExperiencePlan→PositiveRealizationTrace→GenerationArtifactBundleの参照は`<type>:<id>@<version>`でversion-qualifiedにする。別artifact／graph／plan／trace／reportからbare IDを参照しない。Source commitmentのID／version pairも同じ論理referenceを一意に指す。
+EvidenceGraph→GroundedMeaningGraph→ExperiencePlan→PositiveRealizationTrace→GenerationArtifactBundleの参照は`<type>:<id>@<version>`でversion-qualifiedにする。別artifact／graph／plan／trace／reportからbare IDを参照しない。bare local IDを許すのは、同一versioned container内のnode／edge／duty／visible unit等へ閉じた参照だけで、container外へ持ち出す時は必ずversion-qualified refへする。Source commitmentのID／version pairも同じ論理referenceを一意に指す。
 
 provider identityはprocessing provenanceであり、それだけでsemantic authorityにならない。formal-derived claimがprovider admissionへ依存する場合は、version-qualified admission／graph identityを通じてtransitively固定する。
 

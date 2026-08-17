@@ -286,7 +286,7 @@ Japanese Meaning Authorityは言葉を壊さずartifactへ運ぶ土台であり�
 
 ### 2.4 Candidate selection priority
 
-候補比較の前に、source ownership、privacy / access、unsupported claim、high-care safety、epistemic partition、artifact lifecycleをhard eligibilityとして判定する。一つでも不成立なら、score比較へ送らず`REJECTED`または`UNAVAILABLE`とする。
+候補比較の前に、source ownership、privacy / access、unsupported claim、high-care safety、epistemic partition、artifact lifecycleをhard eligibilityとして判定する。不成立時はscore比較へ送らず、contract invalidは`REJECTED`、meaningful artifact不能は`UNAVAILABLE`、high-care分離が必要な場合は`SEPARATE_SAFETY`とする。
 
 hard eligibilityを満たした候補間の優先順位を次のexact6とする。
 
@@ -668,7 +668,7 @@ Current Input
    +-- SUFFICIENT -> NORMAL observation bundle
    +-- LIMITED -> NORMAL limited observation bundle
    +-- ASK -> PRE_QUESTION observation/reception -> one clarification request
-   +-- SEPARATE_SAFETY -> separate safety owner / safe limited observation
+   +-- SEPARATE_SAFETY -> EngineOutcome only / artifact bundle 0 / existing safety owner handles public behavior
 -> optional Supplemental Answer
 -> refined graph delta
 -> REFINED observation/reception bundle
