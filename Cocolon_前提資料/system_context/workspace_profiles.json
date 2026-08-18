@@ -1,0 +1,57 @@
+{
+  "schema_version": "cocolon.system_context.workspace_profiles.v1",
+  "default_workspace": "cmee_working",
+  "profiles": {
+    "production_main": {
+      "purpose": "Merged production baseline for RN and API",
+      "repositories": {
+        "Cocolon": {
+          "repository": "MassyuRed/Cocolon",
+          "checkout_ref": "main",
+          "expected_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
+          "role": "RN application, premise documents, and product structure owners"
+        },
+        "mashos-api": {
+          "repository": "MassyuRed/mashos-api",
+          "checkout_ref": "main",
+          "expected_head": "a8ca4ddf7b7ae76bf7b3d73e74e3a5808d623428",
+          "role": "FastAPI backend, services, engines, storage, workers, and contracts"
+        }
+      }
+    },
+    "cmee_working": {
+      "purpose": "CMEE working view: stacked Cocolon context branch plus current disabled CMEE API draft",
+      "repositories": {
+        "Cocolon": {
+          "repository": "MassyuRed/Cocolon",
+          "checkout_ref": "SELF",
+          "expected_ancestor": "d29042f44e882110514b74dcc6a1b3f31ec746e6",
+          "role": "RN application, premise documents, CMEE design, and system-context owner"
+        },
+        "mashos-api": {
+          "repository": "MassyuRed/mashos-api",
+          "checkout_ref": "agent/cmee-v1a-i1sx-source-explicit-20260815",
+          "expected_head": "06ce311b3ea728b06f83439d268a34bed917c01c",
+          "role": "FastAPI backend plus disabled CMEE implementation Draft PR #3"
+        }
+      }
+    },
+    "cycle001_working": {
+      "purpose": "Cycle001 Response3 working view without mixing it into CMEE",
+      "repositories": {
+        "Cocolon": {
+          "repository": "MassyuRed/Cocolon",
+          "checkout_ref": "agent/cycle001-response3-acceptance-20260814",
+          "expected_head": "0854e21f92f841fd2cfdcef08b9e3117fc93f96a",
+          "role": "Cycle001 current navigation Draft PR #29"
+        },
+        "mashos-api": {
+          "repository": "MassyuRed/mashos-api",
+          "checkout_ref": "agent/cycle001-response3-product-quality-20260814",
+          "expected_head": "958c1b53f5b5894691e0b10e2d991fb8236d9f6f",
+          "role": "Cycle001 product-quality WIP Draft PR #2"
+        }
+      }
+    }
+  }
+}

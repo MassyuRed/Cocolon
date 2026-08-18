@@ -1,0 +1,76 @@
+name: Cocolon system context inventory
+
+on:
+  push:
+    branches:
+      - agent/cocolon-system-context-index-20260818
+    paths:
+      - tools/cocolon_context_inventory.py
+      - tests/cocolon_context/**
+      - Cocolon_前提資料/system_context/workspace_profiles.json
+      - Cocolon_前提資料/system_context/Cocolon_SystemContext_ImplementationContract_20260818.md
+      - .github/workflows/cocolon-system-context-inventory.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cocolon-system-context-inventory-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-and-publish-inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Cocolon source commit
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout locked mashos-api CMEE workspace
+        uses: actions/checkout@v4
+        with:
+          repository: MassyuRed/mashos-api
+          ref: agent/cmee-v1a-i1sx-source-explicit-20260815
+          path: .cocolon-context-workspace/mashos-api
+          fetch-depth: 0
+
+      - name: Run unit tests
+        run: python3 -m unittest tests/cocolon_context/test_inventory.py -v
+
+      - name: Build full tracked-file inventory
+        run: >-
+          python3 tools/cocolon_context_inventory.py build
+          --profiles Cocolon_前提資料/system_context/workspace_profiles.json
+          --workspace cmee_working
+          --repo Cocolon="${GITHUB_WORKSPACE}"
+          --repo mashos-api="${GITHUB_WORKSPACE}/.cocolon-context-workspace/mashos-api"
+          --output Cocolon_前提資料/system_context/current/cmee_working
+
+      - name: Verify exact locked-tree regeneration
+        run: >-
+          python3 tools/cocolon_context_inventory.py verify
+          --profiles Cocolon_前提資料/system_context/workspace_profiles.json
+          --workspace cmee_working
+          --repo Cocolon="${GITHUB_WORKSPACE}"
+          --repo mashos-api="${GITHUB_WORKSPACE}/.cocolon-context-workspace/mashos-api"
+          --output Cocolon_前提資料/system_context/current/cmee_working
+
+      - name: Validate diff
+        run: git diff --check
+
+      - name: Publish generated inventory checkpoint
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- Cocolon_前提資料/system_context/current/cmee_working
+          git diff --cached --check
+          if git diff --cached --quiet; then
+            echo "Inventory is already current."
+            exit 0
+          fi
+          git commit -m "docs(context): publish full tracked-file inventory [skip ci]"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
