@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   contract-guards:
@@ -24,8 +24,6 @@ jobs:
       }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    permissions:
-      contents: read
 
     steps:
       - name: Checkout RN repository
@@ -85,116 +83,3 @@ jobs:
           SUPABASE_SERVICE_ROLE_KEY: test-service-role
           MYMODEL_APP_NAME: Cocolon Test App
         run: pytest -q "${{ steps.api-root.outputs.path }}/ai/tests/contract"
-
-  system-context-step2:
-    if: ${{ github.head_ref == 'agent/cocolon-system-context-index-20260818' || github.ref == 'refs/heads/agent/cocolon-system-context-index-20260818' }}
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    permissions:
-      contents: write
-
-    steps:
-      - name: Checkout Cocolon source branch
-        uses: actions/checkout@v6
-        with:
-          ref: agent/cocolon-system-context-index-20260818
-          fetch-depth: 0
-
-      - name: Checkout locked mashos-api CMEE workspace
-        uses: actions/checkout@v6
-        with:
-          repository: MassyuRed/mashos-api
-          ref: agent/cmee-v1a-i1sx-source-explicit-20260815
-          path: .cocolon-context-workspace/mashos-api
-          fetch-depth: 0
-
-      - name: Run system-context tests
-        run: |
-          python3 -m unittest tests/cocolon_context/test_inventory.py -v
-          python3 -m unittest tests/cocolon_context/test_code_index.py -v
-
-      - name: Build and verify Step 1 inventory
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 tools/cocolon_context_inventory.py build \
-            --profiles Cocolon_前提資料/system_context/workspace_profiles.json \
-            --workspace cmee_working \
-            --repo Cocolon="${GITHUB_WORKSPACE}" \
-            --repo mashos-api="${GITHUB_WORKSPACE}/.cocolon-context-workspace/mashos-api" \
-            --output Cocolon_前提資料/system_context/current/cmee_working
-          python3 tools/cocolon_context_inventory.py verify \
-            --profiles Cocolon_前提資料/system_context/workspace_profiles.json \
-            --workspace cmee_working \
-            --repo Cocolon="${GITHUB_WORKSPACE}" \
-            --repo mashos-api="${GITHUB_WORKSPACE}/.cocolon-context-workspace/mashos-api" \
-            --output Cocolon_前提資料/system_context/current/cmee_working
-
-      - name: Install SCIP indexers and CLI
-        shell: bash
-        run: |
-          set -euo pipefail
-          npm install -g @sourcegraph/scip-typescript@0.4.0 @sourcegraph/scip-python@0.6.6
-          TAG=v0.7.1
-          curl -fsSL "https://github.com/scip-code/scip/releases/download/${TAG}/scip-linux-amd64.tar.gz" -o /tmp/scip.tar.gz
-          tar -xzf /tmp/scip.tar.gz -C /tmp
-          sudo install /tmp/scip /usr/local/bin/scip
-
-      - name: Generate SCIP indexes with explicit fallback
-        shell: bash
-        run: |
-          set -u
-          mkdir -p .cocolon-context-workspace/scip .cocolon-context-workspace/scip-json
-          (cd "${GITHUB_WORKSPACE}" && scip-typescript index --infer-tsconfig --output .cocolon-context-workspace/scip/cocolon-ts.scip) || true
-          (cd "${GITHUB_WORKSPACE}/.cocolon-context-workspace/mashos-api" && scip-typescript index --infer-tsconfig --output ../scip/mashos-ts.scip) || true
-          (cd "${GITHUB_WORKSPACE}/.cocolon-context-workspace/mashos-api" && scip-python index . --project-name=mashos-api --output ../scip/mashos-py.scip) || true
-          for path in .cocolon-context-workspace/scip/*.scip; do
-            [[ -f "$path" ]] || continue
-            base="$(basename "$path" .scip)"
-            scip print --json "$path" > ".cocolon-context-workspace/scip-json/${base}.json" || true
-          done
-
-      - name: Merge SCIP and syntax fallback
-        shell: bash
-        run: |
-          set -euo pipefail
-          args=(
-            --inventory Cocolon_前提資料/system_context/current/cmee_working/files.jsonl
-            --repo Cocolon="${GITHUB_WORKSPACE}"
-            --repo mashos-api="${GITHUB_WORKSPACE}/.cocolon-context-workspace/mashos-api"
-            --output Cocolon_前提資料/system_context/current/cmee_working/code_index
-          )
-          [[ -f .cocolon-context-workspace/scip-json/cocolon-ts.json ]] && args+=(--scip-json Cocolon=.cocolon-context-workspace/scip-json/cocolon-ts.json)
-          [[ -f .cocolon-context-workspace/scip-json/mashos-ts.json ]] && args+=(--scip-json mashos-api=.cocolon-context-workspace/scip-json/mashos-ts.json)
-          [[ -f .cocolon-context-workspace/scip-json/mashos-py.json ]] && args+=(--scip-json mashos-api=.cocolon-context-workspace/scip-json/mashos-py.json)
-          python3 tools/cocolon_context_code_index.py "${args[@]}"
-
-      - name: Validate Step 2 denominator and diff
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          import json, pathlib
-          root=pathlib.Path('Cocolon_前提資料/system_context/current/cmee_working')
-          manifest=json.loads((root/'manifest.json').read_text())
-          summary=json.loads((root/'code_index/code_index_summary.json').read_text())
-          assert summary['coverage_total'] == manifest['total_tracked_entries']
-          assert summary['coverage_gap_count'] == 0
-          PY
-          git diff --check
-
-      - name: Publish Step 2 generated checkpoint
-        if: ${{ github.event_name == 'push' }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- Cocolon_前提資料/system_context/current/cmee_working
-          git diff --cached --check
-          if git diff --cached --quiet; then
-            echo "System context is already current."
-            exit 0
-          fi
-          git commit -m "docs(context): publish SCIP and syntax code index [skip ci]"
-          git push origin "HEAD:agent/cocolon-system-context-index-20260818"

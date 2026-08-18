@@ -1,4 +1,4 @@
-name: Cocolon system context inventory and code index
+name: Cocolon system context inventory
 
 on:
   push:
@@ -6,7 +6,6 @@ on:
       - agent/cocolon-system-context-index-20260818
     paths:
       - tools/cocolon_context_inventory.py
-      - tools/cocolon_context_code_index.py
       - tests/cocolon_context/**
       - Cocolon_前提資料/system_context/workspace_profiles.json
       - Cocolon_前提資料/system_context/Cocolon_SystemContext_ImplementationContract_20260818.md
@@ -21,7 +20,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build-and-publish:
+  build-and-publish-inventory:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Cocolon source commit
@@ -38,9 +37,7 @@ jobs:
           fetch-depth: 0
 
       - name: Run unit tests
-        run: |
-          python3 -m unittest tests/cocolon_context/test_inventory.py -v
-          python3 -m unittest tests/cocolon_context/test_code_index.py -v
+        run: python3 -m unittest tests/cocolon_context/test_inventory.py -v
 
       - name: Build full tracked-file inventory
         run: >-
@@ -60,79 +57,10 @@ jobs:
           --repo mashos-api="${GITHUB_WORKSPACE}/.cocolon-context-workspace/mashos-api"
           --output Cocolon_前提資料/system_context/current/cmee_working
 
-      - name: Install SCIP indexers
-        run: npm install -g @sourcegraph/scip-typescript @sourcegraph/scip-python
-
-      - name: Generate SCIP TypeScript/JavaScript indexes
-        shell: bash
-        run: |
-          set -u
-          mkdir -p .cocolon-context-workspace/scip
-          (cd "${GITHUB_WORKSPACE}" && scip-typescript index --infer-tsconfig --output .cocolon-context-workspace/scip/cocolon-ts.scip) || true
-          (cd "${GITHUB_WORKSPACE}/.cocolon-context-workspace/mashos-api" && scip-typescript index --infer-tsconfig --output ../scip/mashos-ts.scip) || true
-
-      - name: Generate SCIP Python index
-        shell: bash
-        run: |
-          set -u
-          (cd "${GITHUB_WORKSPACE}/.cocolon-context-workspace/mashos-api" && scip-python index . --project-name=mashos-api --output ../scip/mashos-py.scip) || true
-
-      - name: Install SCIP CLI
-        shell: bash
-        run: |
-          set -euo pipefail
-          TAG=v0.6.1
-          curl -fsSL "https://github.com/scip-code/scip/releases/download/${TAG}/scip-linux-amd64.tar.gz" -o /tmp/scip.tar.gz
-          tar -xzf /tmp/scip.tar.gz -C /tmp
-          sudo install /tmp/scip /usr/local/bin/scip
-
-      - name: Convert SCIP indexes to JSON when available
-        shell: bash
-        run: |
-          set -euo pipefail
-          mkdir -p .cocolon-context-workspace/scip-json
-          for pair in \
-            "Cocolon:.cocolon-context-workspace/scip/cocolon-ts.scip" \
-            "mashos-api:.cocolon-context-workspace/scip/mashos-ts.scip" \
-            "mashos-api:.cocolon-context-workspace/scip/mashos-py.scip"; do
-            key="${pair%%:*}"
-            path="${pair#*:}"
-            if [[ -f "$path" ]]; then
-              base="$(basename "$path" .scip)"
-              scip print --json "$path" > ".cocolon-context-workspace/scip-json/${base}.json" || true
-            fi
-          done
-
-      - name: Merge syntax fallback and SCIP results
-        shell: bash
-        run: |
-          set -euo pipefail
-          args=(
-            --inventory Cocolon_前提資料/system_context/current/cmee_working/files.jsonl
-            --repo Cocolon="${GITHUB_WORKSPACE}"
-            --repo mashos-api="${GITHUB_WORKSPACE}/.cocolon-context-workspace/mashos-api"
-            --output Cocolon_前提資料/system_context/current/cmee_working/code_index
-          )
-          [[ -f .cocolon-context-workspace/scip-json/cocolon-ts.json ]] && args+=(--scip-json Cocolon=.cocolon-context-workspace/scip-json/cocolon-ts.json)
-          [[ -f .cocolon-context-workspace/scip-json/mashos-ts.json ]] && args+=(--scip-json mashos-api=.cocolon-context-workspace/scip-json/mashos-ts.json)
-          [[ -f .cocolon-context-workspace/scip-json/mashos-py.json ]] && args+=(--scip-json mashos-api=.cocolon-context-workspace/scip-json/mashos-py.json)
-          python3 tools/cocolon_context_code_index.py "${args[@]}"
-
-      - name: Validate full denominator coverage
-        run: |
-          python3 - <<'PY'
-          import json, pathlib
-          root=pathlib.Path('Cocolon_前提資料/system_context/current/cmee_working')
-          manifest=json.loads((root/'manifest.json').read_text())
-          summary=json.loads((root/'code_index/code_index_summary.json').read_text())
-          assert summary['coverage_total'] == manifest['total_tracked_entries']
-          assert summary['coverage_gap_count'] == 0
-          PY
-
       - name: Validate diff
         run: git diff --check
 
-      - name: Publish generated context checkpoint
+      - name: Publish generated inventory checkpoint
         shell: bash
         run: |
           set -euo pipefail
@@ -141,8 +69,8 @@ jobs:
           git add -- Cocolon_前提資料/system_context/current/cmee_working
           git diff --cached --check
           if git diff --cached --quiet; then
-            echo "System context is already current."
+            echo "Inventory is already current."
             exit 0
           fi
-          git commit -m "docs(context): publish SCIP and syntax code index [skip ci]"
+          git commit -m "docs(context): publish full tracked-file inventory [skip ci]"
           git push origin "HEAD:${GITHUB_REF_NAME}"
