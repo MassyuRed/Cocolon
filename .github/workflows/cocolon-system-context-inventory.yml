@@ -238,6 +238,10 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          du -sh Cocolon_前提資料/system_context/current/cmee_working
+          find Cocolon_前提資料/system_context/current/cmee_working -type f -printf '%s\t%p\n' \
+            | LC_ALL=C sort -nr \
+            | head -20
           git add -- Cocolon_前提資料/system_context/current/cmee_working
           git diff --cached --check
           if git diff --cached --quiet; then
@@ -268,8 +272,8 @@ jobs:
         run: |
           set -euo pipefail
           DIAG="Cocolon_前提資料/system_context/current/cmee_working/workflow_last_failure.json"
-          export DIAG
-          mkdir -p "$(dirname "$DIAG")"
+          FAILURE_JSON=/tmp/cocolon-system-context-failure.json
+          export DIAG FAILURE_JSON
           python3 - <<'PY'
           import json
           import os
@@ -289,21 +293,26 @@ jobs:
               "run_id": int(os.environ["GITHUB_RUN_ID"]),
               "run_attempt": int(os.environ["GITHUB_RUN_ATTEMPT"]),
               "trigger_sha": os.environ["GITHUB_SHA"],
-              "worktree_head": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
+              "worktree_head_before_reset": subprocess.check_output(
+                  ["git", "rev-parse", "HEAD"], text=True
+              ).strip(),
               "run_url": f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}",
               "failing_steps": failing,
               "step_outcomes": outcomes,
               "diagnostic_scope": "ONE_SHOT_FAILURE_STAGE_ONLY",
               "product_effect": 0,
           }
-          pathlib.Path(os.environ["DIAG"]).write_text(
+          pathlib.Path(os.environ["FAILURE_JSON"]).write_text(
               json.dumps(record, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
               encoding="utf-8",
           )
           PY
+          git reset --hard "$GITHUB_SHA"
+          git clean -fd -- Cocolon_前提資料/system_context/current/cmee_working
+          mkdir -p "$(dirname "$DIAG")"
+          cp "$FAILURE_JSON" "$DIAG"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git reset --mixed
           git add -- "$DIAG"
           git diff --cached --check
           git commit -m "docs(context): record workflow failure stage [skip ci]"
