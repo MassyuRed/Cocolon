@@ -148,6 +148,17 @@ class PublicationTransportTests(unittest.TestCase):
             ):
                 publication_transport.verify_outputs(root)
 
+    def test_undeclared_part_is_rejected(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            root = pathlib.Path(raw)
+            make_outputs(root)
+            publication_transport.pack_outputs(root, max_part_bytes=180)
+            (root / "code_index/rogue.jsonl.part0000").write_bytes(b"rogue\n")
+            with self.assertRaises(
+                publication_transport.PublicationTransportError
+            ):
+                publication_transport.verify_outputs(root)
+
 
 if __name__ == "__main__":
     unittest.main()
