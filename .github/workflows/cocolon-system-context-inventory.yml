@@ -33,12 +33,14 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Checkout Cocolon source branch
+        id: checkout_cocolon
         uses: actions/checkout@v4
         with:
           ref: agent/cocolon-system-context-index-20260818
           fetch-depth: 0
 
       - name: Checkout locked mashos-api CMEE workspace
+        id: checkout_mashos
         uses: actions/checkout@v4
         with:
           repository: MassyuRed/mashos-api
@@ -46,7 +48,15 @@ jobs:
           path: .cocolon-context-workspace/mashos-api
           fetch-depth: 0
 
+      - name: Clear prior one-shot workflow failure marker
+        id: clear_failure
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f Cocolon_前提資料/system_context/current/cmee_working/workflow_last_failure.json
+
       - name: Materialize verified Step 3 source payload
+        id: materialize
         shell: bash
         run: |
           set -euo pipefail
@@ -77,16 +87,19 @@ jobs:
           fi
 
       - name: Set up Python 3.11
+        id: setup_python
         uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Set up Node 20
+        id: setup_node
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
       - name: Install pinned SCIP toolchain
+        id: toolchain
         shell: bash
         run: |
           set -euo pipefail
@@ -112,6 +125,7 @@ jobs:
           scip-python --version
 
       - name: Run system-context tests
+        id: tests
         shell: bash
         run: |
           set -euo pipefail
@@ -126,6 +140,7 @@ jobs:
           python3 -m unittest tests/cocolon_context/test_routes.py -v
 
       - name: Build and verify full tracked-file inventory
+        id: inventory
         shell: bash
         run: |
           set -euo pipefail
@@ -143,6 +158,7 @@ jobs:
             --output Cocolon_前提資料/system_context/current/cmee_working
 
       - name: Generate required precise SCIP indexes
+        id: scip
         shell: bash
         run: |
           set -euo pipefail
@@ -155,6 +171,7 @@ jobs:
             --work .cocolon-context-workspace/scip-step2
 
       - name: Build and verify SCIP plus syntax code index
+        id: code_index
         shell: bash
         run: |
           set -euo pipefail
@@ -171,6 +188,7 @@ jobs:
             --output Cocolon_前提資料/system_context/current/cmee_working/code_index
 
       - name: Build and verify RN/API cross-repository route graph
+        id: route_graph
         shell: bash
         run: |
           set -euo pipefail
@@ -188,6 +206,7 @@ jobs:
             --output Cocolon_前提資料/system_context/current/cmee_working/route_graph
 
       - name: Validate Step 2 and Step 3 completion
+        id: validate
         shell: bash
         run: |
           set -euo pipefail
@@ -214,6 +233,7 @@ jobs:
           git diff --check
 
       - name: Publish generated system-context checkpoint
+        id: publish
         shell: bash
         run: |
           set -euo pipefail
@@ -226,4 +246,81 @@ jobs:
             exit 0
           fi
           git commit -m "docs(context): publish code index and RN API route graph [skip ci]"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: Record one-shot system-context workflow failure
+        if: ${{ failure() }}
+        shell: bash
+        env:
+          OUTCOME_CHECKOUT_COCOLON: ${{ steps.checkout_cocolon.outcome }}
+          OUTCOME_CHECKOUT_MASHOS: ${{ steps.checkout_mashos.outcome }}
+          OUTCOME_CLEAR_FAILURE: ${{ steps.clear_failure.outcome }}
+          OUTCOME_MATERIALIZE: ${{ steps.materialize.outcome }}
+          OUTCOME_SETUP_PYTHON: ${{ steps.setup_python.outcome }}
+          OUTCOME_SETUP_NODE: ${{ steps.setup_node.outcome }}
+          OUTCOME_TOOLCHAIN: ${{ steps.toolchain.outcome }}
+          OUTCOME_TESTS: ${{ steps.tests.outcome }}
+          OUTCOME_INVENTORY: ${{ steps.inventory.outcome }}
+          OUTCOME_SCIP: ${{ steps.scip.outcome }}
+          OUTCOME_CODE_INDEX: ${{ steps.code_index.outcome }}
+          OUTCOME_ROUTE_GRAPH: ${{ steps.route_graph.outcome }}
+          OUTCOME_VALIDATE: ${{ steps.validate.outcome }}
+          OUTCOME_PUBLISH: ${{ steps.publish.outcome }}
+        run: |
+          set -euo pipefail
+          DIAG="Cocolon_前提資料/system_context/current/cmee_working/workflow_last_failure.json"
+          export DIAG
+          mkdir -p "$(dirname "$DIAG")"
+          python3 - <<'PY'
+          import json
+          import os
+          import pathlib
+          import subprocess
+
+          keys = [
+              "CHECKOUT_COCOLON",
+              "CHECKOUT_MASHOS",
+              "CLEAR_FAILURE",
+              "MATERIALIZE",
+              "SETUP_PYTHON",
+              "SETUP_NODE",
+              "TOOLCHAIN",
+              "TESTS",
+              "INVENTORY",
+              "SCIP",
+              "CODE_INDEX",
+              "ROUTE_GRAPH",
+              "VALIDATE",
+              "PUBLISH",
+          ]
+          outcomes = {key.lower(): os.environ.get(f"OUTCOME_{key}", "unknown") for key in keys}
+          failing = [key for key, value in outcomes.items() if value == "failure"]
+          worktree_head = subprocess.check_output(
+              ["git", "rev-parse", "HEAD"], text=True
+          ).strip()
+          record = {
+              "schema_version": "cocolon.system_context.workflow_failure_stage.v1",
+              "repository": os.environ["GITHUB_REPOSITORY"],
+              "branch": os.environ["GITHUB_REF_NAME"],
+              "run_id": int(os.environ["GITHUB_RUN_ID"]),
+              "run_attempt": int(os.environ["GITHUB_RUN_ATTEMPT"]),
+              "trigger_sha": os.environ["GITHUB_SHA"],
+              "worktree_head": worktree_head,
+              "run_url": f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}",
+              "failing_steps": failing,
+              "step_outcomes": outcomes,
+              "diagnostic_scope": "ONE_SHOT_FAILURE_STAGE_ONLY",
+              "product_effect": 0,
+          }
+          pathlib.Path(os.environ["DIAG"]).write_text(
+              json.dumps(record, ensure_ascii=False, indent=2, sort_keys=True) + "\n",
+              encoding="utf-8",
+          )
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git reset --mixed
+          git add -- "$DIAG"
+          git diff --cached --check
+          git commit -m "docs(context): record workflow failure stage [skip ci]"
           git push origin "HEAD:${GITHUB_REF_NAME}"
