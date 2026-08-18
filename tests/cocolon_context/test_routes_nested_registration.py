@@ -135,5 +135,109 @@ class NestedFastApiRouteTests(unittest.TestCase):
             )
 
 
+class RnUnresolvedAdjudicationTests(unittest.TestCase):
+    def test_local_query_builder_wrapper_and_method_options_are_resolved(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            root = pathlib.Path(raw)
+            repo = make_repo(
+                root,
+                "Cocolon",
+                {
+                    "lib/client.js": (
+                        "export async function apiFetch(pathOrUrl, options = {}) {\n"
+                        "  return fetch(pathOrUrl, options);\n"
+                        "}\n"
+                        "export async function apiJson(path, options = {}) {\n"
+                        "  return apiFetch(path, options);\n"
+                        "}\n"
+                        "export function apiGet(path, options = {}) {\n"
+                        "  return apiJson(path, { ...options, method: 'GET' });\n"
+                        "}\n"
+                        "export function apiPost(path, body, options = {}) {\n"
+                        "  return apiJson(path, { ...options, method: 'POST', body });\n"
+                        "}\n"
+                    ),
+                    "lib/contracts.js": (
+                        "export const WIRE = Object.freeze({routes:Object.freeze({\n"
+                        "  incoming:'/follow/requests/incoming',\n"
+                        "  outgoing:'/follow/requests/outgoing',\n"
+                        "  approve:'/follow/requests/approve',\n"
+                        "  reject:'/follow/requests/reject'\n"
+                        "})});\n"
+                        "export function buildFollowRequestsPath(kind) {\n"
+                        "  const basePath = String(kind || '').trim() === 'outgoing'\n"
+                        "    ? WIRE.routes.outgoing\n"
+                        "    : WIRE.routes.incoming;\n"
+                        "  const params = new URLSearchParams();\n"
+                        "  const query = params.toString();\n"
+                        "  return query ? `${basePath}?${query}` : basePath;\n"
+                        "}\n"
+                    ),
+                    "screens/TestScreen.js": (
+                        "import { apiFetch, apiGet, apiPost } from '../lib/client';\n"
+                        "import { WIRE, buildFollowRequestsPath } from '../lib/contracts';\n"
+                        "const API_BASE_URL = 'https://example.test';\n"
+                        "async function getJsonWithAuth(url) {\n"
+                        "  return apiFetch(url, { method: 'GET' });\n"
+                        "}\n"
+                        "export async function run(kind) {\n"
+                        "  const params = new URLSearchParams();\n"
+                        "  params.set('x', '1');\n"
+                        "  const query = params.toString();\n"
+                        "  const homePath = `/home/state${query ? `?${query}` : ''}`;\n"
+                        "  await apiGet(homePath);\n"
+                        "  await apiFetch(buildFollowRequestsPath('incoming'), { method: 'GET' });\n"
+                        "  await apiFetch(buildFollowRequestsPath('outgoing'), { method: 'GET' });\n"
+                        "  const fetchOpts = { method: 'GET' };\n"
+                        "  await apiFetch('/self-structure/latest?x=1', fetchOpts);\n"
+                        "  const rankUrl = new URL('/ranking/emotions', API_BASE_URL);\n"
+                        "  rankUrl.searchParams.set('range', 'day');\n"
+                        "  await getJsonWithAuth(rankUrl.toString());\n"
+                        "  const endpoint = kind === 'approve'\n"
+                        "    ? WIRE.routes.approve\n"
+                        "    : WIRE.routes.reject;\n"
+                        "  await apiPost(endpoint, {});\n"
+                        "}\n"
+                    ),
+                },
+            )
+            rows = inventory_rows(repo, "Cocolon")
+            calls, errors = routes.extract_rn_calls(rows, repo, HELPER)
+            self.assertFalse(errors)
+            self.assertFalse(any(call["path"] == "lib/client.js" for call in calls))
+
+            def candidates(expression: str) -> list[set[str]]:
+                return [
+                    set(call["normalized_path_candidates"])
+                    for call in calls
+                    if call["path_expression"] == expression
+                ]
+
+            self.assertIn({"/home/state"}, candidates("homePath"))
+            self.assertIn(
+                {"/follow/requests/incoming"},
+                candidates("buildFollowRequestsPath('incoming')"),
+            )
+            self.assertIn(
+                {"/follow/requests/outgoing"},
+                candidates("buildFollowRequestsPath('outgoing')"),
+            )
+            self.assertIn(
+                {"/self-structure/latest"},
+                candidates("'/self-structure/latest?x=1'"),
+            )
+            self.assertIn({"/ranking/emotions"}, candidates("rankUrl.toString()"))
+            self.assertIn(
+                {"/follow/requests/approve", "/follow/requests/reject"},
+                candidates("endpoint"),
+            )
+            local_options = [
+                call
+                for call in calls
+                if call["path_expression"] == "'/self-structure/latest?x=1'"
+            ]
+            self.assertEqual(["GET"], [call["method"] for call in local_options])
+
+
 if __name__ == "__main__":
     unittest.main()
