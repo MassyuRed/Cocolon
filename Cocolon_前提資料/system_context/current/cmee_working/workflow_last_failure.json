@@ -2,13 +2,13 @@
   "branch": "agent/cocolon-system-context-index-20260818",
   "diagnostic_scope": "ONE_SHOT_FAILURE_STAGE_ONLY",
   "failing_steps": [
-    "toolchain"
+    "tests"
   ],
   "product_effect": 0,
   "repository": "MassyuRed/Cocolon",
   "run_attempt": 1,
-  "run_id": 32140568680,
-  "run_url": "https://github.com/MassyuRed/Cocolon/actions/runs/32140568680",
+  "run_id": 32140851680,
+  "run_url": "https://github.com/MassyuRed/Cocolon/actions/runs/32140851680",
   "schema_version": "cocolon.system_context.workflow_failure_stage.v1",
   "step_outcomes": {
     "checkout_cocolon": "success",
@@ -22,10 +22,10 @@
     "scip": "skipped",
     "setup_node": "success",
     "setup_python": "success",
-    "tests": "skipped",
-    "toolchain": "failure",
+    "tests": "failure",
+    "toolchain": "success",
     "validate": "skipped"
   },
-  "trigger_sha": "c1eba61aeb80e74c3e473e987ac552b008837b5a",
-  "worktree_head": "c1eba61aeb80e74c3e473e987ac552b008837b5a"
+  "trigger_sha": "74f84f6667cb3df4975e7cb8e6b1876fc59e8ebe",
+  "worktree_head": "74f84f6667cb3df4975e7cb8e6b1876fc59e8ebe"
 }
