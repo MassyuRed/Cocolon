@@ -13,6 +13,7 @@ on:
       - Cocolon_前提資料/system_context/workspace_profiles.json
       - Cocolon_前提資料/system_context/Cocolon_SystemContext_ImplementationContract_20260818.md
       - .github/workflows/cocolon-system-context-inventory.yml
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -27,9 +28,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
-      - name: Checkout Cocolon source commit
+      - name: Checkout Cocolon source branch
         uses: actions/checkout@v4
         with:
+          ref: ${{ github.head_ref || github.ref_name }}
           fetch-depth: 0
 
       - name: Checkout locked mashos-api CMEE workspace
@@ -148,7 +150,7 @@ jobs:
             exit 0
           fi
           git commit -m "docs(context): publish SCIP and syntax index [skip ci]"
-          git push origin "HEAD:${GITHUB_REF_NAME}"
+          git push origin "HEAD:${{ github.head_ref || github.ref_name }}"
 
       - name: Validate Step 2 completion and diff
         shell: bash
