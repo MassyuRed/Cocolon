@@ -1,4 +1,5 @@
 name: Cocolon system context inventory, code index, and route graph
+run-name: Cocolon system context A fresh @ ${{ github.sha }}
 
 on:
   push:
