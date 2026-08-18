@@ -1,6 +1,37 @@
 {
   "schema_version": "cocolon.system_context.workspace_profiles.v1",
   "default_workspace": "cmee_working",
+  "code_index": {
+    "schema_version": "cocolon.system_context.code_index_configuration.v1",
+    "toolchain": {
+      "node_major": "20",
+      "typescript_syntax": "5.2.2",
+      "scip_cli": "v0.7.1",
+      "scip_typescript": "0.4.0",
+      "scip_python": "0.6.6"
+    },
+    "runs": [
+      {
+        "run_id": "cocolon_typescript",
+        "repository_key": "Cocolon",
+        "family": "typescript",
+        "required": true
+      },
+      {
+        "run_id": "mashos_api_python",
+        "repository_key": "mashos-api",
+        "family": "python",
+        "project_name": "mashos-api",
+        "required": true
+      },
+      {
+        "run_id": "mashos_api_typescript",
+        "repository_key": "mashos-api",
+        "family": "typescript",
+        "required": true
+      }
+    ]
+  },
   "profiles": {
     "production_main": {
       "purpose": "Merged production baseline for RN and API",

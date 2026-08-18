@@ -1,4 +1,4 @@
-name: Cocolon system context inventory
+name: Cocolon system context inventory and code index
 
 on:
   push:
@@ -6,6 +6,9 @@ on:
       - agent/cocolon-system-context-index-20260818
     paths:
       - tools/cocolon_context_inventory.py
+      - tools/cocolon_context_code_index.py
+      - tools/cocolon_context_index_*.py
+      - tools/cocolon_context_ts_syntax.cjs
       - tests/cocolon_context/**
       - Cocolon_前提資料/system_context/workspace_profiles.json
       - Cocolon_前提資料/system_context/Cocolon_SystemContext_ImplementationContract_20260818.md
@@ -16,12 +19,13 @@ permissions:
   contents: write
 
 concurrency:
-  group: cocolon-system-context-inventory-${{ github.ref }}
+  group: cocolon-system-context-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  build-and-publish-inventory:
+  build-and-publish:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
       - name: Checkout Cocolon source commit
         uses: actions/checkout@v4
@@ -36,31 +40,116 @@ jobs:
           path: .cocolon-context-workspace/mashos-api
           fetch-depth: 0
 
-      - name: Run unit tests
-        run: python3 -m unittest tests/cocolon_context/test_inventory.py -v
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
 
-      - name: Build full tracked-file inventory
-        run: >-
-          python3 tools/cocolon_context_inventory.py build
-          --profiles Cocolon_前提資料/system_context/workspace_profiles.json
-          --workspace cmee_working
-          --repo Cocolon="${GITHUB_WORKSPACE}"
-          --repo mashos-api="${GITHUB_WORKSPACE}/.cocolon-context-workspace/mashos-api"
-          --output Cocolon_前提資料/system_context/current/cmee_working
+      - name: Set up supported Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
 
-      - name: Verify exact locked-tree regeneration
-        run: >-
-          python3 tools/cocolon_context_inventory.py verify
-          --profiles Cocolon_前提資料/system_context/workspace_profiles.json
-          --workspace cmee_working
-          --repo Cocolon="${GITHUB_WORKSPACE}"
-          --repo mashos-api="${GITHUB_WORKSPACE}/.cocolon-context-workspace/mashos-api"
-          --output Cocolon_前提資料/system_context/current/cmee_working
+      - name: Install pinned SCIP toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install -g --no-audit --no-fund \
+            @sourcegraph/scip-typescript@0.4.0 \
+            @sourcegraph/scip-python@0.6.6 \
+            typescript@5.2.2
+          echo "NODE_PATH=$(npm root -g)" >> "$GITHUB_ENV"
+          SCIP_TAG=v0.7.1
+          curl --retry 3 --retry-all-errors -fsSL \
+            "https://github.com/scip-code/scip/releases/download/${SCIP_TAG}/scip-linux-amd64.tar.gz" \
+            -o /tmp/scip.tar.gz
+          rm -rf /tmp/scip-bin
+          mkdir -p /tmp/scip-bin
+          tar -xzf /tmp/scip.tar.gz -C /tmp/scip-bin
+          SCIP_BIN="$(find /tmp/scip-bin -type f -name scip -print -quit)"
+          test -n "$SCIP_BIN"
+          sudo install "$SCIP_BIN" /usr/local/bin/scip
+          node --version
+          scip --version
+          scip-typescript --version
+          scip-python --version
 
-      - name: Validate diff
-        run: git diff --check
+      - name: Run system-context unit tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check tools/cocolon_context_ts_syntax.cjs
+          python3 -m unittest tests/cocolon_context/test_inventory.py -v
+          python3 -m unittest tests/cocolon_context/test_code_index.py -v
 
-      - name: Publish generated inventory checkpoint
+      - name: Build and verify full tracked-file inventory
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/cocolon_context_inventory.py build \
+            --profiles Cocolon_前提資料/system_context/workspace_profiles.json \
+            --workspace cmee_working \
+            --repo Cocolon="${GITHUB_WORKSPACE}" \
+            --repo mashos-api="${GITHUB_WORKSPACE}/.cocolon-context-workspace/mashos-api" \
+            --output Cocolon_前提資料/system_context/current/cmee_working
+          python3 tools/cocolon_context_inventory.py verify \
+            --profiles Cocolon_前提資料/system_context/workspace_profiles.json \
+            --workspace cmee_working \
+            --repo Cocolon="${GITHUB_WORKSPACE}" \
+            --repo mashos-api="${GITHUB_WORKSPACE}/.cocolon-context-workspace/mashos-api" \
+            --output Cocolon_前提資料/system_context/current/cmee_working
+
+      - name: Generate precise SCIP indexes
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf .cocolon-context-workspace/scip-step2
+          mkdir -p .cocolon-context-workspace/scip-step2
+          python3 tools/cocolon_context_code_index.py run-scip \
+            --profiles Cocolon_前提資料/system_context/workspace_profiles.json \
+            --workspace cmee_working \
+            --inventory Cocolon_前提資料/system_context/current/cmee_working/files.jsonl \
+            --repo Cocolon="${GITHUB_WORKSPACE}" \
+            --repo mashos-api="${GITHUB_WORKSPACE}/.cocolon-context-workspace/mashos-api" \
+            --work .cocolon-context-workspace/scip-step2
+
+      - name: Merge SCIP and syntax analysis
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/cocolon_context_code_index.py build \
+            --profiles Cocolon_前提資料/system_context/workspace_profiles.json \
+            --workspace cmee_working \
+            --inventory Cocolon_前提資料/system_context/current/cmee_working/files.jsonl \
+            --repo Cocolon="${GITHUB_WORKSPACE}" \
+            --repo mashos-api="${GITHUB_WORKSPACE}/.cocolon-context-workspace/mashos-api" \
+            --scip-work .cocololon-context-workspace/scip-step2 \
+            --output Cocolon_前提資料/system_context/current/cmee_working/code_index
+          python3 tools/cocolon_context_code_index.py verify \
+            --inventory Cocolon_前提資料/system_context/current/cmee_working/files.jsonl \
+            --output Cocolon_前提資料/system_context/current/cmee_working/code_index
+
+      - name: Validate Step 2 completion and diff
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path("Cocolon_前提資料/system_context/current/cmee_working")
+          inventory = json.loads((root / "manifest.json").read_text())
+          summary = json.loads((root / "code_index/code_index_summary.json").read_text())
+          assert summary["completion_claim"] == "STEP2_SCIP_AND_SYNTAX_INDEX_CONNECTED"
+          assert summary["inventory_total"] == inventory["total_tracked_entries"]
+          assert summary["coverage_total"] == inventory["total_tracked_entries"]
+          assert summary["coverage_gap_count"] == 0
+          assert summary["duplicate_coverage_count"] == 0
+          assert summary["required_scip_runs_ok"] is True
+          assert summary["scip_precise_file_count"] > 0
+          PY
+          git diff --check
+
+      - name: Publish Step 2 generated checkpoint
         shell: bash
         run: |
           set -euo pipefail
@@ -69,8 +158,8 @@ jobs:
           git add -- Cocolon_前提資料/system_context/current/cmee_working
           git diff --cached --check
           if git diff --cached --quiet; then
-            echo "Inventory is already current."
+            echo "System context outputs are already current."
             exit 0
           fi
-          git commit -m "docs(context): publish full tracked-file inventory [skip ci]"
+          git commit -m "docs(context): publish SCIP and syntax index [skip ci]"
           git push origin "HEAD:${GITHUB_REF_NAME}"
