@@ -15,7 +15,9 @@ on:
       - Cocolon_前提資料/system_context/workspace_profiles.json
       - Cocolon_前提資料/system_context/Cocolon_SystemContext_ImplementationContract_20260818.md
       - .github/workflows/cocolon-system-context-inventory.yml
+      - .github/context-payloads/step2-code/**
       - .github/context-payloads/step3/**
+      - .github/context-payloads/step3-ts-routes/**
   workflow_dispatch:
 
 permissions:
@@ -78,10 +80,10 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Set up Node 24
+      - name: Set up Node 20
         uses: actions/setup-node@v4
         with:
-          node-version: "24"
+          node-version: "20"
 
       - name: Install pinned SCIP toolchain
         shell: bash
