@@ -241,7 +241,7 @@ jobs:
           du -sh Cocolon_前提資料/system_context/current/cmee_working
           find Cocolon_前提資料/system_context/current/cmee_working -type f -printf '%s\t%p\n' \
             | LC_ALL=C sort -nr \
-            | head -20
+            | awk 'NR <= 20 { print }'
           git add -- Cocolon_前提資料/system_context/current/cmee_working
           git diff --cached --check
           if git diff --cached --quiet; then
