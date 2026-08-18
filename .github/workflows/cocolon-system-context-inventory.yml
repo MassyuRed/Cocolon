@@ -55,12 +55,15 @@ jobs:
           set -euo pipefail
           rm -f Cocolon_前提資料/system_context/current/cmee_working/workflow_last_failure.json
 
-      - name: Materialize verified Step 3 source payload
+      - name: Verify admitted Step 3 payload lineage
         id: materialize
         shell: bash
         run: |
           set -euo pipefail
           PAYLOAD_DIR=.github/context-payloads/step3
+          ADMITTED_DIR=/tmp/cocolon-step3-admitted
+          rm -rf "$ADMITTED_DIR"
+          mkdir -p "$ADMITTED_DIR"
           cat "${PAYLOAD_DIR}"/part* > /tmp/cocolon-step3-payload.b64
           echo "d7893436ace9d1e7f8791b327473e3c11810c09bd72152f610934217267717dc  /tmp/cocolon-step3-payload.b64" | sha256sum -c -
           base64 -d /tmp/cocolon-step3-payload.b64 > /tmp/cocolon-step3-payload.tar.gz
@@ -70,21 +73,13 @@ jobs:
             tests/cocolon_context/test_routes.py \
             tools/cocolon_context_routes.py | LC_ALL=C sort)"
           test "$ACTUAL_LIST" = "$EXPECTED_LIST"
-          tar -xzf /tmp/cocolon-step3-payload.tar.gz -C "${GITHUB_WORKSPACE}"
-          echo "847303f952dd9fd6a7fd9540c5a42cf53751375cb35c86c863fc78d3bee4c3fe  tools/cocolon_context_routes.py" | sha256sum -c -
-          echo "4d520138b2c92646bf97923a473a6548a2f108ac5f41076a9c7bd50c665aa60c  tests/cocolon_context/test_code_index.py" | sha256sum -c -
-          echo "9a6f4d5d60ba7d17db5d4df10e27e84e9a1b7f253cb7555924327646364d02a8  tests/cocolon_context/test_routes.py" | sha256sum -c -
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- \
-            tools/cocolon_context_routes.py \
-            tests/cocolon_context/test_code_index.py \
-            tests/cocolon_context/test_routes.py
-          git diff --cached --check
-          if ! git diff --cached --quiet; then
-            git commit -m "feat(context): materialize Step 3 route implementation [skip ci]"
-            git push origin "HEAD:${GITHUB_REF_NAME}"
-          fi
+          tar -xzf /tmp/cocolon-step3-payload.tar.gz -C "$ADMITTED_DIR"
+          echo "847303f952dd9fd6a7fd9540c5a42cf53751375cb35c86c863fc78d3bee4c3fe  ${ADMITTED_DIR}/tools/cocolon_context_routes.py" | sha256sum -c -
+          echo "4d520138b2c92646bf97923a473a6548a2f108ac5f41076a9c7bd50c665aa60c  ${ADMITTED_DIR}/tests/cocolon_context/test_code_index.py" | sha256sum -c -
+          echo "9a6f4d5d60ba7d17db5d4df10e27e84e9a1b7f253cb7555924327646364d02a8  ${ADMITTED_DIR}/tests/cocolon_context/test_routes.py" | sha256sum -c -
+          test -f tools/cocolon_context_routes.py
+          test -f tests/cocolon_context/test_code_index.py
+          test -f tests/cocolon_context/test_routes.py
 
       - name: Set up Python 3.11
         id: setup_python
@@ -140,6 +135,7 @@ jobs:
           python3 -m unittest tests/cocolon_context/test_inventory.py -v
           python3 -m unittest tests/cocolon_context/test_code_index.py -v
           python3 -m unittest tests/cocolon_context/test_routes.py -v
+          python3 -m unittest tests/cocolon_context/test_routes_nested_registration.py -v
 
       - name: Build and verify full tracked-file inventory
         id: inventory
@@ -278,28 +274,13 @@ jobs:
           import os
           import pathlib
           import subprocess
-
           keys = [
-              "CHECKOUT_COCOLON",
-              "CHECKOUT_MASHOS",
-              "CLEAR_FAILURE",
-              "MATERIALIZE",
-              "SETUP_PYTHON",
-              "SETUP_NODE",
-              "TOOLCHAIN",
-              "TESTS",
-              "INVENTORY",
-              "SCIP",
-              "CODE_INDEX",
-              "ROUTE_GRAPH",
-              "VALIDATE",
-              "PUBLISH",
+              "CHECKOUT_COCOLON", "CHECKOUT_MASHOS", "CLEAR_FAILURE", "MATERIALIZE",
+              "SETUP_PYTHON", "SETUP_NODE", "TOOLCHAIN", "TESTS", "INVENTORY",
+              "SCIP", "CODE_INDEX", "ROUTE_GRAPH", "VALIDATE", "PUBLISH",
           ]
           outcomes = {key.lower(): os.environ.get(f"OUTCOME_{key}", "unknown") for key in keys}
           failing = [key for key, value in outcomes.items() if value == "failure"]
-          worktree_head = subprocess.check_output(
-              ["git", "rev-parse", "HEAD"], text=True
-          ).strip()
           record = {
               "schema_version": "cocolon.system_context.workflow_failure_stage.v1",
               "repository": os.environ["GITHUB_REPOSITORY"],
@@ -307,7 +288,7 @@ jobs:
               "run_id": int(os.environ["GITHUB_RUN_ID"]),
               "run_attempt": int(os.environ["GITHUB_RUN_ATTEMPT"]),
               "trigger_sha": os.environ["GITHUB_SHA"],
-              "worktree_head": worktree_head,
+              "worktree_head": subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip(),
               "run_url": f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}",
               "failing_steps": failing,
               "step_outcomes": outcomes,
