@@ -33,7 +33,7 @@ if len(sys.argv) > 1 and sys.argv[1] == "run-scip":
     node_options = os.environ.get("NODE_OPTIONS", "")
     if "--max-old-space-size" not in node_options:
         os.environ["NODE_OPTIONS"] = (
-            f"{node_options} --max-old-space-size=6144".strip()
+            f"{node_options} --max-old-space-size=10240".strip()
         )
 
 encoded = b"".join(part.read_bytes() for part in sorted(PAYLOAD.glob("part*")))
