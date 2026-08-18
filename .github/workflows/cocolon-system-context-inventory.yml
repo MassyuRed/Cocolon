@@ -73,6 +73,7 @@ jobs:
           git diff --cached --check
           if ! git diff --cached --quiet; then
             git commit -m "feat(context): materialize Step 3 route implementation [skip ci]"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
 
       - name: Set up Python 3.11
