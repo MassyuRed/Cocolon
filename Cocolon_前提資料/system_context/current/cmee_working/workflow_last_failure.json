@@ -1,0 +1,32 @@
+{
+  "branch": "agent/cocolon-system-context-index-20260818",
+  "diagnostic_scope": "ONE_SHOT_FAILURE_STAGE_ONLY",
+  "failing_steps": [
+    "tests"
+  ],
+  "product_effect": 0,
+  "repository": "MassyuRed/Cocolon",
+  "run_attempt": 1,
+  "run_id": 32190373030,
+  "run_url": "https://github.com/MassyuRed/Cocolon/actions/runs/32190373030",
+  "schema_version": "cocolon.system_context.workflow_failure_stage.v1",
+  "step_outcomes": {
+    "checkout_cocolon": "success",
+    "checkout_mashos": "success",
+    "clear_failure": "success",
+    "code_index": "skipped",
+    "inventory": "skipped",
+    "materialize": "success",
+    "publish": "skipped",
+    "route_graph": "skipped",
+    "scip": "skipped",
+    "setup_node": "success",
+    "setup_python": "success",
+    "tests": "failure",
+    "toolchain": "success",
+    "transport": "skipped",
+    "validate": "skipped"
+  },
+  "trigger_sha": "fdc54cbf942f50b6577743bcb6fd145af180a776",
+  "worktree_head_before_reset": "fdc54cbf942f50b6577743bcb6fd145af180a776"
+}
