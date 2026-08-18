@@ -1,193 +1,113 @@
 #!/usr/bin/env node
-'use strict';
+"use strict";
 
-const fs = require('fs');
-const path = require('path');
-const ts = require('typescript');
+const fs = require("fs");
+const path = require("path");
+const ts = require("typescript");
 
-function parseArgs(argv) {
-  const out = {};
-  for (let i = 0; i < argv.length; i += 1) {
-    const key = argv[i];
-    if (!key.startsWith('--') || i + 1 >= argv.length) {
-      throw new Error(`invalid argument sequence near ${key}`);
-    }
-    out[key.slice(2)] = argv[++i];
-  }
-  if (!out.input || !out.output) {
-    throw new Error('--input and --output are required');
-  }
-  return out;
+function lineColumn(sourceFile, node) {
+  const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart(sourceFile, false));
+  return { line: pos.line + 1, column: pos.character + 1 };
 }
 
-function scriptKind(filePath) {
-  const ext = path.extname(filePath).toLowerCase();
-  if (ext === '.tsx') return ts.ScriptKind.TSX;
-  if (ext === '.ts') return ts.ScriptKind.TS;
-  if (ext === '.jsx') return ts.ScriptKind.JSX;
-  return ts.ScriptKind.JS;
-}
-
-function position(sourceFile, node) {
-  const start = node.getStart(sourceFile, false);
-  const loc = sourceFile.getLineAndCharacterOfPosition(start);
-  return { line: loc.line + 1, column: loc.character + 1 };
-}
-
-function nodeName(node, sourceFile) {
+function nameText(node, sourceFile) {
   if (!node) return null;
   if (ts.isIdentifier(node) || ts.isPrivateIdentifier(node)) return node.text;
-  if (ts.isStringLiteralLike(node) || ts.isNumericLiteral(node)) return node.text;
+  if (ts.isStringLiteralLike(node) || ts.isNumericLiteral(node)) return String(node.text);
+  return node.getText(sourceFile);
+}
+
+function importTarget(expression, sourceFile) {
+  if (!expression) return null;
+  if (ts.isStringLiteralLike(expression)) return expression.text;
+  if (ts.isNoSubstitutionTemplateLiteral(expression)) return expression.text;
+  return expression.getText(sourceFile);
+}
+
+function parseOne(file) {
+  let text;
   try {
-    return node.getText(sourceFile);
-  } catch (_error) {
-    return null;
+    text = fs.readFileSync(file.absolute_path, "utf8");
+  } catch (error) {
+    return {
+      repository_key: file.repository_key,
+      path: file.path,
+      symbols: [],
+      references: [],
+      errors: [{ parser: "typescript", code: "READ_ERROR", message: String(error), line: null, column: null }],
+    };
   }
-}
-
-function declarationKind(node) {
-  if (ts.isFunctionDeclaration(node)) return 'FUNCTION';
-  if (ts.isClassDeclaration(node)) return 'CLASS';
-  if (ts.isInterfaceDeclaration(node)) return 'INTERFACE';
-  if (ts.isTypeAliasDeclaration(node)) return 'TYPE_ALIAS';
-  if (ts.isEnumDeclaration(node)) return 'ENUM';
-  if (ts.isVariableDeclaration(node)) return 'VARIABLE';
-  if (ts.isMethodDeclaration(node)) return 'METHOD';
-  if (ts.isPropertyDeclaration(node)) return 'PROPERTY';
-  if (ts.isGetAccessorDeclaration(node)) return 'GET_ACCESSOR';
-  if (ts.isSetAccessorDeclaration(node)) return 'SET_ACCESSOR';
-  if (ts.isModuleDeclaration(node)) return 'MODULE';
-  return null;
-}
-
-function declaredName(node, sourceFile) {
-  if (ts.isVariableDeclaration(node)) return nodeName(node.name, sourceFile);
-  if ('name' in node) return nodeName(node.name, sourceFile);
-  return null;
-}
-
-function moduleReference(sourceFile, node, kind, literal) {
-  const pos = position(sourceFile, node);
-  return {
-    kind,
-    target: literal.text,
-    line: pos.line,
-    column: pos.column,
-  };
-}
-
-function parseFile(spec) {
-  const text = fs.readFileSync(spec.filesystem_path, 'utf8');
-  const sf = ts.createSourceFile(
-    spec.path,
-    text,
-    ts.ScriptTarget.Latest,
-    true,
-    scriptKind(spec.path),
-  );
+  const ext = path.extname(file.path).toLowerCase();
+  const scriptKind = ext === ".tsx" ? ts.ScriptKind.TSX : ext === ".ts" ? ts.ScriptKind.TS : ext === ".jsx" ? ts.ScriptKind.JSX : ts.ScriptKind.JS;
+  const sourceFile = ts.createSourceFile(file.path, text, ts.ScriptTarget.Latest, true, scriptKind);
   const symbols = [];
   const references = [];
+  const errors = [];
+
+  for (const diagnostic of sourceFile.parseDiagnostics || []) {
+    const start = typeof diagnostic.start === "number" ? diagnostic.start : 0;
+    const pos = sourceFile.getLineAndCharacterOfPosition(start);
+    errors.push({
+      parser: "typescript",
+      code: `TS${diagnostic.code}`,
+      message: ts.flattenDiagnosticMessageText(diagnostic.messageText, "\n"),
+      line: pos.line + 1,
+      column: pos.character + 1,
+    });
+  }
+
+  function addSymbol(node, nameNode, kind) {
+    const name = nameText(nameNode, sourceFile);
+    if (!name) return;
+    const pos = lineColumn(sourceFile, nameNode || node);
+    symbols.push({ name, kind, line: pos.line, column: pos.column });
+  }
+
+  function addReference(node, target, kind = "IMPORT") {
+    if (!target) return;
+    const pos = lineColumn(sourceFile, node);
+    references.push({ kind, target, line: pos.line, column: pos.column });
+  }
 
   function visit(node) {
-    const kind = declarationKind(node);
-    if (kind) {
-      const name = declaredName(node, sf);
-      if (name) {
-        const pos = position(sf, node);
-        symbols.push({ name, kind, line: pos.line, column: pos.column });
+    if (ts.isFunctionDeclaration(node) && node.name) addSymbol(node, node.name, "FUNCTION");
+    else if (ts.isClassDeclaration(node) && node.name) addSymbol(node, node.name, "CLASS");
+    else if (ts.isInterfaceDeclaration(node)) addSymbol(node, node.name, "INTERFACE");
+    else if (ts.isTypeAliasDeclaration(node)) addSymbol(node, node.name, "TYPE_ALIAS");
+    else if (ts.isEnumDeclaration(node)) addSymbol(node, node.name, "ENUM");
+    else if (ts.isMethodDeclaration(node) && node.name) addSymbol(node, node.name, "METHOD");
+    else if (ts.isVariableDeclaration(node) && ts.isIdentifier(node.name)) {
+      const initializer = node.initializer;
+      if (initializer && (ts.isArrowFunction(initializer) || ts.isFunctionExpression(initializer) || ts.isClassExpression(initializer))) {
+        addSymbol(node, node.name, ts.isClassExpression(initializer) ? "CLASS" : "FUNCTION_VARIABLE");
       }
     }
 
-    if (ts.isImportDeclaration(node) && ts.isStringLiteralLike(node.moduleSpecifier)) {
-      references.push(moduleReference(sf, node.moduleSpecifier, 'IMPORT', node.moduleSpecifier));
-    } else if (ts.isExportDeclaration(node) && node.moduleSpecifier && ts.isStringLiteralLike(node.moduleSpecifier)) {
-      references.push(moduleReference(sf, node.moduleSpecifier, 'EXPORT_FROM', node.moduleSpecifier));
-    } else if (ts.isImportEqualsDeclaration(node) && ts.isExternalModuleReference(node.moduleReference)) {
-      const expression = node.moduleReference.expression;
-      if (expression && ts.isStringLiteralLike(expression)) {
-        references.push(moduleReference(sf, expression, 'IMPORT_EQUALS', expression));
-      }
+    if (ts.isImportDeclaration(node)) {
+      addReference(node.moduleSpecifier, importTarget(node.moduleSpecifier, sourceFile));
+    } else if (ts.isExportDeclaration(node) && node.moduleSpecifier) {
+      addReference(node.moduleSpecifier, importTarget(node.moduleSpecifier, sourceFile), "RE_EXPORT");
     } else if (ts.isCallExpression(node)) {
-      const expression = node.expression;
-      const first = node.arguments[0];
-      if (first && ts.isStringLiteralLike(first)) {
-        if (ts.isIdentifier(expression) && expression.text === 'require') {
-          references.push(moduleReference(sf, first, 'REQUIRE', first));
-        } else if (expression.kind === ts.SyntaxKind.ImportKeyword) {
-          references.push(moduleReference(sf, first, 'DYNAMIC_IMPORT', first));
-        }
+      if (node.expression.kind === ts.SyntaxKind.ImportKeyword && node.arguments.length) {
+        addReference(node.arguments[0], importTarget(node.arguments[0], sourceFile), "DYNAMIC_IMPORT");
+      } else if (ts.isIdentifier(node.expression) && node.expression.text === "require" && node.arguments.length) {
+        addReference(node.arguments[0], importTarget(node.arguments[0], sourceFile), "REQUIRE");
       }
     }
-
     ts.forEachChild(node, visit);
   }
-  visit(sf);
-
-  const diagnostics = (sf.parseDiagnostics || []).map((diag) => {
-    const start = typeof diag.start === 'number' ? diag.start : 0;
-    const loc = sf.getLineAndCharacterOfPosition(Math.min(start, sf.getFullText().length));
-    return {
-      code: diag.code,
-      message: ts.flattenDiagnosticMessageText(diag.messageText, '\n'),
-      line: loc.line + 1,
-      column: loc.character + 1,
-    };
-  });
-
-  symbols.sort((a, b) => a.line - b.line || a.column - b.column || a.name.localeCompare(b.name));
-  references.sort((a, b) => a.line - b.line || a.column - b.column || a.target.localeCompare(b.target));
-  diagnostics.sort((a, b) => a.line - b.line || a.column - b.column || a.code - b.code);
-
-  return {
-    repository_key: spec.repository_key,
-    path: spec.path,
-    parser: `typescript-${ts.version}`,
-    parser_status: diagnostics.length ? 'PARSED_WITH_DIAGNOSTICS' : 'PARSED',
-    symbols,
-    references,
-    diagnostics,
-  };
+  visit(sourceFile);
+  return { repository_key: file.repository_key, path: file.path, symbols, references, errors };
 }
 
 function main() {
-  const args = parseArgs(process.argv.slice(2));
-  const request = JSON.parse(fs.readFileSync(args.input, 'utf8'));
-  if (!request || !Array.isArray(request.files)) {
-    throw new Error('input JSON must contain a files array');
+  if (process.argv.length !== 3) {
+    console.error("usage: cocolon_context_ts_syntax.cjs MANIFEST.json");
+    process.exit(2);
   }
-  const files = [];
-  for (const spec of request.files) {
-    try {
-      files.push(parseFile(spec));
-    } catch (error) {
-      files.push({
-        repository_key: spec.repository_key,
-        path: spec.path,
-        parser: `typescript-${ts.version}`,
-        parser_status: 'ERROR',
-        symbols: [],
-        references: [],
-        diagnostics: [{
-          code: 'NODE_PARSER_ERROR',
-          message: error instanceof Error ? error.message : String(error),
-          line: 0,
-          column: 0,
-        }],
-      });
-    }
-  }
-  files.sort((a, b) => a.repository_key.localeCompare(b.repository_key) || a.path.localeCompare(b.path));
-  const output = {
-    schema_version: 'cocolon.system_context.typescript_syntax.v1',
-    typescript_version: ts.version,
-    files,
-  };
-  fs.writeFileSync(args.output, `${JSON.stringify(output)}\n`, 'utf8');
+  const manifest = JSON.parse(fs.readFileSync(process.argv[2], "utf8"));
+  const files = (manifest.files || []).map(parseOne);
+  process.stdout.write(JSON.stringify({ files }));
 }
 
-try {
-  main();
-} catch (error) {
-  console.error(error instanceof Error ? error.stack : String(error));
-  process.exitCode = 1;
-}
+main();
