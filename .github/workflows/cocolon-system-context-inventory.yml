@@ -107,7 +107,9 @@ jobs:
             @sourcegraph/scip-typescript@0.4.0 \
             @sourcegraph/scip-python@0.6.6 \
             typescript@5.2.2
-          echo "NODE_PATH=$(npm root -g)" >> "$GITHUB_ENV"
+          NODE_PATH="$(npm root -g)"
+          export NODE_PATH
+          echo "NODE_PATH=${NODE_PATH}" >> "$GITHUB_ENV"
           SCIP_TAG=v0.7.1
           curl --retry 3 --retry-all-errors -fsSL \
             "https://github.com/scip-code/scip/releases/download/${SCIP_TAG}/scip-linux-amd64.tar.gz" \
