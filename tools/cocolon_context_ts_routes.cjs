@@ -23,6 +23,7 @@ const source = run.stdout;
 if (digest(source) !== "46493b8a988713fd7cf07e601de59d4a087f6094fa6149e06dcc5dc1a32015f4") {
   throw new Error("Step 3 TypeScript route source identity mismatch");
 }
-new Function("require", "module", "exports", "__filename", "__dirname", source.toString("utf8"))(
+const sourceText = source.toString("utf8").replace(/^#![^\n]*(?:\n|$)/, "");
+new Function("require", "module", "exports", "__filename", "__dirname", sourceText)(
   require, module, exports, path.join(payload, "cocolon_context_ts_routes.cjs"), payload
 );
