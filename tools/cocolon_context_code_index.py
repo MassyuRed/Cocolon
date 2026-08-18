@@ -5,6 +5,7 @@ from __future__ import annotations
 import base64
 import hashlib
 import lzma
+import os
 import sys
 from pathlib import Path
 
@@ -27,6 +28,13 @@ def _absolutize_cli_path(flag: str) -> None:
 
 for cli_flag in ("--work", "--scip-work"):
     _absolutize_cli_path(cli_flag)
+
+if len(sys.argv) > 1 and sys.argv[1] == "run-scip":
+    node_options = os.environ.get("NODE_OPTIONS", "")
+    if "--max-old-space-size" not in node_options:
+        os.environ["NODE_OPTIONS"] = (
+            f"{node_options} --max-old-space-size=6144".strip()
+        )
 
 encoded = b"".join(part.read_bytes() for part in sorted(PAYLOAD.glob("part*")))
 if hashlib.sha256(encoded).hexdigest() != "006157b087aaeaebb245d215a288cfa0db12901df240fdc2007d03868b171cab":
