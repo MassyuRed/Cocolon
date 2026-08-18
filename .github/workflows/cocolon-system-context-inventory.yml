@@ -10,6 +10,7 @@ on:
       - tools/cocolon_context_code_index.py
       - tools/cocolon_context_routes.py
       - tools/cocolon_context_routes_*.py
+      - tools/cocolon_context_publish_transport.py
       - tools/cocolon_context_ts_syntax.cjs
       - tools/cocolon_context_ts_routes.cjs
       - tests/cocolon_context/**
@@ -132,11 +133,13 @@ jobs:
           python3 -m py_compile \
             tools/cocolon_context_inventory.py \
             tools/cocolon_context_code_index.py \
-            tools/cocolon_context_routes.py
+            tools/cocolon_context_routes.py \
+            tools/cocolon_context_publish_transport.py
           python3 -m unittest tests/cocolon_context/test_inventory.py -v
           python3 -m unittest tests/cocolon_context/test_code_index.py -v
           python3 -m unittest tests/cocolon_context/test_routes.py -v
           python3 -m unittest tests/cocolon_context/test_routes_nested_registration.py -v
+          python3 -m unittest tests/cocolon_context/test_publication_transport.py -v
 
       - name: Build and verify full tracked-file inventory
         id: inventory
@@ -231,25 +234,66 @@ jobs:
           PY
           git diff --check
 
-      - name: Publish generated system-context checkpoint
+      - name: Pack and verify GitHub publication transport
+        id: transport
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=Cocolon_前提資料/system_context/current/cmee_working
+          python3 tools/cocolon_context_publish_transport.py pack \
+            --root "$ROOT" \
+            --max-part-bytes 90000000
+          python3 tools/cocolon_context_publish_transport.py verify \
+            --root "$ROOT"
+          python3 - <<'PY'
+          from pathlib import Path
+          root = Path("Cocolon_前提資料/system_context/current/cmee_working")
+          oversized = [
+              (path.stat().st_size, path)
+              for path in root.rglob("*")
+              if path.is_file() and path.stat().st_size > 90_000_000
+          ]
+          assert not oversized, oversized
+          PY
+
+      - name: Publish and remotely verify generated system-context checkpoint
         id: publish
         shell: bash
         run: |
           set -euo pipefail
+          ROOT=Cocolon_前提資料/system_context/current/cmee_working
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          du -sh Cocolon_前提資料/system_context/current/cmee_working
-          find Cocolon_前提資料/system_context/current/cmee_working -type f -printf '%s\t%p\n' \
+          du -sh "$ROOT"
+          find "$ROOT" -type f -printf '%s\t%p\n' \
             | LC_ALL=C sort -nr \
             | awk 'NR <= 20 { print }'
-          git add -- Cocolon_前提資料/system_context/current/cmee_working
+          git add -- "$ROOT"
           git diff --cached --check
           if git diff --cached --quiet; then
-            echo "System-context outputs are already current."
-            exit 0
+            GENERATED_COMMIT="$(git rev-parse HEAD)"
+          else
+            git commit -m "docs(context): publish code index and RN API route graph [skip ci]"
+            GENERATED_COMMIT="$(git rev-parse HEAD)"
           fi
-          git commit -m "docs(context): publish code index and RN API route graph [skip ci]"
+          GENERATED_PARENT="$(git rev-parse "${GENERATED_COMMIT}^")"
+          GENERATED_TREE="$(git rev-parse "${GENERATED_COMMIT}^{tree}")"
+          test "$GENERATED_PARENT" = "$GITHUB_SHA"
           git push origin "HEAD:${GITHUB_REF_NAME}"
+          git fetch --no-tags origin \
+            "+refs/heads/${GITHUB_REF_NAME}:refs/remotes/origin/${GITHUB_REF_NAME}"
+          REMOTE_COMMIT="$(git rev-parse "refs/remotes/origin/${GITHUB_REF_NAME}")"
+          test "$REMOTE_COMMIT" = "$GENERATED_COMMIT"
+          rm -rf /tmp/cocolon-system-context-remote
+          git worktree add --detach /tmp/cocolon-system-context-remote "$REMOTE_COMMIT"
+          python3 /tmp/cocolon-system-context-remote/tools/cocolon_context_publish_transport.py verify \
+            --root "/tmp/cocolon-system-context-remote/${ROOT}"
+          test "$(git -C /tmp/cocolon-system-context-remote rev-parse HEAD)" = "$GENERATED_COMMIT"
+          test "$(git -C /tmp/cocolon-system-context-remote rev-parse HEAD^{tree})" = "$GENERATED_TREE"
+          git worktree remove --force /tmp/cocolon-system-context-remote
+          printf 'generated_commit=%s\n' "$GENERATED_COMMIT"
+          printf 'generated_tree=%s\n' "$GENERATED_TREE"
+          printf 'remote_commit=%s\n' "$REMOTE_COMMIT"
 
       - name: Record one-shot system-context workflow failure
         if: ${{ failure() }}
@@ -268,6 +312,7 @@ jobs:
           OUTCOME_CODE_INDEX: ${{ steps.code_index.outcome }}
           OUTCOME_ROUTE_GRAPH: ${{ steps.route_graph.outcome }}
           OUTCOME_VALIDATE: ${{ steps.validate.outcome }}
+          OUTCOME_TRANSPORT: ${{ steps.transport.outcome }}
           OUTCOME_PUBLISH: ${{ steps.publish.outcome }}
         run: |
           set -euo pipefail
@@ -282,7 +327,7 @@ jobs:
           keys = [
               "CHECKOUT_COCOLON", "CHECKOUT_MASHOS", "CLEAR_FAILURE", "MATERIALIZE",
               "SETUP_PYTHON", "SETUP_NODE", "TOOLCHAIN", "TESTS", "INVENTORY",
-              "SCIP", "CODE_INDEX", "ROUTE_GRAPH", "VALIDATE", "PUBLISH",
+              "SCIP", "CODE_INDEX", "ROUTE_GRAPH", "VALIDATE", "TRANSPORT", "PUBLISH",
           ]
           outcomes = {key.lower(): os.environ.get(f"OUTCOME_{key}", "unknown") for key in keys}
           failing = [key for key, value in outcomes.items() if value == "failure"]
