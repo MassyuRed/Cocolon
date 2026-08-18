@@ -1,117 +1,138 @@
 ---
 doc_id: cocolon_system_context_implementation_contract_20260818
-title: "Cocolon System Context — Step 1 Implementation Contract"
+title: "Cocolon System Context — Step 1/2 Implementation Contract"
 revision_date: "2026-08-18 JST"
-implementation_step: 1
-scope: "Cocolon + mashos-api full tracked-file inventory"
+implementation_step: 2
+scope: "Cocolon + mashos-api full tracked-file inventory plus SCIP/syntax code index"
 product_runtime_effect: 0
 api_db_rn_contract_effect: 0
 automatic_progression: false
 ---
 
-# Cocolon System Context — Step 1 Implementation Contract
+# Cocolon System Context — Step 1/2 Implementation Contract
 
 ## 0. Purpose
 
-This step removes one concrete cause of structural misreading: a Cocolon discussion can begin from recent files while tracked files elsewhere in `MassyuRed/Cocolon` or `MassyuRed/mashos-api` are absent from the working context.
+This system prevents Cocolon discussion and design from starting from only recent files. It treats `MassyuRed/Cocolon` and `MassyuRed/mashos-api` as one implementation surface while preserving separate workspace profiles for production, CMEE, and Cycle001 Draft trees.
 
-Step 1 does not claim semantic understanding, RN/API route linkage, CMEE quality improvement, or product credit. It establishes the complete and exact file population on which those later operations must operate.
+Step 1 established the exact complete tracked-file denominator. Step 2 attaches code-meaning indexes without reducing that denominator.
 
 ## 1. Repositories and workspace profiles
 
-The system treats two repositories as one Cocolon implementation surface:
+The system indexes:
 
 - `MassyuRed/Cocolon`: RN application plus premise/product/design owners.
 - `MassyuRed/mashos-api`: API/backend/services/engines/storage/workers/contracts.
 
-Different Draft PRs are not overlaid into one false tree. `workspace_profiles.json` keeps at least these separate views:
+`workspace_profiles.json` keeps at least:
 
 - `production_main`
 - `cmee_working`
 - `cycle001_working`
 
-The first generated inventory in this step is `cmee_working`. The Cocolon side is the exact source commit that triggers generation and must descend from Cocolon Draft PR #30 head `d29042f44e882110514b74dcc6a1b3f31ec746e6`. The API side is the exact current CMEE Draft PR #3 head `06ce311b3ea728b06f83439d268a34bed917c01c`.
+Different Draft PRs are never overlaid into one false tree.
 
-## 2. Canonical outputs
+## 2. Step 1 canonical outputs
 
-For one locked workspace, the canonical output directory contains:
+For one locked workspace:
 
-- `workspace_lock.json`: exact repository commit and tree identities.
-- `files.jsonl`: exactly one row per Git tracked tree entry.
-- `classification_summary.json`: deterministic counts by role, lifecycle, domain, and status.
-- `unresolved.jsonl`: all entries not yet classified by Step 1 rules; unresolved entries remain visible and included in the denominator.
-- `manifest.json`: counts, digests, and the bounded completion claim.
+- `workspace_lock.json`
+- `files.jsonl`
+- `classification_summary.json`
+- `unresolved.jsonl`
+- `manifest.json`
 
-Raw input/output bodies, credentials, environment values, and private Product Read material are not indexed or published.
+Every tracked Git tree entry remains in `files.jsonl`, including unresolved, binary, generated, historical, and support files.
 
-## 3. Completion condition
+## 3. Step 2 code-index outputs
 
-Step 1 is complete only when, for every locked repository:
+`code_index/` adds:
 
-```text
-Git ls-tree tracked entry count
-  = files.jsonl unique repository+path count
+- `coverage.jsonl`: exactly one row for every Step 1 inventory row.
+- `symbols.jsonl`: SCIP or syntax-derived symbol definitions.
+- `references.jsonl`: SCIP occurrences/import references plus syntax fallback references.
+- `code_index_summary.json`: exact denominator coverage and index-mode counts.
 
-missing tracked path
-  = 0
+The Step 2 denominator is the Step 1 `files.jsonl` row count. SCIP success is not allowed to redefine the denominator.
 
-duplicate repository+path
-  = 0
+## 4. SCIP and syntax responsibility split
 
-all rows have:
-  exact commit
-  exact tree
-  path
-  object mode/type/SHA
-  content SHA-256 for blobs
-  size
-  content kind
-  file role
-  lifecycle
-  domain
-  classification status
-```
+### Precise indexing
 
-Unknown classification does not remove a file. It creates an `UNRESOLVED` row and remains part of the exact denominator.
+Where supported and successfully generated:
 
-## 4. Snapshot boundary
+- JavaScript / TypeScript: `scip-typescript`.
+- Python: `scip-python`.
 
-The generated inventory commit is a deterministic projection of its parent source commit. This avoids an impossible self-reference in which `files.jsonl` would need to contain its own final blob SHA before that SHA exists.
+The workflow converts `index.scip` into JSON with `scip print --json` and retains only normalized Cocolon JSONL outputs in Git. Raw `.scip` files are temporary CI artifacts and are not canonical repository state.
 
-Therefore:
+### Syntax fallback
 
-- source commit: implementation/config/workflow bytes being inventoried;
-- generated commit: adds the inventory of that exact source commit;
-- `workspace_lock.json`: records the source commit and tree;
-- verification after generation: reads the locked source commit from Git history and requires byte-exact regeneration.
+If SCIP is unavailable, fails, or does not emit a document for an eligible source file, Step 2 still indexes the source with deterministic syntax fallback:
 
-Generated files are not silently excluded from future source snapshots. When implementation or configuration changes again, the next source commit already contains the previous generated snapshot; that previous snapshot is inventoried as `GENERATED_CONTEXT`.
+- Python: stdlib `ast` for definitions/imports.
+- JavaScript / TypeScript: bounded import/function/class extraction.
+- Other supported source extensions: bounded declaration extraction.
 
-## 5. Classification boundary
+Such rows are explicitly marked `SYNTAX_FALLBACK_SCIP_ELIGIBLE` or `SYNTAX_INDEXED`; they are not reported as precise SCIP results.
 
-Step 1 classification is deliberately path/type based. It distinguishes source, test, config, CI, schema/migration, premise, history, document, asset, lockfile, generated context, submodule, and unresolved entries.
+### Inventory-only
 
-It does not claim symbol/reference accuracy. SCIP ingestion, syntax indexing, RN/API route linkage, reverse dependencies, and task-context compilation are later steps and remain at effect `0` here.
+Binary, non-source, and unsupported entries remain `INVENTORY_ONLY` with an explicit reason. They stay part of `coverage.jsonl`.
 
-## 6. Implementation and operation
+## 5. Completion conditions
 
-The implementation is one standard-library Python CLI:
+Step 2 is complete only when:
 
 ```text
-python3 tools/cocolon_context_inventory.py build ...
-python3 tools/cocolon_context_inventory.py verify ...
+coverage.jsonl row count
+  = Step 1 total tracked entries
+
+coverage gap count
+  = 0
+
+Each tracked entry is exactly one of:
+  SCIP_PRECISE_INDEXED
+  SYNTAX_FALLBACK_SCIP_ELIGIBLE
+  SYNTAX_INDEXED
+  INVENTORY_ONLY
+
+SCIP failure or missing language support
+  != silent omission
+
+symbols/references retain repository key + path
 ```
 
-The GitHub workflow checks out the two repositories side by side, runs unit tests, builds `cmee_working`, verifies exact regeneration, and commits only the generated output directory back to the same branch. It uses no external service, database, model, or paid dependency.
+Step 2 does not require all source languages to have a precise SCIP index. It requires complete population coverage and truthful index mode per file.
 
-## 7. Prohibited expansion
+## 6. Snapshot boundary
 
-This step does not:
+Generated inventory/code-index commits are deterministic projections of their parent source commit. `workspace_lock.json` records the source commit/tree. Verification uses those locked source commits, not the generated commit as if it could index itself.
 
-- modify RN production source, API production source, DB, public contracts, dependencies, CMEE output, Piece, Analysis, or EmlisAI behavior;
-- merge or ready any existing Draft PR;
-- combine CMEE and Cycle001 Draft trees;
-- create a new product-quality score, authority family, proof chain, or human acceptance claim;
-- claim that all files have been semantically understood.
+## 7. GitHub operation
 
-`automatic_progression=false` remains fixed after the Step 1 checkpoint.
+The single workflow checks out Cocolon and the locked mashos-api workspace side-by-side, then:
+
+1. runs Step 1 and Step 2 unit tests;
+2. rebuilds and verifies the Step 1 inventory;
+3. installs SCIP indexers;
+4. generates TypeScript/JavaScript and Python SCIP indexes when possible;
+5. converts raw SCIP to JSON;
+6. merges SCIP data with syntax fallback;
+7. asserts full Step 1 denominator coverage;
+8. commits only generated `system_context/current/cmee_working` outputs.
+
+No Sourcegraph server, database, model API, or paid external service is required.
+
+## 8. Prohibited expansion
+
+Step 2 does not:
+
+- modify RN or API production behavior;
+- change DB/public contracts/dependencies used by the product runtime;
+- claim CMEE/EmlisAI/Piece/Analysis product quality improvement;
+- perform RN↔API route linkage (Step 3);
+- compile task-specific context or claim semantic understanding of all files (Step 4);
+- merge/ready Draft PRs or automatically progress to Step 3.
+
+`product_credit=0` and `automatic_progression=false` remain fixed.
