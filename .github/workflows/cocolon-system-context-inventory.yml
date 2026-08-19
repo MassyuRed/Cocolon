@@ -1,5 +1,5 @@
-name: Cocolon system context inventory, code index, and route graph
-run-name: Cocolon system context A fresh @ ${{ github.sha }}
+name: Cocolon system context inventory, code index, and full route graph
+run-name: Cocolon system context C fresh @ ${{ github.sha }}
 
 on:
   push:
@@ -19,6 +19,7 @@ on:
       - .github/workflows/cocolon-system-context-inventory.yml
       - .github/context-payloads/step2-code/**
       - .github/context-payloads/step3/**
+      - .github/context-payloads/step3-c/**
       - .github/context-payloads/step3-ts-routes/**
   workflow_dispatch:
 
@@ -82,6 +83,18 @@ jobs:
           test -f tools/cocolon_context_routes.py
           test -f tests/cocolon_context/test_code_index.py
           test -f tests/cocolon_context/test_routes.py
+
+          C_PAYLOAD=.github/context-payloads/step3-c/payload.b64
+          C_ADMITTED_DIR=/tmp/cocolon-step3-c-admitted
+          rm -rf "$C_ADMITTED_DIR"
+          mkdir -p "$C_ADMITTED_DIR"
+          echo "aad97baf4fa0f12b62023761be24bcf853a043e79baa043efc3571203c9f7548  ${C_PAYLOAD}" | sha256sum -c -
+          base64 -d "$C_PAYLOAD" > /tmp/cocolon-step3-c-payload.tar.gz
+          C_ACTUAL_LIST="$(tar -tzf /tmp/cocolon-step3-c-payload.tar.gz | LC_ALL=C sort)"
+          C_EXPECTED_LIST="tools/cocolon_context_routes_c_extension.py"
+          test "$C_ACTUAL_LIST" = "$C_EXPECTED_LIST"
+          tar -xzf /tmp/cocolon-step3-c-payload.tar.gz -C "$C_ADMITTED_DIR"
+          echo "fa4a3cc83d9e01c1217a529b874cbfdeb774e4f229f4d658ec94274bbeef9bb0  ${C_ADMITTED_DIR}/tools/cocolon_context_routes_c_extension.py" | sha256sum -c -
 
       - name: Set up Python 3.11
         id: setup_python
@@ -189,7 +202,7 @@ jobs:
             --inventory Cocolon_前提資料/system_context/current/cmee_working/files.jsonl \
             --output Cocolon_前提資料/system_context/current/cmee_working/code_index
 
-      - name: Build and verify RN/API cross-repository route graph
+      - name: Build and verify RN/API/backend/test/domain route graph
         id: route_graph
         shell: bash
         run: |
@@ -207,7 +220,7 @@ jobs:
             --code-index Cocolon_前提資料/system_context/current/cmee_working/code_index \
             --output Cocolon_前提資料/system_context/current/cmee_working/route_graph
 
-      - name: Validate Step 2 and Step 3 completion
+      - name: Validate Step 2 and full Step 3 completion
         id: validate
         shell: bash
         run: |
@@ -226,10 +239,14 @@ jobs:
           assert code["duplicate_coverage_count"] == 0
           assert code["required_scip_runs_ok"] is True
           assert code["scip_precise_file_count"] > 0
-          assert routes["completion_claim"] == "STEP3_RN_API_CROSS_REPOSITORY_ROUTE_GRAPH_CONNECTED"
+          assert routes["completion_claim"] == "STEP3_RN_API_BACKEND_TEST_ROUTE_GRAPH_CONNECTED"
           assert routes["rn_call_count"] > 0
           assert routes["api_route_count"] > 0
           assert routes["cross_repository_edge_count"] > 0
+          assert routes["backend_owner_coverage_count"] == routes["rn_connected_route_count"]
+          assert routes["test_contract_coverage_count"] == routes["api_route_count"]
+          assert routes["visible_consumer_coverage_count"] == routes["rn_call_count"]
+          assert routes["domain_chain_node_coverage_count"] == routes["chain_node_file_count"]
           assert routes["silent_unresolved_count"] == 0
           PY
           git diff --check
@@ -273,7 +290,7 @@ jobs:
           if git diff --cached --quiet; then
             GENERATED_COMMIT="$(git rev-parse HEAD)"
           else
-            git commit -m "docs(context): publish code index and RN API route graph [skip ci]"
+            git commit -m "docs(context): publish full backend/test route graph [skip ci]"
             GENERATED_COMMIT="$(git rev-parse HEAD)"
           fi
           GENERATED_PARENT="$(git rev-parse "${GENERATED_COMMIT}^")"
