@@ -1,33 +1,101 @@
-name: Cocolon system context Step 3 C traversal cache repair
-run-name: Cocolon system context C cache repair @ ${{ github.event.pull_request.head.sha || github.sha }}
+name: Cocolon system context Step 3 D finalization
+run-name: Cocolon system context D final @ ${{ github.event.pull_request.head.sha || github.sha }}
 
 on:
   pull_request:
     paths:
       - .github/workflows/cocolon-system-context-inventory.yml
-      - .github/context-payloads/step3-c/performance_fix.py
-      - .github/context-payloads/step3-c/payload.b64
+      - tools/cocolon_context_inventory.py
+      - tools/cocolon_context_code_index.py
       - tools/cocolon_context_routes.py
-      - tests/cocolon_context/test_routes.py
+      - tools/cocolon_context_publish_transport.py
+      - tools/cocolon_context_ts_syntax.cjs
+      - tools/cocolon_context_ts_routes.cjs
+      - tests/cocolon_context/**
+      - Cocolon_前提資料/system_context/workspace_profiles.json
+      - Cocolon_前提資料/system_context/Cocolon_SystemContext_ImplementationContract_20260818.md
+      - .github/context-payloads/step2-code/**
+      - .github/context-payloads/step3/**
+      - .github/context-payloads/step3-c/**
+      - .github/context-payloads/step3-ts-routes/**
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: cocolon-system-context-step3-c-${{ github.event.pull_request.head.ref || github.ref_name }}
+  group: cocolon-system-context-step3-d-${{ github.event.pull_request.head.ref || github.ref_name }}
   cancel-in-progress: true
 
 jobs:
-  patch-test-and-record:
+  finalize-step3:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 90
+    env:
+      SOURCE_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
+      TARGET_BRANCH: agent/cocolon-system-context-index-20260818
+      MASHOS_COMMIT: 06ce311b3ea728b06f83439d268a34bed917c01c
+      ROOT: Cocolon_前提資料/system_context/current/cmee_working
     steps:
-      - name: Checkout Cocolon context branch
+      - name: Checkout exact Cocolon source
         uses: actions/checkout@v4
         with:
           ref: agent/cocolon-system-context-index-20260818
           fetch-depth: 0
+
+      - name: Assert exact Cocolon source identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$SOURCE_COMMIT"
+          test "$(git status --porcelain)" = ""
+
+      - name: Checkout locked mashos-api read-only
+        uses: actions/checkout@v4
+        with:
+          repository: MassyuRed/mashos-api
+          ref: 06ce311b3ea728b06f83439d268a34bed917c01c
+          path: .cocolon-context-workspace/mashos-api
+          fetch-depth: 0
+
+      - name: Assert locked mashos-api identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C .cocolon-context-workspace/mashos-api rev-parse HEAD)" = "$MASHOS_COMMIT"
+
+      - name: Verify admitted Step 3 payload lineage
+        shell: bash
+        run: |
+          set -euo pipefail
+          PAYLOAD_DIR=.github/context-payloads/step3
+          ADMITTED_DIR=/tmp/cocolon-step3-admitted
+          rm -rf "$ADMITTED_DIR"
+          mkdir -p "$ADMITTED_DIR"
+          cat "${PAYLOAD_DIR}"/part* > /tmp/cocolon-step3-payload.b64
+          echo "d7893436ace9d1e7f8791b327473e3c11810c09bd72152f610934217267717dc  /tmp/cocolon-step3-payload.b64" | sha256sum -c -
+          base64 -d /tmp/cocolon-step3-payload.b64 > /tmp/cocolon-step3-payload.tar.gz
+          ACTUAL_LIST="$(tar -tzf /tmp/cocolon-step3-payload.tar.gz | LC_ALL=C sort)"
+          EXPECTED_LIST="$(printf '%s\n' \
+            tests/cocolon_context/test_code_index.py \
+            tests/cocolon_context/test_routes.py \
+            tools/cocolon_context_routes.py | LC_ALL=C sort)"
+          test "$ACTUAL_LIST" = "$EXPECTED_LIST"
+          tar -xzf /tmp/cocolon-step3-payload.tar.gz -C "$ADMITTED_DIR"
+          echo "847303f952dd9fd6a7fd9540c5a42cf53751375cb35c86c863fc78d3bee4c3fe  ${ADMITTED_DIR}/tools/cocolon_context_routes.py" | sha256sum -c -
+          echo "4d520138b2c92646bf97923a473a6548a2f108ac5f41076a9c7bd50c665aa60c  ${ADMITTED_DIR}/tests/cocolon_context/test_code_index.py" | sha256sum -c -
+          echo "9a6f4d5d60ba7d17db5d4df10e27e84e9a1b7f253cb7555924327646364d02a8  ${ADMITTED_DIR}/tests/cocolon_context/test_routes.py" | sha256sum -c -
+
+          C_PAYLOAD=.github/context-payloads/step3-c/payload.b64
+          C_ADMITTED_DIR=/tmp/cocolon-step3-c-admitted
+          rm -rf "$C_ADMITTED_DIR"
+          mkdir -p "$C_ADMITTED_DIR"
+          echo "26bdc94df68fddc893fa408ad7b05d506ee10ce25c1f840b2b27cff93482056d  ${C_PAYLOAD}" | sha256sum -c -
+          base64 -d "$C_PAYLOAD" > /tmp/cocolon-step3-c-payload.tar.gz
+          C_ACTUAL_LIST="$(tar -tzf /tmp/cocolon-step3-c-payload.tar.gz | LC_ALL=C sort)"
+          test "$C_ACTUAL_LIST" = "tools/cocolon_context_routes_c_extension.py"
+          tar -xzf /tmp/cocolon-step3-c-payload.tar.gz -C "$C_ADMITTED_DIR"
+          echo "97b406f62a71e621281536cf5e0c6712482615b63e189b734e3d54cde8272418  ${C_ADMITTED_DIR}/tools/cocolon_context_routes_c_extension.py" | sha256sum -c -
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
@@ -39,32 +107,37 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Apply cache-only repair and run full regressions
+      - name: Install pinned SCIP toolchain
         shell: bash
         run: |
           set -euo pipefail
-          npm install -g --no-audit --no-fund typescript@5.2.2
-          export NODE_PATH="$(npm root -g)"
+          npm install -g --no-audit --no-fund \
+            @sourcegraph/scip-typescript@0.4.0 \
+            @sourcegraph/scip-python@0.6.6 \
+            typescript@5.2.2
+          NODE_PATH="$(npm root -g)"
+          export NODE_PATH
+          echo "NODE_PATH=${NODE_PATH}" >> "$GITHUB_ENV"
+          SCIP_TAG=v0.7.1
+          curl --retry 3 --retry-all-errors -fsSL \
+            "https://github.com/scip-code/scip/releases/download/${SCIP_TAG}/scip-linux-amd64.tar.gz" \
+            -o /tmp/scip.tar.gz
+          rm -rf /tmp/scip-bin
+          mkdir -p /tmp/scip-bin
+          tar -xzf /tmp/scip.tar.gz -C /tmp/scip-bin
+          SCIP_BIN="$(find /tmp/scip-bin -type f -name scip -print -quit)"
+          test -n "$SCIP_BIN"
+          sudo install "$SCIP_BIN" /usr/local/bin/scip
+          test "$(node --version)" = "v20.20.2"
+          test "$(node -e "console.log(require('typescript').version)")" = "5.2.2"
+          test "$(scip --version)" = "scip version v0.7.1"
+          test "$(scip-typescript --version)" = "0.4.0"
+          test "$(scip-python --version)" = "0.6.6"
 
-          python3 - <<'PY'
-          from pathlib import Path
-          path = Path('.github/context-payloads/step3-c/performance_fix.py')
-          text = path.read_text(encoding='utf-8')
-          old = '''loader_bytes = LOADER.read_bytes()
-          if sha256(loader_bytes) != OLD_LOADER_SHA:
-              raise SystemExit('C traversal cache loader preimage mismatch')
-          loader_text = loader_bytes.decode('utf-8')
-          '''
-          new = '''loader_bytes = LOADER.read_bytes()
-          loader_text = loader_bytes.decode('utf-8')
-          '''
-          if text.count(old) != 1:
-              raise SystemExit('cache repair preimage relaxation target mismatch')
-          path.write_text(text.replace(old, new, 1), encoding='utf-8')
-          PY
-
-          python3 .github/context-payloads/step3-c/performance_fix.py
-
+      - name: Run full system-context regressions
+        shell: bash
+        run: |
+          set -euo pipefail
           node --check tools/cocolon_context_ts_syntax.cjs
           node --check tools/cocolon_context_ts_routes.cjs
           python3 -m py_compile \
@@ -73,7 +146,6 @@ jobs:
             tools/cocolon_context_routes.py \
             tools/cocolon_context_publish_transport.py \
             tests/cocolon_context/test_routes.py
-
           python3 -m unittest tests/cocolon_context/test_inventory.py -v
           python3 -m unittest tests/cocolon_context/test_code_index.py -v
           python3 -m unittest tests/cocolon_context/test_routes.py -v
@@ -81,20 +153,418 @@ jobs:
           python3 -m unittest tests/cocolon_context/test_publication_transport.py -v
           git diff --check
 
-          rm -f \
-            .github/context-payloads/step3-c/profile_extension_static.py \
-            .github/context-payloads/step3-c/inspect_backend_perf_source.py \
-            .github/context-payloads/step3-c/run_c_stage_profile.py \
-            .github/context-payloads/step3-c/performance_fix.py \
-            Cocolon_前提資料/system_context/current/cmee_working/workflow_last_failure.json
+      - name: Fresh Step 1 inventory build and verify
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf "$ROOT/code_index" "$ROOT/route_graph"
+          rm -f "$ROOT/publication_transport.json" "$ROOT/workflow_last_failure.json"
+          python3 tools/cocolon_context_inventory.py build \
+            --profiles Cocolon_前提資料/system_context/workspace_profiles.json \
+            --workspace cmee_working \
+            --repo Cocolon="${GITHUB_WORKSPACE}" \
+            --repo mashos-api="${GITHUB_WORKSPACE}/.cocolon-context-workspace/mashos-api" \
+            --output "$ROOT"
+          python3 tools/cocolon_context_inventory.py verify \
+            --profiles Cocolon_前提資料/system_context/workspace_profiles.json \
+            --workspace cmee_working \
+            --repo Cocolon="${GITHUB_WORKSPACE}" \
+            --repo mashos-api="${GITHUB_WORKSPACE}/.cocolon-context-workspace/mashos-api" \
+            --output "$ROOT"
 
+      - name: Generate required precise SCIP exact3
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf .cocolon-context-workspace/scip-step2
+          mkdir -p .cocolon-context-workspace/scip-step2
+          python3 tools/cocolon_context_code_index.py run-scip \
+            --inventory "$ROOT/files.jsonl" \
+            --repo Cocolon="${GITHUB_WORKSPACE}" \
+            --repo mashos-api="${GITHUB_WORKSPACE}/.cocolon-context-workspace/mashos-api" \
+            --work .cocolon-context-workspace/scip-step2
+
+      - name: Fresh Step 2 code index build and verify
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf "$ROOT/code_index"
+          python3 tools/cocolon_context_code_index.py build \
+            --inventory "$ROOT/files.jsonl" \
+            --repo Cocolon="${GITHUB_WORKSPACE}" \
+            --repo mashos-api="${GITHUB_WORKSPACE}/.cocolon-context-workspace/mashos-api" \
+            --scip-work .cocolon-context-workspace/scip-step2 \
+            --ts-helper tools/cocolon_context_ts_syntax.cjs \
+            --output "$ROOT/code_index"
+          python3 tools/cocolon_context_code_index.py verify \
+            --inventory "$ROOT/files.jsonl" \
+            --output "$ROOT/code_index"
+
+      - name: Fresh C1-C6 route graph build and verify
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf "$ROOT/route_graph"
+          python3 tools/cocolon_context_routes.py build \
+            --inventory "$ROOT/files.jsonl" \
+            --repo Cocolon="${GITHUB_WORKSPACE}" \
+            --repo mashos-api="${GITHUB_WORKSPACE}/.cocolon-context-workspace/mashos-api" \
+            --code-index "$ROOT/code_index" \
+            --rn-helper tools/cocolon_context_ts_routes.cjs \
+            --output "$ROOT/route_graph"
+          python3 tools/cocolon_context_routes.py verify \
+            --inventory "$ROOT/files.jsonl" \
+            --code-index "$ROOT/code_index" \
+            --output "$ROOT/route_graph"
+
+      - name: Validate formal Step 3 claim and canonical exact15
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path(os.environ["ROOT"])
+          route_root = root / "route_graph"
+          expected_outputs = {
+              "rn_calls.jsonl",
+              "api_routes.jsonl",
+              "cross_repository_route_edges.jsonl",
+              "api_model_edges.jsonl",
+              "backend_call_edges.jsonl",
+              "route_owner_closures.jsonl",
+              "test_contract_edges.jsonl",
+              "file_domain_assignments.jsonl",
+              "unresolved_rn_calls.jsonl",
+              "unresolved_api_consumers.jsonl",
+              "unresolved_backend_owners.jsonl",
+              "unresolved_test_contracts.jsonl",
+              "route_extraction_errors.jsonl",
+              "route_graph_summary.json",
+              "route_graph_manifest.json",
+          }
+          actual_outputs = {path.name for path in route_root.iterdir() if path.is_file()}
+          assert actual_outputs == expected_outputs, (
+              actual_outputs - expected_outputs,
+              expected_outputs - actual_outputs,
+          )
+
+          def read_json(path: Path):
+              return json.loads(path.read_text(encoding="utf-8"))
+
+          def read_jsonl(path: Path):
+              return [
+                  json.loads(line)
+                  for line in path.read_text(encoding="utf-8").splitlines()
+                  if line
+              ]
+
+          inventory = read_json(root / "manifest.json")
+          code = read_json(root / "code_index/code_index_summary.json")
+          routes = read_json(route_root / "route_graph_summary.json")
+          api_routes = read_jsonl(route_root / "api_routes.jsonl")
+          route_edges = read_jsonl(route_root / "cross_repository_route_edges.jsonl")
+          unresolved_api = read_jsonl(route_root / "unresolved_api_consumers.jsonl")
+
+          assert inventory["completion_claim"] == "STEP1_FULL_TRACKED_FILE_POPULATION_COMPLETE"
+          assert inventory["repositories"]["Cocolon"]["source_commit"] == os.environ["SOURCE_COMMIT"]
+          assert inventory["repositories"]["mashos-api"]["source_commit"] == os.environ["MASHOS_COMMIT"]
+          assert inventory["missing_tracked_path_count"] == 0
+          assert inventory["duplicate_repository_path_count"] == 0
+          assert code["completion_claim"] == "STEP2_SCIP_AND_SYNTAX_INDEX_CONNECTED"
+          assert code["inventory_total"] == inventory["total_tracked_entries"]
+          assert code["coverage_total"] == inventory["total_tracked_entries"]
+          assert code["coverage_gap_count"] == 0
+          assert code["duplicate_coverage_count"] == 0
+          assert code["missing_coverage_count"] == 0
+          assert code["extra_coverage_count"] == 0
+          assert code["required_scip_runs_ok"] is True
+          assert code["scip_precise_file_count"] > 0
+          assert routes["completion_claim"] == "STEP3_RN_API_BACKEND_TEST_ROUTE_GRAPH_CONNECTED"
+          assert routes["rn_call_count"] > 0
+          assert routes["api_route_count"] > 0
+          assert routes["cross_repository_edge_count"] > 0
+          assert routes["backend_owner_coverage_count"] == routes["rn_connected_route_count"]
+          assert routes["test_contract_coverage_count"] == routes["api_route_count"]
+          assert routes["visible_consumer_coverage_count"] == routes["rn_call_count"]
+          assert routes["domain_chain_node_coverage_count"] == routes["chain_node_file_count"]
+          assert routes["silent_unresolved_count"] == 0
+          assert routes["automatic_progression"] is False
+          assert routes["product_credit"] == 0
+
+          api_by_id = {row["route_id"]: row for row in api_routes}
+          assert len(api_by_id) == len(api_routes)
+          edge_ids = {row["api_route_id"] for row in route_edges}
+          unresolved_by_id = {}
+          for row in unresolved_api:
+              assert "route_id" not in row
+              subject_id = row["subject_id"]
+              assert subject_id in api_by_id
+              assert subject_id not in unresolved_by_id
+              assert row["subject_kind"] == "API_ROUTE"
+              route = api_by_id[subject_id]
+              assert row["method"].upper() == route["method"].upper()
+              assert row["route_path"] == route["route_path"]
+              assert row["path"] == route["path"]
+              assert row["reason"]
+              unresolved_by_id[subject_id] = row
+          for route_id, route in api_by_id.items():
+              classification = route["consumer_classification"]
+              if classification == "RN_CONSUMED":
+                  assert route_id in edge_ids
+                  assert route_id not in unresolved_by_id
+              elif classification == "UNRESOLVED_CONSUMER":
+                  assert route_id not in edge_ids
+                  assert route_id in unresolved_by_id
+              else:
+                  assert route_id not in unresolved_by_id
+
+          print("STEP3_C_VALIDATED=" + json.dumps({
+              "canonical_output_count": len(expected_outputs),
+              "completion_claim": routes["completion_claim"],
+              "silent_unresolved_count": routes["silent_unresolved_count"],
+              "source_commit": inventory["repositories"]["Cocolon"]["source_commit"],
+              "mashos_api_commit": inventory["repositories"]["mashos-api"]["source_commit"],
+          }, sort_keys=True, separators=(",", ":")))
+          PY
+          git diff --check
+          test "$(git rev-parse HEAD)" = "$SOURCE_COMMIT"
+
+      - name: Pack and verify GitHub publication transport
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/cocolon_context_publish_transport.py pack \
+            --root "$ROOT" \
+            --max-part-bytes 90000000
+          python3 tools/cocolon_context_publish_transport.py verify \
+            --root "$ROOT"
+          python3 - <<'PY'
+          import os
+          from pathlib import Path
+          root = Path(os.environ["ROOT"])
+          oversized = [
+              (path.stat().st_size, str(path))
+              for path in root.rglob("*")
+              if path.is_file() and path.stat().st_size > 90_000_000
+          ]
+          assert not oversized, oversized
+          PY
+
+      - name: D-1 publish generated output and D-2 fresh remote postverify
+        shell: bash
+        run: |
+          set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A -- \
-            .github/context-payloads/step3-c \
-            tools/cocolon_context_routes.py \
-            tests/cocolon_context/test_routes.py \
-            Cocolon_前提資料/system_context/current/cmee_working
+
+          git add -- "$ROOT"
           git diff --cached --check
-          git commit -m "perf(context): cache source-bound C traversal derivations [skip ci]"
-          git push origin "HEAD:agent/cocolon-system-context-index-20260818"
+          if git diff --cached --quiet; then
+            git commit --allow-empty -m "docs(context): finalize Step 3 generated checkpoint [skip ci]"
+          else
+            git commit -m "docs(context): finalize Step 3 generated checkpoint [skip ci]"
+          fi
+
+          GENERATED_COMMIT="$(git rev-parse HEAD)"
+          GENERATED_PARENT="$(git rev-parse "${GENERATED_COMMIT}^")"
+          GENERATED_TREE="$(git rev-parse "${GENERATED_COMMIT}^{tree}")"
+          test "$GENERATED_PARENT" = "$SOURCE_COMMIT"
+
+          BAD_PATHS="$(
+            git diff-tree --no-commit-id --name-only -r "$GENERATED_COMMIT" \
+              | awk -v root="${ROOT}/" 'index($0, root) != 1 { print }'
+          )"
+          test -z "$BAD_PATHS"
+
+          git push origin "HEAD:${TARGET_BRANCH}"
+          git fetch --no-tags origin \
+            "+refs/heads/${TARGET_BRANCH}:refs/remotes/origin/${TARGET_BRANCH}"
+          REMOTE_COMMIT="$(git rev-parse "refs/remotes/origin/${TARGET_BRANCH}")"
+          test "$REMOTE_COMMIT" = "$GENERATED_COMMIT"
+
+          rm -rf /tmp/cocolon-system-context-remote
+          git worktree add --detach /tmp/cocolon-system-context-remote "$REMOTE_COMMIT"
+          REMOTE_ROOT="/tmp/cocolon-system-context-remote/${ROOT}"
+
+          python3 /tmp/cocolon-system-context-remote/tools/cocolon_context_publish_transport.py verify \
+            --root "$REMOTE_ROOT"
+
+          export GENERATED_COMMIT GENERATED_PARENT GENERATED_TREE REMOTE_COMMIT REMOTE_ROOT
+          python3 - <<'PY'
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+
+          root = Path(os.environ["REMOTE_ROOT"])
+          source_commit = os.environ["SOURCE_COMMIT"]
+          mashos_commit = os.environ["MASHOS_COMMIT"]
+
+          def sha256(path: Path) -> str:
+              digest = hashlib.sha256()
+              with path.open("rb") as handle:
+                  for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+                      digest.update(chunk)
+              return digest.hexdigest()
+
+          def read_json(path: Path):
+              return json.loads(path.read_text(encoding="utf-8"))
+
+          inventory_manifest = read_json(root / "manifest.json")
+          code_manifest = read_json(root / "code_index/code_index_manifest.json")
+          route_manifest = read_json(root / "route_graph/route_graph_manifest.json")
+          code_summary = read_json(root / "code_index/code_index_summary.json")
+          route_summary = read_json(root / "route_graph/route_graph_summary.json")
+          transport = read_json(root / "publication_transport.json")
+          logical_by_path = {
+              row["logical_path"]: row
+              for row in transport.get("logical_files", [])
+          }
+
+          def logical_sha(relative: str) -> str:
+              direct = root / relative
+              if direct.is_file():
+                  return sha256(direct)
+              row = logical_by_path[relative]
+              digest = hashlib.sha256()
+              total = 0
+              for part in row["parts"]:
+                  part_path = root / part["path"]
+                  assert part_path.stat().st_size == part["size"]
+                  assert sha256(part_path) == part["sha256"]
+                  total += part["size"]
+                  with part_path.open("rb") as handle:
+                      for chunk in iter(lambda: handle.read(1024 * 1024), b""):
+                          digest.update(chunk)
+              assert total == row["logical_size"]
+              actual = digest.hexdigest()
+              assert actual == row["logical_sha256"]
+              return actual
+
+          for name, expected in inventory_manifest["output_sha256"].items():
+              assert sha256(root / name) == expected
+          for name, expected in code_manifest["output_sha256"].items():
+              assert logical_sha(f"code_index/{name}") == expected
+          for name, expected in route_manifest["output_sha256"].items():
+              assert sha256(root / "route_graph" / name) == expected
+
+          files_sha = sha256(root / "files.jsonl")
+          code_manifest_sha = sha256(root / "code_index/code_index_manifest.json")
+          assert code_manifest["inventory_sha256"] == files_sha
+          assert route_manifest["inventory_sha256"] == files_sha
+          assert route_manifest["code_index_manifest_sha256"] == code_manifest_sha
+
+          assert inventory_manifest["completion_claim"] == "STEP1_FULL_TRACKED_FILE_POPULATION_COMPLETE"
+          assert code_manifest["completion_claim"] == "STEP2_SCIP_AND_SYNTAX_INDEX_CONNECTED"
+          assert route_manifest["completion_claim"] == "STEP3_RN_API_BACKEND_TEST_ROUTE_GRAPH_CONNECTED"
+          assert route_summary["completion_claim"] == "STEP3_RN_API_BACKEND_TEST_ROUTE_GRAPH_CONNECTED"
+          assert inventory_manifest["repositories"]["Cocolon"]["source_commit"] == source_commit
+          assert inventory_manifest["repositories"]["mashos-api"]["source_commit"] == mashos_commit
+          assert route_summary["silent_unresolved_count"] == 0
+          assert route_summary["product_credit"] == 0
+          assert route_summary["automatic_progression"] is False
+
+          actual = {
+              "workflow_run_id": os.environ.get("GITHUB_RUN_ID"),
+              "source_commit": source_commit,
+              "source_tree": inventory_manifest["repositories"]["Cocolon"]["source_tree"],
+              "generated_commit": os.environ["GENERATED_COMMIT"],
+              "generated_parent": os.environ["GENERATED_PARENT"],
+              "final_head": os.environ["REMOTE_COMMIT"],
+              "final_tree": os.environ["GENERATED_TREE"],
+              "mashos_api_commit": mashos_commit,
+              "mashos_api_tree": inventory_manifest["repositories"]["mashos-api"]["source_tree"],
+              "step1": {
+                  "cocolon_tracked": inventory_manifest["repositories"]["Cocolon"]["tracked_entry_count"],
+                  "mashos_api_tracked": inventory_manifest["repositories"]["mashos-api"]["tracked_entry_count"],
+                  "total": inventory_manifest["total_tracked_entries"],
+                  "unique": inventory_manifest["unique_repository_path_count"],
+                  "missing": inventory_manifest["missing_tracked_path_count"],
+                  "duplicate": inventory_manifest["duplicate_repository_path_count"],
+                  "unresolved": inventory_manifest["unresolved_count"],
+                  "files_sha256": files_sha,
+                  "manifest_sha256": sha256(root / "manifest.json"),
+              },
+              "step2": {
+                  "required_scip_runs_ok": code_summary["required_scip_runs_ok"],
+                  "coverage_total": code_summary["coverage_total"],
+                  "mode_counts": code_summary["mode_counts"],
+                  "symbol_count": code_summary["symbol_count"],
+                  "reference_count": code_summary["reference_count"],
+                  "import_edge_count": code_summary["import_edge_count"],
+                  "unmatched_scip_document_count": code_summary["unmatched_scip_document_count"],
+                  "manifest_sha256": code_manifest_sha,
+              },
+              "step3": {
+                  "completion_claim": route_summary["completion_claim"],
+                  "rn_call_count": route_summary["rn_call_count"],
+                  "api_route_count": route_summary["api_route_count"],
+                  "cross_repository_edge_count": route_summary["cross_repository_edge_count"],
+                  "rn_connection_counts": route_summary["rn_connection_counts"],
+                  "api_consumer_counts": route_summary["api_consumer_counts"],
+                  "unresolved_rn_call_count": route_summary["unresolved_rn_call_count"],
+                  "unresolved_api_consumer_count": route_summary["unresolved_api_consumer_count"],
+                  "route_extraction_error_count": route_summary["route_extraction_error_count"],
+                  "backend_call_edge_count": route_summary["backend_call_edge_count"],
+                  "route_owner_closure_count": route_summary["route_owner_closure_count"],
+                  "test_contract_edge_count": route_summary["test_contract_edge_count"],
+                  "protected_test_edge_count": route_summary["protected_test_edge_count"],
+                  "ordinary_test_edge_count": route_summary["ordinary_test_edge_count"],
+                  "contract_edge_count": route_summary["contract_edge_count"],
+                  "visible_consumer_counts": route_summary["visible_consumer_counts"],
+                  "file_domain_assignment_count": route_summary["file_domain_assignment_count"],
+                  "resolved_domain_assignment_count": route_summary["resolved_domain_assignment_count"],
+                  "unresolved_domain_assignment_count": route_summary["unresolved_domain_assignment_count"],
+                  "chain_node_file_count": route_summary["chain_node_file_count"],
+                  "silent_unresolved_count": route_summary["silent_unresolved_count"],
+                  "canonical_output_count": len(route_manifest["output_sha256"]),
+                  "manifest_sha256": sha256(root / "route_graph/route_graph_manifest.json"),
+              },
+              "verification": {
+                  "unit_tests": 22,
+                  "inventory_manifest_outputs": len(inventory_manifest["output_sha256"]),
+                  "code_manifest_outputs": len(code_manifest["output_sha256"]),
+                  "route_manifest_outputs": len(route_manifest["output_sha256"]),
+                  "publication_transport_logical_files": transport["logical_file_count"],
+                  "remote_hash_verification": "PASS",
+              },
+              "boundaries": {
+                  "generated_commit_non_context_paths": 0,
+                  "rn_production_source_change": 0,
+                  "api_production_source_change": 0,
+                  "public_api_contract_change": 0,
+                  "db_or_migration_change": 0,
+                  "production_dependency_change": 0,
+                  "product_output_change": 0,
+                  "mashos_api_write": 0,
+                  "product_credit": 0,
+                  "automatic_progression": False,
+                  "structure_map_delta": "NOT_APPLICABLE",
+              },
+              "section_d": {
+                  "d1": "COMPLETE",
+                  "d2": "COMPLETE",
+                  "d3": "NOT_STARTED",
+              },
+          }
+          print("COCOLON_STEP3_D_REMOTE_ACTUAL=" + json.dumps(
+              actual,
+              ensure_ascii=False,
+              sort_keys=True,
+              separators=(",", ":"),
+          ))
+          PY
+
+          test "$(git -C /tmp/cocolon-system-context-remote rev-parse HEAD)" = "$GENERATED_COMMIT"
+          test "$(git -C /tmp/cocolon-system-context-remote rev-parse HEAD^{tree})" = "$GENERATED_TREE"
+          git worktree remove --force /tmp/cocolon-system-context-remote
+
+          printf 'D1_SOURCE_COMMIT=%s\n' "$SOURCE_COMMIT"
+          printf 'D1_GENERATED_COMMIT=%s\n' "$GENERATED_COMMIT"
+          printf 'D1_GENERATED_TREE=%s\n' "$GENERATED_TREE"
+          printf 'D2_REMOTE_COMMIT=%s\n' "$REMOTE_COMMIT"
+          printf 'D2_REMOTE_POSTVERIFY=PASS\n'
