@@ -1,0 +1,390 @@
+{
+  "schema_version": "cocolon.system_context.task_profiles.v1",
+  "tasks": {
+    "cmee": {
+      "current_owner_rules": [
+        {
+          "path_globs": [
+            "Cocolon_前提資料/current_structure/*.md",
+            "Cocolon_前提資料/designs/cmee/Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md",
+            "Cocolon_前提資料/designs/cmee/v1/*.md"
+          ],
+          "repository_keys": [
+            "Cocolon"
+          ]
+        }
+      ],
+      "domains": [
+        "CMEE",
+        "EmlisAI",
+        "Piece",
+        "Analysis",
+        "shared"
+      ],
+      "historical_rules": [
+        {
+          "path_globs": [
+            "Cocolon_前提資料/historical_baselines/**",
+            "Cocolon_前提資料/audits/**",
+            "**/*Handoff*.md",
+            "**/*Receipt*.json"
+          ],
+          "repository_keys": [
+            "Cocolon",
+            "mashos-api"
+          ]
+        }
+      ],
+      "purpose": "Restore the CMEE/EmlisAI/Piece/Analysis task context from exact workspace identities instead of filename recency, while preserving separate CMEE and Cycle001 Git trees.",
+      "required_categories": [
+        {
+          "id": "current_production_emlis_ai",
+          "minimum_source_like": 1,
+          "path_globs": [
+            "ai/services/ai_inference/emlis_ai_reply_service.py",
+            "ai/services/ai_inference/emlis_ai_grounded_observation_plan.py",
+            "ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py"
+          ],
+          "repository_keys": [
+            "mashos-api"
+          ],
+          "title": "current production EmlisAI"
+        },
+        {
+          "actual_review": {
+            "basis_rules": [
+              {
+                "path_globs": [
+                  "Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md",
+                  "Cocolon_前提資料/current_structure/04_cmee_current_structure.md",
+                  "Cocolon_前提資料/designs/cmee/NLSv3_to_CMEE_Disposition_Phase1_20260817.md",
+                  "Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md",
+                  "Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md"
+                ],
+                "repository_keys": [
+                  "Cocolon"
+                ]
+              }
+            ],
+            "canonical_owner_paths": [
+              {
+                "path": "Cocolon_前提資料/current_structure/04_cmee_current_structure.md",
+                "repository_key": "Cocolon"
+              },
+              {
+                "path": "Cocolon_前提資料/designs/cmee/NLSv3_to_CMEE_Disposition_Phase1_20260817.md",
+                "repository_key": "Cocolon"
+              },
+              {
+                "path": "Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md",
+                "repository_key": "Cocolon"
+              },
+              {
+                "path": "Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md",
+                "repository_key": "Cocolon"
+              }
+            ],
+            "conclusion": "Current CMEE design already assigns body-only reverse verification to the Emlis route and requires symbol-level NLSv3 migration. The exact Cycle001 recovery source and its protected audit remain outside cmee_working and are not inherited by PR #3. They are retained as migration source and protected test knowledge; the large recovery module is not wrapped or promoted as a CMEE subengine.",
+            "design_impact": "NONE_CURRENT_CANONICAL_DESIGN_ALREADY_OWNS_BODY_ONLY_REVERSE_AND_ASSET_LEVEL_MIGRATION",
+            "disposition": "RETAIN_AS_SYMBOL_LEVEL_MIGRATION_SOURCE_AND_PROTECTED_TEST_VECTOR",
+            "external_asset_candidates": [
+              {
+                "blob_sha": "c900153cceab5f58e94cdc5433397568e8478dd5",
+                "evidence_kind": "source",
+                "path": "ai/services/ai_inference/emlis_ai_step11_cycle001_product_recovery_v3.py",
+                "repository_key": "mashos-api",
+                "required_workspace": "cycle001_working",
+                "source_commit": "958c1b53f5b5894691e0b10e2d991fb8236d9f6f",
+                "symbols": [
+                  "STEP11_CYCLE001_PRODUCT_RECOVERY_SOURCE_SCHEMA",
+                  "Step11Cycle001ProductRecoverySourceEnvelope",
+                  "step11_cycle001_product_recovery_visible_inverse",
+                  "_SEMANTIC_COVERAGE_AUTHORITY"
+                ]
+              },
+              {
+                "blob_sha": "056d7fa3e0d85ccb56d974c97f7fb95b757ebc8f",
+                "evidence_kind": "test",
+                "path": "ai/tests/test_emlis_nls_v3_s11_cycle001_product_recovery_v3.py",
+                "repository_key": "mashos-api",
+                "required_workspace": "cycle001_working",
+                "source_commit": "958c1b53f5b5894691e0b10e2d991fb8236d9f6f",
+                "symbols": [
+                  "_audit_candidate"
+                ]
+              }
+            ],
+            "finding_id": "CMEE-ACTUAL-001",
+            "require_external_asset_git_verification": true,
+            "required_action": "During a separately approved actual Emlis product-quality unit, compare and migrate only the usable inverse/source duties and protected test vectors to the CMEE Emlis owner. Keep Cycle001 and production cutover separate; do not activate, wrap, or call the PR #2 recovery module from CMEE in Step 4.",
+            "reviewed_workspace_gap_code": "NLSV3_CYCLE001_SOURCE_LANE_EXTERNAL_EXACT_REVIEWED",
+            "status": "DESIGN_OWNER_PRESENT_IMPLEMENTATION_ASSET_NOT_MIGRATED",
+            "structure_map_delta": "STRUCTURE_MAP_DELTA_NONE",
+            "title": "NLSv3 visible inverse replay source/test assets are exact migration inputs, not an active CMEE subengine"
+          },
+          "id": "nlsv3_cycle001",
+          "minimum_source_like": 1,
+          "path_globs": [
+            "Cocolon_前提資料/designs/cmee/NLSv3_to_CMEE_Disposition_Phase1_20260817.md",
+            "Cocolon_前提資料/Cocolon_EmlisAI_NLSv3_CurrentAlignment.md",
+            "Cocolon_前提資料/08_cycle001_current_state.md",
+            "Cocolon_前提資料/historical_baselines/emlis_ai/Cocolon_EmlisAI_ModelFreeNaturalLanguageSurfaceV3_DetailedDesign_ImplementationOrder_20260714_Revised_Cycle.md"
+          ],
+          "repository_keys": [
+            "Cocolon"
+          ],
+          "required_workspace": "cycle001_working",
+          "title": "NLSv3 / Cycle001",
+          "workspace_gap_code": "NLSV3_CYCLE001_SOURCE_LANE_NOT_INDEXED_IN_CMEE_WORKSPACE"
+        },
+        {
+          "id": "cmee_draft_implementation",
+          "minimum_source_like": 1,
+          "path_globs": [
+            "ai/services/ai_inference/cocolon_meaning_experience_engine/*.py"
+          ],
+          "repository_keys": [
+            "mashos-api"
+          ],
+          "title": "CMEE Draft implementation"
+        },
+        {
+          "id": "piece_current_future",
+          "minimum_source_like": 0,
+          "path_globs": [
+            "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+            "Cocolon_前提資料/designs/cmee/v1/03_piece_v1c_detailed_design.md"
+          ],
+          "repository_keys": [
+            "Cocolon"
+          ],
+          "title": "Piece current / future"
+        },
+        {
+          "id": "analysis_current_future",
+          "minimum_source_like": 0,
+          "path_globs": [
+            "Cocolon_前提資料/current_structure/03_analysis_current_structure.md",
+            "Cocolon_前提資料/designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md"
+          ],
+          "repository_keys": [
+            "Cocolon"
+          ],
+          "title": "Analysis current / future"
+        },
+        {
+          "id": "shared_text_generation_core",
+          "minimum_source_like": 1,
+          "path_globs": [
+            "ai/services/ai_inference/cocolon_text_generation_core/*.py",
+            "ai/services/ai_inference/cocolon_text_generation_core/guards/*.py",
+            "ai/services/ai_inference/cocolon_text_generation_core/adapters/*.py"
+          ],
+          "repository_keys": [
+            "mashos-api"
+          ],
+          "title": "shared text-generation core"
+        },
+        {
+          "id": "rn_display_surface",
+          "minimum_source_like": 1,
+          "path_globs": [
+            "screens/InputScreen.js",
+            "screens/input/inputFeedbackModel.js",
+            "screens/input/InputFeedbackReplyModal.js",
+            "screens/input/useInputFeedbackModal.js"
+          ],
+          "repository_keys": [
+            "Cocolon"
+          ],
+          "title": "RN display surface"
+        },
+        {
+          "id": "api_boundary",
+          "minimum_source_like": 1,
+          "path_globs": [
+            "ai/services/ai_inference/api_emotion_submit.py",
+            "ai/services/ai_inference/emlis_ai_response_contract.py",
+            "ai/docs/API_CONTRACT_POLICY.md"
+          ],
+          "repository_keys": [
+            "mashos-api"
+          ],
+          "title": "API boundary"
+        },
+        {
+          "evidence_kinds": [
+            "test"
+          ],
+          "id": "protected_tests",
+          "minimum_source_like": 1,
+          "path_globs": [
+            "ai/tests/contract/test_emlis_ai_contracts.py",
+            "ai/tests/contract/test_new_national_core_emlis_contracts.py",
+            "ai/tests/test_emlis_ai_observation_current_display_contract.py",
+            "ai/tests/test_cmee_v1a_i1sx_contracts.py",
+            "ai/tests/test_cmee_v1a_i1sx_vertical.py",
+            "ai/tests/test_cocolon_text_generation_core_boundary.py"
+          ],
+          "repository_keys": [
+            "mashos-api"
+          ],
+          "title": "protected tests"
+        },
+        {
+          "id": "relevant_historical_design",
+          "minimum_source_like": 0,
+          "path_globs": [
+            "Cocolon_前提資料/designs/cmee/NLSv3_to_CMEE_Disposition_Phase1_20260817.md",
+            "Cocolon_前提資料/historical_baselines/emlis_ai/Cocolon_EmlisAI_ModelFreeNaturalLanguageSurfaceV3_DetailedDesign_ImplementationOrder_20260714_Revised_Cycle.md",
+            "Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md",
+            "ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md",
+            "ai/docs/CMEE_V1A_I1SX_PrivateHumanProductRead_BodyFree_Receipt_20260816.json"
+          ],
+          "repository_keys": [
+            "Cocolon",
+            "mashos-api"
+          ],
+          "title": "relevant historical design"
+        }
+      ],
+      "required_category_exact": 10,
+      "seed_rules": [
+        {
+          "classification": "CURRENT_OWNER",
+          "id": "current_structure_exact5",
+          "path_globs": [
+            "Cocolon_前提資料/current_structure/00_three_core_and_cmee_read_first.md",
+            "Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md",
+            "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+            "Cocolon_前提資料/current_structure/03_analysis_current_structure.md",
+            "Cocolon_前提資料/current_structure/04_cmee_current_structure.md"
+          ],
+          "repository_keys": [
+            "Cocolon"
+          ]
+        },
+        {
+          "classification": "CURRENT_OWNER",
+          "id": "cmee_canonical_design_exact9",
+          "path_globs": [
+            "Cocolon_前提資料/designs/cmee/Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md",
+            "Cocolon_前提資料/designs/cmee/NLSv3_to_CMEE_Disposition_Phase1_20260817.md",
+            "Cocolon_前提資料/designs/cmee/v1/00_read_first.md",
+            "Cocolon_前提資料/designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md",
+            "Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md",
+            "Cocolon_前提資料/designs/cmee/v1/03_piece_v1c_detailed_design.md",
+            "Cocolon_前提資料/designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md",
+            "Cocolon_前提資料/designs/cmee/v1/05_json_schema_and_versioning.md",
+            "Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md"
+          ],
+          "repository_keys": [
+            "Cocolon"
+          ]
+        },
+        {
+          "classification": "MUST_READ_FULL",
+          "id": "cmee_disabled_draft_exact10",
+          "path_globs": [
+            "ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md",
+            "ai/docs/CMEE_V1A_I1SX_PrivateHumanProductRead_BodyFree_Receipt_20260816.json",
+            "ai/services/ai_inference/cocolon_meaning_experience_engine/__init__.py",
+            "ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py",
+            "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_v1a.py",
+            "ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py",
+            "ai/services/ai_inference/cocolon_meaning_experience_engine/source_kernel.py",
+            "ai/tests/test_cmee_v1a_i1sx_contracts.py",
+            "ai/tests/test_cmee_v1a_i1sx_vertical.py",
+            "ai/tools/cmee_v1a_i1sx_candidate_run.py"
+          ],
+          "repository_keys": [
+            "mashos-api"
+          ]
+        },
+        {
+          "classification": "MUST_READ_FULL",
+          "id": "current_production_emlis_exact27",
+          "path_globs": [
+            "screens/InputScreen.js",
+            "screens/input/inputFeedbackModel.js",
+            "screens/input/InputFeedbackReplyModal.js",
+            "screens/input/useInputFeedbackModal.js",
+            "ai/services/ai_inference/api_emotion_submit.py",
+            "ai/services/ai_inference/emotion_submit_service.py",
+            "ai/services/ai_inference/emlis_ai_reply_service.py",
+            "ai/services/ai_inference/emlis_ai_response_contract.py",
+            "ai/services/ai_inference/emlis_ai_public_feedback_meta.py",
+            "ai/services/ai_inference/emlis_ai_types.py",
+            "ai/services/ai_inference/emlis_ai_current_input_bundle.py",
+            "ai/services/ai_inference/emlis_ai_input_material_bundle.py",
+            "ai/services/ai_inference/emlis_ai_capability.py",
+            "ai/services/ai_inference/emlis_ai_evidence_ledger_service.py",
+            "ai/services/ai_inference/emlis_ai_perspective_observers.py",
+            "ai/services/ai_inference/emlis_ai_perspective_board.py",
+            "ai/services/ai_inference/emlis_ai_observation_integrator_service.py",
+            "ai/services/ai_inference/emlis_ai_observation_stage_context_v3.py",
+            "ai/services/ai_inference/emlis_ai_refined_source_partition_v3.py",
+            "ai/services/ai_inference/emlis_ai_safety_triage.py",
+            "ai/services/ai_inference/emlis_ai_grounded_observation_plan.py",
+            "ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py",
+            "ai/services/ai_inference/emlis_ai_grounded_observation_gate.py",
+            "ai/services/ai_inference/emlis_ai_safety_boundary_service.py",
+            "ai/tests/contract/test_emlis_ai_contracts.py",
+            "ai/tests/contract/test_new_national_core_emlis_contracts.py",
+            "ai/tests/test_emlis_ai_observation_current_display_contract.py"
+          ],
+          "repository_keys": [
+            "Cocolon",
+            "mashos-api"
+          ]
+        },
+        {
+          "classification": "MUST_READ_FULL",
+          "id": "shared_text_generation_core_current",
+          "path_globs": [
+            "ai/services/ai_inference/cocolon_text_generation_core/types.py",
+            "ai/services/ai_inference/cocolon_text_generation_core/evidence.py",
+            "ai/services/ai_inference/cocolon_text_generation_core/phrase_units.py",
+            "ai/services/ai_inference/cocolon_text_generation_core/sentence_plan.py",
+            "ai/services/ai_inference/cocolon_text_generation_core/composer.py",
+            "ai/services/ai_inference/cocolon_text_generation_core/result.py",
+            "ai/services/ai_inference/cocolon_text_generation_core/policies.py",
+            "ai/services/ai_inference/cocolon_text_generation_core/guards/*.py",
+            "ai/services/ai_inference/cocolon_text_generation_core/adapters/emlis_observation_composer.py",
+            "ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer.py",
+            "ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer.py",
+            "ai/tests/test_cocolon_text_generation_core_boundary.py"
+          ],
+          "repository_keys": [
+            "mashos-api"
+          ]
+        },
+        {
+          "classification": "RELEVANT_HISTORICAL",
+          "id": "nlsv3_cycle001_current_and_normative",
+          "path_globs": [
+            "Cocolon_前提資料/Cocolon_EmlisAI_NLSv3_CurrentAlignment.md",
+            "Cocolon_前提資料/08_cycle001_current_state.md",
+            "Cocolon_前提資料/historical_baselines/emlis_ai/Cocolon_EmlisAI_ModelFreeNaturalLanguageSurfaceV3_DetailedDesign_ImplementationOrder_20260714_Revised_Cycle.md",
+            "Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md"
+          ],
+          "repository_keys": [
+            "Cocolon"
+          ]
+        },
+        {
+          "classification": "REFERENCE_AS_NEEDED",
+          "id": "route_contract_reference_surfaces",
+          "path_globs": [
+            "lib/api/home/emotionPieceApi.js",
+            "ai/docs/API_CONTRACT_POLICY.md"
+          ],
+          "repository_keys": [
+            "Cocolon",
+            "mashos-api"
+          ]
+        }
+      ]
+    }
+  }
+}
