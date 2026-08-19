@@ -105,8 +105,7 @@ jobs:
             .github/workflows/cocolon-system-context-inventory.yml \
             .github/workflows/cocolon-system-context-rn-reason-repair.yml \
             tools/cocolon_context_routes.py \
-            tests/cocolon_context/test_routes.py \
-            Cocolon_前提資料/system_context/current/cmee_working/workflow_last_failure.json
+            tests/cocolon_context/test_routes.py
           git diff --cached --check
           git commit -m "fix(context): synchronize explicit RN unresolved reasons [skip ci]"
           SOURCE_COMMIT="$(git rev-parse HEAD)"
