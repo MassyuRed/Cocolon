@@ -1,5 +1,5 @@
-name: Cocolon system context Step 4 bootstrap continuation
-run-name: Cocolon Step 4 bootstrap continuation @ ${{ github.event.pull_request.head.sha || github.sha }}
+name: Cocolon system context Step 4 actual
+run-name: Cocolon Step 4 actual @ ${{ github.event.pull_request.head.sha || github.sha }}
 
 on:
   pull_request:
@@ -11,37 +11,36 @@ permissions:
   contents: write
 
 concurrency:
-  group: cocolon-system-context-step4-bootstrap-${{ github.event.pull_request.head.ref || github.ref_name }}
+  group: cocolon-system-context-step4-actual-${{ github.event.pull_request.head.ref || github.ref_name }}
   cancel-in-progress: true
 
 jobs:
-  materialize-and-complete-step4:
+  complete-step4:
     runs-on: ubuntu-24.04
     timeout-minutes: 180
     env:
-      BOOTSTRAP_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
+      SOURCE_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
       TARGET_BRANCH: agent/cocolon-system-context-index-20260818
       CYCLE001_MASHOS_COMMIT: 958c1b53f5b5894691e0b10e2d991fb8236d9f6f
       CONTEXT_ROOT: Cocolon_前提資料/system_context/current/cmee_working/task_context/cmee
     steps:
-      - name: Checkout exact bootstrap source
+      - name: Checkout exact Step 4 source
         uses: actions/checkout@v4
         with:
           ref: agent/cocolon-system-context-index-20260818
           fetch-depth: 0
 
-      - name: Assert exact bootstrap source
+      - name: Assert exact source and transport patch preimage
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = "$BOOTSTRAP_COMMIT"
+          test "$(git rev-parse HEAD)" = "$SOURCE_COMIT"
           test -z "$(git status --porcelain)"
-          test ! -e tools/cocolon_context.py
-          test ! -e tools/cocolon_context_task.py
-          test ! -e tests/cocolon_context/test_task_context.py
-          test ! -e Cocolon_前提資料/system_context/task_profiles.json
+          test "$(git rev-parse HEAD:tools/cocolon_context_task.py)" = "c847e9b784529eff30ef04a9a7630eae8c57594f"
+          test "$(git rev-parse HEAD: tests/cocolon_context/test_task_context.py)" = "9f862bed5fe4a2f95ac8afb6034654abd3599a67"
+          test "$(find .github/context-payloads/step4-transport -maxdepth 1 -type f -name 'part*' | wc -l)" = "4"
 
-      - name: Materialize exact Step 4 source packet
+      - name: Materialize exact publication transport correction
         shell: bash
         run: |
           set -euo pipefail
@@ -52,42 +51,31 @@ jobs:
           import pathlib
           import tarfile
 
-          payload_dir = pathlib.Path('.github/context-payloads/step4-bootstrap')
-          encoded = ''.join(
-              part.read_text(encoding='ascii').strip()
-              for part in sorted(payload_dir.glob('part*'))
-          )
-          assert len(list(payload_dir.glob('part*'))) == 4
+          payload_dir = pathlib.Path('.github/context-payloads/step4-transport')
+          parts = sorted(payload_dir.glob('part*'))
+          assert len(parts) == 4
+          encoded = ''.join(path.read_text(encoding='ascii').strip() for path in parts)
           raw = base64.b64decode(encoded, validate=True)
-          assert hashlib.sha256(raw).hexdigest() == "48e2d90de352555ddf5e5d9f21dda94bde6291685d470755c7a9190877086d03"
+          assert hashlib.sha256(raw).hexdigest() == 'ff99a2163488ba30722e7675d35bab8c7179e5a538e9168baa0ad6d44ae3f4bd'
           expected = {
-              "tools/cocolon_context.py",
-              "tools/cocolon_context_task.py",
-              "tests/cocolon_context/test_task_context.py",
-              "Cocolon_前提資料/system_context/task_profiles.json",
-              ".github/workflows/cocolon-system-context-step4.yml",
+              'tools/cocolon_context_task.py',
+              'tests/cocolon_context/test_task_context.py',
           }
           root = pathlib.Path.cwd().resolve()
-          with tarfile.open(fileobj=io.BytesIO(raw), mode="r:gz") as archive:
+          with tarfile.open(fileobj=io.BytesIO(raw), mode='r:gz') as archive:
               members = [member for member in archive.getmembers() if member.isfile()]
               assert {member.name for member in members} == expected
               for member in members:
-                  if member.name == ".github/workflows/cocolon-system-context-step4.yml":
-                      continue
                   relative = pathlib.PurePosixPath(member.name)
                   assert not relative.is_absolute()
-                  assert all(part not in {"", ".", ".."} for part in relative.parts)
-                  target = root.joinpath(*relative.parts)
-                  target.parent.mkdir(parents=True, exist_ok=True)
+                  assert all(part not in {'', '.', '..'} for part in relative.parts)
                   source = archive.extractfile(member)
                   assert source is not None
+                  target = root.joinpath(*relative.parts)
                   target.write_bytes(source.read())
+          assert hashlib.sha256((root / 'tools/cocolon_context_task.py').read_bytes()).hexdigest() == '394f90fdaead5728ad6b8d21e8d77c98ee2395efd7d5adf5a4afafb18d669ea9'
+          assert hashlib.sha256((root / 'tests/cocolon_context/test_task_context.py').read_bytes()).hexdigest() == '8c2d8ffafd79664e0d6aa05e2a5f9d2244933729d82006c203162808948a80da'
           PY
-          test -f tools/cocolon_context.py
-          test -f tools/cocolon_context_task.py
-          test -f tests/cocolon_context/test_task_context.py
-          test -f Cocolon_前提資料/system_context/task_profiles.json
-          grep -q "name: Cocolon system context Step 4 bootstrap continuation" .github/workflows/cocolon-system-context-step4.yml
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
@@ -100,7 +88,7 @@ jobs:
           set -euo pipefail
           python3 -m pip install --disable-pip-version-check --no-cache-dir pytest==9.0.2
 
-      - name: Validate and publish Step 4 implementation source
+      - name: Validate and publish publication transport correction
         shell: bash
         run: |
           set -euo pipefail
@@ -113,18 +101,16 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config core.quotePath false
-          git rm -r -- .github/context-payloads/step4-bootstrap
+          git rm -r -- .github/context-payloads/step4-transport
           git add -- \
-            tools/cocolon_context.py \
             tools/cocolon_context_task.py \
-            tests/cocolon_context/test_task_context.py \
-            Cocolon_前提資料/system_context/task_profiles.json
-          test "$(git diff --cached --name-only | wc -l)" = "8"
-          test -z "$(git diff --cached --name-only | grep -v -E '^(\.github/context-payloads/step4-bootstrap/part[0-9][0-9]|tools/cocolon_context\.py|tools/cocolon_context_task\.py|tests/cocolon_context/test_task_context\.py|Cocolon_前提資料/system_context/task_profiles\.json)$' || true)"
+            tests/cocolon_context/test_task_context.py
+          test "$(git diff --cached --name-only | wc -l)" = "6"
+          test -z "$(git diff --cached --name-only | grep -v -E '^(\.github/context-payloads/step4-transport/part[0-9][0-9]|tools/cocolon_context_task\.py|tests/cocolon_context/test_task_context\.py)$' || true)"
           git diff --cached --check
-          git commit -m "feat(context): add Step 4 task context compiler [skip ci]"
-          IMPLEMENTATION_COMMIT="$(git rev-parse HEAD)"
-          echo "IMPLEMENTATION_COMMIT=${IMPLEMENTATION_COMMIT}" >> "$GITHUB_ENV"
+          git commit -m "fix(context): transport oversized Step 4 logical outputs [skip ci]"
+          TRANSPORT_COMMIT="$(git rev-parse HEAD)"
+          echo "TRANSPORT_COMMIT=${TRANSPORT_COMMIT}" >> "$GITHUB_ENV"
           git push origin "HEAD:${TARGET_BRANCH}"
 
       - name: Checkout locked Cycle001 mashos-api read-only
@@ -166,8 +152,8 @@ jobs:
           import json
           import pathlib
 
-          path = pathlib.Path('Cocolon_前提資料/system_context/current/cmee_working/task_context/cmee/context_manifest.json')
-          value = json.loads(path.read_text(encoding='utf-8'))
+          root = pathlib.Path('Cocolon_前提資料/system_context/current/cmee_working/task_context/cmee')
+          value = json.loads((root / 'context_manifest.json').read_text(encoding='utf-8'))
           assert value['status'] == 'STEP4_INCOMPLETE_BLOCKING_CONTEXT_OR_REMOTE_VERIFICATION'
           gates = value['completion_gates']
           assert gates['generated_output_remote_hash_verified'] is False
@@ -182,13 +168,21 @@ jobs:
           assert value['actual_unincorporated_finding_count'] >= 1
           assert value['product_credit'] == 0
           assert value['automatic_progression'] is False
+          transport = json.loads((root / 'publication_transport.json').read_text(encoding='utf-8'))
+          assert transport['schema_version'] == 'cocolon.system_context.publication_transport.v1'
+          assert transport['logical_file_count'] >= 1
+          assert not (root / 'closure_edges.jsonl').exists()
+          assert any(row['logical_path'] == 'closure_edges.jsonl' for row in transport['logical_files'])
+          parts = [part for row in transport['logical_files'] for part in row['parts']]
+          assert parts and all(0 < part['size'] <= 90_000_000 for part in parts)
+          assert all((root / part['path']).is_file() for part in parts)
           PY
 
       - name: Publish provisional generated bytes
         shell: bash
         run: |
           set -euo pipefail
-          git add -- "$CONTEXT_ROOT"
+          git add -A -- "$CONTEXT_ROOT"
           test -n "$(git diff --cached --name-only)"
           test -z "$(git diff --cached --name-only | grep -v "^${CONTEXT_ROOT}/" || true)"
           git diff --cached --check
@@ -217,6 +211,7 @@ jobs:
           value = verify_task_context(root)
           assert value['status'] == 'STEP4_INCOMPLETE_BLOCKING_CONTEXT_OR_REMOTE_VERIFICATION'
           assert value['completion_gates']['generated_output_remote_hash_verified'] is False
+          assert value['output_publication_transport_sha256']
           PY
           git worktree remove --force /tmp/cocolon-step4-provisional
 
@@ -243,7 +238,7 @@ jobs:
           )
           assert result.status == 'STEP4_TASK_CONTEXT_COMPILER_CMEE_ACTUAL_REVIEW_COMPLETE'
           PY
-          git add -- "$CONTEXT_ROOT"
+          git add -A -- "$CONTEXT_ROOT"
           test -z "$(git diff --cached --name-only | grep -v "^${CONTEXT_ROOT}/" || true)"
           git diff --cached --check
           git commit -m "docs(context): seal Step 4 CMEE actual review [skip ci]"
@@ -285,6 +280,10 @@ jobs:
           assert value['actual_unincorporated_finding_count'] >= 1
           assert value['product_credit'] == 0
           assert value['automatic_progression'] is False
+          transport = json.loads((root / 'publication_transport.json').read_text(encoding='utf-8'))
+          assert transport['logical_file_count'] >= 1
+          parts = [part for row in transport['logical_files'] for part in row['parts']]
+          assert all((root / part['path']).is_file() for part in parts)
           print('COCOLON_STEP4_REMOTE_ACTUAL=' + json.dumps({
               'context_fingerprint': value['context_fingerprint'],
               'selected_file_count': value['selected_file_count'],
@@ -293,12 +292,16 @@ jobs:
               'finding_count': value['actual_unincorporated_finding_count'],
               'completion_claim': value['completion_claim'],
               'output_sha256': value['output_sha256'],
+              'output_publication_transport_sha256': value['output_publication_transport_sha256'],
+              'transported_logical_file_count': transport['logical_file_count'],
+              'transport_part_count': len(parts),
           }, ensure_ascii=False, sort_keys=True, separators=(',', ':')))
           PY
           CHANGED="$(git diff-tree --no-commit-id --name-only -r "$REMOTE_COMMIT")"
           test -n "$CHANGED"
           test -z "$(printf '%s\n' "$CHANGED" | grep -v "^${CONTEXT_ROOT}/" || true)"
           git worktree remove --force /tmp/cocolon-step4-final
-          echo "STEP4_IMPLEMENTATION_COMMIT=${IMPLEMENTATION_COMMIT}"
+          echo "STEP4_TRANSPORT_COMMIT=${TRANSPORT_COMMIT}"
+          echo "STEP4_PROVISIONAL_COMMIT=${PROVISIONAL_COMMIT}"
           echo "STEP4_FINAL_REMOTE_COMMIT=${REMOTE_COMMIT}"
           echo "STEP4_REMOTE_POSTVERIFY=PASS"
