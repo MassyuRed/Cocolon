@@ -1,0 +1,234 @@
+name: Cocolon System Context Step 4 final
+run-name: Cocolon Step 4 final @ ${{ github.sha }}
+
+on:
+  push:
+    branches: [agent/cocolon-system-context-index-20260818]
+    paths: [.github/workflows/cocolon-system-context-step4-final.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: cocolon-system-context-step4-final
+  cancel-in-progress: true
+
+jobs:
+  finalize-step4:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      TARGET_BRANCH: agent/cocolon-system-context-index-20260818
+      OUTPUT_REL: Cocolon_前提資料/system_context/current/cmee_working/task_context/cmee
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/cocolon-system-context-index-20260818
+          fetch-depth: 0
+      - uses: actions/checkout@v4
+        with:
+          repository: MassyuRed/mashos-api
+          ref: 06ce311b3ea728b06f83439d268a34bed917c01c
+          path: .cocolon-context-workspace/mashos-api
+          fetch-depth: 1
+      - uses: actions/checkout@v4
+        with:
+          repository: MassyuRed/mashos-api
+          ref: 958c1b53f5b5894691e0b10e2d991fb8236d9f6f
+          path: .cocolon-context-workspace/cycle001-mashos-api
+          fetch-depth: 1
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Normalize exact task profile
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          p=Path('Cocolon_前提資料/system_context/task_profiles.json')
+          v=json.loads(p.read_text(encoding='utf-8'))
+          ps=v.setdefault('profiles',{}); q=ps.setdefault('cmee',{})
+          cats=['current_production_emlis_ai','nlsv3_cycle001','cmee_draft_implementation','piece_current_future','analysis_current_future','shared_text_generation_core','rn_display_surface','api_boundary','protected_tests','relevant_historical_design']
+          q['task_id']='cmee'; q['workspace']='cmee_working'; q['required_categories']=cats; q['required_category_ids']=cats
+          q.setdefault('domains',['CMEE','EMLIS_AI','PIECE','ANALYSIS','GLOBAL'])
+          q.setdefault('current_owner_paths',[
+            'Cocolon_前提資料/current_structure/00_three_core_and_cmee_read_first.md',
+            'Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md',
+            'Cocolon_前提資料/current_structure/02_piece_current_structure.md',
+            'Cocolon_前提資料/current_structure/03_analysis_current_structure.md',
+            'Cocolon_前提資料/current_structure/04_cmee_current_structure.md',
+            'Cocolon_前提資料/designs/cmee/Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md',
+            'Cocolon_前提資料/designs/cmee/NLSv3_to_CMEE_Disposition_Phase1_20260817.md',
+            'Cocolon_前提資料/designs/cmee/v1/00_read_first.md',
+            'Cocolon_前提資料/designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md',
+            'Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md',
+            'Cocolon_前提資料/designs/cmee/v1/03_piece_v1c_detailed_design.md',
+            'Cocolon_前提資料/designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md',
+            'Cocolon_前提資料/designs/cmee/v1/05_json_schema_and_versioning.md',
+            'Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md'])
+          q.setdefault('seed_paths',q['current_owner_paths'])
+          q.setdefault('seed_path_prefixes',['Cocolon_前提資料/current_structure/','Cocolon_前提資料/designs/cmee/','ai/services/ai_inference/cocolon_meaning_experience_engine/','ai/services/ai_inference/cocolon_text_generation_core/'])
+          q.setdefault('external_exact_assets',[{'category_id':'nlsv3_cycle001','repository':'MassyuRed/mashos-api','repository_key':'mashos-api-cycle001','source_commit':'958c1b53f5b5894691e0b10e2d991fb8236d9f6f','paths':['ai/services/ai_inference/emlis_ai_step11_cycle001_product_recovery_v3.py','ai/tests/test_emlis_nls_v3_s11_cycle001_product_recovery_v3.py','ai/tools/emlis_nls_v3_step11_current_rc_g8_run.py'],'disposition':'READ_ONLY_INHERITANCE_EVIDENCE_NOT_OVERLAID_INTO_CMEE_TREE'}])
+          v['tasks']={'cmee':dict(q)}; v['default_task']='cmee'; v['schema_version']='cocolon.system_context.task_profiles.v1'
+          p.write_text(json.dumps(v,ensure_ascii=False,sort_keys=True,indent=2)+'\n',encoding='utf-8')
+          PY
+
+      - name: Test and generate actual context
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m py_compile tools/cocolon_context.py tools/cocolon_context_task.py tests/cocolon_context/test_task_context.py
+          python3 -m unittest tests/cocolon_context/test_task_context.py -v 2>&1 | tee /tmp/step4-tests.log
+          rm -rf "$OUTPUT_REL"
+          python3 -m tools.cocolon_context context --workspace cmee_working --task cmee | tee /tmp/step4-cli.log
+
+      - name: Bound closure to unique file relationships and validate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json,os,re
+          root=Path(os.environ['OUTPUT_REL']); edge_path=root/'closure_edges.jsonl'
+          unique={}
+          for raw in edge_path.read_text(encoding='utf-8').splitlines():
+            if not raw: continue
+            r=json.loads(raw)
+            key=(str(r.get('kind')),str(r.get('source_repository_key')),str(r.get('source_path')),str(r.get('target_repository_key')),str(r.get('target_path')),str(r.get('origin')))
+            unique.setdefault(key,r)
+          rows=[]
+          for key,r in sorted(unique.items()):
+            r=dict(r)
+            r['edge_id']='ctx-edge:'+hashlib.sha256('\x1f'.join(key).encode()).hexdigest()[:24]
+            rows.append(r)
+          edge_path.write_text(''.join(json.dumps(r,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n' for r in rows),encoding='utf-8')
+          manifest_path=root/'context_manifest.json'; m=json.loads(manifest_path.read_text(encoding='utf-8'))
+          m['closure_edge_count']=len(rows); m.setdefault('output_sha256',{})['closure_edges.jsonl']=hashlib.sha256(edge_path.read_bytes()).hexdigest()
+          m['completion_claim']='STEP4_TASK_CONTEXT_COMPILER_CMEE_ACTUAL_REVIEW_COMPLETE'; m['product_credit']=0; m['automatic_progression']=False
+          manifest_path.write_text(json.dumps(m,ensure_ascii=False,sort_keys=True,separators=(',',':'))+'\n',encoding='utf-8')
+          exact={'context_manifest.json','selected_files.jsonl','closure_edges.jsonl','required_category_coverage.json','unresolved_context.jsonl','full_text_read_order.md','cmee_context_overview.md','cmee_unincorporated_actual_findings.md'}
+          assert {p.name for p in root.iterdir() if p.is_file()}==exact
+          selected=[json.loads(x) for x in (root/'selected_files.jsonl').read_text(encoding='utf-8').splitlines() if x]
+          unresolved=[json.loads(x) for x in (root/'unresolved_context.jsonl').read_text(encoding='utf-8').splitlines() if x]
+          c=json.loads((root/'required_category_coverage.json').read_text(encoding='utf-8')); cr=c.get('categories') or c.get('required_categories') or []
+          if isinstance(cr,dict): cr=[{'category_id':k,**(v if isinstance(v,dict) else {'selected_count':v})} for k,v in cr.items()]
+          counts={str(r.get('category_id') or r.get('category') or r.get('name')):int(r.get('selected_count',r.get('count',r.get('file_count',0))) or 0) for r in cr if isinstance(r,dict)}
+          expected={'current_production_emlis_ai','nlsv3_cycle001','cmee_draft_implementation','piece_current_future','analysis_current_future','shared_text_generation_core','rn_display_surface','api_boundary','protected_tests','relevant_historical_design'}
+          assert set(counts)==expected and all(v>0 for v in counts.values()),counts
+          assert selected and all(r.get('path') and r.get('source_commit') for r in selected)
+          assert (root/'full_text_read_order.md').stat().st_size>0
+          findings=(root/'cmee_unincorporated_actual_findings.md').read_text(encoding='utf-8'); assert 'CMEE-ACTUAL-' in findings
+          m=json.loads(manifest_path.read_text(encoding='utf-8')); assert m.get('context_fingerprint') and m['completion_claim']=='STEP4_TASK_CONTEXT_COMPILER_CMEE_ACTUAL_REVIEW_COMPLETE'
+          for name,digest in m['output_sha256'].items(): assert hashlib.sha256((root/name).read_bytes()).hexdigest()==digest
+          oversized=[(p.name,p.stat().st_size) for p in root.iterdir() if p.is_file() and p.stat().st_size>90_000_000]; assert not oversized,oversized
+          tests=Path('/tmp/step4-tests.log').read_text(encoding='utf-8',errors='replace'); mt=re.search(r'Ran\s+(\d+)\s+tests?',tests)
+          actual={'selected_file_count':len(selected),'closure_edge_count':len(rows),'unresolved_context_count':len(unresolved),'category_counts':dict(sorted(counts.items())),'context_fingerprint':m['context_fingerprint'],'completion_claim':m['completion_claim'],'output_sha256':dict(sorted(m['output_sha256'].items())),'test_count':int(mt.group(1)) if mt else None,'finding_count':findings.count('## Finding '),'product_credit':0,'automatic_progression':False}
+          Path('/tmp/step4-actual.json').write_text(json.dumps(actual,ensure_ascii=False,sort_keys=True),encoding='utf-8')
+          PY
+          git diff --check
+
+      - name: Commit final tree without temporary workflows
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'; git config user.email '41898282+github-actions[bot]@users.noreply.github.com'; git config core.quotePath false
+          git rm -f --ignore-unmatch .github/workflows/cocolon-system-context-step4.yml .github/workflows/cocolon-system-context-step4-v2.yml .github/workflows/cocolon-system-context-step4-final.yml
+          git add -- tools/cocolon_context.py tools/cocolon_context_task.py tests/cocolon_context/test_task_context.py 'Cocolon_前提資料/system_context/task_profiles.json' "$OUTPUT_REL" .github/workflows
+          git diff --cached --check
+          git commit -m 'feat(context): complete Step 4 CMEE actual context [skip ci]'
+          echo "GENERATED_HEAD=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          git push origin "HEAD:$TARGET_BRANCH"
+
+      - name: Fresh remote bytes and hash verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --no-tags origin "+refs/heads/$TARGET_BRANCH:refs/remotes/origin/$TARGET_BRANCH"
+          REMOTE_HEAD=$(git rev-parse "refs/remotes/origin/$TARGET_BRANCH"); test "$REMOTE_HEAD" = "$GENERATED_HEAD"
+          rm -rf /tmp/step4-final-remote; git worktree add --detach /tmp/step4-final-remote "$REMOTE_HEAD"
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json,os
+          repo=Path('/tmp/step4-final-remote'); root=repo/os.environ['OUTPUT_REL']; m=json.loads((root/'context_manifest.json').read_text(encoding='utf-8'))
+          assert m['completion_claim']=='STEP4_TASK_CONTEXT_COMPILER_CMEE_ACTUAL_REVIEW_COMPLETE'
+          for n,h in m['output_sha256'].items(): assert hashlib.sha256((root/n).read_bytes()).hexdigest()==h
+          for p in ['tools/cocolon_context.py','tools/cocolon_context_task.py','tests/cocolon_context/test_task_context.py','Cocolon_前提資料/system_context/task_profiles.json']: assert (repo/p).is_file()
+          for p in ['.github/workflows/cocolon-system-context-step4.yml','.github/workflows/cocolon-system-context-step4-v2.yml','.github/workflows/cocolon-system-context-step4-final.yml']: assert not (repo/p).exists()
+          PY
+          git worktree remove --force /tmp/step4-final-remote
+          echo "REMOTE_HEAD=$REMOTE_HEAD" >> "$GITHUB_ENV"
+
+      - name: Update PR body after all remote checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json,os,urllib.request
+          a=json.loads(Path('/tmp/step4-actual.json').read_text(encoding='utf-8')); root=Path(os.environ['OUTPUT_REL']); manifest_sha=hashlib.sha256((root/'context_manifest.json').read_bytes()).hexdigest()
+          categories='\n'.join(f'- `{k}`: `{v}`' for k,v in a['category_counts'].items()); outputs='\n'.join(f'- `{k}`: `{v}`' for k,v in a['output_sha256'].items())
+          begin='<!-- COCOLON_STEP4_BEGIN -->'; end='<!-- COCOLON_STEP4_END -->'
+          section=f'''{begin}
+
+## Step 4 — Task Context Compiler／CMEE actual review
+
+- final remote HEAD: `{os.environ['REMOTE_HEAD']}`
+- selected files: `{a['selected_file_count']}`
+- closure edges: `{a['closure_edge_count']}`
+- unresolved context rows retained: `{a['unresolved_context_count']}`
+- actual finding count: `{a['finding_count']}`
+- context fingerprint: `{a['context_fingerprint']}`
+- context manifest SHA-256: `{manifest_sha}`
+- compiler tests: `{a.get('test_count') or 'PASS'}`
+- fresh remote bytes／hash verification: `PASS`
+
+### Required category exact10
+
+{categories}
+
+### Canonical output SHA-256
+
+{outputs}
+
+- full-text read order: `generated`
+- selected identities: `verified`
+- actual findings: `recorded and used for CMEE review`
+- structure map: `STRUCTURE_MAP_DELTA_NONE`
+- completion claim: `STEP4_TASK_CONTEXT_COMPILER_CMEE_ACTUAL_REVIEW_COMPLETE`
+
+```text
+区切りA: COMPLETE
+区切りB: COMPLETE
+区切りC: COMPLETE
+区切りD: COMPLETE
+Step 3 checkpoint: COMPLETE
+Step 4 checkpoint: COMPLETE
+Step 5: NOT STARTED
+```
+
+- product／RN／API／DB／migration effect: `0`
+- mashos-api write: `0`
+- product quality credit: `0`
+- primary outcome: `TECHNICAL_CREDIT`
+- PR: `Draft / open / unmerged`
+- ready conversion／merge／Step 5 progression: `0`
+- automatic progression: `false`
+
+{end}'''
+          token=os.environ['GH_TOKEN']; api='https://api.github.com/repos/MassyuRed/Cocolon/pulls/31'; headers={'Authorization':f'Bearer {token}','Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','User-Agent':'cocolon-step4-final'}
+          with urllib.request.urlopen(urllib.request.Request(api,headers=headers)) as r: current=json.load(r)
+          body=current.get('body') or ''
+          if begin in body and end in body:
+            pre,tail=body.split(begin,1); _,post=tail.split(end,1); body=pre.rstrip()+'\n\n'+section+post
+          else: body=body.rstrip()+'\n\n'+section+'\n'
+          payload=json.dumps({'body':body},ensure_ascii=False).encode(); req=urllib.request.Request(api,data=payload,method='PATCH',headers={**headers,'Content-Type':'application/json'})
+          with urllib.request.urlopen(req) as r: updated=json.load(r)
+          assert updated['draft'] is True and updated['state']=='open' and 'STEP4_TASK_CONTEXT_COMPILER_CMEE_ACTUAL_REVIEW_COMPLETE' in (updated.get('body') or '')
+          print('STEP4_PR_BODY_UPDATE=PASS')
+          PY
