@@ -170,5 +170,91 @@ class RouteGraphTests(unittest.TestCase):
             self.assertEqual(verified["completion_claim"], "STEP3_RN_API_BACKEND_TEST_ROUTE_GRAPH_CONNECTED")
 
 
+    def test_duplicate_method_path_unresolved_consumers_preserve_subject_ids(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            root = pathlib.Path(raw)
+            cocolon = make_repo(root, "Cocolon", {
+                "lib/api.js": "import { apiGet } from './client';\nexport function load(){ return apiGet('/items'); }\n",
+                "lib/client.js": "export function apiGet(){}\n",
+                "screens/ItemsScreen.js": "import { load } from '../lib/api';\nexport function ItemsScreen(){ return load(); }\n",
+            })
+            api = make_repo(root, "mashos-api", {
+                "api/routes.py": (
+                    "from fastapi import FastAPI\n"
+                    "def register_routes(app: FastAPI) -> None:\n"
+                    "    @app.get('/items')\n"
+                    "    async def list_items(): return []\n"
+                    "    @app.get('/ranking/emotions/self')\n"
+                    "    async def ranking_self_primary(): return {}\n"
+                    "    @app.get('/ranking/emotions/self')\n"
+                    "    async def ranking_self_compat(): return {}\n"
+                ),
+            })
+            rows = inventory_rows(cocolon, "Cocolon") + inventory_rows(api, "mashos-api")
+            inventory = root / "files.jsonl"
+            inventory.write_text(
+                "".join(json.dumps(row, sort_keys=True) + "\n" for row in rows),
+                encoding="utf-8",
+            )
+            code_index = root / "code_index"
+            code_index.mkdir()
+            import_edges = [{
+                "repository_key": "Cocolon",
+                "source_path": "screens/ItemsScreen.js",
+                "resolved_target_path": "lib/api.js",
+            }]
+            (code_index / "import_edges.jsonl").write_text(
+                "".join(json.dumps(row) + "\n" for row in import_edges),
+                encoding="utf-8",
+            )
+            (code_index / "code_index_summary.json").write_text(
+                json.dumps({"completion_claim": "STEP2_SCIP_AND_SYNTAX_INDEX_CONNECTED"}),
+                encoding="utf-8",
+            )
+            (code_index / "code_index_manifest.json").write_text(
+                json.dumps({"inventory_sha256": hashlib.sha256(inventory.read_bytes()).hexdigest()}),
+                encoding="utf-8",
+            )
+            output = root / "route_graph"
+            result = routes.build_route_graph(
+                inventory,
+                {"Cocolon": cocolon, "mashos-api": api},
+                code_index,
+                HELPER,
+                output,
+            )
+            self.assertEqual(
+                "STEP3_RN_API_BACKEND_TEST_ROUTE_GRAPH_CONNECTED",
+                result["completion_claim"],
+            )
+            api_routes = routes.read_jsonl(output / "api_routes.jsonl")
+            connected = next(
+                row for row in api_routes
+                if row["method"] == "GET" and row["route_path"] == "/items"
+            )
+            self.assertEqual("RN_CONSUMED", connected["consumer_classification"])
+            duplicates = [
+                row for row in api_routes
+                if row["method"] == "GET"
+                and row["route_path"] == "/ranking/emotions/self"
+            ]
+            self.assertEqual(2, len(duplicates))
+            self.assertEqual(
+                {"UNRESOLVED_CONSUMER"},
+                {row["consumer_classification"] for row in duplicates},
+            )
+            duplicate_ids = {row["route_id"] for row in duplicates}
+            unresolved = routes.read_jsonl(output / "unresolved_api_consumers.jsonl")
+            self.assertTrue(all("route_id" not in row for row in unresolved))
+            unresolved_ids = {row["subject_id"] for row in unresolved}
+            self.assertNotIn(connected["route_id"], unresolved_ids)
+            self.assertEqual(duplicate_ids, unresolved_ids)
+            verified = routes.verify_route_graph(inventory, code_index, output)
+            self.assertEqual(
+                "STEP3_RN_API_BACKEND_TEST_ROUTE_GRAPH_CONNECTED",
+                verified["completion_claim"],
+            )
+
+
 if __name__ == "__main__":
     unittest.main()
