@@ -1,0 +1,50 @@
+name: Cocolon system context Step 3 C bootstrap
+on:
+  push:
+    branches: [agent/cocolon-system-context-index-20260818]
+    paths:
+      - .github/workflows/cocolon-system-context-step3c-bootstrap.yml
+      - .github/context-payloads/step3-c-bootstrap/**
+permissions:
+  contents: write
+concurrency:
+  group: cocolon-system-context-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  close-step3-c:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/cocolon-system-context-index-20260818
+          fetch-depth: 0
+      - uses: actions/checkout@v4
+        with:
+          repository: MassyuRed/mashos-api
+          ref: agent/cmee-v1a-i1sx-source-explicit-20260815
+          path: .cocolon-context-workspace/mashos-api
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - shell: bash
+        run: |
+          set -euo pipefail
+          d=.github/context-payloads/step3-c-bootstrap
+          source "$d/install.sh"
+          cat "$d"/part* > /tmp/c.b64
+          echo 'f9518a4ce8460d4fa9baae8bff294d16a35afa88e1029ef78a2b41708551b8b3  /tmp/c.b64' | sha256sum -c -
+          base64 -d /tmp/c.b64 > /tmp/c.tar.gz
+          echo '3b1202f1a6ff0f07df708aeb95ece79042eecf82f7167a4cea38daae44fdb1be  /tmp/c.tar.gz' | sha256sum -c -
+          rm -rf /tmp/c && mkdir /tmp/c
+          tar -xzf /tmp/c.tar.gz -C /tmp/c
+          test "$(tar -tzf /tmp/c.tar.gz | LC_ALL=C sort | wc -l)" = 7
+          r=/tmp/c/_bootstrap/bootstrap_run.sh
+          echo '077c03832c7d17c4afd7c415a2fcca6332b5056615c7b33cf509d5a4a5581271  /tmp/c/_bootstrap/bootstrap_run.sh' | sha256sum -c -
+          sed -i '/tools\/cocolon_context_routes.py \\$/s/ \\$//' "$r"
+          bash -n "$r"
+          bash "$r" /tmp/c
