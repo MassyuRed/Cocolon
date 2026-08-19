@@ -22,6 +22,7 @@ jobs:
     timeout-minutes: 20
     env:
       EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+      CORRECTION_BASE_COMMIT: d64382472b9edd2623ed86f396ac38cc89b098a2
       TARGET_BRANCH: agent/cocolon-system-context-index-20260818
       PAYLOAD: .github/context-payloads/step5-correction
       FINAL_WORKFLOW_COPY: Cocolon_前提資料/system_context/.step5_corrected_standard_entry_workflow.yml
@@ -30,7 +31,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-          fetch-depth: 1
+          fetch-depth: 0
 
       - name: Apply exact4 correction and publish non-workflow source
         shell: bash
@@ -39,9 +40,11 @@ jobs:
           WORKFLOW=.github/workflows/cocolon-system-context-inventory.yml
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
           test -d "$PAYLOAD"
+          test "$(git rev-parse "${CORRECTION_BASE_COMMIT}^{commit}")" = "$CORRECTION_BASE_COMMIT"
           cp "$WORKFLOW" /tmp/step5-correction-bootstrap.yml
           cat "$PAYLOAD"/part* | base64 -d | gzip -d > /tmp/step5-correction.patch
           echo "2bf3b2c570d3171abce908085d12698f05d3f11ccc75938374b058e501a78147  /tmp/step5-correction.patch" | sha256sum -c -
+          git show "${CORRECTION_BASE_COMMIT}:${WORKFLOW}" > "$WORKFLOW"
           git apply --check /tmp/step5-correction.patch
           git apply /tmp/step5-correction.patch
           cp "$WORKFLOW" "$FINAL_WORKFLOW_COPY"
