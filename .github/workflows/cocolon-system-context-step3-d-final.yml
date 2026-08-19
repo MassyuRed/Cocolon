@@ -88,5 +88,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           python3 -m py_compile .github/context-payloads/step3-d/finalize_step3.py
           python3 .github/context-payloads/step3-d/finalize_step3.py
