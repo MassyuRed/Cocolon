@@ -1,14 +1,13 @@
 name: Cocolon system context Step 3 C bootstrap
 on:
-  push:
-    branches: [agent/cocolon-system-context-index-20260818]
+  pull_request:
     paths:
       - .github/workflows/cocolon-system-context-step3c-bootstrap.yml
       - .github/context-payloads/step3-c-bootstrap/**
 permissions:
   contents: write
 concurrency:
-  group: cocolon-system-context-${{ github.ref }}
+  group: cocolon-system-context-step3c
   cancel-in-progress: true
 jobs:
   close-step3-c:
@@ -47,4 +46,4 @@ jobs:
           echo '077c03832c7d17c4afd7c415a2fcca6332b5056615c7b33cf509d5a4a5581271  /tmp/c/_bootstrap/bootstrap_run.sh' | sha256sum -c -
           sed -i '/tools\/cocolon_context_routes.py \\$/s/ \\$//' "$r"
           bash -n "$r"
-          bash "$r" /tmp/c
+          GITHUB_SHA="$(git rev-parse HEAD)" GITHUB_REF_NAME=agent/cocolon-system-context-index-20260818 bash "$r" /tmp/c
