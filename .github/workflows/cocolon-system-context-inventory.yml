@@ -1,26 +1,27 @@
-name: Cocolon system context Step 3 C stage runtime profile
-run-name: Cocolon system context C stage profile @ ${{ github.event.pull_request.head.sha || github.sha }}
+name: Cocolon system context Step 3 C traversal cache repair
+run-name: Cocolon system context C cache repair @ ${{ github.event.pull_request.head.sha || github.sha }}
 
 on:
   pull_request:
     paths:
       - .github/workflows/cocolon-system-context-inventory.yml
-      - .github/context-payloads/step3-c/run_c_stage_profile.py
+      - .github/context-payloads/step3-c/performance_fix.py
       - .github/context-payloads/step3-c/payload.b64
       - tools/cocolon_context_routes.py
+      - tests/cocolon_context/test_routes.py
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
   group: cocolon-system-context-step3-c-${{ github.event.pull_request.head.ref || github.ref_name }}
   cancel-in-progress: true
 
 jobs:
-  profile-c-stages:
+  patch-test-and-record:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     steps:
       - name: Checkout Cocolon context branch
         uses: actions/checkout@v4
@@ -28,45 +29,55 @@ jobs:
           ref: agent/cocolon-system-context-index-20260818
           fetch-depth: 0
 
-      - name: Reconstruct Inventory-bound Cocolon source with current C candidate
-        shell: bash
-        run: |
-          set -euo pipefail
-          INVENTORY_SOURCE="$(python3 - <<'PY'
-          import json
-          from pathlib import Path
-          manifest = json.loads(Path('Cocolon_前提資料/system_context/current/cmee_working/manifest.json').read_text(encoding='utf-8'))
-          print(manifest['repositories']['Cocolon']['source_commit'])
-          PY
-          )"
-          cp tools/cocolon_context_routes.py /tmp/cocolon_context_routes.py
-          cp .github/context-payloads/step3-c/payload.b64 /tmp/c_payload.b64
-          cp .github/context-payloads/step3-c/run_c_stage_profile.py /tmp/run_c_stage_profile.py
-          git checkout --detach "$INVENTORY_SOURCE"
-          cp /tmp/cocolon_context_routes.py tools/cocolon_context_routes.py
-          mkdir -p .github/context-payloads/step3-c
-          cp /tmp/c_payload.b64 .github/context-payloads/step3-c/payload.b64
-          cp /tmp/run_c_stage_profile.py .github/context-payloads/step3-c/run_c_stage_profile.py
-          test "$(git rev-parse HEAD)" = "$INVENTORY_SOURCE"
-
-      - name: Checkout locked mashos-api read-only
-        uses: actions/checkout@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
         with:
-          repository: MassyuRed/mashos-api
-          ref: 06ce311b3ea728b06f83439d268a34bed917c01c
-          path: .cocolon-context-workspace/mashos-api
-          fetch-depth: 0
+          python-version: "3.11"
 
       - name: Set up Node 20
         uses: actions/setup-node@v4
         with:
           node-version: "20"
 
-      - name: Run bounded C stage profile
+      - name: Apply cache-only repair and run full regressions
         shell: bash
         run: |
           set -euo pipefail
           npm install -g --no-audit --no-fund typescript@5.2.2
           export NODE_PATH="$(npm root -g)"
-          timeout --signal=TERM --kill-after=20s 720s \
-            python3 .github/context-payloads/step3-c/run_c_stage_profile.py
+
+          python3 .github/context-payloads/step3-c/performance_fix.py
+
+          node --check tools/cocolon_context_ts_syntax.cjs
+          node --check tools/cocolon_context_ts_routes.cjs
+          python3 -m py_compile \
+            tools/cocolon_context_inventory.py \
+            tools/cocolon_context_code_index.py \
+            tools/cocolon_context_routes.py \
+            tools/cocolon_context_publish_transport.py \
+            tests/cocolon_context/test_routes.py
+
+          python3 -m unittest tests/cocolon_context/test_inventory.py -v
+          python3 -m unittest tests/cocolon_context/test_code_index.py -v
+          python3 -m unittest tests/cocolon_context/test_routes.py -v
+          python3 -m unittest tests/cocolon_context/test_routes_nested_registration.py -v
+          python3 -m unittest tests/cocolon_context/test_publication_transport.py -v
+          git diff --check
+
+          rm -f \
+            .github/context-payloads/step3-c/profile_extension_static.py \
+            .github/context-payloads/step3-c/inspect_backend_perf_source.py \
+            .github/context-payloads/step3-c/run_c_stage_profile.py \
+            .github/context-payloads/step3-c/performance_fix.py \
+            Cocolon_前提資料/system_context/current/cmee_working/workflow_last_failure.json
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- \
+            .github/context-payloads/step3-c \
+            tools/cocolon_context_routes.py \
+            tests/cocolon_context/test_routes.py \
+            Cocolon_前提資料/system_context/current/cmee_working
+          git diff --cached --check
+          git commit -m "perf(context): cache source-bound C traversal derivations [skip ci]"
+          git push origin "HEAD:agent/cocolon-system-context-index-20260818"
