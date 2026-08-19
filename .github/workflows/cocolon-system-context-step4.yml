@@ -21,61 +21,12 @@ jobs:
     env:
       SOURCE_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
       TARGET_BRANCH: agent/cocolon-system-context-index-20260818
-      CYCLE001_MASHOS_COMMIT: 958c1b53f5b5894691e0b10e2d991fb8236d9f6f
-      CONTEXT_ROOT: Cocolon_前提資料/system_context/current/cmee_working/task_context/cmee
     steps:
       - name: Checkout exact Step 4 source
         uses: actions/checkout@v4
         with:
           ref: agent/cocolon-system-context-index-20260818
           fetch-depth: 0
-
-      - name: Assert exact source and transport patch preimage
-        shell: bash
-        run: |
-          set -euo pipefail
-          test "$(git rev-parse HEAD)" = "$SOURCE_COMIT"
-          test -z "$(git status --porcelain)"
-          test "$(git rev-parse HEAD:tools/cocolon_context_task.py)" = "c847e9b784529eff30ef04a9a7630eae8c57594f"
-          test "$(git rev-parse HEAD: tests/cocolon_context/test_task_context.py)" = "9f862bed5fe4a2f95ac8afb6034654abd3599a67"
-          test "$(find .github/context-payloads/step4-transport -maxdepth 1 -type f -name 'part*' | wc -l)" = "4"
-
-      - name: Materialize exact publication transport correction
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          import base64
-          import hashlib
-          import io
-          import pathlib
-          import tarfile
-
-          payload_dir = pathlib.Path('.github/context-payloads/step4-transport')
-          parts = sorted(payload_dir.glob('part*'))
-          assert len(parts) == 4
-          encoded = ''.join(path.read_text(encoding='ascii').strip() for path in parts)
-          raw = base64.b64decode(encoded, validate=True)
-          assert hashlib.sha256(raw).hexdigest() == 'ff99a2163488ba30722e7675d35bab8c7179e5a538e9168baa0ad6d44ae3f4bd'
-          expected = {
-              'tools/cocolon_context_task.py',
-              'tests/cocolon_context/test_task_context.py',
-          }
-          root = pathlib.Path.cwd().resolve()
-          with tarfile.open(fileobj=io.BytesIO(raw), mode='r:gz') as archive:
-              members = [member for member in archive.getmembers() if member.isfile()]
-              assert {member.name for member in members} == expected
-              for member in members:
-                  relative = pathlib.PurePosixPath(member.name)
-                  assert not relative.is_absolute()
-                  assert all(part not in {'', '.', '..'} for part in relative.parts)
-                  source = archive.extractfile(member)
-                  assert source is not None
-                  target = root.joinpath(*relative.parts)
-                  target.write_bytes(source.read())
-          assert hashlib.sha256((root / 'tools/cocolon_context_task.py').read_bytes()).hexdigest() == '394f90fdaead5728ad6b8d21e8d77c98ee2395efd7d5adf5a4afafb18d669ea9'
-          assert hashlib.sha256((root / 'tests/cocolon_context/test_task_context.py').read_bytes()).hexdigest() == '8c2d8ffafd79664e0d6aa05e2a5f9d2244933729d82006c203162808948a80da'
-          PY
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
@@ -88,220 +39,21 @@ jobs:
           set -euo pipefail
           python3 -m pip install --disable-pip-version-check --no-cache-dir pytest==9.0.2
 
-      - name: Validate and publish publication transport correction
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 -m py_compile \
-            tools/cocolon_context.py \
-            tools/cocolon_context_task.py \
-            tests/cocolon_context/test_task_context.py
-          python3 -m pytest tests/cocolon_context/test_task_context.py -q
-          git diff --check
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git config core.quotePath false
-          git rm -r -- .github/context-payloads/step4-transport
-          git add -- \
-            tools/cocolon_context_task.py \
-            tests/cocolon_context/test_task_context.py
-          test "$(git diff --cached --name-only | wc -l)" = "6"
-          test -z "$(git diff --cached --name-only | grep -v -E '^(\.github/context-payloads/step4-transport/part[0-9][0-9]|tools/cocolon_context_task\.py|tests/cocolon_context/test_task_context\.py)$' || true)"
-          git diff --cached --check
-          git commit -m "fix(context): transport oversized Step 4 logical outputs [skip ci]"
-          TRANSPORT_COMMIT="$(git rev-parse HEAD)"
-          echo "TRANSPORT_COMMIT=${TRANSPORT_COMMIT}" >> "$GITHUB_ENV"
-          git push origin "HEAD:${TARGET_BRANCH}"
-
-      - name: Checkout locked Cycle001 mashos-api read-only
-        uses: actions/checkout@v4
-        with:
-          repository: MassyuRed/mashos-api
-          ref: 958c1b53f5b5894691e0b10e2d991fb8236d9f6f
-          path: .cocolon-context-workspace/cycle001_working/mashos-api
-          fetch-depth: 1
-
-      - name: Verify exact external asset identities
+      - name: Execute exact Step 4 remote runner
         shell: bash
         run: |
           set -euo pipefail
           python3 - <<'PY'
-          import json
-          import pathlib
-          import subprocess
-
-          root = pathlib.Path('.cocolon-context-workspace/cycle001_working/mashos-api')
-          profile = json.loads(pathlib.Path('Cocolon_前提資料/system_context/task_profiles.json').read_text(encoding='utf-8'))
-          review = profile['tasks']['cmee']['required_categories'][1]['actual_review']
-          assert review['require_external_asset_git_verification'] is True
-          assert subprocess.check_output(['git', '-C', str(root), 'rev-parse', 'HEAD'], text=True).strip() == '958c1b53f5b5894691e0b10e2d991fb8236d9f6f'
-          for asset in review['external_asset_candidates']:
-              assert asset['source_commit'] == '958c1b53f5b5894691e0b10e2d991fb8236d9f6f'
-              actual = subprocess.check_output(['git', '-C', str(root), 'rev-parse', f"HEAD:{asset['path']}"], text=True).strip()
-              assert actual == asset['blob_sha'], (asset['path'], actual, asset['blob_sha'])
-          PY
-
-      - name: Generate provisional actual CMEE task context
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 -m tools.cocolon_context context \
-            --workspace cmee_working \
-            --task cmee
-          python3 - <<'PY'
-          import json
+          import base64
+          import gzip
+          import hashlib
           import pathlib
 
-          root = pathlib.Path('Cocolon_前提資料/system_context/current/cmee_working/task_context/cmee')
-          value = json.loads((root / 'context_manifest.json').read_text(encoding='utf-8'))
-          assert value['status'] == 'STEP4_INCOMPLETE_BLOCKING_CONTEXT_OR_REMOTE_VERIFICATION'
-          gates = value['completion_gates']
-          assert gates['generated_output_remote_hash_verified'] is False
-          assert all(result is True for key, result in gates.items() if key != 'generated_output_remote_hash_verified'), gates
-          assert value['required_category_coverage'] == {
-              'expected_exact': 10,
-              'observed': 10,
-              'all_nonzero': True,
-              'all_pass': True,
-          }
-          assert value['blocking_unresolved_count'] == 0
-          assert value['actual_unincorporated_finding_count'] >= 1
-          assert value['product_credit'] == 0
-          assert value['automatic_progression'] is False
-          transport = json.loads((root / 'publication_transport.json').read_text(encoding='utf-8'))
-          assert transport['schema_version'] == 'cocolon.system_context.publication_transport.v1'
-          assert transport['logical_file_count'] >= 1
-          assert not (root / 'closure_edges.jsonl').exists()
-          assert any(row['logical_path'] == 'closure_edges.jsonl' for row in transport['logical_files'])
-          parts = [part for row in transport['logical_files'] for part in row['parts']]
-          assert parts and all(0 < part['size'] <= 90_000_000 for part in parts)
-          assert all((root / part['path']).is_file() for part in parts)
+          encoded = pathlib.Path('.github/context-payloads/step4-runner.b64').read_text(encoding='ascii').strip()
+          packed = base64.b64decode(encoded, validate=True)
+          assert hashlib.sha256(packed).hexdigest() == '1c4fad766c7095c508e164c5c9a009b1bf057aae1b2d5987a48e394124b016a2'
+          source = gzip.decompress(packed)
+          assert hashlib.sha256(source).hexdigest() == '1bc01f662b3e00f7b89aef44e2789af18c266b30a44ac725ed66fd1eea295e80'
+          pathlib.Path('/tmp/cocolon_step4_remote_runner.py').write_bytes(source)
           PY
-
-      - name: Publish provisional generated bytes
-        shell: bash
-        run: |
-          set -euo pipefail
-          git add -A -- "$CONTEXT_ROOT"
-          test -n "$(git diff --cached --name-only)"
-          test -z "$(git diff --cached --name-only | grep -v "^${CONTEXT_ROOT}/" || true)"
-          git diff --cached --check
-          git commit -m "docs(context): generate Step 4 CMEE task context [skip ci]"
-          PROVISIONAL_COMMIT="$(git rev-parse HEAD)"
-          echo "PROVISIONAL_COMMIT=${PROVISIONAL_COMMIT}" >> "$GITHUB_ENV"
-          git push origin "HEAD:${TARGET_BRANCH}"
-
-      - name: Fresh verify provisional remote bytes
-        shell: bash
-        run: |
-          set -euo pipefail
-          git fetch --no-tags origin "+refs/heads/${TARGET_BRANCH}:refs/remotes/origin/${TARGET_BRANCH}"
-          test "$(git rev-parse refs/remotes/origin/${TARGET_BRANCH})" = "$PROVISIONAL_COMMIT"
-          rm -rf /tmp/cocolon-step4-provisional
-          git worktree add --detach /tmp/cocolon-step4-provisional "$PROVISIONAL_COMMIT"
-          python3 - <<'PY'
-          import pathlib
-          import sys
-
-          worktree = pathlib.Path('/tmp/cocolon-step4-provisional')
-          sys.path.insert(0, str(worktree))
-          from tools.cocolon_context_task import verify_task_context
-
-          root = worktree / 'Cocolon_前提資料/system_context/current/cmee_working/task_context/cmee'
-          value = verify_task_context(root)
-          assert value['status'] == 'STEP4_INCOMPLETE_BLOCKING_CONTEXT_OR_REMOTE_VERIFICATION'
-          assert value['completion_gates']['generated_output_remote_hash_verified'] is False
-          assert value['output_publication_transport_sha256']
-          PY
-          git worktree remove --force /tmp/cocolon-step4-provisional
-
-      - name: Seal remote-verified Step 4 completion
-        shell: bash
-        run: |
-          set -euo pipefail
-          python3 - <<'PY'
-          from pathlib import Path
-          from tools.cocolon_context_task import compile_task_context
-
-          root = Path.cwd()
-          system = root / 'Cocolon_前提資料/system_context'
-          result = compile_task_context(
-              repo_root=root,
-              system_context_root=system,
-              workspace='cmee_working',
-              task='cmee',
-              task_profiles_path=system / 'task_profiles.json',
-              manual_overlay_path=None,
-              output_dir=system / 'current/cmee_working/task_context/cmee',
-              external_workspace_root=root / '.cocolon-context-workspace',
-              remote_verified=True,
-          )
-          assert result.status == 'STEP4_TASK_CONTEXT_COMPILER_CMEE_ACTUAL_REVIEW_COMPLETE'
-          PY
-          git add -A -- "$CONTEXT_ROOT"
-          test -z "$(git diff --cached --name-only | grep -v "^${CONTEXT_ROOT}/" || true)"
-          git diff --cached --check
-          git commit -m "docs(context): seal Step 4 CMEE actual review [skip ci]"
-          FINAL_COMMIT="$(git rev-parse HEAD)"
-          echo "FINAL_COMMIT=${FINAL_COMMIT}" >> "$GITHUB_ENV"
-          git push origin "HEAD:${TARGET_BRANCH}"
-
-      - name: Fresh verify final remote checkpoint
-        shell: bash
-        run: |
-          set -euo pipefail
-          git fetch --no-tags origin "+refs/heads/${TARGET_BRANCH}:refs/remotes/origin/${TARGET_BRANCH}"
-          REMOTE_COMMIT="$(git rev-parse refs/remotes/origin/${TARGET_BRANCH})"
-          test "$REMOTE_COMMIT" = "$FINAL_COMMIT"
-          rm -rf /tmp/cocolon-step4-final
-          git worktree add --detach /tmp/cocolon-step4-final "$REMOTE_COMMIT"
-          python3 - <<'PY'
-          import json
-          import pathlib
-          import sys
-
-          worktree = pathlib.Path('/tmp/cocolon-step4-final')
-          sys.path.insert(0, str(worktree))
-          from tools.cocolon_context_task import verify_task_context
-
-          root = worktree / 'Cocolon_前提資料/system_context/current/cmee_working/task_context/cmee'
-          value = verify_task_context(root)
-          claim = 'STEP4_TASK_CONTEXT_COMPILER_CMEE_ACTUAL_REVIEW_COMPLETE'
-          assert value['status'] == claim
-          assert value['completion_claim'] == claim
-          assert all(value['completion_gates'].values())
-          assert value['required_category_coverage'] == {
-              'expected_exact': 10,
-              'observed': 10,
-              'all_nonzero': True,
-              'all_pass': True,
-          }
-          assert value['blocking_unresolved_count'] == 0
-          assert value['actual_unincorporated_finding_count'] >= 1
-          assert value['product_credit'] == 0
-          assert value['automatic_progression'] is False
-          transport = json.loads((root / 'publication_transport.json').read_text(encoding='utf-8'))
-          assert transport['logical_file_count'] >= 1
-          parts = [part for row in transport['logical_files'] for part in row['parts']]
-          assert all((root / part['path']).is_file() for part in parts)
-          print('COCOLON_STEP4_REMOTE_ACTUAL=' + json.dumps({
-              'context_fingerprint': value['context_fingerprint'],
-              'selected_file_count': value['selected_file_count'],
-              'closure_edge_count': value['closure_edge_count'],
-              'blocking_unresolved_count': value['blocking_unresolved_count'],
-              'finding_count': value['actual_unincorporated_finding_count'],
-              'completion_claim': value['completion_claim'],
-              'output_sha256': value['output_sha256'],
-              'output_publication_transport_sha256': value['output_publication_transport_sha256'],
-              'transported_logical_file_count': transport['logical_file_count'],
-              'transport_part_count': len(parts),
-          }, ensure_ascii=False, sort_keys=True, separators=(',', ':')))
-          PY
-          CHANGED="$(git diff-tree --no-commit-id --name-only -r "$REMOTE_COMMIT")"
-          test -n "$CHANGED"
-          test -z "$(printf '%s\n' "$CHANGED" | grep -v "^${CONTEXT_ROOT}/" || true)"
-          git worktree remove --force /tmp/cocolon-step4-final
-          echo "STEP4_TRANSPORT_COMMIT=${TRANSPORT_COMMIT}"
-          echo "STEP4_PROVISIONAL_COMMIT=${PROVISIONAL_COMMIT}"
-          echo "STEP4_FINAL_REMOTE_COMMIT=${REMOTE_COMMIT}"
-          echo "STEP4_REMOTE_POSTVERIFY=PASS"
+          python3 /tmp/cocolon_step4_remote_runner.py
