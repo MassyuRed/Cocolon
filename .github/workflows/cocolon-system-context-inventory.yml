@@ -1,5 +1,5 @@
 name: Cocolon System Context Step 5 source materialization
-run-name: Materialize Step 5 source @ ${{ github.event.pull_request.head.sha || github.sha }}
+run-name: Materialize non-workflow Step 5 source @ ${{ github.event.pull_request.head.sha || github.sha }}
 
 on:
   push:
@@ -15,11 +15,10 @@ on:
 
 permissions:
   contents: write
-  actions: write
 
 concurrency:
-  group: cocolon-system-context-step5-bootstrap-${{ github.event.pull_request.head.ref || github.ref_name }}
-  cancel-in-progress: false
+  group: cocolon-system-context-step5-source-v2-${{ github.event.pull_request.head.ref || github.ref_name }}
+  cancel-in-progress: true
 
 jobs:
   materialize-source:
@@ -37,18 +36,18 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
 
-      - name: Materialize, commit and dispatch final Step 5 workflow
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Materialize and commit non-workflow Step 5 source
         shell: bash
         run: |
           set -euo pipefail
+          WORKFLOW=.github/workflows/cocolon-system-context-inventory.yml
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
           test -d "$PAYLOAD"
+          cp "$WORKFLOW" /tmp/step5-bootstrap-workflow.yml
           cat "$PAYLOAD"/part* | base64 -d | gzip -d > /tmp/step5-source.patch
           echo "65120cc5780324bf1a0895813651736cba357e5706fe2fa39abf3fe10a5e0c2f  /tmp/step5-source.patch" | sha256sum -c -
           rm -f \
-            .github/workflows/cocolon-system-context-inventory.yml \
+            "$WORKFLOW" \
             tools/cocolon_context.py \
             tools/cocolon_context_prepare.py \
             tools/cocolon_context_publish_transport.py \
@@ -59,8 +58,18 @@ jobs:
             Cocolon_前提資料/system_context/00_read_first.md
           git apply --check /tmp/step5-source.patch
           git apply /tmp/step5-source.patch
+          cp /tmp/step5-bootstrap-workflow.yml "$WORKFLOW"
+          chmod 0644 \
+            "$WORKFLOW" \
+            tools/cocolon_context.py \
+            tools/cocolon_context_prepare.py \
+            tools/cocolon_context_publish_transport.py \
+            tools/cocolon_context_inventory.py \
+            tests/cocolon_context/test_prepare.py \
+            tests/cocolon_context/test_publication_transport_nested.py \
+            Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt \
+            Cocolon_前提資料/system_context/00_read_first.md
           git add -A \
-            .github/workflows/cocolon-system-context-inventory.yml \
             tools/cocolon_context.py \
             tools/cocolon_context_prepare.py \
             tools/cocolon_context_publish_transport.py \
@@ -70,15 +79,11 @@ jobs:
             Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt \
             Cocolon_前提資料/system_context/00_read_first.md
           git rm -r "$PAYLOAD"
+          test "$(git diff --cached --name-only -- "$WORKFLOW" | wc -l)" -eq 0
           git diff --cached --check
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "feat(system-context): connect Step 5 standard-entry source"
+          git commit -m "feat(system-context): materialize Step 5 standard-entry source"
+          git fetch --no-tags origin "+refs/heads/${TARGET_BRANCH}:refs/remotes/origin/${TARGET_BRANCH}"
+          test "$(git rev-parse refs/remotes/origin/${TARGET_BRANCH})" = "$EXPECTED_HEAD"
           git push origin "HEAD:${TARGET_BRANCH}"
-          for attempt in 1 2 3 4 5; do
-            if gh workflow run cocolon-system-context-inventory.yml --ref "$TARGET_BRANCH"; then
-              exit 0
-            fi
-            sleep 2
-          done
-          exit 1
