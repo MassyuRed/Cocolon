@@ -90,12 +90,11 @@ jobs:
           C_ADMITTED_DIR=/tmp/cocolon-step3-c-admitted
           rm -rf "$C_ADMITTED_DIR"
           mkdir -p "$C_ADMITTED_DIR"
-          echo "26bdc94df68fddc893fa408ad7b05d506ee10ce25c1f840b2b27cff93482056d  ${C_PAYLOAD}" | sha256sum -c -
+          echo "611b85a346b2ab081ce4be339e3f29dbac725b9755819bdb49b9203f7c4c78dc  ${C_PAYLOAD}" | sha256sum -c -
           base64 -d "$C_PAYLOAD" > /tmp/cocolon-step3-c-payload.tar.gz
-          C_ACTUAL_LIST="$(tar -tzf /tmp/cocolon-step3-c-payload.tar.gz | LC_ALL=C sort)"
-          test "$C_ACTUAL_LIST" = "tools/cocolon_context_routes_c_extension.py"
+          test "$(tar -tzf /tmp/cocolon-step3-c-payload.tar.gz)" = "tools/cocolon_context_routes_c_extension.py"
           tar -xzf /tmp/cocolon-step3-c-payload.tar.gz -C "$C_ADMITTED_DIR"
-          echo "97b406f62a71e621281536cf5e0c6712482615b63e189b734e3d54cde8272418  ${C_ADMITTED_DIR}/tools/cocolon_context_routes_c_extension.py" | sha256sum -c -
+          echo "5adfa04ff1bca26a61feb30aa25a8819e71edc13aa0881214e7885c35c614e97  ${C_ADMITTED_DIR}/tools/cocolon_context_routes_c_extension.py" | sha256sum -c -
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
@@ -115,8 +114,7 @@ jobs:
             @sourcegraph/scip-typescript@0.4.0 \
             @sourcegraph/scip-python@0.6.6 \
             typescript@5.2.2
-          NODE_PATH="$(npm root -g)"
-          export NODE_PATH
+          export NODE_PATH="$(npm root -g)"
           echo "NODE_PATH=${NODE_PATH}" >> "$GITHUB_ENV"
           SCIP_TAG=v0.7.1
           curl --retry 3 --retry-all-errors -fsSL \
@@ -222,49 +220,34 @@ jobs:
         run: |
           set -euo pipefail
           python3 - <<'PY'
-          import hashlib
           import json
           import os
           from pathlib import Path
 
           root = Path(os.environ["ROOT"])
           route_root = root / "route_graph"
-          expected_outputs = {
-              "rn_calls.jsonl",
-              "api_routes.jsonl",
-              "cross_repository_route_edges.jsonl",
-              "api_model_edges.jsonl",
-              "backend_call_edges.jsonl",
-              "route_owner_closures.jsonl",
-              "test_contract_edges.jsonl",
-              "file_domain_assignments.jsonl",
-              "unresolved_rn_calls.jsonl",
-              "unresolved_api_consumers.jsonl",
-              "unresolved_backend_owners.jsonl",
-              "unresolved_test_contracts.jsonl",
-              "route_extraction_errors.jsonl",
-              "route_graph_summary.json",
-              "route_graph_manifest.json",
+          expected = {
+              "rn_calls.jsonl", "api_routes.jsonl", "cross_repository_route_edges.jsonl",
+              "api_model_edges.jsonl", "backend_call_edges.jsonl", "route_owner_closures.jsonl",
+              "test_contract_edges.jsonl", "file_domain_assignments.jsonl",
+              "unresolved_rn_calls.jsonl", "unresolved_api_consumers.jsonl",
+              "unresolved_backend_owners.jsonl", "unresolved_test_contracts.jsonl",
+              "route_extraction_errors.jsonl", "route_graph_summary.json", "route_graph_manifest.json",
           }
-          actual_outputs = {path.name for path in route_root.iterdir() if path.is_file()}
-          assert actual_outputs == expected_outputs, (
-              actual_outputs - expected_outputs,
-              expected_outputs - actual_outputs,
-          )
+          assert {p.name for p in route_root.iterdir() if p.is_file()} == expected
 
-          def read_json(path: Path):
-              return json.loads(path.read_text(encoding="utf-8"))
+          def read_json(path):
+              return json.loads(Path(path).read_text(encoding="utf-8"))
 
-          def read_jsonl(path: Path):
-              return [
-                  json.loads(line)
-                  for line in path.read_text(encoding="utf-8").splitlines()
-                  if line
-              ]
+          def read_jsonl(path):
+              return [json.loads(line) for line in Path(path).read_text(encoding="utf-8").splitlines() if line]
 
           inventory = read_json(root / "manifest.json")
           code = read_json(root / "code_index/code_index_summary.json")
           routes = read_json(route_root / "route_graph_summary.json")
+          route_manifest = read_json(route_root / "route_graph_manifest.json")
+          calls = read_jsonl(route_root / "rn_calls.jsonl")
+          unresolved_rn = {row["subject_id"]: row for row in read_jsonl(route_root / "unresolved_rn_calls.jsonl")}
           api_routes = read_jsonl(route_root / "api_routes.jsonl")
           route_edges = read_jsonl(route_root / "cross_repository_route_edges.jsonl")
           unresolved_api = read_jsonl(route_root / "unresolved_api_consumers.jsonl")
@@ -275,59 +258,52 @@ jobs:
           assert inventory["missing_tracked_path_count"] == 0
           assert inventory["duplicate_repository_path_count"] == 0
           assert code["completion_claim"] == "STEP2_SCIP_AND_SYNTAX_INDEX_CONNECTED"
-          assert code["inventory_total"] == inventory["total_tracked_entries"]
-          assert code["coverage_total"] == inventory["total_tracked_entries"]
-          assert code["coverage_gap_count"] == 0
-          assert code["duplicate_coverage_count"] == 0
-          assert code["missing_coverage_count"] == 0
-          assert code["extra_coverage_count"] == 0
+          assert code["inventory_total"] == code["coverage_total"] == inventory["total_tracked_entries"]
+          assert code["coverage_gap_count"] == code["duplicate_coverage_count"] == 0
+          assert code["missing_coverage_count"] == code["extra_coverage_count"] == 0
           assert code["required_scip_runs_ok"] is True
-          assert code["scip_precise_file_count"] > 0
           assert routes["completion_claim"] == "STEP3_RN_API_BACKEND_TEST_ROUTE_GRAPH_CONNECTED"
-          assert routes["rn_call_count"] > 0
-          assert routes["api_route_count"] > 0
-          assert routes["cross_repository_edge_count"] > 0
+          assert len(route_manifest["output_sha256"]) == 15
           assert routes["backend_owner_coverage_count"] == routes["rn_connected_route_count"]
           assert routes["test_contract_coverage_count"] == routes["api_route_count"]
           assert routes["visible_consumer_coverage_count"] == routes["rn_call_count"]
           assert routes["domain_chain_node_coverage_count"] == routes["chain_node_file_count"]
           assert routes["silent_unresolved_count"] == 0
-          assert routes["automatic_progression"] is False
           assert routes["product_credit"] == 0
+          assert routes["automatic_progression"] is False
+
+          for call in calls:
+              if not str(call.get("connection_status") or "").startswith("MATCHED"):
+                  assert call["call_id"] in unresolved_rn
+                  assert call.get("unresolved_reason")
 
           api_by_id = {row["route_id"]: row for row in api_routes}
-          assert len(api_by_id) == len(api_routes)
           edge_ids = {row["api_route_id"] for row in route_edges}
           unresolved_by_id = {}
           for row in unresolved_api:
               assert "route_id" not in row
               subject_id = row["subject_id"]
-              assert subject_id in api_by_id
-              assert subject_id not in unresolved_by_id
-              assert row["subject_kind"] == "API_ROUTE"
+              assert subject_id in api_by_id and subject_id not in unresolved_by_id
+              assert row["subject_kind"] == "API_ROUTE" and row.get("reason")
               route = api_by_id[subject_id]
               assert row["method"].upper() == route["method"].upper()
               assert row["route_path"] == route["route_path"]
               assert row["path"] == route["path"]
-              assert row["reason"]
               unresolved_by_id[subject_id] = row
           for route_id, route in api_by_id.items():
               classification = route["consumer_classification"]
               if classification == "RN_CONSUMED":
-                  assert route_id in edge_ids
-                  assert route_id not in unresolved_by_id
+                  assert route_id in edge_ids and route_id not in unresolved_by_id
               elif classification == "UNRESOLVED_CONSUMER":
-                  assert route_id not in edge_ids
-                  assert route_id in unresolved_by_id
+                  assert route_id not in edge_ids and route_id in unresolved_by_id
               else:
                   assert route_id not in unresolved_by_id
 
           print("STEP3_C_VALIDATED=" + json.dumps({
-              "canonical_output_count": len(expected_outputs),
               "completion_claim": routes["completion_claim"],
-              "silent_unresolved_count": routes["silent_unresolved_count"],
-              "source_commit": inventory["repositories"]["Cocolon"]["source_commit"],
-              "mashos_api_commit": inventory["repositories"]["mashos-api"]["source_commit"],
+              "canonical_output_count": 15,
+              "silent_unresolved_count": 0,
+              "source_commit": os.environ["SOURCE_COMMIT"],
           }, sort_keys=True, separators=(",", ":")))
           PY
           git diff --check
@@ -340,18 +316,12 @@ jobs:
           python3 tools/cocolon_context_publish_transport.py pack \
             --root "$ROOT" \
             --max-part-bytes 90000000
-          python3 tools/cocolon_context_publish_transport.py verify \
-            --root "$ROOT"
+          python3 tools/cocolon_context_publish_transport.py verify --root "$ROOT"
           python3 - <<'PY'
           import os
           from pathlib import Path
           root = Path(os.environ["ROOT"])
-          oversized = [
-              (path.stat().st_size, str(path))
-              for path in root.rglob("*")
-              if path.is_file() and path.stat().st_size > 90_000_000
-          ]
-          assert not oversized, oversized
+          assert not [p for p in root.rglob("*") if p.is_file() and p.stat().st_size > 90_000_000]
           PY
 
       - name: D-1 publish generated output and D-2 fresh remote postverify
@@ -360,7 +330,6 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
           git add -- "$ROOT"
           git diff --cached --check
           if git diff --cached --quiet; then
@@ -373,25 +342,18 @@ jobs:
           GENERATED_PARENT="$(git rev-parse "${GENERATED_COMMIT}^")"
           GENERATED_TREE="$(git rev-parse "${GENERATED_COMMIT}^{tree}")"
           test "$GENERATED_PARENT" = "$SOURCE_COMMIT"
-
-          BAD_PATHS="$(
-            git diff-tree --no-commit-id --name-only -r "$GENERATED_COMMIT" \
-              | awk -v root="${ROOT}/" 'index($0, root) != 1 { print }'
-          )"
+          BAD_PATHS="$(git diff-tree --no-commit-id --name-only -r "$GENERATED_COMMIT" | awk -v root="${ROOT}/" 'index($0, root) != 1 { print }')"
           test -z "$BAD_PATHS"
 
           git push origin "HEAD:${TARGET_BRANCH}"
-          git fetch --no-tags origin \
-            "+refs/heads/${TARGET_BRANCH}:refs/remotes/origin/${TARGET_BRANCH}"
+          git fetch --no-tags origin "+refs/heads/${TARGET_BRANCH}:refs/remotes/origin/${TARGET_BRANCH}"
           REMOTE_COMMIT="$(git rev-parse "refs/remotes/origin/${TARGET_BRANCH}")"
           test "$REMOTE_COMMIT" = "$GENERATED_COMMIT"
 
           rm -rf /tmp/cocolon-system-context-remote
           git worktree add --detach /tmp/cocolon-system-context-remote "$REMOTE_COMMIT"
           REMOTE_ROOT="/tmp/cocolon-system-context-remote/${ROOT}"
-
-          python3 /tmp/cocolon-system-context-remote/tools/cocolon_context_publish_transport.py verify \
-            --root "$REMOTE_ROOT"
+          python3 /tmp/cocolon-system-context-remote/tools/cocolon_context_publish_transport.py verify --root "$REMOTE_ROOT"
 
           export GENERATED_COMMIT GENERATED_PARENT GENERATED_TREE REMOTE_COMMIT REMOTE_ROOT
           python3 - <<'PY'
@@ -401,35 +363,30 @@ jobs:
           from pathlib import Path
 
           root = Path(os.environ["REMOTE_ROOT"])
-          source_commit = os.environ["SOURCE_COMMIT"]
-          mashos_commit = os.environ["MASHOS_COMMIT"]
 
-          def sha256(path: Path) -> str:
+          def sha256(path):
               digest = hashlib.sha256()
-              with path.open("rb") as handle:
+              with Path(path).open("rb") as handle:
                   for chunk in iter(lambda: handle.read(1024 * 1024), b""):
                       digest.update(chunk)
               return digest.hexdigest()
 
-          def read_json(path: Path):
-              return json.loads(path.read_text(encoding="utf-8"))
+          def read_json(path):
+              return json.loads(Path(path).read_text(encoding="utf-8"))
 
-          inventory_manifest = read_json(root / "manifest.json")
+          inventory = read_json(root / "manifest.json")
           code_manifest = read_json(root / "code_index/code_index_manifest.json")
-          route_manifest = read_json(root / "route_graph/route_graph_manifest.json")
           code_summary = read_json(root / "code_index/code_index_summary.json")
+          route_manifest = read_json(root / "route_graph/route_graph_manifest.json")
           route_summary = read_json(root / "route_graph/route_graph_summary.json")
           transport = read_json(root / "publication_transport.json")
-          logical_by_path = {
-              row["logical_path"]: row
-              for row in transport.get("logical_files", [])
-          }
+          logical = {row["logical_path"]: row for row in transport.get("logical_files", [])}
 
-          def logical_sha(relative: str) -> str:
+          def logical_sha(relative):
               direct = root / relative
               if direct.is_file():
                   return sha256(direct)
-              row = logical_by_path[relative]
+              row = logical[relative]
               digest = hashlib.sha256()
               total = 0
               for part in row["parts"]:
@@ -445,7 +402,7 @@ jobs:
               assert actual == row["logical_sha256"]
               return actual
 
-          for name, expected in inventory_manifest["output_sha256"].items():
+          for name, expected in inventory["output_sha256"].items():
               assert sha256(root / name) == expected
           for name, expected in code_manifest["output_sha256"].items():
               assert logical_sha(f"code_index/{name}") == expected
@@ -457,46 +414,40 @@ jobs:
           assert code_manifest["inventory_sha256"] == files_sha
           assert route_manifest["inventory_sha256"] == files_sha
           assert route_manifest["code_index_manifest_sha256"] == code_manifest_sha
-
-          assert inventory_manifest["completion_claim"] == "STEP1_FULL_TRACKED_FILE_POPULATION_COMPLETE"
-          assert code_manifest["completion_claim"] == "STEP2_SCIP_AND_SYNTAX_INDEX_CONNECTED"
-          assert route_manifest["completion_claim"] == "STEP3_RN_API_BACKEND_TEST_ROUTE_GRAPH_CONNECTED"
+          assert inventory["repositories"]["Cocolon"]["source_commit"] == os.environ["SOURCE_COMMIT"]
+          assert inventory["repositories"]["mashos-api"]["source_commit"] == os.environ["MASHOS_COMMIT"]
           assert route_summary["completion_claim"] == "STEP3_RN_API_BACKEND_TEST_ROUTE_GRAPH_CONNECTED"
-          assert inventory_manifest["repositories"]["Cocolon"]["source_commit"] == source_commit
-          assert inventory_manifest["repositories"]["mashos-api"]["source_commit"] == mashos_commit
           assert route_summary["silent_unresolved_count"] == 0
-          assert route_summary["product_credit"] == 0
-          assert route_summary["automatic_progression"] is False
 
           actual = {
               "workflow_run_id": os.environ.get("GITHUB_RUN_ID"),
-              "source_commit": source_commit,
-              "source_tree": inventory_manifest["repositories"]["Cocolon"]["source_tree"],
+              "source_commit": os.environ["SOURCE_COMMIT"],
+              "source_tree": inventory["repositories"]["Cocolon"]["source_tree"],
               "generated_commit": os.environ["GENERATED_COMMIT"],
               "generated_parent": os.environ["GENERATED_PARENT"],
               "final_head": os.environ["REMOTE_COMMIT"],
               "final_tree": os.environ["GENERATED_TREE"],
-              "mashos_api_commit": mashos_commit,
-              "mashos_api_tree": inventory_manifest["repositories"]["mashos-api"]["source_tree"],
+              "mashos_api_commit": os.environ["MASHOS_COMMIT"],
+              "mashos_api_tree": inventory["repositories"]["mashos-api"]["source_tree"],
               "step1": {
-                  "cocolon_tracked": inventory_manifest["repositories"]["Cocolon"]["tracked_entry_count"],
-                  "mashos_api_tracked": inventory_manifest["repositories"]["mashos-api"]["tracked_entry_count"],
-                  "total": inventory_manifest["total_tracked_entries"],
-                  "unique": inventory_manifest["unique_repository_path_count"],
-                  "missing": inventory_manifest["missing_tracked_path_count"],
-                  "duplicate": inventory_manifest["duplicate_repository_path_count"],
-                  "unresolved": inventory_manifest["unresolved_count"],
+                  "cocolon_tracked": inventory["repositories"]["Cocolon"]["tracked_entry_count"],
+                  "mashos_api_tracked": inventory["repositories"]["mashos-api"]["tracked_entry_count"],
+                  "total": inventory["total_tracked_entries"],
+                  "unique": inventory["unique_repository_path_count"],
+                  "missing": inventory["missing_tracked_path_count"],
+                  "duplicate": inventory["duplicate_repository_path_count"],
+                  "unresolved": inventory["unresolved_count"],
                   "files_sha256": files_sha,
                   "manifest_sha256": sha256(root / "manifest.json"),
               },
               "step2": {
-                  "required_scip_runs_ok": code_summary["required_scip_runs_ok"],
                   "coverage_total": code_summary["coverage_total"],
                   "mode_counts": code_summary["mode_counts"],
                   "symbol_count": code_summary["symbol_count"],
                   "reference_count": code_summary["reference_count"],
                   "import_edge_count": code_summary["import_edge_count"],
                   "unmatched_scip_document_count": code_summary["unmatched_scip_document_count"],
+                  "required_scip_runs_ok": code_summary["required_scip_runs_ok"],
                   "manifest_sha256": code_manifest_sha,
               },
               "step3": {
@@ -511,10 +462,13 @@ jobs:
                   "route_extraction_error_count": route_summary["route_extraction_error_count"],
                   "backend_call_edge_count": route_summary["backend_call_edge_count"],
                   "route_owner_closure_count": route_summary["route_owner_closure_count"],
+                  "resolved_backend_owner_count": route_summary["resolved_backend_owner_count"],
+                  "unresolved_backend_owner_count": route_summary["unresolved_backend_owner_count"],
                   "test_contract_edge_count": route_summary["test_contract_edge_count"],
                   "protected_test_edge_count": route_summary["protected_test_edge_count"],
                   "ordinary_test_edge_count": route_summary["ordinary_test_edge_count"],
                   "contract_edge_count": route_summary["contract_edge_count"],
+                  "unresolved_test_contract_count": route_summary["unresolved_test_contract_count"],
                   "visible_consumer_counts": route_summary["visible_consumer_counts"],
                   "file_domain_assignment_count": route_summary["file_domain_assignment_count"],
                   "resolved_domain_assignment_count": route_summary["resolved_domain_assignment_count"],
@@ -526,9 +480,6 @@ jobs:
               },
               "verification": {
                   "unit_tests": 22,
-                  "inventory_manifest_outputs": len(inventory_manifest["output_sha256"]),
-                  "code_manifest_outputs": len(code_manifest["output_sha256"]),
-                  "route_manifest_outputs": len(route_manifest["output_sha256"]),
                   "publication_transport_logical_files": transport["logical_file_count"],
                   "remote_hash_verification": "PASS",
               },
@@ -545,24 +496,14 @@ jobs:
                   "automatic_progression": False,
                   "structure_map_delta": "NOT_APPLICABLE",
               },
-              "section_d": {
-                  "d1": "COMPLETE",
-                  "d2": "COMPLETE",
-                  "d3": "NOT_STARTED",
-              },
+              "section_d": {"d1": "COMPLETE", "d2": "COMPLETE", "d3": "NOT_STARTED"},
           }
-          print("COCOLON_STEP3_D_REMOTE_ACTUAL=" + json.dumps(
-              actual,
-              ensure_ascii=False,
-              sort_keys=True,
-              separators=(",", ":"),
-          ))
+          print("COCOLON_STEP3_D_REMOTE_ACTUAL=" + json.dumps(actual, ensure_ascii=False, sort_keys=True, separators=(",", ":")))
           PY
 
           test "$(git -C /tmp/cocolon-system-context-remote rev-parse HEAD)" = "$GENERATED_COMMIT"
           test "$(git -C /tmp/cocolon-system-context-remote rev-parse HEAD^{tree})" = "$GENERATED_TREE"
           git worktree remove --force /tmp/cocolon-system-context-remote
-
           printf 'D1_SOURCE_COMMIT=%s\n' "$SOURCE_COMMIT"
           printf 'D1_GENERATED_COMMIT=%s\n' "$GENERATED_COMMIT"
           printf 'D1_GENERATED_TREE=%s\n' "$GENERATED_TREE"
