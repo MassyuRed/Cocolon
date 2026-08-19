@@ -1,0 +1,61 @@
+name: Cocolon system context PR fallback bootstrap
+on:
+  pull_request:
+    paths:
+      - .github/workflows/cocolon-system-context-pr-fallback-bootstrap.yml
+permissions:
+  contents: write
+concurrency:
+  group: cocolon-system-context-pr-fallback-bootstrap
+  cancel-in-progress: true
+jobs:
+  stage-workflow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/cocolon-system-context-index-20260818
+          fetch-depth: 0
+      - name: Stage connector-compatible full workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          source = Path('.github/workflows/cocolon-system-context-inventory.yml')
+          target = Path('.github/context-payloads/step3-c/pr_fallback_workflow.yml')
+          text = source.read_text(encoding='utf-8')
+
+          dispatch_marker = '  workflow_dispatch:\n'
+          if text.count(dispatch_marker) != 1:
+              raise SystemExit('workflow_dispatch marker mismatch')
+          push_start = text.index('  push:\n')
+          paths_start = text.index('    paths:\n', push_start)
+          paths_end = text.index(dispatch_marker, paths_start)
+          push_paths = text[paths_start:paths_end]
+          pull_request_block = '  pull_request:\n' + push_paths
+          text = text.replace(dispatch_marker, pull_request_block + dispatch_marker, 1)
+
+          old_group = '  group: cocolon-system-context-${{ github.ref }}\n'
+          new_group = '  group: cocolon-system-context-${{ github.event.pull_request.head.ref || github.ref_name }}\n'
+          if text.count(old_group) != 1:
+              raise SystemExit('concurrency group preimage mismatch')
+          text = text.replace(old_group, new_group, 1)
+
+          target.parent.mkdir(parents=True, exist_ok=True)
+          target.write_text(text, encoding='utf-8')
+          PY
+          python3 - <<'PY'
+          from pathlib import Path
+          text = Path('.github/context-payloads/step3-c/pr_fallback_workflow.yml').read_text(encoding='utf-8')
+          assert text.count('  pull_request:\n') == 1
+          assert 'github.event.pull_request.head.ref || github.ref_name' in text
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- .github/context-payloads/step3-c/pr_fallback_workflow.yml
+          git diff --cached --check
+          git commit -m "chore(context): stage PR fallback workflow [skip ci]"
+          git push origin "HEAD:agent/cocolon-system-context-index-20260818"
