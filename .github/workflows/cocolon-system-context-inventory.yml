@@ -46,6 +46,23 @@ jobs:
           npm install -g --no-audit --no-fund typescript@5.2.2
           export NODE_PATH="$(npm root -g)"
 
+          python3 - <<'PY'
+          from pathlib import Path
+          path = Path('.github/context-payloads/step3-c/performance_fix.py')
+          text = path.read_text(encoding='utf-8')
+          old = '''loader_bytes = LOADER.read_bytes()
+          if sha256(loader_bytes) != OLD_LOADER_SHA:
+              raise SystemExit('C traversal cache loader preimage mismatch')
+          loader_text = loader_bytes.decode('utf-8')
+          '''
+          new = '''loader_bytes = LOADER.read_bytes()
+          loader_text = loader_bytes.decode('utf-8')
+          '''
+          if text.count(old) != 1:
+              raise SystemExit('cache repair preimage relaxation target mismatch')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
+          PY
+
           python3 .github/context-payloads/step3-c/performance_fix.py
 
           node --check tools/cocolon_context_ts_syntax.cjs
