@@ -1,0 +1,77 @@
+name: Cocolon system context PR event normalization bootstrap
+on:
+  pull_request:
+    paths:
+      - .github/workflows/cocolon-system-context-pr-event-normalization-bootstrap.yml
+permissions:
+  contents: write
+concurrency:
+  group: cocolon-system-context-pr-event-normalization-bootstrap
+  cancel-in-progress: true
+jobs:
+  stage-workflow:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/cocolon-system-context-index-20260818
+          fetch-depth: 0
+      - name: Normalize push and pull-request source identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+
+          source = Path('.github/workflows/cocolon-system-context-inventory.yml')
+          target = Path('.github/context-payloads/step3-c/pr_event_normalized_workflow.yml')
+          text = source.read_text(encoding='utf-8')
+
+          job_preimage = (
+              '  build-and-publish:\n'
+              '    runs-on: ubuntu-latest\n'
+              '    timeout-minutes: 60\n'
+              '    steps:\n'
+          )
+          expression_prefix = '$' + '{{ '
+          source_branch = expression_prefix + 'github.event.pull_request.head.ref || github.ref_name }}'
+          source_commit = expression_prefix + 'github.event.pull_request.head.sha || github.sha }}'
+          job_postimage = (
+              '  build-and-publish:\n'
+              '    runs-on: ubuntu-latest\n'
+              '    timeout-minutes: 60\n'
+              '    env:\n'
+              f'      SOURCE_BRANCH: {source_branch}\n'
+              f'      SOURCE_COMMIT: {source_commit}\n'
+              '    steps:\n'
+          )
+          if text.count(job_preimage) != 1:
+              raise SystemExit('job env insertion preimage mismatch')
+          if text.count('GITHUB_SHA') != 3:
+              raise SystemExit('GITHUB_SHA occurrence mismatch')
+          if text.count('GITHUB_REF_NAME') != 6:
+              raise SystemExit('GITHUB_REF_NAME occurrence mismatch')
+          text = text.replace(job_preimage, job_postimage, 1)
+          text = text.replace('GITHUB_SHA', 'SOURCE_COMMIT')
+          text = text.replace('GITHUB_REF_NAME', 'SOURCE_BRANCH')
+
+          target.parent.mkdir(parents=True, exist_ok=True)
+          target.write_text(text, encoding='utf-8')
+          PY
+          python3 - <<'PY'
+          from pathlib import Path
+          text = Path('.github/context-payloads/step3-c/pr_event_normalized_workflow.yml').read_text(encoding='utf-8')
+          assert text.count('SOURCE_COMMIT') == 4
+          assert text.count('SOURCE_BRANCH') == 7
+          assert 'GITHUB_SHA' not in text
+          assert 'GITHUB_REF_NAME' not in text
+          assert 'github.event.pull_request.head.sha || github.sha' in text
+          assert 'github.event.pull_request.head.ref || github.ref_name' in text
+          PY
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -- .github/context-payloads/step3-c/pr_event_normalized_workflow.yml
+          git diff --cached --check
+          git commit -m "chore(context): stage PR event normalized workflow [skip ci]"
+          git push origin "HEAD:agent/cocolon-system-context-index-20260818"
