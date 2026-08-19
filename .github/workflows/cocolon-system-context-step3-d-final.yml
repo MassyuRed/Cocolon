@@ -1,0 +1,95 @@
+name: Cocolon system context Step 3 D exact finalization
+run-name: Cocolon Step 3 D exact final @ ${{ github.event.pull_request.head.sha || github.sha }}
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/cocolon-system-context-step3-d-final.yml
+      - .github/context-payloads/step3-d/finalize_step3.py
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cocolon-system-context-step3-d-exact-${{ github.event.pull_request.head.ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  finalize-step3-d:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    env:
+      SOURCE_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
+      TARGET_BRANCH: agent/cocolon-system-context-index-20260818
+      MASHOS_COMMIT: 06ce311b3ea728b06f83439d268a34bed917c01c
+    steps:
+      - name: Checkout exact Cocolon source
+        uses: actions/checkout@v4
+        with:
+          ref: agent/cocolon-system-context-index-20260818
+          fetch-depth: 0
+
+      - name: Assert exact Cocolon source
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$SOURCE_COMMIT"
+          test "$(git diff --name-only)" = ""
+          test "$(git diff --cached --name-only)" = ""
+
+      - name: Checkout locked mashos-api read-only
+        uses: actions/checkout@v4
+        with:
+          repository: MassyuRed/mashos-api
+          ref: 06ce311b3ea728b06f83439d268a34bed917c01c
+          path: .cocolon-context-workspace/mashos-api
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install pinned SCIP toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install -g --no-audit --no-fund \
+            @sourcegraph/scip-typescript@0.4.0 \
+            @sourcegraph/scip-python@0.6.6 \
+            typescript@5.2.2
+          export NODE_PATH="$(npm root -g)"
+          echo "NODE_PATH=${NODE_PATH}" >> "$GITHUB_ENV"
+
+          SCIP_TAG=v0.7.1
+          curl --retry 3 --retry-all-errors -fsSL \
+            "https://github.com/scip-code/scip/releases/download/${SCIP_TAG}/scip-linux-amd64.tar.gz" \
+            -o /tmp/scip.tar.gz
+          rm -rf /tmp/scip-bin
+          mkdir -p /tmp/scip-bin
+          tar -xzf /tmp/scip.tar.gz -C /tmp/scip-bin
+          SCIP_BIN="$(find /tmp/scip-bin -type f -name scip -print -quit)"
+          test -n "$SCIP_BIN"
+          sudo install "$SCIP_BIN" /usr/local/bin/scip
+
+          test "$(node --version)" = "v20.20.2"
+          test "$(node -e "console.log(require('typescript').version)")" = "5.2.2"
+          test "$(scip --version)" = "scip version v0.7.1"
+          test "$(scip-typescript --version)" = "0.4.0"
+          test "$(scip-python --version)" = "0.6.6"
+
+      - name: Execute D-1 generation and D-2 remote verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config core.quotePath false
+          python3 -m py_compile .github/context-payloads/step3-d/finalize_step3.py
+          python3 .github/context-payloads/step3-d/finalize_step3.py
