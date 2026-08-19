@@ -54,6 +54,15 @@ jobs:
           assert hashlib.sha256(packed).hexdigest() == 'd1398d7d80020c1189edbf4821c1b3201f4799629e3c1848141651bbbc250966'
           source = gzip.decompress(packed)
           assert hashlib.sha256(source).hexdigest() == 'a98ba90c88449e76bda4be562ed91da74709984b7b0ccd64f3c847a90b80541a'
-          pathlib.Path('/tmp/cocolon_step4_remote_runner.py').write_bytes(source)
+          text = source.decode('utf-8')
+          needle = "assert {member.name for member in members} == expected"
+          replacement = (
+              "print('STEP4_TRANSPORT_ARCHIVE_ACTUAL_MEMBERS=' + repr(sorted(member.name for member in members)), flush=True)\n"
+              "        print('STEP4_TRANSPORT_ARCHIVE_EXPECTED_MEMBERS=' + repr(sorted(expected)), flush=True)\n"
+              "        assert {member.name for member in members} == expected"
+          )
+          assert text.count(needle) == 1
+          text = text.replace(needle, replacement, 1)
+          pathlib.Path('/tmp/cocolon_step4_remote_runner.py').write_text(text, encoding='utf-8')
           PY
           python3 /tmp/cocolon_step4_remote_runner.py
