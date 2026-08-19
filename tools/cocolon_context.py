@@ -45,6 +45,11 @@ def build_parser() -> argparse.ArgumentParser:
     prepare.add_argument("--external-workspace-root", type=Path)
     prepare.add_argument("--remote-verified", action="store_true", help=argparse.SUPPRESS)
     prepare.add_argument("--fresh-clone-verified", action="store_true", help=argparse.SUPPRESS)
+    prepare.add_argument(
+        "--non-code-incremental-verified",
+        action="store_true",
+        help=argparse.SUPPRESS,
+    )
     prepare.add_argument("--verify-only", action="store_true")
     prepare.add_argument("--require-remote-verified", action="store_true")
     prepare.add_argument("--max-part-bytes", type=int, default=90_000_000)
@@ -101,6 +106,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         forwarded.append("--remote-verified")
     if args.fresh_clone_verified:
         forwarded.append("--fresh-clone-verified")
+    if args.non_code_incremental_verified:
+        forwarded.append("--non-code-incremental-verified")
     if args.verify_only:
         forwarded.append("--verify-only")
     if args.require_remote_verified:

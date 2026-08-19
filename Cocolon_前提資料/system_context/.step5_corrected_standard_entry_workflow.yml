@@ -1,0 +1,632 @@
+name: Cocolon System Context Steps 1-5 standard entry
+run-name: Cocolon System Context Step 5 @ ${{ github.sha }}
+
+on:
+  push:
+    branches:
+      - agent/cocolon-system-context-index-20260818
+    paths:
+      - .github/workflows/cocolon-system-context-inventory.yml
+      - tools/cocolon_context.py
+      - tools/cocolon_context_prepare.py
+      - tools/cocolon_context_task.py
+      - tools/cocolon_context_inventory.py
+      - tools/cocolon_context_code_index.py
+      - tools/cocolon_context_routes.py
+      - tools/cocolon_context_publish_transport.py
+      - tools/cocolon_context_ts_syntax.cjs
+      - tools/cocolon_context_ts_routes.cjs
+      - tests/cocolon_context/**
+      - tests/cocolon_context_step4/**
+      - Cocolon_前提資料/system_context/workspace_profiles.json
+      - Cocolon_前提資料/system_context/task_profiles.json
+      - Cocolon_前提資料/system_context/00_read_first.md
+      - Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt
+      - .github/context-payloads/step2-code/**
+      - .github/context-payloads/step3/**
+      - .github/context-payloads/step3-c/**
+      - .github/context-payloads/step3-ts-routes/**
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: cocolon-system-context-step5-${{ github.event.pull_request.head.ref || github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  connect-standard-entry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    env:
+      SOURCE_COMMIT: ${{ github.sha }}
+      TARGET_BRANCH: agent/cocolon-system-context-index-20260818
+      MASHOS_COMMIT: 06ce311b3ea728b06f83439d268a34bed917c01c
+      CYCLE001_MASHOS_COMMIT: 958c1b53f5b5894691e0b10e2d991fb8236d9f6f
+      ROOT: Cocolon_前提資料/system_context/current/cmee_working
+      EXTERNAL_ROOT: .cocolon-context-workspace
+    steps:
+      - name: Checkout exact Cocolon source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+
+      - name: Assert source identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$SOURCE_COMMIT"
+          test "$(git status --porcelain)" = ""
+
+      - name: Checkout locked mashos-api read-only
+        uses: actions/checkout@v4
+        with:
+          repository: MassyuRed/mashos-api
+          ref: 06ce311b3ea728b06f83439d268a34bed917c01c
+          path: .cocolon-context-workspace/mashos-api
+          fetch-depth: 0
+
+      - name: Assert mashos-api identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C "$EXTERNAL_ROOT/mashos-api" rev-parse HEAD)" = "$MASHOS_COMMIT"
+          test "$(git -C "$EXTERNAL_ROOT/mashos-api" status --porcelain)" = ""
+
+      - name: Checkout Cycle001 exact review asset read-only
+        uses: actions/checkout@v4
+        with:
+          repository: MassyuRed/mashos-api
+          ref: 958c1b53f5b5894691e0b10e2d991fb8236d9f6f
+          path: .cocolon-context-workspace/cycle001_working/mashos-api
+          fetch-depth: 0
+
+      - name: Assert Cycle001 exact review asset identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git -C "$EXTERNAL_ROOT/cycle001_working/mashos-api" rev-parse HEAD)" = "$CYCLE001_MASHOS_COMMIT"
+          test "$(git -C "$EXTERNAL_ROOT/cycle001_working/mashos-api" status --porcelain)" = ""
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install pinned SCIP exact3 toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install -g --no-audit --no-fund \
+            @sourcegraph/scip-typescript@0.4.0 \
+            @sourcegraph/scip-python@0.6.6 \
+            typescript@5.2.2
+          export NODE_PATH="$(npm root -g)"
+          echo "NODE_PATH=${NODE_PATH}" >> "$GITHUB_ENV"
+          SCIP_TAG=v0.7.1
+          curl --retry 3 --retry-all-errors -fsSL \
+            "https://github.com/scip-code/scip/releases/download/${SCIP_TAG}/scip-linux-amd64.tar.gz" \
+            -o /tmp/scip.tar.gz
+          rm -rf /tmp/scip-bin
+          mkdir -p /tmp/scip-bin
+          tar -xzf /tmp/scip.tar.gz -C /tmp/scip-bin
+          SCIP_BIN="$(find /tmp/scip-bin -type f -name scip -print -quit)"
+          test -n "$SCIP_BIN"
+          sudo install "$SCIP_BIN" /usr/local/bin/scip
+          test "$(node -e "console.log(require('typescript').version)")" = "5.2.2"
+          test "$(scip --version)" = "scip version v0.7.1"
+          test "$(scip-typescript --version)" = "0.4.0"
+          test "$(scip-python --version)" = "0.6.6"
+
+      - name: Run Step 1-5 regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          node --check tools/cocolon_context_ts_syntax.cjs
+          node --check tools/cocolon_context_ts_routes.cjs
+          python3 -m py_compile \
+            tools/cocolon_context.py \
+            tools/cocolon_context_prepare.py \
+            tools/cocolon_context_task.py \
+            tools/cocolon_context_inventory.py \
+            tools/cocolon_context_code_index.py \
+            tools/cocolon_context_routes.py \
+            tools/cocolon_context_publish_transport.py
+          python3 -m unittest discover -s tests/cocolon_context -p 'test_*.py' -v
+          git diff --check
+
+      - name: Prepare changed ref through Steps 1-4
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -rf "$EXTERNAL_ROOT/prepare"
+          python3 -m tools.cocolon_context prepare \
+            --workspace cmee_working \
+            --task cmee
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path("Cocolon_前提資料/system_context/current/cmee_working")
+          receipt = json.loads((root / "prepare_summary.json").read_text(encoding="utf-8"))
+          assert receipt["status"] == "PENDING_REMOTE_VERIFICATION"
+          assert receipt["refresh_plan"]["execution_mode"] == "FULL_REBUILD_FALLBACK"
+          assert receipt["changed_ref_refresh_verified"] is True
+          assert receipt["full_rebuild_fallback_verified"] is True
+          assert receipt["manual_operation_count"] == 0
+          assert receipt["product_credit"] == 0
+          assert receipt["automatic_progression"] is False
+          assert receipt["resolved_refs"]["Cocolon"]["commit"] == __import__("os").environ["SOURCE_COMMIT"]
+          assert receipt["resolved_refs"]["mashos-api"]["commit"] == __import__("os").environ["MASHOS_COMMIT"]
+          PY
+
+      - name: Commit and push generated changed-ref context
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A "$ROOT"
+          test -n "$(git diff --cached --name-only)"
+          git commit -m "chore(system-context): generate Step 5 changed-ref context"
+          git push origin "HEAD:${TARGET_BRANCH}"
+          echo "PENDING_GENERATED_COMMIT=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+
+      - name: Verify same-ref no-op from distinct fresh clone
+        shell: bash
+        run: |
+          set -euo pipefail
+          FRESH=/tmp/cocolon-step5-fresh-pending
+          rm -rf "$FRESH"
+          git clone --no-local "$GITHUB_WORKSPACE" "$FRESH"
+          git -C "$FRESH" checkout --detach "$PENDING_GENERATED_COMMIT"
+          mkdir -p "$FRESH/.cocolon-context-workspace"
+          git clone --no-local "$GITHUB_WORKSPACE/$EXTERNAL_ROOT/mashos-api" \
+            "$FRESH/.cocolon-context-workspace/mashos-api"
+          git -C "$FRESH/.cocolon-context-workspace/mashos-api" checkout --detach "$MASHOS_COMMIT"
+          mkdir -p "$FRESH/.cocolon-context-workspace/cycle001_working"
+          git clone --no-local "$GITHUB_WORKSPACE/$EXTERNAL_ROOT/cycle001_working/mashos-api" \
+            "$FRESH/.cocolon-context-workspace/cycle001_working/mashos-api"
+          git -C "$FRESH/.cocolon-context-workspace/cycle001_working/mashos-api" checkout --detach "$CYCLE001_MASHOS_COMMIT"
+          BEFORE="$(cd "$FRESH" && python3 -c 'import json; print(json.load(open("Cocolon_前提資料/system_context/current/cmee_working/prepare_summary.json"))["task_context"]["context_fingerprint"])')"
+          (
+            cd "$FRESH"
+            python3 -m tools.cocolon_context prepare \
+              --workspace cmee_working \
+              --task cmee \
+              --verify-only
+            git diff --exit-code -- .
+            git diff --cached --exit-code -- .
+          )
+          AFTER="$(cd "$FRESH" && python3 -c 'import json; print(json.load(open("Cocolon_前提資料/system_context/current/cmee_working/prepare_summary.json"))["task_context"]["context_fingerprint"])')"
+          test "$BEFORE" = "$AFTER"
+
+      - name: Prove changed-ref non-code incremental refresh without provider rerun
+        shell: bash
+        run: |
+          set -euo pipefail
+          FRESH=/tmp/cocolon-step5-incremental-non-code
+          rm -rf "$FRESH"
+          git clone --no-local "$GITHUB_WORKSPACE" "$FRESH"
+          git -C "$FRESH" checkout --detach "$PENDING_GENERATED_COMMIT"
+          git -C "$FRESH" config user.name "cocolon-context-incremental-proof"
+          git -C "$FRESH" config user.email "cocolon-context-incremental-proof@invalid"
+          printf '\n<!-- step5-incremental-proof -->\n' >> \
+            "$FRESH/Cocolon_前提資料/system_context/00_read_first.md"
+          git -C "$FRESH" add Cocolon_前提資料/system_context/00_read_first.md
+          git -C "$FRESH" commit -m "test: exercise non-code incremental refresh"
+          mkdir -p "$FRESH/.cocolon-context-workspace"
+          git clone --no-local "$GITHUB_WORKSPACE/$EXTERNAL_ROOT/mashos-api" \
+            "$FRESH/.cocolon-context-workspace/mashos-api"
+          git -C "$FRESH/.cocolon-context-workspace/mashos-api" \
+            checkout --detach "$MASHOS_COMMIT"
+          mkdir -p "$FRESH/.cocolon-context-workspace/cycle001_working"
+          git clone --no-local \
+            "$GITHUB_WORKSPACE/$EXTERNAL_ROOT/cycle001_working/mashos-api" \
+            "$FRESH/.cocolon-context-workspace/cycle001_working/mashos-api"
+          git -C "$FRESH/.cocolon-context-workspace/cycle001_working/mashos-api" \
+            checkout --detach "$CYCLE001_MASHOS_COMMIT"
+          (
+            cd "$FRESH"
+            python3 -m tools.cocolon_context prepare \
+              --workspace cmee_working \
+              --task cmee
+            python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          receipt = json.loads(
+              Path(
+                  "Cocolon_前提資料/system_context/current/cmee_working/prepare_summary.json"
+              ).read_text(encoding="utf-8")
+          )
+          assert receipt["refresh_plan"]["execution_mode"] == "INCREMENTAL_NON_CODE_REBIND"
+          assert receipt["refresh_plan"]["changed_path_count"] == 1
+          assert receipt["refresh_plan"]["requested_affected_layers"] == [
+              "inventory",
+              "task_context",
+          ]
+          assert receipt["refresh_plan"]["executed_layers"] == [
+              "inventory",
+              "task_context",
+          ]
+          assert receipt["semantic_reuse"]["code_index_provider_rerun"] is False
+          assert receipt["semantic_reuse"]["route_graph_provider_rerun"] is False
+          assert receipt["semantic_reuse"]["non_code_incremental_rebind_verified"] is True
+          assert receipt["changed_ref_refresh_verified"] is True
+          assert receipt["manual_operation_count"] == 0
+          assert receipt["product_credit"] == 0
+          assert receipt["automatic_progression"] is False
+          PY
+          )
+
+      - name: Seal Step 4 and Step 5 after fresh-clone proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m tools.cocolon_context prepare \
+            --workspace cmee_working \
+            --task cmee \
+            --remote-verified \
+            --fresh-clone-verified \
+            --non-code-incremental-verified
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path("Cocolon_前提資料/system_context/current/cmee_working")
+          receipt = json.loads((root / "prepare_summary.json").read_text(encoding="utf-8"))
+          context = json.loads((root / "task_context/cmee/context_manifest.json").read_text(encoding="utf-8"))
+          assert context["status"] == "STEP4_TASK_CONTEXT_COMPILER_CMEE_ACTUAL_REVIEW_COMPLETE"
+          assert receipt["status"] == "COMPLETE"
+          assert receipt["same_ref_reuse_verified"] is True
+          assert receipt["changed_ref_refresh_verified"] is True
+          assert receipt["full_rebuild_fallback_verified"] is True
+          assert receipt["semantic_reuse"]["non_code_incremental_rebind_verified"] is True
+          assert receipt["fresh_clone_deterministic_verified"] is True
+          assert receipt["completion_claim"] == "STEP5_COCOLON_STANDARD_ENTRY_CONNECTED"
+          assert receipt["overall_claim"] == "COCOLON_SYSTEM_CONTEXT_STEPS1_TO_5_COMPLETE"
+          assert receipt["structure_map_delta"] == "STRUCTURE_MAP_DELTA_NONE"
+          assert receipt["mashos_api_write_count"] == 0
+          assert receipt["product_behavior_change_count"] == 0
+          PY
+          git add -A "$ROOT"
+          test -n "$(git diff --cached --name-only)"
+          git commit -m "chore(system-context): seal Steps 1-5 remote completion"
+          git push origin "HEAD:${TARGET_BRANCH}"
+          echo "FINAL_HEAD=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          echo "FINAL_TREE=$(git rev-parse HEAD^{tree})" >> "$GITHUB_ENV"
+
+      - name: Final fresh-clone deterministic and remote verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch origin "$TARGET_BRANCH"
+          test "$(git rev-parse "origin/${TARGET_BRANCH}")" = "$FINAL_HEAD"
+          FRESH=/tmp/cocolon-step5-fresh-final
+          rm -rf "$FRESH"
+          git clone --no-local "$GITHUB_WORKSPACE" "$FRESH"
+          git -C "$FRESH" checkout --detach "$FINAL_HEAD"
+          mkdir -p "$FRESH/.cocolon-context-workspace"
+          git clone --no-local "$GITHUB_WORKSPACE/$EXTERNAL_ROOT/mashos-api" \
+            "$FRESH/.cocolon-context-workspace/mashos-api"
+          git -C "$FRESH/.cocolon-context-workspace/mashos-api" checkout --detach "$MASHOS_COMMIT"
+          mkdir -p "$FRESH/.cocolon-context-workspace/cycle001_working"
+          git clone --no-local "$GITHUB_WORKSPACE/$EXTERNAL_ROOT/cycle001_working/mashos-api" \
+            "$FRESH/.cocolon-context-workspace/cycle001_working/mashos-api"
+          git -C "$FRESH/.cocolon-context-workspace/cycle001_working/mashos-api" checkout --detach "$CYCLE001_MASHOS_COMMIT"
+          (
+            cd "$FRESH"
+            python3 -m tools.cocolon_context prepare \
+              --workspace cmee_working \
+              --task cmee \
+              --verify-only \
+              --require-remote-verified
+            git diff --exit-code -- .
+            git diff --cached --exit-code -- .
+          )
+
+      - name: Update Draft PR 31 with final actual
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import collections
+          import hashlib
+          import json
+          import os
+          from pathlib import Path
+          import subprocess
+          import tempfile
+          import textwrap
+
+          from tools.cocolon_context_publish_transport import materialize_outputs
+
+          root = Path("Cocolon_前提資料/system_context/current/cmee_working")
+          task_root = root / "task_context/cmee"
+          receipt = json.loads((root / "prepare_summary.json").read_text(encoding="utf-8"))
+          manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
+          code = json.loads((root / "code_index/code_index_summary.json").read_text(encoding="utf-8"))
+          routes = json.loads((root / "route_graph/route_graph_summary.json").read_text(encoding="utf-8"))
+          task = json.loads((task_root / "context_manifest.json").read_text(encoding="utf-8"))
+          task_profiles = json.loads(
+              Path("Cocolon_前提資料/system_context/task_profiles.json").read_text(encoding="utf-8")
+          )
+
+
+          def sha256(path: Path) -> str:
+              return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+          def read_jsonl(path: Path) -> list[dict]:
+              rows = []
+              with path.open("r", encoding="utf-8") as handle:
+                  for line in handle:
+                      if line.strip():
+                          value = json.loads(line)
+                          if isinstance(value, dict):
+                              rows.append(value)
+              return rows
+
+
+          with tempfile.TemporaryDirectory(prefix="cocolon-step5-pr-actual-") as temporary:
+              base = Path(temporary)
+              workspace_plain = materialize_outputs(root, base / "workspace")
+              task_plain = materialize_outputs(task_root, base / "task")
+              selected_rows = read_jsonl(task_plain / "selected_files.jsonl")
+              unresolved_rows = read_jsonl(task_plain / "unresolved_context.jsonl")
+              domain_rows = read_jsonl(workspace_plain / "route_graph/file_domain_assignments.jsonl")
+              closure_rows = read_jsonl(workspace_plain / "route_graph/route_owner_closures.jsonl")
+              provider_runs = json.loads(
+                  (workspace_plain / "code_index/provider_runs.json").read_text(encoding="utf-8")
+              )
+
+          classification_counts = collections.Counter(
+              str(row.get("read_classification") or "UNSPECIFIED") for row in selected_rows
+          )
+          domain_counts: collections.Counter[str] = collections.Counter()
+          for row in domain_rows:
+              values = None
+              for key in ("domains", "domain_tags", "assigned_domains"):
+                  candidate = row.get(key)
+                  if isinstance(candidate, list):
+                      values = candidate
+                      break
+                  if isinstance(candidate, dict):
+                      values = [name for name, enabled in candidate.items() if enabled]
+                      break
+              if values is None:
+                  candidate = row.get("domain") or row.get("domain_id")
+                  values = [candidate] if candidate else ["UNSPECIFIED"]
+              for value in values:
+                  domain_counts[str(value)] += 1
+
+          terminal_role_counts: collections.Counter[str] = collections.Counter()
+          for row in closure_rows:
+              terminal = (
+                  row.get("terminal_node_role")
+                  or row.get("terminal_role")
+                  or row.get("terminal_owner_role")
+                  or row.get("owner_role")
+              )
+              if terminal:
+                  terminal_role_counts[str(terminal)] += 1
+          if not terminal_role_counts:
+              terminal_role_counts["RESOLVED_BACKEND_OWNER"] = int(
+                  routes.get("resolved_backend_owner_count", 0)
+              )
+
+          provider_summary = {
+              str(row.get("run_id")): {
+                  "repository": row.get("repository_key"),
+                  "family": row.get("family"),
+                  "exit_code": row.get("exit_code"),
+                  "documents": row.get("document_count"),
+              }
+              for row in provider_runs.get("runs", [])
+          }
+          tool_versions = {
+              str(name): value.get("value") if isinstance(value, dict) else value
+              for name, value in provider_runs.get("tool_versions", {}).items()
+          }
+
+          review = {}
+          for category in task_profiles.get("tasks", {}).get("cmee", {}).get("required_categories", []):
+              if isinstance(category, dict) and category.get("id") == "nlsv3_cycle001":
+                  candidate = category.get("actual_review")
+                  if isinstance(candidate, dict):
+                      review = candidate
+                  break
+          finding_assets = review.get("external_asset_candidates", [])
+          finding_asset_lines = []
+          for asset in finding_assets:
+              if not isinstance(asset, dict):
+                  continue
+              finding_asset_lines.append(
+                  "- `{}:{}` @ `{}` / blob `{}`".format(
+                      asset.get("repository_key"),
+                      asset.get("path"),
+                      asset.get("source_commit"),
+                      asset.get("blob_sha"),
+                  )
+              )
+          if not finding_asset_lines:
+              finding_asset_lines = ["- none"]
+          finding_assets_md = "\n    ".join(finding_asset_lines)
+
+          changed_evidence = receipt.get("changed_ref_refresh_evidence") or {}
+          changed_plan = changed_evidence.get("refresh_plan") or {}
+          changed_rows = changed_evidence.get("changed_paths") or []
+          changed_path_lines = []
+          for row in changed_rows:
+              if not isinstance(row, dict):
+                  continue
+              old_path = row.get("old_path")
+              new_path = row.get("new_path")
+              rendered = new_path if old_path in (None, new_path) else f"{old_path} -> {new_path}"
+              changed_path_lines.append(
+                  f"- `{row.get('repository_key')}` `{row.get('status')}` `{rendered}`"
+              )
+          if not changed_path_lines:
+              changed_path_lines = ["- none"]
+          changed_paths_md = "\n    ".join(changed_path_lines)
+
+          source_change_rows = subprocess.check_output(
+              [
+                  "git",
+                  "-c",
+                  "core.quotepath=false",
+                  "show",
+                  "--pretty=format:",
+                  "--name-status",
+                  "-M",
+                  os.environ["SOURCE_COMMIT"],
+              ],
+              text=True,
+          ).splitlines()
+          source_change_lines = [f"- `{line}`" for line in source_change_rows if line]
+          source_changes_md = "\n    ".join(source_change_lines or ["- none"])
+
+          repo_counts = manifest.get("repositories", {})
+          mode_counts = code.get("mode_counts", {})
+          rn_connections = routes.get("rn_connection_counts", {})
+          api_consumers = routes.get("api_consumer_counts", {})
+          visible_consumers = routes.get("visible_consumer_counts", {})
+          required_coverage = task.get("required_category_coverage", {})
+
+          mashos_tree = subprocess.check_output(
+              ["git", "-C", ".cocolon-context-workspace/mashos-api", "rev-parse", "HEAD^{tree}"],
+              text=True,
+          ).strip()
+          cycle001_tree = subprocess.check_output(
+              [
+                  "git",
+                  "-C",
+                  ".cocolon-context-workspace/cycle001_working/mashos-api",
+                  "rev-parse",
+                  "HEAD^{tree}",
+              ],
+              text=True,
+          ).strip()
+
+          body = textwrap.dedent(
+              f"""
+              ## Cocolon System Context — Steps 1–5 final actual
+
+              `COCOLON_SYSTEM_CONTEXT_STEPS1_TO_5_COMPLETE`
+
+              ### Remote identity
+              - workflow run ID: `{os.environ['GITHUB_RUN_ID']}`
+              - workflow run attempt: `{os.environ['GITHUB_RUN_ATTEMPT']}`
+              - source commit: `{os.environ['SOURCE_COMMIT']}`
+              - generated pending commit: `{os.environ['PENDING_GENERATED_COMMIT']}`
+              - final HEAD: `{os.environ['FINAL_HEAD']}`
+              - final tree: `{os.environ['FINAL_TREE']}`
+              - mashos-api read-only head/tree: `{os.environ['MASHOS_COMMIT']}` / `{mashos_tree}`
+              - Cycle001 review-only head/tree: `{os.environ['CYCLE001_MASHOS_COMMIT']}` / `{cycle001_tree}`
+
+              ### Standard-entry source changed paths
+              {source_changes_md}
+
+              ### Step 1 — full tracked inventory
+              - completion: `{manifest['completion_claim']}`
+              - Cocolon tracked: `{repo_counts['Cocolon']['tracked_entry_count']}`
+              - mashos-api tracked: `{repo_counts['mashos-api']['tracked_entry_count']}`
+              - total tracked: `{manifest['total_tracked_entries']}`
+              - missing: `{manifest['missing_tracked_path_count']}`
+              - duplicate: `{manifest['duplicate_repository_path_count']}`
+              - unresolved classification: `{manifest['unresolved_count']}`
+              - files.jsonl SHA-256: `{manifest['output_sha256']['files.jsonl']}`
+              - manifest SHA-256: `{sha256(root / 'manifest.json')}`
+
+              ### Step 2 — SCIP exact3 + syntax index
+              - completion: `{code['completion_claim']}`
+              - required provider exact3: `{json.dumps(provider_summary, ensure_ascii=False, sort_keys=True)}`
+              - tool versions: `{json.dumps(tool_versions, ensure_ascii=False, sort_keys=True)}`
+              - coverage total/gap/duplicate: `{code['coverage_total']}` / `{code['coverage_gap_count']}` / `{code['duplicate_coverage_count']}`
+              - PRECISE_SCIP: `{mode_counts.get('PRECISE_SCIP', 0)}`
+              - SYNTAX_INDEXED: `{mode_counts.get('SYNTAX_INDEXED', 0)}`
+              - PARSE_ERROR_VISIBLE: `{mode_counts.get('PARSE_ERROR_VISIBLE', 0)}`
+              - INVENTORY_ONLY_WITH_REASON: `{mode_counts.get('INVENTORY_ONLY_WITH_REASON', 0)}`
+              - BINARY_REGISTERED: `{mode_counts.get('BINARY_REGISTERED', 0)}`
+              - symbols/references/import edges: `{code['symbol_count']}` / `{code['reference_count']}` / `{code['import_edge_count']}`
+              - manifest SHA-256: `{sha256(root / 'code_index/code_index_manifest.json')}`
+
+              ### Step 3 — RN/API/backend/test/domain graph
+              - completion: `{routes['completion_claim']}`
+              - RN calls / API routes: `{routes['rn_call_count']}` / `{routes['api_route_count']}`
+              - EXACT / TEMPLATE: `{rn_connections.get('MATCHED_EXACT', 0)}` / `{rn_connections.get('MATCHED_TEMPLATE', 0)}`
+              - backend call edges: `{routes['backend_call_edge_count']}`
+              - route owner closures: `{routes['route_owner_closure_count']}`
+              - engine/store terminal roles: `{json.dumps(dict(sorted(terminal_role_counts.items())), ensure_ascii=False)}`
+              - test/contract edges: `{routes['test_contract_edge_count']}`
+              - visible consumer classification: `{json.dumps(visible_consumers, ensure_ascii=False, sort_keys=True)}`
+              - API consumer classification: `{json.dumps(api_consumers, ensure_ascii=False, sort_keys=True)}`
+              - domain assignment breakdown: `{json.dumps(dict(sorted(domain_counts.items())), ensure_ascii=False)}`
+              - unresolved RN/API consumer/backend/test-contract: `{routes['unresolved_rn_call_count']}` / `{routes['unresolved_api_consumer_count']}` / `{routes['unresolved_backend_owner_count']}` / `{routes['unresolved_test_contract_count']}`
+              - route extraction errors: `{routes['route_extraction_error_count']}`
+              - silent unresolved: `{routes['silent_unresolved_count']}`
+              - manifest SHA-256: `{sha256(root / 'route_graph/route_graph_manifest.json')}`
+
+              ### Step 4 — Task Context Compiler / CMEE actual review
+              - completion: `{task['status']}`
+              - selected files: `{task['selected_file_count']}`
+              - MUST_READ_FULL / CURRENT_OWNER / RELEVANT_HISTORICAL / REFERENCE_AS_NEEDED: `{classification_counts.get('MUST_READ_FULL', 0)}` / `{classification_counts.get('CURRENT_OWNER', 0)}` / `{classification_counts.get('RELEVANT_HISTORICAL', 0)}` / `{classification_counts.get('REFERENCE_AS_NEEDED', 0)}`
+              - required category exact: `{required_coverage.get('observed')}` / `{required_coverage.get('expected_exact')}`; all PASS `{required_coverage.get('all_pass')}`
+              - blocking unresolved / retained unresolved: `{task['blocking_unresolved_count']}` / `{len(unresolved_rows)}`
+              - context fingerprint: `{task['context_fingerprint']}`
+              - actual unincorporated findings: `{task.get('actual_unincorporated_finding_count', 0)}`
+              - finding: `{review.get('finding_id')}` / `{review.get('status')}`
+              - finding disposition: `{review.get('disposition')}`
+              - design impact: `{review.get('design_impact')}`
+              - finding exact assets:
+              {finding_assets_md}
+              - structure map: `{review.get('structure_map_delta', 'STRUCTURE_MAP_DELTA_NONE')}`
+              - manifest SHA-256: `{sha256(task_root / 'context_manifest.json')}`
+
+              ### Step 5 — standard entry
+              ```bash
+              python3 -m tools.cocolon_context prepare --workspace cmee_working --task cmee
+              ```
+              - routing owner: `Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt`
+              - technical owner: `Cocolon_前提資料/system_context/00_read_first.md`
+              - same-ref no-op: `{receipt['same_ref_reuse_verified']}`
+              - changed-ref refresh: `{receipt['changed_ref_refresh_verified']}`
+              - changed-ref execution mode: `{changed_plan.get('execution_mode')}`
+              - changed-ref detected paths:
+              {changed_paths_md}
+              - bounded full-rebuild fallback: `{receipt['full_rebuild_fallback_verified']}` / `{json.dumps(changed_plan.get('fallback_reasons', []), ensure_ascii=False)}`
+              - non-code incremental provider reuse: `{receipt['semantic_reuse']['non_code_incremental_rebind_verified']}`
+              - fresh clone deterministic: `{receipt['fresh_clone_deterministic_verified']}`
+              - Mash manual operation count: `{receipt['manual_operation_count']}`
+              - remote source/generated bytes and manifest verification: `{receipt['remote_verified']}`
+              - completion: `{receipt['completion_claim']}`
+
+              ### Boundaries
+              - PR #31: `Draft / open / unmerged`
+              - mashos-api write: `0`
+              - CMEE runtime change: `0`
+              - Cycle001 restart: `0`
+              - production behavior change: `0`
+              - RN / API / DB / public contract change: `0`
+              - production dependency change: `0`
+              - product output change: `0`
+              - ready / merge effect: `0`
+              - product-quality credit: `0`
+              - `STRUCTURE_MAP_DELTA_NONE`
+              - automatic progression beyond Step 5: `false`
+              """
+          ).strip() + "\n"
+          Path("/tmp/pr-body.md").write_text(body, encoding="utf-8")
+          PY
+          gh pr edit 31 \
+            --title "feat(system-context): connect Cocolon standard entry through Step 5" \
+            --body-file /tmp/pr-body.md

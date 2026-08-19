@@ -671,7 +671,9 @@ def _write_receipt(workspace_dir: Path, receipt: Mapping[str, Any]) -> None:
 def prepare(
     *, repo_root: Path, system_context_root: Path, external_workspace_root: Path,
     workspace: str, task: str, remote_verified: bool = False,
-    fresh_clone_verified: bool = False, verify_only: bool = False,
+    fresh_clone_verified: bool = False,
+    non_code_incremental_verified: bool = False,
+    verify_only: bool = False,
     require_remote_verified: bool = False,
     max_part_bytes: int = DEFAULT_MAX_PART_BYTES,
 ) -> Mapping[str, Any]:
@@ -797,9 +799,29 @@ def prepare(
     effective_fresh_clone_verified = bool(
         fresh_clone_verified or inherited_remote_seal
     )
+    effective_non_code_incremental_verified = bool(
+        non_code_incremental_verified
+        or execution_mode == "INCREMENTAL_NON_CODE_REBIND"
+        or previous_receipt.get("semantic_reuse", {}).get(
+            "non_code_incremental_rebind_verified"
+        )
+    )
+    if changes:
+        changed_ref_refresh_evidence: Mapping[str, Any] | None = {
+            "previous_refs": dict(sorted(saved_refs.items())),
+            "resolved_refs": dict(sorted(current_ref_map.items())),
+            "refresh_plan": refresh_plan,
+            "changed_paths": [_change_json(change) for change in changes],
+        }
+    else:
+        previous_evidence = previous_receipt.get("changed_ref_refresh_evidence")
+        changed_ref_refresh_evidence = (
+            previous_evidence if isinstance(previous_evidence, dict) else None
+        )
     complete = bool(
         effective_remote_verified
         and effective_fresh_clone_verified
+        and effective_non_code_incremental_verified
         and refs_match
         and task_manifest.get("status") == STEP4_CLAIM
         and cumulative_changed_refresh
@@ -821,6 +843,7 @@ def prepare(
         "previous_refs": dict(sorted(saved_refs.items())),
         "refresh_plan": {**refresh_plan, "execution_mode": execution_mode},
         "changed_paths": [_change_json(change) for change in changes],
+        "changed_ref_refresh_evidence": changed_ref_refresh_evidence,
         "workspace_transport": dict(workspace_transport),
         "task_context": {
             "status": task_manifest.get("status"),
@@ -840,9 +863,8 @@ def prepare(
         "semantic_reuse": {
             "code_index_provider_rerun": execution_mode != "INCREMENTAL_NON_CODE_REBIND",
             "route_graph_provider_rerun": execution_mode != "INCREMENTAL_NON_CODE_REBIND",
-            "non_code_incremental_rebind_verified": bool(
-                execution_mode == "INCREMENTAL_NON_CODE_REBIND"
-                or previous_receipt.get("semantic_reuse", {}).get("non_code_incremental_rebind_verified")
+            "non_code_incremental_rebind_verified": (
+                effective_non_code_incremental_verified
             ),
         },
         "fresh_clone_deterministic_contract": "VERIFY_ONLY_BYTE_EXACT_WITH_SAME_EXACT_REFS",
@@ -872,6 +894,7 @@ def cli(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--external-workspace-root", type=Path)
     parser.add_argument("--remote-verified", action="store_true")
     parser.add_argument("--fresh-clone-verified", action="store_true")
+    parser.add_argument("--non-code-incremental-verified", action="store_true")
     parser.add_argument("--verify-only", action="store_true")
     parser.add_argument("--require-remote-verified", action="store_true")
     parser.add_argument("--max-part-bytes", type=int, default=DEFAULT_MAX_PART_BYTES)
@@ -896,6 +919,7 @@ def cli(argv: Sequence[str] | None = None) -> int:
             task=args.task,
             remote_verified=args.remote_verified,
             fresh_clone_verified=args.fresh_clone_verified,
+            non_code_incremental_verified=args.non_code_incremental_verified,
             verify_only=args.verify_only,
             require_remote_verified=args.require_remote_verified,
             max_part_bytes=args.max_part_bytes,
