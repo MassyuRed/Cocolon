@@ -100,8 +100,8 @@ _base_build_route_graph = build_route_graph
 _base_verify_route_graph = verify_route_graph
 
 C_PAYLOAD_PATH = ROOT / ".github" / "context-payloads" / "step3-c" / "payload.b64"
-C_ENCODED_SHA256 = "26bdc94df68fddc893fa408ad7b05d506ee10ce25c1f840b2b27cff93482056d"
-C_SOURCE_SHA256 = "97b406f62a71e621281536cf5e0c6712482615b63e189b734e3d54cde8272418"
+C_ENCODED_SHA256 = "611b85a346b2ab081ce4be339e3f29dbac725b9755819bdb49b9203f7c4c78dc"
+C_SOURCE_SHA256 = "5adfa04ff1bca26a61feb30aa25a8819e71edc13aa0881214e7885c35c614e97"
 C_SOURCE_MEMBER = "tools/cocolon_context_routes_c_extension.py"
 
 c_encoded = C_PAYLOAD_PATH.read_bytes()

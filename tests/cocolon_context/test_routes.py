@@ -158,6 +158,21 @@ class RouteGraphTests(unittest.TestCase):
             calls = routes.read_jsonl(output / "rn_calls.jsonl")
             matched = [call for call in calls if call["connection_status"].startswith("MATCHED")]
             self.assertTrue(any("screens/AccountItemsScreen.js" in call["visible_consumer_files"] for call in matched))
+            unresolved_rn = routes.read_jsonl(output / "unresolved_rn_calls.jsonl")
+            unresolved_reason_by_subject = {
+                row["subject_id"]: row["reason"] for row in unresolved_rn
+            }
+            unresolved_calls = [
+                call
+                for call in calls
+                if not call["connection_status"].startswith("MATCHED")
+            ]
+            self.assertGreater(len(unresolved_calls), 0)
+            self.assertTrue(all(
+                call["call_id"] in unresolved_reason_by_subject
+                and call["unresolved_reason"]
+                for call in unresolved_calls
+            ))
             closures = routes.read_jsonl(output / "route_owner_closures.jsonl")
             owner_roles = {node["node_role"] for row in closures for node in row["nodes"]}
             self.assertIn("APPLICATION_SERVICE", owner_roles)
