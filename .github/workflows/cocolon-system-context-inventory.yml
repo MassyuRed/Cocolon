@@ -41,6 +41,7 @@ jobs:
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
           test -d "$PAYLOAD"
           test "$(git rev-parse "${CORRECTION_BASE_COMMIT}^{commit}")" = "$CORRECTION_BASE_COMMIT"
+          git config core.quotePath false
           cp "$WORKFLOW" /tmp/step5-correction-bootstrap.yml
           cat "$PAYLOAD"/part* | base64 -d | gzip -d > /tmp/step5-correction.patch
           echo "2bf3b2c570d3171abce908085d12698f05d3f11ccc75938374b058e501a78147  /tmp/step5-correction.patch" | sha256sum -c -
