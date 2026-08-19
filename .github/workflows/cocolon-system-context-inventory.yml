@@ -108,13 +108,13 @@ jobs:
           C_ADMITTED_DIR=/tmp/cocolon-step3-c-admitted
           rm -rf "$C_ADMITTED_DIR"
           mkdir -p "$C_ADMITTED_DIR"
-          echo "aad97baf4fa0f12b62023761be24bcf853a043e79baa043efc3571203c9f7548  ${C_PAYLOAD}" | sha256sum -c -
+          echo "48be5aaba408a39dfbd3331268e107f15b854da0b07ec08da29561f35a4dcba0  ${C_PAYLOAD}" | sha256sum -c -
           base64 -d "$C_PAYLOAD" > /tmp/cocolon-step3-c-payload.tar.gz
           C_ACTUAL_LIST="$(tar -tzf /tmp/cocolon-step3-c-payload.tar.gz | LC_ALL=C sort)"
           C_EXPECTED_LIST="tools/cocolon_context_routes_c_extension.py"
           test "$C_ACTUAL_LIST" = "$C_EXPECTED_LIST"
           tar -xzf /tmp/cocolon-step3-c-payload.tar.gz -C "$C_ADMITTED_DIR"
-          echo "fa4a3cc83d9e01c1217a529b874cbfdeb774e4f229f4d658ec94274bbeef9bb0  ${C_ADMITTED_DIR}/tools/cocolon_context_routes_c_extension.py" | sha256sum -c -
+          echo "e03749be5161e6fcded6ca8d96fd7ca3c7dfc3c7e6170dad45c1902eb1433218  ${C_ADMITTED_DIR}/tools/cocolon_context_routes_c_extension.py" | sha256sum -c -
 
       - name: Set up Python 3.11
         id: setup_python
