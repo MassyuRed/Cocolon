@@ -55,6 +55,9 @@ jobs:
           source = gzip.decompress(packed)
           assert hashlib.sha256(source).hexdigest() == 'a98ba90c88449e76bda4be562ed91da74709984b7b0ccd64f3c847a90b80541a'
           text = source.decode('utf-8')
+          for number, line in enumerate(text.splitlines(), 1):
+              if 120 <= number <= 245:
+                  print(f'STEP4_RUNNER_SOURCE_{number:03d}={line}', flush=True)
           needle = "assert {member.name for member in members} == expected"
           replacement = (
               "print('STEP4_TRANSPORT_ARCHIVE_ACTUAL_MEMBERS=' + repr(sorted(member.name for member in members)), flush=True)\n"
