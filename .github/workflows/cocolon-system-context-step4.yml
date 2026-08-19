@@ -51,9 +51,9 @@ jobs:
 
           encoded = pathlib.Path('.github/context-payloads/step4-runner.b64').read_text(encoding='ascii').strip()
           packed = base64.b64decode(encoded, validate=True)
-          assert hashlib.sha256(packed).hexdigest() == '1c4fad766c7095c508e164c5c9a009b1bf057aae1b2d5987a48e394124b016a2'
+          assert hashlib.sha256(packed).hexdigest() == 'd1398d7d80020c1189edbf4821c1b3201f4799629e3c1848141651bbbc250966'
           source = gzip.decompress(packed)
-          assert hashlib.sha256(source).hexdigest() == '1bc01f662b3e00f7b89aef44e2789af18c266b30a44ac725ed66fd1eea295e80'
+          assert hashlib.sha256(source).hexdigest() == 'a98ba90c88449e76bda4be562ed91da74709984b7b0ccd64f3c847a90b80541a'
           pathlib.Path('/tmp/cocolon_step4_remote_runner.py').write_bytes(source)
           PY
           python3 /tmp/cocolon_step4_remote_runner.py
