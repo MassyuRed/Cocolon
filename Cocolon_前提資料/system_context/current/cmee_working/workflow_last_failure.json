@@ -7,8 +7,8 @@
   "product_effect": 0,
   "repository": "MassyuRed/Cocolon",
   "run_attempt": 1,
-  "run_id": 32206869684,
-  "run_url": "https://github.com/MassyuRed/Cocolon/actions/runs/32206869684",
+  "run_id": 32207733129,
+  "run_url": "https://github.com/MassyuRed/Cocolon/actions/runs/32207733129",
   "schema_version": "cocolon.system_context.workflow_failure_stage.v1",
   "step_outcomes": {
     "checkout_cocolon": "success",
@@ -27,6 +27,6 @@
     "transport": "skipped",
     "validate": "skipped"
   },
-  "trigger_sha": "74cb8530a2972d4017b837d29550da173e448fd3",
-  "worktree_head_before_reset": "74cb8530a2972d4017b837d29550da173e448fd3"
+  "trigger_sha": "0077665d5d2d7ceceb112a12e2be5e9a22dc60a1",
+  "worktree_head_before_reset": "0077665d5d2d7ceceb112a12e2be5e9a22dc60a1"
 }
