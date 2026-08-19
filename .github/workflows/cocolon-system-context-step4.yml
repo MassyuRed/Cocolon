@@ -17,7 +17,7 @@ concurrency:
 jobs:
   complete-step4:
     runs-on: ubuntu-24.04
-    timeout-minutes: 180
+    timeout-minutes: 30
     env:
       SOURCE_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
       TARGET_BRANCH: agent/cocolon-system-context-index-20260818
@@ -28,44 +28,36 @@ jobs:
           ref: agent/cocolon-system-context-index-20260818
           fetch-depth: 0
 
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install test dependency
+      - name: Inspect exact transport postimage
         shell: bash
         run: |
           set -euo pipefail
-          python3 -m pip install --disable-pip-version-check --no-cache-dir pytest==9.0.2
-
-      - name: Execute exact Step 4 remote runner
-        shell: bash
-        run: |
-          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$SOURCE_COMMIT"
+          test -z "$(git status --porcelain)"
           python3 - <<'PY'
           import base64
-          import gzip
           import hashlib
+          import io
           import pathlib
+          import tarfile
 
-          encoded = pathlib.Path('.github/context-payloads/step4-runner.b64').read_text(encoding='ascii').strip()
-          packed = base64.b64decode(encoded, validate=True)
-          assert hashlib.sha256(packed).hexdigest() == 'd1398d7d80020c1189edbf4821c1b3201f4799629e3c1848141651bbbc250966'
-          source = gzip.decompress(packed)
-          assert hashlib.sha256(source).hexdigest() == 'a98ba90c88449e76bda4be562ed91da74709984b7b0ccd64f3c847a90b80541a'
-          text = source.decode('utf-8')
-          for number, line in enumerate(text.splitlines(), 1):
-              if 120 <= number <= 245:
-                  print(f'STEP4_RUNNER_SOURCE_{number:03d}={line}', flush=True)
-          needle = "assert {member.name for member in members} == expected"
-          replacement = (
-              "print('STEP4_TRANSPORT_ARCHIVE_ACTUAL_MEMBERS=' + repr(sorted(member.name for member in members)), flush=True)\n"
-              "        print('STEP4_TRANSPORT_ARCHIVE_EXPECTED_MEMBERS=' + repr(sorted(expected)), flush=True)\n"
-              "        assert {member.name for member in members} == expected"
-          )
-          assert text.count(needle) == 1
-          text = text.replace(needle, replacement, 1)
-          pathlib.Path('/tmp/cocolon_step4_remote_runner.py').write_text(text, encoding='utf-8')
+          payload = pathlib.Path('.github/context-payloads/step4-transport')
+          parts = sorted(payload.glob('part[0-9][0-9]'))
+          assert len(parts) == 4
+          encoded = ''.join(path.read_text(encoding='ascii').strip() for path in parts)
+          raw = base64.b64decode(encoded, validate=True)
+          assert hashlib.sha256(raw).hexdigest() == 'bd8e9fbea54178ec542124b4d8fbc80bae40a6dca872778d287af4bc4cecdbbb'
+          with tarfile.open(fileobj=io.BytesIO(raw), mode='r:gz') as archive:
+              members = [member for member in archive.getmembers() if member.isfile()]
+              print('STEP4_TRANSPORT_ARCHIVE_MEMBERS=' + repr([member.name for member in members]), flush=True)
+              assert [member.name for member in members] == ['tools/cocolon_context_task.py']
+              stream = archive.extractfile(members[0])
+              assert stream is not None
+              source = stream.read().decode('utf-8')
+          lines = source.splitlines()
+          print('STEP4_TRANSPORT_TOOL_SHA256=' + hashlib.sha256(source.encode('utf-8')).hexdigest(), flush=True)
+          print('STEP4_TRANSPORT_TOOL_LINE_COUNT=' + str(len(lines)), flush=True)
+          start = max(1, len(lines) - 650)
+          for number in range(start, len(lines) + 1):
+              print(f'STEP4_TRANSPORT_TOOL_{number:04d}={lines[number - 1]}', flush=True)
           PY
-          python3 /tmp/cocolon_step4_remote_runner.py
