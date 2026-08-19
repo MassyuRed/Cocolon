@@ -2,6 +2,11 @@ name: Cocolon System Context Step 5 source materialization
 run-name: Materialize Step 5 source @ ${{ github.event.pull_request.head.sha || github.sha }}
 
 on:
+  push:
+    branches:
+      - agent/cocolon-system-context-index-20260818
+    paths:
+      - .github/workflows/cocolon-system-context-inventory.yml
   pull_request:
     paths:
       - .github/workflows/cocolon-system-context-inventory.yml
