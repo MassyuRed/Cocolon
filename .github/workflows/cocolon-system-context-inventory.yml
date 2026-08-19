@@ -17,7 +17,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: cocolon-system-context-step5-source-v2-${{ github.event.pull_request.head.ref || github.ref_name }}
+  group: cocolon-system-context-step5-source-v3-${{ github.event.pull_request.head.ref || github.ref_name }}
   cancel-in-progress: true
 
 jobs:
@@ -29,12 +29,13 @@ jobs:
       EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
       TARGET_BRANCH: agent/cocolon-system-context-index-20260818
       PAYLOAD: .github/context-payloads/step5-source
+      FINAL_WORKFLOW_COPY: Cocolon_前提資料/system_context/.step5_standard_entry_workflow.yml
     steps:
       - name: Checkout exact bootstrap head
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-          fetch-depth: 0
+          fetch-depth: 1
 
       - name: Materialize and commit non-workflow Step 5 source
         shell: bash
@@ -58,9 +59,11 @@ jobs:
             Cocolon_前提資料/system_context/00_read_first.md
           git apply --check /tmp/step5-source.patch
           git apply /tmp/step5-source.patch
+          cp "$WORKFLOW" "$FINAL_WORKFLOW_COPY"
           cp /tmp/step5-bootstrap-workflow.yml "$WORKFLOW"
           chmod 0644 \
             "$WORKFLOW" \
+            "$FINAL_WORKFLOW_COPY" \
             tools/cocolon_context.py \
             tools/cocolon_context_prepare.py \
             tools/cocolon_context_publish_transport.py \
@@ -70,6 +73,7 @@ jobs:
             Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt \
             Cocolon_前提資料/system_context/00_read_first.md
           git add -A \
+            "$FINAL_WORKFLOW_COPY" \
             tools/cocolon_context.py \
             tools/cocolon_context_prepare.py \
             tools/cocolon_context_publish_transport.py \
