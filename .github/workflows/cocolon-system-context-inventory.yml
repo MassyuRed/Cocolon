@@ -1,10 +1,13 @@
 name: Cocolon System Context Step 5 provider introspection
-run-name: Inspect Step 5 providers @ ${{ github.sha }}
+run-name: Inspect Step 5 providers @ ${{ github.event.pull_request.head.sha || github.sha }}
 
 on:
   push:
     branches:
       - agent/cocolon-system-context-index-20260818
+    paths:
+      - .github/workflows/cocolon-system-context-inventory.yml
+  pull_request:
     paths:
       - .github/workflows/cocolon-system-context-inventory.yml
   workflow_dispatch:
@@ -24,7 +27,7 @@ jobs:
       - name: Checkout exact source
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.sha }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
 
       - name: Print provider APIs and canonical row schemas
