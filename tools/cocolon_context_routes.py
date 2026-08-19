@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
-"""Load the admitted Step 3 route graph source and apply bounded actual-source fixes."""
+'''Load admitted Step 3 source and close C1-C6 backend/test/domain context.'''
 from __future__ import annotations
 
+import argparse
 import base64
 import hashlib
 import io
@@ -82,8 +83,124 @@ if source_text.count(error_patch_old) != 1:
     raise RuntimeError("Step 3 zero-edge diagnostic patch preimage mismatch")
 source_text = source_text.replace(error_patch_old, error_patch_new, 1)
 
+# The admitted payload includes a script guard. Execute it under a non-main module
+# identity, then install the C1-C6 extension before invoking the original CLI.
+_loader_module_name = __name__
+globals()["__name__"] = "cocolon_context_routes_admitted_payload"
+try:
+    exec(
+        compile(source_text, str(PAYLOAD_DIR / SOURCE_MEMBER), "exec"),
+        globals(),
+        globals(),
+    )
+finally:
+    globals()["__name__"] = _loader_module_name
+
+_base_build_route_graph = build_route_graph
+_base_verify_route_graph = verify_route_graph
+
+C_PAYLOAD_PATH = ROOT / ".github" / "context-payloads" / "step3-c" / "payload.b64"
+C_ENCODED_SHA256 = "48be5aaba408a39dfbd3331268e107f15b854da0b07ec08da29561f35a4dcba0"
+C_SOURCE_SHA256 = "e03749be5161e6fcded6ca8d96fd7ca3c7dfc3c7e6170dad45c1902eb1433218"
+C_SOURCE_MEMBER = "tools/cocolon_context_routes_c_extension.py"
+
+c_encoded = C_PAYLOAD_PATH.read_bytes()
+if hashlib.sha256(c_encoded).hexdigest() != C_ENCODED_SHA256:
+    raise RuntimeError("Step 3 C1-C6 payload identity mismatch")
+c_archive = base64.b64decode(c_encoded, validate=True)
+with tarfile.open(fileobj=io.BytesIO(c_archive), mode="r:gz") as c_bundle:
+    c_member = c_bundle.extractfile(C_SOURCE_MEMBER)
+    if c_member is None:
+        raise RuntimeError(f"Step 3 C1-C6 source missing from payload: {C_SOURCE_MEMBER}")
+    c_source = c_member.read()
+if hashlib.sha256(c_source).hexdigest() != C_SOURCE_SHA256:
+    raise RuntimeError("Step 3 C1-C6 source identity mismatch")
 exec(
-    compile(source_text, str(PAYLOAD_DIR / SOURCE_MEMBER), "exec"),
+    compile(c_source, str(C_PAYLOAD_PATH.parent / C_SOURCE_MEMBER), "exec"),
     globals(),
     globals(),
 )
+
+
+def build_route_graph(
+    inventory_path: Path,
+    repo_roots: dict[str, Path],
+    code_index_dir: Path,
+    rn_helper: Path,
+    output_dir: Path,
+) -> dict[str, object]:
+    base_summary = _base_build_route_graph(
+        inventory_path,
+        repo_roots,
+        code_index_dir,
+        rn_helper,
+        output_dir,
+    )
+    # Preserve the adjudicated A/B contract before extending its canonical outputs.
+    _base_verify_route_graph(inventory_path, code_index_dir, output_dir)
+    return _c_extend_route_graph(
+        Path(inventory_path),
+        {str(key): Path(value) for key, value in repo_roots.items()},
+        Path(code_index_dir),
+        Path(output_dir),
+        dict(base_summary),
+    )
+
+
+def verify_route_graph(
+    inventory_path: Path,
+    code_index_dir: Path,
+    output_dir: Path,
+) -> dict[str, object]:
+    return _c_verify_extended(
+        Path(inventory_path),
+        Path(code_index_dir),
+        Path(output_dir),
+    )
+
+
+def _parse_repo_roots(values: list[str]) -> dict[str, Path]:
+    roots: dict[str, Path] = {}
+    for value in values:
+        key, separator, raw_path = value.partition("=")
+        if not separator or not key or not raw_path:
+            raise RouteGraphError(f"invalid --repo value: {value!r}")
+        if key in roots:
+            raise RouteGraphError(f"duplicate --repo key: {key}")
+        roots[key] = Path(raw_path).resolve()
+    return roots
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    subparsers = parser.add_subparsers(dest="command", required=True)
+
+    build_parser = subparsers.add_parser("build")
+    build_parser.add_argument("--inventory", required=True, type=Path)
+    build_parser.add_argument("--repo", action="append", default=[], required=True)
+    build_parser.add_argument("--code-index", required=True, type=Path)
+    build_parser.add_argument("--rn-helper", required=True, type=Path)
+    build_parser.add_argument("--output", required=True, type=Path)
+
+    verify_parser = subparsers.add_parser("verify")
+    verify_parser.add_argument("--inventory", required=True, type=Path)
+    verify_parser.add_argument("--code-index", required=True, type=Path)
+    verify_parser.add_argument("--output", required=True, type=Path)
+
+    args = parser.parse_args(argv)
+    if args.command == "build":
+        summary = build_route_graph(
+            args.inventory,
+            _parse_repo_roots(args.repo),
+            args.code_index,
+            args.rn_helper,
+            args.output,
+        )
+    else:
+        summary = verify_route_graph(args.inventory, args.code_index, args.output)
+    print(json.dumps(summary, ensure_ascii=False, sort_keys=True))
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

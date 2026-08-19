@@ -104,18 +104,22 @@ class RouteGraphTests(unittest.TestCase):
             self.assertIn("/items", paths)
             self.assertIn("/items/{param}", paths)
 
-    def test_build_verify_and_unresolved_retention(self) -> None:
+    def test_build_verify_and_c1_c6_closure(self) -> None:
         with tempfile.TemporaryDirectory() as raw:
             root = pathlib.Path(raw)
             cocolon = make_repo(root, "Cocolon", {
-                "lib/contracts.js": "export const ROUTE='/items';\n",
+                "lib/contracts.js": "export const ROUTE='/account/items';\n",
                 "lib/api.js": "import { apiGet } from './client';\nimport { ROUTE } from './contracts';\nexport function load(){ return apiGet(ROUTE); }\nexport function dynamic(path){ return apiGet(path); }\n",
                 "lib/client.js": "export function apiGet(){}\n",
-                "screens/ItemsScreen.js": "import { load } from '../lib/api';\nexport function ItemsScreen(){ return load(); }\n",
+                "screens/AccountItemsScreen.js": "import { load } from '../lib/api';\nexport function AccountItemsScreen(){ return load(); }\n",
             })
             api = make_repo(root, "mashos-api", {
-                "api/routes.py": "from fastapi import APIRouter\nrouter = APIRouter(prefix='/items')\n@router.get('')\ndef list_items(): return []\n@router.get('/{item_id}')\ndef detail(item_id: str): return {}\n",
+                "api/routes.py": "from fastapi import APIRouter\nfrom api.account_service import load_account_items\nfrom api.contracts import AccountItemsResponse\nrouter = APIRouter(prefix='/account/items')\n@router.get('', response_model=AccountItemsResponse)\nasync def list_items(): return await load_account_items()\n@router.get('/{item_id}')\ndef detail(item_id: str): return {}\n",
+                "api/account_service.py": "from api.account_store import fetch_account_items\nasync def load_account_items(): return await fetch_account_items()\n",
+                "api/account_store.py": "from supabase_client import sb_get\nasync def fetch_account_items(): return await sb_get('/rest/v1/account_items')\n",
+                "api/contracts.py": "from pydantic import BaseModel\nclass AccountItemsResponse(BaseModel):\n    items: list[str] = []\n",
                 "api/app.py": "from fastapi import FastAPI\nfrom api.routes import router\napp = FastAPI()\napp.include_router(router)\n",
+                "api/tests/contract/test_account_items_contract.py": "from api.routes import list_items\nROUTE='/account/items'\ndef test_contract(): assert list_items and ROUTE\n",
             })
             rows = inventory_rows(cocolon, "Cocolon") + inventory_rows(api, "mashos-api")
             inventory = root / "files.jsonl"
@@ -124,7 +128,11 @@ class RouteGraphTests(unittest.TestCase):
             code_index.mkdir()
             import_edges = [
                 {"repository_key": "Cocolon", "source_path": "lib/api.js", "resolved_target_path": "lib/contracts.js"},
-                {"repository_key": "Cocolon", "source_path": "screens/ItemsScreen.js", "resolved_target_path": "lib/api.js"},
+                {"repository_key": "Cocolon", "source_path": "screens/AccountItemsScreen.js", "resolved_target_path": "lib/api.js"},
+                {"repository_key": "mashos-api", "source_path": "api/routes.py", "resolved_target_path": "api/account_service.py"},
+                {"repository_key": "mashos-api", "source_path": "api/routes.py", "resolved_target_path": "api/contracts.py"},
+                {"repository_key": "mashos-api", "source_path": "api/account_service.py", "resolved_target_path": "api/account_store.py"},
+                {"repository_key": "mashos-api", "source_path": "api/tests/contract/test_account_items_contract.py", "resolved_target_path": "api/routes.py"},
             ]
             (code_index / "import_edges.jsonl").write_text("".join(json.dumps(row) + "\n" for row in import_edges), encoding="utf-8")
             summary = {"completion_claim": "STEP2_SCIP_AND_SYNTAX_INDEX_CONNECTED"}
@@ -139,13 +147,27 @@ class RouteGraphTests(unittest.TestCase):
                 HELPER,
                 output,
             )
+            self.assertEqual(result["completion_claim"], "STEP3_RN_API_BACKEND_TEST_ROUTE_GRAPH_CONNECTED")
             self.assertGreater(result["cross_repository_edge_count"], 0)
             self.assertGreater(result["unresolved_rn_call_count"], 0)
+            self.assertGreater(result["backend_call_edge_count"], 0)
+            self.assertGreater(result["protected_test_edge_count"], 0)
+            self.assertEqual(result["backend_owner_coverage_count"], result["rn_connected_route_count"])
+            self.assertEqual(result["test_contract_coverage_count"], result["api_route_count"])
+            self.assertEqual(result["visible_consumer_coverage_count"], result["rn_call_count"])
             calls = routes.read_jsonl(output / "rn_calls.jsonl")
             matched = [call for call in calls if call["connection_status"].startswith("MATCHED")]
-            self.assertTrue(any("screens/ItemsScreen.js" in call["consumer_files"] for call in matched))
+            self.assertTrue(any("screens/AccountItemsScreen.js" in call["visible_consumer_files"] for call in matched))
+            closures = routes.read_jsonl(output / "route_owner_closures.jsonl")
+            owner_roles = {node["node_role"] for row in closures for node in row["nodes"]}
+            self.assertIn("APPLICATION_SERVICE", owner_roles)
+            self.assertIn("STORE_OR_REPOSITORY", owner_roles)
+            self.assertIn("DB_TABLE_REFERENCE", owner_roles)
+            domains = routes.read_jsonl(output / "file_domain_assignments.jsonl")
+            route_domain = next(row for row in domains if row["path"] == "api/routes.py")
+            self.assertIn("account", route_domain["domain_tags"])
             verified = routes.verify_route_graph(inventory, code_index, output)
-            self.assertEqual(verified["completion_claim"], "STEP3_RN_API_CROSS_REPOSITORY_ROUTE_GRAPH_CONNECTED")
+            self.assertEqual(verified["completion_claim"], "STEP3_RN_API_BACKEND_TEST_ROUTE_GRAPH_CONNECTED")
 
 
 if __name__ == "__main__":

@@ -128,10 +128,12 @@ class NestedFastApiRouteTests(unittest.TestCase):
                 output,
             )
             self.assertGreater(result["cross_repository_edge_count"], 0)
+            self.assertEqual(result["backend_owner_coverage_count"], 1)
+            self.assertEqual(result["test_contract_coverage_count"], result["api_route_count"])
             verified = routes.verify_route_graph(inventory, code_index, output)
             self.assertEqual(
                 verified["completion_claim"],
-                "STEP3_RN_API_CROSS_REPOSITORY_ROUTE_GRAPH_CONNECTED",
+                "STEP3_RN_API_BACKEND_TEST_ROUTE_GRAPH_CONNECTED",
             )
 
 
