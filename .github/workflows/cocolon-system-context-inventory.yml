@@ -1,22 +1,23 @@
-name: Cocolon system context API consumer subject identity repair
-run-name: Cocolon system context subject identity fix @ ${{ github.sha }}
+name: Cocolon system context identity diagnostic
+run-name: Cocolon system context identity diagnostic @ ${{ github.sha }}
 
 on:
   pull_request:
     paths:
       - .github/workflows/cocolon-system-context-inventory.yml
+      - .github/context-payloads/step3-c/inspect_identity_contract.py
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: cocolon-system-context-${{ github.event.pull_request.head.ref || github.ref_name }}
   cancel-in-progress: true
 
 jobs:
-  patch-and-test:
+  inspect:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 10
     steps:
       - name: Checkout Cocolon context branch
         uses: actions/checkout@v4
@@ -24,48 +25,8 @@ jobs:
           ref: agent/cocolon-system-context-index-20260818
           fetch-depth: 0
 
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Set up Node 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-
-      - name: Apply bounded subject identity repair and run regression
+      - name: Print bounded identity contract source context
         shell: bash
         run: |
           set -euo pipefail
-          npm install -g --no-audit --no-fund typescript@5.2.2
-          export NODE_PATH="$(npm root -g)"
-
-          python3 .github/context-payloads/step3-c/subject_id_fix.py
-
-          node --check tools/cocolon_context_ts_syntax.cjs
-          node --check tools/cocolon_context_ts_routes.cjs
-          python3 -m py_compile \
-            tools/cocolon_context_inventory.py \
-            tools/cocolon_context_code_index.py \
-            tools/cocolon_context_routes.py \
-            tools/cocolon_context_publish_transport.py \
-            tests/cocolon_context/test_routes.py
-
-          python3 -m unittest tests/cocolon_context/test_inventory.py -v
-          python3 -m unittest tests/cocolon_context/test_code_index.py -v
-          python3 -m unittest tests/cocolon_context/test_routes.py -v
-          python3 -m unittest tests/cocolon_context/test_routes_nested_registration.py -v
-          python3 -m unittest tests/cocolon_context/test_publication_transport.py -v
-          git diff --check
-
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -- \
-            .github/context-payloads/step3-c/payload.b64 \
-            .github/context-payloads/step3-c/full_workflow_before_subject_fix.yml \
-            tools/cocolon_context_routes.py \
-            tests/cocolon_context/test_routes.py
-          git diff --cached --check
-          git commit -m "fix(context): preserve unresolved API route subject identity [skip ci]"
-          git push origin "HEAD:agent/cocolon-system-context-index-20260818"
+          python3 .github/context-payloads/step3-c/inspect_identity_contract.py
