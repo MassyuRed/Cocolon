@@ -51,6 +51,9 @@ jobs:
   build-and-publish:
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    env:
+      SOURCE_BRANCH: ${{ github.event.pull_request.head.ref || github.ref_name }}
+      SOURCE_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
     steps:
       - name: Checkout Cocolon source branch
         id: checkout_cocolon
@@ -312,11 +315,11 @@ jobs:
           fi
           GENERATED_PARENT="$(git rev-parse "${GENERATED_COMMIT}^")"
           GENERATED_TREE="$(git rev-parse "${GENERATED_COMMIT}^{tree}")"
-          test "$GENERATED_PARENT" = "$GITHUB_SHA"
-          git push origin "HEAD:${GITHUB_REF_NAME}"
+          test "$GENERATED_PARENT" = "$SOURCE_COMMIT"
+          git push origin "HEAD:${SOURCE_BRANCH}"
           git fetch --no-tags origin \
-            "+refs/heads/${GITHUB_REF_NAME}:refs/remotes/origin/${GITHUB_REF_NAME}"
-          REMOTE_COMMIT="$(git rev-parse "refs/remotes/origin/${GITHUB_REF_NAME}")"
+            "+refs/heads/${SOURCE_BRANCH}:refs/remotes/origin/${SOURCE_BRANCH}"
+          REMOTE_COMMIT="$(git rev-parse "refs/remotes/origin/${SOURCE_BRANCH}")"
           test "$REMOTE_COMMIT" = "$GENERATED_COMMIT"
           rm -rf /tmp/cocolon-system-context-remote
           git worktree add --detach /tmp/cocolon-system-context-remote "$REMOTE_COMMIT"
@@ -368,10 +371,10 @@ jobs:
           record = {
               "schema_version": "cocolon.system_context.workflow_failure_stage.v1",
               "repository": os.environ["GITHUB_REPOSITORY"],
-              "branch": os.environ["GITHUB_REF_NAME"],
+              "branch": os.environ["SOURCE_BRANCH"],
               "run_id": int(os.environ["GITHUB_RUN_ID"]),
               "run_attempt": int(os.environ["GITHUB_RUN_ATTEMPT"]),
-              "trigger_sha": os.environ["GITHUB_SHA"],
+              "trigger_sha": os.environ["SOURCE_COMMIT"],
               "worktree_head_before_reset": subprocess.check_output(
                   ["git", "rev-parse", "HEAD"], text=True
               ).strip(),
@@ -386,7 +389,7 @@ jobs:
               encoding="utf-8",
           )
           PY
-          git reset --hard "$GITHUB_SHA"
+          git reset --hard "$SOURCE_COMMIT"
           git clean -fd -- Cocolon_前提資料/system_context/current/cmee_working
           mkdir -p "$(dirname "$DIAG")"
           cp "$FAILURE_JSON" "$DIAG"
@@ -395,4 +398,4 @@ jobs:
           git add -- "$DIAG"
           git diff --cached --check
           git commit -m "docs(context): record workflow failure stage [skip ci]"
-          git push origin "HEAD:${GITHUB_REF_NAME}"
+          git push origin "HEAD:${SOURCE_BRANCH}"
