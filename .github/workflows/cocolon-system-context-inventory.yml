@@ -1,11 +1,11 @@
-name: Cocolon system context Step 3 C static profile
-run-name: Cocolon system context C static profile @ ${{ github.event.pull_request.head.sha || github.sha }}
+name: Cocolon system context Step 3 C backend traversal inspection
+run-name: Cocolon system context backend preimage @ ${{ github.event.pull_request.head.sha || github.sha }}
 
 on:
   pull_request:
     paths:
       - .github/workflows/cocolon-system-context-inventory.yml
-      - .github/context-payloads/step3-c/profile_extension_static.py
+      - .github/context-payloads/step3-c/inspect_backend_perf_source.py
       - .github/context-payloads/step3-c/payload.b64
   workflow_dispatch:
 
@@ -17,7 +17,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  static-profile:
+  inspect-backend-preimage:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -27,8 +27,8 @@ jobs:
           ref: agent/cocolon-system-context-index-20260818
           fetch-depth: 0
 
-      - name: Inspect bounded C traversal source
+      - name: Print bounded backend traversal preimage
         shell: bash
         run: |
           set -euo pipefail
-          python3 .github/context-payloads/step3-c/profile_extension_static.py
+          python3 .github/context-payloads/step3-c/inspect_backend_perf_source.py
