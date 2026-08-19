@@ -44,6 +44,6 @@ jobs:
           test "$(tar -tzf /tmp/c.tar.gz | LC_ALL=C sort | wc -l)" = 7
           r=/tmp/c/_bootstrap/bootstrap_run.sh
           echo '077c03832c7d17c4afd7c415a2fcca6332b5056615c7b33cf509d5a4a5581271  /tmp/c/_bootstrap/bootstrap_run.sh' | sha256sum -c -
-          sed -i '/tools\/cocolon_context_routes.py \\$/s/ \\$//' "$r"
+          sed -i '/git add -A --/,/git diff --cached --check/{/tools\/cocolon_context_routes.py \\$/s/ \\$//}' "$r"
           bash -n "$r"
           GITHUB_SHA="$(git rev-parse HEAD)" GITHUB_REF_NAME=agent/cocolon-system-context-index-20260818 bash "$r" /tmp/c
