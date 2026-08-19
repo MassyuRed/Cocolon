@@ -2,11 +2,6 @@ name: Cocolon System Context Step 5 provider introspection
 run-name: Inspect Step 5 providers @ ${{ github.event.pull_request.head.sha || github.sha }}
 
 on:
-  push:
-    branches:
-      - agent/cocolon-system-context-index-20260818
-    paths:
-      - .github/workflows/cocolon-system-context-inventory.yml
   pull_request:
     paths:
       - .github/workflows/cocolon-system-context-inventory.yml
@@ -21,6 +16,7 @@ concurrency:
 
 jobs:
   inspect:
+    if: github.event_name == 'workflow_dispatch' || github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
