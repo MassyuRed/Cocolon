@@ -1,5 +1,5 @@
-name: Cocolon system context Step 4 bootstrap
-run-name: Cocolon Step 4 bootstrap @ ${{ github.event.pull_request.head.sha || github.sha }}
+name: Cocolon system context Step 4 bootstrap continuation
+run-name: Cocolon Step 4 bootstrap continuation @ ${{ github.event.pull_request.head.sha || github.sha }}
 
 on:
   pull_request:
@@ -72,6 +72,8 @@ jobs:
               members = [member for member in archive.getmembers() if member.isfile()]
               assert {member.name for member in members} == expected
               for member in members:
+                  if member.name == ".github/workflows/cocolon-system-context-step4.yml":
+                      continue
                   relative = pathlib.PurePosixPath(member.name)
                   assert not relative.is_absolute()
                   assert all(part not in {"", ".", ".."} for part in relative.parts)
@@ -85,7 +87,7 @@ jobs:
           test -f tools/cocolon_context_task.py
           test -f tests/cocolon_context/test_task_context.py
           test -f Cocolon_前提資料/system_context/task_profiles.json
-          grep -q "name: Cocolon system context Step 4 actual" .github/workflows/cocolon-system-context-step4.yml
+          grep -q "name: Cocolon system context Step 4 bootstrap continuation" .github/workflows/cocolon-system-context-step4.yml
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
@@ -113,13 +115,12 @@ jobs:
           git config core.quotePath false
           git rm -r -- .github/context-payloads/step4-bootstrap
           git add -- \
-            .github/workflows/cocolon-system-context-step4.yml \
             tools/cocolon_context.py \
             tools/cocolon_context_task.py \
             tests/cocolon_context/test_task_context.py \
             Cocolon_前提資料/system_context/task_profiles.json
-          test "$(git diff --cached --name-only | wc -l)" = "9"
-          test -z "$(git diff --cached --name-only | grep -v -E '^(\.github/workflows/cocolon-system-context-step4\.yml|\.github/context-payloads/step4-bootstrap/part[0-9][0-9]|tools/cocolon_context\.py|tools/cocolon_context_task\.py|tests/cocolon_context/test_task_context\.py|Cocolon_前提資料/system_context/task_profiles\.json)$' || true)"
+          test "$(git diff --cached --name-only | wc -l)" = "8"
+          test -z "$(git diff --cached --name-only | grep -v -E '^(\.github/context-payloads/step4-bootstrap/part[0-9][0-9]|tools/cocolon_context\.py|tools/cocolon_context_task\.py|tests/cocolon_context/test_task_context\.py|Cocolon_前提資料/system_context/task_profiles\.json)$' || true)"
           git diff --cached --check
           git commit -m "feat(context): add Step 4 task context compiler [skip ci]"
           IMPLEMENTATION_COMMIT="$(git rev-parse HEAD)"
