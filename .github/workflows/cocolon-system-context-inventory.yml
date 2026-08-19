@@ -1,97 +1,125 @@
-name: Cocolon System Context Step 5 verified source correction
-run-name: Correct Step 5 source @ ${{ github.event.pull_request.head.sha || github.sha }}
+name: Cocolon System Context Step 5 provider introspection
+run-name: Inspect Step 5 providers @ ${{ github.sha }}
 
 on:
-  pull_request:
+  push:
+    branches:
+      - agent/cocolon-system-context-index-20260818
     paths:
       - .github/workflows/cocolon-system-context-inventory.yml
-      - .github/context-payloads/step5-correction/**
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
-  group: cocolon-system-context-step5-correction-v1-${{ github.event.pull_request.head.ref || github.ref_name }}
+  group: cocolon-system-context-step5-introspection
   cancel-in-progress: true
 
 jobs:
-  apply-correction:
-    if: github.event_name == 'workflow_dispatch' || github.actor != 'github-actions[bot]'
+  inspect:
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    env:
-      EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
-      CORRECTION_BASE_COMMIT: d64382472b9edd2623ed86f396ac38cc89b098a2
-      TARGET_BRANCH: agent/cocolon-system-context-index-20260818
-      PAYLOAD: .github/context-payloads/step5-correction
-      FINAL_WORKFLOW_COPY: Cocolon_前提資料/system_context/.step5_corrected_standard_entry_workflow.yml
     steps:
-      - name: Checkout exact correction source
+      - name: Checkout exact source
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          ref: ${{ github.sha }}
           fetch-depth: 0
 
-      - name: Apply exact4 correction and publish non-workflow source
+      - name: Print provider APIs and canonical row schemas
         shell: bash
         run: |
           set -euo pipefail
-          WORKFLOW=.github/workflows/cocolon-system-context-inventory.yml
-          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
-          test -d "$PAYLOAD"
-          test "$(git rev-parse "${CORRECTION_BASE_COMMIT}^{commit}")" = "$CORRECTION_BASE_COMMIT"
-          git config core.quotePath false
-          cp "$WORKFLOW" /tmp/step5-correction-bootstrap.yml
-          cat "$PAYLOAD"/part* | base64 -d | gzip -d > /tmp/step5-correction.patch
-          echo "2bf3b2c570d3171abce908085d12698f05d3f11ccc75938374b058e501a78147  /tmp/step5-correction.patch" | sha256sum -c -
-          git show "${CORRECTION_BASE_COMMIT}:${WORKFLOW}" > "$WORKFLOW"
-          git apply --check /tmp/step5-correction.patch
-          git apply /tmp/step5-correction.patch
-          cp "$WORKFLOW" "$FINAL_WORKFLOW_COPY"
-          cp /tmp/step5-correction-bootstrap.yml "$WORKFLOW"
-          chmod 0644 \
-            "$WORKFLOW" \
-            "$FINAL_WORKFLOW_COPY" \
-            tests/cocolon_context/test_prepare.py \
-            tools/cocolon_context.py \
-            tools/cocolon_context_prepare.py
-          python3 -m py_compile \
-            tools/cocolon_context.py \
-            tools/cocolon_context_prepare.py \
-            tests/cocolon_context/test_prepare.py
-          python3 -m unittest \
-            tests/cocolon_context/test_prepare.py \
-            tests/cocolon_context/test_publication_transport_nested.py \
-            -v
-          git add -A \
-            "$FINAL_WORKFLOW_COPY" \
-            tests/cocolon_context/test_prepare.py \
-            tools/cocolon_context.py \
-            tools/cocolon_context_prepare.py
-          git rm -r "$PAYLOAD"
-          test "$(git diff --cached --name-only -- "$WORKFLOW" | wc -l)" -eq 0
-          git diff --cached --check
           python3 - <<'PY'
-          import subprocess
-          expected = {
-              'Cocolon_前提資料/system_context/.step5_corrected_standard_entry_workflow.yml',
-              'tests/cocolon_context/test_prepare.py',
-              'tools/cocolon_context.py',
-              'tools/cocolon_context_prepare.py',
-              '.github/context-payloads/step5-correction/part00',
-              '.github/context-payloads/step5-correction/part01',
-              '.github/context-payloads/step5-correction/part02',
-              '.github/context-payloads/step5-correction/part03',
-          }
-          actual = set(subprocess.check_output(
-              ['git', 'diff', '--cached', '--name-only'], text=True
-          ).splitlines())
-          assert actual == expected, (sorted(actual), sorted(expected))
+          from __future__ import annotations
+
+          import inspect
+          import json
+          from pathlib import Path
+
+          from tools import cocolon_context_code_index as code_index
+          from tools import cocolon_context_routes as routes
+          from tools import cocolon_context_prepare as prepare
+
+          root = Path("Cocolon_前提資料/system_context/current/cmee_working")
+
+          def display_value(value):
+              if isinstance(value, str):
+                  return value if len(value) <= 180 else value[:177] + "..."
+              if isinstance(value, list):
+                  return [display_value(item) for item in value[:4]]
+              if isinstance(value, dict):
+                  return {key: display_value(value[key]) for key in list(value)[:8]}
+              return value
+
+          def first_row(relative: str):
+              direct = root / relative
+              if direct.is_file():
+                  with direct.open("r", encoding="utf-8") as handle:
+                      for line in handle:
+                          if line.strip():
+                              return json.loads(line)
+              transport = json.loads((root / "publication_transport.json").read_text(encoding="utf-8"))
+              logical = {row["logical_path"]: row for row in transport["logical_files"]}
+              row = logical[relative]
+              first_part = root / row["parts"][0]["path"]
+              with first_part.open("r", encoding="utf-8") as handle:
+                  for line in handle:
+                      if line.strip():
+                          return json.loads(line)
+              raise RuntimeError(relative)
+
+          def module_api(label, module):
+              print(f"=== MODULE_API {label} ===")
+              for name, value in sorted(vars(module).items()):
+                  if name.startswith("_"):
+                      continue
+                  if inspect.isfunction(value) and value.__module__ == module.__name__:
+                      try:
+                          signature = inspect.signature(value)
+                      except (TypeError, ValueError):
+                          signature = "<unknown>"
+                      print(f"FUNCTION {name}{signature}")
+                  elif inspect.isclass(value) and value.__module__ == module.__name__:
+                      print(f"CLASS {name}")
+
+          module_api("code_index", code_index)
+          module_api("routes", routes)
+          module_api("prepare", prepare)
+          print("=== PLAN_REFRESH_SOURCE ===")
+          print(inspect.getsource(prepare.plan_refresh))
+
+          paths = [
+              "code_index/file_coverage.jsonl",
+              "code_index/import_edges.jsonl",
+              "code_index/symbols.jsonl",
+              "code_index/references.jsonl",
+              "route_graph/rn_calls.jsonl",
+              "route_graph/api_routes.jsonl",
+              "route_graph/cross_repository_route_edges.jsonl",
+              "route_graph/api_model_edges.jsonl",
+              "route_graph/backend_call_edges.jsonl",
+              "route_graph/route_owner_closures.jsonl",
+              "route_graph/test_contract_edges.jsonl",
+              "route_graph/file_domain_assignments.jsonl",
+          ]
+          print("=== CANONICAL_ROW_SCHEMAS ===")
+          for relative in paths:
+              row = first_row(relative)
+              print(json.dumps({
+                  "path": relative,
+                  "keys": sorted(row),
+                  "types": {key: type(value).__name__ for key, value in sorted(row.items())},
+                  "sample": {key: display_value(value) for key, value in sorted(row.items())},
+              }, ensure_ascii=False, sort_keys=True))
+
+          for relative in (
+              "code_index/code_index_manifest.json",
+              "code_index/code_index_summary.json",
+              "route_graph/route_graph_manifest.json",
+              "route_graph/route_graph_summary.json",
+          ):
+              value = json.loads((root / relative).read_text(encoding="utf-8"))
+              print("MANIFEST", relative, json.dumps(value, ensure_ascii=False, sort_keys=True))
           PY
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "fix(system-context): apply verified Step 5 source correction"
-          git fetch --no-tags origin "+refs/heads/${TARGET_BRANCH}:refs/remotes/origin/${TARGET_BRANCH}"
-          test "$(git rev-parse refs/remotes/origin/${TARGET_BRANCH})" = "$EXPECTED_HEAD"
-          git push origin "HEAD:${TARGET_BRANCH}"
