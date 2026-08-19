@@ -52,4 +52,82 @@ jobs:
           sed -i '/^node --check tools\/cocolon_context_ts_syntax.cjs/i python3 /tmp/loader_fix.py' "$r"
           sed -i '/^node --check tools\/cocolon_context_ts_syntax.cjs/i python3 /tmp/route_identity_fix.py' "$r"
           bash -n "$r"
-          GITHUB_SHA="$(git rev-parse HEAD)" GITHUB_REF_NAME=agent/cocolon-system-context-index-20260818 bash "$r" /tmp/c
+
+          git() {
+            if [[ "${1:-}" == "push" ]]; then
+              local stage=/tmp/cocolon-step3-c-source
+              rm -rf "$stage"
+              mkdir -p "$stage"
+              local files=(
+                .github/context-payloads/step3-c/payload.b64
+                .github/workflows/cocolon-system-context-inventory.yml
+                Cocolon_前提資料/system_context/Cocolon_SystemContext_ImplementationContract_20260818.md
+                tests/cocolon_context/test_routes.py
+                tests/cocolon_context/test_routes_nested_registration_base.py
+                tools/cocolon_context_routes.py
+              )
+              local file
+              for file in "${files[@]}"; do
+                test -f "$file"
+                mkdir -p "$stage/$(dirname "$file")"
+                cp "$file" "$stage/$file"
+              done
+              cat > "$stage/deleted_paths.txt" <<'EOF'
+          .github/context-payloads/step3-c-bootstrap/install.sh
+          .github/context-payloads/step3-c-bootstrap/loader_fix.py
+          .github/context-payloads/step3-c-bootstrap/part000
+          .github/context-payloads/step3-c-bootstrap/part001
+          .github/context-payloads/step3-c-bootstrap/part002
+          .github/context-payloads/step3-c-bootstrap/part003
+          .github/context-payloads/step3-c-bootstrap/part004
+          .github/context-payloads/step3-c-bootstrap/part005
+          .github/context-payloads/step3-c-bootstrap/part006
+          .github/context-payloads/step3-c-bootstrap/part007
+          .github/context-payloads/step3-c-bootstrap/part008
+          .github/context-payloads/step3-c-bootstrap/part009
+          .github/context-payloads/step3-c-bootstrap/part010
+          .github/context-payloads/step3-c-bootstrap/part011
+          .github/context-payloads/step3-c-bootstrap/part012
+          .github/context-payloads/step3-c-bootstrap/part013
+          .github/context-payloads/step3-c-bootstrap/part014
+          .github/context-payloads/step3-c-bootstrap/part015
+          .github/context-payloads/step3-c-bootstrap/part016
+          .github/context-payloads/step3-c-bootstrap/part017
+          .github/context-payloads/step3-c-bootstrap/part018
+          .github/context-payloads/step3-c-bootstrap/part019
+          .github/context-payloads/step3-c-bootstrap/part020a
+          .github/context-payloads/step3-c-bootstrap/part020b
+          .github/context-payloads/step3-c-bootstrap/route_identity_fix.py
+          .github/workflows/cocolon-system-context-step3c-bootstrap.yml
+          EOF
+              python3 - <<'PY'
+          import json
+          import pathlib
+          import subprocess
+          stage = pathlib.Path('/tmp/cocolon-step3-c-source')
+          metadata = {
+              'local_commit': subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip(),
+              'local_tree': subprocess.check_output(['git', 'rev-parse', 'HEAD^{tree}'], text=True).strip(),
+              'local_parent': subprocess.check_output(['git', 'rev-parse', 'HEAD^'], text=True).strip(),
+              'name_status': subprocess.check_output(['git', 'show', '--format=', '--name-status', 'HEAD'], text=True).splitlines(),
+          }
+          (stage / 'source_commit_metadata.json').write_text(
+              json.dumps(metadata, ensure_ascii=False, indent=2, sort_keys=True) + '\n',
+              encoding='utf-8',
+          )
+          PY
+              tar -czf /tmp/cocolon-step3-c-source.tar.gz -C "$stage" .
+              sha256sum /tmp/cocolon-step3-c-source.tar.gz
+              exit 0
+            fi
+            command git "$@"
+          }
+          export -f git
+          GITHUB_SHA="$(command git rev-parse HEAD)" GITHUB_REF_NAME=agent/cocolon-system-context-index-20260818 bash "$r" /tmp/c
+      - name: Upload materialized Step 3 C source
+        uses: actions/upload-artifact@v4
+        with:
+          name: cocolon-step3-c-source
+          path: /tmp/cocolon-step3-c-source.tar.gz
+          if-no-files-found: error
+          retention-days: 1
