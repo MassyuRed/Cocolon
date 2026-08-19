@@ -1,0 +1,125 @@
+name: Cocolon system context RN unresolved reason repair
+run-name: Cocolon RN unresolved reason repair @ ${{ github.event.pull_request.head.sha || github.sha }}
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/cocolon-system-context-rn-reason-repair.yml
+      - .github/context-payloads/step3-c/rn_unresolved_reason_fix.py
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: cocolon-system-context-rn-reason-repair-${{ github.event.pull_request.head.ref || github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  repair-test-materialize-dispatch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout Cocolon context branch
+        uses: actions/checkout@v4
+        with:
+          ref: agent/cocolon-system-context-index-20260818
+          fetch-depth: 0
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Apply canonical RN unresolved reason synchronization
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 .github/context-payloads/step3-c/rn_unresolved_reason_fix.py \
+            | tee /tmp/rn-unresolved-reason-repair.json
+
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          result = json.loads(Path('/tmp/rn-unresolved-reason-repair.json').read_text(encoding='utf-8').splitlines()[-1])
+          workflow = Path('.github/workflows/cocolon-system-context-inventory.yml')
+          text = workflow.read_text(encoding='utf-8')
+          replacements = (
+              ('26bdc94df68fddc893fa408ad7b05d506ee10ce25c1f840b2b27cff93482056d', result['encoded_payload_sha256']),
+              ('97b406f62a71e621281536cf5e0c6712482615b63e189b734e3d54cde8272418', result['extension_source_sha256']),
+          )
+          for old, new in replacements:
+              if text.count(old) != 1:
+                  raise SystemExit(f'D workflow payload preimage mismatch: {old}')
+              text = text.replace(old, new, 1)
+          workflow.write_text(text, encoding='utf-8')
+          print(json.dumps({
+              'd_workflow_payload_sha256': result['encoded_payload_sha256'],
+              'd_workflow_source_sha256': result['extension_source_sha256'],
+          }, sort_keys=True))
+          PY
+
+      - name: Run focused and full regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          npm install -g --no-audit --no-fund typescript@5.2.2
+          export NODE_PATH="$(npm root -g)"
+          node --check tools/cocolon_context_ts_syntax.cjs
+          node --check tools/cocolon_context_ts_routes.cjs
+          python3 -m py_compile \
+            tools/cocolon_context_inventory.py \
+            tools/cocolon_context_code_index.py \
+            tools/cocolon_context_routes.py \
+            tools/cocolon_context_publish_transport.py \
+            tests/cocolon_context/test_routes.py
+          python3 -m unittest tests/cocolon_context/test_inventory.py -v
+          python3 -m unittest tests/cocolon_context/test_code_index.py -v
+          python3 -m unittest tests/cocolon_context/test_routes.py -v
+          python3 -m unittest tests/cocolon_context/test_routes_nested_registration.py -v
+          python3 -m unittest tests/cocolon_context/test_publication_transport.py -v
+          git diff --check
+
+      - name: Materialize source fix and dispatch D finalization
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          rm -f \
+            .github/context-payloads/step3-c/rn_unresolved_reason_fix.py \
+            .github/workflows/cocolon-system-context-rn-reason-repair.yml \
+            Cocolon_前提資料/system_context/current/cmee_working/workflow_last_failure.json
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A -- \
+            .github/context-payloads/step3-c \
+            .github/workflows/cocolon-system-context-inventory.yml \
+            .github/workflows/cocolon-system-context-rn-reason-repair.yml \
+            tools/cocolon_context_routes.py \
+            tests/cocolon_context/test_routes.py \
+            Cocolon_前提資料/system_context/current/cmee_working/workflow_last_failure.json
+          git diff --cached --check
+          git commit -m "fix(context): synchronize explicit RN unresolved reasons [skip ci]"
+          SOURCE_COMMIT="$(git rev-parse HEAD)"
+          SOURCE_TREE="$(git rev-parse HEAD^{tree})"
+          git push origin "HEAD:agent/cocolon-system-context-index-20260818"
+          git fetch --no-tags origin \
+            "+refs/heads/agent/cocolon-system-context-index-20260818:refs/remotes/origin/agent/cocolon-system-context-index-20260818"
+          test "$(git rev-parse refs/remotes/origin/agent/cocolon-system-context-index-20260818)" = "$SOURCE_COMMIT"
+
+          gh workflow run cocolon-system-context-inventory.yml \
+            --repo MassyuRed/Cocolon \
+            --ref agent/cocolon-system-context-index-20260818
+
+          printf 'SOURCE_MATERIALIZATION_COMMIT=%s\n' "$SOURCE_COMMIT"
+          printf 'SOURCE_MATERIALIZATION_TREE=%s\n' "$SOURCE_TREE"
+          printf 'D_FINALIZATION_DISPATCHED=true\n'
