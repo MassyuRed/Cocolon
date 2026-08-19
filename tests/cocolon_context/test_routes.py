@@ -256,5 +256,128 @@ class RouteGraphTests(unittest.TestCase):
             )
 
 
+    def test_shared_backend_definition_resolution_is_cached_across_routes(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            root = pathlib.Path(raw)
+            cocolon = make_repo(root, "Cocolon", {
+                "lib/api.js": (
+                    "import { apiGet } from './client';\n"
+                    "export function loadA(){ return apiGet('/items/a'); }\n"
+                    "export function loadB(){ return apiGet('/items/b'); }\n"
+                ),
+                "lib/client.js": "export function apiGet(){}\n",
+                "screens/ItemsScreen.js": (
+                    "import { loadA, loadB } from '../lib/api';\n"
+                    "export function ItemsScreen(){ return [loadA(), loadB()]; }\n"
+                ),
+            })
+            api = make_repo(root, "mashos-api", {
+                "api/routes.py": (
+                    "from fastapi import APIRouter\n"
+                    "from api.service import shared_service\n"
+                    "router = APIRouter()\n"
+                    "@router.get('/items/a')\n"
+                    "async def items_a(): return await shared_service()\n"
+                    "@router.get('/items/b')\n"
+                    "async def items_b(): return await shared_service()\n"
+                ),
+                "api/service.py": (
+                    "from api.store import load_items\n"
+                    "async def shared_service(): return await load_items()\n"
+                ),
+                "api/store.py": (
+                    "from supabase_client import sb_get\n"
+                    "async def load_items(): return await sb_get('/rest/v1/items')\n"
+                ),
+                "api/app.py": (
+                    "from fastapi import FastAPI\n"
+                    "from api.routes import router\n"
+                    "app = FastAPI()\n"
+                    "app.include_router(router)\n"
+                ),
+            })
+            rows = inventory_rows(cocolon, "Cocolon") + inventory_rows(api, "mashos-api")
+            inventory = root / "files.jsonl"
+            inventory.write_text(
+                "".join(json.dumps(row, sort_keys=True) + "\n" for row in rows),
+                encoding="utf-8",
+            )
+            code_index = root / "code_index"
+            code_index.mkdir()
+            import_edges = [
+                {
+                    "repository_key": "Cocolon",
+                    "source_path": "screens/ItemsScreen.js",
+                    "resolved_target_path": "lib/api.js",
+                },
+                {
+                    "repository_key": "mashos-api",
+                    "source_path": "api/routes.py",
+                    "resolved_target_path": "api/service.py",
+                },
+                {
+                    "repository_key": "mashos-api",
+                    "source_path": "api/service.py",
+                    "resolved_target_path": "api/store.py",
+                },
+            ]
+            (code_index / "import_edges.jsonl").write_text(
+                "".join(json.dumps(row) + "\n" for row in import_edges),
+                encoding="utf-8",
+            )
+            (code_index / "code_index_summary.json").write_text(
+                json.dumps({"completion_claim": "STEP2_SCIP_AND_SYNTAX_INDEX_CONNECTED"}),
+                encoding="utf-8",
+            )
+            (code_index / "code_index_manifest.json").write_text(
+                json.dumps({"inventory_sha256": hashlib.sha256(inventory.read_bytes()).hexdigest()}),
+                encoding="utf-8",
+            )
+
+            original = routes._c_calls_for_definition
+            counts: dict[tuple[str, str, str, int], int] = {}
+
+            def counting(definition):
+                identity = (
+                    str(definition.get("repo") or ""),
+                    str(definition.get("path") or ""),
+                    str(definition.get("qualname") or definition.get("name") or ""),
+                    int(definition.get("line") or 0),
+                )
+                counts[identity] = counts.get(identity, 0) + 1
+                return original(definition)
+
+            routes._c_calls_for_definition = counting
+            try:
+                output = root / "route_graph"
+                result = routes.build_route_graph(
+                    inventory,
+                    {"Cocolon": cocolon, "mashos-api": api},
+                    code_index,
+                    HELPER,
+                    output,
+                )
+            finally:
+                routes._c_calls_for_definition = original
+
+            self.assertEqual(
+                "STEP3_RN_API_BACKEND_TEST_ROUTE_GRAPH_CONNECTED",
+                result["completion_claim"],
+            )
+            shared_counts = [
+                count
+                for (repo, path, symbol, _line), count in counts.items()
+                if repo == "mashos-api"
+                and path == "api/service.py"
+                and symbol.endswith("shared_service")
+            ]
+            self.assertEqual([1], shared_counts)
+            verified = routes.verify_route_graph(inventory, code_index, output)
+            self.assertEqual(
+                "STEP3_RN_API_BACKEND_TEST_ROUTE_GRAPH_CONNECTED",
+                verified["completion_claim"],
+            )
+
+
 if __name__ == "__main__":
     unittest.main()
