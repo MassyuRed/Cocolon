@@ -21,13 +21,30 @@ on:
       - .github/context-payloads/step3/**
       - .github/context-payloads/step3-c/**
       - .github/context-payloads/step3-ts-routes/**
+  pull_request:
+    paths:
+      - tools/cocolon_context_inventory.py
+      - tools/cocolon_context_code_index.py
+      - tools/cocolon_context_routes.py
+      - tools/cocolon_context_routes_*.py
+      - tools/cocolon_context_publish_transport.py
+      - tools/cocolon_context_ts_syntax.cjs
+      - tools/cocolon_context_ts_routes.cjs
+      - tests/cocolon_context/**
+      - Cocolon_前提資料/system_context/workspace_profiles.json
+      - Cocolon_前提資料/system_context/Cocolon_SystemContext_ImplementationContract_20260818.md
+      - .github/workflows/cocolon-system-context-inventory.yml
+      - .github/context-payloads/step2-code/**
+      - .github/context-payloads/step3/**
+      - .github/context-payloads/step3-c/**
+      - .github/context-payloads/step3-ts-routes/**
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: cocolon-system-context-${{ github.ref }}
+  group: cocolon-system-context-${{ github.event.pull_request.head.ref || github.ref_name }}
   cancel-in-progress: true
 
 jobs:
