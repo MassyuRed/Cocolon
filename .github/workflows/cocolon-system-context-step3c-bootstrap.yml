@@ -35,6 +35,8 @@ jobs:
           set -euo pipefail
           d=.github/context-payloads/step3-c-bootstrap
           source "$d/install.sh"
+          echo 'd3c5742f0b7259b19f9786483d22e40bcff3e8548ca17265725d181219fa622f  '$d'/loader_fix.py' | sha256sum -c -
+          cp "$d/loader_fix.py" /tmp/loader_fix.py
           cat "$d"/part* > /tmp/c.b64
           echo 'f9518a4ce8460d4fa9baae8bff294d16a35afa88e1029ef78a2b41708551b8b3  /tmp/c.b64' | sha256sum -c -
           base64 -d /tmp/c.b64 > /tmp/c.tar.gz
@@ -45,5 +47,7 @@ jobs:
           r=/tmp/c/_bootstrap/bootstrap_run.sh
           echo '077c03832c7d17c4afd7c415a2fcca6332b5056615c7b33cf509d5a4a5581271  /tmp/c/_bootstrap/bootstrap_run.sh' | sha256sum -c -
           sed -i '/git add -A --/,/git diff --cached --check/{/tools\/cocolon_context_routes.py \\$/s/ \\$//}' "$r"
+          sed -i '/^node --check tools\/cocolon_context_ts_syntax.cjs/i python3 /tmp/loader_fix.py' "$r"
+          sed -i "/^node --check tools\/cocolon_context_ts_syntax.cjs/i echo '38663ecc46628283384ad114b573155877c9ea47faa7bd513daab11464ce418a  tools/cocolon_context_routes.py' | sha256sum -c -" "$r"
           bash -n "$r"
           GITHUB_SHA="$(git rev-parse HEAD)" GITHUB_REF_NAME=agent/cocolon-system-context-index-20260818 bash "$r" /tmp/c
