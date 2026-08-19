@@ -1,12 +1,13 @@
-name: Cocolon system context Step 3 C backend traversal inspection
-run-name: Cocolon system context backend preimage @ ${{ github.event.pull_request.head.sha || github.sha }}
+name: Cocolon system context Step 3 C stage runtime profile
+run-name: Cocolon system context C stage profile @ ${{ github.event.pull_request.head.sha || github.sha }}
 
 on:
   pull_request:
     paths:
       - .github/workflows/cocolon-system-context-inventory.yml
-      - .github/context-payloads/step3-c/inspect_backend_perf_source.py
+      - .github/context-payloads/step3-c/run_c_stage_profile.py
       - .github/context-payloads/step3-c/payload.b64
+      - tools/cocolon_context_routes.py
   workflow_dispatch:
 
 permissions:
@@ -17,9 +18,9 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  inspect-backend-preimage:
+  profile-c-stages:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - name: Checkout Cocolon context branch
         uses: actions/checkout@v4
@@ -27,8 +28,24 @@ jobs:
           ref: agent/cocolon-system-context-index-20260818
           fetch-depth: 0
 
-      - name: Print bounded backend traversal preimage
+      - name: Checkout locked mashos-api read-only
+        uses: actions/checkout@v4
+        with:
+          repository: MassyuRed/mashos-api
+          ref: 06ce311b3ea728b06f83439d268a34bed917c01c
+          path: .cocolon-context-workspace/mashos-api
+          fetch-depth: 0
+
+      - name: Set up Node 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run bounded C stage profile
         shell: bash
         run: |
           set -euo pipefail
-          python3 .github/context-payloads/step3-c/inspect_backend_perf_source.py
+          npm install -g --no-audit --no-fund typescript@5.2.2
+          export NODE_PATH="$(npm root -g)"
+          timeout --signal=TERM --kill-after=20s 720s \
+            python3 .github/context-payloads/step3-c/run_c_stage_profile.py
