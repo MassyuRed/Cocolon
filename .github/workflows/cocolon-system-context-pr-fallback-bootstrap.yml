@@ -38,8 +38,13 @@ jobs:
           pull_request_block = '  pull_request:\n' + push_paths
           text = text.replace(dispatch_marker, pull_request_block + dispatch_marker, 1)
 
-          old_group = '  group: cocolon-system-context-${{ github.ref }}\n'
-          new_group = '  group: cocolon-system-context-${{ github.event.pull_request.head.ref || github.ref_name }}\n'
+          expression_prefix = '$' + '{{ '
+          old_group = '  group: cocolon-system-context-' + expression_prefix + 'github.ref }}\n'
+          new_group = (
+              '  group: cocolon-system-context-'
+              + expression_prefix
+              + 'github.event.pull_request.head.ref || github.ref_name }}\n'
+          )
           if text.count(old_group) != 1:
               raise SystemExit('concurrency group preimage mismatch')
           text = text.replace(old_group, new_group, 1)
