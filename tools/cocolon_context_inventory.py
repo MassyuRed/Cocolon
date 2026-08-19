@@ -10,7 +10,6 @@ import os
 import pathlib
 import subprocess
 import sys
-import tempfile
 from typing import Any, Mapping, Sequence
 
 PROFILE_SCHEMA = "cocolon.system_context.workspace_profiles.v1"
@@ -25,8 +24,10 @@ ASSET_EXT = {".aac", ".aiff", ".avif", ".bmp", ".gif", ".heic", ".ico", ".jpeg",
 CONFIG_NAMES = {".babelrc", ".editorconfig", ".env", ".gitattributes", ".gitignore", "dockerfile", "gemfile", "makefile", "package.json", "pyproject.toml", "requirements.txt", "tsconfig.json"}
 LOCK_NAMES = {"bun.lock", "bun.lockb", "cargo.lock", "composer.lock", "gemfile.lock", "package-lock.json", "pnpm-lock.yaml", "poetry.lock", "uv.lock", "yarn.lock"}
 
+
 class InventoryError(RuntimeError):
     pass
+
 
 def run(repo: pathlib.Path, *args: str, text: bool = True, check: bool = True) -> str | bytes:
     p = subprocess.run(["git", "-C", str(repo), *args], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=text)
@@ -35,11 +36,33 @@ def run(repo: pathlib.Path, *args: str, text: bool = True, check: bool = True) -
         raise InventoryError(f"git {' '.join(args)} failed in {repo}: {err}")
     return p.stdout
 
+
 def canon(value: Any) -> bytes:
     return (json.dumps(value, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n").encode("utf-8")
 
+
 def sha256(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
+
+
+def stable_file_identity(row_value: Mapping[str, Any]) -> str:
+    """Return a commit-independent identity for one repository path and its exact bytes.
+
+    The source commit remains recorded independently in every row and manifest.  Keeping it
+    out of ``file_identity`` lets later non-code-only refreshes preserve semantic code/route
+    rows byte-for-byte while rebinding just the changed inventory row and task context.
+    """
+
+    content_basis = row_value.get("content_sha256") or row_value.get("object_sha") or "MISSING_CONTENT_BASIS"
+    basis = [
+        row_value.get("workspace_repository_key"),
+        row_value.get("path"),
+        row_value.get("object_mode"),
+        row_value.get("object_type"),
+        content_basis,
+    ]
+    return sha256(canon(basis))
+
 
 def load_json(path: pathlib.Path) -> Any:
     try:
@@ -47,11 +70,13 @@ def load_json(path: pathlib.Path) -> Any:
     except (OSError, json.JSONDecodeError) as exc:
         raise InventoryError(f"cannot read JSON {path}: {exc}") from exc
 
+
 def write(path: pathlib.Path, data: bytes) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_name(path.name + ".tmp")
     tmp.write_bytes(data)
     os.replace(tmp, path)
+
 
 def repo_args(values: Sequence[str]) -> dict[str, pathlib.Path]:
     out: dict[str, pathlib.Path] = {}
@@ -63,6 +88,7 @@ def repo_args(values: Sequence[str]) -> dict[str, pathlib.Path]:
             raise InventoryError(f"invalid or duplicate --repo: {value}")
         out[name] = pathlib.Path(raw).expanduser().resolve()
     return out
+
 
 def profile(path: pathlib.Path, workspace: str, paths: Mapping[str, pathlib.Path]) -> tuple[dict[str, Any], list[tuple[str, pathlib.Path, Mapping[str, Any]]]]:
     root = load_json(path)
@@ -81,6 +107,7 @@ def profile(path: pathlib.Path, workspace: str, paths: Mapping[str, pathlib.Path
         specs.append((key, paths[key], repos[key]))
     return cfg, specs
 
+
 def identity(key: str, repo: pathlib.Path, cfg: Mapping[str, Any], locked: str | None = None) -> dict[str, Any]:
     head = str(run(repo, "rev-parse", "HEAD")).strip()
     commit = locked or head
@@ -96,12 +123,18 @@ def identity(key: str, repo: pathlib.Path, cfg: Mapping[str, Any], locked: str |
         if rc:
             raise InventoryError(f"{key} HEAD {head} is not a descendant of {ancestor}")
     return {
-        "key": key, "repository": cfg.get("repository"), "configured_ref": cfg.get("checkout_ref"),
-        "expected_head": expected, "expected_ancestor": ancestor, "source_commit": commit,
+        "key": key,
+        "repository": cfg.get("repository"),
+        "configured_ref": cfg.get("checkout_ref"),
+        "expected_head": expected,
+        "expected_ancestor": ancestor,
+        "source_commit": commit,
         "source_tree": str(run(repo, "rev-parse", f"{commit}^{{tree}}")).strip(),
-        "checkout_head_at_build": commit, "commit_time": str(run(repo, "show", "-s", "--format=%cI", commit)).strip(),
+        "checkout_head_at_build": commit,
+        "commit_time": str(run(repo, "show", "-s", "--format=%cI", commit)).strip(),
         "role": cfg.get("role"),
     }
+
 
 def tree_entries(repo: pathlib.Path, commit: str) -> list[tuple[str, str, str, int | None, str]]:
     raw = run(repo, "ls-tree", "-r", "-l", "-z", commit, text=False)
@@ -115,10 +148,12 @@ def tree_entries(repo: pathlib.Path, commit: str) -> list[tuple[str, str, str, i
         rows.append((mode.decode(), typ.decode(), obj.decode(), None if size == b"-" else int(size), path_b.decode("utf-8", "surrogateescape")))
     return rows
 
+
 def blob(repo: pathlib.Path, obj: str) -> bytes:
     data = run(repo, "cat-file", "blob", obj, text=False)
     assert isinstance(data, bytes)
     return data
+
 
 def classify(path: str, typ: str) -> tuple[str, str, list[str], str]:
     low = "/" + path.lower().replace("\\", "/")
@@ -127,46 +162,87 @@ def classify(path: str, typ: str) -> tuple[str, str, list[str], str]:
     history = any(x in low for x in ("/history/", "/historical", "/audits/", "/receipts/", "_receipt", "handoff", "result_20"))
     generated = "/cocolon_前提資料/system_context/current/" in low
     test = any(x in low for x in ("/test/", "/tests/", "test_", ".test.", ".spec.", "_test."))
-    if typ == "commit": role = "SUBMODULE"
-    elif generated: role = "GENERATED_CONTEXT"
-    elif test: role = "TEST"
-    elif "/.github/workflows/" in low: role = "CI_WORKFLOW"
-    elif name in LOCK_NAMES: role = "LOCKFILE"
-    elif "/migrations/" in low or "/schema/" in low or ext == ".sql" or "schema" in name: role = "SCHEMA_OR_MIGRATION"
-    elif "/cocolon_前提資料/" in low or low.startswith("/cocolon_piece/") or low.startswith("/cocolon_analysis/"): role = "PREMISE_OR_DESIGN"
-    elif ext in SOURCE_EXT: role = "SOURCE"
-    elif name in CONFIG_NAMES or ext in CONFIG_EXT: role = "CONFIG"
-    elif ext in ASSET_EXT: role = "ASSET"
-    elif ext in DOC_EXT: role = "DOCUMENT"
-    else: role = "UNRESOLVED"
-    if generated: lifecycle = "GENERATED_CONTEXT"
-    elif history: lifecycle = "HISTORICAL_REFERENCE"
-    elif role == "TEST": lifecycle = "ACTIVE_TEST"
-    elif role == "SOURCE": lifecycle = "ACTIVE_SOURCE"
-    elif role in {"CI_WORKFLOW", "CONFIG", "SCHEMA_OR_MIGRATION"}: lifecycle = "ACTIVE_SUPPORT"
-    elif role == "PREMISE_OR_DESIGN": lifecycle = "CURRENT_REFERENCE_REQUIRES_OWNER"
-    else: lifecycle = "INVENTORY_ONLY"
-    domains = [d for d, keys in {
-        "CMEE": ("cmee", "meaning_experience"), "EMLIS_AI": ("emlis", "nls_v"), "PIECE": ("piece",),
-        "ANALYSIS": ("analysis", "watashi", "self_structure"), "RN": ("screens/", "components/", "navigation/", "react-native"),
-        "API_BACKEND": ("api_", "fastapi", "ai_inference", "services/"), "DB_STORAGE": ("supabase", "migration", ".sql"),
-    }.items() if any(k in low for k in keys)]
+    if typ == "commit":
+        role = "SUBMODULE"
+    elif generated:
+        role = "GENERATED_CONTEXT"
+    elif test:
+        role = "TEST"
+    elif "/.github/workflows/" in low:
+        role = "CI_WORKFLOW"
+    elif name in LOCK_NAMES:
+        role = "LOCKFILE"
+    elif "/migrations/" in low or "/schema/" in low or ext == ".sql" or "schema" in name:
+        role = "SCHEMA_OR_MIGRATION"
+    elif "/cocolon_前提資料/" in low or low.startswith("/cocolon_piece/") or low.startswith("/cocolon_analysis/"):
+        role = "PREMISE_OR_DESIGN"
+    elif ext in SOURCE_EXT:
+        role = "SOURCE"
+    elif name in CONFIG_NAMES or ext in CONFIG_EXT:
+        role = "CONFIG"
+    elif ext in ASSET_EXT:
+        role = "ASSET"
+    elif ext in DOC_EXT:
+        role = "DOCUMENT"
+    else:
+        role = "UNRESOLVED"
+    if generated:
+        lifecycle = "GENERATED_CONTEXT"
+    elif history:
+        lifecycle = "HISTORICAL_REFERENCE"
+    elif role == "TEST":
+        lifecycle = "ACTIVE_TEST"
+    elif role == "SOURCE":
+        lifecycle = "ACTIVE_SOURCE"
+    elif role in {"CI_WORKFLOW", "CONFIG", "SCHEMA_OR_MIGRATION"}:
+        lifecycle = "ACTIVE_SUPPORT"
+    elif role == "PREMISE_OR_DESIGN":
+        lifecycle = "CURRENT_REFERENCE_REQUIRES_OWNER"
+    else:
+        lifecycle = "INVENTORY_ONLY"
+    domains = [
+        d
+        for d, keys in {
+            "CMEE": ("cmee", "meaning_experience"),
+            "EMLIS_AI": ("emlis", "nls_v"),
+            "PIECE": ("piece",),
+            "ANALYSIS": ("analysis", "watashi", "self_structure"),
+            "RN": ("screens/", "components/", "navigation/", "react-native"),
+            "API_BACKEND": ("api_", "fastapi", "ai_inference", "services/"),
+            "DB_STORAGE": ("supabase", "migration", ".sql"),
+        }.items()
+        if any(k in low for k in keys)
+    ]
     return role, lifecycle, domains or ["GLOBAL"], "UNRESOLVED" if role == "UNRESOLVED" else "CLASSIFIED"
+
 
 def row(key: str, ident: Mapping[str, Any], repo: pathlib.Path, entry: tuple[str, str, str, int | None, str]) -> dict[str, Any]:
     mode, typ, obj, size, path = entry
     data = blob(repo, obj) if typ == "blob" else b""
     binary = typ == "blob" and b"\0" in data[:8192]
     role, lifecycle, domains, status = classify(path, typ)
-    return {
-        "schema_version": ROW_SCHEMA, "workspace_repository_key": key, "repository": ident["repository"],
-        "source_commit": ident["source_commit"], "source_tree": ident["source_tree"], "path": path,
-        "object_mode": mode, "object_type": typ, "object_sha": obj, "object_size": size,
+    value = {
+        "schema_version": ROW_SCHEMA,
+        "workspace_repository_key": key,
+        "repository": ident["repository"],
+        "source_commit": ident["source_commit"],
+        "source_tree": ident["source_tree"],
+        "path": path,
+        "object_mode": mode,
+        "object_type": typ,
+        "object_sha": obj,
+        "object_size": size,
         "content_sha256": sha256(data) if typ == "blob" else None,
         "content_kind": "SUBMODULE" if typ == "commit" else ("BINARY" if binary else "TEXT"),
         "line_count": None if typ != "blob" or binary else data.count(b"\n") + (1 if data and not data.endswith(b"\n") else 0),
-        "file_role": role, "lifecycle": lifecycle, "domains": domains, "classification_status": status,
+        "file_role": role,
+        "lifecycle": lifecycle,
+        "domains": domains,
+        "classification_status": status,
     }
+    value["file_identity"] = stable_file_identity(value)
+    return value
+
 
 def build_bytes(profiles: pathlib.Path, workspace: str, paths: Mapping[str, pathlib.Path], locked: Mapping[str, str] | None = None) -> dict[str, bytes]:
     cfg, specs = profile(profiles, workspace, paths)
@@ -186,17 +262,55 @@ def build_bytes(profiles: pathlib.Path, workspace: str, paths: Mapping[str, path
     lock = {"schema_version": LOCK_SCHEMA, "workspace": workspace, "profile_purpose": cfg.get("purpose"), "repositories": identities}
     files_b = b"".join(canon(r) for r in rows)
     unresolved_b = b"".join(canon(r) for r in unresolved)
-    summary = {"schema_version": "cocolon.system_context.classification_summary.v1", "workspace": workspace, "total": len(rows), "by_repository": repo_counts, "by_role": counts("file_role"), "by_lifecycle": counts("lifecycle"), "by_domain": domain_counts, "by_status": counts("classification_status")}
-    outputs = {"workspace_lock.json": canon(lock), "files.jsonl": files_b, "classification_summary.json": canon(summary), "unresolved.jsonl": unresolved_b}
-    per_repo = {i["key"]: {"source_commit": i["source_commit"], "source_tree": i["source_tree"], "tracked_entry_count": repo_counts.get(i["key"], 0)} for i in identities}
-    manifest = {"schema_version": MANIFEST_SCHEMA, "workspace": workspace, "total_tracked_entries": len(rows), "unique_repository_path_count": len(set(keys)), "missing_tracked_path_count": 0, "duplicate_repository_path_count": 0, "unresolved_count": len(unresolved), "repositories": per_repo, "output_sha256": {name: sha256(data) for name, data in outputs.items()}, "completion_claim": "STEP1_FULL_TRACKED_FILE_POPULATION_COMPLETE", "product_credit": 0, "automatic_progression": False}
+    summary = {
+        "schema_version": "cocolon.system_context.classification_summary.v1",
+        "workspace": workspace,
+        "total": len(rows),
+        "by_repository": repo_counts,
+        "by_role": counts("file_role"),
+        "by_lifecycle": counts("lifecycle"),
+        "by_domain": domain_counts,
+        "by_status": counts("classification_status"),
+    }
+    outputs = {
+        "workspace_lock.json": canon(lock),
+        "files.jsonl": files_b,
+        "classification_summary.json": canon(summary),
+        "unresolved.jsonl": unresolved_b,
+    }
+    per_repo = {
+        i["key"]: {
+            "source_commit": i["source_commit"],
+            "source_tree": i["source_tree"],
+            "tracked_entry_count": repo_counts.get(i["key"], 0),
+        }
+        for i in identities
+    }
+    manifest = {
+        "schema_version": MANIFEST_SCHEMA,
+        "workspace": workspace,
+        "total_tracked_entries": len(rows),
+        "unique_repository_path_count": len(set(keys)),
+        "missing_tracked_path_count": 0,
+        "duplicate_repository_path_count": 0,
+        "unresolved_count": len(unresolved),
+        "repositories": per_repo,
+        "output_sha256": {name: sha256(data) for name, data in outputs.items()},
+        "file_identity_contract": "REPOSITORY_PATH_MODE_TYPE_AND_CONTENT_SHA256_COMMIT_INDEPENDENT_V1",
+        "completion_claim": "STEP1_FULL_TRACKED_FILE_POPULATION_COMPLETE",
+        "product_credit": 0,
+        "automatic_progression": False,
+    }
     outputs["manifest.json"] = canon(manifest)
     return outputs
 
+
 def build(profiles: pathlib.Path, workspace: str, paths: Mapping[str, pathlib.Path], output: pathlib.Path) -> dict[str, Any]:
     outputs = build_bytes(profiles, workspace, paths)
-    for name, data in outputs.items(): write(output / name, data)
+    for name, data in outputs.items():
+        write(output / name, data)
     return json.loads(outputs["manifest.json"])
+
 
 def verify(profiles: pathlib.Path, workspace: str, paths: Mapping[str, pathlib.Path], output: pathlib.Path) -> dict[str, Any]:
     lock = load_json(output / "workspace_lock.json")
@@ -209,6 +323,7 @@ def verify(profiles: pathlib.Path, workspace: str, paths: Mapping[str, pathlib.P
         if actual != expected[name]:
             raise InventoryError(f"inventory verification failed: {name}")
     return json.loads(expected["manifest.json"])
+
 
 def cli(argv: Sequence[str] | None = None) -> int:
     p = argparse.ArgumentParser()
@@ -228,6 +343,7 @@ def cli(argv: Sequence[str] | None = None) -> int:
     except (InventoryError, OSError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)
         return 2
+
 
 if __name__ == "__main__":
     raise SystemExit(cli())
