@@ -1,0 +1,67 @@
+name: Cocolon System Context Step 5 pytest bootstrap
+run-name: Fix Step 5 Python test environment @ ${{ github.event.pull_request.head.sha }}
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/cocolon-system-context-step5-pytest-bootstrap.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: cocolon-system-context-step5-pytest-bootstrap
+  cancel-in-progress: false
+
+jobs:
+  patch-standard-workflow:
+    if: github.event_name == 'workflow_dispatch' || github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      SOURCE_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
+      TARGET_BRANCH: agent/cocolon-system-context-index-20260818
+      STANDARD_WORKFLOW: .github/workflows/cocolon-system-context-inventory.yml
+    steps:
+      - name: Checkout exact source
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          fetch-depth: 0
+
+      - name: Add pinned pytest installation to the standard workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$SOURCE_COMMIT"
+          python3 - <<'PY'
+          from pathlib import Path
+
+          path = Path('.github/workflows/cocolon-system-context-inventory.yml')
+          text = path.read_text(encoding='utf-8')
+          marker = '      - name: Install pinned Python test dependency\n'
+          if marker not in text:
+              anchor = '      - name: Set up Node 20\n'
+              if anchor not in text:
+                  raise SystemExit('standard workflow Node setup anchor is missing')
+              step = (
+                  '      - name: Install pinned Python test dependency\n'
+                  '        shell: bash\n'
+                  '        run: |\n'
+                  '          set -euo pipefail\n'
+                  '          python3 -m pip install --disable-pip-version-check pytest==8.4.2\n\n'
+              )
+              text = text.replace(anchor, step + anchor, 1)
+              path.write_text(text, encoding='utf-8')
+          PY
+          grep -F 'python3 -m pip install --disable-pip-version-check pytest==8.4.2' "$STANDARD_WORKFLOW"
+          git diff --check -- "$STANDARD_WORKFLOW"
+          git add -- "$STANDARD_WORKFLOW"
+          test -n "$(git diff --cached --name-only -- "$STANDARD_WORKFLOW")"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "fix(system-context): install pinned pytest in Step 5 workflow"
+          git fetch --no-tags origin "+refs/heads/${TARGET_BRANCH}:refs/remotes/origin/${TARGET_BRANCH}"
+          test "$(git rev-parse refs/remotes/origin/${TARGET_BRANCH})" = "$SOURCE_COMMIT"
+          git push origin "HEAD:${TARGET_BRANCH}"
