@@ -62,6 +62,8 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git commit -m "fix(system-context): install pinned pytest in Step 5 workflow"
+          PATCHED_COMMIT="$(git rev-parse HEAD)"
+          echo "PATCHED_COMMIT=${PATCHED_COMMIT}"
           git fetch --no-tags origin "+refs/heads/${TARGET_BRANCH}:refs/remotes/origin/${TARGET_BRANCH}"
           test "$(git rev-parse refs/remotes/origin/${TARGET_BRANCH})" = "$SOURCE_COMMIT"
           git push origin "HEAD:${TARGET_BRANCH}"
