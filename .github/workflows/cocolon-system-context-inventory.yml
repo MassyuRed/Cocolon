@@ -1,10 +1,14 @@
 name: Cocolon System Context Step 5 incremental materialization
-run-name: Materialize Step 5 incremental source @ ${{ github.sha }}
+run-name: Materialize Step 5 incremental source @ ${{ github.event.pull_request.head.sha || github.sha }}
 
 on:
   push:
     branches:
       - agent/cocolon-system-context-index-20260818
+    paths:
+      - .github/workflows/cocolon-system-context-inventory.yml
+      - .github/context-payloads/step5-incremental/**
+  pull_request:
     paths:
       - .github/workflows/cocolon-system-context-inventory.yml
       - .github/context-payloads/step5-incremental/**
@@ -14,7 +18,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: cocolon-system-context-step5-incremental-materialization
+  group: cocolon-system-context-step5-incremental-materialization-${{ github.event.pull_request.head.ref || github.ref_name }}
   cancel-in-progress: false
 
 jobs:
@@ -23,7 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      EXPECTED_HEAD: ${{ github.sha }}
+      EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
       PATCH_BASE_COMMIT: 3dd394431aa9699f3d21180783e1bfe50741ed6f
       TARGET_BRANCH: agent/cocolon-system-context-index-20260818
       PAYLOAD: .github/context-payloads/step5-incremental
@@ -32,7 +36,7 @@ jobs:
       - name: Checkout exact staged source
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.sha }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
 
       - name: Apply genuine incremental patch, test, commit, and push
