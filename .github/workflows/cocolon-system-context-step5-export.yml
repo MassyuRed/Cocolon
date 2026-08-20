@@ -1,115 +1,101 @@
-# retrigger_source_repair: cancel_old_queue_after_a7b2aa900ccdd3ff44fb2f57cf66ccd2fb3f4176
-name: Cocolon System Context Step 5 packed-workspace repair
-run-name: Repair fresh-clone verification @ ${{ github.event.pull_request.head.sha || github.sha }}
+name: Cocolon System Context Step 5 final standard dispatcher
+run-name: Dispatch final Step 5 standard run @ ${{ github.event.pull_request.head.sha || github.sha }}
 
 on:
-  push:
-    branches:
-      - agent/cocolon-system-context-index-20260818
-    paths:
-      - .github/workflows/cocolon-system-context-step5-export.yml
   pull_request:
     paths:
       - .github/workflows/cocolon-system-context-step5-export.yml
   workflow_dispatch:
 
 permissions:
-  contents: write
+  actions: write
+  contents: read
 
 concurrency:
-  group: cocolon-system-context-step5-packed-workspace-repair-${{ github.event_name }}
+  group: cocolon-system-context-step5-final-dispatch-${{ github.event.pull_request.head.sha || github.sha }}
   cancel-in-progress: true
 
 jobs:
-  repair:
+  dispatch-final-standard:
     if: github.event_name == 'workflow_dispatch' || github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 250
     env:
       SOURCE_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
       TARGET_BRANCH: agent/cocolon-system-context-index-20260818
-      PREPARE_SOURCE: tools/cocolon_context_prepare.py
+      STANDARD_WORKFLOW: cocolon-system-context-inventory.yml
+      GH_TOKEN: ${{ github.token }}
     steps:
-      - name: Checkout exact source
+      - name: Checkout exact dispatch source
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-          fetch-depth: 0
+          fetch-depth: 1
 
-      - name: Repair packed workspace verification, test, and push
+      - name: Assert exact dispatch source
         shell: bash
         run: |
           set -euo pipefail
           test "$(git rev-parse HEAD)" = "$SOURCE_COMMIT"
-          python3 - <<'PY'
-          from pathlib import Path
+          test "$(git status --porcelain)" = ""
 
-          path = Path('tools/cocolon_context_prepare.py')
-          text = path.read_text(encoding='utf-8')
-          start = text.index('def _verify_workspace(\n')
-          end = text.index('\ndef _compile_and_pack_task(\n', start)
-          replacement = '''def _verify_workspace(
-              *, repo_root: Path, workspace: str, workspace_dir: Path,
-              refs: Mapping[str, RepositoryRef], profiles_path: Path,
-          ) -> dict[str, Any]:
-              """Verify published bytes, then semantic outputs from materialized logical files."""
-              transport = verify_outputs(workspace_dir)
-              with tempfile.TemporaryDirectory(
-                  prefix="cocolon-workspace-verify-materialized-"
-              ) as temporary:
-                  materialized = materialize_outputs(
-                      workspace_dir, Path(temporary) / "workspace"
-                  )
-                  verify_inventory(
-                      profiles_path,
-                      workspace,
-                      {key: value.path for key, value in refs.items()},
-                      materialized,
-                  )
-                  _run(
-                      (
-                          sys.executable,
-                          str(repo_root / "tools/cocolon_context_code_index.py"),
-                          "verify",
-                          "--inventory",
-                          str(materialized / "files.jsonl"),
-                          "--output",
-                          str(materialized / "code_index"),
-                      ),
-                      cwd=repo_root,
-                  )
-                  _run(
-                      (
-                          sys.executable,
-                          str(repo_root / "tools/cocolon_context_routes.py"),
-                          "verify",
-                          "--inventory",
-                          str(materialized / "files.jsonl"),
-                          "--code-index",
-                          str(materialized / "code_index"),
-                          "--output",
-                          str(materialized / "route_graph"),
-                      ),
-                      cwd=repo_root,
-                  )
-              return dict(transport)
+      - name: Dispatch and require terminal-success standard run
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh workflow run "$STANDARD_WORKFLOW" --ref "$TARGET_BRANCH"
 
-'''
-          updated = text[:start] + replacement + text[end + 1:]
-          if updated.count('cocolon-workspace-verify-materialized-') != 1:
-              raise SystemExit('materialized verification repair was not written exactly once')
-          path.write_text(updated, encoding='utf-8')
+          RUN_ID=""
+          for _ in $(seq 1 60); do
+            RUNS_JSON="$(gh run list \
+              --workflow "$STANDARD_WORKFLOW" \
+              --branch "$TARGET_BRANCH" \
+              --event workflow_dispatch \
+              --limit 20 \
+              --json databaseId,headSha,status,conclusion,createdAt)"
+            RUN_ID="$(RUNS_JSON="$RUNS_JSON" python3 - <<'PY'
+          import json
+          import os
+
+          source = os.environ["SOURCE_COMMIT"]
+          runs = json.loads(os.environ["RUNS_JSON"])
+          matches = [run for run in runs if run.get("headSha") == source]
+          if matches:
+              matches.sort(key=lambda run: int(run["databaseId"]), reverse=True)
+              print(matches[0]["databaseId"])
           PY
-          python3 -m pip install --disable-pip-version-check pytest==8.4.2
-          python3 -m py_compile "$PREPARE_SOURCE"
-          python3 -m unittest discover -s tests/cocolon_context -p 'test_*.py' -v
-          python3 -m pytest tests/cocolon_context/test_task_context.py -q
-          git diff --check -- "$PREPARE_SOURCE"
-          git add -- "$PREPARE_SOURCE"
-          test -n "$(git diff --cached --name-only -- "$PREPARE_SOURCE")"
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "fix(system-context): verify packed workspace via logical materialization"
-          git fetch --no-tags origin "+refs/heads/${TARGET_BRANCH}:refs/remotes/origin/${TARGET_BRANCH}"
-          git rebase "refs/remotes/origin/${TARGET_BRANCH}"
-          git push origin "HEAD:${TARGET_BRANCH}"
+            )"
+            if [ -n "$RUN_ID" ]; then
+              break
+            fi
+            sleep 5
+          done
+
+          test -n "$RUN_ID"
+          echo "STANDARD_RUN_ID=$RUN_ID"
+
+          set +e
+          gh run watch "$RUN_ID" --exit-status
+          WATCH_RC=$?
+          set -e
+          if [ "$WATCH_RC" -ne 0 ]; then
+            gh run view "$RUN_ID" --log-failed || true
+            exit "$WATCH_RC"
+          fi
+
+          RUN_STATE="$(gh run view "$RUN_ID" --json status,conclusion,headSha)"
+          RUN_STATE="$RUN_STATE" python3 - <<'PY'
+          import json
+          import os
+
+          source = os.environ["SOURCE_COMMIT"]
+          state = json.loads(os.environ["RUN_STATE"])
+          assert state["status"] == "completed", state
+          assert state["conclusion"] == "success", state
+          assert state["headSha"] == source, state
+          PY
+
+          FINAL_HEAD="$(gh api \
+            "repos/${GITHUB_REPOSITORY}/git/ref/heads/${TARGET_BRANCH}" \
+            --jq '.object.sha')"
+          echo "FINAL_HEAD=$FINAL_HEAD"
