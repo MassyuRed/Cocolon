@@ -1,124 +1,80 @@
-name: Cocolon System Context Step 5 provider introspection
-run-name: Inspect Step 5 providers @ ${{ github.event.pull_request.head.sha || github.sha }}
+name: Cocolon System Context Step 5 incremental materialization
+run-name: Materialize Step 5 incremental source @ ${{ github.sha }}
 
 on:
-  pull_request:
+  push:
+    branches:
+      - agent/cocolon-system-context-index-20260818
     paths:
       - .github/workflows/cocolon-system-context-inventory.yml
+      - .github/context-payloads/step5-incremental/**
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
-  group: cocolon-system-context-step5-introspection
-  cancel-in-progress: true
+  group: cocolon-system-context-step5-incremental-materialization
+  cancel-in-progress: false
 
 jobs:
-  inspect:
+  materialize:
     if: github.event_name == 'workflow_dispatch' || github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
+    env:
+      EXPECTED_HEAD: ${{ github.sha }}
+      PATCH_BASE_COMMIT: 3dd394431aa9699f3d21180783e1bfe50741ed6f
+      TARGET_BRANCH: agent/cocolon-system-context-index-20260818
+      PAYLOAD: .github/context-payloads/step5-incremental
+      WORKFLOW: .github/workflows/cocolon-system-context-inventory.yml
     steps:
-      - name: Checkout exact source
+      - name: Checkout exact staged source
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          ref: ${{ github.sha }}
           fetch-depth: 0
 
-      - name: Print provider APIs and canonical row schemas
+      - name: Apply genuine incremental patch, test, commit, and push
         shell: bash
         run: |
           set -euo pipefail
-          python3 - <<'PY'
-          from __future__ import annotations
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          test -d "$PAYLOAD"
+          test "$(git rev-parse "${PATCH_BASE_COMMIT}^{commit}")" = "$PATCH_BASE_COMMIT"
+          git config core.quotePath false
 
-          import inspect
-          import json
-          from pathlib import Path
+          cat "$PAYLOAD"/part* | base64 -d | gzip -d > /tmp/step5-incremental.patch
+          test -s /tmp/step5-incremental.patch
 
-          from tools import cocolon_context_code_index as code_index
-          from tools import cocolon_context_routes as routes
-          from tools import cocolon_context_prepare as prepare
+          # The payload was produced against PATCH_BASE_COMMIT. Restore only the
+          # workflow bootstrap path before applying; all product/source files at
+          # EXPECTED_HEAD already match that base.
+          git show "${PATCH_BASE_COMMIT}:${WORKFLOW}" > "$WORKFLOW"
+          git apply --check /tmp/step5-incremental.patch
+          git apply /tmp/step5-incremental.patch
 
-          root = Path("Cocolon_前提資料/system_context/current/cmee_working")
+          python3 -m py_compile \
+            tools/cocolon_context.py \
+            tools/cocolon_context_prepare.py \
+            tools/cocolon_context_task.py \
+            tools/cocolon_context_inventory.py \
+            tools/cocolon_context_code_index.py \
+            tools/cocolon_context_routes.py \
+            tools/cocolon_context_publish_transport.py
+          python3 -m unittest discover -s tests/cocolon_context -p 'test_*.py' -v
+          git diff --check
 
-          def display_value(value):
-              if isinstance(value, str):
-                  return value if len(value) <= 180 else value[:177] + "..."
-              if isinstance(value, list):
-                  return [display_value(item) for item in value[:4]]
-              if isinstance(value, dict):
-                  return {key: display_value(value[key]) for key in list(value)[:8]}
-              return value
+          git diff --name-only -z | xargs -0 -r git add --
+          git rm -r "$PAYLOAD"
+          test -n "$(git diff --cached --name-only)"
+          echo 'Staged Step 5 paths:'
+          git diff --cached --name-status
 
-          def first_row(relative: str):
-              direct = root / relative
-              if direct.is_file():
-                  with direct.open("r", encoding="utf-8") as handle:
-                      for line in handle:
-                          if line.strip():
-                              return json.loads(line)
-              transport = json.loads((root / "publication_transport.json").read_text(encoding="utf-8"))
-              logical = {row["logical_path"]: row for row in transport["logical_files"]}
-              row = logical[relative]
-              first_part = root / row["parts"][0]["path"]
-              with first_part.open("r", encoding="utf-8") as handle:
-                  for line in handle:
-                      if line.strip():
-                          return json.loads(line)
-              raise RuntimeError(relative)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "feat(system-context): implement genuine changed-ref incremental refresh"
 
-          def module_api(label, module):
-              print(f"=== MODULE_API {label} ===")
-              for name, value in sorted(vars(module).items()):
-                  if name.startswith("_"):
-                      continue
-                  if inspect.isfunction(value) and value.__module__ == module.__name__:
-                      try:
-                          signature = inspect.signature(value)
-                      except (TypeError, ValueError):
-                          signature = "<unknown>"
-                      print(f"FUNCTION {name}{signature}")
-                  elif inspect.isclass(value) and value.__module__ == module.__name__:
-                      print(f"CLASS {name}")
-
-          module_api("code_index", code_index)
-          module_api("routes", routes)
-          module_api("prepare", prepare)
-          print("=== PLAN_REFRESH_SOURCE ===")
-          print(inspect.getsource(prepare.plan_refresh))
-
-          paths = [
-              "code_index/file_coverage.jsonl",
-              "code_index/import_edges.jsonl",
-              "code_index/symbols.jsonl",
-              "code_index/references.jsonl",
-              "route_graph/rn_calls.jsonl",
-              "route_graph/api_routes.jsonl",
-              "route_graph/cross_repository_route_edges.jsonl",
-              "route_graph/api_model_edges.jsonl",
-              "route_graph/backend_call_edges.jsonl",
-              "route_graph/route_owner_closures.jsonl",
-              "route_graph/test_contract_edges.jsonl",
-              "route_graph/file_domain_assignments.jsonl",
-          ]
-          print("=== CANONICAL_ROW_SCHEMAS ===")
-          for relative in paths:
-              row = first_row(relative)
-              print(json.dumps({
-                  "path": relative,
-                  "keys": sorted(row),
-                  "types": {key: type(value).__name__ for key, value in sorted(row.items())},
-                  "sample": {key: display_value(value) for key, value in sorted(row.items())},
-              }, ensure_ascii=False, sort_keys=True))
-
-          for relative in (
-              "code_index/code_index_manifest.json",
-              "code_index/code_index_summary.json",
-              "route_graph/route_graph_manifest.json",
-              "route_graph/route_graph_summary.json",
-          ):
-              value = json.loads((root / relative).read_text(encoding="utf-8"))
-              print("MANIFEST", relative, json.dumps(value, ensure_ascii=False, sort_keys=True))
-          PY
+          git fetch --no-tags origin "+refs/heads/${TARGET_BRANCH}:refs/remotes/origin/${TARGET_BRANCH}"
+          test "$(git rev-parse refs/remotes/origin/${TARGET_BRANCH})" = "$EXPECTED_HEAD"
+          git push origin "HEAD:${TARGET_BRANCH}"
