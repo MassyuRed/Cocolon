@@ -1,10 +1,7 @@
 name: Cocolon System Context Step 5 final standard dispatcher
-run-name: Dispatch final Step 5 standard run @ ${{ github.event.pull_request.head.sha || github.sha }}
+run-name: Dispatch final Step 5 standard run @ ${{ github.sha }}
 
 on:
-  pull_request:
-    paths:
-      - .github/workflows/cocolon-system-context-step5-export.yml
   workflow_dispatch:
 
 permissions:
@@ -12,16 +9,15 @@ permissions:
   contents: read
 
 concurrency:
-  group: cocolon-system-context-step5-final-dispatch-${{ github.event.pull_request.head.sha || github.sha }}
+  group: cocolon-system-context-step5-final-dispatch-${{ github.ref_name }}
   cancel-in-progress: true
 
 jobs:
   dispatch-final-standard:
-    if: github.event_name == 'workflow_dispatch' || github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 250
     env:
-      SOURCE_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
+      SOURCE_COMMIT: ${{ github.sha }}
       TARGET_BRANCH: agent/cocolon-system-context-index-20260818
       STANDARD_WORKFLOW: cocolon-system-context-inventory.yml
       GH_TOKEN: ${{ github.token }}
@@ -29,7 +25,7 @@ jobs:
       - name: Checkout exact dispatch source
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          ref: ${{ github.sha }}
           fetch-depth: 1
 
       - name: Assert exact dispatch source
