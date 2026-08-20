@@ -48,8 +48,15 @@ jobs:
           test "$(git rev-parse "${PATCH_BASE_COMMIT}^{commit}")" = "$PATCH_BASE_COMMIT"
           git config core.quotePath false
 
-          cat "$PAYLOAD"/part* | base64 -d | gzip -d > /tmp/step5-incremental.patch
+          cat "$PAYLOAD"/part* | base64 -d > /tmp/step5-incremental.patch.gz
+          set +e
+          gzip -dc /tmp/step5-incremental.patch.gz > /tmp/step5-incremental.patch
+          GZIP_STATUS=$?
+          set -e
+          echo "gzip_status=${GZIP_STATUS}"
           test -s /tmp/step5-incremental.patch
+          echo 'Decoded patch paths:'
+          grep '^diff --git ' /tmp/step5-incremental.patch || true
 
           # The payload was produced against PATCH_BASE_COMMIT. Restore only the
           # workflow bootstrap path before applying; all product/source files at
