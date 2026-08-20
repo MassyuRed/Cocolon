@@ -3,12 +3,12 @@
   "automatic_progression": false,
   "blocking_unresolved_count": 0,
   "closure_edge_count": 759989,
-  "completion_claim": null,
+  "completion_claim": "STEP4_TASK_CONTEXT_COMPILER_CMEE_ACTUAL_REVIEW_COMPLETE",
   "completion_gates": {
     "actual_unincorporated_finding_extracted": true,
     "finding_used_for_cmee_review": true,
     "full_text_read_order_generated": true,
-    "generated_output_remote_hash_verified": false,
+    "generated_output_remote_hash_verified": true,
     "required_category_exact10_all_pass": true,
     "required_category_exact10_recovered": true,
     "selected_file_identity_verified": true,
@@ -43,7 +43,7 @@
   },
   "schema_version": "cocolon.system_context.task_context_manifest.v1",
   "selected_file_count": 2016,
-  "status": "STEP4_INCOMPLETE_BLOCKING_CONTEXT_OR_REMOTE_VERIFICATION",
+  "status": "STEP4_TASK_CONTEXT_COMPILER_CMEE_ACTUAL_REVIEW_COMPLETE",
   "task": "cmee",
   "workspace": "cmee_working",
   "workspace_exact_refs": {
