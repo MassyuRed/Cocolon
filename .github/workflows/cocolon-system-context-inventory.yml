@@ -1,54 +1,119 @@
-name: Cocolon System Context Step 5 payload recovery
-run-name: Recover staged Step 5 patch @ ${{ github.event.pull_request.head.sha || github.sha }}
+name: Cocolon System Context Step 5 source materialization
+run-name: Materialize reconstructed Step 5 source @ ${{ github.event.pull_request.head.sha || github.sha }}
 
 on:
   pull_request:
     paths:
       - .github/workflows/cocolon-system-context-inventory.yml
+      - .github/context-payloads/step5-reconstructed/**
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 concurrency:
-  group: cocolon-system-context-step5-payload-recovery
+  group: cocolon-system-context-step5-source-materialization
   cancel-in-progress: true
 
 jobs:
-  recover:
+  materialize:
     if: github.event_name == 'workflow_dispatch' || github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 30
     env:
-      PAYLOAD: .github/context-payloads/step5-incremental
+      EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+      TARGET_BRANCH: agent/cocolon-system-context-index-20260818
+      PAYLOAD: .github/context-payloads/step5-reconstructed
     steps:
       - name: Checkout exact staged source
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
-          fetch-depth: 1
+          fetch-depth: 0
 
-      - name: Recover every decodable patch byte
+      - name: Materialize, test, commit, and push Step 5 source
         shell: bash
         run: |
           set -euo pipefail
-          cat "$PAYLOAD"/part* | base64 -d > /tmp/step5-incremental.patch.gz
-          set +e
-          gzip -dc /tmp/step5-incremental.patch.gz > /tmp/step5-incremental.partial.patch
-          gzip_status=$?
-          set -e
-          test -s /tmp/step5-incremental.partial.patch
-          printf '%s\n' "$gzip_status" > /tmp/gzip_status.txt
-          wc -c -l /tmp/step5-incremental.partial.patch
-          grep '^diff --git ' /tmp/step5-incremental.partial.patch || true
-          tail -n 40 /tmp/step5-incremental.partial.patch
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD"
+          test "$(git status --porcelain)" = ""
+          test -d "$PAYLOAD"
+          git config core.quotePath false
 
-      - name: Upload recovered patch bytes
-        uses: actions/upload-artifact@v4
-        with:
-          name: step5-incremental-partial-patch
-          path: |
-            /tmp/step5-incremental.partial.patch
-            /tmp/gzip_status.txt
-          if-no-files-found: error
-          retention-days: 1
+          cat "$PAYLOAD"/part* > /tmp/step5-source.tar.gz.b64
+          base64 -d /tmp/step5-source.tar.gz.b64 > /tmp/step5-source.tar.gz
+          echo "50f8fe8c008dd9c5d665a8fc8a3090d0b072ce59860989fd5a7f19db65478402  /tmp/step5-source.tar.gz" | sha256sum -c -
+
+          rm -rf /tmp/step5-source
+          mkdir -p /tmp/step5-source
+          tar -xzf /tmp/step5-source.tar.gz -C /tmp/step5-source
+
+          python3 - <<'PY'
+          from pathlib import Path
+          root = Path('/tmp/step5-source')
+          expected = {
+              '.github/workflows/cocolon-system-context-inventory.yml',
+              'Cocolon_前提資料/system_context/.step5_corrected_standard_entry_workflow.yml',
+              'Cocolon_前提資料/system_context/00_read_first.md',
+              'tools/cocolon_context.py',
+              'tools/cocolon_context_prepare.py',
+              'tests/cocolon_context/test_prepare.py',
+          }
+          actual = {
+              path.relative_to(root).as_posix()
+              for path in root.rglob('*')
+              if path.is_file()
+          }
+          assert actual == expected, (sorted(actual), sorted(expected))
+          PY
+
+          echo "5802b37e1e8ea70272e77937677bfb2fd3f27894b9c69a5783167ff2239b5979  /tmp/step5-source/.github/workflows/cocolon-system-context-inventory.yml" | sha256sum -c -
+          echo "5802b37e1e8ea70272e77937677bfb2fd3f27894b9c69a5783167ff2239b5979  /tmp/step5-source/Cocolon_前提資料/system_context/.step5_corrected_standard_entry_workflow.yml" | sha256sum -c -
+          echo "df7ba909b0317cf6019ad2a5cbca26cde6ac228cfe31ae192748eebfa1c38624  /tmp/step5-source/Cocolon_前提資料/system_context/00_read_first.md" | sha256sum -c -
+          echo "84d32f0123d7f0999397ee8a64d8a6c691a888c984ab84dd46679948a4c5dc65  /tmp/step5-source/tools/cocolon_context.py" | sha256sum -c -
+          echo "bedacfbb9fc7aed02524dcd8a694435cfaede145f7d6e988255026763f498ead  /tmp/step5-source/tools/cocolon_context_prepare.py" | sha256sum -c -
+          echo "c61a618a40bc839c472e2c0072038b9316da41c3425af9334ddeae57e4172014  /tmp/step5-source/tests/cocolon_context/test_prepare.py" | sha256sum -c -
+
+          install -m 0644 /tmp/step5-source/tools/cocolon_context.py tools/cocolon_context.py
+          install -m 0644 /tmp/step5-source/tools/cocolon_context_prepare.py tools/cocolon_context_prepare.py
+          install -m 0644 /tmp/step5-source/tests/cocolon_context/test_prepare.py tests/cocolon_context/test_prepare.py
+          install -m 0644 /tmp/step5-source/Cocolon_前提資料/system_context/00_read_first.md Cocolon_前提資料/system_context/00_read_first.md
+          install -m 0644 /tmp/step5-source/Cocolon_前提資料/system_context/.step5_corrected_standard_entry_workflow.yml Cocolon_前提資料/system_context/.step5_corrected_standard_entry_workflow.yml
+
+          python3 -m py_compile \
+            tools/cocolon_context.py \
+            tools/cocolon_context_prepare.py \
+            tests/cocolon_context/test_prepare.py
+          python3 -m unittest discover -s tests/cocolon_context -p 'test_*.py' -v
+          git diff --check
+
+          git add -- \
+            tools/cocolon_context.py \
+            tools/cocolon_context_prepare.py \
+            tests/cocolon_context/test_prepare.py \
+            Cocolon_前提資料/system_context/00_read_first.md \
+            Cocolon_前提資料/system_context/.step5_corrected_standard_entry_workflow.yml
+          git rm -r "$PAYLOAD"
+
+          python3 - <<'PY'
+          import subprocess
+          expected = {
+              'tools/cocolon_context.py',
+              'tools/cocolon_context_prepare.py',
+              'tests/cocolon_context/test_prepare.py',
+              'Cocolon_前提資料/system_context/00_read_first.md',
+              'Cocolon_前提資料/system_context/.step5_corrected_standard_entry_workflow.yml',
+              *{f'.github/context-payloads/step5-reconstructed/part{i:03d}' for i in range(6)},
+          }
+          actual = set(subprocess.check_output(
+              ['git', 'diff', '--cached', '--name-only'], text=True
+          ).splitlines())
+          assert actual == expected, (sorted(actual), sorted(expected))
+          PY
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "feat(system-context): materialize genuine Step 5 incremental source"
+          git fetch --no-tags origin "+refs/heads/${TARGET_BRANCH}:refs/remotes/origin/${TARGET_BRANCH}"
+          test "$(git rev-parse refs/remotes/origin/${TARGET_BRANCH})" = "$EXPECTED_HEAD"
+          git push origin "HEAD:${TARGET_BRANCH}"
