@@ -50,6 +50,16 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help=argparse.SUPPRESS,
     )
+    prepare.add_argument(
+        "--source-incremental-verified",
+        action="store_true",
+        help=argparse.SUPPRESS,
+    )
+    prepare.add_argument(
+        "--source-incremental-evidence",
+        type=Path,
+        help=argparse.SUPPRESS,
+    )
     prepare.add_argument("--verify-only", action="store_true")
     prepare.add_argument("--require-remote-verified", action="store_true")
     prepare.add_argument("--max-part-bytes", type=int, default=90_000_000)
@@ -108,6 +118,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         forwarded.append("--fresh-clone-verified")
     if args.non_code_incremental_verified:
         forwarded.append("--non-code-incremental-verified")
+    if args.source_incremental_verified:
+        forwarded.append("--source-incremental-verified")
+    if args.source_incremental_evidence:
+        forwarded.extend(("--source-incremental-evidence", str(args.source_incremental_evidence)))
     if args.verify_only:
         forwarded.append("--verify-only")
     if args.require_remote_verified:

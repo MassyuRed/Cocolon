@@ -71,9 +71,18 @@ deleted, renamed and type-changed paths.  The updater records the affected
 layers.  A modified non-code path updates only Inventory and Task Context;
 Code Index and Route Graph semantic provider payloads are reused, with their
 manifest/coverage bindings refreshed against commit-independent file identity.
-Code, route, test, schema, config, toolchain, provider, add/delete/rename or
-type-change input uses the documented bounded full-rebuild fallback rather
-than retaining a stale index.
+
+An ordinary modified source path is reindexed together with its transitive
+reverse import/reference dependents.  The provider runs against a sparse
+current-commit project, and only rows owned by that affected file set replace
+the saved Step 2 rows.  Step 3 builds a scratch candidate, derives the affected
+RN call / API route / backend owner / test closure, and merges only changed
+rows admitted by that closure.  Any delta outside the closure or any change to
+unaffected semantic rows is rejected.
+
+Add/delete/rename/type changes, provider/toolchain/schema/profile changes, and
+global route registry / `include_router` / domain-owner changes use the
+bounded full-rebuild fallback rather than retaining a stale index.
 
 ### Fresh clone
 
@@ -102,7 +111,8 @@ COCOLON_SYSTEM_CONTEXT_STEPS1_TO_5_COMPLETE
 ```
 
 They require remote source/generated-byte verification, same-ref reuse,
-changed-ref refresh with the required fallback evidence, task-context
-regeneration, full-text read-order publication, fresh-clone deterministic
-verification, and zero Mash manual operation.  Step 5 does not automatically
-advance to any later work.
+non-code incremental rebind, source plus reverse-dependent Step 2 reindex,
+affected Step 3 closure refresh, the required global fallback evidence,
+task-context regeneration, full-text read-order publication, fresh-clone
+deterministic verification, and zero Mash manual operation.  Step 5 does not
+automatically advance to any later work.

@@ -173,7 +173,7 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A "$ROOT"
+          git add -- "$ROOT"
           test -n "$(git diff --cached --name-only)"
           git commit -m "chore(system-context): generate Step 5 changed-ref context"
           git push origin "HEAD:${TARGET_BRANCH}"
@@ -257,13 +257,84 @@ jobs:
               "inventory",
               "task_context",
           ]
-          assert receipt["semantic_reuse"]["code_index_provider_rerun"] is False
-          assert receipt["semantic_reuse"]["route_graph_provider_rerun"] is False
+          assert receipt["semantic_reuse"]["full_code_index_provider_rerun"] is False
+          assert receipt["semantic_reuse"]["partial_code_index_provider_rerun"] is False
+          assert receipt["semantic_reuse"]["full_route_graph_candidate_for_closure_admission"] is False
           assert receipt["semantic_reuse"]["non_code_incremental_rebind_verified"] is True
           assert receipt["changed_ref_refresh_verified"] is True
           assert receipt["manual_operation_count"] == 0
           assert receipt["product_credit"] == 0
           assert receipt["automatic_progression"] is False
+          PY
+          )
+
+
+      - name: Prove changed-ref source reverse-dependent and affected-closure refresh
+        shell: bash
+        run: |
+          set -euo pipefail
+          FRESH=/tmp/cocolon-step5-incremental-source
+          rm -rf "$FRESH"
+          git clone --no-local "$GITHUB_WORKSPACE" "$FRESH"
+          git -C "$FRESH" checkout --detach "$PENDING_GENERATED_COMMIT"
+          git -C "$FRESH" config user.name "cocolon-context-source-incremental-proof"
+          git -C "$FRESH" config user.email "cocolon-context-source-incremental-proof@invalid"
+          python3 - <<'PY'
+          from pathlib import Path
+          target = Path("/tmp/cocolon-step5-incremental-source/lib/api/home/emotionPieceApi.js")
+          target.write_text("\n" + target.read_text(encoding="utf-8"), encoding="utf-8")
+          PY
+          git -C "$FRESH" add lib/api/home/emotionPieceApi.js
+          git -C "$FRESH" commit -m "test: exercise source dependent closure refresh"
+          mkdir -p "$FRESH/.cocolon-context-workspace"
+          git clone --no-local "$GITHUB_WORKSPACE/$EXTERNAL_ROOT/mashos-api" \
+            "$FRESH/.cocolon-context-workspace/mashos-api"
+          git -C "$FRESH/.cocolon-context-workspace/mashos-api" \
+            checkout --detach "$MASHOS_COMMIT"
+          mkdir -p "$FRESH/.cocolon-context-workspace/cycle001_working"
+          git clone --no-local \
+            "$GITHUB_WORKSPACE/$EXTERNAL_ROOT/cycle001_working/mashos-api" \
+            "$FRESH/.cocolon-context-workspace/cycle001_working/mashos-api"
+          git -C "$FRESH/.cocolon-context-workspace/cycle001_working/mashos-api" \
+            checkout --detach "$CYCLE001_MASHOS_COMMIT"
+          (
+            cd "$FRESH"
+            python3 -m tools.cocolon_context prepare \
+              --workspace cmee_working \
+              --task cmee
+            python3 - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path("Cocolon_前提資料/system_context/current/cmee_working")
+          receipt = json.loads((root / "prepare_summary.json").read_text(encoding="utf-8"))
+          assert receipt["refresh_plan"]["execution_mode"] == "INCREMENTAL_SOURCE_DEPENDENT_CLOSURE"
+          assert receipt["refresh_plan"]["fallback_reasons"] == []
+          assert receipt["refresh_plan"]["changed_path_count"] == 1
+          assert receipt["semantic_reuse"]["full_code_index_provider_rerun"] is False
+          assert receipt["semantic_reuse"]["partial_code_index_provider_rerun"] is True
+          assert receipt["semantic_reuse"]["full_route_graph_candidate_for_closure_admission"] is True
+          assert receipt["semantic_reuse"]["source_reverse_dependent_and_route_closure_verified"] is True
+          evidence = receipt["semantic_reuse"]["source_incremental_evidence"]
+          reverse = evidence["reverse_dependents"]
+          route = evidence["route_closure"]
+          assert reverse["reindexed_path_count"] > reverse["seed_path_count"]
+          assert route["affected_rn_call_count"] > 0
+          assert route["affected_route_count"] > 0
+          changed_route_rows = sum(
+              int(value.get("changed_row_count", 0))
+              for value in route["outputs"].values()
+              if isinstance(value, dict)
+          )
+          assert changed_route_rows > 0
+          assert receipt["changed_ref_refresh_verified"] is True
+          assert receipt["manual_operation_count"] == 0
+          assert receipt["product_credit"] == 0
+          assert receipt["automatic_progression"] is False
+          Path("/tmp/source-incremental-evidence.json").write_text(
+              json.dumps(evidence, ensure_ascii=False, sort_keys=True, indent=2) + "\n",
+              encoding="utf-8",
+          )
           PY
           )
 
@@ -276,7 +347,9 @@ jobs:
             --task cmee \
             --remote-verified \
             --fresh-clone-verified \
-            --non-code-incremental-verified
+            --non-code-incremental-verified \
+            --source-incremental-verified \
+            --source-incremental-evidence /tmp/source-incremental-evidence.json
           python3 - <<'PY'
           import json
           from pathlib import Path
@@ -289,6 +362,11 @@ jobs:
           assert receipt["changed_ref_refresh_verified"] is True
           assert receipt["full_rebuild_fallback_verified"] is True
           assert receipt["semantic_reuse"]["non_code_incremental_rebind_verified"] is True
+          assert receipt["semantic_reuse"]["source_reverse_dependent_and_route_closure_verified"] is True
+          source_evidence = receipt["semantic_reuse"]["source_incremental_evidence"]
+          assert source_evidence["reverse_dependents"]["reindexed_path_count"] > source_evidence["reverse_dependents"]["seed_path_count"]
+          assert source_evidence["route_closure"]["affected_rn_call_count"] > 0
+          assert source_evidence["route_closure"]["affected_route_count"] > 0
           assert receipt["fresh_clone_deterministic_verified"] is True
           assert receipt["completion_claim"] == "STEP5_COCOLON_STANDARD_ENTRY_CONNECTED"
           assert receipt["overall_claim"] == "COCOLON_SYSTEM_CONTEXT_STEPS1_TO_5_COMPLETE"
@@ -296,7 +374,7 @@ jobs:
           assert receipt["mashos_api_write_count"] == 0
           assert receipt["product_behavior_change_count"] == 0
           PY
-          git add -A "$ROOT"
+          git add -- "$ROOT"
           test -n "$(git diff --cached --name-only)"
           git commit -m "chore(system-context): seal Steps 1-5 remote completion"
           git push origin "HEAD:${TARGET_BRANCH}"
@@ -353,6 +431,7 @@ jobs:
           root = Path("Cocolon_前提資料/system_context/current/cmee_working")
           task_root = root / "task_context/cmee"
           receipt = json.loads((root / "prepare_summary.json").read_text(encoding="utf-8"))
+          source_incremental = receipt["semantic_reuse"]["source_incremental_evidence"]
           manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
           code = json.loads((root / "code_index/code_index_summary.json").read_text(encoding="utf-8"))
           routes = json.loads((root / "route_graph/route_graph_summary.json").read_text(encoding="utf-8"))
@@ -605,6 +684,11 @@ jobs:
               {changed_paths_md}
               - bounded full-rebuild fallback: `{receipt['full_rebuild_fallback_verified']}` / `{json.dumps(changed_plan.get('fallback_reasons', []), ensure_ascii=False)}`
               - non-code incremental provider reuse: `{receipt['semantic_reuse']['non_code_incremental_rebind_verified']}`
+              - source + reverse-dependent Step 2 reindex: `{receipt['semantic_reuse']['source_reverse_dependent_and_route_closure_verified']}`
+              - source incremental seed/reindexed paths: `{source_incremental['reverse_dependents']['seed_path_count']}` / `{source_incremental['reverse_dependents']['reindexed_path_count']}`
+              - reverse import/reference dependents: `{source_incremental['reverse_dependents']['reverse_import_dependent_count']}` / `{source_incremental['reverse_dependents']['reverse_reference_dependent_count']}`
+              - affected Step 3 RN calls/routes: `{source_incremental['route_closure']['affected_rn_call_count']}` / `{source_incremental['route_closure']['affected_route_count']}`
+              - unaffected route-row delta rejection: `{source_incremental['unaffected_route_row_change_rejected']}`
               - fresh clone deterministic: `{receipt['fresh_clone_deterministic_verified']}`
               - Mash manual operation count: `{receipt['manual_operation_count']}`
               - remote source/generated bytes and manifest verification: `{receipt['remote_verified']}`

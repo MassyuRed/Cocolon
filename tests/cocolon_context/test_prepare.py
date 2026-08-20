@@ -24,7 +24,11 @@ from tools.cocolon_context import build_parser
 from tools.cocolon_context_prepare import (
     Change,
     RepositoryRef,
+    _derive_reverse_dependents,
     _diff_changes,
+    _iter_jsonl,
+    _merge_code_partition,
+    _merge_route_candidate,
     effective_material_commit,
     plan_refresh,
 )
@@ -99,6 +103,33 @@ class PreparePlannerTests(unittest.TestCase):
         self.assertIn("TOOLCHAIN_SCHEMA_OR_PROFILE_CHANGE", plan["classification_reasons"])
         self.assertTrue(plan["fallback_reasons"])
 
+    def test_modified_source_uses_dependent_closure_incremental(self) -> None:
+        plan = plan_refresh([
+            Change("Cocolon", "MODIFIED", None, "lib/api/home/emotionPieceApi.js")
+        ])
+        self.assertEqual(
+            plan["execution_mode"],
+            "INCREMENTAL_SOURCE_DEPENDENT_CLOSURE",
+        )
+        self.assertEqual(plan["fallback_reasons"], [])
+        self.assertEqual(
+            plan["executed_layers"],
+            ["code_index", "inventory", "route_graph", "task_context"],
+        )
+
+    def test_forced_route_registry_owner_uses_full_fallback(self) -> None:
+        plan = plan_refresh(
+            [Change("mashos-api", "MODIFIED", None, "ai/main.py")],
+            forced_full_rebuild_reasons=[
+                "ROUTE_REGISTRY_INCLUDE_ROUTER_OR_DOMAIN_OWNER_CHANGE"
+            ],
+        )
+        self.assertEqual(plan["execution_mode"], "FULL_REBUILD_FALLBACK")
+        self.assertIn(
+            "ROUTE_REGISTRY_INCLUDE_ROUTER_OR_DOMAIN_OWNER_CHANGE",
+            plan["fallback_reasons"],
+        )
+
 
 class PrepareCliTests(unittest.TestCase):
     def test_workflow_only_incremental_proof_flag_is_forwardable(self) -> None:
@@ -112,6 +143,18 @@ class PrepareCliTests(unittest.TestCase):
             "--non-code-incremental-verified",
         ])
         self.assertTrue(args.non_code_incremental_verified)
+
+    def test_source_incremental_proof_flag_is_forwardable(self) -> None:
+        parser = build_parser()
+        args = parser.parse_args([
+            "prepare",
+            "--workspace",
+            "cmee_working",
+            "--task",
+            "cmee",
+            "--source-incremental-verified",
+        ])
+        self.assertTrue(args.source_incremental_verified)
 
 
 class GitDiffRefreshMatrixTests(unittest.TestCase):
@@ -221,6 +264,171 @@ class EffectiveMaterialCommitTests(unittest.TestCase):
             git(repo, "commit", "-m", "mixed")
             head = git(repo, "rev-parse", "HEAD")
             self.assertEqual(effective_material_commit(repo), head)
+
+
+class IncrementalSemanticMergeTests(unittest.TestCase):
+    @staticmethod
+    def _write_jsonl(path: Path, rows: list[dict[str, object]]) -> None:
+        import json
+
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(
+            "".join(
+                json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+                + "\n"
+                for row in rows
+            ),
+            encoding="utf-8",
+        )
+
+    def test_reverse_import_and_reference_dependents_are_transitive(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            self._write_jsonl(
+                root / "import_edges.jsonl",
+                [
+                    {
+                        "repository_key": "Cocolon",
+                        "source_path": "b.ts",
+                        "resolved_target_path": "a.ts",
+                    }
+                ],
+            )
+            self._write_jsonl(
+                root / "references.jsonl",
+                [
+                    {
+                        "repository_key": "Cocolon",
+                        "path": "c.ts",
+                        "resolved_repository_key": "Cocolon",
+                        "resolved_path": "b.ts",
+                    }
+                ],
+            )
+            affected, evidence = _derive_reverse_dependents(
+                code_dir=root,
+                seeds={("Cocolon", "a.ts")},
+                database_path=root / "reverse.sqlite3",
+            )
+            self.assertEqual(
+                affected,
+                {
+                    ("Cocolon", "a.ts"),
+                    ("Cocolon", "b.ts"),
+                    ("Cocolon", "c.ts"),
+                },
+            )
+            self.assertEqual(evidence["reverse_import_dependent_count"], 1)
+            self.assertEqual(evidence["reverse_reference_dependent_count"], 1)
+
+    def test_code_partition_replaces_only_affected_file_rows(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            target = root / "symbols.jsonl"
+            partial = root / "partial.jsonl"
+            self._write_jsonl(
+                target,
+                [
+                    {"repository_key": "Cocolon", "path": "a.ts", "symbol_id": "old-a"},
+                    {"repository_key": "Cocolon", "path": "b.ts", "symbol_id": "b"},
+                ],
+            )
+            self._write_jsonl(
+                partial,
+                [
+                    {"repository_key": "Cocolon", "path": "a.ts", "symbol_id": "new-a"}
+                ],
+            )
+            kept, replaced = _merge_code_partition(
+                target=target,
+                partial=partial,
+                affected={("Cocolon", "a.ts")},
+                name="symbols.jsonl",
+            )
+            self.assertEqual((kept, replaced), (1, 1))
+            rows = list(_iter_jsonl(target))
+            self.assertEqual({row["symbol_id"] for row in rows}, {"b", "new-a"})
+
+    def test_route_candidate_merges_only_affected_closure_rows(self) -> None:
+        import hashlib
+        import json
+
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            old = root / "old"
+            fresh = root / "fresh"
+            old.mkdir()
+            fresh.mkdir()
+            old_calls = [
+                {
+                    "call_id": "call-a",
+                    "path": "lib/api/a.js",
+                    "matched_route_ids": ["route-a"],
+                },
+                {
+                    "call_id": "call-b",
+                    "path": "lib/api/b.js",
+                    "matched_route_ids": ["route-b"],
+                },
+            ]
+            fresh_calls = [
+                {
+                    "call_id": "call-a",
+                    "path": "lib/api/a.js",
+                    "matched_route_ids": [],
+                    "unresolved_reason": "changed",
+                },
+                old_calls[1],
+            ]
+            routes = [
+                {"route_id": "route-a", "path": "ai/api_a.py"},
+                {"route_id": "route-b", "path": "ai/api_b.py"},
+            ]
+            old_edges = [
+                {
+                    "edge_id": "edge-a",
+                    "rn_call_id": "call-a",
+                    "api_route_id": "route-a",
+                },
+                {
+                    "edge_id": "edge-b",
+                    "rn_call_id": "call-b",
+                    "api_route_id": "route-b",
+                },
+            ]
+            fresh_edges = [old_edges[1]]
+            files = {
+                "rn_calls.jsonl": (old_calls, fresh_calls),
+                "api_routes.jsonl": (routes, routes),
+                "cross_repository_route_edges.jsonl": (old_edges, fresh_edges),
+            }
+            for name, (old_rows, fresh_rows) in files.items():
+                self._write_jsonl(old / name, old_rows)
+                self._write_jsonl(fresh / name, fresh_rows)
+            summary = {"completion_claim": "STEP3_RN_API_BACKEND_TEST_ROUTE_GRAPH_CONNECTED"}
+            (old / "route_graph_summary.json").write_text(json.dumps(summary) + "\n")
+            (fresh / "route_graph_summary.json").write_text(json.dumps(summary) + "\n")
+            manifest = {
+                "output_sha256": {
+                    name: hashlib.sha256((fresh / name).read_bytes()).hexdigest()
+                    for name in [*files, "route_graph_summary.json"]
+                }
+            }
+            (fresh / "route_graph_manifest.json").write_text(json.dumps(manifest) + "\n")
+            evidence = _merge_route_candidate(
+                old_route_dir=old,
+                candidate_dir=fresh,
+                affected_keys={("Cocolon", "lib/api/a.js")},
+                replacements={},
+            )
+            self.assertEqual(evidence["affected_rn_call_count"], 1)
+            self.assertEqual(evidence["affected_route_count"], 1)
+            self.assertEqual(
+                evidence["outputs"]["rn_calls.jsonl"]["changed_row_count"],
+                1,
+            )
+            merged_calls = list(_iter_jsonl(old / "rn_calls.jsonl"))
+            self.assertEqual(merged_calls, fresh_calls)
 
 
 if __name__ == "__main__":
