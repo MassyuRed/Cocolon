@@ -8,10 +8,70 @@ from __future__ import annotations
 
 import argparse
 from pathlib import Path
-from typing import Sequence
+import sys
+import tempfile
+from typing import Any, Mapping, Sequence
 
-from tools.cocolon_context_prepare import cli as prepare_cli
+from tools import cocolon_context_prepare as prepare_module
 from tools.cocolon_context_task import ContextCompileError, compile_task_context
+
+
+def _verify_published_workspace(
+    *,
+    repo_root: Path,
+    workspace: str,
+    workspace_dir: Path,
+    refs: Mapping[str, Any],
+    profiles_path: Path,
+) -> dict[str, Any]:
+    """Verify transport bytes, then semantic outputs from logical materialization."""
+    transport = prepare_module.verify_outputs(workspace_dir)
+    with tempfile.TemporaryDirectory(
+        prefix="cocolon-workspace-verify-materialized-"
+    ) as temporary:
+        materialized = prepare_module.materialize_outputs(
+            workspace_dir, Path(temporary) / "workspace"
+        )
+        prepare_module.verify_inventory(
+            profiles_path,
+            workspace,
+            {key: value.path for key, value in refs.items()},
+            materialized,
+        )
+        prepare_module._run(
+            (
+                sys.executable,
+                str(repo_root / "tools/cocolon_context_code_index.py"),
+                "verify",
+                "--inventory",
+                str(materialized / "files.jsonl"),
+                "--output",
+                str(materialized / "code_index"),
+            ),
+            cwd=repo_root,
+        )
+        prepare_module._run(
+            (
+                sys.executable,
+                str(repo_root / "tools/cocolon_context_routes.py"),
+                "verify",
+                "--inventory",
+                str(materialized / "files.jsonl"),
+                "--code-index",
+                str(materialized / "code_index"),
+                "--output",
+                str(materialized / "route_graph"),
+            ),
+            cwd=repo_root,
+        )
+    return dict(transport)
+
+
+# The standard public entry owns packed-output verification.  The implementation
+# module remains unchanged here; all prepare modes reached through this CLI use
+# the logical-file verifier above.
+prepare_module._verify_workspace = _verify_published_workspace
+prepare_cli = prepare_module.cli
 
 
 def build_parser() -> argparse.ArgumentParser:
