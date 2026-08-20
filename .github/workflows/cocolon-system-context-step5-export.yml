@@ -1,7 +1,12 @@
-name: Cocolon System Context Step 5 workflow export
-run-name: Export current Step 5 workflow @ ${{ github.event.pull_request.head.sha }}
+name: Cocolon System Context Step 5 source export
+run-name: Export current Step 5 prepare source @ ${{ github.event.pull_request.head.sha || github.sha }}
 
 on:
+  push:
+    branches:
+      - agent/cocolon-system-context-index-20260818
+    paths:
+      - .github/workflows/cocolon-system-context-step5-export.yml
   pull_request:
     paths:
       - .github/workflows/cocolon-system-context-step5-export.yml
@@ -11,7 +16,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: cocolon-system-context-step5-workflow-export
+  group: cocolon-system-context-step5-source-export-${{ github.event_name }}
   cancel-in-progress: true
 
 jobs:
@@ -26,17 +31,17 @@ jobs:
           ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 1
 
-      - name: Verify workflow file exists
+      - name: Verify prepare source exists
         shell: bash
         run: |
           set -euo pipefail
-          test -f .github/workflows/cocolon-system-context-inventory.yml
-          sha256sum .github/workflows/cocolon-system-context-inventory.yml
+          test -f tools/cocolon_context_prepare.py
+          sha256sum tools/cocolon_context_prepare.py
 
-      - name: Upload exact standard workflow
+      - name: Upload exact prepare source
         uses: actions/upload-artifact@v4
         with:
-          name: cocolon-step5-standard-workflow
-          path: .github/workflows/cocolon-system-context-inventory.yml
+          name: cocolon-step5-prepare-source
+          path: tools/cocolon_context_prepare.py
           if-no-files-found: error
           retention-days: 1
