@@ -40,15 +40,18 @@ jobs:
 
           path = Path('.github/workflows/cocolon-system-context-inventory.yml')
           text = path.read_text(encoding='utf-8')
-          old = '  group: cocolon-system-context-step5-${{ github.event.pull_request.head.ref || github.ref_name }}\n'
-          new = '  group: cocolon-system-context-step5-${{ github.event_name }}-${{ github.event.pull_request.head.ref || github.ref_name }}\n'
+          head_ref = '$' + '{{ github.event.pull_request.head.ref || github.ref_name }}'
+          event_name = '$' + '{{ github.event_name }}'
+          old = f'  group: cocolon-system-context-step5-{head_ref}\n'
+          new = f'  group: cocolon-system-context-step5-{event_name}-{head_ref}\n'
           if new not in text:
               if old not in text:
                   raise SystemExit('standard workflow concurrency anchor is missing')
               text = text.replace(old, new, 1)
               path.write_text(text, encoding='utf-8')
+          if new not in path.read_text(encoding='utf-8'):
+              raise SystemExit('standard workflow concurrency correction was not written')
           PY
-          grep -F 'group: cocolon-system-context-step5-${{ github.event_name }}-${{ github.event.pull_request.head.ref || github.ref_name }}' "$STANDARD_WORKFLOW"
           grep -F 'python3 -m pip install --disable-pip-version-check pytest==8.4.2' "$STANDARD_WORKFLOW"
           git diff --check -- "$STANDARD_WORKFLOW"
           git add -- "$STANDARD_WORKFLOW"
