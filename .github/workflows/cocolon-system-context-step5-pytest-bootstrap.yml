@@ -1,7 +1,12 @@
 name: Cocolon System Context Step 5 fresh-clone repair
-run-name: Repair packed workspace verification @ ${{ github.event.pull_request.head.sha }}
+run-name: Repair packed workspace verification @ ${{ github.event.pull_request.head.sha || github.sha }}
 
 on:
+  push:
+    branches:
+      - agent/cocolon-system-context-index-20260818
+    paths:
+      - .github/workflows/cocolon-system-context-step5-pytest-bootstrap.yml
   pull_request:
     paths:
       - .github/workflows/cocolon-system-context-step5-pytest-bootstrap.yml
@@ -11,7 +16,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: cocolon-system-context-step5-fresh-clone-repair
+  group: cocolon-system-context-step5-fresh-clone-repair-${{ github.event_name }}
   cancel-in-progress: false
 
 jobs:
