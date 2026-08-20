@@ -1,10 +1,32 @@
 name: Cocolon System Context Steps 1-5 standard entry
-run-name: Cocolon System Context Step 5 @ ${{ github.sha }}
+run-name: Cocolon System Context Step 5 @ ${{ github.event.pull_request.head.sha || github.sha }}
 
 on:
   push:
     branches:
       - agent/cocolon-system-context-index-20260818
+    paths:
+      - .github/workflows/cocolon-system-context-inventory.yml
+      - tools/cocolon_context.py
+      - tools/cocolon_context_prepare.py
+      - tools/cocolon_context_task.py
+      - tools/cocolon_context_inventory.py
+      - tools/cocolon_context_code_index.py
+      - tools/cocolon_context_routes.py
+      - tools/cocolon_context_publish_transport.py
+      - tools/cocolon_context_ts_syntax.cjs
+      - tools/cocolon_context_ts_routes.cjs
+      - tests/cocolon_context/**
+      - tests/cocolon_context_step4/**
+      - Cocolon_前提資料/system_context/workspace_profiles.json
+      - Cocolon_前提資料/system_context/task_profiles.json
+      - Cocolon_前提資料/system_context/00_read_first.md
+      - Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt
+      - .github/context-payloads/step2-code/**
+      - .github/context-payloads/step3/**
+      - .github/context-payloads/step3-c/**
+      - .github/context-payloads/step3-ts-routes/**
+  pull_request:
     paths:
       - .github/workflows/cocolon-system-context-inventory.yml
       - tools/cocolon_context.py
@@ -41,7 +63,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 240
     env:
-      SOURCE_COMMIT: ${{ github.sha }}
+      SOURCE_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
       TARGET_BRANCH: agent/cocolon-system-context-index-20260818
       MASHOS_COMMIT: 06ce311b3ea728b06f83439d268a34bed917c01c
       CYCLE001_MASHOS_COMMIT: 958c1b53f5b5894691e0b10e2d991fb8236d9f6f
@@ -51,7 +73,7 @@ jobs:
       - name: Checkout exact Cocolon source
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.sha }}
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
           fetch-depth: 0
 
       - name: Assert source identity
