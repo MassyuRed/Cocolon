@@ -118,6 +118,12 @@ jobs:
         with:
           python-version: "3.11"
 
+      - name: Install pinned Python test dependency
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install --disable-pip-version-check pytest==8.4.2
+
       - name: Set up Node 20
         uses: actions/setup-node@v4
         with:
