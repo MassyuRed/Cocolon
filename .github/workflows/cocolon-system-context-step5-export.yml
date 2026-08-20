@@ -1,4 +1,4 @@
-# retrigger_source_repair: f149fad895efbb436a73ac9b5728d405869c7977
+# retrigger_source_repair: cancel_old_queue_after_a7b2aa900ccdd3ff44fb2f57cf66ccd2fb3f4176
 name: Cocolon System Context Step 5 packed-workspace repair
 run-name: Repair fresh-clone verification @ ${{ github.event.pull_request.head.sha || github.sha }}
 
@@ -18,7 +18,7 @@ permissions:
 
 concurrency:
   group: cocolon-system-context-step5-packed-workspace-repair-${{ github.event_name }}
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   repair:
