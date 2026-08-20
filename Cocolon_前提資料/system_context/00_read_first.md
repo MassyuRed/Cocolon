@@ -89,6 +89,20 @@ bounded full-rebuild fallback rather than retaining a stale index.
 The remotely sealed result must pass `prepare --verify-only` from a distinct
 fresh clone with the same exact refs and produce no generated diff.
 
+## Automated verification ownership
+
+The PR-triggered
+`.github/workflows/cocolon-system-context-inventory.yml` job is the sole
+automatic writer for a Step 5 terminal run.  A commit written by
+`github-actions[bot]` does not start a second writer job.  The separate
+`.github/workflows/cocolon-system-context-step5-export.yml` dispatcher is
+manual-only.
+
+A standard run may begin from either a material source commit or a trailing
+context-generated commit.  The former refreshes the affected layers; the latter
+must resolve the effective material source and verify `SAME_REF_REUSE` instead
+of forcing a false changed-ref rebuild.
+
 ## Publication transport
 
 Canonical large JSONL output remains canonical logical bytes.  Files exceeding
