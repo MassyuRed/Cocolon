@@ -1,3 +1,4 @@
+# retrigger_source_repair: f149fad895efbb436a73ac9b5728d405869c7977
 name: Cocolon System Context Step 5 packed-workspace repair
 run-name: Repair fresh-clone verification @ ${{ github.event.pull_request.head.sha || github.sha }}
 
