@@ -2,30 +2,6 @@ name: Cocolon System Context Steps 1-5 standard entry
 run-name: Cocolon System Context Step 5 @ ${{ github.event.pull_request.head.sha || github.sha }}
 
 on:
-  push:
-    branches:
-      - agent/cocolon-system-context-index-20260818
-    paths:
-      - .github/workflows/cocolon-system-context-inventory.yml
-      - tools/cocolon_context.py
-      - tools/cocolon_context_prepare.py
-      - tools/cocolon_context_task.py
-      - tools/cocolon_context_inventory.py
-      - tools/cocolon_context_code_index.py
-      - tools/cocolon_context_routes.py
-      - tools/cocolon_context_publish_transport.py
-      - tools/cocolon_context_ts_syntax.cjs
-      - tools/cocolon_context_ts_routes.cjs
-      - tests/cocolon_context/**
-      - tests/cocolon_context_step4/**
-      - Cocolon_前提資料/system_context/workspace_profiles.json
-      - Cocolon_前提資料/system_context/task_profiles.json
-      - Cocolon_前提資料/system_context/00_read_first.md
-      - Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt
-      - .github/context-payloads/step2-code/**
-      - .github/context-payloads/step3/**
-      - .github/context-payloads/step3-c/**
-      - .github/context-payloads/step3-ts-routes/**
   pull_request:
     paths:
       - .github/workflows/cocolon-system-context-inventory.yml
@@ -55,15 +31,16 @@ permissions:
   pull-requests: write
 
 concurrency:
-  group: cocolon-system-context-step5-${{ github.event_name }}-${{ github.event.pull_request.head.ref || github.ref_name }}
+  group: cocolon-system-context-step5-${{ github.event.pull_request.head.ref || github.ref_name }}
   cancel-in-progress: false
 
 jobs:
   connect-standard-entry:
+    if: github.event_name == 'workflow_dispatch' || github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     timeout-minutes: 240
     env:
-      SOURCE_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
+      CHECKOUT_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
       TARGET_BRANCH: agent/cocolon-system-context-index-20260818
       MASHOS_COMMIT: 06ce311b3ea728b06f83439d268a34bed917c01c
       CYCLE001_MASHOS_COMMIT: 958c1b53f5b5894691e0b10e2d991fb8236d9f6f
@@ -80,7 +57,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = "$SOURCE_COMMIT"
+          test "$(git rev-parse HEAD)" = "$CHECKOUT_COMMIT"
           test "$(git status --porcelain)" = ""
 
       - name: Checkout locked mashos-api read-only
@@ -171,7 +148,7 @@ jobs:
           python3 -m unittest discover -s tests/cocolon_context -p 'test_*.py' -v
           git diff --check
 
-      - name: Prepare changed ref through Steps 1-4
+      - name: Prepare current ref through Steps 1-4
         shell: bash
         run: |
           set -euo pipefail
@@ -181,31 +158,51 @@ jobs:
             --task cmee
           python3 - <<'PY'
           import json
+          import os
           from pathlib import Path
+          from tools.cocolon_context_prepare import effective_material_commit
+
           root = Path("Cocolon_前提資料/system_context/current/cmee_working")
           receipt = json.loads((root / "prepare_summary.json").read_text(encoding="utf-8"))
+          material_source = effective_material_commit(Path.cwd(), os.environ["CHECKOUT_COMMIT"])
+          resolved = receipt["resolved_refs"]["Cocolon"]
+          resolved_commit = resolved["commit"] if isinstance(resolved, dict) else resolved
+          mode = receipt["refresh_plan"]["execution_mode"]
+
           assert receipt["status"] == "PENDING_REMOTE_VERIFICATION"
-          assert receipt["refresh_plan"]["execution_mode"] == "FULL_REBUILD_FALLBACK"
-          assert receipt["changed_ref_refresh_verified"] is True
-          assert receipt["full_rebuild_fallback_verified"] is True
+          assert resolved_commit == material_source
+          assert receipt["resolved_refs"]["mashos-api"]["commit"] == os.environ["MASHOS_COMMIT"]
+          assert mode in {"FULL_REBUILD_FALLBACK", "SAME_REF_REUSE"}
+          if mode == "FULL_REBUILD_FALLBACK":
+              assert receipt["changed_ref_refresh_verified"] is True
+              assert receipt["full_rebuild_fallback_verified"] is True
+          else:
+              assert receipt["same_ref_reuse_verified"] is True
+              assert receipt["refresh_plan"]["changed_path_count"] == 0
           assert receipt["manual_operation_count"] == 0
           assert receipt["product_credit"] == 0
           assert receipt["automatic_progression"] is False
-          assert receipt["resolved_refs"]["Cocolon"]["commit"] == __import__("os").environ["SOURCE_COMMIT"]
-          assert receipt["resolved_refs"]["mashos-api"]["commit"] == __import__("os").environ["MASHOS_COMMIT"]
+
+          with Path(os.environ["GITHUB_ENV"]).open("a", encoding="utf-8") as handle:
+              handle.write(f"MATERIAL_SOURCE_COMMIT={material_source}\n")
+              handle.write(f"PREPARE_EXECUTION_MODE={mode}\n")
           PY
 
-      - name: Commit and push generated changed-ref context
+      - name: Publish current generated context when changed
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -- "$ROOT"
-          test -n "$(git diff --cached --name-only)"
-          git commit -m "chore(system-context): generate Step 5 changed-ref context"
-          git push origin "HEAD:${TARGET_BRANCH}"
-          echo "PENDING_GENERATED_COMMIT=$(git rev-parse HEAD)" >> "$GITHUB_ENV"
+          if git diff --cached --quiet; then
+            PENDING_GENERATED_COMMIT="$(git rev-parse HEAD)"
+          else
+            git commit -m "chore(system-context): generate Step 5 current-ref context"
+            git push origin "HEAD:${TARGET_BRANCH}"
+            PENDING_GENERATED_COMMIT="$(git rev-parse HEAD)"
+          fi
+          echo "PENDING_GENERATED_COMMIT=${PENDING_GENERATED_COMMIT}" >> "$GITHUB_ENV"
 
       - name: Verify same-ref no-op from distinct fresh clone
         shell: bash
@@ -253,14 +250,11 @@ jobs:
           mkdir -p "$FRESH/.cocolon-context-workspace"
           git clone --no-local "$GITHUB_WORKSPACE/$EXTERNAL_ROOT/mashos-api" \
             "$FRESH/.cocolon-context-workspace/mashos-api"
-          git -C "$FRESH/.cocolon-context-workspace/mashos-api" \
-            checkout --detach "$MASHOS_COMMIT"
+          git -C "$FRESH/.cocolon-context-workspace/mashos-api" checkout --detach "$MASHOS_COMMIT"
           mkdir -p "$FRESH/.cocolon-context-workspace/cycle001_working"
-          git clone --no-local \
-            "$GITHUB_WORKSPACE/$EXTERNAL_ROOT/cycle001_working/mashos-api" \
+          git clone --no-local "$GITHUB_WORKSPACE/$EXTERNAL_ROOT/cycle001_working/mashos-api" \
             "$FRESH/.cocolon-context-workspace/cycle001_working/mashos-api"
-          git -C "$FRESH/.cocolon-context-workspace/cycle001_working/mashos-api" \
-            checkout --detach "$CYCLE001_MASHOS_COMMIT"
+          git -C "$FRESH/.cocolon-context-workspace/cycle001_working/mashos-api" checkout --detach "$CYCLE001_MASHOS_COMMIT"
           (
             cd "$FRESH"
             python3 -m tools.cocolon_context prepare \
@@ -296,7 +290,6 @@ jobs:
           PY
           )
 
-
       - name: Prove changed-ref source reverse-dependent and affected-closure refresh
         shell: bash
         run: |
@@ -317,14 +310,11 @@ jobs:
           mkdir -p "$FRESH/.cocolon-context-workspace"
           git clone --no-local "$GITHUB_WORKSPACE/$EXTERNAL_ROOT/mashos-api" \
             "$FRESH/.cocolon-context-workspace/mashos-api"
-          git -C "$FRESH/.cocolon-context-workspace/mashos-api" \
-            checkout --detach "$MASHOS_COMMIT"
+          git -C "$FRESH/.cocolon-context-workspace/mashos-api" checkout --detach "$MASHOS_COMMIT"
           mkdir -p "$FRESH/.cocolon-context-workspace/cycle001_working"
-          git clone --no-local \
-            "$GITHUB_WORKSPACE/$EXTERNAL_ROOT/cycle001_working/mashos-api" \
+          git clone --no-local "$GITHUB_WORKSPACE/$EXTERNAL_ROOT/cycle001_working/mashos-api" \
             "$FRESH/.cocolon-context-workspace/cycle001_working/mashos-api"
-          git -C "$FRESH/.cocolon-context-workspace/cycle001_working/mashos-api" \
-            checkout --detach "$CYCLE001_MASHOS_COMMIT"
+          git -C "$FRESH/.cocolon-context-workspace/cycle001_working/mashos-api" checkout --detach "$CYCLE001_MASHOS_COMMIT"
           (
             cd "$FRESH"
             python3 -m tools.cocolon_context prepare \
@@ -381,6 +371,7 @@ jobs:
           python3 - <<'PY'
           import json
           from pathlib import Path
+
           root = Path("Cocolon_前提資料/system_context/current/cmee_working")
           receipt = json.loads((root / "prepare_summary.json").read_text(encoding="utf-8"))
           context = json.loads((root / "task_context/cmee/context_manifest.json").read_text(encoding="utf-8"))
@@ -396,6 +387,7 @@ jobs:
           assert source_evidence["route_closure"]["affected_rn_call_count"] > 0
           assert source_evidence["route_closure"]["affected_route_count"] > 0
           assert receipt["fresh_clone_deterministic_verified"] is True
+          assert receipt["remote_verified"] is True
           assert receipt["completion_claim"] == "STEP5_COCOLON_STANDARD_ENTRY_CONNECTED"
           assert receipt["overall_claim"] == "COCOLON_SYSTEM_CONTEXT_STEPS1_TO_5_COMPLETE"
           assert receipt["structure_map_delta"] == "STRUCTURE_MAP_DELTA_NONE"
@@ -445,146 +437,31 @@ jobs:
         run: |
           set -euo pipefail
           python3 - <<'PY'
-          import collections
           import hashlib
           import json
           import os
-          from pathlib import Path
           import subprocess
-          import tempfile
           import textwrap
-
-          from tools.cocolon_context_publish_transport import materialize_outputs
+          from pathlib import Path
 
           root = Path("Cocolon_前提資料/system_context/current/cmee_working")
           task_root = root / "task_context/cmee"
           receipt = json.loads((root / "prepare_summary.json").read_text(encoding="utf-8"))
-          source_incremental = receipt["semantic_reuse"]["source_incremental_evidence"]
           manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
           code = json.loads((root / "code_index/code_index_summary.json").read_text(encoding="utf-8"))
           routes = json.loads((root / "route_graph/route_graph_summary.json").read_text(encoding="utf-8"))
           task = json.loads((task_root / "context_manifest.json").read_text(encoding="utf-8"))
-          task_profiles = json.loads(
-              Path("Cocolon_前提資料/system_context/task_profiles.json").read_text(encoding="utf-8")
-          )
-
+          source_incremental = receipt["semantic_reuse"]["source_incremental_evidence"]
+          changed_plan = (receipt.get("changed_ref_refresh_evidence") or {}).get("refresh_plan") or {}
+          repo_counts = manifest["repositories"]
+          mode_counts = code.get("mode_counts", {})
+          rn_connections = routes.get("rn_connection_counts", {})
+          api_consumers = routes.get("api_consumer_counts", {})
+          visible_consumers = routes.get("visible_consumer_counts", {})
+          required_coverage = task.get("required_category_coverage", {})
 
           def sha256(path: Path) -> str:
               return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
-          def read_jsonl(path: Path) -> list[dict]:
-              rows = []
-              with path.open("r", encoding="utf-8") as handle:
-                  for line in handle:
-                      if line.strip():
-                          value = json.loads(line)
-                          if isinstance(value, dict):
-                              rows.append(value)
-              return rows
-
-
-          with tempfile.TemporaryDirectory(prefix="cocolon-step5-pr-actual-") as temporary:
-              base = Path(temporary)
-              workspace_plain = materialize_outputs(root, base / "workspace")
-              task_plain = materialize_outputs(task_root, base / "task")
-              selected_rows = read_jsonl(task_plain / "selected_files.jsonl")
-              unresolved_rows = read_jsonl(task_plain / "unresolved_context.jsonl")
-              domain_rows = read_jsonl(workspace_plain / "route_graph/file_domain_assignments.jsonl")
-              closure_rows = read_jsonl(workspace_plain / "route_graph/route_owner_closures.jsonl")
-              provider_runs = json.loads(
-                  (workspace_plain / "code_index/provider_runs.json").read_text(encoding="utf-8")
-              )
-
-          classification_counts = collections.Counter(
-              str(row.get("read_classification") or "UNSPECIFIED") for row in selected_rows
-          )
-          domain_counts: collections.Counter[str] = collections.Counter()
-          for row in domain_rows:
-              values = None
-              for key in ("domains", "domain_tags", "assigned_domains"):
-                  candidate = row.get(key)
-                  if isinstance(candidate, list):
-                      values = candidate
-                      break
-                  if isinstance(candidate, dict):
-                      values = [name for name, enabled in candidate.items() if enabled]
-                      break
-              if values is None:
-                  candidate = row.get("domain") or row.get("domain_id")
-                  values = [candidate] if candidate else ["UNSPECIFIED"]
-              for value in values:
-                  domain_counts[str(value)] += 1
-
-          terminal_role_counts: collections.Counter[str] = collections.Counter()
-          for row in closure_rows:
-              terminal = (
-                  row.get("terminal_node_role")
-                  or row.get("terminal_role")
-                  or row.get("terminal_owner_role")
-                  or row.get("owner_role")
-              )
-              if terminal:
-                  terminal_role_counts[str(terminal)] += 1
-          if not terminal_role_counts:
-              terminal_role_counts["RESOLVED_BACKEND_OWNER"] = int(
-                  routes.get("resolved_backend_owner_count", 0)
-              )
-
-          provider_summary = {
-              str(row.get("run_id")): {
-                  "repository": row.get("repository_key"),
-                  "family": row.get("family"),
-                  "exit_code": row.get("exit_code"),
-                  "documents": row.get("document_count"),
-              }
-              for row in provider_runs.get("runs", [])
-          }
-          tool_versions = {
-              str(name): value.get("value") if isinstance(value, dict) else value
-              for name, value in provider_runs.get("tool_versions", {}).items()
-          }
-
-          review = {}
-          for category in task_profiles.get("tasks", {}).get("cmee", {}).get("required_categories", []):
-              if isinstance(category, dict) and category.get("id") == "nlsv3_cycle001":
-                  candidate = category.get("actual_review")
-                  if isinstance(candidate, dict):
-                      review = candidate
-                  break
-          finding_assets = review.get("external_asset_candidates", [])
-          finding_asset_lines = []
-          for asset in finding_assets:
-              if not isinstance(asset, dict):
-                  continue
-              finding_asset_lines.append(
-                  "- `{}:{}` @ `{}` / blob `{}`".format(
-                      asset.get("repository_key"),
-                      asset.get("path"),
-                      asset.get("source_commit"),
-                      asset.get("blob_sha"),
-                  )
-              )
-          if not finding_asset_lines:
-              finding_asset_lines = ["- none"]
-          finding_assets_md = "\n    ".join(finding_asset_lines)
-
-          changed_evidence = receipt.get("changed_ref_refresh_evidence") or {}
-          changed_plan = changed_evidence.get("refresh_plan") or {}
-          changed_rows = changed_evidence.get("changed_paths") or []
-          changed_path_lines = []
-          for row in changed_rows:
-              if not isinstance(row, dict):
-                  continue
-              old_path = row.get("old_path")
-              new_path = row.get("new_path")
-              rendered = new_path if old_path in (None, new_path) else f"{old_path} -> {new_path}"
-              changed_path_lines.append(
-                  f"- `{row.get('repository_key')}` `{row.get('status')}` `{rendered}`"
-              )
-          if not changed_path_lines:
-              changed_path_lines = ["- none"]
-          changed_paths_md = "\n    ".join(changed_path_lines)
 
           source_change_rows = subprocess.check_output(
               [
@@ -595,25 +472,19 @@ jobs:
                   "--pretty=format:",
                   "--name-status",
                   "-M",
-                  os.environ["SOURCE_COMMIT"],
+                  os.environ["MATERIAL_SOURCE_COMMIT"],
               ],
               text=True,
           ).splitlines()
-          source_change_lines = [f"- `{line}`" for line in source_change_rows if line]
-          source_changes_md = "\n    ".join(source_change_lines or ["- none"])
-
-          repo_counts = manifest.get("repositories", {})
-          mode_counts = code.get("mode_counts", {})
-          rn_connections = routes.get("rn_connection_counts", {})
-          api_consumers = routes.get("api_consumer_counts", {})
-          visible_consumers = routes.get("visible_consumer_counts", {})
-          required_coverage = task.get("required_category_coverage", {})
+          source_changes = "\n".join(
+              f"- `{line}`" for line in source_change_rows if line
+          ) or "- none"
 
           mashos_tree = subprocess.check_output(
               ["git", "-C", ".cocolon-context-workspace/mashos-api", "rev-parse", "HEAD^{tree}"],
               text=True,
           ).strip()
-          cycle001_tree = subprocess.check_output(
+          cycle_tree = subprocess.check_output(
               [
                   "git",
                   "-C",
@@ -630,110 +501,91 @@ jobs:
 
               `COCOLON_SYSTEM_CONTEXT_STEPS1_TO_5_COMPLETE`
 
-              ### Remote identity
-              - workflow run ID: `{os.environ['GITHUB_RUN_ID']}`
-              - workflow run attempt: `{os.environ['GITHUB_RUN_ATTEMPT']}`
-              - source commit: `{os.environ['SOURCE_COMMIT']}`
-              - generated pending commit: `{os.environ['PENDING_GENERATED_COMMIT']}`
-              - final HEAD: `{os.environ['FINAL_HEAD']}`
-              - final tree: `{os.environ['FINAL_TREE']}`
-              - mashos-api read-only head/tree: `{os.environ['MASHOS_COMMIT']}` / `{mashos_tree}`
-              - Cycle001 review-only head/tree: `{os.environ['CYCLE001_MASHOS_COMMIT']}` / `{cycle001_tree}`
+              `Cocolon`と`mashos-api`の全tracked file、code relationship、RN／API／backend／test経路を保持し、task contextと全文確認順をfresh refから復元する標準入口をStep 5まで成立させました。このPRはPR #30へstackされたDraftのままです。
 
-              ### Standard-entry source changed paths
-              {source_changes_md}
+              ## Remote identity
 
-              ### Step 1 — full tracked inventory
+              - workflow run ID / attempt: `{os.environ['GITHUB_RUN_ID']}` / `{os.environ['GITHUB_RUN_ATTEMPT']}`
+              - workflow checkout commit: `{os.environ['CHECKOUT_COMMIT']}`
+              - effective material source commit: `{os.environ['MATERIAL_SOURCE_COMMIT']}`
+              - pending generated commit: `{os.environ['PENDING_GENERATED_COMMIT']}`
+              - final HEAD / tree: `{os.environ['FINAL_HEAD']}` / `{os.environ['FINAL_TREE']}`
+              - mashos-api read-only head / tree: `{os.environ['MASHOS_COMMIT']}` / `{mashos_tree}`
+              - Cycle001 review-only head / tree: `{os.environ['CYCLE001_MASHOS_COMMIT']}` / `{cycle_tree}`
+
+              ### Standard-entry material changed paths
+
+              {source_changes}
+
+              ## Step 1 — full tracked Inventory
+
               - completion: `{manifest['completion_claim']}`
-              - Cocolon tracked: `{repo_counts['Cocolon']['tracked_entry_count']}`
-              - mashos-api tracked: `{repo_counts['mashos-api']['tracked_entry_count']}`
-              - total tracked: `{manifest['total_tracked_entries']}`
-              - missing: `{manifest['missing_tracked_path_count']}`
-              - duplicate: `{manifest['duplicate_repository_path_count']}`
-              - unresolved classification: `{manifest['unresolved_count']}`
-              - files.jsonl SHA-256: `{manifest['output_sha256']['files.jsonl']}`
+              - Cocolon / mashos-api / total: `{repo_counts['Cocolon']['tracked_entry_count']}` / `{repo_counts['mashos-api']['tracked_entry_count']}` / `{manifest['total_tracked_entries']}`
+              - missing / duplicate / unresolved: `{manifest['missing_tracked_path_count']}` / `{manifest['duplicate_repository_path_count']}` / `{manifest['unresolved_count']}`
+              - `files.jsonl` SHA-256: `{manifest['output_sha256']['files.jsonl']}`
               - manifest SHA-256: `{sha256(root / 'manifest.json')}`
 
-              ### Step 2 — SCIP exact3 + syntax index
+              ## Step 2 — SCIP exact3 and syntax index
+
               - completion: `{code['completion_claim']}`
-              - required provider exact3: `{json.dumps(provider_summary, ensure_ascii=False, sort_keys=True)}`
-              - tool versions: `{json.dumps(tool_versions, ensure_ascii=False, sort_keys=True)}`
-              - coverage total/gap/duplicate: `{code['coverage_total']}` / `{code['coverage_gap_count']}` / `{code['duplicate_coverage_count']}`
-              - PRECISE_SCIP: `{mode_counts.get('PRECISE_SCIP', 0)}`
-              - SYNTAX_INDEXED: `{mode_counts.get('SYNTAX_INDEXED', 0)}`
-              - PARSE_ERROR_VISIBLE: `{mode_counts.get('PARSE_ERROR_VISIBLE', 0)}`
-              - INVENTORY_ONLY_WITH_REASON: `{mode_counts.get('INVENTORY_ONLY_WITH_REASON', 0)}`
-              - BINARY_REGISTERED: `{mode_counts.get('BINARY_REGISTERED', 0)}`
-              - symbols/references/import edges: `{code['symbol_count']}` / `{code['reference_count']}` / `{code['import_edge_count']}`
+              - coverage total / gap / duplicate: `{code['coverage_total']}` / `{code['coverage_gap_count']}` / `{code['duplicate_coverage_count']}`
+              - PRECISE_SCIP / SYNTAX_INDEXED / PARSE_ERROR_VISIBLE / INVENTORY_ONLY / BINARY: `{mode_counts.get('PRECISE_SCIP', 0)}` / `{mode_counts.get('SYNTAX_INDEXED', 0)}` / `{mode_counts.get('PARSE_ERROR_VISIBLE', 0)}` / `{mode_counts.get('INVENTORY_ONLY_WITH_REASON', 0)}` / `{mode_counts.get('BINARY_REGISTERED', 0)}`
+              - symbols / references / import edges: `{code['symbol_count']}` / `{code['reference_count']}` / `{code['import_edge_count']}`
               - manifest SHA-256: `{sha256(root / 'code_index/code_index_manifest.json')}`
 
-              ### Step 3 — RN/API/backend/test/domain graph
+              ## Step 3 — RN/API/backend/test/domain graph
+
               - completion: `{routes['completion_claim']}`
-              - RN calls / API routes: `{routes['rn_call_count']}` / `{routes['api_route_count']}`
-              - EXACT / TEMPLATE: `{rn_connections.get('MATCHED_EXACT', 0)}` / `{rn_connections.get('MATCHED_TEMPLATE', 0)}`
-              - backend call edges: `{routes['backend_call_edge_count']}`
-              - route owner closures: `{routes['route_owner_closure_count']}`
-              - engine/store terminal roles: `{json.dumps(dict(sorted(terminal_role_counts.items())), ensure_ascii=False)}`
-              - test/contract edges: `{routes['test_contract_edge_count']}`
-              - visible consumer classification: `{json.dumps(visible_consumers, ensure_ascii=False, sort_keys=True)}`
-              - API consumer classification: `{json.dumps(api_consumers, ensure_ascii=False, sort_keys=True)}`
-              - domain assignment breakdown: `{json.dumps(dict(sorted(domain_counts.items())), ensure_ascii=False)}`
-              - unresolved RN/API consumer/backend/test-contract: `{routes['unresolved_rn_call_count']}` / `{routes['unresolved_api_consumer_count']}` / `{routes['unresolved_backend_owner_count']}` / `{routes['unresolved_test_contract_count']}`
-              - route extraction errors: `{routes['route_extraction_error_count']}`
-              - silent unresolved: `{routes['silent_unresolved_count']}`
+              - RN calls / API routes / cross-repository edges: `{routes['rn_call_count']}` / `{routes['api_route_count']}` / `{routes['cross_repository_edge_count']}`
+              - exact / template / ambiguous / unresolved path: `{rn_connections.get('MATCHED_EXACT', 0)}` / `{rn_connections.get('MATCHED_TEMPLATE', 0)}` / `{rn_connections.get('AMBIGUOUS', 0)}` / `{rn_connections.get('UNRESOLVED_PATH', 0)}`
+              - backend call edges / route owner closures: `{routes['backend_call_edge_count']}` / `{routes['route_owner_closure_count']}`
+              - protected / ordinary / contract edges: `{routes['protected_test_edge_count']}` / `{routes['ordinary_test_edge_count']}` / `{routes['contract_edge_count']}`
+              - visible consumers: `{json.dumps(visible_consumers, ensure_ascii=False, sort_keys=True)}`
+              - API consumers: `{json.dumps(api_consumers, ensure_ascii=False, sort_keys=True)}`
+              - domain resolved / unresolved: `{routes['resolved_domain_assignment_count']}` / `{routes['unresolved_domain_assignment_count']}`
+              - unresolved RN / API consumer / backend owner / test-contract: `{routes['unresolved_rn_call_count']}` / `{routes['unresolved_api_consumer_count']}` / `{routes['unresolved_backend_owner_count']}` / `{routes['unresolved_test_contract_count']}`
+              - route extraction errors / silent unresolved: `{routes['route_extraction_error_count']}` / `{routes['silent_unresolved_count']}`
               - manifest SHA-256: `{sha256(root / 'route_graph/route_graph_manifest.json')}`
 
-              ### Step 4 — Task Context Compiler / CMEE actual review
-              - completion: `{task['status']}`
-              - selected files: `{task['selected_file_count']}`
-              - MUST_READ_FULL / CURRENT_OWNER / RELEVANT_HISTORICAL / REFERENCE_AS_NEEDED: `{classification_counts.get('MUST_READ_FULL', 0)}` / `{classification_counts.get('CURRENT_OWNER', 0)}` / `{classification_counts.get('RELEVANT_HISTORICAL', 0)}` / `{classification_counts.get('REFERENCE_AS_NEEDED', 0)}`
-              - required category exact: `{required_coverage.get('observed')}` / `{required_coverage.get('expected_exact')}`; all PASS `{required_coverage.get('all_pass')}`
-              - blocking unresolved / retained unresolved: `{task['blocking_unresolved_count']}` / `{len(unresolved_rows)}`
+              ## Step 4 — Task Context Compiler / CMEE actual review
+
+              - completion: `{task['completion_claim']}`
+              - selected files / closure edges: `{task['selected_file_count']}` / `{task['closure_edge_count']}`
+              - required categories: `{required_coverage.get('observed')}` / `{required_coverage.get('expected_exact')}`; all PASS `{required_coverage.get('all_pass')}`
+              - blocking unresolved: `{task['blocking_unresolved_count']}`
+              - actual unincorporated findings: `{task['actual_unincorporated_finding_count']}`
               - context fingerprint: `{task['context_fingerprint']}`
-              - actual unincorporated findings: `{task.get('actual_unincorporated_finding_count', 0)}`
-              - finding: `{review.get('finding_id')}` / `{review.get('status')}`
-              - finding disposition: `{review.get('disposition')}`
-              - design impact: `{review.get('design_impact')}`
-              - finding exact assets:
-              {finding_assets_md}
-              - structure map: `{review.get('structure_map_delta', 'STRUCTURE_MAP_DELTA_NONE')}`
               - manifest SHA-256: `{sha256(task_root / 'context_manifest.json')}`
 
-              ### Step 5 — standard entry
+              ## Step 5 — standard entry
+
               ```bash
               python3 -m tools.cocolon_context prepare --workspace cmee_working --task cmee
               ```
-              - routing owner: `Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt`
-              - technical owner: `Cocolon_前提資料/system_context/00_read_first.md`
-              - same-ref no-op: `{receipt['same_ref_reuse_verified']}`
-              - changed-ref refresh: `{receipt['changed_ref_refresh_verified']}`
-              - changed-ref execution mode: `{changed_plan.get('execution_mode')}`
-              - changed-ref detected paths:
-              {changed_paths_md}
-              - bounded full-rebuild fallback: `{receipt['full_rebuild_fallback_verified']}` / `{json.dumps(changed_plan.get('fallback_reasons', []), ensure_ascii=False)}`
-              - non-code incremental provider reuse: `{receipt['semantic_reuse']['non_code_incremental_rebind_verified']}`
-              - source + reverse-dependent Step 2 reindex: `{receipt['semantic_reuse']['source_reverse_dependent_and_route_closure_verified']}`
-              - source incremental seed/reindexed paths: `{source_incremental['reverse_dependents']['seed_path_count']}` / `{source_incremental['reverse_dependents']['reindexed_path_count']}`
-              - reverse import/reference dependents: `{source_incremental['reverse_dependents']['reverse_import_dependent_count']}` / `{source_incremental['reverse_dependents']['reverse_reference_dependent_count']}`
-              - affected Step 3 RN calls/routes: `{source_incremental['route_closure']['affected_rn_call_count']}` / `{source_incremental['route_closure']['affected_route_count']}`
-              - unaffected route-row delta rejection: `{source_incremental['unaffected_route_row_change_rejected']}`
-              - fresh clone deterministic: `{receipt['fresh_clone_deterministic_verified']}`
-              - Mash manual operation count: `{receipt['manual_operation_count']}`
-              - remote source/generated bytes and manifest verification: `{receipt['remote_verified']}`
-              - completion: `{receipt['completion_claim']}`
 
-              ### Boundaries
-              - PR #31: `Draft / open / unmerged`
+              - same-ref reuse: `{receipt['same_ref_reuse_verified']}`
+              - changed-ref refresh: `{receipt['changed_ref_refresh_verified']}`
+              - initial changed-ref mode: `{changed_plan.get('execution_mode')}`
+              - required full-rebuild fallback: `{receipt['full_rebuild_fallback_verified']}`
+              - non-code incremental rebind: `{receipt['semantic_reuse']['non_code_incremental_rebind_verified']}`
+              - source reverse-dependent reindex and affected route/owner closure refresh: `{receipt['semantic_reuse']['source_reverse_dependent_and_route_closure_verified']}`
+              - source seed / reindexed paths: `{source_incremental['reverse_dependents']['seed_path_count']}` / `{source_incremental['reverse_dependents']['reindexed_path_count']}`
+              - affected RN calls / routes: `{source_incremental['route_closure']['affected_rn_call_count']}` / `{source_incremental['route_closure']['affected_route_count']}`
+              - fresh-clone deterministic verification: `{receipt['fresh_clone_deterministic_verified']}`
+              - remote verification: `{receipt['remote_verified']}`
+              - Mash manual operation count: `{receipt['manual_operation_count']}`
+              - completion: `{receipt['completion_claim']}`
+              - overall: `{receipt['overall_claim']}`
+
+              ## Boundaries
+
+              - PR state: `Draft / open / unmerged`
               - mashos-api write: `0`
-              - CMEE runtime change: `0`
-              - Cycle001 restart: `0`
-              - production behavior change: `0`
-              - RN / API / DB / public contract change: `0`
-              - production dependency change: `0`
-              - product output change: `0`
+              - RN / API / DB / public-contract / production-dependency / product-output change: `0`
+              - CMEE runtime change / Cycle001 restart: `0`
               - ready / merge effect: `0`
               - product-quality credit: `0`
-              - `STRUCTURE_MAP_DELTA_NONE`
+              - structure map: `STRUCTURE_MAP_DELTA_NONE`
               - automatic progression beyond Step 5: `false`
               """
           ).strip() + "\n"
