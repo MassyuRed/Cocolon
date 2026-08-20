@@ -14,24 +14,24 @@
     "selected_file_identity_verified": true,
     "unresolved_visible": true
   },
-  "context_fingerprint": "80e2eb45b7da3e4349f17afba68783fd8d100cdc808769ab78e14ee722e0641b",
+  "context_fingerprint": "c12cda89e1a46475ef7655b4b2925d15d1e726384f7989515a394a7ac0cd572a",
   "input_sha256": {
     "manual_overlay": null,
     "publication_transport": "d450a7a089d76af9a8a1a9f0a0445e3a11b9079073647864898351e9214a969f",
-    "step1_files": "1026547cc9a31f56091a4495fa8283bc1a6444ec3e6361b107e270859ccad6a2",
-    "step1_manifest": "7aef7067a60ae73c18c1daafbf5e6e6a0ac0032412d3115a1a01c6a6629c4120",
-    "step2_manifest": "f455d22ca5187b962fa164bbde9b1846a4b42d264758665620e1ec48bb617f17",
-    "step3_manifest": "7c74467c9b97992ad2a7ed84ad8f4fc79796efcb3c8c651dec5456e1704a686b",
+    "step1_files": "05400745a394ad8f5cc6616f9fdf4f26080d13f977ae992f1544fe281c548526",
+    "step1_manifest": "e395498084e8ee6f5c4ecba825d108d67ab693870b6f950b6a632edd91e43a53",
+    "step2_manifest": "d4a5c381079e1599a4b60597638d8770dca1888cb1a104b0a7c8542fdf106309",
+    "step3_manifest": "5bd152235417ddf2685a1a3936a362b49ecbac09bfcd086c1afad89418266383",
     "task_profile": "f302580dac831b1171181b51be17395e03056975cec7345a92dc61c4f5783227",
     "workspace_profiles": "3bfa65cb654b5ade1f10f4e95cc38f109deefbc93becca6d1cc99d1d46423b8d"
   },
   "output_sha256": {
     "closure_edges.jsonl": "73ae840836af4cc0a706d0ba7fb21f5116c5af3a514e284052ae397feefb26ce",
     "cmee_context_overview.md": "934ac8d2b221cdd2114add3bf0353cad5f7fc023878fb5441dc94f5d74607ac4",
-    "cmee_unincorporated_actual_findings.md": "b69b2762bc704fde40271cef9c290868bb9678345dfd6e15a613b4089f777958",
-    "full_text_read_order.md": "4d5264d5cb6dfe9135937ce14d89f3c976dae5a56c2c48f9668b726a20df4994",
-    "required_category_coverage.json": "e7ed8f7ca1a86071e2ece57c0bc2176f3be28de819683e7078c018a25a487fcd",
-    "selected_files.jsonl": "eeb23f42423367bb3986ce820998a1ec9068daefe1c42602e331a8c6b3e37f4f",
+    "cmee_unincorporated_actual_findings.md": "b72ea8f27d8b8e9b5a7b88e6ca0426f11837150e11151aba501b317ce67fd99c",
+    "full_text_read_order.md": "b732d5edd4f3f91cabb2db2db7fae3acde0e3ac63ef8b137a73c30e98526470c",
+    "required_category_coverage.json": "f8a0c207ab7948ebfffda9cea2a1d7cfc5d8c802ad31aee8a3bcde675cbf61d7",
+    "selected_files.jsonl": "9413bb64d3a7143fa99b73120d88306f5a57e8f13af0469d2d1dc4f05a46ecc4",
     "unresolved_context.jsonl": "7071eb08794e1bf250f3c2ef7899ccaa9bd5eed138de2fcc490165f916a008a2"
   },
   "product_credit": 0,
@@ -48,8 +48,8 @@
   "workspace": "cmee_working",
   "workspace_exact_refs": {
     "Cocolon": {
-      "source_commit": "d84f67339820ce26e26d58eee76e568de212275b",
-      "source_tree": "5b152fd5147862d8f68821bc99170c396bfc20a6",
+      "source_commit": "3b32234531d0e899dd90ce5d0a4dd6bf0e5db456",
+      "source_tree": "f2013a39ccb7b6809b24b18fe32e6630dadad5a7",
       "tracked_entry_count": 1593
     },
     "mashos-api": {
