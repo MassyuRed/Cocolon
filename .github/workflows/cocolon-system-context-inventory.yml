@@ -80,6 +80,11 @@ jobs:
           install -m 0644 /tmp/step5-source/Cocolon_前提資料/system_context/00_read_first.md Cocolon_前提資料/system_context/00_read_first.md
           install -m 0644 /tmp/step5-source/Cocolon_前提資料/system_context/.step5_corrected_standard_entry_workflow.yml Cocolon_前提資料/system_context/.step5_corrected_standard_entry_workflow.yml
 
+          python3 -m pip install --disable-pip-version-check pytest
+          npm install -g --no-audit --no-fund typescript@5.2.2
+          export NODE_PATH="$(npm root -g)"
+          test "$(node -e "console.log(require('typescript').version)")" = "5.2.2"
+
           python3 -m py_compile \
             tools/cocolon_context.py \
             tools/cocolon_context_prepare.py \
