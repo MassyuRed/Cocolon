@@ -763,8 +763,7 @@ def _validate_workspace_refs(
             )
         expected_ancestor = expected.get("expected_ancestor")
         if expected_ancestor:
-            repository_name = str(expected.get("repository", "")).rsplit("/", 1)[-1]
-            if repo_root.name != repository_name or not (repo_root / ".git").exists():
+            if not (repo_root / ".git").exists():
                 raise ContextCompileError(
                     f"cannot verify expected_ancestor for {repository_key}; "
                     f"repository checkout is required at {repo_root}"

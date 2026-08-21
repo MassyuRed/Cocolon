@@ -4,11 +4,15 @@ import hashlib
 import json
 from pathlib import Path
 import shutil
+import subprocess
+import tempfile
+import unittest
 
 import pytest
 
 from tools.cocolon_context_task import (
     ContextCompileError,
+    _validate_workspace_refs,
     compile_task_context,
     verify_task_context,
 )
@@ -489,6 +493,61 @@ def test_stale_workspace_ref_is_rejected(tmp_path: Path) -> None:
     write_json(paths["system"] / "workspace_profiles.json", profile)
     with pytest.raises(ContextCompileError, match="stale ref"):
         run_compile(paths)
+
+
+class WorkspaceRefValidationTests(unittest.TestCase):
+    def test_expected_ancestor_accepts_checkout_in_arbitrary_directory(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            repo_root = Path(raw) / "step5-incremental-proof"
+            repo_root.mkdir()
+            subprocess.run(["git", "init", "-q"], cwd=repo_root, check=True)
+            subprocess.run(
+                ["git", "config", "user.email", "test@example.invalid"],
+                cwd=repo_root,
+                check=True,
+            )
+            subprocess.run(
+                ["git", "config", "user.name", "test"],
+                cwd=repo_root,
+                check=True,
+            )
+            (repo_root / "README.md").write_text("fixture\n", encoding="utf-8")
+            subprocess.run(["git", "add", "README.md"], cwd=repo_root, check=True)
+            subprocess.run(
+                ["git", "commit", "-q", "-m", "fixture"],
+                cwd=repo_root,
+                check=True,
+            )
+            source_commit = subprocess.check_output(
+                ["git", "rev-parse", "HEAD"], cwd=repo_root, text=True
+            ).strip()
+            api_commit = "a" * 40
+            workspace_profiles = {
+                "profiles": {
+                    "cmee_working": {
+                        "repositories": {
+                            "Cocolon": {
+                                "repository": "MassyuRed/Cocolon",
+                                "expected_ancestor": source_commit,
+                            },
+                            "mashos-api": {
+                                "repository": "MassyuRed/mashos-api",
+                                "expected_head": api_commit,
+                            },
+                        }
+                    }
+                }
+            }
+            inventory_manifest = {
+                "repositories": {
+                    "Cocolon": {"source_commit": source_commit},
+                    "mashos-api": {"source_commit": api_commit},
+                }
+            }
+
+            _validate_workspace_refs(
+                "cmee_working", workspace_profiles, inventory_manifest, repo_root
+            )
 
 
 def test_direct_reverse_route_owner_history_and_cycle_are_closed(tmp_path: Path) -> None:
