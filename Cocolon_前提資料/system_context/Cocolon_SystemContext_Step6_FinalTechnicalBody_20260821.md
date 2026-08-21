@@ -66,7 +66,7 @@ task_profiles.v2
 
 Pro華恋のStep 5 reviewを結論の代用にせず、current source、generated graph、PR actualに戻って`PRO-RR-01`〜`PRO-RR-05`を独立判定した。全5件ともinitial architectureを拡張せずに解け、Operator valueの条件を正すため、`ADOPT_WITH_TECHNICAL_CORRECTION`として本final bodyへ反映する。
 
-ただし、本文書はMashの承認候補であり承認記録ではない。current implementationにはcanonical CMEE owner divergenceとunsafe executable workflow exact3が残る。
+ただし、本文書はMashの承認候補であり承認記録ではない。current implementationにはunsafe executable workflow exact3と未実装のV2が残る。PR #30との`DIVERGED`はcanonical owner relationのactual inputであり、Step 7開始blockerまたはmerge／integration requirementではない。
 
 ```text
 STEP6_ULTRA_FINAL_TECHNICAL_BODY = COMPLETE
@@ -87,7 +87,7 @@ STEP7_START_PERMISSION = 0
 | Step 3 approved requirement boundary | PR #33 head `d8652770598caaee3cdb1cf88c3520a44c4412b3` | approved input |
 | Step 4 initial technical design | PR #34 head `41c41f41d11cebb270937349fb2152b4079d6dc2`, blob `adafb8b059f7d0f9f786a3209b2c9eae52effc90` | initial design baseline |
 | Step 5 Pro review | PR #35 head `87896aec29a639356ca83e2310291db0e0a5d136`, blob `a205aa04e50fa08ea690e4b385a1988c881abbaa` | exact1 Product／Operator Route Review |
-| CMEE canonical owner candidate | PR #30 head `ce2b9beca61c2293ed2828a8caf964392f8eb9f4` | freshness denominator; not integrated into Step 6 lineage |
+| CMEE canonical owner | PR #30 head `ce2b9beca61c2293ed2828a8caf964392f8eb9f4` | read-only canonical owner input／freshness denominator; Step 7 merge／integration requirement 0 |
 | mashos-api CMEE／route actual | `06ce311b3ea728b06f83439d268a34bed917c01c` | read-only source／test evidence |
 
 PR #34とPR #35は2026-08-21 JSTのfresh確認時点で`Draft / open / unmerged / mergeable`である。PR #35はPR #34 headのexact1 childでchanged path exact1。同じStep 4 stable identityへのPro full reviewはexact1を消費済みである。本exact5反映はProが指定した修正envelope内で、新subsystem、新product scope、新authorityを追加しない。したがって追加のPro full reviewは0である。
@@ -105,11 +105,18 @@ PR #34とPR #35は2026-08-21 JSTのfresh確認時点で`Draft / open / unmerged 
 Step 4 initial designのstable GitHub identityとhistorical evidenceは不変であるが、current technical candidateとしては本final bodyがこれをsupersedeする。Step 5 review recordはinputでありsupersedeしない。Step 4の次は本書で置換する。
 
 ```text
+Step 4 §0 divergence／integration blocker conclusion
 §5.1 top-level purpose
+§5.2 canonical task-owner readiness
 §5.10 Pro role policy / feedback
 §7.3 Pro Context
-§15 correction-target test rows
-§18.2 non-CMEE proof
+§10 top-level canonical-owner-movement row
+§10.1 PR #30 expected-result admission
+§15.2 T13 / T14 / T17
+§15.6 T55 / T61 wording
+§16.2 canonical-owner / other-branch blocked cases
+§18.2 CMEE / non-CMEE proof
+§20 CURRENT_BLOCKER_1
 §Step7 implementation unit boundary
 ```
 
@@ -152,9 +159,9 @@ Step 4 initial designのstable GitHub identityとhistorical evidenceは不変で
 
 Pro華恋の採用条件とUltra華恋のtechnical correctionを統合した共同推奨は次である。
 
-> Mashが本文書のpublished exact identityと自動化境界を明示承認し、かつCMEE canonical ownerを含むintegration base exact1を明示決定した場合だけ、Ultra華恋はone bounded Step 7 implementation candidate exact1をfresh admissionする。
+> Mashが本文書のpublished exact identityと自動化境界を明示承認した場合だけ、Ultra華恋はPR #36 lineageからone bounded Step 7 implementation candidate exact1をfresh admissionする。PR #30はread-only canonical owner refとしてfresh resolveし、Step 7 branchへのmerge／integrationを開始条件にしない。
 
-この推奨は承認、integration、implementation権限を生成しない。
+この推奨は承認、PR #30のmerge／integration、implementation権限を生成しない。
 
 ---
 
@@ -234,7 +241,18 @@ canonical owner side relevant changed paths = exact14
 
 本Step 6 exact1がpublishされるとPR側countは変化するため、published headの関係はpostverificationで再測定する。上記はsource baselineである。
 
-correct operator resultは`STALE_RELATIVE_TO_CANONICAL_OWNER / V1_OPERATOR_CONTEXT_BLOCKED`である。System Contextは自動merge／rebaseせず、Mashが承認したintegration baseが両lineageを含むまでCMEE actual proofを`FRESH`にしない。
+このactualでは、次を直交して表示する。
+
+```text
+canonical owner ref resolution = FRESH
+workspace / owner relation = DIVERGED
+workspace contains canonical owner = false
+canonical owner content access = READ_ONLY_EXACT_REF
+merge / rebase / integration requirement = 0
+write authorization from relation = 0
+```
+
+`DIVERGED`はSystem Contextが隠さず返すactual relationである。owner exact refとrequired premisesをfreshに解決してread-only取得できる限り、divergenceだけでOperator Contextをblockせず、Step 7開始もblockしない。ただし、workspaceがownerを取り込み済みとは表示せず、relationからwrite authorityを生成しない。System Contextによる自動merge／rebaseは0である。将来CMEE exact14を変更するowner-owned write taskではtarget／baseを別途明示固定する必要があるが、Step 7 exact9はPR #30 exact14を変更しない。
 
 ### 4.3 Executable workflow blocker
 
@@ -259,7 +277,7 @@ isolated Step 6 worktreeでcurrent standard `prepare --workspace cmee_working --
 
 - generated／profile／source／test／workflow changeは採用していない。
 - この失敗をprepare PASS、actual proof、implementation blocker解消と表示しない。
-- Step 7はCocolonとmashos-apiのapproved exact refsをmaterializeしたworkspaceで開始し、どちらか一方でも不足すればcandidateをSTOPする。
+- Step 7はPR #36 lineageのCocolon implementation workspaceとapproved mashos-api exact refをmaterializeしたworkspaceで開始する。PR #30はfresh resolved exact refからread-onlyで取得し、Step 7 branchへmerge／integrationしない。Cocolon implementation workspaceまたはmashos-apiが不足すればcandidateをSTOPする。
 
 ---
 
@@ -372,6 +390,8 @@ verified_scope[]
 - scope: `ALLOWED_WRITE_CANDIDATE | PROTECTED_REVIEW_REQUIRED | FORBIDDEN | REVIEW_ONLY_EXTERNAL | RELATED_NOT_WRITE_AUTHORIZED | UNRESOLVED`。
 - selection tier: `DECISION_SURFACE | MUST_READ_FULL | REFERENCE_ON_TRIGGER | EXCLUDED_WITH_REASON | UNRESOLVED_IMPACT`。
 - public／private locatorのlocation、availability、privacy、canonicalityの直交4軸。
+
+ただし、Step 4 §5.2の「ready候補は`SAME_REF`／`WORKSPACE_CONTAINS_OWNER_REF`のみ」という定義は本final bodyで置換する。relationとread-only readinessは別軸である。`OWNER_REF_AHEAD`／`DIVERGED`でも、resolved owner headがexactでrequired premisesをそのexact refから取得でき、provenance／locatorが完全ならread-only Operator Contextは`V1_OPERATOR_CONTEXT_READY`になり得る。その場合もwrite authority 0、workspace-incorporation claim 0である。`REMOTE_UNRESOLVED`、またはrequired premiseを取得できない場合は`V1_OPERATOR_CONTEXT_BLOCKED`とする。
 
 duplicate ID、dangling reference、unsafe path／ref、unsupported enum、supersession cycle、required provenance不足、forbidden private fieldはpublishは0である。
 
@@ -569,7 +589,7 @@ task_orientation = Reconstruct the authenticated self-profile GET route across R
 
 対象は`GET /account/profile/me`のread routeである。同じpathの`PATCH`、account delete、profile create、visibility updateは別routeであり、本fixtureのwrite candidateではない。
 
-canonical owner refはCocolon／mashos-apiの`refs/heads/main`をrunごとにread-only fresh resolveする。profileへ固定するのはallowlisted repository URLとbranch ref nameであり、head SHAはrun時にfresh resolveする。以下のcommit／blobはStep 6 auditのsource baselineであり、将来のcurrent owner identityとしてprofileへ固定しない。blob一致はsemantic freshnessを代替せず、owner ref関係がready条件を満たさなければvalid-but-blockedとする。
+canonical owner refはCocolon／mashos-apiの`refs/heads/main`をrunごとにread-only fresh resolveする。profileへ固定するのはallowlisted repository URLとbranch ref nameであり、head SHAはrun時にfresh resolveする。以下のcommit／blobはStep 6 auditのsource baselineであり、将来のcurrent owner identityとしてprofileへ固定しない。blob一致はsemantic freshnessを代替しない。owner refをresolveできない、またはrequired evidenceをそのexact refからread-only取得できない場合はvalid-but-blockedとする。owner refとの`OWNER_REF_AHEAD`／`DIVERGED` relationだけでは本read-only fixtureをblockしない。
 
 ### 11.2 Exact evidence shape
 
@@ -685,7 +705,7 @@ legacy_context = existing exact7 state
 operator_v1.status = V1_OPERATOR_CONTEXT_READY | V1_OPERATOR_CONTEXT_BLOCKED | V1_OPERATOR_CONTEXT_INVALID
 ```
 
-canonical owner divergence時に、`integrity_status=VALID + legacy PASS + operator_v1 BLOCKED`を同時に許す。blocked Contextを作れたことをreadyに変換しない。`completion_claim`はStep 8のdurable exact3、Pro／Ultra actual-use confirmation、Mash明示確認までnullである。
+canonical owner divergenceだけでは`operator_v1`を`BLOCKED`にしない。owner exact refとrequired premisesをread-only取得できる場合、`integrity_status=VALID + legacy PASS + operator_v1.status=V1_OPERATOR_CONTEXT_READY + relation=DIVERGED`を許す。`V1_OPERATOR_CONTEXT_BLOCKED`はremote unresolved、required premise missing／unreadable、またはrequested effectがowner-owned write baselineを必要とするのにtarget／baseが未固定の場合に限る。`completion_claim`はStep 8のdurable exact3、Pro／Ultra actual-use confirmation、Mash明示確認までnullである。
 
 ### 12.3 Whole-workspace transaction
 
@@ -709,9 +729,9 @@ failureではlast-good live workspaceをbyte unchangedで保持／restoreする�
 Step 7開始前に次の全てをfresh確認する。
 
 1. Mashが本Step 6 published exact identityを明示承認している。
-2. Mash／repository ownerがStep 6 lineageとCMEE canonical owner headの両方を含むintegration base exact1を明示している。
-3. Cocolon／mashos-api approved exact refsがworkspaceへmaterialize済みである。
-4. approved changed-path scopeが本節のexact9とgenerated allowed rootに閉じる。
+2. PR #36 lineageをCocolon implementation baselineとしてexactに固定している。
+3. PR #30 canonical owner headをfresh resolveし、required exact14をread-only取得できる。Step 7 branchへのmerge／rebase／integrationは0である。
+4. mashos-api approved exact refがworkspaceへmaterialize済みで、approved changed-path scopeが本節のexact9とgenerated allowed rootに閉じる。
 5. private body、new dependency／service／cost、product source changeが不要である。
 
 一つでも欠ける場合はStep 7を開始しない。
@@ -770,6 +790,8 @@ workflow exact3 correction
 + remote postverification
 ```
 
+generated actual CMEE projectionsは、fresh resolved PR #30 owner ref、`DIVERGED` relation、read-only locatorを同時に表示する。PR #30のmerge／rebase／integrationを要求または実行せず、PR #36 workspaceをowner currentと偽装しない。
+
 Unit A／B／C、P0、preflight、workflow-only、transaction-only、test-only、schema-onlyの別PR／別terminal／creditを作らない。actual CMEE Pro／Ultra Contextまで同じcandidateで到達できなければ、scopeを広げずcandidateをSTOPする。
 
 Step 7 actual outputの生成はStep 8 Operator actual-use proof completeではない。Step 8 exact3は同candidate actualを使う別の明示phaseであり、Step 7から自動開始しない。
@@ -786,6 +808,8 @@ Step 4 §15のT01〜T74をone test matrixとして保持する。個別test ID�
 |---|---|
 | T01 | valid V2は`task_orientation`を`authority_claim=false`でload。V2 `purpose`はreject。v1 purposeはmigration display only |
 | T09 | product purpose／Mash fixed conditionは必須source locator／provenance。orientationからのgeneration 0 |
+| T13／T14／T17／T55 | owner ahead／divergedをrelationとして表示し、exact owner ref／required premiseがread-only取得可能ならOperator ContextはREADY。workspace-incorporation claim、merge／rebase／integration、write authorityは0。remote unresolved／required premise unavailableはBLOCKED。actual PR #36／PR #30の`DIVERGED`はStep 7 admissionをrejectしない |
+| T61 | separately authorized owner-owned write taskだけを対象に、fixed write baselineからowner-owned pathが変化した場合はmanual review。PR #30をStep 7へ取り込む前提にはせず、read-only exact-ref routingをblockしない |
 | T30／T31 | outer budgetに加えPro first-view 12 items／16 KiB／reason2。requiredをtruncateせずblock／additional count／detail pointer |
 | T32 | same operator SHAからordered exact8 Pro cards／Ultra／collaborationをrender。role独自fact 0 |
 | T38 | empty feedback PASS、`EVENT_DRIVEN_OPTIONAL`、Karen author role／observation locator必須、routine row reject |
@@ -815,7 +839,7 @@ machine GREENはOperator value、Product Read、Mash acceptance、V1 activation�
 
 Step 8は別の明示作業として次を確認する。
 
-1. CMEE Step 11: approved integration baseでfresh owner、required premise exact7、claim provenance、protected scope、bounded Pro／Ultra viewを実使用。
+1. CMEE Step 11: freshly resolved PR #30 canonical owner exact ref、required premise exact7、claim provenance、protected scope、bounded Pro／Ultra view、relation `DIVERGED`／integration 0を実使用。
 2. `account_profile_read_only`: 性質の異なるnon-CMEE ephemeral read-only exact1を実使用。
 3. refresh actual: same-ref、canonical owner-only changed-ref、source／test change、premise rename-delete、fresh clone。
 
@@ -847,8 +871,9 @@ Mashが華恋へ戻るtechnical monitoring／Context再構成負担が増えて�
 
 次はreason付きblocked Contextをpublishできるがready／completeにしない。
 
-- owner ahead／diverged／remote unresolved／owner-owned path changed after integration。
-- required premise missing／stale／other-branch-only／budget overflow。
+- remote unresolved、required owner content／premise missing・unreadable、owner-owned write target／base未固定。
+- owner ahead／divergedで、requested effectがworkspace-incorporated owner baselineを必要とする場合。read-only routingだけならblockしない。
+- required premise stale／declared exact identity unavailable／budget overflow。
 - owner／lifecycle／authority conflict、endpoint／test missing。
 - route mount conflict／dynamic unresolved edge／external retrieval gap。
 - impact unknown／manual review required。
@@ -935,7 +960,9 @@ V1_DEFERRED = DEF_01_TO_DEF_05_EXACT5
 CURRENT_V1_EXCLUDED = EXACT12
 
 MASH_FINAL_TECHNICAL_APPROVAL = PENDING
-CANONICAL_CMEE_OWNER_INTEGRATION_BASE = NOT_APPROVED
+CANONICAL_CMEE_OWNER_REF = PR30_READ_ONLY_FRESH_RESOLUTION
+PR30_MERGE_OR_INTEGRATION_REQUIRED_FOR_STEP7 = NO
+PR30_WRITE_EFFECT = 0
 CURRENT_IMPLEMENTATION_READY = NO
 IMPLEMENTATION_PERMISSION = 0
 STEP7_START_PERMISSION = 0
