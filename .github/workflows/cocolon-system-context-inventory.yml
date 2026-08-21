@@ -241,13 +241,22 @@ jobs:
           FRESH=/tmp/cocolon-step5-incremental-non-code
           rm -rf "$FRESH"
           git clone --no-local "$GITHUB_WORKSPACE" "$FRESH"
-          git -C "$FRESH" checkout --detach "$PENDING_GENERATED_COMMIT"
+          git -C "$FRESH" checkout --detach "$MATERIAL_SOURCE_COMMIT"
+          git -C "$FRESH" restore \
+            --source "$PENDING_GENERATED_COMMIT" \
+            --worktree -- "$ROOT"
+          git -C "$FRESH" diff --exit-code \
+            "$PENDING_GENERATED_COMMIT" -- "$ROOT"
           git -C "$FRESH" config user.name "cocolon-context-incremental-proof"
           git -C "$FRESH" config user.email "cocolon-context-incremental-proof@invalid"
           printf '\n<!-- step5-incremental-proof -->\n' >> \
             "$FRESH/Cocolon_前提資料/system_context/00_read_first.md"
           git -C "$FRESH" add Cocolon_前提資料/system_context/00_read_first.md
           git -C "$FRESH" commit -m "test: exercise non-code incremental refresh"
+          test "$(git -C "$FRESH" rev-parse HEAD^)" = "$MATERIAL_SOURCE_COMMIT"
+          test "$(git -C "$FRESH" -c core.quotepath=false \
+            diff-tree --no-commit-id --name-only -r HEAD)" = \
+            "Cocolon_前提資料/system_context/00_read_first.md"
           mkdir -p "$FRESH/.cocolon-context-workspace"
           git clone --no-local "$GITHUB_WORKSPACE/$EXTERNAL_ROOT/mashos-api" \
             "$FRESH/.cocolon-context-workspace/mashos-api"
@@ -298,7 +307,12 @@ jobs:
           FRESH=/tmp/cocolon-step5-incremental-source
           rm -rf "$FRESH"
           git clone --no-local "$GITHUB_WORKSPACE" "$FRESH"
-          git -C "$FRESH" checkout --detach "$PENDING_GENERATED_COMMIT"
+          git -C "$FRESH" checkout --detach "$MATERIAL_SOURCE_COMMIT"
+          git -C "$FRESH" restore \
+            --source "$PENDING_GENERATED_COMMIT" \
+            --worktree -- "$ROOT"
+          git -C "$FRESH" diff --exit-code \
+            "$PENDING_GENERATED_COMMIT" -- "$ROOT"
           git -C "$FRESH" config user.name "cocolon-context-source-incremental-proof"
           git -C "$FRESH" config user.email "cocolon-context-source-incremental-proof@invalid"
           python3 - <<'PY'
@@ -308,6 +322,10 @@ jobs:
           PY
           git -C "$FRESH" add lib/api/home/emotionPieceApi.js
           git -C "$FRESH" commit -m "test: exercise source dependent closure refresh"
+          test "$(git -C "$FRESH" rev-parse HEAD^)" = "$MATERIAL_SOURCE_COMMIT"
+          test "$(git -C "$FRESH" diff-tree \
+            --no-commit-id --name-only -r HEAD)" = \
+            "lib/api/home/emotionPieceApi.js"
           mkdir -p "$FRESH/.cocolon-context-workspace"
           git clone --no-local "$GITHUB_WORKSPACE/$EXTERNAL_ROOT/mashos-api" \
             "$FRESH/.cocolon-context-workspace/mashos-api"
