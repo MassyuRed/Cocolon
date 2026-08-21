@@ -8,7 +8,7 @@ technical_input_owner: "Ultra華恋"
 execution_owner: "Ultra華恋"
 ultra_step3_verdict: "CANDIDATE_CORRECTED"
 document_role: "STEP3_LEVEL3_DECISION_BRIEF_AND_PRO_ULTRA_INPUT_RECONCILIATION"
-normative_status: "JOINT_REQUIREMENT_RECOMMENDATION__MASH_DECISION_PENDING"
+normative_status: "STEP3_LEVEL3_DECISION_APPROVED__STEP4_INITIAL_DESIGN_AUTHORIZED"
 scope_classification: "MASH_DECISION_AND_APPROVAL_REQUIRED_SCOPE_LEVEL_3"
 primary_outcome: "BLOCKER_NARROWED"
 source_plan: "USER_ATTACHMENT__Cocolon_SystemContext_EnhancementPlan_ProUltraJoint_20260821(5).md"
@@ -19,6 +19,10 @@ source_ultra_audit_pr: 32
 source_ultra_audit_head: "218cb8eedec85dd37b6277c8a79bb6da9e158fa1"
 source_ultra_audit_path: "Cocolon_前提資料/system_context/Cocolon_SystemContext_UltraOperatorNeeds_and_CMEEActualUseGap_20260821.md"
 source_ultra_audit_blob: "286e7af7685d6a717e3d3f9dbbaec8439c8923b4"
+mash_approval_at: "2026-08-21 JST"
+mash_approval_instruction: "「Step 4 — Ultra華恋がinitial technical designを作る」まで進んで。"
+mash_approved_decisions: "DECISION-01_TO_04_EXACT4"
+step4_start_permission: true
 current_system_context_pr: 31
 current_system_context_head: "bd3b6f9ab846f97edb2178a5623165b1927649d7"
 current_cmee_design_pr: 30
@@ -58,22 +62,25 @@ Step 1／Step 2から、次はactual gapとして成立している。
 6. 現行Step 5自体のbugは確認されていない。Step 5を再修正するのではなく、強化requirementsとして扱う。
 7. 過去のPro／Ultra重複再確認回数はdurable evidenceから確定していないため、削減量を捏造しない。
 
-この結果から、V1採用候補のrequirement exact9、defer exact5、current V1から除外するexact12を共同推奨候補として提示する。ただし、Mashが管理入口、自動化境界、V1 scope、原本非置換を確認するまでStep 3全体のLevel 3 decisionは成立しない。
+この結果から、V1採用候補のrequirement exact9、defer exact5、current V1から除外するexact12を共同推奨候補として提示した。その後、Mashは2026-08-21 JSTに「Step 4 — Ultra華恋がinitial technical designを作る」まで進むよう明示した。本書はこの指示を、DECISION-01〜04 exact4の承認と、別個のStep 4 initial technical design開始許可として記録する。
+
+この承認は、管理入口activation、implementation、source／test変更、Step 5 Pro review、Step 6 final technical body、V1 activation、mergeを許可しない。Step 4でexact9をexisting pipelineへ安全に閉じられない場合は、scopeを増やさずSTOPしてMashへ戻す。
 
 ```text
 ULTRA_STEP3_INDEPENDENT_REVIEW = COMPLETE
 ULTRA_VERDICT = CANDIDATE_CORRECTED
 STEP3_PRO_ULTRA_INPUT_RECONCILED = 1
 STEP3_JOINT_RECOMMENDATION_READY = 1
-STEP3_REQUIREMENTS_AND_V1_BOUNDARY_APPROVED = 0
-MASH_LEVEL3_DECISION = PENDING
-V1_SCOPE_APPROVED = 0
+STEP3_REQUIREMENTS_AND_V1_BOUNDARY_APPROVED = 1
+MASH_LEVEL3_DECISION = APPROVED
+V1_SCOPE_APPROVED = 1
 EXISTING_PIPELINE_EXTENSION_FEASIBLE_AS_V1_DIRECTION = 1
 NEW_STANDALONE_SUBSYSTEM_REQUIRED = 0
-INITIAL_TECHNICAL_DESIGN = 0
+STEP4_START_PERMISSION = 1
+INITIAL_TECHNICAL_DESIGN = 0_AT_AUTHORIZATION
 IMPLEMENTATION = 0
 AUTOMATIC_PROGRESSION = false
-STOP_BEFORE_STEP4
+STOP_BEFORE_IMPLEMENTATION
 ```
 
 ---
@@ -607,40 +614,46 @@ STOP時は新しいhelper／scanner／authority familyを追加せず、成立�
 
 ---
 
-## 10. Mash Level 3 decision exact4 — 共同推奨
+## 10. Mash Level 3 decision exact4 — 承認済み
+
+Mash approval sourceは、2026-08-21 JSTの次の明示指示である。
+
+> 「Step 4 — Ultra華恋がinitial technical designを作る」まで進んで。
+
+Step 4の開始にはStep 3 exact4の入力固定が必要であるため、この指示を以下の共同推奨exact4の承認として記録する。同じ文でStep 4開始も明示されているが、それ以後への自動進行は認めない。
 
 ### DECISION-01 — 管理入口移行方針
 
-**推奨:** `APPROVE_PRIMARY_ROUTING_ENTRY_DIRECTION__NO_AUTOMATIC_ACTIVATION`
+**Mash承認:** `APPROVE_PRIMARY_ROUTING_ENTRY_DIRECTION__NO_AUTOMATIC_ACTIVATION`
 
 前提資料探索、正本候補確認、Task Context生成をSystem Contextから開始する将来方向だけを承認する。V1 acceptance／actual proof後も自動移行せず、入口activationと旧route retire／削除は別のMash明示判断まで行わない。direct GitHub read fallbackを残す。
 
 ### DECISION-02 — 自動化境界
 
-**推奨:** `APPROVE_DETERMINISTIC_FACT_ROUTING_ONLY`
+**Mash承認:** `APPROVE_DETERMINISTIC_FACT_ROUTING_ONLY`
 
 identity、freshness、明示metadata、存在／hash、決定的な関係、selection reason、claim provenance、conflict表示、同一manifest由来のrole view、unresolved routingだけを自動化する。owner、Mash判断の意味、semantic correctness、supersession、product judgment、technical design、Disposition、Product Read、acceptance、permission、merge／retry／writeは推測・確定・実行しない。判断不能は`UNRESOLVED`のまま正しいactorへ返す。
 
 ### DECISION-03 — V1 scope
 
-**推奨:** `APPROVE_V1_REQUIREMENT_FAMILIES_EXACT9__DEFER_EXACT5__KEEP_EXACT12_OUT_OF_CURRENT_V1`
+**Mash承認:** `APPROVE_V1_REQUIREMENT_FAMILIES_EXACT9__DEFER_EXACT5__KEEP_EXACT12_OUT_OF_CURRENT_V1`
 
-本書のcurrent remote headにある§3のSCV1-R01〜R09だけをclosed V1 requirement候補とする。§4 exact5は未承認のfuture hold、§5 exact12はcurrent V1から除外する。本承認はinitial design、implementation、new component／service、GitHub source／test変更、V1 activation、管理入口移行を承認しない。Step 4でexisting System Context pipeline内へ閉じられない場合はscopeを増やさずSTOPし、actual evidenceを伴ってLevel 3へ戻す。
+本書のcurrent remote headにある§3のSCV1-R01〜R09だけをclosed V1 requirement候補とする。§4 exact5は未承認のfuture hold、§5 exact12はcurrent V1から除外する。このDECISION-03単体はinitial design、implementation、new component／service、GitHub source／test変更、V1 activation、管理入口移行を承認しない。Step 4 initial design開始はMashの同じ指示に含まれる別個の許可である。Step 4でexisting System Context pipeline内へ閉じられない場合はscopeを増やさずSTOPし、actual evidenceを伴ってLevel 3へ戻す。
 
 ### DECISION-04 — 原本非置換方針
 
-**推奨:** `APPROVE_ORIGINALS_REMAIN_CANONICAL_AND_DIRECTLY_READABLE`
+**Mash承認:** `APPROVE_ORIGINALS_REMAIN_CANONICAL_AND_DIRECTLY_READABLE`
 
 前提資料、設計書、source、test、Mash判断、private knowledgeは各current ownerへ残す。System Contextはidentity／relation／routing／conflict／read orderを持つが、本文の第二正本にならない。metadata conflictは原本を上書きせず`UNRESOLVED`とし、private本文／要約／公開hashを出さない。
 
-上記exact4を承認する場合も、次は自動承認されない。
+上記exact4の承認後も、次は自動承認されない。Step 4開始だけは同じMash指示により別個に許可済みである。
 
 ```text
 new external service = 0
 new standalone component = 0
 new recurring cost = 0
 Mash manual operation = 0 default
-Step 4 start permission = 0
+Step 4 start permission = 1
 implementation permission = 0
 GitHub source / test change permission = 0
 V1 activation permission = 0
@@ -650,10 +663,10 @@ automatic progression = false
 
 ### 10.5 Mash向けdecision surface
 
-| 観点 | 共同推奨 |
+| 観点 | Mash承認結果 |
 |---|---|
-| 承認時に成立すること | exact9／exact5／exact12と自動化・原本境界がStep 4入力候補として固定される |
-| 承認時にも成立しないこと | Step 4開始、technical design、implementation、source／test変更、V1 activation、管理入口移行 |
+| 今回の承認で成立したこと | exact9／exact5／exact12と自動化・原本境界がStep 4入力として固定され、Step 4 initial technical design開始が許可された |
+| 今回も成立しないこと | implementation、source／test変更、Step 5 review、Step 6 final technical body、V1 activation、管理入口移行 |
 | 不採用時 | System Context強化だけをSTOPし、current standard entry＋原本direct readでCocolon本体作業を継続する |
 | 増える作業／期間 | Step 4〜9の候補作業。実装工数・期間はStep 4前のため未算定であり、推測値を置かない |
 | 費用 | external service／recurring costは0をdefaultとし、必要になれば別Level 3へ戻す |
@@ -663,13 +676,13 @@ automatic progression = false
 
 ---
 
-## 11. Mash承認後のnext candidate exact1
+## 11. Mash承認・Step 4明示開始後のnext exact1
 
-MashがDECISION-01〜04を承認した場合、次のcandidate bounded workは以下となる。ただし自動開始せず、別の明示指示とその時点のpermission確認を必要とする。
+MashはDECISION-01〜04を承認し、同時に次のbounded workの開始を明示した。
 
 > **Step 4 — Ultra華恋が、current PR #31／#32／本書のstable identityとactual sourceをfresh確認し、SCV1-R01〜R09をexisting architectureへ最小統合するinitial technical design exact1を作る。**
 
-Step 4はimplementationではない。Pro reviewはstable initial technical designへ一回だけ行い、Mashのfinal technical approval前に実装へ進まない。
+Step 4はimplementationではない。initial technical designは本書と分離したstacked Draft PRのexact1 documentとして作る。Pro reviewはそのstable identityへ一回だけ行い、Mashのfinal technical approval前に実装へ進まない。
 
 ---
 
@@ -690,26 +703,28 @@ ACTUAL_GAP_TO_REQUIREMENT_MAPPING = COMPLETE
 EXISTING_PIPELINE_EXTENSION_FEASIBLE_AS_V1_DIRECTION = 1
 NEW_STANDALONE_SUBSYSTEM_REQUIRED = 0
 STEP3_JOINT_RECOMMENDATION_READY = 1
-STEP3_REQUIREMENTS_AND_V1_BOUNDARY_APPROVED = 0
+STEP3_REQUIREMENTS_AND_V1_BOUNDARY_APPROVED = 1
 V1_REQUIREMENT_CANDIDATE = EXACT9
 V1_DEFERRED = EXACT5
 CURRENT_V1_EXCLUDED = EXACT12
 
-MASH_LEVEL3_DECISION = PENDING
-V1_SCOPE_APPROVED = 0
-STEP4_START = 0
+MASH_LEVEL3_DECISION = APPROVED
+MASH_APPROVED_DECISIONS = DECISION_01_TO_04_EXACT4
+V1_SCOPE_APPROVED = 1
+STEP4_START_PERMISSION = 1
+STEP4_START = 1
 MANAGEMENT_ENTRY_ACTIVATED = 0
 MANAGEMENT_ENTRY_MIGRATION = 0
 V1_ACTIVATION = 0
-INITIAL_TECHNICAL_DESIGN = 0
+INITIAL_TECHNICAL_DESIGN = 0_AT_AUTHORIZATION
 IMPLEMENTATION = 0
 TEST_RUNTIME_EFFECT = 0
 PRODUCT_EFFECT = 0
 PRODUCT_CREDIT = 0
 TECHNICAL_CREDIT = 0
 PRIMARY_OUTCOME = BLOCKER_NARROWED
-CURRENT_BLOCKER = MASH_LEVEL3_DECISION_PENDING
+CURRENT_BLOCKER = STEP4_INITIAL_TECHNICAL_DESIGN_NOT_YET_PUBLISHED
 STRUCTURE_MAP_DELTA_NONE
 AUTOMATIC_PROGRESSION = false
-STOP_BEFORE_STEP4
+STOP_BEFORE_IMPLEMENTATION
 ```
