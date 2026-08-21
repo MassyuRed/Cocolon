@@ -2,13 +2,115 @@
   "automatic_progression": false,
   "changed_paths": [
     {
+      "new_path": ".github/workflows/cocolon-system-context-inventory.yml",
+      "old_path": null,
+      "repository_key": "Cocolon",
+      "status": "MODIFIED"
+    },
+    {
       "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/code_index_manifest.json",
       "old_path": null,
       "repository_key": "Cocolon",
       "status": "MODIFIED"
     },
     {
+      "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/code_index_summary.json",
+      "old_path": null,
+      "repository_key": "Cocolon",
+      "status": "MODIFIED"
+    },
+    {
+      "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/import_edges.jsonl",
+      "old_path": null,
+      "repository_key": "Cocolon",
+      "status": "MODIFIED"
+    },
+    {
       "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/provider_runs.json",
+      "old_path": null,
+      "repository_key": "Cocolon",
+      "status": "MODIFIED"
+    },
+    {
+      "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0000",
+      "old_path": null,
+      "repository_key": "Cocolon",
+      "status": "MODIFIED"
+    },
+    {
+      "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0001",
+      "old_path": null,
+      "repository_key": "Cocolon",
+      "status": "MODIFIED"
+    },
+    {
+      "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0002",
+      "old_path": null,
+      "repository_key": "Cocolon",
+      "status": "MODIFIED"
+    },
+    {
+      "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0003",
+      "old_path": null,
+      "repository_key": "Cocolon",
+      "status": "MODIFIED"
+    },
+    {
+      "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0004",
+      "old_path": null,
+      "repository_key": "Cocolon",
+      "status": "MODIFIED"
+    },
+    {
+      "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0005",
+      "old_path": null,
+      "repository_key": "Cocolon",
+      "status": "MODIFIED"
+    },
+    {
+      "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0006",
+      "old_path": null,
+      "repository_key": "Cocolon",
+      "status": "MODIFIED"
+    },
+    {
+      "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0007",
+      "old_path": null,
+      "repository_key": "Cocolon",
+      "status": "MODIFIED"
+    },
+    {
+      "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0008",
+      "old_path": null,
+      "repository_key": "Cocolon",
+      "status": "MODIFIED"
+    },
+    {
+      "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0009",
+      "old_path": null,
+      "repository_key": "Cocolon",
+      "status": "MODIFIED"
+    },
+    {
+      "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0010",
+      "old_path": null,
+      "repository_key": "Cocolon",
+      "status": "MODIFIED"
+    },
+    {
+      "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0011",
+      "old_path": null,
+      "repository_key": "Cocolon",
+      "status": "MODIFIED"
+    },
+    {
+      "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/symbols.jsonl.part0000",
+      "old_path": null,
+      "repository_key": "Cocolon",
+      "status": "MODIFIED"
+    },
+    {
+      "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/symbols.jsonl.part0001",
       "old_path": null,
       "repository_key": "Cocolon",
       "status": "MODIFIED"
@@ -33,6 +135,12 @@
     },
     {
       "new_path": "Cocolon_前提資料/system_context/current/cmee_working/prepare_summary.md",
+      "old_path": null,
+      "repository_key": "Cocolon",
+      "status": "MODIFIED"
+    },
+    {
+      "new_path": "Cocolon_前提資料/system_context/current/cmee_working/publication_transport.json",
       "old_path": null,
       "repository_key": "Cocolon",
       "status": "MODIFIED"
@@ -102,22 +210,16 @@
       "old_path": null,
       "repository_key": "Cocolon",
       "status": "MODIFIED"
-    },
-    {
-      "new_path": "tests/cocolon_context/test_task_context.py",
-      "old_path": null,
-      "repository_key": "Cocolon",
-      "status": "MODIFIED"
-    },
-    {
-      "new_path": "tools/cocolon_context_task.py",
-      "old_path": null,
-      "repository_key": "Cocolon",
-      "status": "MODIFIED"
     }
   ],
   "changed_ref_refresh_evidence": {
     "changed_paths": [
+      {
+        "new_path": ".github/workflows/cocolon-system-context-inventory.yml",
+        "old_path": null,
+        "repository_key": "Cocolon",
+        "status": "MODIFIED"
+      },
       {
         "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/code_index_manifest.json",
         "old_path": null,
@@ -125,7 +227,103 @@
         "status": "MODIFIED"
       },
       {
+        "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/code_index_summary.json",
+        "old_path": null,
+        "repository_key": "Cocolon",
+        "status": "MODIFIED"
+      },
+      {
+        "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/import_edges.jsonl",
+        "old_path": null,
+        "repository_key": "Cocolon",
+        "status": "MODIFIED"
+      },
+      {
         "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/provider_runs.json",
+        "old_path": null,
+        "repository_key": "Cocolon",
+        "status": "MODIFIED"
+      },
+      {
+        "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0000",
+        "old_path": null,
+        "repository_key": "Cocolon",
+        "status": "MODIFIED"
+      },
+      {
+        "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0001",
+        "old_path": null,
+        "repository_key": "Cocolon",
+        "status": "MODIFIED"
+      },
+      {
+        "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0002",
+        "old_path": null,
+        "repository_key": "Cocolon",
+        "status": "MODIFIED"
+      },
+      {
+        "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0003",
+        "old_path": null,
+        "repository_key": "Cocolon",
+        "status": "MODIFIED"
+      },
+      {
+        "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0004",
+        "old_path": null,
+        "repository_key": "Cocolon",
+        "status": "MODIFIED"
+      },
+      {
+        "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0005",
+        "old_path": null,
+        "repository_key": "Cocolon",
+        "status": "MODIFIED"
+      },
+      {
+        "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0006",
+        "old_path": null,
+        "repository_key": "Cocolon",
+        "status": "MODIFIED"
+      },
+      {
+        "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0007",
+        "old_path": null,
+        "repository_key": "Cocolon",
+        "status": "MODIFIED"
+      },
+      {
+        "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0008",
+        "old_path": null,
+        "repository_key": "Cocolon",
+        "status": "MODIFIED"
+      },
+      {
+        "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0009",
+        "old_path": null,
+        "repository_key": "Cocolon",
+        "status": "MODIFIED"
+      },
+      {
+        "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0010",
+        "old_path": null,
+        "repository_key": "Cocolon",
+        "status": "MODIFIED"
+      },
+      {
+        "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/references.jsonl.part0011",
+        "old_path": null,
+        "repository_key": "Cocolon",
+        "status": "MODIFIED"
+      },
+      {
+        "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/symbols.jsonl.part0000",
+        "old_path": null,
+        "repository_key": "Cocolon",
+        "status": "MODIFIED"
+      },
+      {
+        "new_path": "Cocolon_前提資料/system_context/current/cmee_working/code_index/symbols.jsonl.part0001",
         "old_path": null,
         "repository_key": "Cocolon",
         "status": "MODIFIED"
@@ -150,6 +348,12 @@
       },
       {
         "new_path": "Cocolon_前提資料/system_context/current/cmee_working/prepare_summary.md",
+        "old_path": null,
+        "repository_key": "Cocolon",
+        "status": "MODIFIED"
+      },
+      {
+        "new_path": "Cocolon_前提資料/system_context/current/cmee_working/publication_transport.json",
         "old_path": null,
         "repository_key": "Cocolon",
         "status": "MODIFIED"
@@ -219,30 +423,17 @@
         "old_path": null,
         "repository_key": "Cocolon",
         "status": "MODIFIED"
-      },
-      {
-        "new_path": "tests/cocolon_context/test_task_context.py",
-        "old_path": null,
-        "repository_key": "Cocolon",
-        "status": "MODIFIED"
-      },
-      {
-        "new_path": "tools/cocolon_context_task.py",
-        "old_path": null,
-        "repository_key": "Cocolon",
-        "status": "MODIFIED"
       }
     ],
     "previous_refs": {
-      "Cocolon": "ded08a2d9f0b1f1e4c8382f0c3ee2e6bcfe0c141",
+      "Cocolon": "144f0aafb91b262a3f9701184ee20939e5115419",
       "mashos-api": "06ce311b3ea728b06f83439d268a34bed917c01c"
     },
     "refresh_plan": {
-      "changed_path_count": 19,
+      "changed_path_count": 35,
       "classification_reasons": [
         "NON_CODE_CHANGE",
         "ROUTE_METADATA_CHANGE",
-        "ROUTE_OR_OWNER_CLOSURE_CHANGE",
         "TOOLCHAIN_SCHEMA_OR_PROFILE_CHANGE"
       ],
       "detected_change_kinds": [
@@ -267,7 +458,7 @@
       ]
     },
     "resolved_refs": {
-      "Cocolon": "144f0aafb91b262a3f9701184ee20939e5115419",
+      "Cocolon": "9d71ab54f24b4a25d04b3ca2e71d40414d5313fc",
       "mashos-api": "06ce311b3ea728b06f83439d268a34bed917c01c"
     },
     "source_incremental_evidence": null
@@ -281,17 +472,16 @@
   "mashos_api_write_count": 0,
   "overall_claim": null,
   "previous_refs": {
-    "Cocolon": "ded08a2d9f0b1f1e4c8382f0c3ee2e6bcfe0c141",
+    "Cocolon": "144f0aafb91b262a3f9701184ee20939e5115419",
     "mashos-api": "06ce311b3ea728b06f83439d268a34bed917c01c"
   },
   "product_behavior_change_count": 0,
   "product_credit": 0,
   "refresh_plan": {
-    "changed_path_count": 19,
+    "changed_path_count": 35,
     "classification_reasons": [
       "NON_CODE_CHANGE",
       "ROUTE_METADATA_CHANGE",
-      "ROUTE_OR_OWNER_CLOSURE_CHANGE",
       "TOOLCHAIN_SCHEMA_OR_PROFILE_CHANGE"
     ],
     "detected_change_kinds": [
@@ -318,9 +508,9 @@
   "remote_verified": false,
   "resolved_refs": {
     "Cocolon": {
-      "commit": "144f0aafb91b262a3f9701184ee20939e5115419",
+      "commit": "9d71ab54f24b4a25d04b3ca2e71d40414d5313fc",
       "path_role": "Cocolon",
-      "tree": "bb855b0ffc0d607aab4ce3d4829e3e2af30f1a06"
+      "tree": "012786a2a8ad7982061d45dee402141e3def0001"
     },
     "mashos-api": {
       "commit": "06ce311b3ea728b06f83439d268a34bed917c01c",
@@ -353,16 +543,16 @@
     "actual_unincorporated_finding_count": 1,
     "blocking_unresolved_count": 0,
     "closure_edge_count": 759989,
-    "context_fingerprint": "d94d57a0e61f1b64febe816948a4e67ce09793dc7f9d3209978fcaf6effab708",
+    "context_fingerprint": "460073c7beca5841fddde5716e34f175b1bb6bc60fc537d6598b585c1524932a",
     "full_text_read_order": "task_context/cmee/full_text_read_order.md",
-    "manifest_sha256": "a381f42b41205c7f1fa67329de61481b4c3727f92d4615cf1a666fdb9279f2e0",
+    "manifest_sha256": "5fdfc8c1edb3c6c8697cde59533107886555379ed2522ddff596ad9de1ee4e5c",
     "output_sha256": {
       "closure_edges.jsonl": "73ae840836af4cc0a706d0ba7fb21f5116c5af3a514e284052ae397feefb26ce",
       "cmee_context_overview.md": "934ac8d2b221cdd2114add3bf0353cad5f7fc023878fb5441dc94f5d74607ac4",
-      "cmee_unincorporated_actual_findings.md": "91f67e64bbba53f0b70d263f4c307b880745abab69ca524e53a1f9aea0cc87df",
-      "full_text_read_order.md": "71962d6168f07c7c0a5b81fe5c2720527c56fd4a77974f52601cf9fe045aec47",
-      "required_category_coverage.json": "7a1a2c85f7256a54d3851c6a2f6327479b5cc07d7227abf95c78e2918c6211d2",
-      "selected_files.jsonl": "0613f213151abe7071fa27fe0948839333983c52555d92c6e3d615a22c24e4e5",
+      "cmee_unincorporated_actual_findings.md": "78d95b2a1496f7b24e1cb48049495b34ecb509874cdad88c18fa1f796947a5bd",
+      "full_text_read_order.md": "7f786b597c38e2d52ebfdae9e6201f86076025655aae4f85ebf0645572e3ecc7",
+      "required_category_coverage.json": "645089b62866b25d222eebe7fa9796d3ae908841db3cf48a91e0dd4f27c872ad",
+      "selected_files.jsonl": "294200ccd61798bbb9f01f62695b85e17909b372b9a5111c249f83663d8ba062",
       "unresolved_context.jsonl": "7071eb08794e1bf250f3c2ef7899ccaa9bd5eed138de2fcc490165f916a008a2"
     },
     "selected_file_count": 2016,

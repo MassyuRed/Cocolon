@@ -7,7 +7,7 @@ workspace: `cmee_working`
 ## 1. `Cocolon:Cocolon_前提資料/current_structure/00_three_core_and_cmee_read_first.md`
 
 - classification: `CURRENT_OWNER`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `3623f1f27a0f469c8c95c623ecfa2cfd440aec5e0838de3173868604ed7cd518`
 - graph distance: `0`
 - 選択理由:
@@ -17,7 +17,7 @@ workspace: `cmee_working`
 ## 2. `Cocolon:Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md`
 
 - classification: `CURRENT_OWNER`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `de2313e88098e08850b9578bd9ce20980f5678f681193a0be5a890a48c0f641a`
 - graph distance: `0`
 - 選択理由:
@@ -27,7 +27,7 @@ workspace: `cmee_working`
 ## 3. `Cocolon:Cocolon_前提資料/current_structure/02_piece_current_structure.md`
 
 - classification: `CURRENT_OWNER`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `a4a867a6915fe05b8a992ff2601d6e3ad34fb47e499813de4f502d2cbc2fabe9`
 - graph distance: `0`
 - 選択理由:
@@ -37,7 +37,7 @@ workspace: `cmee_working`
 ## 4. `Cocolon:Cocolon_前提資料/current_structure/03_analysis_current_structure.md`
 
 - classification: `CURRENT_OWNER`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `d76cf6120d157eea7f0f2d2044a570ad2162d9ae5ea9e948391d9d23f5e578ee`
 - graph distance: `0`
 - 選択理由:
@@ -47,7 +47,7 @@ workspace: `cmee_working`
 ## 5. `Cocolon:Cocolon_前提資料/current_structure/04_cmee_current_structure.md`
 
 - classification: `CURRENT_OWNER`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `165546b8dba32be5204b7715dd98c9a3a7adea734ab2795b6fae7f8f77af2cc4`
 - graph distance: `0`
 - 選択理由:
@@ -57,7 +57,7 @@ workspace: `cmee_working`
 ## 6. `Cocolon:Cocolon_前提資料/designs/cmee/Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md`
 
 - classification: `CURRENT_OWNER`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `c830666937172d5d9d5d0b5417d6476ab34b271fb6cba5fa03af6251e5abdaad`
 - graph distance: `0`
 - 選択理由:
@@ -67,7 +67,7 @@ workspace: `cmee_working`
 ## 7. `Cocolon:Cocolon_前提資料/designs/cmee/NLSv3_to_CMEE_Disposition_Phase1_20260817.md`
 
 - classification: `CURRENT_OWNER`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `c9b8ee84e38745b0ba2b43b8699557eaf0fa75123f13b5cb819602944bb9d622`
 - graph distance: `0`
 - 選択理由:
@@ -77,7 +77,7 @@ workspace: `cmee_working`
 ## 8. `Cocolon:Cocolon_前提資料/designs/cmee/v1/00_read_first.md`
 
 - classification: `CURRENT_OWNER`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `e86bfadbd00492dccb6ee52c60d7b2ccc1140dff3dc30176027bfa9aada7bd2a`
 - graph distance: `0`
 - 選択理由:
@@ -87,7 +87,7 @@ workspace: `cmee_working`
 ## 9. `Cocolon:Cocolon_前提資料/designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md`
 
 - classification: `CURRENT_OWNER`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `fe8b1c27b75c136a8659b847b638da873c679105918455fd8303792f6e1afada`
 - graph distance: `0`
 - 選択理由:
@@ -98,7 +98,7 @@ workspace: `cmee_working`
 ## 10. `Cocolon:Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md`
 
 - classification: `CURRENT_OWNER`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `85f16f9edd64c537979d3bd607f3579b597854dd48e49b336a8d5e0c39af919b`
 - graph distance: `0`
 - 選択理由:
@@ -108,7 +108,7 @@ workspace: `cmee_working`
 ## 11. `Cocolon:Cocolon_前提資料/designs/cmee/v1/03_piece_v1c_detailed_design.md`
 
 - classification: `CURRENT_OWNER`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `b925c72129872761f2bdba3e83d0488e4fb664b8051992bbd5b34ba94f964fad`
 - graph distance: `0`
 - 選択理由:
@@ -118,7 +118,7 @@ workspace: `cmee_working`
 ## 12. `Cocolon:Cocolon_前提資料/designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md`
 
 - classification: `CURRENT_OWNER`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `69af388a58fab5bc0316390b3472aac4b15496341a0ab3a2b49678733538ce79`
 - graph distance: `0`
 - 選択理由:
@@ -128,7 +128,7 @@ workspace: `cmee_working`
 ## 13. `Cocolon:Cocolon_前提資料/designs/cmee/v1/05_json_schema_and_versioning.md`
 
 - classification: `CURRENT_OWNER`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `9ba105f472909928c333f39e754c74e232f83549bf9f64d0247e32a2b34ec21d`
 - graph distance: `0`
 - 選択理由:
@@ -138,7 +138,7 @@ workspace: `cmee_working`
 ## 14. `Cocolon:Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md`
 
 - classification: `CURRENT_OWNER`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `1e5863d288614043a005d717ff28897323a8e3a3d1c93c6c52851bfe38f3e41f`
 - graph distance: `0`
 - 選択理由:
@@ -148,7 +148,7 @@ workspace: `cmee_working`
 ## 15. `Cocolon:screens/InputScreen.js`
 
 - classification: `MUST_READ_FULL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `c15cce12bcaf4100b8925d0a315be8548ae47a86285b1cb1be9d9bdaad8c9edf`
 - graph distance: `0`
 - 選択理由:
@@ -393,7 +393,7 @@ workspace: `cmee_working`
 ## 16. `Cocolon:screens/input/InputFeedbackReplyModal.js`
 
 - classification: `MUST_READ_FULL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `1d36882f2767d3a607f007fcf8c071f53b5bce2b2b0edda1b85e1034fda5ae9c`
 - graph distance: `0`
 - 選択理由:
@@ -419,7 +419,7 @@ workspace: `cmee_working`
 ## 17. `Cocolon:screens/input/inputFeedbackModel.js`
 
 - classification: `MUST_READ_FULL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `a9404bb494a5ce9312898f4ec514dcacb8479810ea5deeeeee8e5004f3ad6746`
 - graph distance: `0`
 - 選択理由:
@@ -444,7 +444,7 @@ workspace: `cmee_working`
 ## 18. `Cocolon:screens/input/useInputFeedbackModal.js`
 
 - classification: `MUST_READ_FULL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `e8beebc722cee19e2a73fd558684e467e080f152da4e74e2a2b892f2514525b1`
 - graph distance: `0`
 - 選択理由:
@@ -2613,7 +2613,7 @@ workspace: `cmee_working`
 ## 68. `Cocolon:Cocolon_前提資料/08_cycle001_current_state.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `755214460d24742a3c85ab0148b88e9121e857e5b64423c48f4194637e9e25a3`
 - graph distance: `0`
 - 選択理由:
@@ -2622,7 +2622,7 @@ workspace: `cmee_working`
 ## 69. `Cocolon:Cocolon_前提資料/Cocolon_EmlisAI_NLSv3_CurrentAlignment.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `49b6f51a1fc51c6c37f9e6845f248e158466dd9850c9151ff48c29cc00fcd590`
 - graph distance: `0`
 - 選択理由:
@@ -2632,7 +2632,7 @@ workspace: `cmee_working`
 ## 70. `Cocolon:Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `43034c133b95e957e5b9e6087871ebf8e5dedddc4b29cc23bf6fc279dbcaee08`
 - graph distance: `0`
 - 選択理由:
@@ -2642,7 +2642,7 @@ workspace: `cmee_working`
 ## 71. `Cocolon:Cocolon_前提資料/historical_baselines/emlis_ai/Cocolon_EmlisAI_ModelFreeNaturalLanguageSurfaceV3_DetailedDesign_ImplementationOrder_20260714_Revised_Cycle.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `c0bdc73c61faba375cba6813c31178b28bb7ad97746bd5b44016320faacfcc26`
 - graph distance: `0`
 - 選択理由:
@@ -2672,7 +2672,7 @@ workspace: `cmee_working`
 ## 74. `Cocolon:Cocolon_Piece/pce2_cross_core_source_handoff/Piece_CrossCore_Source_Handoff_Contract_20260807.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `8d1c6321fd2b9dffa91463412df12a987859aaae32e8d4d0de10e577e499a5c7`
 - graph distance: `1`
 - 選択理由:
@@ -2681,7 +2681,7 @@ workspace: `cmee_working`
 ## 75. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_InstalledFileManifestCurrentComparatorDecisionAndV2AdditiveRefreeze_V1_Handoff_20260810.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `ee28978847f6315ea20ff6fcb3cc1740a189b94fe93e95eb8491de7eb2ac7938`
 - graph distance: `1`
 - 選択理由:
@@ -2692,7 +2692,7 @@ workspace: `cmee_working`
 ## 76. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_AcceptedTestRunExact134SuccessAndSequenceEvent1Event2ShareableLedgerAtomicPublicationContractReconciliation_ImplementationAndTargetedGreenOnly_STOP_ReadOnly_Handoff_20260725.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `19c498fd37af4a25e2e7acc1453b3a90345ed2044e549445a93fa224c600b003`
 - graph distance: `1`
 - 選択理由:
@@ -2701,7 +2701,7 @@ workspace: `cmee_working`
 ## 77. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_Lineage02_Event1V2_BootstrapPreflightContractUnreachable_SourceBaselineInvalidationAndRecoveryEpoch003_ParentDesign_ReadOnly_Handoff_20260729.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `997e5b268c41cacaaa93708c1136e18d445f52b2d0f872aefbef8792233edbe8`
 - graph distance: `1`
 - 選択理由:
@@ -2712,7 +2712,7 @@ workspace: `cmee_working`
 ## 78. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_PostD2ParentAddendumExternalIdentitySourceClosureCompletionAndEvent1BindingContractCorrection_Design_ReadOnly_Handoff_20260727.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `e0e508ff7fd19a061ee7b56e9e91a5841a3c9663c9576bf721af9e02c6920a67`
 - graph distance: `1`
 - 選択理由:
@@ -2723,7 +2723,7 @@ workspace: `cmee_working`
 ## 79. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_D1_BootstrapFormalExact134ManifestAndReferenceRuntimeRootIdentityBinding_OracleCorrectionAndCausalREDRefreeze_Handoff_20260729.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `65a5b0caa692db4b8e284e0224ecaa83c2c801df11414d4a36bbaf4b68ee230d`
 - graph distance: `1`
 - 選択理由:
@@ -2734,7 +2734,7 @@ workspace: `cmee_working`
 ## 80. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_FinalSourceBootstrapReferenceRuntimeClosureAndOperationalAdmissionContractUnreachable_P0ParentAddendum_Design_ReadOnly_Handoff_20260729.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `699a461dd3edcb323b00c48a1961220272a995b5cc5d414c738173b77088151c`
 - graph distance: `1`
 - 選択理由:
@@ -2745,7 +2745,7 @@ workspace: `cmee_working`
 ## 81. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_AdditiveCorrectiveP0_AfterEpoch003PrestartD2ReceiptIdentityPreimageContractMismatchAndPartialP0NonCredit_ParentDesign_ReadOnly_Handoff_20260730.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `02ccf7a386dc08e7c700184b6f39da118140dd57267f75d1699655ec1c8483ec`
 - graph distance: `1`
 - 選択理由:
@@ -2756,7 +2756,7 @@ workspace: `cmee_working`
 ## 82. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_D1V5_R1SchemaV2_PrelaunchStageProjectionTypedTerminalAndLaunchAdmissionGateConsumption_DistinctSuccessorBoundaryReconciliation_Design_ReadOnly_Handoff_20260801.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `4e79d19b147da40350e8b0f37c4041bd687f09a4f2ff0f556a9dd905f4e2c86e`
 - graph distance: `1`
 - 選択理由:
@@ -2767,7 +2767,7 @@ workspace: `cmee_working`
 ## 83. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeReadinessRecovery_GateB_ContractV1BoundFreshStaticVerifierLauncherClassifierObservation_DualMatchInvalidNoAcceptedIdentityStop_Handoff_20260802.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `9b712180ade3d83574004fcc105c19f7456b4d5f48d1cb4dcb781b5c9a7a31e6`
 - graph distance: `1`
 - 選択理由:
@@ -2778,7 +2778,7 @@ workspace: `cmee_working`
 ## 84. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeReadinessRecovery_GateB_HelperContractReconciliationDesignOnly_RelationSemanticClosureV4_DualStaticValidStop_Handoff_20260801.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `26b9bac17e7cd2d1588a291b8ca552cbafe20fd0d879ae1655e6a876cb8f2b3d`
 - graph distance: `1`
 - 選択理由:
@@ -2789,7 +2789,7 @@ workspace: `cmee_working`
 ## 85. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeReadinessRecovery_GateB_HelperStaticContractInvalid_PreacquisitionStop_Handoff_20260801.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `da7167531b96ecc9ed1ba23e60dda453d46e4d15846f1a0d602a8b375e15f101`
 - graph distance: `1`
 - 選択理由:
@@ -2800,7 +2800,7 @@ workspace: `cmee_working`
 ## 86. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeReadinessRecovery_GateB_StaticVerifierLauncherExactNodeVersionSelectionActivationBindingEvaluatorReconciliationContractDesignOnly_V1_DualStaticValidStop_Handoff_20260802.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `e74a6b9dc91931f5f3dc43cf471e3f5d1813b5b6f4f0cdc8dcf8026df8a1246e`
 - graph distance: `1`
 - 選択理由:
@@ -2811,7 +2811,7 @@ workspace: `cmee_working`
 ## 87. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeReadinessRecovery_GateB_StaticVerifierLauncherExactNodeVersionSelectionPolicyContractReconciliationDesignOnly_V1_DualStaticValidStop_Handoff_20260802.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `91108c7df00afae60e899327ea5a71faba0712857401b03fe1964209564825d5`
 - graph distance: `1`
 - 選択理由:
@@ -2943,7 +2943,7 @@ workspace: `cmee_working`
 ## 99. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_PostImplementationCurrentDependencyClosureRootContract_RED_CorrectionAndRefreezeOnly_ReadOnly_Handoff_20260724.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `2ac1b4cd4c8d6528b508f12e2843d8f6d1bb75302d8c0f9434ad44cbfa7c660e`
 - graph distance: `2`
 - 選択理由:
@@ -2952,7 +2952,7 @@ workspace: `cmee_working`
 ## 100. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleUnmatchedOptionalSelectionAndContentDepthOnlyContract_Reconciliation_ImplementationAndGreenOnly_STOP_ReadOnly_Handoff_20260724.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `ba4c50b2567ddfcaa58bb440da6ab153e46ae580bf1ea18317db6a9c9206770d`
 - graph distance: `2`
 - 選択理由:
@@ -2961,7 +2961,7 @@ workspace: `cmee_working`
 ## 101. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_Lineage02_Event1V2_BootstrapPreflightContractUnreachable_FailureReceiptExternalIdentityAndChallengeProvenance_ContractCorrection_Handoff_20260729.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `89572bca83a7983c04f68ac8e897e9d5e77a338a400628fd18fc76fae533c639`
 - graph distance: `2`
 - 選択理由:
@@ -2970,7 +2970,7 @@ workspace: `cmee_working`
 ## 102. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_GateB_PreIngressDiagnosticStaticVerifierSemanticNormalizationContractV2_TerminalMappingExclusivityCorrected_DualStaticValidMatchingDesignStop_Handoff_20260802.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `01967643ee1debd3f3259c4231bb2de6f5e69be1217a62da335283f6ab2a414b`
 - graph distance: `2`
 - 選択理由:
@@ -2979,7 +2979,7 @@ workspace: `cmee_working`
 ## 103. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_GateB_V5FunctionBoundaryGrammarAndPublicExact9FixtureCoverageReconciliationContractV1_DualStaticValidMatching_DesignOnlyStop_Handoff_20260803.md`
 
 - classification: `RELEVANT_HISTORICAL`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `24fc40ead598012653effce9abf249681db1c9d9a480f18c79ea5ceb9a6baa60`
 - graph distance: `2`
 - 選択理由:
@@ -2988,7 +2988,7 @@ workspace: `cmee_working`
 ## 104. `Cocolon:lib/api/home/emotionPieceApi.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `8c6158c63ecb3137f604aa770b0acd64aacbd78687ae2bc32abfbbf7f23f1e36`
 - graph distance: `0`
 - 選択理由:
@@ -3025,7 +3025,7 @@ workspace: `cmee_working`
 ## 106. `Cocolon:.github/cocolon_formal_publication_guard/guardian.py`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `ab5801c956cc73b5798c3488223b7fa646fd2e1060ee1179e46f2d54525bc1b1`
 - graph distance: `1`
 - 選択理由:
@@ -3053,7 +3053,7 @@ workspace: `cmee_working`
 ## 107. `Cocolon:.github/cocolon_formal_publication_guard/test_guardian.py`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `baa1c90ab53371f2fc38f4eee1c358199e7d45ad1e148b1a4b675ef7edbf8b24`
 - graph distance: `1`
 - 選択理由:
@@ -3081,7 +3081,7 @@ workspace: `cmee_working`
 ## 108. `Cocolon:AppRuntimeContext.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `1bef5061c00855f715651d8e4cc7d4fba5ad24678386ff179954aacb4ec8ee87`
 - graph distance: `1`
 - 選択理由:
@@ -3996,7 +3996,7 @@ workspace: `cmee_working`
 ## 109. `Cocolon:AuthContext.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `ae4cac7ed88c6db2fbdd3ea7deb80a9a9a0798f76d6548067ecefe0b1de12fb4`
 - graph distance: `1`
 - 選択理由:
@@ -4711,7 +4711,7 @@ workspace: `cmee_working`
 ## 110. `Cocolon:AuthScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `3ad6d8c48f389dcfa00d2d38f92adaa11a1fa17e5130978ef09c9d0cf357dcd6`
 - graph distance: `1`
 - 選択理由:
@@ -5169,7 +5169,7 @@ workspace: `cmee_working`
 ## 111. `Cocolon:Cocolon_Piece/pce6_api_db_rn_migration/Piece_New_Data_Contract_Design_20260808.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `2a0bf5fb72b7f5da309959d7a807e8091c8b50f273ed60a504024e751d4ea0e5`
 - graph distance: `1`
 - 選択理由:
@@ -5180,7 +5180,7 @@ workspace: `cmee_working`
 ## 112. `Cocolon:Cocolon_前提資料/02C_cocolon_contract_boundary_validation.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `3f68a72307e4f3645217aca3daa81ab0da6118fe7a1bf090653f8087f625526f`
 - graph distance: `1`
 - 選択理由:
@@ -5227,7 +5227,7 @@ workspace: `cmee_working`
 ## 113. `Cocolon:Cocolon_前提資料/12_cocolon_github_actions_publication_guard.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `95d95b8c953226b01a2961c1c65c8a12cba81e913e075a2232408ad9f5b7abb9`
 - graph distance: `1`
 - 選択理由:
@@ -5240,7 +5240,7 @@ workspace: `cmee_working`
 ## 114. `Cocolon:Cocolon_前提資料/manifest.json`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `51db1d547e4cbd6f6ff8650587f631f45f8e0243ede39eacddcb97fdc99ecb00`
 - graph distance: `1`
 - 選択理由:
@@ -5268,7 +5268,7 @@ workspace: `cmee_working`
 ## 115. `Cocolon:EmlisAIの実装済み資料/Cocolon_EmlisAI_P0_P1_PublicInputFeedbackArrivalContractRepair_詳細設計書_実装順_20260608.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `0c09eba4304e8826aaa7d8a39f02da20e8c5e7f900f67edf29280f7de34e1ceb`
 - graph distance: `1`
 - 選択理由:
@@ -5279,7 +5279,7 @@ workspace: `cmee_working`
 ## 116. `Cocolon:EmlisAIの実装済み資料/Cocolon_EmlisAI_P7_R46_P5P6Return_DisplayContractRedClassification_DetailedDesign_ImplementationOrder_20260617.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `fff7092fc0699a0dc4662f51b579dcebf61726aa49557abf5a49d7f7768e24d3`
 - graph distance: `1`
 - 選択理由:
@@ -5288,7 +5288,7 @@ workspace: `cmee_working`
 ## 117. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_G4_PostG6SharedStructuralCorrection_InstalledFileManifestCurrentComparatorDecisionAndV2AdditiveRefreeze_V1_Result_20260810.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `8cdd37fbc0e69dbcd5fedb65b7bf8a2ef02cdb9d12413f56550221ac3d0da740`
 - graph distance: `1`
 - 選択理由:
@@ -5299,7 +5299,7 @@ workspace: `cmee_working`
 ## 118. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_AcceptedTestRunExact134SuccessAndSequenceEvent1Event2ShareableLedgerAtomicPublicationContractReconciliation_ImplementationAndTargetedGreenOnly_Result_20260725.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `9ccaeadb0c0cf51081d95fc85546a6fcc3f48fac6f1986431fe9aa7098b1b70c`
 - graph distance: `1`
 - 選択理由:
@@ -5308,7 +5308,7 @@ workspace: `cmee_working`
 ## 119. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_Lineage02_Event1V2_BootstrapPreflightContractUnreachable_SourceBaselineInvalidationAndRecoveryEpoch003_ParentDesign_ReadOnly_20260729.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `a33f7b1e281ffb8bf9e68b369040eae047c416c835bf2ffcdbdc5dee6a05756d`
 - graph distance: `1`
 - 選択理由:
@@ -5319,7 +5319,7 @@ workspace: `cmee_working`
 ## 120. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_Lineage02_Event1V2_BootstrapPreflightUnreachable_BootstrapSourceClosureRuntimeIdentityBaselineDisposition_ContractReconciliation_Design_ReadOnly_20260728.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `ad3a7c965a3f6b8eef63d9d34e40610c9ab7e9c2e200976b20bd0bdea4bc9b8a`
 - graph distance: `1`
 - 選択理由:
@@ -5330,7 +5330,7 @@ workspace: `cmee_working`
 ## 121. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_PostD2ParentAddendumExternalIdentitySourceClosureCompletionAndEvent1BindingContractCorrection_Design_ReadOnly_20260727.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `c353a6ace967b6cea29f5e97f595f18149a985c09f2e3c55d39cf6e4bb655bc3`
 - graph distance: `1`
 - 選択理由:
@@ -5341,7 +5341,7 @@ workspace: `cmee_working`
 ## 122. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_PostD2_Event1V2OwnerContract_PostImplementationSourceIdentitySuccession_ImmutableExact20Exact16Exact13_LineageRecoveryDecision_Design_ReadOnly_20260728.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `6114fc0cd0923d2509f0335c04f51542f193f82d3ae25ce4fe312c6c6393de92`
 - graph distance: `1`
 - 選択理由:
@@ -5352,7 +5352,7 @@ workspace: `cmee_working`
 ## 123. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_FinalSourceBootstrapReferenceRuntimeClosureAndOperationalAdmissionContractUnreachable_P0ParentAddendum_Design_ReadOnly_20260729.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `b6869b7f493fa53645d456cb80b42b6cc7b871e6bc154f764618aa339ab6389b`
 - graph distance: `1`
 - 選択理由:
@@ -5363,7 +5363,7 @@ workspace: `cmee_working`
 ## 124. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_OperationalAdmissionV2_DirectEvent1ConnectionSourceIdentityParadox_ContractReconciliation_Design_ReadOnly_20260730.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `84e4f3daac377ffd2e9eea56d6aa3d735cec61fe3aa3ad73e4fa6a9f8d6c00cd`
 - graph distance: `1`
 - 選択理由:
@@ -5374,7 +5374,7 @@ workspace: `cmee_working`
 ## 125. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_AdditiveCorrectiveP0_AfterEpoch003PrestartD2ReceiptIdentityPreimageContractMismatchAndPartialP0NonCredit_ParentDesign_ReadOnly_20260730.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `a744ad8e8301ec58d6d5707ab4f695a17007dd0a292c9f5dcf98152f8795a632`
 - graph distance: `1`
 - 選択理由:
@@ -5385,7 +5385,7 @@ workspace: `cmee_working`
 ## 126. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_D1V5_R1PrelaunchReceiptSchemaContradiction_OrderedNodeDirectFieldV2_DistinctOneShotBoundaryReconciliation_Design_ReadOnly_20260731.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `e08e35406d737aecce12c25c7e5dbed120c66608e3deb7492cb4baff26f7440f`
 - graph distance: `1`
 - 選択理由:
@@ -5396,7 +5396,7 @@ workspace: `cmee_working`
 ## 127. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_D1V5_R1SchemaV2ResultUnknown_NodeIdDisplayCausalSignaturePlacementAndFinalDurationSuffix_TerminalGrammarReconciliation_DistinctSuccessorBoundary_Design_ReadOnly_20260801.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `312b42ea7d7c0c3e7510087a5cedb93397d7af4f28b562834564afa9328345c1`
 - graph distance: `1`
 - 選択理由:
@@ -5408,7 +5408,7 @@ workspace: `cmee_working`
 ## 128. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_D1V5_StaticContractGap_ImplementationNeutralRoleObservationEvidenceBoundary_PostAcquisitionLocalIntrospectionTypedAbort_AuthorityBoundaryReconciliation_Design_ReadOnly_20260731.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `43729271cadae45d624d7f619f70426c05a7396c337dd205d99115005d7d1949`
 - graph distance: `1`
 - 選択理由:
@@ -5419,7 +5419,7 @@ workspace: `cmee_working`
 ## 129. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_PostD2_ActualGitIdentityReproducibilityAndStabilityContractReconciliation_Design_ReadOnly_20260731.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `a16512e1a38036c25bf1f7043dd7295f15c5a383ff59132684d0e6fb07f35ad6`
 - graph distance: `1`
 - 選択理由:
@@ -5464,7 +5464,7 @@ workspace: `cmee_working`
 ## 130. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_R1OwnerContract_ObserverV2_CollectionAdmissionAndThreeWayTerminalGrammarReconciliation_DistinctSuccessorBoundary_Design_ReadOnly_20260801.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `bbd9f7fb8e11e2658bda5da9711974bea0884e1d981a8b27e60bfcb0886679c5`
 - graph distance: `1`
 - 選択理由:
@@ -5475,7 +5475,7 @@ workspace: `cmee_working`
 ## 131. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeReadinessRecovery_GateB_LauncherAvailabilityRecoveryRouteDecisionContractReconciliationDesignOnly_V1_DualStaticValidEnvironmentProviderBlockerStop_Result_20260802.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `86efd89a3505357a819be8d1aee66db359262dce816a6dadbece1794add53e1b`
 - graph distance: `1`
 - 選択理由:
@@ -5486,7 +5486,7 @@ workspace: `cmee_working`
 ## 132. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeReadinessRecovery_GateB_StaticVerifierLauncherExactNodeVersionSelectionPolicyContractReconciliationDesignOnly_V1_DualStaticValidStop_Result_20260802.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `c7a14df18ca517cf2947b74b27827ed941a2ae95b74be6f62b3f6ebb56240237`
 - graph distance: `1`
 - 選択理由:
@@ -5497,7 +5497,7 @@ workspace: `cmee_working`
 ## 133. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeReadinessRecovery_GateB_StaticVerifierLauncherProviderMetadataSourceLockAndArtifactIdentityObservationContractReconciliationDesignOnly_V1_DualStaticValidStop_Result_20260802.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `f8bbaf2707f3ae452ec655eb2a89008f4840c8080e5c79bedb77a5e210945f21`
 - graph distance: `1`
 - 選択理由:
@@ -5508,7 +5508,7 @@ workspace: `cmee_working`
 ## 134. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_WorkTestRunnerRuntimeReadinessRecovery_GateB_StaticVerifierLauncherTrustAndRejectionContractReconciliationDesignOnly_V1_DualStaticValidStop_Result_20260802.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `0912de1a1b1b480d4ced2135b1ad85e245ef22947a42a2e84e03415bd21d7093`
 - graph distance: `1`
 - 選択理由:
@@ -5519,7 +5519,7 @@ workspace: `cmee_working`
 ## 135. `Cocolon:EmlisAIの実装済み資料/documents/V16_PublicGate_LocalEvidence_Preservation_20260805/artifacts/v16_public_gate_execution_continuation_carrier_v3_t06_sanitized_shape_extractor_v1.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `b5dbc5a4d5ea97f2544b49ee8352d2461cdfb4bbf35866492f5875aa99f9f7f0`
 - graph distance: `1`
 - 選択理由:
@@ -5544,7 +5544,7 @@ workspace: `cmee_working`
 ## 136. `Cocolon:EmlisAIの実装済み資料/documents/V16_PublicGate_LocalEvidence_Preservation_20260805/artifacts/v16_public_gate_execution_continuation_carrier_v3_t06_sanitized_shape_extractor_v2.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `ecab8eb367b4b670423f99857be3676037ec52565d3b88d3d1c4540e4fcb95dc`
 - graph distance: `1`
 - 選択理由:
@@ -5654,7 +5654,7 @@ workspace: `cmee_working`
 ## 137. `Cocolon:EmlisAIの実装済み資料/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/v16_standalone_preparation_noninteractive_inspector_generator_v2.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `54b65d614cfd21b9f8d60cf7f1f4e8b7b4ec75d4abc81b74697593a56e1b2a05`
 - graph distance: `1`
 - 選択理由:
@@ -5732,7 +5732,7 @@ workspace: `cmee_working`
 ## 138. `Cocolon:SubscriptionContext.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `84421b36ba43ab4ae14684bb8e11501a515acc44dd37ee305578635ab6ffde8b`
 - graph distance: `1`
 - 選択理由:
@@ -7060,7 +7060,7 @@ workspace: `cmee_working`
 ## 139. `Cocolon:TutorialContext.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `965c2ccc077023f3f6dd6facaa6b53be6ed22238f4a8ae5e2670048fff2c5a0e`
 - graph distance: `1`
 - 選択理由:
@@ -8337,7 +8337,7 @@ workspace: `cmee_working`
 ## 140. `Cocolon:UnreadContext.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `744f848512245bf075c5964a029f97e7d7f8e2b71f7142f381934ff692082d33`
 - graph distance: `1`
 - 選択理由:
@@ -8959,7 +8959,7 @@ workspace: `cmee_working`
 ## 141. `Cocolon:components/CocolonButton.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `5f5b1b708178dd370196f0e50043eb7808f77bea9d6f028a70ea9c10ce8c9c26`
 - graph distance: `1`
 - 選択理由:
@@ -9013,7 +9013,7 @@ workspace: `cmee_working`
 ## 142. `Cocolon:components/CocolonPressable.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `e2068bb727c62981c229337f9bfc6ffc5402453c5bbdff9329dbf64ee5300c30`
 - graph distance: `1`
 - 選択理由:
@@ -9094,7 +9094,7 @@ workspace: `cmee_working`
 ## 143. `Cocolon:components/TodayQuestionCard.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `664d513e672f74318f99d645bb5d73a6774f2c97b925ee454f8b9b77d7af1ce3`
 - graph distance: `1`
 - 選択理由:
@@ -9233,7 +9233,7 @@ workspace: `cmee_working`
 ## 144. `Cocolon:components/TutorialOverlay.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `a0ae7fa4da4e6203d95074e2beba06228bd1ec407484a71434398873e96e6a68`
 - graph distance: `1`
 - 選択理由:
@@ -9525,7 +9525,7 @@ workspace: `cmee_working`
 ## 145. `Cocolon:components/UnreadBadge.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `0fbb55fe6f874d6ac2843ee91bb2f5116ffe6a3033362f84ee3525348374a9e9`
 - graph distance: `1`
 - 選択理由:
@@ -9564,7 +9564,7 @@ workspace: `cmee_working`
 ## 146. `Cocolon:components/selfStructure/SelfStructureDeepRenderer.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `974abcd47b3306687b3142ab021295f03d3e3d3169716b42f8e217f456189e59`
 - graph distance: `1`
 - 選択理由:
@@ -9602,7 +9602,7 @@ workspace: `cmee_working`
 ## 147. `Cocolon:features/home/useHomeActions.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `bb86c388dfc91628e50caa9d0e327557be9d751cb1579023b2a76e517bfe62ad`
 - graph distance: `1`
 - 選択理由:
@@ -9628,7 +9628,7 @@ workspace: `cmee_working`
 ## 148. `Cocolon:features/home/useHomeState.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `bf0a7187398d2c9ab8fe30ec7fb2e5705398fb76afbc5261115bf1b38e4a1045`
 - graph distance: `1`
 - 選択理由:
@@ -9913,7 +9913,7 @@ workspace: `cmee_working`
 ## 149. `Cocolon:lib/analysisHomeSummaryRefreshSignal.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `4f3fe621032833f559121d2bb2206061f771204bd4a39535dad9a9e07a5f4164`
 - graph distance: `1`
 - 選択理由:
@@ -9927,7 +9927,7 @@ workspace: `cmee_working`
 ## 150. `Cocolon:lib/api/account/profileApi.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `0f461ddd7a7ed4d85e6bcf8e42b41ba5a79721e2a9fcb8bfbd4c7d01b1d4afcd`
 - graph distance: `1`
 - 選択理由:
@@ -11638,7 +11638,7 @@ workspace: `cmee_working`
 ## 151. `Cocolon:lib/api/client.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `bbed1e78067d1d14c13eaa5a1e11761a4e1978a6c5449b97b449f0f7866cc27e`
 - graph distance: `1`
 - 選択理由:
@@ -11659,7 +11659,7 @@ workspace: `cmee_working`
 ## 152. `Cocolon:lib/api/home/emotionSubmitApi.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `05f0ec9ed13cc06d6921a2521911c59bd492561bab657ada9acd59b0e0cf4d75`
 - graph distance: `1`
 - 選択理由:
@@ -11677,7 +11677,7 @@ workspace: `cmee_working`
 ## 153. `Cocolon:lib/api/home/homeStateApi.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `2eb6f76bd90d9b9847678e4e4f774608559ecc4bc830f4c5e094a8ae39fcf478`
 - graph distance: `1`
 - 選択理由:
@@ -11700,7 +11700,7 @@ workspace: `cmee_working`
 ## 154. `Cocolon:lib/api/home/noticeApi.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `95d697077412c0ab56bc0b1b70980c5d431b8262e777546711a34de744d15f0d`
 - graph distance: `1`
 - 選択理由:
@@ -11722,7 +11722,7 @@ workspace: `cmee_working`
 ## 155. `Cocolon:lib/api/home/todayQuestionApi.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `7e240d96ddc79df603d2274e5f4cfb7033b2ea50c5dcf41b4beaab5cf13e3c26`
 - graph distance: `1`
 - 選択理由:
@@ -11748,7 +11748,7 @@ workspace: `cmee_working`
 ## 156. `Cocolon:lib/apiClient.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `0d72dda9ac8c739883780f045f6cde1d7bae551af71b0b1b48705d091522c3aa`
 - graph distance: `1`
 - 選択理由:
@@ -13592,7 +13592,7 @@ workspace: `cmee_working`
 ## 157. `Cocolon:lib/compat/legacyWireContracts.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `11ed4bfa76de93cb5dcf170175114eb871e7e8d7ae3ded786ab7d2f116b89b4d`
 - graph distance: `1`
 - 選択理由:
@@ -15450,7 +15450,7 @@ workspace: `cmee_working`
 ## 158. `Cocolon:lib/emotionPieceApi.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `cd75e73709899e028d3c254d7f2796ff9a52e046225f7b9ca49b3f7dcfbc9717`
 - graph distance: `1`
 - 選択理由:
@@ -15459,7 +15459,7 @@ workspace: `cmee_working`
 ## 159. `Cocolon:lib/iap/iapRuntimeCatalog.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `3d0cc5807afc1a395446029f9df5f0cd0af5add89a5d140948ee4ec6ca8c947d`
 - graph distance: `1`
 - 選択理由:
@@ -16022,7 +16022,7 @@ workspace: `cmee_working`
 ## 160. `Cocolon:lib/iap/iapService.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `5904f1d8fd25bd63fa9cbc38a26d5f58c7a802bd82a3377e9b3d716f2715f23f`
 - graph distance: `1`
 - 選択理由:
@@ -16630,7 +16630,7 @@ workspace: `cmee_working`
 ## 161. `Cocolon:lib/monitoring.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `acd80ad6535876b8ed22ea2c8d0440870249865ca7e862ae99bd519752ae69c0`
 - graph distance: `1`
 - 選択理由:
@@ -18321,7 +18321,7 @@ workspace: `cmee_working`
 ## 162. `Cocolon:lib/noticeActionRuntime.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `a4cfca7e0127026e265a904454a781cbefef6e5444c4a27ff9e343f1cf818e2e`
 - graph distance: `1`
 - 選択理由:
@@ -18347,7 +18347,7 @@ workspace: `cmee_working`
 ## 163. `Cocolon:lib/pushToken.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `15d4b9ffe3662a107730176a6725066a6118d07f7273ec7029427507df4efcc3`
 - graph distance: `1`
 - 選択理由:
@@ -19986,7 +19986,7 @@ workspace: `cmee_working`
 ## 164. `Cocolon:navigation/AnalysisStackNavigator.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `632bb4e740681a8f964dda6386b20b49835588755f4e897ef0f72a780e1cea4b`
 - graph distance: `1`
 - 選択理由:
@@ -20076,7 +20076,7 @@ workspace: `cmee_working`
 ## 165. `Cocolon:navigation/InputStackNavigator.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `d1ac0900c3b932d8eda8288347a412aca5b5e5558d034e68cc957ddf27311477`
 - graph distance: `1`
 - 選択理由:
@@ -20135,7 +20135,7 @@ workspace: `cmee_working`
 ## 166. `Cocolon:navigation/MainTabs.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `f51f9f2a90956c2b976947a56ee10b08a1b57bae0c91df96d713cdc839c6204d`
 - graph distance: `1`
 - 選択理由:
@@ -20359,7 +20359,7 @@ workspace: `cmee_working`
 ## 167. `Cocolon:navigation/RootNavigator.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `aa13cc8b3b82b2adfb53e60e6966274886c4a8c5ccc240fe69380a77c8e78016`
 - graph distance: `1`
 - 選択理由:
@@ -20433,7 +20433,7 @@ workspace: `cmee_working`
 ## 168. `Cocolon:runtime/AppRuntimeBootstrapGate.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `1f7bf70a71d037e2d841f2775a60dc21c750a67ab93aff5397d5d5ef6f0a757c`
 - graph distance: `1`
 - 選択理由:
@@ -21971,7 +21971,7 @@ workspace: `cmee_working`
 ## 169. `Cocolon:screens/AnalysisHistoryScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `12b463a8b531bd3f863f1fdf42e0f415d5c9ada53b651d8ec2932a17920d53b7`
 - graph distance: `1`
 - 選択理由:
@@ -22178,7 +22178,7 @@ workspace: `cmee_working`
 ## 170. `Cocolon:screens/AnalysisReportHistoryScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `116223201e547e38da5c7be6ea7b998a15ccc179523e3c046311a2ff1ae3bc68`
 - graph distance: `1`
 - 選択理由:
@@ -22343,7 +22343,7 @@ workspace: `cmee_working`
 ## 171. `Cocolon:screens/AnalysisReportViewerScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `da0624a4c6b1a67d938b9d70886e86631a43003b1c3f412149951b2204904cd5`
 - graph distance: `1`
 - 選択理由:
@@ -22490,7 +22490,7 @@ workspace: `cmee_working`
 ## 172. `Cocolon:screens/AnalysisScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `edae7afbd4a18e71facfdfa3f1562b65126bb55f82e2ca8b658bb6d484b1b337`
 - graph distance: `1`
 - 選択理由:
@@ -22632,7 +22632,7 @@ workspace: `cmee_working`
 ## 173. `Cocolon:screens/EmotionLogScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `2e2fe320b9de03b1a76b72f44ab3812520dce0ff87a71145a0553da0a85d9560`
 - graph distance: `1`
 - 選択理由:
@@ -22696,7 +22696,7 @@ workspace: `cmee_working`
 ## 174. `Cocolon:screens/FollowListScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `a95387fd23f4550b0190226798d9648a55e62ed9b76f2f6776e3ef87d4cdbe9f`
 - graph distance: `1`
 - 選択理由:
@@ -22850,7 +22850,7 @@ workspace: `cmee_working`
 ## 175. `Cocolon:screens/NexusScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `e8d3310ce4bfe60267bd2db6d68a044ce84c24193cad174b392d5540b0e448f9`
 - graph distance: `1`
 - 選択理由:
@@ -23013,7 +23013,7 @@ workspace: `cmee_working`
 ## 176. `Cocolon:screens/NoticeHistoryScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `310ef2cae33b0ed229b4557f33d2ffd60e43351c105015596b295af15fde9956`
 - graph distance: `1`
 - 選択理由:
@@ -23169,7 +23169,7 @@ workspace: `cmee_working`
 ## 177. `Cocolon:screens/PieceLibraryScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `399f394705215e2f8171d77e0581924c701ea6b83727ede8dfbbdbd620b47f27`
 - graph distance: `1`
 - 選択理由:
@@ -23320,7 +23320,7 @@ workspace: `cmee_working`
 ## 178. `Cocolon:screens/ProfileCreateScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `3f0fd5ef4649d76a60076ee3fbbd74c4afca66f2e87470026275e41641737374`
 - graph distance: `1`
 - 選択理由:
@@ -23378,7 +23378,7 @@ workspace: `cmee_working`
 ## 179. `Cocolon:screens/SelfStructureReportGenerateScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `ddc4e47bbacc63463399b629eca2a7d116912e24e2a6dd12469e0dbd8a417e40`
 - graph distance: `1`
 - 選択理由:
@@ -23439,7 +23439,7 @@ workspace: `cmee_working`
 ## 180. `Cocolon:screens/SelfStructureReportHistoryScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `5703442c609c632f2c9429a6ad3019944b2a30c314979a310383c94d0b753878`
 - graph distance: `1`
 - 選択理由:
@@ -23494,7 +23494,7 @@ workspace: `cmee_working`
 ## 181. `Cocolon:screens/SettingsAppSettingsScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `d1a772f4bd941e238d33634612f8536ca7a40f02ba0f3a32320509c988ea2699`
 - graph distance: `1`
 - 選択理由:
@@ -23552,7 +23552,7 @@ workspace: `cmee_working`
 ## 182. `Cocolon:screens/SubscriptionSelectScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `13e36f159646d876e5a0166946157f3df0806f96052ea4b911e185918d794b6c`
 - graph distance: `1`
 - 選択理由:
@@ -23747,7 +23747,7 @@ workspace: `cmee_working`
 ## 183. `Cocolon:screens/TodayQuestionHistoryScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `25b9e91bc12abc3911464b33470b2fadb9bc717cf5ef2699a492c0f4db73145b`
 - graph distance: `1`
 - 選択理由:
@@ -23910,7 +23910,7 @@ workspace: `cmee_working`
 ## 184. `Cocolon:screens/TutorialFlowScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `7e3a9aa52e3408e29525edc63ce8313add6bd758ade0312517afbb809808cd95`
 - graph distance: `1`
 - 選択理由:
@@ -24060,7 +24060,7 @@ workspace: `cmee_working`
 ## 185. `Cocolon:screens/analysisReport/KokoroWeatherCurrentCard.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `9d3d450200d7e4068c0d89fee91817b17973542bd413f0b839b06370af86d62f`
 - graph distance: `1`
 - 選択理由:
@@ -24094,7 +24094,7 @@ workspace: `cmee_working`
 ## 186. `Cocolon:screens/input/InputActionArea.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `4658f0c0d853c5e010373344a3e6170ad9a4c4d8d8eed6c0af440c8570421e30`
 - graph distance: `1`
 - 選択理由:
@@ -24119,7 +24119,7 @@ workspace: `cmee_working`
 ## 187. `Cocolon:screens/input/InputCategorySection.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `df47dc6639e13a1046138c45fcda91df304ce1055df0eabb492d9481427a0fad`
 - graph distance: `1`
 - 選択理由:
@@ -24140,7 +24140,7 @@ workspace: `cmee_working`
 ## 188. `Cocolon:screens/input/InputEmotionSection.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `a8e314e36c68f0b1bafce65114803a370e49b14b1b864843c702a1eb097811c0`
 - graph distance: `1`
 - 選択理由:
@@ -24165,7 +24165,7 @@ workspace: `cmee_working`
 ## 189. `Cocolon:screens/input/InputMemoSection.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `03221a26659ac8e157ae7c8674f54fbf6358ada4c799363338464211e0a317fa`
 - graph distance: `1`
 - 選択理由:
@@ -24196,7 +24196,7 @@ workspace: `cmee_working`
 ## 190. `Cocolon:screens/input/InputPiecePreviewController.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `6560845e6517a48813f291f53089e47a285c83b07487c6e6d3cee14d61987228`
 - graph distance: `1`
 - 選択理由:
@@ -24216,7 +24216,7 @@ workspace: `cmee_working`
 ## 191. `Cocolon:screens/input/InputStartupModals.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `814779f6e5bcdd7cc691fa847d94e372aa971b2e9ef1c79f2156340aa70db3fa`
 - graph distance: `1`
 - 選択理由:
@@ -24249,7 +24249,7 @@ workspace: `cmee_working`
 ## 192. `Cocolon:screens/input/InputToastOverlay.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `e02ac57edfbdcaeff99e61e1bc712f862e8778381f4bb9e792b99f0c525f9e40`
 - graph distance: `1`
 - 選択理由:
@@ -24266,7 +24266,7 @@ workspace: `cmee_working`
 ## 193. `Cocolon:screens/input/inputDraftModel.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `d5973e6180ef5ef4b951ec5a8afc9a37f08de47dd1b9cc2e0d00d6afeb5b4201`
 - graph distance: `1`
 - 選択理由:
@@ -24285,7 +24285,7 @@ workspace: `cmee_working`
 ## 194. `Cocolon:screens/input/inputFeedbackObservationDiagnostics.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `0239f177bf5fa614be11ce6463a0d1ed7677af76b586e949fbbceb44867accf5`
 - graph distance: `1`
 - 選択理由:
@@ -24302,7 +24302,7 @@ workspace: `cmee_working`
 ## 195. `Cocolon:screens/input/inputNoticeModel.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `32db763b73877d600769c568afde575a2555c63daca37c9ebd8cb15481578722`
 - graph distance: `1`
 - 選択理由:
@@ -24316,7 +24316,7 @@ workspace: `cmee_working`
 ## 196. `Cocolon:screens/input/inputOptions.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `5a4ec978d386d4274580640f7fc8f2f20a48760d41118cf3bcd61d4f2ff51fbb`
 - graph distance: `1`
 - 選択理由:
@@ -24332,7 +24332,7 @@ workspace: `cmee_working`
 ## 197. `Cocolon:screens/input/useInputDraftPersistence.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `ef4a017c10f6e976b6429aa6b84213c9584f38c72ae5ef26fb7841fc0d59527c`
 - graph distance: `1`
 - 選択理由:
@@ -24355,7 +24355,7 @@ workspace: `cmee_working`
 ## 198. `Cocolon:screens/input/useInputKeyboardAwareMemo.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `a4af202ccb0d6e06ada79e8bf0d05d392e4338d8aee70392ca425feafe809247`
 - graph distance: `1`
 - 選択理由:
@@ -24378,7 +24378,7 @@ workspace: `cmee_working`
 ## 199. `Cocolon:screens/piece/usePieceHomeTutorial.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `202e8323ba49246b580f0432e421c58ef8ce81ad1fcd46d79898be4a1c43d039`
 - graph distance: `1`
 - 選択理由:
@@ -24411,7 +24411,7 @@ workspace: `cmee_working`
 ## 200. `Cocolon:tests/cocolon_context/test_routes.py`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `5a471826285e9c89020a65407ff0c99f30faea28e8bf9b6303f1077acf1cd056`
 - graph distance: `1`
 - 選択理由:
@@ -24460,7 +24460,7 @@ workspace: `cmee_working`
 ## 201. `Cocolon:tests/rn-screen-contracts.test.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `ce366f6b968da59e66699dc0c31af133e342a07de52c323b670cfa1d31c623ab`
 - graph distance: `1`
 - 選択理由:
@@ -24548,7 +24548,7 @@ workspace: `cmee_working`
 ## 202. `Cocolon:theme/ThemeContext.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `eb4bf9b430bcb01ce3316c9486155b75c97a0bc92333ae0728e00d50d6513185`
 - graph distance: `1`
 - 選択理由:
@@ -26308,7 +26308,7 @@ workspace: `cmee_working`
 ## 203. `Cocolon:tutorial/tutorialScenarioData.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `81d0ff963408b90f5356e10597497d4c52a3c7b925ab0699de2241893207f0c0`
 - graph distance: `1`
 - 選択理由:
@@ -26334,7 +26334,7 @@ workspace: `cmee_working`
 ## 204. `Cocolon:ui/applyTypographyTokens.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `a50af441fcb680ac190bd797c13dc4390df94047a26a4a739e386877c7fd3817`
 - graph distance: `1`
 - 選択理由:
@@ -26422,7 +26422,7 @@ workspace: `cmee_working`
 ## 205. `Cocolon:ui/uiTokens.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `8557efde0620f4d45adf9d4337dc3c86e70a23a104f98d4be31445b9b563c591`
 - graph distance: `1`
 - 選択理由:
@@ -46345,7 +46345,7 @@ workspace: `cmee_working`
 ## 641. `Cocolon:App.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `ed5b0f6dbe99378d9e078d76d23c967037c205c2f56d5f7711bb0af1c627ca2a`
 - graph distance: `2`
 - 選択理由:
@@ -46384,7 +46384,7 @@ workspace: `cmee_working`
 ## 642. `Cocolon:Cocolon_Piece/pce0_current_contract_pin/Piece_Current_Contract_Inventory_20260807.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `77e465b44e29af9e24e353aa699fe11a485d262cbd206441ad7e4e0f4250f068`
 - graph distance: `2`
 - 選択理由:
@@ -46396,7 +46396,7 @@ workspace: `cmee_working`
 ## 643. `Cocolon:Cocolon_Piece/pce0_current_contract_pin/Piece_Current_Owner_Map_20260807.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `70858ab40270c434b8cad607b8d5a65234d17d65a7c17eb691272a07611f2c1e`
 - graph distance: `2`
 - 選択理由:
@@ -46408,7 +46408,7 @@ workspace: `cmee_working`
 ## 644. `Cocolon:Cocolon_Piece/pce0_current_contract_pin/Piece_Current_Unconfirmed_Ledger_20260807.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `14c47feeb6e9b93529406802d33ce685d3e9d9416c4c870dbf4cb2f2bd409ca3`
 - graph distance: `2`
 - 選択理由:
@@ -46418,7 +46418,7 @@ workspace: `cmee_working`
 ## 645. `Cocolon:Cocolon_Piece/pce3_record_lifecycle_visibility_quota/Piece_Quota_Consumption_Contract_20260807.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `1d43b5bd974e14652d39e884516406752eb23a5fb09f863fbe091e9fd35117fa`
 - graph distance: `2`
 - 選択理由:
@@ -46428,7 +46428,7 @@ workspace: `cmee_working`
 ## 646. `Cocolon:Cocolon_Piece/pce4_content_format_safety/Piece_Public_Safety_Transformation_Contract_20260807.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `26ac8f2b7db590dbf24013cbb8ab4b2f1ae955e4d98429e277bf10233ef5d214`
 - graph distance: `2`
 - 選択理由:
@@ -46437,7 +46437,7 @@ workspace: `cmee_working`
 ## 647. `Cocolon:Cocolon_Piece/pce7_test_monitoring_rollback/Piece_Monitoring_Privacy_Contract_20260808.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `e4e2403a1c9bde4fedaa83c26693dc99e1c0cea964781602f9626621b42e92fd`
 - graph distance: `2`
 - 選択理由:
@@ -46449,7 +46449,7 @@ workspace: `cmee_working`
 ## 648. `Cocolon:EmlisAIの実装済み資料/Cocolon_EmlisAI_P7_Gate0_ReadfeelRepair_GateContractClosure_DetailedDesign_ImplementationOrder_20260711.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `d258a9015c7220459d55bc8f73c6e801b6da408e58895ce5c956e78395b13d41`
 - graph distance: `2`
 - 選択理由:
@@ -46460,7 +46460,7 @@ workspace: `cmee_working`
 ## 649. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch001_Step5CrossRoleTypedSubgraphBijectionAndPositiveInputContract_Reconciliation_ReadOnly_20260723.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `0dff2f72932f7ed7189b257fff89d9b8265918d7eb41b281f33278b372337a36`
 - graph distance: `2`
 - 選択理由:
@@ -46469,7 +46469,7 @@ workspace: `cmee_working`
 ## 650. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch002_Lineage02_Event1V2_BootstrapPreflightContractUnreachable_FailureReceiptExternalIdentityAndChallengeProvenance_ContractCorrection_Design_ReadOnly_20260729.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `080e30ebb296da16a900f06a2aa42cc188bb7bfeea4e9e80e3ac90774d75b109`
 - graph distance: `2`
 - 選択理由:
@@ -46478,7 +46478,7 @@ workspace: `cmee_working`
 ## 651. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch003_PrestartD2ReceiptIdentityPreimageContractMismatch_DownstreamActiveCreditAndPartialRecoveryEpoch004P0PublicationDisposition_ContractReconciliation_Design_ReadOnly_20260730.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `d25913e1ad8f575b238551139e696cf095e3deb938524b88e416c914a103dc2a`
 - graph distance: `2`
 - 選択理由:
@@ -46489,7 +46489,7 @@ workspace: `cmee_working`
 ## 652. `Cocolon:EmlisAIの実装済み資料/documents/NLSv3_Step11_Cycle001_RecoveryEpoch004_GateB_PreIngressDiagnosticStaticVerifierSemanticNormalizationContractV1_IndependentStaticInvalidTerminalExclusivityBlockerStop_Result_20260802.md`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `5de31b536120a498dfc38a96e2e82c56739639400986ce3a45b694f19ae2e4ba`
 - graph distance: `2`
 - 選択理由:
@@ -46498,7 +46498,7 @@ workspace: `cmee_working`
 ## 653. `Cocolon:EmlisAIの実装済み資料/documents/V16_PublicGate_LocalEvidence_Preservation_20260805/artifacts/v16_public_full_gate_harness.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `a7ee9bb64f53002a66df093745cdc59265b49847d80509054d58c65e8525a5b0`
 - graph distance: `2`
 - 選択理由:
@@ -46520,7 +46520,7 @@ workspace: `cmee_working`
 ## 654. `Cocolon:EmlisAIの実装済み資料/documents/V16_PublicGate_LocalEvidence_Preservation_20260805/artifacts/v16_public_gate_execution_continuation_carrier_v3_transformer_v4_preparation_orchestrator_v1.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `1e0340963eb629ec4c851676a0508ff52be11114ac9d819df5e6474ce512bad5`
 - graph distance: `2`
 - 選択理由:
@@ -46541,7 +46541,7 @@ workspace: `cmee_working`
 ## 655. `Cocolon:EmlisAIの実装済み資料/documents/V16_PublicGate_LocalEvidence_Preservation_20260805/artifacts/v16_public_gate_execution_continuation_carrier_v3_transformer_v4_preparation_orchestrator_v2.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `40242475de1bcc750a7aa3c26ee3c06aaed564b11f2e7072a23930d7e0e8df00`
 - graph distance: `2`
 - 選択理由:
@@ -46562,7 +46562,7 @@ workspace: `cmee_working`
 ## 656. `Cocolon:EmlisAIの実装済み資料/documents/V16_PublicGate_LocalEvidence_Preservation_20260805/artifacts/v16_public_gate_execution_continuation_carrier_v3_transformer_v4_preparation_orchestrator_v3.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `ce234ea9ff618aecef77dde89f72b5966ffb47b74908f15ad92214ce2a23960a`
 - graph distance: `2`
 - 選択理由:
@@ -46583,7 +46583,7 @@ workspace: `cmee_working`
 ## 657. `Cocolon:EmlisAIの実装済み資料/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/v16_inspector_v2_preimport_scanner_v1.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `18a3ad55a94132de3ece9c439531438f0cc565b88a646e9d0675f7edff90681c`
 - graph distance: `2`
 - 選択理由:
@@ -46599,7 +46599,7 @@ workspace: `cmee_working`
 ## 658. `Cocolon:EmlisAIの実装済み資料/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/v16_standalone_preparation_inspector_v2_synthetic_harness_v1.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `876f040e520022e41e77c196428981ae969b239d9d8c43643c4a932afe71ea57`
 - graph distance: `2`
 - 選択理由:
@@ -46612,7 +46612,7 @@ workspace: `cmee_working`
 ## 659. `Cocolon:EmlisAIの実装済み資料/documents/V16_Standalone_Preparation_CommandTransport_Stop_20260806/v16_standalone_preparation_noninteractive_inspector_generator_v1.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `c3225cc3af2aa98c2339119bc848cd4ef4b288eb9a54efd5de81d00b0bf2ecbf`
 - graph distance: `2`
 - 選択理由:
@@ -46639,7 +46639,7 @@ workspace: `cmee_working`
 ## 660. `Cocolon:TutorialOverlay.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `abe9c8da1f71aefebde70728b7199a45bfb72ed63fc9f783c2ae0d336c0b4c9a`
 - graph distance: `2`
 - 選択理由:
@@ -46664,7 +46664,7 @@ workspace: `cmee_working`
 ## 661. `Cocolon:android/app/src/notifications/push.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `0f9f143f69af0bf45c135987b54b8c5c28c29f672ba29fec72220cbe78946dfd`
 - graph distance: `2`
 - 選択理由:
@@ -46680,7 +46680,7 @@ workspace: `cmee_working`
 ## 662. `Cocolon:android/app/src/notifications/push.ts`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `0f819c4d5087be67c5b6b095b64461e67331bdd023d27899db0774c8f7fe7070`
 - graph distance: `2`
 - 選択理由:
@@ -46694,7 +46694,7 @@ workspace: `cmee_working`
 ## 663. `Cocolon:app/+not-found.tsx`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `acfe5568243fafe4602df29ab0549d91ca1e6c1cd0b01744a5211fe2b0018834`
 - graph distance: `2`
 - 選択理由:
@@ -46707,7 +46707,7 @@ workspace: `cmee_working`
 ## 664. `Cocolon:app/_layout.tsx`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `65d693be1e8b7fc19e8a97c54c82a37ea4500dbb2487c6e4c38477c510b38b63`
 - graph distance: `2`
 - 選択理由:
@@ -46723,7 +46723,7 @@ workspace: `cmee_working`
 ## 665. `Cocolon:babel.config.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `fa700e22b97c76c0a2a040308e904a43df1adcbd410f5bda28b7d097555861d9`
 - graph distance: `2`
 - 選択理由:
@@ -46732,7 +46732,7 @@ workspace: `cmee_working`
 ## 666. `Cocolon:components/CocolonBackButton.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `a11f8f06507633d503d39236cc5a40941e28db24b83951162b316231f6b6f93d`
 - graph distance: `2`
 - 選択理由:
@@ -46791,7 +46791,7 @@ workspace: `cmee_working`
 ## 667. `Cocolon:components/CocolonSwitch.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `5462489f9248f5f35c8e114fffc5dd5d574c9139f7482a7766bf11e0189ca86f`
 - graph distance: `2`
 - 選択理由:
@@ -46810,7 +46810,7 @@ workspace: `cmee_working`
 ## 668. `Cocolon:components/Collapsible.tsx`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `2c39b421029a87946dc555c90fdef306708777dce739f49b28b5209795caed04`
 - graph distance: `2`
 - 選択理由:
@@ -46826,7 +46826,7 @@ workspace: `cmee_working`
 ## 669. `Cocolon:components/EmotionPiecePreviewModal.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `5152df593ce87b79821ec8239fade5a43f41960a58be3a15ced3c495f5686391`
 - graph distance: `2`
 - 選択理由:
@@ -46857,7 +46857,7 @@ workspace: `cmee_working`
 ## 670. `Cocolon:components/ExternalLink.tsx`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `1fa223b3585a1526dc69aac0bd907fad69d17dde5628519a6022cbc71e46caf5`
 - graph distance: `2`
 - 選択理由:
@@ -46871,7 +46871,7 @@ workspace: `cmee_working`
 ## 671. `Cocolon:components/GlobalFrameLayout.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `ea8d35c12f61a6c11fd49ff929f24405109301dd201acb1f1c988f83af3e9b78`
 - graph distance: `2`
 - 選択理由:
@@ -46889,7 +46889,7 @@ workspace: `cmee_working`
 ## 672. `Cocolon:components/GuideRichText.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `6ebd4c0507f4ba2e9d39aa702634a86a6efbdde4b138e7dd0b43936e3f7e2bb7`
 - graph distance: `2`
 - 選択理由:
@@ -46915,7 +46915,7 @@ workspace: `cmee_working`
 ## 673. `Cocolon:components/GuideTermModal.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `4eaa64418e126681b6575024b649c2c2d1bddd09a0e9eb38a2395e76f8138c86`
 - graph distance: `2`
 - 選択理由:
@@ -46945,7 +46945,7 @@ workspace: `cmee_working`
 ## 674. `Cocolon:components/HapticTab.tsx`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `24be709e3f6c42606c8b3a3dbeb09b424dda7c10899814e94fbc59130472841e`
 - graph distance: `2`
 - 選択理由:
@@ -46957,7 +46957,7 @@ workspace: `cmee_working`
 ## 675. `Cocolon:components/HelloWave.tsx`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `8e07fc41b158b0b3d3f9fc0d52af92a17bde232f0447b6ff4a89e93ea5a6c4a2`
 - graph distance: `2`
 - 選択理由:
@@ -46971,7 +46971,7 @@ workspace: `cmee_working`
 ## 676. `Cocolon:components/NoticeModal.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `5b9a372e1a537bbb3a8a1a348a65aa5c775069da9f94be7b9156190173053874`
 - graph distance: `2`
 - 選択理由:
@@ -47005,7 +47005,7 @@ workspace: `cmee_working`
 ## 677. `Cocolon:components/NoticeRichText.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `5a64e7921c4e007d06735c2af112323954377963da214d43b97ff2acadfaf228`
 - graph distance: `2`
 - 選択理由:
@@ -47026,7 +47026,7 @@ workspace: `cmee_working`
 ## 678. `Cocolon:components/ParallaxScrollView.tsx`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `bef3e5824377c68d1c2cca2aab49b298c0924ad1379ff3a3d90115b6a4f1e0a5`
 - graph distance: `2`
 - 選択理由:
@@ -47040,7 +47040,7 @@ workspace: `cmee_working`
 ## 679. `Cocolon:components/ThemedText.tsx`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `9f768fe866474253f602172c4470a40b14a4c0edf0e59c68bafb60fc2d10e439`
 - graph distance: `2`
 - 選択理由:
@@ -47055,7 +47055,7 @@ workspace: `cmee_working`
 ## 680. `Cocolon:components/ThemedView.tsx`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `f1c1ed52d785b20f673fdf63719b1e89cec69955ab5f47e672a476c4100c9ba6`
 - graph distance: `2`
 - 選択理由:
@@ -47068,7 +47068,7 @@ workspace: `cmee_working`
 ## 681. `Cocolon:components/TodayQuestionModal.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `ec0b3fc92aa2ff16feac5de5c2240763afe7a37d05425f3903619468de70e5ad`
 - graph distance: `2`
 - 選択理由:
@@ -47091,7 +47091,7 @@ workspace: `cmee_working`
 ## 682. `Cocolon:components/TutorialStartModal.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `fd92fa7e726384dfda26d61a82c050f228d9930ae6d19d566343be88035f66ec`
 - graph distance: `2`
 - 選択理由:
@@ -47118,7 +47118,7 @@ workspace: `cmee_working`
 ## 683. `Cocolon:components/selfStructure/CrossroadCard.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `506c3a5a8ac326362fa6526928a8806c5e4e30c26462f95855af55e69db56b30`
 - graph distance: `2`
 - 選択理由:
@@ -47141,7 +47141,7 @@ workspace: `cmee_working`
 ## 684. `Cocolon:components/selfStructure/RoleSwitchList.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `f9e410dfcb2045d9f72a26f56946614150fb0ab03b7726e969809f78eb6d9fd2`
 - graph distance: `2`
 - 選択理由:
@@ -47164,7 +47164,7 @@ workspace: `cmee_working`
 ## 685. `Cocolon:components/selfStructure/RoutePatternCard.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `15fa77d3d64b64acf661796dc0fc6fe6bd996e93a6685d9f5381d69c2d184df7`
 - graph distance: `2`
 - 選択理由:
@@ -47186,7 +47186,7 @@ workspace: `cmee_working`
 ## 686. `Cocolon:components/selfStructure/UnknownAreaCard.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `ca8817a521be0925e7e9a123c248a671dd2461566b318d2ea7ee219d6e26e0ef`
 - graph distance: `2`
 - 選択理由:
@@ -47207,7 +47207,7 @@ workspace: `cmee_working`
 ## 687. `Cocolon:components/selfStructure/WatashiMapOverviewCard.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `e6b0ddc1a1e8534f5b0ecfa0cec52b4acf675b109853b0770876ad757326c7b6`
 - graph distance: `2`
 - 選択理由:
@@ -47231,7 +47231,7 @@ workspace: `cmee_working`
 ## 688. `Cocolon:components/selfStructure/WatashiMapRenderer.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `ce3ef8035987e8a50350efca08043bfdbe531f1140174d7ab138a2a19604ab7f`
 - graph distance: `2`
 - 選択理由:
@@ -47276,7 +47276,7 @@ workspace: `cmee_working`
 ## 689. `Cocolon:components/selfStructure/watashiMapAccessPolicy.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `43211b18d0c1fe6d8f551cdcab2d766ffa538939334ea3b288126147d88b83a2`
 - graph distance: `2`
 - 選択理由:
@@ -47294,7 +47294,7 @@ workspace: `cmee_working`
 ## 690. `Cocolon:components/selfStructure/watashiMapFormatters.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `45d995c57411a49131854e61bc7fdf62e750b80831f5709085c54b6769f6a01c`
 - graph distance: `2`
 - 選択理由:
@@ -47336,7 +47336,7 @@ workspace: `cmee_working`
 ## 691. `Cocolon:components/ui/IconSymbol.ios.tsx`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `907b25ca2c45e2b227cc6d91fc18720da2dfb7a1bf1447e0e571ed8679c3dfca`
 - graph distance: `2`
 - 選択理由:
@@ -47351,7 +47351,7 @@ workspace: `cmee_working`
 ## 692. `Cocolon:components/ui/IconSymbol.tsx`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `8086c9f28df5b98282a114a04759e66867359395e5754323ccaca4e89af5a1d5`
 - graph distance: `2`
 - 選択理由:
@@ -47366,7 +47366,7 @@ workspace: `cmee_working`
 ## 693. `Cocolon:components/ui/TabBarBackground.ios.tsx`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `80bccf62ff46a9db25f42517b8a3540c290922ac3c4719812c1f364923fff1d3`
 - graph distance: `2`
 - 選択理由:
@@ -47378,7 +47378,7 @@ workspace: `cmee_working`
 ## 694. `Cocolon:eslint.config.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `f48112e07790e858c7fe46caaf5a658f6e6f3b455bb42295d9d97d5028aa9469`
 - graph distance: `2`
 - 選択理由:
@@ -47387,7 +47387,7 @@ workspace: `cmee_working`
 ## 695. `Cocolon:guide/guidesJa.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `64af8ac7f9446e1a3622a25314adced18fb3c437606f384c8a8f37a0ef739deb`
 - graph distance: `2`
 - 選択理由:
@@ -47401,7 +47401,7 @@ workspace: `cmee_working`
 ## 696. `Cocolon:guide/termsJa.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `faab16963553ebc40fcf6bcd2fc7fe63ed94a87241becf911384b952081e877a`
 - graph distance: `2`
 - 選択理由:
@@ -47414,7 +47414,7 @@ workspace: `cmee_working`
 ## 697. `Cocolon:hooks/useColorScheme.ts`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `45d9c3dc8179490495718635e66347e07964a5e7738f4421f68f1d0dfd7d316b`
 - graph distance: `2`
 - 選択理由:
@@ -47423,7 +47423,7 @@ workspace: `cmee_working`
 ## 698. `Cocolon:hooks/useColorScheme.web.ts`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `aafc737e4dbd370d7d81e556b85398322aa24646901b6a1405ba5315c3fea9a5`
 - graph distance: `2`
 - 選択理由:
@@ -47436,7 +47436,7 @@ workspace: `cmee_working`
 ## 699. `Cocolon:hooks/useThemeColor.ts`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `15a545c47149288a991ec2e7412f9581ba4ccfe4e9352b0b701857e921808f68`
 - graph distance: `2`
 - 選択理由:
@@ -47447,7 +47447,7 @@ workspace: `cmee_working`
 ## 700. `Cocolon:index.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `83a1ff4c9e37dad4f1eb915c5ba17997ea75655822a3db798825827ac11b7b1a`
 - graph distance: `2`
 - 選択理由:
@@ -47466,7 +47466,7 @@ workspace: `cmee_working`
 ## 701. `Cocolon:lib/accountLocalCleanup.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `87096f1c843f158822d195c0551e42ceeeb951596b4b175db802cdd8011cc673`
 - graph distance: `2`
 - 選択理由:
@@ -47481,7 +47481,7 @@ workspace: `cmee_working`
 ## 702. `Cocolon:lib/historyRetentionLabel.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `5d624e5fea79c14e3dabe15610c220e79e32d75597291041218cf12c3e9ad9ee`
 - graph distance: `2`
 - 選択理由:
@@ -47500,7 +47500,7 @@ workspace: `cmee_working`
 ## 703. `Cocolon:lib/iap/iapConfig.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `9e717a784bb85472966f6615526b73dafa0d9799ae4f2a0395f05392df3506b5`
 - graph distance: `2`
 - 選択理由:
@@ -47521,7 +47521,7 @@ workspace: `cmee_working`
 ## 704. `Cocolon:lib/iap/index.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `574a1062bc3df82f037fc165e2130ee8c135abbf1b2647ea71d6feaf2916263d`
 - graph distance: `2`
 - 選択理由:
@@ -47531,7 +47531,7 @@ workspace: `cmee_working`
 ## 705. `Cocolon:lib/inputDraftStorage.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `fd3f2ab8a2e5be188484f9a288e2e468d99754bfaede366b38eb76f8bb733b0d`
 - graph distance: `2`
 - 選択理由:
@@ -47544,7 +47544,7 @@ workspace: `cmee_working`
 ## 706. `Cocolon:lib/nexusApi.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `1da9711190e12047cb969404b5ed40bea406ba3a9c9569a46899a2a018029e4e`
 - graph distance: `2`
 - 選択理由:
@@ -47576,7 +47576,7 @@ workspace: `cmee_working`
 ## 707. `Cocolon:lib/noticeApi.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `31b9be9c85425f7bef00925fc3746f1e1612b004d40f16118be484d6092c88a6`
 - graph distance: `2`
 - 選択理由:
@@ -47587,7 +47587,7 @@ workspace: `cmee_working`
 ## 708. `Cocolon:lib/reportDistributionApi.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `1ebc9dbc0592d673d507560b3da68639ee06e206202c5e6d2b32517c751bc3c1`
 - graph distance: `2`
 - 選択理由:
@@ -47606,7 +47606,7 @@ workspace: `cmee_working`
 ## 709. `Cocolon:lib/subscriptionApi.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `0ba04c3990ca2fad1cdfc0d6db7906a0c196c9f6504eb6895f6ec526d924afdb`
 - graph distance: `2`
 - 選択理由:
@@ -47641,7 +47641,7 @@ workspace: `cmee_working`
 ## 710. `Cocolon:lib/supabase.ts`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `cae947a3b2166c023bc57a8e421c2f27da526d0d2b3da5c634f34b37ef76eec6`
 - graph distance: `2`
 - 選択理由:
@@ -47709,7 +47709,7 @@ workspace: `cmee_working`
 ## 711. `Cocolon:lib/todayQuestionApi.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `90971f9eaf9363032c67a13c06d5c24185705fc779a475bf714d3c88a6e2ed5d`
 - graph distance: `2`
 - 選択理由:
@@ -47724,7 +47724,7 @@ workspace: `cmee_working`
 ## 712. `Cocolon:lib/user.ts`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `315bd01d679404509c23154f914565cddf6db2bf160cba37811a9bcec687541b`
 - graph distance: `2`
 - 選択理由:
@@ -47744,7 +47744,7 @@ workspace: `cmee_working`
 ## 713. `Cocolon:metro.config.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `b2598e30aa16e3ccc768199ac182539ba6ac05a412b451770aa238aa8e07d869`
 - graph distance: `2`
 - 選択理由:
@@ -47756,7 +47756,7 @@ workspace: `cmee_working`
 ## 714. `Cocolon:navigation/PieceStackNavigator.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `aa56f72c7adf80f2af064c89118c27c870f8f0e3fcacf1ba2bc3b17f1f30e8a2`
 - graph distance: `2`
 - 選択理由:
@@ -47815,7 +47815,7 @@ workspace: `cmee_working`
 ## 715. `Cocolon:navigation/RankingStackNavigator.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `f2d4f444bafb0091fdda91bfe5250b9debe805d2c364b3b9437ec24b598812a2`
 - graph distance: `2`
 - 選択理由:
@@ -47869,7 +47869,7 @@ workspace: `cmee_working`
 ## 716. `Cocolon:navigation/SettingsStackNavigator.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `f37535a16b173c86c52d151141160bce917bd50a012cf8fcc244579423a56713`
 - graph distance: `2`
 - 選択理由:
@@ -47917,7 +47917,7 @@ workspace: `cmee_working`
 ## 717. `Cocolon:navigation/linkingRuntime.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `cae5ab3704414039a2e57b8085fbb74c7dd3a33cd65289a3e7569b89f1412077`
 - graph distance: `2`
 - 選択理由:
@@ -47939,7 +47939,7 @@ workspace: `cmee_working`
 ## 718. `Cocolon:navigation/navigationConstants.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `286ce31c9771860988f9396fbb9227718d35fcaa734af061d2c13e917626e644`
 - graph distance: `2`
 - 選択理由:
@@ -47949,7 +47949,7 @@ workspace: `cmee_working`
 ## 719. `Cocolon:navigation/navigationRef.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `921f7ceb12d28cdd95aaca0c9bfff624aa12f708e138e26cee9c27d3e4f2bf40`
 - graph distance: `2`
 - 選択理由:
@@ -47972,7 +47972,7 @@ workspace: `cmee_working`
 ## 720. `Cocolon:navigation/notificationRouting.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `e03eaafb5822d2ab670fc7a4c3203d71bfc5d04695d1a56942a88922ff697173`
 - graph distance: `2`
 - 選択理由:
@@ -47989,7 +47989,7 @@ workspace: `cmee_working`
 ## 721. `Cocolon:react-native.config.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `247dd27243d35ace1ad3d60d190ac281b8e0d51aa889b692b2438ac7d14826fe`
 - graph distance: `2`
 - 選択理由:
@@ -47998,7 +47998,7 @@ workspace: `cmee_working`
 ## 722. `Cocolon:runtime/AppRuntimeBlockingScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `2e456e1b7372efa38701fdb364e20ac63a262fe768cf58225c737d126f91124a`
 - graph distance: `2`
 - 選択理由:
@@ -48016,7 +48016,7 @@ workspace: `cmee_working`
 ## 723. `Cocolon:screens/AccountScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `46fb956330e268289fad96491cca06af9b40242a2f1f40cc025fe08e1053bce8`
 - graph distance: `2`
 - 選択理由:
@@ -48089,7 +48089,7 @@ workspace: `cmee_working`
 ## 724. `Cocolon:screens/AnalysisContentFirstScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `7dd1b1fe62a44dc78a1348180c37566a92d308d9c7f92a477f682e89fc61be62`
 - graph distance: `2`
 - 選択理由:
@@ -48140,7 +48140,7 @@ workspace: `cmee_working`
 ## 725. `Cocolon:screens/AnalysisCrossLinkSection.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `d99e73ff77d67170295aea1e38808f094d9bfc21f3682cf21115ec349477a978`
 - graph distance: `2`
 - 選択理由:
@@ -48168,7 +48168,7 @@ workspace: `cmee_working`
 ## 726. `Cocolon:screens/AnalysisEmotionScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `0ee70cc6e1b3e2c9da6436e061242d9d6102fb839a14f700af62b521118006c3`
 - graph distance: `2`
 - 選択理由:
@@ -48195,7 +48195,7 @@ workspace: `cmee_working`
 ## 727. `Cocolon:screens/AnalysisEnsureClient.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `d5b59d868339ddc29ac165f74b9b88d15b5c6dc6e3dcbb31a2e5fdccfc2ce41a`
 - graph distance: `2`
 - 選択理由:
@@ -48216,7 +48216,7 @@ workspace: `cmee_working`
 ## 728. `Cocolon:screens/AnalysisInputHistoryMenuScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `ae9f1e81ecec223615e794105081e9c46c4f134efd6d2507934fd2038be85fb0`
 - graph distance: `2`
 - 選択理由:
@@ -48235,7 +48235,7 @@ workspace: `cmee_working`
 ## 729. `Cocolon:screens/AnalysisMenuCommon.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `2b2dcd180498278eb01726f7a2497bae0ce53864afb0c2cd3ac5429f9358bceb`
 - graph distance: `2`
 - 選択理由:
@@ -48290,7 +48290,7 @@ workspace: `cmee_working`
 ## 730. `Cocolon:screens/AnalysisReportScheduleUtils.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `41b898b0f1c633a2fc3bb7ed9e268cb4e77914a36a0827a6a702880db267861f`
 - graph distance: `2`
 - 選択理由:
@@ -48304,7 +48304,7 @@ workspace: `cmee_working`
 ## 731. `Cocolon:screens/AnalysisSelfStructureScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `84f4523176fd36ca020b221cc846e816a227a315a48b1f99689023a61388e952`
 - graph distance: `2`
 - 選択理由:
@@ -48325,7 +48325,7 @@ workspace: `cmee_working`
 ## 732. `Cocolon:screens/AnalysisTopScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `46d9ea42ee451be79fb5634bf5ef998aa6a1194b3232b94ea63b343f354342c5`
 - graph distance: `2`
 - 選択理由:
@@ -48349,7 +48349,7 @@ workspace: `cmee_working`
 ## 733. `Cocolon:screens/CocolonGuideScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `08be3d827b10bd5548da1a6c7a168b47edfb20f1be59a0320999bdb136d8ded2`
 - graph distance: `2`
 - 選択理由:
@@ -48397,7 +48397,7 @@ workspace: `cmee_working`
 ## 734. `Cocolon:screens/EmotionRankingScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `24f0762689002fe0945be4ff3c2ae21b00c182ad7a179124fe4bc93b9b628955`
 - graph distance: `2`
 - 選択理由:
@@ -48442,7 +48442,7 @@ workspace: `cmee_working`
 ## 735. `Cocolon:screens/InputCountRankingScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `2d82a781ab7d419cb90d0fd1922c7aff62fc00cb4c484405e4fe2ebaca8d530f`
 - graph distance: `2`
 - 選択理由:
@@ -48488,7 +48488,7 @@ workspace: `cmee_working`
 ## 736. `Cocolon:screens/InputLengthRankingScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `261346b1460578597439200c1aa6c7379c99a0e5b62f944d9a68064de749118d`
 - graph distance: `2`
 - 選択理由:
@@ -48534,7 +48534,7 @@ workspace: `cmee_working`
 ## 737. `Cocolon:screens/LoginStreakRankingScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `c31d1be0facedf170e68a1be162ecba7eeab4e8ae1f6b63bd5a72eb11de673c8`
 - graph distance: `2`
 - 選択理由:
@@ -48579,7 +48579,7 @@ workspace: `cmee_working`
 ## 738. `Cocolon:screens/MenuActionCardCommon.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `f4ea5a6a15ea314f22788c199489a42ade0c542eab44bbe16fff307856fe9cf3`
 - graph distance: `2`
 - 選択理由:
@@ -48610,7 +48610,7 @@ workspace: `cmee_working`
 ## 739. `Cocolon:screens/PieceEntryScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `35da637bc629caf54bebf6bc843f2731dd0c8046e33900f1577bf5a8a972cbb4`
 - graph distance: `2`
 - 選択理由:
@@ -48633,7 +48633,7 @@ workspace: `cmee_working`
 ## 740. `Cocolon:screens/PieceHistoryMenuScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `539c74b5cce1dc8997e2090f708884f3d7e5c74f39c2df3f48a90f10956292c2`
 - graph distance: `2`
 - 選択理由:
@@ -48656,7 +48656,7 @@ workspace: `cmee_working`
 ## 741. `Cocolon:screens/PieceMenuCommon.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `09908338b103bdba74c0477bb7224bcc0e23da05cb23cc975056475efbb7242e`
 - graph distance: `2`
 - 選択理由:
@@ -48681,7 +48681,7 @@ workspace: `cmee_working`
 ## 742. `Cocolon:screens/PieceResonanceRankingScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `33bbb8e707cc49caca9589ace6b8edafbdd63d363b38cfa77b689cc86eff6d0d`
 - graph distance: `2`
 - 選択理由:
@@ -48727,7 +48727,7 @@ workspace: `cmee_working`
 ## 743. `Cocolon:screens/PieceScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `704c69936092b78f8a87912c36ce5681de5ac3be65cc1256894bed0a28c2d1d0`
 - graph distance: `2`
 - 選択理由:
@@ -48778,7 +48778,7 @@ workspace: `cmee_working`
 ## 744. `Cocolon:screens/RankingTopScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `f4e2b7f83489f2a5d306f73d8d4f51c973546a06bdca282503c88e811e1cc74c`
 - graph distance: `2`
 - 選択理由:
@@ -48826,7 +48826,7 @@ workspace: `cmee_working`
 ## 745. `Cocolon:screens/ResonanceHistoryDetailScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `f295908f1c72e76187d018dab100b3d4d1bac1631ef5e7c4d1f8131a3cd6f30b`
 - graph distance: `2`
 - 選択理由:
@@ -48856,7 +48856,7 @@ workspace: `cmee_working`
 ## 746. `Cocolon:screens/ResonanceHistoryListScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `9f028d273d1ed946be9634fc6fce6f1b492abd2c56a73ad3ba725bdbf8dfe73d`
 - graph distance: `2`
 - 選択理由:
@@ -48912,7 +48912,7 @@ workspace: `cmee_working`
 ## 747. `Cocolon:screens/SelfStructureReportViewerScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `e85e36e3ea7310b855dfada91f4b33746aefac291208841c966bc5b1b62cc3d5`
 - graph distance: `2`
 - 選択理由:
@@ -48955,7 +48955,7 @@ workspace: `cmee_working`
 ## 748. `Cocolon:screens/SettingsOtherScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `aa9500a98df5f823ddb2979be0bc7bb605480b53226d34ab1faade04fcb31e15`
 - graph distance: `2`
 - 選択理由:
@@ -48997,7 +48997,7 @@ workspace: `cmee_working`
 ## 749. `Cocolon:screens/SettingsScreen.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `9b815b3c0069dab7965e85d0efa54eb8e146b4e420b217ec2f742a5fe650225b`
 - graph distance: `2`
 - 選択理由:
@@ -49017,7 +49017,7 @@ workspace: `cmee_working`
 ## 750. `Cocolon:screens/account/AccountIdSearchSection.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `5b197eca52ef3cf870170e35068de80b1bbee9505a7d31eef95404b2318c1a62`
 - graph distance: `2`
 - 選択理由:
@@ -49037,7 +49037,7 @@ workspace: `cmee_working`
 ## 751. `Cocolon:screens/account/AccountNameEditModal.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `f2927908bfe1acaa680afd3c74702841f4b153e7ca7ae4369b69f516ab26cc2d`
 - graph distance: `2`
 - 選択理由:
@@ -49064,7 +49064,7 @@ workspace: `cmee_working`
 ## 752. `Cocolon:screens/account/AccountProfileSection.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `a93b5b92ef9d2f1299f7907812567cad8805ef711d4aeef322d6b358bcdd6bd7`
 - graph distance: `2`
 - 選択理由:
@@ -49093,7 +49093,7 @@ workspace: `cmee_working`
 ## 753. `Cocolon:screens/account/AccountStatusSection.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `dcf16b0ebd12261222c3c64e702226835b433ca998cfc066f85034234c27be81`
 - graph distance: `2`
 - 選択理由:
@@ -49112,7 +49112,7 @@ workspace: `cmee_working`
 ## 754. `Cocolon:screens/account/AccountVisibilitySection.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `7f0eaaf4152c48292e784d0e8768c27980741b01510a0cffec7866c771b4b26d`
 - graph distance: `2`
 - 選択理由:
@@ -49138,7 +49138,7 @@ workspace: `cmee_working`
 ## 755. `Cocolon:screens/account/accountModel.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `bc6f6a31d8cfbfd7c5ec66b156ec556da506594427aeedaef7b62f83f9e6d9f0`
 - graph distance: `2`
 - 選択理由:
@@ -49161,7 +49161,7 @@ workspace: `cmee_working`
 ## 756. `Cocolon:screens/account/useAccountFollowState.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `4c78c2b9ee3211566229cded0d9cfa563a1bd4317fc5dcd3900a1176e49736e8`
 - graph distance: `2`
 - 選択理由:
@@ -49204,7 +49204,7 @@ workspace: `cmee_working`
 ## 757. `Cocolon:screens/account/useAccountIdSearch.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `2760b0f1c0aed294213d4bab139f1325d944832e05ce261d4f534303fad7d277`
 - graph distance: `2`
 - 選択理由:
@@ -49236,7 +49236,7 @@ workspace: `cmee_working`
 ## 758. `Cocolon:screens/account/useAccountProfile.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `5a4191b69d07f988299dd5c3c035a08df825bfbd1969d501c0fb48e773a07c20`
 - graph distance: `2`
 - 選択理由:
@@ -49274,7 +49274,7 @@ workspace: `cmee_working`
 ## 759. `Cocolon:screens/account/useAccountSubscription.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `375fb5d154fc2422d2b4b042eb0acb7203671ad7b04df0b27bc5bd20b0d022a0`
 - graph distance: `2`
 - 選択理由:
@@ -49301,7 +49301,7 @@ workspace: `cmee_working`
 ## 760. `Cocolon:screens/account/useAccountVisibility.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `dc43affe9f13ea3e72bf4c3b164eb59d668354907beafbe80492959873591841`
 - graph distance: `2`
 - 選択理由:
@@ -49334,7 +49334,7 @@ workspace: `cmee_working`
 ## 761. `Cocolon:screens/analysis/analysisRouteModel.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `294114e977f83db149b13d1da48de3f7f73e2ced84057e250be569abfd301b16`
 - graph distance: `2`
 - 選択理由:
@@ -49358,7 +49358,7 @@ workspace: `cmee_working`
 ## 762. `Cocolon:screens/analysis/useAnalysisReportActions.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `164c7fa82eadc99f3769d2b781a9bbef8b7d148d5c9c2b6ed2ab00bb66fb7aa8`
 - graph distance: `2`
 - 選択理由:
@@ -49402,7 +49402,7 @@ workspace: `cmee_working`
 ## 763. `Cocolon:screens/analysis/useAnalysisRouteState.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `d4de4ba60ccba1488e4d80ea11f3beebec0dcdcc922a8a8551d2d9cf83519820`
 - graph distance: `2`
 - 選択理由:
@@ -49419,7 +49419,7 @@ workspace: `cmee_working`
 ## 764. `Cocolon:screens/analysis/useAnalysisSelfStructureActions.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `cf1aff6c03a9f818ff8d7317f8cd6de8630bfbdba0bfcc2322c94c8bc7641001`
 - graph distance: `2`
 - 選択理由:
@@ -49439,7 +49439,7 @@ workspace: `cmee_working`
 ## 765. `Cocolon:screens/analysis/useAnalysisTutorialOverlay.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `aa077ab488564f49ddc099f94c82b8527b16e2e0dc1272ba15d3157acba9e68d`
 - graph distance: `2`
 - 選択理由:
@@ -49461,7 +49461,7 @@ workspace: `cmee_working`
 ## 766. `Cocolon:screens/analysis/useAnalysisUnreadBadges.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `f0182aafc3fd3393f0c2735d7ff5a873e8a1f8b4662fa6bc6e90c85b5a0e4dec`
 - graph distance: `2`
 - 選択理由:
@@ -49503,7 +49503,7 @@ workspace: `cmee_working`
 ## 767. `Cocolon:screens/analysisReport/AnalysisReportCharts.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `508d618691562ff6eea438e1737d6ce0ec792544c10bf6c72149f144a0084702`
 - graph distance: `2`
 - 選択理由:
@@ -49526,7 +49526,7 @@ workspace: `cmee_working`
 ## 768. `Cocolon:screens/analysisReport/AnalysisReportUpgradeCard.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `e038b68c5af7fe1713a2a6834dbd359f17df9c359a56d7264d7587bd44f8a733`
 - graph distance: `2`
 - 選択理由:
@@ -49545,7 +49545,7 @@ workspace: `cmee_working`
 ## 769. `Cocolon:screens/analysisReport/KokoroWeatherDetailModal.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `57aa4ce6f046119a211150652fcde040c31dd09dd226e7f021af3f5c0aa6799c`
 - graph distance: `2`
 - 選択理由:
@@ -49577,7 +49577,7 @@ workspace: `cmee_working`
 ## 770. `Cocolon:screens/analysisReport/KokoroWeatherForecastStrip.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `eaad24bf2f6199ab3618bd4eee7ec8077036c9edc3da31293b02f385d3f9e720`
 - graph distance: `2`
 - 選択理由:
@@ -49612,7 +49612,7 @@ workspace: `cmee_working`
 ## 771. `Cocolon:screens/analysisReport/analysisReportAccessPolicy.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `205c8bfd96f3331c4f47a31031772a8f00a4d2ac685106cec8eac2d9ac819524`
 - graph distance: `2`
 - 選択理由:
@@ -49624,7 +49624,7 @@ workspace: `cmee_working`
 ## 772. `Cocolon:screens/analysisReport/analysisReportConstants.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `6a3b786646888b6bdac548c33ec8adae6c5910004118a372bb3d4a037b400a3d`
 - graph distance: `2`
 - 選択理由:
@@ -49633,7 +49633,7 @@ workspace: `cmee_working`
 ## 773. `Cocolon:screens/analysisReport/analysisReportFormatters.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `c66adb2980ec05ab93cb5ebea877488b52f7576e701c2f9d474381dd9b8e6868`
 - graph distance: `2`
 - 選択理由:
@@ -49652,7 +49652,7 @@ workspace: `cmee_working`
 ## 774. `Cocolon:screens/analysisReport/analysisReportHtmlExport.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `6b5e5f15512c46a8e968d8ff7d5e4ba23d559be74dd2f72ffe8e6c0c12567f1c`
 - graph distance: `2`
 - 選択理由:
@@ -49665,7 +49665,7 @@ workspace: `cmee_working`
 ## 775. `Cocolon:screens/analysisReport/analysisReportNormalize.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `cf64864402b2778dbdd009e1dd03304725dcfabba2726133e5df5249fef1155d`
 - graph distance: `2`
 - 選択理由:
@@ -49695,7 +49695,7 @@ workspace: `cmee_working`
 ## 776. `Cocolon:screens/analysisReport/kokoroWeatherFormatters.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `c9e1bf0043073c34a79cec38f5952bbaac6727bfe20d6d6d2cf6aef535081a77`
 - graph distance: `2`
 - 選択理由:
@@ -49731,7 +49731,7 @@ workspace: `cmee_working`
 ## 777. `Cocolon:screens/input/inputLayoutModel.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `92e166c978fe43be32053b6025be1042f0e75436af9f9827e36e759bc65a7d42`
 - graph distance: `2`
 - 選択理由:
@@ -49745,7 +49745,7 @@ workspace: `cmee_working`
 ## 778. `Cocolon:screens/nexus/NexusEmotionLogSection.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `4396100dec93f67a9db9e03352664e888a54cb336eec9ba2ef90b6a00d6d1c77`
 - graph distance: `2`
 - 選択理由:
@@ -49767,7 +49767,7 @@ workspace: `cmee_working`
 ## 779. `Cocolon:screens/nexus/NexusEmotionRankingCard.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `c73769bb9e99a545aed54712a079702c8b07f4b83a4e2c9c5a569a6791164458`
 - graph distance: `2`
 - 選択理由:
@@ -49790,7 +49790,7 @@ workspace: `cmee_working`
 ## 780. `Cocolon:screens/nexus/NexusHeader.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `7abe34934d6ebc252d90b43fe61a105d235fc59620c43682e4a4541e8dc479f3`
 - graph distance: `2`
 - 選択理由:
@@ -49810,7 +49810,7 @@ workspace: `cmee_working`
 ## 781. `Cocolon:screens/nexus/NexusHistorySection.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `8894647f5e838a22ef90a50d172ea6665432bc27b486f17656fef6143dbf628b`
 - graph distance: `2`
 - 選択理由:
@@ -49839,7 +49839,7 @@ workspace: `cmee_working`
 ## 782. `Cocolon:screens/nexus/NexusOwnerPickerModal.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `323577c4ae6881f5fc6a4f655e3cab37eadca963eec543b112e46f89915e56eb`
 - graph distance: `2`
 - 選択理由:
@@ -49864,7 +49864,7 @@ workspace: `cmee_working`
 ## 783. `Cocolon:screens/nexus/NexusPieceCard.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `c5ec61146b3998fb973782f0bbcfee546858781eaf6214959efcc40e54320dad`
 - graph distance: `2`
 - 選択理由:
@@ -49902,7 +49902,7 @@ workspace: `cmee_working`
 ## 784. `Cocolon:screens/nexus/NexusPieceFeedSection.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `8bbd8f19e43f30c51b8ecc0066df19a8fa999d73611ab5a8481ff4a88c8cf86c`
 - graph distance: `2`
 - 選択理由:
@@ -49937,7 +49937,7 @@ workspace: `cmee_working`
 ## 785. `Cocolon:screens/nexus/NexusRecommendSection.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `2dbf280f9a773b1b96fc9357e6ef6c24bdfaea96c1948849bcfb6fd8e8c91198`
 - graph distance: `2`
 - 選択理由:
@@ -49956,7 +49956,7 @@ workspace: `cmee_working`
 ## 786. `Cocolon:screens/nexus/NexusTabBar.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `24570ef6ccd1c59e2f6fc535c9160e42c0790db3b2af406680700493cb3b0861`
 - graph distance: `2`
 - 選択理由:
@@ -49979,7 +49979,7 @@ workspace: `cmee_working`
 ## 787. `Cocolon:screens/nexus/NexusTodayEmotionSummary.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `db8cc5372e9d0d5ab671b63082bc4264fceb753032d9942e40bc219b0365c66b`
 - graph distance: `2`
 - 選択理由:
@@ -49995,7 +49995,7 @@ workspace: `cmee_working`
 ## 788. `Cocolon:screens/nexus/nexusHistoryModel.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `269d3a350788c524e114229daada3619403eee96dd6c46a9fb67ffdcbe130f8a`
 - graph distance: `2`
 - 選択理由:
@@ -50016,7 +50016,7 @@ workspace: `cmee_working`
 ## 789. `Cocolon:screens/nexus/nexusNormalize.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `7cb19e35c39ed5df250f7da4b59e72c18d3ee41c70d0abb7b96e8230677a89ed`
 - graph distance: `2`
 - 選択理由:
@@ -50040,7 +50040,7 @@ workspace: `cmee_working`
 ## 790. `Cocolon:screens/nexus/nexusRouteModel.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `dacd3c42f384d4ab89ab300d3665ed69d2bd0835d48083a4139c06a4bbfcbecc`
 - graph distance: `2`
 - 選択理由:
@@ -50064,7 +50064,7 @@ workspace: `cmee_working`
 ## 791. `Cocolon:screens/piece/PieceHomeActionCard.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `2395fecc17c62ba5f7e68ec7ce892b9d1937aef8c0a9809e40c2fdf8715aac56`
 - graph distance: `2`
 - 選択理由:
@@ -50084,7 +50084,7 @@ workspace: `cmee_working`
 ## 792. `Cocolon:screens/piece/PieceHomeMainActions.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `49d946a639b98bd1a11a6149330b3695ad640fa45db27e0374ab4d627615048a`
 - graph distance: `2`
 - 選択理由:
@@ -50116,7 +50116,7 @@ workspace: `cmee_working`
 ## 793. `Cocolon:screens/piece/PieceRecommendModal.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `dd8cd310e4f23ba7379509d576774bf5fef673da4ff7b4e5bf2732bdc22a1dd0`
 - graph distance: `2`
 - 選択理由:
@@ -50142,7 +50142,7 @@ workspace: `cmee_working`
 ## 794. `Cocolon:screens/piece/PieceTutorialCreateModal.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `0ea0832a651ca7ae885068494fa057bec42c383c9b6e31cb0870e13963e7fdec`
 - graph distance: `2`
 - 選択理由:
@@ -50172,7 +50172,7 @@ workspace: `cmee_working`
 ## 795. `Cocolon:screens/piece/usePieceHomeGlobalSummary.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `37a951b404f7f7f67ffd0104988230dc34fdb8a8721d0e7d144037176b80575c`
 - graph distance: `2`
 - 選択理由:
@@ -50202,7 +50202,7 @@ workspace: `cmee_working`
 ## 796. `Cocolon:screens/piece/usePieceRecommendUsers.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `e76347f53601d0a06317774e842f97370d282debab60ace202d9b99abc668ff6`
 - graph distance: `2`
 - 選択理由:
@@ -50234,7 +50234,7 @@ workspace: `cmee_working`
 ## 797. `Cocolon:scripts/postinstall.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `dd260a3acaae4d25eac58379a9cae5557c7e73095eba066236c5402a89f21499`
 - graph distance: `2`
 - 選択理由:
@@ -50251,7 +50251,7 @@ workspace: `cmee_working`
 ## 798. `Cocolon:scripts/reset-project.js`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `972a8c78195fd87f0fcdc0a937020ebb072bbdbf3bc90c57bad2d09fd9ac015c`
 - graph distance: `2`
 - 選択理由:
@@ -50266,7 +50266,7 @@ workspace: `cmee_working`
 ## 799. `Cocolon:tests/cocolon_context/test_routes_b_adjudication.py`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `98a285d15c97add966f6bab95bb3ab72163b5d206274411a69faca592c3a1d9c`
 - graph distance: `2`
 - 選択理由:
@@ -50284,7 +50284,7 @@ workspace: `cmee_working`
 ## 800. `Cocolon:tests/cocolon_context/test_routes_nested_registration_base.py`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `c2c20c3dea0307a646608e4449ab9dc37f9623d00e73a179217b5890bae13259`
 - graph distance: `2`
 - 選択理由:
@@ -50302,7 +50302,7 @@ workspace: `cmee_working`
 ## 801. `Cocolon:tutorial/generated/tutorialFixtures.generated.json`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `8868a1195938afea968d6f1252e4369753abec2bffe7143bc88c422d92cb27b4`
 - graph distance: `2`
 - 選択理由:
@@ -76752,7 +76752,7 @@ workspace: `cmee_working`
 ## 2004. `Cocolon:app.json`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `a8dafed11ac32c18638e13ee081cd752275ae12e690639f329195294ccc53c48`
 - graph distance: `3`
 - 選択理由:
@@ -76762,7 +76762,7 @@ workspace: `cmee_working`
 ## 2005. `Cocolon:assets/fonts/SpaceMono-Regular.ttf`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `f5bd82c1958a1f50f2999ab5cb0733f5c02b9f8a967d6938b69a2b590eb914ef`
 - graph distance: `3`
 - 選択理由:
@@ -76771,7 +76771,7 @@ workspace: `cmee_working`
 ## 2006. `Cocolon:tests/cocolon_context/test_routes_nested_registration.py`
 
 - classification: `REFERENCE_AS_NEEDED`
-- source commit: `144f0aafb91b262a3f9701184ee20939e5115419`
+- source commit: `9d71ab54f24b4a25d04b3ca2e71d40414d5313fc`
 - file identity: `d729cc98e042514de0d2ccfc6ab2e5d0d84fa8087735931726c9b2632a27a0fd`
 - graph distance: `3`
 - 選択理由:

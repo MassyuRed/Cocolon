@@ -81,28 +81,28 @@
           "identity": "755214460d24742a3c85ab0148b88e9121e857e5b64423c48f4194637e9e25a3",
           "path": "Cocolon_前提資料/08_cycle001_current_state.md",
           "repository_key": "Cocolon",
-          "source_commit": "144f0aafb91b262a3f9701184ee20939e5115419"
+          "source_commit": "9d71ab54f24b4a25d04b3ca2e71d40414d5313fc"
         },
         {
           "evidence_kind": "design",
           "identity": "49b6f51a1fc51c6c37f9e6845f248e158466dd9850c9151ff48c29cc00fcd590",
           "path": "Cocolon_前提資料/Cocolon_EmlisAI_NLSv3_CurrentAlignment.md",
           "repository_key": "Cocolon",
-          "source_commit": "144f0aafb91b262a3f9701184ee20939e5115419"
+          "source_commit": "9d71ab54f24b4a25d04b3ca2e71d40414d5313fc"
         },
         {
           "evidence_kind": "design",
           "identity": "c9b8ee84e38745b0ba2b43b8699557eaf0fa75123f13b5cb819602944bb9d622",
           "path": "Cocolon_前提資料/designs/cmee/NLSv3_to_CMEE_Disposition_Phase1_20260817.md",
           "repository_key": "Cocolon",
-          "source_commit": "144f0aafb91b262a3f9701184ee20939e5115419"
+          "source_commit": "9d71ab54f24b4a25d04b3ca2e71d40414d5313fc"
         },
         {
           "evidence_kind": "historical",
           "identity": "c0bdc73c61faba375cba6813c31178b28bb7ad97746bd5b44016320faacfcc26",
           "path": "Cocolon_前提資料/historical_baselines/emlis_ai/Cocolon_EmlisAI_ModelFreeNaturalLanguageSurfaceV3_DetailedDesign_ImplementationOrder_20260714_Revised_Cycle.md",
           "repository_key": "Cocolon",
-          "source_commit": "144f0aafb91b262a3f9701184ee20939e5115419"
+          "source_commit": "9d71ab54f24b4a25d04b3ca2e71d40414d5313fc"
         }
       ],
       "minimum_source_like": 1,
@@ -178,14 +178,14 @@
           "identity": "a4a867a6915fe05b8a992ff2601d6e3ad34fb47e499813de4f502d2cbc2fabe9",
           "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
           "repository_key": "Cocolon",
-          "source_commit": "144f0aafb91b262a3f9701184ee20939e5115419"
+          "source_commit": "9d71ab54f24b4a25d04b3ca2e71d40414d5313fc"
         },
         {
           "evidence_kind": "design",
           "identity": "b925c72129872761f2bdba3e83d0488e4fb664b8051992bbd5b34ba94f964fad",
           "path": "Cocolon_前提資料/designs/cmee/v1/03_piece_v1c_detailed_design.md",
           "repository_key": "Cocolon",
-          "source_commit": "144f0aafb91b262a3f9701184ee20939e5115419"
+          "source_commit": "9d71ab54f24b4a25d04b3ca2e71d40414d5313fc"
         }
       ],
       "minimum_source_like": 0,
@@ -208,14 +208,14 @@
           "identity": "d76cf6120d157eea7f0f2d2044a570ad2162d9ae5ea9e948391d9d23f5e578ee",
           "path": "Cocolon_前提資料/current_structure/03_analysis_current_structure.md",
           "repository_key": "Cocolon",
-          "source_commit": "144f0aafb91b262a3f9701184ee20939e5115419"
+          "source_commit": "9d71ab54f24b4a25d04b3ca2e71d40414d5313fc"
         },
         {
           "evidence_kind": "design",
           "identity": "69af388a58fab5bc0316390b3472aac4b15496341a0ab3a2b49678733538ce79",
           "path": "Cocolon_前提資料/designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md",
           "repository_key": "Cocolon",
-          "source_commit": "144f0aafb91b262a3f9701184ee20939e5115419"
+          "source_commit": "9d71ab54f24b4a25d04b3ca2e71d40414d5313fc"
         }
       ],
       "minimum_source_like": 0,
@@ -450,28 +450,28 @@
           "identity": "c15cce12bcaf4100b8925d0a315be8548ae47a86285b1cb1be9d9bdaad8c9edf",
           "path": "screens/InputScreen.js",
           "repository_key": "Cocolon",
-          "source_commit": "144f0aafb91b262a3f9701184ee20939e5115419"
+          "source_commit": "9d71ab54f24b4a25d04b3ca2e71d40414d5313fc"
         },
         {
           "evidence_kind": "source",
           "identity": "1d36882f2767d3a607f007fcf8c071f53b5bce2b2b0edda1b85e1034fda5ae9c",
           "path": "screens/input/InputFeedbackReplyModal.js",
           "repository_key": "Cocolon",
-          "source_commit": "144f0aafb91b262a3f9701184ee20939e5115419"
+          "source_commit": "9d71ab54f24b4a25d04b3ca2e71d40414d5313fc"
         },
         {
           "evidence_kind": "source",
           "identity": "a9404bb494a5ce9312898f4ec514dcacb8479810ea5deeeeee8e5004f3ad6746",
           "path": "screens/input/inputFeedbackModel.js",
           "repository_key": "Cocolon",
-          "source_commit": "144f0aafb91b262a3f9701184ee20939e5115419"
+          "source_commit": "9d71ab54f24b4a25d04b3ca2e71d40414d5313fc"
         },
         {
           "evidence_kind": "source",
           "identity": "e8beebc722cee19e2a73fd558684e467e080f152da4e74e2a2b892f2514525b1",
           "path": "screens/input/useInputFeedbackModal.js",
           "repository_key": "Cocolon",
-          "source_commit": "144f0aafb91b262a3f9701184ee20939e5115419"
+          "source_commit": "9d71ab54f24b4a25d04b3ca2e71d40414d5313fc"
         }
       ],
       "minimum_source_like": 1,
@@ -589,21 +589,21 @@
           "identity": "43034c133b95e957e5b9e6087871ebf8e5dedddc4b29cc23bf6fc279dbcaee08",
           "path": "Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md",
           "repository_key": "Cocolon",
-          "source_commit": "144f0aafb91b262a3f9701184ee20939e5115419"
+          "source_commit": "9d71ab54f24b4a25d04b3ca2e71d40414d5313fc"
         },
         {
           "evidence_kind": "design",
           "identity": "c9b8ee84e38745b0ba2b43b8699557eaf0fa75123f13b5cb819602944bb9d622",
           "path": "Cocolon_前提資料/designs/cmee/NLSv3_to_CMEE_Disposition_Phase1_20260817.md",
           "repository_key": "Cocolon",
-          "source_commit": "144f0aafb91b262a3f9701184ee20939e5115419"
+          "source_commit": "9d71ab54f24b4a25d04b3ca2e71d40414d5313fc"
         },
         {
           "evidence_kind": "historical",
           "identity": "c0bdc73c61faba375cba6813c31178b28bb7ad97746bd5b44016320faacfcc26",
           "path": "Cocolon_前提資料/historical_baselines/emlis_ai/Cocolon_EmlisAI_ModelFreeNaturalLanguageSurfaceV3_DetailedDesign_ImplementationOrder_20260714_Revised_Cycle.md",
           "repository_key": "Cocolon",
-          "source_commit": "144f0aafb91b262a3f9701184ee20939e5115419"
+          "source_commit": "9d71ab54f24b4a25d04b3ca2e71d40414d5313fc"
         },
         {
           "evidence_kind": "design",
