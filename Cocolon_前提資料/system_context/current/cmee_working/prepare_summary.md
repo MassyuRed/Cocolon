@@ -4,11 +4,11 @@
 - execution_mode: `FULL_REBUILD_FALLBACK`
 - workspace: `cmee_working`
 - task: `cmee`
-- Cocolon: `ded08a2d9f0b1f1e4c8382f0c3ee2e6bcfe0c141`
+- Cocolon: `144f0aafb91b262a3f9701184ee20939e5115419`
 - mashos-api: `06ce311b3ea728b06f83439d268a34bed917c01c`
-- context_fingerprint: `9201dc344dc9f2cd1ccfc324c4383991e144f0ff7c60b9c915f2151ed0442b35`
+- context_fingerprint: `d94d57a0e61f1b64febe816948a4e67ce09793dc7f9d3209978fcaf6effab708`
 - task_status: `STEP4_INCOMPLETE_BLOCKING_CONTEXT_OR_REMOTE_VERIFICATION`
-- changed_path_count: `20`
+- changed_path_count: `19`
 - manual_operation_count: `0`
 - completion_claim: `None`
 - overall_claim: `None`

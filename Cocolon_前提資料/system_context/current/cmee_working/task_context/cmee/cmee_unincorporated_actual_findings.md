@@ -54,11 +54,11 @@ During a separately approved actual Emlis product-quality unit, compare and migr
 
 ### 選択された文書evidence
 
-- `Cocolon:Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md` @ `ded08a2d9f0b1f1e4c8382f0c3ee2e6bcfe0c141` (`de2313e88098e08850b9578bd9ce20980f5678f681193a0be5a890a48c0f641a`, `current_structure`)
-- `Cocolon:Cocolon_前提資料/current_structure/04_cmee_current_structure.md` @ `ded08a2d9f0b1f1e4c8382f0c3ee2e6bcfe0c141` (`165546b8dba32be5204b7715dd98c9a3a7adea734ab2795b6fae7f8f77af2cc4`, `current_structure`)
-- `Cocolon:Cocolon_前提資料/designs/cmee/NLSv3_to_CMEE_Disposition_Phase1_20260817.md` @ `ded08a2d9f0b1f1e4c8382f0c3ee2e6bcfe0c141` (`c9b8ee84e38745b0ba2b43b8699557eaf0fa75123f13b5cb819602944bb9d622`, `design`)
-- `Cocolon:Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md` @ `ded08a2d9f0b1f1e4c8382f0c3ee2e6bcfe0c141` (`85f16f9edd64c537979d3bd607f3579b597854dd48e49b336a8d5e0c39af919b`, `design`)
-- `Cocolon:Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` @ `ded08a2d9f0b1f1e4c8382f0c3ee2e6bcfe0c141` (`1e5863d288614043a005d717ff28897323a8e3a3d1c93c6c52851bfe38f3e41f`, `design`)
+- `Cocolon:Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md` @ `144f0aafb91b262a3f9701184ee20939e5115419` (`de2313e88098e08850b9578bd9ce20980f5678f681193a0be5a890a48c0f641a`, `current_structure`)
+- `Cocolon:Cocolon_前提資料/current_structure/04_cmee_current_structure.md` @ `144f0aafb91b262a3f9701184ee20939e5115419` (`165546b8dba32be5204b7715dd98c9a3a7adea734ab2795b6fae7f8f77af2cc4`, `current_structure`)
+- `Cocolon:Cocolon_前提資料/designs/cmee/NLSv3_to_CMEE_Disposition_Phase1_20260817.md` @ `144f0aafb91b262a3f9701184ee20939e5115419` (`c9b8ee84e38745b0ba2b43b8699557eaf0fa75123f13b5cb819602944bb9d622`, `design`)
+- `Cocolon:Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md` @ `144f0aafb91b262a3f9701184ee20939e5115419` (`85f16f9edd64c537979d3bd607f3579b597854dd48e49b336a8d5e0c39af919b`, `design`)
+- `Cocolon:Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` @ `144f0aafb91b262a3f9701184ee20939e5115419` (`1e5863d288614043a005d717ff28897323a8e3a3d1c93c6c52851bfe38f3e41f`, `design`)
 
 ### Disposition
 
