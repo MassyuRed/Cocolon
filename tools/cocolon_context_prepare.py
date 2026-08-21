@@ -817,6 +817,26 @@ def _partition_key_for_file(
     return None
 
 
+def _exclude_partial_scope_unmatched_documents(
+    *, path: Path, full_inventory_keys: set[tuple[str, str]],
+    affected: set[tuple[str, str]],
+) -> int:
+    """Exclude provider documents unmatched only by the partial denominator."""
+    rows = list(_iter_jsonl(path)) if path.is_file() else []
+    rejected: list[tuple[str, str] | None] = []
+    for row in rows:
+        key = _partition_key_for_file("unmatched_scip_documents.jsonl", row)
+        if key is None or key not in full_inventory_keys or key in affected:
+            rejected.append(key)
+    if rejected:
+        raise PrepareError(
+            "partial unmatched SCIP document is not an unchanged full-inventory "
+            f"row: {rejected[:10]}"
+        )
+    _write_jsonl(path, [])
+    return len(rows)
+
+
 def _row_sort_key(name: str, row: Mapping[str, Any]) -> tuple[Any, ...]:
     key = _partition_key_for_file(name, row) or ("", "")
     return (
@@ -1225,6 +1245,11 @@ def _incremental_source_dependent_closure(
         for key, target in sparse_targets.items():
             _remove_sparse_worktree(refs[key], target)
 
+    excluded_partial_unmatched_count = _exclude_partial_scope_unmatched_documents(
+        path=partial_code / "unmatched_scip_documents.jsonl",
+        full_inventory_keys=set(new_inventory),
+        affected=affected,
+    )
     partition_evidence: dict[str, Any] = {}
     for name in (
         "file_coverage.jsonl", "symbols.jsonl", "references.jsonl",
@@ -1242,6 +1267,10 @@ def _incremental_source_dependent_closure(
             "replaced_old_row_count": replaced,
             "inserted_row_count": _line_count(partial_code / name),
         }
+        if name == "unmatched_scip_documents.jsonl":
+            partition_evidence[name]["excluded_partial_scope_row_count"] = (
+                excluded_partial_unmatched_count
+            )
 
     inventory_sha = sha256_file(materialized / "files.jsonl")
     _merge_provider_runs(

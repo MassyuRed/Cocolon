@@ -23,9 +23,11 @@ except ModuleNotFoundError:
 from tools.cocolon_context import build_parser
 from tools.cocolon_context_prepare import (
     Change,
+    PrepareError,
     RepositoryRef,
     _derive_reverse_dependents,
     _diff_changes,
+    _exclude_partial_scope_unmatched_documents,
     _iter_jsonl,
     _merge_code_partition,
     _merge_route_candidate,
@@ -348,6 +350,88 @@ class IncrementalSemanticMergeTests(unittest.TestCase):
             self.assertEqual((kept, replaced), (1, 1))
             rows = list(_iter_jsonl(target))
             self.assertEqual({row["symbol_id"] for row in rows}, {"b", "new-a"})
+
+    def test_partial_unmatched_full_inventory_scope_rows_are_excluded(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            target = root / "unmatched_scip_documents.jsonl"
+            partial = root / "partial-unmatched.jsonl"
+            sentinel = {
+                "provider_run_id": "cocolon_typescript",
+                "repository_key": "Cocolon",
+                "relative_path": "generated/external.d.ts",
+            }
+            scope_rows = [
+                {
+                    "provider_run_id": "mashos_api_python",
+                    "repository_key": "mashos-api",
+                    "relative_path": "ai/tests/fixtures/__init__.py",
+                },
+                {
+                    "provider_run_id": "mashos_api_python",
+                    "repository_key": "mashos-api",
+                    "relative_path": "ai/tests/helpers/__init__.py",
+                },
+            ]
+            self._write_jsonl(target, [sentinel])
+            self._write_jsonl(partial, scope_rows)
+            target_before = target.read_bytes()
+            affected = {("Cocolon", "lib/api/home/emotionPieceApi.js")}
+            full_inventory_keys = affected | {
+                ("mashos-api", str(row["relative_path"])) for row in scope_rows
+            }
+
+            excluded = _exclude_partial_scope_unmatched_documents(
+                path=partial,
+                full_inventory_keys=full_inventory_keys,
+                affected=affected,
+            )
+            kept, replaced = _merge_code_partition(
+                target=target,
+                partial=partial,
+                affected=affected,
+                name="unmatched_scip_documents.jsonl",
+            )
+
+            self.assertEqual(excluded, 2)
+            self.assertEqual((kept, replaced), (1, 0))
+            self.assertEqual(list(_iter_jsonl(partial)), [])
+            self.assertEqual(target.read_bytes(), target_before)
+
+    def test_partial_unmatched_rejects_unknown_or_affected_rows(self) -> None:
+        affected = {("Cocolon", "lib/api/home/emotionPieceApi.js")}
+        cases = [
+            ("mashos-api", "ai/tests/rogue.py", set()),
+            (
+                "Cocolon",
+                "lib/api/home/emotionPieceApi.js",
+                {("Cocolon", "lib/api/home/emotionPieceApi.js")},
+            ),
+        ]
+        for repository, path, additional_inventory in cases:
+            with self.subTest(repository=repository, path=path):
+                with tempfile.TemporaryDirectory() as td:
+                    partial = Path(td) / "partial-unmatched.jsonl"
+                    self._write_jsonl(
+                        partial,
+                        [
+                            {
+                                "provider_run_id": "partial_provider",
+                                "repository_key": repository,
+                                "relative_path": path,
+                            }
+                        ],
+                    )
+                    before = partial.read_bytes()
+                    with self.assertRaisesRegex(
+                        PrepareError, "not an unchanged full-inventory row"
+                    ):
+                        _exclude_partial_scope_unmatched_documents(
+                            path=partial,
+                            full_inventory_keys=affected | additional_inventory,
+                            affected=affected,
+                        )
+                    self.assertEqual(partial.read_bytes(), before)
 
     def test_route_candidate_merges_only_affected_closure_rows(self) -> None:
         import hashlib
