@@ -1,7 +1,7 @@
 # CMEE V1-A — EmlisAI Observation Vertical 詳細設計
 
 - document id: `cocolon.cmee.v1a.emlis_observation.detailed_design`
-- revision date: `2026-08-16 JST`
+- revision date: `2026-08-21 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - runtime state: `DRAFT_WIP_DISABLED_PRODUCT_FAIL`
 - implementation evidence owner: `MassyuRed/mashos-api Draft PR #3 @ 06ce311b3ea728b06f83439d268a34bed917c01c`
@@ -14,6 +14,7 @@
 - L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
 - Phase 0 / P0 / P0-R1 / standalone product-delta-0 L3-R / L3-I lifecycle: `RETIRED_HISTORICAL_NONREUSABLE`
 - current implementation rule: `PRODUCT_QUALITY_DELTA_GT_0_AND_MASH_CONFIRMED_ONLY`
+- Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 
 ---
 
@@ -31,7 +32,7 @@ current input
 -> disabled candidate bundle
 ```
 
-問いsystem全体、production cutover、Cycle001 acceptanceはV1-A completionに含めない。V1-A offline runnerはRoute Bを検証できるよう、typed clarification candidateと、callerが別SourceEnvelopeとして供給したsupplemental answerからREFINED candidateを作るcontractまで持てる。ただしAPI / DB / RN / persistence、interactive session、user-visible question lifecycle、production question routeはexact0であり、V1-Bだけがそれをoperational化する。
+問いsystem全体、production cutover、Cycle001 acceptanceはV1-A completionに含めない。V1-A offline runnerはRoute Bを検証できるよう、typed clarification candidateと、callerが別SourceEnvelopeとして供給したsupplemental answerからREFINED candidateを作るcontractまで持てる。ただしAPI / DB / RN / persistence、interactive session、user-visible question lifecycle、production question routeはexact0であり、後述§18のVertical 2だけがそれをoperational化する。V1-Aは§18のVertical 1、つまり全plan共通のLayer 1／2品質を担当する。
 
 ### 0.1 Current actual before baseline — body-free
 
@@ -117,10 +118,10 @@ routing_disposition:
   OBSERVATION | SEPARATE_SAFETY | UNAVAILABLE
 
 artifact_kind:
-  OBSERVATION_SURFACE | CLARIFICATION_REQUEST | OPTIONAL_CONTINUITY_LINE
+  LAYER_1 | LAYER_2 | CLARIFICATION_REQUEST | LAYER_3_HISTORY_CONTINUITY
 ```
 
-Human Receptionはstageではない。visible observation artifact内のrequired dutyである。
+Human Receptionはstageではない。Layer 2として、Layer 1のvisible observation claimへbindするderived artifactである。
 
 Question rule:
 
@@ -171,7 +172,7 @@ minimum duties:
 - scalar / UTF-8 rangeをsource bodyに対して検証
 - owner、version、stage、privacyを固定
 - eligible historyだけを別source envelopeへ追加
-- answerはsupplemental envelope exact1としてoriginalと併存
+- answerはroundごとのsupplemental envelope exact1としてoriginalと併存し、thread全体ではplan budget内の1..3を順序付きで保持
 - body-free commitmentを生成
 
 禁止:
@@ -202,8 +203,8 @@ V1-A runtime policy:
 | Resolution | Normal observation use |
 |---|---|
 | `UNIQUE` | 必要条件にすぎない。matching `JapaneseAttachmentAdmission`がapproved route contract下で当該owner / witnessをadmitした場合だけrequired dutyへ使用可能 |
-| `AMBIGUOUS` | approved Route B contractではambiguityに依存しないmeaningful limited claimまたはoriginal-input lifecycle全体で最大一回・target exact1のsemantic clarificationだけを候補化できる。同一product-quality improvement unit内のconstraintであり、別Gateにしない |
-| `UNRESOLVED` | approved Route B contractではunresolved部分を言い切らずlimited / one clarification / unavailable / separate safetyだけを候補化できる。同一product-quality improvement unit内のconstraintであり、別Gateにしない |
+| `AMBIGUOUS` | approved Route B knowledgeと§18 current plan contractではambiguityに依存しないmeaningful limited claim、または各round target exact1のsemantic clarificationだけを候補化できる。thread budgetはFree／Plus 0..1、Premium sequential 0..3。同一product-quality improvement unit内のconstraintであり、別Gateにしない |
+| `UNRESOLVED` | unresolved部分を言い切らず、limited／plan-budget内の一round一問／unavailable／separate safetyだけを候補化できる。同一product-quality improvement unit内のconstraintであり、別Gateにしない |
 
 parserのone-bestだけで`UNIQUE`にしない。user clarificationはmeaning choiceを追加できるが、parserの過去outputをretroactive truthへしない。
 
@@ -363,7 +364,7 @@ Machineはread-feeling、自然さ、非template、また入力したさをPASS�
 |---|---|
 | source role / version invalid | `REJECTED` |
 | provider identity mismatch | `UNAVAILABLE` and no fallback |
-| material attachment ambiguity | approved Route B contractではmeaningful ambiguity-independent `LIMITED`、original input lifecycle全体で最大一回・target unknown exact1のclarification、または`UNAVAILABLE`; never guessed。standalone P0 / L3-Iは作らず、同一product-quality improvement unit内で保持 |
+| material attachment ambiguity | meaningful ambiguity-independent `LIMITED`、§18 plan budget内で各round target unknown exact1のclarification、または`UNAVAILABLE`; never guessed。standalone P0 / L3-Iは作らず、同一product-quality improvement unit内で保持 |
 | no meaningful grounded claim | `UNAVAILABLE` |
 | high-care adjacency | `SEPARATE_SAFETY` |
 | candidate hard-invalid | reject candidate; valid candidate 0なら`UNAVAILABLE` |
@@ -507,9 +508,152 @@ GENERATED = all required visible duties source/user grounded; unresolved require
 LIMITED = meaningful source-bound observation >= 1 + bound Reception + explicit unknown
 QUESTION_PENDING = PRE_QUESTION LIMITED + material target unknown exact1
 UNAVAILABLE = no meaningful safe visible claim
-max_clarification_requests_per_original_lifecycle = 1
+max_clarification_requests_per_thread = FREE:1 | PLUS:1 | PREMIUM:3
+questions_per_round = 1
 fallback = 0
 automatic_retry = 0
 ```
 
-question prompt/options/need、fixture、expected text、Product Readはsemantic sourceではない。answerはnew `SUPPLEMENTAL_ANSWER` SourceEnvelopeとしてnew graph version/deltaへbindし、originalと非target unknownを不変に保つ。ambiguous answer、skip、unknownでは再質問せず、prior LIMITEDまたはUNAVAILABLEで閉じる。V1-A offline contractであり、production interactive questionはV1-Bの別承認まで0である。
+question prompt/options/need、fixture、expected text、Product Readはsemantic sourceではない。answerはnew `SUPPLEMENTAL_ANSWER` SourceEnvelopeとしてnew graph version/deltaへbindし、original、prior answer、prior graph／artifactと非target unknownを不変に保つ。ambiguous answer、skip、stop、分からない、無回答では正常終了し、同一questionを再発行しない。Premiumの後続roundはrefined Layer 1／2後もmaterial unknownが残り、本人がexplicit continueを選び、budgetが残る場合だけである。V1-A offline contractであり、production interactive questionは後述Vertical 2の別承認まで0である。
+
+## 18. Step 10 finalized Emlis product contract
+
+本sectionはFinal Dispositionと一回限りの正式Pro reviewを反映したEmlis current targetである。§0〜17のcurrent候補と矛盾する場合は本sectionを優先する。historical execution fact、PR #3 Product Read FAIL、runtime disabled、production admission falseは変更しない。exact DB／table／API／RN／session／persistence pathはactual fit-gapまでHOLDであり、本docs reflectionのimplementation effectは`0`である。
+
+### 18.1 Product output exact roles
+
+```text
+Layer 1「見えたこと」:
+  current-input observation
+  P6 Structure Insightのcurrent input内structure insightを含められる
+  全plan
+
+Layer 2「Emlisから」:
+  Layer 1のvisible observation claimにbindしたHuman Reception
+  新しい本人事実を作らない
+  全plan
+
+Layer 3「記録の線」:
+  current inputとeligible owned historyのconcrete connection
+  P5 User Label Connectionのeligibility／guardをadapt
+  Plus／Premiumのみ、条件付き0..1
+```
+
+P6のstructure thinkingはFreeにもLayer 1として返す。構造思考自体を有料化しない。有料差はP5による履歴連続性である。Layer 3は、current input aloneが十分に観測され、eligible historyとmultiple evidence recordsがあり、current inputが中心で、low-informationでもsafety／high-careでもなく、personality／cause／other-intent promotionがない時だけ出す。不成立はLayer 1／2だけで正常終了する。Layer 3をLayer 1／2 failureの回避路にしない。UI最終名称はHOLD、暫定推奨は「これまでの記録から」とする。
+
+### 18.2 Input-history thread
+
+```text
+no question:
+  original input
+  -> Layer 1
+  -> Layer 2
+  -> eligible Layer 3 0..1
+
+with question:
+  original input
+  -> round 0 Layer 1
+  -> round 0 Layer 2
+  -> question artifact
+     -> skip / stop / no answer: NORMAL_TERMINAL
+        (supplemental answer 0, refined artifact 0)
+     -> 「分からない」reply / ambiguous answer: supplemental answer
+        -> NORMAL_TERMINAL (refined artifact 0)
+     -> authenticated usable supplemental answer
+        -> refined Layer 1
+        -> refined Layer 2
+        -> plan budget内のlater round
+  -> eligible Layer 3 0..1（exact insertion positionはHOLD）
+```
+
+上記を生成順にsame threadへ保存する。later roundによるearlier source／artifactのoverwrite／deleteは`0`である。originalと各supplemental answerを別source role、別version、別round lineageで保持し、latest answerでoriginalまたはearlier answerを置換しない。Layer 3もderived artifactとして同thread lineageへ接続し、user sourceへ昇格させない。既存入力のauth／access／delete lifecycleから独立した孤立artifactを作らない。
+
+```text
+USER_OWNED_SOURCE:
+  ORIGINAL_INPUT
+  SUPPLEMENTAL_ANSWER 1..3
+
+DERIVED_EMLIS_ARTIFACT:
+  LAYER_1
+  LAYER_2
+  QUESTION
+  LAYER_3
+```
+
+Emlisはcurrent threadのoriginal + supplemental answerを使える。Analysisはsupplemental answerをoriginal recordに従属する補足根拠として使えるが、別occasion／recordへ数えない。Pieceはuserが「この回答も含める」と明示した場合だけ使える。Analysis／PieceはEmlis Layer 1／2／3、question textをsourceにしない。
+
+### 18.3 Plan contract
+
+| Plan | source scope | output | question |
+|---|---|---|---:|
+| Free | `CURRENT_THREAD_ONLY`。original + same-thread supplemental | Layer 1 + Layer 2。Layer 3なし | thread 0..1 |
+| Plus | current thread + eligible owned history | Layer 1 + Layer 2 + eligible Layer 3 0..1 | thread 0..1 |
+| Premium | current thread + eligible owned history + evidence-bound interpretive frame + allowed user-owned cross-core context | Layer 1 + Layer 2 + eligible Layer 3 0..1 | sequential 0..3 |
+
+Freeもthread／artifactを保存する。ただし、別入力の次回Emlis生成sourceとしてpast input、derived user model、cross-core contextを使わない。same-current-thread supplemental answerは有料の過去履歴利用に数えない。
+
+Premiumでは一画面へ三問を一括表示しない。各roundでLayer 1／2を先に返し、重要unknownが残り、本人が続行を選び、budgetが残る場合だけquestion exact1を出す。skip、stop、分からない、無回答はいつでも正常終了である。
+
+### 18.4 Premium interpretive frame
+
+> **Premiumでは、ユーザーの蓄積した本人情報から作られた、根拠付き・暫定的・修正可能な「ユーザー固有の解釈フレーム」を使い、ユーザー本人の辞書により近い位置から観測とReceptionを行う。**
+
+frameの各要素は本人入力のevidence refへ戻れ、永続的人格／真実／診断ではなく、新しい本人入力と本人訂正で更新できる。current inputをpast modelより優先し、automatic agreement、personality fixation、cause promotionを`0`とする。frame自体をvisible evidenceにせず、visible claimはcurrent inputまたはeligible owned historyへ戻す。
+
+許可できるcross-core contextはuser-owned source、user-confirmed情報、original sourceへ戻れるsafe projectionだけである。Piece生成本文、Analysis推定文、Analysis IF route、past Emlis observation bodyを拒否する。current `cross_core_context` payloadは実装時にactual source roleを確認し、このallowed subsetだけに絞る。
+
+### 18.5 Actual asset disposition
+
+- `emlis_ai_reply_service.py::render_emlis_ai_reply`はaccepted cutoverまでcurrent active owner exact1として維持する。current surfaceをAS_IS継承しない。
+- `emlis_ai_capability.py`、`emlis_ai_context_service.py`、`emlis_ai_user_model_store.py`、owned-history search、P5、P6、Free history boundary testsを`ADAPT_AND_INHERIT`する。
+- capabilityへquestion budgetとLayer contractを追加する。
+- context serviceへsame-thread supplemental lineage、eligible-owned-history、cross-core derived-artifact rejectionを追加する。
+- user model storeへcurrent-input precedence、user correction、frame non-evidenceを追加する。
+- P5／P6のeligibility、scope、guard、relation classificationは継承できるが、generic fixed visible bodyは継承しない。
+- Reception-before-question guard、input material bundle、source partitionをadaptする。
+- `TodayQuestion`は別商品として維持し、Emlis clarificationへ統合しない。
+- PR #3はsource、unknown、contract、test、failure knowledgeだけをadaptし、Product Read FAIL surfaceを継承しない。
+- PR #2はusable symbol、test、failure knowledgeだけを移し、wrapper ingress／large recovery shellをCMEE入口にしない。
+
+### 18.6 Product vertical exact3
+
+```text
+Vertical 1 — Layer 1／2:
+  actual current input
+  -> input-specific observation
+  -> Layer 1
+  -> bound Human Reception
+  -> Layer 2
+  -> body-full Product Read
+
+Vertical 2 — question／refined Layer 1／2:
+  accepted Layer 1／2 quality
+  -> plan budget + explicit continue
+  -> question exact1
+  -> supplemental answer
+  -> cumulative source prefix
+  -> refined Layer 1／2
+  -> sequential lifecycle Product Read
+
+Vertical 3 — Layer 3:
+  accepted Layer 1／2 quality
+  -> Plus／Premium
+  -> eligible owned history
+  -> P5 guard
+  -> input-specific history connection
+  -> Layer 3 0..1
+  -> history-continuity Product Read
+```
+
+各Product Readを別claimとして評価し、一つのPASSを残りへ流用しない。Vertical 1は全planのLayer 1／2 actual body-full quality、Vertical 2はquestion／supplemental／refined lifecycle、Vertical 3はhistory continuityを読む。machine GREEN、shared guard PASS、PR #3 structural 8/8をProduct Read PASSへ換算しない。
+
+### 18.7 Completion and implementation boundary
+
+この完成版contractは、次のremaining logical responsibilityをEmlis ownerに残す。
+
+- `NB-F01`: Layer 1／2 input-specific observation／Reception realizer correction。
+- `NB-F02`: plan別sequential question lifecycle。
+- `NB-F03`: input-history thread persistence／artifact linkage。
+- `NB-F04`: Plus／Premium Layer 3 history continuity integration／realizer。
+
+これらはnew file count、implementation approval、runtime activationではない。exact DB／API／RN／persistence、Premium cross-core payload、production cutoverはHOLDまたはseparate Mash approvalであり、本sectionだけで開始しない。

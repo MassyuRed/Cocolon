@@ -1,9 +1,10 @@
 # CMEE V1 Shared Kernel / Runtime Contracts 詳細設計
 
 - document id: `cocolon.cmee.v1.shared_kernel.detailed_design`
-- revision date: `2026-08-17 JST`
+- revision date: `2026-08-21 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - Phase 2 product-route verdict: `ADOPT_WITH_BOUNDED_CORRECTIONS_REFLECTED`
+- Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 - canonical field / ref / version owner: `05_json_schema_and_versioning.md`
 - implementation / cutover / dependency effect: `0`
 - parent: `00_read_first.md`
@@ -631,7 +632,7 @@ schema / interface testだけではcompletion 0である。
 
 ## 15. Emlis V1-A Route B retained semantic constraints
 
-旧L3-R／P0／P0-R1のpacket、body identity、Gate、Receipt、controller、executor、FD、旧approval orderはhistorical operational shellであり、shared kernelのruntime／implementation prerequisite／authorityへ移さない。ここで保持するのはmeaning sovereignty、unknown、no-promotion、one clarification、immutable refinement、no fallback等のusable semantic／failure knowledgeだけである。
+旧L3-R／P0／P0-R1のpacket、body identity、Gate、Receipt、controller、executor、FD、旧approval orderはhistorical operational shellであり、shared kernelのruntime／implementation prerequisite／authorityへ移さない。ここで保持するのはmeaning sovereignty、unknown、no-promotion、一roundで問うtarget unknown exact1、immutable refinement、no fallback等のusable semantic／failure knowledgeだけである。thread全体のquestion上限は後述§16.3のplan contractが所有し、旧exact1 lifecycleをPremiumに再適用しない。
 
 ### 15.1 Provisional Emlis coverage specialization
 
@@ -662,12 +663,82 @@ provider-required routeでproviderがmissing／invalidならroute変更せず、
 - `REJECTED`: source role／version／lineage／privacy／contract identity hard-invalid。
 - `SEPARATE_SAFETY`: high-care materialを既存separate ownerへ分離。production safety ownerの代替ではない。
 
-### 15.4 One clarification and immutable refinement
+### 15.4 One-question-per-round and immutable refinement
 
-clarification requestはcanonical original `SourceEnvelope` lifecycle全体で最大exact1。発行時にbudgetを消費し、retry、regeneration、skip、expiry、ambiguous answerでも復活しない。answerはauthenticated caller-supplied private `SUPPLEMENTAL_ANSWER` SourceEnvelope exact1だけで、original bytes／digest／version、attachment set／admission、original graphをin-place変更しない。target unknown exact1だけをnew graph versionで`USER_CONFIRMED / USER_CORRECTED`にできる。
+各clarification requestはtarget unknown exact1へbindし、一roundで問うquestionもexact1とする。answerはauthenticated caller-supplied private `SUPPLEMENTAL_ANSWER` SourceEnvelope exact1とし、original bytes／digest／version、attachment set／admission、original graph、prior artifactをin-place変更しない。そのroundのtarget unknown exact1だけをnew graph versionで`USER_CONFIRMED / USER_CORRECTED`にできる。
+
+thread全体のbudgetはFree／Plus `0..1`、Premium sequential `0..3`である。Premiumで後続roundを出せるのは、prior refined Layer 1／2を先に返し、material unknownが残り、userがexplicit continueを選び、budgetが残る場合だけである。skip、stop、分からない、無回答は正常終了とし、同一questionのretry／regenerationでbudgetを復活させない。
 
 ### 15.5 Failure knowledgeとcurrent Cycle contractの分離
 
 provider／resource mismatch、crash、invalid payloadはprovider-required routeで`UNAVAILABLE`、fallback 0、automatic retry 0。OOVはliteral source spanとしてだけ保持し、relation／lemma／normalization／meaningを推測しない。raw input／output、question、parser output、surface／lemma／range、private identityはpublic禁止。
 
 一方、251-owner、Cycle001のfresh current denominator／acceptance、current100評価条件はCMEE implementation prerequisiteではないが、本設計からhistorical-only、unnecessaryまたはretiredとは決めない。本設計はそれらを変更・緩和・退役せず、Cycle適用時はfresh Cycle001 current ownerに従う。
+
+## 16. Step 10 integrated shared contract
+
+本sectionは2026-08-21のFinal Dispositionと正式Pro reviewを反映したcurrent target contractである。§15のhistorical Route B知識と矛盾する場合は本sectionを優先する。本docs reflectionはimplementation／test／DB／API／RN／runtime／cutover effect `0`である。
+
+### 16.1 Shared-neutral responsibility and product owners
+
+CMEE sharedはsource identity／role、evidence edge／coverage、generic meaning boundary、unknown／conflict／annotation、version／lineage／trace、render-neutral artifact binding、caller-generated candidate common guardと、actual evidenceがあるneutral value signalだけを所有する。
+
+- Emlisがsource adoption profile、observation judgment、Layer 1／2／3、question decision／sequential lifecycle、voiceを所有する。
+- Pieceがsource inclusion choice、meaning preservation、canonical text、format selection、visual recipe、recipient-visible lifecycleを所有する。
+- Analysisがoccasion／observed claim／route induction、text + graph、IF、SavedRouteIntent、future external retentionを所有する。
+
+各productのauth、physical persistence、RLS、access、quota、visibility、deleteはproduct lifecycle ownerに残す。CMEE sharedをnew DB／permission ownerにしない。`CoreTextComposer`はcaller-generated candidateのshared guardであり、三coreの本文generatorではない。
+
+### 16.2 Emlis input-history thread and source-role boundary
+
+一件のoriginal inputを中心に、次を生成順で同じ`thread_id`／`thread_sequence`へ保存する。
+
+```text
+no question:
+  ORIGINAL_INPUT -> LAYER_1 -> LAYER_2 -> eligible LAYER_3 0..1
+
+with question:
+  ORIGINAL_INPUT
+  -> round 0 LAYER_1 -> round 0 LAYER_2
+  -> QUESTION
+     -> skip / stop / no answer: NORMAL_TERMINAL
+        (SUPPLEMENTAL_ANSWER 0, refined artifact 0)
+     -> "unknown" reply / ambiguous answer: SUPPLEMENTAL_ANSWER
+        -> NORMAL_TERMINAL (refined artifact 0)
+     -> authenticated usable answer: SUPPLEMENTAL_ANSWER
+        -> refined LAYER_1 -> refined LAYER_2
+        -> plan budget内の後続round
+  -> eligible LAYER_3 0..1（exact insertion positionはHOLD）
+```
+
+`ORIGINAL_INPUT`と`SUPPLEMENTAL_ANSWER` 1..3だけが`USER_OWNED_SOURCE`である。Layer 1／2／3、question textは`DERIVED_EMLIS_ARTIFACT`であり、同じthreadに保存してもsemantic sourceへ昇格させない。later roundはearlier source／artifactをoverwrite／deleteせず、originalとsupplemental answerを別role／version／round lineageで保持する。existing inputのauth／access／delete lifecycleから孤立したartifact storeを作らない。exact DB／table／API／RN pathはactual fit-gapまでHOLDとする。
+
+### 16.3 Plan source and question boundary
+
+| Plan | Emlis source scope | question budget | visible layer |
+|---|---|---:|---|
+| Free | current threadのoriginal + same-thread supplementalのみ | 0..1 | Layer 1 + Layer 2 |
+| Plus | current thread + eligible owned history | 0..1 | Layer 1 + Layer 2 + eligible Layer 3 0..1 |
+| Premium | current thread + eligible owned history + evidence-bound interpretive frame + allowed user-owned cross-core context | sequential 0..3 | Layer 1 + Layer 2 + eligible Layer 3 0..1 |
+
+Freeもthread／artifactを保存するが、別入力の次回Emlis生成sourceには使わない。same-thread supplemental answerは有料の過去履歴利用へ数えない。
+
+Premiumの中心表現は次のとおり固定する。
+
+> **Premiumでは、ユーザーの蓄積した本人情報から作られた、根拠付き・暫定的・修正可能な「ユーザー固有の解釈フレーム」を使い、ユーザー本人の辞書により近い位置から観測とReceptionを行う。**
+
+frameは根拠へ戻れる、暫定的、user correctionで修正可能、current-input precedenceとする。frame自体はvisible evidenceではなく、automatic agreement／personality fixation／diagnosis／cause promotionは`0`である。許可するcross-core contextはuser-owned source、user-confirmed情報、original sourceへ戻れるsafe projectionだけとし、Piece生成本文、Analysis推定／IF、過去Emlis本文を拒否する。
+
+### 16.4 Cross-core source use
+
+- Analysisはoriginal + supplemental answerを補足根拠として使えるが、supplemental answerを別occasion／別recordへ数えない。
+- Pieceはoriginalを使い、supplemental answerはuserが「この回答も含める」と明示した時だけ使う。
+- Analysis／PieceはEmlis Layer 1／2／3、question textをsourceにしない。
+
+### 16.5 Layer ownership
+
+- Layer 1「見えたこと」はcurrent-input observationであり、P6 Structure Insightのcurrent input内のstructure insightを含められる。全plan共通。
+- Layer 2「Emlisから」はLayer 1 claimへbindしたHuman Receptionであり、新しい本人事実を作らない。全plan共通。
+- Layer 3「記録の線」はP5 User Label Connectionをadaptした、current inputとeligible owned historyの接続である。Plus／Premiumのみ、条件付き`0..1`。
+
+Layer 3はcurrent inputが十分に観測済み、eligible owned historyとmultiple evidence recordsがあり、current inputが中心のままで、low-informationまたはsafety／high-careでなく、personality／cause／other-intent promotionがない場合だけ出す。不成立はLayer 1／2だけの正常終了とする。Layer 3をLayer 1／2の品質不足の回避路にしない。UI最終名称はHOLD、暫定推奨は「これまでの記録から」とする。

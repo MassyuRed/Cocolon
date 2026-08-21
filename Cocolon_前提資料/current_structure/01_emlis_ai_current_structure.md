@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_emlis_ai_current_structure
 title: "EmlisAI構造 — Current Structure"
-revision_date: "2026-08-15 JST"
+revision_date: "2026-08-21 JST"
 document_role: "EMLIS_AI_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -23,11 +23,11 @@ EmlisAIの安定した商品目的、production経路、NLS v3／Cycle001 WIP、
 
 EmlisAIは、ユーザーの現在入力、選択感情、category、行動、時点、適格なowned historyを、入力直後に「読まれた形」へ変える。
 
-Current product destinationの中心は次の二つであり、三つ目はdesigned futureである。
+Current product destinationの中心は次の二つであり、plan別thread／問い／履歴接続はdesigned futureである。
 
-1. 今の状態、関係、変化を根拠の範囲で観測する。
-2. 具体的な観測claimへ結び付いたEmlisからの人間的な受け取りを返す。
-3. DESIGNED_NOT_IMPLEMENTED: 条件を満たす場合だけ、記録の線、構造の気づき、または一点の問いへ進む。
+1. Layer 1「見えたこと」として、今の状態、関係、変化を根拠の範囲で観測する。current input内の構造気づきは全planのLayer 1に含む。
+2. Layer 2「Emlisから」として、具体的な観測claimへ結び付いた人間的な受け取りを返す。
+3. DESIGNED_NOT_IMPLEMENTED: 各roundで重要なunknownが残る場合だけplan budget内の一点を問い、回答分だけLayer 1／2を更新する。Plus／Premiumは条件成立時だけLayer 3「記録の線」を0..1加える。
 
 単なる復唱、要約、テンプレ共感、診断、人格決め、原因の断定、相手の意図の推測ではない。
 
@@ -63,15 +63,40 @@ NLS v3 Step10 public routingは同file内でdisabledであり、Cycle001 candida
 
 将来のEmlis問いsystemは、質問だけを返すchat routeではない。
 
-    normal observation
-    limited observation
-    pre-question observation + bound reception
-    one clarification request
-    supplemental answer as separate source
-    refined observation
+    original input as USER_OWNED_SOURCE
+      -> round 0 Layer 1 + Layer 2
+      -> if important unknown remains and plan budget remains:
+           question exact1
+           -> supplemental answer as a separate USER_OWNED_SOURCE
+           -> refined Layer 1 + Layer 2
+           -> next sequential round only when allowed
+      -> Plus/Premium and eligibility satisfied:
+           Layer 3 0..1
 
-observation stage、問い要否decision、visible artifactを分離する。
-問いdecisionはcontrol lineageでありsemantic sourceではない。回答だけがsupplemental sourceとなり、original inputを上書きしない。
+observation stage、問い要否decision、visible artifactを分離する。Free／Plusのquestion budgetはthread全体で0..1、Premiumは逐次0..3である。一画面へ複数問を一括表示せず、skip、stop、分からない、無回答を正常終了として扱う。
+
+問いdecisionとquestion本文はcontrol／derived lineageでありsemantic sourceではない。回答だけがsupplemental sourceとなり、original inputを上書きしない。問いがない場合もoriginal、Layer 1、Layer 2を同じinput-history threadへ順番に保存する。
+
+### 2.4 Plan別source・artifact contract
+
+| Plan | Allowed user-owned source | Rejected source | Visible target | Question budget |
+|---|---|---|---|---|
+| Free | current threadのoriginalとsame-thread supplemental answers | past input、derived user model、cross-core context | Layer 1、Layer 2。Layer 3なし | thread全体で0..1 |
+| Plus | current threadとeligible owned history | 許可外cross-core derived artifact | Layer 1、Layer 2、条件成立時Layer 3 0..1 | thread全体で0..1 |
+| Premium | current thread、eligible owned history、許可済み本人context | Piece生成本文、Analysis推定／IF、過去Emlis本文 | Layer 1、Layer 2、条件成立時Layer 3 0..1 | sequential 0..3 |
+
+Premiumの商品contractの中心表現は次のとおり。
+
+> **Premiumでは、ユーザーの蓄積した本人情報から作られた、根拠付き・暫定的・修正可能な「ユーザー固有の解釈フレーム」を使い、ユーザー本人の辞書により近い位置から観測とReceptionを行う。**
+
+interpretive frameは本人情報から導く処理境界であり、本人が直接述べたsourceでもvisible evidenceでもない。本人は参照範囲を確認・修正・拒否でき、sourceへ戻れない主張、許可外cross-core derived artifact、診断・人格固定・他者意図推定を加えない。
+
+### 2.5 Layerと既存資産の位置
+
+- Layer 1「見えたこと」は入力固有の観測であり、P6 Structure Insightのrelation classification／guardをadaptしてcurrent input内の構造気づきを全planへ残す。
+- Layer 2「Emlisから」はLayer 1の観測claimへ結び付いたHuman Receptionであり、独立した根拠なし断定にしない。
+- Layer 3「記録の線」は今回入力とeligible owned historyの具体的なcontinuityであり、P5 User Label Connectionのeligibility／guard／scopeをadaptしてPlus／Premiumだけに条件付き0..1で出す。
+- capability、context、user model、history search、P5、P6、Free history boundary testsはADAPT_AND_INHERIT候補である。ただしP5／P6のgeneric fixed surfaceをtarget visible bodyとしてREUSE_AS_ISしない。
 
 ## 3. 問いに関するexact3分類
 
@@ -79,7 +104,7 @@ observation stage、問い要否decision、visible artifactを分離する。
 |---|---|---|
 | TodayQuestion product | CURRENT_ACTUAL / 別product route | ai/services/ai_inference/api_today_question.py、ai/services/ai_inference/today_question_store.py。Emlis内部問いと混同しない |
 | Emlis internal question candidate | DORMANT_OR_PARTIAL | ai/services/ai_inference/emlis_ai_internal_question_service.py、ai/services/ai_inference/emlis_ai_question_dominance_guard.pyは存在するがcurrent reply serviceから未接続 |
-| Emlis observation-and-question system | DESIGNED_NOT_IMPLEMENTED | observation-first、問いは必要な一点だけ、skip可能、同一cardでrefined observation |
+| Emlis observation-and-question system | DESIGNED_NOT_IMPLEMENTED | observation-first、各roundの問いはexact1、Free／Plus 0..1、Premium sequential 0..3、skip可能、同じthreadでrefined observation |
 
 問い関連fileの存在を、問いsystemの商品完成へ変換しない。
 
@@ -208,7 +233,7 @@ Route Uまたはcontract変更は別Mash LEVEL_3判断が必要であり、こ�
 - 根拠のない原因、人格、診断、他者意図、未来保証を追加しない。
 - ObservationとEmlis Receptionを同義反復にしない。
 - unknownを埋めず、通常観測、限定観測、問い、separate safetyを分ける。
-- 問いは観測と受け取りの後、一点だけ、skip可能。問い先行、詰問、毎回の質問ラリーをしない。
+- 問いは各roundの観測と受け取りの後にexact1だけ、skip可能。Free／Plus 0..1、Premium sequential 0..3のbudgetを超えず、問い先行、詰問、一括質問、無条件の質問ラリーをしない。
 - emergency／high-care surfaceはseparate safety ownerを使う。
 
 ### Acceptance and privacy
@@ -222,10 +247,10 @@ Route Uまたはcontract変更は別Mash LEVEL_3判断が必要であり、こ�
 
 1. production I5とNLS v3／Cycle001の二経路が存在し、統合またはcutoverは未承認。
 2. Japanese predicate／argument governing authority 251/251は未成立。
-3. Emlis observation-and-question systemは商品完成未確認。
+3. Emlis input-history thread、plan別question lifecycle、refined Layer 1／2、Plus／Premium Layer 3は商品完成未確認。
 4. mainのCycle current navigationはDraft #29より古い。
 5. active planの一部metadataにdraft lifecycle表記が残るため、current actual判断では08とremote factsを優先する。
-6. CMEEは設計候補であり、Emlis V1-A implementation／Cycle re-entryは未承認。
+6. CMEEは設計候補であり、Emlis vertical exact3のimplementation／Cycle re-entryは未承認。
 
 CMEE Emlis detailed design candidate:
 
@@ -233,7 +258,17 @@ CMEE Emlis detailed design candidate:
 
 このpointerはcurrent production ownerまたはCycle navigationを変更しない。provider / acceptance contractのcurrent resultは`NO_SAFE_CMEE_V1A_CANDIDATE_STOP`であり、new Mash LEVEL_3判断までimplementationを開始しない。
 
-## 9. History pointers
+## 9. Step 10 reviewed design synchronization
+
+このmapは次をcanonical current-structure readingへ同期する。
+
+    DOCUMENT_ID = CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2
+    DESIGN_IDENTITY = CMEE_THREE_CORE_INTEGRATED_DESIGN_20260821
+    FORMAL_PRO_REVIEW = CONSUMED_EXACTLY_ONCE
+
+target実装順は、Vertical 1 Layer 1／2、Vertical 2 question／refined Layer 1／2、Vertical 3 Plus／Premium Layer 3である。現存するcapability、context、user model、history、P5、P6を移行候補として先に照合し、不足するproduct integrationだけをNB-F01..NB-F04として残す。これはruntime接続、API／DB／RN変更、activation、Product Read合格を意味しない。
+
+## 10. History pointers
 
 - 2026-05〜07の実装経緯: EmlisAIの実装済み資料/
 - milestone timeline: Cocolon_前提資料/07_latest_snapshot_diff.md
@@ -243,7 +278,7 @@ CMEE Emlis detailed design candidate:
 
 履歴の古いnext actionをcurrentへ復活させない。
 
-## 10. Map update triggers
+## 11. Map update triggers
 
 次を変更するworkは、このfileを同じwrite unitで更新する。
 
@@ -257,13 +292,16 @@ CMEE Emlis detailed design candidate:
 
 内部logicだけのfixで上記が不変ならSTRUCTURE_MAP_DELTA_NONEと理由をPRへ記す。
 
-## 11. Last verified refs
+## 12. Last verified refs
 
     Cocolon main
       de9c3d985053bbaaa7fc0d396e688cc2097ece40
 
     Cocolon Draft PR #29
       0854e21f92f841fd2cfdcef08b9e3117fc93f96a
+
+    Cocolon Draft PR #30 Step 10 reflection preimage
+      d29042f44e882110514b74dcc6a1b3f31ec746e6
 
     mashos-api main
       a8ca4ddf7b7ae76bf7b3d73e74e3a5808d623428

@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_analysis_current_structure
 title: "分析構造 — Current Structure"
-revision_date: "2026-08-15 JST"
+revision_date: "2026-08-21 JST"
 document_role: "ANALYSIS_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -34,6 +34,8 @@ automatic_progression: false
 
 そのrouteへ、守っているもの、負荷、unknown、conflict、期間差を別claimとして添える。
 
+分析構造のfinal product artifactは文章だけでも図だけでもなく、text + visual graphである。両者は同じcanonical artifact identity / versionから投影する。
+
 将来のIF routeは、observed current routeを上書きする正解、未来予測、命令、最適化ではない。
 observed routeをbaseとし、ユーザーが選んだbranch intent／constraintから、別identityの仮想候補を並列提示する。
 
@@ -47,7 +49,9 @@ observed routeをbaseとし、ユーザーが選んだbranch intent／constraint
 | protective／burden | formal typed visible ownerは未実装 | direct observationとinterpretive hypothesisを型分離 |
 | IF route | owner pathなし、runtime exact0 | HypotheticalScenarioGraph + IfRouteSimulation |
 | saved intent | owner pathなし | SavedRouteIntentをobserved／simulatedと別identityで保存 |
-| visual | current Watashi Map cards | observed／IF／unknownを見分けられるgraph + accessible text |
+| visual | current Watashi Map cards | text + visual graphを同一canonical identityで必須化 |
+| plan access | current lifecycleに存在 | Free latest observed only／prior artifact history access 0／period comparison 0／central route 0..1。Plusはhistory / comparison、Premiumは別approval後のV1-E / SavedRouteIntent |
+| external retention | current CMEE ownerなし | 将来方向だけ保持。initial V1-D / V1-E mandatory export false |
 
 Current frontend／backendにIF route authorityはない。future designをcurrent runtimeへ数えない。
 
@@ -73,17 +77,24 @@ Current frontend／backendにIF route authorityはない。future designをcurre
 
 Current watashi_map_service.pyはpresentation-orientedなfixed four-step routeを生成し、generic fallbackを含む。これはfuture CMEEのsource-grounded truth graph authorityではない。
 
-### 3.3 Future observed and IF route
+### 3.3 Future V1-D observed and V1-E IF route
 
     period source-set freeze
       -> event-frame extraction
       -> cross-record evidence graph
       -> observed route induction
       -> protective / burden annotations
-      -> period comparison
-      -> optional user-requested IF scenario
+      -> plan-gated period comparison
       -> text + visual projection
       -> grounding / epistemic gates
+      -> V1-D observed Product Read
+
+    accepted V1-D observed map
+      -> optional user-requested SELF_ONLY IF scenario
+      -> text + visual projection
+      -> V1-E IF Product Read
+
+V1-DはV1-Eがなくても独立completeにする。V1-EはV1-D Product Read後の別approvalまでruntime exact0とする。
 
 ## 4. Current architecture components and files
 
@@ -150,11 +161,11 @@ current testsは主にpayload／label／presentation contractを守る。evidenc
 SourceEnvelopeへ置けるのは、owner／period／version／privacyが固定された真正入力だけ。
 
 - period saved inputs
-- allowed supplemental source
+- original recordに従属するallowed supplemental source
 - simulation session material
 - user-confirmed branch intent／constraints
 
-observed claim、simulated route、saved intentをgrounded source roleへ入れない。
+supplemental answerは補足根拠として別source roleで保持できるが、別occasion、別record、独立した期間sampleに数えない。Emlis Layer 1／Layer 2／question／Layer 3、Piece生成本文、observed claim、simulated route、saved intentをgrounded source roleへ入れない。
 
 ### 5.2 Derived artifacts
 
@@ -169,6 +180,42 @@ observed claim、simulated route、saved intentをgrounded source roleへ入れ�
 latest pointer、history item、detail、text、graphは同じcanonical artifact_id@versionへ解決する。period artifact同士を同じidentityにしない。
 
 future `watashi.map.v2`では、private canonical stored artifactとAPI / RN向けsafe projectionを分ける。projectionは`projection_of = artifact_id@version`で同一identityへ戻れるが、raw body、private source ID、private evidence locator、source digestを持たない。access policyはAnalysis ownerに残り、audienceごとのprojection bytesがprivate stored JSONと同一である必要はない。
+
+### 5.3 V1-D minimum route and plan boundary
+
+「今よく通る流れ」のcentral routeは0..1。record count 3以上、distinct occasion count 2以上、same orderまたはrelationがactual evidenceに結び付く場合だけexact1にする。条件不成立ではcentral route exact0とし、partial observation + unknown / not enoughを返してgeneric routeを補わない。
+
+occasionは日付ではなく、一回の出来事／機会で数える。同一出来事を複数入力に分けた場合やsupplemental answerは水増ししない。
+
+| Plan | V1-D product access | V1-E |
+|---|---|---|
+| Free | latest observed artifact only、prior Analysis artifact history access 0、period comparison 0、central route 0..1 | 0 |
+| Plus | available evidence-backed complete observed map、Analysis artifact history / comparison | 0 |
+| Premium | Plus範囲 | separately approved IF + SavedRouteIntent |
+
+Freeのhistory access 0は過去Analysis artifactの閲覧と期間比較の提供が0という商品境界である。V1-Dが過去の保存入力を分析sourceにできないという意味ではなく、Freeでもrecord count 3以上 + distinct occasion count 2以上を維持する。
+
+### 5.4 Provisional UI and future external retention
+
+UI方向の候補は次とする。
+
+```text
+分析画面
+[ 今のわたしマップ ] [ わたしシミュレーション ]
+
+わたしシミュレーション:
+  今のルート
+  分かれ道
+  ifルート候補
+  条件
+  unknown
+```
+
+価値判断を含みやすい「正規ルート」ではなく「今のルート」を推奨する。final navigation、tab / swipe / separate screen、text量、graph scale、animationはHOLDである。
+
+分析結果のアプリ外保持は将来方向として残す。対象候補は今のわたしマップ、わたしシミュレーション全体、個別ifルート、短い概要。形式候補はPDF、image、overview image + full PDFその他だが、exact format / coverage / UI / renderer / storageは`FUTURE_ANALYSIS_EXTERNAL_RETENTION_HOLD`である。initial V1-D mandatory exportとinitial V1-E mandatory exportはどちらもfalse。Piece postingは別productで、Analysis -> Piece direct connectionは0とする。
+
+future extensionに備え、canonical identity / version、text / graphの同一identity、render-neutral export projectionを追加できる境界、Analysis lifecycle ownerだけを固定する。SavedRouteIntentはin-app saveだがexternal retentionの前提にしない。
 
 ## 6. Observed／annotation／IFの型分離
 
@@ -205,6 +252,8 @@ missing reasonとscopeを持つ別claim／gap marker。observed factを作るた
 - scenario candidate exact1〜3を意味の違う候補として並列提示する。
 - scenario同士をbest／optimalへrankしない。
 - common comparatorが選べるのは同じscenarioの文章／visual／layout realization差だけ。
+- SELF_ONLYに限定し、health / medical IFを生成しない。追加確認後に生成可とする例外は0。
+- other personはcontext evidenceに限定し、相手の意図、反応、関係の結果を推定しない。
 
 ## 7. Protected invariants
 
@@ -229,13 +278,15 @@ missing reasonとscopeを持つ別claim／gap marker。observed factを作るた
 - observedはsolid lane、simulatedは明示label付きdashed lane、unknownはbroken／dottedで分ける。
 - 色だけで区別せずlabel、icon、textを併用する。
 - graphとaccessible linear textを同じartifact identityから投影する。
+- text-onlyまたはgraph-onlyをfinal product artifactとしない。
 - actual deviceで観測／仮想／unknownを判別できることをProduct Readする。
 
 ### Lifecycle and acceptance
 
 - tier、latest、history、detail、refreshの既存product lifecycleはAnalysis ownerに残す。
 - machine verification、human Product Read、runtime readinessを相互変換しない。
-- high-careでunsupported IFは生成停止またはAnalysis固有の短い問いへ進む。
+- health / medical IFおよびrelationship outcome / other-person intent / reaction IFは生成停止。emergency / high-riskはseparate Safety ownerへ渡す。
+- machine verification、human Product Read、runtime readinessにimage / PDF / external exportをinitial mandatory gateとして追加しない。
 
 ## 8. Product／design owners
 
@@ -257,6 +308,8 @@ missing reasonとscopeを持つ別claim／gap marker。observed factを作るた
 4. IF route／HypotheticalScenarioGraph／SavedRouteIntentのruntime ownerはexact0。
 5. Analysis専用Product Read packetとactual-device IF map verificationは未実行。
 6. CMEE Analysis connectionはfuture phaseであり、このmap作成から開始しない。
+7. final navigation / layout / text量 / graph scale / animationはHOLDで、provisional UI directionのみ固定した。
+8. external retentionのexact format / coverage / UI / renderer / storageはHOLDで、initial V1-D / V1-E mandatory exportはfalseである。
 
 CMEE Analysis detailed design candidate:
 

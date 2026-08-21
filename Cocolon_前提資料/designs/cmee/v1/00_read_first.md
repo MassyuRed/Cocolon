@@ -1,7 +1,10 @@
 # CMEE V1 詳細設計 — Read First
 
 - document id: `cocolon.cmee.v1.detailed_design.read_first`
-- revision date: `2026-08-17 JST`
+- revision date: `2026-08-21 JST`
+- Step 10 final document id: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2`
+- Step 10 design identity: `CMEE_THREE_CORE_INTEGRATED_DESIGN_20260821`
+- Step 10 Pro review: `CMEE_STEP10_PRO_SINGLE_PRODUCT_ROUTE_REVIEW_20260821 / CONSUMED_EXACTLY_ONCE`
 - decision owner: `Mash`
 - technical design owner: `Ultra華恋`
 - architecture parent: [Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md](../Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md)
@@ -16,6 +19,8 @@
 - current implementation rule: `PRODUCT_QUALITY_DELTA_GT_0_AND_MASH_CONFIRMED_ONLY`
 - current implementation state: `DRAFT_WIP_DISABLED_PRODUCT_FAIL`
 - Phase 2 design correction state: `TOP_LEVEL_NAVIGATION_ALIGNED`
+- Step 10 design correction state: `FINAL_INTEGRATED_CONTRACT_REFLECTED_EXISTING_EXACT14`
+- new parallel canonical design files: `0`
 - current authorized next implementation: `NONE`
 - automatic progression: `false`
 
@@ -27,9 +32,9 @@
 
 起点は旧G0–G10の補助経路ではなく、次の商品job exact3とする。
 
-1. EmlisAI: 入力を「読まれた形」の観測へ変え、必要な場合だけ一点を問い、回答分だけ観測を深める。
-2. Piece: 保存済み入力の意味を、本人の表現として他者へ共有できるcanonical textと画像artifactへ変える。
-3. 分析構造: 期間sourceから現在の自己構造routeを根拠付きで形にし、観測と分離したIF routeを扱う。
+1. EmlisAI: 入力をLayer 1「見えたこと」とLayer 2「Emlisから」へ変え、plan budget内で各roundの一点を問い、Plus／Premiumは条件成立時だけLayer 3「記録の線」を加える。
+2. Piece: 保存済み入力の意味を、本人の表現として他者へ共有できるcanonical textと画像artifactへ変え、recipient-visible route exact1以上まで届ける。
+3. 分析構造: 期間sourceから現在の自己構造routeをsame-identityのtext＋visual graphで形にし、観測と分離したIF routeを扱う。external retentionはfuture HOLDとする。
 
 CMEEは三商品へ共通する意味保持・artifact生成のtechnical coreである。独立したuser-facing商品、第四の商品中核、共通voice、万能text generatorではない。
 
@@ -108,6 +113,83 @@ Product Read、PieceまたはAnalysis activationへ自動進行しない。
 
 一つのphase資料を新設せず、既存ownerを順に修正する。第3段階のcurrent structure map／商品経路地図修正は、
 上記design ownerの責任境界が揃った後に別write unitで行う。
+
+### 0.3 Step 10 final integrated contract routing
+
+2026-08-21のStep 10では、Step 9-B Final Disposition、MashのQ1〜Q3とplan判断、actual evidence、
+Ultra stable V1に対するPro華恋の一回限りの正式reviewを、existing canonical exact14へ同期した。
+Pro reviewは`CONSUMED_EXACTLY_ONCE`で、二回目は不要である。
+
+current contractの短いroutingは次である。詳細は各exact ownerを読む。
+
+| Contract | Canonical owner |
+|---|---|
+| source role、thread sequence、shared neutral boundary | `01_shared_kernel_and_runtime_contracts.md` |
+| Emlis Free／Plus／Premium、Premium frame、Layer 1／2／3、question | `02_emlis_v1a_detailed_design.md` |
+| Piece exact3 plan selection、recipient-visible final acceptance | `03_piece_v1c_detailed_design.md` |
+| Analysis text＋graph、Free latest-only、IF、future external retention HOLD | `04_analysis_v1d_v1e_detailed_design.md` |
+| logical thread／plan／layer／Piece／Analysis fields and invariants | `05_json_schema_and_versioning.md` |
+| asset migration、remaining exact10、vertical order、verification | `06_implementation_order_migration_and_verification.md` |
+
+cross-core source boundary:
+
+- user originalとsupplemental answerは本人sourceである。
+- Emlis Layer 1／2／3とquestionはderived artifactで、Analysis／Pieceのsourceにしない。
+- Analysisはsupplemental answerをoriginal recordの補足根拠として使えても別occasionへ数えない。
+- Pieceは本人が明示的に含めたsupplemental answerだけを使える。
+- Premium cross-coreはuser-owned／user-confirmed／source-resolvable safe projectionだけを許可し、
+  Piece生成本文、Analysis推定／IF、過去Emlis本文を拒否する。
+
+Emlis plan／Layer:
+
+```text
+Free:
+  current thread only
+  Layer 1 + Layer 2
+  question 0..1
+  Layer 3 = 0
+
+Plus:
+  current thread + eligible owned history
+  Layer 1 + Layer 2 + conditional Layer 3 0..1
+  question 0..1
+
+Premium:
+  Plus + evidence-bound provisional correctable interpretive frame
+  + allowed cross-core user context
+  Layer 1 + Layer 2 + conditional Layer 3 0..1
+  question sequential 0..3
+```
+
+P6 current-input structure insightは全planのLayer 1へ、P5 history continuityはPlus／PremiumのLayer 3へ置く。
+Freeでもthreadを保存するが、別入力の生成sourceとしてpast threadを利用しない。
+
+target scheduling order:
+
+1. Emlis Layer 1／2。
+2. Emlis question／refined Layer 1／2。
+3. Emlis Plus／Premium Layer 3。
+4. Piece text＋visual＋recipient-visible route。
+5. Analysis V1-D observed text＋graph。
+6. Analysis V1-E SELF_ONLY IF。
+
+これはautomatic progressionまたはcross-core hard dependencyではない。各verticalの終点はactual artifactと
+core-specific Product Readである。Cycle001はfresh current ownerが持つseparate external proof laneで、
+docs、Layer 3、Piece、Analysisのautomatic prerequisiteではない。
+
+Step 10 canonical synchronization set:
+
+```text
+parent Final Technical Design = exact1
+detailed suite = exact7
+current structure = exact5
+Emlis long-term roadmap = exact1
+total existing paths = exact14
+new parallel canonical design file = 0
+```
+
+remaining `NEW_BUILD_IMPLEMENTATION`はlogical responsibility exact10であり、file countまたはimplementation authorityではない。
+本docs reflectionからsource、test、DB、API、RN、runtime、activation、production、Cycle、Product Read、cleanupへ進行しない。
 
 ## 1. 読む順 exact8
 

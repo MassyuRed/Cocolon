@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
-revision_date: "2026-08-15 JST"
+revision_date: "2026-08-21 JST"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -30,10 +30,11 @@ PieceはQ&A productではない。現行のQ&Aはpre-release legacyであり、f
 |---|---|---|
 | source | emotion／memo payloadを使うlegacy route | owner-authenticated saved_input_id + source version exact1 |
 | text shape | question／answer channel | short_essay、quote、declaration |
+| plan selection | legacy routeの選択contract | Free short_essay fixed／chooser 0、Plus eligible exact3自動、Premium eligible exact3利用者選択 |
 | generation | focus-key／keyword／fixed fallbackを含むold service | source-bound semantic artifact planからcandidate生成 |
 | visual | Q&A modal／card | canonical piece_text + versioned visual recipe + layout plan |
 | image | actual product ownerなし | derived export binary。record／feed source-of-truthはexact0 |
-| lifecycle | legacy preview／publish／Nexus route | preview = record = card = renderer input = export-visible body |
+| lifecycle | legacy preview／publish／Nexus route | preview／saveは中間Product Read。final acceptanceはrecipient-visible route exact1以上 |
 | activation | old user-visible route | V2はcode-disabled／design-only。runtime activationなし |
 
 Current user-visible Pieceはold Q&Aである。将来designが存在することを、V2 runtime完成へ変換しない。
@@ -41,14 +42,16 @@ Current user-visible Pieceはold Q&Aである。将来designが存在するこ�
 ## 3. Target product flow
 
     owner-authenticated saved input
-      -> original / supplemental source partition
+      -> original / explicit user-opt-in supplemental source partition
       -> Piece semantic duties
-      -> eligible format planning
+      -> plan-bound eligible format planning
       -> publicization and safety transform
       -> canonical piece_text
       -> versioned visual recipe + layout plan
       -> immutable preview bundle
-      -> record / visibility / export lifecycle
+      -> preview / save
+      -> actual recipient-visible route
+      -> final Product Read / clean cutover
 
 safety transform後に本人の核が残らない場合、generic文を捏造せずUNAVAILABLEとする。record／quota effectは0。
 
@@ -131,8 +134,8 @@ B02-A testはcurrent mainに存在するため、旧entryのNOT_ACTIVATEDだけ�
 ### Source and meaning
 
 - sourceはowner-authenticated saved_input_id + version／stage snapshot exact1。
-- normal／pre-questionはoriginalのみ。refinedだけoriginal + supplementalを別role／別commitmentで束ねる。
-- Emlis visible body、Emlis internal body、Analysis inference／routeはPiece text source exact0。
+- normal／pre-questionはoriginalのみ。refinedでも、supplemental answerは利用者が「この回答も含める」と明示opt-inした場合だけoriginalと別role／別commitmentで束ねる。
+- Emlis Layer 1／Layer 2／question／Layer 3、Analysis claim／route／IFはPiece text source exact0。
 - subject、stance、object、relation、negation、uncertainty、time、condition、must-keepを変形後も保持する。
 - sourceにない出来事、意志、診断、性格、原因、未来、助言を追加しない。
 
@@ -146,6 +149,13 @@ B02-A testはcurrent mainに存在するため、旧entryのNOT_ACTIVATEDだけ�
 - image binaryはderived exportでありrecord／feed source-of-truthは0。
 - layout fitまたはsafetyが成立しない場合はUNAVAILABLE、record／quota effectは0。
 
+### Plan and quality
+
+- Freeは`short_essay` fixed、chooser 0。
+- Plusは`short_essay`／`quote`／`declaration`のeligible exact3からPiece product ownerが自動選択する。
+- Premiumは同じeligible exact3から利用者が選択できる。
+- 全planでmeaning fidelity、safety、readabilityの最低品質を同等にする。料金差を意味の欠落、安全性低下、読みにくさで作らない。
+
 ### Lifecycle, privacy, and access
 
 - record lifecycleとvisibilityを混同しない。
@@ -154,6 +164,7 @@ B02-A testはcurrent mainに存在するため、旧entryのNOT_ACTIVATEDだけ�
 - publicは全世界公開を意味せず、既存access policyで許可された他者だけが読める。
 - policy外readはRED。
 - external image shareはCocolon内部visibilityとは別境界。外部copyを回収できると主張しない。
+- preview／saveは中間Product Readであり、recipient-visible final acceptanceの代替にしない。
 - publicからprivateへ戻す時は内部feed／cacheをsource deny firstで除去する。
 - deleteはCocolon内conceal／purge。外部保存／SNS copyは回収不能。
 
@@ -165,7 +176,7 @@ V2 activation時:
 - legacy compatibility read adapter 0
 - dual-run／coexistence renderer 0
 - old preview／generation／API／RN／Nexus entry到達可能性0
-- Nexus renderer exact1
+- actual recipient-visible route exact1以上のProduct Read。端末share、Cocolon内部表示、Nexus等のどれをexact routeにするかはactual fit-gapと後続Mash判断までHOLD
 - 初回V2 activation前に、旧Q&A reachability 0、明示UNAVAILABLE、quota 0、single ownerを満たすpre-admitted V2 rollback targetを別Mash判断で固定する。なければ`NO_SAFE_PIECE_V1C_FIRST_CUTOVER_STOP`
 - 以後のrollbackはdeploy / git revertでlast admitted single-owner V2 versionへ戻し、old Q&Aを復活させない。generic runtime safe-disableはpublic behavior / owner exact1を別承認するまで未採用
 
@@ -177,7 +188,7 @@ shared tableのnon-Piece row／consumerは、exact Piece predicateとwriter／re
 2. Standalone comprehensibility: 画像だけで誰の何が伝わるか読める。
 3. Authorship integrity: user-owned meaningであり、Emlis／Analysis voice 0。
 4. Public safety without meaning erasure: unsafe material 0、generic filler 0。
-5. Format fitness: semantic shapeからshort_essay／quote／declarationを選ぶ。
+5. Format fitness: Free short_essay fixed／chooser 0、Plus auto eligible exact3、Premium user-select eligible exact3を守る。
 6. Visual readability: font、contrast、余白、clip／ellipsis 0、actual device確認。
 7. Artifact identity: preview／save／export mismatch 0、version再現性。
 8. User value: 保存／共有したい、他者が誤解しない、商品として成立する。Human Product Read owner。
@@ -190,6 +201,7 @@ shared tableのnon-Piece row／consumerは、exact Piece predicateとwriter／re
 4. B02-Aはcausal RED test bytesだけが先行し、durable execution creditは未確認、implementation required artifactsはabsent。
 5. Piece current entry／manifestのB02-A stateはこのmapと同じwrite unitで同期済みであり、mergeまでDRAFT_CANDIDATEである。
 6. CMEE Piece adapter／runtime activationは別Mash判断まで開始しない。
+7. preview／saveは中間Product Readまでで、final acceptanceに必要なrecipient-visible route exact1は未確定／未実証である。
 
 CMEE Piece detailed design candidate:
 

@@ -1,13 +1,14 @@
 # CMEE V1 — JSON Schema / Identity / Versioning 詳細設計
 
 - document id: `cocolon.cmee.v1.schema_and_versioning.detailed_design`
-- revision date: `2026-08-17 JST`
+- revision date: `2026-08-21 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - Phase 2 product-route verdict: `ADOPT_WITH_BOUNDED_CORRECTIONS_REFLECTED`
 - canonical field / ref / schema / version owner: `THIS_FILE`
 - schema registration: `NOT_REGISTERED`
 - runtime serialization / implementation / cutover effect: `0`
 - DB / API effect: `0`
+- Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 
 ---
 
@@ -2442,14 +2443,112 @@ promotion = NOT_YET_PROMOTED_TO_CROSS_CORE_SHARED_FINAL
 
 ### 16.2 Retained Emlis semantic constraints
 
-Emlis provisional profileは、source／supplemental role分離、owner coverage、unknown／conflict、no-promotion、one clarification、immutable target-only refinement、no fallbackを保持できる。source coverage denominatorとproduct plan duty、positive trace、machine report、human Product Readを別ownerにする。
+Emlis provisional profileは、source／supplemental role分離、owner coverage、unknown／conflict、no-promotion、一round target exact1のquestion、immutable target-only refinement、no fallbackを保持できる。thread budgetは§17が所有する。source coverage denominatorとproduct plan duty、positive trace、machine report、human Product Readを別ownerにする。
 
 providerなしrouteは`SOURCE_OR_USER_EVIDENCE_ONLY`だけで、visible claim全量がdirect EvidenceSpanへbindし、provider-derived meaning／relation／attachment exact0、required source coverage、unknown、polarity／modality／time、no-added-claimを満たす。provider-required failure後のsilent switchは禁止する。`FORMAL_DERIVED`にはnon-null formal admission、provider identity、evidence bindingを必須にする。
 
-clarificationはoriginal source lifecycle全体でexact1以下とし、authenticated supplemental answerをnew SourceEnvelope／new graph versionとしてtarget unknown exact1だけへ適用する。original bytes／digest／version、prior graph、prior artifact identityをin-place変更しない。
+clarificationは各roundでtarget unknown exact1、question exact1、answer exact1とする。thread budgetはFree／Plus `0..1`、Premium sequential `0..3`とし、authenticated supplemental answerをnew SourceEnvelope／new graph versionとして当該target unknownだけへ適用する。original bytes／digest／version、prior answers、prior graph、prior artifact identityをin-place変更しない。旧original lifecycle exact1はhistorical Free／Plus相当の失敗知識としてだけ保持し、Premiumへ適用しない。
 
 ### 16.3 Current Cycle contract and schema separation
 
 251-owner、Cycle001のfresh denominator／acceptance、current100評価条件はCMEE implementation prerequisiteまたはshared schema constantではない。一方、本設計からhistorical-only、unnecessary、relaxedまたはretiredとも決めない。Cycle適用時はfresh Cycle001 current ownerに従い、source-only modeまたは`execution_scope=CYCLE`をacceptance PASSへ変換しない。
 
 本sectionのschema registration、Python dataclass、JSON schema file、DB／API wire、implementation、Cycle／production effectは0である。最初のactual materializationは§14のpre-registration correction ruleに従い、別Mash実装承認なしに開始しない。
+
+## 17. Step 10 integrated logical schema contract
+
+本sectionはFinal Dispositionと正式Pro reviewを反映したcurrent logical ownerである。§0〜16のfield shapeと矛盾する場合は本sectionを優先する。exact physical schema ID、JSON Schema file、DB table／column、API response、RN model、persistence pathはactual fit-gapまでHOLDとし、架空pathまたはunused schemaを先行作成しない。schema registration、runtime serialization、DB／API／RN effectは`0`である。
+
+### 17.1 Emlis input-history thread logical fields
+
+| Field | Logical contract |
+|---|---|
+| `thread_id` | original inputを中心とするEmlis input-history thread identity |
+| `thread_sequence` | same thread内のstrict generation order |
+| `artifact_role` | `USER_OWNED_SOURCE \| DERIVED_EMLIS_ARTIFACT` |
+| `user_source_kind?` | `ORIGINAL_INPUT \| SUPPLEMENTAL_ANSWER` |
+| `derived_artifact_kind?` | `LAYER_1 \| LAYER_2 \| QUESTION \| LAYER_3` |
+| `original_source_ref` | thread rootのversion-qualified original source ref |
+| `plan_tier` | `FREE \| PLUS \| PREMIUM` |
+| `round_index` | initial observation `0`、supplemental後のrefined round `1..3` |
+| `max_question_count_for_plan` | Free／Plus `1`、Premium `3` |
+| `supplemental_source_refs[]` | order-preserving、version-qualified supplemental refs |
+| `prior_observation_artifact_ref?` | lineage only。semantic evidenceではない |
+| `target_unknown_ref?` | question exact1が対象とするunknown ref |
+| `continue_choice?` | userのcontinue／stop／skip／unknown選択 |
+| `round_status` | round lifecycle state |
+| `history_source_eligibility` | owned historyのplan／guard判定 |
+| `interpretive_frame_ref?` | Premium補助frame。visible evidenceではない |
+| `cross_core_source_role?` | allowed user-owned／confirmed／safe projection roleだけ |
+
+`ClarificationRequest.max_answer_count = 1`は一request／一roundのanswer数であり、thread全体のquestion上限ではない。Round 0をquestion budgetへ数えない。
+
+### 17.2 Emlis invariants
+
+- `artifact_role=USER_OWNED_SOURCE`なら`user_source_kind`必須、`derived_artifact_kind`禁止。
+- `artifact_role=DERIVED_EMLIS_ARTIFACT`なら`derived_artifact_kind`必須、`user_source_kind`禁止。
+- originalとsupplemental answersを別role、別version、別round lineageで保持し、later roundによるoverwrite／deleteを禁止する。
+- Layer 1／2／3、question textはderived artifactであり、same thread保存をsemantic evidence昇格へ変換しない。
+- `prior_observation_artifact_ref`はlineageにだけ使う。
+- Free／Plusのquestion countは`0..1`、Premiumはsequential `0..3`。各roundのquestion／answerはexact1以下。
+- Freeはcurrent threadだけをgeneration sourceにし、保存済みthreadを別入力のhistory generation sourceへ使わない。
+- Layer 3はPlus／Premiumかつeligibility成立時だけ`0..1`。Freeは禁止。
+- frameだけからvisible claimを作らず、frame conflict時はcurrent inputを優先し、user correctionを可能にする。
+- allowed Premium cross-core roleはuser-owned source、user-confirmed information、source-resolvable safe projectionだけ。Piece body、Analysis inference／IF、past Emlis bodyを拒否する。
+- existing input auth／access／delete lifecycleから孤立したthread artifactをadmitしない。
+
+### 17.3 Piece and Analysis logical corrections
+
+Pieceの既存contract profileへ次のlogical fieldsを適用する。exact physical field placementはPiece fit-gapまでHOLDとする。
+
+```text
+plan_tier
+source_inclusion_refs[]
+supplemental_user_opt_in
+format_selection_mode
+eligible_formats[]
+selected_format
+selected_format_source
+canonical_text_ref
+visual_spec_ref
+derived_image_ref?
+recipient_visible_route_ref?
+```
+
+Piece invariant:
+
+- eligible format universeは`short_essay | quote | declaration` exact3。
+- Freeは`selected_format=short_essay`、chooser `0`。Plusはeligible exact3からsystem auto。Premiumはeligible exact3からuser select。
+- 全planでmeaning preservation／safety／readabilityのminimum qualityを同じにする。
+- originalとuserが明示opt-inしたsame-thread supplemental `USER_OWNED_SOURCE`だけを許可し、Emlis derived artifact、Analysis claim／route／IFを拒否する。
+- canonical text、visual spec、derived imageはsame artifact identity／versionへbindする。image binaryはderived projectionである。
+- preview／saveはintermediate Product Readであり、`recipient_visible_route_ref`がactual exact1以上で他者が単独で意味を受け取れるまでfinal acceptanceをfalseとする。exact route channelはHOLD。
+
+Analysisはcanonical identity／versionを維持し、text projectionとgraph projectionをsame Analysis artifactへbindする。observed、IF、SavedRouteIntent、optional comment、future exportを別identityにする。
+
+```text
+FUTURE_ANALYSIS_EXTERNAL_RETENTION_HOLD:
+  candidate coverage = current map | whole simulation | individual IF | short overview
+  candidate format = PDF | image | overview+PDF | other
+  initial V1-D mandatory export = false
+  initial V1-E mandatory export = false
+  exact format / coverage / UI / renderer / storage = HOLD
+  lifecycle owner = Analysis
+```
+
+`future_export_projection_ref?`はinitial mandatory fieldではない。SavedRouteIntentはin-app saveであり、external retention prerequisiteにしない。existing safe projection schemaを、external PDF／imageがcurrent実装済みまたはmandatoryである証拠にしない。Piece external routeとAnalysis external retentionを同一identity／ownerへ統合しない。
+
+### 17.4 Integrated schema verification
+
+- no-question threadがoriginal、Layer 1、Layer 2のstrict sequenceを持つ。
+- usable answerがある場合はquestion、answer、refined Layer 1／2、later roundのsequenceが保持される。skip／stop／no answerではquestion artifact後に正常終了し、answerを捏造しない。「分からない」reply／ambiguous answerは`SUPPLEMENTAL_ANSWER`として保存するが、refined artifactを生成せず正常終了する。
+- user-owned source／derived artifact role swap、earlier version overwrite、derived-to-evidence promotionをREDにする。
+- Free past-history／user-model／cross-core source、Free Layer 3、Free question count 2以上をREDにする。
+- Plus unowned history、Plus question count 2以上、eligibilityなしLayer 3をREDにする。
+- Premium question count 4以上、one-screen bulk questions、frame-only visible claim、current-input precedence違反、uncorrectable frameをREDにする。
+- forbidden cross-core derived artifact、Analysis supplemental-as-new-occasion、Piece supplemental-without-opt-inをREDにする。
+- Layer 1、Layer 2、question、Layer 3を別artifact kindとして検証する。Product Read identityはexact3で、Read 1がLayer 1 + Layer 2、Read 2がquestion／supplemental／refined lifecycle、Read 3がLayer 3 history continuityを所有する。
+- Piece plan selection、same-artifact text／visual binding、recipient route前final acceptanceを検証する。
+- Analysis initial mandatory external export、SavedRouteIntentをexport prerequisiteにするshapeをREDにする。
+
+test fixture、schema example、machine reportをgeneration authorityまたはhuman Product Read PASSにしない。

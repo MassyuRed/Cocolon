@@ -1,7 +1,9 @@
 # CMEE V1-D / V1-E — Analysis Observed / IF Route 詳細設計
 
 - document id: `cocolon.cmee.v1d_v1e.analysis_route.detailed_design`
+- revision date: `2026-08-21 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
+- Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 - observed-route runtime state: `NOT_IMPLEMENTED`
 - IF-route runtime state: `NOT_IMPLEMENTED`
 - Analysis activation: `NOT_AUTHORIZED`
@@ -29,16 +31,20 @@ ObservedSelfStructureMap + user-owned branch intent
 
 current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない。IFは未来予測、正解、命令、最適化ではない。
 
+V1-Dの最終商品artifactはtext + visual graphであり、V1-Eがなくても独立してcompleteかつProduct Read可能にする。V1-Eはaccepted V1-D後の別approvalでのみ開始する。
+
 ## 1. Activation boundary
 
-V1-D / V1-Eのdesign contractは先に定義するが、runtime接続は次の順で別承認する。
+V1-D / V1-Eのdesign contractは先に定義する。Step 10のrecommended scheduling positionは次のとおりで、各runtime接続は別承認とする。
 
-1. Emlis V1-A actual proof
-2. V1-B Emlis Question operational proof
-3. V1-C Piece visual operational proof
-4. V1-D observed routeのimplementation / migration approval
-5. observed mapのProduct Read / lifecycle proof
-6. V1-E IF routeの別implementation / safety approval
+1. Emlis Vertical 1 — Layer 1／2
+2. Emlis Vertical 2 — question／refined Layer 1／2
+3. Emlis Vertical 3 — Plus／Premium Layer 3
+4. Piece — text + visual + recipient-visible route
+5. V1-D observed routeのimplementation／migrationとProduct Read
+6. V1-E IF routeの別implementation／safety approval
+
+この順序はmachine proofからのautomatic progression、Cycle001またはPiece operational完了の無条件gate、PieceからAnalysisへのdirect source transferを作らない。V1-D／V1-Eはそれぞれactual Analysis unitへの別Mash判断を必要とする。
 
 本設計反映からAnalysis route、latest/history、API、DB、RNを変更しない。
 
@@ -56,7 +62,7 @@ SIMULATION_SESSION_MATERIAL
 
 `PERIOD_RECORD_IDENTITY`は本文を持つ`SourceEnvelope` roleではなく、`AnalysisSourceSet.members[].member_role`のmembership metadataである。record childの`ORIGINAL_INPUT`とoptional `SUPPLEMENTAL_ANSWER`だけをmeaning-bearing SourceEnvelopeにする。
 
-period source-set memberはsaved record identityを持ち、そのchild commitmentとして`ORIGINAL_INPUT`とoptional `SUPPLEMENTAL_ANSWER`を別`SourceEnvelope`でfreezeする。question decision / option / skip等のcontrol lineageとEmlis visible bodyはmeaning source 0である。
+period source-set memberはsaved record identityを持ち、そのchild commitmentとして`ORIGINAL_INPUT` exact1とoptional `SUPPLEMENTAL_ANSWER` 0..3を別`SourceEnvelope`でfreezeする。supplemental answerはoriginal recordに従属する補足根拠であり、別record、別occasion、独立した期間sampleに数えない。question decision / option / skip等のcontrol lineageとEmlis Layer 1 / Layer 2 / question / Layer 3はmeaning source 0である。
 
 次はsource roleではなくderived artifact / lineage refである。
 
@@ -133,7 +139,7 @@ members[]:
   inclusion_or_exclusion_reason
   child_source_envelope_refs[]:
     ORIGINAL_INPUT exact1
-    optional SUPPLEMENTAL_ANSWER exact1
+    optional SUPPLEMENTAL_ANSWER 0..3
 source_set_version
 dedupe_policy_version
 comparability_policy_version
@@ -151,8 +157,9 @@ source adapter minimum duties:
 - privacy class
 - conflict / missing source preservation
 - Piece / Emlis bodyとsimulation outputのsource mixing拒否
+- supplemental answerをoriginal memberの別record／別occasionに数えない
 
-`members[]`はparallel arrayにせず、record identity / version / membership role / commitment / include-exclude reason / child envelope refsを一objectへ束ねる。`PERIOD_RECORD_IDENTITY`はSourceEnvelope roleではない。included recordのoriginal / supplemental childだけを別meaning-bearing SourceEnvelope refとして持つ。
+`members[]`はparallel arrayにせず、record identity / version / membership role / commitment / include-exclude reason / child envelope refsを一objectへ束ねる。`PERIOD_RECORD_IDENTITY`はSourceEnvelope roleではない。included recordのoriginal / supplemental childだけを別meaning-bearing SourceEnvelope refとして持つが、occasion / record countはparent member単位でdedupeする。
 
 一件の記録を傾向へ昇格しない。record countだけでroute edgeを作らない。
 
@@ -290,6 +297,7 @@ ObservedSelfStructureMapPayload
   annotation_claims[]
   unknown_gaps[]
   conflict_refs[]
+  central_route_ref? = exact0..1
   comparison_availability = NO_PREVIOUS | COMPARISON_PRESENT
   period_comparisons[] = exact0..1, canonical payload内へinline
   text_projection_ref
@@ -309,6 +317,21 @@ ObservedSelfStructureMap = GenerationArtifactBundle<ObservedSelfStructureMapPayl
 ```
 
 各period artifactは別identityである。latest pointer、history item、detail、text、graphは同じcanonical `artifact_id@version`へresolveする。comparison objectも同じimmutable stored artifactに含め、別のunresolved private locatorへ逃がさない。
+
+「今よく通る流れ」をcentral routeとして表示する最低条件は、record count 3以上、distinct occasion count 2以上、same orderまたはrelationがactual evidenceに結び付くことの全部である。occasionは日付ではなく一回の出来事／機会で数える。同一出来事の分割入力とsupplemental answerは水増ししない。
+
+```text
+central route count:
+  0..1
+
+minimum conditions true:
+  central route exact1
+
+minimum conditions false:
+  central route exact0
+  partial observation + unknown / not enough
+  generic route fallback 0
+```
 
 ### 9.1 Period comparison
 
@@ -335,6 +358,27 @@ PeriodComparison
 
 previous artifactがない初回は`comparison_availability=NO_PREVIOUS`、`period_comparisons` exact0とする。safe projectionも`NO_PREVIOUS`を明示し、架空のprevious / change claimを作らない。
 
+### 9.2 Plan product boundary
+
+```text
+Free:
+  latest observed artifact only
+  prior Analysis artifact history access 0
+  period comparison 0
+  central route 0..1
+
+Plus:
+  available evidence-backed complete observed map
+  Analysis artifact history / comparison
+
+Premium:
+  Plus範囲
+  + separately approved V1-E IF
+  + SavedRouteIntent
+```
+
+Freeのhistory access 0は、過去のAnalysis artifactを閲覧したり期間比較を受けたりする商品機能が0という意味である。V1-Dが分析sourceとして過去の保存入力を使えないという意味ではない。Freeでもrecord count 3以上 + distinct occasion count 2以上のsource条件を維持する。
+
 ## 10. IF route
 
 ### 10.1 Request
@@ -347,6 +391,7 @@ AnalysisIfRouteRequest
   branch_intent_source_ref
   constraint_source_refs[]
   requested_candidate_count = 1..3
+  simulation_scope = SELF_ONLY
   analysis_if_policy_version
 ```
 
@@ -361,6 +406,8 @@ Analysis ownerはmeaningの異なるscenarioを1–3含む`IfScenarioCandidateSe
 - 1–3を並列提示する。
 - required conditions、frictions、unknown、unmodelled factorsを表示する。
 - result probability、future guarantee、optimality scoreを生成しない。
+- other personはcontext evidenceに限定し、相手の意図、反応、関係の結果を推定しない。
+- health / medical IFは生成不可とし、追加確認後に生成可とする例外を置かない。emergency / high-riskはseparate Safety ownerへ渡す。
 
 CMEE comparatorが選べるのは、同じscenario graphの`RealizationCandidateSet`だけである。意味の異なるscenarioをsurface qualityで一つへ選ばない。
 
@@ -478,11 +525,43 @@ visual semantics:
 
 RN rendererはAnalysis product ownerである。text / graph / accessible linear viewは同じcanonical artifactへresolveする。
 
+Analysisのfinal product artifactはtext-onlyでもgraph-onlyでもなく、text + visual graphである。latest pointer、history item、detail、text、graphは同じcanonical `artifact_id@version`へresolveし、別identityの代替品にしない。
+
 canonical stored `watashi.map.v2` artifactはprivateで、exact evidence / source refsを保持する。API / RNへはaccess ownerがversioned safe projectionを作り、`projection_of = artifact_id@version`、visible node / edge / badge、anonymous evidence count、unknown / conflict / period comparison stateだけを渡す。raw body、private source ID、private evidence locator、source digestはprojection 0である。latest / history / detailが同じcanonical identityへresolveすることは、private stored JSONと全audience向けprojection bytesが同一であることを意味しない。
 
 projectionでも`OBSERVED_ORDER`だけが`from_ref / to_ref`を持つ。`REPEATED_COOCCURRENCE`はunordered `endpoint_refs[]`で表し、矢印化しない。annotation / unknown / conflictはvisible labelだけのstring listにせず、safeな`target_ref` / `between_node_refs`を保持してgraph上の対応を失わない。
 
 V1-E safe projectionは`watashi.if-route-set.v1`、SavedRouteIntent safe projectionは`watashi.saved-route-intent.v1`を使う。IF projectionはscenario origin、required condition、friction、unmodelled factorを保ち、rank / score / probabilityを持たない。SavedRouteIntent projectionはowner-authorized exact1で、選択scenarioとoptional noteだけを返す。どちらもobserved safe projectionへ混ぜない。
+
+### 12.1 Provisional UI direction
+
+```text
+分析画面
+
+[ 今のわたしマップ ] [ わたしシミュレーション ]
+
+わたしシミュレーション:
+  今のルート
+  分かれ道
+  ifルート候補
+  条件
+  unknown
+```
+
+UIの表示候補は、価値判断を含みやすい「正規ルート」ではなく「今のルート」を推奨する。final navigation、tab / swipe / separate screen、text量、graph scale、animationはHOLDであり、本設計反映でRN導線を確定しない。
+
+### 12.2 Future external retention
+
+分析結果を将来アプリ外へ保持可能にする方向は残す。対象候補は今のわたしマップ、わたしシミュレーション全体、個別ifルート、短い概要である。形式候補はPDF、image、overview image + full PDFその他だが、exact format、coverage、UI、renderer、storageは`FUTURE_ANALYSIS_EXTERNAL_RETENTION_HOLD`とする。
+
+```text
+initial V1-D mandatory export: false
+initial V1-E mandatory export: false
+Piece posting: separate product
+Analysis -> Piece direct connection: 0
+```
+
+当面固定するのは、Analysis artifactのcanonical identity / version、text / graphの同一identity、将来render-neutral export projectionを追加できる拡張境界、Analysis lifecycleがexternal retention ownerであることだけである。Analysis-owned IF image / PDF exportをcurrent必須実装や初期Product Read終点にしない。SavedRouteIntentはin-app saveとして維持するがexternal retentionの前提にしない。
 
 ## 13. Safety and epistemic gates
 
@@ -497,7 +576,7 @@ hard reject:
 - filler step / generic result
 - evidence ref absent observed claim / edge
 - hidden conflict / insufficient data
-- high-care IF without required confirmation
+- health / medical IF、およびrelationship outcome / other-person intent / reaction IF
 - Piece / Emlis voice or body reuse
 
 valid failure resultはpartial map、unknown gap、conflict表示、IF unavailableである。fixed four-step fallbackへ戻さない。
@@ -525,12 +604,17 @@ ai/tests/test_cmee_analysis_v1e_negative_contracts.py
 machine acceptance:
 
 - visible observed claim / edge evidence ref coverage 100%
+- central routeはrecord count 3以上 + distinct occasion count 2以上 + evidence-backed order / relationの全条件成立時だけexact1
+- supplemental answerによるrecord / occasion / period sample水増し 0
 - filler step / result 0
 - observed graph simulation mutation 0
 - simulated step origin label 100%
 - future / causal / diagnosis / personality / optimality assertion 0
 - text / visual / pointer / history identity mismatch 0
 - unknown / conflict concealment 0
+- Freeはlatest observed artifact only、prior artifact history access 0、period comparison 0、central route 0..1
+- health / medical IFとrelationship outcome / other-person intent / reaction IF 0
+- initial V1-D / V1-E mandatory image / PDF / external export 0
 - safe projectionのraw body / private source ID / private evidence locator / source digest leakage 0
 - policy-external projection read 0
 
@@ -541,6 +625,7 @@ Human Product Read:
 - protectiveとburdenが原因断定に見えない。
 - IFが正解や予測として押し付けられていない。
 - actual RN表示でroute / branch / evidence / unknownが読める。
+- textとvisual graphが同一canonical identityの一つの商品artifactとして読める。
 
 ## 15. Migration and cutover
 
@@ -565,6 +650,8 @@ existing tier、access、unread、dirty / refresh semanticsをregression gateに
 V1-Eのfirst storage candidateは、Analysis lifecycle ownerが`watashi.if-route-set.v1`と`watashi.saved-route-intent.v1`をobserved mapとは別artifact kind / namespaceでimmutable保存する。parent observed map、scenario set、selected scenarioのversion refを固定し、view-time regeneration 0とする。DB / RLS / payload size / latency / retention / read-policy preflightで安全に分離できなければ`NO_SAFE_ANALYSIS_V1E_STORAGE_STOP`とし、observed `watashi.map.v2`へ混ぜて通さない。
 
 V1-E safe projectionはcanonical IF / Saved identityからAnalysis access ownerが生成する。IF / SavedのAPI / RN pathとstorage exact ownerはV1-E separate approvalでfresh固定し、それまでmaterialize 0である。
+
+external retentionのexact format / coverage / UI / renderer / storageは将来の別approvalまでHOLDである。V1-D / V1-Eのinitial storage / cutoverからimage / PDF exportをmandatory dependencyにしない。
 
 ### 15.2 One-owner cutover
 
@@ -591,7 +678,8 @@ requires:
 
 - period sourceからpartialを許すevidence-bound observed routeを作る。
 - observed / annotation / unknown / conflict identityが分離する。
-- latest / history / detail / text / visualがcanonical identityへ一致する。
+- text + visual graphを必須とし、latest / history / detail / text / graphがcanonical identityへ一致する。
+- Freeでlatest observed artifact only、prior artifact history access 0、period comparison 0、central route 0..1を守る。
 - current generic fallback ownerがactive ingress 0になる。
 - Product Readとactual RN proofを通過する。
 
@@ -607,6 +695,7 @@ requires:
 - observed / hypothetical / saved identityが分離する。
 - user selection sourceとderived scenario parentを分離する。
 - IF / Savedのseparate immutable storage / safe projectionを通過する。
+- SELF_ONLYを保ち、health / medicalおよびrelationship outcome / other-person intent / reaction IFを生成しない。
 - simulation safety / clarification / display proofを通過する。
 
 V1-DまたはV1-Eをthree-core completionへ自動変換しない。

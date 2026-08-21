@@ -1,11 +1,11 @@
 ---
 doc_id: cocolon_meaning_experience_engine_current_structure
 title: "CMEE — Current Structure"
-revision_date: "2026-08-16 JST"
+revision_date: "2026-08-21 JST"
 document_role: "CMEE_CURRENT_STRUCTURE_AND_PRODUCT_QUALITY_ROUTE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
-design_state: "FINAL_TECHNICAL_DESIGN_CANDIDATE"
+design_state: "FINAL_TECHNICAL_DESIGN_CANDIDATE_STEP10_REVIEW_APPLIED"
 detailed_design_state: "DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE_DIRECT_PRODUCT_QUALITY_ONLY"
 historical_l3r_route_selection: "ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION"
 historical_l3r_packet_state: "L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP"
@@ -79,9 +79,9 @@ subagentはhuman PASSを自己attestせず、Mashの確認前は成果、product
 
 CMEEが支えるproduct job exact3:
 
-1. EmlisAI: 入力を読まれた形の観測へ変え、必要な場合だけ一点を問い、回答分だけ観測を深める。
-2. Piece: 本人の意味を、他者が単独で受け取れるcanonical textと画像artifactへ変える。
-3. 分析構造: 蓄積入力から現在の自己構造routeを根拠付きで形にし、観測と分離したIF routeを扱う。
+1. EmlisAI: current threadを中心にLayer 1「見えたこと」とLayer 2「Emlisから」を返し、各roundで必要な場合だけ一点を問い、回答分だけ観測を深める。Plus／Premiumは条件成立時だけLayer 3「記録の線」を加える。
+2. Piece: 本人の意味を、他者が単独で受け取れるcanonical textと画像artifactへ変え、actual recipient-visible routeへ届ける。
+3. 分析構造: 蓄積入力から現在の自己構造routeを根拠付きtext + graphで形にし、観測と分離したSELF_ONLY IF routeを扱う。external retentionはfuture HOLDとする。
 
 必要な共通flow:
 
@@ -179,7 +179,7 @@ CMEEの内部graphは:
 
 user-confirmed、user-corrected、unknown、hypothesisのlineageを分け、original sourceを書き換えない。
 
-Historical fact: 2026-08-15 JST、MashはL3-Rのrouteとして`ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`を選択し、続いて`CMEE_V1_L3R_ROUTE_B_BOUNDED_PREFLIGHT_TECHNICAL_BODY` v1.0.0（canonical SHA-256 `4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901`）を承認した。provider proposalをmeaning authorityへ昇格せず、ambiguityに依存しないlimited observation、original-input lifecycle全体で最大一回のuser clarification、または`UNAVAILABLE`で閉じるproduct contractは現在も保持する。P0 exact1がactivation Gateで`P0_ACTIVATION_PRECONDITION_STOP`となった事実も保持する。
+Historical fact: 2026-08-15 JST、MashはL3-Rのrouteとして`ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`を選択し、続いて`CMEE_V1_L3R_ROUTE_B_BOUNDED_PREFLIGHT_TECHNICAL_BODY` v1.0.0（canonical SHA-256 `4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901`）を承認した。provider proposalをmeaning authorityへ昇格せず、ambiguityに依存しないlimited observation、または`UNAVAILABLE`で閉じるmeaning-sovereignty contractは現在も保持する。当時のoriginal-input lifecycle全体で最大一回というclarification上限はhistorical Route B envelopeの記録であり、Step 10 targetのplan別budget（Free／Plus 0..1、Premium sequential 0..3）を制限しない。P0 exact1がactivation Gateで`P0_ACTIVATION_PRECONDITION_STOP`となった事実も保持する。
 Historical fact: 同日、Mashは`CMEE_V1_P0R1_GITHUB_HOSTED_BOUNDED_EXECUTOR_FINAL_TECHNICAL_BODY` v1.0.0（canonical SHA-256 `d5637c8303e377e2bda11977425f209c139911acbb56542e8526ee0afa00be70`）のdocs-only reflectionを承認した。reviewed GitHub-hosted executor candidateは、approved isolationを保持したminimum-compliant residualでも32–52 focused hoursを要し、current one-shot evidence価値に比例しないため、`NO_SAFE_NEXT_CANDIDATE_STOP / FINAL_TECHNICAL_PROPORTIONALITY_STOP / DETOUR_RISK_STOP`としてpre-executionで棄却した。P0-R1 executionは0であり、この判断をRoute B、KWJA、provider capabilityの失敗へ変換しない。
 
 上記のPhase 0 / P0 / P0-R1とproduct-quality delta 0のstand-alone L3-R / L3-Iは全て
@@ -358,15 +358,46 @@ Lifecycle:
 historical L3-R / P0 / P0-R1 bodyは実行権限を生成せず、standalone L3-Iもcurrent prerequisiteではない。
 実装はFinal Technical Design §0.3に合致するactual product-quality unitの別のMash承認なしに開始しない。
 
+### 10.1 Step 10 final integrated contract
+
+このcurrent structure ownerは、正式review済みの次のidentityを既存設計群へ同期する。
+
+    DOCUMENT_ID = CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2
+    DESIGN_IDENTITY = CMEE_THREE_CORE_INTEGRATED_DESIGN_20260821
+    FORMAL_PRO_REVIEW = CONSUMED_EXACTLY_ONCE
+    SECOND_PRO_REVIEW = false
+
+#### EmlisAI thread／plan／layer
+
+- original input、各supplemental answer、question、Layer 1／2／3を同一input-history threadへ順序付きで接続する。ただしuser-owned sourceとderived artifactは別role／version／round lineageであり、derived artifactを本人sourceへ昇格させない。
+- Freeはcurrent thread only、Plusはeligible owned historyを加える。Premiumはさらに根拠付き・暫定的・修正可能な「ユーザー固有の解釈フレーム」と許可済み本人contextをplan／purpose境界内で使う。
+- question budgetはFree／Plusがthread全体で0..1、Premiumが逐次0..3である。各roundでLayer 1／2を先に返し、重要unknown、本人の続行、残budgetが全て成立する場合だけquestion exact1を出す。
+- P6 Structure Insightはcurrent input内の構造気づきとして全planのLayer 1へ置く。P5 User Label Connectionはeligible historyとのcontinuityとしてPlus／Premiumの条件付きLayer 3 0..1へ置く。
+
+#### Piece／Analysis
+
+- PieceはFree fixed short_essay、Plus auto eligible exact3、Premium eligible user selection exact3とし、plan間で意味保持・文章品質を落とさない。preview／saveは中間状態であり、actual recipient-visible route exact1以上で他者が単独受領できることをfinal acceptanceへ含める。exact channelはHOLDである。
+- AnalysisはFree latest-only、Plusはartifact history + comparison、PremiumはPlus範囲に加えて別承認後のV1-E／SavedRouteIntentを扱う。canonical identityを共有するtext + graphを返し、IF routeはSELF_ONLY、explicit selection、unranked 1..3とする。health／medical IFおよびother-person intent／reaction／relationship outcome IFは対象外である。
+- Analysis external retention／sharing／Nexus、exact format／renderer／storageはfuture HOLDであり、初期mandatory exportやPiece完了の無条件gateにしない。
+
+#### shared boundary／remaining responsibility
+
+- cross-coreでsemantic source候補にできるのは、original、supplemental answer、許可済み本人contextだけである。Analysisはsupplemental answerをoriginal recordに従属する補足根拠として利用できるが、Pieceは本人の明示opt-inがある場合だけ利用できる。Emlis本文、Piece生成本文、Analysis推定／IFを他coreの本人sourceにしない。
+- current target順はEmlis vertical exact3、Piece、Analysis observed、Analysis IFである。残るlogical responsibilityはNB-F01..NB-F10 exact10であり、詳細ownerは[CMEE V1 Implementation Order / Migration / Verification](../designs/cmee/v1/06_implementation_order_migration_and_verification.md)が持つ。
+- plan、capability、context、user model、history search、P5、P6等はADAPT_AND_INHERIT候補である。generic fixed visible body、old Q&A、presentation-oriented map、hidden PDF helperをtarget artifactとしてREUSE_AS_ISしない。
+
+今回のStep 10はexisting exact14へのdocumentation reflectionだけであり、code、test、runtime、dependency、DB、API、RN、activation、Cycle001、Product Read effectは0である。
+
 ## 11. Implementation order
 
 1. Phase 0 / P0 / P0-R1とproduct-delta-0 standalone L3-R / L3-Iは歴史証拠としてのみ保持し、current routeから退役。
-2. currentなnext workは、consumer core exact1のactual product artifactを非0に改善するone bounded implementation unit exact1だけ。
-3. source / provider / dependency / resource / test / runner / privacy / Safetyは、同一unitでactual resultまで届けるための必要最小な従属制約としてだけ扱う。
-4. Karenがunchanged input / fixtureのbefore / after actual bodyを全件pre-screenし、明白な低品質が残る場合はMashへ提示せず、同一unit内で商品本文の原因を修正する。
-5. 商品artifactの品質が補助経路へ投入した精度・検証密度を上回った後だけMashへbefore / after resultを提示する。
-6. Mashの確認後だけ商品品質向上、成果またはproduct creditを確定する。Karen / model / subagentはhuman PASSを自己attestしない。
-7. 確認後もCycle001、production cutover、Emlis question、Piece、Analysisまたは次のunitへ自動進行しない。
+2. target vertical順はEmlis Layer 1／2、Emlis question／refined Layer 1／2、Emlis Plus／Premium Layer 3、Piece text + visual + recipient route、Analysis observed text + graph、Analysis SELF_ONLY IFである。
+3. 各verticalはconsumer core exact1のactual product artifactを非0に改善するone bounded implementation unit exact1として別のMash承認を得る。前verticalのmachine GREENだけで自動進行しない。
+4. source / provider / dependency / resource / test / runner / privacy / Safetyは、同一unitでactual resultまで届けるための必要最小な従属制約としてだけ扱う。
+5. Karenがunchanged input / fixtureのbefore / after actual bodyを全件pre-screenし、明白な低品質が残る場合はMashへ提示せず、同一unit内で商品本文の原因を修正する。
+6. 商品artifactの品質が補助経路へ投入した精度・検証密度を上回った後だけMashへbefore / after resultを提示する。
+7. Mashの確認後だけ商品品質向上、成果またはproduct creditを確定する。Karen / model / subagentはhuman PASSを自己attestしない。
+8. 確認後もCycle001、production cutover、次verticalまたは次unitへ自動進行しない。
 
 ## 12. Anti-bloat boundaries
 
@@ -406,6 +437,8 @@ historical L3-R / P0 / P0-R1 bodyは実行権限を生成せず、standalone L3-
 4. current text coreとPR #2 assetのsymbol-level dispositionは、direct product unitに必要なsymbolだけ同一unit内で行う。別作業へしない。
 5. Cycle001は`FORMAL_LEXICAL_AUTHORITY_UNRESOLVED`で停止中だが、このblockerの証明強化をproduct-delta-0の独立作業へしない。
 6. correction authorityは0。別のMash明示承認がある場合だけ、current failed exact8をbeforeとするone bounded actual Emlis product-quality unitを開始できる。
+7. Step 10で設計したinput-history thread、plan別question、P5／P6 product integration、Piece recipient route、Analysis text + graph／SELF_ONLY IFは未実装である。external retentionはfuture HOLDである。
+8. actual asset migrationを反映しても、remaining responsibilityはNB-F01..NB-F10 exact10であり、design同期をruntime readinessへ変換しない。
 
 Historical gapsとterminal事実:
 
@@ -449,6 +482,9 @@ Historical gapsとterminal事実:
 
     Cocolon Draft PR #29
       0854e21f92f841fd2cfdcef08b9e3117fc93f96a
+
+    Cocolon Draft PR #30 Step 10 reflection preimage
+      d29042f44e882110514b74dcc6a1b3f31ec746e6
 
     mashos-api main
       a8ca4ddf7b7ae76bf7b3d73e74e3a5808d623428

@@ -1,7 +1,7 @@
 # CMEE V1 — Implementation Order / Migration / Verification 詳細設計
 
 - document id: `cocolon.cmee.v1.implementation_migration_verification.detailed_design`
-- revision date: `2026-08-16 JST`
+- revision date: `2026-08-21 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - absolute implementation rule: `BOUND_TO_PARENT_FINAL_DESIGN_SECTION_0_3`
 - current implementation state: `DRAFT_WIP_DISABLED_PRODUCT_FAIL`
@@ -13,6 +13,7 @@
 - historical P0-R1 executor candidate state: `P0R1_GITHUB_HOSTED_EXECUTOR_FINAL_TECHNICAL_PROPORTIONALITY_STOP`
 - D0 / L3-R / P0 / P0-R1 / L3-I lifecycle: `RETIRED_HISTORICAL_NONREUSABLE`
 - automatic progression: `false`
+- Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 
 ---
 
@@ -411,6 +412,8 @@ actual artifactが改善しない結果として停止する。
 
 ## 8. C0–C2 — Cycle001
 
+§8〜16は2026-08-16時点のphase breakdownとstate vocabularyを保持する。2026-08-21以降のcurrent target scheduling、migration、remaining responsibility、verificationは§20をsole current ownerとし、§8〜16の旧gate依存、`clarification exact1`またはexport終点と矛盾する場合は§20を優先する。§17〜19のhistorical P0 familyは引き続き`RETIRED_HISTORICAL_NONREUSABLE`である。
+
 CMEE phaseはCycle navigation ownerではない。fresh applicable `Cocolon_前提資料/08_cycle001_current_state.md`だけがtechnical navigation ownerである。08が指すthree-step planはrestart / evidence bundleであり、同格ownerではない。
 本節はcurrent authorized workではない。§6のactual product-quality向上をMashが確認した後でも、Mashの別の
 明示指示なしに自動進行しない。retired Route A / B、P0、P0-R1、L3-IをCycle prerequisiteへ戻さない。
@@ -498,11 +501,11 @@ CMEE_V1A_EMLIS_OBSERVATION_PRODUCTION_OPERATIONAL
 observation production proof後の別design / implementation packet。
 
 - PRE_QUESTION observation + bound Reception first
-- clarification exact1
+- clarificationは一round exact1。thread budgetはFree／Plus 0..1、Premium sequential 0..3
 - skip / unknown allowed
 - answer is supplemental source
 - original immutable
-- refined artifact new version / same lifecycle lineage
+- refined artifact new version / same thread lifecycle lineage。prior source／artifactのoverwrite／delete 0
 - API / DB / RN / persistence owner separately fixed
 
 ## 10. P1 — Piece V1-C implementation order
@@ -783,3 +786,287 @@ automatic_progression = false
 棄却したdocs-only terminal reflectionである。既存P0 result、Route B contract、KWJA candidate identity、synthetic exact12は
 歴史事実として変更しない。別executor、P0 boundary変更、provider / model / version / task / corpus変更、
 Route B contract変更またはnew Mash LEVEL_3 decisionによるalternate candidate revivalを行わない。
+
+## 20. Step 10 finalized implementation order, migration, and verification
+
+本sectionはFinal Dispositionと一回限りの正式Pro reviewを反映したcurrent target ownerである。existing historical factsとcurrent implementation authorization `NONE`を変更せず、implementation／test／DB／API／RN／runtime／activation effectは`0`である。以下はrecommended scheduling orderであり、automatic progression、一括実装、次phase承認ではない。
+
+### 20.1 Product vertical-first rule
+
+```text
+actual product input
+-> same verticalで必要なshared責任だけadapt
+-> core-specific intent / generator / realizer / lifecycle
+-> actual user-visible artifact
+-> core-specific body-full Product Read
+```
+
+standalone shared-first、三core同時big-bang cutover、machine PASSからの商品品質換算を禁止する。core／responsibilityごとのactive owner exact1、fallback／dual-run `0`、accepted cutover後の段階retirementを守る。
+
+### 20.2 Vertical 1–3 — Emlis exact3
+
+#### Vertical 1 — Layer 1／2
+
+```text
+actual current input
+-> input-specific observation
+-> Layer 1「見えたこと」
+-> bound Human Reception
+-> Layer 2「Emlisから」
+-> body-full Product Read 1
+```
+
+全planの基礎品質を先に成立させる。P6 Structure Insightのguard／relation classificationはadaptするが、generic fixed bodyとPR #3 failed surfaceを継承しない。
+
+#### Vertical 2 — question／refined Layer 1／2
+
+```text
+accepted Layer 1／2 quality
+-> plan budget
+-> explicit continue
+-> question exact1
+-> supplemental answer
+-> cumulative source prefix
+-> refined Layer 1／2
+-> sequential lifecycle Product Read 2
+```
+
+question budgetはFree／Plus `0..1`、Premium sequential `0..3`、一round一問である。original、each supplemental answer、each Layer 1／2、questionをsame input-history threadへ順序付き保存し、overwrite／deleteを`0`とする。exact DB／table／API／RN／persistence、existing auth／access／delete linkageはfit-gapまでHOLDであり、架空pathで埋めない。
+
+#### Vertical 3 — Layer 3
+
+```text
+accepted Layer 1／2 quality
+-> Plus／Premium
+-> eligible owned history
+-> P5 guard
+-> input-specific history connection
+-> Layer 3「記録の線」0..1
+-> history continuity Product Read 3
+```
+
+P5のeligibility／scope／guardをadaptし、generic fixed bodyを継承しない。FreeはLayer 3なし。history不足、low-information、safety／high-care、personality／cause／other-intent promotion riskではLayer 1／2だけで正常終了する。Layer 3をLayer 1／2 failureの回避路にしない。
+
+### 20.3 Vertical 4–6 — Piece and Analysis
+
+#### Vertical 4 — Piece text + visual + recipient route
+
+```text
+saved user input
+-> canonical piece_text
+-> exact3 plan selection
+-> visual recipe
+-> actual image
+-> preview / save intermediate Product Read
+-> actual recipient-visible route exact1以上
+-> final Product Read
+```
+
+Freeは`short_essay` fixed／chooser `0`、Plusはexact3からauto、Premiumはexact3からuser selectとし、全planでminimum qualityを同じにする。preview／saveだけをfinal acceptanceにしない。device share／internal／Nexus等のexact channelはHOLDであり、架空routeを固定しない。recipient-visible route exact1以上で他者が単独で意味を受け取れるProduct Read後だけclean cutoverを閉じる。
+
+#### Vertical 5 — Analysis V1-D
+
+```text
+period inputs
+-> occasion-aware evidence graph
+-> observed / partial / unknown / conflict
+-> same canonical identityのtext + graph
+-> plan-specific latest / history / comparison
+-> actual-device Product Read
+```
+
+V1-DはV1-Eなしで完了可能である。Freeはlatest observed artifact only、prior history／comparison `0`、central route `0..1`。
+
+#### Vertical 6 — Analysis V1-E
+
+開始条件はV1-D accepted Product Readかつseparate Mash approvalである。Premium planだけが対象で、Free／PlusのV1-Eは`0`とする。explicit branch selection後だけSELF_ONLYのunranked IF `1..3`を生成し、SavedRouteIntentとoptional commentを別identityでin-app saveする。health／medical、other-person intent／reaction／relationship outcomeをIFにしない。
+
+Analysis external retentionは`FUTURE_ANALYSIS_EXTERNAL_RETENTION_HOLD`である。current map／whole simulation／individual IF／short overview等のcoverage、PDF／image／overview+PDF等のformat、UI／renderer／storageはHOLD。initial V1-D／V1-E mandatory exportはfalseで、SavedRouteIntentをexport prerequisiteにしない。Piece recipient routeとは別owner／identityである。
+
+### 20.4 Actual asset migration
+
+#### `REUSE_AS_IS_OPERATION_ONLY`
+
+- Emlis current I5 user-visible route。
+- Piece old Q&A user-visible route。
+- Watashi Map v1 generation／historical read route。
+- MyProfile compatibility facade。
+
+accepted cutoverまでのcurrent operation ownerであり、target product truthまたはtarget surfaceのAS_IS継承ではない。
+
+#### `ADAPT_AND_INHERIT`
+
+- source identity／role、evidence、unknown、conflict、trace、version、artifact binding。
+- `CoreTextComposer`のcaller-generated candidate guardとneutral value signal responsibility。
+- `emlis_ai_capability.py`。
+- `emlis_ai_context_service.py`。
+- `emlis_ai_user_model_store.py`。
+- `emotion_history_search_service.py`等のowned-history retrieval。
+- User Label Connection P5 familyのeligibility／guard／scope。
+- Structure Insight P6 familyのrelation classification／guard。
+- Free history boundary tests。
+- Emlis material bundle、source partition、Reception-before-question guard。
+- Analysis source auth／retrieval、engine adapter、material snapshot、API／history／identity dispatch。
+- Piece V2 pure contract、minor normalization／publicization／safety boundary、identity／visibility owner。
+
+Emlis adapt時は次を必須補正する。
+
+- capabilityへplan question budgetとLayer contractを加える。
+- context serviceへsame-thread supplemental lineage、eligible-owned-history、cross-core derived-artifact rejectionを加える。
+- user model storeへcurrent-input precedence、user correction、frame non-evidenceを加える。
+- history searchのownershipとsecret materialを含むauth／access／delete fit-gapを確認する。
+- P5／P6 generic fixed sentenceをLayer 3／Layer 1 target bodyとしてAS_IS利用しない。
+- Free protected testを、past-history edge拒否かつsame-current-thread supplemental answer許可へrebaseする。
+
+#### `RETAIN_AS_TEST_OR_FAILURE_KNOWLEDGE`
+
+- NLSv3／Cycle001 current100、mutation、naturalness、MINOR／MAJOR failure family。
+- PR #3 machine structural 8/8とhuman Product Read FAIL。
+- Piece B02 causal RED。
+- current v1 compatibility testsとnegative test knowledge。
+
+#### `DO_NOT_INHERIT`
+
+- shared-first operational chain、NLSv3 wrapper ingress、large recovery／runner shell。
+- PR #3 failed actual surface、P5／P6 generic fixed visible body。
+- dual active generator／mirror／request fallback。
+- Watashi v1 fixed four-step／generic fallbackをV1-D truthにすること。
+- old Piece Q&A identity、Analysis IFからPieceへのdirect transfer。
+- relationship outcome／health／medical IF。
+- dormant／hidden PDF helperをAnalysis external retention ownerへ昇格すること。
+- machine PASSからhuman Product Read PASSへの変換。
+
+旧資料はold name、old path、responsibility、failure、文章整形知見の照合へだけ使い、current source／runtime owner／implementation orderへ戻さない。
+
+### 20.5 Remaining logical implementation responsibility exact10
+
+old remaining exact8を撤回し、actual asset dispositionから次のexact10へ再導出する。これはlogical responsibility countであり、new file count、implementation authorityまたは開始approvalではない。
+
+| ID | Remaining responsibility | Owner／boundary |
+|---|---|---|
+| `NB-F01` | Emlis Layer 1／2 input-specific observation／Reception realizer correction | Emlis route。P6／capability／context／user model adapt。全plan |
+| `NB-F02` | Emlis plan別sequential question lifecycle | Emlis route。Free／Plus 0..1、Premium sequential 0..3 |
+| `NB-F03` | Emlis input-history thread persistence／artifact linkage | Emlis lifecycle。user source／derived type分離、order、overwrite 0。exact path HOLD |
+| `NB-F04` | Plus／Premium Layer 3 continuity integration／realizer | Emlis route。P5 adapt、conditional 0..1、generic body非継承 |
+| `NB-F05` | Piece V2 semantic shaper + exact3 plan selector | Piece route。Free fixed、Plus auto、Premium user select |
+| `NB-F06` | Piece text+visual single-artifact modality／delivery integration | Piece lifecycle。recipient route exact1以上、exact channel HOLD |
+| `NB-F07` | Analysis V1-D observed compiler | Analysis Observed。occasion dedup、3 records + 2 occasions、central 0..1、partial／unknown |
+| `NB-F08` | Analysis V1-D canonical artifact assembly／projection | Analysis lifecycle。text+graph、evidence／unknown／conflict、plan views |
+| `NB-F09` | Analysis V1-E SELF_ONLY IF generator | Analysis IF。Premium only、explicit selection、unranked 1..3、health／medicalおよびother-person intent／reaction／relationship outcome禁止 |
+| `NB-F10` | SavedRouteIntent + optional comment separate identity lifecycle | Analysis lifecycle。in-app save、external export prerequisite false |
+
+```text
+old exact8                         = 8
+remove mandatory Analysis export = -1
+add Emlis Layer 1／2 correction   = +1
+add Emlis input-history thread    = +1
+add Emlis Layer 3 integration     = +1
+final                             = exact10
+```
+
+Premium interpretive frameは独立した11件目へ増やさず`NB-F01`内のexisting capability／context／user-model adaptationとして扱う。P5／P6 familyは`ADAPT_AND_INHERIT`だが、target product artifactへ接続する`NB-F01`／`NB-F04`は未成立責任として残す。standalone shared new-build before first product verticalは`0`。`FUTURE_ANALYSIS_EXTERNAL_RETENTION_HOLD`はcurrent exact10の外である。
+
+### 20.6 Integrated verification — shared and Emlis
+
+Shared／identity:
+
+- source lineage、evidence、unknown、conflict、version、artifact identityを一貫させる。
+- generator active owner exact1、dual-run／fallback `0`。
+- raw body／private locatorをpublic projectionへ出さない。
+- shared guard／machine GREENをproduct-body quality PASSへ換算しない。
+
+Emlis thread:
+
+- no-questionでもoriginal、Layer 1、Layer 2をsame threadへstrict orderで保存する。
+- usable answerがある場合はquestion、answer、refined Layer 1／2、later roundのorderを保持する。skip／stop／no answerではquestion artifact後に正常終了し、answerを捏造しない。「分からない」reply／ambiguous answerは`SUPPLEMENTAL_ANSWER`として保存するが、refined artifactを生成せず正常終了する。
+- later roundによるearlier source／artifactのoverwrite／deleteを拒否する。
+- `USER_OWNED_SOURCE`と`DERIVED_EMLIS_ARTIFACT`をtype分離し、derived artifactのsemantic evidence昇格を拒否する。
+- existing input auth／access／delete lifecycleから孤立するartifactを拒否する。
+
+Emlis Free:
+
+- sourceはcurrent threadだけ。past input、derived user model、cross-core contextを拒否する。
+- same-current-thread supplemental answerは許可する。
+- Layer 1／2を出し、Layer 3を拒否する。
+- question `0..1`。
+- artifact保存trueと、別入力のnext history generation source falseを両立する。
+
+Emlis Plus:
+
+- current thread + eligible owned historyだけを使い、current inputを中心にする。
+- question `0..1`、Layer 3 `0..1`。
+- history不足、low-information、safety／high-careではLayer 1／2だけで正常終了する。
+
+Emlis Premium:
+
+- question sequential `0..3`、一round一問。一画面一括三問を拒否する。
+- frameの各要素を本人evidence refへ戻せることを確認する。
+- frame conflict時のcurrent-input precedence、user correction、provisionalityを確認する。
+- frame-only visible claim、personality truth／cause／diagnosis、automatic agreementを拒否する。
+- Piece body、Analysis inference／IF、past Emlis bodyをcross-core sourceとして拒否する。
+
+Layer別Product Read:
+
+- Product Read 1: Layer 1／2 actual body-full quality。
+- Product Read 2: question／supplemental／refined lifecycle。
+- Product Read 3: Layer 3 history continuity。
+
+一つのProduct Read PASSを他のclaimへ流用しない。
+
+### 20.7 Integrated verification — cross-core, Piece, Analysis
+
+Cross-core rejection:
+
+- AnalysisがEmlis Layer 1／2／3、questionをobserved sourceにしない。
+- Analysisがsupplemental answerを別occasion／recordへ数えない。
+- Pieceが本人の明示opt-inなしにsupplemental answerを使わない。
+- PieceがEmlis derived artifact、Analysis claim／route／IFをsourceにしない。
+- Premiumが許可外cross-core derived artifactを使わない。
+
+Piece:
+
+- owner-authenticated originalと明示opt-inされたsame-thread supplementalだけをadmitする。
+- exact3 eligibilityとFree fixed／Plus auto／Premium user-selectを検証する。
+- 全planでminimum meaning／safety／readability qualityを同じにする。
+- canonical text／visual／derived imageをsame artifact identityへbindする。
+- preview／saveだけでfinal acceptanceにしない。
+- actual recipient-visible route exact1以上で他者が単独で意味を受け取れるProduct Readを行う。
+- accepted clean cutover後のold Q&A fallbackを`0`にする。
+
+Analysis V1-D:
+
+- record exact1／exact2、または3+ recordsでもdistinct occasion exact1ならcentral route exact0。
+- 3+ records、2+ occasions、evidence-bound order／relationの時だけcentral route `0..1`内でexact1。
+- same-event splitの水増し、cooccurrence-only routeを拒否する。
+- threshold未達をpartial + unknownのvalid outcomeにする。
+- textとgraphをsame canonical identityへresolveする。
+- Freeはlatest observed artifact only、prior history／period comparison `0`。
+- PlusはAnalysis artifact historyとperiod comparisonを利用できる。
+- PremiumのV1-D範囲はPlusを継承し、V1-E／SavedRouteIntentはseparate approvalまで未接続とする。
+- V1-Dだけでactual-device Product Readできる。
+
+Analysis V1-E:
+
+- Premium only。Free／PlusはV1-E／SavedRouteIntent `0`。
+- explicit branch selection前、condition不足時のcandidate数合わせを拒否する。
+- candidate `1..3`、rank／probability／guaranteeなし、SELF_ONLY。
+- other-person intent／reaction／relationship outcome、health／medical IFを拒否する。
+- emergency／high-riskをseparate Safety ownerへ送る。
+- observed、IF、SavedRouteIntent、commentを別identityにする。
+- comment空欄をvalidとし、observed／Pieceへ自動投入しない。
+- initial external image／PDFなしでProduct Read可能にする。
+
+### 20.8 Cutover, retirement, and HOLD
+
+| Target | Retire trigger | Action | Retain |
+|---|---|---|---|
+| Emlis current I5 ingress | accepted Emlis Product Reads + cutover approval | new ingress exact1、old direct exact0 | history／test／rollback evidence |
+| Piece old Q&A | recipient-visible V2 Product Read + clean-cutover approval | old generation／entry exact0、fallback exact0 | historical artifact read／approved compatibility |
+| Watashi Map v1 generation | V1-D accepted Product Read + cutover approval | V1-D generation exact1、v1 generation exact0 | historical v1 read compatibility |
+| PR #2 operational shells | never activate | wrapper／recovery chain非継承 | usable symbol／test／failure knowledge |
+| PR #3 failed surface | never activate | output surface非継承 | contract skeleton／FAIL evidence |
+| dormant renderer | caller exact0 + cleanup approval | ownerから除外。physical deleteは別承認 | required compatibility evidence |
+
+destructive DB row／user data／legacy route／code deletionはaccepted cutover後にexact scopeを作り、separate Mash approvalを得る。本完成版から自動進行しない。
+
+HOLDは少なくとも、Emlis thread exact DB／API／RN／lifecycle linkage、Premium actual cross-core payload、Piece semantic／renderer／recipient route／migration、Analysis new source／storage／RLS／UI／external retention／Safety ownerを含む。HOLDをempty module、unused adapter、new table、先行migration packetで埋めない。
