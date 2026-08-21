@@ -5,13 +5,16 @@ created_at: "2026-08-21 JST"
 decision_owner: "Mash"
 product_and_operator_experience_owner: "Pro華恋"
 technical_input_owner: "Ultra華恋"
-execution_owner: "Pro華恋"
+execution_owner: "Ultra華恋"
+ultra_step3_verdict: "CANDIDATE_CORRECTED"
 document_role: "STEP3_LEVEL3_DECISION_BRIEF_AND_PRO_ULTRA_INPUT_RECONCILIATION"
 normative_status: "JOINT_REQUIREMENT_RECOMMENDATION__MASH_DECISION_PENDING"
 scope_classification: "MASH_DECISION_AND_APPROVAL_REQUIRED_SCOPE_LEVEL_3"
 primary_outcome: "BLOCKER_NARROWED"
-source_plan: "USER_ATTACHMENT__Cocolon_SystemContext_EnhancementPlan_ProUltraJoint_20260821(6).md"
-source_pro_operator_needs: "USER_ATTACHMENT__Pro華恋側 Operator Needs 抽出結果.txt"
+source_plan: "USER_ATTACHMENT__Cocolon_SystemContext_EnhancementPlan_ProUltraJoint_20260821(5).md"
+source_pro_operator_needs: "USER_ATTACHMENT__Step1_Pro華恋側 Operator Needs 抽出結果.txt"
+source_pro_step3_candidate: "USER_ATTACHMENT__Step3_Pro華恋.txt"
+source_pro_step3_candidate_head: "56e321b8b61c48e9fbb3e9aea25d40b625794da3"
 source_ultra_audit_pr: 32
 source_ultra_audit_head: "218cb8eedec85dd37b6277c8a79bb6da9e158fa1"
 source_ultra_audit_path: "Cocolon_前提資料/system_context/Cocolon_SystemContext_UltraOperatorNeeds_and_CMEEActualUseGap_20260821.md"
@@ -22,7 +25,7 @@ current_cmee_design_pr: 30
 current_cmee_design_head: "ce2b9beca61c2293ed2828a8caf964392f8eb9f4"
 current_rules_blob: "1f77473d3afa137b32a3325e74ff16fbb55d6a4b"
 mandatory_incident_blob: "1d0decca5ea2684541f4a03a257b4315646b1cff"
-github_effect: "EXACT1_NEW_DOCUMENT_ON_SEPARATE_STACKED_DRAFT_PR"
+github_effect: "EXACT1_DOCUMENT_CORRECTED_ON_EXISTING_STACKED_DRAFT_PR"
 implementation_effect: 0
 source_effect: 0
 test_runtime_effect: 0
@@ -37,7 +40,7 @@ automatic_progression: false
 
 ## 0. 結論
 
-Pro華恋のOperator Needsと、Ultra華恋がactual repository、current System Context、最近のCMEE既存資産継承から独立抽出したOperator Needs／実使用gapを、役割を混ぜずに照合した。
+Pro華恋が作成したStep 3候補を、Ultra華恋がPro結論へ従属せず、Step 1／2のactual evidenceとexisting System Context実装へ戻って独立に照合した。Ultra verdictは`CANDIDATE_CORRECTED`である。exact9／defer exact5の骨格は採用し、管理入口activation、current V1非対象、machine判断境界、既存pipeline統合可否を補正した。
 
 共同推奨は次である。
 
@@ -55,13 +58,18 @@ Step 1／Step 2から、次はactual gapとして成立している。
 6. 現行Step 5自体のbugは確認されていない。Step 5を再修正するのではなく、強化requirementsとして扱う。
 7. 過去のPro／Ultra重複再確認回数はdurable evidenceから確定していないため、削減量を捏造しない。
 
-この結果から、V1へ採用するrequirement exact9、defer exact5、恒久的な非対象exact12を共同推奨として固定する。ただし、Mashが管理入口、自動化境界、V1 scope、原本非置換を確認するまでLevel 3のfinal decisionは成立しない。
+この結果から、V1採用候補のrequirement exact9、defer exact5、current V1から除外するexact12を共同推奨候補として提示する。ただし、Mashが管理入口、自動化境界、V1 scope、原本非置換を確認するまでStep 3全体のLevel 3 decisionは成立しない。
 
 ```text
+ULTRA_STEP3_INDEPENDENT_REVIEW = COMPLETE
+ULTRA_VERDICT = CANDIDATE_CORRECTED
 STEP3_PRO_ULTRA_INPUT_RECONCILED = 1
-STEP3_REQUIREMENT_RECOMMENDATION_COMPLETE = 1
-MASH_LEVEL3_DECISION = 0
+STEP3_JOINT_RECOMMENDATION_READY = 1
+STEP3_REQUIREMENTS_AND_V1_BOUNDARY_APPROVED = 0
+MASH_LEVEL3_DECISION = PENDING
 V1_SCOPE_APPROVED = 0
+EXISTING_PIPELINE_EXTENSION_FEASIBLE_AS_V1_DIRECTION = 1
+NEW_STANDALONE_SUBSYSTEM_REQUIRED = 0
 INITIAL_TECHNICAL_DESIGN = 0
 IMPLEMENTATION = 0
 AUTOMATIC_PROGRESSION = false
@@ -97,7 +105,7 @@ canonical task-owner branchを見ないfreshness
 | A. current未完了条件 | canonical owner freshness、required premise、responsibility owner、claim provenance、bounded role outputが未成立 | このgap以外を追加しない |
 | B. 直接因果 | task profileがcanonical owner ref／required identity／責任関係を持たず、selected graphを短い判断面へ縮約しない | existing System Contextへ最小統合する |
 | C. 成功時のevidence | CMEE Step 11で最新owner、必読資料、role Context、protected scope、unresolved routingを一度に復元できる | machine testに加えてPro／Ultra actual useを確認する |
-| D. より小さい手段 | one-shot manual確認は一件を救うが、標準入口ごとの再構成負荷を残す | new serviceではなく既存manifest／profile／graphを第一候補とする |
+| D. より小さい手段 | one-shot manual確認は一件を救うが、標準入口ごとの再構成負荷を残す | 既存workspace resolve／Inventory／graph／Task Context pipelineへのin-place extensionとし、standalone subsystemを作らない |
 | E. 費用・Mash負担 | new service／recurring cost／Mash操作を必要とする根拠はない | defaultは全て0。逸脱は別Level 3へ戻す |
 | F. 完了・打切り | CMEE exact1、非CMEE exact1、changed-refでoperator effectを検証可能 | 負担が減らない、保守が増える、商品作業を圧迫する場合はSTOP／retire |
 
@@ -149,11 +157,55 @@ Pro／Ultraでviewは変えてよいが、head、owner relation、current／hist
 5. unresolvedをPro／Ultra／Mash／external retrievalへroutingする。
 6. actual-use feedbackでoperator valueを確認する。
 
+### 2.4 Ultra華恋の独立technical verdict
+
+Ultra華恋はcurrent実装をread-onlyで再確認し、V1 exact9は既存の次のpipelineへ統合可能と判断した。
+
+```text
+workspace_profiles / workspace resolve / workspace lock
+→ Inventory / Code Index / Route Graph
+→ task_profiles / Task Context compiler
+→ context manifest / role-specific thin projections
+→ prepare / publication transport / existing single-writer workflow
+```
+
+V1方向としての対応は次であり、新しいservice、daemon、database、vector store、dashboard、authority subsystemは必要ない。
+
+| existing layer | V1 requirement family | Step 3で固定する境界 |
+|---|---|---|
+| workspace ref／profile／lock／prepare | R01、R03、R08 | canonical task-owner ref、required identity、body-free locatorを既存ref解決とfail-closeへ接続する |
+| Inventory／graph＋explicit profile／overlay | R02、R04、R07 | 責任・provenance・deterministic relationを表示し、authorityやsemantic correctnessは推測しない |
+| Task Context／manifest projection | R05、R06、R09 | 同じfingerprintからbounded Pro／Ultra／restart／subagent viewを派生し、別fact baseを作らない |
+
+full closureはtrace可能なevidence layerとして保持し、初期operator surfaceだけを同一manifestから縮約する。内部schema、module分割、field precedence、output filename、budget値、test matrix、処理順はStep 4のtechnical designへ残す。
+
+```text
+EXISTING_PIPELINE_EXTENSION_FEASIBLE_AS_V1_DIRECTION = 1
+NEW_STANDALONE_SUBSYSTEM_REQUIRED = 0
+INTERNAL_MODULE_LAYOUT = STEP4_PENDING
+```
+
+Step 4で既存pipeline内へ安全に閉じられないことが判明した場合は、新componentを自動追加せずSTOPし、新しいactual evidenceを伴ってLevel 3へ戻す。
+
+### 2.5 Pro／Ultra inputからexact9へのtrace
+
+| V1 | Pro input | Ultra input／actual gap |
+|---|---|---|
+| R01 | PRO-05 | UON-01／AUG-05・28 |
+| R02 | PRO-01 | UON-02・03／AUG-06・08 |
+| R03 | PRO-01・04 | UON-06／AUG-07・14〜20 |
+| R04 | PRO-02 | UON-04／AUG-03 |
+| R05 | PRO-03・06・07 | SHN-01〜04／AUG-11・12 |
+| R06 | PRO-04・05 | UON-05／AUG-13〜20 |
+| R07 | PRO-03・05 | UON-07〜09／AUG-09・12 |
+| R08 | PRO-08 | UON-10／AUG-24〜26 |
+| R09 | PRO-09 | UON-12・13／AUG-11・23 |
+
 ---
 
 ## 3. V1採用requirements exact9
 
-## SCV1-R01 — Canonical Task-Owner Ref / Freshness Binding
+### SCV1-R01 — Canonical Task-Owner Ref / Freshness Binding
 
 Task Contextはworkspace refだけでなく、taskごとのcanonical owner ref exact1以上を持ち、次を表示する。
 
@@ -170,7 +222,7 @@ stale時のfail-close reason
 
 **Acceptance:** canonical owner側が更新されたとき、旧Contextを`FRESH`としてsilent reuseしない。
 
-## SCV1-R02 — Responsibility / Lifecycle / Authority / Supersession
+### SCV1-R02 — Responsibility / Lifecycle / Authority / Supersession
 
 file単位の一語分類ではなく、責任単位で次を辿れるようにする。
 
@@ -193,7 +245,7 @@ front matter、explicit metadata、Git history、task profileからの抽出とc
 
 **Acceptance:** owner候補が複数、nonauthority、Draft、historicalの場合、黙って一つへ統合せずreason付きで表示する。
 
-## SCV1-R03 — Required Premise Identity / Mandatory Entry Chain
+### SCV1-R03 — Required Premise Identity / Mandatory Entry Chain
 
 Task profileは最低件数やpath globだけでなく、required responsibilityとidentity／entry chainを持つ。
 
@@ -211,7 +263,7 @@ expected identityの存在、selection、freshness、read-order inclusionは検�
 
 **Acceptance:** 宣言済みrequired premiseがtreeに存在するのにsilent未選択となる件数は0。取得不能はabsenceへ変換せずreason付きunresolvedにする。
 
-## SCV1-R04 — Claim Provenance / Mash Decision Lineage
+### SCV1-R04 — Claim Provenance / Mash Decision Lineage
 
 claim単位で次を区別する。
 
@@ -248,15 +300,15 @@ KAREN_PROPOSAL_NOT_MASH_DECISION
 UNRESOLVED
 ```
 
-明示source間のlink、path／blob／symbol verification、未接続箇所の可視化は自動化してよい。Mashの未明示意図・感情の推測、operator conclusionのmachine conclusion化、final Disposition、acceptanceは行わない。
+明示source間のlink、path／blob／symbol verification、未接続箇所の可視化は自動化してよい。`MASH_EXPLICIT_DECISION`と各反映状態は、明示されたMash sourceまたは権限を持つhuman annotationがある場合だけ保持する。明示sourceがない場合は`UNRESOLVED`とし、Mashの未明示意図・感情、semantic correctness、supersession、operator conclusion、final Disposition、acceptanceをmachineが推測しない。
 
 **Acceptance:** machineが確認した範囲と、Pro／Ultra／Mashが判断した範囲を同じclaimとして表示しない。
 
-## SCV1-R05 — Shared Manifest / Role-Specific Decision Surfaces
+### SCV1-R05 — Shared Manifest / Role-Specific Decision Surfaces
 
 同じmanifest fingerprintから、Pro ContextとUltra Contextを生成する。
 
-### Pro Context
+#### Pro Context
 
 ```text
 今回の目的 / bounded scope / freshness
@@ -270,7 +322,7 @@ Ultra technical gap / Mash normative decision / external gap
 普通の言葉のresult
 ```
 
-### Ultra Context
+#### Ultra Context
 
 ```text
 exact repository / PR / commit refs
@@ -287,7 +339,7 @@ technical gap / implementation candidate surface / STOP
 
 **Acceptance:** Pro／Ultra viewが同じexact refsとmanifestへ戻れ、roleごとの結論を自動統合しない。
 
-## SCV1-R06 — Selection Explanation / Bounded Read Surface
+### SCV1-R06 — Selection Explanation / Bounded Read Surface
 
 2,016-file closureを初期operator outputにしない。選択を次へ段階化する。
 
@@ -303,7 +355,7 @@ UNRESOLVED_IMPACT
 
 **Acceptance:** 初期Pro／Ultra Contextが全closure／約60.3 MBの直接読解を前提にせず、原本full readへ辿れる。
 
-## SCV1-R07 — Protected Scope / High-Confidence Drift / Minimal Impact
+### SCV1-R07 — Protected Scope / High-Confidence Drift / Minimal Impact
 
 Ultra向けにfile／symbol／routeごとのowner、usage、changeability、required approval、write targetを示す。
 
@@ -316,20 +368,20 @@ RELATED_NOT_WRITE_AUTHORIZED
 UNRESOLVED
 ```
 
-V1のdrift detectionはhigh-confidenceな事実に限定する。
+V1のdrift detectionは、path、exact ref／blob、明示metadata、宣言済みrelation、既存route／test graphから決定的に確認できる事実へ限定する。
 
 - owner path不存在。
 - exact ref／blobのstale。
 - rename／delete後もcurrent ownerが旧pathを指す。
-- retired routeがactive call chainへ残る。
-- declared test／contract ownerとactual route closureの不一致。
-- design-onlyをruntime actualとして扱う。
+- 明示的にretiredとされたrouteが既存active call chainへ残る。
+- declared test／contract ownerと既存actual route closureの不一致。
+- explicit lifecycleがdesign-onlyの対象をruntime actualとして扱う。
 
-change impactはdirect、probable、unchanged、manual reviewへ分け、minimal readback surfaceを返す。不明影響を`NO_IMPACT`へ推測しない。
+本文意味からのsemantic drift判定はDEF-01へ残す。change impactはdirect、probable、unchanged、manual reviewへ分け、minimal readback surfaceを返す。不明影響を`NO_IMPACT`へ推測しない。
 
 **Acceptance:** 関連fileであることを変更許可へ変換せず、changed-refで必要な再読だけを理由付きで示す。
 
-## SCV1-R08 — External / Private / Other-Workspace Locator
+### SCV1-R08 — External / Private / Other-Workspace Locator
 
 本文を複製せず、次を区別する。
 
@@ -346,15 +398,15 @@ RETRIEVAL_GAP
 ACTUAL_ABSENCE
 ```
 
-最低metadataはlocator、expected ref／hash、availability、privacy、canonicality、adoption state、retrieval owner、claim boundaryとする。
+最低metadataはlocator、availability、privacy、canonicality、adoption state、retrieval owner、claim boundaryとする。expected ref／hashは、対象のprivacy policyと公開範囲が明示的に許す場合だけ保持し、private body由来の公開hashを作らない。
 
 **Acceptance:** private body leakage 0。取得不可を不存在と表示しない。未採用knowledgeを自動採用しない。
 
-## SCV1-R09 — Thin Collaboration Outputs / Actual-Use Feedback
+### SCV1-R09 — Thin Collaboration Outputs / Actual-Use Feedback
 
 R01〜R08の同じmanifestから、別subsystemを作らずthin projectionとして次を生成可能にする。
 
-### Short restart packet
+#### Short restart packet
 
 ```text
 current refs / canonical owner refs
@@ -367,7 +419,7 @@ prohibited scope
 required model / environment
 ```
 
-### Ultra subagent read-only packet
+#### Ultra subagent read-only packet
 
 ```text
 subtask purpose
@@ -382,7 +434,7 @@ coverage boundary / overlap
 unresolved handback
 ```
 
-### Actual-use feedback
+#### Actual-use feedback
 
 ```text
 SELECTED_AND_USED
@@ -414,20 +466,22 @@ packet案、coverage map、operator feedbackの軽量記録は許可する。sub
 
 ---
 
-## 5. V1の恒久的な非対象 exact12
+## 5. current V1の非対象／System Context責任外 exact12
 
 1. Mashの思想、判断、感情、商品目的を新たに生成すること。
-2. Pro／Ultraのfinal judgment、asset Disposition、採用／非採用を自動決定すること。
-3. human Product Read、商品品質PASS、acceptance、candidate-readyを判定すること。
+2. Pro／Ultraのfinal judgment、Ultra technical design／go・STOP、asset Disposition、採用／非採用を自動決定すること。
+3. human Product Read、商品品質PASS、acceptance、candidate-readyを判定すること、または生成要約を原本読了の代替にすること。
 4. 前提資料、設計書、source、test、private knowledge本文を第二の正本へ複製すること。
-5. current owner／authorityを機械が自動確定すること。
+5. current owner／authority／semantic correctness／supersessionを機械が自動確定すること。
 6. document／source／testを自動削除、rename、統合、修正すること。
-7. auto merge／rebase／fix／retry／GitHub write／workflow executionを行うこと。
+7. auto merge／rebase／fix／retry／GitHub write／workflow executionを行うこと、またはCI／test／log runnerを再実装すること。
 8. subagentの生成、model選択、実行制御、最終統合を独自system化すること。
 9. private bodyのpublic copy／公開hash化、未採用knowledgeの自動採用を行うこと。
 10. external vector DB、search service、常駐daemon、new recurring cost、dashboardをactual blockerなしに導入すること。
 11. 全file全文を毎回model contextへ投入すること。
-12. 新しいapproval ledger、Receipt family、authority familyを作ること、またはSystem Context PASSをCocolon商品品質PASSへ変換すること。
+12. 新しいapproval ledger、Receipt family、authority familyを作ること、またはSystem Context PASSをCocolon商品品質PASS／次Step／implementation／activationへ自動変換すること。
+
+exact12はcurrent V1へ入れない。将来の必要性まで永久否定するものではないが、再検討にはactual gap、より小さい既存手段では解けない理由、費用・保守・privacy評価、新しいMash Level 3判断を必要とする。
 
 ---
 
@@ -435,7 +489,7 @@ packet案、coverage map、operator feedbackの軽量記録は許可する。sub
 
 ### 6.1 共同推奨
 
-管理入口移行は、次の形で**方向として承認し、activationはV1 acceptance後へ遅延**することを推奨する。
+管理入口移行は、次の形で**方向だけを承認候補**とする。V1 acceptanceとactual proofはactivationの必要条件であって十分条件ではない。入口activation、旧routeのretire／削除はStep 9の別bounded workとMashの明示判断まで行わない。
 
 ```text
 作業開始:
@@ -518,7 +572,8 @@ System Contextは原本へのroutingと矛盾検出を担う。第二の正本�
 
 ### Maintainability
 
-- existing System Contextへの最小統合をdefaultとする。
+- existing System Context pipelineへのin-place最小統合だけをV1方向とする。
+- new standalone component／service／database／daemon／dashboard 0。
 - current generated outputはreplace-current、historyはGit history。
 - external service 0、new recurring cost 0をdefaultとする。
 - auto delete／rename／rewrite／merge／retry 0。
@@ -542,13 +597,13 @@ System Contextは原本へのroutingと矛盾検出を担う。第二の正本�
 1. canonical freshness、required premise、role viewという中心gapを解かず、metadata／schema／dashboardだけが増える。
 2. 初期Contextが再び大量closureの直接読解を要求する。
 3. Pro／Ultraが同じmanual owner／lifecycle／selection再構成を継続する。
-4. external service、new dependency、recurring cost、private body ingestionが必要になる。
+4. external service、new standalone component、new dependency、recurring cost、private body ingestionが必要になる。
 5. System Context保守がCMEE／Cocolon本体の作業を継続的に遅らせる。
 6. operator feedbackで負担削減が確認できず、選択漏れまたは不要選択が改善しない。
 7. original sourceを読まなくてよいsystem、または判断を自動化するsystemへscopeが広がる。
 8. Step 4 technical designでV1 exact9を同一bounded architectureへ安全に閉じられない。
 
-STOP時は新しいhelper／scanner／authority familyを追加せず、成立しないrequirementと最小代替routeを示す。
+STOP時は新しいhelper／scanner／authority familyを追加せず、成立しないrequirementと最小代替routeを示す。Mashが本提案を不採用とした場合もSystem Context強化だけをSTOPし、current standard entryと原本direct read fallbackでCocolon本体の作業は継続できる。
 
 ---
 
@@ -556,44 +611,61 @@ STOP時は新しいhelper／scanner／authority familyを追加せず、成立�
 
 ### DECISION-01 — 管理入口移行方針
 
-**推奨:** `APPROVE_DIRECTION__ACTIVATE_ONLY_AFTER_V1_ACCEPTANCE`
+**推奨:** `APPROVE_PRIMARY_ROUTING_ENTRY_DIRECTION__NO_AUTOMATIC_ACTIVATION`
 
-前提資料探索、正本候補確認、Task Context生成をSystem Contextから開始する方向を承認する。ただしStep 3時点では移行しない。V1 actual proofとfreeze後にactivationし、direct GitHub read fallbackを残す。
+前提資料探索、正本候補確認、Task Context生成をSystem Contextから開始する将来方向だけを承認する。V1 acceptance／actual proof後も自動移行せず、入口activationと旧route retire／削除は別のMash明示判断まで行わない。direct GitHub read fallbackを残す。
 
 ### DECISION-02 — 自動化境界
 
-**推奨:** `APPROVE_FACT_ROUTING_AUTOMATION__HUMAN_JUDGMENT_RETAINED`
+**推奨:** `APPROVE_DETERMINISTIC_FACT_ROUTING_ONLY`
 
-identity、freshness、明示metadata、関係、selection、claim provenance、role view、unresolved routingだけを自動化する。owner確定、Mash意図、product judgment、technical design、Disposition、Product Read、acceptance、writeは自動化しない。
+identity、freshness、明示metadata、存在／hash、決定的な関係、selection reason、claim provenance、conflict表示、同一manifest由来のrole view、unresolved routingだけを自動化する。owner、Mash判断の意味、semantic correctness、supersession、product judgment、technical design、Disposition、Product Read、acceptance、permission、merge／retry／writeは推測・確定・実行しない。判断不能は`UNRESOLVED`のまま正しいactorへ返す。
 
 ### DECISION-03 — V1 scope
 
-**推奨:** `APPROVE_V1_EXACT9__DEFER_EXACT5__REJECT_EXACT12`
+**推奨:** `APPROVE_V1_REQUIREMENT_FAMILIES_EXACT9__DEFER_EXACT5__KEEP_EXACT12_OUT_OF_CURRENT_V1`
 
-本書§3のSCV1-R01〜R09だけをV1候補とする。§4はdefer、§5は非対象とする。Step 4のUltra華恋はrequirementsを増やさず、existing System Contextへ統合できる最小technical designを作る。new componentが必要な場合は、actual evidenceと既存統合で不可能な理由を示しLevel 3へ戻す。
+本書のcurrent remote headにある§3のSCV1-R01〜R09だけをclosed V1 requirement候補とする。§4 exact5は未承認のfuture hold、§5 exact12はcurrent V1から除外する。本承認はinitial design、implementation、new component／service、GitHub source／test変更、V1 activation、管理入口移行を承認しない。Step 4でexisting System Context pipeline内へ閉じられない場合はscopeを増やさずSTOPし、actual evidenceを伴ってLevel 3へ戻す。
 
 ### DECISION-04 — 原本非置換方針
 
-**推奨:** `APPROVE_ORIGINALS_REMAIN_CANONICAL`
+**推奨:** `APPROVE_ORIGINALS_REMAIN_CANONICAL_AND_DIRECTLY_READABLE`
 
-前提資料、設計書、source、test、Mash判断、private knowledgeは各current ownerへ残す。System Contextはidentity／relation／routing／conflict／read orderを持つが、本文の第二正本にならない。
+前提資料、設計書、source、test、Mash判断、private knowledgeは各current ownerへ残す。System Contextはidentity／relation／routing／conflict／read orderを持つが、本文の第二正本にならない。metadata conflictは原本を上書きせず`UNRESOLVED`とし、private本文／要約／公開hashを出さない。
 
 上記exact4を承認する場合も、次は自動承認されない。
 
 ```text
 new external service = 0
+new standalone component = 0
 new recurring cost = 0
 Mash manual operation = 0 default
+Step 4 start permission = 0
 implementation permission = 0
 GitHub source / test change permission = 0
+V1 activation permission = 0
+management entry migration permission = 0
 automatic progression = false
 ```
 
+### 10.5 Mash向けdecision surface
+
+| 観点 | 共同推奨 |
+|---|---|
+| 承認時に成立すること | exact9／exact5／exact12と自動化・原本境界がStep 4入力候補として固定される |
+| 承認時にも成立しないこと | Step 4開始、technical design、implementation、source／test変更、V1 activation、管理入口移行 |
+| 不採用時 | System Context強化だけをSTOPし、current standard entry＋原本direct readでCocolon本体作業を継続する |
+| 増える作業／期間 | Step 4〜9の候補作業。実装工数・期間はStep 4前のため未算定であり、推測値を置かない |
+| 費用 | external service／recurring costは0をdefaultとし、必要になれば別Level 3へ戻す |
+| success | stale使用0、required premise silent missing 0、private leakage 0、conflict 0またはreason付き`UNRESOLVED`、actual proof exact3、Pro／Ultra負担減、Mash技術監視増0 |
+| STOP／retire | 原本へ到達不能、private leakage、stale使用、保守負担が削減負担を上回る、新component／serviceが必要、actual改善なし |
+| Mashの今回の負担 | DECISION-01〜04を承認／差分修正／不採用の一回判断。hash、manifest、path、test、実装手法は戻さない |
+
 ---
 
-## 11. Mash承認後のnext exact1
+## 11. Mash承認後のnext candidate exact1
 
-MashがDECISION-01〜04を承認した場合だけ、次のbounded workは以下となる。
+MashがDECISION-01〜04を承認した場合、次のcandidate bounded workは以下となる。ただし自動開始せず、別の明示指示とその時点のpermission確認を必要とする。
 
 > **Step 4 — Ultra華恋が、current PR #31／#32／本書のstable identityとactual sourceをfresh確認し、SCV1-R01〜R09をexisting architectureへ最小統合するinitial technical design exact1を作る。**
 
@@ -611,15 +683,24 @@ STEP2_CMEE_ACTUAL_USE_AUDIT = COMPLETE_AT_PR32_HEAD_218cb8e
 
 PRO_OPERATOR_NEEDS_REAUTHORED_BY_ULTRA = 0
 ULTRA_TECHNICAL_DESIGN_REAUTHORED_BY_PRO = 0
+ULTRA_STEP3_INDEPENDENT_REVIEW = COMPLETE
+ULTRA_VERDICT = CANDIDATE_CORRECTED
 PRO_ULTRA_SHARED_FACTS_RECONCILED = 1
 ACTUAL_GAP_TO_REQUIREMENT_MAPPING = COMPLETE
+EXISTING_PIPELINE_EXTENSION_FEASIBLE_AS_V1_DIRECTION = 1
+NEW_STANDALONE_SUBSYSTEM_REQUIRED = 0
+STEP3_JOINT_RECOMMENDATION_READY = 1
+STEP3_REQUIREMENTS_AND_V1_BOUNDARY_APPROVED = 0
 V1_REQUIREMENT_CANDIDATE = EXACT9
 V1_DEFERRED = EXACT5
-NOT_SYSTEM_CONTEXT_SCOPE = EXACT12
+CURRENT_V1_EXCLUDED = EXACT12
 
 MASH_LEVEL3_DECISION = PENDING
 V1_SCOPE_APPROVED = 0
+STEP4_START = 0
 MANAGEMENT_ENTRY_ACTIVATED = 0
+MANAGEMENT_ENTRY_MIGRATION = 0
+V1_ACTIVATION = 0
 INITIAL_TECHNICAL_DESIGN = 0
 IMPLEMENTATION = 0
 TEST_RUNTIME_EFFECT = 0
@@ -627,6 +708,7 @@ PRODUCT_EFFECT = 0
 PRODUCT_CREDIT = 0
 TECHNICAL_CREDIT = 0
 PRIMARY_OUTCOME = BLOCKER_NARROWED
+CURRENT_BLOCKER = MASH_LEVEL3_DECISION_PENDING
 STRUCTURE_MAP_DELTA_NONE
 AUTOMATIC_PROGRESSION = false
 STOP_BEFORE_STEP4
