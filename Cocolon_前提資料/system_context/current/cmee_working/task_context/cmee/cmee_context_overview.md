@@ -1,7 +1,7 @@
 # CMEE task context 概要
 
 - workspace: `cmee_working`
-- status: `STEP4_INCOMPLETE_BLOCKING_CONTEXT_OR_REMOTE_VERIFICATION`
+- status: `STEP4_TASK_CONTEXT_COMPILER_CMEE_ACTUAL_REVIEW_COMPLETE`
 - selected files: `2016`
 - required categories: `10` / `10`
 - required categories all nonzero: `true`
