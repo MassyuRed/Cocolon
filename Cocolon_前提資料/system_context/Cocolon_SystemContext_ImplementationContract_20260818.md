@@ -1,15 +1,17 @@
 ---
 doc_id: cocolon_system_context_implementation_contract_20260818
-title: "Cocolon System Context — Steps 1–3 Implementation Contract"
-revision_date: "2026-08-19 JST"
-implementation_steps: [1, 2, 3]
+title: "Cocolon System Context — Steps 1–5 and Step 7 Candidate Contract"
+revision_date: "2026-08-22 JST"
+implementation_steps: [1, 2, 3, 4, 5, 7]
+step7_candidate_status: "UNIT_A_INTERNAL_CHECKPOINT"
+v1_activation: 0
 scope: "Cocolon + mashos-api full file inventory, code index, and RN/API/backend/test/domain route graph"
 product_runtime_effect: 0
 api_db_rn_contract_effect: 0
 automatic_progression: false
 ---
 
-# Cocolon System Context — Steps 1–3 Implementation Contract
+# Cocolon System Context — Steps 1–5 and Step 7 Candidate Contract
 
 ## 0. Purpose
 
@@ -19,9 +21,9 @@ This contract establishes the technical context needed to locate every tracked f
 
 ## 1. Workspace
 
-The generated checkpoint in this branch uses `cmee_working`:
+Unit A temporary candidateのresolver relation baseは`cmee_working`のcurrent materialを使うが、tracked live Steps 1–5 Inventoryはそのmanifestがlockした既存`source_commit`を保持する。両者は別identityとして検証／表示し、overlay／incorporation／partial refreshしない。
 
-- `Cocolon`: the exact source commit that triggers generation and descends from Draft PR #30.
+- `Cocolon`: approved PR #36 lineageのcurrent material commit。PR #30 owner exact refとは別identityで、ancestry／incorporationを要求しない。
 - `mashos-api`: `agent/cmee-v1a-i1sx-source-explicit-20260815`, exact expected head fixed by `workspace_profiles.json`.
 
 Different Draft PRs are not overlaid into one false tree.
@@ -174,15 +176,78 @@ python3 tools/cocolon_context_code_index.py run-scip|build|verify ...
 python3 tools/cocolon_context_routes.py build|verify ...
 ```
 
-GitHub Actions checks out both repositories, installs the pinned SCIP toolchain, runs unit tests, rebuilds the exact inventory, builds and verifies Steps 2 and 3, and commits only generated `current/cmee_working` outputs back to the same Draft branch.
+Steps 1–5で使用したwriter workflowは履歴であり、Step 7 candidateのworkflow exact3はcurrent same-repository Draft PR headだけを前後照合するread-only verifierへretireする。Unit A時点ではgenerated output、source、PR本文、branch refをworkflowから変更しない。bounded writerはwhole-workspace transaction、V2 logical exact11、privacy scan、T01–T74が同じStep 7 candidate内で揃う後続checkpointまで再導入しない。
 
 ## 6. Boundaries
 
 This implementation does not change RN production behavior, API production behavior, public route contracts, DB, migrations, product dependencies, CMEE output, EmlisAI output, Piece, Analysis, merge state, or release state.
 
-No `mashos-api` write is authorized. Unresolved rows are context evidence, not defects silently reclassified as success. Step 4 task-context compilation, PR-body update, ready conversion, and merge are outside this C1-C6 checkpoint.
+No `mashos-api` write is authorized. Unresolved rows are context evidence, not defects silently reclassified as success. PR-body ready conversion、merge、V1 activation、Step 8 actual-use proofは本candidateの自動処理対象ではない。
 
 `STRUCTURE_MAP_DELTA_NONE`: System Context metadata closure only; product flow, runtime owner, public API, DB, RN behavior, and core boundaries are unchanged.
 
 `product_credit=0`  
 `automatic_progression=false`
+
+## 7. Step 7 bounded candidate — Unit A internal checkpoint
+
+### 7.1 Authority and branch boundary
+
+- approved implementation baseline: PR #36 head `5a35c4c3f139c59b028b6a417d2111015a578e87`.
+- canonical owner input: PR #30 branch `refs/heads/agent/three-core-cmee-current-structure-20260815`, runごとに`READ_ONLY_EXACT_REF`でfresh resolveする。
+- PR #30 relation `DIVERGED`はvisible actualであり、それ単独ではblockerにしない。
+- PR #30 merge／rebase／integration／write、`mashos-api` write、product source writeはexact0である。
+- Unit Aはone Step 7 branch／one Draft PR candidate内のinternal checkpointであり、別terminal、Gate、completion、technical creditではない。
+
+### 7.2 Unit A owned behavior
+
+`task_profiles.v2`はlegacy selection／category／actual reviewを保持したまま、`purpose`を禁止し、non-authoritativeな`task_orientation`へ移行する。persistent primary taskは`cmee` exact1である。Unit Aの`operator_contract`は次のexact3だけを所有する。
+
+```text
+canonical_owner_refs
+required_premises
+document_responsibilities
+```
+
+canonical owner exact1はworkspace profileのallowlisted `MassyuRed/Cocolon` identityからだけGitHub URLを導出し、profileへremote URL／resolved head／blobを固定しない。resolverは次を満たす。
+
+```text
+first_resolved_head
+= fetched_namespace_head
+= pre_publish_resolved_head
+```
+
+fetchはtask専用ref namespaceへのread-only fetchだけで、checkout／merge／rebase／reset／remote ref updateは行わない。ref movementはretryせずSTOPする。relationは`SAME_REF / WORKSPACE_CONTAINS_OWNER_REF / OWNER_REF_AHEAD / DIVERGED / REMOTE_UNRESOLVED`のexact1である。
+
+required premiseはPR #30 owner exact ref上のexact7をordered chainでblobへbindする。`BIND_EXACT_IDENTITY_AT_RESOLVED_OWNER_REF`では`owner_id`をrequired、`expected_identity_locator_id=null`とし、provenance locatorをverification targetへ兼用しない。premise missing／rename／unreadableはcached Inventoryへ偽装せずblocked reasonを返す。
+
+document responsibilityはPR #30 owner-side exact14、premise追加exact6、NLSv3 Disposition exact1のexact21である。product purpose、structure、design、navigation、historical predecessorを一語へ統合しない。supersession edgeはexplicit profile／metadataだけを許し、現profileでは推測edge exact0である。
+
+restricted front matterは先頭delimiter、16 KiB／256 lines、scalar 2 KiB、single-line list 64 items／item 512 bytesでparseする。duplicate key、nested／multiline YAML、anchor／alias／tag／merge、control character、invalid UTF-8をunresolved metadataとして可視化する。document body、summary、quote、embedding、body-derived hash、secret、token、signed URLはmodelへ入れない。
+
+declared JSON metadataは64 KiB、depth 16に閉じ、strict UTF-8／duplicate-key／non-finite number reject後にRFC 6901-compatibleな`JSON_POINTER`を解決する。modelへはdeclared pointer、`MATCH / MISMATCH / UNRESOLVED`、fixed reason codeだけを返し、undeclared valueやmismatch actual valueは返さない。profileはunknown fieldをrejectし、task 1..32、owner 1..8、premise 0..256、responsibility 1..512、metadata assertion 0..64をboundedにする。CMEE persistent primaryはUnit Aでexact1／exact7／exact21を強制する。
+
+resolver bundleはcompiler入力時にfingerprintだけで信頼しない。workspace／task／phase／zero-effect boundary、declaration set、local owner namespace、actual Git relation／merge-base／changed paths、premise／responsibility subjectのcommit–path–blob identityを再検証する。owner-ref blobとworkspace Inventory blobは別identityとし、一致しないpremiseはworkspace rowへ種付けせず`OWNER_REF_ROUTING_ONLY`とする。
+
+resolver bundleのowner rowはcurrent checkoutのgenerated-only tailを除いた`workspace_material_commit`を明示し、actual relation／structured diffと同じbundle fingerprintへbindする。legacy `workspace_exact_refs` / Inventory `source_commit`はStep 1–3 manifest snapshotの別identityとし、Unit Aで両者を暗黙に同一視したりlive rootをpartial refreshしたりしない。compilerはそれぞれのidentityを別々に検証し、model上でも分離して表示する。
+
+temporary candidate manifestの`unit_a_premise_management`はcountだけでなく、`publication_mode`、public owner、ordered premise、responsibility、conflict、inventory binding、blockerのfull deterministic modelを含む。そのmodel SHAに加え、canonical `workspace_exact_refs`とUnit A completion-gate projectionもcontext fingerprintにbindする。verifierはprofileから渡されたtrusted `expected_unit_a`／`expected_task`／`expected_publication_mode`を使い、Unit A markerの全削除またはtask renameによるlegacy／ephemeral downgrade、internal row、zero-effect boundary、gateの改変をrejectする。CMEE persistent primaryのexact1／exact7／exact21は`publication_mode=PERSISTENT_PRIMARY`のときだけ強制し、ephemeral taskはbounded schema cardinalityを保持する。
+
+verifierはowner relationを`workspace_material_commit`／owner exact head／merge-baseから再導出し、`DIVERGED`を表示したままincorporation claimへ変換しない。また、required-premise readiness、blocking conflict、responsibility supersession reciprocity、authority enum、derived role fact、selected-row↔identity bindingを再導出し、public model全stringをsecret／email／signed-URL patternでfail closed scanする。
+
+selection rowはlegacy full closureを保持したまま、`classification_provenance`、`authority_claim=false`、`responsibility_ids`、`conflict_ids`、`selection_tier`、non-proof boundaryを持つ。NLSv3 Dispositionのlegacy `CURRENT_OWNER`とverified `REVIEWED_NONAUTHORITY / design_authority=false`、およびowner changed-path exact14とlegacy CURRENT_OWNER exact14の集合差をsilent count PASSにせず表示する。
+
+### 7.3 Workflow and activation boundary
+
+workflow exact3は`pull_request`の`opened / reopened / synchronize`だけを受け、`contents: read`／`pull-requests: read`だけを持つ。same-repository event、open Draft、unmerged、event head ref／SHAをcheckout前後にGitHub APIで照合し、credentialをpersistしない。historical branch、hard-coded PR、dispatch／poll、source repair、`git add / commit / push`、PR editはexact0である。
+
+Unit A時点ではV2 exact11をlive rootへpartial publishしない。public `prepare` entryはprofileをstrict loadした後、ref resolve、fetch、live delete／writeより前に`UNIT_A_LIVE_PUBLICATION_DISABLED_USE_TEMPORARY_CANDIDATE`でSTOPする。source／testsはtemporary candidate actualで検証し、tracked `current/cmee_working/**`はbyte unchangedとする。後続Unit B／Cは同じStep 7 Draft candidateへ積むが、自動開始しない。
+
+```text
+V1_ACTIVATION = 0
+completion_claim = null
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+AUTOMATIC_PROGRESSION = false
+STRUCTURE_MAP_DELTA_NONE
+```

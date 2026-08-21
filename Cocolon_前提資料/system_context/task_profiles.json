@@ -1,7 +1,9 @@
 {
-  "schema_version": "cocolon.system_context.task_profiles.v1",
+  "schema_version": "cocolon.system_context.task_profiles.v2",
+  "persistent_primary_task": "cmee",
   "tasks": {
     "cmee": {
+      "publication_mode": "PERSISTENT_PRIMARY",
       "current_owner_rules": [
         {
           "path_globs": [
@@ -35,7 +37,7 @@
           ]
         }
       ],
-      "purpose": "Restore the CMEE/EmlisAI/Piece/Analysis task context from exact workspace identities instead of filename recency, while preserving separate CMEE and Cycle001 Git trees.",
+      "task_orientation": "Restore the CMEE/EmlisAI/Piece/Analysis task context from exact workspace identities instead of filename recency, while preserving separate CMEE and Cycle001 Git trees.",
       "required_categories": [
         {
           "id": "current_production_emlis_ai",
@@ -384,7 +386,503 @@
             "mashos-api"
           ]
         }
-      ]
+      ],
+      "operator_contract": {
+        "canonical_owner_refs": [
+          {
+            "owner_id": "OWNER.CMEE.PR30",
+            "responsibility": "CMEE_CANONICAL_PRODUCT_STRUCTURE_AND_DESIGN_OWNER",
+            "repository_key": "Cocolon",
+            "remote_ref": "refs/heads/agent/three-core-cmee-current-structure-20260815",
+            "public_pr_number_or_locator": "PR #30",
+            "required": true,
+            "freshness_policy": "READ_ONLY_EXACT_REF",
+            "claim_boundary": "READ_ONLY_ROUTING_NO_WORKSPACE_INCORPORATION_OR_WRITE_AUTHORITY",
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {
+              "locator_id": "LOC.OWNER.CMEE.PR30",
+              "location": "PUBLIC_GITHUB_PR",
+              "availability": "RESOLVE_AT_RUN_TIME",
+              "privacy": "PUBLIC",
+              "canonicality": "DECLARED_CANONICAL_OWNER_REF",
+              "repository_key": "Cocolon",
+              "remote_ref": "refs/heads/agent/cocolon-system-context-step6-final-technical-body-20260821",
+              "path": "Cocolon_前提資料/system_context/Cocolon_SystemContext_Step6_FinalTechnicalBody_20260821.md",
+              "section_locator": "§6.3 / §13.1"
+            }
+          }
+        ],
+        "required_premises": [
+          {
+            "premise_id": "PREMISE.PIECE.READ_FIRST",
+            "responsibility": "RESP.PIECE.NAVIGATION",
+            "repository_key": "Cocolon",
+            "path": "Cocolon_Piece/00_read_first.md",
+            "owner_id": "OWNER.CMEE.PR30",
+            "required": true,
+            "entry_chain_order": 1,
+            "read_tier": "MUST_READ_FULL",
+            "expected_identity_policy": "BIND_EXACT_IDENTITY_AT_RESOLVED_OWNER_REF",
+            "expected_identity_locator_id": null,
+            "required_roles": ["PRO_KAREN", "ULTRA_KAREN"],
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {
+              "locator_id": "LOC.PREMISE.PIECE.READ_FIRST",
+              "location": "PUBLIC_GITHUB",
+              "availability": "RESOLVE_AT_OWNER_REF",
+              "privacy": "PUBLIC",
+              "canonicality": "DECLARED_REQUIRED_PREMISE",
+              "repository_key": "Cocolon",
+              "remote_ref": "refs/heads/agent/cocolon-system-context-step4-initial-technical-design-20260821",
+              "path": "Cocolon_前提資料/system_context/Cocolon_SystemContext_Step4_InitialTechnicalDesign_20260821.md",
+              "section_locator": "§5.3"
+            }
+          },
+          {
+            "premise_id": "PREMISE.PIECE.MANIFEST",
+            "responsibility": "RESP.PIECE.MANIFEST",
+            "repository_key": "Cocolon",
+            "path": "Cocolon_Piece/manifest.json",
+            "owner_id": "OWNER.CMEE.PR30",
+            "required": true,
+            "entry_chain_order": 2,
+            "read_tier": "MUST_READ_FULL",
+            "expected_identity_policy": "BIND_EXACT_IDENTITY_AT_RESOLVED_OWNER_REF",
+            "expected_identity_locator_id": null,
+            "required_roles": ["PRO_KAREN", "ULTRA_KAREN"],
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {
+              "locator_id": "LOC.PREMISE.PIECE.MANIFEST",
+              "location": "PUBLIC_GITHUB",
+              "availability": "RESOLVE_AT_OWNER_REF",
+              "privacy": "PUBLIC",
+              "canonicality": "DECLARED_REQUIRED_PREMISE",
+              "repository_key": "Cocolon",
+              "remote_ref": "refs/heads/agent/cocolon-system-context-step4-initial-technical-design-20260821",
+              "path": "Cocolon_前提資料/system_context/Cocolon_SystemContext_Step4_InitialTechnicalDesign_20260821.md",
+              "section_locator": "§5.3"
+            }
+          },
+          {
+            "premise_id": "PREMISE.PIECE.ROADMAP",
+            "responsibility": "RESP.PIECE.ROADMAP",
+            "repository_key": "Cocolon",
+            "path": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807_CleanCutover_Revised.md",
+            "owner_id": "OWNER.CMEE.PR30",
+            "required": true,
+            "entry_chain_order": 3,
+            "read_tier": "MUST_READ_FULL",
+            "expected_identity_policy": "BIND_EXACT_IDENTITY_AT_RESOLVED_OWNER_REF",
+            "expected_identity_locator_id": null,
+            "required_roles": ["PRO_KAREN", "ULTRA_KAREN"],
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {
+              "locator_id": "LOC.PREMISE.PIECE.ROADMAP",
+              "location": "PUBLIC_GITHUB",
+              "availability": "RESOLVE_AT_OWNER_REF",
+              "privacy": "PUBLIC",
+              "canonicality": "DECLARED_REQUIRED_PREMISE",
+              "repository_key": "Cocolon",
+              "remote_ref": "refs/heads/agent/cocolon-system-context-step4-initial-technical-design-20260821",
+              "path": "Cocolon_前提資料/system_context/Cocolon_SystemContext_Step4_InitialTechnicalDesign_20260821.md",
+              "section_locator": "§5.3"
+            }
+          },
+          {
+            "premise_id": "PREMISE.PIECE.DESIGN_SOURCE",
+            "responsibility": "RESP.PIECE.DESIGN_SOURCE",
+            "repository_key": "Cocolon",
+            "path": "Cocolon_Piece/design_sources/Cocolon_Piece_Card_Image_Export_Redesign_DesignNote_20260707.md",
+            "owner_id": "OWNER.CMEE.PR30",
+            "required": true,
+            "entry_chain_order": 4,
+            "read_tier": "MUST_READ_FULL",
+            "expected_identity_policy": "BIND_EXACT_IDENTITY_AT_RESOLVED_OWNER_REF",
+            "expected_identity_locator_id": null,
+            "required_roles": ["PRO_KAREN", "ULTRA_KAREN"],
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {
+              "locator_id": "LOC.PREMISE.PIECE.DESIGN_SOURCE",
+              "location": "PUBLIC_GITHUB",
+              "availability": "RESOLVE_AT_OWNER_REF",
+              "privacy": "PUBLIC",
+              "canonicality": "DECLARED_REQUIRED_PREMISE",
+              "repository_key": "Cocolon",
+              "remote_ref": "refs/heads/agent/cocolon-system-context-step4-initial-technical-design-20260821",
+              "path": "Cocolon_前提資料/system_context/Cocolon_SystemContext_Step4_InitialTechnicalDesign_20260821.md",
+              "section_locator": "§5.3"
+            }
+          },
+          {
+            "premise_id": "PREMISE.ANALYSIS.ROADMAP",
+            "responsibility": "RESP.ANALYSIS.ROADMAP",
+            "repository_key": "Cocolon",
+            "path": "Cocolon_Analysis/roadmap/Cocolon_Analysis_ProFirst_CurrentActual_ProductQualityClosure_Roadmap_20260807.md",
+            "owner_id": "OWNER.CMEE.PR30",
+            "required": true,
+            "entry_chain_order": 5,
+            "read_tier": "MUST_READ_FULL",
+            "expected_identity_policy": "BIND_EXACT_IDENTITY_AT_RESOLVED_OWNER_REF",
+            "expected_identity_locator_id": null,
+            "required_roles": ["PRO_KAREN", "ULTRA_KAREN"],
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {
+              "locator_id": "LOC.PREMISE.ANALYSIS.ROADMAP",
+              "location": "PUBLIC_GITHUB",
+              "availability": "RESOLVE_AT_OWNER_REF",
+              "privacy": "PUBLIC",
+              "canonicality": "DECLARED_REQUIRED_PREMISE",
+              "repository_key": "Cocolon",
+              "remote_ref": "refs/heads/agent/cocolon-system-context-step4-initial-technical-design-20260821",
+              "path": "Cocolon_前提資料/system_context/Cocolon_SystemContext_Step4_InitialTechnicalDesign_20260821.md",
+              "section_locator": "§5.3"
+            }
+          },
+          {
+            "premise_id": "PREMISE.ANALYSIS.SIMULATION",
+            "responsibility": "RESP.ANALYSIS.SIMULATION",
+            "repository_key": "Cocolon",
+            "path": "Cocolon_Analysis/simulation/Cocolon_WatashiSimulation_RouteBranch_DesignNote_20260708.md",
+            "owner_id": "OWNER.CMEE.PR30",
+            "required": true,
+            "entry_chain_order": 6,
+            "read_tier": "MUST_READ_FULL",
+            "expected_identity_policy": "BIND_EXACT_IDENTITY_AT_RESOLVED_OWNER_REF",
+            "expected_identity_locator_id": null,
+            "required_roles": ["PRO_KAREN", "ULTRA_KAREN"],
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {
+              "locator_id": "LOC.PREMISE.ANALYSIS.SIMULATION",
+              "location": "PUBLIC_GITHUB",
+              "availability": "RESOLVE_AT_OWNER_REF",
+              "privacy": "PUBLIC",
+              "canonicality": "DECLARED_REQUIRED_PREMISE",
+              "repository_key": "Cocolon",
+              "remote_ref": "refs/heads/agent/cocolon-system-context-step4-initial-technical-design-20260821",
+              "path": "Cocolon_前提資料/system_context/Cocolon_SystemContext_Step4_InitialTechnicalDesign_20260821.md",
+              "section_locator": "§5.3"
+            }
+          },
+          {
+            "premise_id": "PREMISE.EMLIS.ROADMAP",
+            "responsibility": "RESP.EMLIS.ROADMAP",
+            "repository_key": "Cocolon",
+            "path": "Cocolon_前提資料/Cocolon_EmlisAI_longterm_roadmap_CURRENT.md",
+            "owner_id": "OWNER.CMEE.PR30",
+            "required": true,
+            "entry_chain_order": 7,
+            "read_tier": "MUST_READ_FULL",
+            "expected_identity_policy": "BIND_EXACT_IDENTITY_AT_RESOLVED_OWNER_REF",
+            "expected_identity_locator_id": null,
+            "required_roles": ["PRO_KAREN", "ULTRA_KAREN"],
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {
+              "locator_id": "LOC.PREMISE.EMLIS.ROADMAP",
+              "location": "PUBLIC_GITHUB",
+              "availability": "RESOLVE_AT_OWNER_REF",
+              "privacy": "PUBLIC",
+              "canonicality": "DECLARED_REQUIRED_PREMISE",
+              "repository_key": "Cocolon",
+              "remote_ref": "refs/heads/agent/cocolon-system-context-step4-initial-technical-design-20260821",
+              "path": "Cocolon_前提資料/system_context/Cocolon_SystemContext_Step4_InitialTechnicalDesign_20260821.md",
+              "section_locator": "§5.3"
+            }
+          }
+        ],
+        "document_responsibilities": [
+          {
+            "responsibility_id": "RESP.PIECE.NAVIGATION",
+            "subject_locator": {"repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_Piece/00_read_first.md"},
+            "responsibility_kind": "NAVIGATION_OWNER",
+            "lifecycle": "CURRENT",
+            "publication_state": "PUBLISHED",
+            "authority_kind": "NAVIGATION_AUTHORITY",
+            "effective_condition": "CURRENT_OWNER_REF_RESOLVED",
+            "supersedes": [],
+            "superseded_by": [],
+            "metadata_assertions": [
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "decision_owner", "expected_value": "Mash"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "automatic_progression", "expected_value": false}
+            ],
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {"locator_id": "LOC.RESP.PIECE.NAVIGATION", "privacy": "PUBLIC", "repository_key": "Cocolon", "path": "Cocolon_Piece/00_read_first.md"}
+          },
+          {
+            "responsibility_id": "RESP.PIECE.MANIFEST",
+            "subject_locator": {"repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_Piece/manifest.json"},
+            "responsibility_kind": "PRODUCT_PURPOSE_OWNER",
+            "lifecycle": "CURRENT",
+            "publication_state": "PUBLISHED",
+            "authority_kind": "NORMATIVE_AUTHORITY",
+            "effective_condition": "CURRENT_OWNER_REF_RESOLVED",
+            "supersedes": [],
+            "superseded_by": [],
+            "metadata_assertions": [
+              {"metadata_kind": "JSON_POINTER", "metadata_key": "/schema_version", "expected_value": "cocolon.piece.workstream_manifest.v15"},
+              {"metadata_kind": "JSON_POINTER", "metadata_key": "/decision_owner", "expected_value": "Mash"}
+            ],
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {"locator_id": "LOC.RESP.PIECE.MANIFEST", "privacy": "PUBLIC", "repository_key": "Cocolon", "path": "Cocolon_Piece/manifest.json"}
+          },
+          {
+            "responsibility_id": "RESP.PIECE.ROADMAP",
+            "subject_locator": {"repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807_CleanCutover_Revised.md"},
+            "responsibility_kind": "DETAILED_DESIGN_OWNER",
+            "lifecycle": "DESIGN_ONLY",
+            "publication_state": "REVISED_ROADMAP_IMPLEMENTATION_NOT_STARTED",
+            "authority_kind": "DESIGN_AUTHORITY",
+            "effective_condition": "DESIGN_ONLY_IMPLEMENTATION_REQUIRES_SEPARATE_APPROVAL",
+            "supersedes": [],
+            "superseded_by": [],
+            "metadata_assertions": [
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "decision_owner", "expected_value": "Mash"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "automatic_progression", "expected_value": false}
+            ],
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {"locator_id": "LOC.RESP.PIECE.ROADMAP", "privacy": "PUBLIC", "repository_key": "Cocolon", "path": "Cocolon_Piece/roadmap/Cocolon_Piece_ProFirst_ChatWork_Roadmap_20260807_CleanCutover_Revised.md"}
+          },
+          {
+            "responsibility_id": "RESP.PIECE.DESIGN_SOURCE",
+            "subject_locator": {"repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_Piece/design_sources/Cocolon_Piece_Card_Image_Export_Redesign_DesignNote_20260707.md"},
+            "responsibility_kind": "HISTORICAL_PREDECESSOR",
+            "lifecycle": "DESIGN_ONLY",
+            "publication_state": "DESIGN_SOURCE_IMPLEMENTATION_NOT_AUTHORIZED",
+            "authority_kind": "REVIEWED_NONAUTHORITY",
+            "effective_condition": "REFERENCE_ONLY_NO_IMPLEMENTATION_AUTHORITY",
+            "supersedes": [],
+            "superseded_by": [],
+            "metadata_assertions": [],
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {"locator_id": "LOC.RESP.PIECE.DESIGN_SOURCE", "privacy": "PUBLIC", "repository_key": "Cocolon", "path": "Cocolon_Piece/design_sources/Cocolon_Piece_Card_Image_Export_Redesign_DesignNote_20260707.md"}
+          },
+          {
+            "responsibility_id": "RESP.ANALYSIS.ROADMAP",
+            "subject_locator": {"repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_Analysis/roadmap/Cocolon_Analysis_ProFirst_CurrentActual_ProductQualityClosure_Roadmap_20260807.md"},
+            "responsibility_kind": "DETAILED_DESIGN_OWNER",
+            "lifecycle": "DESIGN_ONLY",
+            "publication_state": "READ_ONLY_ROADMAP_IMPLEMENTATION_NOT_STARTED",
+            "authority_kind": "DESIGN_AUTHORITY",
+            "effective_condition": "DESIGN_ONLY_IMPLEMENTATION_REQUIRES_SEPARATE_APPROVAL",
+            "supersedes": [],
+            "superseded_by": [],
+            "metadata_assertions": [
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "decision_owner", "expected_value": "Mash"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "automatic_progression", "expected_value": false}
+            ],
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {"locator_id": "LOC.RESP.ANALYSIS.ROADMAP", "privacy": "PUBLIC", "repository_key": "Cocolon", "path": "Cocolon_Analysis/roadmap/Cocolon_Analysis_ProFirst_CurrentActual_ProductQualityClosure_Roadmap_20260807.md"}
+          },
+          {
+            "responsibility_id": "RESP.ANALYSIS.SIMULATION",
+            "subject_locator": {"repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_Analysis/simulation/Cocolon_WatashiSimulation_RouteBranch_DesignNote_20260708.md"},
+            "responsibility_kind": "HISTORICAL_PREDECESSOR",
+            "lifecycle": "DESIGN_ONLY",
+            "publication_state": "DESIGN_SOURCE_IMPLEMENTATION_NOT_AUTHORIZED",
+            "authority_kind": "REVIEWED_NONAUTHORITY",
+            "effective_condition": "REFERENCE_ONLY_NO_IMPLEMENTATION_AUTHORITY",
+            "supersedes": [],
+            "superseded_by": [],
+            "metadata_assertions": [],
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {"locator_id": "LOC.RESP.ANALYSIS.SIMULATION", "privacy": "PUBLIC", "repository_key": "Cocolon", "path": "Cocolon_Analysis/simulation/Cocolon_WatashiSimulation_RouteBranch_DesignNote_20260708.md"}
+          },
+          {
+            "responsibility_id": "RESP.EMLIS.ROADMAP",
+            "subject_locator": {"repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/Cocolon_EmlisAI_longterm_roadmap_CURRENT.md"},
+            "responsibility_kind": "PRODUCT_PURPOSE_OWNER",
+            "lifecycle": "CURRENT",
+            "publication_state": "PUBLISHED",
+            "authority_kind": "NORMATIVE_AUTHORITY",
+            "effective_condition": "G4B_TO_G10_EXACT100_BODY_FREE_RECEIPT_REMOTE_POSTVERIFIED",
+            "supersedes": [],
+            "superseded_by": [],
+            "metadata_assertions": [
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "status", "expected_value": "CURRENT_EFFECTIVE"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "document_role", "expected_value": "EmlisAI_LONG_TERM_PRODUCT_CURRENT_ALIGNMENT"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "effective_when", "expected_value": "G4B_TO_G10_EXACT100_BODY_FREE_RECEIPT_REMOTE_POSTVERIFIED"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "decision_owner", "expected_value": "Mash"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "automatic_progression", "expected_value": false}
+            ],
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {"locator_id": "LOC.RESP.EMLIS.ROADMAP", "privacy": "PUBLIC", "repository_key": "Cocolon", "path": "Cocolon_前提資料/Cocolon_EmlisAI_longterm_roadmap_CURRENT.md"}
+          },
+          {
+            "responsibility_id": "RESP.STRUCTURE.ROUTING_ENTRY",
+            "subject_locator": {"repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/current_structure/00_three_core_and_cmee_read_first.md"},
+            "responsibility_kind": "NAVIGATION_OWNER",
+            "lifecycle": "DRAFT",
+            "publication_state": "DRAFT_PR_CANDIDATE_UNTIL_MERGED",
+            "authority_kind": "NAVIGATION_AUTHORITY",
+            "effective_condition": "MERGED_TO_COCOLON_MAIN",
+            "supersedes": [], "superseded_by": [],
+            "metadata_assertions": [
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "document_role", "expected_value": "CURRENT_STRUCTURE_ROUTING_OWNER"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "effective_when", "expected_value": "MERGED_TO_COCOLON_MAIN"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "publication_state", "expected_value": "DRAFT_PR_CANDIDATE_UNTIL_MERGED"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "decision_owner", "expected_value": "Mash"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "operational_owner", "expected_value": "Karen"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "automatic_progression", "expected_value": false}
+            ],
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {"locator_id": "LOC.RESP.STRUCTURE.ROUTING_ENTRY", "privacy": "PUBLIC", "repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/current_structure/00_three_core_and_cmee_read_first.md"}
+          },
+          {
+            "responsibility_id": "RESP.STRUCTURE.EMLIS",
+            "subject_locator": {"repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md"},
+            "responsibility_kind": "CURRENT_STRUCTURE_OWNER",
+            "lifecycle": "DRAFT",
+            "publication_state": "DRAFT_PR_CANDIDATE_UNTIL_MERGED",
+            "authority_kind": "NORMATIVE_AUTHORITY",
+            "effective_condition": "MERGED_TO_COCOLON_MAIN",
+            "supersedes": [], "superseded_by": [],
+            "metadata_assertions": [
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "document_role", "expected_value": "EMLIS_AI_CURRENT_STRUCTURE_OWNER"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "effective_when", "expected_value": "MERGED_TO_COCOLON_MAIN"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "publication_state", "expected_value": "DRAFT_PR_CANDIDATE_UNTIL_MERGED"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "automatic_progression", "expected_value": false}
+            ],
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {"locator_id": "LOC.RESP.STRUCTURE.EMLIS", "privacy": "PUBLIC", "repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md"}
+          },
+          {
+            "responsibility_id": "RESP.STRUCTURE.PIECE",
+            "subject_locator": {"repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md"},
+            "responsibility_kind": "CURRENT_STRUCTURE_OWNER",
+            "lifecycle": "DRAFT",
+            "publication_state": "DRAFT_PR_CANDIDATE_UNTIL_MERGED",
+            "authority_kind": "NORMATIVE_AUTHORITY",
+            "effective_condition": "MERGED_TO_COCOLON_MAIN",
+            "supersedes": [], "superseded_by": [],
+            "metadata_assertions": [
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "document_role", "expected_value": "PIECE_CURRENT_STRUCTURE_OWNER"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "effective_when", "expected_value": "MERGED_TO_COCOLON_MAIN"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "publication_state", "expected_value": "DRAFT_PR_CANDIDATE_UNTIL_MERGED"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "automatic_progression", "expected_value": false}
+            ],
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {"locator_id": "LOC.RESP.STRUCTURE.PIECE", "privacy": "PUBLIC", "repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md"}
+          },
+          {
+            "responsibility_id": "RESP.STRUCTURE.ANALYSIS",
+            "subject_locator": {"repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/current_structure/03_analysis_current_structure.md"},
+            "responsibility_kind": "CURRENT_STRUCTURE_OWNER",
+            "lifecycle": "DRAFT",
+            "publication_state": "DRAFT_PR_CANDIDATE_UNTIL_MERGED",
+            "authority_kind": "NORMATIVE_AUTHORITY",
+            "effective_condition": "MERGED_TO_COCOLON_MAIN",
+            "supersedes": [], "superseded_by": [],
+            "metadata_assertions": [
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "document_role", "expected_value": "ANALYSIS_CURRENT_STRUCTURE_OWNER"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "effective_when", "expected_value": "MERGED_TO_COCOLON_MAIN"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "publication_state", "expected_value": "DRAFT_PR_CANDIDATE_UNTIL_MERGED"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "automatic_progression", "expected_value": false}
+            ],
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {"locator_id": "LOC.RESP.STRUCTURE.ANALYSIS", "privacy": "PUBLIC", "repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/current_structure/03_analysis_current_structure.md"}
+          },
+          {
+            "responsibility_id": "RESP.STRUCTURE.CMEE",
+            "subject_locator": {"repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/current_structure/04_cmee_current_structure.md"},
+            "responsibility_kind": "CURRENT_STRUCTURE_OWNER",
+            "lifecycle": "DRAFT",
+            "publication_state": "DRAFT_PR_CANDIDATE_UNTIL_MERGED",
+            "authority_kind": "NORMATIVE_AUTHORITY",
+            "effective_condition": "MERGED_TO_COCOLON_MAIN",
+            "supersedes": [], "superseded_by": [],
+            "metadata_assertions": [
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "document_role", "expected_value": "CMEE_CURRENT_STRUCTURE_AND_PRODUCT_QUALITY_ROUTE_OWNER"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "effective_when", "expected_value": "MERGED_TO_COCOLON_MAIN"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "publication_state", "expected_value": "DRAFT_PR_CANDIDATE_UNTIL_MERGED"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "automatic_progression", "expected_value": false}
+            ],
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {"locator_id": "LOC.RESP.STRUCTURE.CMEE", "privacy": "PUBLIC", "repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/current_structure/04_cmee_current_structure.md"}
+          },
+          {
+            "responsibility_id": "RESP.CMEE.FINAL_TECHNICAL_DESIGN",
+            "subject_locator": {"repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/designs/cmee/Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md"},
+            "responsibility_kind": "DETAILED_DESIGN_OWNER",
+            "lifecycle": "DRAFT",
+            "publication_state": "FIXED_IN_DRAFT_PR30",
+            "authority_kind": "DESIGN_AUTHORITY",
+            "effective_condition": "MERGED_TO_COCOLON_MAIN_AS_DESIGN_OWNER",
+            "supersedes": [], "superseded_by": [], "metadata_assertions": [],
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {"locator_id": "LOC.RESP.CMEE.FINAL_TECHNICAL_DESIGN", "privacy": "PUBLIC", "repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/designs/cmee/Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md"}
+          },
+          {
+            "responsibility_id": "RESP.CMEE.DETAIL.READ_FIRST",
+            "subject_locator": {"repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/designs/cmee/v1/00_read_first.md"},
+            "responsibility_kind": "NAVIGATION_OWNER", "lifecycle": "DRAFT", "publication_state": "DRAFT_PR_CANDIDATE_UNTIL_MERGED", "authority_kind": "NAVIGATION_AUTHORITY", "effective_condition": "MERGED_TO_COCOLON_MAIN_AS_DESIGN_OWNER",
+            "supersedes": [], "superseded_by": [], "metadata_assertions": [], "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {"locator_id": "LOC.RESP.CMEE.DETAIL.READ_FIRST", "privacy": "PUBLIC", "repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/designs/cmee/v1/00_read_first.md"}
+          },
+          {
+            "responsibility_id": "RESP.CMEE.DETAIL.SHARED_KERNEL",
+            "subject_locator": {"repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md"},
+            "responsibility_kind": "DETAILED_DESIGN_OWNER", "lifecycle": "DRAFT", "publication_state": "DRAFT_PR_CANDIDATE_UNTIL_MERGED", "authority_kind": "DESIGN_AUTHORITY", "effective_condition": "MERGED_TO_COCOLON_MAIN_AS_DESIGN_OWNER",
+            "supersedes": [], "superseded_by": [], "metadata_assertions": [], "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {"locator_id": "LOC.RESP.CMEE.DETAIL.SHARED_KERNEL", "privacy": "PUBLIC", "repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md"}
+          },
+          {
+            "responsibility_id": "RESP.CMEE.DETAIL.EMLIS",
+            "subject_locator": {"repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md"},
+            "responsibility_kind": "DETAILED_DESIGN_OWNER", "lifecycle": "DRAFT", "publication_state": "DRAFT_PR_CANDIDATE_UNTIL_MERGED", "authority_kind": "DESIGN_AUTHORITY", "effective_condition": "MERGED_TO_COCOLON_MAIN_AS_DESIGN_OWNER",
+            "supersedes": [], "superseded_by": [], "metadata_assertions": [], "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {"locator_id": "LOC.RESP.CMEE.DETAIL.EMLIS", "privacy": "PUBLIC", "repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md"}
+          },
+          {
+            "responsibility_id": "RESP.CMEE.DETAIL.PIECE",
+            "subject_locator": {"repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/designs/cmee/v1/03_piece_v1c_detailed_design.md"},
+            "responsibility_kind": "DETAILED_DESIGN_OWNER", "lifecycle": "DRAFT", "publication_state": "DRAFT_PR_CANDIDATE_UNTIL_MERGED", "authority_kind": "DESIGN_AUTHORITY", "effective_condition": "MERGED_TO_COCOLON_MAIN_AS_DESIGN_OWNER",
+            "supersedes": [], "superseded_by": [], "metadata_assertions": [], "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {"locator_id": "LOC.RESP.CMEE.DETAIL.PIECE", "privacy": "PUBLIC", "repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/designs/cmee/v1/03_piece_v1c_detailed_design.md"}
+          },
+          {
+            "responsibility_id": "RESP.CMEE.DETAIL.ANALYSIS",
+            "subject_locator": {"repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md"},
+            "responsibility_kind": "DETAILED_DESIGN_OWNER", "lifecycle": "DRAFT", "publication_state": "DRAFT_PR_CANDIDATE_UNTIL_MERGED", "authority_kind": "DESIGN_AUTHORITY", "effective_condition": "MERGED_TO_COCOLON_MAIN_AS_DESIGN_OWNER",
+            "supersedes": [], "superseded_by": [], "metadata_assertions": [], "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {"locator_id": "LOC.RESP.CMEE.DETAIL.ANALYSIS", "privacy": "PUBLIC", "repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md"}
+          },
+          {
+            "responsibility_id": "RESP.CMEE.DETAIL.SCHEMA",
+            "subject_locator": {"repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/designs/cmee/v1/05_json_schema_and_versioning.md"},
+            "responsibility_kind": "DETAILED_DESIGN_OWNER", "lifecycle": "DRAFT", "publication_state": "DRAFT_PR_CANDIDATE_UNTIL_MERGED", "authority_kind": "DESIGN_AUTHORITY", "effective_condition": "MERGED_TO_COCOLON_MAIN_AS_DESIGN_OWNER",
+            "supersedes": [], "superseded_by": [], "metadata_assertions": [], "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {"locator_id": "LOC.RESP.CMEE.DETAIL.SCHEMA", "privacy": "PUBLIC", "repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/designs/cmee/v1/05_json_schema_and_versioning.md"}
+          },
+          {
+            "responsibility_id": "RESP.CMEE.DETAIL.IMPLEMENTATION_ORDER",
+            "subject_locator": {"repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md"},
+            "responsibility_kind": "DETAILED_DESIGN_OWNER", "lifecycle": "DRAFT", "publication_state": "DRAFT_PR_CANDIDATE_UNTIL_MERGED", "authority_kind": "DESIGN_AUTHORITY", "effective_condition": "MERGED_TO_COCOLON_MAIN_AS_DESIGN_OWNER",
+            "supersedes": [], "superseded_by": [], "metadata_assertions": [], "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {"locator_id": "LOC.RESP.CMEE.DETAIL.IMPLEMENTATION_ORDER", "privacy": "PUBLIC", "repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md"}
+          },
+          {
+            "responsibility_id": "RESP.NLSV3.DISPOSITION.REVIEW",
+            "subject_locator": {"repository_key": "Cocolon", "owner_id": "OWNER.CMEE.PR30", "path": "Cocolon_前提資料/designs/cmee/NLSv3_to_CMEE_Disposition_Phase1_20260817.md"},
+            "responsibility_kind": "HISTORICAL_PREDECESSOR",
+            "lifecycle": "DESIGN_ONLY",
+            "publication_state": "REVIEWED_NONAUTHORITY",
+            "authority_kind": "REVIEWED_NONAUTHORITY",
+            "effective_condition": "MIGRATION_INPUT_ONLY",
+            "supersedes": [],
+            "superseded_by": [],
+            "metadata_assertions": [
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "document_role", "expected_value": "NLSV3_TO_CMEE_MIGRATION_INPUT"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "normative_status", "expected_value": "REVIEWED_NONAUTHORITY"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "lifecycle", "expected_value": "PHASE1_REVIEWED_CORRECTED_READY_FOR_GITHUB_REFLECTION"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "decision_owner", "expected_value": "Mash"},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "design_authority", "expected_value": false},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "implementation_authority", "expected_value": false},
+              {"metadata_kind": "FRONT_MATTER", "metadata_key": "automatic_progression", "expected_value": false}
+            ],
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {"locator_id": "LOC.RESP.NLSV3.DISPOSITION", "privacy": "PUBLIC", "repository_key": "Cocolon", "path": "Cocolon_前提資料/designs/cmee/NLSv3_to_CMEE_Disposition_Phase1_20260817.md"}
+          }
+        ]
+      }
     }
   }
 }
