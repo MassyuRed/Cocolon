@@ -1070,3 +1070,108 @@ Analysis V1-E:
 destructive DB row／user data／legacy route／code deletionはaccepted cutover後にexact scopeを作り、separate Mash approvalを得る。本完成版から自動進行しない。
 
 HOLDは少なくとも、Emlis thread exact DB／API／RN／lifecycle linkage、Premium actual cross-core payload、Piece semantic／renderer／recipient route／migration、Analysis new source／storage／RLS／UI／external retention／Safety ownerを含む。HOLDをempty module、unused adapter、new table、先行migration packetで埋めない。
+
+## 21. Step 11-A — Ultra technical knowledge-gap classification
+
+本sectionは、Step 10 final integrated designとcurrent actual assetを照合し、remaining logical responsibility exact10を、Mashの構造知識との照合候補と、それ以外の実装／fit-gap／product decisionへ分離した11-Aの記録である。新しいproduct contract、implementation authority、質問票または別authority familyを作らない。
+
+- revision date: `2026-08-22 JST`
+- Step 11-A owner: `Ultra華恋`
+- source design identity: `CMEE_THREE_CORE_INTEGRATED_DESIGN_20260821`
+- source PR #30 head: `ce2b9beca61c2293ed2828a8caf964392f8eb9f4`
+- System Context V1 entry lineage: Draft PR #37 head `d5de2bd8945544a44b4ef3d10136010f88ce23ad`
+- System Context V1 entry: `Cocolon_前提資料/system_context/00_read_first.md`
+- lifecycle: `TECHNICAL_KNOWLEDGE_GAP_LIST_COMPLETE`
+- existing-knowledge lookup candidate: `exact6`
+- direct Mash question: `exact0`
+- Karen-Diary `knowledge/` comparison: `NOT_STARTED`
+- Step 11-B: `NOT_STARTED`
+- current authorized next implementation: `NONE`
+- implementation／test／runtime／dependency／DB／API／RN／activation／Cycle001／Product Read effect: `0`
+- product credit: `0`
+- technical credit: `0`
+- structure map delta: `NONE`
+- automatic progression: `false`
+
+### 21.1 Classification rule
+
+`NB-F01..NB-F10`はremaining implementation responsibilityであり、その全てをMashの構造知識不足へ変換しない。11-Aで`EXISTING_KNOWLEDGE_LOOKUP_CANDIDATE_FOR_11B`とするのは、current CMEE／core design、actual source、test、failure knowledgeを全て使っても、product-specific semantic construction ruleを閉じられないものだけである。
+
+このclassificationは`MASH_QUESTION_REQUIRED`を意味しない。11-B Pro華恋がKaren-Diary等の既存構造知識と照合し、既存知識で閉じるものを除いた後にだけ質問候補を作れる。
+
+PR #37のactual finding `CMEE-ACTUAL-001`にあるCycle001 visible-inverse source／testは、symbol-level migration sourceとprotected test knowledgeである。active CMEE subengine、semantic ownerまたは質問根拠へ昇格させず、必要時にbounded product unit内でcurrent CMEE ownerへ移す。
+
+PR #37 System Context task contextはasset inventory／route evidenceとして使い、Step 10 remaining responsibilityのcanonical authorityはPR #30 head `ce2b9beca61c2293ed2828a8caf964392f8eb9f4`のexact14とする。System Context V1 operator actual proofは`NOT_CLAIMED`のままであり、11-Aはこれを`COMPLETE`へ変更しない。
+
+### 21.2 Remaining logical responsibility exact10 disposition
+
+| ID | 11-A classification | Reason |
+|---|---|---|
+| `NB-F01` | `EXISTING_KNOWLEDGE_LOOKUP_CANDIDATE_FOR_11B` | P6、capability、context、user model、graph／plan／traceはあるが、input-specific claim選択、Layer 1と非同義反復のLayer 2 Reception、Premium frame内部構造のconstructive ruleがない。 |
+| `NB-F02` | `EXISTING_KNOWLEDGE_LOOKUP_CANDIDATE_FOR_11B` | budget、round、保存順、`target_unknown_ref` exact1は固定済みだが、複数unknownから本人理解をmaterialに深める一点を選ぶsemantic priorityがない。 |
+| `NB-F03` | `ACTUAL_TECHNICAL_FIT_GAP_HOLD` | logical thread schemaと順序／immutabilityは成立済み。exact DB／API／RN／auth／access／delete linkageだけがactual fit-gapまでHOLDである。 |
+| `NB-F04` | `EXISTING_KNOWLEDGE_LOOKUP_CANDIDATE_FOR_11B` | P5 eligibility／guard／scopeは継承できるが、category一致を超える具体的な「記録の線」のrelationとvisible exact1の選択規則がない。 |
+| `NB-F05` | `MIXED: KNOWLEDGE_GAP + DESIGN_SUFFICIENT_IMPLEMENTATION` | exact3 universe、plan boundary、feature入力後のselector分岐は固定済み。一方、sourceからanchor／format feature／standalone body planを構成するsemantic shaperのpositive ruleがない。 |
+| `NB-F06` | `PRODUCT_ROUTE_AND_TECHNICAL_FIT_GAP_HOLD` | text＋visual single-artifact contractは成立済み。renderer／dependency／migrationとactual recipient-visible exact channelはfit-gapおよび別product decisionである。 |
+| `NB-F07` | `EXISTING_KNOWLEDGE_LOOKUP_CANDIDATE_FOR_11B` | node／edge／threshold／payloadはあるが、本人記録からevent frameとevidence-bound human routeを誘導するsemantic ruleがない。 |
+| `NB-F08` | `DESIGN_ALREADY_SUFFICIENT_IMPLEMENTATION_ONLY` | canonical text＋graph payload、identity、safe projection、plan view、unknown／conflict表示は固定済み。assembly／projection codeが未実装である。 |
+| `NB-F09` | `EXISTING_KNOWLEDGE_LOOKUP_CANDIDATE_FOR_11B` | IF boundary、禁止領域、identity、unranked 1..3は固定済みだが、branch intentから意味の異なるSELF_ONLY候補を作るbounded transformation ruleがない。 |
+| `NB-F10` | `DESIGN_ALREADY_SUFFICIENT_IMPLEMENTATION_ONLY` | `SavedRouteIntent`、optional comment、parent／source／observed separation、in-app lifecycleは固定済み。actual lifecycle codeが未実装である。 |
+
+shared source／evidence／unknown／conflict／trace／artifact identity／version／common guardは`EXISTING_ASSET_AND_DESIGN_SUFFICIENT`であり、standalone shared knowledge gapまたはshared-first new-buildを作らない。
+
+### 21.3 Mash structure-knowledge lookup candidates exact6
+
+| gap id | CMEE responsibility | Existing assets | Actual insufficiency | What remains undesignable | Required technical knowledge shape | Classification | Next owner |
+|---|---|---|---|---|---|---|---|
+| `TK-01 / NB-F01` | Emlis observation judgment、input-specific Layer 1、claim-bound Layer 2 Reception、Premium interpretive frame適用 | P6 relation classification／guard、`emlis_ai_capability.py`、`emlis_ai_context_service.py`、`emlis_ai_user_model_store.py`、current-input material bundle、NLSv3 naturalness／failure knowledge、shared graph／plan／trace | どのsource-bound relationを今回の主要観測として表へ出すか、Layer 2が同義反復でなく何を受け取るか、Premium frameを何単位で作り更新するかが未確定 | `NB-F01` actual observation／Reception realizerと、本人固有frameを使うPremium behaviorのexact logic | 出来事、感情、願い、行動、努力、制約、消耗、変化、unknownをどう優先して観測するかの構造。具体claimから受け取れるHuman Reception。本人固有の語義／価値anchor／反応patternの単位、current input／訂正／矛盾による更新規則 | `EXISTING_KNOWLEDGE_LOOKUP_CANDIDATE_FOR_11B` | `Pro華恋 / Step 11-B existing-knowledge comparison` |
+| `TK-02 / NB-F02` | Emlis sufficiency decisionと各roundの`target_unknown_ref` exact1選択 | `SUFFICIENT／LIMITED／ASK`、expected information gain、user burden／high-care、one-question-per-round、plan budget、thread lifecycle | 複数unknownから、観測不足を隠さず、本人理解をmaterialに深め、負担に比例する一点を選ぶsemantic priorityが未確定 | question-need decision、target selection、回答で更新するobservation dutyのexact behavior | observation gapの種類、本人にとっての重要度、回答可能性、負担、回答で変わるclaimの対応。浅い事実確認と人間構造を深める問いの境界 | `EXISTING_KNOWLEDGE_LOOKUP_CANDIDATE_FOR_11B` | `Pro華恋 / Step 11-B existing-knowledge comparison` |
+| `TK-03 / NB-F04` | current inputとeligible owned historyの具体的接続をLayer 3 exact0..1にするcontinuity compiler／realizer | owned-history retrieval、P5 eligibility／guard／scope、multiple evidence、current-input centrality、low-information／safety／personality／cause／other-intent rejection | category一致、同語反復、creepyな断定でない「記録の線」のrelation typeとcandidate priorityが未確定。generic P5 bodyは継承禁止 | 複数candidateからvisible exact1を選び、本人へ適切な距離で返す`NB-F04` logic | 継続、反復、変化、反転、同じ願い、同じ役割、同じ制約、反応変化等の許可relation taxonomy。必要evidence、conflict、abstention、表現距離の境界 | `EXISTING_KNOWLEDGE_LOOKUP_CANDIDATE_FOR_11B` | `Pro華恋 / Step 11-B existing-knowledge comparison` |
+| `TK-04 / NB-F05-A` | Pieceのsource-bound semantic shaper。sourceからmeaning anchorとformat featureを構成し、canonical `piece_text`のstandalone body planを作る | PCE-4 exact9 anchors、preserve invariants、public-safety dual gate、exact3 eligibility／shape、feature入力後のselector式、plan matrix、V1-C allowed／forbidden realization operations、actual validator／guard／light formatter | `dominant_claim`、`context_dependency`、`relation_complexity`、must-keep priorityの導出、複数anchorの競合解消／順序付け、anchorからshareable sentence／body blockを作るpositive grammarが未確定 | multi-claim、contrast、condition、uncertainty併存時を含むsemantic shaper本体と、fixed selectorへ渡すfeature算出。selector wiring自体は設計可能 | 保存入力の「ユーザーの核」をどう構造把握するか。subject／stance／object／relation／scope／uncertainty／negationが一つの他者可読なthoughtをどう作るか。複数anchorの優先順位とauthorshipを失わず安全にabstractする境界 | `EXISTING_KNOWLEDGE_LOOKUP_CANDIDATE_FOR_11B` | `Pro華恋 / Step 11-B existing-knowledge comparison` |
+| `TK-05 / NB-F07` | period recordをevent frameへ分解し、observed route、protective／burden annotation、unknown、central routeへ構成 | Analysis source auth／retrieval、material snapshot、engine adapter、Watashi Map compatibility、node exact5、edge exact2、3 records＋2 occasions threshold、canonical text＋graph schema | record表現からscene／role／attention／action／aftermathを認識し、別記録間の同一構造、順序、共起、protective／burdenを因果化せず統合するroute-induction ruleが未確定 | threshold成立後に何を一つの「今よく通る流れ」とするかを含む`NB-F07` observed compiler意味処理 | 人間の出来事構造grammar、occasion同一性、役割／注意／反応／行動／結果の対応、pattern同一性、protective／burden仮説の成立条件、evidenceと解釈の境界 | `EXISTING_KNOWLEDGE_LOOKUP_CANDIDATE_FOR_11B` | `Pro華恋 / Step 11-B existing-knowledge comparison` |
+| `TK-06 / NB-F09` | observed map、本人のbranch intent、constraintsから、rankしない意味の異なるIF候補1..3を作る | request shape、`HypotheticalScenarioGraph`、origin partition、candidate-set identity、condition／friction／unknown表示、禁止領域、SavedRouteIntent lifecycle | prediction、正解、他者反応推定へ寄らず、本人側で変えられる意味の異なるscenarioを作るtransformation operatorが未確定 | actual IF candidate generationとcandidate間semantic distinctnessを判定する`NB-F09` logic | 本人側のattention、action、pace、boundary、condition、resource、stop等を分岐させるbounded counterfactual grammar。agencyを保ち、結果保証へ変えない条件 | `EXISTING_KNOWLEDGE_LOOKUP_CANDIDATE_FOR_11B` | `Pro華恋 / Step 11-B existing-knowledge comparison` |
+
+### 21.4 Items that must not become Mash structure-knowledge questions
+
+| Item | Disposition | Boundary |
+|---|---|---|
+| `NB-F03` | `ACTUAL_FIT_GAP_HOLD` | thread logical designを再質問しない。actual repositoryのDB／API／RN／lifecycle fit-gapで閉じる。 |
+| `NB-F05-B` | `DEFERRED_IMPLEMENTATION` | exact3 format universe、plan boundary、feature入力後のselector分岐を再説明させない。fixed selector／Free fixed／Plus auto／Premium user-select wiringはexisting exact ruleを使う。 |
+| `NB-F06` | `DEFERRED_IMPLEMENTATION + PRODUCT_ROUTE_HOLD` | renderer、dependency、migration、recipient-visible routeはactual fit-gapと別product decisionで閉じる。 |
+| `NB-F08` | `DEFERRED_IMPLEMENTATION` | fixed canonical payload／projectionを実装し、semantic knowledge questionを作らない。 |
+| `NB-F10` | `DEFERRED_IMPLEMENTATION` | fixed identity／lifecycleを実装し、human structure questionを作らない。 |
+| `D46` external AI／provider | `FUTURE_PRODUCT_DEPENDENCY_DECISION_ONLY` | 品質／費用／提携／収益条件が変わる時の別Mash判断であり、人間構造知識ではない。 |
+| `D47` Cycle ingress A／`D48` production cutover B | `SEPARATE_MASH_CUTOVER_DECISION_ONLY` | acceptance、owner switch、Safety／public mappingの別判断であり、構造質問へ変換しない。 |
+| `D49` exact asset migration manifest | `DEFERRED_TECHNICAL_MIGRATION_MAPPING` | symbol／test／fixture／failure vectorのowner mappingで閉じる。PR #37 actual findingをprotected migration inputとして保ち、active subengineへしない。 |
+
+### 21.5 HOLD preservation
+
+少なくとも次はHOLDのまま維持し、Mashへの構造質問、empty module、unused adapter、先行tableまたはmigration packetで埋めない。
+
+- Emlis thread exact DB／table／API／RN／session／persistenceとexisting auth／access／delete linkage。
+- Premium actual cross-core payload。
+- Layer 3 exact insertion positionとfinal UI label。
+- Piece physical semantic placement、renderer／native capture／dependency／license、recipient-visible exact channel、migration／rollback target。
+- Analysis new source path、DB／storage／RLS／read policy、final navigation／layout／text量／graph scale／animation、external retention coverage／format／UI／renderer／storage、exact Safety owner。
+- physical schema ID／JSON Schema file／DB column／API response／RN model。
+- accepted cutover前のdestructive DB row／user data／legacy route／code deletionとdormant renderer cleanup。
+- Cycle ingress A、production B、Piece／Analysis activation、V1-E開始、`FUTURE_ANALYSIS_EXTERNAL_RETENTION_HOLD`。
+- System Context V1 operator actual proof、Product Read、migration／cutover completion。
+
+### 21.6 Step 11-B boundary and terminal
+
+Step 11-Bへ渡せるinputは`TK-01..TK-06` exact6だけである。11-BではKaren-Diary等の既存Mash構造知識を先に照合し、既存知識で補える内容を除外し、なお不足する場合だけ人間構造の言葉で質問候補を作る。既出内容の再質問、広い「人間を教えてください」型の質問、実装／fit-gap／product decisionの混入を禁止する。
+
+11-AではKaren-Diary `knowledge/`を読まず、質問文を作らず、Mash発言、Pro華恋の解釈、Ultra華恋のCMEE mappingを混ぜない。将来Mash回答があっても設計反映を自動開始しない。
+
+```text
+STEP_11_A_ULTRA = COMPLETE
+REMAINING_LOGICAL_RESPONSIBILITY = EXACT10_CLASSIFIED
+EXISTING_KNOWLEDGE_LOOKUP_CANDIDATE = EXACT6
+DIRECT_MASH_QUESTION = EXACT0
+STEP_11_B = NOT_STARTED
+IMPLEMENTATION_AUTHORITY = NONE
+STRUCTURE_MAP_DELTA = NONE
+AUTOMATIC_PROGRESSION = FALSE
+STOP_AFTER_STEP_11_A
+```
