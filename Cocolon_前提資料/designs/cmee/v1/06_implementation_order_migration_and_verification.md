@@ -1,11 +1,11 @@
 # CMEE V1 — Implementation Order / Migration / Verification 詳細設計
 
 - document id: `cocolon.cmee.v1.implementation_migration_verification.detailed_design`
-- revision date: `2026-08-21 JST`
+- revision date: `2026-08-23 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - absolute implementation rule: `BOUND_TO_PARENT_FINAL_DESIGN_SECTION_0_3`
-- current implementation state: `DRAFT_WIP_DISABLED_PRODUCT_FAIL`
-- current authorized next implementation: `NONE`
+- current implementation state: `STAGE1_CORRECTION_STEP0_COMPLETE_DISABLED`
+- current authorized next implementation: `NONE_AFTER_STEP0`
 - only admissible next implementation class: `ONE_BOUNDED_ACTUAL_PRODUCT_ARTIFACT_IMPROVEMENT_UNIT`
 - historical provider admission: `NO_SAFE_CMEE_V1A_CANDIDATE_STOP`
 - historical L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
@@ -26,11 +26,13 @@ existing core quality contract上で少なくとも1%向上する場合だけ成
 source / provider / binding / guard / trace / proof / test / runtimeのみは独立した商品品質を持たず、
 actual artifactが改善しなければ1%向上、実装作業、成果またはproduct creditにならない。
 
-Current beforeは[mashos-api Draft PR #3](https://github.com/MassyuRed/mashos-api/pull/3) head
-`06ce311b3ea728b06f83439d268a34bed917c01c`のdisabled V1-A verticalである。R1〜R4とmachine structural
-exact8 8/8は成立したが、private human Product Readは`EVALUATED_FAIL_STOP`、candidate ready false、
-Product / full-I1 / Cycle001 / production credit 0である。これは`DRAFT_WIP_DISABLED_PRODUCT_FAIL`の
-before baselineであって、商品品質向上のresultではない。correctionは未承認で、current authorized workは0である。
+Current correction preimageは[mashos-api Draft PR #3](https://github.com/MassyuRed/mashos-api/pull/3) head
+`106a1b8c92e808d15e88ce4f56c6300568d93e9f`のdisabled V1-A verticalである。fresh full-tree preimageで
+47 tests、machine exact8 `GENERATED / artifact / structural trace = 8/8`、material fixture
+`LIMITED / visible UNKNOWN exact1`を再現し、private beforeを§23へ固定した。candidate ready false、
+Product / technical / full-I1 / Cycle001 / production credit 0であり、商品品質向上のresultではない。
+Mashの明示指示でStage 1 correction Step 0だけを完了した。Step 1以後は未着手かつ本checkpointからの
+automatic progressionはなく、current authorized next implementationは`NONE_AFTER_STEP0`である。
 
 この絶対規則の根拠となった事実は、
 [「EmlisAI商品中核の後回しとCMEE Product Read失敗」恒久インシデント記録](../../../audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md)
@@ -1306,7 +1308,139 @@ AUTOMATIC_PROGRESSION = FALSE
 STOP_AFTER_STEP_11_B
 ```
 
-## 23. 実装順序の現在地 — 第1段階（2026-08-22）
+## 23. Stage 1 correction Step 0 — fresh execution envelope（2026-08-23）
+
+本節は、
+`Cocolon_CMEE_Stage1_ProUltra_KarenDerivedFunctional_FinalTechnicalDesign_20260822.md`
+§19.1–19.2と、Mashの「Step 0の実装までを完了」する明示指示を、current implementation ownerへ
+反映したbody-free execution envelopeである。§0および§23.6の旧current snapshotと矛盾する場合、
+Stage 1 correctionのStep 0現在地についてだけ本節を優先する。Step 1以後、Product Read、ready、merge、
+production、Piece、Analysis、DB、API、RNまたはCycleへ進む権限は作らない。
+
+### 23.1 Fresh preimage lock
+
+| Owner | PR / ref | Fresh preimage head | Base | Tree |
+|---|---|---|---|---|
+| Cocolon technical owner | Draft PR #30 / `agent/three-core-cmee-current-structure-20260815` | `e607c69cfc6d51a881b11e0cfdcf2657c0c648e3` | `de9c3d985053bbaaa7fc0d396e688cc2097ece40` | `cc027f3c1cede8ad8d416cbe18f5ad5d41c3a02c` |
+| mashos-api runtime owner | Draft PR #3 / `agent/cmee-v1a-i1sx-source-explicit-20260815` | `106a1b8c92e808d15e88ce4f56c6300568d93e9f` | `a8ca4ddf7b7ae76bf7b3d73e74e3a5808d623428` | `84d1d057a337fae24ecaace51b3646d76be161c6` |
+
+fresh preimageはPR patchだけでなく、各headのfull commit treeからmaterializeした。base継承fileを省略した
+changed-files-only mirrorをfresh checkoutとは扱わない。両PRはこのlock時点でDraft / open / unmergedであり、
+head drift、fixture drift、history rewriteは0だった。
+
+### 23.2 Replaced SHA / path envelope
+
+Step 1–7を同じbounded correctionとして実行する場合のCocolon path / preimage blob exact5は次で固定する。
+Step 0でactualに変更したのは本file exact1だけであり、残りexact4は未変更である。
+
+| Path | Preimage blob SHA | Step 0 state |
+|---|---|---|
+| `Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md` | `27243a5d02f750a298a3194b17c8a09ea0a1ee48` | unchanged |
+| `Cocolon_前提資料/designs/cmee/v1/05_json_schema_and_versioning.md` | `d4ad26e308decfd827c0e94ee4078f0de43ca71b` | unchanged |
+| `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` | `b43c00b67a5ee0b6bc98a127ba098df9dde5d87a` | Step 0 envelope owner |
+| `Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md` | `bd1e84523605a49393d20ae49834d92fd0977c2c` | unchanged |
+| `Cocolon_前提資料/current_structure/04_cmee_current_structure.md` | `acb1528d31b26a98fdcb2a8b6a19bd29e3b27578` | unchanged |
+
+mashos-api path / preimage blob exact7は次で固定する。Step 0でactualに変更したのはhandoff exact1だけで、
+runtime / test / runner exact5とreserved new file exact1は未変更である。
+
+| Path | Preimage blob SHA | Step 0 state |
+|---|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py` | `a4d095adeceb8ed561d2e74a52af8cc252f1519d` | unchanged |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_v1a.py` | `6217009b62fe80436abd74408b63271e62ccefa0` | unchanged |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py` | `ABSENT_AT_PREIMAGE` | reserved exact1 / not created |
+| `ai/tests/test_cmee_v1a_i1sx_contracts.py` | `be63e0b6404b6f0a3c7beaacb75cca25b3c939ce` | unchanged / 15 tests |
+| `ai/tests/test_cmee_v1a_i1sx_vertical.py` | `a39875e5d2470e1c5f1a13e13eb1e1c15e7ec6ce` | unchanged / 32 tests |
+| `ai/tools/cmee_v1a_i1sx_candidate_run.py` | `44d4a707d8c2f70d499a763cd8c07c99c19af0de` | unchanged |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | `86eb291df1bbf101fedaaf1dee99a62dabb67bb0` | Step 0 body-free receipt owner |
+
+STOP fenceのunchanged blobは、`engine.py=e45244e969af650cc8e087b0148c008b05fdbad2`、
+`source_kernel.py=15bdea45cdbb2a427cc8e5bcb63fd79e27384be2`、
+`__init__.py=3b88577d2d74a0cca3f97b566a2d63b0a5ebe881`である。Step 0はこれらを変更していない。
+
+### 23.3 Fixture / baseline reproduction
+
+```text
+runner_blob = 44d4a707d8c2f70d499a763cd8c07c99c19af0de
+historical_evaluated_runner_blob = 9771c3fd7a69d77aa3ae7a0dd20bb3e0edfd5560
+EXACT8 literal equality = true
+PRODUCT_READ_AXES literal equality = true
+fixture identity / order = SX-01..SX-08
+denominator = exact8
+human axes = exact12
+engine call = MeaningExperienceEngine.generate exact1
+
+contract tests = 15 / 15 PASS
+vertical tests = 32 / 32 PASS
+combined current tests = 47 / 47 PASS
+compileall exact4 = PASS
+three-core boundary = 5 / 5 PASS
+exact8 GENERATED = 8 / 8
+exact8 artifact = 8 / 8
+exact8 structural trace = 8 / 8
+exact8 visible material unknown = 0
+candidate runner exit = 0
+material fixture "疲れた。" = LIMITED / artifact present / visible UNKNOWN exact1
+```
+
+検証はWorkのverified absolute Python entrypointと、`PYTHONPATH=services/ai_inference`で実行した。
+machine resultはprivate本文の自然さまたはProduct PASSを証明せず、baselineの再現だけを示す。
+
+### 23.4 Private packet identity and path separation
+
+```text
+BEFORE_PACKET_ID = CMEE_STAGE1_KAREN_DERIVED_BEFORE_EXACT8_20260823_V1
+AFTER_PACKET_ID  = CMEE_STAGE1_KAREN_DERIVED_AFTER_EXACT8_20260823_V1
+BEFORE_PRIVATE_PATH_SLOT = PRIVATE_SLOT_BEFORE_EXACT8_20260823_V1
+AFTER_PRIVATE_PATH_SLOT  = PRIVATE_SLOT_AFTER_EXACT8_20260823_V1
+
+packet_ids_distinct = true
+private_paths_distinct = true
+historical_packet_identity_reuse = 0
+before_body_full_materialized = true
+before_exclusive_create = true
+before_private_durable_owner = PRESENT_NONPUBLIC
+after_path_reserved_not_materialized = true
+packet_identity_collision_count = 0
+packet_overwrite_count = 0
+private_body_published_to_github = 0
+private_packet_digest_published_to_github = 0
+private_locator_published_to_github = 0
+```
+
+current runnerが保持するhistorical packet IDはbaseline byteを変えないためStep 0では編集しなかった。fresh full packetは、
+pristine runnerの`run()`結果をprivate境界内でBEFORE IDへretagし、Cocolon head、mashos-api head、fixture、
+runner、test blobsへbindingしたうえでmode `0600`の別pathへexclusive-createした。AFTER IDには別pathだけを割り当て、
+本文は生成していない。private body、digest、absolute locator、private owner identityはpublic GitHubへ記録しない。
+
+### 23.5 Fresh preliminary estimate and Step 0 exit
+
+fresh head、fixture、axis、engine call、changed-path topologyに設計時からのdriftがなかったため、再算定値は
+`12–20 focused engineering hours`のまま据え置く。これはStep 1–7を同じbounded product correctionとして
+完了する場合のpreliminary / nonbinding estimateであり、scope、品質Gate、credit、開始承認には使わない。
+additional monetary cost 0、external service 0、new dependency 0、Mashの予定操作負担は最終private exact8
+Product Read exact1のままである。
+
+```text
+STAGE1_CORRECTION_STEP0 = COMPLETE
+STEP0_ACTUAL_TRACKED_PATHS = EXACT2
+  Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md
+  ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md
+HEAD_DRIFT = 0
+FIXTURE_DRIFT = 0
+BASELINE_REPRODUCTION_FAILURE = 0
+STRUCTURE_MAP_DELTA = NONE
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+PRIMARY_OUTCOME = BLOCKER_NARROWED
+CANDIDATE_READY = FALSE
+STEP1 = NOT_STARTED
+CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_STEP0
+AUTOMATIC_PROGRESSION = FALSE
+STOP_AFTER_STEP0
+```
+
+### 23.6 Pre-Step0 snapshot — 第1段階（2026-08-22 / superseded for current correction state）
 
 - 完了した技術作業: `TK-01 -> NB-F01` の基本応答実装とローカル検証。
 - 実装参照: `MassyuRed/mashos-api` Draft PR #3 / `106a1b8c92e808d15e88ce4f56c6300568d93e9f`
