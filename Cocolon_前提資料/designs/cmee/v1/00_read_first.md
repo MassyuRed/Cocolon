@@ -1,7 +1,7 @@
 # CMEE V1 詳細設計 — Read First
 
 - document id: `cocolon.cmee.v1.detailed_design.read_first`
-- revision date: `2026-08-21 JST`
+- revision date: `2026-08-23 JST`
 - Step 10 final document id: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2`
 - Step 10 design identity: `CMEE_THREE_CORE_INTEGRATED_DESIGN_20260821`
 - Step 10 Pro review: `CMEE_STEP10_PRO_SINGLE_PRODUCT_ROUTE_REVIEW_20260821 / CONSUMED_EXACTLY_ONCE`
@@ -17,10 +17,11 @@
 - L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
 - Phase 0 / P0 / P0-R1 / standalone product-delta-0 L3-R / L3-I lifecycle: `RETIRED_HISTORICAL_NONREUSABLE`
 - current implementation rule: `PRODUCT_QUALITY_DELTA_GT_0_AND_MASH_CONFIRMED_ONLY`
-- current implementation state: `DRAFT_WIP_DISABLED_PRODUCT_FAIL`
+- current implementation state: `DRAFT_WIP_DISABLED_PRODUCT_READ_PENDING`
 - Phase 2 design correction state: `TOP_LEVEL_NAVIGATION_ALIGNED`
 - Step 10 design correction state: `FINAL_INTEGRATED_CONTRACT_REFLECTED_EXISTING_EXACT14`
-- new parallel canonical design files: `0`
+- Karen-derived functional companion: `exact2`
+- duplicate parallel technical canonical design files: `0`
 - current authorized next implementation: `NONE`
 - automatic progression: `false`
 
@@ -191,19 +192,42 @@ new parallel canonical design file = 0
 remaining `NEW_BUILD_IMPLEMENTATION`はlogical responsibility exact10であり、file countまたはimplementation authorityではない。
 本docs reflectionからsource、test、DB、API、RN、runtime、activation、production、Cycle、Product Read、cleanupへ進行しない。
 
-## 1. 読む順 exact8
+### 0.4 2026-08-23 華恋由来functional companion correction
+
+2026-08-23のPro final reviewは、華恋由来の機能構造が既存technical ownerへ吸収されるだけでは、商品目的の独立ownerが残らないと判断した。Mashの今回指示に基づき、functional companion exact2を追加する。
+
+```text
+functional companion canonical candidate = exact2
+duplicate technical canonical = 0
+technical integration source = NONCANONICAL exact1
+current structure map delta = 01 + 04
+runtime / test / API / DB / RN / production effect = 0
+product credit = 0
+automatic progression = false
+```
+
+Step 10の`new parallel canonical design file = 0`は当時のsynchronization factとして保持する。今回追加するのは第二technical design treeではなく、P1–P8、M1–M7、Layer 1 / 2、V1–V9、最低商品品質を所有するfunctional companionである。
+
+technical integration source:
+
+[Cocolon CMEE Stage 1 華恋由来機能構造 Pro / Ultra 統合追加技術設計](../Cocolon_CMEE_Stage1_ProUltra_KarenDerivedFunctional_FinalTechnicalDesign_20260822.md)
+
+次のruntime implementationは別の長い設計・審査projectへせず、fresh preimageを入れた短いexecution envelopeから同一bounded Stage 1 product correctionへ戻る。本docs correctionはimplementation開始authorityを生成しない。
+
+## 1. 読む順 exact9
 
 1. 本file
 2. [NLSv3 → CMEE Disposition表](../NLSv3_to_CMEE_Disposition_Phase1_20260817.md)
-3. [01_shared_kernel_and_runtime_contracts.md](01_shared_kernel_and_runtime_contracts.md)
-4. [05_json_schema_and_versioning.md](05_json_schema_and_versioning.md)
-5. 実装対象coreの詳細設計
+3. [華恋由来機能構造 — Read First](karen_derived/00_read_first.md)と[Stage 1 functional owner](karen_derived/01_emlis_observation_and_reception.md)
+4. [01_shared_kernel_and_runtime_contracts.md](01_shared_kernel_and_runtime_contracts.md)
+5. [05_json_schema_and_versioning.md](05_json_schema_and_versioning.md)
+6. 実装対象coreの詳細設計
    - [02_emlis_v1a_detailed_design.md](02_emlis_v1a_detailed_design.md)
    - [03_piece_v1c_detailed_design.md](03_piece_v1c_detailed_design.md)
    - [04_analysis_v1d_v1e_detailed_design.md](04_analysis_v1d_v1e_detailed_design.md)
-6. [06_implementation_order_migration_and_verification.md](06_implementation_order_migration_and_verification.md)
-7. `../../../current_structure/04_cmee_current_structure.md`
-8. 対象coreのcurrent structure mapとactual source / contract / test
+7. [06_implementation_order_migration_and_verification.md](06_implementation_order_migration_and_verification.md)
+8. `../../../current_structure/04_cmee_current_structure.md`
+9. 対象coreのcurrent structure mapとactual source / contract / test
 
 Disposition表だけでcurrent実装状態や移管完了を決めない。本suiteだけでcurrent実装状態を決めず、current structure mapを地図、
 GitHubのactual source / testを現物として両方確認する。
@@ -213,6 +237,7 @@ GitHubのactual source / testを現物として両方確認する。
 | File | Owns | Does not own |
 |---|---|---|
 | `00_read_first.md` | 読み順、lifecycle、suite全体の非影響、NLSv3継承の第2段階routing | runtime contract詳細、asset単位の最終移管 |
+| `karen_derived/00_read_first.md` + `01_emlis_observation_and_reception.md` | 華恋由来P1–P8、M1–M7、Layer 1 / 2、V1–V9、観測・選択・応答構造、最低商品品質、public-safe examples / prohibitions | Python型、schema、validator、trace実装、runtime algorithm |
 | `../NLSv3_to_CMEE_Disposition_Phase1_20260817.md` | 第1段階の分類、受け皿、重複・欠落、evidence index | design authority、implementation authority、移管完了claim |
 | `01_shared_kernel_and_runtime_contracts.md` | shared logical architecture、ports、pipeline、failure | core固有商品判断 |
 | `02_emlis_v1a_detailed_design.md` | Emlis observation vertical、question lifecycle、Cycle境界 | Piece / Analysis activation |
@@ -301,18 +326,18 @@ historical_p0r1_execution = 0
 historical_provider_admission = NO_SAFE_CMEE_V1A_CANDIDATE_STOP
 historical_zero_delta_packet_lifecycle = RETIRED_HISTORICAL_NONREUSABLE
 runtime_state = DRAFT_WIP_DISABLED
-implementation_evidence_owner = MASSYURED_MASHOS_API_DRAFT_PR_3_HEAD_06CE311B3EA728B06F83439D268A34BED917C01C
+implementation_evidence_owner = MASSYURED_MASHOS_API_DRAFT_PR_3_HEAD_106A1B8C92E808D15E88CE4F56C6300568D93E9F
 r1_r4_state = CLOSED_GREEN
-candidate_state = GENERATED_FOR_PRODUCT_READ_DISABLED_PRODUCT_FAIL
+candidate_state = GENERATED_FOR_PRODUCT_READ_DISABLED_PENDING_MASH
 machine_structural_exact8 = 8/8
-product_read_state = EVALUATED_FAIL_STOP
+product_read_state = PENDING_MASH_PRODUCT_READ
 candidate_ready = false
 route_b_contract_complete = false
 production_state = NOT_CONNECTED
 cycle_state = NOT_REOPENED
 current_authorized_next_implementation = NONE
-only_admissible_next_implementation_class = ONE_BOUNDED_ACTUAL_EMLIS_ARTIFACT_QUALITY_IMPROVEMENT_UNIT
-current_result_proof = NOT_ESTABLISHED_PRODUCT_READ_FAIL
+only_admissible_next_implementation_class = ONE_BOUNDED_ACTUAL_EMLIS_STAGE1_ARTIFACT_IMPROVEMENT_UNIT
+current_result_proof = NOT_ESTABLISHED_PENDING_MASH_PRODUCT_READ
 required_future_result_proof = ACTUAL_PRODUCT_RESULT_PLUS_MASH_EXPLICIT_CONFIRMATION
 automatic_progression = false
 ```
@@ -367,7 +392,7 @@ target listはautomatic transitionではない。current authorized next impleme
 
 ## 9. Completion and STOP
 
-本suiteの完成は、Markdown exact7がGitHubへ存在するだけではない。次を満たす必要がある。
+本suiteの完成は、technical Markdown exact7とfunctional companion exact2がGitHubへ存在するだけではない。次を満たす必要がある。
 
 - exact7相互linkが解決する。
 - shared / Emlis / Piece / Analysisのauthority重複がない。
