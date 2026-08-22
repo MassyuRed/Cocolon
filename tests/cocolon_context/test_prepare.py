@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import re
 import subprocess
 import sys
@@ -20,6 +21,44 @@ except ModuleNotFoundError:
     stub.ContextCompileError = RuntimeError
     stub.PROFILE_SCHEMA_VERSION = "cocolon.system_context.task_profiles.v2"
     stub.PROFILE_SCHEMA_VERSION_V1 = "cocolon.system_context.task_profiles.v1"
+    stub.OPERATOR_CONTRACT_UNIT_C_KEYS = frozenset(
+        {
+            "canonical_owner_refs",
+            "required_premises",
+            "document_responsibilities",
+            "claim_nodes",
+            "connections",
+            "scope_rules",
+            "external_locators",
+            "role_views",
+            "collaboration",
+            "actual_use_feedback",
+        }
+    )
+    stub.UNIT_C_CMEE_OUTPUT_NAMES = (
+        "selected_files.jsonl",
+        "closure_edges.jsonl",
+        "required_category_coverage.json",
+        "unresolved_context.jsonl",
+        "full_text_read_order.md",
+        "cmee_context_overview.md",
+        "cmee_unincorporated_actual_findings.md",
+        "operator_context.json",
+        "pro_context.md",
+        "ultra_context.md",
+        "collaboration_packets.json",
+    )
+    stub.UNIT_C_NON_CMEE_OUTPUT_NAMES = (
+        "selected_files.jsonl",
+        "closure_edges.jsonl",
+        "required_category_coverage.json",
+        "unresolved_context.jsonl",
+        "full_text_read_order.md",
+        "operator_context.json",
+        "pro_context.md",
+        "ultra_context.md",
+        "collaboration_packets.json",
+    )
     import re as _re
     stub.SAFE_GIT_REF_RE = _re.compile(r"^refs/heads/.+$")
     stub.SAFE_PUBLIC_ID_RE = _re.compile(r"^[A-Z][A-Z0-9_.:-]{0,127}$")
@@ -48,6 +87,14 @@ from tools.cocolon_context_prepare import (
     _canonical_github_url,
     _classify_owner_relation,
     _owner_namespace,
+    _publication_marker,
+    _publication_paths,
+    _publish_workspace_candidate,
+    _recover_workspace_publication,
+    _validate_terminal_task_receipt,
+    _verify_task,
+    _workspace_publication_identity,
+    _write_publication_marker,
     finalize_canonical_owner_bundle,
     prepare,
     resolve_canonical_owner_bundle_initial,
@@ -651,7 +698,7 @@ class CanonicalOwnerResolverTests(unittest.TestCase):
         with self.assertRaisesRegex(PrepareError, "unsafe canonical GitHub"):
             _canonical_github_url(profile, "Cocolon")
 
-    def test_v2_prepare_stops_before_resolver_or_workspace_mutation(self) -> None:
+    def test_nonterminal_v2_prepare_stops_before_resolver_or_workspace_mutation(self) -> None:
         repository_root = Path(__file__).parents[2]
         source_system = repository_root / "Cocolon_前提資料" / "system_context"
         with tempfile.TemporaryDirectory() as td:
@@ -660,6 +707,22 @@ class CanonicalOwnerResolverTests(unittest.TestCase):
             system.mkdir()
             for name in ("workspace_profiles.json", "task_profiles.json"):
                 (system / name).write_bytes((source_system / name).read_bytes())
+            profiles = json.loads(
+                (system / "task_profiles.json").read_text(encoding="utf-8")
+            )
+            contract = profiles["tasks"]["cmee"]["operator_contract"]
+            profiles["tasks"]["cmee"]["operator_contract"] = {
+                key: contract[key]
+                for key in (
+                    "canonical_owner_refs",
+                    "required_premises",
+                    "document_responsibilities",
+                )
+            }
+            profiles["tasks"] = {"cmee": profiles["tasks"]["cmee"]}
+            (system / "task_profiles.json").write_text(
+                json.dumps(profiles, ensure_ascii=False), encoding="utf-8"
+            )
             sentinel = system / "current" / "cmee_working" / "sentinel.txt"
             sentinel.parent.mkdir(parents=True)
             sentinel.write_text("last-good\n", encoding="utf-8")
@@ -673,7 +736,7 @@ class CanonicalOwnerResolverTests(unittest.TestCase):
                     "tools.cocolon_context_prepare._write_atomic"
                 ) as write_atomic, self.assertRaisesRegex(
                     PrepareError,
-                    "UNIT_A_LIVE_PUBLICATION_DISABLED_USE_TEMPORARY_CANDIDATE",
+                    "STEP7_TERMINAL_LIVE_PUBLICATION_REQUIRES_UNIT_C_EXACT10",
                 ):
                     prepare(
                         repo_root=root / "repo",
@@ -689,6 +752,385 @@ class CanonicalOwnerResolverTests(unittest.TestCase):
                 self.assertEqual(sentinel.read_text(encoding="utf-8"), "last-good\n")
 
 
+class WorkspacePublicationTransactionTests(unittest.TestCase):
+    @staticmethod
+    def _write_workspace(root: Path, task: str, marker: str) -> None:
+        required = (
+            "manifest.json",
+            "code_index/code_index_manifest.json",
+            "route_graph/route_graph_manifest.json",
+            "publication_transport.json",
+            "prepare_summary.json",
+            f"task_context/{task}/context_manifest.json",
+            f"task_context/{task}/publication_transport.json",
+        )
+        for relative in required:
+            path = root / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(f"{marker}:{relative}\n", encoding="utf-8")
+
+    @staticmethod
+    def _terminal_receipt(*, cmee: bool) -> dict[str, object]:
+        outputs = {
+            name: "a" * 64
+            for name in (
+                "selected_files.jsonl",
+                "closure_edges.jsonl",
+                "required_category_coverage.json",
+                "unresolved_context.jsonl",
+                "full_text_read_order.md",
+                "operator_context.json",
+                "pro_context.md",
+                "ultra_context.md",
+                "collaboration_packets.json",
+                *(
+                    (
+                        "cmee_context_overview.md",
+                        "cmee_unincorporated_actual_findings.md",
+                    )
+                    if cmee
+                    else ()
+                ),
+            )
+        }
+        return {
+            "task_context": {"output_sha256": outputs},
+            "operator_v1_completion_claim": None,
+            "v1_activation": 0,
+            "product_credit": 0,
+            "technical_credit": 0,
+            "automatic_progression": False,
+        }
+
+    def test_candidate_is_promoted_only_after_post_swap_verification(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            parent = Path(td)
+            paths = _publication_paths(parent, "cmee_working")
+            self._write_workspace(paths.live, "cmee", "old")
+            self._write_workspace(paths.candidate, "cmee", "new")
+            old_identity = _workspace_publication_identity(paths.live, "cmee")
+            new_identity = _workspace_publication_identity(paths.candidate, "cmee")
+            observed: list[str] = []
+
+            def verify() -> None:
+                observed.append(_workspace_publication_identity(paths.live, "cmee"))
+
+            _publish_workspace_candidate(
+                paths=paths,
+                workspace="cmee_working",
+                task="cmee",
+                verify_promoted=verify,
+            )
+            self.assertEqual(observed, [new_identity])
+            self.assertNotEqual(old_identity, new_identity)
+            self.assertEqual(
+                _workspace_publication_identity(paths.live, "cmee"), new_identity
+            )
+            self.assertFalse(paths.candidate.exists())
+            self.assertFalse(paths.backup.exists())
+            self.assertFalse(paths.marker.exists())
+
+    def test_post_swap_failure_restores_last_good_workspace(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            paths = _publication_paths(Path(td), "cmee_working")
+            self._write_workspace(paths.live, "cmee", "old")
+            self._write_workspace(paths.candidate, "cmee", "new")
+            old_identity = _workspace_publication_identity(paths.live, "cmee")
+
+            with self.assertRaisesRegex(RuntimeError, "post-swap failure"):
+                _publish_workspace_candidate(
+                    paths=paths,
+                    workspace="cmee_working",
+                    task="cmee",
+                    verify_promoted=lambda: (_ for _ in ()).throw(
+                        RuntimeError("post-swap failure")
+                    ),
+                )
+            self.assertEqual(
+                _workspace_publication_identity(paths.live, "cmee"), old_identity
+            )
+            self.assertFalse(paths.candidate.exists())
+            self.assertFalse(paths.backup.exists())
+            self.assertFalse(paths.quarantine.exists())
+            self.assertFalse(paths.marker.exists())
+
+    def test_crash_phase_exact4_recovers_without_guessing(self) -> None:
+        for phase in (
+            "CANDIDATE_VERIFIED",
+            "LIVE_MOVED_TO_BACKUP",
+            "CANDIDATE_PROMOTED",
+            "FINAL_VERIFIED",
+        ):
+            with self.subTest(phase=phase), tempfile.TemporaryDirectory() as td:
+                paths = _publication_paths(Path(td), "cmee_working")
+                self._write_workspace(paths.live, "cmee", "old")
+                old_identity = _workspace_publication_identity(paths.live, "cmee")
+                self._write_workspace(paths.candidate, "cmee", "new")
+                new_identity = _workspace_publication_identity(paths.candidate, "cmee")
+                if phase in {"LIVE_MOVED_TO_BACKUP", "CANDIDATE_PROMOTED", "FINAL_VERIFIED"}:
+                    paths.live.replace(paths.backup)
+                if phase in {"CANDIDATE_PROMOTED", "FINAL_VERIFIED"}:
+                    paths.candidate.replace(paths.live)
+                marker = _publication_marker(
+                    paths=paths,
+                    workspace="cmee_working",
+                    task="cmee",
+                    phase=phase,
+                    pre_swap_identity=old_identity,
+                    candidate_identity=new_identity,
+                )
+                _write_publication_marker(paths, marker)
+                _recover_workspace_publication(
+                    paths, workspace="cmee_working", task="cmee"
+                )
+                expected = new_identity if phase == "FINAL_VERIFIED" else old_identity
+                self.assertEqual(
+                    _workspace_publication_identity(paths.live, "cmee"), expected
+                )
+                self.assertFalse(paths.marker.exists())
+                self.assertFalse(paths.candidate.exists())
+                self.assertFalse(paths.backup.exists())
+                self.assertFalse(paths.quarantine.exists())
+
+    def test_markerless_residual_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            paths = _publication_paths(Path(td), "cmee_working")
+            paths.candidate.mkdir()
+            with self.assertRaisesRegex(
+                PrepareError, "PUBLICATION_RECOVERY_AMBIGUOUS"
+            ):
+                _recover_workspace_publication(
+                    paths, workspace="cmee_working", task="cmee"
+                )
+
+    def test_workspace_identity_rejects_undeclared_sibling_task(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            paths = _publication_paths(Path(td), "cmee_working")
+            self._write_workspace(paths.live, "cmee", "old")
+            (paths.live / "task_context" / "rogue").mkdir()
+            with self.assertRaisesRegex(PrepareError, "primary task exact1"):
+                _workspace_publication_identity(paths.live, "cmee")
+
+    def test_interrupted_marker_temp_fails_closed(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            paths = _publication_paths(Path(td), "cmee_working")
+            paths.marker.with_name(paths.marker.name + ".tmp").write_text(
+                "partial", encoding="utf-8"
+            )
+            with self.assertRaisesRegex(
+                PrepareError, "PUBLICATION_RECOVERY_AMBIGUOUS"
+            ):
+                _recover_workspace_publication(
+                    paths, workspace="cmee_working", task="cmee"
+                )
+
+    def test_first_publication_promoted_crash_rolls_back_to_absence(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            paths = _publication_paths(Path(td), "cmee_working")
+            self._write_workspace(paths.live, "cmee", "new")
+            candidate_identity = _workspace_publication_identity(paths.live, "cmee")
+            _write_publication_marker(
+                paths,
+                _publication_marker(
+                    paths=paths,
+                    workspace="cmee_working",
+                    task="cmee",
+                    phase="CANDIDATE_PROMOTED",
+                    pre_swap_identity=None,
+                    candidate_identity=candidate_identity,
+                ),
+            )
+            _recover_workspace_publication(
+                paths, workspace="cmee_working", task="cmee"
+            )
+            self.assertFalse(paths.live.exists())
+            self.assertFalse(paths.marker.exists())
+
+    def test_terminal_output_cardinality_and_zero_effect_boundary(self) -> None:
+        base = {
+            "operator_v1_completion_claim": None,
+            "v1_activation": 0,
+            "product_credit": 0,
+            "technical_credit": 0,
+            "automatic_progression": False,
+        }
+        cmee_outputs = {
+            name: "a" * 64
+            for name in (
+                "selected_files.jsonl",
+                "closure_edges.jsonl",
+                "required_category_coverage.json",
+                "unresolved_context.jsonl",
+                "full_text_read_order.md",
+                "cmee_context_overview.md",
+                "cmee_unincorporated_actual_findings.md",
+                "operator_context.json",
+                "pro_context.md",
+                "ultra_context.md",
+                "collaboration_packets.json",
+            )
+        }
+        _validate_terminal_task_receipt(
+            {**base, "task_context": {"output_sha256": cmee_outputs}},
+            task="cmee",
+            publication_mode="PERSISTENT_PRIMARY",
+        )
+        non_cmee = {
+            key: value
+            for key, value in cmee_outputs.items()
+            if not key.startswith("cmee_")
+        }
+        _validate_terminal_task_receipt(
+            {**base, "task_context": {"output_sha256": non_cmee}},
+            task="account_profile_read_only",
+            publication_mode="EPHEMERAL_VERIFY_ONLY",
+        )
+        with self.assertRaisesRegex(PrepareError, "non-CMEE exact9"):
+            _validate_terminal_task_receipt(
+                {**base, "task_context": {"output_sha256": cmee_outputs}},
+                task="account_profile_read_only",
+                publication_mode="EPHEMERAL_VERIFY_ONLY",
+            )
+        with self.assertRaisesRegex(PrepareError, "credit boundary"):
+            _validate_terminal_task_receipt(
+                {
+                    **base,
+                    "technical_credit": 1,
+                    "task_context": {"output_sha256": cmee_outputs},
+                },
+                task="cmee",
+                publication_mode="PERSISTENT_PRIMARY",
+            )
+
+    def test_ephemeral_task_uses_temp_candidate_and_preserves_live_bytes(self) -> None:
+        repository_root = Path(__file__).parents[2]
+        source_system = repository_root / "Cocolon_前提資料" / "system_context"
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            system = root / "system_context"
+            system.mkdir()
+            for name in ("workspace_profiles.json", "task_profiles.json"):
+                (system / name).write_bytes((source_system / name).read_bytes())
+            live = system / "current" / "cmee_working"
+            live.mkdir(parents=True)
+            (live / "sentinel.txt").write_bytes(b"last-good\n")
+            before = {
+                path.relative_to(live).as_posix(): path.read_bytes()
+                for path in live.rglob("*")
+                if path.is_file()
+            }
+
+            def seed_ephemeral(_source: Path, target: Path, **_kwargs: object) -> Path:
+                target.mkdir(parents=True)
+                return target
+
+            receipt = self._terminal_receipt(cmee=False)
+            with mock.patch(
+                "tools.cocolon_context_prepare.shutil.copytree",
+                side_effect=seed_ephemeral,
+            ), mock.patch(
+                "tools.cocolon_context_prepare._run_v2_candidate",
+                return_value=receipt,
+            ) as run_candidate:
+                observed = prepare(
+                    repo_root=root / "repo",
+                    system_context_root=system,
+                    external_workspace_root=root / "external",
+                    workspace="cmee_working",
+                    task="account_profile_read_only",
+                    verify_only=True,
+                )
+            self.assertIs(observed, receipt)
+            candidate = run_candidate.call_args.kwargs["candidate_workspace"]
+            self.assertNotEqual(candidate, live)
+            self.assertFalse(candidate.exists())
+            after = {
+                path.relative_to(live).as_posix(): path.read_bytes()
+                for path in live.rglob("*")
+                if path.is_file()
+            }
+            self.assertEqual(after, before)
+            self.assertEqual(
+                sorted(path.name for path in (system / "current").iterdir()),
+                ["cmee_working"],
+            )
+
+    def test_task_verifier_materializes_bound_route_graph_sibling(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            workspace = Path(td) / "workspace"
+            task_output = workspace / "task_context" / "account_profile_read_only"
+            route_graph = workspace / "route_graph"
+            task_output.mkdir(parents=True)
+            route_graph.mkdir()
+            (route_graph / "api_routes.jsonl").write_text("{}\n", encoding="utf-8")
+
+            def materialize(_source: Path, target: Path) -> Path:
+                target.mkdir(parents=True)
+                return target
+
+            def verify(materialized: Path, **_kwargs: object) -> dict[str, bool]:
+                bound_graph = materialized.parent.parent / "route_graph"
+                self.assertTrue(bound_graph.is_symlink())
+                self.assertEqual(bound_graph.resolve(), route_graph.resolve())
+                return {"verified": True}
+
+            with mock.patch(
+                "tools.cocolon_context_prepare.verify_outputs"
+            ), mock.patch(
+                "tools.cocolon_context_prepare.materialize_outputs",
+                side_effect=materialize,
+            ), mock.patch(
+                "tools.cocolon_context_prepare.verify_task_context",
+                side_effect=verify,
+            ):
+                self.assertEqual(
+                    _verify_task(
+                        task_output,
+                        expected_unit_a=True,
+                        expected_task="account_profile_read_only",
+                        expected_publication_mode="EPHEMERAL_VERIFY_ONLY",
+                    ),
+                    {"verified": True},
+                )
+
+    def test_terminal_persistent_task_routes_through_sibling_publication(self) -> None:
+        repository_root = Path(__file__).parents[2]
+        source_system = repository_root / "Cocolon_前提資料" / "system_context"
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            system = root / "system_context"
+            system.mkdir()
+            for name in ("workspace_profiles.json", "task_profiles.json"):
+                (system / name).write_bytes((source_system / name).read_bytes())
+            receipt = self._terminal_receipt(cmee=True)
+
+            def seed(paths: object) -> None:
+                paths.candidate.mkdir(parents=True)
+
+            with mock.patch(
+                "tools.cocolon_context_prepare._seed_workspace_candidate",
+                side_effect=seed,
+            ), mock.patch(
+                "tools.cocolon_context_prepare._run_v2_candidate",
+                return_value=receipt,
+            ) as run_candidate, mock.patch(
+                "tools.cocolon_context_prepare._publish_workspace_candidate"
+            ) as publish:
+                observed = prepare(
+                    repo_root=root / "repo",
+                    system_context_root=system,
+                    external_workspace_root=root / "external",
+                    workspace="cmee_working",
+                    task="cmee",
+                )
+            self.assertIs(observed, receipt)
+            self.assertEqual(
+                run_candidate.call_args.kwargs["candidate_workspace"].name,
+                ".cmee_working.cocolon-candidate",
+            )
+            publish.assert_called_once()
+
+
 class WorkflowPolicyTests(unittest.TestCase):
     WORKFLOW_NAMES = (
         "cocolon-system-context-inventory.yml",
@@ -696,6 +1138,11 @@ class WorkflowPolicyTests(unittest.TestCase):
         "cocolon-system-context-step5-pytest-bootstrap.yml",
     )
     EXPECTED_EVENT_TYPES = ("opened", "reopened", "synchronize")
+    EXPECTED_WORKFLOW_ROLES = {
+        "cocolon-system-context-inventory.yml": "TERMINAL_IMPLEMENTATION_MATRIX",
+        "cocolon-system-context-step5-export.yml": "WORKFLOW_POLICY_VERIFIER",
+        "cocolon-system-context-step5-pytest-bootstrap.yml": "PYTEST_RUNTIME_VERIFIER",
+    }
     ALLOWED_ACTIONS = {
         "actions/checkout@v4",
         "actions/setup-node@v4",
@@ -1092,6 +1539,47 @@ class WorkflowPolicyTests(unittest.TestCase):
             "workflow must fail on tracked source mutation",
         )
 
+    @classmethod
+    def _assert_workflow_role(cls, name: str, text: str) -> None:
+        role = cls.EXPECTED_WORKFLOW_ROLES[name]
+        lines, sections = cls._top_level_sections(text)
+        cls._require(
+            cls._structural_line_count(lines, f"WORKFLOW_ROLE: {role}") == 1,
+            f"workflow role must be declared exact1: {name}={role}",
+        )
+        jobs_start, jobs_end, _jobs_value = sections["jobs"]
+        scripts = "\n".join(
+            str(step["run"])
+            for step in cls._steps(lines, jobs_start, jobs_end)
+        )
+        cls._require(
+            f'test "$WORKFLOW_ROLE" = "{role}"' in scripts,
+            f"workflow role must be asserted at runtime: {name}={role}",
+        )
+        if role == "TERMINAL_IMPLEMENTATION_MATRIX":
+            cls._require(
+                "tests.cocolon_context.test_inventory" in scripts
+                and "tests.cocolon_context.test_publication_transport" in scripts
+                and "tests/cocolon_context/test_prepare.py" in scripts
+                and "tests/cocolon_context/test_task_context.py" in scripts,
+                "terminal matrix role must cover transport, prepare, and task context",
+            )
+        elif role == "WORKFLOW_POLICY_VERIFIER":
+            cls._require(
+                "tests/cocolon_context/test_prepare.py -q -k workflow_policy" in scripts,
+                "workflow policy role must run only the bounded policy selector",
+            )
+        else:
+            cls._require(
+                "tests/cocolon_context/test_prepare.py tests/cocolon_context/test_task_context.py -q"
+                in scripts,
+                "pytest runtime role must run the terminal Python matrix",
+            )
+        cls._require(
+            "workflow_dispatch" not in text,
+            "terminal verification must not depend on manual dispatch registration",
+        )
+
     def test_workflow_policy_is_pr_only_read_only_and_current_head_bound(self) -> None:
         root = Path(__file__).parents[2]
         for name in self.WORKFLOW_NAMES:
@@ -1100,6 +1588,7 @@ class WorkflowPolicyTests(unittest.TestCase):
                     encoding="utf-8"
                 )
                 self._assert_workflow_policy(text)
+                self._assert_workflow_role(name, text)
 
     def test_workflow_policy_rejects_representative_unsafe_mutations(self) -> None:
         root = Path(__file__).parents[2]

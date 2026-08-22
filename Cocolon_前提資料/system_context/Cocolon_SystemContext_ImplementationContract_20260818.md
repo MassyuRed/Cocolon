@@ -1,9 +1,9 @@
 ---
 doc_id: cocolon_system_context_implementation_contract_20260818
-title: "Cocolon System Context — Steps 1–5 and Step 7 Candidate Contract"
+title: "Cocolon System Context — Steps 1–5 and Step 7 Bounded Implementation Contract"
 revision_date: "2026-08-22 JST"
 implementation_steps: [1, 2, 3, 4, 5, 7]
-step7_candidate_status: "UNIT_A_INTERNAL_CHECKPOINT"
+step7_candidate_status: "STEP7_BOUNDED_IMPLEMENTATION_COMPLETE"
 v1_activation: 0
 scope: "Cocolon + mashos-api full file inventory, code index, and RN/API/backend/test/domain route graph"
 product_runtime_effect: 0
@@ -11,7 +11,7 @@ api_db_rn_contract_effect: 0
 automatic_progression: false
 ---
 
-# Cocolon System Context — Steps 1–5 and Step 7 Candidate Contract
+# Cocolon System Context — Steps 1–5 and Step 7 Bounded Implementation Contract
 
 ## 0. Purpose
 
@@ -176,7 +176,7 @@ python3 tools/cocolon_context_code_index.py run-scip|build|verify ...
 python3 tools/cocolon_context_routes.py build|verify ...
 ```
 
-Steps 1–5で使用したwriter workflowは履歴であり、Step 7 candidateのworkflow exact3はcurrent same-repository Draft PR headだけを前後照合するread-only verifierへretireする。Unit A時点ではgenerated output、source、PR本文、branch refをworkflowから変更しない。bounded writerはwhole-workspace transaction、V2 logical exact11、privacy scan、T01–T74が同じStep 7 candidate内で揃う後続checkpointまで再導入しない。
+Steps 1–5で使用したunbounded／historical writer workflowは履歴である。Step 7 terminalのworkflow exact3は、current same-repository Draft PR headへbindするprimary bounded publisher、current selected refからそのstandard workflowだけを起動するread-only dispatcher、exact Draft headのread-only pytest verifierへ役割を分離する。publisherがwriteできるのはwhole-workspace transactionで検証済みの`Cocolon_前提資料/system_context/current/cmee_working/**`だけであり、source／profile／test／workflowの自動修正、force、retry、historical ref write、PR Ready化、mergeは行わない。default branchへ未配置の`workflow_dispatch`はsource／static policyだけを検証し、実行成功を主張しない。現Draftのremote verification正本は`pull_request.synchronize`である。
 
 ## 6. Boundaries
 
@@ -351,6 +351,64 @@ V1_ACTIVATION = 0
 completion_claim = null
 PRODUCT_CREDIT = 0
 TECHNICAL_CREDIT = 0
+AUTOMATIC_PROGRESSION = false
+STRUCTURE_MAP_DELTA_NONE
+```
+
+## 9. Step 7 bounded implementation — Unit C Collaboration Support
+
+### 9.1 Terminal profile and output contract
+
+Unit CはUnit A exact3とUnit B exact4を保持し、同じpersistent `cmee` taskの`operator_contract`へ次のexact3を追加する。
+
+```text
+external_locators
+collaboration
+actual_use_feedback
+```
+
+したがってpersistent CMEE contractはexact10である。logical outputはcommon exact5、CMEE compatibility exact2、V1 projection exact4のexact11とし、`collaboration_packets.json`を追加する。`context_manifest.json`と`publication_transport.json`はlogical count外のowner manifestである。
+
+`operator_context.json`だけをshared fact modelとする。Pro、Ultra、collaborationは同じ`operator_context_sha256`と`operator_model_fingerprint`へbindし、verifierが同じmodelからbyte-exactに再生成する。role別fact、AI summary、model/tool選択、subagent実行、write target、permission生成は0である。
+
+### 9.2 External locator and privacy boundary
+
+external locatorは`location_kind / availability_state / privacy_state / canonicality`を直交軸として保持する。current CMEE profileのCycle001 source/test exact2はpublic commit/path/blob/symbol identityへbindした`OTHER_WORKSPACE / AVAILABLE / PUBLIC / NONCANONICAL`であり、active CMEE subengine、canonical adoption、workspace incorporationを意味しない。
+
+`public_identity_allowed=false`またはprivate locatorはopaque IDとretrieval ownerだけを許す。private body、excerpt、quote、summary、embedding、body-derived hash、secret、token、signed URL、sensitive pathをprofile、logical output、manifest、transport、workflow output、PR bodyへ置かない。`RETRIEVAL_GAP`を`ACTUAL_ABSENCE`へ変換しない。
+
+### 9.3 Collaboration and feedback boundary
+
+collaborationはrestart packet exact1とread-only subagent packet 0..3だけを許す。restartのnext workは`MASH_EXPLICIT_DECISION`または明示承認済みclaim IDだけを参照し、compiler推測からStep 8、implementation、activationを開始しない。Step 7 terminalのrestartは`HOLD_AFTER_STEP7_UNTIL_EXPLICIT_NEXT_APPROVAL`と`next_work_source_claim_ids=[]`を表示し、未承認のnext workを生成しない。packetのselected target、coverage、prohibited scope、environment claimはsame task内の既知IDへresolveし、duplicate、dangling、selectedとcoverageを同一packet内またはpacket間で交差させるunresolved overlap、unknown fieldをrejectする。
+
+Unit Cの`role_views` exact3目は`COLLABORATION`とし、budgetはmax items 32、referenced source bytes 2 MiB、reasons/item 8、projection UTF-8 bytes 128 KiBである。required surfaceのtruncateまたは自動増枠は行わず、超過はblockする。
+
+actual-use feedbackは`EVENT_DRIVEN_OPTIONAL`、0..64 row、empty validである。実際の不要選択、選択漏れ、理由不足、role output不足、tool外issueのreview eventだけを許し、routine positive logを禁止する。`SELECTED_AND_USED`は既存gapを閉じる`related_feedback_id`がある場合だけ許す。feedbackによるautomatic rank、selection mutation、authority、profile append API、Mash manual inputは0である。
+
+### 9.4 Non-CMEE exact1 ephemeral proof
+
+`account_profile_read_only`はworkspace内唯一の`EPHEMERAL_VERIFY_ONLY` taskである。`GET /account/profile/me`をRN、API registration／handler、auth／DB read、response contract、protected testsへread-only traceし、direct source exact8とprotected surface exact5を選択する。CMEE compatibility exact2を要求せず、common exact5＋V1 exact4のlogical exact9をtemporary rootでcompile／verifyして破棄する。
+
+shared modelはbackend closureの`RESOLVED_WITH_EXPLICIT_UNKNOWN_EDGES`、route graphの`UNMOUNTED_ROUTER`、direct sourceの`register_account_lifecycle_routes(app)`を別evidenceとして並記し、`MOUNT_VERIFICATION_REQUIRES_DIRECT_SOURCE / manual review`とする。`ACCOUNT-PROTECTED-GAP-001 = AUTH_SELF_FILTER_AND_DB_FIELD_ALLOWLIST_NOT_DIRECTLY_ENDPOINT_TESTED`は`PROTECTED_REVIEW_REQUIRED`、handback ownerはaccount/public API owner、product route GREEN claimは0である。これらmount evidence conflict、dynamic unknown edge、protected gapをsilent GREENへ変えない。PATCH、delete、profile create、visibility update、endpoint invocation、Bearer使用、user-data fetch、DB query/write、RN/API/auth mutation、persistent output、receipt、transport、Git diffはexact0である。
+
+### 9.5 Publication, verification, and completion boundary
+
+persistent `cmee`だけがwhole-workspace sibling transactionからtracked `current/cmee_working/**`へreplace-current publishできる。candidate build、logical/physical exact set、manifest/transport hash、privacy、projection rerender、owner ref pre-publish equality、T01–T74がすべて通る前にlive rootを変更しない。crashまたはfinal verify failureはlast-good whole workspaceへ復元し、partial live claimを作らない。
+
+Unit C source/test/generated actualとfresh remote verificationが揃った時点で、Step 7 bounded implementationだけをtechnical implementation completeと記録できる。これはOperator actual-use、product quality、V1 completionまたはactivationではない。
+
+```text
+STEP7_BOUNDED_IMPLEMENTATION = COMPLETE
+CMEE_OPERATOR_CONTRACT_KEYS = 10
+CMEE_LOGICAL_OUTPUT_COUNT = 11
+NON_CMEE_EPHEMERAL_TASK_COUNT = 1
+NON_CMEE_LOGICAL_OUTPUT_COUNT = 9
+V1_ACTIVATION = 0
+completion_claim = null
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+STEP8_STARTED = false
+STEP9_STARTED = false
 AUTOMATIC_PROGRESSION = false
 STRUCTURE_MAP_DELTA_NONE
 ```

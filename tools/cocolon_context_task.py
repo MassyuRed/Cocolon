@@ -13,6 +13,7 @@ from __future__ import annotations
 from collections import defaultdict, deque
 from dataclasses import dataclass
 from functools import lru_cache
+import ast
 import csv
 import fnmatch
 import hashlib
@@ -48,6 +49,20 @@ UNIT_B_OUTPUT_NAMES = OUTPUT_NAMES + (
     "pro_context.md",
     "ultra_context.md",
 )
+COMMON_OUTPUT_NAMES = OUTPUT_NAMES[:5]
+CMEE_COMPATIBILITY_OUTPUT_NAMES = OUTPUT_NAMES[5:]
+UNIT_C_PROJECTION_OUTPUT_NAMES = (
+    "operator_context.json",
+    "pro_context.md",
+    "ultra_context.md",
+    "collaboration_packets.json",
+)
+UNIT_C_CMEE_OUTPUT_NAMES = (
+    COMMON_OUTPUT_NAMES
+    + CMEE_COMPATIBILITY_OUTPUT_NAMES
+    + UNIT_C_PROJECTION_OUTPUT_NAMES
+)
+UNIT_C_NON_CMEE_OUTPUT_NAMES = COMMON_OUTPUT_NAMES + UNIT_C_PROJECTION_OUTPUT_NAMES
 UNIT_A_MANIFEST_KEYS = frozenset(
     {
         "schema_version",
@@ -71,6 +86,9 @@ UNIT_A_MANIFEST_KEYS = frozenset(
     }
 )
 UNIT_B_MANIFEST_KEYS = UNIT_A_MANIFEST_KEYS | frozenset({"unit_b_work_context"})
+UNIT_C_MANIFEST_KEYS = UNIT_A_MANIFEST_KEYS | frozenset(
+    {"unit_c_collaboration_support"}
+)
 UNIT_A_INPUT_SHA_KEYS = frozenset(
     {
         "step1_manifest",
@@ -88,6 +106,7 @@ UNIT_A_INPUT_SHA_KEYS = frozenset(
 UNIT_B_INPUT_SHA_KEYS = UNIT_A_INPUT_SHA_KEYS | frozenset(
     {"operator_model", "operator_context"}
 )
+UNIT_C_INPUT_SHA_KEYS = UNIT_B_INPUT_SHA_KEYS
 UNIT_A_COMPLETION_GATE_KEYS = frozenset(
     {
         "required_category_exact10_recovered",
@@ -452,6 +471,7 @@ OPERATOR_CONTRACT_UNIT_A_KEYS = frozenset(
 OPERATOR_CONTRACT_UNIT_B_KEYS = OPERATOR_CONTRACT_UNIT_A_KEYS | frozenset(
     {"claim_nodes", "connections", "scope_rules", "role_views"}
 )
+OPERATOR_CONTRACT_UNIT_C_KEYS = OPERATOR_CONTRACT_ALLOWED_KEYS
 CLAIM_KINDS = frozenset(
     {
         "PRODUCT_PURPOSE",
@@ -599,6 +619,151 @@ PRO_FIRST_VIEW_POLICY_KEYS = frozenset(
         "max_reasons_per_item",
         "max_utf8_bytes",
         "max_locators_per_card",
+    }
+)
+LOCATION_KINDS = frozenset(
+    {
+        "CURRENT_WORKSPACE",
+        "OTHER_DRAFT_OR_BRANCH",
+        "OTHER_WORKSPACE",
+        "GIT_HISTORY_ONLY",
+        "LIBRARY_OR_ATTACHMENT",
+        "LOCAL_ONLY",
+        "PRIVATE_LOCATOR_ONLY",
+    }
+)
+AVAILABILITY_STATES = frozenset(
+    {"AVAILABLE", "EXISTENCE_UNVERIFIED", "RETRIEVAL_GAP", "ACTUAL_ABSENCE"}
+)
+PRIVACY_STATES = frozenset(
+    {
+        "PUBLIC",
+        "PUBLIC_METADATA_ONLY",
+        "PRIVATE_LOCATOR_ONLY",
+        "SENSITIVE_OPAQUE_ID_ONLY",
+    }
+)
+CANONICALITY_STATES = frozenset(
+    {"CANONICAL", "CANDIDATE", "NONCANONICAL", "UNRESOLVED"}
+)
+EXTERNAL_LOCATOR_ROW_KEYS = frozenset(
+    {
+        "locator_id",
+        "location_kind",
+        "public_locator_or_opaque_id",
+        "availability_state",
+        "privacy_state",
+        "canonicality",
+        "adoption_state",
+        "retrieval_owner",
+        "claim_boundary",
+        "public_identity_allowed",
+        "assertion_provenance",
+    }
+)
+PUBLIC_EXTERNAL_LOCATOR_KEYS = frozenset(
+    {
+        "repository_key",
+        "workspace",
+        "source_commit",
+        "path",
+        "blob_sha",
+        "evidence_kind",
+        "symbols",
+    }
+)
+EXTERNAL_EVIDENCE_KINDS = frozenset({"source", "test", "contract", "design"})
+FEEDBACK_ROW_REQUIRED_KEYS = frozenset(
+    {
+        "feedback_id",
+        "observed_task_instance",
+        "observed_at",
+        "author_role",
+        "target_role",
+        "target_id",
+        "trigger_code",
+        "disposition",
+        "source_locator",
+        "reason_code",
+    }
+)
+FEEDBACK_ROW_ALLOWED_KEYS = FEEDBACK_ROW_REQUIRED_KEYS | frozenset(
+    {"related_feedback_id"}
+)
+FEEDBACK_AUTHOR_ROLES = frozenset({"PRO_KAREN", "ULTRA_KAREN"})
+FEEDBACK_TARGET_ROLES = frozenset(
+    {"PRO_KAREN", "ULTRA_KAREN", "COLLABORATION"}
+)
+FEEDBACK_TRIGGER_CODES = frozenset(
+    {
+        "OBSERVED_UNNEEDED_SELECTION",
+        "OBSERVED_MISSING_SELECTION",
+        "OBSERVED_SELECTION_REASON_GAP",
+        "OBSERVED_ROLE_OUTPUT_GAP",
+        "ISSUE_REVIEWED_NOT_TOOL_CAUSED",
+    }
+)
+FEEDBACK_DISPOSITIONS = frozenset(
+    {
+        "SELECTED_AND_USED",
+        "SELECTED_BUT_NOT_NEEDED",
+        "MANUALLY_FOUND_ADDITIONAL",
+        "NEEDED_BUT_NOT_SELECTED",
+        "SELECTION_REASON_INSUFFICIENT",
+        "ROLE_OUTPUT_INSUFFICIENT",
+        "NOT_A_TOOL_PROBLEM",
+    }
+)
+COLLABORATION_KEYS = frozenset(
+    {"max_subagent_packets", "restart_packet", "subagent_packets"}
+)
+RESTART_PACKET_KEYS = frozenset(
+    {
+        "purpose_code",
+        "next_work_source_claim_ids",
+        "prohibited_scope_rule_ids",
+        "environment_requirement_claim_id",
+        "max_items",
+    }
+)
+SUBAGENT_PACKET_KEYS = frozenset(
+    {
+        "packet_id",
+        "purpose_code",
+        "question_code",
+        "question_text",
+        "selected_target_ids",
+        "prohibited_inference_codes",
+        "prohibited_effect_codes",
+        "expected_output_schema",
+        "coverage_boundary_ids",
+        "overlap_policy",
+        "unresolved_handback_owner",
+    }
+)
+UNIT_C_COLLABORATION_SUPPORT_KEYS = frozenset(
+    {
+        "schema_version",
+        "status",
+        "temporary_candidate",
+        "publication_state",
+        "logical_output_count",
+        "operator_context_sha256",
+        "operator_model_fingerprint",
+        "projection_source_sha256",
+        "projection_model_fingerprint",
+        "pro_context_sha256",
+        "ultra_context_sha256",
+        "collaboration_packets_sha256",
+        "external_locator_count",
+        "actual_use_feedback_count",
+        "restart_packet_count",
+        "subagent_packet_count",
+        "completion_claim",
+        "v1_activation",
+        "product_credit",
+        "technical_credit",
+        "automatic_progression",
     }
 )
 UNIT_B_WORK_CONTEXT_KEYS = frozenset(
@@ -1275,6 +1440,104 @@ def _validate_public_source_locator(value: Any, field: str) -> Mapping[str, Any]
     return value
 
 
+def _validate_external_locator(value: Any, field: str) -> Mapping[str, Any]:
+    """Validate the Unit C public-identity/private-opaque tagged union.
+
+    Private rows deliberately have no path, commit, blob, symbol, body, or hash
+    surface: their only payload is one safe opaque public ID.  Public rows bind
+    an exact commit/blob identity which the compiler verifies separately.
+    """
+    if not isinstance(value, dict):
+        raise ContextCompileError(f"{field} must be an object")
+    _require_exact_keys(value, EXTERNAL_LOCATOR_ROW_KEYS, field)
+    locator_id = _require_safe_public_id(value.get("locator_id"), f"{field}.locator_id")
+    _require_enum(value.get("location_kind"), LOCATION_KINDS, f"{locator_id}.location_kind")
+    availability_state = _require_enum(
+        value.get("availability_state"),
+        AVAILABILITY_STATES,
+        f"{locator_id}.availability_state",
+    )
+    privacy_state = _require_enum(
+        value.get("privacy_state"), PRIVACY_STATES, f"{locator_id}.privacy_state"
+    )
+    _require_enum(
+        value.get("canonicality"), CANONICALITY_STATES, f"{locator_id}.canonicality"
+    )
+    _require_enum(
+        value.get("adoption_state"), ADOPTION_STATES, f"{locator_id}.adoption_state"
+    )
+    _require_safe_actor(value.get("retrieval_owner"), f"{locator_id}.retrieval_owner")
+    _require_safe_code(value.get("claim_boundary"), f"{locator_id}.claim_boundary")
+    public_identity_allowed = _require_strict_bool(
+        value.get("public_identity_allowed"),
+        f"{locator_id}.public_identity_allowed",
+    )
+    assertion_provenance = _require_enum(
+        value.get("assertion_provenance"),
+        ASSERTION_PROVENANCE,
+        f"{locator_id}.assertion_provenance",
+    )
+    payload = value.get("public_locator_or_opaque_id")
+    if public_identity_allowed:
+        if privacy_state not in {"PUBLIC", "PUBLIC_METADATA_ONLY"}:
+            raise ContextCompileError(
+                f"{locator_id} public identity requires public privacy state"
+            )
+        if not isinstance(payload, dict):
+            raise ContextCompileError(
+                f"{locator_id}.public_locator_or_opaque_id must be an object"
+            )
+        _require_exact_keys(
+            payload,
+            PUBLIC_EXTERNAL_LOCATOR_KEYS,
+            f"{locator_id}.public_locator_or_opaque_id",
+        )
+        _require_safe_repository_key(
+            payload.get("repository_key"), f"{locator_id}.repository_key"
+        )
+        _require_safe_repository_key(
+            payload.get("workspace"), f"{locator_id}.workspace"
+        )
+        for key in ("source_commit", "blob_sha"):
+            candidate = payload.get(key)
+            if type(candidate) is not str or not GIT_SHA_RE.fullmatch(candidate):
+                raise ContextCompileError(f"unsafe {locator_id}.{key}")
+        _require_safe_repo_path(payload.get("path"), f"{locator_id}.path")
+        _require_enum(
+            payload.get("evidence_kind"),
+            EXTERNAL_EVIDENCE_KINDS,
+            f"{locator_id}.evidence_kind",
+        )
+        _require_public_identity_list(
+            payload.get("symbols"),
+            f"{locator_id}.symbols",
+            maximum=128,
+            require_sorted=False,
+        )
+        if availability_state == "AVAILABLE" and assertion_provenance != (
+            "EXTERNAL_ASSET_VERIFIED"
+        ):
+            raise ContextCompileError(
+                f"{locator_id} available public identity requires verified provenance"
+            )
+    else:
+        if privacy_state not in {
+            "PRIVATE_LOCATOR_ONLY",
+            "SENSITIVE_OPAQUE_ID_ONLY",
+        }:
+            raise ContextCompileError(
+                f"{locator_id} opaque identity requires private privacy state"
+            )
+        _require_safe_public_id(payload, f"{locator_id}.public_locator_or_opaque_id")
+    _reject_sensitive_public_projection(value)
+    return value
+
+
+def _public_external_locator_projection(value: Mapping[str, Any]) -> dict[str, Any]:
+    """Return only the schema-validated, body-free external locator surface."""
+    return {key: value[key] for key in sorted(EXTERNAL_LOCATOR_ROW_KEYS)}
+
+
 def _validate_supersession_graph(
     responsibilities: Sequence[Mapping[str, Any]],
 ) -> None:
@@ -1401,11 +1664,14 @@ def _validate_v2_task_profile_document(
     if not isinstance(contract, dict) or set(contract) not in {
         OPERATOR_CONTRACT_UNIT_A_KEYS,
         OPERATOR_CONTRACT_UNIT_B_KEYS,
+        OPERATOR_CONTRACT_UNIT_C_KEYS,
     }:
         raise ContextCompileError(
-            "operator_contract must contain Unit A exact3 or Unit B exact7"
+            "operator_contract must contain Unit A exact3, Unit B exact7, or Unit C exact10"
         )
     is_unit_b = set(contract) == OPERATOR_CONTRACT_UNIT_B_KEYS
+    is_unit_c = set(contract) == OPERATOR_CONTRACT_UNIT_C_KEYS
+    has_work_context = is_unit_b or is_unit_c
     for key in OPERATOR_CONTRACT_UNIT_A_KEYS:
         if not isinstance(contract[key], list):
             raise ContextCompileError(f"operator_contract.{key} must be a list")
@@ -1428,7 +1694,7 @@ def _validate_v2_task_profile_document(
                 "CMEE Unit A requires canonical owner/premise/responsibility "
                 "exact1/exact7/exact21"
             )
-    if is_unit_b:
+    if has_work_context:
         for key in ("claim_nodes", "connections", "scope_rules"):
             if not isinstance(contract[key], list):
                 raise ContextCompileError(f"operator_contract.{key} must be a list")
@@ -1701,7 +1967,7 @@ def _validate_v2_task_profile_document(
                 f"required premise has dangling responsibility: {premise['premise_id']}"
             )
     _validate_supersession_graph(responsibilities)
-    if is_unit_b:
+    if has_work_context:
         claim_ids: set[str] = set()
         observed_claim_kinds: set[str] = set()
         for row in contract["claim_nodes"]:
@@ -1883,19 +2149,41 @@ def _validate_v2_task_profile_document(
             validate_locator(row.get("source_locator"), f"{scope_id}.source_locator")
 
         role_views = contract["role_views"]
-        if set(role_views) != {"PRO_KAREN", "ULTRA_KAREN"}:
-            raise ContextCompileError("Unit B role_views must contain Pro/Ultra exact2")
+        expected_role_keys = (
+            {"PRO_KAREN", "ULTRA_KAREN", "COLLABORATION"}
+            if is_unit_c
+            else {"PRO_KAREN", "ULTRA_KAREN"}
+        )
+        if set(role_views) != expected_role_keys:
+            raise ContextCompileError(
+                "Unit C role_views must contain Pro/Ultra/Collaboration exact3"
+                if is_unit_c
+                else "Unit B role_views must contain Pro/Ultra exact2"
+            )
         pro_view = role_views["PRO_KAREN"]
         ultra_view = role_views["ULTRA_KAREN"]
-        if not isinstance(pro_view, dict) or not isinstance(ultra_view, dict):
+        collaboration_view = role_views.get("COLLABORATION")
+        if (
+            not isinstance(pro_view, dict)
+            or not isinstance(ultra_view, dict)
+            or (is_unit_c and not isinstance(collaboration_view, dict))
+        ):
             raise ContextCompileError("Unit B role view rows must be objects")
         _require_exact_keys(pro_view, PRO_ROLE_VIEW_KEYS, "Pro role view")
         _require_exact_keys(ultra_view, ROLE_VIEW_COMMON_KEYS, "Ultra role view")
+        if is_unit_c:
+            _require_exact_keys(
+                collaboration_view, ROLE_VIEW_COMMON_KEYS, "Collaboration role view"
+            )
         expected_role_values = {
             "PRO_KAREN": (24, 1572864, 8, 98304),
             "ULTRA_KAREN": (80, 4194304, 12, 196608),
+            "COLLABORATION": (32, 2097152, 8, 131072),
         }
-        for role, view in (("PRO_KAREN", pro_view), ("ULTRA_KAREN", ultra_view)):
+        role_rows = [("PRO_KAREN", pro_view), ("ULTRA_KAREN", ultra_view)]
+        if is_unit_c:
+            role_rows.append(("COLLABORATION", collaboration_view))
+        for role, view in role_rows:
             values = tuple(view[key] for key in (
                 "max_items",
                 "max_referenced_source_bytes",
@@ -1918,6 +2206,338 @@ def _validate_v2_task_profile_document(
             or first_view.get("max_locators_per_card") != 3
         ):
             raise ContextCompileError("Pro first-view policy is not canonical")
+    if is_unit_c:
+        external_locators = contract["external_locators"]
+        actual_use_feedback = contract["actual_use_feedback"]
+        collaboration = contract["collaboration"]
+        if not isinstance(external_locators, list) or len(external_locators) > 256:
+            raise ContextCompileError("external_locators must contain 0..256 rows")
+        if not isinstance(actual_use_feedback, list) or len(actual_use_feedback) > 64:
+            raise ContextCompileError("actual_use_feedback must contain 0..64 rows")
+        if not isinstance(collaboration, dict):
+            raise ContextCompileError("collaboration must be an object")
+
+        external_ids: set[str] = set()
+        for index, row in enumerate(external_locators):
+            validated = _validate_external_locator(
+                row, f"external_locators[{index}]"
+            )
+            locator_id = str(validated["locator_id"])
+            if locator_id in external_ids:
+                raise ContextCompileError(f"duplicate external locator ID: {locator_id}")
+            external_ids.add(locator_id)
+            if task == "cmee" and publication_mode == "PERSISTENT_PRIMARY":
+                expected = {
+                    "location_kind": "OTHER_WORKSPACE",
+                    "availability_state": "AVAILABLE",
+                    "privacy_state": "PUBLIC",
+                    "canonicality": "NONCANONICAL",
+                    "adoption_state": "DESIGN_REFLECTED_NOT_IMPLEMENTED",
+                    "retrieval_owner": "ULTRA_KAREN",
+                    "public_identity_allowed": True,
+                    "assertion_provenance": "EXTERNAL_ASSET_VERIFIED",
+                }
+                if any(validated.get(key) != value for key, value in expected.items()):
+                    raise ContextCompileError(
+                        f"CMEE external locator classification mismatch: {locator_id}"
+                    )
+        if (
+            task == "cmee"
+            and publication_mode == "PERSISTENT_PRIMARY"
+            and len(external_locators) != 2
+        ):
+            raise ContextCompileError("CMEE Unit C requires external locator exact2")
+
+        feedback_ids: set[str] = set()
+        feedback_locator_ids: set[str] = set()
+        feedback_observations: dict[tuple[str, str, str], list[str]] = defaultdict(list)
+        related_by_feedback_id: dict[str, str | None] = {}
+        feedback_by_id: dict[str, Mapping[str, Any]] = {}
+        for index, row in enumerate(actual_use_feedback):
+            field = f"actual_use_feedback[{index}]"
+            if not isinstance(row, dict):
+                raise ContextCompileError(f"{field} must be an object")
+            if not FEEDBACK_ROW_REQUIRED_KEYS.issubset(row) or set(row) - (
+                FEEDBACK_ROW_ALLOWED_KEYS
+            ):
+                raise ContextCompileError(f"{field} keys mismatch")
+            feedback_id = _require_safe_public_id(
+                row.get("feedback_id"), f"{field}.feedback_id"
+            )
+            if feedback_id in feedback_ids:
+                raise ContextCompileError(f"duplicate feedback ID: {feedback_id}")
+            feedback_ids.add(feedback_id)
+            observed_task_instance = _require_safe_public_id(
+                row.get("observed_task_instance"),
+                f"{feedback_id}.observed_task_instance",
+            )
+            _require_safe_symbol_or_route(
+                row.get("observed_at"), f"{feedback_id}.observed_at"
+            )
+            _require_enum(
+                row.get("author_role"),
+                FEEDBACK_AUTHOR_ROLES,
+                f"{feedback_id}.author_role",
+            )
+            target_role = _require_enum(
+                row.get("target_role"),
+                FEEDBACK_TARGET_ROLES,
+                f"{feedback_id}.target_role",
+            )
+            target_id = _require_safe_public_id(
+                row.get("target_id"), f"{feedback_id}.target_id"
+            )
+            observation = (observed_task_instance, target_role, target_id)
+            feedback_observations[observation].append(feedback_id)
+            trigger = _require_enum(
+                row.get("trigger_code"),
+                FEEDBACK_TRIGGER_CODES,
+                f"{feedback_id}.trigger_code",
+            )
+            disposition = _require_enum(
+                row.get("disposition"),
+                FEEDBACK_DISPOSITIONS,
+                f"{feedback_id}.disposition",
+            )
+            permitted_dispositions = {
+                "OBSERVED_UNNEEDED_SELECTION": {"SELECTED_BUT_NOT_NEEDED"},
+                "OBSERVED_MISSING_SELECTION": {
+                    "MANUALLY_FOUND_ADDITIONAL",
+                    "NEEDED_BUT_NOT_SELECTED",
+                },
+                "OBSERVED_SELECTION_REASON_GAP": {
+                    "SELECTION_REASON_INSUFFICIENT"
+                },
+                "OBSERVED_ROLE_OUTPUT_GAP": {"ROLE_OUTPUT_INSUFFICIENT"},
+                "ISSUE_REVIEWED_NOT_TOOL_CAUSED": {"NOT_A_TOOL_PROBLEM"},
+            }
+            related_feedback_id = row.get("related_feedback_id")
+            if disposition == "SELECTED_AND_USED":
+                if related_feedback_id is None:
+                    raise ContextCompileError(
+                        "SELECTED_AND_USED requires related_feedback_id"
+                    )
+            elif disposition not in permitted_dispositions[trigger]:
+                raise ContextCompileError(
+                    f"feedback trigger/disposition mismatch: {feedback_id}"
+                )
+            if related_feedback_id is not None:
+                related_feedback_id = _require_safe_public_id(
+                    related_feedback_id, f"{feedback_id}.related_feedback_id"
+                )
+                if related_feedback_id == feedback_id:
+                    raise ContextCompileError(
+                        f"feedback cannot relate to itself: {feedback_id}"
+                    )
+            related_by_feedback_id[feedback_id] = related_feedback_id
+            feedback_by_id[feedback_id] = row
+            _require_safe_code(row.get("reason_code"), f"{feedback_id}.reason_code")
+            source = _validate_external_locator(
+                row.get("source_locator"), f"{feedback_id}.source_locator"
+            )
+            source_locator_id = str(source["locator_id"])
+            if source_locator_id in feedback_locator_ids:
+                raise ContextCompileError(
+                    f"duplicate feedback source locator ID: {source_locator_id}"
+                )
+            feedback_locator_ids.add(source_locator_id)
+        for feedback_id, related_feedback_id in related_by_feedback_id.items():
+            if related_feedback_id is not None and related_feedback_id not in feedback_ids:
+                raise ContextCompileError(
+                    f"dangling related feedback: {feedback_id}->{related_feedback_id}"
+                )
+            row = feedback_by_id[feedback_id]
+            if row.get("disposition") != "SELECTED_AND_USED":
+                continue
+            related = feedback_by_id[related_feedback_id]
+            closable_gap_dispositions = {
+                "SELECTED_BUT_NOT_NEEDED",
+                "MANUALLY_FOUND_ADDITIONAL",
+                "NEEDED_BUT_NOT_SELECTED",
+                "SELECTION_REASON_INSUFFICIENT",
+                "ROLE_OUTPUT_INSUFFICIENT",
+            }
+            source = row["source_locator"]
+            related_source = related["source_locator"]
+            source_without_id = {
+                key: value for key, value in source.items() if key != "locator_id"
+            }
+            related_source_without_id = {
+                key: value
+                for key, value in related_source.items()
+                if key != "locator_id"
+            }
+            if (
+                related.get("disposition") not in closable_gap_dispositions
+                or row.get("observed_task_instance")
+                != related.get("observed_task_instance")
+                or row.get("author_role") != related.get("author_role")
+                or row.get("target_role") != related.get("target_role")
+                or row.get("target_id") != related.get("target_id")
+                or row.get("trigger_code") != related.get("trigger_code")
+                or source_without_id != related_source_without_id
+            ):
+                raise ContextCompileError(
+                    f"SELECTED_AND_USED does not close a matching gap: {feedback_id}"
+                )
+        for observation, observation_ids in feedback_observations.items():
+            if len(observation_ids) == 1:
+                continue
+            if len(observation_ids) != 2:
+                raise ContextCompileError(
+                    f"duplicate feedback observation: {observation!r}"
+                )
+            closing = [
+                feedback_id
+                for feedback_id in observation_ids
+                if feedback_by_id[feedback_id].get("disposition")
+                == "SELECTED_AND_USED"
+            ]
+            if (
+                len(closing) != 1
+                or related_by_feedback_id[closing[0]]
+                != next(
+                    feedback_id
+                    for feedback_id in observation_ids
+                    if feedback_id != closing[0]
+                )
+            ):
+                raise ContextCompileError(
+                    f"duplicate feedback observation: {observation!r}"
+                )
+
+        _require_exact_keys(collaboration, COLLABORATION_KEYS, "collaboration")
+        if collaboration.get("max_subagent_packets") != 3:
+            raise ContextCompileError("max_subagent_packets must be exact3")
+        restart_packet = collaboration.get("restart_packet")
+        subagent_packets = collaboration.get("subagent_packets")
+        if not isinstance(restart_packet, dict):
+            raise ContextCompileError("restart_packet must be an object")
+        if not isinstance(subagent_packets, list) or len(subagent_packets) > 3:
+            raise ContextCompileError("subagent_packets must contain 0..3 rows")
+        _require_exact_keys(restart_packet, RESTART_PACKET_KEYS, "restart_packet")
+        _require_safe_code(restart_packet.get("purpose_code"), "restart_packet.purpose_code")
+        next_claim_ids = _require_public_code_list(
+            restart_packet.get("next_work_source_claim_ids"),
+            "restart_packet.next_work_source_claim_ids",
+            maximum=32,
+        )
+        claims_by_id = {str(row["claim_id"]): row for row in contract["claim_nodes"]}
+        for claim_id in next_claim_ids:
+            claim = claims_by_id.get(claim_id)
+            if claim is None or claim.get("assertion_provenance") != (
+                "MASH_EXPLICIT_DECISION"
+            ):
+                raise ContextCompileError(
+                    f"restart next work is not a Mash explicit claim: {claim_id}"
+                )
+        prohibited_scope_ids = _require_public_code_list(
+            restart_packet.get("prohibited_scope_rule_ids"),
+            "restart_packet.prohibited_scope_rule_ids",
+            maximum=64,
+        )
+        for scope_id in prohibited_scope_ids:
+            if scope_id not in scope_ids:
+                raise ContextCompileError(
+                    f"restart packet has dangling prohibited scope: {scope_id}"
+                )
+        environment_claim_id = _require_safe_public_id(
+            restart_packet.get("environment_requirement_claim_id"),
+            "restart_packet.environment_requirement_claim_id",
+        )
+        if environment_claim_id not in claim_ids:
+            raise ContextCompileError(
+                f"restart packet has dangling environment claim: {environment_claim_id}"
+            )
+        max_items = restart_packet.get("max_items")
+        if type(max_items) is not int or not 1 <= max_items <= 32:
+            raise ContextCompileError("restart_packet.max_items must be integer 1..32")
+
+        known_target_ids = (
+            owner_ids
+            | premise_ids
+            | responsibility_ids
+            | claim_ids
+            | connection_ids
+            | scope_ids
+            | external_ids
+        )
+        for row in actual_use_feedback:
+            if row["target_id"] not in known_target_ids:
+                raise ContextCompileError(
+                    f"feedback has dangling target: {row['target_id']}"
+                )
+        packet_ids: set[str] = set()
+        selected_across_packets: set[str] = set()
+        coverage_across_packets: set[str] = set()
+        for index, packet in enumerate(subagent_packets):
+            field = f"subagent_packets[{index}]"
+            if not isinstance(packet, dict):
+                raise ContextCompileError(f"{field} must be an object")
+            _require_exact_keys(packet, SUBAGENT_PACKET_KEYS, field)
+            packet_id = _require_safe_public_id(packet.get("packet_id"), f"{field}.packet_id")
+            if packet_id in packet_ids:
+                raise ContextCompileError(f"duplicate subagent packet ID: {packet_id}")
+            packet_ids.add(packet_id)
+            _require_safe_code(packet.get("purpose_code"), f"{packet_id}.purpose_code")
+            _require_safe_code(packet.get("question_code"), f"{packet_id}.question_code")
+            _require_safe_symbol_or_route(packet.get("question_text"), f"{packet_id}.question_text")
+            selected_target_ids = _require_public_code_list(
+                packet.get("selected_target_ids"),
+                f"{packet_id}.selected_target_ids",
+                maximum=80,
+            )
+            if not selected_target_ids:
+                raise ContextCompileError(f"{packet_id} requires selected targets")
+            for target_id in selected_target_ids:
+                if target_id not in known_target_ids:
+                    raise ContextCompileError(
+                        f"subagent packet has dangling target: {packet_id}->{target_id}"
+                    )
+            _require_public_code_list(
+                packet.get("prohibited_inference_codes"),
+                f"{packet_id}.prohibited_inference_codes",
+                maximum=32,
+            )
+            _require_public_code_list(
+                packet.get("prohibited_effect_codes"),
+                f"{packet_id}.prohibited_effect_codes",
+                maximum=32,
+            )
+            _require_safe_code(
+                packet.get("expected_output_schema"),
+                f"{packet_id}.expected_output_schema",
+            )
+            coverage_boundary_ids = _require_public_code_list(
+                packet.get("coverage_boundary_ids"),
+                f"{packet_id}.coverage_boundary_ids",
+                maximum=32,
+            )
+            for boundary_id in coverage_boundary_ids:
+                if boundary_id not in known_target_ids:
+                    raise ContextCompileError(
+                        f"subagent packet has dangling coverage boundary: {packet_id}->{boundary_id}"
+                    )
+            if packet.get("overlap_policy") != "DISJOINT":
+                raise ContextCompileError(f"{packet_id}.overlap_policy must be DISJOINT")
+            _require_safe_actor(
+                packet.get("unresolved_handback_owner"),
+                f"{packet_id}.unresolved_handback_owner",
+            )
+            selected_set = set(selected_target_ids)
+            coverage_set = set(coverage_boundary_ids)
+            if selected_set.intersection(coverage_set):
+                raise ContextCompileError(
+                    "subagent packet selected/coverage overlap is unresolved"
+                )
+            if (selected_across_packets | coverage_across_packets).intersection(
+                selected_set | coverage_set
+            ):
+                raise ContextCompileError(
+                    "subagent packet cross-packet overlap is unresolved"
+                )
+            selected_across_packets.update(selected_target_ids)
+            coverage_across_packets.update(coverage_boundary_ids)
     return profile
 
 
@@ -3950,6 +4570,15 @@ def _is_unit_b_profile(task_profile: Mapping[str, Any]) -> bool:
     return isinstance(contract, Mapping) and set(contract) == OPERATOR_CONTRACT_UNIT_B_KEYS
 
 
+def _is_unit_c_profile(task_profile: Mapping[str, Any]) -> bool:
+    contract = task_profile.get("operator_contract")
+    return isinstance(contract, Mapping) and set(contract) == OPERATOR_CONTRACT_UNIT_C_KEYS
+
+
+def _has_work_context_profile(task_profile: Mapping[str, Any]) -> bool:
+    return _is_unit_b_profile(task_profile) or _is_unit_c_profile(task_profile)
+
+
 def _stable_unit_b_id(prefix: str, payload: Mapping[str, Any]) -> str:
     digest = _sha256_bytes(_canonical_json_bytes(payload))[:16].upper()
     return f"{prefix}.{digest}"
@@ -4040,8 +4669,13 @@ def _render_pro_context(
     overflow_codes = (
         list(budget["overflow_codes"]) if collapse_overflow else []
     )
+    unit_c_started = model.get("unit_c_started") is True
     lines = [
-        "# Cocolon Pro Work Context — Unit B temporary candidate",
+        (
+            "# Cocolon Pro Work Context — Unit C tracked draft candidate"
+            if unit_c_started
+            else "# Cocolon Pro Work Context — Unit B temporary candidate"
+        ),
         "",
         f"operator_context_sha256: `{operator_context_sha256}`",
         f"operator_model_fingerprint: `{fingerprint}`",
@@ -4115,6 +4749,26 @@ def _render_pro_context(
                     "full evidence `operator_context.json#/unresolved_by_owner`"
                 )
             lines.append("")
+    account_proof = model.get("account_profile_read_only_actual_proof")
+    if isinstance(account_proof, Mapping):
+        mount = account_proof["mount_evidence"]
+        gap = account_proof["protected_gap"]
+        lines.extend(
+            [
+                "## Account GET actual proof",
+                "",
+                f"- route: `GET {account_proof['route_path']}`",
+                f"- resolution: `{account_proof['resolution_status']}`",
+                f"- graph mount: `{mount['route_graph_mount_status']}`",
+                f"- direct registration: `{mount['registration_symbol']}` / "
+                f"`{mount['direct_source_verification_status']}`",
+                f"- mount handback: `{mount['resolution_code']}` / `MANUAL_REVIEW`",
+                f"- protected gap: `{gap['gap_id']}` / `{gap['reason_code']}`",
+                f"- handback owner: `{gap['handback_owner']}`",
+                "- product route green claim: `false`",
+                "",
+            ]
+        )
     lines.extend(
         [
             "## Effects stop",
@@ -4125,7 +4779,7 @@ def _render_pro_context(
             "- product credit: `0`",
             "- technical credit: `0`",
             "- automatic progression: `false`",
-            "- Unit C started: `false`",
+            f"- Unit C started: `{str(unit_c_started).lower()}`",
             "",
         ]
     )
@@ -4145,6 +4799,7 @@ def _render_ultra_context(
     overflow_codes = (
         list(budget["overflow_codes"]) if collapse_overflow else []
     )
+    unit_c_started = model.get("unit_c_started") is True
     claims_by_id = {row["claim_id"]: row for row in model["claims"]}
     premises_by_id = {
         row["premise_id"]: row for row in model["required_premises"]
@@ -4156,7 +4811,11 @@ def _render_ultra_context(
     scopes_by_id = {row["scope_rule_id"]: row for row in model["scope_rules"]}
     impacts_by_id = {row["impact_id"]: row for row in model["impact"]}
     lines = [
-        "# Cocolon Ultra Work Context — Unit B temporary candidate",
+        (
+            "# Cocolon Ultra Work Context — Unit C tracked draft candidate"
+            if unit_c_started
+            else "# Cocolon Ultra Work Context — Unit B temporary candidate"
+        ),
         "",
         f"operator_context_sha256: `{operator_context_sha256}`",
         f"operator_model_fingerprint: `{fingerprint}`",
@@ -4262,6 +4921,34 @@ def _render_ultra_context(
                 + f"; additional `{additional}`"
                 + ("; " + "; ".join(detail) if detail else "")
             )
+    account_proof = model.get("account_profile_read_only_actual_proof")
+    if isinstance(account_proof, Mapping):
+        graph = account_proof["route_graph_evidence"]
+        mount = account_proof["mount_evidence"]
+        gap = account_proof["protected_gap"]
+        lines.extend(
+            [
+                "",
+                "## Account GET actual proof",
+                "",
+                f"- route `GET {account_proof['route_path']}` resolution "
+                f"`{account_proof['resolution_status']}`",
+                f"- RN call `{graph['rn_call_id']}` cross edge "
+                f"`{graph['cross_repository_edge_id']}` API route "
+                f"`{graph['api_route_id']}`",
+                "- backend resolved symbols: "
+                + (", ".join(f"`{item}`" for item in graph["backend_resolved_symbols"]) or "`NONE`"),
+                f"- explicit unresolved backend edges: `{len(graph['unresolved_backend_edge_ids'])}`",
+                f"- graph mount `{mount['route_graph_mount_status']}`; direct source "
+                f"`{mount['direct_source_path']}` blob `{mount['direct_source_blob_sha']}`; "
+                f"registration `{mount['registration_symbol']}` present "
+                f"`{str(mount['registration_symbol_present']).lower()}`",
+                f"- `{mount['resolution_code']}` / `{mount['disposition']}`",
+                f"- protected gap `{gap['gap_id']}`: `{gap['reason_code']}`; "
+                f"handback `{gap['handback_owner']}`",
+                "- product route green claim: `false`",
+            ]
+        )
     lines.extend(
         [
             "",
@@ -4363,11 +5050,300 @@ def _render_ultra_context(
             "- product credit: `0`",
             "- technical credit: `0`",
             "- automatic progression: `false`",
-            "- Unit C started: `false`",
+            f"- Unit C started: `{str(unit_c_started).lower()}`",
             "",
         ]
     )
     return ("\n".join(lines).rstrip() + "\n").encode("utf-8")
+
+
+def _compile_external_locator_projection(
+    declarations: Sequence[Mapping[str, Any]],
+    *,
+    workspace_profiles: Mapping[str, Any],
+    external_workspace_root: Path,
+) -> tuple[list[dict[str, Any]], list[str]]:
+    """Verify public exact identities and preserve private rows body-free."""
+    projected: dict[str, dict[str, Any]] = {}
+    public_by_workspace: dict[str, list[Mapping[str, Any]]] = defaultdict(list)
+    blockers: set[str] = set()
+    for declaration in declarations:
+        locator_id = str(declaration["locator_id"])
+        row = _public_external_locator_projection(declaration)
+        payload = declaration["public_locator_or_opaque_id"]
+        if declaration["public_identity_allowed"] is True:
+            if not isinstance(payload, Mapping):  # schema validator owns detail
+                raise ContextCompileError(f"public external locator is invalid: {locator_id}")
+            if declaration["availability_state"] == "AVAILABLE":
+                public_by_workspace[str(payload["workspace"])].append(declaration)
+                row["verification_status"] = "PENDING_PUBLIC_IDENTITY_VERIFICATION"
+                row["verified_scope"] = []
+            else:
+                row["verification_status"] = "PUBLIC_IDENTITY_NOT_AVAILABLE"
+                row["verified_scope"] = ["DECLARED_BODY_FREE_PUBLIC_LOCATOR"]
+                if declaration["availability_state"] in {
+                    "EXISTENCE_UNVERIFIED",
+                    "RETRIEVAL_GAP",
+                }:
+                    blockers.add("EXTERNAL_PUBLIC_IDENTITY_RETRIEVAL_UNRESOLVED")
+        else:
+            row["verification_status"] = "PRIVATE_OPAQUE_ID_ONLY_NOT_RETRIEVED"
+            row["verified_scope"] = ["OPAQUE_PUBLIC_ID_ONLY"]
+            if declaration["availability_state"] in {
+                "EXISTENCE_UNVERIFIED",
+                "RETRIEVAL_GAP",
+            }:
+                blockers.add("EXTERNAL_PRIVATE_IDENTITY_RETRIEVAL_UNRESOLVED")
+        projected[locator_id] = row
+
+    for required_workspace, rows in sorted(public_by_workspace.items()):
+        review = {
+            "require_external_asset_git_verification": True,
+            "external_asset_candidates": [
+                {
+                    "repository_key": row["public_locator_or_opaque_id"]["repository_key"],
+                    "required_workspace": required_workspace,
+                    "path": row["public_locator_or_opaque_id"]["path"],
+                    "source_commit": row["public_locator_or_opaque_id"]["source_commit"],
+                    "blob_sha": row["public_locator_or_opaque_id"]["blob_sha"],
+                    "evidence_kind": row["public_locator_or_opaque_id"]["evidence_kind"],
+                    "symbols": list(row["public_locator_or_opaque_id"]["symbols"]),
+                }
+                for row in rows
+            ],
+        }
+        verified_assets = _validated_external_assets(
+            review,
+            required_workspace,
+            workspace_profiles,
+            external_workspace_root,
+        )
+        verified_by_key = {
+            (str(row["repository_key"]), str(row["path"])): row
+            for row in verified_assets
+        }
+        for declaration in rows:
+            payload = declaration["public_locator_or_opaque_id"]
+            key = (
+                _normalize_repository(str(payload["repository_key"])),
+                _normalize_path(str(payload["path"])),
+            )
+            verified = verified_by_key.get(key)
+            if verified is None or verified.get("validation_status") != (
+                "GIT_COMMIT_BLOB_CONTENT_SYMBOL_VERIFIED"
+            ):
+                raise ContextCompileError(
+                    f"external public identity was not verified: {declaration['locator_id']}"
+                )
+            output = projected[str(declaration["locator_id"])]
+            output["verification_status"] = (
+                "GIT_COMMIT_BLOB_CONTENT_SYMBOL_VERIFIED"
+            )
+            output["verified_scope"] = [
+                "PUBLIC_BLOB_IDENTITY",
+                "PUBLIC_COMMIT_IDENTITY",
+                "PUBLIC_SYMBOL_PRESENCE",
+            ]
+    return [projected[key] for key in sorted(projected)], sorted(blockers)
+
+
+def _render_collaboration_packets(
+    model: Mapping[str, Any], operator_context_sha256: str
+) -> bytes:
+    """Render packets as a byte-exact projection of the shared operator model."""
+    collaboration = model.get("collaboration")
+    if not isinstance(collaboration, Mapping):
+        raise ContextCompileError("Unit C collaboration model is absent")
+    payload = {
+        "schema_version": "cocolon.system_context.collaboration_packets.v1",
+        "operator_context_sha256": operator_context_sha256,
+        "operator_model_fingerprint": model["operator_model_fingerprint"],
+        "fact_base": "operator_context.json",
+        "projection_new_fact_count": 0,
+        "restart_packet": collaboration["restart_packet"],
+        "subagent_packets": collaboration["subagent_packets"],
+        "zero_effects": {
+            "subagent_execution": False,
+            "model_selection": False,
+            "tool_selection": False,
+            "write_authority": False,
+            "final_adoption_authority": False,
+            "automatic_progression": False,
+        },
+    }
+    _reject_sensitive_public_projection(payload)
+    return _pretty_json_bytes(payload)
+
+
+def _build_account_profile_actual_proof(
+    *,
+    workspace_dir: Path,
+    repository_roots: Mapping[str, Path],
+    by_key: Mapping[tuple[str, str], FileRecord],
+    selected_rows: Sequence[Mapping[str, Any]],
+    scope_rules: Sequence[Mapping[str, Any]],
+) -> tuple[dict[str, Any], list[str]]:
+    """Build the Step 6 §11 account proof from graph rows and direct source."""
+    route_path = "/account/profile/me"
+    api_rows = [
+        row
+        for row in _iter_jsonl(workspace_dir / "route_graph" / "api_routes.jsonl")
+        if row.get("method") == "GET" and row.get("route_path") == route_path
+    ]
+    rn_rows = [
+        row
+        for row in _iter_jsonl(workspace_dir / "route_graph" / "rn_calls.jsonl")
+        if row.get("method") == "GET"
+        and route_path in row.get("normalized_path_candidates", [])
+        and row.get("path") == "screens/account/useAccountProfile.js"
+    ]
+    cross_rows = [
+        row
+        for row in _iter_jsonl(
+            workspace_dir / "route_graph" / "cross_repository_route_edges.jsonl"
+        )
+        if row.get("method") == "GET"
+        and row.get("api_route_path") == route_path
+        and row.get("rn_source_path") == "screens/account/useAccountProfile.js"
+        and row.get("match_quality") == "EXACT"
+    ]
+    api_row = sorted(api_rows, key=lambda row: str(row.get("route_id")))[0] if api_rows else {}
+    rn_row = sorted(rn_rows, key=lambda row: str(row.get("call_id")))[0] if rn_rows else {}
+    cross_row = sorted(cross_rows, key=lambda row: str(row.get("edge_id")))[0] if cross_rows else {}
+    route_id = str(api_row.get("route_id") or "")
+    backend_rows = [
+        row
+        for row in _iter_jsonl(
+            workspace_dir / "route_graph" / "backend_call_edges.jsonl"
+        )
+        if row.get("route_id") == route_id
+    ] if route_id else []
+    backend_symbols = sorted(
+        {
+            str(node.get("symbol"))
+            for row in backend_rows
+            for node in (row.get("source_node"), row.get("target_node"))
+            if isinstance(node, Mapping)
+            and node.get("symbol")
+            in {
+                "_require_user_id",
+                "_fetch_profile_me",
+                "_get_profile_row",
+                "_sb_get",
+            }
+        }
+    )
+    unresolved_backend_edge_ids = sorted(
+        str(row.get("edge_id"))
+        for row in backend_rows
+        if row.get("resolution_status") == "UNRESOLVED"
+        and type(row.get("edge_id")) is str
+    )
+
+    app_key = (
+        "mashos-api",
+        "ai/services/ai_inference/app.py",
+    )
+    app_record = by_key.get(app_key)
+    selected_identities = {str(row["identity"]) for row in selected_rows}
+    registration_symbol = "register_account_lifecycle_routes(app)"
+    registration_present = False
+    direct_source_status = "DIRECT_SOURCE_IDENTITY_UNAVAILABLE"
+    if app_record is not None and app_record.identity in selected_identities:
+        repository_root = repository_roots.get("mashos-api")
+        if repository_root is not None and (repository_root / ".git").exists():
+            try:
+                source_bytes = subprocess.check_output(
+                    [
+                        "git",
+                        "-C",
+                        str(repository_root),
+                        "show",
+                        f"{app_record.source_commit}:{app_record.path}",
+                    ],
+                    stderr=subprocess.DEVNULL,
+                )
+                syntax_tree = ast.parse(source_bytes.decode("utf-8", "strict"))
+                registration_present = any(
+                    isinstance(node, ast.Call)
+                    and isinstance(node.func, ast.Name)
+                    and node.func.id == "register_account_lifecycle_routes"
+                    and len(node.args) == 1
+                    and isinstance(node.args[0], ast.Name)
+                    and node.args[0].id == "app"
+                    and not node.keywords
+                    for node in ast.walk(syntax_tree)
+                )
+                direct_source_status = (
+                    "DIRECT_SOURCE_SYMBOL_VERIFIED"
+                    if registration_present
+                    else "DIRECT_SOURCE_SYMBOL_ABSENT"
+                )
+            except (
+                OSError,
+                subprocess.CalledProcessError,
+                UnicodeDecodeError,
+                SyntaxError,
+            ):
+                direct_source_status = "DIRECT_SOURCE_READ_UNRESOLVED"
+
+    graph_resolved = bool(api_row and rn_row and cross_row and backend_rows)
+    resolution_status = (
+        "RESOLVED_WITH_EXPLICIT_UNKNOWN_EDGES"
+        if graph_resolved
+        else "UNRESOLVED_REQUIRED_ROUTE_EVIDENCE"
+    )
+    protected_scope_ids = sorted(
+        str(row["scope_rule_id"])
+        for row in scope_rules
+        if row.get("changeability") == "PROTECTED_REVIEW_REQUIRED"
+    )
+    proof = {
+        "schema_version": "cocolon.system_context.account_profile_read_only_actual_proof.v1",
+        "task_id": "account_profile_read_only",
+        "route_method": "GET",
+        "route_path": route_path,
+        "resolution_status": resolution_status,
+        "route_graph_evidence": {
+            "rn_call_id": rn_row.get("call_id"),
+            "cross_repository_edge_id": cross_row.get("edge_id"),
+            "api_route_id": api_row.get("route_id"),
+            "api_source_path": api_row.get("path"),
+            "backend_resolved_symbols": backend_symbols,
+            "unresolved_backend_edge_ids": unresolved_backend_edge_ids,
+            "unknown_edges_preserved": bool(unresolved_backend_edge_ids),
+        },
+        "mount_evidence": {
+            "route_graph_mount_status": api_row.get("mount_status"),
+            "direct_source_path": app_record.path if app_record is not None else "ai/services/ai_inference/app.py",
+            "direct_source_commit": app_record.source_commit if app_record is not None else None,
+            "direct_source_blob_sha": app_record.blob_sha if app_record is not None else None,
+            "registration_symbol": registration_symbol,
+            "registration_symbol_present": registration_present,
+            "direct_source_verification_status": direct_source_status,
+            "resolution_code": "MOUNT_VERIFICATION_REQUIRES_DIRECT_SOURCE",
+            "disposition": "MANUAL_REVIEW",
+        },
+        "protected_gap": {
+            "gap_id": "ACCOUNT-PROTECTED-GAP-001",
+            "reason_code": "AUTH_SELF_FILTER_AND_DB_FIELD_ALLOWLIST_NOT_DIRECTLY_ENDPOINT_TESTED",
+            "disposition": "PROTECTED_REVIEW_REQUIRED",
+            "protected_scope_rule_ids": protected_scope_ids,
+            "handback_owner": "ACCOUNT_PUBLIC_API_OWNER",
+        },
+        "product_route_green_claim": False,
+        "endpoint_execution": False,
+        "auth_or_user_data_access": False,
+        "db_query_or_write": False,
+        "persistent_effect": False,
+    }
+    blockers = {
+        "MOUNT_VERIFICATION_REQUIRES_DIRECT_SOURCE",
+        "AUTH_SELF_FILTER_AND_DB_FIELD_ALLOWLIST_NOT_DIRECTLY_ENDPOINT_TESTED",
+    }
+    if not graph_resolved:
+        blockers.add("ACCOUNT_GET_ROUTE_REQUIRED_EVIDENCE_UNRESOLVED")
+    return proof, sorted(blockers)
 
 
 def build_work_context_model(
@@ -4386,9 +5362,66 @@ def build_work_context_model(
     workspace_refs: Mapping[str, Any],
     symbol_owner: Mapping[str, str],
     route_owner: Mapping[str, str],
+    workspace_profiles: Mapping[str, Any] | None = None,
+    external_workspace_root: Path | None = None,
+    workspace_dir: Path | None = None,
+    repository_roots: Mapping[str, Path] | None = None,
 ) -> dict[str, Any]:
-    """Build the bounded Unit B fact base without semantic inference."""
+    """Build the bounded Unit B/Unit C fact base without semantic inference."""
     contract = task_profile["operator_contract"]
+    is_unit_c = _is_unit_c_profile(task_profile)
+    external_locators: list[dict[str, Any]] = []
+    external_blockers: list[str] = []
+    actual_use_feedback: dict[str, Any] | None = None
+    collaboration: dict[str, Any] | None = None
+    account_actual_proof: dict[str, Any] | None = None
+    account_blockers: list[str] = []
+    if is_unit_c:
+        if workspace_profiles is None or external_workspace_root is None:
+            raise ContextCompileError(
+                "Unit C requires workspace profiles and external workspace root"
+            )
+        external_locators, external_blockers = (
+            _compile_external_locator_projection(
+                contract["external_locators"],
+                workspace_profiles=workspace_profiles,
+                external_workspace_root=external_workspace_root,
+            )
+        )
+        feedback_sources = [
+            row["source_locator"] for row in contract["actual_use_feedback"]
+        ]
+        if feedback_sources:
+            _, feedback_external_blockers = _compile_external_locator_projection(
+                feedback_sources,
+                workspace_profiles=workspace_profiles,
+                external_workspace_root=external_workspace_root,
+            )
+            external_blockers = sorted(
+                set(external_blockers) | set(feedback_external_blockers)
+            )
+        actual_use_feedback = {
+            "policy": "EVENT_DRIVEN_OPTIONAL",
+            "rows": [dict(row) for row in contract["actual_use_feedback"]],
+            "empty_feedback_is_valid": True,
+            "feedback_required_for_ready": False,
+            "automatic_selection_mutation": False,
+            "automatic_rank": False,
+        }
+        declared_collaboration = contract["collaboration"]
+        collaboration = {
+            "max_subagent_packets": declared_collaboration["max_subagent_packets"],
+            "restart_packet": dict(declared_collaboration["restart_packet"]),
+            "subagent_packets": [
+                dict(row) for row in declared_collaboration["subagent_packets"]
+            ],
+            "same_operator_model_required": True,
+            "subagent_execution": False,
+            "model_selection": False,
+            "tool_selection": False,
+            "write_authority": False,
+            "final_adoption_authority": False,
+        }
     selected_by_identity = {
         str(row["identity"]): row for row in selected_rows
     }
@@ -4548,6 +5581,20 @@ def build_work_context_model(
             }
         )
     scope_rules.sort(key=lambda row: row["scope_rule_id"])
+    if is_unit_c and task == "account_profile_read_only":
+        if workspace_dir is None or repository_roots is None:
+            raise ContextCompileError(
+                "account profile proof requires graph and repository roots"
+            )
+        account_actual_proof, account_blockers = (
+            _build_account_profile_actual_proof(
+                workspace_dir=workspace_dir,
+                repository_roots=repository_roots,
+                by_key=by_key,
+                selected_rows=selected_rows,
+                scope_rules=scope_rules,
+            )
+        )
 
     owners = [dict(row) for row in premise_model.get("owners", [])]
     freshness = [
@@ -5068,6 +6115,7 @@ def build_work_context_model(
         set(str(code) for code in premise_model.get("blocking_codes", []))
         | set(required_claim_blockers)
         | set(required_connection_blockers)
+        | set(account_blockers)
         | {
             str(item["code"])
             for item in unresolved
@@ -5267,6 +6315,11 @@ def build_work_context_model(
         blockers.extend(pro_overflow)
         blockers.extend(ultra_overflow)
         blockers = sorted(set(blockers))
+    unit_b_ready = not blockers
+    if is_unit_c:
+        blockers = sorted(set(blockers) | set(external_blockers))
+    unit_c_ready = bool(is_unit_c and not blockers)
+    operator_ready = unit_c_ready if is_unit_c else unit_b_ready
 
     protected_connections = sorted(
         row["connection_id"]
@@ -5330,7 +6383,13 @@ def build_work_context_model(
             {
                 "owner": "MASH",
                 "reason_code": code,
-                "source_id": f"UNIT_B.{code}",
+                "source_id": (
+                    f"UNIT_C.{code}"
+                    if code in external_blockers
+                    else f"ACCOUNT.ACTUAL_PROOF.{code}"
+                    if code in account_blockers
+                    else f"UNIT_B.{code}"
+                ),
                 "blocking": True,
             }
         )
@@ -5338,9 +6397,12 @@ def build_work_context_model(
         key=lambda row: (row["owner"], row["reason_code"], row["source_id"])
     )
 
-    unit_b_ready = not blockers
     model: dict[str, Any] = {
-        "schema_version": "cocolon.system_context.operator_context.unit_b.v1",
+        "schema_version": (
+            "cocolon.system_context.operator_context.unit_c.v1"
+            if is_unit_c
+            else "cocolon.system_context.operator_context.unit_b.v1"
+        ),
         "workspace": workspace,
         "task": task,
         "integrity_status": "VALID",
@@ -5353,7 +6415,7 @@ def build_work_context_model(
         "operator_v1": {
             "status": (
                 "V1_OPERATOR_CONTEXT_READY"
-                if unit_b_ready
+                if operator_ready
                 else "V1_OPERATOR_CONTEXT_BLOCKED"
             ),
             "candidate_status": "ACTUAL_EVIDENCE_PRESENT_NOT_APPROVED",
@@ -5362,7 +6424,18 @@ def build_work_context_model(
                 if unit_b_ready
                 else "UNIT_B_WORK_CONTEXT_BLOCKED"
             ),
-            "temporary_candidate": True,
+            **(
+                {
+                    "unit_c_status": (
+                        "UNIT_C_COLLABORATION_SUPPORT_READY"
+                        if unit_c_ready
+                        else "UNIT_C_COLLABORATION_SUPPORT_BLOCKED"
+                    )
+                }
+                if is_unit_c
+                else {}
+            ),
+            "temporary_candidate": not is_unit_c,
             "workspace_incorporation_claim": False,
             "write_authority": False,
             "merge_required": False,
@@ -5463,11 +6536,41 @@ def build_work_context_model(
                 "silent_truncation": False,
                 "automatic_expansion": False,
             },
+            **(
+                {
+                    "COLLABORATION": {
+                        **dict(role_views["COLLABORATION"]),
+                        "observed_items": 1
+                        + len(contract["collaboration"]["subagent_packets"]),
+                        "referenced_source_bytes": 0,
+                        "overflow_codes": [],
+                        "silent_truncation": False,
+                        "automatic_expansion": False,
+                        "required_packet_truncation": False,
+                    }
+                }
+                if is_unit_c
+                else {}
+            ),
         },
         "scope_rules": scope_rules,
         "drift": drift,
         "impact": impact,
         "minimal_readback": minimal_readback,
+        **(
+            {
+                "external_locators": external_locators,
+                "actual_use_feedback": actual_use_feedback,
+                "collaboration": collaboration,
+                **(
+                    {"account_profile_read_only_actual_proof": account_actual_proof}
+                    if account_actual_proof is not None
+                    else {}
+                ),
+            }
+            if is_unit_c
+            else {}
+        ),
         "unresolved_by_owner": unresolved_by_owner,
         "completion_gates": {
             "unit_a_premise_model_ready": premise_model.get("status")
@@ -5487,7 +6590,7 @@ def build_work_context_model(
                 row["impact_class"] == "MANUAL_REVIEW" for row in drift
             ),
             "shared_model_projection_binding_required": True,
-            "unit_c_collaboration_complete": False,
+            "unit_c_collaboration_complete": is_unit_c,
             "operator_v1_activation_approved": False,
         },
         "completion_claim": None,
@@ -5495,7 +6598,7 @@ def build_work_context_model(
         "product_credit": 0,
         "technical_credit": 0,
         "automatic_progression": False,
-        "unit_c_started": False,
+        "unit_c_started": is_unit_c,
     }
     model["operator_model_fingerprint"] = _operator_model_fingerprint(model)
     _reject_sensitive_public_projection(model)
@@ -6753,6 +7856,7 @@ def _context_fingerprint_payload(
     operator_model_fingerprint: str | None = None,
     operator_context_sha256: str | None = None,
     unit_b_work_context: Mapping[str, Any] | None = None,
+    unit_c_collaboration_support: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     payload = {
         "workspace": workspace,
@@ -6782,6 +7886,8 @@ def _context_fingerprint_payload(
         payload["operator_context_sha256"] = operator_context_sha256
     if unit_b_work_context is not None:
         payload["unit_b_work_context"] = unit_b_work_context
+    if unit_c_collaboration_support is not None:
+        payload["unit_c_collaboration_support"] = unit_c_collaboration_support
     return payload
 
 
@@ -6904,7 +8010,7 @@ def compile_task_context(
         requested_classification,
         canonical_owner_bundle or {},
     )
-    if is_v2 and _is_unit_b_profile(task_profile):
+    if is_v2 and _has_work_context_profile(task_profile):
         unit_b_contract = task_profile["operator_contract"]
         unit_b_seed_rows = [
             (
@@ -7080,7 +8186,8 @@ def compile_task_context(
         else "STEP4_INCOMPLETE_BLOCKING_CONTEXT_OR_REMOTE_VERIFICATION"
     )
     is_unit_b = bool(is_v2 and _is_unit_b_profile(task_profile))
-    unit_b_model = (
+    is_unit_c = bool(is_v2 and _is_unit_c_profile(task_profile))
+    work_context_model = (
         build_work_context_model(
             workspace=workspace,
             task=task,
@@ -7099,8 +8206,12 @@ def compile_task_context(
             workspace_refs=manifests["inventory"].get("repositories", {}),
             symbol_owner=symbol_owner,
             route_owner=route_owner,
+            workspace_profiles=workspace_profiles,
+            external_workspace_root=external_workspace_root,
+            workspace_dir=workspace_dir,
+            repository_roots=repository_roots,
         )
-        if is_unit_b
+        if is_unit_b or is_unit_c
         else None
     )
 
@@ -7120,44 +8231,45 @@ def compile_task_context(
             staging / "full_text_read_order.md",
             _read_order_markdown(selected_rows, workspace, task).encode("utf-8"),
         )
-        _write_bytes(
-            staging / "cmee_context_overview.md",
-            _overview_markdown(
-                workspace,
-                task,
-                selected_rows,
-                coverage,
-                unresolved,
-                findings,
-                status,
-            ).encode("utf-8"),
-        )
-        _write_bytes(
-            staging / "cmee_unincorporated_actual_findings.md",
-            _findings_markdown(findings, unresolved).encode("utf-8"),
-        )
+        if not is_unit_c or task == "cmee":
+            _write_bytes(
+                staging / "cmee_context_overview.md",
+                _overview_markdown(
+                    workspace,
+                    task,
+                    selected_rows,
+                    coverage,
+                    unresolved,
+                    findings,
+                    status,
+                ).encode("utf-8"),
+            )
+            _write_bytes(
+                staging / "cmee_unincorporated_actual_findings.md",
+                _findings_markdown(findings, unresolved).encode("utf-8"),
+            )
         operator_context_sha256: str | None = None
         operator_model_fingerprint: str | None = None
-        if unit_b_model is not None:
+        if work_context_model is not None:
             for _attempt in range(8):
-                unit_b_model["operator_model_fingerprint"] = (
-                    _operator_model_fingerprint(unit_b_model)
+                work_context_model["operator_model_fingerprint"] = (
+                    _operator_model_fingerprint(work_context_model)
                 )
-                operator_bytes = _pretty_json_bytes(unit_b_model)
+                operator_bytes = _pretty_json_bytes(work_context_model)
                 operator_context_sha256 = _sha256_bytes(operator_bytes)
                 pro_bytes = _render_pro_context(
-                    unit_b_model, operator_context_sha256
+                    work_context_model, operator_context_sha256
                 )
                 ultra_bytes = _render_ultra_context(
-                    unit_b_model, operator_context_sha256
+                    work_context_model, operator_context_sha256
                 )
                 expanded_pro_bytes = _render_pro_context(
-                    unit_b_model,
+                    work_context_model,
                     operator_context_sha256,
                     collapse_overflow=False,
                 )
                 expanded_ultra_bytes = _render_ultra_context(
-                    unit_b_model,
+                    work_context_model,
                     operator_context_sha256,
                     collapse_overflow=False,
                 )
@@ -7170,7 +8282,7 @@ def compile_task_context(
                     byte_overflow.append(("ULTRA_KAREN", "BUDGET_EXCEEDED_PROJECTION_BYTES"))
                 changed = False
                 for role, code in byte_overflow:
-                    overflow_codes = unit_b_model["budgets"][role]["overflow_codes"]
+                    overflow_codes = work_context_model["budgets"][role]["overflow_codes"]
                     if code not in overflow_codes:
                         overflow_codes.append(code)
                         overflow_codes.sort()
@@ -7180,9 +8292,9 @@ def compile_task_context(
                             "source_id": f"UNIT_B.{code}",
                             "blocking": True,
                         }
-                        if handback not in unit_b_model["unresolved_by_owner"]:
-                            unit_b_model["unresolved_by_owner"].append(handback)
-                            unit_b_model["unresolved_by_owner"].sort(
+                        if handback not in work_context_model["unresolved_by_owner"]:
+                            work_context_model["unresolved_by_owner"].append(handback)
+                            work_context_model["unresolved_by_owner"].sort(
                                 key=lambda row: (
                                     row["owner"],
                                     row["reason_code"],
@@ -7192,19 +8304,42 @@ def compile_task_context(
                         changed = True
                 if not changed:
                     break
-                unit_b_model["operator_v1"]["status"] = "V1_OPERATOR_CONTEXT_BLOCKED"
-                unit_b_model["operator_v1"]["unit_b_status"] = "UNIT_B_WORK_CONTEXT_BLOCKED"
-                unit_b_model["completion_gates"]["pro_first_view_budget_pass"] = not unit_b_model["budgets"]["PRO_KAREN"]["overflow_codes"]
-                unit_b_model["completion_gates"]["ultra_budget_pass"] = not unit_b_model["budgets"]["ULTRA_KAREN"]["overflow_codes"]
+                work_context_model["operator_v1"]["status"] = "V1_OPERATOR_CONTEXT_BLOCKED"
+                work_context_model["operator_v1"]["unit_b_status"] = "UNIT_B_WORK_CONTEXT_BLOCKED"
+                if is_unit_c:
+                    work_context_model["operator_v1"]["unit_c_status"] = "UNIT_C_COLLABORATION_SUPPORT_BLOCKED"
+                work_context_model["completion_gates"]["pro_first_view_budget_pass"] = not work_context_model["budgets"]["PRO_KAREN"]["overflow_codes"]
+                work_context_model["completion_gates"]["ultra_budget_pass"] = not work_context_model["budgets"]["ULTRA_KAREN"]["overflow_codes"]
             else:  # pragma: no cover - monotonic exact3 overflow set converges
                 raise ContextCompileError("Unit B byte-budget fixed point did not converge")
             operator_model_fingerprint = str(
-                unit_b_model["operator_model_fingerprint"]
+                work_context_model["operator_model_fingerprint"]
             )
             _write_bytes(staging / "operator_context.json", operator_bytes)
             _write_bytes(staging / "pro_context.md", pro_bytes)
             _write_bytes(staging / "ultra_context.md", ultra_bytes)
-        logical_output_names = UNIT_B_OUTPUT_NAMES if is_unit_b else OUTPUT_NAMES
+            if is_unit_c:
+                collaboration_bytes = _render_collaboration_packets(
+                    work_context_model, operator_context_sha256
+                )
+                if len(collaboration_bytes) > work_context_model["budgets"][
+                    "COLLABORATION"
+                ]["max_projection_utf8_bytes"]:
+                    raise ContextCompileError(
+                        "Unit C collaboration projection byte budget exceeded"
+                    )
+                _write_bytes(
+                    staging / "collaboration_packets.json", collaboration_bytes
+                )
+        logical_output_names = (
+            UNIT_C_CMEE_OUTPUT_NAMES
+            if is_unit_c and task == "cmee"
+            else UNIT_C_NON_CMEE_OUTPUT_NAMES
+            if is_unit_c
+            else UNIT_B_OUTPUT_NAMES
+            if is_unit_b
+            else OUTPUT_NAMES
+        )
         output_sha256 = {
             name: _sha256_file(staging / name) for name in logical_output_names
         }
@@ -7307,10 +8442,10 @@ def compile_task_context(
                 ),
                 "conflict_count": len(premise_model.get("conflicts", [])),
             }
-        if unit_b_model is not None:
+        if is_unit_b and work_context_model is not None:
             unit_b_work_context = {
                 "schema_version": "cocolon.system_context.unit_b_work_context.v1",
-                "status": unit_b_model["operator_v1"]["unit_b_status"],
+                "status": work_context_model["operator_v1"]["unit_b_status"],
                 "temporary_candidate": True,
                 "logical_output_count": 10,
                 "operator_context_sha256": operator_context_sha256,
@@ -7329,6 +8464,45 @@ def compile_task_context(
             }
             manifest["unit_b_work_context"] = unit_b_work_context
             fingerprint_payload["unit_b_work_context"] = unit_b_work_context
+        if is_unit_c and work_context_model is not None:
+            collaboration = work_context_model["collaboration"]
+            unit_c_collaboration_support = {
+                "schema_version": (
+                    "cocolon.system_context.unit_c_collaboration_support.v1"
+                ),
+                "status": work_context_model["operator_v1"]["unit_c_status"],
+                "temporary_candidate": False,
+                "publication_state": "TRACKED_DRAFT_CANDIDATE",
+                "logical_output_count": len(logical_output_names),
+                "operator_context_sha256": operator_context_sha256,
+                "operator_model_fingerprint": operator_model_fingerprint,
+                "projection_source_sha256": operator_context_sha256,
+                "projection_model_fingerprint": operator_model_fingerprint,
+                "pro_context_sha256": output_sha256["pro_context.md"],
+                "ultra_context_sha256": output_sha256["ultra_context.md"],
+                "collaboration_packets_sha256": output_sha256[
+                    "collaboration_packets.json"
+                ],
+                "external_locator_count": len(
+                    work_context_model["external_locators"]
+                ),
+                "actual_use_feedback_count": len(
+                    work_context_model["actual_use_feedback"]["rows"]
+                ),
+                "restart_packet_count": 1,
+                "subagent_packet_count": len(collaboration["subagent_packets"]),
+                "completion_claim": None,
+                "v1_activation": 0,
+                "product_credit": 0,
+                "technical_credit": 0,
+                "automatic_progression": False,
+            }
+            manifest["unit_c_collaboration_support"] = (
+                unit_c_collaboration_support
+            )
+            fingerprint_payload["unit_c_collaboration_support"] = (
+                unit_c_collaboration_support
+            )
         context_fingerprint = _sha256_bytes(
             _canonical_json_bytes(fingerprint_payload)
         )
@@ -7342,6 +8516,7 @@ def compile_task_context(
         output_dir,
         expected_unit_a=is_v2,
         expected_unit_b=is_unit_b,
+        expected_unit_c=is_unit_c,
         expected_task=task,
         expected_publication_mode=(
             str(task_profile["publication_mode"]) if is_v2 else None
@@ -7448,10 +8623,19 @@ def _validate_unit_a_manifest_projection(
 ) -> None:
     """Fail closed on self-consistent forgeries of Unit A public boundaries."""
     is_unit_b = "unit_b_work_context" in manifest
+    is_unit_c = "unit_c_collaboration_support" in manifest
+    if is_unit_b and is_unit_c:
+        raise ContextCompileError("manifest cannot claim Unit B and Unit C together")
     _require_exact_keys(
         manifest,
-        UNIT_B_MANIFEST_KEYS if is_unit_b else UNIT_A_MANIFEST_KEYS,
-        "Unit A/Unit B context manifest",
+        (
+            UNIT_C_MANIFEST_KEYS
+            if is_unit_c
+            else UNIT_B_MANIFEST_KEYS
+            if is_unit_b
+            else UNIT_A_MANIFEST_KEYS
+        ),
+        "Unit A/Unit B/Unit C context manifest",
     )
     inputs = manifest.get("input_sha256")
     gates = manifest.get("completion_gates")
@@ -7459,8 +8643,14 @@ def _validate_unit_a_manifest_projection(
         raise ContextCompileError("Unit A manifest input or gate projection is invalid")
     _require_exact_keys(
         inputs,
-        UNIT_B_INPUT_SHA_KEYS if is_unit_b else UNIT_A_INPUT_SHA_KEYS,
-        "Unit A/Unit B input identity",
+        (
+            UNIT_C_INPUT_SHA_KEYS
+            if is_unit_c
+            else UNIT_B_INPUT_SHA_KEYS
+            if is_unit_b
+            else UNIT_A_INPUT_SHA_KEYS
+        ),
+        "Unit A/Unit B/Unit C input identity",
     )
     _require_exact_keys(gates, UNIT_A_COMPLETION_GATE_KEYS, "Unit A completion gates")
     if any(type(value) is not bool for value in gates.values()):
@@ -8251,10 +9441,540 @@ def _validate_unit_a_manifest_projection(
         raise ContextCompileError("Unit A premise readiness status mismatch")
 
 
+def _validate_unit_c_extensions(
+    output_dir: Path,
+    model: Mapping[str, Any],
+    declared_contract: Mapping[str, Any],
+    summary: Mapping[str, Any],
+    operator_context_sha256: str,
+) -> set[str]:
+    """Re-derive every Unit C-only projection from the embedded exact10 profile."""
+    declarations = declared_contract.get("external_locators")
+    external_rows = model.get("external_locators")
+    if (
+        not isinstance(declarations, list)
+        or not isinstance(external_rows, list)
+        or any(not isinstance(row, Mapping) for row in declarations)
+        or any(not isinstance(row, Mapping) for row in external_rows)
+    ):
+        raise ContextCompileError("Unit C external locator projection is invalid")
+    if summary.get("external_locator_count") != len(external_rows):
+        raise ContextCompileError("Unit C external locator count mismatch")
+    declarations_by_id: dict[str, Mapping[str, Any]] = {}
+    for index, declaration in enumerate(declarations):
+        validated = _validate_external_locator(
+            declaration, f"Unit C external locator declaration {index}"
+        )
+        locator_id = str(validated["locator_id"])
+        if locator_id in declarations_by_id:
+            raise ContextCompileError("Unit C external locator IDs are duplicated")
+        declarations_by_id[locator_id] = declaration
+    expected_external_rows: list[dict[str, Any]] = []
+    external_blockers: set[str] = set()
+    for locator_id in sorted(declarations_by_id):
+        declaration = declarations_by_id[locator_id]
+        expected = _public_external_locator_projection(declaration)
+        if declaration["public_identity_allowed"] is True:
+            if declaration["availability_state"] == "AVAILABLE":
+                expected["verification_status"] = (
+                    "GIT_COMMIT_BLOB_CONTENT_SYMBOL_VERIFIED"
+                )
+                expected["verified_scope"] = [
+                    "PUBLIC_BLOB_IDENTITY",
+                    "PUBLIC_COMMIT_IDENTITY",
+                    "PUBLIC_SYMBOL_PRESENCE",
+                ]
+            else:
+                expected["verification_status"] = "PUBLIC_IDENTITY_NOT_AVAILABLE"
+                expected["verified_scope"] = [
+                    "DECLARED_BODY_FREE_PUBLIC_LOCATOR"
+                ]
+                if declaration["availability_state"] in {
+                    "EXISTENCE_UNVERIFIED",
+                    "RETRIEVAL_GAP",
+                }:
+                    external_blockers.add(
+                        "EXTERNAL_PUBLIC_IDENTITY_RETRIEVAL_UNRESOLVED"
+                    )
+        else:
+            expected["verification_status"] = (
+                "PRIVATE_OPAQUE_ID_ONLY_NOT_RETRIEVED"
+            )
+            expected["verified_scope"] = ["OPAQUE_PUBLIC_ID_ONLY"]
+            if declaration["availability_state"] in {
+                "EXISTENCE_UNVERIFIED",
+                "RETRIEVAL_GAP",
+            }:
+                external_blockers.add(
+                    "EXTERNAL_PRIVATE_IDENTITY_RETRIEVAL_UNRESOLVED"
+                )
+        expected_external_rows.append(expected)
+    if external_rows != expected_external_rows:
+        raise ContextCompileError("Unit C external locator exact derivation mismatch")
+
+    declared_feedback = declared_contract.get("actual_use_feedback")
+    feedback = model.get("actual_use_feedback")
+    if not isinstance(declared_feedback, list) or not isinstance(feedback, Mapping):
+        raise ContextCompileError("Unit C actual-use feedback projection is invalid")
+    _require_exact_keys(
+        feedback,
+        frozenset(
+            {
+                "policy",
+                "rows",
+                "empty_feedback_is_valid",
+                "feedback_required_for_ready",
+                "automatic_selection_mutation",
+                "automatic_rank",
+            }
+        ),
+        "Unit C actual-use feedback",
+    )
+    if (
+        feedback.get("policy") != "EVENT_DRIVEN_OPTIONAL"
+        or feedback.get("rows") != declared_feedback
+        or feedback.get("empty_feedback_is_valid") is not True
+        or feedback.get("feedback_required_for_ready") is not False
+        or feedback.get("automatic_selection_mutation") is not False
+        or feedback.get("automatic_rank") is not False
+        or summary.get("actual_use_feedback_count") != len(declared_feedback)
+    ):
+        raise ContextCompileError("Unit C feedback policy boundary violated")
+    feedback_ids: set[str] = set()
+    feedback_locator_ids: set[str] = set()
+    feedback_by_id: dict[str, Mapping[str, Any]] = {}
+    for index, row in enumerate(declared_feedback):
+        if not isinstance(row, Mapping) or not FEEDBACK_ROW_REQUIRED_KEYS.issubset(
+            row
+        ) or set(row) - FEEDBACK_ROW_ALLOWED_KEYS:
+            raise ContextCompileError("Unit C feedback row shape is invalid")
+        feedback_id = _require_safe_public_id(
+            row.get("feedback_id"), f"Unit C feedback {index} ID"
+        )
+        if feedback_id in feedback_ids:
+            raise ContextCompileError("Unit C feedback IDs are duplicated")
+        feedback_ids.add(feedback_id)
+        feedback_by_id[feedback_id] = row
+        source = _validate_external_locator(
+            row.get("source_locator"), f"Unit C feedback {feedback_id} source"
+        )
+        source_id = str(source["locator_id"])
+        if source_id in feedback_locator_ids:
+            raise ContextCompileError("Unit C feedback source IDs are duplicated")
+        feedback_locator_ids.add(source_id)
+        if row.get("author_role") not in FEEDBACK_AUTHOR_ROLES:
+            raise ContextCompileError("Unit C feedback author role is invalid")
+        if row.get("target_role") not in FEEDBACK_TARGET_ROLES:
+            raise ContextCompileError("Unit C feedback target role is invalid")
+        if row.get("trigger_code") not in FEEDBACK_TRIGGER_CODES:
+            raise ContextCompileError("Unit C feedback trigger is invalid")
+        if row.get("disposition") not in FEEDBACK_DISPOSITIONS:
+            raise ContextCompileError("Unit C feedback disposition is invalid")
+        if row.get("disposition") == "SELECTED_AND_USED" and not row.get(
+            "related_feedback_id"
+        ):
+            raise ContextCompileError("Unit C routine positive feedback is forbidden")
+    closable_gap_dispositions = {
+        "SELECTED_BUT_NOT_NEEDED",
+        "MANUALLY_FOUND_ADDITIONAL",
+        "NEEDED_BUT_NOT_SELECTED",
+        "SELECTION_REASON_INSUFFICIENT",
+        "ROLE_OUTPUT_INSUFFICIENT",
+    }
+    observation_groups: dict[tuple[Any, Any, Any], list[str]] = defaultdict(list)
+    for feedback_id, row in feedback_by_id.items():
+        observation_groups[
+            (
+                row.get("observed_task_instance"),
+                row.get("target_role"),
+                row.get("target_id"),
+            )
+        ].append(feedback_id)
+        related_id = row.get("related_feedback_id")
+        if related_id is not None and related_id not in feedback_by_id:
+            raise ContextCompileError("Unit C feedback related ID is dangling")
+        if row.get("disposition") != "SELECTED_AND_USED":
+            continue
+        related = feedback_by_id[str(related_id)]
+        source_without_id = {
+            key: value
+            for key, value in row["source_locator"].items()
+            if key != "locator_id"
+        }
+        related_source_without_id = {
+            key: value
+            for key, value in related["source_locator"].items()
+            if key != "locator_id"
+        }
+        if (
+            related.get("disposition") not in closable_gap_dispositions
+            or row.get("observed_task_instance")
+            != related.get("observed_task_instance")
+            or row.get("author_role") != related.get("author_role")
+            or row.get("target_role") != related.get("target_role")
+            or row.get("target_id") != related.get("target_id")
+            or row.get("trigger_code") != related.get("trigger_code")
+            or source_without_id != related_source_without_id
+        ):
+            raise ContextCompileError(
+                "Unit C SELECTED_AND_USED does not close a matching gap"
+            )
+    for observation_ids in observation_groups.values():
+        if len(observation_ids) == 1:
+            continue
+        closing = [
+            feedback_id
+            for feedback_id in observation_ids
+            if feedback_by_id[feedback_id].get("disposition") == "SELECTED_AND_USED"
+        ]
+        if (
+            len(observation_ids) != 2
+            or len(closing) != 1
+            or feedback_by_id[closing[0]].get("related_feedback_id")
+            != next(
+                feedback_id
+                for feedback_id in observation_ids
+                if feedback_id != closing[0]
+            )
+        ):
+            raise ContextCompileError("Unit C feedback observations are duplicated")
+
+    declared_collaboration = declared_contract.get("collaboration")
+    collaboration = model.get("collaboration")
+    if not isinstance(declared_collaboration, Mapping) or not isinstance(
+        collaboration, Mapping
+    ):
+        raise ContextCompileError("Unit C collaboration projection is invalid")
+    _require_exact_keys(
+        collaboration,
+        COLLABORATION_KEYS
+        | frozenset(
+            {
+                "same_operator_model_required",
+                "subagent_execution",
+                "model_selection",
+                "tool_selection",
+                "write_authority",
+                "final_adoption_authority",
+            }
+        ),
+        "Unit C collaboration model",
+    )
+    if (
+        {key: collaboration[key] for key in COLLABORATION_KEYS}
+        != dict(declared_collaboration)
+        or collaboration.get("same_operator_model_required") is not True
+        or collaboration.get("subagent_execution") is not False
+        or collaboration.get("model_selection") is not False
+        or collaboration.get("tool_selection") is not False
+        or collaboration.get("write_authority") is not False
+        or collaboration.get("final_adoption_authority") is not False
+        or summary.get("restart_packet_count") != 1
+        or summary.get("subagent_packet_count")
+        != len(collaboration["subagent_packets"])
+    ):
+        raise ContextCompileError("Unit C collaboration zero-effect boundary violated")
+    if (
+        collaboration.get("max_subagent_packets") != 3
+        or not isinstance(collaboration.get("restart_packet"), Mapping)
+        or not isinstance(collaboration.get("subagent_packets"), list)
+        or len(collaboration["subagent_packets"]) > 3
+    ):
+        raise ContextCompileError("Unit C collaboration cardinality is invalid")
+    _require_exact_keys(
+        collaboration["restart_packet"], RESTART_PACKET_KEYS, "Unit C restart packet"
+    )
+    packet_ids: set[str] = set()
+    selected_ids: set[str] = set()
+    coverage_ids: set[str] = set()
+    for packet in collaboration["subagent_packets"]:
+        if not isinstance(packet, Mapping):
+            raise ContextCompileError("Unit C subagent packet is invalid")
+        _require_exact_keys(packet, SUBAGENT_PACKET_KEYS, "Unit C subagent packet")
+        packet_id = _require_safe_public_id(
+            packet.get("packet_id"), "Unit C packet ID"
+        )
+        if packet_id in packet_ids or packet.get("overlap_policy") != "DISJOINT":
+            raise ContextCompileError("Unit C packet identity or overlap is invalid")
+        packet_ids.add(packet_id)
+        packet_selected = set(
+            _require_public_code_list(
+                packet.get("selected_target_ids"),
+                f"{packet_id}.selected_target_ids",
+                maximum=80,
+            )
+        )
+        packet_coverage = set(
+            _require_public_code_list(
+                packet.get("coverage_boundary_ids"),
+                f"{packet_id}.coverage_boundary_ids",
+                maximum=32,
+            )
+        )
+        if packet_selected.intersection(packet_coverage) or (
+            selected_ids | coverage_ids
+        ).intersection(packet_selected | packet_coverage):
+            raise ContextCompileError("Unit C packet DISJOINT boundary is violated")
+        selected_ids.update(packet_selected)
+        coverage_ids.update(packet_coverage)
+
+    expected_packets = _render_collaboration_packets(
+        model, operator_context_sha256
+    )
+    if (output_dir / "collaboration_packets.json").read_bytes() != expected_packets:
+        raise ContextCompileError("Unit C collaboration projection mismatch")
+    return external_blockers
+
+
+def _validate_account_profile_actual_proof(
+    proof: Any,
+    selected_rows: Sequence[Mapping[str, Any]],
+    declared_contract: Mapping[str, Any],
+    output_dir: Path,
+) -> set[str]:
+    if not isinstance(proof, Mapping):
+        raise ContextCompileError("account profile actual proof is missing")
+    _require_exact_keys(
+        proof,
+        frozenset(
+            {
+                "schema_version",
+                "task_id",
+                "route_method",
+                "route_path",
+                "resolution_status",
+                "route_graph_evidence",
+                "mount_evidence",
+                "protected_gap",
+                "product_route_green_claim",
+                "endpoint_execution",
+                "auth_or_user_data_access",
+                "db_query_or_write",
+                "persistent_effect",
+            }
+        ),
+        "account profile actual proof",
+    )
+    graph = proof.get("route_graph_evidence")
+    mount = proof.get("mount_evidence")
+    gap = proof.get("protected_gap")
+    if not all(isinstance(row, Mapping) for row in (graph, mount, gap)):
+        raise ContextCompileError("account profile actual proof rows are invalid")
+    _require_exact_keys(
+        graph,
+        frozenset(
+            {
+                "rn_call_id",
+                "cross_repository_edge_id",
+                "api_route_id",
+                "api_source_path",
+                "backend_resolved_symbols",
+                "unresolved_backend_edge_ids",
+                "unknown_edges_preserved",
+            }
+        ),
+        "account route graph evidence",
+    )
+    workspace_candidates = [output_dir.parent.parent, *output_dir.parents]
+    workspace_dir = next(
+        (
+            candidate
+            for candidate in workspace_candidates
+            if (candidate / "route_graph" / "api_routes.jsonl").is_file()
+        ),
+        None,
+    )
+    if workspace_dir is None:
+        raise ContextCompileError(
+            "account profile verifier cannot locate bound route graph"
+        )
+    api_rows = [
+        row
+        for row in _iter_jsonl(workspace_dir / "route_graph" / "api_routes.jsonl")
+        if row.get("method") == "GET"
+        and row.get("route_path") == "/account/profile/me"
+    ]
+    rn_rows = [
+        row
+        for row in _iter_jsonl(workspace_dir / "route_graph" / "rn_calls.jsonl")
+        if row.get("method") == "GET"
+        and "/account/profile/me" in row.get("normalized_path_candidates", [])
+        and row.get("path") == "screens/account/useAccountProfile.js"
+    ]
+    cross_rows = [
+        row
+        for row in _iter_jsonl(
+            workspace_dir / "route_graph" / "cross_repository_route_edges.jsonl"
+        )
+        if row.get("method") == "GET"
+        and row.get("api_route_path") == "/account/profile/me"
+        and row.get("rn_source_path") == "screens/account/useAccountProfile.js"
+        and row.get("match_quality") == "EXACT"
+    ]
+    api_row = sorted(api_rows, key=lambda row: str(row.get("route_id")))[0] if api_rows else {}
+    rn_row = sorted(rn_rows, key=lambda row: str(row.get("call_id")))[0] if rn_rows else {}
+    cross_row = sorted(cross_rows, key=lambda row: str(row.get("edge_id")))[0] if cross_rows else {}
+    route_id = str(api_row.get("route_id") or "")
+    backend_rows = [
+        row
+        for row in _iter_jsonl(
+            workspace_dir / "route_graph" / "backend_call_edges.jsonl"
+        )
+        if row.get("route_id") == route_id
+    ] if route_id else []
+    expected_graph = {
+        "rn_call_id": rn_row.get("call_id"),
+        "cross_repository_edge_id": cross_row.get("edge_id"),
+        "api_route_id": api_row.get("route_id"),
+        "api_source_path": api_row.get("path"),
+        "backend_resolved_symbols": sorted(
+            {
+                str(node.get("symbol"))
+                for row in backend_rows
+                for node in (row.get("source_node"), row.get("target_node"))
+                if isinstance(node, Mapping)
+                and node.get("symbol")
+                in {
+                    "_require_user_id",
+                    "_fetch_profile_me",
+                    "_get_profile_row",
+                    "_sb_get",
+                }
+            }
+        ),
+        "unresolved_backend_edge_ids": sorted(
+            str(row.get("edge_id"))
+            for row in backend_rows
+            if row.get("resolution_status") == "UNRESOLVED"
+            and type(row.get("edge_id")) is str
+        ),
+        "unknown_edges_preserved": any(
+            row.get("resolution_status") == "UNRESOLVED" for row in backend_rows
+        ),
+    }
+    if graph != expected_graph:
+        raise ContextCompileError(
+            "account profile route graph proof derivation mismatch"
+        )
+    _require_exact_keys(
+        mount,
+        frozenset(
+            {
+                "route_graph_mount_status",
+                "direct_source_path",
+                "direct_source_commit",
+                "direct_source_blob_sha",
+                "registration_symbol",
+                "registration_symbol_present",
+                "direct_source_verification_status",
+                "resolution_code",
+                "disposition",
+            }
+        ),
+        "account mount evidence",
+    )
+    _require_exact_keys(
+        gap,
+        frozenset(
+            {
+                "gap_id",
+                "reason_code",
+                "disposition",
+                "protected_scope_rule_ids",
+                "handback_owner",
+            }
+        ),
+        "account protected gap",
+    )
+    backend_symbols = _require_public_identity_list(
+        graph.get("backend_resolved_symbols"),
+        "account backend symbols",
+        maximum=32,
+    )
+    unresolved_edge_ids = _require_public_identity_list(
+        graph.get("unresolved_backend_edge_ids"),
+        "account unresolved backend edges",
+        maximum=4096,
+    )
+    for key in ("rn_call_id", "cross_repository_edge_id", "api_route_id"):
+        _require_safe_symbol_or_route(graph.get(key), f"account {key}")
+    _require_safe_repo_path(graph.get("api_source_path"), "account API source path")
+    selected_by_key = {
+        (
+            _normalize_repository(str(row["repository_key"])),
+            _normalize_path(str(row["path"])),
+        ): row
+        for row in selected_rows
+    }
+    app_row = selected_by_key.get(
+        ("mashos-api", "ai/services/ai_inference/app.py")
+    )
+    protected_scope_ids = sorted(
+        str(row["scope_rule_id"])
+        for row in declared_contract["scope_rules"]
+        if row.get("changeability") == "PROTECTED_REVIEW_REQUIRED"
+    )
+    if (
+        proof.get("schema_version")
+        != "cocolon.system_context.account_profile_read_only_actual_proof.v1"
+        or proof.get("task_id") != "account_profile_read_only"
+        or proof.get("route_method") != "GET"
+        or proof.get("route_path") != "/account/profile/me"
+        or proof.get("resolution_status")
+        != "RESOLVED_WITH_EXPLICIT_UNKNOWN_EDGES"
+        or not {
+            "_require_user_id",
+            "_fetch_profile_me",
+            "_get_profile_row",
+            "_sb_get",
+        }.issubset(backend_symbols)
+        or not unresolved_edge_ids
+        or graph.get("unknown_edges_preserved") is not True
+        or graph.get("api_source_path")
+        != "ai/services/ai_inference/api_account_lifecycle.py"
+        or mount.get("route_graph_mount_status") != "UNMOUNTED_ROUTER"
+        or mount.get("direct_source_path")
+        != "ai/services/ai_inference/app.py"
+        or app_row is None
+        or mount.get("direct_source_commit") != app_row.get("source_commit")
+        or mount.get("direct_source_blob_sha") != app_row.get("blob_sha")
+        or mount.get("registration_symbol")
+        != "register_account_lifecycle_routes(app)"
+        or mount.get("registration_symbol_present") is not True
+        or mount.get("direct_source_verification_status")
+        != "DIRECT_SOURCE_SYMBOL_VERIFIED"
+        or mount.get("resolution_code")
+        != "MOUNT_VERIFICATION_REQUIRES_DIRECT_SOURCE"
+        or mount.get("disposition") != "MANUAL_REVIEW"
+        or gap.get("gap_id") != "ACCOUNT-PROTECTED-GAP-001"
+        or gap.get("reason_code")
+        != "AUTH_SELF_FILTER_AND_DB_FIELD_ALLOWLIST_NOT_DIRECTLY_ENDPOINT_TESTED"
+        or gap.get("disposition") != "PROTECTED_REVIEW_REQUIRED"
+        or gap.get("protected_scope_rule_ids") != protected_scope_ids
+        or gap.get("handback_owner") != "ACCOUNT_PUBLIC_API_OWNER"
+        or proof.get("product_route_green_claim") is not False
+        or proof.get("endpoint_execution") is not False
+        or proof.get("auth_or_user_data_access") is not False
+        or proof.get("db_query_or_write") is not False
+        or proof.get("persistent_effect") is not False
+    ):
+        raise ContextCompileError("account profile actual proof boundary violated")
+    return {
+        "MOUNT_VERIFICATION_REQUIRES_DIRECT_SOURCE",
+        "AUTH_SELF_FILTER_AND_DB_FIELD_ALLOWLIST_NOT_DIRECTLY_ENDPOINT_TESTED",
+    }
+
+
 def _validate_unit_b_projection(
-    output_dir: Path, manifest: Mapping[str, Any]
+    output_dir: Path,
+    manifest: Mapping[str, Any],
+    *,
+    unit_c: bool = False,
 ) -> Mapping[str, Any]:
-    summary = manifest.get("unit_b_work_context")
+    label = "Unit C" if unit_c else "Unit B"
+    summary = manifest.get(
+        "unit_c_collaboration_support" if unit_c else "unit_b_work_context"
+    )
     inputs = manifest.get("input_sha256")
     output_sha = manifest.get("output_sha256")
     if (
@@ -8262,9 +9982,41 @@ def _validate_unit_b_projection(
         or not isinstance(inputs, Mapping)
         or not isinstance(output_sha, Mapping)
     ):
-        raise ContextCompileError("Unit B manifest projection is invalid")
-    _require_exact_keys(summary, UNIT_B_WORK_CONTEXT_KEYS, "Unit B work context")
-    if (
+        raise ContextCompileError(f"{label} manifest projection is invalid")
+    _require_exact_keys(
+        summary,
+        UNIT_C_COLLABORATION_SUPPORT_KEYS if unit_c else UNIT_B_WORK_CONTEXT_KEYS,
+        f"{label} work context",
+    )
+    if unit_c:
+        expected_logical_count = 11 if manifest.get("task") == "cmee" else 9
+        if (
+            summary.get("schema_version")
+            != "cocolon.system_context.unit_c_collaboration_support.v1"
+            or summary.get("status")
+            not in {
+                "UNIT_C_COLLABORATION_SUPPORT_READY",
+                "UNIT_C_COLLABORATION_SUPPORT_BLOCKED",
+            }
+            or summary.get("temporary_candidate") is not False
+            or summary.get("publication_state") != "TRACKED_DRAFT_CANDIDATE"
+            or summary.get("logical_output_count") != expected_logical_count
+            or summary.get("restart_packet_count") != 1
+            or summary.get("completion_claim") is not None
+            or summary.get("v1_activation") != 0
+            or summary.get("product_credit") != 0
+            or summary.get("technical_credit") != 0
+            or summary.get("automatic_progression") is not False
+        ):
+            raise ContextCompileError("Unit C checkpoint boundary violated")
+        for count_key in (
+            "external_locator_count",
+            "actual_use_feedback_count",
+            "subagent_packet_count",
+        ):
+            if type(summary.get(count_key)) is not int or summary[count_key] < 0:
+                raise ContextCompileError("Unit C summary count is invalid")
+    elif (
         summary.get("schema_version")
         != "cocolon.system_context.unit_b_work_context.v1"
         or summary.get("status")
@@ -8287,6 +10039,7 @@ def _validate_unit_b_projection(
         "projection_model_fingerprint",
         "pro_context_sha256",
         "ultra_context_sha256",
+        *(("collaboration_packets_sha256",) if unit_c else ()),
     ):
         if type(summary.get(key)) is not str or not SHA256_RE.fullmatch(summary[key]):
             raise ContextCompileError("Unit B hash binding is invalid")
@@ -8300,9 +10053,14 @@ def _validate_unit_b_projection(
         != output_sha.get("operator_context.json")
         or summary["pro_context_sha256"] != output_sha.get("pro_context.md")
         or summary["ultra_context_sha256"] != output_sha.get("ultra_context.md")
+        or (
+            unit_c
+            and summary["collaboration_packets_sha256"]
+            != output_sha.get("collaboration_packets.json")
+        )
     ):
-        raise ContextCompileError("Unit B shared-model binding mismatch")
-    if (output_dir / "collaboration_packets.json").exists():
+        raise ContextCompileError(f"{label} shared-model binding mismatch")
+    if not unit_c and (output_dir / "collaboration_packets.json").exists():
         raise ContextCompileError("Unit B cannot publish Unit C collaboration output")
 
     model = _read_json(output_dir / "operator_context.json")
@@ -8347,12 +10105,24 @@ def _validate_unit_b_projection(
             "automatic_progression",
             "unit_c_started",
         }
+    ) | (
+        frozenset({"external_locators", "actual_use_feedback", "collaboration"})
+        if unit_c
+        else frozenset()
+    ) | (
+        frozenset({"account_profile_read_only_actual_proof"})
+        if unit_c and manifest.get("task") == "account_profile_read_only"
+        else frozenset()
     )
-    _require_exact_keys(model, model_keys, "Unit B operator context")
+    _require_exact_keys(model, model_keys, f"{label} operator context")
     _reject_sensitive_public_projection(model)
     if (
         model.get("schema_version")
-        != "cocolon.system_context.operator_context.unit_b.v1"
+        != (
+            "cocolon.system_context.operator_context.unit_c.v1"
+            if unit_c
+            else "cocolon.system_context.operator_context.unit_b.v1"
+        )
         or model.get("workspace") != manifest.get("workspace")
         or model.get("task") != manifest.get("task")
         or model.get("integrity_status") != "VALID"
@@ -8362,18 +10132,18 @@ def _validate_unit_b_projection(
         or model.get("product_credit") != 0
         or model.get("technical_credit") != 0
         or model.get("automatic_progression") is not False
-        or model.get("unit_c_started") is not False
+        or model.get("unit_c_started") is not unit_c
     ):
-        raise ContextCompileError("Unit B operator boundary violated")
+        raise ContextCompileError(f"{label} operator boundary violated")
     fingerprint = _operator_model_fingerprint(model)
     if (
         fingerprint != model.get("operator_model_fingerprint")
         or fingerprint != summary["operator_model_fingerprint"]
     ):
-        raise ContextCompileError("Unit B operator model tamper detected")
+        raise ContextCompileError(f"{label} operator model tamper detected")
     actual_operator_sha = _sha256_file(output_dir / "operator_context.json")
     if actual_operator_sha != summary["operator_context_sha256"]:
-        raise ContextCompileError("Unit B operator context hash mismatch")
+        raise ContextCompileError(f"{label} operator context hash mismatch")
 
     task_profile_declaration = model.get("task_profile_declaration")
     if not isinstance(task_profile_declaration, Mapping):
@@ -8395,9 +10165,29 @@ def _validate_unit_b_projection(
     declared_contract = declared_profile.get("operator_contract")
     if (
         not isinstance(declared_contract, Mapping)
-        or set(declared_contract) != OPERATOR_CONTRACT_UNIT_B_KEYS
+        or set(declared_contract)
+        != (
+            OPERATOR_CONTRACT_UNIT_C_KEYS
+            if unit_c
+            else OPERATOR_CONTRACT_UNIT_B_KEYS
+        )
     ):
-        raise ContextCompileError("Unit B task profile declaration is not exact7")
+        raise ContextCompileError(
+            "Unit C task profile declaration is not exact10"
+            if unit_c
+            else "Unit B task profile declaration is not exact7"
+        )
+    unit_c_external_blockers = (
+        _validate_unit_c_extensions(
+            output_dir,
+            model,
+            declared_contract,
+            summary,
+            actual_operator_sha,
+        )
+        if unit_c
+        else set()
+    )
 
     unit_a = manifest.get("unit_a_premise_management")
     if not isinstance(unit_a, Mapping):
@@ -8411,6 +10201,16 @@ def _validate_unit_b_projection(
     ):
         raise ContextCompileError("Unit B duplicated Unit A facts diverged")
     selected_rows = list(_iter_jsonl(output_dir / "selected_files.jsonl"))
+    account_actual_blockers = (
+        _validate_account_profile_actual_proof(
+            model.get("account_profile_read_only_actual_proof"),
+            selected_rows,
+            declared_contract,
+            output_dir,
+        )
+        if unit_c and model.get("task") == "account_profile_read_only"
+        else set()
+    )
     legacy = model.get("legacy_context")
     if not isinstance(legacy, Mapping):
         raise ContextCompileError("Unit B legacy context is invalid")
@@ -8457,16 +10257,24 @@ def _validate_unit_b_projection(
                 "integration_required",
                 "v1_activation",
             }
-        ),
-        "Unit B operator v1",
+        )
+        | (frozenset({"unit_c_status"}) if unit_c else frozenset()),
+        f"{label} operator v1",
     )
     if (
         operator.get("status")
         not in {"V1_OPERATOR_CONTEXT_READY", "V1_OPERATOR_CONTEXT_BLOCKED"}
-        or operator.get("unit_b_status") != summary.get("status")
+        or (
+            not unit_c
+            and operator.get("unit_b_status") != summary.get("status")
+        )
+        or (
+            unit_c
+            and operator.get("unit_c_status") != summary.get("status")
+        )
         or operator.get("candidate_status")
         != "ACTUAL_EVIDENCE_PRESENT_NOT_APPROVED"
-        or operator.get("temporary_candidate") is not True
+        or operator.get("temporary_candidate") is not (not unit_c)
         or operator.get("workspace_incorporation_claim") is not False
         or operator.get("write_authority") is not False
         or operator.get("merge_required") is not False
@@ -8650,7 +10458,10 @@ def _validate_unit_b_projection(
             raise ContextCompileError("Unit B claim source derivation mismatch")
     if claims != sorted(claims, key=lambda row: row["claim_id"]):
         raise ContextCompileError("Unit B claim canonical order mismatch")
-    if {row["claim_kind"] for row in claims} != set(CLAIM_KINDS):
+    if (
+        model.get("task") == "cmee"
+        and {row["claim_kind"] for row in claims} != set(CLAIM_KINDS)
+    ):
         raise ContextCompileError("Unit B claim kind exact5 is missing")
     normalized_claim_declarations = []
     for row in claims:
@@ -9990,7 +11801,13 @@ def _validate_unit_b_projection(
     ):
         raise ContextCompileError("Unit B decision surface derivation mismatch")
     _require_exact_keys(
-        budgets, frozenset({"PRO_KAREN", "ULTRA_KAREN"}), "Unit B budgets"
+        budgets,
+        frozenset(
+            {"PRO_KAREN", "ULTRA_KAREN", "COLLABORATION"}
+            if unit_c
+            else {"PRO_KAREN", "ULTRA_KAREN"}
+        ),
+        f"{label} budgets",
     )
     budget_overflow_codes = frozenset(
         {
@@ -9999,7 +11816,10 @@ def _validate_unit_b_projection(
             "BUDGET_EXCEEDED_PROJECTION_BYTES",
         }
     )
-    for role in ("PRO_KAREN", "ULTRA_KAREN"):
+    budget_roles = ["PRO_KAREN", "ULTRA_KAREN"]
+    if unit_c:
+        budget_roles.append("COLLABORATION")
+    for role in budget_roles:
         budget = budgets.get(role)
         if not isinstance(budget, Mapping):
             raise ContextCompileError("Unit B role budget boundary violated")
@@ -10024,6 +11844,9 @@ def _validate_unit_b_projection(
                     "overflow_codes",
                     "silent_truncation",
                     "automatic_expansion",
+                    *(("required_packet_truncation",)
+                    if role == "COLLABORATION"
+                    else ()),
                 }
             )
         )
@@ -10036,6 +11859,10 @@ def _validate_unit_b_projection(
         if (
             budget.get("silent_truncation") is not False
             or budget.get("automatic_expansion") is not False
+            or (
+                role == "COLLABORATION"
+                and budget.get("required_packet_truncation") is not False
+            )
             or type(budget.get("observed_items")) is not int
             or type(budget.get("referenced_source_bytes")) is not int
             or budget["observed_items"] < 0
@@ -10045,7 +11872,12 @@ def _validate_unit_b_projection(
     declared_role_views = declared_contract.get("role_views")
     if (
         not isinstance(declared_role_views, Mapping)
-        or set(declared_role_views) != {"PRO_KAREN", "ULTRA_KAREN"}
+        or set(declared_role_views)
+        != (
+            {"PRO_KAREN", "ULTRA_KAREN", "COLLABORATION"}
+            if unit_c
+            else {"PRO_KAREN", "ULTRA_KAREN"}
+        )
     ):
         raise ContextCompileError("Unit B declared role views are invalid")
     for role, declaration in declared_role_views.items():
@@ -10134,6 +11966,23 @@ def _validate_unit_b_projection(
         != sorted(expected_ultra_overflow)
     ):
         raise ContextCompileError("Unit B observed role budget mismatch")
+    if unit_c:
+        collaboration_budget = budgets["COLLABORATION"]
+        collaboration_bytes = _render_collaboration_packets(
+            model, actual_operator_sha
+        )
+        if (
+            collaboration_budget.get("observed_items")
+            != 1 + len(model["collaboration"]["subagent_packets"])
+            or collaboration_budget.get("referenced_source_bytes") != 0
+            or collaboration_budget.get("overflow_codes") != []
+            or collaboration_budget.get("required_packet_truncation") is not False
+            or len(collaboration_bytes)
+            > collaboration_budget["max_projection_utf8_bytes"]
+        ):
+            raise ContextCompileError(
+                "Unit C collaboration observed budget mismatch"
+            )
 
     legacy_unresolved = list(_iter_jsonl(output_dir / "unresolved_context.jsonl"))
     expected_blockers = {
@@ -10162,6 +12011,8 @@ def _validate_unit_b_projection(
         expected_blockers.add("MANUAL_REVIEW_REQUIRED")
     expected_blockers.update(expected_pro_overflow)
     expected_blockers.update(expected_ultra_overflow)
+    expected_blockers.update(unit_c_external_blockers)
+    expected_blockers.update(account_actual_blockers)
     expected_unresolved_by_owner = [
         {
             "owner": str(row.get("handback_owner") or "MASH"),
@@ -10177,7 +12028,13 @@ def _validate_unit_b_projection(
         {
             "owner": "MASH",
             "reason_code": code,
-            "source_id": f"UNIT_B.{code}",
+            "source_id": (
+                f"UNIT_C.{code}"
+                if code in unit_c_external_blockers
+                else f"ACCOUNT.ACTUAL_PROOF.{code}"
+                if code in account_actual_blockers
+                else f"UNIT_B.{code}"
+            ),
             "blocking": True,
         }
         for code in sorted(expected_blockers)
@@ -10273,7 +12130,7 @@ def _validate_unit_b_projection(
         )
         and not any(row["impact_class"] == "MANUAL_REVIEW" for row in drift),
         "shared_model_projection_binding_required": True,
-        "unit_c_collaboration_complete": False,
+        "unit_c_collaboration_complete": unit_c,
         "operator_v1_activation_approved": False,
     }
     if gates != expected_gates:
@@ -10292,23 +12149,43 @@ def _validate_unit_b_projection(
             "shared_model_projection_binding_required",
         )
     ) and not any(row.get("blocking") is True for row in legacy_unresolved)
+    if account_actual_blockers:
+        expected_ready = False
+    expected_unit_ready = (
+        expected_ready
+        and not unit_c_external_blockers
+        and not account_actual_blockers
+    )
     if (
         summary.get("status")
         != (
-            "UNIT_B_WORK_CONTEXT_READY"
+            "UNIT_C_COLLABORATION_SUPPORT_READY"
+            if unit_c and expected_unit_ready
+            else "UNIT_C_COLLABORATION_SUPPORT_BLOCKED"
+            if unit_c
+            else "UNIT_B_WORK_CONTEXT_READY"
             if expected_ready
             else "UNIT_B_WORK_CONTEXT_BLOCKED"
+        )
+        or (
+            unit_c
+            and operator.get("unit_b_status")
+            != (
+                "UNIT_B_WORK_CONTEXT_READY"
+                if expected_ready
+                else "UNIT_B_WORK_CONTEXT_BLOCKED"
+            )
         )
         or operator.get("status")
         != (
             "V1_OPERATOR_CONTEXT_READY"
-            if expected_ready
+            if expected_unit_ready
             else "V1_OPERATOR_CONTEXT_BLOCKED"
         )
         or bool(
             any(row.get("blocking") is True for row in unresolved_by_owner)
         )
-        is not (not expected_ready)
+        is not (not expected_unit_ready)
     ):
         raise ContextCompileError("Unit B readiness derivation mismatch")
 
@@ -10333,6 +12210,7 @@ def verify_task_context(
     *,
     expected_unit_a: bool | None = None,
     expected_unit_b: bool | None = None,
+    expected_unit_c: bool | None = None,
     expected_task: str | None = None,
     expected_publication_mode: str | None = None,
 ) -> Mapping[str, Any]:
@@ -10347,22 +12225,33 @@ def verify_task_context(
     if not isinstance(output_sha, Mapping):
         raise ContextCompileError("context manifest output hashes are invalid")
     manifest_inputs = manifest.get("input_sha256")
-    observed_unit_b = bool(
-        "unit_b_work_context" in manifest
-        or "operator_context.json" in output_sha
-        or (
-            isinstance(manifest_inputs, Mapping)
-            and "operator_model" in manifest_inputs
-        )
+    observed_unit_b = "unit_b_work_context" in manifest
+    observed_unit_c = bool(
+        "unit_c_collaboration_support" in manifest
+        or "collaboration_packets.json" in output_sha
     )
+    if observed_unit_b and observed_unit_c:
+        raise ContextCompileError("Unit B and Unit C artifact markers conflict")
     if expected_unit_b is True and not observed_unit_b:
         raise ContextCompileError("expected Unit B artifact markers are missing")
     if expected_unit_b is False and observed_unit_b:
         raise ContextCompileError("unexpected Unit B artifact markers")
-    canonical_outputs = UNIT_B_OUTPUT_NAMES if observed_unit_b else OUTPUT_NAMES
+    if expected_unit_c is True and not observed_unit_c:
+        raise ContextCompileError("expected Unit C artifact markers are missing")
+    if expected_unit_c is False and observed_unit_c:
+        raise ContextCompileError("unexpected Unit C artifact markers")
+    canonical_outputs = (
+        UNIT_C_CMEE_OUTPUT_NAMES
+        if observed_unit_c and manifest.get("task") == "cmee"
+        else UNIT_C_NON_CMEE_OUTPUT_NAMES
+        if observed_unit_c
+        else UNIT_B_OUTPUT_NAMES
+        if observed_unit_b
+        else OUTPUT_NAMES
+    )
     if set(output_sha) != set(canonical_outputs):
         raise ContextCompileError(
-            "context manifest output set is not canonical Unit A exact7 or Unit B exact10"
+            "context manifest output set is not canonical Unit A exact7, Unit B exact10, or Unit C exact11/exact9"
         )
     for name, expected in output_sha.items():
         actual = _sha256_file(output_dir / name)
@@ -10391,8 +12280,8 @@ def verify_task_context(
     if expected_unit_a is False and observed_unit_a:
         raise ContextCompileError("unexpected Unit A artifact markers")
     is_unit_a = expected_unit_a is True or observed_unit_a
-    if observed_unit_b and not is_unit_a:
-        raise ContextCompileError("Unit B artifact is missing Unit A foundation")
+    if (observed_unit_b or observed_unit_c) and not is_unit_a:
+        raise ContextCompileError("work-context artifact is missing Unit A foundation")
     if expected_task is not None and manifest.get("task") != expected_task:
         raise ContextCompileError("task context trusted task mismatch")
     if expected_unit_a is True and (
@@ -10412,9 +12301,11 @@ def verify_task_context(
         ):
             raise ContextCompileError("Unit A trusted publication mode mismatch")
         _validate_unit_a_manifest_projection(manifest, unit_a_model, selected_rows)
-    unit_b_model = (
-        _validate_unit_b_projection(output_dir, manifest)
-        if observed_unit_b
+    work_context_model = (
+        _validate_unit_b_projection(
+            output_dir, manifest, unit_c=observed_unit_c
+        )
+        if observed_unit_b or observed_unit_c
         else None
     )
     payload = {
@@ -10518,17 +12409,25 @@ def verify_task_context(
         payload["unit_a_model_sha256"] = expected_model_sha
         payload["workspace_exact_refs"] = manifest["workspace_exact_refs"]
         payload["unit_a_completion_gates"] = completion_gates
-        if unit_b_model is not None:
-            unit_b_summary = manifest.get("unit_b_work_context")
-            if not isinstance(unit_b_summary, Mapping):
-                raise ContextCompileError("Unit B manifest summary is invalid")
+        if work_context_model is not None:
+            work_summary = manifest.get(
+                "unit_c_collaboration_support"
+                if observed_unit_c
+                else "unit_b_work_context"
+            )
+            if not isinstance(work_summary, Mapping):
+                raise ContextCompileError("work-context manifest summary is invalid")
             payload["operator_model_fingerprint"] = str(
-                unit_b_model["operator_model_fingerprint"]
+                work_context_model["operator_model_fingerprint"]
             )
             payload["operator_context_sha256"] = str(
                 manifest["input_sha256"]["operator_context"]
             )
-            payload["unit_b_work_context"] = dict(unit_b_summary)
+            payload[
+                "unit_c_collaboration_support"
+                if observed_unit_c
+                else "unit_b_work_context"
+            ] = dict(work_summary)
     actual_fingerprint = _sha256_bytes(_canonical_json_bytes(payload))
     if actual_fingerprint != manifest.get("context_fingerprint"):
         raise ContextCompileError("context fingerprint tamper detected")

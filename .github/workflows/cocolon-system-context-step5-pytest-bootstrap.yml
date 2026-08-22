@@ -32,6 +32,7 @@ jobs:
       EXPECTED_PR_NUMBER: ${{ github.event.pull_request.number }}
       EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
       EXPECTED_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+      WORKFLOW_ROLE: PYTEST_RUNTIME_VERIFIER
     steps:
       - name: Require same-repository PR event
         env:
@@ -40,6 +41,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          test "$WORKFLOW_ROLE" = "PYTEST_RUNTIME_VERIFIER"
           test "$GITHUB_EVENT_NAME" = "pull_request"
           test "$EVENT_HEAD_REPOSITORY" = "$GITHUB_REPOSITORY"
           test "$EVENT_BASE_REPOSITORY" = "$GITHUB_REPOSITORY"
@@ -80,7 +82,7 @@ jobs:
         shell: bash
         run: python3 -m pip install --disable-pip-version-check pytest==8.4.2
 
-      - name: Run exact Unit A pytest set
+      - name: Run terminal Step 7 pytest set
         shell: bash
         run: python3 -m pytest tests/cocolon_context/test_prepare.py tests/cocolon_context/test_task_context.py -q
 

@@ -7,7 +7,9 @@ writes a machine-readable receipt.  It never changes product/runtime behavior.
 """
 from __future__ import annotations
 
+from contextlib import contextmanager
 from dataclasses import dataclass
+import fcntl
 import hashlib
 import json
 import os
@@ -18,7 +20,7 @@ import sqlite3
 import subprocess
 import sys
 import tempfile
-from typing import Any, Iterable, Mapping, Sequence
+from typing import Any, Callable, Iterable, Iterator, Mapping, Sequence
 
 from tools.cocolon_context_inventory import (
     InventoryError,
@@ -36,9 +38,12 @@ from tools.cocolon_context_publish_transport import (
 )
 from tools.cocolon_context_task import (
     ContextCompileError,
+    OPERATOR_CONTRACT_UNIT_C_KEYS,
     PROFILE_SCHEMA_VERSION,
     PROFILE_SCHEMA_VERSION_V1,
     SAFE_PUBLIC_ID_RE,
+    UNIT_C_CMEE_OUTPUT_NAMES,
+    UNIT_C_NON_CMEE_OUTPUT_NAMES,
     _git_blob_prefix,
     _require_safe_git_ref,
     _require_safe_repo_path,
@@ -51,6 +56,7 @@ from tools.cocolon_context_task import (
 )
 
 SCHEMA_VERSION = "cocolon.system_context.prepare_receipt.v1"
+SCHEMA_VERSION_V2 = "cocolon.system_context.prepare_receipt.v2"
 STEP5_CLAIM = "STEP5_COCOLON_STANDARD_ENTRY_CONNECTED"
 OVERALL_CLAIM = "COCOLON_SYSTEM_CONTEXT_STEPS1_TO_5_COMPLETE"
 STEP4_CLAIM = "STEP4_TASK_CONTEXT_COMPILER_CMEE_ACTUAL_REVIEW_COMPLETE"
@@ -59,6 +65,17 @@ RECEIPT_NAME = "prepare_summary.json"
 REPORT_NAME = "prepare_summary.md"
 STATUS_COMPLETE = "COMPLETE"
 STATUS_PENDING_REMOTE = "PENDING_REMOTE_VERIFICATION"
+UNIT_C_OPERATOR_CONTRACT_KEYS = frozenset(OPERATOR_CONTRACT_UNIT_C_KEYS)
+CMEE_TERMINAL_OUTPUTS = frozenset(UNIT_C_CMEE_OUTPUT_NAMES)
+NON_CMEE_TERMINAL_OUTPUTS = frozenset(UNIT_C_NON_CMEE_OUTPUT_NAMES)
+PUBLICATION_PHASES = frozenset(
+    {
+        "CANDIDATE_VERIFIED",
+        "LIVE_MOVED_TO_BACKUP",
+        "CANDIDATE_PROMOTED",
+        "FINAL_VERIFIED",
+    }
+)
 
 
 class PrepareError(RuntimeError):
@@ -71,6 +88,17 @@ class RepositoryRef:
     path: Path
     commit: str
     tree: str
+
+
+@dataclass(frozen=True)
+class WorkspacePublicationPaths:
+    parent: Path
+    live: Path
+    candidate: Path
+    backup: Path
+    quarantine: Path
+    marker: Path
+    lock: Path
 
 
 @dataclass(frozen=True)
@@ -108,6 +136,309 @@ def _load_json(path: Path) -> Any:
         return _strict_json_loads(path.read_text(encoding="utf-8"), str(path))
     except (OSError, UnicodeDecodeError, json.JSONDecodeError, ContextCompileError) as exc:
         raise PrepareError(f"cannot read JSON {path}: {exc}") from exc
+
+
+def _publication_paths(current_parent: Path, workspace: str) -> WorkspacePublicationPaths:
+    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]{0,127}", workspace):
+        raise PrepareError("unsafe workspace publication identity")
+    parent = current_parent.resolve()
+    return WorkspacePublicationPaths(
+        parent=parent,
+        live=parent / workspace,
+        candidate=parent / f".{workspace}.cocolon-candidate",
+        backup=parent / f".{workspace}.cocolon-backup",
+        quarantine=parent / f".{workspace}.cocolon-quarantine",
+        marker=parent / f".{workspace}.cocolon-publication-transaction.json",
+        lock=parent / f".{workspace}.cocolon-publication.lock",
+    )
+
+
+def _assert_publication_path(path: Path, paths: WorkspacePublicationPaths) -> None:
+    allowed = {
+        paths.live,
+        paths.candidate,
+        paths.backup,
+        paths.quarantine,
+        paths.marker,
+        paths.lock,
+    }
+    if path not in allowed or path.parent != paths.parent:
+        raise PrepareError(f"unsafe publication path: {path}")
+
+
+def _remove_publication_tree(path: Path, paths: WorkspacePublicationPaths) -> None:
+    _assert_publication_path(path, paths)
+    if path.is_symlink() or path.is_file():
+        path.unlink()
+    elif path.is_dir():
+        shutil.rmtree(path)
+
+
+def _fsync_path(path: Path) -> None:
+    descriptor = os.open(path, os.O_RDONLY)
+    try:
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+
+
+def _fsync_directory(path: Path) -> None:
+    descriptor = os.open(path, os.O_RDONLY | os.O_DIRECTORY)
+    try:
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+
+
+def _write_publication_marker(
+    paths: WorkspacePublicationPaths, marker: Mapping[str, Any]
+) -> None:
+    _assert_publication_path(paths.marker, paths)
+    marker_temporary = paths.marker.with_name(paths.marker.name + ".tmp")
+    if marker_temporary.exists() or marker_temporary.is_symlink():
+        raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: marker temp exists")
+    _write_atomic(paths.marker, _canonical_bytes(marker))
+    _fsync_path(paths.marker)
+    _fsync_directory(paths.parent)
+
+
+@contextmanager
+def _publication_lock(paths: WorkspacePublicationPaths) -> Iterator[None]:
+    paths.parent.mkdir(parents=True, exist_ok=True)
+    _assert_publication_path(paths.lock, paths)
+    descriptor = os.open(
+        paths.lock,
+        os.O_RDWR | os.O_CREAT | getattr(os, "O_NOFOLLOW", 0),
+        0o600,
+    )
+    try:
+        try:
+            fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError as exc:
+            raise PrepareError("WORKSPACE_PUBLICATION_ALREADY_RUNNING") from exc
+        yield
+    finally:
+        try:
+            fcntl.flock(descriptor, fcntl.LOCK_UN)
+        finally:
+            os.close(descriptor)
+        try:
+            paths.lock.unlink()
+        except FileNotFoundError:
+            pass
+
+
+def _workspace_publication_identity(workspace_dir: Path, task: str) -> str:
+    if workspace_dir.is_symlink() or not workspace_dir.is_dir():
+        raise PrepareError("workspace publication identity root is unsafe")
+    task_root = workspace_dir / "task_context"
+    if not task_root.is_dir() or task_root.is_symlink():
+        raise PrepareError("workspace primary task root is missing or unsafe")
+    task_entries = sorted(task_root.iterdir(), key=lambda path: path.name)
+    if (
+        len(task_entries) != 1
+        or task_entries[0].name != task
+        or task_entries[0].is_symlink()
+        or not task_entries[0].is_dir()
+    ):
+        raise PrepareError("workspace must contain declared primary task exact1")
+    required = (
+        "manifest.json",
+        "code_index/code_index_manifest.json",
+        "route_graph/route_graph_manifest.json",
+        "publication_transport.json",
+        RECEIPT_NAME,
+        f"task_context/{task}/context_manifest.json",
+        f"task_context/{task}/publication_transport.json",
+    )
+    hashes: dict[str, str] = {}
+    for relative in required:
+        path = workspace_dir / relative
+        if not path.is_file():
+            raise PrepareError(
+                f"workspace publication identity file missing: {relative}"
+            )
+        hashes[relative] = sha256_file(path)
+    return hashlib.sha256(_canonical_bytes(hashes)).hexdigest()
+
+
+def _publication_marker(
+    *, paths: WorkspacePublicationPaths, workspace: str, task: str,
+    phase: str, pre_swap_identity: str | None, candidate_identity: str,
+) -> dict[str, Any]:
+    if phase not in PUBLICATION_PHASES:
+        raise PrepareError(f"unsupported publication phase: {phase}")
+    return {
+        "schema_version": "cocolon.system_context.workspace_publication_transaction.v1",
+        "workspace": workspace,
+        "primary_task": task,
+        "live_basename": paths.live.name,
+        "candidate_basename": paths.candidate.name,
+        "backup_basename": paths.backup.name,
+        "quarantine_basename": paths.quarantine.name,
+        "phase": phase,
+        "pre_swap_identity": pre_swap_identity,
+        "candidate_identity": candidate_identity,
+        "completion_claim": None,
+        "v1_activation": 0,
+        "product_credit": 0,
+        "technical_credit": 0,
+        "automatic_progression": False,
+    }
+
+
+def _validate_publication_marker(
+    marker: Any, *, paths: WorkspacePublicationPaths, workspace: str, task: str
+) -> Mapping[str, Any]:
+    expected_keys = {
+        "schema_version",
+        "workspace",
+        "primary_task",
+        "live_basename",
+        "candidate_basename",
+        "backup_basename",
+        "quarantine_basename",
+        "phase",
+        "pre_swap_identity",
+        "candidate_identity",
+        "completion_claim",
+        "v1_activation",
+        "product_credit",
+        "technical_credit",
+        "automatic_progression",
+    }
+    if not isinstance(marker, Mapping) or set(marker) != expected_keys:
+        raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: invalid marker shape")
+    expected_values = {
+        "schema_version": "cocolon.system_context.workspace_publication_transaction.v1",
+        "workspace": workspace,
+        "primary_task": task,
+        "live_basename": paths.live.name,
+        "candidate_basename": paths.candidate.name,
+        "backup_basename": paths.backup.name,
+        "quarantine_basename": paths.quarantine.name,
+        "completion_claim": None,
+        "v1_activation": 0,
+        "product_credit": 0,
+        "technical_credit": 0,
+        "automatic_progression": False,
+    }
+    if any(marker.get(key) != value for key, value in expected_values.items()):
+        raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: marker identity mismatch")
+    if marker.get("phase") not in PUBLICATION_PHASES:
+        raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: invalid marker phase")
+    for key in ("pre_swap_identity", "candidate_identity"):
+        value = marker.get(key)
+        if value is not None and not re.fullmatch(r"[0-9a-f]{64}", str(value)):
+            raise PrepareError(
+                f"PUBLICATION_RECOVERY_AMBIGUOUS: invalid {key}"
+            )
+    if marker.get("candidate_identity") is None:
+        raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: candidate identity missing")
+    return marker
+
+
+def _recover_workspace_publication(
+    paths: WorkspacePublicationPaths, *, workspace: str, task: str
+) -> None:
+    marker_temporary = paths.marker.with_name(paths.marker.name + ".tmp")
+    if marker_temporary.exists() or marker_temporary.is_symlink():
+        raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: marker temp exists")
+    if paths.marker.is_symlink() or any(
+        path.is_symlink()
+        for path in (paths.live, paths.candidate, paths.backup, paths.quarantine)
+    ):
+        raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: symlink publication state")
+    residuals = [
+        path
+        for path in (paths.candidate, paths.backup, paths.quarantine)
+        if path.exists() or path.is_symlink()
+    ]
+    if not paths.marker.is_file():
+        if residuals:
+            raise PrepareError(
+                "PUBLICATION_RECOVERY_AMBIGUOUS: residual without marker"
+            )
+        return
+    marker = _validate_publication_marker(
+        _load_json(paths.marker), paths=paths, workspace=workspace, task=task
+    )
+    phase = str(marker["phase"])
+    pre_swap_identity = marker.get("pre_swap_identity")
+    candidate_identity = str(marker["candidate_identity"])
+    if phase == "CANDIDATE_VERIFIED":
+        if paths.backup.exists() or paths.quarantine.exists() or not paths.candidate.is_dir():
+            raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: candidate phase layout")
+        if pre_swap_identity is not None:
+            if not paths.live.is_dir() or _workspace_publication_identity(
+                paths.live, task
+            ) != pre_swap_identity:
+                raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: last-good live mismatch")
+        elif paths.live.exists():
+            raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: unexpected initial live")
+        _remove_publication_tree(paths.candidate, paths)
+    elif phase == "LIVE_MOVED_TO_BACKUP":
+        if not paths.backup.is_dir():
+            raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: backup missing")
+        if pre_swap_identity is None or _workspace_publication_identity(
+            paths.backup, task
+        ) != pre_swap_identity:
+            raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: backup identity mismatch")
+        if paths.live.exists():
+            raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: unexpected live")
+        os.replace(paths.backup, paths.live)
+        if paths.candidate.exists():
+            _remove_publication_tree(paths.candidate, paths)
+    elif phase == "CANDIDATE_PROMOTED":
+        if not paths.live.is_dir() or _workspace_publication_identity(
+            paths.live, task
+        ) != candidate_identity:
+            raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: promoted live mismatch")
+        if pre_swap_identity is None:
+            if paths.backup.exists():
+                raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: unexpected backup")
+            _remove_publication_tree(paths.live, paths)
+        else:
+            if not paths.backup.is_dir() or _workspace_publication_identity(
+                paths.backup, task
+            ) != pre_swap_identity:
+                raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: backup identity mismatch")
+            os.replace(paths.live, paths.quarantine)
+            os.replace(paths.backup, paths.live)
+            _remove_publication_tree(paths.quarantine, paths)
+        if paths.candidate.exists():
+            _remove_publication_tree(paths.candidate, paths)
+    else:  # FINAL_VERIFIED
+        if not paths.live.is_dir() or _workspace_publication_identity(
+            paths.live, task
+        ) != candidate_identity:
+            raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: final live mismatch")
+        if paths.backup.exists():
+            _remove_publication_tree(paths.backup, paths)
+        if paths.candidate.exists() or paths.quarantine.exists():
+            raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: final residual")
+    paths.marker.unlink()
+    _fsync_directory(paths.parent)
+
+
+@contextmanager
+def _candidate_system_context_root(
+    *, source_root: Path, candidate_workspace: Path, workspace: str,
+    temporary_parent: Path,
+) -> Iterator[Path]:
+    temporary_parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(
+        prefix="cocolon-system-context-candidate-", dir=temporary_parent
+    ) as temporary:
+        root = Path(temporary) / "system_context"
+        (root / "current").mkdir(parents=True)
+        for name in ("workspace_profiles.json", "task_profiles.json"):
+            source = (source_root / name).resolve()
+            if not source.is_file():
+                raise PrepareError(f"candidate profile missing: {name}")
+            os.symlink(source, root / name)
+        os.symlink(candidate_workspace.resolve(), root / "current" / workspace)
+        yield root
 
 
 def _run(
@@ -1980,7 +2311,17 @@ def _verify_task(
 ) -> Mapping[str, Any]:
     verify_outputs(task_output)
     with tempfile.TemporaryDirectory(prefix="cocolon-task-context-materialized-") as temporary:
-        materialized = materialize_outputs(task_output, Path(temporary) / "task")
+        materialized_workspace = Path(temporary) / "workspace"
+        materialized = materialize_outputs(
+            task_output,
+            materialized_workspace / "task_context" / task_output.name,
+        )
+        source_route_graph = task_output.parent.parent / "route_graph"
+        if source_route_graph.is_dir():
+            os.symlink(
+                source_route_graph.resolve(),
+                materialized_workspace / "route_graph",
+            )
         return verify_task_context(
             materialized,
             expected_unit_a=expected_unit_a,
@@ -2022,7 +2363,7 @@ def _write_receipt(workspace_dir: Path, receipt: Mapping[str, Any]) -> None:
     _write_atomic(workspace_dir / REPORT_NAME, _receipt_markdown(receipt))
 
 
-def prepare(
+def _prepare_impl(
     *, repo_root: Path, system_context_root: Path, external_workspace_root: Path,
     workspace: str, task: str, remote_verified: bool = False,
     fresh_clone_verified: bool = False,
@@ -2032,6 +2373,7 @@ def prepare(
     verify_only: bool = False,
     require_remote_verified: bool = False,
     max_part_bytes: int = DEFAULT_MAX_PART_BYTES,
+    _workspace_dir: Path | None = None,
 ) -> Mapping[str, Any]:
     repo_root = repo_root.resolve()
     system_context_root = system_context_root.resolve()
@@ -2041,10 +2383,6 @@ def prepare(
     profiles = _load_json(profiles_path)
     task_profiles = _load_json(task_profiles_path)
     task_profile, is_v2 = _task_profile(task_profiles, task)
-    if is_v2:
-        raise PrepareError(
-            "UNIT_A_LIVE_PUBLICATION_DISABLED_USE_TEMPORARY_CANDIDATE"
-        )
     workspace_profile = profiles.get("profiles", {}).get(workspace)
     if not isinstance(workspace_profile, dict):
         raise PrepareError(f"workspace profile not found: {workspace}")
@@ -2063,7 +2401,11 @@ def prepare(
             workspace_refs=refs,
             task_profile=task_profile,
         )
-    workspace_dir = system_context_root / "current" / workspace
+    workspace_dir = (
+        _workspace_dir.resolve()
+        if _workspace_dir is not None
+        else system_context_root / "current" / workspace
+    )
     task_output = workspace_dir / "task_context" / task
     previous_receipt_path = workspace_dir / RECEIPT_NAME
     previous_receipt = (
@@ -2347,7 +2689,7 @@ def prepare(
         and cumulative_fallback
     )
     receipt: dict[str, Any] = {
-        "schema_version": SCHEMA_VERSION,
+        "schema_version": SCHEMA_VERSION_V2 if is_v2 else SCHEMA_VERSION,
         "workspace": workspace,
         "task": task,
         "status": STATUS_COMPLETE if complete else STATUS_PENDING_REMOTE,
@@ -2458,8 +2800,359 @@ def prepare(
         "product_credit": 0,
         "automatic_progression": False,
     }
+    if is_v2:
+        operator_status: str | None = None
+        for field in (
+            "unit_c_collaboration_support",
+            "unit_b_work_context",
+            "unit_a_premise_management",
+        ):
+            value = task_manifest.get(field)
+            if isinstance(value, Mapping) and isinstance(value.get("status"), str):
+                operator_status = str(value["status"])
+                break
+        receipt.update(
+            {
+                "primary_task": str(task_profiles["persistent_primary_task"]),
+                "publication_mode": str(task_profile["publication_mode"]),
+                "integrity_status": "VALID",
+                "legacy_context": {
+                    "status": task_manifest.get("status"),
+                    "completion_claim": task_manifest.get("completion_claim"),
+                    "completion_gates": task_manifest.get("completion_gates"),
+                },
+                "operator_v1": {
+                    "status": operator_status,
+                    "completion_candidate_status": "NOT_EVALUATED",
+                    "completion_claim": None,
+                    "blocking_reason_codes": owner_bundle.get("blocking_codes", [])
+                    if owner_bundle is not None
+                    else [],
+                },
+                "primary_task_manifest_sha256": sha256_file(
+                    task_output / "context_manifest.json"
+                ),
+                "primary_task_dependency_fingerprint": (
+                    owner_bundle.get("task_dependency_fingerprint")
+                    if owner_bundle is not None
+                    else None
+                ),
+                "workspace_manifest_set": {
+                    relative: sha256_file(workspace_dir / relative)
+                    for relative in (
+                        "manifest.json",
+                        "code_index/code_index_manifest.json",
+                        "route_graph/route_graph_manifest.json",
+                        "publication_transport.json",
+                    )
+                },
+                "nested_primary_task_transport_sha256": sha256_file(
+                    task_output / "publication_transport.json"
+                ),
+                "operator_v1_completion_claim": None,
+                "v1_activation": 0,
+                "technical_credit": 0,
+            }
+        )
     _write_receipt(workspace_dir, receipt)
     return receipt
+
+
+def _validate_terminal_task_receipt(
+    receipt: Mapping[str, Any], *, task: str, publication_mode: str
+) -> None:
+    task_context = receipt.get("task_context")
+    outputs = task_context.get("output_sha256") if isinstance(task_context, Mapping) else None
+    if not isinstance(outputs, Mapping):
+        raise PrepareError("terminal task receipt output map is missing")
+    expected = (
+        CMEE_TERMINAL_OUTPUTS
+        if publication_mode == "PERSISTENT_PRIMARY" and task == "cmee"
+        else NON_CMEE_TERMINAL_OUTPUTS
+    )
+    if set(outputs) != set(expected):
+        label = "CMEE exact11" if len(expected) == 11 else "non-CMEE exact9"
+        raise PrepareError(
+            f"terminal task output set is not canonical {label}: "
+            f"{sorted(outputs)}"
+        )
+    if (
+        receipt.get("operator_v1_completion_claim") is not None
+        or receipt.get("v1_activation") != 0
+        or receipt.get("product_credit") != 0
+        or receipt.get("technical_credit") != 0
+        or receipt.get("automatic_progression") is not False
+    ):
+        raise PrepareError("Step 7 activation, completion, or credit boundary violated")
+
+
+def _publish_workspace_candidate(
+    *, paths: WorkspacePublicationPaths, workspace: str, task: str,
+    verify_promoted: Callable[[], None],
+) -> None:
+    if paths.candidate.is_symlink() or not paths.candidate.is_dir():
+        raise PrepareError("workspace publication candidate is missing")
+    if paths.live.is_symlink():
+        raise PrepareError("workspace live publication target is unsafe")
+    if paths.backup.exists() or paths.quarantine.exists() or paths.marker.exists():
+        raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: unhandled publication state")
+    pre_swap_identity = (
+        _workspace_publication_identity(paths.live, task)
+        if paths.live.is_dir()
+        else None
+    )
+    candidate_identity = _workspace_publication_identity(paths.candidate, task)
+    marker = _publication_marker(
+        paths=paths,
+        workspace=workspace,
+        task=task,
+        phase="CANDIDATE_VERIFIED",
+        pre_swap_identity=pre_swap_identity,
+        candidate_identity=candidate_identity,
+    )
+    _write_publication_marker(paths, marker)
+    try:
+        if paths.live.is_dir():
+            os.replace(paths.live, paths.backup)
+            _fsync_directory(paths.parent)
+            marker["phase"] = "LIVE_MOVED_TO_BACKUP"
+            _write_publication_marker(paths, marker)
+        os.replace(paths.candidate, paths.live)
+        _fsync_directory(paths.parent)
+        marker["phase"] = "CANDIDATE_PROMOTED"
+        _write_publication_marker(paths, marker)
+        verify_promoted()
+        if _workspace_publication_identity(paths.live, task) != candidate_identity:
+            raise PrepareError("promoted workspace identity changed during verification")
+        marker["phase"] = "FINAL_VERIFIED"
+        _write_publication_marker(paths, marker)
+        if paths.backup.exists():
+            _remove_publication_tree(paths.backup, paths)
+        paths.marker.unlink()
+        _fsync_directory(paths.parent)
+    except Exception:
+        if paths.backup.is_dir():
+            if paths.live.exists():
+                os.replace(paths.live, paths.quarantine)
+            os.replace(paths.backup, paths.live)
+        elif pre_swap_identity is None and paths.live.exists():
+            _remove_publication_tree(paths.live, paths)
+        if paths.candidate.exists():
+            _remove_publication_tree(paths.candidate, paths)
+        if paths.quarantine.exists():
+            _remove_publication_tree(paths.quarantine, paths)
+        if paths.marker.exists():
+            paths.marker.unlink()
+        _fsync_directory(paths.parent)
+        raise
+
+
+def _seed_workspace_candidate(paths: WorkspacePublicationPaths) -> None:
+    if paths.candidate.exists() or paths.candidate.is_symlink():
+        raise PrepareError("workspace publication candidate already exists")
+    if paths.live.is_symlink():
+        raise PrepareError("workspace live publication target is unsafe")
+    if paths.live.is_dir():
+        shutil.copytree(paths.live, paths.candidate, copy_function=shutil.copy2)
+    elif paths.live.exists() or paths.live.is_symlink():
+        raise PrepareError("workspace live publication target is not a directory")
+    else:
+        paths.candidate.mkdir(parents=True)
+
+
+def _run_v2_candidate(
+    *, repo_root: Path, source_system_context_root: Path,
+    external_workspace_root: Path, workspace: str, task: str,
+    candidate_workspace: Path, remote_verified: bool,
+    fresh_clone_verified: bool, non_code_incremental_verified: bool,
+    source_incremental_verified: bool,
+    source_incremental_evidence_path: Path | None,
+    require_remote_verified: bool, max_part_bytes: int,
+) -> Mapping[str, Any]:
+    with _candidate_system_context_root(
+        source_root=source_system_context_root,
+        candidate_workspace=candidate_workspace,
+        workspace=workspace,
+        temporary_parent=external_workspace_root,
+    ) as candidate_system_context_root:
+        return _prepare_impl(
+            repo_root=repo_root,
+            system_context_root=candidate_system_context_root,
+            external_workspace_root=external_workspace_root,
+            workspace=workspace,
+            task=task,
+            remote_verified=remote_verified,
+            fresh_clone_verified=fresh_clone_verified,
+            non_code_incremental_verified=non_code_incremental_verified,
+            source_incremental_verified=source_incremental_verified,
+            source_incremental_evidence_path=source_incremental_evidence_path,
+            verify_only=False,
+            require_remote_verified=require_remote_verified,
+            max_part_bytes=max_part_bytes,
+            _workspace_dir=candidate_workspace,
+        )
+
+
+def prepare(
+    *, repo_root: Path, system_context_root: Path, external_workspace_root: Path,
+    workspace: str, task: str, remote_verified: bool = False,
+    fresh_clone_verified: bool = False,
+    non_code_incremental_verified: bool = False,
+    source_incremental_verified: bool = False,
+    source_incremental_evidence_path: Path | None = None,
+    verify_only: bool = False,
+    require_remote_verified: bool = False,
+    max_part_bytes: int = DEFAULT_MAX_PART_BYTES,
+) -> Mapping[str, Any]:
+    """Run the standard entry with terminal V2 publication isolation.
+
+    The legacy v1 route is retained unchanged.  A terminal V2 persistent primary
+    is compiled in a complete sibling workspace and atomically promoted only
+    after verification.  An ephemeral V2 task is always compiled and verified in
+    a temporary sibling and is discarded without touching live current output or
+    its receipt/transport.
+    """
+    repo_root = repo_root.resolve()
+    system_context_root = system_context_root.resolve()
+    external_workspace_root = external_workspace_root.resolve()
+    task_profiles_path = system_context_root / "task_profiles.json"
+    task_profiles = _load_json(task_profiles_path)
+    task_profile, is_v2 = _task_profile(task_profiles, task)
+    if not is_v2:
+        return _prepare_impl(
+            repo_root=repo_root,
+            system_context_root=system_context_root,
+            external_workspace_root=external_workspace_root,
+            workspace=workspace,
+            task=task,
+            remote_verified=remote_verified,
+            fresh_clone_verified=fresh_clone_verified,
+            non_code_incremental_verified=non_code_incremental_verified,
+            source_incremental_verified=source_incremental_verified,
+            source_incremental_evidence_path=source_incremental_evidence_path,
+            verify_only=verify_only,
+            require_remote_verified=require_remote_verified,
+            max_part_bytes=max_part_bytes,
+        )
+    contract = task_profile.get("operator_contract")
+    if not isinstance(contract, Mapping) or set(contract) != set(
+        UNIT_C_OPERATOR_CONTRACT_KEYS
+    ):
+        raise PrepareError(
+            "STEP7_TERMINAL_LIVE_PUBLICATION_REQUIRES_UNIT_C_EXACT10"
+        )
+    publication_mode = str(task_profile.get("publication_mode") or "")
+    current_parent = system_context_root / "current"
+    paths = _publication_paths(current_parent, workspace)
+    if publication_mode == "EPHEMERAL_VERIFY_ONLY":
+        current_parent.mkdir(parents=True, exist_ok=True)
+        primary_task = str(task_profiles.get("persistent_primary_task") or "")
+        with _publication_lock(paths):
+            _recover_workspace_publication(
+                paths, workspace=workspace, task=primary_task
+            )
+            with tempfile.TemporaryDirectory(
+                prefix=f".{workspace}.{task}.ephemeral-", dir=current_parent
+            ) as temporary:
+                candidate_workspace = Path(temporary) / workspace
+                if paths.live.is_dir():
+                    shutil.copytree(
+                        paths.live, candidate_workspace, copy_function=shutil.copy2
+                    )
+                else:
+                    candidate_workspace.mkdir(parents=True)
+                receipt = _run_v2_candidate(
+                    repo_root=repo_root,
+                    source_system_context_root=system_context_root,
+                    external_workspace_root=external_workspace_root,
+                    workspace=workspace,
+                    task=task,
+                    candidate_workspace=candidate_workspace,
+                    remote_verified=False,
+                    fresh_clone_verified=False,
+                    non_code_incremental_verified=False,
+                    source_incremental_verified=False,
+                    source_incremental_evidence_path=None,
+                    require_remote_verified=False,
+                    max_part_bytes=max_part_bytes,
+                )
+                _validate_terminal_task_receipt(
+                    receipt, task=task, publication_mode=publication_mode
+                )
+                return receipt
+    if publication_mode != "PERSISTENT_PRIMARY" or task != task_profiles.get(
+        "persistent_primary_task"
+    ):
+        raise PrepareError("invalid persistent primary task publication route")
+    with _publication_lock(paths):
+        _recover_workspace_publication(paths, workspace=workspace, task=task)
+        if verify_only:
+            receipt = _prepare_impl(
+                repo_root=repo_root,
+                system_context_root=system_context_root,
+                external_workspace_root=external_workspace_root,
+                workspace=workspace,
+                task=task,
+                remote_verified=remote_verified,
+                fresh_clone_verified=fresh_clone_verified,
+                non_code_incremental_verified=non_code_incremental_verified,
+                source_incremental_verified=source_incremental_verified,
+                source_incremental_evidence_path=source_incremental_evidence_path,
+                verify_only=True,
+                require_remote_verified=require_remote_verified,
+                max_part_bytes=max_part_bytes,
+            )
+            _validate_terminal_task_receipt(
+                receipt, task=task, publication_mode=publication_mode
+            )
+            return receipt
+        _seed_workspace_candidate(paths)
+        try:
+            receipt = _run_v2_candidate(
+                repo_root=repo_root,
+                source_system_context_root=system_context_root,
+                external_workspace_root=external_workspace_root,
+                workspace=workspace,
+                task=task,
+                candidate_workspace=paths.candidate,
+                remote_verified=remote_verified,
+                fresh_clone_verified=fresh_clone_verified,
+                non_code_incremental_verified=non_code_incremental_verified,
+                source_incremental_verified=source_incremental_verified,
+                source_incremental_evidence_path=source_incremental_evidence_path,
+                require_remote_verified=require_remote_verified,
+                max_part_bytes=max_part_bytes,
+            )
+            _validate_terminal_task_receipt(
+                receipt, task=task, publication_mode=publication_mode
+            )
+
+            def verify_promoted() -> None:
+                verified = _prepare_impl(
+                    repo_root=repo_root,
+                    system_context_root=system_context_root,
+                    external_workspace_root=external_workspace_root,
+                    workspace=workspace,
+                    task=task,
+                    verify_only=True,
+                    require_remote_verified=require_remote_verified,
+                    max_part_bytes=max_part_bytes,
+                )
+                _validate_terminal_task_receipt(
+                    verified, task=task, publication_mode=publication_mode
+                )
+
+            _publish_workspace_candidate(
+                paths=paths,
+                workspace=workspace,
+                task=task,
+                verify_promoted=verify_promoted,
+            )
+            return receipt
+        except Exception:
+            if paths.candidate.exists() and not paths.marker.exists():
+                _remove_publication_tree(paths.candidate, paths)
+            raise
 
 
 def cli(argv: Sequence[str] | None = None) -> int:

@@ -1,5 +1,5 @@
-name: Cocolon System Context Step 7 read-only verification
-run-name: Verify Step 7 candidate @ ${{ github.event.pull_request.head.sha }}
+name: Cocolon System Context Step 7 terminal matrix verifier
+run-name: Verify terminal Step 7 candidate @ ${{ github.event.pull_request.head.sha }}
 
 on:
   pull_request:
@@ -32,6 +32,7 @@ jobs:
       EXPECTED_PR_NUMBER: ${{ github.event.pull_request.number }}
       EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
       EXPECTED_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+      WORKFLOW_ROLE: TERMINAL_IMPLEMENTATION_MATRIX
     steps:
       - name: Require same-repository PR event
         env:
@@ -40,6 +41,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          test "$WORKFLOW_ROLE" = "TERMINAL_IMPLEMENTATION_MATRIX"
           test "$GITHUB_EVENT_NAME" = "pull_request"
           test "$EVENT_HEAD_REPOSITORY" = "$GITHUB_REPOSITORY"
           test "$EVENT_BASE_REPOSITORY" = "$GITHUB_REPOSITORY"
@@ -89,7 +91,7 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Run identity-independent Steps 1-5 and Unit A regressions
+      - name: Run terminal Step 7 identity-independent regression matrix
         shell: bash
         run: |
           set -euo pipefail

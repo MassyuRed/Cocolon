@@ -32,6 +32,7 @@ jobs:
       EXPECTED_PR_NUMBER: ${{ github.event.pull_request.number }}
       EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
       EXPECTED_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+      WORKFLOW_ROLE: WORKFLOW_POLICY_VERIFIER
     steps:
       - name: Require same-repository PR event
         env:
@@ -40,6 +41,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          test "$WORKFLOW_ROLE" = "WORKFLOW_POLICY_VERIFIER"
           test "$GITHUB_EVENT_NAME" = "pull_request"
           test "$EVENT_HEAD_REPOSITORY" = "$GITHUB_REPOSITORY"
           test "$EVENT_BASE_REPOSITORY" = "$GITHUB_REPOSITORY"

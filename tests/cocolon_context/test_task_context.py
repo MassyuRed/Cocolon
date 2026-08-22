@@ -14,11 +14,14 @@ from tools.cocolon_context_prepare import _classify_owner_relation
 from tools.cocolon_context_task import (
     ContextCompileError,
     FileRecord,
+    _build_account_profile_actual_proof,
     _expected_owner_namespace,
     _operator_model_fingerprint,
+    _render_collaboration_packets,
     _render_pro_context,
     _render_ultra_context,
     _task_profile,
+    _validate_account_profile_actual_proof,
     _validate_workspace_refs,
     build_premise_management_model,
     build_work_context_model,
@@ -3049,7 +3052,10 @@ def test_repository_task_profile_has_exact10_and_exact_external_assets() -> None
         "claim_nodes",
         "connections",
         "scope_rules",
+        "external_locators",
         "role_views",
+        "collaboration",
+        "actual_use_feedback",
     }
     assert len(contract["canonical_owner_refs"]) == 1
     owner = contract["canonical_owner_refs"][0]
@@ -3078,7 +3084,24 @@ def test_repository_task_profile_has_exact10_and_exact_external_assets() -> None
     }
     assert len(contract["connections"]) == 5
     assert len(contract["scope_rules"]) == 3
-    assert set(contract["role_views"]) == {"PRO_KAREN", "ULTRA_KAREN"}
+    assert set(contract["role_views"]) == {
+        "PRO_KAREN",
+        "ULTRA_KAREN",
+        "COLLABORATION",
+    }
+    assert len(contract["external_locators"]) == 2
+    assert all(
+        row["location_kind"] == "OTHER_WORKSPACE"
+        and row["availability_state"] == "AVAILABLE"
+        and row["privacy_state"] == "PUBLIC"
+        and row["canonicality"] == "NONCANONICAL"
+        and row["adoption_state"] == "DESIGN_REFLECTED_NOT_IMPLEMENTED"
+        and row["public_identity_allowed"] is True
+        for row in contract["external_locators"]
+    )
+    assert contract["collaboration"]["max_subagent_packets"] == 3
+    assert len(contract["collaboration"]["subagent_packets"]) == 3
+    assert contract["actual_use_feedback"] == []
     nls_responsibility = next(
         row for row in responsibilities
         if row["subject_locator"]["path"].endswith(
@@ -3154,6 +3177,755 @@ def _install_exact_external_cycle_checkout(paths: dict[str, Path]) -> tuple[str,
         asset["blob_sha"] = blobs[asset["path"]]
     write_json(paths["task_profiles"], task_profiles)
     return commit, blobs
+
+
+def make_unit_c_v2_profile(paths: dict[str, Path]) -> tuple[dict, dict]:
+    """Extend the Unit B fixture with the bounded Unit C contract."""
+    _document, bundle = make_unit_b_v2_profile(paths)
+    commit, blobs = _install_exact_external_cycle_checkout(paths)
+    document = json.loads(paths["task_profiles"].read_text())
+    contract = document["tasks"]["cmee"]["operator_contract"]
+    source_path = (
+        "ai/services/ai_inference/"
+        "emlis_ai_step11_cycle001_product_recovery_v3.py"
+    )
+    test_path = "ai/tests/test_emlis_nls_v3_s11_cycle001_product_recovery_v3.py"
+
+    def external_locator(
+        locator_id: str,
+        path: str,
+        *,
+        evidence_kind: str,
+        symbols: list[str],
+    ) -> dict:
+        return {
+            "locator_id": locator_id,
+            "location_kind": "OTHER_WORKSPACE",
+            "public_locator_or_opaque_id": {
+                "repository_key": "mashos-api",
+                "workspace": "cycle001_working",
+                "source_commit": commit,
+                "path": path,
+                "blob_sha": blobs[path],
+                "evidence_kind": evidence_kind,
+                "symbols": symbols,
+            },
+            "availability_state": "AVAILABLE",
+            "privacy_state": "PUBLIC",
+            "canonicality": "NONCANONICAL",
+            "adoption_state": "DESIGN_REFLECTED_NOT_IMPLEMENTED",
+            "retrieval_owner": "ULTRA_KAREN",
+            "claim_boundary": "PUBLIC_EXACT_IDENTITY_READ_ONLY_NONCANONICAL",
+            "public_identity_allowed": True,
+            "assertion_provenance": "EXTERNAL_ASSET_VERIFIED",
+        }
+
+    contract["external_locators"] = [
+        external_locator(
+            "EXTERNAL.CMEE.TEST.CYCLE001.SOURCE",
+            source_path,
+            evidence_kind="source",
+            symbols=[
+                "STEP11_CYCLE001_PRODUCT_RECOVERY_SOURCE_SCHEMA",
+                "Step11Cycle001ProductRecoverySourceEnvelope",
+                "_SEMANTIC_COVERAGE_AUTHORITY",
+                "step11_cycle001_product_recovery_visible_inverse",
+            ],
+        ),
+        external_locator(
+            "EXTERNAL.CMEE.TEST.CYCLE001.TEST",
+            test_path,
+            evidence_kind="test",
+            symbols=["_audit_candidate"],
+        ),
+    ]
+    contract["role_views"]["COLLABORATION"] = {
+        "max_items": 32,
+        "max_referenced_source_bytes": 2097152,
+        "max_reasons_per_item": 8,
+        "max_projection_utf8_bytes": 131072,
+    }
+    contract["collaboration"] = {
+        "max_subagent_packets": 3,
+        "restart_packet": {
+            "purpose_code": "RESUME_FROM_MASH_FIXED_CLAIM",
+            "next_work_source_claim_ids": [
+                "CLAIM.CMEE.TEST.MASH_FIXED_CONDITION"
+            ],
+            "prohibited_scope_rule_ids": [
+                "SCOPE.CMEE.TEST.ACTUAL",
+                "SCOPE.CMEE.TEST.CONTRACT",
+            ],
+            "environment_requirement_claim_id": (
+                "CLAIM.CMEE.TEST.MASH_FIXED_CONDITION"
+            ),
+            "max_items": 12,
+        },
+        "subagent_packets": [
+            {
+                "packet_id": "PACKET.CMEE.TEST.CLAIM_ROUTE",
+                "purpose_code": "VERIFY_CLAIM_ROUTE_READ_ONLY",
+                "question_code": "DO_DECLARED_IDENTITIES_CONNECT",
+                "question_text": (
+                    "Verify the declared claim and external identities without "
+                    "adding facts or effects."
+                ),
+                "selected_target_ids": [
+                    "CLAIM.CMEE.TEST.PRODUCT_ROUTE",
+                    "EXTERNAL.CMEE.TEST.CYCLE001.SOURCE",
+                ],
+                "prohibited_inference_codes": [
+                    "NO_ACCEPTANCE_INFERENCE",
+                    "NO_PRODUCT_GREEN_INFERENCE",
+                ],
+                "prohibited_effect_codes": [
+                    "NO_EXECUTION",
+                    "NO_WRITE_AUTHORITY",
+                ],
+                "expected_output_schema": "READ_ONLY_FINDINGS_V1",
+                "coverage_boundary_ids": ["SCOPE.CMEE.TEST.ACTUAL"],
+                "overlap_policy": "DISJOINT",
+                "unresolved_handback_owner": "MASH",
+            }
+        ],
+    }
+    contract["actual_use_feedback"] = []
+    write_json(paths["task_profiles"], document)
+    return document, bundle
+
+
+def compile_unit_c_fixture(
+    paths: dict[str, Path],
+    bundle: dict,
+    *,
+    task: str = "cmee",
+    output: Path | None = None,
+    remote_verified: bool = False,
+):
+    return compile_task_context(
+        repo_root=paths["root"],
+        system_context_root=paths["system"],
+        workspace="cmee_working",
+        task=task,
+        task_profiles_path=paths["task_profiles"],
+        manual_overlay_path=None,
+        output_dir=output or paths["output"],
+        remote_verified=remote_verified,
+        canonical_owner_bundle=bundle,
+    )
+
+
+def install_ephemeral_unit_c_fixture_task(
+    paths: dict[str, Path],
+    document: dict,
+    bundle: dict,
+    *,
+    task: str,
+) -> dict:
+    """Install a non-CMEE Unit C task and its read-only owner namespace."""
+    ephemeral = json.loads(json.dumps(document["tasks"]["cmee"]))
+    ephemeral["publication_mode"] = "EPHEMERAL_VERIFY_ONLY"
+    ephemeral["task_orientation"] = "Verify a non-CMEE read-only context."
+    ephemeral["operator_contract"]["external_locators"] = []
+    ephemeral["operator_contract"]["collaboration"]["subagent_packets"][0][
+        "selected_target_ids"
+    ] = ["CLAIM.CMEE.TEST.PRODUCT_ROUTE"]
+    document["tasks"][task] = ephemeral
+    write_json(paths["task_profiles"], document)
+
+    ephemeral_bundle = json.loads(json.dumps(bundle))
+    ephemeral_bundle["task"] = task
+    for owner in ephemeral_bundle["owners"]:
+        namespace = _expected_owner_namespace(task, owner["owner_id"])
+        owner["namespace"] = namespace
+        subprocess.run(
+            ["git", "update-ref", namespace, owner["pre_publish_resolved_head"]],
+            cwd=paths["root"],
+            check=True,
+        )
+    ephemeral_bundle["task_dependency_fingerprint"] = (
+        canonical_owner_bundle_fingerprint(ephemeral_bundle)
+    )
+    return ephemeral_bundle
+
+
+def test_unit_c_t32_t60_same_model_renders_exact11_byte_exact_outputs(
+    tmp_path: Path,
+) -> None:
+    paths = make_fixture(tmp_path / "repo")
+    _document, bundle = make_unit_c_v2_profile(paths)
+    compile_unit_c_fixture(paths, bundle)
+    manifest = verify_task_context(
+        paths["output"],
+        expected_unit_a=True,
+        expected_unit_c=True,
+        expected_task="cmee",
+        expected_publication_mode="PERSISTENT_PRIMARY",
+    )
+    expected_logical = {
+        "selected_files.jsonl",
+        "closure_edges.jsonl",
+        "required_category_coverage.json",
+        "unresolved_context.jsonl",
+        "full_text_read_order.md",
+        "cmee_context_overview.md",
+        "cmee_unincorporated_actual_findings.md",
+        "operator_context.json",
+        "pro_context.md",
+        "ultra_context.md",
+        "collaboration_packets.json",
+    }
+    assert set(manifest["output_sha256"]) == expected_logical
+    assert len(manifest["output_sha256"]) == 11
+    summary = manifest["unit_c_collaboration_support"]
+    assert summary["status"] == "UNIT_C_COLLABORATION_SUPPORT_READY"
+    assert summary["logical_output_count"] == 11
+    assert summary["publication_state"] == "TRACKED_DRAFT_CANDIDATE"
+    assert summary["temporary_candidate"] is False
+    assert summary["external_locator_count"] == 2
+    assert summary["actual_use_feedback_count"] == 0
+    assert summary["restart_packet_count"] == 1
+    assert summary["subagent_packet_count"] == 1
+
+    operator_path = paths["output"] / "operator_context.json"
+    operator = json.loads(operator_path.read_text())
+    operator_sha = sha(operator_path)
+    packet_path = paths["output"] / "collaboration_packets.json"
+    assert packet_path.read_bytes() == _render_collaboration_packets(
+        operator, operator_sha
+    )
+    packets = json.loads(packet_path.read_text())
+    assert packets["operator_context_sha256"] == operator_sha
+    assert packets["operator_model_fingerprint"] == (
+        operator["operator_model_fingerprint"]
+    )
+    assert packets["projection_new_fact_count"] == 0
+    assert packets["fact_base"] == "operator_context.json"
+    assert set(packets["zero_effects"].values()) == {False}
+    assert summary["collaboration_packets_sha256"] == sha(packet_path)
+    assert operator["actual_use_feedback"] == {
+        "policy": "EVENT_DRIVEN_OPTIONAL",
+        "rows": [],
+        "empty_feedback_is_valid": True,
+        "feedback_required_for_ready": False,
+        "automatic_selection_mutation": False,
+        "automatic_rank": False,
+    }
+    assert operator["collaboration"]["same_operator_model_required"] is True
+    assert operator["collaboration"]["subagent_execution"] is False
+    assert operator["collaboration"]["model_selection"] is False
+    assert operator["collaboration"]["tool_selection"] is False
+    assert operator["collaboration"]["write_authority"] is False
+    assert operator["collaboration"]["final_adoption_authority"] is False
+
+
+def test_unit_c_t38_empty_feedback_valid_and_routine_positive_rejected(
+    tmp_path: Path,
+) -> None:
+    paths = make_fixture(tmp_path / "repo")
+    document, _bundle = make_unit_c_v2_profile(paths)
+    profile, is_v2 = _task_profile(document, "cmee")
+    assert is_v2 is True
+    assert profile["operator_contract"]["actual_use_feedback"] == []
+
+    invalid = json.loads(json.dumps(document))
+    contract = invalid["tasks"]["cmee"]["operator_contract"]
+    contract["actual_use_feedback"] = [
+        {
+            "feedback_id": "FEEDBACK.CMEE.TEST.ROUTINE_POSITIVE",
+            "observed_task_instance": "CMEE.TEST.INSTANCE.001",
+            "observed_at": "OBSERVATION_20260822",
+            "author_role": "PRO_KAREN",
+            "target_role": "COLLABORATION",
+            "target_id": "CLAIM.CMEE.TEST.PRODUCT_ROUTE",
+            "trigger_code": "OBSERVED_MISSING_SELECTION",
+            "disposition": "SELECTED_AND_USED",
+            "source_locator": json.loads(
+                json.dumps(contract["external_locators"][0])
+            ),
+            "reason_code": "ROUTINE_SUCCESS_LOG",
+        }
+    ]
+    with pytest.raises(
+        ContextCompileError,
+        match="SELECTED_AND_USED requires related_feedback_id",
+    ):
+        _task_profile(invalid, "cmee")
+
+    routine_pair = json.loads(json.dumps(document))
+    pair_contract = routine_pair["tasks"]["cmee"]["operator_contract"]
+    reviewed_source = json.loads(
+        json.dumps(pair_contract["external_locators"][0])
+    )
+    reviewed_source["locator_id"] = "LOC.FEEDBACK.CMEE.TEST.REVIEWED"
+    positive_source = json.loads(
+        json.dumps(pair_contract["external_locators"][1])
+    )
+    positive_source["locator_id"] = "LOC.FEEDBACK.CMEE.TEST.POSITIVE"
+    pair_contract["actual_use_feedback"] = [
+        {
+            "feedback_id": "FEEDBACK.CMEE.TEST.ISSUE_REVIEWED",
+            "observed_task_instance": "CMEE.TEST.INSTANCE.001",
+            "observed_at": "OBSERVATION_20260822_A",
+            "author_role": "ULTRA_KAREN",
+            "target_role": "COLLABORATION",
+            "target_id": "CLAIM.CMEE.TEST.PRODUCT_ROUTE",
+            "trigger_code": "ISSUE_REVIEWED_NOT_TOOL_CAUSED",
+            "disposition": "NOT_A_TOOL_PROBLEM",
+            "source_locator": reviewed_source,
+            "reason_code": "ISSUE_REVIEWED_EXTERNALLY",
+        },
+        {
+            "feedback_id": "FEEDBACK.CMEE.TEST.ROUTINE_PAIR_POSITIVE",
+            "observed_task_instance": "CMEE.TEST.INSTANCE.002",
+            "observed_at": "OBSERVATION_20260822_B",
+            "author_role": "PRO_KAREN",
+            "target_role": "COLLABORATION",
+            "target_id": "CLAIM.CMEE.TEST.ZERO_EFFECT_BOUNDARY",
+            "trigger_code": "OBSERVED_MISSING_SELECTION",
+            "disposition": "SELECTED_AND_USED",
+            "source_locator": positive_source,
+            "reason_code": "ROUTINE_SUCCESS_PAIR",
+            "related_feedback_id": "FEEDBACK.CMEE.TEST.ISSUE_REVIEWED",
+        },
+    ]
+    with pytest.raises(
+        ContextCompileError,
+        match="SELECTED_AND_USED does not close a matching gap",
+    ):
+        _task_profile(routine_pair, "cmee")
+
+
+def test_unit_c_private_locator_rejects_body_or_identity_leakage(
+    tmp_path: Path,
+) -> None:
+    paths = make_fixture(tmp_path / "repo")
+    document, _bundle = make_unit_c_v2_profile(paths)
+    invalid = json.loads(json.dumps(document))
+    locator = invalid["tasks"]["cmee"]["operator_contract"][
+        "external_locators"
+    ][0]
+    locator["location_kind"] = "PRIVATE_LOCATOR_ONLY"
+    locator["availability_state"] = "EXISTENCE_UNVERIFIED"
+    locator["privacy_state"] = "PRIVATE_LOCATOR_ONLY"
+    locator["canonicality"] = "UNRESOLVED"
+    locator["adoption_state"] = "UNRESOLVED"
+    locator["public_identity_allowed"] = False
+    locator["assertion_provenance"] = "UNRESOLVED"
+    locator["public_locator_or_opaque_id"] = {
+        "opaque_id": "PRIVATE.CMEE.TEST.001",
+        "private_body": "must-never-project",
+    }
+    with pytest.raises(
+        ContextCompileError,
+        match="public_locator_or_opaque_id",
+    ) as error:
+        _task_profile(invalid, "cmee")
+    assert "must-never-project" not in str(error.value)
+
+
+def test_unit_c_t66_packet_max_dangling_and_overlap_fail_closed(
+    tmp_path: Path,
+) -> None:
+    paths = make_fixture(tmp_path / "repo")
+    document, _bundle = make_unit_c_v2_profile(paths)
+
+    too_many = json.loads(json.dumps(document))
+    packets = too_many["tasks"]["cmee"]["operator_contract"][
+        "collaboration"
+    ]["subagent_packets"]
+    packets.extend(json.loads(json.dumps(packets[0])) for _ in range(3))
+    with pytest.raises(
+        ContextCompileError,
+        match=r"subagent_packets must contain 0\.\.3 rows",
+    ):
+        _task_profile(too_many, "cmee")
+
+    dangling = json.loads(json.dumps(document))
+    dangling_packet = dangling["tasks"]["cmee"]["operator_contract"][
+        "collaboration"
+    ]["subagent_packets"][0]
+    dangling_packet["selected_target_ids"] = [
+        "CLAIM.CMEE.TEST.DOES_NOT_EXIST"
+    ]
+    with pytest.raises(ContextCompileError, match="dangling target"):
+        _task_profile(dangling, "cmee")
+
+    overlap = json.loads(json.dumps(document))
+    overlap_packet = overlap["tasks"]["cmee"]["operator_contract"][
+        "collaboration"
+    ]["subagent_packets"][0]
+    overlap_packet["selected_target_ids"].append("SCOPE.CMEE.TEST.ACTUAL")
+    overlap_packet["selected_target_ids"].sort()
+    with pytest.raises(
+        ContextCompileError,
+        match="selected/coverage overlap is unresolved",
+    ):
+        _task_profile(overlap, "cmee")
+
+
+def test_unit_c_t43_non_cmee_profile_emits_exact9_without_cmee_compatibility(
+    tmp_path: Path,
+) -> None:
+    paths = make_fixture(tmp_path / "repo")
+    document, bundle = make_unit_c_v2_profile(paths)
+    task = "other_read_only"
+    ephemeral_bundle = install_ephemeral_unit_c_fixture_task(
+        paths, document, bundle, task=task
+    )
+    output = tmp_path / "non-cmee-output"
+    compile_unit_c_fixture(
+        paths,
+        ephemeral_bundle,
+        task=task,
+        output=output,
+    )
+    manifest = verify_task_context(
+        output,
+        expected_unit_a=True,
+        expected_unit_c=True,
+        expected_task=task,
+        expected_publication_mode="EPHEMERAL_VERIFY_ONLY",
+    )
+    expected_logical = {
+        "selected_files.jsonl",
+        "closure_edges.jsonl",
+        "required_category_coverage.json",
+        "unresolved_context.jsonl",
+        "full_text_read_order.md",
+        "operator_context.json",
+        "pro_context.md",
+        "ultra_context.md",
+        "collaboration_packets.json",
+    }
+    assert set(manifest["output_sha256"]) == expected_logical
+    assert manifest["unit_c_collaboration_support"]["logical_output_count"] == 9
+    assert manifest["unit_c_collaboration_support"]["external_locator_count"] == 0
+    assert not (output / "cmee_context_overview.md").exists()
+    assert not (output / "cmee_unincorporated_actual_findings.md").exists()
+
+
+def test_unit_c_t56_account_profile_read_only_preserves_explicit_gaps() -> None:
+    repository_root = Path(__file__).resolve().parents[2]
+    document = json.loads(
+        (
+            repository_root
+            / "Cocolon_前提資料"
+            / "system_context"
+            / "task_profiles.json"
+        ).read_text()
+    )
+    profile, is_v2 = _task_profile(document, "account_profile_read_only")
+    assert is_v2 is True
+    assert profile["publication_mode"] == "EPHEMERAL_VERIFY_ONLY"
+    assert profile["required_category_exact"] == 2
+    assert [len(rule["path_globs"]) for rule in profile["seed_rules"]] == [8, 5]
+    contract = profile["operator_contract"]
+    assert len(contract["canonical_owner_refs"]) == 2
+    assert {row["remote_ref"] for row in contract["canonical_owner_refs"]} == {
+        "refs/heads/main"
+    }
+    assert len(contract["document_responsibilities"]) == 13
+    assert len(contract["connections"]) == 13
+    assert contract["external_locators"] == []
+    assert contract["actual_use_feedback"] == []
+    assert len(contract["collaboration"]["subagent_packets"]) == 1
+    packet = contract["collaboration"]["subagent_packets"][0]
+    assert packet["prohibited_inference_codes"] == [
+        "NO_ENDPOINT_GREEN_INFERENCE",
+        "NO_MOUNT_STATUS_PROMOTION",
+    ]
+    assert packet["prohibited_effect_codes"] == [
+        "NO_AUTH_TOKEN_OR_USER_DATA_ACCESS",
+        "NO_DB_RN_API_OR_PERSISTENT_WRITE",
+    ]
+    assert all(row["endpoint_verification"] == "UNRESOLVED_RELATION" for row in contract["connections"])
+    connection_ids = {row["connection_id"] for row in contract["connections"]}
+    assert {
+        "CONNECTION.ACCOUNT.API.APP_REGISTRATION",
+        "CONNECTION.ACCOUNT.API.GET_HANDLER",
+    }.issubset(connection_ids)
+    gap = next(
+        row
+        for row in contract["scope_rules"]
+        if row["scope_rule_id"] == "SCOPE.ACCOUNT.PROTECTED_GAP_001"
+    )
+    assert gap["target_symbol_or_route"] == "GET /account/profile/me"
+    assert gap["changeability"] == "PROTECTED_REVIEW_REQUIRED"
+    assert gap["write_target"] is False
+    assert all(row["write_target"] is False for row in contract["scope_rules"])
+    product_route = next(
+        row
+        for row in contract["claim_nodes"]
+        if row["claim_kind"] == "PRODUCT_ROUTE"
+    )
+    assert product_route["adoption_state"] == "KAREN_PROPOSAL_NOT_MASH_DECISION"
+    zero_effect = next(
+        row
+        for row in contract["claim_nodes"]
+        if row["claim_kind"] == "ZERO_EFFECT_BOUNDARY"
+    )
+    assert zero_effect["asserted_value_code"] == (
+        "NO_ENDPOINT_AUTH_DB_RN_OR_PERSISTENT_EFFECT"
+    )
+
+    implementation_contract = (
+        repository_root
+        / "Cocolon_前提資料"
+        / "system_context"
+        / "Cocolon_SystemContext_ImplementationContract_20260818.md"
+    ).read_text()
+    for required_boundary in (
+        "RESOLVED_WITH_EXPLICIT_UNKNOWN_EDGES",
+        "UNMOUNTED_ROUTER",
+        "register_account_lifecycle_routes(app)",
+        "ACCOUNT-PROTECTED-GAP-001",
+        "product route GREEN claimは0",
+    ):
+        assert required_boundary in implementation_contract
+
+
+def test_unit_c_t56_account_actual_proof_is_graph_bound_and_fail_closed(
+    tmp_path: Path,
+) -> None:
+    paths = make_fixture(tmp_path / "repo")
+    route_graph = paths["workspace"] / "route_graph"
+    write_jsonl(
+        route_graph / "rn_calls.jsonl",
+        [
+            {
+                "call_id": "rn-account-profile-me",
+                "method": "GET",
+                "path": "screens/account/useAccountProfile.js",
+                "normalized_path_candidates": ["/account/profile/me"],
+            }
+        ],
+    )
+    write_jsonl(
+        route_graph / "api_routes.jsonl",
+        [
+            {
+                "route_id": "api-account-profile-me",
+                "method": "GET",
+                "route_path": "/account/profile/me",
+                "path": "ai/services/ai_inference/api_account_lifecycle.py",
+                "mount_status": "UNMOUNTED_ROUTER",
+            }
+        ],
+    )
+    write_jsonl(
+        route_graph / "cross_repository_route_edges.jsonl",
+        [
+            {
+                "edge_id": "cross-account-profile-me",
+                "method": "GET",
+                "api_route_path": "/account/profile/me",
+                "rn_source_path": "screens/account/useAccountProfile.js",
+                "match_quality": "EXACT",
+            }
+        ],
+    )
+    backend_rows = [
+        {
+            "edge_id": "backend-account-auth",
+            "route_id": "api-account-profile-me",
+            "source_node": {"symbol": "_require_user_id"},
+            "target_node": {"symbol": "_fetch_profile_me"},
+            "resolution_status": "RESOLVED",
+        },
+        {
+            "edge_id": "backend-account-fetch",
+            "route_id": "api-account-profile-me",
+            "source_node": {"symbol": "_fetch_profile_me"},
+            "target_node": {"symbol": "_get_profile_row"},
+            "resolution_status": "RESOLVED",
+        },
+        {
+            "edge_id": "backend-account-db-read",
+            "route_id": "api-account-profile-me",
+            "source_node": {"symbol": "_get_profile_row"},
+            "target_node": {"symbol": "_sb_get"},
+            "resolution_status": "RESOLVED",
+        },
+        {
+            "edge_id": "backend-account-unknown",
+            "route_id": "api-account-profile-me",
+            "source_node": {"symbol": "_fetch_profile_me"},
+            "target_node": {"symbol": "HTTPException"},
+            "resolution_status": "UNRESOLVED",
+        },
+    ]
+    write_jsonl(route_graph / "backend_call_edges.jsonl", backend_rows)
+
+    api_repo = tmp_path / "mashos-api"
+    app_path = api_repo / "ai" / "services" / "ai_inference" / "app.py"
+    app_path.parent.mkdir(parents=True)
+    app_path.write_text(
+        "def register_account_lifecycle_routes(value):\n"
+        "    return value\n"
+        "app = object()\n"
+        "register_account_lifecycle_routes(app)\n",
+        encoding="utf-8",
+    )
+    subprocess.run(["git", "init", "-q"], cwd=api_repo, check=True)
+    subprocess.run(
+        ["git", "config", "user.email", "test@example.invalid"],
+        cwd=api_repo,
+        check=True,
+    )
+    subprocess.run(
+        ["git", "config", "user.name", "test"], cwd=api_repo, check=True
+    )
+    subprocess.run(["git", "add", "."], cwd=api_repo, check=True)
+    subprocess.run(
+        ["git", "commit", "-q", "-m", "account proof fixture"],
+        cwd=api_repo,
+        check=True,
+    )
+    app_commit = subprocess.check_output(
+        ["git", "rev-parse", "HEAD"], cwd=api_repo, text=True
+    ).strip()
+    app_blob = subprocess.check_output(
+        [
+            "git",
+            "rev-parse",
+            "HEAD:ai/services/ai_inference/app.py",
+        ],
+        cwd=api_repo,
+        text=True,
+    ).strip()
+    app_record = FileRecord(
+        identity="file-account-app",
+        repository_key="mashos-api",
+        path="ai/services/ai_inference/app.py",
+        source_commit=app_commit,
+        blob_sha=app_blob,
+        content_sha256=hashlib.sha256(app_path.read_bytes()).hexdigest(),
+        size_bytes=app_path.stat().st_size,
+        inventory_classification="source",
+        raw={},
+    )
+    selected_rows = [
+        {
+            "identity": app_record.identity,
+            "repository_key": app_record.repository_key,
+            "path": app_record.path,
+            "source_commit": app_record.source_commit,
+            "blob_sha": app_record.blob_sha,
+        }
+    ]
+    repository_root = Path(__file__).resolve().parents[2]
+    task_profiles = json.loads(
+        (
+            repository_root
+            / "Cocolon_前提資料"
+            / "system_context"
+            / "task_profiles.json"
+        ).read_text()
+    )
+    account_contract = task_profiles["tasks"]["account_profile_read_only"][
+        "operator_contract"
+    ]
+    proof, blockers = _build_account_profile_actual_proof(
+        workspace_dir=paths["workspace"],
+        repository_roots={"mashos-api": api_repo},
+        by_key={app_record.key: app_record},
+        selected_rows=selected_rows,
+        scope_rules=account_contract["scope_rules"],
+    )
+    assert proof["resolution_status"] == (
+        "RESOLVED_WITH_EXPLICIT_UNKNOWN_EDGES"
+    )
+    assert proof["route_graph_evidence"]["backend_resolved_symbols"] == [
+        "_fetch_profile_me",
+        "_get_profile_row",
+        "_require_user_id",
+        "_sb_get",
+    ]
+    assert proof["route_graph_evidence"]["unresolved_backend_edge_ids"] == [
+        "backend-account-unknown"
+    ]
+    assert proof["route_graph_evidence"]["unknown_edges_preserved"] is True
+    assert proof["mount_evidence"]["route_graph_mount_status"] == (
+        "UNMOUNTED_ROUTER"
+    )
+    assert proof["mount_evidence"]["registration_symbol_present"] is True
+    assert proof["mount_evidence"]["direct_source_verification_status"] == (
+        "DIRECT_SOURCE_SYMBOL_VERIFIED"
+    )
+    assert proof["protected_gap"] == {
+        "gap_id": "ACCOUNT-PROTECTED-GAP-001",
+        "reason_code": (
+            "AUTH_SELF_FILTER_AND_DB_FIELD_ALLOWLIST_NOT_DIRECTLY_ENDPOINT_TESTED"
+        ),
+        "disposition": "PROTECTED_REVIEW_REQUIRED",
+        "protected_scope_rule_ids": [
+            "SCOPE.ACCOUNT.AUTH_DB.PROTECTED",
+            "SCOPE.ACCOUNT.GET_HANDLER.PROTECTED",
+            "SCOPE.ACCOUNT.PROTECTED_GAP_001",
+        ],
+        "handback_owner": "ACCOUNT_PUBLIC_API_OWNER",
+    }
+    assert proof["product_route_green_claim"] is False
+    assert {
+        "MOUNT_VERIFICATION_REQUIRES_DIRECT_SOURCE",
+        "AUTH_SELF_FILTER_AND_DB_FIELD_ALLOWLIST_NOT_DIRECTLY_ENDPOINT_TESTED",
+    } == set(blockers)
+
+    output = paths["workspace"] / "task_context" / "account_profile_read_only"
+    output.mkdir(parents=True)
+    assert _validate_account_profile_actual_proof(
+        proof, selected_rows, account_contract, output
+    ) == set(blockers)
+
+    tampered = json.loads(json.dumps(proof))
+    tampered["product_route_green_claim"] = True
+    with pytest.raises(
+        ContextCompileError,
+        match="account profile actual proof boundary violated",
+    ):
+        _validate_account_profile_actual_proof(
+            tampered, selected_rows, account_contract, output
+        )
+
+    changed_rn_rows = [
+        {
+            "call_id": "rn-account-profile-me-moved",
+            "method": "GET",
+            "path": "screens/account/useAccountProfile.js",
+            "normalized_path_candidates": ["/account/profile/me"],
+        }
+    ]
+    write_jsonl(route_graph / "rn_calls.jsonl", changed_rn_rows)
+    with pytest.raises(
+        ContextCompileError,
+        match="account profile route graph proof derivation mismatch",
+    ):
+        _validate_account_profile_actual_proof(
+            proof, selected_rows, account_contract, output
+        )
+
+
+def test_unit_c_t74_machine_green_does_not_award_activation_or_credit(
+    tmp_path: Path,
+) -> None:
+    paths = make_fixture(tmp_path / "repo")
+    _document, bundle = make_unit_c_v2_profile(paths)
+    compile_unit_c_fixture(paths, bundle)
+    manifest = verify_task_context(paths["output"], expected_unit_c=True)
+    summary = manifest["unit_c_collaboration_support"]
+    assert summary["status"] == "UNIT_C_COLLABORATION_SUPPORT_READY"
+    assert summary["completion_claim"] is None
+    assert summary["v1_activation"] == 0
+    assert summary["product_credit"] == 0
+    assert summary["technical_credit"] == 0
+    assert summary["automatic_progression"] is False
+    assert manifest["product_credit"] == 0
+    assert manifest["automatic_progression"] is False
+    operator = json.loads(
+        (paths["output"] / "operator_context.json").read_text()
+    )
+    assert operator["completion_gates"]["operator_v1_activation_approved"] is False
 
 
 def test_strict_external_assets_verify_commit_blob_content_and_symbols(tmp_path: Path) -> None:
