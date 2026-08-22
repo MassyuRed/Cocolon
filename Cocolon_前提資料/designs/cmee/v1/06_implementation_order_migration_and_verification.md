@@ -131,7 +131,7 @@ scope:
 - CMEE current structure map update
 - affected core current mapsへのdesign pointer同期
 - no mashos-api write
-- no dependency / implementation / test / runner
+- no dependency / implementation / test / runner write
 
 verification:
 
