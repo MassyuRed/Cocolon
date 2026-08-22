@@ -1,0 +1,114 @@
+{
+  "fact_base": "operator_context.json",
+  "operator_context_sha256": "65d3817ee40a8702ccf334ff537ab988ba83ab0d5d7b2100a2499bbfab0982e6",
+  "operator_model_fingerprint": "a34a4142208e24718f959d76535e9a47cec1429a69add274806a58a4c180778d",
+  "projection_new_fact_count": 0,
+  "restart_packet": {
+    "environment_requirement_claim_id": "CLAIM.CMEE.MASH_FIXED_CONDITION",
+    "max_items": 12,
+    "next_work_source_claim_ids": [],
+    "prohibited_scope_rule_ids": [
+      "SCOPE.CMEE.ACTUAL.RELATED_ONLY",
+      "SCOPE.CMEE.DESIGN.PROTECTED",
+      "SCOPE.CMEE.TEST.PROTECTED"
+    ],
+    "purpose_code": "HOLD_AFTER_STEP7_UNTIL_EXPLICIT_NEXT_APPROVAL"
+  },
+  "schema_version": "cocolon.system_context.collaboration_packets.v1",
+  "subagent_packets": [
+    {
+      "coverage_boundary_ids": [
+        "CLAIM.CMEE.ZERO_EFFECT_BOUNDARY"
+      ],
+      "expected_output_schema": "READ_ONLY_IDENTITY_FINDINGS_V1",
+      "overlap_policy": "DISJOINT",
+      "packet_id": "PACKET.CMEE.OWNER_PREMISE_READ_ONLY",
+      "prohibited_effect_codes": [
+        "NO_MERGE_REBASE_OR_INTEGRATION",
+        "NO_REMOTE_OR_WORKSPACE_WRITE"
+      ],
+      "prohibited_inference_codes": [
+        "NO_AUTHORITY_INFERENCE",
+        "NO_WORKSPACE_INCORPORATION_INFERENCE"
+      ],
+      "purpose_code": "VERIFY_OWNER_AND_REQUIRED_PREMISE_IDENTITIES",
+      "question_code": "ARE_OWNER_AND_PREMISE_EXACT_REFS_FRESH",
+      "question_text": "Verify the declared owner and required premise identities without incorporating or changing either workspace.",
+      "selected_target_ids": [
+        "OWNER.CMEE.PR30",
+        "PREMISE.ANALYSIS.ROADMAP",
+        "PREMISE.ANALYSIS.SIMULATION",
+        "PREMISE.EMLIS.ROADMAP",
+        "PREMISE.PIECE.DESIGN_SOURCE",
+        "PREMISE.PIECE.MANIFEST",
+        "PREMISE.PIECE.READ_FIRST",
+        "PREMISE.PIECE.ROADMAP"
+      ],
+      "unresolved_handback_owner": "MASH"
+    },
+    {
+      "coverage_boundary_ids": [
+        "CLAIM.CMEE.MASH_FIXED_CONDITION"
+      ],
+      "expected_output_schema": "READ_ONLY_CONNECTION_SCOPE_FINDINGS_V1",
+      "overlap_policy": "DISJOINT",
+      "packet_id": "PACKET.CMEE.CLAIM_CONNECTION_SCOPE_READ_ONLY",
+      "prohibited_effect_codes": [
+        "NO_ACTIVATION_OR_CREDIT",
+        "NO_PROTECTED_TEST_OR_PRODUCT_WRITE"
+      ],
+      "prohibited_inference_codes": [
+        "NO_PRODUCT_QUALITY_INFERENCE",
+        "NO_SEMANTIC_CONNECTION_INFERENCE"
+      ],
+      "purpose_code": "VERIFY_DECLARED_CLAIM_CONNECTION_AND_SCOPE_FACTS",
+      "question_code": "ARE_DECLARED_ENDPOINTS_AND_PROTECTED_SCOPES_EXACT",
+      "question_text": "Verify declared claim sources, connection endpoints, and protected scope boundaries without making a product judgment.",
+      "selected_target_ids": [
+        "CLAIM.CMEE.CURRENT_PRODUCT_OWNER",
+        "CLAIM.CMEE.PRODUCT_PURPOSE",
+        "CLAIM.CMEE.PRODUCT_ROUTE",
+        "CONNECTION.CMEE.PURPOSE_TO_ROADMAP",
+        "CONNECTION.CMEE.ROUTE_TO_ACTUAL",
+        "CONNECTION.CMEE.ROUTE_TO_API",
+        "CONNECTION.CMEE.ROUTE_TO_DESIGN",
+        "CONNECTION.CMEE.ROUTE_TO_PROTECTED_TEST",
+        "SCOPE.CMEE.DESIGN.PROTECTED",
+        "SCOPE.CMEE.TEST.PROTECTED"
+      ],
+      "unresolved_handback_owner": "MASH"
+    },
+    {
+      "coverage_boundary_ids": [
+        "SCOPE.CMEE.ACTUAL.RELATED_ONLY"
+      ],
+      "expected_output_schema": "READ_ONLY_EXTERNAL_IDENTITY_FINDINGS_V1",
+      "overlap_policy": "DISJOINT",
+      "packet_id": "PACKET.CMEE.EXTERNAL_ASSET_READ_ONLY",
+      "prohibited_effect_codes": [
+        "NO_EXTERNAL_WORKSPACE_WRITE",
+        "NO_MIGRATION_OR_ACTIVATION"
+      ],
+      "prohibited_inference_codes": [
+        "NO_ACTIVE_SUBENGINE_INFERENCE",
+        "NO_CANONICAL_ADOPTION_INFERENCE"
+      ],
+      "purpose_code": "VERIFY_EXTERNAL_MIGRATION_INPUT_IDENTITIES",
+      "question_code": "ARE_EXTERNAL_SOURCE_AND_TEST_IDENTITIES_AVAILABLE",
+      "question_text": "Verify only the declared public commit and blob identities for the external migration inputs.",
+      "selected_target_ids": [
+        "EXTERNAL.CMEE.CYCLE001.SOURCE",
+        "EXTERNAL.CMEE.CYCLE001.TEST"
+      ],
+      "unresolved_handback_owner": "MASH"
+    }
+  ],
+  "zero_effects": {
+    "automatic_progression": false,
+    "final_adoption_authority": false,
+    "model_selection": false,
+    "subagent_execution": false,
+    "tool_selection": false,
+    "write_authority": false
+  }
+}
