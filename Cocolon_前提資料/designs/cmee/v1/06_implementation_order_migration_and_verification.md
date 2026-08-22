@@ -131,7 +131,7 @@ scope:
 - CMEE current structure map update
 - affected core current mapsへのdesign pointer同期
 - no mashos-api write
-- no dependency / implementation / test / runner write
+- no dependency / implementation / test / runner
 
 verification:
 
@@ -1174,4 +1174,134 @@ IMPLEMENTATION_AUTHORITY = NONE
 STRUCTURE_MAP_DELTA = NONE
 AUTOMATIC_PROGRESSION = FALSE
 STOP_AFTER_STEP_11_A
+```
+
+## 22. Step 11-B — Pro existing-knowledge comparison and question formation
+
+本sectionは、Step 11-Aから渡された`TK-01..TK-06` exact6だけを、Karen-Diaryに保存されたMashの既存構造知識と照合したPro華恋の11-B記録である。既存知識が各technical gapへ渡せるhuman-structure shapeを持つかを確認し、まだMashにしか答えられない不足だけを質問候補へ残す。Mash発言をCMEE contractへ自動採用せず、Ultra technical mapping、実装、test、runtimeまたはProduct Readを開始しない。
+
+- revision date: `2026-08-22 JST`
+- Step 11-B owner: `Pro華恋`
+- predecessor: `STEP_11_A_ULTRA_COMPLETE / commit aa027802f88432a7db0b60a868c6eb11b5901330`
+- source design identity: `CMEE_THREE_CORE_INTEGRATED_DESIGN_20260821`
+- Cocolon working branch: `agent/three-core-cmee-current-structure-20260815`
+- System Context V1 entry lineage: Draft PR #37 head `d5de2bd8945544a44b4ef3d10136010f88ce23ad`
+- System Context V1 Operator actual proof: `NOT_CLAIMED`
+- System Context fallback actually used: `ORIGINAL_DOCUMENT_DIRECT_READ`
+- Karen-Diary repository visibility: `PRIVATE`
+- Karen-Diary comparison identity: `main@a120c416bf54bbb5f36b71734343bbf7e5b681f9`
+- private knowledge objects compared: `exact5`
+- public Cocolon reflection: `BODY_FREE_PUBLIC_SAFE_ABSTRACTION_ONLY`
+- private source body／dialogue／path replication into Cocolon: `0`
+- comparison scope: `TK-01..TK-06 exact6 only`
+- existing knowledge coverage for separate Ultra mapping: `exact6`
+- residual Mash knowledge gap: `exact0`
+- residual Mash question candidate: `exact0`
+- Karen-Diary write effect: `0`
+- Ultra technical mapping: `NOT_STARTED`
+- current authorized next implementation: `NONE`
+- implementation／test／runtime／dependency／DB／API／RN／activation／Cycle001／Product Read effect: `0`
+- product credit: `0`
+- technical credit: `0`
+- primary outcome: `BLOCKER_NARROWED`
+- structure map delta: `NONE`
+- automatic progression: `false`
+
+### 22.1 Source-status separation
+
+| Layer | Owner／status | 11-Bでの扱い |
+|---|---|---|
+| `MASH_EXPLICIT_SOURCE` | Karen-Diary private source dialogue内のMash発言 | 思想・人間構造のsource。公開Cocolonへbodyまたはdialogueを複製しない。 |
+| `KAREN_STRUCTURAL_RESTATEMENT` | Karen-Diary private structure record | Mash発言を構造化した照合材料。Cocolon designへのautomatic adoptionは`false`。 |
+| `PRO_11B_COMPARISON` | 本section | exact6のgapごとに既存知識のcoverageと質問要否を整理する。technical rule確定ではない。 |
+| `ULTRA_TECHNICAL_MAPPING` | `NOT_STARTED` | Proのpublic-safe mapping briefをcurrent CMEE ownerのschema／logic／testへ変換する別bounded work。 |
+
+Karen-Diary private source objectのbody-free identityは次のexact5である。path、dialogue本文、個人情報は本public repositoryへ出さない。
+
+```text
+bab342894e9af798a681efacfa40140ce284f3ac
+777d69bee2519dbed379ad71d2ba0f6380ba3aba
+439d813cf2f5df4fc6c761c107f5b451a2bc2b97
+16d79604141c277c816c24e5cb7899df103a3f4c
+badce24b762b3647013863db37e6860a3d5eb796
+```
+
+### 22.2 Public-safe existing human-structure families
+
+private sourceからCocolonへ渡せるのは、次の抽象化されたknowledge shapeまでである。
+
+1. **理解と事実の分離** — 理解は受け手による暫定的な解釈であり、外部に起きたこと、本人の内側、相手の解釈を同一のtruthへ潰さない。確認・訂正によって更新できる状態として扱う。
+2. **意思と実際の出力の分離** — 本人が望む方向と、条件下で実際に出た行動・表現は一致しないことがある。一回の出力を本人全体、人格または固定patternへ昇格しない。
+3. **自己履歴・自己pattern・自己可能性の分離** — 実際に出た履歴、反復・条件・変化として確認できるpattern、まだ実行されていない可能性を別identityで扱う。
+4. **連続状態遷移** — 環境・状態から複数の選択肢が生じ、相対的な出やすさを経て出力となり、その結果が次の状態と選択肢を変える。単一原因または固定四段へ圧縮しない。
+5. **自己世界・外部世界・関係の分離** — 内側の考え・感情・願い・解釈、外部へ出た行動・出来事、役割合意や共有された事実を別軸で扱う。理解度と関係の成立を相互変換しない。
+
+これはMashの思想を新しいCMEE contractへ確定したものではない。11-Aのtechnical knowledge shapeへ渡せる既存材料が存在することだけを示す。
+
+### 22.3 `TK-01..TK-06` comparison result exact6
+
+| Gap | Existing knowledgeで補えるhuman-structure shape | Pro 11-B judgment | Mash question candidate |
+|---|---|---|---|
+| `TK-01 / NB-F01` | 理解を暫定解釈として扱うこと、本人の内側と実際の出力、望む方向と出た行動、一回の出力と自己patternを分けることにより、source-bound Layer 1、claim-bound Reception、訂正可能なPremium frameの構成軸を作れる。 | `EXISTING_KNOWLEDGE_SUFFICIENT_FOR_SEPARATE_ULTRA_MAPPING`。主要claim選択、Layer 2の受け取り、frame updateのexact logicはUltra ownerであり、Mashへ同じ人間構造を再説明させない。 | `NONE` |
+| `TK-02 / NB-F02` | 意思／出力、内側／外部、履歴／pattern／可能性、理解／関係を分ける既存軸により、どのunknownが観測内容をmaterialに変えるかを区別できる。既存CMEEのinformation gain、回答可能性、burden、high-careと組み合わせられる。 | `EXISTING_KNOWLEDGE_SUFFICIENT_FOR_SEPARATE_ULTRA_MAPPING`。問いの優先式とthresholdはtechnical mappingであり、新しいMash思想回答ではない。 | `NONE` |
+| `TK-03 / NB-F04` | 履歴、反復、条件、変化、望む方向と実際の出力、理解と役割を分けることで、継続・反復・変化・反転・同じ願い・同じ役割等のcandidateをpersonality truthへ昇格せず扱える。一件だけではpatternとしない境界も既存にある。 | `EXISTING_KNOWLEDGE_SUFFICIENT_FOR_SEPARATE_ULTRA_MAPPING`。relation taxonomy、evidence minimum、conflict、abstention、visible exact1選択はUltra owner。 | `NONE` |
+| `TK-04 / NB-F05-A` | 本人の内側の考え・感情・願い、外へ出た行動・結果、望む方向、複数の同時選択肢、理解と役割を分けることで、authorshipを保ったmeaning anchor、contrast、condition、uncertaintyを構成できる。 | `EXISTING_KNOWLEDGE_SUFFICIENT_FOR_SEPARATE_ULTRA_MAPPING`。複数anchorの優先、feature算出、shareable bodyのpositive grammarはPiece semantic shaperのtechnical designで閉じる。exact3 selectorは再質問しない。 | `NONE` |
+| `TK-05 / NB-F07` | 環境／状態→複数option→相対的な出やすさ→行動／表現→結果→次状態という連続遷移と、履歴／patternの分離により、scene、role、attention、reaction、action、aftermathを因果確定せずevent frameとobserved routeへ整理できる。 | `EXISTING_KNOWLEDGE_SUFFICIENT_FOR_SEPARATE_ULTRA_MAPPING`。occasion同一性、route induction、protective／burden annotation、evidence weightingはUltra owner。 | `NONE` |
+| `TK-06 / NB-F09` | 自己可能性は未実行のoptionであり、実際に出力された後だけ履歴になるという境界と、本人側の環境・状態・注意・行動・pace・boundary・conditionを変える連続遷移により、予測や保証でないSELF_ONLY IFを作れる。 | `EXISTING_KNOWLEDGE_SUFFICIENT_FOR_SEPARATE_ULTRA_MAPPING`。bounded transformation operatorとcandidate semantic distinctnessはUltra ownerであり、Mashへ未来の正解を決めさせない。 | `NONE` |
+
+```text
+EXISTING_KNOWLEDGE_LOOKUP_CANDIDATE = EXACT6
+EXISTING_KNOWLEDGE_COVERAGE_FOR_ULTRA_MAPPING = EXACT6
+RESIDUAL_MASH_KNOWLEDGE_GAP = EXACT0
+RESIDUAL_MASH_QUESTION_CANDIDATE = EXACT0
+RESIDUAL_ULTRA_TECHNICAL_MAPPING_CANDIDATE = EXACT6
+```
+
+### 22.4 Why Mash is not asked in Step 11-B
+
+Mashへ質問する必要があるのは、actual assetと既存構造知識を全て使っても、思想・人間構造・商品判断のexact branchをMashにしか閉じられない場合だけである。今回のexact6には、必要なhuman-structure familyが既に存在した。
+
+残った不足は、既存知識をCMEEのclaim selection、question priority、continuity relation、Piece shaper、observed compiler、IF operatorへどう写像し、どのthreshold／abstention／testで閉じるかというtechnical designである。これはUltra華恋の次の別bounded workであり、Mashへ既出知識を再説明させて埋めるものではない。
+
+したがって、今回質問を作らない理由は「不足がないから」ではなく、次の分離による。
+
+```text
+missing Mash human-structure answer = exact0
+remaining Ultra technical mapping = exact6
+```
+
+将来のUltra mappingで、private sourceとcurrent CMEE assetの双方から解けない具体的counterexampleが初めて確認された場合だけ、そのexact pointをProへ戻して別bounded question formationを行える。これはautomatic progressionでも、将来質問の事前承認でもない。
+
+### 22.5 Non-adoption, privacy, and HOLD preservation
+
+- Karen-Diaryはprivate knowledge ownerであり、Cocolon design正本ではない。
+- private dialogue、personal detail、exact private path、body-full evidenceをpublic Cocolonへ複製しない。
+- public reflectionはbody-free object identityと、CMEEに必要なpublic-safe abstractionだけである。
+- Mash発言、Karenのstructure restatement、Pro 11-B comparison、Ultra technical mappingを分離する。
+- `NB-F03`、`NB-F05-B`、`NB-F06`、`NB-F08`、`NB-F10`、`D46..D49`を構造質問へ戻さない。
+- 11-A §21.5のDB／API／RN、renderer、recipient route、UI、storage、Safety、migration、cutover、activation等のHOLDを全て維持する。
+- new schema、module、table、API、RN model、question contract、Product Read、implementation authorityを本sectionから生成しない。
+- Karen-Diaryへのwriteは行わない。
+
+### 22.6 Step 11-B terminal
+
+```text
+STEP_11_A_ULTRA = COMPLETE
+STEP_11_B_PRO = COMPLETE
+EXISTING_KNOWLEDGE_LOOKUP_CANDIDATE = EXACT6
+EXISTING_KNOWLEDGE_COVERAGE_FOR_ULTRA_MAPPING = EXACT6
+RESIDUAL_MASH_KNOWLEDGE_GAP = EXACT0
+RESIDUAL_MASH_QUESTION_CANDIDATE = EXACT0
+MASH_QUESTION_ASKED = EXACT0
+RESIDUAL_ULTRA_TECHNICAL_MAPPING_CANDIDATE = EXACT6
+ULTRA_TECHNICAL_MAPPING = NOT_STARTED
+PRIVATE_SOURCE_BODY_DISCLOSURE = 0
+KAREN_DIARY_WRITE_EFFECT = 0
+IMPLEMENTATION_AUTHORITY = NONE
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+PRIMARY_OUTCOME = BLOCKER_NARROWED
+STRUCTURE_MAP_DELTA = NONE
+AUTOMATIC_PROGRESSION = FALSE
+STOP_AFTER_STEP_11_B
 ```
