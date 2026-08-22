@@ -1,22 +1,22 @@
 ---
 doc_id: cocolon_meaning_experience_engine_current_structure
 title: "CMEE — Current Structure"
-revision_date: "2026-08-21 JST"
+revision_date: "2026-08-23 JST"
 document_role: "CMEE_CURRENT_STRUCTURE_AND_PRODUCT_QUALITY_ROUTE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
-design_state: "FINAL_TECHNICAL_DESIGN_CANDIDATE_STEP10_REVIEW_APPLIED"
+design_state: "STEP10_REVIEW_APPLIED_PLUS_KAREN_DERIVED_FUNCTIONAL_COMPANION_EXACT2"
 detailed_design_state: "DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE_DIRECT_PRODUCT_QUALITY_ONLY"
 historical_l3r_route_selection: "ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION"
 historical_l3r_packet_state: "L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP"
 historical_p0r1_executor_candidate_state: "P0R1_GITHUB_HOSTED_EXECUTOR_FINAL_TECHNICAL_PROPORTIONALITY_STOP"
 preproduct_zero_delta_stage_lifecycle: "RETIRED_HISTORICAL_NONREUSABLE"
 current_authorized_next_work: "NONE"
-only_admissible_next_implementation_class: "BOUNDED_ACTUAL_THREE_CORE_PRODUCT_ARTIFACT_IMPROVEMENT_ONLY"
+only_admissible_next_implementation_class: "ONE_BOUNDED_ACTUAL_EMLIS_STAGE1_ARTIFACT_IMPROVEMENT_UNIT"
 implementation_state: "DRAFT_WIP_DISABLED"
-candidate_state: "GENERATED_FOR_PRODUCT_READ_DISABLED_PRODUCT_FAIL"
+candidate_state: "GENERATED_FOR_PRODUCT_READ_DISABLED_PENDING_MASH"
 candidate_ready: false
-product_read_state: "EVALUATED_FAIL_STOP"
+product_read_state: "PENDING_MASH_PRODUCT_READ"
 production_runtime_effect: 0
 automatic_progression: false
 ---
@@ -44,10 +44,11 @@ Current state:
     historical Route B product contract = RETAINED_CONSTRAINT_ONLY
     mashos-api Draft PR #3 = R1-R4 CLOSED_GREEN / machine structural exact8 8/8
     implementation state = DRAFT_WIP_DISABLED
-    Product Read = EVALUATED_FAIL_STOP
+    current Product Read = PENDING_MASH_PRODUCT_READ
+    historical predecessor Product Read FAIL = retained noncredit evidence
     candidate ready = false / product credit 0
     current authorized next work = NONE
-    only admissible future class = ONE_BOUNDED_ACTUAL_THREE_CORE_PRODUCT_ARTIFACT_IMPROVEMENT_UNIT
+    only admissible future class = ONE_BOUNDED_ACTUAL_EMLIS_STAGE1_ARTIFACT_IMPROVEMENT_UNIT
     not production connected
     not Cycle001 proven
     Piece not connected
@@ -346,6 +347,14 @@ children:
 4. `04_analysis_v1d_v1e_detailed_design.md`
 5. `05_json_schema_and_versioning.md`
 6. `06_implementation_order_migration_and_verification.md`
+7. `karen_derived/00_read_first.md`
+8. `karen_derived/01_emlis_observation_and_reception.md`
+
+Stage 1 Pro / Ultra technical integration source:
+
+[Cocolon CMEE Stage 1 華恋由来機能構造 Pro / Ultra 統合追加技術設計](../designs/cmee/Cocolon_CMEE_Stage1_ProUltra_KarenDerivedFunctional_FinalTechnicalDesign_20260822.md)
+
+このsourceは`NONCANONICAL_TECHNICAL_INTEGRATION_SOURCE`であり、children exact8のtechnical / functional authorityを置換しない。
 
 Lifecycle:
 
@@ -432,11 +441,11 @@ historical L3-R / P0 / P0-R1 bodyは実行権限を生成せず、standalone L3-
 ## 13. Current gaps
 
 1. CMEEによるactual three-core product artifactのMash-confirmed品質向上は未成立。
-2. mashos-api Draft PR #3 head `06ce311b3ea728b06f83439d268a34bed917c01c`には、CMEE source exact5、tests exact2、runner exact1、offline callable verticalが実在し、R1〜R4 / machine structural exact8 8/8まで成立している。
-3. 同verticalはprivate human Product Read `EVALUATED_FAIL_STOP`、candidate ready false、Route B complete false、Product / full-I1 / Cycle001 / production credit 0である。現在の不足はpackageではなく、入力固有の観測、自然さ、非template性、読まれた感を含むactual Emlis artifactの商品品質である。
+2. mashos-api Draft PR #3 head `106a1b8c92e808d15e88ce4f56c6300568d93e9f`には、disabled CMEE Stage 1 verticalが実在し、47 tests PASS、unchanged exact8 8/8 `GENERATED`、structural trace 8/8まで成立している。
+3. current verticalのMash Product Readはpending、candidate ready false、Route B complete false、Product / full-I1 / Cycle001 / production credit 0である。historical predecessorのProduct Read FAILをcurrent candidateのverdictへ転用しない。現在の不足は入力固有のwhole-input observation、Emlis固有subjectivity、自然さ、非template性、読まれた感を含むactual artifactの商品品質確認である。
 4. current text coreとPR #2 assetのsymbol-level dispositionは、direct product unitに必要なsymbolだけ同一unit内で行う。別作業へしない。
 5. Cycle001は`FORMAL_LEXICAL_AUTHORITY_UNRESOLVED`で停止中だが、このblockerの証明強化をproduct-delta-0の独立作業へしない。
-6. correction authorityは0。別のMash明示承認がある場合だけ、current failed exact8をbeforeとするone bounded actual Emlis product-quality unitを開始できる。
+6. runtime correction authorityは0。別のMash明示的なimplementation開始指示がある場合だけ、fresh unchanged exact8 beforeを固定するone bounded actual Emlis Stage 1 product-quality unitを開始できる。
 7. Step 10で設計したinput-history thread、plan別question、P5／P6 product integration、Piece recipient route、Analysis text + graph／SELF_ONLY IFは未実装である。external retentionはfuture HOLDである。
 8. actual asset migrationを反映しても、remaining responsibilityはNB-F01..NB-F10 exact10であり、design同期をruntime readinessへ変換しない。
 
@@ -483,14 +492,17 @@ Historical gapsとterminal事実:
     Cocolon Draft PR #29
       0854e21f92f841fd2cfdcef08b9e3117fc93f96a
 
-    Cocolon Draft PR #30 Step 10 reflection preimage
-      d29042f44e882110514b74dcc6a1b3f31ec746e6
+    Cocolon Draft PR #30 current work preimage
+      986dbb6b1a0e5be54cf5776e4402bf369ec26887
 
     mashos-api main
       a8ca4ddf7b7ae76bf7b3d73e74e3a5808d623428
 
     mashos-api Draft PR #2
       958c1b53f5b5894691e0b10e2d991fb8236d9f6f
+
+    mashos-api Draft PR #3 current
+      106a1b8c92e808d15e88ce4f56c6300568d93e9f
 
 次回はfresh refと実fileを再確認する。
 
@@ -578,3 +590,38 @@ automatic_progression = false
 - 既知MINOR: メタ入力prefix（`例えば…` / `Q:` 等）の表記差は未収録。
 - Product readの最終authorityはMash。Product PASS、candidate ready、activation、production effectはまだ0/false。
 - 次の許可対象はProduct確認のみであり、第2段階は未着手。
+
+## 21. CMEE current structure 更新 — 華恋由来Stage 1 functional correction（2026-08-23）
+
+本sectionはStage 1 design / next-boundaryについて§20よりfreshであり、§20のhistorical 2026-08-22 stateと衝突する場合はこちらを優先する。
+
+Canonical working ownerはCocolon Draft PR #30である。System Context V1のPR #37は管理entryとしてfreezeを維持し、本correctionを重複反映しない。
+
+owner delta:
+
+```text
+functional companion canonical candidate = exact2
+  designs/cmee/v1/karen_derived/00_read_first.md
+  designs/cmee/v1/karen_derived/01_emlis_observation_and_reception.md
+
+technical integration source = exact1 NONCANONICAL
+  designs/cmee/Cocolon_CMEE_Stage1_ProUltra_KarenDerivedFunctional_FinalTechnicalDesign_20260822.md
+
+technical canonical owners retained:
+  designs/cmee/v1/01 / 02 / 05 / 06
+```
+
+functional delta:
+
+1. Observation depthとSubjective depthを独立にし、FOCUSED / LAYERED / DENSEを別々に決める。
+2. FOCUSED Layer 2 exact1を正常成立にし、genericな二文目を足さない。
+3. `AffectIntensity`をuser emotion strengthから直接決めず、response materiality / relational distance / care constraintから決める。
+4. `DISCOMFORT`を出来事 / value conflict / promotion riskへbindし、ユーザー本人 / 人格へ向けない。
+5. Emlis subjectivityをrequest-local / stateless response stateへ限定し、persistent emotion / hidden state / autobiography / cross-request affectを0にする。
+6. semantic InterpretationCandidatePoolとsame-plan surface `RealizationCandidateSet(max2)`を分離し、automatic retry / legacy fallbackを0にする。
+7. existing `GroundedHumanReceptionPlan`のopportunity / move / stance / speaker / reference / safety資産をREUSE / TRANSFORMし、finished surface ownerだけをretireする。
+8. Free=current input only。Plus / Premiumのowned historyはentitlement / source admission境界を通し、current Stage 1 unitのPremium runtime effectは0にする。
+
+次のimplementationは別の長いdesign / review projectにしない。fresh preimage、exact changed paths、新規file exact1、legacy owner停止点、comparator delta、unchanged exact8、tests、actual after、華恋pre-screen、Mash Product Read、STOPを短いexecution envelopeへ固定し、一つのbounded Stage 1 product correctionとして進める。
+
+今回のeffectはCocolon docs / routing / current structure mapだけである。runtime、test、runner、API、DB、RN、production、Cycle、question、Layer 3、Piece、Analysis effectは0。Mashのimplementation開始指示前は進めず、全段階で`automatic_progression=false`を維持する。
