@@ -1818,3 +1818,17 @@ Ultra華恋として、本設計を`Cocolon Meaning Experience Engine V1`のStep
 今回のGitHub effectはexisting canonical exact14のdocs synchronizationだけである。new parallel design file、CMEE実装、NLSv3実装、
 test／runner／fixture、Cycle001再開、A／B cutover、Product Read、production、Piece／Analysis activation、dependency、
 DB／API／RNまたはPR metadataへのeffectは0である。automatic progressionはfalseのままとする。
+
+## 26. 第1段階 — EmlisAIの基本応答 実装反映（2026-08-22）
+
+> 本節は current implementation state / next gate のみを更新し、既存の設計契約・HOLD・過去証跡を置換しない。
+
+- 実装 lineage: `MassyuRed/mashos-api` Draft PR #3 / `106a1b8c92e808d15e88ce4f56c6300568d93e9f`
+- 実装対象は `TK-01 -> NB-F01` のみ。`TK-02`〜`TK-06` は未着手。
+- current input / evidence 直結の二層応答（`見えたこと` / `Emlisから`）を実装。
+- role / experiencer / time / negation / safety precedence / bound reception / material unknown の設計契約を実行コードへ反映。
+- exact8 は 8/8 `GENERATED`、structural trace 8/8。material fixture は `LIMITED / UNKNOWN 1`。
+- 47 tests PASS、独立 pre-screen は BLOCKER 0 / MAJOR 0。
+- 既知MINORはメタ入力prefix（`例えば…` / `Q:` 等）の表記差。disabled候補の未収録境界として保持。
+- disabled terminal、automatic progression false、credit 0、production effect 0 を維持。
+- 最終 Product PASS は Mash のexact8本文確認待ち。第2段階は未承認・未着手。

@@ -566,3 +566,15 @@ automatic_progression = false
 ```
 
 このSTOPはreviewed GitHub-hosted executor candidateだけを棄却し、GitHub-hosted runner一般、Route B、KWJAまたはCMEEを失敗判定したものではなかった。当時の「別executor等はnew Mash LEVEL_3 decisionへ戻る」というfuture routeはFinal Technical Design §0.3がsupersedeした。別executor、P0 boundary、provider、model、version、task、corpus、rename、類似preflightまたはsuccessorによるP0 / P0-R1の再承認・復活は0である。
+
+## 20. CMEE current structure 更新 — Stage 1（2026-08-22）
+
+- code lineage: `MassyuRed/mashos-api` Draft PR #3 / `106a1b8c92e808d15e88ce4f56c6300568d93e9f`
+- current implemented slice: `TK-01 -> NB-F01`。
+- input bundle -> evidence resolver -> grounded plan -> meaning graph / experience plan -> two-layer artifact のvertical sliceをdisabled状態で実装。
+- safety は独立経路。experiencer / time / negation が不明確な入力はfail closed。
+- material unknown は `LIMITED` と可視 UNKNOWN、unknown 0 は `GENERATED`。いずれもautomatic progression false。
+- exact8 8/8 GENERATED、structural trace 8/8、47 tests PASS。
+- 既知MINOR: メタ入力prefix（`例えば…` / `Q:` 等）の表記差は未収録。
+- Product readの最終authorityはMash。Product PASS、candidate ready、activation、production effectはまだ0/false。
+- 次の許可対象はProduct確認のみであり、第2段階は未着手。

@@ -1305,3 +1305,13 @@ STRUCTURE_MAP_DELTA = NONE
 AUTOMATIC_PROGRESSION = FALSE
 STOP_AFTER_STEP_11_B
 ```
+
+## 23. 実装順序の現在地 — 第1段階（2026-08-22）
+
+- 完了した技術作業: `TK-01 -> NB-F01` の基本応答実装とローカル検証。
+- 実装参照: `MassyuRed/mashos-api` Draft PR #3 / `106a1b8c92e808d15e88ce4f56c6300568d93e9f`
+- 検証: 47 tests PASS、exact8 GENERATED/structural 8/8、material fixture LIMITED/UNKNOWN1。
+- current gate: Mashによるexact8本文の最終 Product 確認待ち。
+- 既知MINOR: メタ入力prefix（`例えば…` / `Q:` 等）の表記差はdisabled候補のまま持ち越す。
+- `TK-02`〜`TK-06`、Piece / Analysis、DB / API / RN、activation / cutover / production は未着手。
+- Mash の明示確認までは第2段階を開始しない。

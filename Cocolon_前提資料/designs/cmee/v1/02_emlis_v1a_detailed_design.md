@@ -657,3 +657,15 @@ Vertical 3 — Layer 3:
 - `NB-F04`: Plus／Premium Layer 3 history continuity integration／realizer。
 
 これらはnew file count、implementation approval、runtime activationではない。exact DB／API／RN／persistence、Premium cross-core payload、production cutoverはHOLDまたはseparate Mash approvalであり、本sectionだけで開始しない。
+
+## 19. Stage 1 実装レシート（2026-08-22）
+
+- 実装参照: `MassyuRed/mashos-api` Draft PR #3 / `106a1b8c92e808d15e88ce4f56c6300568d93e9f`
+- `TK-01 -> NB-F01` として、source-explicit observation と evidence-bound human reception を実装した。
+- 願い・負荷・実行済み行動・変化は別役割として扱い、他者主語、非current時制、外部評価、否定形は本人の肯定的現在状態へ昇格させない。
+- safety 判定は scope / meaning 判定より先行する。
+- reception opportunity / move / target / support / evidence は canonical validator と field-named digest でexact sealする。
+- material unknown のみ `LIMITED` の可視 UNKNOWN とし、非material unresolved は表示しない。
+- exact8 8/8 GENERATED、material fixture LIMITED/UNKNOWN1、47 tests PASS。
+- 既知MINOR: メタ入力prefix（`例えば…` / `Q:` 等）の表記差は未収録。
+- Product PASS、candidate ready、activation、production は未宣言。Mash確認前に次段階へ進まない。
