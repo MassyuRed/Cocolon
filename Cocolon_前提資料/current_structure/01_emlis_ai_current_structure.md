@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_emlis_ai_current_structure
 title: "EmlisAI構造 — Current Structure"
-revision_date: "2026-08-21 JST"
+revision_date: "2026-08-23 JST"
 document_role: "EMLIS_AI_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -213,6 +213,8 @@ Route Uまたはcontract変更は別Mash LEVEL_3判断が必要であり、こ�
 | Role | Path | Lifecycle |
 |---|---|---|
 | stable product destination | Cocolon_前提資料/Cocolon_EmlisAI_longterm_roadmap_CURRENT.md | CURRENT_PRODUCT_OWNER。embedded SHAはfresh currentではない |
+| Karen-derived Stage 1 functional owner | Cocolon_前提資料/designs/cmee/v1/karen_derived/00_read_first.md + 01_emlis_observation_and_reception.md | DRAFT_PR_CANONICAL_CANDIDATE / product-function owner exact2 |
+| Pro / Ultra technical integration source | Cocolon_前提資料/designs/cmee/Cocolon_CMEE_Stage1_ProUltra_KarenDerivedFunctional_FinalTechnicalDesign_20260822.md | NONCANONICAL_TECHNICAL_INTEGRATION_SOURCE |
 | NLS v3 alignment | Cocolon_前提資料/Cocolon_EmlisAI_NLSv3_CurrentAlignment.md | CURRENT_REFERENCE。append済みpinsに古いものがある |
 | immutable NLS design baseline | Cocolon_前提資料/historical_baselines/emlis_ai/Cocolon_EmlisAI_ModelFreeNaturalLanguageSurfaceV3_DetailedDesign_ImplementationOrder_20260714_Revised_Cycle.md | CURRENT_TECHNICAL_NORM / immutable |
 | Cycle current navigation | Cocolon_前提資料/08_cycle001_current_state.md | CURRENT only at fresh applicable ref |
@@ -250,13 +252,13 @@ Route Uまたはcontract変更は別Mash LEVEL_3判断が必要であり、こ�
 3. Emlis input-history thread、plan別question lifecycle、refined Layer 1／2、Plus／Premium Layer 3は商品完成未確認。
 4. mainのCycle current navigationはDraft #29より古い。
 5. active planの一部metadataにdraft lifecycle表記が残るため、current actual判断では08とremote factsを優先する。
-6. CMEEは設計候補であり、Emlis vertical exact3のimplementation／Cycle re-entryは未承認。
+6. CMEE Stage 1はdisabled verticalまで実装済みだが、Pro / Ultra追加設計のruntime implementation、Cycle re-entry、productionは未承認。
 
 CMEE Emlis detailed design candidate:
 
 [CMEE V1-A — EmlisAI Observation Vertical 詳細設計](../designs/cmee/v1/02_emlis_v1a_detailed_design.md)
 
-このpointerはcurrent production ownerまたはCycle navigationを変更しない。provider / acceptance contractのcurrent resultは`NO_SAFE_CMEE_V1A_CANDIDATE_STOP`であり、new Mash LEVEL_3判断までimplementationを開始しない。
+このpointerはcurrent production ownerまたはCycle navigationを変更しない。current runtime evidenceはmashos-api Draft PR #3 head `106a1b8c92e808d15e88ce4f56c6300568d93e9f`、47 tests PASS、unchanged exact8 8/8 `GENERATED`、structural trace 8/8である。Mash Product Readはpending、`candidate_ready=false`、`product_credit=0`、`automatic_progression=false`である。historical `NO_SAFE_CMEE_V1A_CANDIDATE_STOP`をcurrent candidate stateへ復活させない。
 
 ## 9. Step 10 reviewed design synchronization
 
@@ -267,6 +269,22 @@ CMEE Emlis detailed design candidate:
     FORMAL_PRO_REVIEW = CONSUMED_EXACTLY_ONCE
 
 target実装順は、Vertical 1 Layer 1／2、Vertical 2 question／refined Layer 1／2、Vertical 3 Plus／Premium Layer 3である。現存するcapability、context、user model、history、P5、P6を移行候補として先に照合し、不足するproduct integrationだけをNB-F01..NB-F04として残す。これはruntime接続、API／DB／RN変更、activation、Product Read合格を意味しない。
+
+### 9.1 2026-08-23 華恋由来Stage 1 functional correction
+
+functional owner exact2は、P1–P8、M1–M7、Layer 1 / 2、V1–V9、観測・選択・応答構造、最低商品品質を所有する。既存`02 / 05 / 06`はtechnical realization、schema / ref / identity、implementation / verificationを所有し、Pro / Ultra追加技術資料はnoncanonical integration sourceとする。
+
+Stage 1の新product contract:
+
+- Observation depthとSubjective depthを独立にする。
+- FOCUSED L2はhonest / input-specific proposition exact1で正常成立する。
+- AffectIntensityをuser emotion strengthから直接決めない。
+- `DISCOMFORT`を出来事 / value conflict / promotion riskへbindし、ユーザー人格へ向けない。
+- existing `GroundedHumanReceptionPlan`資産をREUSE / TRANSFORMし、finished surface ownerだけをretireする。
+- semantic interpretation poolとsame-plan surface `RealizationCandidateSet`を分け、automatic retry / legacy fallbackを0にする。
+- Free=current input only。eligible owned historyはPlus / Premiumのsource admission境界で扱い、current unitのPremium runtime effectは0。
+
+今回のeffectはdesign / routing / mapだけで、runtime / test / production effectは0。次は別の長い設計projectではなく、fresh short execution envelopeから一つのbounded Stage 1 product correctionへ戻る。Mashのimplementation開始指示前は進めない。
 
 ## 10. History pointers
 
@@ -300,13 +318,16 @@ target実装順は、Vertical 1 Layer 1／2、Vertical 2 question／refined Laye
     Cocolon Draft PR #29
       0854e21f92f841fd2cfdcef08b9e3117fc93f96a
 
-    Cocolon Draft PR #30 Step 10 reflection preimage
-      d29042f44e882110514b74dcc6a1b3f31ec746e6
+    Cocolon Draft PR #30 current work preimage
+      986dbb6b1a0e5be54cf5776e4402bf369ec26887
 
     mashos-api main
       a8ca4ddf7b7ae76bf7b3d73e74e3a5808d623428
 
     mashos-api Draft PR #2
       958c1b53f5b5894691e0b10e2d991fb8236d9f6f
+
+    mashos-api Draft PR #3 current
+      106a1b8c92e808d15e88ce4f56c6300568d93e9f
 
 次回はfresh refと実fileを再確認する。
