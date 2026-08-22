@@ -251,3 +251,106 @@ TECHNICAL_CREDIT = 0
 AUTOMATIC_PROGRESSION = false
 STRUCTURE_MAP_DELTA_NONE
 ```
+
+## 8. Step 7 bounded candidate — Unit B Work Context Intelligence
+
+### 8.1 Incremental contract and Unit C boundary
+
+Unit BはUnit A exact3を保持し、同じ`task_profiles.v2`／同じDraft PR candidateへ次のexact4だけを追加する。
+
+```text
+claim_nodes
+connections
+scope_rules
+role_views
+```
+
+Unit B時点の`operator_contract`はexact7である。`external_locators`、`collaboration`、`actual_use_feedback`、non-CMEE ephemeral profileはUnit C所有であり、本checkpointではschema、output、activationを開始しない。Unit A exact3 fixtureはfoundation回帰用にverify-only compilerが引き続き受理するが、repositoryのpersistent `cmee` profileはUnit B exact7を使用する。
+
+Unit Bのtemporary logical outputはlegacy exact7へ次のexact3を追加したexact10である。
+
+```text
+operator_context.json
+pro_context.md
+ultra_context.md
+```
+
+`collaboration_packets.json`を含むterminal exact11はUnit Cまで未成立である。したがってexact10はtracked `current/cmee_working/**`へpublishせず、candidate temp rootでcompile／verify後に破棄する。public `prepare`のlive-publication guardとworkflow exact3のread-only境界は変更しない。
+
+### 8.2 Claim, connection, scope, impact, and drift
+
+CMEE persistent Unit Bはsource-bound claim kind exact5をrequiredにする。
+
+```text
+PRODUCT_PURPOSE
+MASH_FIXED_CONDITION
+PRODUCT_ROUTE
+CURRENT_PRODUCT_OWNER
+ZERO_EFFECT_BOUNDARY
+```
+
+claim rowはassertion provenance exact8とadoption state exact7を分離する。全`MASH_EXPLICIT_DECISION` rowは`asserted_by=Mash`、`decision_owner=Mash`、durable public ref locatorを要求し、`MASH_FIXED_CONDITION`は当該provenanceを必須とする。profileは`DECLARED_SOURCE_LOCATOR`とdeclarative scopeだけを記述し、compilerがowner-ref exact responsibility identity、selected workspace Inventory identity、またはdurable public ref declarationへ分離して再導出する。owner-ref claimを同pathのworkspace blobでverifiedへ昇格せず、ownerなしdurable remote refもselected workspace blobでverifiedへ昇格しない。remote refを持たないrequired source unresolvedはreason付きblockとする。owner-scoped connection endpointはUnit Aのexact owner head／responsibility commit／blobへbindし、同pathのworkspace blobで代用しない。required claim sourceとrequired connection targetはUnit B seedとしてfull selected closureへ明示的に含める。原文、summary、quote、body-derived hashをmodelへ複製しない。machine verificationはpublic locator／file／blobのverified scopeだけで、claim意味、受容、商品品質を生成しない。named symbol／routeはUnit B exact10内にstandalone verifierがreplayできるmembership proofを保持しないため、本checkpointでは`UNRESOLVED_RELATION`にfail closedし、compile時のin-memory index lookupだけで`ALL_ENDPOINTS_VERIFIED`へ昇格しない。
+
+connection relationは次のexact6、endpoint resultは次のexact4である。
+
+```text
+CONSTRAINS_PRODUCT_PURPOSE
+REFLECTED_BY_DESIGN
+IMPLEMENTED_BY_ACTUAL
+COVERED_BY_TEST_OR_CONTRACT
+EXPOSED_BY_ROUTE
+SUPERSEDES
+
+ALL_ENDPOINTS_VERIFIED
+MISSING_ENDPOINT
+STALE_REF
+UNRESOLVED_RELATION
+```
+
+endpoint存在はdesign adequacy、Mash意図充足、product PASSを意味せず、各rowは`semantic_claim=false / product_quality_credit=0`を保持する。required test／contract endpoint missingまたはrelation unresolvedはexact reasonとowner handbackを持つblocked Contextとして可視化する。
+
+scopeは`ALLOWED_WRITE_CANDIDATE / PROTECTED_REVIEW_REQUIRED / FORBIDDEN / REVIEW_ONLY_EXTERNAL / RELATED_NOT_WRITE_AUTHORIZED / UNRESOLVED`のexact6である。explicit scopeがないconnected targetにはdeterministic `RELATED_NOT_WRITE_AUTHORIZED`を生成し、`permission_claim=false`を固定する。`ALLOWED_WRITE_CANDIDATE`もpermissionではない。
+
+impactは`DIRECT / PROBABLE / UNCHANGED / MANUAL_REVIEW`のexact4だけを許す。`DIRECT`はexact changed pathまたはexplicit verified connection、`PROBABLE`はexisting bounded graph closure、`UNCHANGED`はcompared exact blobが同一というfile factだけ、その他は`MANUAL_REVIEW`とする。`MANUAL_REVIEW`はowner handbackを持つvalid blocked Contextであり、READYへ昇格しない。`UNCHANGED`をproduct no-impactへ、unknownを`NO_IMPACT`へ変換しない。
+
+drift machine codeは次のexact6へ閉じる。
+
+```text
+OWNER_PATH_MISSING
+OWNER_PATH_RENAMED_OR_DELETED
+EXPLICIT_RETIRED_ROUTE_STILL_ACTIVE
+DECLARED_TEST_CONTRACT_OWNER_ROUTE_MISMATCH
+DESIGN_ONLY_CLASSIFIED_AS_RUNTIME_ACTUAL
+OWNER_OWNED_PATH_CHANGED_AFTER_INTEGRATION
+```
+
+各rowはsubject ID、exact evidence locator、provenance、verified scope、impact class、required owner handbackを持つ。sixth codeはseparately-authorized owner-write transactionだけが所有し、本read-only PR #30 routingでは生成しない。`DIVERGED / OWNER_REF_AHEAD`はfreshness relationとして表示するが、owner exact headとrequired premise exact blobが読める場合はそれだけでOperator Contextをblockしない。workspace incorporation／merge／rebase／integration／write claimは常にfalseである。
+
+### 8.3 One fact base and bounded role projections
+
+`operator_context.json`はUnit B operator fact base exact1である。model内の`task_profile_declaration`はcompile inputのschema／task／exact profileを保持し、canonical SHAをmanifest `input_sha256.task_profile`へbindする。verifierはclaim、connection、explicit scope、role viewを当該declarationから再照合する。`operator_model_fingerprint`は当該fieldを除くcanonical payloadから一回計算し、manifestの`output_sha256`とUnit B summaryがoperator file SHA、model fingerprint、Pro SHA、Ultra SHAをbindする。final `context_fingerprint`はself-referenceを避けmanifestだけに置く。
+
+`pro_context.md`と`ultra_context.md`は同じoperator SHA／model fingerprintからdeterministicにrenderし、verifierがshared modelからbyte-exact rerenderする。AI summary、role独自fact、semantic ranking、implementation permissionはexact0である。一方のprojectionへの新fact追加、model／projection SHA mismatch、fingerprint tamperはpublish 0である。
+
+Pro first-viewはordered card exact8、maximum 12 decision items、reason maximum 2、locator maximum 3/card、16 KiBである。Pro outer ceilingは24 items／1.5 MiB referenced source／8 reasons／96 KiB、Ultra ceilingは80 items／4 MiB referenced source／12 reasons／192 KiBである。required surface超過は`BUDGET_EXCEEDED_REQUIRED_SURFACE`としてblockし、silent truncation／automatic expansionは行わない。full closureは`closure_edges.jsonl`とshared modelへ保持し、initial role viewへ全展開しない。
+
+decision surfaceはfreshness blocker、premise chain、Mash/product/owner、changed path/scope/protected test、verified connection、PROBABLE impact、trigger/exclusionのpriority exact7でsortする。同priorityはrequired、graph distance、repository key、normalized path、stable IDで決定し、semantic score、date、feedback countを使わない。
+
+minimal readbackはchanged path／symbol／route、required owner／premise、connected protected test／contract、probable dependent＋reason、unresolved owner handback、full closure pointerを持つ。probable dependentはchanged targetごとのbounded graph originへbindし、別変更だけから到達するdependentを全DIRECT rowへ一括複製しない。
+
+Proのfreshness cardはshared modelのexact relationと両側changed-path countを表示し、actual `DIVERGED`を`FRESHNESS_READY_NO_BLOCKER`だけへ潰さない。Ultraはworkspace／owner exact refs、owner-side changed path、required entry chain commit／blob、claim provenance、connection endpoint、scope、conflict、impact、minimal readback、STOPを同じadmitted setからboundedに投影する。
+
+### 8.4 Internal checkpoint and zero-effect boundary
+
+Unit B internal successはUnit A regression、exact7 schema fail-close、temporary exact10 generation、same-model projection binding、endpoint／scope／impact／drift／minimal-readback actual、byte-exact rerender、privacy scan、tamper rejectionを意味する。Unit C、terminal exact11、Step 7全体completion、Step 8 actual-use、Step 9 activationを意味しない。
+
+```text
+UNIT_B_TEMPORARY_LOGICAL_OUTPUT_COUNT = 10
+UNIT_C_STARTED = false
+V1_ACTIVATION = 0
+completion_claim = null
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+AUTOMATIC_PROGRESSION = false
+STRUCTURE_MAP_DELTA_NONE
+```

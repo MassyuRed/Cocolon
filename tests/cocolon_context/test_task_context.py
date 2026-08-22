@@ -15,9 +15,13 @@ from tools.cocolon_context_task import (
     ContextCompileError,
     FileRecord,
     _expected_owner_namespace,
+    _operator_model_fingerprint,
+    _render_pro_context,
+    _render_ultra_context,
     _task_profile,
     _validate_workspace_refs,
     build_premise_management_model,
+    build_work_context_model,
     canonical_owner_bundle_fingerprint,
     compile_task_context,
     extract_restricted_metadata,
@@ -503,6 +507,55 @@ def resign_unit_a_manifest(output: Path, manifest: dict) -> None:
     manifest["context_fingerprint"] = hashlib.sha256(canonical(payload)).hexdigest()
 
 
+def resign_unit_b_artifacts(output: Path, model: dict, manifest: dict) -> None:
+    model["operator_model_fingerprint"] = _operator_model_fingerprint(model)
+    operator_path = output / "operator_context.json"
+    write_json(operator_path, model)
+    operator_sha = sha(operator_path)
+    (output / "pro_context.md").write_bytes(
+        _render_pro_context(model, operator_sha)
+    )
+    (output / "ultra_context.md").write_bytes(
+        _render_ultra_context(model, operator_sha)
+    )
+    inputs = manifest["input_sha256"]
+    summary = manifest["unit_b_work_context"]
+    inputs["operator_model"] = model["operator_model_fingerprint"]
+    inputs["operator_context"] = operator_sha
+    summary["operator_context_sha256"] = operator_sha
+    summary["projection_source_sha256"] = operator_sha
+    summary["operator_model_fingerprint"] = model["operator_model_fingerprint"]
+    summary["projection_model_fingerprint"] = model["operator_model_fingerprint"]
+    for name in ("operator_context.json", "pro_context.md", "ultra_context.md"):
+        manifest["output_sha256"][name] = sha(output / name)
+    summary["pro_context_sha256"] = manifest["output_sha256"]["pro_context.md"]
+    summary["ultra_context_sha256"] = manifest["output_sha256"]["ultra_context.md"]
+    selected_rows = read_jsonl(output / "selected_files.jsonl")
+    payload = {
+        "workspace": manifest["workspace"],
+        "task": manifest["task"],
+        "step1_manifest_sha256": inputs["step1_manifest"],
+        "step1_files_sha256": inputs["step1_files"],
+        "step2_manifest_sha256": inputs["step2_manifest"],
+        "step3_manifest_sha256": inputs["step3_manifest"],
+        "publication_transport_sha256": inputs.get("publication_transport"),
+        "workspace_profiles_sha256": inputs["workspace_profiles"],
+        "task_profile_sha256": inputs["task_profile"],
+        "manual_overlay_sha256": inputs["manual_overlay"],
+        "selected_file_identities": [row["identity"] for row in selected_rows],
+        "output_sha256": dict(sorted(manifest["output_sha256"].items())),
+        "owner_bundle_fingerprint": inputs["owner_bundle"],
+        "unit_a_model_sha256": inputs["unit_a_model"],
+        "workspace_exact_refs": manifest["workspace_exact_refs"],
+        "unit_a_completion_gates": manifest["completion_gates"],
+        "operator_model_fingerprint": model["operator_model_fingerprint"],
+        "operator_context_sha256": operator_sha,
+        "unit_b_work_context": summary,
+    }
+    manifest["context_fingerprint"] = hashlib.sha256(canonical(payload)).hexdigest()
+    write_json(output / "context_manifest.json", manifest)
+
+
 def make_unit_a_v2_profile(paths: dict[str, Path]) -> tuple[dict, dict]:
     document = json.loads(paths["task_profiles"].read_text())
     profile = document["tasks"]["cmee"]
@@ -745,6 +798,200 @@ def make_unit_a_v2_profile(paths: dict[str, Path]) -> tuple[dict, dict]:
     return document, bundle
 
 
+def make_unit_b_v2_profile(paths: dict[str, Path]) -> tuple[dict, dict]:
+    document, bundle = make_unit_a_v2_profile(paths)
+    contract = document["tasks"]["cmee"]["operator_contract"]
+    owner_ref = "refs/heads/fixture-owner"
+    owner_path = "Cocolon_前提資料/current_structure/04_cmee_current_structure.md"
+
+    def locator(locator_id: str, repository_key: str, path: str, *, durable: bool = False):
+        value = {
+            "locator_id": locator_id,
+            "privacy": "PUBLIC",
+            "repository_key": repository_key,
+            "path": path,
+        }
+        if durable:
+            value["remote_ref"] = owner_ref
+        return value
+
+    claim_specs = [
+        (
+            "CLAIM.CMEE.TEST.PRODUCT_PURPOSE",
+            "PRODUCT_PURPOSE",
+            "FIXTURE_PRODUCT_PURPOSE",
+            "Mash",
+            "MANUAL_PROFILE_ASSERTION",
+            "ACCEPTED_CURRENT",
+        ),
+        (
+            "CLAIM.CMEE.TEST.MASH_FIXED_CONDITION",
+            "MASH_FIXED_CONDITION",
+            "FIXTURE_BOUNDED_IMPLEMENTATION_ONLY",
+            "Mash",
+            "MASH_EXPLICIT_DECISION",
+            "ACCEPTED_CURRENT",
+        ),
+        (
+            "CLAIM.CMEE.TEST.PRODUCT_ROUTE",
+            "PRODUCT_ROUTE",
+            "FIXTURE_PRODUCT_ROUTE",
+            "Karen",
+            "KAREN_PROPOSAL_NOT_MASH_DECISION",
+            "KAREN_PROPOSAL_NOT_MASH_DECISION",
+        ),
+        (
+            "CLAIM.CMEE.TEST.CURRENT_PRODUCT_OWNER",
+            "CURRENT_PRODUCT_OWNER",
+            "FIXTURE_CURRENT_PRODUCT_OWNER",
+            "Karen",
+            "MANUAL_PROFILE_ASSERTION",
+            "DESIGN_REFLECTED_NOT_IMPLEMENTED",
+        ),
+        (
+            "CLAIM.CMEE.TEST.ZERO_EFFECT_BOUNDARY",
+            "ZERO_EFFECT_BOUNDARY",
+            "FIXTURE_ZERO_EFFECT_BOUNDARY",
+            "Mash",
+            "MASH_EXPLICIT_DECISION",
+            "ACCEPTED_CURRENT",
+        ),
+    ]
+    contract["claim_nodes"] = [
+        {
+            "claim_id": claim_id,
+            "claim_kind": claim_kind,
+            "asserted_value_code": value_code,
+            "asserted_by": asserted_by,
+            "decision_owner": "Mash",
+            "assertion_provenance": provenance,
+            "source_locator": locator(
+                f"LOC.{claim_id}", "Cocolon", owner_path, durable=claim_kind in {
+                    "MASH_FIXED_CONDITION",
+                    "ZERO_EFFECT_BOUNDARY",
+                }
+            ),
+            "adoption_state": adoption,
+            "claim_boundary": "FIXTURE_SOURCE_BOUND_NO_SEMANTIC_INFERENCE",
+            "verification_status": "DECLARED_SOURCE_LOCATOR",
+            "verified_scope": [
+                "DURABLE_PUBLIC_DECISION_LOCATOR"
+                if claim_kind in {"MASH_FIXED_CONDITION", "ZERO_EFFECT_BOUNDARY"}
+                else "PUBLIC_SOURCE_LOCATOR"
+            ],
+        }
+        for claim_id, claim_kind, value_code, asserted_by, provenance, adoption in claim_specs
+    ]
+    connection_specs = [
+        (
+            "CONNECTION.CMEE.TEST.DESIGN",
+            "REFLECTED_BY_DESIGN",
+            "Cocolon",
+            owner_path,
+        ),
+        (
+            "CONNECTION.CMEE.TEST.ACTUAL",
+            "IMPLEMENTED_BY_ACTUAL",
+            "mashos-api",
+            "ai/cmee/draft_engine.py",
+        ),
+        (
+            "CONNECTION.CMEE.TEST.CONTRACT",
+            "COVERED_BY_TEST_OR_CONTRACT",
+            "mashos-api",
+            "tests/protected/test_cmee_contract.py",
+        ),
+        (
+            "CONNECTION.CMEE.TEST.ROUTE",
+            "EXPOSED_BY_ROUTE",
+            "mashos-api",
+            "api/routes/emlis_endpoint.py",
+        ),
+    ]
+    contract["connections"] = [
+        {
+            "connection_id": connection_id,
+            "source_claim_id": "CLAIM.CMEE.TEST.PRODUCT_ROUTE",
+            "relation_kind": relation,
+            "target_locator": locator(
+                f"LOC.{connection_id}", repository_key, path
+            ),
+            "target_symbol_or_route": None,
+            "required": True,
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "endpoint_verification": "UNRESOLVED_RELATION",
+            "verified_scope": ["PROFILE_DECLARATION"],
+        }
+        for connection_id, relation, repository_key, path in connection_specs
+    ]
+    contract["scope_rules"] = [
+        {
+            "scope_rule_id": "SCOPE.CMEE.TEST.CONTRACT",
+            "target_locator": locator(
+                "LOC.SCOPE.CMEE.TEST.CONTRACT.TARGET",
+                "mashos-api",
+                "tests/protected/test_cmee_contract.py",
+            ),
+            "target_symbol_or_route": None,
+            "changeability": "PROTECTED_REVIEW_REQUIRED",
+            "required_approval": "PROTECTED_TEST_REVIEW_REQUIRED",
+            "write_target": False,
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": locator(
+                "LOC.SCOPE.CMEE.TEST.CONTRACT.SOURCE", "Cocolon", owner_path
+            ),
+        },
+        {
+            "scope_rule_id": "SCOPE.CMEE.TEST.ACTUAL",
+            "target_locator": locator(
+                "LOC.SCOPE.CMEE.TEST.ACTUAL.TARGET",
+                "mashos-api",
+                "ai/cmee/draft_engine.py",
+            ),
+            "target_symbol_or_route": None,
+            "changeability": "RELATED_NOT_WRITE_AUTHORIZED",
+            "required_approval": "SEPARATE_EXPLICIT_AUTHORIZATION_REQUIRED",
+            "write_target": False,
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": locator(
+                "LOC.SCOPE.CMEE.TEST.ACTUAL.SOURCE", "Cocolon", owner_path
+            ),
+        },
+    ]
+    contract["role_views"] = {
+        "PRO_KAREN": {
+            "max_items": 24,
+            "max_referenced_source_bytes": 1572864,
+            "max_reasons_per_item": 8,
+            "max_projection_utf8_bytes": 98304,
+            "first_view": {
+                "card_order": [
+                    "TASK_ORIENTATION_AND_PRODUCT_CONNECTION",
+                    "FRESHNESS_AND_BLOCKER",
+                    "MASH_FIXED_CONDITIONS",
+                    "CURRENT_PRODUCT_OWNER_AND_ROUTE",
+                    "ORIGINALS_TO_READ_NOW",
+                    "PRODUCT_ROUTE_FINDINGS_AND_CLAIM_BOUNDARY",
+                    "UNRESOLVED_AND_HANDBACK",
+                    "EFFECTS_STOP_AND_AUTOMATIC_PROGRESSION",
+                ],
+                "max_decision_items": 12,
+                "max_reasons_per_item": 2,
+                "max_utf8_bytes": 16384,
+                "max_locators_per_card": 3,
+            },
+        },
+        "ULTRA_KAREN": {
+            "max_items": 80,
+            "max_referenced_source_bytes": 4194304,
+            "max_reasons_per_item": 12,
+            "max_projection_utf8_bytes": 196608,
+        },
+    }
+    write_json(paths["task_profiles"], document)
+    return document, bundle
+
+
 def test_same_manifests_and_profile_are_byte_exact(tmp_path: Path) -> None:
     paths = make_fixture(tmp_path / "repo")
     first = tmp_path / "first"
@@ -852,6 +1099,1263 @@ def test_v2_prepared_compile_accepts_revalidated_read_only_owner_model(
     assert len(premise_row["responsibility_ids"]) == 21
     assert premise_row["selection_tier"] in {"DECISION_SURFACE", "UNRESOLVED_IMPACT"}
     assert "NO_WRITE_AUTHORITY" in premise_row["non_proof_boundaries"]
+
+
+def _compile_unit_b_fixture(tmp_path: Path) -> tuple[dict[str, Path], dict, Path]:
+    paths = make_fixture(tmp_path / "repo")
+    _document, bundle = make_unit_b_v2_profile(paths)
+    output = tmp_path / "unit-b-output"
+    compile_task_context(
+        repo_root=paths["root"],
+        system_context_root=paths["system"],
+        workspace="cmee_working",
+        task="cmee",
+        task_profiles_path=paths["task_profiles"],
+        manual_overlay_path=None,
+        output_dir=output,
+        canonical_owner_bundle=bundle,
+    )
+    return paths, bundle, output
+
+
+def make_diverged_unit_b_bundle(paths: dict[str, Path], bundle: dict) -> dict:
+    root = paths["root"]
+    owner = bundle["owners"][0]
+    merge_base = owner["workspace_material_commit"]
+    subprocess.run(
+        ["git", "commit", "-q", "--allow-empty", "-m", "owner side"],
+        cwd=root,
+        check=True,
+    )
+    owner_head = subprocess.check_output(
+        ["git", "rev-parse", "HEAD"], cwd=root, text=True
+    ).strip()
+    subprocess.run(
+        ["git", "update-ref", owner["namespace"], owner_head],
+        cwd=root,
+        check=True,
+    )
+    subprocess.run(
+        ["git", "checkout", "-q", "--detach", merge_base],
+        cwd=root,
+        check=True,
+    )
+    subprocess.run(
+        ["git", "commit", "-q", "--allow-empty", "-m", "workspace side"],
+        cwd=root,
+        check=True,
+    )
+    workspace_head = subprocess.check_output(
+        ["git", "rev-parse", "HEAD"], cwd=root, text=True
+    ).strip()
+    workspace_tree = subprocess.check_output(
+        ["git", "rev-parse", "HEAD^{tree}"], cwd=root, text=True
+    ).strip()
+    owner.update(
+        first_resolved_head=owner_head,
+        fetched_namespace_head=owner_head,
+        pre_publish_resolved_head=owner_head,
+        workspace_material_commit=workspace_head,
+        relation="DIVERGED",
+        merge_base=merge_base,
+        owner_side_unique_commit_count=1,
+        workspace_side_unique_commit_count=1,
+        owner_side_changes=[],
+        workspace_side_changes=[],
+        owner_side_changed_paths=[],
+        workspace_side_changed_paths=[],
+    )
+    for row in bundle["premises"]:
+        row["resolved_commit"] = owner_head
+    for row in bundle["responsibility_subjects"]:
+        row["resolved_commit"] = owner_head
+
+    files_path = paths["workspace"] / "files.jsonl"
+    inventory_rows = read_jsonl(files_path)
+    for row in inventory_rows:
+        if row["repository_key"] == "Cocolon":
+            row["source_commit"] = workspace_head
+    write_jsonl(files_path, inventory_rows)
+    inventory_sha = sha(files_path)
+    inventory_manifest_path = paths["workspace"] / "manifest.json"
+    inventory_manifest = json.loads(inventory_manifest_path.read_text())
+    inventory_manifest["repositories"]["Cocolon"] = {
+        "source_commit": workspace_head,
+        "source_tree": workspace_tree,
+    }
+    inventory_manifest["output_sha256"]["files.jsonl"] = inventory_sha
+    write_json(inventory_manifest_path, inventory_manifest)
+    code_manifest_path = (
+        paths["workspace"] / "code_index" / "code_index_manifest.json"
+    )
+    code_manifest = json.loads(code_manifest_path.read_text())
+    code_manifest["inventory_sha256"] = inventory_sha
+    write_json(code_manifest_path, code_manifest)
+    route_manifest_path = (
+        paths["workspace"] / "route_graph" / "route_graph_manifest.json"
+    )
+    route_manifest = json.loads(route_manifest_path.read_text())
+    route_manifest["inventory_sha256"] = inventory_sha
+    route_manifest["code_index_manifest_sha256"] = sha(code_manifest_path)
+    write_json(route_manifest_path, route_manifest)
+    bundle["task_dependency_fingerprint"] = canonical_owner_bundle_fingerprint(
+        bundle
+    )
+    return bundle
+
+
+def test_unit_b_emits_exact10_from_one_shared_model(tmp_path: Path) -> None:
+    _paths, _bundle, output = _compile_unit_b_fixture(tmp_path)
+    manifest = verify_task_context(output, expected_unit_b=True)
+    assert set(manifest["output_sha256"]) == {
+        "selected_files.jsonl",
+        "closure_edges.jsonl",
+        "required_category_coverage.json",
+        "unresolved_context.jsonl",
+        "full_text_read_order.md",
+        "cmee_context_overview.md",
+        "cmee_unincorporated_actual_findings.md",
+        "operator_context.json",
+        "pro_context.md",
+        "ultra_context.md",
+    }
+    summary = manifest["unit_b_work_context"]
+    assert summary["logical_output_count"] == 10
+    assert summary["status"] == "UNIT_B_WORK_CONTEXT_READY"
+    assert summary["operator_context_sha256"] == summary["projection_source_sha256"]
+    assert summary["operator_model_fingerprint"] == summary[
+        "projection_model_fingerprint"
+    ]
+    model = json.loads((output / "operator_context.json").read_text())
+    assert model["operator_v1"]["status"] == "V1_OPERATOR_CONTEXT_READY"
+    cards = model["decision_surface"]["pro_first_view_cards"]
+    assert [row["card_id"] for row in cards] == [
+        "TASK_ORIENTATION_AND_PRODUCT_CONNECTION",
+        "FRESHNESS_AND_BLOCKER",
+        "MASH_FIXED_CONDITIONS",
+        "CURRENT_PRODUCT_OWNER_AND_ROUTE",
+        "ORIGINALS_TO_READ_NOW",
+        "PRODUCT_ROUTE_FINDINGS_AND_CLAIM_BOUNDARY",
+        "UNRESOLVED_AND_HANDBACK",
+        "EFFECTS_STOP_AND_AUTOMATIC_PROGRESSION",
+    ]
+    purpose_claim = next(
+        row for row in model["claims"] if row["claim_kind"] == "PRODUCT_PURPOSE"
+    )
+    assert cards[0]["item_ids"] == [purpose_claim["claim_id"]]
+    assert cards[1]["item_ids"]
+    assert "SAME_REF" in cards[1]["reason_codes"]
+    assert model["budgets"]["PRO_KAREN"][
+        "first_view_observed_decision_items"
+    ] <= 12
+    assert {
+        row["endpoint_verification"]
+        for row in model["design_actual_test_connections"]
+    } == {"ALL_ENDPOINTS_VERIFIED"}
+    assert {row["verification_status"] for row in model["claims"]} == {
+        "DECLARED_SOURCE_LOCATOR",
+        "SOURCE_LOCATOR_VERIFIED",
+    }
+    assert sum(
+        row["verification_status"] == "DECLARED_SOURCE_LOCATOR"
+        for row in model["claims"]
+    ) == 2
+    route_claim = next(
+        row for row in model["claims"] if row["claim_kind"] == "PRODUCT_ROUTE"
+    )
+    assert route_claim["assertion_provenance"] == (
+        "KAREN_PROPOSAL_NOT_MASH_DECISION"
+    )
+    assert "WORKSPACE_INVENTORY_BLOB_IDENTITY" in route_claim["verified_scope"]
+    assert all(row["semantic_claim"] is False for row in model["design_actual_test_connections"])
+    assert all(row["product_quality_credit"] == 0 for row in model["design_actual_test_connections"])
+    assert not (output / "collaboration_packets.json").exists()
+    assert model["completion_claim"] is None
+    assert model["v1_activation"] == 0
+    assert model["product_credit"] == model["technical_credit"] == 0
+    assert model["automatic_progression"] is False
+    assert model["unit_c_started"] is False
+    pro_text = (output / "pro_context.md").read_text()
+    ultra_text = (output / "ultra_context.md").read_text()
+    assert "relation `SAME_REF`" in pro_text
+    assert "## Exact refs" in ultra_text
+    assert "## Required entry chain" in ultra_text
+    assert "## Conflict, provenance, and minimal readback" in ultra_text
+
+
+def test_unit_b_same_input_rerenders_byte_exact(tmp_path: Path) -> None:
+    paths = make_fixture(tmp_path / "repo")
+    _document, bundle = make_unit_b_v2_profile(paths)
+    first = tmp_path / "first"
+    second = tmp_path / "second"
+    for output in (first, second):
+        compile_task_context(
+            repo_root=paths["root"],
+            system_context_root=paths["system"],
+            workspace="cmee_working",
+            task="cmee",
+            task_profiles_path=paths["task_profiles"],
+            manual_overlay_path=None,
+            output_dir=output,
+            canonical_owner_bundle=bundle,
+        )
+    assert sorted(row.name for row in first.iterdir()) == sorted(
+        row.name for row in second.iterdir()
+    )
+    for row in first.iterdir():
+        assert row.read_bytes() == (second / row.name).read_bytes()
+
+
+def test_unit_b_pro_first_view_required_overflow_blocks_explicitly(
+    tmp_path: Path,
+) -> None:
+    paths = make_fixture(tmp_path / "repo")
+    document, bundle = make_unit_b_v2_profile(paths)
+    claims = document["tasks"]["cmee"]["operator_contract"]["claim_nodes"]
+    extra = json.loads(
+        json.dumps(
+            next(
+                row
+                for row in claims
+                if row["claim_kind"] == "MASH_FIXED_CONDITION"
+            )
+        )
+    )
+    extra["claim_id"] = "CLAIM.CMEE.TEST.MASH_FIXED_CONDITION.EXTRA"
+    extra["source_locator"]["locator_id"] = (
+        "LOC.CLAIM.CMEE.TEST.MASH_FIXED_CONDITION.EXTRA"
+    )
+    claims.append(extra)
+    write_json(paths["task_profiles"], document)
+    output = tmp_path / "pro-overflow"
+    compile_task_context(
+        repo_root=paths["root"],
+        system_context_root=paths["system"],
+        workspace="cmee_working",
+        task="cmee",
+        task_profiles_path=paths["task_profiles"],
+        manual_overlay_path=None,
+        output_dir=output,
+        canonical_owner_bundle=bundle,
+    )
+    manifest = verify_task_context(output, expected_unit_b=True)
+    model = json.loads((output / "operator_context.json").read_text())
+    pro_budget = model["budgets"]["PRO_KAREN"]
+    assert pro_budget["first_view_observed_decision_items"] > 12
+    assert "BUDGET_EXCEEDED_REQUIRED_SURFACE" in pro_budget["overflow_codes"]
+    assert model["operator_v1"]["status"] == "V1_OPERATOR_CONTEXT_BLOCKED"
+    assert manifest["unit_b_work_context"]["status"] == (
+        "UNIT_B_WORK_CONTEXT_BLOCKED"
+    )
+    assert "BUDGET_EXCEEDED_REQUIRED_SURFACE" in (
+        output / "pro_context.md"
+    ).read_text()
+
+
+def test_unit_b_pro_expanded_byte_overflow_stays_valid_blocked_context(
+    tmp_path: Path,
+) -> None:
+    paths = make_fixture(tmp_path / "repo")
+    document, bundle = make_unit_b_v2_profile(paths)
+    contract = document["tasks"]["cmee"]["operator_contract"]
+    for index, claim in enumerate(contract["claim_nodes"]):
+        claim["source_locator"]["path"] = (
+            f"long-claim-{index}/" + "a" * 980 + ".md"
+        )
+    for index, connection in enumerate(contract["connections"]):
+        connection["target_locator"]["path"] = (
+            f"long-connection-{index}/" + "b" * 975 + ".py"
+        )
+    write_json(paths["task_profiles"], document)
+    output = tmp_path / "pro-byte-overflow"
+    compile_task_context(
+        repo_root=paths["root"],
+        system_context_root=paths["system"],
+        workspace="cmee_working",
+        task="cmee",
+        task_profiles_path=paths["task_profiles"],
+        manual_overlay_path=None,
+        output_dir=output,
+        canonical_owner_bundle=bundle,
+    )
+    manifest = verify_task_context(output, expected_unit_b=True)
+    model = json.loads((output / "operator_context.json").read_text())
+    operator_sha = manifest["unit_b_work_context"]["operator_context_sha256"]
+    expanded = _render_pro_context(
+        model,
+        operator_sha,
+        collapse_overflow=False,
+    )
+    collapsed = (output / "pro_context.md").read_bytes()
+    assert len(expanded) > model["budgets"]["PRO_KAREN"]["first_view"][
+        "max_utf8_bytes"
+    ]
+    assert len(collapsed) <= model["budgets"]["PRO_KAREN"]["first_view"][
+        "max_utf8_bytes"
+    ]
+    assert "BUDGET_EXCEEDED_REQUIRED_SURFACE" in model["budgets"][
+        "PRO_KAREN"
+    ]["overflow_codes"]
+    assert model["operator_v1"]["status"] == "V1_OPERATOR_CONTEXT_BLOCKED"
+    assert manifest["unit_b_work_context"]["status"] == (
+        "UNIT_B_WORK_CONTEXT_BLOCKED"
+    )
+
+
+def test_unit_b_missing_claim_source_is_unresolved_and_blocked(
+    tmp_path: Path,
+) -> None:
+    paths = make_fixture(tmp_path / "repo")
+    document, bundle = make_unit_b_v2_profile(paths)
+    claim = next(
+        row
+        for row in document["tasks"]["cmee"]["operator_contract"]["claim_nodes"]
+        if row["claim_kind"] == "PRODUCT_PURPOSE"
+    )
+    claim["source_locator"]["path"] = "missing/product-purpose.md"
+    write_json(paths["task_profiles"], document)
+    output = tmp_path / "missing-claim"
+    compile_task_context(
+        repo_root=paths["root"],
+        system_context_root=paths["system"],
+        workspace="cmee_working",
+        task="cmee",
+        task_profiles_path=paths["task_profiles"],
+        manual_overlay_path=None,
+        output_dir=output,
+        canonical_owner_bundle=bundle,
+    )
+    manifest = verify_task_context(output, expected_unit_b=True)
+    model = json.loads((output / "operator_context.json").read_text())
+    projected = next(row for row in model["claims"] if row["claim_id"] == claim["claim_id"])
+    assert projected["verification_status"] == "UNRESOLVED"
+    assert manifest["unit_b_work_context"]["status"] == (
+        "UNIT_B_WORK_CONTEXT_BLOCKED"
+    )
+    assert any(
+        row["reason_code"] == "REQUIRED_CLAIM_SOURCE_UNRESOLVED"
+        and row["blocking"] is True
+        for row in model["unresolved_by_owner"]
+    )
+
+
+def test_unit_b_owner_ref_claim_uses_owner_identity_not_workspace_blob(
+    tmp_path: Path,
+) -> None:
+    paths = make_fixture(tmp_path / "repo")
+    document, bundle = make_unit_b_v2_profile(paths)
+    claim = next(
+        row
+        for row in document["tasks"]["cmee"]["operator_contract"]["claim_nodes"]
+        if row["claim_kind"] == "PRODUCT_ROUTE"
+    )
+    claim["source_locator"]["owner_id"] = "OWNER.CMEE.TEST"
+    claim["source_locator"]["remote_ref"] = "refs/heads/fixture-owner"
+    write_json(paths["task_profiles"], document)
+    output = tmp_path / "owner-ref-claim"
+    compile_task_context(
+        repo_root=paths["root"],
+        system_context_root=paths["system"],
+        workspace="cmee_working",
+        task="cmee",
+        task_profiles_path=paths["task_profiles"],
+        manual_overlay_path=None,
+        output_dir=output,
+        canonical_owner_bundle=bundle,
+    )
+    verify_task_context(output, expected_unit_b=True)
+    model = json.loads((output / "operator_context.json").read_text())
+    projected = next(row for row in model["claims"] if row["claim_id"] == claim["claim_id"])
+    assert projected["verification_status"] == "SOURCE_LOCATOR_VERIFIED"
+    assert "OWNER_REF_BLOB_IDENTITY" in projected["verified_scope"]
+    assert "OWNER_REF_FILE_IDENTITY" in projected["verified_scope"]
+    assert "WORKSPACE_INVENTORY_BLOB_IDENTITY" not in projected["verified_scope"]
+
+
+@pytest.mark.parametrize(
+    "remote_ref",
+    [
+        "refs/heads/fixture-owner",
+        "refs/heads/nonexistent-durable-decision",
+    ],
+)
+def test_unit_b_ownerless_durable_ref_stays_declarative_even_for_selected_blob(
+    tmp_path: Path, remote_ref: str
+) -> None:
+    paths = make_fixture(tmp_path / "repo")
+    document, bundle = make_unit_b_v2_profile(paths)
+    claim = next(
+        row
+        for row in document["tasks"]["cmee"]["operator_contract"]["claim_nodes"]
+        if row["claim_kind"] == "MASH_FIXED_CONDITION"
+    )
+    assert ("Cocolon", claim["source_locator"]["path"]) in paths["identity_by_path"]
+    assert "owner_id" not in claim["source_locator"]
+    claim["source_locator"]["remote_ref"] = remote_ref
+    write_json(paths["task_profiles"], document)
+    output = tmp_path / "ownerless-durable-claim"
+    compile_task_context(
+        repo_root=paths["root"],
+        system_context_root=paths["system"],
+        workspace="cmee_working",
+        task="cmee",
+        task_profiles_path=paths["task_profiles"],
+        manual_overlay_path=None,
+        output_dir=output,
+        canonical_owner_bundle=bundle,
+    )
+    manifest = verify_task_context(output, expected_unit_b=True)
+    model = json.loads((output / "operator_context.json").read_text())
+    projected = next(
+        row for row in model["claims"] if row["claim_id"] == claim["claim_id"]
+    )
+    assert projected["verification_status"] == "DECLARED_SOURCE_LOCATOR"
+    assert "DURABLE_PUBLIC_DECISION_LOCATOR" in projected["verified_scope"]
+    assert not {
+        "WORKSPACE_INVENTORY_BLOB_IDENTITY",
+        "WORKSPACE_INVENTORY_FILE_IDENTITY",
+        "OWNER_REF_BLOB_IDENTITY",
+        "OWNER_REF_FILE_IDENTITY",
+    }.intersection(projected["verified_scope"])
+    assert manifest["unit_b_work_context"]["status"] == "UNIT_B_WORK_CONTEXT_READY"
+
+
+def test_unit_b_connection_with_unknown_owner_does_not_use_workspace_blob(
+    tmp_path: Path,
+) -> None:
+    paths = make_fixture(tmp_path / "repo")
+    document, bundle = make_unit_b_v2_profile(paths)
+    connection = next(
+        row
+        for row in document["tasks"]["cmee"]["operator_contract"]["connections"]
+        if row["relation_kind"] == "IMPLEMENTED_BY_ACTUAL"
+    )
+    connection["target_locator"].update(
+        {
+            "owner_id": "OWNER.UNKNOWN.TEST",
+            "remote_ref": "refs/heads/fixture-owner",
+        }
+    )
+    write_json(paths["task_profiles"], document)
+    output = tmp_path / "unknown-connection-owner"
+    compile_task_context(
+        repo_root=paths["root"],
+        system_context_root=paths["system"],
+        workspace="cmee_working",
+        task="cmee",
+        task_profiles_path=paths["task_profiles"],
+        manual_overlay_path=None,
+        output_dir=output,
+        canonical_owner_bundle=bundle,
+    )
+    manifest = verify_task_context(output, expected_unit_b=True)
+    model = json.loads((output / "operator_context.json").read_text())
+    projected = next(
+        row
+        for row in model["design_actual_test_connections"]
+        if row["connection_id"] == connection["connection_id"]
+    )
+    assert projected["endpoint_verification"] != "ALL_ENDPOINTS_VERIFIED"
+    assert manifest["unit_b_work_context"]["status"] == (
+        "UNIT_B_WORK_CONTEXT_BLOCKED"
+    )
+
+
+def test_unit_b_named_endpoint_cannot_be_promoted_by_unbound_symbol_map_or_resign(
+    tmp_path: Path,
+) -> None:
+    paths = make_fixture(tmp_path / "repo")
+    document, bundle = make_unit_b_v2_profile(paths)
+    connection = next(
+        row
+        for row in document["tasks"]["cmee"]["operator_contract"]["connections"]
+        if row["relation_kind"] == "IMPLEMENTED_BY_ACTUAL"
+    )
+    named_endpoint = "sym:fixture.unproven.named.endpoint"
+    connection["target_symbol_or_route"] = named_endpoint
+    write_json(paths["task_profiles"], document)
+    output = tmp_path / "unproven-named-endpoint"
+    compile_task_context(
+        repo_root=paths["root"],
+        system_context_root=paths["system"],
+        workspace="cmee_working",
+        task="cmee",
+        task_profiles_path=paths["task_profiles"],
+        manual_overlay_path=None,
+        output_dir=output,
+        canonical_owner_bundle=bundle,
+    )
+    manifest = verify_task_context(output, expected_unit_b=True)
+    model = json.loads((output / "operator_context.json").read_text())
+    projected = next(
+        row
+        for row in model["design_actual_test_connections"]
+        if row["connection_id"] == connection["connection_id"]
+    )
+    assert projected["target_identity"] is not None
+    assert projected["endpoint_verification"] == "UNRESOLVED_RELATION"
+    assert projected["reason_code"] == "TARGET_SYMBOL_OR_ROUTE_UNRESOLVED"
+    assert "TARGET_SYMBOL_OR_ROUTE_IDENTITY" not in projected["verified_scope"]
+    assert manifest["unit_b_work_context"]["status"] == (
+        "UNIT_B_WORK_CONTEXT_BLOCKED"
+    )
+
+    selected = read_jsonl(output / "selected_files.jsonl")
+    records = {
+        row["identity"]: FileRecord(
+            identity=row["identity"],
+            repository_key=row["repository_key"],
+            path=row["path"],
+            source_commit=row["source_commit"],
+            blob_sha=row["blob_sha"],
+            content_sha256=row["content_sha256"],
+            size_bytes=row["size_bytes"],
+            inventory_classification=row["inventory_classification"],
+            raw=row,
+        )
+        for row in selected
+    }
+    rebuilt = build_work_context_model(
+        workspace="cmee_working",
+        task="cmee",
+        legacy_status=manifest["status"],
+        task_profile=document["tasks"]["cmee"],
+        premise_model=manifest["unit_a_premise_management"],
+        by_identity=records,
+        by_key={row.key: row for row in records.values()},
+        selected_rows=selected,
+        used_edges=read_jsonl(output / "closure_edges.jsonl"),
+        unresolved=read_jsonl(output / "unresolved_context.jsonl"),
+        task_dependency_fingerprint=bundle["task_dependency_fingerprint"],
+        workspace_refs=manifest["workspace_exact_refs"],
+        symbol_owner={named_endpoint: projected["target_identity"]},
+        route_owner={},
+    )
+    rebuilt_connection = next(
+        row
+        for row in rebuilt["design_actual_test_connections"]
+        if row["connection_id"] == connection["connection_id"]
+    )
+    assert rebuilt_connection["endpoint_verification"] == "UNRESOLVED_RELATION"
+    assert rebuilt_connection["reason_code"] == (
+        "TARGET_SYMBOL_OR_ROUTE_UNRESOLVED"
+    )
+
+    projected["endpoint_verification"] = "ALL_ENDPOINTS_VERIFIED"
+    projected["reason_code"] = "DECLARED_ENDPOINT_IDENTITIES_PRESENT"
+    projected["verified_scope"] = sorted(
+        set(projected["verified_scope"]) | {"TARGET_SYMBOL_OR_ROUTE_IDENTITY"}
+    )
+    verification_scope = next(
+        row
+        for row in model["verification_scopes"]
+        if row["source_id"] == connection["connection_id"]
+    )
+    verification_scope["verified_scope"] = list(projected["verified_scope"])
+    resign_unit_b_artifacts(output, model, manifest)
+    with pytest.raises(ContextCompileError, match="endpoint reason derivation"):
+        verify_task_context(output, expected_unit_b=True)
+
+
+def test_unit_b_manual_review_impact_is_valid_blocked_context(
+    tmp_path: Path,
+) -> None:
+    paths = make_fixture(tmp_path / "repo")
+    document, bundle = make_unit_b_v2_profile(paths)
+    contract = document["tasks"]["cmee"]["operator_contract"]
+    source = contract["scope_rules"][0]["source_locator"]
+    contract["scope_rules"].append(
+        {
+            "scope_rule_id": "SCOPE.CMEE.TEST.MANUAL_REVIEW",
+            "target_locator": {
+                "locator_id": "LOC.SCOPE.CMEE.TEST.MANUAL_REVIEW.TARGET",
+                "privacy": "PUBLIC",
+                "repository_key": "mashos-api",
+                "path": "private/external-gap.py",
+            },
+            "target_symbol_or_route": None,
+            "changeability": "PROTECTED_REVIEW_REQUIRED",
+            "required_approval": "MASH_MANUAL_REVIEW_REQUIRED",
+            "write_target": False,
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {
+                **source,
+                "locator_id": "LOC.SCOPE.CMEE.TEST.MANUAL_REVIEW.SOURCE",
+            },
+        }
+    )
+    write_json(paths["task_profiles"], document)
+    output = tmp_path / "manual-review"
+    compile_task_context(
+        repo_root=paths["root"],
+        system_context_root=paths["system"],
+        workspace="cmee_working",
+        task="cmee",
+        task_profiles_path=paths["task_profiles"],
+        manual_overlay_path=None,
+        output_dir=output,
+        canonical_owner_bundle=bundle,
+    )
+    manifest = verify_task_context(output, expected_unit_b=True)
+    model = json.loads((output / "operator_context.json").read_text())
+    assert any(row["impact_class"] == "MANUAL_REVIEW" for row in model["impact"])
+    assert model["completion_gates"]["manual_review_absent"] is False
+    assert manifest["unit_b_work_context"]["status"] == (
+        "UNIT_B_WORK_CONTEXT_BLOCKED"
+    )
+
+
+def test_unit_b_missing_required_test_blocks_with_exact_handback(
+    tmp_path: Path,
+) -> None:
+    paths = make_fixture(tmp_path / "repo")
+    document, bundle = make_unit_b_v2_profile(paths)
+    connection = next(
+        row
+        for row in document["tasks"]["cmee"]["operator_contract"]["connections"]
+        if row["relation_kind"] == "COVERED_BY_TEST_OR_CONTRACT"
+    )
+    connection["target_locator"]["path"] = "tests/protected/missing_contract.py"
+    write_json(paths["task_profiles"], document)
+    output = tmp_path / "missing-test-output"
+    compile_task_context(
+        repo_root=paths["root"],
+        system_context_root=paths["system"],
+        workspace="cmee_working",
+        task="cmee",
+        task_profiles_path=paths["task_profiles"],
+        manual_overlay_path=None,
+        output_dir=output,
+        canonical_owner_bundle=bundle,
+    )
+    manifest = verify_task_context(output, expected_unit_b=True)
+    model = json.loads((output / "operator_context.json").read_text())
+    missing = next(
+        row
+        for row in model["design_actual_test_connections"]
+        if row["connection_id"] == connection["connection_id"]
+    )
+    assert missing["endpoint_verification"] == "MISSING_ENDPOINT"
+    assert missing["reason_code"] == "TARGET_FILE_IDENTITY_MISSING"
+    assert manifest["unit_b_work_context"]["status"] == "UNIT_B_WORK_CONTEXT_BLOCKED"
+    assert model["operator_v1"]["status"] == "V1_OPERATOR_CONTEXT_BLOCKED"
+    assert any(
+        row["drift_code"] == "DECLARED_TEST_CONTRACT_OWNER_ROUTE_MISMATCH"
+        and row["required_owner_handback"] == "MASH"
+        for row in model["drift"]
+    )
+
+
+def test_unit_b_connected_target_without_explicit_scope_defaults_related_only(
+    tmp_path: Path,
+) -> None:
+    _paths, _bundle, output = _compile_unit_b_fixture(tmp_path)
+    model = json.loads((output / "operator_context.json").read_text())
+    route = next(
+        row
+        for row in model["design_actual_test_connections"]
+        if row["relation_kind"] == "EXPOSED_BY_ROUTE"
+    )
+    scope = next(
+        row
+        for row in model["scope_rules"]
+        if row["target_locator"]["path"] == route["target_locator"]["path"]
+    )
+    assert scope["changeability"] == "RELATED_NOT_WRITE_AUTHORIZED"
+    assert scope["write_target"] is False
+    assert scope["permission_claim"] is False
+
+
+def test_unit_b_unchanged_is_only_an_exact_blob_file_fact(tmp_path: Path) -> None:
+    paths = make_fixture(tmp_path / "repo")
+    document, bundle = make_unit_b_v2_profile(paths)
+    contract = document["tasks"]["cmee"]["operator_contract"]
+    contract["connections"] = []
+    contract["scope_rules"] = []
+    write_json(paths["task_profiles"], document)
+    output = tmp_path / "unchanged-output"
+    compile_task_context(
+        repo_root=paths["root"],
+        system_context_root=paths["system"],
+        workspace="cmee_working",
+        task="cmee",
+        task_profiles_path=paths["task_profiles"],
+        manual_overlay_path=None,
+        output_dir=output,
+        canonical_owner_bundle=bundle,
+    )
+    verify_task_context(output, expected_unit_b=True)
+    model = json.loads((output / "operator_context.json").read_text())
+    unchanged = [row for row in model["impact"] if row["impact_class"] == "UNCHANGED"]
+    assert unchanged
+    assert {row["reason_code"] for row in unchanged} == {
+        "EXACT_COMPARED_BLOB_IDENTITY_SAME_FILE_FACT_ONLY"
+    }
+    assert "NO_IMPACT" not in json.dumps(model, sort_keys=True)
+
+
+def test_unit_b_projection_or_model_tamper_is_rejected(tmp_path: Path) -> None:
+    _paths, _bundle, output = _compile_unit_b_fixture(tmp_path)
+    pro = output / "pro_context.md"
+    pro.write_bytes(pro.read_bytes() + b"forged-new-fact\n")
+    with pytest.raises(ContextCompileError, match="tamper"):
+        verify_task_context(output, expected_unit_b=True)
+
+
+def test_unit_b_recomputed_nested_permission_injection_is_rejected(
+    tmp_path: Path,
+) -> None:
+    _paths, _bundle, output = _compile_unit_b_fixture(tmp_path)
+    model = json.loads((output / "operator_context.json").read_text())
+    manifest = json.loads((output / "context_manifest.json").read_text())
+    model["scope_rules"][0]["implementation_permission"] = "GRANTED"
+    resign_unit_b_artifacts(output, model, manifest)
+    with pytest.raises(ContextCompileError, match="scope row keys mismatch"):
+        verify_task_context(output, expected_unit_b=True)
+
+
+def test_unit_b_resigned_extra_write_candidate_scope_is_rejected(
+    tmp_path: Path,
+) -> None:
+    _paths, _bundle, output = _compile_unit_b_fixture(tmp_path)
+    model = json.loads((output / "operator_context.json").read_text())
+    manifest = json.loads((output / "context_manifest.json").read_text())
+    source_scope = next(
+        row
+        for row in model["scope_rules"]
+        if row["scope_rule_id"] == "SCOPE.CMEE.TEST.ACTUAL"
+    )
+    forged_scope = {
+        **source_scope,
+        "scope_rule_id": "SCOPE.AAA.FORGED.WRITE",
+        "changeability": "ALLOWED_WRITE_CANDIDATE",
+        "required_approval": "SEPARATE_EXPLICIT_AUTHORIZATION_REQUIRED",
+        "write_target": True,
+        "assertion_provenance": "MACHINE_DISCOVERED",
+    }
+    model["scope_rules"].append(forged_scope)
+    model["scope_rules"].sort(key=lambda row: row["scope_rule_id"])
+    item = {
+        "priority": 4,
+        "stable_id": forged_scope["scope_rule_id"],
+        "required": False,
+        "repository_key": forged_scope["target_locator"]["repository_key"],
+        "path": forged_scope["target_locator"]["path"],
+        "graph_distance": 0,
+        "selection_tier": "DECISION_SURFACE",
+        "reason_codes": sorted(
+            {
+                forged_scope["changeability"],
+                forged_scope["required_approval"],
+            }
+        ),
+        "locator": forged_scope["target_locator"],
+    }
+    surface = model["decision_surface"]
+    surface["items"].append(item)
+    surface["items"].sort(
+        key=lambda row: (
+            row["priority"],
+            0 if row["required"] else 1,
+            row["graph_distance"]
+            if row["graph_distance"] is not None
+            else 10**9,
+            str(row["repository_key"] or ""),
+            str(row["path"] or ""),
+            row["stable_id"],
+        )
+    )
+    surface["full_candidate_count"] += 1
+    model["read_tiers"]["DECISION_SURFACE"] += 1
+    model["budgets"]["ULTRA_KAREN"]["observed_items"] += 1
+    resign_unit_b_artifacts(output, model, manifest)
+    with pytest.raises(ContextCompileError, match="scope rule exact set"):
+        verify_task_context(output, expected_unit_b=True)
+
+
+def test_unit_b_resigned_workspace_claim_owner_scope_injection_is_rejected(
+    tmp_path: Path,
+) -> None:
+    _paths, _bundle, output = _compile_unit_b_fixture(tmp_path)
+    model = json.loads((output / "operator_context.json").read_text())
+    manifest = json.loads((output / "context_manifest.json").read_text())
+    claim = next(
+        row
+        for row in model["claims"]
+        if row["source_locator"].get("owner_id") is None
+        and row["source_locator"].get("remote_ref") is None
+    )
+    claim["verified_scope"] = sorted(
+        set(claim["verified_scope"]) | {"OWNER_REF_BLOB_IDENTITY"}
+    )
+    scope = next(
+        row
+        for row in model["verification_scopes"]
+        if row["source_id"] == claim["claim_id"]
+    )
+    scope["verified_scope"] = list(claim["verified_scope"])
+    resign_unit_b_artifacts(output, model, manifest)
+    with pytest.raises(ContextCompileError, match="claim source derivation"):
+        verify_task_context(output, expected_unit_b=True)
+
+
+@pytest.mark.parametrize(
+    ("mutation", "message"),
+    [
+        ("claim_value", "profile declaration|claim declaration"),
+        ("direct_impact_reason", "impact reason"),
+    ],
+)
+def test_unit_b_resigned_semantic_model_tamper_is_rejected(
+    tmp_path: Path, mutation: str, message: str
+) -> None:
+    _paths, _bundle, output = _compile_unit_b_fixture(tmp_path)
+    model = json.loads((output / "operator_context.json").read_text())
+    manifest = json.loads((output / "context_manifest.json").read_text())
+    if mutation == "claim_value":
+        claim = next(
+            row
+            for row in model["claims"]
+            if row["claim_kind"] == "MASH_FIXED_CONDITION"
+        )
+        claim["asserted_value_code"] = "FIXTURE_FORGED_DECISION"
+    else:
+        direct = next(
+            row
+            for row in model["impact"]
+            if row["impact_class"] == "DIRECT"
+            and row["reason_code"] == "EXPLICIT_VERIFIED_CONNECTION"
+        )
+        direct["reason_code"] = "EXACT_OWNER_OR_WORKSPACE_CHANGED_PATH"
+    resign_unit_b_artifacts(output, model, manifest)
+    with pytest.raises(ContextCompileError, match=message):
+        verify_task_context(output, expected_unit_b=True)
+
+
+def test_unit_b_resigned_impact_and_readback_reordering_is_rejected(
+    tmp_path: Path,
+) -> None:
+    _paths, _bundle, output = _compile_unit_b_fixture(tmp_path)
+    model = json.loads((output / "operator_context.json").read_text())
+    manifest = json.loads((output / "context_manifest.json").read_text())
+    assert len(model["impact"]) > 1
+    assert len(model["minimal_readback"]) > 1
+    model["impact"].reverse()
+    model["minimal_readback"].reverse()
+    resign_unit_b_artifacts(output, model, manifest)
+    with pytest.raises(ContextCompileError, match="impact canonical order"):
+        verify_task_context(output, expected_unit_b=True)
+
+
+def test_unit_b_resigned_decision_reason_tamper_is_rejected(
+    tmp_path: Path,
+) -> None:
+    _paths, _bundle, output = _compile_unit_b_fixture(tmp_path)
+    model = json.loads((output / "operator_context.json").read_text())
+    manifest = json.loads((output / "context_manifest.json").read_text())
+    visible_ids = {
+        item_id
+        for card in model["decision_surface"]["pro_first_view_cards"]
+        for item_id in card["item_ids"]
+    }
+    premise = next(
+        row
+        for row in model["decision_surface"]["items"]
+        if row["stable_id"].startswith("PREMISE.")
+        and row["stable_id"] not in visible_ids
+    )
+    premise["reason_codes"] = ["FORGED_REASON_CODE"]
+    resign_unit_b_artifacts(output, model, manifest)
+    with pytest.raises(
+        ContextCompileError, match="decision surface derivation mismatch"
+    ):
+        verify_task_context(output, expected_unit_b=True)
+
+
+def test_unit_b_resigned_mash_card_erasure_is_rejected(
+    tmp_path: Path,
+) -> None:
+    _paths, _bundle, output = _compile_unit_b_fixture(tmp_path)
+    model = json.loads((output / "operator_context.json").read_text())
+    manifest = json.loads((output / "context_manifest.json").read_text())
+    card = next(
+        row
+        for row in model["decision_surface"]["pro_first_view_cards"]
+        if row["card_id"] == "MASH_FIXED_CONDITIONS"
+    )
+    assert card["item_ids"]
+    card.update(
+        item_ids=[],
+        source_item_count=0,
+        locators=[],
+        additional_count=0,
+        reason_codes=["NO_MASH_FIXED_CONDITION"],
+        additional_reason_count=0,
+    )
+    visible_ids = {
+        item_id
+        for row in model["decision_surface"]["pro_first_view_cards"]
+        for item_id in row["item_ids"]
+    }
+    model["budgets"]["PRO_KAREN"]["observed_items"] = len(visible_ids)
+    model["budgets"]["PRO_KAREN"]["first_view_observed_decision_items"] = len(
+        visible_ids
+    )
+    resign_unit_b_artifacts(output, model, manifest)
+    with pytest.raises(
+        ContextCompileError, match="decision surface derivation mismatch"
+    ):
+        verify_task_context(output, expected_unit_b=True)
+
+
+def test_unit_b_diverged_freshness_is_projected_and_card_erasure_is_rejected(
+    tmp_path: Path,
+) -> None:
+    paths = make_fixture(tmp_path / "repo")
+    _document, bundle = make_unit_b_v2_profile(paths)
+    bundle = make_diverged_unit_b_bundle(paths, bundle)
+    output = tmp_path / "diverged-output"
+    compile_task_context(
+        repo_root=paths["root"],
+        system_context_root=paths["system"],
+        workspace="cmee_working",
+        task="cmee",
+        task_profiles_path=paths["task_profiles"],
+        manual_overlay_path=None,
+        output_dir=output,
+        canonical_owner_bundle=bundle,
+    )
+    manifest = verify_task_context(output, expected_unit_b=True)
+    model = json.loads((output / "operator_context.json").read_text())
+    assert [row["relation"] for row in model["freshness"]] == ["DIVERGED"]
+    assert "DIVERGED" in (output / "pro_context.md").read_text()
+    card = next(
+        row
+        for row in model["decision_surface"]["pro_first_view_cards"]
+        if row["card_id"] == "FRESHNESS_AND_BLOCKER"
+    )
+    assert card["reason_codes"] == ["DIVERGED", "READ_ONLY_EXACT_REF_RESOLVED"]
+    assert card["item_ids"]
+    card.update(
+        item_ids=[],
+        source_item_count=0,
+        locators=[],
+        additional_count=0,
+        reason_codes=["FRESHNESS_READY_NO_BLOCKER"],
+        additional_reason_count=0,
+    )
+    visible_ids = {
+        item_id
+        for row in model["decision_surface"]["pro_first_view_cards"]
+        for item_id in row["item_ids"]
+    }
+    model["budgets"]["PRO_KAREN"]["observed_items"] = len(visible_ids)
+    model["budgets"]["PRO_KAREN"][
+        "first_view_observed_decision_items"
+    ] = len(visible_ids)
+    resign_unit_b_artifacts(output, model, manifest)
+    with pytest.raises(
+        ContextCompileError, match="decision surface derivation mismatch"
+    ):
+        verify_task_context(output, expected_unit_b=True)
+
+
+def test_unit_b_resigned_freshness_set_erasure_is_rejected(
+    tmp_path: Path,
+) -> None:
+    _paths, _bundle, output = _compile_unit_b_fixture(tmp_path)
+    model = json.loads((output / "operator_context.json").read_text())
+    manifest = json.loads((output / "context_manifest.json").read_text())
+    surface = model["decision_surface"]
+    assert len(model["freshness"]) == 1
+    assert surface["additional_candidate_count"] == 0
+    freshness_card = next(
+        row
+        for row in surface["pro_first_view_cards"]
+        if row["card_id"] == "FRESHNESS_AND_BLOCKER"
+    )
+    assert freshness_card["source_item_count"] == 1
+    freshness_ids = set(freshness_card["item_ids"])
+    freshness_items = [
+        row for row in surface["items"] if row["stable_id"] in freshness_ids
+    ]
+    assert len(freshness_items) == 1
+    model["freshness"] = []
+    surface["items"] = [
+        row for row in surface["items"] if row["stable_id"] not in freshness_ids
+    ]
+    surface["full_candidate_count"] -= len(freshness_items)
+    surface["required_item_count"] -= sum(
+        row["required"] for row in freshness_items
+    )
+    freshness_card.update(
+        item_ids=[],
+        source_item_count=0,
+        locators=[],
+        additional_count=0,
+        reason_codes=["FRESHNESS_READY_NO_BLOCKER"],
+        additional_reason_count=0,
+    )
+    visible_ids = {
+        item_id
+        for row in surface["pro_first_view_cards"]
+        for item_id in row["item_ids"]
+    }
+    model["budgets"]["PRO_KAREN"]["observed_items"] = len(visible_ids)
+    model["budgets"]["PRO_KAREN"][
+        "first_view_observed_decision_items"
+    ] = len(visible_ids)
+    resign_unit_b_artifacts(output, model, manifest)
+    with pytest.raises(ContextCompileError, match="freshness"):
+        verify_task_context(output, expected_unit_b=True)
+
+
+def test_unit_b_resigned_minimal_readback_erasure_is_rejected(
+    tmp_path: Path,
+) -> None:
+    _paths, _bundle, output = _compile_unit_b_fixture(tmp_path)
+    model = json.loads((output / "operator_context.json").read_text())
+    manifest = json.loads((output / "context_manifest.json").read_text())
+    assert model["minimal_readback"]
+    model["minimal_readback"] = []
+    resign_unit_b_artifacts(output, model, manifest)
+    with pytest.raises(ContextCompileError, match="minimal readback"):
+        verify_task_context(output, expected_unit_b=True)
+
+
+def test_unit_b_resigned_nonblocking_handback_injection_is_rejected(
+    tmp_path: Path,
+) -> None:
+    _paths, _bundle, output = _compile_unit_b_fixture(tmp_path)
+    model = json.loads((output / "operator_context.json").read_text())
+    manifest = json.loads((output / "context_manifest.json").read_text())
+    model["unresolved_by_owner"].append(
+        {
+            "owner": "MASH",
+            "reason_code": "FORGED_NONBLOCKING_HANDOFF",
+            "source_id": "FORGED.SOURCE",
+            "blocking": False,
+        }
+    )
+    model["unresolved_by_owner"].sort(
+        key=lambda row: (row["owner"], row["reason_code"], row["source_id"])
+    )
+    resign_unit_b_artifacts(output, model, manifest)
+    with pytest.raises(ContextCompileError, match="unresolved handback"):
+        verify_task_context(output, expected_unit_b=True)
+
+
+def test_unit_b_resigned_legacy_context_count_tamper_is_rejected(
+    tmp_path: Path,
+) -> None:
+    _paths, _bundle, output = _compile_unit_b_fixture(tmp_path)
+    model = json.loads((output / "operator_context.json").read_text())
+    manifest = json.loads((output / "context_manifest.json").read_text())
+    model["legacy_context"]["selected_file_count"] += 1
+    resign_unit_b_artifacts(output, model, manifest)
+    with pytest.raises(ContextCompileError, match="legacy context"):
+        verify_task_context(output, expected_unit_b=True)
+
+
+def test_unit_b_resigned_drift_erasure_is_rejected_by_exact_derivation(
+    tmp_path: Path,
+) -> None:
+    paths = make_fixture(tmp_path / "repo")
+    document, bundle = make_unit_b_v2_profile(paths)
+    connection = next(
+        row
+        for row in document["tasks"]["cmee"]["operator_contract"]["connections"]
+        if row["relation_kind"] == "COVERED_BY_TEST_OR_CONTRACT"
+    )
+    connection["target_locator"]["path"] = "tests/protected/missing_contract.py"
+    write_json(paths["task_profiles"], document)
+    output = tmp_path / "drift-erasure"
+    compile_task_context(
+        repo_root=paths["root"],
+        system_context_root=paths["system"],
+        workspace="cmee_working",
+        task="cmee",
+        task_profiles_path=paths["task_profiles"],
+        manual_overlay_path=None,
+        output_dir=output,
+        canonical_owner_bundle=bundle,
+    )
+    model = json.loads((output / "operator_context.json").read_text())
+    manifest = json.loads((output / "context_manifest.json").read_text())
+    assert model["drift"]
+    model["drift"] = []
+    model["unresolved_by_owner"] = []
+    for gate in (
+        "unit_a_premise_model_ready",
+        "claim_provenance_valid",
+        "required_claim_sources_resolved",
+        "required_connections_verified",
+        "scope_default_applied",
+        "pro_first_view_budget_pass",
+        "ultra_budget_pass",
+        "manual_review_absent",
+        "shared_model_projection_binding_required",
+    ):
+        model["completion_gates"][gate] = True
+    model["operator_v1"]["status"] = "V1_OPERATOR_CONTEXT_READY"
+    model["operator_v1"]["unit_b_status"] = "UNIT_B_WORK_CONTEXT_READY"
+    manifest["unit_b_work_context"]["status"] = "UNIT_B_WORK_CONTEXT_READY"
+    resign_unit_b_artifacts(output, model, manifest)
+    with pytest.raises(
+        ContextCompileError, match="drift exact set derivation mismatch"
+    ):
+        verify_task_context(output, expected_unit_b=True)
+
+
+def test_unit_b_resigned_fake_budget_overflow_is_rejected_by_observation(
+    tmp_path: Path,
+) -> None:
+    _paths, _bundle, output = _compile_unit_b_fixture(tmp_path)
+    model = json.loads((output / "operator_context.json").read_text())
+    manifest = json.loads((output / "context_manifest.json").read_text())
+    assert model["budgets"]["PRO_KAREN"]["overflow_codes"] == []
+    model["budgets"]["PRO_KAREN"]["overflow_codes"] = [
+        "BUDGET_EXCEEDED_REQUIRED_SURFACE"
+    ]
+    model["completion_gates"]["pro_first_view_budget_pass"] = False
+    model["operator_v1"]["status"] = "V1_OPERATOR_CONTEXT_BLOCKED"
+    model["operator_v1"]["unit_b_status"] = "UNIT_B_WORK_CONTEXT_BLOCKED"
+    manifest["unit_b_work_context"]["status"] = "UNIT_B_WORK_CONTEXT_BLOCKED"
+    model["unresolved_by_owner"] = [
+        {
+            "owner": "MASH",
+            "reason_code": "BUDGET_EXCEEDED_REQUIRED_SURFACE",
+            "source_id": "UNIT_B.BUDGET_EXCEEDED_REQUIRED_SURFACE",
+            "blocking": True,
+        }
+    ]
+    resign_unit_b_artifacts(output, model, manifest)
+    with pytest.raises(ContextCompileError, match="observed role budget mismatch"):
+        verify_task_context(output, expected_unit_b=True)
+
+
+def test_unit_b_rename_drift_requires_exact_diff_and_remote_gap_is_not_path_missing(
+    tmp_path: Path,
+) -> None:
+    paths, bundle, output = _compile_unit_b_fixture(tmp_path)
+    manifest = json.loads((output / "context_manifest.json").read_text())
+    premise_model = manifest["unit_a_premise_management"]
+    owner_path = "Cocolon_前提資料/current_structure/04_cmee_current_structure.md"
+    premise_model["owners"][0]["owner_side_changes"] = [
+        {
+            "git_status": "R100",
+            "status": "RENAMED",
+            "old_path": owner_path,
+            "new_path": "Cocolon_前提資料/current_structure/04_cmee_current_structure_v2.md",
+        }
+    ]
+    premise_model["owners"][0]["owner_side_changed_paths"] = [
+        "Cocolon_前提資料/current_structure/04_cmee_current_structure_v2.md"
+    ]
+    selected = read_jsonl(output / "selected_files.jsonl")
+    records = {
+        row["identity"]: FileRecord(
+            identity=row["identity"],
+            repository_key=row["repository_key"],
+            path=row["path"],
+            source_commit=row["source_commit"],
+            blob_sha=row["blob_sha"],
+            content_sha256=row["content_sha256"],
+            size_bytes=row["size_bytes"],
+            inventory_classification=row["inventory_classification"],
+            raw=row,
+        )
+        for row in selected
+    }
+    by_key = {row.key: row for row in records.values()}
+    profile = json.loads(paths["task_profiles"].read_text())["tasks"]["cmee"]
+    common = {
+        "workspace": "cmee_working",
+        "task": "cmee",
+        "legacy_status": manifest["status"],
+        "task_profile": profile,
+        "by_identity": records,
+        "by_key": by_key,
+        "selected_rows": selected,
+        "used_edges": read_jsonl(output / "closure_edges.jsonl"),
+        "unresolved": read_jsonl(output / "unresolved_context.jsonl"),
+        "task_dependency_fingerprint": bundle["task_dependency_fingerprint"],
+        "workspace_refs": manifest["workspace_exact_refs"],
+        "symbol_owner": {},
+        "route_owner": {},
+    }
+    renamed = build_work_context_model(premise_model=premise_model, **common)
+    rename_drift = next(
+        row
+        for row in renamed["drift"]
+        if row["drift_code"] == "OWNER_PATH_RENAMED_OR_DELETED"
+    )
+    assert rename_drift["evidence_locator"]["path"] == owner_path
+    deleted = json.loads(json.dumps(premise_model))
+    deleted["owners"][0]["owner_side_changes"] = [
+        {
+            "git_status": "D",
+            "status": "DELETED",
+            "old_path": owner_path,
+            "new_path": None,
+        }
+    ]
+    deleted["owners"][0]["owner_side_changed_paths"] = [owner_path]
+    deleted_model = build_work_context_model(
+        premise_model=deleted, **common
+    )
+    deletion_drift = next(
+        row
+        for row in deleted_model["drift"]
+        if row["drift_code"] == "OWNER_PATH_RENAMED_OR_DELETED"
+    )
+    assert deletion_drift["evidence_locator"]["path"] == owner_path
+    assert deletion_drift["impact_class"] == "MANUAL_REVIEW"
+    assert deletion_drift["required_owner_handback"] == "MASH"
+    remote_gap = json.loads(json.dumps(premise_model))
+    remote_gap["premises"][0]["status"] = "UNRESOLVED"
+    remote_gap["premises"][0]["reason_code"] = "REQUIRED_PREMISE_OWNER_UNRESOLVED"
+    unresolved_model = build_work_context_model(
+        premise_model=remote_gap, **common
+    )
+    assert not any(
+        row["drift_code"] == "OWNER_PATH_MISSING"
+        and row["subject_id"] == remote_gap["premises"][0]["premise_id"]
+        for row in unresolved_model["drift"]
+    )
+
+
+@pytest.mark.parametrize(
+    ("mutation", "message"),
+    [
+        ("dangling_claim", "dangling claim"),
+        ("unknown_scope", "unsupported"),
+        ("private_body", "unsupported field|private field"),
+        ("forged_mash_provenance", "Mash explicit decision"),
+    ],
+)
+def test_unit_b_invalid_contract_fails_closed(
+    tmp_path: Path, mutation: str, message: str
+) -> None:
+    paths = make_fixture(tmp_path / "repo")
+    document, _bundle = make_unit_b_v2_profile(paths)
+    contract = document["tasks"]["cmee"]["operator_contract"]
+    if mutation == "dangling_claim":
+        contract["connections"][0]["source_claim_id"] = "CLAIM.MISSING"
+    elif mutation == "unknown_scope":
+        contract["scope_rules"][0]["changeability"] = "NO_IMPACT"
+    elif mutation == "forged_mash_provenance":
+        claim = next(
+            row
+            for row in contract["claim_nodes"]
+            if row["claim_kind"] == "ZERO_EFFECT_BOUNDARY"
+        )
+        claim["asserted_by"] = "Karen"
+        claim["source_locator"].pop("remote_ref")
+    else:
+        contract["claim_nodes"][0]["source_locator"]["body"] = "private"
+    with pytest.raises(ContextCompileError, match=message):
+        _task_profile(document, "cmee")
 
 
 def test_unit_a_stale_bundle_workspace_commit_cannot_follow_later_checkout(
@@ -1542,6 +3046,10 @@ def test_repository_task_profile_has_exact10_and_exact_external_assets() -> None
         "canonical_owner_refs",
         "required_premises",
         "document_responsibilities",
+        "claim_nodes",
+        "connections",
+        "scope_rules",
+        "role_views",
     }
     assert len(contract["canonical_owner_refs"]) == 1
     owner = contract["canonical_owner_refs"][0]
@@ -1561,6 +3069,16 @@ def test_repository_task_profile_has_exact10_and_exact_external_assets() -> None
     assert len(responsibilities) == 21
     assert len({row["responsibility_id"] for row in responsibilities}) == 21
     assert all(not row["supersedes"] and not row["superseded_by"] for row in responsibilities)
+    assert {row["claim_kind"] for row in contract["claim_nodes"]} == {
+        "PRODUCT_PURPOSE",
+        "MASH_FIXED_CONDITION",
+        "PRODUCT_ROUTE",
+        "CURRENT_PRODUCT_OWNER",
+        "ZERO_EFFECT_BOUNDARY",
+    }
+    assert len(contract["connections"]) == 5
+    assert len(contract["scope_rules"]) == 3
+    assert set(contract["role_views"]) == {"PRO_KAREN", "ULTRA_KAREN"}
     nls_responsibility = next(
         row for row in responsibilities
         if row["subject_locator"]["path"].endswith(

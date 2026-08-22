@@ -43,6 +43,11 @@ OUTPUT_NAMES = (
     "cmee_context_overview.md",
     "cmee_unincorporated_actual_findings.md",
 )
+UNIT_B_OUTPUT_NAMES = OUTPUT_NAMES + (
+    "operator_context.json",
+    "pro_context.md",
+    "ultra_context.md",
+)
 UNIT_A_MANIFEST_KEYS = frozenset(
     {
         "schema_version",
@@ -65,6 +70,7 @@ UNIT_A_MANIFEST_KEYS = frozenset(
         "unit_a_premise_management",
     }
 )
+UNIT_B_MANIFEST_KEYS = UNIT_A_MANIFEST_KEYS | frozenset({"unit_b_work_context"})
 UNIT_A_INPUT_SHA_KEYS = frozenset(
     {
         "step1_manifest",
@@ -78,6 +84,9 @@ UNIT_A_INPUT_SHA_KEYS = frozenset(
         "owner_bundle",
         "unit_a_model",
     }
+)
+UNIT_B_INPUT_SHA_KEYS = UNIT_A_INPUT_SHA_KEYS | frozenset(
+    {"operator_model", "operator_context"}
 )
 UNIT_A_COMPLETION_GATE_KEYS = frozenset(
     {
@@ -439,6 +448,179 @@ OPERATOR_CONTRACT_ALLOWED_KEYS = frozenset(
 )
 OPERATOR_CONTRACT_UNIT_A_KEYS = frozenset(
     {"canonical_owner_refs", "required_premises", "document_responsibilities"}
+)
+OPERATOR_CONTRACT_UNIT_B_KEYS = OPERATOR_CONTRACT_UNIT_A_KEYS | frozenset(
+    {"claim_nodes", "connections", "scope_rules", "role_views"}
+)
+CLAIM_KINDS = frozenset(
+    {
+        "PRODUCT_PURPOSE",
+        "MASH_FIXED_CONDITION",
+        "PRODUCT_ROUTE",
+        "CURRENT_PRODUCT_OWNER",
+        "ZERO_EFFECT_BOUNDARY",
+    }
+)
+ADOPTION_STATES = frozenset(
+    {
+        "DECIDED_UNREFLECTED",
+        "DESIGN_REFLECTED_NOT_IMPLEMENTED",
+        "IMPLEMENTED_NOT_ACCEPTED",
+        "ACCEPTED_CURRENT",
+        "SUPERSEDED",
+        "KAREN_PROPOSAL_NOT_MASH_DECISION",
+        "UNRESOLVED",
+    }
+)
+CLAIM_VERIFICATION_STATUSES = frozenset(
+    {
+        "DECLARED_SOURCE_LOCATOR",
+        "SOURCE_LOCATOR_VERIFIED",
+        "UNRESOLVED",
+    }
+)
+CLAIM_DECLARED_VERIFIED_SCOPES = frozenset(
+    {
+        "PUBLIC_SOURCE_LOCATOR",
+        "DURABLE_PUBLIC_DECISION_LOCATOR",
+        "PUBLIC_OWNER_LOCATOR",
+    }
+)
+CLAIM_MACHINE_VERIFIED_SCOPES = frozenset(
+    {
+        "WORKSPACE_INVENTORY_BLOB_IDENTITY",
+        "WORKSPACE_INVENTORY_FILE_IDENTITY",
+        "OWNER_REF_BLOB_IDENTITY",
+        "OWNER_REF_FILE_IDENTITY",
+    }
+)
+CONNECTION_RELATIONS = frozenset(
+    {
+        "CONSTRAINS_PRODUCT_PURPOSE",
+        "REFLECTED_BY_DESIGN",
+        "IMPLEMENTED_BY_ACTUAL",
+        "COVERED_BY_TEST_OR_CONTRACT",
+        "EXPOSED_BY_ROUTE",
+        "SUPERSEDES",
+    }
+)
+ENDPOINT_VERIFICATION_STATUSES = frozenset(
+    {
+        "ALL_ENDPOINTS_VERIFIED",
+        "MISSING_ENDPOINT",
+        "STALE_REF",
+        "UNRESOLVED_RELATION",
+    }
+)
+CHANGEABILITY = frozenset(
+    {
+        "ALLOWED_WRITE_CANDIDATE",
+        "PROTECTED_REVIEW_REQUIRED",
+        "FORBIDDEN",
+        "REVIEW_ONLY_EXTERNAL",
+        "RELATED_NOT_WRITE_AUTHORIZED",
+        "UNRESOLVED",
+    }
+)
+IMPACT_CLASSES = frozenset({"DIRECT", "PROBABLE", "UNCHANGED", "MANUAL_REVIEW"})
+DRIFT_CODES = frozenset(
+    {
+        "OWNER_PATH_MISSING",
+        "OWNER_PATH_RENAMED_OR_DELETED",
+        "EXPLICIT_RETIRED_ROUTE_STILL_ACTIVE",
+        "DECLARED_TEST_CONTRACT_OWNER_ROUTE_MISMATCH",
+        "DESIGN_ONLY_CLASSIFIED_AS_RUNTIME_ACTUAL",
+        "OWNER_OWNED_PATH_CHANGED_AFTER_INTEGRATION",
+    }
+)
+PRO_FIRST_VIEW_CARDS = (
+    "TASK_ORIENTATION_AND_PRODUCT_CONNECTION",
+    "FRESHNESS_AND_BLOCKER",
+    "MASH_FIXED_CONDITIONS",
+    "CURRENT_PRODUCT_OWNER_AND_ROUTE",
+    "ORIGINALS_TO_READ_NOW",
+    "PRODUCT_ROUTE_FINDINGS_AND_CLAIM_BOUNDARY",
+    "UNRESOLVED_AND_HANDBACK",
+    "EFFECTS_STOP_AND_AUTOMATIC_PROGRESSION",
+)
+CLAIM_ROW_KEYS = frozenset(
+    {
+        "claim_id",
+        "claim_kind",
+        "asserted_value_code",
+        "asserted_by",
+        "decision_owner",
+        "assertion_provenance",
+        "source_locator",
+        "adoption_state",
+        "claim_boundary",
+        "verification_status",
+        "verified_scope",
+    }
+)
+CONNECTION_ROW_KEYS = frozenset(
+    {
+        "connection_id",
+        "source_claim_id",
+        "relation_kind",
+        "target_locator",
+        "target_symbol_or_route",
+        "required",
+        "assertion_provenance",
+        "endpoint_verification",
+        "verified_scope",
+    }
+)
+SCOPE_RULE_ROW_KEYS = frozenset(
+    {
+        "scope_rule_id",
+        "target_locator",
+        "target_symbol_or_route",
+        "changeability",
+        "required_approval",
+        "write_target",
+        "assertion_provenance",
+        "source_locator",
+    }
+)
+ROLE_VIEW_COMMON_KEYS = frozenset(
+    {
+        "max_items",
+        "max_referenced_source_bytes",
+        "max_reasons_per_item",
+        "max_projection_utf8_bytes",
+    }
+)
+PRO_ROLE_VIEW_KEYS = ROLE_VIEW_COMMON_KEYS | frozenset({"first_view"})
+PRO_FIRST_VIEW_POLICY_KEYS = frozenset(
+    {
+        "card_order",
+        "max_decision_items",
+        "max_reasons_per_item",
+        "max_utf8_bytes",
+        "max_locators_per_card",
+    }
+)
+UNIT_B_WORK_CONTEXT_KEYS = frozenset(
+    {
+        "schema_version",
+        "status",
+        "temporary_candidate",
+        "logical_output_count",
+        "operator_context_sha256",
+        "operator_model_fingerprint",
+        "projection_source_sha256",
+        "projection_model_fingerprint",
+        "pro_context_sha256",
+        "ultra_context_sha256",
+        "collaboration_output_present",
+        "unit_c_started",
+        "completion_claim",
+        "v1_activation",
+        "product_credit",
+        "technical_credit",
+        "automatic_progression",
+    }
 )
 V2_DOCUMENT_KEYS = frozenset(
     {"schema_version", "persistent_primary_task", "tasks"}
@@ -937,6 +1119,73 @@ def _require_safe_code(value: Any, field: str) -> str:
     return _require_safe_public_id(value, field)
 
 
+def _require_safe_actor(value: Any, field: str) -> str:
+    if (
+        type(value) is not str
+        or not re.fullmatch(r"[A-Za-z][A-Za-z0-9_.:-]{0,127}", value)
+    ):
+        raise ContextCompileError(f"unsafe {field}")
+    _reject_sensitive_public_text(value)
+    return value
+
+
+def _require_safe_symbol_or_route(value: Any, field: str) -> str:
+    if (
+        type(value) is not str
+        or not value
+        or len(value.encode("utf-8")) > 1024
+        or unicodedata.normalize("NFC", value) != value
+        or any(ord(char) < 32 or ord(char) == 127 for char in value)
+    ):
+        raise ContextCompileError(f"unsafe {field}")
+    _reject_sensitive_public_text(value)
+    return value
+
+
+def _require_public_code_list(
+    value: Any, field: str, *, maximum: int = 64
+) -> list[str]:
+    if (
+        not isinstance(value, list)
+        or len(value) > maximum
+        or any(type(item) is not str for item in value)
+    ):
+        raise ContextCompileError(f"{field} must be a bounded code list")
+    normalized = [_require_safe_code(item, field) for item in value]
+    if normalized != sorted(set(normalized)):
+        raise ContextCompileError(f"{field} must be sorted and unique")
+    return normalized
+
+
+def _require_public_identity_list(
+    value: Any,
+    field: str,
+    *,
+    maximum: int = 4096,
+    require_sorted: bool = True,
+) -> list[str]:
+    if (
+        not isinstance(value, list)
+        or len(value) > maximum
+        or any(type(item) is not str for item in value)
+    ):
+        raise ContextCompileError(f"{field} must be a bounded identity list")
+    for item in value:
+        if (
+            not item
+            or len(item.encode("utf-8")) > 1024
+            or unicodedata.normalize("NFC", item) != item
+            or any(ord(char) < 32 or ord(char) == 127 for char in item)
+        ):
+            raise ContextCompileError(f"unsafe {field}")
+        _reject_sensitive_public_text(item)
+    if len(value) != len(set(value)) or (
+        require_sorted and value != sorted(value)
+    ):
+        raise ContextCompileError(f"{field} must be unique and deterministically ordered")
+    return value
+
+
 def _validate_public_expected_value(value: Any, field: str) -> None:
     if isinstance(value, list):
         if len(value) > 64:
@@ -1149,10 +1398,14 @@ def _validate_v2_task_profile_document(
         raise ContextCompileError("task_orientation exceeds 2 KiB")
     _reject_sensitive_public_text(orientation)
     contract = profile.get("operator_contract")
-    if not isinstance(contract, dict) or set(contract) != OPERATOR_CONTRACT_UNIT_A_KEYS:
+    if not isinstance(contract, dict) or set(contract) not in {
+        OPERATOR_CONTRACT_UNIT_A_KEYS,
+        OPERATOR_CONTRACT_UNIT_B_KEYS,
+    }:
         raise ContextCompileError(
-            "operator_contract must contain Unit A exact3 only"
+            "operator_contract must contain Unit A exact3 or Unit B exact7"
         )
+    is_unit_b = set(contract) == OPERATOR_CONTRACT_UNIT_B_KEYS
     for key in OPERATOR_CONTRACT_UNIT_A_KEYS:
         if not isinstance(contract[key], list):
             raise ContextCompileError(f"operator_contract.{key} must be a list")
@@ -1175,6 +1428,18 @@ def _validate_v2_task_profile_document(
                 "CMEE Unit A requires canonical owner/premise/responsibility "
                 "exact1/exact7/exact21"
             )
+    if is_unit_b:
+        for key in ("claim_nodes", "connections", "scope_rules"):
+            if not isinstance(contract[key], list):
+                raise ContextCompileError(f"operator_contract.{key} must be a list")
+        if not isinstance(contract["role_views"], dict):
+            raise ContextCompileError("operator_contract.role_views must be an object")
+        if len(contract["claim_nodes"]) > 1024:
+            raise ContextCompileError("claim_nodes exceeds 1024 rows")
+        if len(contract["connections"]) > 2048:
+            raise ContextCompileError("connections exceeds 2048 rows")
+        if len(contract["scope_rules"]) > 1024:
+            raise ContextCompileError("scope_rules exceeds 1024 rows")
 
     owner_ids: set[str] = set()
     owner_repository_by_id: dict[str, str] = {}
@@ -1436,6 +1701,223 @@ def _validate_v2_task_profile_document(
                 f"required premise has dangling responsibility: {premise['premise_id']}"
             )
     _validate_supersession_graph(responsibilities)
+    if is_unit_b:
+        claim_ids: set[str] = set()
+        observed_claim_kinds: set[str] = set()
+        for row in contract["claim_nodes"]:
+            if not isinstance(row, dict):
+                raise ContextCompileError("claim node row must be an object")
+            _require_exact_keys(row, CLAIM_ROW_KEYS, "claim node row")
+            claim_id = _require_safe_public_id(row.get("claim_id"), "claim_id")
+            if claim_id in claim_ids:
+                raise ContextCompileError(f"duplicate claim ID: {claim_id}")
+            claim_ids.add(claim_id)
+            claim_kind = _require_enum(
+                row.get("claim_kind"), CLAIM_KINDS, f"{claim_id}.claim_kind"
+            )
+            observed_claim_kinds.add(claim_kind)
+            _require_safe_code(
+                row.get("asserted_value_code"), f"{claim_id}.asserted_value_code"
+            )
+            asserted_by = _require_safe_actor(
+                row.get("asserted_by"), f"{claim_id}.asserted_by"
+            )
+            decision_owner = _require_safe_actor(
+                row.get("decision_owner"), f"{claim_id}.decision_owner"
+            )
+            provenance = _require_enum(
+                row.get("assertion_provenance"),
+                ASSERTION_PROVENANCE,
+                f"{claim_id}.assertion_provenance",
+            )
+            if provenance == "MASH_EXPLICIT_DECISION" and (
+                asserted_by.casefold() != "mash"
+                or decision_owner.casefold() != "mash"
+            ):
+                raise ContextCompileError(
+                    "Mash explicit decision requires Mash actor and decision owner"
+                )
+            if claim_kind == "MASH_FIXED_CONDITION" and provenance != (
+                "MASH_EXPLICIT_DECISION"
+            ):
+                raise ContextCompileError(
+                    "Mash fixed condition requires Mash durable decision provenance"
+                )
+            _require_enum(
+                row.get("adoption_state"),
+                ADOPTION_STATES,
+                f"{claim_id}.adoption_state",
+            )
+            _require_safe_code(
+                row.get("claim_boundary"), f"{claim_id}.claim_boundary"
+            )
+            verification_status = _require_enum(
+                row.get("verification_status"),
+                CLAIM_VERIFICATION_STATUSES,
+                f"{claim_id}.verification_status",
+            )
+            if verification_status != "DECLARED_SOURCE_LOCATOR":
+                raise ContextCompileError(
+                    f"{claim_id}.verification_status must be declarative"
+                )
+            verified_scope = _require_public_code_list(
+                row.get("verified_scope"), f"{claim_id}.verified_scope", maximum=32
+            )
+            if not set(verified_scope).issubset(CLAIM_DECLARED_VERIFIED_SCOPES):
+                raise ContextCompileError(
+                    f"{claim_id}.verified_scope contains non-declarative scope"
+                )
+            source = validate_locator(
+                row.get("source_locator"), f"{claim_id}.source_locator"
+            )
+            if provenance == "MASH_EXPLICIT_DECISION" and not source.get(
+                "remote_ref"
+            ):
+                raise ContextCompileError(
+                    "Mash explicit decision requires durable exact public ref locator"
+                )
+        if (
+            task == "cmee"
+            and publication_mode == "PERSISTENT_PRIMARY"
+            and observed_claim_kinds != set(CLAIM_KINDS)
+        ):
+            raise ContextCompileError("CMEE Unit B requires claim kind exact5")
+
+        connection_ids: set[str] = set()
+        for row in contract["connections"]:
+            if not isinstance(row, dict):
+                raise ContextCompileError("connection row must be an object")
+            _require_exact_keys(row, CONNECTION_ROW_KEYS, "connection row")
+            connection_id = _require_safe_public_id(
+                row.get("connection_id"), "connection_id"
+            )
+            if connection_id in connection_ids:
+                raise ContextCompileError(
+                    f"duplicate connection ID: {connection_id}"
+                )
+            connection_ids.add(connection_id)
+            source_claim_id = _require_safe_public_id(
+                row.get("source_claim_id"), f"{connection_id}.source_claim_id"
+            )
+            if source_claim_id not in claim_ids:
+                raise ContextCompileError(
+                    f"connection has dangling claim: {connection_id}->{source_claim_id}"
+                )
+            _require_enum(
+                row.get("relation_kind"),
+                CONNECTION_RELATIONS,
+                f"{connection_id}.relation_kind",
+            )
+            validate_locator(
+                row.get("target_locator"), f"{connection_id}.target_locator"
+            )
+            target_symbol_or_route = row.get("target_symbol_or_route")
+            if target_symbol_or_route is not None:
+                _require_safe_symbol_or_route(
+                    target_symbol_or_route,
+                    f"{connection_id}.target_symbol_or_route",
+                )
+            _require_strict_bool(row.get("required"), f"{connection_id}.required")
+            _require_enum(
+                row.get("assertion_provenance"),
+                ASSERTION_PROVENANCE,
+                f"{connection_id}.assertion_provenance",
+            )
+            endpoint_verification = _require_enum(
+                row.get("endpoint_verification"),
+                ENDPOINT_VERIFICATION_STATUSES,
+                f"{connection_id}.endpoint_verification",
+            )
+            if endpoint_verification != "UNRESOLVED_RELATION":
+                raise ContextCompileError(
+                    f"{connection_id}.endpoint_verification must be declarative"
+                )
+            connection_scope = _require_public_code_list(
+                row.get("verified_scope"),
+                f"{connection_id}.verified_scope",
+                maximum=32,
+            )
+            if set(connection_scope) - {"PROFILE_DECLARATION"}:
+                raise ContextCompileError(
+                    f"{connection_id}.verified_scope contains non-declarative scope"
+                )
+
+        scope_ids: set[str] = set()
+        for row in contract["scope_rules"]:
+            if not isinstance(row, dict):
+                raise ContextCompileError("scope rule row must be an object")
+            _require_exact_keys(row, SCOPE_RULE_ROW_KEYS, "scope rule row")
+            scope_id = _require_safe_public_id(
+                row.get("scope_rule_id"), "scope_rule_id"
+            )
+            if scope_id in scope_ids:
+                raise ContextCompileError(f"duplicate scope rule ID: {scope_id}")
+            scope_ids.add(scope_id)
+            validate_locator(row.get("target_locator"), f"{scope_id}.target_locator")
+            target_symbol_or_route = row.get("target_symbol_or_route")
+            if target_symbol_or_route is not None:
+                _require_safe_symbol_or_route(
+                    target_symbol_or_route,
+                    f"{scope_id}.target_symbol_or_route",
+                )
+            changeability = _require_enum(
+                row.get("changeability"),
+                CHANGEABILITY,
+                f"{scope_id}.changeability",
+            )
+            _require_safe_code(
+                row.get("required_approval"), f"{scope_id}.required_approval"
+            )
+            write_target = _require_strict_bool(
+                row.get("write_target"), f"{scope_id}.write_target"
+            )
+            if write_target and changeability != "ALLOWED_WRITE_CANDIDATE":
+                raise ContextCompileError(
+                    f"{scope_id} write_target requires ALLOWED_WRITE_CANDIDATE"
+                )
+            _require_enum(
+                row.get("assertion_provenance"),
+                ASSERTION_PROVENANCE,
+                f"{scope_id}.assertion_provenance",
+            )
+            validate_locator(row.get("source_locator"), f"{scope_id}.source_locator")
+
+        role_views = contract["role_views"]
+        if set(role_views) != {"PRO_KAREN", "ULTRA_KAREN"}:
+            raise ContextCompileError("Unit B role_views must contain Pro/Ultra exact2")
+        pro_view = role_views["PRO_KAREN"]
+        ultra_view = role_views["ULTRA_KAREN"]
+        if not isinstance(pro_view, dict) or not isinstance(ultra_view, dict):
+            raise ContextCompileError("Unit B role view rows must be objects")
+        _require_exact_keys(pro_view, PRO_ROLE_VIEW_KEYS, "Pro role view")
+        _require_exact_keys(ultra_view, ROLE_VIEW_COMMON_KEYS, "Ultra role view")
+        expected_role_values = {
+            "PRO_KAREN": (24, 1572864, 8, 98304),
+            "ULTRA_KAREN": (80, 4194304, 12, 196608),
+        }
+        for role, view in (("PRO_KAREN", pro_view), ("ULTRA_KAREN", ultra_view)):
+            values = tuple(view[key] for key in (
+                "max_items",
+                "max_referenced_source_bytes",
+                "max_reasons_per_item",
+                "max_projection_utf8_bytes",
+            ))
+            if any(type(value) is not int for value in values) or values != expected_role_values[role]:
+                raise ContextCompileError(f"{role} role budget is not canonical")
+        first_view = pro_view["first_view"]
+        if not isinstance(first_view, dict):
+            raise ContextCompileError("Pro first_view must be an object")
+        _require_exact_keys(
+            first_view, PRO_FIRST_VIEW_POLICY_KEYS, "Pro first-view policy"
+        )
+        if (
+            first_view.get("card_order") != list(PRO_FIRST_VIEW_CARDS)
+            or first_view.get("max_decision_items") != 12
+            or first_view.get("max_reasons_per_item") != 2
+            or first_view.get("max_utf8_bytes") != 16384
+            or first_view.get("max_locators_per_card") != 3
+        ):
+            raise ContextCompileError("Pro first-view policy is not canonical")
     return profile
 
 
@@ -2801,17 +3283,32 @@ def _metadata_for_record(
     if suffix not in {".md", ".txt", ".rst", ".adoc"} and not (
         suffix == ".json" and has_json_pointer
     ):
-        return {"status": "ABSENT", "reason_code": "FRONT_MATTER_NOT_APPLICABLE", "fields": {}}
+        return {
+            "status": "ABSENT",
+            "reason_code": "FRONT_MATTER_NOT_APPLICABLE",
+            "fields": {},
+            "json_pointer_assertions": [],
+        }
     root = repository_roots.get(record.repository_key)
     if root is None or not record.blob_sha:
-        return {"status": "UNRESOLVED_METADATA", "reason_code": "METADATA_BLOB_UNAVAILABLE", "fields": {}}
+        return {
+            "status": "UNRESOLVED_METADATA",
+            "reason_code": "METADATA_BLOB_UNAVAILABLE",
+            "fields": {},
+            "json_pointer_assertions": [],
+        }
     try:
         maximum = 64 * 1024 if has_json_pointer else 16 * 1024
         return extract_restricted_metadata(
             _git_blob_prefix(root, record.blob_sha, maximum=maximum), assertions
         )
     except ContextCompileError:
-        return {"status": "UNRESOLVED_METADATA", "reason_code": "METADATA_BLOB_UNREADABLE", "fields": {}}
+        return {
+            "status": "UNRESOLVED_METADATA",
+            "reason_code": "METADATA_BLOB_UNREADABLE",
+            "fields": {},
+            "json_pointer_assertions": [],
+        }
 
 
 def _apply_required_premise_seeds(
@@ -3071,7 +3568,12 @@ def build_premise_management_model(
                 "source_locator": dict(premise["source_locator"]),
                 "metadata": binding.get(
                     "metadata",
-                    {"status": "ABSENT", "reason_code": "FRONT_MATTER_ABSENT", "fields": {}},
+                    {
+                        "status": "ABSENT",
+                        "reason_code": "FRONT_MATTER_ABSENT",
+                        "fields": {},
+                        "json_pointer_assertions": [],
+                    },
                 ),
             }
         )
@@ -3122,7 +3624,12 @@ def build_premise_management_model(
             if record is not None
             else premise_metadata.get(
                 key,
-                {"status": "UNRESOLVED_METADATA", "reason_code": "RESPONSIBILITY_SUBJECT_NOT_IN_WORKSPACE_OR_OWNER_PREMISES", "fields": {}},
+                {
+                    "status": "UNRESOLVED_METADATA",
+                    "reason_code": "RESPONSIBILITY_SUBJECT_NOT_IN_WORKSPACE_OR_OWNER_PREMISES",
+                    "fields": {},
+                    "json_pointer_assertions": [],
+                },
             )
         )
         normalized = {
@@ -3436,6 +3943,1563 @@ def build_premise_management_model(
         "technical_credit": 0,
         "automatic_progression": False,
     }
+
+
+def _is_unit_b_profile(task_profile: Mapping[str, Any]) -> bool:
+    contract = task_profile.get("operator_contract")
+    return isinstance(contract, Mapping) and set(contract) == OPERATOR_CONTRACT_UNIT_B_KEYS
+
+
+def _stable_unit_b_id(prefix: str, payload: Mapping[str, Any]) -> str:
+    digest = _sha256_bytes(_canonical_json_bytes(payload))[:16].upper()
+    return f"{prefix}.{digest}"
+
+
+def _operator_model_fingerprint(model: Mapping[str, Any]) -> str:
+    identity = dict(model)
+    identity.pop("operator_model_fingerprint", None)
+    return _sha256_bytes(_canonical_json_bytes(identity))
+
+
+def _locator_key(locator: Mapping[str, Any]) -> tuple[str, str]:
+    return (
+        _normalize_repository(str(locator.get("repository_key") or "")),
+        _normalize_path(str(locator.get("path") or "")),
+    )
+
+
+def _resolved_owner_locator_identity(
+    locator: Mapping[str, Any],
+    owner_by_id: Mapping[str, Mapping[str, Any]],
+    responsibility_by_owner_key: Mapping[
+        tuple[str, str, str], Mapping[str, Any]
+    ],
+) -> tuple[str, str, str] | None:
+    """Resolve an owner-scoped locator only from Unit A exact owner facts."""
+    owner_id = locator.get("owner_id")
+    if type(owner_id) is not str:
+        return None
+    repository_key, path = _locator_key(locator)
+    owner = owner_by_id.get(owner_id)
+    responsibility = responsibility_by_owner_key.get(
+        (owner_id, repository_key, path)
+    )
+    if owner is None or responsibility is None:
+        return None
+    resolved_commit = responsibility.get("resolved_owner_commit")
+    resolved_blob_sha = responsibility.get("resolved_owner_blob_sha")
+    owner_head = owner.get("pre_publish_resolved_head")
+    locator_remote_ref = locator.get("remote_ref")
+    if (
+        owner.get("relation") == "REMOTE_UNRESOLVED"
+        or _normalize_repository(str(owner.get("repository_key") or ""))
+        != repository_key
+        or (
+            locator_remote_ref is not None
+            and locator_remote_ref != owner.get("remote_ref")
+        )
+        or type(resolved_commit) is not str
+        or not GIT_SHA_RE.fullmatch(resolved_commit)
+        or resolved_commit != owner_head
+        or type(resolved_blob_sha) is not str
+        or not GIT_SHA_RE.fullmatch(resolved_blob_sha)
+    ):
+        return None
+    identity = "owner-file:" + _sha256_bytes(
+        _canonical_json_bytes(
+            {
+                "owner_id": owner_id,
+                "repository_key": repository_key,
+                "path": path,
+                "resolved_commit": resolved_commit,
+                "resolved_blob_sha": resolved_blob_sha,
+            }
+        )
+    )
+    return identity, resolved_commit, resolved_blob_sha
+
+
+def _public_locator_projection(locator: Mapping[str, Any]) -> dict[str, Any]:
+    return {
+        key: locator[key]
+        for key in sorted(locator)
+        if key in PUBLIC_SOURCE_LOCATOR_KEYS
+    }
+
+
+def _render_pro_context(
+    model: Mapping[str, Any],
+    operator_context_sha256: str,
+    *,
+    collapse_overflow: bool = True,
+) -> bytes:
+    fingerprint = str(model["operator_model_fingerprint"])
+    operator = model["operator_v1"]
+    surface = model["decision_surface"]
+    budget = model["budgets"]["PRO_KAREN"]
+    overflow_codes = (
+        list(budget["overflow_codes"]) if collapse_overflow else []
+    )
+    lines = [
+        "# Cocolon Pro Work Context — Unit B temporary candidate",
+        "",
+        f"operator_context_sha256: `{operator_context_sha256}`",
+        f"operator_model_fingerprint: `{fingerprint}`",
+        f"operator_v1_status: `{operator['status']}`",
+        "fact_base: `operator_context.json`",
+        "projection_new_fact_count: `0`",
+        "",
+        "## Compact first view",
+        "",
+    ]
+    for index, card in enumerate(surface["pro_first_view_cards"], 1):
+        display_reasons = (
+            overflow_codes[:2] if overflow_codes else card["reason_codes"]
+        )
+        display_item_ids = [] if overflow_codes else card["item_ids"]
+        display_locators = [] if overflow_codes else card["locators"]
+        display_additional_count = (
+            card["source_item_count"]
+            if overflow_codes
+            else card["additional_count"]
+        )
+        lines.extend(
+            [
+                f"### {index}. `{card['card_id']}`",
+                "",
+                f"- reason codes: {', '.join(f'`{item}`' for item in display_reasons) or '`NONE`'}",
+                f"- source item count: `{card['source_item_count']}`",
+            ]
+        )
+        if display_item_ids:
+            lines.append(
+                "- stable IDs: "
+                + ", ".join(f"`{item}`" for item in display_item_ids)
+            )
+        else:
+            lines.append("- stable IDs: `NONE`")
+        if display_locators:
+            lines.append("- read now:")
+            for locator in display_locators:
+                lines.append(
+                    f"  - `{locator.get('repository_key')}:{locator.get('path')}`"
+                )
+        else:
+            lines.append("- read now: `NONE`")
+        lines.extend(
+            [
+                f"- additional count: `{display_additional_count}`",
+                f"- additional reason count: `{card['additional_reason_count']}`",
+                f"- full evidence: `{card['detail_anchor']}`",
+                "",
+            ]
+        )
+        if card["card_id"] == "FRESHNESS_AND_BLOCKER":
+            for row in model["freshness"]:
+                lines.append(
+                    f"- owner `{row['owner_id']}` relation `{row['relation']}`; "
+                    f"owner changed paths `{row['owner_side_changed_path_count']}`; "
+                    f"workspace changed paths `{row['workspace_side_changed_path_count']}`"
+                )
+            lines.append("")
+        if card["card_id"] == "UNRESOLVED_AND_HANDBACK":
+            handbacks = list(model["unresolved_by_owner"])
+            for row in handbacks[:3]:
+                lines.append(
+                    f"- handback `{row['owner']}` reason `{row['reason_code']}` "
+                    f"blocking `{str(row['blocking']).lower()}`"
+                )
+            if len(handbacks) > 3:
+                lines.append(
+                    f"- additional handbacks: `{len(handbacks) - 3}`; "
+                    "full evidence `operator_context.json#/unresolved_by_owner`"
+                )
+            lines.append("")
+    lines.extend(
+        [
+            "## Effects stop",
+            "",
+            "- workspace incorporation claim: `false`",
+            "- write authority: `false`",
+            "- V1 activation: `0`",
+            "- product credit: `0`",
+            "- technical credit: `0`",
+            "- automatic progression: `false`",
+            "- Unit C started: `false`",
+            "",
+        ]
+    )
+    return ("\n".join(lines).rstrip() + "\n").encode("utf-8")
+
+
+def _render_ultra_context(
+    model: Mapping[str, Any],
+    operator_context_sha256: str,
+    *,
+    collapse_overflow: bool = True,
+) -> bytes:
+    fingerprint = str(model["operator_model_fingerprint"])
+    operator = model["operator_v1"]
+    surface = model["decision_surface"]
+    budget = model["budgets"]["ULTRA_KAREN"]
+    overflow_codes = (
+        list(budget["overflow_codes"]) if collapse_overflow else []
+    )
+    claims_by_id = {row["claim_id"]: row for row in model["claims"]}
+    premises_by_id = {
+        row["premise_id"]: row for row in model["required_premises"]
+    }
+    connections_by_id = {
+        row["connection_id"]: row
+        for row in model["design_actual_test_connections"]
+    }
+    scopes_by_id = {row["scope_rule_id"]: row for row in model["scope_rules"]}
+    impacts_by_id = {row["impact_id"]: row for row in model["impact"]}
+    lines = [
+        "# Cocolon Ultra Work Context — Unit B temporary candidate",
+        "",
+        f"operator_context_sha256: `{operator_context_sha256}`",
+        f"operator_model_fingerprint: `{fingerprint}`",
+        f"operator_v1_status: `{operator['status']}`",
+        "fact_base: `operator_context.json`",
+        "projection_new_fact_count: `0`",
+        "implementation_permission_generated: `false`",
+        "",
+        "## Exact refs",
+        "",
+    ]
+    for repository_key, ref in sorted(model["workspace_refs"].items()):
+        lines.append(
+            f"- workspace `{repository_key}` commit `{ref.get('source_commit')}` "
+            f"tree `{ref.get('source_tree')}`"
+        )
+    for owner in model["canonical_owner_refs"]:
+        lines.append(
+            f"- owner `{owner['owner_id']}` PR `{owner['public_pr_number_or_locator']}` "
+            f"ref `{owner['remote_ref']}` head `{owner['pre_publish_resolved_head']}`"
+        )
+    lines.extend(
+        [
+        "",
+        "## Exact freshness",
+        "",
+        ]
+    )
+    for row in model["freshness"]:
+        lines.append(
+            f"- `{row['owner_id']}` `{row['relation']}` @ `{row['resolved_head']}`; "
+            f"owner changed paths `{row['owner_side_changed_path_count']}`; "
+            f"workspace changed paths `{row['workspace_side_changed_path_count']}`"
+        )
+        for path in row["owner_side_changed_paths"]:
+            lines.append(f"  - owner changed `{path}`")
+    if not model["freshness"]:
+        lines.append("- `NONE`")
+    lines.extend(["", "## Required entry chain", ""])
+    for chain in model["entry_chains"]:
+        for premise_id in chain:
+            premise = premises_by_id[premise_id]
+            lines.append(
+                f"- `{premise_id}` `{premise['repository_key']}:"
+                f"{premise['path']}` status `{premise['status']}` commit "
+                f"`{premise.get('resolved_commit')}` blob "
+                f"`{premise.get('resolved_blob_sha')}`"
+            )
+    lines.extend(["", "## Decision surface", ""])
+    if overflow_codes:
+        for code in overflow_codes:
+            lines.append(f"- `{code}` — full evidence `operator_context.json#/decision_surface`")
+    else:
+        for row in surface["items"]:
+            target = (
+                f"{row['repository_key']}:{row['path']}"
+                if row["repository_key"] and row["path"]
+                else "NO_FILE_TARGET"
+            )
+            reasons = row["reason_codes"][: budget["max_reasons_per_item"]]
+            additional = len(row["reason_codes"]) - len(reasons)
+            detail: list[str] = []
+            if row["stable_id"] in claims_by_id:
+                claim = claims_by_id[row["stable_id"]]
+                detail.append(
+                    f"claim `{claim['claim_kind']}` provenance "
+                    f"`{claim['assertion_provenance']}` adoption "
+                    f"`{claim['adoption_state']}` verification "
+                    f"`{claim['verification_status']}`"
+                )
+            if row["stable_id"] in premises_by_id:
+                premise = premises_by_id[row["stable_id"]]
+                detail.append(
+                    f"premise status `{premise['status']}` owner commit "
+                    f"`{premise.get('resolved_commit')}` blob "
+                    f"`{premise.get('resolved_blob_sha')}`"
+                )
+            if row["stable_id"] in connections_by_id:
+                connection = connections_by_id[row["stable_id"]]
+                detail.append(
+                    f"connection `{connection['relation_kind']}` endpoint "
+                    f"`{connection['endpoint_verification']}` target commit "
+                    f"`{connection.get('target_source_commit')}` blob "
+                    f"`{connection.get('target_blob_sha')}`"
+                )
+            if row["stable_id"] in scopes_by_id:
+                scope = scopes_by_id[row["stable_id"]]
+                detail.append(
+                    f"scope `{scope['changeability']}` write target "
+                    f"`{str(scope['write_target']).lower()}` approval "
+                    f"`{scope['required_approval']}`"
+                )
+            if row["stable_id"] in impacts_by_id:
+                impact = impacts_by_id[row["stable_id"]]
+                detail.append(
+                    f"impact `{impact['impact_class']}` origin count "
+                    f"`{len(impact['origin_changed_target_ids'])}`"
+                )
+            lines.append(
+                f"- P{row['priority']} `{row['stable_id']}` `{row['selection_tier']}` "
+                f"`{target}` reasons "
+                + (", ".join(f"`{item}`" for item in reasons) or "`NONE`")
+                + f"; additional `{additional}`"
+                + ("; " + "; ".join(detail) if detail else "")
+            )
+    lines.extend(
+        [
+            "",
+            "## Drift and impact",
+            "",
+        ]
+    )
+    displayed_decision_count = (
+        len(overflow_codes)
+        if overflow_codes
+        else len(surface["items"])
+    )
+    remaining_items = max(budget["max_items"] - displayed_decision_count, 0)
+    drift_rows = list(model["drift"])
+    impact_rows = list(model["impact"])
+    evidence_rows: list[tuple[str, Mapping[str, Any]]] = [
+        ("DRIFT", row) for row in drift_rows
+    ] + [("IMPACT", row) for row in impact_rows]
+    for kind, row in evidence_rows[:remaining_items]:
+        if kind == "DRIFT":
+            lines.append(
+                f"- `{row['drift_code']}` subject `{row['subject_id']}` impact "
+                f"`{row['impact_class']}` handback `{row['required_owner_handback']}`"
+            )
+        else:
+            lines.append(
+                f"- `{row['impact_id']}` `{row['impact_class']}` "
+                f"`{row['repository_key']}:{row['path']}` reason `{row['reason_code']}`"
+            )
+    additional_evidence_count = max(len(evidence_rows) - remaining_items, 0)
+    if additional_evidence_count:
+        lines.append(
+            f"- additional drift/impact evidence: `{additional_evidence_count}`; "
+            "full evidence `operator_context.json#/drift` and `operator_context.json#/impact`"
+        )
+    if not evidence_rows:
+        lines.append("- `NONE`")
+    lines.extend(["", "## Conflict, provenance, and minimal readback", ""])
+    for claim in model["claims"][:5]:
+        lines.append(
+            f"- claim `{claim['claim_id']}` `{claim['claim_kind']}` provenance "
+            f"`{claim['assertion_provenance']}` adoption "
+            f"`{claim['adoption_state']}` source "
+            f"`{claim['source_locator']['repository_key']}:"
+            f"{claim['source_locator']['path']}`"
+        )
+    if len(model["claims"]) > 5:
+        lines.append(
+            f"- additional claims `{len(model['claims']) - 5}`; "
+            "full evidence `operator_context.json#/claims`"
+        )
+    for conflict in model["conflicts"][:5]:
+        lines.append(
+            f"- conflict `{conflict['conflict_id']}` reason "
+            f"`{conflict['reason_code']}` handback `{conflict['handback_owner']}` "
+            f"blocking `{str(conflict['blocking']).lower()}`"
+        )
+    if len(model["conflicts"]) > 5:
+        lines.append(
+            f"- additional conflicts `{len(model['conflicts']) - 5}`; "
+            "full evidence `operator_context.json#/conflicts`"
+        )
+    visible_ids = {row["stable_id"] for row in surface["items"]}
+    visible_impact_paths = {
+        (row["repository_key"], row["path"])
+        for row in model["impact"]
+        if row["impact_id"] in visible_ids
+    }
+    visible_readback = [
+        row
+        for row in model["minimal_readback"]
+        if (
+            row["changed_target"]["repository_key"],
+            row["changed_target"]["path"],
+        )
+        in visible_impact_paths
+    ]
+    for row in visible_readback:
+        lines.append(
+            f"- readback `{row['readback_id']}` changed "
+            f"`{row['changed_target']['repository_key']}:"
+            f"{row['changed_target']['path']}` probable "
+            f"`{len(row['probable_dependent_ids'])}` additional "
+            f"`{row['additional_probable_dependent_count']}` handback "
+            f"`{row['unresolved_impact_handback']}`"
+        )
+    if not model["conflicts"] and not visible_readback:
+        lines.append("- `NONE`")
+    lines.extend(
+        [
+            "",
+            "## STOP boundary",
+            "",
+            "- completion claim: `null`",
+            "- workspace incorporation claim: `false`",
+            "- write authority: `false`",
+            "- merge/rebase/integration authority: `false`",
+            "- V1 activation: `0`",
+            "- product credit: `0`",
+            "- technical credit: `0`",
+            "- automatic progression: `false`",
+            "- Unit C started: `false`",
+            "",
+        ]
+    )
+    return ("\n".join(lines).rstrip() + "\n").encode("utf-8")
+
+
+def build_work_context_model(
+    *,
+    workspace: str,
+    task: str,
+    legacy_status: str,
+    task_profile: Mapping[str, Any],
+    premise_model: Mapping[str, Any],
+    by_identity: Mapping[str, FileRecord],
+    by_key: Mapping[tuple[str, str], FileRecord],
+    selected_rows: Sequence[Mapping[str, Any]],
+    used_edges: Sequence[Mapping[str, Any]],
+    unresolved: Sequence[Mapping[str, Any]],
+    task_dependency_fingerprint: str,
+    workspace_refs: Mapping[str, Any],
+    symbol_owner: Mapping[str, str],
+    route_owner: Mapping[str, str],
+) -> dict[str, Any]:
+    """Build the bounded Unit B fact base without semantic inference."""
+    contract = task_profile["operator_contract"]
+    selected_by_identity = {
+        str(row["identity"]): row for row in selected_rows
+    }
+    owner_by_id = {
+        str(row["owner_id"]): row
+        for row in premise_model.get("owners", [])
+    }
+    responsibility_by_owner_key = {
+        (
+            str(row["subject_locator"]["owner_id"]),
+            _normalize_repository(str(row["subject_locator"]["repository_key"])),
+            _normalize_path(str(row["subject_locator"]["path"])),
+        ): row
+        for row in premise_model.get("responsibilities", [])
+    }
+    claims: list[dict[str, Any]] = []
+    required_claim_blockers: list[str] = []
+    for declaration in contract["claim_nodes"]:
+        normalized_claim = dict(declaration)
+        locator = declaration["source_locator"]
+        source_record = by_key.get(_locator_key(locator))
+        verified_scope = set(declaration["verified_scope"])
+        locator_owner_id = locator.get("owner_id")
+        source_verified = False
+        if locator_owner_id is not None:
+            source_verified = _resolved_owner_locator_identity(
+                locator, owner_by_id, responsibility_by_owner_key
+            ) is not None
+            if source_verified:
+                verified_scope.update(
+                    {"OWNER_REF_BLOB_IDENTITY", "OWNER_REF_FILE_IDENTITY"}
+                )
+        elif locator.get("remote_ref") is None:
+            source_verified = bool(
+                source_record is not None
+                and source_record.identity in selected_by_identity
+            )
+            if source_verified:
+                verified_scope.update(
+                    {
+                        "WORKSPACE_INVENTORY_BLOB_IDENTITY",
+                        "WORKSPACE_INVENTORY_FILE_IDENTITY",
+                    }
+                )
+        if source_verified:
+            normalized_claim["verification_status"] = "SOURCE_LOCATOR_VERIFIED"
+        elif locator_owner_id is None and locator.get("remote_ref"):
+            normalized_claim["verification_status"] = "DECLARED_SOURCE_LOCATOR"
+        else:
+            normalized_claim["verification_status"] = "UNRESOLVED"
+            required_claim_blockers.append("REQUIRED_CLAIM_SOURCE_UNRESOLVED")
+        normalized_claim["verified_scope"] = sorted(verified_scope)
+        normalized_claim["source_locator"] = _public_locator_projection(
+            locator
+        )
+        claims.append(normalized_claim)
+    claims.sort(key=lambda row: row["claim_id"])
+    claim_by_id = {str(row["claim_id"]): row for row in claims}
+
+    connections: list[dict[str, Any]] = []
+    required_connection_blockers: list[str] = []
+    for declaration in contract["connections"]:
+        locator = declaration["target_locator"]
+        record = by_key.get(_locator_key(locator))
+        if record is not None and record.identity not in selected_by_identity:
+            record = None
+        owner_identity = _resolved_owner_locator_identity(
+            locator, owner_by_id, responsibility_by_owner_key
+        )
+        owner_scoped = locator.get("owner_id") is not None
+        named_endpoint = declaration.get("target_symbol_or_route")
+        # Unit B exact10 does not carry a independently verifiable membership
+        # proof for code-index symbols or route-graph IDs.  Preserve the named
+        # endpoint as a declared fact, but fail closed instead of promoting it
+        # from an in-memory lookup that the standalone verifier cannot replay.
+        named_endpoint_verified = named_endpoint is None
+        if owner_scoped:
+            endpoint_present = owner_identity is not None
+            target_identity, target_source_commit, target_blob_sha = (
+                owner_identity if owner_identity is not None else (None, None, None)
+            )
+        else:
+            endpoint_present = record is not None
+            target_identity, target_source_commit, target_blob_sha = (
+                (record.identity, record.source_commit, record.blob_sha)
+                if record is not None
+                else (None, None, None)
+            )
+        if not endpoint_present:
+            endpoint_status = "MISSING_ENDPOINT"
+            reason_code = "TARGET_FILE_IDENTITY_MISSING"
+        elif not named_endpoint_verified:
+            endpoint_status = "UNRESOLVED_RELATION"
+            reason_code = "TARGET_SYMBOL_OR_ROUTE_UNRESOLVED"
+        else:
+            endpoint_status = "ALL_ENDPOINTS_VERIFIED"
+            reason_code = "DECLARED_ENDPOINT_IDENTITIES_PRESENT"
+        verified_scope = set(declaration["verified_scope"])
+        if endpoint_present:
+            verified_scope.update({"TARGET_BLOB_IDENTITY", "TARGET_FILE_IDENTITY"})
+        if named_endpoint_verified and named_endpoint:
+            verified_scope.add("TARGET_SYMBOL_OR_ROUTE_IDENTITY")
+        normalized = {
+            **dict(declaration),
+            "target_locator": _public_locator_projection(locator),
+            "endpoint_verification": endpoint_status,
+            "verified_scope": sorted(verified_scope),
+            "target_identity": target_identity,
+            "target_source_commit": target_source_commit,
+            "target_blob_sha": target_blob_sha,
+            "reason_code": reason_code,
+            "semantic_claim": False,
+            "product_quality_credit": 0,
+        }
+        connections.append(normalized)
+        if declaration["required"] and endpoint_status != "ALL_ENDPOINTS_VERIFIED":
+            required_connection_blockers.append(
+                f"REQUIRED_CONNECTION_{endpoint_status}"
+            )
+    connections.sort(key=lambda row: row["connection_id"])
+
+    scope_rules = [
+        {
+            **dict(row),
+            "target_locator": _public_locator_projection(row["target_locator"]),
+            "source_locator": _public_locator_projection(row["source_locator"]),
+            "permission_claim": False,
+        }
+        for row in contract["scope_rules"]
+    ]
+    scoped_targets = {
+        (_locator_key(row["target_locator"]), row.get("target_symbol_or_route"))
+        for row in scope_rules
+    }
+    for connection in connections:
+        target = (
+            _locator_key(connection["target_locator"]),
+            connection.get("target_symbol_or_route"),
+        )
+        if target in scoped_targets:
+            continue
+        locator = connection["target_locator"]
+        scope_rules.append(
+            {
+                "scope_rule_id": _stable_unit_b_id(
+                    "SCOPE.DEFAULT.RELATED",
+                    {"connection_id": connection["connection_id"]},
+                ),
+                "target_locator": locator,
+                "target_symbol_or_route": connection.get("target_symbol_or_route"),
+                "changeability": "RELATED_NOT_WRITE_AUTHORIZED",
+                "required_approval": "SEPARATE_EXPLICIT_AUTHORIZATION_REQUIRED",
+                "write_target": False,
+                "assertion_provenance": "MACHINE_DISCOVERED",
+                "source_locator": locator,
+                "permission_claim": False,
+            }
+        )
+    scope_rules.sort(key=lambda row: row["scope_rule_id"])
+
+    owners = [dict(row) for row in premise_model.get("owners", [])]
+    freshness = [
+        {
+            "owner_id": row["owner_id"],
+            "relation": row["relation"],
+            "resolved_head": row.get("pre_publish_resolved_head"),
+            "workspace_material_commit": row.get("workspace_material_commit"),
+            "owner_side_changed_paths": list(row.get("owner_side_changed_paths", [])),
+            "workspace_side_changed_paths": list(
+                row.get("workspace_side_changed_paths", [])
+            ),
+            "owner_side_changed_path_count": len(
+                row.get("owner_side_changed_paths", [])
+            ),
+            "workspace_side_changed_path_count": len(
+                row.get("workspace_side_changed_paths", [])
+            ),
+            "read_only_ready": row.get("relation") != "REMOTE_UNRESOLVED",
+            "workspace_incorporation_claim": False,
+            "write_authority": False,
+        }
+        for row in owners
+    ]
+
+    owner_changed_keys: set[tuple[str, str]] = set()
+    workspace_changed_keys: set[tuple[str, str]] = set()
+    for owner in owners:
+        repository_key = _normalize_repository(str(owner["repository_key"]))
+        for path in owner.get("owner_side_changed_paths", []):
+            owner_changed_keys.add((repository_key, _normalize_path(str(path))))
+        for path in owner.get("workspace_side_changed_paths", []):
+            workspace_changed_keys.add(
+                (repository_key, _normalize_path(str(path)))
+            )
+    changed_keys = owner_changed_keys | workspace_changed_keys
+    changed_identities = {
+        record.identity
+        for key in changed_keys
+        if (record := by_key.get(key)) is not None
+    }
+    adjacency: dict[str, set[str]] = defaultdict(set)
+    for edge in used_edges:
+        source = str(edge["source_identity"])
+        target = str(edge["target_identity"])
+        adjacency[source].add(target)
+        adjacency[target].add(source)
+    probable_distance: dict[str, int] = {}
+    probable_origins: dict[str, set[str]] = defaultdict(set)
+    for origin_identity in sorted(changed_identities):
+        queue: deque[tuple[str, int]] = deque([(origin_identity, 0)])
+        seen = {origin_identity}
+        while queue:
+            identity, distance = queue.popleft()
+            for target in sorted(adjacency.get(identity, set())):
+                if target in seen:
+                    continue
+                seen.add(target)
+                target_distance = distance + 1
+                probable_distance[target] = min(
+                    probable_distance.get(target, target_distance),
+                    target_distance,
+                )
+                probable_origins[target].add(origin_identity)
+                queue.append((target, target_distance))
+
+    explicit_connection_keys = {
+        _locator_key(row["target_locator"]): row for row in connections
+    }
+    explicit_scope_keys = {
+        _locator_key(row["target_locator"]): row for row in scope_rules
+    }
+    unchanged_keys = {
+        (
+            _normalize_repository(str(row["repository_key"])),
+            _normalize_path(str(row["path"])),
+        )
+        for row in premise_model.get("premises", [])
+        if row.get("workspace_blob_matches_owner") is True
+    }
+    impact: list[dict[str, Any]] = []
+    impact_keys = changed_keys | set(explicit_connection_keys) | set(explicit_scope_keys) | unchanged_keys
+    impact_keys.update(
+        by_identity[identity].key
+        for identity in probable_distance
+        if identity in by_identity
+    )
+    for key in sorted(impact_keys):
+        record = by_key.get(key)
+        selected_record = (
+            record
+            if record is not None and record.identity in selected_by_identity
+            else None
+        )
+        connection = explicit_connection_keys.get(key)
+        scope = explicit_scope_keys.get(key)
+        if key in changed_keys:
+            impact_class = "DIRECT"
+            reason_code = "EXACT_OWNER_OR_WORKSPACE_CHANGED_PATH"
+            distance = 0
+        elif connection is not None and connection["endpoint_verification"] == "ALL_ENDPOINTS_VERIFIED":
+            impact_class = "DIRECT"
+            reason_code = "EXPLICIT_VERIFIED_CONNECTION"
+            distance = 0
+        elif record is not None and record.identity in probable_distance:
+            impact_class = "PROBABLE"
+            reason_code = "BOUNDED_EXISTING_GRAPH_CLOSURE"
+            distance = probable_distance[record.identity]
+        elif key in unchanged_keys:
+            impact_class = "UNCHANGED"
+            reason_code = "EXACT_COMPARED_BLOB_IDENTITY_SAME_FILE_FACT_ONLY"
+            distance = 0
+        else:
+            impact_class = "MANUAL_REVIEW"
+            reason_code = "RELATION_OR_ENDPOINT_REQUIRES_MANUAL_REVIEW"
+            distance = None
+        evidence_ids = sorted(
+            item
+            for item in (
+                connection.get("connection_id") if connection else None,
+                scope.get("scope_rule_id") if scope else None,
+                selected_record.identity if selected_record else None,
+            )
+            if item
+        )
+        impact.append(
+            {
+                "impact_id": _stable_unit_b_id(
+                    "IMPACT", {"repository_key": key[0], "path": key[1]}
+                ),
+                "target_id": evidence_ids[0] if evidence_ids else "UNRESOLVED.TARGET",
+                "repository_key": key[0],
+                "path": key[1],
+                "target_symbol_or_route": (
+                    connection.get("target_symbol_or_route") if connection else None
+                ),
+                "impact_class": impact_class,
+                "reason_code": reason_code,
+                "graph_distance": distance,
+                "evidence_ids": evidence_ids,
+                "origin_changed_target_ids": (
+                    [selected_record.identity]
+                    if key in changed_keys and selected_record is not None
+                    else sorted(probable_origins.get(record.identity, set()))
+                    if impact_class == "PROBABLE" and record is not None
+                    else []
+                ),
+                "claim_boundary": "FILE_AND_GRAPH_FACT_ONLY_NO_SEMANTIC_EFFECT_CLAIM",
+                "required_owner_handback": (
+                    "MASH" if impact_class == "MANUAL_REVIEW" else None
+                ),
+            }
+        )
+    impact.sort(key=lambda row: row["impact_id"])
+
+    drift: list[dict[str, Any]] = []
+
+    def exact_drift_target_locator(
+        subject_id: str,
+        repository_key: str,
+        path: str,
+        owner_id: str | None = None,
+    ) -> dict[str, Any]:
+        locator: dict[str, Any] = {
+            "locator_id": _stable_unit_b_id(
+                "LOC.DRIFT",
+                {
+                    "subject_id": subject_id,
+                    "repository_key": _normalize_repository(repository_key),
+                    "path": _normalize_path(path),
+                },
+            ),
+            "privacy": "PUBLIC",
+            "repository_key": _normalize_repository(repository_key),
+            "path": _normalize_path(path),
+        }
+        if owner_id is not None:
+            locator["owner_id"] = owner_id
+            owner = owner_by_id.get(owner_id)
+            if owner is not None and type(owner.get("remote_ref")) is str:
+                locator["remote_ref"] = owner["remote_ref"]
+        return locator
+
+    def add_drift(
+        code: str,
+        subject_id: str,
+        locator: Mapping[str, Any],
+        provenance: str,
+        verified_scope: Sequence[str],
+        impact_class: str,
+        handback: str,
+    ) -> None:
+        payload = {"drift_code": code, "subject_id": subject_id}
+        drift.append(
+            {
+                "drift_id": _stable_unit_b_id("DRIFT", payload),
+                "drift_code": code,
+                "subject_id": subject_id,
+                "evidence_locator": _public_locator_projection(locator),
+                "assertion_provenance": provenance,
+                "verified_scope": sorted(set(verified_scope)),
+                "impact_class": impact_class,
+                "required_owner_handback": handback,
+            }
+        )
+
+    for premise in premise_model.get("premises", []):
+        if (
+            premise.get("status") == "RESOLVED"
+            or premise.get("reason_code")
+            != "REQUIRED_PREMISE_MISSING_OR_UNREADABLE"
+        ):
+            continue
+        locator = exact_drift_target_locator(
+            str(premise["premise_id"]),
+            str(premise["repository_key"]),
+            str(premise["path"]),
+            str(premise["owner_id"]),
+        )
+        add_drift(
+            "OWNER_PATH_MISSING",
+            str(premise["premise_id"]),
+            locator,
+            "MACHINE_VERIFIED",
+            ["EXACT_OWNER_REF", "OWNER_TREE_PATH_LOOKUP"],
+            "MANUAL_REVIEW",
+            "MASH",
+        )
+    declared_paths = {
+        (
+            _normalize_repository(str(row["repository_key"])),
+            _normalize_path(str(row["path"])),
+        ): (str(row["premise_id"]), str(row["owner_id"]))
+        for row in premise_model.get("premises", [])
+    }
+    declared_paths.update(
+        {
+            (
+                _normalize_repository(
+                    str(row["subject_locator"]["repository_key"])
+                ),
+                _normalize_path(str(row["subject_locator"]["path"])),
+            ): (
+                str(row["responsibility_id"]),
+                str(row["subject_locator"]["owner_id"]),
+            )
+            for row in premise_model.get("responsibilities", [])
+        }
+    )
+    for owner in owners:
+        owner_repository_key = _normalize_repository(
+            str(owner["repository_key"])
+        )
+        for change in owner.get("owner_side_changes", []):
+            git_status = str(change.get("git_status") or "")
+            if not (git_status.startswith("R") or git_status == "D"):
+                continue
+            old_path = _normalize_path(str(change.get("old_path") or ""))
+            declared = declared_paths.get((owner_repository_key, old_path))
+            if declared is None:
+                continue
+            add_drift(
+                "OWNER_PATH_RENAMED_OR_DELETED",
+                declared[0],
+                exact_drift_target_locator(
+                    declared[0],
+                    owner_repository_key,
+                    old_path,
+                    declared[1],
+                ),
+                "MACHINE_DISCOVERED",
+                ["EXACT_REF_DIFF", "OLD_AND_NEW_PATH"],
+                "MANUAL_REVIEW",
+                "MASH",
+            )
+    connection_by_target = {
+        _locator_key(row["target_locator"]): row for row in connections
+    }
+    for responsibility in premise_model.get("responsibilities", []):
+        key = _locator_key(responsibility["subject_locator"])
+        connection = connection_by_target.get(key)
+        if (
+            responsibility["lifecycle"] in {"HISTORICAL", "SUPERSEDED"}
+            and connection is not None
+            and connection["relation_kind"] == "EXPOSED_BY_ROUTE"
+            and connection["endpoint_verification"] == "ALL_ENDPOINTS_VERIFIED"
+        ):
+            add_drift(
+                "EXPLICIT_RETIRED_ROUTE_STILL_ACTIVE",
+                str(responsibility["responsibility_id"]),
+                connection["target_locator"],
+                str(responsibility["assertion_provenance"]),
+                ["EXPLICIT_LIFECYCLE", "ROUTE_GRAPH_ENDPOINT"],
+                "MANUAL_REVIEW",
+                "MASH",
+            )
+        record = by_key.get(key)
+        if (
+            responsibility["lifecycle"] == "DESIGN_ONLY"
+            and record is not None
+            and record.evidence_kind == "source"
+        ):
+            add_drift(
+                "DESIGN_ONLY_CLASSIFIED_AS_RUNTIME_ACTUAL",
+                str(responsibility["responsibility_id"]),
+                exact_drift_target_locator(
+                    str(responsibility["responsibility_id"]),
+                    str(responsibility["subject_locator"]["repository_key"]),
+                    str(responsibility["subject_locator"]["path"]),
+                    str(responsibility["subject_locator"]["owner_id"]),
+                ),
+                str(responsibility["assertion_provenance"]),
+                ["EXPLICIT_LIFECYCLE", "INVENTORY_SOURCE_CLASSIFICATION"],
+                "MANUAL_REVIEW",
+                "MASH",
+            )
+    for connection in connections:
+        if (
+            connection["required"]
+            and connection["relation_kind"] == "COVERED_BY_TEST_OR_CONTRACT"
+            and connection["endpoint_verification"] != "ALL_ENDPOINTS_VERIFIED"
+        ):
+            add_drift(
+                "DECLARED_TEST_CONTRACT_OWNER_ROUTE_MISMATCH",
+                str(connection["connection_id"]),
+                connection["target_locator"],
+                "MACHINE_VERIFIED",
+                ["DECLARED_CONNECTION", "TEST_OR_CONTRACT_ENDPOINT"],
+                "MANUAL_REVIEW",
+                "MASH",
+            )
+    # OWNER_OWNED_PATH_CHANGED_AFTER_INTEGRATION is intentionally not emitted
+    # by this read-only task.  It belongs to a separately authorized owner-write
+    # transaction and cannot be inferred from PR #30 routing alone.
+    drift.sort(key=lambda row: row["drift_id"])
+
+    decision_items: dict[str, dict[str, Any]] = {}
+
+    def add_decision(
+        *,
+        priority: int,
+        stable_id: str,
+        required: bool,
+        repository_key: str | None,
+        path: str | None,
+        graph_distance: int | None,
+        selection_tier: str,
+        reason_codes: Sequence[str],
+        locator: Mapping[str, Any] | None,
+    ) -> None:
+        decision_items[stable_id] = {
+            "priority": priority,
+            "stable_id": stable_id,
+            "required": required,
+            "repository_key": repository_key,
+            "path": path,
+            "graph_distance": graph_distance,
+            "selection_tier": selection_tier,
+            "reason_codes": sorted(set(reason_codes)),
+            "locator": _public_locator_projection(locator) if locator else None,
+        }
+
+    owner_by_id = {str(row["owner_id"]): row for row in owners}
+    freshness_item_ids: list[str] = []
+    for row in sorted(freshness, key=lambda item: str(item["owner_id"])):
+        owner = owner_by_id[str(row["owner_id"])]
+        stable_id = _stable_unit_b_id(
+            "FRESHNESS",
+            {
+                "owner_id": row["owner_id"],
+                "relation": row["relation"],
+                "resolved_head": row["resolved_head"],
+            },
+        )
+        freshness_item_ids.append(stable_id)
+        add_decision(
+            priority=1,
+            stable_id=stable_id,
+            required=True,
+            repository_key=str(owner["repository_key"]),
+            path=str(owner["source_locator"]["path"]),
+            graph_distance=0,
+            selection_tier=(
+                "DECISION_SURFACE"
+                if row["read_only_ready"]
+                else "UNRESOLVED_IMPACT"
+            ),
+            reason_codes=[
+                str(row["relation"]),
+                (
+                    "READ_ONLY_EXACT_REF_RESOLVED"
+                    if row["read_only_ready"]
+                    else "REMOTE_UNRESOLVED"
+                ),
+            ],
+            locator=owner["source_locator"],
+        )
+
+    for premise in premise_model.get("premises", []):
+        add_decision(
+            priority=1 if premise["status"] != "RESOLVED" else 2,
+            stable_id=str(premise["premise_id"]),
+            required=bool(premise["required"]),
+            repository_key=str(premise["repository_key"]),
+            path=str(premise["path"]),
+            graph_distance=0,
+            selection_tier=str(premise["read_tier"]),
+            reason_codes=[str(premise["reason_code"])],
+            locator=premise["source_locator"],
+        )
+    for claim in claims:
+        add_decision(
+            priority=3,
+            stable_id=str(claim["claim_id"]),
+            required=claim["claim_kind"] in CLAIM_KINDS,
+            repository_key=str(claim["source_locator"]["repository_key"]),
+            path=str(claim["source_locator"]["path"]),
+            graph_distance=0,
+            selection_tier="DECISION_SURFACE",
+            reason_codes=[str(claim["claim_kind"]), str(claim["claim_boundary"])],
+            locator=claim["source_locator"],
+        )
+    for scope in scope_rules:
+        add_decision(
+            priority=4,
+            stable_id=str(scope["scope_rule_id"]),
+            required=scope["changeability"] in {"PROTECTED_REVIEW_REQUIRED", "FORBIDDEN"},
+            repository_key=str(scope["target_locator"]["repository_key"]),
+            path=str(scope["target_locator"]["path"]),
+            graph_distance=0,
+            selection_tier=(
+                "UNRESOLVED_IMPACT"
+                if scope["changeability"] == "UNRESOLVED"
+                else "DECISION_SURFACE"
+            ),
+            reason_codes=[str(scope["changeability"]), str(scope["required_approval"])],
+            locator=scope["target_locator"],
+        )
+    for connection in connections:
+        add_decision(
+            priority=5,
+            stable_id=str(connection["connection_id"]),
+            required=bool(connection["required"]),
+            repository_key=str(connection["target_locator"]["repository_key"]),
+            path=str(connection["target_locator"]["path"]),
+            graph_distance=0,
+            selection_tier=(
+                "DECISION_SURFACE"
+                if connection["endpoint_verification"] == "ALL_ENDPOINTS_VERIFIED"
+                else "UNRESOLVED_IMPACT"
+            ),
+            reason_codes=[str(connection["endpoint_verification"]), str(connection["relation_kind"])],
+            locator=connection["target_locator"],
+        )
+    for row in impact:
+        key = (
+            _normalize_repository(str(row["repository_key"])),
+            _normalize_path(str(row["path"])),
+        )
+        if row["impact_class"] != "DIRECT" or key not in owner_changed_keys:
+            continue
+        record = by_key.get(key)
+        if record is not None and record.identity not in selected_by_identity:
+            record = None
+        locator = {
+            "locator_id": _stable_unit_b_id(
+                "LOC.IMPACT", {"impact_id": row["impact_id"]}
+            ),
+            "privacy": "PUBLIC",
+            "repository_key": row["repository_key"],
+            "path": row["path"],
+        }
+        add_decision(
+            priority=4,
+            stable_id=str(row["impact_id"]),
+            required=True,
+            repository_key=str(row["repository_key"]),
+            path=str(row["path"]),
+            graph_distance=0,
+            selection_tier="DECISION_SURFACE",
+            reason_codes=[str(row["reason_code"])],
+            locator=locator if record is not None else None,
+        )
+    for row in impact:
+        if row["impact_class"] != "PROBABLE":
+            continue
+        record = by_key.get((row["repository_key"], row["path"]))
+        locator = {
+            "locator_id": _stable_unit_b_id("LOC.IMPACT", {"impact_id": row["impact_id"]}),
+            "privacy": "PUBLIC",
+            "repository_key": row["repository_key"],
+            "path": row["path"],
+        }
+        add_decision(
+            priority=6,
+            stable_id=str(row["impact_id"]),
+            required=False,
+            repository_key=str(row["repository_key"]),
+            path=str(row["path"]),
+            graph_distance=int(row["graph_distance"] or 0),
+            selection_tier="REFERENCE_ON_TRIGGER",
+            reason_codes=[str(row["reason_code"])],
+            locator=locator if record is not None else None,
+        )
+    decision_surface_candidates = sorted(
+        decision_items.values(),
+        key=lambda row: (
+            row["priority"],
+            0 if row["required"] else 1,
+            row["graph_distance"] if row["graph_distance"] is not None else 10**9,
+            str(row["repository_key"] or ""),
+            str(row["path"] or ""),
+            row["stable_id"],
+        ),
+    )
+
+    blockers = sorted(
+        set(str(code) for code in premise_model.get("blocking_codes", []))
+        | set(required_claim_blockers)
+        | set(required_connection_blockers)
+        | {
+            str(item["code"])
+            for item in unresolved
+            if item.get("blocking") is True
+        }
+    )
+    if premise_model.get("status") != "UNIT_A_PREMISE_MODEL_READY":
+        blockers.append("UNIT_A_PREMISE_MODEL_NOT_READY")
+    if any(row["changeability"] == "UNRESOLVED" for row in scope_rules):
+        blockers.append("UNRESOLVED_SCOPE_RULE")
+    if any(row["impact_class"] == "MANUAL_REVIEW" for row in impact) or any(
+        row["impact_class"] == "MANUAL_REVIEW" for row in drift
+    ):
+        blockers.append("MANUAL_REVIEW_REQUIRED")
+    blockers = sorted(set(blockers))
+
+    role_views = contract["role_views"]
+    ultra_overflow: list[str] = []
+    ultra_policy = role_views["ULTRA_KAREN"]
+    decision_surface_items: list[dict[str, Any]] = []
+    referenced_records: dict[str, FileRecord] = {}
+    referenced_source_bytes = 0
+    optional_admission_closed = False
+    for row in decision_surface_candidates:
+        locator = row.get("locator")
+        record = (
+            by_key.get(_locator_key(locator))
+            if isinstance(locator, Mapping)
+            else None
+        )
+        if record is not None and record.identity not in selected_by_identity:
+            record = None
+        additional_bytes = (
+            (record.size_bytes or 0)
+            if record is not None and record.identity not in referenced_records
+            else 0
+        )
+        exceeds_items = len(decision_surface_items) + 1 > ultra_policy["max_items"]
+        exceeds_bytes = (
+            referenced_source_bytes + additional_bytes
+            > ultra_policy["max_referenced_source_bytes"]
+        )
+        if row["required"]:
+            decision_surface_items.append(row)
+            if record is not None and record.identity not in referenced_records:
+                referenced_records[record.identity] = record
+                referenced_source_bytes += additional_bytes
+            if exceeds_items:
+                ultra_overflow.append("BUDGET_EXCEEDED_REQUIRED_SURFACE")
+            if exceeds_bytes:
+                ultra_overflow.append("BUDGET_EXCEEDED_REFERENCED_SOURCE_BYTES")
+            continue
+        if optional_admission_closed or exceeds_items or exceeds_bytes:
+            optional_admission_closed = True
+            continue
+        decision_surface_items.append(row)
+        if record is not None and record.identity not in referenced_records:
+            referenced_records[record.identity] = record
+            referenced_source_bytes += additional_bytes
+    additional_decision_surface_count = (
+        len(decision_surface_candidates) - len(decision_surface_items)
+    )
+
+    def card(
+        card_id: str, items: Sequence[Mapping[str, Any]], fallback_reason: str
+    ) -> dict[str, Any]:
+        locators: list[dict[str, Any]] = []
+        locator_keys: set[tuple[str, str]] = set()
+        for item in items:
+            locator = item.get("locator")
+            if not isinstance(locator, Mapping):
+                continue
+            key = _locator_key(locator)
+            if key in locator_keys:
+                continue
+            locator_keys.add(key)
+            locators.append(_public_locator_projection(locator))
+        locators.sort(
+            key=lambda row: (str(row.get("repository_key")), str(row.get("path")))
+        )
+        reasons = sorted(
+            {
+                reason
+                for item in items
+                for reason in item.get("reason_codes", [])
+            }
+        )
+        return {
+            "card_id": card_id,
+            "item_ids": [str(item["stable_id"]) for item in items[:3]],
+            "source_item_count": len(items),
+            "locators": locators[:3],
+            "additional_count": max(len(items) - 3, len(locators) - 3, 0),
+            "reason_codes": (reasons or [fallback_reason])[:2],
+            "additional_reason_count": max(len(reasons) - 2, 0),
+            "detail_anchor": "operator_context.json#/decision_surface",
+        }
+
+    items_by_id = {row["stable_id"]: row for row in decision_surface_items}
+    premise_items = [
+        items_by_id[row["premise_id"]]
+        for row in premise_model.get("premises", [])
+        if row["premise_id"] in items_by_id
+    ]
+    claim_items = [items_by_id[row["claim_id"]] for row in claims]
+    purpose_items = [
+        items_by_id[row["claim_id"]]
+        for row in claims
+        if row["claim_kind"] == "PRODUCT_PURPOSE"
+    ]
+    fixed_items = [
+        items_by_id[row["claim_id"]]
+        for row in claims
+        if row["claim_kind"] == "MASH_FIXED_CONDITION"
+    ]
+    owner_route_items = [
+        items_by_id[row["claim_id"]]
+        for row in claims
+        if row["claim_kind"] in {"CURRENT_PRODUCT_OWNER", "PRODUCT_ROUTE"}
+    ]
+    zero_items = [
+        items_by_id[row["claim_id"]]
+        for row in claims
+        if row["claim_kind"] == "ZERO_EFFECT_BOUNDARY"
+    ]
+    connection_items = [
+        items_by_id[row["connection_id"]]
+        for row in connections
+        if row["connection_id"] in items_by_id
+    ]
+    freshness_items = [
+        items_by_id[item_id]
+        for item_id in freshness_item_ids
+        if item_id in items_by_id
+    ]
+    unresolved_items = [
+        row for row in decision_surface_items if row["selection_tier"] == "UNRESOLVED_IMPACT"
+    ]
+    owner_changed_items = [
+        items_by_id[row["impact_id"]]
+        for row in sorted(
+            impact,
+            key=lambda item: (
+                str(item["repository_key"]),
+                str(item["path"]),
+                str(item["impact_id"]),
+            ),
+        )
+        if row["impact_id"] in items_by_id
+        and (
+            _normalize_repository(str(row["repository_key"])),
+            _normalize_path(str(row["path"])),
+        )
+        in owner_changed_keys
+    ]
+    cards = [
+        card(PRO_FIRST_VIEW_CARDS[0], purpose_items, "TASK_ORIENTATION_NONAUTHORITY"),
+        card(
+            PRO_FIRST_VIEW_CARDS[1],
+            freshness_items + unresolved_items,
+            "FRESHNESS_READY_NO_BLOCKER",
+        ),
+        card(PRO_FIRST_VIEW_CARDS[2], fixed_items, "NO_MASH_FIXED_CONDITION"),
+        card(PRO_FIRST_VIEW_CARDS[3], owner_route_items, "OWNER_OR_ROUTE_UNRESOLVED"),
+        card(PRO_FIRST_VIEW_CARDS[4], premise_items, "NO_REQUIRED_ORIGINAL"),
+        card(
+            PRO_FIRST_VIEW_CARDS[5],
+            owner_changed_items[:1] + connection_items,
+            "NO_VERIFIED_PRODUCT_ROUTE_FINDING",
+        ),
+        card(PRO_FIRST_VIEW_CARDS[6], unresolved_items, "NO_UNRESOLVED_HANDBACK"),
+        card(PRO_FIRST_VIEW_CARDS[7], zero_items, "ZERO_EFFECT_BOUNDARY_REQUIRED"),
+    ]
+    pro_referenced_keys = {
+        _locator_key(locator)
+        for item in cards
+        for locator in item["locators"]
+    }
+    pro_first_view_item_ids = {
+        item_id for item in cards for item_id in item["item_ids"]
+    }
+    pro_referenced_source_bytes = sum(
+        record.size_bytes or 0
+        for key in pro_referenced_keys
+        if (record := by_key.get(key)) is not None
+        and record.identity in selected_by_identity
+    )
+    pro_overflow: list[str] = []
+    if (
+        len(pro_first_view_item_ids)
+        > role_views["PRO_KAREN"]["first_view"]["max_decision_items"]
+    ):
+        pro_overflow.append("BUDGET_EXCEEDED_REQUIRED_SURFACE")
+    if pro_referenced_source_bytes > role_views["PRO_KAREN"]["max_referenced_source_bytes"]:
+        pro_overflow.append("BUDGET_EXCEEDED_REFERENCED_SOURCE_BYTES")
+    if pro_overflow or ultra_overflow:
+        blockers.extend(pro_overflow)
+        blockers.extend(ultra_overflow)
+        blockers = sorted(set(blockers))
+
+    protected_connections = sorted(
+        row["connection_id"]
+        for row in connections
+        if row["relation_kind"] == "COVERED_BY_TEST_OR_CONTRACT"
+    )
+    direct_impacts = [row for row in impact if row["impact_class"] == "DIRECT"]
+    owner_ids = sorted(str(row["owner_id"]) for row in owners if row.get("required"))
+    premise_ids = [
+        str(row["premise_id"])
+        for row in premise_model.get("premises", [])
+        if row.get("required")
+    ]
+    minimal_readback = []
+    for row in direct_impacts:
+        origin_ids = set(row["origin_changed_target_ids"])
+        related_probable = sorted(
+            item["impact_id"]
+            for item in impact
+            if item["impact_class"] == "PROBABLE"
+            and origin_ids.intersection(item["origin_changed_target_ids"])
+        )
+        minimal_readback.append(
+            {
+            "readback_id": _stable_unit_b_id(
+                "READBACK", {"impact_id": row["impact_id"]}
+            ),
+            "changed_target": {
+                "repository_key": row["repository_key"],
+                "path": row["path"],
+                "target_symbol_or_route": row["target_symbol_or_route"],
+            },
+            "required_owner_ids": owner_ids,
+            "required_premise_ids": premise_ids,
+            "protected_connection_ids": protected_connections,
+            "probable_dependent_ids": related_probable[:12],
+            "additional_probable_dependent_count": max(
+                len(related_probable) - 12, 0
+            ),
+            "reason_codes": [row["reason_code"]],
+            "unresolved_impact_handback": (
+                "MASH"
+                if any(item["impact_class"] == "MANUAL_REVIEW" for item in impact)
+                else None
+            ),
+            "full_closure_pointer": "closure_edges.jsonl",
+            }
+        )
+
+    unresolved_by_owner = [
+        {
+            "owner": str(row.get("handback_owner") or "MASH"),
+            "reason_code": str(row.get("code") or "UNRESOLVED_CONTEXT"),
+            "source_id": str(row.get("unresolved_id") or "UNRESOLVED.CONTEXT"),
+            "blocking": bool(row.get("blocking")),
+        }
+        for row in unresolved
+    ]
+    for code in blockers:
+        unresolved_by_owner.append(
+            {
+                "owner": "MASH",
+                "reason_code": code,
+                "source_id": f"UNIT_B.{code}",
+                "blocking": True,
+            }
+        )
+    unresolved_by_owner.sort(
+        key=lambda row: (row["owner"], row["reason_code"], row["source_id"])
+    )
+
+    unit_b_ready = not blockers
+    model: dict[str, Any] = {
+        "schema_version": "cocolon.system_context.operator_context.unit_b.v1",
+        "workspace": workspace,
+        "task": task,
+        "integrity_status": "VALID",
+        "legacy_context": {
+            "status": legacy_status,
+            "selected_file_count": len(selected_rows),
+            "closure_edge_count": len(used_edges),
+            "compatibility_authority": False,
+        },
+        "operator_v1": {
+            "status": (
+                "V1_OPERATOR_CONTEXT_READY"
+                if unit_b_ready
+                else "V1_OPERATOR_CONTEXT_BLOCKED"
+            ),
+            "candidate_status": "ACTUAL_EVIDENCE_PRESENT_NOT_APPROVED",
+            "unit_b_status": (
+                "UNIT_B_WORK_CONTEXT_READY"
+                if unit_b_ready
+                else "UNIT_B_WORK_CONTEXT_BLOCKED"
+            ),
+            "temporary_candidate": True,
+            "workspace_incorporation_claim": False,
+            "write_authority": False,
+            "merge_required": False,
+            "rebase_required": False,
+            "integration_required": False,
+            "v1_activation": 0,
+        },
+        "task_dependency_fingerprint": task_dependency_fingerprint,
+        "operator_model_fingerprint": "",
+        "task_profile_declaration": {
+            "schema_version": PROFILE_SCHEMA_VERSION,
+            "task": task,
+            "profile": task_profile,
+        },
+        "workspace_refs": dict(workspace_refs),
+        "canonical_owner_refs": owners,
+        "freshness": freshness,
+        "responsibilities": list(premise_model.get("responsibilities", [])),
+        "conflicts": list(premise_model.get("conflicts", [])),
+        "supersession": {
+            "responsibility_edges": sorted(
+                {
+                    f"{row['responsibility_id']}->{target}"
+                    for row in premise_model.get("responsibilities", [])
+                    for target in row.get("supersedes", [])
+                }
+            ),
+            "connection_ids": sorted(
+                row["connection_id"]
+                for row in connections
+                if row["relation_kind"] == "SUPERSEDES"
+            ),
+        },
+        "required_premises": list(premise_model.get("premises", [])),
+        "entry_chains": [premise_ids],
+        "claims": claims,
+        "verification_scopes": [
+            {
+                "source_id": row["claim_id"],
+                "verified_scope": list(row["verified_scope"]),
+            }
+            for row in claims
+        ]
+        + [
+            {
+                "source_id": row["connection_id"],
+                "verified_scope": list(row["verified_scope"]),
+            }
+            for row in connections
+        ],
+        "decision_lineage": [
+            {
+                "claim_id": row["claim_id"],
+                "asserted_by": row["asserted_by"],
+                "decision_owner": row["decision_owner"],
+                "assertion_provenance": row["assertion_provenance"],
+                "adoption_state": row["adoption_state"],
+                "source_locator": row["source_locator"],
+                "machine_semantic_inference": False,
+            }
+            for row in claims
+        ],
+        "design_actual_test_connections": connections,
+        "decision_surface": {
+            "priority_order": [1, 2, 3, 4, 5, 6, 7],
+            "items": decision_surface_items,
+            "full_candidate_count": len(decision_surface_candidates),
+            "additional_candidate_count": additional_decision_surface_count,
+            "required_item_count": sum(
+                bool(row["required"]) for row in decision_surface_candidates
+            ),
+            "pro_first_view_cards": cards,
+            "full_closure_pointer": "closure_edges.jsonl",
+            "full_candidate_pointer": "operator_context.json#/impact",
+            "semantic_ranking": False,
+        },
+        "read_tiers": {
+            tier: sum(row["selection_tier"] == tier for row in decision_surface_items)
+            for tier in sorted(SELECTION_TIERS)
+        },
+        "budgets": {
+            "PRO_KAREN": {
+                **dict(role_views["PRO_KAREN"]),
+                "observed_items": len(pro_first_view_item_ids),
+                "first_view_observed_decision_items": len(
+                    pro_first_view_item_ids
+                ),
+                "referenced_source_bytes": pro_referenced_source_bytes,
+                "overflow_codes": sorted(set(pro_overflow)),
+                "silent_truncation": False,
+                "automatic_expansion": False,
+            },
+            "ULTRA_KAREN": {
+                **dict(role_views["ULTRA_KAREN"]),
+                "observed_items": len(decision_surface_items),
+                "referenced_source_bytes": referenced_source_bytes,
+                "overflow_codes": sorted(set(ultra_overflow)),
+                "silent_truncation": False,
+                "automatic_expansion": False,
+            },
+        },
+        "scope_rules": scope_rules,
+        "drift": drift,
+        "impact": impact,
+        "minimal_readback": minimal_readback,
+        "unresolved_by_owner": unresolved_by_owner,
+        "completion_gates": {
+            "unit_a_premise_model_ready": premise_model.get("status")
+            == "UNIT_A_PREMISE_MODEL_READY",
+            "claim_provenance_valid": True,
+            "required_claim_sources_resolved": not required_claim_blockers,
+            "required_connections_verified": not required_connection_blockers,
+            "scope_default_applied": all(
+                row["changeability"] != "UNRESOLVED" for row in scope_rules
+            ),
+            "pro_first_view_budget_pass": not pro_overflow,
+            "ultra_budget_pass": not ultra_overflow,
+            "manual_review_absent": not any(
+                row["impact_class"] == "MANUAL_REVIEW" for row in impact
+            )
+            and not any(
+                row["impact_class"] == "MANUAL_REVIEW" for row in drift
+            ),
+            "shared_model_projection_binding_required": True,
+            "unit_c_collaboration_complete": False,
+            "operator_v1_activation_approved": False,
+        },
+        "completion_claim": None,
+        "v1_activation": 0,
+        "product_credit": 0,
+        "technical_credit": 0,
+        "automatic_progression": False,
+        "unit_c_started": False,
+    }
+    model["operator_model_fingerprint"] = _operator_model_fingerprint(model)
+    _reject_sensitive_public_projection(model)
+    return model
 
 
 def _match_path(path: str, rule: Mapping[str, Any]) -> bool:
@@ -4686,6 +6750,9 @@ def _context_fingerprint_payload(
     unit_a_model_sha256: str | None = None,
     workspace_exact_refs: Mapping[str, Any] | None = None,
     unit_a_completion_gates: Mapping[str, Any] | None = None,
+    operator_model_fingerprint: str | None = None,
+    operator_context_sha256: str | None = None,
+    unit_b_work_context: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
     payload = {
         "workspace": workspace,
@@ -4709,6 +6776,12 @@ def _context_fingerprint_payload(
         payload["workspace_exact_refs"] = workspace_exact_refs
     if unit_a_completion_gates is not None:
         payload["unit_a_completion_gates"] = unit_a_completion_gates
+    if operator_model_fingerprint is not None:
+        payload["operator_model_fingerprint"] = operator_model_fingerprint
+    if operator_context_sha256 is not None:
+        payload["operator_context_sha256"] = operator_context_sha256
+    if unit_b_work_context is not None:
+        payload["unit_b_work_context"] = unit_b_work_context
     return payload
 
 
@@ -4831,6 +6904,32 @@ def compile_task_context(
         requested_classification,
         canonical_owner_bundle or {},
     )
+    if is_v2 and _is_unit_b_profile(task_profile):
+        unit_b_contract = task_profile["operator_contract"]
+        unit_b_seed_rows = [
+            (
+                row["source_locator"],
+                f"unit_b_required_claim_source:{row['claim_id']}",
+            )
+            for row in unit_b_contract["claim_nodes"]
+        ] + [
+            (
+                row["target_locator"],
+                f"unit_b_required_connection_target:{row['connection_id']}",
+            )
+            for row in unit_b_contract["connections"]
+            if row["required"]
+        ]
+        for locator, reason in unit_b_seed_rows:
+            record = by_key.get(_locator_key(locator))
+            if record is None:
+                continue
+            reasons.setdefault(record.identity, set()).add(reason)
+            old = requested_classification.get(record.identity)
+            if old is None or CLASSIFICATION_PRIORITY["MUST_READ_FULL"] < (
+                CLASSIFICATION_PRIORITY[old]
+            ):
+                requested_classification[record.identity] = "MUST_READ_FULL"
     manual_overlay_sha256: str | None = None
     if manual_overlay_path is not None:
         overlay = _read_json(manual_overlay_path)
@@ -4980,6 +7079,30 @@ def compile_task_context(
         if complete
         else "STEP4_INCOMPLETE_BLOCKING_CONTEXT_OR_REMOTE_VERIFICATION"
     )
+    is_unit_b = bool(is_v2 and _is_unit_b_profile(task_profile))
+    unit_b_model = (
+        build_work_context_model(
+            workspace=workspace,
+            task=task,
+            legacy_status=status,
+            task_profile=task_profile,
+            premise_model=premise_model,
+            by_identity=by_identity,
+            by_key=by_key,
+            selected_rows=selected_rows,
+            used_edges=used_edges,
+            unresolved=unresolved,
+            task_dependency_fingerprint=str(
+                (canonical_owner_bundle or {}).get("task_dependency_fingerprint")
+                or ""
+            ),
+            workspace_refs=manifests["inventory"].get("repositories", {}),
+            symbol_owner=symbol_owner,
+            route_owner=route_owner,
+        )
+        if is_unit_b
+        else None
+    )
 
     output_dir.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(
@@ -5013,8 +7136,77 @@ def compile_task_context(
             staging / "cmee_unincorporated_actual_findings.md",
             _findings_markdown(findings, unresolved).encode("utf-8"),
         )
+        operator_context_sha256: str | None = None
+        operator_model_fingerprint: str | None = None
+        if unit_b_model is not None:
+            for _attempt in range(8):
+                unit_b_model["operator_model_fingerprint"] = (
+                    _operator_model_fingerprint(unit_b_model)
+                )
+                operator_bytes = _pretty_json_bytes(unit_b_model)
+                operator_context_sha256 = _sha256_bytes(operator_bytes)
+                pro_bytes = _render_pro_context(
+                    unit_b_model, operator_context_sha256
+                )
+                ultra_bytes = _render_ultra_context(
+                    unit_b_model, operator_context_sha256
+                )
+                expanded_pro_bytes = _render_pro_context(
+                    unit_b_model,
+                    operator_context_sha256,
+                    collapse_overflow=False,
+                )
+                expanded_ultra_bytes = _render_ultra_context(
+                    unit_b_model,
+                    operator_context_sha256,
+                    collapse_overflow=False,
+                )
+                byte_overflow = []
+                if len(expanded_pro_bytes) > 16384:
+                    byte_overflow.append(("PRO_KAREN", "BUDGET_EXCEEDED_REQUIRED_SURFACE"))
+                if len(expanded_pro_bytes) > 98304:
+                    byte_overflow.append(("PRO_KAREN", "BUDGET_EXCEEDED_PROJECTION_BYTES"))
+                if len(expanded_ultra_bytes) > 196608:
+                    byte_overflow.append(("ULTRA_KAREN", "BUDGET_EXCEEDED_PROJECTION_BYTES"))
+                changed = False
+                for role, code in byte_overflow:
+                    overflow_codes = unit_b_model["budgets"][role]["overflow_codes"]
+                    if code not in overflow_codes:
+                        overflow_codes.append(code)
+                        overflow_codes.sort()
+                        handback = {
+                            "owner": "MASH",
+                            "reason_code": code,
+                            "source_id": f"UNIT_B.{code}",
+                            "blocking": True,
+                        }
+                        if handback not in unit_b_model["unresolved_by_owner"]:
+                            unit_b_model["unresolved_by_owner"].append(handback)
+                            unit_b_model["unresolved_by_owner"].sort(
+                                key=lambda row: (
+                                    row["owner"],
+                                    row["reason_code"],
+                                    row["source_id"],
+                                )
+                            )
+                        changed = True
+                if not changed:
+                    break
+                unit_b_model["operator_v1"]["status"] = "V1_OPERATOR_CONTEXT_BLOCKED"
+                unit_b_model["operator_v1"]["unit_b_status"] = "UNIT_B_WORK_CONTEXT_BLOCKED"
+                unit_b_model["completion_gates"]["pro_first_view_budget_pass"] = not unit_b_model["budgets"]["PRO_KAREN"]["overflow_codes"]
+                unit_b_model["completion_gates"]["ultra_budget_pass"] = not unit_b_model["budgets"]["ULTRA_KAREN"]["overflow_codes"]
+            else:  # pragma: no cover - monotonic exact3 overflow set converges
+                raise ContextCompileError("Unit B byte-budget fixed point did not converge")
+            operator_model_fingerprint = str(
+                unit_b_model["operator_model_fingerprint"]
+            )
+            _write_bytes(staging / "operator_context.json", operator_bytes)
+            _write_bytes(staging / "pro_context.md", pro_bytes)
+            _write_bytes(staging / "ultra_context.md", ultra_bytes)
+        logical_output_names = UNIT_B_OUTPUT_NAMES if is_unit_b else OUTPUT_NAMES
         output_sha256 = {
-            name: _sha256_file(staging / name) for name in OUTPUT_NAMES
+            name: _sha256_file(staging / name) for name in logical_output_names
         }
         profile_document = {
             "schema_version": task_profiles["schema_version"],
@@ -5045,9 +7237,9 @@ def compile_task_context(
             unit_a_model_sha256,
             manifests["inventory"].get("repositories") if is_v2 else None,
             completion_gates if is_v2 else None,
-        )
-        context_fingerprint = _sha256_bytes(
-            _canonical_json_bytes(fingerprint_payload)
+            operator_model_fingerprint,
+            operator_context_sha256,
+            None,
         )
         manifest = {
             "schema_version": SCHEMA_VERSION,
@@ -5055,7 +7247,7 @@ def compile_task_context(
             "task": task,
             "status": status,
             "completion_claim": status if complete else None,
-            "context_fingerprint": context_fingerprint,
+            "context_fingerprint": "",
             "workspace_exact_refs": manifests["inventory"].get("repositories", {}),
             "input_sha256": {
                 "step1_manifest": manifests["inventory_sha256"],
@@ -5074,6 +7266,15 @@ def compile_task_context(
                 **(
                     {"unit_a_model": unit_a_model_sha256}
                     if unit_a_model_sha256 is not None
+                    else {}
+                ),
+                **(
+                    {
+                        "operator_model": operator_model_fingerprint,
+                        "operator_context": operator_context_sha256,
+                    }
+                    if operator_model_fingerprint is not None
+                    and operator_context_sha256 is not None
                     else {}
                 ),
             },
@@ -5106,6 +7307,32 @@ def compile_task_context(
                 ),
                 "conflict_count": len(premise_model.get("conflicts", [])),
             }
+        if unit_b_model is not None:
+            unit_b_work_context = {
+                "schema_version": "cocolon.system_context.unit_b_work_context.v1",
+                "status": unit_b_model["operator_v1"]["unit_b_status"],
+                "temporary_candidate": True,
+                "logical_output_count": 10,
+                "operator_context_sha256": operator_context_sha256,
+                "operator_model_fingerprint": operator_model_fingerprint,
+                "projection_source_sha256": operator_context_sha256,
+                "projection_model_fingerprint": operator_model_fingerprint,
+                "pro_context_sha256": output_sha256["pro_context.md"],
+                "ultra_context_sha256": output_sha256["ultra_context.md"],
+                "collaboration_output_present": False,
+                "unit_c_started": False,
+                "completion_claim": None,
+                "v1_activation": 0,
+                "product_credit": 0,
+                "technical_credit": 0,
+                "automatic_progression": False,
+            }
+            manifest["unit_b_work_context"] = unit_b_work_context
+            fingerprint_payload["unit_b_work_context"] = unit_b_work_context
+        context_fingerprint = _sha256_bytes(
+            _canonical_json_bytes(fingerprint_payload)
+        )
+        manifest["context_fingerprint"] = context_fingerprint
         _write_bytes(staging / "context_manifest.json", _pretty_json_bytes(manifest))
         if output_dir.exists():
             shutil.rmtree(output_dir)
@@ -5114,6 +7341,7 @@ def compile_task_context(
     verify_task_context(
         output_dir,
         expected_unit_a=is_v2,
+        expected_unit_b=is_unit_b,
         expected_task=task,
         expected_publication_mode=(
             str(task_profile["publication_mode"]) if is_v2 else None
@@ -5219,12 +7447,21 @@ def _validate_unit_a_manifest_projection(
     selected_rows: Sequence[Mapping[str, Any]],
 ) -> None:
     """Fail closed on self-consistent forgeries of Unit A public boundaries."""
-    _require_exact_keys(manifest, UNIT_A_MANIFEST_KEYS, "Unit A context manifest")
+    is_unit_b = "unit_b_work_context" in manifest
+    _require_exact_keys(
+        manifest,
+        UNIT_B_MANIFEST_KEYS if is_unit_b else UNIT_A_MANIFEST_KEYS,
+        "Unit A/Unit B context manifest",
+    )
     inputs = manifest.get("input_sha256")
     gates = manifest.get("completion_gates")
     if not isinstance(inputs, Mapping) or not isinstance(gates, Mapping):
         raise ContextCompileError("Unit A manifest input or gate projection is invalid")
-    _require_exact_keys(inputs, UNIT_A_INPUT_SHA_KEYS, "Unit A input identity")
+    _require_exact_keys(
+        inputs,
+        UNIT_B_INPUT_SHA_KEYS if is_unit_b else UNIT_A_INPUT_SHA_KEYS,
+        "Unit A/Unit B input identity",
+    )
     _require_exact_keys(gates, UNIT_A_COMPLETION_GATE_KEYS, "Unit A completion gates")
     if any(type(value) is not bool for value in gates.values()):
         raise ContextCompileError("Unit A completion gate type is invalid")
@@ -6014,10 +8251,2088 @@ def _validate_unit_a_manifest_projection(
         raise ContextCompileError("Unit A premise readiness status mismatch")
 
 
+def _validate_unit_b_projection(
+    output_dir: Path, manifest: Mapping[str, Any]
+) -> Mapping[str, Any]:
+    summary = manifest.get("unit_b_work_context")
+    inputs = manifest.get("input_sha256")
+    output_sha = manifest.get("output_sha256")
+    if (
+        not isinstance(summary, Mapping)
+        or not isinstance(inputs, Mapping)
+        or not isinstance(output_sha, Mapping)
+    ):
+        raise ContextCompileError("Unit B manifest projection is invalid")
+    _require_exact_keys(summary, UNIT_B_WORK_CONTEXT_KEYS, "Unit B work context")
+    if (
+        summary.get("schema_version")
+        != "cocolon.system_context.unit_b_work_context.v1"
+        or summary.get("status")
+        not in {"UNIT_B_WORK_CONTEXT_READY", "UNIT_B_WORK_CONTEXT_BLOCKED"}
+        or summary.get("temporary_candidate") is not True
+        or summary.get("logical_output_count") != 10
+        or summary.get("collaboration_output_present") is not False
+        or summary.get("unit_c_started") is not False
+        or summary.get("completion_claim") is not None
+        or summary.get("v1_activation") != 0
+        or summary.get("product_credit") != 0
+        or summary.get("technical_credit") != 0
+        or summary.get("automatic_progression") is not False
+    ):
+        raise ContextCompileError("Unit B checkpoint boundary violated")
+    for key in (
+        "operator_context_sha256",
+        "operator_model_fingerprint",
+        "projection_source_sha256",
+        "projection_model_fingerprint",
+        "pro_context_sha256",
+        "ultra_context_sha256",
+    ):
+        if type(summary.get(key)) is not str or not SHA256_RE.fullmatch(summary[key]):
+            raise ContextCompileError("Unit B hash binding is invalid")
+    if (
+        summary["operator_context_sha256"] != summary["projection_source_sha256"]
+        or summary["operator_model_fingerprint"]
+        != summary["projection_model_fingerprint"]
+        or summary["operator_context_sha256"] != inputs.get("operator_context")
+        or summary["operator_model_fingerprint"] != inputs.get("operator_model")
+        or summary["operator_context_sha256"]
+        != output_sha.get("operator_context.json")
+        or summary["pro_context_sha256"] != output_sha.get("pro_context.md")
+        or summary["ultra_context_sha256"] != output_sha.get("ultra_context.md")
+    ):
+        raise ContextCompileError("Unit B shared-model binding mismatch")
+    if (output_dir / "collaboration_packets.json").exists():
+        raise ContextCompileError("Unit B cannot publish Unit C collaboration output")
+
+    model = _read_json(output_dir / "operator_context.json")
+    if not isinstance(model, Mapping):
+        raise ContextCompileError("Unit B operator context must be an object")
+    model_keys = frozenset(
+        {
+            "schema_version",
+            "workspace",
+            "task",
+            "integrity_status",
+            "legacy_context",
+            "operator_v1",
+            "task_dependency_fingerprint",
+            "operator_model_fingerprint",
+            "task_profile_declaration",
+            "workspace_refs",
+            "canonical_owner_refs",
+            "freshness",
+            "responsibilities",
+            "conflicts",
+            "supersession",
+            "required_premises",
+            "entry_chains",
+            "claims",
+            "verification_scopes",
+            "decision_lineage",
+            "design_actual_test_connections",
+            "decision_surface",
+            "read_tiers",
+            "budgets",
+            "scope_rules",
+            "drift",
+            "impact",
+            "minimal_readback",
+            "unresolved_by_owner",
+            "completion_gates",
+            "completion_claim",
+            "v1_activation",
+            "product_credit",
+            "technical_credit",
+            "automatic_progression",
+            "unit_c_started",
+        }
+    )
+    _require_exact_keys(model, model_keys, "Unit B operator context")
+    _reject_sensitive_public_projection(model)
+    if (
+        model.get("schema_version")
+        != "cocolon.system_context.operator_context.unit_b.v1"
+        or model.get("workspace") != manifest.get("workspace")
+        or model.get("task") != manifest.get("task")
+        or model.get("integrity_status") != "VALID"
+        or model.get("task_dependency_fingerprint") != inputs.get("owner_bundle")
+        or model.get("completion_claim") is not None
+        or model.get("v1_activation") != 0
+        or model.get("product_credit") != 0
+        or model.get("technical_credit") != 0
+        or model.get("automatic_progression") is not False
+        or model.get("unit_c_started") is not False
+    ):
+        raise ContextCompileError("Unit B operator boundary violated")
+    fingerprint = _operator_model_fingerprint(model)
+    if (
+        fingerprint != model.get("operator_model_fingerprint")
+        or fingerprint != summary["operator_model_fingerprint"]
+    ):
+        raise ContextCompileError("Unit B operator model tamper detected")
+    actual_operator_sha = _sha256_file(output_dir / "operator_context.json")
+    if actual_operator_sha != summary["operator_context_sha256"]:
+        raise ContextCompileError("Unit B operator context hash mismatch")
+
+    task_profile_declaration = model.get("task_profile_declaration")
+    if not isinstance(task_profile_declaration, Mapping):
+        raise ContextCompileError("Unit B task profile declaration is invalid")
+    _require_exact_keys(
+        task_profile_declaration,
+        frozenset({"schema_version", "task", "profile"}),
+        "Unit B task profile declaration",
+    )
+    declared_profile = task_profile_declaration.get("profile")
+    if (
+        task_profile_declaration.get("schema_version") != PROFILE_SCHEMA_VERSION
+        or task_profile_declaration.get("task") != model.get("task")
+        or not isinstance(declared_profile, Mapping)
+        or _sha256_bytes(_canonical_json_bytes(task_profile_declaration))
+        != inputs.get("task_profile")
+    ):
+        raise ContextCompileError("Unit B task profile declaration hash mismatch")
+    declared_contract = declared_profile.get("operator_contract")
+    if (
+        not isinstance(declared_contract, Mapping)
+        or set(declared_contract) != OPERATOR_CONTRACT_UNIT_B_KEYS
+    ):
+        raise ContextCompileError("Unit B task profile declaration is not exact7")
+
+    unit_a = manifest.get("unit_a_premise_management")
+    if not isinstance(unit_a, Mapping):
+        raise ContextCompileError("Unit B is missing its Unit A source model")
+    if (
+        model.get("workspace_refs") != manifest.get("workspace_exact_refs")
+        or model.get("canonical_owner_refs") != unit_a.get("owners")
+        or model.get("responsibilities") != unit_a.get("responsibilities")
+        or model.get("conflicts") != unit_a.get("conflicts")
+        or model.get("required_premises") != unit_a.get("premises")
+    ):
+        raise ContextCompileError("Unit B duplicated Unit A facts diverged")
+    selected_rows = list(_iter_jsonl(output_dir / "selected_files.jsonl"))
+    legacy = model.get("legacy_context")
+    if not isinstance(legacy, Mapping):
+        raise ContextCompileError("Unit B legacy context is invalid")
+    _require_exact_keys(
+        legacy,
+        frozenset(
+            {
+                "status",
+                "selected_file_count",
+                "closure_edge_count",
+                "compatibility_authority",
+            }
+        ),
+        "Unit B legacy context",
+    )
+    legacy_edges = list(_iter_jsonl(output_dir / "closure_edges.jsonl"))
+    expected_legacy = {
+        "status": manifest.get("status"),
+        "selected_file_count": len(selected_rows),
+        "closure_edge_count": len(legacy_edges),
+        "compatibility_authority": False,
+    }
+    if (
+        legacy != expected_legacy
+        or manifest.get("closure_edge_count") != len(legacy_edges)
+    ):
+        raise ContextCompileError("Unit B legacy context derivation mismatch")
+
+    operator = model.get("operator_v1")
+    if not isinstance(operator, Mapping):
+        raise ContextCompileError("Unit B operator authority boundary violated")
+    _require_exact_keys(
+        operator,
+        frozenset(
+            {
+                "status",
+                "candidate_status",
+                "unit_b_status",
+                "temporary_candidate",
+                "workspace_incorporation_claim",
+                "write_authority",
+                "merge_required",
+                "rebase_required",
+                "integration_required",
+                "v1_activation",
+            }
+        ),
+        "Unit B operator v1",
+    )
+    if (
+        operator.get("status")
+        not in {"V1_OPERATOR_CONTEXT_READY", "V1_OPERATOR_CONTEXT_BLOCKED"}
+        or operator.get("unit_b_status") != summary.get("status")
+        or operator.get("candidate_status")
+        != "ACTUAL_EVIDENCE_PRESENT_NOT_APPROVED"
+        or operator.get("temporary_candidate") is not True
+        or operator.get("workspace_incorporation_claim") is not False
+        or operator.get("write_authority") is not False
+        or operator.get("merge_required") is not False
+        or operator.get("rebase_required") is not False
+        or operator.get("integration_required") is not False
+        or operator.get("v1_activation") != 0
+    ):
+        raise ContextCompileError("Unit B operator authority boundary violated")
+    freshness = model.get("freshness")
+    if not isinstance(freshness, list):
+        raise ContextCompileError("Unit B freshness projection is invalid")
+    freshness_keys = frozenset(
+        {
+            "owner_id",
+            "relation",
+            "resolved_head",
+            "workspace_material_commit",
+            "owner_side_changed_paths",
+            "workspace_side_changed_paths",
+            "owner_side_changed_path_count",
+            "workspace_side_changed_path_count",
+            "read_only_ready",
+            "workspace_incorporation_claim",
+            "write_authority",
+        }
+    )
+    owner_projection_by_id = {
+        row["owner_id"]: row for row in model["canonical_owner_refs"]
+    }
+    expected_freshness = [
+        {
+            "owner_id": row["owner_id"],
+            "relation": row["relation"],
+            "resolved_head": row.get("pre_publish_resolved_head"),
+            "workspace_material_commit": row.get("workspace_material_commit"),
+            "owner_side_changed_paths": list(
+                row.get("owner_side_changed_paths", [])
+            ),
+            "workspace_side_changed_paths": list(
+                row.get("workspace_side_changed_paths", [])
+            ),
+            "owner_side_changed_path_count": len(
+                row.get("owner_side_changed_paths", [])
+            ),
+            "workspace_side_changed_path_count": len(
+                row.get("workspace_side_changed_paths", [])
+            ),
+            "read_only_ready": row.get("relation") != "REMOTE_UNRESOLVED",
+            "workspace_incorporation_claim": False,
+            "write_authority": False,
+        }
+        for row in model["canonical_owner_refs"]
+    ]
+    for row in freshness:
+        if not isinstance(row, Mapping) or row.get("relation") not in CANONICAL_OWNER_RELATIONS:
+            raise ContextCompileError("Unit B owner relation is invalid")
+        _require_exact_keys(row, freshness_keys, "Unit B freshness row")
+        if row.get("relation") in {"DIVERGED", "OWNER_REF_AHEAD"} and row.get(
+            "read_only_ready"
+        ) is not True:
+            raise ContextCompileError("Unit B readable divergent owner was blocked")
+        if (
+            row.get("workspace_incorporation_claim") is not False
+            or row.get("write_authority") is not False
+        ):
+            raise ContextCompileError("Unit B freshness authority boundary violated")
+    if freshness != expected_freshness:
+        raise ContextCompileError("Unit B freshness exact set derivation mismatch")
+
+    claims = model.get("claims")
+    if not isinstance(claims, list) or any(not isinstance(row, Mapping) for row in claims):
+        raise ContextCompileError("Unit B claims are invalid")
+    selected_by_key = {
+        (
+            _normalize_repository(str(row["repository_key"])),
+            _normalize_path(str(row["path"])),
+        ): row
+        for row in selected_rows
+    }
+    responsibility_by_owner_key = {
+        (
+            str(row["subject_locator"]["owner_id"]),
+            _normalize_repository(str(row["subject_locator"]["repository_key"])),
+            _normalize_path(str(row["subject_locator"]["path"])),
+        ): row
+        for row in model["responsibilities"]
+    }
+    declared_claims = declared_contract.get("claim_nodes")
+    if not isinstance(declared_claims, list) or any(
+        not isinstance(row, Mapping) for row in declared_claims
+    ):
+        raise ContextCompileError("Unit B declared claims are invalid")
+    declared_claim_by_id = {
+        str(row.get("claim_id")): row for row in declared_claims
+    }
+    if len(declared_claim_by_id) != len(declared_claims):
+        raise ContextCompileError("Unit B declared claim IDs are duplicated")
+    claim_ids: set[str] = set()
+    for row in claims:
+        _require_exact_keys(row, CLAIM_ROW_KEYS, "Unit B claim")
+        claim_id = _require_safe_public_id(row.get("claim_id"), "Unit B claim ID")
+        if claim_id in claim_ids:
+            raise ContextCompileError("Unit B claim IDs are duplicated")
+        claim_ids.add(claim_id)
+        declaration = declared_claim_by_id.get(claim_id)
+        if declaration is None:
+            raise ContextCompileError("Unit B claim lacks its declaration")
+        _require_enum(row.get("claim_kind"), CLAIM_KINDS, "Unit B claim kind")
+        provenance = _require_enum(
+            row.get("assertion_provenance"),
+            ASSERTION_PROVENANCE,
+            "Unit B claim provenance",
+        )
+        asserted_by = _require_safe_actor(
+            row.get("asserted_by"), "Unit B claim actor"
+        )
+        decision_owner = _require_safe_actor(
+            row.get("decision_owner"), "Unit B claim decision owner"
+        )
+        if provenance == "MASH_EXPLICIT_DECISION" and (
+            asserted_by.casefold() != "mash"
+            or decision_owner.casefold() != "mash"
+        ):
+            raise ContextCompileError("Unit B Mash provenance is invalid")
+        _require_enum(row.get("adoption_state"), ADOPTION_STATES, "Unit B adoption")
+        verification_status = _require_enum(
+            row.get("verification_status"),
+            CLAIM_VERIFICATION_STATUSES,
+            "Unit B claim verification",
+        )
+        locator = _validate_public_source_locator(
+            row.get("source_locator"), "Unit B claim locator"
+        )
+        if provenance == "MASH_EXPLICIT_DECISION" and not locator.get(
+            "remote_ref"
+        ):
+            raise ContextCompileError("Unit B Mash source is not durable")
+        verified_scope = _require_public_code_list(
+            row.get("verified_scope"), "Unit B claim verified scope", maximum=32
+        )
+        if not set(verified_scope).issubset(
+            CLAIM_DECLARED_VERIFIED_SCOPES | CLAIM_MACHINE_VERIFIED_SCOPES
+        ):
+            raise ContextCompileError("Unit B claim verified scope is invalid")
+        locator_key = _locator_key(locator)
+        locator_owner_id = locator.get("owner_id")
+        if locator_owner_id is not None:
+            source_verified = _resolved_owner_locator_identity(
+                locator,
+                owner_projection_by_id,
+                responsibility_by_owner_key,
+            ) is not None
+            required_machine_scope = {
+                "OWNER_REF_BLOB_IDENTITY",
+                "OWNER_REF_FILE_IDENTITY",
+            }
+        elif locator.get("remote_ref") is None:
+            source_verified = locator_key in selected_by_key
+            required_machine_scope = {
+                "WORKSPACE_INVENTORY_BLOB_IDENTITY",
+                "WORKSPACE_INVENTORY_FILE_IDENTITY",
+            }
+        else:
+            source_verified = False
+            required_machine_scope = set()
+        expected_claim_status = (
+            "SOURCE_LOCATOR_VERIFIED"
+            if source_verified
+            else "DECLARED_SOURCE_LOCATOR"
+            if locator_owner_id is None and locator.get("remote_ref")
+            else "UNRESOLVED"
+        )
+        expected_verified_scope = sorted(
+            set(declaration["verified_scope"])
+            | (required_machine_scope if source_verified else set())
+        )
+        if (
+            verification_status != expected_claim_status
+            or verified_scope != expected_verified_scope
+        ):
+            raise ContextCompileError("Unit B claim source derivation mismatch")
+    if claims != sorted(claims, key=lambda row: row["claim_id"]):
+        raise ContextCompileError("Unit B claim canonical order mismatch")
+    if {row["claim_kind"] for row in claims} != set(CLAIM_KINDS):
+        raise ContextCompileError("Unit B claim kind exact5 is missing")
+    normalized_claim_declarations = []
+    for row in claims:
+        normalized = {key: row[key] for key in CLAIM_ROW_KEYS}
+        normalized["verification_status"] = "DECLARED_SOURCE_LOCATOR"
+        normalized["verified_scope"] = [
+            scope
+            for scope in normalized["verified_scope"]
+            if scope in CLAIM_DECLARED_VERIFIED_SCOPES
+        ]
+        normalized_claim_declarations.append(normalized)
+    normalized_claim_declarations.sort(key=lambda row: row["claim_id"])
+    if (
+        not isinstance(declared_claims, list)
+        or normalized_claim_declarations
+        != sorted(declared_claims, key=lambda row: row["claim_id"])
+    ):
+        raise ContextCompileError("Unit B claim declaration diverged from profile declaration")
+
+    connections = model.get("design_actual_test_connections")
+    if not isinstance(connections, list):
+        raise ContextCompileError("Unit B connections are invalid")
+    connection_output_keys = CONNECTION_ROW_KEYS | frozenset(
+        {
+            "target_identity",
+            "target_source_commit",
+            "target_blob_sha",
+            "reason_code",
+            "semantic_claim",
+            "product_quality_credit",
+        }
+    )
+    connection_ids: set[str] = set()
+    for row in connections:
+        if not isinstance(row, Mapping):
+            raise ContextCompileError("Unit B connection row is invalid")
+        _require_exact_keys(row, connection_output_keys, "Unit B connection row")
+        connection_id = _require_safe_public_id(
+            row.get("connection_id"), "Unit B connection ID"
+        )
+        if connection_id in connection_ids or row.get("source_claim_id") not in claim_ids:
+            raise ContextCompileError("Unit B connection identity is invalid")
+        connection_ids.add(connection_id)
+        _require_enum(
+            row.get("relation_kind"), CONNECTION_RELATIONS, "Unit B relation"
+        )
+        _require_enum(
+            row.get("endpoint_verification"),
+            ENDPOINT_VERIFICATION_STATUSES,
+            "Unit B endpoint verification",
+        )
+        target_locator = _validate_public_source_locator(
+            row.get("target_locator"), "Unit B connection target"
+        )
+        verified_scope = _require_public_code_list(
+            row.get("verified_scope"),
+            "Unit B connection verified scope",
+            maximum=32,
+        )
+        selected_target = selected_by_key.get(_locator_key(target_locator))
+        owner_identity = _resolved_owner_locator_identity(
+            target_locator,
+            owner_projection_by_id,
+            responsibility_by_owner_key,
+        )
+        owner_scoped = target_locator.get("owner_id") is not None
+        if owner_scoped:
+            expected_target = owner_identity or (None, None, None)
+            target_present = owner_identity is not None
+        else:
+            expected_target = (
+                (
+                    selected_target["identity"],
+                    selected_target["source_commit"],
+                    selected_target["blob_sha"],
+                )
+                if selected_target is not None
+                else (None, None, None)
+            )
+            target_present = selected_target is not None
+        named_endpoint = row.get("target_symbol_or_route")
+        expected_endpoint_status = (
+            "MISSING_ENDPOINT"
+            if not target_present
+            else "ALL_ENDPOINTS_VERIFIED"
+            if named_endpoint is None
+            else "UNRESOLVED_RELATION"
+        )
+        expected_endpoint_reason = (
+            "TARGET_FILE_IDENTITY_MISSING"
+            if not target_present
+            else "DECLARED_ENDPOINT_IDENTITIES_PRESENT"
+            if named_endpoint is None
+            else "TARGET_SYMBOL_OR_ROUTE_UNRESOLVED"
+        )
+        if (
+            row.get("endpoint_verification") != expected_endpoint_status
+            or row.get("reason_code") != expected_endpoint_reason
+        ):
+            raise ContextCompileError("Unit B endpoint reason derivation mismatch")
+        if (
+            row.get("target_identity"),
+            row.get("target_source_commit"),
+            row.get("target_blob_sha"),
+        ) != expected_target:
+            raise ContextCompileError("Unit B endpoint identity mismatch")
+        expected_verified_scope = {"PROFILE_DECLARATION"}
+        if target_present:
+            expected_verified_scope.update(
+                {"TARGET_BLOB_IDENTITY", "TARGET_FILE_IDENTITY"}
+            )
+        if (
+            row.get("target_symbol_or_route") is not None
+            and row.get("endpoint_verification") == "ALL_ENDPOINTS_VERIFIED"
+        ):
+            expected_verified_scope.add("TARGET_SYMBOL_OR_ROUTE_IDENTITY")
+        if verified_scope != sorted(expected_verified_scope):
+            raise ContextCompileError("Unit B endpoint verified scope mismatch")
+        if row.get("semantic_claim") is not False or row.get("product_quality_credit") != 0:
+            raise ContextCompileError("Unit B endpoint semantic boundary violated")
+    if connections != sorted(connections, key=lambda row: row["connection_id"]):
+        raise ContextCompileError("Unit B connection canonical order mismatch")
+
+    declared_connections = declared_contract.get("connections")
+    normalized_connection_declarations = []
+    for row in connections:
+        normalized = {key: row[key] for key in CONNECTION_ROW_KEYS}
+        normalized["endpoint_verification"] = "UNRESOLVED_RELATION"
+        normalized["verified_scope"] = [
+            scope for scope in normalized["verified_scope"]
+            if scope == "PROFILE_DECLARATION"
+        ]
+        normalized_connection_declarations.append(normalized)
+    normalized_connection_declarations.sort(key=lambda row: row["connection_id"])
+    if (
+        not isinstance(declared_connections, list)
+        or normalized_connection_declarations
+        != sorted(declared_connections, key=lambda row: row["connection_id"])
+    ):
+        raise ContextCompileError(
+            "Unit B connection declaration diverged from profile declaration"
+        )
+
+    scope_rules = model.get("scope_rules")
+    if not isinstance(scope_rules, list):
+        raise ContextCompileError("Unit B scope rules are invalid")
+    scope_ids: set[str] = set()
+    for row in scope_rules:
+        if not isinstance(row, Mapping):
+            raise ContextCompileError("Unit B scope row is invalid")
+        _require_exact_keys(
+            row,
+            SCOPE_RULE_ROW_KEYS | frozenset({"permission_claim"}),
+            "Unit B scope row",
+        )
+        scope_id = _require_safe_public_id(
+            row.get("scope_rule_id"), "Unit B scope ID"
+        )
+        if scope_id in scope_ids:
+            raise ContextCompileError("Unit B scope IDs are duplicated")
+        scope_ids.add(scope_id)
+        _require_enum(row.get("changeability"), CHANGEABILITY, "Unit B scope")
+        _validate_public_source_locator(
+            row.get("target_locator"), "Unit B scope target"
+        )
+        _validate_public_source_locator(
+            row.get("source_locator"), "Unit B scope source"
+        )
+        _require_strict_bool(row.get("write_target"), "Unit B scope write target")
+        _require_enum(
+            row.get("assertion_provenance"),
+            ASSERTION_PROVENANCE,
+            "Unit B scope provenance",
+        )
+        if (
+            row.get("permission_claim") is not False
+            or (
+                row.get("write_target") is True
+                and row.get("changeability") != "ALLOWED_WRITE_CANDIDATE"
+            )
+        ):
+            raise ContextCompileError("Unit B scope generated permission")
+    for connection in connections:
+        target = (
+            _locator_key(connection["target_locator"]),
+            connection.get("target_symbol_or_route"),
+        )
+        if not any(
+            (
+                _locator_key(scope["target_locator"]),
+                scope.get("target_symbol_or_route"),
+            )
+            == target
+            for scope in scope_rules
+        ):
+            raise ContextCompileError("Unit B connected target has no explicit/default scope")
+    declared_scope_rules = declared_contract.get("scope_rules")
+    if not isinstance(declared_scope_rules, list):
+        raise ContextCompileError("Unit B declared scope rules are invalid")
+    scope_by_id = {row["scope_rule_id"]: row for row in scope_rules}
+    normalized_declared_scopes = []
+    for declaration in declared_scope_rules:
+        projected = scope_by_id.get(declaration.get("scope_rule_id"))
+        if projected is None:
+            raise ContextCompileError("Unit B declared scope is missing")
+        normalized_declared_scopes.append(
+            {key: projected[key] for key in SCOPE_RULE_ROW_KEYS}
+        )
+    if normalized_declared_scopes != declared_scope_rules:
+        raise ContextCompileError(
+            "Unit B scope declaration diverged from profile declaration"
+        )
+    expected_scope_rules = [
+        {
+            **dict(row),
+            "target_locator": _public_locator_projection(row["target_locator"]),
+            "source_locator": _public_locator_projection(row["source_locator"]),
+            "permission_claim": False,
+        }
+        for row in declared_scope_rules
+    ]
+    expected_scoped_targets = {
+        (_locator_key(row["target_locator"]), row.get("target_symbol_or_route"))
+        for row in expected_scope_rules
+    }
+    for connection in connections:
+        target = (
+            _locator_key(connection["target_locator"]),
+            connection.get("target_symbol_or_route"),
+        )
+        if target in expected_scoped_targets:
+            continue
+        locator = connection["target_locator"]
+        expected_scope_rules.append(
+            {
+                "scope_rule_id": _stable_unit_b_id(
+                    "SCOPE.DEFAULT.RELATED",
+                    {"connection_id": connection["connection_id"]},
+                ),
+                "target_locator": locator,
+                "target_symbol_or_route": connection.get(
+                    "target_symbol_or_route"
+                ),
+                "changeability": "RELATED_NOT_WRITE_AUTHORIZED",
+                "required_approval": (
+                    "SEPARATE_EXPLICIT_AUTHORIZATION_REQUIRED"
+                ),
+                "write_target": False,
+                "assertion_provenance": "MACHINE_DISCOVERED",
+                "source_locator": locator,
+                "permission_claim": False,
+            }
+        )
+    expected_scope_rules.sort(key=lambda row: row["scope_rule_id"])
+    if scope_rules != expected_scope_rules:
+        raise ContextCompileError("Unit B scope rule exact set derivation mismatch")
+
+    drift = model.get("drift")
+    impact = model.get("impact")
+    if not isinstance(drift, list) or not isinstance(impact, list):
+        raise ContextCompileError("Unit B drift/impact projection is invalid")
+    premise_by_id = {
+        str(row["premise_id"]): row for row in model["required_premises"]
+    }
+    responsibility_by_id = {
+        str(row["responsibility_id"]): row for row in model["responsibilities"]
+    }
+    connection_by_id = {
+        str(row["connection_id"]): row for row in connections
+    }
+    expected_drift: list[dict[str, Any]] = []
+
+    def expected_drift_target_locator(
+        subject_id: str,
+        repository_key: str,
+        path: str,
+        owner_id: str | None = None,
+    ) -> dict[str, Any]:
+        locator: dict[str, Any] = {
+            "locator_id": _stable_unit_b_id(
+                "LOC.DRIFT",
+                {
+                    "subject_id": subject_id,
+                    "repository_key": _normalize_repository(repository_key),
+                    "path": _normalize_path(path),
+                },
+            ),
+            "privacy": "PUBLIC",
+            "repository_key": _normalize_repository(repository_key),
+            "path": _normalize_path(path),
+        }
+        if owner_id is not None:
+            locator["owner_id"] = owner_id
+            owner = owner_projection_by_id.get(owner_id)
+            if owner is not None and type(owner.get("remote_ref")) is str:
+                locator["remote_ref"] = owner["remote_ref"]
+        return locator
+
+    def add_expected_drift(
+        code: str,
+        subject_id: str,
+        locator: Mapping[str, Any],
+        provenance: str,
+        verified_scope: Sequence[str],
+    ) -> None:
+        expected_drift.append(
+            {
+                "drift_id": _stable_unit_b_id(
+                    "DRIFT", {"drift_code": code, "subject_id": subject_id}
+                ),
+                "drift_code": code,
+                "subject_id": subject_id,
+                "evidence_locator": _public_locator_projection(locator),
+                "assertion_provenance": provenance,
+                "verified_scope": sorted(set(verified_scope)),
+                "impact_class": "MANUAL_REVIEW",
+                "required_owner_handback": "MASH",
+            }
+        )
+
+    for premise in model["required_premises"]:
+        if (
+            premise.get("status") == "RESOLVED"
+            or premise.get("reason_code")
+            != "REQUIRED_PREMISE_MISSING_OR_UNREADABLE"
+        ):
+            continue
+        premise_id = str(premise["premise_id"])
+        add_expected_drift(
+            "OWNER_PATH_MISSING",
+            premise_id,
+            expected_drift_target_locator(
+                premise_id,
+                str(premise["repository_key"]),
+                str(premise["path"]),
+                str(premise["owner_id"]),
+            ),
+            "MACHINE_VERIFIED",
+            ["EXACT_OWNER_REF", "OWNER_TREE_PATH_LOOKUP"],
+        )
+    declared_drift_targets = {
+        (
+            _normalize_repository(str(row["repository_key"])),
+            _normalize_path(str(row["path"])),
+        ): (str(row["premise_id"]), str(row["owner_id"]))
+        for row in model["required_premises"]
+    }
+    declared_drift_targets.update(
+        {
+            _locator_key(row["subject_locator"]): (
+                str(row["responsibility_id"]),
+                str(row["subject_locator"]["owner_id"]),
+            )
+            for row in model["responsibilities"]
+        }
+    )
+    for owner in model["canonical_owner_refs"]:
+        owner_repository_key = _normalize_repository(
+            str(owner["repository_key"])
+        )
+        for change in owner.get("owner_side_changes", []):
+            git_status = str(change.get("git_status") or "")
+            if not (git_status.startswith("R") or git_status == "D"):
+                continue
+            old_path = _normalize_path(str(change.get("old_path") or ""))
+            declared = declared_drift_targets.get(
+                (owner_repository_key, old_path)
+            )
+            if declared is None:
+                continue
+            add_expected_drift(
+                "OWNER_PATH_RENAMED_OR_DELETED",
+                declared[0],
+                expected_drift_target_locator(
+                    declared[0],
+                    owner_repository_key,
+                    old_path,
+                    declared[1],
+                ),
+                "MACHINE_DISCOVERED",
+                ["EXACT_REF_DIFF", "OLD_AND_NEW_PATH"],
+            )
+    connection_by_target = {
+        _locator_key(row["target_locator"]): row for row in connections
+    }
+    for responsibility in model["responsibilities"]:
+        key = _locator_key(responsibility["subject_locator"])
+        connection = connection_by_target.get(key)
+        responsibility_id = str(responsibility["responsibility_id"])
+        if (
+            responsibility["lifecycle"] in {"HISTORICAL", "SUPERSEDED"}
+            and connection is not None
+            and connection["relation_kind"] == "EXPOSED_BY_ROUTE"
+            and connection["endpoint_verification"] == "ALL_ENDPOINTS_VERIFIED"
+        ):
+            add_expected_drift(
+                "EXPLICIT_RETIRED_ROUTE_STILL_ACTIVE",
+                responsibility_id,
+                connection["target_locator"],
+                str(responsibility["assertion_provenance"]),
+                ["EXPLICIT_LIFECYCLE", "ROUTE_GRAPH_ENDPOINT"],
+            )
+        record = selected_by_key.get(key)
+        if (
+            responsibility["lifecycle"] == "DESIGN_ONLY"
+            and record is not None
+            and record.get("evidence_kind") == "source"
+        ):
+            add_expected_drift(
+                "DESIGN_ONLY_CLASSIFIED_AS_RUNTIME_ACTUAL",
+                responsibility_id,
+                expected_drift_target_locator(
+                    responsibility_id,
+                    str(responsibility["subject_locator"]["repository_key"]),
+                    str(responsibility["subject_locator"]["path"]),
+                    str(responsibility["subject_locator"]["owner_id"]),
+                ),
+                str(responsibility["assertion_provenance"]),
+                ["EXPLICIT_LIFECYCLE", "INVENTORY_SOURCE_CLASSIFICATION"],
+            )
+    for connection in connections:
+        if (
+            connection["required"]
+            and connection["relation_kind"] == "COVERED_BY_TEST_OR_CONTRACT"
+            and connection["endpoint_verification"] != "ALL_ENDPOINTS_VERIFIED"
+        ):
+            add_expected_drift(
+                "DECLARED_TEST_CONTRACT_OWNER_ROUTE_MISMATCH",
+                str(connection["connection_id"]),
+                connection["target_locator"],
+                "MACHINE_VERIFIED",
+                ["DECLARED_CONNECTION", "TEST_OR_CONTRACT_ENDPOINT"],
+            )
+    expected_drift.sort(key=lambda row: row["drift_id"])
+    if drift != expected_drift:
+        raise ContextCompileError("Unit B drift exact set derivation mismatch")
+    for row in drift:
+        if (
+            not isinstance(row, Mapping)
+            or row.get("drift_code") not in DRIFT_CODES
+            or row.get("impact_class") not in IMPACT_CLASSES
+            or not row.get("required_owner_handback")
+        ):
+            raise ContextCompileError("Unit B drift row is invalid")
+        _require_exact_keys(
+            row,
+            frozenset(
+                {
+                    "drift_id",
+                    "drift_code",
+                    "subject_id",
+                    "evidence_locator",
+                    "assertion_provenance",
+                    "verified_scope",
+                    "impact_class",
+                    "required_owner_handback",
+                }
+            ),
+            "Unit B drift row",
+        )
+        drift_locator = _validate_public_source_locator(
+            row.get("evidence_locator"), "Unit B drift locator"
+        )
+        _require_enum(
+            row.get("assertion_provenance"),
+            ASSERTION_PROVENANCE,
+            "Unit B drift provenance",
+        )
+        _require_public_code_list(
+            row.get("verified_scope"), "Unit B drift scope", maximum=32
+        )
+        drift_code = str(row["drift_code"])
+        subject_id = str(row["subject_id"])
+        expected_drift_target: Mapping[str, Any] | None = None
+        if drift_code in {"OWNER_PATH_MISSING", "OWNER_PATH_RENAMED_OR_DELETED"}:
+            expected_drift_target = premise_by_id.get(subject_id)
+            if expected_drift_target is None:
+                responsibility = responsibility_by_id.get(subject_id)
+                expected_drift_target = (
+                    responsibility.get("subject_locator")
+                    if responsibility is not None
+                    else None
+                )
+        elif drift_code in {
+            "EXPLICIT_RETIRED_ROUTE_STILL_ACTIVE",
+            "DESIGN_ONLY_CLASSIFIED_AS_RUNTIME_ACTUAL",
+        }:
+            responsibility = responsibility_by_id.get(subject_id)
+            expected_drift_target = (
+                responsibility.get("subject_locator")
+                if responsibility is not None
+                else None
+            )
+        elif drift_code == "DECLARED_TEST_CONTRACT_OWNER_ROUTE_MISMATCH":
+            connection = connection_by_id.get(subject_id)
+            expected_drift_target = (
+                connection.get("target_locator")
+                if connection is not None
+                else None
+            )
+        if (
+            expected_drift_target is None
+            or _locator_key(drift_locator) != _locator_key(expected_drift_target)
+            or row.get("drift_id")
+            != _stable_unit_b_id(
+                "DRIFT", {"drift_code": drift_code, "subject_id": subject_id}
+            )
+            or row.get("impact_class") != "MANUAL_REVIEW"
+            or row.get("required_owner_handback") != "MASH"
+        ):
+            raise ContextCompileError("Unit B drift evidence derivation mismatch")
+    exact_changed_keys = {
+        (
+            _normalize_repository(str(owner.get("repository_key") or "")),
+            _normalize_path(str(path)),
+        )
+        for owner in model["canonical_owner_refs"]
+        for path in (
+            list(owner.get("owner_side_changed_paths", []))
+            + list(owner.get("workspace_side_changed_paths", []))
+        )
+    }
+    connection_by_impact_key = {
+        _locator_key(row["target_locator"]): row for row in connections
+    }
+    scope_by_impact_key = {
+        _locator_key(row["target_locator"]): row for row in scope_rules
+    }
+    exact_unchanged_keys = {
+        (
+            _normalize_repository(str(row["repository_key"])),
+            _normalize_path(str(row["path"])),
+        )
+        for row in model["required_premises"]
+        if row.get("workspace_blob_matches_owner") is True
+    }
+    selected_by_identity = {
+        str(row["identity"]): row for row in selected_rows
+    }
+    exact_changed_identities = {
+        str(row["identity"])
+        for key in exact_changed_keys
+        if (row := selected_by_key.get(key)) is not None
+    }
+    adjacency: dict[str, set[str]] = defaultdict(set)
+    for edge in _iter_jsonl(output_dir / "closure_edges.jsonl"):
+        source = str(edge["source_identity"])
+        target = str(edge["target_identity"])
+        adjacency[source].add(target)
+        adjacency[target].add(source)
+    expected_probable_distance: dict[str, int] = {}
+    expected_probable_origins: dict[str, set[str]] = defaultdict(set)
+    for origin_identity in sorted(exact_changed_identities):
+        queue: deque[tuple[str, int]] = deque([(origin_identity, 0)])
+        seen = {origin_identity}
+        while queue:
+            identity, distance = queue.popleft()
+            for target in sorted(adjacency.get(identity, set())):
+                if target in seen:
+                    continue
+                seen.add(target)
+                target_distance = distance + 1
+                expected_probable_distance[target] = min(
+                    expected_probable_distance.get(target, target_distance),
+                    target_distance,
+                )
+                expected_probable_origins[target].add(origin_identity)
+                queue.append((target, target_distance))
+    expected_impact_keys = (
+        exact_changed_keys
+        | set(connection_by_impact_key)
+        | set(scope_by_impact_key)
+        | exact_unchanged_keys
+        | {
+            (
+                _normalize_repository(str(selected_by_identity[identity]["repository_key"])),
+                _normalize_path(str(selected_by_identity[identity]["path"])),
+            )
+            for identity in expected_probable_distance
+            if identity in selected_by_identity
+        }
+    )
+    actual_impact_keys = {
+        (
+            _normalize_repository(str(row.get("repository_key") or "")),
+            _normalize_path(str(row.get("path") or "")),
+        )
+        for row in impact
+        if isinstance(row, Mapping)
+    }
+    if actual_impact_keys != expected_impact_keys or len(impact) != len(
+        expected_impact_keys
+    ):
+        raise ContextCompileError("Unit B impact target set derivation mismatch")
+    for row in impact:
+        if not isinstance(row, Mapping) or row.get("impact_class") not in IMPACT_CLASSES:
+            raise ContextCompileError("Unit B impact row is invalid")
+        _require_exact_keys(
+            row,
+            frozenset(
+                {
+                    "impact_id",
+                    "target_id",
+                    "repository_key",
+                    "path",
+                    "target_symbol_or_route",
+                    "impact_class",
+                    "reason_code",
+                    "graph_distance",
+                    "evidence_ids",
+                    "origin_changed_target_ids",
+                    "claim_boundary",
+                    "required_owner_handback",
+                }
+            ),
+            "Unit B impact row",
+        )
+        _require_repository_key(row.get("repository_key"), "Unit B impact repository")
+        _require_safe_repo_path(row.get("path"), "Unit B impact path")
+        _require_public_identity_list(
+            row.get("evidence_ids"), "Unit B impact evidence IDs", maximum=64
+        )
+        _require_public_identity_list(
+            row.get("origin_changed_target_ids"),
+            "Unit B impact origin IDs",
+            maximum=4096,
+        )
+        impact_key = (
+            _normalize_repository(str(row["repository_key"])),
+            _normalize_path(str(row["path"])),
+        )
+        record = selected_by_key.get(impact_key)
+        connection = connection_by_impact_key.get(impact_key)
+        scope = scope_by_impact_key.get(impact_key)
+        if impact_key in exact_changed_keys:
+            expected_impact_class = "DIRECT"
+            expected_impact_reason = "EXACT_OWNER_OR_WORKSPACE_CHANGED_PATH"
+            expected_distance: int | None = 0
+        elif (
+            connection is not None
+            and connection["endpoint_verification"] == "ALL_ENDPOINTS_VERIFIED"
+        ):
+            expected_impact_class = "DIRECT"
+            expected_impact_reason = "EXPLICIT_VERIFIED_CONNECTION"
+            expected_distance = 0
+        elif (
+            record is not None
+            and record["identity"] in expected_probable_distance
+        ):
+            expected_impact_class = "PROBABLE"
+            expected_impact_reason = "BOUNDED_EXISTING_GRAPH_CLOSURE"
+            expected_distance = expected_probable_distance[record["identity"]]
+        elif impact_key in exact_unchanged_keys:
+            expected_impact_class = "UNCHANGED"
+            expected_impact_reason = (
+                "EXACT_COMPARED_BLOB_IDENTITY_SAME_FILE_FACT_ONLY"
+            )
+            expected_distance = 0
+        else:
+            expected_impact_class = "MANUAL_REVIEW"
+            expected_impact_reason = (
+                "RELATION_OR_ENDPOINT_REQUIRES_MANUAL_REVIEW"
+            )
+            expected_distance = None
+        expected_evidence_ids = sorted(
+            item
+            for item in (
+                connection.get("connection_id") if connection else None,
+                scope.get("scope_rule_id") if scope else None,
+                record.get("identity") if record else None,
+            )
+            if item
+        )
+        expected_origins = (
+            [record["identity"]]
+            if impact_key in exact_changed_keys and record is not None
+            else sorted(
+                expected_probable_origins.get(record["identity"], set())
+            )
+            if expected_impact_class == "PROBABLE" and record is not None
+            else []
+        )
+        if (
+            row.get("impact_id")
+            != _stable_unit_b_id(
+                "IMPACT",
+                {"repository_key": impact_key[0], "path": impact_key[1]},
+            )
+            or row.get("target_id")
+            != (
+                expected_evidence_ids[0]
+                if expected_evidence_ids
+                else "UNRESOLVED.TARGET"
+            )
+            or row.get("target_symbol_or_route")
+            != (
+                connection.get("target_symbol_or_route")
+                if connection is not None
+                else None
+            )
+            or row.get("impact_class") != expected_impact_class
+            or row.get("reason_code") != expected_impact_reason
+            or row.get("graph_distance") != expected_distance
+            or row.get("evidence_ids") != expected_evidence_ids
+            or row.get("origin_changed_target_ids") != expected_origins
+            or row.get("claim_boundary")
+            != "FILE_AND_GRAPH_FACT_ONLY_NO_SEMANTIC_EFFECT_CLAIM"
+            or row.get("required_owner_handback")
+            != ("MASH" if expected_impact_class == "MANUAL_REVIEW" else None)
+        ):
+            raise ContextCompileError("Unit B impact reason derivation mismatch")
+    if impact != sorted(impact, key=lambda row: str(row["impact_id"])):
+        raise ContextCompileError("Unit B impact canonical order mismatch")
+
+    readback = model.get("minimal_readback")
+    if not isinstance(readback, list):
+        raise ContextCompileError("Unit B minimal readback is invalid")
+    expected_protected_connections = sorted(
+        row["connection_id"]
+        for row in connections
+        if row["relation_kind"] == "COVERED_BY_TEST_OR_CONTRACT"
+    )
+    expected_readback_owner_ids = sorted(
+        str(row["owner_id"])
+        for row in model["canonical_owner_refs"]
+        if row.get("required")
+    )
+    expected_readback_premise_ids = [
+        str(row["premise_id"])
+        for row in model["required_premises"]
+        if row.get("required")
+    ]
+    has_manual_impact = any(
+        row["impact_class"] == "MANUAL_REVIEW" for row in impact
+    )
+    expected_readback = []
+    for direct in impact:
+        if direct["impact_class"] != "DIRECT":
+            continue
+        origin_ids = set(direct["origin_changed_target_ids"])
+        related_probable = sorted(
+            row["impact_id"]
+            for row in impact
+            if row["impact_class"] == "PROBABLE"
+            and origin_ids.intersection(row["origin_changed_target_ids"])
+        )
+        expected_readback.append(
+            {
+                "readback_id": _stable_unit_b_id(
+                    "READBACK", {"impact_id": direct["impact_id"]}
+                ),
+                "changed_target": {
+                    "repository_key": direct["repository_key"],
+                    "path": direct["path"],
+                    "target_symbol_or_route": direct["target_symbol_or_route"],
+                },
+                "required_owner_ids": expected_readback_owner_ids,
+                "required_premise_ids": expected_readback_premise_ids,
+                "protected_connection_ids": expected_protected_connections,
+                "probable_dependent_ids": related_probable[:12],
+                "additional_probable_dependent_count": max(
+                    len(related_probable) - 12, 0
+                ),
+                "reason_codes": [direct["reason_code"]],
+                "unresolved_impact_handback": (
+                    "MASH" if has_manual_impact else None
+                ),
+                "full_closure_pointer": "closure_edges.jsonl",
+            }
+        )
+    if readback != expected_readback:
+        raise ContextCompileError("Unit B minimal readback exact derivation mismatch")
+
+    unresolved_by_owner = model.get("unresolved_by_owner")
+    if not isinstance(unresolved_by_owner, list):
+        raise ContextCompileError("Unit B unresolved handback is invalid")
+    for row in unresolved_by_owner:
+        if not isinstance(row, Mapping):
+            raise ContextCompileError("Unit B unresolved handback row is invalid")
+        _require_exact_keys(
+            row,
+            frozenset({"owner", "reason_code", "source_id", "blocking"}),
+            "Unit B unresolved handback row",
+        )
+        _require_safe_actor(row.get("owner"), "Unit B handback owner")
+        _require_safe_public_id(
+            row.get("reason_code"), "Unit B handback reason"
+        )
+        _require_public_identity_list(
+            [row.get("source_id")],
+            "Unit B handback source",
+            maximum=1,
+            require_sorted=False,
+        )
+        _require_strict_bool(row.get("blocking"), "Unit B handback blocking")
+
+    verification_scopes = model.get("verification_scopes")
+    expected_verification_scopes = [
+        {
+            "source_id": row["claim_id"],
+            "verified_scope": list(row["verified_scope"]),
+        }
+        for row in claims
+    ] + [
+        {
+            "source_id": row["connection_id"],
+            "verified_scope": list(row["verified_scope"]),
+        }
+        for row in connections
+    ]
+    if verification_scopes != expected_verification_scopes:
+        raise ContextCompileError("Unit B verification scopes diverged")
+    for row in verification_scopes:
+        _require_exact_keys(
+            row,
+            frozenset({"source_id", "verified_scope"}),
+            "Unit B verification scope row",
+        )
+    expected_lineage = [
+        {
+            "claim_id": row["claim_id"],
+            "asserted_by": row["asserted_by"],
+            "decision_owner": row["decision_owner"],
+            "assertion_provenance": row["assertion_provenance"],
+            "adoption_state": row["adoption_state"],
+            "source_locator": row["source_locator"],
+            "machine_semantic_inference": False,
+        }
+        for row in claims
+    ]
+    if model.get("decision_lineage") != expected_lineage:
+        raise ContextCompileError("Unit B decision lineage diverged")
+
+    surface = model.get("decision_surface")
+    budgets = model.get("budgets")
+    if not isinstance(surface, Mapping) or not isinstance(budgets, Mapping):
+        raise ContextCompileError("Unit B bounded surface is invalid")
+    _require_exact_keys(
+        surface,
+        frozenset(
+            {
+                "priority_order",
+                "items",
+                "full_candidate_count",
+                "additional_candidate_count",
+                "required_item_count",
+                "pro_first_view_cards",
+                "full_closure_pointer",
+                "full_candidate_pointer",
+                "semantic_ranking",
+            }
+        ),
+        "Unit B decision surface",
+    )
+    cards = surface.get("pro_first_view_cards")
+    items = surface.get("items")
+    if (
+        not isinstance(cards, list)
+        or [row.get("card_id") for row in cards if isinstance(row, Mapping)]
+        != list(PRO_FIRST_VIEW_CARDS)
+        or len(cards) != 8
+        or any(len(row.get("locators", [])) > 3 for row in cards)
+        or not isinstance(items, list)
+    ):
+        raise ContextCompileError("Unit B Pro first-view contract violated")
+    decision_item_keys = frozenset(
+        {
+            "priority",
+            "stable_id",
+            "required",
+            "repository_key",
+            "path",
+            "graph_distance",
+            "selection_tier",
+            "reason_codes",
+            "locator",
+        }
+    )
+    decision_ids: set[str] = set()
+    for row in items:
+        if not isinstance(row, Mapping):
+            raise ContextCompileError("Unit B decision item is invalid")
+        _require_exact_keys(row, decision_item_keys, "Unit B decision item")
+        stable_id = _require_safe_public_id(
+            row.get("stable_id"), "Unit B decision ID"
+        )
+        if stable_id in decision_ids:
+            raise ContextCompileError("Unit B decision IDs are duplicated")
+        decision_ids.add(stable_id)
+        if row.get("priority") not in {1, 2, 3, 4, 5, 6, 7}:
+            raise ContextCompileError("Unit B decision priority is invalid")
+        _require_strict_bool(row.get("required"), "Unit B decision required")
+        _require_enum(
+            row.get("selection_tier"), SELECTION_TIERS, "Unit B decision tier"
+        )
+        _require_public_code_list(
+            row.get("reason_codes"), "Unit B decision reasons", maximum=32
+        )
+        if row.get("locator") is not None:
+            _validate_public_source_locator(
+                row["locator"], "Unit B decision locator"
+            )
+    card_keys = frozenset(
+        {
+            "card_id",
+            "item_ids",
+            "source_item_count",
+            "locators",
+            "additional_count",
+            "reason_codes",
+            "additional_reason_count",
+            "detail_anchor",
+        }
+    )
+    pro_first_view_ids: set[str] = set()
+    for row in cards:
+        _require_exact_keys(row, card_keys, "Unit B Pro first-view card")
+        item_ids = row.get("item_ids")
+        reasons = row.get("reason_codes")
+        locators = row.get("locators")
+        if (
+            not isinstance(item_ids, list)
+            or any(type(item) is not str for item in item_ids)
+            or len(item_ids) != len(set(item_ids))
+            or any(item not in decision_ids for item in item_ids)
+            or not isinstance(reasons, list)
+            or len(reasons) > 2
+            or any(type(item) is not str for item in reasons)
+            or not isinstance(locators, list)
+            or any(not isinstance(item, Mapping) for item in locators)
+            or type(row.get("source_item_count")) is not int
+            or row["source_item_count"] < len(item_ids)
+            or type(row.get("additional_count")) is not int
+            or row["additional_count"] < 0
+            or type(row.get("additional_reason_count")) is not int
+            or row["additional_reason_count"] < 0
+            or row.get("detail_anchor")
+            != "operator_context.json#/decision_surface"
+        ):
+            raise ContextCompileError("Unit B Pro first-view card is invalid")
+        for locator in locators:
+            _validate_public_source_locator(locator, "Unit B Pro card locator")
+        pro_first_view_ids.update(item_ids)
+    if (
+        surface.get("priority_order") != [1, 2, 3, 4, 5, 6, 7]
+        or surface.get("full_closure_pointer") != "closure_edges.jsonl"
+        or surface.get("full_candidate_pointer")
+        != "operator_context.json#/impact"
+        or surface.get("full_candidate_count") != (
+            len(items) + surface.get("additional_candidate_count", -1)
+        )
+        or surface.get("required_item_count")
+        != sum(row["required"] for row in items)
+    ):
+        raise ContextCompileError("Unit B decision surface counts are invalid")
+    expected_order = sorted(
+        items,
+        key=lambda row: (
+            row["priority"],
+            0 if row["required"] else 1,
+            row["graph_distance"] if row["graph_distance"] is not None else 10**9,
+            str(row["repository_key"] or ""),
+            str(row["path"] or ""),
+            row["stable_id"],
+        ),
+    )
+    if items != expected_order or surface.get("semantic_ranking") is not False:
+        raise ContextCompileError("Unit B decision-surface ordering mismatch")
+
+    expected_decision_by_id: dict[str, dict[str, Any]] = {}
+
+    def add_expected_decision(
+        *,
+        priority: int,
+        stable_id: str,
+        required: bool,
+        repository_key: str | None,
+        path: str | None,
+        graph_distance: int | None,
+        selection_tier: str,
+        reason_codes: Sequence[str],
+        locator: Mapping[str, Any] | None,
+    ) -> None:
+        expected_decision_by_id[stable_id] = {
+            "priority": priority,
+            "stable_id": stable_id,
+            "required": required,
+            "repository_key": repository_key,
+            "path": path,
+            "graph_distance": graph_distance,
+            "selection_tier": selection_tier,
+            "reason_codes": sorted(set(reason_codes)),
+            "locator": _public_locator_projection(locator) if locator else None,
+        }
+
+    expected_freshness_ids: list[str] = []
+    for freshness_row in sorted(
+        freshness, key=lambda row: str(row["owner_id"])
+    ):
+        owner = owner_projection_by_id[str(freshness_row["owner_id"])]
+        stable_id = _stable_unit_b_id(
+            "FRESHNESS",
+            {
+                "owner_id": freshness_row["owner_id"],
+                "relation": freshness_row["relation"],
+                "resolved_head": freshness_row["resolved_head"],
+            },
+        )
+        expected_freshness_ids.append(stable_id)
+        add_expected_decision(
+            priority=1,
+            stable_id=stable_id,
+            required=True,
+            repository_key=str(owner["repository_key"]),
+            path=str(owner["source_locator"]["path"]),
+            graph_distance=0,
+            selection_tier=(
+                "DECISION_SURFACE"
+                if freshness_row["read_only_ready"]
+                else "UNRESOLVED_IMPACT"
+            ),
+            reason_codes=[
+                str(freshness_row["relation"]),
+                (
+                    "READ_ONLY_EXACT_REF_RESOLVED"
+                    if freshness_row["read_only_ready"]
+                    else "REMOTE_UNRESOLVED"
+                ),
+            ],
+            locator=owner["source_locator"],
+        )
+    for premise in model["required_premises"]:
+        add_expected_decision(
+            priority=1 if premise["status"] != "RESOLVED" else 2,
+            stable_id=str(premise["premise_id"]),
+            required=bool(premise["required"]),
+            repository_key=str(premise["repository_key"]),
+            path=str(premise["path"]),
+            graph_distance=0,
+            selection_tier=str(premise["read_tier"]),
+            reason_codes=[str(premise["reason_code"])],
+            locator=premise["source_locator"],
+        )
+    for claim in claims:
+        add_expected_decision(
+            priority=3,
+            stable_id=str(claim["claim_id"]),
+            required=claim["claim_kind"] in CLAIM_KINDS,
+            repository_key=str(claim["source_locator"]["repository_key"]),
+            path=str(claim["source_locator"]["path"]),
+            graph_distance=0,
+            selection_tier="DECISION_SURFACE",
+            reason_codes=[str(claim["claim_kind"]), str(claim["claim_boundary"])],
+            locator=claim["source_locator"],
+        )
+    for scope in scope_rules:
+        add_expected_decision(
+            priority=4,
+            stable_id=str(scope["scope_rule_id"]),
+            required=scope["changeability"]
+            in {"PROTECTED_REVIEW_REQUIRED", "FORBIDDEN"},
+            repository_key=str(scope["target_locator"]["repository_key"]),
+            path=str(scope["target_locator"]["path"]),
+            graph_distance=0,
+            selection_tier=(
+                "UNRESOLVED_IMPACT"
+                if scope["changeability"] == "UNRESOLVED"
+                else "DECISION_SURFACE"
+            ),
+            reason_codes=[
+                str(scope["changeability"]),
+                str(scope["required_approval"]),
+            ],
+            locator=scope["target_locator"],
+        )
+    for connection in connections:
+        add_expected_decision(
+            priority=5,
+            stable_id=str(connection["connection_id"]),
+            required=bool(connection["required"]),
+            repository_key=str(connection["target_locator"]["repository_key"]),
+            path=str(connection["target_locator"]["path"]),
+            graph_distance=0,
+            selection_tier=(
+                "DECISION_SURFACE"
+                if connection["endpoint_verification"]
+                == "ALL_ENDPOINTS_VERIFIED"
+                else "UNRESOLVED_IMPACT"
+            ),
+            reason_codes=[
+                str(connection["endpoint_verification"]),
+                str(connection["relation_kind"]),
+            ],
+            locator=connection["target_locator"],
+        )
+    owner_side_changed_keys = {
+        (
+            _normalize_repository(str(owner["repository_key"])),
+            _normalize_path(str(path)),
+        )
+        for owner in model["canonical_owner_refs"]
+        for path in owner.get("owner_side_changed_paths", [])
+    }
+    for impact_row in impact:
+        key = (
+            _normalize_repository(str(impact_row["repository_key"])),
+            _normalize_path(str(impact_row["path"])),
+        )
+        if (
+            impact_row["impact_class"] != "DIRECT"
+            or key not in owner_side_changed_keys
+        ):
+            continue
+        locator = {
+            "locator_id": _stable_unit_b_id(
+                "LOC.IMPACT", {"impact_id": impact_row["impact_id"]}
+            ),
+            "privacy": "PUBLIC",
+            "repository_key": impact_row["repository_key"],
+            "path": impact_row["path"],
+        }
+        add_expected_decision(
+            priority=4,
+            stable_id=str(impact_row["impact_id"]),
+            required=True,
+            repository_key=str(impact_row["repository_key"]),
+            path=str(impact_row["path"]),
+            graph_distance=0,
+            selection_tier="DECISION_SURFACE",
+            reason_codes=[str(impact_row["reason_code"])],
+            locator=locator if key in selected_by_key else None,
+        )
+    for impact_row in impact:
+        if impact_row["impact_class"] != "PROBABLE":
+            continue
+        key = (
+            _normalize_repository(str(impact_row["repository_key"])),
+            _normalize_path(str(impact_row["path"])),
+        )
+        locator = {
+            "locator_id": _stable_unit_b_id(
+                "LOC.IMPACT", {"impact_id": impact_row["impact_id"]}
+            ),
+            "privacy": "PUBLIC",
+            "repository_key": impact_row["repository_key"],
+            "path": impact_row["path"],
+        }
+        add_expected_decision(
+            priority=6,
+            stable_id=str(impact_row["impact_id"]),
+            required=False,
+            repository_key=str(impact_row["repository_key"]),
+            path=str(impact_row["path"]),
+            graph_distance=int(impact_row["graph_distance"] or 0),
+            selection_tier="REFERENCE_ON_TRIGGER",
+            reason_codes=[str(impact_row["reason_code"])],
+            locator=locator if key in selected_by_key else None,
+        )
+    expected_decision_candidates = sorted(
+        expected_decision_by_id.values(),
+        key=lambda row: (
+            row["priority"],
+            0 if row["required"] else 1,
+            row["graph_distance"]
+            if row["graph_distance"] is not None
+            else 10**9,
+            str(row["repository_key"] or ""),
+            str(row["path"] or ""),
+            row["stable_id"],
+        ),
+    )
+    declared_role_views_for_surface = declared_contract.get("role_views")
+    if not isinstance(declared_role_views_for_surface, Mapping):
+        raise ContextCompileError("Unit B decision role view is invalid")
+    ultra_surface_policy = declared_role_views_for_surface.get("ULTRA_KAREN")
+    if not isinstance(ultra_surface_policy, Mapping):
+        raise ContextCompileError("Unit B Ultra decision policy is invalid")
+    expected_admitted_items: list[dict[str, Any]] = []
+    admitted_record_ids: set[str] = set()
+    expected_admitted_bytes = 0
+    optional_admission_closed = False
+    for candidate in expected_decision_candidates:
+        locator = candidate.get("locator")
+        record = (
+            selected_by_key.get(_locator_key(locator))
+            if isinstance(locator, Mapping)
+            else None
+        )
+        additional_bytes = (
+            int(record.get("size_bytes") or 0)
+            if record is not None
+            and record["identity"] not in admitted_record_ids
+            else 0
+        )
+        exceeds_items = (
+            len(expected_admitted_items) + 1
+            > ultra_surface_policy["max_items"]
+        )
+        exceeds_bytes = (
+            expected_admitted_bytes + additional_bytes
+            > ultra_surface_policy["max_referenced_source_bytes"]
+        )
+        if candidate["required"]:
+            expected_admitted_items.append(candidate)
+            if record is not None and record["identity"] not in admitted_record_ids:
+                admitted_record_ids.add(record["identity"])
+                expected_admitted_bytes += additional_bytes
+            continue
+        if optional_admission_closed or exceeds_items or exceeds_bytes:
+            optional_admission_closed = True
+            continue
+        expected_admitted_items.append(candidate)
+        if record is not None and record["identity"] not in admitted_record_ids:
+            admitted_record_ids.add(record["identity"])
+            expected_admitted_bytes += additional_bytes
+
+    def expected_card(
+        card_id: str,
+        card_items: Sequence[Mapping[str, Any]],
+        fallback_reason: str,
+    ) -> dict[str, Any]:
+        locators: list[dict[str, Any]] = []
+        locator_keys: set[tuple[str, str]] = set()
+        for item in card_items:
+            locator = item.get("locator")
+            if not isinstance(locator, Mapping):
+                continue
+            key = _locator_key(locator)
+            if key in locator_keys:
+                continue
+            locator_keys.add(key)
+            locators.append(_public_locator_projection(locator))
+        locators.sort(
+            key=lambda row: (
+                str(row.get("repository_key")), str(row.get("path"))
+            )
+        )
+        reasons = sorted(
+            {
+                reason
+                for item in card_items
+                for reason in item.get("reason_codes", [])
+            }
+        )
+        return {
+            "card_id": card_id,
+            "item_ids": [str(item["stable_id"]) for item in card_items[:3]],
+            "source_item_count": len(card_items),
+            "locators": locators[:3],
+            "additional_count": max(
+                len(card_items) - 3, len(locators) - 3, 0
+            ),
+            "reason_codes": (reasons or [fallback_reason])[:2],
+            "additional_reason_count": max(len(reasons) - 2, 0),
+            "detail_anchor": "operator_context.json#/decision_surface",
+        }
+
+    expected_items_by_id = {
+        row["stable_id"]: row for row in expected_admitted_items
+    }
+    premise_card_items = [
+        expected_items_by_id[row["premise_id"]]
+        for row in model["required_premises"]
+        if row["premise_id"] in expected_items_by_id
+    ]
+    purpose_card_items = [
+        expected_items_by_id[row["claim_id"]]
+        for row in claims
+        if row["claim_kind"] == "PRODUCT_PURPOSE"
+    ]
+    fixed_card_items = [
+        expected_items_by_id[row["claim_id"]]
+        for row in claims
+        if row["claim_kind"] == "MASH_FIXED_CONDITION"
+    ]
+    owner_route_card_items = [
+        expected_items_by_id[row["claim_id"]]
+        for row in claims
+        if row["claim_kind"] in {"CURRENT_PRODUCT_OWNER", "PRODUCT_ROUTE"}
+    ]
+    zero_card_items = [
+        expected_items_by_id[row["claim_id"]]
+        for row in claims
+        if row["claim_kind"] == "ZERO_EFFECT_BOUNDARY"
+    ]
+    connection_card_items = [
+        expected_items_by_id[row["connection_id"]]
+        for row in connections
+        if row["connection_id"] in expected_items_by_id
+    ]
+    freshness_card_items = [
+        expected_items_by_id[item_id]
+        for item_id in expected_freshness_ids
+        if item_id in expected_items_by_id
+    ]
+    unresolved_card_items = [
+        row
+        for row in expected_admitted_items
+        if row["selection_tier"] == "UNRESOLVED_IMPACT"
+    ]
+    owner_changed_card_items = [
+        expected_items_by_id[row["impact_id"]]
+        for row in sorted(
+            impact,
+            key=lambda item: (
+                str(item["repository_key"]),
+                str(item["path"]),
+                str(item["impact_id"]),
+            ),
+        )
+        if row["impact_id"] in expected_items_by_id
+        and (
+            _normalize_repository(str(row["repository_key"])),
+            _normalize_path(str(row["path"])),
+        )
+        in owner_side_changed_keys
+    ]
+    expected_cards = [
+        expected_card(PRO_FIRST_VIEW_CARDS[0], purpose_card_items, "TASK_ORIENTATION_NONAUTHORITY"),
+        expected_card(PRO_FIRST_VIEW_CARDS[1], freshness_card_items + unresolved_card_items, "FRESHNESS_READY_NO_BLOCKER"),
+        expected_card(PRO_FIRST_VIEW_CARDS[2], fixed_card_items, "NO_MASH_FIXED_CONDITION"),
+        expected_card(PRO_FIRST_VIEW_CARDS[3], owner_route_card_items, "OWNER_OR_ROUTE_UNRESOLVED"),
+        expected_card(PRO_FIRST_VIEW_CARDS[4], premise_card_items, "NO_REQUIRED_ORIGINAL"),
+        expected_card(PRO_FIRST_VIEW_CARDS[5], owner_changed_card_items[:1] + connection_card_items, "NO_VERIFIED_PRODUCT_ROUTE_FINDING"),
+        expected_card(PRO_FIRST_VIEW_CARDS[6], unresolved_card_items, "NO_UNRESOLVED_HANDBACK"),
+        expected_card(PRO_FIRST_VIEW_CARDS[7], zero_card_items, "ZERO_EFFECT_BOUNDARY_REQUIRED"),
+    ]
+    if (
+        items != expected_admitted_items
+        or cards != expected_cards
+        or surface.get("full_candidate_count")
+        != len(expected_decision_candidates)
+        or surface.get("additional_candidate_count")
+        != len(expected_decision_candidates) - len(expected_admitted_items)
+        or surface.get("required_item_count")
+        != sum(row["required"] for row in expected_decision_candidates)
+    ):
+        raise ContextCompileError("Unit B decision surface derivation mismatch")
+    _require_exact_keys(
+        budgets, frozenset({"PRO_KAREN", "ULTRA_KAREN"}), "Unit B budgets"
+    )
+    budget_overflow_codes = frozenset(
+        {
+            "BUDGET_EXCEEDED_REQUIRED_SURFACE",
+            "BUDGET_EXCEEDED_REFERENCED_SOURCE_BYTES",
+            "BUDGET_EXCEEDED_PROJECTION_BYTES",
+        }
+    )
+    for role in ("PRO_KAREN", "ULTRA_KAREN"):
+        budget = budgets.get(role)
+        if not isinstance(budget, Mapping):
+            raise ContextCompileError("Unit B role budget boundary violated")
+        expected_budget_keys = (
+            PRO_ROLE_VIEW_KEYS
+            | frozenset(
+                {
+                    "observed_items",
+                    "first_view_observed_decision_items",
+                    "referenced_source_bytes",
+                    "overflow_codes",
+                    "silent_truncation",
+                    "automatic_expansion",
+                }
+            )
+            if role == "PRO_KAREN"
+            else ROLE_VIEW_COMMON_KEYS
+            | frozenset(
+                {
+                    "observed_items",
+                    "referenced_source_bytes",
+                    "overflow_codes",
+                    "silent_truncation",
+                    "automatic_expansion",
+                }
+            )
+        )
+        _require_exact_keys(budget, expected_budget_keys, f"Unit B {role} budget")
+        overflow_codes = _require_public_code_list(
+            budget.get("overflow_codes"), f"Unit B {role} overflow", maximum=8
+        )
+        if set(overflow_codes) - budget_overflow_codes:
+            raise ContextCompileError("Unit B role budget overflow is invalid")
+        if (
+            budget.get("silent_truncation") is not False
+            or budget.get("automatic_expansion") is not False
+            or type(budget.get("observed_items")) is not int
+            or type(budget.get("referenced_source_bytes")) is not int
+            or budget["observed_items"] < 0
+            or budget["referenced_source_bytes"] < 0
+        ):
+            raise ContextCompileError("Unit B role budget boundary violated")
+    declared_role_views = declared_contract.get("role_views")
+    if (
+        not isinstance(declared_role_views, Mapping)
+        or set(declared_role_views) != {"PRO_KAREN", "ULTRA_KAREN"}
+    ):
+        raise ContextCompileError("Unit B declared role views are invalid")
+    for role, declaration in declared_role_views.items():
+        if not isinstance(declaration, Mapping):
+            raise ContextCompileError("Unit B declared role view is invalid")
+        if {key: budgets[role][key] for key in declaration} != declaration:
+            raise ContextCompileError(
+                "Unit B role view diverged from profile declaration"
+            )
+    pro_referenced_keys = {
+        _locator_key(locator)
+        for card in cards
+        for locator in card["locators"]
+    }
+    expected_pro_referenced_bytes = sum(
+        int(record.get("size_bytes") or 0)
+        for key in pro_referenced_keys
+        if (record := selected_by_key.get(key)) is not None
+    )
+    ultra_referenced_identities: set[str] = set()
+    expected_ultra_referenced_bytes = 0
+    for item in items:
+        locator = item.get("locator")
+        record = (
+            selected_by_key.get(_locator_key(locator))
+            if isinstance(locator, Mapping)
+            else None
+        )
+        if record is None or record["identity"] in ultra_referenced_identities:
+            continue
+        ultra_referenced_identities.add(record["identity"])
+        expected_ultra_referenced_bytes += int(record.get("size_bytes") or 0)
+    pro_projection_bytes = len(
+        _render_pro_context(
+            model, actual_operator_sha, collapse_overflow=False
+        )
+    )
+    ultra_projection_bytes = len(
+        _render_ultra_context(
+            model, actual_operator_sha, collapse_overflow=False
+        )
+    )
+    expected_pro_overflow: set[str] = set()
+    if (
+        len(pro_first_view_ids)
+        > budgets["PRO_KAREN"]["first_view"]["max_decision_items"]
+        or pro_projection_bytes
+        > budgets["PRO_KAREN"]["first_view"]["max_utf8_bytes"]
+    ):
+        expected_pro_overflow.add("BUDGET_EXCEEDED_REQUIRED_SURFACE")
+    if (
+        expected_pro_referenced_bytes
+        > budgets["PRO_KAREN"]["max_referenced_source_bytes"]
+    ):
+        expected_pro_overflow.add("BUDGET_EXCEEDED_REFERENCED_SOURCE_BYTES")
+    if (
+        pro_projection_bytes
+        > budgets["PRO_KAREN"]["max_projection_utf8_bytes"]
+    ):
+        expected_pro_overflow.add("BUDGET_EXCEEDED_PROJECTION_BYTES")
+    expected_ultra_overflow: set[str] = set()
+    if len(items) > budgets["ULTRA_KAREN"]["max_items"]:
+        expected_ultra_overflow.add("BUDGET_EXCEEDED_REQUIRED_SURFACE")
+    if (
+        expected_ultra_referenced_bytes
+        > budgets["ULTRA_KAREN"]["max_referenced_source_bytes"]
+    ):
+        expected_ultra_overflow.add("BUDGET_EXCEEDED_REFERENCED_SOURCE_BYTES")
+    if (
+        ultra_projection_bytes
+        > budgets["ULTRA_KAREN"]["max_projection_utf8_bytes"]
+    ):
+        expected_ultra_overflow.add("BUDGET_EXCEEDED_PROJECTION_BYTES")
+    if (
+        budgets["PRO_KAREN"].get("observed_items") != len(pro_first_view_ids)
+        or budgets["PRO_KAREN"].get("first_view_observed_decision_items")
+        != len(pro_first_view_ids)
+        or budgets["PRO_KAREN"].get("referenced_source_bytes")
+        != expected_pro_referenced_bytes
+        or budgets["PRO_KAREN"].get("overflow_codes")
+        != sorted(expected_pro_overflow)
+        or budgets["ULTRA_KAREN"].get("observed_items") != len(items)
+        or budgets["ULTRA_KAREN"].get("referenced_source_bytes")
+        != expected_ultra_referenced_bytes
+        or budgets["ULTRA_KAREN"].get("overflow_codes")
+        != sorted(expected_ultra_overflow)
+    ):
+        raise ContextCompileError("Unit B observed role budget mismatch")
+
+    legacy_unresolved = list(_iter_jsonl(output_dir / "unresolved_context.jsonl"))
+    expected_blockers = {
+        str(code) for code in unit_a.get("blocking_codes", [])
+    }
+    if any(row["verification_status"] == "UNRESOLVED" for row in claims):
+        expected_blockers.add("REQUIRED_CLAIM_SOURCE_UNRESOLVED")
+    expected_blockers.update(
+        f"REQUIRED_CONNECTION_{row['endpoint_verification']}"
+        for row in connections
+        if row["required"]
+        and row["endpoint_verification"] != "ALL_ENDPOINTS_VERIFIED"
+    )
+    expected_blockers.update(
+        str(row["code"])
+        for row in legacy_unresolved
+        if row.get("blocking") is True
+    )
+    if unit_a.get("status") != "UNIT_A_PREMISE_MODEL_READY":
+        expected_blockers.add("UNIT_A_PREMISE_MODEL_NOT_READY")
+    if any(row["changeability"] == "UNRESOLVED" for row in scope_rules):
+        expected_blockers.add("UNRESOLVED_SCOPE_RULE")
+    if any(row["impact_class"] == "MANUAL_REVIEW" for row in impact) or any(
+        row["impact_class"] == "MANUAL_REVIEW" for row in drift
+    ):
+        expected_blockers.add("MANUAL_REVIEW_REQUIRED")
+    expected_blockers.update(expected_pro_overflow)
+    expected_blockers.update(expected_ultra_overflow)
+    expected_unresolved_by_owner = [
+        {
+            "owner": str(row.get("handback_owner") or "MASH"),
+            "reason_code": str(row.get("code") or "UNRESOLVED_CONTEXT"),
+            "source_id": str(
+                row.get("unresolved_id") or "UNRESOLVED.CONTEXT"
+            ),
+            "blocking": bool(row.get("blocking")),
+        }
+        for row in legacy_unresolved
+    ]
+    expected_unresolved_by_owner.extend(
+        {
+            "owner": "MASH",
+            "reason_code": code,
+            "source_id": f"UNIT_B.{code}",
+            "blocking": True,
+        }
+        for code in sorted(expected_blockers)
+    )
+    expected_unresolved_by_owner.sort(
+        key=lambda row: (row["owner"], row["reason_code"], row["source_id"])
+    )
+    if unresolved_by_owner != expected_unresolved_by_owner:
+        raise ContextCompileError(
+            "Unit B unresolved handback exact derivation mismatch"
+        )
+
+    expected_entry_chain = [
+        [row["premise_id"] for row in model["required_premises"]]
+    ]
+    if model.get("entry_chains") != expected_entry_chain:
+        raise ContextCompileError("Unit B entry chain diverged")
+    supersession = model.get("supersession")
+    if not isinstance(supersession, Mapping):
+        raise ContextCompileError("Unit B supersession projection is invalid")
+    _require_exact_keys(
+        supersession,
+        frozenset({"responsibility_edges", "connection_ids"}),
+        "Unit B supersession",
+    )
+    expected_responsibility_edges = sorted(
+        {
+            f"{row['responsibility_id']}->{target}"
+            for row in model["responsibilities"]
+            for target in row.get("supersedes", [])
+        }
+    )
+    expected_connection_supersession = sorted(
+        row["connection_id"]
+        for row in connections
+        if row["relation_kind"] == "SUPERSEDES"
+    )
+    if (
+        supersession.get("responsibility_edges")
+        != expected_responsibility_edges
+        or supersession.get("connection_ids")
+        != expected_connection_supersession
+    ):
+        raise ContextCompileError("Unit B supersession derivation mismatch")
+    expected_read_tiers = {
+        tier: sum(row["selection_tier"] == tier for row in items)
+        for tier in sorted(SELECTION_TIERS)
+    }
+    if model.get("read_tiers") != expected_read_tiers:
+        raise ContextCompileError("Unit B read-tier counts diverged")
+
+    gates = model.get("completion_gates")
+    if not isinstance(gates, Mapping):
+        raise ContextCompileError("Unit B completion gates are invalid")
+    gate_keys = frozenset(
+        {
+            "unit_a_premise_model_ready",
+            "claim_provenance_valid",
+            "required_claim_sources_resolved",
+            "required_connections_verified",
+            "scope_default_applied",
+            "pro_first_view_budget_pass",
+            "ultra_budget_pass",
+            "manual_review_absent",
+            "shared_model_projection_binding_required",
+            "unit_c_collaboration_complete",
+            "operator_v1_activation_approved",
+        }
+    )
+    _require_exact_keys(gates, gate_keys, "Unit B completion gates")
+    expected_gates = {
+        "unit_a_premise_model_ready": unit_a.get("status")
+        == "UNIT_A_PREMISE_MODEL_READY",
+        "claim_provenance_valid": True,
+        "required_claim_sources_resolved": all(
+            row["verification_status"] != "UNRESOLVED"
+            for row in claims
+        ),
+        "required_connections_verified": all(
+            not row["required"]
+            or row["endpoint_verification"] == "ALL_ENDPOINTS_VERIFIED"
+            for row in connections
+        ),
+        "scope_default_applied": all(
+            row["changeability"] != "UNRESOLVED" for row in scope_rules
+        ),
+        "pro_first_view_budget_pass": not budgets["PRO_KAREN"][
+            "overflow_codes"
+        ],
+        "ultra_budget_pass": not budgets["ULTRA_KAREN"]["overflow_codes"],
+        "manual_review_absent": not any(
+            row["impact_class"] == "MANUAL_REVIEW" for row in impact
+        )
+        and not any(row["impact_class"] == "MANUAL_REVIEW" for row in drift),
+        "shared_model_projection_binding_required": True,
+        "unit_c_collaboration_complete": False,
+        "operator_v1_activation_approved": False,
+    }
+    if gates != expected_gates:
+        raise ContextCompileError("Unit B completion gate derivation mismatch")
+    expected_ready = all(
+        expected_gates[key]
+        for key in (
+            "unit_a_premise_model_ready",
+            "claim_provenance_valid",
+            "required_claim_sources_resolved",
+            "required_connections_verified",
+            "scope_default_applied",
+            "pro_first_view_budget_pass",
+            "ultra_budget_pass",
+            "manual_review_absent",
+            "shared_model_projection_binding_required",
+        )
+    ) and not any(row.get("blocking") is True for row in legacy_unresolved)
+    if (
+        summary.get("status")
+        != (
+            "UNIT_B_WORK_CONTEXT_READY"
+            if expected_ready
+            else "UNIT_B_WORK_CONTEXT_BLOCKED"
+        )
+        or operator.get("status")
+        != (
+            "V1_OPERATOR_CONTEXT_READY"
+            if expected_ready
+            else "V1_OPERATOR_CONTEXT_BLOCKED"
+        )
+        or bool(
+            any(row.get("blocking") is True for row in unresolved_by_owner)
+        )
+        is not (not expected_ready)
+    ):
+        raise ContextCompileError("Unit B readiness derivation mismatch")
+
+    expected_pro = _render_pro_context(model, actual_operator_sha)
+    expected_ultra = _render_ultra_context(model, actual_operator_sha)
+    if (output_dir / "pro_context.md").read_bytes() != expected_pro:
+        raise ContextCompileError("Unit B Pro projection mismatch")
+    if (output_dir / "ultra_context.md").read_bytes() != expected_ultra:
+        raise ContextCompileError("Unit B Ultra projection mismatch")
+    if len(expected_pro) > 98304 or len(expected_ultra) > 196608:
+        raise ContextCompileError("Unit B projection byte budget exceeded")
+    pro_overflow = budgets["PRO_KAREN"].get("overflow_codes")
+    if (not pro_overflow and len(expected_pro) > 16384) or (
+        pro_overflow and operator.get("status") != "V1_OPERATOR_CONTEXT_BLOCKED"
+    ):
+        raise ContextCompileError("Unit B Pro first-view budget boundary violated")
+    return model
+
+
 def verify_task_context(
     output_dir: Path,
     *,
     expected_unit_a: bool | None = None,
+    expected_unit_b: bool | None = None,
     expected_task: str | None = None,
     expected_publication_mode: str | None = None,
 ) -> Mapping[str, Any]:
@@ -6031,8 +10346,24 @@ def verify_task_context(
     output_sha = manifest.get("output_sha256", {})
     if not isinstance(output_sha, Mapping):
         raise ContextCompileError("context manifest output hashes are invalid")
-    if set(output_sha) != set(OUTPUT_NAMES):
-        raise ContextCompileError("context manifest output set is not canonical exact7")
+    manifest_inputs = manifest.get("input_sha256")
+    observed_unit_b = bool(
+        "unit_b_work_context" in manifest
+        or "operator_context.json" in output_sha
+        or (
+            isinstance(manifest_inputs, Mapping)
+            and "operator_model" in manifest_inputs
+        )
+    )
+    if expected_unit_b is True and not observed_unit_b:
+        raise ContextCompileError("expected Unit B artifact markers are missing")
+    if expected_unit_b is False and observed_unit_b:
+        raise ContextCompileError("unexpected Unit B artifact markers")
+    canonical_outputs = UNIT_B_OUTPUT_NAMES if observed_unit_b else OUTPUT_NAMES
+    if set(output_sha) != set(canonical_outputs):
+        raise ContextCompileError(
+            "context manifest output set is not canonical Unit A exact7 or Unit B exact10"
+        )
     for name, expected in output_sha.items():
         actual = _sha256_file(output_dir / name)
         if actual != expected:
@@ -6060,6 +10391,8 @@ def verify_task_context(
     if expected_unit_a is False and observed_unit_a:
         raise ContextCompileError("unexpected Unit A artifact markers")
     is_unit_a = expected_unit_a is True or observed_unit_a
+    if observed_unit_b and not is_unit_a:
+        raise ContextCompileError("Unit B artifact is missing Unit A foundation")
     if expected_task is not None and manifest.get("task") != expected_task:
         raise ContextCompileError("task context trusted task mismatch")
     if expected_unit_a is True and (
@@ -6079,6 +10412,11 @@ def verify_task_context(
         ):
             raise ContextCompileError("Unit A trusted publication mode mismatch")
         _validate_unit_a_manifest_projection(manifest, unit_a_model, selected_rows)
+    unit_b_model = (
+        _validate_unit_b_projection(output_dir, manifest)
+        if observed_unit_b
+        else None
+    )
     payload = {
         "workspace": manifest["workspace"],
         "task": manifest["task"],
@@ -6180,6 +10518,17 @@ def verify_task_context(
         payload["unit_a_model_sha256"] = expected_model_sha
         payload["workspace_exact_refs"] = manifest["workspace_exact_refs"]
         payload["unit_a_completion_gates"] = completion_gates
+        if unit_b_model is not None:
+            unit_b_summary = manifest.get("unit_b_work_context")
+            if not isinstance(unit_b_summary, Mapping):
+                raise ContextCompileError("Unit B manifest summary is invalid")
+            payload["operator_model_fingerprint"] = str(
+                unit_b_model["operator_model_fingerprint"]
+            )
+            payload["operator_context_sha256"] = str(
+                manifest["input_sha256"]["operator_context"]
+            )
+            payload["unit_b_work_context"] = dict(unit_b_summary)
     actual_fingerprint = _sha256_bytes(_canonical_json_bytes(payload))
     if actual_fingerprint != manifest.get("context_fingerprint"):
         raise ContextCompileError("context fingerprint tamper detected")

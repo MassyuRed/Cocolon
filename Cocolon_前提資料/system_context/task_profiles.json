@@ -881,7 +881,310 @@
             "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
             "source_locator": {"locator_id": "LOC.RESP.NLSV3.DISPOSITION", "privacy": "PUBLIC", "repository_key": "Cocolon", "path": "Cocolon_前提資料/designs/cmee/NLSv3_to_CMEE_Disposition_Phase1_20260817.md"}
           }
-        ]
+        ],
+        "claim_nodes": [
+          {
+            "claim_id": "CLAIM.CMEE.PRODUCT_PURPOSE",
+            "claim_kind": "PRODUCT_PURPOSE",
+            "asserted_value_code": "EMLIS_AI_LONG_TERM_PRODUCT_CURRENT_ALIGNMENT",
+            "asserted_by": "Mash",
+            "decision_owner": "Mash",
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {
+              "locator_id": "LOC.UNITB.CLAIM.PRODUCT_PURPOSE",
+              "location": "PUBLIC_GITHUB",
+              "availability": "RESOLVE_AT_OWNER_REF",
+              "privacy": "PUBLIC",
+              "canonicality": "CURRENT_PRODUCT_PURPOSE_SOURCE",
+              "repository_key": "Cocolon",
+              "owner_id": "OWNER.CMEE.PR30",
+              "remote_ref": "refs/heads/agent/three-core-cmee-current-structure-20260815",
+              "path": "Cocolon_前提資料/Cocolon_EmlisAI_longterm_roadmap_CURRENT.md",
+              "section_locator": "CURRENT_EFFECTIVE"
+            },
+            "adoption_state": "ACCEPTED_CURRENT",
+            "claim_boundary": "SOURCE_BOUND_PRODUCT_PURPOSE_NO_MACHINE_SEMANTIC_INFERENCE",
+            "verification_status": "DECLARED_SOURCE_LOCATOR",
+            "verified_scope": ["PUBLIC_SOURCE_LOCATOR"]
+          },
+          {
+            "claim_id": "CLAIM.CMEE.MASH_FIXED_CONDITION",
+            "claim_kind": "MASH_FIXED_CONDITION",
+            "asserted_value_code": "STEP7_BOUNDED_IMPLEMENTATION_ONLY",
+            "asserted_by": "Mash",
+            "decision_owner": "Mash",
+            "assertion_provenance": "MASH_EXPLICIT_DECISION",
+            "source_locator": {
+              "locator_id": "LOC.UNITB.CLAIM.MASH_FIXED_CONDITION",
+              "location": "PUBLIC_GITHUB",
+              "availability": "AVAILABLE",
+              "privacy": "PUBLIC",
+              "canonicality": "APPROVED_FINAL_TECHNICAL_BODY",
+              "repository_key": "Cocolon",
+              "remote_ref": "refs/heads/agent/cocolon-system-context-step6-final-technical-body-20260821",
+              "path": "Cocolon_前提資料/system_context/Cocolon_SystemContext_Step6_FinalTechnicalBody_20260821.md",
+              "section_locator": "§4 / §13"
+            },
+            "adoption_state": "ACCEPTED_CURRENT",
+            "claim_boundary": "NO_ORIGINAL_QUOTE_NO_AUTOMATIC_NEXT_WORK",
+            "verification_status": "DECLARED_SOURCE_LOCATOR",
+            "verified_scope": ["DURABLE_PUBLIC_DECISION_LOCATOR"]
+          },
+          {
+            "claim_id": "CLAIM.CMEE.PRODUCT_ROUTE",
+            "claim_kind": "PRODUCT_ROUTE",
+            "asserted_value_code": "CMEE_CURRENT_STRUCTURE_PRODUCT_QUALITY_ROUTE",
+            "asserted_by": "Karen",
+            "decision_owner": "Mash",
+            "assertion_provenance": "KAREN_PROPOSAL_NOT_MASH_DECISION",
+            "source_locator": {
+              "locator_id": "LOC.UNITB.CLAIM.PRODUCT_ROUTE",
+              "location": "PUBLIC_GITHUB_PR",
+              "availability": "RESOLVE_AT_OWNER_REF",
+              "privacy": "PUBLIC",
+              "canonicality": "DRAFT_OWNER_CANDIDATE",
+              "repository_key": "Cocolon",
+              "owner_id": "OWNER.CMEE.PR30",
+              "remote_ref": "refs/heads/agent/three-core-cmee-current-structure-20260815",
+              "path": "Cocolon_前提資料/current_structure/04_cmee_current_structure.md",
+              "section_locator": "CURRENT_STRUCTURE_ROUTE"
+            },
+            "adoption_state": "KAREN_PROPOSAL_NOT_MASH_DECISION",
+            "claim_boundary": "DRAFT_ROUTE_CANDIDATE_NOT_EFFECTIVE_AUTHORITY",
+            "verification_status": "DECLARED_SOURCE_LOCATOR",
+            "verified_scope": ["PUBLIC_SOURCE_LOCATOR"]
+          },
+          {
+            "claim_id": "CLAIM.CMEE.CURRENT_PRODUCT_OWNER",
+            "claim_kind": "CURRENT_PRODUCT_OWNER",
+            "asserted_value_code": "PR30_DECLARED_CMEE_STRUCTURE_OWNER",
+            "asserted_by": "Karen",
+            "decision_owner": "Mash",
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {
+              "locator_id": "LOC.UNITB.CLAIM.CURRENT_PRODUCT_OWNER",
+              "location": "PUBLIC_GITHUB_PR",
+              "availability": "RESOLVE_AT_OWNER_REF",
+              "privacy": "PUBLIC",
+              "canonicality": "DECLARED_CANONICAL_OWNER_REF",
+              "repository_key": "Cocolon",
+              "owner_id": "OWNER.CMEE.PR30",
+              "remote_ref": "refs/heads/agent/three-core-cmee-current-structure-20260815",
+              "path": "Cocolon_前提資料/current_structure/04_cmee_current_structure.md",
+              "section_locator": "OWNER_AND_EFFECTIVE_CONDITION"
+            },
+            "adoption_state": "DESIGN_REFLECTED_NOT_IMPLEMENTED",
+            "claim_boundary": "READ_ONLY_OWNER_ROUTING_NO_WORKSPACE_INCORPORATION",
+            "verification_status": "DECLARED_SOURCE_LOCATOR",
+            "verified_scope": ["PUBLIC_OWNER_LOCATOR"]
+          },
+          {
+            "claim_id": "CLAIM.CMEE.ZERO_EFFECT_BOUNDARY",
+            "claim_kind": "ZERO_EFFECT_BOUNDARY",
+            "asserted_value_code": "NO_ACTIVATION_NO_PRODUCT_CREDIT_NO_AUTOMATIC_PROGRESSION",
+            "asserted_by": "Mash",
+            "decision_owner": "Mash",
+            "assertion_provenance": "MASH_EXPLICIT_DECISION",
+            "source_locator": {
+              "locator_id": "LOC.UNITB.CLAIM.ZERO_EFFECT_BOUNDARY",
+              "location": "PUBLIC_GITHUB",
+              "availability": "AVAILABLE",
+              "privacy": "PUBLIC",
+              "canonicality": "APPROVED_FINAL_TECHNICAL_BODY",
+              "repository_key": "Cocolon",
+              "remote_ref": "refs/heads/agent/cocolon-system-context-step6-final-technical-body-20260821",
+              "path": "Cocolon_前提資料/system_context/Cocolon_SystemContext_Step6_FinalTechnicalBody_20260821.md",
+              "section_locator": "§13.1 / §16"
+            },
+            "adoption_state": "ACCEPTED_CURRENT",
+            "claim_boundary": "EFFECTS_STOP_ONLY_NO_COMPLETION_OR_PERMISSION",
+            "verification_status": "DECLARED_SOURCE_LOCATOR",
+            "verified_scope": ["DURABLE_PUBLIC_DECISION_LOCATOR"]
+          }
+        ],
+        "connections": [
+          {
+            "connection_id": "CONNECTION.CMEE.PURPOSE_TO_ROADMAP",
+            "source_claim_id": "CLAIM.CMEE.PRODUCT_PURPOSE",
+            "relation_kind": "CONSTRAINS_PRODUCT_PURPOSE",
+            "target_locator": {
+              "locator_id": "LOC.UNITB.CONNECTION.PURPOSE_TO_ROADMAP",
+              "privacy": "PUBLIC",
+              "repository_key": "Cocolon",
+              "owner_id": "OWNER.CMEE.PR30",
+              "path": "Cocolon_前提資料/Cocolon_EmlisAI_longterm_roadmap_CURRENT.md"
+            },
+            "target_symbol_or_route": null,
+            "required": true,
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "endpoint_verification": "UNRESOLVED_RELATION",
+            "verified_scope": ["PROFILE_DECLARATION"]
+          },
+          {
+            "connection_id": "CONNECTION.CMEE.ROUTE_TO_DESIGN",
+            "source_claim_id": "CLAIM.CMEE.PRODUCT_ROUTE",
+            "relation_kind": "REFLECTED_BY_DESIGN",
+            "target_locator": {
+              "locator_id": "LOC.UNITB.CONNECTION.ROUTE_TO_DESIGN",
+              "privacy": "PUBLIC",
+              "repository_key": "Cocolon",
+              "owner_id": "OWNER.CMEE.PR30",
+              "path": "Cocolon_前提資料/designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md"
+            },
+            "target_symbol_or_route": null,
+            "required": true,
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "endpoint_verification": "UNRESOLVED_RELATION",
+            "verified_scope": ["PROFILE_DECLARATION"]
+          },
+          {
+            "connection_id": "CONNECTION.CMEE.ROUTE_TO_ACTUAL",
+            "source_claim_id": "CLAIM.CMEE.PRODUCT_ROUTE",
+            "relation_kind": "IMPLEMENTED_BY_ACTUAL",
+            "target_locator": {
+              "locator_id": "LOC.UNITB.CONNECTION.ROUTE_TO_ACTUAL",
+              "privacy": "PUBLIC",
+              "repository_key": "mashos-api",
+              "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py"
+            },
+            "target_symbol_or_route": null,
+            "required": true,
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "endpoint_verification": "UNRESOLVED_RELATION",
+            "verified_scope": ["PROFILE_DECLARATION"]
+          },
+          {
+            "connection_id": "CONNECTION.CMEE.ROUTE_TO_PROTECTED_TEST",
+            "source_claim_id": "CLAIM.CMEE.PRODUCT_ROUTE",
+            "relation_kind": "COVERED_BY_TEST_OR_CONTRACT",
+            "target_locator": {
+              "locator_id": "LOC.UNITB.CONNECTION.ROUTE_TO_PROTECTED_TEST",
+              "privacy": "PUBLIC",
+              "repository_key": "mashos-api",
+              "path": "ai/tests/test_cmee_v1a_i1sx_vertical.py"
+            },
+            "target_symbol_or_route": null,
+            "required": true,
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "endpoint_verification": "UNRESOLVED_RELATION",
+            "verified_scope": ["PROFILE_DECLARATION"]
+          },
+          {
+            "connection_id": "CONNECTION.CMEE.ROUTE_TO_API",
+            "source_claim_id": "CLAIM.CMEE.PRODUCT_ROUTE",
+            "relation_kind": "EXPOSED_BY_ROUTE",
+            "target_locator": {
+              "locator_id": "LOC.UNITB.CONNECTION.ROUTE_TO_API",
+              "privacy": "PUBLIC",
+              "repository_key": "mashos-api",
+              "path": "ai/services/ai_inference/api_emotion_submit.py"
+            },
+            "target_symbol_or_route": null,
+            "required": true,
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "endpoint_verification": "UNRESOLVED_RELATION",
+            "verified_scope": ["PROFILE_DECLARATION"]
+          }
+        ],
+        "scope_rules": [
+          {
+            "scope_rule_id": "SCOPE.CMEE.DESIGN.PROTECTED",
+            "target_locator": {
+              "locator_id": "LOC.UNITB.SCOPE.DESIGN.TARGET",
+              "privacy": "PUBLIC",
+              "repository_key": "Cocolon",
+              "owner_id": "OWNER.CMEE.PR30",
+              "path": "Cocolon_前提資料/designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md"
+            },
+            "target_symbol_or_route": null,
+            "changeability": "PROTECTED_REVIEW_REQUIRED",
+            "required_approval": "MASH_REVIEW_REQUIRED",
+            "write_target": false,
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {
+              "locator_id": "LOC.UNITB.SCOPE.DESIGN.SOURCE",
+              "privacy": "PUBLIC",
+              "repository_key": "Cocolon",
+              "remote_ref": "refs/heads/agent/cocolon-system-context-step6-final-technical-body-20260821",
+              "path": "Cocolon_前提資料/system_context/Cocolon_SystemContext_Step6_FinalTechnicalBody_20260821.md",
+              "section_locator": "§6 / §9"
+            }
+          },
+          {
+            "scope_rule_id": "SCOPE.CMEE.ACTUAL.RELATED_ONLY",
+            "target_locator": {
+              "locator_id": "LOC.UNITB.SCOPE.ACTUAL.TARGET",
+              "privacy": "PUBLIC",
+              "repository_key": "mashos-api",
+              "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py"
+            },
+            "target_symbol_or_route": null,
+            "changeability": "RELATED_NOT_WRITE_AUTHORIZED",
+            "required_approval": "SEPARATE_EXPLICIT_AUTHORIZATION_REQUIRED",
+            "write_target": false,
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {
+              "locator_id": "LOC.UNITB.SCOPE.ACTUAL.SOURCE",
+              "privacy": "PUBLIC",
+              "repository_key": "Cocolon",
+              "remote_ref": "refs/heads/agent/cocolon-system-context-step6-final-technical-body-20260821",
+              "path": "Cocolon_前提資料/system_context/Cocolon_SystemContext_Step6_FinalTechnicalBody_20260821.md",
+              "section_locator": "§5.2 / §6.3"
+            }
+          },
+          {
+            "scope_rule_id": "SCOPE.CMEE.TEST.PROTECTED",
+            "target_locator": {
+              "locator_id": "LOC.UNITB.SCOPE.TEST.TARGET",
+              "privacy": "PUBLIC",
+              "repository_key": "mashos-api",
+              "path": "ai/tests/test_cmee_v1a_i1sx_vertical.py"
+            },
+            "target_symbol_or_route": null,
+            "changeability": "PROTECTED_REVIEW_REQUIRED",
+            "required_approval": "PROTECTED_TEST_REVIEW_REQUIRED",
+            "write_target": false,
+            "assertion_provenance": "MANUAL_PROFILE_ASSERTION",
+            "source_locator": {
+              "locator_id": "LOC.UNITB.SCOPE.TEST.SOURCE",
+              "privacy": "PUBLIC",
+              "repository_key": "Cocolon",
+              "remote_ref": "refs/heads/agent/cocolon-system-context-step6-final-technical-body-20260821",
+              "path": "Cocolon_前提資料/system_context/Cocolon_SystemContext_Step6_FinalTechnicalBody_20260821.md",
+              "section_locator": "§6.4 / §9.2"
+            }
+          }
+        ],
+        "role_views": {
+          "PRO_KAREN": {
+            "max_items": 24,
+            "max_referenced_source_bytes": 1572864,
+            "max_reasons_per_item": 8,
+            "max_projection_utf8_bytes": 98304,
+            "first_view": {
+              "card_order": [
+                "TASK_ORIENTATION_AND_PRODUCT_CONNECTION",
+                "FRESHNESS_AND_BLOCKER",
+                "MASH_FIXED_CONDITIONS",
+                "CURRENT_PRODUCT_OWNER_AND_ROUTE",
+                "ORIGINALS_TO_READ_NOW",
+                "PRODUCT_ROUTE_FINDINGS_AND_CLAIM_BOUNDARY",
+                "UNRESOLVED_AND_HANDBACK",
+                "EFFECTS_STOP_AND_AUTOMATIC_PROGRESSION"
+              ],
+              "max_decision_items": 12,
+              "max_reasons_per_item": 2,
+              "max_utf8_bytes": 16384,
+              "max_locators_per_card": 3
+            }
+          },
+          "ULTRA_KAREN": {
+            "max_items": 80,
+            "max_referenced_source_bytes": 4194304,
+            "max_reasons_per_item": 12,
+            "max_projection_utf8_bytes": 196608
+          }
+        }
       }
     }
   }
