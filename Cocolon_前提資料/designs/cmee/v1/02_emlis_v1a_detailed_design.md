@@ -880,3 +880,66 @@ OVERALL_STEP1_TO_STEP7_PRODUCT_CORRECTION = INCOMPLETE
 CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_STEP4
 STOP_AFTER_STEP4
 ```
+
+
+## 23. Stage 1 correction Step 5 — atomic compiler cutover（2026-08-23）
+
+本節はparent functional final technical design §19.2 Step 5だけを同期する。runtime evidence ownerはmashos-api Draft PR #3 commit `c59deaff9541db1fa476c3a504bb8ce708920885`である。Step 4のfinite projection / S8 / S9を新しいsole response compiler facade `compile_stage1_response`からactive disabled artifact pathへexact1回だけ接続し、Step 6のregression restoration / exact8 ALL MACHINE GREENには進まない。
+
+### 23.1 Sole active path and legacy non-call
+
+success pathは`compile_stage1_response exact1 → selected Layer 1 common guard exact1 → role-aware trace build → artifact identity seal → validate_positive_realization_trace exact1 → return`である。compiler / common guardのいずれかが失敗した場合はartifactを作らず`UNAVAILABLE`へ終端し、dual-run、retry、recompile、fallbackは0である。
+
+旧ownerのdefinitionはhistorical compatibilityとして残るが、active pathから次のcallは全て0である。
+
+1. `_canonical_r4_observation_lines`
+2. `_canonical_r4_tail_lines`
+3. `_cmee_nucleus_observation_text`
+4. `_cmee_relation_observation_text`
+5. `_cmee_stage1_reception_text`
+6. `realize_grounded_human_reception`
+7. `validate_grounded_human_reception_surface`
+
+`REALIZER_CONTRACT_IDS`はStage 1 response schema v1を、`TRUST_POLICY_IDS`はpositive trace extension v1をactive private identityへ登録する。selected projection / selected unit tupleは一度だけ作られ、その同一objectをtrace構築とsemantic validatorへ渡す。artifact identityには同じprojectionのartifact ref、projection / selected units由来のObservation / Reception surface、existing plan由来のUNKNOWN surfaceをsealする。validator内のcompiler再呼出しは0である。
+
+### 23.2 Multi-Reception and role-aware trace
+
+visible trace spineは`OBSERVATION exact1..5 → UNKNOWN exact0..1 → RECEPTION exact1..4`の順序・cardinalityを持つ。Observation rowはselected contribution exact1、Reception rowはselected subjective claim exact1とordered prior Observation basisを持ち、全positive rowは同一composition variantへ閉じる。relation contributionはnodeだけでなくselected `relation_basis_refs` edgeまで到達可能でなければならない。UNKNOWN rowはpositive extensionを持たず、既存evidence-bound UNKNOWN contractを保つ。
+
+`validate_positive_realization_trace`がprojection / selected unit / source graph / plan / visible line / proof / artifact identityを再結合するsemantic authorityである。runner comparatorはoutcome-only structural authorityであり、projectionを保持しないためformat-valid forged artifact identityやsemantic claim/text swapを単独で再計算しない。この境界はpublic field追加やrunner内compiler再実行で埋めない。
+
+`GenerationArtifactBundle`のfield setは不変であり、`observation` / `reception`も引き続きpublic stringである。複数selected unitは各field内でnewline joinされるだけで、public serializer / API / DB / RN shape変更は0である。
+
+### 23.3 Step 5 exit and Step 6 boundary
+
+Step 5 focused exact7とcontract suite exact61はGREENであり、active compiler / common guard / disabled semantic validatorはsuccess caseごとに各exact1、legacy active call exact7は0、SX-06はReception exact3を持つ。adversarial reviewはBlocker 0 / Major 0である。
+
+一方、original exact8 fixtures / denominator / axesを使うrole-aware runnerは現時点でgenerated / artifact / structural `5 / 8`、SX-02 / SX-04 / SX-07は`plan_bound_observation_realizer_unavailable`へfail closed、material UNKNOWN fixtureは`stage1_projection_unavailable`である。これは§19.2 Step 6所管の既知redであり、Step 5でfallbackやStep 4 policyの再変更を行って隠さない。
+
+```text
+STAGE1_CORRECTION_STEP4 = CONFIRMED_COMPLETE_DISABLED
+STAGE1_CORRECTION_STEP5 = COMPLETE_DISABLED
+STEP6_PLUS = NOT_STARTED
+NEW_COMPILER_ACTIVE_CALL = EXACT1
+COMMON_GUARD_ACTIVE_CALL = EXACT1
+DISABLED_SEMANTIC_VALIDATOR_ACTIVE_CALL = EXACT1
+LEGACY_ACTIVE_CALL = 0
+DUAL_RUN_RETRY_FALLBACK = 0
+ROLE_AWARE_TRACE_EFFECT = 1
+MULTI_RECEPTION_EFFECT = 1
+PRIVATE_ARTIFACT_SEAL_EFFECT = 1
+PRIVATE_DISABLED_ACTIVE_SURFACE_CUTOVER_EFFECT = 1
+PUBLIC_SHAPE_EFFECT = 0
+PRODUCTION_ENGINE_ROUTE_EFFECT = 0
+CURRENT_STRUCTURE_EFFECT = 0_FOR_STEP5_PENDING_STEP7
+API_DB_RN_PERSISTENCE_EFFECT = 0
+PRODUCTION_EFFECT = 0
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+CANDIDATE_READY = FALSE
+AUTOMATIC_PROGRESSION = FALSE
+EXACT8_ACCEPTANCE_COMPLETE = FALSE
+OVERALL_STEP1_TO_STEP7_PRODUCT_CORRECTION = INCOMPLETE
+CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_STEP5
+STOP_AFTER_STEP5
+```

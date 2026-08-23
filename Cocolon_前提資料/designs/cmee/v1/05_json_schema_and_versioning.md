@@ -2809,3 +2809,54 @@ AUTOMATIC_PROGRESSION = FALSE
 CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_STEP4
 STOP_AFTER_STEP4
 ```
+
+
+## 21. Step 5 active private trace / artifact registration（2026-08-23）
+
+Step 5は新規public schemaを作らず、既存private `GenerationArtifactBundle`と`VisibleUnitTrace`へStage 1 selected unit identityをatomicに接続する。active constantsは次のとおりである。
+
+| Registry surface | Active private identity |
+|---|---|
+| Stage 1 response | `cocolon.cmee.v1a.emlis_stage1_response.v1` |
+| Positive trace extension | `cocolon.cmee.v1a.emlis_stage1_positive_trace_extension.v1` |
+| Emlis owner | `owner:emlis@cocolon.cmee.v1a.emlis_stage1_response.v1` |
+| Identity algorithm | `cocolon.cmee.identity.typed_canonical_json_sha256.v1` |
+
+`REALIZER_CONTRACT_IDS`はlegacy semantic reception projection identityをStage 1 response schemaへ、`TRUST_POLICY_IDS`はlegacy finished-surface validator identityをpositive trace extension schemaへ置換する。これはprivate disabled artifact identityだけのcutoverであり、production registry / public serializer / API fieldの登録ではない。
+
+### 21.1 Role extension contract
+
+`EmlisStage1PositiveTraceExtension`のfield setは`schema_version / claim_domain / owner_ref / contribution_refs / basis_trace_refs / interpretation_candidate_refs / subjective_claim_ref / basis_observation_contribution_refs / value_principle_refs / speaker_owner / user_fact_effect / composition_variant_id`である。
+
+- Observation: `claim_domain=INTERPRETIVE_OBSERVATION`（serialized value `EMLIS_INTERPRETIVE_OBSERVATION`）、`contribution_refs exact1`、subjective claim 0、`user_fact_effect`はboolを許さないinteger exact0。
+- UNKNOWN: positive extensionなし。既存UNKNOWN evidence / constrained owner / no-positive-visible-disposition contractを使用する。
+- Reception: `claim_domain=SUBJECTIVE_RESPONSE`（serialized value `EMLIS_SUBJECTIVE_RESPONSE`）、subjective claim exact1、ordered prior basis trace / Observation contribution exact1以上、`speaker_owner=EMLIS`、`user_fact_effect`はboolを許さないinteger exact0。
+
+全positive rowはselected unit / source anchor / evidence / graph nodeまたはrelation edge / composition variantへexactに結合する。Reception basisは集合包含ではなくselected claimが要求するObservation contribution順と一致する。
+
+### 21.2 Artifact and comparator boundary
+
+`GenerationArtifactBundle`の既存field set `artifact_id / realizer_contract_ids / trust_policy_ids / common_guard_proof / observation / reception / plan / trace / visible_unknowns`は不変である。`observation` / `reception`はstringのままで、multi-unitはprivate assembly時のnewline joinだけを使用する。new public field、projection serialization、candidate set serializationは0である。
+
+`validate_positive_realization_trace`は既にcompilerが返した同一projection / selected unit tupleを引数で受け、compilerを再実行せずsemantic / artifact identityを検証するsole disabled authorityである。outcome-only runner comparatorはrole order / cardinality / schema / enum / exact type / source lineage / ordered basis / common guard proof / UNKNOWN boundary / registered IDsをstructural検証するが、projectionを保持しないためsemantic identityを代替しない。runner field `structural_trace_valid_is_observation_only=false`はReceptionをstructural対象に含むことを示し、semantic validator化を示さない。
+
+```text
+PRIVATE_TRACE_EXTENSION_REGISTRY_EFFECT = 1
+PRIVATE_REALIZER_TRUST_IDENTITY_CUTOVER_EFFECT = 1
+PRIVATE_ARTIFACT_IDENTITY_EFFECT = 1
+PRIVATE_DISABLED_ACTIVE_SURFACE_CUTOVER_EFFECT = 1
+PUBLIC_JSON_SCHEMA_FILE_EFFECT = 0
+PUBLIC_SERIALIZATION_EFFECT = 0
+API_DB_RN_PERSISTENCE_EFFECT = 0
+PRODUCTION_REGISTRY_EFFECT = 0
+PRODUCTION_ENGINE_ROUTE_EFFECT = 0
+PRODUCTION_EFFECT = 0
+STAGE1_CORRECTION_STEP5 = COMPLETE_DISABLED
+STEP6_PLUS = NOT_STARTED
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+CANDIDATE_READY = FALSE
+AUTOMATIC_PROGRESSION = FALSE
+EXACT8_ACCEPTANCE_COMPLETE = FALSE
+STOP_AFTER_STEP5
+```

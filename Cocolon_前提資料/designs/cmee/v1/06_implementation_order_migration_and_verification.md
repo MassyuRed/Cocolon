@@ -1747,3 +1747,103 @@ OVERALL_STEP1_TO_STEP7_PRODUCT_CORRECTION = INCOMPLETE
 CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_STEP4
 STOP_AFTER_STEP4
 ```
+
+
+## 27. Stage 1 correction Step 5 — atomic cutover checkpoint（2026-08-23）
+
+本節はparent functional final technical design §19.2 Step 5 exact1のimplementation receiptである。Step 4 runtime head `51b6c61b56dfa34650e30fe44b0d9577b7278211`とCocolon head `a8f533bd1d9098504581461e38e7d198c571cb63`をfresh preimageとして確認し、Step 4 baseline contract + vertical `91 / 91 PASS`とcanonical inventory 9,321 bytes / SHA-256 `6850d05d22d0378cf5926ce8856e648253df43a468376ba08062246f6c54b966`を固定してからStep 5だけを反映した。
+
+### 27.1 Final heads and exact changed paths
+
+| Owner | Step 4 preimage | Step 5 state |
+|---|---|---|
+| mashos-api Draft PR #3 | `51b6c61b56dfa34650e30fe44b0d9577b7278211` | `c59deaff9541db1fa476c3a504bb8ce708920885` / Draft open unmerged |
+| Cocolon Draft PR #30 | `a8f533bd1d9098504581461e38e7d198c571cb63` | `THIS_COMMIT_SEQUENCE` / Draft open unmerged |
+
+mashos-api Step 5 commit changed path exact6:
+
+1. `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py`
+2. `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py`
+3. `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_v1a.py`
+4. `ai/tests/test_cmee_v1a_i1sx_contracts.py`
+5. `ai/tests/test_cmee_v1a_i1sx_vertical.py`
+6. `ai/tools/cmee_v1a_i1sx_candidate_run.py`
+
+Cocolon Step 5 receipt changed path exact3:
+
+1. `Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md`
+2. `Cocolon_前提資料/designs/cmee/v1/05_json_schema_and_versioning.md`
+3. `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md`
+
+engine、source kernel、core registry / boundary、fixture、handoff、current_structure、functional companion、API / DB / RN、dependency、production fileは変更していない。current map / handoff reflectionは同じbounded correction packetのStep 7所管としてpendingであり、Step 5から先取りしない。
+
+### 27.2 Atomic cutover receipt
+
+- `compile_stage1_response`をprojection build / candidate set build / S9 selectのsole facadeとして追加し、active disabled response pathからexact1回だけ呼ぶ。
+- selected Layer 1をunchanged common guardへexact1回通し、selected Layer 2をReception exact1..4へ展開する。compiler / guard failureはartifactなし`UNAVAILABLE`で終端し、dual-run / retry / legacy fallbackは0である。
+- legacy observation / relation / reception surface ownerとlegacy reception validatorのactive callはexact0。historical definitionは削除せずnon-callをtestで固定する。
+- role spineを`OBSERVATION exact1..5 → UNKNOWN exact0..1 → RECEPTION exact1..4`へ固定し、selected contribution / claim / source anchor / node / relation edge / ordered prior basis / composition variantを検証する。
+- `validate_positive_realization_trace`が同一projection / selected unitsをcompiler再呼出し0で検証し、artifact ID / realizer IDs / trust IDsまでsealする。runnerはrole-aware structural comparatorでありsemantic authorityを代替しない。
+- `GenerationArtifactBundle` field setおよびpublic `observation` / `reception` string shapeは不変。multi-unitはnewline joinでありpublic shape / serialization変更は0である。
+
+### 27.3 Step 5 verification and intentionally open Step 6 gates
+
+```text
+Step 4 preflight combined = 91 / 91 PASS
+Step 5 focused = 7 / 7 PASS
+contract suite = 61 / 61 PASS
+py_compile exact6 = PASS
+git diff --check = PASS
+independent adversarial review = Blocker 0 / Major 0
+new compiler active call on success = exact1
+common guard active call on success = exact1
+disabled semantic validator active call on success = exact1
+legacy active call exact7 = 0
+SX-06 Reception unit count = 3
+original exact8 fixtures / denominator / axes = unchanged
+role-aware runner generated / artifact / structural = 5 / 8
+role-aware runner state = EXACT8_GENERATION_INCOMPLETE_DISABLED
+role-aware runner exit = 1
+SX-02 / SX-04 / SX-07 = UNAVAILABLE / plan_bound_observation_realizer_unavailable
+material UNKNOWN fixture = UNAVAILABLE / stage1_projection_unavailable
+combined current + new tests = 96 run / failures 7 / errors 4
+candidate_ready = false
+exact8_acceptance_complete = false
+automatic_progression = false
+production_effect = 0
+```
+
+focused GREENはStep 5のatomic ownership / non-call / role-aware trace exitだけを閉じる。exact8 `8 / 8`、material UNKNOWN preservation、current + new regression ALL MACHINE GREEN、safety / unseen input unchangedは§19.2 Step 6 exitであり、ここでは達成を宣言しない。outcome-only runnerの旧field名`observation_plus_bound_reception_trace_count`はvalid case数を表し、Reception unit総数ではない。
+
+### 27.4 Exit and STOP
+
+```text
+STAGE1_CORRECTION_STEP0 = CONFIRMED_COMPLETE
+STAGE1_CORRECTION_STEP1 = CONFIRMED_COMPLETE_DISABLED
+STAGE1_CORRECTION_STEP2 = CONFIRMED_COMPLETE_DISABLED
+STAGE1_CORRECTION_STEP3 = CONFIRMED_COMPLETE_DISABLED
+STAGE1_CORRECTION_STEP4 = CONFIRMED_COMPLETE_DISABLED
+STAGE1_CORRECTION_STEP5 = COMPLETE_DISABLED
+STEP6_PLUS = NOT_STARTED
+ACTIVE_NEW_COMPILER_EFFECT = 1
+LEGACY_OWNER_STOP_EFFECT = 1
+ROLE_AWARE_TRACE_EFFECT = 1
+RUNNER_COMPARATOR_EFFECT = 1
+PRIVATE_DISABLED_ACTIVE_SURFACE_CUTOVER_EFFECT = 1
+DUAL_RUN_RETRY_FALLBACK = 0
+PUBLIC_SHAPE_EFFECT = 0
+PRODUCTION_ENGINE_ROUTE_EFFECT = 0
+CURRENT_STRUCTURE_EFFECT = 0_FOR_STEP5_PENDING_STEP7
+API_DB_RN_PERSISTENCE_EFFECT = 0
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+FULL_I1_CREDIT = 0
+CYCLE001_CREDIT = 0
+PRODUCTION_EFFECT = 0
+CANDIDATE_READY = FALSE
+EXACT8_ACCEPTANCE_COMPLETE = FALSE
+AUTOMATIC_PROGRESSION = FALSE
+OVERALL_STEP1_TO_STEP7_PRODUCT_CORRECTION = INCOMPLETE
+CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_STEP5
+STOP_AFTER_STEP5
+```
