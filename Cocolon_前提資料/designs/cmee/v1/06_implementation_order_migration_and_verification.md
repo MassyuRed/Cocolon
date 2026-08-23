@@ -4,8 +4,8 @@
 - revision date: `2026-08-23 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - absolute implementation rule: `BOUND_TO_PARENT_FINAL_DESIGN_SECTION_0_3`
-- current implementation state: `STAGE1_CORRECTION_STEP1_COMPLETE_DISABLED`
-- current authorized next implementation: `NONE_AFTER_STEP1`
+- current implementation state: `STAGE1_CORRECTION_STEP4_COMPLETE_DISABLED`
+- current authorized next implementation: `NONE_AFTER_STEP4`
 - only admissible next implementation class: `ONE_BOUNDED_ACTUAL_PRODUCT_ARTIFACT_IMPROVEMENT_UNIT`
 - historical provider admission: `NO_SAFE_CMEE_V1A_CANDIDATE_STOP`
 - historical L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
@@ -26,14 +26,16 @@ existing core quality contract上で少なくとも1%向上する場合だけ成
 source / provider / binding / guard / trace / proof / test / runtimeのみは独立した商品品質を持たず、
 actual artifactが改善しなければ1%向上、実装作業、成果またはproduct creditにならない。
 
-Current correction preimageは§23のStep 0 envelopeで固定し、その完了をfresh remote headと47 testsで再確認した。
-Mashの明示指示により、同じpreimageからStage 1 correction Step 1 exact1だけを実行し、
+Current correction preimageは§23のStep 0 envelopeで固定し、Step 1、Step 2の順に完了したremote headを再確認した。
+Mashの明示指示により、Stage 1 correction Step 3 exact1として、
 [mashos-api Draft PR #3](https://github.com/MassyuRed/mashos-api/pull/3) head
-`748934f38036a2cf42ca834bbd635b24e56470bf`へprivate identity / depth / trace spineを反映した。
-新規contract testsを含む56 tests、machine exact8 `GENERATED / artifact / structural trace = 8/8`を維持する。
-これはdisabled internal checkpointであり、actual product artifactの改善、Product Read、candidate ready、
-Product / technical / full-I1 / Cycle001 / production creditを一切作らない。Step 2以後は未着手で、
-automatic progressionはなく、current authorized next implementationは`NONE_AFTER_STEP1`である。
+`e9be5c25d042b52deff800e11646188c0c697340`へcurrent Reception assetの有限変換、Layer 2 subjective planner、
+affect / request-local self-state境界、V1–V9 material eligibility / suppression、projection / artifact identity seamを反映した。
+contract 46/46、vertical 32/32、combined 78/78、machine exact8
+`GENERATED / artifact / structural trace = 8/8`を維持する。これはdisabled internal checkpointであり、
+actual product artifactの改善、Product Read、candidate ready、Product / technical / full-I1 / Cycle001 / production creditを
+一切作らない。Step 4以後は未着手で、automatic progressionはなく、current authorized next implementationは
+`NONE_AFTER_STEP3`である。
 
 この絶対規則の根拠となった事実は、
 [「EmlisAI商品中核の後回しとCMEE Product Read失敗」恒久インシデント記録](../../../audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md)
@@ -1548,4 +1550,200 @@ CANDIDATE_READY = FALSE
 AUTOMATIC_PROGRESSION = FALSE
 CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_STEP1
 STOP_AFTER_STEP1
+```
+
+## 25. Stage 1 correction Step 3 — Reception / Layer 2 / value policy checkpoint（2026-08-23）
+
+本節はparent functional final technical design §19.2のStep 3 exact1を実施したcurrent receiptである。Step 0 / 1 / 2を再実行せず、Step 2 completion headをfresh確認してからStep 3だけを反映した。
+
+### 25.1 Preimage and remote heads
+
+| Owner | Confirmed Step 2 preimage | Step 3 final state |
+|---|---|---|
+| mashos-api Draft PR #3 | `575d968a014d7f5f244396fe7502ec2cda3c9c11` | `e9be5c25d042b52deff800e11646188c0c697340` / Draft open unmerged |
+| Cocolon Draft PR #30 | `33e8e4e3a37bcfb2cdeafc25702c8bd77e20ef6d` | `THIS_COMMIT_SEQUENCE` / Draft open unmerged |
+
+Step 2 baselineはfocused 12/12、combined 68/68、three-core boundary 5/5、exact8 deterministic Layer 1 8/8、existing runner GENERATED / artifact / structural trace 8/8、`candidate_ready=false`、production effect 0として再確認した。
+
+### 25.2 Changed-path exact sets
+
+mashos-api Step 3 commit changed path exact4:
+
+1. `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py`
+2. `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py`
+3. `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_v1a.py`
+4. `ai/tests/test_cmee_v1a_i1sx_contracts.py`
+
+Cocolon Step 3 actual changed path exact3（historical nested snapshot）:
+
+1. `reference/Cocolon/Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md`
+2. `reference/Cocolon/Cocolon_前提資料/designs/cmee/v1/05_json_schema_and_versioning.md`
+3. `reference/Cocolon/Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md`
+
+Step 3時点ではcanonical root exact3が更新されず、上記nested snapshotだけが変更された。これはStep 4でcanonical root exact3へlossless同期して修復する。
+
+`engine.py`、runner、vertical test、core registry / boundary、handoff、fixture、current_structure、functional companion、API / DB / RN、dependency、production / cutover fileは変更していない。`emlis_v1a.py`の変更はoptional dormant artifact identity seamだけで、active call sitesはrefを渡さない。
+
+### 25.3 Implementation receipt
+
+- §17.4 current Reception assetをexact finite mappingで検証し、move target / support / evidenceをselected Layer 1 contributionへbindしてLayer 2 claim exact2..4へ変換した。
+- act×mode×operator、stance、object kind、basis semantic projection、parent Reception target、same-projection paired bounded target、response / counter / actor reachability、semantic distinctnessをfail closedにした。
+- Subjective depthをdistinct claim数から独立再計算し、affect intensityをsource strength / depth / temperature / text length / tierから分離した。
+- `DISCOMFORT` current generation 0を維持し、event / source-explicit value conflict / promotion risk以外、特にuser本人 / 人格 / 属性targetをrejectした。
+- request-local Emlis self-stateをspeaker / versioned value policy / selected contribution refs / relationship-care constraints exact4に閉じ、persistent affect / cross-request carryoverを0にした。
+- V1–V9をdefault suppressionにし、material self-denial V1/V8、material retained intention V2/V8だけをplannerからvisible到達可能にした。V4/V5/V6/V3/V7/V9とmaterial UNKNOWN V9 suppressionをcanonical orderで再計算する。
+- value / distance / microgrammar policy refs、claim order / IDsをprojection identityへ、schema-qualified projection refをoptional artifact identity seamへbindした。legacy `None` preimageはbyte exact不変である。
+
+### 25.4 Verification receipt
+
+```text
+Step 3 focused tests = 10 / 10 PASS
+contract suite = 46 / 46 PASS
+vertical regression = 32 / 32 PASS
+combined = 78 / 78 PASS
+compileall exact4 = PASS
+three-core boundary = 5 / 5 PASS
+Step 3 exact8 deterministic Layer 2 = 8 / 8
+Step 3 exact8 claim counts = 2,2,2,2,2,3,2,2
+material VALUE_POSITION planner reachability = V2,V8 PASS
+bounded self-denial distinct claims = 4 / DENSE PASS
+mapping UTF-8 bytes = 7336
+mapping SHA-256 = 1fca37e4dd4efd06c09e63f14a1977ab31856dde8b147803cbab0d166eec2587
+nested snapshot 02 / 05 mapping byte equality = PASS
+runtime commit compare = ahead 1 / behind 0 / changed paths exact4
+runtime remote blob equality = 4 / 4 PASS
+existing runner exit = 0
+existing runner GENERATED / artifact / structural trace = 8 / 8
+candidate_ready = false
+automatic_progression = false
+production_effect = 0
+```
+
+negative coverageはgeneric / redirected object、user-state DISCOMFORT、policy-as-object、nonmaterial value visibility、unknown Reception act / stance / role / code、relaxed quote / distinctness / forbidden axes、cross-field nullability、depth / intensity coupling、persistent state、projection / artifact policy identity tamperを含む。独立technical reviewはBlocker 0 / Major 0、独立final quality reviewはBlocker 0 / Major 0 / Minor 0である。現mappingがDISCOMFORTを生成しないため、allowed target exact3のpositive helper branchはstatic reviewとし、user target rejectionをpublic negative testで固定した。
+
+### 25.5 Exit and STOP
+
+```text
+STAGE1_CORRECTION_STEP0 = CONFIRMED_COMPLETE
+STAGE1_CORRECTION_STEP1 = CONFIRMED_COMPLETE_DISABLED
+STAGE1_CORRECTION_STEP2 = CONFIRMED_COMPLETE_DISABLED
+STAGE1_CORRECTION_STEP3 = COMPLETE_DISABLED
+STEP4 = NOT_STARTED
+STEP5_PLUS = NOT_STARTED
+STEP3_PROJECTION_FINISHED_SURFACE_OWNER_REUSE = 0
+NEW_SURFACE_REALIZER_EFFECT = 0
+RUNNER_EFFECT = 0
+ENGINE_ROUTE_EFFECT = 0
+CUTOVER_EFFECT = 0
+CURRENT_STRUCTURE_EFFECT = 0
+API_DB_RN_PERSISTENCE_EFFECT = 0
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+FULL_I1_CREDIT = 0
+CYCLE001_CREDIT = 0
+PRODUCTION_EFFECT = 0
+CANDIDATE_READY = FALSE
+AUTOMATIC_PROGRESSION = FALSE
+OVERALL_STEP1_TO_STEP7_PRODUCT_CORRECTION = INCOMPLETE
+CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_STEP3
+STOP_AFTER_STEP3
+```
+
+
+## 26. Stage 1 correction Step 4 — finite realization checkpoint（2026-08-23）
+
+本節はparent functional final technical design §19.2 Step 4 exact1のimplementation receiptである。Step 3 runtime head `e9be5c25d042b52deff800e11646188c0c697340`とCocolon head `e993a641c019316b606cab687639eb9af848caba`をfresh preimageとして確認し、Step 0–3を再実行せずStep 4だけを反映した。
+
+### 26.1 Final heads and changed paths
+
+| Owner | Step 3 preimage | Step 4 state |
+|---|---|---|
+| mashos-api Draft PR #3 | `e9be5c25d042b52deff800e11646188c0c697340` | `51b6c61b56dfa34650e30fe44b0d9577b7278211` / Draft open unmerged |
+| Cocolon Draft PR #30 | `e993a641c019316b606cab687639eb9af848caba` | `THIS_COMMIT_SEQUENCE` / Draft open unmerged |
+
+mashos-api Step 4 commit changed path exact3:
+
+1. `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py`
+2. `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py`
+3. `ai/tests/test_cmee_v1a_i1sx_contracts.py`
+
+Cocolon Step 4 sync / repair changed path exact3:
+
+1. `Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md`
+2. `Cocolon_前提資料/designs/cmee/v1/05_json_schema_and_versioning.md`
+3. `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md`
+
+Step 3で誤って作られた`reference/Cocolon/...` nested snapshot exact3はhistoryとして保持し、削除・rename・Step 4追記を行わない。Step 4はcanonical root exact3をStep 3 bytesへ同期した後にcurrent receiptを追記した。
+
+`emlis_v1a.py`、`engine.py`、runner、vertical test、core registry / boundary、handoff、fixture、current_structure、functional companion、API / DB / RN、dependency、production / cutover fileは変更していない。
+
+### 26.2 Implementation receipt
+
+- versioned microgrammar immutable inventory exact23を実装し、Observation row exact12、Subjective row exact14、connective family exact7、operator-connective exact12、wrapper / case / speaker / reference / role anchor / quote / clause / polarity / variant / S9 policyを一つのcanonical bytes ownerへ閉じた。
+- source-bound role anchorを16 grapheme以内のrightmost window、追加token 0、over-limit全文replay 0へ固定した。provider / network / random / finished template bank / fixture branch / inventory外visible tokenは0である。
+- `EmlisUtteranceState` exact14とphase exact6をrequest-localに実装し、一文ごとのtyped realized / remaining / suppressed、semantic key、normalized digest、layer count、focus / moveをatomic更新する。foreign / stale unit、forged phase、namespace混入、repetitionはmutation前にrejectする。
+- `RealizationCandidateSet` private frozen exact2、same projection、max2を実装した。S8はprimary + optional predeclared alternateを同一callで全てattemptし、primary candidate-local defectでもalternate generationを省略しない。
+- S9は既生成candidateだけをslot / frame / source span / hash / coverage / repetition / speaker / reference / connective collisionへ照合する。surface join、new candidate generation、recomposition、retry、fallbackは0で、hard-valid既存memberをstable variant IDで選ぶ。
+- later bounded counterpositionのexplicit `Emlis`、16字超anchor、`またまた` collision、partition維持binding swap、invalid cardinality / member / order、post-defect generation 0をnegativeで固定した。
+
+### 26.3 Verification receipt
+
+```text
+Step 4 focused tests = 13 / 13 PASS
+contract suite = 59 / 59 PASS
+vertical regression = 32 / 32 PASS
+combined = 91 / 91 PASS
+compileall exact4 = PASS
+three-core boundary = 5 / 5 PASS
+existing runner exit = 0
+existing runner GENERATED / artifact / structural trace = 8 / 8
+Step 4 exact8 candidate set = 2 / case, 8 / 8 deterministic
+bounded later-counter projection = PASS
+role anchor max = 16 graphemes PASS
+connective collision hard-valid = 0 PASS
+S8 primary-local-defect alternate attempt = exact2 calls PASS
+S9 new surface join / generation / retry = 0 PASS
+microgrammar top-level rows = 23
+microgrammar UTF-8 bytes = 9321
+microgrammar SHA-256 = 6850d05d22d0378cf5926ce8856e648253df43a468376ba08062246f6c54b966
+runtime / canonical 02 / canonical 05 inventory bytes = 3 / 3 PASS
+runtime commit compare = ahead 1 / behind 0 / changed paths exact3
+candidate_ready = false
+automatic_progression = false
+production_effect = 0
+```
+
+machine GREENはprivate disabled technical checkpointだけであり、Product Read、商品品質PASS、candidate ready、technical / Product creditを作らない。
+
+### 26.4 Exit and STOP
+
+```text
+STAGE1_CORRECTION_STEP0 = CONFIRMED_COMPLETE
+STAGE1_CORRECTION_STEP1 = CONFIRMED_COMPLETE_DISABLED
+STAGE1_CORRECTION_STEP2 = CONFIRMED_COMPLETE_DISABLED
+STAGE1_CORRECTION_STEP3 = CONFIRMED_COMPLETE_DISABLED
+STAGE1_CORRECTION_STEP4 = COMPLETE_DISABLED
+STEP5_PLUS = NOT_STARTED
+PRIVATE_DISABLED_MICROGRAMMAR_EFFECT = 1
+PRIVATE_UTTERANCE_STATE_EFFECT = 1
+PRIVATE_REALIZATION_CANDIDATE_SET_EFFECT = 1
+ACTIVE_SURFACE_ROUTE_EFFECT = 0
+LEGACY_OWNER_STOP_EFFECT = 0
+ENGINE_EFFECT = 0
+RUNNER_EFFECT = 0
+CUTOVER_EFFECT = 0
+ARTIFACT_SEAL_EFFECT = 0
+TRACE_INTEGRATION_EFFECT = 0
+CURRENT_STRUCTURE_EFFECT = 0
+API_DB_RN_PERSISTENCE_EFFECT = 0
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+FULL_I1_CREDIT = 0
+CYCLE001_CREDIT = 0
+PRODUCTION_EFFECT = 0
+CANDIDATE_READY = FALSE
+AUTOMATIC_PROGRESSION = FALSE
+OVERALL_STEP1_TO_STEP7_PRODUCT_CORRECTION = INCOMPLETE
+CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_STEP4
+STOP_AFTER_STEP4
 ```

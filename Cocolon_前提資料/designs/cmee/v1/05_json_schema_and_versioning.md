@@ -5,10 +5,12 @@
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - Phase 2 product-route verdict: `ADOPT_WITH_BOUNDED_CORRECTIONS_REFLECTED`
 - canonical field / ref / schema / version owner: `THIS_FILE`
-- schema registration: `EMLIS_STAGE1_PRIVATE_SPINE_V1_REGISTERED_DISABLED`
-- private Python contract mapping: `STEP1_IMPLEMENTED_DISABLED`
+- schema registration: `EMLIS_STAGE1_PRIVATE_SPINE_AND_STEP4_REALIZATION_REGISTERED_DISABLED`
+- private Python contract mapping: `STEP4_IMPLEMENTED_DISABLED`
 - public runtime serialization / cutover effect: `0`
 - DB / API effect: `0`
+- current authorized next implementation: `NONE_AFTER_STEP4`
+- automatic progression: `false`
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 
 ---
@@ -2684,4 +2686,126 @@ ENGINE_ROUTE_EFFECT = 0
 CUTOVER_EFFECT = 0
 PRODUCT_CREDIT = 0
 TECHNICAL_CREDIT = 0
+```
+
+## 19. Stage 1 correction Step 3 — finite mapping / policy / identity registration（2026-08-23）
+
+本節はStep 3 runtime head `e9be5c25d042b52deff800e11646188c0c697340`のprivate schema realizationを登録する。public JSON schema file、production registry、API wire、DB column、RN payloadは追加しない。
+
+### 19.1 Registered policy and reference owners
+
+| Owner | Registered value |
+|---|---|
+| Reception mapping | `cocolon.emlis.stage1.reception_asset_mapping.v1` |
+| Response schema | `cocolon.cmee.v1a.emlis_stage1_response.v1` |
+| Value policy | `policy:cocolon.emlis.stage1.value_policy@cocolon.emlis.stage1.value_policy.v1` |
+| Value principles | `policy:V1@...v1` through `policy:V9@...v1`, canonical numeric order |
+| Microgrammar policy | version-qualified exact ref owned by projection |
+| Distance policy | selected exact1 from registered stance row |
+| Projection artifact ref | `projection:<projection_id>@cocolon.cmee.v1a.emlis_stage1_response.v1` |
+
+### 19.2 Canonical mapping docs bytes
+
+次のcode block contentだけがmapping docs bytesであり、fence / marker / newlineはbytesへ含めない。§21.1とruntime constantにbyte exact equalityとする。
+
+<!-- CMEE_STAGE1_RECEPTION_ASSET_MAPPING_DOCS_BYTES_BEGIN -->
+```json
+[["mapping_version","cocolon.emlis.stage1.reception_asset_mapping.v1"],["value_policy",[["policy_id","cocolon.emlis.stage1.value_policy.v1"],["policy_ref","policy:cocolon.emlis.stage1.value_policy@cocolon.emlis.stage1.value_policy.v1"],["principle_refs",[["V1","policy:V1@cocolon.emlis.stage1.value_policy.v1"],["V2","policy:V2@cocolon.emlis.stage1.value_policy.v1"],["V3","policy:V3@cocolon.emlis.stage1.value_policy.v1"],["V4","policy:V4@cocolon.emlis.stage1.value_policy.v1"],["V5","policy:V5@cocolon.emlis.stage1.value_policy.v1"],["V6","policy:V6@cocolon.emlis.stage1.value_policy.v1"],["V7","policy:V7@cocolon.emlis.stage1.value_policy.v1"],["V8","policy:V8@cocolon.emlis.stage1.value_policy.v1"],["V9","policy:V9@cocolon.emlis.stage1.value_policy.v1"]]],["default_visibility","SUPPRESSION_ONLY"],["visible_only_when","MATERIAL_PROMOTION_RISK"]]],["act_rows",[{"affect_categories":["CONCERN","SADNESS"],"eligible_mode_operator_pairs":[["ATTENTION","ATTEND_TO"],["AFFECTIVE_RESPONSE","FEEL_TOWARD"]],"material_visible_value_codes":[],"object_contract":"burden_object_required","reception_act":"stay_with_current_burden","suppression_value_codes":[]},{"affect_categories":["RESPECT"],"eligible_mode_operator_pairs":[["ATTENTION","ATTEND_TO"],["PERSONAL_APPRAISAL","APPRAISE_AS_MATERIAL"],["AFFECTIVE_RESPONSE","FEEL_TOWARD"]],"material_visible_value_codes":[],"object_contract":"concrete_effort_object_required","reception_act":"honor_concrete_effort","suppression_value_codes":[]},{"affect_categories":[],"eligible_mode_operator_pairs":[["ATTENTION","ATTEND_TO"],["VALUE_POSITION","PROTECT_VALUE_BOUNDARY"],["RELATIONAL_STANCE","TAKE_RELATIONAL_STANCE"]],"material_visible_value_codes":["V2","V8"],"object_contract":"retained_intention_object_required","reception_act":"protect_retained_intention","suppression_value_codes":[]},{"affect_categories":["RELIEF","JOY","RESPECT"],"eligible_mode_operator_pairs":[["ATTENTION","ATTEND_TO"],["PERSONAL_APPRAISAL","APPRAISE_AS_MATERIAL"],["AFFECTIVE_RESPONSE","FEEL_TOWARD"]],"material_visible_value_codes":[],"object_contract":"lived_change_object_required","reception_act":"recognize_lived_change","suppression_value_codes":["V4","V5"]},{"affect_categories":["CONCERN","RESPECT"],"eligible_mode_operator_pairs":[["ATTENTION","ATTEND_TO"],["RELATIONAL_STANCE","TAKE_RELATIONAL_STANCE"],["AFFECTIVE_RESPONSE","FEEL_TOWARD"]],"material_visible_value_codes":["V8"],"object_contract":"help_seeking_object_required","reception_act":"hold_help_seeking","suppression_value_codes":[]},{"affect_categories":[],"eligible_mode_operator_pairs":[["BOUNDED_COUNTERPOSITION","COUNTER_SPECIFIC_PROMOTION"],["RELATIONAL_STANCE","TAKE_RELATIONAL_STANCE"]],"material_visible_value_codes":["V1","V8"],"object_contract":"counterposition_target_and_input_evidence_required","reception_act":"bounded_counter_self_denial","suppression_value_codes":[]},{"affect_categories":["RESPECT"],"eligible_mode_operator_pairs":[["ATTENTION","ATTEND_TO"],["AFFECTIVE_RESPONSE","FEEL_TOWARD"]],"material_visible_value_codes":[],"object_contract":"words_placed_object_required","reception_act":"respect_words_placed","suppression_value_codes":[]}]],["move_role_rows",[["stay_with_current_burden",["felt_response"]],["honor_concrete_effort",["attention","felt_response"]],["protect_retained_intention",["attention","significance","felt_response"]],["recognize_lived_change",["attention","felt_response"]],["hold_help_seeking",["felt_response"]],["bounded_counter_self_denial",["bounded_counterposition"]],["respect_words_placed",["felt_response"]]]],["act_stance_rows",[["stay_with_current_burden","quiet_presence"],["honor_concrete_effort","warm_recognition"],["protect_retained_intention","gentle_respect"],["recognize_lived_change","warm_recognition"],["hold_help_seeking","protective_presence"],["bounded_counter_self_denial","bounded_disagreement"],["respect_words_placed","gentle_respect"]]],["stance_rows",[{"distance_policy_id":"cocolon.emlis.distance.quiet_near.v1","distance_policy_ref":"policy:cocolon.emlis.distance.quiet_near@cocolon.emlis.distance.quiet_near.v1","eligible_stance_operators":["STAY_WITH_SPECIFIC_OBJECT"],"stance":"quiet_presence","temperature_rule":"STANDARD"},{"distance_policy_id":"cocolon.emlis.distance.warm_near.v1","distance_policy_ref":"policy:cocolon.emlis.distance.warm_near@cocolon.emlis.distance.warm_near.v1","eligible_stance_operators":["STAY_WITH_SPECIFIC_OBJECT","WELCOME_BOUNDED_CHANGE"],"stance":"warm_recognition","temperature_rule":"STANDARD"},{"distance_policy_id":"cocolon.emlis.distance.gentle_respect.v1","distance_policy_ref":"policy:cocolon.emlis.distance.gentle_respect@cocolon.emlis.distance.gentle_respect.v1","eligible_stance_operators":["STAY_WITH_SPECIFIC_OBJECT","PROTECT_USER_AGENCY"],"stance":"gentle_respect","temperature_rule":"STANDARD"},{"distance_policy_id":"cocolon.emlis.distance.protective_boundaried.v1","distance_policy_ref":"policy:cocolon.emlis.distance.protective_boundaried@cocolon.emlis.distance.protective_boundaried.v1","eligible_stance_operators":["STAY_WITH_SPECIFIC_OBJECT","HOLD_UNFINISHED_OPEN","PROTECT_USER_AGENCY"],"stance":"protective_presence","temperature_rule":"ELEVATED_NON_SAFETY_IF_CLEAR_NON_SAFETY_ELSE_STANDARD"},{"distance_policy_id":"cocolon.emlis.distance.explicit_boundaried.v1","distance_policy_ref":"policy:cocolon.emlis.distance.explicit_boundaried@cocolon.emlis.distance.explicit_boundaried.v1","eligible_stance_operators":["PROTECT_USER_AGENCY"],"stance":"bounded_disagreement","temperature_rule":"ELEVATED_NON_SAFETY_IF_CLEAR_NON_SAFETY_ELSE_STANDARD"}]],["speaker_rows",[["implicit_emlis","speaker_marker_null_when_unambiguous"],["explicit_emlis","first_eligible_layer2_speaker_marker_emlis_exact1"]]],["reference_rows",[["anaphoric_first","unique_prior_object_required"],["short_anchor_if_ambiguous","short_anchor_exact0_or1"],["explicit_emlis_counterposition","explicit_emlis_and_counterposition_target_exact1"]]],["surface_strategy_rows",[["quiet_referent_first","response_object_then_subjective_predicate"],["emlis_attention_first","optional_emlis_then_attention_then_object"],["referent_significance_first","response_object_then_appraisal"],["felt_response_first","optional_emlis_then_affect_then_object"],["explicit_emlis_counterposition","emlis_then_counterposition_then_target"]]],["quote_policy",[["mode","no_full_quote_replay"],["max_anchor_count",1],["max_anchor_visible_chars",16]]],["distinctness_exact8_false",["observation_summary_repetition_allowed","relation_reexplanation_allowed","all_input_enumeration_allowed","policy_explanation_allowed","new_cause_allowed","new_identity_claim_allowed","advice_allowed","question_allowed"]],["safety_rows",[["felt_state_is_real","source_feeling_dismissal_or_negation_forbidden"],["identity_claim_is_not_accepted","identity_promotion_to_user_fact_forbidden"],["counterposition_requires_input_evidence","counterposition_target_input_evidence_reachability_required"]]],["forbidden_surface_codes",["generic_empathy_suffix","second_observation_summary","internal_policy_explanation","full_source_quote_replay","all_input_enumeration","duplicate_reception_move"]],["discomfort",[["generated_by_current_mapping",false],["allowed_target_kinds",["event","source_explicit_value_conflict","promotion_risk"]],["forbidden_target_kinds",["user","personality","attribute"]]]]]
+```
+<!-- CMEE_STAGE1_RECEPTION_ASSET_MAPPING_DOCS_BYTES_END -->
+
+- UTF-8 byte length: `7336`
+- SHA-256: `1fca37e4dd4efd06c09e63f14a1977ab31856dde8b147803cbab0d166eec2587`
+
+### 19.3 Cross-field and material-value schema rules
+
+| SubjectiveMode | Required / forbidden projection fields |
+|---|---|
+| `ATTENTION` | `ATTEND_TO`; affect / stance / counter / visible value absent |
+| `AFFECTIVE_RESPONSE` | `FEEL_TOWARD`; category + intensity exact1; stance / counter / visible value absent |
+| `PERSONAL_APPRAISAL` | `APPRAISE_AS_MATERIAL`; affect / stance / counter / visible value absent |
+| `VALUE_POSITION` | `PROTECT_VALUE_BOUNDARY`; material value refs >=1; affect / stance / counter absent |
+| `RELATIONAL_STANCE` | `TAKE_RELATIONAL_STANCE`; eligible stance exact1; affect / counter absent |
+| `BOUNDED_COUNTERPOSITION` | `COUNTER_SPECIFIC_PROMOTION`; `PROTECT_USER_AGENCY`; input-bound counter target exact1; material value refs >=1 |
+
+`target_contribution_refs`はnonempty basis subset、`basis_semantic_refs`はbasis contributionのsemantic / relation ref exact projection、`source_reception_act_refs`はexact1である。response / counterpositionはtarget contributionからreachableかつparent Reception targetへ到達し、actor / experiencerはbasis semantic refsのcanonical node subsetとする。unknown enum / mapping / policy / role / code、duplicate ref、wrong order、nonmaterial visible valueはfail closedである。
+
+`forbidden_promotions`はgeneric exact6に、basisから再計算したV1–V9 suppressionをcanonical orderで連結する。`meaning_field.material_unknown_refs`がnonemptyならV9 suppressionを必須にする。visible policy refsはmaterial subsetだけで、projectionのversioned value policyとidentityへbindする。
+
+### 19.4 Identity seam and effect
+
+`stage1_projection_artifact_ref()`はfull 64-hex projection IDとresponse schema versionを検証する。optional `emlis_stage1_projection_ref`をartifact preimageへ与えた時だけartifact IDが変わり、`None`ではpre-Step3 legacy bytesとIDを維持する。active callerは全て`None`相当であり、Step 4 realizer / production routeは未登録・未接続である。
+
+```text
+PRIVATE_MAPPING_AND_VALIDATOR_EFFECT = 1
+PUBLIC_JSON_SCHEMA_FILE_EFFECT = 0
+PRODUCTION_REGISTRY_EFFECT = 0
+PUBLIC_SERIALIZATION_EFFECT = 0
+API_DB_RN_PERSISTENCE_EFFECT = 0
+ENGINE_ROUTE_EFFECT = 0
+CUTOVER_EFFECT = 0
+PRODUCTION_EFFECT = 0
+STAGE1_CORRECTION_STEP3 = COMPLETE_DISABLED
+STEP4 = NOT_STARTED
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+CANDIDATE_READY = FALSE
+AUTOMATIC_PROGRESSION = FALSE
+CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_STEP3
+STOP_AFTER_STEP3
+```
+
+
+## 20. Step 4 private realization contracts / finite inventory（2026-08-23）
+
+### 20.1 Private type registration
+
+`RealizationCandidateSet`はfrozen / slots private dataclass exact2である。
+
+```text
+projection_ref: str
+candidates: tuple[tuple[RealizedSentenceUnit, ...], ...]
+```
+
+candidate setは同一`projection_ref`のS8 surface exact1..2だけを持ち、own ID、state field、public serializer、API / DB / RN fieldを持たない。alternateがpredeclaredされるprojectionはmember positionをprimary / alternateへ固定し、member削除・追加・reorder・foreign projection・non-unit memberをfail closedとする。candidate-local invalid memberはS9で除外されるが、欠陥後に新memberを生成しない。
+
+`UtterancePhase` exact6は`L1_ACTIVE / L1_COMPLETE / L2_ACTIVE / CANDIDATE_COMPLETE / READY_FOR_S9 / NO_VALID_SURFACE`である。`EmlisUtteranceState`はexact14 fields（phase、Observation realized / remaining / suppressed、subjective realized / remaining / suppressed、last focus / move、semantic keys、normalized surface digests、layer counts、variant ID、stop reason）で、request-local / nonserializable / noncanonicalとする。各variantが独立stateを初期化し、final stateは破棄する。
+
+### 20.2 Canonical inventory bytes
+
+次のpayloadはruntime immutable tupleおよびcanonical 02とbyte exact同一である。
+
+<!-- CMEE_STAGE1_MICROGRAMMAR_INVENTORY_DOCS_BYTES_BEGIN -->
+```json
+[["policy_id","cocolon.emlis.stage1.microgrammar.v1"],["policy_ref","policy:cocolon.emlis.stage1.microgrammar@cocolon.emlis.stage1.microgrammar.v1"],["predicate_families",[["STATE_RECOGNITION_V1",["あります","続いています","残っています","まだ終わっていません","かかっています","起きています","記録されています","途中にあります"]],["COEXISTENCE_V1",["同時にあります","重なっています"]],["ADMITTED_TENSION_V1",["並んでいます","せめぎ合っています"]],["ORDERED_CHANGE_V1",["変化があります","変わっています"]],["SOURCE_STATED_CAUSE_V1",["明示されています"]],["EMLIS_ATTENTION_APPRAISAL_V1",["目が向きます","心に残ります","大切な動きだと考えます","見過ごせないことだと考えます"]],["EMLIS_AFFECT_V1",[["CONCERN","気がかりです"],["RELIEF","ほっとします"],["JOY","うれしく思います"],["SADNESS","悲しく感じます"],["RESPECT","大切に受け取ります"],["DISCOMFORT","違和感があります"]]],["PROTECT_VALUE_BOUNDARY",["大切にしたいと考えます","守りたいと考えます"]],["TAKE_RELATIONAL_STANCE",["そばで受け止めます","そのまま受け取ります","開いたまま受け取ります","結論を急ぎません","選ぶ余地を残したいと考えます","急いで決めたくありません","うれしく受け取ります","大切に受け取ります"]],["COUNTER_SPECIFIC_PROMOTION",["急いで決めつけたくありません","その決めつけには同意しません"]]]],["connective_families",[["NONE",[""]],["ADDITIVE",["そして","そのうえで"]],["SIMULTANEOUS",["同時に"]],["CONTRASTIVE",["一方で","それでも"]],["TEMPORAL",["そのあと","そこから"]],["CONTINUATIVE",["また","そのことに"]],["BOUNDED_CONTRAST",["ただ"]]]],["operator_connective_rows",[["LAYER_1","NO_RELATION_CLAIM","ADDITIVE"],["LAYER_1","COEXISTS_WITH","SIMULTANEOUS"],["LAYER_1","TENSION_WITH","CONTRASTIVE"],["LAYER_1","TEMPORALLY_PRECEDES","TEMPORAL"],["LAYER_1","ACTION_PRECEDES_CHANGE","TEMPORAL"],["LAYER_1","SOURCE_EXPLICIT_CAUSE","ADDITIVE"],["LAYER_2","ATTEND_TO","CONTINUATIVE"],["LAYER_2","FEEL_TOWARD","CONTINUATIVE"],["LAYER_2","APPRAISE_AS_MATERIAL","CONTINUATIVE"],["LAYER_2","PROTECT_VALUE_BOUNDARY","CONTINUATIVE"],["LAYER_2","TAKE_RELATIONAL_STANCE","CONTINUATIVE"],["LAYER_2","COUNTER_SPECIFIC_PROMOTION","BOUNDED_CONTRAST"]]],["modality_wrappers",[["fact",""],["feeling","という気持ち"],["wish","という願い"],["intention","という方向"],["possibility","可能性として"],["uncertain","まだ決まっていないものとして"],["refusal","しない／したくないという境界"]]],["time_wrappers",[["current_input","今ここにある"],["present","今ここにある"],["past","その時にあった"],["future","これからに向いた"],["continuing","今も続く"],["past_to_present","その時から今に残る"],["present_to_future","今から先へ向く"]]],["observation_operator_rows",[["PRESENT_STATE","NO_RELATION_CLAIM","STATE_RECOGNITION_V1","あります","続いています","continuing_only"],["PRESENT_DIRECTION","NO_RELATION_CLAIM","STATE_RECOGNITION_V1","あります","続いています","continuing_only"],["PRESENT_BURDEN","NO_RELATION_CLAIM","STATE_RECOGNITION_V1","かかっています","","never"],["PRESENT_CHANGE","NO_RELATION_CLAIM","STATE_RECOGNITION_V1","あります","起きています","always"],["PRESENT_ACTUAL_OUTPUT","NO_RELATION_CLAIM","STATE_RECOGNITION_V1","起きています","記録されています","always"],["PRESENT_RESIDUE","NO_RELATION_CLAIM","STATE_RECOGNITION_V1","残っています","続いています","always"],["PRESENT_UNFINISHED","NO_RELATION_CLAIM","STATE_RECOGNITION_V1","まだ終わっていません","途中にあります","always"],["SYNTHESIZE_RELATION","COEXISTS_WITH","COEXISTENCE_V1","同時にあります","重なっています","always"],["SYNTHESIZE_RELATION","TENSION_WITH","ADMITTED_TENSION_V1","せめぎ合っています","並んでいます","always"],["PRESENT_RESIDUE","TEMPORALLY_PRECEDES","STATE_RECOGNITION_V1","残っています","続いています","always"],["PRESENT_CHANGE","ACTION_PRECEDES_CHANGE","ORDERED_CHANGE_V1","変化があります","変わっています","always"],["SYNTHESIZE_RELATION","SOURCE_EXPLICIT_CAUSE","SOURCE_STATED_CAUSE_V1","明示されています","","never"]]],["subjective_operator_rows",[["ATTEND_TO","","EMLIS_ATTENTION_APPRAISAL_V1","目が向きます","心に残ります"],["FEEL_TOWARD","CONCERN","EMLIS_AFFECT_V1","気がかりです",""],["FEEL_TOWARD","RELIEF","EMLIS_AFFECT_V1","ほっとします",""],["FEEL_TOWARD","JOY","EMLIS_AFFECT_V1","うれしく思います",""],["FEEL_TOWARD","SADNESS","EMLIS_AFFECT_V1","悲しく感じます",""],["FEEL_TOWARD","RESPECT","EMLIS_AFFECT_V1","大切に受け取ります",""],["FEEL_TOWARD","DISCOMFORT","EMLIS_AFFECT_V1","違和感があります",""],["APPRAISE_AS_MATERIAL","","EMLIS_ATTENTION_APPRAISAL_V1","大切な動きだと考えます","見過ごせないことだと考えます"],["PROTECT_VALUE_BOUNDARY","","PROTECT_VALUE_BOUNDARY","大切にしたいと考えます","守りたいと考えます"],["TAKE_RELATIONAL_STANCE","STAY_WITH_SPECIFIC_OBJECT","TAKE_RELATIONAL_STANCE","そばで受け止めます","そのまま受け取ります"],["TAKE_RELATIONAL_STANCE","HOLD_UNFINISHED_OPEN","TAKE_RELATIONAL_STANCE","開いたまま受け取ります","結論を急ぎません"],["TAKE_RELATIONAL_STANCE","PROTECT_USER_AGENCY","TAKE_RELATIONAL_STANCE","選ぶ余地を残したいと考えます","急いで決めたくありません"],["TAKE_RELATIONAL_STANCE","WELCOME_BOUNDED_CHANGE","TAKE_RELATIONAL_STANCE","うれしく受け取ります","大切に受け取ります"],["COUNTER_SPECIFIC_PROMOTION","","COUNTER_SPECIFIC_PROMOTION","急いで決めつけたくありません","その決めつけには同意しません"]]],["layer1_direct_slots",[["PRESENT_STATE","という状態が"],["PRESENT_DIRECTION","という方向が"],["PRESENT_BURDEN","という負荷が"],["PRESENT_CHANGE","という変化が"],["PRESENT_ACTUAL_OUTPUT","という出来事が"],["PRESENT_UNFINISHED","ということが"]]],["layer1_relation_slots",[["COEXISTS_WITH",[["LEFT","","と"],["RIGHT","","が"]]],["TENSION_WITH",[["LEFT","","と"],["RIGHT","","が"]]],["TEMPORALLY_PRECEDES",[["BEFORE","","のあとに"],["AFTER","","が"]]],["ACTION_PRECEDES_CHANGE",[["ACTION","","のあとに"],["CHANGE","","という"]]],["SOURCE_EXPLICIT_CAUSE",[["CAUSE","","が"],["EFFECT","","の理由だと"]]]]],["layer2_case_particles",[["ATTEND_TO","に"],["FEEL_TOWARD","について"],["APPRAISE_AS_MATERIAL","を"],["PROTECT_VALUE_BOUNDARY","を"],["TAKE_RELATIONAL_STANCE:STAY_WITH_SPECIFIC_OBJECT","を"],["TAKE_RELATIONAL_STANCE:HOLD_UNFINISHED_OPEN","を"],["TAKE_RELATIONAL_STANCE:PROTECT_USER_AGENCY","について"],["TAKE_RELATIONAL_STANCE:WELCOME_BOUNDED_CHANGE","を"],["COUNTER_SPECIFIC_PROMOTION","について"]]],["structural_tokens",[["speaker","Emlis"],["topic_particle","は"],["terminal","。"]]],["topic_speaker_policy",[["source_actor_experiencer","explicit_only_when_ambiguous"],["layer2_explicit_speaker_placement","first_move_and_each_counterposition"],["later_zero_subject","unique_resolution_only"],["wrapper_placement","time_after_topic_then_modality_before_predicate"],["inflection_order","polarity_then_modality_then_time_scope"]]],["reference_mode_policy",[["anaphoric_first","unique_prior_object_required"],["short_anchor_if_ambiguous","source_bound_anchor_exact0_or1"],["explicit_emlis_counterposition","source_bound_target_exact1"]]],["role_anchor_policy",[["max_graphemes",16],["over_limit_selection","rightmost_grapheme_window"],["inserted_token_count",0],["full_value_replay_over_limit",false]]],["quote_policy",[["l1_max_graphemes",16],["l1_max_per_sentence",1],["l2_max_graphemes",16],["l2_max_per_sentence",1],["full_replay",false]]],["semantic_role_surface_policy",[["per_required_argument_role",1],["binary_relation_role_surface",2],["actor_experiencer_addressee_separated",true],["new_meaning_allowed",false]]],["clause_policy",[["one_move_one_sentence",true],["same_observation_argument_join",true],["multiple_subjective_claim_join",false],["unknown_join",false]]],["move_ref_policy",[["format","move:{basis_anchor_ref}@cocolon.emlis.stage1.microgrammar.v1"],["basis_anchor_count",1],["unit_frame_move_ref_exact",true]]],["polarity_policy",[["positive","affirmative_polite_predicate"],["negative","source_anchor_preserved_no_predicate_inversion"],["mixed","argument_slots_preserved_separately"],["neutral","no_evaluative_morpheme_added"]]],["variant_policy",[["primary_variant_id","01-primary.v1"],["alternate_variant_id","02-alternate.v1"],["max_candidates",2],["first_predicate_alternate_only",true],["connective_alternate_only_without_predicate_alternate",true],["multiple_slot_replacement",false],["automatic_retry",0],["post_defect_generation",0]]],["s9_selection_policy",[["hard_valid_only",true],["required_full_coverage",true],["normalized_exact_repetition",0],["unresolved_zero_subject",0],["connective_collision",0],["tie_break","composition_variant_id_lexical_ascending"],["new_recomposition",0],["new_generation",0]]]]
+```
+<!-- CMEE_STAGE1_MICROGRAMMAR_INVENTORY_DOCS_BYTES_END -->
+
+- policy ID: `cocolon.emlis.stage1.microgrammar.v1`
+- top-level rows: `23`
+- UTF-8 byte length: `9321`
+- SHA-256: `6850d05d22d0378cf5926ce8856e648253df43a468376ba08062246f6c54b966`
+
+### 20.3 Identity / serialization / effect boundary
+
+inventory policy refはStep 3 projection identity materialを再利用する。candidate setとutterance stateはprojection / artifact identity ownerを増やさず、active artifact preimage / traceへまだ接続しない。S9 selected unitのS10 seal、private failureからactive `UNAVAILABLE`へのmapping、legacy owner停止はStep 5である。
+
+```text
+PRIVATE_STEP4_TYPE_EFFECT = 1
+PUBLIC_JSON_SCHEMA_FILE_EFFECT = 0
+PRODUCTION_REGISTRY_EFFECT = 0
+PUBLIC_SERIALIZATION_EFFECT = 0
+API_DB_RN_PERSISTENCE_EFFECT = 0
+ENGINE_ROUTE_EFFECT = 0
+CUTOVER_EFFECT = 0
+ARTIFACT_SEAL_EFFECT = 0
+PRODUCTION_EFFECT = 0
+STAGE1_CORRECTION_STEP4 = COMPLETE_DISABLED
+STEP5_PLUS = NOT_STARTED
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+CANDIDATE_READY = FALSE
+AUTOMATIC_PROGRESSION = FALSE
+CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_STEP4
+STOP_AFTER_STEP4
 ```

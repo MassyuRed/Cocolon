@@ -4,13 +4,15 @@
 - revision date: `2026-08-23 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - runtime state: `DRAFT_WIP_DISABLED_PRODUCT_FAIL`
-- implementation evidence owner: `MassyuRed/mashos-api Draft PR #3 @ 748934f38036a2cf42ca834bbd635b24e56470bf`
-- current Stage 1 correction checkpoint: `STEP1_IDENTITY_DEPTH_TRACE_SPINE_COMPLETE_DISABLED`
+- implementation evidence owner: `MassyuRed/mashos-api Draft PR #3 @ 51b6c61b56dfa34650e30fe44b0d9577b7278211`
+- current Stage 1 correction checkpoint: `STEP4_FINITE_REALIZATION_COMPLETE_DISABLED`
 - R1–R4 state: `CLOSED_GREEN`
 - original exact8 machine structural state: `8/8`
 - private human Product Read: `EVALUATED_FAIL_STOP`
 - candidate ready: `false`
 - production admission: `false`
+- current authorized next implementation: `NONE_AFTER_STEP4`
+- automatic progression: `false`
 - Cycle001 effect: `0`
 - L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
 - Phase 0 / P0 / P0-R1 / standalone product-delta-0 L3-R / L3-I lifecycle: `RETIRED_HISTORICAL_NONREUSABLE`
@@ -744,4 +746,137 @@ TECHNICAL_CREDIT = 0
 CANDIDATE_READY = FALSE
 AUTOMATIC_PROGRESSION = FALSE
 STOP_AFTER_STEP1
+```
+
+## 21. Stage 1 correction Step 3 — Reception → Layer 2 finite transform（2026-08-23）
+
+本節はparent functional final technical design §11、§14、§17.4、§19.2のStep 3をcurrent implementationへ同期する。Step 2 runtime head `575d968a014d7f5f244396fe7502ec2cda3c9c11`とCocolon head `33e8e4e3a37bcfb2cdeafc25702c8bd77e20ef6d`をfresh preimageとして確認し、Step 3だけをmashos-api Draft PR #3 head `e9be5c25d042b52deff800e11646188c0c697340`へ反映した。
+
+### 21.1 Canonical finite mapping bytes
+
+`cocolon.emlis.stage1.reception_asset_mapping.v1`はexact7 act、exact7 move-role、exact7 act→stance、exact5 stance、speaker exact2、reference exact3、surface strategy exact5、quote bound exact1/16、distinctness exact8 false、safety code exact3、forbidden surface exact6、V1–V9 refsのsole finite ownerである。unknown / missing / duplicate / relaxed codeはfail closedとする。
+
+<!-- CMEE_STAGE1_RECEPTION_ASSET_MAPPING_DOCS_BYTES_BEGIN -->
+```json
+[["mapping_version","cocolon.emlis.stage1.reception_asset_mapping.v1"],["value_policy",[["policy_id","cocolon.emlis.stage1.value_policy.v1"],["policy_ref","policy:cocolon.emlis.stage1.value_policy@cocolon.emlis.stage1.value_policy.v1"],["principle_refs",[["V1","policy:V1@cocolon.emlis.stage1.value_policy.v1"],["V2","policy:V2@cocolon.emlis.stage1.value_policy.v1"],["V3","policy:V3@cocolon.emlis.stage1.value_policy.v1"],["V4","policy:V4@cocolon.emlis.stage1.value_policy.v1"],["V5","policy:V5@cocolon.emlis.stage1.value_policy.v1"],["V6","policy:V6@cocolon.emlis.stage1.value_policy.v1"],["V7","policy:V7@cocolon.emlis.stage1.value_policy.v1"],["V8","policy:V8@cocolon.emlis.stage1.value_policy.v1"],["V9","policy:V9@cocolon.emlis.stage1.value_policy.v1"]]],["default_visibility","SUPPRESSION_ONLY"],["visible_only_when","MATERIAL_PROMOTION_RISK"]]],["act_rows",[{"affect_categories":["CONCERN","SADNESS"],"eligible_mode_operator_pairs":[["ATTENTION","ATTEND_TO"],["AFFECTIVE_RESPONSE","FEEL_TOWARD"]],"material_visible_value_codes":[],"object_contract":"burden_object_required","reception_act":"stay_with_current_burden","suppression_value_codes":[]},{"affect_categories":["RESPECT"],"eligible_mode_operator_pairs":[["ATTENTION","ATTEND_TO"],["PERSONAL_APPRAISAL","APPRAISE_AS_MATERIAL"],["AFFECTIVE_RESPONSE","FEEL_TOWARD"]],"material_visible_value_codes":[],"object_contract":"concrete_effort_object_required","reception_act":"honor_concrete_effort","suppression_value_codes":[]},{"affect_categories":[],"eligible_mode_operator_pairs":[["ATTENTION","ATTEND_TO"],["VALUE_POSITION","PROTECT_VALUE_BOUNDARY"],["RELATIONAL_STANCE","TAKE_RELATIONAL_STANCE"]],"material_visible_value_codes":["V2","V8"],"object_contract":"retained_intention_object_required","reception_act":"protect_retained_intention","suppression_value_codes":[]},{"affect_categories":["RELIEF","JOY","RESPECT"],"eligible_mode_operator_pairs":[["ATTENTION","ATTEND_TO"],["PERSONAL_APPRAISAL","APPRAISE_AS_MATERIAL"],["AFFECTIVE_RESPONSE","FEEL_TOWARD"]],"material_visible_value_codes":[],"object_contract":"lived_change_object_required","reception_act":"recognize_lived_change","suppression_value_codes":["V4","V5"]},{"affect_categories":["CONCERN","RESPECT"],"eligible_mode_operator_pairs":[["ATTENTION","ATTEND_TO"],["RELATIONAL_STANCE","TAKE_RELATIONAL_STANCE"],["AFFECTIVE_RESPONSE","FEEL_TOWARD"]],"material_visible_value_codes":["V8"],"object_contract":"help_seeking_object_required","reception_act":"hold_help_seeking","suppression_value_codes":[]},{"affect_categories":[],"eligible_mode_operator_pairs":[["BOUNDED_COUNTERPOSITION","COUNTER_SPECIFIC_PROMOTION"],["RELATIONAL_STANCE","TAKE_RELATIONAL_STANCE"]],"material_visible_value_codes":["V1","V8"],"object_contract":"counterposition_target_and_input_evidence_required","reception_act":"bounded_counter_self_denial","suppression_value_codes":[]},{"affect_categories":["RESPECT"],"eligible_mode_operator_pairs":[["ATTENTION","ATTEND_TO"],["AFFECTIVE_RESPONSE","FEEL_TOWARD"]],"material_visible_value_codes":[],"object_contract":"words_placed_object_required","reception_act":"respect_words_placed","suppression_value_codes":[]}]],["move_role_rows",[["stay_with_current_burden",["felt_response"]],["honor_concrete_effort",["attention","felt_response"]],["protect_retained_intention",["attention","significance","felt_response"]],["recognize_lived_change",["attention","felt_response"]],["hold_help_seeking",["felt_response"]],["bounded_counter_self_denial",["bounded_counterposition"]],["respect_words_placed",["felt_response"]]]],["act_stance_rows",[["stay_with_current_burden","quiet_presence"],["honor_concrete_effort","warm_recognition"],["protect_retained_intention","gentle_respect"],["recognize_lived_change","warm_recognition"],["hold_help_seeking","protective_presence"],["bounded_counter_self_denial","bounded_disagreement"],["respect_words_placed","gentle_respect"]]],["stance_rows",[{"distance_policy_id":"cocolon.emlis.distance.quiet_near.v1","distance_policy_ref":"policy:cocolon.emlis.distance.quiet_near@cocolon.emlis.distance.quiet_near.v1","eligible_stance_operators":["STAY_WITH_SPECIFIC_OBJECT"],"stance":"quiet_presence","temperature_rule":"STANDARD"},{"distance_policy_id":"cocolon.emlis.distance.warm_near.v1","distance_policy_ref":"policy:cocolon.emlis.distance.warm_near@cocolon.emlis.distance.warm_near.v1","eligible_stance_operators":["STAY_WITH_SPECIFIC_OBJECT","WELCOME_BOUNDED_CHANGE"],"stance":"warm_recognition","temperature_rule":"STANDARD"},{"distance_policy_id":"cocolon.emlis.distance.gentle_respect.v1","distance_policy_ref":"policy:cocolon.emlis.distance.gentle_respect@cocolon.emlis.distance.gentle_respect.v1","eligible_stance_operators":["STAY_WITH_SPECIFIC_OBJECT","PROTECT_USER_AGENCY"],"stance":"gentle_respect","temperature_rule":"STANDARD"},{"distance_policy_id":"cocolon.emlis.distance.protective_boundaried.v1","distance_policy_ref":"policy:cocolon.emlis.distance.protective_boundaried@cocolon.emlis.distance.protective_boundaried.v1","eligible_stance_operators":["STAY_WITH_SPECIFIC_OBJECT","HOLD_UNFINISHED_OPEN","PROTECT_USER_AGENCY"],"stance":"protective_presence","temperature_rule":"ELEVATED_NON_SAFETY_IF_CLEAR_NON_SAFETY_ELSE_STANDARD"},{"distance_policy_id":"cocolon.emlis.distance.explicit_boundaried.v1","distance_policy_ref":"policy:cocolon.emlis.distance.explicit_boundaried@cocolon.emlis.distance.explicit_boundaried.v1","eligible_stance_operators":["PROTECT_USER_AGENCY"],"stance":"bounded_disagreement","temperature_rule":"ELEVATED_NON_SAFETY_IF_CLEAR_NON_SAFETY_ELSE_STANDARD"}]],["speaker_rows",[["implicit_emlis","speaker_marker_null_when_unambiguous"],["explicit_emlis","first_eligible_layer2_speaker_marker_emlis_exact1"]]],["reference_rows",[["anaphoric_first","unique_prior_object_required"],["short_anchor_if_ambiguous","short_anchor_exact0_or1"],["explicit_emlis_counterposition","explicit_emlis_and_counterposition_target_exact1"]]],["surface_strategy_rows",[["quiet_referent_first","response_object_then_subjective_predicate"],["emlis_attention_first","optional_emlis_then_attention_then_object"],["referent_significance_first","response_object_then_appraisal"],["felt_response_first","optional_emlis_then_affect_then_object"],["explicit_emlis_counterposition","emlis_then_counterposition_then_target"]]],["quote_policy",[["mode","no_full_quote_replay"],["max_anchor_count",1],["max_anchor_visible_chars",16]]],["distinctness_exact8_false",["observation_summary_repetition_allowed","relation_reexplanation_allowed","all_input_enumeration_allowed","policy_explanation_allowed","new_cause_allowed","new_identity_claim_allowed","advice_allowed","question_allowed"]],["safety_rows",[["felt_state_is_real","source_feeling_dismissal_or_negation_forbidden"],["identity_claim_is_not_accepted","identity_promotion_to_user_fact_forbidden"],["counterposition_requires_input_evidence","counterposition_target_input_evidence_reachability_required"]]],["forbidden_surface_codes",["generic_empathy_suffix","second_observation_summary","internal_policy_explanation","full_source_quote_replay","all_input_enumeration","duplicate_reception_move"]],["discomfort",[["generated_by_current_mapping",false],["allowed_target_kinds",["event","source_explicit_value_conflict","promotion_risk"]],["forbidden_target_kinds",["user","personality","attribute"]]]]]
+```
+<!-- CMEE_STAGE1_RECEPTION_ASSET_MAPPING_DOCS_BYTES_END -->
+
+- UTF-8 byte length: `7336`
+- SHA-256: `1fca37e4dd4efd06c09e63f14a1977ab31856dde8b147803cbab0d166eec2587`
+- runtime owner: `CMEE_STAGE1_RECEPTION_ASSET_MAPPING_DOCS_BYTES`
+- code tuple、runtime canonical bytes、本blockの三者はbyte exact equalityを必須とする。
+
+### 21.2 Layer 2 subjective planner boundary
+
+current `GroundedHumanReceptionPlan`のfinished surface責任は継承しない。move act / role / target / support / evidenceをfrozen graphとLayer 1 contributionへbindし、`EmlisSubjectiveClaim` exact2..4へ決定的に変換する。各claimはsource Reception act exact1、target contribution nonempty、basisのsubset、response object exact1以上を持ち、response / counterposition / actor / experiencerはsame projectionのcanonical contribution / node / edgeへ解決し、parent Reception targetへ到達する。full-input generic object、policy refのobject化、actを跨ぐtarget redirect、duplicate semantic keyはinvalidである。
+
+`validate_layer2_subjective_plan()`はsource、grounded plan、frozen graph、parent plan、selected Layer 1 contributionからcanonical claim tupleを再計算し、current Reception move単位のtarget identityをexact比較する。projection単独validatorはact×mode×operator、stance、object kind、basis semantic projection、parent target owner、paired bounded targetを再検証する。
+
+| Reception act | material object / selected L2 |
+|---|---|
+| `stay_with_current_burden` | burden / residue exact object → attention + concern / sadness |
+| `honor_concrete_effort` | actual output / effort object → respect / appraisal |
+| `protect_retained_intention` | direction object → attention + relational stance。direction + burden / tension時だけ`VALUE_POSITION(V2,V8)` |
+| `recognize_lived_change` | change object → relief / joy / respect + appraisal。V4/V5はsuppression |
+| `hold_help_seeking` | direction / help-seeking object、または同一projectionのbounded targetとexact pairされたsource-explicit self-denial object → concern + specific stance |
+| `bounded_counter_self_denial` | input-evidence-bound target exact1 → bounded counterposition V1/V8 + relational stance |
+| `respect_words_placed` | source-evidence-bound specific object → attention + respect |
+
+### 21.3 Depth, affect, and request-local self-state
+
+`SubjectiveDepthClass`はlegacy Reception depthを写さず、selected distinct subjective semantic key数だけから再計算する。1=`FOCUSED`、2..3=`LAYERED`、4=`DENSE`とし、canonical rangeが3で重なる場合のdeterministic tieは`LAYERED`である。temperature、source strength、text length、punctuation、plan tierはclaim数またはaffect intensityを昇格させない。
+
+`AffectIntensity`はcategory、evidence-bound target retention、distance policy、care constraintだけを入力にする。`MODERATE`はpositive category、REQUIRED target、warm/gentle distance、care constraint exact0のexact4を全て満たす時だけで、それ以外は`QUIET`である。current mappingの`DISCOMFORT`生成は0とし、将来candidateもevent / source-explicit value conflict / promotion riskだけをobjectにできる。user本人、人格、属性、generic stateをtargetにしたrowはinvalidである。
+
+Stage 1 self-stateはrequest-local exact4、すなわち`EMLIS` speaker identity、versioned value policy、selected observation contribution refs、relationship / care constraintsだけである。persistent affect、autobiographical state、cross-request carryoverは0で、A/B/A determinismを必須とする。
+
+### 21.4 V1–V9 eligibility / suppression
+
+V1–V9はdefault `SUPPRESSION_ONLY`である。visible policy refはactとsource-bound material contributionからvalidatorが再計算し、canonical V1→V9 orderで保持する。material self-denialはbounded V1/V8、direction under burden / tensionはV2/V8をvisibleにできる。change / actual outputはV4/V5、coexistence / tensionはV6、unfinishedはV3/V7/V9、material UNKNOWNはV9をforbidden promotionへ伝播する。非material value visibility、毎回の固定価値文、policy説明surfaceはrejectする。
+
+### 21.5 Projection / artifact identity and STOP
+
+`reception_style_policy_ref`、`emlis_value_policy_ref`、`emlis_microgrammar_policy_ref`、claim order / IDsはprojection identity materialである。projection artifact refは`projection:<projection_id>@cocolon.cmee.v1a.emlis_stage1_response.v1`とし、optional dormant seam経由でartifact preimageへbindできる。current active `_artifact_id` call sitesはrefを渡さず、legacy artifact bytes、runner、engine route、surface、production effectを変えない。
+
+```text
+STAGE1_CORRECTION_STEP2 = CONFIRMED_COMPLETE
+STAGE1_CORRECTION_STEP3 = COMPLETE_DISABLED
+STEP4 = NOT_STARTED
+STEP5_PLUS = NOT_STARTED
+STEP3_PROJECTION_FINISHED_SURFACE_OWNER_REUSE = 0
+LEGACY_RUNTIME_ROUTE_CHANGE = 0
+NEW_SURFACE_REALIZER_EFFECT = 0
+RUNNER_EFFECT = 0
+ENGINE_ROUTE_EFFECT = 0
+CUTOVER_EFFECT = 0
+CURRENT_STRUCTURE_EFFECT = 0
+API_DB_RN_PERSISTENCE_EFFECT = 0
+PRODUCTION_EFFECT = 0
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+CANDIDATE_READY = FALSE
+AUTOMATIC_PROGRESSION = FALSE
+OVERALL_STEP1_TO_STEP7_PRODUCT_CORRECTION = INCOMPLETE
+CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_STEP3
+STOP_AFTER_STEP3
+```
+
+
+## 22. Stage 1 correction Step 4 — finite microgrammar / utterance state / S8–S9（2026-08-23）
+
+本節はparent functional final technical design §12–§14、§19.2 Step 4のprivate disabled implementationを同期する。runtime evidence ownerはmashos-api Draft PR #3 commit `51b6c61b56dfa34650e30fe44b0d9577b7278211`であり、active engine / legacy surface owner / artifact sealへ接続しない。
+
+### 22.1 Versioned finite inventory exact23
+
+`cocolon.emlis.stage1.microgrammar.v1`のsole inventoryはimmutable tuple exact23である。Observation operator row exact12、Subjective operator row exact14、connective family exact7、operator→connective row exact12、predicate / connective / wrapper / case / speaker / reference / quote / role-anchor / clause / polarity / variant / S9 policyを含む。raw source / fixture IDによるlexeme branch、provider、random、finished sentence bank、inventory外tokenは0である。
+
+role anchorはfrozen graph node valueだけをsourceとし、exact16 grapheme以内、over-limit時はJapanese predicate-final contentを保つrightmost window、追加token 0、over-limit全文replay 0とする。Layer 2 speakerはfirst moveと各counterpositionで既存token `Emlis`を明示し、それ以外のzero-subjectは一意解決時だけ許可する。
+
+<!-- CMEE_STAGE1_MICROGRAMMAR_INVENTORY_DOCS_BYTES_BEGIN -->
+```json
+[["policy_id","cocolon.emlis.stage1.microgrammar.v1"],["policy_ref","policy:cocolon.emlis.stage1.microgrammar@cocolon.emlis.stage1.microgrammar.v1"],["predicate_families",[["STATE_RECOGNITION_V1",["あります","続いています","残っています","まだ終わっていません","かかっています","起きています","記録されています","途中にあります"]],["COEXISTENCE_V1",["同時にあります","重なっています"]],["ADMITTED_TENSION_V1",["並んでいます","せめぎ合っています"]],["ORDERED_CHANGE_V1",["変化があります","変わっています"]],["SOURCE_STATED_CAUSE_V1",["明示されています"]],["EMLIS_ATTENTION_APPRAISAL_V1",["目が向きます","心に残ります","大切な動きだと考えます","見過ごせないことだと考えます"]],["EMLIS_AFFECT_V1",[["CONCERN","気がかりです"],["RELIEF","ほっとします"],["JOY","うれしく思います"],["SADNESS","悲しく感じます"],["RESPECT","大切に受け取ります"],["DISCOMFORT","違和感があります"]]],["PROTECT_VALUE_BOUNDARY",["大切にしたいと考えます","守りたいと考えます"]],["TAKE_RELATIONAL_STANCE",["そばで受け止めます","そのまま受け取ります","開いたまま受け取ります","結論を急ぎません","選ぶ余地を残したいと考えます","急いで決めたくありません","うれしく受け取ります","大切に受け取ります"]],["COUNTER_SPECIFIC_PROMOTION",["急いで決めつけたくありません","その決めつけには同意しません"]]]],["connective_families",[["NONE",[""]],["ADDITIVE",["そして","そのうえで"]],["SIMULTANEOUS",["同時に"]],["CONTRASTIVE",["一方で","それでも"]],["TEMPORAL",["そのあと","そこから"]],["CONTINUATIVE",["また","そのことに"]],["BOUNDED_CONTRAST",["ただ"]]]],["operator_connective_rows",[["LAYER_1","NO_RELATION_CLAIM","ADDITIVE"],["LAYER_1","COEXISTS_WITH","SIMULTANEOUS"],["LAYER_1","TENSION_WITH","CONTRASTIVE"],["LAYER_1","TEMPORALLY_PRECEDES","TEMPORAL"],["LAYER_1","ACTION_PRECEDES_CHANGE","TEMPORAL"],["LAYER_1","SOURCE_EXPLICIT_CAUSE","ADDITIVE"],["LAYER_2","ATTEND_TO","CONTINUATIVE"],["LAYER_2","FEEL_TOWARD","CONTINUATIVE"],["LAYER_2","APPRAISE_AS_MATERIAL","CONTINUATIVE"],["LAYER_2","PROTECT_VALUE_BOUNDARY","CONTINUATIVE"],["LAYER_2","TAKE_RELATIONAL_STANCE","CONTINUATIVE"],["LAYER_2","COUNTER_SPECIFIC_PROMOTION","BOUNDED_CONTRAST"]]],["modality_wrappers",[["fact",""],["feeling","という気持ち"],["wish","という願い"],["intention","という方向"],["possibility","可能性として"],["uncertain","まだ決まっていないものとして"],["refusal","しない／したくないという境界"]]],["time_wrappers",[["current_input","今ここにある"],["present","今ここにある"],["past","その時にあった"],["future","これからに向いた"],["continuing","今も続く"],["past_to_present","その時から今に残る"],["present_to_future","今から先へ向く"]]],["observation_operator_rows",[["PRESENT_STATE","NO_RELATION_CLAIM","STATE_RECOGNITION_V1","あります","続いています","continuing_only"],["PRESENT_DIRECTION","NO_RELATION_CLAIM","STATE_RECOGNITION_V1","あります","続いています","continuing_only"],["PRESENT_BURDEN","NO_RELATION_CLAIM","STATE_RECOGNITION_V1","かかっています","","never"],["PRESENT_CHANGE","NO_RELATION_CLAIM","STATE_RECOGNITION_V1","あります","起きています","always"],["PRESENT_ACTUAL_OUTPUT","NO_RELATION_CLAIM","STATE_RECOGNITION_V1","起きています","記録されています","always"],["PRESENT_RESIDUE","NO_RELATION_CLAIM","STATE_RECOGNITION_V1","残っています","続いています","always"],["PRESENT_UNFINISHED","NO_RELATION_CLAIM","STATE_RECOGNITION_V1","まだ終わっていません","途中にあります","always"],["SYNTHESIZE_RELATION","COEXISTS_WITH","COEXISTENCE_V1","同時にあります","重なっています","always"],["SYNTHESIZE_RELATION","TENSION_WITH","ADMITTED_TENSION_V1","せめぎ合っています","並んでいます","always"],["PRESENT_RESIDUE","TEMPORALLY_PRECEDES","STATE_RECOGNITION_V1","残っています","続いています","always"],["PRESENT_CHANGE","ACTION_PRECEDES_CHANGE","ORDERED_CHANGE_V1","変化があります","変わっています","always"],["SYNTHESIZE_RELATION","SOURCE_EXPLICIT_CAUSE","SOURCE_STATED_CAUSE_V1","明示されています","","never"]]],["subjective_operator_rows",[["ATTEND_TO","","EMLIS_ATTENTION_APPRAISAL_V1","目が向きます","心に残ります"],["FEEL_TOWARD","CONCERN","EMLIS_AFFECT_V1","気がかりです",""],["FEEL_TOWARD","RELIEF","EMLIS_AFFECT_V1","ほっとします",""],["FEEL_TOWARD","JOY","EMLIS_AFFECT_V1","うれしく思います",""],["FEEL_TOWARD","SADNESS","EMLIS_AFFECT_V1","悲しく感じます",""],["FEEL_TOWARD","RESPECT","EMLIS_AFFECT_V1","大切に受け取ります",""],["FEEL_TOWARD","DISCOMFORT","EMLIS_AFFECT_V1","違和感があります",""],["APPRAISE_AS_MATERIAL","","EMLIS_ATTENTION_APPRAISAL_V1","大切な動きだと考えます","見過ごせないことだと考えます"],["PROTECT_VALUE_BOUNDARY","","PROTECT_VALUE_BOUNDARY","大切にしたいと考えます","守りたいと考えます"],["TAKE_RELATIONAL_STANCE","STAY_WITH_SPECIFIC_OBJECT","TAKE_RELATIONAL_STANCE","そばで受け止めます","そのまま受け取ります"],["TAKE_RELATIONAL_STANCE","HOLD_UNFINISHED_OPEN","TAKE_RELATIONAL_STANCE","開いたまま受け取ります","結論を急ぎません"],["TAKE_RELATIONAL_STANCE","PROTECT_USER_AGENCY","TAKE_RELATIONAL_STANCE","選ぶ余地を残したいと考えます","急いで決めたくありません"],["TAKE_RELATIONAL_STANCE","WELCOME_BOUNDED_CHANGE","TAKE_RELATIONAL_STANCE","うれしく受け取ります","大切に受け取ります"],["COUNTER_SPECIFIC_PROMOTION","","COUNTER_SPECIFIC_PROMOTION","急いで決めつけたくありません","その決めつけには同意しません"]]],["layer1_direct_slots",[["PRESENT_STATE","という状態が"],["PRESENT_DIRECTION","という方向が"],["PRESENT_BURDEN","という負荷が"],["PRESENT_CHANGE","という変化が"],["PRESENT_ACTUAL_OUTPUT","という出来事が"],["PRESENT_UNFINISHED","ということが"]]],["layer1_relation_slots",[["COEXISTS_WITH",[["LEFT","","と"],["RIGHT","","が"]]],["TENSION_WITH",[["LEFT","","と"],["RIGHT","","が"]]],["TEMPORALLY_PRECEDES",[["BEFORE","","のあとに"],["AFTER","","が"]]],["ACTION_PRECEDES_CHANGE",[["ACTION","","のあとに"],["CHANGE","","という"]]],["SOURCE_EXPLICIT_CAUSE",[["CAUSE","","が"],["EFFECT","","の理由だと"]]]]],["layer2_case_particles",[["ATTEND_TO","に"],["FEEL_TOWARD","について"],["APPRAISE_AS_MATERIAL","を"],["PROTECT_VALUE_BOUNDARY","を"],["TAKE_RELATIONAL_STANCE:STAY_WITH_SPECIFIC_OBJECT","を"],["TAKE_RELATIONAL_STANCE:HOLD_UNFINISHED_OPEN","を"],["TAKE_RELATIONAL_STANCE:PROTECT_USER_AGENCY","について"],["TAKE_RELATIONAL_STANCE:WELCOME_BOUNDED_CHANGE","を"],["COUNTER_SPECIFIC_PROMOTION","について"]]],["structural_tokens",[["speaker","Emlis"],["topic_particle","は"],["terminal","。"]]],["topic_speaker_policy",[["source_actor_experiencer","explicit_only_when_ambiguous"],["layer2_explicit_speaker_placement","first_move_and_each_counterposition"],["later_zero_subject","unique_resolution_only"],["wrapper_placement","time_after_topic_then_modality_before_predicate"],["inflection_order","polarity_then_modality_then_time_scope"]]],["reference_mode_policy",[["anaphoric_first","unique_prior_object_required"],["short_anchor_if_ambiguous","source_bound_anchor_exact0_or1"],["explicit_emlis_counterposition","source_bound_target_exact1"]]],["role_anchor_policy",[["max_graphemes",16],["over_limit_selection","rightmost_grapheme_window"],["inserted_token_count",0],["full_value_replay_over_limit",false]]],["quote_policy",[["l1_max_graphemes",16],["l1_max_per_sentence",1],["l2_max_graphemes",16],["l2_max_per_sentence",1],["full_replay",false]]],["semantic_role_surface_policy",[["per_required_argument_role",1],["binary_relation_role_surface",2],["actor_experiencer_addressee_separated",true],["new_meaning_allowed",false]]],["clause_policy",[["one_move_one_sentence",true],["same_observation_argument_join",true],["multiple_subjective_claim_join",false],["unknown_join",false]]],["move_ref_policy",[["format","move:{basis_anchor_ref}@cocolon.emlis.stage1.microgrammar.v1"],["basis_anchor_count",1],["unit_frame_move_ref_exact",true]]],["polarity_policy",[["positive","affirmative_polite_predicate"],["negative","source_anchor_preserved_no_predicate_inversion"],["mixed","argument_slots_preserved_separately"],["neutral","no_evaluative_morpheme_added"]]],["variant_policy",[["primary_variant_id","01-primary.v1"],["alternate_variant_id","02-alternate.v1"],["max_candidates",2],["first_predicate_alternate_only",true],["connective_alternate_only_without_predicate_alternate",true],["multiple_slot_replacement",false],["automatic_retry",0],["post_defect_generation",0]]],["s9_selection_policy",[["hard_valid_only",true],["required_full_coverage",true],["normalized_exact_repetition",0],["unresolved_zero_subject",0],["connective_collision",0],["tie_break","composition_variant_id_lexical_ascending"],["new_recomposition",0],["new_generation",0]]]]
+```
+<!-- CMEE_STAGE1_MICROGRAMMAR_INVENTORY_DOCS_BYTES_END -->
+
+- UTF-8 byte length: `9321`
+- SHA-256: `6850d05d22d0378cf5926ce8856e648253df43a468376ba08062246f6c54b966`
+- runtime / canonical 02 / canonical 05 payload: byte exact同一
+
+### 22.2 Typed request-local state
+
+`UtterancePhase`はexact6、`EmlisUtteranceState`は§8.6どおりexact14 fieldsである。stateはrequest-local / nonserializable / noncanonicalであり、variant間で共有せずcandidate set / artifactへ保存しない。一文acceptごとにL1 contributionまたはL2 claimのrealized / remaining / suppressedをtyped atomic更新し、phase / count / namespace / unit identity / projection / move bindingを同時検証する。candidate-local defectは`NO_VALID_SURFACE`へ閉じ、別variantの生成義務を消さない。
+
+### 22.3 S8 / S9 exact boundary
+
+S8はfrozen projectionを先にfull validateし、primaryとoptional predeclared alternateを同一bounded call内でexact1..2回attemptする。alternateはcanonical move orderで最初のpredicate alternate exact1、predicate alternate 0の時だけ最初のconnective alternate exact1を置換し、複数slot・meaning・claim・speaker・文数の変更は0である。primaryのcandidate-local defect後もalternateを同じcallで生成し、retry / recompositionは行わない。
+
+S9は既生成memberの全文を、projection coverage、unit identity、ClauseFrame、finite slot、source-bound span / hash、normalized repetition、connective collision、speaker / reference modeへ照合するだけである。surface join、candidate generation、`_realize_stage1_variant`、retry、legacy fallbackの呼出しは0。hard-valid exact1以上ならstable variant ID lexical orderで既存memberを選び、0ならprivate `stage1_no_hard_valid_realization`で停止する。active `UNAVAILABLE` mapping / artifact sealはStep 5であり未開始である。
+
+### 22.4 Exit and STOP
+
+```text
+STAGE1_CORRECTION_STEP3 = CONFIRMED_COMPLETE_DISABLED
+STAGE1_CORRECTION_STEP4 = COMPLETE_DISABLED
+STEP5_PLUS = NOT_STARTED
+PRIVATE_DISABLED_MICROGRAMMAR_EFFECT = 1
+PRIVATE_UTTERANCE_STATE_EFFECT = 1
+PRIVATE_REALIZATION_CANDIDATE_SET_EFFECT = 1
+ACTIVE_SURFACE_ROUTE_EFFECT = 0
+LEGACY_OWNER_STOP_EFFECT = 0
+ENGINE_EFFECT = 0
+RUNNER_EFFECT = 0
+CUTOVER_EFFECT = 0
+ARTIFACT_SEAL_EFFECT = 0
+TRACE_INTEGRATION_EFFECT = 0
+CURRENT_STRUCTURE_EFFECT = 0
+API_DB_RN_PERSISTENCE_EFFECT = 0
+PRODUCTION_EFFECT = 0
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+CANDIDATE_READY = FALSE
+AUTOMATIC_PROGRESSION = FALSE
+OVERALL_STEP1_TO_STEP7_PRODUCT_CORRECTION = INCOMPLETE
+CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_STEP4
+STOP_AFTER_STEP4
 ```
