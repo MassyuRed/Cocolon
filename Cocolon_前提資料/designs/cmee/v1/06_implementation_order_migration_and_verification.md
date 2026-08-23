@@ -1847,3 +1847,101 @@ OVERALL_STEP1_TO_STEP7_PRODUCT_CORRECTION = INCOMPLETE
 CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_STEP5
 STOP_AFTER_STEP5
 ```
+
+## 28. Stage 1 correction Step 6 — full regression checkpoint（2026-08-23）
+
+Step 5 runtime head `c59deaff9541db1fa476c3a504bb8ce708920885`とCocolon head `ddeec3b755f00de55091a4b3b45e816fce3af449`の`COMPLETE_DISABLED`、Draft / open / unmergedをfresh preimageとして再確認した。Step 6 final stateはmashos-api commit `1c7270eab83fbac602c79ce39578eea3583701c6`と本Cocolon `THIS_COMMIT_SEQUENCE`であり、Step 7を開始しない。
+
+### 28.1 Exact changed paths and preserved boundary
+
+mashos-api Step 6 changed path exact6:
+
+1. `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py`
+2. `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py`
+3. `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_v1a.py`
+4. `ai/tests/test_cmee_v1a_i1sx_contracts.py`
+5. `ai/tests/test_cmee_v1a_i1sx_vertical.py`
+6. `ai/tools/cmee_v1a_i1sx_candidate_run.py`
+
+Cocolon Step 6 changed path exact3:
+
+1. `Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md`
+2. `Cocolon_前提資料/designs/cmee/v1/05_json_schema_and_versioning.md`
+3. `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md`
+
+source kernel、engine、package `__init__`、common guard、production validator / registry / route、API / DB / RN / persistence、current_structure、handoffは変更していない。retry / fallback / provider / random、production case-ID / expected-text branch、candidate cap緩和は0である。
+
+### 28.2 Finite mutation and invariant closure
+
+`STAGE1_KAREN_DERIVED_MUTATION_SET_V1`はbody-free / non-executing exact12 registryであり、class denominatorはsemantic equivalence `3`、relation contrast `3`、claim boundary `4`、subjectivity `2`である。bodyとtyped semantic oracleはcurrent + new testsだけが所有する。
+
+- semantic equivalenceはregister inflection、lexical paraphrase、clause orderを同じtyped meaningへ閉じる。
+- relation contrastはtemporal order、coexistence / tension、sequence / causeをnode / edge / endpoint orderまで区別する。
+- claim boundaryはnegation、modality、experiencer、material unrelatedをpositive ownerへ誤昇格させない。
+- subjectivityはsource strengthのみでdepth / intensityを昇格せず、DISCOMFORT person-target改変をcompiler / realizer前にrejectする。
+- whole-state negationはnoun / adjective / verb × plain / past / polite / polite-pastのfinite exact16をfail closedし、既存scope reason precedenceを保持する。
+- role anchorは`semantic_boundary_or_stop`でcomplete predicateまたはtyped semantic boundaryをsource-contiguousに保持し、inability / direction / burden / conditional actionを落とすmeaning-changing cutを行わない。
+- positive / nonvisible / UNKNOWN disposition shape、canonical owner、visible exactness、ordered basis、directional relation traceをrunner structural comparatorでも検証する。
+
+historical phase14 fixtureに残る旧owner literal assertionはStep 6 active ownerではなく、再有効化しない。current ownerへ置換したthree-core boundary exact5をprotected obligationとして検証した。
+
+### 28.3 Machine receipt
+
+```text
+contract suite = 69 / 69 PASS
+vertical suite = 41 / 41 PASS
+combined current + new = 110 / 110 PASS
+finite mutation semantic oracle = 12 / 12 PASS (3 / 3 / 4 / 2)
+generated compiler / composer call = exact1 / exact1
+early UNAVAILABLE compiler / composer call = exact0 / exact0
+legacy / retry / fallback call = 0
+original exact8 generated / artifact / structural = 8 / 8 / 8
+runner state = GENERATED_FOR_PRODUCT_READ_DISABLED
+material UNKNOWN = LIMITED / artifact present / visible UNKNOWN exact1 / structural valid
+safety route = unchanged / artifact 0
+unseen input regression = PASS
+whole-state negation finite table = 16 / 16 PASS
+current-owner three-core boundary = 5 / 5 PASS
+canonical inventory = 9,321 bytes / SHA-256 5228a1814d26cbe0a19072804536dea5d7719d0b69a374c8a973f710c3a80459
+candidate kind cap = 2 (unchanged)
+py_compile exact6 = PASS
+git diff --check = PASS
+independent final review = Blocker 0 / Major 0 / Minor 0
+```
+
+### 28.4 Private-after post-commit gate
+
+両repoのfinal headとclean worktreeを確認してから、actual-afterを別packet IDへexclusive createする。private packet bindingはruntime head、本Cocolon commit sequence、unchanged exact8 fixture order + fixture / axes canonical結合digest、runner path + bytes identityへ閉じる。body-full packetのroot / directoryは`0700`、fileは`0600`、checkoutとの重複は0である。body-free stdoutのexact8 / registry / stateとprivate bindingを照合し、body、digest、locatorはGitHubへ公開しない。
+
+### 28.5 Exit and STOP
+
+```text
+STAGE1_CORRECTION_STEP0 = CONFIRMED_COMPLETE
+STAGE1_CORRECTION_STEP1 = CONFIRMED_COMPLETE_DISABLED
+STAGE1_CORRECTION_STEP2 = CONFIRMED_COMPLETE_DISABLED
+STAGE1_CORRECTION_STEP3 = CONFIRMED_COMPLETE_DISABLED
+STAGE1_CORRECTION_STEP4 = CONFIRMED_COMPLETE_DISABLED
+STAGE1_CORRECTION_STEP5 = CONFIRMED_COMPLETE_DISABLED
+STAGE1_CORRECTION_STEP6 = COMPLETE_DISABLED
+STEP7 = NOT_STARTED
+FINITE_MUTATION_SET = 12 / 12
+EXACT8_MACHINE_GATE = 8 / 8
+SAFETY_UNKNOWN_INVARIANT = PASS
+PRIVATE_BODY_DIGEST_LOCATOR_GITHUB_PUBLICATION = 0
+PUBLIC_SHAPE_EFFECT = 0
+CURRENT_STRUCTURE_EFFECT = 0_PENDING_STEP7
+HANDOFF_EFFECT = 0_PENDING_STEP7
+API_DB_RN_PERSISTENCE_EFFECT = 0
+PRODUCTION_EFFECT = 0
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+FULL_I1_CREDIT = 0
+CYCLE001_CREDIT = 0
+CANDIDATE_READY = FALSE
+PRODUCT_READ_EVALUATED = FALSE
+EXACT8_ACCEPTANCE_COMPLETE = FALSE
+AUTOMATIC_PROGRESSION = FALSE
+OVERALL_STEP1_TO_STEP7_PRODUCT_CORRECTION = INCOMPLETE
+CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_STEP6
+STOP_AFTER_STEP6
+```
