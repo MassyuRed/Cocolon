@@ -331,3 +331,41 @@ Stage 1の新product contract:
       106a1b8c92e808d15e88ce4f56c6300568d93e9f
 
 次回はfresh refと実fileを再確認する。
+
+## 13. Latest Stage 1 disabled candidate map — Step 7 correction（2026-08-23）
+
+本節はStage 1 correctionのcurrent working stateについて§8 / §9.1よりfreshである。current implementation ownerはmashos-api Draft PR #3のprivate disabled routeであり、production `emlis_ai_reply_service.py`、ReplyEnvelope、RN display ownerを置換しない。
+
+| Surface | Current owner / state | Effect |
+|---|---|---|
+| Stage 1 response compiler | `cocolon_meaning_experience_engine/emlis_stage1_response.py::compile_stage1_response` / disabled candidate | private disabled effect exact1 |
+| finite language owner | `cocolon.emlis.stage1.microgrammar.v2` / exact44 / 16695 bytes / canonical 02 + 05 byte-exact | production effect 0 |
+| engine / runner | `MeaningExperienceEngine.generate()`経由のdisabled candidate run | public ingress effect 0 |
+| production reply / API / DB / RN | existing owners unchanged | effect 0 |
+| provider / source / dependency | no new owner, no expansion | effect 0 |
+| Product verdict | Mash body-full Product Read only | not evaluated in docs |
+
+最初のStep 7 pre-screenで共通surface原因を検出してStep 2–4へ戻し、provider / source / allowlistを広げずsame-scope v2 finite correctionを行った。fresh Step 5は7/7、Step 6はcontracts 70/70 + vertical 41/41 = 111/111で、all-variant quote seal、forged three-pair fail-closed、typed source-shape parser tableも通過した。formal V10 Step 7はpairwise 28/28と独立set-level review 2/2を通過し、case / pairwiseのMajor / Blocker 0、明白な低品質0/8、source fidelity 8/8、duplicate / forbidden 0、SX07重点全PASSとなった。full receiptはcanonical 06 §29が所有する。machine GREENや華恋pre-screenはMash Product PASSではない。
+
+```text
+candidate_state = DISABLED_MASH_PRESENTATION_PRE_SCREEN_PASSED
+current_runtime_owner = mashos-api Draft PR #3 / canonical 06 §29 final token
+formal_step7_revision = V10
+v2_inventory_tuple_bytes_sha256 = 44 / 16695 / dc4e1e5ef8026d5577698f375e305db7886f57096c69e6e6a0b99bfe1f26de8a
+step6_full_regression_rerun = 111 / 111 PASS
+step6_quote_and_parser_regression = PASS
+production_owner_changed = false
+provider_source_dependency_expansion = 0
+public_schema_api_db_rn_persistence_effect = 0
+private_body_digest_locator_github_publication = 0
+runner_candidate_ready = false
+runner_product_read_eligible = false
+mash_presentation_pre_screen_eligible = true
+product_read_evaluated = false
+product_pass = not_declared
+product_technical_full_i1_cycle001_production_credit = 0
+remote_exact_path_and_bytes_equality = PASS_VERIFIED_POST_PUSH
+automatic_progression = false
+```
+
+final remote refs、exact changed-path set、file bytes equalityはcommit / push後にcanonical 06 §29の`PASS_VERIFIED_POST_PUSH`として実測確認した。

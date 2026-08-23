@@ -1945,3 +1945,104 @@ OVERALL_STEP1_TO_STEP7_PRODUCT_CORRECTION = INCOMPLETE
 CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_STEP6
 STOP_AFTER_STEP6
 ```
+
+## 29. Stage 1 correction Step 7 — common-cause return / final pre-screen checkpoint（2026-08-23）
+
+### 29.1 Entry confirmation and mandatory return loop
+
+Step 7 entryでは§28のStep 6 `COMPLETE_DISABLED`を確認した。最初のexact8全文pairwise / set-level pre-screenは共通のsurface品質原因を検出したため合格扱いにせず、Step 2–4へ戻した。修正は既存allowlist内のruntime / tests / runnerとcanonical docs / maps / handoffだけに限定し、provider、source、dependency、API、DB、RN、persistence、production routeを拡張していない。
+
+戻り修正後の順序は変更できない。
+
+1. Step 5 atomic proofをfresh再実行する。
+2. Step 6 full regression、finite mutation、exact8 machine gate、安全 / UNKNOWN / unseen invariantsをfresh再実行する。
+3. Step 7でunchanged exact8全文をbefore / after pairwiseおよびset-levelで再pre-screenする。
+4. 明白な低品質0、machine GREEN再成立、docs-runtime整合の候補だけをMashのbody-full Product Readへ提示する。
+5. Product verdictはMashだけが所有し、pre-screenをProduct PASSへ変換しない。
+
+### 29.2 Final correction allowlists
+
+mashos-api changed-path candidate exact7:
+
+```text
+ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py
+ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_v1a.py
+ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py
+ai/tests/test_cmee_v1a_i1sx_contracts.py
+ai/tests/test_cmee_v1a_i1sx_vertical.py
+ai/tools/cmee_v1a_i1sx_candidate_run.py
+ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md
+```
+
+Cocolon changed-path candidate exact5:
+
+```text
+Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md
+Cocolon_前提資料/designs/cmee/v1/05_json_schema_and_versioning.md
+Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md
+Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md
+Cocolon_前提資料/current_structure/04_cmee_current_structure.md
+```
+
+`reference/Cocolon/.../02 / 05 / 06`のnested snapshotはfinal ownerではなく、Step 0 preimageからのnet changed pathへ残さない。final commit / push後は両Draft PRをopen / draft / unmergedに保ち、remoteからallowlist exact setと各file bytesを再取得してlocal final bytesと一致させる。
+
+### 29.3 Final body-free receipt
+
+common causeはscope内のStep 2–4で修正できたため、`IMPLEMENTATION_STOP`条件には該当しなかった。fresh Step 5 / 6とformal V10 Step 7を完了し、独立したset-level review exact2はいずれもBlocker / Major 0である。case minorはpre-screen非blockingである。presentation pre-screen eligibilityはrunnerのcandidate / Product Read eligibilityとは別状態であり、Product verdictを作らない。
+
+```text
+STEP6_PREVIOUS_COMPLETION_CONFIRMED = TRUE
+FIRST_STEP7_V1_PRE_SCREEN = REJECTED_RETURNED_TO_STEP2_TO4
+COMMON_CAUSE_FIX_WITHIN_SCOPE = TRUE
+PROVIDER_SOURCE_ALLOWLIST_EXPANSION = 0
+MASHOS_RUNTIME_HEAD = b7865574ebe08c801f6a2c779daf9148159cf8b0
+COCOLON_COMMIT_SEQUENCE = THIS_COMMIT_SEQUENCE
+FORMAL_STEP7_REVISION = V10
+V2_INVENTORY_TUPLE_BYTES_SHA256 = 44 / 16695 / dc4e1e5ef8026d5577698f375e305db7886f57096c69e6e6a0b99bfe1f26de8a
+STEP5_ATOMIC_PROOF_RERUN = 7 / 7 PASS
+STEP6_CONTRACT_VERTICAL = 70 / 70 + 41 / 41 = 111 / 111 PASS
+STEP6_FINITE_MUTATION = 12 / 12 PASS (3 / 3 / 4 / 2)
+STEP6_INVARIANTS_UNKNOWN_SAFETY_UNSEEN = 6 / 6 PASS
+STEP6_THREE_CORE_BOUNDARY = 5 / 5 PASS
+STEP6_COMPILE_EXACT4 = PASS
+STEP6_EXACT8_GENERATED_ARTIFACT_STRUCTURAL = 8 / 8 / 8
+STEP6_QUOTE_ALL_VARIANTS_SEAL = PASS
+STEP6_FORGED_THREE_QUOTE_PAIRS = FAIL_CLOSED
+STEP6_TYPED_SOURCE_SHAPE_PARSER_TABLE = PASS
+STEP7_PAIRWISE_PRE_SCREEN = 28 / 28 PASS
+STEP7_CASE_MAJOR = 0
+STEP7_PAIRWISE_MAJOR_BLOCKER = 0 / 0
+STEP7_INDEPENDENT_SET_LEVEL_REVIEWS = 2 / 2 PASS
+STEP7_EACH_REVIEW_BLOCKER_MAJOR = 0 / 0
+OBVIOUS_LOW_QUALITY_COUNT = 0 / 8
+SOURCE_FIDELITY = 8 / 8
+DUPLICATES = 0
+FORBIDDEN = 0
+SX07_FOCUSED_CONDITIONS = ALL PASS
+CASE_MINOR = NONBLOCKING
+MACHINE_GREEN_REESTABLISHED = TRUE
+DOCS_RUNTIME_BYTE_EQUALITY = BYTE_EXACT
+MASHOS_STEP0_TO_FINAL_LOCAL_CANDIDATE = EXACT7
+COCOLON_STEP0_TO_FINAL_LOCAL_CANDIDATE = EXACT5
+MASHOS_REMOTE_CHANGED_PATH_EXACT7 = PASS_VERIFIED_POST_PUSH
+COCOLON_REMOTE_CHANGED_PATH_EXACT5 = PASS_VERIFIED_POST_PUSH
+REMOTE_LOCAL_FILE_BYTES_EQUALITY = PASS_VERIFIED_POST_PUSH
+PRIVATE_BODY_DIGEST_LOCATOR_GITHUB_PUBLICATION = 0
+CURRENT_STRUCTURE_EFFECT = SYNCED_EXACT2
+HANDOFF_EFFECT = SYNCED_EXACT1
+API_DB_RN_PERSISTENCE_EFFECT = 0
+PRODUCTION_EFFECT = 0
+PROVIDER_SOURCE_DEPENDENCY_EFFECT = 0
+PRODUCT_READ_EVALUATED = FALSE
+PRODUCT_PASS = NOT_DECLARED
+RUNNER_CANDIDATE_READY = FALSE
+RUNNER_PRODUCT_READ_ELIGIBLE = FALSE
+MASH_PRESENTATION_PRE_SCREEN_ELIGIBLE = TRUE
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+FULL_I1_CREDIT = 0
+CYCLE001_CREDIT = 0
+PRODUCTION_CREDIT = 0
+AUTOMATIC_PROGRESSION = FALSE
+IMPLEMENTATION_STOP = NOT_APPLICABLE_SCOPE_FIXED
+```

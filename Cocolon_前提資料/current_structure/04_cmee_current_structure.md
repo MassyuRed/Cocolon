@@ -625,3 +625,46 @@ functional delta:
 次のimplementationは別の長いdesign / review projectにしない。fresh preimage、exact changed paths、新規file exact1、legacy owner停止点、comparator delta、unchanged exact8、tests、actual after、華恋pre-screen、Mash Product Read、STOPを短いexecution envelopeへ固定し、一つのbounded Stage 1 product correctionとして進める。
 
 今回のeffectはCocolon docs / routing / current structure mapだけである。runtime、test、runner、API、DB、RN、production、Cycle、question、Layer 3、Piece、Analysis effectは0。Mashのimplementation開始指示前は進めず、全段階で`automatic_progression=false`を維持する。
+
+## 22. CMEE current structure 更新 — Stage 1 Step 7 correction（2026-08-23）
+
+本sectionはStage 1 correctionのcurrent working stateについて§20 / §21よりfreshである。mashos-api Draft PR #3のdisabled Emlis verticalだけがimplementation ownerであり、shared CMEE production owner、three-core共通API、provider、dependency、source admissionを新設しない。
+
+current owner / boundary:
+
+```text
+response compiler = compile_stage1_response / private disabled exact1
+finite language policy = cocolon.emlis.stage1.microgrammar.v2
+canonical inventory owners = runtime + canonical 02 §25.1 + canonical 05 §23.1
+production engine route effect = 0
+public serializer / API / DB / RN / persistence effect = 0
+provider / source / dependency expansion = 0
+Piece / Analysis / question / Layer 3 effect = 0
+private body / digest / locator GitHub publication = 0
+```
+
+最初のStep 7 pre-screenで共通surface原因を確認したため、Step 2–4へ戻してprovider / source / allowlist拡張0のsame-scope v2 correctionを行った。fresh Step 5は7/7、Step 6はcontracts 70/70 + vertical 41/41 = 111/111で、all-variant quote seal、forged three-pair fail-closed、typed source-shape parser tableも通過した。formal V10 Step 7はpairwise 28/28と独立set-level review 2/2を通過した。case / pairwiseのMajor / Blocker 0、明白な低品質0/8、source fidelity 8/8、duplicate / forbidden 0、SX07重点全PASSであり、case minorはnonblockingである。通過後もcandidateはdisabledのままであり、Product PASS、activation、production、Cycle001、full-I1 creditへ自動進行しない。
+
+```text
+formal_step7_revision = V10
+v2_inventory_tuple_bytes_sha256 = 44 / 16695 / dc4e1e5ef8026d5577698f375e305db7886f57096c69e6e6a0b99bfe1f26de8a
+step5_atomic_proof_rerun = 7 / 7 PASS
+step6_full_regression_rerun = 111 / 111 PASS
+step6_quote_and_parser_regression = PASS
+step7_pairwise_pre_screen = 28 / 28 PASS
+step7_independent_set_level_reviews = 2 / 2 PASS, each Blocker / Major 0 / 0
+step7_case_major = 0
+step7_pairwise_major_blocker = 0 / 0
+obvious_low_quality_count = 0 / 8
+source_fidelity = 8 / 8
+duplicates / forbidden = 0 / 0
+sx07_focused_conditions = ALL PASS
+runner_candidate_ready = false
+runner_product_read_eligible = false
+mash_presentation_pre_screen_eligible = true
+remote_exact_path_and_bytes_equality = PASS_VERIFIED_POST_PUSH
+product_read_evaluated = false
+product_pass = not_declared
+product_technical_full_i1_cycle001_production_credit = 0
+automatic_progression = false
+```
