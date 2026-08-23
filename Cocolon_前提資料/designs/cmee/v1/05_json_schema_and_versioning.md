@@ -1,12 +1,13 @@
 # CMEE V1 — JSON Schema / Identity / Versioning 詳細設計
 
 - document id: `cocolon.cmee.v1.schema_and_versioning.detailed_design`
-- revision date: `2026-08-21 JST`
+- revision date: `2026-08-23 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - Phase 2 product-route verdict: `ADOPT_WITH_BOUNDED_CORRECTIONS_REFLECTED`
 - canonical field / ref / schema / version owner: `THIS_FILE`
-- schema registration: `NOT_REGISTERED`
-- runtime serialization / implementation / cutover effect: `0`
+- schema registration: `EMLIS_STAGE1_PRIVATE_SPINE_V1_REGISTERED_DISABLED`
+- private Python contract mapping: `STEP1_IMPLEMENTED_DISABLED`
+- public runtime serialization / cutover effect: `0`
 - DB / API effect: `0`
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 
@@ -35,6 +36,8 @@
 | `cocolon.cmee.engine_outcome.v1alpha1` | internal response envelope | V1-A candidate |
 | `cocolon.cmee.clarification_request.v1alpha1` | private interaction artifact | V1-A offline candidate; V1-B / V1-E operational future |
 | `cocolon.cmee.positive_realization_trace.v1alpha1` | private body-full | V1-A candidate |
+| `cocolon.cmee.v1a.emlis_stage1_response.v1` | private request-local Emlis specialization | Step 1 registered / disabled |
+| `cocolon.cmee.v1a.emlis_stage1_positive_trace_extension.v1` | private body-full Emlis trace specialization | Step 1 registered / disabled |
 | `cocolon.cmee.body_free_quality_report.v1alpha1` | body-free | V1-A candidate |
 | `cocolon.cmee.failure_envelope.v1alpha1` | body-free | V1-A candidate |
 | `cocolon.cmee.piece_visual_card_payload.v1alpha1` | private primary payload | V1-C future |
@@ -2552,3 +2555,133 @@ FUTURE_ANALYSIS_EXTERNAL_RETENTION_HOLD:
 - Analysis initial mandatory external export、SavedRouteIntentをexport prerequisiteにするshapeをREDにする。
 
 test fixture、schema example、machine reportをgeneration authorityまたはhuman Product Read PASSにしない。
+
+## 18. Emlis Stage 1 private identity / depth / trace registration（2026-08-23）
+
+本節はStep 1でactual materializeしたprivate field、ref、identity、versionのsole canonical ownerである。
+§17はStep 10 logical product contractを引き続き所有する。本節はproduction registry、public wireまたはcutoverを作らない。
+
+### 18.1 Registered schema exact2
+
+| Schema ID | Root / privacy | Lifecycle |
+|---|---|---|
+| `cocolon.cmee.v1a.emlis_stage1_response.v1` | immutable request-local Emlis IR / private body-full | registered / implemented / disabled |
+| `cocolon.cmee.v1a.emlis_stage1_positive_trace_extension.v1` | Emlis positive-trace specialization / private body-full | registered / implemented / disabled |
+
+response schemaのrootは`EmlisStage1Projection`であり、`EmlisInterpretationCandidate[]`、`EmlisMeaningField`、
+`PlannedObservationContribution[]`、`EmlisSubjectiveClaim[]`をbottom-upに所有する。realization identity shapeとして
+`ClauseFrame[] / RealizedSemanticBinding[] / RealizedSentenceUnit`を同じversion familyへ登録する。
+全array fieldのruntime representationはexact `tuple`で、nested contract / enumはexact typeである。
+
+### 18.2 Exact6 identity algorithm
+
+algorithm IDは`cocolon.cmee.identity.typed_canonical_json_sha256.v1`とする。
+
+```python
+canonical = json.dumps(
+    preimage,
+    ensure_ascii=False,
+    sort_keys=True,
+    separators=(",", ":"),
+    allow_nan=False,
+).encode("utf-8")
+
+identity = prefix + "-" + lowercase_hex(
+    SHA256(UTF8(prefix) + b"\x00" + canonical)
+)
+```
+
+digestは省略しないfull 64 hexである。object key orderとserialization whitespaceはidentityを変えない。
+array orderはsemantic orderであり、unordered fieldはownerがhash前にcanonical orderへ変換する。
+
+| ID field | Prefix | Canonical preimage field exact set | Excluded |
+|---|---|---|---|
+| `candidate_id` | `candidate` | `schema_version, candidate_kind, claim_domain, semantic_operator, argument_bindings, relation_operator, relation_basis_refs, derivation_rule_id, semantic_refs, evidence_refs, basis_candidate_refs, epistemic_state, required_qualifiers, forbidden_promotions` | own ID、request / path / timestamp / surface |
+| `meaning_field_id` | `meaning-field` | `schema_version, grounded_graph_ref, center_candidate_ref, entries, required_candidate_refs, material_unknown_refs` | own ID、request / path / timestamp / surface |
+| `contribution_id` | `contribution` | `schema_version, parent_duty_ref, contribution_kind, interpretation_candidate_refs, semantic_operator, argument_bindings, relation_operator, relation_basis_refs, derivation_rule_id, semantic_refs, evidence_refs, retention, semantic_key_version, canonical_semantic_key, prerequisite_contribution_refs, forbidden_operations` | own ID、request / path / timestamp / surface |
+| `subjective_claim_id` | `subjective-claim` | `schema_version, parent_duty_ref, speaker_owner, claim_domain, subjective_mode, asserted_subjective_proposition, basis_observation_contribution_refs, basis_semantic_refs, source_reception_act_refs, value_principle_refs, user_fact_effect, forbidden_promotions` | own ID、request / path / timestamp / surface |
+| `projection_id` | `projection` | `schema_version, grounded_graph_ref, parent_observation_duty_ref, parent_reception_duty_ref, ordered interpretation_candidate_ids, meaning_field_id, ordered observation_contribution_ids, ordered subjective_claim_ids, ordered_observation_refs, ordered_subjective_refs, retained_reception_act_ids, observation_depth_class, subjective_depth_class, temperature_class, reception_style_policy_ref, emlis_value_policy_ref, emlis_microgrammar_policy_ref` | own ID、parent plan ID、request / path / timestamp / surface / realization variant |
+| `unit_id` | `unit` | `projection_ref, layer, move_ref, clause_frames, canonical visible UTF-8 text, basis_anchor_refs, realized_semantic_bindings, discourse_link_to_prior_sentence, composition_variant_id` | own ID、request / path / timestamp |
+
+included field、schema version、semantic array order、depth、temperature、policyまたはunit textを変更して旧IDを維持したrowはRED。
+childをcoordinated rehashしても、parent MeaningField / contribution / claim / projection / unit / traceのreachabilityを
+全て再sealしない限りREDとする。
+
+### 18.3 Ref and frozen-owner resolution
+
+same versioned request container内のcandidate / contribution / claim / unit IDと、同じparent plan containerのduty / act IDだけは
+bare local IDを許可する。container外refは`<type>:<id>@<version>` exact formを必須にする。
+
+- `grounded_graph_ref`は`grounded:<graph_id>@cocolon.cmee.grounded_meaning_graph.v1alpha1`。
+- semantic refはversion-matched `node:`または`edge:`で、必須resolverのfrozen `GroundedMeaningGraph`にactual存在する。
+- evidence refは`evidence:`で、同graphのsource versionとgraph evidence universeへ解決する。
+- policy refは`policy:`、Stage 1 Emlis ownerは`owner:emlis@cocolon.cmee.v1a.emlis_stage1_response.v1`。
+- parent `ExperiencePlan`はexact1必須で、source envelope / source version / obligation version / owner-universe digest、duty exact2、retained actsをgraph / projectionとexact equalityにする。
+- subjective response object / counterpositionはlocal contributionまたはresolved node / edgeだけ。actor / experiencerはresolved nodeだけ。policy-to-semantic promotionを拒否する。
+- sentence unitはcontaining projection exact1へbindし、LAYER_1 anchorはcontribution、LAYER_2 anchorはsubjective claimだけ。clause / visible bindingはanchorから到達するsemantic refだけを許可する。
+
+missing、forward、self、cycle、duplicate、foreign graph / projection、version mismatch、node-edge kind swap、
+non-tuple arrayを全てREDにする。
+
+### 18.4 Independent depth / temperature
+
+| Field | Enum | Valid selected count |
+|---|---|---|
+| `observation_depth_class` | `FOCUSED / LAYERED / DENSE` | `1 / 2..3 / 4..5` distinct contribution |
+| `subjective_depth_class` | `FOCUSED / LAYERED / DENSE` | `1 / 2..3 / 3..4` distinct subjective claim |
+| `temperature_class` | `STANDARD / ELEVATED_NON_SAFETY` | sentence countとaffect強度から独立 |
+
+depthはMeaningField field、raw node count、text length、user emotion strength、plan tierから直接導かない。
+
+### 18.5 Plan boundary registration
+
+`EmlisStage1Projection`はrequest-local / private compilation intermediateでありplanではない。
+current flat `ExperiencePlan`はcanonical duties shapeへのprovisional mappingとして維持し、parent plan exact1をresolverにする。
+canonical `ExperiencePlan.duties[]`がsole duty ownerである。`ExperiencePlan`へ`core_projection_ref`を追加せず、
+projection IDへparent plan IDを含めない。第二plan owner、第三plan shape、silent canonical conformanceは全てRED。
+
+### 18.6 Positive trace extension field registration
+
+`cocolon.cmee.v1a.emlis_stage1_positive_trace_extension.v1`のfield exact setは次である。
+
+```text
+schema_version
+claim_domain
+owner_ref
+contribution_refs[]
+basis_trace_refs[]
+interpretation_candidate_refs[]
+subjective_claim_ref?
+basis_observation_contribution_refs[]
+value_principle_refs[]
+speaker_owner?
+user_fact_effect
+composition_variant_id
+```
+
+current Python provisional mappingとして、`VisibleUnitTrace.emlis_stage1_extension?`をoptional registered fieldにする。
+これはcanonical `PositiveRealizationTrace v1alpha1` base rowへunknown propertyを注入する変更ではなく、versioned Emlis specializationである。
+base schema、unit role enum、`additionalProperties=false`を維持する。
+
+| Role | Extension invariant |
+|---|---|
+| `OBSERVATION` | present、interpretive domain、EMLIS owner、contribution / candidate >=1、subjective / basis trace / value / speaker absent、graph evidence reachable、parent observation duty、`user_fact_effect=0` |
+| `UNKNOWN` | absent。existing UNKNOWN base lineageだけを使用 |
+| `RECEPTION` | present、subjective domain、claim exact1、contribution / candidate empty、basis contribution / prior Observation trace >=1、value refs exact claim、speaker EMLIS、parent reception duty、`user_fact_effect=0` |
+
+全rowのsource envelope / source version / obligation version / owner-universe digestはfrozen graph / parent planとexact equalityにする。
+selected contributionとsubjective claimはtrace全体でexact1 coverage、Reception basisは先行Observation contributionへ到達する。
+
+### 18.7 Effect boundary
+
+```text
+PRIVATE_DATACLASS_AND_VALIDATOR_EFFECT = 1
+JSON_SCHEMA_FILE_EFFECT = 0
+PRODUCTION_REGISTRY_EFFECT = 0
+PUBLIC_SERIALIZATION_EFFECT = 0
+API_DB_RN_PERSISTENCE_EFFECT = 0
+ENGINE_ROUTE_EFFECT = 0
+CUTOVER_EFFECT = 0
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+```

@@ -4,8 +4,8 @@
 - revision date: `2026-08-23 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - absolute implementation rule: `BOUND_TO_PARENT_FINAL_DESIGN_SECTION_0_3`
-- current implementation state: `STAGE1_CORRECTION_STEP0_COMPLETE_DISABLED`
-- current authorized next implementation: `NONE_AFTER_STEP0`
+- current implementation state: `STAGE1_CORRECTION_STEP1_COMPLETE_DISABLED`
+- current authorized next implementation: `NONE_AFTER_STEP1`
 - only admissible next implementation class: `ONE_BOUNDED_ACTUAL_PRODUCT_ARTIFACT_IMPROVEMENT_UNIT`
 - historical provider admission: `NO_SAFE_CMEE_V1A_CANDIDATE_STOP`
 - historical L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
@@ -26,13 +26,14 @@ existing core quality contract上で少なくとも1%向上する場合だけ成
 source / provider / binding / guard / trace / proof / test / runtimeのみは独立した商品品質を持たず、
 actual artifactが改善しなければ1%向上、実装作業、成果またはproduct creditにならない。
 
-Current correction preimageは[mashos-api Draft PR #3](https://github.com/MassyuRed/mashos-api/pull/3) head
-`106a1b8c92e808d15e88ce4f56c6300568d93e9f`のdisabled V1-A verticalである。fresh full-tree preimageで
-47 tests、machine exact8 `GENERATED / artifact / structural trace = 8/8`、material fixture
-`LIMITED / visible UNKNOWN exact1`を再現し、private beforeを§23へ固定した。candidate ready false、
-Product / technical / full-I1 / Cycle001 / production credit 0であり、商品品質向上のresultではない。
-Mashの明示指示でStage 1 correction Step 0だけを完了した。Step 1以後は未着手かつ本checkpointからの
-automatic progressionはなく、current authorized next implementationは`NONE_AFTER_STEP0`である。
+Current correction preimageは§23のStep 0 envelopeで固定し、その完了をfresh remote headと47 testsで再確認した。
+Mashの明示指示により、同じpreimageからStage 1 correction Step 1 exact1だけを実行し、
+[mashos-api Draft PR #3](https://github.com/MassyuRed/mashos-api/pull/3) head
+`748934f38036a2cf42ca834bbd635b24e56470bf`へprivate identity / depth / trace spineを反映した。
+新規contract testsを含む56 tests、machine exact8 `GENERATED / artifact / structural trace = 8/8`を維持する。
+これはdisabled internal checkpointであり、actual product artifactの改善、Product Read、candidate ready、
+Product / technical / full-I1 / Cycle001 / production creditを一切作らない。Step 2以後は未着手で、
+automatic progressionはなく、current authorized next implementationは`NONE_AFTER_STEP1`である。
 
 この絶対規則の根拠となった事実は、
 [「EmlisAI商品中核の後回しとCMEE Product Read失敗」恒久インシデント記録](../../../audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md)
@@ -1449,3 +1450,102 @@ STOP_AFTER_STEP0
 - 既知MINOR: メタ入力prefix（`例えば…` / `Q:` 等）の表記差はdisabled候補のまま持ち越す。
 - `TK-02`〜`TK-06`、Piece / Analysis、DB / API / RN、activation / cutover / production は未着手。
 - Mash の明示確認までは第2段階を開始しない。
+
+## 24. Stage 1 correction Step 1 — identity / depth / trace spine checkpoint（2026-08-23）
+
+本節はparent functional final technical design §19.2と、MashのStep 1実装指示をcurrent implementation ownerへ反映する。
+§23のStep 0を再実行または上書きせず、そのremote head exact2をfresh preimageとして確認した後、Step 1だけを実行した。
+
+### 24.1 Preimage and authority
+
+| Owner | Step 0 confirmed head | Step 1 final head / state |
+|---|---|---|
+| Cocolon Draft PR #30 | `480e5769fca01207b31bb845faf8fe62c5e62b16` | `THIS_COMMIT` / Draft open unmerged |
+| mashos-api Draft PR #3 | `0db1a4e910ad51276bc6625498b319515086d15f` | `748934f38036a2cf42ca834bbd635b24e56470bf` / Draft open unmerged |
+
+Step 0 fresh baselineは47/47、compileall exact4、three-core boundary 5/5、exact8
+GENERATED / artifact / structural trace 8/8、runner exit 0、head / fixture drift 0として再確認した。
+Step 0のprivate BEFORE、reserved AFTER、identity / path separation、publication 0は変更していない。
+
+### 24.2 Changed-path and remote receipt
+
+Cocolon changed pathはcanonical exact3だけである。
+
+| Path | Step 1 preimage blob | Step 1 responsibility |
+|---|---|---|
+| `Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md` | `27243a5d02f750a298a3194b17c8a09ea0a1ee48` | Emlis private identity / depth / trace contract sync |
+| `Cocolon_前提資料/designs/cmee/v1/05_json_schema_and_versioning.md` | `d4ad26e308decfd827c0e94ee4078f0de43ca71b` | response / trace schema registration、exact6 ID / ref sole owner |
+| `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` | `02b9ad3e300b5b8688bee0b9913881678213f788` | current Step 1 receipt / STOP owner |
+
+mashos-api changed pathはimplementation / test exact2だけである。
+
+| Path | Step 0 blob | Step 1 final blob |
+|---|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py` | `a4d095adeceb8ed561d2e74a52af8cc252f1519d` | `c58285c85ce01f21c7dc9bbf671b8fdc8949b266` |
+| `ai/tests/test_cmee_v1a_i1sx_contracts.py` | `be63e0b6404b6f0a3c7beaacb75cca25b3c939ce` | `5e92acfe0907ebfd829f0fd9d7af904b18e7be6a` |
+
+mashos-api final treeは`f3f12e3e3a0091353393d37bcf50e3a39deb56e7`である。
+`emlis_v1a.py`、`engine.py`、`source_kernel.py`、`__init__.py`、vertical test、runner、handoff、fixture、
+current_structure mapはStep 1で変更していない。reserved `emlis_stage1_response.py`も作成していない。
+
+### 24.3 Canonical and implementation decision
+
+- private response schema `cocolon.cmee.v1a.emlis_stage1_response.v1`を登録した。
+- private trace schema `cocolon.cmee.v1a.emlis_stage1_positive_trace_extension.v1`を登録した。
+- exact6 identityをobject-specific canonical JSON + typed full SHA-256へ固定した。
+- frozen graph / parent planを必須resolverにし、semantic / evidence / duty / act / source lineageをexact bindした。
+- Observation / Subjective depthとtemperatureを独立fieldとして固定した。
+- trace extensionはOBSERVATION / RECEPTIONだけpresent、UNKNOWN absentとし、owner / domain / basis / coverage / node-edge kindを検証する。
+- current flat `ExperiencePlan` option 2を維持し、第二plan ownerと`core_projection_ref`を作らない。
+- current `CMEE_SCHEMA_VERSION`、legacy `_plan_id / _artifact_id`、body-free result、runtime routeを変更しない。
+
+### 24.4 Verification receipt
+
+```text
+Stage 1 focused contract tests = 9 / 9 PASS
+existing contract tests = 15 / 15 PASS
+Step 1 contract tests total = 24 / 24 PASS
+vertical regression tests = 32 / 32 PASS
+combined tests = 56 / 56 PASS
+compileall exact4 = PASS
+three-core boundary = 5 / 5 PASS
+candidate runner exit = 0
+exact8 GENERATED = 8 / 8
+exact8 artifact = 8 / 8
+exact8 structural trace = 8 / 8
+exact8 Observation + bound Reception trace = 8 / 8
+exact8 material unknown = 0
+candidate_ready = false
+automatic_progression = false
+```
+
+Step 1 negative testsは、exact6 ID recomputation / stale tamper、UTF-8 canonical JSON、semantic order / schema / depth /
+temperature / policy identity change、external bare / kind / version mismatch、missing / forward / self / cycle / foreign ref、
+coordinated rehash後のsemantic / policy promotion、non-tuple array、foreign graph / projection、parent-plan exact4 lineage swap、
+unit text / span / clause / layer anchor / prior ref、trace role / owner / duty / metadata / node-edge kind / basis / coverage / value tamperを含む。
+independent blocker reviewは最終diffに対しrelease blocker 0である。
+
+body-full private input / candidate、private packet digest / locator / durable owner identityはGitHubへ記録していない。
+public body-free outputへのnew private field / ref / text leakは0である。
+
+### 24.5 Exit and STOP
+
+```text
+STAGE1_CORRECTION_STEP0 = CONFIRMED_COMPLETE
+STAGE1_CORRECTION_STEP1 = COMPLETE_DISABLED
+STEP2 = NOT_STARTED
+SECOND_PLAN_OWNER = 0
+CORE_PROJECTION_REF_FIELD = 0
+UNREGISTERED_SCHEMA_FIELD = 0
+LEGACY_RUNTIME_ROUTE_CHANGE = 0
+STRUCTURE_MAP_DELTA = NONE
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+FULL_I1_CREDIT = 0
+CYCLE001_CREDIT = 0
+PRODUCTION_EFFECT = 0
+CANDIDATE_READY = FALSE
+AUTOMATIC_PROGRESSION = FALSE
+CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_STEP1
+STOP_AFTER_STEP1
+```

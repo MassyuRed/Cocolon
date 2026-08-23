@@ -1,10 +1,11 @@
 # CMEE V1-A — EmlisAI Observation Vertical 詳細設計
 
 - document id: `cocolon.cmee.v1a.emlis_observation.detailed_design`
-- revision date: `2026-08-21 JST`
+- revision date: `2026-08-23 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - runtime state: `DRAFT_WIP_DISABLED_PRODUCT_FAIL`
-- implementation evidence owner: `MassyuRed/mashos-api Draft PR #3 @ 06ce311b3ea728b06f83439d268a34bed917c01c`
+- implementation evidence owner: `MassyuRed/mashos-api Draft PR #3 @ 748934f38036a2cf42ca834bbd635b24e56470bf`
+- current Stage 1 correction checkpoint: `STEP1_IDENTITY_DEPTH_TRACE_SPINE_COMPLETE_DISABLED`
 - R1–R4 state: `CLOSED_GREEN`
 - original exact8 machine structural state: `8/8`
 - private human Product Read: `EVALUATED_FAIL_STOP`
@@ -669,3 +670,78 @@ Vertical 3 — Layer 3:
 - exact8 8/8 GENERATED、material fixture LIMITED/UNKNOWN1、47 tests PASS。
 - 既知MINOR: メタ入力prefix（`例えば…` / `Q:` 等）の表記差は未収録。
 - Product PASS、candidate ready、activation、production は未宣言。Mash確認前に次段階へ進まない。
+
+## 20. Stage 1 correction Step 1 — identity / depth / trace spine（2026-08-23）
+
+本節はparent final technical design §8、§15、§19.2を、Mashが明示したStep 1 exact1へ同期する。
+§18の商品contractと§19の歴史的実装レシートを上書きせず、current correction checkpointだけを所有する。
+
+### 20.1 Private response contract
+
+private request-local schema `cocolon.cmee.v1a.emlis_stage1_response.v1` を採用し、次をimmutable contractとして固定した。
+
+- `EmlisInterpretationCandidate`、`EmlisMeaningField`、`PlannedObservationContribution`
+- `EmlisSubjectiveClaim`、`EmlisStage1Projection`
+- `ClauseFrame`、`RealizedSemanticBinding`、`RealizedSentenceUnit`
+- exact6 local identity: `candidate_id / meaning_field_id / contribution_id / subjective_claim_id / projection_id / unit_id`
+
+local identityはobject別typed preimage、UTF-8 canonical JSON、full SHA-256でbottom-upに再計算する。
+semantic array order、schema version、depth、temperature、policy、orderingはidentity materialである。
+`unit_id`だけがcanonical visible UTF-8 textを含み、他のexact5はsurface textを含まない。
+
+projection validatorはfrozen `GroundedMeaningGraph`とparent `ExperiencePlan`を必須resolverとして受け取り、
+graph / source / obligation / owner-universe lineage、duty exact2、retained Reception actsをexact equalityでbindする。
+same-container bare local ref以外はversion-qualified refとし、missing、forward、self、cycle、foreign graph / projection、
+node-edge kind swap、policy-to-semantic promotionをrejectする。
+
+### 20.2 Independent depth
+
+depthはMeaningFieldまたはraw node countから先取りしない。projectionが次の独立3軸を所有する。
+
+```text
+ObservationDepthClass = FOCUSED | LAYERED | DENSE
+SubjectiveDepthClass  = FOCUSED | LAYERED | DENSE
+TemperatureClass      = STANDARD | ELEVATED_NON_SAFETY
+```
+
+ObservationはFOCUSED exact1、LAYERED 2..3、DENSE 4..5 contribution、SubjectiveはFOCUSED exact1、
+LAYERED 2..3、DENSE 3..4 claimを必要とする。L1 / L2 depthは独立で、temperatureは文数またはaffect強度を増やさない。
+
+### 20.3 Sole plan owner
+
+parent final design §8.5のoption 2を選択する。current flat `ExperiencePlan`はprivate provisional mappingのまま維持し、
+canonical `ExperiencePlan.duties[]`がvisible dutyのsole ownerである。`EmlisStage1Projection`はrequest-local compilation
+intermediateであり、第二plan ownerではない。`ExperiencePlan`へ`core_projection_ref`その他のfieldを追加せず、
+canonical conformanceまたはcutover完了を主張しない。
+
+### 20.4 Registered trace specialization
+
+private schema `cocolon.cmee.v1a.emlis_stage1_positive_trace_extension.v1`を採用する。
+current Python `VisibleUnitTrace.emlis_stage1_extension?`は、このversioned Emlis specializationのoptional provisional mappingである。
+canonical `PositiveRealizationTrace v1alpha1`本体と`additionalProperties=false`は変更しない。
+
+- OBSERVATION: extension必須。contribution / interpretation candidate exact reachability、EMLIS owner、interpretive domain、`user_fact_effect=0`。
+- UNKNOWN: extension absent。既存UNKNOWN contractを維持する。
+- RECEPTION: subjective claim exact1、先行Observation trace、basis contribution、source evidence、EMLIS speaker、value refs exact equality、`user_fact_effect=0`。
+
+全positive rowはfrozen graph / parent planと同じsource lineageへbindし、Observation / Reception duty、node / edge kind、
+selected contribution / claim coverageを検証する。body-free projection、API、DB、RN、persistence、public telemetryは変更しない。
+
+### 20.5 Checkpoint boundary
+
+実装参照は`MassyuRed/mashos-api` Draft PR #3 head
+`748934f38036a2cf42ca834bbd635b24e56470bf`である。Step 1はcontract / validator / test checkpointだけを完了した。
+Step 2のcandidate pool / MeaningField builder / Layer 1 planner、surface、engine integration、cutoverは未着手である。
+
+```text
+STAGE1_CORRECTION_STEP1 = COMPLETE_DISABLED
+SECOND_PLAN_OWNER = 0
+CORE_PROJECTION_REF_FIELD = 0
+UNREGISTERED_SCHEMA_FIELD = 0
+LEGACY_RUNTIME_ROUTE_CHANGE = 0
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+CANDIDATE_READY = FALSE
+AUTOMATIC_PROGRESSION = FALSE
+STOP_AFTER_STEP1
+```
