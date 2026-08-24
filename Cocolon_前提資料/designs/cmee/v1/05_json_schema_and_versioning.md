@@ -5,14 +5,14 @@
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - Phase 2 product-route verdict: `ADOPT_WITH_BOUNDED_CORRECTIONS_REFLECTED`
 - canonical field / ref / schema / version owner: `THIS_FILE`
-- schema registration: `EMLIS_STAGE1_V2_CURRENT_REGISTERED_DISABLED_PRODUCT_REJECTED__ADDITIONAL_CORRECTION_PROPOSED_NOT_REGISTERED`
-- private Python contract mapping: `STEP7_V2_IMPLEMENTED_DISABLED_PRODUCT_REJECTED`
+- schema registration: `EMLIS_STAGE1_V1_CURRENT_REGISTERED_DISABLED_PRODUCT_REJECTED__ADDITIONAL_CORRECTION_FINAL_IDS_AND_SUBJECTIVE_V2_REGISTERED_DISABLED`
+- private Python contract mapping: `STEP7_V2_IMPLEMENTED_DISABLED_PRODUCT_REJECTED / ADDITIONAL_CORRECTION_STEP1_REGISTERED_DISABLED_AT_21392275b6684fe852f111143747db92ad74a4fb`
 - public runtime serialization / cutover effect: `0`
 - DB / API effect: `0`
-- current authorized next implementation: `NONE_PENDING_MASH_LEVEL3_IMPLEMENTATION_DECISION`
+- current authorized next implementation: `NONE_AFTER_ADDITIONAL_CORRECTION_STEP1`
 - automatic progression: `false`
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
-- Stage 1 additional correction schema delta: `PROPOSED_IN_NONCANONICAL_FINAL_BODY / NOT_REGISTERED_BY_DOCS_WRITE`
+- Stage 1 additional correction schema delta: `STEP1_FINAL_IDS_AND_SUBJECTIVE_V2_REGISTERED_DISABLED / STEP2_NOT_STARTED`
 
 ---
 
@@ -2995,3 +2995,119 @@ AUTOMATIC_PROGRESSION = FALSE
 [Stage 1 Additional Correction Final Technical Body](../Cocolon_CMEE_Stage1_AdditionalCorrection_UltraFinalTechnicalBodyAndJointRecommendation_20260824.md)
 
 本docs-only配置は、新schema registration、public JSON、runtime serialization、API、DB、RN、persistence、productionまたはprovider / dependency activationを行わない。提案型を本fileへ二重定義せず、Mashのfresh LEVEL_3 implementation approval後にだけ、同本文§8のexact field / version deltaを本fileのsole canonical schema ownerへ同期する。approval前のimplementation authority、candidate ready、Product / technical creditは0である。
+
+## 25. Stage 1 additional correction Step 1 — final private schema / identity registration（2026-08-24）
+
+本節はMashが明示承認したadditional correction Step 1について、final body §8のfinal logical identity、`SubjectivePropositionV2`、minimum lineage、anti-template invariantを本fileのsole schema / identity ownerへ同期する。登録状態は`REGISTERED_DISABLED`であり、current v1 response bytesをv2と表示しない。
+
+### 25.1 Final logical identity registry exact28
+
+記載順とvalueは次で固定する。これはStep 1のnon-serializing frozen registry exact1であり、active constant、current `REALIZER_CONTRACT_IDS`、current trace / owner、runnerへは接続しない。response v2 `ClauseFrame` / surface binding / positive traceのatomic migrationとactive registrationはStep 4 / Step 5のowning orderまで行わない。
+
+```text
+CMEE_STAGE1_RESPONSE_SCHEMA_VERSION = cocolon.cmee.v1a.emlis_stage1_response.v2
+CMEE_STAGE1_SUBJECTIVE_PROPOSITION_SCHEMA_VERSION = cocolon.cmee.v1a.emlis_subjective_proposition.v2
+CMEE_STAGE1_COMPOSITION_POLICY_VERSION = cocolon.emlis.stage1.discourse_composition.v1
+CMEE_STAGE1_NORMAL_FORM_VERSION = cocolon.cmee.v1a.emlis_stage1_normal_form.v1
+CMEE_STAGE1_CONSTRUCTION_GRAMMAR_POLICY_VERSION = cocolon.emlis.stage1.grounded_construction_grammar.v1
+CMEE_STAGE1_PROJECTION_PREIMAGE_REF_VERSION = cocolon.cmee.v1a.emlis_stage1_projection_preimage_ref.v1
+CMEE_STAGE1_SUBJECTIVE_BASIS_BINDING_REF_VERSION = cocolon.cmee.v1a.emlis_subjective_basis_binding_ref.v1
+CMEE_STAGE1_SOURCE_QUALIFIER_BINDING_REF_VERSION = cocolon.cmee.v1a.emlis_source_qualifier_binding_ref.v1
+CMEE_STAGE1_POLICY_BASIS_BINDING_REF_VERSION = cocolon.cmee.v1a.emlis_policy_basis_binding_ref.v1
+CMEE_STAGE1_POLICY_TARGET_KEY_VERSION = cocolon.cmee.v1a.emlis_policy_target_key.v1
+CMEE_STAGE1_POLICY_APPLICATION_ROW_ID_VERSION = cocolon.cmee.v1a.emlis_policy_application_row_id.v1
+CMEE_STAGE1_SUBJECTIVE_RESPONSIBILITY_REF_VERSION = cocolon.cmee.v1a.emlis_subjective_responsibility_ref.v1
+CMEE_STAGE1_SUBJECTIVE_OPPORTUNITY_KEY_VERSION = cocolon.cmee.v1a.emlis_subjective_opportunity_key.v1
+CMEE_STAGE1_ARC_DEPENDENCY_REF_VERSION = cocolon.cmee.v1a.emlis_arc_dependency_ref.v1
+CMEE_STAGE1_DISCOURSE_ARC_REF_VERSION = cocolon.cmee.v1a.emlis_stage1_discourse_arc_ref.v1
+CMEE_STAGE1_COMPOSITION_DUTY_REF_VERSION = cocolon.cmee.v1a.emlis_composition_duty_ref.v1
+CMEE_STAGE1_REFERENCE_STATE_REF_VERSION = cocolon.cmee.v1a.emlis_discourse_reference_state_ref.v2
+CMEE_STAGE1_CLAUSE_SCALAR_CONSTRAINT_REF_VERSION = cocolon.cmee.v1a.emlis_clause_scalar_constraint_ref.v1
+CMEE_STAGE1_CLAUSE_INTENT_ID_VERSION = cocolon.cmee.v1a.emlis_clause_intent_id.v1
+CMEE_STAGE1_CLAUSE_PLAN_ID_VERSION = cocolon.cmee.v1a.emlis_clause_plan_id.v1
+CMEE_STAGE1_RESPONSE_OBJECT_EXPRESSION_ID_VERSION = cocolon.cmee.v1a.emlis_response_object_expression_id.v1
+CMEE_STAGE1_PROFILE_EVIDENCE_REF_VERSION = cocolon.cmee.v1a.emlis_profile_evidence_ref.v1
+CMEE_STAGE1_SEALED_UNIT_PLAN_ROW_ID_VERSION = cocolon.cmee.v1a.emlis_sealed_unit_plan_row_id.v1
+CMEE_STAGE1_COMPOSITION_LAYOUT_ID_VERSION = cocolon.cmee.v1a.emlis_composition_layout_id.v1
+CMEE_STAGE1_ARTIFACT_COMPOSITION_CANDIDATE_ID_VERSION = cocolon.cmee.v1a.emlis_artifact_composition_candidate_id.v1
+CMEE_STAGE1_SELECTED_ARTIFACT_ID_VERSION = cocolon.cmee.v1a.emlis_selected_stage1_artifact_id.v1
+CMEE_STAGE1_TRACE_EXTENSION_SCHEMA_VERSION = cocolon.cmee.v1a.emlis_stage1_positive_trace_extension.v2
+CMEE_STAGE1_EMLIS_OWNER_REF = owner:emlis@cocolon.cmee.v1a.emlis_stage1_response.v2
+```
+
+`CMEE_STAGE1_IDENTITY_ALGORITHM=cocolon.cmee.identity.typed_canonical_json_sha256.v1`はKEEPする。final owner refはfinal response schema versionからderiveする。exact28はsymbolic name / valueともuniqueで、別mirror dict、second registry、public exporterを作らない。Step 5のatomic cutover時だけcurrent common adapter identityの後ろへ上記final valuesを記載順で全件接続する。
+
+### 25.2 Final proposition / binding schema
+
+`SubjectivePropositionV2`のdeclared fieldsはexact20である。
+
+```text
+schema_version
+content_kind
+subjective_mode
+subjective_operator
+target_contribution_refs
+primary_target_refs
+boundary_target_refs
+response_object_refs
+basis_binding_refs
+source_qualifier_binding_refs
+focal_relation_ref
+affect_content
+appraisal_content
+material_value_content
+relational_position
+referenced_actor_refs
+referenced_experiencer_refs
+addressee_role
+assertion_modality
+epistemic_scope
+```
+
+`content_kind=AFFECT | APPRAISAL | MATERIAL_VALUE | RELATIONAL_POSITION`に対応するcontent fieldだけexact1、残りexact0とする。primary / response / basis / qualifierは1..N、boundary / focal relation / actor / experiencerは0..N（focal relationは0..1）である。mode / operator / assertion modalityはcanonical 02 §27.1のexact tableからderiveし、choice fieldにしない。
+
+supporting typeは`SubjectiveBasisBinding`、`SourceQualifierBinding`、`PolicyBasisBinding`、`EmlisAffectContent`、`EmlisAppraisalContent`、`ValueApplication`、`MaterialValueContent`、`EmlisRelationalPosition` exact1 familyである。旧`SubjectiveProposition`へのalias、`SubjectiveMeaningArtifact`、`ClauseFrameV2`、parallel v2 positive-trace classは作らない。
+
+projection preimage、subjective basis、source qualifier、policy basisのStep 1 projectorはfinal body §8.8のordered preimageをそのまま使う。projection preimageには`subjective_depth_class`、final claim / projection ID、arbitrary saltを含めない。binding rowのself refを除く全declared materialとlogical versionをtyped canonical JSON SHA-256で再計算し、stale refとfull rehash cross-bindの双方をrejectする。
+
+### 25.3 Minimum owner / unknown / derivation schema
+
+- basis row exact1にqualifier row exact1をsame basis orderで対応させ、phase-A frozen expected rowsとfull-byte equalityを要求する。expected / allowed / actor / experiencer / relation / forbidden contextはcaller choiceでなくsame phase-A snapshotのtrusted frozen outputで、Step 2 sole projectorだけが供給する。Step 1はruntime caller 0のdisabled seamであり、upstream closure co-tamperを先取りするparallel resolverを作らない。
+- direct qualifier codesは`polarity:<value> / modality:<value> / time_scope:<value>`、role-qualified relation codesは`<role>_polarity:<value> / <role>_modality:<value> / <role>_time_scope:<value>` exact3とする。
+- `MaterialRisk` exact9はV1→MINIMIZATION、V2→WISH_TO_OBLIGATION、V3→NO_RESULT_TO_NO_VALUE、V4→SINGLE_EVENT_TO_IDENTITY、V5→BOUNDED_CHANGE_TO_UNIVERSAL_SOLUTION、V6→ONE_SIDE_TO_TRUE_SELF、V7→POSSIBILITY_TO_FACT、V8→REMOVE_USER_AGENCY、V9→UNKNOWN_TO_FALSE_UNDERSTANDINGのone-to-oneである。
+- policy basis rowsはphase-A frozen expected rowsとfull-byte equalityを要求する。`ValueApplication.policy_application_row_refs`はprojection-owned frozen allowlistのsubsetかつapplications間unique、policy-basis / protected refsはprojection-owned rowsのsubsetとし、free stringを許さない。visible principleはV1 / V2 / V8だけで、principle↔risk exact mappingを固定する。
+- material unknownはpolicy-basis ownerだけに置き、V9 constraint専用とする。visible applicationのpolicy basis、subjective basis / content / targetへ置かない。各claimのpolicy rowsは0..Nで、unused unknown rowの強制materializeはしない。claim-local forbidden promotionsはcurrent wrapperのphase-A frozen outputとbyte-exactにする。
+- primary / boundary targetはbinding refだけでなくresolved semantic refもdisjoint、response object refsは重複なしのexact concatenationとする。
+- `SurfaceDerivation`はexact8 kind、source / claim refs、Emlis owner、relation / clause plan refs、qualifier refs、response object ref、antecedent、participant role、evidence、rule、nonoverlap scalar rangesを持つ。registered rule registryはderivation kind exact7 + response mode exact3のkeyをexact-coverし、rule refをkey間共有しない。Step 1はminimum shape / frozen rule ownerまで、concrete source / evidence / range freshnessはStep 2、sealed reachabilityはStep 4のowning gateで閉じる。
+
+### 25.4 Anti-template invariant
+
+construction registryで拒否するfieldまたは同等内容はexactに次を起点とする。
+
+```text
+case_id
+case_family
+fixture_id
+exact8_id
+raw_text
+raw_pattern
+source_regex
+semantic_keyword
+expected_text
+finished_surface
+finished_clause
+finished_sentence
+```
+
+Step 1 registry fieldはConstructionSpec raw ordered exact8、selector parameterはeligible-constructionsのgrammatical-shape input raw ordered exact3とのexact equalityだけを許すclosed allowlistとする。missing / duplicate / reorder / camelCase aliasと未知fieldを拒否する。response-object専用`reference_rule_id`、functional専用`functional_rule_id`、post-rank `shared_variant_id / artifact_composition_candidate_id`等をこのfamilyへ混ぜない。response-object / functional morphologyのfamily別final validatorはStep 2が所有し、Step 1でflat union schemaを先行登録しない。
+
+raw source / raw text / normalized input / evidence text / semantic resolver / regex result / case ID / case family / fixture / exact8 / source phrase family / semantic keyword / input hashを拒否する。opening、terminal、finished connective chain、sentence body、source-domain noun、case-specific phrase、request / source bytes、utterance、prompt等のsemantic-equivalent aliasも同じ不変条件で拒否する。文法上のcase slot自体をcase-IDと誤認して禁止しない。
+
+```text
+FINAL_V2_SCHEMA_REGISTRY = EXACT1 / REGISTERED_DISABLED
+FINAL_LOGICAL_IDENTITIES = EXACT28
+ACTIVE_V1_RESPONSE_RELABEL = 0
+ACTIVE_REALIZER_OR_RUNNER_EFFECT = 0
+PARALLEL_SCHEMA_COMPILER_SERIALIZER_OWNER = 0
+UNFIXED_FIELD = 0
+```

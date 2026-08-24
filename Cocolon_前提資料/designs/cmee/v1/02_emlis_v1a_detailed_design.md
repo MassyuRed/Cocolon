@@ -3,22 +3,23 @@
 - document id: `cocolon.cmee.v1a.emlis_observation.detailed_design`
 - revision date: `2026-08-24 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- runtime state: `DRAFT_WIP_DISABLED_PRODUCT_FAIL_ADDITIONAL_CORRECTION_DESIGN_RECORDED`
-- implementation evidence owner: `MassyuRed/mashos-api Draft PR #3 @ b7865574ebe08c801f6a2c779daf9148159cf8b0`
+- runtime state: `DRAFT_WIP_DISABLED_PRODUCT_FAIL_ADDITIONAL_CORRECTION_STEP1_COMPLETE_DISABLED`
+- implementation evidence owner: `MassyuRed/mashos-api Draft PR #3 @ 21392275b6684fe852f111143747db92ad74a4fb`
 - current Stage 1 correction checkpoint: `STEP7_V2_MACHINE_GREEN_PRODUCT_REJECTED`
+- current Stage 1 additional correction checkpoint: `STEP1_COMPLETE_DISABLED_STEP2_NOT_STARTED`
 - R1–R4 state: `CLOSED_GREEN`
 - original exact8 machine structural state: `8/8`
 - private human Product Read: `EVALUATED_FAIL_STOP`
 - candidate ready: `false`
 - production admission: `false`
-- current authorized next implementation: `NONE_PENDING_MASH_LEVEL3_IMPLEMENTATION_DECISION`
+- current authorized next implementation: `NONE_AFTER_ADDITIONAL_CORRECTION_STEP1`
 - automatic progression: `false`
 - Cycle001 effect: `0`
 - L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
 - Phase 0 / P0 / P0-R1 / standalone product-delta-0 L3-R / L3-I lifecycle: `RETIRED_HISTORICAL_NONREUSABLE`
 - current implementation rule: `PRODUCT_QUALITY_DELTA_GT_0_AND_MASH_CONFIRMED_ONLY`
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
-- Stage 1 additional correction final body: `PRO_CONFIRMED_NONCANONICAL_INTEGRATION_SOURCE / NOT_IMPLEMENTED`
+- Stage 1 additional correction final body: `PRO_CONFIRMED_INTEGRATION_SOURCE / STEP1_COMPLETE_DISABLED / STEP2_NOT_STARTED`
 
 ---
 
@@ -1097,3 +1098,48 @@ Pro華恋が`PASS / BLOCKER 0 / MAJOR 0 / MINOR 0`と最終確認したadditiona
 本docs-only反映では、同本文が提案する`EmlisSubjectiveMeaningPlan`、`SubjectivePropositionV2`、Grounded Discourse Composer、normal form、internal exact32 candidate、early actual、withheld exact4をruntime contractとしてactiveにしない。本fileはcurrent v2 preimageとfuture integration destinationを一つに保ち、parallel Emlis technical ownerを作らない。
 
 Mashのfresh LEVEL_3 implementation approvalが成立した場合だけ、同本文§12.2の責任を本file、functional owner、canonical 05 / 06へ同期し、canonical 06 §30の一意な順序でStep 0から開始する。現在のsource / test / runtime / API / DB / RN / persistence / production / provider / dependency effectは0、automatic progressionはfalseである。
+
+## 27. Stage 1 additional correction Step 1 — subjective meaning contract（2026-08-24）
+
+本節はcanonical 06 §31で完了したStep 0と、Mashが明示承認したadditional correction Step 1だけを受け、final body §6.9のsubjective meaning責任を本fileのsole Emlis technical behavior ownerへ同期する。Step 2以後のcomposer、response v2 surface、runtime cutover、actual本文生成は開始しない。
+
+### 27.1 Registered-disabled semantic contract
+
+`SubjectivePropositionV2`はcurrent `EmlisSubjectiveClaim`へ将来nestedされるrequest-local private contentであり、独立artifact、第二meaning owner、public serializer、persistent Emlis stateではない。Step 1ではfinal typeとvalidatorを`REGISTERED_DISABLED`で固定し、current v1 projection / compiler / realizerからのread / writeはexact0とする。legacy `SubjectiveProposition`とのalias、dual read、dual write、generic fallbackは0である。
+
+content discriminantとderived fieldsは次のexact5以外を許さない。
+
+| content | subjective mode | subjective operator | assertion modality |
+|---|---|---|---|
+| `AFFECT` | `AFFECTIVE_RESPONSE` | `FEEL_TOWARD` | `EMLIS_FEELING` |
+| `APPRAISAL` | `PERSONAL_APPRAISAL` | `APPRAISE_AS_MATERIAL` | `EMLIS_APPRAISAL` |
+| `MATERIAL_VALUE` | `VALUE_POSITION` | `PROTECT_VALUE_BOUNDARY` | `EMLIS_VALUE_POSITION` |
+| `RELATIONAL_POSITION / STANCE` | `RELATIONAL_STANCE` | `TAKE_RELATIONAL_STANCE` | `EMLIS_RELATIONAL_INTENTION` |
+| `RELATIONAL_POSITION / BOUNDED_COUNTERPOSITION` | `BOUNDED_COUNTERPOSITION` | `COUNTER_SPECIFIC_PROMOTION` | `EMLIS_BOUNDED_REFUSAL` |
+
+対応content fieldはexact1、残りexact0である。AFFECTはconcrete elicitor 1..N、APPRAISALはconcrete appraised binding 1..N、MATERIAL_VALUEはvalue application / protected target 1..N、RELATIONAL_POSITIONはtarget 1..Nを必須にする。mode / affect / stance labelだけ、ATTENTIONだけ、unboundな「気にかかる」「大切」等は`GENERIC_SUBJECTIVE_CONTENT_STOP`であり、thought paddingへfallbackしない。
+
+### 27.2 Source / owner / safety / unknown / derivation spine
+
+- `SubjectiveBasisBinding`はsame `projection_preimage_ref`のcontribution / semantic / role exact tupleへbindし、phase-A frozen expected descriptorとbyte-exact一致させる。
+- `SourceQualifierBinding`は各basis exact1をsame orderでcoverする。directは`polarity / modality / time_scope` exact3、relation endpointは`<role>_polarity / <role>_modality / <role>_time_scope` exact3とscalar値を同時にbindする。candidate、role、axis code、scalarの全ID再hash tamperもfrozen expectationとの差でrejectする。
+- 上記expected rows、allowed refs、actor / experiencer、focal relation、forbidden promotionsはcaller choiceではなく、same phase-A snapshotのtrusted frozen outputである。Step 1のvalidator seamにruntime callerは0であり、Step 2のsole projectorだけが同一snapshotから一括供給する。upstream closureとのfresh co-tamper検証はStep 2、sealed-plan tamperはStep 4のowning gateで行い、Step 1へparallel resolverを作らない。
+- `basis_binding_refs`、qualifier refs、primary / boundary / response objects、target contributionsはcontentからpure deriveする。binding refsだけでなくresolved semantic refsもprimary / boundary間でdisjoint、response objectsは重複なしのexact concatenationである。counterpositionはboundary 1..Nかつadmitted focal relation exact1、STANCEはboundary exact0である。
+- ownerはfinal Emlis owner、speakerは`EMLIS`、addresseeは`USER`、epistemic scopeは`REQUEST_LOCAL_EMLIS_SUBJECTIVITY`、`user_fact_effect=0`で固定する。forbidden promotionはcurrent wrapperから得たclaim-basis-local frozen resultとbyte-exactで、canonical prefix + V1–V9 suppression suffixのcanonical orderも同時に検証する。
+- policy basis rowsもphase-A frozen expected rowsとbyte-exactに固定する。visible `ValueApplication`はcurrent visibility可能なV1 / V2 / V8だけ、principle↔risk exact、application row refはapplications間でunique、参照policy basisは`CONTRIBUTION` ownerだけである。material unknownは`PolicyBasisBinding(owner_kind=MATERIAL_UNKNOWN, role=MATERIAL_UNKNOWN)`だけに置け、V9 constraint専用でvisible applicationを支えない。unknownを`SubjectiveBasisBinding`、appraisal target、known feeling / valueへ昇格しない。policy rowは必要時0..Nであり、各propositionへ全unknown coverを強制しない。
+- `SurfaceDerivation` exact8 kindはsource / claim、Emlis owner、participant、response object、relation / qualifier、evidence / scalar ranges、kind-compatible registered ruleを分離する。empty owner、foreign rule、overlap range、kind / response-mode rule swapをfail closedにする。Step 1が所有するのはregistered-disabled minimum shape / rule ownerまでであり、concrete source / evidence / scalar range freshnessはStep 2 sole projector、sealed reachability tamperはStep 4が検証する。
+
+### 27.3 Anti-template and STOP
+
+Step 1のanti-template invariantはConstructionSpecとeligible-constructions用grammatical-shape selectorだけを所有する。registryはraw ordered tuple `construction_id / argument_slots / role_order / valency / particle_rules / auxiliary_rules / relation_combinators / inflection_order` exact8、selectorはraw ordered tuple `grammatical_shape_key / predicate_valency / syntactic_orientation` exact3とのexact equalityを要求するclosed allowlistである。missing / duplicate / reorder / camelCase alias、unknown field、response-object / functional / post-rank identity fieldのcross-family混入をrejectする。case / fixture / exact8 / raw input / regex result / semantic keyword / expected text / finished surface・clause・sentence / input hashはregistry fieldにもselector inputにも使わない。同等aliasもrejectする。raw textからmeaning、construction ID、grouping、opening、speaker placement、endingを選ぶownerは0である。response-object / functional morphologyのfamily別final validatorはStep 2のowning implementationで追加し、Step 1へflat union allowlistを置かない。
+
+```text
+ADDITIONAL_CORRECTION_STEP1_SEMANTIC_CONTRACT = REGISTERED_DISABLED
+FINAL_SUBJECTIVE_PROPOSITION_V2_OWNER = EXACT1
+LEGACY_ALIAS_OR_DUAL_READ_WRITE = 0
+GENERIC_PROPOSITION_FALLBACK = 0
+RAW_TEXT_CONSTRUCTION_SELECTOR = 0
+CURRENT_V1_RUNTIME_EFFECT = 0
+STEP2 = NOT_STARTED
+AUTOMATIC_PROGRESSION = FALSE
+```

@@ -4,8 +4,8 @@
 - revision date: `2026-08-24 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - absolute implementation rule: `BOUND_TO_PARENT_FINAL_DESIGN_SECTION_0_3`
-- current implementation state: `STAGE1_ADDITIONAL_CORRECTION_STEP0_COMPLETE_DISABLED`
-- current authorized next implementation: `NONE_AFTER_ADDITIONAL_CORRECTION_STEP0`
+- current implementation state: `STAGE1_ADDITIONAL_CORRECTION_STEP1_COMPLETE_DISABLED`
+- current authorized next implementation: `NONE_AFTER_ADDITIONAL_CORRECTION_STEP1`
 - only admissible next implementation class: `ONE_BOUNDED_ACTUAL_PRODUCT_ARTIFACT_IMPROVEMENT_UNIT`
 - historical provider admission: `NO_SAFE_CMEE_V1A_CANDIDATE_STOP`
 - historical L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
@@ -14,7 +14,7 @@
 - D0 / L3-R / P0 / P0-R1 / L3-I lifecycle: `RETIRED_HISTORICAL_NONREUSABLE`
 - automatic progression: `false`
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
-- Stage 1 additional correction final body: `PRO_CONFIRMED_NONCANONICAL_INTEGRATION_SOURCE / MASH_LEVEL3_STEP0_APPROVED_COMPLETE`
+- Stage 1 additional correction final body: `PRO_CONFIRMED_INTEGRATION_SOURCE / MASH_LEVEL3_STEP1_APPROVED_COMPLETE_DISABLED / STEP2_NOT_STARTED`
 - Stage 1 additional correction order owner: `THIS_FILE_SECTION_30_ROUTING_TO_FINAL_BODY_SECTION_13`
 
 ---
@@ -36,8 +36,7 @@ Step 6 full regression、formal exact8 machine gate、Step 7 pairwise / set-leve
 ただし、これらはhistorical technical factであり、Mashがactual本文を「文章品質が不足する」と判断したため、
 v2のcurrent product acceptanceは`FALSE`、candidate readyは`false`、Product / technical / full-I1 /
 Cycle001 / production creditは0である。§29の`MASH_PRESENTATION_PRE_SCREEN_ELIGIBLE`をProduct PASSへ変換しない。
-2026-08-24のadditional correctionは§30のdocs-only final design recordであり、runtime実装は未承認、
-current authorized next implementationは`NONE_PENDING_MASH_LEVEL3_IMPLEMENTATION_DECISION`である。
+2026-08-24のadditional correctionは§30のfinal design record、§31のStep 0 receipt、§32のStep 1 registered-disabled receiptまでをcurrent canonical stateとする。runtimeはapproved exact2でfinal IDs、`SubjectivePropositionV2`、minimum invariantだけを登録し、active v1への接続は0、Step 2は未開始である。current authorized next implementationは`NONE_AFTER_ADDITIONAL_CORRECTION_STEP1`である。
 
 この絶対規則の根拠となった事実は、
 [「EmlisAI商品中核の後回しとCMEE Product Read失敗」恒久インシデント記録](../../../audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md)
@@ -2313,3 +2312,150 @@ STOP_AFTER_STEP0 = true
 ```
 
 fresh照合結果はapproved bytes / assumptions一致、baseline再現、private packet identity分離、counter owner生成をすべて満たす。head / fixture / axis / path / assumption driftは0であり、effect前STOP条件は成立しなかった。今回のauthorityはStep 0で尽きる。
+
+## 32. Stage 1 additional correction Step 1 — final type / invariant registration receipt（2026-08-24）
+
+本節は§31よりfreshであり、Mashが明示承認したadditional correction Step 1のcompletion receiptである。authorityはfinal body §12のStep 1、すなわちapproved canonical deltaの同期、final IDs、`SubjectivePropositionV2`、minimum source / owner / safety / unknown / derivation spine、anti-template registry invariantのregistered-disabled実装だけに限定する。Step 2 composer、current response v2 cutover、actual本文生成、Product Readは開始しない。
+
+### 32.1 Fresh Step 0 gate / approved delta identity
+
+Step 1開始時にStep 0 exact2、両approved branch、final body bytesを再照合した。
+
+```text
+FINAL_BODY_SHA256 = 1f02e566ddfaefcbfc99ba985e3ef8af5c8e15b8867215c994cda99fbdedff05
+FINAL_BODY_BYTES = 357275
+FINAL_BODY_LINES = 4008
+
+COCOLON_STEP0_HEAD = d583d31cfdd777f78fb7948cdb45688594b5e114
+MASHOS_STEP0_HEAD = e006609d7a72c2b837c85a51327b0c49de227015
+STEP0_CONTRACT_VERTICAL_BASELINE = 111 / 111 PASS
+STEP0_FORMAL_CASE_GENERATED_ARTIFACT_STRUCTURAL = 8 / 8 / 8 / 8
+STEP0_LIMITED_VISIBLE_MATERIAL_UNKNOWN = 0 / 0
+STEP0_CANDIDATE_READY = FALSE
+STEP0_AUTOMATIC_PROGRESSION = FALSE
+```
+
+approved Step 1 changed pathはcross-repo exact5である。preimageはStep 1開始時のblob、resultは本Stepのcommit treeが所有するblobである。self-containing receiptのblobを本文内へ再帰記載しない。
+
+| Repository / approved path | Step 1 preimage blob | Step 1 result blob |
+|---|---|---|
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py` | `3d4425809b1e24c7f9dd5c2d6fd00038f20d4db2` | `c8c9a313833f10bb0992eb33968aa6e02afbf22e` |
+| mashos-api `ai/tests/test_cmee_v1a_i1sx_contracts.py` | `edddca775d65d414e5d8aec17f892bf5a9942633` | `0988a4cf9f4a46c5c54c21ecb2e322f830cfac59` |
+| Cocolon `Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md` | `3594aa85137a47de552bb965f3a44dd01eadfbff` | `2b2b6809bceb6bcfb3084f2d9ee850b3184ba43e` |
+| Cocolon `Cocolon_前提資料/designs/cmee/v1/05_json_schema_and_versioning.md` | `998fea19ed34f7f963e84e1613cd8595919325c9` | `abd89b657d346b8479d0a344dfd77911ba839a63` |
+| Cocolon `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` | `3aa761881f4e10d577e460eabdc01ca18018dc66` | self-referenceのため本文内非埋込。resulting Step 1 commit treeをauthorityとする |
+
+```text
+APPROVED_CANONICAL_DELTA_PATH_COUNT = 5
+MASHOS_STEP1_CHANGED_PATHS = EXACT2
+COCOLON_STEP1_CHANGED_PATHS = EXACT3
+CHANGED_PATH_OUTSIDE_APPROVED_EXACT5 = 0
+WORKTREE_EXTERNAL_PARTIAL_WRITE = 0
+```
+
+### 32.2 Runtime registration exactness
+
+mashos-apiのStep 1 resultはcommit `21392275b6684fe852f111143747db92ad74a4fb`、tree `0bbda4220db4afba9ce1c6bf76d0bb7b68f95239`であり、parentはStep 0 head exact1、changed pathは上表exact2だけである。
+
+final logical IDs exact28はone frozen tuple、symbol / valueともunique、状態`REGISTERED_DISABLED`で登録した。`SubjectivePropositionV2`はdeclared field exact20とsupporting enum / dataclass familyを持つが、current builder / response / trace / compiler / serializer / REALIZER / runnerからのread / writeは0である。
+
+```text
+ACTIVE_RESPONSE_SCHEMA_VERSION = cocolon.cmee.v1a.emlis_stage1_response.v1
+ACTIVE_TRACE_SCHEMA_VERSION = cocolon.cmee.v1a.emlis_stage1_positive_trace_extension.v1
+ACTIVE_EMLIS_OWNER_REF = owner:emlis@cocolon.cmee.v1a.emlis_stage1_response.v1
+
+FINAL_LOGICAL_IDENTITIES = EXACT28 / REGISTERED_DISABLED
+SUBJECTIVE_PROPOSITION_V2_FIELDS = EXACT20 / REGISTERED_DISABLED
+FINAL_EMLIS_OWNER = EXACT1
+LEGACY_ALIAS = 0
+DUAL_READ = 0
+DUAL_WRITE = 0
+PARALLEL_SCHEMA_COMPILER_SERIALIZER_OWNER = 0
+GENERIC_SUBJECTIVE_PROPOSITION = 0
+UNFIXED_FIELD = 0
+CURRENT_V1_RUNTIME_EFFECT = 0
+```
+
+minimum source / owner / safety / unknown spineはcanonical 02 §27、05 §25と同期した。phase-A expected basis / qualifier / policy rows、allowed refs、actor / experiencer、focal relation、forbidden promotionsはtrusted frozen contextであり、runtime caller choiceは0である。Step 1はdisabled validator seamだけを所有し、upstream closure freshnessのsole projectorはStep 2、sealed plan tamper gateはStep 4へ残す。
+
+primary / boundaryはbinding refとresolved semantic refの双方でdisjoint、response objectはexact concatenation、counterpositionはboundary 1..Nかつadmitted focal relation exact1である。forbidden promotionsはclaim-basis-local frozen wrapper resultとbyte-exact、policy applicationはV1 / V2 / V8だけ、material unknownはV9 constraint専用でvisible subjective contentへ昇格しない。`SurfaceDerivation`はregistered-disabled minimum exact8 kind、owner、cardinality、rule compatibility、nonoverlap scalar rangeまでを閉じ、concrete source / evidence / range freshnessをStep 2より先に所有しない。
+
+### 32.3 Anti-template exact invariant
+
+ConstructionSpec registryのcanonical raw ordered tupleは次のexact8である。
+
+```text
+construction_id
+argument_slots
+role_order
+valency
+particle_rules
+auxiliary_rules
+relation_combinators
+inflection_order
+```
+
+eligible-constructions selectorのcanonical raw ordered tupleは次のexact3である。
+
+```text
+grammatical_shape_key
+predicate_valency
+syntactic_orientation
+```
+
+validatorは各tupleとのraw ordered exact equalityを要求する。empty / subset / missing / duplicate / reorder / camelCase / unknown / cross-familyはすべてrejectする。raw source、raw text、normalized input、regex result、case / fixture / exact8 ID、semantic keyword、expected / finished surface、input hashおよび同等aliasはregistry / selectorへ入れない。raw text construction selector、generic proposition fallback、flat union allowlistは0である。response-object / functional morphologyのfamily別final validatorはStep 2 ownerへ残す。
+
+### 32.4 Machine verification / unchanged boundaries
+
+Workのverified absolute Python entrypointと`PYTHONPATH=services/ai_inference`で、final Step 1 treeをfresh実行した。
+
+```text
+STEP1_FOCUSED_TESTS = 16 / 16 PASS
+CONTRACT_TESTS = 86 / 86 PASS
+VERTICAL_TESTS = 41 / 41 PASS
+COMBINED_TESTS = 127 / 127 PASS
+
+FORMAL_CASE / GENERATED / ARTIFACT / STRUCTURAL_TRACE = 8 / 8 / 8 / 8
+LIMITED / VISIBLE_MATERIAL_UNKNOWN = 0 / 0
+MATERIAL_UNKNOWN = 0
+candidate_ready = false
+product_read_eligible = false
+exact8_acceptance_complete = false
+automatic_progression = false
+
+PYTHON_AST_PARSE = PASS
+GIT_DIFF_CHECK = PASS
+INDEPENDENT_FINAL_REVIEW_BLOCKER = 0
+INDEPENDENT_FINAL_REVIEW_MAJOR = 0
+```
+
+current package layout、entrypoint、active response / trace / owner、API、DB、RN、persistence、artifact lifecycle、runner、current structure mapにdeltaはない。listed path外、public callable、provider、dependency、network、production effectは0である。
+
+```text
+STRUCTURE_MAP_DELTA_NONE = true
+PUBLIC_CALLABLE_API_DB_RN_PERSISTENCE_EFFECT = 0
+PRODUCTION_PROVIDER_DEPENDENCY_NETWORK_EFFECT = 0
+RUNTIME_REQUEST_STATE_EFFECT = 0
+COMMON_DEFECT_RETURN_COUNT = 0
+COMMON_DEFECT_RETURN_MAX = 2
+STEP1_COUNTER_INCREMENT = 0
+```
+
+### 32.5 Step 1 exit / STOP
+
+```text
+STAGE1_ADDITIONAL_CORRECTION_STEP0 = COMPLETE
+STAGE1_ADDITIONAL_CORRECTION_STEP1 = COMPLETE_DISABLED
+PRIMARY_OUTCOME = FINAL_TYPE_AND_INVARIANT_EXACT
+STEP2 = NOT_STARTED
+EARLY_ACTUAL_STATUS = NOT_RUN
+PRODUCT_READ_EVALUATED_FOR_THIS_UNIT = FALSE
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+CANDIDATE_READY = FALSE
+CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_ADDITIONAL_CORRECTION_STEP1
+AUTOMATIC_PROGRESSION = FALSE
+STOP_AFTER_STEP1 = true
+```
+
+Step 1 authorityはここで尽きる。Step 2以後を開始するにはfresh explicit approvalを必要とし、本receiptまたはmachine GREENを暗黙の進行許可として扱わない。
