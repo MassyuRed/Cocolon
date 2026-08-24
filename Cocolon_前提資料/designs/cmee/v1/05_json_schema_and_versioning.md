@@ -1,17 +1,18 @@
 # CMEE V1 — JSON Schema / Identity / Versioning 詳細設計
 
 - document id: `cocolon.cmee.v1.schema_and_versioning.detailed_design`
-- revision date: `2026-08-23 JST`
+- revision date: `2026-08-24 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - Phase 2 product-route verdict: `ADOPT_WITH_BOUNDED_CORRECTIONS_REFLECTED`
 - canonical field / ref / schema / version owner: `THIS_FILE`
-- schema registration: `EMLIS_STAGE1_PRIVATE_SPINE_AND_STEP4_REALIZATION_REGISTERED_DISABLED`
-- private Python contract mapping: `STEP4_IMPLEMENTED_DISABLED`
+- schema registration: `EMLIS_STAGE1_V2_CURRENT_REGISTERED_DISABLED_PRODUCT_REJECTED__ADDITIONAL_CORRECTION_PROPOSED_NOT_REGISTERED`
+- private Python contract mapping: `STEP7_V2_IMPLEMENTED_DISABLED_PRODUCT_REJECTED`
 - public runtime serialization / cutover effect: `0`
 - DB / API effect: `0`
-- current authorized next implementation: `NONE_AFTER_STEP4`
+- current authorized next implementation: `NONE_PENDING_MASH_LEVEL3_IMPLEMENTATION_DECISION`
 - automatic progression: `false`
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
+- Stage 1 additional correction schema delta: `PROPOSED_IN_NONCANONICAL_FINAL_BODY / NOT_REGISTERED_BY_DOCS_WRITE`
 
 ---
 
@@ -2986,3 +2987,11 @@ PRODUCT_CREDIT = 0
 TECHNICAL_CREDIT = 0
 AUTOMATIC_PROGRESSION = FALSE
 ```
+
+## 24. Stage 1 additional correction schema / identity candidate（2026-08-24）
+
+§23までのv2 private schema / registry / receiptは、Mashが商品品質不足と判断したdisabled preimageのhistorical current implementation factである。Pro-confirmed additional correction本文が提案するprivate v2 contracts、version IDs、identity material、normal-form / rank / trace rulesは、次のnoncanonical integration sourceに固定する。
+
+[Stage 1 Additional Correction Final Technical Body](../Cocolon_CMEE_Stage1_AdditionalCorrection_UltraFinalTechnicalBodyAndJointRecommendation_20260824.md)
+
+本docs-only配置は、新schema registration、public JSON、runtime serialization、API、DB、RN、persistence、productionまたはprovider / dependency activationを行わない。提案型を本fileへ二重定義せず、Mashのfresh LEVEL_3 implementation approval後にだけ、同本文§8のexact field / version deltaを本fileのsole canonical schema ownerへ同期する。approval前のimplementation authority、candidate ready、Product / technical creditは0である。

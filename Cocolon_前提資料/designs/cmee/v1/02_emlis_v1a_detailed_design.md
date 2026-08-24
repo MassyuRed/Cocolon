@@ -1,23 +1,24 @@
 # CMEE V1-A — EmlisAI Observation Vertical 詳細設計
 
 - document id: `cocolon.cmee.v1a.emlis_observation.detailed_design`
-- revision date: `2026-08-23 JST`
+- revision date: `2026-08-24 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- runtime state: `DRAFT_WIP_DISABLED_PRODUCT_FAIL`
-- implementation evidence owner: `MassyuRed/mashos-api Draft PR #3 @ 51b6c61b56dfa34650e30fe44b0d9577b7278211`
-- current Stage 1 correction checkpoint: `STEP4_FINITE_REALIZATION_COMPLETE_DISABLED`
+- runtime state: `DRAFT_WIP_DISABLED_PRODUCT_FAIL_ADDITIONAL_CORRECTION_DESIGN_RECORDED`
+- implementation evidence owner: `MassyuRed/mashos-api Draft PR #3 @ b7865574ebe08c801f6a2c779daf9148159cf8b0`
+- current Stage 1 correction checkpoint: `STEP7_V2_MACHINE_GREEN_PRODUCT_REJECTED`
 - R1–R4 state: `CLOSED_GREEN`
 - original exact8 machine structural state: `8/8`
 - private human Product Read: `EVALUATED_FAIL_STOP`
 - candidate ready: `false`
 - production admission: `false`
-- current authorized next implementation: `NONE_AFTER_STEP4`
+- current authorized next implementation: `NONE_PENDING_MASH_LEVEL3_IMPLEMENTATION_DECISION`
 - automatic progression: `false`
 - Cycle001 effect: `0`
 - L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
 - Phase 0 / P0 / P0-R1 / standalone product-delta-0 L3-R / L3-I lifecycle: `RETIRED_HISTORICAL_NONREUSABLE`
 - current implementation rule: `PRODUCT_QUALITY_DELTA_GT_0_AND_MASH_CONFIRMED_ONLY`
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
+- Stage 1 additional correction final body: `PRO_CONFIRMED_NONCANONICAL_INTEGRATION_SOURCE / NOT_IMPLEMENTED`
 
 ---
 
@@ -1084,3 +1085,15 @@ PRODUCT_CREDIT = 0
 TECHNICAL_CREDIT = 0
 AUTOMATIC_PROGRESSION = FALSE
 ```
+
+## 26. Stage 1 additional correction final design record（2026-08-24）
+
+§25までのv2 machine GREEN、pairwise / set-level pre-screen、remote bytes一致はhistorical implementation factとして保持する。しかしMashのactual本文判断により、v2の商品品質は不足し、`PRODUCT_ACCEPTANCE=FALSE`、`CANDIDATE_READY=false`である。machine / 華恋pre-screenをProduct PASSへ変換しない。
+
+Pro華恋が`PASS / BLOCKER 0 / MAJOR 0 / MINOR 0`と最終確認したadditional correction本文は、次のnoncanonical integration sourceである。
+
+[Stage 1 Additional Correction Final Technical Body](../Cocolon_CMEE_Stage1_AdditionalCorrection_UltraFinalTechnicalBodyAndJointRecommendation_20260824.md)
+
+本docs-only反映では、同本文が提案する`EmlisSubjectiveMeaningPlan`、`SubjectivePropositionV2`、Grounded Discourse Composer、normal form、internal exact32 candidate、early actual、withheld exact4をruntime contractとしてactiveにしない。本fileはcurrent v2 preimageとfuture integration destinationを一つに保ち、parallel Emlis technical ownerを作らない。
+
+Mashのfresh LEVEL_3 implementation approvalが成立した場合だけ、同本文§12.2の責任を本file、functional owner、canonical 05 / 06へ同期し、canonical 06 §30の一意な順序でStep 0から開始する。現在のsource / test / runtime / API / DB / RN / persistence / production / provider / dependency effectは0、automatic progressionはfalseである。

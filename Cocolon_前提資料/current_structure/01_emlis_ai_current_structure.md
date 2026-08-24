@@ -1,11 +1,13 @@
 ---
 doc_id: cocolon_emlis_ai_current_structure
 title: "EmlisAI構造 — Current Structure"
-revision_date: "2026-08-23 JST"
+revision_date: "2026-08-24 JST"
 document_role: "EMLIS_AI_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
 implementation_effect: 0
+stage1_v2_product_read_state: "EVALUATED_FAIL_QUALITY_INSUFFICIENT"
+stage1_additional_correction_design_state: "PRO_CONFIRMED_DOCS_ONLY_IMPLEMENTATION_NOT_GRANTED"
 cycle001_effect: 0
 automatic_progression: false
 ---
@@ -369,3 +371,21 @@ automatic_progression = false
 ```
 
 final remote refs、exact changed-path set、file bytes equalityはcommit / push後にcanonical 06 §29の`PASS_VERIFIED_POST_PUSH`として実測確認した。
+
+## 14. Latest Stage 1 product verdict / additional correction map（2026-08-24）
+
+本sectionはcurrent Product verdictとnext design stateについて§13よりfreshである。
+
+- v2 Step 7 machine / pre-screen: historical GREEN。
+- Mash actual Product Read: `EVALUATED_FAIL_QUALITY_INSUFFICIENT`。
+- current v2 product acceptance: `FALSE`。
+- current candidate ready / Product / technical / production credit: `false / 0 / 0 / 0`。
+- additional correction final body: [Pro-confirmed noncanonical integration source](../designs/cmee/Cocolon_CMEE_Stage1_AdditionalCorrection_UltraFinalTechnicalBodyAndJointRecommendation_20260824.md)。
+- final body reviewed source SHA-256: `1f02e566ddfaefcbfc99ba985e3ef8af5c8e15b8867215c994cda99fbdedff05`。
+- Pro final confirmation: `PASS / BLOCKER 0 / MAJOR 0 / MINOR 0`。
+- implementation order owner: canonical 06 §30 → final body §13。
+- implementation approval / runtime / test / provider / API / DB / RN / persistence / production effect: `0`。
+- current authorized next implementation: `NONE_PENDING_MASH_LEVEL3_IMPLEMENTATION_DECISION`。
+- automatic progression: `false`。
+
+current production `emlis_ai_reply_service.py`、ReplyEnvelope、RN display、Cycle001、question、Layer 3、Piece、Analysisのownerは変わらない。new final bodyはcurrent v2 surface ownerを即時に置換せず、future LEVEL_3 approval後にだけcanonical owner exact1へ分配する。

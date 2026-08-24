@@ -1,7 +1,7 @@
 # CMEE V1 詳細設計 — Read First
 
 - document id: `cocolon.cmee.v1.detailed_design.read_first`
-- revision date: `2026-08-23 JST`
+- revision date: `2026-08-24 JST`
 - Step 10 final document id: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2`
 - Step 10 design identity: `CMEE_THREE_CORE_INTEGRATED_DESIGN_20260821`
 - Step 10 Pro review: `CMEE_STEP10_PRO_SINGLE_PRODUCT_ROUTE_REVIEW_20260821 / CONSUMED_EXACTLY_ONCE`
@@ -17,12 +17,15 @@
 - L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
 - Phase 0 / P0 / P0-R1 / standalone product-delta-0 L3-R / L3-I lifecycle: `RETIRED_HISTORICAL_NONREUSABLE`
 - current implementation rule: `PRODUCT_QUALITY_DELTA_GT_0_AND_MASH_CONFIRMED_ONLY`
-- current implementation state: `DRAFT_WIP_DISABLED_PRODUCT_READ_PENDING`
+- current implementation state: `STAGE1_V2_DISABLED_PRODUCT_REJECTED_ADDITIONAL_CORRECTION_DESIGN_RECORDED`
 - Phase 2 design correction state: `TOP_LEVEL_NAVIGATION_ALIGNED`
 - Step 10 design correction state: `FINAL_INTEGRATED_CONTRACT_REFLECTED_EXISTING_EXACT14`
 - Karen-derived functional companion: `exact2`
+- Stage 1 additional correction final body: `COCOLON_CMEE_STAGE1_ADDITIONAL_CORRECTION_ULTRA_FINAL_TECHNICAL_BODY_AND_JOINT_RECOMMENDATION_20260824`
+- Stage 1 additional correction Pro final confirmation: `PASS / BLOCKER 0 / MAJOR 0 / MINOR 0`
+- Stage 1 additional correction placement: `NONCANONICAL_TECHNICAL_INTEGRATION_SOURCE / DESIGN_RECORD_WRITE_ONLY`
 - duplicate parallel technical canonical design files: `0`
-- current authorized next implementation: `NONE`
+- current authorized next implementation: `NONE_PENDING_MASH_LEVEL3_IMPLEMENTATION_DECISION`
 - automatic progression: `false`
 
 ---
@@ -214,7 +217,29 @@ technical integration source:
 
 次のruntime implementationは別の長い設計・審査projectへせず、fresh preimageを入れた短いexecution envelopeから同一bounded Stage 1 product correctionへ戻る。本docs correctionはimplementation開始authorityを生成しない。
 
-## 1. 読む順 exact9
+### 0.5 2026-08-24 Stage 1 additional correction final body
+
+Mashの今回の明示指示に基づき、Pro華恋が最終確認で`PASS / BLOCKER 0 / MAJOR 0 / MINOR 0`とした次の本文を、PR #30 working lineageへdocs-onlyで配置する。
+
+[Cocolon CMEE Stage 1 追加修正 — Ultra華恋 Final Technical Body and Pro/Ultra Joint Recommendation](../Cocolon_CMEE_Stage1_AdditionalCorrection_UltraFinalTechnicalBodyAndJointRecommendation_20260824.md)
+
+```text
+document_id = COCOLON_CMEE_STAGE1_ADDITIONAL_CORRECTION_ULTRA_FINAL_TECHNICAL_BODY_AND_JOINT_RECOMMENDATION_20260824
+reviewed_source_sha256 = 1f02e566ddfaefcbfc99ba985e3ef8af5c8e15b8867215c994cda99fbdedff05
+reviewed_source_bytes_lines = 357275 / 4008
+pro_final_confirmation_sha256 = ceef533a19d6ee2be75be06e8be74bc2fbefb7a7f0130050ffe2678903bef5bb
+placement_role = NONCANONICAL_TECHNICAL_INTEGRATION_SOURCE
+design_record_write = APPROVED_BY_MASH_20260824
+implementation_approval = NOT_GRANTED
+runtime_test_api_db_rn_production_provider_dependency_effect = 0
+automatic_progression = false
+```
+
+本文frontmatterの`pro_review_verdict=CHANGES_REQUIRED`は初回reviewの歴史事実、`GITHUB_WRITE_APPROVAL=NOT_GRANTED`はfinal body freeze時点の状態として改変しない。本sectionとcanonical 06 §30が、今回のfinal Pro confirmationとdocs-only配置authorityを所有する。これは本文§12.2が禁じるparallel technical canonicalではなく、将来MashがLEVEL_3実装を明示承認した場合に限り、functional owner、02、05、06へ責任別に分配するintegration sourceである。
+
+current v2 Step 7のmachine GREEN / pre-screen結果はhistorical factとして保持するが、Mashのactual本文判断「文章品質が不足する」によりproduct acceptanceは`FALSE`、candidate readyは`false`である。本文§13のStep 0–9だけをadditional correctionの提案実装順とし、canonical 06 §30がcallable名、known early exact4、遷移Tを一意に補足する。別の実装順ownerは作らない。System Context PR #37はnavigation-onlyのまま更新しない。
+
+## 1. 読む順 exact10
 
 1. 本file
 2. [NLSv3 → CMEE Disposition表](../NLSv3_to_CMEE_Disposition_Phase1_20260817.md)
@@ -226,8 +251,9 @@ technical integration source:
    - [03_piece_v1c_detailed_design.md](03_piece_v1c_detailed_design.md)
    - [04_analysis_v1d_v1e_detailed_design.md](04_analysis_v1d_v1e_detailed_design.md)
 7. [06_implementation_order_migration_and_verification.md](06_implementation_order_migration_and_verification.md)
-8. `../../../current_structure/04_cmee_current_structure.md`
-9. 対象coreのcurrent structure mapとactual source / contract / test
+8. [Stage 1 additional correction Pro-confirmed final body](../Cocolon_CMEE_Stage1_AdditionalCorrection_UltraFinalTechnicalBodyAndJointRecommendation_20260824.md)
+9. `../../../current_structure/04_cmee_current_structure.md`
+10. 対象coreのcurrent structure mapとactual source / contract / test
 
 Disposition表だけでcurrent実装状態や移管完了を決めない。本suiteだけでcurrent実装状態を決めず、current structure mapを地図、
 GitHubのactual source / testを現物として両方確認する。
@@ -239,6 +265,7 @@ GitHubのactual source / testを現物として両方確認する。
 | `00_read_first.md` | 読み順、lifecycle、suite全体の非影響、NLSv3継承の第2段階routing | runtime contract詳細、asset単位の最終移管 |
 | `karen_derived/00_read_first.md` + `01_emlis_observation_and_reception.md` | 華恋由来P1–P8、M1–M7、Layer 1 / 2、V1–V9、観測・選択・応答構造、最低商品品質、public-safe examples / prohibitions | Python型、schema、validator、trace実装、runtime algorithm |
 | `../NLSv3_to_CMEE_Disposition_Phase1_20260817.md` | 第1段階の分類、受け皿、重複・欠落、evidence index | design authority、implementation authority、移管完了claim |
+| `../Cocolon_CMEE_Stage1_AdditionalCorrection_UltraFinalTechnicalBodyAndJointRecommendation_20260824.md` | Pro-confirmed Stage 1 additional correctionのLEVEL_3 implementation candidate、root cause、提案delta、§13実装順 | parallel canonical owner、current runtime activation、implementation authority、Product PASS |
 | `01_shared_kernel_and_runtime_contracts.md` | shared logical architecture、ports、pipeline、failure | core固有商品判断 |
 | `02_emlis_v1a_detailed_design.md` | Emlis observation vertical、question lifecycle、Cycle境界 | Piece / Analysis activation |
 | `03_piece_v1c_detailed_design.md` | share artifact、visual spec、identity、clean cutover | renderer implementation / DB activation |

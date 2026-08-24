@@ -1,22 +1,22 @@
 ---
 doc_id: cocolon_meaning_experience_engine_current_structure
 title: "CMEE — Current Structure"
-revision_date: "2026-08-23 JST"
+revision_date: "2026-08-24 JST"
 document_role: "CMEE_CURRENT_STRUCTURE_AND_PRODUCT_QUALITY_ROUTE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
-design_state: "STEP10_REVIEW_APPLIED_PLUS_KAREN_DERIVED_FUNCTIONAL_COMPANION_EXACT2"
+design_state: "STEP10_PLUS_KAREN_DERIVED_PLUS_STAGE1_ADDITIONAL_CORRECTION_PRO_CONFIRMED_RECORD"
 detailed_design_state: "DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE_DIRECT_PRODUCT_QUALITY_ONLY"
 historical_l3r_route_selection: "ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION"
 historical_l3r_packet_state: "L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP"
 historical_p0r1_executor_candidate_state: "P0R1_GITHUB_HOSTED_EXECUTOR_FINAL_TECHNICAL_PROPORTIONALITY_STOP"
 preproduct_zero_delta_stage_lifecycle: "RETIRED_HISTORICAL_NONREUSABLE"
-current_authorized_next_work: "NONE"
+current_authorized_next_work: "NONE_PENDING_MASH_LEVEL3_IMPLEMENTATION_DECISION"
 only_admissible_next_implementation_class: "ONE_BOUNDED_ACTUAL_EMLIS_STAGE1_ARTIFACT_IMPROVEMENT_UNIT"
 implementation_state: "DRAFT_WIP_DISABLED"
-candidate_state: "GENERATED_FOR_PRODUCT_READ_DISABLED_PENDING_MASH"
+candidate_state: "V2_PRODUCT_REJECTED_ADDITIONAL_CORRECTION_DESIGN_ONLY"
 candidate_ready: false
-product_read_state: "PENDING_MASH_PRODUCT_READ"
+product_read_state: "EVALUATED_FAIL_QUALITY_INSUFFICIENT"
 production_runtime_effect: 0
 automatic_progression: false
 ---
@@ -42,12 +42,12 @@ Current state:
     Phase 0 / P0 / P0-R1 = RETIRED_HISTORICAL_NONREUSABLE
     product-delta-0 standalone L3-R / L3-I = RETIRED_HISTORICAL_NONREUSABLE
     historical Route B product contract = RETAINED_CONSTRAINT_ONLY
-    mashos-api Draft PR #3 = R1-R4 CLOSED_GREEN / machine structural exact8 8/8
+    mashos-api Draft PR #3 = STEP7_V2_MACHINE_GREEN_DISABLED @ b7865574ebe08c801f6a2c779daf9148159cf8b0
     implementation state = DRAFT_WIP_DISABLED
-    current Product Read = PENDING_MASH_PRODUCT_READ
-    historical predecessor Product Read FAIL = retained noncredit evidence
+    current Product Read = EVALUATED_FAIL_QUALITY_INSUFFICIENT
+    additional correction final body = PRO_CONFIRMED_DOCS_ONLY / NOT_IMPLEMENTED
     candidate ready = false / product credit 0
-    current authorized next work = NONE
+    current authorized next work = NONE_PENDING_MASH_LEVEL3_IMPLEMENTATION_DECISION
     only admissible future class = ONE_BOUNDED_ACTUAL_EMLIS_STAGE1_ARTIFACT_IMPROVEMENT_UNIT
     not production connected
     not Cycle001 proven
@@ -668,3 +668,23 @@ product_pass = not_declared
 product_technical_full_i1_cycle001_production_credit = 0
 automatic_progression = false
 ```
+
+## 23. CMEE current structure 更新 — Stage 1 additional correction design record（2026-08-24）
+
+本sectionはcurrent Product verdictとfuture Stage 1 design routeについて§22よりfreshである。§22のv2 Step 7 machine / pre-screen receiptはhistorical factとして保持するが、Mashのactual本文判断によりproduct acceptanceは`FALSE`である。
+
+```text
+v2_product_read = EVALUATED_FAIL_QUALITY_INSUFFICIENT
+v2_machine_green = HISTORICAL_TRUE
+v2_candidate_ready = false
+additional_correction_final_body = PRO_CONFIRMED_NONCANONICAL_INTEGRATION_SOURCE
+additional_correction_implementation = NOT_APPROVED_NOT_STARTED
+current_authorized_next_work = NONE_PENDING_MASH_LEVEL3_IMPLEMENTATION_DECISION
+production / API / DB / RN / persistence / provider / dependency effect = 0
+automatic_progression = false
+```
+
+design record:
+[Cocolon CMEE Stage 1 Additional Correction — Ultra Final Technical Body and Joint Recommendation](../designs/cmee/Cocolon_CMEE_Stage1_AdditionalCorrection_UltraFinalTechnicalBodyAndJointRecommendation_20260824.md)
+
+canonical ownerはfunctional=`v1/karen_derived/01`、technical=`v1/02`、schema / identity=`v1/05`、implementation order=`v1/06`、shared S8/S9=`v1/01`のままである。new final bodyはparallel canonicalではなく、canonical 06 §30から§13へrouteするLEVEL_3 implementation candidateである。System Context PR #37はnavigation-only / frozenのまま重複反映しない。

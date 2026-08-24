@@ -1,11 +1,11 @@
 # CMEE V1 — Implementation Order / Migration / Verification 詳細設計
 
 - document id: `cocolon.cmee.v1.implementation_migration_verification.detailed_design`
-- revision date: `2026-08-23 JST`
+- revision date: `2026-08-24 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - absolute implementation rule: `BOUND_TO_PARENT_FINAL_DESIGN_SECTION_0_3`
-- current implementation state: `STAGE1_CORRECTION_STEP4_COMPLETE_DISABLED`
-- current authorized next implementation: `NONE_AFTER_STEP4`
+- current implementation state: `STAGE1_V2_STEP7_MACHINE_GREEN_PRODUCT_REJECTED_ADDITIONAL_CORRECTION_DESIGN_RECORDED`
+- current authorized next implementation: `NONE_PENDING_MASH_LEVEL3_IMPLEMENTATION_DECISION`
 - only admissible next implementation class: `ONE_BOUNDED_ACTUAL_PRODUCT_ARTIFACT_IMPROVEMENT_UNIT`
 - historical provider admission: `NO_SAFE_CMEE_V1A_CANDIDATE_STOP`
 - historical L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
@@ -14,6 +14,8 @@
 - D0 / L3-R / P0 / P0-R1 / L3-I lifecycle: `RETIRED_HISTORICAL_NONREUSABLE`
 - automatic progression: `false`
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
+- Stage 1 additional correction final body: `PRO_CONFIRMED_NONCANONICAL_INTEGRATION_SOURCE / IMPLEMENTATION_NOT_GRANTED`
+- Stage 1 additional correction order owner: `THIS_FILE_SECTION_30_ROUTING_TO_FINAL_BODY_SECTION_13`
 
 ---
 
@@ -26,16 +28,16 @@ existing core quality contract上で少なくとも1%向上する場合だけ成
 source / provider / binding / guard / trace / proof / test / runtimeのみは独立した商品品質を持たず、
 actual artifactが改善しなければ1%向上、実装作業、成果またはproduct creditにならない。
 
-Current correction preimageは§23のStep 0 envelopeで固定し、Step 1、Step 2の順に完了したremote headを再確認した。
-Mashの明示指示により、Stage 1 correction Step 3 exact1として、
-[mashos-api Draft PR #3](https://github.com/MassyuRed/mashos-api/pull/3) head
-`e9be5c25d042b52deff800e11646188c0c697340`へcurrent Reception assetの有限変換、Layer 2 subjective planner、
-affect / request-local self-state境界、V1–V9 material eligibility / suppression、projection / artifact identity seamを反映した。
-contract 46/46、vertical 32/32、combined 78/78、machine exact8
-`GENERATED / artifact / structural trace = 8/8`を維持する。これはdisabled internal checkpointであり、
-actual product artifactの改善、Product Read、candidate ready、Product / technical / full-I1 / Cycle001 / production creditを
-一切作らない。Step 4以後は未着手で、automatic progressionはなく、current authorized next implementationは
-`NONE_AFTER_STEP3`である。
+Current v2 correctionは§23〜§29の同一bounded unitでStep 7まで到達し、Cocolon head
+`c0fb407e88aea5b8ba52aa25c9532adc0ff3a539`、mashos-api Draft PR #3 head
+`b7865574ebe08c801f6a2c779daf9148159cf8b0`をfinal reviewed preimageとする。Step 5 atomic proof、
+Step 6 full regression、formal exact8 machine gate、Step 7 pairwise / set-level pre-screenはGREENである。
+
+ただし、これらはhistorical technical factであり、Mashがactual本文を「文章品質が不足する」と判断したため、
+v2のcurrent product acceptanceは`FALSE`、candidate readyは`false`、Product / technical / full-I1 /
+Cycle001 / production creditは0である。§29の`MASH_PRESENTATION_PRE_SCREEN_ELIGIBLE`をProduct PASSへ変換しない。
+2026-08-24のadditional correctionは§30のdocs-only final design recordであり、runtime実装は未承認、
+current authorized next implementationは`NONE_PENDING_MASH_LEVEL3_IMPLEMENTATION_DECISION`である。
 
 この絶対規則の根拠となった事実は、
 [「EmlisAI商品中核の後回しとCMEE Product Read失敗」恒久インシデント記録](../../../audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md)
@@ -2046,3 +2048,91 @@ PRODUCTION_CREDIT = 0
 AUTOMATIC_PROGRESSION = FALSE
 IMPLEMENTATION_STOP = NOT_APPLICABLE_SCOPE_FIXED
 ```
+
+## 30. Stage 1 additional correction final design / implementation-order routing（2026-08-24）
+
+本sectionはcurrent product verdict、additional correction design identity、future implementation orderについて§29以前よりfreshである。§29までのv2 machine / pre-screen receiptは改変しないが、Mashのactual本文判断によりv2 product acceptanceは`FALSE`である。
+
+### 30.1 Final body / Pro confirmation / authority
+
+- final body: [Cocolon CMEE Stage 1 Additional Correction — Ultra Final Technical Body and Joint Recommendation](../Cocolon_CMEE_Stage1_AdditionalCorrection_UltraFinalTechnicalBodyAndJointRecommendation_20260824.md)
+- document id: `COCOLON_CMEE_STAGE1_ADDITIONAL_CORRECTION_ULTRA_FINAL_TECHNICAL_BODY_AND_JOINT_RECOMMENDATION_20260824`
+- reviewed source: SHA-256 `1f02e566ddfaefcbfc99ba985e3ef8af5c8e15b8867215c994cda99fbdedff05` / 357,275 bytes / 4,008 lines
+- Pro final confirmation attachment: SHA-256 `ceef533a19d6ee2be75be06e8be74bc2fbefb7a7f0130050ffe2678903bef5bb`
+- Pro final verdict: `PASS / BLOCKER 0 / MAJOR 0 / MINOR 0 / ALL_6_ACCEPTED_AND_MATERIALLY_CLOSED`
+- reviewed technical preimage: Cocolon PR #30 `c0fb407e88aea5b8ba52aa25c9532adc0ff3a539` / mashos-api PR #3 `b7865574ebe08c801f6a2c779daf9148159cf8b0`
+- current authority: `DESIGN_RECORD_WRITE_ONLY_APPROVED_BY_MASH_20260824`
+- implementation / runtime / test / provider / API / DB / RN / persistence / production authority: `NOT_GRANTED`
+
+final body frontmatterのinitial Pro verdictとGitHub no-writeはbody freeze時点の履歴として保持する。本sectionがfinal Pro confirmationとdocs-only placementを記録する。本文は`NONCANONICAL_TECHNICAL_INTEGRATION_SOURCE / LEVEL3_FINAL_IMPLEMENTATION_CANDIDATE`であり、functional、technical、schema、implementation-orderのparallel canonical ownerではない。
+
+今回のdocs-only changed pathはexact7である。
+
+```text
+Cocolon_前提資料/designs/cmee/Cocolon_CMEE_Stage1_AdditionalCorrection_UltraFinalTechnicalBodyAndJointRecommendation_20260824.md
+Cocolon_前提資料/designs/cmee/v1/00_read_first.md
+Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md
+Cocolon_前提資料/designs/cmee/v1/05_json_schema_and_versioning.md
+Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md
+Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md
+Cocolon_前提資料/current_structure/04_cmee_current_structure.md
+```
+
+これはfinal body §12.2のfuture implementation exact6と別集合である。shared 01、functional owner、runtime / tests、System Context PR #37、withheld exact4 body / digest / locatorを変更・保存しない。
+
+### 30.2 Single executable order
+
+additional correctionの詳細順はfinal body §13のStep 0–9を唯一のsourceとする。重複tableを本fileへ作らず、実行順だけを次へ固定する。
+
+```text
+0 -> 1 -> 2 -> 3
+Step 3 CLEAR -> 4 -> 5 -> 6 -> 7
+Step 7 CLEAR -> 9 -> Mash Product Read
+
+Step 3 or Step 7 COMMON_DEFECT
+  -> transition T
+  -> count < 2: cause ownerへ戻り、affected Stepをfresh再実行
+  -> count == 2: COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP
+
+Step 3 or Step 7 ROUTE_LEVEL_CEILING
+  -> PROVIDERLESS_LANGUAGE_VIABILITY_STOP
+
+sequential Step 8 = 0
+transition T = final bodyの旧表記「Step 8」
+automatic retry / fallback / Product Read後correction = 0
+```
+
+### 30.3 Logical job label / sole callable mapping
+
+final body §13 Step 2の語はlogical job labelとして読み、次のsole callableへexactに写す。左列と同名のparallel production functionを新設しない。
+
+| §13 logical job label | Sole implementation owner |
+|---|---|
+| `plan_subjective_meaning` | `project_subjective_meaning_plan(phase_A)` |
+| `plan_stage1_discourse` | `project_stage1_discourse_arc(phase_B)`と同じphase B内のfinite seed / layout projectors |
+| `compose_stage1_draft` | sole phase B facade `compose_stage1_from_projection(phase_B)`内のdraft linearization |
+| `normalize_to_normal_form` | `normalize_to_normal_form(DraftArtifact, same_seed, same_phase_B_inputs)` exact1 |
+| `rank_stage1_drafts` | `derive_discourse_preference_profile(...)`、exact reducer、global rankを`compose_stage1_from_projection(phase_B)`内で実行 |
+
+early / finalはいずれもfinal body §6.1.1のexact2 facade sequenceだけを通り、別prototype、alias owner、early-only flag、late callbackを作らない。
+
+### 30.4 Known early exact4 identity
+
+final body §13の`known exact4`は、§6.11 public-safe nonbinding walkthrough A〜Dのsynthetic input exact4をlisted orderで使う。formal exact8から選ぶsubsetではなく、expected text、runtime fixture、Product denominator、case-ID branchではない。canonical UTF-8 JSON arrayは§6.11の四入力本文だけをA→D順にno-spaceで格納する。
+
+```text
+KNOWN_EARLY_SET_ID = cocolon.cmee.stage1.known_early_public_safe_exact4.20260824
+KNOWN_EARLY_SET_CANONICAL_JSON_BYTES = 400
+KNOWN_EARLY_SET_SHA256 = 212b63019c519f86a188936ab5deaa8754e3807e49562d3230577abb8dff0435
+FORMAL_EXACT8_SUBSET = 0
+EXPECTED_TEXT = 0
+RUNTIME_CASE_ID_OR_AXIS_LABEL_EFFECT = 0
+```
+
+withheld exact4はfinal body §13のprivate contractを維持し、body-full readerはProだけである。GitHub、ZIP、formal exact8 denominator、Product evidence、Mash review burdenへ入れない。
+
+### 30.5 Activation / STOP
+
+future implementation開始には、Mashがこのfinal body identityとその時点のfresh PR heads / exact implementation paths / effectsへ明示的なLEVEL_3 approvalを与える必要がある。本docs-only publication commitはCocolon technical preimage `c0fb407e...`のdescendantになってもimplementation head approvalを自己生成しない。Step 0はfuture decision時のfresh headをbindし、reviewed technical preimageからのdocs-only exact7以外にdriftがあればeffect前に停止する。
+
+implementation approval前はcanonical 02 / 05のproposed v2 delta登録、runtime、test、runner、current production route、provider、dependency、API、DB、RN、persistence、Stage 2、Layer 3、Piece、Analysisへ進まない。Product PASS、candidate ready、technical / product credit、automatic progressionは0である。
