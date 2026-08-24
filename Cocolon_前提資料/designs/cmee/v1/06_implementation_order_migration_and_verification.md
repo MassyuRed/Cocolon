@@ -2746,3 +2746,69 @@ AUTOMATIC_PROGRESSION = FALSE
 ```
 
 このterminalはProduct Read、product acceptanceまたはready判定ではない。approved unit内のlanguage viability return budget exhaustedと、fixed case集合だけでは見えなかったpre-existing technical blockerをbody-freeで記録する。machine bug correctionはhuman counter外だが、human `COMMON_DEFECT`がcount=`2/2`で同時にterminalを成立させた後のautomatic correctionには使わない。Step 4、formal exact8、Product Read、current structure変更、ready、merge、productionへ進まず、fresh explicit LEVEL_3 authorityなしにmachine repair、別route・asset family・provider検討または再実装を開始しない。
+
+## 37. Stage 1 additional correction Step 3 — bounded machine repair activation（2026-08-25）
+
+§36のterminal後、Mashは同一Route A内のcase-ID effectだけをgenericに修正し、共有counterを`2/2`のまま保持してnew language-core identityでStep 3全体をfresh exact1回再実行するfresh explicit `LEVEL_3` authorityを与えた。本節はfirst effect前のsingle-use activation ownerである。第三composer correction、別route、new asset family、provider、Step 4以降を承認しない。
+
+```text
+AUTHORITY = FRESH_EXPLICIT_LEVEL_3
+AUTHORITY_DATE = 2026-08-25
+AUTHORITY_SCOPE = SAME_ROUTE_MACHINE_REPAIR_ONLY
+REPAIR_CLASS = BOUNDED_MECHANICAL_REPAIR
+ACTIVATION_PREIMAGE_RUNTIME_HEAD = c664f6972d9ae384144f0c31a9971eeab27081b8
+ACTIVATION_PREIMAGE_DESIGN_HEAD = 95847fb8a3c432477704889917259a3ab9c4c8f5
+PREVIOUS_STEP3_EXECUTION_RUNTIME_HEAD = 31befaf6a4f825330c06ca97df045ebccf2f4f2d
+PREVIOUS_STEP3_EXECUTION_DESIGN_HEAD = 9f37ee343e8d6f11d49658d5560b0910b1ea2a23
+PREVIOUS_LANGUAGE_CORE_IDENTITY = 57f334c3c61e2ed590ae13f29481bc4824944a2bfc360a604a2a2a81cc95c193
+
+FAILURE_CLASS = RUNTIME_CASE_ID_EFFECT_ON_SEMANTIC_DIRECTION_AND_LAYOUT
+FAILURE_CAUSE = SYMMETRIC_ENDPOINT_ORDERED_BY_OPAQUE_SEMANTIC_REF
+GENERIC_REPAIR_INVARIANT = CANONICAL_TYPED_SOURCE_ORDER_FOR_PLAIN_SYMMETRIC_ENDPOINTS
+PLAIN_SYMMETRIC_SCOPE = COEXISTENCE_COEXISTS_WITH / TENSION_TENSION_WITH
+DIRECTION_UNDER_BURDEN_TYPED_ORDER = KEEP
+ASYMMETRIC_BEFORE_AFTER_ACTION_CHANGE_CAUSE_EFFECT = KEEP
+CASE_ID_REQUEST_ID_RECORD_ID_RAW_TEXT_HASH_AS_ORDER_INPUT = 0
+
+PRODUCT_CAUSAL_WRITE_PATHS = EXACT2
+  ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py
+  ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py
+REGRESSION_WRITE_PATH = ai/tests/test_cmee_v1a_i1sx_contracts.py
+IDENTITY_SYNC_PATH = ai/tools/cmee_v1a_i1sx_candidate_run.py
+DURABLE_OWNER_PATHS = EXACT2
+  Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md
+  ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md
+
+COMMON_DEFECT_RETURN_COUNT_BEFORE = 2
+COMMON_DEFECT_RETURN_COUNT_AFTER_ACTIVATION = 2
+COMMON_DEFECT_RETURN_INCREMENT = 0
+COMMON_DEFECT_RETURN_MAX = 2
+COUNTER_RESET = 0
+MACHINE_BUG_INCREMENT = 0
+MACHINE_REPAIR_ATTEMPT_MAX = 1
+MACHINE_REPAIR_ATTEMPT_USED = 0
+FRESH_STEP3_RERUN_MAX = 1
+FRESH_STEP3_RERUN_USED = 0
+
+LANGUAGE_CORE_IDENTITY_STATE = REPLACEMENT_PENDING_APPROVED_MACHINE_REPAIR
+EARLY_ACTUAL_STATUS = NOT_RUN
+STAGE1_ADDITIONAL_CORRECTION_STEP3 = BOUNDED_MACHINE_REPAIR_IN_PROGRESS_DISABLED
+SECOND_MACHINE_FAILURE = BOUNDED_MECHANICAL_REPAIR_SECOND_FAILURE_STOP
+COMMON_DEFECT_AT_COUNT2 = COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP_WITHOUT_CORRECTION
+ROUTE_LEVEL_CEILING = IMMEDIATE_STOP
+ALL_THREE_CLEAR = LANGUAGE_VIABILITY_OBSERVED_INTERNAL_ONLY
+THIRD_GENERIC_CORRECTION_ALLOWED = FALSE
+SECOND_MACHINE_REPAIR_ALLOWED = FALSE
+STEP4 = NOT_STARTED
+FORMAL_EXACT8 = NOT_RUN
+PRODUCT_READ_EVALUATED_FOR_THIS_UNIT = FALSE
+PRODUCT_PASS = NOT_DECLARED
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+CANDIDATE_READY = FALSE
+READY_OR_MERGE = 0
+PRODUCTION_EFFECT = 0
+AUTOMATIC_PROGRESSION = FALSE
+```
+
+repair後はnew identityをfreezeし、同じfrozen private input bytesとnew exclusive outputでStep 3全体をexact1回だけ再実行する。成立条件はknown machine invariant、Ultra known technical invariant、withheld body-free machine invariant、Pro body-free human resultのrequired CLEARである。結果にかかわらず今回のauthorityはStep 3 receiptで尽き、Step 4へ自動進行しない。
