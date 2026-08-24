@@ -5,14 +5,14 @@
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - Phase 2 product-route verdict: `ADOPT_WITH_BOUNDED_CORRECTIONS_REFLECTED`
 - canonical field / ref / schema / version owner: `THIS_FILE`
-- schema registration: `EMLIS_STAGE1_V1_CURRENT_REGISTERED_DISABLED_PRODUCT_REJECTED__ADDITIONAL_CORRECTION_FINAL_IDS_AND_SUBJECTIVE_V2_REGISTERED_DISABLED`
-- private Python contract mapping: `STEP7_V2_IMPLEMENTED_DISABLED_PRODUCT_REJECTED / ADDITIONAL_CORRECTION_STEP1_REGISTERED_DISABLED_AT_21392275b6684fe852f111143747db92ad74a4fb`
+- schema registration: `EMLIS_STAGE1_V1_CURRENT_REGISTERED_DISABLED_PRODUCT_REJECTED__ADDITIONAL_CORRECTION_STEP2_LANGUAGE_CORE_FROZEN_DISABLED`
+- private Python contract mapping: `STEP7_V2_IMPLEMENTED_DISABLED_PRODUCT_REJECTED / ADDITIONAL_CORRECTION_STEP2_COMPLETE_DISABLED_AT_d26b3521f0cd63421af3596277145b2e52dafbbe`
 - public runtime serialization / cutover effect: `0`
 - DB / API effect: `0`
-- current authorized next implementation: `NONE_AFTER_ADDITIONAL_CORRECTION_STEP1`
+- current authorized next implementation: `NONE_AFTER_ADDITIONAL_CORRECTION_STEP2`
 - automatic progression: `false`
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
-- Stage 1 additional correction schema delta: `STEP1_FINAL_IDS_AND_SUBJECTIVE_V2_REGISTERED_DISABLED / STEP2_NOT_STARTED`
+- Stage 1 additional correction schema delta: `STEP2_FINAL_LANGUAGE_CORE_IDENTITY_FROZEN_DISABLED / EARLY_ACTUAL_NOT_RUN`
 
 ---
 
@@ -3111,3 +3111,33 @@ ACTIVE_REALIZER_OR_RUNNER_EFFECT = 0
 PARALLEL_SCHEMA_COMPILER_SERIALIZER_OWNER = 0
 UNFIXED_FIELD = 0
 ```
+
+## 26. Stage 1 additional correction Step 2 — language-core identity registration（2026-08-24）
+
+Step 2はfinal language coreのbody-free identityを次でfreezeした。
+
+```text
+LANGUAGE_CORE_IDENTITY = b74ea2f448011c8a721ed0b08bca8caa5c794e3f07c149612030451015953ae9
+ALGORITHM_PREFIX = COCOLON_CMEE_STAGE1_LANGUAGE_CORE_IDENTITY_V1\x00
+ORDERED_PAYLOAD_COUNT = 16
+RAW_WHOLE_FILE_PAYLOAD_COUNT = 7
+CANONICAL_MANIFEST_PAYLOAD_COUNT = 9
+```
+
+whole-file exact7はcomposition自身と、`contracts.py`、`emlis_stage1_response.py`、`emlis_v1a.py`、fresh承認されたgrounded observation plan、shared composer、observation adapterである。各path / payloadをuint64 big-endian length framingし、UTF-8 file bytesをnewline込みでhashする。source slice、AST、bytecode、mtime、working-tree orderはidentity materialではない。
+
+manifest exact9は次をexact orderで持つ。
+
+1. transitive product-causal contract closure。field名だけでなくlogical type、cardinality、default、conditional constraint、version、content derivationを含む。
+2. construction registry。
+3. Emlis expression assets。
+4. response-object reference assets。
+5. functional relation / qualifier / scalar / source-scalar morphology assets。
+6. participant lexeme assets。
+7. structural whitespace / punctuation assets。
+8. V1–V9 policy / closed enum / ref preimage / validator / product-causal owner manifestとfresh policy behavior digest。
+9. exact5 layout、exact6 normal form、defect exact8、profile exact8、Stage A/B reduction / rank manifest。
+
+policy behavior digestはsuppression feature matrix `2^13 = 8,192` rowsと、visibility matrix `2^12 × Reception act exact7 = 28,672` rowsをcanonical orderでfresh再計算する。digest expected / fresh mismatch、manifest名 / count / order drift、allowlist外product-causal callableはnamed identity STOPである。
+
+このidentityはStep 3 earlyと将来final cutoverのbyte-exact共通条件であり、Product PASS、public schema activation、API / DB field、persistence contractではない。現在はregistered-disabledで、active v1 serializer / runtime outputへdelta 0、`EARLY_ACTUAL_STATUS=NOT_RUN`、candidate ready false、automatic progression falseである。

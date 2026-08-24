@@ -8,7 +8,7 @@
 - scope: `EmlisAI Stage 1 / Layer 1 + Layer 2`
 - technical schema authority: `../05_json_schema_and_versioning.md`
 - technical realization authority: `../02_emlis_v1a_detailed_design.md`
-- implementation / production effect: `0`
+- registered-disabled implementation / production effect: `1 / 0`
 - product credit: `0`
 - automatic progression: `false`
 
@@ -226,3 +226,17 @@ implementation順、schema、ref、trace、validator、changed paths、STOPはte
 次のimplementationは一つのbounded Stage 1 product correctionである。canonical docs、contracts、Layer 1、Layer 2、microgrammar、atomic owner cutover、tests、unchanged exact8 after、華恋pre-screen、Mash Product Readまでを別成果へ分割しない。
 
 question、Layer 3、Premium runtime effect、Piece、Analysis、Cycle、productionは権限外である。完了後も`automatic_progression=false`を維持する。
+
+## 12. Stage 1 additional correction Step 2 functional receipt（2026-08-24）
+
+Step 1のfinal type / invariant登録完了をfresh確認した後、Mashが承認したStep 2と、追加承認されたgrounded-observation upstream exact pathだけを実装した。これはactive v1 cutoverやProduct Readではなく、final Phase A / Phase B seamから同じrequest-local language coreを呼べるregistered-disabled実装である。
+
+body-freeに確認した機能結果は次である。
+
+- tension、temporal change、help-seeking、unfinishedのknown public-safe exact4は、source-bound typed relation / scalarを保持したままfinal APIからgrammatically completeな日本語へ4/4到達した。本文は本receiptへ保存しない。
+- Layer 1はadmitted relation、direction、action/change、residue/unfinishedを担当し、Layer 2はinput-specific appraisal、affect、agency/open stanceを別jobとして担当する。
+- relation direction、action/change、residue/unfinished、direction/burdenはtyped projectionからcomposition dutyまでlosslessに到達する。cause、personality、future guarantee、unknown-to-known promotionは追加しない。
+- material alternateを持つknown input exact1で、exact5 seedのinternal poolからnormalizer/profile/rankを通る複数memberを作り、可視構造の異なるprimary / alternate exact2を得た。
+- construction / expression / response-object / functional morphology / participant / structural registryはcase ID、finished sentence bank、random、legacy fallbackを持たない。
+
+この4/4はStep 2 machine exitであり、Step 3のUltra technical read / Pro language viability readではない。したがって`EARLY_ACTUAL_STATUS=NOT_RUN`、Product PASS未評価、`candidate_ready=false`、product / technical credit 0、`automatic_progression=false`を維持する。Step 3以後はfresh explicit approvalなしに開始しない。

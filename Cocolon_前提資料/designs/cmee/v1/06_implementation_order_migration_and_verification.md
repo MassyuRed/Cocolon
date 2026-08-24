@@ -4,8 +4,8 @@
 - revision date: `2026-08-24 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - absolute implementation rule: `BOUND_TO_PARENT_FINAL_DESIGN_SECTION_0_3`
-- current implementation state: `STAGE1_ADDITIONAL_CORRECTION_STEP1_COMPLETE_DISABLED`
-- current authorized next implementation: `NONE_AFTER_ADDITIONAL_CORRECTION_STEP1`
+- current implementation state: `STAGE1_ADDITIONAL_CORRECTION_STEP2_COMPLETE_DISABLED`
+- current authorized next implementation: `NONE_AFTER_ADDITIONAL_CORRECTION_STEP2`
 - only admissible next implementation class: `ONE_BOUNDED_ACTUAL_PRODUCT_ARTIFACT_IMPROVEMENT_UNIT`
 - historical provider admission: `NO_SAFE_CMEE_V1A_CANDIDATE_STOP`
 - historical L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
@@ -14,7 +14,7 @@
 - D0 / L3-R / P0 / P0-R1 / L3-I lifecycle: `RETIRED_HISTORICAL_NONREUSABLE`
 - automatic progression: `false`
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
-- Stage 1 additional correction final body: `PRO_CONFIRMED_INTEGRATION_SOURCE / MASH_LEVEL3_STEP1_APPROVED_COMPLETE_DISABLED / STEP2_NOT_STARTED`
+- Stage 1 additional correction final body: `PRO_CONFIRMED_INTEGRATION_SOURCE / MASH_LEVEL3_STEP2_APPROVED_COMPLETE_DISABLED / EARLY_ACTUAL_NOT_RUN`
 - Stage 1 additional correction order owner: `THIS_FILE_SECTION_30_ROUTING_TO_FINAL_BODY_SECTION_13`
 
 ---
@@ -2459,3 +2459,91 @@ STOP_AFTER_STEP1 = true
 ```
 
 Step 1 authorityはここで尽きる。Step 2以後を開始するにはfresh explicit approvalを必要とし、本receiptまたはmachine GREENを暗黙の進行許可として扱わない。
+
+## 33. Stage 1 additional correction Step 2 — final language-core completion receipt（2026-08-24）
+
+本節は§32のStep 1完了を上書きせず、そのfinal registered-disabled headをStep 2 preimageとしてfresh確認した後のcompletion receiptである。MashはStep 2を明示承認し、実装中に必要性が確定した次のupstream exact path expansionもfresh LEVEL_3で追加承認した。
+
+```text
+ai/services/ai_inference/emlis_ai_grounded_observation_plan.py
+```
+
+System Context v1は今回のapproved type / path / owner判断に追加情報を必要としなかったため使用していない。
+
+### 33.1 Changed paths / sole owners
+
+```text
+mashos-api changed paths = exact6
+  ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py
+  ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py
+  ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py
+  ai/services/ai_inference/emlis_ai_grounded_observation_plan.py
+  ai/tests/test_cmee_v1a_i1sx_contracts.py
+  ai/tests/test_cmee_v1a_i1sx_vertical.py
+
+Cocolon changed paths = exact4
+  Cocolon_前提資料/designs/cmee/v1/karen_derived/01_emlis_observation_and_reception.md
+  Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md
+  Cocolon_前提資料/designs/cmee/v1/05_json_schema_and_versioning.md
+  Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md
+```
+
+logical job label / sole callable mappingは§30.3をそのまま適用した。`project_subjective_meaning_plan`、`project_stage1_discourse_arc`、`compose_stage1_from_projection`、`normalize_to_normal_form`、`derive_discourse_preference_profile`がexact1 ownerであり、旧logical labelと同名のparallel functions exact0である。
+
+final-only Phase A / B adapterはsource、graph、grounded plan、parent plan、candidate→frame、relation `(R, role, ref)→D`、qualifier exact3、registry snapshotをfresh exact-coverする。final projectionはnested `SubjectivePropositionV2`を使う。active v1 compile / response、shared S9、public bundle、provider、API、DB、RN、persistence、current_structureは変更しない。
+
+### 33.2 Machine exit
+
+body-full known exact4は本receiptへ保存しない。body-free resultだけを次へ固定する。
+
+```text
+KNOWN_PUBLIC_SAFE_STRUCTURES = 4 / 4 ACTUAL_JAPANESE_REACHED
+RELATION_DIRECTION = 4 / 4 TYPED_EXACT
+SOURCE_SCALAR_FINITE_MORPHOLOGY = PASS
+MATERIAL_FIXTURE_INTERNAL_CANDIDATES = 4
+MATERIAL_FIXTURE_VISIBLE_RANKED_CANDIDATES = 2
+NORMAL_FORM_PHASES = EXACT6
+POST_NORMALIZATION_CORRECTABLE_DEFECTS = EXACT0
+NORMALIZATION_IDEMPOTENCE = PASS
+PROFILE_FIELDS / EVIDENCE = EXACT8 / EXACT8
+REGISTRY_INVARIANT = PASS
+ACTIVE_V1_GROUNDED_BUILDER_EQUIVALENCE = 8 / 8
+COMBINED_TESTS = 138 / 138 PASS
+PYTHON_COMPILE = PASS
+GIT_DIFF_CHECK = PASS
+```
+
+language-core identityは次でfreezeする。
+
+```text
+LANGUAGE_CORE_IDENTITY = b74ea2f448011c8a721ed0b08bca8caa5c794e3f07c149612030451015953ae9
+ORDERED_PAYLOADS = EXACT16
+WHOLE_FILES / MANIFESTS = EXACT7 / EXACT9
+POLICY_SUPPRESSION_ROWS = 8192
+POLICY_VISIBILITY_ROWS = 28672
+```
+
+manifestはfield-name自己確認だけにせず、logical contract descriptors、V1–V9 policy behavior digest、closed enums / ref preimages / validator rules、exact5 seed、exact6 normalizer、exact8 profile、Stage A/B reducerを独立再計算可能なcanonical bytesとして保持する。compositionまたはexternal exact6 allowlist外のproduct-causal dependencyは`LANGUAGE_CORE_DEPENDENCY_SCOPE_STOP`である。
+
+### 33.3 Exit / STOP
+
+```text
+STAGE1_ADDITIONAL_CORRECTION_STEP0 = COMPLETE
+STAGE1_ADDITIONAL_CORRECTION_STEP1 = CONFIRMED_COMPLETE_DISABLED
+STAGE1_ADDITIONAL_CORRECTION_STEP2 = COMPLETE_DISABLED
+PRIMARY_OUTCOME = FINAL_LANGUAGE_CORE_FROZEN_DISABLED
+
+EARLY_ACTUAL_STATUS = NOT_RUN
+EARLY_HUMAN_READ_RESULT = NOT_RUN
+STEP3 = NOT_RUN
+PRODUCT_READ_EVALUATED_FOR_THIS_UNIT = FALSE
+PRODUCT_PASS = NOT_DECLARED
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+CANDIDATE_READY = FALSE
+CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_ADDITIONAL_CORRECTION_STEP2
+AUTOMATIC_PROGRESSION = FALSE
+STOP_AFTER_STEP2 = true
+```
+
+known exact4のmachine generationはStep 3 early actualを自己成立させない。Step 3以後、withheld exact4、人間language read、Step 4 state / trace / S9 validator、Step 5 atomic cutover、formal exact8、Product Read、current_structure / handoff同期、ready、merge、productionへ自動進行しない。次のeffectにはfresh explicit approvalが必要である。

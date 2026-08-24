@@ -3,23 +3,23 @@
 - document id: `cocolon.cmee.v1a.emlis_observation.detailed_design`
 - revision date: `2026-08-24 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- runtime state: `DRAFT_WIP_DISABLED_PRODUCT_FAIL_ADDITIONAL_CORRECTION_STEP1_COMPLETE_DISABLED`
-- implementation evidence owner: `MassyuRed/mashos-api Draft PR #3 @ 21392275b6684fe852f111143747db92ad74a4fb`
+- runtime state: `DRAFT_WIP_DISABLED_PRODUCT_FAIL_ADDITIONAL_CORRECTION_STEP2_COMPLETE_DISABLED`
+- implementation evidence owner: `MassyuRed/mashos-api Draft PR #3 @ d26b3521f0cd63421af3596277145b2e52dafbbe`
 - current Stage 1 correction checkpoint: `STEP7_V2_MACHINE_GREEN_PRODUCT_REJECTED`
-- current Stage 1 additional correction checkpoint: `STEP1_COMPLETE_DISABLED_STEP2_NOT_STARTED`
+- current Stage 1 additional correction checkpoint: `STEP2_COMPLETE_DISABLED_EARLY_ACTUAL_NOT_RUN`
 - R1–R4 state: `CLOSED_GREEN`
 - original exact8 machine structural state: `8/8`
 - private human Product Read: `EVALUATED_FAIL_STOP`
 - candidate ready: `false`
 - production admission: `false`
-- current authorized next implementation: `NONE_AFTER_ADDITIONAL_CORRECTION_STEP1`
+- current authorized next implementation: `NONE_AFTER_ADDITIONAL_CORRECTION_STEP2`
 - automatic progression: `false`
 - Cycle001 effect: `0`
 - L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
 - Phase 0 / P0 / P0-R1 / standalone product-delta-0 L3-R / L3-I lifecycle: `RETIRED_HISTORICAL_NONREUSABLE`
 - current implementation rule: `PRODUCT_QUALITY_DELTA_GT_0_AND_MASH_CONFIRMED_ONLY`
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
-- Stage 1 additional correction final body: `PRO_CONFIRMED_INTEGRATION_SOURCE / STEP1_COMPLETE_DISABLED / STEP2_NOT_STARTED`
+- Stage 1 additional correction final body: `PRO_CONFIRMED_INTEGRATION_SOURCE / STEP2_COMPLETE_DISABLED / EARLY_ACTUAL_NOT_RUN`
 
 ---
 
@@ -1143,3 +1143,61 @@ CURRENT_V1_RUNTIME_EFFECT = 0
 STEP2 = NOT_STARTED
 AUTOMATIC_PROGRESSION = FALSE
 ```
+
+## 28. Stage 1 additional correction Step 2 — final language core（2026-08-24）
+
+本節はcanonical 06 §33のcompletion receiptと同一stateを記録する。開始前にStep 1 `COMPLETE_DISABLED`、両Draft PRのapproved head、final body bytesをfresh確認した。作業中にfinal known structuresをtypedに成立させるため、Mashがfresh LEVEL_3で次のupstream exact pathを追加承認した。
+
+```text
+ai/services/ai_inference/emlis_ai_grounded_observation_plan.py
+```
+
+同pathはfinal-only builderでcompound action/change、residue/unfinished、direction/burdenをtyped projectionする。active `build_grounded_observation_plan()`の既存8入力結果はpreimageとbyte-equivalentで、active public path / provider / API / DB / RN / persistence / production effectは0である。
+
+### 28.1 Sole staged implementation owners
+
+canonical 06 §30.3に従い、final body §13の旧5名はlogical job labelとして次へ一意に写した。旧4名と同名のparallel production functionは作っていない。
+
+| Logical job | Sole implementation owner |
+|---|---|
+| subjective meaning | `project_subjective_meaning_plan(phase_A)` |
+| discourse planning | `project_stage1_discourse_arc(phase_B)` + same-phase exact5 seed/layout projector |
+| draft composition | `compose_stage1_from_projection(phase_B)`内のtyped draft linearization |
+| normal form | `normalize_to_normal_form(draft, same_seed, same_phase_B)` exact1 |
+| profile / rank | `derive_discourse_preference_profile()` + Stage A/B reducer + global rank |
+
+`emlis_stage1_response.py`はpublic pure seam exact3でPhase A inputを構築し、subjective meaningからfinal projectionをsealし、fresh Phase B inputを構築する。compositionからresponseへのreverse import、callback、viability-only flag、legacy v1 fallbackは0である。final projectionだけがv2 nested `SubjectivePropositionV2`を使い、active v1 compile pathは不変である。
+
+### 28.2 Construction, morphology, normal form and rank
+
+- construction exact8とtyped expression / response-object / relation / scalar / source-scalar / participant / structural assetsをclosed registryで検証する。
+- source scalarはtyped `surface_scalar_range`と`surface_scalar_source:normalized_raw_text` exact1を使い、upstream同値whitespace normalizationとregistered finite-form morphologyだけでactual surfaceへ写す。
+- admitted relation direction、source dependency、grounded→subjective、subjective content、unfinished terminalをfull `ArcDependencyRow`へ投影し、direct endpoint absorption後もowner coverageを失わない。
+- `LayoutPreferenceSeed` exact5 dimensionsを各1..2で完全列挙し、cross-product cap exact32、typed dependency filter、0 / 3+ named STOPを持つ。normalizer phase 2はseed partitionを別canonical layoutへ潰さない。
+- exact6 normalizerはpost-artifact defect projector exact8を実行し、typed defect exact0を証明した時だけcanonical bytesを返す。同じseed / Phase Bで二度目のnormalization bytes、duty、suppression、surface、response-object rowsは不変である。
+- exact8 profileはsealed typed evidenceからcandidateごとにderiveし、NOT_APPLICABLE maskをpool-globalで一致させる。Stage Aはfull exact-member bytes、Stage Bはfull visible-equivalence bytesとprofile/signatureだけを使い、hash-only / first-seen / ID tie-breakを使わない。
+
+known public-safe exact4はfinal APIからactual Japaneseへ4/4到達した。body-full textはこのcanonical receiptへ保存しない。material fixtureではinternal candidate exact4がnormalizer/profile/rankを通り、visible-equivalenceの異なるranked candidate exact2を保持した。
+
+### 28.3 Frozen state and boundary
+
+```text
+LANGUAGE_CORE_IDENTITY = b74ea2f448011c8a721ed0b08bca8caa5c794e3f07c149612030451015953ae9
+LANGUAGE_CORE_PAYLOADS = EXACT16
+WHOLE_FILE_PAYLOADS = EXACT7
+MANIFEST_PAYLOADS = EXACT9
+COMBINED_TESTS = 138 / 138 PASS
+
+STAGE1_ADDITIONAL_CORRECTION_STEP2 = COMPLETE_DISABLED
+EARLY_ACTUAL_STATUS = NOT_RUN
+STEP3 = NOT_RUN
+PRODUCT_READ_EVALUATED_FOR_THIS_UNIT = FALSE
+PRODUCT_PASS = NOT_DECLARED
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+CANDIDATE_READY = FALSE
+CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_ADDITIONAL_CORRECTION_STEP2
+AUTOMATIC_PROGRESSION = FALSE
+```
+
+Step 2のknown exact4 machine generationはStep 3 human language viability observationを代行しない。identity対象のfile bytes / manifest / product-causal behaviorを今後変更した場合、`EARLY_ACTUAL_STATUS`は引き続き`NOT_RUN`であり、fresh Step 3前に新identityを明示承認しなければならない。
