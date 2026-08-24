@@ -4,8 +4,8 @@
 - revision date: `2026-08-24 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - absolute implementation rule: `BOUND_TO_PARENT_FINAL_DESIGN_SECTION_0_3`
-- current implementation state: `STAGE1_ADDITIONAL_CORRECTION_STEP2_COMPLETE_DISABLED`
-- current authorized next implementation: `NONE_AFTER_ADDITIONAL_CORRECTION_STEP2`
+- current implementation state: `STAGE1_ADDITIONAL_CORRECTION_STEP3_COMMON_DEFECT_RETURN_IN_PROGRESS_DISABLED`
+- current authorized next implementation: `APPROVED_INTERNAL_RETURN_TO_STEP2_CAUSE_COMPONENT_ONLY`
 - only admissible next implementation class: `ONE_BOUNDED_ACTUAL_PRODUCT_ARTIFACT_IMPROVEMENT_UNIT`
 - historical provider admission: `NO_SAFE_CMEE_V1A_CANDIDATE_STOP`
 - historical L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
@@ -14,7 +14,7 @@
 - D0 / L3-R / P0 / P0-R1 / L3-I lifecycle: `RETIRED_HISTORICAL_NONREUSABLE`
 - automatic progression: `false`
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
-- Stage 1 additional correction final body: `PRO_CONFIRMED_INTEGRATION_SOURCE / MASH_LEVEL3_STEP2_APPROVED_COMPLETE_DISABLED / EARLY_ACTUAL_NOT_RUN`
+- Stage 1 additional correction final body: `PRO_CONFIRMED_INTEGRATION_SOURCE / STEP3_COMMON_DEFECT_BODY_FREE_RETURN / EARLY_ACTUAL_NOT_RUN`
 - Stage 1 additional correction order owner: `THIS_FILE_SECTION_30_ROUTING_TO_FINAL_BODY_SECTION_13`
 
 ---
@@ -2547,3 +2547,63 @@ STOP_AFTER_STEP2 = true
 ```
 
 known exact4のmachine generationはStep 3 early actualを自己成立させない。Step 3以後、withheld exact4、人間language read、Step 4 state / trace / S9 validator、Step 5 atomic cutover、formal exact8、Product Read、current_structure / handoff同期、ready、merge、productionへ自動進行しない。次のeffectにはfresh explicit approvalが必要である。
+
+## 34. Stage 1 additional correction Step 3 — common-defect return transition（2026-08-25）
+
+本節は§33よりfreshである。Mashが明示承認したStep 3でknown public-safe exact4とrepo外private withheld exact4を、Step 2でfreezeした同一language coreからactual Japaneseまで生成した。known本文はUltra華恋がtechnical invariant、Pro華恋がlanguage viabilityを読み、withheld body-fullはPro華恋exact1だけが読んだ。本文、個別digest、private locatorは本receiptへ保存しない。
+
+machine invariantはknown / withheldとも`CLEAR`であった。一方、Proのbody-free human transition input exact1は、複数bodyへ共通し、approved type / enum / path / provider / privacy / candidate budgetを変えず既存原因componentへ一般修正できる欠陥を`COMMON_DEFECT`へ分類した。これはacceptance statusではなく、final body §13のcounter transition exact1である。
+
+```text
+TRANSITION_ORIGIN = STEP3
+RUNTIME_REPO_HEAD = b26a3d026839884fc9f97005735081fc19480ac5
+DESIGN_REPO_HEAD = 2e65fdea3f628c298ee93211efd2c596162946c5
+LANGUAGE_CORE_IDENTITY_PRE_RETURN = b74ea2f448011c8a721ed0b08bca8caa5c794e3f07c149612030451015953ae9
+WITHHELD_SET_DIGEST = e09e2cfd66830a14e15e1f5aa02a4858226394663b89728f657325a22663c31c
+
+KNOWN_SET_COUNT / ACTUAL_JAPANESE / MACHINE_CLEAR = 4 / 4 / 4
+WITHHELD_SET_COUNT / ACTUAL_JAPANESE / MACHINE_CLEAR = 4 / 4 / 4
+STRUCTURAL_FAMILIES = TENSION_1 / TEMPORAL_CHANGE_1 / HELP_SEEKING_1 / UNFINISHED_1
+MATERIAL_ALTERNATE_CASE_COUNT = KNOWN_4 / WITHHELD_4
+NORMAL_FORM_PHASE_EXACT6 = WITHHELD_4 / 4
+NORMAL_FORM_DEFECT_FREE = WITHHELD_4 / 4
+NORMALIZATION_IDEMPOTENT = WITHHELD_4 / 4
+REQUIRED_DUTY_COVERAGE_EXACT = WITHHELD_4 / 4
+
+EARLY_HUMAN_READ_RESULT_TRANSIENT = COMMON_DEFECT
+BODY_FREE_DEFECT_CLASS = GENERIC_SUBJECTIVE_CONTENT
+CAUSE_COMPONENT = SUBJECTIVE_MEANING_PLANNER
+RAW_BODY = 0
+CASE_OR_FIXTURE_IDENTIFIER = 0
+CASE_PATCH_OR_PHRASE_FAMILY_RULE = 0
+FINISHED_SENTENCE_ASSET = 0
+NEW_ENUM_AXIS_PATH_PROVIDER_DEPENDENCY = 0
+PRIVATE_INDIVIDUAL_DIGEST_PUBLICATION = 0
+PRIVATE_LOCATOR_PUBLICATION = 0
+
+COMMON_DEFECT_RETURN_COUNT_BEFORE = 0
+COMMON_DEFECT_RETURN_COUNT_AFTER = 1
+COMMON_DEFECT_RETURN_INCREMENT = 1
+COMMON_DEFECT_RETURN_MAX = 2
+COMMON_DEFECT_RETURN_COUNT_SCOPE = cocolon.cmee.stage1.additional_correction.route_a.20260824.v1
+COUNTER_RESET = 0
+COUNTER_OWNER_1_SYNC = COCOLON_V1_06_BODY_FREE_PACKET
+COUNTER_OWNER_2_SYNC = MASHOS_DURABLE_HANDOFF
+
+LANGUAGE_CORE_IDENTITY_STATE = STEP2_FROZEN_PRE_RETURN__REPLACEMENT_PENDING_APPROVED_GENERIC_CORRECTION
+EARLY_ACTUAL_STATUS = NOT_RUN
+STAGE1_ADDITIONAL_CORRECTION_STEP3 = RETURN_IN_PROGRESS
+INTERNAL_RETURN_TARGET = STEP2_SUBJECTIVE_MEANING_PLANNER
+FRESH_STEP3_RERUN_REQUIRED = TRUE
+STEP4 = NOT_STARTED
+PRODUCT_READ_EVALUATED_FOR_THIS_UNIT = FALSE
+PRODUCT_PASS = NOT_DECLARED
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 0
+CANDIDATE_READY = FALSE
+NEXT_GATE_PROGRESSION = 0
+AUTHORITY_TERMINAL = FALSE
+AUTOMATIC_PROGRESSION = FALSE
+```
+
+同一approved unit内で、既存のsubjective opportunity / suppression軸に限定した一般修正後にnew `LANGUAGE_CORE_IDENTITY`をfreezeし、このcountをresetせずfresh Step 3を再実行する。listed外path、case / phrase-family rule、finished sentence、new enum / axis、provider等が必要なら本transitionを使わず`ROUTE_LEVEL_CEILING` terminalへ移る。
