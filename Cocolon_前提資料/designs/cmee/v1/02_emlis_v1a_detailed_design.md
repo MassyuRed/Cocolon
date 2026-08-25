@@ -1,25 +1,25 @@
 # CMEE V1-A — EmlisAI Observation Vertical 詳細設計
 
 - document id: `cocolon.cmee.v1a.emlis_observation.detailed_design`
-- revision date: `2026-08-24 JST`
+- revision date: `2026-08-25 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- runtime state: `DRAFT_WIP_DISABLED_PRODUCT_FAIL_ADDITIONAL_CORRECTION_STEP2_COMPLETE_DISABLED`
+- runtime state: `DRAFT_WIP_DISABLED_PRODUCT_FAIL_ADDITIONAL_CORRECTION_STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP`
 - implementation evidence owner: `MassyuRed/mashos-api Draft PR #3 @ d26b3521f0cd63421af3596277145b2e52dafbbe`
 - current Stage 1 correction checkpoint: `STEP7_V2_MACHINE_GREEN_PRODUCT_REJECTED`
-- current Stage 1 additional correction checkpoint: `STEP2_COMPLETE_DISABLED_EARLY_ACTUAL_NOT_RUN`
+- current Stage 1 additional correction checkpoint: `STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP / COUNT_2_OF_2 / EARLY_ACTUAL_NOT_RUN`
 - R1–R4 state: `CLOSED_GREEN`
 - original exact8 machine structural state: `8/8`
 - private human Product Read: `EVALUATED_FAIL_STOP`
 - candidate ready: `false`
 - production admission: `false`
-- current authorized next implementation: `NONE_AFTER_ADDITIONAL_CORRECTION_STEP2`
+- current authorized next implementation: `NONE`
 - automatic progression: `false`
 - Cycle001 effect: `0`
 - Stage 1 language route: `ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER / SOLE_CURRENT_AND_FUTURE_ROUTE`
 - Phase 0 / P0 / P0-R1 / standalone product-delta-0 L3-R / L3-I lifecycle: `RETIRED_HISTORICAL_NONREUSABLE`
 - current implementation rule: `PRODUCT_QUALITY_DELTA_GT_0_AND_MASH_CONFIRMED_ONLY`
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
-- Stage 1 additional correction final body: `PRO_CONFIRMED_INTEGRATION_SOURCE / STEP2_COMPLETE_DISABLED / EARLY_ACTUAL_NOT_RUN`
+- Stage 1 additional correction final body: `ROUTE_A_ONLY / STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP / EARLY_ACTUAL_NOT_RUN`
 
 ---
 
@@ -224,7 +224,7 @@ independent admission closure:
 
 providerのcandidate-local `UNIQUE`またはempty ambiguity listはadmissionではない。attachment set ID / digest、source version、resource lock、approved contract、formal denominator、independent mutation evidenceが一致しなければvisible dutyへ使用しない。
 
-official候補のcurrent comparisonでは`FORMAL_CLOSED`を成立させるconcrete providerが確認できていない。providerless Route Aのper-owner disposition、provisional graph隔離、one-clarification lifecycleを含むexact acceptance contractとbounded preflightがapproved body v1.0.0へ固定されたこと、P0 evidence / L3-Iが成立しなかったことはhistorical factsとして保持する。P0 / L3-Iはcurrent admission prerequisiteではない。provider outputはproviderless Route A product contractに従い、§0.2の同一unit内で得るactual artifactの商品品質でだけ判断する。
+過去のprovider-first comparison、bounded preflightおよびそのexact literal identityはGit commit historyだけに残り、current treeのdesign input、admission prerequisite、fallbackまたは再承認候補ではない。current providerless Route Aは外部provider outputを受け付けず、source-owner resolutionはlocal source / user evidenceだけで閉じる。
 
 ## 6. `EmlisMeaningGraph` extension
 
@@ -442,21 +442,9 @@ raw bodyをGitHubへ保存しない。
 
 別Mash判断後、fresh applicable `08_cycle001_current_state.md`だけをtechnical navigation ownerとして従う。08が指すactive planはrestart / evidence bundleであり、同格のnavigation ownerではない。CMEE設計もCycle navigation ownerではない。
 
-非選択のRoute A formal contractはcurrent workへ採用しない。以下は2026-08-15設計時のhistorical acceptance evidenceとして保持し、alternate provider / preflight / reapproval routeに使わない。
+2026-08-15のprovider-first比較と当時のroute-specific identityはcurrent treeから除去した。exact historical bytesはGit commit historyだけに残り、current contract、alternate route、preflight、fallbackまたはreapproval authorityを持たない。
 
-```text
-owner-bound authority 251/251
-exact predicate range
-authoritative lemma / inflection
-argument span / case role / governing edge
-formal open-slot denominator established
-scope / provenance exact
-ambiguity 0 / unresolved 0 independently derived
-forbidden replay / append 0
-relation / unknown / self-denial / lifecycle preserved
-```
-
-providerless Route A directionは選択済みだが、Cycle001のStep1 contract変更は未承認である。適用にはseparate C0とfresh `08`判断を必要とし、このdetail suiteまたはL3-R selection receiptだけで251 denominator、visible claim authority、P1–P7、Cycle acceptanceを緩和しない。
+providerless Route A exact1がcurrent/future sole routeだが、Cycle001のStep1 contract変更は未承認である。適用にはseparate C0とfresh `08`判断を必要とし、このdetail suiteまたはretired commit historyだけで251 denominator、visible claim authority、P1–P7、Cycle acceptanceを緩和しない。
 
 ### Production cutover
 
@@ -491,7 +479,7 @@ CMEE_V1A_EMLIS_OBSERVATION_CANDIDATE_READY_DISABLED_NOT_ADMITTED
 
 このstateをCycle proof、production admission、Emlis question completionへ変換しない。machine checkと華恋pre-screenはMash確認を代替せず、Mash確認前は本stateまたはproduct creditを宣言しない。
 
-providerless Route A bounded preflight / exact acceptance contractがapproved body v1.0.0へ固定され、L3-Rが成立したことはhistorical factである。P0 measured PASS、separate L3-I、alternate executor、renamed preflightまたはreapprovalはremaining prerequisiteではない。別Mash承認後に許され得るimplementation class exact1は§0.2のone bounded actual Emlis artifact quality improvement unitだけである。
+retired provider-first packet、P0、separate L3-I、alternate executor、renamed preflightまたはreapprovalはremaining prerequisiteではなく、current treeへ戻さない。別Mash承認後に許され得るimplementation class exact1は、providerless Route Aだけを用いる§0.2のone bounded actual Emlis artifact quality improvement unitである。
 
 Cycle001のcurrent first unfinished gateはfresh applicable `08`が示す。CMEE prerequisiteをCycleのnavigation stateへ読み替えず、同時にCycleのtechnical Gateを、actual Emlis artifactの品質向上に先行する独立workへ変換しない。
 
