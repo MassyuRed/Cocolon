@@ -2841,7 +2841,7 @@ final exact3は`CLEAR / CLEAR / ROUTE_LEVEL_CEILING`であり、`LANGUAGE_VIABIL
 
 ## 44. Route A generic relation recognition extension and final Step 3 reactivation（2026-08-25）
 
-§43後のMash current instructionにより、external AI / Route Bは不採用とし、providerless Route AだけでStep 3を完了まで進める。これは§43のceiling terminalより新しいRoute A implementation authorityであり、`COMMON_DEFECT_RETURN_COUNT=2/2`はreset / incrementせず保持する。
+§43後のMash current instructionにより、external AI / alternate routeは不採用とし、providerless Route AだけでStep 3を完了まで進める。これは§43のceiling terminalより新しいRoute A implementation authorityであり、`COMMON_DEFECT_RETURN_COUNT=2/2`はreset / incrementせず保持する。
 
 追加するのはcase / phrase-family ruleではなく、source grammar上のbounded recognizer exact1である。quote / bracket depth 0のtop-level connective exact1だけをscanし、coexistenceをfragment-local wish exact1..2と必要時のm-row表記上曖昧なnominal endpoint exact0..1へ分解する。曖昧endpointは`state / fact / neutral`のまま保持し、wish / retained-intentionへ昇格しない。contrastはaffirmative wish + clause-final source-explicit constraintへ分解する。各childはexisting Evidence exact1とnormalized raw text exact scalar rangeへbindする。第三者owner / beneficiary / attribution、quoted / grouped content、malformed nesting、multiple link、relative nominal、negated wish / uncertainty / constraint、modifier内operator、simile-only exact2はfail-closedとし、self-evaluation safety owner、action→change / residue→unfinished projectorを先に適用する。
 
@@ -3108,13 +3108,13 @@ GENERIC_RELATION_SUBJECTIVE_PRIORITY = RELATIONAL_NONCOLLAPSE_BEFORE_ENDPOINT_LO
 CASE_ID_FAMILY_RAW_FIXTURE_EXPECTED_SENTENCE_SELECTOR = 0
 NEW_PATH_ASSET_ENUM_AXIS_DEPENDENCY_ROUTE = 0
 
-RUNTIME_CHANGED_PATHS = EXACT6
+RUNTIME_CHANGED_PATHS_FROM_PREIMAGE = EXACT5
   ai/services/ai_inference/emlis_ai_grounded_observation_plan.py
-  ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_v1a.py
   ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py
   ai/tests/test_cmee_v1a_i1sx_contracts.py
   ai/tools/cmee_v1a_i1sx_candidate_run.py
   ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md
+BOUND_UNCHANGED_SUPPORT_PATH = ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_v1a.py
 DESIGN_CHANGED_PATHS = EXACT1
   Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md
 
@@ -3150,3 +3150,64 @@ AUTOMATIC_PROGRESSION = FALSE
 ```
 
 new activation headsを固定した後だけsame frozen private exact4をfresh materializeする。known body-fullはUltra / Pro、withheld body-fullはProだけが読み、output exact2を直後に削除する。success exact3がすべて`CLEAR`のときだけ`EARLY_ACTUAL_STATUS=LANGUAGE_VIABILITY_OBSERVED`へ遷移する。
+
+## 49. Step 3 admitted-connective / finite-host Route A repair（2026-08-25）
+
+§48 activation headsのfresh early actualはknown / withheld machine invariant `CLEAR_4_OF_4 / CLEAR_4_OF_4`、known Pro language `CLEAR_4_OF_4`だったが、withheld Pro exact1はaggregate viable `1/4`、non-clear `3/4`の`COMMON_DEFECT / GENERIC_SUBJECTIVE_CONTENT / SUBJECTIVE_MEANING_PLANNER`だった。ceilingはなく、generic finite endpoint / connective admissionの不足によりrelation-bearing spanがwhole-nodeに残る共通欠陥である。private body、locator、語彙、per-case detailはPro外へ出していない。
+
+raw `が`にはrelation authorityを与えず、top-level candidateごとにowner-bound endpoint profile exact2とleft finite endpoint proofを作り、admitted candidate exact1だけをcontrastとして採用する。nominative、bare nominal、third-party owner、quote / group、admitted 0 / 2+は閉じる。negative finite inflection、連続bounded temporal prefix、polite wish、wish nominal copular、source-bound epistemic `とは` hostはexisting frozen operator axisの有限文法として処理する。case id、private term、phrase-family rule、expected sentence、new asset / enum / dependency / routeは0。
+
+```text
+PREIMAGE_RUNTIME_HEAD = d625c576b606ec939228642de596f8384fde8123
+PREIMAGE_DESIGN_HEAD = d0244467248ff5e7816bc00780d5bd02281c5bcb
+PREIMAGE_LANGUAGE_CORE_IDENTITY = 8e903ebec1ef4de2f646a824fae675eebcc16b9333b6ce7064d9702a6b28d59d
+PREIMAGE_MACHINE_KNOWN / WITHHELD = CLEAR_4_OF_4 / CLEAR_4_OF_4
+PREIMAGE_PRO_KNOWN / WITHHELD = CLEAR_4_OF_4 / COMMON_DEFECT_1_OF_4_VIABLE
+PREIMAGE_DEFECT_CLASS / CAUSE = GENERIC_SUBJECTIVE_CONTENT / SUBJECTIVE_MEANING_PLANNER
+PREIMAGE_CEILING_REASON = NONE
+PREIMAGE_PRIVATE_PACKET_BINDING_SHA256 = 85b668cb28ab406c902aa34381658d176e122a0722d3bbf92babfadff6dce9f1
+
+ADMITTED_BARE_GA = EXACT1_FROM_ENDPOINT_PROFILE_EXACT2_AND_LEFT_FINITE_PROOF
+RAW_GA_RELATION_AUTHORITY = 0
+NEGATIVE_FINITE_INFLECTION = EXISTING_AXIS_GRAMMAR_ONLY
+BOUNDED_TEMPORAL_PREFIX = ITERATIVE_EXACT_PREFIX_CONSUMPTION
+POLITE_WISH_NOMINAL_COPULAR_EPISTEMIC_HOST = EXISTING_WISH_AXIS_ONLY
+CASE_ID_PRIVATE_TERM_PHRASE_FAMILY_EXPECTED_SENTENCE_RULE = 0
+NEW_ASSET_ENUM_DEPENDENCY_ROUTE = 0
+
+RUNTIME_CHANGED_PATHS_FROM_PREIMAGE = EXACT5
+  ai/services/ai_inference/emlis_ai_grounded_observation_plan.py
+  ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py
+  ai/tests/test_cmee_v1a_i1sx_contracts.py
+  ai/tools/cmee_v1a_i1sx_candidate_run.py
+  ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md
+DESIGN_CHANGED_PATHS = EXACT1
+  Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md
+
+LANGUAGE_CORE_IDENTITY = 41619312c76f3640fcde089e45c4287819374624e6ba05df11909ae8a327d718
+RUNNER_SHA256 = a06964e5bba4c30c87186e026cb4288ae17397f36f56d0579d6d03273873075b
+STEP2_COMPOSITION_TESTS = 19_OF_19_PASS
+STEP3_EARLY_HARNESS_TESTS = 17_OF_17_PASS
+CONTRACT_TESTS = 123_OF_123_PASS
+VERTICAL_TESTS = 42_OF_42_PASS
+COMBINED_TESTS = 165_OF_165_PASS
+COMPILEALL = PASS
+
+PREIMAGE_EARLY_ACTUAL_RUN / RETRY / RERUN = 1 / 0 / 0
+PREIMAGE_FRESH_OUTPUT_CREATED / DELETED / REMAINING = 2 / 2 / 0
+PREIMAGE_NETWORK / EXTERNAL_AI / PROVIDER / BODY_SEND / COST = 0 / 0 / 0 / 0 / 0
+FROZEN_PRIVATE_INPUT_RETAINED = 1
+COMMON_DEFECT_RETURN_COUNT = 2_OF_2_KEEP
+COUNTER_RESET / COUNTER_INCREMENT = 0 / 0
+SOLE_ROUTE = ROUTE_A_PROVIDERLESS_EXACT1_ONLY
+PUBLIC_API / DB / RN / PRODUCTION_EFFECT = 0 / 0 / 0 / 0
+EARLY_ACTUAL_STATUS = NOT_RUN_PENDING_ADMITTED_CONNECTIVE_ACTIVATION_HEADS
+STEP3 = ROUTE_A_GENERIC_FINITE_HOST_REPAIR_VERIFIED_PENDING_FRESH_ACTUAL
+FORMAL_EXACT8 = NOT_RUN
+PRODUCT_READ_EVALUATED = FALSE
+CANDIDATE_READY = FALSE
+STEP4 = NOT_STARTED
+AUTOMATIC_PROGRESSION = FALSE
+```
+
+new activation headsを固定した後だけsame frozen private exact4をfresh materializeする。reader / cleanup / exact3 success境界は§48から変更しない。
