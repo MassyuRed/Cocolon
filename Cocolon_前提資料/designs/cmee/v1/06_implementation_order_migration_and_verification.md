@@ -3002,3 +3002,76 @@ AUTOMATIC_PROGRESSION = FALSE
 ```
 
 new activation headsを固定した後だけsame frozen private exact4をfresh materializeする。reader / output cleanup境界は§45から変更しない。
+
+## 47. Step 3 whole-node fallthrough repair and exact2 reception closure（2026-08-25）
+
+§46 activation headsのfresh early actualはknown / withheld machine `CLEAR_4_OF_4`、Pro exact1 `COMMON_DEFECT / GENERIC_SUBJECTIVE_CONTENT / SUBJECTIVE_MEANING_PLANNER`となった。body-free signatureは`TOP_LEVEL_RELATION_WHOLE_FALLTHROUGH`で、specialized wish+constraint以外のtop-level contrast spanがtyped exact2へ分かれずwhole source ownerのまま残り、appraisal / agency dutyが集中する。withheld affected countはaggregate `4/4`。private body、locator、per-case情報はPro外へ公開しない。
+
+既存action→change、residue→unfinished、coexistence、finite wish→constraintを先に適用した後、quote / bracket depth 0のtop-level contrast exact1だけをgeneric fallbackへ渡す。各endpointはnonempty / ordered / nonoverlap、implicit/current-user owner、fragment-local existing operator、endpoint-final finite predicate、same Evidenceとnormalized source scalar rangeを必須にする。generic `が、`は主格助詞との区別不能を避けて全拒否し、specialized finite wish→constraintのみ維持する。actionはexplicit perfective exact1が必要で、目的 / 用途の`のに`は拒否する。relationはexisting `contrast | wish_and_constraint`だけで、explicit relation kindをaction→change heuristicより先にbindする。
+
+CMEE human reception bridgeは、same-span typed relation exact1、generic endpoint exact2、target/support disjoint、source evidence exact一致を証明した場合だけ、reconstructed RR Moveのaggregate supportを受理する。Move act / polarity compatibilityは各Move targetへbindして検証し、pair whitelistを持たない。generic fact surfaceはsource objectとexisting role-local carrierだけを接続する。new axis / enum / asset / dependency / route / case selectorは0。
+
+```text
+AUTHORITY = MASH_CURRENT_EXPLICIT_ROUTE_A_ONLY_STEP3_COMPLETION
+PREIMAGE_RUNTIME_HEAD = c92dab04a5bbf258710820db1ed6bfdc84a6a711
+PREIMAGE_DESIGN_HEAD = ce1bc884c869e4f91dd97cfcf3786c2d6f714c93
+PREIMAGE_LANGUAGE_CORE_IDENTITY = 70fef2e11548d544714783a86fdb9036cf455bb63f6308b00cadfbf13676ff59
+PREIMAGE_BODY_FREE_MACHINE_PACKET_FILE_SHA256 = 8496c410238182733989715746e77adaf017ce1c2e477686d38a4b84866ee88c
+PREIMAGE_PRO_RESULT_FILE_SHA256 = 551727c51d727cb82cc9bddede724c63dedf0fbe3dc9acafc5d3ce18b429043c
+PREIMAGE_KNOWN_VISIBLE_PACKET_FILE_SHA256 = c6c2237cd61d3794c268ca4514f238dc93a8faff574d65c093bf1801b6f98c8c
+PREIMAGE_PRIVATE_PACKET_BINDING_SHA256 = acd9aafe875e615c2af097cd2d9e220a3f283181433d087f4d472e5522f79f5f
+WITHHELD_AFFECTED_AGGREGATE = 4_OF_4
+
+GENERIC_REPAIR = TOP_LEVEL_RELATION_WHOLE_FALLTHROUGH_TO_EXACT2_TYPED_ENDPOINTS
+SPECIALIZED_RECOGNIZER_PRIORITY = UNCHANGED
+GENERIC_GA_CONNECTIVE_AUTHORITY = 0
+GENERIC_ACTION_TENSE = EXPLICIT_PERFECTIVE_EXACT1
+SOURCE_FRAGMENT_BINDING = NORMALIZED_RAW_TEXT_EXACT_SCALAR_RANGE
+RELATION_KIND_DELTA = EXISTING_CONTRAST_OR_WISH_AND_CONSTRAINT_ONLY
+EXPLICIT_RELATION_KIND_PRIORITY = BEFORE_ACTION_CHANGE_HEURISTIC
+GENERIC_RECEPTION_SUPPORT = SAME_SPAN_TYPED_RELATION_EXACT1_ENDPOINT_EXACT2_ONLY
+GENERIC_RECEPTION_MOVE_VALIDATION = MOVE_LOCAL_TARGET_AND_POLARITY
+CASE_ID_FAMILY_RAW_FIXTURE_EXPECTED_SENTENCE_SELECTOR = 0
+NEW_PATH_ASSET_ENUM_AXIS_DEPENDENCY_ROUTE = 0
+SOURCE_MEANING_OWNER_POLARITY_MODALITY_TIME_UNKNOWN_SAFETY_AUTHORITY_DELTA = 0
+
+RUNTIME_CHANGED_PATHS = EXACT6
+  ai/services/ai_inference/emlis_ai_grounded_observation_plan.py
+  ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_v1a.py
+  ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py
+  ai/tests/test_cmee_v1a_i1sx_contracts.py
+  ai/tools/cmee_v1a_i1sx_candidate_run.py
+  ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md
+DESIGN_CHANGED_PATHS = EXACT1
+  Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md
+
+LANGUAGE_CORE_IDENTITY = f5c67079ae329d9a9e1c567ee25c6210a59a05ae766eef2bf1b751c11b746dcf
+RUNNER_SHA256 = 30bf7588f6ce6db01aacd5242e9369c0d072e1232456c1ec190eaeba96358bbc
+STEP2_COMPOSITION_TESTS = 19_OF_19_PASS
+STEP3_EARLY_HARNESS_TESTS = 17_OF_17_PASS
+CONTRACT_TESTS = 123_OF_123_PASS
+VERTICAL_TESTS = 42_OF_42_PASS
+COMBINED_TESTS = 165_OF_165_PASS
+COMPILEALL = PASS
+INDEPENDENT_TECHNICAL_AUDIT = CLEAR_BLOCKER_0_MAJOR_0
+ORDERED_GENERIC_KIND_PAIR_MATRIX = CLEAR_81_OF_81
+CONNECTOR_VARIANT_MATRIX = CLEAR_16_OF_16
+OWNER_EXISTENTIAL_COPULAR_PASSIVE_ADVERSARIAL = PROJECTION_0
+
+PREIMAGE_EARLY_ACTUAL_RUN / RETRY / RERUN = 1 / 0 / 0
+PREIMAGE_FRESH_OUTPUT_CREATED / DELETED / REMAINING = 2 / 2 / 0
+PREIMAGE_NETWORK / EXTERNAL_AI / PROVIDER / BODY_SEND / COST = 0 / 0 / 0 / 0 / 0
+FROZEN_PRIVATE_INPUT_RETAINED = 1
+COMMON_DEFECT_RETURN_COUNT = 2_OF_2_KEEP
+COUNTER_RESET / COUNTER_INCREMENT = 0 / 0
+SOLE_ROUTE = ROUTE_A_PROVIDERLESS_EXACT1_ONLY
+EARLY_ACTUAL_STATUS = NOT_RUN_PENDING_GENERIC_CONTRAST_ACTIVATION_HEADS
+STEP3 = ROUTE_A_GENERIC_CONTRAST_REPAIR_VERIFIED_PENDING_FRESH_ACTUAL
+FORMAL_EXACT8 = NOT_RUN
+PRODUCT_READ_EVALUATED = FALSE
+CANDIDATE_READY = FALSE
+STEP4 = NOT_STARTED
+AUTOMATIC_PROGRESSION = FALSE
+```
+
+new heads固定後にsame frozen private exact4からfresh exact8を一回だけmaterializeする。known body-full readersはUltra technical exact1 / Pro language exact1、withheld body-full readerはPro exact1だけとし、review後にfresh body-full output exact2を削除する。success exact3が全`CLEAR`の場合だけ`EARLY_ACTUAL_STATUS=LANGUAGE_VIABILITY_OBSERVED`へ遷移し、formal Product Read、Step 4、ready、mergeまたはproductionへ自動進行しない。
