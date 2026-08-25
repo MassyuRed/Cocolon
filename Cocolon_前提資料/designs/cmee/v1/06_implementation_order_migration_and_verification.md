@@ -3286,3 +3286,73 @@ AUTOMATIC_PROGRESSION = FALSE
 ```
 
 new activation heads固定後にだけsame frozen private exact4をfresh materializeする。known body-fullはUltra technical / Pro language、withheld body-fullはPro exact1だけが読み、fresh output exact2をreview直後に削除する。success exact3がすべて`CLEAR`の場合だけ`EARLY_ACTUAL_STATUS=LANGUAGE_VIABILITY_OBSERVED`へ遷移し、formal Product Read、Step 4、ready、mergeまたはproductionへ自動進行しない。
+
+## 51. Step 3 bounded finite-host / owner-boundary Route A repair（2026-08-26）
+
+§50 activation headsへbindしたfresh early actual exact1はknown / withheld machine `CLEAR_4_OF_4 / CLEAR_4_OF_4`、known Pro language `CLEAR_4_OF_4`だったが、withheld Pro exact1はaggregate viable `1/4`、non-clear `3/4`の`COMMON_DEFECT / GENERIC_SUBJECTIVE_CONTENT / SUBJECTIVE_MEANING_PLANNER`だった。first-failing categoryは`ENDPOINT_FINITE_CLASSIFICATION`で、relation-bearing spanのconnector検出後にendpoint exact2をadmitできずwhole-span appraisalへ残る共通原因である。Route A ceilingではなく、private body / locator / term / case detailはPro外へ出していない。
+
+existing frozen operator axisのfinite hostをoperator patternと活用classに同時bindし、ichidan、sahen、godan-r / w / k、i-adjective、copular、te/de auxiliary、bounded aspectを固定深度で検証する。direct inflection、bounded explanatory / occurrence / residue / semantic-subject / self-owned experiential hostのexact1 wrapperまでを証明し、wrapper前のadnominal formはdirect finite formと分離して`だ / です / でした`を拒否する。owner scanはfragment末尾までlater owner / experiencerを検査し、arbitrary lexical host、report / hearsay、third-party attribution、passive、modifier residue、nested / malformed groupを閉じる。operator kindを証明できる場合は従来kindを維持し、finite hostだけの場合はexisting neutral `state / state / fact`へ限定する。plain `のに`はconcessiveとnominalizer+case purpose/useを既存axisだけで一意に区別できないためfail-closed、unambiguousな`なのに`はcommon exact2 proofへ残す。negated constraint wrapperも同じbounded carrier proofで閉じる。case / family / private term / expected sentence selector、new axis / enum / asset / dependency / routeは0。
+
+```text
+AUTHORITY = MASH_CURRENT_EXPLICIT_ROUTE_A_ONLY_STEP3_COMPLETION
+PREIMAGE_RUNTIME_HEAD = de7b1a0041e04f85639b2fa9fa5d484ef9218e02
+PREIMAGE_DESIGN_HEAD = bcbb0140a122ca45ce0e7cdca1a9fb3376761464
+PREIMAGE_LANGUAGE_CORE_IDENTITY = 94a55c8226454f3850fe265b02590f1de762e71518d890d31299f6d34a631b72
+PREIMAGE_MACHINE_KNOWN / WITHHELD = CLEAR_4_OF_4 / CLEAR_4_OF_4
+PREIMAGE_PRO_KNOWN / WITHHELD = CLEAR_4_OF_4 / COMMON_DEFECT_1_OF_4_VIABLE
+PREIMAGE_FIRST_FAILING_CATEGORY = ENDPOINT_FINITE_CLASSIFICATION
+PREIMAGE_ROUTE_LEVEL_CEILING = FALSE
+PREIMAGE_WITHHELD_SET_DIGEST = 5f31461625397bd22746dcdad8c8d68f7f6c7d2e56c1dc62e177664ae365c59d
+PREIMAGE_PRIVATE_PACKET_BINDING_SHA256 = e59938c894775f199f636bd472106f976764b61309e152383b8bd0bcea1218ac
+
+FINITE_HOST_PROOF = BOUNDED_DIRECT_EXPLANATORY_OCCURRENCE_RESIDUE_SEMANTIC_SUBJECT
+FINITE_HOST_WRAPPER_DEPTH = EXACT1
+FINITE_CARRIER_COMPATIBILITY = OPERATOR_PATTERN_X_CONJUGATION_CLASS
+ADNOMINAL_WRAPPER_COMPATIBILITY = SEPARATE_FAIL_CLOSED
+LATER_OWNER_SCAN = THROUGH_FRAGMENT_END
+THIRD_PARTY_OWNER_OR_EXPERIENCER_AUTHORITY = 0
+ARBITRARY_LEXICAL_HOST_REPORT_HEARSAY_PASSIVE_AUTHORITY = 0
+PURPOSE_NO_NI_CONCESSIVE_AUTHORITY = 0
+GENERIC_CHILD_EMBEDDED_OPERATOR_COPY = 0
+CASE_ID_PRIVATE_TERM_FAMILY_EXPECTED_SENTENCE_SELECTOR = 0
+NEW_AXIS_ENUM_ASSET_DEPENDENCY_ROUTE = 0
+
+RUNTIME_CHANGED_PATHS_FROM_PREIMAGE = EXACT5
+  ai/services/ai_inference/emlis_ai_grounded_observation_plan.py
+  ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py
+  ai/tests/test_cmee_v1a_i1sx_contracts.py
+  ai/tools/cmee_v1a_i1sx_candidate_run.py
+  ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md
+DESIGN_CHANGED_PATHS = EXACT1
+  Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md
+
+LANGUAGE_CORE_IDENTITY = 29ea2b9bfebcc15435246c84dd7e7f56a9bcaabac89ce123363a2ac356b8f5de
+RUNNER_SHA256 = 3707917a81c2f6bb572730b2ab70e763f1a86f1143272b0f6868ee9aa068de70
+STEP2_COMPOSITION_TESTS = 19_OF_19_PASS
+STEP3_EARLY_HARNESS_TESTS = 17_OF_17_PASS
+CONTRACT_TESTS = 123_OF_123_PASS
+VERTICAL_TESTS = 42_OF_42_PASS
+COMBINED_TESTS = 165_OF_165_PASS
+COMPILEALL = PASS
+PUBLIC_HOSTED_ENDPOINT_MATRIX = CLEAR_60_OF_60
+PUBLIC_OWNER_AND_MALFORMED_NEGATIVE_MATRIX = CLEAR_98_OF_98
+PUBLIC_DOWNSTREAM_GENERIC_NEGATIVE_MATRIX = CLEAR_37_OF_37
+INDEPENDENT_PUBLIC_AUDIT = PENDING_FINAL_REVIEW
+
+PREIMAGE_EARLY_ACTUAL_RUN / RETRY / RERUN = 1 / 0 / 0
+FROZEN_PRIVATE_INPUT_RETAINED = 1
+COMMON_DEFECT_RETURN_COUNT = 2_OF_2_KEEP
+COUNTER_RESET / COUNTER_INCREMENT = 0 / 0
+SOLE_ROUTE = ROUTE_A_PROVIDERLESS_EXACT1_ONLY
+NETWORK / EXTERNAL_AI / PROVIDER / BODY_SEND / COST = 0 / 0 / 0 / 0 / 0
+PUBLIC_API / DB / RN / PRODUCTION_EFFECT = 0 / 0 / 0 / 0
+EARLY_ACTUAL_STATUS = NOT_RUN_PENDING_BOUNDED_FINITE_HOST_ACTIVATION_HEADS
+STEP3 = ROUTE_A_BOUNDED_FINITE_HOST_REPAIR_VERIFIED_PENDING_FRESH_ACTUAL
+FORMAL_EXACT8 = NOT_RUN
+PRODUCT_READ_EVALUATED = FALSE
+CANDIDATE_READY = FALSE
+STEP4 = NOT_STARTED
+AUTOMATIC_PROGRESSION = FALSE
+```
+
+new activation heads固定後にsame frozen private exact4をfresh exact1回だけmaterializeする。known body-fullはUltra technical / Pro language、withheld body-fullはPro exact1だけが読み、fresh output exact2をreview直後に削除する。success exact3がすべて`CLEAR`の場合だけbody-free finalizerでStep 3を`LANGUAGE_VIABILITY_OBSERVED`へ閉じる。formal Product Read、Step 4、ready、mergeまたはproductionへ進まない。
