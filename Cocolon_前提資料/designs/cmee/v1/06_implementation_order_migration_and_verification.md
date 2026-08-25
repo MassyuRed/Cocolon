@@ -3356,3 +3356,49 @@ AUTOMATIC_PROGRESSION = FALSE
 ```
 
 new activation heads固定後にsame frozen private exact4をfresh exact1回だけmaterializeする。known body-fullはUltra technical / Pro language、withheld body-fullはPro exact1だけが読み、fresh output exact2をreview直後に削除する。success exact3がすべて`CLEAR`の場合だけbody-free finalizerでStep 3を`LANGUAGE_VIABILITY_OBSERVED`へ閉じる。formal Product Read、Step 4、ready、mergeまたはproductionへ進まない。
+
+## 52. Additional correction checkpoint subdivision / current Step 3 resume pointer（2026-08-26）
+
+Mashのcurrent明示指示により、final body §13のmacro Step 0–9を、同一bounded unit内のremote savepointへ細分化した。§30.2のmacro順、Route A-only、privacy、counter、Step / Product Read / credit境界は変更しない。savepointは処理落ち・強制session切替からactual bytesを守る保存地点であり、独立成果、追加Gate、追加authority、macro Step complete、technical credit、Product PASSまたはautomatic progressionではない。
+
+実行時はfinal body §13.1–13.12を唯一のsubstep ownerとする。各savepointはmashos-api source / test / existing handoffを先にcommit / push / remote postverifyし、そのruntime headを本fileへbody-freeで記録してCocolonをcommit / push / remote postverifyする。一方だけ成功した場合はPARTIAL_REMOTE_SAVEDとし、成功repoをrollback・再実装せず、次sessionは未反映repo exact1から再開する。write結果不明targetはremote target bytesを取得して状態を確定し、自動retryしない。
+
+~~~text
+CHECKPOINT_SUBDIVISION_PREIMAGE_RUNTIME_HEAD =
+  d05a07224194e1f5a505c5fbca231ce16c792fdd
+CHECKPOINT_SUBDIVISION_PREIMAGE_DESIGN_HEAD =
+  0e840ec236f61f3206ddaa96647af64b70c7c433
+
+CURRENT_MACRO_STEP = 3
+MIGRATED_LAST_SAVEPOINT = 3.1
+MIGRATED_LAST_SAVEPOINT_STATE = WIP_REMOTE_SAVED
+CURRENT_RESUME_CHECKPOINT = 3.2
+CURRENT_RESUME_WORK =
+  INDEPENDENT_PUBLIC_AUDIT_AND_CURRENT_ACTIVATION_IDENTITY_FREEZE
+
+STEP0_STEP1_STEP2_REEXECUTION = 0
+PRE_D05A_STEP3_RECONSTRUCTION = 0
+STEP3_COMPLETE = FALSE
+INDEPENDENT_PUBLIC_AUDIT = PENDING_FINAL_REVIEW
+EARLY_ACTUAL_STATUS = NOT_RUN_PENDING_BOUNDED_FINITE_HOST_ACTIVATION_HEADS
+FORMAL_EXACT8 = NOT_RUN
+PRODUCT_READ_EVALUATED = FALSE
+CANDIDATE_READY = FALSE
+STEP4 = NOT_STARTED
+COMMON_DEFECT_RETURN_COUNT = 2_OF_2_KEEP
+COUNTER_RESET / COUNTER_INCREMENT = 0 / 0
+
+THIS_WRITE_CHANGED_PATHS = EXACT2
+  Cocolon_前提資料/designs/cmee/
+    Cocolon_CMEE_Stage1_AdditionalCorrection_UltraFinalTechnicalBodyAndJointRecommendation_20260824.md
+  Cocolon_前提資料/designs/cmee/v1/
+    06_implementation_order_migration_and_verification.md
+RUNTIME / TEST / RUNNER / PRIVATE_PACKET_EFFECT = 0 / 0 / 0 / 0
+STRUCTURE_MAP_DELTA_NONE =
+  CHECKPOINT_GRANULARITY_ONLY_NO_PRODUCT_OWNER_ENTRYPOINT_API_DB_RN_LIFECYCLE_CHANGE
+PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
+STEP3_ACTIVATION_OR_EXECUTION_BY_THIS_DOCS_WRITE = 0
+AUTOMATIC_PROGRESSION = FALSE
+~~~
+
+§51に保存済みのfinite-host / owner-boundary repair、recorded tests、public matricesを失効させない。一方、§51のindependent public audit、fresh early actual、human read、cleanup、body-free finalizerは未完了である。本docs write完了後もStep 3をcompleteとせず、次のtechnical workを自動開始しない。
