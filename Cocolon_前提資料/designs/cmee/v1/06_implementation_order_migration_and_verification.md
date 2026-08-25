@@ -2715,3 +2715,64 @@ AUTOMATIC_PROGRESSION = FALSE
 ```
 
 このsectionは§40の`EARLY_ACTUAL_ATTEMPT_MAX=1`をcurrent completion instruction内の診断後generic correctionについてsupersedeする。private body / locatorはdesign、runtime docs、GitHub、UltraまたはMashへ公開せず、corrected activation headsへbindしたfresh exact8だけをsame Route A coreから生成してsuccess exact3を再評価する。
+
+## 42. Second early actual diagnosis and typed shared-endpoint discourse closure（2026-08-25）
+
+§41のcorrected activation headsにbindしたsecond early actualはknown / withheld machine invariantが`CLEAR_4_OF_4`、Pro exact1が`COMMON_DEFECT / GENERIC_SUBJECTIVE_CONTENT / DISCOURSE_PLANNER`となった。adjacent relation dutyが共有endpointを別sentenceへ再出力し、sequence endpointのあとにmeta tailを追加していたplanner-level common defectである。private本文、locator、per-case情報はPro外へ出していない。
+
+existing layout candidate exact2のうち、required Layer 1 admitted-relation exact2がtyped order `(A,B)`→`(B,C)`、共有endpoint exact1、union exact3、shared scalar profile一致を満たす場合だけ同一unitへgroup化する。両duty / clause plan / relation ref / COMPOSITE expressionを保持し、shared endpointはbody-full exact1とする。sequence combinator、role-local carrierおよび後続relation connectiveで一つのJapanese relation chainへlinearizeし、該当chainがある場合だけexisting sentence-load profileはgrouped candidateを`ARC_ALIGNED`、duplicate singleton candidateを`PERMITTED`とする。
+
+Layer 1→Layer 2はimmediately prior unitのanchor setとresponse refsがexact一致するときだけwhole-object existing anaphorを使い、single / pluralを`そのこと` / `その両方`へ分ける。extra / intervening anchorがあればexplicitを維持する。contiguous Layer 2はEmlis owner / authority bindingを変えずsurface speakerをfirst exact1だけにする。existing appraisal assets exact5をinput-bound relational predicateへ自然化するが、new asset family / enum / grammatical axisは追加しない。
+
+```text
+AUTHORITY = MASH_CURRENT_EXPLICIT_ROUTE_A_STEP3_COMPLETION_CONTINUATION
+SECOND_EARLY_ACTUAL_RUNTIME_HEAD = adbdd16a3ae01bfef88c9257e34c7951a03278fc
+SECOND_EARLY_ACTUAL_DESIGN_HEAD = cfa0356dacc9d3f5466d965dc63d8d7228df09c4
+SECOND_EARLY_ACTUAL_LANGUAGE_CORE_IDENTITY = 2f33ad8f8dd9d7a6d34f57519abaaa569a406fec96a3b936ca23baf8808104c3
+SECOND_KNOWN_VISIBLE_PACKET_SHA256 = 4ac3501bcd61299bfe3c63a2beadfa5258ca66e81abc16875750f4cb4d3734c7
+SECOND_BODY_FREE_MACHINE_PACKET_SHA256 = 2ce5152b1e035ec3f7b83899dc5be01b2b58d3666e47b780a9af276ebbb4c2e6
+SECOND_PRIVATE_PACKET_BINDING_SHA256 = 37580b2238a41e80b2bc3209da4473b3e808d4e924eacecd4e75f03e45ac1937
+SECOND_PRO_RESULT_SHA256 = 5309d3b75e9e4e595426c65e76e643ebf28188b361a62150b09b4a6402cc736e
+SECOND_RUNNER_SHA256 = 5f418f8f2daf501039d4fd1c31c743f985e40678ccb400ac17c27f6e48186d11
+SECOND_KNOWN_MACHINE_INVARIANT = CLEAR_4_OF_4
+SECOND_WITHHELD_MACHINE_INVARIANT = CLEAR_4_OF_4
+SECOND_PRO_BODY_FREE_RESULT = COMMON_DEFECT
+SECOND_DEFECT_CLASS = GENERIC_SUBJECTIVE_CONTENT
+SECOND_CAUSE_COMPONENT = DISCOURSE_PLANNER
+SECOND_CEILING_REASON = NONE
+
+GENERIC_CORRECTION = TYPED_SHARED_ENDPOINT_RELATION_CHAIN_AND_EXACT_REFERENCE_CONTINUITY
+SHARED_ENDPOINT_CHAIN = REQUIRED_RELATION_DUTY_EXACT2 / ENDPOINT_UNION_EXACT3 / SHARED_BODY_FULL_EXACT1
+RELATION_DUTY_PLAN_EXPRESSION_COVERAGE = UNCHANGED_EXACT2
+LAYER_TRANSITION_ANAPHORA = EXACT_MATCH_IMMEDIATE_ONLY
+CONTIGUOUS_LAYER2_SURFACE_SPEAKER = EMLIS_EXACT1
+CASE_ID_FAMILY_RAW_FIXTURE_EXPECTED_SENTENCE_SELECTOR = 0
+NEW_ASSET_FAMILY_ENUM_GRAMMATICAL_AXIS_DEPENDENCY_ROUTE = 0
+SOURCE_MEANING_OWNER_SAFETY_CHANGE = 0
+FINAL_CORRECTED_LANGUAGE_CORE_IDENTITY = b8ac6a74a05a108744b164bd3492bac34bfa1e0bd16b42a566dc9d78eab3e409
+
+PUBLIC_KNOWN_PRO_PRESCREEN = CLEAR_4_OF_4
+PUBLIC_KNOWN_MACHINE_INVARIANT = CLEAR_4_OF_4
+CONTRACT_TESTS = 119_OF_119_PASS
+VERTICAL_TESTS = 42_OF_42_PASS
+COMBINED_TESTS = 161_OF_161_PASS
+COMPILEALL = PASS
+
+SECOND_RUN_EARLY_ACTUAL_CALL_COUNT = 1
+SECOND_RUN_FRESH_MATERIALIZATION_COUNT = 1
+SECOND_RUN_RETRY / RERUN = 0 / 0
+SECOND_RUN_FRESH_OUTPUT_CREATED / DELETED / REMAINING = 2 / 2 / 0
+PRIVATE_BODY_LOCATOR_PER_CASE_DIGEST_DISCLOSED = 0 / 0 / 0
+COMMON_DEFECT_RETURN_COUNT_BEFORE / AFTER = 2_OF_2 / 2_OF_2
+COUNTER_RESET / COUNTER_INCREMENT = 0 / 0
+SOLE_ROUTE = ROUTE_A_PROVIDERLESS_EXACT1_ONLY
+EXTERNAL_AI / PROVIDER / NETWORK / BODY_SEND / COST = 0 / 0 / 0 / 0 / 0
+EARLY_ACTUAL_STATUS = NOT_RUN_PENDING_FINAL_CORRECTED_HEAD_ACTIVATION
+STEP3 = TYPED_DISCOURSE_CLOSURE_VERIFIED_PENDING_FINAL_FRESH_ACTUAL
+FORMAL_EXACT8 = NOT_RUN
+PRODUCT_READ_EVALUATED = FALSE
+STEP4 = NOT_STARTED
+AUTOMATIC_PROGRESSION = FALSE
+```
+
+final corrected activation headsへbindしたfresh exact8だけを同じfrozen private inputからmaterializeする。knownはUltra technical / Pro language、withheldはPro body-fullだけが読み、success exact3をseparate body-free finalizerへ渡す。private output exact2はread後削除し、Step 4 / formal Product Read / ready / merge / productionへ進まない。
