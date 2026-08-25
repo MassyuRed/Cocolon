@@ -2888,3 +2888,58 @@ AUTOMATIC_PROGRESSION = FALSE
 ```
 
 runtime / design activation headsを確定した後、同じfrozen private exact4をfresh exclusive outputへexact1回だけmaterializeする。knownはUltra technical / Pro language、withheldはPro body-fullだけが読む。success exact3はbody-free finalizerだけで評価し、private output exact2はreview後に削除する。成功時もinternal `LANGUAGE_VIABILITY_OBSERVED`に限定し、formal Product Read、Step 4、ready、mergeまたはproductionへ自動進行しない。
+
+## 45. Route A subjective planner deconcentration and Step 3 fresh reactivation（2026-08-25）
+
+§44 activation headsでのfresh early actualはknown / withheld machine `CLEAR_4_OF_4`、Pro exact1 `COMMON_DEFECT / GENERIC_SUBJECTIVE_CONTENT / SUBJECTIVE_MEANING_PLANNER`となった。noncollapse relationがsame target exact2を保持した後もdirection-only `PROTECT_USER_AGENCY` positionが独立し、Layer 2のsubjective contentが集中していた。これはexisting typed axesで閉じるcommon defectであり、new rule / asset / routeを要するceilingではない。private body / locator / per-case digestはPro外へ公開しない。
+
+generic repairは次のtyped proof exact1に限定する。
+
+- noncollapse semantic refs exact2 / distinct
+- direction refs exact1かつnoncollapse refsのsubset
+- relation endpoint rows exact2
+- endpoint source semantic ref setとnoncollapse ref setがexact一致
+- endpoint candidate refs distinct、resolved frames exact2
+
+このproofが成立する場合だけdirection-only positionをnoncollapse appraisalへ吸収する。noncollapse appraisalはexact2 source expressionsを明示し、直後のmaterial-valueはexisting immediate exact2 anaphorを使用する。claimの意味分担とpolicy boundaryは保持し、source全文の連続反復だけを除く。unfinished open position、action→change、residue→unfinishedのpriorityは不変である。
+
+```text
+AUTHORITY = MASH_CURRENT_EXPLICIT_ROUTE_A_ONLY_STEP3_COMPLETION
+PREIMAGE_RUNTIME_HEAD = 3ef41262f4411de2e2da0b6a392461299f46446b
+PREIMAGE_DESIGN_HEAD = 9f18267f1ab460dc8e379498f9723b435781fc21
+PREIMAGE_LANGUAGE_CORE_IDENTITY = b8665662e80bda7350825dc925dabf21f6a6ad233a2aa0d6fe83ecd4bac0aa8e
+PREIMAGE_BODY_FREE_MACHINE_PACKET_SHA256 = c55e3e7b447c30a87c80ce3d40fc9f9a149850755b54b4d880eff6975601faea
+PREIMAGE_PRO_RESULT_SHA256 = 70262579b8b5b13cbc1af1958915471abf1e3370dc2d10d401fe3f5815c310d1
+PREIMAGE_KNOWN_VISIBLE_PACKET_SHA256 = f9442be86176f354d24879492aa52559dee57659542301b475a3ce6f20f6b094
+
+GENERIC_REPAIR = TYPED_SAME_TARGET_POSITION_ABSORPTION_AND_EXACT2_REFERENCE_CONTINUITY
+REDUNDANT_PROTECT_USER_AGENCY_POSITION = ABSORBED
+NONCOLLAPSE_APPRAISAL = SOURCE_BOUND_EXACT2
+FOLLOWING_MATERIAL_VALUE = IMMEDIATE_ANAPHORIC_EXACT2
+CASE_ID_FAMILY_RAW_FIXTURE_EXPECTED_SENTENCE_SELECTOR = 0
+NEW_ASSET_FAMILY_ENUM_AXIS_DEPENDENCY_ROUTE = 0
+SOURCE_MEANING_OWNER_POLARITY_MODALITY_TIME_UNKNOWN_SAFETY_AUTHORITY_DELTA = 0
+
+LANGUAGE_CORE_IDENTITY = ce57ab185a2b2e099569391aea72230f880f56607c45dfa30b976ae80da63329
+RUNNER_SHA256 = 7697491c0bfeb5d3cf8e8dd8c6cfbb635f595e635687effde2c391d98e8de276
+STEP2_COMPOSITION_TESTS = 16_OF_16_PASS
+STEP3_EARLY_HARNESS_TESTS = 17_OF_17_PASS
+CONTRACT_TESTS = 120_OF_120_PASS
+VERTICAL_TESTS = 42_OF_42_PASS
+COMBINED_TESTS = 162_OF_162_PASS
+
+COMMON_DEFECT_RETURN_COUNT_BEFORE / AFTER = 2_OF_2 / 2_OF_2
+COUNTER_RESET / COUNTER_INCREMENT = 0 / 0
+SOLE_ROUTE = ROUTE_A_PROVIDERLESS_EXACT1_ONLY
+EXTERNAL_AI / PROVIDER / NETWORK / EXTERNAL_BODY_SEND / COST = 0 / 0 / 0 / 0 / 0
+PUBLIC_API / DB / RN / PRODUCTION_EFFECT = 0 / 0 / 0 / 0
+EARLY_ACTUAL_STATUS = NOT_RUN_PENDING_REPAIR_ACTIVATION_HEADS
+STEP3 = ROUTE_A_SUBJECTIVE_PLANNER_REPAIR_VERIFIED_PENDING_FRESH_ACTUAL
+FORMAL_EXACT8 = NOT_RUN
+PRODUCT_READ_EVALUATED = FALSE
+CANDIDATE_READY = FALSE
+STEP4 = NOT_STARTED
+AUTOMATIC_PROGRESSION = FALSE
+```
+
+repair activation headsを固定した後だけsame frozen private exact4をfresh materializeする。knownはUltra technical / Pro language、withheldはPro body-fullだけが読み、body-free success exact3を評価する。output exact2はreview後に削除し、formal Product Read、Step 4、ready、merge、productionには進まない。
