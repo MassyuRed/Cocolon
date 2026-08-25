@@ -2838,3 +2838,53 @@ AUTOMATIC_PROGRESSION = FALSE
 ```
 
 final exact3は`CLEAR / CLEAR / ROUTE_LEVEL_CEILING`であり、`LANGUAGE_VIABILITY_OBSERVED`へ遷移しない。known language coreとmachine invariantは閉じたが、frozen withheldに必要なlanguage recognitionはcurrent Route A grammarの上限外である。今回のscopeでは追加path / rule / asset / fixtureを増やさず、Draft / open / unmergedを維持する。
+
+## 44. Route A generic relation recognition extension and final Step 3 reactivation（2026-08-25）
+
+§43後のMash current instructionにより、external AI / Route Bは不採用とし、providerless Route AだけでStep 3を完了まで進める。これは§43のceiling terminalより新しいRoute A implementation authorityであり、`COMMON_DEFECT_RETURN_COUNT=2/2`はreset / incrementせず保持する。
+
+追加するのはcase / phrase-family ruleではなく、source grammar上のbounded recognizer exact1である。quote / bracket depth 0のtop-level connective exact1だけをscanし、coexistenceをfragment-local wish exact1..2と必要時のm-row表記上曖昧なnominal endpoint exact0..1へ分解する。曖昧endpointは`state / fact / neutral`のまま保持し、wish / retained-intentionへ昇格しない。contrastはaffirmative wish + clause-final source-explicit constraintへ分解する。各childはexisting Evidence exact1とnormalized raw text exact scalar rangeへbindする。第三者owner / beneficiary / attribution、quoted / grouped content、malformed nesting、multiple link、relative nominal、negated wish / uncertainty / constraint、modifier内operator、simile-only exact2はfail-closedとし、self-evaluation safety owner、action→change / residue→unfinished projectorを先に適用する。
+
+surfaceはtyped marker exact2とexisting polarity / modality / time axesだけでrole-localにrealizeする。partial marker fallbackは0。source sliceがresidue / unfinished scalarをすでに明示する場合、同axisの重複carrierはprovenance-onlyとしてsurfaceへ重ねない。RELATIONAL_NONCOLLAPSE / PRESERVE_BOTH_ENDPOINTSとWISH_TO_OBLIGATION / REMOVE_USER_AGENCYのcoverageが同一targetで成立する場合だけ、重複するPROTECT_USER_AGENCY positionをsemantic subsetとして吸収する。
+
+```text
+AUTHORITY = MASH_CURRENT_EXPLICIT_ROUTE_A_ONLY_STEP3_COMPLETION
+SOLE_ROUTE = ROUTE_A_PROVIDERLESS_EXACT1_ONLY
+GENERIC_RECOGNIZER = TOP_LEVEL_CONNECTIVE_EXACT1
+GENERIC_ENDPOINTS = EXACT2_SOURCE_BOUND
+COEXISTENCE_WISH_AUTHORITY = FRAGMENT_LOCAL_EXACT1_TO_2
+AMBIGUOUS_M_ROW_ENDPOINT = STATE_FACT_NEUTRAL_EXACT0_TO_1 / WISH_PROMOTION_0
+SOURCE_RANGE_VALIDATION = EXACT3_MARKER_PARTS_AND_IN_RANGE
+OWNER_POLARITY_MODALITY_TIME_UNKNOWN_SAFETY_VALIDATION = REQUIRED
+GROUPED_OR_QUOTED_OPERATOR_AUTHORITY = 0
+PARTIAL_MARKER_OR_UNSUPPORTED_SCALAR_FALLBACK = 0
+NEGATED_OR_NONFINITE_RIGHT_OPERATOR_AUTHORITY = 0
+PRIOR_TYPED_PROJECTOR_PRIORITY = ACTION_CHANGE_THEN_RESIDUE_UNFINISHED_THEN_GENERIC
+
+CASE_ID_FAMILY_RAW_FIXTURE_EXPECTED_SENTENCE_SELECTOR = 0
+NEW_ASSET_FAMILY_ENUM_AXIS_DEPENDENCY_ROUTE = 0
+EXTERNAL_AI / PROVIDER / NETWORK / EXTERNAL_BODY_SEND / COST = 0 / 0 / 0 / 0 / 0
+PUBLIC_API / DB / RN / PRODUCTION_EFFECT = 0 / 0 / 0 / 0
+
+RUNTIME_CHANGED_PATHS = EXACT6
+DESIGN_CHANGED_PATHS = EXACT1
+LANGUAGE_CORE_IDENTITY = b8665662e80bda7350825dc925dabf21f6a6ad233a2aa0d6fe83ecd4bac0aa8e
+PUBLIC_GENERIC_STANDIN_PRO_LANGUAGE_READ = CLEAR_4_OF_4
+CONTRACT_TESTS = 120_OF_120_PASS
+VERTICAL_TESTS = 42_OF_42_PASS
+COMBINED_TESTS = 162_OF_162_PASS
+STEP2_COMPOSITION_TESTS = 16_OF_16_PASS
+COMPILEALL = PASS
+
+COMMON_DEFECT_RETURN_COUNT_BEFORE / AFTER = 2_OF_2 / 2_OF_2
+COUNTER_RESET / COUNTER_INCREMENT = 0 / 0
+EARLY_ACTUAL_STATUS = NOT_RUN_PENDING_REACTIVATED_HEADS
+STEP3 = ROUTE_A_GENERIC_RECOGNITION_VERIFIED_PENDING_FRESH_ACTUAL
+FORMAL_EXACT8 = NOT_RUN
+PRODUCT_READ_EVALUATED = FALSE
+CANDIDATE_READY = FALSE
+STEP4 = NOT_STARTED
+AUTOMATIC_PROGRESSION = FALSE
+```
+
+runtime / design activation headsを確定した後、同じfrozen private exact4をfresh exclusive outputへexact1回だけmaterializeする。knownはUltra technical / Pro language、withheldはPro body-fullだけが読む。success exact3はbody-free finalizerだけで評価し、private output exact2はreview後に削除する。成功時もinternal `LANGUAGE_VIABILITY_OBSERVED`に限定し、formal Product Read、Step 4、ready、mergeまたはproductionへ自動進行しない。
