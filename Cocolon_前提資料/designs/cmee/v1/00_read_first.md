@@ -1,7 +1,7 @@
 # CMEE V1 詳細設計 — Read First
 
 - document id: `cocolon.cmee.v1.detailed_design.read_first`
-- revision date: `2026-08-24 JST`
+- revision date: `2026-08-25 JST`
 - Step 10 final document id: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2`
 - Step 10 design identity: `CMEE_THREE_CORE_INTEGRATED_DESIGN_20260821`
 - Step 10 Pro review: `CMEE_STEP10_PRO_SINGLE_PRODUCT_ROUTE_REVIEW_20260821 / CONSUMED_EXACTLY_ONCE`
@@ -14,10 +14,10 @@
 - implementation approval: `NOT_GRANTED_BY_THIS_SUITE`
 - dependency / production / test / runner / API / DB / RN effect: `0`
 - Cycle001 restart effect: `0`
-- L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
+- Stage 1 language route: `ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER / SOLE_CURRENT_AND_FUTURE_ROUTE`
 - Phase 0 / P0 / P0-R1 / standalone product-delta-0 L3-R / L3-I lifecycle: `RETIRED_HISTORICAL_NONREUSABLE`
 - current implementation rule: `PRODUCT_QUALITY_DELTA_GT_0_AND_MASH_CONFIRMED_ONLY`
-- current implementation state: `STAGE1_V2_DISABLED_PRODUCT_REJECTED_ADDITIONAL_CORRECTION_DESIGN_RECORDED`
+- current implementation state: `STAGE1_ADDITIONAL_CORRECTION_STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP`
 - Phase 2 design correction state: `TOP_LEVEL_NAVIGATION_ALIGNED`
 - Step 10 design correction state: `FINAL_INTEGRATED_CONTRACT_REFLECTED_EXISTING_EXACT14`
 - Karen-derived functional companion: `exact2`
@@ -25,7 +25,7 @@
 - Stage 1 additional correction Pro final confirmation: `PASS / BLOCKER 0 / MAJOR 0 / MINOR 0`
 - Stage 1 additional correction placement: `NONCANONICAL_TECHNICAL_INTEGRATION_SOURCE / DESIGN_RECORD_WRITE_ONLY`
 - duplicate parallel technical canonical design files: `0`
-- current authorized next implementation: `NONE_PENDING_MASH_LEVEL3_IMPLEMENTATION_DECISION`
+- current authorized next implementation: `NONE`
 - automatic progression: `false`
 
 ---
@@ -53,7 +53,7 @@ CMEEは三商品へ共通する意味保持・artifact生成のtechnical coreで
 `RETIRED_HISTORICAL_NONREUSABLE`である。後続sectionに残るbody、identity、terminal、hash、resultは失敗履歴と
 非再利用証拠だけであり、current prerequisite、approval order、next workまたは再実行authorityを持たない。
 別executor、別provider、別model、rename、類似preflight、新しい承認または別名のsuccessorで復活させない。
-Route Bのmeaning sovereignty、unknown、no-promotion等のproduct contractだけは、以下のcurrent実装unit内の制約として保持する。
+source / owner / unknown / no-promotionのproduct contractだけは、route-neutralなcurrent実装unit内の制約として保持する。
 
 別のMash明示承認後に許され得るnext implementation classは、unchanged input / fixtureとcurrent actual Emlis artifactをbeforeとし、その同じ入力から得る
 actual Observation / Reception artifactの商品品質を非0に改善する、one bounded implementation unit exact1だけである。
@@ -271,7 +271,7 @@ GitHubのactual source / testを現物として両方確認する。
 | `03_piece_v1c_detailed_design.md` | share artifact、visual spec、identity、clean cutover | renderer implementation / DB activation |
 | `04_analysis_v1d_v1e_detailed_design.md` | observed route、IF graph、projection、identity | current Watashi Mapの無承認置換 |
 | `05_json_schema_and_versioning.md` | canonical draft schemas、identity、versioning | production schema registration |
-| `06_implementation_order_migration_and_verification.md` | current product-quality implementation unit、NLSv3 asset migration、二段階cutover、retired historical packet記録 | 実装開始authority |
+| `06_implementation_order_migration_and_verification.md` | current product-quality implementation unit、NLSv3 asset migration、二段階cutover、Route A-only current authority | 実装開始authority |
 
 ## 3. Fixed architecture decisions
 
@@ -287,34 +287,6 @@ GitHubのactual source / testを現物として両方確認する。
 10. API / DB / RLS / RN / public routeはcore lifecycle ownerに残し、CMEE packageの初期実装で変更しない。
 11. NLSv3は責任・symbol・test・corpus・failure knowledgeをowner単位でCMEEへ継承し、PR #2全体をCMEE hostへwrapしない。
 12. Cycle001 candidate ingress cutoverとproduction generation cutoverは別approval・別write unitとし、最終的にactive Emlis generation owner exact1へ収束する。
-
-## 4. Historical Japanese linguistic provider recommendation state
-
-officialに確認できた日本語parser / PAS候補は、morphology、dependency、predicate / argument proposalを返せても、current contractが要求する次を保証しない。
-
-```text
-complete candidate set
-zero / omitted argumentを含むformal open-slot denominator
-required / active owner全件のunique governing attachment
-statistical one-bestをuser meaning authorityへできる根拠
-```
-
-したがって、GiNZA、spaCy Japanese、KWJA等を`FORMAL_CLOSED` authorityとして選定済みにしない。設計上は`PROVISIONAL_ONLY` candidate producer候補である。
-
-2026-08-15のhistorical Phase 0 terminalは次だった。current implementation routeへ再利用しない。
-
-```text
-NO_SAFE_CMEE_V1A_CANDIDATE_STOP
-```
-
-route候補は次のexact2であり、2026-08-15 JSTのMash LEVEL_3判断でRoute Bを選択した。
-
-1. `ROUTE_A_FORMAL_CLOSED_ATTACHMENT_AUTHORITY`: current formal closureを満たす別authorityを提示する。
-2. `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`: provisional analysisをlimited observation / user clarification / unavailableへ明示的にbindするよう受入契約を変更する。
-
-Mashはroute directionに加えて、`CMEE_V1_L3R_ROUTE_B_BOUNDED_PREFLIGHT_TECHNICAL_BODY` v1.0.0（canonical SHA-256 `4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901`）を承認した。provider / resolver責任、Route B cross-field semantics、KWJA exact1候補、temp path、categorical ceiling、network / storage / secret effect、failure / ambiguity / OOV、privacy、retry、post-preflight境界は同bodyへ固定され、L3-R exitは成立した。P0 exact1はdocs reflectionのfresh verification後にactivateされ、`P0_ACTIVATION_PRECONDITION_STOP`でterminalとなった。これらは変更しないhistorical factsである。
-
-historical approval orderは`L3-R route + bounded preflight authorization -> P0 measured evidence -> L3-I dependency/resource/I1 exact allowlist -> I1`だったが、この順序とstandalone packetは全て`RETIRED_HISTORICAL_NONREUSABLE`である。P0 PASS、L3-I、alternate executor、providerの再選定または別のpreflightをcurrent I1 prerequisiteにしない。wheel / model / resource等のtechnical制約がactual artifact改善に必要な場合だけ、§0.1の同一bounded unit内で扱う。one-best arc、model score、Product Read、first / last / nearest heuristicはambiguityを消すauthorityにならない。
 
 ## 5. Runtime entrypoint target
 
@@ -346,12 +318,10 @@ current orthogonal state:
 
 ```text
 document_lifecycle = DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE
-route_selection = ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION
-historical_l3r_state = L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP
-historical_p0r1_executor_candidate_state = P0R1_GITHUB_HOSTED_EXECUTOR_FINAL_TECHNICAL_PROPORTIONALITY_STOP
-historical_p0r1_execution = 0
-historical_provider_admission = NO_SAFE_CMEE_V1A_CANDIDATE_STOP
-historical_zero_delta_packet_lifecycle = RETIRED_HISTORICAL_NONREUSABLE
+stage1_language_route = ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER_ONLY
+external_generative_ai = PROHIBITED
+external_body_send = 0
+retired_provider_investigation = REMOVED_FROM_CURRENT_TREE_GIT_HISTORY_ONLY
 runtime_state = DRAFT_WIP_DISABLED
 implementation_evidence_owner = MASSYURED_MASHOS_API_DRAFT_PR_3_HEAD_106A1B8C92E808D15E88CE4F56C6300568D93E9F
 r1_r4_state = CLOSED_GREEN
@@ -359,7 +329,7 @@ candidate_state = GENERATED_FOR_PRODUCT_READ_DISABLED_PENDING_MASH
 machine_structural_exact8 = 8/8
 product_read_state = PENDING_MASH_PRODUCT_READ
 candidate_ready = false
-route_b_contract_complete = false
+source_owner_contract_complete = false
 production_state = NOT_CONNECTED
 cycle_state = NOT_REOPENED
 current_authorized_next_implementation = NONE
@@ -428,65 +398,29 @@ target listはautomatic transitionではない。current authorized next impleme
 - current CMEE structure mapが同じwrite unitで同期する。
 - remote bytesとchanged pathsをpostverifyする。
 
-本suiteの2026-08-15 publication primary outcomeは`BLOCKER_NARROWED`だった。Route B selectionとbounded preflight technical body v1.0.0の承認によりL3-Rは成立した。P0 exact1はactivation preconditionでterminalとなり、historical stateは`L3R_ROUTE_B_APPROVED_P0_TERMINAL_ACTIVATION_PRECONDITION_STOP`である。後続のreviewed GitHub-hosted P0-R1 executor candidateも比例性STOPでpre-execution rejectされ、P0-R1 executionは0である。これはproduct / implementation creditではなく、商品出力、Product Read、runtime readiness、Cycle creditは増えなかった。この経路全体は`RETIRED_HISTORICAL_NONREUSABLE`である。
+## Current Route A-only authority（2026-08-25 Mash決定）
 
-## 10. Historical nonreusable L3-R identity and activation boundary
+Mashのcurrent明示指示により、CMEE Stage 1のcurrent/future language routeはproviderless Route A exact1だけである。外部生成AI、external generative composer、remote model/provider、current input本文またはsemantic projectionの外部送信、network call、provider dependency、fallback、external costを禁止する。名称変更、別packet、別operator、別providerまたはfresh approvalで代替routeを復活させない。
 
-本sectionと§11–12は、body、identity、terminalとfailure historyを保持するためのhistorical recordである。
-current prerequisite、approval order、next workまたは再実行可能なbodyとして読まない。
-
-Canonical body:
-
-[CMEE V1 L3-R Route B Bounded Preflight Technical Body v1](../CMEE_V1_L3R_RouteB_BoundedPreflight_TechnicalBody_20260815.md)
+今回の決定は外部route撤去とroute-neutral source/owner contractへの改名だけを承認する。第三generic correction、counter reset、同じStep 3の再実行、Step 4、formal Product Read、ready、merge、productionは承認しない。Route Aでceilingまたはreturn budget exhaustionとなった場合は、そのterminalで停止する。
 
 ```text
-approval_token = CMEE_V1_L3R_ROUTE_B_TECHNICAL_BODY_V1_APPROVED
-body_version = 1.0.0
-body_canonical_sha256 = 4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901
-P0 = CONSUMED_EXACT1_P0_ACTIVATION_PRECONDITION_STOP
-implementation_approval = 0
-automatic_progression = false
+DECISION_ID = COCOLON_CMEE_STAGE1_ROUTE_A_ONLY_EXTERNAL_AI_PROHIBITION_20260825
+DECISION_OWNER = MASH
+SOLE_CURRENT_AND_FUTURE_ROUTE = ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER
+EXTERNAL_GENERATIVE_AI = PROHIBITED
+EXTERNAL_COMPOSER_OR_REMOTE_MODEL_PROVIDER = PROHIBITED
+CURRENT_INPUT_OR_SEMANTIC_PROJECTION_EXTERNAL_SEND = 0
+NETWORK_CALL / NEW_PROVIDER_DEPENDENCY / FALLBACK / EXTERNAL_COST = 0 / 0 / 0 / 0
+ALTERNATIVE_ROUTE_CURRENT_AUTHORITY / FUTURE_TRIGGER / REACTIVATION = 0 / 0 / 0
+EXTERNAL_OPERATOR = NOT_APPLICABLE
+COMMON_DEFECT_RETURN_COUNT = 2/2_UNCHANGED
+EARLY_ACTUAL_STATUS = NOT_RUN
+STEP3 = COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP
+THIRD_GENERIC_CORRECTION / COUNTER_RESET / STEP3_RERUN / STEP4 = 0 / 0 / 0 / 0
+CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE
+ONLY_POSSIBLE_FUTURE_CLASS = FRESH_LEVEL3_ROUTE_A_PROVIDERLESS_ONLY
+PRIMARY_OUTCOME = ADMINISTRATIVE_ONLY
+PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
+AUTOMATIC_PROGRESSION = false
 ```
-
-P0はcanonical bodyのactivation Gateでterminalとなった。dependency、requirements、lock、source、test、runner writeは0で、separate L3-Iは未承認のままであった。このL3-Iを承認するfuture routeは存在しない。
-
-## 11. Historical nonreusable P0 body-free terminal
-
-[CMEE V1 P0 KWJA 2.5.1 Base Body-Free Result](../CMEE_V1_P0_KWJA251_Base_BodyFree_Result_20260815.json)
-
-```text
-terminal = P0_ACTIVATION_PRECONDITION_STOP
-authority = CONSUMED_TERMINAL
-platform_tuple = NOT_RECORDED_BY_P0
-temp_root_created = 0
-network / acquisition / install / load / inference = 0
-Route B disposition / sufficiency = NOT_EVALUATED_IN_P0
-L3-I / implementation / Cycle001 = NOT_AUTHORIZED
-automatic_progression = false
-```
-
-このterminalはKWJA capability、license/provenance、resource cost、Route B product sufficiencyのFAILではない。current executorのactivation precondition不成立で後段を未実行のまま閉じた結果である。`RETIRED_HISTORICAL_NONREUSABLE`のため再実行しない。
-
-## 12. Historical nonreusable P0-R1 executor final technical judgment
-
-[CMEE V1 P0-R1 GitHub-hosted bounded executor — Final Technical Body](../CMEE_V1_P0R1_GitHubHosted_BoundedExecutor_TechnicalBody_20260815.md)
-
-```text
-body_id = CMEE_V1_P0R1_GITHUB_HOSTED_BOUNDED_EXECUTOR_FINAL_TECHNICAL_BODY
-body_version = 1.0.0
-body_canonical_sha256 = d5637c8303e377e2bda11977425f209c139911acbb56542e8526ee0afa00be70
-docs_reflection_approval = DOCS_REFLECTION_ONLY
-approval_token = CMEE_V1_P0R1_GITHUB_HOSTED_EXECUTOR_FINAL_PROPORTIONALITY_STOP_V1_APPROVED_FOR_DOCS_REFLECTION_ONLY
-p0r1_executor_candidate_state = P0R1_GITHUB_HOSTED_EXECUTOR_FINAL_TECHNICAL_PROPORTIONALITY_STOP
-rule18_verdict = NO_SAFE_NEXT_CANDIDATE_STOP
-work_rule_stop_classification = DETOUR_RISK_STOP
-candidate = REJECTED_PRE_EXECUTION
-P0_R1_execution = 0
-ROUTE_B_FAILURE = NOT_ESTABLISHED
-KWJA_FAILURE = NOT_ESTABLISHED
-provider_resource_platform_evidence = 0
-L3-I / dependency / implementation / I1 / Product Read / Cycle001 / production = NOT_AUTHORIZED
-automatic_progression = false
-```
-
-Final bodyは、reviewed current GitHub-hosted executor candidateの技術的成立可能性と商品経路への比例性を分離し、minimum-compliant residual 32–52 focused hoursがcurrent one-shot evidence価値に比例しないためSTOPした。既存P0 terminalを置き換えず、Route B、KWJA、meaning sovereignty、owner denominator、clarification exact1、supplemental lineageを保持する。これらのhistorical facts / bodiesは変更しないが、別executor、P0 boundary、provider、model、version、task、corpus、rename、successorまたは新しい承認による再開routeはない。

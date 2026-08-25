@@ -15,7 +15,7 @@
 - current authorized next implementation: `NONE_AFTER_ADDITIONAL_CORRECTION_STEP2`
 - automatic progression: `false`
 - Cycle001 effect: `0`
-- L3-R route selection: `ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION`
+- Stage 1 language route: `ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER / SOLE_CURRENT_AND_FUTURE_ROUTE`
 - Phase 0 / P0 / P0-R1 / standalone product-delta-0 L3-R / L3-I lifecycle: `RETIRED_HISTORICAL_NONREUSABLE`
 - current implementation rule: `PRODUCT_QUALITY_DELTA_GT_0_AND_MASH_CONFIRMED_ONLY`
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
@@ -37,7 +37,7 @@ current input
 -> disabled candidate bundle
 ```
 
-問いsystem全体、production cutover、Cycle001 acceptanceはV1-A completionに含めない。V1-A offline runnerはRoute Bを検証できるよう、typed clarification candidateと、callerが別SourceEnvelopeとして供給したsupplemental answerからREFINED candidateを作るcontractまで持てる。ただしAPI / DB / RN / persistence、interactive session、user-visible question lifecycle、production question routeはexact0であり、後述§18のVertical 2だけがそれをoperational化する。V1-Aは§18のVertical 1、つまり全plan共通のLayer 1／2品質を担当する。
+問いsystem全体、production cutover、Cycle001 acceptanceはV1-A completionに含めない。V1-A offline runnerはproviderless Route Aを検証できるよう、typed clarification candidateと、callerが別SourceEnvelopeとして供給したsupplemental answerからREFINED candidateを作るcontractまで持てる。ただしAPI / DB / RN / persistence、interactive session、user-visible question lifecycle、production question routeはexact0であり、後述§18のVertical 2だけがそれをoperational化する。V1-Aは§18のVertical 1、つまり全plan共通のLayer 1／2品質を担当する。
 
 ### 0.1 Current actual before baseline — body-free
 
@@ -45,7 +45,7 @@ current input
 tests exact2、candidate runner exact1および`MeaningExperienceEngine.generate()`によるoffline disabled verticalが
 実在する。head `06ce311b3ea728b06f83439d268a34bed917c01c`でR1〜R4は`CLOSED_GREEN`、original exact8は
 machine structural 8/8である。一方、private human Product Readは`EVALUATED_FAIL_STOP`、candidate ready false、
-Route B complete false、Product / full-I1 / Cycle001 / production credit 0、`automatic_progression=false`である。
+providerless Route A complete false、Product / full-I1 / Cycle001 / production credit 0、`automatic_progression=false`である。
 
 従って、これは未実装ではなく、商品品質に到達しなかった`DRAFT_WIP_DISABLED`のcurrent before baselineである。
 body-full input / candidateは本designへ転記しない。correctionは未承認であり、authorized next workは0である。
@@ -58,7 +58,7 @@ body-full input / candidateは本designへ転記しない。correctionは未承�
 
 Phase 0 / P0 / P0-R1とstandalone product-quality delta 0のL3-R / L3-Iは
 `RETIRED_HISTORICAL_NONREUSABLE`である。後続のP0 / L3-I prerequisite、alternate executor、別provider / model、rename、
-類似preflight、再承認またはsuccessor routeはcurrent authorityを持たない。Route Bのmeaning sovereignty、unknown、
+類似preflight、再承認またはsuccessor routeはcurrent authorityを持たない。providerless Route Aのmeaning sovereignty、unknown、
 no-promotionとsource-explicit groundingのproduct contractだけを、以下のcurrent implementation unit内で保持する。
 
 別のMash明示承認後に許され得るnext implementation classはone bounded actual Emlis artifact quality improvement unit exact1だけである。開始時に、
@@ -208,7 +208,7 @@ V1-A runtime policy:
 | Resolution | Normal observation use |
 |---|---|
 | `UNIQUE` | 必要条件にすぎない。matching `JapaneseAttachmentAdmission`がapproved route contract下で当該owner / witnessをadmitした場合だけrequired dutyへ使用可能 |
-| `AMBIGUOUS` | approved Route B knowledgeと§18 current plan contractではambiguityに依存しないmeaningful limited claim、または各round target exact1のsemantic clarificationだけを候補化できる。thread budgetはFree／Plus 0..1、Premium sequential 0..3。同一product-quality improvement unit内のconstraintであり、別Gateにしない |
+| `AMBIGUOUS` | approved providerless Route A knowledgeと§18 current plan contractではambiguityに依存しないmeaningful limited claim、または各round target exact1のsemantic clarificationだけを候補化できる。thread budgetはFree／Plus 0..1、Premium sequential 0..3。同一product-quality improvement unit内のconstraintであり、別Gateにしない |
 | `UNRESOLVED` | unresolved部分を言い切らず、limited／plan-budget内の一round一問／unavailable／separate safetyだけを候補化できる。同一product-quality improvement unit内のconstraintであり、別Gateにしない |
 
 parserのone-bestだけで`UNIQUE`にしない。user clarificationはmeaning choiceを追加できるが、parserの過去outputをretroactive truthへしない。
@@ -218,13 +218,13 @@ independent admission closure:
 | Status | Visible authority |
 |---|---|
 | `FORMAL_CLOSED` | independent assessorがcurrent formal contractを全条件で満たすmatching setとしてsealした場合だけ |
-| `PROVISIONAL_ONLY` | Route B選択後も単独ではvisible authorityにならない。source-explicitまたはtarget exact1のuser-owned supplemental evidenceに独立してgroundできないdisputed claimへ使用不可 |
+| `PROVISIONAL_ONLY` | providerless Route A選択後も単独ではvisible authorityにならない。source-explicitまたはtarget exact1のuser-owned supplemental evidenceに独立してgroundできないdisputed claimへ使用不可 |
 | `UNRESOLVED` | visible candidateなし |
 | `UNAVAILABLE` | meaning payloadなし |
 
 providerのcandidate-local `UNIQUE`またはempty ambiguity listはadmissionではない。attachment set ID / digest、source version、resource lock、approved contract、formal denominator、independent mutation evidenceが一致しなければvisible dutyへ使用しない。
 
-official候補のcurrent comparisonでは`FORMAL_CLOSED`を成立させるconcrete providerが確認できていない。Route Bのper-owner disposition、provisional graph隔離、one-clarification lifecycleを含むexact acceptance contractとbounded preflightがapproved body v1.0.0へ固定されたこと、P0 evidence / L3-Iが成立しなかったことはhistorical factsとして保持する。P0 / L3-Iはcurrent admission prerequisiteではない。provider outputはRoute B product contractに従い、§0.2の同一unit内で得るactual artifactの商品品質でだけ判断する。
+official候補のcurrent comparisonでは`FORMAL_CLOSED`を成立させるconcrete providerが確認できていない。providerless Route Aのper-owner disposition、provisional graph隔離、one-clarification lifecycleを含むexact acceptance contractとbounded preflightがapproved body v1.0.0へ固定されたこと、P0 evidence / L3-Iが成立しなかったことはhistorical factsとして保持する。P0 / L3-Iはcurrent admission prerequisiteではない。provider outputはproviderless Route A product contractに従い、§0.2の同一unit内で得るactual artifactの商品品質でだけ判断する。
 
 ## 6. `EmlisMeaningGraph` extension
 
@@ -456,7 +456,7 @@ forbidden replay / append 0
 relation / unknown / self-denial / lifecycle preserved
 ```
 
-Route B directionは選択済みだが、Cycle001のStep1 contract変更は未承認である。適用にはseparate C0とfresh `08`判断を必要とし、このdetail suiteまたはL3-R selection receiptだけで251 denominator、visible claim authority、P1–P7、Cycle acceptanceを緩和しない。
+providerless Route A directionは選択済みだが、Cycle001のStep1 contract変更は未承認である。適用にはseparate C0とfresh `08`判断を必要とし、このdetail suiteまたはL3-R selection receiptだけで251 denominator、visible claim authority、P1–P7、Cycle acceptanceを緩和しない。
 
 ### Production cutover
 
@@ -491,7 +491,7 @@ CMEE_V1A_EMLIS_OBSERVATION_CANDIDATE_READY_DISABLED_NOT_ADMITTED
 
 このstateをCycle proof、production admission、Emlis question completionへ変換しない。machine checkと華恋pre-screenはMash確認を代替せず、Mash確認前は本stateまたはproduct creditを宣言しない。
 
-Route B bounded preflight / exact acceptance contractがapproved body v1.0.0へ固定され、L3-Rが成立したことはhistorical factである。P0 measured PASS、separate L3-I、alternate executor、renamed preflightまたはreapprovalはremaining prerequisiteではない。別Mash承認後に許され得るimplementation class exact1は§0.2のone bounded actual Emlis artifact quality improvement unitだけである。
+providerless Route A bounded preflight / exact acceptance contractがapproved body v1.0.0へ固定され、L3-Rが成立したことはhistorical factである。P0 measured PASS、separate L3-I、alternate executor、renamed preflightまたはreapprovalはremaining prerequisiteではない。別Mash承認後に許され得るimplementation class exact1は§0.2のone bounded actual Emlis artifact quality improvement unitだけである。
 
 Cycle001のcurrent first unfinished gateはfresh applicable `08`が示す。CMEE prerequisiteをCycleのnavigation stateへ読み替えず、同時にCycleのtechnical Gateを、actual Emlis artifactの品質向上に先行する独立workへ変換しない。
 
@@ -503,12 +503,12 @@ CMEE_V1A_EMLIS_OBSERVATION_PRODUCTION_OPERATIONAL
 
 このstateもV1-B question operationalを含まない。
 
-## 17. Approved Route B Emlis resolution contract
+## 17. Providerless Route A source-owner resolution contract
 
 Emlis resolverはrequired/active owner全件のexact-one dispositionを入力とし、provider proposalをmeaning authorityへしない。visible graphはsource-explicitまたはtarget-exact1 user supplemental evidenceだけで支える。
 
 ```text
-contract_id = cocolon.cmee.v1a.acceptance.route_b.v1
+contract_id = cocolon.cmee.v1a.source_owner_resolution.v2
 GENERATED = all required visible duties source/user grounded; unresolved required duty 0
 LIMITED = meaningful source-bound observation >= 1 + bound Reception + explicit unknown
 QUESTION_PENDING = PRE_QUESTION LIMITED + material target unknown exact1
@@ -958,7 +958,7 @@ STOP_AFTER_STEP5
 
 - role anchorのover-limit policyを`semantic_boundary_or_stop`へ訂正した。source-contiguousなcomplete predicate、retained direction + burden、conditional action → changeだけをexact16以内で保持し、negative / inability anchorまたはactionを落とすright-edge切断は0である。
 - standalone whole-state negationはnoun / adjective / verb、plain / past / polite / polite-pastのfinite exact16でpositive compilation前にfail closedする。既存のexperiencer / time / deontic / nonfactive scope理由はpreemptionさせない。
-- positive Route B ownerはcanonical authority / resolution / admission / reason / claim refsを要求する。`NOT_VISIBLE_UNRESOLVED`はvisible claim exact0、material UNKNOWNはunknown target exact1へ閉じる。coordinated downgrade、noncanonical owner field、directional endpoint逆転をrunnerもrejectする。
+- positive providerless Route A ownerはcanonical authority / resolution / admission / reason / claim refsを要求する。`NOT_VISIBLE_UNRESOLVED`はvisible claim exact0、material UNKNOWNはunknown target exact1へ閉じる。coordinated downgrade、noncanonical owner field、directional endpoint逆転をrunnerもrejectする。
 - source strengthだけの変更でdepth / intensityを自動昇格せず、DISCOMFORT person-target tamperはcompiler / realizer前にrejectする。candidate kind capはexact2のままである。
 - source kernel、engine、package `__init__`、common guard、production validator / API / DB / RN / persistence、public dataclass field / module export shapeは変更していない。retry、fallback、provider、random、case-ID production branchは0である。
 

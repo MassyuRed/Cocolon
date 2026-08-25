@@ -3,6 +3,7 @@ document_id: COCOLON_CMEE_STAGE1_ADDITIONAL_CORRECTION_ULTRA_FINAL_TECHNICAL_BOD
 title: "Cocolon CMEE Stage 1 追加修正 — Ultra華恋 Final Technical Body and Pro/Ultra Joint Recommendation"
 document_kind: ULTRA_FINAL_TECHNICAL_BODY_AND_JOINT_RECOMMENDATION
 created_at: "2026-08-24 JST"
+route_policy_revision: "2026-08-25 JST"
 supersedes_document_id: COCOLON_CMEE_STAGE1_ADDITIONAL_CORRECTION_ULTRA_INITIAL_TECHNICAL_DESIGN_20260824
 pro_review_document_id: COCOLON_CMEE_STAGE1_ADDITIONAL_CORRECTION_PRO_REVIEW_20260824
 pro_review_verdict: CHANGES_REQUIRED_BLOCKER0_MAJOR4_MINOR2
@@ -12,14 +13,14 @@ decision_owner: Mash
 product_value_owner: Mash
 product_and_functional_policy_owner: "Pro華恋"
 technical_design_owner: "Ultra華恋"
-recommended_route: PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER_WITH_EARLY_ACTUAL_LANGUAGE_VIABILITY_AND_CONDITIONAL_EXTERNAL_COMPOSER
-design_status: FINAL_TECHNICAL_CANDIDATE_AWAITING_MASH_LEVEL3_DECISION
-implementation_approval: NOT_GRANTED
-github_write_approval: NOT_GRANTED
-mash_level3_approval: NOT_GRANTED
-current_canonical_contract_effect: 0
-proposed_contract_effect: FINAL_CANDIDATE_ONLY
-github_effect: 0
+recommended_route: PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER_ROUTE_A_ONLY
+design_status: ROUTE_A_ONLY_POLICY_SOURCE_STEP3_TERMINAL
+implementation_approval: CONSUMED_PRIOR_UNIT_STEP3_TERMINAL
+github_write_approval: APPROVED_ROUTE_A_ONLY_POLICY_REPLACEMENT_20260825
+mash_level3_approval: ROUTE_A_ONLY_POLICY_REPLACEMENT_ONLY
+current_canonical_contract_effect: ROUTE_A_ONLY_POLICY_BINDING
+proposed_contract_effect: NONE_CURRENT_POLICY_APPLIED
+github_effect: DOCS_POLICY_REPLACEMENT_ONLY
 runtime_effect: 0
 api_effect: 0
 db_effect: 0
@@ -30,6 +31,12 @@ new_dependency_effect: 0
 product_credit: 0
 technical_credit: 0
 mash_additional_structure_input_required_now: false
+external_generative_ai_allowed: false
+external_alternative_route_effect: 0
+common_defect_return_count: "2/2_UNCHANGED"
+early_actual_status: NOT_RUN
+step3_terminal: COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP
+current_authorized_next_implementation: NONE
 automatic_progression: false
 ---
 
@@ -58,7 +65,7 @@ Reception actから固定claim列を作る
 
 今回providerless routeを第一選択にする理由は、actualで確認できた直接原因がCMEE private Stage 1内の談話計画・表層構成contractにあり、現在のsource / meaning資産だけでその原因を除去できるためである。provider、network、privacy、継続費用を先に増やす必要はない。
 
-ただし、providerlessであることを商品品質より優先しない。実装の早期に、tension、temporal change、help-seeking、unfinishedの既知exact4とprivate withheld exact4を、最終実装に残る同一planner / composer / normalizer / rankerで実文まで通す。そこでidiomatic Japaneseのceiling、入力固有lexicalizationの不成立、typed軸で説明できないrule増殖、same-family集中などを観測した時は、症状名だけでRoute Bへ送らず§7.5で分類する。`ROUTE_LEVEL_CEILING`ならfull schema / trace / regressionの残りへ進まず停止し、`COMMON_DEFECT`なら§13の共通counter内だけ一般修正する。Route Bの採否をfresh LEVEL_3のMash判断へ戻すのは、ceiling判定またはcommon-defect return上限到達時だけである。
+providerless Route Aは唯一の許可routeである。実装の早期に、tension、temporal change、help-seeking、unfinishedの既知exact4とprivate withheld exact4を、最終実装に残る同一planner / composer / normalizer / rankerで実文まで通す。そこでidiomatic Japaneseのceiling、入力固有lexicalizationの不成立、typed軸で説明できないrule増殖、same-family集中などを観測した時は§7.5で分類する。`ROUTE_LEVEL_CEILING`ならfull schema / trace / regressionの残りへ進まず停止し、`COMMON_DEFECT`なら§13の共通counter内だけ一般修正する。ceilingまたはreturn上限到達後も外部AI、外部composer、provider routeへは移らない。
 
 ```text
 PRO_REVIEW = CONSUMED_EXACTLY_ONCE
@@ -66,7 +73,7 @@ PRO_REVIEW_VERDICT = CHANGES_REQUIRED
 ULTRA_FINAL_VERDICT = CANDIDATE_CORRECTED
 ULTRA_FINAL_TECHNICAL_BODY = COMPLETE
 PRIMARY_OUTCOME = METHOD_OR_PRODUCT_DECISION_CANDIDATE
-JOINT_RECOMMENDATION = PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER_WITH_EARLY_ACTUAL_LANGUAGE_VIABILITY_AND_CONDITIONAL_EXTERNAL_COMPOSER
+JOINT_RECOMMENDATION = PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER_ROUTE_A_ONLY
 IMMEDIATE_MASH_QUESTION = NONE
 IMPLEMENTATION_AUTHORITY = NOT_GRANTED
 CURRENT_CANONICAL_CONTRACT_EFFECT = 0
@@ -82,7 +89,7 @@ review対象は、初版`COCOLON_CMEE_STAGE1_ADDITIONAL_CORRECTION_ULTRA_INITIAL
 | `PRO-MAJOR-02` | `ACCEPT` | final language coreを先に完成させたproduction verticalで、既知exact4 + withheld exact4のactual Japaneseをfull state / trace完成前に読む | 別prototype / Gate / credit / Mash中間確認 0 |
 | `PRO-MAJOR-03` | `ACCEPT` | stable signatureより前にtyped談話選好を置き、局所修正max1を廃止する。代わりにexact6 phaseの`normalize_to_normal_form()` exact1 callとidempotence / defect exact0を要求する | S8-private、shared S9 effect 0、numeric quality score 0 |
 | `PRO-MAJOR-04` | `ACCEPT` | construction keyを文法・意味構造だけに限定し、raw text / case family / regex result / fixture similarityを禁止する。public-safe nonbinding walkthrough exact4とprivate withheld pre-screenを追加する | finished sentence bank 0、runtime case-ID effect 0 |
-| `PRO-MINOR-01` | `ACCEPT` | rule proliferation、lexicalization failure、idiomatic ceiling、same-family concentrationを観測対象に追加し、§7.5で`COMMON_DEFECT | ROUTE_LEVEL_CEILING`に原因分類する | ceilingまたはreturn上限時のみRoute B trigger、Route B authority 0 |
+| `PRO-MINOR-01` | `ACCEPT` | rule proliferation、lexicalization failure、idiomatic ceiling、same-family concentrationを観測対象に追加し、§7.5で`COMMON_DEFECT | ROUTE_LEVEL_CEILING`に原因分類する | ceilingまたはreturn上限時はRoute A terminal STOP。外部route authority 0 |
 | `PRO-MINOR-02` | `ACCEPT` | `COMMON_DEFECT_RETURN_MAX=2`をcost / decision boundaryとして固定する。上限到達時は低品質candidateを受け入れずMashへfresh判断を戻す | quality ceiling 0、automatic progression 0 |
 
 このreviewは同じstable initial identityへの原則一回reviewとしてconsumeする。本final bodyはreviewの要求を狭めず実装可能なcontractへしたもので、新しいproduct scope、provider、public boundaryを追加していない。したがって、fresh material changeがない限り二回目のPro design reviewは要求しない。
@@ -94,7 +101,7 @@ Ultraとして、Pro修正に加えて次を推奨する。
 1. **sourceがmaterial thoughtを支える時だけ、content-bearing thoughtを最低exact1要求する。** projectionが`APPRAISAL | MATERIAL_VALUE | RELATIONAL_POSITION`を具体target / admitted relationへbindできる時は、そのいずれかexact1以上を要求する。一方、source-supported thoughtがなく、具体elicitorを持つaffect-onlyがminimum honest setなら正常に許可する。generic thoughtを数合わせで作ることは許可しない。
 2. **早期actualは最初の不可逆な技術判断点に置く。** current upstreamには一般的な日本語lemma / POS / case-frameがなく、現v2はsource-shape regexと個別語彙に強く依存する。anti-template境界を守ったまま自然なlexicalizationが成立するかは、型とtraceを完成させる前に実文で確かめる方が、工数と商品リスクの両方に対して合理的である。
 3. **recompositionをretry loopにしない。** 本案は全文をexact6 phaseで一度normal formへ写すpure functionとし、同じ関数の二度目でtyped planだけでなくsurface / derivation / duty / suppression / seedを含むcanonical normalized bytesが変わらないことを必須にする。これで「一回」を品質上限ではなくnormalization identityに変える。
-4. **providerless ceilingをfailureとして正直に扱う。** typed profileまで同値なのに、どちらが自然な日本語かをstable IDでしか選べない場合、語彙assetを増やして隠さずRoute B triggerとする。providerless維持自体を商品目的へ昇格させない。
+4. **Route Aのlanguage ceilingをfailureとして正直に扱う。** typed profileまで同値なのに、どちらが自然な日本語かをstable IDでしか選べない場合、語彙assetを増やして隠さずRoute A terminal STOPとする。低品質を受け入れず、外部AIまたは外部composerへ切り替えない。
 5. **withheldを小さなhuman pre-screenに留める。** exact4はformal exact8の分母、numeric score、Product evidenceではない。隠しfixture bankを育てると新しいoverfit ownerになるため、body、expected text、case patchをGitHubへ保存しない。
 
 ---
@@ -332,9 +339,9 @@ S9は新しい構成を作らない。hard-valid候補の中から`min(valid, ke
 
 ---
 
-## 5. 選択したrouteと代替案
+## 5. Route A only
 
-### 5.1 Route A — Providerless Grounded Discourse Composer（推奨）
+### 5.1 Route A — Providerless Grounded Discourse Composer（唯一の許可route）
 
 同じrequestでfreeze済みの`AdmittedTextSource + GroundedMeaningGraph + GroundedObservationPlan + EmlisStage1Projection + parent ExperiencePlan`を入力にし、次の五責任だけをnew private routeへ置く。別source admission、別graph構築、raw textからの第二meaning解析は行わない。
 
@@ -345,14 +352,6 @@ S9は新しい構成を作らない。hard-valid候補の中から`min(valid, ke
 5. 全文をexact6 phaseのnormal formへ写し、typed discourse preferenceでrankする。
 
 provider、network、new dependency、per-request外部費用は0である。request-local、deterministic、fail-closedを維持する。
-
-### 5.2 Route B — Constrained external composer（条件付き）
-
-`ConversationComposerClient` protocolはactualに存在するが、CMEE current pathに自然文を生成するconcrete provider ownerは存在しない。採用する場合は、current inputとbounded semantic planを外部へ送るprivacy、provider / model、費用、latency、availability、determinismを変更する。
-
-自然さの上限はRoute Aより高い可能性がある。一方、今回actualで確定した直接原因を除く前に採用すると、意味planの欠陥をmodelへ隠す危険がある。したがってfirst routeにはしない。
-
-early / final actualでinput-specific lexicalization、idiomatic Japanese、same-family concentration、typed profileでは選べない自然さの問題が現れた時は、§7.5の原因分類を必ず通す。approved軸内の一般修正で直る`COMMON_DEFECT`は§13のcounter内でRoute Aへ戻す。修正がrule proliferation、finished sentence bank、case branch、raw-text selector、new enum / asset familyを必要とする`ROUTE_LEVEL_CEILING`、またはcommon-defect return上限到達時だけRoute AをterminalにしてRoute BをLEVEL_3判断へ上げる。exact triggerとdecision packetは§19.2が所有する。
 
 ### 5.3 Route C — microgrammar v3拡張（不採用）
 
@@ -3252,7 +3251,7 @@ mergeはsurfaceを短くする操作であり、semantic collapseではない。
 | discourse planがrequired meaningをcoverできない | `UNAVAILABLE` |
 | surface candidateが全件hard invalid | `UNAVAILABLE` |
 | normal formのidempotence / defect exact0を証明できない | `RECOMPOSITION_NORMAL_FORM_UNPROVEN_STOP` |
-| early actualでproviderless Japanese ceilingを観測 | `PROVIDERLESS_LANGUAGE_VIABILITY_STOP` |
+| early actualでRoute A Japanese ceilingを観測 | `ROUTE_A_LANGUAGE_VIABILITY_STOP` |
 | construction / expression ruleがtyped軸でなくcaseごとに増殖 | `CONSTRUCTION_RULE_PROLIFERATION_STOP` |
 | provider / legacy / generic fallbackが必要 | STOP、実装しない |
 
@@ -3379,7 +3378,7 @@ early actualは別Gate、acceptance、Product PASS、candidate-ready、creditで
 ```text
 EARLY_ACTUAL_STATUS = NOT_RUN
   | LANGUAGE_VIABILITY_OBSERVED
-  | PROVIDERLESS_LANGUAGE_VIABILITY_STOP
+  | ROUTE_A_LANGUAGE_VIABILITY_STOP
 
 EARLY_HUMAN_READ_RESULT = CLEAR | COMMON_DEFECT | ROUTE_LEVEL_CEILING
   # transient result; durable acceptance / statusではない
@@ -3389,11 +3388,11 @@ LANGUAGE_VIABILITY_OBSERVED:
   candidate_ready = false
   Mash_intermediate_review = 0
 
-PROVIDERLESS_LANGUAGE_VIABILITY_STOP:
+ROUTE_A_LANGUAGE_VIABILITY_STOP:
   remaining_full_implementation = 0
   product_credit = 0
   current_authority_terminal = true
-  Route_B_decision_packet_required = true
+  alternative_route_decision_packet = FORBIDDEN
 ```
 
 `COMMON_DEFECT`は、複数bodyへ共通し、approved type / enum / path / provider / privacy / candidate budgetを変えず、既存の原因componentへ一般修正できる欠陥だけである。`ROUTE_LEVEL_CEILING`は、その修正にcase / phrase-family rule、finished sentence、new enum / axis、listed外path、provider、またはtyped profileで説明できないnaturalness判断が必要な状態であり、return budgetを消費して同じrouteを延命しない。
@@ -3432,7 +3431,7 @@ MASH_WITHHELD_BODY_ACCESS = 0
 
 withheld bodyはactual user history、user ID、profileを使わず、repo外private JSONからexisting runnerへ与える。body-full input / outputはprivate packet内だけで扱い、GitHub / canonical docs / 本design zipへ入れない。public / durable resultはcount、family count、set digest、`CLEAR | COMMON_DEFECT | ROUTE_LEVEL_CEILING`、body-free defect classだけとする。Proがdefectを返す時はraw bodyやcase patchでなく原因componentを返す。
 
-`COMMON_DEFECT_RETURN_MAX=2`は、early actualまたはfinal exact8 + withheldのhuman body readから、cross-case product-surface defectでcomposition coreへ戻る回数のcost / decision boundaryである。machine bug fixはcount外である。上限到達時はcandidateを低品質のままMashへ見せず、残存defect、actual cost、same-route拡張 / Route B / 別方式のdecision briefだけを戻す。
+`COMMON_DEFECT_RETURN_MAX=2`は、early actualまたはfinal exact8 + withheldのhuman body readから、cross-case product-surface defectでcomposition coreへ戻る回数のcost / decision boundaryである。machine bug fixはcount外である。上限到達時はcandidateを低品質のままMashへ見せず、残存defectとactual costをbody-freeで記録してRoute A terminal STOPとする。外部AI、外部composer、別routeへは移らない。
 
 ```text
 COMMON_DEFECT_RETURN_COUNT_INITIAL = 0 at approved Step 0
@@ -3453,7 +3452,7 @@ COMMON_DEFECT_RETURN_TRANSITION(origin, result):
 
   if result == ROUTE_LEVEL_CEILING:
     COMMON_DEFECT_RETURN_COUNT is unchanged
-    -> PROVIDERLESS_LANGUAGE_VIABILITY_STOP
+    -> ROUTE_A_LANGUAGE_VIABILITY_STOP
 
   if result == COMMON_DEFECT and COMMON_DEFECT_RETURN_COUNT < 2:
     COMMON_DEFECT_RETURN_COUNT += 1
@@ -3708,7 +3707,7 @@ MASH_PRODUCT_READ_FAIL:
 
 これは品質Gateや実装承認ではなく、current sourceとPro correctionを基にしたplanning rangeである。48–82 hはreturn exact0で最初のearly本文を観測する地点であり、`LANGUAGE_VIABILITY_OBSERVED`到達を無条件に保証するrangeではない。earlyで`COMMON_DEFECT`を返す場合の追加時間は、globalな`+24–54 h` contingencyから消費し、early用に別加算して100–180 hを超えて二重計上しない。48–82 h時点でfinal language coreを先に完成させるため、早期actual後にconstruction / morphology / anti-template / rankerを後付けするbucketは置かない。後続bucketは`LANGUAGE_VIABILITY_OBSERVED`後だけ消費する。上限は`COMMON_DEFECT_RETURN_MAX=2`のcomposition-core return contingencyを含むが、上限まで使うauthorityや品質妥協を意味しない。Step 0でapproved assumptionsが不一致なら、このrangeを流用せずeffect前にfresh LEVEL_3 candidateへ戻す。
 
-`UPSTREAM_MORPHOSYNTAX_SCOPE_STOP`が成立し、listed外path、external parser、new dependencyが必要なら100–180 hを適用しない。exact path / dependency / privacy / costを含むfresh estimateを作る。early providerless STOP時はfull rangeを消費せず、成立済みのsource / subjective plan contractはRoute Bでも再利用候補にできる。
+`UPSTREAM_MORPHOSYNTAX_SCOPE_STOP`が成立し、listed外path、external parser、new dependencyが必要なら100–180 hを適用しない。external parser / external AI / network dependencyを追加せずSTOPする。成立済みのsource / subjective plan contractは、futureのfresh Route A-only designでだけ再利用候補にできる。
 
 Recommended Route A:
 
@@ -3725,21 +3724,9 @@ recommended minimum Mash burden = explicit decisions exact2
 intermediate Mash monitoring = 0
 
 conditional additional decision:
-  separate GitHub write authority / Route B / scope or contract change = +1 each as applicable
+  separate GitHub write authority / Route A-only scope or contract change = +1 each as applicable
   Product Read FAIL後のnext work = fresh explicit decision required
 ```
-
-Conditional Route Bへ移る場合:
-
-```text
-additional engineering estimate = 30–60 h preliminary
-provider / model price = fresh decision時に算定
-recurring request cost = unknown until provider/model fixed
-structured-output adaptation / evaluation / privacy / failure behavior = estimateに含む
-latency / availability / privacy / determinism = LEVEL_3 decision required
-```
-
-不確かなprovider価格を本書で固定しない。
 
 ---
 
@@ -3749,14 +3736,14 @@ latency / availability / privacy / determinism = LEVEL_3 decision required
 |---|---|
 | 新composerが大きなtemplate bankになる | sentence bank / case regexを禁止し、graph-based clause combinatorだけを許可。必要になればSTOP |
 | upstreamにgeneral Japanese lemma / POS / case-frameがない | final language coreを含む48–82 h cumulative early actualでphrase seamを確認。listed外path / dependencyが必要ならSTOP |
-| deterministic Japaneseの自然さが不足 | source-bound concrete phrase、typed preference、idempotent normal formを実文で検証。語彙追加loopでは隠さず§7.5で原因分類し、ceilingまたはreturn上限時だけRoute B判断へ |
+| deterministic Japaneseの自然さが不足 | source-bound concrete phrase、typed preference、idempotent normal formを実文で検証。語彙追加loopでは隠さず§7.5で原因分類し、ceilingまたはreturn上限時はRoute A terminal STOP |
 | multi-anchor mergeでtraceが壊れる | existing Tuple fieldを使い、state / validatorをsame unitで更新 |
 | Emlis owner / functional / participant tokenまでsource semantic refへ偽bindingする | full scalar exact-coverを維持し、`EMLIS_OWNER / RELATION_FUNCTIONAL / QUALIFIER_FUNCTIONAL / PARTICIPANT_ROLE / PURE_STRUCTURAL`へtyped bind |
 | candidate countが増えすぎる | internal exact32 / unit max9 / normal-form exact1 callをfreezeし、超過はsilent truncationせずnamed STOP |
 | testsが旧failureを正解として固定する | first-speaker / anaphora-first / one-anchor / max2 testsをcontract更新 |
 | set-level variationをruntime score化する | human pre-screenだけで検出し、generic composition causeへ戻す |
 | exact8だけ改善しunseenで崩れる | semantic-equivalence / contrast / boundary / multi-ref mutations + private withheld exact4 |
-| providerlessを守るため品質を妥協する | finished templateが必要になった時点でSTOPしLEVEL_3 decision |
+| Route A onlyを理由に品質を妥協する | finished templateまたはcase assetが必要になった時点でSTOPし、低品質candidateを提示しない |
 | scopeがproductionへ漏れる | disabled Stage 1 private route、API / DB / RN / production effect 0を維持 |
 
 ---
@@ -3827,7 +3814,7 @@ latency / availability / privacy / determinism = LEVEL_3 decision required
 - `SUBJECTIVE_CLAIM_BUDGET_STOP`: responsibility exact-coverに必要なdistinct claimsがgrouping後も5件以上、またはvalid subset 0件である。responsibilityを落として1..4へ縮めない。
 - `RECOMPOSITION_NORMAL_FORM_UNPROVEN_STOP`: idempotenceまたはcorrectable defect exact0を証明できない。
 - `SCALAR_SURFACE_REALIZATION_NONUNIQUE_STOP`: closed precedenceで選ばれたFUSED / OVERT / UNMARKED mode内にcompatible registered ruleが2件以上残り、typed ruleだけでexact1にできない。
-- `PROVIDERLESS_LANGUAGE_VIABILITY_STOP`: early actualでinput-specific lexicalization、idiomaticity、structural diversityが成立しない。
+- `ROUTE_A_LANGUAGE_VIABILITY_STOP`: early actualでinput-specific lexicalization、idiomaticity、structural diversityが成立しない。外部AIまたは別routeへ切り替えない。
 - `CONSTRUCTION_RULE_PROLIFERATION_STOP`: typed grammar axesでなくsurface / case依存ruleが増殖する。
 - `UPSTREAM_MORPHOSYNTAX_SCOPE_STOP`: listed外upstream field / parser / dependencyが必要。
 - `LANGUAGE_CORE_DEPENDENCY_SCOPE_STOP`: early / final product-causal call graphが§6.1 whole-file dependency exact6の外へ到達する、または同allowlistを暗黙拡張しないと成立しない。
@@ -3864,53 +3851,29 @@ MASH_STRUCTURE_KNOWLEDGE_GAP = NONE_FOUND_FOR_FINAL_ROUTE_CANDIDATE
 - providerless correctionはAPI / privacy / cost / productionの新判断なしで設計できる。
 - 既存の理解構造、Emlis価値、Layer 1 / Layer 2の役割を再質問する必要はない。
 
-### 19.2 条件付きLEVEL_3質問
+---
 
-次のtriggerがactualで成立した場合だけ、exact1 decision packetとして質問する。
+### 19.2 Route A only binding（2026-08-25 Mash決定）
 
-```text
-TRIGGER:
-  A. early actualでinput-specific phraseをidiomatic Japaneseへlexicalizeできない
-  OR B. rule / asset追加がtyped grammatical axesでなくcase / surface依存になる
-  OR C. unrelated known / withheld inputsのsame-family集中を直すためにcase / phrase-family rule、
-       new enum / asset family、typed preference外selectorが必要でROUTE_LEVEL_CEILINGになる
-  OR D. typed profile同値の候補でidiomaticity差をstable IDでしか選べない
-  OR E. final pre-screenでROUTE_LEVEL_CEILINGと分類される、または
-       COMMON_DEFECT_RETURN_COUNT=2の再実行後もCOMMON_DEFECTが残る
-  OR F. frozen providerless resource envelopeまたはcurrent upstream morphologyだけでは成立しない
+Mashのcurrent明示決定により、Stage 1 language routeはproviderless Route A exact1だけとする。external generative AI、external composer、provider/model route、network送信、current input本文またはsemantic projectionの外部送信は、current/future candidateのいずれにも含めない。旧§19.2のconditional external route trigger、decision packet、provider selection、external operator、費用・privacy検討は撤回され、再利用できない。
 
-QUESTION:
-  current input本文と、current requestだけのsource-bound semantic projectionを、
-  履歴・user ID・derived profileを含めず、
-  承認済みexternal generative composerへ送るStage 1 routeを許可するか
-```
-
-この判断で同時に固定すべき項目:
-
-- provider / model / version / region。
-- current retention / training / deletion / encryption terms。
-- payload schema exact。current input + current source-bound projectionだけで、history / user ID / profile / cross-core artifact 0。
-- provider outputはlanguage proposalで、meaning / source / user-fact authority 0。
-- source / owner / polarity / modality / time / unknown / safety validator。
-- network / dependency / privacy / API / DB / RN / production effects。
-- request / period cost ceiling、latency / timeout、retry exact0、failure=`UNAVAILABLE`。
-- byte determinismを要求するかsemantic determinismへ変えるか、no legacy / provider fallback。
-- exact changed paths、cutover / retirement、tests、fresh estimate、Mash burden。
-- unchanged exact8 + private withheld pre-screen boundary。
-- `automatic_progression=false`。
-
-Ultra技術推奨は、trigger成立時に低品質なtemplate bankを増やすより、constrained external composerをMash判断へ上げることである。
-
-trigger成立はRoute B authorityではなく、該当する§18 named reasonによるRoute Aのcurrent-authority terminal STOPである。genericな「外部AIを許可するか」を先に聞かず、上記packetがfresh exactになってからLEVEL_3 exact1 questionにする。現時点は次である。
+Route Aで`ROUTE_LEVEL_CEILING`、`ROUTE_A_LANGUAGE_VIABILITY_STOP`または`COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP`が成立した場合は、そのterminalで停止する。第三generic correction、counter reset、同じStep 3再実行、外部AIへの切替は0である。Cocolonを続ける場合も、fresh explicit LEVEL_3で承認されたRoute A-only product design以外は開始しない。
 
 ```text
-ROUTE_B_DECISION_PACKET = TRIGGER_ONLY_NOT_APPROVED
-ROUTE_B_PROVIDER = NOT_SELECTED
-ROUTE_B_NETWORK_PRIVACY_EFFECT = 0
+STAGE1_LANGUAGE_ROUTE = ROUTE_A_PROVIDERLESS_ONLY
+EXTERNAL_GENERATIVE_AI_ALLOWED = FALSE
+EXTERNAL_COMPOSER_ALLOWED = FALSE
+PROVIDER_OR_MODEL_SELECTION = NOT_APPLICABLE
+EXTERNAL_OPERATOR = NOT_APPLICABLE
+NETWORK_BODY_SEND = 0
+EXTERNAL_ALTERNATIVE_ROUTE_ACTIVE_DESIGN = 0
+EXTERNAL_ALTERNATIVE_ROUTE_FUTURE_TRIGGER = 0
+EXTERNAL_ALTERNATIVE_ROUTE_DECISION_PACKET = CANCELLED_NOT_ADOPTED
+EXTERNAL_ALTERNATIVE_ROUTE_REACTIVATION_ALLOWED = FALSE
+AUTOMATIC_PROGRESSION = FALSE
 ```
 
 ---
-
 ## 20. Mash LEVEL_3 decision handoff
 
 Proの原則一回reviewは§0.1でconsume済みであり、全6指摘を`ACCEPT`した。fresh product / scope / provider material changeがない限り、本final bodyへの二回目のPro design reviewは要求しない。
@@ -3926,7 +3889,7 @@ Mashへ提示するexact1 implementation candidateは、本mdの外部算出SHA-
 7. `FINAL_PROPOSED_CHANGED_PATHS=EXACT14`とread-only / STOP paths。
 8. 100–180 focused engineering hours、Route A external / per-request cost 0、Mash burden。
 9. Safety / source / privacy / public / runtime / production effects。
-10. terminal reasons、Route Bはtrigger-only、automatic progression false。
+10. terminal reasons、Route A only、external AI / external composer 0、automatic progression false。
 
 推奨するMash burdenはexplicit decisions exact2である。
 
@@ -3941,7 +3904,7 @@ withheld Mash review burden = 0
 
 Mash approval後のStep 0はfresh identity matchだけであり、cap、path、estimate、providerを再設計しない。early `LANGUAGE_VIABILITY_OBSERVED`は同じapproved unit内のcontinuationで、next Gateや追加Mash承認ではない。
 
-このcandidateはRoute B、listed外path、provider / privacy変更、Product Read後retryを先取り承認しない。それらが必要ならcurrent authorityをterminalにし、fresh LEVEL_3 packetへ戻す。
+このcandidateはlisted外path、external AI / external composer / provider / privacy変更、Product Read後retryを承認しない。それらが必要な状態ではcurrent authorityをterminalにし、Route A onlyのままSTOPする。
 
 ---
 
@@ -3954,10 +3917,10 @@ PRO_REVIEW_FINDINGS = BLOCKER_0_MAJOR_4_MINOR_2
 PRO_REVIEW_DISPOSITION = ALL_6_ACCEPTED
 ULTRA_FINAL_VERDICT = CANDIDATE_CORRECTED
 ULTRA_FINAL_TECHNICAL_BODY = COMPLETE
-JOINT_RECOMMENDATION = PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER_WITH_EARLY_ACTUAL_LANGUAGE_VIABILITY_AND_CONDITIONAL_EXTERNAL_COMPOSER
+JOINT_RECOMMENDATION = PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER_ROUTE_A_ONLY
 CURRENT_ROOT_CAUSE = IDENTIFIED_FROM_ACTUAL_SOURCE
 KEEP_SUBORDINATE_REPLACE = COMPLETE
-ALTERNATIVE_PROVIDER_ROUTE = CONDITIONAL_LEVEL_3_ONLY
+ALTERNATIVE_PROVIDER_ROUTE = FORBIDDEN
 IMMEDIATE_MASH_QUESTION = NONE
 MASH_ADDITIONAL_STRUCTURE_INPUT_REQUIRED_NOW = false
 MASH_LEVEL_3_IMPLEMENTATION_APPROVAL = NOT_GRANTED
@@ -3998,9 +3961,9 @@ LANGUAGE_CORE_IDENTITY = REQUIRED_EARLY_FINAL_EXACT_MATCH
 COMPLETION_RANGE = 100_180_FOCUSED_HOURS
 ROUTE_A_EXTERNAL_SERVICE_COST = 0
 ROUTE_A_PER_REQUEST_PROVIDER_COST = 0
-ROUTE_B_DECISION_PACKET = TRIGGER_ONLY_NOT_APPROVED
+EXTERNAL_ALTERNATIVE_ROUTE_DECISION_PACKET = CANCELLED_NOT_ADOPTED
 TECHNICAL_STOP = false
-CONDITIONAL_LEVEL_3_QUESTION = TRIGGER_ONLY
+CONDITIONAL_LEVEL_3_QUESTION = ROUTE_A_ONLY_FRESH_PRODUCT_DESIGN_IF_MASH_AUTHORIZES
 MASH_PRODUCT_READ = NOT_RUN
 TECHNICAL_CREDIT = 0
 PRODUCT_CREDIT = 0

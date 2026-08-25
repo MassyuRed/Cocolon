@@ -1,6 +1,6 @@
 ---
 doc_id: cocolon_current_work_rules
-revision_date: 2026-08-16
+revision_date: 2026-08-25
 normative_status: CURRENT_GENERAL_RULE_OWNER
 status: CURRENT_EFFECTIVE
 effective_when: NECESSITY_PRODUCT_DIRECTNESS_AND_MINIMUM_SAFETY_BOUNDARY_REMOTE_POSTVERIFIED
@@ -207,6 +207,15 @@ authorityとして扱いません。後続の設計本文に矛盾する記載�
 
 本条とP0退役の2026-08-16 durable reflectionは、Mash様の今回の明示指示を履行するsingle-useの規範修正です。
 三大中核構造及びCMEEの実装作業・成果・product creditには数えず、将来のdocs-only work exceptionとして再利用しません。
+
+## R1.6 CMEE Stage 1 Route A-only / external AI prohibition（2026-08-25追加）
+
+- CMEE Stage 1のcurrent/future language routeは、providerless `ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER` exact1だけとする。
+- 外部生成AI、external generative composer、remote model/provider、current input本文またはsemantic projectionの外部送信、network call、provider dependency、fallback、external costを禁止する。
+- 名称変更、別packet、別operator、別providerまたはfresh approvalで代替routeを復活させない。
+- Route Aのceilingまたは`COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP`では、そのterminalで停止する。第三generic correction、counter reset、同じStep 3の再実行へ読み替えない。
+- current counterは`2/2`、`EARLY_ACTUAL_STATUS=NOT_RUN`、current authorized next implementationは`NONE`、`automatic_progression=false`である。
+- 過去のGit commitは履歴として残るが、current treeの削除済みpacketや旧名称をauthority、fallbackまたは再利用可能な設計へ戻さない。
 
 ## R2. 事実・source・未確認
 

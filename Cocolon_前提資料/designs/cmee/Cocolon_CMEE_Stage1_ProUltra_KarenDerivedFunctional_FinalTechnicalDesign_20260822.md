@@ -1776,7 +1776,7 @@ existing depth `minimal / focused / layered` は直接写像せず、selected di
 
 - current input source role、schema、lineage。
 - evidence locatorとdigest。
-- Route B owner universeとdisposition。
+- source-owner universeとdisposition。
 - GroundedMeaningGraphのsource-bound semantics。
 - existing Observation / unknown / Reception duty identity。
 - visible top-level Layer 1 / Layer 2 shape。
@@ -1870,7 +1870,7 @@ PROTECTED_COMPARATOR_DELTA:
 
 UNCHANGED:
   exact8 input / order / denominator / axes / engine call exact1
-  source kernel / safety / unknown / Route B owner universe
+  source kernel / safety / unknown / source-owner universe
   public observation / reception string shape
   API / DB / RN / production route
 

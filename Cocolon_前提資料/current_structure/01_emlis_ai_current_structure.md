@@ -1,14 +1,17 @@
 ---
 doc_id: cocolon_emlis_ai_current_structure
 title: "EmlisAI構造 — Current Structure"
-revision_date: "2026-08-24 JST"
+revision_date: "2026-08-25 JST"
 document_role: "EMLIS_AI_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
 implementation_effect: 0
 stage1_v2_product_read_state: "EVALUATED_FAIL_QUALITY_INSUFFICIENT"
-stage1_additional_correction_design_state: "PRO_CONFIRMED_DOCS_ONLY_IMPLEMENTATION_NOT_GRANTED"
+stage1_additional_correction_design_state: "STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP"
 cycle001_effect: 0
+stage1_language_route: "ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER_ONLY"
+external_generative_ai_allowed: false
+external_body_send: 0
 automatic_progression: false
 ---
 
@@ -389,3 +392,30 @@ final remote refs、exact changed-path set、file bytes equalityはcommit / push
 - automatic progression: `false`。
 
 current production `emlis_ai_reply_service.py`、ReplyEnvelope、RN display、Cycle001、question、Layer 3、Piece、Analysisのownerは変わらない。new final bodyはcurrent v2 surface ownerを即時に置換せず、future LEVEL_3 approval後にだけcanonical owner exact1へ分配する。
+
+## 15. Current Route A-only authority（2026-08-25 Mash決定）
+
+Mashのcurrent明示指示により、CMEE Stage 1のcurrent/future language routeはproviderless Route A exact1だけである。外部生成AI、external generative composer、remote model/provider、current input本文またはsemantic projectionの外部送信、network call、provider dependency、fallback、external costを禁止する。名称変更、別packet、別operator、別providerまたはfresh approvalで代替routeを復活させない。
+
+今回の決定は外部route撤去とroute-neutral source/owner contractへの改名だけを承認する。第三generic correction、counter reset、同じStep 3の再実行、Step 4、formal Product Read、ready、merge、productionは承認しない。Route Aでceilingまたはreturn budget exhaustionとなった場合は、そのterminalで停止する。
+
+```text
+DECISION_ID = COCOLON_CMEE_STAGE1_ROUTE_A_ONLY_EXTERNAL_AI_PROHIBITION_20260825
+DECISION_OWNER = MASH
+SOLE_CURRENT_AND_FUTURE_ROUTE = ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER
+EXTERNAL_GENERATIVE_AI = PROHIBITED
+EXTERNAL_COMPOSER_OR_REMOTE_MODEL_PROVIDER = PROHIBITED
+CURRENT_INPUT_OR_SEMANTIC_PROJECTION_EXTERNAL_SEND = 0
+NETWORK_CALL / NEW_PROVIDER_DEPENDENCY / FALLBACK / EXTERNAL_COST = 0 / 0 / 0 / 0
+ALTERNATIVE_ROUTE_CURRENT_AUTHORITY / FUTURE_TRIGGER / REACTIVATION = 0 / 0 / 0
+EXTERNAL_OPERATOR = NOT_APPLICABLE
+COMMON_DEFECT_RETURN_COUNT = 2/2_UNCHANGED
+EARLY_ACTUAL_STATUS = NOT_RUN
+STEP3 = COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP
+THIRD_GENERIC_CORRECTION / COUNTER_RESET / STEP3_RERUN / STEP4 = 0 / 0 / 0 / 0
+CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE
+ONLY_POSSIBLE_FUTURE_CLASS = FRESH_LEVEL3_ROUTE_A_PROVIDERLESS_ONLY
+PRIMARY_OUTCOME = ADMINISTRATIVE_ONLY
+PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
+AUTOMATIC_PROGRESSION = false
+```

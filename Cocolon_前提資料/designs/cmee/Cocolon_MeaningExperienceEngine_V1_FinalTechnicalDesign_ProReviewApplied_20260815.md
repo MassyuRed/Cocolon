@@ -147,7 +147,7 @@ Mashへ結果を提示する前に華恋が全候補本文を読み、明白な�
 既存のPhase 0 / P0 / P0-R1およびproduct-quality delta 0のL3-R / L3-I standalone packetは、
 `RETIRED_HISTORICAL_NONREUSABLE`である。本設計後段に残るPhase 0 / P0の実行指示、prerequisite、approval order、next Gateは
 本条がsupersedeし、current authorityを持たない。別executor、別provider、別model、rename、類似preflightまたは
-新approvalで復活・再包装しない。Route Bの意味主権・unknown・no-promotion等のproduct contractだけを保持し、
+新approvalで復活・再包装しない。source / owner / unknown / no-promotionのproduct contractだけをroute-neutralに保持し、
 product-quality implementationの同一unit内の制約として使う。
 
 この絶対規則は、補助経路を大規模に作りながらEmlisAIの商品品質を後回しにし、その失敗を記録した後も、
@@ -178,7 +178,7 @@ product-quality implementationの同一unit内の制約として使う。
 2. PR #2のlarge recovery／natural-surface／semantic-overlayをCMEEから丸ごと呼ぶwrapperは作らない。責任、必要symbol、test vectorをdesignated ownerへ移し、旧RC identityやprivate helper familyをactive ownerへ昇格しない。
 3. Cycle001 candidate ingress cutover Aとproduction generation cutover Bを別transition・別approvalにする。AのproofをBのauthorizationへ変換しない。
 4. `required + active = 251`、fresh current100、Cycle acceptance denominatorはcurrent Cycle001 ownerの外部contractとして保持する。CMEE implementation prerequisiteにはしない一方、本設計からhistorical、retired、relaxedまたは自動PASSとも決めない。
-5. current PR #3の`SourceOwnerUniverse`はgeneric coverage概念のEmlis V1-A provisional shape、`RouteBOwnerDisposition`はEmlis／Route B core-owned provisional shapeであり、両方を`PROVISIONAL_EMLIS_SPECIALIZATION / NOT_YET_PROMOTED_TO_CROSS_CORE_SHARED_FINAL`とする。
+5. current PR #3の`SourceOwnerUniverse`はgeneric coverage概念のEmlis V1-A provisional shape、`SourceOwnerResolution`はEmlis source-owner provisional shapeであり、両方を`PROVISIONAL_EMLIS_SPECIALIZATION / NOT_YET_PROMOTED_TO_CROSS_CORE_SHARED_FINAL`とする。
 6. providerなしrouteは、visible claim全量がsource-explicitまたはauthenticated supplemental user evidenceだけで成立し、provider-derived meaning／relation／attachmentが0の場合に限る。source coverage、unknown、polarity／modality／time、evidence binding、no-added-claimを省略せず、provider failure後のsilent fallbackには使わない。`FORMAL_DERIVED` claimにはformal admissionを必須とする。
 7. `execution_scope`等のlane値はrequest-local routing contextに限り、meaning、plan、trace、artifact identity／lineageまたはProduct Read対象identityへ入れない。
 8. A後もcurrent production I5 generation ownerとcurrent production safety ownerを変更せず、CMEE production safety effectを0とする。`EngineOutcome.SEPARATE_SAFETY`はproduction safety ownerの代替ではない。B前にsafe-response／public-behavior mapping、single owner、silent empty 0、fallback／dual-run 0を別判断で固定する。
@@ -758,7 +758,7 @@ forbidden_promotions
 fallback_disposition
 ```
 
-source coverage denominatorとproduct realization dutyを同じownerにしない。current PR #3の`SourceOwnerUniverse`／`SourceOwnerObligation`はEmlis V1-A provisional source-coverage shape、`RouteBOwnerDisposition`はEmlis／Route B specializationであり、shared final `ExperiencePlan.duties[]`ではない。
+source coverage denominatorとproduct realization dutyを同じownerにしない。current PR #3の`SourceOwnerUniverse`／`SourceOwnerObligation`はEmlis V1-A provisional source-coverage shape、`SourceOwnerResolution`はEmlis source-owner specializationであり、shared final `ExperiencePlan.duties[]`ではない。
 
 ### 6.6 `GenerationArtifactBundle`
 
@@ -1143,7 +1143,7 @@ NLSv3はwhole moduleではなくowner unitで継承する。exact classification
 | conflicts | D38–D40 | concept／usable symbol／test vectorを抽出し、PR #2 whole recovery wrapperとsecond active ownerを0にする |
 | historical shell | D41–D43 | old RC、Gate、Receipt、controller、executor、FD、authority chainをhistoryへ残しcurrent prerequisiteにしない |
 | future product adaptation | D44、D45 | Pieceはtext＋visual、Analysisはnode／edge／direction／IF provenanceとして改良 |
-| future decisions／gap | D46–D49 | external AI、A、B、exact asset manifestは別owner／別判断。今回実装0 |
+| future decisions／gap | D47–D49 | cutover A／Bとexact asset manifestは別owner／別判断。外部生成AI経路は廃止。今回実装0 |
 
 `DO_NOT_WRAP_AS_CMEE`と`NLSV3_SECOND_ACTIVE_ENGINE=0`を不変条件とする。PR #2からのdirect importまたはmetadata-only wrappingで継承完了としない。
 
@@ -1580,7 +1580,7 @@ completion:
 | Work unit | 何を終えるか | 既存資産 / 外部部品 | 何へ活かすか | 完了後も未完成 | STOP |
 |---|---|---|---|---|---|
 | Historical Phase 0 / P0 | `RETIRED_HISTORICAL_NONREUSABLE`。実行・再承認・rename・successor 0 | historical evidence only | なし | 全商品品質 | 常時DO NOT EXECUTE |
-| Current V1-A Draft WIP before baseline | mashos-api PR #3でR1〜R4、machine structural exact8 8/8まで実装。human Product Readは`EVALUATED_FAIL_STOP` | source exact5、tests exact2、runner exact1。body-fullはpublic化しない | 次のdirect product correctionのbefore evidenceだけ | candidate ready、商品品質、Route B完了、full I1、Cycle、production | correction authorityなし。自動進行0 |
+| Current V1-A Draft WIP before baseline | mashos-api PR #3でR1〜R4、machine structural exact8 8/8まで実装。human Product Readは`EVALUATED_FAIL_STOP` | source exact5、tests exact2、runner exact1。body-fullはpublic化しない | 次のdirect product correctionのbefore evidenceだけ | candidate ready、商品品質、source-owner contract完了、full I1、Cycle、production | correction authorityなし。自動進行0 |
 | Future V1-A product correction | unchanged exact8 beforeからactual Emlis Observation / Receptionの商品品質を非0改善し、華恋pre-screen後にMash確認まで一巡 | current disabled verticalをproduct-causal sourceだけ修正。technical stepは同一unit内 | Mashが確認したactual product result | production admission、Cycle acceptance | 復唱・template・generic Reception・深さ不足、Mash未確認、別補助経路化 |
 | Cycle001 | current100、Product Read、repair、final acceptance | single navigation ownerのfresh `08`、そのrestart bundle、runnerへ限定。new dependency追加0 unless separately approved | Emlis observation sliceの稼働可否を別判断する材料 | Emlis question、actual-device / owner switch / release、Piece、Analysis | active planのgate不成立 |
 | Emlis Question | plan別逐次refinement。Free／Plus 0..1、Premium 0..3 | stage / source partitionを適合。問いdecisionをsemantic source化しない。original＋answer prefixを保持 | False Understanding Prevention | Layer 3、Piece、Analysis | 問いが観測不足を隠す、round上書き |
@@ -1746,7 +1746,7 @@ design reflection後の実装・移行順は、product-quality delta 0の前段�
 22. NLSv3のknowledge／test／failure／historyは保持するが、CMEEと並ぶsecond active Emlis engineにしない。
 23. PR #2 large recoveryをCMEE wrapper／subengine／fallbackにしない。
 24. shared、Emlis、future Piece、future Analysis、test knowledge、historical shellを別ownerへ置く。
-25. `SourceOwnerUniverse`と`RouteBOwnerDisposition`はEmlis provisionalで、cross-core shared finalではない。
+25. `SourceOwnerUniverse`と`SourceOwnerResolution`はEmlis provisionalで、cross-core shared finalではない。
 26. providerなしrouteはsource／user evidence exact routeに限定し、provider failure後のsilent fallbackを0にする。
 27. historical shellの退役をfresh Cycle001 denominator／current100／acceptance contractの退役へ変換しない。
 28. AとBは別approval／別cutoverであり、A後もcurrent production I5とsafety ownerを維持する。

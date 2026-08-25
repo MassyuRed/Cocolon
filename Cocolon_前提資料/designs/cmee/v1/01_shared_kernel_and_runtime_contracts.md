@@ -409,7 +409,7 @@ source coverageとplan dutyを混ぜない。
 3. `GroundedMeaningGraph`: source-bound meaning／unknown／conflict。
 4. `ExperiencePlan.duties[]`: product artifactで実現するsole plan-duty record。
 
-current PR #3の`SourceOwnerUniverse`はgeneric source-coverage conceptのEmlis V1-A current shape、`RouteBOwnerDisposition`はEmlis／Route B core-owned shapeである。両方を`PROVISIONAL_EMLIS_SPECIALIZATION / NOT_YET_PROMOTED_TO_CROSS_CORE_SHARED_FINAL`とし、Piece／Analysisへ要求しない。第2 actual productが同じ責任を実証した後の別design changeだけがpromotionできる。
+current PR #3の`SourceOwnerUniverse`はgeneric source-coverage conceptのEmlis V1-A current shape、`SourceOwnerResolution`はEmlis source-owner shapeである。両方を`PROVISIONAL_EMLIS_SPECIALIZATION / NOT_YET_PROMOTED_TO_CROSS_CORE_SHARED_FINAL`とし、Piece／Analysisへ要求しない。第2 actual productが同じ責任を実証した後の別design changeだけがpromotionできる。
 
 forbidden operations default:
 
@@ -630,23 +630,23 @@ Shared kernelを完成と数えるminimum:
 
 schema / interface testだけではcompletion 0である。
 
-## 15. Emlis V1-A Route B retained semantic constraints
+## 15. Emlis V1-A route-neutral source-owner semantic constraints
 
 旧L3-R／P0／P0-R1のpacket、body identity、Gate、Receipt、controller、executor、FD、旧approval orderはhistorical operational shellであり、shared kernelのruntime／implementation prerequisite／authorityへ移さない。ここで保持するのはmeaning sovereignty、unknown、no-promotion、一roundで問うtarget unknown exact1、immutable refinement、no fallback等のusable semantic／failure knowledgeだけである。thread全体のquestion上限は後述§16.3のplan contractが所有し、旧exact1 lifecycleをPremiumに再適用しない。
 
 ### 15.1 Provisional Emlis coverage specialization
 
-current PR #3の`SourceOwnerUniverse`はgeneric coverage概念のcurrent Emlis shape、`RouteBOwnerDisposition`はEmlis／Route B core-owned shapeである。
+current PR #3の`SourceOwnerUniverse`はgeneric coverage概念のcurrent Emlis shape、`SourceOwnerResolution`はEmlis source-owner shapeである。
 
 ```text
 SourceOwnerUniverse.status = PROVISIONAL_EMLIS_SPECIALIZATION
-RouteBOwnerDisposition.status = PROVISIONAL_EMLIS_SPECIALIZATION
+SourceOwnerResolution.status = PROVISIONAL_EMLIS_SPECIALIZATION
 promotion = NOT_YET_PROMOTED_TO_CROSS_CORE_SHARED_FINAL
 ```
 
-Piece／Analysisにこれらのtype、owner denominatorまたはdisposition enumを要求しない。shared final promotionは第2 actual productで同じ責任が実証された後の別design changeだけで行う。`ExperiencePlan.duties[]`はplan dutyのcanonical shared ownerであり、source coverage denominatorまたはRoute B dispositionではない。
+Piece／Analysisにこれらのtype、owner denominatorまたはdisposition enumを要求しない。shared final promotionは第2 actual productで同じ責任が実証された後の別design changeだけで行う。`ExperiencePlan.duties[]`はplan dutyのcanonical shared ownerであり、source coverage denominatorまたはsource-owner dispositionではない。
 
-Emlis V1-A／Route B内でowner universeを使う場合、required／active／credit-onlyをsource versionとobligation versionへbindし、duplicate、missing、denominator shrinkを0にする。これはEmlis product admission semanticsであり、251というcurrent Cycle denominatorをshared runtime constantへしない。
+Emlis V1-Aのproviderless Route A内でowner universeを使う場合、required／active／credit-onlyをsource versionとobligation versionへbindし、duplicate、missing、denominator shrinkを0にする。これはEmlis product admission semanticsであり、251というcurrent Cycle denominatorをshared runtime constantへしない。
 
 ### 15.2 Source-explicit and provider-required dispositions
 
@@ -677,7 +677,7 @@ provider／resource mismatch、crash、invalid payloadはprovider-required route
 
 ## 16. Step 10 integrated shared contract
 
-本sectionは2026-08-21のFinal Dispositionと正式Pro reviewを反映したcurrent target contractである。§15のhistorical Route B知識と矛盾する場合は本sectionを優先する。本docs reflectionはimplementation／test／DB／API／RN／runtime／cutover effect `0`である。
+本sectionは2026-08-21のFinal Dispositionと正式Pro reviewを反映したcurrent target contractである。§15のroute-neutral source-owner constraintsと矛盾する場合は本sectionを優先する。本docs reflectionはimplementation／test／DB／API／RN／runtime／cutover effect `0`である。
 
 ### 16.1 Shared-neutral responsibility and product owners
 

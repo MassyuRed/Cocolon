@@ -980,7 +980,7 @@ scenario nodeは`origin = OBSERVED_ANCHOR | USER_CHOICE | SIMULATED_EXTENSION | 
 }
 ```
 
-`ExperiencePlan.duties[]`はshared plan-dutyのsole canonical recordである。source coverage denominator、meaning graph、core product taxonomyまたはhuman Product Readをdutiesへ混ぜない。current PR #3の`SourceOwnerUniverse`と`RouteBOwnerDisposition`はcatalogへshared schemaとして追加せず、Emlis provisional specializationとして§16で扱う。
+`ExperiencePlan.duties[]`はshared plan-dutyのsole canonical recordである。source coverage denominator、meaning graph、core product taxonomyまたはhuman Product Readをdutiesへ混ぜない。current PR #3の`SourceOwnerUniverse`と`SourceOwnerResolution`はcatalogへshared schemaとして追加せず、Emlis provisional specializationとして§16で扱う。
 
 plan／graph／semantic refsはversion-qualifiedにする。同一plan内のlocal duty ID／artifact-plan IDはそのplan versionのnamespace内だけで有効であり、別planからbare IDで参照しない。
 
@@ -2420,7 +2420,7 @@ minimum tests:
 - EvidenceSpan unresolved、foreign source、source version／role／field digest／literal digest mismatch RED
 - EvidenceGraph required source missing、unknown-boundary ref mismatch RED
 - PositiveRealizationTrace role invariant、version-qualified ref、EvidenceGraph resolution mismatch RED
-- `SourceOwnerUniverse`／`RouteBOwnerDisposition`をPiece／Analysis shared schemaとして使用した場合RED
+- `SourceOwnerUniverse`／`SourceOwnerResolution`をPiece／Analysis shared schemaとして使用した場合RED
 - `execution_scope`またはA／B laneだけでartifact hash／meaning／lineageが変わる場合RED
 - machine reportまたはhuman Product Read verdictがcanonical artifact identityを変える場合RED
 - `SEPARATE_SAFETY`がartifact／public safe response／production ingress authorityを持つ場合RED
@@ -2431,17 +2431,17 @@ minimum tests:
 
 test fixtureをproduction schema ownerにしない。actual implementationでPython dataclass、validator、JSON schemaのthree-way consistencyを検証する。
 
-## 16. Emlis V1-A retained Route B semantics — non-shared provisional profile
+## 16. Emlis V1-A route-neutral source-owner semantics — non-shared provisional profile
 
 旧L3-R technical body、P0、P0-R1、L3-I／I1、旧Gate、Receipt、controller、executor、FD、approval orderはhistorical operational shellであり、current schema registration、runtime implementation prerequisiteまたはversion authorityへ移さない。旧approval identityをv1alpha2 shared schemaの承認として流用しない。
 
 ### 16.1 Provisional type boundary
 
-current PR #3の`SourceOwnerUniverse`はgeneric coverage conceptのcurrent Emlis shape、`RouteBOwnerDisposition`はEmlis／Route B core-owned specializationである。
+current PR #3の`SourceOwnerUniverse`はgeneric coverage conceptのcurrent Emlis shape、`SourceOwnerResolution`はEmlis source-owner specializationである。
 
 ```text
 SourceOwnerUniverse = PROVISIONAL_EMLIS_SPECIALIZATION
-RouteBOwnerDisposition = PROVISIONAL_EMLIS_SPECIALIZATION
+SourceOwnerResolution = PROVISIONAL_EMLIS_SPECIALIZATION
 promotion = NOT_YET_PROMOTED_TO_CROSS_CORE_SHARED_FINAL
 ```
 
@@ -2868,7 +2868,7 @@ Step 6 runtime ownerはmashos-api commit `1c7270eab83fbac602c79ce39578eea3583701
 
 ### 22.1 Canonical disposition / trace constraints
 
-- positive Route B dispositionはcanonical authority、resolution、admission、reason、claim refsを要求する。`NOT_VISIBLE_UNRESOLVED`はvisible claim exact0、material UNKNOWNはunknown target exact1を持つ。
+- positive source-owner dispositionはcanonical authority、resolution、admission、reason、claim refsを要求する。`NOT_VISIBLE_UNRESOLVED`はvisible claim exact0、material UNKNOWNはunknown target exact1を持つ。
 - visible traceはdirectional relation endpoint order、selected meaning node / relation edge、ordered prior basis、composition variantを保持する。endpoint reversal、noncanonical owner、coordinated downgradeはstructural comparatorでもrejectする。
 - whole-state negation、source strength、person-target subjectivity、semantic role anchorはtyped inputから判定し、case ID / fixture body / expected textをproduction conditionに使用しない。
 - role anchor over-limit ownerは`semantic_boundary_or_stop`である。source-contiguousなcomplete predicateまたはtyped semantic boundaryだけを保持し、meaning-changing cutを生成しない。
