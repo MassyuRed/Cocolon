@@ -2622,3 +2622,49 @@ PRIMARY_OUTCOME = ADMINISTRATIVE_ONLY
 PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
 AUTOMATIC_PROGRESSION = false
 ```
+
+## 40. Route A Step 3 completion work-unit activation（2026-08-25 Mash current instruction）
+
+§39後、Mashは外部AI・代替routeを拒否し、providerless Route AだけでStep 3を完了まで進め、実在する問題だけを報告するよう明示した。このcurrent instructionを§38 / §39の追加修正禁止より新しい実装authorityとして適用する。`COMMON_DEFECT_RETURN_COUNT=2/2`はresetも増分もせず保持する。
+
+repair対象は、existing composerがtyped scalar rowsをrole横断のsemantic-label列へ平坦化した共通surface seamである。existing `clause_argument_role`ごとにpolarity / modality / timeをcoalesceし、LEFT / RIGHT、BEFORE / AFTER、ACTION / CHANGE等のexisting endpoint hostへ直接係らせる。同時に、同一文のconnective重複、subject/object particle seam、同一targetのReception concentrationをexisting grammatical axes / duty / basis / targetだけで直す。case ID、family、raw text、fixture、expected sentenceによる分岐、新しいsentence bank、asset family、enum、axis、dependencyまたはrouteは0とする。
+
+```text
+AUTHORITY = MASH_CURRENT_EXPLICIT_ROUTE_A_STEP3_COMPLETION
+ACTIVATION_PREIMAGE_RUNTIME_HEAD = 7a257173a9476c0b93873f5e064c2abeaf753588
+ACTIVATION_PREIMAGE_DESIGN_HEAD = a661f670a934df562a47ce5c0db1d027c9efb44a
+PREVIOUS_LANGUAGE_CORE_IDENTITY = 3158e2bb597ab4f4be92931fef9548d9b73dfd16f7c4432acded4c3f101a8918
+REPAIRED_LANGUAGE_CORE_IDENTITY = 21aa234369b467b377f595c972487bb3b036cf47ebc605efb9a0f301a2c1d99a
+
+SOLE_ROUTE = ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER
+EXTERNAL_AI / REMOTE_PROVIDER / NETWORK / EXTERNAL_BODY_SEND / COST = 0 / 0 / 0 / 0 / 0
+CASE_FAMILY_RAW_FIXTURE_EXPECTED_SENTENCE_SELECTOR = 0
+NEW_ASSET_FAMILY_ENUM_AXIS_DEPENDENCY_PATH = 0
+
+RUNTIME_ACTIVATION_CHANGED_PATHS = EXACT4
+  ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py
+  ai/tests/test_cmee_v1a_i1sx_contracts.py
+  ai/tools/cmee_v1a_i1sx_candidate_run.py
+  ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md
+DESIGN_ACTIVATION_CHANGED_PATHS = EXACT1
+  Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md
+
+COMMON_DEFECT_RETURN_COUNT = 2_OF_2_KEEP
+COUNTER_RESET / COUNTER_INCREMENT = 0 / 0
+EARLY_ACTUAL_ATTEMPT_MAX = 1
+EARLY_ACTUAL_STATUS = NOT_RUN
+STEP3 = ROUTE_A_GENERIC_SURFACE_REPAIR_IMPLEMENTED_PENDING_FRESH_ACTUAL
+
+SUCCESS_EXACT3 = PRO_BODY_FREE_EARLY_HUMAN_READ_RESULT_CLEAR / ULTRA_KNOWN_TECHNICAL_INVARIANT_CLEAR / WITHHELD_BODY_FREE_MACHINE_INVARIANT_CLEAR
+SUCCESS_STATUS = LANGUAGE_VIABILITY_OBSERVED_INTERNAL_ONLY
+FORMAL_EXACT8 = NOT_RUN
+PRODUCT_READ_EVALUATED = FALSE
+PRODUCT_PASS = NOT_DECLARED
+PRODUCT_CREDIT = 0
+CANDIDATE_READY = FALSE
+STEP4 = NOT_STARTED
+STRUCTURE_MAP_DELTA_NONE = TRUE_EXISTING_ROUTE_AND_ARCHITECTURE_UNCHANGED
+AUTOMATIC_PROGRESSION = FALSE
+```
+
+activation commitsでruntime / design headを確定し、そのheadsへbindしたfresh early actual exact1を実行する。known public-safe exact4はUltra technical exact1とPro language exact1、repo-outside withheld exact4はPro body-full exact1だけが読む。final transitionはseparate body-free receiptでexact3から純粋導出し、成功してもStep 4、formal Product Read、ready、mergeまたはproductionへ進まない。
