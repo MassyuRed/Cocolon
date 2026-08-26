@@ -1,21 +1,23 @@
 # CMEE V1 — Implementation Order / Migration / Verification 詳細設計
 
 - document id: `cocolon.cmee.v1.implementation_migration_verification.detailed_design`
-- revision date: `2026-08-25 JST`
+- revision date: `2026-08-26 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - absolute implementation rule: `BOUND_TO_PARENT_FINAL_DESIGN_SECTION_0_3`
-- current implementation state: `STAGE1_ADDITIONAL_CORRECTION_STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP`
-- current authorized next implementation: `NONE`
-- only admissible next implementation class: `NONE_AFTER_STEP3_BUDGET_EXHAUSTED_STOP`
+- current implementation state: `STAGE1_ADDITIONAL_CORRECTION_STEP3_2_SUCCESSOR_READY_STEP3_3_NOT_STARTED`
+- current authorized next implementation: `STEP3_3A_FRESH_LIBRARY_ACQUIRE_AND_ATTEMPT_PREFLIGHT_ONLY`
+- only admissible next implementation class: `PRESERVED_ROUTE_A_BOUNDED_UNIT_STEP3_3_THROUGH_PRODUCT_READ`
 - Stage 1 language route: `ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER / SOLE_CURRENT_AND_FUTURE_ROUTE`
 - external generative AI / remote provider / body send: `PROHIBITED / 0 / 0`
 - retired provider investigation: `REMOVED_FROM_CURRENT_TREE_GIT_HISTORY_ONLY`
 - automatic progression: `false`
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
-- Stage 1 additional correction final body: `PRO_CONFIRMED_INTEGRATION_SOURCE / STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP / EARLY_ACTUAL_NOT_RUN`
-- Stage 1 additional correction order owner: `THIS_FILE_SECTION_30_ROUTING_TO_FINAL_BODY_SECTION_13`
+- Stage 1 additional correction final body: `PRO_CONFIRMED_INTEGRATION_SOURCE / ALL_STEP_FORWARD_RESUMABILITY_CORRECTED / EARLY_ACTUAL_NOT_RUN`
+- Stage 1 additional correction order owner: `THIS_FILE_LATEST_SECTION_ROUTING_TO_FINAL_BODY_SECTION_13`
 
 ---
+
+Current additive execution ownerは本file latest sectionである。§0–§53は設計・実装・失敗・旧receiptの履歴として保持するが、相違時はlatest sectionとfinal body §13.1–§13.13を優先する。Step 3.2はprivate inputのuser-owned nonpublic Library保存 / fresh readback、Step 2 language identityとStep 4 / 5 integration identityの分離、両repo remote postverifyまで含む。Step 3.3 actualは未実行である。
 
 ## 0. Current conclusion
 
@@ -3501,3 +3503,141 @@ AUTOMATIC_PROGRESSION = FALSE
 ~~~
 
 このcheckpointの完了はStep 3全体の完了ではない。次sessionは本節とPR #3 / #30のcurrent receiptに固定されたactivation pairから3.3だけを再開し、3.2以前を再探索・再実装しない。private actualを実行する場合も§48以降のprivacy、exact1 materialization、reader、cleanup、counterおよびstop境界を変更しない。
+
+## 54. Step 3.2 forward-resumability repair / all-Step save contract correction（2026-08-26）
+
+§53のpublic audit / bounded finite-host correctionは有効だが、`FROZEN_PRIVATE_INPUT_RETAINED=1`はdurable owner / fresh readback proofを持たず、3.3へ同一inputで進めないためStep 3.2 completion claimとして無効だった。Mashのcurrent明示指示により、final body §13のStep 0–9をforward-resumability観点で全監査し、private input / output / Product bundle lifecycle、decision-save-before-cleanup、Step 9 verdict順、Step 2 language identityとStep 4 / 5 integration identityを修正した。
+
+Library上のhistorical Step 0 private envelope候補exact3もprivate boundary内でfresh取得したがbyte-identicalで、withheld-input schema / structural familyを持たず、旧exact4をlossless recoveryできなかった。旧bodyを推測・再生成して「同じ4件」とはしない。旧packet / slot / set digestは`SUPERSEDED_BODY_UNAVAILABLE_WITHOUT_STEP3_3_EXECUTION`として失効し、new generation exact4を新packet / slotへ固定した。
+
+new exact4はsynthetic / non-identifying、family exact1ずつで、user-owned nonpublic ChatGPT Libraryへ実bytes保存した。別fresh rootへmaterializeし、directory 0700、file 0600、current owner、regular file、nlink 1、symlink 0、schema / count / family / raw SHA / canonical set digest一致をbody-free検証した後、local copyを削除した。Library physical file ID / version / URL、本文、per-case detail / digest、expected sentenceはGitHub / design / public ZIP / chatへ出さない。next sessionはlogical owner aliasをLibrary title検索し、same canonical digestをfresh照合する。
+
+~~~text
+AUTHORITY = MASH_CURRENT_EXPLICIT_ALL_STEP_DESIGN_REPAIR_AND_STEP3_2_COMPLETION_20260826
+CURRENT_STATE_OWNER = THIS_LATEST_SECTION_PLUS_FINAL_BODY_SECTION_13
+INVALIDATED_PRIOR_CHECKPOINT = SECTION_53_STEP3_2_COMPLETION_CLAIM_ONLY
+VALID_PRIOR_PUBLIC_AUDIT_AND_CORRECTION = RETAINED
+
+OLD_PRIVATE_PACKET_ID = CMEE_STAGE1_ADDITIONAL_CORRECTION_WITHHELD_EARLY_20260824_V1
+OLD_PRIVATE_SLOT_ID = PRIVATE_SLOT_WITHHELD_EARLY_20260824_V1
+OLD_PRIVATE_SET_DIGEST = 5f31461625397bd22746dcdad8c8d68f7f6c7d2e56c1dc62e177664ae365c59d
+OLD_PRIVATE_SET_STATE = SUPERSEDED_BODY_UNAVAILABLE_WITHOUT_STEP3_3_EXECUTION
+OLD_FROZEN_PRIVATE_INPUT_RETAINED_CLAIM = FALSE
+OLD_PACKET_SLOT_REUSE = 0
+HISTORICAL_LIBRARY_ENVELOPES_CHECKED = EXACT3_BYTE_IDENTICAL_NOT_RECOVERABLE
+
+NEW_PRIVATE_PACKET_GENERATION = V2
+NEW_PRIVATE_PACKET_ID = CMEE_STAGE1_WITHHELD_EARLY_DURABLE_20260826_V2
+NEW_PRIVATE_SLOT_ID = PRIVATE_SLOT_WITHHELD_EARLY_DURABLE_20260826_V2
+PRIVATE_DURABLE_OWNER_CLASS = CHATGPT_LIBRARY_USER_OWNED_NONPUBLIC
+PRIVATE_DURABLE_OWNER_ALIAS = Cocolon_CMEE_Stage1_WithheldExact4_DurableInput_20260826.json
+PRIVATE_DURABLE_PHYSICAL_ID_VERSION_URL_PUBLICATION = 0
+PRIVATE_INPUT_SCHEMA_VERSION = cocolon.cmee.stage1.withheld_early_input.v1
+PRIVATE_INPUT_COUNT = 4
+PRIVATE_INPUT_FAMILY_COUNTS = TENSION_1_TEMPORAL_CHANGE_1_HELP_SEEKING_1_UNFINISHED_1
+PRIVATE_INPUT_RAW_SHA256 = af718e82a6d9ed4e476f6d6b85f297272eef4790e1809cb6566d427e1f588a57
+PRIVATE_INPUT_CANONICAL_SET_DIGEST = 489dcf8763ff95893fd67030422e5af24f391d5f9594b899486749da3dbcc6a7
+PRIVATE_LIBRARY_CREATE = SUCCEEDED
+PRIVATE_LIBRARY_FRESH_MATERIALIZE_AND_READBACK = PASS
+PRIVATE_LIBRARY_READBACK_MODE = DIR_0700_FILE_0600_OWNER_MATCH_NLINK1_REGULAR_NO_SYMLINK
+PRIVATE_LIBRARY_READBACK_METADATA_MATCH = PASS
+LOCAL_PRIVATE_INPUT_COPIES_REMAINING = 0
+
+LANGUAGE_CORE_IDENTITY = ab4a6b5612a3912e9789ef1cc0983ce4f37a0e0657b76f49b430b1baea8755a2
+LANGUAGE_CORE_IDENTITY_SCOPE = STEP2_LANGUAGE_SEMANTIC_COMPOSITION_OWNER_AST_PLUS_CLOSED_MANIFESTS
+STAGE1_RUNTIME_INTEGRATION_IDENTITY = 49da471397d19828b4a2e8326f76d4309e7d36a716221a1a91e1959f4b44a91d
+STAGE1_RUNTIME_INTEGRATION_IDENTITY_SCOPE = CURRENT_PRODUCT_CAUSAL_WHOLE_FILE_EXACT7_PLUS_CLOSED_MANIFESTS
+RUNNER_SHA256 = fa80a5d77bfbfaa9ce34ec06b5494fff4b844e4d86a7a649714dae889b5a8d00
+
+RUNTIME_ACTIVATION_HEAD = 3d6f3499190f1465e57cdb102e1937d095cdd457
+DESIGN_ACTIVATION_HEAD = THIS_STEP3_2_REPAIR_COCOLON_CHECKPOINT_COMMIT
+ACTIVATION_PAIR_OWNER = THIS_SECTION_PLUS_CURRENT_PR3_AND_PR30_RECEIPTS
+RUNTIME_CHANGED_PATHS_FROM_PRIOR_STEP3_2_HEAD = EXACT4
+  ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py
+  ai/tests/test_cmee_v1a_i1sx_contracts.py
+  ai/tools/cmee_v1a_i1sx_candidate_run.py
+  ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md
+DESIGN_CHANGED_PATHS = EXACT2
+  Cocolon_前提資料/designs/cmee/
+    Cocolon_CMEE_Stage1_AdditionalCorrection_UltraFinalTechnicalBodyAndJointRecommendation_20260824.md
+  Cocolon_前提資料/designs/cmee/v1/
+    06_implementation_order_migration_and_verification.md
+STRUCTURE_MAP_DELTA = NONE
+STRUCTURE_MAP_DELTA_REASON = SAVE_LIFECYCLE_AND_DISABLED_IDENTITY_OWNER_ONLY
+
+STEP2_COMPOSITION_TESTS = 20_OF_20_PASS
+STEP3_PUBLIC_SYNTHETIC_EARLY_HARNESS = 34_OF_34_PASS
+CONTRACT_TESTS = 141_OF_141_PASS
+VERTICAL_TESTS = 42_OF_42_PASS
+COMBINED_TESTS = 183_OF_183_PASS
+COMPILEALL = PASS
+DIFF_CHECK = PASS
+PRIVATE_INPUT_READBACK = PASS
+PRIVATE_ACTUAL_RUN / RETRY / RERUN = 0 / 0 / 0
+
+EARLY_WITHHELD_BODY_FREE_SCHEMA = cocolon.cmee.stage1.withheld_early_machine_body_free.v2
+EARLY_BODY_FREE_PACKET_SCHEMA = cocolon.cmee.stage1.early_actual_body_free.v4
+EARLY_HUMAN_READ_RESULT_SCHEMA = cocolon.cmee.stage1.early_human_read_result.v4
+EARLY_ULTRA_RESULT_SCHEMA = cocolon.cmee.stage1.early_ultra_known_technical_result.v5
+EARLY_FINAL_RECEIPT_SCHEMA = cocolon.cmee.stage1.early_actual_final_body_free.v6
+EARLY_PRO_REVIEW_ATTEMPT_ID / READ / REREAD = EARLY_PRO_COMBINED_READ_ATTEMPT_01 / 1 / 0
+EARLY_ULTRA_REVIEW_ATTEMPT_ID / READ / REREAD = EARLY_ULTRA_KNOWN_READ_ATTEMPT_01 / 1 / 0
+EARLY_PRIVATE_PACKET_AND_BINDING_GENERATION = V2
+EARLY_RUN_EXACT3_SCHEMA = cocolon.cmee.stage1.early_actual_run_exact3.v1
+EARLY_PRIVATE_REVIEW_MASTER_SCHEMA = cocolon.cmee.stage1.private_review_output_master.v1
+EARLY_PRIVATE_REVIEW_MASTER_RECEIPT_SCHEMA = cocolon.cmee.stage1.private_review_output_master_receipt.v1
+EARLY_PRIVATE_REVIEW_MASTER_READER = PRO_ONLY
+EARLY_PRIVATE_REVIEW_MASTER_LIFECYCLE = DELETE_AT_STEP3_7_AFTER_STEP3_6_DECISION_POSTVERIFY
+EARLY_KNOWN_REVIEW_AUXILIARY_SCHEMA = cocolon.cmee.stage1.early_known_review_auxiliary.v1
+EARLY_KNOWN_REVIEW_AUXILIARY_RECEIPT_SCHEMA = cocolon.cmee.stage1.early_known_review_auxiliary_receipt.v1
+EARLY_ACTUAL_ATTEMPT_ID = CMEE_STAGE1_STEP3_3_ATTEMPT_01
+EARLY_RUN_TRANSACTION = FIXED_STAGING_TO_FIXED_FINAL_RENAMEAT2_NOREPLACE
+RUNTIME_HEAD_AND_TRACKED_TREE_PREFLIGHT = REQUIRED_CLEAN
+DESIGN_HEAD_VERIFICATION = EXTERNAL_PR_PREFLIGHT_ATTESTATION
+FROZEN_RAW_AND_CANONICAL_DIGEST_PREFLIGHT = BEFORE_ATTEMPT_MARKER
+MACHINE_NONCLEAR_EXACT3_DURABLE = REQUIRED
+PRIVATE_REVIEW_DURABLE_FIRST_OWNER = SINGLE_LIBRARY_MASTER_EXACT3
+PARALLEL_CRASH_PARTIAL_WRITE_RETRY = 0
+
+PUBLIC_BYTES_REMOTE_POSTVERIFIED = TRUE
+NEXT_CHECKPOINT_REQUIRED_INPUTS_CLASSIFIED = TRUE
+NONRECOMPUTABLE_INPUTS_DURABLE = TRUE
+DURABLE_OWNER_AND_RETRIEVAL_PROOF_VERIFIED = TRUE
+NEXT_SESSION_DRY_ACQUIRE_AND_DIGEST_VERIFY = PASS
+NEXT_CHECKPOINT_REQUIRED_ARTIFACTS_READBACK_VERIFIED = TRUE
+REQUIRED_ARTIFACT_ONLY_IN_SCRATCH_OR_TMP = FALSE
+SESSION_LIBRARY_CHECKPOINT_READBACK = PASS
+
+STEP3_2 = COMPLETE_SUCCESSOR_READY_REMOTE_POSTVERIFIED
+CURRENT_RESUME_CHECKPOINT = 3.3A_NOT_STARTED
+CURRENT_RESUME_WORK = STEP3_3A_FRESH_LIBRARY_ACQUIRE_AND_ATTEMPT_PREFLIGHT_ONLY
+STEP3_3B_ACTUAL_BLOCKED_UNTIL_3_3A_REMOTE_POSTVERIFIED = TRUE
+EARLY_ACTUAL_STATUS = NOT_RUN_ON_CURRENT_STEP3_2_REPAIR_ACTIVATION_PAIR
+STEP3_COMPLETE = FALSE
+FORMAL_EXACT8 = NOT_RUN
+PRODUCT_READ_EVALUATED = FALSE
+CANDIDATE_READY = FALSE
+STEP4 = NOT_STARTED
+COMMON_DEFECT_RETURN_COUNT = 2_OF_2_KEEP
+COUNTER_RESET / COUNTER_INCREMENT = 0 / 0
+NETWORK / EXTERNAL_AI / PROVIDER / BODY_SEND / COST = 0 / 0 / 0 / 0 / 0
+PUBLIC_API / DB / RN / PRODUCTION_EFFECT = 0 / 0 / 0 / 0
+PRIMARY_OUTCOME = ADMINISTRATIVE_FORWARD_RESUMABILITY_REPAIR_WITH_MINIMAL_DISABLED_IDENTITY_AND_TRANSACTION_FIX
+TECHNICAL_CREDIT = 0
+PRODUCT_CREDIT = 0
+AUTOMATIC_PROGRESSION = FALSE
+~~~
+
+全Step再監査で検出した保存境界はfinal body §13.1–§13.13へ統合した。current canonical ruleは次である。
+
+- Steps 3–9の全named STOPは、terminal receipt dual-repo postverify後にcommon `F.1–F.3`を通る。全active private artifact / local copyへ`RETAIN_FOR_NAMED_APPROVED_RETURN / ACTIVE_CLEANUP_REQUIRED / QUARANTINE_UNKNOWN_NO_MUTATION`のexact3から一つを付け、`UNCLASSIFIED=0`をremote postverifyする。nonrepeatable generation / read / presentation / verdict / save unknownをcleanup / retry / reread / redisplay / success claimしない。
+- Step 3 machine nonclearは3.3dでFを実行し、3.4a以降 / actual rerun 0。known-good frozen inputを保持できるのはcurrent authorityにnamed machine-fix returnがある時だけである。early master receiptは`reader=PRO_ONLY / lifecycle=DELETE_AT_STEP3_7_AFTER_STEP3_6_DECISION_POSTVERIFY`をexact bindし、human / final consumerはfresh materialization operationだけを受け入れる。
+- nonrepeatable human readはgeneration attemptと分離し、`EARLY_ULTRA_KNOWN_READ_ATTEMPT_01 / EARLY_PRO_COMBINED_READ_ATTEMPT_01 / FORMAL_ULTRA_AFTER_READ_ATTEMPT_01 / FORMAL_PRO_SET_READ_ATTEMPT_01 / FORMAL_PRO_WITHHELD_READ_ATTEMPT_01`をread前に両repo postverifyする。resultは`READ=1 / REREAD=0`で即保存し、unknownは`HUMAN_READ_RESULT_UNKNOWN_TERMINAL / REREAD=0`でquarantineする。
+- Step 4.1はpublic ordered exact32を使うbaseline fixed attemptsをeffect前に保存する。latencyはwarmup 5 + exact32×30のper-case `monotonic_ns` nearest-rank p95、memoryはwarmup 2 + isolated child 5の`/usr/bin/time -v` peak maxである。Step 6 limitは`max(ceil(baseline p95×1.15), baseline p95+5ms)`、memoryは`baseline + max(32MiB, ceil(baseline×0.15))`へ固定し、same environment identityを要求する。after attemptsは`LATENCY_ATTEMPT_01 / MEMORY_ATTEMPT_01`、unknownはretry 0である。
+- Step 7.1はformal input identity、approved before / current after heads・runner・integration identities、expected slotsだけをpreflightし、未生成output digestをfreezeしない。7.2でexact1 pair生成後、before provenance exact5とmember / master digestsをProduct master exact17へ固定する。Product masterのbody-full readerはMash exact1だけで、Ultra / Proはfresh-readback済みreader-specific auxiliaryを使う。withheldもPro-only auxiliaryを使い、Proがmasterを直接読まない。
+- Step 7 CLEARはfrozen input / withheld master /全review auxiliaryをcleanupし、Product bundleだけをStep 9まで保持する。return / terminal / unknownもFのexact dispositionを適用する。
+- Step 9は`MASH_PRODUCT_READ_ATTEMPT_01`を提示前に両repo postverifyし、same Product bundleをexact1回だけ提示する。提示直後・verdict待機前に`PRESENTATION_SENT_AWAITING_VERDICT`を両repo postverifyし、Mash tuple受領後のfirst effectはverdict-only receipt dual-repo postverifyである。presentation / verdict receipt unknown時はbodyを再提示せず、body-free acknowledgementまたはsame-verdict re-attestationだけを許可する。
+
+これらはfuture checkpoint contractの修正であり、current Step 3.3 actual、human read、benchmark、formal generation、Mash Product Readを実行したことを意味しない。Product / technical creditは0、automatic progressionはfalseである。
+
+Step 3.3aはsame Library itemのfresh acquire / raw + canonical digest verification、clean runtime checkout / dual identity / current activation pair、fixed `ATTEMPT_01` / exact3 slot / `renameat2(RENAME_NOREPLACE)` capability、single master Library slotのpreflightだけを行う。design headはPR #30 external attestationで確認する。3.3b actual runはそのsavepointが両repoでremote postverifiedされるまで開始せず、CLEAR / machine nonclearを問わずlocal exact3をatomic no-replace commitする。3.3cでsingle nonpublic Library masterを最初にdurable save / fresh readbackしbody-free receiptを両repoへpostverifyするまでcheckpoint completeにしない。3.3以降のprivate output、Step 7 Product bundle、transition cleanup、Step 9 verdict-only immediate receipt順はfinal body §13.1–§13.13を唯一のcurrent ownerとする。
