@@ -5,6 +5,7 @@ document_kind: ULTRA_FINAL_TECHNICAL_BODY_AND_JOINT_RECOMMENDATION
 created_at: "2026-08-24 JST"
 route_policy_revision: "2026-08-25 JST"
 checkpoint_policy_revision: "2026-08-26 JST"
+forward_resumability_audit_revision: "2026-08-26 JST"
 checkpoint_subdivision_preimage_runtime_head: "d05a07224194e1f5a505c5fbca231ce16c792fdd"
 checkpoint_subdivision_preimage_design_head: "0e840ec236f61f3206ddaa96647af64b70c7c433"
 supersedes_document_id: COCOLON_CMEE_STAGE1_ADDITIONAL_CORRECTION_ULTRA_INITIAL_TECHNICAL_DESIGN_20260824
@@ -17,14 +18,14 @@ product_value_owner: Mash
 product_and_functional_policy_owner: "Pro華恋"
 technical_design_owner: "Ultra華恋"
 recommended_route: PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER_ROUTE_A_ONLY
-design_status: ROUTE_A_ONLY_STEP3_WIP_CHECKPOINT_SUBDIVIDED
-implementation_approval: PRIOR_STEP3_WIP_SCOPE_PRESERVED_NOT_EXTENDED
-github_write_approval: APPROVED_CHECKPOINT_SUBDIVISION_20260826
-mash_level3_approval: CHECKPOINT_SUBDIVISION_DOCS_ONLY
-current_canonical_contract_effect: CHECKPOINT_GRANULARITY_AND_RESUME_POINTER_ONLY
-proposed_contract_effect: NONE_OUTSIDE_CHECKPOINT_GRANULARITY
-github_effect: DOCS_CHECKPOINT_SUBDIVISION_EXACT2
-runtime_effect: 0
+design_status: ROUTE_A_ONLY_STEP3_2_DURABILITY_REPAIR_SUCCESSOR_READY
+implementation_approval: MASH_CURRENT_EXPLICIT_ALL_STEP_DESIGN_REPAIR_AND_STEP3_2_COMPLETION_20260826
+github_write_approval: APPROVED_CURRENT_INSTRUCTION_20260826
+mash_level3_approval: PRESERVED_CURRENT_BOUNDED_ROUTE_A_UNIT
+current_canonical_contract_effect: CHECKPOINT_DURABILITY_PRIVATE_ARTIFACT_LIFECYCLE_AND_IDENTITY_SEPARATION_ONLY
+proposed_contract_effect: NONE_OUTSIDE_EXISTING_ROUTE_A_BOUNDED_UNIT
+github_effect: STEP3_2_MINIMAL_RUNTIME_IDENTITY_TRANSACTION_FIX_HANDOFF_AND_DESIGN_EXACT2
+runtime_effect: DISABLED_STEP3_IDENTITY_SPLIT_PACKET_BINDING_AND_TRANSACTIONAL_EXACT3_RUNNER_ONLY
 api_effect: 0
 db_effect: 0
 react_native_effect: 0
@@ -37,9 +38,9 @@ mash_additional_structure_input_required_now: false
 external_generative_ai_allowed: false
 external_alternative_route_effect: 0
 common_defect_return_count: "2/2_UNCHANGED"
-early_actual_status: NOT_RUN_PENDING_BOUNDED_FINITE_HOST_ACTIVATION_HEADS
-step3_state: ROUTE_A_BOUNDED_FINITE_HOST_REPAIR_WIP_REMOTE_SAVED_PENDING_PUBLIC_AUDIT
-current_authorized_next_implementation: PRESERVED_PRIOR_STEP3_SCOPE_NOT_EXECUTED_BY_THIS_DOCS_WRITE
+early_actual_status: NOT_RUN_ON_CURRENT_STEP3_2_REPAIR_ACTIVATION_PAIR
+step3_state: STEP3_2_COMPLETE_SUCCESSOR_READY_STEP3_3_NOT_STARTED
+current_authorized_next_implementation: STEP3_3A_FRESH_LIBRARY_ACQUIRE_AND_ATTEMPT_PREFLIGHT_ONLY
 automatic_progression: false
 ---
 
@@ -517,7 +518,7 @@ independent atomの全組を架空のvalidator-valid contributionへ写さない
 
 digestはvalidated contributionを捏造せず、typed feature vector domainを直接全列挙する。suppression rowはexact13 input + code tuple、visibility rowはmaterial-unknownを除くexact12 input + act-ref + visible-ref tupleを持つ。bit位置、false/true order、act order、output tuple order、extractor rule table、pure decision tableをmanifestでfreezeする。unreachable vectorもclosed decision domainとしてdefinedであり、production extractorのrangeとは別に扱う。これによりone-sided drift、`hold_help_seeking`のREQUIRED check削除、OPTIONAL誤許可を検出できる。early / final packetでfresh再計算し、manifest expected digestと一致しなければidentity mismatch / STOPとする。
 
-early packetとfinal packetはこのidentityがbyte-exact一致しなければならない。early後にidentity対象のbytesまたはobservable behaviorを変更した場合、以前のearly observationは失効し、`EARLY_ACTUAL_STATUS=NOT_RUN`へ戻してfresh Step 3を行う。viability専用実装、early-only flag、fixture branch、後付けlanguage coreは許可しない。
+early packetとfinal packetはこのidentityがbyte-exact一致しなければならない。early後にidentity対象のbytesまたはobservable behaviorを変更した場合、以前のearly observationをhistorical invalidatedとして保持し、new activationの`EARLY_PRE_RUN_STATUS=NOT_RUN`からだけfresh Step 3を行う。completed old attempt自体を`NOT_RUN`へ改名しない。viability専用実装、early-only flag、fixture branch、後付けlanguage coreは許可しない。
 
 #### 6.1.1 Runtime import / staged adapter seam
 
@@ -3331,7 +3332,9 @@ current `GroundedSemanticFrame`はactor、predicate kind、polarity、modality�
 `Cocolon_前提資料/designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md`はshared S8 / S9 current ownerとしてread-only参照し、recommended routeのchanged pathには入れない。shared S9 contract変更が必要ならStage 1 local correctionを超えるためLEVEL_3 final candidateへ戻す。
 
 ```text
-FINAL_PROPOSED_CHANGED_PATHS = EXACT14
+HISTORICAL_FINAL_PROPOSED_CHANGED_PATHS = EXACT14
+CURRENT_STEP3_2_RUNTIME_CHANGED_PATHS = EXACT4
+CURRENT_STEP3_2_DESIGN_CHANGED_PATHS = EXACT2
 PATHS_APPROVED = FALSE
 LISTED_PATH_AUTO_EXPANSION = 0
 WITHHELD_TRACKED_PATHS = 0
@@ -3366,13 +3369,13 @@ historical docsのv2 receiptは削除せずhistorical sectionとして残す。r
 | 0 | approved final identity、exact changed paths、preimage、unchanged exact8、current machine baseline、estimate assumptionsをfresh照合し、`COMMON_DEFECT_RETURN_COUNT=0`をapproved bounded unitへ初期化する。path / cap / estimateを再決定しない | approved bytes / assumptions一致、baseline再現、private packet identity分離、counter owner生成 | head / fixture / axis / path / assumption driftはeffect前STOPしLEVEL_3 final candidateへ戻す |
 | 1 | approved canonical deltaを同期し、final IDs、`SubjectivePropositionV2`、minimum source / owner / safety / unknown / derivation spine、anti-template registry invariantだけを実装する。worktree外へpartial writeしない | early verticalに必要なfinal type / invariant exact、parallel schema owner 0 | unfixed field、generic proposition、raw-text construction selector |
 | 2 | `emlis_stage1_composition.py`へ最終production functions `plan_subjective_meaning`、`plan_stage1_discourse`、`compose_stage1_draft`、`normalize_to_normal_form`、`rank_stage1_drafts`を実装する。early signatureに必要なfinal construction grammar、morphology path、anti-template allowlist、exact6 normalizer、final profile / rank behaviorまで完成し`LANGUAGE_CORE_IDENTITY`をfreezeする | known four structuresをfinal APIでactual Japaneseまで生成。material alternateを持つ入力exact1以上でfinal normalizer / rank path実行、idempotence / defect exact0、registry invariant成立 | viability-only composer / mode flag、case-ID、finished sentence bank、random、legacy fallback、early後のlanguage core後付け |
-| 3 | tension / temporal change / help-seeking / unfinishedのknown exact4とprivate withheld exact4を同じStep 2 language coreからactual Japaneseまで出す。known exact4本文はUltraがtechnical、Proがlanguage viabilityを読む。withheld exact4のbody-full input / outputはProだけが読む | Proのbody-free `EARLY_HUMAN_READ_RESULT`が`CLEAR`で、Ultra known technical invariantとwithheld body-free machine invariantがCLEARなら`EARLY_ACTUAL_STATUS=LANGUAGE_VIABILITY_OBSERVED`。同じapproved unitを続けられるinternal observationのみ | human transition inputはProのbody-free result exact1。frozen grammatical axes内のgeneric修正で直せるseam / concentrationは`COMMON_DEFECT`、case rule / asset proliferation等が必要なら`ROUTE_LEVEL_CEILING`。§13共通遷移を適用し、ceiling時だけ即STOP |
+| 3 | tension / temporal change / help-seeking / unfinishedのknown exact4とprivate withheld exact4を同じStep 2 language coreからactual Japaneseまで出す。実行前にwithheld inputをprivate Libraryへdurable freeze / fresh readbackする。known exact4本文はUltraがtechnical、Proがlanguage viabilityを読み、withheld本文はProだけが読む | Proのcombined body-free `EARLY_HUMAN_READ_RESULT`が`CLEAR`で、Ultra known technical invariantとwithheld body-free machine invariantがCLEAR、review出力とdecisionのdurable save / cleanup proofが成立した時だけ`EARLY_ACTUAL_STATUS=LANGUAGE_VIABILITY_OBSERVED`。同じapproved unitを続けられるinternal observationのみ | durable input / output owner欠落、readback mismatch、run result不明はnamed STOP。human transition inputはProのbody-free result exact1。generic修正は`COMMON_DEFECT`、case rule等は`ROUTE_LEVEL_CEILING`。§13共通遷移を適用 |
 | 4 | viable時だけstate、sealed plan、positive trace、common guard、S9-private validator、full candidate coverage / tamperを完成する。Step 2 language coreを変更しない | identity / ref / duty / state / trace / tamper / S9 tests、shared S9 effect 0 | owner / source / unknown loss、Step 2 behavior変更、upstream morphology scope expansion |
 | 5 | `compile_stage1_response()` exact1から同じStep 2 production functionsへatomic cutoverし、legacy v2 surfaceをnon-callにする | exact-one owner、early / final call-graph identity、no fallback、A/B/A determinism | early/final二重実装、dual-run、fallback |
-| 6 | affected contract / vertical / safety / unknown / mutation regressionとexact32 resource envelopeのlatency / memory測定をfresh実行 | machine GREEN、public boundary不変、frozen envelope内 | regression、private leak、budget超過はcap変更せずLEVEL_3 STOP |
-| 7 | unchanged formal exact8 before / afterとprivate withheld exact4 afterを生成する。Ultraはformal exact8 after本文だけをtechnical checkし、Proはformal exact8 pairwise / set-levelとwithheld body-fullをpre-screenする。Ultraへwithheld本文を渡さない | formal exact8はexact8のまま。withheldはProから`CLEAR | COMMON_DEFECT | ROUTE_LEVEL_CEILING`のbody-free resultだけを受ける | actual本文未到達、generic subjective content、template concentration。human defectは§13共通遷移 |
+| 6 | affected contract / vertical / safety / unknown / mutation regressionとexact32 cardinality envelopeのlatency / memory測定をfresh実行し、各family resultを即remote保存する | machine GREEN、public boundary不変、exact32 cardinality不変、事前承認・固定したnumeric latency / memory envelope内、Step 7 private input fresh readback | regression、private leak、cardinality / approved numeric envelope超過はcap変更せずLEVEL_3 STOP。numeric envelope未定義なら`STEP6_PERFORMANCE_ENVELOPE_UNDEFINED_STOP`。identity changeは失効を先にremote保存 |
+| 7 | unchanged formal exact8 before / afterとprivate withheld exact4 afterを生成する。formal pairはMash verdictまでprivate Product Read bundleとして保持し、withheld outputとは分離する。Ultraはformal afterだけ、Proはformal pairwise / set-levelとwithheld body-fullを読む | formal exact8はexact8のまま同一durable bytes。withheldはProから`CLEAR | COMMON_DEFECT | ROUTE_LEVEL_CEILING`のbody-free resultだけを受け、transition decisionをremote postverify | durable bundle欠落 / mismatch、actual本文未到達、generic subjective content、template concentration。human defectは§13共通遷移 |
 | 8 | **共通遷移定義であり独立した後続Stepではない。** Step 3またはStep 7のhuman read直後に、下記`COMMON_DEFECT_RETURN_TRANSITION` exact1を適用する | count 0..2内でstable actual after、またはnamed terminal STOP | count exact2でcommon defectが残れば増分 / 再returnせず`COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP`。provider / path / scope変更ならfresh LEVEL_3 STOP |
-| 9 | stable formal exact8 actual after成立時だけ`current_structure/01 / 04`とhandoffを同期し、Mashへformal exact8 body-full before / afterを提示する | current map / runtime / packet整合、Mash explicit Product verdict | FAILはcurrent authority terminal、自動修正 / retry 0 |
+| 9 | stable formal exact8 actual after成立時だけ、Step 7で固定済みのsame Product bundleをMashへ提示する。explicit verdict後にだけ`current_structure/01 / 04`とhandoffを同期する | entry pair / closure pair / bundle / runtime整合、Mash explicit Product verdict、cleanup proof | verdict前は`AWAITING_MASH_PRODUCT_READ`でStep 9未完了。FAILはcurrent authority terminal、自動修正 / retry 0 |
 
 ### 13.1 Remote-save checkpoint contract（2026-08-26 Mash明示変更）
 
@@ -3382,17 +3385,59 @@ historical docsのv2 receiptは削除せずhistorical sectionとして残す。r
 
 未保存作業時間は最大20 focused minutesとし、materialな型・algorithm・test・human-read resultが成立した時点、長時間test / human readの直前、tool degradationまたはsession切替riskを観測した時点では20分を待たず保存する。
 
-一savepointの順序はexact7である。
+一savepointの順序はexact13である。
 
-1. 両PRのfresh remote headとtarget preimageを取得する。
-2. checkpoint exact1だけを変更し、scope外の次checkpointを始めない。
-3. source変更ならminimum syntax / import、直接targeted test、docs-onlyならMarkdown / link / fence / diff checkを実行し、未実行testを明記する。
-4. mashos-apiのsource / test / existing handoffをcheckpoint ID付きでcommit / pushする。
-5. remote head、write commit changed paths、対象bytesをfresh取得し一致確認する。
-6. runtime remote headをCocolon canonical 06へbody-freeで記録してcommit / pushし、同じremote確認を行う。
-7. 両repoがremote postverifiedになった後だけ次checkpointへ進む。
+1. 両PRのfresh remote head、target preimage、current Library owner stateを取得する。
+2. 次checkpointが必要とするartifactを、下表のclassへ全件分類する。
+3. checkpoint exact1だけを変更し、scope外の次checkpointを始めない。
+4. source変更ならminimum syntax / import、直接targeted test、docs-onlyならMarkdown / link / fence / diff checkを実行し、未実行testを明記する。
+5. 非再実行operationの前にinput readback、exclusive attempt ID、durable output slot、結果不明時のSTOPをpreflightする。
+6. mashos-apiのpre-effect source / test / preflight handoffをcheckpoint ID付きでcommit / pushする。generated private outcomeを持つcheckpointでは、この時点にoutcome / success receiptを書かず、item 7後へdeferする。
+7. 次checkpointが必要とするprivate artifactを所定のLibrary ownerへ保存し、別fresh rootへmaterializeしてbytes / digest / schema / countをreadback検証する。public session bundleはまだ作らない。
+8. item 7がある場合はmaster durability確認後にだけbody-free runtime outcome receiptをcommit / pushし、runtime remote head、changed paths、対象bytesをfresh取得して一致確認する。private artifactがない場合はitem 6のruntime bytesを確認する。
+9. runtime remote headとbody-free artifact stateをCocolon canonical 06へ記録してcommit / pushする。
+10. Cocolon remote head、changed paths、対象bytesをfresh取得し一致確認する。
+11. postverify済みの両remote heads、changed paths、tests、unfinished exact action、next checkpointを含むpublic-safe session bundleを作り、Libraryへ保存して別fresh rootからdigest / members / private-body absenceをreadback検証する。
+12. 両PRのcurrent body-free receiptを同じactivation pair / bundle digestへ同期し、PR bodyとheadをfresh取得して一致確認する。
+13. 次checkpoint必須入力がsuccessor-readyであることを再確認してからだけ次へ進む。
 
-savepoint stateは次のexact4である。
+artifact classとdurable ownerは次で固定する。
+
+| Artifact class | Durable owner | Public record | Retention / cleanup |
+|---|---|---|---|
+| `PUBLIC_CODE_DOC_TEST_RECEIPT` | 対象Draft PRのGitHub bytes | exact path、commit、test、unfinished action | Git historyで保持 |
+| `PUBLIC_SESSION_SAVE_BUNDLE` | user-owned ChatGPT Library | GitHubにはbundle digest / readback stateだけ | 各session / material checkpoint / terminalでexact1。GitHub-backed sourceのcanonical ownerを奪わない |
+| `PRIVATE_FROZEN_INPUT` | user-owned nonpublic ChatGPT Library | logical owner alias、schema、count、family count、set digest、availability / readbackだけ | Step 3.2から全Step 3 / 7 return終了まで保持。ただしnamed macro-terminalでは後述F dispositionを必ず適用 |
+| `PRIVATE_REVIEW_OUTPUT_MASTER` | user-owned nonpublic ChatGPT Library single item | local transactional exact3全体のmaster digest、count、reader / lifecycle stateだけ | sole-run直後に最初のdurable write / fresh readback。known-only auxiliaryは常にmasterから再構成し、必須human readとtransition decisionのremote postverify後にactive itemをcleanup |
+| `PRIVATE_REVIEW_OUTPUT_AUXILIARY` | user-owned nonpublic ChatGPT Library | master digest、allowed reader、derived digestだけ | Ultra向けknown-only等。partial / loss時はrunを再実行せずmasterから再構成し、masterと同じdecision後にcleanup |
+| `PRODUCT_READ_BUNDLE` | user-owned nonpublic ChatGPT Library | bundle digest、count、entry activation pair、stateだけ | Step 7生成からMash verdict remote postverifyまで保持。Step 9で再生成しない |
+| `TRANSIENT_STAGING` | `/tmp`またはsession scratch | completion proofに使用禁止 | durable readback後にlocal copyを削除 |
+
+Libraryのphysical file ID、version ID、URL、absolute pathはLibrary側metadata / xattrだけに保持し、GitHub、本design、公開ZIP、chatへ出さない。GitHubに置くlogical owner aliasは本文を含まず、Library title検索とbody-free digest照合にだけ使う。withheld private body、withheld per-case detail / digest、expected sentenceはGitHub、公開ZIP、chat、Ultra、Mashへ出さず、withheld body-full readerはPro exact1だけである。early known exact4は§13.5でUltraがknown-only auxiliaryを読み、Proはvalidated early master exact1からknown + withheldをcombined readする。formal `PRODUCT_READ_BUNDLE` master自体は§13.11のMash exact1だけがprivateに読み、formal Pro / Ultraはvalidated masterからrecomputableに派生したreader-specific auxiliaryだけを読む。formal Product master / auxiliaryはいずれもGitHub / 公開ZIP / public chatへ出さない。Library itemは非共有・user-ownedとし、`/tmp`、scratch、chat memory、subagent memoryまたはdigest-onlyをdurable retention evidenceへ数えない。
+
+`PRIVATE_REVIEW_OUTPUT_MASTER`は「directoryをLibraryへ置く」という曖昧な操作にしない。Step 3 early outputのsingle-file ownerは`cocolon.cmee.stage1.private_review_output_master.v1` canonical JSON exact1で、logical aliasは`Cocolon_CMEE_Stage1_EarlyReviewMaster_CMEE_STAGE1_STEP3_3_ATTEMPT_01.json`、`master_kind=EARLY_ACTUAL_EXACT3`へ固定する。closed root keys exact15は`schema_version / master_alias / master_kind / exact3_schema_version / packet_id / bounded_unit_id / early_attempt_id / runtime_repo_head / design_repo_head / language_core_identity / stage1_runtime_integration_identity / withheld_input_raw_sha256 / withheld_set_digest / member_order / members`だけである。member orderは`known_visible.json`、`private_packet.json`、`body_free_machine.json`で固定し、各member closed keys exact5は`name / media_type / byte_size / sha256 / raw_base64`、`media_type=application/json`とする。duplicate / missing / extra field / member、noncanonical base64、size / SHA mismatch、member schema / cross-binding mismatchをrejectする。
+
+master bytesはUTF-8、`ensure_ascii=false / sort_keys=true / separators=(",", ":") / allow_nan=false`のcanonical JSON exact1 + terminal LFで一意化し、そのraw SHA-256を`PRIVATE_REVIEW_MASTER_SHA256`とする。sealはcommitted local exact3だけをsingle-fd / no-symlinkで読み、exclusive 0600 master fileへ書く。Library fresh readback validatorは0700 / 0600 / current owner / regular / nlink1 / no-symlink、master SHA、root schema、member exact3、decoded raw bytes、member validatorsを再検証し、同じfixed filenamesへbyte-identical再構成可能であることを証明する。seal / validate失敗はactualを再実行せず、committed exact3またはdurable masterから再開する。
+
+body-free master receipt schemaは`cocolon.cmee.stage1.private_review_output_master_receipt.v1`であり、master schemaと区別する。closed root exact28は`schema_version / operation / master_alias / master_kind / exact3_schema_version / private_review_master_sha256 / packet_id / bounded_unit_id / early_attempt_id / runtime_repo_head / design_repo_head / language_core_identity / stage1_runtime_integration_identity / withheld_input_raw_sha256 / withheld_set_digest / exact3_member_count / exact3_member_order / known_visible_packet_sha256 / private_packet_sha256 / body_free_machine_packet_sha256 / body_payload_present / private_text_published / reader / lifecycle / source_actual_run_count / source_actual_retry_count / source_actual_rerun_count / seal_or_validation_actual_run_invoked`だけである。`body_payload_present=false / private_text_published=false / reader=PRO_ONLY / lifecycle=DELETE_AT_STEP3_7_AFTER_STEP3_6_DECISION_POSTVERIFY / source counters=1/0/0 / seal_or_validation_actual_run_invoked=false`を必須とし、human / final consumerは`operation=VALIDATED_FRESH_MATERIALIZATION`だけを受け入れる。master byte size、member raw byte size / raw SHA / base64、本文またはper-case値は公開receiptへ出さず、nonpublic master内だけに保持する。`actual_run_invoked=false`のようにsource runとseal operationを混同するfieldは使わない。
+
+known-only auxiliaryはvalidated masterの`known_visible.json` raw bytesからだけ派生し、auxiliary body-free receiptへmaster SHAとknown member SHAをbindする。Pro / Ultra resultとfinal body-free receiptは同じmaster SHAへexact bindし、Ultraへmaster / withheld bodyを渡さない。master SHA生成前のmachine packet自身へmaster SHAを自己参照させない。
+
+early known auxiliaryは3.3aのnonrecomputable slotではなく3.4でmasterからrecomputableに作る。single-file schemaは`cocolon.cmee.stage1.early_known_review_auxiliary.v1`、kindは`EARLY_KNOWN_VISIBLE_EXACT4`、aliasは`Cocolon_CMEE_Stage1_EarlyKnownReviewAuxiliary_CMEE_STAGE1_STEP3_3_ATTEMPT_01.json`へ固定する。closed root exact7は`schema_version / auxiliary_kind / auxiliary_alias / early_attempt_id / private_review_master_sha256 / known_visible_packet_sha256 / known_visible_payload`で、同じcanonical JSON + permission / Library fresh-readback ruleを使う。body-free receipt schemaは`cocolon.cmee.stage1.early_known_review_auxiliary_receipt.v1`で、closed root exact16は`schema_version / operation / auxiliary_alias / auxiliary_kind / early_attempt_id / private_review_master_sha256 / known_visible_packet_sha256 / early_known_review_auxiliary_sha256 / reader / lifecycle / body_payload_present / private_text_published / source_actual_run_count / source_actual_retry_count / source_actual_rerun_count / seal_or_validation_actual_run_invoked`だけである。`operation=VALIDATED_FRESH_MATERIALIZATION / reader=ULTRA_ONLY / lifecycle=DELETE_AFTER_STEP3_6_TRANSITION / body_payload_present=false / private_text_published=false / source counters=1/0/0 / seal_or_validation_actual_run_invoked=false`をhuman / final consumerで必須とし、known本文はLibrary item内だけに保持する。auxiliary lossはvalidated masterから再生成しactual run 0である。
+
+Step 7のsingle-file ownersも同じcanonical framing / permission / fresh-readback ruleを使用するが、early固有field名を流用しない。`PRODUCT_READ_BUNDLE`はschema `cocolon.cmee.stage1.product_read_bundle_master.v1`、kind `FORMAL_BEFORE_AFTER_EXACT8`、attempt `FORMAL_ATTEMPT_01`、alias `Cocolon_CMEE_Stage1_ProductReadBundle_FORMAL_ATTEMPT_01.json`、member order `formal_before_exact8.json`→`formal_after_exact8.json`へ固定する。closed root exact17は`schema_version / master_alias / master_kind / formal_attempt_id / before_runtime_head / before_design_head / after_runtime_head / after_design_head / language_core_identity / before_stage1_runtime_integration_identity / after_stage1_runtime_integration_identity / before_runner_sha256 / after_runner_sha256 / formal_input_identity / formal_before_identity / member_order / members`である。
+
+`formal_input_identity`はdomain prefix `COCOLON_CMEE_STAGE1_FORMAL_INPUT_IDENTITY_V1\0` + canonical JSON `{fixture_id, denominator_id, axes_identity, ordered_inputs_exact8}`（UTF-8、sort keys、compact separators、allow_nan=false、terminal LF）のSHA-256とする。7.1はこのinput identity、before / after source heads、before / after runner SHA、before / after integration identities、language identity、expected alias / member names / exclusive slotだけをfreezeし、まだ存在しないoutput / member / master digestを記録しない。7.2でapproved before provenanceのclean detached checkoutとcurrent after checkoutからexact1 pairを生成・atomic saveした後にだけ、validated `formal_before_exact8.json` canonical member raw bytesのSHA-256を`formal_before_identity`としてmaster / receiptへfreezeする。before provenance exact5（runtime head / design head / integration identity / runner SHA / formal input identity）がmemberとmaster receiptで一致しないbundleはrejectする。
+
+Step 7 withheld masterはschema `cocolon.cmee.stage1.formal_withheld_review_master.v1`、kind `FORMAL_WITHHELD_AFTER_EXACT4`、attempt `FORMAL_WITHHELD_ATTEMPT_01`、alias `Cocolon_CMEE_Stage1_FormalWithheldReviewMaster_FORMAL_WITHHELD_ATTEMPT_01.json`、member order `withheld_after_exact4.json`→`body_free_machine.json`へ固定する。closed root exact15は`schema_version / master_alias / master_kind / formal_withheld_attempt_id / entry_runtime_head / entry_design_head / language_core_identity / stage1_runtime_integration_identity / runner_sha256 / private_packet_id / withheld_input_raw_sha256 / withheld_set_digest / product_read_bundle_master_sha256 / member_order / members`である。両masterのmember rowはearly masterと同じclosed exact5 framingを使い、activation / identity / input / member cross-bindingを検証する。7.1 receiptはexpected member names / aliases / slotsとinput / provenance identitiesだけを持ち、Product / withheld master / member output digestsは7.2 / 7.3の生成・atomic save・fresh readback後に各receiptへ初めて固定する。
+
+Ultra向けformal after auxiliaryはvalidated Product masterからだけrecomputableに派生する。schema `cocolon.cmee.stage1.formal_after_review_auxiliary.v1`、kind `FORMAL_AFTER_EXACT8`、alias `Cocolon_CMEE_Stage1_FormalAfterReviewAuxiliary_FORMAL_ATTEMPT_01.json`とし、rootはschema / kind / alias / formal attempt / Product master SHA / after canonical packet SHA / formal after payload exact1へ閉じる。receipt schema `cocolon.cmee.stage1.formal_after_review_auxiliary_receipt.v1`はProduct master SHA / after packet SHA / auxiliary SHA / `operation=VALIDATED_FRESH_MATERIALIZATION / reader=ULTRA_ONLY / lifecycle=DELETE_AFTER_STEP7_8_TRANSITION`だけを公開し、7.5b Ultra / 7.8 transitionはこのoperation以外を拒否する。loss時はvalidated Product masterから再生成しformal actual 0である。
+
+Pro formal-pair auxiliaryもvalidated Product masterからだけrecomputableに派生する。schema `cocolon.cmee.stage1.formal_pro_pair_review_auxiliary.v1`、kind `FORMAL_BEFORE_AFTER_EXACT8`、alias `Cocolon_CMEE_Stage1_FormalProPairReviewAuxiliary_FORMAL_ATTEMPT_01.json`とし、rootはschema / kind / alias / formal attempt / Product master SHA / before packet SHA / after packet SHA / formal before + after payload exact2へ閉じる。receipt schema `cocolon.cmee.stage1.formal_pro_pair_review_auxiliary_receipt.v1`はmaster / before / after packet / auxiliary SHAと`operation=VALIDATED_FRESH_MATERIALIZATION / reader=PRO_ONLY / lifecycle=DELETE_AFTER_STEP7_8_TRANSITION`だけを公開する。ProはProduct masterを直接読まず、このsame-pair auxiliary exact1だけを7.6で読む。
+
+Pro formal-withheld auxiliaryはvalidated formal withheld masterからだけrecomputableに派生する。schema `cocolon.cmee.stage1.formal_withheld_pro_review_auxiliary.v1`、kind `FORMAL_WITHHELD_AFTER_EXACT4`、alias `Cocolon_CMEE_Stage1_FormalWithheldProReviewAuxiliary_FORMAL_WITHHELD_ATTEMPT_01.json`とし、rootはschema / kind / alias / formal withheld attempt / withheld master SHA / withheld packet SHA / withheld after payload exact1へ閉じる。receipt schema `cocolon.cmee.stage1.formal_withheld_pro_review_auxiliary_receipt.v1`はmaster / packet / auxiliary SHAと`operation=VALIDATED_FRESH_MATERIALIZATION / reader=PRO_ONLY / lifecycle=DELETE_AFTER_STEP7_8_TRANSITION`だけを公開する。Proはformal withheld masterを直接読まず、このauxiliary exact1だけを7.7で読む。
+
+savepoint stateは次のexact6である。
 
 ~~~text
 WIP_REMOTE_SAVED
@@ -3400,8 +3445,13 @@ WIP_REMOTE_SAVED
   unfinished exact actionまでremoteへ保存済み。checkpoint / macro Stepは未完了。
 
 CHECKPOINT_COMPLETE_REMOTE_POSTVERIFIED
-  当該substepのexitだけが成立し、両repoのremote bytes / headsを確認済み。
+  当該substepのexitが成立し、両repoのremote bytes / headsを確認済みで、
+  次checkpointの全required artifactがdurable ownerからfresh readback可能。
   macro Step complete、creditまたは次macro Step authorityを意味しない。
+
+FORWARD_HANDOFF_INCOMPLETE
+  current bytesはremote保存済みだが、次checkpointの非再計算input / resultに
+  durable ownerまたはfresh readback proofがない。checkpointをCOMPLETEとしない。
 
 PARTIAL_REMOTE_SAVED
   一方のrepoだけremote postverified。成功repoをrollback・再実装せず、
@@ -3410,7 +3460,26 @@ PARTIAL_REMOTE_SAVED
 TERMINAL_REMOTE_POSTVERIFIED
   named STOPと再利用不可境界までremoteへ保存済み。
   STOPを成功またはcreditへ変換しない。
+
+RUN_RESULT_UNKNOWN_TERMINAL
+  非再実行operationの結果またはdurable保存結果が確定不能。silent retry、
+  同一inputの再実行、成功claimをせず、attempt identityと不明境界をremote保存する。
 ~~~
+
+`CHECKPOINT_COMPLETE_REMOTE_POSTVERIFIED`は次のconjunctionが全て`TRUE`の時だけ成立する。
+
+~~~text
+PUBLIC_BYTES_REMOTE_POSTVERIFIED = TRUE
+NEXT_CHECKPOINT_REQUIRED_INPUTS_CLASSIFIED = TRUE
+NONRECOMPUTABLE_INPUTS_DURABLE = TRUE
+DURABLE_OWNER_AND_RETRIEVAL_PROOF_VERIFIED = TRUE
+NEXT_SESSION_DRY_ACQUIRE_AND_DIGEST_VERIFY = PASS
+NEXT_CHECKPOINT_REQUIRED_ARTIFACTS_READBACK_VERIFIED = TRUE
+REQUIRED_ARTIFACT_ONLY_IN_SCRATCH_OR_TMP = FALSE
+SESSION_LIBRARY_CHECKPOINT_READBACK = PASS
+~~~
+
+一つでも`FALSE | UNKNOWN | NOT_APPLICABLEの誤用`なら`FORWARD_HANDOFF_INCOMPLETE`または`WIP_REMOTE_SAVED`であり、Step / checkpoint completeを主張しない。SHA / digestはidentityであってstorageではない。
 
 WIP commitはDraft / disabled Route A branchだけに許容し、commit message、existing handoff、canonical 06に次を残す。
 
@@ -3429,16 +3498,56 @@ EARLY_ACTUAL_STATUS
 COMMON_DEFECT_RETURN_COUNT
 STEP_COMPLETE = FALSE unless the macro exit independently成立
 CANDIDATE_READY = FALSE
-PRIVATE_BODY_GITHUB_LIBRARY_ZIP_EFFECT = 0
+PUBLIC_GITHUB_PRIVATE_BODY_EFFECT = 0
+PUBLIC_ZIP_PRIVATE_BODY_EFFECT = 0
+PRIVATE_DURABLE_OWNER_CLASS
+PRIVATE_DURABLE_OWNER_ALIAS
+PRIVATE_DURABLE_AVAILABILITY_AND_READBACK
+NEXT_CHECKPOINT_REQUIRED_ARTIFACTS
+SESSION_LIBRARY_CHECKPOINT_DIGEST_AND_READBACK
 PRODUCT_CREDIT_FROM_SAVEPOINT = 0
+TECHNICAL_CREDIT_FROM_SAVEPOINT = 0
 AUTOMATIC_MACRO_PROGRESSION = FALSE
 ~~~
 
 push応答だけで保存完了としない。write結果が不明なら対象pathを再取得し、prepared bytes一致なら成功、preimageのままなら未反映、別内容または取得不能なら結果不明STOPとする。結果不明targetを自動retryしない。remote headが進んでもtarget pathに衝突がなければfresh headから未反映側だけを続ける。
 
-withheld body-full input / output、private locator、per-case detailはGitHub、Library、本design ZIP、body-free receipt、Ultra、Mashへ出さない。Pro-only existing private ownerとreview直後cleanup contractを維持する。public-safeな本design ZIPはLibraryへ保存できるが、withheld body-fullのdurable ownerへ読み替えない。
+非再実行runは、Library owner / input readback / output slotを先に確保し、一つのprotected orchestration内で`ATTEMPT=1 -> run -> durable output master write -> fresh readback -> body-free machine remote receipt`まで閉じる。human read / decisionはその後のcheckpointでdurable master bytesだけを入力とし、`human read -> body-free result / decision -> immediate remote receipt`を閉じてからcleanupする。結果が不明なら`RUN_RESULT_UNKNOWN_TERMINAL / RETRY=0`で停止する。完了済みrun / human readはactivation pairとinput / master digestが一致する限り、session交代を理由に再実行しない。
 
-次sessionは両PRのremote head、latest checkpoint ID、target bytes、stateをfresh取得し、最大のCHECKPOINT_COMPLETE_REMOTE_POSTVERIFIEDまたはWIP_REMOTE_SAVEDから再開する。remote保存済みbytesをchat memory不足を理由に再作成せず、PARTIAL_REMOTE_SAVEDでは成功repoを再実行しない。
+nonrepeatable human readもgeneration attemptとは別のexclusive review attemptとして管理する。read前にreader、activation pair、dual identities、master / auxiliary / input digest、fixed output slot、`READ=0 / REREAD=0`をbody-free markerとして両repoへpostverifyし、そのmarker後にだけexact1回読む。result receiptはsame binding、fixed `review_attempt_id`、`read_count=1 / reread_count=0`を両repoへ即postverifyする。early Pro schema v4は`EARLY_PRO_COMBINED_READ_ATTEMPT_01`、early Ultra schema v5は`EARLY_ULTRA_KNOWN_READ_ATTEMPT_01`だけを許可し、early final schema v6は両ID / countを検証・明示伝播する。marker後にread / receipt結果が不明なら`HUMAN_READ_RESULT_UNKNOWN_TERMINAL / REREAD=0`としてFの`QUARANTINE_UNKNOWN_NO_MUTATION`へ入り、session交代でfresh readを始めない。
+
+Step 6 resource envelopeは追加Mash判断を要求せず、本designでbaseline-relative ruleをpre-approveする。4.1のcurrent Step 3 activation checkoutで、public frozen ordered exact32、same final API、provider / network 0を使い、latencyはwarmup exact5後にordered exact32をexact30周してper-case `monotonic_ns` exact960 samplesのnearest-rank p95、memoryはwarmup exact2後にisolated child exact5を`/usr/bin/time -v`で測ったmaximum resident set size KiBのmaxを取得する。environment identityはPython executable / version、OS / kernel / architecture、CPU model / quota、memory limit、command bytes、fixture / exact32 identityをcanonical hashへbindし、Step 6でexact一致しなければ`BENCHMARK_ENVIRONMENT_DRIFT_STOP`とする。
+
+numeric rulesは次で固定し、4.1で得たbaseline数値を式へ機械代入して両repo postverifyする。integer計算はceil、単位はns / bytesである。
+
+~~~text
+LATENCY_BASELINE_ATTEMPT = LATENCY_BASELINE_ATTEMPT_01
+MEMORY_BASELINE_ATTEMPT = MEMORY_BASELINE_ATTEMPT_01
+LATENCY_AFTER_ATTEMPT = LATENCY_ATTEMPT_01
+MEMORY_AFTER_ATTEMPT = MEMORY_ATTEMPT_01
+LATENCY_P95_MAX = max(ceil(BASELINE_LATENCY_P95_NS * 1.15),
+                      BASELINE_LATENCY_P95_NS + 5_000_000)
+MEMORY_PEAK_MAX = BASELINE_MEMORY_PEAK_BYTES
+                  + max(33_554_432,
+                        ceil(BASELINE_MEMORY_PEAK_BYTES * 0.15))
+UNKNOWN_POLICY = BENCHMARK_RESULT_UNKNOWN_STOP / RETRY=0
+~~~
+
+baseline attempts自身もexclusive marker、fixed body-free sample + aggregate slot、atomic no-replace commit、immediate dual-repo receiptを使う。baseline / afterのraw sample order、aggregate、environment identity、attempt / retry countを保存し、percentile library default、平均値、手計算丸めへ置換しない。
+
+cleanupはbody-free decisionが両repoでremote postverifiedされた後だけ行う。Libraryのtrash / version retentionを考慮し、`ACTIVE_LIBRARY_REMAINING=0 / LOCAL_REMAINING=0 / PHYSICAL_ERASURE_CLAIM=0`と記録する。partial remoteまたは結果不明時にcleanupしない。
+
+Common macro-terminal private-artifact dispositionをSteps 3–9の全named STOPへ適用する。まずbody-free terminal receiptを両repoへ保存してfresh postverifyし、その後にactive `PRIVATE_FROZEN_INPUT / PRIVATE_REVIEW_OUTPUT_MASTER / PRIVATE_REVIEW_OUTPUT_AUXILIARY / PRODUCT_READ_BUNDLE / local copy`を全件inventoryする。各artifactはexact1のdisposition、`RETAIN_FOR_NAMED_APPROVED_RETURN / ACTIVE_CLEANUP_REQUIRED / QUARANTINE_UNKNOWN_NO_MUTATION`のexact3から一つだけを持つ。`RETAIN`はknown-good durable bytesだけに許可し、current authority上のreturn checkpoint、logical owner alias、retention reason、expiryまたはnext decision owner、fresh readbackを必須とする。`ACTIVE_CLEANUP_REQUIRED`はknown dispositionにだけ許可し、terminal receipt postverify後にactive cleanupして`ACTIVE_LIBRARY_REMAINING / LOCAL_REMAINING / PHYSICAL_ERASURE_CLAIM=0`を両repoへpostverifyする。`QUARANTINE_UNKNOWN_NO_MUTATION`はnonrepeatable generation / human read / presentation / verdict / save outcomeのいずれかがUNKNOWNの時だけ使い、retry / reread / redisplay / overwrite / cleanup / success claimを0にし、発見可能なartifact / markerをprivate保持してbody-free unknown boundaryとresolver ownerを保存する。digest-only / 暗黙retentionを禁止し、`UNCLASSIFIED` itemが一つでも残るmacro-terminalはsuccessor-readyではない。
+
+この共通terminal save sequenceを`F`とし、exact3に分ける。
+
+| ID | Work | Savepoint exit |
+|---|---|---|
+| F.1 | named STOP receiptを両repoへ保存・fresh postverifyし、全active private artifact / local copyをinventory | terminal cause / authority / origin、artifact exact count、`UNCLASSIFIED`数をbody-free固定。receipt partial / unknown時cleanup 0 |
+| F.2 | 各artifactへexact1 dispositionを付け、known-good approved returnはfresh readback付きretain、known terminalはactive cleanup、unknownはno-mutation quarantine | named return / expiry / next decision owner、absence proof、またはunknown boundary / resolver owner。physical erasure claim 0 |
+| F.3 | retention / cleanup proofを両repoへ保存・fresh postverify | `UNCLASSIFIED=0`、次の許可actionまたはterminal closure一意、automatic retry / progression 0 |
+
+次sessionは両PRのremote head、latest checkpoint ID、target bytes、state、Libraryのlogical owner aliasをfresh取得し、最大のsuccessor-ready savepointから再開する。Libraryをfresh materializeしbody-free digestを再計算するまでprivate依存checkpointを開始しない。remote保存済みbytesをchat memory不足を理由に再作成せず、PARTIAL_REMOTE_SAVEDでは成功repoを再実行しない。
 
 ### 13.2 Step 0 micro-checkpoints
 
@@ -3447,7 +3556,8 @@ withheld body-full input / output、private locator、per-case detailはGitHub�
 | 0.1 | 両PR head、Draft / open / unmerged、approved final identityをlock | remote SHA、design blob、authority identity一致 |
 | 0.2 | exact changed paths、全preimage、unchanged exact8 fixture / axesをlock | path / blob map一致、scope外path 0 |
 | 0.3 | current machine baselineとunchanged exact8 beforeを再現 | test result、exact8 count、未実行項目をbody-free保存 |
-| 0.4 | private packet identity分離、estimate / cap assumptions、counter 0を初期化 | drift 0、Step 0 macro exit receipt remote postverified |
+| 0.4 | historical Pro / design sourceを後続dependencyかconsumed historyへ分類 | hash-only availability claim 0。必要bytesはLibrary readback、不要bytesは`CONSUMED_HISTORICAL_NONREUSABLE` |
+| 0.5 | private packet identity予約、estimate / cap assumptions、counter 0、Step 0 session bundleを固定 | private materialize 0、両repo receipt + Library bundle readback、Step 0 macro exit successor-ready |
 
 ### 13.3 Step 1 micro-checkpoints
 
@@ -3459,6 +3569,7 @@ withheld body-full input / output、private locator、per-case detailはGitHub�
 | 1.4 | SubjectivePropositionV2 discriminated content contractを実装 | content-kind / nullability matrix成立 |
 | 1.5 | basis / qualifier / policy rowとsource / owner / safety / unknown / derivation spineを実装 | exact-cover / tamper tests成立 |
 | 1.6 | projection full-row invariantとanti-template registry invariantを閉じる | parallel schema owner、raw-text selector 0、Step 1 macro exit remote postverified |
+| 1.7 | Step 1両repo receiptとsession bundleをreadback検証 | private dependency 0、next Step 2 source / testsがGitHubからfresh取得可能 |
 
 ### 13.4 Step 2 micro-checkpoints
 
@@ -3476,35 +3587,51 @@ withheld body-full input / output、private locator、per-case detailはGitHub�
 | 2.10 | normalizer phase 4–6とidempotence | exact6、correctable defect 0、N(N(x))=N(x) |
 | 2.11 | exact32 candidate pool、dedupe、profile、exact reducer、global rank | material alternate exact1以上、typed tieはnamed STOP |
 | 2.12 | known exact4をfinal APIで生成しmanifest / identityをfreeze | actual Japanese 4/4、registry invariant、LANGUAGE_CORE_IDENTITY固定、Step 2 macro exit remote postverified |
+| 2.13 | Step 0–2 historical migration ledgerとStep 2 session bundleを固定 | runtime / design heads、changed paths、tests、superseded identity、next pointerをreadback。Step 0–2再実行0 |
 
-2.1–2.12はStep 2 language core exact1の内部保存地点であり、viability-only composer、early-only flag、parallel callable、legacy fallbackを作らない。language coreは2.12後に後付けしない。
+2.1–2.13はStep 2 language core exact1の内部保存地点であり、viability-only composer、early-only flag、parallel callable、legacy fallbackを作らない。language coreは2.12後に後付けしない。Step 0–2のsource / docs / testsはGitHubから再構成できるため、今回の監査で再実行しない。known exact4はpublic design / runnerから再構成可能であり、private durable inputではない。
 
 ### 13.5 Step 3 micro-checkpoints
 
 | ID | Work | Savepoint exit |
 |---|---|---|
 | 3.1 | 2026-08-26 existing WIPをlosslessにimportし、repair / public regressionのremote identityを固定 | mashos-api d05a072…、Cocolon 0e840ec…、recorded 165/165、Step 3未完了 |
-| 3.2 | bounded finite-host / owner-boundary deltaのindependent public auditを完了し、activation pair、LANGUAGE_CORE_IDENTITY、runner、private body-free identitiesをfreeze | audit body-free result、current activation identities remote postverified |
-| 3.3 | same frozen private exact4をcurrent activation headsでfresh exact1回実行し、known / withheld machine invariantを判定 | body-free count / family / digest / machine result、fresh run 1、retry 0 |
-| 3.4 | Ultraがknown exact4だけをtechnical check | body-free Ultra result、withheld body access 0 |
-| 3.5 | Proがknown exact4をlanguage viability read | body-free known Pro result |
-| 3.6 | Proがwithheld exact4をPro-onlyでlanguage readし、fresh outputをexisting contractどおりcleanup | body-free withheld Pro result、output remaining 0、private publication 0 |
-| 3.7 | exact3 human / machine resultを分類しCOMMON_DEFECT_RETURN_TRANSITIONをinline適用 | LANGUAGE_VIABILITY_OBSERVEDまたはnamed return / terminalをremote postverify |
+| 3.2a | bounded finite-host / owner-boundary deltaをindependent public auditし、Step 2言語核identityとStep 4/5統合identityを分離 | public audit CLEAR、`LANGUAGE_CORE_IDENTITY` / `STAGE1_RUNTIME_INTEGRATION_IDENTITY` / runner固定 |
+| 3.2b | 失われた旧exact4を失効させ、旧packet / slot / digestを再利用禁止にする | `SUPERSEDED_BODY_UNAVAILABLE_WITHOUT_STEP3_3_EXECUTION`、旧`RETAINED` claim訂正 |
+| 3.2c | new synthetic non-identifying exact4をnew packet / slotへ固定し、private Library ownerへ保存 | exact4 / family各1 / schema / raw SHA / set digest、GitHub / ZIP / chat body 0 |
+| 3.2d | Libraryから別fresh rootへbyte-blind materializeし、0700 / 0600 / owner / nlink / no-symlink、schema / count / family / digestをbody-free検証 | original metadata match、early actual run 0、local materialized copy 0 |
+| 3.2e | activation pair、dual identity、transactional exact3 runner、durable owner attestation、unfinished exact actionを両repoへ保存し、public-safe session bundleをLibrary readback | integration identityがmachine / private / Pro / Ultra / final receiptをexact bind、second-write / pre-commit failure tests PASS、両PR bytes / bodies + Library readback postverified、Step 3.2 successor-ready complete、resume 3.3a |
+| 3.3a | activation pairをfresh確認し、runtime checkout HEAD exact一致 + tracked/index clean + current/frozen dual identity exact一致を確認してsame Library exact4をfresh materialize。strict attempt ID、そのIDから一意導出するsame-filesystem fixed staging / final run slot、fixed-name known / withheld / body-free machine exact3、single master Library slotをpreflight / remote保存 | raw SHA / canonical digest match、design headはexternal PR attestation、`renameat2(RENAME_NOREPLACE)` capability probe / transaction schema / target・stale marker absence / permissions PASS、全確認はirreversible marker前、`ATTEMPT=1 / RUN=0 / RETRY=0`、preflight remote postverified |
+| 3.3b | protected orchestration内でfixed attempt markerをatomic exclusive作成してからcurrent activation headsのfresh exact1 runを実行する。CLEAR / machine-nonclearを問わずknown / withheld / body-free machine exact3を完備し、final run directoryへatomic no-replace renameする | `INTERMEDIATE_NON_YIELD_NO_CHECKPOINT_COMPLETION`。並行run 0、partial committed exact3 0、nonclear exact3も保存、run 1 / retry 0。crash markerは結果不明証拠として保持し、同じorchestrationの3.3cまでyield / success claim 0 |
+| 3.3c | 同じprotected orchestration内でcommitted exact3のactivation heads / attempt / dual identities / input・packet digestを再検証し、exact3全体をsingle `PRIVATE_REVIEW_OUTPUT_MASTER` itemへ最初に保存・fresh readbackしてmachine body-free receiptをGitHubへ保存。known-only auxiliaryはmaster成功後にだけ派生 | 3.3の唯一のcheckpoint exit。master exact1 durable + machine receipt両repo remote postverified。CLEAR pairは`EARLY_ACTUAL_MACHINE_COMPLETED_PENDING_REVIEW`、machine nonclearは`EARLY_ACTUAL_MACHINE_NONCLEAR_STOP / RETRY=0`で3.4以降0。auxiliary partialはmasterから再開。masterまたはcommitted exact3が不明なら`RUN_RESULT_UNKNOWN_TERMINAL / RETRY=0` |
+| 3.3d | machine nonclear時だけFを実行し、bodyをhuman readせずcause / allowed returnとearly master / frozen input / local exact3 lifecycleを分類 | machine STOP receipt postverify後、approved machine-fix return targetがcurrent authorityにある場合だけfrozen inputをfresh-readback付き保持。early master / local exact3は原則cleanupし、不可欠なdiagnostic retentionだけnamed owner / reader / expiry付きで許可。3.4a–3.6 / actual rerun 0、F.3 remote postverified |
+| 3.4a | validated masterからfixed schema / kind / aliasのknown exact4 auxiliaryを派生しLibrary fresh readback、body-free auxiliary receiptを両repo保存 | withheld / master body access 0。operation=`VALIDATED_FRESH_MATERIALIZATION`、auxiliary SHA / master SHA / known packet SHA bind。Ultra read 0 |
+| 3.4b | `EARLY_ULTRA_KNOWN_READ_ATTEMPT_01` markerを両repo postverify後、Ultraがsame auxiliaryだけをexact1回technical readしresultを即保存 | marker / resultはreader / activation / dual IDs / auxiliary / master / known packet SHA、`READ=0→1 / REREAD=0` bind。unknownは`HUMAN_READ_RESULT_UNKNOWN_TERMINAL` + F quarantine |
+| 3.5a | `EARLY_PRO_COMBINED_READ_ATTEMPT_01`、validated master fresh materialization、known + withheld exact4、fixed result slotをbody-free preflight / 両repo保存 | Pro read 0、master / machine / activation / dual IDs / input digest exact bind、slot collision 0 |
+| 3.5b | Proが3.5aのsame durable masterにbindしたknown exact4 + withheld exact4をexact1回でlanguage viability readしresultを即保存 | combined human result schema exact1、`READ=1 / REREAD=0`、validated master receipt / machine packet digest exact bind、両repo postverified。unknownはF quarantine |
+| 3.6 | machine packet、body-free master receipt、body-free known auxiliary receipt、Ultra、Pro exact5のgeneration / review attempts、READ / REREAD counts、heads / dual IDs / input digests / packet・auxiliary・master SHAを照合しCOMMON_DEFECT_RETURN_TRANSITIONを決定・両repo postverify | master / auxiliary receiptはいずれも`VALIDATED_FRESH_MATERIALIZATION`必須、Pro / Ultra fixed review IDs、`READ=1 / REREAD=0`必須、arbitrary hash合意0。`LANGUAGE_VIABILITY_OBSERVED`または`EARLY_ACTUAL_REVIEWED_NONCLEAR_PENDING_TRANSITION`からnamed return / terminal。decision保存前cleanup 0 |
+| 3.7 | transition stateに従いmaster / auxiliary review outputをactive cleanupし、inputはStep 7再使用まで保持 | local remaining 0、active master / auxiliary remaining 0、physical erasure claim 0、cleanup proof remote postverified |
 
-3.1は本再細分化による遡及的なStep 3完了claimではない。current saved WIPを新番号へ対応付けるmigration pointである。3.2以前のrepair、Step 2、Step 1、Step 0を再実行しない。
+3.1は本再細分化による遡及的なStep 3完了claimではない。current saved WIPを新番号へ対応付けるmigration pointである。3.2a以前のrepair、Step 2、Step 1、Step 0を再実行しない。3.5a / 3.5bはpreflight saveとsingle combined readだけを分け、runnerの`EARLY_HUMAN_READ_RESULT` exact1が要求するknown 4 + withheld 4の同一readを分割しない。
+
+3.3cのmachine nonclear、master / committed exact3不明を含むStep 3 named STOPは3.3d / Fを通らずterminal closureにしない。結果不明のartifactは推測cleanupせずF.1で`UNKNOWN`としてremote保存し、explicit authorityまでretry 0で停止する。
 
 ### 13.6 Step 4 micro-checkpoints
 
 | ID | Work | Savepoint exit |
 |---|---|---|
-| 4.1 | Step 3 CLEAR、identity、viability re-entryをlock | drift 0 |
+| 4.1 | Step 3 CLEAR、言語核identity、runtime integration preimage、private input ownerを確認し、pre-approved protocolでbaseline latency / memoryをfixed attempts exact1ずつ測定・atomic保存してStep 6 numeric limitsへ機械代入 | durable Step 3 final receipt / Library input readback、environment identity一致。baseline exact960 latency / exact5 memory、15% + latency 5ms floor / memory 32MiB floor、after attempts / exclusive slots / unknown policyを両repo postverify。欠落なら`STEP6_PERFORMANCE_ENVELOPE_UNDEFINED_STOP` |
 | 4.2 | EmlisUtteranceStateとduty consumptionを実装 | required duty exact-cover、overlap 0 |
 | 4.3 | sealed plan / unit rowsとbottom-up ref validation | missing / duplicate / unreferenced 0 |
 | 4.4 | ClauseFrame / RealizedSentenceUnit atomic migration | old / new dual shape 0 |
 | 4.5 | SurfacePart / BindingV2 / Derivation exact-cover | gap / overlap / owner tamper 0 |
 | 4.6 | positive trace v2とselected artifact metadata | duty / layout / variant refs到達 |
 | 4.7 | S9-private validatorとcommon guard | shared S9 effect 0、L1 1..5 / L2 1..4 |
-| 4.8 | full coverage / tamper / identity tests | language identity不変ならStep 4 macro exit。変化時はearly status失効をremote保存しStep 3へ戻る |
+| 4.8 | full coverage / tamper / identity testsとsession bundle readback | `LANGUAGE_CORE_IDENTITY`不変必須、`STAGE1_RUNTIME_INTEGRATION_IDENTITY`更新を記録してStep 4 exit。言語identity drift時は失効を先にremote保存し`STEP4_LANGUAGE_CORE_DRIFT_STOP`。fresh explicit authorityなしに3.2a / 3.2dへ戻らない |
+
+`LANGUAGE_CORE_IDENTITY`はStep 2のsubjective meaning、planner、composer、construction / morphology、normalizer、rankerとそのclosed registry / manifestだけを所有する。Step 4 / 5が変更するstate、sealed plan、trace、validator、facade、callerのwhole-file bytesは別`STAGE1_RUNTIME_INTEGRATION_IDENTITY`が所有する。planned integration changeをlanguage changeと誤判定しない。一方、Step 2 product-causal callable / registry / manifestが変わる場合は必ずlanguage identityが変わり、early statusを失効させる。
+
+4.1–4.8のperformance envelope未定義、language identity drift、regressionその他のnamed STOPは全てF.1–F.3を実行する。current authorityにapproved return checkpointがないSTOPでfrozen inputを暗黙保持しない。
 
 ### 13.7 Step 5 micro-checkpoints
 
@@ -3512,77 +3639,108 @@ withheld body-full input / output、private locator、per-case detailはGitHub�
 |---|---|---|
 | 5.1 | pre-cutover call graphとlegacy caller inventoryを固定 | exact caller inventory |
 | 5.2 | dormant facadeとcandidate-map supportを準備 | active owner変更0 |
-| 5.3 | compile_stage1_response() exact1をnew ownerへatomic cutoverしlegacyをnon-call化 | dual-run / fallback window 0 |
-| 5.4 | selected candidate、visible units、trace、S9 selectionを照合 | selected refs / identities一致 |
-| 5.5 | A / B / A determinism、no-legacy、no-provider call graphを検証 | exact-one owner、Step 5 macro exit remote postverified |
+| 5.3 | compile_stage1_response() exact1のnew owner activationとlegacy non-call化を同一commitへatomic cutover | intermediate dual-run / fallback stateをremote保存0 |
+| 5.4 | selected candidate、visible units、trace、S9 selectionを照合しbody-free receipt保存 | selected refs / identities一致 |
+| 5.5 | A / B / A determinism、no-legacy、no-provider call graphとsession bundleを検証 | exact-one owner、caller inventory / integration identity / tests remote + Library readback、Step 5 exit |
+
+5.1のcaller inventoryはchatまたは一時解析だけでなくGitHub body-free manifestへ保存する。Step 5にprivate body dependencyはないが、Step 7再使用の`PRIVATE_FROZEN_INPUT` ownerを削除しない。
+
+5.1–5.5のcutover / identity / regression named STOPは全てF.1–F.3を実行する。Step 7へ進めないterminalではfrozen inputをactiveのまま無期限保持しない。
 
 ### 13.8 Step 6 micro-checkpoints
 
 | ID | Work | Savepoint exit |
 |---|---|---|
+| 6.0 | 4.1でremote freeze済みのbenchmark command / environment identity、warmup / sample / nearest-rank p95 / memory max、baseline raw samples / aggregate、numeric limits、fixed after attempts / exclusive slots / unknown policyをfresh再取得 | 4.1 receiptと全bytes / 数値 / formula / attempts exact一致。environment driftは`BENCHMARK_ENVIRONMENT_DRIFT_STOP`、欠落は`STEP6_PERFORMANCE_ENVELOPE_UNDEFINED_STOP`で6.1以降 / Step 7へ進まない |
 | 6.1 | import / schema / identity / phase seam suites | GREENまたはnamed REDをremote保存 |
 | 6.2 | subjective / policy / source / safety / unknown suites | GREENまたはnamed RED |
 | 6.3 | arc / duty / state / intent / plan suites | GREENまたはnamed RED |
 | 6.4 | frame / surface / binding / trace / S9 / cutover suites | GREENまたはnamed RED |
 | 6.5 | finite tamper / mutation / generalization set | GREEN、expected-text oracle 0 |
-| 6.6 | exact32 latency測定 | frozen latency envelope内 |
-| 6.7 | exact32 memory測定 | frozen memory envelope内 |
-| 6.8 | full combined regression、compile、public boundary / provider / privacy確認 | all machine GREEN、Step 6 macro exit remote postverified |
+| 6.6 | frozen exact32 identityをbindした`LATENCY_ATTEMPT_01`をexclusive marker後にexact1回測定し、body-free raw samples + aggregateをfixed slotへatomic no-replace commit | same command / environment / runtime / hardware / warmup / sample / statistic / exact32 identityをbindし、commit直後にGitHub receiptをpostverify。crash / save不明は`BENCHMARK_RESULT_UNKNOWN_STOP / RETRY=0`、frozen numeric ruleへPASSまたはnamed STOP |
+| 6.7 | same exact32 identityをbindした`MEMORY_ATTEMPT_01`を別exclusive marker後にexact1回測定し、body-free raw samples + aggregateをfixed slotへatomic no-replace commit | same command / environment / runtime / hardware / sample / statistic / exact32 identityをbindし、commit直後にGitHub receiptをpostverify。crash / save不明は`BENCHMARK_RESULT_UNKNOWN_STOP / RETRY=0`、frozen numeric ruleへPASSまたはnamed STOP |
+| 6.8 | full combined regression、compile、public boundary / provider / privacy確認とStep 7 input readback | all receipt remote、identity不変、6.0 / 6.6 / 6.7 exact binding、private input Library fresh readback、session bundle readbackでStep 6 exit |
 
-machine fixがLANGUAGE_CORE_IDENTITYを変えた場合はStep 6を閉じず、early status失効とreturn targetをremote保存してStep 3をfresh再実行する。
+machine fixがLANGUAGE_CORE_IDENTITYを変えた場合はStep 6を閉じず、early status失効とreturn targetをremote保存してStep 3をfresh再実行する。6.6 / 6.7のcommitted outputまたはremote receiptが不明な場合、cache / warmup状態を変えるsilent rerunを同一attemptとして扱わず、fixed marker / slotを保持してFの`QUARANTINE_UNKNOWN_NO_MUTATION`へ入る。
+
+6.0–6.8のnumeric envelope、test、performance、privacy、identity named STOPは全てF.1–F.3を実行する。approved Step 3 returnを選ぶ場合だけfrozen inputをnamed retentionし、terminal closureではactive private artifact exact0まで分類する。
 
 ### 13.9 Step 7 micro-checkpoints
 
 | ID | Work | Savepoint exit |
 |---|---|---|
-| 7.1 | identity、Step 6 GREEN、before packet、withheld digestをrelock | drift 0 |
-| 7.2 | unchanged formal exact8 afterを生成 | count 8、body-free packet identity |
-| 7.3 | withheld exact4 afterをPro-onlyで生成 | count / family / digestのみpublic-safe |
+| 7.1 | Step 6全receipt、activation pair、same private inputをfresh readbackし、approved before provenance / current after provenance、formal input identity、expected aliases / member names、strict `FORMAL_ATTEMPT_01 / FORMAL_WITHHELD_ATTEMPT_01`、exclusive Product / withheld master slotsをpreflight / 両repo保存 | before / after heads・runner・language / integration identities、input identity、slot collision 0、`ATTEMPT=1 / RUN=0 / RETRY=0` exact2。output / member / master digestは未生成として0、再生成 / substitution 0 |
+| 7.2 | 7.1後のprotected orchestrationでapproved clean detached before checkoutとcurrent clean after checkoutからformal exact8 pairをexact1回生成し、single immutable `PRODUCT_READ_BUNDLE`へatomic save / private Library fresh readbackしてbody-free receiptをremote保存 | exact8 pair、before / after provenance exact5、attempt、language / integration identities、runner、formal input identity、生成後のformal before / member / master digestsをbind。保存結果不明は`RUN_RESULT_UNKNOWN_TERMINAL / RETRY=0`、Step 9まで再生成0 |
+| 7.3 | 別protected orchestrationでsame withheld exact4 afterをexact1回生成し、Step 3 masterとは別のsingle `PRIVATE_REVIEW_OUTPUT_MASTER`へ即保存 / fresh readbackしてbody-free receiptをremote保存 | count / family / attempt / master digestのみpublic-safe、reader derivativeは`PRIVATE_REVIEW_OUTPUT_AUXILIARY`。保存結果不明は`RUN_RESULT_UNKNOWN_TERMINAL / RETRY=0`、Product bundleへの混入0 |
 | 7.4 | machine invariant / structural / privacy checks | body-free machine GREEN |
-| 7.5 | Ultraがformal exact8 afterだけをtechnical check | body-free Ultra result |
-| 7.6 | Proがformal exact8 individual / pairwiseをpre-screen | body-free Pro individual result |
-| 7.7 | Proがset-level + withheldをpre-screen | CLEAR / COMMON_DEFECT / ROUTE_LEVEL_CEILING exact1 |
-| 7.8 | inline transitionを適用しstable packetまたはnamed STOPをseal | Step 7 macro exitまたはreturn / terminal remote postverified |
+| 7.5a | validated Product masterからfixed formal-after auxiliaryを派生・Library fresh readbackしてbody-free auxiliary receiptを両repo保存 | master / auxiliary / after packet SHA bind、before / withheld access 0、Ultra read 0 |
+| 7.5b | `FORMAL_ULTRA_AFTER_READ_ATTEMPT_01` markerを両repo postverify後、Ultraがsame formal exact8 after auxiliaryだけをexact1回technical read | resultを即両repo保存、`READ=1 / REREAD=0`、unknownは`HUMAN_READ_RESULT_UNKNOWN_TERMINAL` + F quarantine |
+| 7.6a | validated Product masterからfixed Pro formal-pair auxiliaryを派生・Library fresh readbackしてbody-free auxiliary receiptを両repo保存 | `reader=PRO_ONLY / operation=VALIDATED_FRESH_MATERIALIZATION`、master / before / after packet / auxiliary SHA bind、Pro master direct read 0 |
+| 7.6b | `FORMAL_PRO_SET_READ_ATTEMPT_01`とsame Pro pair auxiliary / fixed result slotをbody-free preflightし両repo保存 | Pro read 0、formal exact8 pair / auxiliary / master / activation / dual IDs bind、slot collision 0 |
+| 7.6c | Proがsame validated Pro pair auxiliaryのformal exact8 individual / pairwise / set-levelをexact1回の同一readでpre-screenしresultを即保存 | individual / pairwise / formal-set-level complete、`READ=1 / REREAD=0`、unknownはF quarantine。Product master direct read / session memory依存0 |
+| 7.7a | validated formal withheld masterからfixed Pro withheld auxiliaryを派生・Library fresh readbackしてbody-free auxiliary receiptを両repo保存 | `reader=PRO_ONLY / operation=VALIDATED_FRESH_MATERIALIZATION`、withheld master / packet / auxiliary SHA bind、Pro master direct read 0 |
+| 7.7b | `FORMAL_PRO_WITHHELD_READ_ATTEMPT_01`、same Pro withheld auxiliary、7.6c durable formal result、fixed result slotをbody-free preflightし両repo保存 | Pro withheld read 0、formal body reread 0、auxiliary / master / prior result / activation / dual IDs bind |
+| 7.7c | Proがsame validated Pro withheld auxiliaryだけをexact1回pre-screenし、7.6c durable formal resultとbody-freeにcombineして即保存 | CLEAR / COMMON_DEFECT / ROUTE_LEVEL_CEILING exact1、`READ=1 / REREAD=0`。unknownはF quarantine、formal human read再実行0 |
+| 7.8 | inline transitionを適用しstable packetまたはnamed STOPをseal | decisionを両repo postverify後だけT.4以降へ進む。stable Product bundleはStep 9まで保持 |
 
 ### 13.10 Step 8 / transition T micro-checkpoints
 
-Step 8は独立した後続Stepではない。Step 3.7または7.8の同一transition内だけで次を保存する。
+Step 8は独立した後続Stepではない。Step 3.6–3.7または7.8の同一transition内だけで次を保存する。
 
 | ID | Work | Savepoint exit |
 |---|---|---|
-| T.1 | body-free human result exact1とoriginを検証 | raw body / case patch 0 |
+| T.1 | body-free human result exact1、origin、artifact identitiesを検証 | raw body / case patch 0、same durable bytes proof |
 | T.2 | common-defect counterとcause ownerをatomic更新 | durable count 0..2、reset 0 |
-| T.3 | CLEAR継続、language core→Step 2、state / trace→Step 4、ceiling / budget→terminalを一意に決定 | return targetとfresh再実行範囲、またはnamed STOP remote postverified |
+| T.3 | CLEAR継続、language core→Step 2、state / trace→Step 4、ceiling / budget→terminalを一意に決定 | return targetとfresh再実行範囲、またはnamed STOP |
+| T.4 | decisionをmashos-apiとCocolonへ保存し両方fresh取得 | `DECISION_SAVED_REMOTE_POSTVERIFIED`。PARTIAL時cleanup 0 |
+| T.5 | origin / state別retention / active cleanupを行い、Library / localの存在・不在をfresh確認 | Step 3 CLEARはfrozen input保持 + early master / auxiliary cleanup。Step 7 CLEARはfrozen input + withheld master / auxiliaryをcleanupしProduct bundleだけ保持。RETURNはapproved return target / next decision owner付きでfrozen inputを保持しorigin review master / auxiliaryをcleanup、Step 7 RETURNはstale Product bundleもcleanup。terminalはFを適用し`UNCLASSIFIED=0`。全cleanupはT.4 decision postverify後だけ |
+| T.6 | cleanup / retention proofを両repoへbody-free保存 | crash後はpresent / absentをreconcileし、human readを再実行0 |
+
+Library backendの物理消去を主張しない。cleanup proofはactive itemへの取得可否とlocal copy不在だけを所有する。
 
 ### 13.11 Step 9 micro-checkpoints
 
 | ID | Work | Savepoint exit |
 |---|---|---|
-| 9.1 | stable exact8、counter、language identity、両remote headsをfreeze | final gate identities一致 |
-| 9.2 | current_structure/01を同期 | runtime evidenceと一致 |
-| 9.3 | current_structure/04を同期 | CMEE owner / lifecycle一致 |
-| 9.4 | mashos-api existing handoffを同期 | packet / counter / runtime refs一致 |
-| 9.5 | docs / runtime / packet cross-check、両repo push / remote verify | paired remote heads、exact changed paths / bytes一致 |
-| 9.6 | formal exact8 before / after body-fullをMashへ提示するprivate artifactを固定 | public GitHub / design ZIP / withheld effect 0、Mash review ready |
-| 9.7 | Mash explicit Product verdictをbody-free反映 | FAILはterminal。PASSでもStage 2 / Piece / Analysis / ready / merge / productionへ自動進行0 |
+| 9.1 | Step 7 stable receipt、entry activation pair、counter、language / integration identity、Product bundle digestをfreeze | entry identities一致。closure pairと混同0 |
+| 9.2 | existing Product bundleをLibraryからfresh readbackし、`MASH_PRODUCT_READ_ATTEMPT_01` markerとbody-free presentation message identityを両repo postverify | immutable bundle SHA / entry pair / allowed verdict exact2 `PASS｜FAIL` / `PRESENTATION=0 / VERDICT=0 / REREAD=0` bind、再生成0、withheld effect 0 |
+| 9.3a | 9.2のsame readback済みformal exact8 before / afterだけをMashへprivateにexact1回提示し、body-free tuple `attempt_id + bundle_sha256 + PASS｜FAIL`を依頼 | 9.2のmessage identityとexact bind、withheld effect 0。提示送信だけでProduct verdictをclaimせず、bundle保持、Product body reread 0 |
+| 9.3b | 9.3a送信直後・Mash verdict待機前に`PRESENTATION_SENT_AWAITING_VERDICT` body-free receiptを両repoへcommit / fresh postverify | attempt / bundle / message identity、`PRESENTATION=1 / VERDICT=0 / REREAD=0`。片repo時は未保存側だけ続行。send outcomeまたはreceipt unknownはF quarantine、再提示0 |
+| 9.4 | 9.3b postverify後にMash explicit tupleを待ち、受領後のfirst effectとしてverdict-only body-free receiptを両repoへcommit / push / fresh postverifyする。current_structure / 01 / 04、cleanup、説明replyはまだ行わない | presentation receipt exact bind、`VERDICT_ATTEMPT=1 / MASH_PRODUCT_BODY_REREAD=0`。片repo保存ならfresh targetを取得して未保存側だけ継続。両repo durableが唯一のexitで、reply前 / partial / unknownはStep 9 complete / Product credit / accepted-current 0 |
+| 9.5 | 9.4のremote verdict receiptをfresh取得してからcurrent_structure / 01 / 04とmashos-api handoffをPASSまたはFAILへ同期 | FAILはterminal / accepted-current 0。closure pairをentry pairと別に固定 |
+| 9.6 | docs / runtime / packetをcross-checkし、同期deltaを両repo push / remote verify | closure pair、exact changed paths / bytes / 9.4 remote verdict receipt一致 |
+| 9.7 | verdict receipt postverify後にProduct bundleをactive cleanupしabsence proofを保存 | attempt / presentation source / verdict source、`VERDICT_ATTEMPT=1 / MASH_PRODUCT_BODY_REREAD=0`をproofへbind。PASSでもStage 2 / Piece / Analysis / ready / merge / productionへ自動進行0 |
+
+`presentation_message_identity`はprivate本文digestを追加公開せず、domain prefix `COCOLON_CMEE_STAGE1_MASH_PRESENTATION_MESSAGE_V1\0` + canonical JSON `{attempt_id, product_bundle_master_sha256, ordered_member_names, presentation_format_version, verdict_tuple_schema}`のSHA-256へ固定する。9.3aのprivate renderingはvalidated Product masterのordered exact2とfrozen presentation formatだけから作り、free-form要約 / body omission / order changeを許さない。
+
+Step 7 / 9の結果不明、named STOP、Mash FAIL terminalもF.1–F.3を適用する。Step 9 FAILではverdict receiptを先に両repo postverifyし、Product bundleを含む全active private artifactのdisposition / cleanup proofまでremote保存してterminal closureとする。
+
+9.3a send後・9.3b receipt確定前にsession / contextを失った場合は`MASH_PRESENTATION_RECEIPT_UNKNOWN`としてbundleをquarantineし、bodyを再提示しない。Mashへbody-free `SAME_PRESENTATION_ACK(attempt_id,bundle_sha256,message_identity,SEEN｜NOT_SEEN)`だけを依頼し、`SEEN`ならack receipt dual-repo postverify後にverdictだけを待つ。`NOT_SEEN`でも同一attemptを自動再提示せず、fresh explicit Mash authorityまで停止する。
+
+Mash reply後・9.4 receipt確定前にsession / contextを失った場合は`MASH_VERDICT_RECEIPT_UNKNOWN`とし、bundleを`QUARANTINE_UNKNOWN_NO_MUTATION`で保持してbodyを再提示 / 再読せず、Product claimを行わない。durable conversation sourceからsame tupleをlossless取得できる場合だけ9.4を続け、取得不能ならMashへProduct bodyの再評価ではなく`SAME_VERDICT_REATTESTATION(attempt_id,bundle_sha256,verdict)` exact1だけを依頼する。reattestation receiptを最初に両repo postverifyするまでbundle再生成 / cleanup / map同期0とする。
 
 ### 13.12 Current Step 3 migration / resume point
 
-本checkpoint細分化writeはruntime、test、runner、private packet、early actual、human read、Step 3 lifecycleを進めない。2026-08-26のfresh preimageは次である。
+2026-08-26の全Step forward-resumability監査により、旧Step 3.2 completionは`FROZEN_PRIVATE_INPUT_RETAINED=1`を裏付けるdurable owner / readback proofがなく、successor-readyではなかったことを確認した。旧claimを履歴から消さず、本節とcanonical 06 latest sectionで失効・修復する。失われた旧exact4は復元・再利用せず、Step 3.3を一度も実行しないままnew generation exact4へ置換した。
 
 ~~~text
-CHECKPOINT_SUBDIVISION_PREIMAGE_RUNTIME_HEAD =
-  d05a07224194e1f5a505c5fbca231ce16c792fdd
-CHECKPOINT_SUBDIVISION_PREIMAGE_DESIGN_HEAD =
-  0e840ec236f61f3206ddaa96647af64b70c7c433
-
 CURRENT_MACRO_STEP = 3
-MIGRATED_LAST_SAVEPOINT = 3.1
-MIGRATED_LAST_SAVEPOINT_STATE = WIP_REMOTE_SAVED
-CURRENT_RESUME_CHECKPOINT = 3.2
+INVALIDATED_PRIOR_CHECKPOINT = 3.2_AT_2026_08_26_PRE_REPAIR
+INVALIDATION_REASON = DURABLE_PRIVATE_INPUT_OWNER_AND_READBACK_PROOF_MISSING
+OLD_PRIVATE_SET_DIGEST = 5f31461625397bd22746dcdad8c8d68f7f6c7d2e56c1dc62e177664ae365c59d
+OLD_PRIVATE_SET_STATE = SUPERSEDED_BODY_UNAVAILABLE_WITHOUT_STEP3_3_EXECUTION
+OLD_PACKET_SLOT_REUSE = 0
+OLD_FROZEN_PRIVATE_INPUT_RETAINED_CLAIM = FALSE
 
-SAVED_RUNTIME_DELTA_PATHS = EXACT5
-SAVED_DESIGN_DELTA_PATHS = EXACT1
+CURRENT_CHECKPOINT = 3.2e
+CURRENT_CHECKPOINT_STATE = CHECKPOINT_COMPLETE_REMOTE_POSTVERIFIED
+CURRENT_RESUME_CHECKPOINT = 3.3a
+CURRENT_RESUME_WORK =
+  STEP3_3A_FRESH_LIBRARY_ACQUIRE_AND_ATTEMPT_PREFLIGHT_ONLY
+STEP3_3B_ACTUAL_BLOCKED_UNTIL_3_3A_REMOTE_POSTVERIFIED = TRUE
+
+SAVED_RUNTIME_DELTA_PATHS = EXACT4
+SAVED_DESIGN_DELTA_PATHS = EXACT2
 RECORDED_COMPOSITION_TESTS = 19_OF_19_PASS
 RECORDED_EARLY_HARNESS_TESTS = 17_OF_17_PASS
 RECORDED_CONTRACT_TESTS = 123_OF_123_PASS
@@ -3590,8 +3748,60 @@ RECORDED_VERTICAL_TESTS = 42_OF_42_PASS
 RECORDED_COMBINED_TESTS = 165_OF_165_PASS
 RECORDED_COMPILEALL = PASS
 RECORDED_PUBLIC_MATRICES = CLEAR_60_OF_60 / CLEAR_98_OF_98 / CLEAR_37_OF_37
-INDEPENDENT_PUBLIC_AUDIT = PENDING_FINAL_REVIEW
-EARLY_ACTUAL_STATUS = NOT_RUN_PENDING_BOUNDED_FINITE_HOST_ACTIVATION_HEADS
+INDEPENDENT_PUBLIC_AUDIT = CLEAR
+ALL_STEP_FORWARD_RESUMABILITY_AUDIT = COMPLETE_CORRECTED
+
+NEW_PRIVATE_PACKET_GENERATION = V2
+NEW_PRIVATE_PACKET_ID = CMEE_STAGE1_WITHHELD_EARLY_DURABLE_20260826_V2
+NEW_PRIVATE_SLOT_ID = PRIVATE_SLOT_WITHHELD_EARLY_DURABLE_20260826_V2
+PRIVATE_DURABLE_OWNER_CLASS = CHATGPT_LIBRARY_USER_OWNED_NONPUBLIC
+PRIVATE_DURABLE_OWNER_ALIAS = Cocolon_CMEE_Stage1_WithheldExact4_DurableInput_20260826.json
+PRIVATE_DURABLE_PHYSICAL_ID_VERSION_URL_PUBLICATION = 0
+PRIVATE_INPUT_SCHEMA = cocolon.cmee.stage1.withheld_early_input.v1
+PRIVATE_INPUT_COUNT = 4
+PRIVATE_INPUT_FAMILY_COUNTS = TENSION_1_TEMPORAL_CHANGE_1_HELP_SEEKING_1_UNFINISHED_1
+PRIVATE_INPUT_RAW_SHA256 = af718e82a6d9ed4e476f6d6b85f297272eef4790e1809cb6566d427e1f588a57
+PRIVATE_INPUT_CANONICAL_SET_DIGEST = 489dcf8763ff95893fd67030422e5af24f391d5f9594b899486749da3dbcc6a7
+PRIVATE_LIBRARY_CREATE = SUCCEEDED
+PRIVATE_LIBRARY_FRESH_MATERIALIZE_AND_READBACK = PASS
+PRIVATE_LIBRARY_READBACK_MODE = DIR_0700_FILE_0600_OWNER_MATCH_NLINK1_REGULAR_NO_SYMLINK
+PRIVATE_LIBRARY_READBACK_METADATA_MATCH = PASS
+LOCAL_PRIVATE_INPUT_COPIES_REMAINING = 0
+
+LANGUAGE_CORE_IDENTITY = ab4a6b5612a3912e9789ef1cc0983ce4f37a0e0657b76f49b430b1baea8755a2
+STAGE1_RUNTIME_INTEGRATION_IDENTITY = 49da471397d19828b4a2e8326f76d4309e7d36a716221a1a91e1959f4b44a91d
+RUNNER_SHA256 = fa80a5d77bfbfaa9ce34ec06b5494fff4b844e4d86a7a649714dae889b5a8d00
+CURRENT_STEP2_COMPOSITION_TESTS = 20_OF_20_PASS
+CURRENT_STEP3_PUBLIC_SYNTHETIC_EARLY_HARNESS = 34_OF_34_PASS
+CURRENT_CONTRACT / VERTICAL / COMBINED_TESTS = 141_OF_141 / 42_OF_42 / 183_OF_183_PASS
+CURRENT_COMPILEALL / DIFF_CHECK = PASS / PASS
+
+EARLY_WITHHELD_BODY_FREE_SCHEMA = cocolon.cmee.stage1.withheld_early_machine_body_free.v2
+EARLY_BODY_FREE_PACKET_SCHEMA = cocolon.cmee.stage1.early_actual_body_free.v4
+EARLY_HUMAN_READ_RESULT_SCHEMA = cocolon.cmee.stage1.early_human_read_result.v4
+EARLY_ULTRA_RESULT_SCHEMA = cocolon.cmee.stage1.early_ultra_known_technical_result.v5
+EARLY_FINAL_RECEIPT_SCHEMA = cocolon.cmee.stage1.early_actual_final_body_free.v6
+EARLY_PRO_REVIEW_ATTEMPT_ID / READ / REREAD = EARLY_PRO_COMBINED_READ_ATTEMPT_01 / 1 / 0
+EARLY_ULTRA_REVIEW_ATTEMPT_ID / READ / REREAD = EARLY_ULTRA_KNOWN_READ_ATTEMPT_01 / 1 / 0
+EARLY_PRIVATE_PACKET_AND_BINDING_GENERATION = V2
+EARLY_RUN_EXACT3_SCHEMA = cocolon.cmee.stage1.early_actual_run_exact3.v1
+EARLY_PRIVATE_REVIEW_MASTER_SCHEMA = cocolon.cmee.stage1.private_review_output_master.v1
+EARLY_PRIVATE_REVIEW_MASTER_RECEIPT_SCHEMA = cocolon.cmee.stage1.private_review_output_master_receipt.v1
+EARLY_PRIVATE_REVIEW_MASTER_READER = PRO_ONLY
+EARLY_PRIVATE_REVIEW_MASTER_LIFECYCLE = DELETE_AT_STEP3_7_AFTER_STEP3_6_DECISION_POSTVERIFY
+EARLY_KNOWN_REVIEW_AUXILIARY_SCHEMA = cocolon.cmee.stage1.early_known_review_auxiliary.v1
+EARLY_KNOWN_REVIEW_AUXILIARY_RECEIPT_SCHEMA = cocolon.cmee.stage1.early_known_review_auxiliary_receipt.v1
+EARLY_ACTUAL_ATTEMPT_ID = CMEE_STAGE1_STEP3_3_ATTEMPT_01
+EARLY_RUN_TRANSACTION = FIXED_STAGING_TO_FIXED_FINAL_RENAMEAT2_NOREPLACE
+RUNTIME_HEAD_AND_TRACKED_TREE_PREFLIGHT = REQUIRED_CLEAN
+DESIGN_HEAD_VERIFICATION = EXTERNAL_PR_PREFLIGHT_ATTESTATION
+FROZEN_RAW_AND_CANONICAL_DIGEST_PREFLIGHT = BEFORE_ATTEMPT_MARKER
+MACHINE_NONCLEAR_EXACT3_DURABLE = REQUIRED
+PRIVATE_REVIEW_DURABLE_FIRST_OWNER = SINGLE_LIBRARY_MASTER_EXACT3
+PARALLEL_CRASH_PARTIAL_WRITE_RETRY = 0
+
+EARLY_ACTUAL_RUN / RETRY / RERUN = 0 / 0 / 0
+EARLY_ACTUAL_STATUS = NOT_RUN_ON_CURRENT_STEP3_2_REPAIR_ACTIVATION_PAIR
 STEP3_COMPLETE = FALSE
 FORMAL_EXACT8 = NOT_RUN
 PRODUCT_READ_EVALUATED = FALSE
@@ -3601,20 +3811,46 @@ COMMON_DEFECT_RETURN_COUNT = 2_OF_2_KEEP
 COUNTER_RESET / COUNTER_INCREMENT = 0 / 0
 STEP0_STEP1_STEP2_REEXECUTION = 0
 PRE_D05A_STEP3_RECONSTRUCTION = 0
-RUNTIME_TEST_PRIVATE_EFFECT_OF_THIS_DESIGN_WRITE = 0
+PRIVATE_BODY_GITHUB_CHAT_PUBLIC_ZIP_EFFECT = 0
+TECHNICAL_CREDIT = 0
+PRODUCT_CREDIT = 0
 AUTOMATIC_PROGRESSION = FALSE
 ~~~
 
-3.2のexact workはindependent public auditと、そのCLEAR時のcurrent activation identity freezeである。§51のknown / withheld CLEARとwithheld 1/4 viableはpreimage resultであり、current outputとして再主張しない。current fresh outputsは未生成である。
+Step 3.2の修復完了は、public audit、identity split、new exact4のLibrary保存、別fresh rootへの読み戻し、body-free digest一致、local copy不在、両repo handoff / canonical receipt、public-safe session bundle readbackを全て含む。Library physical ID / version / URLはprivate Library metadataだけに保持する。次sessionはlogical owner aliasをLibrary title検索し、canonical set digestを照合して3.3aから開始する。別exact4の生成・代用をしない。
+
+Library上のhistorical Step 0 private envelope候補exact3もprivate boundary内で確認したが、3件はbyte-identicalで、withheld-input schema / `structural_family`を持たず、旧digestに一致するexact4をlossless recoveryできなかった。したがって、旧4件を「見つからなかっただけ」として再主張せず、`SUPERSEDED_BODY_UNAVAILABLE`を維持する。
+
+§51のknown / withheld CLEARとwithheld 1/4 viableはhistorical preimage resultであり、current outputとして再主張しない。current fresh outputsは未生成である。
 
 canonical docs、schema、runtime、tests、actual after、Pro pre-screenを別成果へ分割しない。Mash Product Read後もStage 2、Piece、Analysis、productionへ自動進行しない。
 
 early actualは別Gate、acceptance、Product PASS、candidate-ready、creditではない。
 
 ```text
-EARLY_ACTUAL_STATUS = NOT_RUN
-  | LANGUAGE_VIABILITY_OBSERVED
+EARLY_PRE_RUN_STATUS = NOT_RUN
+
+EARLY_MACHINE_PACKET_STATUS =
+    EARLY_ACTUAL_MACHINE_COMPLETED_PENDING_REVIEW
+  | EARLY_ACTUAL_MACHINE_NONCLEAR_STOP
+
+EARLY_REVIEW_TRANSITION_STATUS =
+    LANGUAGE_VIABILITY_OBSERVED
+  | EARLY_ACTUAL_REVIEWED_NONCLEAR_PENDING_TRANSITION
   | ROUTE_A_LANGUAGE_VIABILITY_STOP
+
+STATE_TRANSITIONS =
+  NOT_RUN
+    -> MACHINE_COMPLETED_PENDING_REVIEW
+      -> LANGUAGE_VIABILITY_OBSERVED
+       | REVIEWED_NONCLEAR_PENDING_TRANSITION
+          -> COMMON_DEFECT_RETURN_DECISION
+           | ROUTE_A_LANGUAGE_VIABILITY_STOP
+    | MACHINE_NONCLEAR_STOP
+
+COMMON_DEFECT_RETURN_DECISION =
+  durable historical decision; approved repairでidentityが変わったnew activationだけ
+  EARLY_PRE_RUN_STATUS=NOT_RUNへ進む。completed old attemptをNOT_RUNへ改名しない。
 
 EARLY_HUMAN_READ_RESULT = CLEAR | COMMON_DEFECT | ROUTE_LEVEL_CEILING
   # transient result; durable acceptance / statusではない
@@ -3659,13 +3895,18 @@ PRODUCT_ACCEPTANCE_DENOMINATOR_EFFECT = 0
 NUMERIC_SCORE_OR_PASS_RATE = 0
 MASH_REVIEW_BURDEN = 0
 BODY_FULL_GITHUB_OR_DESIGN_ZIP = 0
-TRACKED_FILE = 0
+GITHUB_TRACKED_PRIVATE_FILE = 0
+PRIVATE_DURABLE_OWNER_CLASS = CHATGPT_LIBRARY_USER_OWNED_NONPUBLIC
+PRIVATE_DURABLE_OWNER_ALIAS = Cocolon_CMEE_Stage1_WithheldExact4_DurableInput_20260826.json
+PRIVATE_DURABLE_READBACK_REQUIRED_BEFORE_EACH_RUN = true
+PRIVATE_DURABLE_PHYSICAL_ID_VERSION_URL_PUBLICATION = 0
+PRIVATE_INPUT_RETENTION = THROUGH_ALL_STEP3_AND_STEP7_RETURNS
 WITHHELD_BODY_FULL_READERS = PRO_ONLY
 ULTRA_WITHHELD_BODY_ACCESS = 0
 MASH_WITHHELD_BODY_ACCESS = 0
 ```
 
-withheld bodyはactual user history、user ID、profileを使わず、repo外private JSONからexisting runnerへ与える。body-full input / outputはprivate packet内だけで扱い、GitHub / canonical docs / 本design zipへ入れない。public / durable resultはcount、family count、set digest、`CLEAR | COMMON_DEFECT | ROUTE_LEVEL_CEILING`、body-free defect classだけとする。Proがdefectを返す時はraw bodyやcase patchでなく原因componentを返す。
+withheld bodyはactual user history、user ID、profileを使わず、repo外のuser-owned nonpublic Library JSONからfresh materializeしてexisting runnerへ与える。body-full input / outputはprivate Library artifact内だけで扱い、GitHub / canonical docs / 本design ZIP / chatへ入れない。public resultはlogical owner alias、count、family count、set digest、availability / readback state、`CLEAR | COMMON_DEFECT | ROUTE_LEVEL_CEILING`、body-free defect classだけとする。Library physical ID / version / URLはLibrary metadataだけに保持する。Proがdefectを返す時はraw bodyやcase patchでなく原因componentを返す。
 
 `COMMON_DEFECT_RETURN_MAX=2`は、early actualまたはfinal exact8 + withheldのhuman body readから、cross-case product-surface defectでcomposition coreへ戻る回数のcost / decision boundaryである。machine bug fixはcount外である。上限到達時はcandidateを低品質のままMashへ見せず、残存defectとactual costをbody-freeで記録してRoute A terminal STOPとする。外部AI、外部composer、別routeへは移らない。
 
@@ -3679,7 +3920,7 @@ RESET_AFTER_LANGUAGE_CORE_IDENTITY_CHANGE = 0
 RESET_AUTHORITY = fresh explicit LEVEL_3 bounded-unit decision only
 ```
 
-counterはprocess-local memoryだけへ置かず、withheld bodyを含まないbody-free packet / handoffで保持する。Step 2 return、early status失効、runner再起動、work session交代で0へ戻さない。現在は実装未承認なので`NOT_STARTED / prospective initial 0`であり、実装Step 0が成立した時だけdurable count 0を作る。
+counterはprocess-local memoryだけへ置かず、withheld bodyを含まないbody-free packet / handoffで保持する。Step 2 return、early status失効、runner再起動、work session交代で0へ戻さない。current bounded unitはhistorical return exact2を既に消費しており、`COMMON_DEFECT_RETURN_COUNT=2_OF_2_KEEP`である。今回の保存修復、identity split、old exact4失効、new exact4 durable freezeはhuman `COMMON_DEFECT` returnではないためcounterをincrement / resetしない。
 
 ```text
 COMMON_DEFECT_RETURN_TRANSITION(origin, result):
@@ -3694,7 +3935,8 @@ COMMON_DEFECT_RETURN_TRANSITION(origin, result):
     COMMON_DEFECT_RETURN_COUNT += 1
     if cause owner is language core:
       return to Step 2 cause component
-      LANGUAGE_CORE_IDENTITY changes -> EARLY_ACTUAL_STATUS = NOT_RUN
+      LANGUAGE_CORE_IDENTITY changes -> old receipt = HISTORICAL_INVALIDATED;
+                                        new activation EARLY_PRE_RUN_STATUS = NOT_RUN
       rerun Step 3 fresh, then all affected later Steps through Step 7
     else if origin == Step 7 and cause owner is state / trace / validator:
       return to Step 4 cause component without changing LANGUAGE_CORE_IDENTITY
@@ -3717,12 +3959,34 @@ COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP:
   fresh_LEVEL3_decision_required = true
 ```
 
+### 13.13 All-Step forward-resumability audit（2026-08-26）
+
+Step 0–9を「処理量」だけでなく「次sessionが同じbytesから再開できるか」で再監査した。監査preimageにはBLOCKER / MAJORが複数あり、主因は、GitHubだけのsave順、private input / output owner不在、run / benchmark / human readのpartial・overwrite・parallel・wrong-input risk、named STOP後のprivate artifact未分類、decision保存前cleanup、Step 9でのbundle後生成 / verdict保存遅延、Step 4 planned changeを言語変更と誤認するidentity、Step 6 numeric performance envelope未定義である。件数を途中監査値へ固定せずfailure classごとに下表へ統合する。本節と§13.1–§13.12の修正後contractに未解消のforward-resumability defectは0である。runtime behaviorの未実装checkpointは、各Stepのfuture workとして残り、完了claimへ変換しない。
+
+| Step | Pre-correction defect | Corrected successor-ready exit | Current effect |
+|---:|---|---|---|
+| 0 | head / preimageはあったがreview bytesをhash-onlyでavailability扱い得た | dependency分類、必要bytes readback、consumed history明示、両repo + session bundle | historical receiptsをledger化、re-execution 0 |
+| 1 | GitHub sourceはあるが両repo final receipt / session bundleが曖昧 | owner別commit / test / remote bytes + Library session bundle readback | private dependency 0、re-execution 0 |
+| 2 | known actualとbroad language identityを次Step dependencyへ混同 | Step 2 language-only identity、known input reproducibility、historical heads / tests ledger | Step 4/5 integration identityを分離、re-execution 0 |
+| 3 | private exact4が`/tmp`だけ、旧`RETAINED=1`誤記、outputsも一時領域、sequential write / stdout-only / overwrite / parallel / wrong input、Pro result分割、review attempt / artifact binding / machine-nonclear lifecycle不足 | inputをprivate Library freeze / readback、clean activation + frozen digest preflight、fixed generation / Ultra / Pro attempts、atomic no-replace exact3、single Library master first、combined Pro exact bind、3.3d / F、decision-save-before-cleanup | 旧set失効、新V2 exact4固定、transaction / bindingだけ修復、3.2完了後も3.3 actual / human read未実行 |
+| 4 | planned state / trace filesがbroad language identityを必ず変えreturn loop化、Step 6 performance不足を4/5後まで発見し得た | language identity不変 + integration identity更新、Step 3 final receipt / input owner readback、4.1でconcrete baseline attempts / numeric formulaをeffect前lock | future 4.xのみ。language drift / baseline不明はF named STOP、Step 3一時output依存0 |
+| 5 | caller inventoryが一時解析、cutover中間stateを保存し得た | inventory remote manifest、activation + legacy non-call atomic、A/B/A body-free receipt | future 5.xのみ、dual-run savepoint 0 |
+| 6 | long regression / resource計測がmacro末尾まで未保存、latency / memory rule・attempt・unknown policy未定義 | 4.1 baseline exact attempts + concrete 15% / floor formula、6.0 fresh lock、6.6 / 6.7 exclusive after attempts / atomic body-free samples、family receipt、Step 7 input readback | future 6.xのみ。environment drift / unknownはF STOP / retry0、language changeは失効を先に保存 |
+| 7 | formal exact8 / withheld outputがStep 9 / Pro readまでdurableでなく、before provenance / pre-run output digest順が不正、Product master reader矛盾、Ultra / Pro reread・再生成risk | before / after provenanceを7.1 preflightしoutput digestは7.2生成後freeze、Product / withheld mastersとreader-specific auxiliariesを分離してLibrary readback、fixed Ultra / Pro review attempts、result即remote保存 | future 7.xのみ、MashだけProduct master read、same frozen input required、read unknownはF quarantine |
+| 8 | decision保存前cleanup、crash後のhuman reread、terminal artifact lifecycle未分類 | decision両repo postverify→T.5/F exact disposition→state別cleanup / quarantine→existence / absence確認→proof postverify | independent Step / credit 0、`UNCLASSIFIED=0`必須 |
+| 9 | Mash verdict前にcurrent map同期、entry / closure pair混同、Product bundleを遅れて固定、presentation / verdict attempt・提示直後receipt不在、verdict受領後もdocs同期までremote未保存 | existing bundle readback→fixed Mash marker→single presentation→`PRESENTATION_SENT_AWAITING_VERDICT` dual postverify→verdict-only dual postverify→docs sync→closure pair→cleanup。unknownはbody-free acknowledgement / same-verdict re-attestationのみ | verdict receipt前`AWAITING_MASH_PRODUCT_READ`、body redisplay / Product claim 0 |
+
+全Step共通のsession closeは、少なくともbody-free checkpoint manifest、両remote heads、changed paths、tests、未完了exact action、next checkpointをpublic-safe session bundle exact1へまとめ、Library保存 / fresh readbackする。GitHub-backed source / docs / testsのcanonical ownerはGitHubのままであり、Library bundleはsession lossからの復旧補助である。private bodyはpublic-safe bundleと別itemにし、公開ZIPへ混在させない。
+
 ---
 
 ## 14. Verification design
 
 ### 14.1 Machine invariant
 
+- `LANGUAGE_CORE_IDENTITY`はStep 2 language / semantic / composition ownersとclosed registries / manifestsだけをframed digestし、Step 4 / 5 integration-only whole-file changeで変わらない。`STAGE1_RUNTIME_INTEGRATION_IDENTITY`はcurrent product-causal whole-file setを別にdigestする。両identityを独立再計算し、language owner変更がintegration identityだけへ隠れることを許さない。
+- private input / output / Product bundleはLibrary fresh readbackのraw SHA / canonical digest / schema / count / owner・modeを照合する。GitHub hashだけ、Library create応答だけ、元local fileだけをreadback proofにしない。
+- checkpoint completion validatorは§13.1 exact conjunctionを検証し、next required artifactがscratch / `/tmp`だけなら`FORWARD_HANDOFF_INCOMPLETE`とする。
 - phase A / B inputは同一full `AdmittedTextSource`、relation graph、grounded plan、parent plan、registry identities、full-domain grounded-frame map、relation-endpoint R→D binding map、qualifier mapを持ち、phase Aはfinal subjective output / projection exact0、phase Bはsealed final projection exact1である。surface側のsecond admission、late lookup、phase Aへのpolicy output先渡し0。
 - source / evidence / owner lineage。
 - actor / experiencer / addressee。
@@ -3779,7 +4043,7 @@ COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP:
 - case-ID / fixture text / expected-text branch 0。
 - provider / network / new dependency call 0。
 - legacy surface / fallback / dual-run 0。
-- early verticalとfinal `compile_stage1_response()`は同じ`LANGUAGE_CORE_IDENTITY`を使用し、viability-only flag / component 0。identity変更時は`EARLY_ACTUAL_STATUS=NOT_RUN`へ戻りStep 3 fresh実行。
+- early verticalとfinal `compile_stage1_response()`は同じ`LANGUAGE_CORE_IDENTITY`を使用し、viability-only flag / component 0。identity変更時はold completed receiptをhistorical invalidatedで保持し、new activationの`EARLY_PRE_RUN_STATUS=NOT_RUN`からだけStep 3 fresh実行。
 - language-core external dependency exact6はpath / whole-file bytes / orderをearly・finalで再計算する。instrumented call graphでproduct-causal callableがcomposition moduleまたはexact6内だけであることを確認し、`_candidate_for_contribution()` / `_candidate_from_direct()` / `project_direct_argument_bindings()` / `_qualifier_value()`、contracts validator、shared selectorの一つだけを変えるmutationでもidentity mismatchにする。allowlist外callはnamed STOP。
 - phase A adapterはfull source / graph / grounded / parentを持ち、candidate pure lookupをunique contributionごとexact1回呼ぶ。`project_direct_argument_bindings()`はcurrent `_candidate_from_direct()`とcomposition validatorでsame upstream source semantic ref + frame bytesに対して共用し、candidate rowsとのbyte equalityを検証する。candidate constructorからdownstream contributionへの参照は0である。actual qualifier helperはdirect candidateごと`role=None` exact3、relation source-binding keyごとwrapper R + `role=source_argument_role` exact3でfreezeし、逆scope、Dをrelation qualifier ownerにする状態、role/ref cardinality driftをrejectする。frame mapはfull admitted closureのdirect / endpoint D（OPTIONAL含む）、binding mapは各`(R, role, semantic_ref)->D`をexact-coverする。current projection-taking candidate wrapperはsame pure lookupへdelegateしbytesを変えない。phase Bはsame inputs + final projection + same three map objects/full bytesをfresh一致させる。composition→response import、callback / resolver object、late lookup、global cache、contracts reverse import、phase A final-output cycle 0。
 - withheld body-full readerはPro exact1だけ。Ultra / Mash / GitHub / design zipへのwithheld body access exact0。
@@ -3895,7 +4159,7 @@ Pro pre-screenはProduct PASSではない。
 
 ### 14.6 Mash Product Read
 
-Mashだけがformal exact8 before / afterを最終`Product Read`として読み、商品品質の受入を確定する。Ultra / Proの本文確認はtechnical check / pre-screenであり最終受入ではない。private withheld本文はMashへ渡さない。
+MashだけがStep 7.2で固定しLibrary fresh readback済みのsame formal exact8 before / after bundleを最終`Product Read`として読み、商品品質の受入を確定する。Step 9で本文を再生成・差替えしない。Ultra / Proの本文確認はtechnical check / pre-screenであり最終受入ではない。private withheld本文 / outputはProduct bundleへ混ぜずMashへ渡さない。
 
 ```text
 machine GREEN != Product PASS
@@ -3911,6 +4175,8 @@ candidate_ready = false
 exact8_acceptance_complete = false
 product_credit = 0
 automatic_progression = false
+step9_state = AWAITING_MASH_PRODUCT_READ
+current_map_acceptance_sync = 0
 ```
 
 Mashが`FAIL`とした場合も、そのverdictを自動修正authorityへ変換しない。
@@ -3980,6 +4246,9 @@ conditional additional decision:
 | set-level variationをruntime score化する | human pre-screenだけで検出し、generic composition causeへ戻す |
 | exact8だけ改善しunseenで崩れる | semantic-equivalence / contrast / boundary / multi-ref mutations + private withheld exact4 |
 | Route A onlyを理由に品質を妥協する | finished templateまたはcase assetが必要になった時点でSTOPし、低品質candidateを提示しない |
+| session切替でprivate input / output / Product bundleが消える | 非公開Library owner、fresh materialize / digest readback、decision-save-before-cleanupをcheckpoint exitにする。scratch / `/tmp`だけではcomplete禁止 |
+| Step 4 / 5 integration changeをlanguage core changeと誤認する | language-only identityとruntime integration identityを分離し、両方を独立再計算する |
+| Mash verdict前のcandidateをaccepted currentへ同期する | Step 9を`AWAITING_MASH_PRODUCT_READ`で止め、explicit verdict後だけcurrent mapを同期する |
 | scopeがproductionへ漏れる | disabled Stage 1 private route、API / DB / RN / production effect 0を維持 |
 
 ---
@@ -4022,7 +4291,8 @@ conditional additional decision:
 5. Ultra technical body check。
 6. Pro pairwise / set-level / withheld body pre-screen。
 7. common defectがあれば`COMMON_DEFECT_RETURN_MAX=2`内だけcomposition coreへ戻して全再実行。
-8. Mash actual before / after Product Read。
+8. private input / outputとformal Product bundleが各readerまでdurableで、全transition decisionがcleanup前にremote postverified。
+9. MashがStep 7から保持されたsame actual before / afterをProduct Readし、verdict receipt / closure pair / cleanup proofがremote postverified。
 
 内部型、module、test、trace、docsだけではcompletionにしない。
 
@@ -4068,6 +4338,11 @@ conditional additional decision:
 - Stage 2、Layer 3、Piece、Analysis、API、DB、RN、productionへ広がる。
 - actual after本文まで到達しない作業を独立成果にしようとする。
 - exact8を通すためにunseen generalizationを犠牲にする。
+- next checkpoint必須artifactが`/tmp`、scratch、chat memory、digest-onlyにしかなく、durable owner / fresh readbackを成立させられない。
+- nonrecomputable run / human read resultがdurable保存前に不明となり、同一inputをsilent retryしようとする。
+- withheld private body / per-case detail、またはLibrary physical file ID / version / URLをGitHub、公開ZIPまたはpublic chatへ出す必要がある。formal Product bundleのMash-only private提示は§13.11 exact1に限る。
+- decisionの両repo remote postverify前にprivate output / Product bundleをcleanupする必要がある。
+- Step 9でStep 7のProduct bundleを再生成・差替えする、またはMash verdict前にaccepted currentへ同期する。
 
 ---
 
@@ -4114,7 +4389,7 @@ AUTOMATIC_PROGRESSION = FALSE
 
 Proの原則一回reviewは§0.1でconsume済みであり、全6指摘を`ACCEPT`した。fresh product / scope / provider material changeがない限り、本final bodyへの二回目のPro design reviewは要求しない。
 
-Mashへ提示するexact1 implementation candidateは、本mdの外部算出SHA-256と、次を一つにbindする。
+以下のpairは2026-08-24 initial LEVEL_3 candidateとしてconsumed historicalであり、current activationへ使用しない。current Step 3.2 activation pairのsole ownerは§13.12、canonical 06 §54、PR #3 / #30 current receiptである。historical candidateは本mdの当時の外部算出SHA-256と、次を一つにbindした。
 
 1. Cocolon PR #30 head `c0fb407e88aea5b8ba52aa25c9532adc0ff3a539`。
 2. mashos-api PR #3 head `b7865574ebe08c801f6a2c779daf9148159cf8b0`。
@@ -4159,15 +4434,15 @@ KEEP_SUBORDINATE_REPLACE = COMPLETE
 ALTERNATIVE_PROVIDER_ROUTE = FORBIDDEN
 IMMEDIATE_MASH_QUESTION = NONE
 MASH_ADDITIONAL_STRUCTURE_INPUT_REQUIRED_NOW = false
-MASH_LEVEL_3_IMPLEMENTATION_APPROVAL = NOT_GRANTED
-GITHUB_WRITE_APPROVAL = NOT_GRANTED
-GITHUB_WRITE = 0
-RUNTIME_EFFECT = 0
+MASH_LEVEL_3_IMPLEMENTATION_APPROVAL = GRANTED_FOR_EXISTING_BOUNDED_ROUTE_A_UNIT
+GITHUB_WRITE_APPROVAL = GRANTED_BY_CURRENT_MASH_INSTRUCTION_20260826
+GITHUB_WRITE = STEP3_2_DURABILITY_REPAIR_AND_ALL_STEP_DESIGN_CORRECTION
+RUNTIME_EFFECT = DISABLED_IDENTITY_SPLIT_DUAL_PACKET_BINDING_TRANSACTIONAL_EXACT3_MASTER_AUXILIARY_AND_FINALIZER_DURABILITY_ONLY
 API_DB_RN_PRODUCTION_EFFECT = 0
 PROVIDER_NEW_DEPENDENCY_EFFECT = 0
-CURRENT_CANONICAL_CONTRACT_EFFECT = 0
+CURRENT_CANONICAL_CONTRACT_EFFECT = CHECKPOINT_DURABILITY_PRIVATE_ARTIFACT_LIFECYCLE_IDENTITY_SEPARATION_AND_NONREPEATABLE_TRANSACTION
 FINAL_PROPOSED_CHANGED_PATHS = EXACT14
-PATHS_APPROVED = false
+PATHS_APPROVED = CURRENT_STEP3_2_MINIMAL_SET_ONLY
 LISTED_PATH_AUTO_EXPANSION = 0
 WITHHELD_TRACKED_PATHS = 0
 SHARED_S9_CONTRACT_EFFECT = 0
@@ -4187,17 +4462,20 @@ SHARED_REALIZATION_CANDIDATE_ENVELOPE = EXACT1_TO_2_KEEP
 INTERNAL_CANDIDATE_CAP = EXACT32
 VISIBLE_UNIT_MAX_PER_LAYOUT = EXACT9
 COMMON_DEFECT_RETURN_MAX = EXACT2_COST_DECISION_BOUNDARY_ONLY
-COMMON_DEFECT_RETURN_COUNT = NOT_STARTED_PROSPECTIVE_INITIAL_0
-EARLY_ACTUAL_STATUS = NOT_RUN
+COMMON_DEFECT_RETURN_COUNT = 2_OF_2_KEEP
+EARLY_ACTUAL_STATUS = NOT_RUN_ON_CURRENT_STEP3_2_REPAIR_ACTIVATION_PAIR
 WITHHELD_SET_COUNT = EXACT4_NON_DENOMINATOR_PRIVATE
 WITHHELD_BODY_FULL_READERS = PRO_ONLY
 ULTRA_WITHHELD_BODY_ACCESS = 0
 MASH_WITHHELD_BODY_ACCESS = 0
-LANGUAGE_CORE_IDENTITY = REQUIRED_EARLY_FINAL_EXACT_MATCH
+LANGUAGE_CORE_IDENTITY = STEP2_LANGUAGE_ONLY_EARLY_FINAL_EXACT_MATCH
+STAGE1_RUNTIME_INTEGRATION_IDENTITY = STEP4_STEP5_WHOLE_FILE_INTEGRATION_OWNER
 COMPLETION_RANGE = 100_180_FOCUSED_HOURS
 ROUTE_A_EXTERNAL_SERVICE_COST = 0
 ROUTE_A_PER_REQUEST_PROVIDER_COST = 0
 EXTERNAL_ALTERNATIVE_ROUTE_DECISION_PACKET = CANCELLED_NOT_ADOPTED
+STEP3_2 = COMPLETE_SUCCESSOR_READY_ON_PAIRED_REMOTE_AND_LIBRARY_READBACK
+CURRENT_RESUME_CHECKPOINT = 3.3A_NOT_STARTED
 TECHNICAL_STOP = false
 CONDITIONAL_LEVEL_3_QUESTION = ROUTE_A_ONLY_FRESH_PRODUCT_DESIGN_IF_MASH_AUTHORIZES
 MASH_PRODUCT_READ = NOT_RUN
