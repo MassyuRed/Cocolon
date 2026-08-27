@@ -1,5 +1,5 @@
 work_attitude_rules_for_karen
-revision_date: 2026-08-16
+revision_date: 2026-08-27
 created_at: 2026-05-17 18:58:26 JST
 format: UTF-8 text / Notepad向け
 normative_status: CURRENT_ENTRY
@@ -10,6 +10,22 @@ normative_status: CURRENT_ENTRY
 
 大量のrule全文を毎回読むことを目的にしません。
 今回の作業に必要なcurrent正本・専門rule・実ファイルだけを漏れなく選び、未成立のGateがあれば作業を進めないためのrouting ownerです。
+
+## System Context V1 bootstrap pointer
+
+Cocolonの設計・実装・診断・監査・前提資料更新・仕様判断を始める前に、currentなSystem Context technical ownerをfreshに解決します。
+
+現在のactive owner:
+
+- repository: `MassyuRed/Cocolon`
+- Draft PR: `#37`
+- working lineage: `agent/cocolon-system-context-step7-bounded-implementation-20260822`
+- technical entry: `Cocolon_前提資料/system_context/00_read_first.md`
+
+PR headは作業開始ごとにfresh確認し、過去の固定SHAをcurrentとして再利用しません。
+PR #37がmerge、close、supersedeされた場合は、currentな後継technical ownerへ追従します。
+このpointerはSystem Context本文を複製せず、管理入口の所在だけを示します。
+Mash様へhead監視、manifest確認、refresh command組立てを戻しません。
 
 ただし、`../audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md`は
 恒久インシデント記録として例外です。全てのCocolon作業で毎回、先頭からEOFまで全文を読みます。
