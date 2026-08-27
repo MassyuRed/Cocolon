@@ -1288,3 +1288,71 @@ STRUCTURE_MAP_DELTA_NONE = TRUE_PRIVATE_DISABLED_BEHAVIOR_ONLY_NO_ACTIVE_ROUTE_O
 I04 = NOT_STARTED_REQUIRES_FRESH_EXPLICIT_START
 AUTOMATIC_PROGRESSION = FALSE
 ```
+
+## 32. Route A v2 I04 — design-corrected normal form / rank / composer / trace（2026-08-27）
+
+I04はN2.3のnormal form／rank／composer／preactivated helperを、Mashがfreshに承認した「v2 validator／production traceの設計と、R03 / R04のreference-state契約を先に確定する」設計補正を含めて完了した。corrected allowlistはM01 / M02 / M03 / M04 / M05 / M07 / M08 / C08 / C09 / C10のexact10であり、actual writeはruntime exact7（M01 / M02 / M03 / M04 / M05 / M07 / M08）とcanonical design exact3（C08 / C09 / C10）に閉じた。M06 runner、C11 / C12、元設計のhistorical recordは変更していない。runtime commitの確定値はI04 runtime handoffとdual-repo fresh remote post-verify記録を正とする。
+
+### 32.1 v1 / v2 validator and preactivated boundary
+
+validatorはschema versionのv1 / v2 exact dispatchとし、unknown schema、mixed child schema、cross-version artifact refをrankより前にSTOPする。v2 projection spineは、frozen v1 Layer 1 childrenとv2 subjective claimsをsame sourceからbottom-upでexactに構成する。v2 direct shapeはnode kind authoritativeのprivate ownerであり、v1 direct shapeのlegacy bytesとactive `compile_stage1_response` facadeのsource / AST bytesは不変である。
+
+active response schemaは`cocolon.cmee.v1a.emlis_stage1_response.v1`のままで、v2 production helperは`PREACTIVATED_DISABLED`である。public schema / API / DB / RN / persistence / production route、provider / network / dependency / fallbackに効果を与えず、private body generation、formal run、human read、Product Readも実行していない。
+
+### 32.2 Normal form, preference profile and global rank
+
+normal form exact6 phases、discourse preference profile exact8 rules、Japanese local preference exact7 rulesをclosed ownerとした。candidate axesはlayout 4 × mention 2 × link 2 × head 1で、internal maximumはexact16、visible-equivalenceを経たemitted candidateはexact2である。representativeはfull canonical bytesで決め、collisionはSTOPする。required duty orderはflattened canonical seed orderに固定し、seed A / B / Aの逆順操作でもsame-seedの結果は不変である。hash-only、first-seen、candidate ID tie-breakを代替ownerにしない。
+
+### 32.3 R03 / R04 reference-state and explicit cause
+
+R03は`PROJECTED_RESPONSE_OBJECT`のsingular exact1だけを「そのこと」へ投影する。R04はsame ordered exact2 pairのimmediately prior response objectsだけを「その両方」へ投影する。どちらもraw text similarity、substring、fixture order、candidate historyをdecision ownerにせず、reference-state bundleからpublic graph refへ一意に写す。singular / pairのcardinality、ordered pair、immediately prior、projection bindingのいずれかが不成立ならanaphorへfallbackしない。
+
+source-explicit causeはF09（frame-internal cause）とL05（already-owned / frame-internal link）の契約でproduction composerとv2 traceの両方へ到達する。causeをgeneric external connectiveとして二重表示しない。
+
+### 32.4 Production trace and common guard
+
+v2 visible unitは次のtrace seal exact6を持つ。
+
+| Seal field | Contract |
+|---|---|
+| `covered_duty_refs` | selected unitが履行したdutyのcanonical ordered cover |
+| `sentence_job_refs` | unitが実現したsentence jobのcanonical ordered cover |
+| `source_reception_act_refs` | source / reception actへのexact provenance |
+| `composition_candidate_ref` | selected composition candidate exact1 |
+| `composition_layout_ref` | selected layout exact1 |
+| `selected_stage1_artifact_ref` | same selected Stage 1 artifact exact1 |
+
+trace validatorはsource → grounded plan → graph → v2 projection → selected unitsをcanonical production pathで再生し、visible unit / positive extension / artifactの同値性を比較する。coordinated unitのsealを一括置換するco-tamperも、caller-provided seal同士の整合だけで通さずSTOPする。grouped temporal unitはclauseごとのrelation / node / evidence exact coverを必須にする。
+
+common guard proofはraw guardの`passed` / dispositionを改竄せず、typed admissionはexact typed quotationが成立する場合だけに閉じる。raw failureをtyped successに書き換えず、raw failure proofを保持する。
+
+### 32.5 Identity, proof denominator and next boundary
+
+I03までのbehavior root exact22はM08 `emlis_v1a.py`不変を前提としていたため、I04でM08 exact6を追加し、behavior rootをexact28（owner cardinality M01 / M02 / M03 / M08 = 2 / 15 / 5 / 6）へ補正した。M08 exact6からのtransitive AST closureもidentity対象に含める。I04 postimage identityは次の通りである。
+
+```text
+LANGUAGE_CORE_IDENTITY_POST_I04 = f979368cc28a920553f9b95894492cb9a9aad4e7c890eba9181c6d68e5994c55
+STAGE1_RUNTIME_INTEGRATION_IDENTITY_POST_I04 = 0998ff14f2bd6b5853ebb09d8eb098b9a04c88c6c02b545c1ab674ad151bc266
+ACTIVE_FACADE_SOURCE_SHA256 = 127858adb26813f83111f5b6fb0ec8116ad46d371ed9a91d8b60a48157976515
+ACTIVE_FACADE_AST_SHA256 = ebdf3a8ab86537572c0ce7e9db89aae6c7bdd2f0c945d2d0e79de637a3364f47
+```
+
+public machine regressionはcontracts 152件＋vertical 44件の196 / 196 GREENで、I04 mandatory / strengthened gateは11 / 11 GREEN、compileall / role import / diff checkはPASSである。これはprivate disabled routeのmachine proofであり、I05のidentity freeze、full public proof、Product Readを先取りしない。
+
+I04のdual-repo fresh remote post-verify後の次工程はI05である。I05はbehavior delta 0でidentity freezeとfull public proofだけを所有し、fresh explicit startなしに開始しない。I09のactivationはresponse facadeとgrounded-plan runtime resolverのatomic exact2であり、compile body単体exact1へ縮退させない。
+
+```text
+ROUTE_A_V2_I04_NORMAL_FORM_RANK_COMPOSER_TRACE = COMPLETE_DISABLED_DESIGN_CORRECTED
+CORRECTED_ALLOWED_PATHS / ACTUAL_RUNTIME / ACTUAL_DESIGN = 10 / 7 / 3
+NORMAL_FORM / PROFILE / LOCAL_RULES = 6 / 8 / 7
+CANDIDATE_MAXIMA / INTERNAL / EMITTED = 4x2x2x1 / 16 / 2
+REFERENCE_R03 / REFERENCE_R04 = そのこと / その両方
+SOURCE_EXPLICIT_CAUSE = F09_L05_PRODUCTION_AND_TRACE_REACHABLE
+V2_UNIT_TRACE_SEAL = EXACT6_CANONICAL_REPLAY
+N2_BEHAVIOR_ROOTS = EXACT28_CARDINALITY_2_15_5_6
+PUBLIC_MACHINE_REGRESSION = 196 / 196 PASS
+ACTIVE_V1 / PRIVATE_V2 = UNCHANGED / PREACTIVATED_DISABLED
+NEXT_STEP = I05_IDENTITY_FREEZE_AND_FULL_PUBLIC_PROOF_BEHAVIOR_DELTA_0_REQUIRES_FRESH_EXPLICIT_START
+I09_ACTIVATION = ATOMIC_EXACT2_RESPONSE_FACADE_PLUS_GROUNDED_PLAN_RUNTIME_RESOLVER
+AUTOMATIC_PROGRESSION = FALSE
+```

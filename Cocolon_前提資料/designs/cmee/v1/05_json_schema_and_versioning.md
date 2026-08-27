@@ -3222,3 +3222,54 @@ LANGUAGE_CORE_IDENTITY_FINAL_FREEZE = I05_NOT_CLAIMED
 I03 = NOT_STARTED_REQUIRES_FRESH_EXPLICIT_START
 AUTOMATIC_PROGRESSION = FALSE
 ```
+
+## 29. Route A v2 I04 — v1/v2 validator and trace schema correction
+
+I04はnormal form／rank／composer／preactivated helperに加え、承認済みの設計補正としてv2 validator、production trace、R03 / R04 reference-stateの契約を同じprivate disabled closureに確定した。schema dispatchは`schema_version`によるv1 / v2 exact dispatchとし、unknown schema、mixed-child schema、cross-version artifact refはすべてSTOPとする。active public response schemaとpublic compile facadeはv1のままであり、v2 production helperはpreactivated disabledから有効化しない。
+
+v2 projectionは、frozen v1 Layer 1 childrenにv2 subjective claimsを追加したfull bottom-up spineをexactに検証する。claim / projection rowのartifact refは各schemaのclosed ownerに属し、projection preimageからclaim、binding、source qualifier、policy basis、surface derivation、selected unitまでの整合を部分的なshape checkでなくfull spineで閉じる。v1 Layer 1のchild contractは凍結し、v2 claimをv1に混ぜたり、v1 childをv2に読み替えたりしない。
+
+`Stage1V2UnitSeal`は次のexact6である。これらはunitのidentity materialとは循環させず、canonical production replayによって別系統で再構成する。
+
+```text
+covered_duty_refs
+sentence_job_refs
+source_reception_act_refs
+composition_candidate_ref
+composition_layout_ref
+selected_stage1_artifact_ref
+```
+
+production traceは単数claim前提を廃し、plural claimsとexact6 provenanceを所有する。grouped temporal traceはclauseごとにrelation / node / evidenceをexact coverし、grouped anchor coverageは必要なanchorの過不足を認めない。各subjective claimのbasis refsは対応するprojection / source qualifier / policy basisと非空intersectionを持ち、合成後に孤立したbasisを認めない。
+
+common guardが成功としてadmitできるのはexact typed quotationのみである。raw guard failureは`raw_passed=false`と失敗dispositionを保ったままproof化し、型なしsuccessへ読み替えない。source → grounded observation plan → composition graph → projection → selected unitsのcanonical replayはexactに再生され、unit sealとtraceを同時に差し替えるcoordinated tamperもSTOPする。
+
+I04のidentity materialは旧exact22から、`contracts.py`、`emlis_stage1_composition.py`、`emlis_stage1_response.py`、`emlis_v1a.py`に帰属するbehavior root exact28へ補正した。特に`emlis_v1a.py`のexact6 rootはそのtransitive AST closureを含む。post-I04 identitiesは次である。
+
+```text
+N2_BEHAVIOR_ROOTS = EXACT28_CARDINALITY_2_15_5_6
+LANGUAGE_CORE_IDENTITY_POST_I04 = f979368cc28a920553f9b95894492cb9a9aad4e7c890eba9181c6d68e5994c55
+STAGE1_RUNTIME_INTEGRATION_IDENTITY_POST_I04 = 0998ff14f2bd6b5853ebb09d8eb098b9a04c88c6c02b545c1ab674ad151bc266
+ACTIVE_RESPONSE_SCHEMA = cocolon.cmee.v1a.emlis_stage1_response.v1
+PRIVATE_V2_PRODUCTION_HELPER = PREACTIVATED_DISABLED
+```
+
+machine regressionはcontracts 152件とvertical 44件の合計196件をPASSし、active v1 facadeのsource / AST identityとlegacy behaviorの不変を確認した。I04でpublic JSON、serializer、log、persistence、DB / API / RN schema、runner、production routeを変更しない。
+
+```text
+V1_V2_VALIDATOR_DISPATCH = EXACT_BY_SCHEMA_VERSION
+V2_PROJECTION_SPINE = FROZEN_V1_LAYER1_CHILDREN_PLUS_V2_SUBJECTIVE_CLAIMS_BOTTOM_UP_EXACT
+V2_UNIT_TRACE_SEAL_FIELDS = EXACT6
+V2_TRACE_CLAIMS = PLURAL
+V2_TRACE_PROVENANCE = EXACT6
+GROUPED_ANCHOR_COVERAGE = EXACT
+SUBJECTIVE_BASIS_INTERSECTIONS = REQUIRED
+COMMON_GUARD_TYPED_ADMISSION = EXACT_TYPED_QUOTATION_ONLY_RAW_FAILURE_PRESERVED
+CANONICAL_PRODUCTION_REPLAY = SOURCE_TO_PLAN_TO_GRAPH_TO_PROJECTION_TO_SELECTED_UNITS_EXACT
+FINAL_PUBLIC_MACHINE_REGRESSION = PASS_196_OF_196
+PUBLIC_SCHEMA / SERIALIZER / LOG / PERSISTENCE / PRODUCTION_EFFECT = 0 / 0 / 0 / 0 / 0
+LANGUAGE_CORE_IDENTITY_FINAL_FREEZE = I05_NOT_CLAIMED
+NEXT_STEP = I05_IDENTITY_FREEZE_AND_FULL_PUBLIC_PROOF
+I05_BEHAVIOR_DELTA = 0
+AUTOMATIC_PROGRESSION = FALSE
+```
