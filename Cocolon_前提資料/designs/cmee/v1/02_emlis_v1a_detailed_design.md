@@ -1241,3 +1241,50 @@ ACTIVE_FACADE / BODY_GENERATION / PUBLIC_SCHEMA / PRODUCTION_EFFECT = 0 / 0 / 0 
 I03 = NOT_STARTED_REQUIRES_FRESH_EXPLICIT_START
 AUTOMATIC_PROGRESSION = FALSE
 ```
+
+## 31. Route A v2 I03 — reference / link / morphology / IR / sole linearizer（2026-08-27）
+
+I03はfinal design §8 / §13 / §20 Step 3のN2.2だけを、active facadeへ接続しないprivate behaviorとして実装した。I02で固定済みのsource complement、case frame、atomic head、argument planを入力とし、`project_reference_state`、`project_clause_link_plan`、`project_predicate_morphology_plan`、`build_japanese_clause_ir`、`linearize_japanese_clause`をproduct-causal ownerへ追加した。raw source、case / fixture ID、expected text、prior output、human verdictはselector入力0である。
+
+### 31.1 reference / topic / zero owner
+
+`DiscourseReferenceStateRow.establishment_proof_refs`には、登録済みR01–R12のうち適用された直交dimensionをexactにsealする。mention / relation endpointはR01–R04 / R11 / R12、Emlis speaker continuityはR05–R07、topic / base caseはR08–R10が所有する。したがって初出EmlisはR05 explicitとR08 introduced topicを同時に持て、same-speaker chainはR06 zeroとR10 baseを持つ。required relation endpointはR11 exact1だけでanaphor / zero / topicへ落とさない。
+
+- singular anaphorはantecedent exact1、competitor 0、focus一致、local distanceをすべて要求する。
+- pair anaphorは同じordered exact2 pairの直前導入を要求する。
+- competitor、distance、cardinalityが曖昧ならfull expressionへ閉じ、full expressionがframe不適合なら`STAGE1_REFERENCE_REPAIR_UNAVAILABLE_STOP`である。
+- Emlis zeroはsame-speaker chain exact1だけで、first / restart / counterposition後はexplicitである。
+- `は`はR08 introduced topicまたはR09 admitted contrastだけで、R10 first noncontrastはbase caseである。
+
+public typed proofはR01–R12のclosed cover、explicit＋topic、zero＋base、required endpointを全件検査した。text similarity、raw substring、fixture順はreference decisionに使っていない。
+
+### 31.2 clause link / morphology owner
+
+`ClauseLinkPlan`はadmitted relation、placement、token ownerを一体で選ぶ。L01–L05はF05–F09の`FRAME_INTERNAL`でexternal token 0、L06–L08はnon-first sentenceのtyped temporal / action-change / source-explicit-causeだけ、L09はindependent topic additiveだけ、L10はno relationまたはalready-owned relationの`ZERO`だけである。first-sentence connective、frame-internal relationの外部二重表示、adjacent same tokenはlinearization前STOPになる。cause connectiveを`SOURCE_EXPLICIT_CAUSE`以外へ付与しない。
+
+`PredicateMorphologyPlan`はselected frame / head / inflection class / MP01–MP22をexact1で閉じ、aspect / time、polarity、modal、politeness、finite recipe、matrix terminalをsealする。head atomからのfinite surfaceはclass-specific closed transformationだけで、generic morpheme concatenationは0である。各clauseのfinite head exact1、matrix `。` exact1を要求し、source literal内のterminal、quote、newline、whitespace bytesは変更しない。
+
+### 31.3 IR / linearization / derivation seal
+
+`JapaneseClauseIR`はargument plan、source complement plan ref、reference state ref、link plan ref、morphology plan refとcanonical semantic digest 64 hexを、text生成前にsealする。`linearize_japanese_clause`だけがtext ownerであり、IRの再計算一致、source group / plan一致、reference / link / morphology exact1を再検証してから、delimiter、literal bytes、functional atom、particle、modifier、finite head、terminalをframe orderで組み立てる。
+
+textと同じpassで`ClauseFrame` exact1、contiguous `RealizedSemanticBinding` exact cover、bindingと同数の`SurfaceDerivation`を生成する。source literal derivationは`SourceLeafToken`が持つcertified scalar rangeを保持し、opening / closing delimiterとmatrix terminalはregistered structural owner、Emlisはregistered Emlis owner、particle / classifier / modifier / connective / finite headはprojected functional ownerへ閉じる。render後のtext reparse、post-hoc ledger、alternate linearizer、legacy fallbackは0である。
+
+runtime branch head `57a875978949742660e74ef10d7878eaf016cbd5`で、ordered commits `66125d62aa02ea1483a8c695c3b24fd77fc93942`（M02）、`b86f60a490b08244a9fb7cdd2585ff544f7c4c47`（M04）、`57a875978949742660e74ef10d7878eaf016cbd5`（M07）をfresh postverifyした。runtime target blobsはM02 `f0aa0d416b9fca6d807a9fe8adb0393f3b6dcce3`、M04 `da11f0232f0a8ae441d55505224df3e196c1ef8d`、M07 `b7f84eff2237d3195aad275ce008dad498b0fdc1`、postimage manifest SHA-256 `5fc4bb63bdb95b5119fa0098433a9e53c4ae2ae70b4a7e003ad0fa7e3fa08d80`である。各commit changed path exact1、aggregate exact3、PR open / draft / unmerged、status / workflow exact0を確認した。
+
+machine proofはI01 regression exact1＋既存canonical names 2 / 4 / 5 / 6 / 7のI02/I03 enhanced exact5でfinal 6 / 6 GREEN、source boundary 208 / 208、mutation registry `59×3 + 42 + 22 + 22 + 10 = 273`、placeholder frame surface skeleton 22 / 22 byte equality、canonical skeleton SHA-256 `cba16357cec9cd37c8da16e9727aeea5a961c8e413c2f97469161c5a03a5f03b`を確認した。invalid mutationのrank / linearization到達は0 / 0である。これはpublic typed fixtureのmachine proofであり、private exact8、formal、human read、Product Read、Product / technical creditではない。
+
+```text
+ROUTE_A_V2_I03_REFERENCE_LINK_MORPHOLOGY_IR_LINEARIZER = IMPLEMENTED_DISABLED
+REFERENCE / LINK / MATRIX_MORPHOLOGY = 12 / 10 / 22
+MUTATION_CASE_REGISTRY / SOURCE_BOUNDARY / SKELETON = 273 / 208 / 22
+SKELETON_SHA256 = cba16357cec9cd37c8da16e9727aeea5a961c8e413c2f97469161c5a03a5f03b
+VISIBLE_DERIVATION_COVER / TERMINAL_OWNER / DELIMITER_OWNER = EXACT / EXACT1 / EXACT1
+INVALID_REACHES_RANK / LINEARIZATION = 0 / 0
+LANGUAGE_CORE_IDENTITY_POST_I03 = d7d211f5dae049d2c3a75b523794f48b292defaddddb7c5c73550c9380fe6365
+STAGE1_RUNTIME_INTEGRATION_IDENTITY_POST_I03 = a13a3463927a048a507d7a6f283f501982095a00b7b517b154256f031f9e8b4c
+ACTIVE_FACADE / PRIVATE_BODY / PUBLIC_SCHEMA / PRODUCTION_EFFECT = 0 / 0 / 0 / 0
+STRUCTURE_MAP_DELTA_NONE = TRUE_PRIVATE_DISABLED_BEHAVIOR_ONLY_NO_ACTIVE_ROUTE_OR_CALL_CHAIN_CHANGE
+I04 = NOT_STARTED_REQUIRES_FRESH_EXPLICIT_START
+AUTOMATIC_PROGRESSION = FALSE
+```
