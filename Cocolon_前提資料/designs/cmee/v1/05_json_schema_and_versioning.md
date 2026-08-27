@@ -3273,3 +3273,47 @@ NEXT_STEP = I05_IDENTITY_FREEZE_AND_FULL_PUBLIC_PROOF
 I05_BEHAVIOR_DELTA = 0
 AUTOMATIC_PROGRESSION = FALSE
 ```
+
+## 30. Route A v2 I05 — final identity / payload freeze（2026-08-27）
+
+I05のschema / identity境界は、active v1 public schemaを変更せず、private disabled v2のproduct-causal closureとI09 activation selectorを分離する。behavior rootはI04補正後のexact28、identity infrastructureはexisting exact5、LCI / runtime payload cardinalityは各exact16である。M02 `_language_core_source_owner_payloads`のpath-qualified traversal補正以外にproduct source AST変更はない。
+
+### 30.1 exact16 payload ledger
+
+次のSHAはpayload bytes、byte countは同じpayloadのlengthである。ordinal / name / orderをidentity materialとする。
+
+| # | Payload | LCI SHA-256 / bytes | Runtime SHA-256 / bytes |
+|---:|---|---|---|
+| 01 | composition owner AST / whole file | `94830072dd48f9cda3ca4b80838dd04138890a23acc0f348973ff5cffe95c6d2` / 1,133,688 | `a0d243595ad95d434bac88d6a08ddfc356f4ec6e19799dd3c5c58ec3a1ec3ada` / 523,147 |
+| 02 | contracts owner AST / whole file | `48a312c9019aaa4d8ffb150163c57f8bf6c28028f16afd190eca1b55aa31cb01` / 767,466 | `239533f7514fb516185aebc61ebfb076c3fe24aaffca8d78cca734e8dc203777` / 284,967 |
+| 03 | response owner AST / whole file | `0224e2578b2544e2f4f0b4a87a446927a5d64c7d14a5e0a10738b8c55fa3c7d3` / 442,538 | `b6d64dc15fc93d4a3e99d608778fa32cc462af3efb24e52f9d703aafa40f7a75` / 325,262 |
+| 04 | emlis_v1a owner AST / whole file | `8c6ed267db55cc87751d3f75fc39eb7678224266595c175b5d216518d004e8ca` / 712,544 | `c907af7a059f802120b3e494a88651015a14d45c5e272ab1f9d3f1e9bfa8d06f` / 293,740 |
+| 05 | grounded-plan owner AST / whole file | `2fd50144fb65e9ff7d3dfd163c71f6ac6691e04d608ae70d6082d93ef577da07` / 900,661 | `efb08a5f49d6c3452a8f2332c9d45cebcb5e91ed2c8e8c41fa5a06b3faa4fadd` / 352,379 |
+| 06 | core composer owner AST / whole file | `8b6c361506f5efe3d508a8ea0685524baa2c092fb149fa04718242afaf524e43` / 21,822 | `e524111597d75599b0550b271a3df464df4d468aec28e608ab4586b7840da1f0` / 8,179 |
+| 07 | adapter owner AST / whole file | `19ec812e35ecbb70661c66156cd6609e2dc813016b7358f290db04cab09de64f` / 90,077 | `3ca31fbcf0ad9c93bdd4d267a3ef2000ce79b8d702bd7188f020eb11d5bd593c` / 25,495 |
+| 08 | contract manifest | `01a0727258de897242262ef5d05851a040bc8b4c4694c7126d744e85c0de66e0` / 183,448 | same |
+| 09 | case frame / particle manifest | `838767e83ab7f34e955bab4ed5e9efd07e238a6a74c5024ea644e70af1cd3cf1` / 14,076 | same |
+| 10 | predicate / atomic head manifest | `7db3d6c83e24a364e701af35c84ec68b7f36ff24acbe5c6f2b9020dfbbc96774` / 8,097 | same |
+| 11 | source / complement / reference manifest | `b60f13b6f253cfb94d759d8b0ade9d3ea6c7fd6786a964886cf02037ab2d4d40` / 25,759 | same |
+| 12 | morphology / link / functional manifest | `9a0b927f1a8239024a2d97351277412fed65e1975408de1328411ac2e1ae2ea9` / 7,408 | same |
+| 13 | participant / structural manifest | `cee6c2989896f8e3f3642f98a354ea294d34b05eff81a2322fcb94ce9fc9abba` / 774 | same |
+| 14 | policy / closed enum manifest | `ed64aa5ca1e92121f4098bfc7c855646c904ff6d4d599d31edb1522fdaf7f973` / 20,889 | same |
+| 15 | normal form / profile manifest | `3c14b8eb9e5cd8ff5410ffc7c1a0d3558784a75f8c355c272904dc650dd50ff7` / 4,055 | same |
+| 16 | product owner / registry digests | `805deae2406958a3ea3a3d9aaaeecd4a186489c50c2b8edd82101943f3789e04` / 5,956 | same |
+
+ordered `(name, sha256, byte_count)` canonical JSON SHAはLCI `f29ab019e5bb1d36617157a5f141c9c11adf8f52109e16665364573fe613e565`、runtime `fdf5f722513485b9f8e9718512915eb12d76f03b05ec94bc9180826cdacfb726`である。source-owner exact7は`4c959b6b…`、ordered path / declaration names / import binding namesは7 files / 1,070 / 354、SHA `c3baf89b…`である。
+
+### 30.2 activation and schema invariants
+
+```text
+N3_LANGUAGE_CORE_IDENTITY = fc337cc7712d461d594dd8ec45ec46da10939a8d18dedc3fc4cf9246fe6a5f3d
+N3_RUNTIME_INTEGRATION_IDENTITY = 8f9eb006847beb24446cacb64228c70ef7852a2e7cc364913e6876a99a9f8e3d
+ACTIVE_RESPONSE_SCHEMA = cocolon.cmee.v1a.emlis_stage1_response.v1
+PRIVATE_V2_SCHEMA = REGISTERED_PREACTIVATED_DISABLED
+I09_ACTIVATION_EXACT2 = M03_COMPILE_STAGE1_RESPONSE_PLUS_M08_BUILD_TEXT_GROUNDED_LIMITED_ARTIFACT
+I09_LANGUAGE_IDENTITY_RELATION = N4_EQUALS_N3
+I09_RUNTIME_INTEGRATION_RELATION = N4_NOT_EQUAL_N3
+PUBLIC_JSON / API / DB / RN / PERSISTENCE_DELTA_I05 = 0 / 0 / 0 / 0 / 0
+```
+
+M03 facadeとM08 public runtime resolverはactivation selectorであってN2 behavior ownerではない。private `_build_stage1_grounded_observation_plan_for_schema`、`_build_text_grounded_limited_artifact_for_schema`、trace replay / validatorはbehavior ownerのままLCIに含む。I09はM03＋M08のatomic exact2以外をadmitせず、allowed-path upper boundは補正後`M03,M05,M07,M08,C10,C11,C12` exact7である。本I05では両activation body、schema version、serializerを変更しない。

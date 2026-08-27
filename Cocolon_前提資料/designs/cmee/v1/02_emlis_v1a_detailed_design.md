@@ -1356,3 +1356,65 @@ NEXT_STEP = I05_IDENTITY_FREEZE_AND_FULL_PUBLIC_PROOF_BEHAVIOR_DELTA_0_REQUIRES_
 I09_ACTIVATION = ATOMIC_EXACT2_RESPONSE_FACADE_PLUS_GROUNDED_PLAN_RUNTIME_RESOLVER
 AUTOMATIC_PROGRESSION = FALSE
 ```
+
+## 33. Route A v2 I05 — identity freeze / full public proof（2026-08-27）
+
+I05はN2.4のidentity freezeとfull public proofをbehavior delta 0で完了する。I04補正後の正しいdenominatorはbehavior root exact28（M01 / M02 / M03 / M08 = 2 / 15 / 5 / 6）とpublic named tests 196（contracts 152＋vertical 44）である。元final design本文のexact22 / 191はhistorical pre-correction値であり、本節とI05 terminal checkpointがsupersedeする。
+
+I05監査で、M08 behavior root `_realize_cmee_experience`からimport bindingを介してactive M03 `compile_stage1_response`本体までLCI closureが到達していることを検出した。この状態ではI09 activation時にlanguage identityが変わり、`LANGUAGE_CORE_IDENTITY_N4 == N3_LANGUAGE_CORE_IDENTITY`を満たせない。M02の既存identity infrastructure owner `_language_core_source_owner_payloads`だけを補正し、次のI09 activation exact2をpath-qualifiedにclosure対象外とした。
+
+| I09 activation owner | I05 state | LCI / runtime integration |
+|---|---|---|
+| M03 `compile_stage1_response` | active v1 body unchanged、activation excluded | body changeでLCI不変、whole-file runtime identity変化 |
+| M08 `build_text_grounded_limited_artifact` | v1 schema resolver unchanged from I04、activation excluded | body changeでLCI不変、whole-file runtime identity変化 |
+| M08 `_build_stage1_grounded_observation_plan_for_schema` | preactivated private behavior owner | closureに残り、body driftでLCI変化 |
+
+M08に残る`compile_stage1_response` import binding descriptorはunchangedであり、M03 target declaration / bodyだけを除外する。name-global exclusion、private resolver exclusion、behavior helper refactorは行わない。atomic exact2をtemporary sourceでsimulationし、changed top-level AST symbol exact2、LCI equality、runtime integration inequalityを確認した。single-owner切替はI09 admissionにならない。
+
+### 33.1 frozen N3 identity
+
+```text
+N3_LANGUAGE_CORE_IDENTITY = fc337cc7712d461d594dd8ec45ec46da10939a8d18dedc3fc4cf9246fe6a5f3d
+N3_RUNTIME_INTEGRATION_IDENTITY = 8f9eb006847beb24446cacb64228c70ef7852a2e7cc364913e6876a99a9f8e3d
+LANGUAGE / RUNTIME_PAYLOADS = EXACT16 / EXACT16
+LANGUAGE_EXACT16_NAME_SHA_BYTES_TUPLE_SHA256 = f29ab019e5bb1d36617157a5f141c9c11adf8f52109e16665364573fe613e565
+RUNTIME_EXACT16_NAME_SHA_BYTES_TUPLE_SHA256 = fdf5f722513485b9f8e9718512915eb12d76f03b05ec94bc9180826cdacfb726
+SOURCE_OWNER_CLOSURE = FILES7_DECLARATIONS1070_IMPORT_BINDINGS354
+SOURCE_OWNER_PAYLOAD_EXACT7_NAME_SHA_BYTES_TUPLE_SHA256 = 4c959b6ba61ff5135417e91d296d0291e4e246183040c3f639afab9d8694dbfe
+SOURCE_OWNER_SYMBOL_SET_PATH_DECLARATIONS_IMPORTS_SHA256 = c3baf89b8810fc71c4468aa0f00262fc2626febccb12f9bece049cdd6ba85e58
+PRODUCT_CAUSAL_OWNER_MANIFEST_FILES_SEEDS = 7 / 55
+PRODUCT_CAUSAL_OWNER_SEED_CARDINALITIES = 18 / 10 / 11 / 10 / 3 / 1 / 2
+PRODUCT_CAUSAL_OWNER_MANIFEST_SHA256 = c499a7b048dac5afc6e81fc7b44564c25d110b1c4d1e86b8507015133e81de3c
+BEHAVIOR_ROOT_EXACT28_SHA256 = e2484757b2e834ea27febec130cacff36deb2df9ddc15a66f25f38708aec0606
+IDENTITY_INFRASTRUCTURE_EXACT5_SHA256 = 1df267709164af1ce8e3ee443eddad14c83efa132bb1cf87492ab8cccf9f9c27
+I09_ACTIVATION_EXACT2_SHA256 = 1eb7baf3fcc2673f0d73ecf1663f140baa955967a4e3066e54913b978f9d9e79
+```
+
+SHA tupleはUTF-8、`ensure_ascii=false`、key sort、separator `,` / `:`のcanonical JSONで、ordered `(name, sha256(payload bytes), byte_count)`をhashした値である。name＋SHAだけの別tuple値と混同しない。payload exact16の個別値はcanonical 05 §30を正とする。
+
+### 33.2 runner freeze and public proof
+
+M06はI06がM07 / C10 body-freeだけを変更できるよう、successorを事前固定した。unit IDはcanonical underscore spelling `cocolon.cmee.stage1.route_a.typed_japanese_case_frame_realizer.20260826.v1`であり、I01–I04 receiptのdotted spellingはhistorical typoとして書換えず、本I05からsupersedeする。
+
+```text
+SET = SUCCESSOR_EARLY_LANGUAGE_SET_EXACT8
+ATTEMPT = SUCCESSOR_EARLY_LANGUAGE_ATTEMPT_01
+ULTRA_READ = SUCCESSOR_EARLY_ULTRA_KNOWN_READ_ATTEMPT_01
+PRO_READ = SUCCESSOR_EARLY_PRO_COMBINED_READ_ATTEMPT_01
+I05_RUN / PRIVATE_INPUT_READ / PRIVATE_OUTPUT / HUMAN_READ = 0 / 0 / 0 / 0
+```
+
+runnerはprivate inputを開く前に、N3 identity pair、exact16 rows / tuple、source-owner closure、owner manifest、behavior exact28、identity infra exact5、activation exact2をfresh再計算してliteral equalityを要求する。旧`CMEE_STAGE1_STEP3_3_ATTEMPT_01`と旧identity `ab4a6b… / 49da471…`はcounter 2 / 2 immutable、attempt / output / read reuse falseのpredecessor recordだけに残る。同じretained inputのraw SHA `af718e82…` / set digest `489dcf87…`はpredecessor outputではなく、I06 successor exact1だけへ再bindされ、I05では消費していない。
+
+public proofは既存test functionを増やさず196 / 196 GREEN、mutation273、source boundary208、skeleton22、A / B / A、idempotence、compileall、role import、diff checkをPASSした。active facade source / AST SHAは`127858…` / `ebdf3a…`、M08 public resolverのI04-current source / AST SHAは`01d901…` / `c1d3ab…`で不変である。M01 / M03 / M05 / M08、public schema / API / DB / RN / persistence / production routeにdeltaはない。Product runtimeのexternal AI / provider / network / new dependency / fallbackは0であり、GitHub control-plane transportはこのproduct-runtime network 0に含めない。
+
+```text
+ROUTE_A_V2_I05_IDENTITY_FREEZE_FULL_PUBLIC_PROOF = COMPLETE_ONLY_AFTER_DUAL_REMOTE_POSTVERIFY
+ACTUAL_RUNTIME_PATHS = M02,M04,M06,M07
+ACTUAL_DESIGN_PATHS = C08,C09,C10
+STRUCTURE_MAP_DELTA_NONE = TRUE
+PRIVATE_GENERATION / FORMAL / HUMAN_READ / PRODUCT_READ = 0 / 0 / 0 / 0
+PRODUCT_CREDIT = 0
+NEXT_STEP = I06_AFTER_FRESH_EXPLICIT_START
+AUTOMATIC_PROGRESSION = FALSE
+```
