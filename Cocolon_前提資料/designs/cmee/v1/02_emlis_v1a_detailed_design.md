@@ -1207,3 +1207,37 @@ STRUCTURE_MAP_DELTA_NONE = TRUE_REGISTERED_DISABLED_PRIVATE_OWNER_NO_ACTIVE_ROUT
 I02 = NOT_STARTED_REQUIRES_FRESH_EXPLICIT_START
 AUTOMATIC_PROGRESSION = FALSE
 ```
+
+## 30. Route A v2 I02 — source / complement / case / head（2026-08-27）
+
+I02はfinal design §6–§7 / §20 Step 2のN2.1だけを、active facadeへ接続しないprivate behaviorとして実装した。`project_source_leaf_group`は`SourceLeafToken`のEvidenceRef、source envelope、raw UTF-8 range、extent proofをexact1へbindし、`payload_utf8 == raw_utf8[start:end]`とstrict UTF-8 round-tripを要求する。FULL_EVIDENCE_LITERALはEvidence literal rangeのexact cover、CERTIFIED_LITERAL_SUBSPANはcallerが渡すtyped subspan proof exact1だけを許し、composer内の文字列探索、normalization、strip、terminal削除、newline変換は0である。
+
+shape witnessはsentence / final terminal / quote topology / linebreakのvalidationとouter delimiter selectionにだけ使う。terminal closed setは`。．.!！？?`、quoteはbalanced `「」` / `『』`、linebreakはNONE / LF_ONLY / CRLF_ONLYである。unbalanced quote、lone CR、LF / CRLF混在、invalid UTF-8、uncertified subspanはnamed STOPへ閉じる。exact2 groupのcardinality logicが読むのはordered leaf refsとcardinalityだけで、二leafのshape coupling、dedupe、reorder、generic 3-way joinは0である。
+
+`select_source_complement_plan`はselected frameのSenseComplementLicenseからC02–C09 exact1を選び、mode exact5を次のownershipで閉じる。
+
+| Mode | Cardinality | Complement owner |
+|---|---|---|
+| `QUOTE_COMPLEMENT` | exact1 | C02、outer delimiter、frame-owned case marker |
+| `CONTENT_NOMINAL` | exact1 | C03 / C04、SF01 / SF02 |
+| `CLASSIFIED_CONTENT` | exact1 | C05 / C06、classifier exact1 |
+| `COORDINATED_EXACT2` | ordered exact2 | C07はframe particle、C08はSF03 |
+| `BOUNDARY_SPLIT_EXACT2` | ordered exact2 | C09、PRIMARY / SECONDARY frame particle |
+
+QD01–QD03は各leafへ独立にexact1、QD04 BALANCED_MIXEDは`SOURCE_OUTER_DELIMITER_UNAVAILABLE_STOP`であり、別modeや万能nominalizerへfallbackしない。source terminalはinner literal bytesに残り、matrix terminal ownerはI03のmorphology / linearizerまで未実装である。
+
+`JapaneseCaseFrameKey`はSentenceJob、SemanticClauseKind、subjective content / predication / semantic sense、grounded predicate kind、required ClauseArgumentRole tuple、RelationOperator、polarity / modality / time scope、speaker / zero requirement、complement requirementだけを持つ。raw source、source shape、rendered surface、output history、case / fixture ID、expected textはfield 0である。`select_case_frame`はF01–F22 exact1、`select_atomic_predicate_head`は選択済みframeからH01–H22 exact1を別call / ownerとして返す。`project_argument_realization_plan`はrequired slot 42をframe orderでexact coverし、semantic binding exact1とparticle rule owner exact1を同時に固定する。0件 / 2件以上、missing / extra slot、particle duplicateはrank前にSTOPする。
+
+runtime head `c40cc43952a49b75cb8cf5fd4a2bd1cf74a29473`でM02 / M04 / M07 exact3をpostverifyした。public typed testsはI02 named exact5、I01 regression exact1のfinal 6 / 6 GREEN、source boundary `192 + 2 + 10 + 4 = 208`、I02 applicable mutation `59×3 + 42 + 22 = 241`をbody-freeに実行した。private linearized output、formal exact8、human read、Product Readは0である。
+
+```text
+ROUTE_A_V2_I02_SOURCE_COMPLEMENT_CASE_HEAD = IMPLEMENTED_DISABLED
+SOURCE_BOUNDARY_TOTAL = 208
+SOURCE_MODE / CASE_FRAME / ATOMIC_HEAD / REQUIRED_SLOT_PARTICLE = 5 / 22 / 22 / 42
+I02_APPLICABLE_MUTATION_SUBCASES = 241
+INVALID_REACHES_RANK / LINEARIZATION = 0 / 0
+LANGUAGE_CORE_IDENTITY_POST_I02 = 7e829de6cc80919d0cd760e1679ee6ac1f4d06b75edafa41133188767fa8a9b0
+ACTIVE_FACADE / BODY_GENERATION / PUBLIC_SCHEMA / PRODUCTION_EFFECT = 0 / 0 / 0 / 0
+I03 = NOT_STARTED_REQUIRES_FRESH_EXPLICIT_START
+AUTOMATIC_PROGRESSION = FALSE
+```
