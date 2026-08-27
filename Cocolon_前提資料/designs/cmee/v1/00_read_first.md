@@ -1,7 +1,7 @@
 # CMEE V1 詳細設計 — Read First
 
 - document id: `cocolon.cmee.v1.detailed_design.read_first`
-- revision date: `2026-08-25 JST`
+- revision date: `2026-08-27 JST`
 - Step 10 final document id: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2`
 - Step 10 design identity: `CMEE_THREE_CORE_INTEGRATED_DESIGN_20260821`
 - Step 10 Pro review: `CMEE_STEP10_PRO_SINGLE_PRODUCT_ROUTE_REVIEW_20260821 / CONSUMED_EXACTLY_ONCE`
@@ -9,23 +9,23 @@
 - technical design owner: `Ultra華恋`
 - architecture parent: [Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md](../Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md)
 - NLSv3 inheritance input: [NLSv3_to_CMEE_Disposition_Phase1_20260817.md](../NLSv3_to_CMEE_Disposition_Phase1_20260817.md)
-- lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
+- lifecycle: `MASH_APPROVED_FINAL_DESIGN_IMPLEMENTATION_NOT_STARTED`
 - effective when: `MERGED_TO_COCOLON_MAIN_AS_DESIGN_OWNER`
-- implementation approval: `NOT_GRANTED_BY_THIS_SUITE`
+- implementation approval: `FINAL_DESIGN_AND_ORDER_APPROVED / EXECUTION_REQUIRES_EXPLICIT_STEP_START`
 - dependency / production / test / runner / API / DB / RN effect: `0`
 - Cycle001 restart effect: `0`
 - Stage 1 language route: `ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER / SOLE_CURRENT_AND_FUTURE_ROUTE`
 - Phase 0 / P0 / P0-R1 / standalone product-delta-0 L3-R / L3-I lifecycle: `RETIRED_HISTORICAL_NONREUSABLE`
 - current implementation rule: `PRODUCT_QUALITY_DELTA_GT_0_AND_MASH_CONFIRMED_ONLY`
-- current implementation state: `STAGE1_ADDITIONAL_CORRECTION_STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP`
+- current implementation state: `PREDECESSOR_TERMINAL_CLOSED / APPROVED_SUCCESSOR_NOT_STARTED`
 - Phase 2 design correction state: `TOP_LEVEL_NAVIGATION_ALIGNED`
 - Step 10 design correction state: `FINAL_INTEGRATED_CONTRACT_REFLECTED_EXISTING_EXACT14`
 - Karen-derived functional companion: `exact2`
 - Stage 1 additional correction final body: `COCOLON_CMEE_STAGE1_ADDITIONAL_CORRECTION_ULTRA_FINAL_TECHNICAL_BODY_AND_JOINT_RECOMMENDATION_20260824`
 - Stage 1 additional correction Pro final confirmation: `PASS / BLOCKER 0 / MAJOR 0 / MINOR 0`
-- Stage 1 additional correction placement: `NONCANONICAL_TECHNICAL_INTEGRATION_SOURCE / DESIGN_RECORD_WRITE_ONLY`
+- Stage 1 additional correction placement: `HISTORICAL_PREDECESSOR_INTEGRATION_SOURCE`
 - duplicate parallel technical canonical design files: `0`
-- current authorized next implementation: `NONE`
+- current authorized next implementation: `I00_AFTER_FRESH_EXPLICIT_STEP_START`
 - automatic progression: `false`
 
 ---
@@ -239,6 +239,29 @@ automatic_progression = false
 
 current v2 Step 7のmachine GREEN / pre-screen結果はhistorical factとして保持するが、Mashのactual本文判断「文章品質が不足する」によりproduct acceptanceは`FALSE`、candidate readyは`false`である。本文§13のStep 0–9だけをadditional correctionの提案実装順とし、canonical 06 §30がcallable名、known early exact4、遷移Tを一意に補足する。別の実装順ownerは作らない。System Context PR #37はnavigation-onlyのまま更新しない。
 
+### 0.6 2026-08-27 Route A typed Japanese case-frame realizer v2 final design
+
+Mashのcurrent直接判断により、corrected V2 exact bytesへsession-safe実装順Step 0–14を統合した次のfinal documentを、PR #30 working lineageのcurrent Stage 1 successor designとする。
+
+[Route A Typed Japanese Case-Frame Realizer v2 — Final Technical Design and Implementation Order](../Cocolon_CMEE_Stage1_RouteA_TypedJapaneseCaseFrameRealizerV2_UltraFinalTechnicalDesignAndImplementationOrder_20260827.md)
+
+    final_document_id = CMEE_STAGE1_ROUTE_A_TYPED_JAPANESE_CASE_FRAME_REALIZER_V2_ULTRA_FINAL_TECHNICAL_DESIGN_AND_IMPLEMENTATION_ORDER_20260827
+    source_corrected_v2_sha256 = 4c71c49577e4e95cbc735eafeacc301cabcc4b2c8d3dc4544006dcdd56a9b0de
+    final_document_sha256 = da20918280ccb4bcaba7ee112dca454e447fdcfb6432891e3c7437d29b311cbd
+    mash_decision_id = COCOLON_CMEE_ROUTE_A_V2_FINAL_DESIGN_AND_SESSION_ORDER_APPROVAL_20260827
+    mash_final_design_approval_sha256 = a4052f3bb4744107b7740f219733275679dbc38fecbb79fb8d292bcfbf6044eb
+    session_safe_order = I00_I14_EXACT15
+    session_safe_order_sha256 = 0d6fb8cb123669d37d4a6801225f9995ea6ff3765900c6fb460e7592f1bba7b6
+    pro_delta_final_check / read / reread = NOT_RUN / 0 / 0
+    pro_verified_current_body_clear = false
+    implementation_execution = NOT_STARTED
+    current_authorized_next_step = I00_AFTER_FRESH_EXPLICIT_STEP_START
+    predecessor_counter = 2_OF_2_IMMUTABLE
+    step_4_1 / product_pass / activation = 0 / 0 / 0
+    automatic_progression = false
+
+旧2026-08-24 final bodyは歴史的predecessorとして保持し、current implementation orderの詳細はfinal document §20、canonical checkpoint routingは06 latest sectionが所有する。本docs reflectionはruntime、test、private generation、API、DB、RN、activation、productionを開始しない。
+
 ## 1. 読む順 exact10
 
 1. 本file
@@ -251,7 +274,7 @@ current v2 Step 7のmachine GREEN / pre-screen結果はhistorical factとして�
    - [03_piece_v1c_detailed_design.md](03_piece_v1c_detailed_design.md)
    - [04_analysis_v1d_v1e_detailed_design.md](04_analysis_v1d_v1e_detailed_design.md)
 7. [06_implementation_order_migration_and_verification.md](06_implementation_order_migration_and_verification.md)
-8. [Stage 1 additional correction Pro-confirmed final body](../Cocolon_CMEE_Stage1_AdditionalCorrection_UltraFinalTechnicalBodyAndJointRecommendation_20260824.md)
+8. [Route A v2 final technical design and session-safe implementation order](../Cocolon_CMEE_Stage1_RouteA_TypedJapaneseCaseFrameRealizerV2_UltraFinalTechnicalDesignAndImplementationOrder_20260827.md)
 9. `../../../current_structure/04_cmee_current_structure.md`
 10. 対象coreのcurrent structure mapとactual source / contract / test
 
@@ -418,8 +441,10 @@ COMMON_DEFECT_RETURN_COUNT = 2/2_UNCHANGED
 EARLY_ACTUAL_STATUS = NOT_RUN
 STEP3 = COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP
 THIRD_GENERIC_CORRECTION / COUNTER_RESET / STEP3_RERUN / STEP4 = 0 / 0 / 0 / 0
-CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE
-ONLY_POSSIBLE_FUTURE_CLASS = FRESH_LEVEL3_ROUTE_A_PROVIDERLESS_ONLY
+CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION_AT_20260825 = NONE
+CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = I00_AFTER_FRESH_EXPLICIT_STEP_START_PER_SECTION_0_6
+ONLY_POSSIBLE_FUTURE_CLASS_AT_20260825 = FRESH_LEVEL3_ROUTE_A_PROVIDERLESS_ONLY
+CURRENT_APPROVED_SUCCESSOR_CLASS = ROUTE_A_TYPED_CASE_FRAME_I00_I14
 PRIMARY_OUTCOME = ADMINISTRATIVE_ONLY
 PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
 AUTOMATIC_PROGRESSION = false
