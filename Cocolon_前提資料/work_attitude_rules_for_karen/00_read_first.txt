@@ -1,5 +1,5 @@
 work_attitude_rules_for_karen
-revision_date: 2026-08-16
+revision_date: 2026-08-20
 created_at: 2026-05-17 18:58:26 JST
 format: UTF-8 text / Notepad向け
 normative_status: CURRENT_ENTRY
@@ -41,10 +41,16 @@ non-Pro成果物は`UNTRUSTED_NOT_ADOPTED`として扱い、最後のPro verifie
 6. `09_work_start_checklist.txt`を今回の作業について埋める。
 7. `../07_latest_snapshot_diff.md`のEOF側最後の完全なcurrent sectionと、latest durable task handoffを確認する。ただしCycle001の次作業は`08_cycle001_current_state.md`から選び、07やhistorical Handoffの古い`next authority`から選ばない。
 8. GitHub上の`Cocolon` / `mashos-api` current head、対象path、指定predecessorを確認する。
-9. `manifest.json`のactivation mapから、今回必要な専門ruleだけを読む。
-10. EmlisAI / Piece / 分析構造 / CMEEを触る場合、`../current_structure/00_three_core_and_cmee_read_first.md`と対象mapを読み、商品目的、current route、owner path、保護境界、current / futureを固定する。
-11. 前提資料を地図、実ファイル・contract・test・logを現物として両方確認する。
-12. 出力直前に`99_integrated_paste_each_time.txt`を通す。
+9. Cocolonについて設計・実装・診断・監査・前提資料更新・仕様判断を行う前に、`../system_context/00_read_first.md`を読み、次を実行する。
+   - `python3 -m tools.cocolon_context prepare --workspace cmee_working --task cmee`
+   - same-refなら保存済みmanifest／output hashの検証結果を使う。
+   - changed-refならchanged path導出後に自動refreshし、stale contextを判断根拠へ使わない。
+   - `../system_context/current/cmee_working/task_context/cmee/full_text_read_order.md`の対象実ファイルを、判断前に実際に全文確認する。
+   - Mash様へmanifest確認、SHA比較、更新対象選択、refresh command組立てを戻さない。
+10. `manifest.json`のactivation mapから、今回必要な専門ruleだけを読む。
+11. EmlisAI / Piece / 分析構造 / CMEEを触る場合、`../current_structure/00_three_core_and_cmee_read_first.md`と対象mapを読み、商品目的、current route、owner path、保護境界、current / futureを固定する。
+12. 前提資料を地図、実ファイル・contract・test・logを現物として両方確認する。
+13. 出力直前に`99_integrated_paste_each_time.txt`を通す。
 
 # 2. current ownerと優先関係
 
@@ -65,6 +71,7 @@ non-Pro成果物は`UNTRUSTED_NOT_ADOPTED`として扱い、最後のPro verifie
 
 ## 技術正本
 
+- System Context standard entry: `../system_context/00_read_first.md`
 - GitHub reflection: `../11_cocolon_github_transport_and_session_continuity.md`
 - Work Python / pytest runtime: `../13_cocolon_work_test_runner_runtime_continuity.md`
 - durable recording: `../14_cocolon_continuous_work_recording_and_emergency_handoff.md`

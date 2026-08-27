@@ -1,0 +1,61 @@
+{
+  "actual_unincorporated_finding_count": 1,
+  "automatic_progression": false,
+  "blocking_unresolved_count": 0,
+  "closure_edge_count": 759989,
+  "completion_claim": "STEP4_TASK_CONTEXT_COMPILER_CMEE_ACTUAL_REVIEW_COMPLETE",
+  "completion_gates": {
+    "actual_unincorporated_finding_extracted": true,
+    "finding_used_for_cmee_review": true,
+    "full_text_read_order_generated": true,
+    "generated_output_remote_hash_verified": true,
+    "required_category_exact10_all_pass": true,
+    "required_category_exact10_recovered": true,
+    "selected_file_identity_verified": true,
+    "unresolved_visible": true
+  },
+  "context_fingerprint": "2089a46768e39662d5a514eb27864bbb9b03921c4d0ce35bad748b65efcafe47",
+  "input_sha256": {
+    "manual_overlay": null,
+    "publication_transport": "84a3c53e70f4e183ffdd1879657935903bbfea85df6beb2d41dfbac2d46ee709",
+    "step1_files": "f25068aa45dfdc702206666cfdc55ba4f7285de731f9f29e91b9faf1f33a508f",
+    "step1_manifest": "24a2a449099063a916041593c31b1d9dc25b5b621f00d5a982fa51ac0434f121",
+    "step2_manifest": "657a3c089329a16627036b1ecb14bfde2087a97eb86b58fa84503d2ea08ad107",
+    "step3_manifest": "b8a38ea09a5f07edf220a2f638db6eda5d2d891bd6c160e2e4e2a7537bdd87ae",
+    "task_profile": "f302580dac831b1171181b51be17395e03056975cec7345a92dc61c4f5783227",
+    "workspace_profiles": "3bfa65cb654b5ade1f10f4e95cc38f109deefbc93becca6d1cc99d1d46423b8d"
+  },
+  "output_sha256": {
+    "closure_edges.jsonl": "73ae840836af4cc0a706d0ba7fb21f5116c5af3a514e284052ae397feefb26ce",
+    "cmee_context_overview.md": "b7fda23174ecfb89641585c2691fce848b228f7cd12c001e4452e2731b4c4a5d",
+    "cmee_unincorporated_actual_findings.md": "eabcfcfb0b52e2a2586ede39b956f253bb3281d4fbe2c132b926e2bd3656c7f3",
+    "full_text_read_order.md": "8044971b6af94eac0aee94fc0bca3fc14632fe217820bfa32d988452dfcc6800",
+    "required_category_coverage.json": "cd2d9a4f17123b993ba5c6dc1944aa8aa34474f23deea40b428045dfd69180fe",
+    "selected_files.jsonl": "4524c98b71cf09b670784280a870491c83a1353d431fcc19724db973552fc278",
+    "unresolved_context.jsonl": "7071eb08794e1bf250f3c2ef7899ccaa9bd5eed138de2fcc490165f916a008a2"
+  },
+  "product_credit": 0,
+  "required_category_coverage": {
+    "all_nonzero": true,
+    "all_pass": true,
+    "expected_exact": 10,
+    "observed": 10
+  },
+  "schema_version": "cocolon.system_context.task_context_manifest.v1",
+  "selected_file_count": 2016,
+  "status": "STEP4_TASK_CONTEXT_COMPILER_CMEE_ACTUAL_REVIEW_COMPLETE",
+  "task": "cmee",
+  "workspace": "cmee_working",
+  "workspace_exact_refs": {
+    "Cocolon": {
+      "source_commit": "d068856e35086cd301c1eaf46b3e5cc27dc1f88c",
+      "source_tree": "130d51b6c46449aaf8f110145ff0a184e75cfb34",
+      "tracked_entry_count": 1593
+    },
+    "mashos-api": {
+      "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c",
+      "source_tree": "26d1d166f2d733afc1fed3313adb56ae9b60736c",
+      "tracked_entry_count": 2116
+    }
+  }
+}
