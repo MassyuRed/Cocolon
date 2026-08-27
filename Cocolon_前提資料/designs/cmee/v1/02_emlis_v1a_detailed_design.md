@@ -1189,3 +1189,21 @@ AUTOMATIC_PROGRESSION = FALSE
 ```
 
 Step 2のknown exact4 machine generationはStep 3 human language viability observationを代行しない。identity対象のfile bytes / manifest / product-causal behaviorを今後変更した場合、`EARLY_ACTUAL_STATUS`は引き続き`NOT_RUN`であり、fresh Step 3前に新identityを明示承認しなければならない。
+
+## 29. Route A v2 I01 — registered-disabled Japanese case-frame contract（2026-08-27）
+
+Route A v2 final design §5 / §20のI01をauthorityとし、typed Japanese case-frame realizerのprivate typeとclosed grammar registryだけを`REGISTERED_DISABLED`で追加した。既存meaning ownerを置換せず、request-localの`GroundedExpressionPlan`、`PredicateSenseSpec`、`JapaneseCaseFrameSpec`、`SourceLeafToken` / `SourceLeafGroup`、`SourceComplementPlan`、`ArgumentRealizationPlan`、`DiscourseReferenceStateRow`、`ClauseLinkPlan`、`PredicateMorphologyPlan`、`JapaneseClauseIR`、`LinearizedJapaneseClause`、`JapaneseLocalPreferenceProfile`を登録する。registry backing typeはatomic head、lexical family、complement license、classifier / functional token / modifier / quote delimiter、case particle、inflection / morphology、clause link、reference / zero / topic、local preferenceをそれぞれsole typed ownerとする。
+
+runtimeの`V2_GRAMMAR_INVENTORY_V1`はfinal designのcanonical literalとbyte-exactで、232 rows、13,811 UTF-8 bytes、SHA-256 `f071244e28baa5a824067ebfddf273bc4ad8f967d90ed5bd0bf9b9862a68a802`である。validatorはsense 17、frame 22、sense→frame license 22、head 22、lexical family 22、complement 8、sense-complement 22、source mode 5、classifier 5、functional token 3、modifier 3、quote delimiter 4、particle 42 / surface variant 59、inflection 6、morphology 22、link 10、reference 12、preference 7をexactに検査し、参照のnonunique、orphan、unlicensed rowをlinearization前にfail closedにする。旧`C01`はなく、corrected `CL05`を含む。
+
+I01ではregistryを用いたbehavior、source realization、linearization、body generationを実行しない。active `compile_stage1_response` facade / call chain、public response schema、subjective proposition public schema、API、DB、RN、persistence、production、provider、network、dependency、fallbackはすべてdelta 0である。N2 implementationは未開始で、次のI02はfresh explicit startを必要とする。
+
+```text
+ROUTE_A_V2_I01_PRIVATE_TYPE_AND_REGISTRY = REGISTERED_DISABLED
+GRAMMAR_INVENTORY_ROWS / BYTES / SHA256 = 232 / 13811 / f071244e28baa5a824067ebfddf273bc4ad8f967d90ed5bd0bf9b9862a68a802
+ORPHAN / UNLICENSED / NONUNIQUE_OWNER = 0 / 0 / 0
+ACTIVE_FACADE / BODY_GENERATION / PUBLIC_SCHEMA_EFFECT = 0 / 0 / 0
+STRUCTURE_MAP_DELTA_NONE = TRUE_REGISTERED_DISABLED_PRIVATE_OWNER_NO_ACTIVE_ROUTE_OR_CALL_CHAIN_CHANGE
+I02 = NOT_STARTED_REQUIRES_FRESH_EXPLICIT_START
+AUTOMATIC_PROGRESSION = FALSE
+```

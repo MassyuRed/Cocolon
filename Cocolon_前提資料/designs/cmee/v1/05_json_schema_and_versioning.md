@@ -3141,3 +3141,46 @@ manifest exact9は次をexact orderで持つ。
 policy behavior digestはsuppression feature matrix `2^13 = 8,192` rowsと、visibility matrix `2^12 × Reception act exact7 = 28,672` rowsをcanonical orderでfresh再計算する。digest expected / fresh mismatch、manifest名 / count / order drift、allowlist外product-causal callableはnamed identity STOPである。
 
 このidentityはStep 3 earlyと将来final cutoverのbyte-exact共通条件であり、Product PASS、public schema activation、API / DB field、persistence contractではない。現在はregistered-disabledで、active v1 serializer / runtime outputへdelta 0、`EARLY_ACTUAL_STATUS=NOT_RUN`、candidate ready false、automatic progression falseである。
+
+## 27. Route A v2 I01 — private grammar schema / registry registration（2026-08-27）
+
+I01はprivate source boundaryのclosed enumを、`SourceLeafExtent` exact2、`SourceLeafCardinality` exact2、`SourceSentenceShape` exact2、`SourceFinalTerminalClass` exact4、`SourceQuoteTopology` exact4、`SourceLineBreakShape` exact3、`SourceRealizationMode` exact5として登録した。`SourceLeafToken`のfield順は次のexact13である。
+
+```text
+leaf_ref
+semantic_ref
+source_envelope_ref
+evidence_ref
+extent
+raw_utf8_start
+raw_utf8_end
+payload_utf8
+sentence_shape
+final_terminal_class
+quote_topology
+line_break_shape
+derivation
+```
+
+`payload_utf8`は`repr=false`で、log、public serialization、persistent storageを持たない。source bytesをsemantic selectorとして扱わず、request-local private valueのまま保持する。
+
+grammar inventoryはfinal designのmarker外・Markdown表示indent外のpayloadを、表示順、UTF-8、LF、terminal LF exact1、Unicode normalizationなし、trimなしでcanonicalizeする。runtime登録値は232 rows / 13,811 bytes / SHA-256 `f071244e28baa5a824067ebfddf273bc4ad8f967d90ed5bd0bf9b9862a68a802`と一致する。anti-template value invariantはraw source / suffix / substring / regex、case / fixture ID・family、input hash、expected text、finished phrase / clause / sentence、prior output、human verdict、private-body identityをfield、selector、registry valueから拒否する。文法上のframe、slot、particle IDはcase-IDとして誤拒否しない。
+
+final logical registry exact28のうち、I01が変更するseedは次のexact3だけである。
+
+```text
+CMEE_STAGE1_COMPOSITION_POLICY_VERSION = cocolon.emlis.stage1.discourse_composition.v2
+CMEE_STAGE1_NORMAL_FORM_VERSION = cocolon.cmee.v1a.emlis_stage1_normal_form.v2
+CMEE_STAGE1_CONSTRUCTION_GRAMMAR_POLICY_VERSION = cocolon.emlis.stage1.grounded_construction_grammar.v2
+```
+
+active public `CMEE_STAGE1_RESPONSE_SCHEMA_VERSION`とtrace extension constantはv1のままで、public response / subjective proposition schemaをrelabellingしない。final response v2、final subjective proposition v2、owner ref等の既登録logical identityもI01では変更しない。
+
+```text
+FINAL_V2_GRAMMAR_SCHEMA_REGISTRY = EXACT1_REGISTERED_DISABLED
+FINAL_LOGICAL_ID_REGISTRY = EXACT28_SINGLE_OWNER
+VERSION_SEED_DELTA = EXACT3_V1_TO_V2
+ACTIVE_V1_RESPONSE_RELABEL = 0
+PUBLIC_SERIALIZER / LOG / PERSISTENCE / SCHEMA_EFFECT = 0 / 0 / 0 / 0
+AUTOMATIC_PROGRESSION = FALSE
+```
