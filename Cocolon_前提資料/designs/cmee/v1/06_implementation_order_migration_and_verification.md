@@ -1,19 +1,19 @@
 # CMEE V1 — Implementation Order / Migration / Verification 詳細設計
 
 - document id: `cocolon.cmee.v1.implementation_migration_verification.detailed_design`
-- revision date: `2026-08-26 JST`
-- lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
+- revision date: `2026-08-27 JST`
+- lifecycle: `MASH_APPROVED_FINAL_DESIGN_ROUTE_OWNER_IMPLEMENTATION_NOT_STARTED`
 - absolute implementation rule: `BOUND_TO_PARENT_FINAL_DESIGN_SECTION_0_3`
-- current implementation state: `STAGE1_ADDITIONAL_CORRECTION_STEP3_2_SUCCESSOR_READY_STEP3_3_NOT_STARTED`
-- current authorized next implementation: `STEP3_3A_FRESH_LIBRARY_ACQUIRE_AND_ATTEMPT_PREFLIGHT_ONLY`
-- only admissible next implementation class: `PRESERVED_ROUTE_A_BOUNDED_UNIT_STEP3_3_THROUGH_PRODUCT_READ`
+- current implementation state: `PREDECESSOR_STEP3_TERMINAL_CLOSED_SUCCESSOR_FINAL_DESIGN_APPROVED_NOT_STARTED`
+- current authorized next implementation: `I00_AFTER_FRESH_EXPLICIT_STEP_START`
+- only admissible next implementation class: `APPROVED_ROUTE_A_TYPED_CASE_FRAME_SUCCESSOR_I00_I14`
 - Stage 1 language route: `ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER / SOLE_CURRENT_AND_FUTURE_ROUTE`
 - external generative AI / remote provider / body send: `PROHIBITED / 0 / 0`
 - retired provider investigation: `REMOVED_FROM_CURRENT_TREE_GIT_HISTORY_ONLY`
 - automatic progression: `false`
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
-- Stage 1 additional correction final body: `PRO_CONFIRMED_INTEGRATION_SOURCE / ALL_STEP_FORWARD_RESUMABILITY_CORRECTED / EARLY_ACTUAL_NOT_RUN`
-- Stage 1 additional correction order owner: `THIS_FILE_LATEST_SECTION_ROUTING_TO_FINAL_BODY_SECTION_13`
+- Stage 1 current final design: `MASH_APPROVED_TYPED_CASE_FRAME_V2_WITH_SESSION_SAFE_ORDER_I00_I14`
+- Stage 1 current order owner: `THIS_FILE_LATEST_SECTION_ROUTING_TO_FINAL_DESIGN_SECTION_20`
 
 ---
 
@@ -4321,3 +4321,30 @@ NEXT_REQUIRED_ACTION = FRESH_MASH_LEVEL_3_ROUTE_A_ONLY_PRODUCT_DESIGN_DECISION
 ```
 
 このproofはactive master / auxiliaryのcleanupとfrozen inputの明示retentionだけを所有する。input保持はStep 7、Step 4.1、第三generic correction、counter resetまたは同じStep 3再実行の開始権限を生成しない。Step 3はCLEARではないためStep 4.1へ進まず、本bounded unitはterminal closureで停止する。
+
+## 63. Route A typed Japanese case-frame realizer v2 final design / session-safe order routing（2026-08-27）
+
+Mashのcurrent直接判断により、§62のpredecessor terminalを再開せず、fresh sibling successor exact1のfinal designとsession-safe実装順を承認した。Pro delta final checkは未実施のままであり、Pro CLEARを主張しない。Mash decisionは旧Pro-delta approval prerequisiteだけをsupersedeし、実装後のPro early／formal readとMash Product Readを維持する。
+
+[Final technical design and implementation order](../Cocolon_CMEE_Stage1_RouteA_TypedJapaneseCaseFrameRealizerV2_UltraFinalTechnicalDesignAndImplementationOrder_20260827.md)
+
+    FINAL_DOCUMENT_ID = CMEE_STAGE1_ROUTE_A_TYPED_JAPANESE_CASE_FRAME_REALIZER_V2_ULTRA_FINAL_TECHNICAL_DESIGN_AND_IMPLEMENTATION_ORDER_20260827
+    SOURCE_CORRECTED_V2_SHA256 = 4c71c49577e4e95cbc735eafeacc301cabcc4b2c8d3dc4544006dcdd56a9b0de
+    FINAL_DOCUMENT_SHA256 = da20918280ccb4bcaba7ee112dca454e447fdcfb6432891e3c7437d29b311cbd
+    MASH_DECISION_ID = COCOLON_CMEE_ROUTE_A_V2_FINAL_DESIGN_AND_SESSION_ORDER_APPROVAL_20260827
+    MASH_FINAL_DESIGN_APPROVAL_SHA256 = a4052f3bb4744107b7740f219733275679dbc38fecbb79fb8d292bcfbf6044eb
+    SESSION_SAFE_IMPLEMENTATION_ORDER = I00_I14_EXACT15
+    SESSION_SAFE_IMPLEMENTATION_ORDER_SHA256 = 0d6fb8cb123669d37d4a6801225f9995ea6ff3765900c6fb460e7592f1bba7b6
+    PRO_DELTA_FINAL_CHECK / READ / REREAD = NOT_RUN / 0 / 0
+    PRO_VERIFIED_CURRENT_BODY_CLEAR = false
+    PREDECESSOR_TERMINAL = COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP
+    PREDECESSOR_COUNTER = 2_OF_2_IMMUTABLE
+    RETAINED_INPUT_REBIND = SUCCESSOR_EARLY_LANGUAGE_SET_EXACT8_EXACT1_ONLY
+    IMPLEMENTATION_EXECUTION = NOT_STARTED
+    CURRENT_AUTHORIZED_NEXT_STEP = I00_AFTER_FRESH_EXPLICIT_STEP_START
+    STEP_4_1 / PRODUCT_PASS / ACTIVATION = 0 / 0 / 0
+    AUTOMATIC_PROGRESSION = false
+
+Final document §20がStep 0–14の目的、allowed path subset、verification、STOP、partial-state recovery、next Stepを所有する。本fileは各StepのCocolon body-free checkpoint ownerであり、runtime側existing handoffと同じ STEP_CHECKPOINT_ID／runtime headをbindする。runtime sideだけがremote postverifiedされた場合は同じStepのCocolon syncだけを再開し、run／test／readを再実行しない。
+
+今回のpublication exact4と将来実装exact12を混同しない。今回の変更はfinal design new exact1、00、06、04のdocs exact4だけで、mashos-api、source、test、runner、private body、API、DB、RN、production effectは0。System Context v1はnavigation-onlyであり更新不要。I00は別のfresh explicit Step-startまで開始しない。
