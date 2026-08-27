@@ -3184,3 +3184,41 @@ ACTIVE_V1_RESPONSE_RELABEL = 0
 PUBLIC_SERIALIZER / LOG / PERSISTENCE / SCHEMA_EFFECT = 0 / 0 / 0 / 0
 AUTOMATIC_PROGRESSION = FALSE
 ```
+
+## 28. Route A v2 I02 — private source and frame selection schema（2026-08-27）
+
+I02はI01で登録済みのprivate typeを用い、new public JSON field、serializer、log、persistence、DB / API / RN schemaを追加しない。runtime-only `JapaneseCaseFrameKey`は次のsemantic fieldsだけを持つ。
+
+```text
+sentence_job
+semantic_clause_kind
+subjective_content_kind
+subjective_predication_kind
+subjective_semantic_sense
+grounded_predicate_kind
+required_argument_roles
+admitted_relation_operator
+polarity
+modality
+time_scope
+speaker_requirement
+zero_subject_eligibility
+complement_requirement
+```
+
+raw source / suffix / regex、source shape、rendered surface、output history、case / fixture ID、input hash、expected text、human verdict、private body identityは0である。frame selectorはfrozen sense / frame / morphology / complement registryだけからexact1を返し、head selectorはselected frame refから別のexact1を返す。head candidate fork、hash tie-break、lexicographic fallbackは0である。
+
+source boundary tableはprivate enum shape predicate exact192、group cardinality exact2、mode×cardinality exact10、quote delimiter exact4の合計exact208である。SourceLeaf payloadはbytesのまま`repr=false`で、runtime groupはordered leaf refsだけを保存する。SourceComplementPlanはmode、group、complement rule、ordered delimiter refs、optional classifier / coordinator、case slot refだけを持ち、source text、terminal、finished phraseを保存しない。ArgumentRealizationPlanはframe / slot / semantic / particle / provenanceだけを持つ。
+
+I02後のtransitive product-causal AST identityは`7e829de6cc80919d0cd760e1679ee6ac1f4d06b75edafa41133188767fa8a9b0`、whole-file integration identityは`020980e7352de0bff7ceaafc82aacb8e657cd9af3a8ab10b703f5830857dea01`である。これらはI02 postimageのbody-free machine identityであり、final N2 freezeではない。I03 / I04でbehavior ownerを追加し、I05でfull public proof後にfinal freezeする。active response schema version、compile facade、emlis_v1a call chain、runner blobはunchangedである。
+
+```text
+ROUTE_A_V2_I02_PRIVATE_SCHEMA = IMPLEMENTED_DISABLED
+SOURCE_BOUNDARY_ROWS = 208
+JAPANESE_CASE_FRAME_KEY_FORBIDDEN_SELECTOR_FIELDS = 0
+FRAME / HEAD / REQUIRED_SLOT_PARTICLE_OWNER = 22 / 22 / 42
+PUBLIC_JSON / SERIALIZER / LOG / PERSISTENCE_DELTA = 0 / 0 / 0 / 0
+LANGUAGE_CORE_IDENTITY_FINAL_FREEZE = I05_NOT_CLAIMED
+I03 = NOT_STARTED_REQUIRES_FRESH_EXPLICIT_START
+AUTOMATIC_PROGRESSION = FALSE
+```
