@@ -1,20 +1,20 @@
 ---
 doc_id: cocolon_meaning_experience_engine_current_structure
 title: "CMEE — Current Structure"
-revision_date: "2026-08-25 JST"
+revision_date: "2026-08-27 JST"
 document_role: "CMEE_CURRENT_STRUCTURE_AND_PRODUCT_QUALITY_ROUTE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
-design_state: "STEP10_PLUS_KAREN_DERIVED_PLUS_STAGE1_ADDITIONAL_CORRECTION_PRO_CONFIRMED_RECORD"
-detailed_design_state: "DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE_DIRECT_PRODUCT_QUALITY_ONLY"
+design_state: "MASH_APPROVED_ROUTE_A_TYPED_CASE_FRAME_V2_FINAL_DESIGN_WITH_SESSION_SAFE_ORDER"
+detailed_design_state: "FINAL_DESIGN_APPROVED_IMPLEMENTATION_NOT_STARTED"
 stage1_language_route: "ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER_ONLY"
 external_generative_ai_allowed: false
 external_body_send: 0
 retired_provider_investigation: "REMOVED_FROM_CURRENT_TREE_GIT_HISTORY_ONLY"
-current_authorized_next_work: "NONE"
-only_possible_future_implementation_class: "FRESH_LEVEL3_ROUTE_A_PROVIDERLESS_ONLY"
-implementation_state: "DRAFT_WIP_DISABLED"
-candidate_state: "V2_PRODUCT_REJECTED_ADDITIONAL_CORRECTION_DESIGN_ONLY"
+current_authorized_next_work: "I00_AFTER_FRESH_EXPLICIT_STEP_START"
+only_possible_future_implementation_class: "APPROVED_ROUTE_A_TYPED_CASE_FRAME_SUCCESSOR_I00_I14"
+implementation_state: "PREDECESSOR_DRAFT_WIP_DISABLED_TERMINAL / SUCCESSOR_NOT_STARTED"
+candidate_state: "FINAL_DESIGN_APPROVED_SUCCESSOR_NOT_GENERATED"
 candidate_ready: false
 product_read_state: "EVALUATED_FAIL_QUALITY_INSUFFICIENT"
 production_runtime_effect: 0
@@ -45,10 +45,11 @@ Current state:
     mashos-api Draft PR #3 = STEP7_V2_MACHINE_GREEN_DISABLED @ b7865574ebe08c801f6a2c779daf9148159cf8b0
     implementation state = DRAFT_WIP_DISABLED
     current Product Read = EVALUATED_FAIL_QUALITY_INSUFFICIENT
-    additional correction final body = PRO_CONFIRMED_DOCS_ONLY / NOT_IMPLEMENTED
+    additional correction final body = HISTORICAL_PREDECESSOR
+    typed case-frame v2 final design = MASH_APPROVED / NOT_IMPLEMENTED
     candidate ready = false / product credit 0
-    current authorized next work = NONE_PENDING_MASH_LEVEL3_IMPLEMENTATION_DECISION
-    only admissible future class = ONE_BOUNDED_ACTUAL_EMLIS_STAGE1_ARTIFACT_IMPROVEMENT_UNIT
+    current authorized next work = I00_AFTER_FRESH_EXPLICIT_STEP_START
+    only admissible future class = APPROVED_ROUTE_A_SUCCESSOR_STEP_0_TO_14_EXACT1_PER_SESSION
     not production connected
     not Cycle001 proven
     Piece not connected
@@ -629,3 +630,28 @@ PRIMARY_OUTCOME = ADMINISTRATIVE_ONLY
 PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
 AUTOMATIC_PROGRESSION = false
 ```
+
+## 25. Route A typed Japanese case-frame realizer v2 final design（2026-08-27 Mash最終承認）
+
+§24のRoute A-only境界、§62相当のpredecessor terminal、counter 2/2を保持したまま、Mashはfresh sibling successor design exact1を最終承認した。corrected V2へPro delta CLEARが出たとは扱わない。
+
+design record:
+[Route A Typed Japanese Case-Frame Realizer v2 — Final Technical Design and Implementation Order](../designs/cmee/Cocolon_CMEE_Stage1_RouteA_TypedJapaneseCaseFrameRealizerV2_UltraFinalTechnicalDesignAndImplementationOrder_20260827.md)
+
+    FINAL_DOCUMENT_ID = CMEE_STAGE1_ROUTE_A_TYPED_JAPANESE_CASE_FRAME_REALIZER_V2_ULTRA_FINAL_TECHNICAL_DESIGN_AND_IMPLEMENTATION_ORDER_20260827
+    SOURCE_CORRECTED_V2_SHA256 = 4c71c49577e4e95cbc735eafeacc301cabcc4b2c8d3dc4544006dcdd56a9b0de
+    FINAL_DOCUMENT_SHA256 = da20918280ccb4bcaba7ee112dca454e447fdcfb6432891e3c7437d29b311cbd
+    MASH_DECISION_ID = COCOLON_CMEE_ROUTE_A_V2_FINAL_DESIGN_AND_SESSION_ORDER_APPROVAL_20260827
+    SESSION_SAFE_ORDER / SHA256 = I00_I14_EXACT15 / 0d6fb8cb123669d37d4a6801225f9995ea6ff3765900c6fb460e7592f1bba7b6
+    PRO_DELTA_FINAL_CHECK / READ / REREAD = NOT_RUN / 0 / 0
+    PRO_VERIFIED_CURRENT_BODY_CLEAR = false
+    DESIGN_APPROVAL = COMPLETE
+    IMPLEMENTATION_EXECUTION = NOT_STARTED
+    CURRENT_AUTHORIZED_NEXT_STEP = I00_AFTER_FRESH_EXPLICIT_STEP_START
+    PREDECESSOR_COUNTER = 2_OF_2_IMMUTABLE
+    STEP_4_1 / PRODUCT_PASS / ACTIVATION = 0 / 0 / 0
+    AUTOMATIC_PROGRESSION = false
+
+Step 0–14は一つのbounded product-quality unitのsession checkpointで、独立product outcomeではない。各Stepはruntime→Cocolonのremote postverify後にだけsession-switch-safeとなり、次StepはMashのfresh explicit startを必要とする。retained inputはsuccessor early exact1へ限定rebind済みだが、Step 6より前の利用0、run／retry／rerunは1／0／0である。
+
+今回のeffectはCocolon docs exact4だけである。runtime、source、test、runner、API、DB、RN、persistence、private generation、activation、production effectは0。System Context v1はnavigation-onlyのため変更しない。
