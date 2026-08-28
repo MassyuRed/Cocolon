@@ -699,3 +699,20 @@ CURRENT_IMPLEMENTATION_AUTHORITY
 ~~~
 
 今回のeffectはCocolon docs exact4だけである。actual Emlis runtime構造は未変更なので`current_structure/01_emlis_ai_current_structure.md`は変更しない。mashos-api、System Context PR #37、runtime source、test、runner、API、DB、RN、persistence、private generation、merge、activation、production effectは0である。
+
+## 27. Emlis input-specific meaning decision — IM00 current implementation state（2026-08-28）
+
+Mashのfresh Level 3 Route A providerless-only指示により、final design §17のIM00 exact1をmashos-api Draft PR #3へ実装した。runtime headは`2c607f001e3524de67c6c276d0140c1b8b464584`でremote postverify済み、changed pathsはcore-private `contracts.py`、contract test、body-free handoffのexact3である。
+
+current actualへ追加された構造は次に限定される。
+
+- 既存`SubjectiveDepthClass` exact3を再利用するForeground Scope contract。
+- basis exact5、relation exact4、compatibility axis exact10、derivation state exact4とsource／Layer 1 bound validator。
+- `MeaningReadingOperation` exact7のtyped seam。
+- `WholeReadingConsequenceCode` exact7、content-bearing semantic signature、validation context、row validator。
+
+IM00のmeaning-side validatorはtyped Grounded Viewをupstream trust boundaryとし、Reception、affect、style、temperature、subjective binding、visible line、surfaceを参照しない。focused＋identity`15/15`、boundary`5/5`、compileall／diff-checkはPASSである。
+
+response pipelineのpre-meaning／allowed Reception envelope型分離とGrounded View→`derive_foreground_scope_closed()`実接続はまだない。compatible union／competing LIMITED／zero-object STOPはIM01、Required Difference issuerはIM02、operation applicabilityはIM03のownerである。このため`current_structure/01_emlis_ai_current_structure.md`、response、composition、runner、vertical、API、DB、RN、persistence、activation、productionは変更していない。
+
+IM00はnonterminal checkpointでProduct／technical credit 0、full public regressionはIM07へdeferredである。依存順上の次はIM01で正しいが、`IM01_EXECUTION=NOT_STARTED`、fresh Mash explicit start必須、automatic progressionはfalseである。旧Route A v2 N3 identity、terminal、counter 2/2はimmutableのまま保持する。

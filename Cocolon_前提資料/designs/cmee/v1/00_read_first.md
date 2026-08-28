@@ -286,6 +286,20 @@ Proの最終商品レビューは、前回必須修正10/10の反映を確認し
 
 本design candidateは上流の入力固有meaning decisionを所有する。§0.6のRoute A typed Japanese case-frame realizer v2は、決定済みmeaningを自然な日本語へ写す下流sole-owner境界として保持し、meaningを再選択しない。今回のeffectはCocolon docs exact4だけで、runtime source、test、mashos-api、System Context、private generation、productionを変更しない。
 
+### 0.8 2026-08-28 Emlis input-specific meaning decision IM00 checkpoint
+
+Mashのfresh Level 3 Route A providerless-only指示により、final document §17のIM00 exact1だけを実装した。mashos-api Draft PR #3 head `2c607f001e3524de67c6c276d0140c1b8b464584`でremote postverify済みである。
+
+- 既存`SubjectiveDepthClass` exact3を再利用した。
+- Foreground Scope basis exact5、relation exact4、compatibility axis exact10、derivation state exact4とclosed validatorをcore-private contractへ実装した。
+- `MeaningReadingOperation` exact7はtyped seamだけ、`WholeReadingConsequenceCode` exact7はsemantic signature／context／row validatorまでを実装した。
+- typed `GroundedObservationPlan`／`GroundedMeaningGraph`をIM00のupstream Grounded View trust boundaryとし、source／Layer 1／projectionをlocal deterministicに照合する。Reception、affect、style、surface、visible line、subjective bindingからの逆流は0である。
+- actual `derive_foreground_scope_closed()` pipeline接続とcompatible union／competing LIMITED／zero-object STOPはIM01、Required Difference issuerはIM02、operation applicabilityはIM03へ留保した。
+
+focused IM00＋current identityは`15/15 PASS`、boundaryは`5/5 PASS`、compileall／diff-checkはPASSである。旧Route A v2 N3 runner identity、terminal、counter 2/2はimmutableのまま、full public regressionはfinal designどおりIM07へ留保し、IM00では主張しない。
+
+IM00はnonterminal session checkpointであり、Product／technical credit、Product Read、acceptance、activation、mergeは0である。依存順上の次はIM01で正しいが、IM01は未開始で、fresh Mash explicit startなしに自動進行しない。
+
 ## 1. 読む順 exact11
 
 1. 本file

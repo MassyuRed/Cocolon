@@ -5919,3 +5919,69 @@ IMPLEMENTATION_ORDER_ROUTING_OWNER
 Foreground Scopeは許可basis exact5のcompatible unionで、meaningを選ぶ第二selectorではない。whole-reading consequenceはsource、Foreground Scope、Required Difference、closed counterfactualへbindしたexact7 codeだけを発行する。Reception、affect、style、surface、fixture、ID／hash／列挙順からの逆流は0である。
 
 今回のeffectはCocolon docs exact4だけである。mashos-api、System Context PR #37、runtime source、test、runner、API、DB、RN、persistence、private body、generation、merge、productionは変更しない。remote postverify成立後もimplementationは`NOT_STARTED`、automatic progressionはfalseのままfresh Mash判断を待つ。
+
+---
+
+## 81. Emlis input-specific meaning decision / IM00 canonical checkpoint（2026-08-28）
+
+Mashのfresh Level 3 Route A providerless-only指示により、final design §17のIM00 exact1だけを実装した。これはIM00–IM09のnonseparable bounded unit内のsession checkpointであり、独立したProduct成果、technical creditまたはterminal completionではない。旧Route A v2 fresh siblingのterminalとcommon-defect return counter 2/2はimmutableであり、第三generic correction、retry、rerunまたはcounter resetではない。
+
+~~~text
+CHECKPOINT_ID = CMEE_EMLIS_INPUT_SPECIFIC_MEANING_IM00_CONTRACT_20260828_V1
+FINAL_DESIGN_ID = Cocolon_CMEE_Stage1_Emlis_InputSpecificMeaningDecision_KarenDesigned_FinalTechnicalDesignAndImplementationOrder_20260828
+FINAL_DESIGN_SHA256 = 9690c3f027608825406df7bd5d3b51cb6834b20e07e36bf837b1e309b2daef18
+IMPLEMENTATION_STEP = IM00
+STEP_STATE = COMPLETE_NONTERMINAL_CHECKPOINT
+
+RUNTIME_REPOSITORY / PULL_REQUEST = MassyuRed/mashos-api / 3
+RUNTIME_PRE_HEAD = 4da981d69fe00e2798cf84fb68b10b239dc41c77
+RUNTIME_FINAL_HEAD = 2c607f001e3524de67c6c276d0140c1b8b464584_REMOTE_POSTVERIFIED
+RUNTIME_CHANGED_PATHS_EXACT3 = contracts.py,test_cmee_v1a_i1sx_contracts.py,CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md
+RUNTIME_BLOBS_EXACT3 = 5926d461e68f645a41431735f30dd72c8140e32e,4c97c11e6c13341a83e403e57d0bd73ae3a4b9f0,2b37fe70fa1621d0f0028084fb0394992f2b821e
+
+DESIGN_REPOSITORY / PULL_REQUEST = MassyuRed/Cocolon / 30
+DESIGN_PRE_HEAD = 2ad23a8d441cbab4d9eff27bae5ad0fe452beddd
+DESIGN_FINAL_HEAD = THIS_COMMIT_RESOLVED_BY_FRESH_REMOTE_POSTVERIFY
+DESIGN_CHANGED_PATHS_EXACT3 = v1/00_read_first.md,v1/06_implementation_order_migration_and_verification.md,current_structure/04_cmee_current_structure.md
+
+PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
+PRODUCT_READ / CANDIDATE_ACCEPTANCE / ACTIVATION / MERGE = 0 / 0 / 0 / 0
+AUTOMATIC_RETRY / AUTOMATIC_PROGRESSION = 0 / 0
+~~~
+
+IM00はcore-private contractへ、既存`SubjectiveDepthClass` exact3、Foreground Scope basis exact5／relation exact4／compatibility axis exact10／derivation state exact4、`ForegroundScopeBasisRow`／`ForegroundScope`／`ForegroundScopeDerivation`とclosed validator、`MeaningReadingOperation` exact7 typed seam、`WholeReadingConsequenceCode` exact7／semantic signature／validation context／row validatorを実装した。
+
+IM00のupstream trust boundaryはtyped `GroundedObservationPlan`／`GroundedMeaningGraph`をGrounded View authorityとして受ける位置である。admitted sourceはsource ownerのfreeze／evidence／owner validatorを通し、plan、graph、Layer 1 candidate、MeaningField、contribution、projectionの意味側構造をlocal deterministicに照合する。contracts内private raw parser複製、response／Reception builder call、Reception／affect／stance／style／temperature／subjective binding／visible line／surfaceからの逆流は0である。
+
+actual Grounded View→`derive_foreground_scope_closed()`接続、compatible canonical union、material competing LIMITED、zero-object-only STOPはIM01へ、Required Difference／counterfactual mutation actual issuerはIM02へ、reading operation applicability／enumerationはIM03へ留保した。response、composition、`emlis_v1a.py`、vertical test、runner、production routeは変更していない。
+
+~~~text
+PRIVATE_BEFORE_OWNER_ALIAS = SUBJECTIVE_MEANING_PLANNER_IM00_BEFORE_EXACT8_OWNER_PRIVATE_20260828_V1
+PRIVATE_BEFORE_COUNT = 8
+PRIVATE_BEFORE_PACKET_SHA256 = 2efbfd007dc3497a931b1737d78ecf54731abac7e541cf63e32a37366d4f10c4
+PRIVATE_BEFORE_PACKET_BYTES / MODE / NLINK = 17028 / 0600 / 1
+PRIVATE_BEFORE_READBACK = PASS
+PRIVATE_BODY / PER_CASE_VALUE / RAW_INPUT_PUBLICATION = 0 / 0 / 0
+
+FOCUSED_IM00_CONTRACT_SUITE = PASS_13_OF_13
+CURRENT_RUNTIME_AND_LANGUAGE_IDENTITY_TESTS = PASS_2_OF_2
+COMBINED_TARGETED = PASS_15_OF_15
+THREE_CORE_BOUNDARY = PASS_5_OF_5
+COMPILEALL / GIT_DIFF_CHECK = PASS / PASS
+RECEPTION_BACKFLOW_REACHABILITY = 0
+PERMISSION_OUTSIDE_ALLOWLIST = 0
+
+HISTORICAL_N3_RUNNER_IDENTITY = FROZEN_UNCHANGED
+NONREQUIRED_FULL_DISCOVERY_PROBE = EXPECTED_HISTORICAL_N3_IDENTITY_SEAL_STOP_AFTER_175_OTHER_TESTS_PASS
+FULL_PUBLIC_REGRESSION = DEFERRED_TO_IM07_NOT_CLAIMED_AT_IM00
+PERSISTED_RUNNER_IDENTITY_REBIND / TEST_SKIP / GUARD_BYPASS = 0 / 0 / 0
+~~~
+
+System Context PR #37、public API、DB、RN、persistence、provider、network inference、fallback、external cost、production activation、ready、mergeへのeffectは0である。依存順上の次checkpointはIM01で正しいが、今回authorityから自動開始しない。
+
+~~~text
+IM01_EXECUTION = NOT_STARTED
+NEXT_DEPENDENCY = IM01
+IM01_START_AUTHORITY = FRESH_MASH_EXPLICIT_START_REQUIRED
+CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_IM00
+~~~
