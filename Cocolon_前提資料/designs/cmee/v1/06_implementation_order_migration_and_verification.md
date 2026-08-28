@@ -5864,3 +5864,58 @@ SAFE_SESSION_SWITCH = false_until_full_fresh_sibling_cleanup_proof_dual_remote_p
 ```
 
 final decision pairのdual remote postverify後、fresh unitのactive input・private master・known-only auxiliaryをLibrary Trashへ移動し、明示allowlistのローカル作業コピーを削除してremaining 0を検証した。Library Trashは復元可能であり物理消去は主張しない。machineとUltraがCLEARでもProがCOMMON_DEFECTのためI09条件は成立せず、本cleanup proof pairのdual remote postverify後は自動進行せずfresh authority decisionを待つ。
+
+## 80. Emlis input-specific meaning decision final design candidate / IM00–IM10 routing（2026-08-28）
+
+§79のRoute A v2 fresh sibling terminal、Pro `COMMON_DEFECT`、candidate acceptance false、counter 2/2、implementation authority exhaustedをimmutable predecessorとして保持する。Mashの今回指示は、Ultra修正版に対するPro最終商品レビューを確認し、残るtechnical handoff exact1を閉じた最終設計候補と実装順をCocolon GitHubへdocs-onlyで反映するauthorityである。runtime実装、generation、Product Read、activation、I09の開始authorityではない。
+
+final design candidate:
+[Emlis Input-Specific Meaning Decision — Final Technical Design and Implementation Order](../Cocolon_CMEE_Stage1_Emlis_InputSpecificMeaningDecision_KarenDesigned_FinalTechnicalDesignAndImplementationOrder_20260828.md)
+
+~~~text
+FINAL_DOCUMENT_ID = Cocolon_CMEE_Stage1_Emlis_InputSpecificMeaningDecision_KarenDesigned_FinalTechnicalDesignAndImplementationOrder_20260828
+INTERMEDIATE_REVISION_SHA256 = 0bc64a78c2ce092dec1ca86fb91050402745c00ffaf1c2b198d2b83f5f0e1a51
+PRO_FINAL_PRODUCT_REVIEW_SHA256 = 7dbaf221244c840f376d49b978df4fdab375f1c4f7f7ff4cbcfc25be712d0cec
+FINAL_DOCUMENT_SHA256 = 9690c3f027608825406df7bd5d3b51cb6834b20e07e36bf837b1e309b2daef18
+PRO_FINAL_PRODUCT_REVIEW = PASS
+PREVIOUS_REQUIRED_CORRECTIONS = 10_OF_10_REFLECTED
+DESIGN_DIRECTION = APPROVED_UNCHANGED
+CANONICAL_ADOPTION = READY_FOR_MASH_DECISION
+REVISION_STATE = PRO_FINAL_PRODUCT_REVIEW_PASSED
+TECHNICAL_HANDOFF_REMAINING = EXACT0
+FOREGROUND_SCOPE_CLOSED_DERIVATION = COMPLETE_IN_DESIGN
+WHOLE_READING_CONSEQUENCE_CLOSED_EXACT7 = COMPLETE_IN_DESIGN
+SUBJECTIVE_DEPTH_TYPE = SubjectiveDepthClass
+IMPLEMENTATION_ORDER = IM00_IM10_EXACT11
+IMPLEMENTATION_EXECUTION = NOT_STARTED
+CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE
+NEXT_REQUIRED_ACTION = FRESH_MASH_LEVEL_3_ROUTE_A_ONLY_DESIGN_ADOPTION_AND_IMPLEMENTATION_DECISION
+SOLE_ROUTE = ROUTE_A_PROVIDERLESS_ONLY
+EXTERNAL_AI / PROVIDER / NETWORK_INFERENCE / FALLBACK / COST = 0 / 0 / 0 / 0 / 0
+PRODUCT_READ / PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0 / 0
+ACTIVATION / I09 / PRODUCTION_EFFECT = 0 / 0 / 0
+PRIMARY_OUTCOME = ADMINISTRATIVE_ONLY
+AUTOMATIC_RETRY / AUTOMATIC_PROGRESSION = 0 / 0
+~~~
+
+implementation dependency orderはfinal document §17のIM00–IM10 exact11だけをcurrent candidate routingとする。既存common-defect counter 2/2はimmutableで、これは第三generic correction、旧Step 3 rerunまたはcounter resetではない。IM00はfresh Mash Level 3 authority後にだけ開始でき、IM00–IM09は一つのnonseparable bounded implementation unit、IM10はseparate formal human Product Read gateである。初回authorityがIM10までを明示的に含めない限りfresh gate authorityを必要とする。preflight、schema、validator、test、machine GREEN、Ultra read、Pro readを独立product outcomeへ昇格させず、PASSでもdisabled candidate acceptanceまでとする。
+
+owner boundaryは次へ閉じる。
+
+~~~text
+UPSTREAM_INPUT_SPECIFIC_MEANING_DESIGN_CANDIDATE
+  = final document §0–§18
+
+DOWNSTREAM_TYPED_JAPANESE_CASE_FRAME_OWNER
+  = 2026-08-27 Route A v2 final design §0–§20
+
+CURRENT_RUNTIME_OWNER
+  = ACTUAL_SOURCE_UNCHANGED
+
+IMPLEMENTATION_ORDER_ROUTING_OWNER
+  = THIS_06_LATEST_SECTION
+~~~
+
+Foreground Scopeは許可basis exact5のcompatible unionで、meaningを選ぶ第二selectorではない。whole-reading consequenceはsource、Foreground Scope、Required Difference、closed counterfactualへbindしたexact7 codeだけを発行する。Reception、affect、style、surface、fixture、ID／hash／列挙順からの逆流は0である。
+
+今回のeffectはCocolon docs exact4だけである。mashos-api、System Context PR #37、runtime source、test、runner、API、DB、RN、persistence、private body、generation、merge、productionは変更しない。remote postverify成立後もimplementationは`NOT_STARTED`、automatic progressionはfalseのままfresh Mash判断を待つ。

@@ -655,3 +655,47 @@ design record:
 Step 0–14は一つのbounded product-quality unitのsession checkpointで、独立product outcomeではない。各Stepはruntime→Cocolonのremote postverify後にだけsession-switch-safeとなり、次StepはMashのfresh explicit startを必要とする。retained inputはsuccessor early exact1へ限定rebind済みだが、Step 6より前の利用0、run／retry／rerunは1／0／0である。
 
 今回のeffectはCocolon docs exact4だけである。runtime、source、test、runner、API、DB、RN、persistence、private generation、activation、production effectは0。System Context v1はnavigation-onlyのため変更しない。
+
+## 26. Emlis input-specific meaning decision final design candidate（2026-08-28）
+
+§25のRoute A typed Japanese case-frame realizer v2は、決定済みmeaningを自然な日本語へ写すdownstream sole ownerとして保持する。§79相当のfresh sibling terminal、Pro `COMMON_DEFECT`、candidate acceptance false、counter 2/2を履歴として変更しない。
+
+Pro最終商品レビューはUltra修正版の前回必須修正10/10を確認して`PASS`とし、残るtechnical handoff exact1をclosed contractとstatus更新だけで閉じれば追加Pro商品レビューは不要とした。今回のfinal design candidateは、Foreground Scopeを第二selectorにしないclosed derivation、whole-reading consequence closed exact7、`SubjectiveDepthClass`、IM00–IM10 exact11を所有する。
+
+design record:
+[Emlis Input-Specific Meaning Decision — Final Technical Design and Implementation Order](../designs/cmee/Cocolon_CMEE_Stage1_Emlis_InputSpecificMeaningDecision_KarenDesigned_FinalTechnicalDesignAndImplementationOrder_20260828.md)
+
+    FINAL_DOCUMENT_ID = Cocolon_CMEE_Stage1_Emlis_InputSpecificMeaningDecision_KarenDesigned_FinalTechnicalDesignAndImplementationOrder_20260828
+    INTERMEDIATE_REVISION_SHA256 = 0bc64a78c2ce092dec1ca86fb91050402745c00ffaf1c2b198d2b83f5f0e1a51
+    PRO_FINAL_PRODUCT_REVIEW_SHA256 = 7dbaf221244c840f376d49b978df4fdab375f1c4f7f7ff4cbcfc25be712d0cec
+    FINAL_DOCUMENT_SHA256 = 9690c3f027608825406df7bd5d3b51cb6834b20e07e36bf837b1e309b2daef18
+    PRO_FINAL_PRODUCT_REVIEW = PASS
+    PREVIOUS_REQUIRED_CORRECTIONS = 10_OF_10_REFLECTED
+    CANONICAL_ADOPTION = READY_FOR_MASH_DECISION
+    REVISION_STATE = PRO_FINAL_PRODUCT_REVIEW_PASSED
+    TECHNICAL_HANDOFF_REMAINING = EXACT0
+    IMPLEMENTATION_ORDER = IM00_IM10_EXACT11
+    IMPLEMENTATION_EXECUTION = NOT_STARTED
+    CURRENT_AUTHORIZED_NEXT_STEP = NONE
+    NEXT = FRESH_MASH_LEVEL_3_ROUTE_A_ONLY_DESIGN_ADOPTION_AND_IMPLEMENTATION_DECISION
+    PRODUCT_READ / PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0 / 0
+    ACTIVATION / I09 / PRODUCTION_EFFECT = 0 / 0 / 0
+    AUTOMATIC_PROGRESSION = false
+
+current boundary:
+
+~~~text
+UPSTREAM_MEANING_DESIGN_CANDIDATE
+  = 2026-08-28 input-specific meaning decision final document
+
+DOWNSTREAM_REALIZER_DESIGN_OWNER
+  = 2026-08-27 Route A typed Japanese case-frame realizer v2
+
+CURRENT_ACTUAL_RUNTIME_STRUCTURE
+  = UNCHANGED
+
+CURRENT_IMPLEMENTATION_AUTHORITY
+  = EXACT0
+~~~
+
+今回のeffectはCocolon docs exact4だけである。actual Emlis runtime構造は未変更なので`current_structure/01_emlis_ai_current_structure.md`は変更しない。mashos-api、System Context PR #37、runtime source、test、runner、API、DB、RN、persistence、private generation、merge、activation、production effectは0である。
