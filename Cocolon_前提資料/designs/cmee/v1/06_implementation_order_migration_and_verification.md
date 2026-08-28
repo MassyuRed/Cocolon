@@ -6047,3 +6047,54 @@ ACTIVATION / I09 / PRODUCTION = 0 / 0 / 0
 NEXT_DEPENDENCY = IM02
 CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_IM01
 ~~~
+
+---
+
+## 83. Emlis input-specific meaning decision / IM02 canonical completion gate（2026-08-28）
+
+Mashの明示的なcomplete-to-finish authorityにより、final design §17のIM02をactual source／testへ統合した。implementation scopeはDifference Config、Observed Difference／Required Difference、closed counterfactual mutation、Difference Bundle、WholeReadingConsequence issuer、response pre-Reception storage、composition rederive／exact equality、およびruntime integration exact17 identityに限定する。
+
+formal execution historyは、isolated runtimeの`fastapi`不足によるprecollection failure、続く`28/32`、`24/32`、`25/32`をすべて未完了／no-creditとして保持し、後続のMash explicit complete-to-finish authority下で同じfinal exact selector setを`32/32` GREENまで収束させた。IM02 targeted selectorsも`7/7` PASSである。
+
+~~~text
+CHECKPOINT_ID = CMEE_EMLIS_INPUT_SPECIFIC_MEANING_IM02_DIFFERENCE_REQUIREMENTS_20260828_V1
+FINAL_DESIGN_ID = Cocolon_CMEE_Stage1_Emlis_InputSpecificMeaningDecision_KarenDesigned_FinalTechnicalDesignAndImplementationOrder_20260828
+IMPLEMENTATION_STEP = IM02
+STEP_STATE = COMPLETE_NONTERMINAL_CHECKPOINT
+
+RUNTIME_REPOSITORY / PULL_REQUEST = MassyuRed/mashos-api / 3
+DESIGN_REPOSITORY / PULL_REQUEST = MassyuRed/Cocolon / 30
+DESIGN_CHANGED_PATHS_EXACT4 = v1/00_read_first.md,v1/06_implementation_order_migration_and_verification.md,current_structure/01_emlis_ai_current_structure.md,current_structure/04_cmee_current_structure.md
+DESIGN_PR30_STATE = DRAFT_OPEN_UNMERGED_PENDING_PUSH
+
+FORMAL_GATE_ATTEMPT_1 = MISSING_FASTAPI_PRECOLLECTION_CLOSED_NO_CREDIT
+FORMAL_GATE_ATTEMPT_2 = FAILED_28_OF_32_NO_COMPLETION_CREDIT
+FORMAL_GATE_ATTEMPT_3 = FAILED_24_OF_32_NO_COMPLETION_CREDIT
+FORMAL_GATE_ATTEMPT_4 = FAILED_25_OF_32_NO_COMPLETION_CREDIT
+FINAL_GATE_AUTHORITY = LATER_MASH_EXPLICIT_COMPLETE_TO_FINISH
+FINAL_EXACT_SELECTOR_SET / DENOMINATOR = EXACT9 / 32
+FINAL_FORMAL_PYTEST_RESULT = GREEN_PASS_32_OF_32
+IM02_TARGETED_SELECTOR_SET / RESULT = EXACT7 / GREEN_PASS_7_OF_7
+RUNTIME_INTEGRATION_IDENTITY = EXACT17_FROZEN
+WRITE_GATE = FINAL_FORMAL_PYTEST_GREEN_SATISFIED
+
+DIFFERENCE_CONFIG = IMPLEMENTED
+OBSERVED_DIFFERENCE / REQUIRED_DIFFERENCE = IMPLEMENTED / IMPLEMENTED
+CLOSED_COUNTERFACTUAL_MUTATION = IMPLEMENTED
+DIFFERENCE_BUNDLE / WHOLE_READING_CONSEQUENCE_ISSUER = IMPLEMENTED / IMPLEMENTED
+RESPONSE_PRE_RECEPTION_STORAGE = IMPLEMENTED
+COMPOSITION_REDERIVE_EXACT_EQUALITY = IMPLEMENTED
+
+PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
+PRODUCT_READ / CANDIDATE_ACCEPTANCE = 0 / 0
+IM03 / ACTIVATION / I09 / PRODUCTION / MERGE = NOT_STARTED / 0 / 0 / 0 / 0
+API / DB / RN / PERSISTENCE / PROVIDER / NETWORK / FALLBACK / COST_EFFECT = 0 / 0 / 0 / 0 / 0 / 0 / 0 / 0
+FULL_PUBLIC_REGRESSION = DEFERRED_TO_IM07_NOT_CLAIMED_AT_IM02
+DESIGN_FINAL_SOURCE_MODIFICATION = 0
+NEXT_DEPENDENCY = IM03
+AUTOMATIC_PROGRESSION = false
+~~~
+
+Required Differenceはtyped Grounded View／Foreground Scopeとclosed Difference Configだけから構成し、Observed Differenceとcounterfactual mutation resultを同じbundleへ束ねる。WholeReadingConsequence issuerはbundleのsemantic order／adjacencyを検証して発行し、responseがReceptionへ入る前に保存する。compositionは保存値を同じinputsから再導出してexact equalityを要求し、不一致、未知mutation、signature不整合、対象不一致をclosedで拒否する。Reception、affect、stance、style、temperature、surface、fixture、ID／hash／列挙順のmeaning backflowは0である。
+
+本§83はIM02のcomplete nonterminal checkpointだけを所有する。reading operation applicability／enumerationはIM03へ留保し、activation、I09、production、mergeを開始しない。public API、DB、RN、persistence、provider、network、fallback、external costへのeffectは0である。

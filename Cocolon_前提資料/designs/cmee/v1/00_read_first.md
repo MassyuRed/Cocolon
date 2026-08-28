@@ -520,3 +520,26 @@ PRIMARY_OUTCOME = ADMINISTRATIVE_ONLY
 PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
 AUTOMATIC_PROGRESSION = false
 ```
+
+## 10. IM02 completion checkpoint（2026-08-28）
+
+Mashの明示的なcomplete-to-finish authorityにより、implementation order §17のIM02をactual runtimeへ統合した。Difference Config、Observed Difference／Required Difference、closed counterfactual mutation、Difference Bundle、WholeReadingConsequence issuer、response pre-Reception storage、composition rederive／exact equality、runtime integration exact17 identityが実装対象である。final design source本文は変更していない。
+
+```text
+CHECKPOINT_ID = CMEE_EMLIS_INPUT_SPECIFIC_MEANING_IM02_DIFFERENCE_REQUIREMENTS_20260828_V1
+IMPLEMENTATION_STEP / STEP_STATE = IM02 / COMPLETE_NONTERMINAL_CHECKPOINT
+FORMAL_GATE_HISTORY = MISSING_FASTAPI_PRECOLLECTION_CLOSED_NO_CREDIT -> 28_OF_32 -> 24_OF_32 -> 25_OF_32 -> FINAL_32_OF_32_GREEN
+FINAL_EXACT_SELECTORS / PASS = 32 / 32
+IM02_TARGETED_SELECTORS / PASS = 7 / 7
+RUNTIME_INTEGRATION_IDENTITY = EXACT17_FROZEN
+PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
+IM03 / ACTIVATION / I09 / PRODUCTION / MERGE = NOT_STARTED / 0 / 0 / 0 / 0
+API / DB / RN / PERSISTENCE / PROVIDER / NETWORK / FALLBACK / COST_EFFECT = 0 / 0 / 0 / 0 / 0 / 0 / 0 / 0
+FULL_PUBLIC_REGRESSION = DEFERRED_TO_IM07_NOT_CLAIMED_AT_IM02
+DESIGN_FINAL_SOURCE_MODIFICATION = 0
+DESIGN_PR30_STATE = DRAFT_OPEN_UNMERGED_PENDING_PUSH
+NEXT_DEPENDENCY = IM03
+AUTOMATIC_PROGRESSION = false
+```
+
+失敗した各Gateは完了creditに使わず、final `32/32`だけをIM02 write gateとする。IM03のreading operation applicability／enumeration、I09、activation、production、mergeへは進んでいない。

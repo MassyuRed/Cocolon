@@ -747,3 +747,32 @@ NEXT_DEPENDENCY / CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = IM02 / NONE_AFTER_IM0
 ~~~
 
 Required Difference、counterfactual mutation、WholeReadingConsequence actual issuerはIM02、reading operation applicabilityはIM03へ留保する。public API、DB、RN、persistence、provider、network inference、fallback、external cost、production activationへのeffectは0である。本authorityでIM02以降へは進まず、automatic progressionはfalseである。
+
+## 29. Emlis input-specific meaning decision — IM02 complete current implementation state（2026-08-28）
+
+Mashの明示的なcomplete-to-finish authorityにより、final design §17のIM02をmashos-api Draft PR #3へ統合した。Difference Config、Observed Difference／Required Difference、closed counterfactual mutation、Difference Bundle、WholeReadingConsequence issuerをactual contractへ追加し、response pipelineでpre-Reception保存、compositionで再導出した値とのexact equalityを要求する。runtime integration identityはexact17で固定した。
+
+formal Gateのactual historyは、isolated launcherのdependency不足による`missing fastapi` precollection failure、続く`28/32`、`24/32`、`25/32`をいずれも未完了／no-creditとして閉じ、後続の明示的complete-to-finish authority下でfinal exact selectors `32/32`、IM02 targeted `7/7` GREENに到達したものである。
+
+~~~text
+CHECKPOINT_ID = CMEE_EMLIS_INPUT_SPECIFIC_MEANING_IM02_DIFFERENCE_REQUIREMENTS_20260828_V1
+IMPLEMENTATION_STEP = IM02
+STEP_STATE = COMPLETE_NONTERMINAL_CHECKPOINT
+FORMAL_GATE_HISTORY = MISSING_FASTAPI_PRECOLLECTION_CLOSED_NO_CREDIT,28_OF_32,24_OF_32,25_OF_32,FINAL_32_OF_32_GREEN
+FINAL_EXACT_SELECTOR_DENOMINATOR / PASS = 32 / 32
+IM02_TARGETED_DENOMINATOR / PASS = 7 / 7
+DIFFERENCE_CONFIG / OBSERVED_REQUIRED_DIFFERENCE = IMPLEMENTED / IMPLEMENTED
+CLOSED_MUTATION / DIFFERENCE_BUNDLE / WHOLE_ISSUER = IMPLEMENTED / IMPLEMENTED / IMPLEMENTED
+RESPONSE_PRE_RECEPTION_STORAGE / COMPOSITION_REDERIVE_EXACT_EQUALITY = IMPLEMENTED / IMPLEMENTED
+RUNTIME_INTEGRATION_IDENTITY = EXACT17_FROZEN
+PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
+IM03 / ACTIVATION / I09 / PRODUCTION / MERGE = NOT_STARTED / 0 / 0 / 0 / 0
+API / DB / RN / PERSISTENCE / PROVIDER / NETWORK / FALLBACK / COST_EFFECT = 0 / 0 / 0 / 0 / 0 / 0 / 0 / 0
+FULL_PUBLIC_REGRESSION = DEFERRED_TO_IM07_NOT_CLAIMED_AT_IM02
+DESIGN_FINAL_SOURCE_MODIFICATION = 0
+DESIGN_PR30_STATE = DRAFT_OPEN_UNMERGED_PENDING_PUSH
+NEXT_DEPENDENCY = IM03
+AUTOMATIC_PROGRESSION = false
+~~~
+
+本checkpointはIM02完了だけを記録する。IM03のoperation applicability／enumeration、activation、I09、production、mergeは開始せず、final design source documentも変更しない。

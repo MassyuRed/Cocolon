@@ -449,3 +449,28 @@ NEXT_DEPENDENCY / CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = IM02 / NONE_AFTER_IM0
 ```
 
 current production `emlis_ai_reply_service.py`、ReplyEnvelope、RN display ownerは変更しない。Required Difference／counterfactual mutation／WholeReadingConsequence issuerはIM02のownerへ留保するが、本authorityでIM02へは進まず、automatic progressionはfalseである。
+
+## 17. Emlis input-specific meaning decision — IM02 difference requirements complete checkpoint（2026-08-28）
+
+Mashの明示的なcomplete-to-finish authorityにより、IM02をactual source／testへ統合し、final exact selectors `32/32`、IM02 targeted `7/7`をGREENで完了した。追加したcurrent structureは、Difference Config、Observed Difference／Required Difference、closed counterfactual mutation、Difference Bundle、WholeReadingConsequence issuer、response pre-Reception storage、composition-side rederive／exact equality、およびruntime integration exact17 identityである。
+
+Required Differenceはtyped Grounded View／Foreground Scopeから導出したObserved Differenceとclosed mutation結果を同じbundleへ束ね、semantic orderとadjacencyを固定する。WholeReadingConsequenceはそのbundleだけから発行し、responseがReceptionへ入る前に保存する。compositionは保存済み結果を再導出してexact equalityを要求し、不一致、未知mutation、signature不整合、対象不一致をclosedで拒否する。Reception、affect、stance、style、temperature、surface、ID／hash／fixture順序を意味決定へ逆流させない。
+
+```text
+CHECKPOINT_ID = CMEE_EMLIS_INPUT_SPECIFIC_MEANING_IM02_DIFFERENCE_REQUIREMENTS_20260828_V1
+IMPLEMENTATION_STEP / STEP_STATE = IM02 / COMPLETE_NONTERMINAL_CHECKPOINT
+FORMAL_GATE_HISTORY = MISSING_FASTAPI_PRECOLLECTION_CLOSED_NO_CREDIT -> 28_OF_32 -> 24_OF_32 -> 25_OF_32 -> 32_OF_32_GREEN
+FINAL_EXACT_SELECTORS / FINAL_RESULT = 32 / PASS_32_OF_32
+IM02_TARGETED_SELECTORS / TARGETED_RESULT = 7 / PASS_7_OF_7
+RUNTIME_INTEGRATION_IDENTITY = EXACT17_FROZEN
+PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
+IM03 / ACTIVATION / I09 / PRODUCTION / MERGE = NOT_STARTED / 0 / 0 / 0 / 0
+API / DB / RN / PERSISTENCE / PROVIDER / NETWORK / FALLBACK / COST_EFFECT = 0 / 0 / 0 / 0 / 0 / 0 / 0 / 0
+FULL_PUBLIC_REGRESSION = DEFERRED_TO_IM07_NOT_CLAIMED_AT_IM02
+DESIGN_FINAL_SOURCE_MODIFICATION = 0
+DESIGN_PR30_STATE = DRAFT_OPEN_UNMERGED_PENDING_PUSH
+NEXT_DEPENDENCY = IM03
+AUTOMATIC_PROGRESSION = false
+```
+
+current production activation、public API、DB、RN、persistence、provider、network、fallback、external costへのeffectは0である。IM03のreading operation applicability／enumeration、I09、production、mergeは開始していない。
