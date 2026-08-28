@@ -716,3 +716,34 @@ IM00のmeaning-side validatorはtyped Grounded Viewをupstream trust boundaryと
 response pipelineのpre-meaning／allowed Reception envelope型分離とGrounded View→`derive_foreground_scope_closed()`実接続はまだない。compatible union／competing LIMITED／zero-object STOPはIM01、Required Difference issuerはIM02、operation applicabilityはIM03のownerである。このため`current_structure/01_emlis_ai_current_structure.md`、response、composition、runner、vertical、API、DB、RN、persistence、activation、productionは変更していない。
 
 IM00はnonterminal checkpointでProduct／technical credit 0、full public regressionはIM07へdeferredである。依存順上の次はIM01で正しいが、`IM01_EXECUTION=NOT_STARTED`、fresh Mash explicit start必須、automatic progressionはfalseである。旧Route A v2 N3 identity、terminal、counter 2/2はimmutableのまま保持する。
+
+## 28. Emlis input-specific meaning decision — IM01 authorized integration gate（2026-08-28）
+
+Mashのfresh explicit authorityは、final design §17のIM01について、IM00のremote-postverified runtime／design headsをsole preimageとする統合修正とformal pytest exact1だけを許可する。authority前のlocal途中差分は完了credit 0で、failed diagnostic pytestはclosed/no-creditとする。
+
+最初のformal launcherはrepository `ai` rootをisolated Pythonのimport pathから外した`COMMAND_CONSTRUCTION_ERROR`でcollection 0となった。Mashのfresh bounded mechanical repair authorityによりlauncherだけをexact1修復し、target／denominator／comparator／input identity／runtime不変の同じGateをexact1再実行した結果は`25 passed`でGREENである。
+
+actualへ統合する責任は、response pipelineのpre-meaning grounded inputs／allowed Reception envelope型分離、typed Grounded View→`derive_foreground_scope_closed()`実接続、および新しい型に合わせた旧IM00 test fixture移行に限定する。このexact3をactual source／testへ統合し終える前のrepository-code test executionは0である。Foreground Scopeは許可basis exact5をtyped compatibility exact10でcanonical unionし、material competingは`LIMITED_COMPETING_MATERIAL_READINGS`、safe objectがある構造不足は`LIMITED_STRUCTURE_INSUFFICIENT`、safe foreground object exact0だけは`STRUCTURE_INSUFFICIENT_STOP`へ閉じる。Reception、affect、stance、style、temperature、subjective mode、surface、fixture、ID／hash／列挙順のbackflowは0である。
+
+~~~text
+CHECKPOINT_ID = CMEE_EMLIS_INPUT_SPECIFIC_MEANING_IM01_SCOPE_DERIVATION_20260828_V1
+RUNTIME_PRE_HEAD = 2c607f001e3524de67c6c276d0140c1b8b464584_REMOTE_POSTVERIFIED
+DESIGN_PRE_HEAD = ac1ccfce52374abad122cb6b82f99b0760c01d6f_REMOTE_POSTVERIFIED
+PRIOR_DIAGNOSTIC_PYTEST = FAILED_CLOSED_NO_CREDIT
+IM00_FIXTURE_MIGRATION_BEFORE_FORMAL_PYTEST = COMPLETE
+POST_AUTHORITY_PREINTEGRATION_TEST_EXECUTION = 0
+ORIGINAL_FORMAL_PYTEST_ALLOWED_INVOCATION / RETRY / RERUN = 1 / 0 / 0
+ORIGINAL_FORMAL_PYTEST_RESULT = COMMAND_CONSTRUCTION_ERROR_COLLECTION_0_CLOSED_NO_CREDIT
+BOUNDED_MECHANICAL_REPAIR_LAUNCHER / SAME_GATE_RERUN = 1 / 1
+FORMAL_PYTEST_TERMINAL_RESULT = GREEN_PASS_25_OF_25_OWNED_BY_CANONICAL_06_SECTION_82
+OTHER_REPOSITORY_CODE_EXECUTION = 0
+WRITE_GATE = FORMAL_PYTEST_GREEN_SATISFIED
+STEP_STATE = COMPLETE_NONTERMINAL_CHECKPOINT
+PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
+PRODUCT_READ / CANDIDATE_ACCEPTANCE / IM02 / ACTIVATION / I09 / PRODUCTION = 0 / 0 / 0 / 0 / 0 / 0
+FULL_PUBLIC_REGRESSION = DEFERRED_TO_IM07_NOT_CLAIMED_AT_IM01
+AUTOMATIC_RETRY / AUTOMATIC_PROGRESSION = 0 / 0
+NEXT_DEPENDENCY / CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = IM02 / NONE_AFTER_IM01
+~~~
+
+Required Difference、counterfactual mutation、WholeReadingConsequence actual issuerはIM02、reading operation applicabilityはIM03へ留保する。public API、DB、RN、persistence、provider、network inference、fallback、external cost、production activationへのeffectは0である。本authorityでIM02以降へは進まず、automatic progressionはfalseである。

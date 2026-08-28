@@ -419,3 +419,33 @@ PRIMARY_OUTCOME = ADMINISTRATIVE_ONLY
 PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
 AUTOMATIC_PROGRESSION = false
 ```
+
+## 16. Emlis input-specific meaning decision — IM01 authorized integration gate（2026-08-28）
+
+Mashのfresh explicit authorityは、IM00のremote-postverified runtime head `2c607f001e3524de67c6c276d0140c1b8b464584`とdesign head `ac1ccfce52374abad122cb6b82f99b0760c01d6f`をsole preimageとして、IM01の統合修正とformal pytest exact1だけを許可する。authority前のlocal途中差分は完了creditではなく、failed diagnostic pytestはclosed/no-creditである。
+
+最初のformal launcherはrepository `ai` rootをisolated Pythonのimport pathから外した`COMMAND_CONSTRUCTION_ERROR`でcollection 0となった。Mashのfresh bounded mechanical repair authorityによりlauncherだけをexact1修復し、target／denominator／comparator／input identity／runtime不変の同じGateをexact1再実行した結果は`25 passed`でGREENである。
+
+IM01の完了前提は、current disabled response pathのpre-meaning grounded inputs／allowed Reception envelope型分離、typed Grounded Viewから`derive_foreground_scope_closed()`への実接続、および新しい型に合わせた旧IM00 test fixture移行をactual source／testへ統合することである。fixture移行を含む統合完了前のdiagnostic pytest、target test、compileallその他同等のrepository-code executionは0とする。Foreground Scopeは許可basis exact5をtyped compatibility exact10でcanonical unionし、material competingは`LIMITED_COMPETING_MATERIAL_READINGS`、safe objectを保持できる構造不足は`LIMITED_STRUCTURE_INSUFFICIENT`、safe foreground object exact0だけは`STRUCTURE_INSUFFICIENT_STOP`へ閉じる。Reception、affect、style、temperature、surface、fixture、ID／hash／列挙順はscope selectorへ逆流しない。
+
+```text
+RUNTIME_PRE_HEAD = 2c607f001e3524de67c6c276d0140c1b8b464584_REMOTE_POSTVERIFIED
+DESIGN_PRE_HEAD = ac1ccfce52374abad122cb6b82f99b0760c01d6f_REMOTE_POSTVERIFIED
+PRIOR_DIAGNOSTIC_PYTEST = FAILED_CLOSED_NO_CREDIT
+CURRENT_LOCAL_INTERIM_DIFF_COMPLETION_CREDIT = 0
+IM00_FIXTURE_MIGRATION_BEFORE_FORMAL_PYTEST = COMPLETE
+POST_AUTHORITY_PREINTEGRATION_TEST_EXECUTION = 0
+ORIGINAL_FORMAL_PYTEST_ALLOWED_INVOCATION / RETRY / RERUN = 1 / 0 / 0
+ORIGINAL_FORMAL_PYTEST_RESULT = COMMAND_CONSTRUCTION_ERROR_COLLECTION_0_CLOSED_NO_CREDIT
+BOUNDED_MECHANICAL_REPAIR_LAUNCHER / SAME_GATE_RERUN = 1 / 1
+FORMAL_PYTEST_TERMINAL_RESULT = GREEN_PASS_25_OF_25_OWNED_BY_CANONICAL_06_SECTION_82
+OTHER_REPOSITORY_CODE_EXECUTION = 0
+WRITE_GATE = FORMAL_PYTEST_GREEN_SATISFIED
+STEP_STATE = COMPLETE_NONTERMINAL_CHECKPOINT
+PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
+PRODUCT_READ / IM02 / ACTIVATION / I09 / PRODUCTION_EFFECT = 0 / 0 / 0 / 0 / 0
+FULL_PUBLIC_REGRESSION = DEFERRED_TO_IM07_NOT_CLAIMED_AT_IM01
+NEXT_DEPENDENCY / CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = IM02 / NONE_AFTER_IM01
+```
+
+current production `emlis_ai_reply_service.py`、ReplyEnvelope、RN display ownerは変更しない。Required Difference／counterfactual mutation／WholeReadingConsequence issuerはIM02のownerへ留保するが、本authorityでIM02へは進まず、automatic progressionはfalseである。

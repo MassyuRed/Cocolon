@@ -5985,3 +5985,65 @@ NEXT_DEPENDENCY = IM01
 IM01_START_AUTHORITY = FRESH_MASH_EXPLICIT_START_REQUIRED
 CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_IM00
 ~~~
+
+---
+
+## 82. Emlis input-specific meaning decision / IM01 canonical integration gate（2026-08-28）
+
+Mashのfresh explicit authorityは、IM00のremote-postverified runtime head `2c607f001e3524de67c6c276d0140c1b8b464584`とdesign head `ac1ccfce52374abad122cb6b82f99b0760c01d6f`をsole preimageとして、final design §17のIM01統合修正とformal pytest exact1だけを許可する。authority前のlocal途中差分は完了creditではなく、failed diagnostic pytestはclosed/no-creditである。actual source／testとの整合を確認して必要差分だけを採用し、response pipelineのpre-meaning inputs／allowed Reception envelope型分離、typed Grounded Viewから`derive_foreground_scope_closed()`への実接続、新しい型に合わせた旧IM00 test fixture移行のexact3をすべて統合した後にだけformal pytestへ進む。
+
+最初のformal launcherはrepository `ai` rootをisolated Pythonのimport pathから外した`COMMAND_CONSTRUCTION_ERROR`によりcollection 0でclosed/no-creditとなった。Mashのfresh `BOUNDED_MECHANICAL_REPAIR` authority exact1により、target／denominator／comparator／input identity／runtimeを変えずlauncherだけをexact1修復し、同じGateをexact1再実行した結果は`25 passed`でGREENである。この§82はそのcomplete nonterminal checkpointを所有し、mashos-api Draft PR #3とCocolon Draft PR #30へのcommit／pushおよびdual remote postverifyを許す。IM02、activation、I09、productionへは進まない。
+
+~~~text
+CHECKPOINT_ID = CMEE_EMLIS_INPUT_SPECIFIC_MEANING_IM01_SCOPE_DERIVATION_20260828_V1
+FINAL_DESIGN_ID = Cocolon_CMEE_Stage1_Emlis_InputSpecificMeaningDecision_KarenDesigned_FinalTechnicalDesignAndImplementationOrder_20260828
+FINAL_DESIGN_SHA256 = 9690c3f027608825406df7bd5d3b51cb6834b20e07e36bf837b1e309b2daef18
+IMPLEMENTATION_STEP = IM01
+STEP_STATE = COMPLETE_NONTERMINAL_CHECKPOINT
+
+RUNTIME_REPOSITORY / PULL_REQUEST = MassyuRed/mashos-api / 3
+RUNTIME_PRE_HEAD = 2c607f001e3524de67c6c276d0140c1b8b464584_REMOTE_POSTVERIFIED
+RUNTIME_FINAL_HEAD = THIS_COMMIT_RESOLVED_BY_FRESH_REMOTE_POSTVERIFY
+
+DESIGN_REPOSITORY / PULL_REQUEST = MassyuRed/Cocolon / 30
+DESIGN_PRE_HEAD = ac1ccfce52374abad122cb6b82f99b0760c01d6f_REMOTE_POSTVERIFIED
+DESIGN_FINAL_HEAD = THIS_COMMIT_RESOLVED_BY_FRESH_REMOTE_POSTVERIFY
+DESIGN_CHANGED_PATHS_EXACT4 = v1/00_read_first.md,v1/06_implementation_order_migration_and_verification.md,current_structure/01_emlis_ai_current_structure.md,current_structure/04_cmee_current_structure.md
+
+PRIOR_DIAGNOSTIC_PYTEST = FAILED_CLOSED_NO_CREDIT
+PRIOR_DIAGNOSTIC_EVIDENCE_REUSE / COMPLETION_CREDIT = 0 / 0
+CURRENT_LOCAL_INTERIM_DIFF_COMPLETION_CREDIT = 0
+IM00_FIXTURE_MIGRATION_BEFORE_FORMAL_PYTEST = COMPLETE
+POST_AUTHORITY_PREINTEGRATION_TEST_EXECUTION = 0
+FORMAL_PYTEST_AUTHORITY = FRESH_MASH_EXPLICIT_EXACT1
+ORIGINAL_FORMAL_PYTEST_ALLOWED_INVOCATION / RETRY / RERUN = 1 / 0 / 0
+ORIGINAL_FORMAL_PYTEST_RESULT = COMMAND_CONSTRUCTION_ERROR_TOOLS_IMPORT_COLLECTION_0_CLOSED_NO_CREDIT
+BOUNDED_MECHANICAL_REPAIR_AUTHORITY = MASH_FRESH_LAUNCHER_REPAIR_EXACT1_AND_SAME_GATE_RERUN_EXACT1_20260828
+LAUNCHER_REPAIR / SAME_GATE_FRESH_RERUN = 1 / 1
+SAME_GATE_TARGET_SELECTORS / DENOMINATOR = EXACT8 / 25
+TARGET_DENOMINATOR_COMPARATOR_INPUT_IDENTITY_RUNTIME_CHANGE = 0 / 0 / 0 / 0 / 0
+FORMAL_PYTEST_TERMINAL_RESULT = GREEN_PASS_25_OF_25_WITH_1_WARNING_IN_33_98S
+SECOND_FAILURE_STOP_TRIGGERED = false
+OTHER_REPOSITORY_CODE_EXECUTION = 0
+STATIC_GIT_DIFF_CHECK = PASS
+RECEPTION_AFFECT_STYLE_ID_ORDER_BACKFLOW = 0
+FULL_PUBLIC_REGRESSION = DEFERRED_TO_IM07_NOT_CLAIMED_AT_IM01
+
+PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
+PRODUCT_READ / CANDIDATE_ACCEPTANCE / IM02 / ACTIVATION / I09 / PRODUCTION / MERGE = 0 / 0 / 0 / 0 / 0 / 0 / 0
+WRITE_GATE = FORMAL_PYTEST_GREEN_SATISFIED
+AUTOMATIC_RETRY / AUTOMATIC_PROGRESSION = 0 / 0
+~~~
+
+IM01のintegration orderは、response pipelineのpre-meaning grounded inputs／allowed Reception envelope型分離、typed Grounded Viewから`derive_foreground_scope_closed()`への実接続、旧IM00 test fixtureの新型への移行をactual source／testへ統合し、その完了後にformal pytest exact1を実行する順で固定する。統合完了前のdiagnostic pytest、target test、compileallその他同等のrepository-code executionは0である。scope derivationは許可basis exact5とtyped compatibility exact10だけを用い、compatible source-connected rowsをcanonical unionする。material competingは`LIMITED_COMPETING_MATERIAL_READINGS`、safe object exact1以上で構造不足なら`LIMITED_STRUCTURE_INSUFFICIENT`、safe foreground object exact0の場合だけ`STRUCTURE_INSUFFICIENT_STOP`へ閉じる。
+
+Reception、affect、stance、style、temperature、subjective mode、surface、fixture、ID／hash／列挙順はscopeの採否、中心、順序または競合解消へ到達しない。Required Difference／counterfactual mutation／WholeReadingConsequence actual issuerはIM02、operation applicability／enumerationはIM03のownerであり、IM01へ先取りしない。
+
+System Context PR #37、public API、DB、RN、persistence、provider、network inference、fallback、external cost、production activation、ready、mergeへのeffectは0である。Required Difference以降のownerはIM02へ留保するが、本authorityでIM02を開始せず、fresh authorityの対象にも含めない。
+
+~~~text
+IM02_EXECUTION = 0_THIS_AUTHORITY
+ACTIVATION / I09 / PRODUCTION = 0 / 0 / 0
+NEXT_DEPENDENCY = IM02
+CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE_AFTER_IM01
+~~~

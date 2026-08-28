@@ -300,6 +300,37 @@ focused IM00＋current identityは`15/15 PASS`、boundaryは`5/5 PASS`、compile
 
 IM00はnonterminal session checkpointであり、Product／technical credit、Product Read、acceptance、activation、mergeは0である。依存順上の次はIM01で正しいが、IM01は未開始で、fresh Mash explicit startなしに自動進行しない。
 
+### 0.9 2026-08-28 Emlis input-specific meaning decision IM01 integration gate
+
+Mashのfresh explicit authorityは、IM00のremote-postverified runtime head `2c607f001e3524de67c6c276d0140c1b8b464584`とdesign head `ac1ccfce52374abad122cb6b82f99b0760c01d6f`をsole preimageとして、final document §17のIM01統合修正とformal pytest exact1だけを許可する。authority前のlocal途中差分は完了creditではなく、failed diagnostic pytestはclosed/no-creditである。
+
+最初のformal launcherはrepository `ai` rootをisolated Pythonのimport pathから外した`COMMAND_CONSTRUCTION_ERROR`でcollection 0となった。Mashのfresh bounded mechanical repair authorityによりlauncherだけをexact1修復し、target／denominator／comparator／input identity／runtime不変の同じGateをexact1再実行した結果は`25 passed`でGREENである。
+
+- response pipelineをpre-meaning grounded inputsとallowed Reception envelopeへ型分離する。
+- typed Grounded Viewから`derive_foreground_scope_closed()`へ実接続し、scope basisを許可exact5に限定してtyped compatibility exact10でcanonical unionする。
+- 新しい型に合わせて旧IM00 test fixtureを移行し、この移行を含むactual source／test統合をformal pytestより前に完了する。
+- material competing scopeは`LIMITED_COMPETING_MATERIAL_READINGS`、safe objectがある構造不足は`LIMITED_STRUCTURE_INSUFFICIENT`、safe foreground object exact0だけを`STRUCTURE_INSUFFICIENT_STOP`へ閉じる。
+- Reception、affect、stance、style、temperature、subjective mode、surface、fixture、ID／hash／列挙順からscope derivationへの逆流は0とする。
+
+```text
+RUNTIME_PRE_HEAD = 2c607f001e3524de67c6c276d0140c1b8b464584_REMOTE_POSTVERIFIED
+DESIGN_PRE_HEAD = ac1ccfce52374abad122cb6b82f99b0760c01d6f_REMOTE_POSTVERIFIED
+PRIOR_DIAGNOSTIC_PYTEST = FAILED_CLOSED_NO_CREDIT
+POST_AUTHORITY_PREINTEGRATION_TEST_EXECUTION = 0
+IM00_FIXTURE_MIGRATION_BEFORE_FORMAL_PYTEST = COMPLETE
+ORIGINAL_FORMAL_PYTEST_ALLOWED_INVOCATION / RETRY / RERUN = 1 / 0 / 0
+ORIGINAL_FORMAL_PYTEST_RESULT = COMMAND_CONSTRUCTION_ERROR_COLLECTION_0_CLOSED_NO_CREDIT
+BOUNDED_MECHANICAL_REPAIR_LAUNCHER / SAME_GATE_RERUN = 1 / 1
+FORMAL_PYTEST_TERMINAL_RESULT = GREEN_PASS_25_OF_25_OWNED_BY_CANONICAL_06_SECTION_82
+OTHER_REPOSITORY_CODE_EXECUTION = 0
+WRITE_GATE = FORMAL_PYTEST_GREEN_SATISFIED
+STEP_STATE = COMPLETE_NONTERMINAL_CHECKPOINT
+IM02 / ACTIVATION / I09 / PRODUCTION = 0 / 0 / 0 / 0
+NEXT_DEPENDENCY / CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = IM02 / NONE_AFTER_IM01
+```
+
+IM01はIM00–IM09のnonseparable bounded unit内にあり、このcompleted nonterminal checkpoint自体のProduct／technical credit、Product Read、acceptance、activation、mergeは0である。Required Difference、counterfactual mutation、WholeReadingConsequence actual issuerはIM02のownerへ留保するが、本authorityでIM02へは進まない。full public regressionはIM07へ留保し、自動進行しない。
+
 ## 1. 読む順 exact11
 
 1. 本file
