@@ -1,23 +1,24 @@
 # CMEE V1 — Implementation Order / Migration / Verification 詳細設計
 
 - document id: `cocolon.cmee.v1.implementation_migration_verification.detailed_design`
-- revision date: `2026-08-27 JST`
-- lifecycle: `MASH_APPROVED_FINAL_DESIGN_ROUTE_OWNER_IMPLEMENTATION_NOT_STARTED`
+- revision date: `2026-08-29 JST`
+- lifecycle: `FINAL_CANONICAL_IMPLEMENTATION_READY / IM02_RUNTIME_COMPLETE / IM03_NOT_STARTED`
 - absolute implementation rule: `BOUND_TO_PARENT_FINAL_DESIGN_SECTION_0_3`
-- current implementation state: `PREDECESSOR_STEP3_TERMINAL_CLOSED_SUCCESSOR_FINAL_DESIGN_APPROVED_NOT_STARTED`
-- current authorized next implementation: `I00_AFTER_FRESH_EXPLICIT_STEP_START`
-- only admissible next implementation class: `APPROVED_ROUTE_A_TYPED_CASE_FRAME_SUCCESSOR_I00_I14`
+- current implementation state: `IM02_COMPLETE_NONTERMINAL / IM03_THROUGH_IM06_ATOMIC_UNIT_NOT_STARTED`
+- current authorized next implementation: `PACKET_A_FRESH_PREIMAGE_FREEZE_THEN_IM03_AFTER_EXPLICIT_START`
+- only admissible next implementation class: `SUBJECTIVE_MEANING_PLANNER_IM03_THROUGH_IM10_ROUTE_A_PROVIDERLESS_ONLY`
 - Stage 1 language route: `ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER / SOLE_CURRENT_AND_FUTURE_ROUTE`
 - external generative AI / remote provider / body send: `PROHIBITED / 0 / 0`
 - retired provider investigation: `REMOVED_FROM_CURRENT_TREE_GIT_HISTORY_ONLY`
 - automatic progression: `false`
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
-- Stage 1 current final design: `MASH_APPROVED_TYPED_CASE_FRAME_V2_WITH_SESSION_SAFE_ORDER_I00_I14`
-- Stage 1 current order owner: `THIS_FILE_LATEST_SECTION_ROUTING_TO_FINAL_DESIGN_SECTION_20`
+- Stage 1 downstream case-frame final design: `MASH_APPROVED_TYPED_CASE_FRAME_V2_WITH_SESSION_SAFE_ORDER_I00_I14`
+- Stage 1 upstream input-specific meaning final design: `FINAL_CANONICAL_IMPLEMENTATION_READY_SECTIONS_19_THROUGH_22`
+- Stage 1 current order owner: `THIS_FILE_SECTION_84_ROUTING_TO_INPUT_SPECIFIC_MEANING_FINAL_DESIGN_SECTIONS_19_THROUGH_22`
 
 ---
 
-Current additive execution ownerは本file latest sectionである。§0–§53は設計・実装・失敗・旧receiptの履歴として保持するが、相違時はlatest sectionとfinal body §13.1–§13.13を優先する。Step 3.2はprivate inputのuser-owned nonpublic Library保存 / fresh readback、Step 2 language identityとStep 4 / 5 integration identityの分離、両repo remote postverifyまで含む。Step 3.3 actualは未実行である。
+Current additive execution routing ownerは本file latest §84である。Emlis input-specific meaning implementationについて、§0–§83は設計・実装・失敗・旧receiptの履歴として保持し、相違時は§84とfinal canonical §§19–§22を優先する。旧additional-correction body §13.1–§13.13はdownstream／historical contextであり、このupstream meaning unitの実装contractを上書きしない。
 
 ## 0. Current conclusion
 
@@ -6098,3 +6099,60 @@ AUTOMATIC_PROGRESSION = false
 Required Differenceはtyped Grounded View／Foreground Scopeとclosed Difference Configだけから構成し、Observed Differenceとcounterfactual mutation resultを同じbundleへ束ねる。WholeReadingConsequence issuerはbundleのsemantic order／adjacencyを検証して発行し、responseがReceptionへ入る前に保存する。compositionは保存値を同じinputsから再導出してexact equalityを要求し、不一致、未知mutation、signature不整合、対象不一致をclosedで拒否する。Reception、affect、stance、style、temperature、surface、fixture、ID／hash／列挙順のmeaning backflowは0である。
 
 本§83はIM02のcomplete nonterminal checkpointだけを所有する。reading operation applicability／enumerationはIM03へ留保し、activation、I09、production、mergeを開始しない。public API、DB、RN、persistence、provider、network、fallback、external costへのeffectは0である。
+
+## 84. Emlis入力固有意味決定 — final canonical implementation route（2026-08-29）
+
+### 84.1 authority owner
+
+遅延して到着したProレビュー列のeffective correctionは、既存の正規設計書へ統合済みである。implementation contractのsole ownerは次であり、削除済み修正案、historical §17、別addendumを実装入力にしない。
+
+```text
+CANONICAL_DESIGN_PATH = Cocolon_前提資料/designs/cmee/Cocolon_CMEE_Stage1_Emlis_InputSpecificMeaningDecision_KarenDesigned_FinalTechnicalDesignAndImplementationOrder_20260828.md
+CANONICAL_DESIGN_SHA256 = 167a0a4012f5e542d7cbc11fee25f067df929c1cf6d82fe9c927bef63d604ca8
+NORMATIVE_IMPLEMENTATION_SECTIONS = 19_THROUGH_22
+CANONICAL_STATUS = FINAL_CANONICAL_IMPLEMENTATION_READY
+PROPOSAL_CURRENT_TREE = ABSENT_AFTER_FINALIZATION_COMMIT
+```
+
+### 84.2 revised current-to-next boundary
+
+§83はIM02時点のactual runtime事実を保持する。そこで記録したcomposition rederive exact equalityはcurrent preimageの挙動であり、final targetではsecond meaning owner riskとして廃止する。IM05でresponse builderがsole meaning ownerをexact1回呼び、compositionはderive exact0／validation-onlyへ移行する。
+
+IM00–IM02はhistorical implemented checkpoint、actual nextはIM03である。IM03–IM06は分割不能な通常development unit、IM07はseparate formal one-shot、IM08／IM09／IM10は別review gateである。旧`COMMON_DEFECT_RETURN_COUNT=2/2`はpre-revision routeだけに保持し、revised routeへinherit／reset／reuseしない。
+
+### 84.3 Packet A fixed boundary
+
+required write pathはcanonical §21.2のexact6だけである。
+
+1. `contracts.py`
+2. `emlis_input_specific_meaning.py`
+3. `emlis_stage1_response.py`
+4. `emlis_stage1_composition.py`
+5. `ai/tests/test_cmee_v1a_i1sx_contracts.py`
+6. `ai/tools/cmee_v1a_i1sx_candidate_run.py`
+
+package `__init__.py`、`emlis_v1a.py`、vertical／core-boundary test、conftest、migration plugin、requirements、runtime lockはwrite exact0である。allowlist外pathが必要なら暗黙拡張せずdesign/scope terminalへ戻る。
+
+runtimeはfull46 lock blob `0822fcb010985cd0d384f250a9e8a1fe16dc8fd4`、raw SHA-256 `9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787`、logical SHA-256 `801ba54efc0f6655238d14e7c153fb70b555801489aa8ba028515fc64d9c05f4`へbindする。repo内wheel exact0のため、canonical §21.4の`CMEE_LOCKED_WHEELHOUSE_ACQUISITION_COMMAND_V1`でPyPI index exact1／network process exact1／hash-locked wheel exact46を一時workspaceへ取得・全件検証した後、existing `materialize_recovery_epoch002_locked_runtime`をexact1使用する。G4-B exact5、unpinned requirements、ad-hoc install、system fallbackは0。
+
+### 84.4 executable checkpoints
+
+| checkpoint | closed target | required verification |
+|---|---|---|
+| IM03 | root v1.1 exact12、candidate/evidence/outcome、mutation exact12、material provenance、loss/core/row/evidence identity、full-core dedupe、dominance、all-invalid boundary | prospective focused IM03 exact9 |
+| IM04 | ReadingConsequence、normal Reception 1..4、LIMITED FOCUSED exact1、derived IDs、private Stage1 post-selection record exact6＋`projection_seal_ref` exact1 | prospective focused IM04 exact2 |
+| IM05 | response derive exact1／Stage1 exact38 carry same records、composition derive exact0、tagged projection identity、visible trace | prospective focused IM05 exact3 |
+| IM06 | contrastive／paraphrase／adjunct／synthetic oracle、runner identity、full convergence | prospective focused IM06 exact1、cumulative focused expected47、full expected241 |
+| IM07 | Packet B conditional pre-admission＋formal OS launch exact1 | formal result exact1 |
+| IM08／IM09／IM10 | Ultra／Pro／Mash same-output review | attempt exact1、intra-attempt reread allowed、verdict seal exact1 |
+
+same-state rerunは0。approved causal delta exact1+かつprotected criteria不変ならchanged-state verification exact1を許す。designated repair後のsame normalized mechanical defectだけがsecond-failure terminalであり、different／strictly downstream defectは同じdevelopment unitで継続する。`DEVELOPMENT_EXECUTION_ID`、ADMINISTRATIVE_ONLY count、physical body-read countをGateにしない。
+
+```text
+CURRENT_RUNTIME_IMPLEMENTATION = IM02_COMPLETE_NONTERMINAL
+CURRENT_CANONICAL_NEXT_IMPLEMENTATION = PACKET_A_FRESH_PREIMAGE_FREEZE_THEN_IM03
+TECHNICAL_HANDOFF_REMAINING = EXACT0
+IMPLEMENTATION_EXECUTION_IN_DOCS_FINALIZATION = NOT_STARTED
+PRODUCT_READ / ACTIVATION / I09 / PRODUCTION / MERGE = 0 / 0 / 0 / 0 / 0
+AUTOMATIC_PROGRESSION = false
+```

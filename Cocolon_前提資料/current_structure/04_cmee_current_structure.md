@@ -1,20 +1,20 @@
 ---
 doc_id: cocolon_meaning_experience_engine_current_structure
 title: "CMEE — Current Structure"
-revision_date: "2026-08-27 JST"
+revision_date: "2026-08-29 JST"
 document_role: "CMEE_CURRENT_STRUCTURE_AND_PRODUCT_QUALITY_ROUTE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
 design_state: "MASH_APPROVED_ROUTE_A_TYPED_CASE_FRAME_V2_FINAL_DESIGN_WITH_SESSION_SAFE_ORDER"
-detailed_design_state: "FINAL_DESIGN_APPROVED_IMPLEMENTATION_NOT_STARTED"
+detailed_design_state: "INPUT_SPECIFIC_MEANING_FINAL_CANONICAL_IMPLEMENTATION_READY"
 stage1_language_route: "ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER_ONLY"
 external_generative_ai_allowed: false
 external_body_send: 0
 retired_provider_investigation: "REMOVED_FROM_CURRENT_TREE_GIT_HISTORY_ONLY"
-current_authorized_next_work: "I00_AFTER_FRESH_EXPLICIT_STEP_START"
-only_possible_future_implementation_class: "APPROVED_ROUTE_A_TYPED_CASE_FRAME_SUCCESSOR_I00_I14"
-implementation_state: "PREDECESSOR_DRAFT_WIP_DISABLED_TERMINAL / SUCCESSOR_NOT_STARTED"
-candidate_state: "FINAL_DESIGN_APPROVED_SUCCESSOR_NOT_GENERATED"
+current_authorized_next_work: "PACKET_A_FRESH_PREIMAGE_FREEZE_THEN_IM03_AFTER_EXPLICIT_START"
+only_possible_future_implementation_class: "SUBJECTIVE_MEANING_PLANNER_IM03_THROUGH_IM10_ROUTE_A_PROVIDERLESS_ONLY"
+implementation_state: "IM02_COMPLETE_NONTERMINAL / IM03_THROUGH_IM06_NOT_STARTED"
+candidate_state: "FINAL_CANONICAL_DESIGN_ADOPTED / RUNTIME_CANDIDATE_NOT_GENERATED"
 candidate_ready: false
 product_read_state: "EVALUATED_FAIL_QUALITY_INSUFFICIENT"
 production_runtime_effect: 0
@@ -36,20 +36,20 @@ G0–G10の補助経路またはcurrent text guardを拡大して作るのでは
 
 Current state:
 
-    final technical design candidate
-    detailed implementation design candidate
+    final technical design = FINAL_CANONICAL_IMPLEMENTATION_READY
+    detailed implementation route = §30 -> canonical §§19–§22
     absolute implementation rule = PRODUCT_QUALITY_DELTA_GT_0_AND_MASH_CONFIRMED_ONLY
     Phase 0 / P0 / P0-R1 = RETIRED_HISTORICAL_NONREUSABLE
     product-delta-0 standalone L3-R / L3-I = RETIRED_HISTORICAL_NONREUSABLE
     source / owner / unknown / no-promotion contract = RETAINED_ROUTE_NEUTRAL
-    mashos-api Draft PR #3 = STEP7_V2_MACHINE_GREEN_DISABLED @ b7865574ebe08c801f6a2c779daf9148159cf8b0
-    implementation state = DRAFT_WIP_DISABLED
+    mashos-api current preimage = IM02_COMPLETE_NONTERMINAL @ 540ed76d9ae39b9fa6eafc4dbc028e50f52dc3df
+    implementation state = IM02_COMPLETE_NONTERMINAL / IM03_NOT_STARTED
     current Product Read = EVALUATED_FAIL_QUALITY_INSUFFICIENT
     additional correction final body = HISTORICAL_PREDECESSOR
     typed case-frame v2 final design = MASH_APPROVED / NOT_IMPLEMENTED
     candidate ready = false / product credit 0
-    current authorized next work = I00_AFTER_FRESH_EXPLICIT_STEP_START
-    only admissible future class = APPROVED_ROUTE_A_SUCCESSOR_STEP_0_TO_14_EXACT1_PER_SESSION
+    current authorized next work = PACKET_A_FRESH_PREIMAGE_FREEZE_THEN_IM03_AFTER_EXPLICIT_START
+    only admissible future class = SUBJECTIVE_MEANING_PLANNER_IM03_THROUGH_IM10_ROUTE_A_PROVIDERLESS_ONLY
     not production connected
     not Cycle001 proven
     Piece not connected
@@ -776,3 +776,38 @@ AUTOMATIC_PROGRESSION = false
 ~~~
 
 本checkpointはIM02完了だけを記録する。IM03のoperation applicability／enumeration、activation、I09、production、mergeは開始せず、final design source documentも変更しない。
+
+## 30. Emlis input-specific meaning decision — final design routing / next implementation structure（2026-08-29）
+
+本fileのcurrent authorityはfrontmatterと本§30である。§0–§29に残る`I00`、fresh design adoption、旧Route A successorのNEXT literalはhistorical receiptとしてのみ保持し、current implementation入口に使わない。
+
+前回のGitHub反映は非規範の修正案だけで、正規設計書は未変更だった。Mashのcurrent requestにより、遅延Proレビュー列のeffective correctionを既存正規設計書§19–§22へ統合し、修正案をcurrent treeから削除する。current structureのruntime事実はIM02のままであり、このdocs unitはsource／testを変更しない。
+
+```text
+CANONICAL_DESIGN_PATH = Cocolon_前提資料/designs/cmee/Cocolon_CMEE_Stage1_Emlis_InputSpecificMeaningDecision_KarenDesigned_FinalTechnicalDesignAndImplementationOrder_20260828.md
+CANONICAL_DESIGN_SHA256 = 167a0a4012f5e542d7cbc11fee25f067df929c1cf6d82fe9c927bef63d604ca8
+CANONICAL_STATUS = FINAL_CANONICAL_IMPLEMENTATION_READY
+CANONICAL_ADOPTION = ADOPTED_BY_MASH_CURRENT_REQUEST
+PROPOSAL_CURRENT_TREE = ABSENT_AFTER_FINALIZATION_COMMIT
+CURRENT_RUNTIME_IMPLEMENTATION = IM02_COMPLETE_NONTERMINAL
+NEXT_ACTUAL_IMPLEMENTATION = PACKET_A_FRESH_PREIMAGE_FREEZE_THEN_IM03
+STRUCTURE_MAP_DELTA = CMEE_AUTHORITY_ROUTING_ONLY
+```
+
+target implementation structureは次へ固定された。
+
+- `emlis_input_specific_meaning.py`がcandidate列挙、hard validity、selection、NORMAL／LIMITED decisionのsole owner exact1。
+- `emlis_stage1_response.py`がsealed root v1.1 exact12をexact1回deriveし、same object/refをcarryする。
+- `emlis_stage1_composition.py`はderive Grounded View／Scope／disposition／meaning structureをexact0とし、schema、ref、identity、non-mutation、tagged projectionだけを検証する。
+- current root v1.0 exact9はhistorical Git evidenceだけ。forward runtimeはrequired v1.1 exact12だけ。
+- mutation exact12、candidate full-core identity、material provenance、sealed trace exact3、ReadingConsequence／Reception derived ID、private `Stage1SubjectivePlanningInputs` exact38（post-selection record exact6＋`projection_seal_ref` exact1）のbranch-disjoint records、NORMAL／LIMITED visible pathを同じIM03–IM06 atomic unitで閉じる。
+- implementation write allowlist exact6、new focused selector exact15、cumulative focused expected47、full expected241、full46 runtime lockを正規設計書で固定する。
+
+今回、`current_structure/01_emlis_ai_current_structure.md`は更新しない。actual runtime structureがまだ変化しておらず、map deltaはCMEE authority routingだけだからである。IM03–IM06のactual runtime write完了時に、実際のsource／test／identity／resultに基づいて01と本04を同期する。
+
+```text
+IMPLEMENTATION_EXECUTION_IN_DOCS_FINALIZATION = NOT_STARTED
+RUNTIME_SOURCE_TEST_EFFECT = 0
+PRODUCT_READ / ACTIVATION / I09 / PRODUCTION / MERGE = 0 / 0 / 0 / 0 / 0
+AUTOMATIC_PROGRESSION = false
+```
