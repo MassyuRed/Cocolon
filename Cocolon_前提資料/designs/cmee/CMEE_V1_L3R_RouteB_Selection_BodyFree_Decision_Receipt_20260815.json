@@ -1,0 +1,70 @@
+{
+  "schema_version": "cocolon.cmee.v1.l3r.body_free_decision_receipt.v1",
+  "receipt_id": "CMEE_V1_L3R_ROUTE_B_SELECTION_20260815",
+  "decision_date": "2026-08-15 JST",
+  "repository": "MassyuRed/Cocolon",
+  "publication_branch": "agent/three-core-cmee-current-structure-20260815",
+  "publication_preimage": "3cd3d3da03a06e43ca8854943036462d9ed77a3c",
+  "scope_classification": "MASH_DECISION_AND_APPROVAL_REQUIRED_SCOPE",
+  "decision_owner": "Mash",
+  "technical_owner": "Ultra華恋",
+  "packet": "L3-R",
+  "selected_route": "ROUTE_B_PROVISIONAL_ATTACHMENT_WITH_USER_SOVEREIGN_RESOLUTION",
+  "route_selection_state": "APPROVED",
+  "l3r_state": "ROUTE_B_SELECTED_BOUNDED_PREFLIGHT_NOT_AUTHORIZED_STOP",
+  "approval_consumption": "ROUTE_SELECTION_ONLY_CONSUMED",
+  "selected_route_semantics": [
+    "provider proposals remain PROVISIONAL_ONLY and are not meaning authority",
+    "ambiguity-dependent visible meaning closes only by ambiguity-independent limited observation, one target-exact user clarification, or UNAVAILABLE",
+    "one-best, score, empty ambiguity list, and parser ordering are not truth or candidate-set completeness",
+    "a caller-supplied supplemental answer is a new source and does not mutate the original source, graph, or admission"
+  ],
+  "retained_boundaries": [
+    "all required and active owners remain in the denominator; omission and denominator shrink are forbidden",
+    "PR29 Cycle001 current route, P1-P7, and acceptance state are unchanged",
+    "P0, L3-I, I1, implementation, dependency, test, runner, runtime, production, API, DB, RN, and Cycle001 re-entry are not authorized",
+    "automatic progression is false"
+  ],
+  "remaining_l3r_requirements": [
+    "approved cross-field acceptance semantics and per-owner disposition exact coverage",
+    "provisional epistemic representation that cannot alone support a visible claim",
+    "one clarification request maximum across the original-input lifecycle",
+    "provider and resolver responsibility",
+    "preflight candidate package and resource identity",
+    "preflight exact temporary paths",
+    "resource and platform categorical ceilings",
+    "acquisition network, storage, and secret effects",
+    "failure, ambiguity, and OOV behavior",
+    "privacy boundary and retry authority",
+    "post-preflight approval requirements"
+  ],
+  "effects": {
+    "latest_commit_changed_paths": 5,
+    "expected_pr_full_changed_paths": 19,
+    "mashos_api_changed_paths": 0,
+    "production_source": 0,
+    "test": 0,
+    "runner": 0,
+    "dependency": 0,
+    "runtime": 0,
+    "network": 0,
+    "api": 0,
+    "db": 0,
+    "rn": 0,
+    "cycle001_restart": false,
+    "merge": false,
+    "ready_for_review": false
+  },
+  "primary_outcome": "BLOCKER_NARROWED",
+  "reusable_credit": "Route B normative selection only",
+  "not_reusable_as": [
+    "L3-R exit",
+    "P0 authorization or PASS",
+    "L3-I approval",
+    "I1 authorization",
+    "Cycle001 credit or acceptance",
+    "production admission"
+  ],
+  "next_action": "Prepare and review one exact bounded-preflight technical body, obtain separate Mash LEVEL_3 approval, and only then enter P0.",
+  "automatic_progression": false
+}

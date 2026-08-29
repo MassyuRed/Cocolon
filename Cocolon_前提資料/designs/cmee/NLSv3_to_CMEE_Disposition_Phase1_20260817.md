@@ -182,7 +182,7 @@ TARGET — 二つの切替を混ぜない
 - `運用外殻として退役`: **2件**
 - `Piece用に将来改良`: **1件**
 - `分析構造用に将来改良`: **1件**
-- `Mash判断が必要`: **2件**
+- `Mash判断が必要`: **3件**
 - `受け皿なし`: **1件**
 
 合計は**exact51 classification rows**です。
@@ -205,7 +205,7 @@ D40とD46–D49はNLSv3 assetそのものではなく、移管時にUltra華恋�
 | D05 | Emlis固有Semantic Obligation（Reception、Emlis構造、観測depth等） | Emlisとして何を観測し、どう受け取り、どこまで深めるかを決める。 | Emlis observation duties／`ExperiencePlan`／`ConversationalObservationPayload`。 | **EmlisAI専用ルートへ継承** | 設計受け皿あり。PR #3に一部実装。ただし商品品質FAIL。 | CMEE Emlis route | Piece・分析構造へEmlisの声や観測方式を押しつけない。 | 方針確定済み |
 | D06 | semantic units／meaning nodes | 入力から意味単位を作り、文字列の寄せ集めではなく構造として扱う。 | `GroundedMeaningGraph`／`MeaningNode`。 | **CMEE共通部へ継承** | 設計・PR #3に受け皿あり。PR #2側にも別実装があり重複中。 | CMEE shared kernel | 三商品が同じsource-bound meaning基礎を利用できる。 | 方針確定済み |
 | D07 | relation construction／predicate・argument・scope・polarity・time | 誰が何をどうしたか、条件、対比、時制、否定等の関係を保持する。 | shared meaning relations＋Emlis Japanese structure admission。 | **CMEE共通部へ継承** | 設計受け皿あり。PR #2に詳細知識、PR #3に限定実装。exact移管未実施。 | CMEE shared kernel（初期実証はEmlis route） | 意味関係は共通基礎。日本語解析の具体方式はEmlis先行で実測後に共通化判断。 | 方針確定済み |
-| D08 | unknown／open slot／ambiguityの保持 | 分からないことを既知へ昇格せず、未確定範囲を残す。 | `GroundedMeaningGraph`の`UNKNOWN`／`CONFLICT`、source-owner disposition、route固有unknown表示。 | **CMEE共通部へ継承** | 設計・PR #3に一部実装。PR #2のfailure knowledgeは未移管。 | CMEE shared kernel＋各route projection | unknownの存在は共通、見せ方と質問判断は商品固有。 | 方針確定済み |
+| D08 | unknown／open slot／ambiguityの保持 | 分からないことを既知へ昇格せず、未確定範囲を残す。 | `GroundedMeaningGraph`の`UNKNOWN`／`CONFLICT`、Route B disposition、route固有unknown表示。 | **CMEE共通部へ継承** | 設計・PR #3に一部実装。PR #2のfailure knowledgeは未移管。 | CMEE shared kernel＋各route projection | unknownの存在は共通、見せ方と質問判断は商品固有。 | 方針確定済み |
 | D09 | forbidden inference／negative knowledge | 原因、性格、診断、未来、意図等をsourceなしで足さない。 | `ExperiencePlan.forbidden_promotions`／Trust checks／route-specific hard reject。 | **CMEE共通部へ継承** | 設計受け皿あり。PR #3にguard連携あり。三core統一contractは未実測。 | CMEE shared kernel | 意味を足さない原則は三商品共通。 | 方針確定済み |
 | D10 | Content Selectionの一般責任 | どのdutyを今回の完成物へ出すか、何を出さないかを決める。 | `ExperiencePlan.required_duties`／`optional_duties`／`deferred_duties`／`artifact_plans`。 | **CMEE共通部へ継承** | 設計受け皿あり。PR #3ではEmlis plan内に一部集約。 | CMEE shared kernel | surfaceより先に意味とdutyを選ぶ責任は共通。商品価値判断はroute owner。 | 方針確定済み |
 | D11 | Emlis固有Content Selection／sufficiency／depth | NORMAL／LIMITED／ASK／UNAVAILABLE等、Emlisとして返す深さを決める。 | Emlis sufficiency decision／intent compiler。 | **EmlisAI専用ルートへ継承** | 設計受け皿あり。PR #3はLIMITED中心のdisabled実装。 | CMEE Emlis route | 同じ意味でもPiece・Analysisとは商品目的が異なる。 | 方針確定済み |
@@ -243,7 +243,7 @@ D40とD46–D49はNLSv3 assetそのものではなく、移管時にUltra華恋�
 | D43 | G0–G10 checker／controller／executor／FD／transport family | 実行環境・証明・補助経路を管理する大規模外殻。 | current routeの受け皿不要。 | **運用外殻として退役** | CMEE migration designで退役済み。失敗知識だけ保持。 | historical only | 必要な確認はactual product improvement unit内の最小確認へ戻す。 | 方針確定済み |
 | D44 | NLS body-only reverse思想のPiece適用 | 共有文・画像へ変換後も本人の意味、条件、文章と画像の整合が残るか確認する。 | Piece must-keep coverage／canonical text＋visual spec verification。 | **Piece用に将来改良** | Piece詳細設計に受け皿あり。runtime未実装・未承認。 | CMEE Piece route | Emlis本文逆読をそのまま流用せず、文章＋画像artifact向けに作り替える。 | 方針確定済み |
 | D45 | NLS reverse verification思想の分析構造適用 | mapの点・線・方向・unknown・IFを元記録とevidenceへ戻す。 | Analysis evidence-bound node/edge／unknown gap／observed-hypothetical separation。 | **分析構造用に将来改良** | Analysis詳細設計に受け皿あり。runtime未実装・未承認。 | CMEE Analysis route | 文章逆読ではなく、graph provenanceとepistemic partition確認へ作り替える。 | 方針確定済み |
-| D46 | 外部生成AIによる自然表現補助 | **廃止。current/futureとも使用しない。** | current treeに実装・packet・fallbackを残さない。 | **PROHIBITED** | model／dependency／network／body send／cost 0。 | Mash current Route A-only decision | 名称変更やfresh packetで復活させない。 | CLOSED_REMOVED |
+| D46 | 将来の外部AIによる自然表現補助 | CMEEが決めた意味を変えず、自然な候補表現を作る可能性。 | 将来のroute-local candidate provider。meaning authorityにはしない。 | **Mash判断が必要** | 現在はモデルなし。dependency／provider採用0。 | Mash decision＋CMEE route owner | 品質・費用・提携・収益条件が変わった場合だけ再判断。 | 将来判断 |
 | D47 | Cycle001 acceptance contract変更／CMEE ingress re-entry | NLS current100のcandidate ingressをCMEE exact1へ切り替え、旧recovery ingressを止める。 | CMEE migration §C0–C2／fresh `08_cycle001_current_state.md`。 | **Mash判断が必要** | 未承認。CMEE design／PR #3はCycle navigation ownerではない。 | Mash＋Cycle001 current owner | acceptance denominator・fixture・契約を無断変更しないため。 | 別途明示判断 |
 | D48 | current production I5からCMEEへのone-owner cutover | 現行Emlis生成ownerをCMEE exact1へ切り替え、旧direct ownerを同一packetでunreachableにする。 | CMEE production cutover／ReplyEnvelope mapping／current structure map。 | **Mash判断が必要** | current productionは変更なし。NLS PR #2もCMEE PR #3もproduction ownerではない。 | Mash＋CMEE Emlis cutover owner | actual Product Read・Cycle proof・API/RN mapping後にのみ判断できる。 | 別途明示判断 |
 | D49 | NLSv3→CMEE exact asset migration manifest | どのsymbol、test、fixture、failure vectorを、どのCMEE ownerへ移すかを一意に記録する。 | 現行CMEE docsにはfamily-level dispositionはあるが、asset-level exact owner表がない。 | **受け皿なし** | 今回のDisposition表が最初のarchitecture-level受け皿。symbol/test単位は未作成。 | Phase 2のImplementation/Migration design owner | 丸ごとwrap・二重owner・test資産の取りこぼしを防ぐため必要。 | 今回の表確認後に設計補正 |
@@ -308,7 +308,7 @@ D40とD46–D49はNLSv3 assetそのものではなく、移管時にUltra華恋�
 
 - Pieceの文章＋画像向けmeaning verification。
 - 分析構造のnode／edge／direction／unknown／IF reverse verification。
-- 外部生成AIによる自然表現補助は廃止済みで、future decisionへ戻さない。
+- external AIによる自然表現補助。
 - Cycle001 ingress cutover。
 - production one-owner cutover。
 
@@ -435,9 +435,8 @@ NLSv3の中には、実際には四種類のものが混ざっています。
 1. 再確認・補正版をCocolon Draft PR #30へnon-authority migration inputとして置き、第2段階の設計修正根拠として採用するか。
 2. Cycle001のcandidate ingressをCMEE exact1へ変える時。
 3. current productionをCMEE exact1へcutoverする時。
-4. Piece／分析構造の実装・activationを開始する時。
-
-外部生成AIを自然表現の候補生成に使う経路は廃止済みで、Mash判断候補へ戻さない。
+4. 将来、外部AIを自然表現の候補生成に使う時。
+5. Piece／分析構造の実装・activationを開始する時。
 
 それまでは、設計受け皿の確認を実装承認やproduction変更へ自動変換しません。
 

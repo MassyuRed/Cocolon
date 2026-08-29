@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_three_core_and_cmee_current_structure_entry
 title: "三大中核構造とCMEE — Current Structure Read First"
-revision_date: "2026-08-21 JST"
+revision_date: "2026-08-15 JST"
 document_role: "CURRENT_STRUCTURE_ROUTING_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -33,9 +33,9 @@ CMEEは設計候補がlocal artifactに留まり、GitHub上のdurable ownerが�
 
 | 構造 | Current structure map | 商品target | Current stateの要点 |
 |---|---|---|---|
-| EmlisAI構造 | [01_emlis_ai_current_structure.md](01_emlis_ai_current_structure.md) | current threadを中心にLayer 1「見えたこと」とLayer 2「Emlisから」を返し、plan budget内で各roundの不足一点だけを問い、Plus／Premiumは条件成立時だけLayer 3「記録の線」を加える | production観測／受け取りはCURRENT_ACTUAL。plan別thread／問い／Layer 3はDESIGNED_NOT_IMPLEMENTED |
-| Piece構造 | [02_piece_current_structure.md](02_piece_current_structure.md) | 保存済み本人入力を、他者が単独で受け取れるcanonical textと画像artifactへ変え、actual recipient-visible routeへ届ける | current user-visibleはold Q&A。Piece V2とrecipient-visible routeはCODE_DISABLED／DESIGNED_NOT_IMPLEMENTED |
-| 分析構造 | [03_analysis_current_structure.md](03_analysis_current_structure.md) | 蓄積入力から現在の自己構造routeを根拠付きtext + graphで示し、観測routeと分離したSELF_ONLY IF routeを扱う | current Watashi Mapはpresentation-oriented。evidence graph／IF routeはDESIGNED_NOT_IMPLEMENTED。external retentionはfuture HOLD |
+| EmlisAI構造 | [01_emlis_ai_current_structure.md](01_emlis_ai_current_structure.md) | 入力を「読まれた形」の観測へ変え、必要な場合だけ一点を問い、回答分だけ観測を深める | production観測／受け取りはCURRENT_ACTUAL。問い／refined observationはDESIGNED_NOT_IMPLEMENTED |
+| Piece構造 | [02_piece_current_structure.md](02_piece_current_structure.md) | 保存済み入力を、他者が単独で受け取れるcanonical textと画像artifactへ変える | current user-visibleはold Q&A。Piece V2はCODE_DISABLED／DESIGNED_NOT_IMPLEMENTED |
+| 分析構造 | [03_analysis_current_structure.md](03_analysis_current_structure.md) | 蓄積入力から現在の自己構造routeを根拠付きで示し、観測routeと分離したIF routeを扱う | current Watashi Mapはpresentation-oriented。evidence graph／IF routeはDESIGNED_NOT_IMPLEMENTED |
 | CMEE | [04_cmee_current_structure.md](04_cmee_current_structure.md) | exact3の商品に共通するsource・意味・plan・realization・traceを持つ共有生成中枢 | DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE／NO_SAFE_CMEE_V1A_CANDIDATE_STOP／NOT_IMPLEMENTED／NOT_PRODUCTION_CONNECTED |
 
 CMEEは技術上first-classに育てる共有Engine targetであるが、独立したuser-facing商品目的を持たないため、商品構造上の「第四の中核」ではない。商品中核はEmlisAI／Piece／分析構造のexact3である。
@@ -119,32 +119,10 @@ Map更新のためにmap checker、map Receipt、map専用manifest family、phas
 - EmlisAI body／voiceをPieceまたは分析構造へ流用しない。
 - Pieceのcanonical text／visual artifactをEmlisAI observationまたは分析claimのsourceにしない。
 - 分析構造の推定、route、simulationをEmlisAIまたはPieceの観測factにしない。
-- cross-coreで利用できる本人source候補は、original input、supplemental answer、許可・plan・purpose境界を満たす本人contextだけである。Analysisはsupplemental answerをoriginal recordに従属する補足根拠として利用できるが、別record／別occasionへ数えない。Pieceは本人が「この回答も含める」と明示opt-inした場合だけ利用できる。
-- question本文、Emlis Layer 1／2／3、Piece生成本文、Analysis推定／IFはderived artifactであり、本人が述べたsemantic sourceへ昇格させない。
 - CMEEは共通言語・artifact生成primitiveを提供してよいが、core固有のsource採用、何を言うか、voice、artifact lifecycle、Product Readを奪わない。
 - machine verification、human Product Read、runtime readiness、Cycle acceptanceは相互変換しない。
 
-## 8. Step 10 final integrated contract synchronization
-
-この版は次のreviewed identityを、既存canonical ownerへ責務別に同期する。
-
-    DOCUMENT_ID = CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2
-    DESIGN_IDENTITY = CMEE_THREE_CORE_INTEGRATED_DESIGN_20260821
-    FORMAL_PRO_REVIEW = CONSUMED_EXACTLY_ONCE
-    SECOND_PRO_REVIEW = false
-
-同期する要点は次のとおり。
-
-- EmlisAIはoriginal／supplemental answer／derived artifactを同一threadの別role・別version・別round lineageとして保存し、source overwriteを0にする。
-- Freeはcurrent thread only、Plusはeligible owned historyを加え、Premiumはさらに根拠付き・暫定的・修正可能な本人固有interpretive frameと許可済み本人contextをplan境界内で利用する。
-- question budgetはFree／Plusがthread全体で0..1、Premiumが逐次0..3であり、各roundはLayer 1／2を先に返す。P6 current-input structure insightはLayer 1、P5 history continuityはPlus／Premiumの条件付きLayer 3へ置く。
-- Pieceはplan別exact3 format、supplemental answerの明示opt-in、text + visualの同一artifact、recipient-visible route exact1以上をfinal acceptanceへ含める。
-- AnalysisはFree latest-only、Plusはartifact history + comparison、PremiumはPlus範囲に加えて別承認後のSELF_ONLY IF + SavedRouteIntentを扱う。text + graphは同じcanonical identityから投影し、external retention／sharingはfuture HOLDとする。
-- 実装順のownerはEmlis vertical exact3、Piece、Analysis observed、Analysis IFであり、残るlogical responsibilityはNB-F01..NB-F10 exact10である。
-
-今回のGitHub write setは既存exact14だけである。新規parallel design、削除、rename、code、test、runtime、DB、API、RN、dependency、activation、Cycle／Product Read effectを作らない。設計同期から実装開始へ自動進行しない。
-
-## 9. Last verified refs
+## 8. Last verified refs
 
 この版の構造監査preimage:
 
@@ -153,10 +131,6 @@ Map更新のためにmap checker、map Receipt、map専用manifest family、phas
 
     MassyuRed/Cocolon Draft PR #29
       0854e21f92f841fd2cfdcef08b9e3117fc93f96a
-      OPEN / DRAFT / UNMERGED
-
-    MassyuRed/Cocolon Draft PR #30 Step 10 reflection preimage
-      d29042f44e882110514b74dcc6a1b3f31ec746e6
       OPEN / DRAFT / UNMERGED
 
     MassyuRed/mashos-api main
@@ -168,7 +142,7 @@ Map更新のためにmap checker、map Receipt、map専用manifest family、phas
 
 このSHAを将来のcurrent事実として固定しない。次の作業はfresh headと実pathを再確認する。
 
-## 10. この資料化のcredit
+## 9. この資料化のcredit
 
 このworkは、current全体構造のowner不在／分散という観測済みblockerを最小補正するOBSERVED_BLOCKER_MINIMAL_FIX / DOCUMENTATION_NAVIGATION_ONLYであり、商品出力の改善creditではない。
 

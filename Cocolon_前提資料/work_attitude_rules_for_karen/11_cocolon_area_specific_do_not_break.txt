@@ -1,6 +1,6 @@
 # Cocolon領域別: 特に壊してはいけないもの
 
-revision_date: 2026-08-25
+revision_date: 2026-08-07
 normative_status: CURRENT_AREA_REFERENCE
 
 ## 全体
@@ -20,7 +20,7 @@ normative_status: CURRENT_AREA_REFERENCE
 - 入力量に応じて返答量を調整する。
 - 「強度表示」は見せない方向。
 - 例文特化コードをruntimeに入れない。
-- EmlisAI / CMEEのcurrent/future language routeはproviderless Route A exact1だけとする。外部生成AI、external composer、remote model/provider、current input本文またはsemantic projectionの外部送信、network call、provider dependency、fallback、external costを追加・復活させない。Route Aのceilingまたはreturn budget exhaustionではそのままSTOPする。
+- 外部AIレンタル前提を勝手に復活させない。
 - `observation_status=passed` と本文表示条件など、RN表示contractを壊さない。
 
 ## Piece

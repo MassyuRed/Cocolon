@@ -1,9 +1,7 @@
 # CMEE V1-C — Piece Semantic Visual Artifact 詳細設計
 
 - document id: `cocolon.cmee.v1c.piece_semantic_visual_artifact.detailed_design`
-- revision date: `2026-08-21 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 - runtime state: `NOT_IMPLEMENTED`
 - Piece activation: `NOT_AUTHORIZED`
 - API / DB / RN effect: `0`
@@ -18,21 +16,16 @@ V1-Cが最終的に作るものは、保存済みのユーザー入力を、他�
 ```text
 owner-authenticated saved input
 -> source-bound provisional meaning
--> plan-bound Piece public-expression intent
+-> Piece public-expression intent
 -> format-specific canonical text
 -> versioned visual recipe and layout plan
 -> positive realization trace
 -> verified PieceArtifactSpec
 -> Piece-owned renderer
 -> RenderedPieceExport
--> preview / save
--> actual recipient-visible route
--> final Product Read
 ```
 
 CMEEはcanonical textとrender-neutral visual specificationまでを生成する。画像binaryの描画、保存、公開、Nexus表示、quota、削除はPiece product lifecycle ownerが担う。
-
-previewとsaveは中間Product Readである。Piece V2のfinal acceptanceとlegacy Q&Aからのclean cutoverには、actual recipient-visible route exact1以上で他者がartifactを受け取れることを確認する。
 
 ## 1. Activation boundary
 
@@ -47,7 +40,7 @@ previewとsaveは中間Product Readである。Piece V2のfinal acceptanceとleg
 - CMEE Piece moduleの空実装
 - EmlisAIまたは分析構造bodyの再利用
 
-Step 10のrecommended schedulingでは、Emlis Vertical 1（Layer 1／2）、Vertical 2（question／refined Layer 1／2）、Vertical 3（Plus／Premium Layer 3）の後にPieceを置く。ただし前verticalのmachine proofだけをhard prerequisiteまたはautomatic authorityにせず、V1-C implementation／activationはactual Piece unitへの別Mash判断を必要とする。Cycle001はexternal proof laneであり、Pieceの無条件gateにしない。
+V1-C implementationは、Emlis V1-A / Cycle001 proofとV1-B Emlis Questionのoperational proof後に、別Mash判断を必要とする。approved V1 orderを変更してPieceをV1-Bより先にactivateしない。
 
 ## 2. Core request
 
@@ -58,9 +51,7 @@ PieceGenerationRequest
   saved_input_ref
   saved_input_version
   source_stage
-  supplemental_answer_refs[]
-  supplemental_user_opt_in = true | false
-  plan = FREE | PLUS | PREMIUM
+  supplemental_answer_ref?
   requested_format?
   visibility_intent
   audience_policy_ref
@@ -78,10 +69,9 @@ source rule:
 | Stage | Original | Supplemental | Other-core body |
 |---|---:|---:|---:|
 | normal / pre-question | exact1 | 0 | 0 |
-| refined, user opt-in false | exact1 immutable | 0 | 0 |
-| refined, user opt-in true | exact1 immutable | 1..3, separate user-owned role | 0 |
+| refined | exact1 immutable | exact1 separate role | 0 |
 
-supplemental answerはユーザーが「この回答も含める」と明示した場合だけPiece sourceにできる。本人の明示選択はPiece ingressのsource selectionとして記録する。Emlis observation / reception / question decision / Layer 3、Analysis claim / route / IFはcontrol lineageに参照できても、Piece本文のmeaning sourceにはできない。
+Emlis observation / reception / question decision、Analysis claim / route / simulationはcontrol lineageに参照できても、Piece本文のmeaning sourceにはできない。
 
 ## 3. Proposed future module topology
 
@@ -132,7 +122,7 @@ V1-C implementation approval時は、new CMEE pathsだけでなく次のcurrent 
 
 1. authenticated ownerとsaved input ownerを一致させる。
 2. source ID、source version、stage snapshotをexact1でfreezeする。
-3. originalと利用者が明示opt-inしたsupplementalを別partition / commitmentとして保持する。
+3. originalとsupplementalを別partition / commitmentとして保持する。
 4. raw bodyはrequest-local private materialとして扱う。
 5. source range、Unicode scalar、UTF-8 byte境界を検証する。
 6. Emlis / Analysis bodyをsource setから拒否する。
@@ -145,7 +135,6 @@ failure:
 | saved input absent / version mismatch | `UNAVAILABLE` |
 | owner scope mismatch | `REJECTED` |
 | supplemental-only request | `REJECTED` |
-| supplemental included without explicit user opt-in | `REJECTED` |
 | other-core body mixed | `REJECTED` |
 | raw payload replay route | `REJECTED` |
 
@@ -230,17 +219,7 @@ formatはkeyword、文長、focus keyだけで選ばない。semantic shape、au
 
 eligible format 0なら`UNAVAILABLE`。Q&Aをfallback formatにしない。
 
-### 8.1 Plan contract
-
-| Plan | selected format | selection mode |
-|---|---|---|
-| Free | `short_essay` | fixed。chooser 0 |
-| Plus | `short_essay`／`quote`／`declaration`のeligible exact3 | Piece product ownerが自動選択 |
-| Premium | `short_essay`／`quote`／`declaration`のeligible exact3 | 利用者が選択可能 |
-
-Freeで`quote`または`declaration`を選ばない。Plusはeligible setからproduct ownerが自動選択し、Premiumは同じeligible setから利用者が選択できる。全planでmeaning fidelity、safety、readabilityの最低品質を同等にし、料金差を意味の欠落、安全性低下、読みにくさで作らない。
-
-### 8.2 Existing Piece V2 contract mapping
+### 8.1 Existing Piece V2 contract mapping
 
 | Contract | CMEE V1-C use |
 |---|---|
@@ -395,10 +374,6 @@ machine gates:
 - cross-core body / voice leakage 0
 - public safety violation 0
 - format ineligible selection 0
-- Free selected format = `short_essay`、chooser 0
-- Plus auto-selectionとPremium user-selectionがeligible exact3外を選ぶこと 0
-- plan間のmeaning fidelity / safety / readability最低品質差 0
-- explicit user opt-inなしのsupplemental source use 0
 - text / recipe / version identity mismatch 0
 - clip / ellipsis / hidden continuation 0
 - policy-external read 0
@@ -412,7 +387,6 @@ human / actual-device Product Read:
 - 意味を削って安全に見せていないか
 - 保存・共有したい商品品質か
 - iOS / Androidのactual viewで読めるか
-- actual recipient-visible route exact1以上で、他者がPieceを単独で受け取れるか
 
 ## 14. Clean cutover
 
@@ -423,12 +397,9 @@ new Piece generation ingress exact1
 Q&A active/selectable format 0
 legacy Q&A generation/API/RN/Nexus entrypoint reachability 0
 dual-run / coexistence renderer / compat-read adapter 0
-actual recipient-visible route exact1以上
 first rollback target = pre-admitted PIECE_V2_SAFE_UNAVAILABLE_ROLLBACK_TARGET
 later rollback = deploy / git revert to last admitted single-owner V2 version
 ```
-
-recipient-visible routeの候補は端末share、Cocolon内部表示、Nexus等だが、本設計反映でexact routeを確定しない。actual fit-gapとMashの後続判断までHOLDとし、架空の導線を追加しない。preview / saveだけをfinal acceptanceへ変換せず、route exact1がactual proofされるまでclean cutoverを完了扱いしない。
 
 初回V2 activationには、戻り先となるadmitted V2がまだ存在しない。したがってactivationより前に、旧Q&A reachability 0を保ったまま明示的な`UNAVAILABLE`を返す`PIECE_V2_SAFE_UNAVAILABLE_ROLLBACK_TARGET`を、public behavior、single owner、API / RN表示、quota 0、device testと共に別Mash判断でpre-admitする。これが成立しなければ`NO_SAFE_PIECE_V1C_FIRST_CUTOVER_STOP`とし、初回activationを行わない。
 
@@ -443,12 +414,10 @@ CMEE_V1C_PIECE_VISUAL_OPERATIONAL
 成立条件:
 
 - owner-authenticated saved inputからverified `PieceArtifactSpec`が生成される。
-- Freeは`short_essay`／chooser 0、Plusはeligible exact3から自動、Premiumはeligible exact3から利用者選択であり、品質下限が同等である。
-- supplemental answerは利用者が明示opt-inした場合だけsourceに含まれる。
+- exact3 formatがsemantic eligibilityに従う。
 - preview / save / card / render / export identityが一致する。
 - publicizationがmeaningを消さない。
 - actual-device Product Readを通過する。
-- actual recipient-visible route exact1以上のProduct Readを通過する。
 - legacy Q&A active ingressが0である。
 - pre-admitted first-cutover rollback targetまたはlast admitted V2 rollback targetがexact1である。
 - Piece current structure map / manifest / historyがsame packetで同期する。

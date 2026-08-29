@@ -1,17 +1,12 @@
 ---
 doc_id: cocolon_emlis_ai_current_structure
 title: "EmlisAI構造 — Current Structure"
-revision_date: "2026-08-25 JST"
+revision_date: "2026-08-15 JST"
 document_role: "EMLIS_AI_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
 implementation_effect: 0
-stage1_v2_product_read_state: "EVALUATED_FAIL_QUALITY_INSUFFICIENT"
-stage1_additional_correction_design_state: "STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP"
 cycle001_effect: 0
-stage1_language_route: "ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER_ONLY"
-external_generative_ai_allowed: false
-external_body_send: 0
 automatic_progression: false
 ---
 
@@ -28,11 +23,11 @@ EmlisAIの安定した商品目的、production経路、NLS v3／Cycle001 WIP、
 
 EmlisAIは、ユーザーの現在入力、選択感情、category、行動、時点、適格なowned historyを、入力直後に「読まれた形」へ変える。
 
-Current product destinationの中心は次の二つであり、plan別thread／問い／履歴接続はdesigned futureである。
+Current product destinationの中心は次の二つであり、三つ目はdesigned futureである。
 
-1. Layer 1「見えたこと」として、今の状態、関係、変化を根拠の範囲で観測する。current input内の構造気づきは全planのLayer 1に含む。
-2. Layer 2「Emlisから」として、具体的な観測claimへ結び付いた人間的な受け取りを返す。
-3. DESIGNED_NOT_IMPLEMENTED: 各roundで重要なunknownが残る場合だけplan budget内の一点を問い、回答分だけLayer 1／2を更新する。Plus／Premiumは条件成立時だけLayer 3「記録の線」を0..1加える。
+1. 今の状態、関係、変化を根拠の範囲で観測する。
+2. 具体的な観測claimへ結び付いたEmlisからの人間的な受け取りを返す。
+3. DESIGNED_NOT_IMPLEMENTED: 条件を満たす場合だけ、記録の線、構造の気づき、または一点の問いへ進む。
 
 単なる復唱、要約、テンプレ共感、診断、人格決め、原因の断定、相手の意図の推測ではない。
 
@@ -68,40 +63,15 @@ NLS v3 Step10 public routingは同file内でdisabledであり、Cycle001 candida
 
 将来のEmlis問いsystemは、質問だけを返すchat routeではない。
 
-    original input as USER_OWNED_SOURCE
-      -> round 0 Layer 1 + Layer 2
-      -> if important unknown remains and plan budget remains:
-           question exact1
-           -> supplemental answer as a separate USER_OWNED_SOURCE
-           -> refined Layer 1 + Layer 2
-           -> next sequential round only when allowed
-      -> Plus/Premium and eligibility satisfied:
-           Layer 3 0..1
+    normal observation
+    limited observation
+    pre-question observation + bound reception
+    one clarification request
+    supplemental answer as separate source
+    refined observation
 
-observation stage、問い要否decision、visible artifactを分離する。Free／Plusのquestion budgetはthread全体で0..1、Premiumは逐次0..3である。一画面へ複数問を一括表示せず、skip、stop、分からない、無回答を正常終了として扱う。
-
-問いdecisionとquestion本文はcontrol／derived lineageでありsemantic sourceではない。回答だけがsupplemental sourceとなり、original inputを上書きしない。問いがない場合もoriginal、Layer 1、Layer 2を同じinput-history threadへ順番に保存する。
-
-### 2.4 Plan別source・artifact contract
-
-| Plan | Allowed user-owned source | Rejected source | Visible target | Question budget |
-|---|---|---|---|---|
-| Free | current threadのoriginalとsame-thread supplemental answers | past input、derived user model、cross-core context | Layer 1、Layer 2。Layer 3なし | thread全体で0..1 |
-| Plus | current threadとeligible owned history | 許可外cross-core derived artifact | Layer 1、Layer 2、条件成立時Layer 3 0..1 | thread全体で0..1 |
-| Premium | current thread、eligible owned history、許可済み本人context | Piece生成本文、Analysis推定／IF、過去Emlis本文 | Layer 1、Layer 2、条件成立時Layer 3 0..1 | sequential 0..3 |
-
-Premiumの商品contractの中心表現は次のとおり。
-
-> **Premiumでは、ユーザーの蓄積した本人情報から作られた、根拠付き・暫定的・修正可能な「ユーザー固有の解釈フレーム」を使い、ユーザー本人の辞書により近い位置から観測とReceptionを行う。**
-
-interpretive frameは本人情報から導く処理境界であり、本人が直接述べたsourceでもvisible evidenceでもない。本人は参照範囲を確認・修正・拒否でき、sourceへ戻れない主張、許可外cross-core derived artifact、診断・人格固定・他者意図推定を加えない。
-
-### 2.5 Layerと既存資産の位置
-
-- Layer 1「見えたこと」は入力固有の観測であり、P6 Structure Insightのrelation classification／guardをadaptしてcurrent input内の構造気づきを全planへ残す。
-- Layer 2「Emlisから」はLayer 1の観測claimへ結び付いたHuman Receptionであり、独立した根拠なし断定にしない。
-- Layer 3「記録の線」は今回入力とeligible owned historyの具体的なcontinuityであり、P5 User Label Connectionのeligibility／guard／scopeをadaptしてPlus／Premiumだけに条件付き0..1で出す。
-- capability、context、user model、history search、P5、P6、Free history boundary testsはADAPT_AND_INHERIT候補である。ただしP5／P6のgeneric fixed surfaceをtarget visible bodyとしてREUSE_AS_ISしない。
+observation stage、問い要否decision、visible artifactを分離する。
+問いdecisionはcontrol lineageでありsemantic sourceではない。回答だけがsupplemental sourceとなり、original inputを上書きしない。
 
 ## 3. 問いに関するexact3分類
 
@@ -109,7 +79,7 @@ interpretive frameは本人情報から導く処理境界であり、本人が�
 |---|---|---|
 | TodayQuestion product | CURRENT_ACTUAL / 別product route | ai/services/ai_inference/api_today_question.py、ai/services/ai_inference/today_question_store.py。Emlis内部問いと混同しない |
 | Emlis internal question candidate | DORMANT_OR_PARTIAL | ai/services/ai_inference/emlis_ai_internal_question_service.py、ai/services/ai_inference/emlis_ai_question_dominance_guard.pyは存在するがcurrent reply serviceから未接続 |
-| Emlis observation-and-question system | DESIGNED_NOT_IMPLEMENTED | observation-first、各roundの問いはexact1、Free／Plus 0..1、Premium sequential 0..3、skip可能、同じthreadでrefined observation |
+| Emlis observation-and-question system | DESIGNED_NOT_IMPLEMENTED | observation-first、問いは必要な一点だけ、skip可能、同一cardでrefined observation |
 
 問い関連fileの存在を、問いsystemの商品完成へ変換しない。
 
@@ -218,8 +188,6 @@ Route Uまたはcontract変更は別Mash LEVEL_3判断が必要であり、こ�
 | Role | Path | Lifecycle |
 |---|---|---|
 | stable product destination | Cocolon_前提資料/Cocolon_EmlisAI_longterm_roadmap_CURRENT.md | CURRENT_PRODUCT_OWNER。embedded SHAはfresh currentではない |
-| Karen-derived Stage 1 functional owner | Cocolon_前提資料/designs/cmee/v1/karen_derived/00_read_first.md + 01_emlis_observation_and_reception.md | DRAFT_PR_CANONICAL_CANDIDATE / product-function owner exact2 |
-| Pro / Ultra technical integration source | Cocolon_前提資料/designs/cmee/Cocolon_CMEE_Stage1_ProUltra_KarenDerivedFunctional_FinalTechnicalDesign_20260822.md | NONCANONICAL_TECHNICAL_INTEGRATION_SOURCE |
 | NLS v3 alignment | Cocolon_前提資料/Cocolon_EmlisAI_NLSv3_CurrentAlignment.md | CURRENT_REFERENCE。append済みpinsに古いものがある |
 | immutable NLS design baseline | Cocolon_前提資料/historical_baselines/emlis_ai/Cocolon_EmlisAI_ModelFreeNaturalLanguageSurfaceV3_DetailedDesign_ImplementationOrder_20260714_Revised_Cycle.md | CURRENT_TECHNICAL_NORM / immutable |
 | Cycle current navigation | Cocolon_前提資料/08_cycle001_current_state.md | CURRENT only at fresh applicable ref |
@@ -240,7 +208,7 @@ Route Uまたはcontract変更は別Mash LEVEL_3判断が必要であり、こ�
 - 根拠のない原因、人格、診断、他者意図、未来保証を追加しない。
 - ObservationとEmlis Receptionを同義反復にしない。
 - unknownを埋めず、通常観測、限定観測、問い、separate safetyを分ける。
-- 問いは各roundの観測と受け取りの後にexact1だけ、skip可能。Free／Plus 0..1、Premium sequential 0..3のbudgetを超えず、問い先行、詰問、一括質問、無条件の質問ラリーをしない。
+- 問いは観測と受け取りの後、一点だけ、skip可能。問い先行、詰問、毎回の質問ラリーをしない。
 - emergency／high-care surfaceはseparate safety ownerを使う。
 
 ### Acceptance and privacy
@@ -254,44 +222,18 @@ Route Uまたはcontract変更は別Mash LEVEL_3判断が必要であり、こ�
 
 1. production I5とNLS v3／Cycle001の二経路が存在し、統合またはcutoverは未承認。
 2. Japanese predicate／argument governing authority 251/251は未成立。
-3. Emlis input-history thread、plan別question lifecycle、refined Layer 1／2、Plus／Premium Layer 3は商品完成未確認。
+3. Emlis observation-and-question systemは商品完成未確認。
 4. mainのCycle current navigationはDraft #29より古い。
 5. active planの一部metadataにdraft lifecycle表記が残るため、current actual判断では08とremote factsを優先する。
-6. CMEE Stage 1はdisabled verticalまで実装済みだが、Pro / Ultra追加設計のruntime implementation、Cycle re-entry、productionは未承認。
+6. CMEEは設計候補であり、Emlis V1-A implementation／Cycle re-entryは未承認。
 
 CMEE Emlis detailed design candidate:
 
 [CMEE V1-A — EmlisAI Observation Vertical 詳細設計](../designs/cmee/v1/02_emlis_v1a_detailed_design.md)
 
-このpointerはcurrent production ownerまたはCycle navigationを変更しない。current runtime evidenceはmashos-api Draft PR #3 head `106a1b8c92e808d15e88ce4f56c6300568d93e9f`、47 tests PASS、unchanged exact8 8/8 `GENERATED`、structural trace 8/8である。Mash Product Readはpending、`candidate_ready=false`、`product_credit=0`、`automatic_progression=false`である。historical `NO_SAFE_CMEE_V1A_CANDIDATE_STOP`をcurrent candidate stateへ復活させない。
+このpointerはcurrent production ownerまたはCycle navigationを変更しない。provider / acceptance contractのcurrent resultは`NO_SAFE_CMEE_V1A_CANDIDATE_STOP`であり、new Mash LEVEL_3判断までimplementationを開始しない。
 
-## 9. Step 10 reviewed design synchronization
-
-このmapは次をcanonical current-structure readingへ同期する。
-
-    DOCUMENT_ID = CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2
-    DESIGN_IDENTITY = CMEE_THREE_CORE_INTEGRATED_DESIGN_20260821
-    FORMAL_PRO_REVIEW = CONSUMED_EXACTLY_ONCE
-
-target実装順は、Vertical 1 Layer 1／2、Vertical 2 question／refined Layer 1／2、Vertical 3 Plus／Premium Layer 3である。現存するcapability、context、user model、history、P5、P6を移行候補として先に照合し、不足するproduct integrationだけをNB-F01..NB-F04として残す。これはruntime接続、API／DB／RN変更、activation、Product Read合格を意味しない。
-
-### 9.1 2026-08-23 華恋由来Stage 1 functional correction
-
-functional owner exact2は、P1–P8、M1–M7、Layer 1 / 2、V1–V9、観測・選択・応答構造、最低商品品質を所有する。既存`02 / 05 / 06`はtechnical realization、schema / ref / identity、implementation / verificationを所有し、Pro / Ultra追加技術資料はnoncanonical integration sourceとする。
-
-Stage 1の新product contract:
-
-- Observation depthとSubjective depthを独立にする。
-- FOCUSED L2はhonest / input-specific proposition exact1で正常成立する。
-- AffectIntensityをuser emotion strengthから直接決めない。
-- `DISCOMFORT`を出来事 / value conflict / promotion riskへbindし、ユーザー人格へ向けない。
-- existing `GroundedHumanReceptionPlan`資産をREUSE / TRANSFORMし、finished surface ownerだけをretireする。
-- semantic interpretation poolとsame-plan surface `RealizationCandidateSet`を分け、automatic retry / legacy fallbackを0にする。
-- Free=current input only。eligible owned historyはPlus / Premiumのsource admission境界で扱い、current unitのPremium runtime effectは0。
-
-今回のeffectはdesign / routing / mapだけで、runtime / test / production effectは0。次は別の長い設計projectではなく、fresh short execution envelopeから一つのbounded Stage 1 product correctionへ戻る。Mashのimplementation開始指示前は進めない。
-
-## 10. History pointers
+## 9. History pointers
 
 - 2026-05〜07の実装経緯: EmlisAIの実装済み資料/
 - milestone timeline: Cocolon_前提資料/07_latest_snapshot_diff.md
@@ -301,7 +243,7 @@ Stage 1の新product contract:
 
 履歴の古いnext actionをcurrentへ復活させない。
 
-## 11. Map update triggers
+## 10. Map update triggers
 
 次を変更するworkは、このfileを同じwrite unitで更新する。
 
@@ -315,7 +257,7 @@ Stage 1の新product contract:
 
 内部logicだけのfixで上記が不変ならSTRUCTURE_MAP_DELTA_NONEと理由をPRへ記す。
 
-## 12. Last verified refs
+## 11. Last verified refs
 
     Cocolon main
       de9c3d985053bbaaa7fc0d396e688cc2097ece40
@@ -323,154 +265,10 @@ Stage 1の新product contract:
     Cocolon Draft PR #29
       0854e21f92f841fd2cfdcef08b9e3117fc93f96a
 
-    Cocolon Draft PR #30 current work preimage
-      986dbb6b1a0e5be54cf5776e4402bf369ec26887
-
     mashos-api main
       a8ca4ddf7b7ae76bf7b3d73e74e3a5808d623428
 
     mashos-api Draft PR #2
       958c1b53f5b5894691e0b10e2d991fb8236d9f6f
 
-    mashos-api Draft PR #3 current
-      106a1b8c92e808d15e88ce4f56c6300568d93e9f
-
 次回はfresh refと実fileを再確認する。
-
-## 13. Latest Stage 1 disabled candidate map — Step 7 correction（2026-08-23）
-
-本節はStage 1 correctionのcurrent working stateについて§8 / §9.1よりfreshである。current implementation ownerはmashos-api Draft PR #3のprivate disabled routeであり、production `emlis_ai_reply_service.py`、ReplyEnvelope、RN display ownerを置換しない。
-
-| Surface | Current owner / state | Effect |
-|---|---|---|
-| Stage 1 response compiler | `cocolon_meaning_experience_engine/emlis_stage1_response.py::compile_stage1_response` / disabled candidate | private disabled effect exact1 |
-| finite language owner | `cocolon.emlis.stage1.microgrammar.v2` / exact44 / 16695 bytes / canonical 02 + 05 byte-exact | production effect 0 |
-| engine / runner | `MeaningExperienceEngine.generate()`経由のdisabled candidate run | public ingress effect 0 |
-| production reply / API / DB / RN | existing owners unchanged | effect 0 |
-| provider / source / dependency | no new owner, no expansion | effect 0 |
-| Product verdict | Mash body-full Product Read only | not evaluated in docs |
-
-最初のStep 7 pre-screenで共通surface原因を検出してStep 2–4へ戻し、provider / source / allowlistを広げずsame-scope v2 finite correctionを行った。fresh Step 5は7/7、Step 6はcontracts 70/70 + vertical 41/41 = 111/111で、all-variant quote seal、forged three-pair fail-closed、typed source-shape parser tableも通過した。formal V10 Step 7はpairwise 28/28と独立set-level review 2/2を通過し、case / pairwiseのMajor / Blocker 0、明白な低品質0/8、source fidelity 8/8、duplicate / forbidden 0、SX07重点全PASSとなった。full receiptはcanonical 06 §29が所有する。machine GREENや華恋pre-screenはMash Product PASSではない。
-
-```text
-candidate_state = DISABLED_MASH_PRESENTATION_PRE_SCREEN_PASSED
-current_runtime_owner = mashos-api Draft PR #3 / canonical 06 §29 final token
-formal_step7_revision = V10
-v2_inventory_tuple_bytes_sha256 = 44 / 16695 / dc4e1e5ef8026d5577698f375e305db7886f57096c69e6e6a0b99bfe1f26de8a
-step6_full_regression_rerun = 111 / 111 PASS
-step6_quote_and_parser_regression = PASS
-production_owner_changed = false
-provider_source_dependency_expansion = 0
-public_schema_api_db_rn_persistence_effect = 0
-private_body_digest_locator_github_publication = 0
-runner_candidate_ready = false
-runner_product_read_eligible = false
-mash_presentation_pre_screen_eligible = true
-product_read_evaluated = false
-product_pass = not_declared
-product_technical_full_i1_cycle001_production_credit = 0
-remote_exact_path_and_bytes_equality = PASS_VERIFIED_POST_PUSH
-automatic_progression = false
-```
-
-final remote refs、exact changed-path set、file bytes equalityはcommit / push後にcanonical 06 §29の`PASS_VERIFIED_POST_PUSH`として実測確認した。
-
-## 14. Latest Stage 1 product verdict / additional correction map（2026-08-24）
-
-本sectionはcurrent Product verdictとnext design stateについて§13よりfreshである。
-
-- v2 Step 7 machine / pre-screen: historical GREEN。
-- Mash actual Product Read: `EVALUATED_FAIL_QUALITY_INSUFFICIENT`。
-- current v2 product acceptance: `FALSE`。
-- current candidate ready / Product / technical / production credit: `false / 0 / 0 / 0`。
-- additional correction final body: [Pro-confirmed noncanonical integration source](../designs/cmee/Cocolon_CMEE_Stage1_AdditionalCorrection_UltraFinalTechnicalBodyAndJointRecommendation_20260824.md)。
-- final body reviewed source SHA-256: `1f02e566ddfaefcbfc99ba985e3ef8af5c8e15b8867215c994cda99fbdedff05`。
-- Pro final confirmation: `PASS / BLOCKER 0 / MAJOR 0 / MINOR 0`。
-- implementation order owner: canonical 06 §30 → final body §13。
-- implementation approval / runtime / test / provider / API / DB / RN / persistence / production effect: `0`。
-- current authorized next implementation: `NONE_PENDING_MASH_LEVEL3_IMPLEMENTATION_DECISION`。
-- automatic progression: `false`。
-
-current production `emlis_ai_reply_service.py`、ReplyEnvelope、RN display、Cycle001、question、Layer 3、Piece、Analysisのownerは変わらない。new final bodyはcurrent v2 surface ownerを即時に置換せず、future LEVEL_3 approval後にだけcanonical owner exact1へ分配する。
-
-## 15. Current Route A-only authority（2026-08-25 Mash決定）
-
-Mashのcurrent明示指示により、CMEE Stage 1のcurrent/future language routeはproviderless Route A exact1だけである。外部生成AI、external generative composer、remote model/provider、current input本文またはsemantic projectionの外部送信、network call、provider dependency、fallback、external costを禁止する。名称変更、別packet、別operator、別providerまたはfresh approvalで代替routeを復活させない。
-
-今回の決定は外部route撤去とroute-neutral source/owner contractへの改名だけを承認する。第三generic correction、counter reset、同じStep 3の再実行、Step 4、formal Product Read、ready、merge、productionは承認しない。Route Aでceilingまたはreturn budget exhaustionとなった場合は、そのterminalで停止する。
-
-```text
-DECISION_ID = COCOLON_CMEE_STAGE1_ROUTE_A_ONLY_EXTERNAL_AI_PROHIBITION_20260825
-DECISION_OWNER = MASH
-SOLE_CURRENT_AND_FUTURE_ROUTE = ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER
-EXTERNAL_GENERATIVE_AI = PROHIBITED
-EXTERNAL_COMPOSER_OR_REMOTE_MODEL_PROVIDER = PROHIBITED
-CURRENT_INPUT_OR_SEMANTIC_PROJECTION_EXTERNAL_SEND = 0
-NETWORK_CALL / NEW_PROVIDER_DEPENDENCY / FALLBACK / EXTERNAL_COST = 0 / 0 / 0 / 0
-ALTERNATIVE_ROUTE_CURRENT_AUTHORITY / FUTURE_TRIGGER / REACTIVATION = 0 / 0 / 0
-EXTERNAL_OPERATOR = NOT_APPLICABLE
-COMMON_DEFECT_RETURN_COUNT = 2/2_UNCHANGED
-EARLY_ACTUAL_STATUS = NOT_RUN
-STEP3 = COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP
-THIRD_GENERIC_CORRECTION / COUNTER_RESET / STEP3_RERUN / STEP4 = 0 / 0 / 0 / 0
-CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE
-ONLY_POSSIBLE_FUTURE_CLASS = FRESH_LEVEL3_ROUTE_A_PROVIDERLESS_ONLY
-PRIMARY_OUTCOME = ADMINISTRATIVE_ONLY
-PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
-AUTOMATIC_PROGRESSION = false
-```
-
-## 16. Emlis input-specific meaning decision — IM01 authorized integration gate（2026-08-28）
-
-Mashのfresh explicit authorityは、IM00のremote-postverified runtime head `2c607f001e3524de67c6c276d0140c1b8b464584`とdesign head `ac1ccfce52374abad122cb6b82f99b0760c01d6f`をsole preimageとして、IM01の統合修正とformal pytest exact1だけを許可する。authority前のlocal途中差分は完了creditではなく、failed diagnostic pytestはclosed/no-creditである。
-
-最初のformal launcherはrepository `ai` rootをisolated Pythonのimport pathから外した`COMMAND_CONSTRUCTION_ERROR`でcollection 0となった。Mashのfresh bounded mechanical repair authorityによりlauncherだけをexact1修復し、target／denominator／comparator／input identity／runtime不変の同じGateをexact1再実行した結果は`25 passed`でGREENである。
-
-IM01の完了前提は、current disabled response pathのpre-meaning grounded inputs／allowed Reception envelope型分離、typed Grounded Viewから`derive_foreground_scope_closed()`への実接続、および新しい型に合わせた旧IM00 test fixture移行をactual source／testへ統合することである。fixture移行を含む統合完了前のdiagnostic pytest、target test、compileallその他同等のrepository-code executionは0とする。Foreground Scopeは許可basis exact5をtyped compatibility exact10でcanonical unionし、material competingは`LIMITED_COMPETING_MATERIAL_READINGS`、safe objectを保持できる構造不足は`LIMITED_STRUCTURE_INSUFFICIENT`、safe foreground object exact0だけは`STRUCTURE_INSUFFICIENT_STOP`へ閉じる。Reception、affect、style、temperature、surface、fixture、ID／hash／列挙順はscope selectorへ逆流しない。
-
-```text
-RUNTIME_PRE_HEAD = 2c607f001e3524de67c6c276d0140c1b8b464584_REMOTE_POSTVERIFIED
-DESIGN_PRE_HEAD = ac1ccfce52374abad122cb6b82f99b0760c01d6f_REMOTE_POSTVERIFIED
-PRIOR_DIAGNOSTIC_PYTEST = FAILED_CLOSED_NO_CREDIT
-CURRENT_LOCAL_INTERIM_DIFF_COMPLETION_CREDIT = 0
-IM00_FIXTURE_MIGRATION_BEFORE_FORMAL_PYTEST = COMPLETE
-POST_AUTHORITY_PREINTEGRATION_TEST_EXECUTION = 0
-ORIGINAL_FORMAL_PYTEST_ALLOWED_INVOCATION / RETRY / RERUN = 1 / 0 / 0
-ORIGINAL_FORMAL_PYTEST_RESULT = COMMAND_CONSTRUCTION_ERROR_COLLECTION_0_CLOSED_NO_CREDIT
-BOUNDED_MECHANICAL_REPAIR_LAUNCHER / SAME_GATE_RERUN = 1 / 1
-FORMAL_PYTEST_TERMINAL_RESULT = GREEN_PASS_25_OF_25_OWNED_BY_CANONICAL_06_SECTION_82
-OTHER_REPOSITORY_CODE_EXECUTION = 0
-WRITE_GATE = FORMAL_PYTEST_GREEN_SATISFIED
-STEP_STATE = COMPLETE_NONTERMINAL_CHECKPOINT
-PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
-PRODUCT_READ / IM02 / ACTIVATION / I09 / PRODUCTION_EFFECT = 0 / 0 / 0 / 0 / 0
-FULL_PUBLIC_REGRESSION = DEFERRED_TO_IM07_NOT_CLAIMED_AT_IM01
-NEXT_DEPENDENCY / CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = IM02 / NONE_AFTER_IM01
-```
-
-current production `emlis_ai_reply_service.py`、ReplyEnvelope、RN display ownerは変更しない。Required Difference／counterfactual mutation／WholeReadingConsequence issuerはIM02のownerへ留保するが、本authorityでIM02へは進まず、automatic progressionはfalseである。
-
-## 17. Emlis input-specific meaning decision — IM02 difference requirements complete checkpoint（2026-08-28）
-
-Mashの明示的なcomplete-to-finish authorityにより、IM02をactual source／testへ統合し、final exact selectors `32/32`、IM02 targeted `7/7`をGREENで完了した。追加したcurrent structureは、Difference Config、Observed Difference／Required Difference、closed counterfactual mutation、Difference Bundle、WholeReadingConsequence issuer、response pre-Reception storage、composition-side rederive／exact equality、およびruntime integration exact17 identityである。
-
-Required Differenceはtyped Grounded View／Foreground Scopeから導出したObserved Differenceとclosed mutation結果を同じbundleへ束ね、semantic orderとadjacencyを固定する。WholeReadingConsequenceはそのbundleだけから発行し、responseがReceptionへ入る前に保存する。compositionは保存済み結果を再導出してexact equalityを要求し、不一致、未知mutation、signature不整合、対象不一致をclosedで拒否する。Reception、affect、stance、style、temperature、surface、ID／hash／fixture順序を意味決定へ逆流させない。
-
-```text
-CHECKPOINT_ID = CMEE_EMLIS_INPUT_SPECIFIC_MEANING_IM02_DIFFERENCE_REQUIREMENTS_20260828_V1
-IMPLEMENTATION_STEP / STEP_STATE = IM02 / COMPLETE_NONTERMINAL_CHECKPOINT
-FORMAL_GATE_HISTORY = MISSING_FASTAPI_PRECOLLECTION_CLOSED_NO_CREDIT -> 28_OF_32 -> 24_OF_32 -> 25_OF_32 -> 32_OF_32_GREEN
-FINAL_EXACT_SELECTORS / FINAL_RESULT = 32 / PASS_32_OF_32
-IM02_TARGETED_SELECTORS / TARGETED_RESULT = 7 / PASS_7_OF_7
-RUNTIME_INTEGRATION_IDENTITY = EXACT17_FROZEN
-PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
-IM03 / ACTIVATION / I09 / PRODUCTION / MERGE = NOT_STARTED / 0 / 0 / 0 / 0
-API / DB / RN / PERSISTENCE / PROVIDER / NETWORK / FALLBACK / COST_EFFECT = 0 / 0 / 0 / 0 / 0 / 0 / 0 / 0
-FULL_PUBLIC_REGRESSION = DEFERRED_TO_IM07_NOT_CLAIMED_AT_IM02
-DESIGN_FINAL_SOURCE_MODIFICATION = 0
-DESIGN_PR30_STATE = DRAFT_OPEN_UNMERGED_PENDING_PUSH
-NEXT_DEPENDENCY = IM03
-AUTOMATIC_PROGRESSION = false
-```
-
-current production activation、public API、DB、RN、persistence、provider、network、fallback、external costへのeffectは0である。IM03のreading operation applicability／enumeration、I09、production、mergeは開始していない。

@@ -1,9 +1,8 @@
 ---
 document_id: Cocolon_EmlisAI_longterm_roadmap_CURRENT
 canonical_path: Cocolon_前提資料/Cocolon_EmlisAI_longterm_roadmap_CURRENT.md
-revision_date: 2026-08-21
+revision_date: 2026-08-13
 observation_date: 2026-08-13 JST
-step10_contract_sync_date: 2026-08-21 JST
 status: CURRENT_EFFECTIVE
 document_role: EmlisAI_LONG_TERM_PRODUCT_CURRENT_ALIGNMENT
 effective_when: G4B_TO_G10_EXACT100_BODY_FREE_RECEIPT_REMOTE_POSTVERIFIED
@@ -117,39 +116,13 @@ Phase 2がoriginal exact3だけを追加した事実とそのbytesは保持し�
 
 EmlisAIは、ユーザーがCocolonへ残した言葉・感情・カテゴリ・行動・時点・履歴を、入力直後に「読まれた形」として返し、その人が自分の状態と反応の線を外側から見られるようにする、Cocolonの最初の商品体験です。
 
-返すものは次の三層です。Layer 1／2は全planの基礎であり、Layer 3だけがeligible historyを使うPlus／Premiumの条件付きartifactです。
+返すものは次の三層です。
 
-1. **Layer 1「見えたこと」** — 今の入力で置かれている環境・状態・出力と、その入力内にある出来事・感情・願い・行動・努力・消耗等の関係を返す。
-2. **Layer 2「Emlisから」** — Layer 1の具体的な観測claimに結び付けて、入力内に見える怖さ、努力、怒り、願い、迷い、消耗、安心、変化をEmlisの人間的な受け取りとして返す。
-3. **Layer 3「記録の線」** — Plus／Premiumで必要条件を満たす場合だけ、今回入力と適格な過去の本人記録の具体的なつながりを0..1返す。
+1. **現在状態の観測** — 今の入力で置かれている環境・状態・出力を返す。
+2. **人間的フォロー** — 入力内に見える怖さ、努力、怒り、願い、迷い、消耗、安心、変化を、Emlisの受け取りとして返す。
+3. **記録の線 / 構造気づき** — 必要条件を満たす場合だけ、過去記録・ラベル接続・自己情報の線として返す。
 
 目標体験は、単なる慰めでも診断でもなく、「読まれた」「自分に何が起きているかが少し見えた」「ここに残すと自分の言葉が積み上がる」「もう一度残したい」へつながることです。
-
-#### 3.1.1 Step 10 reviewed product contract
-
-EmlisAIは、original input、各supplemental answer、question、Layer 1／2／3を一つのinput-history threadへ順番に保存します。ただし、同じthreadにあることとsemantic sourceとして再利用できることは別です。originalとsupplemental answerだけをuser-owned sourceとし、question本文とEmlis derived artifactを本人が述べたsourceへ昇格させません。
-
-| Plan | source scope | visible target | question budget |
-|---|---|---|---|
-| Free | current threadのoriginalとsame-thread supplemental answersだけ | Layer 1、Layer 2。Layer 3なし | thread全体で0..1 |
-| Plus | current threadとeligible owned history | Layer 1、Layer 2、条件成立時Layer 3 0..1 | thread全体で0..1 |
-| Premium | current thread、eligible owned history、許可済み本人context | Layer 1、Layer 2、条件成立時Layer 3 0..1 | sequential 0..3 |
-
-Premiumの商品contractの中心表現は次のとおりです。
-
-> **Premiumでは、ユーザーの蓄積した本人情報から作られた、根拠付き・暫定的・修正可能な「ユーザー固有の解釈フレーム」を使い、ユーザー本人の辞書により近い位置から観測とReceptionを行う。**
-
-このframeは本人情報から導く処理境界であり、本人が直接述べたsourceでもvisible evidenceでもありません。本人は参照範囲を確認・修正・拒否でき、Piece生成本文、Analysis推定／IF、過去Emlis本文を本人sourceとして使いません。
-
-各roundはLayer 1／2を先に返します。重要unknownが残り、本人が続行を選び、budgetが残る場合だけquestion exact1を出します。一画面へ複数問を一括表示せず、skip、stop、分からない、無回答を正常終了として扱います。
-
-P6 Structure Insightはcurrent input内の関係を見る能力としてLayer 1へ置き、全planに残します。P5 User Label Connectionは今回入力とeligible owned historyをつなぐ能力としてPlus／Premiumの条件付きLayer 3へ置きます。既存capability、context、user model、history search、P5、P6、Free history boundary testsはADAPT_AND_INHERIT候補ですが、generic fixed surfaceをtarget本文としてそのまま再利用しません。
-
-    DOCUMENT_ID = CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2
-    DESIGN_IDENTITY = CMEE_THREE_CORE_INTEGRATED_DESIGN_20260821
-    FORMAL_PRO_REVIEW = CONSUMED_EXACTLY_ONCE
-
-この同期はlong-term product contractの明確化だけです。question system、thread persistence、Layer 3 product integration、API、DB、RN、runtime、activation、Cycle001、Product Readへのeffectは0であり、実装または次Phaseへ自動進行しません。
 
 ### 3.2 unchanged completion principles
 
@@ -186,8 +159,6 @@ P6 Structure Insightはcurrent input内の関係を見る能力としてLayer 1�
 | P10 Release Readiness | contract・quality・pilot・operationを満たし、release_allowedを別層で判断する | future / completion `UNVERIFIED`。currentはrelease-readyではない |
 
 P3をcurrent workstreamとする判断は、P0〜P2またはP4〜P10の完了を遡及的に認定しません。
-
-Step 10 targetでは、P6を全planのLayer 1、P5をPlus／PremiumのLayer 3へ配置します。phase番号は長期能力の発展履歴であり、表示Layer番号や実装順ではありません。P5／P6 familyの存在または実装historyを、target product integrationの完成へ変換しません。
 
 ---
 
@@ -301,7 +272,7 @@ NLS v3設計上の最低1000件、100件単位の累積再実行、直近2つの
 問いシステムは二層です。
 
 1. **EmlisAI core quality gate** — 足りない情報をAIが勝手に補完して「わかったつもり」で閉じることを防ぐ。
-2. **P8 question UX** — Layer 1／2、各roundで足りない一点、短い問い、回答に基づくrefined Layer 1／2を、privacy / plan / continuity境界内で実現する。Free／Plusはthread全体0..1、Premiumは逐次0..3を上限とする。
+2. **P8 question UX** — 仮観測、足りない一点、短い問い、回答に基づくrefined observationを、privacy / plan / continuity境界内で実現する。
 
 問いだけを返して即時観測を先送りする、Emlis本体の読感不足を質問ラリーで隠す、回答で元入力を上書きする、raw answerをpublic metaへ出す、問診・診断へ寄せることは禁止です。
 
@@ -311,7 +282,7 @@ NLS v3設計上の最低1000件、100件単位の累積再実行、直近2つの
 |---|---|
 | false-understanding prevention | P3でも維持するcurrent quality axis。G6でこの軸が悪化していないことは確認済みだが、問いシステム完成を意味しない |
 | NLS v3 scope | `normal_observation` / future `pre_question_observation` / `refined_observation` のSurface境界を守る。問い必要性判定、問い文、回答保存、RN導線をNLS v3が勝手に実装しない |
-| question-system implementation | plan別budget、input-history thread、source-role分離をtarget contractとして固定したが、current実装は `UNVERIFIED` |
+| question-system implementation | current reviewed evidenceだけでは `UNVERIFIED` |
 | question-system completion | `UNVERIFIED`。completion creditなし |
 | P7 body-free need observation | future normative boundary。P7 current開始の証拠なし |
 | P8 question UX | future normative boundary。API / DB / RN / plan guard /課金境界の実装authorityを本書から出さない |
@@ -353,7 +324,6 @@ NLS v3 owner switchだけではEmlisAI全体は完成しません。問いシス
 - Cycle002〜010、最低1000件、saturation、final local gate。
 - shadow、R8 rollback baseline、tester-only actual device、owner switch。
 - question-system implementation / completion、refined observation end-to-end。
-- input-history thread persistence、plan別question budget、Premium interpretive frame、P5／P6のtarget Layer product integration。
 - external pilot、retention evidence、release operation。
 
 `UNVERIFIED`はPASSでもFAILでもありません。必要なcurrent source / Receiptが確認されるまで、開始・完了・creditを付けません。
@@ -409,7 +379,6 @@ current nextは、NLS v3 current alignment、本書、Cycle001 current closure r
 | 2026-08-10 | `CURRENT_ALIGNMENT_JUDGMENT` | current derivative作成。current product workstreamをP3、Cycle001をP3 supporting route、P7をfuture / `UNVERIFIED`として分離。G5 GREEN / G6 REJECT / Gate B credit 0を反映 |
 | 2026-08-11 | `CURRENT_ALIGNMENT_JUDGMENT` | Phase 8 pre-freeze terminalを反映。V1 / V2 helper routeをretireし、approved `GATE_B_DIRECT_NATIVE_PROCESS_ROUTE_V1`をselected methodとした。Gate B未閉鎖、Runtime READY false、readiness / product / technical credit 0を保持 |
 | 2026-08-11 | `CONFIRMED_CURRENT_FACT` | direct-native Gate Bのcomponent checksは成立したが、authority-frozen readiness observation preimage欠落でtyped STOP。Gate B未閉鎖、readiness / product / technical credit 0 |
-| 2026-08-21 | `UNCHANGED_NORMATIVE` | Step 10正式reviewをexactly once反映。input-history thread、Free／Plus／Premium source scope、question budget、Premium interpretive frame、Layer 1／2／3、P6 Layer 1／P5 Layer 3をlong-term product ownerへ同期。implementation／Cycle／Product Read effect 0 |
 
 ---
 
@@ -439,8 +408,6 @@ GATE_C_AUTHORIZATION = FALSE
 P7_CURRENT = FALSE
 P7_STATUS = FUTURE_UNVERIFIED
 QUESTION_SYSTEM_IMPLEMENTATION = UNVERIFIED
-STEP10_THREAD_PLAN_LAYER_CONTRACT = REVIEWED_DESIGNED_NOT_IMPLEMENTED
-STEP10_PRODUCT_RUNTIME_EFFECT = 0
 ACTUAL_DEVICE_COMPLETION = UNVERIFIED_NO_CREDIT
 PILOT_COMPLETION = UNVERIFIED_NO_CREDIT
 RELEASE_READY = FALSE

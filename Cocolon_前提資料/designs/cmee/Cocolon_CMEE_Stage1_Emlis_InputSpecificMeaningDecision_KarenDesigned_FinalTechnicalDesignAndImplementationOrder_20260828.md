@@ -1579,7 +1579,8 @@ InputSpecificMeaningStructure v1.1 exact12 = (
 - historical root v1.0 exact9はGit履歴・historical receiptで保持し、current runtimeでdecode／validate／admit／serializeしない。
 - nested existing contractのschema versionは現行`1.0`を保持し、shared constantをglobalに1.1へ上げない。
 - parallel carrier、compatibility registry、別trace root fieldは作らない。
-- candidate/evidence/rowのorphan、duplicate、foreign refは0。candidate exact1 ↔ evidence exact1をreverse bindし、evidenceが参照するconsequence rowはcandidateごとにdisjointとする。
+- candidate/evidence/rowのorphan、duplicate、foreign refは0。candidate exact1 ↔ evidence exact1をreverse bindする。
+- `WholeReadingConsequenceRow`はclosed exact8 payloadのsemantic fact ownerであり、candidate ownerではない。同一`ForegroundScope`、`RequiredDifferenceRow`、source evidence、mutation、baseline／mutated signatureから同一exact8 payload／IDへ到達した場合、carrierにはrow exact1だけを置き、該当する複数candidateのevidenceから同じrow refを共有参照してよい。この共有は同一exact8 payload／IDの場合だけで、payloadが異なるrowの共有、同一IDのduplicate格納、candidate ID／provenance／hash saltのrow preimageへの追加は0とする。
 
 ### 20.3 candidate、evidence、reading identityの非循環順
 
@@ -1622,7 +1623,8 @@ candidate-owned required-difference order = stable union of (
 
 whole_reading_consequence_rows order =
   candidate_records order、次にcandidate-owned required-difference order
-  （各candidate/differenceのmatching row exact1）
+  （各candidate/differenceのmatching row exact1を解決し、同一exact8
+   payload／IDはfirst occurrenceを保持するstable dedupe exact1）
 
 BasisProvenanceRow order =
   material relation_path_refs in candidate declaration order、次に
@@ -1885,9 +1887,9 @@ outcome tagだけでcarrier cardinalityを推測せず、`derivation_state_ref`�
 
 | outcome / derivation state | candidate / evidence / consequence rows | trace completeness |
 |---|---|---|
-| NORMAL selected | candidate/evidence exact1+、各candidateのmatching row exact1+ | SELECTED exact1、remaining candidateごとNONSELECTED_VALID exact1 |
+| NORMAL selected | candidate/evidence exact1+、各candidateのmatching row ref exact1+。同一exact8 rowは複数evidenceから共有可、carrier格納exact1 | SELECTED exact1、remaining candidateごとNONSELECTED_VALID exact1 |
 | `LIMITED_COMPETING_MATERIAL_READINGS` / `COMPETING_MATERIAL_SCOPES` | `0 / 0 / 0`。unresolved refsはscope derivationとexact一致 | `LIMITED_BASIS(LIM03)` exact1、candidate trace 0 |
-| `LIMITED_COMPETING_MATERIAL_READINGS` / `LIMITED_COMPETING_MATERIAL_READINGS` | hard-valid candidate/evidence exact2+、各candidateのmatching row exact1+、winner 0 | `LIMITED_BASIS(LIM03)` exact1＋candidateごとNONSELECTED_VALID exact1、SELECTED 0 |
+| `LIMITED_COMPETING_MATERIAL_READINGS` / `LIMITED_COMPETING_MATERIAL_READINGS` | hard-valid candidate/evidence exact2+、各candidateのmatching row ref exact1+、同一exact8 rowの共有可、carrier duplicate 0、winner 0 | `LIMITED_BASIS(LIM03)` exact1＋candidateごとNONSELECTED_VALID exact1、SELECTED 0 |
 | `LIMITED_NO_SAFE_INPUT_SPECIFIC_CONFIGURATION` / 許可exact3 | `0 / 0 / 0` | `LIMITED_BASIS(LIM01)` exact1 |
 | `LIMITED_STRUCTURE_INSUFFICIENT` / `UPSTREAM_STRUCTURE_INSUFFICIENT` | `0 / 0 / 0` | `LIMITED_BASIS(LIM02)` exact1 |
 
