@@ -2261,6 +2261,261 @@ formal OS launch atomic event:
 
 Packet B外のnetwork/dependency、source/test/selector changeが必要ならGate Bでscope STOPする。formal failure後にrunnerだけ、visible bodyだけ、reviewだけを再実行しない。fresh correction authorityはcausal ownerのIM03–IM06 atomic unitから新bundleを作り直す。
 
+### 21.9 IM07 formal identity preimage and visible record
+
+本節は§21.8で未定義だった`PRODUCT_IMPLEMENTATION_ID`、`FORMAL_EVALUATION_BUNDLE_ID`とformal visible recordを閉じる。product source exact4、selector、denominator 47／241、oracle、Product Read axes exact12、meaning／Reception contractは変更しない。
+
+#### 21.9.1 canonical encodingとdomain-separated ID
+
+canonical encodingは既存`contracts.stage1_canonical_json_bytes()` exact1だけを使う。すなわちEnumは`.value`、dataclassは宣言field順のfield map、tuple／listはJSON array、mapping keyはstring、scalarは`None | str | int | bool`とし、`ensure_ascii=false`、key sort、compact separator、`allow_nan=false`、UTF-8、末尾LFなしである。formal record内のactual bytes fieldだけは`{"encoding":"base64","data":<RFC 4648 canonical base64>}`へlossless projectionしてから同じencoderへ渡す。別canonicalizer、Unicode正規化、platform newline変換、default stringificationは0。
+
+```text
+DOMAIN_HASH(domain, preimage) =
+  lowercase_hex(SHA256(UTF8(domain) + 0x00 + canonical_json(preimage)))
+
+PRODUCT_IMPLEMENTATION_DOMAIN =
+  "cocolon.cmee.stage1.product_implementation_id.v1"
+
+FORMAL_EVALUATION_BUNDLE_DOMAIN =
+  "cocolon.cmee.stage1.formal_evaluation_bundle_id.v1"
+
+PRODUCT_IMPLEMENTATION_ID =
+  "cmee-product-implementation-v1:"
+  + DOMAIN_HASH(PRODUCT_IMPLEMENTATION_DOMAIN, PRODUCT_IMPLEMENTATION_PREIMAGE)
+
+FORMAL_EVALUATION_BUNDLE_ID =
+  "cmee-formal-evaluation-bundle-v1:"
+  + DOMAIN_HASH(FORMAL_EVALUATION_BUNDLE_DOMAIN,
+                FORMAL_EVALUATION_BUNDLE_PREIMAGE)
+```
+
+arrayは本節のdeclared orderを保持し、path／hash／IDによる再sortは0。timestamp、session／workflow／job ID、一時absolute path、materialized runtime absolute path、branch display nameは両preimageへ入れない。
+
+#### 21.9.2 Product Implementation preimage
+
+```text
+PRODUCT_IMPLEMENTATION_PREIMAGE = {
+  "schema_version": PRODUCT_IMPLEMENTATION_DOMAIN,
+  "repository": "MassyuRed/mashos-api",
+  "ordered_product_source_bytes": [
+    {"path", "raw_sha256", "byte_count"}
+    exact4 in §21.2 order:
+      contracts.py
+      emlis_input_specific_meaning.py
+      emlis_stage1_response.py
+      emlis_stage1_composition.py
+  ]
+}
+```
+
+`raw_sha256`と`byte_count`はformal対象checkoutのactual raw bytesから再計算する。product source exact4の一byte変更はnew Product IDである。contract test、runner、design、ops workflowだけの変更はProduct IDを変えず、Formal Bundle IDを変える。
+
+#### 21.9.3 Formal Evaluation Bundle preimage
+
+```text
+FORMAL_EVALUATION_BUNDLE_PREIMAGE = {
+  "schema_version": FORMAL_EVALUATION_BUNDLE_DOMAIN,
+  "product_implementation_id": PRODUCT_IMPLEMENTATION_ID,
+
+  "authority_heads": {
+    "mashos_api": <formal target head exact40>,
+    "cocolon": <canonical design head exact40>
+  },
+
+  "canonical_design": {
+    "repository": "MassyuRed/Cocolon",
+    "path": <this exact final-design path>,
+    "raw_sha256": <actual design raw SHA-256>,
+    "byte_count": <actual design byte count>
+  },
+
+  "ordered_approved_source_bytes_exact6": [
+    {"path", "raw_sha256", "byte_count"} exact6 in §21.2 order
+  ],
+
+  "runner_successor_identity_exact17": {
+    "language_core_identity": <actual IM03 working identity>,
+    "runtime_integration_identity": <actual IM03 working identity>,
+    "language_payload_name_sha256_byte_count_exact17": <actual exact17>,
+    "runtime_payload_name_sha256_byte_count_exact17": <actual exact17>,
+    "runner_raw_sha256": <actual runner SHA-256>,
+    "runner_byte_count": <actual runner byte count>
+  },
+
+  "focused_selector": {
+    "ordered_nodeids_exact47": <unchanged exact47>,
+    "expected_denominator": 47,
+    "actual_collected_denominator": 47
+  },
+
+  "full_regression_selector": {
+    "ordered_paths_exact3": <unchanged exact3>,
+    "expected_denominator": 241,
+    "actual_collected_denominator": 241
+  },
+
+  "input_set": {
+    "ordered_exact8": <EXACT8 full fields and values in declared order>,
+    "case_order": ["SX-01", "SX-02", "SX-03", "SX-04",
+                   "SX-05", "SX-06", "SX-07", "SX-08"]
+  },
+
+  "runtime_lock_exact46": {
+    "path", "git_blob", "raw_sha256", "logical_sha256",
+    "wheel_bundle_manifest_sha256", "installed_distributions_sha256",
+    "runtime": "Python 3.12.13 / linux x86_64 / wheel-only",
+    "distribution_count": 46,
+    "ordered_distributions_exact46": <tracked lock array without reorder>
+  },
+
+  "formal_command": {
+    "working_directory": "ai",
+    "runtime_executable": "<CMEE_LOCKED_RUNTIME>/bin/python",
+    "environment_exact2": [
+      ["PYTHONDONTWRITEBYTECODE", "1"],
+      ["PYTEST_DISABLE_PLUGIN_AUTOLOAD", "1"]
+    ],
+    "argv_template": [
+      "tools/cmee_v1a_i1sx_candidate_run.py",
+      "--formal-im07",
+      "--expected-product-implementation-id", "<PRODUCT_IMPLEMENTATION_ID>",
+      "--expected-formal-evaluation-bundle-id",
+        "<FORMAL_EVALUATION_BUNDLE_ID>",
+      "--design-document-raw-sha256", "<CANONICAL_DESIGN_RAW_SHA256>",
+      "--design-document-byte-count", "<CANONICAL_DESIGN_BYTE_COUNT>",
+      "--body-full-output",
+        "<CMEE_PRIVATE_OUTPUT_ROOT>/IM07_FORMAL_ATTEMPT_01.json",
+      "--runtime-repo-head", "<MASHOS_API_AUTHORITY_HEAD>",
+      "--design-repo-head", "<COCOLON_AUTHORITY_HEAD>"
+    ]
+  },
+
+  "product_read_axes_exact12": <unchanged PRODUCT_READ_AXES>,
+  "machine_comparator": {
+    "schema_version": "cocolon.cmee.stage1.im07_machine_comparator.v1",
+    "product_predicate":
+      "formal v2 call graph identity and visible trace closure",
+    "required_case_count": 8,
+    "required_formal_trace_valid_count": 8,
+    "semantic_oracle_change": 0
+  },
+  "visible_record_schema": {
+    "private": "cocolon.cmee.stage1.im07_formal_private_record.v1",
+    "body_free": "cocolon.cmee.stage1.im07_formal_body_free_receipt.v1",
+    "trace": "cocolon.cmee.stage1.im07_visible_trace.v1"
+  }
+}
+```
+
+Bundle ID自身はpreimageへ含めない。actual launchのangle-bracket tokenは同bundleから得たactual IDs、heads、design identity、admitted private pathへexact substitutionするだけで、argument追加／削除／並替え、別executable、別environmentは0。`--im07-pre-admission`は同じactual bytesから両preimageとIDを再導出し、body-free `PASS / formal attempt 0 / bundle FROZEN`だけを返す。
+
+#### 21.9.4 direct-v2 formal executionとprivate visible record
+
+formal exact8は既存runnerのearly materializerと同じcurrent direct-v2 call graphだけを使う。各caseは次をdeclared orderでexact1回ずつ実行する。
+
+```text
+raw input -> GenerationRequest -> freeze_text_source
+-> build_final_stage1_grounded_observation_plan
+-> _planned_visible_source_ids -> _build_graph -> _build_experience_plan
+-> build_subjective_planning_inputs = phase_A
+-> project_subjective_meaning_plan = subjective_plan
+-> seal_stage1_projection = projection
+-> build_surface_composition_inputs = phase_B
+-> compose_stage1_from_projection = Stage1CompositionResult
+-> _adapt_v2_composed_units_to_realized_units
+```
+
+`MeaningExperienceEngine.generate()`、legacy `GenerationArtifactBundle`、second generation、meaning／Reception／composition再呼出し、monkeypatch、stored bodyからの再構築は0。formal captureはこのsame executionで得たactual structure／outcome、subjective plan、projection、composition result、selected normalized artifact、realized unitsのsame object／refだけをserializeする。
+
+```text
+FORMAL_PRIVATE_RECORD = {
+  schema_version = "cocolon.cmee.stage1.im07_formal_private_record.v1",
+  product_implementation_id,
+  formal_evaluation_bundle_id,
+  identity_preimages,
+  formal_attempt_count = 1,
+  bundle_state = "CONSUMED",
+  case_count = 8,
+  ordered_case_ids = SX-01..SX-08,
+  cases = FORMAL_PRIVATE_CASE exact8 in input order,
+  formal_output_set_sha256,
+  formal_result_id,
+  machine_invariant_clear_count,
+  machine_result = CLEAR | NONCLEAR,
+  product_read_axes = unchanged exact12,
+  product_read_evaluated = false,
+  private_body_full = true,
+  private_text_published = false,
+  production_effect = 0,
+  automatic_progression = false
+}
+
+FORMAL_PRIVATE_CASE = {
+  case_id,
+  input_private,
+  input_sha256,
+  outcome_type = SelectedEmlisProvisionalReading | LimitedMeaningOutcome,
+  outcome_identity = current branch-specific derived identity,
+
+  decision = {
+    input_specific_meaning_structure_body,
+    body_sha256
+  },
+
+  projection = {
+    subjective_plan_body,
+    stage1_projection_body,
+    projection_artifact_ref,
+    body_sha256
+  },
+
+  artifact = {
+    selected_rank,
+    internal_candidate_count,
+    ranked_candidate_count,
+    language_core_identity,
+    normalized_artifact,
+    realized_units,
+    candidate_text,
+    body_sha256
+  },
+
+  visible_trace = {
+    schema_version = "cocolon.cmee.stage1.im07_visible_trace.v1",
+    projection_id,
+    projection_artifact_ref,
+    projection_preimage_ref,
+    projection_seal_ref,
+    projection_branch,
+    tagged_projection_ref,
+    meaning_visible_causal_trace_rows,
+    reception_visible_causal_trace_rows,
+    realized_visible_units,
+    ordered_visible_unit_ids,
+    ordered_visible_text_sha256,
+    validated_visible_causal_trace_seal_ref
+  },
+
+  visible_trace_body_sha256,
+  actual_output_sha256,
+  formal_trace_valid,
+  machine_invariant,
+  case_record_sha256,
+  review_axes = unchanged exact12,
+  human_product_read = not evaluated
+}
+```
+
+decision、projection、artifact、visible trace、case、actual output、ordered output set、formal resultはそれぞれ`cocolon.cmee.stage1.im07.formal_*.v1`のclosed domainで§21.9.1の`DOMAIN_HASH`を使う。row／candidate／unitのsort、omit、補完は0。private fileはfresh staging regular file mode `0600`へcomplete bytesを書き、fsync、same-directory no-replace atomic publish、readback一致後だけbody-free receiptをstdoutへ出す。partial file、既存target overwrite、checkout内出力は0。
+
+#### 21.9.5 current-v2 comparatorとbody-free receipt
+
+各caseのmachine CLEARは、actual Japanese reached、Phase-A/B validated、subjective claim exact1+、`internal_candidate_count >= ranked_count`、ranked count 1..2、rank tuple `1..n`、selected rank 1、normal-form phase exact6、correctable defect exact0、normalization idempotent、required-duty exact coverage、current IM03 language/runtime identity一致、formal record identity closureがすべてtrueの場合だけである。旧N3 identity、legacy `_structural_trace_valid(EngineOutcome)`、new semantic oracleをformal comparatorへ使わない。
+
+public durable ownerへ保存できるbody-free receiptは、schema、両ID、attempt `1`、bundle `CONSUMED`、case order／count、各caseのoutcome／projection identity、component digest、trace／unit count、case digest、machine boolean／failure class、output set digest、formal result ID、aggregate resultとzero-effect fieldsだけである。private input、Japanese body、decision／projection／artifact／trace bodyはcommit、PR body、workflow logへ出さない。
+
+`machine_result=CLEAR`はProduct／Bundle ID再導出、private/body-free cross-digest、case exact8 order／cardinality、component／case／set／result digest、case machine invariant exact8の全成立時だけである。pre-launch identity／schema／zero-drift不一致はformal attempt 0。launch後の欠落、identity不一致、partial write、UNKNOWNはattempt 1のformal nonclearであり、same bundleの再launch、bodyだけの再生成、traceだけの補完は0。
+
 ## 22. Verification, STOP, review, and final handoff
 
 ### 22.1 pre-admission exclusive classifier exact1
