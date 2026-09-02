@@ -13,6 +13,10 @@ import tempfile
 from typing import Any, Mapping, Sequence
 
 from tools import cocolon_context_prepare as prepare_module
+from tools.cocolon_context_environment import (
+    canonical_json_bytes as environment_json_bytes,
+    inspect_environment,
+)
 from tools.cocolon_context_task import ContextCompileError, compile_task_context
 
 
@@ -41,19 +45,19 @@ def _verify_published_workspace(
         prepare_module._run(
             (
                 sys.executable,
-                str(repo_root / "tools/cocolon_context_code_index.py"),
+                str(prepare_module.IMPLEMENTATION_ROOT / "tools/cocolon_context_code_index.py"),
                 "verify",
                 "--inventory",
                 str(materialized / "files.jsonl"),
                 "--output",
                 str(materialized / "code_index"),
             ),
-            cwd=repo_root,
+            cwd=prepare_module.IMPLEMENTATION_ROOT,
         )
         prepare_module._run(
             (
                 sys.executable,
-                str(repo_root / "tools/cocolon_context_routes.py"),
+                str(prepare_module.IMPLEMENTATION_ROOT / "tools/cocolon_context_routes.py"),
                 "verify",
                 "--inventory",
                 str(materialized / "files.jsonl"),
@@ -62,7 +66,7 @@ def _verify_published_workspace(
                 "--output",
                 str(materialized / "route_graph"),
             ),
-            cwd=repo_root,
+            cwd=prepare_module.IMPLEMENTATION_ROOT,
         )
     return dict(transport)
 
@@ -77,6 +81,11 @@ prepare_cli = prepare_module.cli
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="python3 -m tools.cocolon_context")
     subparsers = parser.add_subparsers(dest="command", required=True)
+
+    subparsers.add_parser(
+        "doctor",
+        help="verify the exact fixed System Context environment without mutation",
+    )
 
     context = subparsers.add_parser(
         "context",
@@ -103,6 +112,10 @@ def build_parser() -> argparse.ArgumentParser:
     prepare.add_argument("--repo-root", type=Path, default=Path.cwd())
     prepare.add_argument("--system-context-root", type=Path)
     prepare.add_argument("--external-workspace-root", type=Path)
+    prepare.add_argument("--cache-root", type=Path)
+    prepare.add_argument(
+        "--output-format", choices=("brief", "full"), default="brief"
+    )
     prepare.add_argument("--remote-verified", action="store_true", help=argparse.SUPPRESS)
     prepare.add_argument("--fresh-clone-verified", action="store_true", help=argparse.SUPPRESS)
     prepare.add_argument(
@@ -131,7 +144,9 @@ def _run_context(args: argparse.Namespace, parser: argparse.ArgumentParser) -> i
     system_context_root = (
         args.system_context_root.resolve()
         if args.system_context_root
-        else repo_root / "Cocolon_前提資料" / "system_context"
+        else prepare_module.IMPLEMENTATION_ROOT
+        / "Cocolon_前提資料"
+        / "system_context"
     )
     task_profiles = (
         args.task_profiles.resolve()
@@ -165,6 +180,12 @@ def _run_context(args: argparse.Namespace, parser: argparse.ArgumentParser) -> i
 def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
+    if args.command == "doctor":
+        report = inspect_environment(
+            implementation_root=prepare_module.IMPLEMENTATION_ROOT
+        )
+        print(environment_json_bytes(report).decode("utf-8"), end="")
+        return 0 if report.get("status") == "PASS" else 2
     if args.command == "context":
         return _run_context(args, parser)
     forwarded = ["--workspace", args.workspace, "--task", args.task, "--repo-root", str(args.repo_root)]
@@ -172,6 +193,9 @@ def main(argv: Sequence[str] | None = None) -> int:
         forwarded.extend(("--system-context-root", str(args.system_context_root)))
     if args.external_workspace_root:
         forwarded.extend(("--external-workspace-root", str(args.external_workspace_root)))
+    if args.cache_root:
+        forwarded.extend(("--cache-root", str(args.cache_root)))
+    forwarded.extend(("--output-format", args.output_format))
     if args.remote_verified:
         forwarded.append("--remote-verified")
     if args.fresh_clone_verified:

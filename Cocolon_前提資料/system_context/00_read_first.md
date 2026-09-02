@@ -1,7 +1,7 @@
 # Cocolon System Context — V1 current technical management entry
 
 status: CURRENT_TECHNICAL_OWNER__V1_MANAGEMENT_ENTRY_ACTIVE_ON_PR37_WORKING_LINEAGE
-revision_date: 2026-08-22
+revision_date: 2026-09-02
 scope: Cocolon System Context Steps 1–7 plus Step 9 management entry and V1 implementation freeze
 step8_status: SKIPPED_BY_MASH_DECISION
 management_entry_activation: 1
@@ -44,31 +44,59 @@ work-attitude 00_read_first
 → human judgment
 ```
 
-Run from the Cocolon repository root.
+Run the V1 entry from the PR #37 implementation checkout. The implementation
+root and the material roots are deliberately separate: the executing tools and
+embedded payloads come from the exact PR #37 checkout, while `--repo-root`
+selects the exact PR #30 Cocolon material checkout and
+`--external-workspace-root` contains the exact PR #3 `mashos-api` material
+checkout. They are never overlaid into one synthetic Git tree.
+
+Open the implementation checkout with `.devcontainer/devcontainer.json` and
+verify the locked toolchain before preparing Context:
 
 ```bash
+python3 -m tools.cocolon_context doctor
+
 python3 -m tools.cocolon_context prepare \
   --workspace cmee_working \
-  --task cmee
+  --task cmee \
+  --repo-root "$COCOLON_MATERIAL_ROOT" \
+  --system-context-root "$PWD/Cocolon_前提資料/system_context" \
+  --external-workspace-root "$EXTERNAL_MATERIAL_ROOT"
 ```
 
-The command resolves exact `Cocolon` and `mashos-api` refs, compares the
-saved workspace lock, verifies same-ref bytes, derives
+`doctor` verifies the exact Python, Node, TypeScript, SCIP providers and locked
+test dependencies recorded by the repository. A missing or mismatched tool is
+a fail-closed stop, not a warning or a syntax-only success.
+
+The command resolves the exact `Cocolon` and `mashos-api` refs pinned by
+`workspace_profiles.json`, rejects a dirty material checkout, compares the
+saved workspace lock and execution-input fingerprint, verifies same-ref bytes,
+derives
 added/modified/deleted/renamed/type-changed paths for changed refs, refreshes
 only the causally affected layers or uses the bounded full-rebuild fallback,
-and writes the current result to:
+and writes the current result to a regenerable cache outside the tracked
+historical snapshot. The default cache root is
+`<PR37-implementation-root>/.cocolon-context-cache`; `--cache-root` may select
+an equivalent explicit local cache root.
 
 ```text
-Cocolon_前提資料/system_context/current/cmee_working/prepare_summary.json
-Cocolon_前提資料/system_context/current/cmee_working/prepare_summary.md
-Cocolon_前提資料/system_context/current/cmee_working/task_context/cmee/
+<cache-root>/cmee_working/prepare_summary.json
+<cache-root>/cmee_working/prepare_summary.md
+<cache-root>/cmee_working/task_context/cmee/
 ```
 
 The actual original full-file reading order is:
 
 ```text
-Cocolon_前提資料/system_context/current/cmee_working/task_context/cmee/full_text_read_order.md
+<cache-root>/cmee_working/task_context/cmee/full_text_read_order.md
 ```
+
+Standard stdout is a bounded brief receipt containing identities, freshness,
+proof state, counts and cache paths. `--output-format full` is an explicit
+diagnostic view. The exact logical outputs, transport manifests and full
+original-reading order remain in the cache; stdout reduction does not remove
+or truncate their evidence.
 
 `prepare` is complete only after the execution owner has read the applicable
 actual original files in that order before making a Cocolon judgment. The
@@ -81,7 +109,15 @@ permanently memorized or that its meaning was machine-approved.
 
 Existing inventory, code index, route graph and task Context may be reused only
 when their manifests, logical output hashes, transport manifests and context
-fingerprint verify. A mismatch is rejected; it is not converted into PASS.
+fingerprint verify. The fingerprint covers the exact material refs and the
+implementation tools, embedded payloads, profiles, schemas and fixed
+environment lock. A mismatch is rejected; it is not converted into PASS.
+
+Input freshness, output freshness and remote proof status are separate states.
+A fresh local rebuild is not mislabeled stale merely because remote proof is
+pending, and pending proof is not converted into freshness. Exact refs and
+clean worktrees are checked at both start and end; movement during execution
+stops without retry or publication.
 
 ### Changed refs
 
@@ -99,11 +135,18 @@ unverifiable Context fails closed. The original tracked files remain canonical
 and directly readable; System Context failure never prohibits direct original
 read.
 
+The tracked `current/cmee_working/**` bytes remain the historical frozen
+snapshot during this hardening step. They are not deleted, rewritten or used as
+the standard writable cache.
+
 ## Current verification ownership
 
 The three PR-triggered System Context workflows are read-only exact-head
-verifiers. They use `contents: read` and `pull-requests: read`, do not
-commit or push, and verify the open Draft PR head before and after tests.
+verifiers. They build the fixed environment from the small `.devcontainer`
+context, mount the exact Draft head read-only at runtime, run `doctor`, compile
+the bounded active Python entries and execute their assigned tests without
+runtime network access. They use `contents: read` and `pull-requests: read`, do
+not commit or push, and verify the open Draft PR head before and after tests.
 Automatic writer count is 0.
 
 A generated current update, if separately authorized later, belongs to an
@@ -162,8 +205,11 @@ Any later retirement requires a separate Mash decision.
 ## V1 implementation freeze and future enhancement
 
 Step 7 source, tests, profiles, workflows, and generated actual at
-`92e4ad913f61c064e42320bd62ab13fa0ba97fa7` are the frozen V1 implementation
-baseline. This Step 9 changes the management position only.
+`92e4ad913f61c064e42320bd62ab13fa0ba97fa7` remain the frozen V1 behavior and
+evidence baseline. Mash's 2026-09-02 decision authorizes only the bounded
+execution hardening documented above: exact implementation/material identity,
+fixed environment validation, freshness/cache correction and lightweight
+stdout. It does not reopen product behavior or Operator actual-proof claims.
 
 A future enhancement is allowed only when all exact4 conditions hold:
 

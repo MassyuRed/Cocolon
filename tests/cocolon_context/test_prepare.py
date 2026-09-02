@@ -71,6 +71,8 @@ except ModuleNotFoundError:
     stub.verify_task_context = lambda *_args, **_kwargs: {}
     sys.modules["tools.cocolon_context_task"] = stub
 
+from tools import cocolon_context as context_module
+from tools import cocolon_context_prepare as prepare_module
 from tools.cocolon_context import build_parser
 from tools.cocolon_context_prepare import (
     Change,
@@ -214,6 +216,488 @@ class PreparePlannerTests(unittest.TestCase):
         self.assertEqual(plan["executed_layers"], ["inventory", "task_context"])
         self.assertNotIn("code_index", plan["executed_layers"])
         self.assertNotIn("route_graph", plan["executed_layers"])
+
+
+class PrepareFreshnessBoundaryTests(unittest.TestCase):
+    @staticmethod
+    def _init_repository(path: Path, label: str) -> tuple[str, str]:
+        path.mkdir(parents=True)
+        git(path, "init", "-q")
+        git(path, "config", "user.email", "test@example.invalid")
+        git(path, "config", "user.name", "test")
+        (path / "tracked.txt").write_text(f"{label}\n", encoding="utf-8")
+        git(path, "add", ".")
+        git(path, "commit", "-m", f"initial {label}")
+        return (
+            git(path, "rev-parse", "HEAD"),
+            git(path, "rev-parse", "HEAD^{tree}"),
+        )
+
+    def _material_fixture(
+        self, root: Path, *, exact_heads: bool = True
+    ) -> tuple[Path, Path, Path, dict[str, object], dict[str, RepositoryRef]]:
+        cocolon = root / "material-cocolon"
+        external = root / "external"
+        mashos = external / "mashos-api"
+        cocolon_head, cocolon_tree = self._init_repository(cocolon, "cocolon")
+        mashos_head, mashos_tree = self._init_repository(mashos, "mashos")
+        cocolon_spec: dict[str, str] = {"repository": "MassyuRed/Cocolon"}
+        mashos_spec: dict[str, str] = {"repository": "MassyuRed/mashos-api"}
+        if exact_heads:
+            cocolon_spec["expected_head"] = cocolon_head
+            mashos_spec["expected_head"] = mashos_head
+        workspace_profile: dict[str, object] = {
+            "repositories": {
+                "Cocolon": cocolon_spec,
+                "mashos-api": mashos_spec,
+            }
+        }
+        refs = {
+            "Cocolon": RepositoryRef(
+                "Cocolon", cocolon.resolve(), cocolon_head, cocolon_tree
+            ),
+            "mashos-api": RepositoryRef(
+                "mashos-api", mashos.resolve(), mashos_head, mashos_tree
+            ),
+        }
+        return cocolon, external, mashos, workspace_profile, refs
+
+    @staticmethod
+    def _write_profile_documents(
+        system_context_root: Path, workspace_profile: dict[str, object]
+    ) -> None:
+        system_context_root.mkdir(parents=True)
+        (system_context_root / "workspace_profiles.json").write_text(
+            json.dumps(
+                {
+                    "schema_version": "test.workspace-profile.v1",
+                    "profiles": {"test_workspace": workspace_profile},
+                },
+                sort_keys=True,
+            ),
+            encoding="utf-8",
+        )
+        (system_context_root / "task_profiles.json").write_text(
+            json.dumps(
+                {
+                    "schema_version": "cocolon.system_context.task_profiles.v1",
+                    "tasks": {"test_task": {}},
+                },
+                sort_keys=True,
+            ),
+            encoding="utf-8",
+        )
+
+    @staticmethod
+    def _execution_identity(fingerprint: str = "e" * 64) -> dict[str, object]:
+        return {
+            "fingerprint": fingerprint,
+            "implementation_commit": "a" * 40,
+            "implementation_tree": "b" * 40,
+            "environment_fingerprint": "f" * 64,
+            "files": {"tools/cocolon_context_prepare.py": {"sha256": "c" * 64}},
+        }
+
+    @staticmethod
+    def _task_manifest() -> dict[str, object]:
+        return {
+            "status": "PENDING_MANUAL_CONFIRMATION",
+            "context_fingerprint": "d" * 64,
+            "selected_file_count": 2,
+            "closure_edge_count": 1,
+            "blocking_unresolved_count": 0,
+            "actual_unincorporated_finding_count": 0,
+            "output_sha256": {},
+        }
+
+    def _run_legacy_prepare(
+        self,
+        *,
+        root: Path,
+        saved_refs: dict[str, str] | None,
+        previous_receipt: dict[str, object] | None = None,
+        commit_available: bool = True,
+        verify_only: bool = False,
+    ) -> tuple[dict[str, object], dict[str, mock.Mock]]:
+        cocolon, external, _mashos, profile, refs = self._material_fixture(root)
+        resolved_saved_refs = (
+            {key: ref.commit for key, ref in refs.items()}
+            if saved_refs is None
+            else dict(saved_refs)
+        )
+        system = root / "system_context"
+        self._write_profile_documents(system, profile)
+        workspace_dir = root / "cache" / "test_workspace"
+        if previous_receipt is not None:
+            workspace_dir.mkdir(parents=True)
+            (workspace_dir / prepare_module.RECEIPT_NAME).write_text(
+                json.dumps(previous_receipt, sort_keys=True), encoding="utf-8"
+            )
+        identity = self._execution_identity()
+        build = mock.Mock(return_value={"status": "PACKED"})
+        verify_workspace = mock.Mock(return_value={"status": "VERIFIED"})
+        stable = mock.Mock(wraps=prepare_module._assert_refs_stable)
+        diff = mock.Mock(side_effect=lambda _repo_ref, _old_commit: [])
+        with mock.patch.object(
+            prepare_module, "_execution_input_identity", return_value=identity
+        ), mock.patch.object(
+            prepare_module, "_load_saved_refs", return_value=resolved_saved_refs
+        ), mock.patch.object(
+            prepare_module, "_diff_changes", diff
+        ), mock.patch.object(
+            prepare_module, "_commit_available", return_value=commit_available
+        ), mock.patch.object(
+            prepare_module, "_build_all", build
+        ), mock.patch.object(
+            prepare_module, "_verify_workspace", verify_workspace
+        ), mock.patch.object(
+            prepare_module,
+            "_compile_and_pack_task",
+            return_value=self._task_manifest(),
+        ), mock.patch.object(
+            prepare_module, "_assert_refs_stable", stable
+        ), mock.patch.object(
+            prepare_module, "sha256_file", return_value="f" * 64
+        ), mock.patch.object(
+            prepare_module, "_write_receipt"
+        ) as write_receipt:
+            receipt = prepare_module._prepare_impl(
+                repo_root=cocolon,
+                system_context_root=system,
+                external_workspace_root=external,
+                workspace="test_workspace",
+                task="test_task",
+                verify_only=verify_only,
+                _workspace_dir=workspace_dir,
+            )
+        return dict(receipt), {
+            "build": build,
+            "verify_workspace": verify_workspace,
+            "stable": stable,
+            "write_receipt": write_receipt,
+        }
+
+    def test_resolve_refs_rejects_tracked_and_untracked_material_bytes(self) -> None:
+        for repository_key in ("Cocolon", "mashos-api"):
+            for dirty_kind in ("tracked", "untracked"):
+                with self.subTest(
+                    repository_key=repository_key, dirty_kind=dirty_kind
+                ), tempfile.TemporaryDirectory() as td:
+                    root = Path(td)
+                    cocolon, external, mashos, profile, _refs = (
+                        self._material_fixture(root)
+                    )
+                    target = cocolon if repository_key == "Cocolon" else mashos
+                    if dirty_kind == "tracked":
+                        (target / "tracked.txt").write_text(
+                            "dirty tracked bytes\n", encoding="utf-8"
+                        )
+                    else:
+                        (target / "untracked.txt").write_text(
+                            "dirty untracked bytes\n", encoding="utf-8"
+                        )
+                    with self.assertRaisesRegex(
+                        PrepareError, rf"{repository_key}.*not clean"
+                    ):
+                        prepare_module._resolve_refs(
+                            repo_root=cocolon,
+                            external_workspace_root=external,
+                            workspace_profile=profile,
+                        )
+
+    def test_standard_entry_rejects_dirty_implementation_before_doctor(self) -> None:
+        with mock.patch.object(
+            prepare_module,
+            "_assert_clean_checkout",
+            side_effect=PrepareError("implementation is not clean"),
+        ) as clean, mock.patch.object(
+            prepare_module, "verify_environment"
+        ) as doctor, self.assertRaisesRegex(PrepareError, "not clean"):
+            prepare_module._standard_environment_identity()
+        clean.assert_called_once_with(
+            prepare_module.IMPLEMENTATION_ROOT, "System Context implementation"
+        )
+        doctor.assert_not_called()
+
+    def test_unrelated_saved_commit_is_not_an_incremental_base(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            repo = Path(td) / "repo"
+            first, _tree = self._init_repository(repo, "first")
+            git(repo, "checkout", "-q", "--orphan", "unrelated")
+            git(repo, "rm", "-q", "-f", "tracked.txt")
+            (repo / "other.txt").write_text("other root\n", encoding="utf-8")
+            git(repo, "add", "other.txt")
+            git(repo, "commit", "-m", "unrelated root")
+            unrelated = git(repo, "rev-parse", "HEAD")
+
+            self.assertTrue(prepare_module._commit_available(repo, first, first))
+            self.assertFalse(
+                prepare_module._commit_available(repo, first, unrelated)
+            )
+
+    def test_end_ref_drift_is_rejected_without_retry(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            cocolon, external, _mashos, profile, refs = self._material_fixture(
+                root, exact_heads=False
+            )
+            (cocolon / "moved.txt").write_text("moved\n", encoding="utf-8")
+            git(cocolon, "add", "moved.txt")
+            git(cocolon, "commit", "-m", "move material ref")
+            with self.assertRaisesRegex(
+                PrepareError, "MATERIAL_REF_MOVED_DURING_RUN"
+            ):
+                prepare_module._assert_refs_stable(
+                    start_refs=refs,
+                    repo_root=cocolon,
+                    external_workspace_root=external,
+                    workspace_profile=profile,
+                )
+
+    def test_layer_commands_use_implementation_tools_and_material_repositories(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            material = root / "material"
+            cocolon = material / "Cocolon"
+            mashos = material / "mashos-api"
+            cocolon.mkdir(parents=True)
+            mashos.mkdir()
+            refs = {
+                "Cocolon": RepositoryRef("Cocolon", cocolon, "a" * 40, "b" * 40),
+                "mashos-api": RepositoryRef(
+                    "mashos-api", mashos, "c" * 40, "d" * 40
+                ),
+            }
+            with mock.patch.object(prepare_module, "_run") as run:
+                prepare_module._run_layer_commands(
+                    repo_root=material,
+                    workspace_dir=root / "cache",
+                    refs=refs,
+                    work_root=root / "work",
+                )
+            implementation_root = prepare_module.IMPLEMENTATION_ROOT.resolve()
+            self.assertEqual(run.call_count, 5)
+            rendered = []
+            for call in run.call_args_list:
+                command = tuple(str(value) for value in call.args[0])
+                rendered.append(" ".join(command))
+                self.assertTrue(
+                    Path(command[1]).resolve().is_relative_to(
+                        implementation_root / "tools"
+                    )
+                )
+                self.assertEqual(call.kwargs["cwd"], implementation_root)
+            joined = "\n".join(rendered)
+            self.assertIn(f"Cocolon={cocolon}", joined)
+            self.assertIn(f"mashos-api={mashos}", joined)
+            self.assertNotIn(str(material / "tools"), joined)
+
+    def test_execution_input_fingerprint_binds_profiles_payloads_and_locks(
+        self,
+    ) -> None:
+        source = Path(__file__).parents[2] / "Cocolon_前提資料" / "system_context"
+        with tempfile.TemporaryDirectory() as td:
+            system = Path(td) / "system_context"
+            system.mkdir()
+            for name in ("workspace_profiles.json", "task_profiles.json"):
+                (system / name).write_bytes((source / name).read_bytes())
+            first = prepare_module._execution_input_identity(system)
+            again = prepare_module._execution_input_identity(system)
+            self.assertEqual(first, again)
+            bound_files = json.dumps(first["files"], sort_keys=True)
+            self.assertIn(".github/context-payloads/step2-code/", bound_files)
+            self.assertIn(".github/context-payloads/step3/", bound_files)
+            self.assertIn(".devcontainer/system-context-toolchain.lock.json", bound_files)
+            profile = system / "workspace_profiles.json"
+            profile.write_bytes(profile.read_bytes() + b"\n")
+            changed = prepare_module._execution_input_identity(system)
+            self.assertNotEqual(first["fingerprint"], changed["fingerprint"])
+
+    def test_initial_cache_build_has_explicit_mode_and_freshness_axes(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            receipt, calls = self._run_legacy_prepare(
+                root=Path(td), saved_refs={}
+            )
+        self.assertEqual(
+            receipt["refresh_plan"]["execution_mode"], "INITIAL_FULL_BUILD"
+        )
+        self.assertEqual(receipt["start_refs"], receipt["end_refs"])
+        self.assertEqual(receipt["ref_drift"], "NONE")
+        self.assertEqual(receipt["execution_input_fingerprint"], "e" * 64)
+        self.assertIn("EXACT", str(receipt["input_freshness"]))
+        self.assertIn("FRESH", str(receipt["output_freshness"]))
+        self.assertIn("PENDING", str(receipt["proof_status"]))
+        self.assertIn("BUILD", str(receipt["cache_decision"]))
+        calls["build"].assert_called_once()
+        calls["stable"].assert_called()
+        calls["write_receipt"].assert_called_once()
+
+    def test_changed_commit_without_path_delta_uses_full_identity_rebuild(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            previous = {
+                "execution_input_fingerprint": "e" * 64,
+                "execution_input": self._execution_identity(),
+            }
+            receipt, calls = self._run_legacy_prepare(
+                root=root,
+                saved_refs={"Cocolon": "1" * 40, "mashos-api": "2" * 40},
+                previous_receipt=previous,
+            )
+        self.assertEqual(
+            receipt["refresh_plan"]["execution_mode"],
+            "FULL_REBUILD_COMMIT_IDENTITY_CHANGE",
+        )
+        calls["build"].assert_called_once()
+        calls["verify_workspace"].assert_not_called()
+
+    def test_unavailable_saved_base_falls_back_to_bounded_full_rebuild(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            previous = {
+                "execution_input_fingerprint": "e" * 64,
+                "execution_input": self._execution_identity(),
+            }
+            receipt, calls = self._run_legacy_prepare(
+                root=Path(td),
+                saved_refs={"Cocolon": "1" * 40, "mashos-api": "2" * 40},
+                previous_receipt=previous,
+                commit_available=False,
+            )
+        self.assertEqual(
+            receipt["refresh_plan"]["execution_mode"],
+            "FULL_REBUILD_BASE_UNAVAILABLE",
+        )
+        calls["build"].assert_called_once()
+
+    def test_execution_input_change_rebuilds_instead_of_reusing_same_refs(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            root = Path(td)
+            previous = {
+                "execution_input_fingerprint": "0" * 64,
+                "execution_input": self._execution_identity("0" * 64),
+            }
+            receipt, calls = self._run_legacy_prepare(
+                root=root,
+                saved_refs=None,
+                previous_receipt=previous,
+            )
+        self.assertEqual(
+            receipt["refresh_plan"]["execution_mode"],
+            "FULL_REBUILD_EXECUTION_INPUT_CHANGE",
+        )
+        self.assertIn("REBUILT", str(receipt["cache_decision"]))
+        calls["build"].assert_called_once()
+        calls["verify_workspace"].assert_not_called()
+
+    def test_matching_execution_input_allows_verified_same_ref_reuse(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            previous = {
+                "execution_input_fingerprint": "e" * 64,
+                "execution_input": self._execution_identity(),
+            }
+            receipt, calls = self._run_legacy_prepare(
+                root=Path(td),
+                saved_refs=None,
+                previous_receipt=previous,
+            )
+        self.assertEqual(
+            receipt["refresh_plan"]["execution_mode"], "SAME_REF_REUSE"
+        )
+        self.assertEqual(receipt["cache_decision"], "SAME_REF_CACHE_VERIFIED")
+        calls["verify_workspace"].assert_called_once()
+        calls["build"].assert_not_called()
+
+    def test_verify_only_rejects_stale_execution_input_before_cache_use(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            previous = {
+                "execution_input_fingerprint": "0" * 64,
+                "execution_input": self._execution_identity("0" * 64),
+            }
+            with self.assertRaisesRegex(
+                PrepareError, "verify-only execution input is stale"
+            ):
+                self._run_legacy_prepare(
+                    root=Path(td),
+                    saved_refs=None,
+                    previous_receipt=previous,
+                    verify_only=True,
+                )
+
+    def test_brief_receipt_omits_heavy_output_map(self) -> None:
+        full = {
+            "workspace": "cmee_working",
+            "task": "cmee",
+            "status": "PENDING_REMOTE_VERIFICATION",
+            "resolved_refs": {
+                "Cocolon": {"commit": "a" * 40, "tree": "b" * 40},
+                "mashos-api": {"commit": "c" * 40, "tree": "d" * 40},
+            },
+            "refresh_plan": {"execution_mode": "SAME_REF_REUSE"},
+            "input_freshness": "CURRENT_EXACT_INPUTS",
+            "output_freshness": "FRESH_AT_END_REFS",
+            "ref_drift": "NONE",
+            "cache_decision": "VERIFIED_REUSE",
+            "proof_status": "PENDING_REMOTE_VERIFICATION",
+            "execution_input_fingerprint": "e" * 64,
+            "task_context": {
+                "selected_file_count": 2,
+                "closure_edge_count": 1,
+                "blocking_unresolved_count": 0,
+                "output_sha256": {"large.jsonl": "HEAVY_SENTINEL"},
+            },
+            "product_credit": 0,
+            "automatic_progression": False,
+        }
+        brief = prepare_module._brief_receipt(full, Path("/cache/cmee_working"))
+        rendered = json.dumps(brief, sort_keys=True)
+        self.assertNotIn("HEAVY_SENTINEL", rendered)
+        self.assertNotIn("output_sha256", rendered)
+        self.assertEqual(brief["workspace"], "cmee_working")
+        self.assertEqual(
+            full["task_context"]["output_sha256"]["large.jsonl"],
+            "HEAVY_SENTINEL",
+        )
+
+    def test_brief_receipt_does_not_publish_paths_for_ephemeral_output(self) -> None:
+        full = {
+            "workspace": "cmee_working",
+            "task": "account_profile_read_only",
+            "publication_mode": "EPHEMERAL_VERIFY_ONLY",
+        }
+        brief = prepare_module._brief_receipt(full, Path("/cache/cmee_working"))
+        self.assertEqual(brief["publication_mode"], "EPHEMERAL_VERIFY_ONLY")
+        self.assertEqual(brief["cache"]["retention"], "EPHEMERAL_DISCARDED")
+        self.assertIsNone(brief["cache"]["workspace"])
+        self.assertIsNone(brief["cache"]["receipt"])
+        self.assertIsNone(brief["cache"]["full_text_read_order"])
+
+    def test_cache_root_inside_repository_must_be_ignored(self) -> None:
+        with tempfile.TemporaryDirectory() as td:
+            repository = Path(td) / "repo"
+            repository.mkdir()
+            git(repository, "init", "-q")
+            (repository / ".gitignore").write_text(".cache/\n", encoding="utf-8")
+            prepare_module._assert_cache_root_untracked(
+                repository / ".cache", ()
+            )
+            tracked = repository / ".cache" / "tracked.txt"
+            tracked.parent.mkdir()
+            tracked.write_text("tracked\n", encoding="utf-8")
+            git(repository, "add", "-f", ".cache/tracked.txt")
+            with self.assertRaisesRegex(PrepareError, "contains tracked paths"):
+                prepare_module._assert_cache_root_untracked(
+                    repository / ".cache", ()
+                )
+            with self.assertRaisesRegex(PrepareError, "is not ignored"):
+                prepare_module._assert_cache_root_untracked(
+                    repository / "publishable-cache", (repository,)
+                )
+            with self.assertRaisesRegex(PrepareError, "cannot be a repository root"):
+                prepare_module._assert_cache_root_untracked(repository, (repository,))
 
 
 class CanonicalOwnerResolverTests(unittest.TestCase):
@@ -1508,6 +1992,32 @@ class WorkflowPolicyTests(unittest.TestCase):
         )
 
         scripts = "\n".join(str(step["run"]) for step in steps)
+        cls._require(
+            scripts.count(
+                "docker build --file .devcontainer/Dockerfile "
+                "--tag cocolon-system-context-ci .devcontainer"
+            )
+            == 1,
+            "workflow must build the fixed image from only .devcontainer",
+        )
+        cls._require(
+            scripts.count("docker run --rm --read-only --network none") == 1,
+            "workflow test runtime must be read-only and network-disabled",
+        )
+        cls._require(
+            '--volume "$GITHUB_WORKSPACE:/workspace:ro"' in scripts,
+            "workflow must mount the exact checkout read-only",
+        )
+        cls._require(
+            scripts.count("python3 -m tools.cocolon_context doctor") == 1,
+            "workflow must run the fixed-environment doctor exact1",
+        )
+        cls._require(
+            "--env GIT_CONFIG_COUNT=1" in scripts
+            and "--env GIT_CONFIG_KEY_0=safe.directory" in scripts
+            and "--env GIT_CONFIG_VALUE_0=/workspace" in scripts,
+            "workflow must bind the read-only checkout as Git safe.directory",
+        )
         forbidden = (
             r"\bpush\b",
             r"\bpatch\b",
@@ -1557,11 +2067,18 @@ class WorkflowPolicyTests(unittest.TestCase):
             f"workflow role must be asserted at runtime: {name}={role}",
         )
         if role == "TERMINAL_IMPLEMENTATION_MATRIX":
+            full_system_context_suite = (
+                "tests/cocolon_context -q" in scripts
+                and "python3 -m pytest" in scripts
+            )
             cls._require(
-                "tests.cocolon_context.test_inventory" in scripts
-                and "tests.cocolon_context.test_publication_transport" in scripts
-                and "tests/cocolon_context/test_prepare.py" in scripts
-                and "tests/cocolon_context/test_task_context.py" in scripts,
+                full_system_context_suite
+                or (
+                    "tests.cocolon_context.test_inventory" in scripts
+                    and "tests.cocolon_context.test_publication_transport" in scripts
+                    and "tests/cocolon_context/test_prepare.py" in scripts
+                    and "tests/cocolon_context/test_task_context.py" in scripts
+                ),
                 "terminal matrix role must cover transport, prepare, and task context",
             )
         elif role == "WORKFLOW_POLICY_VERIFIER":
@@ -1680,6 +2197,30 @@ class WorkflowPolicyTests(unittest.TestCase):
                 ),
                 "same-repository",
             ),
+            "writable test container": (
+                original.replace(" --read-only", "", 1),
+                "read-only and network-disabled",
+            ),
+            "networked test container": (
+                original.replace(" --network none", "", 1),
+                "read-only and network-disabled",
+            ),
+            "fixed environment doctor removed": (
+                original.replace(
+                    "          python3 -m tools.cocolon_context doctor\n",
+                    "",
+                    1,
+                ),
+                "fixed-environment doctor",
+            ),
+            "broad Docker build context": (
+                original.replace(
+                    "--tag cocolon-system-context-ci .devcontainer",
+                    "--tag cocolon-system-context-ci .",
+                    1,
+                ),
+                "only .devcontainer",
+            ),
             "git push through global option": (
                 original.replace(
                     "          node --check tools/cocolon_context_ts_syntax.cjs",
@@ -1707,6 +2248,83 @@ class WorkflowPolicyTests(unittest.TestCase):
 
 
 class PrepareCliTests(unittest.TestCase):
+    def test_prepare_cli_defaults_technical_inputs_and_cache_to_implementation_root(
+        self,
+    ) -> None:
+        implementation_root = prepare_module.IMPLEMENTATION_ROOT.resolve()
+        result = {"workspace": "cmee_working", "task": "cmee"}
+        brief = {"schema_version": "cocolon.system_context.prepare_brief.v1"}
+        with mock.patch.object(
+            prepare_module,
+            "_standard_environment_identity",
+            return_value={"environment_fingerprint": "e" * 64},
+        ) as environment_identity, mock.patch.object(
+            prepare_module, "prepare", return_value=result
+        ) as prepare_call, mock.patch.object(
+            prepare_module, "_brief_receipt", return_value=brief
+        ) as brief_call, mock.patch("builtins.print"):
+            code = prepare_module.cli(
+                [
+                    "--workspace",
+                    "cmee_working",
+                    "--task",
+                    "cmee",
+                    "--repo-root",
+                    "/tmp/material-cocolon",
+                ]
+            )
+        self.assertEqual(code, 0)
+        environment_identity.assert_called_once_with()
+        kwargs = prepare_call.call_args.kwargs
+        self.assertEqual(
+            kwargs["system_context_root"],
+            implementation_root / "Cocolon_前提資料" / "system_context",
+        )
+        self.assertEqual(
+            kwargs["external_workspace_root"],
+            implementation_root / ".cocolon-context-workspace",
+        )
+        self.assertEqual(
+            kwargs["cache_root"], implementation_root / ".cocolon-context-cache"
+        )
+        self.assertEqual(kwargs["environment_fingerprint"], "e" * 64)
+        brief_call.assert_called_once_with(
+            result,
+            implementation_root / ".cocolon-context-cache" / "cmee_working",
+        )
+
+    def test_prepare_cache_root_and_brief_output_defaults_are_forwardable(self) -> None:
+        parser = build_parser()
+        defaults = parser.parse_args(
+            ["prepare", "--workspace", "cmee_working", "--task", "cmee"]
+        )
+        self.assertIsNone(defaults.cache_root)
+        self.assertEqual(defaults.output_format, "brief")
+
+        with mock.patch.object(context_module, "prepare_cli", return_value=0) as cli:
+            result = context_module.main(
+                [
+                    "prepare",
+                    "--workspace",
+                    "cmee_working",
+                    "--task",
+                    "cmee",
+                    "--cache-root",
+                    "/tmp/cocolon-test-cache",
+                    "--output-format",
+                    "full",
+                ]
+            )
+        self.assertEqual(result, 0)
+        forwarded = cli.call_args.args[0]
+        self.assertEqual(
+            forwarded[forwarded.index("--cache-root") + 1],
+            "/tmp/cocolon-test-cache",
+        )
+        self.assertEqual(
+            forwarded[forwarded.index("--output-format") + 1], "full"
+        )
+
     def test_workflow_only_incremental_proof_flag_is_forwardable(self) -> None:
         parser = build_parser()
         args = parser.parse_args([

@@ -5,14 +5,17 @@ on:
   pull_request:
     types: [opened, reopened, synchronize]
     paths:
+      - .devcontainer/**
+      - .github/context-payloads/**
       - .github/workflows/cocolon-system-context-inventory.yml
       - .github/workflows/cocolon-system-context-step5-export.yml
       - .github/workflows/cocolon-system-context-step5-pytest-bootstrap.yml
-      - tools/cocolon_context_prepare.py
-      - tools/cocolon_context_task.py
+      - .gitignore
+      - tools/cocolon_context*
+      - Cocolon_前提資料/system_context/00_read_first.md
+      - Cocolon_前提資料/system_context/workspace_profiles.json
       - Cocolon_前提資料/system_context/task_profiles.json
-      - tests/cocolon_context/test_prepare.py
-      - tests/cocolon_context/test_task_context.py
+      - tests/cocolon_context/**
       - Cocolon_前提資料/system_context/Cocolon_SystemContext_ImplementationContract_20260818.md
       - Cocolon_前提資料/system_context/current/cmee_working/**
 
@@ -77,32 +80,36 @@ jobs:
           test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD_SHA"
           test -z "$(git status --porcelain=v1 --untracked-files=no)"
 
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install pinned test dependency
+      - name: Build fixed System Context environment
         shell: bash
-        run: python3 -m pip install --disable-pip-version-check pytest==8.4.2
+        run: docker build --file .devcontainer/Dockerfile --tag cocolon-system-context-ci .devcontainer
 
-      - name: Set up Node 20
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-
-      - name: Run terminal Step 7 identity-independent regression matrix
+      - name: Run terminal Step 7 matrix in fixed read-only environment
         shell: bash
         run: |
           set -euo pipefail
+          docker run --rm --read-only --network none \
+            --tmpfs /tmp:rw,nosuid,nodev \
+            --volume "$GITHUB_WORKSPACE:/workspace:ro" \
+            --workdir /workspace \
+            --env PYTHONPYCACHEPREFIX=/tmp/pycache \
+            --env XDG_CACHE_HOME=/tmp/cache \
+            --env GIT_CONFIG_COUNT=1 \
+            --env GIT_CONFIG_KEY_0=safe.directory \
+            --env GIT_CONFIG_VALUE_0=/workspace \
+            cocolon-system-context-ci \
+            bash -euo pipefail -c '
+          python3 -m tools.cocolon_context doctor
           node --check tools/cocolon_context_ts_syntax.cjs
           node --check tools/cocolon_context_ts_routes.cjs
-          python3 -m py_compile tools/cocolon_context_prepare.py tools/cocolon_context_task.py
-          python3 -m unittest -v \
-            tests.cocolon_context.test_inventory \
-            tests.cocolon_context.test_publication_transport \
-            tests.cocolon_context.test_publication_transport_nested
-          python3 -m pytest tests/cocolon_context/test_prepare.py tests/cocolon_context/test_task_context.py -q
+          python3 -m py_compile \
+            tools/cocolon_context.py \
+            tools/cocolon_context_environment.py \
+            tools/cocolon_context_prepare.py \
+            tools/cocolon_context_task.py \
+            tools/cocolon_context_publish_transport.py
+          python3 -m pytest -p no:cacheprovider tests/cocolon_context -q
+            '
 
       - name: Assert no tracked mutation
         if: always()

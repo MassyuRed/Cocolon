@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_system_context_implementation_contract_20260818
 title: "Cocolon System Context — Steps 1–5, Step 7, and Step 9 V1 Management Entry Contract"
-revision_date: "2026-08-22 JST"
+revision_date: "2026-09-02 JST"
 implementation_steps: [1, 2, 3, 4, 5, 7, 9]
 step7_candidate_status: "STEP7_BOUNDED_IMPLEMENTATION_COMPLETE"
 step8_status: "SKIPPED_BY_MASH_DECISION"
@@ -509,3 +509,65 @@ AUTOMATIC_PROGRESSION = false
 
 `SYSTEM_CONTEXT_V1_COMPLETE`、`SYSTEM_CONTEXT_V1_OPERATOR_CONTEXT_ACTUAL_PROOF_COMPLETE`、Operator value PASS、Product Read、merge-ready、release-readyは主張しない。Step 9 terminalから次workへautomatic progressionしない。
 
+---
+
+## 11. 2026-09-02 bounded V1 execution hardening overlay
+
+### 11.1 Authorization and exact identity separation
+
+Mashの2026-09-02明示判断は、現行V1のread-only actualで観測された不足に対し、次のexact4だけを最小修正することを承認する。
+
+```text
+exact-ref separation
+fixed environment enforcement
+stale/cache decision correction
+lightweight standard output
+```
+
+実行tool、schema、profile、embedded payloadのimplementation rootは、実行中のPR #37 exact checkoutである。`--repo-root`はPR #30 Cocolon materialだけを指し、`--external-workspace-root/mashos-api`はPR #3 materialだけを指す。subprocess toolをmaterial checkoutから起動せず、PR #37 implementation rootから起動する。
+
+current approved material exact headsは`workspace_profiles.json`に固定する。
+
+```text
+Cocolon PR #30 = e03d04b78bffb63c26ff5c7b6d3f1ce557f7a3cf
+mashos-api PR #3 = 4e8d397843c0381bc94379b71665cf71b80d7d1b
+```
+
+PR #37、PR #30、PR #3をoverlay、merge、rebase、incorporation claimで一つの偽treeにしない。PR #30とPR #3はread-only materialであり、そのwrite effectは0である。
+
+### 11.2 Fixed environment and fail-closed gate
+
+`.devcontainer/`はSystem Context専用のPython、Node、TypeScript、`scip`、`scip-typescript`、`scip-python`とtest dependencyをversion、artifact digest、lock integrityで固定する。product runtime dependencyは追加しない。
+
+standard entryはprepare前に`python3 -m tools.cocolon_context doctor`を通し、repository lockとactual executable/module versionの不一致、missing provider、lock tamperをfail closedでSTOPする。required SCIP failureをsyntax fallbackまたはwarningに変換しない。
+
+workflow exact3は従来のsame-repository、open Draft、unmerged、event head ref/SHAの前後照合、read-only permission、credential non-persistenceを保持する。CIは1.46 GBのtracked historical Contextをimage build contextに送らず、`.devcontainer`だけからfixed imageをbuildし、exact checkoutをread-only mountしたruntime network exact0でdoctor、bounded compile、testを実行する。
+
+### 11.3 Freshness, drift, and cache decision
+
+material checkoutは開始前と完了直前にHEAD、tree、tracked/untracked dirty exact0を照合する。実行中のrefまたはimplementation inputが動いた場合はretryせずSTOPし、partial resultをpublishしない。
+
+cache fingerprintは次を結合する。
+
+```text
+material exact refs
++ implementation tool and embedded payload bytes
++ workspace/task profiles and schema
++ fixed-environment lock identity
+```
+
+saved lock不在は`INITIAL_FULL_BUILD`、commit identityの変更に対しtree diffが0でもfull rebuild、old commit object不在またはlineage不一致はbounded full-rebuild fallbackとする。これらを`SAME_REF_REUSE`と表示しない。same-ref reuseはmanifest、logical bytes、transport、Context fingerprint、execution-input fingerprintがすべてverifyした場合だけ許す。
+
+receiptは`input_freshness`、`output_freshness`、`start_refs`、`end_refs`、`ref_drift`、`cache_decision`、`proof_status`を独立に扱う。fresh local buildとremote proof pendingをstaleと同一視せず、remote proof pendingをfreshness PASSの代替にしない。
+
+standard writable outputはtracked `Cocolon_前提資料/system_context/current/cmee_working/**`ではなく、Git-ignoredの`<cache-root>/cmee_working/**`に置く。defaultはPR #37 implementation rootの`.cocolon-context-cache`であり、`--cache-root`でexplicit local rootを指定できる。tracked 1.46 GB historical snapshotは本hardeningでdelete、rename、rewriteしない。
+
+### 11.4 Lightweight output and original-read boundary
+
+standard stdoutはexact refs、freshness、proof state、bounded count、cache/receipt path、zero-effect boundaryだけのbrief JSONとする。`--output-format full`はexplicit diagnosticである。canonical logical exact11、publication transport、whole-workspace transaction、full closure、original full-text reading orderはcache内に完全に保持し、stdoutを軽量化するために証拠を削除またはsilent truncateしない。
+
+fixed environment、exact ref、freshness、cache verification、tool executionのどれかがmissing、stale、tampered、unverifiableならSystem Contextはfail closedで停止する。その停止は作業そのものを禁止しない。tracked originalは常にcanonicalであり、execution ownerは原本へdirect read fallbackし、関係ファイル本文を実際に読んだ後にhuman judgmentを行う。
+
+### 11.5 Unchanged boundaries
+
+本overlayはV1の実行再現性とlocal navigation costだけを修正する。RN/API/DB/migration/product behavior、CMEE/EmlisAI/Piece/Analysis output、public contract、external service、daemon、dashboard、recurring cost、automatic rank/selection/owner mutation、PR Ready化、merge、deploy、releaseのeffectは0である。Operator actual-use proof、Product Read、`SYSTEM_CONTEXT_V1_COMPLETE`は主張しない。
