@@ -2232,7 +2232,7 @@ def _validate_v2_task_profile_document(
                     "availability_state": "AVAILABLE",
                     "privacy_state": "PUBLIC",
                     "canonicality": "NONCANONICAL",
-                    "adoption_state": "DESIGN_REFLECTED_NOT_IMPLEMENTED",
+                    "adoption_state": "IMPLEMENTED_NOT_ACCEPTED",
                     "retrieval_owner": "ULTRA_KAREN",
                     "public_identity_allowed": True,
                     "assertion_provenance": "EXTERNAL_ASSET_VERIFIED",
