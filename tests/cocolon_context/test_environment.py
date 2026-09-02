@@ -281,6 +281,15 @@ class EnvironmentVerificationTests(unittest.TestCase):
             first,
         )
 
+    def test_fixture_bin_validation_uses_locked_mode_not_mount_access(self) -> None:
+        # CI keeps /tmp on a noexec tmpfs. The real providers are executed from
+        # /opt by the version checks; fixture metadata should remain portable.
+        with mock.patch(
+            "tools.cocolon_context_environment.os.access", return_value=False
+        ):
+            report = self.inspect()
+        self.assertEqual(report["status"], "PASS")
+
     def test_fixed_image_lock_environment_variable_is_supported(self) -> None:
         with mock.patch.dict(
             "os.environ",

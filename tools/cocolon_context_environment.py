@@ -253,7 +253,10 @@ def _package_lock_transitive_row(
 
 def _bin_is_executable(install_root: Path, name: str) -> bool:
     target = install_root / "node_modules" / ".bin" / name
-    return target.is_file() and os.access(target, os.X_OK)
+    try:
+        return target.is_file() and bool(target.stat().st_mode & 0o111)
+    except OSError:
+        return False
 
 
 def _configured_lock(lock_path: Path) -> tuple[Mapping[str, Any], str]:
