@@ -7,6 +7,7 @@ step7_candidate_status: "STEP7_BOUNDED_IMPLEMENTATION_COMPLETE"
 step8_status: "SKIPPED_BY_MASH_DECISION"
 step9_start_basis: "STEP7_BOUNDED_IMPLEMENTATION_COMPLETE + MASH_EXPLICIT_STEP8_SKIP_AND_STEP9_ACTIVATION"
 step9_status: "STEP9_MANAGEMENT_ENTRY_MIGRATION_AND_V1_FREEZE_COMPLETE"
+execution_hardening_status: "COMPLETE"
 v1_activation: 0
 v1_activation_semantics: "GENERATED_OPERATOR_PROOF_SELF_CLAIM_NOT_AWARDED"
 management_entry_activation: 1
@@ -17,8 +18,9 @@ scope: "Cocolon + mashos-api full file inventory, code index, RN/API/backend/tes
 product_runtime_effect: 0
 api_db_rn_contract_effect: 0
 product_credit: 0
-technical_credit: 0
-primary_outcome: "ADMINISTRATIVE_ONLY"
+technical_credit: 1
+technical_credit_scope: "V1_EXECUTION_REPRODUCIBILITY_AND_NAVIGATION_COST"
+primary_outcome: "TECHNICAL_CREDIT"
 automatic_progression: false
 ---
 
@@ -478,7 +480,7 @@ actual taskで観測したpain point exact1
 
 System Contextの規模、document数、feedback件数、scanner数またはcheck数を成果にしない。new service／DB／daemon／dashboard／recurring cost／automatic rank／automatic owner mutationはdefault 0のまま保持する。
 
-### 10.5 Current terminal
+### 10.5 Retained Step 9 historical terminal
 
 ```text
 STEP7_BOUNDED_IMPLEMENTATION = COMPLETE
@@ -571,3 +573,24 @@ fixed environment、exact ref、freshness、cache verification、tool execution�
 ### 11.5 Unchanged boundaries
 
 本overlayはV1の実行再現性とlocal navigation costだけを修正する。RN/API/DB/migration/product behavior、CMEE/EmlisAI/Piece/Analysis output、public contract、external service、daemon、dashboard、recurring cost、automatic rank/selection/owner mutation、PR Ready化、merge、deploy、releaseのeffectは0である。Operator actual-use proof、Product Read、`SYSTEM_CONTEXT_V1_COMPLETE`は主張しない。
+
+### 11.6 Current hardening terminal
+
+Section 10.5の`ADMINISTRATIVE_ONLY`は2026-08-22 Step 9 terminalのhistorical primary outcomeとして保持する。2026-09-02 current authorityは、actual V1不足の観測とexact4のexecution hardeningを完了したため、次のtechnical terminalへ置き換わる。
+
+```text
+COCOLON_SYSTEM_CONTEXT_V1_EXECUTION_HARDENING = COMPLETE
+AUTHORIZED_CORRECTION_COUNT = 4
+EXACT_REF_SEPARATION = COMPLETE
+FIXED_ENVIRONMENT_ENFORCEMENT = COMPLETE
+STALE_CACHE_DECISION_CORRECTION = COMPLETE
+LIGHTWEIGHT_STANDARD_OUTPUT = COMPLETE
+PRODUCT_CREDIT = 0
+TECHNICAL_CREDIT = 1
+TECHNICAL_CREDIT_SCOPE = V1_EXECUTION_REPRODUCIBILITY_AND_NAVIGATION_COST
+PRIMARY_OUTCOME = TECHNICAL_CREDIT
+SYSTEM_CONTEXT_V1_COMPLETE = NOT_CLAIMED
+SYSTEM_CONTEXT_V1_OPERATOR_CONTEXT_ACTUAL_PROOF_COMPLETE = NOT_CLAIMED
+READY_MERGE_DEPLOY_RELEASE_EFFECT = 0
+AUTOMATIC_PROGRESSION = false
+```

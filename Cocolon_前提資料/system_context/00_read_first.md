@@ -6,11 +6,13 @@ scope: Cocolon System Context Steps 1–7 plus Step 9 management entry and V1 im
 step8_status: SKIPPED_BY_MASH_DECISION
 management_entry_activation: 1
 v1_implementation_freeze: 1
+execution_hardening_status: COMPLETE
 operator_proof_activation: 0
 operator_actual_proof_completion_claim: null
 product_credit: 0
-technical_credit: 0
-primary_outcome: ADMINISTRATIVE_ONLY
+technical_credit: 1
+technical_credit_scope: V1_EXECUTION_REPRODUCIBILITY_AND_NAVIGATION_COST
+primary_outcome: TECHNICAL_CREDIT
 automatic_progression: false
 
 ## Purpose
@@ -230,6 +232,7 @@ selection mutation, and automatic owner mutation remain 0 by default.
 STEP7_BOUNDED_IMPLEMENTATION = COMPLETE
 STEP8_STATUS = SKIPPED_BY_MASH_DECISION
 STEP9_MANAGEMENT_ENTRY_MIGRATION_AND_V1_FREEZE = COMPLETE
+COCOLON_SYSTEM_CONTEXT_V1_EXECUTION_HARDENING = COMPLETE
 MANAGEMENT_ENTRY_ACTIVATION = 1
 V1_IMPLEMENTATION_FREEZE = 1
 SYSTEM_CONTEXT_V1_MANAGEMENT_ENTRY_ACTIVATED_AND_IMPLEMENTATION_FROZEN = TRUE
@@ -237,8 +240,9 @@ SYSTEM_CONTEXT_V1_OPERATOR_CONTEXT_ACTUAL_PROOF_COMPLETE = NOT_CLAIMED
 OPERATOR_PROOF_ACTIVATION = 0
 OPERATOR_GENERATED_COMPLETION_CLAIM = null
 PRODUCT_CREDIT = 0
-TECHNICAL_CREDIT = 0
-PRIMARY_OUTCOME = ADMINISTRATIVE_ONLY
+TECHNICAL_CREDIT = 1
+TECHNICAL_CREDIT_SCOPE = V1_EXECUTION_REPRODUCIBILITY_AND_NAVIGATION_COST
+PRIMARY_OUTCOME = TECHNICAL_CREDIT
 AUTOMATIC_PROGRESSION = false
 STRUCTURE_MAP_DELTA_NONE
 ```
@@ -248,13 +252,14 @@ production dependency, CMEE/EmlisAI/Piece/Analysis output, default-branch
 state, ready state, merge state, deployment, release, or `mashos-api` byte.
 It is active on the PR #37 working lineage only.
 
-The bounded final claims are:
+The bounded current claims are:
 
 ```text
 STEP9_MANAGEMENT_ENTRY_MIGRATION_AND_V1_FREEZE_COMPLETE
 SYSTEM_CONTEXT_V1_MANAGEMENT_ENTRY_ACTIVATED_AND_IMPLEMENTATION_FROZEN
+COCOLON_SYSTEM_CONTEXT_V1_EXECUTION_HARDENING_COMPLETE
 ```
 
 `SYSTEM_CONTEXT_V1_COMPLETE`, Operator actual-proof completion, Operator value
-PASS, Product Read, merge-ready and release-ready are not claimed. Step 9 does
-not automatically start any next work.
+PASS, Product Read, merge-ready and release-ready are not claimed. Neither
+Step 9 nor this execution hardening automatically starts any next work.

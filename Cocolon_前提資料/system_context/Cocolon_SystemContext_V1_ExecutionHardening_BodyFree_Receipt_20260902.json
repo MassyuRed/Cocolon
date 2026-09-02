@@ -67,9 +67,12 @@
     "branch": "agent/cocolon-system-context-step7-bounded-implementation-20260822",
     "initial_implementation_commit": "9a53ab06da876ca2a88d61ea04e0bfc1ee8e1f11",
     "bounded_ci_correction_commit": "558cab872cf6af88152cc4e0abbe948c54da0e8c",
-    "terminal_exact_head": "558cab872cf6af88152cc4e0abbe948c54da0e8c",
-    "implementation_tree": "81f831313a716459f76004cc51b2d4a2e4ad2172",
-    "implementation_changed_path_count": 18,
+    "pre_receipt_corrected_implementation_head": "558cab872cf6af88152cc4e0abbe948c54da0e8c",
+    "pre_receipt_corrected_implementation_tree": "81f831313a716459f76004cc51b2d4a2e4ad2172",
+    "changed_path_count_before_receipt": 18,
+    "receipt_path_excluded_from_pre_receipt_count": true,
+    "authority_terminal_changed_path_count_including_receipt": 19,
+    "receipt_publication_commit": "SELF_GIT_COMMIT_CONTAINING_THIS_RECEIPT",
     "corrections": {
       "exact_ref": [
         "separate PR37 implementation root from PR30 and PR3 material roots",
@@ -125,24 +128,25 @@
       "python_compile": "PASS",
       "git_diff_check": "PASS"
     },
+    "remote_exact_head_runs_verified_head": "9b6c45ed5d5fe6dab0bc9fc21abf26fe98b020c9",
     "remote_exact_head_runs": [
       {
-        "run_id": 33634179282,
+        "run_id": 33635067111,
         "role": "terminal fixed-environment matrix",
         "conclusion": "success"
       },
       {
-        "run_id": 33634179283,
+        "run_id": 33635067135,
         "role": "pytest exact Draft head",
         "conclusion": "success"
       },
       {
-        "run_id": 33634179406,
+        "run_id": 33635067144,
         "role": "read-only workflow policy",
         "conclusion": "success"
       },
       {
-        "run_id": 33634179340,
+        "run_id": 33635067191,
         "role": "repository phase6 contract guards",
         "conclusion": "success"
       }
@@ -161,6 +165,8 @@
     "external_service_change_count": 0,
     "ready_merge_deploy_release_count": 0,
     "product_credit": 0,
+    "technical_credit": 1,
+    "technical_credit_scope": "V1_EXECUTION_REPRODUCIBILITY_AND_NAVIGATION_COST",
     "automatic_progression": false
   },
   "primary_outcome": "TECHNICAL_CREDIT",
