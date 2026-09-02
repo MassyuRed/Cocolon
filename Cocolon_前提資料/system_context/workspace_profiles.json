@@ -51,19 +51,31 @@
       }
     },
     "cmee_working": {
-      "purpose": "CMEE working view: stacked Cocolon context branch plus current disabled CMEE API draft",
+      "purpose": "CMEE working view: stacked Cocolon context branch plus current disabled inherited-owner implementation; product owner implemented but not accepted and IM10 Mash review pending; saved current/cmee_working output is stale and must not be consumed",
+      "current_product_owner_adoption_state": "IMPLEMENTED_NOT_ACCEPTED",
+      "im10_state": "MASH_PENDING",
+      "candidate_ready": false,
+      "production_effect": 0,
+      "automatic_progression": false,
+      "generated_context_state": "STALE_FAIL_CLOSED",
+      "generated_context_consumable": false,
+      "generated_context_last_source_commits": {
+        "Cocolon": "6b0973c841d536a2e6eaa97c586c320a93f83dc7",
+        "mashos-api": "06ce311b3ea728b06f83439d268a34bed917c01c"
+      },
+      "generated_context_refresh_blocker": "PINNED_SCIP_PYTHON_AND_NODE20_UNAVAILABLE",
       "repositories": {
         "Cocolon": {
           "repository": "MassyuRed/Cocolon",
           "checkout_ref": "SELF",
-          "expected_ancestor": "d29042f44e882110514b74dcc6a1b3f31ec746e6",
+          "expected_ancestor": "a77b79c5c8b0ce498c2ca5674460b3be267164b5",
           "role": "RN application, premise documents, CMEE design, and system-context owner"
         },
         "mashos-api": {
           "repository": "MassyuRed/mashos-api",
           "checkout_ref": "agent/cmee-v1a-i1sx-source-explicit-20260815",
-          "expected_head": "06ce311b3ea728b06f83439d268a34bed917c01c",
-          "role": "FastAPI backend plus disabled CMEE implementation Draft PR #3"
+          "expected_head": "4e8d397843c0381bc94379b71665cf71b80d7d1b",
+          "role": "FastAPI backend plus disabled CMEE inherited-owner implementation Draft PR #3; no cutover, merge, API, DB, RN, external generative AI, product-runtime network, or fallback effect"
         }
       }
     },
