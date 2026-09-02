@@ -1,0 +1,168 @@
+{
+  "schema_version": "cocolon.system_context.v1_execution_hardening_receipt.v1",
+  "receipt_id": "COCOLON_SYSTEM_CONTEXT_V1_EXECUTION_HARDENING_20260902",
+  "recorded_at_utc": "2026-09-02T13:13:24Z",
+  "authority": {
+    "source": "Mash explicit instruction on 2026-09-02",
+    "authorized_steps": [
+      "run current V1 read-only at current refs and record actual deficiencies only",
+      "minimally correct exact-ref, fixed environment, stale judgment, and lightweight output"
+    ],
+    "execution_owner": "ULTRA_KAREN_SINGLE_OWNER",
+    "terminal_boundary": "AUTHORIZED_STEP_2_COMPLETE",
+    "automatic_progression": false
+  },
+  "read_only_v1_observation": {
+    "implementation_preimage": {
+      "repository": "MassyuRed/Cocolon",
+      "pull_request": 37,
+      "commit": "d5de2bd8945544a44b4ef3d10136010f88ce23ad"
+    },
+    "material_heads": {
+      "Cocolon": "e03d04b78bffb63c26ff5c7b6d3f1ce557f7a3cf",
+      "mashos-api": "4e8d397843c0381bc94379b71665cf71b80d7d1b"
+    },
+    "first_stop": {
+      "exit_code": 2,
+      "stopped_before_inventory_refresh": true,
+      "reason": "MASHOS_API_EXACT_REF_MISMATCH",
+      "profile_expected": "06ce311b3ea728b06f83439d268a34bed917c01c",
+      "actual": "4e8d397843c0381bc94379b71665cf71b80d7d1b",
+      "elapsed_ms": 124.7,
+      "material_repository_write_count": 0,
+      "published_output_count": 0
+    },
+    "stored_historical_context": {
+      "Cocolon_commit": "6b0973c841d536a2e6eaa97c586c320a93f83dc7",
+      "mashos_api_commit": "06ce311b3ea728b06f83439d268a34bed917c01c",
+      "Cocolon_changed_path_count_to_current": 89,
+      "mashos_api_changed_path_count_to_current": 35,
+      "file_count": 90,
+      "byte_count": 1457180924,
+      "retained_without_rewrite": true
+    },
+    "host_environment": {
+      "python": "3.12.13",
+      "node": "24.19.0",
+      "npm": "11.9.0",
+      "typescript": "MISSING",
+      "scip_cli": "MISSING",
+      "scip_typescript": "MISSING",
+      "scip_python": "MISSING",
+      "docker": "MISSING"
+    },
+    "actual_deficiencies": [
+      "STALE_PROFILE_AND_STORED_MATERIAL_REFS",
+      "IMPLEMENTATION_AND_MATERIAL_ROOTS_NOT_INDEPENDENT",
+      "NO_STANDARD_FIXED_ENVIRONMENT_GATE",
+      "DIRTY_OR_MOVING_EXACT_REFS_NOT_REJECTED_AT_BOTH_BOUNDARIES",
+      "STALE_CACHE_DECISION_DID_NOT_BIND_ALL_EXECUTION_INPUTS_OR_LINEAGE",
+      "STANDARD_WRITABLE_OUTPUT_TARGETED_TRACKED_HISTORICAL_CURRENT",
+      "STANDARD_TERMINAL_OUTPUT_WAS_NOT_BOUNDED"
+    ]
+  },
+  "implementation": {
+    "repository": "MassyuRed/Cocolon",
+    "pull_request": 37,
+    "branch": "agent/cocolon-system-context-step7-bounded-implementation-20260822",
+    "initial_implementation_commit": "9a53ab06da876ca2a88d61ea04e0bfc1ee8e1f11",
+    "bounded_ci_correction_commit": "558cab872cf6af88152cc4e0abbe948c54da0e8c",
+    "terminal_exact_head": "558cab872cf6af88152cc4e0abbe948c54da0e8c",
+    "implementation_tree": "81f831313a716459f76004cc51b2d4a2e4ad2172",
+    "implementation_changed_path_count": 18,
+    "corrections": {
+      "exact_ref": [
+        "separate PR37 implementation root from PR30 and PR3 material roots",
+        "pin both material heads and require clean start/end commit and tree identity",
+        "stop without publication on ref drift"
+      ],
+      "fixed_environment": [
+        "pin linux/amd64, Python, Node, npm, TypeScript, SCIP providers, pytest, artifacts, and dependency integrities",
+        "require fail-closed doctor before the standard entry",
+        "build CI from .devcontainer only and test a read-only checkout with runtime network disabled"
+      ],
+      "stale_judgment": [
+        "bind cache reuse to material refs, implementation bytes, payloads, profiles, and environment fingerprint",
+        "require old commit availability and ancestry before incremental refresh",
+        "separate input freshness, output freshness, cache decision, ref drift, and proof status"
+      ],
+      "lightweight_output": [
+        "default to bounded brief JSON while retaining complete exact outputs in local cache",
+        "move standard writable output to a regenerable Git-ignored cache",
+        "reject a Git-contained cache that is tracked or not ignored",
+        "report ephemeral output as discarded with no false persistent paths"
+      ]
+    }
+  },
+  "bounded_mechanical_repair": {
+    "prior_failed_run": {
+      "run_id": 33633360331,
+      "head": "9a53ab06da876ca2a88d61ea04e0bfc1ee8e1f11",
+      "result": "2_FAILED_280_PASSED",
+      "failed_root_closed": true
+    },
+    "root_cause": "NOEXEC_TMPFS_MADE_TEST_FIXTURE_OS_ACCESS_FALSE",
+    "repair_exact1": "validate fixture bin executable mode bits while retaining actual provider execution checks",
+    "repair_changed_paths": [
+      "tests/cocolon_context/test_environment.py",
+      "tools/cocolon_context_environment.py"
+    ],
+    "fresh_rerun": {
+      "commit": "558cab872cf6af88152cc4e0abbe948c54da0e8c",
+      "docker_image_id": "sha256:d3de1dfa6272a66b2483a41fa548e987b4bcdf18e2450594d8c22151ba29f6b2",
+      "failed_runtime_reuse_count": 0,
+      "same_gate_run_id": 33634179282,
+      "result": "SUCCESS_283_PASSED"
+    },
+    "second_failure": false
+  },
+  "verification": {
+    "environment_fingerprint": "3acf25b24a16d5788336dcc57c560d510cc8c901c898855a7f7091aa1e031791",
+    "toolchain_lock_sha256": "30f5d46c5379169fdade52a686ed54406a951a6b9ac3b7b377a09d6b5938baa1",
+    "local": {
+      "focused_environment_and_prepare": "71_PASSED",
+      "fixed_toolchain_full_system_context": "283_PASSED",
+      "python_compile": "PASS",
+      "git_diff_check": "PASS"
+    },
+    "remote_exact_head_runs": [
+      {
+        "run_id": 33634179282,
+        "role": "terminal fixed-environment matrix",
+        "conclusion": "success"
+      },
+      {
+        "run_id": 33634179283,
+        "role": "pytest exact Draft head",
+        "conclusion": "success"
+      },
+      {
+        "run_id": 33634179406,
+        "role": "read-only workflow policy",
+        "conclusion": "success"
+      },
+      {
+        "run_id": 33634179340,
+        "role": "repository phase6 contract guards",
+        "conclusion": "success"
+      }
+    ],
+    "independent_review": {
+      "blocker_count": 0,
+      "major_count": 0
+    }
+  },
+  "effects": {
+    "Cocolon_PR30_write_count": 0,
+    "mashos_api_PR3_write_count": 0,
+    "tracked_historical_context_delete_rename_rewrite_count": 0,
+    "product_runtime_change_count": 0,
+    "api_db_rn_contract_change_count": 0,
+    "external_service_change_count": 0,
+    "ready_merge_deploy_release_count": 0,
+    "product_credit": 0,
+    "automatic_progression": false
+  },
+  "primary_outcome": "TECHNICAL_CREDIT",
+  "next_action": "NONE_AUTOMATIC__WAIT_FOR_NEW_MASH_AUTHORITY"
+}
