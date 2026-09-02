@@ -1,7 +1,7 @@
 # CMEE V1 詳細設計 — Read First
 
 - document id: `cocolon.cmee.v1.detailed_design.read_first`
-- revision date: `2026-09-01 JST`
+- revision date: `2026-09-02 JST`
 - Step 10 final document id: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2`
 - Step 10 design identity: `CMEE_THREE_CORE_INTEGRATED_DESIGN_20260821`
 - Step 10 Pro review: `CMEE_STEP10_PRO_SINGLE_PRODUCT_ROUTE_REVIEW_20260821 / CONSUMED_EXACTLY_ONCE`
@@ -9,30 +9,30 @@
 - technical design owner: `Ultra華恋`
 - architecture parent: [Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md](../Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md)
 - NLSv3 inheritance input: [NLSv3_to_CMEE_Disposition_Phase1_20260817.md](../NLSv3_to_CMEE_Disposition_Phase1_20260817.md)
-- lifecycle: `CURRENT_PRODUCT_OWNER_IMPLEMENTED_NOT_ACCEPTED / IM10_MASH_PENDING`
+- lifecycle: `CURRENT_PRODUCT_OWNER_NON_PASS / CORRECTION_ROUTE_APPROVED_NOT_STARTED`
 - effective when: `MERGED_TO_COCOLON_MAIN_AS_DESIGN_OWNER`
-- implementation approval: `INHERITED_DISABLED_IMPLEMENTATION_COMPLETE_TO_IM09 / IM10_MASH_REVIEW_PENDING`
+- implementation approval: `INHERITED_DISABLED_IMPLEMENTATION_COMPLETE_TO_IM09 / IM10_NON_PASS / NEXT_IMPLEMENTATION_NOT_STARTED`
 - dependency / production / test / runner / API / DB / RN effect: `0`
 - Cycle001 restart effect: `0`
 - Stage 1 language route: `ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER / SOLE_CURRENT_AND_FUTURE_ROUTE`
 - Phase 0 / P0 / P0-R1 / standalone product-delta-0 L3-R / L3-I lifecycle: `RETIRED_HISTORICAL_NONREUSABLE`
 - current implementation rule: `PRODUCT_QUALITY_DELTA_GT_0_AND_MASH_CONFIRMED_ONLY`
-- current implementation state: `INHERITED_OWNER_CHAIN_IMPLEMENTED_NOT_ACCEPTED / IM10_MASH_PENDING`
+- current implementation state: `INHERITED_OWNER_CHAIN_IMPLEMENTED_NOT_ACCEPTED / IM10_NON_PASS`
 - Phase 2 design correction state: `TOP_LEVEL_NAVIGATION_ALIGNED`
 - Step 10 design correction state: `FINAL_INTEGRATED_CONTRACT_REFLECTED_EXISTING_EXACT14`
-- Karen-derived functional companion: `exact2`
+- Karen-derived functional companion: `HISTORICAL_PREDECESSOR_ABSENT_CURRENT_TREE / CURRENT_OWNER_V1_02_AND_V1_06`
 - Stage 1 additional correction final body: `COCOLON_CMEE_STAGE1_ADDITIONAL_CORRECTION_ULTRA_FINAL_TECHNICAL_BODY_AND_JOINT_RECOMMENDATION_20260824`
 - Stage 1 additional correction Pro final confirmation: `PASS / BLOCKER 0 / MAJOR 0 / MINOR 0`
 - Stage 1 additional correction placement: `HISTORICAL_PREDECESSOR_INTEGRATION_SOURCE`
 - duplicate parallel technical canonical design files: `0`
-- current authorized next implementation: `IM10_MASH_PENDING / NO_AUTOMATIC_PROGRESSION`
+- current authorized next implementation: `NONE_UNTIL_FRESH_SESSION_EXPLICIT_START / APPROVED_ROUTE_ROUND0_FOLLOW_PRIMARY_CORRECTION`
 - automatic progression: `false`
 
 ---
 
 ## 0. このsuiteの役割
 
-このdirectoryは、CMEEの上位技術設計を、実装者がsource、contract、module、failure、test、cutoverの順に追える詳細設計群である。Emlis入力固有意味決定のdesign authorityは既存final canonical §§19–§22、current implementation／lifecycle navigationは本file latest §12とcanonical 06 latest §85が所有する。
+このdirectoryは、CMEEの上位技術設計を、実装者がsource、contract、module、failure、test、cutoverの順に追える詳細設計群である。Emlis入力固有意味決定のdesign authorityは既存final canonical §§19–§22、current product verdict／完成routeは本file latest §13、canonical 02 latest §35、canonical 06 latest §86が所有する。
 
 起点は旧G0–G10の補助経路ではなく、次の商品job exact3とする。
 
@@ -211,9 +211,9 @@ automatic progression = false
 
 Step 10の`new parallel canonical design file = 0`は当時のsynchronization factとして保持する。今回追加するのは第二technical design treeではなく、P1–P8、M1–M7、Layer 1 / 2、V1–V9、最低商品品質を所有するfunctional companionである。
 
-technical integration source:
+technical integration source at that historical checkpoint:
 
-[Cocolon CMEE Stage 1 華恋由来機能構造 Pro / Ultra 統合追加技術設計](../Cocolon_CMEE_Stage1_ProUltra_KarenDerivedFunctional_FinalTechnicalDesign_20260822.md)
+`Cocolon_CMEE_Stage1_ProUltra_KarenDerivedFunctional_FinalTechnicalDesign_20260822.md`（current treeには存在せず、Git history上のpredecessor）
 
 次のruntime implementationは別の長い設計・審査projectへせず、fresh preimageを入れた短いexecution envelopeから同一bounded Stage 1 product correctionへ戻る。本docs correctionはimplementation開始authorityを生成しない。
 
@@ -221,7 +221,7 @@ technical integration source:
 
 Mashの今回の明示指示に基づき、Pro華恋が最終確認で`PASS / BLOCKER 0 / MAJOR 0 / MINOR 0`とした次の本文を、PR #30 working lineageへdocs-onlyで配置する。
 
-[Cocolon CMEE Stage 1 追加修正 — Ultra華恋 Final Technical Body and Pro/Ultra Joint Recommendation](../Cocolon_CMEE_Stage1_AdditionalCorrection_UltraFinalTechnicalBodyAndJointRecommendation_20260824.md)
+`Cocolon_CMEE_Stage1_AdditionalCorrection_UltraFinalTechnicalBodyAndJointRecommendation_20260824.md`（current treeには存在せず、Git history上のpredecessor）
 
 ```text
 document_id = COCOLON_CMEE_STAGE1_ADDITIONAL_CORRECTION_ULTRA_FINAL_TECHNICAL_BODY_AND_JOINT_RECOMMENDATION_20260824
@@ -335,7 +335,7 @@ IM01はIM00–IM09のnonseparable bounded unit内にあり、このcompleted non
 
 1. 本file
 2. [NLSv3 → CMEE Disposition表](../NLSv3_to_CMEE_Disposition_Phase1_20260817.md)
-3. [華恋由来機能構造 — Read First](karen_derived/00_read_first.md)と[Stage 1 functional owner](karen_derived/01_emlis_observation_and_reception.md)
+3. [Emlis V1-A current product contract](02_emlis_v1a_detailed_design.md) latest §35
 4. [01_shared_kernel_and_runtime_contracts.md](01_shared_kernel_and_runtime_contracts.md)
 5. [05_json_schema_and_versioning.md](05_json_schema_and_versioning.md)
 6. 実装対象coreの詳細設計
@@ -343,10 +343,10 @@ IM01はIM00–IM09のnonseparable bounded unit内にあり、このcompleted non
    - [03_piece_v1c_detailed_design.md](03_piece_v1c_detailed_design.md)
    - [04_analysis_v1d_v1e_detailed_design.md](04_analysis_v1d_v1e_detailed_design.md)
 7. [Emlis input-specific meaning decision final technical design and implementation order](../Cocolon_CMEE_Stage1_Emlis_InputSpecificMeaningDecision_KarenDesigned_FinalTechnicalDesignAndImplementationOrder_20260828.md)
-8. [06_implementation_order_migration_and_verification.md](06_implementation_order_migration_and_verification.md) latest §85
-9. [Route A v2 downstream case-frame final technical design and session-safe implementation order](../Cocolon_CMEE_Stage1_RouteA_TypedJapaneseCaseFrameRealizerV2_UltraFinalTechnicalDesignAndImplementationOrder_20260827.md)
-10. `../../../current_structure/04_cmee_current_structure.md`
-11. 対象coreのcurrent structure mapとactual source / contract / test
+8. [06_implementation_order_migration_and_verification.md](06_implementation_order_migration_and_verification.md) latest §86
+9. `../../../current_structure/01_emlis_ai_current_structure.md` latest §19
+10. `../../../current_structure/04_cmee_current_structure.md` latest §32
+11. mashos-apiの既存CMEE handoff latest current sectionとactual source / contract / test
 
 Disposition表だけでcurrent実装状態や移管完了を決めない。本suiteだけでcurrent実装状態を決めず、current structure mapを地図、
 GitHubのactual source / testを現物として両方確認する。
@@ -356,9 +356,9 @@ GitHubのactual source / testを現物として両方確認する。
 | File | Owns | Does not own |
 |---|---|---|
 | `00_read_first.md` | 読み順、lifecycle、suite全体の非影響、NLSv3継承の第2段階routing | runtime contract詳細、asset単位の最終移管 |
-| `karen_derived/00_read_first.md` + `01_emlis_observation_and_reception.md` | 華恋由来P1–P8、M1–M7、Layer 1 / 2、V1–V9、観測・選択・応答構造、最低商品品質、public-safe examples / prohibitions | Python型、schema、validator、trace実装、runtime algorithm |
+| `02_emlis_v1a_detailed_design.md` latest §35 + `06_implementation_order_migration_and_verification.md` latest §86 | Layer 1 / 2のcurrent商品契約、IM10 NON_PASS、follow-primary配分、完成までの実行順 | actual runtime execution、Product PASS、production activation |
 | `../NLSv3_to_CMEE_Disposition_Phase1_20260817.md` | 第1段階の分類、受け皿、重複・欠落、evidence index | design authority、implementation authority、移管完了claim |
-| `../Cocolon_CMEE_Stage1_AdditionalCorrection_UltraFinalTechnicalBodyAndJointRecommendation_20260824.md` | Pro-confirmed Stage 1 additional correctionのLEVEL_3 implementation candidate、root cause、提案delta、§13実装順 | parallel canonical owner、current runtime activation、implementation authority、Product PASS |
+| deleted `../Cocolon_CMEE_Stage1_AdditionalCorrection_UltraFinalTechnicalBodyAndJointRecommendation_20260824.md` | HISTORICAL_PREDECESSOR_ABSENT_CURRENT_TREE / 当時のPro-confirmed Stage 1 additional correction、root cause、提案delta、§13実装順をGit historyで保持 | current authority、parallel canonical owner、current runtime activation、implementation authority、Product PASS |
 | `../Cocolon_CMEE_Stage1_Emlis_InputSpecificMeaningDecision_KarenDesigned_FinalTechnicalDesignAndImplementationOrder_20260828.md` | `FINAL_CANONICAL_IMPLEMENTATION_READY`のupstream input-specific meaning商品設計、§19–§22のnormative implementation contract／order／Packet境界 | implementation execution start、actual runtime result、Product Read、activation、I09 |
 | `01_shared_kernel_and_runtime_contracts.md` | shared logical architecture、ports、pipeline、failure | core固有商品判断 |
 | `02_emlis_v1a_detailed_design.md` | Emlis observation vertical、question lifecycle、Cycle境界 | Piece / Analysis activation |
@@ -594,3 +594,34 @@ Cycle001 large moduleは`NOT_ADOPTED`であり、責務移管だけを行う。c
 current runtime evidenceはmashos-api Draft PR #3 head `4e8d397843c0381bc94379b71665cf71b80d7d1b`である。active identity payloadは18/18、product causal source ownerはexact9、canonical100はdirect 100/100およびouter generated-disabled 68／finite fail-closed 32である。historical exact17／IM06 approval freezeは遡及更新しない。
 
 保存済み`system_context/current/cmee_working/**`は06ce時点の旧materializationであり、current profileは`STALE_FAIL_CLOSED`／`generated_context_consumable=false`に固定する。pinned SCIP Python／Node 20が無い環境では再生成をfail closedし、新headのformal contextとして消費しない。
+
+## 13. IM10 Product Read NON_PASSと完成route（2026-09-02）
+
+本節はcurrent商品判定と次の順路について§12よりfreshである。Mashはcurrent disabled exact8を確認し、観測構造が内部に存在することと、ユーザーへ届く文章が商品として成立することは別だと判断した。current候補は`NON_PASS`であり、IM10の`MASH_PENDING`は解消した。
+
+```text
+IM10 = NON_PASS
+MASH_PRODUCT_READ = EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFICIENT
+CURRENT_PRODUCT_OWNER_ADOPTION_STATE = IMPLEMENTED_NOT_ACCEPTED
+CANDIDATE_READY = false
+PRODUCT_CREDIT = 0
+PRODUCTION / CUTOVER / MERGE / API / DB / RN EFFECT = 0 / 0 / 0 / 0 / 0 / 0
+CURRENT_IMPLEMENTATION_EXECUTION = NOT_STARTED
+AUTOMATIC_PROGRESSION = false
+```
+
+current商品契約では、Layer 2「Emlisから」がユーザーの主本文であり、Layer 1「見えたこと」はその主本文が何を根拠にしたかを示す必要最小限の観測である。配分は文字数、文数、token数の固定quotaではなく、入力ごとの意味役割の比率として、観測1：フォロー9から観測4：フォロー6の範囲で動的に決める。日常の出来事や感情の受け取りは観測1〜3：フォロー9〜7、通常の悩みや自己理解は観測3〜4：フォロー7〜6、構造説明を明示的に求められた場合でも観測は最大4、フォローは最小6とする。観測0またはフォロー0にはしない。
+
+旧資料に残る標準`観測6：フォロー4`および構造要求時`観測7：フォロー3`は、当時の履歴として保持するが、current EmlisAI商品routeには使用しない。current意味はcanonical 02 latest §35が所有する。
+
+完成routeは次の順である。
+
+1. Round 0のLayer 1／2について、actual user-visible本文の共通原因を修正し、「見えたこと」を必要最小限へ、「Emlisから」を入力固有で会話として流れる主本文へする。
+2. 華恋がbody-full private boundary内で代表入力の本文を読み、復唱、label置換、定型文、generic follow、同義反復、深さ不足が残る間はMashへ提示せず、同じproduct-causal unit内で修正する。
+3. actual before／afterをMashへ提示し、Round 0のProduct Readを受ける。Mashの明示PASSまではquestion実装へ進まない。
+4. Round 0 PASS後のfresh explicit startで、Freeの重要な問い0..1をend-to-endで実装する。original inputとは別sourceとしてsupplemental answerを保存し、その回答を根拠にLayer 1／2をrefineする。既存API／DB／Supabase／RN契約を確認し、必要な既存経路だけを変更する。
+5. Plus／PremiumのLayer 3と複数roundは、Round 0およびFree一問end-to-endの後に別判断で扱う。
+
+これは新しい並列設計書を作るrouteではない。current ownerはcanonical 02 §35と06 §86、構造地図はcurrent_structure 01 §19と04 §32である。各実装unitはactual visible outputの非0改善、必要なtest、GitHub checkpoint、fresh remote verificationまでを同じ単位で完了し、framework、document、test、internal proofだけで完了またはproduct creditとしない。
+
+本2026-09-02反映はapproved商品判断と再開順を既存ownerへ保存する`ADMINISTRATIVE_ONLY`である。runtime、test、private generation、API、DB、Supabase、RN、production、System Context生成物は変更しておらず、次実装は新しいsessionの明示開始指示まで開始しない。

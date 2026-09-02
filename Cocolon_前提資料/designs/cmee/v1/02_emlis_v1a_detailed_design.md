@@ -1,20 +1,20 @@
 # CMEE V1-A — EmlisAI Observation Vertical 詳細設計
 
 - document id: `cocolon.cmee.v1a.emlis_observation.detailed_design`
-- revision date: `2026-09-01 JST`
-- lifecycle: `CURRENT_PRODUCT_OWNER_IMPLEMENTED_NOT_ACCEPTED`
-- runtime state: `DRAFT_WIP_DISABLED_INHERITED_OWNER_CHAIN_IM10_MASH_PENDING`
+- revision date: `2026-09-02 JST`
+- lifecycle: `CURRENT_PRODUCT_OWNER_NON_PASS / FOLLOW_PRIMARY_CORRECTION_ROUTE_APPROVED_NOT_STARTED`
+- runtime state: `DRAFT_WIP_DISABLED_INHERITED_OWNER_CHAIN_IM10_NON_PASS`
 - historical predecessor implementation evidence: `MassyuRed/mashos-api Draft PR #3 @ d26b3521f0cd63421af3596277145b2e52dafbbe / NOT_CURRENT_OWNER_HEAD`
 - historical predecessor Stage 1 correction checkpoint: `STEP7_V2_MACHINE_GREEN_PRODUCT_REJECTED / NOT_CURRENT_CHECKPOINT`
 - historical predecessor Stage 1 additional correction checkpoint: `STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP / COUNT_2_OF_2 / EARLY_ACTUAL_NOT_RUN / NOT_CURRENT_CHECKPOINT`
 - current implementation evidence owner: `MassyuRed/mashos-api Draft PR #3 / exact head bound by system_context/workspace_profiles.json after final runtime commit`
-- current Stage 1 checkpoint: `INHERITED_OWNER_CHAIN_IMPLEMENTED_NOT_ACCEPTED / IM10_MASH_PENDING`
+- current Stage 1 checkpoint: `INHERITED_OWNER_CHAIN_IMPLEMENTED_NOT_ACCEPTED / IM10_NON_PASS`
 - R1–R4 state: `CLOSED_GREEN`
 - original exact8 machine structural state: `8/8`
-- private human Product Read: `CURRENT_MASH_PENDING / HISTORICAL_PREDECESSOR_EVALUATED_FAIL_STOP`
+- private human Product Read: `CURRENT_EVALUATED_NON_PASS / HISTORICAL_PREDECESSOR_EVALUATED_FAIL_STOP`
 - candidate ready: `false`
 - production admission: `false`
-- current authorized next implementation: `IM10_MASH_PENDING`
+- current authorized next implementation: `NONE_UNTIL_FRESH_SESSION_EXPLICIT_START / APPROVED_ROUTE_ROUND0_FOLLOW_PRIMARY_CORRECTION`
 - automatic progression: `false`
 - Cycle001 effect: `0`
 - Stage 1 language route: `ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER / SOLE_CURRENT_AND_FUTURE_ROUTE`
@@ -45,9 +45,9 @@ current input
 
 [mashos-api Draft PR #3](https://github.com/MassyuRed/mashos-api/pull/3)には、input-specific meaning、meaning projection validation、Grounded Observation Plan、Grounded Sentence Plan／sentence realizer、Human Reception／reception realizer、final-body-only inverse／Gateを既存owner chainで接続したoffline disabled verticalが実在する。current headは`4e8d397843c0381bc94379b71665cf71b80d7d1b`で、compositionはfinal surfaceを所有しない。
 
-canonical100はdirect active final surface 100/100、outer engineはgenerated-disabled 68／有限fail-closed 32である。active final-language identityはpayload exact18、product causal source owner exact9へ更新した。全100件でproduction effect 0、candidate ready false、Product Read eligible false、automatic progression falseを維持する。current candidateのprivate human Product Readは`IM10=MASH_PENDING`であり、過去candidateの`EVALUATED_FAIL_STOP`はhistorical predecessor verdictとしてだけ保持する。
+canonical100はdirect active final surface 100/100、outer engineはgenerated-disabled 68／有限fail-closed 32である。active final-language identityはpayload exact18、product causal source owner exact9へ更新した。全100件でproduction effect 0、candidate ready false、Product Read eligible false、automatic progression falseを維持する。これはIM10実施前のtechnical baselineであり、current private human Product Readはlatest §35の`IM10=NON_PASS`を優先する。過去candidateの`EVALUATED_FAIL_STOP`はhistorical predecessor verdictとしてだけ保持する。
 
-従って、これは未実装ではなく`IMPLEMENTED_NOT_ACCEPTED`の`DRAFT_WIP_DISABLED` current baselineである。body-full input／candidateは本designへ転記せず、IM10のMash判断前にacceptance、ready、mergeまたはproductionへ進めない。
+従って、これは未実装ではなく`IMPLEMENTED_NOT_ACCEPTED`の`DRAFT_WIP_DISABLED` current baselineである。body-full input／candidateは本designへ転記せず、current NON_PASSのままacceptance、ready、mergeまたはproductionへ進めない。
 
 ### 0.2 絶対実装規則と許され得るnext implementation class
 
@@ -1447,3 +1447,71 @@ AUTOMATIC_PROGRESSION = false
 ```
 
 current evidence headは`4e8d397843c0381bc94379b71665cf71b80d7d1b`、current language/runtime identity payload countは18/18、product causal source owner countは9である。canonical100はdirect 100/100、outer generated-disabled 68／finite fail-closed 32を保持する。N3 exact16／source-owner exact7、historical exact17 receipt、IM06 approval freezeはcurrent bytesへ遡及更新しない。
+
+## 35. IM10 Mash Product Read NON_PASS / follow-primary completion contract（2026-09-02）
+
+本節はV1-Aの商品本文、current verdict、次の実装方向について§34よりfreshである。Mashのcurrent Product Readにより、current disabled exact8は`NON_PASS`である。内部のinput-specific meaning、Grounded Observation Plan、Human Reception、trace、body-only inverseが存在しmachine resultがGREENでも、visible本文がユーザー入力の近い言い換えと短い定型的followへ縮退している限り、EmlisAIの商品品質は成立しない。
+
+### 35.1 current product roles
+
+Layer 1「見えたこと」は、Emlisが何を根拠に読んだかをユーザーが確かめられる必要最小限の観測である。Layer 2「Emlisから」は、Emlisがその入力をどう受け取り、何に目を向け、何を感じ、どの距離と姿勢で言葉を返すかを担うユーザー向け主本文である。
+
+Layer 1では、入力文の反復、語尾変更、短い引用または構造labelの提示そのものを観測成立と数えない。入力のどこを意味の中心として受け取り、どの出来事、状態、願い、block、変化または関係が同時に／順に／緊張して置かれていると読んだかが、その入力固有に分かる必要がある。ただし、本人が示していない原因、人格、診断または他者意図を補わない。
+
+主従は次に固定する。
+
+```text
+PRIMARY_USER_FACING_BODY = LAYER_2_EMLIS_KARA
+MINIMUM_GROUNDING_AND_TRANSPARENCY = LAYER_1_MIETA_KOTO
+LAYER_1_ZERO = FORBIDDEN
+LAYER_2_ZERO = FORBIDDEN
+```
+
+Layer 2はLayer 1の要約、言い換え、感情labelの付加または固定closeではない。ユーザーが置いた出来事や状態を受け取り、その入力固有の重要点へEmlisとして目を向け、その受け取りを人間的な流れで返す。華恋との雑談にあるような「何を受け取ったか、そのことをどう考えたか、その上で何を伝えるか」という内容上の連続性を持たせる。これは必須質問、相槌formulaまたはturn-takingを意味せず、会話ではない場面でも一方向の「Emlisからユーザーへの言葉」として成立させる。ただし、これを固定した三文構成、定型sequenceまたはcase別完成文として実装してはいけない。
+
+### 35.2 dynamic meaning-role ratio
+
+配分は文字数、文数、token数のquotaではなく、完成本文の中で各Layerが担う意味役割の比率である。入力ごとに次の範囲で動かす。
+
+| Input family | Layer 1 観測 | Layer 2 フォロー |
+|---|---:|---:|
+| 日常の出来事、感情の受け取り | 1〜3 | 9〜7 |
+| 通常の悩み、迷い、自己理解 | 3〜4 | 7〜6 |
+| 構造説明を明示的に求められた入力 | 最大4 | 最小6 |
+
+全体範囲は`観測1：フォロー9`から`観測4：フォロー6`である。入力に観測材料が少ない場合もLayer 1を水増しせず、Layer 2をgeneric empathyで埋めない。入力が構造的でも、内部分析の説明が主本文を占有しない。
+
+旧`emlis_ai_state_answer_human_follow_definition_2026_05_26.md`等に残る標準`観測6：フォロー4`、構造要求時`観測7：フォロー3`はhistorical product positionとして保持するが、本節がcurrent V1-A product positionとしてsupersedeする。これは2026-09-02に新しく思いついた比率ではなく、2026-06-01までの会話で固定されていたfollow-primary方向をcurrent ownerへ復元したものである。
+
+### 35.3 current actual failure boundary
+
+current mashos-api head `4e8d397843c0381bc94379b71665cf71b80d7d1b`のactive disabled owner chainでは、`emlis_v1a.py`の`_cmee_semantic_reception_plan()`が`CMEE_RECEPTION_MATERIAL_MODE="limited_grounding"`でReception planを作り、その後`compile_stage1_response()`が、このactive compilerへ到達した各`grounded_plan`を`material_quality="limited_grounding"`、`response_kind="limited_grounding_observation"`、`hedge_policy="limited_single_input_scope"`へ置換して`build_grounded_sentence_plan()`と`realize_grounded_sentence_plan()`へ渡す。sentence plannerはlimited branchで単一の`render_limited_scope` observationを作り、その後にhuman followを加える。この一連の境界が最初に追うべきproduct-causal seamである。
+
+同fileに残る`_compile_stage1_response_v1_legacy()`は、case-frame candidate builder／selectorを使うisolated historical test ownerであり、active facadeとrunnerは呼ばない。したがって、registryや設計構造の存在をvisible本文への到達証拠にせず、current actual callerから最終表示bodyまでを追って修正する。
+
+これはconstantまたは三つのliteralを解除するだけの変更指示ではない。実装時はReception material mode、入力固有meaning、source／unknown／safety境界、Layer 1／2 plan、realizer、Gate、public response mappingへの影響を同じbounded unitで読み、未知入力にも効く共通原因の修正だけを行う。fixture語、case ID、case別mode、固定surface、外部生成AI、provider、fallbackを追加しない。
+
+### 35.4 completion route
+
+1. `ROUND0_FOLLOW_PRIMARY_VISIBLE_RESPONSE_CORRECTION`: current actual callerからLayer 1／2 final bodyまでを修正し、同じ代表入力のbefore／afterでactual visible qualityを非0改善する。
+2. `KAREN_BODY_FULL_PRE_SCREEN`: 華恋がprivate本文を全件読み、復唱、近い言い換え、label置換、少数template、generic follow、Layer 1／2同義反復、不自然な日本語、深さ不足が一つでも残る間はMashへ提示せず、同じproduct-causal correctionへ戻る。
+3. `MASH_ROUND0_PRODUCT_READ`: actual before／after本文をMashへ提示する。Mashの明示PASSだけがRound 0商品通過であり、machine GREEN、華恋pre-screenまたはGitHub反映で代替しない。
+4. `FREE_ONE_QUESTION_END_TO_END`: Round 0 PASS後のfresh explicit startで、重要unknownがある場合だけ問いexact1を返し、supplemental answerをoriginal inputと別の`USER_OWNED_SOURCE`として保存し、その根拠だけでLayer 1／2をrefineする。API／DB／Supabase／RNはcurrent contractとactual schemaを先に確認し、必要な既存経路だけを変更する。
+5. `PLUS_PREMIUM_LAYER3_AND_LATER_ROUNDS`: Layer 3、eligible history、Premium sequential roundsは、Free一問end-to-end後の別判断とする。
+
+一つのcommon-cause correctionをactual final bodyまで完了しても同種の引用化、定型化またはgeneric followが残る場合、同じ修正方針を名前だけ変えて自動反復しない。actual before／after、残存欠陥、到達したactive path、providerless current routeの能力限界を固定し、Mashのmethod／product判断へ`STOP`する。別設計、別helper、同じstrategyの再実装または問いstageへの先送りで回避しない。
+
+各実装work unitはactual user-visible outputの改善、必要なsource／test、GitHub checkpoint、fresh remote bytes／changed paths確認までを同じ単位で完了する。document、framework、schema、trace、test、internal reviewだけのunitを商品作業として挿入しない。既存mashos-api handoffをcontinuity ownerとして更新し、新しいhandoff file、parallel design、checker、score、authority familyを作らない。
+
+```text
+IM10 = NON_PASS
+CURRENT_PRODUCT_OWNER_ADOPTION_STATE = IMPLEMENTED_NOT_ACCEPTED
+CANDIDATE_READY = false
+ROUND0_CORRECTION = APPROVED_ROUTE_NOT_STARTED
+QUESTION / LAYER3 = NOT_STARTED
+CURRENT_AUTHORIZED_IMPLEMENTATION = NONE_UNTIL_FRESH_SESSION_EXPLICIT_START
+PRODUCT / TECHNICAL CREDIT OF THIS DOCS REFLECTION = 0 / 0
+ADMINISTRATIVE_RESULT = APPROVED_PRODUCT_DECISION_DURABLY_RECORDED
+PRODUCTION / CUTOVER / MERGE / API / DB / SUPABASE / RN EFFECT = 0 / 0 / 0 / 0 / 0 / 0 / 0
+AUTOMATIC_PROGRESSION = false
+```

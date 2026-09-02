@@ -1,20 +1,21 @@
 ---
 doc_id: cocolon_emlis_ai_current_structure
 title: "EmlisAI構造 — Current Structure"
-revision_date: "2026-09-01 JST"
+revision_date: "2026-09-02 JST"
 document_role: "EMLIS_AI_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
 implementation_effect: 0
 stage1_v2_product_read_state: "HISTORICAL_PREDECESSOR_FAIL_RETAINED"
-stage1_additional_correction_design_state: "CURRENT_PRODUCT_OWNER_IMPLEMENTED_NOT_ACCEPTED"
+stage1_additional_correction_design_state: "CURRENT_PRODUCT_OWNER_NON_PASS / FOLLOW_PRIMARY_CORRECTION_ROUTE_APPROVED_NOT_STARTED"
 cycle001_effect: 0
 stage1_language_route: "ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER_ONLY"
 external_generative_ai_allowed: false
 external_body_send: 0
 automatic_progression: false
 current_product_owner_adoption_state: "IMPLEMENTED_NOT_ACCEPTED"
-im10_state: "MASH_PENDING"
+im10_state: "NON_PASS"
+current_product_read_state: "EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFICIENT"
 candidate_ready: false
 ---
 
@@ -222,8 +223,8 @@ Route Uまたはcontract変更は別Mash LEVEL_3判断が必要であり、こ�
 | Role | Path | Lifecycle |
 |---|---|---|
 | stable product destination | Cocolon_前提資料/Cocolon_EmlisAI_longterm_roadmap_CURRENT.md | CURRENT_PRODUCT_OWNER。embedded SHAはfresh currentではない |
-| Karen-derived Stage 1 functional owner | Cocolon_前提資料/designs/cmee/v1/karen_derived/00_read_first.md + 01_emlis_observation_and_reception.md | DRAFT_PR_CANONICAL_CANDIDATE / product-function owner exact2 |
-| Pro / Ultra technical integration source | Cocolon_前提資料/designs/cmee/Cocolon_CMEE_Stage1_ProUltra_KarenDerivedFunctional_FinalTechnicalDesign_20260822.md | NONCANONICAL_TECHNICAL_INTEGRATION_SOURCE |
+| current Stage 1 product contract / completion route | Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md latest §35 + 06_implementation_order_migration_and_verification.md latest §86 | CURRENT_PRODUCT_OWNER_NON_PASS / FOLLOW_PRIMARY_CORRECTION_ROUTE |
+| historical Karen-derived functional / Pro-Ultra integration sources | deleted `v1/karen_derived/00_read_first.md` + `01_emlis_observation_and_reception.md` + `Cocolon_CMEE_Stage1_ProUltra_KarenDerivedFunctional_FinalTechnicalDesign_20260822.md` | HISTORICAL_PREDECESSOR_ABSENT_CURRENT_TREE / Git history only。current ownerではない |
 | NLS v3 alignment | Cocolon_前提資料/Cocolon_EmlisAI_NLSv3_CurrentAlignment.md | CURRENT_REFERENCE。append済みpinsに古いものがある |
 | immutable NLS design baseline | Cocolon_前提資料/historical_baselines/emlis_ai/Cocolon_EmlisAI_ModelFreeNaturalLanguageSurfaceV3_DetailedDesign_ImplementationOrder_20260714_Revised_Cycle.md | CURRENT_TECHNICAL_NORM / immutable |
 | Cycle current navigation | Cocolon_前提資料/08_cycle001_current_state.md | CURRENT only at fresh applicable ref |
@@ -261,13 +262,13 @@ Route Uまたはcontract変更は別Mash LEVEL_3判断が必要であり、こ�
 3. Emlis input-history thread、plan別question lifecycle、refined Layer 1／2、Plus／Premium Layer 3は商品完成未確認。
 4. mainのCycle current navigationはDraft #29より古い。
 5. active planの一部metadataにdraft lifecycle表記が残るため、current actual判断では08とremote factsを優先する。
-6. CMEE Stage 1はPro / Ultra追加設計の必要責務を既存ownerへ継承したdisabled owner chainまで実装済みである。MashのIM10 Product Read、Cycle re-entry、productionは未承認である。
+6. CMEE Stage 1はPro / Ultra追加設計の必要責務を既存ownerへ継承したdisabled owner chainまで実装済みである。IM10 Product Readは`NON_PASS`で、Round 0 follow-primary correctionは未開始である。Cycle re-entryとproductionは未承認である。
 
 CMEE Emlis detailed design candidate:
 
 [CMEE V1-A — EmlisAI Observation Vertical 詳細設計](../designs/cmee/v1/02_emlis_v1a_detailed_design.md)
 
-このpointerはcurrent production ownerまたはCycle navigationを変更しない。current runtime evidenceはmashos-api Draft PR #3 head `4e8d397843c0381bc94379b71665cf71b80d7d1b`である。final-language payloadはexact18、product causal source ownerはexact9、canonical100はdirect 100/100、outer generated-disabled 68件／finite fail-closed 32件である。owner adoptionは`IMPLEMENTED_NOT_ACCEPTED`、IM10 Mash Product Readは`MASH_PENDING`、`candidate_ready=false`、`product_credit=0`、`automatic_progression=false`、production effect 0である。historical `NO_SAFE_CMEE_V1A_CANDIDATE_STOP`をcurrent candidate stateへ復活させない。
+このpointerはcurrent production ownerまたはCycle navigationを変更しない。current runtime evidenceはmashos-api Draft PR #3 head `4e8d397843c0381bc94379b71665cf71b80d7d1b`である。final-language payloadはexact18、product causal source ownerはexact9、canonical100はdirect 100/100、outer generated-disabled 68件／finite fail-closed 32件である。owner adoptionは`IMPLEMENTED_NOT_ACCEPTED`、IM10 Mash Product Readは`NON_PASS`、Round 0 correctionは`APPROVED_ROUTE_NOT_STARTED`、`candidate_ready=false`、`product_credit=0`、`automatic_progression=false`、production effect 0である。historical `NO_SAFE_CMEE_V1A_CANDIDATE_STOP`をcurrent candidate stateへ復活させない。
 
 ## 9. Step 10 reviewed design synchronization
 
@@ -280,6 +281,8 @@ CMEE Emlis detailed design candidate:
 target実装順は、Vertical 1 Layer 1／2、Vertical 2 question／refined Layer 1／2、Vertical 3 Plus／Premium Layer 3である。現存するcapability、context、user model、history、P5、P6を移行候補として先に照合し、不足するproduct integrationだけをNB-F01..NB-F04として残す。これはruntime接続、API／DB／RN変更、activation、Product Read合格を意味しない。
 
 ### 9.1 2026-08-23 華恋由来Stage 1 functional correction
+
+本§9.1は2026-08-23時点のpredecessor統合記録である。ここでいうfunctional owner exact2とPro／Ultra integration sourceはcurrent treeに存在せず、current ownerではない。統合後のcurrent商品契約はlatest §19とcanonical 02 §35、実行順はcanonical 06 §86を優先する。
 
 functional owner exact2は、P1–P8、M1–M7、Layer 1 / 2、V1–V9、観測・選択・応答構造、最低商品品質を所有する。既存`02 / 05 / 06`はtechnical realization、schema / ref / identity、implementation / verificationを所有し、Pro / Ultra追加技術資料はnoncanonical integration sourceとする。
 
@@ -383,7 +386,7 @@ final remote refs、exact changed-path set、file bytes equalityはcommit / push
 
 ## 14. Historical Stage 1 product verdict / additional correction snapshot（2026-08-24）
 
-本sectionは旧candidateのProduct verdictとnext design stateのappend-only predecessor snapshotであり、current判定に使用しない。current Product Read stateは本file latest §18の`IM10=MASH_PENDING`を優先する。
+本sectionは旧candidateのProduct verdictとnext design stateのappend-only predecessor snapshotであり、current判定に使用しない。current Product Read stateは本file latest §19の`IM10=NON_PASS`を優先する。
 
 - v2 Step 7 machine / pre-screen: historical GREEN。
 - Mash actual Product Read: `EVALUATED_FAIL_QUALITY_INSUFFICIENT`。
@@ -504,3 +507,48 @@ AUTOMATIC_PROGRESSION = false
 canonical100、protected inverse、machine／trace結果はdisabled candidateのtechnical evidenceに限定し、Mash Product Read、acceptance、production creditへ自動変換しない。
 
 current implementation evidenceはmashos-api Draft PR #3 head `4e8d397843c0381bc94379b71665cf71b80d7d1b`である。active final-language identityはpayload exact18、product causal source owner exact9で封印した。canonical100はdirect active final surface 100/100、outer engine generated-disabled 68／有限fail-closed 32で、全100件のproduction effect、candidate ready、Product Read eligible、automatic progressionは0／falseである。
+
+## 19. IM10 NON_PASS後のcurrent EmlisAI商品境界（2026-09-02）
+
+本節はcurrent Product Read、visible product roles、次の構造順について§18よりfreshである。Mashはcurrent disabled exact8を読み、`NON_PASS`と判断した。内部meaning／observation／Reception／traceが実装済みでも、Layer 1が入力の引用に近く、Layer 2が短い定型的followに縮退しているcurrent本文は、EmlisAIの最低商品品質へ到達していない。
+
+```text
+IM10 = NON_PASS
+CURRENT_PRODUCT_OWNER_ADOPTION_STATE = IMPLEMENTED_NOT_ACCEPTED
+CANDIDATE_READY = false
+CURRENT_AUTHORIZED_IMPLEMENTATION = NONE_UNTIL_FRESH_SESSION_EXPLICIT_START
+APPROVED_NEXT_ROUTE = ROUND0_FOLLOW_PRIMARY_VISIBLE_RESPONSE_CORRECTION
+PRODUCT_CREDIT = 0
+AUTOMATIC_PROGRESSION = false
+```
+
+user-visible役割は次の通りである。
+
+| Visible layer | Current role | Current weight boundary |
+|---|---|---|
+| Layer 1「見えたこと」 | Emlisが何を根拠に読んだかを示す必要最小限の観測 | 意味役割として1〜4。0にしない |
+| Layer 2「Emlisから」 | 何を受け取り、何に目を向け、どう感じ、何を伝えるかを担う主本文 | 意味役割として9〜6。0にせず、常にLayer 1以上 |
+
+Layer 1は入力の反復、語尾変更、短い引用または構造labelだけでは成立しない。根拠を越える人物推定をせず、Emlisが入力のどこを意味の中心として受け取ったかが入力固有に分かる必要がある。Layer 2は必須質問や相槌formulaではなく、一方向の「Emlisからユーザーへの言葉」として内容上の流れを持つ。
+
+入力別のcurrent配分は、日常の出来事／感情が観測1〜3：フォロー9〜7、通常の悩み／自己理解が観測3〜4：フォロー7〜6、構造説明を明示的に求められた場合でも観測最大4：フォロー最小6である。文字数、文数、token数の固定quotaではない。旧標準6：4／構造要求7：3はcurrent routeに使用しない。
+
+current actual product-causal chainは次である。
+
+```text
+input-specific meaning
+  -> Grounded Observation Plan
+  -> compile_stage1_response
+       -> limited Reception material mode
+       -> forced limited plan fields
+  -> Grounded Sentence Plan + active realizer
+  -> Human Reception realization
+  -> body-only inverse + Gate
+  -> disabled Layer 1 / Layer 2 body
+```
+
+`_cmee_semantic_reception_plan()`のlimited Reception material modeと`compile_stage1_response()`内のforced-limited置換を一連の最初の確認点とし、current callerからfinal bodyまで追う。constant／literal解除だけを修正とせず、isolated historical `_compile_stage1_response_v1_legacy()`が使うcase-frame candidate builder／selector、削除済みfunctional companion、NLSv3／Cycle001 large moduleをcurrent active ownerへ戻さない。
+
+完成順はRound 0 active-path correction、華恋body-full pre-screen、Mash Round 0 Product Read、Mash PASS後のFree重要問い0..1 end-to-end、さらに後のPlus／Premium Layer 3である。問いではsupplemental answerだけをoriginalと別のuser-owned sourceとして保存し、その回答分だけLayer 1／2をrefineする。API／DB／Supabase／RNはquestion stage開始時にactual contractを読み、必要な既存経路だけを扱う。
+
+current detailed ownerはcanonical 02 §35、execution order ownerはcanonical 06 §86、shared CMEE mapは04 §32である。本map更新はruntime structure、production I5、ReplyEnvelope、API、DB、Supabase、RNまたはSystem Context生成物を変更しない。構造上のdeltaはProduct Read state、visible role、current owner／next-route navigationだけで、primary outcomeは`ADMINISTRATIVE_ONLY`である。

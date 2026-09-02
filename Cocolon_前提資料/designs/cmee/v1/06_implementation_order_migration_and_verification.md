@@ -1,12 +1,12 @@
 # CMEE V1 — Implementation Order / Migration / Verification 詳細設計
 
 - document id: `cocolon.cmee.v1.implementation_migration_verification.detailed_design`
-- revision date: `2026-09-01 JST`
-- lifecycle: `CURRENT_PRODUCT_OWNER_IMPLEMENTED_NOT_ACCEPTED / IM10_MASH_PENDING`
+- revision date: `2026-09-02 JST`
+- lifecycle: `CURRENT_PRODUCT_OWNER_NON_PASS / FOLLOW_PRIMARY_CORRECTION_ROUTE_APPROVED_NOT_STARTED`
 - absolute implementation rule: `BOUND_TO_PARENT_FINAL_DESIGN_SECTION_0_3`
-- current implementation state: `INHERITED_OWNER_CHAIN_IMPLEMENTED_NOT_ACCEPTED / IM10_MASH_PENDING`
-- current authorized next implementation: `IM10_MASH_PENDING`
-- only admissible next lifecycle action: `IM10_MASH_REVIEW_ONLY_CURRENT_DISABLED_CANDIDATE`
+- current implementation state: `INHERITED_OWNER_CHAIN_IMPLEMENTED_NOT_ACCEPTED / IM10_NON_PASS`
+- current authorized next implementation: `NONE_UNTIL_FRESH_SESSION_EXPLICIT_START`
+- only admissible next lifecycle action: `ROUND0_FOLLOW_PRIMARY_VISIBLE_RESPONSE_CORRECTION_AFTER_FRESH_START`
 - Stage 1 language route: `ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER / SOLE_CURRENT_AND_FUTURE_ROUTE`
 - external generative AI / remote provider / body send: `PROHIBITED / 0 / 0`
 - retired provider investigation: `REMOVED_FROM_CURRENT_TREE_GIT_HISTORY_ONLY`
@@ -14,11 +14,11 @@
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 - Stage 1 downstream case-frame final design: `MASH_APPROVED_TYPED_CASE_FRAME_V2_WITH_SESSION_SAFE_ORDER_I00_I14`
 - Stage 1 upstream input-specific meaning final design: `FINAL_CANONICAL_IMPLEMENTATION_READY_SECTIONS_19_THROUGH_22`
-- Stage 1 current order owner: `THIS_FILE_SECTION_85_RESPONSIBILITY_INHERITANCE_COMPLETION_BOUNDARY`
+- Stage 1 current order owner: `THIS_FILE_SECTION_86_PRODUCT_COMPLETION_ROUTE`
 
 ---
 
-Current additive execution routing ownerは本file latest §85である。Emlis input-specific meaning implementationについて、§0–§84は設計・実装・失敗・旧receiptの履歴として保持し、current owner／lifecycle判定では§85を優先する。final canonical §§19–§22は実装済み責務のdesign authorityとして保持し、旧additional-correction body §13.1–§13.13はdownstream／historical contextであってcurrent entrypointではない。
+Current additive execution routing ownerは本file latest §86である。Emlis input-specific meaning implementationについて、§0–§85は設計・実装・失敗・旧receiptの履歴として保持し、current owner／lifecycle判定では§86を優先する。final canonical §§19–§22は実装済み責務のdesign authorityとして保持し、旧additional-correction body §13.1–§13.13はdownstream／historical contextであってcurrent entrypointではない。
 
 ## 0. Current conclusion
 
@@ -6193,3 +6193,66 @@ EXTERNAL_GENERATIVE_AI / PRODUCT_RUNTIME_NETWORK / FALLBACK = 0 / 0 / 0
 canonical100、focused／protected regression、trace、identity、static import checkのGREENはtechnical evidenceであり、Mash Product Readまたはacceptanceを代替しない。IM10以後へ自動進行せず、production activation、merge、cutoverを行わない。
 
 current runtime evidence headは`4e8d397843c0381bc94379b71665cf71b80d7d1b`である。current final-language payload countは18/18、product causal source owner countは9、canonical100はdirect 100/100、outer generated-disabled 68／finite fail-closed 32である。N3 exact16／source-owner exact7、historical exact17 receipt、IM06 approval freezeはappend-only historyとして保持し、current bytesへrebaselineしない。
+
+## 86. IM10 NON_PASS後のEmlisAI商品完成route（2026-09-02）
+
+本節はcurrent lifecycle、実行順、再開境界について§85よりfreshである。Mashのcurrent Product Readは、current disabled exact8を`NON_PASS`とした。IM00–IM09の実装、canonical100、trace、identity、body-only inverse、machine GREENはtechnical historyとして保持するが、visible Layer 1／2の商品品質不足を相殺しない。
+
+```text
+IM10 = NON_PASS
+CURRENT_PRODUCT_OWNER_ADOPTION_STATE = IMPLEMENTED_NOT_ACCEPTED
+CANDIDATE_READY = false
+PRODUCT_CREDIT = 0
+ROUND0_CORRECTION = APPROVED_ROUTE_NOT_STARTED
+CURRENT_AUTHORIZED_IMPLEMENTATION = NONE_UNTIL_FRESH_SESSION_EXPLICIT_START
+AUTOMATIC_PROGRESSION = false
+```
+
+### 86.1 fixed product target
+
+current product contractはcanonical 02 §35をsole detail ownerとする。Layer 2「Emlisから」が主本文、Layer 1「見えたこと」が必要最小限のgroundingである。意味役割の配分は入力ごとに観測1：フォロー9から観測4：フォロー6へ動かし、文字数、文数またはtoken数のquotaにしない。旧標準6：4／構造要求7：3をcurrent実装判断へ使わない。
+
+actual current codeで最初に扱うproduct-causal seamは、`_cmee_semantic_reception_plan()`がReceptionを`limited_grounding`で作り、続いて`compile_stage1_response()`が、このactive compilerへ到達した各planを`limited_grounding`／`limited_grounding_observation`／`limited_single_input_scope`へ置換し、active `build_grounded_sentence_plan()`／`realize_grounded_sentence_plan()`へ渡している一連の境界である。constant／literal解除だけを修正とせず、isolated historical `_compile_stage1_response_v1_legacy()`のcase-frame builder／selector、registry、schema、traceまたはtestを増やすだけの修正にも戻らない。
+
+### 86.2 ordered work stages
+
+#### Work Stage 1 — Round 0 active-path correction
+
+current actual callerからfinal Layer 1／2 body、Gate、public response mappingまでを読み、forced-limited collapseとfollowのgeneric化を生む共通原因を最小修正する。入力例固有のword cue、case ID、専用mode、固定完成文、external AI、provider、fallbackを追加しない。同じ代表入力のactual before／afterを生成し、Layer 1が必要最小限、Layer 2が入力固有の主本文になった非0差分を本文で確認する。
+
+一sessionでStage 1全体が閉じない場合は、各bounded unitが少なくとも一つのcurrent common causeをactual final bodyまで修正し、relevant tests、GitHub checkpoint、fresh remote verification、既存handoff更新まで到達してから止める。framework、schema、testまたはdocumentだけを作ってsession成果としない。
+
+#### Work Stage 2 — Round 0 completion / Karen pre-screen / Mash Product Read
+
+残る代表input familyに共通修正を通し、華恋がbody-full private boundary内で全candidateを読む。復唱、近い言い換え、meaning label置換、少数template、generic follow、Layer 1／2同義反復、不自然な日本語、深さ不足が一つでも残る場合はMashへ提示せず、Stage 1のproduct-causal sourceへ戻る。
+
+華恋pre-screenを通ったactual before／afterだけをMashへ提示する。Mashの明示`PASS`または`NON_PASS`をRound 0 terminalとし、`PASS`前に問い、Layer 3、production、mergeまたはcutoverへ進まない。`NON_PASS`なら指摘された本文共通原因だけを次のRound 0 correctionへ戻し、新しい補助systemや設計projectを作らない。
+
+一つのcommon-cause correctionをactual final bodyまで完了した後にも同種の引用化、定型化またはgeneric followが残る場合、同じ修正方針をrename、別helperまたは別設計として自動反復しない。actual before／after、残存欠陥、到達したactive path、providerless current routeの能力限界を固定し、Mashのmethod／product判断へ`STOP`する。
+
+#### Work Stage 3 — Free重要問い0..1のend-to-end
+
+Round 0のMash明示PASS後、fresh explicit startで開始する。既存§18のquestion contractを使い、Round 0 Layer 1／2を先に返し、重要unknownが残る場合だけquestion exact1を返す。supplemental answerはoriginal inputと別の`USER_OWNED_SOURCE`として保存し、originalを上書きせず、answerの根拠だけでrefined Layer 1／2を返す。skip、stop、分からない、無回答は正常終了である。
+
+このstageは必要に応じて複数のbounded sessionへ分けられるが、core、API、DB／Supabase persistence、RN表示を別々の完成物とは呼ばず、actual end-to-endがcompletionである。各interim unitも、current running verticalで観測可能な非0進展、tests、GitHub checkpoint、fresh remote verificationを残す。新規table／column、migration、RLS変更、public contract変更、production effectが必要と判明した場合は、actual現状と最小差分を固定してMashの別LEVEL_3 approvalまでeffect 0で停止する。
+
+#### Work Stage 4 — Plus／Premium Layer 3とlater rounds
+
+Free一問end-to-endのProduct Read後に別判断する。eligible owned history、Layer 3 0..1、Premium sequential 0..3を、Round 0またはFree questionのcompletion条件へ遡及追加しない。
+
+### 86.3 per-session mandatory boundary
+
+各sessionは開始時にCocolon／mashos-apiのfresh head、current owner、actual source／test、affected structure map、System Contextのfreshnessを確認する。System Contextがstaleならgenerated記録を判断に使わず、current repositoryを直接読む。mashos-api既存handoff `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md`の2026-09-01 `IM10_DISPOSITION=MASH_PENDING`／`CURRENT_DEPENDENCY=IM10`は、runtime evidenceについては有効だが、product verdict／next routeについてはCocolon canonical 02 §35／本§86がsupersedeする。最初のruntime／source checkpointで同handoffのlatest current sectionを更新し、新しいhandoff fileを作らない。
+
+各bounded unitの終了条件は次の全てである。
+
+1. actual user-visible Emlis bodyに非0改善がある。
+2. source／unknown／safety／question budget／plan boundaryを壊していない。
+3. relevant protected regressionと新規回帰が通る。
+4. 華恋がactual bodyを読み、machine resultとProduct Readを分離して記録する。
+5. approved exact pathsだけをGitHubへ反映し、remote bytes、changed paths、final headをfresh確認する。
+6. completed、zero effect、uncompleted、next exact actionを既存ownerへ残す。
+
+次stageへのautomatic progressionは常にfalseである。cleanup、unused table削除、unrelated CMEE整理、System Contextのためだけの構造追加、Piece、Analysis、production activationを本routeへ混ぜない。
+
+本節を追加した2026-09-02 writeはapproved商品判断のdurable reflectionだけであり、runtime、test、API、DB、Supabase、RN、production、private generation、System Context生成物を変更していない。primary outcomeは`ADMINISTRATIVE_ONLY`である。
