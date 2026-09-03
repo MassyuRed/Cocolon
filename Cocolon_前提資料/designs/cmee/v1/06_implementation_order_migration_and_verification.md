@@ -1,24 +1,24 @@
 # CMEE V1 — Implementation Order / Migration / Verification 詳細設計
 
 - document id: `cocolon.cmee.v1.implementation_migration_verification.detailed_design`
-- revision date: `2026-09-02 JST`
-- lifecycle: `CURRENT_PRODUCT_OWNER_NON_PASS / FOLLOW_PRIMARY_CORRECTION_ROUTE_APPROVED_NOT_STARTED`
+- revision date: `2026-09-04 JST`
+- lifecycle: `CURRENT_PRODUCT_OWNER_NON_PASS / REALIZABLE_RECEPTION_EXPRESSION_WORK_STAGE1_ACTIVE`
 - absolute implementation rule: `BOUND_TO_PARENT_FINAL_DESIGN_SECTION_0_3`
 - current implementation state: `INHERITED_OWNER_CHAIN_IMPLEMENTED_NOT_ACCEPTED / IM10_NON_PASS`
-- current authorized next implementation: `NONE_UNTIL_FRESH_SESSION_EXPLICIT_START`
-- only admissible next lifecycle action: `ROUND0_FOLLOW_PRIMARY_VISIBLE_RESPONSE_CORRECTION_AFTER_FRESH_START`
-- Stage 1 language route: `ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER / SOLE_CURRENT_AND_FUTURE_ROUTE`
+- current authorized implementation: `FRESH_MASH_LEVEL3_CMEE_WORK_STAGE1_REALIZABLE_RECEPTION_EXPRESSION_CANONICAL_INTEGRATION_AND_HUMAN_RECEPTION_BODY_CLOSURE_20260904`
+- only admissible current lifecycle action: `SOURCE_GROUNDED_REALIZABLE_RECEPTION_EXPRESSION_TO_HUMAN_RECEPTION_BODY`
+- Stage 1 language route: `ROUTE_A_PROVIDERLESS_EXISTING_OWNER_CHAIN / SOURCE_GROUNDED_REALIZABLE_RECEPTION_EXPRESSION_CONTRACT`
 - external generative AI / remote provider / body send: `PROHIBITED / 0 / 0`
 - retired provider investigation: `REMOVED_FROM_CURRENT_TREE_GIT_HISTORY_ONLY`
 - automatic progression: `false`
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 - Stage 1 downstream case-frame final design: `MASH_APPROVED_TYPED_CASE_FRAME_V2_WITH_SESSION_SAFE_ORDER_I00_I14`
 - Stage 1 upstream input-specific meaning final design: `FINAL_CANONICAL_IMPLEMENTATION_READY_SECTIONS_19_THROUGH_22`
-- Stage 1 current order owner: `THIS_FILE_SECTION_86_PRODUCT_COMPLETION_ROUTE`
+- Stage 1 current order owner: `THIS_FILE_SECTION_87_REALIZABLE_RECEPTION_EXPRESSION_WORK_STAGE1`
 
 ---
 
-Current additive execution routing ownerは本file latest §86である。Emlis input-specific meaning implementationについて、§0–§85は設計・実装・失敗・旧receiptの履歴として保持し、current owner／lifecycle判定では§86を優先する。final canonical §§19–§22は実装済み責務のdesign authorityとして保持し、旧additional-correction body §13.1–§13.13はdownstream／historical contextであってcurrent entrypointではない。
+Current additive execution routing ownerは本file latest §87である。Emlis input-specific meaning implementationについて、§0–§86は設計・実装・失敗・旧receipt・IM10 verdictの履歴として保持し、current owner／lifecycle判定では§87を優先する。final canonical §§19–§22は実装済み責務のdesign authorityとして保持し、旧additional-correction body §13.1–§13.13はdownstream／historical contextであってcurrent entrypointではない。
 
 ## 0. Current conclusion
 
@@ -6256,3 +6256,107 @@ Free一問end-to-endのProduct Read後に別判断する。eligible owned histor
 次stageへのautomatic progressionは常にfalseである。cleanup、unused table削除、unrelated CMEE整理、System Contextのためだけの構造追加、Piece、Analysis、production activationを本routeへ混ぜない。
 
 本節を追加した2026-09-02 writeはapproved商品判断のdurable reflectionだけであり、runtime、test、API、DB、Supabase、RN、production、private generation、System Context生成物を変更していない。primary outcomeは`ADMINISTRATIVE_ONLY`である。
+
+## 87. Realizable Reception expression Work Stage 1 execution order（2026-09-04）
+
+本節はWork Stage 1のcurrent bounded unitについて§86よりfreshである。authorityは
+`FRESH_MASH_LEVEL3_CMEE_WORK_STAGE1_REALIZABLE_RECEPTION_EXPRESSION_CANONICAL_INTEGRATION_AND_HUMAN_RECEPTION_BODY_CLOSURE_20260904`であり、Cocolon PR #30 `97b25c146ad41f87d5859e450e48face9de65ea0`、mashos-api PR #3 `3c335bd11eb94d38eb5649b54b31b2de38636ebb`、System Context PR #37 `20bb1cbbda430205943ea2226e8a0ef331cc9c7b`から開始する。開始時three-headはfresh、Draft、open、unmergedである。
+
+前回focus selector authorityは消費済みterminal STOPである。同じselection methodをrename、別helper、別schema、別case familyとして再試行しない。本unitはselected meaningを再選択せず、§36のexpression contractで下流の発話可能性を閉じる。
+
+### 87.1 Phase 0 — admission and direct originals
+
+1. `CURRENT_RULES.md`、start checklist、output gate、continuity／transport／runtime rules、恒久インシデント記録を全文で読む。
+2. fresh three-head、PR state、clean worktree、approved exact pathsを確認する。
+3. System Contextはdoctor→prepare→verify-onlyを先に試す。required pinned runtimeが無い場合はfail closedし、stale generated contextを消費せず、fresh canonical originalとsourceを直接読む。
+4. active candidate callerからfinal body、Gate、adapterまでと、public product ownerの非接続境界を区別する。disabled candidateをproductionへ接続しない。
+
+Phase 0はdesign、source、test、product creditを持たない。
+
+### 87.2 Phase 1 — canonical integration
+
+既存path exact4へin-placeで反映する。
+
+```text
+Cocolon_前提資料/designs/cmee/v1/00_read_first.md
+Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md
+Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md
+Cocolon_前提資料/designs/cmee/Cocolon_CMEE_Stage1_Emlis_InputSpecificMeaningDecision_KarenDesigned_FinalTechnicalDesignAndImplementationOrder_20260828.md
+```
+
+新しいdesign、proposal、ledger、handoff、checker、authority fileは作らない。§36／本§87／final §24とread-first pointerを一つのaggregate reviewで確認し、`Blocker=0 / Major=0`だけをwrite gateとする。Phase 1 checkpointは`DESIGNED_NOT_IMPLEMENTED`、private body publication 0、product／technical credit 0である。
+
+### 87.3 Phase 2 — active candidate implementation
+
+実装順は固定する。
+
+1. `compile_stage1_response()`のlate `_cmee_semantic_reception_plan()`でselected final plan Moveのidentity／duty domainをread-only exact-cover keyとして確定する。このkeyはexpressionの意味内容を決めない。
+2. NORMALはselected meaningとMove-function-matched MeaningBoundReceptionProposition exact1（Set refはprovenance only）、LIMITEDはbounded outcomeとBoundedLimitedReception exact1のbranch-specific one-of、semantic projection、visible traceからrequest-local private expression v1の内容をdeterministically構築し、読み取り済みMove keyへexact1でbindする。正規の因果順はmeaning outcome→expression→Move consumeである。
+3. Human ReceptionがexpressionからLayer 2 semantic segmentとsegment bindingを同一passで作る。
+4. Sentence Surfaceはpreauthored Human Reception surfaceを配置し、句読点・文境界だけを所有する。
+5. recoveryおよびGate前のsecond compiler validationでもHuman Receptionが同じdeterministic expression／surfaceを再構築し、identityを保持する。Human Reception-local rangeはLayer 2 unit textのsemantic bindingに使い、Sentence Surfaceは別のrequest-local placement tupleでline-local rangeとbody-global rangeを分離し、実際のprefix／separator／line start分だけremapして両slice hash一致を検証する。
+6. expression／visible binding／preauthored surfaceのcarrierをSentence Surfaceの配置結果とadapterで終了し、Gateとbody-only inverseへは完成本文だけを渡す。forward metadataをverification oracleにせず、existing final-body-only inverse、independent Gate、public mappingの責任／判定項目／閾値を変更せず通す。
+
+shared Human Reception／Sentence Surfaceはpublic base pathでも使われるため、新behaviorはcurrent final Stage 1 grounded projection versionへ限定する。public registry、`emlis_ai_reply_service.py`、API、DB、Supabase、RN、persistenceへ接続しない。
+
+既存public／private response schemaはversion／bytesとも据え置く。expressionはrequest-local function argumentとreturn valueだけでHuman Receptionへ渡し、Human Reception-authored surfaceとvisible bindingはSentence Surfaceからcompiler／adapterへだけ返す。`GroundedSentencePlan`は`rr4.v2`のままとし、expression、surface、bindingのfieldを追加せず、private schema bumpを行わない。body-free metadata、GitHub、handoff、checkpoint、diagnostic、log、public responseへsource refs、lexical material、visible scalar locator、segment hash、case別情報を出さない。expression linkageはidentity preimageに含まれるexisting private `ClauseFrame`／`RealizedSemanticBinding.clause_slot`へversion-qualified、collision-freeなrefとして封印し、`Stage1V2UnitSeal`だけに置いてidentityを主張しない。adapterはHuman Reception-local rangeをLayer 2 unit textのsemantic bindingへ移し、別のrequest-local placement tupleのline-local／body-global rangeとhashに一致することを検証し、whole-line bindingを廃止する。
+
+final Moveのidentity／duty keyをexpression projectorより先に読むのは、exact-cover先を固定するexecution sequencingであり、expression contentの因果入力にしない。causal directionは`NORMAL selected meaning + MeaningBoundReception OR LIMITED outcome + BoundedLimitedReception -> expression exact1 -> existing Move consumes expression`である。Move identityはexpressionへ結合するread-only keyだけであり、Moveからmeaning／expression contentへのreselection／semantic backflowは0である。
+
+`compose_stage1_from_projection()`、legacy compiler、old case-frame selector、large NLS routeのactive call countは0を維持する。fixture words、case id、Move act combination、入力例専用branch、fixed complete sentence、raw source replay、generic follow fallbackを追加しない。
+
+### 87.4 Phase 3 — verification matrix
+
+実装後はfresh source bytesから次を確認する。
+
+- expression contract field completeness、Move exact-cover、named failure、late rebuild identity。
+- Human Reception sole author、Sentence Surface content-author call count 0、recoveryのdeterministic Human Reception rerender、Gate／body-only inverseへforward metadataが渡らないこと。
+- same-act／different-meaning contrast、multi-Move many-to-one、anaphora antecedent、zero／omission、negation、wish、time、degree、scope。
+- source／unknown／safety／LIMITED／question budget／composition validation-only／body-only inverseの回帰なし。
+- focused active route、owner inheritance、exact8 inheritance、RR3–RR8 baseline parity。
+- canonical100 direct `100/100`、required Move `124/124`、outer `GENERATED 68 / unavailable 32`。
+- static registry／import checksでlegacy、parallel owner、public-path wiringが0。
+
+required locked runtimeがmaterializeされないWork runtimeではformal pytestを別interpreterやsilently installed dependencyへfallbackしない。利用可能なexact interpreterでcompile、direct runner、stdlib-compatible testを実行し、formal未実行を明記する。既存known baseline failureをfixture変更やdenominator縮小でGREEN化しない。
+
+### 87.5 Phase 4 — private body pre-screen
+
+canonical100のactual Layer 1／2本文を華恋がbody-full private boundary内で全件読む。入力、本文、lexical source spanをGitHub、handoff、diagnostic、checkpointへ出さない。次のどれかが一件でも残る場合はProduct Read readyとしない。
+
+- source replay／quote、意味label置換、generic empathy、fixed close、少数template。
+- selected relation、predicate、argument、negation、wish、time、degree、scopeの脱落。
+- Layer 1／2の同義反復、Layer 1の過剰化、Layer 2の不足。
+- 不自然な助詞、活用、名詞化、節接続、anaphora、文境界。
+- same-act input間でmeaning非依存に同じ主本文へcollapseすること。
+
+defectがあれば同じcurrent product-causal unit内でPhase 2のowner sourceへ戻り、必要なtest、canonical100再生成、全本文再読を行う。承認済みcontract内の型／関数実装不備、日本語規則不足、一件のtest failure、同じmethod内で修正可能な不自然さは単独でSTOPにしない。§35／§86にある一回のcommon-cause correction後のSTOPは前回method familyのhistorical boundaryであり、本§87のcurrent expression methodへ継承しない。
+
+### 87.6 success, STOP, and final boundary
+
+成功は次のall-ofだけである。
+
+1. same public-safe facade／inputのactual before／afterでLayer 1 visible bytesが同一、Layer 2にtarget、predicate、supportまたはrelationのsemantic deltaが非0であり、punctuation、語尾、長文化だけの差ではない。
+2. actual final Layer 2までHuman Reception sole author exact1、Sentence Surface semantic content author 0で到達する。
+3. expression→required Move `124/124`とexpression→actual segment bindingが閉じ、canonical100 direct `100/100`、outer `GENERATED 68 / unavailable 32`が不変である。
+4. relevant regressionはGREENまたは事前記録済みbaseline parity、old composer／legacy route active call 0、source／unknown／safety／LIMITED／Gate／body inverse／public mapping非回帰である。
+5. private body、locator、digest、case別情報、expression／source refsのGitHub／handoff／diagnostic／log／public response leakageが0である。
+6. canonical100全文のKaren private pre-screenがCLEARである。
+7. approved exact pathsだけをGitHub checkpointし、remote bytes、changed paths、three final heads、three worktree cleanをfresh確認する。
+8. existing handoffとSystem Context final refsをbody-freeで同期する。
+
+成功状態は次である。
+
+```text
+CURRENT_PRODUCT_OWNER_ADOPTION_STATE = IMPLEMENTED_NOT_ACCEPTED
+CANDIDATE_READY = false
+PRODUCT / TECHNICAL CREDIT = 0 / 0
+PRIMARY_OUTCOME = BLOCKER_NARROWED
+MASH_ROUND0_PRODUCT_READ_READY = true
+QUESTION / LAYER3 / PIECE / ANALYSIS = NOT_STARTED
+PRODUCTION / CUTOVER / MERGE / API / DB / SUPABASE / RN / PERSISTENCE EFFECT = 0
+AUTOMATIC_PROGRESSION = false
+```
+
+external AI、permission外path、新public contract、schema effect上限超過、source-grounded providerless routeでlossless realization不能のいずれかが確定した場合は、performed／zero／unknown、last safe remote checkpoint、残存gapをbody-freeで固定し、scope terminal STOPする。Mashの明示指示なしに別method、問いstage、Layer 3、productionへ進まない。
+
+terminal STOPは、initial／resume lineage不一致、effect owner不明、別method family／general-purpose parser／new external dependency／providerが不可避、public API／DB／Supabase／RN／persistence changeが不可避、新ontology／classification／Reception act／Move familyが不可避、Gate／body inverse／source／unknown／privacy弱化が不可避、existing active owner維持不能、old large module／parallel renderer復活が不可避、canonical100の意味保持と自然さの同時成立不能、approved product condition変更が必要、repository effect不明またはsafe rollback不能の場合だけである。一件のtest failure、承認済みfield追加、同じmethod内の実装／日本語規則／自然さの修正、session切替、checkpoint後のhead更新、既存test count増加、non-expansive実装順変更は単独でSTOPにしない。

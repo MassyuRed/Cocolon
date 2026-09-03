@@ -1,8 +1,8 @@
 # CMEE V1-A — EmlisAI Observation Vertical 詳細設計
 
 - document id: `cocolon.cmee.v1a.emlis_observation.detailed_design`
-- revision date: `2026-09-02 JST`
-- lifecycle: `CURRENT_PRODUCT_OWNER_NON_PASS / FOLLOW_PRIMARY_CORRECTION_ROUTE_APPROVED_NOT_STARTED`
+- revision date: `2026-09-04 JST`
+- lifecycle: `CURRENT_PRODUCT_OWNER_NON_PASS / REALIZABLE_RECEPTION_EXPRESSION_WORK_STAGE1_ACTIVE`
 - runtime state: `DRAFT_WIP_DISABLED_INHERITED_OWNER_CHAIN_IM10_NON_PASS`
 - historical predecessor implementation evidence: `MassyuRed/mashos-api Draft PR #3 @ d26b3521f0cd63421af3596277145b2e52dafbbe / NOT_CURRENT_OWNER_HEAD`
 - historical predecessor Stage 1 correction checkpoint: `STEP7_V2_MACHINE_GREEN_PRODUCT_REJECTED / NOT_CURRENT_CHECKPOINT`
@@ -14,10 +14,10 @@
 - private human Product Read: `CURRENT_EVALUATED_NON_PASS / HISTORICAL_PREDECESSOR_EVALUATED_FAIL_STOP`
 - candidate ready: `false`
 - production admission: `false`
-- current authorized next implementation: `NONE_UNTIL_FRESH_SESSION_EXPLICIT_START / APPROVED_ROUTE_ROUND0_FOLLOW_PRIMARY_CORRECTION`
+- current authorized next implementation: `FRESH_MASH_LEVEL3_CMEE_WORK_STAGE1_REALIZABLE_RECEPTION_EXPRESSION_CANONICAL_INTEGRATION_AND_HUMAN_RECEPTION_BODY_CLOSURE_20260904`
 - automatic progression: `false`
 - Cycle001 effect: `0`
-- Stage 1 language route: `ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER / SOLE_CURRENT_AND_FUTURE_ROUTE`
+- Stage 1 language route: `ROUTE_A_PROVIDERLESS / SOURCE_GROUNDED_REALIZABLE_RECEPTION_EXPRESSION / HUMAN_RECEPTION_SOLE_LAYER2_AUTHOR`
 - Phase 0 / P0 / P0-R1 / standalone product-delta-0 L3-R / L3-I lifecycle: `RETIRED_HISTORICAL_NONREUSABLE`
 - current implementation rule: `PRODUCT_QUALITY_DELTA_GT_0_AND_MASH_CONFIRMED_ONLY`
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
@@ -1513,5 +1513,177 @@ CURRENT_AUTHORIZED_IMPLEMENTATION = NONE_UNTIL_FRESH_SESSION_EXPLICIT_START
 PRODUCT / TECHNICAL CREDIT OF THIS DOCS REFLECTION = 0 / 0
 ADMINISTRATIVE_RESULT = APPROVED_PRODUCT_DECISION_DURABLY_RECORDED
 PRODUCTION / CUTOVER / MERGE / API / DB / SUPABASE / RN EFFECT = 0 / 0 / 0 / 0 / 0 / 0 / 0
+AUTOMATIC_PROGRESSION = false
+```
+
+## 36. Source-grounded realizable Reception expression current contract（2026-09-04）
+
+本節は、IM10 NON_PASS後のWork Stage 1におけるcurrent root cause、owner境界、実装順について§35および§34よりfreshである。§1–§33、旧Route A、case-frame route、IM00–IM10、前回focus selectorの記録は履歴として保持するが、current実装入口には使わない。
+
+```text
+AUTHORITY = FRESH_MASH_LEVEL3_CMEE_WORK_STAGE1_REALIZABLE_RECEPTION_EXPRESSION_CANONICAL_INTEGRATION_AND_HUMAN_RECEPTION_BODY_CLOSURE_20260904
+CURRENT_COMMON_CAUSE = FINAL_STAGE1_HUMAN_RECEPTION_MOVE_PLAN_CONTENT_FLOW_COLLAPSE
+ROOT_CAPABILITY_GAP = SELECTED_MEANING_TO_GRAMMATICALLY_REALIZABLE_HUMAN_RECEPTION_EXPRESSION_CONTRACT_ABSENT
+CURRENT_CAPABILITY = SOURCE_GROUNDED_REALIZABLE_RECEPTION_EXPRESSION_CONTRACT
+PREVIOUS_FOCUS_SELECTOR_AUTHORITY = CONSUMED_TERMINAL_STOP_DO_NOT_RETRY_RENAME_OR_RECREATE
+ROUTE = PROVIDERLESS_EXISTING_OWNER_CHAIN_ONLY
+EXTERNAL_GENERATIVE_AI / PROVIDER / PRODUCT_RUNTIME_NETWORK / FALLBACK = 0 / 0 / 0 / 0
+```
+
+### 36.1 corrected causal finding
+
+pre-IM10設計の「主因は上流のinput-specific meaning decisionであり、日本語realizerそのものではない」という診断は当時の履歴として正しい。しかし、IM00–IM09でmeaning decisionを実装し、IM10およびrequired Human Reception Move 124件をactual bodyまで追った後にも、selected meaningを文法的に実現可能な形で各Moveへ渡すcurrent active carrierが存在しないことが確定した。
+
+現在のselected meaning、`MeaningBoundReception`、Grounded Situation View、visible causal traceは、predicate、owner、relation、polarity、modality、time、scope等を保持している。一方、current `GroundedReceptionMovePlan`はMoveのtarget、support、evidence、act、surface strategyまでであり、それらをactor／predicate／ordered arguments／case／morphology／referenceへ変換して最終segmentへexactにbindする契約を持たない。この断絶により、Sentence SurfaceがMove act中心のgeneric followを再生成し、内部meaningが存在してもactual Layer 2で失われる。
+
+したがってcurrent one-way routeは次だけである。
+
+```text
+selected input-specific meaning -> MeaningBoundReception
+or bounded LIMITED outcome -> BoundedLimitedReception
+  -> SourceGroundedRealizableReceptionExpression exact1 per selected plan Move
+  -> existing Human Reception Move consumes expression
+  -> Human Reception-authored Layer 2 segment
+  -> Sentence Surface arrangement only
+  -> independent Gate / final-body-only inverse / public mapping
+```
+
+expressionはmeaningを再選択しない。Move act、style、temperature、surface strategyからmeaningへ逆流しない。NORMAL／LIMITED以外の分類、ontology、Move family、fixture-specific modeを増やさない。
+
+### 36.2 fit-gap and asset disposition
+
+| asset | current disposition | current use |
+|---|---|---|
+| input-specific meaning、MeaningBoundReception、BoundedLimitedReception | `ACTIVE_AND_RETAIN` | meaning sole owner、NORMAL／LIMITED、fake selected reading防止を維持 |
+| Grounded Situation View、semantic projection、visible causal trace | `ACTIVE_AND_RETAIN` | source-grounded expression derivationのtyped evidence |
+| existing Opportunity／Depth／required Move | `ACTIVE_AND_RETAIN` | selection済みMove dutyを変更せずexact-cover domainにする |
+| R8 owner map: Opportunity／Depth／Move=`Grounded Observation Plan`、Clause／semantic segment=`Human Reception`、multi-Move layout=`Sentence Surface`、12 Gates=`Gate` | `ACTIVE_AND_RETAIN_WITH_EXCLUSIVE_OWNER_CORRECTION` | Move selectionとGateは維持し、Layer 2 authorshipだけをHuman Reception exact1へ閉じる |
+| Human Reception clause realization | `ADAPT_AND_INHERIT` | expressionからLayer 2 semantic clauseとvisible segmentを同一passで作るsole author |
+| Sentence Surface multi-Move layout | `ADAPT_AND_INHERIT` | 配置、結合、句読点、文境界、body parserだけを保持 |
+| `JapaneseCaseFrameSpec`、`ArgumentRealizationPlan`、`PredicateMorphologyPlan`、`JapaneseClauseIR`のpure grammatical knowledge | `ADAPT_AND_INHERIT` | Human Reception内部のbounded predicate／argument／case／inflection bindingへfield知識だけ継承 |
+| `SurfaceDerivation`、ClauseFrame、visible semantic binding知識 | `ADAPT_AND_INHERIT` | Human Reception realizationと同一passのsegment-level bindingへ継承し、whole-line後付けを廃止 |
+| NLSv3の小さいowner-role inflection／typed recomposition原理 | `ADAPT_AND_INHERIT` | app-wide moduleを使わずHuman Reception内部のpure ruleへ限定継承 |
+| NLSv3のfailure taxonomy／Product Read知識 | `RETAIN_AS_TEST_OR_FAILURE_KNOWLEDGE` | generic collapse、meaning loss、full-body read境界のregression知識だけ保持 |
+| historical `ResponseObjectExpression`のsource anchor、polarity、modality、time、EXPLICIT／COMPOSITE／ANAPHORIC知識 | `ADAPT_AND_INHERIT` | 新contractのfield knowledgeだけ継承する |
+| historical `ResponseObjectExpression` type／projector／storage／旧order | `HISTORICAL_ONLY` | 型、carrier、`SealedCompositionPlan` storageを復活させない |
+| Gate、body-only inverse、source／unknown／safety protection、composition validation-only | `ACTIVE_AND_RETAIN` | forward expression metadataに依存しない独立verificationを維持 |
+| old Route A composer／selector／rank、active case-frame route、`compose_stage1_from_projection()`、旧linearizer、large NLSv2/v3 route | `NOT_ADOPTED_DO_NOT_REVIVE` | active import、wrapper、entrypoint call、fallbackを0に保つ |
+| previous bounded focus selector method | `NOT_ADOPTED_DO_NOT_REVIVE` | terminal STOPを同名・別名・別helperで反復しない |
+| previous focus selectorの124 Move failure、RR／NLSの失敗事実 | `RETAIN_AS_TEST_OR_FAILURE_KNOWLEDGE` | regressionと能力境界の証拠だけ保持 |
+
+### 36.3 sole private expression contract
+
+新しいparallel schema familyやshared CMEE ontologyは作らない。current implementationでは、late final Move identity／duty確定後からHuman Reception realizationまでだけ存在するEmlis-private、request-local、providerlessなschema v1をexact1作る。既存public response schema、DB、API、projection schemaのversionは上げない。expressionはrequest-local function argumentとreturn valueだけでHuman Receptionへ渡し、Human Reception-authored surfaceとvisible bindingはSentence Surfaceの配置結果までだけ運ぶ。`GroundedSentencePlan`を含む既存schemaは変更せず、Gate／body-only inverse／public mappingへexpression、binding、preauthored surfaceを渡さない。body-free metadataへprivate lexical materialを出さない。
+
+production placementは既存`emlis_ai_grounded_human_reception.py` exact1とする。同fileに次のfrozen request-local typesを置く。
+
+```text
+RealizableReceptionArgumentV1
+  semantic_ref: str exact1
+  source_evidence_refs: tuple[str, ...] 1..N
+  semantic_role: str exact1
+  lexical_form: private str exact1
+  requirement: REQUIRED | OPTIONAL
+  case_marker: str | None
+  direction_ref: str | None
+  relation_endpoint_ref: str | None
+  realization: EXPLICIT | ZERO | OMITTED
+
+SourceGroundedRealizableReceptionExpressionV1
+  schema_version: literal cocolon.emlis.human_reception.realizable_expression.v1
+  expression_ref: str exact1 derived from complete canonical payload
+  meaning_outcome_ref: str exact1
+  reception_binding_ref: str exact1 branch-specific one-of
+    NORMAL: Move-function-matched MeaningBoundReceptionProposition exact1; Set ref is provenance only
+    LIMITED: BoundedLimitedReception lineage, no fake selected reading
+  move_id: str exact1
+  source_evidence_refs: tuple[str, ...] 1..N
+  actor_refs / subject_refs / experiencer_refs: tuple[str, ...], applicable union 1..N
+  predicate_kind: str exact1
+  lexical_head: private str exact1
+  arguments: tuple[RealizableReceptionArgumentV1, ...] 1..N ordered
+  polarity / modality / time_scope / aspect / degree / quantity / scope: str exact1
+  qualifier_refs: tuple[str, ...] 0..N
+  relation_refs / relation_endpoint_refs / direction_refs: tuple[str, ...] 0..N, applicable exact-cover
+  reference_mode: EXPLICIT | COMPOSITE | ANAPHORIC
+  antecedent_refs: tuple[str, ...] 0..N
+  antecedent_condition: str | None, required iff ANAPHORIC
+  particle_plan / inflection_plan / nominalization_plan / clause_link_plan: tuple[str, ...] applicable 1..N
+  provenance_refs: tuple[str, ...] 1..N
+
+ReceptionVisibleSegmentBindingV1
+  binding_ref: str exact1 derived from complete private binding payload
+  expression_refs / move_ids: tuple[str, ...] 1..N
+  human_reception_local_scalar_start / human_reception_local_scalar_end: int exact1 valid range
+  surface_span_sha256: private str exact1
+  clause_frame_fields: request-local mapping exact1
+  surface_derivation_refs: tuple[str, ...] 1..N
+
+SentenceSurfacePlacement (request-local tuple, not a schema or serialized record)
+  binding_ref / sentence_id
+  line_scalar_start / line_scalar_end
+  body_scalar_start / body_scalar_end
+```
+
+`emlis_stage1_response.py`のsole bridgeがselected meaningとMove-function-matched MeaningBoundReceptionProposition exact1（Set refはprovenance only）、またはbounded LIMITED outcomeとBoundedLimitedReception exact1のいずれか、visible trace、およびexact-cover keyとして先に確定済みのread-only final Move duty／identityをexact joinし、Human Receptionのsole builderへ渡す。Move identityはexpressionの内容sourceではなく、どのmeaning outcomeをどのdutyへ実現するかを固定するkeyだけである。`emlis_ai_grounded_human_reception.py`だけがexpressionをvalidate／consumeして本文とHuman Reception-local segment bindingを同一passで作る。`emlis_ai_grounded_sentence_surface.py`はそのresultをrequest-local argumentで受け、binding ref exact1でjoinするrequest-local placement tupleとともにcompiler／adapterへ返すが、既存planやresponseへserializeしない。expression、preauthored surface、bindingをGateへ運ばず、同義field、compat field、parallel carrierは0である。
+
+各selected final plan Moveはexpression exact1を持ち、expression集合はselected final plan Move集合をexact-coverする。これにrequired Move全数がexact-coverされる。plan-owned optional Moveがexact-cover domainにある間はそのexpression exact1を要し、許可済みrecoveryでMove自体が除外される場合にだけ同時に除外する。planにないforeign／unused expressionは許可しない。missing、duplicate、foreign Move、unresolved source、role conflict、required argument欠落、invalid zero／omission、morphology gap、anaphora antecedent gapはfail closedする。一つの自然なvisible segmentが複数Move／expressionを担うmany-to-oneは許可するが、各expressionはvisible segmentへexact1以上到達する。
+
+成功recordへnullable failureを混ぜない。projector／realizerはsuccessまたは次のnamed failureを返す。
+
+```text
+MEANING_REALIZATION_CAPABILITY_GAP
+MEANING_REALIZATION_CAUSAL_TRACE_GAP
+REALIZABLE_RECEPTION_EXPRESSION_ARGUMENT_GAP
+REALIZABLE_RECEPTION_EXPRESSION_MORPHOLOGY_GAP
+REALIZABLE_RECEPTION_EXPRESSION_REFERENCE_GAP
+REALIZABLE_RECEPTION_EXPRESSION_VISIBLE_BINDING_GAP
+```
+
+### 36.4 ordering, identity, and late rebuild
+
+`compile_stage1_response()`は、input-specific meaning ownerのmeaning outcomeとprojectionを保持したまま、`_cmee_semantic_reception_plan()`によるfinal Move identity／duty domainの読み取りkeyを先に確定する。これはexact join先のidentityを確定するexecution sequencingにすぎず、Moveはexpression内容を決めない。その後、NORMALはselected meaning／MeaningBoundReception lineage、LIMITEDはbounded outcome／BoundedLimitedReception lineageのbranch-specific one-ofと、semantic projection、visible causal trace、Grounded Situation Viewから発話内容を構成し、read-only Move keyへexact1でbindしたexpressionを発行する。正規のcausal directionは`meaning outcome -> expression -> existing Move consumes expression`であり、Moveからmeaning／expression contentへのreselection／semantic backflowは0である。
+
+expression発行後にMoveのact、target、support、evidence、required、reference modeまたはmeaning bindingを変更するlate rebuildは禁止する。recoveryは同じfinal Move／expression identityを保持し、句読点・文境界・許可済みomission等の配置だけを変えられる。final unit identityはMove ref、expression ref、visible segment bindingをsealし、whole-line一括bindingや完成後の推測で代用しない。
+
+source clauseは、applicableなpredicate、ordered arguments、degree／quantity、relationとendpoint／direction、polarity／negation、modality／wish、time／aspect、scope／qualifierを全て欠けなく保持する最小単位である場合だけ、private internal evidenceとして保持できる。ただしfinal本文へraw replay、quote、label置換またはgeneric fixed closeとして出力しない。source span、source text、lexical head、scalar locator、segment digest、case別情報、expression／source refsをbody-free metadata、GitHub、handoff、checkpoint、diagnostic、log、public responseへ出さない。
+
+### 36.5 exclusive realization ownership
+
+`Human Reception`は各expressionを自然なLayer 2 semantic clauseへ実現し、同じpassで次を発行するsole authorである。
+
+発行型は§36.3の`ReceptionVisibleSegmentBindingV1` exact1であり、それと同じ`binding_ref`、`expression_refs / move_ids`、`human_reception_local_scalar_start / human_reception_local_scalar_end`、`surface_span_sha256`、`clause_frame_fields`、`surface_derivation_refs`を用いる。alias field、再定義、parallel bindingは作らない。
+
+`Sentence Surface`はpreauthored Human Reception surfaceをrequired request-local inputとして受け取り、Layer 1との配置、複数segmentの結合、句読点、文境界、body parserだけを行う。Human Reception-local rangeはLayer 2 unit textに対する`RealizedSemanticBinding` rangeとして保持する。それと別にSentence Surfaceは、Human Reception binding ref exact1をplacementに引き継ぎ、実際に追加したprefix／separator／line startのscalar数だけを移動させ、request-local `SentenceSurfacePlacement`のline range／body rangeへdeterministically remapする。両coordinate spaceのslice hashがHuman Receptionのsegment hashと一致し、対象segment内の文字が一字でも変更された場合は`REALIZABLE_RECEPTION_EXPRESSION_VISIBLE_BINDING_GAP`へ閉じる。adapterはHuman Reception-local segment rangeをClauseFrame／semantic bindingへ移し、placementのbinding ref／body rangeとの一致を検証し、whole-line `[0,len]`一括bindingを作らない。final Stage 1 pathにおけるgeneric follow、empathy close、fixed close、Move actからのsemantic clause生成、second Layer 2 bodyのauthoringはexact0とする。preauthored surfaceが無いfinal callはfallbackせずnamed failureで停止する。
+
+`emlis_stage1_composition.py`は既存どおりschema／ref／identity／non-mutationのvalidation-onlyであり、expressionをderiveまたはrenderしない。expression／bindingのcarrierはSentence Surfaceの配置結果とadapterで終了する。Gateとfinal-body-only inverseへは完成本文だけを渡し、forward expression metadata、binding、preauthored surfaceを正解またはverification oracleとして読ませない。Gate／body-only inverseの現行責任、判定項目、閾値は変更しない。
+
+### 36.6 verification and product boundary
+
+実装は同じbounded unitでactual active Layer 2へ到達しなければ完了しない。最低verificationは次を含む。
+
+1. required Move→expression exact1とexpression→visible segment exact1以上。
+2. actor／predicate／ordered arguments／case／polarity／modality／time／degree／scope／reference／morphologyの保持とnamed failure。
+3. same Move actでもselected meaningが異なればLayer 2本文が異なり、fixture id、case id、word cue、固定完成文で分岐しないこと。
+4. Human Receptionがfinal Layer 2 sole author、Sentence Surfaceのsemantic content generation call count 0。
+5. source／unknown／safety／LIMITED、Gate、body-only inverse、question budget、composition validation-onlyの回帰なし。
+6. canonical100 direct `100/100`、outer `GENERATED 68 / unavailable 32`、required Move `124/124`を維持すること。
+7. 華恋がcanonical100 actual body全文をMash提示前にprivate boundary内で読み、generic follow、source replay、label置換、少数template、不自然な日本語、Layer 1／2重複、深さ不足を確認すること。
+
+machine GREENと華恋pre-screenはMash Product Readを代替しない。successはcanonical 06 latest §87.6のall-ofを一つも省略せず満たす場合だけである。成功時も`CURRENT_PRODUCT_OWNER_ADOPTION_STATE=IMPLEMENTED_NOT_ACCEPTED`、`candidate_ready=false`、product／technical credit 0、`PRIMARY_OUTCOME=BLOCKER_NARROWED`を維持し、`MASH_ROUND0_PRODUCT_READ_READY=true`だけを次境界として固定する。問い、Layer 3、Piece、Analysis、production、merge、cutoverへ自動進行しない。
+
+### 36.7 Phase 1 design checkpoint
+
+```text
+CHECKPOINT_ID = CMEE_REALIZABLE_RECEPTION_EXPRESSION_PHASE1_CANONICAL_20260904_V1
+PARENT_COCOLON_HEAD = 97b25c146ad41f87d5859e450e48face9de65ea0
+PHASE = 1_CANONICAL_INTEGRATION
+STATE = DESIGNED_NOT_IMPLEMENTED
+COMPLETED = RULES_READ_FRESH_ADMISSION_FIT_GAP_OWNER_CONTRACT
+NOT_COMPLETED = RUNTIME_SOURCE_TEST_BODY_PRESCREEN_SYSTEM_CONTEXT_FINAL_REFS
+PRIVATE_INPUT_OR_BODY_PUBLICATION = 0
+PRODUCT / TECHNICAL CREDIT = 0 / 0
+API / DB / SUPABASE / RN / PERSISTENCE / PRODUCTION / MERGE EFFECT = 0 / 0 / 0 / 0 / 0 / 0 / 0
+NEXT_EXACT_ACTION = IMPLEMENT_REQUEST_LOCAL_EXPRESSION_AFTER_FINAL_MOVE_REBUILD_AND_CONNECT_HUMAN_RECEPTION_AUTHORED_BODY
 AUTOMATIC_PROGRESSION = false
 ```

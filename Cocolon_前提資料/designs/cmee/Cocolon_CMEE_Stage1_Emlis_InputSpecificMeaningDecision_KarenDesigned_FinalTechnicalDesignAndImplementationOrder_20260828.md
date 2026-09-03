@@ -4,8 +4,8 @@
 | 項目 | 値 |
 |---|---|
 | Document ID | `Cocolon_CMEE_Stage1_Emlis_InputSpecificMeaningDecision_KarenDesigned_FinalTechnicalDesignAndImplementationOrder_20260828` |
-| Date | `2026-08-29` |
-| Status | `FINAL_CANONICAL_IMPLEMENTATION_READY` |
+| Date | `2026-09-04` |
+| Status | `CURRENT_PRODUCT_OWNER_NON_PASS / REALIZABLE_RECEPTION_EXPRESSION_WORK_STAGE1_ACTIVE` |
 | Design owner | `Karen` |
 | 対象 | CMEE Stage1 Layer 2 / Emlisの入力固有意味決定 |
 | Pro review chain | initial exact8 + intermediate exact7 + latest exact13（単一添付内の遅延出力を時系列分離） |
@@ -13,19 +13,19 @@
 | Latest Pro review result | `PASS_WITH_REQUIRED_CORRECTIONS` |
 | Required corrections resolution | latest exact13 + earlier non-conflicting unique corrections = `REFLECTED`; stale-preimage RC13は§19.3の同一意図充足で閉包 |
 | Canonical adoption | `ADOPTED_BY_MASH_CURRENT_REQUEST` |
-| Revision state | `FINALIZED_FOR_IMPLEMENTATION` |
-| Technical handoff remaining | `EXACT0` |
-| Implementation order | `IM00_IM10_EXACT11` |
-| Implementation execution | `NOT_STARTED` |
-| 実装・Product Read・activation・I09 | `EXACT0` |
-| GitHub reflection authority / scope | `MASH_CURRENT_REQUEST_20260829 / COCOLON_DOCS_FINALIZATION_EXACT5` |
+| Revision state | `IM00_IM09_IMPLEMENTED / IM10_NON_PASS / §24_CURRENT_CORRECTION` |
+| Historical IM00–IM10 technical handoff remaining | `EXACT0` |
+| Historical implementation order | `IM00_IM10_EXACT11`; current owner=`§24 / canonical 06 §87` |
+| Implementation execution | `REALIZABLE_RECEPTION_EXPRESSION_PHASE1_DESIGN_CHECKPOINT_ACTIVE` |
+| 実装・Product Read・activation・I09 | `CURRENT_CORRECTION_NOT_YET_IMPLEMENTED / 0 / 0 / HISTORICAL_COMPLETE` |
+| GitHub reflection authority / scope | `FRESH_MASH_LEVEL3_CMEE_WORK_STAGE1_REALIZABLE_RECEPTION_EXPRESSION_CANONICAL_INTEGRATION_AND_HUMAN_RECEPTION_BODY_CLOSURE_20260904` |
 | 外部AI・provider・network inference | `EXACT0` |
 | Product / technical credit | `0 / 0` |
 | Automatic progression | `false` |
 | Mashへの追加質問 | `CURRENT_MASH_QUESTION_REQUIRED = FALSE` |
-| System Context v1 | `FRESH_OWNER_RESOLVED` — PR #37 head `d5de2bd8945544a44b4ef3d10136010f88ce23ad` |
+| System Context v1 | `FRESH_OWNER_RESOLVED` — PR #37 start head `20bb1cbbda430205943ea2226e8a0ef331cc9c7b` |
 | System Context use | `DIRECT_CANONICAL_ORIGINAL_READ_USED` |
-| System Context generated-output dependency | `EXACT0` |
+| System Context generated-output dependency | `STALE_FAIL_CLOSED / UNAVAILABLE / EXACT0` |
 | Superseded proposal disposition | canonical統合後にcurrent treeから削除。Git履歴だけに保持 |
 
 ---
@@ -2666,12 +2666,125 @@ AUTOMATIC_PROGRESSION = false
 - delayed concatenated Pro review source `Pro華恋レビュー2.txt` SHA-256 `c1101d6ad20c7d9fc3ea6d2e03900667f457e842806348db33b7ae968665e53e`
 - Karen-Diary private structural knowledge（機能原理のみ参照。非公開内部過程の複製なし）
 
-Fresh repository facts used for this finalization:
+Historical repository facts used for the preceding finalization:
 
 ```text
 Cocolon PR #30 pre-write head = 307eb26c223a90b49b09a561cbd2cd393c680248
 mashos-api PR #3 head = 540ed76d9ae39b9fa6eafc4dbc028e50f52dc3df
-System Context current owner PR #37 head = d5de2bd8945544a44b4ef3d10136010f88ce23ad
+System Context then-current owner PR #37 head = d5de2bd8945544a44b4ef3d10136010f88ce23ad
 System Context canonical original direct read = USED
 System Context generated-output dependency = EXACT0
+```
+
+## 24. IM10後のsource-grounded realizable Reception expression補正（2026-09-04）
+
+本節はcurrent Work Stage 1のroot cause、contract、owner、実装順について§§19–§22よりfreshである。優先順位は次へ固定する。
+
+```text
+CURRENT_REALIZABLE_EXPRESSION_CONTRACT = §24
+PREVIOUS_IMPLEMENTATION_CONTRACT = §§19-§22
+HISTORICAL_PRE_IM10_DIAGNOSIS = §§1.1-§1.3
+HISTORICAL_IM_ROUTE = §21
+CONFLICT_PRECEDENCE = §24 > §§19-§22 > §17
+```
+
+### 24.1 current evidenceによる診断補正
+
+§§1.1–§1.3が退けたのは、meaning decisionを欠いたまま日本語realizerだけを主因とする設計である。この判断は履歴として保持する。IM00–IM09でmeaning decisionを実装した後、IM10 Product Readおよびrequired Human Reception Move 124件の追跡により、別のdownstream gapが確定した。
+
+```text
+CURRENT_COMMON_CAUSE = FINAL_STAGE1_HUMAN_RECEPTION_MOVE_PLAN_CONTENT_FLOW_COLLAPSE
+ROOT_CAPABILITY_GAP = SELECTED_MEANING_TO_GRAMMATICALLY_REALIZABLE_HUMAN_RECEPTION_EXPRESSION_CONTRACT_ABSENT
+```
+
+selected meaning、MeaningBoundReception、semantic projection、Move dutyは存在する。しかし、それらをactor／predicate／ordered arguments／case／polarity／modality／time／degree／scope／reference／morphologyを持つ発話可能expressionへ閉じ、actual Layer 2 segmentへbindするactive carrierが無い。このため、meaning選択後にもSentence Surfaceのgeneric followへcollapseする。本補正はmeaning ownerを置換せず、その下流を閉じる。
+
+### 24.2 current one-way contract
+
+```text
+selected input-specific meaning -> existing MeaningBoundReception
+or bounded LIMITED outcome -> existing BoundedLimitedReception
+  -> SourceGroundedRealizableReceptionExpressionV1 exact1 per selected plan Move
+  -> existing Human Reception Move consumes expression
+  -> Human Reception-authored visible Layer 2 segment
+  -> Sentence Surface arrangement only
+  -> independent Gate / final-body-only inverse / public mapping
+```
+
+expressionはrequest-local、Emlis-private、providerless、deterministicである。意味を再選択せず、Move act／style／temperatureからmeaningへ逆流せず、normal／LIMITED、Move family、ontologyを増やさない。第2 actual consumerが実証されるまでshared CMEE schemaへ昇格させない。
+
+### 24.3 expression and visible-binding fields
+
+`SourceGroundedRealizableReceptionExpressionV1`は最低限次をrequiredにする。
+
+- meaning outcome ref exact1、branch-specific reception binding ref exact1（NORMALはMove-function-matched MeaningBoundReceptionProposition exact1でSet refはprovenance only、LIMITEDはBoundedLimitedReception exact1でfake selected reading 0）、final Move ref。
+- source evidence refs、actor／subject／experiencer。
+- predicate／state／event／wish／relation、lexical head。
+- ordered arguments、semantic roles、required／optional、case／direction／relation endpoint、explicit／zero／omitted。
+- polarity／negation、modality／wish、time／aspect、degree／quantity、scope／qualifier。
+- EXPLICIT／COMPOSITE／ANAPHORIC、antecedent refと成立条件。
+- particles、inflection、nominalization、clause links、provenance。
+
+selected final plan Move集合とexpression集合はexact-coverし、その中のrequired Move全数を覆う。plan-owned optional Moveが存在する間はexpression exact1を持ち、許可済みrecoveryでMove自体が除外されるときだけ同時に除外する。missing、duplicate、foreign／unused、argument／morphology／reference／trace gapはnamed failureへfail closedする。成功recordへnullable failureを混ぜない。
+
+Human Receptionは同一realization passでcomplete private binding payloadから導出したbinding ref exact1、Human Reception-local scalar range、segment hash、expression refs、Move refs、ClauseFrame、SurfaceDerivationを持つ`ReceptionVisibleSegmentBindingV1`を発行する。Sentence Surfaceはそと別のnonserialized request-local placement tupleにbinding ref、line-local／body-global rangeを記録し、placementからHuman Reception bindingへexact1でjoinする。各expressionはsegmentへexact1以上到達する。一つの自然なsegmentが複数expression／Moveを担うmany-to-oneは許可する。
+
+### 24.4 current asset disposition
+
+| asset | disposition |
+|---|---|
+| input-specific meaning、MeaningBoundReception、BoundedLimitedReception | `ACTIVE_AND_RETAIN` |
+| semantic projection、visible trace、Grounded Situation View | `ACTIVE_AND_RETAIN` |
+| existing Opportunity／Depth／Move | `ACTIVE_AND_RETAIN` |
+| Human Reception clause realization | `ADAPT_AND_INHERIT_AS_SOLE_LAYER2_AUTHOR` |
+| Sentence Surface multi-Move layout | `ADAPT_AND_INHERIT_AS_ARRANGEMENT_ONLY` |
+| disabled case／argument／morphology／IRのpure field knowledge | `ADAPT_AND_INHERIT_INSIDE_HUMAN_RECEPTION` |
+| historical ResponseObjectExpressionのsource／reference field knowledge | `ADAPT_AND_INHERIT_WITHOUT_TYPE_OR_STORAGE_REVIVAL` |
+| Gate、body-only inverse、source／unknown／safety、composition validation-only | `ACTIVE_AND_RETAIN` |
+| old composer／selector／rank／linearizer、large NLS route、`compose_stage1_from_projection()` | `NOT_ADOPTED_DO_NOT_REVIVE` |
+| previous bounded focus selector method | `CONSUMED_TERMINAL_STOP_DO_NOT_RETRY_RENAME_OR_RECREATE` |
+| previous failures | `RETAIN_AS_TEST_OR_FAILURE_KNOWLEDGE` |
+
+### 24.5 source clause and privacy
+
+source clauseがpredicate、arguments、degree、relationを欠けなく保持する最小完全単位である場合、expression builderはprivate internal evidenceとして保持できる。ただしfinal本文へraw replay、quote、label replacement、fixed complete sentenceとして出力しない。body-full input、source span、lexical material、actual outputはGitHub、handoff、checkpoint、diagnostic、public metadataへ出さない。
+
+既存response schema、public API、DB、Supabase、RN、persistenceは変更しない。expressionはfinal Move identity／duty key読み取り後からHuman Reception realizationまでdeterministically再構築可能なprivate v1とする。request-local function argument／return valueでHuman ReceptionからSentence Surfaceの配置結果、compiler／adapterまでだけ運び、`GroundedSentencePlan`を含む既存schemaをbumpしない。Gate／body-only inverse／public mappingへexpression、binding、preauthored surfaceを渡さない。body-free metadataへlexical materialや本文を出さない。identity linkageはexisting identity-bearing ClauseFrame／semantic bindingへ置き、identity preimage外のsealだけで封印を主張しない。
+
+### 24.6 exclusive owners and active-path boundary
+
+Human ReceptionだけがLayer 2 semantic clauseとvisible segmentをauthorする。Sentence Surfaceはpreauthored surfaceの配置、結合、句読点、文境界、body parserだけを行い、generic follow、generic empathy、fixed close、Move actからのsemantic content、second Layer 2 bodyを作らない。Human Reception-local rangeはLayer 2 unit textのsemantic bindingとして保持する。Sentence Surfaceは別のrequest-local placement tupleでbinding ref、line-local／body-global rangeを分離し、actual prefix／separator／line startのscalar数だけ加えてremapし、両slice hashを検証する。adapterはHuman Reception-local rangeをunit bindingへ使い、placementのbinding ref／body rangeと一致検証し、whole-line bindingを作らない。final pathでpreauthored Human Reception surfaceが無ければfallbackせず停止する。
+
+compilerのsecond reconstructionとrecoveryは、final Move keyとsame expressionをdeterministically再構築する。expression発行後のmeaning-bearing Move late mutationは禁止する。expression／binding／preauthored surfaceのcarrierはSentence Surfaceの配置結果とadapterで終了し、Gateとbody-only inverseは完成本文だけから独立検証する。forward metadataを正解またはverification oracleにせず、現行の責任／判定項目／閾値を変更しない。
+
+shared Human Reception／Sentence Surfaceのpublic base routeは不変とし、新挙動をcurrent final Stage 1 grounded projection versionへ限定する。disabled CMEE candidateを`emlis_ai_reply_service.py`、core registry、APIまたはproductionへ接続しない。
+
+### 24.7 execution, success, and STOP
+
+実装順はcanonical 02 §36および06 §87をsole detail ownerとする。Phase 1 designだけでは完了せず、同じunitでactive candidateのactual Layer 2、tests、canonical100、body-full pre-screen、GitHub checkpoint、handoff、System Context final refsまで閉じる。
+
+```text
+CANONICAL100_DIRECT = 100/100_REQUIRED
+REQUIRED_MOVES = 124/124_REQUIRED
+OUTER = GENERATED_68 / UNAVAILABLE_32_REQUIRED_UNCHANGED
+HUMAN_RECEPTION_FINAL_LAYER2_AUTHOR = exact1
+SENTENCE_SURFACE_LAYER2_CONTENT_AUTHOR = exact0
+EXTERNAL_GENERATIVE_AI / PROVIDER / NETWORK_INFERENCE / FALLBACK = 0 / 0 / 0 / 0
+```
+
+華恋はMash提示前にcanonical100 actual body全文をprivate boundary内で読む。machine GREEN、schema、trace、test、designはProduct Readを代替しない。成功時も`IMPLEMENTED_NOT_ACCEPTED`、`candidate_ready=false`、product／technical credit 0であり、`MASH_ROUND0_PRODUCT_READ_READY=true`のみを次境界とする。問い、Layer 3、Piece、Analysis、production、merge、cutoverへ自動進行しない。
+
+providerless current routeでlossless realization不能、permission外effect、新public contract、外部AIが必要と確定した場合は、last safe checkpointと残存gapをbody-freeで固定してscope terminal STOPする。同じfocus／template／helper方針をrenameして再試行しない。
+
+### 24.8 Phase 1 checkpoint
+
+```text
+CHECKPOINT_ID = CMEE_REALIZABLE_RECEPTION_EXPRESSION_PHASE1_CANONICAL_20260904_V1
+PARENT_COCOLON_HEAD = 97b25c146ad41f87d5859e450e48face9de65ea0
+STATE = DESIGNED_NOT_IMPLEMENTED
+CHANGED_PATHS = EXISTING_CANONICAL_EXACT4
+PRIVATE_BODY_PUBLICATION = 0
+PRODUCT / TECHNICAL CREDIT = 0 / 0
+NEXT_EXACT_ACTION = FINAL_MOVE_TO_EXPRESSION_EXACT_JOIN_THEN_HUMAN_RECEPTION_SOLE_BODY_AUTHORING
+AUTOMATIC_PROGRESSION = false
 ```
