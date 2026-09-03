@@ -72,7 +72,7 @@
         "mashos-api": {
           "repository": "MassyuRed/mashos-api",
           "checkout_ref": "agent/cmee-v1a-i1sx-source-explicit-20260815",
-          "expected_head": "4a805312e025d3fd7018d76f1b946543833c3740",
+          "expected_head": "0476459b5134d2d33fbec6442c0710ffc40db88b",
           "role": "FastAPI backend plus disabled CMEE inherited-owner implementation Draft PR #3"
         }
       }

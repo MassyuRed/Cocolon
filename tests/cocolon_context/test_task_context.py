@@ -3381,7 +3381,7 @@ def test_repository_cmee_workspace_profile_keeps_disabled_acceptance_boundary() 
         "agent/cmee-v1a-i1sx-source-explicit-20260815"
     )
     assert api["expected_head"] == (
-        "4a805312e025d3fd7018d76f1b946543833c3740"
+        "0476459b5134d2d33fbec6442c0710ffc40db88b"
     )
 
 
