@@ -3030,7 +3030,7 @@ def test_external_asset_stale_ref_is_rejected(tmp_path: Path) -> None:
         run_compile(paths)
 
 
-def test_repository_task_profile_has_exact10_and_exact_external_assets() -> None:
+def test_repository_task_profile_has_exact13_seed_and_exact_external_assets() -> None:
     profile_path = (
         Path(__file__).parents[2]
         / "Cocolon_前提資料"
@@ -3082,6 +3082,60 @@ def test_repository_task_profile_has_exact10_and_exact_external_assets() -> None
         "CURRENT_PRODUCT_OWNER",
         "ZERO_EFFECT_BOUNDARY",
     }
+    product_route_claim = next(
+        row
+        for row in contract["claim_nodes"]
+        if row["claim_id"] == "CLAIM.CMEE.PRODUCT_ROUTE"
+    )
+    assert product_route_claim["asserted_value_code"] == (
+        "ROUND0_FOLLOW_PRIMARY_VISIBLE_RESPONSE_CORRECTION_APPROVED"
+    )
+    assert product_route_claim["asserted_by"] == "Mash"
+    assert product_route_claim["decision_owner"] == "Mash"
+    assert product_route_claim["assertion_provenance"] == "MASH_EXPLICIT_DECISION"
+    assert product_route_claim["adoption_state"] == "ACCEPTED_CURRENT"
+    assert product_route_claim["claim_boundary"] == (
+        "APPROVED_ROUTE_REQUIRES_FRESH_EXPLICIT_UNIT_NO_AUTOMATIC_PROGRESSION"
+    )
+    product_route_source = product_route_claim["source_locator"]
+    assert product_route_source["repository_key"] == "Cocolon"
+    assert product_route_source["owner_id"] == "OWNER.CMEE.PR30"
+    assert product_route_source["remote_ref"] == (
+        "refs/heads/agent/three-core-cmee-current-structure-20260815"
+    )
+    assert product_route_source["path"] == (
+        "Cocolon_前提資料/designs/cmee/v1/"
+        "06_implementation_order_migration_and_verification.md"
+    )
+    assert product_route_source["section_locator"] == "§86"
+    current_owner_claim = next(
+        row
+        for row in contract["claim_nodes"]
+        if row["claim_id"] == "CLAIM.CMEE.CURRENT_PRODUCT_OWNER"
+    )
+    assert current_owner_claim["asserted_value_code"] == (
+        "CMEE_INHERITED_DISABLED_OWNER_IMPLEMENTED_NOT_ACCEPTED_"
+        "IM10_NON_PASS_CANDIDATE_NOT_READY"
+    )
+    assert current_owner_claim["asserted_by"] == "Mash"
+    assert current_owner_claim["decision_owner"] == "Mash"
+    assert current_owner_claim["assertion_provenance"] == "MASH_EXPLICIT_DECISION"
+    assert current_owner_claim["adoption_state"] == "IMPLEMENTED_NOT_ACCEPTED"
+    assert current_owner_claim["claim_boundary"] == (
+        "DISABLED_NO_CUTOVER_MERGE_API_DB_RN_EXTERNAL_AI_NETWORK_"
+        "FALLBACK_OR_PRODUCTION_EFFECT"
+    )
+    current_owner_source = current_owner_claim["source_locator"]
+    assert current_owner_source["repository_key"] == "Cocolon"
+    assert current_owner_source["owner_id"] == "OWNER.CMEE.PR30"
+    assert current_owner_source["remote_ref"] == (
+        "refs/heads/agent/three-core-cmee-current-structure-20260815"
+    )
+    assert current_owner_source["path"] == (
+        "Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md"
+    )
+    assert current_owner_source["section_locator"] == "§35"
+    assert current_owner_claim["verified_scope"] == ["PUBLIC_SOURCE_LOCATOR"]
     assert len(contract["connections"]) == 5
     assert len(contract["scope_rules"]) == 3
     assert set(contract["role_views"]) == {
@@ -3099,6 +3153,17 @@ def test_repository_task_profile_has_exact10_and_exact_external_assets() -> None
         and row["public_identity_allowed"] is True
         for row in contract["external_locators"]
     )
+    assert {
+        row["locator_id"]: row["claim_boundary"]
+        for row in contract["external_locators"]
+    } == {
+        "EXTERNAL.CMEE.CYCLE001.SOURCE": (
+            "EXACT_MIGRATION_INPUT_NOT_ACTIVE_CMEE_SUBENGINE"
+        ),
+        "EXTERNAL.CMEE.CYCLE001.TEST": (
+            "EXACT_PROTECTED_MIGRATION_VECTOR_NOT_ACTIVE_CMEE_TEST"
+        ),
+    }
     assert contract["collaboration"]["max_subagent_packets"] == 3
     assert len(contract["collaboration"]["subagent_packets"]) == 3
     assert contract["actual_use_feedback"] == []
@@ -3126,8 +3191,198 @@ def test_repository_task_profile_has_exact10_and_exact_external_assets() -> None
     assert len(assets) == 2
     assert all(len(row["source_commit"]) == 40 for row in assets)
     assert all(len(row["blob_sha"]) == 40 for row in assets)
-    assert nls["actual_review"]["disposition"] == "RETAIN_AS_SYMBOL_LEVEL_MIGRATION_SOURCE_AND_PROTECTED_TEST_VECTOR"
+    review = nls["actual_review"]
+    assert review["disposition"] == (
+        "MIGRATED_RESPONSIBILITY_ONLY_EXTERNAL_ASSET_RETAINED_AS_HISTORY"
+    )
+    assert review["migration_adoption"] == "MIGRATED_RESPONSIBILITY_ONLY"
+    assert review["large_cycle001_module_adoption"] == "NOT_ADOPTED"
+    assert review["production_cutover"] == "ZERO"
+    assert review["current_product_owner_adoption_state"] == (
+        "IMPLEMENTED_NOT_ACCEPTED"
+    )
+    assert review["im10_state"] == "NON_PASS"
+    assert review["candidate_ready"] is False
+    assert review["production_effect"] == 0
+    assert review["automatic_progression"] is False
+    assert set(review["prohibited_effects"]) == {
+        "NO_CUTOVER",
+        "NO_MERGE",
+        "NO_API_CHANGE",
+        "NO_DB_CHANGE",
+        "NO_RN_CHANGE",
+        "NO_EXTERNAL_GENERATIVE_AI",
+        "NO_PRODUCT_RUNTIME_NETWORK",
+        "NO_FALLBACK",
+    }
+    targets = review["migrated_responsibility_targets"]
+    assert len(targets) == 8
+    assert {
+        (row["repository_key"], row["path"])
+        for row in targets
+    } == {
+        (
+            "mashos-api",
+            "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_input_specific_meaning.py",
+        ),
+        (
+            "mashos-api",
+            "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py",
+        ),
+        (
+            "mashos-api",
+            "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py",
+        ),
+        (
+            "mashos-api",
+            "ai/services/ai_inference/emlis_ai_grounded_observation_plan.py",
+        ),
+        (
+            "mashos-api",
+            "ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py",
+        ),
+        (
+            "mashos-api",
+            "ai/services/ai_inference/emlis_ai_grounded_human_reception.py",
+        ),
+        (
+            "mashos-api",
+            "ai/services/ai_inference/emlis_ai_grounded_observation_gate.py",
+        ),
+        (
+            "mashos-api",
+            "ai/tests/test_emlis_cmee_body_inverse_protected.py",
+        ),
+    }
+    responsibilities = {
+        row["path"]: row["responsibility"] for row in targets
+    }
+    assert responsibilities[
+        "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py"
+    ] == "MEANING_PROJECTION_VALIDATION_ONLY_NO_FINAL_SURFACE_OWNER"
+    assert responsibilities[
+        "ai/services/ai_inference/emlis_ai_grounded_observation_plan.py"
+    ] == "FINAL_GROUNDED_OBSERVATION_PLAN_OWNER"
+    assert responsibilities[
+        "ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py"
+    ] == (
+        "FINAL_GROUNDED_SENTENCE_PLAN_AND_SENTENCE_REALIZER_OWNER_WITH_BYTES_ONLY_PARSER"
+    )
+    assert responsibilities[
+        "ai/services/ai_inference/emlis_ai_grounded_human_reception.py"
+    ] == "FINAL_HUMAN_RECEPTION_AND_RECEPTION_REALIZER_OWNER_TARGET_ATTENTION_WHY"
+    symbols = {row["path"]: set(row["symbols"]) for row in targets}
+    assert symbols[
+        "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_input_specific_meaning.py"
+    ] == {
+        "derive_input_specific_meaning_structure",
+        "select_input_specific_meaning",
+        "project_selected_reading",
+    }
+    assert symbols[
+        "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py"
+    ] == {"project_subjective_meaning_plan", "_validate_phase_A"}
+    assert symbols[
+        "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py"
+    ] == {
+        "build_premeaning_grounded_inputs",
+        "build_subjective_planning_inputs",
+        "seal_stage1_projection",
+        "compile_stage1_response",
+    }
+    assert symbols[
+        "ai/services/ai_inference/emlis_ai_grounded_observation_plan.py"
+    ] == {
+        "GroundedObservationPlan",
+        "build_final_stage1_grounded_observation_plan",
+    }
+    assert symbols[
+        "ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py"
+    ] == {
+        "GroundedBodyOnlyWitness",
+        "parse_grounded_surface_body_bytes",
+        "build_grounded_sentence_plan",
+        "realize_grounded_sentence_plan",
+    }
+    assert symbols[
+        "ai/services/ai_inference/emlis_ai_grounded_human_reception.py"
+    ] == {"realize_grounded_human_reception"}
+    assert symbols[
+        "ai/services/ai_inference/emlis_ai_grounded_observation_gate.py"
+    ] == {
+        "GroundedBodyInverseEvaluation",
+        "evaluate_grounded_surface_body_inverse",
+        "evaluate_grounded_observation_gate",
+    }
+    assert symbols[
+        "ai/tests/test_emlis_cmee_body_inverse_protected.py"
+    ] == {
+        "GroundedBodyOnlyParserProtectedTest",
+        "GroundedBodyInverseProtectedTest",
+        "test_parser_contract_is_exact_bytes_only_and_deterministic",
+        "test_parser_has_no_plan_source_or_forward_metadata_parameters",
+        "test_d21_delete_vector_is_rejected",
+        "test_d21_relation_reverse_vector_is_rejected",
+        "test_d21_unknown_fill_vector_is_rejected",
+        "test_d21_relation_tamper_vector_is_rejected",
+        "test_reception_target_attention_why_duties_are_protected",
+        "test_existing_production_gate_default_is_unchanged_and_opt_in_is_body_free",
+    }
+    disabled_seed = next(
+        row for row in cmee["seed_rules"]
+        if row["id"] == "cmee_disabled_draft_exact13"
+    )
+    assert len(disabled_seed["path_globs"]) == 13
+    assert {
+        "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_input_specific_meaning.py",
+        "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py",
+    }.issubset(disabled_seed["path_globs"])
+    protected = next(
+        row for row in cmee["required_categories"]
+        if row["id"] == "protected_tests"
+    )
+    assert (
+        "ai/tests/test_cmee_nls_v3_batch001_unified_stage1_bridge.py"
+        in protected["path_globs"]
+    )
     assert nls["actual_review"]["require_external_asset_git_verification"] is True
+
+
+def test_repository_cmee_workspace_profile_keeps_disabled_acceptance_boundary() -> None:
+    profile_path = (
+        Path(__file__).parents[2]
+        / "Cocolon_前提資料"
+        / "system_context"
+        / "workspace_profiles.json"
+    )
+    document = json.loads(profile_path.read_text())
+    cmee = document["profiles"]["cmee_working"]
+    assert cmee["current_product_owner_adoption_state"] == (
+        "IMPLEMENTED_NOT_ACCEPTED"
+    )
+    assert cmee["im10_state"] == "NON_PASS"
+    assert cmee["candidate_ready"] is False
+    assert cmee["production_effect"] == 0
+    assert cmee["automatic_progression"] is False
+    assert "generated_context_state" not in cmee
+    assert "generated_context_consumable" not in cmee
+    assert "generated_context_last_source_commits" not in cmee
+    assert "generated_context_refresh_blocker" not in cmee
+    product = cmee["repositories"]["Cocolon"]
+    assert product["checkout_ref"] == (
+        "agent/three-core-cmee-current-structure-20260815"
+    )
+    assert product["expected_head"] == (
+        "97b25c146ad41f87d5859e450e48face9de65ea0"
+    )
+    assert "expected_ancestor" not in product
+    api = cmee["repositories"]["mashos-api"]
+    assert api["checkout_ref"] == (
+        "agent/cmee-v1a-i1sx-source-explicit-20260815"
+    )
+    assert api["expected_head"] == (
+        "4a805312e025d3fd7018d76f1b946543833c3740"
+    )
 
 
 def _install_exact_external_cycle_checkout(paths: dict[str, Path]) -> tuple[str, dict[str, str]]:
