@@ -6318,7 +6318,7 @@ final Moveのidentity／duty keyをexpression projectorより先に読むのは�
 - same-act／different-meaning contrast、multi-Move many-to-one、anaphora antecedent、zero／omission、negation、wish、time、degree、scope。
 - source／unknown／safety／LIMITED／question budget／composition validation-only／body-only inverseの回帰なし。
 - focused active route、owner inheritance、exact8 inheritance、RR3–RR8 baseline parity。
-- canonical100 direct `100/100`、required Move `124/124`、outer `GENERATED 68 / unavailable 32`。
+- canonical100 direct `100/100`、required Move `124/124`、outer `GENERATED 68 / unavailable 32`、各caseのavailability classification不変。
 - static registry／import checksでlegacy、parallel owner、public-path wiringが0。
 
 required locked runtimeがmaterializeされないWork runtimeではformal pytestを別interpreterやsilently installed dependencyへfallbackしない。利用可能なexact interpreterでcompile、direct runner、stdlib-compatible testを実行し、formal未実行を明記する。既存known baseline failureをfixture変更やdenominator縮小でGREEN化しない。
@@ -6341,7 +6341,7 @@ defectがあれば同じcurrent product-causal unit内でPhase 2のowner source�
 
 1. same public-safe facade／inputのactual before／afterでLayer 1 visible bytesが同一、Layer 2にtarget、predicate、supportまたはrelationのsemantic deltaが非0であり、punctuation、語尾、長文化だけの差ではない。
 2. actual final Layer 2までHuman Reception sole author exact1、Sentence Surface semantic content author 0で到達する。
-3. expression→required Move `124/124`とexpression→actual segment bindingが閉じ、canonical100 direct `100/100`、outer `GENERATED 68 / unavailable 32`が不変である。
+3. expression→required Move `124/124`とexpression→actual segment bindingが閉じ、canonical100 direct `100/100`、outer `GENERATED 68 / unavailable 32`および各caseのavailability classificationが不変である。
 4. relevant regressionはGREENまたは事前記録済みbaseline parity、old composer／legacy route active call 0、source／unknown／safety／LIMITED／Gate／body inverse／public mapping非回帰である。
 5. private body、locator、digest、case別情報、expression／source refsのGitHub／handoff／diagnostic／log／public response leakageが0である。
 6. canonical100全文のKaren private pre-screenがCLEARである。
