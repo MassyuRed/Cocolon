@@ -2453,3 +2453,8 @@ clarificationはoriginal source lifecycle全体でexact1以下とし、authentic
 251-owner、Cycle001のfresh denominator／acceptance、current100評価条件はCMEE implementation prerequisiteまたはshared schema constantではない。一方、本設計からhistorical-only、unnecessary、relaxedまたはretiredとも決めない。Cycle適用時はfresh Cycle001 current ownerに従い、source-only modeまたは`execution_scope=CYCLE`をacceptance PASSへ変換しない。
 
 本sectionのschema registration、Python dataclass、JSON schema file、DB／API wire、implementation、Cycle／production effectは0である。最初のactual materializationは§14のpre-registration correction ruleに従い、別Mash実装承認なしに開始しない。
+
+
+## Same-nucleus temporal alignment boundary（2026-09-04）
+
+Canonical 02 §38 / 06 §89 authorize source-grounded correction of existing status/time/modality before selected meaning and projection identity derivation. Existing time-scope/attribute vocabulary is retained; no public/private response or GroundedSentencePlan schema bump is introduced. The §36 request-local expression/segment/placement contract remains private, excluded from Gate forward inputs, public response, diagnostic and durable body-free metadata. Updated frames, graphs, meaning and projections must be freshly derived together; mixed old/new sealed identities are rejected.

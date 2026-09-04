@@ -2820,3 +2820,8 @@ fresh Mash decisionは次のexact2からexact1を選ぶ。
 - `PRESERVE_LAYER1_BYTE_PARITY_AND_AUTHORIZE_UPSTREAM_SPLIT_OWNER`
 
 前者はLayer 1 visible product conditionの変更を、後者はprospective contentとperformed actionを別nucleusへbindするupstream meaning／plan owner contractの変更を要する。fresh decisionがowner／product conditionを再承認するまで、runtime再実装、Human Reception／Gate局所修正、別method、問い、Layer 3、productionまたはmergeへ進まない。
+
+
+## 26. Approved same-nucleus status alignment（2026-09-04）
+
+Mash selected option 1 under `FRESH_MASH_LEVEL3_CMEE_STAGE1_SAME_NUCLEUS_STATUS_ALIGNMENT_WITH_LAYER1_PARITY_RELAXATION_20260904`. §25 remains predecessor terminal history. Current details are canonical v1/02 §38, v1/06 §89 and v1/05; no duplicate contract is introduced here. The upstream existing owner may correct source-grounded status/time/modality before meaning sealing and downstream expression construction. The original Layer1 byte freeze and meaning non-change clause are superseded only for that correction. No separate owner split, new meaning categories or arbitrary reselection is allowed. The rollback means §24 reception-expression implementation must be rebuilt and verified in the same unit; it is not already complete.

@@ -552,3 +552,8 @@ input-specific meaning
 完成順はRound 0 active-path correction、華恋body-full pre-screen、Mash Round 0 Product Read、Mash PASS後のFree重要問い0..1 end-to-end、さらに後のPlus／Premium Layer 3である。問いではsupplemental answerだけをoriginalと別のuser-owned sourceとして保存し、その回答分だけLayer 1／2をrefineする。API／DB／Supabase／RNはquestion stage開始時にactual contractを読み、必要な既存経路だけを扱う。
 
 current detailed ownerはcanonical 02 §35、execution order ownerはcanonical 06 §86、shared CMEE mapは04 §32である。本map更新はruntime structure、production I5、ReplyEnvelope、API、DB、Supabase、RNまたはSystem Context生成物を変更しない。構造上のdeltaはProduct Read state、visible role、current owner／next-route navigationだけで、primary outcomeは`ADMINISTRATIVE_ONLY`である。
+
+
+## Current same-nucleus status correction（2026-09-04）
+
+Current approved disabled work is canonical v1/02 §38 and v1/06 §89. The existing `emlis_ai_grounded_observation_plan.py` final-only seam owns same-nucleus source-grounded status alignment before graph/meaning/Reception generation. Human Reception remains the sole intended Layer2 author; Sentence Surface owns Observation and placement; composition validates only. The public base reply path, national-system storage/dispatch/publication, Piece and Analysis are unchanged. Implementation and full-body verification are in progress, not complete; predecessor candidate remains rejected/rolled back and all production/ready/merge effects remain 0.

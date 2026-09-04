@@ -885,3 +885,8 @@ current active disabled pathの最初のproduct-causal確認点は、`_cmee_sema
 問いstageではoriginal inputとsupplemental answerを別のuser-owned sourceとして保存し、回答分だけLayer 1／2をrefineする。API／DB／Supabase／RNへのactual effectは同stage開始時にcurrent contractとschemaを確認して初めて確定し、新規migration、RLS、public contractまたはproduction effectが必要なら別LEVEL_3 approvalまで停止する。
 
 current detail ownerは`designs/cmee/v1/02_emlis_v1a_detailed_design.md` §35、execution order ownerは同`06_implementation_order_migration_and_verification.md` §86、Emlis mapは`current_structure/01_emlis_ai_current_structure.md` §19である。本map reflectionはruntime、test、API、DB、Supabase、RN、productionまたはSystem Context生成物を変更せず、primary outcomeは`ADMINISTRATIVE_ONLY`である。
+
+
+## Current same-nucleus status correction（2026-09-04）
+
+Current approved disabled work is canonical v1/02 §38 and v1/06 §89. The existing `emlis_ai_grounded_observation_plan.py` final-only seam owns same-nucleus source-grounded status alignment before graph/meaning/Reception generation. Human Reception remains the sole intended Layer2 author; Sentence Surface owns Observation and placement; composition validates only. The public base reply path, national-system storage/dispatch/publication, Piece and Analysis are unchanged. Implementation and full-body verification are in progress, not complete; predecessor candidate remains rejected/rolled back and all production/ready/merge effects remain 0.

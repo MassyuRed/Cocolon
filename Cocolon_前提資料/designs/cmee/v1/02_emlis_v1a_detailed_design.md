@@ -14,7 +14,7 @@
 - private human Product Read: `CURRENT_EVALUATED_NON_PASS / HISTORICAL_PREDECESSOR_EVALUATED_FAIL_STOP`
 - candidate ready: `false`
 - production admission: `false`
-- current authorized next implementation: `FRESH_MASH_LEVEL3_CMEE_WORK_STAGE1_REALIZABLE_RECEPTION_EXPRESSION_CANONICAL_INTEGRATION_AND_HUMAN_RECEPTION_BODY_CLOSURE_20260904`
+- current authorized next implementation: `FRESH_MASH_LEVEL3_CMEE_STAGE1_SAME_NUCLEUS_STATUS_ALIGNMENT_WITH_LAYER1_PARITY_RELAXATION_20260904`
 - automatic progression: `false`
 - Cycle001 effect: `0`
 - Stage 1 language route: `ROUTE_A_PROVIDERLESS / SOURCE_GROUNDED_REALIZABLE_RECEPTION_EXPRESSION / HUMAN_RECEPTION_SOLE_LAYER2_AUTHOR`
@@ -1732,3 +1732,18 @@ AUTOMATIC_PROGRESSION = false
 ```
 
 再開には、Layer 1 byte parityを緩和してsame-nucleus statusを統一するか、Layer 1 parityを保持してupstream meaning／plan contractでprospective ownerとperformed ownerを明示的に分割するかについて、fresh Mash decision exact1を要する。決定まではnew runtime implementationを承認しない。
+
+
+## 38. Same-nucleus status alignment with bounded Layer 1 revision（2026-09-04）
+
+Current authority: `FRESH_MASH_LEVEL3_CMEE_STAGE1_SAME_NUCLEUS_STATUS_ALIGNMENT_WITH_LAYER1_PARITY_RELAXATION_20260904`. This section supersedes the execution prohibition in §37 for this newly approved unit only; the predecessor STOP, rollback and non-acceptance remain historical facts.
+
+The final Stage 1 Observation Plan owner resolves the same action nucleus against its exact source fragment before relations, reception duties, graph, selected meaning, projection and identity are derived. It may correct source-grounded status/time/modality and their existing attribute codes, preserving nucleus identity, actor, polarity, evidence, arguments, relations and unknown scope. Downstream expression and both visible layers consume that common state; they do not mutate a sealed meaning outcome or independently reclassify the action. No owner split, new ontology, arbitrary meaning reselection or public base-route change is authorized.
+
+Layer 1 byte parity is relaxed only for this causal correction and necessary grammatical realization. Source faithfulness and full-body quality remain mandatory. Past morphology alone does not establish completed action; negation, wish, uncertainty, quoted/conditional scope and progressive aspect remain distinct. Existing time-scope vocabulary and schema versions are retained. Pure morphology knowledge is shared through the existing upstream owner without duplicate classifiers or a new module.
+
+The §36 request-local expression → Human Reception sole Layer 2 author → Sentence Surface placement → adapter contract is reimplemented in the same unit. The rejected predecessor implementation is reference evidence, not an accepted candidate. Its shortened-context Gate matching and repetitive predicate construction are not adopted as proof of correctness. Gate/source matching thresholds and independent final-body inverse duties remain unchanged.
+
+Verification requires original canonical100 input/order/axes/count, direct 100/100, required Move and binding 124/124, outer 68/32 and per-input availability parity, relevant regression, status-to-source fidelity, and a frozen same-set full-body Karen pre-screen. Scope-internal implementation/language/test defects are corrected within this unit, with regeneration and all100 re-reading after changes. Unrun required tests prevent completion/readiness. Mash Product Read PASS, adoption, candidate ready, production and merge are not awarded.
+
+Current execution state: `IN_PROGRESS_DESIGN_SYNCHRONIZED_IMPLEMENTATION_NOT_YET_COMPLETE`. Execution and next checkpoint are owned by canonical 06 §89 and the existing mashos-api handoff.

@@ -9,7 +9,7 @@
 - technical design owner: `Ultra華恋`
 - architecture parent: [Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md](../Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md)
 - NLSv3 inheritance input: [NLSv3_to_CMEE_Disposition_Phase1_20260817.md](../NLSv3_to_CMEE_Disposition_Phase1_20260817.md)
-- lifecycle: `CURRENT_PRODUCT_OWNER_NON_PASS / REALIZABLE_RECEPTION_EXPRESSION_WORK_STAGE1_ACTIVE`
+- lifecycle: `CURRENT_PRODUCT_OWNER_NON_PASS / SAME_NUCLEUS_STATUS_ALIGNMENT_IN_PROGRESS`
 - effective when: `MERGED_TO_COCOLON_MAIN_AS_DESIGN_OWNER`
 - current Draft authority effect: `ACTIVE_ON_OPEN_PR30_WORKING_LINEAGE_BEFORE_MERGE`
 - implementation approval: `INHERITED_DISABLED_IMPLEMENTATION_COMPLETE_TO_IM09 / IM10_NON_PASS / REALIZABLE_RECEPTION_EXPRESSION_AUTHORIZED`
@@ -672,3 +672,8 @@ AUTOMATIC_PROGRESSION = false
 fresh Mash decisionは、Layer 1 visible byte parityを緩和してsame-nucleus statusを整合させるか、Layer 1 parityを維持してprospective contentとperformed actionを別nucleusへbindするupstream split ownerを承認するかのexact1である。決定前にHuman Reception、Gate、別helper、renameまたは局所規則で再試行しない。
 
 current read orderは本§15、canonical 02 §37、canonical 06 §88、final canonical §25とする。
+
+
+## Current authorized work — same-nucleus status alignment（2026-09-04）
+
+Mash approved `FRESH_MASH_LEVEL3_CMEE_STAGE1_SAME_NUCLEUS_STATUS_ALIGNMENT_WITH_LAYER1_PARITY_RELAXATION_20260904`. Current contract is 02 §38, current execution is 06 §89, and schema/identity remains in 05. Prior 02 §37 / 06 §88 is the closed rejected/rolled-back predecessor. Layer1 may change only for source-grounded status alignment and necessary language; both layers and all100 quality must be verified in the same unit. No Product Read readiness, adoption, merge or production is yet claimed.

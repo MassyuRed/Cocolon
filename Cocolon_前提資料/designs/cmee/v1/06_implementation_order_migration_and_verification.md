@@ -6262,7 +6262,7 @@ Free一問end-to-endのProduct Read後に別判断する。eligible owned histor
 本節はWork Stage 1のcurrent bounded unitについて§86よりfreshである。authorityは
 `FRESH_MASH_LEVEL3_CMEE_WORK_STAGE1_REALIZABLE_RECEPTION_EXPRESSION_CANONICAL_INTEGRATION_AND_HUMAN_RECEPTION_BODY_CLOSURE_20260904`であり、Cocolon PR #30 `97b25c146ad41f87d5859e450e48face9de65ea0`、mashos-api PR #3 `3c335bd11eb94d38eb5649b54b31b2de38636ebb`、System Context PR #37 `20bb1cbbda430205943ea2226e8a0ef331cc9c7b`から開始する。開始時three-headはfresh、Draft、open、unmergedである。
 
-前回focus selector authorityは消費済みterminal STOPである。同じselection methodをrename、別helper、別schema、別case familyとして再試行しない。本unitはselected meaningを再選択せず、§36のexpression contractで下流の発話可能性を閉じる。
+前回focus selector authorityは消費済みterminal STOPである。同じselection methodをrename、別helper、別schema、別case familyとして再試行しない。本unitの原設計ではselected meaningを再選択せず§36のexpression contractで下流の発話可能性を閉じる。2026-09-04の後続承認（§89）では、原入力に基づく同一nucleusのstatus/time/modality修正と、それに必要な上流meaning/plan/projection/identity再導出を限定許可する。それ以外の任意再選択は禁止する。
 
 ### 87.1 Phase 0 — admission and direct originals
 
@@ -6339,7 +6339,7 @@ defectがあれば同じcurrent product-causal unit内でPhase 2のowner source�
 
 成功は次のall-ofだけである。
 
-1. same public-safe facade／inputのactual before／afterでLayer 1 visible bytesが同一、Layer 2にtarget、predicate、supportまたはrelationのsemantic deltaが非0であり、punctuation、語尾、長文化だけの差ではない。
+1. same public-safe facade／inputのactual before／afterでLayer 1の差分が原入力に基づく同一nucleusの状態整合と必要な文章修正だけであり、Layer 2にtarget、predicate、supportまたはrelationのsemantic deltaが非0である。punctuation、語尾、長文化だけの差ではない。原設計のLayer 1完全byte parityは§89のfresh Mash authorityによりこの範囲だけ置換する。
 2. actual final Layer 2までHuman Reception sole author exact1、Sentence Surface semantic content author 0で到達する。
 3. expression→required Move `124/124`とexpression→actual segment bindingが閉じ、canonical100 direct `100/100`、outer `GENERATED 68 / unavailable 32`および各caseのavailability classificationが不変である。
 4. relevant regressionはGREENまたは事前記録済みbaseline parity、old composer／legacy route active call 0、source／unknown／safety／LIMITED／Gate／body inverse／public mapping非回帰である。
@@ -6400,3 +6400,25 @@ AUTOMATIC_PROGRESSION = false
 これは単独test failureまたは同一method内の日本語規則不足ではなく、approved product conditionとsemantic owner境界の衝突である。局所patch、別helper、renameまたは再runへ戻らない。
 
 next gateはfresh Mash decision exact1のみとする。選択肢は、Layer 1 visible byte parity relaxation、またはLayer 1 parity preservationとupstream split owner authorizationのexact2である。前者はvisible product conditionを変更し、後者はmeaning／plan owner contractを変更するため、いずれもcurrent implementation authority外である。
+
+
+## 89. Approved same-nucleus status correction / active execution（2026-09-04）
+
+AUTHORITY = FRESH_MASH_LEVEL3_CMEE_STAGE1_SAME_NUCLEUS_STATUS_ALIGNMENT_WITH_LAYER1_PARITY_RELAXATION_20260904
+EXECUTION_OWNER = ULTRA_KAREN_SINGLE_OWNER
+EXECUTION_ENVIRONMENT = WORK_ULTRA_REQUIRED
+STATE = IN_PROGRESS
+
+Fresh admission: Cocolon PR30 `c5eb8310df31f1d9d459761c5abdc77791c35790`; mashos-api PR3 `99e308effb629362a06c9d63429c77cb760da273`; System Context PR37 `8701513dafdb22c026dd87096d5ec731b2c9671f`. All are open Draft/unmerged. §88 is the predecessor terminal; it does not prohibit this newly authorized correction.
+
+Execution sequence within one authorized unit:
+1. Read whole-app/current maps and relevant original owner closure; doctor then prepare when the locked System Context environment is available. Doctor failed on local pinned-toolchain mismatch; stale generated Context is not used. Direct original read is permitted. A clean separate checkout isolates existing generated-file working changes.
+2. Apply canonical 02 §38 in the final-only Observation Plan seam before selected meaning is sealed. Keep public base behavior, same nucleus/source/actor/polarity and all unrelated meaning.
+3. Reimplement §87.3 expression, Human Reception authorship, placement and adapter with the corrected common state. Preserve source matching/Gate/body inverse; do not adopt predecessor validation weakening.
+4. Run required related regressions and unchanged canonical100 on current source. Compare per-input availability with the admitted baseline. Correct scope-internal failures without an arbitrary one-attempt stop.
+5. Freeze final source/output, privately read all100 original/Layer1/Layer2 plus set-level quality; after any source fix regenerate and re-read all100.
+6. Update existing canonical/current maps/handoff and required System Context refs; checkpoint on existing branches and verify changed paths, bytes and latest heads remotely.
+
+Allowed source files are the nine existing files explicitly listed in Mash's current authority; initial causal edits are Observation Plan, Human Reception, Sentence Surface, Stage1 response and Gate replay integration. Meaning/vertical/composition/contracts changes are conditional on status propagation or identity necessity only. Directly associated existing tests and runner identity updates are allowed; fixtures, acceptance axes, denominator and public route are not. No new design, authority, ledger, checker or handoff family is created.
+
+Success remains the all-of §87.6 with the bounded Layer1 replacement above and per-input availability parity added. Required tests must be executed, not silently skipped. Current `candidate_ready=false`, `MASH_ROUND0_PRODUCT_READ_READY=false`, `IMPLEMENTED_NOT_ACCEPTED`, and production/API/DB/Supabase/RN/persistence/merge effects 0. New external providers/dependencies, generic parser, ontology/Move family, owner split, privacy or Gate weakening require a different decision and are not silently introduced.
