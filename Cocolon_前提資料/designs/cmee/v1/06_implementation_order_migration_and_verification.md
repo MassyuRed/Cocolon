@@ -6407,7 +6407,7 @@ next gateはfresh Mash decision exact1のみとする。選択肢は、Layer 1 v
 AUTHORITY = FRESH_MASH_LEVEL3_CMEE_STAGE1_SAME_NUCLEUS_STATUS_ALIGNMENT_WITH_LAYER1_PARITY_RELAXATION_20260904
 EXECUTION_OWNER = ULTRA_KAREN_SINGLE_OWNER
 EXECUTION_ENVIRONMENT = WORK_ULTRA_REQUIRED
-STATE = IN_PROGRESS
+STATE = BLOCKED_AVAILABILITY_CONSTRAINT_UNFINISHED
 
 Fresh admission: Cocolon PR30 `c5eb8310df31f1d9d459761c5abdc77791c35790`; mashos-api PR3 `99e308effb629362a06c9d63429c77cb760da273`; System Context PR37 `8701513dafdb22c026dd87096d5ec731b2c9671f`. All are open Draft/unmerged. §88 is the predecessor terminal; it does not prohibit this newly authorized correction.
 
@@ -6422,3 +6422,11 @@ Execution sequence within one authorized unit:
 Allowed source files are the nine existing files explicitly listed in Mash's current authority; initial causal edits are Observation Plan, Human Reception, Sentence Surface, Stage1 response and Gate replay integration. Meaning/vertical/composition/contracts changes are conditional on status propagation or identity necessity only. Directly associated existing tests and runner identity updates are allowed; fixtures, acceptance axes, denominator and public route are not. No new design, authority, ledger, checker or handoff family is created.
 
 Success remains the all-of §87.6 with the bounded Layer1 replacement above and per-input availability parity added. Required tests must be executed, not silently skipped. Current `candidate_ready=false`, `MASH_ROUND0_PRODUCT_READ_READY=false`, `IMPLEMENTED_NOT_ACCEPTED`, and production/API/DB/Supabase/RN/persistence/merge effects 0. New external providers/dependencies, generic parser, ontology/Move family, owner split, privacy or Gate weakening require a different decision and are not silently introduced.
+
+### Confirmed availability boundary and resume point
+
+Current execution checkpoint: `BLOCKED_AVAILABILITY_CONSTRAINT_UNFINISHED`. A reliable frozen probe reached direct 100/100 and required Move/expression/visible binding 124/124, but outer classification became 72/28 with four changes. Root read that probe's original/observation/follow for all100 and recorded NOT_CLEAR. Later source repairs require a fresh full generation and full reread; no final CLEAR or readiness is claimed.
+
+The unchanged completed-body compatibility check rejects unsupported negative sensation. Removing that unsupported meaning correctly removes the rejection. The four original inputs, observations and selected nuclei were unchanged; the final follow was the changed operand. Restoring legacy referent defaults did not restore the old classifications. Keeping the old classification would require an unfaithful body or a new admission rule/parallel route. The approved 68/32 and per-input parity requirement has not been relaxed. Canonical 06 §89 and the existing mashos-api handoff record this specific approval boundary. Other status/grammar/quality defects remain scope-internal work, not additional approval boundaries. Product Read, candidate ready, adoption and production/merge effects remain false/0.
+
+The next decision is whether source-faithful removal of unsupported meaning may change availability, while preserving canonical inputs/order/axes/denominator and the existing strict body guard. No such exception is assumed. After that boundary is resolved, resume within the existing unit at bounded outer-predicate status alignment, shared state consumption, meaningful Human Reception language, unchanged-runner source identity, required regression, then frozen all100 full reread. Predecessor STOP/rollback stays historical; the current implementation is retained only as an unfinished disabled checkpoint.

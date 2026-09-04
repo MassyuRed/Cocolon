@@ -677,3 +677,5 @@ current read orderは本§15、canonical 02 §37、canonical 06 §88、final can
 ## Current authorized work — same-nucleus status alignment（2026-09-04）
 
 Mash approved `FRESH_MASH_LEVEL3_CMEE_STAGE1_SAME_NUCLEUS_STATUS_ALIGNMENT_WITH_LAYER1_PARITY_RELAXATION_20260904`. Current contract is 02 §38, current execution is 06 §89, and schema/identity remains in 05. Prior 02 §37 / 06 §88 is the closed rejected/rolled-back predecessor. Layer1 may change only for source-grounded status alignment and necessary language; both layers and all100 quality must be verified in the same unit. No Product Read readiness, adoption, merge or production is yet claimed.
+
+Current execution is `BLOCKED_AVAILABILITY_CONSTRAINT_UNFINISHED`: source-faithful removal of unsupported sensation changes the unchanged outer body verdict, conflicting with required per-input 68/32 parity. See canonical 06 §89 and the existing runtime handoff. The reliable all100 probe was read in full and was NOT_CLEAR; latest source verification and quality repair remain incomplete. No acceptance, Product Read readiness or production effect follows.

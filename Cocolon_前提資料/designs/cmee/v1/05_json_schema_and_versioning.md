@@ -2458,3 +2458,7 @@ clarificationはoriginal source lifecycle全体でexact1以下とし、authentic
 ## Same-nucleus temporal alignment boundary（2026-09-04）
 
 Canonical 02 §38 / 06 §89 authorize source-grounded correction of existing status/time/modality before selected meaning and projection identity derivation. Existing time-scope/attribute vocabulary is retained; no public/private response or GroundedSentencePlan schema bump is introduced. The §36 request-local expression/segment/placement contract remains private, excluded from Gate forward inputs, public response, diagnostic and durable body-free metadata. Updated frames, graphs, meaning and projections must be freshly derived together; mixed old/new sealed identities are rejected.
+
+The existing V2 candidate required-qualifier field now carries source-owned aspect, with matching original/rebuilt meaning compatibility and role-bound causal validation. SourceQualifierBinding retains exactly polarity/modality/time; V1 and existing aspect/episodicity vocabularies stay unchanged. This is re-derivation from source, not mutation of a sealed meaning. An aspect-only NORMAL trace must exactly cover the aspect values of its existing bound configuration components; missing/foreign/unsupported aspect is rejected.
+
+Current validation is incomplete under the availability constraint recorded in canonical 06 §89. No schema or Gate relaxation is used to preserve counts, and no body-independent availability hold or second rendering route is introduced.
