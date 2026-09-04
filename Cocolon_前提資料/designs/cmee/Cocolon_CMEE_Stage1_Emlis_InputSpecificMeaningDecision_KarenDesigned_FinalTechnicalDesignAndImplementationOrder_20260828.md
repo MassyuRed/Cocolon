@@ -2794,3 +2794,29 @@ PRODUCT / TECHNICAL CREDIT = 0 / 0
 NEXT_EXACT_ACTION = FINAL_MOVE_TO_EXPRESSION_EXACT_JOIN_THEN_HUMAN_RECEPTION_SOLE_BODY_AUTHORING
 AUTOMATIC_PROGRESSION = false
 ```
+
+## 25. Work Stage 1 terminal disposition and fresh Mash owner decision（2026-09-04）
+
+本節はcurrent lifecycle、feasibility、product readinessについて§24よりfreshである。§24は採択済みdesign historyとして保持するが、§24.7のsuccess routeおよび§24.8のimplementation next actionはcurrentではない。
+
+canonical100 full-body確認で、Layer 1のprospective actionとLayer 2のperformed／nonfutureが同じaction nucleusを所有し、relation、supportまたはdownstream scopeへ分離できないことが確定した。evidence aggregateはcanonical 02 §37、constraint triangleとruntime restoration receiptはcanonical 06 §88をsole detail ownerとする。
+
+```text
+CONFLICT_PRECEDENCE = §25 > §24
+CURRENT_ROUTE = SCOPE_TERMINAL_STOP
+CURRENT_PRODUCT_OWNER_ADOPTION_STATE = IMPLEMENTED_NOT_ACCEPTED
+CANDIDATE_RETAINED = false
+CANDIDATE_READY = false
+MASH_ROUND0_PRODUCT_READ_READY = false
+PRODUCT / TECHNICAL CREDIT = 0 / 0
+PUBLIC PRODUCT ROUTE / API / DB / SUPABASE / RN / PERSISTENCE / PRODUCTION / CUTOVER / MERGE EFFECT = 0
+NEXT_REQUIRED_ACTION = FRESH_MASH_DECISION_EXACT1
+AUTOMATIC_PROGRESSION = false
+```
+
+fresh Mash decisionは次のexact2からexact1を選ぶ。
+
+- `RELAX_LAYER1_BYTE_PARITY_AND_ALIGN_SAME_NUCLEUS_STATUS`
+- `PRESERVE_LAYER1_BYTE_PARITY_AND_AUTHORIZE_UPSTREAM_SPLIT_OWNER`
+
+前者はLayer 1 visible product conditionの変更を、後者はprospective contentとperformed actionを別nucleusへbindするupstream meaning／plan owner contractの変更を要する。fresh decisionがowner／product conditionを再承認するまで、runtime再実装、Human Reception／Gate局所修正、別method、問い、Layer 3、productionまたはmergeへ進まない。

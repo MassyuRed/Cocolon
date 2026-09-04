@@ -1711,3 +1711,24 @@ API / DB / SUPABASE / RN / PERSISTENCE / PRODUCTION / MERGE EFFECT = 0 / 0 / 0 /
 NEXT_EXACT_ACTION = IMPLEMENT_REQUEST_LOCAL_EXPRESSION_AFTER_FINAL_MOVE_REBUILD_AND_CONNECT_HUMAN_RECEPTION_AUTHORED_BODY
 AUTOMATIC_PROGRESSION = false
 ```
+
+## 37. Cross-layer action-status owner conflict terminal（2026-09-04）
+
+本節はcurrent feasibilityとnext actionについて§36.6–§36.7よりfreshである。§36 contractはdesign historyとして保持するが、そのsuccess routeおよびruntime実装next actionは未達で終了した。
+
+canonical100の20 outputで、Layer 1はprospective action、Layer 2はperformed／nonfutureとして同じaction nucleusへexact bindされる。Layer 2のsource-grounded morphology内訳はpositive past 19、progressive 1である。plan binding、nucleus、target realizationおよびrelation semanticsの独立照合により、Layer 1が別のsupport、downstream actionまたはepistemic contentを所有するscope escapeは成立しない。
+
+Layer 1 classifierとそのvisible bytesは本試行より前から存在し、current Layer 2 status補正が潜在していたcross-layer contradictionを可視化した。direct runner、Gateまたはinverseのmachine GREENはcanonical100 full-body CLEARを代替しない。Human Reception／Gate内の局所分類変更、parallel ownerまたはfallbackではowner conflictを解消できない。
+
+```text
+CURRENT_CONTRACT_RESULT = SCOPE_TERMINAL_STOP
+CURRENT_PRODUCT_OWNER_ADOPTION_STATE = IMPLEMENTED_NOT_ACCEPTED
+CANDIDATE_RETAINED = false
+CANDIDATE_READY = false
+MASH_ROUND0_PRODUCT_READ_READY = false
+PRODUCT / TECHNICAL CREDIT = 0 / 0
+NEXT_REQUIRED_ACTION = FRESH_MASH_DECISION_EXACT1
+AUTOMATIC_PROGRESSION = false
+```
+
+再開には、Layer 1 byte parityを緩和してsame-nucleus statusを統一するか、Layer 1 parityを保持してupstream meaning／plan contractでprospective ownerとperformed ownerを明示的に分割するかについて、fresh Mash decision exact1を要する。決定まではnew runtime implementationを承認しない。

@@ -649,3 +649,26 @@ PUBLIC PRODUCT ROUTE / API / DB / SUPABASE / RN / PERSISTENCE / PRODUCTION / MER
 NEXT_EXACT_ACTION = IMPLEMENT_FINAL_MOVE_TO_EXPRESSION_TO_HUMAN_RECEPTION_BODY
 AUTOMATIC_PROGRESSION = false
 ```
+
+## 15. Realizable Reception expression Work Stage 1 scope terminal STOP（2026-09-04）
+
+本節はcurrent lifecycle、state、next actionについて§14よりfreshである。§14は採択時のplanned routeとして履歴保持するが、runtime実装をnext actionとする記載はcurrentではない。
+
+canonical100のfull-body確認により、Layer 1のprospective-action判定とLayer 2のperformed／nonfuture判定が同じaction nucleusを所有するcross-layer conflictが確定した。詳細なevidence ownerはcanonical 02 §37、execution dispositionはcanonical 06 §88、final precedenceはfinal canonical §25とする。
+
+```text
+CURRENT_WORK_STAGE1 = SCOPE_TERMINAL_STOP
+CURRENT_PRODUCT_OWNER_ADOPTION_STATE = IMPLEMENTED_NOT_ACCEPTED
+CANDIDATE_RETAINED = false
+CANDIDATE_READY = false
+MASH_ROUND0_PRODUCT_READ_READY = false
+PRIVATE_BODY_PUBLICATION = 0
+PRODUCT / TECHNICAL CREDIT = 0 / 0
+PUBLIC PRODUCT ROUTE / API / DB / SUPABASE / RN / PERSISTENCE / PRODUCTION / MERGE EFFECT = 0
+NEXT_REQUIRED_ACTION = FRESH_MASH_DECISION_EXACT1
+AUTOMATIC_PROGRESSION = false
+```
+
+fresh Mash decisionは、Layer 1 visible byte parityを緩和してsame-nucleus statusを整合させるか、Layer 1 parityを維持してprospective contentとperformed actionを別nucleusへbindするupstream split ownerを承認するかのexact1である。決定前にHuman Reception、Gate、別helper、renameまたは局所規則で再試行しない。
+
+current read orderは本§15、canonical 02 §37、canonical 06 §88、final canonical §25とする。
