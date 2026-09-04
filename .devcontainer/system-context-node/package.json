@@ -1,0 +1,15 @@
+{
+  "name": "cocolon-system-context-toolchain",
+  "version": "1.0.0",
+  "private": true,
+  "engines": {
+    "node": "20.20.2",
+    "npm": "10.8.2"
+  },
+  "packageManager": "npm@10.8.2",
+  "dependencies": {
+    "@sourcegraph/scip-python": "0.6.6",
+    "@sourcegraph/scip-typescript": "0.4.0",
+    "typescript": "5.2.2"
+  }
+}
