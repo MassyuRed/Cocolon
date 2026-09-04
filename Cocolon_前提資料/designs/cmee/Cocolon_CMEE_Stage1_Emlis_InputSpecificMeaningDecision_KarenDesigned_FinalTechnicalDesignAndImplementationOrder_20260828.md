@@ -2727,7 +2727,7 @@ expressionはrequest-local、Emlis-private、providerless、deterministicであ�
 
 selected final plan Move集合とexpression集合はexact-coverし、その中のrequired Move全数を覆う。plan-owned optional Moveが存在する間はexpression exact1を持ち、許可済みrecoveryでMove自体が除外されるときだけ同時に除外する。missing、duplicate、foreign／unused、argument／morphology／reference／trace gapはnamed failureへfail closedする。成功recordへnullable failureを混ぜない。
 
-Human Receptionは同一realization passでcomplete private binding payloadから導出したbinding ref exact1、Human Reception-local scalar range、segment hash、expression refs、Move refs、ClauseFrame、SurfaceDerivationを持つ`ReceptionVisibleSegmentBindingV1`を発行する。Sentence Surfaceはそと別のnonserialized request-local placement tupleにbinding ref、line-local／body-global rangeを記録し、placementからHuman Reception bindingへexact1でjoinする。各expressionはsegmentへexact1以上到達する。一つの自然なsegmentが複数expression／Moveを担うmany-to-oneは許可する。
+Human Receptionは同一realization passでcomplete private binding payloadから導出したbinding ref exact1、Human Reception-local scalar range、segment hash、expression refs、Move refs、ClauseFrame、SurfaceDerivationを持つ`ReceptionVisibleSegmentBindingV1`を発行する。各argumentはrequired／optionalと別にomission permission、zero realization condition refs、omission condition refsをidentity-bearing payloadへ保持し、選択されたrealizationが`EXPLICIT`であっても許可された代替条件を失わず、条件不成立の`ZERO`／`OMITTED`を拒否する。Sentence Surfaceはそれと別のnonserialized request-local placement tupleにbinding ref、line-local／body-global rangeを記録し、placementからHuman Reception bindingへexact1でjoinする。各expressionはsegmentへexact1以上到達する。一つの自然なsegmentが複数expression／Moveを担うmany-to-oneは許可する。
 
 ### 24.4 current asset disposition
 
@@ -2753,9 +2753,9 @@ source clauseがpredicate、arguments、degree、relationを欠けなく保持�
 
 ### 24.6 exclusive owners and active-path boundary
 
-Human ReceptionだけがLayer 2 semantic clauseとvisible segmentをauthorする。Sentence Surfaceはpreauthored surfaceの配置、結合、句読点、文境界、body parserだけを行い、generic follow、generic empathy、fixed close、Move actからのsemantic content、second Layer 2 bodyを作らない。Human Reception-local rangeはLayer 2 unit textのsemantic bindingとして保持する。Sentence Surfaceは別のrequest-local placement tupleでbinding ref、line-local／body-global rangeを分離し、actual prefix／separator／line startのscalar数だけ加えてremapし、両slice hashを検証する。adapterはHuman Reception-local rangeをunit bindingへ使い、placementのbinding ref／body rangeと一致検証し、whole-line bindingを作らない。final pathでpreauthored Human Reception surfaceが無ければfallbackせず停止する。
+Human ReceptionだけがLayer 2 semantic clauseとvisible segmentをauthorする。Sentence Surfaceはpreauthored surfaceの配置、結合、句読点、文境界、body parserだけを行い、generic follow、generic empathy、fixed close、Move actからのsemantic content、second Layer 2 bodyを作らない。Human Reception-local rangeはHuman Reception-authored source surfaceの検証に使う。Sentence Surfaceは別のrequest-local placement tupleでbinding ref、line-local／body-global rangeを分離し、actual prefix／separator／line startのscalar数だけ加えてremapし、Human Reception-local／final line-local／body-globalの三coordinateのslice hashを検証する。adapterはplacementのfinal line-local rangeをunit bindingへ使い、Human Reception-local rangeはsource surface、body-global rangeは完成bodyとの一致検証にのみ用い、whole-line bindingを作らない。final pathでpreauthored Human Reception surfaceが無ければfallbackせず停止する。
 
-compilerのsecond reconstructionとrecoveryは、final Move keyとsame expressionをdeterministically再構築する。expression発行後のmeaning-bearing Move late mutationは禁止する。expression／binding／preauthored surfaceのcarrierはSentence Surfaceの配置結果とadapterで終了し、Gateとbody-only inverseは完成本文だけから独立検証する。forward metadataを正解またはverification oracleにせず、現行の責任／判定項目／閾値を変更しない。
+各recovery candidateはactive Move集合、effective reference mode、argument realizationをexpression発行前に確定し、candidate固有のcomplete payloadからexpression identityをderiveする。同一candidateのsecond compiler validationは同じfinal Move keyとexpression identityを再現し、Human Receptionのplan-only replayは同じsurfaceを再現する。optional Move除外またはEXPLICIT／ZERO／OMITTED変更時はcandidate単位でMove集合とidentityを再deriveし、発行済みexpressionへのlate mutationと別candidate sidecarの混在を禁止する。Human Reception forward入口は`realize_source_grounded_human_reception(...) -> GroundedHumanReceptionSurface`、Sentence Surface入口は`realize_grounded_sentence_plan_with_human_reception(..., human_reception_surface=...) -> (GroundedSurfaceResult, tuple[SentenceSurfacePlacement, ...])`とし、compiler candidate tupleがadapterへsurface／binding／placementを同時に渡す。adapter検証後にそのcarrierを破棄し、Gateとbody-only inverseへ渡さない。Gateの現行`realize_grounded_human_follow_text(...)`はHuman Receptionの`replay_source_grounded_human_reception_from_plan(...)`と同一final authorを通じてactual completed-body lineを独立再現／exact比較する。projection-only値を可視化しplan-only replayで再現できない場合はnamed failureで停止する。forward metadataを正解またはverification oracleにせず、現行Gate／body-only inverseの責任／判定項目／閾値を変更しない。
 
 shared Human Reception／Sentence Surfaceのpublic base routeは不変とし、新挙動をcurrent final Stage 1 grounded projection versionへ限定する。disabled CMEE candidateを`emlis_ai_reply_service.py`、core registry、APIまたはproductionへ接続しない。
 
@@ -2780,9 +2780,15 @@ providerless current routeでlossless realization不能、permission外effect、
 
 ```text
 CHECKPOINT_ID = CMEE_REALIZABLE_RECEPTION_EXPRESSION_PHASE1_CANONICAL_20260904_V1
+AUTHORITY = FRESH_MASH_LEVEL3_CMEE_WORK_STAGE1_REALIZABLE_RECEPTION_EXPRESSION_CANONICAL_INTEGRATION_AND_HUMAN_RECEPTION_BODY_CLOSURE_20260904
 PARENT_COCOLON_HEAD = 97b25c146ad41f87d5859e450e48face9de65ea0
+PHASE = 1_CANONICAL_INTEGRATION
 STATE = DESIGNED_NOT_IMPLEMENTED
+COMPLETED = RULES_READ_FRESH_ADMISSION_FIT_GAP_OWNER_CONTRACT
+NOT_COMPLETED = RUNTIME_SOURCE_TEST_BODY_PRESCREEN_SYSTEM_CONTEXT_FINAL_REFS
 CHANGED_PATHS = EXISTING_CANONICAL_EXACT4
+TESTS_RUN = GIT_DIFF_CHECK_AND_AGGREGATE_DESIGN_REVIEW
+TESTS_NOT_RUN = RUNTIME_SOURCE_TESTS_CANONICAL100_BODY_PRESCREEN
 PRIVATE_BODY_PUBLICATION = 0
 PRODUCT / TECHNICAL CREDIT = 0 / 0
 NEXT_EXACT_ACTION = FINAL_MOVE_TO_EXPRESSION_EXACT_JOIN_THEN_HUMAN_RECEPTION_SOLE_BODY_AUTHORING

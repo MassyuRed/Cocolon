@@ -6291,15 +6291,19 @@ Cocolon_前提資料/designs/cmee/Cocolon_CMEE_Stage1_Emlis_InputSpecificMeaning
 実装順は固定する。
 
 1. `compile_stage1_response()`のlate `_cmee_semantic_reception_plan()`でselected final plan Moveのidentity／duty domainをread-only exact-cover keyとして確定する。このkeyはexpressionの意味内容を決めない。
-2. NORMALはselected meaningとMove-function-matched MeaningBoundReceptionProposition exact1（Set refはprovenance only）、LIMITEDはbounded outcomeとBoundedLimitedReception exact1のbranch-specific one-of、semantic projection、visible traceからrequest-local private expression v1の内容をdeterministically構築し、読み取り済みMove keyへexact1でbindする。正規の因果順はmeaning outcome→expression→Move consumeである。
-3. Human ReceptionがexpressionからLayer 2 semantic segmentとsegment bindingを同一passで作る。
-4. Sentence Surfaceはpreauthored Human Reception surfaceを配置し、句読点・文境界だけを所有する。
-5. recoveryおよびGate前のsecond compiler validationでもHuman Receptionが同じdeterministic expression／surfaceを再構築し、identityを保持する。Human Reception-local rangeはLayer 2 unit textのsemantic bindingに使い、Sentence Surfaceは別のrequest-local placement tupleでline-local rangeとbody-global rangeを分離し、実際のprefix／separator／line start分だけremapして両slice hash一致を検証する。
-6. expression／visible binding／preauthored surfaceのcarrierをSentence Surfaceの配置結果とadapterで終了し、Gateとbody-only inverseへは完成本文だけを渡す。forward metadataをverification oracleにせず、existing final-body-only inverse、independent Gate、public mappingの責任／判定項目／閾値を変更せず通す。
+2. 各recovery candidateについてactive Move集合、effective reference mode、argument realizationをexpression発行前に確定する。そのcandidate内で、NORMALはselected meaningとMove-function-matched MeaningBoundReceptionProposition exact1（Set refはprovenance only）、LIMITEDはbounded outcomeとBoundedLimitedReception exact1のbranch-specific one-of、semantic projection、visible traceからrequest-local private expression v1の内容をdeterministically構築し、読み取り済みMove keyへexact1でbindする。candidate固有のcomplete payloadからexpression identityをderiveし、optional Move除外またはEXPLICIT／ZERO／OMITTED変更時はMove集合とidentityをcandidate単位で再deriveする。正規の因果順はmeaning outcome→expression→Move consumeである。
+3. Human Receptionの`realize_source_grounded_human_reception(...)`がexpressionからLayer 2 semantic segmentとsegment bindingを同一passで作る。各argumentの`omission_permission`、`zero_realization_condition_refs`、`omission_condition_refs`を含むcomplete payloadからidentityを作り、選択realizationとpermitted alternativeを分離したうえで`ZERO`／`OMITTED`の条件が成立しない場合はnamed failureで停止する。
+4. Sentence Surfaceの`realize_grounded_sentence_plan_with_human_reception(..., human_reception_surface=...)`はpreauthored Human Reception surfaceをrequired request-local argumentとして配置し、`(GroundedSurfaceResult, tuple[SentenceSurfacePlacement, ...])`をcompilerのcandidate tupleへ返す。句読点・文境界だけを所有する。
+5. 同一candidateのsecond compiler validationは同じidentityを再現し、Human Receptionのplan-only replayは同じsurfaceを再現する。発行済みexpressionへのlate mutationと別candidateのsidecar混在を禁止する。Human Reception-local rangeはHuman Reception-authored source surfaceの検証に使い、Sentence Surfaceは別のrequest-local placement tupleでline-local rangeとbody-global rangeを分離し、実際のprefix／separator／line start分だけremapして三coordinateのslice hash一致を検証する。Layer 2 unit textのsemantic bindingにはplacementのline-local rangeだけを使う。
+6. expression／visible binding／preauthored surfaceのcarrierをSentence Surfaceの配置結果とadapterで終了し、新規carrierからGate／body-only inverseへ渡すのは完成本文だけとする。Gate／body-only inverseが受ける既存plan／sentence plan／resolverは新規carrierではない。forward metadataをverification oracleにせず、existing final-body-only inverse、independent Gate、public mappingの責任／判定項目／閾値を変更せず通す。
+
+`FINAL_SENTENCE_SURFACE_ENTRYPOINT = realize_grounded_sentence_plan_with_human_reception`、`FINAL_ADAPTER = _adapt_grounded_surface_to_v2_realized_units`、`BASE_REALIZER_SIGNATURE_OR_RETURN_CHANGE = 0`とする。request-local candidateはHuman Reception surfaceとplacementsをsurface resultと同じrecovery candidate tupleで保持し、adapter完了時に破棄する。
+
+Gateが現行`realize_grounded_human_follow_text(line, plan, resolver)`を呼ぶfinal branchは、Human Receptionの`replay_source_grounded_human_reception_from_plan(...)`へdelegateする。forwardとreplayはHuman Reception内の同一final authorを使い、replayはcompleted plan／Move／nucleus／resolverだけからsurface-affecting realization objectを再構成する。再現不能なprojection-only valueで本文が変わる場合はnamed failureで停止し、second rendererやforward metadata oracleに逃げない。GateはHuman Reception-owned replayとactual completed-body lineをexisting exact comparisonし、Gate source自体の責任／signature／thresholdは変更しない。
 
 shared Human Reception／Sentence Surfaceはpublic base pathでも使われるため、新behaviorはcurrent final Stage 1 grounded projection versionへ限定する。public registry、`emlis_ai_reply_service.py`、API、DB、Supabase、RN、persistenceへ接続しない。
 
-既存public／private response schemaはversion／bytesとも据え置く。expressionはrequest-local function argumentとreturn valueだけでHuman Receptionへ渡し、Human Reception-authored surfaceとvisible bindingはSentence Surfaceからcompiler／adapterへだけ返す。`GroundedSentencePlan`は`rr4.v2`のままとし、expression、surface、bindingのfieldを追加せず、private schema bumpを行わない。body-free metadata、GitHub、handoff、checkpoint、diagnostic、log、public responseへsource refs、lexical material、visible scalar locator、segment hash、case別情報を出さない。expression linkageはidentity preimageに含まれるexisting private `ClauseFrame`／`RealizedSemanticBinding.clause_slot`へversion-qualified、collision-freeなrefとして封印し、`Stage1V2UnitSeal`だけに置いてidentityを主張しない。adapterはHuman Reception-local rangeをLayer 2 unit textのsemantic bindingへ移し、別のrequest-local placement tupleのline-local／body-global rangeとhashに一致することを検証し、whole-line bindingを廃止する。
+既存public／private response schemaはversion／bytesとも据え置く。expressionはrequest-local function argumentとreturn valueだけでHuman Receptionへ渡し、Human Reception-authored surfaceとvisible bindingはSentence Surfaceからcompiler／adapterへだけ返す。`GroundedSentencePlan`は`rr4.v2`のままとし、expression、surface、bindingのfieldを追加せず、private schema bumpを行わない。body-free metadata、GitHub、handoff、checkpoint、diagnostic、log、public responseへsource refs、lexical material、visible scalar locator、segment hash、case別情報を出さない。adapterは各Human Reception bindingの`expression_refs`と`binding_ref`をidentity-bearing `ClauseFrame.qualifier_refs`／`RealizedSemanticBinding.clause_slot`へexact1で封印し、`semantic_ref`は従来どおりreachable source semantic ref、surface range／hashはplacementのfinal line-local exact rangeとする。Human Reception-local rangeはsource surface、body-global rangeは完成bodyとの一致検証にのみ用いる。`Stage1V2UnitSeal`だけに置いてidentityを主張せず、whole-line bindingを作らない。
 
 final Moveのidentity／duty keyをexpression projectorより先に読むのは、exact-cover先を固定するexecution sequencingであり、expression contentの因果入力にしない。causal directionは`NORMAL selected meaning + MeaningBoundReception OR LIMITED outcome + BoundedLimitedReception -> expression exact1 -> existing Move consumes expression`である。Move identityはexpressionへ結合するread-only keyだけであり、Moveからmeaning／expression contentへのreselection／semantic backflowは0である。
 
@@ -6321,9 +6325,9 @@ required locked runtimeがmaterializeされないWork runtimeではformal pytest
 
 ### 87.5 Phase 4 — private body pre-screen
 
-canonical100のactual Layer 1／2本文を華恋がbody-full private boundary内で全件読む。入力、本文、lexical source spanをGitHub、handoff、diagnostic、checkpointへ出さない。次のどれかが一件でも残る場合はProduct Read readyとしない。
+canonical100のcandidate setを一度freezeし、その同一setのactual Layer 1／2本文を華恋がbody-full private boundary内で全件読む。読了前のcandidate差替えと部分再読は0とする。入力、本文、lexical source spanをGitHub、handoff、diagnostic、checkpointへ出さない。次のどれかが一件でも残る場合はProduct Read readyとしない。
 
-- source replay／quote、意味label置換、generic empathy、fixed close、少数template。
+- source replay／quote、意味label置換、近い言い換え、説明過多、generic empathy、generic follow、fixed close、意味のない補助文、少数template。
 - selected relation、predicate、argument、negation、wish、time、degree、scopeの脱落。
 - Layer 1／2の同義反復、Layer 1の過剰化、Layer 2の不足。
 - 不自然な助詞、活用、名詞化、節接続、anaphora、文境界。
