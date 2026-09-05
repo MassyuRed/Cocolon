@@ -2470,3 +2470,6 @@ The resumed source-grounded grammar uses the existing private expression nominal
 
 
 The internal clause-core time owner may be the already visible target referent; this is private grammatical ownership, not a time-scope value or serialized field. A negative finite-carrier nominalization operation in the existing tuple records reversible morphology and modifier/separator attachment. Expression identity and plan-only replay must derive the identical operation from the same source profiles; changed negation in a completed body is rejected. Public/V1 schema and Gate inputs remain unchanged. Current full100 root review is NOT_CLEAR, with final verification pending.
+
+
+Current source-owned uncertain wish modality and the existing finite/progressive/future state are re-derived before identity sealing; no new semantic time/modality vocabulary is added. The selected subjective-content replay gap in 02 §38 would require an explicit adjustment to the existing trusted replay input contract. That adjustment is proposed only: no hidden appraisal payload is inserted in source attributes, stance strings or grammar tuples, and no new plan/sentence-plan field or Gate oracle has been added. Root fixed100 review is NOT_CLEAR; completion/readiness remain false.
