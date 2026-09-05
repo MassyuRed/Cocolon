@@ -7,7 +7,7 @@ effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
 implementation_effect: 0
 stage1_v2_product_read_state: "HISTORICAL_PREDECESSOR_FAIL_RETAINED"
-stage1_additional_correction_design_state: "CURRENT_PRODUCT_OWNER_NON_PASS / SELECTED_SUBJECTIVE_RECEPTION_INPUT_IMPLEMENTED_VERIFICATION_PENDING"
+stage1_additional_correction_design_state: "CURRENT_PRODUCT_OWNER_NON_PASS / SELECTED_SUBJECTIVE_RECEPTION_INPUT_VERIFIED_PRODUCT_NOT_CLEAR"
 cycle001_effect: 0
 stage1_language_route: "ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER_ONLY"
 external_generative_ai_allowed: false
@@ -28,7 +28,7 @@ EmlisAIの安定した商品目的、production経路、NLS v3／Cycle001 WIP、
 
 このmapは、その区別と読取順をcurrent ownerとして固定する。
 
-2026-09-05のcurrent correctionは、candidate11の同じ100件全文NOT_CLEARを継承し、上流の選択済みNORMAL／LIMITED受け取り判断を唯一のHuman Reception forward／replayへ渡すrequest-local入力契約の明示承認後の接続を実装し、focused契約・本文逆検証58/58 PASS、最終same100・関連回帰・全文確認待ちの段階である。現在の正本は[02 §36.3／§36.5／§38](../designs/cmee/v1/02_emlis_v1a_detailed_design.md)、[06 §89](../designs/cmee/v1/06_implementation_order_migration_and_verification.md)と既存mashos-api handoff末尾である。直接100/100、Move／expression／binding124、outer73/27、latest177/7は変更前の保存証拠であり、新入力実装後の合格証拠ではない。保存入力→応答→保存→RN表示のproduction経路、国家システム、Piece／Analysis境界は変更しない。商品状態はIMPLEMENTED_NOT_ACCEPTED、candidate ready=falseを維持する。
+2026-09-05のcurrent correctionは、candidate11の同じ100件全文NOT_CLEARを継承し、上流の選択済みNORMAL／LIMITED受け取り判断を唯一のHuman Reception forward／replayへ渡すrequest-local入力契約の明示承認後の接続を実装し、focused契約・本文逆検証58/58 PASS、新same100は100/124/73-27、最新関連集計180/7、華恋全文確認NOT_CLEARの段階である。現在の正本は[02 §36.3／§36.5／§38](../designs/cmee/v1/02_emlis_v1a_detailed_design.md)、[06 §89](../designs/cmee/v1/06_implementation_order_migration_and_verification.md)と既存mashos-api handoff末尾である。直接100/100、Move／expression／binding124、outer73/27、latest177/7は変更前の保存証拠であり、新入力実装後の合格証拠ではない。保存入力→応答→保存→RN表示のproduction経路、国家システム、Piece／Analysis境界は変更しない。商品状態はIMPLEMENTED_NOT_ACCEPTED、candidate ready=falseを維持する。
 
 ## 1. 商品目的
 

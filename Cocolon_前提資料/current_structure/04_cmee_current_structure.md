@@ -6,7 +6,7 @@ document_role: "CMEE_CURRENT_STRUCTURE_AND_PRODUCT_QUALITY_ROUTE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
 design_state: "MASH_APPROVED_ROUTE_A_TYPED_CASE_FRAME_V2_FINAL_DESIGN_WITH_SESSION_SAFE_ORDER"
-detailed_design_state: "CURRENT_PRODUCT_OWNER_NON_PASS / SELECTED_SUBJECTIVE_RECEPTION_INPUT_IMPLEMENTED_VERIFICATION_PENDING"
+detailed_design_state: "CURRENT_PRODUCT_OWNER_NON_PASS / SELECTED_SUBJECTIVE_RECEPTION_INPUT_VERIFIED_PRODUCT_NOT_CLEAR"
 stage1_language_route: "ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER_ONLY"
 external_generative_ai_allowed: false
 external_body_send: 0
@@ -56,7 +56,7 @@ Current state:
     Analysis not connected
     automatic progression false
 
-Current correction status: candidate11 is direct100/100, required Move/expression/binding124, outer73/27, latest combined per-test regression177/7 and root same100 NOT_CLEAR. The selected subjective reception request-local input contract was explicitly approved on 2026-09-05; the connection is implemented, focused contract/body-inverse tests are 58/58 PASS, and final same100/regressions/full rereading remain pending at this save. The current authority and exact next work are [canonical 02 §38](../designs/cmee/v1/02_emlis_v1a_detailed_design.md) and [canonical 06 §89](../designs/cmee/v1/06_implementation_order_migration_and_verification.md), together with the existing runtime handoff. This display update changes no owner, public/production route or product acceptance. Historical implementation sections below retain their dated results.
+Current correction status: candidate11 is direct100/100, required Move/expression/binding124, outer73/27, latest combined per-test regression177/7 and root same100 NOT_CLEAR. The selected subjective reception request-local input contract was explicitly approved on 2026-09-05; the connection is implemented, focused tests are 58/58 PASS, and the new fixed same100 is 100/124/73-27 with Karen full read NOT_CLEAR. Latest required-test aggregate is180 PASS/7 inherited FAIL after complete execution plus targeted rerun; this is not an all-green run. The current authority and exact next work are [canonical 02 §38](../designs/cmee/v1/02_emlis_v1a_detailed_design.md) and [canonical 06 §89](../designs/cmee/v1/06_implementation_order_migration_and_verification.md), together with the existing runtime handoff. This display update changes no owner, public/production route or product acceptance. Historical implementation sections below retain their dated results.
 
 Current implementation rule owner:
 
