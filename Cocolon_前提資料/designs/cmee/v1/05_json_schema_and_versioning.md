@@ -2464,3 +2464,6 @@ The existing V2 candidate required-qualifier field now carries source-owned aspe
 Current validation is incomplete under the availability constraint recorded in canonical 06 §89. No schema or Gate relaxation is used to preserve counts, and no body-independent availability hold or second rendering route is introduced.
 
 Mash subsequently approved the source-fidelity availability exception in canonical 06 §89. This changes an acceptance condition only; it adds no schema vocabulary, Gate input, relaxed threshold or body-independent admission condition.
+
+
+The resumed source-grounded grammar uses the existing private expression nominalization-plan tuple and existing Human Reception internal clause core. Any bounded case/head/carrier description is identity-bearing private grammar, derived before expression emission and re-derived exactly by plan-only replay. It creates no public schema, transport carrier, semantic taxonomy, Reception act, Move family or downstream metadata oracle. Actual source/slot/edge preservation and the unchanged strict body checks are required; implementation and final validation remain pending.
