@@ -2462,3 +2462,5 @@ Canonical 02 §38 / 06 §89 authorize source-grounded correction of existing sta
 The existing V2 candidate required-qualifier field now carries source-owned aspect, with matching original/rebuilt meaning compatibility and role-bound causal validation. SourceQualifierBinding retains exactly polarity/modality/time; V1 and existing aspect/episodicity vocabularies stay unchanged. This is re-derivation from source, not mutation of a sealed meaning. An aspect-only NORMAL trace must exactly cover the aspect values of its existing bound configuration components; missing/foreign/unsupported aspect is rejected.
 
 Current validation is incomplete under the availability constraint recorded in canonical 06 §89. No schema or Gate relaxation is used to preserve counts, and no body-independent availability hold or second rendering route is introduced.
+
+Mash subsequently approved the source-fidelity availability exception in canonical 06 §89. This changes an acceptance condition only; it adds no schema vocabulary, Gate input, relaxed threshold or body-independent admission condition.

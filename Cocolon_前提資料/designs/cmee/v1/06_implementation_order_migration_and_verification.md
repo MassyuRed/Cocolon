@@ -6318,7 +6318,7 @@ final Moveのidentity／duty keyをexpression projectorより先に読むのは�
 - same-act／different-meaning contrast、multi-Move many-to-one、anaphora antecedent、zero／omission、negation、wish、time、degree、scope。
 - source／unknown／safety／LIMITED／question budget／composition validation-only／body-only inverseの回帰なし。
 - focused active route、owner inheritance、exact8 inheritance、RR3–RR8 baseline parity。
-- canonical100 direct `100/100`、required Move `124/124`、outer `GENERATED 68 / unavailable 32`、各caseのavailability classification不変。
+- canonical100 direct `100/100`、required Move `124/124`。outerの基準68/32・各入力のavailabilityは、§89のMash承認済みsource-fidelity例外に限り改善方向の変更を許可する。
 - static registry／import checksでlegacy、parallel owner、public-path wiringが0。
 
 required locked runtimeがmaterializeされないWork runtimeではformal pytestを別interpreterやsilently installed dependencyへfallbackしない。利用可能なexact interpreterでcompile、direct runner、stdlib-compatible testを実行し、formal未実行を明記する。既存known baseline failureをfixture変更やdenominator縮小でGREEN化しない。
@@ -6341,7 +6341,7 @@ defectがあれば同じcurrent product-causal unit内でPhase 2のowner source�
 
 1. same public-safe facade／inputのactual before／afterでLayer 1の差分が原入力に基づく同一nucleusの状態整合と必要な文章修正だけであり、Layer 2にtarget、predicate、supportまたはrelationのsemantic deltaが非0である。punctuation、語尾、長文化だけの差ではない。原設計のLayer 1完全byte parityは§89のfresh Mash authorityによりこの範囲だけ置換する。
 2. actual final Layer 2までHuman Reception sole author exact1、Sentence Surface semantic content author 0で到達する。
-3. expression→required Move `124/124`とexpression→actual segment bindingが閉じ、canonical100 direct `100/100`、outer `GENERATED 68 / unavailable 32`および各caseのavailability classificationが不変である。
+3. expression→required Move `124/124`とexpression→actual segment bindingが閉じ、canonical100 direct `100/100`を維持する。outerの基準68/32と各caseのavailabilityは、§89の承認済みsource-fidelity例外以外で変化していない。
 4. relevant regressionはGREENまたは事前記録済みbaseline parity、old composer／legacy route active call 0、source／unknown／safety／LIMITED／Gate／body inverse／public mapping非回帰である。
 5. private body、locator、digest、case別情報、expression／source refsのGitHub／handoff／diagnostic／log／public response leakageが0である。
 6. canonical100全文のKaren private pre-screenがCLEARである。
@@ -6407,7 +6407,7 @@ next gateはfresh Mash decision exact1のみとする。選択肢は、Layer 1 v
 AUTHORITY = FRESH_MASH_LEVEL3_CMEE_STAGE1_SAME_NUCLEUS_STATUS_ALIGNMENT_WITH_LAYER1_PARITY_RELAXATION_20260904
 EXECUTION_OWNER = ULTRA_KAREN_SINGLE_OWNER
 EXECUTION_ENVIRONMENT = WORK_ULTRA_REQUIRED
-STATE = BLOCKED_AVAILABILITY_CONSTRAINT_UNFINISHED
+STATE = IN_PROGRESS_APPROVED_SOURCE_FIDELITY_EXCEPTION
 
 Fresh admission: Cocolon PR30 `c5eb8310df31f1d9d459761c5abdc77791c35790`; mashos-api PR3 `99e308effb629362a06c9d63429c77cb760da273`; System Context PR37 `8701513dafdb22c026dd87096d5ec731b2c9671f`. All are open Draft/unmerged. §88 is the predecessor terminal; it does not prohibit this newly authorized correction.
 
@@ -6421,12 +6421,20 @@ Execution sequence within one authorized unit:
 
 Allowed source files are the nine existing files explicitly listed in Mash's current authority; initial causal edits are Observation Plan, Human Reception, Sentence Surface, Stage1 response and Gate replay integration. Meaning/vertical/composition/contracts changes are conditional on status propagation or identity necessity only. Directly associated existing tests and runner identity updates are allowed; fixtures, acceptance axes, denominator and public route are not. No new design, authority, ledger, checker or handoff family is created.
 
-Success remains the all-of §87.6 with the bounded Layer1 replacement above and per-input availability parity added. Required tests must be executed, not silently skipped. Current `candidate_ready=false`, `MASH_ROUND0_PRODUCT_READ_READY=false`, `IMPLEMENTED_NOT_ACCEPTED`, and production/API/DB/Supabase/RN/persistence/merge effects 0. New external providers/dependencies, generic parser, ontology/Move family, owner split, privacy or Gate weakening require a different decision and are not silently introduced.
+Success remains the all-of §87.6 with the bounded Layer1 replacement and per-input availability parity subject only to the source-fidelity exception approved below. Required tests must be executed, not silently skipped. Current `candidate_ready=false`, `MASH_ROUND0_PRODUCT_READ_READY=false`, `IMPLEMENTED_NOT_ACCEPTED`, and production/API/DB/Supabase/RN/persistence/merge effects 0. New external providers/dependencies, generic parser, ontology/Move family, owner split, privacy or Gate weakening require a different decision and are not silently introduced.
 
-### Confirmed availability boundary and resume point
+### Historical pre-approval availability boundary and resume point
 
 Current execution checkpoint: `BLOCKED_AVAILABILITY_CONSTRAINT_UNFINISHED`. A reliable frozen probe reached direct 100/100 and required Move/expression/visible binding 124/124, but outer classification became 72/28 with four changes. Root read that probe's original/observation/follow for all100 and recorded NOT_CLEAR. Later source repairs require a fresh full generation and full reread; no final CLEAR or readiness is claimed.
 
 The unchanged completed-body compatibility check rejects unsupported negative sensation. Removing that unsupported meaning correctly removes the rejection. The four original inputs, observations and selected nuclei were unchanged; the final follow was the changed operand. Restoring legacy referent defaults did not restore the old classifications. Keeping the old classification would require an unfaithful body or a new admission rule/parallel route. The approved 68/32 and per-input parity requirement has not been relaxed. Canonical 06 §89 and the existing mashos-api handoff record this specific approval boundary. Other status/grammar/quality defects remain scope-internal work, not additional approval boundaries. Product Read, candidate ready, adoption and production/merge effects remain false/0.
 
 The next decision is whether source-faithful removal of unsupported meaning may change availability, while preserving canonical inputs/order/axes/denominator and the existing strict body guard. No such exception is assumed. After that boundary is resolved, resume within the existing unit at bounded outer-predicate status alignment, shared state consumption, meaningful Human Reception language, unchanged-runner source identity, required regression, then frozen all100 full reread. Predecessor STOP/rollback stays historical; the current implementation is retained only as an unfinished disabled checkpoint.
+
+### Mash-approved availability exception — execution resumed
+
+Mash approved the source-fidelity availability exception in the current session: an admitted UNAVAILABLE input may become GENERATED only because unsupported meaning was removed and the unchanged strict checks now pass. Every change needs causal source/body verification; unrelated classification changes and GENERATED-to-UNAVAILABLE regressions are not covered. The canonical100 inputs, order, evaluation axes and denominator stay fixed. Baseline 68/32 remains historical evidence, not a quota that requires defective wording. No Gate/threshold weakening, new admission hold or automatic product acceptance is authorized.
+
+The preceding availability-boundary record is the pre-approval finding, not an active execution prohibition. Continue the same authorized implementation and all100 verification unit; root full-body CLEAR and final readiness remain pending.
+
+The resumed status checkpoint explicitly carries final-projection context through existing Plan classification, reception rebuilding and validation. Its default is the unchanged legacy behavior; only the existing final projection enables the negative-action correction. The six focused status/aspect methods pass, including nonperformance and legacy-default preservation. This is an unfinished implementation checkpoint; final canonical generation, source identity, regressions and root full100 CLEAR remain required.
