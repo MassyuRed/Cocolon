@@ -1822,3 +1822,12 @@ Inherited status/grammar/source-fidelity corrections and the already approved UN
 ### Inherited regression source grammar continuation (2026-09-05)
 
 After the selected-reception contract save, the same unfinished verification work repairs shared source recognition: the existing self-worth-negation grammar accepts the additive particle under its unchanged identity dependency, and Observation Plan uses original field/validated span positions to distinguish a concessive time introduction from a change in the user’s state or a scheduled value. The source-context proof stays in the existing owner and also reaches final typed scalar projections; it is not a new meaning selector, Evidence or hidden attribute carrier. Shared active/legacy callers and their safety/public boundaries remain explicit. Strict Gate and historical expected hashes are unchanged. See the latest 06/handoff continuation for fresh execution results; candidate12 cannot certify later changed source. Product NOT_CLEAR and all readiness/merge prohibitions remain.
+
+
+### 2026-09-05 continuation — source time and unfinished wording
+
+同じ承認の継続修正。final Stage1の既存same-nucleus status alignerは、継続を希望する直接の肯定願望形を継続実行とみなさず、同じwishのtime_scopeをcurrent_inputへ戻す。引用・過去願望・reporting host・別の継続根拠はこの限定修正で書き換えない。source・actor・target・modality・relation・上流判断の担当は維持する。
+
+既存の後置指示語＋限定助詞の解析を同じObservation Plan owner内の関数にまとめ、Human Receptionも同じ有限述語を時制の根拠として確認する。元の限定句はsource／argument／本文に保持し、余分な期間表現を足さない。未完入力のellipsisはlexical whitespaceとして削除せず、同じsource argumentをforwardとreplayの両方に渡す。Gate／body-only parser／判定基準・閾値を変更せず、生成metadataを正解にしない。
+
+代表本文で原入力より強い継続・期間表現の除去とellipsis保持を確認した。既存generic Move41検査成功、追加の境界・完成本文の改変拒否3検査成功。最初の新規検査案2件は、短い入力で正しくanaphoricが選ばれて対象本文が出ないという検査入力の不一致で失敗した記録を残す。対象を実際に露出する既存canonical loader入力で確認し、歴史的期待値は変更していない。この時点で変更後の最終same100／必要回帰／華恋全文確認はこれから実行する。candidate13の結果を変更コードの合格証拠へ流用しない。
