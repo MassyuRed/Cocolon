@@ -23,7 +23,7 @@
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 - Stage 1 historical predecessor additional correction final body, not current: `ROUTE_A_ONLY / STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP / EARLY_ACTUAL_NOT_RUN`
 
-2026-09-05最新：行動予定を同じ選択済み意図の担当で受け止める継続修正を実装・検証した。固定sourceで同じ100件を直接生成、Move／expression／binding124、外側73/27。フォロー1件を改善、観測・可否・理由変更0。全198検査194成功／既存4失敗、新規失敗0。華恋が原入力全フィールド・観測・フォロー100件を全文確認しNOT_CLEAR。詳細と再開位置は02 §38、06末尾、既存runtime handoff末尾。長い復唱・定型の締め・上流対象と意味分類の問題が残り、9月12日商品確認準備は未成立。ready／採用／merge／本番／問い／Layer3は未成立。
+2026-09-05最新：肯定反応を根拠なく変化として受け取らない継続修正を実装・検証した。元入力の疑問符境界も確認する。固定sourceで同じ100件を直接生成、Move／expression／binding124、外側73/27。GENERATED側のフォロー3件を改善、観測・可否・理由・nuclei変更0、残97件は全保存項目同一。全201検査197成功／既存4失敗、新規失敗0。華恋が原入力全フィールド・観測・フォロー100件を全文確認しNOT_CLEAR。既存parserに感情marker、final Gateに同じ対象の必須義務を追加した。閾値・歴史的hash／PASS変更0。詳細と再開位置は02 §38、06末尾、既存runtime handoff末尾。長い復唱・同じ締め・対象と意味分類の残件により、9月12日商品確認準備、ready／採用／merge／本番／問い／Layer3は未成立。
 
 ---
 
@@ -1926,3 +1926,22 @@ parser／Gateにも限定した変更がある。既存body parserは本文だ�
 実際に完了した肯定変化については、既存final source alignerで同じ反応の原文範囲を確認する。既存positive lexiconの一致自体が有限の完了動詞で、引用・疑問・条件・後続hostの内側ではなく外側述語の末尾を占める場合だけ、既存operator:changeを保持・明示する。単なる肯定感情のstemはこの証明にならない。選択感情labelだけでは新しい反応判定を成立させない。先行代表7件／追加3検査の成功後、この実変化境界を補った。最終固定コードの回帰・同じ100件で再確認する。V1分類と受取義務は従来通りであり、共通parserのmarker診断だけには新語の検出が現れ得る。
 
 最初の固定コードで全201検査を実行したところ196成功／5失敗となり、既存4件に加えて疑問符を失ったsourceから変化を確定する新規失敗が1件発生した。Ledgerは原文末尾の疑問符をspanから除くため、span内だけの確認では不十分だった。既存normalized_inputを同じfinal alignerへ渡し、元fieldとstart/endの一致を確認したうえで終端の疑問記号列を調べる。欠損・不一致のsourceでは新しい変化証明を追加しない。Ledger／offset／既存action・wish分岐と検査期待は変更しない。この失敗と途中100件は非公開記録に保持し、修正後を新たに固定して全201検査・同じ100件・全文確認を行う。
+
+
+### 2026-09-05 continuation — 反応と変化の最終検証・全文確認（商品未成立）
+
+最終固定sourceはruntime remote `9766c4bceece120e7461cf7e8a2ba3cf88a11147`、local `d8f4c14ebbd6b30baea4dab69366692c8744cc35`、全体tree `6fc38702b2334bdf0fcdf9e59cb3f4912e1c855e`。対応する設計sourceはremote `9b81b46fd815b159609a1f196bd1c2d5a836266c`、local `a0bdd39f0cc2edc1251b14c9c8f3f5055c2328e3`、全体tree `2e93bdb733705c085ba714e85cd17102146c3c6f`。両repoのlocal／remote treeと変更ファイル全文の一致を確認した。この後の保存は結果・地図・handoffだけで、実装・テスト・runner bytesを変えない。
+
+同じcanonical入力の全フィールド・順序・評価軸・分母100でdirect100、必須Move／expression／binding各124、外側GENERATED73／UNAVAILABLE27。直前候補に対して観測・可否・外側理由・nucleiは全件同一、3件のGENERATEDフォローとselected-input identityが変わり、残97件は全保存項目同一。3件とも、肯定反応を根拠なく変化と呼ぶ不一致を、同じ選択対象の気持ちとして訂正した。全100の既存act・target・supportとoperation内訳material116／両側保持5／限定変化1／関係姿勢2は維持。未選択対象を本文から追加せず、GENERATED→UNAVAILABLE変更0。
+
+全201検査を固定sourceで通して実行し197成功／4失敗。元184は180成功／4失敗、直前までの追加14と今回追加3の計17は全成功。新規失敗0、未実行0。途中の全201では疑問符消失による新規1失敗があり、その失敗と途中100件は非公開記録として保持する。元field／start／endを検証して元の終端記号列を見る修正により、疑問・混在記号・空白を含む反例が成功した。疑問符のないspanだけでは新しい変化証明を作らない。既存テスト期待やLedgerの本文／offsetは書き換えない。
+
+既存4失敗は観測固定との不一致2、過去dated receiptと現コードの不一致1、旧経路の集合フォロー重複1。観測不一致には比較・意味分類の未解決問題が含まれ、古い期待値だけとして処理しない。後続36ケースとpost-hash96検査も全実行、96成功。unseen集合重複FAILを維持し、後続診断で元testの失敗を置換しない。歴史的hash／PASS／閾値変更0。
+
+今回parser／Gateは実際に変更した。本文だけを読む既存parserへ感情対象markerを加え、finalの同act・全target存在・全target typed feeling証明が揃う場合だけ、独立inverseにその対象義務を要求する。変化／言葉markerで代用できず、同じ完成本文replay・source・参照・context・why・Move coverを維持する。Planなしの新文法は不許可。mixed／不足target／base経路の受け取り義務は従来通り。新しい属性語彙・carrierは追加せず、実変化を原文が証明するときだけ既存operator:changeを明示し得る。今回100件のnuclei変更0と、一般に属性編集が一切ないという主張を混同しない。
+
+華恋自身が最終sourceの原入力全フィールド・観測・フォロー100件を全文で再読し、集合判定はNOT_CLEAR。3件の誤呼称は改善したが、長い行動節の復唱、同じ締め方、分類名だけの参照、感情・価値・関係より一つの行動評価へ偏る選択が残る。過去の発言／意図を現在の願いに寄せる分類、援助を受けた際の主体、問い・比較・複文の関係分類も未解決。局所的な参照改善を、商品全体の自然さや正式Product Read成功へ読み替えない。Mashへ未達本文の確認を求めない。
+
+System Contextはdoctor→prepare実行、18成功／16失敗、prepareは固定toolchain不一致で不成立。stale不使用、承認済み原典直読を継続。既存lock46依存の版／46 wheel hash／installed RECORD2277件を照合し不一致0。profile／基準ref／tracked current／lock変更0。全体設計・全ファイル地図・国家システム・保存入力→Emlis→返却→RN表示・旧経路と他機能境界を確認した。STRUCTURE_MAP_DELTA_NONE：新owner／route／公開schema追加0、production／API／DB／RN／Piece／Analysis変更0。地図は現状の説明を同期する。新CMEE本文の保存・履歴接続が完成済みとは扱わない。
+
+次は同じ承認内で、今回の予定・反応の修正を保持し、過去の発言／意図と現在の主述語・援助の主体・不確かさ・比較関係を既存意味ownerと代表本文で突き合わせる。選択前のsource scopeと実現責務を直し、同じ100件・required124と既存失敗を保持して検証する。表面的な分類語削除、言い換えbank、第二selector／renderer、隠し意味、新proposal／台帳は作らない。9月12日商品確認準備は集合の反復と意味分類の未解決により依然危うい。9月9日の中間確認では改善本文・残件・見通しを確認する。日付からの自動作業／停止／Product Read PASSはない。PR3／30／37はDraft/open/unmerged、ready／採用／merge／本番／問い／Layer3は未成立。
