@@ -2467,3 +2467,6 @@ Mash subsequently approved the source-fidelity availability exception in canonic
 
 
 The resumed source-grounded grammar uses the existing private expression nominalization-plan tuple and existing Human Reception internal clause core. Any bounded case/head/carrier description is identity-bearing private grammar, derived before expression emission and re-derived exactly by plan-only replay. It creates no public schema, transport carrier, semantic taxonomy, Reception act, Move family or downstream metadata oracle. Actual source/slot/edge preservation and the unchanged strict body checks are required; implementation and final validation remain pending.
+
+
+The internal clause-core time owner may be the already visible target referent; this is private grammatical ownership, not a time-scope value or serialized field. A negative finite-carrier nominalization operation in the existing tuple records reversible morphology and modifier/separator attachment. Expression identity and plan-only replay must derive the identical operation from the same source profiles; changed negation in a completed body is rejected. Public/V1 schema and Gate inputs remain unchanged. Current full100 root review is NOT_CLEAR, with final verification pending.
