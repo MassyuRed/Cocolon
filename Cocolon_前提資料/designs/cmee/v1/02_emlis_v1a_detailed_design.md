@@ -1831,3 +1831,12 @@ After the selected-reception contract save, the same unfinished verification wor
 既存の後置指示語＋限定助詞の解析を同じObservation Plan owner内の関数にまとめ、Human Receptionも同じ有限述語を時制の根拠として確認する。元の限定句はsource／argument／本文に保持し、余分な期間表現を足さない。未完入力のellipsisはlexical whitespaceとして削除せず、同じsource argumentをforwardとreplayの両方に渡す。Gate／body-only parser／判定基準・閾値を変更せず、生成metadataを正解にしない。
 
 代表本文で原入力より強い継続・期間表現の除去とellipsis保持を確認した。既存generic Move41検査成功、追加の境界・完成本文の改変拒否3検査成功。最初の新規検査案2件は、短い入力で正しくanaphoricが選ばれて対象本文が出ないという検査入力の不一致で失敗した記録を残す。対象を実際に露出する既存canonical loader入力で確認し、歴史的期待値は変更していない。この時点で変更後の最終same100／必要回帰／華恋全文確認はこれから実行する。candidate13の結果を変更コードの合格証拠へ流用しない。
+
+
+### 2026-09-05 continuation — selected object grammar and context responsibility
+
+同じ承認の継続修正として、唯一のHuman Receptionが選択済みPRESERVE_BOTH_ENDPOINTSのfocal relationを既存のrelation順へexact joinし、方向のない共在関係に限り、二つの完全な対象を一つの分配的目的語へ組み立てる。共在の事実説明と両側保持の締めを二重に出さず、選択済みの両側保持を可視目的語で一度だけ表す。方向、比較、因果、不確かな接続はこの省略対象にせず、既存の述語・endpoint・directionを維持する。意味、Move、act、上流のselection、private schema、Gate／body parser／判定項目・閾値は変更しない。
+
+背景は、source slotがcoveredであるという理由だけで削除しない。最初の単純削除案は既存逆検証のcontext／why義務で停止したため採用せず、失敗記録を保持した。関係exact1・背景exact1・応答対象とのendpoint一致を満たすANAPHORICだけ、背景を対象の連体修飾へ組み込み、背景の可視markerと両方のsource objectを同じcoreに一度ずつ残す。複数関係、方向・比較、不確かさを一般的な背景へ平坦化しない。forwardと独立replayが同じplan／resolver／検証済み判断からこの文法を再導出し、生成metadataを逆検証の正解にしない。
+
+同じ100件の大部分には、選択済み判断が一つの行動へのMATERIAL_WEIGHT評価に限られるものが残る。文法修正で選ばれていない感情・価値・関係を付け足さず、選択内容の限界と表現実装の不足を区別する。代表本文を先に確認し、変更コードの最終100件・必要回帰・華恋の全文確認後に結果を本handoff／実装順へ保存する。NOT_CLEAR、全ready／採用／merge／本番／問い／Layer3未成立を維持する。
