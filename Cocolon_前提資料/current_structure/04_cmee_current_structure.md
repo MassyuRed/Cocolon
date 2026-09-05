@@ -1,19 +1,19 @@
 ---
 doc_id: cocolon_meaning_experience_engine_current_structure
 title: "CMEE — Current Structure"
-revision_date: "2026-09-02 JST"
+revision_date: "2026-09-05 JST"
 document_role: "CMEE_CURRENT_STRUCTURE_AND_PRODUCT_QUALITY_ROUTE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
 design_state: "MASH_APPROVED_ROUTE_A_TYPED_CASE_FRAME_V2_FINAL_DESIGN_WITH_SESSION_SAFE_ORDER"
-detailed_design_state: "CURRENT_PRODUCT_OWNER_NON_PASS / FOLLOW_PRIMARY_CORRECTION_ROUTE_APPROVED_NOT_STARTED"
+detailed_design_state: "CURRENT_PRODUCT_OWNER_NON_PASS / SELECTED_SUBJECTIVE_RECEPTION_INPUT_IMPLEMENTED_VERIFICATION_PENDING"
 stage1_language_route: "ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER_ONLY"
 external_generative_ai_allowed: false
 external_body_send: 0
 retired_provider_investigation: "REMOVED_FROM_CURRENT_TREE_GIT_HISTORY_ONLY"
-current_authorized_next_work: "NONE_UNTIL_FRESH_SESSION_EXPLICIT_START"
+current_authorized_next_work: "SELECTED_SUBJECTIVE_RECEPTION_INPUT_FORWARD_REPLAY_AND_SAME100_CLOSURE"
 only_possible_future_implementation_class: "ROUND0_FOLLOW_PRIMARY_VISIBLE_RESPONSE_CORRECTION"
-implementation_state: "INHERITED_OWNER_CHAIN_IMPLEMENTED_NOT_ACCEPTED / IM10_NON_PASS / CORRECTION_ROUTE_NOT_STARTED"
+implementation_state: "DISABLED_IMPLEMENTED_NOT_ACCEPTED / CANDIDATE11_ROOT_NOT_CLEAR / REPLAY_INPUT_IMPLEMENTATION_PENDING"
 candidate_state: "DISABLED_IMPLEMENTED_NOT_ACCEPTED"
 candidate_ready: false
 product_read_state: "CURRENT_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFICIENT / HISTORICAL_PREDECESSOR_FAIL_RETAINED"
@@ -37,24 +37,26 @@ G0–G10の補助経路またはcurrent text guardを拡大して作るのでは
 Current state:
 
     final technical design = FINAL_CANONICAL_IMPLEMENTATION_READY
-    detailed implementation route = §31 -> canonical §§19–§22
+    detailed implementation route = canonical 02 §§36.3–36.5 / §38 and 06 §89; latest existing runtime handoff
     absolute implementation rule = PRODUCT_QUALITY_DELTA_GT_0_AND_MASH_CONFIRMED_ONLY
     Phase 0 / P0 / P0-R1 = RETIRED_HISTORICAL_NONREUSABLE
     product-delta-0 standalone L3-R / L3-I = RETIRED_HISTORICAL_NONREUSABLE
     source / owner / unknown / no-promotion contract = RETAINED_ROUTE_NEUTRAL
-    mashos-api current preimage = INHERITED_OWNER_CHAIN @ 4e8d397843c0381bc94379b71665cf71b80d7d1b
+    mashos-api approved resume preimage = 05845f12ee348bf207716c79ebe0adde4ac09216; follow latest existing runtime handoff
     implementation state = IMPLEMENTED_NOT_ACCEPTED / IM10_NON_PASS
     current Product Read = CURRENT_NON_PASS / HISTORICAL_PREDECESSOR_FAIL_RETAINED
     additional correction final body = HISTORICAL_PREDECESSOR / NOT_CURRENT_OWNER
     typed case-frame v2 final design = INHERITED_INTO_CURRENT_DISABLED_OWNER_CHAIN
     candidate ready = false / product credit 0
-    current authorized next work = NONE_UNTIL_FRESH_SESSION_EXPLICIT_START
+    current authorized next work = SELECTED_SUBJECTIVE_RECEPTION_INPUT_FORWARD_REPLAY_AND_SAME100_CLOSURE
     only admissible next implementation class = ROUND0_FOLLOW_PRIMARY_VISIBLE_RESPONSE_CORRECTION
     not production connected
     not Cycle001 proven
     Piece not connected
     Analysis not connected
     automatic progression false
+
+Current correction status: candidate11 is direct100/100, required Move/expression/binding124, outer73/27, latest combined per-test regression177/7 and root same100 NOT_CLEAR. The selected subjective reception request-local input contract was explicitly approved on 2026-09-05; the connection is implemented, focused contract/body-inverse tests are 58/58 PASS, and final same100/regressions/full rereading remain pending at this save. The current authority and exact next work are [canonical 02 §38](../designs/cmee/v1/02_emlis_v1a_detailed_design.md) and [canonical 06 §89](../designs/cmee/v1/06_implementation_order_migration_and_verification.md), together with the existing runtime handoff. This display update changes no owner, public/production route or product acceptance. Historical implementation sections below retain their dated results.
 
 Current implementation rule owner:
 

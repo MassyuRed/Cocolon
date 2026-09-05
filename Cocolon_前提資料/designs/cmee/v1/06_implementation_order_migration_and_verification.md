@@ -6407,7 +6407,8 @@ next gateはfresh Mash decision exact1のみとする。選択肢は、Layer 1 v
 AUTHORITY = FRESH_MASH_LEVEL3_CMEE_STAGE1_SAME_NUCLEUS_STATUS_ALIGNMENT_WITH_LAYER1_PARITY_RELAXATION_20260904
 EXECUTION_OWNER = ULTRA_KAREN_SINGLE_OWNER
 EXECUTION_ENVIRONMENT = WORK_ULTRA_REQUIRED
-STATE = IN_PROGRESS_APPROVED_SOURCE_FIDELITY_EXCEPTION
+STATE = IN_PROGRESS_APPROVED_SOURCE_FIDELITY_EXCEPTION_AND_SELECTED_SUBJECTIVE_INPUT
+REPLAY_CONTRACT_AUTHORITY = FRESH_MASH_LEVEL3_CMEE_STAGE1_SELECTED_SUBJECTIVE_RECEPTION_FORWARD_INVERSE_REQUEST_LOCAL_CONTRACT_20260905
 
 Fresh admission: Cocolon PR30 `c5eb8310df31f1d9d459761c5abdc77791c35790`; mashos-api PR3 `99e308effb629362a06c9d63429c77cb760da273`; System Context PR37 `8701513dafdb22c026dd87096d5ec731b2c9671f`. All are open Draft/unmerged. §88 is the predecessor terminal; it does not prohibit this newly authorized correction.
 
@@ -6456,9 +6457,67 @@ Existing Human Reception grammar now tracks actual emitted semantic/relation cov
 
 Current verified source probe remains 100/100 direct, required Move/expression/binding 124/124, outer 73/27. Root has completed the same fixed100 original/observation/follow reading: NOT_CLEAR. Existing current runner identity exact18/exact9 was refreshed and verified; historical receipts remain unchanged. Existing test expectations now follow source-grounded future time, actual relation-context consumption and status-driven meaning re-derivation without changing canonical inputs/evaluation axes. Required regression results and private causal availability verification are recorded in the existing runtime handoff.
 
-The next contract boundary is the selected subjective-content consumption/replay gap documented in 02 §38: the bridge resolves an existing selected subjective decision but plan-only replay has no authoritative representation of its selected appraisal/bindings/focal relation. The proposed minimal adjustment is explicit read-only access to that independently validated existing NORMAL/LIMITED decision for the same Human Reception forward/replay author. No such input contract has been implemented or approved by inference. Current Mash §5 limits and §8 govern this boundary. Other remaining grammar/source-scope defects stay in the same unfinished unit; no product readiness or acceptance is declared.
+The pre-approval contract boundary was the selected subjective-content consumption/replay gap documented in 02 §38: the bridge resolves an existing selected subjective decision but plan-only replay has no authoritative representation of its selected appraisal/bindings/focal relation. The proposed minimal adjustment is explicit read-only access to that independently validated existing NORMAL/LIMITED decision for the same Human Reception forward/replay author. No such input contract was implemented or approved by inference at that checkpoint. The explicit 2026-09-05 approval below resolves this boundary; current Mash §5 limits and §8 remain applicable to any different expansion. Other remaining grammar/source-scope defects stay in the same unfinished unit; no product readiness or acceptance is declared.
 
 
 Verification at the preserved boundary: the existing required regression set executed 184 distinct tests, including all six asynchronous tests with stdlib asyncio. Initial run: 174 PASS / 10 FAIL. After correcting three obsolete current assertions, targeted reruns leave latest results 177 PASS / 7 FAIL / 0 SKIPPED. All seven remaining failures are also present in the immutable admission baseline: two frozen observation expectations, two RR8 self-denial/depth expectations, two RR8 unseen/long-body Gate expectations and one dated source-bound PASS receipt. No baseline failure is credited as passing; later cohort checks behind the existing unseen-loop failure remain unexecuted. The current source identity exact18/exact9 check passes; historical source receipts are untouched.
 
 The fixed100 remains direct100 / required Move124 / expression124 / visible binding124 / outer73-27. For every one of the five availability increases, a counterfactual on the same current source, plan and projection rejects the old follow for unsupported negative meaning and accepts the current follow under the unchanged strict compatibility function; the six relevant source/guard definitions match the admission baseline. The reconstructed original twenty future-wording contradictions no longer appear; their source-owned past/progressive facts were checked, including the non-self-performance event boundary. This is explicitly reconstructed comparison evidence because no private predecessor ID ledger was found, not a newly invented historical receipt. Root full100 remains NOT_CLEAR for the stated residual defects. Final acceptance tests following any replay-contract/source change, product pre-screen CLEAR and Mash body-review preparation remain pending.
+
+
+### Mash-approved selected subjective reception input — same unit resumed（2026-09-05）
+
+```text
+AUTHORITY = FRESH_MASH_LEVEL3_CMEE_STAGE1_SELECTED_SUBJECTIVE_RECEPTION_FORWARD_INVERSE_REQUEST_LOCAL_CONTRACT_20260905
+INHERITED_AUTHORITY = FRESH_MASH_LEVEL3_CMEE_STAGE1_SAME_NUCLEUS_STATUS_ALIGNMENT_WITH_LAYER1_PARITY_RELAXATION_20260904
+EXECUTION_OWNER = ULTRA_KAREN_SINGLE_OWNER
+EXECUTION_ENVIRONMENT = WORK_ULTRA_REQUIRED
+REPLAY_INPUT_CONTRACT = IMPLEMENTED_FINAL_VERIFICATION_PENDING
+PRODUCT_OWNER = IMPLEMENTED_NOT_ACCEPTED
+ROOT_SAME100_REVIEW = NOT_CLEAR_PRECHANGE_CANDIDATE11
+CANDIDATE_READY / PRODUCT_READ_READY / MERGE / PRODUCTION = false / false / 0 / 0
+```
+
+Fresh admission for this approval: runtime PR3 `05845f12ee348bf207716c79ebe0adde4ac09216`, canonical PR30 `9fd5a4cc5ceb49eac84b12269c24ccbe0cbf31c0`, System Context PR37 `8701513dafdb22c026dd87096d5ec731b2c9671f`, all Draft/open/unmerged. PR30 advanced from the saved checkpoint only for the September 5 weekly review and entry navigation; that change is retained. System Context doctor did not establish its pinned environment, so prepare/current generation was not used as evidence. Read the current original owners directly; do not change lock/profile to manufacture success.
+
+The approved change replaces only the plan-only replay-input restriction in historical §87.3 and current 02 §36.3–§36.5. It does not adopt forward output metadata as a verification oracle. `SelectedSubjectiveReceptionInputV1` is an immutable request-local input containing per-Move `SelectedSubjectiveReceptionDecisionV1` rows, lossless existing `SubjectivePropositionV2` content and authoritative projection/grounding lineage. The existing sole bridge exact-joins it after projection sealing and before recovery; each active recovery subset reuses the same decision. Human Reception independently consumes it in forward and replay. Sentence Surface carries it only through its replay call; Gate compares the reconstructed reception to the completed body under unchanged checks and thresholds.
+
+Continue in this order within the same authorized implementation/verification unit:
+
+1. Reflect the concrete input/trust contract in existing 02/05/06, then implement the exact join, immutable request-local input and forward/replay plumbing in the four approved existing runtime files. Extend only directly affected tests and existing runner identity maintenance. No new proposal, ledger, helper system or additional approval phase is inserted.
+2. Use representative actual bodies to prove selected appraisal/binding/focal relation reaches the final follow. Keep Human Reception as sole Layer 2 author and upstream as sole meaning selector. Continue source-scope, grammar, generic closing, long replay and inter-layer repetition corrections under the inherited authority.
+3. Expand to the same100 without changing inputs/order/axes/denominator, and classify the seven inherited failures plus later unexecuted checks from current actual results. Preserve their initial-failure/history status; do not relabel old PASS receipts or change expectations merely to increase passing totals. Explain the twenty-seven unavailable outcomes from their existing rejection reasons, preserving necessary stops and distinguishing capability gaps.
+4. On final runtime/runner bytes, run required regressions and the same100 generation; verify required Move/expression/binding coverage, causal availability deltas and semantic-to-body correspondence. Karen reads every original input, observation and follow, including set-level repetition. After source changes, old outputs or old successful tests cannot serve as final-code evidence.
+5. At appropriate code-saving checkpoints, root commits to the existing branches, verifies remote head/paths/bytes, and synchronizes existing handoff/current display and PR introductions. Preserve private bodies, individual cases, digests and locators outside public GitHub. No product readiness follows from saving or display synchronization.
+
+Candidate11 remains the preserved pre-change checkpoint: direct100/100; Move/expression/binding124; outer73/27; latest per-test regression aggregate177 PASS/7 FAIL from complete-plus-targeted executions, with later checks still unexecuted; full100 Karen verdict NOT_CLEAR. The five availability increases already satisfy the inherited exception and do not require reapproval. Scope-internal failures are corrected and rechecked; one failed execution does not terminate the whole unit. September 9 is the work-session interim check and September 12 the product-body-review preparation goal, without automatic execution or date-only stopping. If that goal becomes doubtful, report causes, required correction and genuine decisions in that session. Product Read PASS, adoption, candidate ready, merge, production and later question/Layer3 work remain separately gated.
+
+
+### Approved request-local reception input implemented — unfinished checkpoint (2026-09-05)
+
+AUTHORITY = FRESH_MASH_LEVEL3_CMEE_STAGE1_SELECTED_SUBJECTIVE_RECEPTION_FORWARD_INVERSE_REQUEST_LOCAL_CONTRACT_20260905
+INHERITED_AUTHORITY = FRESH_MASH_LEVEL3_CMEE_STAGE1_SAME_NUCLEUS_STATUS_ALIGNMENT_WITH_LAYER1_PARITY_RELAXATION_20260904
+EXECUTION_OWNER = ULTRA_KAREN_SINGLE_OWNER
+EXECUTION_ENVIRONMENT = WORK_ULTRA_REQUIRED
+
+The explicit approval resolves the preceding proposed-only replay boundary. The existing bridge now constructs one immutable SelectedSubjectiveReceptionInputV1 before recovery. It exact-joins the already selected NORMAL/LIMITED proposition, outcome, reception binding, projected claim, contribution subset and source/qualifier bindings. Thin exposure is compared with independently derived authority before Human Reception runs, including after an attempted reseal. The same object reaches the sole Human Reception forward author, Sentence Surface replay, Gate and completed-body inverse. Forward expressions carry only the matching decision identity; they are not inverse truth. Public/base entry signatures, meaning selection, strict Gate items and thresholds are preserved.
+
+The sole author consumes selected appraisal/stance operations, checks per-Move selected basis against actually emitted source slots, and checks full content-owned primary/boundary targets across the active Moves of the same selected claim. Existing source/qualifier/focal mapping is reused. A selected material-value content without supported realization now fails explicitly rather than passing through generic act wording. Existing bounded counterposition must match its selected relational commitment and modality. No new semantic family, source attribute carrier, owner or renderer is introduced.
+
+Bounded grammar corrections remove the duplicated change noun in selected bounded recognition, preserve typed action-to-change direction without reverse kind labels in final Layer 1, and avoid turning a current-input state into an unproved present sensation of suffering. The attempted shorter generic referent failed the unchanged act-responsibility check; that attempt was reverted, not used to relax the check. Its failed verification remains private evidence.
+
+Current focused verification: 58 tests executed, 58 PASS. This includes immutable/same-object forwarding, missing/foreign input rejection, thirteen resealed semantic/lineage mutations rejected before authoring, actual quote-endpoint reversal and relation-marker mutation with non-noop assertions, and existing source/status/recovery/body-inverse tests. Earlier failed attempts are not PASS evidence. Current runner identity maintenance changes only existing working constants; historical source receipts remain unchanged. Final frozen same100, all required regressions and final root rereading are still pending at this implementation save.
+
+The preliminary connection diagnostic generated all100 and 124 required decisions. Root read all100 original inputs, observations and follows in full: NOT_CLEAR. Selected contents were 116 material appraisals, five relation-preserving appraisals, one bounded-change appraisal and two relational stances. Generic closures, raw source replay, some upstream source/time/voice treatment and set-level repetition remain. This diagnostic preceded the latest grammar corrections and cannot certify this implementation. Candidate11 remains pre-change evidence only.
+
+The seven inherited regression failures were independently reproduced at admission source: two fixed observation hashes with a substantive old/current role difference (not assumed obsolete); two genuine self-worth-negation recognition failures; two genuine observation repetition failures whose Gate rejection is correct; and one dated PASS receipt compared against live source. Original hashes and PASS records are unchanged. Later checks behind the old failure were inspected/executed separately on admission source, including all exact8/unseen12/same16 cohort rows and aggregate QA. Those admission results do not certify current source. Shared source/safety fixes must not be hidden in a final-only replay change.
+
+Fresh save admission: runtime PR3 05845f12ee348bf207716c79ebe0adde4ac09216, canonical PR30 9fd5a4cc5ceb49eac84b12269c24ccbe0cbf31c0, System Context PR37 8701513dafdb22c026dd87096d5ec731b2c9671f; all open Draft/unmerged. PR30's intervening weekly review/navigation changes are retained. System Context doctor: 18 PASS / 16 FAIL, pinned toolchain mismatch; prepare NOT_EXECUTED, stale outputs NOT_USED. Original-source fallback remains in use without profile/ref/lock changes. The distinct runtime-test lock was verified at all 46 distributions and wheel hashes.
+
+Resume from this implementation: freeze/verify existing current runner identity, execute the same input/order/axes/denominator100 on clean source with selected-content/body correspondence, execute the complete required regression inventory plus new tests and the later cohort checks, verify every availability change, and perform root full100 rereading. Continue authorized grammar/source-scope corrections from actual output; do not create another meaning selector or substitute an expression/metadata oracle. September 12 readiness is at risk from systematic generic expression and upstream scope defects; no date-only stop or automatic run is established. Preserve evidence and report the remaining causes in the current session.
+
+KAREN_FULL100_CLEAR = false
+MASH_PRODUCT_READ_READY = false
+CANDIDATE_READY = false
+PRODUCT_ADOPTION_OR_PRODUCTION_MERGE = false
+PRIVATE_BODY_CASE_DIGEST_LOCATOR_PUBLICATION = 0

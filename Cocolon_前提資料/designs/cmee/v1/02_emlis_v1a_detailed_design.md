@@ -1573,11 +1573,24 @@ expressionはmeaningを再選択しない。Move act、style、temperature、sur
 
 ### 36.3 sole private expression contract
 
+2026-09-05のMash承認により、本節と§36.4／§36.5のcurrent call contractは、既存のselected subjective decisionを明示的なrequest-local入力としてforward／replayへ共通に渡す。承認範囲、未完了状態、継承する検証条件は§38末尾を参照する。forward expression／surface／bindingを逆検証の正解にしない条件は維持する。
+
 新しいparallel schema familyやshared CMEE ontologyは作らない。current implementationでは、late final Move identity／duty確定後からHuman Reception realizationまでだけ存在するEmlis-private、request-local、providerlessなschema v1をexact1作る。既存public response schema、DB、API、projection schemaのversionは上げない。expressionはrequest-local function argumentとreturn valueだけでHuman Receptionへ渡し、Human Reception-authored surfaceとvisible bindingはSentence Surfaceの配置結果までだけ運ぶ。`GroundedSentencePlan`を含む既存schemaは変更せず、Gate／body-only inverse／public mappingへexpression、binding、preauthored surfaceを渡さない。body-free metadataへprivate lexical materialを出さない。
 
 production placementは既存`emlis_ai_grounded_human_reception.py` exact1とする。同fileに次のfrozen request-local typesを置く。
 
 ```text
+SelectedSubjectiveReceptionDecisionV1
+  one row per selected final Move, with its existing act/nucleus lineage
+  existing meaning outcome / reception binding / projected claim / opportunity identity
+  subjective_proposition: existing immutable SubjectivePropositionV2, lossless
+  existing authoritative semantic/qualifier binding rows needed for exact joins
+
+SelectedSubjectiveReceptionInputV1
+  decisions: immutable tuple[SelectedSubjectiveReceptionDecisionV1, ...]
+  authoritative projection preimage/seal and current plan/resolver grounding identity
+  request-local only; not a serialized schema, public metadata, cache or Emlis self-state
+
 RealizableReceptionArgumentV1
   semantic_ref: str exact1
   source_evidence_refs: tuple[str, ...] 1..N
@@ -1595,6 +1608,7 @@ RealizableReceptionArgumentV1
 SourceGroundedRealizableReceptionExpressionV1
   schema_version: literal cocolon.emlis.human_reception.realizable_expression.v1
   expression_ref: str exact1 derived from complete canonical payload
+  selected_subjective_decision_ref: str exact1; same Move's independently validated request-local SelectedSubjectiveReceptionDecisionV1
   meaning_outcome_ref: str exact1
   reception_binding_ref: str exact1 branch-specific one-of
     NORMAL: Move-function-matched MeaningBoundReceptionProposition exact1; Set ref is provenance only
@@ -1628,20 +1642,33 @@ SentenceSurfacePlacement (request-local tuple, not a schema or serialized record
   body_scalar_start / body_scalar_end
 
 final Stage 1 request-local call contract (not a schema or serialized record)
-  expressions = compiler bridge output
-  human_surface = realize_source_grounded_human_reception(..., expressions, ...)
+  selected_subjective_input = sole compiler bridge exact-join/seal output
+  expressions = compiler bridge output for the active recovery candidate
+  human_surface = realize_source_grounded_human_reception(
+      ..., expressions, ..., selected_subjective_input=selected_subjective_input,
+  )
   surface_result, placements = realize_grounded_sentence_plan_with_human_reception(
       sentence_plan, grounded_plan, resolver,
       human_reception_surface=human_surface,
+      selected_subjective_input=selected_subjective_input,
   )
   realized_units = _adapt_grounded_surface_to_v2_realized_units(
       ...,
       human_reception_surface=human_surface,
       sentence_surface_placements=placements,
   )
+  evaluate_grounded_observation_gate(..., selected_subjective_input=selected_subjective_input)
+  evaluate_grounded_surface_body_inverse(..., selected_subjective_input=selected_subjective_input)
+  independent_replay = replay_source_grounded_human_reception_from_plan(
+      ..., selected_subjective_input=selected_subjective_input,
+  )
 ```
 
-`emlis_stage1_response.py`のsole bridgeがselected meaningとMove-function-matched MeaningBoundReceptionProposition exact1（Set refはprovenance only）、またはbounded LIMITED outcomeとBoundedLimitedReception exact1のいずれか、visible trace、およびexact-cover keyとして先に確定済みのread-only final Move duty／identityをexact joinし、Human Receptionのsole builderへ渡す。Move identityはexpressionの内容sourceではなく、どのmeaning outcomeをどのdutyへ実現するかを固定するkeyだけである。`emlis_ai_grounded_human_reception.py`の`realize_source_grounded_human_reception(reception_plan, expressions, nucleus_index, resolver, *, plan, recovery_stage, clause_plans) -> GroundedHumanReceptionSurface`だけがexpressionをvalidate／consumeして本文とHuman Reception-local segment bindingを同一passで作る。`emlis_ai_grounded_sentence_surface.py`の`realize_grounded_sentence_plan_with_human_reception(sentence_plan, plan, resolver, *, human_reception_surface) -> tuple[GroundedSurfaceResult, tuple[SentenceSurfacePlacement, ...]]`はcurrent final Stage 1 projection versionでだけ使うguarded entrypointである。そのresultをrequired request-local argumentで受け、binding ref exact1でjoinするplacement tupleとともにcompilerのcandidate tupleへ返す。既存`realize_grounded_sentence_plan()`のpublic／base signature、return、bytesは変更しない。compilerはrecovery candidateごとにsentence plan／surface result／Human Reception surface／placementを一つのcandidate identityとして保持し、選択後に別candidateのsidecarと混ぜない。compilerはそのcandidateとplacementをadapterへ同時に渡し、adapterがLayer 2 unit／binding identityとrange／hashを検証した時点でcarrierを破棄する。既存planやresponseへserializeせず、expression、preauthored surface、binding、placementをschema field、global state、cache、functional atom、log、Gateへ運ばず、同義field、compat field、parallel carrierは0である。
+`emlis_stage1_response.py`のsole bridgeがselected meaningとMove-function-matched MeaningBoundReceptionProposition exact1（Set refはprovenance only）、またはbounded LIMITED outcomeとBoundedLimitedReception exact1のいずれか、visible trace、およびexact-cover keyとして先に確定済みのread-only final Move duty／identityをexact joinし、Human Receptionのsole builderへ渡す。Move identityはexpressionの内容sourceではなく、どのmeaning outcomeをどのdutyへ実現するかを固定するkeyだけである。`emlis_ai_grounded_human_reception.py`の`realize_source_grounded_human_reception(reception_plan, expressions, nucleus_index, resolver, *, plan, recovery_stage, clause_plans, selected_subjective_input) -> GroundedHumanReceptionSurface`だけがexpressionをvalidate／consumeして本文とHuman Reception-local segment bindingを同一passで作る。`emlis_ai_grounded_sentence_surface.py`の`realize_grounded_sentence_plan_with_human_reception(sentence_plan, plan, resolver, *, human_reception_surface, selected_subjective_input) -> tuple[GroundedSurfaceResult, tuple[SentenceSurfacePlacement, ...]]`はcurrent final Stage 1 projection versionでだけ使うguarded entrypointである。そのresultをrequired request-local argumentで受け、binding ref exact1でjoinするplacement tupleとともにcompilerのcandidate tupleへ返す。既存`realize_grounded_sentence_plan()`のpublic／base signature、return、bytesは変更しない。compilerはrecovery candidateごとにsentence plan／surface result／Human Reception surface／placementを一つのcandidate identityとして保持し、選択後に別candidateのsidecarと混ぜない。compilerはそのcandidateとplacementをadapterへ同時に渡し、adapterがLayer 2 unit／binding identityとrange／hashを検証した時点でcarrierを破棄する。既存planやresponseへserializeせず、expression、preauthored surface、binding、placementをschema field、global state、cache、functional atom、log、Gateへ運ばず、同義field、compat field、parallel carrierは0である。
+
+`SelectedSubjectiveReceptionInputV1`はexpressionより前に確定する上流判断の入力であり、forward生成metadataではない。sole bridgeは既存Phase A、sealed projection、selected NORMAL／bounded LIMITED outcome、trace、Move、nucleusとexact joinし、完全な`SubjectivePropositionV2`および必要な既存bindingを不変入力へ束ねる。content kind／mode／operator、selected contribution subset、response／basis／qualifier binding、appraisal等のtyped content、focal relation、actor／experiencer、assertion modality／epistemic scopeを落とさない。型・seal・grounding preimageの一致だけでsource忠実性を代用せず、既存のbranch-specific lineage、source／role／qualifier／relation検証を同時に維持する。
+
+この入力はprojection seal後、recovery loop前に一度だけ構築する。各candidateは許可されたactive Move subsetだけを同じ入力へread-onlyでjoinし、meaningを再選択・変更しない。forwardとreplayは同じ入力を受けるが、replayはexpression、forward realization、surface、visible bindingを読まず、plan／Move／nucleus／resolverと上流判断から独立に文法realizationを再構成する。欠落、duplicate／foreign Move、別request／grounding、branch／claim／binding／focal relation不一致、seal後の変更は既存のnamed failureへ閉じる。Sentence Surfaceはreplay検証呼出しへ引数を通すだけで、selected meaningを執筆しない。この入力のlifetimeはrequest内のforward、Gate／inverse検証までとし、public mapping、response、DB、log、durable metadataへserializeしない。
 
 各selected final plan Moveはexpression exact1を持ち、expression集合はselected final plan Move集合をexact-coverする。これにrequired Move全数がexact-coverされる。plan-owned optional Moveがexact-cover domainにある間はそのexpression exact1を要し、許可済みrecoveryでMove自体が除外される場合にだけ同時に除外する。planにないforeign／unused expressionは許可しない。missing、duplicate、foreign Move、unresolved source、role conflict、required argument欠落、invalid zero／omission、morphology gap、anaphora antecedent gapはfail closedする。一つの自然なvisible segmentが複数Move／expressionを担うmany-to-oneは許可するが、各expressionはvisible segmentへexact1以上到達する。
 
@@ -1662,7 +1689,7 @@ REALIZABLE_RECEPTION_EXPRESSION_VISIBLE_BINDING_GAP
 
 `compile_stage1_response()`は、input-specific meaning ownerのmeaning outcomeとprojectionを保持したまま、`_cmee_semantic_reception_plan()`によるfinal Move identity／duty domainの読み取りkeyを先に確定する。これはexact join先のidentityを確定するexecution sequencingにすぎず、Moveはexpression内容を決めない。その後、NORMALはselected meaning／MeaningBoundReception lineage、LIMITEDはbounded outcome／BoundedLimitedReception lineageのbranch-specific one-ofと、semantic projection、visible causal trace、Grounded Situation Viewから発話内容を構成し、read-only Move keyへexact1でbindしたexpressionを発行する。正規のcausal directionは`meaning outcome -> expression -> existing Move consumes expression`であり、Moveからmeaning／expression contentへのreselection／semantic backflowは0である。
 
-各recovery candidateはactive Move集合、effective reference mode、argument realizationをexpression発行前に確定し、そのcandidate固有のcomplete payloadからexpression refをderiveする。同一candidateのsecond compiler validationは同じexpression refを再現し、Human Receptionのplan-only replayは同じ可視surfaceを再現する。optional Move除外またはEXPLICIT／ZERO／OMITTED変更時はMove集合とexpression identityをcandidate単位で再deriveし、発行済みexpressionを保持したまま変更しない。expression発行後に意味内容を変更できるのは0で、Sentence Surfaceは句読点と文境界の配置だけを扱う。final unit identityはMove ref、expression ref、visible segment bindingをsealし、whole-line一括bindingや完成後の推測で代用しない。
+各recovery candidateはactive Move集合、effective reference mode、argument realizationをexpression発行前に確定し、そのcandidate固有のcomplete payloadからexpression refをderiveする。同一candidateのsecond compiler validationは同じexpression refを再現し、Human Receptionの独立replayは同じ上流の`selected_subjective_input`とplanから同じ可視surfaceを再現する。optional Move除外またはEXPLICIT／ZERO／OMITTED変更時はMove集合とexpression identityをcandidate単位で再deriveし、発行済みexpressionを保持したまま変更しない。expression発行後に意味内容を変更できるのは0で、Sentence Surfaceは句読点と文境界の配置だけを扱う。final unit identityはMove ref、expression ref、visible segment bindingをsealし、whole-line一括bindingや完成後の推測で代用しない。
 
 source clauseは、applicableなpredicate、ordered arguments、degree／quantity、relationとendpoint／direction、polarity／negation、modality／wish、time／aspect、scope／qualifierを全て欠けなく保持する最小単位である場合だけ、private internal evidenceとして保持できる。ただしfinal本文へraw replay、quote、label置換またはgeneric fixed closeとして出力しない。source span、source text、lexical head、scalar locator、segment digest、case別情報、expression／source refsをbody-free metadata、GitHub、handoff、checkpoint、diagnostic、log、public responseへ出さない。
 
@@ -1674,9 +1701,9 @@ source clauseは、applicableなpredicate、ordered arguments、degree／quantit
 
 `Sentence Surface`はpreauthored Human Reception surfaceをrequired request-local inputとして受け取り、Layer 1との配置、複数segmentの結合、句読点、文境界、body parserだけを行う。Human Reception-local rangeはHuman Reception-authored source surface上の検証coordinateとして保持する。Sentence SurfaceはHuman Reception binding ref exact1をplacementに引き継ぎ、実際に追加したprefix／separator／line startのscalar数だけを移動させ、request-local `SentenceSurfacePlacement`のline range／body rangeへdeterministically remapする。Human Reception-local、final line-local、body-globalの三coordinate spaceのslice hashがHuman Receptionのsegment hashと一致し、対象segment内の文字が一字でも変更された場合は`REALIZABLE_RECEPTION_EXPRESSION_VISIBLE_BINDING_GAP`へ閉じる。adapterは`SentenceSurfacePlacement.line_scalar_start / line_scalar_end`をLayer 2 unit textの`RealizedSemanticBinding` rangeへ移し、Human Reception-local rangeはsource surface、body-global rangeは完成bodyとの一致検証にのみ用い、whole-line `[0,len]`一括bindingを作らない。final Stage 1 pathにおけるgeneric follow、empathy close、fixed close、Move actからのsemantic clause生成、second Layer 2 bodyのauthoringはexact0とする。preauthored surfaceが無いfinal callはfallbackせずnamed failureで停止する。
 
-`emlis_stage1_composition.py`は既存どおりschema／ref／identity／non-mutationのvalidation-onlyであり、expressionをderiveまたはrenderしない。expression／bindingのcarrierはSentence Surfaceの配置結果とadapterで終了する。新規carrierからGate／final-body-only inverseへ渡すのは完成本文だけであり、forward expression metadata、binding、preauthored surfaceを正解またはverification oracleとして読ませない。Gate／body-only inverseが現行どおり受ける既存plan／sentence plan／resolverは新規carrierではない。Gate／body-only inverseの現行責任、判定項目、閾値は変更しない。
+`emlis_stage1_composition.py`は既存どおりschema／ref／identity／non-mutationのvalidation-onlyであり、expressionをderiveまたはrenderしない。expression／bindingのcarrierはSentence Surfaceの配置結果とadapterで終了する。Gate／final-body-only inverseが受けるのは完成本文、既存plan／sentence plan／resolver、および§36.3の独立に検証された上流入力`selected_subjective_input`である。forward expression metadata、binding、preauthored surfaceを正解またはverification oracleとして読ませない。body parserは完成本文だけを解析する。今回追加するのはmatcher／replayへ渡す明示的な意味入力であり、Gate／body-only inverseの現行責任、判定項目、閾値は変更しない。
 
-Gateの現行`realize_grounded_human_follow_text(line, plan, resolver)`はforward carrierを受けず、final CMEE branchで`replay_source_grounded_human_reception_from_plan(reception_plan, nucleus_index, resolver, *, plan, recovery_stage, clause_plans) -> GroundedHumanReceptionSurface`へ委譲する。forward入口とplan-only replay入口はHuman Reception内の同一final authorを呼び、前者はexpression、後者は完成plan／Move／nucleus／resolverから同じsurface-affecting realization objectへ到達する。projectionだけにある値が可視byteを変え、plan-only replayが同値を再現できない場合はfallbackせず`MEANING_REALIZATION_CAUSAL_TRACE_GAP`で停止する。GateはそのHuman Reception-owned replayとactual completed-body lineのexact bytesを現行どおり比較し、second renderer、forward oracle、Gate弱化を0に保つ。
+Gateの`realize_grounded_human_follow_text(..., selected_subjective_input=...)`はforward carrierを受けず、final CMEE branchで`replay_source_grounded_human_reception_from_plan(reception_plan, nucleus_index, resolver, *, plan, recovery_stage, clause_plans, selected_subjective_input) -> GroundedHumanReceptionSurface`へ委譲する。forward入口と独立replay入口はHuman Reception内の同一final authorを呼ぶ。前者はexpressionと検証済み上流判断、後者は完成plan／Move／nucleus／resolverと同じ検証済み上流判断から同じsurface-affecting realization objectへ到達する。replayが同値を再現できない場合はfallbackせず`MEANING_REALIZATION_CAUSAL_TRACE_GAP`へ閉じる。GateはそのHuman Reception-owned replayとactual completed-body lineのexact bytesを現行どおり比較する。新入力はcurrent final Stage 1 branchでrequiredとし、public／legacy branchの既存挙動とbase surface entrypointは維持する。second renderer、意味の再選択、forward oracle、Gate弱化は0である。
 
 ### 36.6 verification and product boundary
 
@@ -1687,7 +1714,7 @@ Gateの現行`realize_grounded_human_follow_text(line, plan, resolver)`はforwar
 3. same Move actでもselected meaningが異なればLayer 2本文が異なり、fixture id、case id、word cue、固定完成文で分岐しないこと。
 4. Human Receptionがfinal Layer 2 sole author、Sentence Surfaceのsemantic content generation call count 0。
 5. source／unknown／safety／LIMITED、Gate、body-only inverse、question budget、composition validation-onlyの回帰なし。
-6. canonical100 direct `100/100`、outer `GENERATED 68 / unavailable 32`、required Move `124/124`を維持すること。
+6. canonical100 direct `100/100`、required Move `124/124`と同じ入力・順序・評価軸・分母を維持すること。outerと個別availabilityは§38の明示承認済みsource-fidelity例外だけを適用し、過去の68/32を件数quotaにしない。
 7. 華恋がcanonical100 actual body全文をMash提示前にprivate boundary内で読み、generic follow、source replay、label置換、少数template、不自然な日本語、Layer 1／2重複、深さ不足を確認すること。
 
 machine GREENと華恋pre-screenはMash Product Readを代替しない。successはcanonical 06 latest §87.6のall-ofを一つも省略せず満たす場合だけである。成功時も`CURRENT_PRODUCT_OWNER_ADOPTION_STATE=IMPLEMENTED_NOT_ACCEPTED`、`candidate_ready=false`、product／technical credit 0、`PRIMARY_OUTCOME=BLOCKER_NARROWED`を維持し、`MASH_ROUND0_PRODUCT_READ_READY=true`だけを次境界として固定する。問い、Layer 3、Piece、Analysis、production、merge、cutoverへ自動進行しない。
@@ -1768,7 +1795,7 @@ Latest frozen checkpoint: direct canonical100 100/100, required Move/expression/
 Existing Human Reception grammar now tracks actual emitted semantic/relation cover and consumes context once. Existing source-proven future referents may own their already visible time expression, avoiding a duplicate adjunct. The existing private nominalization tuple can encode uniquely reversible negative finite-carrier and adverb attachment, checked against inherited lexical conjugation classes before expression sealing and independently re-derived by the same plan-only replay owner. No input-example branch, full sentence bank, second meaning owner, parser, new carrier or Gate relaxation is introduced. Next work remains source-owned uncertainty alignment, meaningful Reception expression, frozen all100 regeneration/rereading and the required regression/current source identity verification; no CLEAR or readiness is claimed.
 
 
-### Selected subjective-content consumption and replay boundary — unfinished
+### Selected subjective-content consumption and replay boundary — pre-approval finding
 
 The latest fixed source probe is direct 100/100, required Move/expression/visible binding 124/124 and outer GENERATED 73 / UNAVAILABLE 27. Original input/order/axes/denominator are unchanged. Root read every original input, observation and follow in that same fixed100 and recorded NOT_CLEAR. Source-owned future/performed/progressive corrections, uncertain desire qualification and the bounded finite-feeling nominalization improve specific defects; they do not establish full source/grammar/product closure. Generic closes, categorical anaphora, raw source replay and some embedded intention/outer-action scope remain unresolved. No private body, individual case, digest or locator is included here.
 
@@ -1779,3 +1806,14 @@ The exact constraint is canonical 02 §36.3 / §36.5: the final replay receives 
 The proposed next adjustment, NOT implemented or self-authorized here, is to let the existing Human Reception forward and inverse replay consume the same independently validated, immutable existing NORMAL/LIMITED subjective decision through an explicit request-local input contract. The selected meaning/outcome/binding identity remains authoritative and source/role/qualifier validated; no new appraisal operation, Reception act, Move family, semantic reselection, owner split or renderer is introduced. Completed body comparison and all strict Gate items/thresholds remain. This requires an explicit adjustment of the existing replay input/trust contract, beyond status alignment and wiring the current plan-only replay. Current Mash §5 limits and §8 require that boundary to be reported before crossing it. The proposed adjustment is not claimed to eliminate every remaining language defect by itself.
 
 Resume after that exact boundary is decided: continue the same unit from this preserved disabled checkpoint, connect the existing selected subjective content through the agreed replay contract, repair remaining source-scope/grammar/product defects, regenerate and reread all100, and execute final required regressions. The previous terminal STOP/rollback and intermediate failed probes remain history; this is a new unfinished checkpoint under the current authority, not product adoption. No one-failure stopping rule is being reinstated. Scope-internal language defects remain work to complete; they are not separate approval requests. Product Read readiness, candidate readiness, acceptance, merge and production effects remain false/0.
+
+
+### Mash-approved selected subjective reception input — implemented, verification unfinished（2026-09-05）
+
+Mash explicitly approved `FRESH_MASH_LEVEL3_CMEE_STAGE1_SELECTED_SUBJECTIVE_RECEPTION_FORWARD_INVERSE_REQUEST_LOCAL_CONTRACT_20260905` after reviewing the concrete change. The preceding proposed-only replay boundary is a historical pre-approval finding, not a current execution prohibition. The approved normative input/trust contract is integrated in §36.3–§36.5; no separate proposal, meaning owner, schema family or renderer is created. The input and bounded grammar connection are implemented. Focused contract/body-inverse verification is 58/58 PASS; final same100, required regression and root rereading remain pending at this save. The latest implementation checkpoint is recorded in 06 §89 and the existing runtime handoff.
+
+The same verified existing NORMAL/LIMITED `SubjectivePropositionV2` is carried losslessly by `SelectedSubjectiveReceptionDecisionV1` rows inside one immutable `SelectedSubjectiveReceptionInputV1`. The sole Stage 1 bridge binds the existing selected decision to authoritative projection/grounding and Move lineage before expression generation. The same request-local input reaches Human Reception forward and independent replay through keyword `selected_subjective_input`. Recovery may select only the already authorized active Move subset; it cannot rewrite the decision. Human Reception consumes the existing selected appraisal/binding/focal relation to realize what this input was received as, instead of reducing it to Move act/role wording. Grammar and selected-content realization are part of the same body-correction unit, not independent technical completion.
+
+Runtime scope is the existing `emlis_stage1_response.py`, `emlis_ai_grounded_human_reception.py`, `emlis_ai_grounded_sentence_surface.py`, `emlis_ai_grounded_observation_gate.py`, directly affected tests, and existing runner identity maintenance. Existing shared meaning types and public/persisted schemas are retained. Canonical 02/05/06 and the existing runtime handoff own the change. Current-map and PR display synchronization changes status pointers only; application, national-system, public API/DB/RN, Piece/Analysis and legacy-route responsibilities do not change.
+
+Inherited status/grammar/source-fidelity corrections and the already approved UNAVAILABLE-to-GENERATED exception remain authorized in this same unfinished unit and are not new approval requests. Preserve strict Gate/body inverse, exact completed-body comparison, source/role/qualifier/unknown/safety protection, Move/expression/visible binding cover and no semantic reselection. After representative body checks, regenerate the same100 on final code, execute required regressions including the seven inherited failures and later unexecuted checks, verify runner identity and per-input availability reasons, and have Karen read every original/observation/follow plus set-level repetition. Candidate11's 100/124/73-27 and latest combined regression 177/7 remain pre-change evidence; all100 NOT_CLEAR is not cleared by this approval. Product Read readiness, candidate ready, acceptance, merge and production remain false/0 until their own actual conditions are met.
