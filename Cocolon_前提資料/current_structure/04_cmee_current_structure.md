@@ -56,7 +56,7 @@ Current state:
     Analysis not connected
     automatic progression false
 
-2026-09-05最新：未完の理由疑問を埋込行動と誤認する既存final source分類を限定修正した。同じ意味核を原field・offset・引用外・文境界で確認して既存uncertaintyへ戻し、既存選択LEAVE_UNFINISHEDをforward／独立replayへ届ける。固定sourceはdirect100、Move／expression／binding124、外側73/27、入力・順序・可否・理由変更0。生成可能側1件の観測・フォローが変わった。別1件に同じ属性の順序差があり、残98件は全保存項目同一。全208検査204成功／既存4失敗、新規失敗0・未実行0。華恋は原入力全フィールド・観測・フォロー全100を読みNOT_CLEAR。Gate／parser／閾値・歴史的hash／PASS変更0。長い復唱・同じ締め・行動評価偏重、複文時制・予定・援助主体と他の問い／比較／可能性は残件。詳細は02 §38、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+2026-09-05最新：既存動作語の授受補助動詞について、本人が埋込行為を実行したという根拠のないperformed属性を付けないよう、既存final same-nucleus status補正を限定修正した。数量表現・場所格と後続の本人行動は保持。固定100はdirect100、Move／expression／binding124、外側73/27で入力・順序・可否・理由変更0。生成可能側1件の観測だけが変わり、選択decisionと全フォローは同一、残99件は全保存項目同一。全211検査207成功／既存4失敗、新規失敗0・未実行0。華恋は全100の原入力全フィールド・観測・フォローを読みNOT_CLEAR。受領の意味契約と未登録述語、複文の主体・時制・予定、他の問い／比較／可能性、長い復唱・同じ締め・行動評価偏重が残る。詳細は02 §38と末尾、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
 
 Current implementation rule owner:
 
@@ -912,3 +912,10 @@ Latest checkpoint: Current correction status (2026-09-05): typed positive feelin
 2026-09-05最新：未完の理由疑問を埋込行動と誤認する既存final source分類を限定修正した。同じ意味核を原field・offset・引用外・文境界で確認して既存uncertaintyへ戻し、既存選択LEAVE_UNFINISHEDをforward／独立replayへ届ける。固定sourceはdirect100、Move／expression／binding124、外側73/27、入力・順序・可否・理由変更0。生成可能側1件の観測・フォローが変わった。別1件に同じ属性の順序差があり、残98件は全保存項目同一。全208検査204成功／既存4失敗、新規失敗0・未実行0。華恋は原入力全フィールド・観測・フォロー全100を読みNOT_CLEAR。Gate／parser／閾値・歴史的hash／PASS変更0。長い復唱・同じ締め・行動評価偏重、複文時制・予定・援助主体と他の問い／比較／可能性は残件。詳細は02 §38、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
 
 既存意味核を選択前にsourceへ整合する限定修正。全体のowner／国家／公開経路／Piece／分析との接続は変わらない。正本02 §38、06 §89と末尾、runtime handoffに実装・検証・残件を記録する。
+
+
+### 2026-09-05 continuation — 受領節の自己実行誤認の限定修正
+
+2026-09-05最新：既存動作語の授受補助動詞について、本人が埋込行為を実行したという根拠のないperformed属性を付けないよう、既存final same-nucleus status補正を限定修正した。数量表現・場所格と後続の本人行動は保持。固定100はdirect100、Move／expression／binding124、外側73/27で入力・順序・可否・理由変更0。生成可能側1件の観測だけが変わり、選択decisionと全フォローは同一、残99件は全保存項目同一。全211検査207成功／既存4失敗、新規失敗0・未実行0。華恋は全100の原入力全フィールド・観測・フォローを読みNOT_CLEAR。受領の意味契約と未登録述語、複文の主体・時制・予定、他の問い／比較／可能性、長い復唱・同じ締め・行動評価偏重が残る。詳細は02 §38と末尾、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+
+既存ObservationPlan内部のstatus証明条件と直接関連テスト・現在runner identityを更新。STRUCTURE_MAP_DELTA_NONE。source／public actor契約、国家／共通基盤／旧経路／他中核との境界は同じ。System Contextはdoctor→prepare不成立・stale不使用・原典直読。詳細と残るactor契約境界は正本02／06末尾。

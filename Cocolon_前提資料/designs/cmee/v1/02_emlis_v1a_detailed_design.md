@@ -23,7 +23,7 @@
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 - Stage 1 historical predecessor additional correction final body, not current: `ROUTE_A_ONLY / STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP / EARLY_ACTUAL_NOT_RUN`
 
-2026-09-05最新：未完の理由疑問を埋込行動と誤認する既存final source分類を限定修正した。同じ意味核を原field・offset・引用外・文境界で確認して既存uncertaintyへ戻し、既存選択LEAVE_UNFINISHEDをforward／独立replayへ届ける。固定sourceはdirect100、Move／expression／binding124、外側73/27、入力・順序・可否・理由変更0。生成可能側1件の観測・フォローが変わった。別1件に同じ属性の順序差があり、残98件は全保存項目同一。全208検査204成功／既存4失敗、新規失敗0・未実行0。華恋は原入力全フィールド・観測・フォロー全100を読みNOT_CLEAR。Gate／parser／閾値・歴史的hash／PASS変更0。長い復唱・同じ締め・行動評価偏重、複文時制・予定・援助主体と他の問い／比較／可能性は残件。詳細は02 §38、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+2026-09-05最新：既存動作語の授受補助動詞について、本人が埋込行為を実行したという根拠のないperformed属性を付けないよう、既存final same-nucleus status補正を限定修正した。数量表現・場所格と後続の本人行動は保持。固定100はdirect100、Move／expression／binding124、外側73/27で入力・順序・可否・理由変更0。生成可能側1件の観測だけが変わり、選択decisionと全フォローは同一、残99件は全保存項目同一。全211検査207成功／既存4失敗、新規失敗0・未実行0。華恋は全100の原入力全フィールド・観測・フォローを読みNOT_CLEAR。受領の意味契約と未登録述語、複文の主体・時制・予定、他の問い／比較／可能性、長い復唱・同じ締め・行動評価偏重が残る。詳細は02 §38と末尾、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
 
 ---
 
@@ -2032,3 +2032,22 @@ System Contextは作業前doctor→prepareを実行し18成功16失敗、prepare
 代表実データでは、受領節の誤った行動呼称を除いても、後続の本人行動と既存required Moveを保ち、独立inverse・Gateを通ることを確認した。3つの関連検査で活用、主動詞と補助動詞、後続本人行動、完成本文を確認し、固定sourceで同じ100・124、必要回帰、華恋の全100本文再読を行う。初回試験の2失敗はargument抽出境界の不一致であり、修正後結果と分ける。前段100／124／73-27と208件204成功／既存4失敗を今回最終sourceの証明に流用しない。
 
 System Contextはdoctor→prepareを実行し18成功16失敗、prepareは固定toolchain不一致で不成立。stale不使用、原典直読、profile／基準ref／tracked current変更0。アプリ全体／国家／共通基盤・全ファイル地図とinventory・最新weekly review、影響ownerと旧経路の本文を確認。国家保存・dispatch・queue・read-side、公開API／DB／RN、Piece／分析の変更0。商品NOT_CLEAR、ready／採用／merge／本番／質問生成／Layer3は未成立。
+
+
+### 2026-09-05 continuation — 受領節の自己実行誤認を除く最終検証・全文確認（商品未成立）
+
+固定runtime sourceはremote `64ef97ccde856d9fd8effe5ee5488aad90fa4f3a`、local `33010232a41e0f37c8fbebaf0eb44b2bddba925d`、全体tree `0d87e3fd15f06502604e33f7a7578320f0af2a2d`。対応する設計sourceはremote `de346dca3ee65cf5b5baaca06b2fe810f5041818`、local `0c34d4e96d0d0ae70634a11722021b139b155970`、全体tree `9d382ceed679880a99eb4184c665c2730a5629d8`。両repoの変更path・全変更ファイルのGitHub取得全文とlocal bytes・全体treeが一致。以後は結果・既存地図・handoffだけを同期し、実装／テスト／runner bytesは固定する。
+
+既存final ObservationPlan内で、文末の授受補助動詞と、既存completed-action／achievementに登録されたhostの活用綴りがともに確認できる場合、同じaction核へ根拠のないperformed属性を付けない。既存語形の照合は本人がhostを実行したという証明を作らない。新動詞辞書・case別分岐・schema・carrier・helper・selector・rendererは追加していない。裸のテ形語尾だけによる初回案は不採用で、argument境界の取りこぼし2失敗、次案の数量／名詞との誤一致を修正した。途中案の3成功は最終証拠へ流用しない。最終追加3検査には既存動作語の活用、数量／場所格／主動詞、後続本人行動と完成本文・独立inverse／Gateを含む。
+
+同じcanonical100の全入力・順序・評価軸・分母を維持し、direct100、required Move／expression／visible binding各124、外側GENERATED73／UNAVAILABLE27。生成可能側1件の同じnucleusからperformed属性だけが除かれ、観測の受領節を本人の実行として呼ぶ箇所が消えた。kind／actor／polarity／証拠／anchor／時制／aspect等の他の属性は同じ。選択decisionは全件同一、当該1件のinput／grounding identityだけが新sourceに追従した。フォローは全100件同じで、後続の本人行動を受け止める責務も維持。残99件は全保存項目同一。観測の誤帰属を除いたことを、受領関係の意味契約完成やフォロー改善、商品全体の成立へ読み替えない。
+
+最終sourceの必要回帰211件を全実行し、207成功／既存4失敗、新規失敗0、未実行0。原184は180成功4失敗、追加27は全成功。XMLと完全なconsoleの最終集計を照合。既存4失敗は、観測固定との不一致2、過去dated receiptと現コードの不一致1、旧経路の集合フォロー重複1。観測の比較・意味分類にも未解決があるため、古い期待値だけとして消さない。後続36ケースを実行し、post-hash96検査は全成功、unseen集合重複FAILは維持。診断で元testの失敗を置換せず、歴史的hash／PASS／閾値変更0。別GA2/shared164の過去結果を今回再実行したとは扱わない。
+
+可否・外側理由は入力ごとに全件不変、GENERATED→UNAVAILABLEは0。利用不可27の今回の外側理由はcurrent_experiencer_or_time_scope_unsupportedが26件、plan_bound_observation_realizer_unavailableが1件。これは外側理由集計で、旧内部18／8／1の再立証ではない。27件を一括で正常停止・一括で欠陥とは判定せず、admission／Gate／parserを弱めない。
+
+華恋が最終sourceの原入力全フィールド・観測・フォローを10件ずつ全100読み、集合判定はNOT_CLEAR。今回の観測誤認は除かれたが、受領・共同作業・本人行動の意味上の区別はまだ不足する。未登録hostの授受や潜在形・複合節を本修正の成立範囲へ含めない。長い行動／関係節の復唱、同じ締め、一般的な対象参照、気持ちや価値より行動評価へ偏る選択、複文の過去予定・伝達内の現在語・他の問い／比較／可能性も残る。Mashへ未達本文のProduct Readを求めない。
+
+System Contextは作業前doctor→prepareを実行したが18成功16失敗、prepareは固定toolchain不一致で不成立。stale不使用・原典直読、profile／基準ref／tracked current変更0。実装runtimeは同セッション先行の46依存版・46wheel hash・2277 installed RECORD不一致0を確認した環境を継続使用し、今回その照合を再実行したとは主張しない。アプリ全体／国家／共通基盤、現在地図と全ファイルinventory、最新weekly review、影響ownerと旧経路の本文を確認。STRUCTURE_MAP_DELTA_NONE：新owner／route／公開schemaなし。国家保存・dispatch・queue・read-side、公開API／DB／RN、Piece／分析の変更0。
+
+次は同じ承認内で、残る問い／比較／可能性や複文の時点を、原入力→既存意味核→選択→本文へ戻って確認する。援助者・受領者の新しいactor意味契約は別の境界であり、Human ReceptionのOTHER型の存在だけからcurrent_user専用source-qualified契約を拡張しない。複文予定でも、未知の話題名詞を人／物と推測して主語を継承しない。新proposal／台帳／言い換えbank／第二selector／renderer／隠し意味を増やさず、既存ownerで成立する修正ごとに同じ100・124と必要回帰・華恋全文確認を揃える。9月12日商品確認準備は依然危うく、9月9日の作業時には改善本文・残件・見通しを確認する。PR3／30／37はDraft/open/unmerged、商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
