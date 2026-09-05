@@ -28,7 +28,7 @@ EmlisAIの安定した商品目的、production経路、NLS v3／Cycle001 WIP、
 
 このmapは、その区別と読取順をcurrent ownerとして固定する。
 
-2026-09-05のcurrent correctionは、candidate11の同じ100件全文NOT_CLEARを継承し、上流の選択済みNORMAL／LIMITED受け取り判断を唯一のHuman Reception forward／replayへ渡すrequest-local入力契約の明示承認後の接続を実装し、focused契約・本文逆検証58/58 PASS、新same100は100/124/73-27、最新関連集計180/7、華恋全文確認NOT_CLEARの段階である。現在の正本は[02 §36.3／§36.5／§38](../designs/cmee/v1/02_emlis_v1a_detailed_design.md)、[06 §89](../designs/cmee/v1/06_implementation_order_migration_and_verification.md)と既存mashos-api handoff末尾である。直接100/100、Move／expression／binding124、outer73/27、latest177/7は変更前の保存証拠であり、新入力実装後の合格証拠ではない。保存入力→応答→保存→RN表示のproduction経路、国家システム、Piece／Analysis境界は変更しない。商品状態はIMPLEMENTED_NOT_ACCEPTED、candidate ready=falseを維持する。
+2026-09-05のcurrent correctionは、承認済みの選択済みNORMAL／LIMITED判断を唯一のHuman Reception forward／replayへ接続し、原入力より強い時制の付加と未完表現の削除を修正した。最新の同じ100件は直接100／Move・expression・binding各124／外側73生成・27利用不可、華恋による新しい全文確認はNOT_CLEAR。今回4件のフォローを修正し、開始候補から通算10件の本文が変わったが、定型化・復唱と一部の意味分類が残る。固定コードの必要190検査は186成功／4失敗（元184は180／4、追加6は全成功）。現在の正本は[02 §38](../designs/cmee/v1/02_emlis_v1a_detailed_design.md)、[06の最新checkpoint](../designs/cmee/v1/06_implementation_order_migration_and_verification.md)と既存mashos-api handoff末尾。保存入力→応答→保存→RN表示のproduction経路、国家システム、Piece／Analysis境界は変えず、IMPLEMENTED_NOT_ACCEPTED／candidate ready=falseを維持する。
 
 ## 1. 商品目的
 

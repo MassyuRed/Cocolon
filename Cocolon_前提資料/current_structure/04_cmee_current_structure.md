@@ -13,7 +13,7 @@ external_body_send: 0
 retired_provider_investigation: "REMOVED_FROM_CURRENT_TREE_GIT_HISTORY_ONLY"
 current_authorized_next_work: "SELECTED_SUBJECTIVE_RECEPTION_INPUT_FORWARD_REPLAY_AND_SAME100_CLOSURE"
 only_possible_future_implementation_class: "ROUND0_FOLLOW_PRIMARY_VISIBLE_RESPONSE_CORRECTION"
-implementation_state: "DISABLED_IMPLEMENTED_NOT_ACCEPTED / CANDIDATE11_ROOT_NOT_CLEAR / REPLAY_INPUT_IMPLEMENTATION_PENDING"
+implementation_state: "DISABLED_IMPLEMENTED_NOT_ACCEPTED / ROOT_SAME100_NOT_CLEAR / REPLAY_INPUT_IMPLEMENTED"
 candidate_state: "DISABLED_IMPLEMENTED_NOT_ACCEPTED"
 candidate_ready: false
 product_read_state: "CURRENT_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFICIENT / HISTORICAL_PREDECESSOR_FAIL_RETAINED"
@@ -56,7 +56,7 @@ Current state:
     Analysis not connected
     automatic progression false
 
-Current correction status: candidate11 is direct100/100, required Move/expression/binding124, outer73/27, latest combined per-test regression177/7 and root same100 NOT_CLEAR. The selected subjective reception request-local input contract was explicitly approved on 2026-09-05; the connection is implemented, focused tests are 58/58 PASS, and the new fixed same100 is 100/124/73-27 with Karen full read NOT_CLEAR. Latest required-test aggregate is180 PASS/7 inherited FAIL after complete execution plus targeted rerun; this is not an all-green run. The current authority and exact next work are [canonical 02 §38](../designs/cmee/v1/02_emlis_v1a_detailed_design.md) and [canonical 06 §89](../designs/cmee/v1/06_implementation_order_migration_and_verification.md), together with the existing runtime handoff. This display update changes no owner, public/production route or product acceptance. Historical implementation sections below retain their dated results.
+Current correction status: the approved immutable selected-subjective input is implemented. After source time/unfinished-expression repairs, fresh same100 is100/124/73-27; Karen's complete new100 body review is NOT_CLEAR. Four follow bodies changed in this continuation, ten from the starting candidate; observations and outer availability are unchanged. The fresh required190 run is186 PASS/4 FAIL (original184 is180/4, added6 all PASS); later36-case and96 post-hash checks are executed, while cohort repetition remains failed. Historical expectations stay unchanged. The latest normative/implementation detail is canonical02 §38, canonical06 §89 and its latest appended checkpoint, and the existing runtime handoff. This is an unfinished product correction, not acceptance or production connection.
 
 Current implementation rule owner:
 
