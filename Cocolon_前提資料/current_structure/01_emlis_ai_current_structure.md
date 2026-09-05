@@ -28,7 +28,7 @@ EmlisAIの安定した商品目的、production経路、NLS v3／Cycle001 WIP、
 
 このmapは、その区別と読取順をcurrent ownerとして固定する。
 
-2026-09-05最新：肯定反応を根拠なく変化として受け取らない継続修正を実装・検証した。元入力の疑問符境界も確認する。固定sourceで同じ100件を直接生成、Move／expression／binding124、外側73/27。GENERATED側のフォロー3件を改善、観測・可否・理由・nuclei変更0、残97件は全保存項目同一。全201検査197成功／既存4失敗、新規失敗0。華恋が原入力全フィールド・観測・フォロー100件を全文確認しNOT_CLEAR。既存parserに感情marker、final Gateに同じ対象の必須義務を追加した。閾値・歴史的hash／PASS変更0。詳細と再開位置は02 §38、06末尾、既存runtime handoff末尾。長い復唱・同じ締め・対象と意味分類の残件により、9月12日商品確認準備、ready／採用／merge／本番／問い／Layer3は未成立。 新CMEE本文保存・履歴接続の完成は未主張。
+2026-09-05最新：過去の発言・思考を現在願望へ寄せない限定修正を実装・検証した。元span／typed fragmentの既存時間分類と、分割前の引用・話者・疑問境界を同じownerで確認し、Human Receptionは原文確認済みの当時参照を用いる。固定sourceで同じ100件direct100、Move／expression／binding124、外側73/27。nuclei時制とselected identityが2件変化、フォローの局所改善は利用不可側1件、生成可能73件の本文変更0。残98件は全保存項目同一、観測・可否・理由・選択act／対象／支援先の変更0。全204検査200成功／既存4失敗、新規失敗0・未実行0。華恋が原入力全フィールド・観測・フォロー100件を全文確認しNOT_CLEAR。今回のGate／parser／閾値・歴史的hash／PASS変更0。途中2版と追加検査案の失敗は保存した。詳細は02 §38、06末尾、既存runtime handoff末尾。長い復唱・同じ締め・意味分類と対象選択が残り、商品確認準備／ready／採用／merge／本番／問い／Layer3は未成立。
 
 ## 1. 商品目的
 
@@ -566,3 +566,10 @@ Current state superseding the preceding boundary checkpoint: `IN_PROGRESS_APPROV
 
 
 Latest checkpoint: Current correction status (2026-09-05): typed positive feelings retain their existing selected act and use a feeling referent instead of unsupported change. Actual perfective change needs source-bound evidence; original field/offset verification preserves question punctuation lost by Ledger trimming. Frozen same100: direct100, Move/expression/binding124, outer73/27; three GENERATED follows and their selected-input identities changed,97 full records identical. Observation/status/reasons/nuclei and selected acts/targets/supports/operation counts are unchanged in this cohort. Required201:197 PASS/4 inherited FAIL; new failures0, unexecuted0. All36 later cases and96 post-hash checks executed;96 PASS, unseen duplicate FAIL retained. Karen read all100 original inputs in every field, observations and follows:NOT_CLEAR. The initial question-boundary failure is preserved privately and corrected without altering its expectation. Existing body parser adds a feeling-target marker; final Gate requires it only for the same typed target and rejects change/words as substitutes. Replay/source/context/why duties, thresholds and historical evidence remain mandatory. New owner/carrier/schema/production route0. Existing operator:change may be explicitly added with verified source evidence; this is not a claim of zero attribute edits for all inputs. Long replay, repeated closes and upstream target/agency/tense/relation problems remain. See canonical02 §38,06 latest checkpoint and runtime handoff. Product readiness/adoption/merge/production and new CMEE history persistence remain unclaimed.
+
+
+### 2026-09-05 過去の願望発言の最新checkpoint
+
+2026-09-05最新：過去の発言・思考を現在願望へ寄せない限定修正を実装・検証した。元span／typed fragmentの既存時間分類と、分割前の引用・話者・疑問境界を同じownerで確認し、Human Receptionは原文確認済みの当時参照を用いる。固定sourceで同じ100件direct100、Move／expression／binding124、外側73/27。nuclei時制とselected identityが2件変化、フォローの局所改善は利用不可側1件、生成可能73件の本文変更0。残98件は全保存項目同一、観測・可否・理由・選択act／対象／支援先の変更0。全204検査200成功／既存4失敗、新規失敗0・未実行0。華恋が原入力全フィールド・観測・フォロー100件を全文確認しNOT_CLEAR。今回のGate／parser／閾値・歴史的hash／PASS変更0。途中2版と追加検査案の失敗は保存した。詳細は02 §38、06末尾、既存runtime handoff末尾。長い復唱・同じ締め・意味分類と対象選択が残り、商品確認準備／ready／採用／merge／本番／問い／Layer3は未成立。
+
+新しいファイルfamilyは追加せず、既存ObservationPlanが分割前の元位置を確認し、Human Receptionが同じ過去report参照をforward／replayへ渡す。現行production／国家保存経路、Piece／Analysis、CMEE本文の履歴接続には変更しない。
