@@ -6630,3 +6630,18 @@ System Contextはdoctor不成立（固定toolchain不一致）、prepare未実�
 次の再開位置は、改善した7件と未改善の行動評価を同じ原入力へ戻して比較し、既存のsource-boundな項・述語・先行詞のどこまでを省略／統合できるか確認する部分。Human Reception内部の実現不足と、既存の意味選択／source scopeの狭さを区別し、各既存ownerへ戻して扱う。別の意味選択担当、言い換えbank、隠し属性、検査緩和を導入しない。代表本文を先に確認し、コード変更後は同じ100件・必要回帰・華恋全文確認を新しく行う。同じ承認範囲の継続修正に再承認は不要。
 
 作業開始時doctorは18 PASS／16 FAIL（固定toolchain不一致）。prepare未実行、stale不使用、原典直接確認、profile／ref／lock変更0を維持した。9月12日までの商品確認準備は、集合の定型化と上流scope残件により引き続き危うい。9月9日の作業時には改善本文・100件残件・見通しを確認する。日付による自動実行・停止はしない。Product Read PASS、採用、candidate ready、merge、本番、問い／Layer3は未成立。private本文・個別ケース・digest・locatorの公開0。この結果保存の差分は文書のみで、runtime／test／runnerの検証対象bytesは変えない。
+
+
+### 2026-09-05 continuation — 願望目的語の時制補正・変更後100件の確認（未完了）
+
+承認済みの同じ継続修正をcandidate15から実施し、runtime remote `ad736865bc0b4cce24555f5d3852a62cf0b5f926`／local `c9e5ce5b63b2a1744384b98f3dbc976c35162802`（whole tree一致）で固定した。実装は既存final-only Observation Planの限定文法、追加2検査、current runner identity。目的語を修飾する非過去の継続動詞を、主述語である現在願望そのものの継続と混同しない。元のnucleus・主体・kind・modality・source範囲・continuation operatorは保持し、time_scopeと対応属性だけを訂正した。選択済み入力は既存上流ownerが訂正済みplanから新しく構築し、同じLIMITED／両側保持判断をforwardとreplayへ渡す。
+
+変更後の同じ100件・入力全フィールド・順序・評価軸・分母で直接100/100、必要Move／expression／binding各124、外側73 GENERATED／27 UNAVAILABLE。candidate15からフォロー1件だけが変わり、余分な継続断定を除去した。観測本文・外側理由・可否の変更は0。99件は保存項目全て同一、残る1件は同一wishの時制、そこから再構築したselected input、フォローが変わった。上流判断の内訳はmaterial評価116、両側保持5、限定変化1、関係姿勢2で同じ。変更は利用不可側の直接生成本文であり、73件の生成可能応答は全保存項目同一。外側の停止を通過した改善と報告しない。
+
+華恋自身が固定コードの原入力全フィールド・観測・フォロー100件を全て全文で読み、集合判定は **NOT_CLEAR**。余分な状態断定の除去は局所改善だが、長い行動の再掲、同じ締め、分類名だけの先行詞、上流の対象選択の狭さ、過去願望・発話・主体・複文・関係分類の課題が残る。Human Receptionで未選択の感情・価値を足すことで覆わない。完全な行動節の名詞化と述語内の再参照を組み合わせる案は、通常本文の既存対象marker検査を通らず短いrecoveryへ移るため棄却した。Human Receptionのtrial差分は取り消し、Gate／body parser／基準・閾値は変更していない。
+
+最終固定コードで全195件を実行し191 PASS／4 FAIL。元184は180 PASS／4 FAIL、既存追加9と今回追加2は11 PASS。candidate15で成功していた189件は今回も成功、新しい失敗test0、未実行0。残4件は観測固定値との不一致2（比較・意味分類の未解決を含む）、dated receiptと現コードの不一致1、既存経路の集合フォロー重複1。歴史的hash・PASS receiptを書き換えず、開始時7失敗の3修正済み／4残存を維持する。全36の後続cohortケースとpost-hash96検査も今回の固定コードで実行し、96成功、unseen集合重複はFAIL。診断で元testのFAILを置換しない。過去コードの共有164件157／7は今回の成功証拠にしない。
+
+System Contextは今回doctor→prepareを実行。doctor18 PASS／16 FAIL、prepareは固定toolchain不一致で不成立。stale不使用、原典直接確認、profile／基準ref／lock／tracked current変更0。全体・国家システム・既存API→保存→Emlis→返却→RN表示の責務を確認し、新CMEEのLayer1／2保存・履歴接続が完成済みとは扱わない。今回はproduction／DB／API／RN／Piece／Analysis変更0。
+
+9月12日までの商品確認準備は引き続き危うい。今回の局所補正だけでは、生成可能73件の本文の厚みと集合の定型化を改善できていないためである。次は同じ承認範囲で、既存の意味選択・source scopeを原入力の主述語・主体・不確かさへ戻して整え、その対象と受け取り方が既存Human Receptionで表現できるか代表本文から確認する。分類名の削除や定型句の差替えだけの同種試行を反復しない。文法と上流判断を一つの問題にせず、各既存ownerで修正する。9月9日の作業時にはこの本文差分と残件を中間確認する。日付による自動実行・自動停止なし。同じ承認の再要求なし。Product Read PASS／candidate ready／採用／merge／本番／問い／Layer3は未成立。private本文・個別ケース・digest・locatorはprivate checkpointへ保存し、公開しない。

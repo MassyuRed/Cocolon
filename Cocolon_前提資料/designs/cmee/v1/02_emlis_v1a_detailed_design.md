@@ -1861,3 +1861,12 @@ After the selected-reception contract save, the same unfinished verification wor
 次の再開位置は、改善した7件と未改善の行動評価を同じ原入力へ戻して比較し、既存のsource-boundな項・述語・先行詞のどこまでを省略／統合できるか確認する部分。Human Reception内部の実現不足と、既存の意味選択／source scopeの狭さを区別し、各既存ownerへ戻して扱う。別の意味選択担当、言い換えbank、隠し属性、検査緩和を導入しない。代表本文を先に確認し、コード変更後は同じ100件・必要回帰・華恋全文確認を新しく行う。同じ承認範囲の継続修正に再承認は不要。
 
 作業開始時doctorは18 PASS／16 FAIL（固定toolchain不一致）。prepare未実行、stale不使用、原典直接確認、profile／ref／lock変更0を維持した。9月12日までの商品確認準備は、集合の定型化と上流scope残件により引き続き危うい。9月9日の作業時には改善本文・100件残件・見通しを確認する。日付による自動実行・停止はしない。Product Read PASS、採用、candidate ready、merge、本番、問い／Layer3は未成立。private本文・個別ケース・digest・locatorの公開0。この結果保存の差分は文書のみで、runtime／test／runnerの検証対象bytesは変えない。
+
+
+### 2026-09-05 continuation — 願望目的語内の継続を主述語へ昇格しない
+
+既存same-nucleus status alignerの直接願望判定を、単一continuationの非過去連体形＋名詞目的語＋形容詞連用形の変化願望が句末まで閉じる場合へ限定拡張した。目的語内部の継続を願望全体の継続と扱わず、同じwishのtime_scopeと対応属性だけをcurrent_inputへ訂正する。current_user、exact1 source span、既存typed scalar範囲、元のwish modalityとcontinuing time、top-level引用なし、単一operator、句末全文一致を維持する。過去/進行連体形、過去願望、報告・引用・否定・不確かさのhost、複数continuationをこの型へ混ぜない。nucleus・actor・kind・modality・polarity・source refs・continuation operatorを保持し、graph／意味選択の固定前の既存ownerだけで扱う。
+
+既存意味ownerが訂正済みplanからselected inputを再構築し、Human Reception forward／独立replayへ同じ検証済み判断を渡す。rendererの意味再選択、source引数の削除、新しいowner、private schema、Gate／body parser／閾値変更0。完全な行動節の名詞化・再参照案は既存本文markerを満たさずrecoveryへ移るため棄却し、現runtimeへ残さない。
+
+固定runtime remote `ad736865bc0b4cce24555f5d3852a62cf0b5f926`で同じ100件を生成。直接100、Move／expression／binding124、外側73/27。フォロー1件の過剰な継続断定を除去、観測／可否／理由変更0。変更した直接本文は利用不可側で、生成可能73件は保存項目全て同じ。全195検査は191成功／既存4失敗、華恋の全100件全文確認はNOT_CLEAR。上流対象選択の狭さと既存表現の不足は未解決として分け、意味・主体・時制・関係と本文の接続を同じ承認内で継続する。詳細結果と次の再開点は06末尾／既存runtime handoff末尾が所有する。
