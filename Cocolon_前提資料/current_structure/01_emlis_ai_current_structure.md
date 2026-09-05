@@ -28,7 +28,7 @@ EmlisAIの安定した商品目的、production経路、NLS v3／Cycle001 WIP、
 
 このmapは、その区別と読取順をcurrent ownerとして固定する。
 
-2026-09-05最新checkpointは、既存final-only Observation Planで、願望の目的語内の継続を願望全体の継続と混同しない限定修正。固定コードの同じ100件は直接100／Move・expression・binding各124／外側73生成・27利用不可。フォロー1件の余分な継続断定を除き、観測・可否・理由の変更0。変更は利用不可側の直接本文で、生成可能73件の保存項目は全て同じ。華恋の変更後全100件全文確認はNOT_CLEAR。必要195検査は191成功／既存4失敗（元184は180／4、既存追加9＋今回2は全成功）、新しい失敗test0。長い再掲、定型の締め、分類名の先行詞、上流対象・主述語・主体・関係のscopeが残る。正本は[02 §38](../designs/cmee/v1/02_emlis_v1a_detailed_design.md)、[06末尾](../designs/cmee/v1/06_implementation_order_migration_and_verification.md)、既存runtime handoff末尾。同じ承認内で継続し、IMPLEMENTED_NOT_ACCEPTED／candidate ready=falseを維持する。新CMEEの本文保存・履歴接続は完成済みと扱わず、既存国家システム・production境界を維持する。
+2026-09-05最新：同じ承認の継続で有限の行動予定を願望と混同しない既存final状態補正を実装。追加3検査成功、変更後100件・関連回帰・華恋全文確認は固定後に実行する。直前候補は100／124／73-27、195件191成功／4失敗、NOT_CLEAR。新しい意味owner・Human Reception・Gate・body parser・公開経路は追加／変更しない。詳細は02 §38、06末尾、既存runtime handoff末尾。長い復唱・同じ締め・上流の主述語等は未解決。新CMEEの本文保存・履歴接続も完成済みとは扱わない。
 
 ## 1. 商品目的
 

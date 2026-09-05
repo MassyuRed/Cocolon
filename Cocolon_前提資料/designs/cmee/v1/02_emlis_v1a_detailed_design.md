@@ -23,7 +23,7 @@
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 - Stage 1 historical predecessor additional correction final body, not current: `ROUTE_A_ONLY / STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP / EARLY_ACTUAL_NOT_RUN`
 
-2026-09-05最新：選択済み判断の接続に続き、両側保持と背景の重複を既存Human Reception文法で修正した。同じ100件は100／124／73-27、今回7件・開始時から14件のフォローが変更。華恋の新しい全100件全文確認はNOT_CLEAR、必要193件は189成功／4失敗。現在の詳細・残件・再開位置は02 §38、06 §89と末尾の最新checkpoint、既存runtime handoffを優先する。ready／採用／merge／本番／問い／Layer3は未成立。
+2026-09-05最新：同じ承認で、有限の行動予定を願望と混同しない既存final状態補正を検証中。詳細・実行結果・未完了の再開位置は02 §38、06 §89と末尾の最新checkpoint、既存runtime handoffを優先する。直前の固定候補は100／124／73-27、195件191成功／4失敗、華恋の全文NOT_CLEARであり、変更後の成功証拠へ流用しない。ready／採用／merge／本番／問い／Layer3は未成立。
 
 ---
 
@@ -1870,3 +1870,14 @@ After the selected-reception contract save, the same unfinished verification wor
 既存意味ownerが訂正済みplanからselected inputを再構築し、Human Reception forward／独立replayへ同じ検証済み判断を渡す。rendererの意味再選択、source引数の削除、新しいowner、private schema、Gate／body parser／閾値変更0。完全な行動節の名詞化・再参照案は既存本文markerを満たさずrecoveryへ移るため棄却し、現runtimeへ残さない。
 
 固定runtime remote `ad736865bc0b4cce24555f5d3852a62cf0b5f926`で同じ100件を生成。直接100、Move／expression／binding124、外側73/27。フォロー1件の過剰な継続断定を除去、観測／可否／理由変更0。変更した直接本文は利用不可側で、生成可能73件は保存項目全て同じ。全195検査は191成功／既存4失敗、華恋の全100件全文確認はNOT_CLEAR。上流対象選択の狭さと既存表現の不足は未解決として分け、意味・主体・時制・関係と本文の接続を同じ承認内で継続する。詳細結果と次の再開点は06末尾／既存runtime handoff末尾が所有する。
+
+
+### 2026-09-05 continuation — 有限の行動予定を願望と混同しない（実装固定前）
+
+同じ承認の継続として、既存final-only Observation Planのsame-nucleus status alignerで、肯定の非過去動詞＋予定hostの有限末尾だけを既存intention／future／next_intention／concrete_actionへ整合する。kind、nucleus、actor、polarity、predicate kind、source範囲と文中のwish／negation operatorを保持する。既存の行動対象判定はfinal分岐でこの外側intentionを読み、上流の既存meaning ownerがMove・selected inputを再構築する。Human Receptionはその判断を既存future-action表現へ実現する。文末を越えた願望の昇格や、実行済みの主張を加えない。
+
+引用・括弧、過去予定、否定された予定、推量・疑問、明示された別主体は今回の肯定予定証明へ入れない。subjectの初期current_user値を本人の行動証明とせず、冒頭の既存calendar adjunctを除いてsubject／topicとなり得る文字が残る場合は保守的に未解決とする。目的語topicを正しく分解できない文もこの限定修正へ混ぜない。一般的な日本語の主語解析の完成ではない。
+
+既存Human Reception、Sentence Surface、Gate、body-only parser、閾値、historical hash／PASS receiptを変更しない。全体の入力保存→dispatch→production Emlis→public feedback→RN表示を実ファイルで確認し、今回のfinal seamをproduction経路・Piece・Analysisへ適用しない。STRUCTURE_MAP_DELTA_NONE：owner、経路、schema、公開契約を変えず既存final内の意味状態を補正する。構造地図の現在地案内だけを同期する。
+
+最終コードの同じ100件、関連回帰、華恋の全文判定は06末尾／既存runtime handoffに記録する。
