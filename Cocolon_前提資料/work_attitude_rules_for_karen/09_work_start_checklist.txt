@@ -1,6 +1,6 @@
 # Cocolon作業開始チェックリスト
 
-revision_date: 2026-08-13
+revision_date: 2026-08-15
 normative_status: CURRENT_EXECUTION_GATE
 status: CURRENT_EFFECTIVE
 effective_when: NECESSITY_PRODUCT_DIRECTNESS_AND_MINIMUM_SAFETY_BOUNDARY_REMOTE_POSTVERIFIED
@@ -12,10 +12,10 @@ general_rule_owner: CURRENT_RULES.md
 
 ## 0. exact start record
 
-Workを起動する前に、次のexact13 fieldsをcurrent actualで埋める。
+Workを起動する前に、次のexact14 fieldsをcurrent actualで埋める。
 
 - [ ] `product_destination`: 最終商品目的と今回の接続を平易に示した。
-- [ ] `current_gate_or_subgate`: Current Closure Route上のexact1へ対応付けた。
+- [ ] `current_gate_or_subgate`: 対象product / engineのcurrent routeまたはsubgate exact1へ対応付けた。Cycle001の場合だけCurrent Closure Routeとfresh applicable `08`へ結び付けた。
 - [ ] `exact_work`: 今回行う一つのbounded作業を示した。
 - [ ] `scope_classification`: Rule 18のLEVEL_1 / LEVEL_2 / LEVEL_3からexact1を固定した。
 - [ ] `approval_or_delegation_basis`: 個別Mash approval、Rule 18 standing delegation、effect 0 read-onlyのいずれかをcurrent ownerへ結び付けた。
@@ -26,7 +26,8 @@ Workを起動する前に、次のexact13 fieldsをcurrent actualで埋める。
 - [ ] `prohibited_scope`: 変更・実行・再利用してはいけない対象を示した。
 - [ ] `next_product_read_or_mash_decision_point`: 次にProduct ReadまたはMash判断が必要になる地点を示した。
 - [ ] `current_source_test_receipt`: actual source / protected test / latest relevant Receiptをpathとidentityで固定した。
-- [ ] `current_docs_and_heads`: current roadmap / alignment / Closure Route / `08`とCocolon / mashos-api headsを固定した。
+- [ ] `current_docs_and_heads`: 対象product / engineのcurrent docsと、変更対象repositoryのfresh headsを固定した。EmlisAI作業ではroadmap / alignmentを必要範囲で固定し、Cycle001作業の場合だけCurrent Closure Route / fresh applicable `08`も固定した。
+- [ ] `affected_current_structure_maps`: EmlisAI / Piece / 分析構造 / CMEEに影響する場合は対象map exact1以上と、構造更新または`STRUCTURE_MAP_DELTA_NONE`を固定した。該当しないCocolon作業は`NOT_APPLICABLE`とした。
 
 一つでも具体化できなければ、Workを起動せず`START_ALLOWED`を出さない。
 
@@ -85,12 +86,13 @@ authority、Receipt、checker、controller、scanner、carrierまたはledgerを
 
 - [ ] Karen-Diaryの`00_READ_FIRST.md`、`memory/karen_operating_principles.md`、`memory/mash_and_karen.md`を確認した。
 - [ ] `00_read_first.txt`と`CURRENT_RULES.md`を確認した。
-- [ ] `../08_cycle001_current_state.md`のcurrent-only本文を唯一のcurrent navigation ownerとして確認した。
-- [ ] current long-term roadmap、NLS v3 Current Alignment、Cycle001 Current Closure Routeから今回に必要なnorm / routeを確認した。
+- [ ] 三大中核構造またはCMEEを触る場合、`../current_structure/00_three_core_and_cmee_read_first.md`と対象current structure mapを確認した。
+- [ ] Cycle001作業の場合だけ、fresh applicable refの`../08_cycle001_current_state.md`を解決し、そのcurrent-only本文をCycle001の唯一のcurrent navigation ownerとして確認した。2026-08-15監査時点ではCocolon Draft PR #29 head `0854e21f92f841fd2cfdcef08b9e3117fc93f96a`がworking currentであり、merge後はfresh mainを再確認する。このSHAを将来のcurrentへ固定しない。
+- [ ] EmlisAI作業ではcurrent long-term roadmapとNLS v3 Current Alignmentを必要範囲で確認した。Cycle001作業の場合だけCycle001 Current Closure Routeも確認した。
 - [ ] Cocolon / mashos-api current headを確認した。
-- [ ] `08` / Current Closure Routeのevidence pointerから、必要なactual source / contract / protected test / latest Receiptだけを確認した。
+- [ ] Cycle001作業の場合だけ、fresh `08` / Current Closure Routeのevidence pointerから必要なactual source / contract / protected test / latest Receiptだけを確認した。
 - [ ] 指定predecessor、local materialization、未push overlayを分離した。
-- [ ] `07`はmilestone history、Planはroute / evidence mapであり、daily current next action ownerとして読んでいない。
+- [ ] Cycle001作業の場合だけ、`07`はmilestone history、Planはroute / evidence mapであり、daily current next action ownerとして読んでいない。
 
 ## D. authority / effect
 
@@ -105,8 +107,7 @@ authority、Receipt、checker、controller、scanner、carrierまたはledgerを
 - [ ] authority terminalで付与可能なprimary outcome exact4を確認し、複数primaryを予定していない。
 - [ ] `DETOUR_RISK_STOP` exact6条件を確認し、一つでも成立しているのに通常authorityを追加していない。
 - [ ] mechanical repairを含む場合、prior failure closure、Mash様が明示承認したnew authority exact1、`BOUNDED_MECHANICAL_REPAIR`全条件、repair exact1、fresh rerun exact1、second failure STOPを事前固定した。
-- [ ] prior G4-Bは`DETOUR_RISK_STOP`、minimum preflightはPASS、G4-BからG10はterminal済みであり、checker / controller / FD routeをcurrent next actionへ戻していない。
-- [ ] current nextは`RETURN_TO_SHARED_STRUCTURAL_CORRECTION`であり、G9のBLOCKER 58 / MAJOR 40とbase pipeline / product surfaceの実原因を直接減らす作業である。
+- [ ] Cycle001作業の場合、fresh applicable `08`が示すcurrent state / first actionだけを採用し、2026-08-13以前のG0–G10、checker / controller / FD、旧RETURN_TO_SHARED_STRUCTURAL_CORRECTIONをcurrent next actionへ戻していない。
 
 ## E. specialized rule activation
 
@@ -118,8 +119,9 @@ authority、Receipt、checker、controller、scanner、carrierまたはledgerを
 - [ ] Mash様への操作依頼 → rule 07。
 - [ ] 質問 / 構想確認 → rule 13。
 - [ ] EmlisAI → EmlisAI current policy / design / actual files + rules 05 / 10 / 13。
-- [ ] Piece → rule 11 + `Cocolon_Piece/00_read_first.md` + manifest。
-- [ ] Analysis → rule 11 + Analysis current owner / actual files。
+- [ ] Piece → rule 11 + `../current_structure/02_piece_current_structure.md` + `../../Cocolon_Piece/00_read_first.md` + `../../Cocolon_Piece/manifest.json`。
+- [ ] Analysis → rule 11 + `../current_structure/03_analysis_current_structure.md` + actual files。
+- [ ] CMEE → rule 11 + `../current_structure/04_cmee_current_structure.md` + full design candidate。
 - [ ] API / DB / RN / IAP / account → `../05_cocolon_rule_file_index.md`の対象contract / guard / test。
 
 ## F. Mash様への質問・依頼
@@ -141,6 +143,8 @@ authority、Receipt、checker、controller、scanner、carrierまたはledgerを
 - [ ] fixture / test greenだけで商品品質合格としない。
 - [ ] machine GREEN、Product Read、runtime readinessのclaim / denominator / creditを分離した。
 - [ ] current product definitionと過去構想を分けた。
+- [ ] 商品目的、user-visible flow、component責任、active owner path、API / DB / RN、artifact lifecycle、current / future、cross-core境界のいずれかを変える場合、対象current structure mapを同じwrite unitで更新する。
+- [ ] 上記に構造差分がないbounded fixではmapをchurnさせず、`STRUCTURE_MAP_DELTA_NONE`と理由を記録する。
 
 ## H. artifact / GitHub / continuity
 
@@ -152,18 +156,18 @@ authority、Receipt、checker、controller、scanner、carrierまたはledgerを
 - [ ] secret / body-full private evidenceをpublic GitHubへ出さない。
 - [ ] authority terminalのbody-free Receipt exact1を必須ownerとして予定した。
 - [ ] Result、Handoff、standalone comparisonは各conditional条件が成立する場合だけ予定した。
-- [ ] `08`はcurrent-only replace、`07`はmilestone-only append、Planはdaily current ownerではない境界を維持した。
+- [ ] Cycle001 workの場合、fresh applicable `08`はcurrent-only replace、`07`はmilestone-only append、Planはdaily current ownerではない境界を維持した。
 
 ## I. Cycle001 current-state gate
 
 Cycle001作業の場合、次を全て満たす。
 
-- [ ] `../08_cycle001_current_state.md`を読んだ。
+- [ ] fresh applicable refの`../08_cycle001_current_state.md`を読んだ。2026-08-15監査時点のworking currentはCocolon Draft PR #29 head `0854e21f92f841fd2cfdcef08b9e3117fc93f96a`であり、mainのolder fileを採用していない。
 - [ ] current Cocolon HEAD以後の関連changed pathsを確認した。
 - [ ] current recovery lineage、last reusable technical credit、first unfinished technical gateを一意に説明できる。
 - [ ] historical G1 / G2、selected R5、retired Inspector V2系列を次作業へ戻していない。
 - [ ] checker / controller / FDを含むprior G4-B detourをnext actionへ戻していない。
-- [ ] 今回の作業はCycle001 acceptanceを阻害するactual product / pipeline failureを直接修正・再評価するか、その因果source / test / case rowを確定する。
+- [ ] fresh applicable `08`が示すfirst action / decision boundaryへ直接対応し、そのscope外の実装・再評価を開始していない。actual repairを行う場合だけ、直接扱うcause / source / protected test / case rowを固定した。
 - [ ] authority、STOP、Handoff、snapshot、ledger、Planだけを増やす結果を成果にしていない。
 - [ ] 成功すると減る未完了条件と、直接扱う実ファイル / test / receiptを示した。
 
@@ -181,22 +185,12 @@ START_ALLOWED
 
 checklistを読んだという宣言だけで`START_ALLOWED`にしません。
 
-CURRENT NECESSITY / CYCLE001 WORK-START PRECEDENCE — 2026-08-13
+## K. 2026-08-13 precedenceの扱い
 
-- [ ] prior G4-B is `DETOUR_RISK_STOP`; further checker / controller / FD development remains stopped.
-- [ ] G4-B minimum preflight, G4-C, G5, G6, G8, G9 and G10 are not rerun as proof-of-proof work.
-- [ ] Cycle001 is `NOT_ACCEPTED`; current route is shared structural correction, not runtime-safety mechanism development.
-- [ ] next work directly reduces the observed base-pipeline rejection or current product-surface residue and has a predeclared Product Read / exact100 exit.
-- [ ] R1.1 exact3 classification and exact6 conditions are all satisfied.
+2026-08-13のRETURN_TO_SHARED_STRUCTURAL_CORRECTION / G9 BLOCKER58 / MAJOR40はHISTORICAL_PRECEDENCE_SUPERSEDEDであり、current next actionを所有しない。
 
-```text
-CURRENT_PRECEDENCE_EFFECTIVE_DATE = 2026-08-13
-CURRENT_NAVIGATION_OWNER = Cocolon_前提資料/08_cycle001_current_state.md
-PRIOR_G4_B = DETOUR_RISK_STOP
-SAFETY_DEVICE_FURTHER_DEVELOPMENT = STOPPED
-G4_B_TO_G10 = COMPLETED
-CYCLE001 = NOT_ACCEPTED
-CURRENT_ROUTE = RETURN_TO_SHARED_STRUCTURAL_CORRECTION
-CURRENT_AUTHORITY = STOP
-AUTOMATIC_PROGRESSION = FALSE
-```
+Cycle001 currentは、作業時にfresh applicable refの08_cycle001_current_state.mdから解決する。2026-08-15監査時点ではCocolon Draft PR #29 head 0854e21f92f841fd2cfdcef08b9e3117fc93f96aがworking currentで、FORMAL_LEXICAL_AUTHORITY_UNRESOLVED、NO_SAFE_STEP1_INTERMEDIATE_GATE_CORRECTION_FOR_CURRENT_ACTUAL_V1、Step2 / Step3 forbidden、Cycle001 NOT_ACCEPTED、automatic progression falseである。
+
+このaudit SHAを将来のcurrentへ固定しない。Draftがmergeされた場合はmain、headが進んだ場合は新headのtarget bytesをfresh確認する。
+
+
