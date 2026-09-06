@@ -28,7 +28,7 @@ EmlisAIの安定した商品目的、production経路、NLS v3／Cycle001 WIP、
 
 このmapは、その区別と読取順をcurrent ownerとして固定する。
 
-2026-09-06最新（関係で結ばれた共同主題を保持／candidate26）：final専用の既存ObservationPlanで、適格lived_change候補が一つの従来単一primaryに加え、全primaryが二つで両者が既存required関係（uncertain_connectionを除く）により結ばれる場合も、低scoreの非directional補助行動に押しのけられないよう限定補正した。独立主題・複数適格候補・三つ以上は対象外。primary数とMove数の条件は別である。固定100はdirect100、Move／expression／binding124、外側73/27。生成可能側1件のフォローと選択inputが変わり、別1件は参照識別子のみ、残98件は全保存項目同一。原入力・核・観察・可否・理由は全100同一。全220検査216成功／既存4失敗、新規失敗0・未実行0。華恋が全100の原入力全フィールド・両層本文を読みNOT_CLEAR。長い再掲・定型的な締め、通常の負担・未完・混合状態の選択は残件。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+2026-09-06最新（注意と受け止めの対象を接続／candidate27）：既存Human Receptionのattention「対象に目が留まり」の後へ、同じ対象を受ける既存格補語を置き、受け止め述語の目的語脱落を補正した。意味核・関係・主題順位・Move・選択inputは変更しない。固定100はdirect100、Move／expression／binding124、外側73/27。フォロー73件のみ上記接続が変わり、残27件は全保存項目同一。全222検査218成功／既存4失敗、新規失敗0・未実行0。華恋が原入力全フィールド・両層本文の全100を読みNOT_CLEAR。長い再掲・分類的な対象句・定型的な締め、負担／未完／混合状態の選択は残件。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
 
 ## 1. 商品目的
 
@@ -621,3 +621,10 @@ STRUCTURE_MAP_DELTA_NONE：既存final ObservationPlanの選択から同じforwa
 2026-09-06最新（関係で結ばれた共同主題を保持／candidate26）：final専用の既存ObservationPlanで、適格lived_change候補が一つの従来単一primaryに加え、全primaryが二つで両者が既存required関係（uncertain_connectionを除く）により結ばれる場合も、低scoreの非directional補助行動に押しのけられないよう限定補正した。独立主題・複数適格候補・三つ以上は対象外。primary数とMove数の条件は別である。固定100はdirect100、Move／expression／binding124、外側73/27。生成可能側1件のフォローと選択inputが変わり、別1件は参照識別子のみ、残98件は全保存項目同一。原入力・核・観察・可否・理由は全100同一。全220検査216成功／既存4失敗、新規失敗0・未実行0。華恋が全100の原入力全フィールド・両層本文を読みNOT_CLEAR。長い再掲・定型的な締め、通常の負担・未完・混合状態の選択は残件。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
 
 STRUCTURE_MAP_DELTA_NONE：既存final ObservationPlanの順位条件のみを補正し、同じforward／replay経路を維持する。新owner／route／公開schema、国家・公開／旧経路・Piece／分析変更0。詳細な条件、先行診断の失敗、最終sourceと検証、環境照合、残件は正本02／06と既存runtime handoffのcandidate26末尾を参照。
+
+
+### 2026-09-06 continuation — 注意と受け止めの対象接続
+
+2026-09-06最新（注意と受け止めの対象を接続／candidate27）：既存Human Receptionのattention「対象に目が留まり」の後へ、同じ対象を受ける既存格補語を置き、受け止め述語の目的語脱落を補正した。意味核・関係・主題順位・Move・選択inputは変更しない。固定100はdirect100、Move／expression／binding124、外側73/27。フォロー73件のみ上記接続が変わり、残27件は全保存項目同一。全222検査218成功／既存4失敗、新規失敗0・未実行0。華恋が原入力全フィールド・両層本文の全100を読みNOT_CLEAR。長い再掲・分類的な対象句・定型的な締め、負担／未完／混合状態の選択は残件。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+
+STRUCTURE_MAP_DELTA_NONE：既存Human Receptionの文法部品のみ。owner／国家／公開・旧経路／他中核の境界は同じ。実装・検証・残件は正本02／06と既存runtime handoffのcandidate27末尾を参照。
