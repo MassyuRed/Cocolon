@@ -1,7 +1,7 @@
 # CMEE V1-A — EmlisAI Observation Vertical 詳細設計
 
 - document id: `cocolon.cmee.v1a.emlis_observation.detailed_design`
-- revision date: `2026-09-05 JST`
+- revision date: `2026-09-06 JST`
 - lifecycle: `CURRENT_PRODUCT_OWNER_NON_PASS / REALIZABLE_RECEPTION_EXPRESSION_WORK_STAGE1_ACTIVE`
 - runtime state: `DRAFT_WIP_DISABLED_INHERITED_OWNER_CHAIN_IM10_NON_PASS`
 - historical predecessor implementation evidence: `MassyuRed/mashos-api Draft PR #3 @ d26b3521f0cd63421af3596277145b2e52dafbbe / NOT_CURRENT_OWNER_HEAD`
@@ -23,7 +23,7 @@
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 - Stage 1 historical predecessor additional correction final body, not current: `ROUTE_A_ONLY / STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP / EARLY_ACTUAL_NOT_RUN`
 
-2026-09-05最新：既存動作語の授受補助動詞について、本人が埋込行為を実行したという根拠のないperformed属性を付けないよう、既存final same-nucleus status補正を限定修正した。数量表現・場所格と後続の本人行動は保持。固定100はdirect100、Move／expression／binding124、外側73/27で入力・順序・可否・理由変更0。生成可能側1件の観測だけが変わり、選択decisionと全フォローは同一、残99件は全保存項目同一。全211検査207成功／既存4失敗、新規失敗0・未実行0。華恋は全100の原入力全フィールド・観測・フォローを読みNOT_CLEAR。受領の意味契約と未登録述語、複文の主体・時制・予定、他の問い／比較／可能性、長い復唱・同じ締め・行動評価偏重が残る。詳細は02 §38と末尾、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+2026-09-06最新：後置の理由疑問を変化／行動の断定として扱う誤りを、既存final ObservationPlanのsource分類で限定補正した。完結した外側疑問を元fieldとoffsetで証明し、同じnucleusのkind・predicate_kind・modalityと既存uncertainty属性だけを整合する。固定100はdirect100、Move／expression／binding124、外側73/27で入力・順序・可否・理由変更0。生成可能側1件の観察とフォローが変わり、選択済み未完了appraisalが両層へ届いた。他99件は全保存項目同一。全214検査210成功／既存4失敗、新規失敗0・未実行0。華恋は全100の原入力全フィールド・観察・フォローを読みNOT_CLEAR。問いの語調も含む自然さ、複文の主体・時制・予定、他の問い／比較／可能性、長い復唱・同じ締め・行動評価偏重が残る。詳細は02 §38と末尾、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
 
 ---
 
@@ -2051,3 +2051,14 @@ System Contextはdoctor→prepareを実行し18成功16失敗、prepareは固定
 System Contextは作業前doctor→prepareを実行したが18成功16失敗、prepareは固定toolchain不一致で不成立。stale不使用・原典直読、profile／基準ref／tracked current変更0。実装runtimeは同セッション先行の46依存版・46wheel hash・2277 installed RECORD不一致0を確認した環境を継続使用し、今回その照合を再実行したとは主張しない。アプリ全体／国家／共通基盤、現在地図と全ファイルinventory、最新weekly review、影響ownerと旧経路の本文を確認。STRUCTURE_MAP_DELTA_NONE：新owner／route／公開schemaなし。国家保存・dispatch・queue・read-side、公開API／DB／RN、Piece／分析の変更0。
 
 次は同じ承認内で、残る問い／比較／可能性や複文の時点を、原入力→既存意味核→選択→本文へ戻って確認する。援助者・受領者の新しいactor意味契約は別の境界であり、Human ReceptionのOTHER型の存在だけからcurrent_user専用source-qualified契約を拡張しない。複文予定でも、未知の話題名詞を人／物と推測して主語を継承しない。新proposal／台帳／言い換えbank／第二selector／renderer／隠し意味を増やさず、既存ownerで成立する修正ごとに同じ100・124と必要回帰・華恋全文確認を揃える。9月12日商品確認準備は依然危うく、9月9日の作業時には改善本文・残件・見通しを確認する。PR3／30／37はDraft/open/unmerged、商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+
+
+### 2026-09-06 continuation — 後置理由疑問の同核source補正
+
+継承承認の同じ実装作業として、既存final ObservationPlanの `_final_stage1_typed_nuclei` 内の理由疑問補正を限定拡張した。既存action／change核について、元field／offset／source一致、引用外の同位置、前の文境界から未所有prefixなし、外側終端の完結を確認した後置理由疑問だけを既存uncertainty型へ揃える。後置語形自身が外側の未確定を証明するため、同じsemantic frameのmodalityをuncertainへ揃え、既存operator:uncertaintyを保持／補足する。前置理由疑問は従来のuncertainと既存uncertainty属性の条件を維持する。nucleus ID、actor、polarity、時制、原文、source／anchor、argument、関係と未知の範囲は保持する。
+
+先行する読点節は、明示の逆接従属節に限定し、独立断定の並列を問い全体のuncertaintyへ取り込まない。引用・report suffix・span外主語・原文不一致・source欠落は補正しない。既存projectionが成立する核や他のkindへ一括適用せず、全理由疑問・比較・可能性の分類完成とも扱わない。新helper／辞書／型／意味carrier／selector／renderer／公開base経路は追加しない。
+
+同じ既存graph／kind-authoritative direct shapeからPRESENT_UNFINISHEDが得られ、既存の選択ownerがLEAVE_UNFINISHEDを決める。既存immutable request-local decisionをHuman Receptionのforwardと独立replayがともに消費する。新しい本文で選択をやり直さず、Surface／Gate／inverseの責任・判定・閾値を維持する。positive change等の既存根拠属性とreception actも保持されるため、問いに対する受け止めの語調まで自然になったとは主張しない。
+
+2026-09-06最新：後置の理由疑問を変化／行動の断定として扱う誤りを、既存final ObservationPlanのsource分類で限定補正した。完結した外側疑問を元fieldとoffsetで証明し、同じnucleusのkind・predicate_kind・modalityと既存uncertainty属性だけを整合する。固定100はdirect100、Move／expression／binding124、外側73/27で入力・順序・可否・理由変更0。生成可能側1件の観察とフォローが変わり、選択済み未完了appraisalが両層へ届いた。他99件は全保存項目同一。全214検査210成功／既存4失敗、新規失敗0・未実行0。華恋は全100の原入力全フィールド・観察・フォローを読みNOT_CLEAR。問いの語調も含む自然さ、複文の主体・時制・予定、他の問い／比較／可能性、長い復唱・同じ締め・行動評価偏重が残る。詳細は02 §38と末尾、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。

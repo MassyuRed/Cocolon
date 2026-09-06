@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_emlis_ai_current_structure
 title: "EmlisAI構造 — Current Structure"
-revision_date: "2026-09-05 JST"
+revision_date: "2026-09-06 JST"
 document_role: "EMLIS_AI_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -28,7 +28,7 @@ EmlisAIの安定した商品目的、production経路、NLS v3／Cycle001 WIP、
 
 このmapは、その区別と読取順をcurrent ownerとして固定する。
 
-2026-09-05最新：既存動作語の授受補助動詞について、本人が埋込行為を実行したという根拠のないperformed属性を付けないよう、既存final same-nucleus status補正を限定修正した。数量表現・場所格と後続の本人行動は保持。固定100はdirect100、Move／expression／binding124、外側73/27で入力・順序・可否・理由変更0。生成可能側1件の観測だけが変わり、選択decisionと全フォローは同一、残99件は全保存項目同一。全211検査207成功／既存4失敗、新規失敗0・未実行0。華恋は全100の原入力全フィールド・観測・フォローを読みNOT_CLEAR。受領の意味契約と未登録述語、複文の主体・時制・予定、他の問い／比較／可能性、長い復唱・同じ締め・行動評価偏重が残る。詳細は02 §38と末尾、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+2026-09-06最新：後置の理由疑問を変化／行動の断定として扱う誤りを、既存final ObservationPlanのsource分類で限定補正した。完結した外側疑問を元fieldとoffsetで証明し、同じnucleusのkind・predicate_kind・modalityと既存uncertainty属性だけを整合する。固定100はdirect100、Move／expression／binding124、外側73/27で入力・順序・可否・理由変更0。生成可能側1件の観察とフォローが変わり、選択済み未完了appraisalが両層へ届いた。他99件は全保存項目同一。全214検査210成功／既存4失敗、新規失敗0・未実行0。華恋は全100の原入力全フィールド・観察・フォローを読みNOT_CLEAR。問いの語調も含む自然さ、複文の主体・時制・予定、他の問い／比較／可能性、長い復唱・同じ締め・行動評価偏重が残る。詳細は02 §38と末尾、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
 
 ## 1. 商品目的
 
@@ -586,3 +586,10 @@ Latest checkpoint: Current correction status (2026-09-05): typed positive feelin
 2026-09-05最新：既存動作語の授受補助動詞について、本人が埋込行為を実行したという根拠のないperformed属性を付けないよう、既存final same-nucleus status補正を限定修正した。数量表現・場所格と後続の本人行動は保持。固定100はdirect100、Move／expression／binding124、外側73/27で入力・順序・可否・理由変更0。生成可能側1件の観測だけが変わり、選択decisionと全フォローは同一、残99件は全保存項目同一。全211検査207成功／既存4失敗、新規失敗0・未実行0。華恋は全100の原入力全フィールド・観測・フォローを読みNOT_CLEAR。受領の意味契約と未登録述語、複文の主体・時制・予定、他の問い／比較／可能性、長い復唱・同じ締め・行動評価偏重が残る。詳細は02 §38と末尾、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
 
 既存ObservationPlan内部のstatus証明条件と直接関連テスト・現在runner identityを更新。STRUCTURE_MAP_DELTA_NONE。source／public actor契約、国家／共通基盤／旧経路／他中核との境界は同じ。System Contextはdoctor→prepare不成立・stale不使用・原典直読。詳細と残るactor契約境界は正本02／06末尾。
+
+
+### 2026-09-06 continuation — 後置理由疑問のsource補正
+
+2026-09-06最新：後置の理由疑問を変化／行動の断定として扱う誤りを、既存final ObservationPlanのsource分類で限定補正した。完結した外側疑問を元fieldとoffsetで証明し、同じnucleusのkind・predicate_kind・modalityと既存uncertainty属性だけを整合する。固定100はdirect100、Move／expression／binding124、外側73/27で入力・順序・可否・理由変更0。生成可能側1件の観察とフォローが変わり、選択済み未完了appraisalが両層へ届いた。他99件は全保存項目同一。全214検査210成功／既存4失敗、新規失敗0・未実行0。華恋は全100の原入力全フィールド・観察・フォローを読みNOT_CLEAR。問いの語調も含む自然さ、複文の主体・時制・予定、他の問い／比較／可能性、長い復唱・同じ締め・行動評価偏重が残る。詳細は02 §38と末尾、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+
+STRUCTURE_MAP_DELTA_NONE：既存final ObservationPlanからHuman Receptionの選択済み意味消費までの同じ経路であり、新owner／route／公開schemaはない。国家保存・dispatch・queue・read-side、公開API／DB／RN、Piece／分析の変更0。
