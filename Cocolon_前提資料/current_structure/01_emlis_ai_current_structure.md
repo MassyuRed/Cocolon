@@ -28,7 +28,9 @@ EmlisAIの安定した商品目的、production経路、NLS v3／Cycle001 WIP、
 
 このmapは、その区別と読取順をcurrent ownerとして固定する。
 
-2026-09-06最新（予定行動の具体的な対象句／candidate34）：既存sourceが未来のintentionとして持つ本人の行動の完全な非過去節を、final explicit/compositeの同一対象へ接続し、分類句の重複を除いた。kind/voice/未来の扱い・選択input・厳格な全文replayを維持。固定100はdirect100／124／73-27、生成可能側1件のフォローのみ変化、残99件は全保存項目同一。必須247検査243成功／既存4失敗、新規失敗0。華恋が全100全文を読みNOT_CLEAR。未来一般句全般、定型締め、補助行動偏重、未完/混合状態・受援の具体的な受け止めは残件。詳細は02/06とruntime handoffのcandidate34末尾。商品確認準備/ready/採用/merge/本番/Layer3は未成立。
+2026-09-06最新（変化の未解決部分を受け止め対象へ接続／candidate35）：既存sourceがuncertaintyとして持つ単一SELF targetのfinal ANAPHORIC参照へ未知範囲を残し、選択済みLEAVE_UNFINISHEDに限り受け止める既存述語で実現した。kind/act/polarity/selected inputと既存Gate・全文replayを維持。固定100はdirect100／124／73-27、生成可能側1件のフォローのみ変化、残99件は全保存項目同一。必須251検査247成功／既存4失敗、新規失敗0。華恋が全100全文を読みNOT_CLEAR。一般的参照句・定型締め・補助行動偏重・複数endpointの未完/混合状態と受援等は残件。詳細は02/06とruntime handoffのcandidate35末尾。商品確認準備/ready/採用/merge/本番/Layer3は未成立。
+
+2026-09-06前回（予定行動の具体的な対象句／candidate34）：既存sourceが未来のintentionとして持つ本人の行動の完全な非過去節を、final explicit/compositeの同一対象へ接続し、分類句の重複を除いた。kind/voice/未来の扱い・選択input・厳格な全文replayを維持。固定100はdirect100／124／73-27、生成可能側1件のフォローのみ変化、残99件は全保存項目同一。必須247検査243成功／既存4失敗、新規失敗0。華恋が全100全文を読みNOT_CLEAR。未来一般句全般、定型締め、補助行動偏重、未完/混合状態・受援の具体的な受け止めは残件。詳細は02/06とruntime handoffのcandidate34末尾。商品確認準備/ready/採用/merge/本番/Layer3は未成立。
 
 2026-09-06前回（否定感覚名詞句の二重参照を除去／candidate33）：既存の可逆名詞句をfinal ANAPHORICの同一対象へ接続し、一般的参照句の重複を除いた。新owner/selector/Move/schemaは追加せず、同じ選択済みinputと全文replayを維持。固定100はdirect100／124／73-27、生成可能側1件のフォローだけ変更、残99件は全保存項目同一。必須242検査238成功／既存4失敗、新規失敗0。華恋が確定100件を全文確認しNOT_CLEAR。一般的参照句全般、定型締め、補助行動偏重、未完/混合状態・受援の具体的な受け止めは残件。詳細は02/06とruntime handoffのcandidate33末尾。商品確認準備/ready/採用/merge/本番/Layer3は未成立。
 
