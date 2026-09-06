@@ -28,7 +28,7 @@ EmlisAIの安定した商品目的、production経路、NLS v3／Cycle001 WIP、
 
 このmapは、その区別と読取順をcurrent ownerとして固定する。
 
-2026-09-06最新（注意と受け止めの対象を接続／candidate27）：既存Human Receptionのattention「対象に目が留まり」の後へ、同じ対象を受ける既存格補語を置き、受け止め述語の目的語脱落を補正した。意味核・関係・主題順位・Move・選択inputは変更しない。固定100はdirect100、Move／expression／binding124、外側73/27。フォロー73件のみ上記接続が変わり、残27件は全保存項目同一。全222検査218成功／既存4失敗、新規失敗0・未実行0。華恋が原入力全フィールド・両層本文の全100を読みNOT_CLEAR。長い再掲・分類的な対象句・定型的な締め、負担／未完／混合状態の選択は残件。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+2026-09-06最新（対比の対象節と丁寧な背景節の名詞化／candidate28）：既存Human Receptionで、選択済みcontrastの対象節だけを有限化し、丁寧な背景節を原文のまま名詞化した。引用を含むsource fieldと言いかけは有限化を見送る。意味核・関係・対象順位・Move・選択inputは変更しない。固定100はdirect100、Move／expression／binding124、外側73/27。フォロー1件だけが変わり、残99件は全保存項目同一。全225検査221成功／既存4失敗、新規失敗0・未実行0。華恋が原入力全フィールド・両層本文の全100を読みNOT_CLEAR。長い再掲・分類的な対象句・定型的な締め、負担／未完／混合状態の選択は残件。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
 
 ## 1. 商品目的
 
@@ -628,3 +628,10 @@ STRUCTURE_MAP_DELTA_NONE：既存final ObservationPlanの順位条件のみを�
 2026-09-06最新（注意と受け止めの対象を接続／candidate27）：既存Human Receptionのattention「対象に目が留まり」の後へ、同じ対象を受ける既存格補語を置き、受け止め述語の目的語脱落を補正した。意味核・関係・主題順位・Move・選択inputは変更しない。固定100はdirect100、Move／expression／binding124、外側73/27。フォロー73件のみ上記接続が変わり、残27件は全保存項目同一。全222検査218成功／既存4失敗、新規失敗0・未実行0。華恋が原入力全フィールド・両層本文の全100を読みNOT_CLEAR。長い再掲・分類的な対象句・定型的な締め、負担／未完／混合状態の選択は残件。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
 
 STRUCTURE_MAP_DELTA_NONE：既存Human Receptionの文法部品のみ。owner／国家／公開・旧経路／他中核の境界は同じ。実装・検証・残件は正本02／06と既存runtime handoffのcandidate27末尾を参照。
+
+
+### 2026-09-06 continuation — 対比の対象節と丁寧な背景節の名詞化
+
+2026-09-06最新（対比の対象節と丁寧な背景節の名詞化／candidate28）：既存Human Receptionで、選択済みcontrastの対象節だけを有限化し、丁寧な背景節を原文のまま名詞化した。引用を含むsource fieldと言いかけは有限化を見送る。意味核・関係・対象順位・Move・選択inputは変更しない。固定100はdirect100、Move／expression／binding124、外側73/27。フォロー1件だけが変わり、残99件は全保存項目同一。全225検査221成功／既存4失敗、新規失敗0・未実行0。華恋が原入力全フィールド・両層本文の全100を読みNOT_CLEAR。長い再掲・分類的な対象句・定型的な締め、負担／未完／混合状態の選択は残件。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+
+STRUCTURE_MAP_DELTA_NONE：既存Human Receptionの文法処理のみ。owner／国家／公開・旧経路／他中核の境界は同じ。実装・検証・残件は正本02／06と既存runtime handoffのcandidate28末尾を参照。
