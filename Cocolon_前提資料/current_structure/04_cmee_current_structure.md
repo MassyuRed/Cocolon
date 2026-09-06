@@ -56,7 +56,7 @@ Current state:
     Analysis not connected
     automatic progression false
 
-2026-09-06最新：後置の理由疑問を変化／行動の断定として扱う誤りを、既存final ObservationPlanのsource分類で限定補正した。完結した外側疑問を元fieldとoffsetで証明し、同じnucleusのkind・predicate_kind・modalityと既存uncertainty属性だけを整合する。固定100はdirect100、Move／expression／binding124、外側73/27で入力・順序・可否・理由変更0。生成可能側1件の観察とフォローが変わり、選択済み未完了appraisalが両層へ届いた。他99件は全保存項目同一。全214検査210成功／既存4失敗、新規失敗0・未実行0。華恋は全100の原入力全フィールド・観察・フォローを読みNOT_CLEAR。問いの語調も含む自然さ、複文の主体・時制・予定、他の問い／比較／可能性、長い復唱・同じ締め・行動評価偏重が残る。詳細は02 §38と末尾、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+2026-09-06最新（受け止め補語の節スコープ）：既存Human Receptionで、選択済みの未完了補語を節先頭へ置き、対象とact述語の直接接続を回復した。語彙・意味選択・act・対象・時制は保持。固定100はdirect100、Move／expression／binding124、外側73/27。フォロー2件のみ変更、観察・選択decision・可否・理由は全100同一。別1件に既存operator属性の順序とinput／grounding識別子の差があり、本文改善に数えない。全215検査211成功／既存4失敗、新規失敗0・未実行0。華恋は原入力全フィールド・観察・フォロー全100を読みNOT_CLEAR。問いの意味の浅さ、行動主対象への偏り、長い再掲・同じ締め、複文の主体・時制・予定、他の問い／比較／可能性が残る。次は既存ObservationPlanの主対象順位・burden候補除去・副Move候補を原意と照合する。詳細は02 §38と末尾、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
 
 Current implementation rule owner:
 
@@ -926,3 +926,10 @@ Latest checkpoint: Current correction status (2026-09-05): typed positive feelin
 2026-09-06最新：後置の理由疑問を変化／行動の断定として扱う誤りを、既存final ObservationPlanのsource分類で限定補正した。完結した外側疑問を元fieldとoffsetで証明し、同じnucleusのkind・predicate_kind・modalityと既存uncertainty属性だけを整合する。固定100はdirect100、Move／expression／binding124、外側73/27で入力・順序・可否・理由変更0。生成可能側1件の観察とフォローが変わり、選択済み未完了appraisalが両層へ届いた。他99件は全保存項目同一。全214検査210成功／既存4失敗、新規失敗0・未実行0。華恋は全100の原入力全フィールド・観察・フォローを読みNOT_CLEAR。問いの語調も含む自然さ、複文の主体・時制・予定、他の問い／比較／可能性、長い復唱・同じ締め・行動評価偏重が残る。詳細は02 §38と末尾、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
 
 STRUCTURE_MAP_DELTA_NONE：既存final ObservationPlanからHuman Receptionの選択済み意味消費までの同じ経路であり、新owner／route／公開schemaはない。国家保存・dispatch・queue・read-side、公開API／DB／RN、Piece／分析の変更0。
+
+
+### 2026-09-06 continuation — 受け止め補語の節スコープ
+
+2026-09-06最新（受け止め補語の節スコープ）：既存Human Receptionで、選択済みの未完了補語を節先頭へ置き、対象とact述語の直接接続を回復した。語彙・意味選択・act・対象・時制は保持。固定100はdirect100、Move／expression／binding124、外側73/27。フォロー2件のみ変更、観察・選択decision・可否・理由は全100同一。別1件に既存operator属性の順序とinput／grounding識別子の差があり、本文改善に数えない。全215検査211成功／既存4失敗、新規失敗0・未実行0。華恋は原入力全フィールド・観察・フォロー全100を読みNOT_CLEAR。問いの意味の浅さ、行動主対象への偏り、長い再掲・同じ締め、複文の主体・時制・予定、他の問い／比較／可能性が残る。次は既存ObservationPlanの主対象順位・burden候補除去・副Move候補を原意と照合する。詳細は02 §38と末尾、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+
+STRUCTURE_MAP_DELTA_NONE：Human Reception内部の文法配置のみ。owner／国家／公開経路・旧経路変更0。
