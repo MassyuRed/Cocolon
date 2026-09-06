@@ -56,7 +56,9 @@ Current state:
     Analysis not connected
     automatic progression false
 
-2026-09-06最新（具体的な実行済み行動の対象句／candidate30）：既存Human Receptionで、同じsourceで実行済みと確認された本人の行動の完全節を「〜したこと」等の対象句として実現し、sole author・body-only構文witness・独立inverseの照合をそろえた。意味選択・Move・source内容・full replay・context等の義務は保持。固定100はdirect100／124／73-27、フォロー52件のみ変更、残48件とフォロー以外の全100保存項目は同一。test修正後の再生成も全100同一。最終230検査226成功／既存4失敗、新規失敗0。華恋が原入力全フィールド・両層全100を読みNOT_CLEAR。分類語の一部は解消したが、長い再掲・定型的な締め・補助行動偏重・負担／未完／混合状態は残件。詳細は02／06とruntime handoffのcandidate30末尾。商品確認準備／ready／採用／merge／本番／Layer3は未成立。
+2026-09-06最新（否定背景節の可逆な名詞化／candidate31）：同じ選択済みcontrast contextの完全節「なくて」を「ないこと」へ活用し、既存nominalization tupleの封印と独立原文復元をそろえた。source内容・関係・full replay・context／why等の義務を保持し、alias／引用／非正規slot／無効sourceを防御。固定100はdirect100／124／73-27、フォロー1件のみ変更、99件とフォロー以外の全100保存項目は同一。必須235検査231成功／既存4失敗、新規失敗0。華恋が全100の原入力・両層を全文確認しNOT_CLEAR。長い再掲・定型締め・補助行動偏重・負担／未完／混合状態は残件。原fieldのASCII省略や一般入れ子引用の解決は未主張。詳細は02／06とruntime handoffのcandidate31末尾。商品確認準備／ready／採用／merge／本番／Layer3は未成立。
+
+2026-09-06前回（具体的な実行済み行動の対象句／candidate30）：既存Human Receptionで、同じsourceで実行済みと確認された本人の行動の完全節を「〜したこと」等の対象句として実現し、sole author・body-only構文witness・独立inverseの照合をそろえた。意味選択・Move・source内容・full replay・context等の義務は保持。固定100はdirect100／124／73-27、フォロー52件のみ変更、残48件とフォロー以外の全100保存項目は同一。test修正後の再生成も全100同一。最終230検査226成功／既存4失敗、新規失敗0。華恋が原入力全フィールド・両層全100を読みNOT_CLEAR。分類語の一部は解消したが、長い再掲・定型的な締め・補助行動偏重・負担／未完／混合状態は残件。詳細は02／06とruntime handoffのcandidate30末尾。商品確認準備／ready／採用／merge／本番／Layer3は未成立。
 
 2026-09-06追記（診断29、runtimeはcandidate28を維持）：未完contextの有限化案は、既存の元fragment照合で具体的候補が拒否され、抽象的なrecoveryへ退くため不採用とした。分類的な対象句についても、referent解決・sole author・独立body照合にまたがる対応を特定した。runtime採用差分0、全100／225検査の今回再実行なし。candidate28の前回実測とNOT_CLEARを保持し、継承承認内の改修は未完で継続する。詳細は06と既存runtime handoffの診断29末尾。新たな承認待ち／全体STOP／商品改善の成立とはしない。
 
