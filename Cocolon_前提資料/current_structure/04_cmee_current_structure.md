@@ -56,7 +56,7 @@ Current state:
     Analysis not connected
     automatic progression false
 
-2026-09-06最新（compound属性順序の再現性）：final専用の既存endpointで解析器の順序付きoperator tupleを保持し、同入力のplan識別値がprocess hash seedで変わる不具合を修正。fresh interpreter 3 seedの全active／final exact8 plan比較は修正前不一致・修正後一致。固定100は全保存項目が前回と同一、direct100、Move／expression／binding124、外側73/27。全216検査212成功／既存4失敗、新規失敗0・未実行0。華恋は全100の原入力全フィールド・観察・フォローを読みNOT_CLEAR。行動偏重の修正案としてrelation support一律引継ぎを診断したが、選択済み意味とのstrict不整合で不採用。次は既存の選択前ownerとNORMAL／LIMITEDの根拠範囲の接続を直す。本文品質改善とは数えず、商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+2026-09-06最新（補助行動より既存の主題を保持）：final専用の既存ObservationPlanで、正scoreの単一required memo主題が既存lived-change familyを満たす場合、低scoreの非directional補助行動に押しのけられないよう選択順位を限定修正。final・safe・exact2 familyの既存役割も、選択済み主題を本文で先に受ける順に整合。固定100はdirect100、Move／expression／binding124、外側73/27。生成可能側5件で選択inputとフォローだけが変わり、残95件は全保存項目同一。原入力・意味核・観察・可否・理由は全100同一。全218検査214成功／既存4失敗、新規失敗0・未実行0。華恋が全100の原入力全フィールド・両層本文を読みNOT_CLEAR。主題の具体的受容が戻る一方、複文の長い再掲が増える箇所と対象外に残る行動偏重・定型的な締めが残る。一般のburden／未完・混合状態の選択は未解決。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
 
 Current implementation rule owner:
 
@@ -940,3 +940,10 @@ STRUCTURE_MAP_DELTA_NONE：Human Reception内部の文法配置のみ。owner／
 2026-09-06最新（compound属性順序の再現性）：final専用の既存endpointで解析器の順序付きoperator tupleを保持し、同入力のplan識別値がprocess hash seedで変わる不具合を修正。fresh interpreter 3 seedの全active／final exact8 plan比較は修正前不一致・修正後一致。固定100は全保存項目が前回と同一、direct100、Move／expression／binding124、外側73/27。全216検査212成功／既存4失敗、新規失敗0・未実行0。華恋は全100の原入力全フィールド・観察・フォローを読みNOT_CLEAR。行動偏重の修正案としてrelation support一律引継ぎを診断したが、選択済み意味とのstrict不整合で不採用。次は既存の選択前ownerとNORMAL／LIMITEDの根拠範囲の接続を直す。本文品質改善とは数えず、商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
 
 STRUCTURE_MAP_DELTA_NONE：既存final endpoint内部のみ。国家・公開／旧経路変更0。
+
+
+### 2026-09-06 continuation — 既存memo主題と補助行動の順位整合
+
+2026-09-06最新（補助行動より既存の主題を保持）：final専用の既存ObservationPlanで、正scoreの単一required memo主題が既存lived-change familyを満たす場合、低scoreの非directional補助行動に押しのけられないよう選択順位を限定修正。final・safe・exact2 familyの既存役割も、選択済み主題を本文で先に受ける順に整合。固定100はdirect100、Move／expression／binding124、外側73/27。生成可能側5件で選択inputとフォローだけが変わり、残95件は全保存項目同一。原入力・意味核・観察・可否・理由は全100同一。全218検査214成功／既存4失敗、新規失敗0・未実行0。華恋が全100の原入力全フィールド・両層本文を読みNOT_CLEAR。主題の具体的受容が戻る一方、複文の長い再掲が増える箇所と対象外に残る行動偏重・定型的な締めが残る。一般のburden／未完・混合状態の選択は未解決。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+
+STRUCTURE_MAP_DELTA_NONE：既存final ObservationPlanの選択から同じforward／replay経路。国家・公開／旧経路・Piece／分析変更0。
