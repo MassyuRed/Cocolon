@@ -28,7 +28,9 @@ EmlisAIの安定した商品目的、production経路、NLS v3／Cycle001 WIP、
 
 このmapは、その区別と読取順をcurrent ownerとして固定する。
 
-2026-09-06最新（原文で断定された残存感情の参照／candidate40）：原入力全文で断定と主体境界を証明した現在の感情主語を、既存単一Moveで程度・残存性を保つ参照へ接続。生成／inverseが全参照を独立照合。公開合成例で能力改善、canonical100は全保存項目同一。direct100／124／73-27、可否変更0。必須273検査269成功／既存4失敗、新規失敗0。全100全文再確認、商品NOT_CLEAR。詳細は02／06とruntime handoffのcandidate40末尾。
+2026-09-06最新（選択済みの独立した気持ちの具体参照／candidate41）：既存OPの意味確定前で、行動の次に選ばれたrequired memo feelingが先行文に未参照のとき、既存の具体参照を残す。NORMAL／LIMITEDを昇格せず、核・対象・役割・順序・124責務を維持。canonical100中1件の受取が具体化、他99件同一、direct100／73-27、可否変更0。必須274検査270成功／既存4失敗、新規失敗0。全100全文再確認、商品NOT_CLEAR。補助行動偏重等は残る。詳細はruntime handoffのcandidate41末尾。
+
+2026-09-06前回（原文で断定された残存感情の参照／candidate40）：原入力全文で断定と主体境界を証明した現在の感情主語を、既存単一Moveで程度・残存性を保つ参照へ接続。生成／inverseが全参照を独立照合。公開合成例で能力改善、canonical100は全保存項目同一。direct100／124／73-27、可否変更0。必須273検査269成功／既存4失敗、新規失敗0。全100全文再確認、商品NOT_CLEAR。詳細は02／06とruntime handoffのcandidate40末尾。
 
 2026-09-06前回（原文が証明する未解決状態の受取対象／candidate39）：finalの既存単一Moveでsource証明済みの現在の未知を未解決対象へ接続し、本文inverseでも同じ参照全体を照合。旧change／旧経路／全文replay境界を維持。canonical100の受取本文2件のみ変化、他98全項目同一、原入力・核・観察・selected input不変。direct100／124／73-27、可否変更0。必須268検査264成功／既存4失敗、新規失敗0。全100全文確認済み、商品NOT_CLEAR。詳細は02／06とruntime handoffのcandidate39末尾。
 

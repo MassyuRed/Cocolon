@@ -2409,3 +2409,11 @@ System Contextは作業前にdoctor→prepareを実行し、固定toolchain不�
 商品NOT_CLEAR。選択済みの現在感情について参照能力を限定的に補った段階で、通常負担・混合状態・受援・補助行動偏重・未知の具体的範囲・一般参照と定型締め・長い原文再掲は残る。次は中心の感情がそもそも選択から外れるsource分類／primary／support契約を、既存の必要な受取内容とともに扱う。語彙追加・件数維持・合成例PASSだけを商品完成にしない。
 
 作業前System Context doctor→prepareは固定toolchain不一致でprepare不成立。stale cacheを使わず、Context00／weeklyで認められた原典読取で継続。profile／基準ref／tracked currentは変更なし。candidate38で照合済みの同じPython3.12.13／46依存runtimeを再利用し、今回の46依存再検証は主張しない。sub-agentは公開sourceの静的確認だけを担当し、原典境界の不足を指摘した。編集・生成・検査実行・非公開本文の読取・GitHub更新は華恋が担当。外部Pro独立Product Read、ready／採用／merge／本番／質問生成／Layer3は未成立、product／technical credit0。PR3／30／37はDraft/open/unmerged。同じ承認内の継続で、新しい承認待ちは設けない。
+
+### 2026-09-06 continuation — 選択済みの独立した気持ちを二番目の受取へ具体的に残す（candidate41／商品未成立）
+
+既存§36.2／36.3と§38の参照文法内の補修。effortの次に独立したtyped feelingが既選択の場合だけ、presealで具体参照を保つ。別の意味や責務を追加せず、LIMITEDの確度を上げない。既存生成／inverse／回復ownerを利用する。
+
+2026-09-06最新（選択済みの独立した気持ちの具体参照／candidate41）：既存OPの意味確定前で、行動の次に選ばれたrequired memo feelingが先行文に未参照のとき、既存の具体参照を残す。NORMAL／LIMITEDを昇格せず、核・対象・役割・順序・124責務を維持。canonical100中1件の受取が具体化、他99件同一、direct100／73-27、可否変更0。必須274検査270成功／既存4失敗、新規失敗0。全100全文再確認、商品NOT_CLEAR。補助行動偏重等は残る。詳細はruntime handoffのcandidate41末尾。
+
+固定source `e0eeba92f37cb4a20d83a326c657b3c3442aa471`。詳細な条件・実行履歴・残件はmashos-apiの既存 `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のcandidate41末尾。商品NOT_CLEAR、公開返信経路への未接続と既存の進行境界を維持。
