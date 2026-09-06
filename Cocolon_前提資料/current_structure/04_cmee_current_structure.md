@@ -56,7 +56,7 @@ Current state:
     Analysis not connected
     automatic progression false
 
-2026-09-06最新（補助行動より既存の主題を保持）：final専用の既存ObservationPlanで、正scoreの単一required memo主題が既存lived-change familyを満たす場合、低scoreの非directional補助行動に押しのけられないよう選択順位を限定修正。final・safe・exact2 familyの既存役割も、選択済み主題を本文で先に受ける順に整合。固定100はdirect100、Move／expression／binding124、外側73/27。生成可能側5件で選択inputとフォローだけが変わり、残95件は全保存項目同一。原入力・意味核・観察・可否・理由は全100同一。全218検査214成功／既存4失敗、新規失敗0・未実行0。華恋が全100の原入力全フィールド・両層本文を読みNOT_CLEAR。主題の具体的受容が戻る一方、複文の長い再掲が増える箇所と対象外に残る行動偏重・定型的な締めが残る。一般のburden／未完・混合状態の選択は未解決。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+2026-09-06最新（関係で結ばれた共同主題を保持／candidate26）：final専用の既存ObservationPlanで、適格lived_change候補が一つの従来単一primaryに加え、全primaryが二つで両者が既存required関係（uncertain_connectionを除く）により結ばれる場合も、低scoreの非directional補助行動に押しのけられないよう限定補正した。独立主題・複数適格候補・三つ以上は対象外。primary数とMove数の条件は別である。固定100はdirect100、Move／expression／binding124、外側73/27。生成可能側1件のフォローと選択inputが変わり、別1件は参照識別子のみ、残98件は全保存項目同一。原入力・核・観察・可否・理由は全100同一。全220検査216成功／既存4失敗、新規失敗0・未実行0。華恋が全100の原入力全フィールド・両層本文を読みNOT_CLEAR。長い再掲・定型的な締め、通常の負担・未完・混合状態の選択は残件。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
 
 Current implementation rule owner:
 
@@ -947,3 +947,10 @@ STRUCTURE_MAP_DELTA_NONE：既存final endpoint内部のみ。国家・公開／
 2026-09-06最新（補助行動より既存の主題を保持）：final専用の既存ObservationPlanで、正scoreの単一required memo主題が既存lived-change familyを満たす場合、低scoreの非directional補助行動に押しのけられないよう選択順位を限定修正。final・safe・exact2 familyの既存役割も、選択済み主題を本文で先に受ける順に整合。固定100はdirect100、Move／expression／binding124、外側73/27。生成可能側5件で選択inputとフォローだけが変わり、残95件は全保存項目同一。原入力・意味核・観察・可否・理由は全100同一。全218検査214成功／既存4失敗、新規失敗0・未実行0。華恋が全100の原入力全フィールド・両層本文を読みNOT_CLEAR。主題の具体的受容が戻る一方、複文の長い再掲が増える箇所と対象外に残る行動偏重・定型的な締めが残る。一般のburden／未完・混合状態の選択は未解決。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
 
 STRUCTURE_MAP_DELTA_NONE：既存final ObservationPlanの選択から同じforward／replay経路。国家・公開／旧経路・Piece／分析変更0。
+
+
+### 2026-09-06 continuation — 関係で結ばれた共同主題の保持
+
+2026-09-06最新（関係で結ばれた共同主題を保持／candidate26）：final専用の既存ObservationPlanで、適格lived_change候補が一つの従来単一primaryに加え、全primaryが二つで両者が既存required関係（uncertain_connectionを除く）により結ばれる場合も、低scoreの非directional補助行動に押しのけられないよう限定補正した。独立主題・複数適格候補・三つ以上は対象外。primary数とMove数の条件は別である。固定100はdirect100、Move／expression／binding124、外側73/27。生成可能側1件のフォローと選択inputが変わり、別1件は参照識別子のみ、残98件は全保存項目同一。原入力・核・観察・可否・理由は全100同一。全220検査216成功／既存4失敗、新規失敗0・未実行0。華恋が全100の原入力全フィールド・両層本文を読みNOT_CLEAR。長い再掲・定型的な締め、通常の負担・未完・混合状態の選択は残件。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+
+STRUCTURE_MAP_DELTA_NONE：既存final ObservationPlanの順位条件のみを補正し、同じforward／replay経路を維持する。新owner／route／公開schema、国家・公開／旧経路・Piece／分析変更0。詳細な条件、先行診断の失敗、最終sourceと検証、環境照合、残件は正本02／06と既存runtime handoffのcandidate26末尾を参照。
