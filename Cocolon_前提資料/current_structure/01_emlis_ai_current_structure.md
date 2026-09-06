@@ -28,7 +28,9 @@ EmlisAIの安定した商品目的、production経路、NLS v3／Cycle001 WIP、
 
 このmapは、その区別と読取順をcurrent ownerとして固定する。
 
-2026-09-06最新（選択済みの独立した気持ちを先に受け取る／candidate42）：既存OPの意味確定前に2 Moveの役割と対応strategyを変更し、気持ち→行動の順で本文を実現する。candidate41の対象条件と具体参照、核・対象・primary／follow・124責務を維持。canonical100中1件の受取順を修正、他99件同一、direct100／73-27、可否変更0。必須274検査270成功／既存4失敗、前回全成否一致。全100全文再確認、商品NOT_CLEAR。選択されない中心感情や対象外の補助行動偏重等は残る。詳細はruntime handoffのcandidate42末尾。
+2026-09-06最新（選択済みの独立した関係の具体参照／candidate43）：既存OPの意味確定前で、他Moveから独立した単一required関係を持つMoveの参照方式を既存short_anchorへ戻し、両端の具体的内容を受取へ届ける。核・対象・act・role・意味を伴う124責務・全selected decision／basisは維持。canonical100中6件の受取が変更、他94件同一、direct100／73-27、可否変更0。必須275検査271成功／継承4失敗、前回274の全成否一致、新規一件成功。全100全文確認、商品NOT_CLEAR。長い原文再掲・定型表現、中心感情の未選択と補助行動偏重は残る。詳細はruntime handoffのcandidate43末尾。
+
+2026-09-06前回（選択済みの独立した気持ちを先に受け取る／candidate42）：既存OPの意味確定前に2 Moveの役割と対応strategyを変更し、気持ち→行動の順で本文を実現する。candidate41の対象条件と具体参照、核・対象・primary／follow・124責務を維持。canonical100中1件の受取順を修正、他99件同一、direct100／73-27、可否変更0。必須274検査270成功／既存4失敗、前回全成否一致。全100全文再確認、商品NOT_CLEAR。選択されない中心感情や対象外の補助行動偏重等は残る。詳細はruntime handoffのcandidate42末尾。
 
 2026-09-06前回（選択済みの独立した気持ちの具体参照／candidate41）：既存OPの意味確定前で、行動の次に選ばれたrequired memo feelingが先行文に未参照のとき、既存の具体参照を残す。NORMAL／LIMITEDを昇格せず、核・対象・役割・順序・124責務を維持。canonical100中1件の受取が具体化、他99件同一、direct100／73-27、可否変更0。必須274検査270成功／既存4失敗、新規失敗0。全100全文再確認、商品NOT_CLEAR。補助行動偏重等は残る。詳細はruntime handoffのcandidate41末尾。
 

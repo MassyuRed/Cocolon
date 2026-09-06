@@ -2425,3 +2425,9 @@ System Contextは作業前にdoctor→prepareを実行し、固定toolchain不�
 2026-09-06最新（選択済みの独立した気持ちを先に受け取る／candidate42）：既存OPの意味確定前に2 Moveの役割と対応strategyを変更し、気持ち→行動の順で本文を実現する。candidate41の対象条件と具体参照、核・対象・primary／follow・124責務を維持。canonical100中1件の受取順を修正、他99件同一、direct100／73-27、可否変更0。必須274検査270成功／既存4失敗、前回全成否一致。全100全文再確認、商品NOT_CLEAR。選択されない中心感情や対象外の補助行動偏重等は残る。詳細はruntime handoffのcandidate42末尾。
 
 固定source `eafbfe555ae2b73d135ba25f245e16decb357baa`。詳細な条件・実行履歴・残件はmashos-apiの既存 `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のcandidate42末尾。商品NOT_CLEAR、公開返信経路への未接続と既存の進行境界を維持。
+
+### 2026-09-06 continuation — 選択済みの独立した関係の具体参照（candidate43／商品未成立）
+
+2026-09-06最新（選択済みの独立した関係の具体参照／candidate43）：既存OPの意味確定前で、他Moveから独立した単一required関係を持つMoveの参照方式を既存short_anchorへ戻し、両端の具体的内容を受取へ届ける。核・対象・act・role・意味を伴う124責務・全selected decision／basisは維持。canonical100中6件の受取が変更、他94件同一、direct100／73-27、可否変更0。必須275検査271成功／継承4失敗、前回274の全成否一致、新規一件成功。全100全文確認、商品NOT_CLEAR。長い原文再掲・定型表現、中心感情の未選択と補助行動偏重は残る。詳細はruntime handoffのcandidate43末尾。
+
+既存の意味確定前ownerによる参照方式の補修。対象はfinal／safe／grounded・limited、単一targetと単一required関係、required両端、support空または同じcontext一つ、他の全Moveとrequired関係閉包から独立する場合に限る。should昇格・意味再選択・Gate緩和はしない。既存回復方式を保持する。固定source `5eff06be86092cce6da9ff49e64fb8c0dab88e9c`。詳細な条件・検査追従・本文確認・残件はmashos-apiの既存 `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のcandidate43末尾。商品NOT_CLEAR、公開返信経路への未接続と進行境界を維持。
