@@ -7224,3 +7224,11 @@ candidate40から同じ承認内で継続。原184と追加分、継承4失敗�
 2026-09-06最新（選択済みの独立した気持ちの具体参照／candidate41）：既存OPの意味確定前で、行動の次に選ばれたrequired memo feelingが先行文に未参照のとき、既存の具体参照を残す。NORMAL／LIMITEDを昇格せず、核・対象・役割・順序・124責務を維持。canonical100中1件の受取が具体化、他99件同一、direct100／73-27、可否変更0。必須274検査270成功／既存4失敗、新規失敗0。全100全文再確認、商品NOT_CLEAR。補助行動偏重等は残る。詳細はruntime handoffのcandidate41末尾。
 
 固定source `e0eeba92f37cb4a20d83a326c657b3c3442aa471`。詳細な条件・実行履歴・残件はmashos-apiの既存 `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のcandidate41末尾。商品NOT_CLEAR、公開返信経路への未接続と既存の進行境界を維持。
+
+### 2026-09-06 continuation — 選択済みの独立した気持ちを行動より先に受け取る（candidate42／商品未成立）
+
+candidate41から同じ承認内で継続。今回の124は件数に加え全selected decision／basis同一を確認した。前回274の全成否を維持。次は中心感情の未選択と既選択の表現不足を区別し、source分類／primary／supportの必要な責務を追う。
+
+2026-09-06最新（選択済みの独立した気持ちを先に受け取る／candidate42）：既存OPの意味確定前に2 Moveの役割と対応strategyを変更し、気持ち→行動の順で本文を実現する。candidate41の対象条件と具体参照、核・対象・primary／follow・124責務を維持。canonical100中1件の受取順を修正、他99件同一、direct100／73-27、可否変更0。必須274検査270成功／既存4失敗、前回全成否一致。全100全文再確認、商品NOT_CLEAR。選択されない中心感情や対象外の補助行動偏重等は残る。詳細はruntime handoffのcandidate42末尾。
+
+固定source `eafbfe555ae2b73d135ba25f245e16decb357baa`。詳細な条件・実行履歴・残件はmashos-apiの既存 `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のcandidate42末尾。商品NOT_CLEAR、公開返信経路への未接続と既存の進行境界を維持。
