@@ -28,7 +28,7 @@ EmlisAIの安定した商品目的、production経路、NLS v3／Cycle001 WIP、
 
 このmapは、その区別と読取順をcurrent ownerとして固定する。
 
-2026-09-06最新（受け止め補語の節スコープ）：既存Human Receptionで、選択済みの未完了補語を節先頭へ置き、対象とact述語の直接接続を回復した。語彙・意味選択・act・対象・時制は保持。固定100はdirect100、Move／expression／binding124、外側73/27。フォロー2件のみ変更、観察・選択decision・可否・理由は全100同一。別1件に既存operator属性の順序とinput／grounding識別子の差があり、本文改善に数えない。全215検査211成功／既存4失敗、新規失敗0・未実行0。華恋は原入力全フィールド・観察・フォロー全100を読みNOT_CLEAR。問いの意味の浅さ、行動主対象への偏り、長い再掲・同じ締め、複文の主体・時制・予定、他の問い／比較／可能性が残る。次は既存ObservationPlanの主対象順位・burden候補除去・副Move候補を原意と照合する。詳細は02 §38と末尾、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+2026-09-06最新（compound属性順序の再現性）：final専用の既存endpointで解析器の順序付きoperator tupleを保持し、同入力のplan識別値がprocess hash seedで変わる不具合を修正。fresh interpreter 3 seedの全active／final exact8 plan比較は修正前不一致・修正後一致。固定100は全保存項目が前回と同一、direct100、Move／expression／binding124、外側73/27。全216検査212成功／既存4失敗、新規失敗0・未実行0。華恋は全100の原入力全フィールド・観察・フォローを読みNOT_CLEAR。行動偏重の修正案としてrelation support一律引継ぎを診断したが、選択済み意味とのstrict不整合で不採用。次は既存の選択前ownerとNORMAL／LIMITEDの根拠範囲の接続を直す。本文品質改善とは数えず、商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
 
 ## 1. 商品目的
 
@@ -600,3 +600,10 @@ STRUCTURE_MAP_DELTA_NONE：既存final ObservationPlanからHuman Receptionの�
 2026-09-06最新（受け止め補語の節スコープ）：既存Human Receptionで、選択済みの未完了補語を節先頭へ置き、対象とact述語の直接接続を回復した。語彙・意味選択・act・対象・時制は保持。固定100はdirect100、Move／expression／binding124、外側73/27。フォロー2件のみ変更、観察・選択decision・可否・理由は全100同一。別1件に既存operator属性の順序とinput／grounding識別子の差があり、本文改善に数えない。全215検査211成功／既存4失敗、新規失敗0・未実行0。華恋は原入力全フィールド・観察・フォロー全100を読みNOT_CLEAR。問いの意味の浅さ、行動主対象への偏り、長い再掲・同じ締め、複文の主体・時制・予定、他の問い／比較／可能性が残る。次は既存ObservationPlanの主対象順位・burden候補除去・副Move候補を原意と照合する。詳細は02 §38と末尾、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
 
 STRUCTURE_MAP_DELTA_NONE：Human Reception内部の文法配置のみ。owner／国家／公開経路・旧経路変更0。
+
+
+### 2026-09-06 continuation — compound属性順序の再現性
+
+2026-09-06最新（compound属性順序の再現性）：final専用の既存endpointで解析器の順序付きoperator tupleを保持し、同入力のplan識別値がprocess hash seedで変わる不具合を修正。fresh interpreter 3 seedの全active／final exact8 plan比較は修正前不一致・修正後一致。固定100は全保存項目が前回と同一、direct100、Move／expression／binding124、外側73/27。全216検査212成功／既存4失敗、新規失敗0・未実行0。華恋は全100の原入力全フィールド・観察・フォローを読みNOT_CLEAR。行動偏重の修正案としてrelation support一律引継ぎを診断したが、選択済み意味とのstrict不整合で不採用。次は既存の選択前ownerとNORMAL／LIMITEDの根拠範囲の接続を直す。本文品質改善とは数えず、商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+
+STRUCTURE_MAP_DELTA_NONE：既存final endpoint内部のみ。国家・公開／旧経路変更0。
