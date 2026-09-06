@@ -56,7 +56,9 @@ Current state:
     Analysis not connected
     automatic progression false
 
-2026-09-06最新（否定感覚名詞句の二重参照を除去／candidate33）：既存の可逆名詞句をfinal ANAPHORICの同一対象へ接続し、一般的参照句の重複を除いた。新owner/selector/Move/schemaは追加せず、同じ選択済みinputと全文replayを維持。固定100はdirect100／124／73-27、生成可能側1件のフォローだけ変更、残99件は全保存項目同一。必須242検査238成功／既存4失敗、新規失敗0。華恋が確定100件を全文確認しNOT_CLEAR。一般的参照句全般、定型締め、補助行動偏重、未完/混合状態・受援の具体的な受け止めは残件。詳細は02/06とruntime handoffのcandidate33末尾。商品確認準備/ready/採用/merge/本番/Layer3は未成立。
+2026-09-06最新（予定行動の具体的な対象句／candidate34）：既存sourceが未来のintentionとして持つ本人の行動の完全な非過去節を、final explicit/compositeの同一対象へ接続し、分類句の重複を除いた。kind/voice/未来の扱い・選択input・厳格な全文replayを維持。固定100はdirect100／124／73-27、生成可能側1件のフォローのみ変化、残99件は全保存項目同一。必須247検査243成功／既存4失敗、新規失敗0。華恋が全100全文を読みNOT_CLEAR。未来一般句全般、定型締め、補助行動偏重、未完/混合状態・受援の具体的な受け止めは残件。詳細は02/06とruntime handoffのcandidate34末尾。商品確認準備/ready/採用/merge/本番/Layer3は未成立。
+
+2026-09-06前回（否定感覚名詞句の二重参照を除去／candidate33）：既存の可逆名詞句をfinal ANAPHORICの同一対象へ接続し、一般的参照句の重複を除いた。新owner/selector/Move/schemaは追加せず、同じ選択済みinputと全文replayを維持。固定100はdirect100／124／73-27、生成可能側1件のフォローだけ変更、残99件は全保存項目同一。必須242検査238成功／既存4失敗、新規失敗0。華恋が確定100件を全文確認しNOT_CLEAR。一般的参照句全般、定型締め、補助行動偏重、未完/混合状態・受援の具体的な受け止めは残件。詳細は02/06とruntime handoffのcandidate33末尾。商品確認準備/ready/採用/merge/本番/Layer3は未成立。
 
 2026-09-06前回（有限の認知的不明を未完の受け止めへ接続／candidate32）：既存source分類内で、原文の全有限節と既存uncertain属性がそろう自己状態の同核をuncertaintyへ補正し、既存の未完判断と最終フォローへ接続した。引用・別主体・過去・報告・条件・取消し・疑問へ広げず、新owner／selector／Moveは追加しない。固定100はdirect100／124／73-27、生成可能側1件の核分類・選択判断・フォローが変化し、残99件は全保存項目同一。観察と可否は全100維持。必須238検査234成功／既存4失敗、新規失敗0。華恋が全100全文を読みNOT_CLEAR。一般的な参照句・定型締め・補助行動偏重・通常の負担／未完／混合状態は残件。詳細は02／06とruntime handoffのcandidate32末尾。商品確認準備／ready／採用／merge／本番／Layer3は未成立。
 
