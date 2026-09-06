@@ -56,9 +56,11 @@ Current state:
     Analysis not connected
     automatic progression false
 
+2026-09-06最新（具体的な実行済み行動の対象句／candidate30）：既存Human Receptionで、同じsourceで実行済みと確認された本人の行動の完全節を「〜したこと」等の対象句として実現し、sole author・body-only構文witness・独立inverseの照合をそろえた。意味選択・Move・source内容・full replay・context等の義務は保持。固定100はdirect100／124／73-27、フォロー52件のみ変更、残48件とフォロー以外の全100保存項目は同一。test修正後の再生成も全100同一。最終230検査226成功／既存4失敗、新規失敗0。華恋が原入力全フィールド・両層全100を読みNOT_CLEAR。分類語の一部は解消したが、長い再掲・定型的な締め・補助行動偏重・負担／未完／混合状態は残件。詳細は02／06とruntime handoffのcandidate30末尾。商品確認準備／ready／採用／merge／本番／Layer3は未成立。
+
 2026-09-06追記（診断29、runtimeはcandidate28を維持）：未完contextの有限化案は、既存の元fragment照合で具体的候補が拒否され、抽象的なrecoveryへ退くため不採用とした。分類的な対象句についても、referent解決・sole author・独立body照合にまたがる対応を特定した。runtime採用差分0、全100／225検査の今回再実行なし。candidate28の前回実測とNOT_CLEARを保持し、継承承認内の改修は未完で継続する。詳細は06と既存runtime handoffの診断29末尾。新たな承認待ち／全体STOP／商品改善の成立とはしない。
 
-2026-09-06最新（対比の対象節と丁寧な背景節の名詞化／candidate28）：既存Human Receptionで、選択済みcontrastの対象節だけを有限化し、丁寧な背景節を原文のまま名詞化した。引用を含むsource fieldと言いかけは有限化を見送る。意味核・関係・対象順位・Move・選択inputは変更しない。固定100はdirect100、Move／expression／binding124、外側73/27。フォロー1件だけが変わり、残99件は全保存項目同一。全225検査221成功／既存4失敗、新規失敗0・未実行0。華恋が原入力全フィールド・両層本文の全100を読みNOT_CLEAR。長い再掲・分類的な対象句・定型的な締め、負担／未完／混合状態の選択は残件。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+2026-09-06前回（対比の対象節と丁寧な背景節の名詞化／candidate28）：既存Human Receptionで、選択済みcontrastの対象節だけを有限化し、丁寧な背景節を原文のまま名詞化した。引用を含むsource fieldと言いかけは有限化を見送る。意味核・関係・対象順位・Move・選択inputは変更しない。固定100はdirect100、Move／expression／binding124、外側73/27。フォロー1件だけが変わり、残99件は全保存項目同一。全225検査221成功／既存4失敗、新規失敗0・未実行0。華恋が原入力全フィールド・両層本文の全100を読みNOT_CLEAR。長い再掲・分類的な対象句・定型的な締め、負担／未完／混合状態の選択は残件。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
 
 Current implementation rule owner:
 
@@ -967,6 +969,6 @@ STRUCTURE_MAP_DELTA_NONE：既存Human Receptionの文法部品のみ。owner／
 
 ### 2026-09-06 continuation — 対比の対象節と丁寧な背景節の名詞化
 
-2026-09-06最新（対比の対象節と丁寧な背景節の名詞化／candidate28）：既存Human Receptionで、選択済みcontrastの対象節だけを有限化し、丁寧な背景節を原文のまま名詞化した。引用を含むsource fieldと言いかけは有限化を見送る。意味核・関係・対象順位・Move・選択inputは変更しない。固定100はdirect100、Move／expression／binding124、外側73/27。フォロー1件だけが変わり、残99件は全保存項目同一。全225検査221成功／既存4失敗、新規失敗0・未実行0。華恋が原入力全フィールド・両層本文の全100を読みNOT_CLEAR。長い再掲・分類的な対象句・定型的な締め、負担／未完／混合状態の選択は残件。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+2026-09-06前回（対比の対象節と丁寧な背景節の名詞化／candidate28）：既存Human Receptionで、選択済みcontrastの対象節だけを有限化し、丁寧な背景節を原文のまま名詞化した。引用を含むsource fieldと言いかけは有限化を見送る。意味核・関係・対象順位・Move・選択inputは変更しない。固定100はdirect100、Move／expression／binding124、外側73/27。フォロー1件だけが変わり、残99件は全保存項目同一。全225検査221成功／既存4失敗、新規失敗0・未実行0。華恋が原入力全フィールド・両層本文の全100を読みNOT_CLEAR。長い再掲・分類的な対象句・定型的な締め、負担／未完／混合状態の選択は残件。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
 
 STRUCTURE_MAP_DELTA_NONE：既存Human Receptionの文法処理のみ。owner／国家／公開・旧経路／他中核の境界は同じ。実装・検証・残件は正本02／06と既存runtime handoffのcandidate28末尾を参照。
