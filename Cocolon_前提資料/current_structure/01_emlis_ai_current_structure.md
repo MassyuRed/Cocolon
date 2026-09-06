@@ -28,7 +28,9 @@ EmlisAIの安定した商品目的、production経路、NLS v3／Cycle001 WIP、
 
 このmapは、その区別と読取順をcurrent ownerとして固定する。
 
-2026-09-06最新（否定背景節の可逆な名詞化／candidate31）：同じ選択済みcontrast contextの完全節「なくて」を「ないこと」へ活用し、既存nominalization tupleの封印と独立原文復元をそろえた。source内容・関係・full replay・context／why等の義務を保持し、alias／引用／非正規slot／無効sourceを防御。固定100はdirect100／124／73-27、フォロー1件のみ変更、99件とフォロー以外の全100保存項目は同一。必須235検査231成功／既存4失敗、新規失敗0。華恋が全100の原入力・両層を全文確認しNOT_CLEAR。長い再掲・定型締め・補助行動偏重・負担／未完／混合状態は残件。原fieldのASCII省略や一般入れ子引用の解決は未主張。詳細は02／06とruntime handoffのcandidate31末尾。商品確認準備／ready／採用／merge／本番／Layer3は未成立。
+2026-09-06最新（有限の認知的不明を未完の受け止めへ接続／candidate32）：既存source分類内で、原文の全有限節と既存uncertain属性がそろう自己状態の同核をuncertaintyへ補正し、既存の未完判断と最終フォローへ接続した。引用・別主体・過去・報告・条件・取消し・疑問へ広げず、新owner／selector／Moveは追加しない。固定100はdirect100／124／73-27、生成可能側1件の核分類・選択判断・フォローが変化し、残99件は全保存項目同一。観察と可否は全100維持。必須238検査234成功／既存4失敗、新規失敗0。華恋が全100全文を読みNOT_CLEAR。一般的な参照句・定型締め・補助行動偏重・通常の負担／未完／混合状態は残件。詳細は02／06とruntime handoffのcandidate32末尾。商品確認準備／ready／採用／merge／本番／Layer3は未成立。
+
+2026-09-06前回（否定背景節の可逆な名詞化／candidate31）：同じ選択済みcontrast contextの完全節「なくて」を「ないこと」へ活用し、既存nominalization tupleの封印と独立原文復元をそろえた。source内容・関係・full replay・context／why等の義務を保持し、alias／引用／非正規slot／無効sourceを防御。固定100はdirect100／124／73-27、フォロー1件のみ変更、99件とフォロー以外の全100保存項目は同一。必須235検査231成功／既存4失敗、新規失敗0。華恋が全100の原入力・両層を全文確認しNOT_CLEAR。長い再掲・定型締め・補助行動偏重・負担／未完／混合状態は残件。原fieldのASCII省略や一般入れ子引用の解決は未主張。詳細は02／06とruntime handoffのcandidate31末尾。商品確認準備／ready／採用／merge／本番／Layer3は未成立。
 
 2026-09-06前回（具体的な実行済み行動の対象句／candidate30）：既存Human Receptionで、同じsourceで実行済みと確認された本人の行動の完全節を「〜したこと」等の対象句として実現し、sole author・body-only構文witness・独立inverseの照合をそろえた。意味選択・Move・source内容・full replay・context等の義務は保持。固定100はdirect100／124／73-27、フォロー52件のみ変更、残48件とフォロー以外の全100保存項目は同一。test修正後の再生成も全100同一。最終230検査226成功／既存4失敗、新規失敗0。華恋が原入力全フィールド・両層全100を読みNOT_CLEAR。分類語の一部は解消したが、長い再掲・定型的な締め・補助行動偏重・負担／未完／混合状態は残件。詳細は02／06とruntime handoffのcandidate30末尾。商品確認準備／ready／採用／merge／本番／Layer3は未成立。
 
