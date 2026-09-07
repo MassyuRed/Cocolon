@@ -2443,3 +2443,9 @@ System Contextは作業前にdoctor→prepareを実行し、固定toolchain不�
 2026-09-07最新（選択済みの言葉参照の重複短縮／candidate45）：既存HRで非ANAPHORICのcurrent_expression参照を、同じsource節全文＋「という言葉」へ短縮した。語への参照を保ち、内容を事実として新たに認定しない。意味・否定・時点・不確かさ・関係両端と選択済み受取を維持。canonical100中8件の受取のみ変更、他92件同一、全核・selected input・実reception plan・意味を伴う124責務・73/27は同一。必須279検査275成功／継承4失敗、前回276の全成否一致。全100件全文確認、商品NOT_CLEAR。長い再掲・名詞接続・定型締め、中心感情の未選択と補助行動偏重は残る。
 
 既存HRのsource有限節全文＋「という言葉」という参照文法で、語への参照を保ったまま説明の重複を短縮する。原fieldの断定性はspanから証明できないため、事実nominalへの変更は見送った。Gateは完全参照と既存target_wordsのUTF-8終端一致を同時に要求し、本文改変を拒否する。固定source `ebe01503a99824fd58797c32adb09a529348bf2b`。適用条件・見送り・最終検査・全文確認の詳細は既存API handoffのcandidate45末尾。商品NOT_CLEAR、同じ承認内で継続。
+
+### 2026-09-07 continuation — 選択済みの気持ちを受け取る述語の整合（candidate46／商品未成立）
+
+2026-09-07最新（選択済みの気持ちのMATERIAL受取／candidate46）：既存HRで、positive_feelingに選択済みのMATERIAL_WEIGHT／RECEIVE_AS_MATERIALを「受け止める」で実現する。本人の気持ちをEmlis自身が感じるという述語との不一致を修正。同じ不変selected inputをHRとSentenceSurfaceの責任検査へ渡す。canonical100の受取3件のみ変更、他97件・全核・意味選択・実plan・意味を伴う124責務・73/27は同一。必須282検査278成功／継承4失敗、前回279の全成否一致。華恋が全100件全文確認し商品NOT_CLEAR。長い再掲・名詞連結・定型締め、中心感情の未選択と補助行動偏重は残る。
+
+選択済みMATERIALの受取述語と同一inputを用いた責任検査を整合する既存owner内の修正。適用条件・検査・保存sourceと検証sourceの同一tree証明はAPI handoffのcandidate46末尾。意味選択・Gate・旧経路・国家システム境界を維持。STRUCTURE_MAP_DELTA_NONE。
