@@ -3,7 +3,6 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
-import os
 import pathlib
 import subprocess
 import sys
@@ -71,11 +70,12 @@ def inventory_rows(repo: pathlib.Path, key: str, repository: str) -> list[dict[s
 
 
 class CodeIndexTests(unittest.TestCase):
-    def test_python_heap_wrapper_propagates_limit_to_spawned_node(self) -> None:
-        # run_provider supplies 4096 in its environment. The existing wrapper's
-        # command-line limit alone only changes the parent, not spawned Node.
+    def test_python_provider_heap_reaches_spawned_node(self) -> None:
+        # Exercise the actual run_provider environment boundary. The probe is
+        # data passed to the installed Node, so no executable tmpfs is needed.
         with tempfile.TemporaryDirectory(prefix="scip provider ") as raw:
-            entry = pathlib.Path(raw) / "provider entry.js"
+            root = pathlib.Path(raw)
+            entry = root / "provider entry.js"
             entry.write_text(
                 "const cp = require('child_process');\n"
                 "const child = cp.spawnSync(process.execPath, ['-e', "
@@ -85,29 +85,28 @@ class CodeIndexTests(unittest.TestCase):
                 "console.log(JSON.stringify({args:process.argv.slice(2),child:JSON.parse(child.stdout)}));\n",
                 encoding="utf-8",
             )
-            real_which = code_index.shutil.which
-            wrapper_dir = None
-            try:
-                with mock.patch.dict(os.environ), mock.patch.object(
-                    code_index.shutil,
-                    "which",
-                    side_effect=lambda name: str(entry) if name == "scip-python" else real_which(name),
-                ):
-                    code_index._install_scip_python_heap_wrapper()
-                    wrapper_dir = pathlib.Path(os.environ["PATH"].split(os.pathsep)[0])
-                    result = code_index.run_command(
-                        ["scip-python", "index", "argument with spaces"],
-                        env={"NODE_OPTIONS": "--max-old-space-size=4096"},
-                        timeout=30,
-                    )
-                self.assertEqual(result.returncode, 0, result.stderr)
-                observed = json.loads(result.stdout)
-                self.assertEqual(observed["args"], ["index", "argument with spaces"])
-                self.assertEqual(observed["child"]["options"], "--max-old-space-size=8192")
-                self.assertGreaterEqual(observed["child"]["limit"], 8192 * 1024 * 1024)
-            finally:
-                if wrapper_dir is not None:
-                    code_index.shutil.rmtree(wrapper_dir)
+            run_command = code_index.run_command
+            observed_commands = []
+
+            def probe(command, **kwargs):
+                self.assertEqual(command[0], "scip-python")
+                observed_commands.append(list(command))
+                return run_command(["node", str(entry), *command[1:]], **kwargs)
+
+            with mock.patch.object(code_index, "run_command", side_effect=probe):
+                result = code_index.run_provider(
+                    {"run_id": "mashos_api_python", "repository_key": "mashos-api",
+                     "family": "python", "required": True, "candidate_count": 1},
+                    [], {"mashos-api": root}, {"mashos-api": "a" * 40}, root,
+                )
+            self.assertEqual(result["exit_code"], 0, result["stderr_tail"])
+            self.assertEqual(len(observed_commands), 1)
+            observed = json.loads(result["stdout_tail"][-1])
+            self.assertEqual(observed["args"], observed_commands[0][1:])
+            self.assertEqual(observed["child"]["options"], "--max-old-space-size=8192")
+            self.assertGreaterEqual(observed["child"]["limit"], 8192 * 1024 * 1024)
+            self.assertFalse(result["output_exists"])
+            self.assertTrue(code_index.provider_failures({"runs": [result]}))
 
     def test_python_syntax_extracts_symbols_and_imports(self) -> None:
         symbols, refs, errors = code_index.python_syntax(
