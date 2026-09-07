@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_emlis_ai_current_structure
 title: "EmlisAI構造 — Current Structure"
-revision_date: "2026-09-06 JST"
+revision_date: "2026-09-07 JST"
 document_role: "EMLIS_AI_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -28,7 +28,9 @@ EmlisAIの安定した商品目的、production経路、NLS v3／Cycle001 WIP、
 
 このmapは、その区別と読取順をcurrent ownerとして固定する。
 
-2026-09-06最新（選択済みの独立した関係の具体参照／candidate43）：既存OPの意味確定前で、他Moveから独立した単一required関係を持つMoveの参照方式を既存short_anchorへ戻し、両端の具体的内容を受取へ届ける。核・対象・act・role・意味を伴う124責務・全selected decision／basisは維持。canonical100中6件の受取が変更、他94件同一、direct100／73-27、可否変更0。必須275検査271成功／継承4失敗、前回274の全成否一致、新規一件成功。全100全文確認、商品NOT_CLEAR。長い原文再掲・定型表現、中心感情の未選択と補助行動偏重は残る。詳細はruntime handoffのcandidate43末尾。
+2026-09-07最新（願望内の継続時点補正と願いの参照／candidate44）：既存OPで願望内の継続動詞を既に継続中とは扱わず、同核の時点をcurrent_inputへ補正する。既存HRで、現在の自己の肯定wishを表す有限carrier全文に「こと」を付け、一般wrapperの重複を除いた。存在・topic/case・時点・願い・関係と両端を保持。canonical100中1件の受取だけが変更、他99件同一、全核identity・観察・実reception plan・意味を伴う124責務・73/27を維持し、selected inputの時点と参照を同じownerから再導出。必須276検査272成功／継承4失敗、前回275の全成否一致。全100件を全文確認、商品NOT_CLEAR。長い再掲・名詞接続・定型締め、中心感情の未選択と補助行動偏重は残る。
+
+2026-09-06前回（選択済みの独立した関係の具体参照／candidate43）：既存OPの意味確定前で、他Moveから独立した単一required関係を持つMoveの参照方式を既存short_anchorへ戻し、両端の具体的内容を受取へ届ける。核・対象・act・role・意味を伴う124責務・全selected decision／basisは維持。canonical100中6件の受取が変更、他94件同一、direct100／73-27、可否変更0。必須275検査271成功／継承4失敗、前回274の全成否一致、新規一件成功。全100全文確認、商品NOT_CLEAR。長い原文再掲・定型表現、中心感情の未選択と補助行動偏重は残る。詳細はruntime handoffのcandidate43末尾。
 
 2026-09-06前回（選択済みの独立した気持ちを先に受け取る／candidate42）：既存OPの意味確定前に2 Moveの役割と対応strategyを変更し、気持ち→行動の順で本文を実現する。candidate41の対象条件と具体参照、核・対象・primary／follow・124責務を維持。canonical100中1件の受取順を修正、他99件同一、direct100／73-27、可否変更0。必須274検査270成功／既存4失敗、前回全成否一致。全100全文再確認、商品NOT_CLEAR。選択されない中心感情や対象外の補助行動偏重等は残る。詳細はruntime handoffのcandidate42末尾。
 
