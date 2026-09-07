@@ -15,7 +15,7 @@ RUN set -eu; \
         > /etc/apt/apt.conf.d/80cocolon-acquire; \
     mkdir -p /tmp/cocolon-snapshot-releases; \
     acquired=0; \
-    for mirror in https://snapshot.debian.org https://snapshot-cloudflare.debian.org; do \
+    for mirror in https://snapshot.debian.org https://snapshot-mmx-01.debian.org; do \
         printf 'System Context snapshot transport: %s (%s)\n' "$mirror" "$DEBIAN_SNAPSHOT"; \
         rm -rf /var/lib/apt/lists/*; \
         printf '%s\n' \

@@ -158,9 +158,11 @@ Current execution results belong in PR #37's current report; historical tracked
 
 Mash approved bounded acquisition timeouts and a same-content alternative
 transport after the observed Debian HTTP 503 failures. The existing Dockerfile
-tries `snapshot.debian.org`, then `snapshot-cloudflare.debian.org`, each only
-at the locked `20260822T000000Z` snapshot and the same three suites. APT keeps
-its Debian signature and package-hash verification; update errors are fatal
+tries `snapshot.debian.org`, then `snapshot-mmx-01.debian.org`, each only
+at the locked `20260822T000000Z` snapshot and the same three suites. The earlier
+Cloudflare endpoint also returned HTTP 503 in actual CI; the alternative now
+uses Debian's separately named snapshot server instead of that failed CDN path.
+APT keeps its Debian signature and package-hash verification; update errors are fatal
 for that transport. No current-suite, unsigned or arbitrary-mirror fallback
 is allowed. Each update and download phase has a 180-second overall timeout
 plus a 10-second kill grace; connection/data timeout is 20 seconds and retries
