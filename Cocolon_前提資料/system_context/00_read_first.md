@@ -1,7 +1,7 @@
 # Cocolon System Context — V1 current technical management entry
 
 status: CURRENT_TECHNICAL_OWNER__V1_MANAGEMENT_ENTRY_ACTIVE_ON_PR37_WORKING_LINEAGE
-revision_date: 2026-09-07
+revision_date: 2026-09-08
 scope: Cocolon System Context Steps 1–7 plus Step 9 management entry and V1 implementation freeze
 step8_status: SKIPPED_BY_MASH_DECISION
 management_entry_activation: 1
@@ -109,7 +109,8 @@ permanently memorized or that its meaning was machine-approved.
 
 Mash explicitly prioritized restoring System Context on 2026-09-07, including
 current material refs, doctor, actual prepare and regenerable cache creation.
-The existing `.devcontainer/Dockerfile` and toolchain lock remain unchanged.
+The existing toolchain lock and its exact versions remain unchanged. The
+2026-09-08 Dockerfile acquisition correction below changes transport only.
 Do not change required tool versions merely to match the chat host.
 
 The additional `.github/workflows/cocolon-system-context-prepare.yml` executes
@@ -152,6 +153,30 @@ artifact does not repair the chat host's Python/Node installation, establish
 Operator actual-value proof, or convert pending remote proof into PASS.
 Current execution results belong in PR #37's current report; historical tracked
 `current/cmee_working/**` remains unchanged.
+
+### Bounded acquisition recovery — 2026-09-08
+
+Mash approved bounded acquisition timeouts and a same-content alternative
+transport after the observed Debian HTTP 503 failures. The existing Dockerfile
+tries `snapshot.debian.org`, then `snapshot-cloudflare.debian.org`, each only
+at the locked `20260822T000000Z` snapshot and the same three suites. APT keeps
+its Debian signature and package-hash verification; update errors are fatal
+for that transport. No current-suite, unsigned or arbitrary-mirror fallback
+is allowed. Each update and download phase has a 180-second overall timeout
+plus a 10-second kill grace; connection/data timeout is 20 seconds and retries
+are limited to one. Packages are installed only after complete download, with
+`--no-download`. If an earlier transport supplied verified InRelease files,
+the next transport must supply byte-identical files. When no earlier metadata
+was obtainable, cross-transport equality is not claimed; snapshot identity,
+APT verification and the unchanged locked tool checks remain required.
+
+Node/SCIP archive acquisition also has bounded curl timeouts/retries; npm and
+pip acquisition have 300-second overall timeouts. Existing archive SHA-256,
+package lock integrity and tool-version checks are not weakened. Cache packing
+runs as the existing producer in a read-only, network-disabled container and
+compares the archive against the source without widening cache permissions.
+Actual run outcomes and artifact verification belong in PR #37's current
+report, not in an assumed-success statement in this entry.
 
 ## Freshness and fallback
 

@@ -6,24 +6,42 @@ ARG SCIP_VERSION=v0.7.1
 ARG SCIP_ARCHIVE_SHA256=7bb1a566787478641a13bd9c93c2f571337556c76d659206f2225dc7d71a648b
 ARG DEBIAN_SNAPSHOT=20260822T000000Z
 
-RUN rm -f /etc/apt/sources.list.d/debian.sources \
-    && printf '%s\n' \
-        "deb [check-valid-until=no] https://snapshot.debian.org/archive/debian/${DEBIAN_SNAPSHOT}/ bookworm main" \
-        "deb [check-valid-until=no] https://snapshot.debian.org/archive/debian/${DEBIAN_SNAPSHOT}/ bookworm-updates main" \
-        "deb [check-valid-until=no] https://snapshot.debian.org/archive/debian-security/${DEBIAN_SNAPSHOT}/ bookworm-security main" \
-        > /etc/apt/sources.list \
-    && apt-get update \
-    && apt-get install -y --no-install-recommends \
-        bash \
-        ca-certificates \
-        curl \
-        git \
-        xz-utils \
-    && rm -rf /var/lib/apt/lists/*
+# Bound only acquisition; preserve the snapshot, signatures, hashes and package set.
+# The second Debian-owned endpoint is a transport alternative, never a newer suite.
+RUN set -eu; \
+    rm -f /etc/apt/sources.list.d/debian.sources; \
+    printf '%s\n' 'Acquire::Retries "1";' \
+        'Acquire::http::Timeout "20";' 'Acquire::https::Timeout "20";' \
+        > /etc/apt/apt.conf.d/80cocolon-acquire; \
+    mkdir -p /tmp/cocolon-snapshot-releases; \
+    acquired=0; \
+    for mirror in https://snapshot.debian.org https://snapshot-cloudflare.debian.org; do \
+        printf 'System Context snapshot transport: %s (%s)\n' "$mirror" "$DEBIAN_SNAPSHOT"; \
+        rm -rf /var/lib/apt/lists/*; \
+        printf '%s\n' \
+            "deb [check-valid-until=no] ${mirror}/archive/debian/${DEBIAN_SNAPSHOT}/ bookworm main" \
+            "deb [check-valid-until=no] ${mirror}/archive/debian/${DEBIAN_SNAPSHOT}/ bookworm-updates main" \
+            "deb [check-valid-until=no] ${mirror}/archive/debian-security/${DEBIAN_SNAPSHOT}/ bookworm-security main" \
+            > /etc/apt/sources.list; \
+        if timeout --kill-after=10s 180s apt-get --error-on=any update; then \
+            for release in /var/lib/apt/lists/*_InRelease; do \
+                baseline="/tmp/cocolon-snapshot-releases/${release##*_dists_}"; \
+                if test -f "$baseline"; then cmp "$baseline" "$release"; else cp "$release" "$baseline"; fi; \
+            done; \
+            if timeout --kill-after=10s 180s apt-get install --download-only -y --no-install-recommends \
+                bash ca-certificates curl git xz-utils; then acquired=1; break; fi; \
+        fi; \
+    done; \
+    test "$acquired" = 1; \
+    sha256sum /tmp/cocolon-snapshot-releases/*; \
+    apt-get install --no-download -y --no-install-recommends bash ca-certificates curl git xz-utils; \
+    rm -rf /var/lib/apt/lists/* /tmp/cocolon-snapshot-releases; \
+    rm /etc/apt/apt.conf.d/80cocolon-acquire
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN curl --fail --location --silent --show-error \
+        --connect-timeout 20 --max-time 120 --retry 1 --retry-max-time 180 \
         "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.xz" \
         --output /tmp/node.tar.xz \
     && printf '%s  %s\n' "${NODE_ARCHIVE_SHA256}" /tmp/node.tar.xz | sha256sum --check --strict \
@@ -33,6 +51,7 @@ RUN curl --fail --location --silent --show-error \
     && rm /tmp/node.tar.xz
 
 RUN curl --fail --location --silent --show-error \
+        --connect-timeout 20 --max-time 120 --retry 1 --retry-max-time 180 \
         "https://github.com/scip-code/scip/releases/download/${SCIP_VERSION}/scip-linux-amd64.tar.gz" \
         --output /tmp/scip.tar.gz \
     && printf '%s  %s\n' "${SCIP_ARCHIVE_SHA256}" /tmp/scip.tar.gz | sha256sum --check --strict \
@@ -49,11 +68,13 @@ ENV PATH="/opt/cocolon-system-context-node/node_modules/.bin:/opt/node/bin:${PAT
 
 WORKDIR /opt/cocolon-system-context-node
 COPY system-context-node/package.json system-context-node/package-lock.json ./
-RUN npm ci --omit=dev --ignore-scripts --no-audit --no-fund
+RUN timeout --kill-after=10s 300s npm ci --omit=dev --ignore-scripts --no-audit --no-fund \
+        --fetch-timeout=30000 --fetch-retries=1
 
 WORKDIR /opt/cocolon-system-context-toolchain
 COPY system-context-python.lock system-context-toolchain.lock.json ./
-RUN python -m pip install --no-cache-dir --only-binary=:all: --require-hashes \
+RUN timeout --kill-after=10s 300s python -m pip install \
+        --timeout 30 --retries 1 --no-cache-dir --only-binary=:all: --require-hashes \
         --requirement system-context-python.lock
 
 RUN python -c 'import hashlib, json, pathlib; root = pathlib.Path("/opt/cocolon-system-context-toolchain"); spec = json.loads((root / "system-context-toolchain.lock.json").read_text(encoding="utf-8")); pairs = ((root / "system-context-python.lock", spec["python"]["test_lock"]["sha256"]), (pathlib.Path("/opt/cocolon-system-context-node/package-lock.json"), spec["npm_toolchain"]["lock"]["sha256"])); assert all(hashlib.sha256(path.read_bytes()).hexdigest() == expected for path, expected in pairs), "toolchain lock file hash mismatch"' \
