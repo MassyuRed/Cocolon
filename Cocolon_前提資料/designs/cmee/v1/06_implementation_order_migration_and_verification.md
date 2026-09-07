@@ -1,7 +1,7 @@
 # CMEE V1 — Implementation Order / Migration / Verification 詳細設計
 
 - document id: `cocolon.cmee.v1.implementation_migration_verification.detailed_design`
-- revision date: `2026-09-07 JST`
+- revision date: `2026-09-08 JST`
 - lifecycle: `CURRENT_PRODUCT_OWNER_NON_PASS / REALIZABLE_RECEPTION_EXPRESSION_WORK_STAGE1_ACTIVE`
 - absolute implementation rule: `BOUND_TO_PARENT_FINAL_DESIGN_SECTION_0_3`
 - current implementation state: `INHERITED_OWNER_CHAIN_IMPLEMENTED_NOT_ACCEPTED / IM10_NON_PASS`
@@ -16,7 +16,7 @@
 - Stage 1 upstream input-specific meaning final design: `FINAL_CANONICAL_IMPLEMENTATION_READY_SECTIONS_19_THROUGH_22`
 - Stage 1 current order owner: `THIS_FILE_SECTION_89_AND_LATEST_APPENDED_UNFINISHED_CHECKPOINT`
 
-2026-09-07最新（原文で断定された願い変化句の受取／candidate57）：原文で断定された願いの強まり・弱まりを全句のまま受取対象にし、願いを二重に言い直す接続を除いた。canonical100の受取1件だけ変更、他99件は全record同一。変更核は原fieldの証明属性1個、selected inputはそこから再導出したinput／grounding参照だけが変わり、意味status・選択内容・全実plan・観察・可否理由・73/27・124責務は不変。必須304検査300成功／継承4失敗、前回302の全成否一致、新規2成功。華恋が全100件の原文と応答本文を読み商品NOT_CLEAR。変更例も外側不可の診断本文であり、商品PASSではない。長い再掲・定型締め・中心感情の未選択と補助行動偏重などは残る。
+2026-09-08最新（既証明の過去願望報告句を受け取る文法／candidate58）：既存ownerが証明・選択済みの過去願望の報告句を、原文のplain過去形を保った全文＋「こと」で受取対象へ接続し、重なった願いwrapperを除いた。canonical100の受取1件だけ変更、他99件は全record同一。原文・全核・時点・主体・selected input・全実plan・観察・可否理由・73/27・124責務は不変。必須305検査301成功／継承4失敗、前回304の全成否一致、新規1成功。華恋が全100件の原文全field・観察・受取を全文確認し、商品NOT_CLEAR。変更例も外側不可の診断本文で、商品PASSではない。長い再掲・定型締め・中心感情の未選択と補助行動偏重、動機願いの時点・複合関係などは残る。
 
 ---
 
@@ -7322,3 +7322,22 @@ candidate41から同じ承認内で継続。今回の124は件数に加え全sel
 2026-09-07最新（原文で断定された願い変化句の受取／candidate57）：原文で断定された願いの強まり・弱まりを全句のまま受取対象にし、願いを二重に言い直す接続を除いた。canonical100の受取1件だけ変更、他99件は全record同一。変更核は原fieldの証明属性1個、selected inputはそこから再導出したinput／grounding参照だけが変わり、意味status・選択内容・全実plan・観察・可否理由・73/27・124責務は不変。必須304検査300成功／継承4失敗、前回302の全成否一致、新規2成功。華恋が全100件の原文と応答本文を読み商品NOT_CLEAR。変更例も外側不可の診断本文であり、商品PASSではない。長い再掲・定型締め・中心感情の未選択と補助行動偏重などは残る。
 
 条件・最終source・検証・残件は既存API handoffのcandidate57末尾。原field断定の証明を既存同核へ渡し、願い変化句全文を直接名詞化する文法に限定。両端・関係・意味status・意味選択・Gate・旧経路・国家システム境界不変。STRUCTURE_MAP_DELTA_NONE。
+
+
+### 2026-09-08 continuation — 既証明の過去願望報告句の直接名詞化（candidate58／商品未成立）
+
+既存ownerが証明・選択済みの過去願望の報告句を、原文のplain過去形を保った全文＋「こと」で受取対象へ接続し、重なった願いwrapperを除いた。canonical100の受取1件だけ変更、他99件は全record同一。原文・全核・時点・主体・selected input・全実plan・観察・可否理由・73/27・124責務は不変。必須305検査301成功／継承4失敗、前回304の全成否一致、新規1成功。華恋が全100件の原文全field・観察・受取を全文確認し、商品NOT_CLEAR。変更例も外側不可の診断本文で、商品PASSではない。長い再掲・定型締め・中心感情の未選択と補助行動偏重、動機願いの時点・複合関係などは残る。
+
+同じ継承承認内で、既存Human Receptionのsource_grounded_retained_wish_nominalだけを拡張した。final・非ANAPHORIC・同じplanの単一target・SELF・positive wish・既存quantity等のguardを維持し、time_scope= pastの同じ核について既存_past_wish_targetと共有past_reported_wish_finiteを再確認する。plain過去報告の全文を「こと」へ接続し、語尾の過去形を既存SOURCE_CLAUSEの時間証拠として消費する。敬体過去、引用、不確かさ、異なる主体、現在／未来、別の過去日付、動機願いの新分類はこの文法で追加しない。現行の現在願望branchと旧／ANAPHORIC経路は維持した。
+
+対象名詞句の全文一致、出現1回、引用外、文法witness、関係両端・重なり・願いの保護、sole-authorの独立replayを保持した。時制・内容・否定・引用・重複・関係・保護を変えた完成本文をinverseとGateが拒否する。最初の短い公開検査入力では正しくANAPHORICが選ばれたため、直接名詞化の固定期待が1件失敗した。実際の対象を選ぶ既存canonical loaderに検査を合わせ、focused 5件成功。歴史的fixture／hash／dated PASSは変更していない。
+
+source／test／current runnerの3pathをremote `4df0e6f80d79b843a0f114d729e524cfd8db6a31` に保存。最終実行local head `5465738f5d604d664ba329d2b2de7d3dcd11a3be` とwhole tree `501e560c7fa9dbaa580505b7c4b60f5ac025fd73` が同一。remoteのchanged pathsと3path全文も照合。runner既存13定数を再導出しexact18／exact9、非current AST不変を確認した。必須305件は原184が180成功4失敗、追加121全成功、ERROR／skip0。継承4失敗は観察固定2・dated source receipt1・旧unseen集合重複1のまま。全36ケース／post-hash96と集合後続診断も前回と全項目同一で、未実行を成功にしない。
+
+継承比較失敗について、自己所有の比較評価を識別するOP案も検討したが不採用とし、source／testを開始時の全文へ復元した。後段Surfaceが根拠のない本人／前回基準を補う経路へ広がり、既存actor値も原文証明ではないため、観察hash復帰だけを修正完了にできない。新規試行検査のattribute参照誤りもprivate記録に保持した。今回の採用差分にOP／Sentence Surfaceの変更はない。旧集合重複も通常referentでsource差を一般参照へ縮める経路に属し、finalの語尾variationや未選択意味の補充で閉じない。
+
+作業前には全体構造・全tracked file地図、国家／他中核／共通基盤／旧経路、現行前提・恒久incident・最新weeklyへ戻った。STRUCTURE_MAP_DELTA_NONE。国家保存／dispatch／queue／read、公開API／DB／RN、Piece／Analysis、旧I5の接続不変。補助agentは公開静的読取のみで、実行・編集・private全文確認・GitHub反映はrootが担当した。
+
+System Contextは開始時PR37 `a069cf241210ad8781bfcbfed544b5888674bef7` と別系統の最新Actionsを確認。前のproduct refs（PR30 `dd11c067b28ad4e53421e109fed78fd667f7447f`／PR3 `247c0228a8a4b66ceee6b5f599800f923ca2acf0`）について、run 34165831128はlocked doctor34件、prepare、verify-only、source heads／trees再照合、cache uploadまで成功しEXACT_INPUTS_VERIFIED／FRESH_FOR_EXACT_INPUTS、proofはREMOTE_PROOF_PENDINGのまま。ローカルdoctor→prepareはtoolchain不一致で両方exit2、cache取得は403で利用せず、最新原典直接確認を継続した。今回の最終refsに対する同期・再生成結果はPR37のcurrent本文とexact-head Actionsで確認し、前回cacheの成功を今回へ流用しない。
+
+次は既存source ownerの同核時点・主体・関係、中心の選択責務と実際の受取本文へ戻って続ける。動機節の過去願いは未修正。長い再掲／定型締めを未選択の感情や意味の注入で修正しない。同じ承認の再要求は不要。商品NOT_CLEAR、Human Product Read／human PASS／ready／採用／merge／本番／問い／Layer3は未成立。9月9日の途中確認・9月12日の本文確認準備目標と品質リスクを継承する。private本文・個別case・digest・locatorの公開0。
