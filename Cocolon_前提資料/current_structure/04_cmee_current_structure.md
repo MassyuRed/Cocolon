@@ -56,7 +56,9 @@ Current state:
     Analysis not connected
     automatic progression false
 
-2026-09-07最新（願望内の継続時点補正と願いの参照／candidate44）：既存OPで願望内の継続動詞を既に継続中とは扱わず、同核の時点をcurrent_inputへ補正する。既存HRで、現在の自己の肯定wishを表す有限carrier全文に「こと」を付け、一般wrapperの重複を除いた。存在・topic/case・時点・願い・関係と両端を保持。canonical100中1件の受取だけが変更、他99件同一、全核identity・観察・実reception plan・意味を伴う124責務・73/27を維持し、selected inputの時点と参照を同じownerから再導出。必須276検査272成功／継承4失敗、前回275の全成否一致。全100件を全文確認、商品NOT_CLEAR。長い再掲・名詞接続・定型締め、中心感情の未選択と補助行動偏重は残る。
+2026-09-07最新（選択済みの言葉参照の重複短縮／candidate45）：既存HRで非ANAPHORICのcurrent_expression参照を、同じsource節全文＋「という言葉」へ短縮した。語への参照を保ち、内容を事実として新たに認定しない。意味・否定・時点・不確かさ・関係両端と選択済み受取を維持。canonical100中8件の受取のみ変更、他92件同一、全核・selected input・実reception plan・意味を伴う124責務・73/27は同一。必須279検査275成功／継承4失敗、前回276の全成否一致。全100件全文確認、商品NOT_CLEAR。長い再掲・名詞接続・定型締め、中心感情の未選択と補助行動偏重は残る。
+
+2026-09-07前回（願望内の継続時点補正と願いの参照／candidate44）：既存OPで願望内の継続動詞を既に継続中とは扱わず、同核の時点をcurrent_inputへ補正する。既存HRで、現在の自己の肯定wishを表す有限carrier全文に「こと」を付け、一般wrapperの重複を除いた。存在・topic/case・時点・願い・関係と両端を保持。canonical100中1件の受取だけが変更、他99件同一、全核identity・観察・実reception plan・意味を伴う124責務・73/27を維持し、selected inputの時点と参照を同じownerから再導出。必須276検査272成功／継承4失敗、前回275の全成否一致。全100件を全文確認、商品NOT_CLEAR。長い再掲・名詞接続・定型締め、中心感情の未選択と補助行動偏重は残る。
 
 2026-09-06前回（選択済みの独立した関係の具体参照／candidate43）：既存OPの意味確定前で、他Moveから独立した単一required関係を持つMoveの参照方式を既存short_anchorへ戻し、両端の具体的内容を受取へ届ける。核・対象・act・role・意味を伴う124責務・全selected decision／basisは維持。canonical100中6件の受取が変更、他94件同一、direct100／73-27、可否変更0。必須275検査271成功／継承4失敗、前回274の全成否一致、新規一件成功。全100全文確認、商品NOT_CLEAR。長い原文再掲・定型表現、中心感情の未選択と補助行動偏重は残る。詳細はruntime handoffのcandidate43末尾。
 

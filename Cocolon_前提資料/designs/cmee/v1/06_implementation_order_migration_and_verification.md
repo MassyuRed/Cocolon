@@ -7244,3 +7244,9 @@ candidate41から同じ承認内で継続。今回の124は件数に加え全sel
 2026-09-07最新（願望内の継続時点補正と願いの参照／candidate44）：既存OPで願望内の継続動詞を既に継続中とは扱わず、同核の時点をcurrent_inputへ補正する。既存HRで、現在の自己の肯定wishを表す有限carrier全文に「こと」を付け、一般wrapperの重複を除いた。存在・topic/case・時点・願い・関係と両端を保持。canonical100中1件の受取だけが変更、他99件同一、全核identity・観察・実reception plan・意味を伴う124責務・73/27を維持し、selected inputの時点と参照を同じownerから再導出。必須276検査272成功／継承4失敗、前回275の全成否一致。全100件を全文確認、商品NOT_CLEAR。長い再掲・名詞接続・定型締め、中心感情の未選択と補助行動偏重は残る。
 
 既存OPで願望内部の継続を現在のwish継続と誤認する時点を同核current_inputへ補正し、既存HRのsource有限carrier全文＋ことという可逆参照文法へ接続する。存在carrierとtopic/caseを削らず、補正後のselected意味と時点所有を維持する。Gateはsource証明付き完全参照と既存body-only suffix文法を検証し、本文改変を拒否する。固定source `c78526fc1edb278542a3ff77b6c150abc6ca37a4`。適用条件・失敗補修・最終検査・全文確認の詳細は既存API handoffのcandidate44末尾。商品NOT_CLEAR、同じ承認内で継続。
+
+### 2026-09-07 continuation — 選択済みの言葉参照の重複短縮（candidate45／商品未成立）
+
+2026-09-07最新（選択済みの言葉参照の重複短縮／candidate45）：既存HRで非ANAPHORICのcurrent_expression参照を、同じsource節全文＋「という言葉」へ短縮した。語への参照を保ち、内容を事実として新たに認定しない。意味・否定・時点・不確かさ・関係両端と選択済み受取を維持。canonical100中8件の受取のみ変更、他92件同一、全核・selected input・実reception plan・意味を伴う124責務・73/27は同一。必須279検査275成功／継承4失敗、前回276の全成否一致。全100件全文確認、商品NOT_CLEAR。長い再掲・名詞接続・定型締め、中心感情の未選択と補助行動偏重は残る。
+
+既存HRのsource有限節全文＋「という言葉」という参照文法で、語への参照を保ったまま説明の重複を短縮する。原fieldの断定性はspanから証明できないため、事実nominalへの変更は見送った。Gateは完全参照と既存target_wordsのUTF-8終端一致を同時に要求し、本文改変を拒否する。固定source `ebe01503a99824fd58797c32adb09a529348bf2b`。適用条件・見送り・最終検査・全文確認の詳細は既存API handoffのcandidate45末尾。商品NOT_CLEAR、同じ承認内で継続。
