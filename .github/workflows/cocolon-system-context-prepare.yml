@@ -90,6 +90,7 @@ jobs:
           set -euo pipefail
           # No token or private input is passed into this container.
           # prepare's existing owner resolver reads public Git refs over the network.
+          # SCIP Python recommends NODE_OPTIONS so spawned Node processes inherit the heap budget.
           docker run --rm --read-only \
             --tmpfs /tmp:rw,nosuid,nodev \
             --volume "$GITHUB_WORKSPACE:/workspace:ro" \
@@ -97,6 +98,7 @@ jobs:
             --workdir /workspace \
             --env PYTHONPYCACHEPREFIX=/tmp/pycache \
             --env XDG_CACHE_HOME=/tmp/cache \
+            --env NODE_OPTIONS=--max-old-space-size=8192 \
             --env GIT_CONFIG_COUNT=4 \
             --env GIT_CONFIG_KEY_0=safe.directory --env GIT_CONFIG_VALUE_0=/workspace \
             --env GIT_CONFIG_KEY_1=safe.directory --env GIT_CONFIG_VALUE_1=/state/material/Cocolon \

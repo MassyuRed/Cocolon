@@ -1,7 +1,7 @@
 # Cocolon System Context — V1 current technical management entry
 
 status: CURRENT_TECHNICAL_OWNER__V1_MANAGEMENT_ENTRY_ACTIVE_ON_PR37_WORKING_LINEAGE
-revision_date: 2026-09-02
+revision_date: 2026-09-07
 scope: Cocolon System Context Steps 1–7 plus Step 9 management entry and V1 implementation freeze
 step8_status: SKIPPED_BY_MASH_DECISION
 management_entry_activation: 1
@@ -104,6 +104,54 @@ or truncate their evidence.
 actual original files in that order before making a Cocolon judgment. The
 generated order is navigation evidence, not a claim that every file was
 permanently memorized or that its meaning was machine-approved.
+
+### Fixed-environment execution when the chat host cannot restore it
+
+Mash explicitly prioritized restoring System Context on 2026-09-07, including
+current material refs, doctor, actual prepare and regenerable cache creation.
+The existing `.devcontainer/Dockerfile` and toolchain lock remain unchanged.
+Do not change required tool versions merely to match the chat host.
+
+The additional `.github/workflows/cocolon-system-context-prepare.yml` executes
+the existing CLI on the exact same-repository Draft PR #37 head. Relevant PR
+synchronization triggers it; it is not a scheduled worker or automatic Git
+writer. The three pre-existing verifier workflows still only verify their
+assigned tests. Their success alone does not prove actual prepare succeeded.
+
+The actual-prepare job checks the current PR #30 and PR #3 heads against the
+approved `cmee_working` profile, creates separate clean material checkouts and
+the exact historical Cycle001 external checkout, builds the locked container,
+and runs `doctor`, `prepare`, then `prepare --verify-only`. It verifies all
+material heads and tracked trees plus the current PR heads again afterward.
+The implementation tree is mounted read-only. Only temporary workspaces and
+the regenerable cache are writable. The container receives no credential or
+private product input; network access is limited by purpose to the existing
+public Git owner/ref resolution. No Emlis generation or production effect is
+part of this job.
+
+The first actual Python indexing run reached the provider but exhausted its
+approximately 4 GiB V8 heap. The actual runner now supplies
+`NODE_OPTIONS=--max-old-space-size=8192`, the provider's documented 8 GiB heap
+setting, including spawned Node processes. This is a resource setting, not a
+version change, index-scope reduction or verification relaxation.
+
+For each run, inspect its actual terminal result rather than the workflow's
+presence. Diagnostics are retained as `system-context-diagnostics-<head>`.
+Only after successful prepare, verify-only and final-head checks is
+`system-context-cache-<head>` published as an Actions artifact containing
+`system-context-cache.tar.gz`. Both artifacts have seven-day retention; they
+are regenerable and are not the permanent source of truth. An expired artifact
+is not evidence that the source or implementation disappeared.
+
+Before using a retained cache in a later session, confirm its implementation,
+material refs and recorded fingerprints against the intended approved work.
+A changed material ref requires explicit profile/current-test alignment and a
+new prepare; do not treat an older successful artifact as current. Read the
+applicable original files through the generated reading order. Downloading an
+artifact does not repair the chat host's Python/Node installation, establish
+Operator actual-value proof, or convert pending remote proof into PASS.
+Current execution results belong in PR #37's current report; historical tracked
+`current/cmee_working/**` remains unchanged.
 
 ## Freshness and fallback
 
@@ -212,6 +260,9 @@ evidence baseline. Mash's 2026-09-02 decision authorizes only the bounded
 execution hardening documented above: exact implementation/material identity,
 fixed environment validation, freshness/cache correction and lightweight
 stdout. It does not reopen product behavior or Operator actual-proof claims.
+The 2026-09-07 restoration authorization adds the bounded execution route,
+material-ref alignment and its directly related test maintenance described
+above; it does not change those product or proof boundaries.
 
 A future enhancement is allowed only when all exact4 conditions hold:
 
