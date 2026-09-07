@@ -56,7 +56,9 @@ Current state:
     Analysis not connected
     automatic progression false
 
-2026-09-07最新（両方を残す対比の受取文法／candidate48）：既存HRで、選択済みRELATIONAL_NONCOLLAPSE／PRESERVE_BOTH_ENDPOINTSと同一focal contrast、両端のselected basisかつappraised primaryを確認し、felt_response／stay_with_current_burden／current_expressionに限定して両端そのものを受取対象にする。両方の保持と対比をobjectと述語で分担し、未完了の関係を同じ節で厳密に完了する。canonical100の受取1件のみ変更、他99件・全核・selected input・実plan・意味を伴う124責務・73/27は同一。変更例の外側不可は継続し、診断本文の文法改善である。必須287検査283成功／継承4失敗、前回285の全成否一致。華恋が全100件全文確認し商品NOT_CLEAR。長い再掲・定型締め、中心感情の未選択と補助行動偏重は残る。
+2026-09-07最新（願いの対比を受取対象へ保つ文法／candidate49）：既存HRで、自己のretained_wish／protect_retained_intention／attentionに選択済みのMATERIAL対比を、願いと背景の完全な二端点へ直接つなぐ。対比と願いを大切に受け止める責務を同じ節に保持。canonical100の生成可能側の受取2件のみ変更し、他98件・全核・selected input・実plan・意味を伴う124責務・観察・可否理由・73/27は同一。必須289検査285成功／継承4失敗、前回287の全成否一致、新規2成功。華恋が全100件全文確認し商品NOT_CLEAR。長い再掲・定型締め、別actの対比名詞、中心感情の未選択と補助行動偏重は残る。
+
+2026-09-07前回（両方を残す対比の受取文法／candidate48）：既存HRで、選択済みRELATIONAL_NONCOLLAPSE／PRESERVE_BOTH_ENDPOINTSと同一focal contrast、両端のselected basisかつappraised primaryを確認し、felt_response／stay_with_current_burden／current_expressionに限定して両端そのものを受取対象にする。両方の保持と対比をobjectと述語で分担し、未完了の関係を同じ節で厳密に完了する。canonical100の受取1件のみ変更、他99件・全核・selected input・実plan・意味を伴う124責務・73/27は同一。変更例の外側不可は継続し、診断本文の文法改善である。必須287検査283成功／継承4失敗、前回285の全成否一致。華恋が全100件全文確認し商品NOT_CLEAR。長い再掲・定型締め、中心感情の未選択と補助行動偏重は残る。
 
 2026-09-07最新（対比の両端を受け取る文法／candidate47）：既存HRで、positive_feelingに選択済みのMATERIAL受取とattention、単一contrastの両端がそのMoveのselected basisかつappraised primaryである場合、両端そのものを受取対象にし、違いも同じ述語で受け取る。二端点の原文・順序・意味選択を維持し、coreで未完了の関係を述語で厳密に完了する。canonical100の受取1件のみ変更、他99件・全核・selected input・実plan・意味を伴う124責務・73/27は同一。必須285検査281成功／継承4失敗、前回282の全成否一致。華恋が全100件全文確認し商品NOT_CLEAR。長い再掲・定型締め、中心感情の未選択と補助行動偏重は残る。
 
