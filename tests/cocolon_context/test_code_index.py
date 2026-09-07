@@ -3,11 +3,13 @@ from __future__ import annotations
 import hashlib
 import importlib.util
 import json
+import os
 import pathlib
 import subprocess
 import sys
 import tempfile
 import unittest
+from unittest import mock
 
 ROOT = pathlib.Path(__file__).parents[2]
 TOOL = ROOT / "tools" / "cocolon_context_code_index.py"
@@ -69,6 +71,44 @@ def inventory_rows(repo: pathlib.Path, key: str, repository: str) -> list[dict[s
 
 
 class CodeIndexTests(unittest.TestCase):
+    def test_python_heap_wrapper_propagates_limit_to_spawned_node(self) -> None:
+        # run_provider supplies 4096 in its environment. The existing wrapper's
+        # command-line limit alone only changes the parent, not spawned Node.
+        with tempfile.TemporaryDirectory(prefix="scip provider ") as raw:
+            entry = pathlib.Path(raw) / "provider entry.js"
+            entry.write_text(
+                "const cp = require('child_process');\n"
+                "const child = cp.spawnSync(process.execPath, ['-e', "
+                "'process.stdout.write(JSON.stringify({options:process.env.NODE_OPTIONS,limit:require(\"v8\").getHeapStatistics().heap_size_limit}))'], "
+                "{encoding:'utf8'});\n"
+                "if (child.status !== 0) process.exit(child.status || 1);\n"
+                "console.log(JSON.stringify({args:process.argv.slice(2),child:JSON.parse(child.stdout)}));\n",
+                encoding="utf-8",
+            )
+            real_which = code_index.shutil.which
+            wrapper_dir = None
+            try:
+                with mock.patch.dict(os.environ), mock.patch.object(
+                    code_index.shutil,
+                    "which",
+                    side_effect=lambda name: str(entry) if name == "scip-python" else real_which(name),
+                ):
+                    code_index._install_scip_python_heap_wrapper()
+                    wrapper_dir = pathlib.Path(os.environ["PATH"].split(os.pathsep)[0])
+                    result = code_index.run_command(
+                        ["scip-python", "index", "argument with spaces"],
+                        env={"NODE_OPTIONS": "--max-old-space-size=4096"},
+                        timeout=30,
+                    )
+                self.assertEqual(result.returncode, 0, result.stderr)
+                observed = json.loads(result.stdout)
+                self.assertEqual(observed["args"], ["index", "argument with spaces"])
+                self.assertEqual(observed["child"]["options"], "--max-old-space-size=8192")
+                self.assertGreaterEqual(observed["child"]["limit"], 8192 * 1024 * 1024)
+            finally:
+                if wrapper_dir is not None:
+                    code_index.shutil.rmtree(wrapper_dir)
+
     def test_python_syntax_extracts_symbols_and_imports(self) -> None:
         symbols, refs, errors = code_index.python_syntax(
             "api.py",

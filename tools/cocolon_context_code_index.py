@@ -43,6 +43,7 @@ def _install_scip_python_heap_wrapper() -> None:
     wrapper.write_text(
         "#!/usr/bin/env bash\n"
         "set -euo pipefail\n"
+        "export NODE_OPTIONS=--max-old-space-size=8192\n"
         f"exec {shlex.quote(node)} --max-old-space-size=8192 "
         f"{shlex.quote(str(entrypoint))} \"$@\"\n",
         encoding="utf-8",
