@@ -1,7 +1,7 @@
 # CMEE V1 — Implementation Order / Migration / Verification 詳細設計
 
 - document id: `cocolon.cmee.v1.implementation_migration_verification.detailed_design`
-- revision date: `2026-09-06 JST`
+- revision date: `2026-09-07 JST`
 - lifecycle: `CURRENT_PRODUCT_OWNER_NON_PASS / REALIZABLE_RECEPTION_EXPRESSION_WORK_STAGE1_ACTIVE`
 - absolute implementation rule: `BOUND_TO_PARENT_FINAL_DESIGN_SECTION_0_3`
 - current implementation state: `INHERITED_OWNER_CHAIN_IMPLEMENTED_NOT_ACCEPTED / IM10_NON_PASS`
@@ -16,7 +16,7 @@
 - Stage 1 upstream input-specific meaning final design: `FINAL_CANONICAL_IMPLEMENTATION_READY_SECTIONS_19_THROUGH_22`
 - Stage 1 current order owner: `THIS_FILE_SECTION_89_AND_LATEST_APPENDED_UNFINISHED_CHECKPOINT`
 
-2026-09-06最新（補助行動より既存の主題を保持）：final専用の既存ObservationPlanで、正scoreの単一required memo主題が既存lived-change familyを満たす場合、低scoreの非directional補助行動に押しのけられないよう選択順位を限定修正。final・safe・exact2 familyの既存役割も、選択済み主題を本文で先に受ける順に整合。固定100はdirect100、Move／expression／binding124、外側73/27。生成可能側5件で選択inputとフォローだけが変わり、残95件は全保存項目同一。原入力・意味核・観察・可否・理由は全100同一。全218検査214成功／既存4失敗、新規失敗0・未実行0。華恋が全100の原入力全フィールド・両層本文を読みNOT_CLEAR。主題の具体的受容が戻る一方、複文の長い再掲が増える箇所と対象外に残る行動偏重・定型的な締めが残る。一般のburden／未完・混合状態の選択は未解決。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+2026-09-07最新（不確かな願いと有限節の受け取り／candidate53）：未確定の願いと背景を、既存wish_and_constraintの二対象として受け取り、不確かさと関係を保持。願いの有限節は全文を同じ参照語へ直接接続して二重名詞化を減らした。canonical100の受取2件のみ変更、他98件・全核・selected input・実plan・意味を伴う124責務・観察・可否理由・73/27は同一。最終必須296検査292成功／継承4失敗、前回294の全成否一致、新規2成功。華恋が全100件の本文を確認し商品NOT_CLEAR。長い原文再掲・定型締め・一般参照・中心感情の未選択と補助行動偏重は残る。
 
 ---
 
