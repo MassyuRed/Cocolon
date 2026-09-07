@@ -30,7 +30,6 @@ jobs:
       EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
       EXPECTED_HEAD_REF: ${{ github.event.pull_request.head.ref }}
       EXPECTED_PR_NUMBER: ${{ github.event.pull_request.number }}
-      STATE_ROOT: ${{ runner.temp }}/cocolon-context-actual
     steps:
       - name: Bind to the current open Draft implementation head
         env:
@@ -39,6 +38,7 @@ jobs:
           set -euo pipefail
           test "$GITHUB_EVENT_NAME" = pull_request
           gh api "repos/${GITHUB_REPOSITORY}/pulls/${EXPECTED_PR_NUMBER}" | jq -e --arg sha "$EXPECTED_HEAD_SHA" --arg ref "$EXPECTED_HEAD_REF" --arg repo "$GITHUB_REPOSITORY" '.state == "open" and .draft == true and .merged == false and .head.sha == $sha and .head.ref == $ref and .head.repo.full_name == $repo and .base.repo.full_name == $repo' >/dev/null
+          echo "STATE_ROOT=$RUNNER_TEMP/cocolon-context-actual" >> "$GITHUB_ENV"
       - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
