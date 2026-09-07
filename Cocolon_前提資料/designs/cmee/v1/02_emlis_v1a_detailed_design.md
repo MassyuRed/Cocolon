@@ -23,7 +23,7 @@
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 - Stage 1 historical predecessor additional correction final body, not current: `ROUTE_A_ONLY / STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP / EARLY_ACTUAL_NOT_RUN`
 
-2026-09-07最新（独立した実行済み行動の参照／candidate54）：選択済みの独立した本人の行動が、後続応答で一般語に縮む参照policyを修正。canonical100の受取5件を具体化し、他95件は全record同一。全核・観察・可否理由・73/27と意味を伴う124責務は不変。実planは5件のreference_modeだけが変わり、selected inputの意味内容は同一、plan由来input_ref／grounding_refのみ更新。必須298検査294成功／継承4失敗、前回296の全成否一致、新規2成功。華恋が全100件本文を読み商品NOT_CLEAR。長い原文再掲・定型締め・一般参照・中心感情の未選択と補助行動偏重は残る。
+2026-09-07最新（同じ行動への注意と受取／candidate55）：選択済みの単一の本人の実行行動について、注意とmaterial受取を同じ具体的な目的語に接続するfinal HR文法を修正。canonical100の受取39件が変わり、他61件は全record同一。全plan・核・観察・可否理由・73/27と意味を伴う124責務は不変。必須300検査296成功／継承4失敗、前回298の全成否一致、新規2成功。華恋が全100件の原文と応答本文を読み商品NOT_CLEAR。長い原文再掲・定型的な締め・中心感情の未選択と補助行動偏重などは残る。
 
 ---
 
@@ -2497,3 +2497,9 @@ System Contextは作業前にdoctor→prepareを実行し、固定toolchain不�
 2026-09-07最新（独立した実行済み行動の参照／candidate54）：選択済みの独立した本人の行動が、後続応答で一般語に縮む参照policyを修正。canonical100の受取5件を具体化し、他95件は全record同一。全核・観察・可否理由・73/27と意味を伴う124責務は不変。実planは5件のreference_modeだけが変わり、selected inputの意味内容は同一、plan由来input_ref／grounding_refのみ更新。必須298検査294成功／継承4失敗、前回296の全成否一致、新規2成功。華恋が全100件本文を読み商品NOT_CLEAR。長い原文再掲・定型締め・一般参照・中心感情の未選択と補助行動偏重は残る。
 
 条件・最終source・検証・残件は既存API handoffのcandidate54末尾。既存OPの選択済み独立performed actionの参照policyに限定。意味選択・Gate・旧経路・国家システム境界不変。STRUCTURE_MAP_DELTA_NONE。
+
+### 2026-09-07 continuation — 同じ行動を目的語とする注意と受取の接続（candidate55／商品未成立）
+
+2026-09-07最新（同じ行動への注意と受取／candidate55）：選択済みの単一の本人の実行行動について、注意とmaterial受取を同じ具体的な目的語に接続するfinal HR文法を修正。canonical100の受取39件が変わり、他61件は全record同一。全plan・核・観察・可否理由・73/27と意味を伴う124責務は不変。必須300検査296成功／継承4失敗、前回298の全成否一致、新規2成功。華恋が全100件の原文と応答本文を読み商品NOT_CLEAR。長い原文再掲・定型的な締め・中心感情の未選択と補助行動偏重などは残る。
+
+条件・最終source・検証・残件は既存API handoffのcandidate55末尾。既存final HRの単一の証明済み本人行動を目的語にした注意とmaterial受取の接続に限定。意味選択・Gate・旧経路・国家システム境界不変。STRUCTURE_MAP_DELTA_NONE。
