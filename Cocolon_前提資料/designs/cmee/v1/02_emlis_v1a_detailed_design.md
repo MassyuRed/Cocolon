@@ -23,7 +23,7 @@
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 - Stage 1 historical predecessor additional correction final body, not current: `ROUTE_A_ONLY / STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP / EARLY_ACTUAL_NOT_RUN`
 
-2026-09-07最新（関係する二対象への注意と受取／candidate56）：選択済みMATERIALの二対象を、full attentionで同じ目的語として注意と受取へ接続。両端と違い／重なりの関係を保ち、代名詞で受け直す接続を除いた。canonical100の受取9件だけ変更、他91件は全record同一。全plan・意味選択・核・観察・可否理由・73/27・意味を伴う124責務は不変。必須302検査298成功／継承4失敗、前回300の全成否一致、新規2成功。華恋が全100件の原文と応答本文を読み商品NOT_CLEAR。長い再掲・定型締め・中心感情の未選択と補助行動偏重などは残る。
+2026-09-07最新（原文で断定された願い変化句の受取／candidate57）：原文で断定された願いの強まり・弱まりを全句のまま受取対象にし、願いを二重に言い直す接続を除いた。canonical100の受取1件だけ変更、他99件は全record同一。変更核は原fieldの証明属性1個、selected inputはそこから再導出したinput／grounding参照だけが変わり、意味status・選択内容・全実plan・観察・可否理由・73/27・124責務は不変。必須304検査300成功／継承4失敗、前回302の全成否一致、新規2成功。華恋が全100件の原文と応答本文を読み商品NOT_CLEAR。変更例も外側不可の診断本文であり、商品PASSではない。長い再掲・定型締め・中心感情の未選択と補助行動偏重などは残る。
 
 ---
 
@@ -2509,3 +2509,9 @@ System Contextは作業前にdoctor→prepareを実行し、固定toolchain不�
 2026-09-07最新（関係する二対象への注意と受取／candidate56）：選択済みMATERIALの二対象を、full attentionで同じ目的語として注意と受取へ接続。両端と違い／重なりの関係を保ち、代名詞で受け直す接続を除いた。canonical100の受取9件だけ変更、他91件は全record同一。全plan・意味選択・核・観察・可否理由・73/27・意味を伴う124責務は不変。必須302検査298成功／継承4失敗、前回300の全成否一致、新規2成功。華恋が全100件の原文と応答本文を読み商品NOT_CLEAR。長い再掲・定型締め・中心感情の未選択と補助行動偏重などは残る。
 
 条件・最終source・検証・残件は既存API handoffのcandidate56末尾。既存MATERIAL二対象のfull attentionを同じ目的語へ接続する文法に限定。両端・関係・意味選択・Gate・旧経路・国家システム境界不変。STRUCTURE_MAP_DELTA_NONE。
+
+### 2026-09-07 continuation — 原文で断定された願いの変化を受け取る文法（candidate57／商品未成立）
+
+2026-09-07最新（原文で断定された願い変化句の受取／candidate57）：原文で断定された願いの強まり・弱まりを全句のまま受取対象にし、願いを二重に言い直す接続を除いた。canonical100の受取1件だけ変更、他99件は全record同一。変更核は原fieldの証明属性1個、selected inputはそこから再導出したinput／grounding参照だけが変わり、意味status・選択内容・全実plan・観察・可否理由・73/27・124責務は不変。必須304検査300成功／継承4失敗、前回302の全成否一致、新規2成功。華恋が全100件の原文と応答本文を読み商品NOT_CLEAR。変更例も外側不可の診断本文であり、商品PASSではない。長い再掲・定型締め・中心感情の未選択と補助行動偏重などは残る。
+
+条件・最終source・検証・残件は既存API handoffのcandidate57末尾。原field断定の証明を既存同核へ渡し、願い変化句全文を直接名詞化する文法に限定。両端・関係・意味status・意味選択・Gate・旧経路・国家システム境界不変。STRUCTURE_MAP_DELTA_NONE。
