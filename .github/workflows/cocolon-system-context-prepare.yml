@@ -138,7 +138,23 @@ jobs:
           PY
       - name: Package only the verified regenerable cache
         if: success()
-        run: tar -C "$STATE_ROOT/cache" -czf "$STATE_ROOT/system-context-cache.tar.gz" cmee_working
+        run: |
+          set -euo pipefail
+          archive="$STATE_ROOT/system-context-cache.tar.gz"
+          # Preserve producer-owned restrictive directories; never chmod/chown the cache.
+          # Stream to a runner-owned archive, then compare every archived member to source.
+          docker run --rm --read-only --network none \
+            --volume "$STATE_ROOT/cache:/cache:ro" \
+            --workdir /cache \
+            cocolon-system-context-actual \
+            tar -czf - cmee_working > "$archive.partial"
+          docker run --rm -i --read-only --network none \
+            --volume "$STATE_ROOT/cache:/cache:ro" \
+            --workdir /cache \
+            cocolon-system-context-actual \
+            tar -dzf - < "$archive.partial"
+          mv "$archive.partial" "$archive"
+          sha256sum "$archive" > "$STATE_ROOT/logs/cache-archive.sha256"
       - name: Retain public diagnostics
         if: always()
         uses: actions/upload-artifact@v4
