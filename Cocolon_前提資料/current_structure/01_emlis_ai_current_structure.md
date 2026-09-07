@@ -28,6 +28,8 @@ EmlisAIの安定した商品目的、production経路、NLS v3／Cycle001 WIP、
 
 このmapは、その区別と読取順をcurrent ownerとして固定する。
 
+2026-09-07最新（対比の両端を受け取る文法／candidate47）：既存HRで、positive_feelingに選択済みのMATERIAL受取とattention、単一contrastの両端がそのMoveのselected basisかつappraised primaryである場合、両端そのものを受取対象にし、違いも同じ述語で受け取る。二端点の原文・順序・意味選択を維持し、coreで未完了の関係を述語で厳密に完了する。canonical100の受取1件のみ変更、他99件・全核・selected input・実plan・意味を伴う124責務・73/27は同一。必須285検査281成功／継承4失敗、前回282の全成否一致。華恋が全100件全文確認し商品NOT_CLEAR。長い再掲・定型締め、中心感情の未選択と補助行動偏重は残る。
+
 2026-09-07最新（選択済みの気持ちのMATERIAL受取／candidate46）：既存HRで、positive_feelingに選択済みのMATERIAL_WEIGHT／RECEIVE_AS_MATERIALを「受け止める」で実現する。本人の気持ちをEmlis自身が感じるという述語との不一致を修正。同じ不変selected inputをHRとSentenceSurfaceの責任検査へ渡す。canonical100の受取3件のみ変更、他97件・全核・意味選択・実plan・意味を伴う124責務・73/27は同一。必須282検査278成功／継承4失敗、前回279の全成否一致。華恋が全100件全文確認し商品NOT_CLEAR。長い再掲・名詞連結・定型締め、中心感情の未選択と補助行動偏重は残る。
 
 2026-09-07前回（選択済みの言葉参照の重複短縮／candidate45）：既存HRで非ANAPHORICのcurrent_expression参照を、同じsource節全文＋「という言葉」へ短縮した。語への参照を保ち、内容を事実として新たに認定しない。意味・否定・時点・不確かさ・関係両端と選択済み受取を維持。canonical100中8件の受取のみ変更、他92件同一、全核・selected input・実reception plan・意味を伴う124責務・73/27は同一。必須279検査275成功／継承4失敗、前回276の全成否一致。全100件全文確認、商品NOT_CLEAR。長い再掲・名詞接続・定型締め、中心感情の未選択と補助行動偏重は残る。

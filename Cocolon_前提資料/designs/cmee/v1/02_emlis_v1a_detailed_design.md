@@ -2449,3 +2449,9 @@ System Contextは作業前にdoctor→prepareを実行し、固定toolchain不�
 2026-09-07最新（選択済みの気持ちのMATERIAL受取／candidate46）：既存HRで、positive_feelingに選択済みのMATERIAL_WEIGHT／RECEIVE_AS_MATERIALを「受け止める」で実現する。本人の気持ちをEmlis自身が感じるという述語との不一致を修正。同じ不変selected inputをHRとSentenceSurfaceの責任検査へ渡す。canonical100の受取3件のみ変更、他97件・全核・意味選択・実plan・意味を伴う124責務・73/27は同一。必須282検査278成功／継承4失敗、前回279の全成否一致。華恋が全100件全文確認し商品NOT_CLEAR。長い再掲・名詞連結・定型締め、中心感情の未選択と補助行動偏重は残る。
 
 選択済みMATERIALの受取述語と同一inputを用いた責任検査を整合する既存owner内の修正。適用条件・検査・保存sourceと検証sourceの同一tree証明はAPI handoffのcandidate46末尾。意味選択・Gate・旧経路・国家システム境界を維持。STRUCTURE_MAP_DELTA_NONE。
+
+### 2026-09-07 continuation — 対比の両端を受取対象として保つ文法（candidate47／商品未成立）
+
+2026-09-07最新（対比の両端を受け取る文法／candidate47）：既存HRで、positive_feelingに選択済みのMATERIAL受取とattention、単一contrastの両端がそのMoveのselected basisかつappraised primaryである場合、両端そのものを受取対象にし、違いも同じ述語で受け取る。二端点の原文・順序・意味選択を維持し、coreで未完了の関係を述語で厳密に完了する。canonical100の受取1件のみ変更、他99件・全核・selected input・実plan・意味を伴う124責務・73/27は同一。必須285検査281成功／継承4失敗、前回282の全成否一致。華恋が全100件全文確認し商品NOT_CLEAR。長い再掲・定型締め、中心感情の未選択と補助行動偏重は残る。
+
+既存HR内で両端の受取と対比の文法上の分担を厳密に接続する修正。条件・実検査・固定sourceはAPI handoffのcandidate47末尾。意味選択・Gate・旧経路・国家システム境界を維持。STRUCTURE_MAP_DELTA_NONE。
