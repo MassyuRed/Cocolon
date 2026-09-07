@@ -7274,3 +7274,9 @@ candidate41から同じ承認内で継続。今回の124は件数に加え全sel
 2026-09-07最新（願いの対比を受取対象へ保つ文法／candidate49）：既存HRで、自己のretained_wish／protect_retained_intention／attentionに選択済みのMATERIAL対比を、願いと背景の完全な二端点へ直接つなぐ。対比と願いを大切に受け止める責務を同じ節に保持。canonical100の生成可能側の受取2件のみ変更し、他98件・全核・selected input・実plan・意味を伴う124責務・観察・可否理由・73/27は同一。必須289検査285成功／継承4失敗、前回287の全成否一致、新規2成功。華恋が全100件全文確認し商品NOT_CLEAR。長い再掲・定型締め、別actの対比名詞、中心感情の未選択と補助行動偏重は残る。
 
 条件・最終source・検証・残件は既存API handoffのcandidate49末尾。意味選択・Gate・旧経路・国家システム境界を維持。STRUCTURE_MAP_DELTA_NONE。
+
+### 2026-09-07 continuation — 願いの存在節を保つ名詞化（candidate50／商品未成立）
+
+2026-09-07最新（願いの存在節を保つ名詞化／candidate50）：原文で証明済みの現在の願いの存在節を、助詞・存在・時点を保った全文＋「ということ」で名詞化。HR正本と対象名詞句の完全一致、限定した本文文法witnessを整合し、Gateの全文・引用外・byte末尾・独立replay条件を維持。canonical100の受取1件のみ変更し、他99件・全核・selected input・実plan・意味を伴う124責務・観察・可否理由・73/27は同一。必須290検査286成功／継承4失敗、前回289の全成否一致、新規1成功。華恋が全100件の本文を確認し商品NOT_CLEAR。長い再掲・定型締め・別actの対比名詞・中心感情の未選択と補助行動偏重は残る。
+
+条件・最終source・検証・残件は既存API handoffのcandidate50末尾。意味選択・Gate・旧経路・国家システム境界を維持。STRUCTURE_MAP_DELTA_NONE。
