@@ -66,13 +66,13 @@
         "Cocolon": {
           "repository": "MassyuRed/Cocolon",
           "checkout_ref": "agent/three-core-cmee-current-structure-20260815",
-          "expected_head": "843a1ea79986b8b88e72967e8c68ec05794eb971",
+          "expected_head": "1ac91809065c0d1754b3fa80a87bc0b5b02723a8",
           "role": "RN application, premise documents, CMEE design, and product structure material"
         },
         "mashos-api": {
           "repository": "MassyuRed/mashos-api",
           "checkout_ref": "agent/cmee-v1a-i1sx-source-explicit-20260815",
-          "expected_head": "6b4c844e0b74cfe57531c4cca05067cebf09f6d4",
+          "expected_head": "3eb2513071f60a9c83a8acd8ea79929181f8e069",
           "role": "FastAPI backend plus disabled CMEE inherited-owner implementation Draft PR #3"
         }
       }
