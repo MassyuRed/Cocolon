@@ -28,7 +28,7 @@ EmlisAIの安定した商品目的、production経路、NLS v3／Cycle001 WIP、
 
 このmapは、その区別と読取順をcurrent ownerとして固定する。
 
-2026-09-08最新（単独文の否定過去報告を原意のまま保持／candidate63）：既存OPの同核statusで本人の単独否定過去報告をstate／negative／fact／pastへ整合し、同じ原field証明を既存の具体参照へ接続した。受取にも否定句全文が届き、観察だけ・受取だけの否定消去を別々に拒否する。必須329件326 PASS／継承3 FAIL、前回325全成否一致、新規4成功。canonical100は全record・実plan不変、73/27・124責務を維持し、華恋の全100件全文確認はNOT_CLEAR。V2の17件6 PASS／11 FAILと全42件213候補も前回と同一。公開20件は8改善／12全record同一。中心感情の未選択、再掲・定型締め、対象外の報告scopeと全角ピリオドanchorは残件。GitHub正本・定例ZIPなしを継続。
+2026-09-08最新（証明済み否定過去報告の全角文末を引用に保持／candidate64）：既存Sentence Surfaceで、原fieldと本人の否定過去報告が証明済みの単独spanだけ、末尾の全角ピリオドを引用内に保持した。元入力・根拠・意味計画・Gateは変更しない。公開合成57件は8件の本文成立／49件全record同一、全57件の根拠とplanは不変。必須332件329 PASS／継承3 FAIL、前回329全成否一致、新規3成功。旧I5等11成功。canonical100は全record・実plan不変、73/27・124責務を維持し、華恋が全100件全文確認してNOT_CLEAR。V2の17件6 PASS／11 FAIL・全42件213候補も同一。共有Ledger案は他の未修復な誤読まで本文を返したため不採用。中心感情の未選択、再掲・定型締め、対象外の報告scopeと他の全角文末は残件。GitHub正本・定例ZIPなしを継続。
 
 2026-09-08前回（単独行動の具体的受取と過去願望時点／candidate60）：finalの単一required自己行動を既存の具体参照方式へそろえ、内容を受取に保持した。過去願望報告の活用も既存同核statusで補った。canonical100の受取2件と参照planだけ変更、全核・観察・既存主観判断・可否理由は不変、73/27・124責務を維持。必須317件314 PASS／継承3 FAIL、前回313の全成否一致、新規4成功。華恋が全100件の原文・観察・受取を全文確認しNOT_CLEAR。残件・検証範囲・System Contextはcanonical06とAPI handoffのcandidate60、およびPR37 current本文を参照。GitHub正本・定例ZIPなしを継続。
 
