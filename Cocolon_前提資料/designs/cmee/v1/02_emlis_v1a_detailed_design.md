@@ -2515,3 +2515,10 @@ System Contextは作業前にdoctor→prepareを実行し、固定toolchain不�
 2026-09-07最新（原文で断定された願い変化句の受取／candidate57）：原文で断定された願いの強まり・弱まりを全句のまま受取対象にし、願いを二重に言い直す接続を除いた。canonical100の受取1件だけ変更、他99件は全record同一。変更核は原fieldの証明属性1個、selected inputはそこから再導出したinput／grounding参照だけが変わり、意味status・選択内容・全実plan・観察・可否理由・73/27・124責務は不変。必須304検査300成功／継承4失敗、前回302の全成否一致、新規2成功。華恋が全100件の原文と応答本文を読み商品NOT_CLEAR。変更例も外側不可の診断本文であり、商品PASSではない。長い再掲・定型締め・中心感情の未選択と補助行動偏重などは残る。
 
 条件・最終source・検証・残件は既存API handoffのcandidate57末尾。原field断定の証明を既存同核へ渡し、願い変化句全文を直接名詞化する文法に限定。両端・関係・意味status・意味選択・Gate・旧経路・国家システム境界不変。STRUCTURE_MAP_DELTA_NONE。
+
+
+### 2026-09-08 continuation — 単独行動の具体的な受取と過去願望時点（candidate60／商品未成立）
+
+2026-09-08最新（単独行動の具体的受取と過去願望時点／candidate60）：finalの単一required自己行動を既存の具体参照方式へそろえ、内容を受取に保持した。過去願望報告の活用も既存同核statusで補った。canonical100の受取2件と参照planだけ変更、全核・観察・既存主観判断・可否理由は不変、73/27・124責務を維持。必須317件314 PASS／継承3 FAIL、前回313の全成否一致、新規4成功。華恋が全100件の原文・観察・受取を全文確認しNOT_CLEAR。残件・検証範囲・System Contextはcanonical06とAPI handoffのcandidate60、およびPR37 current本文を参照。GitHub正本・定例ZIPなしを継続。
+
+既存Observation Planの選択後・seal前で、final・safe・単一required自己行動・primary一致・単一memo_action source・既存performed証明・supportと関係なしの場合だけ、Moveとglobalを登録済みの具体参照方式へそろえる。引用枠1／16は既存式で導出し、Human Receptionの既存名詞化は引用なしの完全対象を受け取る。独立replayとcompiler asset mapping、Gate・回復は変更しない。未来・未証明実行は対象外。past_reported_wish_finiteは既存原field／主体／引用・疑問境界を保ち、default-timeの同じwishの単純過去報告活用だけ追加する。新schema・carrier・意味選択・国家／他中核／旧公開経路の変更なし。STRUCTURE_MAP_DELTA_NONE。
