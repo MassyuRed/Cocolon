@@ -23,7 +23,7 @@
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 - Stage 1 historical predecessor additional correction final body, not current: `ROUTE_A_ONLY / STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP / EARLY_ACTUAL_NOT_RUN`
 
-2026-09-08継続確認：runtimeと前回の実行結果はcandidate64を維持。中心感情の選択欠落に関する限定変更案と固定runtime未復元の再開点を末尾へ記録した。提案は未承認・実装未着手であり、商品改善・今回の再検証とはしない。
+2026-09-08継続確認：直前の限定案への継続指示を受け、原文で証明済みの本人の気持ちと既存行動をともに残す選択修復を開始。固定runtime復元済み。各124固定への必要責務増加の限定例外はcanonical02末尾の承認節を参照。candidate64は開始時の比較証拠であり、変更後の実行結果は同じ末尾checkpointへ記録する。
 
 2026-09-08前回実装（証明済み否定過去報告の全角文末を引用に保持／candidate64）：既存Sentence Surfaceで、原fieldと本人の否定過去報告が証明済みの単独spanだけ、末尾の全角ピリオドを引用内に保持した。元入力・根拠・意味計画・Gateは変更しない。公開合成57件は8件の本文成立／49件全record同一、全57件の根拠とplanは不変。必須332件329 PASS／継承3 FAIL、前回329全成否一致、新規3成功。旧I5等11成功。canonical100は全record・実plan不変、73/27・124責務を維持し、華恋が全100件全文確認してNOT_CLEAR。V2の17件6 PASS／11 FAIL・全42件213候補も同一。共有Ledger案は他の未修復な誤読まで本文を返したため不採用。中心感情の未選択、再掲・定型締め、対象外の報告scopeと他の全角文末は残件。GitHub正本・定例ZIPなしを継続。
 
@@ -2623,3 +2623,15 @@ canonical100を同じ入力・順序・分母でdirectと外側の両方から�
 検証は固定製品runtimeの復元・依存実体確認後に行う。代表例と負の対照は、行動のみ、感情ラベルのみ、他者／引用／疑問／不確かな気持ち、独立した複数主題、未遂／未来行動、同一relation共有を含む。固定sourceで元の100件・順序・軸・分母を維持し、direct100、各入力の責務集合と増加理由、意味投影／実plan／両層本文、厳格なGate／inverseと必要回帰332件を確認する。新しい意味の脱落や二重受取を検出する既存test内の追加検査も実行する。既存失敗3件を期待値更新で消さず、後続診断で置換しない。華恋が全100件の原入力・観察・受取・可否理由を読み、集合の再掲・定型化・深さも判断する。
 
 この提案は可否条件の追加緩和を含まない。現行73 GENERATED／27 UNAVAILABLEと入力別可否は既存の「根拠のない意味を除去した結果だけUNAVAILABLE→GENERATEDを許す」承認範囲で評価し、逆転や今回の責務追加だけによる可否変更を自動承認しない。国家保存→dispatch／queue／worker→read-side／RN、公開I5、API／DB／RN、Piece／分析、問い／Layer3は変更しない。STRUCTURE_MAP_DELTA_NONE。商品NOT_CLEAR、disabled、ready／採用／merge／本番未成立を維持する。既存承認内の同核source・表現修正まで新たな承認待ちへ戻すものではない。
+
+### 2026-09-08 continuation — 中心感情と既存行動をともに残す限定変更の承認
+
+直前の限定変更案を提示した後、Mash様から「残件作業を進めて。変更後、既存Draft PRへ反映し、最終版のSystem Context再生成まで進めていいよ」と継続指示を受領した。この文脈で、直前の案に明記した選択欠落修復と必要責務の増加を承認済みとして進める。前節の未承認・実装未着手は提示時点の履歴であり、現在の承認待ちではない。
+
+§36.2の選択済み責務不変、§36.6／§38および06 §87.6／§89の各124固定には、この限定例外を適用する。原文で検証された本人の気持ちと既存の必要な行動をともに保持するため、seal前の既存OPにおける候補・主対象／副対象と必要なMove再導出を変更できる。124は比較開始時点の実測値として保存し、必要責務の増加を旧件数へ丸めない。元の必要な行動・関係・unknownの消失、無関係な選択増加、各層のexact cover不一致は許容しない。
+
+前節の原field・本人性・時点・極性・不確かさの証明、最大3 Move、既存family／schema／owner、NORMAL／LIMITED閉包、同一関係の二重appraisal禁止、意味ownerへのReception順位逆流禁止、唯一のHuman Receptionと独立replay、Gate／inverse／可否条件の維持を引き続き適用する。変更はEmlisの入力直後の受取UXを担当するdisabled final Stage1内に閉じる。国家保存／非同期処理／read-side、公開I5、API／DB／RN、Piece／Analysisへの経路変更はない。
+
+固定製品runtimeは今回保存済みwheelから復元でき、Python3.12.13・46依存・46wheel・2268実ファイルをlockと照合した。System Contextは開始時doctor→prepareを実行し、ローカル固定toolchain不一致を記録。同一の3承認refの既存CI生成物を実装入力61・canonical出力37・transport parts19まで再検証し、原典本文と併用した。変更後の最終refから既存固定CIで再生成する。
+
+既存の選択処理内で最小の原文証明から実装し、代表例と負の対照、同じ100件と必要回帰、華恋の全100件本文確認まで進める。実行結果と残件は同じ02／06／API handoffの次のcheckpointに記録する。商品NOT_CLEAR、Draft/open/unmerged、disabled、human PASS／ready／採用／merge／本番未成立を維持する。

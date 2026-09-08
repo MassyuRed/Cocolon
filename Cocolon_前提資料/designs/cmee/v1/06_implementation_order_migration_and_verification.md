@@ -16,7 +16,7 @@
 - Stage 1 upstream input-specific meaning final design: `FINAL_CANONICAL_IMPLEMENTATION_READY_SECTIONS_19_THROUGH_22`
 - Stage 1 current order owner: `THIS_FILE_SECTION_89_AND_LATEST_APPENDED_UNFINISHED_CHECKPOINT`
 
-2026-09-08継続確認：runtimeと前回の実行結果はcandidate64を維持。中心感情の選択欠落に関する限定変更案と固定runtime未復元の再開点を末尾へ記録した。提案は未承認・実装未着手であり、商品改善・今回の再検証とはしない。
+2026-09-08継続確認：直前の限定案への継続指示を受け、原文で証明済みの本人の気持ちと既存行動をともに残す選択修復を開始。固定runtime復元済み。各124固定への必要責務増加の限定例外はcanonical02末尾の承認節を参照。candidate64は開始時の比較証拠であり、変更後の実行結果は同じ末尾checkpointへ記録する。
 
 2026-09-08前回実装（証明済み否定過去報告の全角文末を引用に保持／candidate64）：既存Sentence Surfaceで、原fieldと本人の否定過去報告が証明済みの単独spanだけ、末尾の全角ピリオドを引用内に保持した。元入力・根拠・意味計画・Gateは変更しない。公開合成57件は8件の本文成立／49件全record同一、全57件の根拠とplanは不変。必須332件329 PASS／継承3 FAIL、前回329全成否一致、新規3成功。旧I5等11成功。canonical100は全record・実plan不変、73/27・124責務を維持し、華恋が全100件全文確認してNOT_CLEAR。V2の17件6 PASS／11 FAIL・全42件213候補も同一。共有Ledger案は他の未修復な誤読まで本文を返したため不採用。中心感情の未選択、再掲・定型締め、対象外の報告scopeと他の全角文末は残件。GitHub正本・定例ZIPなしを継続。
 
@@ -7481,3 +7481,7 @@ canonical100を同じ入力・順序・分母でdirectと外側の両方から�
 変更対象は既存02・本06・API既存handoffと上記System Context二path。実装トポロジー変更0で、全体図・current mapのruntime candidate64は現行のまま。PR3／30／37はDraft/open/unmerged、商品NOT_CLEAR。publicには入力／本文／個別case／private digest・locatorを置かない。個別診断と環境復元失敗の実記録は既存private作業記録へ保存する。GitHub正本・定例ZIPなしを継続する。
 
 次のexact actionは、02に示した限定変更の判断と固定runtime復元が成立した後、既存OPの三段と意味投影・独立再導出・NORMAL／LIMITED・recoveryの関連本文を再確認して同じ未完unitを修正し、最終固定sourceの同100件と必要回帰を実行・華恋が全文確認すること。今回の診断・文書保存・System Context再生成を商品品質改善や実装完了へ数えない。9月9日途中確認・9月12日本文確認準備の目標は継承するが、達成済みとはしない。
+
+### 2026-09-08 continuation — 提示済み限定案の承認と実装再開
+
+02末尾「中心感情と既存行動をともに残す限定変更の承認」を現在の選択境界として適用する。§87.4／§87.6／§89の各124固定は比較開始値を保ち、原文で検証された本人の気持ちと既存行動を両方残すための必要な責務増加だけを認める。前節の承認待ち・runtime未復元は履歴であり、今回の継続指示と固定環境復元により実装を再開する。既存332回帰・同じ100件・全件本文確認を実行し、結果はこの既存checkpoint系列へ追記する。商品NOT_CLEAR・disabledとその他の制限は継承する。

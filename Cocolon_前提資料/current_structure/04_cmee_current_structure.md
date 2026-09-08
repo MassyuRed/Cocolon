@@ -11,7 +11,7 @@ stage1_language_route: "ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER_ONLY"
 external_generative_ai_allowed: false
 external_body_send: 0
 retired_provider_investigation: "REMOVED_FROM_CURRENT_TREE_GIT_HISTORY_ONLY"
-current_authorized_next_work: "SELECTED_SUBJECTIVE_RECEPTION_INPUT_FORWARD_REPLAY_AND_SAME100_CLOSURE"
+current_authorized_next_work: "SOURCE_VERIFIED_FEELING_AND_EXISTING_ACTION_SELECTION_REPAIR_PER_CANONICAL_02"
 only_possible_future_implementation_class: "ROUND0_FOLLOW_PRIMARY_VISIBLE_RESPONSE_CORRECTION"
 implementation_state: "DISABLED_IMPLEMENTED_NOT_ACCEPTED / ROOT_SAME100_NOT_CLEAR / REPLAY_INPUT_IMPLEMENTED"
 candidate_state: "DISABLED_IMPLEMENTED_NOT_ACCEPTED"
@@ -24,6 +24,8 @@ automatic_progression: false
 # CMEE — Current Structure
 
 ## 0. Current conclusion
+
+2026-09-08現在：直前に提示した限定案への継続指示を受け、原文で検証済みの本人の気持ちと既存の必要行動をともに残す、seal前の既存OP選択修復を開始する。選択責務集合・各124固定にはcanonical02末尾の承認済み限定例外を適用する。既存meaning ownerへReception act／role／順位を逆流させず、唯一のHuman Receptionと厳格なGate／inverseへ全責務を通す。所有者／file／経路の追加はなく、今回の地図更新はdisabled Stage1内の選択境界。国家システム・公開I5・API／DB／RN・Piece／Analysisの接続は維持する。candidate64は開始時実測であり、変更後の結果ではない。
 
 正式推奨名称:
 
