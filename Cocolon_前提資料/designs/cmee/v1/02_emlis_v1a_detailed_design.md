@@ -23,7 +23,9 @@
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 - Stage 1 historical predecessor additional correction final body, not current: `ROUTE_A_ONLY / STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP / EARLY_ACTUAL_NOT_RUN`
 
-2026-09-08最新（証明済み否定過去報告の全角文末を引用に保持／candidate64）：既存Sentence Surfaceで、原fieldと本人の否定過去報告が証明済みの単独spanだけ、末尾の全角ピリオドを引用内に保持した。元入力・根拠・意味計画・Gateは変更しない。公開合成57件は8件の本文成立／49件全record同一、全57件の根拠とplanは不変。必須332件329 PASS／継承3 FAIL、前回329全成否一致、新規3成功。旧I5等11成功。canonical100は全record・実plan不変、73/27・124責務を維持し、華恋が全100件全文確認してNOT_CLEAR。V2の17件6 PASS／11 FAIL・全42件213候補も同一。共有Ledger案は他の未修復な誤読まで本文を返したため不採用。中心感情の未選択、再掲・定型締め、対象外の報告scopeと他の全角文末は残件。GitHub正本・定例ZIPなしを継続。
+2026-09-08継続確認：runtimeと前回の実行結果はcandidate64を維持。中心感情の選択欠落に関する限定変更案と固定runtime未復元の再開点を末尾へ記録した。提案は未承認・実装未着手であり、商品改善・今回の再検証とはしない。
+
+2026-09-08前回実装（証明済み否定過去報告の全角文末を引用に保持／candidate64）：既存Sentence Surfaceで、原fieldと本人の否定過去報告が証明済みの単独spanだけ、末尾の全角ピリオドを引用内に保持した。元入力・根拠・意味計画・Gateは変更しない。公開合成57件は8件の本文成立／49件全record同一、全57件の根拠とplanは不変。必須332件329 PASS／継承3 FAIL、前回329全成否一致、新規3成功。旧I5等11成功。canonical100は全record・実plan不変、73/27・124責務を維持し、華恋が全100件全文確認してNOT_CLEAR。V2の17件6 PASS／11 FAIL・全42件213候補も同一。共有Ledger案は他の未修復な誤読まで本文を返したため不採用。中心感情の未選択、再掲・定型締め、対象外の報告scopeと他の全角文末は残件。GitHub正本・定例ZIPなしを継続。
 
 2026-09-07前回（原文で断定された願い変化句の受取／candidate57）：原文で断定された願いの強まり・弱まりを全句のまま受取対象にし、願いを二重に言い直す接続を除いた。canonical100の受取1件だけ変更、他99件は全record同一。変更核は原fieldの証明属性1個、selected inputはそこから再導出したinput／grounding参照だけが変わり、意味status・選択内容・全実plan・観察・可否理由・73/27・124責務は不変。必須304検査300成功／継承4失敗、前回302の全成否一致、新規2成功。華恋が全100件の原文と応答本文を読み商品NOT_CLEAR。変更例も外側不可の診断本文であり、商品PASSではない。長い再掲・定型締め・中心感情の未選択と補助行動偏重などは残る。
 
@@ -2602,3 +2604,22 @@ canonical100を同じ入力・順序・分母でdirectと外側の両方から�
 開始時System Contextは3承認refが前回最終と一致し、run34200511762のdoctor34 PASS→actual prepare→verify-only、実装入力61・canonical出力37・transport parts19のhash一致を確認。local doctorは固定toolchain不一致でFAIL、local prepareはNOT_RUNとして原典本文と同一refの実行済み証拠を用いた。製品用Python3.12.13の46依存／wheel・2268実ファイルも再検証した。今回の最終商品refsをPR37の既存profileと対応testへ同期し、固定CIでGit管理外cacheを再生成する。最終結果はPR37 current本文と同じheadのActionsを正本とし、開始時の成功を変更後へ流用しない。REMOTE_PROOF_PENDINGはOperator actual proof完了を意味しない。
 
 残件は中心感情の未選択と補助行動偏重、長い再掲・定型締め、対象外の否定報告scope／主体／時点、一般的な参照と他の全角文末。次も既存source ownerの意味状態と、選択済み受取を原文へ戻して扱い、退役済みfocus selectorを再開しない。9月9日途中確認・9月12日本文確認準備目標を継承。全PR Draft／open／unmerged、商品NOT_CLEAR、human PASS／ready／採用／merge／本番／問い／Layer3は未成立。コード・設計・再開点はGitHub正本、private本文・個別case・digest・locatorの公開0、定例ZIPなし。
+
+### 2026-09-08 continuation — 中心感情の選択欠落に対する限定変更案（未承認・実装未着手）
+
+商品runtimeの現行はcandidate64のまま。以下は既存02 §36.2／§36.6／§38の変更案であり、承認済み契約の置換や新しい実装authorityではない。今回の「残件継続・既存Draft PR反映・最終System Context再生成」の許可から、固定された意味選択責務の変更承認を推定しない。原文にある気持ちを受け止めず、別欄の行動だけを評価するUXの欠落を対象とする。
+
+既存OPの三段の原因を再確認した。`_build_response_and_policies` の `follow_rank` は通常の役割順位を主題より優先し、`build_grounded_reception_opportunities` は行動等を主対象にしたとき `current_burden` を除去し、`_select_reception_opportunities` の `concrete_effort` 主対象の副候補にも同familyがない。この原因は既存runtime handoffにも記録済みで、新規発見・修復済みとはしない。保存済みcandidate64の同100件を再照合すると、thought非空で選択target／supportが行動欄だけの入力は46件、そのうちmemoにretention=required／modality=feelingの核が既にある入力は16件だった。16件の原入力・観察・受取を確認したが、型があることだけで本人性・時点・関係の正しさや同一修正への適格性は証明されない。今回の新規生成・全100本文再読・回帰再実行は0である。
+
+**Mash様へ提示する変更範囲：** §36.2の選択責務集合不変、§36.6／§38と06 §89のrequired Move／expression／binding各124固定を、原文で検証された本人の気持ちと既存の必要な行動をともに保持する選択欠落修復に限り変更する。124を維持するために気持ちを捨てることも、行動を消して数を合わせることも行わず、必要な責務の増加だけを許容する案である。これは数値だけの緩和ではなく、seal前の既存OPでの候補保持・主対象／副対象の選択と、その必要な意味投影／Move再導出の限定変更を含む。増加数は未確定であり、16件全部の修復や新しい固定件数を約束しない。
+
+承認された場合の適用条件と実装境界は次のとおり。
+
+- 原fieldと既存typed sourceで、本人の気持ち・対象・極性・時点・不確かさが一致し、既存familyと能力範囲で表せることを確認する。感情ラベル、他者、引用、疑問、未確定な帰属を本人の現在感情へ昇格しない。memoを一律優先せず、required根拠・既存主題と関係に基づいて決める。
+- 上記三段を既存OP内の一つの選択問題として修正する。候補除去だけの解除、count clamp、should／optional関係のrequired化、一律relation-support引継ぎ、退役済みfocus selector、HRでの未選択意味補充は使わない。既存の最大3 Move、family・schema・owner構造は維持する。
+- 元の必要な行動、根拠、関係endpoint／方向、unknownを残す。NORMAL／LIMITEDの能力と選択根拠の閉包を一致させ、同一relationへの二重appraisalを作らない。既存selectionからの差は入力ごとに因果説明できるものに限定し、無関係な責務の追加・消失を許容しない。
+- 必要な伝播だけを既存 `emlis_v1a.py`、`emlis_input_specific_meaning.py`、`emlis_stage1_composition.py`、`contracts.py`、`emlis_stage1_response.py` で整合させる。Reception act・role・順位を意味選択ownerの決定入力へ逆流させない。seal後は同じ検証済みimmutable selected inputを唯一のHuman Receptionと独立replayが消費する。Sentence Surface／Gateの厳格な完成本文照合、source matching、inverse、閾値は維持する。新しい意味owner・parser・carrier・外部依存は作らない。
+
+検証は固定製品runtimeの復元・依存実体確認後に行う。代表例と負の対照は、行動のみ、感情ラベルのみ、他者／引用／疑問／不確かな気持ち、独立した複数主題、未遂／未来行動、同一relation共有を含む。固定sourceで元の100件・順序・軸・分母を維持し、direct100、各入力の責務集合と増加理由、意味投影／実plan／両層本文、厳格なGate／inverseと必要回帰332件を確認する。新しい意味の脱落や二重受取を検出する既存test内の追加検査も実行する。既存失敗3件を期待値更新で消さず、後続診断で置換しない。華恋が全100件の原入力・観察・受取・可否理由を読み、集合の再掲・定型化・深さも判断する。
+
+この提案は可否条件の追加緩和を含まない。現行73 GENERATED／27 UNAVAILABLEと入力別可否は既存の「根拠のない意味を除去した結果だけUNAVAILABLE→GENERATEDを許す」承認範囲で評価し、逆転や今回の責務追加だけによる可否変更を自動承認しない。国家保存→dispatch／queue／worker→read-side／RN、公開I5、API／DB／RN、Piece／分析、問い／Layer3は変更しない。STRUCTURE_MAP_DELTA_NONE。商品NOT_CLEAR、disabled、ready／採用／merge／本番未成立を維持する。既存承認内の同核source・表現修正まで新たな承認待ちへ戻すものではない。
