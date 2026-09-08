@@ -1,7 +1,7 @@
 # CMEE V1 — Implementation Order / Migration / Verification 詳細設計
 
 - document id: `cocolon.cmee.v1.implementation_migration_verification.detailed_design`
-- revision date: `2026-09-08 JST`
+- revision date: `2026-09-09 JST`
 - lifecycle: `CURRENT_PRODUCT_OWNER_NON_PASS / REALIZABLE_RECEPTION_EXPRESSION_WORK_STAGE1_ACTIVE`
 - absolute implementation rule: `BOUND_TO_PARENT_FINAL_DESIGN_SECTION_0_3`
 - current implementation state: `INHERITED_OWNER_CHAIN_IMPLEMENTED_NOT_ACCEPTED / IM10_NON_PASS`
@@ -16,7 +16,7 @@
 - Stage 1 upstream input-specific meaning final design: `FINAL_CANONICAL_IMPLEMENTATION_READY_SECTIONS_19_THROUGH_22`
 - Stage 1 current order owner: `THIS_FILE_SECTION_89_AND_LATEST_APPENDED_UNFINISHED_CHECKPOINT`
 
-2026-09-08最新（candidate66）：原field全域で取組の背景と本人の現在感情を証明し、既存の独立した必要行動とともに選択するcandidate66を実装・検証した。同じ100件のうち1件で気持ちの欠落を解消し、99件の全record／実planは不変。観察全100・可否／理由全100不変、direct100、73 GENERATED／27 UNAVAILABLE、Move／expression／binding各125（元の124責務をすべて保持）。華恋が全100件を全文確認しNOT_CLEAR。必須340件337 PASS／継承3 FAIL、前回336全成否一致、新規4全成功。
+2026-09-09最新（candidate67）：発言等に関する動詞節の背景と本人の現在感情を原field全域で証明し、既存の独立した必要行動とともに選択するcandidate67を実装・検証した。同じ100件の1件で感情欠落を解消し、他99件の全record／実planは不変。全観察・可否／理由も不変、direct100、73 GENERATED／27 UNAVAILABLE。旧125必要責務をすべて保持し、Move／expression／binding各126。華恋が全100件を全文確認しNOT_CLEAR。必須344件341 PASS／継承3 FAIL、前回340全成否一致、新規4全成功。
 
 2026-09-08前回実装（証明済み否定過去報告の全角文末を引用に保持／candidate64）：既存Sentence Surfaceで、原fieldと本人の否定過去報告が証明済みの単独spanだけ、末尾の全角ピリオドを引用内に保持した。元入力・根拠・意味計画・Gateは変更しない。公開合成57件は8件の本文成立／49件全record同一、全57件の根拠とplanは不変。必須332件329 PASS／継承3 FAIL、前回329全成否一致、新規3成功。旧I5等11成功。canonical100は全record・実plan不変、73/27・124責務を維持し、華恋が全100件全文確認してNOT_CLEAR。V2の17件6 PASS／11 FAIL・全42件213候補も同一。共有Ledger案は他の未修復な誤読まで本文を返したため不採用。中心感情の未選択、再掲・定型締め、対象外の報告scopeと他の全角文末は残件。GitHub正本・定例ZIPなしを継続。
 
@@ -7525,3 +7525,23 @@ System Contextは作業前doctor→prepareを実行し、localの固定toolchain
 全体設計・全tracked file地図・最新weekly20260905・前提規則と恒久incidentを確認し、Emlis→CMEEと国家保存／非同期／read-side、公開I5と旧経路の境界を確認した。新file／owner／schema／経路はなくSTRUCTURE_MAP_DELTA_NONE。地図の現在状態だけ同期する。国家／API／DB／RN／Piece／Analysis、問い／Layer3には変更を加えない。開始時System Contextはdoctor→prepareでlocal固定toolchain不一致を記録し、同一開始refのCI cacheを61入力・37出力・19partsまで再検証した。最終商品refsをPR37既存profile／対応testへ同期し、固定CIでGit管理外cacheを再生成する。最終結果はPR37 current本文と同headのActionsに記録し、開始時成功を最終refへ流用しない。Operator actual proofはREMOTE_PROOF_PENDINGを維持する。
 
 次は同じsource ownerと既存選択で、残る中心感情と複数主題／共有関係の欠落を扱う。旧主語転置の証明の拡張、末尾感情一致だけの本人認定、無関係な責務追加、同一関係の二重appraisal、旧124への丸めでは直さない。9月9日途中確認・9月12日本文確認準備目標と品質リスクを継承。全PR Draft/open/unmerged、disabled、automatic_progression=false、human PASS／ready／採用／merge／本番未成立。private本文・個別case・digest・locatorの公開0、定例ZIPなし。
+
+### 2026-09-09 continuation — 発言の背景を含む現在感情の選択修復（candidate67最終製品検証）
+
+発言等に関する動詞節の背景と本人の現在感情を原field全域で証明し、既存の独立した必要行動とともに選択するcandidate67を実装・検証した。同じ100件の1件で感情欠落を解消し、他99件の全record／実planは不変。全観察・可否／理由も不変、direct100、73 GENERATED／27 UNAVAILABLE。旧125必要責務をすべて保持し、Move／expression／binding各126。華恋が全100件を全文確認しNOT_CLEAR。必須344件341 PASS／継承3 FAIL、前回340全成否一致、新規4全成功。
+
+Emlisの入力直後の受取が、現在の気持ちを行動だけに置き換えないための限定修正。既存OPのfinal専用source alignmentで、原fieldの全offset・前後終端・引用外と、有限な発言等の動詞背景節、接続、1〜2の負の感情名詞、現在の残存hostを全域照合する。既存のowner／modality／極性／時点条件も必要とする。新witnessはlocalな証明語彙であり、共通感情辞書や旧感情主語転置の証明を拡張しない。背景の省略された行為者や受動／可能の違いを新たに確定せず、原文全体と元の意味核を保持する。
+
+既存typed reactionも、この新しい全域証明が成立し既存のmodality条件を満たす場合だけ、独立した感情／行動選択と意味決定前の役割再導出へ接続する。predicate kindのfeelingへの書換え、感情だけの短縮参照、新しい核・因果・関係の発行はない。required memoと本人の実行済みrequired memo_actionのexact2 text核、共有意味関係の除外、既存current_burdenの一意性を維持。元の行動・関係方向・unknown、最大3 Move、NORMAL／LIMITED、immutable selected input、sole HR、独立replay、Gate／inverseを保持する。seal後の感情補充や一律memo優先で直さない。
+
+公開合成3代表例を既存testに追加し、元のreaction型、両required責務と別々のselected contribution、全回復段階でのsource保持・inverse、背景／各感情／元の行動欠落のinverse拒否を検証した。他者・過去・否定・推量・報告・引用・条件・正感情・3感情・不完全field・別節・第三主題・optional感情・非実行行動・共有関係を対象外に保つ。通常HRは原field全文、anaphoric回復は既存指示語と観察の全sourceを用いる。新たな対応範囲を現在感情の全構文へ一般化しない。
+
+検証sourceは `2969c3edbc231ff9bfb81fd67c9e3a0adccb4e0a`、tree `db5346d21ca0d3d7b234cad3fce85eaa14bcb60a`。固定Python3.12.13、46依存／wheel、2268実ファイルを照合した。必須344件は341 PASS／継承3 FAIL、ERROR／skip0。原184は181 PASS／3 FAIL、追加160全成功。前回340全成否一致、新規4全成功。歴史的観察hash2件とdated source receipt1件の失敗を保持し、36ケース・post-hash96検査・集合後続診断は前回と全内容同一。V2別17検査／42件213候補は今回再実行していない。後続は結果資料のみとし、検証済み製品sourceを変えない。
+
+canonical100は原入力・順序・軸・分母を保ってdirectと外側から実行した。今回の1件は背景・現在感情・元の必要行動が受取本文にそろい、旧125責務の消失0で各層126。現在bridgeの合計だけ125→126へ同期し、入力別exact coverを維持。華恋が全100件の原文全field・観察・受取・可否理由を全文確認した。ほかの中心感情欠落、複数主題／共有関係、未確定／報告scope、長い原文再掲と定型締めは残件であり、商品NOT_CLEAR。機械検査成功をMashのProduct PASSへ変換しない。
+
+全体設計・全tracked file地図・前提規則・恒久incident・最新weekly20260905を確認し、直接変更しない下流ownerと旧経路も本文確認した。runtime変更は既存OPのみ。既存generic test・現在bridge・runner current13定数を同期し、runner exact18／exact9と非current AST不変。新file／owner／schema／経路はなくSTRUCTURE_MAP_DELTA_NONE。国家保存／非同期／read-side、公開I5、API／DB／RN／Piece／Analysisの接続は不変更。
+
+開始時System Contextのdoctor→prepareはlocal固定toolchain不一致で失敗。同じ開始refの既存固定CIのdoctor34 PASS・actual prepare・verify-onlyをログで確認し、原典直接読取で継続した。開始時cacheのローカル取得・照合は成立しておらず、利用済みとはしない。最終商品refsをPR37既存profile／対応testへ同期し、固定CIでGit管理外cacheを再生成する。完了結果はPR37 current本文と同headのActionsに保存する。開始時の結果を最終refへ流用せず、Operator actual proofのREMOTE_PROOF_PENDINGを保持する。
+
+次は同じsource ownerから、未対応の中心感情と複数主題／共有関係の選択欠落を追う。旧witnessの無条件拡張、末尾感情一致だけの本人認定、同一関係への二重appraisal、125や124へのcount clampは採らない。9月9日途中確認・9月12日本文確認準備の目標と品質リスクを継承。全PR Draft/open/unmerged、disabled、automatic_progression=false。human PASS／ready／採用／merge／本番／問い／Layer3は未成立。GitHubをコード・設計・引継ぎの正本とし、private本文・個別case・digest・locatorの公開0、定例ZIPなし。

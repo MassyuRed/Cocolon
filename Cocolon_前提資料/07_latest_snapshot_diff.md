@@ -40418,3 +40418,11 @@ CURRENT_AUTHORITY_STOP
 
 Body-full evidence and key remain private; public GitHub receives only body-free
 counts, axes, reason codes, hashes, and the terminal Receipt.
+
+# 2026-09-09 milestone — CMEE candidate67 current-feeling selection repair
+
+CMEEの最新ownerはdesigns/cmee/v1/02と06、およびmashos-apiのCurrentStateAndNextWorkHandoffのcandidate67末尾。Cycle001のcurrent navigation ownerは08のままで、本節はCMEEのmilestoneのみを記録する。
+
+既存OPで原field全域に証明された動詞背景節と本人の現在感情を、元の必要行動とともに選択する限定修正を検証した。同じ100件の1件で感情欠落を解消、他99件の全record／実plan、全観察・可否理由は不変。direct100、73 GENERATED／27 UNAVAILABLE、旧125必要責務全保持で各層126。華恋の全100件全文確認はNOT_CLEAR。必須344件341 PASS／継承3 FAIL、前回340全成否一致、新規4全成功。
+
+STRUCTURE_MAP_DELTA_NONE。国家／API／DB／RN／Piece／Analysis接続は不変更。全PR Draft/open/unmerged、disabled、automatic_progression=false。最終refのSystem Context再生成結果はPR37 current本文と同head Actionsに記録する。private本文・個別case・digest・locator公開0。過去のmilestone・失敗・receiptは当時の記録として保持する。
