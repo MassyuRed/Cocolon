@@ -3373,7 +3373,7 @@ def test_repository_cmee_workspace_profile_keeps_disabled_acceptance_boundary() 
         "agent/three-core-cmee-current-structure-20260815"
     )
     assert product["expected_head"] == (
-        "bf259837e90dcbd76dcc27d8407063c02661f971"
+        "ab3bdd4ce0ca8a3bfc08675aff1598a64ef67010"
     )
     assert "expected_ancestor" not in product
     api = cmee["repositories"]["mashos-api"]
@@ -3381,7 +3381,7 @@ def test_repository_cmee_workspace_profile_keeps_disabled_acceptance_boundary() 
         "agent/cmee-v1a-i1sx-source-explicit-20260815"
     )
     assert api["expected_head"] == (
-        "17c8e2383578a3766818d5bebf0b49f71bdb1fbc"
+        "1c671427198c4b423110ac3bbb2ca084402f9741"
     )
 
 
