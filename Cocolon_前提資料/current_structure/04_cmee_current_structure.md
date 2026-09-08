@@ -56,7 +56,7 @@ Current state:
     Analysis not connected
     automatic progression false
 
-2026-09-08最新（複合文の過去願望を原入力から受取へ保持／candidate61）：既存OPの先頭・一意なplain過去報告句を原fieldで証明し、同じstatus ownerでpastへそろえた。公開合成の3件で過去の願いと制約が完成本文へ届き、他17件は全記録同一。取消し制約の初案退行も修正した。必須321件318 PASS／継承3 FAIL、前回317の全成否一致、新規4成功。canonical100は全record・実plan不変、73/27・124責務を維持。華恋の全100件全文確認はNOT_CLEAR。V2再実行17件6 PASS／11 FAIL、最後のcandidate59と全42件213候補・選択結果も同一。主体・極性・時点のscopeと中心感情の未選択などの残件はcanonical06・API handoffのcandidate61とPR37 current本文を参照。GitHub正本・定例ZIPなしを継続。
+2026-09-08最新（否定された過去の思考報告を受取まで保持／candidate62）：既存OPで原fieldの先頭・一意・本人所有・default時点を証明した否定過去報告を、肯定の願いへ変えずnegative／fact／pastのstateとして保持した。既存HRのminimal適格条件を既存validatorの1核・1根拠条件へそろえ、必要supportを落とさず不適格候補を入口で除外する。必須325件322 PASS／継承3 FAIL、前回321の全成否一致、新規4成功。canonical100は全record・実plan不変、73/27・124責務を維持し、華恋の全100件全文確認はNOT_CLEAR。V2の17件6 PASS／11 FAILと全42件213候補も前回と同一。公開20件では否定報告1件の意味・本文を修正し、別3件の候補処理停止も解消、他16件は全記録同一。対象外の報告scope、中心感情の未選択、再掲・定型締めは残件。GitHub正本・定例ZIPなしを継続。
 
 2026-09-08前回（単独行動の具体的受取と過去願望時点／candidate60）：finalの単一required自己行動を既存の具体参照方式へそろえ、内容を受取に保持した。過去願望報告の活用も既存同核statusで補った。canonical100の受取2件と参照planだけ変更、全核・観察・既存主観判断・可否理由は不変、73/27・124責務を維持。必須317件314 PASS／継承3 FAIL、前回313の全成否一致、新規4成功。華恋が全100件の原文・観察・受取を全文確認しNOT_CLEAR。残件・検証範囲・System Contextはcanonical06とAPI handoffのcandidate60、およびPR37 current本文を参照。GitHub正本・定例ZIPなしを継続。
 
