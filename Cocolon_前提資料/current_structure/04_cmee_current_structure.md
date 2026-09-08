@@ -56,7 +56,9 @@ Current state:
     Analysis not connected
     automatic progression false
 
-2026-09-08最新（単独行動の具体的受取と過去願望時点／candidate60）：finalの単一required自己行動を既存の具体参照方式へそろえ、内容を受取に保持した。過去願望報告の活用も既存同核statusで補った。canonical100の受取2件と参照planだけ変更、全核・観察・既存主観判断・可否理由は不変、73/27・124責務を維持。必須317件314 PASS／継承3 FAIL、前回313の全成否一致、新規4成功。華恋が全100件の原文・観察・受取を全文確認しNOT_CLEAR。残件・検証範囲・System Contextはcanonical06とAPI handoffのcandidate60、およびPR37 current本文を参照。GitHub正本・定例ZIPなしを継続。
+2026-09-08最新（複合文の過去願望を原入力から受取へ保持／candidate61）：既存OPの先頭・一意なplain過去報告句を原fieldで証明し、同じstatus ownerでpastへそろえた。公開合成の3件で過去の願いと制約が完成本文へ届き、他17件は全記録同一。取消し制約の初案退行も修正した。必須321件318 PASS／継承3 FAIL、前回317の全成否一致、新規4成功。canonical100は全record・実plan不変、73/27・124責務を維持。華恋の全100件全文確認はNOT_CLEAR。V2再実行17件6 PASS／11 FAIL、最後のcandidate59と全42件213候補・選択結果も同一。主体・極性・時点のscopeと中心感情の未選択などの残件はcanonical06・API handoffのcandidate61とPR37 current本文を参照。GitHub正本・定例ZIPなしを継続。
+
+2026-09-08前回（単独行動の具体的受取と過去願望時点／candidate60）：finalの単一required自己行動を既存の具体参照方式へそろえ、内容を受取に保持した。過去願望報告の活用も既存同核statusで補った。canonical100の受取2件と参照planだけ変更、全核・観察・既存主観判断・可否理由は不変、73/27・124責務を維持。必須317件314 PASS／継承3 FAIL、前回313の全成否一致、新規4成功。華恋が全100件の原文・観察・受取を全文確認しNOT_CLEAR。残件・検証範囲・System Contextはcanonical06とAPI handoffのcandidate60、およびPR37 current本文を参照。GitHub正本・定例ZIPなしを継続。
 
 2026-09-07前回（原文で断定された願い変化句の受取／candidate57）：原文で断定された願いの強まり・弱まりを全句のまま受取対象にし、願いを二重に言い直す接続を除いた。canonical100の受取1件だけ変更、他99件は全record同一。変更核は原fieldの証明属性1個、selected inputはそこから再導出したinput／grounding参照だけが変わり、意味status・選択内容・全実plan・観察・可否理由・73/27・124責務は不変。必須304検査300成功／継承4失敗、前回302の全成否一致、新規2成功。華恋が全100件の原文と応答本文を読み商品NOT_CLEAR。変更例も外側不可の診断本文であり、商品PASSではない。長い再掲・定型締め・中心感情の未選択と補助行動偏重などは残る。
 
