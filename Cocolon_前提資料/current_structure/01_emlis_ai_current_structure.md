@@ -23,7 +23,7 @@ candidate_ready: false
 
 ## 0. Current conclusion
 
-2026-09-08現在：直前に提示した限定案への継続指示を受け、原文で検証済みの本人の気持ちと既存の必要行動をともに残す、seal前の既存OP選択修復を開始する。選択責務集合・各124固定にはcanonical02末尾の承認済み限定例外を適用する。既存meaning ownerへReception act／role／順位を逆流させず、唯一のHuman Receptionと厳格なGate／inverseへ全責務を通す。所有者／file／経路の追加はなく、今回の地図更新はdisabled Stage1内の選択境界。国家システム・公開I5・API／DB／RN・Piece／Analysisの接続は維持する。candidate64は開始時実測であり、変更後の結果ではない。
+2026-09-08現在（candidate65）：原文全体で証明済みの現在の感情主語と、別欄の本人の実行済み行動が独立している場合に、既存OPで両方のrequired Moveを選ぶ修正を実装した。気持ちを先に受け取り、元の行動も本文へ残す。公開合成の代表例で2責務・厳格なGate／inverse・回復処理が成立。追加4検査成功、必須336件333 PASS／継承3 FAIL、前回332全成否一致。canonical100の全record・実planはcandidate64と同一で、direct100、73/27、各124。華恋が全100件の原文・観察・受取・可否理由を全文確認してNOT_CLEAR。現在の限定証明は100件の欠落例に適用できておらず、中心感情欠落全体の修復完了とはしない。 選択責務集合の限定例外はcanonical02末尾が正本。今回の地図deltaは既存OP内の選択境界で、国家／公開I5／API／DB／RN／Piece／Analysisへの経路追加はない。
 
 EmlisAIの安定した商品目的、production経路、NLS v3／Cycle001 WIP、問い構想、履歴はGitHubに存在する。
 ただし、それらは別々の資料と数百のfile familyへ分散しており、production I5経路とoffline Cycle001経路を一枚で区別できるcurrent mapがなかった。
