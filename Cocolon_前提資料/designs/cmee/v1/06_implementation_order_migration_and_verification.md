@@ -16,7 +16,7 @@
 - Stage 1 upstream input-specific meaning final design: `FINAL_CANONICAL_IMPLEMENTATION_READY_SECTIONS_19_THROUGH_22`
 - Stage 1 current order owner: `THIS_FILE_SECTION_89_AND_LATEST_APPENDED_UNFINISHED_CHECKPOINT`
 
-2026-09-09最新（candidate76）：既存future軸を原文末尾の非過去動詞＋つもりが担う場合、重複する未来副詞句をsole HRで省いた。outer UNAVAILABLEの診断本文1件を改善、他99件の全recordと全100件の入力・観察・意味核・selected input・選択plan・可否理由は同一。Move／expression／binding各133、direct100、73 GENERATED／27 UNAVAILABLEを維持。必須378件の単一full runは375 PASS／継承3 FAIL、前375件の全成否と後続診断同一、新規3件成功。rootが全100件を全文確認しNOT_CLEAR。同family二行動の選択数拡張は限定例外の範囲外として未実装、長い復唱・定型末尾と感情／共有関係の残件を継続。System Context未使用・原典直接確認。再開点は末尾candidate76。
+2026-09-09最新（candidate77）：既に選ばれた独立した後続の予定が、位置だけを理由に抽象指示へ縮む参照処理を補正した。canonical100の5件で予定の対象・時刻・数量・順序を含む原文全体が受取へ戻り、他95件の全recordは同一。全100の入力・観察・意味核・選択意味・133義務・可否理由を保持。参照modeとそれを含むselected inputの導出refだけが対応して変わる。direct100、73 GENERATED／27 UNAVAILABLE。必須381件の単一full runは378 PASS／継承3 FAIL、前378件の全成否と後続診断同一、新規3件成功。rootが全100件を全文確認しNOT_CLEAR。長い復唱・定型末尾と中心感情／共有関係等の残件を継続。System Context未使用・原典直接確認、PR37不変更。再開点は末尾candidate77。
 
 2026-09-08前回実装（証明済み否定過去報告の全角文末を引用に保持／candidate64）：既存Sentence Surfaceで、原fieldと本人の否定過去報告が証明済みの単独spanだけ、末尾の全角ピリオドを引用内に保持した。元入力・根拠・意味計画・Gateは変更しない。公開合成57件は8件の本文成立／49件全record同一、全57件の根拠とplanは不変。必須332件329 PASS／継承3 FAIL、前回329全成否一致、新規3成功。旧I5等11成功。canonical100は全record・実plan不変、73/27・124責務を維持し、華恋が全100件全文確認してNOT_CLEAR。V2の17件6 PASS／11 FAIL・全42件213候補も同一。共有Ledger案は他の未修復な誤読まで本文を返したため不採用。中心感情の未選択、再掲・定型締め、対象外の報告scopeと他の全角文末は残件。GitHub正本・定例ZIPなしを継続。
 
@@ -7678,3 +7678,16 @@ Mash承認済み運用を継承する。System Contextは任意で今回は未�
 - 全100件生成・全文確認と全378検査のsourceはlocal `9a03648805eed4283528cfd5db427f5f3155d482`／remote `6eec1da8520b9ab9fd3604c4e2f5f4832e46b16e`、tree `e5a0ef550a4c347528ba3ef80601e66457309e7a`同一。後続変更は既存引継ぎ3資料の結果反映だけ。商品実装変更後へ今回の結果を流用しない。
 
 同familyの独立二行動が一方へ減る原因は、既存OPのfamily代表化と選択辞書にある。ただし02 §36.2の選択義務保護に対する9月8日の限定例外は、原文で証明した感情／材料と既存行動の保持であり、action-onlyの選択数拡張を含まない。今回この変更は実装せず、範囲拡張が必要な残件として記録した。次は現在選ばれた意味を保った文章改善を継続し、未保持の感情・共有関係やother_explicit分類・help-seeking binding gapは別原因として追う。既存承認の同じ未完unit、disabled／Draft／open／unmerged、candidate_ready=false、automatic_progression=false、NOT_CLEARを継続。System Context未使用・原典直接確認、PR37不変更。Product Read PASS・採用・ready・merge・本番・問い／Layer3は未成立。9月12日の本文確認準備の未達リスクを保持する。
+
+
+### 2026-09-09 current — candidate77 後続の予定の具体参照
+
+既存OPの後続Move参照処理で、すでに選択された独立行動の具体参照を、原文で証明した実行済みだけでなく原文で証明した予定にも保持する。既存helperによるfuture／present_to_future・intention・next_intention・非performedの証明と、元のrequired felt_response・本人・memo_action・単一核／span・非重複・非共有関係の条件を満たす場合に限る。既存HRの原文保持名詞化と全回復／独立inverseへ接続し、単一予定の既存方針、未証明future、wish／uncertain、他者、support／optional、共有文脈の除外は維持した。既存選択とMove義務のまま参照文法を修復する02 §36.2／§36.3の範囲であり、action-only二行動の選択数は拡張しない。新owner／schema／経路なし、STRUCTURE_MAP_DELTA_NONE。
+
+- 同じcanonical100はdirect100、73 GENERATED／27 UNAVAILABLE、Move／expression／binding各133。5件の後続予定が抽象的な未来行動の指示から、原文の対象・時刻・数量・順序・限度を含む具体的な受取へ変わった。うち3件はGENERATED、2件はUNAVAILABLEの診断本文で、提供可否の改善はない。他95件の全record、全100件の入力・観察・意味核・選択意味・可否理由を保持。受取planは当該5 Moveのreference_mode以外同一、selected inputはその変更を含む導出input_ref／grounding_ref以外同一。選択133義務をすべて保持した。
+- rootが全100件の思考・行動・カテゴリ・感情／強度・観察・受取・可否理由を、変更のない例と集合全体も含め全文確認しNOT_CLEAR。具体性は回復したが、原文の長い再掲、願い／関係のwrapper、定型末尾は残り、文量は増えている。中心感情、感謝・共有関係・複数主題、薄い指示的受取、暫定的な自己否定への受取不足は未解決。
+- 関連13検査PASS後、最終固定sourceの必須381件を一括実行した。raw結果378 PASS／継承3 FAIL、ERROR／skip0。前378件の全成否、36ケース・post-hash96検査と集合後続診断は同一、新規3検査全成功。新規検査は二義務と全回復authorへの意味保持、未来と実行済みの区別、原文欠落・時刻・数量・否定・主体・引用・重複のinverse拒否、証明と独立性の境界を確認した。継承失敗は観察freeze hash2件と歴史source receipt1件で、保護された期待値とbridge総数は不変更。別V2の17検査／42件213候補は今回未実行。
+- 固定Python3.12.13・46依存の既存環境を再構築せず使用。同セッションの保存済み環境照合を再利用し、今回の関連検査・必須回帰・100件の実行が完了した。依存ファイルの全件hash照合を今回再実施したという記録ではない。runnerは既存current13定数内のみ同期しexact18／exact9と非current ASTを維持した。
+- 全100件生成・全文確認と全381検査のsourceはlocal `32cf3a24d8e5fce86d51ac2d8064849cc06846bd`／remote `4c437ac2fc01761f766eb354dabe288f8cbf869c`、tree `76f81b0c51886ea54ea89337e94e9162cc0c97fc`同一。後続変更は既存引継ぎ3資料の結果反映だけ。商品実装変更後へ今回の結果を流用しない。
+
+次は現在選ばれた意味を保つ文章改善を継続する。中心感情・共有関係やother_explicit分類・help-seeking binding gapは原因を分けて追う。同family二行動の代表化・選択数拡張は、9月8日の感情／材料と既存行動を保持する限定例外に含まれず、引き続き未実装。既存承認の同じ未完unit、disabled／Draft／open／unmerged、candidate_ready=false、automatic_progression=false、NOT_CLEARを継続。System Context未使用・原典直接確認、PR37不変更。Product Read PASS・採用・ready・merge・本番・問い／Layer3は未成立。9月12日の本文確認準備の未達リスクを保持する。
