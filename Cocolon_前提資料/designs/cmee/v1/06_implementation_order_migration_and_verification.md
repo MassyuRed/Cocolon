@@ -16,7 +16,7 @@
 - Stage 1 upstream input-specific meaning final design: `FINAL_CANONICAL_IMPLEMENTATION_READY_SECTIONS_19_THROUGH_22`
 - Stage 1 current order owner: `THIS_FILE_SECTION_89_AND_LATEST_APPENDED_UNFINISHED_CHECKPOINT`
 
-2026-09-09最新（candidate71）：原文に明示された遅れ・比較の背景を、意味の型を保って別欄の実行済み行動とともに残した。同じ100件では2件の本文材料欠落を修正、他98件の全recordと全100件の観察・可否理由は同一。direct100、73 GENERATED／27 UNAVAILABLE、Move／expression／binding各129、従来127義務を保持。必須359件356 PASS／継承3 FAIL、新規4件全成功、前回355件の全成否と後続診断は同一。華恋が全100件の全入力field・観察・受取・可否理由を全文確認しNOT_CLEAR。System Contextは今回も未使用・原典直接確認。現在の残件と再開点は末尾candidate71を参照する。
+2026-09-09最新（candidate72）：原文の非過去の最終節が既に表す継続へ、同じ時点表現を重ねる不具合を既存Human Receptionで修正した。同じ100件では受取1件だけが変わり、他99件の全recordと全100件の意味核・selected input・実plan・観察・可否理由は同一。direct100、73 GENERATED／27 UNAVAILABLE、Move／expression／binding各129を維持。必須362件359 PASS／継承3 FAIL、新規3件全成功、前回359件の全成否と後続診断は同一。rootが全100件の全入力field・観察・受取・可否理由を全文確認しNOT_CLEAR。過去肯定感情のNORMAL現在時点契約は未変更。System Contextは未使用・原典直接確認。現在の残件と再開点は末尾candidate72を参照する。
 
 2026-09-08前回実装（証明済み否定過去報告の全角文末を引用に保持／candidate64）：既存Sentence Surfaceで、原fieldと本人の否定過去報告が証明済みの単独spanだけ、末尾の全角ピリオドを引用内に保持した。元入力・根拠・意味計画・Gateは変更しない。公開合成57件は8件の本文成立／49件全record同一、全57件の根拠とplanは不変。必須332件329 PASS／継承3 FAIL、前回329全成否一致、新規3成功。旧I5等11成功。canonical100は全record・実plan不変、73/27・124責務を維持し、華恋が全100件全文確認してNOT_CLEAR。V2の17件6 PASS／11 FAIL・全42件213候補も同一。共有Ledger案は他の未修復な誤読まで本文を返したため不採用。中心感情の未選択、再掲・定型締め、対象外の報告scopeと他の全角文末は残件。GitHub正本・定例ZIPなしを継続。
 
@@ -7612,3 +7612,19 @@ canonical100は原入力・順序・軸・分母を保ってdirectと外側か�
 次は過去の肯定感情をNORMALの現在時点条件も含む意味契約から追い、複数主題の感謝・共有関係を既存の上流source証明から検討する。限定構文以外の背景、長い復唱、定型締め、継続語と時点adjunctの重複も残る。物理的状態と本人感情は引き続き区別する。
 
 Mash承認済み運用を継承する。System Contextは任意で今回は未使用・原典直接確認、PR37は不変更。必要な原典確認と最終版の必須検証／root全100件読了を維持し、同じ前提や全履歴の反復・定例JSON／ZIP配布は行わない。既存2026-09-05承認の同じ未完unit、disabled／Draft／open／unmerged、candidate_ready=false、automatic_progression=falseを維持。Product Read PASS・採用・merge・本番・問い／Layer3は未成立。9月12日の本文確認準備に対する未達リスクを保持する。
+
+### 2026-09-09 current — candidate72 継続表現の時点重複修正
+
+既存Human Receptionの時点表現で、原文の非過去の最終節にある「ずっと」を継続の根拠として扱い、同じ意味の時点副詞を重ねないようにした。完全な原文、程度、否定、上流意味、Move、選択済み判断を保持し、既存の時間／相の所有と独立replayを使用する。今回追加した判定は最終節に限定し、引用・報告・過去形・別節・原文全体の明示比較を除外する。新しいowner／schema／経路、意味選択変更、Gate／inverseの基準緩和はない。STRUCTURE_MAP_DELTA_NONE。
+
+修正途中の関連7検査は成功。独立レビューで前節の比較を見落とす可能性を確認し、原文全体の比較除外と負例を追加してから最終sourceを固定した。この途中結果とcandidate71の成功を、変更後の最終証拠へ流用していない。
+
+- canonical100はdirect100、73 GENERATED／27 UNAVAILABLE、Move／expression／binding各129。受取1件の時点重複だけを除き、他99件の全recordと全100件の意味核・selected input・実plan・観察・可否理由は同一。全129の既存必要義務、入力・順序・分母を保持。
+- rootが全100件の元入力・行動・カテゴリ・感情／強度・観察・受取・可否理由を、変更例以外と集合全体を含めて全文確認した。時点重複の局所改善はあるが、中心感情・関係より行動評価へ偏る応答、長い原文再掲、汎用的な結語は残り、商品判定はNOT_CLEAR。
+- 必須362件359 PASS／継承3 FAIL、ERROR／skip0。前回359件の全成否は同一、新規3件全成功。36ケース・post-hash96検査・集合後続診断も同一。継承失敗は観察hash2件と歴史source receipt1件で、保護fixtureと期待値を変更していない。別V2の17検査／42件213候補は今回未実行。
+- 固定Python3.12.13／46依存の照合済み環境で検証した。runnerの既存current13定数だけを同期し、exact18／exact9と非current ASTを維持。
+- 検証source: local `86c644240c32c1853cfcba86eaf235e9b5f2b18d` / remote `b775e6179ed2d5e00421f29c8555d0ad8e5630f8`、tree `c5770055158f43528d17ea975f3e864c0dc40cd4` 同一。後続変更は結果資料のみ。
+
+過去の肯定感情については、既存NORMAL appraisalのpositive feelingが現在時点だけを受け入れ、保護検査もpastを拒否することを確認した。今回はこの意味契約と保護期待値を変更していない。次はこの契約と原文の時点を区別して必要差分を確定し、感謝・複数主題・共有関係は既存の上流source証明から扱う。長い復唱、汎用結語、中心感情より補助行動へ偏る選択、限定構文外の背景は引き続き残件。
+
+Mash承認済み運用を継承する。System Contextは任意で今回は未使用・原典直接確認、PR37不変更。最終修正版の必須検査とroot全100件全文確認を維持し、同じ前提・全履歴・検証の不要な反復、定例JSON／ZIP配布、新しい管理系を追加しない。既存2026-09-05承認の同じ未完unit、disabled／Draft／open／unmerged、candidate_ready=false、automatic_progression=falseを維持。Product Read PASS・採用・merge・本番・問い／Layer3は未成立。9月12日の本文確認準備に対する未達リスクを保持する。
