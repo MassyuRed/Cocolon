@@ -23,7 +23,7 @@
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 - Stage 1 historical predecessor additional correction final body, not current: `ROUTE_A_ONLY / STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP / EARLY_ACTUAL_NOT_RUN`
 
-2026-09-09最新（candidate72）：原文の非過去の最終節が既に表す継続へ、同じ時点表現を重ねる不具合を既存Human Receptionで修正した。同じ100件では受取1件だけが変わり、他99件の全recordと全100件の意味核・selected input・実plan・観察・可否理由は同一。direct100、73 GENERATED／27 UNAVAILABLE、Move／expression／binding各129を維持。必須362件359 PASS／継承3 FAIL、新規3件全成功、前回359件の全成否と後続診断は同一。rootが全100件の全入力field・観察・受取・可否理由を全文確認しNOT_CLEAR。過去肯定感情のNORMAL現在時点契約は未変更。System Contextは未使用・原典直接確認。現在の残件と再開点は末尾candidate72を参照する。
+2026-09-09最新（candidate73）：有限の背景と主節を含む原field全体を、既存の中立的な意味型を保って別欄の実行済み行動とともに残した。同じ100件では2件の本文材料欠落を修正、他98件の全recordと全100件の観察・可否理由は同一。direct100、73 GENERATED／27 UNAVAILABLE、旧129義務を保持してMove／expression／binding各131。必須367件の初回363 PASS／4 FAILを保存し、現行総数の更新漏れ1件を訂正・単独再検証した最終有効成否は364 PASS／継承3 FAIL。旧362件の成否と後続診断は同一、新規5件成功。rootが全100件を全文確認しNOT_CLEAR。NORMALの現在肯定感情契約は未変更。System Context未使用・原典直接確認。残件と再開点は末尾candidate73を参照する。
 
 2026-09-08前回実装（証明済み否定過去報告の全角文末を引用に保持／candidate64）：既存Sentence Surfaceで、原fieldと本人の否定過去報告が証明済みの単独spanだけ、末尾の全角ピリオドを引用内に保持した。元入力・根拠・意味計画・Gateは変更しない。公開合成57件は8件の本文成立／49件全record同一、全57件の根拠とplanは不変。必須332件329 PASS／継承3 FAIL、前回329全成否一致、新規3成功。旧I5等11成功。canonical100は全record・実plan不変、73/27・124責務を維持し、華恋が全100件全文確認してNOT_CLEAR。V2の17件6 PASS／11 FAIL・全42件213候補も同一。共有Ledger案は他の未修復な誤読まで本文を返したため不採用。中心感情の未選択、再掲・定型締め、対象外の報告scopeと他の全角文末は残件。GitHub正本・定例ZIPなしを継続。
 
@@ -2774,3 +2774,16 @@ Mash承認済み運用を継承する。System Contextは任意で今回は未�
 過去の肯定感情については、既存NORMAL appraisalのpositive feelingが現在時点だけを受け入れ、保護検査もpastを拒否することを確認した。今回はこの意味契約と保護期待値を変更していない。次はこの契約と原文の時点を区別して必要差分を確定し、感謝・複数主題・共有関係は既存の上流source証明から扱う。長い復唱、汎用結語、中心感情より補助行動へ偏る選択、限定構文外の背景は引き続き残件。
 
 Mash承認済み運用を継承する。System Contextは任意で今回は未使用・原典直接確認、PR37不変更。最終修正版の必須検査とroot全100件全文確認を維持し、同じ前提・全履歴・検証の不要な反復、定例JSON／ZIP配布、新しい管理系を追加しない。既存2026-09-05承認の同じ未完unit、disabled／Draft／open／unmerged、candidate_ready=false、automatic_progression=falseを維持。Product Read PASS・採用・merge・本番・問い／Layer3は未成立。9月12日の本文確認準備に対する未達リスクを保持する。
+
+### 2026-09-09 current — candidate73 有限背景を含む本文材料の保持
+
+既存OPで有限の背景＋有限主節を原field全体として証明し、`lexical:source_bounded_expression`を既存選択へ接続した。neutral event／state、fact、主体、極性、modality、時点を保持し、背景を本人の行動・感情・因果へ読み替えない。旧scalar witnessを維持し、引用・報告・疑問・未来・否定host・第三節を追加証明から除外する。
+
+同じ材料核と別欄行動の関係が`whole_input_source_order`だけに由来する限定的なshiftでは、欄内の比較を欄間の変化へ移さず`uncertain_connection`へ整合する。両核が本人のrequired核、行動側が実行済みで変化証拠なしという条件に限定し、明示関係や別の根拠は変更しない。既存NORMALの現在肯定感情契約、public／旧経路、Gate／inverseの保護基準は不変更。新owner／schema／経路はなくSTRUCTURE_MAP_DELTA_NONE。
+
+- canonical100はdirect100、73 GENERATED／27 UNAVAILABLE。2件の本文材料全体と独立した行動を保持し、他98件の全recordと全100件の観察・可否理由は同一。追加witnessを除けば全意味核は同一、旧129義務をすべて保持し本文材料2を追加、Move／expression／binding各131。
+- rootが全100件の元入力・行動・カテゴリ・感情／強度・観察・受取・可否理由を全文確認した。本文材料の欠落は局所改善したが、混合した肯定感情、感謝・共有関係・複数主題、長い原文再掲・定型末尾は残りNOT_CLEAR。NORMALの過去肯定感情対応や一般的な時点解釈の完成には数えない。
+- 必須367件の初回は363 PASS／4 FAIL。新規失敗1件はbridgeの現行必要総数が129のまま残った更新漏れで、test-only変更`21c8babe45ce2a8f5941dc13c2e98674e70a9665`で131へ同期し、該当1検査を再実行してPASSを確認した。初回証拠を保存した上で最終有効成否は367件364 PASS／継承3 FAIL、ERROR／skip0。旧362件の成否は同一、新規5件成功、後続診断も同一。継承失敗は観察hash2件と歴史source receipt1件で、歴史fixtureは不変更。367件を訂正後に一括再実行したという記録ではない。
+- 全100件の検証sourceはlocal `fcbdd6b8eaf354eddf3dfd6fe502143cc33b4c22`／remote `f8eb4e68d31a94abc0e15fead666d14e22784d1e`、tree `0247abc00405adf27db15dae2d21b934f66b251d`同一。後続変更は現行総数のtest同期と結果資料だけで、商品実装が同一のため保存済み全100件と全文確認を再利用した。
+
+既存2026-09-05承認の同じ未完unitを継続する。次は混合した感情、感謝・共有関係・複数主題の意味が既存source証明と選択でどこまで保持されるかを確認し、長い復唱と定型末尾も修正対象に残す。System Contextは任意で今回は未使用・原典直接確認、PR37不変更。disabled／Draft／open／unmerged、candidate_ready=false、automatic_progression=false、NOT_CLEARを維持し、Product Read PASS・採用・merge・本番・問い／Layer3を成立させない。9月12日の本文確認準備の未達リスクを保持する。
