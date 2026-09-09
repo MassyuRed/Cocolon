@@ -1,97 +1,130 @@
-name: Cocolon System Context Step 5 final standard dispatcher
-run-name: Dispatch final Step 5 standard run @ ${{ github.sha }}
+name: Cocolon System Context workflow policy verifier
+run-name: Verify read-only workflow policy @ ${{ github.event.pull_request.head.sha }}
 
 on:
-  workflow_dispatch:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    paths:
+      - .devcontainer/**
+      - .github/context-payloads/**
+      - .github/workflows/cocolon-system-context-inventory.yml
+      - .github/workflows/cocolon-system-context-step5-export.yml
+      - .github/workflows/cocolon-system-context-step5-pytest-bootstrap.yml
+      - .gitignore
+      - tools/cocolon_context*
+      - Cocolon_前提資料/system_context/00_read_first.md
+      - Cocolon_前提資料/system_context/workspace_profiles.json
+      - Cocolon_前提資料/system_context/task_profiles.json
+      - tests/cocolon_context/**
+      - Cocolon_前提資料/system_context/Cocolon_SystemContext_ImplementationContract_20260818.md
+      - Cocolon_前提資料/system_context/current/cmee_working/**
 
 permissions:
-  actions: write
   contents: read
+  pull-requests: read
 
 concurrency:
-  group: cocolon-system-context-step5-final-dispatch-${{ github.ref_name }}
+  group: ${{ github.workflow }}-pr-${{ github.event.pull_request.number }}
   cancel-in-progress: true
 
 jobs:
-  dispatch-final-standard:
+  verify-policy-at-current-head:
     runs-on: ubuntu-latest
-    timeout-minutes: 250
+    timeout-minutes: 15
     env:
-      SOURCE_COMMIT: ${{ github.sha }}
-      TARGET_BRANCH: agent/cocolon-system-context-index-20260818
-      STANDARD_WORKFLOW: cocolon-system-context-inventory.yml
-      GH_TOKEN: ${{ github.token }}
+      EXPECTED_PR_NUMBER: ${{ github.event.pull_request.number }}
+      EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+      EXPECTED_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+      WORKFLOW_ROLE: WORKFLOW_POLICY_VERIFIER
     steps:
-      - name: Checkout exact dispatch source
+      - name: Require same-repository PR event
+        env:
+          EVENT_HEAD_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
+          EVENT_BASE_REPOSITORY: ${{ github.event.pull_request.base.repo.full_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$WORKFLOW_ROLE" = "WORKFLOW_POLICY_VERIFIER"
+          test "$GITHUB_EVENT_NAME" = "pull_request"
+          test "$EVENT_HEAD_REPOSITORY" = "$GITHUB_REPOSITORY"
+          test "$EVENT_BASE_REPOSITORY" = "$GITHUB_REPOSITORY"
+
+      - name: Bind to current open Draft PR head
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          PR_JSON="$(gh api "repos/${GITHUB_REPOSITORY}/pulls/${EXPECTED_PR_NUMBER}")"
+          jq -e --arg repo "$GITHUB_REPOSITORY" --arg sha "$EXPECTED_HEAD_SHA" --arg ref "$EXPECTED_HEAD_REF" '
+            .state == "open" and .draft == true and .merged == false
+            and .head.repo.full_name == $repo and .base.repo.full_name == $repo
+            and .head.sha == $sha and .head.ref == $ref
+          ' <<<"$PR_JSON" >/dev/null
+
+      - name: Checkout exact PR head without credentials
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.sha }}
+          ref: ${{ github.event.pull_request.head.sha }}
           fetch-depth: 1
+          persist-credentials: false
 
-      - name: Assert exact dispatch source
+      - name: Assert local checkout identity
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = "$SOURCE_COMMIT"
-          test "$(git status --porcelain)" = ""
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD_SHA"
+          test -z "$(git status --porcelain=v1 --untracked-files=no)"
 
-      - name: Dispatch and require terminal-success standard run
+      - name: Build fixed System Context environment
+        shell: bash
+        run: docker build --file .devcontainer/Dockerfile --tag cocolon-system-context-ci .devcontainer
+
+      - name: Verify T67 policy in fixed read-only environment
         shell: bash
         run: |
           set -euo pipefail
-          gh workflow run "$STANDARD_WORKFLOW" --ref "$TARGET_BRANCH"
+          docker run --rm --read-only --network none \
+            --tmpfs /tmp:rw,nosuid,nodev \
+            --volume "$GITHUB_WORKSPACE:/workspace:ro" \
+            --workdir /workspace \
+            --env PYTHONPYCACHEPREFIX=/tmp/pycache \
+            --env XDG_CACHE_HOME=/tmp/cache \
+            --env GIT_CONFIG_COUNT=1 \
+            --env GIT_CONFIG_KEY_0=safe.directory \
+            --env GIT_CONFIG_VALUE_0=/workspace \
+            cocolon-system-context-ci \
+            bash -euo pipefail -c '
+          python3 -m tools.cocolon_context doctor
+          python3 -m py_compile \
+            tools/cocolon_context.py \
+            tools/cocolon_context_environment.py \
+            tools/cocolon_context_prepare.py \
+            tools/cocolon_context_task.py \
+            tools/cocolon_context_publish_transport.py
+          python3 -m pytest -p no:cacheprovider tests/cocolon_context/test_prepare.py -q -k workflow_policy
+            '
 
-          RUN_ID=""
-          for _ in $(seq 1 60); do
-            RUNS_JSON="$(gh run list \
-              --workflow "$STANDARD_WORKFLOW" \
-              --branch "$TARGET_BRANCH" \
-              --event workflow_dispatch \
-              --limit 20 \
-              --json databaseId,headSha,status,conclusion,createdAt)"
-            RUN_ID="$(RUNS_JSON="$RUNS_JSON" python3 - <<'PY'
-          import json
-          import os
+      - name: Assert no tracked mutation
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD_SHA"
+          git diff --exit-code -- .
+          git diff --cached --exit-code -- .
+          test -z "$(git status --porcelain=v1 --untracked-files=no)"
 
-          source = os.environ["SOURCE_COMMIT"]
-          runs = json.loads(os.environ["RUNS_JSON"])
-          matches = [run for run in runs if run.get("headSha") == source]
-          if matches:
-              matches.sort(key=lambda run: int(run["databaseId"]), reverse=True)
-              print(matches[0]["databaseId"])
-          PY
-            )"
-            if [ -n "$RUN_ID" ]; then
-              break
-            fi
-            sleep 5
-          done
-
-          test -n "$RUN_ID"
-          echo "STANDARD_RUN_ID=$RUN_ID"
-
-          set +e
-          gh run watch "$RUN_ID" --exit-status
-          WATCH_RC=$?
-          set -e
-          if [ "$WATCH_RC" -ne 0 ]; then
-            gh run view "$RUN_ID" --log-failed || true
-            exit "$WATCH_RC"
-          fi
-
-          RUN_STATE="$(gh run view "$RUN_ID" --json status,conclusion,headSha)"
-          RUN_STATE="$RUN_STATE" python3 - <<'PY'
-          import json
-          import os
-
-          source = os.environ["SOURCE_COMMIT"]
-          state = json.loads(os.environ["RUN_STATE"])
-          assert state["status"] == "completed", state
-          assert state["conclusion"] == "success", state
-          assert state["headSha"] == source, state
-          PY
-
-          FINAL_HEAD="$(gh api \
-            "repos/${GITHUB_REPOSITORY}/git/ref/heads/${TARGET_BRANCH}" \
-            --jq '.object.sha')"
-          echo "FINAL_HEAD=$FINAL_HEAD"
+      - name: Recheck current PR head
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          PR_JSON="$(gh api "repos/${GITHUB_REPOSITORY}/pulls/${EXPECTED_PR_NUMBER}")"
+          jq -e --arg repo "$GITHUB_REPOSITORY" --arg sha "$EXPECTED_HEAD_SHA" --arg ref "$EXPECTED_HEAD_REF" '
+            .state == "open" and .draft == true and .merged == false
+            and .head.repo.full_name == $repo and .base.repo.full_name == $repo
+            and .head.sha == $sha and .head.ref == $ref
+          ' <<<"$PR_JSON" >/dev/null

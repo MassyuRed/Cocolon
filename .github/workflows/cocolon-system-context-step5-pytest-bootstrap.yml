@@ -1,116 +1,130 @@
-name: Cocolon System Context Step 5 fresh-clone repair
-run-name: Repair packed workspace verification @ ${{ github.event.pull_request.head.sha || github.sha }}
+name: Cocolon System Context fresh-head pytest verifier
+run-name: Verify pytest at exact Draft head @ ${{ github.event.pull_request.head.sha }}
 
 on:
-  push:
-    branches:
-      - agent/cocolon-system-context-index-20260818
-    paths:
-      - .github/workflows/cocolon-system-context-step5-pytest-bootstrap.yml
   pull_request:
+    types: [opened, reopened, synchronize]
     paths:
+      - .devcontainer/**
+      - .github/context-payloads/**
+      - .github/workflows/cocolon-system-context-inventory.yml
+      - .github/workflows/cocolon-system-context-step5-export.yml
       - .github/workflows/cocolon-system-context-step5-pytest-bootstrap.yml
-  workflow_dispatch:
+      - .gitignore
+      - tools/cocolon_context*
+      - Cocolon_前提資料/system_context/00_read_first.md
+      - Cocolon_前提資料/system_context/workspace_profiles.json
+      - Cocolon_前提資料/system_context/task_profiles.json
+      - tests/cocolon_context/**
+      - Cocolon_前提資料/system_context/Cocolon_SystemContext_ImplementationContract_20260818.md
+      - Cocolon_前提資料/system_context/current/cmee_working/**
 
 permissions:
-  contents: write
+  contents: read
+  pull-requests: read
 
 concurrency:
-  group: cocolon-system-context-step5-fresh-clone-repair-${{ github.event_name }}
-  cancel-in-progress: false
+  group: ${{ github.workflow }}-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
 
 jobs:
-  repair:
-    if: github.event_name == 'workflow_dispatch' || github.actor != 'github-actions[bot]'
+  pytest-current-draft-head:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 20
     env:
-      SOURCE_COMMIT: ${{ github.event.pull_request.head.sha || github.sha }}
-      TARGET_BRANCH: agent/cocolon-system-context-index-20260818
-      PREPARE_SOURCE: tools/cocolon_context_prepare.py
+      EXPECTED_PR_NUMBER: ${{ github.event.pull_request.number }}
+      EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+      EXPECTED_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+      WORKFLOW_ROLE: PYTEST_RUNTIME_VERIFIER
     steps:
-      - name: Checkout exact source
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha || github.sha }}
-          fetch-depth: 0
-
-      - name: Repair packed workspace verification, test, commit, and push
+      - name: Require same-repository PR event
+        env:
+          EVENT_HEAD_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
+          EVENT_BASE_REPOSITORY: ${{ github.event.pull_request.base.repo.full_name }}
         shell: bash
         run: |
           set -euo pipefail
-          test "$(git rev-parse HEAD)" = "$SOURCE_COMMIT"
-          python3 - <<'PY'
-          from pathlib import Path
+          test "$WORKFLOW_ROLE" = "PYTEST_RUNTIME_VERIFIER"
+          test "$GITHUB_EVENT_NAME" = "pull_request"
+          test "$EVENT_HEAD_REPOSITORY" = "$GITHUB_REPOSITORY"
+          test "$EVENT_BASE_REPOSITORY" = "$GITHUB_REPOSITORY"
 
-          path = Path('tools/cocolon_context_prepare.py')
-          text = path.read_text(encoding='utf-8')
-          start = text.index('def _verify_workspace(\n')
-          end = text.index('\ndef _compile_and_pack_task(\n', start)
-          replacement = '''def _verify_workspace(
-              *, repo_root: Path, workspace: str, workspace_dir: Path,
-              refs: Mapping[str, RepositoryRef], profiles_path: Path,
-          ) -> dict[str, Any]:
-              """Verify published bytes, then semantic outputs from materialized logical files."""
-              transport = verify_outputs(workspace_dir)
-              with tempfile.TemporaryDirectory(
-                  prefix="cocolon-workspace-verify-materialized-"
-              ) as temporary:
-                  materialized = materialize_outputs(
-                      workspace_dir, Path(temporary) / "workspace"
-                  )
-                  verify_inventory(
-                      profiles_path,
-                      workspace,
-                      {key: value.path for key, value in refs.items()},
-                      materialized,
-                  )
-                  _run(
-                      (
-                          sys.executable,
-                          str(repo_root / "tools/cocolon_context_code_index.py"),
-                          "verify",
-                          "--inventory",
-                          str(materialized / "files.jsonl"),
-                          "--output",
-                          str(materialized / "code_index"),
-                      ),
-                      cwd=repo_root,
-                  )
-                  _run(
-                      (
-                          sys.executable,
-                          str(repo_root / "tools/cocolon_context_routes.py"),
-                          "verify",
-                          "--inventory",
-                          str(materialized / "files.jsonl"),
-                          "--code-index",
-                          str(materialized / "code_index"),
-                          "--output",
-                          str(materialized / "route_graph"),
-                      ),
-                      cwd=repo_root,
-                  )
-              return dict(transport)
+      - name: Bind to current open Draft PR head
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          PR_JSON="$(gh api "repos/${GITHUB_REPOSITORY}/pulls/${EXPECTED_PR_NUMBER}")"
+          jq -e --arg repo "$GITHUB_REPOSITORY" --arg sha "$EXPECTED_HEAD_SHA" --arg ref "$EXPECTED_HEAD_REF" '
+            .state == "open" and .draft == true and .merged == false
+            and .head.repo.full_name == $repo and .base.repo.full_name == $repo
+            and .head.sha == $sha and .head.ref == $ref
+          ' <<<"$PR_JSON" >/dev/null
 
-'''
-          updated = text[:start] + replacement + text[end + 1:]
-          if 'prefix="cocolon-workspace-verify-materialized-"' not in updated:
-              raise SystemExit('materialized verification repair was not written')
-          path.write_text(updated, encoding='utf-8')
-          PY
-          python3 -m pip install --disable-pip-version-check pytest==8.4.2
-          python3 -m py_compile "$PREPARE_SOURCE"
-          python3 -m unittest discover -s tests/cocolon_context -p 'test_*.py' -v
-          python3 -m pytest tests/cocolon_context/test_task_context.py -q
-          git diff --check -- "$PREPARE_SOURCE"
-          git add -- "$PREPARE_SOURCE"
-          test -n "$(git diff --cached --name-only -- "$PREPARE_SOURCE")"
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "fix(system-context): verify packed workspace via logical materialization"
-          PATCHED_COMMIT="$(git rev-parse HEAD)"
-          echo "PATCHED_COMMIT=${PATCHED_COMMIT}"
-          git fetch --no-tags origin "+refs/heads/${TARGET_BRANCH}:refs/remotes/origin/${TARGET_BRANCH}"
-          test "$(git rev-parse refs/remotes/origin/${TARGET_BRANCH})" = "$SOURCE_COMMIT"
-          git push origin "HEAD:${TARGET_BRANCH}"
+      - name: Checkout exact PR head without credentials
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Assert local checkout identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD_SHA"
+          test -z "$(git status --porcelain=v1 --untracked-files=no)"
+
+      - name: Build fixed System Context environment
+        shell: bash
+        run: docker build --file .devcontainer/Dockerfile --tag cocolon-system-context-ci .devcontainer
+
+      - name: Run terminal Step 7 pytest set in fixed read-only environment
+        shell: bash
+        run: |
+          set -euo pipefail
+          docker run --rm --read-only --network none \
+            --tmpfs /tmp:rw,nosuid,nodev \
+            --volume "$GITHUB_WORKSPACE:/workspace:ro" \
+            --workdir /workspace \
+            --env PYTHONPYCACHEPREFIX=/tmp/pycache \
+            --env XDG_CACHE_HOME=/tmp/cache \
+            --env GIT_CONFIG_COUNT=1 \
+            --env GIT_CONFIG_KEY_0=safe.directory \
+            --env GIT_CONFIG_VALUE_0=/workspace \
+            cocolon-system-context-ci \
+            bash -euo pipefail -c '
+          python3 -m tools.cocolon_context doctor
+          python3 -m py_compile \
+            tools/cocolon_context.py \
+            tools/cocolon_context_environment.py \
+            tools/cocolon_context_prepare.py \
+            tools/cocolon_context_task.py \
+            tools/cocolon_context_publish_transport.py
+          python3 -m pytest -p no:cacheprovider tests/cocolon_context/test_prepare.py tests/cocolon_context/test_task_context.py -q
+            '
+
+      - name: Assert no tracked mutation
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD_SHA"
+          git diff --exit-code -- .
+          git diff --cached --exit-code -- .
+          test -z "$(git status --porcelain=v1 --untracked-files=no)"
+
+      - name: Recheck current PR head
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          PR_JSON="$(gh api "repos/${GITHUB_REPOSITORY}/pulls/${EXPECTED_PR_NUMBER}")"
+          jq -e --arg repo "$GITHUB_REPOSITORY" --arg sha "$EXPECTED_HEAD_SHA" --arg ref "$EXPECTED_HEAD_REF" '
+            .state == "open" and .draft == true and .merged == false
+            and .head.repo.full_name == $repo and .base.repo.full_name == $repo
+            and .head.sha == $sha and .head.ref == $ref
+          ' <<<"$PR_JSON" >/dev/null
