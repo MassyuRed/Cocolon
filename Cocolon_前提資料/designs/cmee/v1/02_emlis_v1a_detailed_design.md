@@ -23,7 +23,7 @@
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 - Stage 1 historical predecessor additional correction final body, not current: `ROUTE_A_ONLY / STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP / EARLY_ACTUAL_NOT_RUN`
 
-2026-09-09最新（candidate75）：試行条件・期待比較・授受可能の完了表現を含む原文全体を、型・主体・時点を保った本文材料として独立行動とともに残した。同じ100件の受取1件を改善、他99件の全recordと全100件の観察・可否理由は同一。旧132義務を保持してMove／expression／binding各133、direct100、73 GENERATED／27 UNAVAILABLE。必須375件の単一full runは372 PASS／継承3 FAIL、既存371件の成否・後続診断同一、新規4件成功。rootが全100件の全入力field・観察・受取・可否理由を全文確認しNOT_CLEAR。感謝・共有関係・複数主題、中心感情の取りこぼし、長い復唱と定型末尾は残る。System Context未使用・原典直接確認。再開点は末尾candidate75。
+2026-09-09最新（candidate76）：既存future軸を原文末尾の非過去動詞＋つもりが担う場合、重複する未来副詞句をsole HRで省いた。outer UNAVAILABLEの診断本文1件を改善、他99件の全recordと全100件の入力・観察・意味核・selected input・選択plan・可否理由は同一。Move／expression／binding各133、direct100、73 GENERATED／27 UNAVAILABLEを維持。必須378件の単一full runは375 PASS／継承3 FAIL、前375件の全成否と後続診断同一、新規3件成功。rootが全100件を全文確認しNOT_CLEAR。同family二行動の選択数拡張は限定例外の範囲外として未実装、長い復唱・定型末尾と感情／共有関係の残件を継続。System Context未使用・原典直接確認。再開点は末尾candidate76。
 
 2026-09-08前回実装（証明済み否定過去報告の全角文末を引用に保持／candidate64）：既存Sentence Surfaceで、原fieldと本人の否定過去報告が証明済みの単独spanだけ、末尾の全角ピリオドを引用内に保持した。元入力・根拠・意味計画・Gateは変更しない。公開合成57件は8件の本文成立／49件全record同一、全57件の根拠とplanは不変。必須332件329 PASS／継承3 FAIL、前回329全成否一致、新規3成功。旧I5等11成功。canonical100は全record・実plan不変、73/27・124責務を維持し、華恋が全100件全文確認してNOT_CLEAR。V2の17件6 PASS／11 FAIL・全42件213候補も同一。共有Ledger案は他の未修復な誤読まで本文を返したため不採用。中心感情の未選択、再掲・定型締め、対象外の報告scopeと他の全角文末は残件。GitHub正本・定例ZIPなしを継続。
 
@@ -2811,3 +2811,16 @@ Mash承認済み運用を継承する。System Contextは任意で今回は未�
 - 全100件生成・全文確認と全375検査のsourceはlocal `6ec69069d3e9da5bebaddc79bcbbe0234813338f`／remote `ff5a77a3f39a8c4f90219d99d4fd5efc400f3bcb`、tree `f1539ee40ec2fa4193834b747effb2647156d922`同一。後続変更は既存引継ぎ3資料の結果反映だけ。商品実装変更後へ今回の結果を流用しない。
 
 次は既存source証明・選択で、同familyの独立行動、未保持の複数主題・感謝・共有関係を別原因として追う。近傍のhelp-seeking binding gapは修正前にも発生し、other_explicitへの分類も今回対象外のまま残る。有限な材料保持を一般的な授受・感謝理解の完成に数えない。既存承認の同じ未完unit、disabled／Draft／open／unmerged、candidate_ready=false、automatic_progression=false、NOT_CLEARを継続。System Context未使用・原典直接確認、PR37不変更。Product Read PASS・採用・ready・merge・本番・問い／Layer3は未成立。9月12日の本文確認準備の未達リスクを保持する。
+
+
+### 2026-09-09 current — candidate76 原文末尾による未来時点の保持
+
+既存sole HRのtime/aspect所有判定で、既に選択されたfuture軸を原文末尾の非過去動詞＋つもりが担う場合、重複する未来副詞句を省く。予定の意図、内部の対象・数量・時点と原文全体を保持する。意味核・選択・Move責務・CMEE契約は不変更で、同じselected inputと全回復／inverseを使う。過去の思い込み、引用・外側報告・別文・疑問・名詞のつもり・進行状態へこの証明を広げず、present_to_future、ANAPHORIC、aspectの既存所有も変えない。一部の通常動詞や否定形は旧挙動に残る限定対応であり、一般的な予定解釈の完成ではない。新owner／schema／経路なし、STRUCTURE_MAP_DELTA_NONE。
+
+- 同じcanonical100はdirect100、73 GENERATED／27 UNAVAILABLE、Move／expression／binding各133。outer UNAVAILABLEの診断受取1件で重複する時点表現が減ったが、当該例の提供可否は未改善。他99件の全recordと、全100件の入力・観察・意味核・selected input・受取plan・可否理由は同一で、選択133義務をすべて保持した。
+- rootが全100件の思考・行動・カテゴリ・感情／強度・観察・受取・可否理由を、変更のない例と集合全体も含め全文確認しNOT_CLEAR。改善例にも長い原文再掲・願いのwrapper・定型末尾が残る。中心感情、感謝・共有関係・複数主題、薄い指示的受取、暫定的な自己否定への受取不足は未解決。
+- 関連10検査PASS後、実経路で対象核のfuture／非実行状態を確認するassertを補強し、最終固定sourceの必須378件を一括実行した。raw結果375 PASS／継承3 FAIL、ERROR／skip0。前375件の全成否、36ケース・post-hash96検査と集合後続診断は同一、新規3検査全成功。継承失敗は観察freeze hash2件と歴史source receipt1件で、保護された歴史期待値とbridge総数は不変更。別V2の17検査／42件213候補は今回未実行。
+- 固定Python3.12.13・46依存の既存環境を再構築せず使用。同セッションで保存済みの環境照合を再利用し、今回の対象検査・必須回帰・100件の実行が完了した。今回あらためて依存ファイルを全件hash照合したという記録ではない。runnerは既存current13定数内のみ同期しexact18／exact9と非current ASTを維持した。
+- 全100件生成・全文確認と全378検査のsourceはlocal `9a03648805eed4283528cfd5db427f5f3155d482`／remote `6eec1da8520b9ab9fd3604c4e2f5f4832e46b16e`、tree `e5a0ef550a4c347528ba3ef80601e66457309e7a`同一。後続変更は既存引継ぎ3資料の結果反映だけ。商品実装変更後へ今回の結果を流用しない。
+
+同familyの独立二行動が一方へ減る原因は、既存OPのfamily代表化と選択辞書にある。ただし02 §36.2の選択義務保護に対する9月8日の限定例外は、原文で証明した感情／材料と既存行動の保持であり、action-onlyの選択数拡張を含まない。今回この変更は実装せず、範囲拡張が必要な残件として記録した。次は現在選ばれた意味を保った文章改善を継続し、未保持の感情・共有関係やother_explicit分類・help-seeking binding gapは別原因として追う。既存承認の同じ未完unit、disabled／Draft／open／unmerged、candidate_ready=false、automatic_progression=false、NOT_CLEARを継続。System Context未使用・原典直接確認、PR37不変更。Product Read PASS・採用・ready・merge・本番・問い／Layer3は未成立。9月12日の本文確認準備の未達リスクを保持する。
