@@ -16,7 +16,7 @@
 - Stage 1 upstream input-specific meaning final design: `FINAL_CANONICAL_IMPLEMENTATION_READY_SECTIONS_19_THROUGH_22`
 - Stage 1 current order owner: `THIS_FILE_SECTION_89_AND_LATEST_APPENDED_UNFINISHED_CHECKPOINT`
 
-2026-09-09最新（candidate67）：発言等に関する動詞節の背景と本人の現在感情を原field全域で証明し、既存の独立した必要行動とともに選択するcandidate67を実装・検証した。同じ100件の1件で感情欠落を解消し、他99件の全record／実planは不変。全観察・可否／理由も不変、direct100、73 GENERATED／27 UNAVAILABLE。旧125必要責務をすべて保持し、Move／expression／binding各126。華恋が全100件を全文確認しNOT_CLEAR。必須344件341 PASS／継承3 FAIL、前回340全成否一致、新規4全成功。
+2026-09-09最新（candidate68）：既に選ばれた否定・継続を含む言葉の参照を、既存OPの参照方針とHRの原文全体＋「という言葉」で修復した。新しい意味選択・本人認定・source status変更・HR文法追加はない。同じ100件の1件で参照を修復し、他99件の全record／実planは同一。全nuclei・観察・可否理由は不変。direct100、73 GENERATED／27 UNAVAILABLE、Move／expression／binding各126を維持。華恋が全100件を全文確認しNOT_CLEAR。必須348件345 PASS／継承3 FAIL、ERROR／skip0。前回344件の全成否同一、新規4件全成功。最終System Context再生成は本記録時点未完で、PR37 current本文と同head Actionsを参照する。
 
 2026-09-08前回実装（証明済み否定過去報告の全角文末を引用に保持／candidate64）：既存Sentence Surfaceで、原fieldと本人の否定過去報告が証明済みの単独spanだけ、末尾の全角ピリオドを引用内に保持した。元入力・根拠・意味計画・Gateは変更しない。公開合成57件は8件の本文成立／49件全record同一、全57件の根拠とplanは不変。必須332件329 PASS／継承3 FAIL、前回329全成否一致、新規3成功。旧I5等11成功。canonical100は全record・実plan不変、73/27・124責務を維持し、華恋が全100件全文確認してNOT_CLEAR。V2の17件6 PASS／11 FAIL・全42件213候補も同一。共有Ledger案は他の未修復な誤読まで本文を返したため不採用。中心感情の未選択、再掲・定型締め、対象外の報告scopeと他の全角文末は残件。GitHub正本・定例ZIPなしを継続。
 
@@ -7545,3 +7545,22 @@ canonical100は原入力・順序・軸・分母を保ってdirectと外側か�
 開始時System Contextのdoctor→prepareはlocal固定toolchain不一致で失敗。同じ開始refの既存固定CIのdoctor34 PASS・actual prepare・verify-onlyをログで確認し、原典直接読取で継続した。開始時cacheのローカル取得・照合は成立しておらず、利用済みとはしない。最終商品refsをPR37既存profile／対応testへ同期し、固定CIでGit管理外cacheを再生成する。完了結果はPR37 current本文と同headのActionsに保存する。開始時の結果を最終refへ流用せず、Operator actual proofのREMOTE_PROOF_PENDINGを保持する。
 
 次は同じsource ownerから、未対応の中心感情と複数主題／共有関係の選択欠落を追う。旧witnessの無条件拡張、末尾感情一致だけの本人認定、同一関係への二重appraisal、125や124へのcount clampは採らない。9月9日途中確認・9月12日本文確認準備の目標と品質リスクを継承。全PR Draft/open/unmerged、disabled、automatic_progression=false。human PASS／ready／採用／merge／本番／問い／Layer3は未成立。GitHubをコード・設計・引継ぎの正本とし、private本文・個別case・digest・locatorの公開0、定例ZIPなし。
+
+### 2026-09-09 current — candidate68 継続中の言葉への参照修復
+
+既に選ばれている継続中の負担が、フォローで一般的な「置かれた言葉」の参照へ戻る箇所を、既存OPの参照方針で修正した。元の背景・継続・述語を含む原文全体を、既存HRの「という言葉」で受け取る。新しい意味選択・感情の本人認定・source status変更・HR文法追加はない。人物への帰属が原文にあれば全文のまま保持する。既存actor判定の限界は未解決。
+
+- 同じcanonical100を固定sourceで実行。direct100、73 GENERATED／27 UNAVAILABLE、必要Move／expression／binding各126を維持。
+- 1件の参照を修復。他99件の全record／実planは同一。全nuclei・観察・可否理由は不変。変更対象のselected inputはplan由来のinput_ref／grounding_refだけ再導出し、意味内容と責務は不変。
+- 華恋が全100件の全入力field・観察・受取・可否理由を全文確認。商品NOT_CLEAR。原文再掲・定型締め、他の中心感情や複数主題／共有関係の欠落は残件。
+- 必須348件345 PASS／継承3 FAIL、ERROR／skip0。前回344件の全成否同一、新規4件全成功。36ケース・post-hash96検査・集合後続診断も同一。歴史fixtureを変更せず、V2別17検査／42件213候補は今回未実行。
+- 固定Python3.12.13、46依存／wheel、2268実ファイルを照合。runtime変更は既存OPのみ。既存generic testとrunner current13定数を同期し、bridge126とrunner非current ASTを維持。
+- 検証source: local `5ab897fa980b43d3657f3a72924ddf5e7a364f48` / remote `ce109009dbdf9cb697e70c7f2e0b1a65d79c76a2`、whole tree `2d3080ea22d6573e65afa4e633f04f89b261c704` 同一。後続は結果資料だけ。
+
+開始時System Contextはdoctor→prepareでlocal toolchain不一致を記録し、同じ開始refのCI生成cacheを61入力・37出力・19partsまで再照合して原典と併用した。最終商品refsへPR37の既存profileと対応testを同期し、Git管理外cacheを再生成する。最終refの結果はPR37 current本文と同head Actionsに記録する。開始時証拠を変更後へ流用せず、Operator actual proofのREMOTE_PROOF_PENDINGを保持する。
+
+全体設計と全tracked file地図、最新weekly20260905、影響する本文と旧経路を確認。STRUCTURE_MAP_DELTA_NONE。国家システム・公開I5・API／DB／RN・Piece／Analysisの経路変更なし。Draft/open/unmerged、disabled、automatic_progression=false。human PASS／ready／採用／merge／本番／問い／Layer3は未成立。private本文・個別case・digest・locatorの公開0。
+
+既存の2026-09-05 selected subjective reception承認を継承する同じ未完unit。後続の品質分類によるplan再構築でも、元の短状態の語彙維持指定に基づく参照方針を保持する。原文の背景・否定・継続・他者への帰属を維持し、従来の否定形・連体形の具体参照も保持する。同じimmutable selected inputによるforward／回復／独立replay／厳格なGate・inverseを維持し、seal後の意味補充や新しい自己証明を追加しない。最大3 Moveと既存126責務を保持する。
+
+最終System Context再生成は本記録時点では未完。開始時の鮮度確認を変更後の証拠へ流用しない。最終商品refsに対応するPR37 current本文と同head Actionsを最終結果の参照先とする。candidate_ready=falseを維持し、過去candidate67までの実行結果と当時の未完記録は履歴として残す。
