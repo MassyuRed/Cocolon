@@ -23,7 +23,7 @@
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 - Stage 1 historical predecessor additional correction final body, not current: `ROUTE_A_ONLY / STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP / EARLY_ACTUAL_NOT_RUN`
 
-2026-09-09最新（candidate78）：既存OPの証明済みの本人の有限感情に限り、HRの原文＋「という言葉」を原文＋「こと」の目的語へ接続し、Gateの既存finite_clause_nominal照合へ厳密に接続した。canonical100の3件の受取だけが変わり、他97件の全recordと全100の入力・観察・意味核・選択入力・受取plan・可否理由は同一。133義務、direct100、73 GENERATED／27 UNAVAILABLEを維持。必須384件の単一full runは381 PASS／継承3 FAIL、前381件の全成否と後続診断同一、新規3件成功。rootが全100件を全文確認しNOT_CLEAR。長い復唱・定型末尾と中心感情／共有関係等の残件を継続。System Context未使用・原典直接確認、PR37不変更。再開点は末尾candidate78。
+2026-09-09最新（candidate79・強制切替から復旧）：原文の背景と並列状態を既存行動とともに保持するsourceを復元。保存済みcanonical100のroot全文確認と前回比較を完了し、受取1件変更・他99全record同一、全100の入力・観察・可否理由同一、73 GENERATED／27 UNAVAILABLE。必要Move／expression／binding各134、旧133義務すべて保持。必須388は384 PASS／4 FAIL（既存3＋bridge合計133固定との不一致1）。期待値不変更・全成功扱いなし。商品NOT_CLEAR、実出力再生成なし。再開点は末尾candidate79 recovery。System Context未使用・原典直接確認、PR37不変更。
 
 2026-09-08前回実装（証明済み否定過去報告の全角文末を引用に保持／candidate64）：既存Sentence Surfaceで、原fieldと本人の否定過去報告が証明済みの単独spanだけ、末尾の全角ピリオドを引用内に保持した。元入力・根拠・意味計画・Gateは変更しない。公開合成57件は8件の本文成立／49件全record同一、全57件の根拠とplanは不変。必須332件329 PASS／継承3 FAIL、前回329全成否一致、新規3成功。旧I5等11成功。canonical100は全record・実plan不変、73/27・124責務を維持し、華恋が全100件全文確認してNOT_CLEAR。V2の17件6 PASS／11 FAIL・全42件213候補も同一。共有Ledger案は他の未修復な誤読まで本文を返したため不採用。中心感情の未選択、再掲・定型締め、対象外の報告scopeと他の全角文末は残件。GitHub正本・定例ZIPなしを継続。
 
@@ -2851,3 +2851,20 @@ Mash承認済み運用を継承する。System Contextは任意で今回は未�
 - 全100件生成・全文確認と全384検査のsourceはlocal `dbf655d56a01fd4224339cd0c4a06f7d23b91acb`／remote `a435ad8868393f90633f233932298c0203dca08a`、tree `33397a038ca59ffeca4013bb6d37940e4f41c358`同一。後続変更は既存引継ぎ3資料の結果反映だけ。商品実装変更後へ今回の結果を流用しない。
 
 次は現在選ばれた意味を保つ文章改善を継続する。中心感情・共有関係やother_explicit分類・help-seeking binding gapは原因を分けて追う。同family二行動の代表化・選択数拡張は、9月8日の感情／材料と既存行動を保持する限定例外に含まれず、引き続き未実装。既存承認の同じ未完unit、disabled／Draft／open／unmerged、candidate_ready=false、automatic_progression=false、NOT_CLEARを継続。System Context未使用・原典直接確認、PR37不変更。Product Read PASS・採用・ready・merge・本番・問い／Layer3は未成立。9月12日の本文確認準備の未達リスクを保持する。
+
+
+### 2026-09-09 current — candidate79 recovery（生成済み結果の復旧・検証失敗保持）
+
+強制セッション切替後、未公開だった固定sourceと生成済み実出力・raw回帰結果が残存していることを確認し、同じ未完unitを再開した。旧スクリーンショットの「最終検証を開始」と、実際に残る完了結果を分けて扱う。商品source、評価入力、検証条件は復旧中に変更せず、保存のための再生成・必須回帰の重複実行は行わなかった。
+
+既存OPの原field全域証明に、有限背景と二つの状態節を原文のまま保持する限定文法を接続した。継続時制は既存event/state・factの有限素材に限定。別fieldの完了した行動に含まれる願望を近接だけで現在の阻害された試みとみなしていた辺は、既存relation normalizerで端点・出典を残す未確定関係へ修復した。型・主体・時制を再分類せず、既存選択条件・Human Reception・独立Gate／inverseを継承する。9月8日の感情／材料と既存行動をともに保持する限定例外に接続し、新owner／schema／経路／選択枠は追加しない。STRUCTURE_MAP_DELTA_NONE。公開I5・国家保存／非同期処理／read-side・API／DB／RN・Piece／Analysisとの接続変更はない。
+
+- 保存済みcanonical100の原入力全field・観察・受取・生成可否と理由をrootが全件本文として確認し、NOT_CLEAR。受取1件に背景・疲れ・苛立ちが戻り、既存の行動も保持。他99件の全recordと全100件の入力・観察・可否理由は同一。変更例はUNAVAILABLEの診断本文であり提供可否の改善ではない。原文全体の長い再掲、言葉wrapper、定型的な締め、中心感情・感謝・共有関係・複数主題の不足は残る。
+- direct100、73 GENERATED／27 UNAVAILABLE。必要Move／expression／binding各134で、旧133義務はすべて保持した。新しい原文証明属性と受取義務に伴って意味核の証明属性・selected input・受取planが変わるため、それらまで不変とは主張しない。
+- 修正途中の8検査は6 PASS／2 FAIL、修正後の関連9検査は9 PASS。初期失敗と行動だけの試作出力も保持。最終固定sourceの必須388検査のraw結果は384 PASS／4 FAIL、ERROR／skip0。新規4検査は全PASS。前384検査のうち383成否は同一で、1件が新規FAIL。既存3 FAILは観察freeze hash2件と歴史source receipt1件。追加FAILは `test_all100_inherit_premeaning_and_reach_selected_final_surface_gate` の合計134と固定133の不一致。全100 loop後の件数assertで止まり、その後のassertまでこのtestで成功したとは扱わない。保存済みの後続診断結果は前回と同一。
+- 必要責務を旧数へ丸めず、テストの固定期待値も変更していない。合計整合の残件を未解決として保持し、成功へのoverlay・失敗の基準化・期待値の追随変更を行わない。前candidate78の384検査の結果は退行判定基準として保存し、candidate79の4失敗を解消済み基準へ昇格しない。別V2の17検査／42件213候補は今回再実行していない。
+- 実行source local `f195d1a967af6a2ccf91f8858d06155b43cedbe1`／remote `b65436162c369dc4324fb516fc14558e432f03e5`、tree `c9d1899e837d8825e7d362997b6cbae7fbf75f94`は同一。GitHub pluginでsource4pathを反映し、全変更blobとDraft headをfresh確認した。以後は既存02／06／API handoffの結果記載だけで、商品コード・テスト・入力・runnerの変更なし。
+
+再開点：保存済みcandidate79の出力・回帰・全文確認を引き継ぎ、133固定と承認済み必要義務増加の整合残件を保持しながら、既存範囲の入力固有フォロー改善を続ける。保護された期待値の変更が必要な場合は変更対象と意味を明示して扱い、単に成功させるためには変更しない。同family二行動の選択数拡張は限定例外外で未実装。商品NOT_CLEAR、disabled、Draft/open/unmerged、candidate_ready=false、automatic_progression=false。Product Read PASS・採用・ready・merge・本番・問い／Layer3は未成立。
+
+添付の9月9日運用変更を継承：System Context任意利用（今回は未使用・原典直接確認、PR37不変更）、同一source・入力・条件の結果を再利用、変更のある既存PRだけ反映、公開可能な再開情報はGitHub、private本文は既存非公開作業記録へ保持、定例JSON／ZIP配布なし。今回の復旧・保存を文章品質全体の完了とは扱わない。
