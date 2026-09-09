@@ -23,7 +23,7 @@
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 - Stage 1 historical predecessor additional correction final body, not current: `ROUTE_A_ONLY / STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP / EARLY_ACTUAL_NOT_RUN`
 
-2026-09-09最新（candidate79・強制切替から復旧）：原文の背景と並列状態を既存行動とともに保持するsourceを復元。保存済みcanonical100のroot全文確認と前回比較を完了し、受取1件変更・他99全record同一、全100の入力・観察・可否理由同一、73 GENERATED／27 UNAVAILABLE。必要Move／expression／binding各134、旧133義務すべて保持。必須388は384 PASS／4 FAIL（既存3＋bridge合計133固定との不一致1）。期待値不変更・全成功扱いなし。商品NOT_CLEAR、実出力再生成なし。再開点は末尾candidate79 recovery。System Context未使用・原典直接確認、PR37不変更。
+2026-09-09最新（candidate80）：未来行動に対する目的語の言い直しを4件で削減。全100件の意味・必要責務・観測・可否は維持、華恋全文確認済み。必須391は385成功／6失敗（前回4＋旧句依存2）、既存期待値不変更・品質NOT_CLEAR。詳細と再開点は末尾candidate80。System Context未使用・原典直接確認、PR37不変更。
 
 2026-09-08前回実装（証明済み否定過去報告の全角文末を引用に保持／candidate64）：既存Sentence Surfaceで、原fieldと本人の否定過去報告が証明済みの単独spanだけ、末尾の全角ピリオドを引用内に保持した。元入力・根拠・意味計画・Gateは変更しない。公開合成57件は8件の本文成立／49件全record同一、全57件の根拠とplanは不変。必須332件329 PASS／継承3 FAIL、前回329全成否一致、新規3成功。旧I5等11成功。canonical100は全record・実plan不変、73/27・124責務を維持し、華恋が全100件全文確認してNOT_CLEAR。V2の17件6 PASS／11 FAIL・全42件213候補も同一。共有Ledger案は他の未修復な誤読まで本文を返したため不採用。中心感情の未選択、再掲・定型締め、対象外の報告scopeと他の全角文末は残件。GitHub正本・定例ZIPなしを継続。
 
@@ -2868,3 +2868,16 @@ Mash承認済み運用を継承する。System Contextは任意で今回は未�
 再開点：保存済みcandidate79の出力・回帰・全文確認を引き継ぎ、133固定と承認済み必要義務増加の整合残件を保持しながら、既存範囲の入力固有フォロー改善を続ける。保護された期待値の変更が必要な場合は変更対象と意味を明示して扱い、単に成功させるためには変更しない。同family二行動の選択数拡張は限定例外外で未実装。商品NOT_CLEAR、disabled、Draft/open/unmerged、candidate_ready=false、automatic_progression=false。Product Read PASS・採用・ready・merge・本番・問い／Layer3は未成立。
 
 添付の9月9日運用変更を継承：System Context任意利用（今回は未使用・原典直接確認、PR37不変更）、同一source・入力・条件の結果を再利用、変更のある既存PRだけ反映、公開可能な再開情報はGitHub、private本文は既存非公開作業記録へ保持、定例JSON／ZIP配布なし。今回の復旧・保存を文章品質全体の完了とは扱わない。
+
+
+### 2026-09-09 current — candidate80（未来行動の目的語重複削減・検証未達）
+
+既存final選択経路が原文証明した未来行動を、sole HRでattentionとhonorの同じ目的語として受け取る形へ接続した。「に目が留まり、それを」を「を見過ごさず、」とし、「大切に思う」は保持。full・非代名詞参照・単一の完全対象・関係/contextなし・本人のintention・未実行・selected MATERIAL_WEIGHT / RECEIVE_AS_MATERIALに限定する。OP・意味選択・Gate/body parserは変更せず、原文・予定・否定・数量・時点・必要Moveとfollow要素を継承する。未来boolそのものを証明とせず既存OPのfinal source証明条件を継承。STRUCTURE_MAP_DELTA_NONE。国家／公開I5／API／DB／RN／Piece／Analysis経路は不変更。
+
+同じ100件を最終固定sourceから生成し、華恋が全件の原入力全field・観測・フォロー・生成可否と理由を全文確認。フォロー4件の目的語再導入を除去し、他96件は全record同一。全100件でnuclei、selected入力、reception plan、観測、可否と理由は同一。direct100、73 GENERATED／27 UNAVAILABLE、必要Move／expression／binding各134。既存内容の削減・意味の読み替えは確認されていない。一方、長い復唱・説明語・定型締め、中心感情・複数主題・共有関係の欠落は残るためNOT_CLEAR。変更4件も商品全体の完成を意味しない。
+
+関連9検査は7 PASS／2 FAIL、新規3は全PASS。初回は新規検査が別actの名詞的予定までattentionと仮定して失敗したため、その実際のprotect選択を保持する検査へ訂正し、初回rawも保持した。最終必須391検査は385 PASS／6 FAIL、ERROR／skip0。前候補の4失敗（歴史的観測hash2、dated receipt1、bridge合計134対固定133の不一致1）に、旧句の固定期待1と旧句を改変対象として見つけられない検査1が加わる。後者はreception_tamper_source_missingで改変本文の作成時点に停止しており、意味検査の通過を示さない。本修正のattention／honor／source改変は新規検査で拒否した。既存期待値・入力・fixtureの変更、失敗の成功化、追加失敗の基準化はしない。後続の既存診断は前回と同一。V2別17検査／42件213候補は今回未再実行。
+
+再開点はこの固定sourceと保存済み100件。文言依存2失敗と件数不一致1を未解決のまま保持し、期待値変更で通過させない。中心感情欠落の次の原因は、否定評価・不確定表現を原field全体から証明するfinal OP処理と既存選択への接続。終端の不確定や冒頭の留保を確定factへ残さず、否定過去の非行動を実行済みへ変えず、原行動・unknown・最大3 Move・既存family／NORMAL／LIMITED閉包を維持する。HRで未選択内容を補わない。新しい管理装置やparallel selectorは追加しない。
+
+公開sourceは既存Draft PR3、結果と引継ぎは既存PR3／30、private実入力・実出力・初期失敗は従来の非公開作業記録に保持。実装・入力・条件が同一の結果を保存説明のために再生成せず、同じ原典と全体地図の不要な再読、System Contextの一式再生成、定例JSON／ZIP配布を省く運用を継続。System Context未使用・原典直接確認、PR37不変更。NOT_CLEAR・disabled・Draft/open/unmerged・candidate_ready=false・automatic_progression=false、Mash human PASS／ready／採用／merge／本番未成立。
