@@ -1,6 +1,6 @@
 # CMEE V1 Shared Kernel / Runtime Contracts 詳細設計
 
-> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabled実装・検証中で、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存handoffと本設計のQ1追補です。
+> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabledで意味・実本文一往復と必要回帰の確認済みで、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」です。
 
 
 - document id: `cocolon.cmee.v1.shared_kernel.detailed_design`
@@ -667,7 +667,7 @@ provider-required routeでproviderがmissing／invalidならroute変更せず、
 
 ### 15.4 One clarification and immutable refinement
 
-clarification requestはcanonical original `SourceEnvelope` lifecycle全体で最大exact1。発行時にbudgetを消費し、retry、regeneration、skip、expiry、ambiguous answerでも復活しない。answerはauthenticated caller-supplied private `SUPPLEMENTAL_ANSWER` SourceEnvelope exact1だけで、original bytes／digest／version、attachment set／admission、original graphをin-place変更しない。旧shared v1のtarget unknown exact1更新は旧契約内に保持する。Emlis thread v1は、問い焦点の補足・同threadで対象を特定できる本人の明示訂正・その依存先を、更新項目ごとにADD／REVISE／WITHDRAWで検証する。一問一焦点は発行条件であり、別箇所の明示訂正を捨てる条件ではない。非対象の主体・出来事・対象・関係・時点・unknownは保持する。意味checkpointを本文前に確定し、本文失敗で確定した撤回を戻さない。回答記録時刻と回答が指す時点を分離する。Analysisへこの更新規則を適用しない。
+旧shared版はoriginal source lifecycle全体で最大1回。Emlis thread版は一round一問、thread上限はFree／Plus 1回、Premium 3回。今回Q1はFree最大1回の純粋処理だけで、後続round・永続的枠管理は未実施。発行時にbudgetを消費し、retry、regeneration、skip、expiry、ambiguous answerでも復活しない。answerはauthenticated caller-supplied private `SUPPLEMENTAL_ANSWER` SourceEnvelope exact1だけで、original bytes／digest／version、attachment set／admission、original graphをin-place変更しない。旧shared v1のtarget unknown exact1更新は旧契約内に保持する。Emlis thread v1は、問い焦点の補足・同threadで対象を特定できる本人の明示訂正・その依存先を、更新項目ごとにADD／REVISE／WITHDRAWで検証する。一問一焦点は発行条件であり、別箇所の明示訂正を捨てる条件ではない。非対象の主体・出来事・対象・関係・時点・unknownは保持する。意味checkpointを本文前に確定し、本文失敗で確定した撤回を戻さない。回答記録時刻と回答が指す時点を分離する。Analysisへこの更新規則を適用しない。
 
 ### 15.5 Failure knowledgeとcurrent Cycle contractの分離
 

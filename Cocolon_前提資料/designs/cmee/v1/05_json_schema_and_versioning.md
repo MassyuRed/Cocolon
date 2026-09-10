@@ -1,6 +1,6 @@
 # CMEE V1 — JSON Schema / Identity / Versioning 詳細設計
 
-> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabled実装・検証中で、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存handoffと本設計のQ1追補です。
+> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabledで意味・実本文一往復と必要回帰の確認済みで、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」です。
 
 
 - document id: `cocolon.cmee.v1.schema_and_versioning.detailed_design`
@@ -2453,7 +2453,7 @@ Emlis provisional profileは、source／supplemental role分離、owner coverage
 
 providerなしrouteは`SOURCE_OR_USER_EVIDENCE_ONLY`だけで、visible claim全量がdirect EvidenceSpanへbindし、provider-derived meaning／relation／attachment exact0、required source coverage、unknown、polarity／modality／time、no-added-claimを満たす。provider-required failure後のsilent switchは禁止する。`FORMAL_DERIVED`にはnon-null formal admission、provider identity、evidence bindingを必須にする。
 
-clarificationはoriginal source lifecycle全体でexact1以下とし、authenticated supplemental answerをnew SourceEnvelope／new graph versionへ適用する。旧版はtarget unknown exact1、Emlis thread v1は焦点補足・同threadの特定可能な明示訂正・依存先を項目別に検証する。original bytes／digest／version、prior graph、prior artifact identityをin-place変更しない。
+旧shared版はoriginal source lifecycle全体で最大1回。Emlis thread版は一round一問、thread上限はFree／Plus 1回、Premium 3回。今回Q1はFree最大1回の純粋処理だけで、後続round・永続的枠管理は未実施。 authenticated supplemental answerをnew SourceEnvelope／new graph versionへ適用する。旧版はtarget unknown exact1、Emlis thread v1は焦点補足・同threadの特定可能な明示訂正・依存先を項目別に検証する。original bytes／digest／version、prior graph、prior artifact identityをin-place変更しない。
 
 ### 16.3 Current Cycle contract and schema separation
 

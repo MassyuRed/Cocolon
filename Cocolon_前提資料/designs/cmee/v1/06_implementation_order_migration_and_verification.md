@@ -1,6 +1,6 @@
 # CMEE V1 — Implementation Order / Migration / Verification 詳細設計
 
-> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabled実装・検証中で、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存handoffと本設計のQ1追補です。
+> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabledで意味・実本文一往復と必要回帰の確認済みで、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」です。
 
 
 - document id: `cocolon.cmee.v1.implementation_migration_verification.detailed_design`
@@ -8,8 +8,8 @@
 - lifecycle: `CURRENT_PRODUCT_OWNER_NON_PASS / REALIZABLE_RECEPTION_EXPRESSION_WORK_STAGE1_ACTIVE`
 - absolute implementation rule: `BOUND_TO_PARENT_FINAL_DESIGN_SECTION_0_3`
 - current implementation state: `INHERITED_OWNER_CHAIN_IMPLEMENTED_NOT_ACCEPTED / IM10_NON_PASS`
-- current authorized implementation: `FRESH_MASH_LEVEL3_CMEE_STAGE1_SELECTED_SUBJECTIVE_RECEPTION_FORWARD_INVERSE_REQUEST_LOCAL_CONTRACT_20260905 / CONTINUE_APPROVED_SOURCE_AND_BODY_CORRECTION`
-- only admissible current lifecycle action: `SOURCE_GROUNDED_REALIZABLE_RECEPTION_EXPRESSION_TO_HUMAN_RECEPTION_BODY`
+- current authorized implementation: `MASH_EXPLICIT_EMLIS_Q1_THREAD_IMPLEMENTATION_20260910`
+- only admissible current lifecycle action: `Q1_FREE_PURE_THREAD_TO_ACTUAL_INITIAL_AND_REFINED_BODY`
 - Stage 1 language route: `ROUTE_A_PROVIDERLESS_EXISTING_OWNER_CHAIN / SOURCE_GROUNDED_REALIZABLE_RECEPTION_EXPRESSION_CONTRACT`
 - external generative AI / remote provider / body send: `PROHIBITED / 0 / 0`
 - retired provider investigation: `REMOVED_FROM_CURRENT_TREE_GIT_HISTORY_ONLY`
@@ -17,9 +17,9 @@
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 - Stage 1 downstream case-frame final design: `MASH_APPROVED_TYPED_CASE_FRAME_V2_WITH_SESSION_SAFE_ORDER_I00_I14`
 - Stage 1 upstream input-specific meaning final design: `FINAL_CANONICAL_IMPLEMENTATION_READY_SECTIONS_19_THROUGH_22`
-- Stage 1 current order owner: `THIS_FILE_SECTION_89_AND_LATEST_APPENDED_UNFINISHED_CHECKPOINT`
+- current order owner: `THIS_FILE_20260910_Q1_SECTION_AND_EXISTING_API_HANDOFF`
 
-2026-09-10最新（candidate91）：継続状態と予定までの時間を元行動と保持するsource証明を追加。1件の直接診断フォローの欠落を修正したが、対象の生成不可は未解消。他99件全record・全100件の観測と可否理由は同一。華恋が同じ100件全文確認、73 GENERATED／27 UNAVAILABLE、旧142責務を保持して各層143。必須438は432 PASS／既存6 FAIL、前回434の成否同一・追加4全PASS。復唱は長く、中心内容・複数主題／共有関係・定型締めは残りNOT_CLEAR。末尾candidate91から再開。System Context未使用・原典直接確認、PR37不変更。
+Q1開始前の履歴（2026-09-10 candidate91）：継続状態と予定までの時間を元行動と保持するsource証明を追加。1件の直接診断フォローの欠落を修正したが、対象の生成不可は未解消。他99件全record・全100件の観測と可否理由は同一。華恋が同じ100件全文確認、73 GENERATED／27 UNAVAILABLE、旧142責務を保持して各層143。必須438は432 PASS／既存6 FAIL、前回434の成否同一・追加4全PASS。復唱は長く、中心内容・複数主題／共有関係・定型締めは残りNOT_CLEAR。この段落はQ1開始前baselineの記録。現在はQ1節とAPI既存handoffから再開。System Context未使用・原典直接確認、PR37不変更。
 
 2026-09-08前回実装（証明済み否定過去報告の全角文末を引用に保持／candidate64）：既存Sentence Surfaceで、原fieldと本人の否定過去報告が証明済みの単独spanだけ、末尾の全角ピリオドを引用内に保持した。元入力・根拠・意味計画・Gateは変更しない。公開合成57件は8件の本文成立／49件全record同一、全57件の根拠とplanは不変。必須332件329 PASS／継承3 FAIL、前回329全成否一致、新規3成功。旧I5等11成功。canonical100は全record・実plan不変、73/27・124責務を維持し、華恋が全100件全文確認してNOT_CLEAR。V2の17件6 PASS／11 FAIL・全42件213候補も同一。共有Ledger案は他の未修復な誤読まで本文を返したため不採用。中心感情の未選択、再掲・定型締め、対象外の報告scopeと他の全角文末は残件。GitHub正本・定例ZIPなしを継続。
 
@@ -27,7 +27,7 @@
 
 ---
 
-Current additive execution routing ownerは本file §89と末尾の最新未完了checkpointである。Emlis input-specific meaning implementationについて、§0–§86は設計・実装・失敗・旧receipt・IM10 verdictの履歴として保持し、current owner／lifecycle判定では§89と末尾の最新未完了checkpointを優先する。final canonical §§19–§22は実装済み責務のdesign authorityとして保持し、旧additional-correction body §13.1–§13.13はdownstream／historical contextであってcurrent entrypointではない。
+Current execution routing ownerは本fileの「2026-09-10 current — Q1開始と再開順」とAPI既存handoffである。以下の§89への順序参照はQ1開始前の履歴として保持する。Emlis input-specific meaning implementationについて、§0–§86は設計・実装・失敗・旧receipt・IM10 verdictの履歴として保持し、current owner／lifecycle判定では本書Q1節とAPI既存handoffを優先する。final canonical §§19–§22は実装済み責務のdesign authorityとして保持し、旧additional-correction body §13.1–§13.13はdownstream／historical contextであってcurrent entrypointではない。
 
 ## 0. Current conclusion
 
@@ -7904,3 +7904,10 @@ MashのQuestion System Technical Design v1.1／Q1実装指示が現在の開発�
 4. Q4：同じ一連の実本文を含むMashの商品確認と公開判断。機械PASS・華恋の確認・Draft保存で代替しない。
 
 Q1のschema・実装責任は02のQ1節、05のthread v1 profile、構造図00／01／04、mashos-api既存handoffへ同期する。本文・個別case・private digest／locatorは公開GitHubへ保存しない。最終コードの検証記録と既存失敗の差分はAPI handoffに保持する。
+
+
+### Q1最終検証（2026-09-10）
+
+Q1のFree相当process-local一往復を実装・検証。初回本文→一問→独立回答source→意味checkpoint→回答後本文が共通作者を通る。追加53件PASS、主要既存442件は436 PASS／既存6 FAIL、旧契約194件は123 PASS／46 FAIL／23 ERROR／2 SKIPでcandidate91 baselineと全成否一致。単独100件は73 GENERATED／27 UNAVAILABLEで全record一致、華恋が全100件の入力・実本文・理由を読了。商品NOT_CLEAR、Q2以降未実施、未公開。
+
+固定sourceはmashos-api PR #3の `74b614a8164b43e8aabcf686aec86282bfbbf8ad`。詳細・既存失敗の内訳・Q2への再開点は既存API handoffの末尾Q1節を使う。Q1共有ownerの固定test snapshotは旧IM03 receiptを保持した検証用で、商品証明・新しい承認ownerではない。

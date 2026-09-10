@@ -1,10 +1,10 @@
 # CMEE V1 詳細設計 — Read First
 
-> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabled実装・検証中で、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存handoffと本設計のQ1追補です。
+> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabledで意味・実本文一往復と必要回帰の確認済みで、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」です。
 
 
 - document id: `cocolon.cmee.v1.detailed_design.read_first`
-- revision date: `2026-09-04 JST`
+- revision date: `2026-09-10 JST`
 - Step 10 final document id: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2`
 - Step 10 design identity: `CMEE_THREE_CORE_INTEGRATED_DESIGN_20260821`
 - Step 10 Pro review: `CMEE_STEP10_PRO_SINGLE_PRODUCT_ROUTE_REVIEW_20260821 / CONSUMED_EXACTLY_ONCE`
@@ -29,14 +29,14 @@
 - Stage 1 additional correction Pro final confirmation: `PASS / BLOCKER 0 / MAJOR 0 / MINOR 0`
 - Stage 1 additional correction placement: `HISTORICAL_PREDECESSOR_INTEGRATION_SOURCE`
 - duplicate parallel technical canonical design files: `0`
-- current authorized next implementation: `FRESH_MASH_LEVEL3_CMEE_WORK_STAGE1_REALIZABLE_RECEPTION_EXPRESSION_CANONICAL_INTEGRATION_AND_HUMAN_RECEPTION_BODY_CLOSURE_20260904`
+- current authorized implementation: `MASH_EXPLICIT_EMLIS_Q1_THREAD_IMPLEMENTATION_20260910`
 - automatic progression: `false`
 
 ---
 
 ## 0. このsuiteの役割
 
-このdirectoryは、CMEEの上位技術設計を、実装者がsource、contract、module、failure、test、cutoverの順に追える詳細設計群である。Emlis入力固有意味決定のimplemented design authorityは既存final canonical §§19–§22、IM10 product verdict historyは本file §13、canonical 02 §35、canonical 06 §86が保持する。current Work Stage 1のcontract／実行routeは本file latest §14、canonical 02 latest §36、canonical 06 latest §87、final canonical latest §24が所有する。
+このdirectoryは、CMEEの上位技術設計を、実装者がsource、contract、module、failure、test、cutoverの順に追える詳細設計群である。Emlis入力固有意味決定のimplemented design authorityは既存final canonical §§19–§22、IM10 product verdict historyは本file §13、canonical 02 §35、canonical 06 §86が保持する。従来Work Stage 1のcontractは本file §14、canonical 02 §36、canonical 06 §87、final canonical §24に保持する。現在のQ1契約／再開先はAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」で、実装順は06の「2026-09-10 current — Q1開始と再開順」を使う。
 
 起点は旧G0–G10の補助経路ではなく、次の商品job exact3とする。
 

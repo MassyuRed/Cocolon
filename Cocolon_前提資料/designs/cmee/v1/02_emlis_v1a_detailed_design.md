@@ -1,6 +1,6 @@
 # CMEE V1-A — EmlisAI Observation Vertical 詳細設計
 
-> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabled実装・検証中で、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存handoffと本設計のQ1追補です。
+> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabledで意味・実本文一往復と必要回帰の確認済みで、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」です。
 
 
 - document id: `cocolon.cmee.v1a.emlis_observation.detailed_design`
@@ -17,7 +17,7 @@
 - private human Product Read: `CURRENT_EVALUATED_NON_PASS / HISTORICAL_PREDECESSOR_EVALUATED_FAIL_STOP`
 - candidate ready: `false`
 - production admission: `false`
-- current authorized next implementation: `FRESH_MASH_LEVEL3_CMEE_STAGE1_SELECTED_SUBJECTIVE_RECEPTION_FORWARD_INVERSE_REQUEST_LOCAL_CONTRACT_20260905 / CONTINUE_APPROVED_SOURCE_AND_BODY_CORRECTION`
+- current authorized implementation: `MASH_EXPLICIT_EMLIS_Q1_THREAD_IMPLEMENTATION_20260910`
 - automatic progression: `false`
 - Cycle001 effect: `0`
 - Stage 1 language route: `ROUTE_A_PROVIDERLESS / SOURCE_GROUNDED_REALIZABLE_RECEPTION_EXPRESSION / HUMAN_RECEPTION_SOLE_LAYER2_AUTHOR`
@@ -26,7 +26,7 @@
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 - Stage 1 historical predecessor additional correction final body, not current: `ROUTE_A_ONLY / STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP / EARLY_ACTUAL_NOT_RUN`
 
-2026-09-10最新（candidate91）：継続状態と予定までの時間を元行動と保持するsource証明を追加。1件の直接診断フォローの欠落を修正したが、対象の生成不可は未解消。他99件全record・全100件の観測と可否理由は同一。華恋が同じ100件全文確認、73 GENERATED／27 UNAVAILABLE、旧142責務を保持して各層143。必須438は432 PASS／既存6 FAIL、前回434の成否同一・追加4全PASS。復唱は長く、中心内容・複数主題／共有関係・定型締めは残りNOT_CLEAR。末尾candidate91から再開。System Context未使用・原典直接確認、PR37不変更。
+Q1開始前の履歴（2026-09-10 candidate91）：継続状態と予定までの時間を元行動と保持するsource証明を追加。1件の直接診断フォローの欠落を修正したが、対象の生成不可は未解消。他99件全record・全100件の観測と可否理由は同一。華恋が同じ100件全文確認、73 GENERATED／27 UNAVAILABLE、旧142責務を保持して各層143。必須438は432 PASS／既存6 FAIL、前回434の成否同一・追加4全PASS。復唱は長く、中心内容・複数主題／共有関係・定型締めは残りNOT_CLEAR。この段落はQ1開始前baselineの記録。現在はQ1節とAPI既存handoffから再開。System Context未使用・原典直接確認、PR37不変更。
 
 2026-09-08前回実装（証明済み否定過去報告の全角文末を引用に保持／candidate64）：既存Sentence Surfaceで、原fieldと本人の否定過去報告が証明済みの単独spanだけ、末尾の全角ピリオドを引用内に保持した。元入力・根拠・意味計画・Gateは変更しない。公開合成57件は8件の本文成立／49件全record同一、全57件の根拠とplanは不変。必須332件329 PASS／継承3 FAIL、前回329全成否一致、新規3成功。旧I5等11成功。canonical100は全record・実plan不変、73/27・124責務を維持し、華恋が全100件全文確認してNOT_CLEAR。V2の17件6 PASS／11 FAIL・全42件213候補も同一。共有Ledger案は他の未修復な誤読まで本文を返したため不採用。中心感情の未選択、再掲・定型締め、対象外の報告scopeと他の全角文末は残件。GitHub正本・定例ZIPなしを継続。
 
@@ -52,7 +52,7 @@ current input
 
 ### 0.1 Current actual before baseline — body-free
 
-[mashos-api Draft PR #3](https://github.com/MassyuRed/mashos-api/pull/3)には、input-specific meaning、meaning projection validation、Grounded Observation Plan、Grounded Sentence Plan／sentence realizer、Human Reception／reception realizer、final-body-only inverse／Gateを既存owner chainで接続したoffline disabled verticalが実在する。current headは`4e8d397843c0381bc94379b71665cf71b80d7d1b`で、compositionはfinal surfaceを所有しない。
+[mashos-api Draft PR #3](https://github.com/MassyuRed/mashos-api/pull/3)には、input-specific meaning、meaning projection validation、Grounded Observation Plan、Grounded Sentence Plan／sentence realizer、Human Reception／reception realizer、final-body-only inverse／Gateを既存owner chainで接続したoffline disabled verticalが実在する。このIM10前baselineのheadは`4e8d397843c0381bc94379b71665cf71b80d7d1b`で、compositionはfinal surfaceを所有しない。
 
 canonical100はdirect active final surface 100/100、outer engineはgenerated-disabled 68／有限fail-closed 32である。active final-language identityはpayload exact18、product causal source owner exact9へ更新した。全100件でproduction effect 0、candidate ready false、Product Read eligible false、automatic progression falseを維持する。これはIM10実施前のtechnical baselineであり、current private human Product Readはlatest §35の`IM10=NON_PASS`を優先する。過去candidateの`EVALUATED_FAIL_STOP`はhistorical predecessor verdictとしてだけ保持する。
 
@@ -259,6 +259,8 @@ self_denial_boundary:
 graphにpersonality、hidden cause、diagnosis、future guaranteeを追加しない。
 
 ## 7. Sufficiency decision
+
+Emlis thread v1では `body_sufficiency=SUFFICIENT|LIMITED` と `question_decision=ASK|END|BLOCKED` を独立に判定する。本文成立と問い要否を相互変換しない。本文が十分でも本人意味の重要な不足があれば一問を選べる。以下のcombined decisionは旧shared版の履歴契約であり、thread版へ転用しない。safetyは既存の別ownerへ渡す。
 
 decision inputs:
 
@@ -635,13 +637,13 @@ Vertical 1 — Layer 1／2:
 
 Vertical 2 — question／refined Layer 1／2:
   Q1: grounded initial Layer 1／2 + material one-question target
-  -> pure question selection (no issuance write)
-  -> Q2: plan budget + explicit continue / atomic issuance
-  -> question exact1
-  -> supplemental answer
-  -> cumulative source prefix
-  -> refined Layer 1／2
-  -> sequential lifecycle Product Read
+  -> pure question selection (no issuance write), question exact1
+  -> independent supplemental answer source
+  -> cumulative source prefix + validated meaning checkpoint
+  -> refined Layer 1／2 through shared author and inverse gate
+  Q2: persist the Q1 lifecycle, budget and atomic issuance, API / RN
+  Q3: plan differences, owned history and later rounds
+  Q4: sequential lifecycle Product Read / release decision
 
 Vertical 3 — Layer 3:
   accepted Layer 1／2 quality
@@ -1512,12 +1514,14 @@ current mashos-api head `4e8d397843c0381bc94379b71665cf71b80d7d1b`のactive disa
 1. `ROUND0_FOLLOW_PRIMARY_VISIBLE_RESPONSE_CORRECTION`: current actual callerからLayer 1／2 final bodyまでを修正し、同じ代表入力のbefore／afterでactual visible qualityを非0改善する。
 2. `KAREN_BODY_FULL_PRE_SCREEN`: 華恋がprivate本文を全件読み、復唱、近い言い換え、label置換、少数template、generic follow、Layer 1／2同義反復、不自然な日本語、深さ不足が一つでも残る間はMashへ提示せず、同じproduct-causal correctionへ戻る。
 3. `MASH_ROUND0_PRODUCT_READ`: actual before／after本文をMashへ提示する。Mashの明示PASSだけがRound 0商品通過であり、machine GREEN、華恋pre-screenまたはGitHub反映で代替しない。
-4. `FREE_ONE_QUESTION_END_TO_END`（2026-09-10更新）: Q1開始にRound 0 PASSを要求しない。MashのQ1開始指示に基づき純粋処理と実本文一往復を先に成立させ、Q2で保存・API・RNを接続する。重要unknownがある場合だけ問いexact1を返し、supplemental answerをoriginal inputと別の`USER_OWNED_SOURCE`として保存し、その根拠だけでLayer 1／2をrefineする。API／DB／Supabase／RNはcurrent contractとactual schemaを先に確認し、必要な既存経路だけを変更する。
+4. `FREE_ONE_QUESTION_END_TO_END`（2026-09-10更新）: Q1開始にRound 0 PASSを要求しない。MashのQ1開始指示に基づき純粋処理と実本文一往復を先に成立させ、Q2で保存・API・RNを接続する。本人意味の重要な不足がある場合だけ問いexact1を返し（構造unknownは必須にしない）、supplemental answerをoriginal inputと別の`USER_OWNED_SOURCE`として保存し、その根拠だけでLayer 1／2をrefineする。API／DB／Supabase／RNはcurrent contractとactual schemaを先に確認し、必要な既存経路だけを変更する。
 5. `PLUS_PREMIUM_LAYER3_AND_LATER_ROUNDS`: Layer 3、eligible history、Premium sequential roundsは、Free一問end-to-end後の別判断とする。
 
 一つのcommon-cause correctionをactual final bodyまで完了しても同種の引用化、定型化またはgeneric followが残る場合、同じ修正方針を名前だけ変えて自動反復しない。actual before／after、残存欠陥、到達したactive path、providerless current routeの能力限界を固定し、Mashのmethod／product判断へ`STOP`する。別設計、別helper、同じstrategyの再実装または問いstageへの先送りで回避しない。
 
 各実装work unitはactual user-visible outputの改善、必要なsource／test、GitHub checkpoint、fresh remote bytes／changed paths確認までを同じ単位で完了する。document、framework、schema、trace、test、internal reviewだけのunitを商品作業として挿入しない。既存mashos-api handoffをcontinuity ownerとして更新し、新しいhandoff file、parallel design、checker、score、authority familyを作らない。
+
+以下は2026-09-02当時の状態。Q1の実装指示・開始状態は2026-09-10の冒頭と末尾Q1節を優先し、NON_PASS／未公開の事実は継承する。
 
 ```text
 IM10 = NON_PASS
@@ -3067,7 +3071,7 @@ source checkpointは既存Draft PR3へ先に保存・取得照合済み。最終
 
 `prepare_emlis_update(request)`は本文生成前に意味checkpointを返します。更新項目は焦点へのADD、対象の明示されたREVISE／WITHDRAW、同じ出来事の回答時点の状態を扱います。一問一焦点は回答の訂正可能範囲を狭める規則ではありません。別箇所でも、原sourceの完全な節を一意に指定した訂正は項目別に扱います。同語だけで別主体・別出来事を書き換えません。
 
-対応文法は有限な本人の感情・受け取った見方、当時を指す明示訂正、完全な節の引用撤回／置換です。読めない構文・特定できない訂正対象・対象時点未確定・別件はunresolved_partsへ残し、推測で旧claimを無効化しません。明確な部分だけを採用した場合はPARTIALです。非対象の原nucleus、構造化感情、関係、unknownは保持します。
+対応文法は有限な本人の感情・受け取った見方、当時を指す明示訂正、完全な節の引用撤回／置換です。読めない構文・特定できない訂正対象・対象時点未確定・別件はunresolved_partsへ残し、推測で旧claimを無効化しません。明確な部分だけを採用した場合はPARTIALです。置換先の構文が未対応でも、対象が一意な明示撤回は保持し、未確定の置換部分だけをunresolvedにします。訂正文の旧表現は対象指定にのみ用い、新claimの極性・演算子・型を汚染させません。非対象の原nucleus、構造化感情、関係、unknownは保持します。
 
 `recorded_at`は受信時刻、`authored_at`は任意の申告時刻です。`about_time`はORIGINAL_OCCASION／ANSWER_TIME／EXPLICIT_OTHER_TIME／UNRESOLVEDを別軸に持ちます。当時の訂正と「今」の状態追加を区別し、後日受信しただけで時点を決めません。Q1は別時点・別件を元出来事へ結べない場合、未確定理由を保持し、相対表現を絶対日時へ推定変換しません。
 
@@ -3080,3 +3084,10 @@ source checkpointは既存Draft PR3へ先に保存・取得照合済み。最終
 RESOLVEDは更新の検証済みを表し、本文全体のSUFFICIENTではありません。本文が失敗しても確定した訂正・撤回checkpointは残り、旧本文を現在の解釈として返しません。NO_MATERIAL_UPDATEを評価できた場合だけUNCHANGED、部分採用はPARTIALLY_REFINED、未評価／読取未成立はANSWER_UNREFLECTED、意味更新後の本文失敗はMEANING_UPDATED_BODY_UNAVAILABLEとして区別します。
 
 Q1はprocess-localの実本文経路までです。意味保存確認、本文保存、再読込、認可、同時送信、timeout後の照合、取消／削除連鎖、画面はQ2、履歴・frame・後続roundはQ3へ残します。国家システムの入力計数や課金event、TodayQuestion、Piece、Analysisへ今回の回答を自動接続しません。
+
+
+### Q1最終検証（2026-09-10）
+
+Q1のFree相当process-local一往復を実装・検証。初回本文→一問→独立回答source→意味checkpoint→回答後本文が共通作者を通る。追加53件PASS、主要既存442件は436 PASS／既存6 FAIL、旧契約194件は123 PASS／46 FAIL／23 ERROR／2 SKIPでcandidate91 baselineと全成否一致。単独100件は73 GENERATED／27 UNAVAILABLEで全record一致、華恋が全100件の入力・実本文・理由を読了。商品NOT_CLEAR、Q2以降未実施、未公開。
+
+固定sourceはmashos-api PR #3の `74b614a8164b43e8aabcf686aec86282bfbbf8ad`。詳細・既存失敗の内訳・Q2への再開点は既存API handoffの末尾Q1節を使う。Q1共有ownerの固定test snapshotは旧IM03 receiptを保持した検証用で、商品証明・新しい承認ownerではない。

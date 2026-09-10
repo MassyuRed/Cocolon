@@ -1,7 +1,7 @@
 ---
 document_id: Cocolon_EmlisAI_longterm_roadmap_CURRENT
 canonical_path: Cocolon_前提資料/Cocolon_EmlisAI_longterm_roadmap_CURRENT.md
-revision_date: 2026-08-13
+revision_date: 2026-09-10
 observation_date: 2026-08-13 JST
 status: CURRENT_EFFECTIVE
 document_role: EmlisAI_LONG_TERM_PRODUCT_CURRENT_ALIGNMENT
@@ -15,7 +15,7 @@ automatic_progression: false
 
 # Cocolon / EmlisAI 長期開発ロードマップ CURRENT
 
-> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabled実装・検証中で、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存handoffと本設計のQ1追補です。
+> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabledで意味・実本文一往復と必要回帰の確認済みで、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」です。
 
 
 ## 0. この文書の結論
@@ -24,7 +24,9 @@ automatic_progression: false
 
 NLS v3 Step 11 Cycle001は、P3の「読まれた感・自然さ・non-template」を成立させるためのshared structural correction / cumulative product-quality routeです。**Cycle001の累積loopをP7と同一視しません。P7はcurrent Phaseではなく、将来Phaseかつcurrent completion `UNVERIFIED`です。**
 
-現在の確定状態は次です。
+2026-09-10のcurrent developmentは `Q1_FREE_PURE_THREAD_IMPLEMENTATION_AND_VALIDATION`、その後はQ2→Q3→Q4。current technical navigationはAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」である。P3未完了、商品NON_PASS、公開不可を継承する。
+
+以下は2026-08-13の履歴状態であり、古いCURRENT_*やGate順を今回の再開先にしない。
 
 ```text
 CURRENT_PRODUCT_WORKSTREAM = P3_PRODUCT_READ_FEEL_V1
@@ -55,7 +57,7 @@ Cycle001がacceptedになっても、P3完了を自動宣言しません。P3の
 ### 1.1 owner境界
 
 - 本書は、EmlisAIの変えない最終商品目的、P0〜P10 map、current product Phase、未完了条件を示す長期roadmap current ownerです。
-- current技術navigation ownerは `Cocolon_前提資料/08_cycle001_current_state.md` です。本書はGateの実行順、command、runtime authorityを上書きしません。
+- current技術navigation ownerはAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」です。`08_cycle001_current_state.md` は旧Cycle履歴の参照先です。本書はGateの実行順、command、runtime authorityを上書きしません。
 - `Cocolon_前提資料/07_latest_snapshot_diff.md` はappend-only evidence / historyです。current next actionのownerとして読みません。
 - source、test、fixture、runtime、API、DB、RN、問いシステム実装を承認する文書ではありません。
 - 本書単独では、Gate C以降、pytest、次Cycleを開始できません。
@@ -85,7 +87,7 @@ Git blob: d1c3cdd25e31f0a5a18df4217d0ecac9d243ab3c
 
 ---
 
-## 2. current observation identity
+## 2. 2026-08-13 historical observation identity
 
 ### 2.1 GitHub heads
 
@@ -109,7 +111,7 @@ Phase 2がoriginal exact3だけを追加した事実とそのbytesは保持し�
 | NLS v3 immutable design | `Cocolon_前提資料/historical_baselines/emlis_ai/Cocolon_EmlisAI_ModelFreeNaturalLanguageSurfaceV3_DetailedDesign_ImplementationOrder_20260714_Revised_Cycle.md` |
 | Cycle001 immutable plan | `Cocolon_前提資料/historical_baselines/emlis_ai/NLSv3_Step11_Cycle001_ExecutionAndClosurePlan_ReadOnly_20260723.md` |
 
-同名のappend-grown current Planはroute / evidence mapです。single current navigation ownerではありません。current nextを決めるときは必ず `08_cycle001_current_state.md` を読みます。
+同名のappend-grown current Planはroute / evidence mapです。single current navigation ownerではありません。当時のCycle再開先は `08_cycle001_current_state.md` でした。Q1のcurrent nextには本書冒頭のQ1参照先を使います。
 
 ---
 
@@ -508,6 +510,6 @@ invalidation and not an NLS v3 method STOP.
 
 ## 2026-09-10 開発順の更新
 
-> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabled実装・検証中で、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存handoffと本設計のQ1追補です。
+> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabledで意味・実本文一往復と必要回帰の確認済みで、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」です。
 
 P3の読まれた感・自然さの未達とP8の未完了を維持する。問いは生成失敗や読み落としを隠す手段にしない。一方、初回本文だけの全面PASSをQ1開始条件にせず、本人回答による意味更新までを同じ商品体験として実装・確認する。長期全体進捗をQ1のコード追加だけで増やさない。

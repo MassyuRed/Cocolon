@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_emlis_ai_current_structure
 title: "EmlisAI構造 — Current Structure"
-revision_date: "2026-09-08 JST"
+revision_date: "2026-09-10 JST"
 document_role: "EMLIS_AI_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -21,7 +21,7 @@ candidate_ready: false
 
 # EmlisAI構造 — Current Structure
 
-> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabled実装・検証中で、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存handoffと本設計のQ1追補です。
+> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabledで意味・実本文一往復と必要回帰の確認済みで、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」です。
 
 ## 2026-09-10 Q1現在地 — Emlisの一往復を共通本文経路へ接続
 
@@ -39,12 +39,16 @@ Q1は、今回の入力を読んだ初回観測とフォローを先に返し、
 
 国家システム・課金・入力件数・永続化への効果はQ1で0。runtimeはOFFLINE_CANDIDATEのまま、productionの`emlis_ai_reply_service`、公開I5、API、DB、RNへまだ配線しない。`TodayQuestion`は別機能のまま、Piece／Analysisのsource許可を拡張しない。回答は新しい原入力件数にも国家eventにも数えない。訂正済み解釈を過去artifactから復活させない下流利用規則は設計として保持し、Q2以降で実データ経路へ接続する。
 
+検証は `ai/tests/test_cmee_emlis_q1_thread.py` が新しい一往復と逆検証を担当する。`ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` は変更した共有9ownerの固定test snapshotであり、旧IM03 receipt・runnerを上書きせず、thread全体の品質証明にも使わない。
+
 全ファイル地図の既存各familyと旧経路の役割は保持する。新ownerは上表の7ファイルに限定し、共通Stage1候補・投影・HRの責任を継承する。保存・再読込・画面までのアプリ完成はQ2、履歴／プラン差はQ3、Mashの商品確認・公開はQ4であり、今回は成立したと扱わない。
 
 
 ## 0. Current conclusion
 
-2026-09-08現在（candidate66）：原field全域で取組の背景と本人の現在感情を証明し、既存の独立した必要行動とともに選択するcandidate66を実装・検証した。同じ100件のうち1件で気持ちの欠落を解消し、99件の全record／実planは不変。観察全100・可否／理由全100不変、direct100、73 GENERATED／27 UNAVAILABLE、Move／expression／binding各125（元の124責務をすべて保持）。華恋が全100件を全文確認しNOT_CLEAR。必須340件337 PASS／継承3 FAIL、前回336全成否一致、新規4全成功。 原fieldの背景複文証明を既存OP内で補完。選択責務の限定例外はcanonical02末尾が正本。既存owner／経路内の補修でSTRUCTURE_MAP_DELTA_NONE。国家／公開I5／API／DB／RN／Piece／Analysisへの経路追加はない。
+2026-09-10現在はQ1のFree相当thread callableを既存本文作者へ接続し、意味更新・訂正・時点と実本文を検証済み。追加7ownerとアプリ境界は冒頭Q1地図、詳細はAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」を使う。未公開・商品NON_PASSを維持する。
+
+Q1以前の履歴（2026-09-08 candidate66）：原field全域で取組の背景と本人の現在感情を証明し、既存の独立した必要行動とともに選択するcandidate66を実装・検証した。同じ100件のうち1件で気持ちの欠落を解消し、99件の全record／実planは不変。観察全100・可否／理由全100不変、direct100、73 GENERATED／27 UNAVAILABLE、Move／expression／binding各125（元の124責務をすべて保持）。華恋が全100件を全文確認しNOT_CLEAR。必須340件337 PASS／継承3 FAIL、前回336全成否一致、新規4全成功。 原fieldの背景複文証明を既存OP内で補完。選択責務の限定例外はcanonical02末尾が正本。既存owner／経路内の補修でSTRUCTURE_MAP_DELTA_NONE。国家／公開I5／API／DB／RN／Piece／Analysisへの経路追加はない。
 
 EmlisAIの安定した商品目的、production経路、NLS v3／Cycle001 WIP、問い構想、履歴はGitHubに存在する。
 ただし、それらは別々の資料と数百のfile familyへ分散しており、production I5経路とoffline Cycle001経路を一枚で区別できるcurrent mapがなかった。
