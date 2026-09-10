@@ -1,5 +1,8 @@
 # CMEE V1 — JSON Schema / Identity / Versioning 詳細設計
 
+> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabled実装・検証中で、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存handoffと本設計のQ1追補です。
+
+
 - document id: `cocolon.cmee.v1.schema_and_versioning.detailed_design`
 - revision date: `2026-08-17 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
@@ -1163,6 +1166,8 @@ plan／graph／semantic refsはversion-qualifiedにする。同一plan内のloca
 
 ### 9.1 `ClarificationRequest`
 
+以下のv1alpha1 JSONは旧shared／Analysisを含む既存契約として維持する。Emlis問い版の新しいcallableは本書「Emlis thread v1 profile」を使い、旧JSONのLIMITED強制やtarget_unknown_refを緩和して流用しない。
+
 問いの要否、prompt、source lifecycleはcore ownerが決める。EmlisとAnalysisでreason code / policyを共有しない。
 
 ```json
@@ -1203,6 +1208,8 @@ plan／graph／semantic refsはversion-qualifiedにする。同一plan内のloca
 `prompt_private`はbody-full artifactでpublic telemetryへ0。Analysis IFでbranch point / intent / constraint不足時はgraph / primary artifactを捏造せず、このrequestをouter outcomeへ返す。
 
 ### 9.2 `EngineOutcome`
+
+以下のv1alpha1 JSONは旧shared／Analysisを含む既存契約として維持する。Emlis問い版の新しいcallableは本書「Emlis thread v1 profile」を使い、旧JSONのLIMITED強制やtarget_unknown_refを緩和して流用しない。
 
 `GenerationArtifactBundle`はvisible artifactが存在する結果だけを表す。非生成結果をempty primary artifactで表現しない。
 
@@ -2442,11 +2449,11 @@ promotion = NOT_YET_PROMOTED_TO_CROSS_CORE_SHARED_FINAL
 
 ### 16.2 Retained Emlis semantic constraints
 
-Emlis provisional profileは、source／supplemental role分離、owner coverage、unknown／conflict、no-promotion、one clarification、immutable target-only refinement、no fallbackを保持できる。source coverage denominatorとproduct plan duty、positive trace、machine report、human Product Readを別ownerにする。
+Emlis provisional profileは、source／supplemental role分離、owner coverage、unknown／conflict、no-promotion、one clarification、immutable refinement（旧版target-only、thread版は検証済み更新集合）、no fallbackを保持できる。source coverage denominatorとproduct plan duty、positive trace、machine report、human Product Readを別ownerにする。
 
 providerなしrouteは`SOURCE_OR_USER_EVIDENCE_ONLY`だけで、visible claim全量がdirect EvidenceSpanへbindし、provider-derived meaning／relation／attachment exact0、required source coverage、unknown、polarity／modality／time、no-added-claimを満たす。provider-required failure後のsilent switchは禁止する。`FORMAL_DERIVED`にはnon-null formal admission、provider identity、evidence bindingを必須にする。
 
-clarificationはoriginal source lifecycle全体でexact1以下とし、authenticated supplemental answerをnew SourceEnvelope／new graph versionとしてtarget unknown exact1だけへ適用する。original bytes／digest／version、prior graph、prior artifact identityをin-place変更しない。
+clarificationはoriginal source lifecycle全体でexact1以下とし、authenticated supplemental answerをnew SourceEnvelope／new graph versionへ適用する。旧版はtarget unknown exact1、Emlis thread v1は焦点補足・同threadの特定可能な明示訂正・依存先を項目別に検証する。original bytes／digest／version、prior graph、prior artifact identityをin-place変更しない。
 
 ### 16.3 Current Cycle contract and schema separation
 
@@ -2482,3 +2489,29 @@ Mash approved `FRESH_MASH_LEVEL3_CMEE_STAGE1_SELECTED_SUBJECTIVE_RECEPTION_FORWA
 `SelectedSubjectiveReceptionDecisionV1` references the complete existing immutable `SubjectivePropositionV2` and its authoritative Move/meaning/binding lineage; `SelectedSubjectiveReceptionInputV1` holds the immutable decision tuple and projection/grounding preimage/seal for this request. These are Python-only, nonserializable input records in the existing Human Reception owner, not a new semantic schema, shared ontology, Emlis self-state, response payload or plan field. Existing `SubjectivePropositionV2`, `GroundedObservationPlan`, `GroundedReceptionMovePlan`, `GroundedSentencePlan` and public/private response versions are unchanged.
 
 The sole Stage 1 bridge exact-joins the authoritative upstream records before realization. Human Reception forward and replay receive the same `selected_subjective_input`; final-stage Gate/matcher call signatures carry that input only to replay. The parser remains body-only. Replay re-derives realization without consuming forward expression, surface, visible metadata or hidden source-attribute/grammar payload as an oracle. Missing, modified, foreign-request or mismatched branch/Move/claim/binding/focal-relation input fails closed. No case body, source reference, digest, locator or lexical material from the input is serialized to public response, diagnostics, logs or durable body-free records. Source/unknown/safety validation and completed-body exact comparison remain mandatory; approval does not confer all100 CLEAR, acceptance or readiness.
+
+## Emlis thread v1 profile（2026-09-10／Q1）
+
+このprofileはEmlis専用の新しい型契約です。§9の旧shared JSON、Analysis、単一source validatorは保持します。Q1でPythonのprocess-local dataclassを実装し、JSON API／DB wireはQ2で型・認可・永続性を含めて実装します。以下を旧JSON schema実装済みと読み替えません。
+
+| 型／版 | 必須の意味・参照 |
+|---|---|
+| `EmlisThreadInputV1` / `cocolon.cmee.emlis_thread.v1` | thread_id、original_source_ref、answers、admitted_history、current_round、capability_snapshot、question_control_context、prepared_meaning_checkpoint_ref。原sourceは親GenerationRequest所有。Freeはhistory空・answer最大1。 |
+| `SupplementalAnswerSource` / `cocolon.cmee.supplemental_answer.v1` | answer_id、thread_id、question_id、round_index、original_source_ref、answer_text_private、recorded_at、任意authored_at、SUPPLEMENTAL_ANSWER role。独立raw identity・UTF-8位置。 |
+| `QualifiedEvidenceRef` | thread_span_id、元local_source_span_id、envelope／field／scalar／UTF-8を持つ既存EvidenceRef。元根拠IDを変更しない。 |
+| `EmlisQuestionDecisionV1` | ASK／END／BLOCKED、target_ref／kind、supporting_evidence_refs、missing_dimension、affected_meaning_refs、affected_reception_refs、asked_target_refs、decision_reason。 |
+| `EmlisClarificationV1` / `cocolon.cmee.emlis_clarification.v1` | question／parent request／thread／original source、decision、prompt_private、skip_allowed=true、answer_limit=1、SUPPLEMENTAL_ANSWER role。 |
+| `AnswerTemporalBindingV1` | about_time、anchor_source_ref、time_expression_evidence_refs、任意relative_relation／resolved_interval／timezone_basis。受信時刻から推定しない。 |
+| `EmlisAnswerUpdateItemV1` | update_ref、binding_kind、target_meaning_refs、evidence_refs、temporal_binding、operation、changed_claim_refs、superseded_claim_refs、affected_dependency_refs。 |
+| `AnswerMeaningUpdateV1` | answer_source_ref、question_ref、prior_meaning_ref、updates、unresolved_parts、disposition、new_meaning_ref。 |
+| `EmlisMeaningCheckpointV1` / `cocolon.cmee.emlis_answer_meaning.v1` | checkpoint_id、source_prefix_ref、base_meaning_ref、answer_update、assessment_status、accepted_update_refs、inactive_claim_refs、unresolved_parts。 |
+| `EmlisThreadOutcomeV1` | status、body、question_decision、question、meaning_checkpoint、body_sufficiency、body_state、reason_codes。automatic_progression=false。 |
+| `EmlisThreadBodyArtifactV1` | 二節本文、source_prefix_ref、meaning_checkpoint_ref、qualified_evidence_refs、meaning／reception trace、body_status。private artifact。 |
+
+`binding_kind`はQUESTION_FOCUS／EXPLICIT_CORRECTION／SAME_OCCASION_CURRENT_STATE、`operation`はADD／REVISE／WITHDRAW、dispositionはMATERIAL_UPDATE／NO_MATERIAL_UPDATE／UNRESOLVED、assessment_statusはRESOLVED／PARTIAL／UNRESOLVEDです。問いの一焦点制限と、回答内の検証済み訂正集合を分けます。
+
+`QUESTION_PENDING`は有効な初回本文＋一問です。本文はSUFFICIENTでもLIMITEDでもよく、問いpendingを本文不十分へ強制変換しません。回答後はcheckpointのsource prefixを再導出し、clientが任意の意味graphを指定する入口を持ちません。更新確定後に本文が失敗した場合もcheckpointを返し、本文はnull、body_stateはMEANING_UPDATED_BODY_UNAVAILABLEです。未評価回答を無視した旧本文の再ラベルは禁止です。
+
+共通IM03の旧`ForegroundScopeRelationKind` exact4と`INTERPRETATION_MATRIX_EXACT16`は不変です。thread専用`EmlisThreadScopeRelationKind.ABOUT_TARGET`だけを、thread graphのevaluation_about_event・両endpoint・元／回答evidenceに結んでscopeへadmitします。carried viewも元graph／premeaningに照合します。共有候補を追加の因果・対比へ昇格しません。
+
+これはQ1の型・意味の登録です。質問数の永続的消費、checkpoint先行保存、UI状態、公開レスポンスのprivate除外はQ2のwire contractで閉じます。旧profileへの暗黙fallbackはありません。

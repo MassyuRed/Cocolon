@@ -15,6 +15,9 @@ automatic_progression: false
 
 # Cocolon / EmlisAI 長期開発ロードマップ CURRENT
 
+> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabled実装・検証中で、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存handoffと本設計のQ1追補です。
+
+
 ## 0. この文書の結論
 
 2026-08-13 JST時点のcurrent product workstreamは、**P3: Product Read Feel v1** です。
@@ -501,3 +504,10 @@ AUTOMATIC_PROGRESSION = FALSE
 
 This result is a product rejection on a valid frozen corpus, not a corpus
 invalidation and not an NLS v3 method STOP.
+
+
+## 2026-09-10 開発順の更新
+
+> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabled実装・検証中で、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存handoffと本設計のQ1追補です。
+
+P3の読まれた感・自然さの未達とP8の未完了を維持する。問いは生成失敗や読み落としを隠す手段にしない。一方、初回本文だけの全面PASSをQ1開始条件にせず、本人回答による意味更新までを同じ商品体験として実装・確認する。長期全体進捗をQ1のコード追加だけで増やさない。

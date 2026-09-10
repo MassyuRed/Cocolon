@@ -1,5 +1,8 @@
 # CMEE V1 — Implementation Order / Migration / Verification 詳細設計
 
+> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabled実装・検証中で、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存handoffと本設計のQ1追補です。
+
+
 - document id: `cocolon.cmee.v1.implementation_migration_verification.detailed_design`
 - revision date: `2026-09-10 JST`
 - lifecycle: `CURRENT_PRODUCT_OWNER_NON_PASS / REALIZABLE_RECEPTION_EXPRESSION_WORK_STAGE1_ACTIVE`
@@ -7890,3 +7893,14 @@ source checkpointは既存Draft PR3へ先に保存・取得照合済み。最終
 対象は引き続きUNAVAILABLEであり、新たに利用可能な応答の改善へ換算しない。診断本文の内容欠落は減ったが、その分原文再掲が長くなり、定型的な受取と締めは残る。商品NOT_CLEAR。混合した推量と確定否定は、節の仮投影だけでは選択へ届かないと確認したが未修正。未来行動の短い名詞化試作は未実行の見え方とvisible bindingを保てず不採用。自己評価、複数主題・共有関係、中心感情の欠落、抽象的な参照、旧mapping整合も残る。次は保存済み本文と今回の不採用診断を使い、節ごとの不確かさ／確定性と関係を保って選択へ届ける既存経路を検討する。自己評価を単なるuncertaintyへ置換せず、対象削除・原期待値変更で成功を作らない。
 
 固定sourceはlocal `ae987731fd1693da1006f42a0f3253c3ae5d9644`／remote `dca20b06b69e149ef724428ec7381846a8a51c08`、同一tree `5445f8172b4cab55f4336cdb85208e28ffffb751`。sourceは既存Draft PR3へ途中保存・取得照合済み。後続変更は結果資料だけで、この固定sourceの検証を再利用する。PR3／PR30と既存非公開継続記録へ結果・残件・再開点を保存し、保存後照合する。既存20260905／20260908承認と今回運用指示を継承、前提・作業規則、恒久incident全文、weekly20260905、全体設計／全file地図・影響sourceを確認。System Context未使用・原典直接確認、PR37不変更。disabled・Draft/open/unmerged・candidate_ready=false・automatic_progression=false、Mash human PASS／ready／採用／merge／本番なし。private本文・個別case・digest・locatorを公開GitHubへ置かず、定例JSON／ZIP配布も行わない。9月12日の本文確認準備目標と品質リスクを継承する。
+
+## 2026-09-10 current — Q1開始と再開順
+
+MashのQuestion System Technical Design v1.1／Q1実装指示が現在の開発順を更新した。candidate91と過去のNON_PASSはbaseline／未解決品質として継承する。次作業を単独応答の反復やRound 0 PASS待ちへ戻さない。
+
+1. Q1：Free固定sourceの初回本文、一点の問い、別source回答、純粋意味checkpoint、既存IM03／HR作者／Surface／逆検証による回答後本文。固定意味検査と同じ100件の回帰を確認する。
+2. Q2：checkpointを本文より先に保存し、発行回数、回答保存、認可、再試行／同時送信、API、RN、履歴再表示、削除を同じstateへ接続する。
+3. Q3：Plus／Premiumの適格履歴、暫定frame、逐次round。Free履歴境界を維持する。
+4. Q4：同じ一連の実本文を含むMashの商品確認と公開判断。機械PASS・華恋の確認・Draft保存で代替しない。
+
+Q1のschema・実装責任は02のQ1節、05のthread v1 profile、構造図00／01／04、mashos-api既存handoffへ同期する。本文・個別case・private digest／locatorは公開GitHubへ保存しない。最終コードの検証記録と既存失敗の差分はAPI handoffに保持する。

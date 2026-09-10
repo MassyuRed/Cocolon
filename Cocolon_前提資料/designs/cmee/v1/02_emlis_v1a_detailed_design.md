@@ -1,5 +1,8 @@
 # CMEE V1-A — EmlisAI Observation Vertical 詳細設計
 
+> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabled実装・検証中で、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存handoffと本設計のQ1追補です。
+
+
 - document id: `cocolon.cmee.v1a.emlis_observation.detailed_design`
 - revision date: `2026-09-10 JST`
 - lifecycle: `CURRENT_PRODUCT_OWNER_NON_PASS / REALIZABLE_RECEPTION_EXPRESSION_WORK_STAGE1_ACTIVE`
@@ -112,7 +115,7 @@ source role:
 | eligible owned history | `OWNED_HISTORY_RECORD` | eligibility成立時だけ |
 | question need decision | control lineage | no |
 | question text | artifact | no |
-| user answer | `SUPPLEMENTAL_ANSWER` | refined deltaだけ |
+| user answer | `SUPPLEMENTAL_ANSWER` | thread v1の検証済み更新項目（焦点補足・特定可能な明示訂正・依存先）だけ。原入力と別envelope・別field。 |
 | separate safety output | separate owner artifact | Emlis observationへ自動混入しない |
 
 ## 2. Stage, sufficiency, artifact separation
@@ -122,7 +125,10 @@ observation_stage:
   NORMAL | PRE_QUESTION | REFINED
 
 sufficiency_decision:
-  SUFFICIENT | LIMITED | ASK
+  SUFFICIENT | LIMITED
+
+question_decision (Emlis thread v1):
+  ASK | END | BLOCKED
 
 routing_disposition:
   OBSERVATION | SEPARATE_SAFETY | UNAVAILABLE
@@ -138,7 +144,7 @@ Question rule:
 - `ASK`でも先にpre-question observation + bound receptionを出す。
 - questionは不足している一点だけを対象にする。
 - skip / このまま観測 / 分からないを許す。
-- answerがなくてもlimited observationは有効である。
+- answerがなくても成立した初回observationは有効である。SUFFICIENT本文にも、本人の受け取った意味を深める適格な一問を付けられる。
 - answerはoriginalを置換せず、refined graph deltaへ追加する。
 - question decision、question option、skip decisionをsemantic sourceへしない。
 
@@ -223,7 +229,7 @@ independent admission closure:
 | Status | Visible authority |
 |---|---|
 | `FORMAL_CLOSED` | independent assessorがcurrent formal contractを全条件で満たすmatching setとしてsealした場合だけ |
-| `PROVISIONAL_ONLY` | providerless Route A選択後も単独ではvisible authorityにならない。source-explicitまたはtarget exact1のuser-owned supplemental evidenceに独立してgroundできないdisputed claimへ使用不可 |
+| `PROVISIONAL_ONLY` | providerless Route A選択後も単独ではvisible authorityにならない。source-explicitまたはthread版で項目別に検証したuser-owned supplemental evidenceに独立してgroundできないdisputed claimへ使用不可 |
 | `UNRESOLVED` | visible candidateなし |
 | `UNAVAILABLE` | meaning payloadなし |
 
@@ -498,13 +504,16 @@ CMEE_V1A_EMLIS_OBSERVATION_PRODUCTION_OPERATIONAL
 
 ## 17. Providerless Route A source-owner resolution contract
 
-Emlis resolverはrequired/active owner全件のexact-one dispositionを入力とし、provider proposalをmeaning authorityへしない。visible graphはsource-explicitまたはtarget-exact1 user supplemental evidenceだけで支える。
+Emlis resolverはrequired/active owner全件のexact-one dispositionを入力とし、provider proposalをmeaning authorityへしない。visible graphはsource-explicitまたはthread v1で検証済みのuser supplemental evidenceだけで支える。問いや旧生成本文は根拠にしない。
 
 ```text
 contract_id = cocolon.cmee.v1a.source_owner_resolution.v2
 GENERATED = all required visible duties source/user grounded; unresolved required duty 0
 LIMITED = meaningful source-bound observation >= 1 + bound Reception + explicit unknown
-QUESTION_PENDING = PRE_QUESTION LIMITED + material target unknown exact1
+QUESTION_PENDING (legacy) = PRE_QUESTION LIMITED + material target unknown exact1
+QUESTION_PENDING (emlis_thread.v1) = valid PRE_QUESTION body + one material meaning target
+body_sufficiency = SUFFICIENT | LIMITED
+question_decision = ASK | END | BLOCKED
 UNAVAILABLE = no meaningful safe visible claim
 max_clarification_requests_per_thread = FREE:1 | PLUS:1 | PREMIUM:3
 questions_per_round = 1
@@ -512,7 +521,7 @@ fallback = 0
 automatic_retry = 0
 ```
 
-question prompt/options/need、fixture、expected text、Product Readはsemantic sourceではない。answerはnew `SUPPLEMENTAL_ANSWER` SourceEnvelopeとしてnew graph version/deltaへbindし、original、prior answer、prior graph／artifactと非target unknownを不変に保つ。ambiguous answer、skip、stop、分からない、無回答では正常終了し、同一questionを再発行しない。Premiumの後続roundはrefined Layer 1／2後もmaterial unknownが残り、本人がexplicit continueを選び、budgetが残る場合だけである。V1-A offline contractであり、production interactive questionは後述Vertical 2の別承認まで0である。
+question prompt/options/need、fixture、expected text、Product Readはsemantic sourceではない。answerはnew `SUPPLEMENTAL_ANSWER` SourceEnvelopeとしてnew graph version/deltaへbindし、original、prior answer、prior graph／artifactは不変に保つ。thread版は明示訂正の対象と依存先だけを新しい意味版で無効化し、それ以外のunknown・意味を保持する。ambiguous answer、skip、stop、分からない、無回答では正常終了し、同一questionを再発行しない。Premiumの後続roundはrefined Layer 1／2後もmaterial unknownが残り、本人がexplicit continueを選び、budgetが残る場合だけである。V1-A offline contractであり、production interactive questionは後述Vertical 2の別承認まで0である。
 
 ## 18. Step 10 finalized Emlis product contract
 
@@ -625,8 +634,9 @@ Vertical 1 — Layer 1／2:
   -> body-full Product Read
 
 Vertical 2 — question／refined Layer 1／2:
-  accepted Layer 1／2 quality
-  -> plan budget + explicit continue
+  Q1: grounded initial Layer 1／2 + material one-question target
+  -> pure question selection (no issuance write)
+  -> Q2: plan budget + explicit continue / atomic issuance
   -> question exact1
   -> supplemental answer
   -> cumulative source prefix
@@ -1502,7 +1512,7 @@ current mashos-api head `4e8d397843c0381bc94379b71665cf71b80d7d1b`のactive disa
 1. `ROUND0_FOLLOW_PRIMARY_VISIBLE_RESPONSE_CORRECTION`: current actual callerからLayer 1／2 final bodyまでを修正し、同じ代表入力のbefore／afterでactual visible qualityを非0改善する。
 2. `KAREN_BODY_FULL_PRE_SCREEN`: 華恋がprivate本文を全件読み、復唱、近い言い換え、label置換、少数template、generic follow、Layer 1／2同義反復、不自然な日本語、深さ不足が一つでも残る間はMashへ提示せず、同じproduct-causal correctionへ戻る。
 3. `MASH_ROUND0_PRODUCT_READ`: actual before／after本文をMashへ提示する。Mashの明示PASSだけがRound 0商品通過であり、machine GREEN、華恋pre-screenまたはGitHub反映で代替しない。
-4. `FREE_ONE_QUESTION_END_TO_END`: Round 0 PASS後のfresh explicit startで、重要unknownがある場合だけ問いexact1を返し、supplemental answerをoriginal inputと別の`USER_OWNED_SOURCE`として保存し、その根拠だけでLayer 1／2をrefineする。API／DB／Supabase／RNはcurrent contractとactual schemaを先に確認し、必要な既存経路だけを変更する。
+4. `FREE_ONE_QUESTION_END_TO_END`（2026-09-10更新）: Q1開始にRound 0 PASSを要求しない。MashのQ1開始指示に基づき純粋処理と実本文一往復を先に成立させ、Q2で保存・API・RNを接続する。重要unknownがある場合だけ問いexact1を返し、supplemental answerをoriginal inputと別の`USER_OWNED_SOURCE`として保存し、その根拠だけでLayer 1／2をrefineする。API／DB／Supabase／RNはcurrent contractとactual schemaを先に確認し、必要な既存経路だけを変更する。
 5. `PLUS_PREMIUM_LAYER3_AND_LATER_ROUNDS`: Layer 3、eligible history、Premium sequential roundsは、Free一問end-to-end後の別判断とする。
 
 一つのcommon-cause correctionをactual final bodyまで完了しても同種の引用化、定型化またはgeneric followが残る場合、同じ修正方針を名前だけ変えて自動反復しない。actual before／after、残存欠陥、到達したactive path、providerless current routeの能力限界を固定し、Mashのmethod／product判断へ`STOP`する。別設計、別helper、同じstrategyの再実装または問いstageへの先送りで回避しない。
@@ -3036,3 +3046,37 @@ source checkpointは既存Draft PR3へ先に保存・取得照合済み。最終
 対象は引き続きUNAVAILABLEであり、新たに利用可能な応答の改善へ換算しない。診断本文の内容欠落は減ったが、その分原文再掲が長くなり、定型的な受取と締めは残る。商品NOT_CLEAR。混合した推量と確定否定は、節の仮投影だけでは選択へ届かないと確認したが未修正。未来行動の短い名詞化試作は未実行の見え方とvisible bindingを保てず不採用。自己評価、複数主題・共有関係、中心感情の欠落、抽象的な参照、旧mapping整合も残る。次は保存済み本文と今回の不採用診断を使い、節ごとの不確かさ／確定性と関係を保って選択へ届ける既存経路を検討する。自己評価を単なるuncertaintyへ置換せず、対象削除・原期待値変更で成功を作らない。
 
 固定sourceはlocal `ae987731fd1693da1006f42a0f3253c3ae5d9644`／remote `dca20b06b69e149ef724428ec7381846a8a51c08`、同一tree `5445f8172b4cab55f4336cdb85208e28ffffb751`。sourceは既存Draft PR3へ途中保存・取得照合済み。後続変更は結果資料だけで、この固定sourceの検証を再利用する。PR3／PR30と既存非公開継続記録へ結果・残件・再開点を保存し、保存後照合する。既存20260905／20260908承認と今回運用指示を継承、前提・作業規則、恒久incident全文、weekly20260905、全体設計／全file地図・影響sourceを確認。System Context未使用・原典直接確認、PR37不変更。disabled・Draft/open/unmerged・candidate_ready=false・automatic_progression=false、Mash human PASS／ready／採用／merge／本番なし。private本文・個別case・digest・locatorを公開GitHubへ置かず、定例JSON／ZIP配布も行わない。9月12日の本文確認準備目標と品質リスクを継承する。
+
+## 2026-09-10 Q1 — 初回本文・一問・本人回答・意味更新・再観測
+
+この節は添付Question System Technical Design v1.1とMashのQ1実装指示を既存Emlis正本へ取り込むものです。Q1の開始に単独応答100件／Round 0のProduct Read PASSは要求しません。初回本文の読み落とし、生成失敗、既存不合格を質問で隠すことは引き続き禁止します。正式な商品確認・公開条件は維持します。
+
+### Callableとsource
+
+`MeaningExperienceEngine.generate(GenerationRequest)`の旧single-input呼出しは保持します。`GenerationRequest.emlis_thread`を与えたEmlis／OBSERVE_AND_CLARIFY／OFFLINE_CANDIDATEだけがthread v1を使います。原入力は既存`current_input_bundle`が所有し、threadはその固定source参照を持ちます。Freeのadmitted_historyは空、補足回答は最大1件です。
+
+回答は`SupplementalAnswerSource`から独立したenvelopeを凍結します。`answer_text_private`の原UTF-8・scalar位置と、元sourceのenvelope・evidence IDを保存します。互換のsN番号はqualified resolverで元envelope・局所spanへ戻ります。原memoへの貼り足し、感情labelの複製、回答をCURRENT_INPUTに偽装すること、旧単一source validatorの緩和はしません。
+
+### 問いと本文の独立性
+
+成立したLayer 1／2を先に返し、本文充足度SUFFICIENT／LIMITEDとは別にASK／END／BLOCKEDを判定します。Q1で実装した候補は、source上の有限な受領イベントと同じ節に結びつく本人反応があり、本人の受け取った意味がまだ書かれていない場合の一焦点です。否定・仮定・他者の出来事・既に書かれた本人説明を問いの前提へ昇格しません。一般的な全質問種の完成ではありません。
+
+候補作成は純粋処理で、発行回数を変更しません。発行済み／既質問／終了の固定controlを受け取り、残枠がなければENDにします。発行時の回数消費と再試行の冪等性はQ2のサービスが所有します。question-onlyは返しません。promptは独立artifactで、二節の本文parserへ混ぜません。
+
+### 意味更新と時点
+
+`prepare_emlis_update(request)`は本文生成前に意味checkpointを返します。更新項目は焦点へのADD、対象の明示されたREVISE／WITHDRAW、同じ出来事の回答時点の状態を扱います。一問一焦点は回答の訂正可能範囲を狭める規則ではありません。別箇所でも、原sourceの完全な節を一意に指定した訂正は項目別に扱います。同語だけで別主体・別出来事を書き換えません。
+
+対応文法は有限な本人の感情・受け取った見方、当時を指す明示訂正、完全な節の引用撤回／置換です。読めない構文・特定できない訂正対象・対象時点未確定・別件はunresolved_partsへ残し、推測で旧claimを無効化しません。明確な部分だけを採用した場合はPARTIALです。非対象の原nucleus、構造化感情、関係、unknownは保持します。
+
+`recorded_at`は受信時刻、`authored_at`は任意の申告時刻です。`about_time`はORIGINAL_OCCASION／ANSWER_TIME／EXPLICIT_OTHER_TIME／UNRESOLVEDを別軸に持ちます。当時の訂正と「今」の状態追加を区別し、後日受信しただけで時点を決めません。Q1は別時点・別件を元出来事へ結べない場合、未確定理由を保持し、相対表現を絶対日時へ推定変換しません。
+
+### 同じ意味を共通本文ownerへ渡す
+
+更新からactive planを作り、旧claimとその依存relationを新しい意味版で無効化します。元source・過去plan／graph／artifactを変更しません。イベントについての本人回答は`evaluation_about_event`をsourceで結び、thread専用`ABOUT_TARGET`として既存IM03のscope・配置・意味候補へ渡します。旧scope exact4と解釈exact16は変更せず、対比・共存・因果へ読み替えません。対象関係は必須のObservation／Reception関係にも引き継ぎます。
+
+候補投影、postselection records、seal検証、選択済みReception入力、Human Reception唯一の作者、Sentence Surface、独立body inverseを再利用します。本文の逆検証は原sourceと回答source、現在有効な核・関係・時点から行い、生成済みexpressionを正解入力にしません。回答対象の除去・入替え・時点改変は拒否します。
+
+RESOLVEDは更新の検証済みを表し、本文全体のSUFFICIENTではありません。本文が失敗しても確定した訂正・撤回checkpointは残り、旧本文を現在の解釈として返しません。NO_MATERIAL_UPDATEを評価できた場合だけUNCHANGED、部分採用はPARTIALLY_REFINED、未評価／読取未成立はANSWER_UNREFLECTED、意味更新後の本文失敗はMEANING_UPDATED_BODY_UNAVAILABLEとして区別します。
+
+Q1はprocess-localの実本文経路までです。意味保存確認、本文保存、再読込、認可、同時送信、timeout後の照合、取消／削除連鎖、画面はQ2、履歴・frame・後続roundはQ3へ残します。国家システムの入力計数や課金event、TodayQuestion、Piece、Analysisへ今回の回答を自動接続しません。

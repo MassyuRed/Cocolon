@@ -1,5 +1,8 @@
 # CMEE V1 詳細設計 — Read First
 
+> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabled実装・検証中で、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存handoffと本設計のQ1追補です。
+
+
 - document id: `cocolon.cmee.v1.detailed_design.read_first`
 - revision date: `2026-09-04 JST`
 - Step 10 final document id: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2`
@@ -619,8 +622,8 @@ current商品契約では、Layer 2「Emlisから」がユーザーの主本文�
 
 1. Round 0のLayer 1／2について、actual user-visible本文の共通原因を修正し、「見えたこと」を必要最小限へ、「Emlisから」を入力固有で会話として流れる主本文へする。
 2. 華恋がbody-full private boundary内で代表入力の本文を読み、復唱、label置換、定型文、generic follow、同義反復、深さ不足が残る間はMashへ提示せず、同じproduct-causal unit内で修正する。
-3. actual before／afterをMashへ提示し、Round 0のProduct Readを受ける。Mashの明示PASSまではquestion実装へ進まない。
-4. Round 0 PASS後のfresh explicit startで、Freeの重要な問い0..1をend-to-endで実装する。original inputとは別sourceとしてsupplemental answerを保存し、その回答を根拠にLayer 1／2をrefineする。既存API／DB／Supabase／RN契約を確認し、必要な既存経路だけを変更する。
+3. 【2026-09-02当時の順序・2026-09-10に開発順を更新】actual before／afterによるMashの商品確認は保持する。Round 0のPASSはQ1開始条件としない。
+4. 【2026-09-10更新】Q1で初回本文・適格な一問・別source回答・意味checkpoint・回答後本文を同じ単位で実装し、Q2でFreeの保存・API・RNをend-to-end接続する。original inputとは別sourceとしてsupplemental answerを保存し、その回答を根拠にLayer 1／2をrefineする。既存API／DB／Supabase／RN契約を確認し、必要な既存経路だけを変更する。
 5. Plus／PremiumのLayer 3と複数roundは、Round 0およびFree一問end-to-endの後に別判断で扱う。
 
 これは新しい並列設計書を作るrouteではない。本段落は§13 historyとして保持し、current ownerはlatest §14、canonical 02 §36、06 §87、final canonical §24である。構造地図はactual owner change反映前のcurrent_structure 01 §19と04 §32である。各実装unitはactual visible outputの非0改善、必要なtest、GitHub checkpoint、fresh remote verificationまでを同じ単位で完了し、framework、document、test、internal proofだけで完了またはproduct creditとしない。

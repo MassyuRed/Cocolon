@@ -1,4 +1,7 @@
 # Cocolon Meaning Experience Engine V1
+
+> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabled実装・検証中で、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存handoffと本設計のQ1追補です。
+
 ## Pro華恋 Product Route Review反映・Ultra華恋 最終技術設計案
 
 - 設計日: 2026-08-15
@@ -1307,6 +1310,8 @@ completion:
 ### Phase 3 — Emlis Question System
 
 Observation本体の弱さを問いで隠さない。Cycle001 observation proof後に接続する。
+
+2026-09-10差分：この旧開始順はQ1の開発開始条件にしない。正式商品確認・公開条件は保持し、Q1→Q2→Q3→Q4で進める。
 
 completion:
 

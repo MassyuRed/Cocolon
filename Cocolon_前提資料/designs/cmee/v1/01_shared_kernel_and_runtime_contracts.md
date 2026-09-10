@@ -1,5 +1,8 @@
 # CMEE V1 Shared Kernel / Runtime Contracts 詳細設計
 
+> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabled実装・検証中で、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存handoffと本設計のQ1追補です。
+
+
 - document id: `cocolon.cmee.v1.shared_kernel.detailed_design`
 - revision date: `2026-08-17 JST`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
@@ -657,14 +660,14 @@ provider-required routeでproviderがmissing／invalidならroute変更せず、
 
 - `GENERATED`: 全required visible dutyがsource／user evidence、またはformal-admitted evidenceで成立し、unresolved required duty exact0。
 - `LIMITED`: 入力固有でsource-boundなmeaningful Observation exact1以上 + bound Reception + unknown明示。raw replay、generic empathy、fixed template、薄い要約は禁止。
-- `QUESTION_PENDING`: LIMITED PRE_QUESTION artifactとmaterial target unknown exact1へbindしたClarificationRequest。question-onlyは禁止。
+- `QUESTION_PENDING`: 旧shared v1ではLIMITED PRE_QUESTION＋target unknown exact1。Emlis thread v1では本文充足度（SUFFICIENT／LIMITED）と問い要否（ASK／END／BLOCKED）を分離し、成立済みの初回Layer 1／2＋意味を深める一点のClarificationを返す。本文失敗を問いで代替しない。question-onlyは禁止。
 - `UNAVAILABLE`: safeでmeaningfulなvisible claimがない。artifact／question／fallbackはnull。
 - `REJECTED`: source role／version／lineage／privacy／contract identity hard-invalid。
 - `SEPARATE_SAFETY`: high-care materialを既存separate ownerへ分離。production safety ownerの代替ではない。
 
 ### 15.4 One clarification and immutable refinement
 
-clarification requestはcanonical original `SourceEnvelope` lifecycle全体で最大exact1。発行時にbudgetを消費し、retry、regeneration、skip、expiry、ambiguous answerでも復活しない。answerはauthenticated caller-supplied private `SUPPLEMENTAL_ANSWER` SourceEnvelope exact1だけで、original bytes／digest／version、attachment set／admission、original graphをin-place変更しない。target unknown exact1だけをnew graph versionで`USER_CONFIRMED / USER_CORRECTED`にできる。
+clarification requestはcanonical original `SourceEnvelope` lifecycle全体で最大exact1。発行時にbudgetを消費し、retry、regeneration、skip、expiry、ambiguous answerでも復活しない。answerはauthenticated caller-supplied private `SUPPLEMENTAL_ANSWER` SourceEnvelope exact1だけで、original bytes／digest／version、attachment set／admission、original graphをin-place変更しない。旧shared v1のtarget unknown exact1更新は旧契約内に保持する。Emlis thread v1は、問い焦点の補足・同threadで対象を特定できる本人の明示訂正・その依存先を、更新項目ごとにADD／REVISE／WITHDRAWで検証する。一問一焦点は発行条件であり、別箇所の明示訂正を捨てる条件ではない。非対象の主体・出来事・対象・関係・時点・unknownは保持する。意味checkpointを本文前に確定し、本文失敗で確定した撤回を戻さない。回答記録時刻と回答が指す時点を分離する。Analysisへこの更新規則を適用しない。
 
 ### 15.5 Failure knowledgeとcurrent Cycle contractの分離
 
