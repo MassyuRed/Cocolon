@@ -16,7 +16,7 @@
 - Stage 1 upstream input-specific meaning final design: `FINAL_CANONICAL_IMPLEMENTATION_READY_SECTIONS_19_THROUGH_22`
 - Stage 1 current order owner: `THIS_FILE_SECTION_89_AND_LATEST_APPENDED_UNFINISHED_CHECKPOINT`
 
-2026-09-10最新（candidate88）：選択済みの現在の肯定感情が指示語だけへ縮む欠落を既存の具体参照方針で修正。1件のfollowへ背景と気分を保持し、他99件全record同一。華恋が前後の全100件を全文確認。direct100／73 GENERATED・27 UNAVAILABLE、必要Move／expression／binding各140を維持。必須426は420 PASS／6既存FAIL、前回422全成否同一・追加4全PASS。長い復唱・定型締め・他の中心内容の欠落は残りNOT_CLEAR。詳細と再開点は末尾candidate88。System Context未使用・原典直接確認、PR37不変更。
+2026-09-10最新（candidate89）：本人にとってのやりやすさの見込みを原文で証明し、欠落していた比較対象と見込みを元行動とともにfollowへ保持。1件の観測・followが変わり、他99件全record同一。華恋が全100件全文確認、direct100／73 GENERATED・27 UNAVAILABLE、旧140責務を保持して各層141。必須430は424 PASS／6既存FAIL、前回426全成否同一・追加4全PASS。長い復唱・定型締め・他の中心内容／関係の欠落は残りNOT_CLEAR。詳細と再開点は末尾candidate89。System Context未使用・原典直接確認、PR37不変更。
 
 2026-09-08前回実装（証明済み否定過去報告の全角文末を引用に保持／candidate64）：既存Sentence Surfaceで、原fieldと本人の否定過去報告が証明済みの単独spanだけ、末尾の全角ピリオドを引用内に保持した。元入力・根拠・意味計画・Gateは変更しない。公開合成57件は8件の本文成立／49件全record同一、全57件の根拠とplanは不変。必須332件329 PASS／継承3 FAIL、前回329全成否一致、新規3成功。旧I5等11成功。canonical100は全record・実plan不変、73/27・124責務を維持し、華恋が全100件全文確認してNOT_CLEAR。V2の17件6 PASS／11 FAIL・全42件213候補も同一。共有Ledger案は他の未修復な誤読まで本文を返したため不採用。中心感情の未選択、再掲・定型締め、対象外の報告scopeと他の全角文末は残件。GitHub正本・定例ZIPなしを継続。
 
@@ -7847,3 +7847,16 @@ sourceは既存Draft PR3へ先に保存・取得照合済み。結果は既存ha
 商品NOT_CLEAR。背景と気分を具体的に受け取る改善はあるが、原文復唱が長くなり、定型的な受取述語も残る。自然さ・簡潔さ・商品全体の受入成功にはしない。他の中心感情、自己評価、未来行動との組合せ、複数主題・関係の欠落は残件。自己評価の別例では有限自己評価の認識不足、行動冒頭の接続詞と格助詞の取り違え、既存対比関係が重なる原因を確認したが未修正。複合現在状態・不確定な能力のsource証明も未修正。次は保存済み100件とこの診断から既存source認定・選択への未到達原因を限定して扱い、自己評価を不確定表現へ読み替えず元行動・否定・unknownを保持する。共有述語の2 Move／layered／min2契約、action-only二行動・未来行動への選択拡張、旧mapping整合は未解決。対象削除・同義語だけの置換・旧期待値書換えで成功を作らない。
 
 source checkpointは既存Draft PR3へ先に保存・取得照合済み。最終結果は既存handoff／設計02・06と同じ非公開継続記録へ保存し、保存結果を照合する。結果資料だけの後続commitには同じ固定sourceの検証を継承し、保存目的の再生成はしない。System Context未使用・原典直接確認、PR37不変更、定例JSON／ZIP配布なし。disabled・Draft/open/unmerged、candidate_ready=false・automatic_progression=false。Mash human PASS／ready／採用／merge／本番なし。
+
+
+### 2026-09-10 candidate89 最終検証 — 本人にとってのやりやすさの見込みを保持
+
+原文の見込みがfollowから欠落する原因を、既存final OPの原field全域での有限uncertainty証明で修正した。閉じた名詞対象／任意の比較・明示本人「には」・有限な動詞連用形・やす／にくそうだ／ですを証明し、比較対象を体験者や実行者へ変換せず原句を保持する。伝聞・他者・報告・過去／未来・条件・外側否定・疑問・引用・別文・二重終端、明示self_evaluationと既存action分類を除外。既存unknown／hedge_onlyとexact2材料＋元行動の選択へ接続し、感情・能力・実行を断定しない。selector／HR／Surface／Gate／meaning／contracts・最大3 Move・公開I5／API／DB／RN／Piece／Analysisは不変更。STRUCTURE_MAP_DELTA_NONE：既存source証明の内部修正でownerと経路を維持する。
+
+固定source local 9b7667c0b0f1db37bd16a48a35c6509543f5f22d／remote f09485bbbc12d7dc2df136bf361b9769c160dda2／同一tree 654e0191368fa3b0d3496a3e9d1743a808c5b001で必須回帰と同じ100件を実行。華恋が前後の原入力全field・観測・follow・可否と全理由を全100件全文確認した。beforeは同一sessionの読了済みcandidate88と同一byteを再利用し、afterは今回全件読んだ。1件で見込みと比較対象をfollowへ回復し、観測にも不確定範囲を明示。他99件は全record・Reception plan同一。全入力・順序・可否・理由は不変で、旧140必要Moveのact／target／support／evidence／follow要素／requiredは全保持。direct100、73 GENERATED／27 UNAVAILABLE、Move／expression／binding各141。変更例はmemoのkind／predicate／modalityと証明属性2個が変わり、主体・極性・時点・ID・根拠・certaintyと元action核は同一。元行動のselected contribution・意味参照・根拠上の役割・source候補・qualifierも保持するが、Move位置・role・strategyと既存LIMITED内の2対象投影／decision／sealは変わる。全核・全plan・selected判断不変とはしない。独立比較は全文確認の補助として保存した。
+
+最終必須430は424 PASS／6 FAIL、ERROR／skip0。直前426の全成否は同一で追加4は全PASS。既存6失敗は歴史的観測hash2、dated receipt1、bridge合計141対固定133の不一致1、旧句固定期待1、旧句tamperのreception_tamper_source_missing停止1。tamper停止をinverse到達成功へ換算しない。後段36件・RR5 post-hash96・cohort診断を実行し、直前保存診断との全文byte一致を確認。初回の追加4検査は2 PASS／2 FAILで、新検査が既存action分類をeventと誤って仮定していた。同じ入力を削除せずaction分類・全plan不変の境界検査へ置き、対象内の本文・recovery検査を維持した。実装範囲を広げず、旧test全文byte prefix・全既存AST、旧入力・期待値・閾値は不変更。初期結果も非creditで保存し、work79の384件381 PASS／3 FAILという歴史的比較基準を維持する。runnerは既存current13だけ再導出し非current AST不変。前後cleanの同一固定sourceを確認、既存Python3.12.13・lock全46依存の確認済み実体を同一sessionで再利用し、環境再構築なし。Stage3過去8 PASS／2 FAILとV2別17検査／42件213候補は今回未再実行。
+
+商品NOT_CLEAR。見込みを元行動とともに受け取れる改善はあるが、原文復唱が長くなり、定型的受取と機械的な不確定範囲表示は残る。自然さ・簡潔さ・商品全体の受入成功にはしない。自己評価の別例には、有限自己評価の認識不足、接続詞の格誤認、省略目的語の未登録動作、欄間対比の選択境界が重なると診断したが未修正。複合現在状態・能力の推量・未来行動との組合せ、複数主題・共有関係の欠落、共有述語の2 Move／layered／min2、action-only二行動・旧mapping整合も未解決。次は保存済み100件からこれらの原materialが既存source証明・選択へ届かない原因を限定して扱う。自己評価をuncertaintyへ読み替えず、元行動・否定・unknownを保持し、対象削除・同義語だけの置換・旧期待値書換えで解決扱いにしない。
+
+source checkpointは既存Draft PR3へ先に保存・取得照合済み。最終結果は既存handoff／設計02・06と同じ非公開継続記録へ保存し、保存結果を照合する。資料だけの後続commitへ同じ固定sourceの検証を継承し、保存目的の再生成はしない。System Context未使用・原典直接確認、PR37不変更、定例JSON／ZIP配布なし。disabled・Draft/open/unmerged、candidate_ready=false・automatic_progression=false。Mash human PASS／ready／採用／merge／本番なし。
