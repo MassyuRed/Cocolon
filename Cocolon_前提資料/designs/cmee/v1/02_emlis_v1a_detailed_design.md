@@ -3006,3 +3006,18 @@ source checkpointは既存Draft PR3へ先に保存・取得照合済み。最終
 商品NOT_CLEAR。見込みを元行動とともに受け取れる改善はあるが、原文復唱が長くなり、定型的受取と機械的な不確定範囲表示は残る。自然さ・簡潔さ・商品全体の受入成功にはしない。自己評価の別例には、有限自己評価の認識不足、接続詞の格誤認、省略目的語の未登録動作、欄間対比の選択境界が重なると診断したが未修正。複合現在状態・能力の推量・未来行動との組合せ、複数主題・共有関係の欠落、共有述語の2 Move／layered／min2、action-only二行動・旧mapping整合も未解決。次は保存済み100件からこれらの原materialが既存source証明・選択へ届かない原因を限定して扱う。自己評価をuncertaintyへ読み替えず、元行動・否定・unknownを保持し、対象削除・同義語だけの置換・旧期待値書換えで解決扱いにしない。
 
 source checkpointは既存Draft PR3へ先に保存・取得照合済み。最終結果は既存handoff／設計02・06と同じ非公開継続記録へ保存し、保存結果を照合する。資料だけの後続commitへ同じ固定sourceの検証を継承し、保存目的の再生成はしない。System Context未使用・原典直接確認、PR37不変更、定例JSON／ZIP配布なし。disabled・Draft/open/unmerged、candidate_ready=false・automatic_progression=false。Mash human PASS／ready／採用／merge／本番なし。
+
+
+### 2026-09-10 continuation — 否定疑問を元行動とともに保持する（candidate90最終製品検証）
+
+原文の本人の疑問がフォローから落ち、実行済み行動だけが残る欠落を、既存final OPの全field有限source証明で修正した。名詞目的語と閉じた否定進行形＋「かな」を、明示required・本人・現在・既存negative／negation・正確なraw offset・単一原field全域から証明する。手段、目的語修飾、否定、不確かさと元の根拠を保持したまま同じ核のkind／predicateをuncertaintyへ整合する。見落とし・取り違え・忘却の発生、実行意図、能力、気持ちを新たに断定しない。既存の中心内容と元行動の選択、唯一のHR、immutable selected input、独立replay、NORMAL／LIMITEDと全回復の再導出、Gate／inverseを使用する。selector／owner／schema／経路の追加やGate緩和はない。
+
+公開合成3例を含む追加4検査は全成功。対象・手段・修飾・否定・疑問・元行動の欠落をinverseとGateが拒否し、他者、報告／引用、過去未来、条件、別文、二重終端、自己評価／action核、optional／非explicitと原field不一致を除外する。旧test全byteと歴史的fixture・期待値・閾値を保持し、runnerは既存current13定数だけを再導出、exact18／exact9と非current AST不変。固定Python3.12.13と46依存のruntimeを再使用した。
+
+必須434検査は428 PASS／継承6 FAIL、ERROR／skip0。前回430件の全成否が一致し、新規4件は全成功。原184は180 PASS／4 FAIL、追加250は248 PASS／2 FAIL。失敗は歴史的観察hash2件、dated source receipt1件、固定133に対するbridge責務数1件、旧定型句の本文期待1件、同旧句が存在せずtamperが開始できない1件。責務数は前回141から142、source receiptの現行hashも変わったため、失敗詳細全byte不変とはしない。6件は未解消のまま保存し、成功へ数えない。後続36ケース・post-hash96・集合診断は前回とbyte同一。別のStage3検証とV2の17検査／42件213候補は今回は再実行せず、過去結果を今回の成功へ流用しない。
+
+同じcanonical100を入力全field・順序・軸・分母不変で最終sourceからdirectと外側で実行した。direct100、73 GENERATED／27 UNAVAILABLE、required Move／expression／binding各142。1件で否定疑問と元の行動が両方フォローへ残り、観察も不確かさを明示する形へ変わった。他99件の全recordと実reception planは同一、全100件の可否／理由も同一。前回141責務のact・target・support・sourceを全保持し、元action核は同一。ただし変更例の新しい選択に伴い、行動の順番・role／strategy、selected decision／sealは変化するため全意味plan不変とはしない。華恋が前後の全100件の入力全field・観察・フォロー・可否理由、非変化例と集合の繰り返しまで全文確認した。
+
+商品判定はNOT_CLEAR。今回の欠落は改善したが、その分長い原文再掲が増え、定型の受取表現も残る。本人の自己評価、混合した現在状態／未確定な変化・可能性、複数主題／共有関係の欠落、抽象的な指示語と締めは未解消。次は保存済み本文とsource診断からこれらの中心内容が失われる境界を扱う。他者／伝聞や時点を本人の現在へ置換せず、自己評価を単なるuncertaintyへ変更せず、任意の行動や共有関係を追加選択する別仕様へ広げない。機械結果をMashのProduct PASSへ変換しない。
+
+最終検証sourceはlocal `d88cbe31a5402833360c347b74537617a5b9c20a`／remote `75b7c6adedb9c20fd6fe556f9feae00158841855`、whole tree `13fdb35c4b8ee6dd5bda2af8402c3e7abc8b4cb4` が同一。後続は結果資料のみ。既存20260905と20260908承認と今回の運用指示を継承し、現行PR heads、前提・作業規則、恒久incident全文、weekly20260905、全体設計／全file地図と影響sourceを確認。入力→国家保存／非同期／read-side、旧I5と三中核境界を維持し、STRUCTURE_MAP_DELTA_NONE。System Contextは現在指示に従い未使用で、PR37も変更しない。全PR Draft/open/unmerged、disabled、automatic_progression=false、ready／採用／merge／本番／human PASS未成立。privateの入力・本文・個別case・digest・locatorは既存の承認済み非公開記録へ保持し、公開GitHubへ置かない。途中保存は維持し、定例JSON／ZIP配布は行わない。9月12日の本文確認準備目標と品質リスクを継承する。
