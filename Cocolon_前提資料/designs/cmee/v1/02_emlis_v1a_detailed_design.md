@@ -1,7 +1,7 @@
 # CMEE V1-A — EmlisAI Observation Vertical 詳細設計
 
 - document id: `cocolon.cmee.v1a.emlis_observation.detailed_design`
-- revision date: `2026-09-09 JST`
+- revision date: `2026-09-10 JST`
 - lifecycle: `CURRENT_PRODUCT_OWNER_NON_PASS / REALIZABLE_RECEPTION_EXPRESSION_WORK_STAGE1_ACTIVE`
 - runtime state: `DRAFT_WIP_DISABLED_INHERITED_OWNER_CHAIN_IM10_NON_PASS`
 - historical predecessor implementation evidence: `MassyuRed/mashos-api Draft PR #3 @ d26b3521f0cd63421af3596277145b2e52dafbbe / NOT_CURRENT_OWNER_HEAD`
@@ -23,7 +23,7 @@
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 - Stage 1 historical predecessor additional correction final body, not current: `ROUTE_A_ONLY / STEP3_COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP / EARLY_ACTUAL_NOT_RUN`
 
-2026-09-10最新（candidate85）：疑問補文の否定と外側の過去経験を全fieldで分け、失われていた気持ち・背景と元行動をfollowへ保持。1件変更・他99件全record同一、華恋が全100件全文確認済み。direct100／73 GENERATED・27 UNAVAILABLE、旧137責務を保持して各層138。必須414は408成功／6失敗、前回410の全成否・旧期待値不変更。原文復唱・定型締め・他の中心感情／関係の欠落は残りNOT_CLEAR。詳細と再開点は末尾candidate85。System Context未使用・原典直接確認、PR37不変更。
+2026-09-10最新（candidate88）：選択済みの現在の肯定感情が指示語だけへ縮む欠落を既存の具体参照方針で修正。1件のfollowへ背景と気分を保持し、他99件全record同一。華恋が前後の全100件を全文確認。direct100／73 GENERATED・27 UNAVAILABLE、必要Move／expression／binding各140を維持。必須426は420 PASS／6既存FAIL、前回422全成否同一・追加4全PASS。長い復唱・定型締め・他の中心内容の欠落は残りNOT_CLEAR。詳細と再開点は末尾candidate88。System Context未使用・原典直接確認、PR37不変更。
 
 2026-09-08前回実装（証明済み否定過去報告の全角文末を引用に保持／candidate64）：既存Sentence Surfaceで、原fieldと本人の否定過去報告が証明済みの単独spanだけ、末尾の全角ピリオドを引用内に保持した。元入力・根拠・意味計画・Gateは変更しない。公開合成57件は8件の本文成立／49件全record同一、全57件の根拠とplanは不変。必須332件329 PASS／継承3 FAIL、前回329全成否一致、新規3成功。旧I5等11成功。canonical100は全record・実plan不変、73/27・124責務を維持し、華恋が全100件全文確認してNOT_CLEAR。V2の17件6 PASS／11 FAIL・全42件213候補も同一。共有Ledger案は他の未修復な誤読まで本文を返したため不採用。中心感情の未選択、再掲・定型締め、対象外の報告scopeと他の全角文末は残件。GitHub正本・定例ZIPなしを継続。
 
@@ -2980,3 +2980,16 @@ sourceは既存Draft PR3へ先に保存・取得照合済み。結果は既存ha
 商品NOT_CLEAR。今回の改善は中心内容の欠落回復であり、自然さ・簡潔さは未達。変化したfollowは長くなり、原文全文の復唱と定型句の出現も増えた。他の自己評価・中心material、未来行動との組合せ、複数主題・共有関係の欠落が残る。次はこの保存済み100件から、本来の自己評価や現在状態が既存source証明と選択へ届かない原因を確認する。自己評価を不確定表現へ読み替えず、元行動・否定・unknownを保持する。共有述語の2 Move／layered／min2契約、action-only二行動・未来行動への選択拡張、旧mapping整合は未解決。対象削除・同義語だけの置換・旧期待値書換えで成功を作らない。
 
 sourceは既存Draft PR3へ先に保存・取得照合済み。結果は既存handoff／設計02・06と同じ非公開継続記録へ保存し、取得内容と保存完了を照合する。結果資料のみの後続commitへ固定sourceの実行結果を継承し、保存目的の再生成はしない。System Context未使用・原典直接確認、PR37不変更、定例JSON／ZIP配布なし。disabled・Draft/open/unmerged、candidate_ready=false・automatic_progression=false。Mash human PASS／ready／採用／merge／本番なし。
+
+
+### 2026-09-10 candidate88 最終検証 — 選択済みの現在の肯定感情を具体参照へ保持
+
+現在の肯定感情は正しく選択されていても、単一Moveの参照方針によりfollowが指示語だけになる共通原因を修正した。既存final OPの具体参照方針を、required・単一memo／単一span・本人・現在・明示根拠・既存positive feeling型・関係なしの選択済み対象にも適用する。新しいsource認定、核・actor・時制・感情分類・根拠・選択対象・act・role・supportの変更はなく、既存HRの全文＋気持ちの参照へ渡す。NORMAL／LIMITEDと既存quote方針をそろえ、anaphoric recoveryを維持する。HR／Surface／Gate／meaning／contracts・公開I5・API／DB／RN／Piece／Analysisは不変更。既存ownerと経路の構造変更がないためSTRUCTURE_MAP_DELTA_NONE。
+
+固定source local da5cefe1d271c2e87825ff000970a08ca564798d／remote 19aaacca7dff36817a4b68df1c825b19c99d91e4／同一tree c7e619e5e5755b23c21f9e9a0fd68359b4ebf737で必須回帰と同じ100件を実行し、前後のsourceがcleanであることを確認した。華恋がこのsessionで前後全100件の原入力全field・観測・follow・生成可否と全理由を全文確認。1件のfollowへ背景と現在の気分を保持し、他99件は全record・実Reception plan同一。全100件の原入力・順序・核・観測・可否・理由、およびselected decisions／semantic pairs／relation pairs／projection preimage／sealは同一。旧140必要Moveのact／role／target／support／evidence／requiredは全保持。変更した1件のselected inputはinput_refとgrounding_refだけ、planはMoveと全体のreference_modeおよびmax_anchor_countの0→1だけが変わる。selected input全体やplan全体を不変とはしない。direct100、73 GENERATED／27 UNAVAILABLE、必要Move／expression／binding各140。独立比較は全文確認の補助として保存した。
+
+最終必須426は420 PASS／6 FAIL、ERROR／skip0。直前422の全成否は同じで追加4は全PASS。既存6失敗は歴史的観測hash2、dated receipt1、bridge合計140対固定133の不一致1、旧句固定期待1、旧句tamperのreception_tamper_source_missing停止1。tamper停止をinverse到達成功へ換算しない。後段36件・RR5 post-hash96・cohort診断も実行し、直前保存診断との全文byte一致を確認した。初回の関連4検査は3 PASS／1 FAILで、新classの挿入位置が旧検査末尾を移したNameErrorを修正。新classをEOFへ置き、旧test全文byte prefix・全既存ASTの一致を確認した。初期失敗も非creditで保持し、旧入力・期待値・閾値は不変更。work79の384件381 PASS／3 FAILという歴史的比較基準を保持し、6失敗を受入基準へ変えない。runnerは既存current13だけ再導出し非current AST不変。既存Python3.12.13とlock全46依存versionを確認して再利用し、環境再構築なし。Stage3過去8 PASS／2 FAILとV2別17検査／42件213候補は今回未再実行。
+
+商品NOT_CLEAR。背景と気分を具体的に受け取る改善はあるが、原文復唱が長くなり、定型的な受取述語も残る。自然さ・簡潔さ・商品全体の受入成功にはしない。他の中心感情、自己評価、未来行動との組合せ、複数主題・関係の欠落は残件。自己評価の別例では有限自己評価の認識不足、行動冒頭の接続詞と格助詞の取り違え、既存対比関係が重なる原因を確認したが未修正。複合現在状態・不確定な能力のsource証明も未修正。次は保存済み100件とこの診断から既存source認定・選択への未到達原因を限定して扱い、自己評価を不確定表現へ読み替えず元行動・否定・unknownを保持する。共有述語の2 Move／layered／min2契約、action-only二行動・未来行動への選択拡張、旧mapping整合は未解決。対象削除・同義語だけの置換・旧期待値書換えで成功を作らない。
+
+source checkpointは既存Draft PR3へ先に保存・取得照合済み。最終結果は既存handoff／設計02・06と同じ非公開継続記録へ保存し、保存結果を照合する。結果資料だけの後続commitには同じ固定sourceの検証を継承し、保存目的の再生成はしない。System Context未使用・原典直接確認、PR37不変更、定例JSON／ZIP配布なし。disabled・Draft/open/unmerged、candidate_ready=false・automatic_progression=false。Mash human PASS／ready／採用／merge／本番なし。
