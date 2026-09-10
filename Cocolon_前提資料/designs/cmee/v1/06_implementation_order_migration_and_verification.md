@@ -16,7 +16,7 @@
 - Stage 1 upstream input-specific meaning final design: `FINAL_CANONICAL_IMPLEMENTATION_READY_SECTIONS_19_THROUGH_22`
 - Stage 1 current order owner: `THIS_FILE_SECTION_89_AND_LATEST_APPENDED_UNFINISHED_CHECKPOINT`
 
-2026-09-10最新（candidate84）：既に選ばれた対象の「気になる」を原語義・程度・対象付きでfollowへ保持。follow1件改善・他99件全record同一、全100件全文確認済み。必要Move／expression／binding各137とReception plan全100同一。必須410は404成功／6失敗、前回406の状態・既存期待値不変更。Stage3の2失敗は履歴から未解決として引継ぎ（今回未再実行）。締め反復・他の中心感情欠落・旧mapping整合は残りNOT_CLEAR。詳細と再開点は末尾candidate84。System Context未使用・原典直接確認、PR37不変更。
+2026-09-10最新（candidate85）：疑問補文の否定と外側の過去経験を全fieldで分け、失われていた気持ち・背景と元行動をfollowへ保持。1件変更・他99件全record同一、華恋が全100件全文確認済み。direct100／73 GENERATED・27 UNAVAILABLE、旧137責務を保持して各層138。必須414は408成功／6失敗、前回410の全成否・旧期待値不変更。原文復唱・定型締め・他の中心感情／関係の欠落は残りNOT_CLEAR。詳細と再開点は末尾candidate85。System Context未使用・原典直接確認、PR37不変更。
 
 2026-09-08前回実装（証明済み否定過去報告の全角文末を引用に保持／candidate64）：既存Sentence Surfaceで、原fieldと本人の否定過去報告が証明済みの単独spanだけ、末尾の全角ピリオドを引用内に保持した。元入力・根拠・意味計画・Gateは変更しない。公開合成57件は8件の本文成立／49件全record同一、全57件の根拠とplanは不変。必須332件329 PASS／継承3 FAIL、前回329全成否一致、新規3成功。旧I5等11成功。canonical100は全record・実plan不変、73/27・124責務を維持し、華恋が全100件全文確認してNOT_CLEAR。V2の17件6 PASS／11 FAIL・全42件213候補も同一。共有Ledger案は他の未修復な誤読まで本文を返したため不採用。中心感情の未選択、再掲・定型締め、対象外の報告scopeと他の全角文末は残件。GitHub正本・定例ZIPなしを継続。
 
@@ -7795,3 +7795,16 @@ sourceと結果は既存Draft PR3／30、実入力・実出力・初期失敗・
 商品NOT_CLEAR。今回戻した具体参照にも定型締めが残り、2文の同じ締め、長い観測説明、他の中心感情・複数主題・共有関係の不足も未解決。次は同じ保存済み100件と既存承認範囲の原文証明から、中心materialと元の必要行動を保つ欠落へ進む。共有述語による統合は既存Reception Depth／Gateの2 Move・layered・min2に関わるため未実装、Stage3 FOCUSEDを流用しない。必要対象削除・同義語だけの入替え・期待値書換えで改善や成功を作らない。
 
 既存Draft PR3／30へsourceと結果を保存し、実入力・実出力・試行・失敗・全件読了記録・再開点は従来の非公開記録へ継続する。結果資料だけを追記した後は固定sourceの結果を再利用し、保存目的で再生成しない。System Context未使用・原典直接確認、PR37不変更。NOT_CLEAR・disabled・Draft/open/unmerged、candidate_ready=false・automatic_progression=false、Mash human PASS／ready／採用／merge／本番未成立。
+
+
+### 2026-09-10 current — candidate85（疑問と過去の気持ちを元行動とともに保持・品質未達）
+
+既存final OPで、本人の原memo全fieldと正確なoffset・引用外・単核を確認し、非人物の情報／事情主題＋有限否定状態の疑問補文と、外側の閉じた過去経験hostを分けて証明した。受身背景、疑問、否定、程度、主体、ID、根拠、certaintyを同核で保持してreaction／feeling／negative／pastへ整合し、既存source_past_negative_feeling根拠とexact2選択から元の必要行動も残す。自己接頭でself_evaluationになった場合も同じ全文証明に限り整合する。任意人物主題、外側他者・否定経験・推量・報告・条件・未来・引用・別文・連続終端は除外。疑問内容の事実化、新actor／performed／因果追加なし。HR／Surface／Gate／meaning／contracts・選択条件・最大3 Move・公開経路は不変更。STRUCTURE_MAP_DELTA_NONE。
+
+固定source local 2c7f10c2234be011f820c8b5fd6c19ca3d7e67b2／remote 436a342e472ef47f93b2a73f3ad28eac3bb2abb8／同一tree 028d8f593011db7b5caf6b36ce3a66cef24db173で必須回帰と同じ100件を実行した。華恋が全100件の原入力全field・観測・follow・外側可否と全理由を全文確認。1件で疑問を含む過去の気持ちと背景をfollowへ回復し、元行動も保持。他99件は全record・実Reception plan同一。全100件の入力・順序・観測・可否・理由は同一で、旧137必要Moveのact／target／support／follow要素／source evidenceをすべて保持。direct100、73 GENERATED／27 UNAVAILABLE、必要Move／expression／bindingは各138。独立比較も保存し、華恋の全文確認の代替にはしない。
+
+初回関連12は11 PASS／新規1 FAILで、自己接頭の分類欠落を入力・期待値を変えず修正。固定実装の追加4検査は全PASS。最終必須414は408 PASS／6 FAIL、ERROR／skip0。前回410の全成否は同じで新規4は全PASS。6失敗は歴史的観測hash2、dated receipt1、bridge合計138対固定133の不一致1、旧句固定期待1、旧句tamperのreception_tamper_source_missing停止1。tamper停止をinverse到達成功にしない。旧fixture／期待値／閾値不変更、work79の384件381 PASS／3 FAILを歴史的比較基準として保持し、6失敗を受入基準へ変えない。後段36件・RR5 post-hash96とcohort診断は前回と同一。Stage3の過去実行8 PASS／2 FAIL（external_ref条件停止・旧mapping hash不一致）とV2別17検査／42件213候補は今回未再実行で、今回の検証成功へ換算しない。既存Pythonを実体・version／imports確認後に再利用し、環境再構築なし。
+
+商品NOT_CLEAR。回復したfollowも原文復唱と定型締めで、長さと集合内の定型句出現数は増えた。同一本文内の同じ締め二連続は従来の1件で増加なし。他の中心感情、自己評価、未来行動との組合せ、複数主題・共有関係の欠落は未解決。次は保存済み100件から、未保持の原materialが本人・有限host・時点の既存source証明と選択へ届かない原因を扱う。共有述語の2 Move／layered／min2契約、action-only二行動の選択拡張、旧mapping整合は未実装・未解決のまま保持する。必要対象削除・同義語だけの入替え・期待値書換えで解決扱いにしない。
+
+source checkpointを既存Draft PR3へ先に保存し、実試行と初期失敗も従来の非公開記録へ保存した。最終結果は既存handoff／設計02・06と同じ非公開記録へ継続し、取得内容と保存完了を確認する。資料だけの追記後は同じ固定sourceの検証を再利用する。System Context未使用・原典直接確認、PR37不変更、定例JSON／ZIP配布なし。disabled・Draft/open/unmerged・candidate_ready=false・automatic_progression=false、Mash human PASS／ready／採用／merge／本番なし。
