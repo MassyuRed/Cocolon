@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_emlis_ai_current_structure
 title: "EmlisAI構造 — Current Structure"
-revision_date: "2026-09-10 JST"
+revision_date: "2026-09-11 JST"
 document_role: "EMLIS_AI_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -18,6 +18,29 @@ im10_state: "NON_PASS"
 current_product_read_state: "EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFICIENT"
 candidate_ready: false
 ---
+
+## 2026-09-11 Q2 current — 保存・API・入力/履歴の一往復
+
+Q1 pure53件を確認後、Q2 development applicationをdefault OFFで実装。稼働DB適用と端末の開発アプリ確認は残るためQ2完了・商品PASS・公開とはしない。実装/確認の現在ownerはAPI既存handoffのQ2節と `ai/docs/EMLIS_Q2_DEVELOPMENT.md`。以下のQ1記録はQ1時点の効果を示す。
+
+| repository / file | 今回の責任 | 他機能との境界 |
+|---|---|---|
+| mashos-api `ai/services/ai_inference/emlis_thread_config.py` | 二重development gate、application mode、回答長 | productionはOFF |
+| 同 `api_emlis_thread.py` | Bearer、strict request、専用response allowlist、GET/answers/actions | 旧comment_text/ObservationStatusを拡張しない |
+| 同 `emlis_thread_service.py` | 原入力→一問→回答→意味checkpoint→本文、resume/idempotency/attempt | Q1純粋作者を継承。全tier Free一問、他coreへ回答をdispatchしない |
+| 同 `emlis_thread_store.py` | private read/CAS RPC、一時停止と不明ACKの分類 | POST自動retryなし、例外本文を返さない |
+| 同 `app.py` / `api_contract_registry.py` / `emlis_ai_reply_service.py` | route登録と原入力保存後の開発分岐 | flag OFFは既存I5、Piece返信のwire保持 |
+| mashos-api `supabase/migrations/20260911020509_emlis_input_threads_q2.sql` | threads/events、親/account cascade、owner/access、lock/revision/lease | 既存emotionsや国家queueを更新しない |
+| Cocolon `lib/api/emlisThreadApi.js` | 明示debug opt-in、認証API、error本文をmonitoringに入れない | release OFF、汎用API contractを変更しない |
+| Cocolon `screens/input/useEmlisThread.js` | GET復帰、回答、same payload再送、明示retry、memory draft消去 | closeはPOSTなし。user変更/削除/遅延応答で旧内容を再表示しない |
+| Cocolon `screens/input/EmlisThreadModal.js` | 元日時/回答日時、以前/現在、未反映/訂正済み本文未完成、任意回答 | Pieceの旧modal・tutorialと分離 |
+| Cocolon `screens/InputScreen.js` / `screens/AnalysisHistoryScreen.js` | 通常保存結果のidと履歴idから開く、削除時消去 | TodayQuestion、Piece publish、元draft保存を保護 |
+| mashos-api `ai/tests/test_emlis_q2_application.py` / `ai/tests/helpers/emlis_q2_postgres.cjs` | 実migration/RPCで一往復・障害・権限・削除・競合 | 合成データと一時DBのみ |
+| Cocolon `tests/emlis-thread.test.js` / `tests/emlis-q2-tools/package.json` | 実hook/panelのReact renderer検証と固定test依存 | native実機確認と区別 |
+
+影響確認する既存ownerは `emotion_submit_service`（親保存・fanout・既存timeout）、`supabase_client`（RPC・retry）、`publish_governance`（元日時の保持期間）、`api_account_visibility`/`api_emotion_submit`（verified auth）、`api_emotion_history_manage`/`account_delete_service`（削除）、RN `AuthContext`/`apiClient`/`accountLocalCleanup`/`useInputDraftPersistence`/`InputFeedbackReplyModal`。Q2の回答はPiece/Analysis materialとTodayQuestionの回答schemaへ流さない。System Contextをfresh実行済みとは扱わず、原典と取得済み全tree/file familyから確認した。
+
+
 
 # EmlisAI構造 — Current Structure
 

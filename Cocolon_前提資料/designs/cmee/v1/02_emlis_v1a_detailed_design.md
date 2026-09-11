@@ -1,6 +1,6 @@
 # CMEE V1-A — EmlisAI Observation Vertical 詳細設計
 
-> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabledで意味・実本文一往復と必要回帰の確認済みで、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」です。
+> 2026-09-11 Q2更新：Q1 dedicated53件を再確認し、Q2の保存・認証API・RN入力/履歴・明示再試行をdefault OFFの開発候補として実装。実SQLを通す検査とReact renderer検査を実施。稼働DB適用・端末での開発アプリ確認は未実施で、Q2完了確認／商品PASS／公開は未成立。現在の再開先はAPI既存handoff末尾のQ2節と `ai/docs/EMLIS_Q2_DEVELOPMENT.md`。Q3/Q4へ自動進行せず、旧candidate91修正ループへ戻さない。
 
 
 - document id: `cocolon.cmee.v1a.emlis_observation.detailed_design`
@@ -17,7 +17,7 @@
 - private human Product Read: `CURRENT_EVALUATED_NON_PASS / HISTORICAL_PREDECESSOR_EVALUATED_FAIL_STOP`
 - candidate ready: `false`
 - production admission: `false`
-- current authorized implementation: `MASH_EXPLICIT_EMLIS_Q1_THREAD_IMPLEMENTATION_20260910`
+- current authorized implementation: `MASH_EXPLICIT_EMLIS_Q2_APPLICATION_IMPLEMENTATION_20260911`
 - automatic progression: `false`
 - Cycle001 effect: `0`
 - Stage 1 language route: `ROUTE_A_PROVIDERLESS / SOURCE_GROUNDED_REALIZABLE_RECEPTION_EXPRESSION / HUMAN_RECEPTION_SOLE_LAYER2_AUTHOR`
@@ -3091,3 +3091,9 @@ Q1はprocess-localの実本文経路までです。意味保存確認、本文�
 Q1のFree相当process-local一往復を実装・検証。初回本文→一問→独立回答source→意味checkpoint→回答後本文が共通作者を通る。追加53件PASS、主要既存442件は436 PASS／既存6 FAIL、旧契約194件は123 PASS／46 FAIL／23 ERROR／2 SKIPでcandidate91 baselineと全成否一致。単独100件は73 GENERATED／27 UNAVAILABLEで全record一致、華恋が全100件の入力・実本文・理由を読了。商品NOT_CLEAR、Q2以降未実施、未公開。
 
 固定sourceはmashos-api PR #3の `74b614a8164b43e8aabcf686aec86282bfbbf8ad`。詳細・既存失敗の内訳・Q2への再開点は既存API handoffの末尾Q1節を使う。Q1共有ownerの固定test snapshotは旧IM03 receiptを保持した検証用で、商品証明・新しい承認ownerではない。
+
+## 2026-09-11 Q2 — 元入力に所属する一往復の開発アプリ接続
+
+元入力保存後のEmlis orchestrationがthreadを作成し、回答source・意味checkpoint・本文を別commitで保存する。意味訂正済みで本文が失敗しても旧観測を現在へ戻さない。未回答questionはcloseでは消費せず、履歴の元input IDから同じquestionへ戻る。NO_MATERIAL_UPDATEは保存本文を再利用し、UNRESOLVED/PARTIALを完読扱いにしない。
+
+Q2 serviceがDEVELOPMENT_APPLICATIONを所有し、内部のQ1作者は純粋なOFFLINE_CANDIDATEとして継承する。国家件数・通知・課金・Astor materialへ回答を流さない。TodayQuestionと別identity、Piece publish modalと別UIを使う。全tierともFree scope一問。保存中の競合・source/親/access変更・lease失効をDBで再確認し、確認済み一時障害だけ同じ回答/意味で明示retryする。実装file mapはcurrent_structure/01、wire/保存shapeは05、到達と残件は06およびAPI既存handoff。

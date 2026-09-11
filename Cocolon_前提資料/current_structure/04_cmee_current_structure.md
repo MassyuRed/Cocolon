@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_meaning_experience_engine_current_structure
 title: "CMEE — Current Structure"
-revision_date: "2026-09-10 JST"
+revision_date: "2026-09-11 JST"
 document_role: "CMEE_CURRENT_STRUCTURE_AND_PRODUCT_QUALITY_ROUTE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -11,7 +11,7 @@ stage1_language_route: "ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER_ONLY"
 external_generative_ai_allowed: false
 external_body_send: 0
 retired_provider_investigation: "REMOVED_FROM_CURRENT_TREE_GIT_HISTORY_ONLY"
-current_authorized_next_work: "EMLIS_Q1_THREAD_IMPLEMENTATION_AND_VALIDATION"
+current_authorized_next_work: "EMLIS_Q2_DEVELOPMENT_APPLICATION_CONFIRMATION"
 only_possible_future_implementation_class: "Q1_THEN_Q2_Q3_Q4_PER_20260910_DESIGN"
 implementation_state: "DISABLED_IMPLEMENTED_NOT_ACCEPTED / ROOT_SAME100_NOT_CLEAR / REPLAY_INPUT_IMPLEMENTED"
 candidate_state: "DISABLED_IMPLEMENTED_NOT_ACCEPTED"
@@ -20,6 +20,15 @@ product_read_state: "CURRENT_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFICIENT / HI
 production_runtime_effect: 0
 automatic_progression: false
 ---
+
+## 2026-09-11 Q2 current — 保存・API・入力/履歴の一往復
+
+Q1 pure53件を確認後、Q2 development applicationをdefault OFFで実装。稼働DB適用と端末の開発アプリ確認は残るためQ2完了・商品PASS・公開とはしない。実装/確認の現在ownerはAPI既存handoffのQ2節と `ai/docs/EMLIS_Q2_DEVELOPMENT.md`。以下のQ1記録はQ1時点の効果を示す。
+
+追加/変更fileと他core・国家・旧経路との接続は [EmlisAI current mapのQ2節](01_emlis_ai_current_structure.md) に集約する。Q1の純粋作者、Q2の保存と画面、Q3の有料拡張、Q4の商品/公開判断を分ける。
+
+
+
 
 # CMEE — Current Structure
 

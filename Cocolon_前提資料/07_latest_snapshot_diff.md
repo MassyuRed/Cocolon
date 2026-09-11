@@ -40449,3 +40449,7 @@ STRUCTURE_MAP_DELTA_NONE。国家／API／DB／RN／Piece／Analysis接続は不
 既存の2026-09-05 selected subjective reception承認を継承する同じ未完unit。後続の品質分類によるplan再構築でも、元の短状態の語彙維持指定に基づく参照方針を保持する。原文の背景・否定・継続・他者への帰属を維持し、従来の否定形・連体形の具体参照も保持する。同じimmutable selected inputによるforward／回復／独立replay／厳格なGate・inverseを維持し、seal後の意味補充や新しい自己証明を追加しない。最大3 Moveと既存126責務を保持する。
 
 最終System Context再生成は本記録時点では未完。開始時の鮮度確認を変更後の証拠へ流用しない。最終商品refsに対応するPR37 current本文と同head Actionsを最終結果の参照先とする。candidate_ready=falseを維持し、過去candidate67までの実行結果と当時の未完記録は履歴として残す。
+
+## 2026-09-11 milestone — Q1確認後のQ2開発候補
+
+Q1 pure一往復53件を再確認し、Q2の専用永続化/認証API/RN入力・履歴/明示再試行を既存Draft PR3/30に実装。実SQL一往復と障害時の意味保持、hook/panel動作を検証。全体/Home/国家/三core地図とv1正本02/05/06、API registry/DB migration資料を同期。稼働DB適用と端末の開発アプリ確認が残り、Q2完了・商品PASS・公開としない。次作業の正本はAPI既存handoff末尾Q2節。

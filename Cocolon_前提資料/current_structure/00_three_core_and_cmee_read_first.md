@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_three_core_and_cmee_current_structure_entry
 title: "三大中核構造とCMEE — Current Structure Read First"
-revision_date: "2026-09-10 JST"
+revision_date: "2026-09-11 JST"
 document_role: "CURRENT_STRUCTURE_ROUTING_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -10,6 +10,15 @@ operational_owner: "Karen"
 implementation_effect: 0
 automatic_progression: false
 ---
+
+## 2026-09-11 Q2 current — 保存・API・入力/履歴の一往復
+
+Q1 pure53件を確認後、Q2 development applicationをdefault OFFで実装。稼働DB適用と端末の開発アプリ確認は残るためQ2完了・商品PASS・公開とはしない。実装/確認の現在ownerはAPI既存handoffのQ2節と `ai/docs/EMLIS_Q2_DEVELOPMENT.md`。以下のQ1記録はQ1時点の効果を示す。
+
+追加/変更fileと他core・国家・旧経路との接続は [EmlisAI current mapのQ2節](01_emlis_ai_current_structure.md) に集約する。Q1の純粋作者、Q2の保存と画面、Q3の有料拡張、Q4の商品/公開判断を分ける。
+
+
+
 
 # 三大中核構造とCMEE — Current Structure Read First
 
@@ -56,7 +65,7 @@ CMEEは設計候補がlocal artifactに留まり、GitHub上のdurable ownerが�
 
 | 構造 | Current structure map | 商品target | Current stateの要点 |
 |---|---|---|---|
-| EmlisAI構造 | [01_emlis_ai_current_structure.md](01_emlis_ai_current_structure.md) | 入力を「読まれた形」の観測へ変え、必要な場合だけ一点を問い、回答分だけ観測を深める | production観測／受け取りはCURRENT_ACTUAL。問い／refined observationはDESIGNED_NOT_IMPLEMENTED |
+| EmlisAI構造 | [01_emlis_ai_current_structure.md](01_emlis_ai_current_structure.md) | 入力を「読まれた形」の観測へ変え、必要な場合だけ一点を問い、回答分だけ観測を深める | production観測／受け取りはCURRENT_ACTUAL。問い／refined observationはQ1 pure・Q2 development候補まで実装、端末確認未了 |
 | Piece構造 | [02_piece_current_structure.md](02_piece_current_structure.md) | 保存済み入力を、他者が単独で受け取れるcanonical textと画像artifactへ変える | current user-visibleはold Q&A。Piece V2はCODE_DISABLED／DESIGNED_NOT_IMPLEMENTED |
 | 分析構造 | [03_analysis_current_structure.md](03_analysis_current_structure.md) | 蓄積入力から現在の自己構造routeを根拠付きで示し、観測routeと分離したIF routeを扱う | current Watashi Mapはpresentation-oriented。evidence graph／IF routeはDESIGNED_NOT_IMPLEMENTED |
 | CMEE | [04_cmee_current_structure.md](04_cmee_current_structure.md) | exact3の商品に共通するsource・意味・plan・realization・traceを持つ共有生成中枢 | DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE／NO_SAFE_CMEE_V1A_CANDIDATE_STOP／NOT_IMPLEMENTED／NOT_PRODUCTION_CONNECTED |

@@ -1,6 +1,6 @@
 # CMEE V1 — JSON Schema / Identity / Versioning 詳細設計
 
-> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabledで意味・実本文一往復と必要回帰の確認済みで、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」です。
+> 2026-09-11 Q2更新：Q1 dedicated53件を再確認し、Q2の保存・認証API・RN入力/履歴・明示再試行をdefault OFFの開発候補として実装。実SQLを通す検査とReact renderer検査を実施。稼働DB適用・端末での開発アプリ確認は未実施で、Q2完了確認／商品PASS／公開は未成立。現在の再開先はAPI既存handoff末尾のQ2節と `ai/docs/EMLIS_Q2_DEVELOPMENT.md`。Q3/Q4へ自動進行せず、旧candidate91修正ループへ戻さない。
 
 
 - document id: `cocolon.cmee.v1.schema_and_versioning.detailed_design`
@@ -2515,3 +2515,21 @@ The sole Stage 1 bridge exact-joins the authoritative upstream records before re
 共通IM03の旧`ForegroundScopeRelationKind` exact4と`INTERPRETATION_MATRIX_EXACT16`は不変です。thread専用`EmlisThreadScopeRelationKind.ABOUT_TARGET`だけを、thread graphのevaluation_about_event・両endpoint・元／回答evidenceに結んでscopeへadmitします。carried viewも元graph／premeaningに照合します。共有候補を追加の因果・対比へ昇格しません。
 
 これはQ1の型・意味の登録です。質問数の永続的消費、checkpoint先行保存、UI状態、公開レスポンスのprivate除外はQ2のwire contractで閉じます。旧profileへの暗黙fallbackはありません。
+
+## 2026-09-11 Q2 application v1 — 開発用wireと永続identity
+
+profileは `cocolon.emlis_thread.application.v1`、runtimeは `q2.free.one_round.v1`。実allowlistは `api_emlis_thread.ThreadResponse` に対応する。
+
+| 領域 | fieldと責任 |
+|---|---|
+| original | id / created_at / memo / memo_action。元の保存日時を保持 |
+| thread | thread_id / revision / state / issued_count / question_limit。元emotions.idに一意、一問上限 |
+| timeline | event_id / kind / recorded_at / text。QUESTIONのquestion_id、ANSWERのauthored_at、OBSERVATIONのstage/is_current |
+| current | current_observation と pending_question。意味更新後の旧本文はcurrentにしない |
+| assessment | body_state / answer_saved / answer_assessment / meaning_updated |
+| operation | operation_id / attempt_id / requested_attempt_id / processing_deadline_at / failure_code / can_retry / can_continue |
+| private persistence | original FK、current_meaning_event_id、last_observation_event_id、latest_answer_event_id、source/evaluated_prefix、source_snapshot、private event payload |
+
+MEANING_UPDATEはthread＋source prefix＋semantic schemaで一意。ANSWERはthread＋questionで一意。idempotency_keyはthread内一意でpayload fingerprintを保持する。回答受理、意味確定、本文保存のtransactionを分け、現在pointer更新と該当eventsのappendは原子的。RPCは短いlock＋CAS、FK cascade、service-roleを含むowner/access検査を行う。private graphs/checkpoints/raw bytes/digestsをpublic DTOに含めない。parent created_atの保持期間を使い、回答日時で延長しない。
+
+source-modeや意味schemaを変えるQ3では既存checkpointを黙って再利用しない。Q2に本番schema migrationの適用済みeffectはない。物理DDL ownerはmashos-apiの `supabase/migrations/20260911020509_emlis_input_threads_q2.sql`、route一覧は `ai/docs/PUBLIC_API_REGISTRY.md`。

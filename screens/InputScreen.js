@@ -18,6 +18,9 @@ import {
 // Supabase Auth
 import { useAuth } from "../AuthContext";
 import { submitEmotionInput } from "../lib/api/home/emotionSubmitApi";
+import { useEmlisThread } from "./input/useEmlisThread";
+import { EMLIS_THREADS_ENABLED } from "../lib/api/emlisThreadApi";
+import EmlisThreadModal from "./input/EmlisThreadModal";
 import {
   cancelEmotionPiece,
   previewEmotionPiece,
@@ -140,6 +143,7 @@ export default function InputScreen({ navigation, route }) {
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const currentUserId = String(session?.user?.id || "").trim();
+  const emlisThread = useEmlisThread({ userId: currentUserId, enabled: EMLIS_THREADS_ENABLED && !isTutorialMode });
   const tutorialDisplayName = useMemo(() => {
     const metadata = session?.user?.user_metadata || {};
     return (
@@ -558,7 +562,7 @@ const safeInsets = useSafeAreaInsets();
     startupModalVisible,
     noticeLoading,
     todayQuestionLoading,
-    inputFeedbackModalVisible,
+    inputFeedbackModalVisible: inputFeedbackModalVisible || emlisThread.visible,
     applyInputDraft,
     showToast,
   });
@@ -1125,6 +1129,8 @@ const safeInsets = useSafeAreaInsets();
       await loadHomeState({ force: true, includeStartupCandidate: false });
       await markAnalysisHomeSummaryDirty();
 
+      if (await emlisThread.open(submitResult?.id)) return;
+
       const openedObservation = inputFeedbackText
         ? openInputFeedbackModal({
             commentText: inputFeedbackText,
@@ -1566,7 +1572,8 @@ ${String(error?.message || error)}`
   discardPendingInputDraft={discardPendingInputDraft}
 />
 
-<InputFeedbackReplyModal
+      <EmlisThreadModal thread={emlisThread} colors={colors} />
+      <InputFeedbackReplyModal
   visible={inputFeedbackModalVisible}
   text={inputFeedbackModalText}
   meta={inputFeedbackModalMeta}
@@ -2662,4 +2669,3 @@ toastText: {
 },
   }, ui));
 }
-

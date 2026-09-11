@@ -6716,3 +6716,9 @@ observation V2のactivation-binding-invalid pre-network STOP、Full R1は
 - authority effect: technical activation / admission / consumption `0 / 0 / 0`; this correction cannot start V15.
 - implementation / runtime / pytest / private analyzer / production / mashos-api effect: `0 / 0 / 0 / 0 / 0 / 0`.
 - closure boundary: only a later separately authorized additive marker, after immediate postwrite verification and a read-only re-audit, may state `REMEDIATION_CLOSED`.
+
+## 2026-09-11 Q2差分 — 元入力に所属するEmlis一往復
+
+保存済み `emotions.id` → Q2 thread service → ANSWER/MEANING_UPDATE/OBSERVATIONの別commit → 専用認証API → Input/HistoryのEmlisThreadModal。元入力保存と国家fanoutの後に分岐し、補足回答で国家入力件数・通知・Astor queue・Piece/Analysis materialを増やさない。元入力/account削除はFK cascade、閲覧は既存retentionに従う。旧I5と共用Piece返信modalはdevelopment OFF時の境界を保持。
+
+新設/変更全fileと直接変更しない影響ownerの役割表は [current_structure/01_emlis_ai_current_structure.md](current_structure/01_emlis_ai_current_structure.md) の2026-09-11 Q2節へ集約する。稼働DB適用・端末確認・本番接続は未成立。旧snapshot件数や旧全file inventoryを今回の全体再生成・新headのfresh証明として扱わない。
