@@ -8004,3 +8004,18 @@ Q3の既存146件にQ4の17件を加え、API/純粋処理/実SQL-RPC/保存版/
 回答の不自然な名詞化と時点の係りは今回修正済み。長い内容の再掲、共通の締め、既存100件の中心感情・複数主題・共有関係の不足は引き続き商品品質の残件で、商品NOT_CLEAR、P3/P8商品完成・Mash正式PASSは未成立。Q4で現在確認できた機能境界と今回の名詞化欠陥を残したまま、実機確認へ送ったという意味ではない。
 
 開発DBへのQ2→Q3 migration適用、native端末・実課金、Mashの商品判断、全replicaの設定切替・停止復旧の実施、merge/deploy/有効化は `EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md` §9と別添の適用・運用確認に残る。既定OFF、Draft/open/unmergedを維持。後日の環境確認でコード不具合が判明した場合は、その機能の修正として引き取る。
+
+## 2026-09-11 Q4残件 — 共有Observation接続の最終確認
+
+再開元API `e899c8ba5cca1b65db1a994cee622f192edec930` / App `aaf7e739fb494d8728c89dfd86167425446047f8`。同じ出来事と本人回答の二重引用を、共有Sentence Surfaceと独立inverseで接続し直した。Premium中間の原入力順を保つ修正も含む。最終実装sourceはAPI `72d6c047717c3b78ca591e88dcd4faef528028b3`、tree `06d74365f672eafcb8e89bb5e1aafe3835ce1b23`。API結果保存commitは `a6893b6f9cb108f42f71a0594640a2f28d613a60`。変更内容、途中結果、再現境界の詳細ownerは `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` の同日「Q4残件」節。
+
+- 最終Q1〜Q4・実SQL/RPC・保存版・共有作者・inverse・registryは184 PASS、失敗/skip 0。RNは旧56 PASSを継承し、今回App実行コード変更・再実行はない。
+- 広い必須回帰438件は429 PASS / 9 FAIL。保存済みcandidate91の6失敗を保持し、追加で見えた3件も再開元Q4 sourceで同じ失敗を再現した。旧stubのnominalization_plan不足2件と旧肯定感情の限定期待1件を含む。全回帰GREENへ換算せず、歴史的fixture・期待値・閾値を変更していない。
+- 最終sourceから同じcanonical100を再生成。取得した保存済みcandidate91原本と全100レコード・HR plan・観測/フォロー・提供可否/理由が一致。direct100、GENERATED73/UNAVAILABLE27、Moves143。華恋は原入力全fieldと最終本文・可否/理由を100件全読、独立readerも照合した。旧単独入力の品質改善と称しない。
+- Q4既存合成22ケースは実SQL/RPCの新規生成・保存・GET照合で確認した。初回・問い・本人回答・回答後とPremium全6中間状態の計48DTOを華恋と独立readerが全読。REFINED13、PARTIALLY_REFINED3、UNCHANGED3、意図した訂正後本文故障3。入力・時点・状態・質問枠・全フォローを保持し、全roundの出来事順も原入力と一致。履歴を含む62回の保存GETが各返却DTOに一致した。
+- 新規実行のthread/event等は新identity。旧DTOにないPlus履歴UUID/秒時刻は復元済みと主張せず、既存Q3履歴fixtureの内容・日付・tier条件を使用した。旧公開22ケースfixtureを保持し、実行結果とharnessは既存非公開作業記録へ保存する。
+- CPython3.12.13、pytest8.4.1、46固定依存wheel・2176配布file実bytesを照合した復元環境とPGlite0.5.8。稼働Postgresやnative端末の確認ではなく、uvのinstaller metadataと旧pip環境の同一性も主張しない。
+
+今回閉じたのは、対象eventの二重引用と回答接続、逐次roundの読み順の欠陥。長い同型文、共通の締め、同じ感情familyの代表1件へ絞られて過去回答がフォローから落ちる選択は残る。既存100件の中心感情・複数主題・共同/共有関係の不足も商品NOT_CLEARとして保持する。次はABOUT_TARGET追加前にReceptionを作る `_active_plan` と同family代表選択の責任箇所を、原入力から回答後までの意味関係として検討する。入力済みの感情の読み落としを追加質問へ置換しない。
+
+既存Draft PR3/30へ継続。System Contextは使用せず原典を直接確認した。DB適用・merge/deploy/ready/有効化は未実施、既定OFF・Draft/open/unmergedを維持。公開しない実本文・private個別case/digest/locatorをGitHubへ含めない。
