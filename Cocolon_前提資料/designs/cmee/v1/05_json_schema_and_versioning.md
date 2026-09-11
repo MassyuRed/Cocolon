@@ -2554,3 +2554,10 @@ source-modeや意味schemaを変えるQ3では既存checkpointを黙って再利
 | 履歴失効 | 編集・削除・回答更新・期限・権限・feedback versionの変化を保存時に照合。古い現在本文はCONTEXT_CHANGED、旧timelineでは自分のLayer1/2だけを履歴として扱う。 |
 | 意味変更なし | 同じ有効意味・同じ許可contextの保存済み本文だけを再使用。旧本文へ新prefixを付け替えず、最終commitでもguardを再照合。 |
 | 障害と再送 | ANSWER→意味→本文の独立commit、同じ回答で明示retry。旧操作receiptと現在stateを分ける。CAS後の再読取りと失敗返却も現在contextを照合。 |
+
+
+## 2026-09-11 Q4 — additive wireと保存版互換
+
+cocolon.emlis_thread.application.v1へboolean can_writeを追加。読取り専用ではfalse、can_retry/can_continueもfalse。既存state・body_state・question_limit・profile・revisionの意味は維持する。app.bootstrap.v1のfeature_flagsへemlis_threads_enabledを追加し、欠落時false。旧input_feedbackはpassed＋comment_textのままで、QUESTION_PENDINGやprivate checkpointを露出しない。
+
+実modeはEMLIS_APPLICATION、保存profileは既存q2.free.one_round.v1／q3.plan.sequential.v1。旧Q2をQ3上限へ自動昇格しない。意味schema、元source bytes、source prefixのidentityをmode追加だけで変えず、保存checkpointの再計算を正常回復の条件にしない。Q4追加DDLなし。Q2→Q3追加migrationの順序と停止/互換回復はAPI運用資料§9がowner。

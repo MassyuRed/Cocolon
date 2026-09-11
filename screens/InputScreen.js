@@ -929,7 +929,7 @@ const safeInsets = useSafeAreaInsets();
     setPiecePreviewLoading(true);
     try {
       const payload = buildEmotionSubmitPayload();
-      const preview = await previewEmotionPiece(payload);
+      const preview = await previewEmotionPiece(payload, { expectedUserId: requestOwner.id });
       if (!ownsResponse()) return;
       const quota = preview?.quota && typeof preview.quota === "object"
         ? preview.quota
@@ -975,7 +975,7 @@ const safeInsets = useSafeAreaInsets();
       return;
     }
     try {
-      await cancelEmotionPiece(previewId);
+      await cancelEmotionPiece(previewId, { expectedUserId: requestOwner.id });
       if (!ownsResponse()) return;
     } catch (e) {
       if (!ownsResponse()) return;
@@ -1020,7 +1020,7 @@ const safeInsets = useSafeAreaInsets();
 
     setPiecePublishLoading(true);
     try {
-      const publishResult = await publishEmotionPiece(previewId);
+      const publishResult = await publishEmotionPiece(previewId, { expectedUserId: requestOwner.id });
       if (!ownsResponse()) return;
       const inputFeedback = publishResult?.input_feedback || null;
       const inputFeedbackText = String(
@@ -1122,7 +1122,7 @@ const safeInsets = useSafeAreaInsets();
         void ensureTutorialPiecesSeed();
 
         await clearPersistedInputDraft();
-      if (!ownsResponse()) return;
+        if (!ownsResponse()) return;
         setPendingInputDraft(null);
         setDraftRestoreModalVisible(false);
         Keyboard.dismiss();
@@ -1142,7 +1142,7 @@ const safeInsets = useSafeAreaInsets();
         return;
       }
 
-      const submitResult = await submitEmotionInput(payload);
+      const submitResult = await submitEmotionInput(payload, { expectedUserId: requestOwner.id });
       if (!ownsResponse()) return;
       const inputFeedback = submitResult?.input_feedback || null;
       const inputFeedbackAI = inputFeedback?.emlis_ai || null;
@@ -1200,7 +1200,7 @@ ${inputFeedbackEmotionMeta.emotionSummary}` : ""}`);
       if (isRequestTimeoutError(error)) {
         console.warn("InputScreen: emotion submit completion timed out", error);
         const refreshedAfterTimeout = await refreshHomeStateAfterEmotionSubmitTimeout(loadHomeState);
-      if (!ownsResponse()) return;
+        if (!ownsResponse()) return;
         Alert.alert(
           "記録の確認",
           getEmotionSubmitTimeoutRecoveryMessage(refreshedAfterTimeout)

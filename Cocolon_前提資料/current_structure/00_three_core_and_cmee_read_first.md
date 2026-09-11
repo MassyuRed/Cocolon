@@ -11,7 +11,9 @@ implementation_effect: 0
 automatic_progression: false
 ---
 
-> 2026-09-11 Q3現在地：添付修正版Technical Design v1.2に従い、Q2のコード実装完了からQ3へ進めた。Plusの適格本人履歴、Premiumの本人続行による最大3問と確認・修正・否定できる解釈フレーム、限定条件のLayer3を保存・API・RNまで実装した。Q3のコード実装は完了し、次の実装単位はQ4の統合・実本文確認・互換性・公開接続準備。実DB適用、端末・実課金確認、Mashの正式商品判断、公開操作は別作業として未実施。default OFF、商品NOT_CLEAR、Draft/open/unmergedを維持する。以下の旧Q1/Q2段落・Product Read待ちの順序は当時の履歴であり、Q3/Q4のコード進行を止める現行条件ではない。現在の進行ownerは本系列の`06_implementation_order_migration_and_verification.md`末尾Q3節とAPI既存handoff末尾Q3節。
+> 2026-09-11 Q4現在地：修正版v1.2に従い、公開用mode・単一生成owner・旧client/保存版互換・停止復旧・bootstrap/RN統合を実装し、API163件とRN56件を確認した。初回の不自然な名詞化と肯定的回答/当時訂正の本文不成立を修正。保存済み公開合成22ケースと既存100件を全読した。本文の長い再掲と定型性は引き続き改善対象で、商品NOT_CLEAR、公開未実施。Q4の実装・検証・具体的残件は正本06とAPI既存handoffの末尾Q4節。実DB・端末・実課金・Mash正式判断・公開は別資料で扱い、その未実施をコード進行の停止条件にしない。
+
+> 2026-09-11 Q3時点の記録：添付修正版Technical Design v1.2に従い、Q2のコード実装完了からQ3へ進めた。Plusの適格本人履歴、Premiumの本人続行による最大3問と確認・修正・否定できる解釈フレーム、限定条件のLayer3を保存・API・RNまで実装した。Q3のコード実装は完了し、次の実装単位はQ4の統合・実本文確認・互換性・公開接続準備。実DB適用、端末・実課金確認、Mashの正式商品判断、公開操作は別作業として未実施。default OFF、商品NOT_CLEAR、Draft/open/unmergedを維持する。以下の旧Q1/Q2段落・Product Read待ちの順序は当時の履歴であり、Q3/Q4のコード進行を止める現行条件ではない。現在の進行ownerは本系列の`06_implementation_order_migration_and_verification.md`末尾Q3節とAPI既存handoff末尾Q3節。
 
 ## 2026-09-11 Q2履歴 — 保存・API・入力/履歴の一往復
 
@@ -196,3 +198,8 @@ Emlisは「今回の入力を読んだ観測→重要な一点の任意質問→
 Q1・Q2・Q3のコード実装を完了として記録し、次はQ4の実装統合、対象集合の初回/質問/回答後本文の確認と修正、旧client/保存版互換、公開用mode・単一生成ownerの接続準備、保存済み訂正を消さない停止・復旧のコードと検証へ進む。古いcandidate91単独修正ループやProduct Read PASS待ちへ戻さない。
 
 実DB適用、端末・実課金の環境確認、Mashの正式商品判断、merge/deploy/公開切替は、API `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md`へ分離した未実施作業。これらが未実施という理由だけでQ3/Q4のコード作業を停止しない。機械成功・華恋の本文確認・Mashの商品合格・公開を相互に代用しない。
+
+
+## 2026-09-11 Q4 — 現在の接続
+
+Q4の変更file・直接変更しない影響ownerは[01 EmlisAI地図のQ4節](01_emlis_ai_current_structure.md)に集約。bootstrapでreader、server modeでwriterを選び、共有作者へ明示EMLIS_APPLICATIONを渡す。停止は保存済み本文と本人の訂正を保持するread_only。旧I5への単純切戻しを回復としない。原入力保存・国家dispatchと他中核の責務は分離したまま、実装/本文検証を既存PR3/30で継続する。

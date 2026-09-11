@@ -15,6 +15,8 @@ automatic_progression: false
 
 # Cocolon / EmlisAI 長期開発ロードマップ CURRENT
 
+> 2026-09-11 Q4現在地：修正版v1.2に従い、公開用mode・単一生成owner・旧client/保存版互換・停止復旧・bootstrap/RN統合を実装し、API163件とRN56件を確認した。初回の不自然な名詞化と肯定的回答/当時訂正の本文不成立を修正。保存済み公開合成22ケースと既存100件を全読した。本文の長い再掲と定型性は引き続き改善対象で、商品NOT_CLEAR、公開未実施。Q4の実装・検証・具体的残件は正本06とAPI既存handoffの末尾Q4節。実DB・端末・実課金・Mash正式判断・公開は別資料で扱い、その未実施をコード進行の停止条件にしない。
+
 > 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabledで意味・実本文一往復と必要回帰の確認済みで、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」です。
 
 
@@ -513,3 +515,8 @@ invalidation and not an NLS v3 method STOP.
 > 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabledで意味・実本文一往復と必要回帰の確認済みで、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」です。
 
 P3の読まれた感・自然さの未達とP8の未完了を維持する。問いは生成失敗や読み落としを隠す手段にしない。一方、初回本文だけの全面PASSをQ1開始条件にせず、本人回答による意味更新までを同じ商品体験として実装・確認する。長期全体進捗をQ1のコード追加だけで増やさない。
+
+
+## 2026-09-11 Q4現在地
+
+修正版v1.2に基づくQ1〜Q3実装からQ4の統合と本文修正へ進めた。公開mode・旧client・停止/保存版回復のコードとRN接続を検証したが、P3の自然さ・読まれた感、P8全体の商品完成を達成済みにしない。旧単独100のProduct Read PASS待ちを質問機能の前提へ戻さず、今回の対象本文の具体的改善を既存正本06/API handoffで管理する。稼働環境への適用とMashの商品判断、公開は別作業。

@@ -19,7 +19,9 @@ current_product_read_state: "EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFI
 candidate_ready: false
 ---
 
-> 2026-09-11 Q3現在地：添付修正版Technical Design v1.2に従い、Q2のコード実装完了からQ3へ進めた。Plusの適格本人履歴、Premiumの本人続行による最大3問と確認・修正・否定できる解釈フレーム、限定条件のLayer3を保存・API・RNまで実装した。Q3のコード実装は完了し、次の実装単位はQ4の統合・実本文確認・互換性・公開接続準備。実DB適用、端末・実課金確認、Mashの正式商品判断、公開操作は別作業として未実施。default OFF、商品NOT_CLEAR、Draft/open/unmergedを維持する。以下の旧Q1/Q2段落・Product Read待ちの順序は当時の履歴であり、Q3/Q4のコード進行を止める現行条件ではない。現在の進行ownerは本系列の`06_implementation_order_migration_and_verification.md`末尾Q3節とAPI既存handoff末尾Q3節。
+> 2026-09-11 Q4現在地：修正版v1.2に従い、公開用mode・単一生成owner・旧client/保存版互換・停止復旧・bootstrap/RN統合を実装し、API163件とRN56件を確認した。初回の不自然な名詞化と肯定的回答/当時訂正の本文不成立を修正。保存済み公開合成22ケースと既存100件を全読した。本文の長い再掲と定型性は引き続き改善対象で、商品NOT_CLEAR、公開未実施。Q4の実装・検証・具体的残件は正本06とAPI既存handoffの末尾Q4節。実DB・端末・実課金・Mash正式判断・公開は別資料で扱い、その未実施をコード進行の停止条件にしない。
+
+> 2026-09-11 Q3時点の記録：添付修正版Technical Design v1.2に従い、Q2のコード実装完了からQ3へ進めた。Plusの適格本人履歴、Premiumの本人続行による最大3問と確認・修正・否定できる解釈フレーム、限定条件のLayer3を保存・API・RNまで実装した。Q3のコード実装は完了し、次の実装単位はQ4の統合・実本文確認・互換性・公開接続準備。実DB適用、端末・実課金確認、Mashの正式商品判断、公開操作は別作業として未実施。default OFF、商品NOT_CLEAR、Draft/open/unmergedを維持する。以下の旧Q1/Q2段落・Product Read待ちの順序は当時の履歴であり、Q3/Q4のコード進行を止める現行条件ではない。現在の進行ownerは本系列の`06_implementation_order_migration_and_verification.md`末尾Q3節とAPI既存handoff末尾Q3節。
 
 ## 2026-09-11 Q2履歴 — 保存・API・入力/履歴の一往復
 
@@ -775,3 +777,24 @@ Emlisは「今回の入力を読んだ観測→重要な一点の任意質問→
 Q1・Q2・Q3のコード実装を完了として記録し、次はQ4の実装統合、対象集合の初回/質問/回答後本文の確認と修正、旧client/保存版互換、公開用mode・単一生成ownerの接続準備、保存済み訂正を消さない停止・復旧のコードと検証へ進む。古いcandidate91単独修正ループやProduct Read PASS待ちへ戻さない。
 
 実DB適用、端末・実課金の環境確認、Mashの正式商品判断、merge/deploy/公開切替は、API `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md`へ分離した未実施作業。これらが未実施という理由だけでQ3/Q4のコード作業を停止しない。機械成功・華恋の本文確認・Mashの商品合格・公開を相互に代用しない。
+
+
+## 2026-09-11 Q4 — 実装統合・公開接続と保存済み訂正の保護
+
+| owner（API sourceは ai/services/ai_inference/ 以下） | 今回の役割・接続 |
+|---|---|
+| API emlis_thread_config.py / api_app_bootstrap.py | legacy/development/active/read_only選択、独立公開承認、bootstrapのreader通知。既定値OFF。 |
+| API emlis_ai_reply_service.py / api_emlis_thread.py / emlis_thread_service.py | 認証済み同一threadへ一本化。旧comment_textには保存current本文だけ。受理/commit時の停止検査、同じ保存回答からの明示回復。 |
+| API cocolon_meaning_experience_engine/contracts.py / engine.py / emlis_thread_engine.py | 明示EMLIS_APPLICATIONをthread専用に許可、旧offline互換。次問候補の失敗で成立した本文を失わない。 |
+| API emlis_ai_grounded_observation_plan.py / emlis_ai_grounded_human_reception.py / cocolon_meaning_experience_engine/emlis_stage1_composition.py | 肯定感情を負担から分離、過去訂正のsource時間保持、出来事と反応の関係を原文に沿って名詞化。同じ作者と独立inverse。 |
+| App AppRuntimeContext.js / lib/api/emlisThreadApi.js / screens/input/useEmlisThread.js | server bootstrapで専用readerを選ぶ。read_only、未作成、結果不明、競合/再送、owner/epoch境界。 |
+| App screens/input/EmlisThreadModal.js | 現在本文を先頭、過去本文と元入力は展開。送信中/結果不明cacheを現在扱いしない。 |
+| App screens/InputScreen.js / navigation/RootNavigator.js | 旧modal/Piece導線を維持し、アカウントごとにprivate state再作成。古いcallback/応答を排除。 |
+| App lib/apiClient.js / lib/api/home/emotionSubmitApi.js / lib/api/home/emotionPieceApi.js | 入力/Pieceの4書込みで開始ownerとtokenを同じsessionから照合し、切替後の別人認証による送信を防ぐ。旧呼出しは追加任意引数で互換。 |
+| API api_contract_registry.py / ai/docs/PUBLIC_API_REGISTRY.md | additive can_writeとmode条件、旧public statusの維持。 |
+| API ai/tests/test_emlis_q4_application.py / fixtures/emlis_q4_synthetic_saved_rounds_20260911.json | mode・旧client・Q2/Q3保存版・停止/回復・実本文/inverse。22ケースの実RPC保存結果。 |
+| App tests/emlis-thread.test.js / tests/rn-screen-contracts.test.js | 実hook/component/API clientの操作と認証競合、既存36screen契約。 |
+
+直接変更しない影響本文として、APIの元入力保存・国家dispatch、app route登録、thread store/履歴/回答更新/投影/本文surface/独立gate、Q2/Q3 migration、認証・subscription・retention・親/account削除、RNのAuthContext・AnalysisHistoryScreen・Home actions/state・draft保存・旧feedback modal・Piece previewと共通API façadeを確認した。補足回答は元入力に所属し、国家件数・花・通知・Astor queue、Piece/Analysis/TodayQuestionへ新しい入力として送らない。
+
+全体図・両repositoryの全treeと役割地図を参照した。旧inventoryの件数を新headの全体再生成と称さず、関係の薄いfileは役割と接点を確認する。System Context v1は使わず原典を直接確認。実適用手順はAPI EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md §9、検証と品質残件は正本06/API既存handoffのQ4節。

@@ -691,3 +691,8 @@ Emlisは「今回の入力を読んだ観測→重要な一点の任意質問→
 | 障害と再送 | ANSWER→意味→本文の独立commit、同じ回答で明示retry。旧操作receiptと現在stateを分ける。CAS後の再読取りと失敗返却も現在contextを照合。 |
 
 Q1 request・prefixは既存版を保持し、Q3のsource集合と寄与数だけをversioned extensionで扱う。履歴をSUPPLEMENTAL_USERへ混ぜず、original+今回の回答をresolveするkernelと、owned historyをresolveする経路を区別する。Layer1/2の独立検証が通った後に任意Layer3を検証し、履歴行失敗で成立したLayer1/2を消さない。
+
+
+## 2026-09-11 Q4 — 実行modeと既存作者
+
+ExecutionModeへEMLIS_APPLICATIONを追加する。保存serviceが認証・mode・sourceを検証してEmlis thread付きrequestだけを渡し、public single requestではREJECTEDとする。旧OFFLINE_CANDIDATEの純粋生成は維持する。EngineOutcomeのbody-free表示も実modeを保持し、内部でofflineを装わない。Q2/Q3保存profileと意味checkpointのsource identityを維持し、旧保存版を同じsourceから読める。Human Reception → Sentence Surface → independent inverseの所有者は同一。作者を二重実行するfallbackを置かない。

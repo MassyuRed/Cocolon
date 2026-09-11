@@ -141,7 +141,7 @@ test('App root wires providers through Phase 9 navigation/runtime split modules'
     'syncPushTokenOnce({ userId })',
     'startPushTokenSync({ userId })',
     'tryOpenRouteIfPending();',
-    '<MainTabs key={`main-tabs-${tutorialResetToken || 0}`} />',
+    '<MainTabs key={`main-tabs-${session.user.id}-${tutorialResetToken || 0}`} />',
   ], 'RootNavigator.js');
 
   assertIncludes(mainTabs, [
@@ -4331,4 +4331,3 @@ test('P10 Gate Recovery public boundary RN contract keeps backend-owned passed p
   assert.equal(isPassedEmlisObservationReply(metaOnlyGateRecoveryPayload), false);
   assert.equal(buildPassedEmlisObservationModalPayload(metaOnlyGateRecoveryPayload), null);
 });
-

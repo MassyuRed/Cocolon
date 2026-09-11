@@ -66,7 +66,7 @@ export default function EmlisThreadModal({ thread, colors }) {
         <Text style={[s.title, { color: colors.TITLE_GOLD }]}>Emlisの観測</Text>
         <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={s.content}>
           {dto?.current_observation && <View style={s.section}>
-            <Text style={[s.label, textStyle]}>{error || uncertain || thread.rejected ? "前回確認した観測（反映状況は未確認）" : "現在の観測"}</Text>
+            <Text style={[s.label, textStyle]}>{busy || error || uncertain || thread.rejected ? "前回確認した観測（反映状況は未確認）" : "現在の観測"}</Text>
             <Text selectable style={[s.body, textStyle]}>{dto.current_observation.text}</Text>
           </View>}
           {dto?.pending_question && <View style={s.section}>

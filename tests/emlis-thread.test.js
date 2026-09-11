@@ -34,6 +34,54 @@ const initial = {
 const completed = { ...initial, revision: 6, state: 'COMPLETED', body_state: 'REFINED',
   answer_saved: true, pending_question: null, current_observation: { event_id: 'new', text: '更新した観測' } };
 
+test('input writes bind the payload owner to the same session that supplies authorization', async t => {
+  let finishSession;
+  const client = load('lib/apiClient.js', {
+    'react-native': { Platform: { OS: 'ios' } },
+    './supabase': { supabase: { auth: { getSession: () => new Promise(resolve => { finishSession = resolve; }) } } },
+    './compat/legacyWireContracts': { readRuntimeApiBaseUrl: () => 'https://synthetic.invalid' },
+    './monitoring': { captureApiError() {} },
+  });
+  const submit = load('lib/api/home/emotionSubmitApi.js', { '../client': client });
+  const piece = load('lib/api/home/emotionPieceApi.js', {
+    '../client': client,
+    '../../compat/legacyWireContracts': { PIECE_WIRE: { routes: {
+      emotionPiecePreview: '/preview', emotionPiecePublish: '/publish', emotionPieceCancel: '/cancel',
+    } } },
+  });
+  const sent = [];
+  t.mock.method(globalThis, 'fetch', async (url, options) => {
+    sent.push({ url, options });
+    return { ok: true, text: async () => '{"id":"saved"}' };
+  });
+  const calls = [
+    () => submit.submitEmotionInput({ memo: 'Aの入力' }, { expectedUserId: 'A' }),
+    () => piece.previewEmotionPiece({ memo: 'Aの入力' }, { expectedUserId: 'A' }),
+    () => piece.publishEmotionPiece('A-preview', { expectedUserId: 'A' }),
+    () => piece.cancelEmotionPiece('A-preview', { expectedUserId: 'A' }),
+  ];
+  for (const call of calls) {
+    for (const session of [{ user: { id: 'B' }, access_token: 'B-token' }, null]) {
+      const pending = call();
+      finishSession({ data: { session } });
+      await assert.rejects(pending, { name: 'AccountChangedError' });
+    }
+  }
+  assert.equal(sent.length, 0);
+  const valid = calls[0]();
+  finishSession({ data: { session: { user: { id: 'A' }, access_token: 'A-refreshed-token' } } });
+  assert.deepEqual(await valid, { id: 'saved' });
+  assert.equal(sent[0].options.headers.Authorization, 'Bearer A-refreshed-token');
+  assert.equal(sent[0].options.body, '{"memo":"Aの入力"}');
+  assert.equal(Object.hasOwn(sent[0].options, 'expectedUserId'), false);
+  const legacy = client.getAccessToken(); finishSession({ data: { session: null } });
+  assert.equal(await legacy, null);
+  const screen = fs.readFileSync(path.join(ROOT, 'screens/InputScreen.js'), 'utf8');
+  for (const call of ['submitEmotionInput(payload', 'previewEmotionPiece(payload', 'publishEmotionPiece(previewId', 'cancelEmotionPiece(previewId']) {
+    assert.ok(screen.includes(`${call}, { expectedUserId: requestOwner.id })`));
+  }
+});
+
 async function mount(api, enabled = true) {
   const { useEmlisThread } = load('screens/input/useEmlisThread.js', {
     '../../lib/api/emlisThreadApi': { emlisThreadApi: api },
@@ -267,5 +315,37 @@ test('current body leads; original source and older observations remain expandab
   let out=JSON.stringify(root.toJSON());assert.match(out,/更新した観測/);assert.doesNotMatch(out,/初回の観測/);
   const toggle=root.root.findAllByType('Button').find(b=>b.props.children==='元の記録とこれまでのやり取り');
   await act(async()=>toggle.props.onPress());out=JSON.stringify(root.toJSON());assert.match(out,/初回の観測/);assert.ok(out.indexOf('更新した観測')<out.indexOf('初回の観測'));
+  await act(async()=>root.unmount());
+});
+
+test('account changes remount private tab state; old hook callbacks cannot mutate the new owner', async () => {
+  let session={user:{id:'A'}},mounts=0;
+  function Tabs(){const [privateDraft]=React.useState(()=>`private-${session.user.id}-${++mounts}`);return React.createElement('Tabs',{privateDraft});}
+  const {default:Root}=load('navigation/RootNavigator.js',{
+    'react-native':{ActivityIndicator:'Spinner',View:'View'},'../AuthContext':{useAuth:()=>({session})},
+    '../AuthScreen':()=>null,'../SubscriptionContext':{useSubscription:()=>({subscriptionBootstrapLoaded:false})},
+    '../TutorialContext':{useTutorial:()=>({tutorialResetToken:0})},'./MainTabs':Tabs,
+    '../lib/iap/iapService':{startIapPurchaseObserver:async()=>{},stopIapPurchaseObserver:()=>{}},
+    '../lib/pushToken':{syncPushTokenOnce:async()=>{},startPushTokenSync:()=>()=>{}},
+    '../lib/monitoring':{captureClientError:()=>{}},'./navigationRef':{tryOpenRouteIfPending:()=>{}},
+  });
+  let root;await act(async()=>{root=Renderer.create(React.createElement(Root));});assert.equal(root.root.findByType('Tabs').props.privateDraft,'private-A-1');
+  session={user:{id:'B'}};await act(async()=>root.update(React.createElement(Root)));assert.equal(root.root.findByType('Tabs').props.privateDraft,'private-B-2');
+  await act(async()=>root.unmount());
+  const h=await mount({get:async()=>initial,answer:()=>assert.fail('old callback sent')});
+  await act(async()=>h.value.open('input'));await act(async()=>h.value.setDraft('Aの下書き'));const old=h.value;
+  await h.user('B');await act(async()=>h.value.open('input'));await act(async()=>h.value.setDraft('Bの下書き'));
+  await act(async()=>{old.setDraft('古い値');old.sendAnswer();old.action('skip');});assert.equal(h.value.draft,'Bの下書き');assert.equal(h.value.uncertain,false);
+  await act(async()=>h.root.unmount());
+});
+
+test('unknown ACK labels the cached body as last confirmed, never current', async () => {
+  const native=Object.fromEntries(['ActivityIndicator','KeyboardAvoidingView','Modal','ScrollView','Text','TextInput','View'].map(x=>[x,x]));Object.assign(native,{Platform:{OS:'ios'},StyleSheet:{create:x=>x}});
+  const {default:Modal}=load('screens/input/EmlisThreadModal.js',{'react-native':native,'../../components/CocolonButton':p=>React.createElement('Button',p,p.children)});
+  let root;const thread={visible:true,dto:completed,draft:'',uncertain:true};
+  await act(async()=>{root=Renderer.create(React.createElement(Modal,{thread,colors:{}}));});
+  let out=JSON.stringify(root.toJSON());assert.match(out,/前回確認した観測/);assert.doesNotMatch(out,/現在の観測/);
+  await act(async()=>root.update(React.createElement(Modal,{thread:{...thread,uncertain:false},colors:{}})));out=JSON.stringify(root.toJSON());assert.match(out,/現在の観測/);
+  await act(async()=>root.update(React.createElement(Modal,{thread:{...thread,uncertain:false,busy:true},colors:{}})));out=JSON.stringify(root.toJSON());assert.match(out,/前回確認した観測/);assert.doesNotMatch(out,/現在の観測/);
   await act(async()=>root.unmount());
 });
