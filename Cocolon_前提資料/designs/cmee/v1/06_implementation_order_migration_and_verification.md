@@ -1,6 +1,6 @@
 # CMEE V1 — Implementation Order / Migration / Verification 詳細設計
 
-> 2026-09-11 Q2更新：Q1 dedicated53件を再確認し、Q2の保存・認証API・RN入力/履歴・明示再試行をdefault OFFの開発候補として実装。実SQLを通す検査とReact renderer検査を実施。稼働DB適用・端末での開発アプリ確認は未実施で、Q2完了確認／商品PASS／公開は未成立。現在の再開先はAPI既存handoff末尾のQ2節と `ai/docs/EMLIS_Q2_DEVELOPMENT.md`。Q3/Q4へ自動進行せず、旧candidate91修正ループへ戻さない。
+> 2026-09-11 Q3現在地：添付修正版Technical Design v1.2に従い、Q2のコード実装完了からQ3へ進めた。Plusの適格本人履歴、Premiumの本人続行による最大3問と確認・修正・否定できる解釈フレーム、限定条件のLayer3を保存・API・RNまで実装した。Q3のコード実装は完了し、次の実装単位はQ4の統合・実本文確認・互換性・公開接続準備。実DB適用、端末・実課金確認、Mashの正式商品判断、公開操作は別作業として未実施。default OFF、商品NOT_CLEAR、Draft/open/unmergedを維持する。以下の旧Q1/Q2段落・Product Read待ちの順序は当時の履歴であり、Q3/Q4のコード進行を止める現行条件ではない。現在の進行ownerは本系列の`06_implementation_order_migration_and_verification.md`末尾Q3節とAPI既存handoff末尾Q3節。
 
 
 - document id: `cocolon.cmee.v1.implementation_migration_verification.detailed_design`
@@ -8,8 +8,8 @@
 - lifecycle: `CURRENT_PRODUCT_OWNER_NON_PASS / REALIZABLE_RECEPTION_EXPRESSION_WORK_STAGE1_ACTIVE`
 - absolute implementation rule: `BOUND_TO_PARENT_FINAL_DESIGN_SECTION_0_3`
 - current implementation state: `INHERITED_OWNER_CHAIN_IMPLEMENTED_NOT_ACCEPTED / IM10_NON_PASS`
-- current authorized implementation: `MASH_EXPLICIT_EMLIS_Q2_APPLICATION_IMPLEMENTATION_20260911`
-- only admissible current lifecycle action: `Q2_APPLICATION_IMPLEMENTED_AWAITING_DEVELOPMENT_DB_AND_DEVICE_CONFIRMATION`
+- current authorized implementation: `MASH_EXPLICIT_EMLIS_Q3_CONTINUATION_PER_20260911_V1_2`
+- only admissible current lifecycle action: `Q3_IMPLEMENTATION_COMPLETE_Q4_IMPLEMENTATION_NEXT`
 - Stage 1 language route: `ROUTE_A_PROVIDERLESS_EXISTING_OWNER_CHAIN / SOURCE_GROUNDED_REALIZABLE_RECEPTION_EXPRESSION_CONTRACT`
 - external generative AI / remote provider / body send: `PROHIBITED / 0 / 0`
 - retired provider investigation: `REMOVED_FROM_CURRENT_TREE_GIT_HISTORY_ONLY`
@@ -17,7 +17,7 @@
 - Step 10 integrated revision: `CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2_REFLECTED`
 - Stage 1 downstream case-frame final design: `MASH_APPROVED_TYPED_CASE_FRAME_V2_WITH_SESSION_SAFE_ORDER_I00_I14`
 - Stage 1 upstream input-specific meaning final design: `FINAL_CANONICAL_IMPLEMENTATION_READY_SECTIONS_19_THROUGH_22`
-- current order owner: `THIS_FILE_20260911_Q2_SECTION_AND_EXISTING_API_HANDOFF`
+- current order owner: `THIS_FILE_20260911_Q3_SECTION_AND_EXISTING_API_HANDOFF`
 
 Q1開始前の履歴（2026-09-10 candidate91）：継続状態と予定までの時間を元行動と保持するsource証明を追加。1件の直接診断フォローの欠落を修正したが、対象の生成不可は未解消。他99件全record・全100件の観測と可否理由は同一。華恋が同じ100件全文確認、73 GENERATED／27 UNAVAILABLE、旧142責務を保持して各層143。必須438は432 PASS／既存6 FAIL、前回434の成否同一・追加4全PASS。復唱は長く、中心内容・複数主題／共有関係・定型締めは残りNOT_CLEAR。この段落はQ1開始前baselineの記録。現在はQ1節とAPI既存handoffから再開。System Context未使用・原典直接確認、PR37不変更。
 
@@ -27,7 +27,7 @@ Q1開始前の履歴（2026-09-10 candidate91）：継続状態と予定まで�
 
 ---
 
-Current execution routing ownerは本fileの「2026-09-10 current — Q1開始と再開順」とAPI既存handoffである。以下の§89への順序参照はQ1開始前の履歴として保持する。Emlis input-specific meaning implementationについて、§0–§86は設計・実装・失敗・旧receipt・IM10 verdictの履歴として保持し、current owner／lifecycle判定では本書Q1節とAPI既存handoffを優先する。final canonical §§19–§22は実装済み責務のdesign authorityとして保持し、旧additional-correction body §13.1–§13.13はdownstream／historical contextであってcurrent entrypointではない。
+Current execution routing ownerは本file末尾の「2026-09-11 Q3 — 有料履歴・逐次質問・解釈フレーム」とAPI既存handoffである。以下の§89への順序参照はQ1開始前の履歴として保持する。Emlis input-specific meaning implementationについて、§0–§86は設計・実装・失敗・旧receipt・IM10 verdictの履歴として保持し、current owner／lifecycle判定では本書Q1節とAPI既存handoffを優先する。final canonical §§19–§22は実装済み責務のdesign authorityとして保持し、旧additional-correction body §13.1–§13.13はdownstream／historical contextであってcurrent entrypointではない。
 
 ## 0. Current conclusion
 
@@ -7917,3 +7917,28 @@ Q1のFree相当process-local一往復を実装・検証。初回本文→一問�
 Q1の53検査を再確認してQ2へ進んだ。保存/API/RN/履歴/遅延回答/削除/同一操作の再送/一時障害後の明示retryを同じ単位で実装し、実PostgreSQL WASM RPCによる一往復と障害時の保存、React hook/panel動作を確認した。元入力を前日にした合成5組の実保存本文も全文確認した。長い再掲・定型受取は残りNOT_CLEAR。
 
 次は開発DB適用と端末上の開発アプリで一往復・再開・意味確定後の本文失敗・再入力なし回復を確認する。これが残るためQ2のアプリ完了を宣言しない。確認前にQ3の有料履歴/追加roundやQ4へ自動進行しない。実機正式受入と商品判断、本番単一路切替はQ4。既存I5はflag OFF時の公開ownerとして維持する。再現手順・検査結果・既存のregistry2失敗はAPI `EMLIS_Q2_DEVELOPMENT.md` と既存handoffがowner。
+
+## 2026-09-11 Q3 — 有料履歴・逐次質問・解釈フレーム
+
+| 対象 | 現行Q3の動作 |
+|---|---|
+| Free | 今回の原入力＋同thread回答のみ、最大1問。履歴とframeなし。 |
+| Plus | 最大1問、所有者・状態・365日の条件を満たす直近最大3記録から必要な履歴。 |
+| Premium | 最大3問、3650日の条件を満たす直近最大6記録と修正可能frame。元入力自体の閲覧は既存Premium無期限条件のまま。 |
+| 質問発行 | 回答後本文を先に保存し、次候補があればAWAITING_CONTINUE。本人のcontinueで初めて次問を保存・発行する。4問目なし。 |
+| プラン変更 | 開始時上限と現在上限の小さい方。upgradeで開始枠を増やさず、downgrade後も既発行問への回答を受けるが次問は現在枠に従う。 |
+| 履歴失効 | 編集・削除・回答更新・期限・権限・feedback versionの変化を保存時に照合。古い現在本文はCONTEXT_CHANGED、旧timelineでは自分のLayer1/2だけを履歴として扱う。 |
+| 意味変更なし | 同じ有効意味・同じ許可contextの保存済み本文だけを再使用。旧本文へ新prefixを付け替えず、最終commitでもguardを再照合。 |
+| 障害と再送 | ANSWER→意味→本文の独立commit、同じ回答で明示retry。旧操作receiptと現在stateを分ける。CAS後の再読取りと失敗返却も現在contextを照合。 |
+
+検証結果：API/純粋処理/実SQL/RPC/旧Q1-Q2/共有作者・inverseの8 test filesとregistry文書整合1件で144 PASS、追加の有料障害・start競合2件で2 PASS（重複なし合計146）。RN専用12＋既存screen契約36で48 PASS。
+
+初回の拡張回帰は139 PASS/1 FAILで、Q3寄与上限helperが不正なNone参照を拒否する前に例外化していた。型guardを修正し、関連30件と最終144件で確認済み。初回失敗を成功へ書き換えず、この修正経緯を保持する。
+
+実migrationをPGliteへ適用してRPCを実行し、旧Q2保存行の移行・再読取り、三round、所有者境界、意味と本文の分離、履歴の削除/更新、プラン変更、UNCHANGED保存競合、feedbackの二度目取得競合、一時障害・再送を確認した。React rendererは実hook/componentを対象とし、native端末の確認ではない。PGlite上のinterleavingは稼働Postgres複数接続の負荷試験ではない。
+
+Q3の公開合成入力について、Free/Plus/Premiumの保存済み初回本文・質問・回答後本文、Premium三round、frame修正、前回答時点の訂正を本文として確認した。引用の長さ・定型的な受け取り・有限文法の範囲は残り、商品NOT_CLEAR。共有作者変更の区切りとしてcanonical100も今回再実行した。保存済み本文baselineを取得できなかったため、Q1保存版 `b679a04b501ae7d4bb7a73bcdb8c449fdc7af2da` と今回の固定sourceを別processで再生成した比較であり、過去成果物の取得と称しない。既存validated batch/manifest・request adapter・日時・入力順序を不変とし、原row、direct projectionと全units、outer artifact/plan/trace/status/reasonsの全100レコードが一致。direct100、outer73 GENERATED/27 UNAVAILABLE。華恋が全100件の元入力全field・direct本文・提供可否/理由を全文確認し、outer本文がdirectの対応本文と同じことも照合した。長い再掲、定型的な締め、中心感情・共有関係の不足は残りNOT_CLEAR。Q3の機能検証件数とは別分母で記録する。
+
+Q1・Q2・Q3のコード実装を完了として記録し、次はQ4の実装統合、対象集合の初回/質問/回答後本文の確認と修正、旧client/保存版互換、公開用mode・単一生成ownerの接続準備、保存済み訂正を消さない停止・復旧のコードと検証へ進む。古いcandidate91単独修正ループやProduct Read PASS待ちへ戻さない。
+
+実DB適用、端末・実課金の環境確認、Mashの正式商品判断、merge/deploy/公開切替は、API `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md`へ分離した未実施作業。これらが未実施という理由だけでQ3/Q4のコード作業を停止しない。機械成功・華恋の本文確認・Mashの商品合格・公開を相互に代用しない。

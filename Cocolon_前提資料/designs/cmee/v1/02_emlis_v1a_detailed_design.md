@@ -1,6 +1,6 @@
 # CMEE V1-A — EmlisAI Observation Vertical 詳細設計
 
-> 2026-09-11 Q2更新：Q1 dedicated53件を再確認し、Q2の保存・認証API・RN入力/履歴・明示再試行をdefault OFFの開発候補として実装。実SQLを通す検査とReact renderer検査を実施。稼働DB適用・端末での開発アプリ確認は未実施で、Q2完了確認／商品PASS／公開は未成立。現在の再開先はAPI既存handoff末尾のQ2節と `ai/docs/EMLIS_Q2_DEVELOPMENT.md`。Q3/Q4へ自動進行せず、旧candidate91修正ループへ戻さない。
+> 2026-09-11 Q3現在地：添付修正版Technical Design v1.2に従い、Q2のコード実装完了からQ3へ進めた。Plusの適格本人履歴、Premiumの本人続行による最大3問と確認・修正・否定できる解釈フレーム、限定条件のLayer3を保存・API・RNまで実装した。Q3のコード実装は完了し、次の実装単位はQ4の統合・実本文確認・互換性・公開接続準備。実DB適用、端末・実課金確認、Mashの正式商品判断、公開操作は別作業として未実施。default OFF、商品NOT_CLEAR、Draft/open/unmergedを維持する。以下の旧Q1/Q2段落・Product Read待ちの順序は当時の履歴であり、Q3/Q4のコード進行を止める現行条件ではない。現在の進行ownerは本系列の`06_implementation_order_migration_and_verification.md`末尾Q3節とAPI既存handoff末尾Q3節。
 
 
 - document id: `cocolon.cmee.v1a.emlis_observation.detailed_design`
@@ -17,7 +17,7 @@
 - private human Product Read: `CURRENT_EVALUATED_NON_PASS / HISTORICAL_PREDECESSOR_EVALUATED_FAIL_STOP`
 - candidate ready: `false`
 - production admission: `false`
-- current authorized implementation: `MASH_EXPLICIT_EMLIS_Q2_APPLICATION_IMPLEMENTATION_20260911`
+- current authorized implementation: `MASH_EXPLICIT_EMLIS_Q3_CONTINUATION_PER_20260911_V1_2`
 - automatic progression: `false`
 - Cycle001 effect: `0`
 - Stage 1 language route: `ROUTE_A_PROVIDERLESS / SOURCE_GROUNDED_REALIZABLE_RECEPTION_EXPRESSION / HUMAN_RECEPTION_SOLE_LAYER2_AUTHOR`
@@ -3097,3 +3097,22 @@ Q1のFree相当process-local一往復を実装・検証。初回本文→一問�
 元入力保存後のEmlis orchestrationがthreadを作成し、回答source・意味checkpoint・本文を別commitで保存する。意味訂正済みで本文が失敗しても旧観測を現在へ戻さない。未回答questionはcloseでは消費せず、履歴の元input IDから同じquestionへ戻る。NO_MATERIAL_UPDATEは保存本文を再利用し、UNRESOLVED/PARTIALを完読扱いにしない。
 
 Q2 serviceがDEVELOPMENT_APPLICATIONを所有し、内部のQ1作者は純粋なOFFLINE_CANDIDATEとして継承する。国家件数・通知・課金・Astor materialへ回答を流さない。TodayQuestionと別identity、Piece publish modalと別UIを使う。全tierともFree scope一問。保存中の競合・source/親/access変更・lease失効をDBで再確認し、確認済み一時障害だけ同じ回答/意味で明示retryする。実装file mapはcurrent_structure/01、wire/保存shapeは05、到達と残件は06およびAPI既存handoff。
+
+## 2026-09-11 Q3 — 有料履歴・逐次質問・解釈フレーム
+
+Emlisは「今回の入力を読んだ観測→重要な一点の任意質問→本人回答で観測を深める」体験を担当する。回答・続行・フレーム操作は元入力に所属し、国家の入力件数・課金event・通知・Astor queueを増やさない。原入力の保存と既存fanoutは`emotion_submit_service`、履歴の閲覧期限は既存`publish_governance`が所有する。Piece／Analysisの入力許可、TodayQuestionの回答schema、旧I5 public wireを拡張しない。共有CMEE→既存Human Reception作者→Sentence Surface→独立逆検証の順を継承し、外部生成AIや別本文rendererは追加しない。
+
+| 対象 | 現行Q3の動作 |
+|---|---|
+| Free | 今回の原入力＋同thread回答のみ、最大1問。履歴とframeなし。 |
+| Plus | 最大1問、所有者・状態・365日の条件を満たす直近最大3記録から必要な履歴。 |
+| Premium | 最大3問、3650日の条件を満たす直近最大6記録と修正可能frame。元入力自体の閲覧は既存Premium無期限条件のまま。 |
+| 質問発行 | 回答後本文を先に保存し、次候補があればAWAITING_CONTINUE。本人のcontinueで初めて次問を保存・発行する。4問目なし。 |
+| プラン変更 | 開始時上限と現在上限の小さい方。upgradeで開始枠を増やさず、downgrade後も既発行問への回答を受けるが次問は現在枠に従う。 |
+| 履歴失効 | 編集・削除・回答更新・期限・権限・feedback versionの変化を保存時に照合。古い現在本文はCONTEXT_CHANGED、旧timelineでは自分のLayer1/2だけを履歴として扱う。 |
+| 意味変更なし | 同じ有効意味・同じ許可contextの保存済み本文だけを再使用。旧本文へ新prefixを付け替えず、最終commitでもguardを再照合。 |
+| 障害と再送 | ANSWER→意味→本文の独立commit、同じ回答で明示retry。旧操作receiptと現在stateを分ける。CAS後の再読取りと失敗返却も現在contextを照合。 |
+
+Layer3は既存P5の接続可能familyを参照し、今回は回答と出来事の関係が成立した`self_understanding_follow`に限定する。現在と適格な過去記録の明示句が一致し、主体・極性・modality・時点・述語型が整合するときだけ、過去の日付付きで言葉の重なりを0〜1行示す。一般的な意味類似、原因、人格、長期変化の推定やP5全体の移植が完成したとは扱わない。
+
+Premiumのフレームは、評価済み履歴の本人回答と対象の出来事から、原入力当時の受け取りを構築できる有限文法の範囲。現在の明示的な複数候補が同順位になる場合に焦点選定を補助し、現在回答を優先する。本人の修正は独立sourceとして保存し、否定した読みは再採用しない。feedback保存直後は自動再生成せず、古い本文の現在性を外し、次回生成へ反映する。

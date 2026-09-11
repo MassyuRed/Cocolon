@@ -19,7 +19,9 @@ current_product_read_state: "EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFI
 candidate_ready: false
 ---
 
-## 2026-09-11 Q2 current — 保存・API・入力/履歴の一往復
+> 2026-09-11 Q3現在地：添付修正版Technical Design v1.2に従い、Q2のコード実装完了からQ3へ進めた。Plusの適格本人履歴、Premiumの本人続行による最大3問と確認・修正・否定できる解釈フレーム、限定条件のLayer3を保存・API・RNまで実装した。Q3のコード実装は完了し、次の実装単位はQ4の統合・実本文確認・互換性・公開接続準備。実DB適用、端末・実課金確認、Mashの正式商品判断、公開操作は別作業として未実施。default OFF、商品NOT_CLEAR、Draft/open/unmergedを維持する。以下の旧Q1/Q2段落・Product Read待ちの順序は当時の履歴であり、Q3/Q4のコード進行を止める現行条件ではない。現在の進行ownerは本系列の`06_implementation_order_migration_and_verification.md`末尾Q3節とAPI既存handoff末尾Q3節。
+
+## 2026-09-11 Q2履歴 — 保存・API・入力/履歴の一往復
 
 Q1 pure53件を確認後、Q2 development applicationをdefault OFFで実装。稼働DB適用と端末の開発アプリ確認は残るためQ2完了・商品PASS・公開とはしない。実装/確認の現在ownerはAPI既存handoffのQ2節と `ai/docs/EMLIS_Q2_DEVELOPMENT.md`。以下のQ1記録はQ1時点の効果を示す。
 
@@ -747,3 +749,29 @@ STRUCTURE_MAP_DELTA_NONE：既存Human Receptionの文法部品のみ。owner／
 2026-09-06前回（対比の対象節と丁寧な背景節の名詞化／candidate28）：既存Human Receptionで、選択済みcontrastの対象節だけを有限化し、丁寧な背景節を原文のまま名詞化した。引用を含むsource fieldと言いかけは有限化を見送る。意味核・関係・対象順位・Move・選択inputは変更しない。固定100はdirect100、Move／expression／binding124、外側73/27。フォロー1件だけが変わり、残99件は全保存項目同一。全225検査221成功／既存4失敗、新規失敗0・未実行0。華恋が原入力全フィールド・両層本文の全100を読みNOT_CLEAR。長い再掲・分類的な対象句・定型的な締め、負担／未完／混合状態の選択は残件。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
 
 STRUCTURE_MAP_DELTA_NONE：既存Human Receptionの文法処理のみ。owner／国家／公開・旧経路／他中核の境界は同じ。実装・検証・残件は正本02／06と既存runtime handoffのcandidate28末尾を参照。
+
+## 2026-09-11 Q3 — 有料履歴・逐次質問・解釈フレーム
+
+| 所在 / owner | Q3の責任と接続 |
+|---|---|
+| API `cocolon_meaning_experience_engine/emlis_thread_contracts.py` / `emlis_thread_source.py` | Q3 capability、逐次3回答、発行済み質問列、版付きprefix。本人履歴・回答・feedbackを異なるsourceとして扱う。 |
+| API `.../emlis_thread_history.py`（新規） | 所有者・保持期間で許可されたraw履歴から意味を再導出。暫定フレーム、独立feedback、Layer3適格性と根拠。古い生成本文・model cacheは意味根拠にしない。 |
+| API `.../emlis_question.py` / `emlis_answer_update.py` | 既質問焦点を除いた次候補、回答ごとの累積ADD/REVISE/WITHDRAW。前回答の訂正はその回答時点を保持。 |
+| API `.../emlis_thread_engine.py` / `emlis_thread_surface.py` / `emlis_thread_projection.py` | 各roundの意味checkpointと本文、保留候補と発行の分離、共有作者への投影、検証済み本文の後に任意Layer3。 |
+| API `.../contracts.py` / `emlis_stage1_response.py` / `emlis_input_specific_meaning.py` | Q3 logical graphだけ寄与上限8（原入力5＋回答3）。旧single/Q1の上限5と型検証を維持。 |
+| API `emlis_ai_grounded_sentence_surface.py` / `emlis_ai_grounded_human_reception.py` / `emlis_ai_grounded_observation_gate.py` | 独立した対比の組を保持した文、前回答時点、既存受け取り。組の取り違え・時点改変・Layer3根拠を独立照合。 |
+| API `emlis_thread_service.py` / `emlis_thread_store.py` | 本人続行、round別保存、現在権限、履歴revision/feedback version、CAS、再取得、失敗後の明示retry、操作receipt。 |
+| API `api_emlis_thread.py` / `api_contract_registry.py` / `ai/docs/PUBLIC_API_REGISTRY.md` | strict DTOとframes route。本人確認・訂正・否定は質問枠を消費しない。 |
+| API `emlis_ai_reply_service.py` | default OFFの開発入口でQ3 profileを選択。旧I5との二重実行をしない。 |
+| API `supabase/migrations/20260911041749_emlis_q3_plan_rounds.sql`（新規） | Q2後の追加migration、開始時上限、round、frame feedback、owned context RPCと保存時再照合。親/account削除cascade、RLS/service_role境界を保持。 |
+| App `lib/api/emlisThreadApi.js` / `screens/input/useEmlisThread.js` / `screens/input/EmlisThreadModal.js` | 本人続行・停止・round表示・フレーム編集。過去roundの回答receiptで新下書きを消さず、不明ACKは同じkey/payloadで照合する。 |
+| API `ai/tests/test_cmee_emlis_q3_thread.py` / `test_emlis_q3_application.py`（新規） | 実本文・時点訂正・旧Q2移行・実SQL/RPC・履歴/プラン/競合/失敗の検証。 |
+| API `ai/tests/test_emlis_q2_application.py` / `helpers/emlis_q2_postgres.cjs`; App `tests/emlis-thread.test.js` | Q2互換と実開発入口、追加DDLの実行、実hook/componentのQ3継続・編集検証。 |
+
+上表のAPI Python sourceは`ai/services/ai_inference/`以下。影響先として、直接修正しない`engine.py`、既存source/observation plan/reception plan、`app.py`、`emlis_thread_config.py`、Q2 migration、`emotion_submit_service`、`publish_governance`、認証・親入力削除・account削除、AppのInputScreen／AnalysisHistoryScreen／AuthContext／apiClient／draft cleanup／Piece返信導線の本文を確認した。全体図・国家図・両repositoryの全treeを照合し、関係の薄い既存familyは地図で役割を確認した。全repository全文監査を完了したという意味ではない。
+
+Emlisは「今回の入力を読んだ観測→重要な一点の任意質問→本人回答で観測を深める」体験を担当する。回答・続行・フレーム操作は元入力に所属し、国家の入力件数・課金event・通知・Astor queueを増やさない。原入力の保存と既存fanoutは`emotion_submit_service`、履歴の閲覧期限は既存`publish_governance`が所有する。Piece／Analysisの入力許可、TodayQuestionの回答schema、旧I5 public wireを拡張しない。共有CMEE→既存Human Reception作者→Sentence Surface→独立逆検証の順を継承し、外部生成AIや別本文rendererは追加しない。
+
+Q1・Q2・Q3のコード実装を完了として記録し、次はQ4の実装統合、対象集合の初回/質問/回答後本文の確認と修正、旧client/保存版互換、公開用mode・単一生成ownerの接続準備、保存済み訂正を消さない停止・復旧のコードと検証へ進む。古いcandidate91単独修正ループやProduct Read PASS待ちへ戻さない。
+
+実DB適用、端末・実課金の環境確認、Mashの正式商品判断、merge/deploy/公開切替は、API `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md`へ分離した未実施作業。これらが未実施という理由だけでQ3/Q4のコード作業を停止しない。機械成功・華恋の本文確認・Mashの商品合格・公開を相互に代用しない。

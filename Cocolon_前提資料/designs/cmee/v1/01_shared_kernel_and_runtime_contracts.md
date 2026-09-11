@@ -1,6 +1,6 @@
 # CMEE V1 Shared Kernel / Runtime Contracts 詳細設計
 
-> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabledで意味・実本文一往復と必要回帰の確認済みで、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」です。
+> 2026-09-11 Q3現在地：添付修正版Technical Design v1.2に従い、Q2のコード実装完了からQ3へ進めた。Plusの適格本人履歴、Premiumの本人続行による最大3問と確認・修正・否定できる解釈フレーム、限定条件のLayer3を保存・API・RNまで実装した。Q3のコード実装は完了し、次の実装単位はQ4の統合・実本文確認・互換性・公開接続準備。実DB適用、端末・実課金確認、Mashの正式商品判断、公開操作は別作業として未実施。default OFF、商品NOT_CLEAR、Draft/open/unmergedを維持する。以下の旧Q1/Q2段落・Product Read待ちの順序は当時の履歴であり、Q3/Q4のコード進行を止める現行条件ではない。現在の進行ownerは本系列の`06_implementation_order_migration_and_verification.md`末尾Q3節とAPI既存handoff末尾Q3節。
 
 
 - document id: `cocolon.cmee.v1.shared_kernel.detailed_design`
@@ -674,3 +674,20 @@ provider-required routeでproviderがmissing／invalidならroute変更せず、
 provider／resource mismatch、crash、invalid payloadはprovider-required routeで`UNAVAILABLE`、fallback 0、automatic retry 0。OOVはliteral source spanとしてだけ保持し、relation／lemma／normalization／meaningを推測しない。raw input／output、question、parser output、surface／lemma／range、private identityはpublic禁止。
 
 一方、251-owner、Cycle001のfresh current denominator／acceptance、current100評価条件はCMEE implementation prerequisiteではないが、本設計からhistorical-only、unnecessaryまたはretiredとは決めない。本設計はそれらを変更・緩和・退役せず、Cycle適用時はfresh Cycle001 current ownerに従う。
+
+## 2026-09-11 Q3 — 有料履歴・逐次質問・解釈フレーム
+
+Emlisは「今回の入力を読んだ観測→重要な一点の任意質問→本人回答で観測を深める」体験を担当する。回答・続行・フレーム操作は元入力に所属し、国家の入力件数・課金event・通知・Astor queueを増やさない。原入力の保存と既存fanoutは`emotion_submit_service`、履歴の閲覧期限は既存`publish_governance`が所有する。Piece／Analysisの入力許可、TodayQuestionの回答schema、旧I5 public wireを拡張しない。共有CMEE→既存Human Reception作者→Sentence Surface→独立逆検証の順を継承し、外部生成AIや別本文rendererは追加しない。
+
+| 対象 | 現行Q3の動作 |
+|---|---|
+| Free | 今回の原入力＋同thread回答のみ、最大1問。履歴とframeなし。 |
+| Plus | 最大1問、所有者・状態・365日の条件を満たす直近最大3記録から必要な履歴。 |
+| Premium | 最大3問、3650日の条件を満たす直近最大6記録と修正可能frame。元入力自体の閲覧は既存Premium無期限条件のまま。 |
+| 質問発行 | 回答後本文を先に保存し、次候補があればAWAITING_CONTINUE。本人のcontinueで初めて次問を保存・発行する。4問目なし。 |
+| プラン変更 | 開始時上限と現在上限の小さい方。upgradeで開始枠を増やさず、downgrade後も既発行問への回答を受けるが次問は現在枠に従う。 |
+| 履歴失効 | 編集・削除・回答更新・期限・権限・feedback versionの変化を保存時に照合。古い現在本文はCONTEXT_CHANGED、旧timelineでは自分のLayer1/2だけを履歴として扱う。 |
+| 意味変更なし | 同じ有効意味・同じ許可contextの保存済み本文だけを再使用。旧本文へ新prefixを付け替えず、最終commitでもguardを再照合。 |
+| 障害と再送 | ANSWER→意味→本文の独立commit、同じ回答で明示retry。旧操作receiptと現在stateを分ける。CAS後の再読取りと失敗返却も現在contextを照合。 |
+
+Q1 request・prefixは既存版を保持し、Q3のsource集合と寄与数だけをversioned extensionで扱う。履歴をSUPPLEMENTAL_USERへ混ぜず、original+今回の回答をresolveするkernelと、owned historyをresolveする経路を区別する。Layer1/2の独立検証が通った後に任意Layer3を検証し、履歴行失敗で成立したLayer1/2を消さない。

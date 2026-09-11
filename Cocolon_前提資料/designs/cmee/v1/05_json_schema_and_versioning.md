@@ -1,6 +1,6 @@
 # CMEE V1 — JSON Schema / Identity / Versioning 詳細設計
 
-> 2026-09-11 Q2更新：Q1 dedicated53件を再確認し、Q2の保存・認証API・RN入力/履歴・明示再試行をdefault OFFの開発候補として実装。実SQLを通す検査とReact renderer検査を実施。稼働DB適用・端末での開発アプリ確認は未実施で、Q2完了確認／商品PASS／公開は未成立。現在の再開先はAPI既存handoff末尾のQ2節と `ai/docs/EMLIS_Q2_DEVELOPMENT.md`。Q3/Q4へ自動進行せず、旧candidate91修正ループへ戻さない。
+> 2026-09-11 Q3現在地：添付修正版Technical Design v1.2に従い、Q2のコード実装完了からQ3へ進めた。Plusの適格本人履歴、Premiumの本人続行による最大3問と確認・修正・否定できる解釈フレーム、限定条件のLayer3を保存・API・RNまで実装した。Q3のコード実装は完了し、次の実装単位はQ4の統合・実本文確認・互換性・公開接続準備。実DB適用、端末・実課金確認、Mashの正式商品判断、公開操作は別作業として未実施。default OFF、商品NOT_CLEAR、Draft/open/unmergedを維持する。以下の旧Q1/Q2段落・Product Read待ちの順序は当時の履歴であり、Q3/Q4のコード進行を止める現行条件ではない。現在の進行ownerは本系列の`06_implementation_order_migration_and_verification.md`末尾Q3節とAPI既存handoff末尾Q3節。
 
 
 - document id: `cocolon.cmee.v1.schema_and_versioning.detailed_design`
@@ -2533,3 +2533,24 @@ profileは `cocolon.emlis_thread.application.v1`、runtimeは `q2.free.one_round
 MEANING_UPDATEはthread＋source prefix＋semantic schemaで一意。ANSWERはthread＋questionで一意。idempotency_keyはthread内一意でpayload fingerprintを保持する。回答受理、意味確定、本文保存のtransactionを分け、現在pointer更新と該当eventsのappendは原子的。RPCは短いlock＋CAS、FK cascade、service-roleを含むowner/access検査を行う。private graphs/checkpoints/raw bytes/digestsをpublic DTOに含めない。parent created_atの保持期間を使い、回答日時で延長しない。
 
 source-modeや意味schemaを変えるQ3では既存checkpointを黙って再利用しない。Q2に本番schema migrationの適用済みeffectはない。物理DDL ownerはmashos-apiの `supabase/migrations/20260911020509_emlis_input_threads_q2.sql`、route一覧は `ai/docs/PUBLIC_API_REGISTRY.md`。
+
+## 2026-09-11 Q3 — 有料履歴・逐次質問・解釈フレーム
+
+実行profileは`q3.plan.sequential.v1`、旧保存profileは`q2.free.one_round.v1`。新規開発入口だけQ3、旧Q2保存threadの上限1とDTO意味は維持する。logical graph source版は`cocolon.cmee.emlis_thread.q3.v1`、Q1版は変更しない。公開wireはadditiveな`cocolon.emlis_thread.application.v1`のまま。
+
+`EmlisQuestionControlV1.issued_questions/question_limit`、最大3件の回答、Q3 capability、owned history guards、独立frame feedback refsをprivate prefixへ含める。質問文・生成済み本文・推論cacheは本人sourceへ昇格しない。公開DTOに`started_question_limit`、`AWAITING_CONTINUE`、`CONTEXT_CHANGED`、型付き`interpretive_frames`と`requested_operation`を追加。frameはopaque ref、暫定状態、根拠の日付・出来事・受け取り、CONFIRMED/REVISED/REJECTEDを公開する。内部digest・意味checkpoint・raw evidenceは公開しない。
+
+`POST /emlis/threads/{thread_id}/frames`はexpected_revision/idempotency_key/frame_ref/status/correction_textを受け、ownerと現在frame versionを照合する。user/plan/sourceをclientから採用しない。framefeedbackは独立OPERATIONで質問数を消費しない。
+
+追加DDLは`20260911041749_emlis_q3_plan_rounds.sql`。旧Q2後に適用し、started_question_limitの不変性、round0〜3、質問/回答の対応、owner限定feedback表、context RPCを追加する。親・user削除はcascade。current profile行のlockで同じ本人のcommitを直列化し、履歴のsource digest/revisionとfeedback versionを最終commitまで再照合する。
+
+| 対象 | 現行Q3の動作 |
+|---|---|
+| Free | 今回の原入力＋同thread回答のみ、最大1問。履歴とframeなし。 |
+| Plus | 最大1問、所有者・状態・365日の条件を満たす直近最大3記録から必要な履歴。 |
+| Premium | 最大3問、3650日の条件を満たす直近最大6記録と修正可能frame。元入力自体の閲覧は既存Premium無期限条件のまま。 |
+| 質問発行 | 回答後本文を先に保存し、次候補があればAWAITING_CONTINUE。本人のcontinueで初めて次問を保存・発行する。4問目なし。 |
+| プラン変更 | 開始時上限と現在上限の小さい方。upgradeで開始枠を増やさず、downgrade後も既発行問への回答を受けるが次問は現在枠に従う。 |
+| 履歴失効 | 編集・削除・回答更新・期限・権限・feedback versionの変化を保存時に照合。古い現在本文はCONTEXT_CHANGED、旧timelineでは自分のLayer1/2だけを履歴として扱う。 |
+| 意味変更なし | 同じ有効意味・同じ許可contextの保存済み本文だけを再使用。旧本文へ新prefixを付け替えず、最終commitでもguardを再照合。 |
+| 障害と再送 | ANSWER→意味→本文の独立commit、同じ回答で明示retry。旧操作receiptと現在stateを分ける。CAS後の再読取りと失敗返却も現在contextを照合。 |

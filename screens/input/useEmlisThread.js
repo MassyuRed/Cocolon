@@ -42,8 +42,10 @@ export function useEmlisThread({ userId, enabled = EMLIS_THREADS_ENABLED, api = 
       if (!active()) return false;
       // A GET that still sees an unanswered question cannot prove that a timed
       // out admission rolled back. Keep the original payload/key for a replay.
-      if (method !== "get" || dto.answer_saved || (c.pending && dto.revision > c.pending.payload.expected_revision)) c.pending = null;
-      setState(s => ({ ...s, dto, draft: dto.answer_saved ? "" : s.draft,
+      const answerAccepted = c.pending?.method === "answer" && (dto.timeline || []).some(
+        event => event.kind === "ANSWER" && event.question_id === c.pending.payload.question_id && event.text === c.pending.payload.answer_text);
+      if (method !== "get" || answerAccepted) c.pending = null;
+      setState(s => ({ ...s, dto, draft: method === "answer" || answerAccepted || (!c.pending && dto.pending_question?.question_id !== s.dto?.pending_question?.question_id) ? "" : s.draft,
         uncertain: Boolean(c.pending), reconciled: method === "get", busy: false, error: "" }));
       return true;
     } catch (error) {
@@ -85,16 +87,28 @@ export function useEmlisThread({ userId, enabled = EMLIS_THREADS_ENABLED, api = 
     const c = context.current;
     const dto = state.dto;
     if (!dto || c.busy || c.pending) return;
-    if (actionName === "retry_response" ? !dto.can_retry : !dto.pending_question) return;
+    const available = actionName === "retry_response" ? dto.can_retry
+      : actionName === "continue" ? dto.can_continue
+        : actionName === "stop" && dto.state === "AWAITING_CONTINUE" ? true : Boolean(dto.pending_question);
+    if (!available) return;
     c.pending = { method: "action", threadId: dto.thread_id, payload: {
       action: actionName, expected_revision: dto.revision, idempotency_key: operationKey(),
-      ...(actionName === "retry_response" ? { operation_id: dto.operation_id } : { question_id: dto.pending_question.question_id }),
+      ...(actionName === "retry_response" ? { operation_id: dto.operation_id } : dto.pending_question ? { question_id: dto.pending_question.question_id } : {}),
     } };
     await perform("action", c.pending);
   }
+  async function updateFrame(frame, status, correctionText) {
+    const c = context.current;
+    if (!state.dto || c.busy || c.pending) return false;
+    c.pending = { method: "frame", threadId: state.dto.thread_id, payload: {
+      expected_revision: state.dto.revision, idempotency_key: operationKey(),
+      frame_ref: frame.frame_ref, status, correction_text: status === "REVISED" ? correctionText : null,
+    } };
+    return perform("frame", c.pending);
+  }
   const safeState = context.current.userId === userId && enabled ? state : empty();
-  return { ...safeState, enabled, open, close: reset, reset, refresh: () => perform("get"), sendAnswer, action,
-    pendingAction: context.current.pending?.method === "action",
+  return { ...safeState, enabled, open, close: reset, reset, refresh: () => perform("get"), sendAnswer, action, updateFrame,
+    pendingAction: Boolean(context.current.pending && context.current.pending.method !== "answer"),
     replayPending: () => {
       const pending = context.current.pending;
       if (pending && state.reconciled) return perform(pending.method, pending);

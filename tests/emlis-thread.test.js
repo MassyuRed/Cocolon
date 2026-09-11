@@ -170,3 +170,45 @@ test('changed native screens and question panel transpile', () => {
     }).code);
   }
 });
+
+test('round two draft and uncertain answer survive round one receipt', async () => {
+  const roundTwo = { ...initial, revision: 8, answer_saved: true, pending_question: { question_id: 'question-2' },
+    timeline: [...initial.timeline, {event_id:'answer-1',kind:'ANSWER',question_id:'question',text:'前の回答'}] };
+  let saved = roundTwo;
+  const h = await mount({ get: async () => saved, answer: async () => { throw Error('timeout'); } });
+  await act(async () => h.value.open('input')); await act(async () => h.value.setDraft('二つ目の回答'));
+  await act(async () => h.value.refresh()); assert.equal(h.value.draft,'二つ目の回答');
+  await act(async () => h.value.sendAnswer()); await act(async () => h.value.refresh());
+  assert.equal(h.value.uncertain,true);assert.equal(h.value.draft,'二つ目の回答');
+  saved = {...roundTwo,revision:11,pending_question:null,timeline:[...roundTwo.timeline,{event_id:'answer-2',kind:'ANSWER',question_id:'question-2',text:'二つ目の回答'}]};
+  await act(async () => h.value.refresh());assert.equal(h.value.uncertain,false);assert.equal(h.value.draft,'');
+  await act(async () => h.root.unmount());
+});
+
+test('continue is a deliberate action and frame feedback has its own replay key', async () => {
+  const waiting={...completed,state:'AWAITING_CONTINUE',can_continue:true};const sent=[];
+  const h=await mount({get:async()=>waiting, action:async(_,p)=>{sent.push(p);return {...initial,pending_question:{question_id:'question-2'}};},
+    frame:async(_,p)=>{sent.push(p);return waiting;}});
+  await act(async()=>h.value.open('input'));assert.equal(sent.length,0);
+  await act(async()=>h.value.action('continue'));assert.equal(sent[0].action,'continue');assert.equal(sent[0].question_id,undefined);
+  await act(async()=>h.value.updateFrame({frame_ref:'frame-version'},'REVISED','私の受け止め'));
+  assert.equal(sent[1].frame_ref,'frame-version');assert.equal(sent[1].correction_text,'私の受け止め');
+  assert.notEqual(sent[0].idempotency_key,sent[1].idempotency_key);
+  await act(async()=>h.root.unmount());
+});
+
+test('frame editor submits an explicit revision and keeps continuation separate', async () => {
+  const native=Object.fromEntries(['ActivityIndicator','KeyboardAvoidingView','Modal','ScrollView','Text','TextInput','View'].map(x=>[x,x]));
+  Object.assign(native,{Platform:{OS:'ios'},StyleSheet:{create:x=>x}});
+  const {default:Modal,threadStatus}=load('screens/input/EmlisThreadModal.js',{'react-native':native,
+    '../../components/CocolonButton':p=>React.createElement('Button',p,p.children)});
+  const calls=[];const frame={frame_key:'frame',frame_ref:'version',recorded_at:'2026-09-10T00:00:00Z',trigger:'褒められた',received_meaning:'重かった',status:'TENTATIVE'};
+  const thread={visible:true,dto:{...completed,interpretive_frames:[frame]},draft:'',updateFrame:async(...args)=>{calls.push(args);return true;}};
+  let root;await act(async()=>{root=Renderer.create(React.createElement(Modal,{thread,colors:{}}));});
+  const button=label=>root.root.findAllByType('Button').find(x=>x.props.children===label);
+  await act(async()=>button('理解を直す').props.onPress());
+  await act(async()=>root.root.findByType('TextInput').props.onChangeText('怖かった'));
+  await act(async()=>button('訂正を保存').props.onPress());assert.equal(calls[0][1],'REVISED');assert.equal(calls[0][2],'怖かった');
+  assert.doesNotMatch(threadStatus({...completed,state:'AWAITING_CONTINUE',can_continue:false}),/続けられます/);
+  await act(async()=>root.unmount());
+});
