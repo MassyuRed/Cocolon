@@ -1,6 +1,8 @@
 # CMEE V1-A — EmlisAI Observation Vertical 詳細設計
 
-> 2026-09-11 Q4現在地：修正版v1.2のQ4コード実装・統合・公開接続準備と今回の検証を完了。公開用mode・単一作者・旧client/保存版互換・停止復旧・bootstrap/RNを接続し、初回/肯定的回答/当時訂正と回答名詞化・時点の不具合を修正した。API179 PASS、RNは保存済み56 PASS。新しい保存22ケースを全文確認し、既存100件は全読済みの前版と全record一致。長い再掲・定型性など商品品質はNOT_CLEARとして保持する。現行結果は正本06とAPI既存handoffの末尾Q4 continuation節。実DB・端末・実課金・Mash正式判断・公開操作は別作業、既定OFF。
+> 2026-09-11 最新Q4残件：複数回答をそれぞれの出来事・時点へ結び付け、既存の受け止めへ保持する実装を検証。最新結果は06/API handoff末尾「複数回答」節。商品NOT_CLEAR、既定OFF。
+
+> 2026-09-11 Q4前段階の記録：修正版v1.2のQ4コード実装・統合・公開接続準備と今回の検証を完了。公開用mode・単一作者・旧client/保存版互換・停止復旧・bootstrap/RNを接続し、初回/肯定的回答/当時訂正と回答名詞化・時点の不具合を修正した。API179 PASS、RNは保存済み56 PASS。新しい保存22ケースを全文確認し、既存100件は全読済みの前版と全record一致。長い再掲・定型性など商品品質はNOT_CLEARとして保持する。現行結果は正本06とAPI既存handoffの末尾Q4 continuation節。実DB・端末・実課金・Mash正式判断・公開操作は別作業、既定OFF。
 
 > 2026-09-11 Q3時点の記録：添付修正版Technical Design v1.2に従い、Q2のコード実装完了からQ3へ進めた。Plusの適格本人履歴、Premiumの本人続行による最大3問と確認・修正・否定できる解釈フレーム、限定条件のLayer3を保存・API・RNまで実装した。Q3のコード実装は完了し、次の実装単位はQ4の統合・実本文確認・互換性・公開接続準備。実DB適用、端末・実課金確認、Mashの正式商品判断、公開操作は別作業として未実施。default OFF、商品NOT_CLEAR、Draft/open/unmergedを維持する。以下の旧Q1/Q2段落・Product Read待ちの順序は当時の履歴であり、Q3/Q4のコード進行を止める現行条件ではない。現在の進行ownerは本系列の`06_implementation_order_migration_and_verification.md`末尾Q3節とAPI既存handoff末尾Q3節。
 
@@ -3136,3 +3138,12 @@ Premiumのフレームは、評価済み履歴の本人回答と対象の出来�
 既存の共有Observation作者で、同じ出来事に結ばれた元の反応と本人回答を一文へ接続し、その出来事の二重引用を除いた。本文の明示構文から照応先を解析してから、独立inverseが元event/reaction/answerとcontrast/ABOUT_TARGET、当時・回答時点・前回答時点を照合する。曖昧なsource、同eventへの複数回答、訂正で消えた対比には従来の明示形を保つ。Premiumの途中でも原入力の出来事順を維持する。
 
 意味選択・問いpolicy・checkpoint・wire・保存・RNの変更ではない。API最終実装sourceは `72d6c047717c3b78ca591e88dcd4faef528028b3`。途中の順序不具合は同sourceで修正済み。最終結果はAPI `a6893b6f9cb108f42f71a0594640a2f28d613a60` の既存handoff末尾と本設計群06に記録した。複数回答をフォローへ十分反映すること、長い同型文、既存100件の中心感情/複数主題/共有関係は残り、商品NOT_CLEAR。実装結果を承認済み商品仕様の拡張や正式PASSへ昇格しない。
+
+
+### 2026-09-11 Q4残件 — 複数回答を各出来事に結び付けてフォローへ保持
+
+API source `df10369372d7fd4fb1bfcafec8ba4c8fc9b079de`。ABOUT_TARGETをReception選択前に成立させ、同family・同じ時間/aspect/quantity条件の2〜3件の有効な本人回答を、一つの既存受け止めに保持する。意味sourceが各出来事の原文の一意性を証明し、selectorはbodyを読まない。各回答の出来事・命題・時点を原順序で共有作者が返し、後続slotを含むIR検査と実本文からの独立復元で照合する。同表記の出来事や対応外の混在は従来選択を保持。取り下げ後も残る有効回答をfocusに保つ。
+
+最終202 PASS、必須438は前回と同じ429 PASS/9 FAIL。保存原本と同じ100入力・HR planを保持し、22ケース48状態・Premium全6中間状態・62保存GETを確認。華恋と独立readerが全件実読した。詳細な変更範囲と検証は06およびAPI既存handoff末尾の同名節。
+
+初回の複数主題HR、異なる種類の回答の混在、長い同型文と共通の締め、既存100件の中心感情/共有関係は残件。商品NOT_CLEAR、既定OFF・Draft/open/unmergedを保持する。実装結果は商品仕様の承認や正式PASSではなく、DB/schema/RN、質問枠、自動続行、公開設定の変更を含まない。

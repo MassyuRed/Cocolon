@@ -1,6 +1,8 @@
 # CMEE V1 — Implementation Order / Migration / Verification 詳細設計
 
-> 2026-09-11 Q4現在地：修正版v1.2のQ4コード実装・統合・公開接続準備と今回の検証を完了。公開用mode・単一作者・旧client/保存版互換・停止復旧・bootstrap/RNを接続し、初回/肯定的回答/当時訂正と回答名詞化・時点の不具合を修正した。API179 PASS、RNは保存済み56 PASS。新しい保存22ケースを全文確認し、既存100件は全読済みの前版と全record一致。長い再掲・定型性など商品品質はNOT_CLEARとして保持する。現行結果は正本06とAPI既存handoffの末尾Q4 continuation節。実DB・端末・実課金・Mash正式判断・公開操作は別作業、既定OFF。
+> 2026-09-11 最新Q4残件：複数回答のフォロー保持を検証。202 PASS、広い必須回帰429 PASS/9既存FAIL。100入力・保存22ケースを全読。最新結果と次の残件は末尾「複数回答」節。商品NOT_CLEAR、既定OFF。
+
+> 2026-09-11 Q4前段階の記録：修正版v1.2のQ4コード実装・統合・公開接続準備と今回の検証を完了。公開用mode・単一作者・旧client/保存版互換・停止復旧・bootstrap/RNを接続し、初回/肯定的回答/当時訂正と回答名詞化・時点の不具合を修正した。API179 PASS、RNは保存済み56 PASS。新しい保存22ケースを全文確認し、既存100件は全読済みの前版と全record一致。長い再掲・定型性など商品品質はNOT_CLEARとして保持する。現行結果は正本06とAPI既存handoffの末尾Q4 continuation節。実DB・端末・実課金・Mash正式判断・公開操作は別作業、既定OFF。
 
 > 2026-09-11 Q3時点の記録：添付修正版Technical Design v1.2に従い、Q2のコード実装完了からQ3へ進めた。Plusの適格本人履歴、Premiumの本人続行による最大3問と確認・修正・否定できる解釈フレーム、限定条件のLayer3を保存・API・RNまで実装した。Q3のコード実装は完了し、次の実装単位はQ4の統合・実本文確認・互換性・公開接続準備。実DB適用、端末・実課金確認、Mashの正式商品判断、公開操作は別作業として未実施。default OFF、商品NOT_CLEAR、Draft/open/unmergedを維持する。以下の旧Q1/Q2段落・Product Read待ちの順序は当時の履歴であり、Q3/Q4のコード進行を止める現行条件ではない。現在の進行ownerは本系列の`06_implementation_order_migration_and_verification.md`末尾Q3節とAPI既存handoff末尾Q3節。
 
@@ -8019,3 +8021,32 @@ Q3の既存146件にQ4の17件を加え、API/純粋処理/実SQL-RPC/保存版/
 今回閉じたのは、対象eventの二重引用と回答接続、逐次roundの読み順の欠陥。長い同型文、共通の締め、同じ感情familyの代表1件へ絞られて過去回答がフォローから落ちる選択は残る。既存100件の中心感情・複数主題・共同/共有関係の不足も商品NOT_CLEARとして保持する。次はABOUT_TARGET追加前にReceptionを作る `_active_plan` と同family代表選択の責任箇所を、原入力から回答後までの意味関係として検討する。入力済みの感情の読み落としを追加質問へ置換しない。
 
 既存Draft PR3/30へ継続。System Contextは使用せず原典を直接確認した。DB適用・merge/deploy/ready/有効化は未実施、既定OFF・Draft/open/unmergedを維持。公開しない実本文・private個別case/digest/locatorをGitHubへ含めない。
+
+
+## 2026-09-11 Q4残件 — 複数回答を各出来事に結び付けてフォローへ保持
+
+再開元API `a6893b6f9cb108f42f71a0594640a2f28d613a60` / App `4706bc5abca009a7dce1ffe7c4bc0cad5e9cf294`。今回の最終実装sourceはAPI `df10369372d7fd4fb1bfcafec8ba4c8fc9b079de`、tree `5433d27881e96da42de4f7be04db72af73cef351`。local検証commit `18b25472f1bde7d40039393186aef7b5bd9e3a86` と同treeである。以下はこのsourceで実行した結果で、前節の184 PASS等は前作業単位の履歴として保持する。
+
+### 修正した責任と挙動
+
+`emlis_answer_update._active_plan` で本人回答のABOUT_TARGETをReception選択より前に成立させた。共有opportunity選択は、同じ負担familyの有効な本人回答が2〜3件あり、各回答の出来事が原文から区別でき、時間・aspect・quantityの条件が揃う場合、既存の一つの受け止めに全回答を含める。各回答の出来事・命題・時点を原入力順で保持し、一回の受け止めとして返す。否定・主題・程度表現は元の有限節に残し、名詞句とは接続を分ける。対応外の組合せは従来の選択を保つ。
+
+異なるevent IDだけでは原文表記の一意性を証明できないため、意味source段階で有効回答のsubject一意性を再計算し、bodyを読まないselectorに証明を渡す。途中で見つかった同表記の出来事による新しいUNAVAILABLEは、この条件の不整合を修正して解消した。取り下げ時は残る有効回答をfocusに保ち、別の回答にある引用がその回答自身の有限節を失効させないよう証拠範囲を限定した。
+
+既存IRのtarget slot・ABOUT context・文法・時点を回答ごとに検証し、実本文からも全ての出来事/回答/時点を独立復元して照合する。欠落、交換、重複、別時点、引用化、否定変更、後続slotのIR改変を拒否する。本文の完成形照合だけを独立検査と称していない。新作者、入力別完成文、質問数や自動続行、DB/schema/RNの変更はない。現在の共有owner snapshotを更新し、歴史的fixture・runner・期待値・閾値は保持した。
+
+### 最終検証と本文確認
+
+- Q1〜Q4・実SQL/RPC・保存版・共有作者・独立inverse・registryは **202 PASS、失敗/skip 0**。既存184件に18件を追加し、既存の3round検査も各回答の保持を確認する形へ補強した。RNは既存56 PASSの記録を継承し、今回実行コード変更・再実行はない。
+- 広い必須回帰438件は **429 PASS / 9 FAIL**。前作業単位の全438 test keyと成否が一致し、新規失敗・欠落なし。前節の未解消9件を保持し、合格扱いや期待値の更新はしていない。
+- 同じvalidated canonical100を再生成し、取得済みの保存原本candidate91と全100レコード・HR planが完全一致。direct100、GENERATED73 / UNAVAILABLE27、Moves143。華恋と独立readerが元入力全field・Observation・HR・可否/理由を全100件実読した。旧原本を再生成物へ置き換えていない。
+- 既存の保存合成22ケースを実SQL/RPCで新規生成・保存し、48状態と62回の保存GET一致を確認。華恋と独立readerが問い・回答・current本文・frameとPremium全6中間状態を実読した。本文変更は2回答後・その後の続行後・3回答後の3状態で、前回答が各出来事と正しく結び付いて残る。他45状態の本文、問い・回答・主要状態は前回と一致した。
+- 最終状態はREFINED13、PARTIALLY_REFINED3、UNCHANGED3、意図した訂正後本文故障3。故障時に旧本文へ復帰しない。新規identityとframe refは再導出されるため、旧DTO全bytesの再現とは主張しない。既存22 fixtureは不変。固定復元runtime/PGliteを再利用し、前節の環境再現上の限定も保持する。
+
+### 残件と次の実装単位
+
+今回改善したのは、対応する複数の負担回答が代表1件へ落ちる選択と、その正しい本文接続。初回の複数主題HR、肯定/否定や時点条件が混在する回答を全体として受け止めること、長い同型Observation、共通の締め、既存100件の中心感情・共有関係の不足は残り、**商品NOT_CLEAR**。全件実読や機械検査成功をMashの正式商品PASSへ換算しない。
+
+次は統合フローのまま、原入力ですでに見えている感情・複数主題と、異なる種類の回答が混在したときの選択を確認する。読み落としを追加質問へ転嫁せず、今回の限定条件を一律に緩めない。Q1や旧単独入力の修正ループへ戻る作業ではない。
+
+既存Draft PR3/30へ反映し、詳細な実本文・旧baseline・途中判断・全実行結果は既存非公開作業記録へ保持する。private本文/個別case/digest/locatorをGitHubへ含めない。System Contextは使わず原典を直接確認。既定OFF、Draft/open/unmergedを維持し、DB適用・native実機/実課金・merge/deploy/ready/有効化は別作業で未実施。
