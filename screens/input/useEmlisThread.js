@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { EMLIS_THREADS_ENABLED, emlisThreadApi } from "../../lib/api/emlisThreadApi";
+import { emlisThreadApi } from "../../lib/api/emlisThreadApi";
 
-const empty = () => ({ visible: false, dto: null, draft: "", busy: false, error: "", uncertain: false, reconciled: false });
+import { useAppRuntime } from "../../AppRuntimeContext";
+
+const empty = () => ({ visible: false, dto: null, draft: "", busy: false, error: "", uncertain: false, reconciled: false, rejected: false });
 let keySequence = 0;
 function operationKey() {
   keySequence += 1;
@@ -10,7 +12,9 @@ function operationKey() {
 
 // Drafts and in-flight payloads exist only in component memory. Each response is
 // bound to the requesting account and open window; a late response cannot reopen it.
-export function useEmlisThread({ userId, enabled = EMLIS_THREADS_ENABLED, api = emlisThreadApi }) {
+export function useEmlisThread({ userId, enabled: explicitEnabled, api = emlisThreadApi }) {
+  const { isFeatureEnabled } = useAppRuntime();
+  const enabled = explicitEnabled ?? isFeatureEnabled("emlis_threads_enabled", false);
   const [state, setState] = useState(empty);
   const context = useRef({ userId, epoch: 0, inputId: null, busy: false, pending: null, controller: null });
   const owner = useRef(userId);
@@ -29,7 +33,7 @@ export function useEmlisThread({ userId, enabled = EMLIS_THREADS_ENABLED, api = 
 
   async function perform(method, body) {
     const c = context.current;
-    if (!enabled || !userId || owner.current !== c.userId || c.busy || !c.inputId) return false;
+    if (!enabled || !userId || owner.current !== c.userId || c.userId !== userId || c.busy || !c.inputId) return false;
     c.busy = true;
     c.controller = new AbortController();
     const epoch = c.epoch;
@@ -46,14 +50,21 @@ export function useEmlisThread({ userId, enabled = EMLIS_THREADS_ENABLED, api = 
         event => event.kind === "ANSWER" && event.question_id === c.pending.payload.question_id && event.text === c.pending.payload.answer_text);
       if (method !== "get" || answerAccepted) c.pending = null;
       setState(s => ({ ...s, dto, draft: method === "answer" || answerAccepted || (!c.pending && dto.pending_question?.question_id !== s.dto?.pending_question?.question_id) ? "" : s.draft,
-        uncertain: Boolean(c.pending), reconciled: method === "get", busy: false, error: "" }));
-      return true;
+        uncertain: Boolean(c.pending), reconciled: method === "get", rejected: false, busy: false, error: "" }));
+      return dto;
     } catch (error) {
       if (!active()) return false;
       if (error?.status === 401 || error?.status === 404 || (method === "get" && error?.status === 409)) {
         c.pending = null;
         setState(s => ({ ...s, dto: null, draft: "", uncertain: false, busy: false,
           error: "この観測は現在参照できません。" }));
+      } else if (method !== "get" && [409, 422].includes(error?.status)) {
+        // A definite rejection admits no operation. After GET, the user may
+        // submit with the current revision and a new key. Unknown ACKs retain
+        // their original key below.
+        c.pending = null;
+        setState(s => ({ ...s, busy: false, uncertain: false, rejected: true, reconciled: false,
+          error: "送信は受け付けられませんでした。保存状況を確認してから、もう一度操作してください。" }));
       } else {
         setState(s => ({ ...s, busy: false, uncertain: Boolean(c.pending), reconciled: false,
           error: error?.status === 409 ? "保存状態が更新されています。保存状況を確認してください。"
@@ -68,13 +79,20 @@ export function useEmlisThread({ userId, enabled = EMLIS_THREADS_ENABLED, api = 
     reset();
     context.current.inputId = String(inputId);
     setState({ ...empty(), visible: true });
-    await perform("get");
-    return context.current.inputId === String(inputId) && owner.current === userId;
+    const result = await perform("get");
+    if (context.current.inputId !== String(inputId) || owner.current !== userId) return false;
+    if (result?.state === "NOT_CREATED") {
+      reset();
+      return false;
+    }
+    // An unknown GET result keeps the reader/error visible for reconciliation.
+    return true;
   }
   async function sendAnswer() {
     const c = context.current;
+    if (c.userId !== userId || owner.current !== userId) return false;
     const dto = state.dto;
-    if (c.pending && !state.reconciled) return;
+    if (dto?.can_write === false || state.rejected || (c.pending && !state.reconciled)) return;
     if (!dto?.pending_question || !state.draft.trim() || [...state.draft].length > 2000 || c.busy) return;
     if (!c.pending) c.pending = { method: "answer", threadId: dto.thread_id, payload: {
       expected_revision: dto.revision, question_id: dto.pending_question.question_id,
@@ -85,8 +103,9 @@ export function useEmlisThread({ userId, enabled = EMLIS_THREADS_ENABLED, api = 
   }
   async function action(actionName) {
     const c = context.current;
+    if (c.userId !== userId || owner.current !== userId) return false;
     const dto = state.dto;
-    if (!dto || c.busy || c.pending) return;
+    if (!dto || dto.can_write === false || state.rejected || c.busy || c.pending) return;
     const available = actionName === "retry_response" ? dto.can_retry
       : actionName === "continue" ? dto.can_continue
         : actionName === "stop" && dto.state === "AWAITING_CONTINUE" ? true : Boolean(dto.pending_question);
@@ -99,7 +118,8 @@ export function useEmlisThread({ userId, enabled = EMLIS_THREADS_ENABLED, api = 
   }
   async function updateFrame(frame, status, correctionText) {
     const c = context.current;
-    if (!state.dto || c.busy || c.pending) return false;
+    if (c.userId !== userId || owner.current !== userId) return false;
+    if (!state.dto || state.dto.can_write === false || state.rejected || c.busy || c.pending) return false;
     c.pending = { method: "frame", threadId: state.dto.thread_id, payload: {
       expected_revision: state.dto.revision, idempotency_key: operationKey(),
       frame_ref: frame.frame_ref, status, correction_text: status === "REVISED" ? correctionText : null,
@@ -111,8 +131,8 @@ export function useEmlisThread({ userId, enabled = EMLIS_THREADS_ENABLED, api = 
     pendingAction: Boolean(context.current.pending && context.current.pending.method !== "answer"),
     replayPending: () => {
       const pending = context.current.pending;
-      if (pending && state.reconciled) return perform(pending.method, pending);
+      if (context.current.userId === userId && owner.current === userId && pending && state.reconciled && state.dto?.can_write !== false) return perform(pending.method, pending);
     },
-    setDraft: draft => { if (!context.current.pending && !context.current.busy) setState(s => ({ ...s, draft })); },
+    setDraft: draft => { if (context.current.userId === userId && owner.current === userId && !context.current.pending && !context.current.busy) setState(s => ({ ...s, draft })); },
   };
 }

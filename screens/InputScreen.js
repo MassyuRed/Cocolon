@@ -19,7 +19,7 @@ import {
 import { useAuth } from "../AuthContext";
 import { submitEmotionInput } from "../lib/api/home/emotionSubmitApi";
 import { useEmlisThread } from "./input/useEmlisThread";
-import { EMLIS_THREADS_ENABLED } from "../lib/api/emlisThreadApi";
+import { useAppRuntime } from "../AppRuntimeContext";
 import EmlisThreadModal from "./input/EmlisThreadModal";
 import {
   cancelEmotionPiece,
@@ -143,7 +143,11 @@ export default function InputScreen({ navigation, route }) {
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const currentUserId = String(session?.user?.id || "").trim();
-  const emlisThread = useEmlisThread({ userId: currentUserId, enabled: EMLIS_THREADS_ENABLED && !isTutorialMode });
+  const { isFeatureEnabled } = useAppRuntime();
+  const feedbackOwner = useRef({ id: currentUserId, epoch: 0 });
+  if (feedbackOwner.current.id !== currentUserId) feedbackOwner.current = { id: currentUserId, epoch: feedbackOwner.current.epoch + 1 };
+  useEffect(() => () => { feedbackOwner.current = { id: "", epoch: feedbackOwner.current.epoch + 1 }; }, []);
+  const emlisThread = useEmlisThread({ userId: currentUserId, enabled: isFeatureEnabled("emlis_threads_enabled", false) && !isTutorialMode });
   const tutorialDisplayName = useMemo(() => {
     const metadata = session?.user?.user_metadata || {};
     return (
@@ -178,6 +182,15 @@ export default function InputScreen({ navigation, route }) {
     navigation,
     setTutorialStep,
   });
+
+  useEffect(() => {
+    resetInputFeedbackModal();
+    setSubmitting(false);
+    setPiecePreviewVisible(false);
+    setPiecePreviewPayload(null);
+    setPiecePublishLoading(false);
+    setPiecePreviewLoading(false);
+  }, [currentUserId, resetInputFeedbackModal]);
 
   const {
     keyboardInset,
@@ -900,6 +913,9 @@ const safeInsets = useSafeAreaInsets();
 
 
   const handlePreviewPiece = useCallback(async () => {
+    const requestOwner = feedbackOwner.current;
+    if (requestOwner.id !== currentUserId) return;
+    const ownsResponse = () => feedbackOwner.current === requestOwner;
     if (!canPreviewPiece) return;
 
     registerInputInteraction();
@@ -914,6 +930,7 @@ const safeInsets = useSafeAreaInsets();
     try {
       const payload = buildEmotionSubmitPayload();
       const preview = await previewEmotionPiece(payload);
+      if (!ownsResponse()) return;
       const quota = preview?.quota && typeof preview.quota === "object"
         ? preview.quota
         : null;
@@ -923,15 +940,18 @@ const safeInsets = useSafeAreaInsets();
       setPiecePreviewPayload(preview && typeof preview === "object" ? preview : null);
       setPiecePreviewVisible(true);
     } catch (e) {
+      if (!ownsResponse()) return;
       console.warn("InputScreen: previewEmotionPiece failed", e);
       Alert.alert(
         "ピースの生成",
         String(e?.message || "ピースの生成に失敗しました。")
       );
     } finally {
+      if (!ownsResponse()) return;
       setPiecePreviewLoading(false);
     }
   }, [
+    currentUserId,
     buildEmotionSubmitPayload,
     canPreviewPiece,
     isTutorialMode,
@@ -939,6 +959,9 @@ const safeInsets = useSafeAreaInsets();
   ]);
 
   const handleCancelPiecePreview = useCallback(async () => {
+    const requestOwner = feedbackOwner.current;
+    if (requestOwner.id !== currentUserId) return;
+    const ownsResponse = () => feedbackOwner.current === requestOwner;
     const previewId = String(piecePreviewPayload?.preview_id || "").trim();
     setPiecePreviewVisible(false);
 
@@ -953,14 +976,20 @@ const safeInsets = useSafeAreaInsets();
     }
     try {
       await cancelEmotionPiece(previewId);
+      if (!ownsResponse()) return;
     } catch (e) {
+      if (!ownsResponse()) return;
       console.warn("InputScreen: cancelEmotionPiece failed", e);
     } finally {
+      if (!ownsResponse()) return;
       setPiecePreviewPayload(null);
     }
-  }, [isTutorialMode, piecePreviewPayload?.preview_id]);
+  }, [currentUserId, isTutorialMode, piecePreviewPayload?.preview_id]);
 
   const handlePublishPiece = useCallback(async () => {
+    const requestOwner = feedbackOwner.current;
+    if (requestOwner.id !== currentUserId) return;
+    const ownsResponse = () => feedbackOwner.current === requestOwner;
     const previewId = String(piecePreviewPayload?.preview_id || "").trim();
     if (!previewId || piecePublishLoading) return;
 
@@ -970,6 +999,7 @@ const safeInsets = useSafeAreaInsets();
       setPiecePreviewPayload(null);
       void ensureTutorialPiecesSeed();
       await clearPersistedInputDraft();
+      if (!ownsResponse()) return;
       setPendingInputDraft(null);
       setDraftRestoreModalVisible(false);
       Keyboard.dismiss();
@@ -991,6 +1021,7 @@ const safeInsets = useSafeAreaInsets();
     setPiecePublishLoading(true);
     try {
       const publishResult = await publishEmotionPiece(previewId);
+      if (!ownsResponse()) return;
       const inputFeedback = publishResult?.input_feedback || null;
       const inputFeedbackText = String(
         inputFeedback?.comment_text || ""
@@ -999,6 +1030,7 @@ const safeInsets = useSafeAreaInsets();
       const inputFeedbackEmotionMeta = buildInputFeedbackEmotionMeta(selectedEmotions);
 
       await clearPersistedInputDraft();
+      if (!ownsResponse()) return;
       setPendingInputDraft(null);
       setDraftRestoreModalVisible(false);
 
@@ -1023,7 +1055,9 @@ const safeInsets = useSafeAreaInsets();
       }
 
       await loadHomeState({ force: true, includeStartupCandidate: false });
+      if (!ownsResponse()) return;
       await markAnalysisHomeSummaryDirty();
+      if (!ownsResponse()) return;
 
       const openedObservation = inputFeedbackText
         ? openInputFeedbackModal({
@@ -1038,15 +1072,18 @@ const safeInsets = useSafeAreaInsets();
         showToast("ピースを生成しました");
       }
     } catch (e) {
+      if (!ownsResponse()) return;
       console.warn("InputScreen: publishEmotionPiece failed", e);
       Alert.alert(
         "ピースの生成",
         String(e?.message || "ピースの生成に失敗しました。")
       );
     } finally {
+      if (!ownsResponse()) return;
       setPiecePublishLoading(false);
     }
   }, [
+    currentUserId,
     clearPersistedInputDraft,
     completeTutorialAfterReply,
     ensureTutorialPiecesSeed,
@@ -1063,6 +1100,9 @@ const safeInsets = useSafeAreaInsets();
   ]);
 
   const handleOk = async () => {
+    const requestOwner = feedbackOwner.current;
+    if (requestOwner.id !== currentUserId) return;
+    const ownsResponse = () => feedbackOwner.current === requestOwner;
     if (!canSubmit) return;
     setSubmitting(true);
     try {
@@ -1082,6 +1122,7 @@ const safeInsets = useSafeAreaInsets();
         void ensureTutorialPiecesSeed();
 
         await clearPersistedInputDraft();
+      if (!ownsResponse()) return;
         setPendingInputDraft(null);
         setDraftRestoreModalVisible(false);
         Keyboard.dismiss();
@@ -1102,6 +1143,7 @@ const safeInsets = useSafeAreaInsets();
       }
 
       const submitResult = await submitEmotionInput(payload);
+      if (!ownsResponse()) return;
       const inputFeedback = submitResult?.input_feedback || null;
       const inputFeedbackAI = inputFeedback?.emlis_ai || null;
       const inputFeedbackText = String(
@@ -1112,6 +1154,7 @@ const safeInsets = useSafeAreaInsets();
 
 
       await clearPersistedInputDraft();
+      if (!ownsResponse()) return;
       setPendingInputDraft(null);
       setDraftRestoreModalVisible(false);
 
@@ -1127,9 +1170,12 @@ const safeInsets = useSafeAreaInsets();
       Keyboard.dismiss();
 
       await loadHomeState({ force: true, includeStartupCandidate: false });
+      if (!ownsResponse()) return;
       await markAnalysisHomeSummaryDirty();
+      if (!ownsResponse()) return;
 
-      if (await emlisThread.open(submitResult?.id)) return;
+      const openedThread = await emlisThread.open(submitResult?.id);
+      if (!ownsResponse() || openedThread) return;
 
       const openedObservation = inputFeedbackText
         ? openInputFeedbackModal({
@@ -1150,9 +1196,11 @@ const safeInsets = useSafeAreaInsets();
 ${inputFeedbackEmotionMeta.emotionSummary}` : ""}`);
       }
     } catch (error) {
+      if (!ownsResponse()) return;
       if (isRequestTimeoutError(error)) {
         console.warn("InputScreen: emotion submit completion timed out", error);
         const refreshedAfterTimeout = await refreshHomeStateAfterEmotionSubmitTimeout(loadHomeState);
+      if (!ownsResponse()) return;
         Alert.alert(
           "記録の確認",
           getEmotionSubmitTimeoutRecoveryMessage(refreshedAfterTimeout)
@@ -1167,6 +1215,7 @@ ${inputFeedbackEmotionMeta.emotionSummary}` : ""}`);
 ${String(error?.message || error)}`
       );
     } finally {
+      if (!ownsResponse()) return;
       setSubmitting(false);
     }
   };

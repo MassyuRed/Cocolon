@@ -9,7 +9,7 @@ const babel = require('@babel/core');
 const { act } = Renderer;
 const ROOT = path.resolve(__dirname, '..');
 
-function load(relative, mocks = {}) {
+function load(relative, mocks = {}, dev = true) {
   const filename = path.resolve(ROOT, relative);
   const transformed = babel.transformSync(fs.readFileSync(filename, 'utf8'), {
     filename, configFile: false, babelrc: false,
@@ -20,7 +20,7 @@ function load(relative, mocks = {}) {
   Function('require', 'module', 'exports', '__DEV__', transformed)(name => {
     if (Object.hasOwn(mocks, name)) return mocks[name];
     return require(name);
-  }, module, module.exports, true);
+  }, module, module.exports, dev);
   return module.exports;
 }
 const initial = {
@@ -32,11 +32,12 @@ const initial = {
     { event_id: 'question', kind: 'QUESTION', text: 'その時、どう感じましたか？' }],
 };
 const completed = { ...initial, revision: 6, state: 'COMPLETED', body_state: 'REFINED',
-  answer_saved: true, pending_question: null, current_observation: { text: '更新した観測' } };
+  answer_saved: true, pending_question: null, current_observation: { event_id: 'new', text: '更新した観測' } };
 
 async function mount(api, enabled = true) {
   const { useEmlisThread } = load('screens/input/useEmlisThread.js', {
-    '../../lib/api/emlisThreadApi': { EMLIS_THREADS_ENABLED: false, emlisThreadApi: api },
+    '../../lib/api/emlisThreadApi': { emlisThreadApi: api },
+    '../../AppRuntimeContext': { useAppRuntime: () => ({ isFeatureEnabled: () => false }) },
   });
   let value, root;
   function Harness({ userId }) { value = useEmlisThread({ userId, api, enabled }); return null; }
@@ -134,7 +135,7 @@ test('refinement failure shows old observation as historical and retry only when
     '../../components/CocolonButton': props => React.createElement('Button',props,props.children),
   });
   const failed = { ...completed, state: 'RESPONSE_FAILED', body_state: 'MEANING_UPDATED_BODY_UNAVAILABLE',
-    timeline: initial.timeline.map(e => ({ ...e, is_current: false })), can_retry: true };
+    timeline: initial.timeline.map(e => ({ ...e, is_current: false })), current_observation: null, can_retry: true };
   const actions = [];
   const thread = { visible: true, dto: failed, draft: '', action: value => actions.push(value), close: () => actions.push('close') };
   let root;
@@ -151,12 +152,11 @@ test('refinement failure shows old observation as historical and retry only when
 
 test('dedicated API drops source-bearing error bodies and keeps auth on', async () => {
   let options;
-  const { emlisThreadApi, EMLIS_THREADS_ENABLED } = load('lib/api/emlisThreadApi.js', {
+  const { emlisThreadApi } = load('lib/api/emlisThreadApi.js', {
     '../apiClient': { apiFetch: async (_, opts) => { options = opts; return {
       ok: false, status: 503, json: () => assert.fail('must not read private error'),
     }; } },
   });
-  assert.equal(EMLIS_THREADS_ENABLED, false);
   await assert.rejects(emlisThreadApi.answer('thread', { answer_text: 'synthetic' }), error => {
     assert.equal(error.message, 'emlis_thread_request_failed'); assert.equal(error.body, undefined); return true;
   });
@@ -210,5 +210,62 @@ test('frame editor submits an explicit revision and keeps continuation separate'
   await act(async()=>root.root.findByType('TextInput').props.onChangeText('怖かった'));
   await act(async()=>button('訂正を保存').props.onPress());assert.equal(calls[0][1],'REVISED');assert.equal(calls[0][2],'怖かった');
   assert.doesNotMatch(threadStatus({...completed,state:'AWAITING_CONTINUE',can_continue:false}),/続けられます/);
+  await act(async()=>root.unmount());
+});
+
+test('NOT_CREATED falls back, unknown GET retains reconciliation, and saved thread opens', async () => {
+  let result={...initial,state:'NOT_CREATED',thread_id:null};let fail=false;
+  const h=await mount({get:async()=>{if(fail)throw Error('timeout');return result;}});
+  let opened;await act(async()=>{opened=await h.value.open('input');});assert.equal(opened,false);assert.equal(h.value.visible,false);
+  fail=true;await act(async()=>{opened=await h.value.open('input');});assert.equal(opened,true);assert.equal(h.value.visible,true);assert.equal(h.value.dto,null);
+  fail=false;result=initial;await act(async()=>h.value.refresh());assert.equal(h.value.dto,initial);
+  await act(async()=>h.root.unmount());
+});
+
+test('read-only preserves body and pending answer without any mutation call', async () => {
+  const dto={...initial,can_write:false,can_retry:false,can_continue:false};
+  const noWrite=()=>assert.fail('write while paused');
+  const h=await mount({get:async()=>dto,answer:noWrite,action:noWrite,frame:noWrite});
+  await act(async()=>h.value.open('input'));await act(async()=>h.value.setDraft('下書き'));
+  await act(async()=>{h.value.sendAnswer();h.value.action('skip');h.value.action('continue');h.value.updateFrame({frame_ref:'x'},'REJECTED');});
+  assert.equal(h.value.dto,dto);assert.equal(h.value.draft,'下書き');
+  await act(async()=>h.root.unmount());
+});
+
+test('definite conflict permits a new revision after GET while timeout retains its original key', async () => {
+  const sent=[];let current=initial;
+  const h=await mount({get:async()=>current,answer:async(_,p)=>{sent.push(p);if(sent.length===1)throw Object.assign(Error('conflict'),{status:409});return completed;}});
+  await act(async()=>h.value.open('input'));await act(async()=>h.value.setDraft('回答'));
+  await act(async()=>h.value.sendAnswer());assert.equal(h.value.uncertain,false);assert.equal(h.value.rejected,true);
+  await act(async()=>h.value.sendAnswer());assert.equal(sent.length,1);
+  current={...initial,revision:4};await act(async()=>h.value.refresh());await act(async()=>h.value.sendAnswer());
+  assert.equal(sent[1].expected_revision,4);assert.notEqual(sent[1].idempotency_key,sent[0].idempotency_key);
+  await act(async()=>h.root.unmount());
+});
+
+test('release runtime bootstrap enables reader; default and failed initial load stay off', async () => {
+  let payload={feature_flags:{emlis_threads_enabled:true}},fail=false;
+  const runtime=load('AppRuntimeContext.js',{'./lib/apiClient':{apiGet:async()=>{if(fail)throw Error('offline');return payload;}}},false);
+  const api={get:async()=>initial};
+  const {useEmlisThread}=load('screens/input/useEmlisThread.js',{'../../lib/api/emlisThreadApi':{emlisThreadApi:api},'../../AppRuntimeContext':runtime},false);
+  let value,control,root;
+  function Harness(){control=runtime.useAppRuntime();value=useEmlisThread({userId:'owner'});return null;}
+  await act(async()=>{root=Renderer.create(React.createElement(runtime.AppRuntimeProvider,null,React.createElement(Harness)));});
+  assert.equal(value.enabled,false);fail=true;await act(async()=>{await assert.rejects(control.refreshAppRuntime());});assert.equal(value.enabled,false);
+  fail=false;await act(async()=>control.refreshAppRuntime());assert.equal(value.enabled,true);
+  await act(async()=>value.open('input'));assert.equal(value.dto,initial);
+  payload={feature_flags:{emlis_threads_enabled:false}};await act(async()=>control.refreshAppRuntime());assert.equal(value.enabled,false);assert.equal(value.dto,null);
+  await act(async()=>root.unmount());
+});
+
+test('current body leads; original source and older observations remain expandable', async () => {
+  const native=Object.fromEntries(['ActivityIndicator','KeyboardAvoidingView','Modal','ScrollView','Text','TextInput','View'].map(x=>[x,x]));
+  Object.assign(native,{Platform:{OS:'ios'},StyleSheet:{create:x=>x}});
+  const {default:Modal}=load('screens/input/EmlisThreadModal.js',{'react-native':native,'../../components/CocolonButton':p=>React.createElement('Button',p,p.children)});
+  const thread={visible:true,dto:completed,draft:''};let root;
+  await act(async()=>{root=Renderer.create(React.createElement(Modal,{thread,colors:{}}));});
+  let out=JSON.stringify(root.toJSON());assert.match(out,/更新した観測/);assert.doesNotMatch(out,/初回の観測/);
+  const toggle=root.root.findAllByType('Button').find(b=>b.props.children==='元の記録とこれまでのやり取り');
+  await act(async()=>toggle.props.onPress());out=JSON.stringify(root.toJSON());assert.match(out,/初回の観測/);assert.ok(out.indexOf('更新した観測')<out.indexOf('初回の観測'));
   await act(async()=>root.unmount());
 });

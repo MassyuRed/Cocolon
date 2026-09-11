@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ActivityIndicator, KeyboardAvoidingView, Modal, Platform, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import CocolonButton from "../../components/CocolonButton";
 
 export function threadStatus(dto) {
+  if (dto?.can_write === false) return "観測の更新を一時停止しています。保存済みの本文と回答は確認できます。";
   if (!dto || dto.state === "NOT_CREATED") return "この記録の観測はまだありません。";
   if (dto.body_state === "CONTEXT_CHANGED") return "参照できる記録や解釈が変わっています。以前の観測は履歴として表示しています。";
   if (dto.failure_code === "save_result_unknown") return "処理の完了を確認できません。保存状況を確認してください。";
@@ -29,7 +30,7 @@ function dateLabel(value) {
 function FrameEditor({ frame, thread, textStyle, borderColor }) {
   const [editing, setEditing] = useState(false);
   const [value, setValue] = useState(frame.correction_text || "");
-  const disabled = thread.busy || thread.uncertain;
+  const disabled = thread.busy || thread.uncertain || thread.rejected || thread.dto?.can_write === false;
   return <View style={s.section}>
     <Text style={[s.label, textStyle]}>あなたの言葉からの仮の理解</Text>
     <Text style={textStyle}>{dateLabel(frame.recorded_at)}の「{frame.trigger}」について</Text>
@@ -51,43 +52,64 @@ function FrameEditor({ frame, thread, textStyle, borderColor }) {
 export default function EmlisThreadModal({ thread, colors }) {
   const { dto, busy, error, draft, uncertain } = thread;
   const textStyle = { color: colors.TEXT_ON_LIGHT };
+  const [historyOpen, setHistoryOpen] = useState(false);
+  useEffect(() => setHistoryOpen(false), [dto?.thread_id, thread.visible]);
+  const readOnly = dto?.can_write === false;
+  const blocked = readOnly || thread.rejected;
+  const history = (dto?.timeline || []).filter(event =>
+    !(dto?.current_observation && event.event_id === dto.current_observation.event_id)
+    && !(event.kind === "QUESTION" && dto?.pending_question && event.question_id === dto.pending_question.question_id));
+
   return <Modal visible={thread.visible} transparent animationType="fade" onRequestClose={thread.close}>
     <KeyboardAvoidingView style={s.backdrop} behavior={Platform.OS === "ios" ? "padding" : "height"}>
       <View style={[s.card, { backgroundColor: colors.FIELD_BG, borderColor: colors.CARD_BORDER }]}>
         <Text style={[s.title, { color: colors.TITLE_GOLD }]}>Emlisの観測</Text>
         <ScrollView keyboardShouldPersistTaps="handled" contentContainerStyle={s.content}>
+          {dto?.current_observation && <View style={s.section}>
+            <Text style={[s.label, textStyle]}>{error || uncertain || thread.rejected ? "前回確認した観測（反映状況は未確認）" : "現在の観測"}</Text>
+            <Text selectable style={[s.body, textStyle]}>{dto.current_observation.text}</Text>
+          </View>}
+          {dto?.pending_question && <View style={s.section}>
+            <Text style={[s.label, textStyle]}>Emlisからの質問</Text>
+            <Text selectable style={[s.body, textStyle]}>{dto.pending_question.text}</Text>
+          </View>}
+          <Text accessibilityLiveRegion="polite" style={[s.body, textStyle]}>{error || threadStatus(dto)}</Text>
+          {busy && <ActivityIndicator accessibilityLabel="保存状態を確認中" color={colors.TITLE_GOLD} />}
+          {dto?.pending_question && <View style={s.content}>
+            <TextInput multiline value={draft} onChangeText={thread.setDraft} editable={!busy && !uncertain && !blocked}
+              maxLength={4000} accessibilityLabel="Emlisへの回答" placeholder="この質問への回答"
+              placeholderTextColor={colors.TEXT_ON_LIGHT} textAlignVertical="top"
+              style={[s.input, textStyle, { borderColor: colors.CARD_BORDER }]} />
+            <Text style={textStyle}>{[...draft].length} / 2000文字</Text>
+            <CocolonButton disabled={blocked || busy || thread.pendingAction || (uncertain && !thread.reconciled) || !draft.trim() || [...draft].length > 2000} onPress={thread.sendAnswer}>
+              {uncertain ? "同じ回答を再送する" : "回答を送る"}
+            </CocolonButton>
+            <CocolonButton variant="secondary" disabled={blocked || busy || uncertain} onPress={() => thread.action("skip")}>今回はスキップ</CocolonButton>
+          </View>}
+          {dto?.state === "AWAITING_CONTINUE" && <View style={s.content}>
+            {dto.can_continue && <CocolonButton disabled={blocked || busy || uncertain} onPress={() => thread.action("continue")}>もう一点続ける</CocolonButton>}
+            <CocolonButton variant="secondary" disabled={blocked || busy || uncertain} onPress={() => thread.action("stop")}>ここで終える</CocolonButton>
+          </View>}
+          {dto?.can_continue && <Text style={textStyle}>この記録では、あと{Math.max(0, dto.question_limit - dto.issued_count)}問まで続けられます。</Text>}
+          {(dto?.interpretive_frames || []).map(frame => <FrameEditor key={`${dto.thread_id}:${frame.frame_ref}`} frame={frame} thread={thread} textStyle={textStyle} borderColor={colors.CARD_BORDER} />)}
+          {dto?.can_retry && <CocolonButton disabled={blocked || busy || uncertain} onPress={() => thread.action("retry_response")}>本文を再試行する</CocolonButton>}
+          {uncertain && thread.pendingAction && <CocolonButton disabled={blocked || busy || !thread.reconciled} onPress={thread.replayPending}>同じ操作を再送する</CocolonButton>}
+          {!!dto?.thread_id && <CocolonButton variant="secondary" onPress={() => setHistoryOpen(!historyOpen)}>
+            {historyOpen ? "履歴を閉じる" : "元の記録とこれまでのやり取り"}
+          </CocolonButton>}
+          {(historyOpen || !dto?.current_observation) && <View style={s.content}>
           {dto?.original ? <View style={s.section}>
             <Text style={textStyle}>元の記録 · {dateLabel(dto.original.created_at)}</Text>
             {!!dto.original.memo && <Text selectable style={[s.body, textStyle]}>{dto.original.memo}</Text>}
             {!!dto.original.memo_action && <Text selectable style={[s.body, textStyle]}>{dto.original.memo_action}</Text>}
           </View> : null}
-          {(dto?.timeline || []).map(event => <View key={event.event_id} style={s.section}>
+          {history.map(event => <View key={event.event_id} style={s.section}>
             <Text style={[s.label, textStyle]}>{event.kind === "QUESTION" ? `Emlisからの質問${event.round_index ? ` · ${event.round_index}問目` : ""}`
               : event.kind === "ANSWER" ? `あなたの回答 · ${dateLabel(event.authored_at || event.recorded_at)}`
-                : event.is_current ? "現在の観測" : "以前の観測"}</Text>
+                : "以前の観測"}</Text>
             <Text selectable style={[s.body, textStyle]}>{event.text}</Text>
           </View>)}
-          <Text accessibilityLiveRegion="polite" style={[s.body, textStyle]}>{error || threadStatus(dto)}</Text>
-          {busy && <ActivityIndicator accessibilityLabel="保存状態を確認中" color={colors.TITLE_GOLD} />}
-          {dto?.pending_question && <View style={s.content}>
-            <TextInput multiline value={draft} onChangeText={thread.setDraft} editable={!busy && !uncertain}
-              maxLength={4000} accessibilityLabel="Emlisへの回答" placeholder="この質問への回答"
-              placeholderTextColor={colors.TEXT_ON_LIGHT} textAlignVertical="top"
-              style={[s.input, textStyle, { borderColor: colors.CARD_BORDER }]} />
-            <Text style={textStyle}>{[...draft].length} / 2000文字</Text>
-            <CocolonButton disabled={busy || thread.pendingAction || (uncertain && !thread.reconciled) || !draft.trim() || [...draft].length > 2000} onPress={thread.sendAnswer}>
-              {uncertain ? "同じ回答を再送する" : "回答を送る"}
-            </CocolonButton>
-            <CocolonButton variant="secondary" disabled={busy || uncertain} onPress={() => thread.action("skip")}>今回はスキップ</CocolonButton>
           </View>}
-          {dto?.state === "AWAITING_CONTINUE" && <View style={s.content}>
-            {dto.can_continue && <CocolonButton disabled={busy || uncertain} onPress={() => thread.action("continue")}>もう一点続ける</CocolonButton>}
-            <CocolonButton variant="secondary" disabled={busy || uncertain} onPress={() => thread.action("stop")}>ここで終える</CocolonButton>
-          </View>}
-          {!!dto?.thread_id && <Text style={textStyle}>発行済み{dto.issued_count}問。開始時の上限は{dto.started_question_limit}問です。プランを上げてもこの記録の上限は増えず、下げた場合は現在のプランの範囲で続けます。</Text>}
-          {(dto?.interpretive_frames || []).map(frame => <FrameEditor key={`${dto.thread_id}:${frame.frame_key}`} frame={frame} thread={thread} textStyle={textStyle} borderColor={colors.CARD_BORDER} />)}
-          {dto?.can_retry && <CocolonButton disabled={busy || uncertain} onPress={() => thread.action("retry_response")}>本文を再試行する</CocolonButton>}
-          {uncertain && thread.pendingAction && <CocolonButton disabled={busy || !thread.reconciled} onPress={thread.replayPending}>同じ操作を再送する</CocolonButton>}
           <CocolonButton variant="secondary" disabled={busy} onPress={thread.refresh}>保存状況を確認</CocolonButton>
         </ScrollView>
         <CocolonButton variant="secondary" onPress={thread.close} accessibilityLabel="Emlisの観測を閉じる">閉じる</CocolonButton>
