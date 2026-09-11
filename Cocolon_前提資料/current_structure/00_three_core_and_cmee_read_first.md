@@ -11,7 +11,7 @@ implementation_effect: 0
 automatic_progression: false
 ---
 
-> 2026-09-11 Q4現在地：修正版v1.2に従い、公開用mode・単一生成owner・旧client/保存版互換・停止復旧・bootstrap/RN統合を実装し、API163件とRN56件を確認した。初回の不自然な名詞化と肯定的回答/当時訂正の本文不成立を修正。保存済み公開合成22ケースと既存100件を全読した。本文の長い再掲と定型性は引き続き改善対象で、商品NOT_CLEAR、公開未実施。Q4の実装・検証・具体的残件は正本06とAPI既存handoffの末尾Q4節。実DB・端末・実課金・Mash正式判断・公開は別資料で扱い、その未実施をコード進行の停止条件にしない。
+> 2026-09-11 Q4現在地：修正版v1.2のQ4コード実装・統合・公開接続準備と今回の検証を完了。公開用mode・単一作者・旧client/保存版互換・停止復旧・bootstrap/RNを接続し、初回/肯定的回答/当時訂正と回答名詞化・時点の不具合を修正した。API179 PASS、RNは保存済み56 PASS。新しい保存22ケースを全文確認し、既存100件は全読済みの前版と全record一致。長い再掲・定型性など商品品質はNOT_CLEARとして保持する。現行結果は正本06とAPI既存handoffの末尾Q4 continuation節。実DB・端末・実課金・Mash正式判断・公開操作は別作業、既定OFF。
 
 > 2026-09-11 Q3時点の記録：添付修正版Technical Design v1.2に従い、Q2のコード実装完了からQ3へ進めた。Plusの適格本人履歴、Premiumの本人続行による最大3問と確認・修正・否定できる解釈フレーム、限定条件のLayer3を保存・API・RNまで実装した。Q3のコード実装は完了し、次の実装単位はQ4の統合・実本文確認・互換性・公開接続準備。実DB適用、端末・実課金確認、Mashの正式商品判断、公開操作は別作業として未実施。default OFF、商品NOT_CLEAR、Draft/open/unmergedを維持する。以下の旧Q1/Q2段落・Product Read待ちの順序は当時の履歴であり、Q3/Q4のコード進行を止める現行条件ではない。現在の進行ownerは本系列の`06_implementation_order_migration_and_verification.md`末尾Q3節とAPI既存handoff末尾Q3節。
 

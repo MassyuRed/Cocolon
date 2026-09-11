@@ -19,7 +19,7 @@ current_product_read_state: "EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFI
 candidate_ready: false
 ---
 
-> 2026-09-11 Q4現在地：修正版v1.2に従い、公開用mode・単一生成owner・旧client/保存版互換・停止復旧・bootstrap/RN統合を実装し、API163件とRN56件を確認した。初回の不自然な名詞化と肯定的回答/当時訂正の本文不成立を修正。保存済み公開合成22ケースと既存100件を全読した。本文の長い再掲と定型性は引き続き改善対象で、商品NOT_CLEAR、公開未実施。Q4の実装・検証・具体的残件は正本06とAPI既存handoffの末尾Q4節。実DB・端末・実課金・Mash正式判断・公開は別資料で扱い、その未実施をコード進行の停止条件にしない。
+> 2026-09-11 Q4現在地：修正版v1.2のQ4コード実装・統合・公開接続準備と今回の検証を完了。公開用mode・単一作者・旧client/保存版互換・停止復旧・bootstrap/RNを接続し、初回/肯定的回答/当時訂正と回答名詞化・時点の不具合を修正した。API179 PASS、RNは保存済み56 PASS。新しい保存22ケースを全文確認し、既存100件は全読済みの前版と全record一致。長い再掲・定型性など商品品質はNOT_CLEARとして保持する。現行結果は正本06とAPI既存handoffの末尾Q4 continuation節。実DB・端末・実課金・Mash正式判断・公開操作は別作業、既定OFF。
 
 > 2026-09-11 Q3時点の記録：添付修正版Technical Design v1.2に従い、Q2のコード実装完了からQ3へ進めた。Plusの適格本人履歴、Premiumの本人続行による最大3問と確認・修正・否定できる解釈フレーム、限定条件のLayer3を保存・API・RNまで実装した。Q3のコード実装は完了し、次の実装単位はQ4の統合・実本文確認・互換性・公開接続準備。実DB適用、端末・実課金確認、Mashの正式商品判断、公開操作は別作業として未実施。default OFF、商品NOT_CLEAR、Draft/open/unmergedを維持する。以下の旧Q1/Q2段落・Product Read待ちの順序は当時の履歴であり、Q3/Q4のコード進行を止める現行条件ではない。現在の進行ownerは本系列の`06_implementation_order_migration_and_verification.md`末尾Q3節とAPI既存handoff末尾Q3節。
 
@@ -798,3 +798,6 @@ Q1・Q2・Q3のコード実装を完了として記録し、次はQ4の実装統
 直接変更しない影響本文として、APIの元入力保存・国家dispatch、app route登録、thread store/履歴/回答更新/投影/本文surface/独立gate、Q2/Q3 migration、認証・subscription・retention・親/account削除、RNのAuthContext・AnalysisHistoryScreen・Home actions/state・draft保存・旧feedback modal・Piece previewと共通API façadeを確認した。補足回答は元入力に所属し、国家件数・花・通知・Astor queue、Piece/Analysis/TodayQuestionへ新しい入力として送らない。
 
 全体図・両repositoryの全treeと役割地図を参照した。旧inventoryの件数を新headの全体再生成と称さず、関係の薄いfileは役割と接点を確認する。System Context v1は使わず原典を直接確認。実適用手順はAPI EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md §9、検証と品質残件は正本06/API既存handoffのQ4節。
+
+
+Q4回答名詞化の追加差分：既存Human Reception／Sentence Surface／Observation Gateの3owner内。Q1とQ4の既存testを更新し、新しい公開保存snapshot `ai/tests/fixtures/emlis_q4_synthetic_saved_nominals_20260911.json` を追加した。新しいproduction file・作者・routeはなく、国家・他core・旧経路の役割地図は上記Q4境界を継承する。旧snapshotと旧検証記録は保持。

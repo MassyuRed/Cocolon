@@ -1,7 +1,7 @@
 ---
 document_id: Cocolon_EmlisAI_longterm_roadmap_CURRENT
 canonical_path: Cocolon_前提資料/Cocolon_EmlisAI_longterm_roadmap_CURRENT.md
-revision_date: 2026-09-10
+revision_date: 2026-09-11
 observation_date: 2026-08-13 JST
 status: CURRENT_EFFECTIVE
 document_role: EmlisAI_LONG_TERM_PRODUCT_CURRENT_ALIGNMENT
@@ -15,7 +15,7 @@ automatic_progression: false
 
 # Cocolon / EmlisAI 長期開発ロードマップ CURRENT
 
-> 2026-09-11 Q4現在地：修正版v1.2に従い、公開用mode・単一生成owner・旧client/保存版互換・停止復旧・bootstrap/RN統合を実装し、API163件とRN56件を確認した。初回の不自然な名詞化と肯定的回答/当時訂正の本文不成立を修正。保存済み公開合成22ケースと既存100件を全読した。本文の長い再掲と定型性は引き続き改善対象で、商品NOT_CLEAR、公開未実施。Q4の実装・検証・具体的残件は正本06とAPI既存handoffの末尾Q4節。実DB・端末・実課金・Mash正式判断・公開は別資料で扱い、その未実施をコード進行の停止条件にしない。
+> 2026-09-11 Q4現在地：修正版v1.2のQ4コード実装・統合・公開接続準備と今回の検証を完了。公開用mode・単一作者・旧client/保存版互換・停止復旧・bootstrap/RNを接続し、初回/肯定的回答/当時訂正と回答名詞化・時点の不具合を修正した。API179 PASS、RNは保存済み56 PASS。新しい保存22ケースを全文確認し、既存100件は全読済みの前版と全record一致。長い再掲・定型性など商品品質はNOT_CLEARとして保持する。現行結果は正本06とAPI既存handoffの末尾Q4 continuation節。実DB・端末・実課金・Mash正式判断・公開操作は別作業、既定OFF。
 
 > 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabledで意味・実本文一往復と必要回帰の確認済みで、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」です。
 

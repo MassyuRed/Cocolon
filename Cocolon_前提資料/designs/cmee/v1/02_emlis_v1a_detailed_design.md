@@ -1,10 +1,12 @@
 # CMEE V1-A — EmlisAI Observation Vertical 詳細設計
 
-> 2026-09-11 Q3現在地：添付修正版Technical Design v1.2に従い、Q2のコード実装完了からQ3へ進めた。Plusの適格本人履歴、Premiumの本人続行による最大3問と確認・修正・否定できる解釈フレーム、限定条件のLayer3を保存・API・RNまで実装した。Q3のコード実装は完了し、次の実装単位はQ4の統合・実本文確認・互換性・公開接続準備。実DB適用、端末・実課金確認、Mashの正式商品判断、公開操作は別作業として未実施。default OFF、商品NOT_CLEAR、Draft/open/unmergedを維持する。以下の旧Q1/Q2段落・Product Read待ちの順序は当時の履歴であり、Q3/Q4のコード進行を止める現行条件ではない。現在の進行ownerは本系列の`06_implementation_order_migration_and_verification.md`末尾Q3節とAPI既存handoff末尾Q3節。
+> 2026-09-11 Q4現在地：修正版v1.2のQ4コード実装・統合・公開接続準備と今回の検証を完了。公開用mode・単一作者・旧client/保存版互換・停止復旧・bootstrap/RNを接続し、初回/肯定的回答/当時訂正と回答名詞化・時点の不具合を修正した。API179 PASS、RNは保存済み56 PASS。新しい保存22ケースを全文確認し、既存100件は全読済みの前版と全record一致。長い再掲・定型性など商品品質はNOT_CLEARとして保持する。現行結果は正本06とAPI既存handoffの末尾Q4 continuation節。実DB・端末・実課金・Mash正式判断・公開操作は別作業、既定OFF。
+
+> 2026-09-11 Q3時点の記録：添付修正版Technical Design v1.2に従い、Q2のコード実装完了からQ3へ進めた。Plusの適格本人履歴、Premiumの本人続行による最大3問と確認・修正・否定できる解釈フレーム、限定条件のLayer3を保存・API・RNまで実装した。Q3のコード実装は完了し、次の実装単位はQ4の統合・実本文確認・互換性・公開接続準備。実DB適用、端末・実課金確認、Mashの正式商品判断、公開操作は別作業として未実施。default OFF、商品NOT_CLEAR、Draft/open/unmergedを維持する。以下の旧Q1/Q2段落・Product Read待ちの順序は当時の履歴であり、Q3/Q4のコード進行を止める現行条件ではない。現在の進行ownerは本系列の`06_implementation_order_migration_and_verification.md`末尾Q3節とAPI既存handoff末尾Q3節。
 
 
 - document id: `cocolon.cmee.v1a.emlis_observation.detailed_design`
-- revision date: `2026-09-10 JST`
+- revision date: `2026-09-11 JST`
 - lifecycle: `CURRENT_PRODUCT_OWNER_NON_PASS / REALIZABLE_RECEPTION_EXPRESSION_WORK_STAGE1_ACTIVE`
 - runtime state: `DRAFT_WIP_DISABLED_INHERITED_OWNER_CHAIN_IM10_NON_PASS`
 - historical predecessor implementation evidence: `MassyuRed/mashos-api Draft PR #3 @ d26b3521f0cd63421af3596277145b2e52dafbbe / NOT_CURRENT_OWNER_HEAD`
@@ -17,7 +19,7 @@
 - private human Product Read: `CURRENT_EVALUATED_NON_PASS / HISTORICAL_PREDECESSOR_EVALUATED_FAIL_STOP`
 - candidate ready: `false`
 - production admission: `false`
-- current authorized implementation: `MASH_EXPLICIT_EMLIS_Q3_CONTINUATION_PER_20260911_V1_2`
+- current authorized implementation: `MASH_EXPLICIT_EMLIS_Q4_CONTINUATION_PER_20260911_V1_2`
 - automatic progression: `false`
 - Cycle001 effect: `0`
 - Stage 1 language route: `ROUTE_A_PROVIDERLESS / SOURCE_GROUNDED_REALIZABLE_RECEPTION_EXPRESSION / HUMAN_RECEPTION_SOLE_LAYER2_AUTHOR`
@@ -3123,3 +3125,8 @@ Premiumのフレームは、評価済み履歴の本人回答と対象の出来�
 本人の元入力を読む → 必要な一点を問う → 独立回答と意味を先に保存 → 同じ作者が本文を返す体験を、公開mode・旧client・専用readerへ接続した。activeには独立承認値が必要で、既定OFF。read_onlyは回答/意味を消さず、生成・新規操作を止めて保存結果を読む。旧I5の再生成へ戻さない。最新本文を先頭にし、原入力と前のやり取りは履歴で読める。
 
 本文の確認で、肯定的な回答を負担型へ押し込む選択と過去の肯定感情を拒否するappraisalを修正。初回の適格な出来事/反応対比では、原文の出来事を「こと」として名詞化する。同一作者と独立inverseで関係・時点・sourceを検証する。公開合成22ケースの保存本文と既存100件を全読し、長い再掲/定型性は引き続き改善対象。詳細結果と残件は06とAPI既存handoff末尾Q4節。
+
+
+### 2026-09-11 Q4回答名詞化の検証完了
+
+回答の命題・否定・限定・推量・語幹を保つ可逆な名詞化を同じHuman Reception作者へ追加した。時点は最終主観名詞へ掛け、元の意味/source/checkpointを変えない。形態・slot・時点を既存IRへ封じ、全plan再導出・Sentence Surface・独立inverseが一致するものだけを出す。今回のQ4コード作業は検証済みで、API179 PASS、保存22ケース全読、既存100件の全record不変。詳しい途中失敗・最終結果・品質残件は正本06とAPI既存handoff末尾Q4 continuation節。商品NOT_CLEARと後日の適用・運用確認は保持する。
