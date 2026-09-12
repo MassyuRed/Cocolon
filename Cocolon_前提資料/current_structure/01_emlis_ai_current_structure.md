@@ -816,3 +816,15 @@ Q4回答名詞化の追加差分：既存Human Reception／Sentence Surface／Ob
 | emlis_ai_grounded_observation_gate.py | 完成本文を独立して読み、境界全件・順序・原文・述語の一致を検査。source内疑問符の例外を検証済み限界句に限定。 |
 
 Human Reception作者、thread store/API、Q2/Q3 SQL、RN current readerは既存接続を維持する。意味更新後に本文を検証できなければcurrentなし、過去本文非currentの境界は変更しない。内部契約は正本05、商品判断と全検証は正本06/API既存handoffの同日追記を参照。本人の不明のHR受容と中心感情選択・読みやすさは未完了、商品NOT_CLEAR。
+
+
+## 2026-09-12 Q4 — 現在の不明と原反応を保持する既存owner接続
+
+新production file・作者・routeはない。意味採用・保存・公開wire・schema field・DDL・RN経路は変更しない。
+
+| 既存owner（API ai/services/ai_inference/以下） | 追加した責務 |
+|---|---|
+| emlis_ai_grounded_observation_plan.py | 既存の認識上の不明の有限文法に現在時点の修飾を許容。採用済みの現在の自己認識状態をsource/属性/時点から検証し、単一出来事・単一回答・未撤回・一意ABOUTの場合に既存の原反応保持groupへ渡す。 |
+| emlis_ai_grounded_human_reception.py | 状態を感情へ読み替えず、既存FINITE名詞化で元の反応と回答時点の不明を同じHRへ保持。IRも単一eventに限定し、既存の独立本文inverseを通す。 |
+
+共有stage1での初回の不明の受け止め改善と、Q3初回の実経路のUNAVAILABLEは別に扱う。後者のUNKNOWNとaffected nucleusの接続は未解消。意味/選択/契約の次の補修点、対応範囲と全検証は正本06/API既存handoffの同日節を参照する。商品NOT_CLEAR、既定OFF。

@@ -3215,3 +3215,10 @@ API source `4af65007d3b425d0331810251de01a28835f0993`。本人の過去の受動
 PARTIAL回答の未解釈根拠を、採用済みの意味/HRとは別の処理限界としてObservation内に必須表示する。元回答の連続範囲を示し、今回の観測へ反映できていない部分があると伝える。本人の不明や別時点/第三者の感情へ読み替えず、解釈済みの裸unknownを未処理扱いしない。引用内断片を独立した自己回答として採用しない。訂正・撤回の成立部分を維持し、未対応置換が同じspanにあっても撤回全体を失敗扱いしない。
 
 同じ共有Sentence Surfaceの既存limited_scope句と独立body inverseで、必須範囲・原文・述語を双方向に照合する。採用された感情・関係・時点・HRは保持。内部dimensionの区別は正本05、owner接続はcurrent_structure01、固定source `f1a5880c801d47e259d18352b246c6dec4291cf2` の全検証と残件は同日06/API handoffを参照する。本人が明示した不明の意味/HR受容、中心感情の選択、長い列挙・反復は未完了。商品NOT_CLEAR、既定OFF・Draft/open/unmerged。
+
+
+### 2026-09-12 Q4継続 — 現在の不明と元の気持ちを共有HRで保持
+
+採用済みの現在の認識上の不明をstate/state/uncertainのまま、未訂正の原反応とともに共有HRへ保持する。sourceで証明された単一の本人の過去の受動出来事と原陰性反応、一件の現在回答、一意ABOUT、未撤回に限定。private回答source・required/explicit・単一span・limit/negation/uncertainty・原述語・回答時点を検証し、既存FINITE名詞化・IR・独立inverseで元の気持ちと不明の両方を残す。
+
+共有初回文法も現在時点の修飾に対応したが、Q3初回のUNKNOWN投影はUNAVAILABLEのまま。直接共有stage1の改善を実アプリの初回提供成功へ換算しない。一部の限定表現は回答採用がUNRESOLVEDであり、このHR修正から採用へ昇格させない。詳細な境界・固定source検証・次の投影補修は同日06とAPI既存handoffを参照。新owner/公開wire/schema field/DDL/RN変更なし。商品NOT_CLEAR、既定OFF・Draftを維持。
