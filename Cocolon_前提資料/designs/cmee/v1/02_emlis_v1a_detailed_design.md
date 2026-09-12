@@ -3222,3 +3222,10 @@ PARTIAL回答の未解釈根拠を、採用済みの意味/HRとは別の処理�
 採用済みの現在の認識上の不明をstate/state/uncertainのまま、未訂正の原反応とともに共有HRへ保持する。sourceで証明された単一の本人の過去の受動出来事と原陰性反応、一件の現在回答、一意ABOUT、未撤回に限定。private回答source・required/explicit・単一span・limit/negation/uncertainty・原述語・回答時点を検証し、既存FINITE名詞化・IR・独立inverseで元の気持ちと不明の両方を残す。
 
 共有初回文法も現在時点の修飾に対応したが、Q3初回のUNKNOWN投影はUNAVAILABLEのまま。直接共有stage1の改善を実アプリの初回提供成功へ換算しない。一部の限定表現は回答採用がUNRESOLVEDであり、このHR修正から採用へ昇格させない。詳細な境界・固定source検証・次の投影補修は同日06とAPI既存handoffを参照。新owner/公開wire/schema field/DDL/RN変更なし。商品NOT_CLEAR、既定OFF・Draftを維持。
+
+
+### 2026-09-12 初回の現在の不明を本文まで保持
+
+現在の認識上の不明として採用済みの原文を、未知を表す内部nodeだけへ切り離さず、完全なsource証拠とrequired UNFINISHED contributionへ対応させる。追加質問や解決済み解釈を作らず、共有meaning・HR・Sentence Surface・独立inverseを通じて初回本文へ接続する。未知はLIMITEDのまま保持する。上流でlow-informationに分類される裸の不明、対応外の入力、他人・過去・引用・衝突する修飾はこの対応から昇格させない。
+
+到達性の改善と文章品質は別に確認する。初回Observationの汎用文型による感覚扱い・時点の重複は残件であり、本文生成が成功しても商品全体はNOT_CLEARとする。全検証・保存結果・途中失敗は06と同じ非公開記録に継続する。

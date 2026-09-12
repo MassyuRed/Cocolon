@@ -828,3 +828,8 @@ Human Reception作者、thread store/API、Q2/Q3 SQL、RN current readerは既�
 | emlis_ai_grounded_human_reception.py | 状態を感情へ読み替えず、既存FINITE名詞化で元の反応と回答時点の不明を同じHRへ保持。IRも単一eventに限定し、既存の独立本文inverseを通す。 |
 
 共有stage1での初回の不明の受け止め改善と、Q3初回の実経路のUNAVAILABLEは別に扱う。後者のUNKNOWNとaffected nucleusの接続は未解消。意味/選択/契約の次の補修点、対応範囲と全検証は正本06/API既存handoffの同日節を参照する。商品NOT_CLEAR、既定OFF。
+
+
+### 2026-09-12 初回の現在の不明を既存意味経路へ接続
+
+新規file・owner・route・schema fieldは追加しない。`emlis_thread_projection.py` は既存の source-explicit epistemic boundary と原nucleus・完全source span・hedge-only・limiting-unknown roleの一致を確認する。UNKNOWN node / owner / material unknown refs は維持する。`contracts.py` の共有導出は、同一の完全証拠、必要owner、現在の本人の不明、唯一のrequired UNFINISHED contributionがあるときだけ、その原文nodeを不明の対象として返す。`emlis_input_specific_meaning.py` はこの対応をbasisへ用い、実Q1/Q3のview検証でもunknown coverage・basis・compatibilityを独立に再導出する。限定された単一UNFINISHEDのappraisalは既存LEAVE_UNFINISHEDを使用する。文面専用routeや作者は追加しない。

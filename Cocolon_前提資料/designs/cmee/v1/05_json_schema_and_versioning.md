@@ -2575,3 +2575,10 @@ cocolon.emlis_thread.application.v1へboolean can_writeを追加。読取り専�
 answer_interpretation_unresolvedの句はsource envelopeの同一field内で順序・連続性・一意性を確認した原文を用い、sourceの区切りと引用文脈を保持する。意味を採用できないことを本人の不明へ変換しない。完成本文の独立inverseは必須境界と根拠引用・外側述語の全件対応を検査し、同時削除/付替えや意味の反転を拒否する。引用内の疑問符はこの検証済み句のsource部分に限る。quoted spanの採用前確認はcanonical scalar_startを用い、sourceを再分割・再符号化しない。
 
 歴史的snapshotは保持し、現行共有owner identityだけを更新した。新しい公開field・state・DDL・rendererはなく、保存版を再計算して正常回復した扱いにしない。本人の不明を意味として採用しHRへ接続する残件は未完了。品質結果は同日06/API handoff、責務地図はcurrent_structure01を参照。
+
+
+### 2026-09-12 初回epistemic unknownのsource-object対応
+
+wire schema / enum / source owner数は変更しない。Q1/Q3の既存unknown dimensionだけではsource-object対応の権限を与えない。UNKNOWNはUNKNOWNのまま残し、同じ完全evidenceに結び付く唯一の本人・現在・陰性uncertain nucleus、required owner / provisional-only attachment、単一UNFINISHED/PRESENT_UNFINISHED/NO_RELATION_CLAIMのrequired contributionが揃う場合だけ原文objectへ対応させる。PRIMARYと同一objectのEXPERIENCER以外のargumentを許可しない。adapterでは元boundaryのaffected nucleus・span・hedge-onlyも照合する。
+
+Q1/Q3の実経路にある `validate_grounded_situation_view` で、required UNKNOWN dispositionとmaterial unknown refsの全件一致、各unknown専用basisの対象・証拠・unknown参照と空の他duty欄、compatibilityの正確な対応を再計算する。basisの削除・別対象化・複製・余分なduty混入を許可しない。旧generic source admissionやhistorical unknown grounding-kind契約を広げない。Layer 1 trace必須とuser-fact-effect 0を維持する。
