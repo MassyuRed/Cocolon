@@ -3174,3 +3174,12 @@ API source `755530b5ff20dde13f81d3264caa5188a2bfa904`。sourceで成立する2�
 関連242 PASS、追加registry9件は7 PASS/2既存FAIL、必須438件は前回と同じ429 PASS/9 FAIL。同じ100入力と全HR planは保存原本と完全一致。保存35ケース98状態・112保存GETを確認し、華恋と独立readerが本文を全読した。前回80状態からの差はHR27状態、Observationは同一。詳しい限定・途中失敗・結果は06とAPI既存handoffの同日節を正本とする。
 
 商品NOT_CLEAR。肯定回答と原反応の隣接、単一eventの肯定ADD後の両義性、原イベント自体の撤回、一般の複数主題/中心感情/共有関係、未対応文法、長い本文は残件。新owner/schema/DB/RN変更はなくSTRUCTURE_MAP_DELTA_NONE、既定OFFとDraft/open/unmergedを保持。最新weekly20260912に従い、既存の意味・関係・本文ownerで次の保持条件と読みやすさを進める。
+
+
+### 2026-09-12 Q4残件 — 単一出来事への肯定ADDでも元の感情を保持
+
+API source `4af65007d3b425d0331810251de01a28835f0993`。本人の過去の受動出来事と未訂正の原陰性反応がsourceで一組に結ばれ、一件の肯定回答をADDした場合、元の感情と追加された気持ちを既存HRで両方保持する。原接続詞と回答時点を残し、改善した等の関係は補わない。独立したNORMAL claimのcontribution帰属を保持し、分配は同一claimの共有時だけ行う。既存LIMITED条件と独立inverseを維持する。明示訂正を追加回答へ置き換えない。
+
+関連252 PASS、registry追加9件は7 PASS / 2既存FAIL。必須438件は前回と同じ429 PASS / 9既存FAILで、全key成否と後続診断が一致。 同じ100入力とHR planは保存原本と全bytes同一。保存40ケース108状態・123保存GET一致を確認し、華恋と独立readerが全文確認した。詳細な範囲と結果は06およびAPI既存handoffの同名節。
+
+商品NOT_CLEAR。単一陰性ADDの原感情保持、原イベント自体の撤回、未確定部分と中心感情の本文反映、長い本文・定型的な締めを残件として保持する。撤回の静的原因調査を、保存フローの修正済み判定へ昇格しない。STRUCTURE_MAP_DELTA_NONE、既定OFFとDraft/open/unmergedを維持。最新weeklyの目標に沿って、既存の意味・関係・本文ownerで継続する。
