@@ -3243,3 +3243,12 @@ PARTIAL回答の未解釈根拠を、採用済みの意味/HRとは別の処理�
 初回の本人・現在・否定・不明の有限文は、時点・継続・程度・表記を原文どおりに保持して既存のObservationと単一felt_responseへ返す。final OPで唯一のmemo核の原文全域・required/explicitを証明した場合のみ、既存selected-label contextをsource ownerのACTIVE_OPTIONALへ整合させる。labelの値・ID・証拠、旧I5・material quality・required unknown/UNFINISHEDは保持する。HRは既存のこと名詞化を用い、独立inverseは目的語全体を原文と照合し、修飾追加・削除・引用・再掲・否定や格の改変を拒否する。複合文・複数Move・関係付きの一般化は未達。
 
 検証・実装sourceは同日06/API handoffを参照。固定必須回帰は426 PASS / 13 FAIL（既存9＋原文保持と固定参照の不一致4）で、別途診断を元のPASSに換算しない。本文100件と保存69ケース170状態を全件読解。中心感情・不明より補助行動を受け止める対象選択、主題・関係、長い再掲が残り、商品NOT_CLEAR。既存4owner内、STRUCTURE_MAP_DELTA_NONE、既定OFF・Draft/open/unmerged。
+
+
+### 2026-09-12 短い現在の不明と独立した行動を共有HRへ保持
+
+初回の本人・現在・否定・不明を表すmemo全域と、別欄の実行済み行動が独立している場合、行動だけを受け止めず、短い不明を先に、行動を後に保持する。既存final OPのsource全域証明と独立material選択を使用し、明示focusとrequired/非uncertain関係は優先する。前段のmemo証明と、両核のtyped projection後の行動実行証明を混同しない。非required uncertain_connectionを確定背景としてHRへ混ぜず、sourceの関係自体は残す。
+
+既存HRのこと名詞化は不明の時点・継続・程度・表記を保持する。共有命題の全contributionから対象別の非空・排他・全量を照合し、Q3の完全共有集合とQ1の正確な分配済み集合を共通処理する。欠落・混在・交換・外部参照は拒否。selected material受容を未選択のopennessへ変更せず、独立inverseで主体・時点・否定・引用・重複・片方の義務欠落を拒否する。単核の型変換契約は保持する。
+
+実装source `90263ec5682d9f717ab358aea9213aa96435057b`。全検証・途中失敗・保存結果は同日06/API handoffを参照。既存4owner内で新owner/file/route/schema/DDL/RNなし、STRUCTURE_MAP_DELTA_NONE。商品NOT_CLEAR。複数節の中心感情・不明が補助行動に負ける選択、関係、長い列挙・定型句は未解消で、次は同じforeground/background残件を進める。既定OFF・既存Draft/open/unmergedを維持する。
