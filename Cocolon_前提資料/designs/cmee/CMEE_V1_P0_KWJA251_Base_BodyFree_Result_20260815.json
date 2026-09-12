@@ -1,0 +1,105 @@
+{
+  "schema_version": "cocolon.cmee.v1.p0.body_free_result.v1",
+  "result_id": "CMEE_V1_P0_KWJA251_BASE_20260815",
+  "result_date_jst": "2026-08-15",
+  "repository": "MassyuRed/Cocolon",
+  "pull_request": {
+    "number": 30,
+    "state": "DRAFT_OPEN_UNMERGED"
+  },
+  "publication_branch": "agent/three-core-cmee-current-structure-20260815",
+  "l3r_reflection_commit": "7d8473c7edab266576a40b5ec7425cde8618a8f7",
+  "technical_body": {
+    "body_id": "CMEE_V1_L3R_ROUTE_B_BOUNDED_PREFLIGHT_TECHNICAL_BODY",
+    "body_version": "1.0.0",
+    "body_canonical_sha256": "4948bd4d0db491b29021a035af5d596776c86908301b5f49aeff15b2b8418901",
+    "route_contract_id": "cocolon.cmee.v1a.acceptance.route_b.v1"
+  },
+  "authority": {
+    "scope_classification": "MASH_DECISION_AND_APPROVAL_REQUIRED_SCOPE",
+    "approval_owner": "Mash",
+    "execution_owner": "Ultra華恋",
+    "p0_execution_count": 1,
+    "lifecycle": "CONSUMED_TERMINAL",
+    "automatic_retry": false,
+    "fallback": false
+  },
+  "candidate": {
+    "provider": "KWJA",
+    "provider_version": "2.5.1",
+    "model_size": "base",
+    "tasks": [
+      "char",
+      "word"
+    ],
+    "device": "cpu",
+    "package_acquisition": "NOT_STARTED",
+    "checkpoint_acquisition": "NOT_STARTED",
+    "install": "NOT_STARTED",
+    "load": "NOT_STARTED",
+    "inference": "NOT_STARTED"
+  },
+  "terminal": {
+    "code": "P0_ACTIVATION_PRECONDITION_STOP",
+    "exact_one": true,
+    "reason_codes": [
+      "APPROVED_ACQUISITION_CHANNEL_UNAVAILABLE_IN_CURRENT_EXECUTOR",
+      "ACTIVATION_CP312_CHILD_NOT_STARTED"
+    ]
+  },
+  "observations": {
+    "l3r_docs_reflection_fresh_verified": true,
+    "activation_shell_process_count": 1,
+    "activation_python_child_started": false,
+    "platform_tuple": "NOT_RECORDED_BY_P0",
+    "approved_acquisition_host_access": "UNAVAILABLE_IN_CURRENT_EXECUTOR",
+    "acquisition_network_attempt_count": 0,
+    "exact_temp_root_created": false,
+    "cleanup": "NOT_REQUIRED_NO_ROOT_CREATED",
+    "isolation_gate": "NOT_EVALUATED_DUE_EARLIER_STOP",
+    "license_and_provenance_gate": "NOT_EVALUATED_DUE_EARLIER_STOP",
+    "package_binary_closure": "NOT_EVALUATED_DUE_EARLIER_STOP",
+    "provider_output_capability": "NOT_EVALUATED_DUE_EARLIER_STOP",
+    "route_b_owner_disposition_evaluation": "NOT_EVALUATED_IN_P0",
+    "route_b_sufficiency_evaluation": "NOT_EVALUATED_IN_P0",
+    "user_or_private_input_count": 0,
+    "secret_use_count": 0,
+    "write_outside_temp_root_count": 0
+  },
+  "effects": {
+    "temp_root": 0,
+    "network": 0,
+    "package_download": 0,
+    "checkpoint_download": 0,
+    "install": 0,
+    "model_load": 0,
+    "synthetic_case_run": 0,
+    "requirements_or_lock_write": 0,
+    "source_write": 0,
+    "test_write": 0,
+    "runner_write": 0,
+    "production": 0,
+    "api": 0,
+    "db": 0,
+    "rn": 0,
+    "cycle001": 0,
+    "merge": false,
+    "ready_for_review": false
+  },
+  "evidence_credit": {
+    "provider_resource_platform_evidence": false,
+    "product_credit": 0,
+    "implementation_credit": 0,
+    "cycle001_credit": 0,
+    "primary_outcome": "BLOCKER_NARROWED"
+  },
+  "non_reuse": [
+    "P0 authority is consumed and is not retryable",
+    "pre-admission read-only observations are not P0 PASS evidence",
+    "no dependency, resource, platform, or provider capability was admitted",
+    "no L3-I, I1, Product Read, production, or Cycle001 progression is authorized"
+  ],
+  "next_action": "REMAIN_STOPPED_OR_CREATE_A_NEW_LEVEL3_TECHNICAL_BODY_FOR_A_COMPLIANT_EXECUTOR",
+  "automatic_progression": false,
+  "body_free": true
+}

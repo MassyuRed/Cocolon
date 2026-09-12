@@ -1,19 +1,19 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v14",
-  "generated_at": "2026-08-12 JST",
+  "schema_version": "cocolon.piece.workstream_manifest.v15",
+  "generated_at": "2026-08-15 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v13",
-    "predecessor_blob": "9df6e5ce25d127550e71c322ae6a1de46876c661",
-    "predecessor_head": "b3263b25a2105c9358318efdd1f2c274e052bdfb",
-    "carry_forward": "PCE-0 through PCE-9A B01 identities remain unchanged; this revision adds prospective Analysis role alignment only"
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v14",
+    "predecessor_blob": "3b008d572d86178379a3c21a2028e1b8f855ac7e",
+    "predecessor_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
+    "carry_forward": "PCE-0 through PCE-9A B01 identities remain unchanged; this revision records the existing B02-A M0/M1 causal RED test as frozen/present without inventing execution credit, keeps implementation and production apply unapproved, and adds the current structure map."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "96dd9c99fa27d539a02551b5343a749e88025099"
+    "git_blob_sha1": "f5f5b1f43d56b9468b153ef76b225dbf3cdde49a"
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -51,10 +51,12 @@
     "pce9a_b01_red": "COMPLETE_TEST_ONLY_CAUSAL_RED",
     "pce9a_b01_implementation": "COMPLETE_CODE_DISABLED_TARGETED_GREEN",
     "pce9a_b01": "COMPLETE",
-    "pce9a_b02a": "NOT_ACTIVATED_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "pce9a_b02a": "CAUSAL_RED_TEST_FROZEN_PRESENT__EXECUTION_CREDIT_UNVERIFIED__IMPLEMENTATION_NOT_ACTIVATED",
     "analysis_roadmap": "NOT_ACTIVATED_SEPARATE_MASH_APPROVAL_REQUIRED",
-    "next_piece_group": "B2_A_M0_TRACKED_BASELINE_AND_M1_LEGACY_READ_BRIDGE",
-    "automatic_packet_progression": false
+    "next_piece_group": "B02A_IMPLEMENTATION_REQUIRES_SEPARATE_MASH_APPROVAL",
+    "automatic_packet_progression": false,
+    "pce9a_b02a_red": "FROZEN_PRESENT_EXECUTION_CREDIT_UNVERIFIED",
+    "pce9a_b02a_implementation": "NOT_MATERIALIZED_SEPARATE_MASH_APPROVAL_REQUIRED"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -136,10 +138,10 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "4979d8cf3590ec4e4a34db73dc583a953c89bf4e",
-    "cocolon_pre_sync_tree": "315d0984c453d428348e33494c487341eba00285",
-    "mashos_api_head": "7a10fc593b123cb9d9b02147c4b345894dba0c0b",
-    "mashos_api_tree": "842715d588c0573f0de5411dae62b8b8bb22f3a4",
+    "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
+    "cocolon_pre_sync_tree": "4e7901f8b3e10d20f242e19be91f6c725f625b2a",
+    "mashos_api_head": "a8ca4ddf7b7ae76bf7b3d73e74e3a5808d623428",
+    "mashos_api_tree": "a7f782e48e8ac0c97992c74e5a0c5a828f1a9e00",
     "current_user_visible_piece_shape": "old_qna_piece_flow",
     "piece_v2_pure_contract_owner_present": true,
     "piece_v2_api_registration_present": false,
@@ -147,16 +149,20 @@
     "piece_v2_db_runtime_present": false,
     "piece_v2_rn_runtime_present": false,
     "piece_v2_feature_flags_present": false,
-    "production_database_catalog_drift_after_pce0": "UNCONFIRMED"
+    "production_database_catalog_drift_after_pce0": "UNCONFIRMED",
+    "b02a_causal_red_test_path": "ai/tests/piece_v2/db/test_b02_m0_m1_legacy_bridge.py",
+    "b02a_causal_red_test_present": true,
+    "b02a_causal_red_execution_credit": "UNVERIFIED",
+    "b02a_required_implementation_exact5_present": false
   },
   "next_group": {
     "id": "B2_A",
     "name": "M0_TRACKED_MIGRATION_BASELINE_AND_M1_LEGACY_READ_BRIDGE_CURRENT_CALLER_REBIND",
     "environment": "CHAT_5_6_PRO_OK",
     "stronger_evidence_condition": "ISOLATED_DB_REQUIRED_FOR_MIGRATION_GREEN",
-    "first_lifecycle": "SEPARATELY_APPROVED_PACKET_SCOPED_PREFLIGHT_OR_CAUSAL_RED",
+    "first_lifecycle": "FROZEN_CAUSAL_RED_TEST_PRESENT__IMPLEMENTATION_REQUIRES_SEPARATE_MASH_APPROVAL",
     "production_migration_apply_effect": 0,
-    "state": "NOT_ACTIVATED_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "state": "CAUSAL_RED_EXECUTION_CREDIT_UNVERIFIED__IMPLEMENTATION_NOT_ACTIVATED",
     "automatic_progression": false
   },
   "durable_history": {
@@ -167,8 +173,8 @@
     "pce8_owner": "Cocolon_Piece/pce8_design_freeze_work_packages/"
   },
   "sync_effects": {
-    "authority": "PCE9A_B01_COCOLON_WORKSTREAM_STATE_SYNC_DOC_ONLY",
-    "classification": "DOC_ONLY",
+    "authority": "PIECE_CURRENT_STRUCTURE_AND_B02A_RED_STATE_SYNC_DOC_ONLY",
+    "classification": "OBSERVED_BLOCKER_MINIMAL_FIX_DOCUMENTATION_NAVIGATION_ONLY",
     "cocolon_documentation_changed_path_count": 3,
     "mashos_api_change": 0,
     "test_execution": 0,
@@ -205,5 +211,11 @@
     "cycle001_state_change_count": 0,
     "source_test_runtime_change_count": "0 / 0 / 0",
     "automatic_progression": false
+  },
+  "current_structure": {
+    "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+    "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
+    "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit"
   }
 }
+

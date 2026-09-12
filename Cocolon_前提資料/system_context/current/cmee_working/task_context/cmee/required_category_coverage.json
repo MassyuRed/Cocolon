@@ -1,0 +1,636 @@
+{
+  "all_nonzero": true,
+  "all_pass": true,
+  "categories": [
+    {
+      "blocking_codes": [],
+      "category_id": "current_production_emlis_ai",
+      "effective_source_like_count": 3,
+      "external_exact_assets": [],
+      "external_source_like_count": 0,
+      "files": [
+        {
+          "evidence_kind": "source",
+          "identity": "022303c64260ac856c6cdfae509530b24ff15934bd5e3684feee41ab90ffbd4a",
+          "path": "ai/services/ai_inference/emlis_ai_grounded_observation_plan.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "ec041fe9e46fcd4603ab554c37a9295e2eafc0d45d8f8a7fd117039d1b89c93f",
+          "path": "ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "b2aab7c8a8b2980b80ffa8995eac6c6896462e1f4b70a548d10a311e72562cad",
+          "path": "ai/services/ai_inference/emlis_ai_reply_service.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        }
+      ],
+      "minimum_source_like": 1,
+      "required_workspace": null,
+      "review_codes": [],
+      "selected_count": 3,
+      "source_like_count": 3,
+      "status": "PASS",
+      "title": "current production EmlisAI"
+    },
+    {
+      "blocking_codes": [],
+      "category_id": "nlsv3_cycle001",
+      "effective_source_like_count": 2,
+      "external_exact_assets": [
+        {
+          "blob_sha": "c900153cceab5f58e94cdc5433397568e8478dd5",
+          "content_sha256": "ef29a731fb7c6df0b7444b1e503f447e6131430f22400471e8eb0a97dda982ee",
+          "evidence_kind": "source",
+          "path": "ai/services/ai_inference/emlis_ai_step11_cycle001_product_recovery_v3.py",
+          "repository_key": "mashos-api",
+          "required_workspace": "cycle001_working",
+          "source_commit": "958c1b53f5b5894691e0b10e2d991fb8236d9f6f",
+          "symbols": [
+            "STEP11_CYCLE001_PRODUCT_RECOVERY_SOURCE_SCHEMA",
+            "Step11Cycle001ProductRecoverySourceEnvelope",
+            "step11_cycle001_product_recovery_visible_inverse",
+            "_SEMANTIC_COVERAGE_AUTHORITY"
+          ],
+          "validation_status": "GIT_COMMIT_BLOB_CONTENT_SYMBOL_VERIFIED"
+        },
+        {
+          "blob_sha": "056d7fa3e0d85ccb56d974c97f7fb95b757ebc8f",
+          "content_sha256": "15b0861a37874ce0226b1cb92eaa10305234a09db5670b766cdfc36276273c00",
+          "evidence_kind": "test",
+          "path": "ai/tests/test_emlis_nls_v3_s11_cycle001_product_recovery_v3.py",
+          "repository_key": "mashos-api",
+          "required_workspace": "cycle001_working",
+          "source_commit": "958c1b53f5b5894691e0b10e2d991fb8236d9f6f",
+          "symbols": [
+            "_audit_candidate"
+          ],
+          "validation_status": "GIT_COMMIT_BLOB_CONTENT_SYMBOL_VERIFIED"
+        }
+      ],
+      "external_source_like_count": 2,
+      "files": [
+        {
+          "evidence_kind": "design",
+          "identity": "755214460d24742a3c85ab0148b88e9121e857e5b64423c48f4194637e9e25a3",
+          "path": "Cocolon_前提資料/08_cycle001_current_state.md",
+          "repository_key": "Cocolon",
+          "source_commit": "6b0973c841d536a2e6eaa97c586c320a93f83dc7"
+        },
+        {
+          "evidence_kind": "design",
+          "identity": "49b6f51a1fc51c6c37f9e6845f248e158466dd9850c9151ff48c29cc00fcd590",
+          "path": "Cocolon_前提資料/Cocolon_EmlisAI_NLSv3_CurrentAlignment.md",
+          "repository_key": "Cocolon",
+          "source_commit": "6b0973c841d536a2e6eaa97c586c320a93f83dc7"
+        },
+        {
+          "evidence_kind": "design",
+          "identity": "c9b8ee84e38745b0ba2b43b8699557eaf0fa75123f13b5cb819602944bb9d622",
+          "path": "Cocolon_前提資料/designs/cmee/NLSv3_to_CMEE_Disposition_Phase1_20260817.md",
+          "repository_key": "Cocolon",
+          "source_commit": "6b0973c841d536a2e6eaa97c586c320a93f83dc7"
+        },
+        {
+          "evidence_kind": "historical",
+          "identity": "c0bdc73c61faba375cba6813c31178b28bb7ad97746bd5b44016320faacfcc26",
+          "path": "Cocolon_前提資料/historical_baselines/emlis_ai/Cocolon_EmlisAI_ModelFreeNaturalLanguageSurfaceV3_DetailedDesign_ImplementationOrder_20260714_Revised_Cycle.md",
+          "repository_key": "Cocolon",
+          "source_commit": "6b0973c841d536a2e6eaa97c586c320a93f83dc7"
+        }
+      ],
+      "minimum_source_like": 1,
+      "required_workspace": "cycle001_working",
+      "review_codes": [
+        "EXTERNAL_EXACT_ASSET_REVIEWED_WITH_DISPOSITION"
+      ],
+      "selected_count": 4,
+      "source_like_count": 0,
+      "status": "PASS",
+      "title": "NLSv3 / Cycle001"
+    },
+    {
+      "blocking_codes": [],
+      "category_id": "cmee_draft_implementation",
+      "effective_source_like_count": 5,
+      "external_exact_assets": [],
+      "external_source_like_count": 0,
+      "files": [
+        {
+          "evidence_kind": "source",
+          "identity": "5a2aeaf0e88f028620c7e49b826dd39a5e081e4e8bf220e3bd31ce83dd06d39a",
+          "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/__init__.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "contract",
+          "identity": "3ba93f8c455700ecbff784e01afe9935291314ef3f8d030032fc74970097175e",
+          "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "4c6dc780a572bf9eb6a91e256c92fc564c982547d294439caeac938dbda30560",
+          "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_v1a.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "48ae1cd592d321ac29c21b555bde62e30f43a0bd0ef8f29794a14e74c459d964",
+          "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "05a30e9314e7697305f282424a19dec610638b416468a8117accca0c546f624c",
+          "path": "ai/services/ai_inference/cocolon_meaning_experience_engine/source_kernel.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        }
+      ],
+      "minimum_source_like": 1,
+      "required_workspace": null,
+      "review_codes": [],
+      "selected_count": 5,
+      "source_like_count": 5,
+      "status": "PASS",
+      "title": "CMEE Draft implementation"
+    },
+    {
+      "blocking_codes": [],
+      "category_id": "piece_current_future",
+      "effective_source_like_count": 0,
+      "external_exact_assets": [],
+      "external_source_like_count": 0,
+      "files": [
+        {
+          "evidence_kind": "current_structure",
+          "identity": "a4a867a6915fe05b8a992ff2601d6e3ad34fb47e499813de4f502d2cbc2fabe9",
+          "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+          "repository_key": "Cocolon",
+          "source_commit": "6b0973c841d536a2e6eaa97c586c320a93f83dc7"
+        },
+        {
+          "evidence_kind": "design",
+          "identity": "b925c72129872761f2bdba3e83d0488e4fb664b8051992bbd5b34ba94f964fad",
+          "path": "Cocolon_前提資料/designs/cmee/v1/03_piece_v1c_detailed_design.md",
+          "repository_key": "Cocolon",
+          "source_commit": "6b0973c841d536a2e6eaa97c586c320a93f83dc7"
+        }
+      ],
+      "minimum_source_like": 0,
+      "required_workspace": null,
+      "review_codes": [],
+      "selected_count": 2,
+      "source_like_count": 0,
+      "status": "PASS",
+      "title": "Piece current / future"
+    },
+    {
+      "blocking_codes": [],
+      "category_id": "analysis_current_future",
+      "effective_source_like_count": 0,
+      "external_exact_assets": [],
+      "external_source_like_count": 0,
+      "files": [
+        {
+          "evidence_kind": "current_structure",
+          "identity": "d76cf6120d157eea7f0f2d2044a570ad2162d9ae5ea9e948391d9d23f5e578ee",
+          "path": "Cocolon_前提資料/current_structure/03_analysis_current_structure.md",
+          "repository_key": "Cocolon",
+          "source_commit": "6b0973c841d536a2e6eaa97c586c320a93f83dc7"
+        },
+        {
+          "evidence_kind": "design",
+          "identity": "69af388a58fab5bc0316390b3472aac4b15496341a0ab3a2b49678733538ce79",
+          "path": "Cocolon_前提資料/designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md",
+          "repository_key": "Cocolon",
+          "source_commit": "6b0973c841d536a2e6eaa97c586c320a93f83dc7"
+        }
+      ],
+      "minimum_source_like": 0,
+      "required_workspace": null,
+      "review_codes": [],
+      "selected_count": 2,
+      "source_like_count": 0,
+      "status": "PASS",
+      "title": "Analysis current / future"
+    },
+    {
+      "blocking_codes": [],
+      "category_id": "shared_text_generation_core",
+      "effective_source_like_count": 28,
+      "external_exact_assets": [],
+      "external_source_like_count": 0,
+      "files": [
+        {
+          "evidence_kind": "source",
+          "identity": "98c46300de325f477c7fde06e2c8932007cbac1a00c49cb6c02b9258cfc8b830",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/__init__.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "96d23c8c5ec0a8e96564654b0fc470944798dd2d5c1ef85490f8ef83b41319d9",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/__init__.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "dc8d4b886f4f056cf6f2544b7bb0fffdcf395567fb4ec18cf739e56980a85e8d",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "contract",
+          "identity": "d779480f852f464fde6e8e97f717754c9ecdb2b2df5f0f1b633383b2d863de64",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_composer_input_contract.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "1d55e5b3b0b3046c8f027daebfa022c08c3944668d3ab03329608496535a8af4",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_environment_state_output_material.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "fa89e47dc56f1eb3b08d6a3b881c389c60e4a6f79569f9c419b15870dbc0b77b",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_environment_state_output_surface.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "ec6a031765bc5966ebaa46688095d61c09a2492bf7735393c46cf5878d544d65",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/analysis_evidence_adapter.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "c42b5244724c9446a887f84a30a6e6536ca38fed20a0fb7917e1afc32e5970df",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/emlis_evidence_adapter.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "f4b9d1f3c3ed35c184c776a7e25caf01beb89a81b28372a3f275722c2403d042",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/emlis_observation_composer.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "421f2e71abca70d43ce32a41fcc8f3bc2a5659e6fddf5c52e45327bcfefbe945",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "contract",
+          "identity": "89ea23a68f66c2187b06d4e26455f1aa65019d3e9e74451ae337409156af5188",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_composer_input_contract.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "c590bb1e3e9b168c908786ceb54b292e9dec3061f609a4fcfb0d62a2e785bf70",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_environment_state_output_guard.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "9098bb207e6a1e764463808c43a99ab89189080815b01a6776193450821c839a",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/adapters/piece_evidence_adapter.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "d64e2fe21ca182bbeb36abacc8785ac78af3eefdbd05b35117ec6a5ea02a9978",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/composer.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "eb769682d214daa7b820066ddb4982286b8e2ea6077e659d34b1fe71796ecb0c",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/evidence.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "39ff03ec0519d0ccf178b1d6a0c181d2eac88c0fd26da2930cfd1a5d67a2912f",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/guards/__init__.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "3a4328fbd13bb1674ee7171a5e81146e9119f48f9ddb032bbf67e238d15fd902",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/guards/base.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "295359905752ba25d7f0e7ad61d9337fc5e0e6869016942aedea648a9ee29d1b",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/guards/grounding.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "a845189043388001a11418fa76672bd32064676f5d54a636b8b78414b8d8f16f",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/guards/japanese_coherence.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "b3eefb9dccbc1c5926223609052afb9ea300d51a3cce0bf80c2b9ee6b57f011a",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/guards/must_keep_coverage.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "2e540c736eb7d8a8f8757e1bddc8b01b383236c9c935747aaad88491bc6a3169",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/guards/overclaim_diagnosis.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "b631db2f7830a322e1f224c233dfa407ebaee6b796e1b056ae4005879696514c",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/guards/template_echo.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "433a178fad3cfb4165aa30c68c2f8e30163321309dd05aa7774d3678f373d48d",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/phrase_units.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "ef434ff068dd87ad41c5ec85cffe56deaaf117dde80ef014c7eeb9e75696ca5b",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/policies.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "c18192ec6bed278dd52d167c27cf81e342582e990b021359c713d320747136d3",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/result.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "8029f959f5b3cfba3c53d6eeba349886f4370a483230a03582004b488f377f50",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/sentence_plan.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "71bad0ad55a2e25b452fb7a2d7a71c934bc150e1236dc6b283271e0e3f25188d",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/stabilization.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "dcdf4a3deb57e707d102ec51965c914797f1e0a6bfd6f88c326eca032358b178",
+          "path": "ai/services/ai_inference/cocolon_text_generation_core/types.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        }
+      ],
+      "minimum_source_like": 1,
+      "required_workspace": null,
+      "review_codes": [],
+      "selected_count": 28,
+      "source_like_count": 28,
+      "status": "PASS",
+      "title": "shared text-generation core"
+    },
+    {
+      "blocking_codes": [],
+      "category_id": "rn_display_surface",
+      "effective_source_like_count": 4,
+      "external_exact_assets": [],
+      "external_source_like_count": 0,
+      "files": [
+        {
+          "evidence_kind": "source",
+          "identity": "c15cce12bcaf4100b8925d0a315be8548ae47a86285b1cb1be9d9bdaad8c9edf",
+          "path": "screens/InputScreen.js",
+          "repository_key": "Cocolon",
+          "source_commit": "6b0973c841d536a2e6eaa97c586c320a93f83dc7"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "1d36882f2767d3a607f007fcf8c071f53b5bce2b2b0edda1b85e1034fda5ae9c",
+          "path": "screens/input/InputFeedbackReplyModal.js",
+          "repository_key": "Cocolon",
+          "source_commit": "6b0973c841d536a2e6eaa97c586c320a93f83dc7"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "a9404bb494a5ce9312898f4ec514dcacb8479810ea5deeeeee8e5004f3ad6746",
+          "path": "screens/input/inputFeedbackModel.js",
+          "repository_key": "Cocolon",
+          "source_commit": "6b0973c841d536a2e6eaa97c586c320a93f83dc7"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "e8beebc722cee19e2a73fd558684e467e080f152da4e74e2a2b892f2514525b1",
+          "path": "screens/input/useInputFeedbackModal.js",
+          "repository_key": "Cocolon",
+          "source_commit": "6b0973c841d536a2e6eaa97c586c320a93f83dc7"
+        }
+      ],
+      "minimum_source_like": 1,
+      "required_workspace": null,
+      "review_codes": [],
+      "selected_count": 4,
+      "source_like_count": 4,
+      "status": "PASS",
+      "title": "RN display surface"
+    },
+    {
+      "blocking_codes": [],
+      "category_id": "api_boundary",
+      "effective_source_like_count": 3,
+      "external_exact_assets": [],
+      "external_source_like_count": 0,
+      "files": [
+        {
+          "evidence_kind": "contract",
+          "identity": "b7fd3aaa49bd24b925bb68c464c88a63b9796d5f128f47707840994afc5ed860",
+          "path": "ai/docs/API_CONTRACT_POLICY.md",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "source",
+          "identity": "f113910ff7207ce293e86170a42bc9b71d8977fb6b4cbd2306b0c4a474cef653",
+          "path": "ai/services/ai_inference/api_emotion_submit.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "contract",
+          "identity": "3c09f907b0a7edb5103d17427cf85d944f16a2b3167639e05e8dde1f275f5e15",
+          "path": "ai/services/ai_inference/emlis_ai_response_contract.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        }
+      ],
+      "minimum_source_like": 1,
+      "required_workspace": null,
+      "review_codes": [],
+      "selected_count": 3,
+      "source_like_count": 3,
+      "status": "PASS",
+      "title": "API boundary"
+    },
+    {
+      "blocking_codes": [],
+      "category_id": "protected_tests",
+      "effective_source_like_count": 6,
+      "external_exact_assets": [],
+      "external_source_like_count": 0,
+      "files": [
+        {
+          "evidence_kind": "test",
+          "identity": "f36e5183d42ed3b622a79b1df4e63a856ea7d33a748995b7fd006bb19c8d8c62",
+          "path": "ai/tests/contract/test_emlis_ai_contracts.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "test",
+          "identity": "8f4eb6582de40553a24ef60fd9ddf74441b022496acf09423fda974a0ed74277",
+          "path": "ai/tests/contract/test_new_national_core_emlis_contracts.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "test",
+          "identity": "cf4dbf9dad357086a61e8d4bebdbd1d1d5349f442ec6437ab47835254c6c51f6",
+          "path": "ai/tests/test_cmee_v1a_i1sx_contracts.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "test",
+          "identity": "967041e96281e384950a4b8a66169d24d418aae63ed5bc1b58cae8d85dec234f",
+          "path": "ai/tests/test_cmee_v1a_i1sx_vertical.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "test",
+          "identity": "2c57797b87fd7659cb1bb021ff2eb9c95630410ffd0a9f12546ccf38b71bf468",
+          "path": "ai/tests/test_cocolon_text_generation_core_boundary.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "test",
+          "identity": "f7fec54a8c5cb0c7906c9672da5c2f8757428a476ae5251b21c5139fd28adc51",
+          "path": "ai/tests/test_emlis_ai_observation_current_display_contract.py",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        }
+      ],
+      "minimum_source_like": 1,
+      "required_workspace": null,
+      "review_codes": [],
+      "selected_count": 6,
+      "source_like_count": 6,
+      "status": "PASS",
+      "title": "protected tests"
+    },
+    {
+      "blocking_codes": [],
+      "category_id": "relevant_historical_design",
+      "effective_source_like_count": 0,
+      "external_exact_assets": [],
+      "external_source_like_count": 0,
+      "files": [
+        {
+          "evidence_kind": "design",
+          "identity": "43034c133b95e957e5b9e6087871ebf8e5dedddc4b29cc23bf6fc279dbcaee08",
+          "path": "Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_ProductNeglect_and_CMEE_ProductReadFailure_20260816.md",
+          "repository_key": "Cocolon",
+          "source_commit": "6b0973c841d536a2e6eaa97c586c320a93f83dc7"
+        },
+        {
+          "evidence_kind": "design",
+          "identity": "c9b8ee84e38745b0ba2b43b8699557eaf0fa75123f13b5cb819602944bb9d622",
+          "path": "Cocolon_前提資料/designs/cmee/NLSv3_to_CMEE_Disposition_Phase1_20260817.md",
+          "repository_key": "Cocolon",
+          "source_commit": "6b0973c841d536a2e6eaa97c586c320a93f83dc7"
+        },
+        {
+          "evidence_kind": "historical",
+          "identity": "c0bdc73c61faba375cba6813c31178b28bb7ad97746bd5b44016320faacfcc26",
+          "path": "Cocolon_前提資料/historical_baselines/emlis_ai/Cocolon_EmlisAI_ModelFreeNaturalLanguageSurfaceV3_DetailedDesign_ImplementationOrder_20260714_Revised_Cycle.md",
+          "repository_key": "Cocolon",
+          "source_commit": "6b0973c841d536a2e6eaa97c586c320a93f83dc7"
+        },
+        {
+          "evidence_kind": "design",
+          "identity": "ea5fb2030a0aec6e308107eb088174b1c1211c61a37b895ef47864bd9d0280ab",
+          "path": "ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        },
+        {
+          "evidence_kind": "config",
+          "identity": "dceba387be7266d546d64f314d0d3aec8506d0f79a180093e29166fa4e4cd67c",
+          "path": "ai/docs/CMEE_V1A_I1SX_PrivateHumanProductRead_BodyFree_Receipt_20260816.json",
+          "repository_key": "mashos-api",
+          "source_commit": "06ce311b3ea728b06f83439d268a34bed917c01c"
+        }
+      ],
+      "minimum_source_like": 0,
+      "required_workspace": null,
+      "review_codes": [],
+      "selected_count": 5,
+      "source_like_count": 0,
+      "status": "PASS",
+      "title": "relevant historical design"
+    }
+  ],
+  "observed_category_count": 10,
+  "product_credit": 0,
+  "required_category_exact": 10,
+  "schema_version": "cocolon.system_context.required_category_coverage.v1"
+}

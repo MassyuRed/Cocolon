@@ -1,0 +1,835 @@
+---
+doc_id: cocolon_emlis_ai_current_structure
+title: "EmlisAI構造 — Current Structure"
+revision_date: "2026-09-11 JST"
+document_role: "EMLIS_AI_CURRENT_STRUCTURE_OWNER"
+effective_when: "MERGED_TO_COCOLON_MAIN"
+publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
+implementation_effect: 0
+stage1_v2_product_read_state: "HISTORICAL_PREDECESSOR_FAIL_RETAINED"
+stage1_additional_correction_design_state: "CURRENT_PRODUCT_OWNER_NON_PASS / SELECTED_SUBJECTIVE_RECEPTION_INPUT_VERIFIED_PRODUCT_NOT_CLEAR"
+cycle001_effect: 0
+stage1_language_route: "ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER_ONLY"
+external_generative_ai_allowed: false
+external_body_send: 0
+automatic_progression: false
+current_product_owner_adoption_state: "IMPLEMENTED_NOT_ACCEPTED"
+im10_state: "NON_PASS"
+current_product_read_state: "EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFICIENT"
+candidate_ready: false
+---
+
+> 2026-09-11 Q4現在地：修正版v1.2のQ4コード実装・統合・公開接続準備と今回の検証を完了。公開用mode・単一作者・旧client/保存版互換・停止復旧・bootstrap/RNを接続し、初回/肯定的回答/当時訂正と回答名詞化・時点の不具合を修正した。API179 PASS、RNは保存済み56 PASS。新しい保存22ケースを全文確認し、既存100件は全読済みの前版と全record一致。長い再掲・定型性など商品品質はNOT_CLEARとして保持する。現行結果は正本06とAPI既存handoffの末尾Q4 continuation節。実DB・端末・実課金・Mash正式判断・公開操作は別作業、既定OFF。
+
+> 2026-09-11 Q3時点の記録：添付修正版Technical Design v1.2に従い、Q2のコード実装完了からQ3へ進めた。Plusの適格本人履歴、Premiumの本人続行による最大3問と確認・修正・否定できる解釈フレーム、限定条件のLayer3を保存・API・RNまで実装した。Q3のコード実装は完了し、次の実装単位はQ4の統合・実本文確認・互換性・公開接続準備。実DB適用、端末・実課金確認、Mashの正式商品判断、公開操作は別作業として未実施。default OFF、商品NOT_CLEAR、Draft/open/unmergedを維持する。以下の旧Q1/Q2段落・Product Read待ちの順序は当時の履歴であり、Q3/Q4のコード進行を止める現行条件ではない。現在の進行ownerは本系列の`06_implementation_order_migration_and_verification.md`末尾Q3節とAPI既存handoff末尾Q3節。
+
+## 2026-09-11 Q2履歴 — 保存・API・入力/履歴の一往復
+
+Q1 pure53件を確認後、Q2 development applicationをdefault OFFで実装。稼働DB適用と端末の開発アプリ確認は残るためQ2完了・商品PASS・公開とはしない。実装/確認の現在ownerはAPI既存handoffのQ2節と `ai/docs/EMLIS_Q2_DEVELOPMENT.md`。以下のQ1記録はQ1時点の効果を示す。
+
+| repository / file | 今回の責任 | 他機能との境界 |
+|---|---|---|
+| mashos-api `ai/services/ai_inference/emlis_thread_config.py` | 二重development gate、application mode、回答長 | productionはOFF |
+| 同 `api_emlis_thread.py` | Bearer、strict request、専用response allowlist、GET/answers/actions | 旧comment_text/ObservationStatusを拡張しない |
+| 同 `emlis_thread_service.py` | 原入力→一問→回答→意味checkpoint→本文、resume/idempotency/attempt | Q1純粋作者を継承。全tier Free一問、他coreへ回答をdispatchしない |
+| 同 `emlis_thread_store.py` | private read/CAS RPC、一時停止と不明ACKの分類 | POST自動retryなし、例外本文を返さない |
+| 同 `app.py` / `api_contract_registry.py` / `emlis_ai_reply_service.py` | route登録と原入力保存後の開発分岐 | flag OFFは既存I5、Piece返信のwire保持 |
+| mashos-api `supabase/migrations/20260911020509_emlis_input_threads_q2.sql` | threads/events、親/account cascade、owner/access、lock/revision/lease | 既存emotionsや国家queueを更新しない |
+| Cocolon `lib/api/emlisThreadApi.js` | 明示debug opt-in、認証API、error本文をmonitoringに入れない | release OFF、汎用API contractを変更しない |
+| Cocolon `screens/input/useEmlisThread.js` | GET復帰、回答、same payload再送、明示retry、memory draft消去 | closeはPOSTなし。user変更/削除/遅延応答で旧内容を再表示しない |
+| Cocolon `screens/input/EmlisThreadModal.js` | 元日時/回答日時、以前/現在、未反映/訂正済み本文未完成、任意回答 | Pieceの旧modal・tutorialと分離 |
+| Cocolon `screens/InputScreen.js` / `screens/AnalysisHistoryScreen.js` | 通常保存結果のidと履歴idから開く、削除時消去 | TodayQuestion、Piece publish、元draft保存を保護 |
+| mashos-api `ai/tests/test_emlis_q2_application.py` / `ai/tests/helpers/emlis_q2_postgres.cjs` | 実migration/RPCで一往復・障害・権限・削除・競合 | 合成データと一時DBのみ |
+| Cocolon `tests/emlis-thread.test.js` / `tests/emlis-q2-tools/package.json` | 実hook/panelのReact renderer検証と固定test依存 | native実機確認と区別 |
+
+影響確認する既存ownerは `emotion_submit_service`（親保存・fanout・既存timeout）、`supabase_client`（RPC・retry）、`publish_governance`（元日時の保持期間）、`api_account_visibility`/`api_emotion_submit`（verified auth）、`api_emotion_history_manage`/`account_delete_service`（削除）、RN `AuthContext`/`apiClient`/`accountLocalCleanup`/`useInputDraftPersistence`/`InputFeedbackReplyModal`。Q2の回答はPiece/Analysis materialとTodayQuestionの回答schemaへ流さない。System Contextをfresh実行済みとは扱わず、原典と取得済み全tree/file familyから確認した。
+
+
+
+# EmlisAI構造 — Current Structure
+
+> 2026-09-10 Q1更新：Mashの添付「CMEE Question System Technical Design」v1.1とQ1実装指示により、現在の開発順は **Q1（Free相当の純粋処理・実本文一往復）→Q2（保存・API・RN）→Q3（有料の履歴・後続round）→Q4（商品確認・公開判断）** です。単独応答100件またはRound 0のProduct Read PASSをQ1開始条件にしません。過去のNON_PASS・未解決品質・公開条件は保持します。Q1はdisabledで意味・実本文一往復と必要回帰の確認済みで、Q2以降／商品PASS／公開は未成立です。現在の再開先はAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」です。
+
+## 2026-09-10 Q1現在地 — Emlisの一往復を共通本文経路へ接続
+
+Q1は、今回の入力を読んだ初回観測とフォローを先に返し、本人がどう受け取ったかの重要な一点だけを問い、別sourceの本人回答で意味と本文を更新する開発単位である。単独応答の全面Product Read PASSは開始条件にしない。Emlisの商品品質判定は引き継ぎ、Q1の機械検証を商品PASSへ換算しない。
+
+| 実装owner（mashos-api / ai/services/ai_inference） | 責任 |
+|---|---|
+| `cocolon_meaning_experience_engine/engine.py` | 既存single callableのEmlis thread版分岐と純粋`prepare_emlis_update`。旧単独入力経路を維持。 |
+| `.../emlis_thread_contracts.py`・`emlis_thread_source.py` | Free固定source集合、原source不変、独立回答envelope、元field／scalar／UTF-8へ戻るqualified evidence。 |
+| `.../emlis_question.py` | sourceに結びついた一問の必要性・焦点・既質問／終了を純粋判定。質問文を意味根拠にしない。 |
+| `.../emlis_answer_update.py` | ADD／REVISE／WITHDRAW、時点、訂正対象・依存先・未確定部分を本文前に検証。 |
+| `.../emlis_thread_projection.py` | 検証済み意味を既存IM03、選択意味、Receptionへ渡す。対象関係はthread版ABOUT_TARGETで保持。 |
+| `.../emlis_thread_surface.py`・`emlis_thread_engine.py` | 既存Human Reception作者・Sentence Surface・独立逆検証を使用。本文失敗でもcheckpointを保持し、旧本文を現在へ付け替えない。 |
+| 既存`emlis_ai_grounded_observation_plan.py`・`emlis_ai_grounded_human_reception.py`・`emlis_ai_grounded_sentence_surface.py`・`emlis_ai_grounded_observation_gate.py` | source文法、本文作者、二節構造、関係・時点の独立照合。別の本文rendererを作らない。 |
+
+国家システム・課金・入力件数・永続化への効果はQ1で0。runtimeはOFFLINE_CANDIDATEのまま、productionの`emlis_ai_reply_service`、公開I5、API、DB、RNへまだ配線しない。`TodayQuestion`は別機能のまま、Piece／Analysisのsource許可を拡張しない。回答は新しい原入力件数にも国家eventにも数えない。訂正済み解釈を過去artifactから復活させない下流利用規則は設計として保持し、Q2以降で実データ経路へ接続する。
+
+検証は `ai/tests/test_cmee_emlis_q1_thread.py` が新しい一往復と逆検証を担当する。`ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` は変更した共有9ownerの固定test snapshotであり、旧IM03 receipt・runnerを上書きせず、thread全体の品質証明にも使わない。
+
+全ファイル地図の既存各familyと旧経路の役割は保持する。新ownerは上表の7ファイルに限定し、共通Stage1候補・投影・HRの責任を継承する。保存・再読込・画面までのアプリ完成はQ2、履歴／プラン差はQ3、Mashの商品確認・公開はQ4であり、今回は成立したと扱わない。
+
+
+## 0. Current conclusion
+
+2026-09-10現在はQ1のFree相当thread callableを既存本文作者へ接続し、意味更新・訂正・時点と実本文を検証済み。追加7ownerとアプリ境界は冒頭Q1地図、詳細はAPI既存 `CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` のQ1節、正本 `02_emlis_v1a_detailed_design.md` の「2026-09-10 Q1」、`05_json_schema_and_versioning.md` の「Emlis thread v1 profile」を使う。未公開・商品NON_PASSを維持する。
+
+Q1以前の履歴（2026-09-08 candidate66）：原field全域で取組の背景と本人の現在感情を証明し、既存の独立した必要行動とともに選択するcandidate66を実装・検証した。同じ100件のうち1件で気持ちの欠落を解消し、99件の全record／実planは不変。観察全100・可否／理由全100不変、direct100、73 GENERATED／27 UNAVAILABLE、Move／expression／binding各125（元の124責務をすべて保持）。華恋が全100件を全文確認しNOT_CLEAR。必須340件337 PASS／継承3 FAIL、前回336全成否一致、新規4全成功。 原fieldの背景複文証明を既存OP内で補完。選択責務の限定例外はcanonical02末尾が正本。既存owner／経路内の補修でSTRUCTURE_MAP_DELTA_NONE。国家／公開I5／API／DB／RN／Piece／Analysisへの経路追加はない。
+
+EmlisAIの安定した商品目的、production経路、NLS v3／Cycle001 WIP、問い構想、履歴はGitHubに存在する。
+ただし、それらは別々の資料と数百のfile familyへ分散しており、production I5経路とoffline Cycle001経路を一枚で区別できるcurrent mapがなかった。
+
+このmapは、その区別と読取順をcurrent ownerとして固定する。
+
+2026-09-08前回実装（証明済み否定過去報告の全角文末を引用に保持／candidate64）：既存Sentence Surfaceで、原fieldと本人の否定過去報告が証明済みの単独spanだけ、末尾の全角ピリオドを引用内に保持した。元入力・根拠・意味計画・Gateは変更しない。公開合成57件は8件の本文成立／49件全record同一、全57件の根拠とplanは不変。必須332件329 PASS／継承3 FAIL、前回329全成否一致、新規3成功。旧I5等11成功。canonical100は全record・実plan不変、73/27・124責務を維持し、華恋が全100件全文確認してNOT_CLEAR。V2の17件6 PASS／11 FAIL・全42件213候補も同一。共有Ledger案は他の未修復な誤読まで本文を返したため不採用。中心感情の未選択、再掲・定型締め、対象外の報告scopeと他の全角文末は残件。GitHub正本・定例ZIPなしを継続。
+
+2026-09-08前回（単独行動の具体的受取と過去願望時点／candidate60）：finalの単一required自己行動を既存の具体参照方式へそろえ、内容を受取に保持した。過去願望報告の活用も既存同核statusで補った。canonical100の受取2件と参照planだけ変更、全核・観察・既存主観判断・可否理由は不変、73/27・124責務を維持。必須317件314 PASS／継承3 FAIL、前回313の全成否一致、新規4成功。華恋が全100件の原文・観察・受取を全文確認しNOT_CLEAR。残件・検証範囲・System Contextはcanonical06とAPI handoffのcandidate60、およびPR37 current本文を参照。GitHub正本・定例ZIPなしを継続。
+
+2026-09-07前回（原文で断定された願い変化句の受取／candidate57）：原文で断定された願いの強まり・弱まりを全句のまま受取対象にし、願いを二重に言い直す接続を除いた。canonical100の受取1件だけ変更、他99件は全record同一。変更核は原fieldの証明属性1個、selected inputはそこから再導出したinput／grounding参照だけが変わり、意味status・選択内容・全実plan・観察・可否理由・73/27・124責務は不変。必須304検査300成功／継承4失敗、前回302の全成否一致、新規2成功。華恋が全100件の原文と応答本文を読み商品NOT_CLEAR。変更例も外側不可の診断本文であり、商品PASSではない。長い再掲・定型締め・中心感情の未選択と補助行動偏重などは残る。
+
+2026-09-07前回（関係する二対象への注意と受取／candidate56）：選択済みMATERIALの二対象を、full attentionで同じ目的語として注意と受取へ接続。両端と違い／重なりの関係を保ち、代名詞で受け直す接続を除いた。canonical100の受取9件だけ変更、他91件は全record同一。全plan・意味選択・核・観察・可否理由・73/27・意味を伴う124責務は不変。必須302検査298成功／継承4失敗、前回300の全成否一致、新規2成功。華恋が全100件の原文と応答本文を読み商品NOT_CLEAR。長い再掲・定型締め・中心感情の未選択と補助行動偏重などは残る。
+
+2026-09-07前回（同じ行動への注意と受取／candidate55）：選択済みの単一の本人の実行行動について、注意とmaterial受取を同じ具体的な目的語に接続するfinal HR文法を修正。canonical100の受取39件が変わり、他61件は全record同一。全plan・核・観察・可否理由・73/27と意味を伴う124責務は不変。必須300検査296成功／継承4失敗、前回298の全成否一致、新規2成功。華恋が全100件の原文と応答本文を読み商品NOT_CLEAR。長い原文再掲・定型的な締め・中心感情の未選択と補助行動偏重などは残る。
+
+2026-09-07前回（独立した実行済み行動の参照／candidate54）：選択済みの独立した本人の行動が、後続応答で一般語に縮む参照policyを修正。canonical100の受取5件を具体化し、他95件は全record同一。全核・観察・可否理由・73/27と意味を伴う124責務は不変。実planは5件のreference_modeだけが変わり、selected inputの意味内容は同一、plan由来input_ref／grounding_refのみ更新。必須298検査294成功／継承4失敗、前回296の全成否一致、新規2成功。華恋が全100件本文を読み商品NOT_CLEAR。長い原文再掲・定型締め・一般参照・中心感情の未選択と補助行動偏重は残る。
+
+2026-09-07前回（不確かな願いと有限節の受け取り／candidate53）：未確定の願いと背景を、既存wish_and_constraintの二対象として受け取り、不確かさと関係を保持。願いの有限節は全文を同じ参照語へ直接接続して二重名詞化を減らした。canonical100の受取2件のみ変更、他98件・全核・selected input・実plan・意味を伴う124責務・観察・可否理由・73/27は同一。最終必須296検査292成功／継承4失敗、前回294の全成否一致、新規2成功。華恋が全100件の本文を確認し商品NOT_CLEAR。長い原文再掲・定型締め・一般参照・中心感情の未選択と補助行動偏重は残る。
+
+2026-09-07前回（関係する二対象と単独変化の受け取り／candidate52）：選択済みMATERIALの願い・変化とその背景を二対象として受け取り、既存の関係を述語側で保持する。単独の有限な変化節は原文全文＋「という変化」へ接続。canonical100の受取6件のみ変更、他94件・全核・selected input・実plan・意味を伴う124責務・観察・可否理由・73/27は同一。最終必須294検査290成功／継承4失敗、前回292の全成否一致、新規2成功。華恋が全100件の本文を確認し商品NOT_CLEAR。長い原文再掲・定型締め・一般名詞／指示語だけの受取・中心感情の未選択と補助行動偏重は残る。
+
+2026-09-07前回（選択済み変化と背景の受け取り／candidate51）：選択済みMATERIALの変化を「受け止める」述語へ整合し、同じMoveで評価済みの対比両端を、変化と背景の二対象として受け取る。有限節だけを原文全文＋「という変化」へ接続し、差異を述語側で保持する。canonical100の受取5件のみ変更し、他95件・全核・selected input・実plan・意味を伴う124責務・観察・可否理由・73/27は同一。必須292検査288成功／継承4失敗、前回290の全成否一致、新規2成功。華恋が全100件の本文を確認し商品NOT_CLEAR。長い関係再掲・定型締め・一般名詞だけの受取・中心感情の未選択と補助行動偏重は残る。
+
+2026-09-07前回（願いの存在節を保つ名詞化／candidate50）：原文で証明済みの現在の願いの存在節を、助詞・存在・時点を保った全文＋「ということ」で名詞化。HR正本と対象名詞句の完全一致、限定した本文文法witnessを整合し、Gateの全文・引用外・byte末尾・独立replay条件を維持。canonical100の受取1件のみ変更し、他99件・全核・selected input・実plan・意味を伴う124責務・観察・可否理由・73/27は同一。必須290検査286成功／継承4失敗、前回289の全成否一致、新規1成功。華恋が全100件の本文を確認し商品NOT_CLEAR。長い再掲・定型締め・別actの対比名詞・中心感情の未選択と補助行動偏重は残る。
+
+2026-09-07前回（願いの対比を受取対象へ保つ文法／candidate49）：既存HRで、自己のretained_wish／protect_retained_intention／attentionに選択済みのMATERIAL対比を、願いと背景の完全な二端点へ直接つなぐ。対比と願いを大切に受け止める責務を同じ節に保持。canonical100の生成可能側の受取2件のみ変更し、他98件・全核・selected input・実plan・意味を伴う124責務・観察・可否理由・73/27は同一。必須289検査285成功／継承4失敗、前回287の全成否一致、新規2成功。華恋が全100件全文確認し商品NOT_CLEAR。長い再掲・定型締め、別actの対比名詞、中心感情の未選択と補助行動偏重は残る。
+
+2026-09-07前回（両方を残す対比の受取文法／candidate48）：既存HRで、選択済みRELATIONAL_NONCOLLAPSE／PRESERVE_BOTH_ENDPOINTSと同一focal contrast、両端のselected basisかつappraised primaryを確認し、felt_response／stay_with_current_burden／current_expressionに限定して両端そのものを受取対象にする。両方の保持と対比をobjectと述語で分担し、未完了の関係を同じ節で厳密に完了する。canonical100の受取1件のみ変更、他99件・全核・selected input・実plan・意味を伴う124責務・73/27は同一。変更例の外側不可は継続し、診断本文の文法改善である。必須287検査283成功／継承4失敗、前回285の全成否一致。華恋が全100件全文確認し商品NOT_CLEAR。長い再掲・定型締め、中心感情の未選択と補助行動偏重は残る。
+
+2026-09-07最新（対比の両端を受け取る文法／candidate47）：既存HRで、positive_feelingに選択済みのMATERIAL受取とattention、単一contrastの両端がそのMoveのselected basisかつappraised primaryである場合、両端そのものを受取対象にし、違いも同じ述語で受け取る。二端点の原文・順序・意味選択を維持し、coreで未完了の関係を述語で厳密に完了する。canonical100の受取1件のみ変更、他99件・全核・selected input・実plan・意味を伴う124責務・73/27は同一。必須285検査281成功／継承4失敗、前回282の全成否一致。華恋が全100件全文確認し商品NOT_CLEAR。長い再掲・定型締め、中心感情の未選択と補助行動偏重は残る。
+
+2026-09-07最新（選択済みの気持ちのMATERIAL受取／candidate46）：既存HRで、positive_feelingに選択済みのMATERIAL_WEIGHT／RECEIVE_AS_MATERIALを「受け止める」で実現する。本人の気持ちをEmlis自身が感じるという述語との不一致を修正。同じ不変selected inputをHRとSentenceSurfaceの責任検査へ渡す。canonical100の受取3件のみ変更、他97件・全核・意味選択・実plan・意味を伴う124責務・73/27は同一。必須282検査278成功／継承4失敗、前回279の全成否一致。華恋が全100件全文確認し商品NOT_CLEAR。長い再掲・名詞連結・定型締め、中心感情の未選択と補助行動偏重は残る。
+
+2026-09-07前回（選択済みの言葉参照の重複短縮／candidate45）：既存HRで非ANAPHORICのcurrent_expression参照を、同じsource節全文＋「という言葉」へ短縮した。語への参照を保ち、内容を事実として新たに認定しない。意味・否定・時点・不確かさ・関係両端と選択済み受取を維持。canonical100中8件の受取のみ変更、他92件同一、全核・selected input・実reception plan・意味を伴う124責務・73/27は同一。必須279検査275成功／継承4失敗、前回276の全成否一致。全100件全文確認、商品NOT_CLEAR。長い再掲・名詞接続・定型締め、中心感情の未選択と補助行動偏重は残る。
+
+2026-09-07前回（願望内の継続時点補正と願いの参照／candidate44）：既存OPで願望内の継続動詞を既に継続中とは扱わず、同核の時点をcurrent_inputへ補正する。既存HRで、現在の自己の肯定wishを表す有限carrier全文に「こと」を付け、一般wrapperの重複を除いた。存在・topic/case・時点・願い・関係と両端を保持。canonical100中1件の受取だけが変更、他99件同一、全核identity・観察・実reception plan・意味を伴う124責務・73/27を維持し、selected inputの時点と参照を同じownerから再導出。必須276検査272成功／継承4失敗、前回275の全成否一致。全100件を全文確認、商品NOT_CLEAR。長い再掲・名詞接続・定型締め、中心感情の未選択と補助行動偏重は残る。
+
+2026-09-06前回（選択済みの独立した関係の具体参照／candidate43）：既存OPの意味確定前で、他Moveから独立した単一required関係を持つMoveの参照方式を既存short_anchorへ戻し、両端の具体的内容を受取へ届ける。核・対象・act・role・意味を伴う124責務・全selected decision／basisは維持。canonical100中6件の受取が変更、他94件同一、direct100／73-27、可否変更0。必須275検査271成功／継承4失敗、前回274の全成否一致、新規一件成功。全100全文確認、商品NOT_CLEAR。長い原文再掲・定型表現、中心感情の未選択と補助行動偏重は残る。詳細はruntime handoffのcandidate43末尾。
+
+2026-09-06前回（選択済みの独立した気持ちを先に受け取る／candidate42）：既存OPの意味確定前に2 Moveの役割と対応strategyを変更し、気持ち→行動の順で本文を実現する。candidate41の対象条件と具体参照、核・対象・primary／follow・124責務を維持。canonical100中1件の受取順を修正、他99件同一、direct100／73-27、可否変更0。必須274検査270成功／既存4失敗、前回全成否一致。全100全文再確認、商品NOT_CLEAR。選択されない中心感情や対象外の補助行動偏重等は残る。詳細はruntime handoffのcandidate42末尾。
+
+2026-09-06前回（選択済みの独立した気持ちの具体参照／candidate41）：既存OPの意味確定前で、行動の次に選ばれたrequired memo feelingが先行文に未参照のとき、既存の具体参照を残す。NORMAL／LIMITEDを昇格せず、核・対象・役割・順序・124責務を維持。canonical100中1件の受取が具体化、他99件同一、direct100／73-27、可否変更0。必須274検査270成功／既存4失敗、新規失敗0。全100全文再確認、商品NOT_CLEAR。補助行動偏重等は残る。詳細はruntime handoffのcandidate41末尾。
+
+2026-09-06前回（原文で断定された残存感情の参照／candidate40）：原入力全文で断定と主体境界を証明した現在の感情主語を、既存単一Moveで程度・残存性を保つ参照へ接続。生成／inverseが全参照を独立照合。公開合成例で能力改善、canonical100は全保存項目同一。direct100／124／73-27、可否変更0。必須273検査269成功／既存4失敗、新規失敗0。全100全文再確認、商品NOT_CLEAR。詳細は02／06とruntime handoffのcandidate40末尾。
+
+2026-09-06前回（原文が証明する未解決状態の受取対象／candidate39）：finalの既存単一Moveでsource証明済みの現在の未知を未解決対象へ接続し、本文inverseでも同じ参照全体を照合。旧change／旧経路／全文replay境界を維持。canonical100の受取本文2件のみ変化、他98全項目同一、原入力・核・観察・selected input不変。direct100／124／73-27、可否変更0。必須268検査264成功／既存4失敗、新規失敗0。全100全文確認済み、商品NOT_CLEAR。詳細は02／06とruntime handoffのcandidate39末尾。
+
+2026-09-06前回（場面を残した現在気分の受取／candidate38）：既存OPの同核全文証明を有限の環境節＋現在気分へ拡張。原文全体・主体・時点を保持し、気持ちへの既存受取へ接続。final単一memo／非fragmentのpositive feelingで観察quoteの原source欠落を拒否。canonical100本文変更1、他99全項目同一。direct100／124／73-27、可否変更0。必須264検査260成功／既存4失敗、新規失敗0。全100全文確認済み、商品NOT_CLEAR。詳細は02／06とruntime handoffのcandidate38末尾。
+
+2026-09-06前回（独立した現在の肯定的な気分とnormal受取の接続／candidate37）：単一memoの有限source証明を既存OPへ追加し、NORMALの同じ肯定feeling／PRESENT_STATEを既存MATERIAL_WEIGHTへ接続。forwardと独立再導出で同じqualifier／SELFのEXPERIENCERを要求。公開単文2例の応答を修正したが、複文は対象外。固定100は全保存項目が前回と同一、direct100／124／73-27、canonical本文改善0。必須260検査256成功／既存4失敗、新規失敗0。全100全文確認済み、商品NOT_CLEAR。詳細は02／06とruntime handoffのcandidate37末尾。
+
+2026-09-06前回（気持ちと未解決の側を同じ受け止めへ接続／candidate36）：既存selected PRESERVE_BOTH_ENDPOINTSの同じSELF feeling targetとuncertain contextを、両端を残して受け止める既存述語で実現した。actual focal relation/endpointとfinal plan/sourceを照合し、kind/act/polarity/selected inputと既存Gate・全文replayを維持。固定100はdirect100／124／73-27、生成可能側1件のフォローのみ変化、残99件は全保存項目同一。必須255検査251成功／既存4失敗、新規失敗0。華恋が全100全文を読みNOT_CLEAR。一般的参照句・定型締め・補助行動偏重・未完/混合状態と受援等は残件。詳細は02/06とruntime handoffのcandidate36末尾。商品確認準備/ready/採用/merge/本番/Layer3は未成立。
+
+2026-09-06前回（変化の未解決部分を受け止め対象へ接続／candidate35）：既存sourceがuncertaintyとして持つ単一SELF targetのfinal ANAPHORIC参照へ未知範囲を残し、選択済みLEAVE_UNFINISHEDに限り受け止める既存述語で実現した。kind/act/polarity/selected inputと既存Gate・全文replayを維持。固定100はdirect100／124／73-27、生成可能側1件のフォローのみ変化、残99件は全保存項目同一。必須251検査247成功／既存4失敗、新規失敗0。華恋が全100全文を読みNOT_CLEAR。一般的参照句・定型締め・補助行動偏重・複数endpointの未完/混合状態と受援等は残件。詳細は02/06とruntime handoffのcandidate35末尾。商品確認準備/ready/採用/merge/本番/Layer3は未成立。
+
+2026-09-06前回（予定行動の具体的な対象句／candidate34）：既存sourceが未来のintentionとして持つ本人の行動の完全な非過去節を、final explicit/compositeの同一対象へ接続し、分類句の重複を除いた。kind/voice/未来の扱い・選択input・厳格な全文replayを維持。固定100はdirect100／124／73-27、生成可能側1件のフォローのみ変化、残99件は全保存項目同一。必須247検査243成功／既存4失敗、新規失敗0。華恋が全100全文を読みNOT_CLEAR。未来一般句全般、定型締め、補助行動偏重、未完/混合状態・受援の具体的な受け止めは残件。詳細は02/06とruntime handoffのcandidate34末尾。商品確認準備/ready/採用/merge/本番/Layer3は未成立。
+
+2026-09-06前回（否定感覚名詞句の二重参照を除去／candidate33）：既存の可逆名詞句をfinal ANAPHORICの同一対象へ接続し、一般的参照句の重複を除いた。新owner/selector/Move/schemaは追加せず、同じ選択済みinputと全文replayを維持。固定100はdirect100／124／73-27、生成可能側1件のフォローだけ変更、残99件は全保存項目同一。必須242検査238成功／既存4失敗、新規失敗0。華恋が確定100件を全文確認しNOT_CLEAR。一般的参照句全般、定型締め、補助行動偏重、未完/混合状態・受援の具体的な受け止めは残件。詳細は02/06とruntime handoffのcandidate33末尾。商品確認準備/ready/採用/merge/本番/Layer3は未成立。
+
+2026-09-06前回（有限の認知的不明を未完の受け止めへ接続／candidate32）：既存source分類内で、原文の全有限節と既存uncertain属性がそろう自己状態の同核をuncertaintyへ補正し、既存の未完判断と最終フォローへ接続した。引用・別主体・過去・報告・条件・取消し・疑問へ広げず、新owner／selector／Moveは追加しない。固定100はdirect100／124／73-27、生成可能側1件の核分類・選択判断・フォローが変化し、残99件は全保存項目同一。観察と可否は全100維持。必須238検査234成功／既存4失敗、新規失敗0。華恋が全100全文を読みNOT_CLEAR。一般的な参照句・定型締め・補助行動偏重・通常の負担／未完／混合状態は残件。詳細は02／06とruntime handoffのcandidate32末尾。商品確認準備／ready／採用／merge／本番／Layer3は未成立。
+
+2026-09-06前回（否定背景節の可逆な名詞化／candidate31）：同じ選択済みcontrast contextの完全節「なくて」を「ないこと」へ活用し、既存nominalization tupleの封印と独立原文復元をそろえた。source内容・関係・full replay・context／why等の義務を保持し、alias／引用／非正規slot／無効sourceを防御。固定100はdirect100／124／73-27、フォロー1件のみ変更、99件とフォロー以外の全100保存項目は同一。必須235検査231成功／既存4失敗、新規失敗0。華恋が全100の原入力・両層を全文確認しNOT_CLEAR。長い再掲・定型締め・補助行動偏重・負担／未完／混合状態は残件。原fieldのASCII省略や一般入れ子引用の解決は未主張。詳細は02／06とruntime handoffのcandidate31末尾。商品確認準備／ready／採用／merge／本番／Layer3は未成立。
+
+2026-09-06前回（具体的な実行済み行動の対象句／candidate30）：既存Human Receptionで、同じsourceで実行済みと確認された本人の行動の完全節を「〜したこと」等の対象句として実現し、sole author・body-only構文witness・独立inverseの照合をそろえた。意味選択・Move・source内容・full replay・context等の義務は保持。固定100はdirect100／124／73-27、フォロー52件のみ変更、残48件とフォロー以外の全100保存項目は同一。test修正後の再生成も全100同一。最終230検査226成功／既存4失敗、新規失敗0。華恋が原入力全フィールド・両層全100を読みNOT_CLEAR。分類語の一部は解消したが、長い再掲・定型的な締め・補助行動偏重・負担／未完／混合状態は残件。詳細は02／06とruntime handoffのcandidate30末尾。商品確認準備／ready／採用／merge／本番／Layer3は未成立。
+
+2026-09-06追記（診断29、runtimeはcandidate28を維持）：未完contextの有限化案は、既存の元fragment照合で具体的候補が拒否され、抽象的なrecoveryへ退くため不採用とした。分類的な対象句についても、referent解決・sole author・独立body照合にまたがる対応を特定した。runtime採用差分0、全100／225検査の今回再実行なし。candidate28の前回実測とNOT_CLEARを保持し、継承承認内の改修は未完で継続する。詳細は06と既存runtime handoffの診断29末尾。新たな承認待ち／全体STOP／商品改善の成立とはしない。
+
+2026-09-06前回（対比の対象節と丁寧な背景節の名詞化／candidate28）：既存Human Receptionで、選択済みcontrastの対象節だけを有限化し、丁寧な背景節を原文のまま名詞化した。引用を含むsource fieldと言いかけは有限化を見送る。意味核・関係・対象順位・Move・選択inputは変更しない。固定100はdirect100、Move／expression／binding124、外側73/27。フォロー1件だけが変わり、残99件は全保存項目同一。全225検査221成功／既存4失敗、新規失敗0・未実行0。華恋が原入力全フィールド・両層本文の全100を読みNOT_CLEAR。長い再掲・分類的な対象句・定型的な締め、負担／未完／混合状態の選択は残件。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+
+## 1. 商品目的
+
+EmlisAIは、ユーザーの現在入力、選択感情、category、行動、時点、適格なowned historyを、入力直後に「読まれた形」へ変える。
+
+Current product destinationの中心は次の二つであり、plan別thread／問い／履歴接続はdesigned futureである。
+
+1. Layer 1「見えたこと」として、今の状態、関係、変化を根拠の範囲で観測する。current input内の構造気づきは全planのLayer 1に含む。
+2. Layer 2「Emlisから」として、具体的な観測claimへ結び付いた人間的な受け取りを返す。
+3. DESIGNED_NOT_IMPLEMENTED: 各roundで重要なunknownが残る場合だけplan budget内の一点を問い、回答分だけLayer 1／2を更新する。Plus／Premiumは条件成立時だけLayer 3「記録の線」を0..1加える。
+
+単なる復唱、要約、テンプレ共感、診断、人格決め、原因の断定、相手の意図の推測ではない。
+
+## 2. User-visible product flow
+
+### 2.1 Current production
+
+    RN InputScreen
+      -> emotion submit API
+      -> emotion_submit_service
+      -> emlis_ai_reply_service
+      -> ReplyEnvelope / public feedback meta
+      -> input_feedback.comment_text
+      -> InputFeedbackReplyModal
+
+現行production orchestration ownerはmashos-apiのemlis_ai_reply_service.pyである。
+NLS v3 Step10 public routingは同file内でdisabledであり、Cycle001 candidateをproduction app ownerとして扱わない。
+
+### 2.2 Current I5 generation route
+
+    current input normalization
+      -> Evidence Ledger
+      -> perspective observers / board
+      -> ObservationGraph integration
+      -> safety triage
+      -> GroundedObservationPlan
+      -> GroundedSentencePlan
+      -> functional grounded sentence surface
+      -> semantic gate
+      -> ReplyEnvelope
+
+### 2.3 Future observation and question system
+
+将来のEmlis問いsystemは、質問だけを返すchat routeではない。
+
+    original input as USER_OWNED_SOURCE
+      -> round 0 Layer 1 + Layer 2
+      -> if important unknown remains and plan budget remains:
+           question exact1
+           -> supplemental answer as a separate USER_OWNED_SOURCE
+           -> refined Layer 1 + Layer 2
+           -> next sequential round only when allowed
+      -> Plus/Premium and eligibility satisfied:
+           Layer 3 0..1
+
+observation stage、問い要否decision、visible artifactを分離する。Free／Plusのquestion budgetはthread全体で0..1、Premiumは逐次0..3である。一画面へ複数問を一括表示せず、skip、stop、分からない、無回答を正常終了として扱う。
+
+問いdecisionとquestion本文はcontrol／derived lineageでありsemantic sourceではない。回答だけがsupplemental sourceとなり、original inputを上書きしない。問いがない場合もoriginal、Layer 1、Layer 2を同じinput-history threadへ順番に保存する。
+
+### 2.4 Plan別source・artifact contract
+
+| Plan | Allowed user-owned source | Rejected source | Visible target | Question budget |
+|---|---|---|---|---|
+| Free | current threadのoriginalとsame-thread supplemental answers | past input、derived user model、cross-core context | Layer 1、Layer 2。Layer 3なし | thread全体で0..1 |
+| Plus | current threadとeligible owned history | 許可外cross-core derived artifact | Layer 1、Layer 2、条件成立時Layer 3 0..1 | thread全体で0..1 |
+| Premium | current thread、eligible owned history、許可済み本人context | Piece生成本文、Analysis推定／IF、過去Emlis本文 | Layer 1、Layer 2、条件成立時Layer 3 0..1 | sequential 0..3 |
+
+Premiumの商品contractの中心表現は次のとおり。
+
+> **Premiumでは、ユーザーの蓄積した本人情報から作られた、根拠付き・暫定的・修正可能な「ユーザー固有の解釈フレーム」を使い、ユーザー本人の辞書により近い位置から観測とReceptionを行う。**
+
+interpretive frameは本人情報から導く処理境界であり、本人が直接述べたsourceでもvisible evidenceでもない。本人は参照範囲を確認・修正・拒否でき、sourceへ戻れない主張、許可外cross-core derived artifact、診断・人格固定・他者意図推定を加えない。
+
+### 2.5 Layerと既存資産の位置
+
+- Layer 1「見えたこと」は入力固有の観測であり、P6 Structure Insightのrelation classification／guardをadaptしてcurrent input内の構造気づきを全planへ残す。
+- Layer 2「Emlisから」はLayer 1の観測claimへ結び付いたHuman Receptionであり、独立した根拠なし断定にしない。
+- Layer 3「記録の線」は今回入力とeligible owned historyの具体的なcontinuityであり、P5 User Label Connectionのeligibility／guard／scopeをadaptしてPlus／Premiumだけに条件付き0..1で出す。
+- capability、context、user model、history search、P5、P6、Free history boundary testsはADAPT_AND_INHERIT候補である。ただしP5／P6のgeneric fixed surfaceをtarget visible bodyとしてREUSE_AS_ISしない。
+
+## 3. 問いに関するexact3分類
+
+| 種類 | Current status | Owner／境界 |
+|---|---|---|
+| TodayQuestion product | CURRENT_ACTUAL / 別product route | ai/services/ai_inference/api_today_question.py、ai/services/ai_inference/today_question_store.py。Emlis内部問いと混同しない |
+| Emlis internal question candidate | DORMANT_OR_PARTIAL | ai/services/ai_inference/emlis_ai_internal_question_service.py、ai/services/ai_inference/emlis_ai_question_dominance_guard.pyは存在するがcurrent reply serviceから未接続 |
+| Emlis observation-and-question system | DESIGNED_NOT_IMPLEMENTED | observation-first、各roundの問いはexact1、Free／Plus 0..1、Premium sequential 0..3、skip可能、同じthreadでrefined observation |
+
+問い関連fileの存在を、問いsystemの商品完成へ変換しない。
+
+## 4. Current architecture components and files
+
+### 4.1 Cocolon RN
+
+| Responsibility | Repository path | Lifecycle |
+|---|---|---|
+| input entry | screens/InputScreen.js | CURRENT_ACTUAL |
+| feedback model | screens/input/inputFeedbackModel.js | CURRENT_ACTUAL |
+| visible reply modal | screens/input/InputFeedbackReplyModal.js | CURRENT_ACTUAL |
+| modal lifecycle | screens/input/useInputFeedbackModal.js | CURRENT_ACTUAL |
+
+Public displayはpassed-only contractを守り、private body、internal evidence、verification keyをRNへ出さない。
+
+### 4.2 mashos-api entry and orchestration
+
+| Responsibility | Repository path | Lifecycle |
+|---|---|---|
+| submit API | ai/services/ai_inference/api_emotion_submit.py | CURRENT_ACTUAL |
+| submit application service | ai/services/ai_inference/emotion_submit_service.py | CURRENT_ACTUAL |
+| current orchestration | ai/services/ai_inference/emlis_ai_reply_service.py | CURRENT_ACTUAL |
+| response contract | ai/services/ai_inference/emlis_ai_response_contract.py | CURRENT_ACTUAL |
+| public body-free meta | ai/services/ai_inference/emlis_ai_public_feedback_meta.py | CURRENT_ACTUAL |
+| common Emlis types | ai/services/ai_inference/emlis_ai_types.py | CURRENT_ACTUAL |
+
+### 4.3 Source and evidence
+
+| Responsibility | Repository path | Lifecycle |
+|---|---|---|
+| current input bundle | ai/services/ai_inference/emlis_ai_current_input_bundle.py | CURRENT_ACTUAL |
+| input material roles | ai/services/ai_inference/emlis_ai_input_material_bundle.py | DORMANT_OR_PARTIAL / canonical I5 call chain未接続 |
+| subscription capability | ai/services/ai_inference/emlis_ai_capability.py | CURRENT_ACTUAL |
+| evidence ledger | ai/services/ai_inference/emlis_ai_evidence_ledger_service.py | CURRENT_ACTUAL |
+| perspective observers | ai/services/ai_inference/emlis_ai_perspective_observers.py | CURRENT_ACTUAL |
+| perspective board | ai/services/ai_inference/emlis_ai_perspective_board.py | CURRENT_ACTUAL |
+| observation integration | ai/services/ai_inference/emlis_ai_observation_integrator_service.py | CURRENT_ACTUAL |
+| observation stage scaffold | ai/services/ai_inference/emlis_ai_observation_stage_context_v3.py | DORMANT_OR_PARTIAL |
+| refined source partition | ai/services/ai_inference/emlis_ai_refined_source_partition_v3.py | DORMANT_OR_PARTIAL |
+
+### 4.4 Plan, surface, and safety
+
+| Responsibility | Repository path | Lifecycle |
+|---|---|---|
+| safety triage | ai/services/ai_inference/emlis_ai_safety_triage.py | CURRENT_ACTUAL |
+| grounded observation plan | ai/services/ai_inference/emlis_ai_grounded_observation_plan.py | CURRENT_ACTUAL |
+| grounded sentence plan + functional realization | ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py | CURRENT_ACTUAL |
+| grounded Human Reception + reception realization | ai/services/ai_inference/emlis_ai_grounded_human_reception.py | CURRENT_ACTUAL |
+| grounded observation gate | ai/services/ai_inference/emlis_ai_grounded_observation_gate.py | CURRENT_ACTUAL |
+| safety boundary service | ai/services/ai_inference/emlis_ai_safety_boundary_service.py | CURRENT_ACTUAL / separate safety owner |
+
+### 4.5 Representative protected tests
+
+| Contract | Repository path |
+|---|---|
+| Emlis API／reply contract | ai/tests/contract/test_emlis_ai_contracts.py |
+| national-core Emlis boundary | ai/tests/contract/test_new_national_core_emlis_contracts.py |
+| current display contract | ai/tests/test_emlis_ai_observation_current_display_contract.py |
+
+この表はtest全件一覧ではない。architecture-level contract ownerを示す。
+
+## 5. NLS v3／Cycle001 offline route
+
+### 5.1 Lifecycle
+
+NLS v3 Step11／Cycle001はACTIVE_OFFLINE_WIPであり、production public routeではない。
+
+mainの代表owner:
+
+- ai/services/ai_inference/emlis_ai_step11_runtime_adapter_v3.py
+- ai/services/ai_inference/emlis_ai_step11_natural_surface_v3.py
+- ai/services/ai_inference/emlis_ai_step11_natural_surface_matcher_v3.py
+- ai/services/ai_inference/emlis_ai_step11_hard_gate_v3.py
+- ai/services/ai_inference/emlis_ai_step11_cycle001_product_recovery_v3.py
+- ai/tools/emlis_nls_v3_step11_current_rc_g8_run.py
+
+mashos-api Draft PR #2はruntime-unconnected service/source exact6、tests exact6、runner exact1のWIPであり、mainまたはruntime接続済みと数えない。
+
+### 5.2 Current technical state
+
+Cocolon mainの08_cycle001_current_state.mdは古い。
+working currentはCocolon Draft PR #29の同pathであり、次を示す。
+
+    Step1:
+      FORMAL_LEXICAL_AUTHORITY_UNRESOLVED
+
+    final technical code:
+      NO_SAFE_STEP1_INTERMEDIATE_GATE_CORRECTION_FOR_CURRENT_ACTUAL_V1
+
+    Step2 / Step3:
+      NOT_STARTED_FORBIDDEN
+
+    Cycle001:
+      NOT_ACCEPTED
+
+    automatic progression:
+      false
+
+safe substitution eligible upper boundは30/251以下、authority-unresolved lower boundは221/251以上である。
+221を真の日本語構文曖昧件数、30をgoverning authority成立件数として読み替えない。
+
+Route Uまたはcontract変更は別Mash LEVEL_3判断が必要であり、このmap作成から再開しない。
+
+## 6. Product／design canonical owners
+
+| Role | Path | Lifecycle |
+|---|---|---|
+| stable product destination | Cocolon_前提資料/Cocolon_EmlisAI_longterm_roadmap_CURRENT.md | CURRENT_PRODUCT_OWNER。embedded SHAはfresh currentではない |
+| current Stage 1 product contract / completion route | Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md latest §35 + 06_implementation_order_migration_and_verification.md latest §86 | CURRENT_PRODUCT_OWNER_NON_PASS / FOLLOW_PRIMARY_CORRECTION_ROUTE |
+| historical Karen-derived functional / Pro-Ultra integration sources | deleted `v1/karen_derived/00_read_first.md` + `01_emlis_observation_and_reception.md` + `Cocolon_CMEE_Stage1_ProUltra_KarenDerivedFunctional_FinalTechnicalDesign_20260822.md` | HISTORICAL_PREDECESSOR_ABSENT_CURRENT_TREE / Git history only。current ownerではない |
+| NLS v3 alignment | Cocolon_前提資料/Cocolon_EmlisAI_NLSv3_CurrentAlignment.md | CURRENT_REFERENCE。append済みpinsに古いものがある |
+| immutable NLS design baseline | Cocolon_前提資料/historical_baselines/emlis_ai/Cocolon_EmlisAI_ModelFreeNaturalLanguageSurfaceV3_DetailedDesign_ImplementationOrder_20260714_Revised_Cycle.md | CURRENT_TECHNICAL_NORM / immutable |
+| Cycle current navigation | Cocolon_前提資料/08_cycle001_current_state.md | CURRENT only at fresh applicable ref |
+| milestone history | Cocolon_前提資料/07_latest_snapshot_diff.md | HISTORICAL_REFERENCE / navigationではない |
+| implementation archive | EmlisAIの実装済み資料/ | HISTORICAL_REFERENCE / active ownerは個別確認 |
+
+## 7. Protected invariants
+
+### Source and meaning
+
+- original input、owned history、question control、supplemental answerのroleを混ぜない。
+- actor／referent、predicate、argument、relation direction、polarity、modality、time、unknown、lifecycleを保持する。
+- raw inputの再掲、source clause、case／family専用surface routeをmeaning authorityの代用にしない。
+- self-denial、uncertain、intended、stoppedをfact、completed、valueへ昇格しない。
+
+### Product and safety
+
+- 根拠のない原因、人格、診断、他者意図、未来保証を追加しない。
+- ObservationとEmlis Receptionを同義反復にしない。
+- unknownを埋めず、通常観測、限定観測、問い、separate safetyを分ける。
+- 問いは各roundの観測と受け取りの後にexact1だけ、skip可能。Free／Plus 0..1、Premium sequential 0..3のbudgetを超えず、問い先行、詰問、一括質問、無条件の質問ラリーをしない。
+- emergency／high-care surfaceはseparate safety ownerを使う。
+
+### Acceptance and privacy
+
+- machine GREEN、human Product Read、runtime readiness、Cycle acceptanceを相互変換しない。
+- read-feeling、naturalness、non-template、また入力したさは最終表示artifactのbody-full Product Readで判定する。
+- public body-free metaへraw input、raw output、identifiable paraphrase、private evidence、keyを出さない。
+- API／DB／RNの既存public contractをdesign資料だけで変更しない。
+
+## 8. Current gaps
+
+1. production I5とNLS v3／Cycle001の二経路が存在し、統合またはcutoverは未承認。
+2. Japanese predicate／argument governing authority 251/251は未成立。
+3. Emlis input-history thread、plan別question lifecycle、refined Layer 1／2、Plus／Premium Layer 3は商品完成未確認。
+4. mainのCycle current navigationはDraft #29より古い。
+5. active planの一部metadataにdraft lifecycle表記が残るため、current actual判断では08とremote factsを優先する。
+6. CMEE Stage 1はPro / Ultra追加設計の必要責務を既存ownerへ継承したdisabled owner chainまで実装済みである。IM10 Product Readは`NON_PASS`である。旧Round 0の未開始記録は履歴であり、現在は本節冒頭の承認済みselected-reception入力と本文修正・検証を継続中である。Cycle re-entryとproductionは未承認である。
+
+CMEE Emlis detailed design candidate:
+
+[CMEE V1-A — EmlisAI Observation Vertical 詳細設計](../designs/cmee/v1/02_emlis_v1a_detailed_design.md)
+
+このpointerはcurrent production ownerまたはCycle navigationを変更しない。current runtime evidenceはmashos-api Draft PR #3 head `4e8d397843c0381bc94379b71665cf71b80d7d1b`である。final-language payloadはexact18、product causal source ownerはexact9、canonical100はdirect 100/100、outer generated-disabled 68件／finite fail-closed 32件である。owner adoptionは`IMPLEMENTED_NOT_ACCEPTED`、IM10 Mash Product Readは`NON_PASS`、Round 0 correctionは`APPROVED_ROUTE_NOT_STARTED`、`candidate_ready=false`、`product_credit=0`、`automatic_progression=false`、production effect 0である。historical `NO_SAFE_CMEE_V1A_CANDIDATE_STOP`をcurrent candidate stateへ復活させない。
+
+## 9. Step 10 reviewed design synchronization
+
+このmapは次をcanonical current-structure readingへ同期する。
+
+    DOCUMENT_ID = CMEE_STEP10_ULTRA_FINAL_INTEGRATED_REVISION_PROPOSAL_20260821_V2
+    DESIGN_IDENTITY = CMEE_THREE_CORE_INTEGRATED_DESIGN_20260821
+    FORMAL_PRO_REVIEW = CONSUMED_EXACTLY_ONCE
+
+target実装順は、Vertical 1 Layer 1／2、Vertical 2 question／refined Layer 1／2、Vertical 3 Plus／Premium Layer 3である。現存するcapability、context、user model、history、P5、P6を移行候補として先に照合し、不足するproduct integrationだけをNB-F01..NB-F04として残す。これはruntime接続、API／DB／RN変更、activation、Product Read合格を意味しない。
+
+### 9.1 2026-08-23 華恋由来Stage 1 functional correction
+
+本§9.1は2026-08-23時点のpredecessor統合記録である。ここでいうfunctional owner exact2とPro／Ultra integration sourceはcurrent treeに存在せず、current ownerではない。統合後のcurrent商品契約はlatest §19とcanonical 02 §35、実行順はcanonical 06 §86を優先する。
+
+functional owner exact2は、P1–P8、M1–M7、Layer 1 / 2、V1–V9、観測・選択・応答構造、最低商品品質を所有する。既存`02 / 05 / 06`はtechnical realization、schema / ref / identity、implementation / verificationを所有し、Pro / Ultra追加技術資料はnoncanonical integration sourceとする。
+
+Stage 1の新product contract:
+
+- Observation depthとSubjective depthを独立にする。
+- FOCUSED L2はhonest / input-specific proposition exact1で正常成立する。
+- AffectIntensityをuser emotion strengthから直接決めない。
+- `DISCOMFORT`を出来事 / value conflict / promotion riskへbindし、ユーザー人格へ向けない。
+- existing `GroundedHumanReceptionPlan`資産をREUSE / TRANSFORMし、finished surface ownerだけをretireする。
+- semantic interpretation poolとsame-plan surface `RealizationCandidateSet`を分け、automatic retry / legacy fallbackを0にする。
+- Free=current input only。eligible owned historyはPlus / Premiumのsource admission境界で扱い、current unitのPremium runtime effectは0。
+
+今回のeffectはdesign / routing / mapだけで、runtime / test / production effectは0。次は別の長い設計projectではなく、fresh short execution envelopeから一つのbounded Stage 1 product correctionへ戻る。Mashのimplementation開始指示前は進めない。
+
+## 10. History pointers
+
+- 2026-05〜07の実装経緯: EmlisAIの実装済み資料/
+- milestone timeline: Cocolon_前提資料/07_latest_snapshot_diff.md
+- NLS v3 immutable design: historical_baselines/emlis_ai/ 以下
+- G0–G10後の構造監査: Cocolon_前提資料/audits/emlis_ai/Cocolon_Cycle001_PostG2_SystemArchitecture_Reusability_Audit_20260814.md
+- Response3 body-free receipts and plan: EmlisAIの実装済み資料/documents/ 以下
+
+履歴の古いnext actionをcurrentへ復活させない。
+
+## 11. Map update triggers
+
+次を変更するworkは、このfileを同じwrite unitで更新する。
+
+- production reply orchestrationまたはRN display entry
+- source role、observation stage、問いlifecycle
+- meaning／plan／surface／safety owner
+- NLS v3のactive／dormant／production status
+- API、DB、RN、public meta contract
+- CMEE Emlis adapterへのcutoverまたは旧owner retirement
+- Cycle statusのauthority path
+
+内部logicだけのfixで上記が不変ならSTRUCTURE_MAP_DELTA_NONEと理由をPRへ記す。
+
+## 12. Historical verified refs
+
+以下は継承完了前の履歴refである。current runtime evidenceは本file latest §18を使用する。
+
+    Cocolon main
+      de9c3d985053bbaaa7fc0d396e688cc2097ece40
+
+    Cocolon Draft PR #29
+      0854e21f92f841fd2cfdcef08b9e3117fc93f96a
+
+    Cocolon Draft PR #30 current work preimage
+      986dbb6b1a0e5be54cf5776e4402bf369ec26887
+
+    mashos-api main
+      a8ca4ddf7b7ae76bf7b3d73e74e3a5808d623428
+
+    mashos-api Draft PR #2
+      958c1b53f5b5894691e0b10e2d991fb8236d9f6f
+
+    mashos-api Draft PR #3 historical snapshot
+      106a1b8c92e808d15e88ce4f56c6300568d93e9f
+
+次回はfresh refと実fileを再確認する。
+
+## 13. Historical Stage 1 disabled candidate snapshot — Step 7 correction（2026-08-23）
+
+本節は旧Step 7 candidateのappend-only predecessor snapshotであり、current owner／lifecycle判定に使用しない。current stateは本file latest §18を優先する。当時のimplementation ownerはmashos-api Draft PR #3のprivate disabled routeであり、production `emlis_ai_reply_service.py`、ReplyEnvelope、RN display ownerを置換しなかった。
+
+| Surface | Current owner / state | Effect |
+|---|---|---|
+| Stage 1 response compiler | `cocolon_meaning_experience_engine/emlis_stage1_response.py::compile_stage1_response` / disabled candidate | private disabled effect exact1 |
+| finite language owner | `cocolon.emlis.stage1.microgrammar.v2` / exact44 / 16695 bytes / canonical 02 + 05 byte-exact | production effect 0 |
+| engine / runner | `MeaningExperienceEngine.generate()`経由のdisabled candidate run | public ingress effect 0 |
+| production reply / API / DB / RN | existing owners unchanged | effect 0 |
+| provider / source / dependency | no new owner, no expansion | effect 0 |
+| Product verdict | Mash body-full Product Read only | not evaluated in docs |
+
+最初のStep 7 pre-screenで共通surface原因を検出してStep 2–4へ戻し、provider / source / allowlistを広げずsame-scope v2 finite correctionを行った。fresh Step 5は7/7、Step 6はcontracts 70/70 + vertical 41/41 = 111/111で、all-variant quote seal、forged three-pair fail-closed、typed source-shape parser tableも通過した。formal V10 Step 7はpairwise 28/28と独立set-level review 2/2を通過し、case / pairwiseのMajor / Blocker 0、明白な低品質0/8、source fidelity 8/8、duplicate / forbidden 0、SX07重点全PASSとなった。full receiptはcanonical 06 §29が所有する。machine GREENや華恋pre-screenはMash Product PASSではない。
+
+```text
+candidate_state = DISABLED_MASH_PRESENTATION_PRE_SCREEN_PASSED
+current_runtime_owner = mashos-api Draft PR #3 / canonical 06 §29 final token
+formal_step7_revision = V10
+v2_inventory_tuple_bytes_sha256 = 44 / 16695 / dc4e1e5ef8026d5577698f375e305db7886f57096c69e6e6a0b99bfe1f26de8a
+step6_full_regression_rerun = 111 / 111 PASS
+step6_quote_and_parser_regression = PASS
+production_owner_changed = false
+provider_source_dependency_expansion = 0
+public_schema_api_db_rn_persistence_effect = 0
+private_body_digest_locator_github_publication = 0
+runner_candidate_ready = false
+runner_product_read_eligible = false
+mash_presentation_pre_screen_eligible = true
+product_read_evaluated = false
+product_pass = not_declared
+product_technical_full_i1_cycle001_production_credit = 0
+remote_exact_path_and_bytes_equality = PASS_VERIFIED_POST_PUSH
+automatic_progression = false
+```
+
+final remote refs、exact changed-path set、file bytes equalityはcommit / push後にcanonical 06 §29の`PASS_VERIFIED_POST_PUSH`として実測確認した。
+
+## 14. Historical Stage 1 product verdict / additional correction snapshot（2026-08-24）
+
+本sectionは旧candidateのProduct verdictとnext design stateのappend-only predecessor snapshotであり、current判定に使用しない。current Product Read stateは本file latest §19の`IM10=NON_PASS`を優先する。
+
+- v2 Step 7 machine / pre-screen: historical GREEN。
+- Mash actual Product Read: `EVALUATED_FAIL_QUALITY_INSUFFICIENT`。
+- current v2 product acceptance: `FALSE`。
+- current candidate ready / Product / technical / production credit: `false / 0 / 0 / 0`。
+- additional correction final body: [Pro-confirmed noncanonical integration source](../designs/cmee/Cocolon_CMEE_Stage1_AdditionalCorrection_UltraFinalTechnicalBodyAndJointRecommendation_20260824.md)。
+- final body reviewed source SHA-256: `1f02e566ddfaefcbfc99ba985e3ef8af5c8e15b8867215c994cda99fbdedff05`。
+- Pro final confirmation: `PASS / BLOCKER 0 / MAJOR 0 / MINOR 0`。
+- implementation order owner: canonical 06 §30 → final body §13。
+- implementation approval / runtime / test / provider / API / DB / RN / persistence / production effect: `0`。
+- current authorized next implementation: `NONE_PENDING_MASH_LEVEL3_IMPLEMENTATION_DECISION`。
+- automatic progression: `false`。
+
+current production `emlis_ai_reply_service.py`、ReplyEnvelope、RN display、Cycle001、question、Layer 3、Piece、Analysisのownerは変わらない。new final bodyはcurrent v2 surface ownerを即時に置換せず、future LEVEL_3 approval後にだけcanonical owner exact1へ分配する。
+
+## 15. Current Route A-only authority（2026-08-25 Mash決定）
+
+Mashのcurrent明示指示により、CMEE Stage 1のcurrent/future language routeはproviderless Route A exact1だけである。外部生成AI、external generative composer、remote model/provider、current input本文またはsemantic projectionの外部送信、network call、provider dependency、fallback、external costを禁止する。名称変更、別packet、別operator、別providerまたはfresh approvalで代替routeを復活させない。
+
+今回の決定は外部route撤去とroute-neutral source/owner contractへの改名だけを承認する。第三generic correction、counter reset、同じStep 3の再実行、Step 4、formal Product Read、ready、merge、productionは承認しない。Route Aでceilingまたはreturn budget exhaustionとなった場合は、そのterminalで停止する。
+
+```text
+DECISION_ID = COCOLON_CMEE_STAGE1_ROUTE_A_ONLY_EXTERNAL_AI_PROHIBITION_20260825
+DECISION_OWNER = MASH
+SOLE_CURRENT_AND_FUTURE_ROUTE = ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER
+EXTERNAL_GENERATIVE_AI = PROHIBITED
+EXTERNAL_COMPOSER_OR_REMOTE_MODEL_PROVIDER = PROHIBITED
+CURRENT_INPUT_OR_SEMANTIC_PROJECTION_EXTERNAL_SEND = 0
+NETWORK_CALL / NEW_PROVIDER_DEPENDENCY / FALLBACK / EXTERNAL_COST = 0 / 0 / 0 / 0
+ALTERNATIVE_ROUTE_CURRENT_AUTHORITY / FUTURE_TRIGGER / REACTIVATION = 0 / 0 / 0
+EXTERNAL_OPERATOR = NOT_APPLICABLE
+COMMON_DEFECT_RETURN_COUNT = 2/2_UNCHANGED
+EARLY_ACTUAL_STATUS = NOT_RUN
+STEP3 = COMMON_DEFECT_RETURN_BUDGET_EXHAUSTED_STOP
+THIRD_GENERIC_CORRECTION / COUNTER_RESET / STEP3_RERUN / STEP4 = 0 / 0 / 0 / 0
+CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = NONE
+ONLY_POSSIBLE_FUTURE_CLASS = FRESH_LEVEL3_ROUTE_A_PROVIDERLESS_ONLY
+PRIMARY_OUTCOME = ADMINISTRATIVE_ONLY
+PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
+AUTOMATIC_PROGRESSION = false
+```
+
+## 16. Emlis input-specific meaning decision — IM01 authorized integration gate（2026-08-28）
+
+Mashのfresh explicit authorityは、IM00のremote-postverified runtime head `2c607f001e3524de67c6c276d0140c1b8b464584`とdesign head `ac1ccfce52374abad122cb6b82f99b0760c01d6f`をsole preimageとして、IM01の統合修正とformal pytest exact1だけを許可する。authority前のlocal途中差分は完了creditではなく、failed diagnostic pytestはclosed/no-creditである。
+
+最初のformal launcherはrepository `ai` rootをisolated Pythonのimport pathから外した`COMMAND_CONSTRUCTION_ERROR`でcollection 0となった。Mashのfresh bounded mechanical repair authorityによりlauncherだけをexact1修復し、target／denominator／comparator／input identity／runtime不変の同じGateをexact1再実行した結果は`25 passed`でGREENである。
+
+IM01の完了前提は、current disabled response pathのpre-meaning grounded inputs／allowed Reception envelope型分離、typed Grounded Viewから`derive_foreground_scope_closed()`への実接続、および新しい型に合わせた旧IM00 test fixture移行をactual source／testへ統合することである。fixture移行を含む統合完了前のdiagnostic pytest、target test、compileallその他同等のrepository-code executionは0とする。Foreground Scopeは許可basis exact5をtyped compatibility exact10でcanonical unionし、material competingは`LIMITED_COMPETING_MATERIAL_READINGS`、safe objectを保持できる構造不足は`LIMITED_STRUCTURE_INSUFFICIENT`、safe foreground object exact0だけは`STRUCTURE_INSUFFICIENT_STOP`へ閉じる。Reception、affect、style、temperature、surface、fixture、ID／hash／列挙順はscope selectorへ逆流しない。
+
+```text
+RUNTIME_PRE_HEAD = 2c607f001e3524de67c6c276d0140c1b8b464584_REMOTE_POSTVERIFIED
+DESIGN_PRE_HEAD = ac1ccfce52374abad122cb6b82f99b0760c01d6f_REMOTE_POSTVERIFIED
+PRIOR_DIAGNOSTIC_PYTEST = FAILED_CLOSED_NO_CREDIT
+CURRENT_LOCAL_INTERIM_DIFF_COMPLETION_CREDIT = 0
+IM00_FIXTURE_MIGRATION_BEFORE_FORMAL_PYTEST = COMPLETE
+POST_AUTHORITY_PREINTEGRATION_TEST_EXECUTION = 0
+ORIGINAL_FORMAL_PYTEST_ALLOWED_INVOCATION / RETRY / RERUN = 1 / 0 / 0
+ORIGINAL_FORMAL_PYTEST_RESULT = COMMAND_CONSTRUCTION_ERROR_COLLECTION_0_CLOSED_NO_CREDIT
+BOUNDED_MECHANICAL_REPAIR_LAUNCHER / SAME_GATE_RERUN = 1 / 1
+FORMAL_PYTEST_TERMINAL_RESULT = GREEN_PASS_25_OF_25_OWNED_BY_CANONICAL_06_SECTION_82
+OTHER_REPOSITORY_CODE_EXECUTION = 0
+WRITE_GATE = FORMAL_PYTEST_GREEN_SATISFIED
+STEP_STATE = COMPLETE_NONTERMINAL_CHECKPOINT
+PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
+PRODUCT_READ / IM02 / ACTIVATION / I09 / PRODUCTION_EFFECT = 0 / 0 / 0 / 0 / 0
+FULL_PUBLIC_REGRESSION = DEFERRED_TO_IM07_NOT_CLAIMED_AT_IM01
+NEXT_DEPENDENCY / CURRENT_AUTHORIZED_NEXT_IMPLEMENTATION = IM02 / NONE_AFTER_IM01
+```
+
+current production `emlis_ai_reply_service.py`、ReplyEnvelope、RN display ownerは変更しない。Required Difference／counterfactual mutation／WholeReadingConsequence issuerはIM02のownerへ留保するが、本authorityでIM02へは進まず、automatic progressionはfalseである。
+
+## 17. Emlis input-specific meaning decision — IM02 difference requirements complete checkpoint（2026-08-28）
+
+Mashの明示的なcomplete-to-finish authorityにより、IM02をactual source／testへ統合し、final exact selectors `32/32`、IM02 targeted `7/7`をGREENで完了した。追加したcurrent structureは、Difference Config、Observed Difference／Required Difference、closed counterfactual mutation、Difference Bundle、WholeReadingConsequence issuer、response pre-Reception storage、composition-side rederive／exact equality、およびruntime integration exact17 identityである。
+
+Required Differenceはtyped Grounded View／Foreground Scopeから導出したObserved Differenceとclosed mutation結果を同じbundleへ束ね、semantic orderとadjacencyを固定する。WholeReadingConsequenceはそのbundleだけから発行し、responseがReceptionへ入る前に保存する。compositionは保存済み結果を再導出してexact equalityを要求し、不一致、未知mutation、signature不整合、対象不一致をclosedで拒否する。Reception、affect、stance、style、temperature、surface、ID／hash／fixture順序を意味決定へ逆流させない。
+
+```text
+CHECKPOINT_ID = CMEE_EMLIS_INPUT_SPECIFIC_MEANING_IM02_DIFFERENCE_REQUIREMENTS_20260828_V1
+IMPLEMENTATION_STEP / STEP_STATE = IM02 / COMPLETE_NONTERMINAL_CHECKPOINT
+FORMAL_GATE_HISTORY = MISSING_FASTAPI_PRECOLLECTION_CLOSED_NO_CREDIT -> 28_OF_32 -> 24_OF_32 -> 25_OF_32 -> 32_OF_32_GREEN
+FINAL_EXACT_SELECTORS / FINAL_RESULT = 32 / PASS_32_OF_32
+IM02_TARGETED_SELECTORS / TARGETED_RESULT = 7 / PASS_7_OF_7
+RUNTIME_INTEGRATION_IDENTITY = EXACT17_FROZEN
+PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
+IM03 / ACTIVATION / I09 / PRODUCTION / MERGE = NOT_STARTED / 0 / 0 / 0 / 0
+API / DB / RN / PERSISTENCE / PROVIDER / NETWORK / FALLBACK / COST_EFFECT = 0 / 0 / 0 / 0 / 0 / 0 / 0 / 0
+FULL_PUBLIC_REGRESSION = DEFERRED_TO_IM07_NOT_CLAIMED_AT_IM02
+DESIGN_FINAL_SOURCE_MODIFICATION = 0
+DESIGN_PR30_STATE = DRAFT_OPEN_UNMERGED_PENDING_PUSH
+NEXT_DEPENDENCY = IM03
+AUTOMATIC_PROGRESSION = false
+```
+
+current production activation、public API、DB、RN、persistence、provider、network、fallback、external costへのeffectは0である。IM03のreading operation applicability／enumeration、I09、production、mergeは開始していない。
+
+## 18. CMEE継承後のEmlis Stage 1 owner chain（2026-09-01）
+
+本節はcurrent disabled CMEE routeについて§17よりfreshである。production I5のpublic orchestration、ReplyEnvelope、RN displayおよびAPI／DB ownerは変更しない。
+
+disabled Stage 1では、`emlis_input_specific_meaning.py`がinput-specific meaning decisionを所有し、`emlis_stage1_composition.py`はそのprojectionのschema／ref／identity／non-mutationを検証するだけである。compositionはfinal observation、Sentence Plan、Human Receptionまたはvisible surfaceのownerではない。
+
+final Layer 1 ownerは`GroundedObservationPlan`、final sentence planning／sentence realization ownerは`emlis_ai_grounded_sentence_surface.py`、final Layer 2 ownerとreception realization ownerは`emlis_ai_grounded_human_reception.py`である。`emlis_ai_grounded_observation_gate.py`は生成済みfinal bodyだけを入力とするbody-only inverseと独立source matcherを所有し、forward plan／source metadataをparserへ渡して自己照合しない。
+
+NLSv3／Cycle001からはこの責務とprotected failure knowledgeだけを移した。large Cycle001 recovery moduleは`NOT_ADOPTED`であり、copy／wrapper／import／callは0である。System Contextはdisabled implementation seedをexact11からexact13へ更新し、canonical100 bridge testをprotected pathへ追加する。
+
+```text
+CURRENT_PRODUCT_OWNER_ADOPTION_STATE = IMPLEMENTED_NOT_ACCEPTED
+IM10 = MASH_PENDING
+CANDIDATE_READY = false
+PRODUCTION_EFFECT = 0
+CUTOVER / MERGE / API / DB / RN = 0 / 0 / 0 / 0 / 0
+EXTERNAL_GENERATIVE_AI / PRODUCT_RUNTIME_NETWORK / FALLBACK = 0 / 0 / 0
+AUTOMATIC_PROGRESSION = false
+```
+
+canonical100、protected inverse、machine／trace結果はdisabled candidateのtechnical evidenceに限定し、Mash Product Read、acceptance、production creditへ自動変換しない。
+
+current implementation evidenceはmashos-api Draft PR #3 head `4e8d397843c0381bc94379b71665cf71b80d7d1b`である。active final-language identityはpayload exact18、product causal source owner exact9で封印した。canonical100はdirect active final surface 100/100、outer engine generated-disabled 68／有限fail-closed 32で、全100件のproduction effect、candidate ready、Product Read eligible、automatic progressionは0／falseである。
+
+## 19. IM10 NON_PASS後のcurrent EmlisAI商品境界（2026-09-02）
+
+本節はcurrent Product Read、visible product roles、次の構造順について§18よりfreshである。Mashはcurrent disabled exact8を読み、`NON_PASS`と判断した。内部meaning／observation／Reception／traceが実装済みでも、Layer 1が入力の引用に近く、Layer 2が短い定型的followに縮退しているcurrent本文は、EmlisAIの最低商品品質へ到達していない。
+
+```text
+IM10 = NON_PASS
+CURRENT_PRODUCT_OWNER_ADOPTION_STATE = IMPLEMENTED_NOT_ACCEPTED
+CANDIDATE_READY = false
+CURRENT_AUTHORIZED_IMPLEMENTATION = NONE_UNTIL_FRESH_SESSION_EXPLICIT_START
+APPROVED_NEXT_ROUTE = ROUND0_FOLLOW_PRIMARY_VISIBLE_RESPONSE_CORRECTION
+PRODUCT_CREDIT = 0
+AUTOMATIC_PROGRESSION = false
+```
+
+user-visible役割は次の通りである。
+
+| Visible layer | Current role | Current weight boundary |
+|---|---|---|
+| Layer 1「見えたこと」 | Emlisが何を根拠に読んだかを示す必要最小限の観測 | 意味役割として1〜4。0にしない |
+| Layer 2「Emlisから」 | 何を受け取り、何に目を向け、どう感じ、何を伝えるかを担う主本文 | 意味役割として9〜6。0にせず、常にLayer 1以上 |
+
+Layer 1は入力の反復、語尾変更、短い引用または構造labelだけでは成立しない。根拠を越える人物推定をせず、Emlisが入力のどこを意味の中心として受け取ったかが入力固有に分かる必要がある。Layer 2は必須質問や相槌formulaではなく、一方向の「Emlisからユーザーへの言葉」として内容上の流れを持つ。
+
+入力別のcurrent配分は、日常の出来事／感情が観測1〜3：フォロー9〜7、通常の悩み／自己理解が観測3〜4：フォロー7〜6、構造説明を明示的に求められた場合でも観測最大4：フォロー最小6である。文字数、文数、token数の固定quotaではない。旧標準6：4／構造要求7：3はcurrent routeに使用しない。
+
+current actual product-causal chainは次である。
+
+```text
+input-specific meaning
+  -> Grounded Observation Plan
+  -> compile_stage1_response
+       -> limited Reception material mode
+       -> forced limited plan fields
+  -> Grounded Sentence Plan + active realizer
+  -> Human Reception realization
+  -> body-only inverse + Gate
+  -> disabled Layer 1 / Layer 2 body
+```
+
+`_cmee_semantic_reception_plan()`のlimited Reception material modeと`compile_stage1_response()`内のforced-limited置換を一連の最初の確認点とし、current callerからfinal bodyまで追う。constant／literal解除だけを修正とせず、isolated historical `_compile_stage1_response_v1_legacy()`が使うcase-frame candidate builder／selector、削除済みfunctional companion、NLSv3／Cycle001 large moduleをcurrent active ownerへ戻さない。
+
+完成順はRound 0 active-path correction、華恋body-full pre-screen、Mash Round 0 Product Read、Mash PASS後のFree重要問い0..1 end-to-end、さらに後のPlus／Premium Layer 3である。問いではsupplemental answerだけをoriginalと別のuser-owned sourceとして保存し、その回答分だけLayer 1／2をrefineする。API／DB／Supabase／RNはquestion stage開始時にactual contractを読み、必要な既存経路だけを扱う。
+
+current detailed ownerはcanonical 02 §35、execution order ownerはcanonical 06 §86、shared CMEE mapは04 §32である。本map更新はruntime structure、production I5、ReplyEnvelope、API、DB、Supabase、RNまたはSystem Context生成物を変更しない。構造上のdeltaはProduct Read state、visible role、current owner／next-route navigationだけで、primary outcomeは`ADMINISTRATIVE_ONLY`である。
+
+
+## Current same-nucleus status correction（2026-09-04）
+
+Current approved disabled work is canonical v1/02 §38 and v1/06 §89. The existing `emlis_ai_grounded_observation_plan.py` final-only seam owns same-nucleus source-grounded status alignment before graph/meaning/Reception generation. Human Reception remains the sole intended Layer2 author; Sentence Surface owns Observation and placement; composition validates only. The public base reply path, national-system storage/dispatch/publication, Piece and Analysis are unchanged. Implementation and full-body verification are in progress, not complete; predecessor candidate remains rejected/rolled back and all production/ready/merge effects remain 0.
+
+Current result: `BLOCKED_AVAILABILITY_CONSTRAINT_UNFINISHED`. Direct generation and 124 required bindings succeeded on a frozen probe; outer availability differed from the required 68/32 because the unchanged completed-body guard no longer rejects a removed unsupported sensation. Root full100 review was NOT_CLEAR. The disabled Human Reception → Sentence Surface placement → adapter path is retained as unfinished work; canonical 06 §89 and the existing runtime handoff own the precise boundary/resume point. National-system/public route boundaries are unchanged.
+
+Current state superseding the preceding boundary checkpoint: `IN_PROGRESS_APPROVED_SOURCE_FIDELITY_EXCEPTION`. Mash approved only UNAVAILABLE→GENERATED caused by removal of unsupported meaning under unchanged strict checks. Canonical 02 §38 / 06 §89 own the exception and continued same-unit correction; all100 CLEAR and product readiness remain pending.
+
+
+Latest checkpoint: Current correction status (2026-09-05): typed positive feelings retain their existing selected act and use a feeling referent instead of unsupported change. Actual perfective change needs source-bound evidence; original field/offset verification preserves question punctuation lost by Ledger trimming. Frozen same100: direct100, Move/expression/binding124, outer73/27; three GENERATED follows and their selected-input identities changed,97 full records identical. Observation/status/reasons/nuclei and selected acts/targets/supports/operation counts are unchanged in this cohort. Required201:197 PASS/4 inherited FAIL; new failures0, unexecuted0. All36 later cases and96 post-hash checks executed;96 PASS, unseen duplicate FAIL retained. Karen read all100 original inputs in every field, observations and follows:NOT_CLEAR. The initial question-boundary failure is preserved privately and corrected without altering its expectation. Existing body parser adds a feeling-target marker; final Gate requires it only for the same typed target and rejects change/words as substitutes. Replay/source/context/why duties, thresholds and historical evidence remain mandatory. New owner/carrier/schema/production route0. Existing operator:change may be explicitly added with verified source evidence; this is not a claim of zero attribute edits for all inputs. Long replay, repeated closes and upstream target/agency/tense/relation problems remain. See canonical02 §38,06 latest checkpoint and runtime handoff. Product readiness/adoption/merge/production and new CMEE history persistence remain unclaimed.
+
+
+### 2026-09-05 過去の願望発言の前段checkpoint（履歴）
+
+2026-09-05最新：過去の発言・思考を現在願望へ寄せない限定修正を実装・検証した。元span／typed fragmentの既存時間分類と、分割前の引用・話者・疑問境界を同じownerで確認し、Human Receptionは原文確認済みの当時参照を用いる。固定sourceで同じ100件direct100、Move／expression／binding124、外側73/27。nuclei時制とselected identityが2件変化、フォローの局所改善は利用不可側1件、生成可能73件の本文変更0。残98件は全保存項目同一、観測・可否・理由・選択act／対象／支援先の変更0。全204検査200成功／既存4失敗、新規失敗0・未実行0。華恋が原入力全フィールド・観測・フォロー100件を全文確認しNOT_CLEAR。今回のGate／parser／閾値・歴史的hash／PASS変更0。途中2版と追加検査案の失敗は保存した。詳細は02 §38、06末尾、既存runtime handoff末尾。長い復唱・同じ締め・意味分類と対象選択が残り、商品確認準備／ready／採用／merge／本番／問い／Layer3は未成立。
+
+新しいファイルfamilyは追加せず、既存ObservationPlanが分割前の元位置を確認し、Human Receptionが同じ過去report参照をforward／replayへ渡す。現行production／国家保存経路、Piece／Analysis、CMEE本文の履歴接続には変更しない。
+
+### 2026-09-05 未完の問いの最新checkpoint
+
+2026-09-05最新：未完の理由疑問を埋込行動と誤認する既存final source分類を限定修正した。同じ意味核を原field・offset・引用外・文境界で確認して既存uncertaintyへ戻し、既存選択LEAVE_UNFINISHEDをforward／独立replayへ届ける。固定sourceはdirect100、Move／expression／binding124、外側73/27、入力・順序・可否・理由変更0。生成可能側1件の観測・フォローが変わった。別1件に同じ属性の順序差があり、残98件は全保存項目同一。全208検査204成功／既存4失敗、新規失敗0・未実行0。華恋は原入力全フィールド・観測・フォロー全100を読みNOT_CLEAR。Gate／parser／閾値・歴史的hash／PASS変更0。長い復唱・同じ締め・行動評価偏重、複文時制・予定・援助主体と他の問い／比較／可能性は残件。詳細は02 §38、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+
+既存意味核を選択前にsourceへ整合する限定修正。全体のowner／国家／公開経路／Piece／分析との接続は変わらない。正本02 §38、06 §89と末尾、runtime handoffに実装・検証・残件を記録する。
+
+
+### 2026-09-05 continuation — 受領節の自己実行誤認の限定修正
+
+2026-09-05最新：既存動作語の授受補助動詞について、本人が埋込行為を実行したという根拠のないperformed属性を付けないよう、既存final same-nucleus status補正を限定修正した。数量表現・場所格と後続の本人行動は保持。固定100はdirect100、Move／expression／binding124、外側73/27で入力・順序・可否・理由変更0。生成可能側1件の観測だけが変わり、選択decisionと全フォローは同一、残99件は全保存項目同一。全211検査207成功／既存4失敗、新規失敗0・未実行0。華恋は全100の原入力全フィールド・観測・フォローを読みNOT_CLEAR。受領の意味契約と未登録述語、複文の主体・時制・予定、他の問い／比較／可能性、長い復唱・同じ締め・行動評価偏重が残る。詳細は02 §38と末尾、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+
+既存ObservationPlan内部のstatus証明条件と直接関連テスト・現在runner identityを更新。STRUCTURE_MAP_DELTA_NONE。source／public actor契約、国家／共通基盤／旧経路／他中核との境界は同じ。System Contextはdoctor→prepare不成立・stale不使用・原典直読。詳細と残るactor契約境界は正本02／06末尾。
+
+
+### 2026-09-06 continuation — 後置理由疑問のsource補正
+
+2026-09-06最新：後置の理由疑問を変化／行動の断定として扱う誤りを、既存final ObservationPlanのsource分類で限定補正した。完結した外側疑問を元fieldとoffsetで証明し、同じnucleusのkind・predicate_kind・modalityと既存uncertainty属性だけを整合する。固定100はdirect100、Move／expression／binding124、外側73/27で入力・順序・可否・理由変更0。生成可能側1件の観察とフォローが変わり、選択済み未完了appraisalが両層へ届いた。他99件は全保存項目同一。全214検査210成功／既存4失敗、新規失敗0・未実行0。華恋は全100の原入力全フィールド・観察・フォローを読みNOT_CLEAR。問いの語調も含む自然さ、複文の主体・時制・予定、他の問い／比較／可能性、長い復唱・同じ締め・行動評価偏重が残る。詳細は02 §38と末尾、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+
+STRUCTURE_MAP_DELTA_NONE：既存final ObservationPlanからHuman Receptionの選択済み意味消費までの同じ経路であり、新owner／route／公開schemaはない。国家保存・dispatch・queue・read-side、公開API／DB／RN、Piece／分析の変更0。
+
+
+### 2026-09-06 continuation — 受け止め補語の節スコープ
+
+2026-09-06最新（受け止め補語の節スコープ）：既存Human Receptionで、選択済みの未完了補語を節先頭へ置き、対象とact述語の直接接続を回復した。語彙・意味選択・act・対象・時制は保持。固定100はdirect100、Move／expression／binding124、外側73/27。フォロー2件のみ変更、観察・選択decision・可否・理由は全100同一。別1件に既存operator属性の順序とinput／grounding識別子の差があり、本文改善に数えない。全215検査211成功／既存4失敗、新規失敗0・未実行0。華恋は原入力全フィールド・観察・フォロー全100を読みNOT_CLEAR。問いの意味の浅さ、行動主対象への偏り、長い再掲・同じ締め、複文の主体・時制・予定、他の問い／比較／可能性が残る。次は既存ObservationPlanの主対象順位・burden候補除去・副Move候補を原意と照合する。詳細は02 §38と末尾、06末尾、既存runtime handoff末尾。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+
+STRUCTURE_MAP_DELTA_NONE：Human Reception内部の文法配置のみ。owner／国家／公開経路・旧経路変更0。
+
+
+### 2026-09-06 continuation — compound属性順序の再現性
+
+2026-09-06最新（compound属性順序の再現性）：final専用の既存endpointで解析器の順序付きoperator tupleを保持し、同入力のplan識別値がprocess hash seedで変わる不具合を修正。fresh interpreter 3 seedの全active／final exact8 plan比較は修正前不一致・修正後一致。固定100は全保存項目が前回と同一、direct100、Move／expression／binding124、外側73/27。全216検査212成功／既存4失敗、新規失敗0・未実行0。華恋は全100の原入力全フィールド・観察・フォローを読みNOT_CLEAR。行動偏重の修正案としてrelation support一律引継ぎを診断したが、選択済み意味とのstrict不整合で不採用。次は既存の選択前ownerとNORMAL／LIMITEDの根拠範囲の接続を直す。本文品質改善とは数えず、商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+
+STRUCTURE_MAP_DELTA_NONE：既存final endpoint内部のみ。国家・公開／旧経路変更0。
+
+
+### 2026-09-06 continuation — 既存memo主題と補助行動の順位整合
+
+2026-09-06最新（補助行動より既存の主題を保持）：final専用の既存ObservationPlanで、正scoreの単一required memo主題が既存lived-change familyを満たす場合、低scoreの非directional補助行動に押しのけられないよう選択順位を限定修正。final・safe・exact2 familyの既存役割も、選択済み主題を本文で先に受ける順に整合。固定100はdirect100、Move／expression／binding124、外側73/27。生成可能側5件で選択inputとフォローだけが変わり、残95件は全保存項目同一。原入力・意味核・観察・可否・理由は全100同一。全218検査214成功／既存4失敗、新規失敗0・未実行0。華恋が全100の原入力全フィールド・両層本文を読みNOT_CLEAR。主題の具体的受容が戻る一方、複文の長い再掲が増える箇所と対象外に残る行動偏重・定型的な締めが残る。一般のburden／未完・混合状態の選択は未解決。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+
+STRUCTURE_MAP_DELTA_NONE：既存final ObservationPlanの選択から同じforward／replay経路。国家・公開／旧経路・Piece／分析変更0。
+
+
+### 2026-09-06 continuation — 関係で結ばれた共同主題の保持
+
+2026-09-06最新（関係で結ばれた共同主題を保持／candidate26）：final専用の既存ObservationPlanで、適格lived_change候補が一つの従来単一primaryに加え、全primaryが二つで両者が既存required関係（uncertain_connectionを除く）により結ばれる場合も、低scoreの非directional補助行動に押しのけられないよう限定補正した。独立主題・複数適格候補・三つ以上は対象外。primary数とMove数の条件は別である。固定100はdirect100、Move／expression／binding124、外側73/27。生成可能側1件のフォローと選択inputが変わり、別1件は参照識別子のみ、残98件は全保存項目同一。原入力・核・観察・可否・理由は全100同一。全220検査216成功／既存4失敗、新規失敗0・未実行0。華恋が全100の原入力全フィールド・両層本文を読みNOT_CLEAR。長い再掲・定型的な締め、通常の負担・未完・混合状態の選択は残件。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+
+STRUCTURE_MAP_DELTA_NONE：既存final ObservationPlanの順位条件のみを補正し、同じforward／replay経路を維持する。新owner／route／公開schema、国家・公開／旧経路・Piece／分析変更0。詳細な条件、先行診断の失敗、最終sourceと検証、環境照合、残件は正本02／06と既存runtime handoffのcandidate26末尾を参照。
+
+
+### 2026-09-06 continuation — 注意と受け止めの対象接続
+
+2026-09-06最新（注意と受け止めの対象を接続／candidate27）：既存Human Receptionのattention「対象に目が留まり」の後へ、同じ対象を受ける既存格補語を置き、受け止め述語の目的語脱落を補正した。意味核・関係・主題順位・Move・選択inputは変更しない。固定100はdirect100、Move／expression／binding124、外側73/27。フォロー73件のみ上記接続が変わり、残27件は全保存項目同一。全222検査218成功／既存4失敗、新規失敗0・未実行0。華恋が原入力全フィールド・両層本文の全100を読みNOT_CLEAR。長い再掲・分類的な対象句・定型的な締め、負担／未完／混合状態の選択は残件。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+
+STRUCTURE_MAP_DELTA_NONE：既存Human Receptionの文法部品のみ。owner／国家／公開・旧経路／他中核の境界は同じ。実装・検証・残件は正本02／06と既存runtime handoffのcandidate27末尾を参照。
+
+
+### 2026-09-06 continuation — 対比の対象節と丁寧な背景節の名詞化
+
+2026-09-06前回（対比の対象節と丁寧な背景節の名詞化／candidate28）：既存Human Receptionで、選択済みcontrastの対象節だけを有限化し、丁寧な背景節を原文のまま名詞化した。引用を含むsource fieldと言いかけは有限化を見送る。意味核・関係・対象順位・Move・選択inputは変更しない。固定100はdirect100、Move／expression／binding124、外側73/27。フォロー1件だけが変わり、残99件は全保存項目同一。全225検査221成功／既存4失敗、新規失敗0・未実行0。華恋が原入力全フィールド・両層本文の全100を読みNOT_CLEAR。長い再掲・分類的な対象句・定型的な締め、負担／未完／混合状態の選択は残件。商品確認準備／ready／採用／merge／本番／質問生成／Layer3は未成立。
+
+STRUCTURE_MAP_DELTA_NONE：既存Human Receptionの文法処理のみ。owner／国家／公開・旧経路／他中核の境界は同じ。実装・検証・残件は正本02／06と既存runtime handoffのcandidate28末尾を参照。
+
+## 2026-09-11 Q3 — 有料履歴・逐次質問・解釈フレーム
+
+| 所在 / owner | Q3の責任と接続 |
+|---|---|
+| API `cocolon_meaning_experience_engine/emlis_thread_contracts.py` / `emlis_thread_source.py` | Q3 capability、逐次3回答、発行済み質問列、版付きprefix。本人履歴・回答・feedbackを異なるsourceとして扱う。 |
+| API `.../emlis_thread_history.py`（新規） | 所有者・保持期間で許可されたraw履歴から意味を再導出。暫定フレーム、独立feedback、Layer3適格性と根拠。古い生成本文・model cacheは意味根拠にしない。 |
+| API `.../emlis_question.py` / `emlis_answer_update.py` | 既質問焦点を除いた次候補、回答ごとの累積ADD/REVISE/WITHDRAW。前回答の訂正はその回答時点を保持。 |
+| API `.../emlis_thread_engine.py` / `emlis_thread_surface.py` / `emlis_thread_projection.py` | 各roundの意味checkpointと本文、保留候補と発行の分離、共有作者への投影、検証済み本文の後に任意Layer3。 |
+| API `.../contracts.py` / `emlis_stage1_response.py` / `emlis_input_specific_meaning.py` | Q3 logical graphだけ寄与上限8（原入力5＋回答3）。旧single/Q1の上限5と型検証を維持。 |
+| API `emlis_ai_grounded_sentence_surface.py` / `emlis_ai_grounded_human_reception.py` / `emlis_ai_grounded_observation_gate.py` | 独立した対比の組を保持した文、前回答時点、既存受け取り。組の取り違え・時点改変・Layer3根拠を独立照合。 |
+| API `emlis_thread_service.py` / `emlis_thread_store.py` | 本人続行、round別保存、現在権限、履歴revision/feedback version、CAS、再取得、失敗後の明示retry、操作receipt。 |
+| API `api_emlis_thread.py` / `api_contract_registry.py` / `ai/docs/PUBLIC_API_REGISTRY.md` | strict DTOとframes route。本人確認・訂正・否定は質問枠を消費しない。 |
+| API `emlis_ai_reply_service.py` | default OFFの開発入口でQ3 profileを選択。旧I5との二重実行をしない。 |
+| API `supabase/migrations/20260911041749_emlis_q3_plan_rounds.sql`（新規） | Q2後の追加migration、開始時上限、round、frame feedback、owned context RPCと保存時再照合。親/account削除cascade、RLS/service_role境界を保持。 |
+| App `lib/api/emlisThreadApi.js` / `screens/input/useEmlisThread.js` / `screens/input/EmlisThreadModal.js` | 本人続行・停止・round表示・フレーム編集。過去roundの回答receiptで新下書きを消さず、不明ACKは同じkey/payloadで照合する。 |
+| API `ai/tests/test_cmee_emlis_q3_thread.py` / `test_emlis_q3_application.py`（新規） | 実本文・時点訂正・旧Q2移行・実SQL/RPC・履歴/プラン/競合/失敗の検証。 |
+| API `ai/tests/test_emlis_q2_application.py` / `helpers/emlis_q2_postgres.cjs`; App `tests/emlis-thread.test.js` | Q2互換と実開発入口、追加DDLの実行、実hook/componentのQ3継続・編集検証。 |
+
+上表のAPI Python sourceは`ai/services/ai_inference/`以下。影響先として、直接修正しない`engine.py`、既存source/observation plan/reception plan、`app.py`、`emlis_thread_config.py`、Q2 migration、`emotion_submit_service`、`publish_governance`、認証・親入力削除・account削除、AppのInputScreen／AnalysisHistoryScreen／AuthContext／apiClient／draft cleanup／Piece返信導線の本文を確認した。全体図・国家図・両repositoryの全treeを照合し、関係の薄い既存familyは地図で役割を確認した。全repository全文監査を完了したという意味ではない。
+
+Emlisは「今回の入力を読んだ観測→重要な一点の任意質問→本人回答で観測を深める」体験を担当する。回答・続行・フレーム操作は元入力に所属し、国家の入力件数・課金event・通知・Astor queueを増やさない。原入力の保存と既存fanoutは`emotion_submit_service`、履歴の閲覧期限は既存`publish_governance`が所有する。Piece／Analysisの入力許可、TodayQuestionの回答schema、旧I5 public wireを拡張しない。共有CMEE→既存Human Reception作者→Sentence Surface→独立逆検証の順を継承し、外部生成AIや別本文rendererは追加しない。
+
+Q1・Q2・Q3のコード実装を完了として記録し、次はQ4の実装統合、対象集合の初回/質問/回答後本文の確認と修正、旧client/保存版互換、公開用mode・単一生成ownerの接続準備、保存済み訂正を消さない停止・復旧のコードと検証へ進む。古いcandidate91単独修正ループやProduct Read PASS待ちへ戻さない。
+
+実DB適用、端末・実課金の環境確認、Mashの正式商品判断、merge/deploy/公開切替は、API `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md`へ分離した未実施作業。これらが未実施という理由だけでQ3/Q4のコード作業を停止しない。機械成功・華恋の本文確認・Mashの商品合格・公開を相互に代用しない。
+
+
+## 2026-09-11 Q4 — 実装統合・公開接続と保存済み訂正の保護
+
+| owner（API sourceは ai/services/ai_inference/ 以下） | 今回の役割・接続 |
+|---|---|
+| API emlis_thread_config.py / api_app_bootstrap.py | legacy/development/active/read_only選択、独立公開承認、bootstrapのreader通知。既定値OFF。 |
+| API emlis_ai_reply_service.py / api_emlis_thread.py / emlis_thread_service.py | 認証済み同一threadへ一本化。旧comment_textには保存current本文だけ。受理/commit時の停止検査、同じ保存回答からの明示回復。 |
+| API cocolon_meaning_experience_engine/contracts.py / engine.py / emlis_thread_engine.py | 明示EMLIS_APPLICATIONをthread専用に許可、旧offline互換。次問候補の失敗で成立した本文を失わない。 |
+| API emlis_ai_grounded_observation_plan.py / emlis_ai_grounded_human_reception.py / cocolon_meaning_experience_engine/emlis_stage1_composition.py | 肯定感情を負担から分離、過去訂正のsource時間保持、出来事と反応の関係を原文に沿って名詞化。同じ作者と独立inverse。 |
+| App AppRuntimeContext.js / lib/api/emlisThreadApi.js / screens/input/useEmlisThread.js | server bootstrapで専用readerを選ぶ。read_only、未作成、結果不明、競合/再送、owner/epoch境界。 |
+| App screens/input/EmlisThreadModal.js | 現在本文を先頭、過去本文と元入力は展開。送信中/結果不明cacheを現在扱いしない。 |
+| App screens/InputScreen.js / navigation/RootNavigator.js | 旧modal/Piece導線を維持し、アカウントごとにprivate state再作成。古いcallback/応答を排除。 |
+| App lib/apiClient.js / lib/api/home/emotionSubmitApi.js / lib/api/home/emotionPieceApi.js | 入力/Pieceの4書込みで開始ownerとtokenを同じsessionから照合し、切替後の別人認証による送信を防ぐ。旧呼出しは追加任意引数で互換。 |
+| API api_contract_registry.py / ai/docs/PUBLIC_API_REGISTRY.md | additive can_writeとmode条件、旧public statusの維持。 |
+| API ai/tests/test_emlis_q4_application.py / fixtures/emlis_q4_synthetic_saved_rounds_20260911.json | mode・旧client・Q2/Q3保存版・停止/回復・実本文/inverse。22ケースの実RPC保存結果。 |
+| App tests/emlis-thread.test.js / tests/rn-screen-contracts.test.js | 実hook/component/API clientの操作と認証競合、既存36screen契約。 |
+
+直接変更しない影響本文として、APIの元入力保存・国家dispatch、app route登録、thread store/履歴/回答更新/投影/本文surface/独立gate、Q2/Q3 migration、認証・subscription・retention・親/account削除、RNのAuthContext・AnalysisHistoryScreen・Home actions/state・draft保存・旧feedback modal・Piece previewと共通API façadeを確認した。補足回答は元入力に所属し、国家件数・花・通知・Astor queue、Piece/Analysis/TodayQuestionへ新しい入力として送らない。
+
+全体図・両repositoryの全treeと役割地図を参照した。旧inventoryの件数を新headの全体再生成と称さず、関係の薄いfileは役割と接点を確認する。System Context v1は使わず原典を直接確認。実適用手順はAPI EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md §9、検証と品質残件は正本06/API既存handoffのQ4節。
+
+
+Q4回答名詞化の追加差分：既存Human Reception／Sentence Surface／Observation Gateの3owner内。Q1とQ4の既存testを更新し、新しい公開保存snapshot `ai/tests/fixtures/emlis_q4_synthetic_saved_nominals_20260911.json` を追加した。新しいproduction file・作者・routeはなく、国家・他core・旧経路の役割地図は上記Q4境界を継承する。旧snapshotと旧検証記録は保持。
+
+
+## 2026-09-12 Q4 — 未反映回答範囲の既存owner接続
+
+新production file・作者・routeはない。以下は既存owner内の責務追加で、API sourceはai/services/ai_inference/以下。公開wire・schema field・DDL・RN経路は不変。
+
+| 既存owner | 追加した責務 |
+|---|---|
+| cocolon_meaning_experience_engine/emlis_answer_update.py | 未解釈回答の連続spanをanswer_interpretation_unresolved境界へ投影。sourceのscalar_startに基づく引用内文脈を採用前に確認する。 |
+| cocolon_meaning_experience_engine/emlis_thread_source.py | 同一envelope/fieldの連続qualified spansから、区切りを含む原文を復元する。逆順・飛越し・重複・外部根拠を拒否。 |
+| cocolon_meaning_experience_engine/emlis_thread_projection.py | 処理限界を採用意味の未知graphと区別。意味上の未知に関する従来の能力判定を保持。 |
+| emlis_ai_grounded_sentence_surface.py | 同じsentence planの既存limited_scopeへ必須限界句を組込み、原文と処理限界の述語を表示。厳密な入れ子引用検査。 |
+| emlis_ai_grounded_observation_gate.py | 完成本文を独立して読み、境界全件・順序・原文・述語の一致を検査。source内疑問符の例外を検証済み限界句に限定。 |
+
+Human Reception作者、thread store/API、Q2/Q3 SQL、RN current readerは既存接続を維持する。意味更新後に本文を検証できなければcurrentなし、過去本文非currentの境界は変更しない。内部契約は正本05、商品判断と全検証は正本06/API既存handoffの同日追記を参照。本人の不明のHR受容と中心感情選択・読みやすさは未完了、商品NOT_CLEAR。
+
+
+## 2026-09-12 Q4 — 現在の不明と原反応を保持する既存owner接続
+
+新production file・作者・routeはない。意味採用・保存・公開wire・schema field・DDL・RN経路は変更しない。
+
+| 既存owner（API ai/services/ai_inference/以下） | 追加した責務 |
+|---|---|
+| emlis_ai_grounded_observation_plan.py | 既存の認識上の不明の有限文法に現在時点の修飾を許容。採用済みの現在の自己認識状態をsource/属性/時点から検証し、単一出来事・単一回答・未撤回・一意ABOUTの場合に既存の原反応保持groupへ渡す。 |
+| emlis_ai_grounded_human_reception.py | 状態を感情へ読み替えず、既存FINITE名詞化で元の反応と回答時点の不明を同じHRへ保持。IRも単一eventに限定し、既存の独立本文inverseを通す。 |
+
+共有stage1での初回の不明の受け止め改善と、Q3初回の実経路のUNAVAILABLEは別に扱う。後者のUNKNOWNとaffected nucleusの接続は未解消。意味/選択/契約の次の補修点、対応範囲と全検証は正本06/API既存handoffの同日節を参照する。商品NOT_CLEAR、既定OFF。
+
+
+### 2026-09-12 初回の現在の不明を既存意味経路へ接続
+
+新規file・owner・route・schema fieldは追加しない。`emlis_thread_projection.py` は既存の source-explicit epistemic boundary と原nucleus・完全source span・hedge-only・limiting-unknown roleの一致を確認する。UNKNOWN node / owner / material unknown refs は維持する。`contracts.py` の共有導出は、同一の完全証拠、必要owner、現在の本人の不明、唯一のrequired UNFINISHED contributionがあるときだけ、その原文nodeを不明の対象として返す。`emlis_input_specific_meaning.py` はこの対応をbasisへ用い、実Q1/Q3のview検証でもunknown coverage・basis・compatibilityを独立に再導出する。限定された単一UNFINISHEDのappraisalは既存LEAVE_UNFINISHEDを使用する。文面専用routeや作者は追加しない。

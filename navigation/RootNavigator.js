@@ -70,5 +70,5 @@ export default function RootNavigator() {
 
   if (recoveryMode) return <AuthScreen />;
   if (!session) return <AuthScreen />;
-  return <MainTabs key={`main-tabs-${tutorialResetToken || 0}`} />;
+  return <MainTabs key={`main-tabs-${session.user.id}-${tutorialResetToken || 0}`} />;
 }
