@@ -2561,3 +2561,17 @@ source-modeや意味schemaを変えるQ3では既存checkpointを黙って再利
 cocolon.emlis_thread.application.v1へboolean can_writeを追加。読取り専用ではfalse、can_retry/can_continueもfalse。既存state・body_state・question_limit・profile・revisionの意味は維持する。app.bootstrap.v1のfeature_flagsへemlis_threads_enabledを追加し、欠落時false。旧input_feedbackはpassed＋comment_textのままで、QUESTION_PENDINGやprivate checkpointを露出しない。
 
 実modeはEMLIS_APPLICATION、保存profileは既存q2.free.one_round.v1／q3.plan.sequential.v1。旧Q2をQ3上限へ自動昇格しない。意味schema、元source bytes、source prefixのidentityをmode追加だけで変えず、保存checkpointの再計算を正常回復の条件にしない。Q4追加DDLなし。Q2→Q3追加migrationの順序と停止/互換回復はAPI運用資料§9がowner。
+
+
+## 2026-09-12 Q4 — 未解釈回答範囲の内部境界
+
+公開wire cocolon.emlis_thread.application.v1、意味schemaのfield、source encoding/segmentation/qualified span ID、保存profileと状態・質問数・権限は変更しない。既存GroundedUnknownBoundaryのfree-string dimensionへ次の内部区別を登録する。元回答・保存checkpointの意味採用と本文出力上の処理限界を混同しない。
+
+| 内部境界 | 生成根拠と責務 |
+|---|---|
+| answer_interpretation_unresolved | checkpoint.unresolved_partsの実在するqualified回答spanに限定。連続した未解釈範囲だけを束ね、affected_nucleus_idsは空、surface_policyはdo_not_claim。採用意味の未知graphには加えず、同じsentence planのlimited_scope / render_limited_scopeで必須表示する。claim_scopeはunresolved_answer_interpretation。 |
+| source_explicit_epistemic_limit等の意味上の未知 | 本人sourceから採用された未知として従来のgraph・LIMITED能力判定を保持する。上記処理限界の除外条件を流用しない。 |
+
+answer_interpretation_unresolvedの句はsource envelopeの同一field内で順序・連続性・一意性を確認した原文を用い、sourceの区切りと引用文脈を保持する。意味を採用できないことを本人の不明へ変換しない。完成本文の独立inverseは必須境界と根拠引用・外側述語の全件対応を検査し、同時削除/付替えや意味の反転を拒否する。引用内の疑問符はこの検証済み句のsource部分に限る。quoted spanの採用前確認はcanonical scalar_startを用い、sourceを再分割・再符号化しない。
+
+歴史的snapshotは保持し、現行共有owner identityだけを更新した。新しい公開field・state・DDL・rendererはなく、保存版を再計算して正常回復した扱いにしない。本人の不明を意味として採用しHRへ接続する残件は未完了。品質結果は同日06/API handoff、責務地図はcurrent_structure01を参照。

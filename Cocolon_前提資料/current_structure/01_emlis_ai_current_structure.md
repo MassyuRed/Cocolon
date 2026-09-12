@@ -801,3 +801,18 @@ Q1・Q2・Q3のコード実装を完了として記録し、次はQ4の実装統
 
 
 Q4回答名詞化の追加差分：既存Human Reception／Sentence Surface／Observation Gateの3owner内。Q1とQ4の既存testを更新し、新しい公開保存snapshot `ai/tests/fixtures/emlis_q4_synthetic_saved_nominals_20260911.json` を追加した。新しいproduction file・作者・routeはなく、国家・他core・旧経路の役割地図は上記Q4境界を継承する。旧snapshotと旧検証記録は保持。
+
+
+## 2026-09-12 Q4 — 未反映回答範囲の既存owner接続
+
+新production file・作者・routeはない。以下は既存owner内の責務追加で、API sourceはai/services/ai_inference/以下。公開wire・schema field・DDL・RN経路は不変。
+
+| 既存owner | 追加した責務 |
+|---|---|
+| cocolon_meaning_experience_engine/emlis_answer_update.py | 未解釈回答の連続spanをanswer_interpretation_unresolved境界へ投影。sourceのscalar_startに基づく引用内文脈を採用前に確認する。 |
+| cocolon_meaning_experience_engine/emlis_thread_source.py | 同一envelope/fieldの連続qualified spansから、区切りを含む原文を復元する。逆順・飛越し・重複・外部根拠を拒否。 |
+| cocolon_meaning_experience_engine/emlis_thread_projection.py | 処理限界を採用意味の未知graphと区別。意味上の未知に関する従来の能力判定を保持。 |
+| emlis_ai_grounded_sentence_surface.py | 同じsentence planの既存limited_scopeへ必須限界句を組込み、原文と処理限界の述語を表示。厳密な入れ子引用検査。 |
+| emlis_ai_grounded_observation_gate.py | 完成本文を独立して読み、境界全件・順序・原文・述語の一致を検査。source内疑問符の例外を検証済み限界句に限定。 |
+
+Human Reception作者、thread store/API、Q2/Q3 SQL、RN current readerは既存接続を維持する。意味更新後に本文を検証できなければcurrentなし、過去本文非currentの境界は変更しない。内部契約は正本05、商品判断と全検証は正本06/API既存handoffの同日追記を参照。本人の不明のHR受容と中心感情選択・読みやすさは未完了、商品NOT_CLEAR。
