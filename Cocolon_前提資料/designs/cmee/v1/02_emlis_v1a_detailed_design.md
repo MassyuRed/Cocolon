@@ -3236,3 +3236,10 @@ PARTIAL回答の未解釈根拠を、採用済みの意味/HRとは別の処理�
 採用済みの本人・現在・否定・不明を表す単一の有限節は、原文の時点・継続・程度・否定を保って返す。外側から感覚と呼び替えたり現在時点をもう一度補ったりしない。既存の共有Sentence Surfaceと独立inverseで、Q1のlimited句とQ3の観察句の双方に同じ原文義務を持たせる。LIMITEDとunknown保持、出来事・理由の補完禁止は変えない。回答時点・関係付き・複合文・未反映回答の処理限界へは適用しない。
 
 全検証・実装source・保存結果は同日06/API handoffを参照。裸の不明の初回停止、短い不明のHR参照、長い再掲・中心感情・複数主題・関係選択は残件で、商品NOT_CLEARを維持する。新owner/schema/DDL/RNなし、STRUCTURE_MAP_DELTA_NONE、既定OFF・Draft/open/unmerged。
+
+
+### 2026-09-12 短い初回不明の原文保持とfinal context整合
+
+初回の本人・現在・否定・不明の有限文は、時点・継続・程度・表記を原文どおりに保持して既存のObservationと単一felt_responseへ返す。final OPで唯一のmemo核の原文全域・required/explicitを証明した場合のみ、既存selected-label contextをsource ownerのACTIVE_OPTIONALへ整合させる。labelの値・ID・証拠、旧I5・material quality・required unknown/UNFINISHEDは保持する。HRは既存のこと名詞化を用い、独立inverseは目的語全体を原文と照合し、修飾追加・削除・引用・再掲・否定や格の改変を拒否する。複合文・複数Move・関係付きの一般化は未達。
+
+検証・実装sourceは同日06/API handoffを参照。固定必須回帰は426 PASS / 13 FAIL（既存9＋原文保持と固定参照の不一致4）で、別途診断を元のPASSに換算しない。本文100件と保存69ケース170状態を全件読解。中心感情・不明より補助行動を受け止める対象選択、主題・関係、長い再掲が残り、商品NOT_CLEAR。既存4owner内、STRUCTURE_MAP_DELTA_NONE、既定OFF・Draft/open/unmerged。
