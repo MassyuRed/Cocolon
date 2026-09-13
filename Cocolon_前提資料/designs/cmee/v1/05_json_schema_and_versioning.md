@@ -2671,3 +2671,18 @@ Observationの敬体活用も独立inverseで照合し、全文一致を証明�
 選択 group は、この両核に加えて required／user-stated contrast と既存の別欄行動証明を必要とする。optional な接続詞が observation-owned inventory から外れても、原文全域の証明と必須関係は保持する。source group を候補保持と深さ選択の両方へ渡し、関係なしの COMPOSITE の制約は緩めない。既存の対照 realization と RR4 aggregate を使用するため、新しい名詞化 marker は追加しない。
 
 独立 inverse は、各観測引用に暫定 host／行動候補の評価が全体として残ることを原文から検査する。別の layer や残った形容詞だけでは省略を補償しない。現行 shared-owner snapshot だけを実装から再導出し、過去の固定期待値・閾値・receipt は保持する。
+
+### 2026-09-13 継続 — 独立した判断対象と検討開始時期を保つ
+
+公開wire・schema field・enum・保存profileは変更しない。既存attribute_codesと内部名詞化markerに、原文全域の証明を持つ次の区別を記録する。
+
+| 内部表現 | 範囲 |
+|---|---|
+| `lexical:source_independent_decision_choice` | 現在の肯定進行の迷い。uncertainty / uncertain / neutral / present。 |
+| `lexical:source_independent_decision_timing` | 独立した検討開始時期の未決。uncertainty / uncertain / negative / present。 |
+| `source_decision_scope:<role>:<start>:<end>` | object・host、および時期側のproposal・consideration・timeの原文内範囲。新しい推論許可ではない。 |
+| `source-independent-decision:0:1` / `:1:0` | 既存COMPOSITEの二対象とfocus順。完全な節とprofileを再照合する。 |
+
+二つの既存source_explicit_epistemic_limitは、各一核・同じ証拠span・hedge_onlyを保持する。neutralのUNKNOWN carrier追加条件は完全なchoice hostと既存の一意owner・qualifier・寄与・証拠を必要とし、neutralラベルだけでは結べない。完成本文の有限hostを完全一致で証明した場合だけ、一般的な未知語markerに依存せず未決の保持を認める。深さの閾値を変えない。
+
+現行shared-owner snapshotのみを変更した5ownerから再導出し、過去の期待値・閾値・receiptを保持する。検証は正本06/API既存handoffに集約する。

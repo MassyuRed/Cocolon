@@ -908,3 +908,17 @@ Human Reception作者、thread store/API、Q2/Q3 SQL、RN current readerは既�
 既存 ObservationPlan owner で、対象についての暫定評価と、行動候補についての別の評価を、完全な原文の述語・節境界から識別する。必須の原文 contrast を保持して既存の対照 HR へ渡し、別欄の実行済み行動は別 Move に保つ。証明済み group の候補保持と深さ選択を初回 adapter／回答後経路で揃え、明示 focus を上書きしない。独立 inverse owner は観測の各評価 host が完全に残ることを検査する。
 
 変更 owner は `emlis_ai_grounded_observation_plan.py` と `emlis_ai_grounded_observation_gate.py`。本文作者、関係を持たない material-pair COMPOSITE、sealed claim、RR4 aggregate の既存契約を使用する範囲は従来どおりで、対照を関係なしへ変換して通す修正ではない。新しい作者・公開入力・質問／回答の採用条件は追加しない。意味の範囲は正本02、内部表現は正本05、最終検証と残件は正本06／API既存handoffの同見出しを参照する。
+
+### 2026-09-13 継続 — 独立した判断対象と検討開始時期を保つ
+
+完全な本人のmemo二節を照合し、判断に迷う対象と、それとは独立した「検討を始める時期」の未決を、共有選択・観測・受け止めへ保つ。別欄の実行済み行動は従来の証明を必要とし、別Moveに残す。対象・時期・内側の行動候補を原文の各hostから切り離さない。
+
+| 既存owner（API `ai/services/ai_inference/`以下） | 責務差分 |
+|---|---|
+| `emlis_ai_grounded_observation_plan.py` | 二つの未決hostと内側の原文範囲を証明し、既存uncertaintyへ整合する。明示された独立性をsource順だけのrequired関係にせず、両対象を既存選択へ渡す。 |
+| `cocolon_meaning_experience_engine/contracts.py` | 肯定形の迷いをneutralのまま、同じ完全なsource objectに属するUNKNOWNへ結ぶ。既存のowner・証拠・UNRESOLVED・寄与条件を維持する。 |
+| `emlis_ai_grounded_human_reception.py` | 選択された二対象を既存COMPOSITEへ渡す。丁寧形は連体形へ活用し、時期側focusでは独立性の指示語を対応する後節へ置く。 |
+| `emlis_ai_grounded_sentence_surface.py` | 完全な未決hostを既存有限文で述べる。行動案を実行済みにしない。 |
+| `emlis_ai_grounded_observation_gate.py` | 原文の完全host・否定・検討開始の入れ子・独立性を本文から独立照合する。活用・focus順の対応は全対象一致が条件。 |
+
+既存の単一作者、sealed claim、非空・排他・全量の寄与分配を使用する。問い・回答理解・公開wire・保存・RN・activationの変更はない。意味は正本02、内部表現は05、検証と残件は06/API既存handoffの同見出しを参照する。
