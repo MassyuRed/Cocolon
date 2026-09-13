@@ -2611,3 +2611,16 @@ groupと独立行動が同じsealed claimを共有する場合、二つのMove�
 | `source-current-material:1:0` | 暫定判断をtarget、気持ちをcontextとする。headerはnegative/uncertain、COMPOSITE・`target_slot_count=1`（targetはIR slot 0）・`context_slots=(1,)`・2 fragments/profiles・関係なし。検証では気持ち／判断の原文役割順へ戻して従来の有限文法を照合し、本文はtarget/contextの選択順で生成する。 |
 
 逆順markerは意味役割やsource順の交換ではない。targetが元の判断、supportが元の気持ちであることを照合し、完成本文は独立inverseで原文の両対象・否定・時点・留保を保持する。`source-feeling-reason-boundary:0:1`へ逆順許可を広げない。groupと独立行動の寄与は従来のsealed claim・非空・排他・全量条件を保持する。内部focus対応を質問・回答の新契約へ換算しない。正本06/API handoffの同見出しへ検証と未解消範囲を記録した。商品NOT_CLEAR。
+
+### 2026-09-13 継続 — 完結した負担と別節の言いかけを区別する
+
+公開wire・意味schema field・enum・source segmentation/encoding・保存profileは変更しない。既存attribute_codesへ、原文全域と節間区切りを照合した内部区別を追加する。
+
+| 内部marker | 証明する範囲 |
+|---|---|
+| `lexical:source_nominal_constraint_clause` | 単一spanの完結した名詞述語。既存のrequired/explicit・本人・現在・constraint/negative/possibilityを保持し、程度・留保・指示対象を落とさない。 |
+| `lexical:source_unfinished_utterance_clause` | 疑問詞・任意の格助詞・問いの導入・未完の修飾語・省略記号からなる別spanの発話範囲。欠けた主述語、その内容・主体・時点・unknown・前節との因果は証明しない。 |
+
+負担だけのmemo、またはその後ろに上記の未完発話を一つ伴うmemoを照合する。任意prefix、有限の主張、後置報告・撤回を末尾だけで許可しない。独立行動を含む選択groupでは、全text対象、既存の実行証明、非requiredのuncertain_connectionという境界を照合する。明示focusを上書きしない。
+
+HRは選択された原文と参加spanを再照合して既存の「という言葉」を使用する。独立inverseは完成本文の目的語全体を左端から一致させる。共有claimの分配は既存のclaim・branch・命題・basis・qualifierと非空・排他・全量条件を保持する。未知保持や全欄の省略記号制限は解除しない。責務はcurrent_structure01、検証と反映は正本06/API既存handoffの同見出しを参照する。

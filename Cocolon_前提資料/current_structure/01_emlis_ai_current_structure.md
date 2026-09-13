@@ -860,3 +860,16 @@ Human Reception作者、thread store/API、Q2/Q3 SQL、RN current readerは既�
 | `cocolon_meaning_experience_engine/emlis_stage1_response.py` | 対象判断focusのgroupと独立行動について、既存sealed claimの非空・排他・全量分配へ順序を対応させる。 |
 
 問い選択・回答理解・アプリ操作は増やしていない。正本05の内部markerと、正本06/API handoffの同見出しが固定source・全検証・残件を所有する。全100初回と既存保存内容は不変、内部focusでの実作者到達を改善。商品NOT_CLEAR。
+
+### 2026-09-13 継続 — 完結した負担と別節の言いかけを区別する
+
+原文境界から、完結した名詞述語の負担と、主述語の手前で止まった別の発話を区別する。前者を後続の省略記号だけで失効させず、独立した実行済み行動とともに共有フォローへ保持する。
+
+| 既存owner（API `ai/services/ai_inference/`以下） | 今回の責務差分 |
+|---|---|
+| `emlis_ai_grounded_observation_plan.py` | 名詞述語の完結、任意の別spanの未完発話、原文全域と節間区切りを照合し、既存の本人・現在・constraint/negative/possibilityを保持して対象選択へ接続する。明示focusは維持する。 |
+| `emlis_ai_grounded_human_reception.py` | 選択された負担と各spanを再照合し、既存名詞化の「という言葉」で程度・留保を保つ。未完内容を補わない。 |
+| `emlis_ai_grounded_observation_gate.py` | 完成フォローの目的語を左端から独立に復元し、原文全体と照合する。部分一致だけで主体・原因・補完内容の追加を認めない。 |
+| `cocolon_meaning_experience_engine/emlis_stage1_response.py` | 負担と独立行動が共有するsealed claimを、既存の非空・排他・全量の寄与分配へ対応させる。 |
+
+未完markerは内容・主体・時点・unknown・前節との因果を証明しない。新production file・作者・公開routeを追加せず、問い選択・回答解釈・保存・plan差・国家システム・他中核のsource許可は変更しない。内部表現は正本05、検証・反映と残件は正本06/API既存handoffの同見出しを参照する。商品NOT_CLEAR、既定OFFを維持する。
