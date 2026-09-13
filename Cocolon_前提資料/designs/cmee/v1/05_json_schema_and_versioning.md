@@ -2624,3 +2624,21 @@ groupと独立行動が同じsealed claimを共有する場合、二つのMove�
 負担だけのmemo、またはその後ろに上記の未完発話を一つ伴うmemoを照合する。任意prefix、有限の主張、後置報告・撤回を末尾だけで許可しない。独立行動を含む選択groupでは、全text対象、既存の実行証明、非requiredのuncertain_connectionという境界を照合する。明示focusを上書きしない。
 
 HRは選択された原文と参加spanを再照合して既存の「という言葉」を使用する。独立inverseは完成本文の目的語全体を左端から一致させる。共有claimの分配は既存のclaim・branch・命題・basis・qualifierと非空・排他・全量条件を保持する。未知保持や全欄の省略記号制限は解除しない。責務はcurrent_structure01、検証と反映は正本06/API既存handoffの同見出しを参照する。
+
+
+### 2026-09-13 継続 — 回想・現在の不明・条件付きの変化を区別する
+
+公開wire・意味schema field・enum・source segmentation/encoding・保存profileは変更しない。既存attribute_codesと名詞化planへ、完全なmemo二節の証明に限定した内部区別を追加する。
+
+| 内部marker | 保持する範囲 |
+|---|---|
+| `lexical:source_temporal_causal_unknown` | 原因の同一性が不明である現在のhost。既存型uncertainty、uncertain、negativeを使用し、回想内の過去を現在の状態へ変えない。 |
+| `lexical:source_temporal_relief_residue` | 条件を含む軽減と残存の現在host。既存型change、fact、mixedを使用する。factは完全な文のhostに対する属性であり、内側の条件節を実行済み行動とする証明ではない。 |
+| `source_clause_scope:<role>:<start>:<end>:<scope>` | 改変しない各原文節の内部範囲に対する回想対象・回想host・現在の不明対象/host・条件・変化・残存の役割と時点。独立した入力、保存件数、実行済み行動、原因関係を追加しない。 |
+| `source-temporal-material:0:1` / `source-temporal-material:1:0` | 既存COMPOSITEの二対象を、現在の変化→不明、または既存focusに従う不明→現在の変化の順に本文化する内部marker。source順・意味役割は交換しない。 |
+
+採用は完全な二節の組に限定する。節単体のparserが文法を認識できることを、単独節の採用・選択対応へ読み替えない。別欄の独立行動は従来の実行証明を必要とする。required関係・未知保持を一律に緩めず、欄順だけを根拠とする関係を因果として出力しない。寄与分配は従来のsealed claim・非空・排他・全量条件を維持する。
+
+現行の共有owner snapshotは変更した5ownerへ整合し、historical fixture/receiptは変更しない。公開合成検査は `ai/tests/test_cmee_emlis_q3_thread.py`、現行owner snapshotは `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` を使用する。検証実績と未確認は正本06/API既存handoffへ記録する。
+
+証明済みの残存節が丁寧形で終わる場合、HRの名詞化前に現在進行の連体形へ活用する。Surfaceの原文表示は保ち、独立inverseも同じ時制・相・否定を照合する。丁寧形へそのまま「こと」を付けない。source_clause_scopeはOP内部の範囲記録であり、下流は全節原文とprofile・markerを再照合する。独立の多時点推論器を追加したものではない。

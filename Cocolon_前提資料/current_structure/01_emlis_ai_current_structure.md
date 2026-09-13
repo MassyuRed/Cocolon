@@ -873,3 +873,18 @@ Human Reception作者、thread store/API、Q2/Q3 SQL、RN current readerは既�
 | `cocolon_meaning_experience_engine/emlis_stage1_response.py` | 負担と独立行動が共有するsealed claimを、既存の非空・排他・全量の寄与分配へ対応させる。 |
 
 未完markerは内容・主体・時点・unknown・前節との因果を証明しない。新production file・作者・公開routeを追加せず、問い選択・回答解釈・保存・plan差・国家システム・他中核のsource許可は変更しない。内部表現は正本05、検証・反映と残件は正本06/API既存handoffの同見出しを参照する。商品NOT_CLEAR、既定OFFを維持する。
+
+
+### 2026-09-13 継続 — 回想・現在の不明・条件付きの変化を区別する
+
+現在の原因が以前と同じかという不明と、条件を伴う現在の軽減・残る負担を、完全なmemo二節の原文から区別し、共有フォローへ渡す。回想内の過去、現在の不明、条件節、変化と残存の範囲を同じ現在の出来事へ平板化しない。新しいproduction file・作者・公開routeは追加しない。
+
+| 既存owner（API `ai/services/ai_inference/`以下） | 今回の責務差分 |
+|---|---|
+| `emlis_ai_grounded_observation_plan.py` | 完全なmemo二節と本人・原文全域・節境界を照合し、不明の現在hostと、軽減・残存の現在hostを既存属性へ投影する。内側の原文範囲と時点・条件の役割を保持し、既存対象選択へ接続する。明示focusと独立行動の別義務を維持する。 |
+| `emlis_ai_grounded_human_reception.py` | 選択された二対象を既存COMPOSITE名詞化へ接続し、focusに従う本文順でも不明の範囲・条件・軽減・残存を保持する。条件節を実行済み行動へ変えず、因果を補わない。 |
+| `emlis_ai_grounded_sentence_surface.py` | 証明済みの現在の認識上の不明を既存の独立した有限文へ接続し、隣接する変化や負担へ不明を広げない。 |
+| `emlis_ai_grounded_observation_gate.py` | 完成本文から二対象と不明の述語を独立に照合し、時点・条件・否定・残存・不明範囲の改変や因果の追加を拒否する。作者replayだけで成立を認めない。 |
+| `cocolon_meaning_experience_engine/emlis_stage1_response.py` | 不明側へfocusが移った場合も、二対象groupと独立行動の寄与を既存の非空・排他・全量分配へ対応させる。 |
+
+対象は完全な二節の組に限定し、単独節・任意の多主題・未完断片まで対応したとは扱わない。既存Q1の本人・時点に関するadmission条件は変更しない。共通描画とQ3実初回の成立、Q1実初回の提供可否を分けて記録する。問い選択・回答解釈・保存・plan差・国家システム・他中核のsource許可は変更しない。内部表現は正本05、検証と残件は正本06/API既存handoffの同見出しを参照する。商品NOT_CLEAR、既定OFFを維持する。
