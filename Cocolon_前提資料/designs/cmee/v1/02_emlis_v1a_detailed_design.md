@@ -3294,3 +3294,7 @@ weekly20260912 Rev2の9/16共通修正・9/18比較・9/19判断と2027年1月�
 実装sourceはAPI `56ba51e847ca05461c3618ebaa630879cfa1139c`、tree `8df87218ac82b3bcce856fdcea8742e4ac5b625c`。固定検証local `0bf56c3e34933e990736f9601da2fdfd500f8137` と同tree。実装4file・公開合成検査・現行owner identityの計6fileをGitHubから全文再取得して一致確認した。
 
 同じ100入力で1件の観察・HRを改善し、他99件は全record一致。全可否/理由と既存保存内容を保持した。必須426/439 PASS・Q1〜Q4 425/427 PASS、既存FAILを残す。保存は追加9を含め90ケース191状態・226GET一致。全本文確認、途中不採用・旧経路停止・未解消範囲は同日06/API handoff参照。商品NOT_CLEAR、既定OFF・Draft/open/unmerged。
+
+### 2026-09-13 継続 — 暫定的な対象判断へ焦点を移しても両対象を保持する
+
+既存内部focusが暫定判断側を選んだ場合の共有フォローを補修した。判断のnegative/uncertainと併存する気持ちを保持し、選択順に両対象を述べる。OP→既存HR作者→独立inverse→Stage1の4owner内を更新し、質問選択・回答解釈の範囲は変えない。既存100初回・保存90ケース191状態は全内容一致で、初回100件の新規本文改善数は0。内部focusの実作者到達に関する追加10検査は旧版FAIL・修正版PASS。固定source・全検証・商品NOT_CLEARと残件は正本06の同見出し、責務はcurrent_structure01、内部表現は正本05を参照。

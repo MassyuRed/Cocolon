@@ -2600,3 +2600,14 @@ groupは二つのmemo対象だけ、または別欄の本人の実行済み行�
 groupと独立行動が同じsealed claimを共有する場合、二つのMoveの順序にかかわらず、そのclaim・branch・meaning outcome・binding・命題・basis・qualifierを一致させ、focal relationがないことを確認する。target/supportの対象集合と寄与集合はそれぞれ非空・排他・全量でなければならない。Q1の正確な分配済み参照とQ3の完全共有参照だけを扱い、任意の部分集合・混在・欠落を補完しない。既存HR作者と完成本文の独立inverseが原文二対象を検査する。
 
 これは選択・名詞化・寄与対応の限定的な補修であり、質問選択や回答採用の新契約ではない。対象判断節への明示focusを選択で保持したことを、その汎用本文生成の成立へ換算しない。責務地図はcurrent_structure01、固定sourceと実検証・残件は正本06/API既存handoffの同日継続節を参照する。商品NOT_CLEARを維持する。
+
+### 2026-09-13 継続 — 暫定的な対象判断へ焦点を移しても両対象を保持する
+
+既存の完全source照合で`lexical:source_current_material_primary`と`lexical:source_current_material_qualification`を持つ隣接2節に限り、名詞化planの内部markerへ`source-current-material:1:0`を追加する。公開wire・意味schema field・enum・保存profileは変更しない。
+
+| marker | target/contextと検証 |
+|---|---|
+| `source-current-material:0:1` | 従来どおり気持ちをtarget、暫定判断をcontextとする。 |
+| `source-current-material:1:0` | 暫定判断をtarget、気持ちをcontextとする。headerはnegative/uncertain、COMPOSITE・`target_slot_count=1`（targetはIR slot 0）・`context_slots=(1,)`・2 fragments/profiles・関係なし。検証では気持ち／判断の原文役割順へ戻して従来の有限文法を照合し、本文はtarget/contextの選択順で生成する。 |
+
+逆順markerは意味役割やsource順の交換ではない。targetが元の判断、supportが元の気持ちであることを照合し、完成本文は独立inverseで原文の両対象・否定・時点・留保を保持する。`source-feeling-reason-boundary:0:1`へ逆順許可を広げない。groupと独立行動の寄与は従来のsealed claim・非空・排他・全量条件を保持する。内部focus対応を質問・回答の新契約へ換算しない。正本06/API handoffの同見出しへ検証と未解消範囲を記録した。商品NOT_CLEAR。

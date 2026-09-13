@@ -847,3 +847,16 @@ Human Reception作者、thread store/API、Q2/Q3 SQL、RN current readerは既�
 | `cocolon_meaning_experience_engine/emlis_stage1_response.py` | 同じsealed claimを共有するgroupと独立行動の寄与を、Move順に依存せず既存の非空・排他・全量分配へ対応させる。対象・support・命題・basis・qualifierの一致条件を維持する。 |
 
 明示focusは選択で優先する。対象判断節へのfocusを勝手に気持ちへ戻さないが、その選択に対する汎用rendererの未対応まで解消したとは扱わない。質問選択・回答解釈の対応範囲は拡張していない。内部表現の区別は正本05、固定source・実本文・全検証・未解消範囲は正本06/API既存handoffの同日継続節を参照する。商品NOT_CLEAR、既定OFF・Draft/open/unmergedを維持する。
+
+### 2026-09-13 継続 — 暫定的な対象判断へ焦点を移しても両対象を保持する
+
+既存の完全source証明を持つ気持ち／対象判断groupで、明示focusが対象判断側なら、その判断をtarget・気持ちをsupportにして本文の順序まで一致させる。新規production file・owner・作者・公開wire・route・DDL・RN変更はない。
+
+| 既存owner（API `ai/services/ai_inference/`以下） | 今回の責務差分 |
+|---|---|
+| `emlis_ai_grounded_observation_plan.py` | 対象判断focusでもcurrent_burden groupを保持し、両対象の具体参照と独立行動の別義務を選ぶ。意味核の型・原文・時点・関係を変更しない。 |
+| `emlis_ai_grounded_human_reception.py` | 逆順COMPOSITEを既存原文の役割順で検査し、選択された順で両有限節を名詞化する。対象判断のnegative/uncertainを保持する。 |
+| `emlis_ai_grounded_observation_gate.py` | 完成本文から選択順の2対象を独立照合し、片方の削除・時点や留保の変更・原因追加を拒否する。作者replayで代用しない。 |
+| `cocolon_meaning_experience_engine/emlis_stage1_response.py` | 対象判断focusのgroupと独立行動について、既存sealed claimの非空・排他・全量分配へ順序を対応させる。 |
+
+問い選択・回答理解・アプリ操作は増やしていない。正本05の内部markerと、正本06/API handoffの同見出しが固定source・全検証・残件を所有する。全100初回と既存保存内容は不変、内部focusでの実作者到達を改善。商品NOT_CLEAR。
