@@ -2582,3 +2582,21 @@ answer_interpretation_unresolvedの句はsource envelopeの同一field内で順�
 wire schema / enum / source owner数は変更しない。Q1/Q3の既存unknown dimensionだけではsource-object対応の権限を与えない。UNKNOWNはUNKNOWNのまま残し、同じ完全evidenceに結び付く唯一の本人・現在・陰性uncertain nucleus、required owner / provisional-only attachment、単一UNFINISHED/PRESENT_UNFINISHED/NO_RELATION_CLAIMのrequired contributionが揃う場合だけ原文objectへ対応させる。PRIMARYと同一objectのEXPERIENCER以外のargumentを許可しない。adapterでは元boundaryのaffected nucleus・span・hedge-onlyも照合する。
 
 Q1/Q3の実経路にある `validate_grounded_situation_view` で、required UNKNOWN dispositionとmaterial unknown refsの全件一致、各unknown専用basisの対象・証拠・unknown参照と空の他duty欄、compatibilityの正確な対応を再計算する。basisの削除・別対象化・複製・余分なduty混入を許可しない。旧generic source admissionやhistorical unknown grounding-kind契約を広げない。Layer 1 trace必須とuser-fact-effect 0を維持する。
+
+
+### 2026-09-13 継続 — 併存する気持ちと暫定判断の内部表現
+
+公開wire・意味schema field・enum・source segmentation/encoding・保存profileは変更しない。初回memo全域の隣接2節を完全sourceで照合でき、本人の現在の二つの気持ちの併存と、対象の単一性についての暫定判断を表す有限文法に限り、既存属性欄とCOMPOSITE IRへ次の区別を追加する。他者・過去・引用・未完断片・追加のmemo節には一般化しない。
+
+| 内部表現 | 意味と適用条件 |
+|---|---|
+| `lexical:source_current_material_primary` / `lexical:source_current_material_qualification` | 前者はreaction/feeling/mixed/feeling、後者は元のeventまたはstateと同じpredicate・negative・uncertainを保持する。両方ともrequired/explicit・本人・現在・単一の完全spanを要する。対象判断を認識不能や理由不明へ読み替えない。 |
+| `source-current-material:0:1` | 既存名詞化planの内部marker。COMPOSITE・2 fragments/profiles・target slot 0・context slot 1・関係なしに限定し、source文法と原述語を再照合する。従来の`source-feeling-reason-boundary:0:1`は元の証明条件を維持し、二つを同時に付与しない。 |
+
+暫定判断のuncertain modalityと原文の曖昧さは保持する。この完全source証明を持つ判断だけは、uncertain属性から別の`source_explicit_epistemic_limit`を追加導出しない。既にあるunknown境界・UNKNOWN node・material unknown refs・required unknown coverageは除去せず、本人が明示した認識上の不明の既存契約も変更しない。
+
+groupは二つのmemo対象だけ、または別欄の本人の実行済み行動を一つ加えた構成に限る。関係は非requiredのuncertain_connectionに限定し、欄順由来の行動因果を補正する場合も、既存source順のarc・両endpointの完全span・元の構造推論由来・既存権限正規化後の非required・実行証明を照合する。上流でrequiredと付いた欄順の構造推論は既存正規化でshouldになるが、ユーザーが明示した原因や権限を持つrequired関係をこの補正へ流用しない。
+
+groupと独立行動が同じsealed claimを共有する場合、二つのMoveの順序にかかわらず、そのclaim・branch・meaning outcome・binding・命題・basis・qualifierを一致させ、focal relationがないことを確認する。target/supportの対象集合と寄与集合はそれぞれ非空・排他・全量でなければならない。Q1の正確な分配済み参照とQ3の完全共有参照だけを扱い、任意の部分集合・混在・欠落を補完しない。既存HR作者と完成本文の独立inverseが原文二対象を検査する。
+
+これは選択・名詞化・寄与対応の限定的な補修であり、質問選択や回答採用の新契約ではない。対象判断節への明示focusを選択で保持したことを、その汎用本文生成の成立へ換算しない。責務地図はcurrent_structure01、固定sourceと実検証・残件は正本06/API既存handoffの同日継続節を参照する。商品NOT_CLEARを維持する。

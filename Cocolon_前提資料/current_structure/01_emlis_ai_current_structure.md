@@ -833,3 +833,17 @@ Human Reception作者、thread store/API、Q2/Q3 SQL、RN current readerは既�
 ### 2026-09-12 初回の現在の不明を既存意味経路へ接続
 
 新規file・owner・route・schema fieldは追加しない。`emlis_thread_projection.py` は既存の source-explicit epistemic boundary と原nucleus・完全source span・hedge-only・limiting-unknown roleの一致を確認する。UNKNOWN node / owner / material unknown refs は維持する。`contracts.py` の共有導出は、同一の完全証拠、必要owner、現在の本人の不明、唯一のrequired UNFINISHED contributionがあるときだけ、その原文nodeを不明の対象として返す。`emlis_input_specific_meaning.py` はこの対応をbasisへ用い、実Q1/Q3のview検証でもunknown coverage・basis・compatibilityを独立に再導出する。限定された単一UNFINISHEDのappraisalは既存LEAVE_UNFINISHEDを使用する。文面専用routeや作者は追加しない。
+
+
+### 2026-09-13 継続 — 併存する現在の気持ちと暫定的な対象判断
+
+初回memo全域で証明した現在の二つの気持ちの併存と、対象についての暫定判断を、独立した行動より先に受け止める既存経路へ接続する。以下は既存4owner内の責務差分。新規production file・owner・作者・route・schema field・DDL・RN変更はない。
+
+| 既存owner（API `ai/services/ai_inference/`以下） | 今回の責務差分 |
+|---|---|
+| `emlis_ai_grounded_observation_plan.py` | 本人・現在・隣接2節の完全sourceと有限文法を照合し、併存する気持ちをmixedの反応、対象判断を元のevent/state・negative・uncertainとして保持する。別欄の実行済み行動は独立義務へ選択し、欄順だけから生じた非required行動因果をuncertain_connectionへ補正する。暫定判断だけを根拠とする追加のepistemic unknownを作らず、既存unknown境界は保持する。 |
+| `emlis_ai_grounded_human_reception.py` | 既存COMPOSITE IRで気持ちと対象判断の両有限節を保持し、否定・併存・時点・曖昧さを変えず名詞化する。行動が先に選ばれた場合も、後続groupを原文が曖昧になる代名詞へ置換しない。 |
+| `emlis_ai_grounded_observation_gate.py` | 完成HR本文から二つの原文対象を独立に復元し、片方の削除・意味の交換・否定や曖昧さの改変・根拠のない関係追加を拒否する。作者replayだけで一致を認めない。 |
+| `cocolon_meaning_experience_engine/emlis_stage1_response.py` | 同じsealed claimを共有するgroupと独立行動の寄与を、Move順に依存せず既存の非空・排他・全量分配へ対応させる。対象・support・命題・basis・qualifierの一致条件を維持する。 |
+
+明示focusは選択で優先する。対象判断節へのfocusを勝手に気持ちへ戻さないが、その選択に対する汎用rendererの未対応まで解消したとは扱わない。質問選択・回答解釈の対応範囲は拡張していない。内部表現の区別は正本05、固定source・実本文・全検証・未解消範囲は正本06/API既存handoffの同日継続節を参照する。商品NOT_CLEAR、既定OFF・Draft/open/unmergedを維持する。
