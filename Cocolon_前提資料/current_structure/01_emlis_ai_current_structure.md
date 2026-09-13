@@ -901,3 +901,10 @@ Human Reception作者、thread store/API、Q2/Q3 SQL、RN current readerは既�
 | `emlis_ai_grounded_observation_gate.py` | 完成本文を独立照合し、比較・留保・否定・主体・時点の改変を拒否する。原文の程度否定の内側だけを保証語の誤検出から除外し、別の保証追加は拒否する。 |
 
 既存のsealed claim寄与分配・唯一の本文作者・Q1/Q3経路を使用する。新しいproduction file・公開wire・問い選択・回答理解・保存・プラン差・他中核や国家システムのsource許可は変更しない。内部表現は正本05、固定sourceの検証と未解消品質は正本06/API既存handoffの同見出しを参照する。商品NOT_CLEAR。
+
+
+### 2026-09-13 継続 — 対照する二つの評価と独立行動の保持
+
+既存 ObservationPlan owner で、対象についての暫定評価と、行動候補についての別の評価を、完全な原文の述語・節境界から識別する。必須の原文 contrast を保持して既存の対照 HR へ渡し、別欄の実行済み行動は別 Move に保つ。証明済み group の候補保持と深さ選択を初回 adapter／回答後経路で揃え、明示 focus を上書きしない。独立 inverse owner は観測の各評価 host が完全に残ることを検査する。
+
+変更 owner は `emlis_ai_grounded_observation_plan.py` と `emlis_ai_grounded_observation_gate.py`。本文作者、関係を持たない material-pair COMPOSITE、sealed claim、RR4 aggregate の既存契約を使用する範囲は従来どおりで、対照を関係なしへ変換して通す修正ではない。新しい作者・公開入力・質問／回答の採用条件は追加しない。意味の範囲は正本02、内部表現は正本05、最終検証と残件は正本06／API既存handoffの同見出しを参照する。

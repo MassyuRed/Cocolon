@@ -2657,3 +2657,17 @@ HRは選択された原文と参加spanを再照合して既存の「という�
 OPは既存の原文・ID・証拠を保ち、下流は完全な原文・profile・markerを再照合する。内部scope記録だけを独立の推論許可にしない。既存の完全表現group選択、原文名詞化、有限文、sealed claimの非空・排他・全量分配を使用する。別欄の行動は既存の実行証明を必要とし、原文内の逆接を欄間の因果へ昇格しない。
 
 Observationの敬体活用も独立inverseで照合し、全文一致を証明した場合だけ暫定比較をchange内容の保持として扱う。保証語の例外は、完全な名詞構文内で否定に従属する結論の文字範囲に限定する。新しい回復判断・一律の保証語除外はない。現行の共有owner snapshotのみを変更した4ownerから再導出し、歴史的なfixture・receipt・判定基準は保持する。
+
+
+### 2026-09-13 継続 — 対照する二つの評価と独立行動の保持
+
+公開 wire、schema field、enum、保存 profile は変更しない。完全な三spanの原文を証明した場合だけ、既存 attribute_codes へ次の内部区別を記録する。
+
+| 内部 marker | 証明する意味 |
+|---|---|
+| `lexical:source_appraisal_tentative` | 対象への形容詞評価が現在の暫定 host に従属する。既存 event/state と neutral を保持し、modality は uncertain。新たな不明対象を追加しない。 |
+| `lexical:source_appraisal_alternative` | 有限の行動候補を名詞化した評価。既存 event/state・fact・neutral を保持し、実行、拒否行動、意図へ変換しない。 |
+
+選択 group は、この両核に加えて required／user-stated contrast と既存の別欄行動証明を必要とする。optional な接続詞が observation-owned inventory から外れても、原文全域の証明と必須関係は保持する。source group を候補保持と深さ選択の両方へ渡し、関係なしの COMPOSITE の制約は緩めない。既存の対照 realization と RR4 aggregate を使用するため、新しい名詞化 marker は追加しない。
+
+独立 inverse は、各観測引用に暫定 host／行動候補の評価が全体として残ることを原文から検査する。別の layer や残った形容詞だけでは省略を補償しない。現行 shared-owner snapshot だけを実装から再導出し、過去の固定期待値・閾値・receipt は保持する。
