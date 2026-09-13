@@ -2642,3 +2642,18 @@ HRは選択された原文と参加spanを再照合して既存の「という�
 現行の共有owner snapshotは変更した5ownerへ整合し、historical fixture/receiptは変更しない。公開合成検査は `ai/tests/test_cmee_emlis_q3_thread.py`、現行owner snapshotは `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` を使用する。検証実績と未確認は正本06/API既存handoffへ記録する。
 
 証明済みの残存節が丁寧形で終わる場合、HRの名詞化前に現在進行の連体形へ活用する。Surfaceの原文表示は保ち、独立inverseも同じ時制・相・否定を照合する。丁寧形へそのまま「こと」を付けない。source_clause_scopeはOP内部の範囲記録であり、下流は全節原文とprofile・markerを再照合する。独立の多時点推論器を追加したものではない。
+
+### 2026-09-13 継続 — 暫定的な変化と結論を断定できる程度の否定を保つ
+
+公開wire・意味schema field・enum・source segmentation/encoding・保存profileは変更しない。完全な原文に対する以下の区別を既存attribute_codesに記録する。
+
+| 内部表現 | 保持する意味・範囲 |
+|---|---|
+| `lexical:source_provisional_degree` | 本人の現在の暫定比較と、結論を断定できる程度の否定を含む完全な表現。既存change / fact / mixed / current_inputを使用する。factは両方の留保を含む発話全体に対する属性で、内側の変化・結論の確定ではない。 |
+| `source_clause_scope:comparison:<start>:<end>:past_comparison` | 現在と比較される以前の範囲。発話全体を過去の感情へ移さない。 |
+| `source_clause_scope:change:<start>:<end>:under_tentative_host` / `source_clause_scope:tentative:<start>:<end>:present_tentative` | 変化が現在の暫定的な認識に従属している範囲。変化の独立断定を許可しない。 |
+| `source_clause_scope:assertion:<start>:<end>:under_negative_degree` / `source_clause_scope:degree:<start>:<end>:present_negative_degree` | 結論と、その結論を言える程度に達していない現在の否定の範囲。原因不明・回答拒否・新しい意味核を追加しない。 |
+
+OPは既存の原文・ID・証拠を保ち、下流は完全な原文・profile・markerを再照合する。内部scope記録だけを独立の推論許可にしない。既存の完全表現group選択、原文名詞化、有限文、sealed claimの非空・排他・全量分配を使用する。別欄の行動は既存の実行証明を必要とし、原文内の逆接を欄間の因果へ昇格しない。
+
+Observationの敬体活用も独立inverseで照合し、全文一致を証明した場合だけ暫定比較をchange内容の保持として扱う。保証語の例外は、完全な名詞構文内で否定に従属する結論の文字範囲に限定する。新しい回復判断・一律の保証語除外はない。現行の共有owner snapshotのみを変更した4ownerから再導出し、歴史的なfixture・receipt・判定基準は保持する。

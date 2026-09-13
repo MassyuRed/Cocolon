@@ -888,3 +888,16 @@ Human Reception作者、thread store/API、Q2/Q3 SQL、RN current readerは既�
 | `cocolon_meaning_experience_engine/emlis_stage1_response.py` | 不明側へfocusが移った場合も、二対象groupと独立行動の寄与を既存の非空・排他・全量分配へ対応させる。 |
 
 対象は完全な二節の組に限定し、単独節・任意の多主題・未完断片まで対応したとは扱わない。既存Q1の本人・時点に関するadmission条件は変更しない。共通描画とQ3実初回の成立、Q1実初回の提供可否を分けて記録する。問い選択・回答解釈・保存・plan差・国家システム・他中核のsource許可は変更しない。内部表現は正本05、検証と残件は正本06/API既存handoffの同見出しを参照する。商品NOT_CLEAR、既定OFFを維持する。
+
+### 2026-09-13 継続 — 暫定的な変化と結論を断定できる程度の否定を保つ
+
+本人の完全なmemoにある比較上の変化を「気が／は／もする」の現在の留保の下に保ち、後続する結論の「と言える／言い切れるほどではない」と一緒に共有フォローへ渡す。変化だけを確定させず、結論の否定を原因の不明へ読み替えない。
+
+| 既存owner（API `ai/services/ai_inference/`以下） | 今回の責務差分 |
+|---|---|
+| `emlis_ai_grounded_observation_plan.py` | 完全な原文と二つの述語の範囲を照合し、留保を伴う比較と、断定できる程度の否定を一つのmixed表現として保つ。原文内の逆接を別欄の行動との関係にせず、既存の独立対象選択へ接続する。 |
+| `emlis_ai_grounded_human_reception.py` | 両方の述語を含む原文全体を既存の「という言葉」の名詞化へ渡し、行動は別のMoveで受け止める。 |
+| `emlis_ai_grounded_sentence_surface.py` | 原文証明を持つ完全な表現を既存の有限文へ接続する。敬体の接続・末尾だけを活用し、留保・程度否定を保持する。 |
+| `emlis_ai_grounded_observation_gate.py` | 完成本文を独立照合し、比較・留保・否定・主体・時点の改変を拒否する。原文の程度否定の内側だけを保証語の誤検出から除外し、別の保証追加は拒否する。 |
+
+既存のsealed claim寄与分配・唯一の本文作者・Q1/Q3経路を使用する。新しいproduction file・公開wire・問い選択・回答理解・保存・プラン差・他中核や国家システムのsource許可は変更しない。内部表現は正本05、固定sourceの検証と未解消品質は正本06/API既存handoffの同見出しを参照する。商品NOT_CLEAR。
