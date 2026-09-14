@@ -1,0 +1,111 @@
+name: Cocolon System Context fresh-head pytest verifier
+run-name: Verify pytest at exact Draft head @ ${{ github.event.pull_request.head.sha }}
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    paths:
+      - .github/workflows/cocolon-system-context-inventory.yml
+      - .github/workflows/cocolon-system-context-step5-export.yml
+      - .github/workflows/cocolon-system-context-step5-pytest-bootstrap.yml
+      - tools/cocolon_context_prepare.py
+      - tools/cocolon_context_task.py
+      - Cocolon_前提資料/system_context/task_profiles.json
+      - tests/cocolon_context/test_prepare.py
+      - tests/cocolon_context/test_task_context.py
+      - Cocolon_前提資料/system_context/Cocolon_SystemContext_ImplementationContract_20260818.md
+      - Cocolon_前提資料/system_context/current/cmee_working/**
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: ${{ github.workflow }}-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  pytest-current-draft-head:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      EXPECTED_PR_NUMBER: ${{ github.event.pull_request.number }}
+      EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+      EXPECTED_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+      WORKFLOW_ROLE: PYTEST_RUNTIME_VERIFIER
+    steps:
+      - name: Require same-repository PR event
+        env:
+          EVENT_HEAD_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
+          EVENT_BASE_REPOSITORY: ${{ github.event.pull_request.base.repo.full_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$WORKFLOW_ROLE" = "PYTEST_RUNTIME_VERIFIER"
+          test "$GITHUB_EVENT_NAME" = "pull_request"
+          test "$EVENT_HEAD_REPOSITORY" = "$GITHUB_REPOSITORY"
+          test "$EVENT_BASE_REPOSITORY" = "$GITHUB_REPOSITORY"
+
+      - name: Bind to current open Draft PR head
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          PR_JSON="$(gh api "repos/${GITHUB_REPOSITORY}/pulls/${EXPECTED_PR_NUMBER}")"
+          jq -e --arg repo "$GITHUB_REPOSITORY" --arg sha "$EXPECTED_HEAD_SHA" --arg ref "$EXPECTED_HEAD_REF" '
+            .state == "open" and .draft == true and .merged == false
+            and .head.repo.full_name == $repo and .base.repo.full_name == $repo
+            and .head.sha == $sha and .head.ref == $ref
+          ' <<<"$PR_JSON" >/dev/null
+
+      - name: Checkout exact PR head without credentials
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Assert local checkout identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD_SHA"
+          test -z "$(git status --porcelain=v1 --untracked-files=no)"
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install pinned test dependency
+        shell: bash
+        run: python3 -m pip install --disable-pip-version-check pytest==8.4.2
+
+      - name: Run terminal Step 7 pytest set
+        shell: bash
+        run: python3 -m pytest tests/cocolon_context/test_prepare.py tests/cocolon_context/test_task_context.py -q
+
+      - name: Assert no tracked mutation
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD_SHA"
+          git diff --exit-code -- .
+          git diff --cached --exit-code -- .
+          test -z "$(git status --porcelain=v1 --untracked-files=no)"
+
+      - name: Recheck current PR head
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          PR_JSON="$(gh api "repos/${GITHUB_REPOSITORY}/pulls/${EXPECTED_PR_NUMBER}")"
+          jq -e --arg repo "$GITHUB_REPOSITORY" --arg sha "$EXPECTED_HEAD_SHA" --arg ref "$EXPECTED_HEAD_REF" '
+            .state == "open" and .draft == true and .merged == false
+            and .head.repo.full_name == $repo and .base.repo.full_name == $repo
+            and .head.sha == $sha and .head.ref == $ref
+          ' <<<"$PR_JSON" >/dev/null
