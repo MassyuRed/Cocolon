@@ -11,7 +11,7 @@
     "lint": "eslint .",
     "postinstall": "node ./scripts/postinstall.js",
     "test": "npm run test:rn-screens",
-    "test:rn-screens": "node --test tests/rn-screen-contracts.test.js tests/iap-restore-purchases.test.js"
+    "test:rn-screens": "node --test tests/rn-screen-contracts.test.js tests/iap-restore-purchases.test.js tests/theme-readability.test.js"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.2.0",
