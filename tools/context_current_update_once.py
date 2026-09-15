@@ -15,8 +15,8 @@ BEFORE = {
     TEST: 'd3b3db88a9e23317385a19630bd11e5ae5da7d4747e2672b646b940dc402175c',
 }
 AFTER = {
-    TASK: ('500010f2b7859656aa0d7bc6d017e9a87d554d4fc57b6c2c8932ffa6ce873385', 'c76226fcae9918c17525d7d7da21046b307dba0c'),
-    TEST: ('8d21bfc1c0179100d12fdb141781f61749ff58e4cfa5fb602327c682eb9ecb71', '0b23d14dbc411d683f94efd3ec156661e300beb9'),
+    TASK: ('aafdba64884923c6174d2a9098d111c5b0ab56d934519cf6f4b5b742c7b34cca', '9a077b7b10050089bd7ed20d0cc1290072024a85'),
+    TEST: ('04c4eaaca9a501a50b016d6647ed6a2e3dcd21031240e0d77c5512b4488c7f3d', '4f5560c05a441dbb0c78d633082cf8e9018e0034'),
 }
 HANDOFF = 'ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md'
 ROUTE = 'EMLIS_Q1_Q4_IMPLEMENTED_SHARED_QUESTION_ANSWER_QUALITY_CONTINUATION'
@@ -62,7 +62,6 @@ def prepare(root):
     claim = next(row for row in cmee['operator_contract']['claim_nodes'] if row['claim_id']=='CLAIM.CMEE.PRODUCT_ROUTE')
     claim['asserted_value_code'] = ROUTE
     claim['source_locator']['section_locator'] = 'Latest Q4 and subsequent valid continuation sections; see API current handoff'
-    claim['claim_boundary'] = 'CURRENT_MASH_INSTRUCTIONS_AND_LATEST_HANDOFF_NO_PRODUCT_PASS_OR_AUTOMATIC_PROGRESSION'
     restart = cmee['operator_contract']['collaboration']['restart_packet']
     restart['purpose_code'] = 'READ_LATEST_EMLIS_QUESTION_ANSWER_CONTINUATION_AND_CURRENT_MASH_INSTRUCTIONS'
     restart['next_work_source_claim_ids'] = ['CLAIM.CMEE.PRODUCT_ROUTE']
@@ -73,6 +72,8 @@ def prepare(root):
         ('4594e3358bed0d475dde87aa40bb9f7705079649',APP_HEAD),
         ('92cf86b9644771091d59c4a2b76ec9006ed37b47',API_HEAD),
         ('ROUND0_FOLLOW_PRIMARY_VISIBLE_RESPONSE_CORRECTION_APPROVED',ROUTE),
+        ('assert product_route_source["section_locator"] == "§86"',
+         'assert product_route_source["section_locator"] == "Latest Q4 and subsequent valid continuation sections; see API current handoff"'),
     ]:
         assert text.count(old) == 1
         text = text.replace(old,new)
