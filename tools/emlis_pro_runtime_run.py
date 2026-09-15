@@ -26,19 +26,28 @@ def deny_network():
     lib.seccomp_init.restype = ctypes.c_void_p
     lib.seccomp_syscall_resolve_name.argtypes = [ctypes.c_char_p]
     lib.seccomp_syscall_resolve_name.restype = ctypes.c_int
-    lib.seccomp_rule_add.argtypes = [ctypes.c_void_p, ctypes.c_uint32, ctypes.c_int, ctypes.c_uint]
+    class Argument(ctypes.Structure):
+        _fields_ = [('arg', ctypes.c_uint), ('op', ctypes.c_uint),
+                    ('value', ctypes.c_uint64), ('unused', ctypes.c_uint64)]
+    lib.seccomp_rule_add_array.argtypes = [ctypes.c_void_p, ctypes.c_uint32, ctypes.c_int,
+                                         ctypes.c_uint, ctypes.POINTER(Argument)]
     lib.seccomp_load.argtypes = [ctypes.c_void_p]
     lib.seccomp_release.argtypes = [ctypes.c_void_p]
     context = lib.seccomp_init(0x7fff0000)  # SCMP_ACT_ALLOW
     if not context:
         raise RuntimeError('cannot allocate network isolation')
     try:
-        # No new sockets, connections or datagrams, including in subprocesses.
-        # asyncio uses socketpair, not socket; PGlite uses stdin/stdout pipes.
-        for name in [b'socket', b'connect', b'sendto', b'sendmsg', b'sendmmsg']:
-            number = lib.seccomp_syscall_resolve_name(name)
-            if number < 0 or lib.seccomp_rule_add(context, 0x00050000 | errno.ENETUNREACH, number, 0):
-                raise RuntimeError('cannot install network isolation rule')
+        # Block Internet sockets in Python and child processes, not local IPC.
+        # asyncio thread completion writes to a Unix socketpair using sendto;
+        # blocking sendto globally would silently prevent the event-loop wakeup.
+        number = lib.seccomp_syscall_resolve_name(b'socket')
+        if number < 0:
+            raise RuntimeError('socket syscall unavailable')
+        for family in (2, 10, 17):  # AF_INET, AF_INET6, AF_PACKET on Linux
+            condition = Argument(0, 4, family, 0)  # argument 0, SCMP_CMP_EQ
+            if lib.seccomp_rule_add_array(context, 0x00050000 | errno.ENETUNREACH,
+                                          number, 1, ctypes.byref(condition)):
+                raise RuntimeError('cannot install Internet socket denial')
         if lib.seccomp_load(context):
             raise RuntimeError('network isolation unavailable; test not started')
     finally:

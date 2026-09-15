@@ -341,3 +341,64 @@ COCOLON_SYSTEM_CONTEXT_V1_EXECUTION_HARDENING_COMPLETE
 `SYSTEM_CONTEXT_V1_COMPLETE`, Operator actual-proof completion, Operator value
 PASS, Product Read, merge-ready and release-ready are not claimed. Neither
 Step 9 nor this execution hardening automatically starts any next work.
+
+
+## 2026-09-15 — Pro portable Emlis execution connection
+
+Mash explicitly authorized a bounded separate unit: build the Emlis test
+runtime, transfer it through the GitHub artifact connector, and run the
+existing persistent Emlis test in Pro. This adds execution support beside
+System Context navigation; it does not replace or relax the indexing
+`.devcontainer` toolchain, original tests, private-data boundary, or product
+acceptance. It does not redirect the original Emlis quality continuation or
+add UI/payment follow-up to that workstream.
+
+The implementation is `.github/workflows/emlis-pro-runtime.yml`,
+`tools/emlis_pro_runtime_build.py`, and `tools/emlis_pro_runtime_run.py`.
+The read-only PR #37 job binds API PR #3 at
+`ce8466253b99fcf0992a8b5c3ca38284d1fb5ef0` and app PR #30 at
+`6a073151facb674efa412e80451403dd50f8bfa6`. It packages Python 3.12.13,
+pytest 8.4.1 and the unchanged exact46 wheel lock, Node 22.16.0 and PGlite
+0.5.8. It executes no Emlis or private evaluation in GitHub Actions.
+
+Use the connector's `download_workflow_artifact` for the successful exact-head
+`emlis-pro-runtime-<head>` artifact. Verify the recorded ZIP digest, ZIP CRC,
+inner `archive.sha256`, every `SHA256SUMS` member, source manifest and required
+heads before use. Extract into a new directory with traversal/link protection;
+do not overlay a prior installation. The bundle has documented filtered
+text-source snapshots, not full Git checkouts: no `.env`, credentials, Git
+history, native/media files or private work records. Checked-in fixture data
+is included only from the existing test-fixture directories. Acquire any
+additional required originals rather than treating exclusions as nonexistent.
+
+From the extracted `emlis-pro-runtime` directory, run:
+
+```bash
+./python/bin/python3 run_tests.py
+./python/bin/python3 run_tests.py -q ai/tests/test_emlis_q2_application.py
+```
+
+The launcher discards inherited configuration/credentials, verifies the exact
+46 packages and interpreter, and denies Internet socket creation in Python
+and its Node children. Unix socket IPC remains available to asyncio/PGlite.
+The first launcher incorrectly denied `sendto` for local event-loop wakeups
+and timed out; that is a launcher defect, not an Emlis result. The corrected
+launcher passed the original persistent round/restart test (1 PASS), then the
+unchanged complete Q2 application file (32 PASS, two deprecation warnings) in
+Pro. These are startup/persistence results, not 33 distinct tests. Final
+artifact identities and post-download replay belong in this PR's current
+execution report. No product source or existing assertion was changed.
+
+Artifacts expire after seven days; the build recipe and fixed dependency lock
+remain in GitHub. Reuse a verified runtime while its dependencies and platform
+remain applicable. Do not use its source snapshot for a later head without
+fetching and checking that head's originals, and do not rebuild tools merely
+because prose/code was edited. Changes to the packaged source heads require
+updating the builder/workflow's matching pins together before regeneration.
+
+This startup unit does not complete the mandatory Emlis suites, canonical100,
+all inherited saved-conversation comparisons, RN rendering tests, actual DB/
+store/device checks, product PASS, or Operator actual-use proof. System Context
+workspace/task profiles and the generated cache have not been refreshed by
+this runtime build; their earlier results remain historical. Emlis validation
+and System Context freshness must continue to be reported separately.

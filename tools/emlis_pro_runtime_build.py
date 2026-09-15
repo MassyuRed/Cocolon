@@ -72,13 +72,17 @@ def copy_sources(source, target):
     # Do not ship .env, credential files, .git history, native binaries or media/fonts.
     included, excluded = [], []
     extensions = {'.py', '.js', '.cjs', '.mjs', '.jsx', '.ts', '.tsx', '.json', '.sql',
-                  '.md', '.txt', '.yml', '.yaml', '.toml', '.ini', '.cfg', '.lock', '.sh'}
+                  '.md', '.txt', '.yml', '.yaml', '.toml', '.ini', '.cfg', '.lock', '.sh',
+                  '.jsonl', '.csv', '.tsv', '.ndjson'}
     for name in run('git', '-C', source, 'ls-files', '-z').split('\0'):
         if not name:
             continue
         rel = Path(name)
         lower = name.lower()
-        blocked = (any(part.startswith('.env') for part in rel.parts)
+        fixture_data = rel.suffix.lower() in {'.jsonl', '.csv', '.tsv', '.ndjson'}
+        allowed_fixture = name.startswith(('ai/tests/fixtures/', 'tests/fixtures/'))
+        blocked = ((fixture_data and not allowed_fixture)
+                   or any(part.startswith('.env') for part in rel.parts)
                    or any(word in lower for word in ['credential', 'service_account', 'service-account', 'private_key'])
                    or rel.suffix.lower() not in extensions)
         path = source / rel
