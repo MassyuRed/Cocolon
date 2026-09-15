@@ -69,7 +69,7 @@ def checkout(repo, head, target):
 
 def copy_sources(source, target):
     # Deliberately a documented text-source snapshot, not a full Git checkout.
-    # Do not ship .env, credential files, .git history, native binaries or media/fonts.
+    # Do not ship .env, credential files, prior Git history, native binaries or media/fonts.
     included, excluded = [], []
     extensions = {'.py', '.js', '.cjs', '.mjs', '.jsx', '.ts', '.tsx', '.json', '.sql',
                   '.md', '.txt', '.yml', '.yaml', '.toml', '.ini', '.cfg', '.lock', '.sh',
@@ -84,7 +84,7 @@ def copy_sources(source, target):
         blocked = ((fixture_data and not allowed_fixture)
                    or any(part.startswith('.env') for part in rel.parts)
                    or any(word in lower for word in ['credential', 'service_account', 'service-account', 'private_key'])
-                   or rel.suffix.lower() not in extensions)
+                   or (rel.suffix.lower() not in extensions and rel.name not in {'.gitignore', '.gitattributes'}))
         path = source / rel
         if blocked or path.is_symlink() or not path.is_file():
             excluded.append(name)
@@ -100,6 +100,63 @@ def copy_sources(source, target):
         destination.write_bytes(data)
         included.append({'path': name, 'sha256': sha(data), 'git_blob': hashlib.sha1(b'blob ' + str(len(data)).encode() + b'\0' + data).hexdigest()})
     return {'files': included, 'excluded_paths': excluded, 'is_full_checkout': False}
+
+
+
+def add_sparse_git_metadata(source, target, source_map):
+    """Keep the real current commit/trees, but only allowed file blobs; no history."""
+    import zlib
+    head = run('git', '-C', source, 'rev-parse', 'HEAD')
+    root_tree = run('git', '-C', source, 'rev-parse', 'HEAD^{tree}')
+    run('git', 'init', '-q', target)
+    gitdir = target / '.git'
+    shutil.rmtree(gitdir / 'hooks', ignore_errors=True)
+
+    def store(kind, data, expected=None):
+        raw = kind.encode() + b' ' + str(len(data)).encode() + b'\0' + data
+        identity = hashlib.sha1(raw).hexdigest()
+        if expected is not None:
+            assert identity == expected, 'Git object identity mismatch'
+        path = gitdir / 'objects' / identity[:2] / identity[2:]
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(zlib.compress(raw))
+        return identity
+
+    tree_ids = {root_tree}
+    listing = subprocess.check_output(['git', '-C', str(source), 'ls-tree', '-r', '-t', '-z', head])
+    for entry in listing.split(b'\0'):
+        if entry:
+            fields = entry.split(b'\t', 1)[0].split()
+            if fields[1] == b'tree':
+                tree_ids.add(fields[2].decode())
+    for kind, identity in [('commit', head), *[('tree', t) for t in sorted(tree_ids)]]:
+        raw = subprocess.check_output(['git', '-C', str(source), 'cat-file', kind, identity])
+        store(kind, raw, identity)
+    for entry in source_map['files']:
+        store('blob', (target / entry['path']).read_bytes(), entry['git_blob'])
+    # Standard non-cone sparse checkout: excluded blobs are neither present nor
+    # claimed to have been read. No real source file is assume-unchanged.
+    def escape(name):
+        return '/' + ''.join('\\' + c if c in '\\*?[]!' else c for c in name)
+    (gitdir / 'info/sparse-checkout').write_text(
+        '\n'.join(escape(e['path']) for e in source_map['files']) + '\n')
+    (gitdir / 'HEAD').write_text(head + '\n')
+    (gitdir / 'shallow').write_text(head + '\n')
+    run('git', '-C', target, 'config', 'core.sparseCheckout', 'true')
+    run('git', '-C', target, 'config', 'core.sparseCheckoutCone', 'false')
+    run('git', '-C', target, 'read-tree', '--reset', '-u', 'HEAD')
+    assert run('git', '-C', target, 'rev-parse', 'HEAD') == head
+    assert run('git', '-C', target, 'rev-parse', 'HEAD^{tree}') == root_tree
+    assert not run('git', '-C', target, 'status', '--porcelain', '--untracked-files=all')
+    flags = subprocess.check_output(['git', '-C', str(target), 'ls-files', '-v', '-z'])
+    included = {e['path'] for e in source_map['files']}
+    for entry in flags.split(b'\0'):
+        if entry:
+            flag, name = entry[:1], entry[2:].decode()
+            assert (flag == b'H') == (name in included), 'incorrect sparse inclusion'
+    source_map['source_tree'] = root_tree
+    source_map['git_metadata'] = 'EXACT_HEAD_AND_TREES_ALLOWED_BLOBS_ONLY_SHALLOW_SPARSE'
+    source_map['excluded_blob_bodies_included'] = False
 
 
 def main():
@@ -180,11 +237,18 @@ def main():
     for repo, head, source in [('mashos-api', API_HEAD, api), ('Cocolon', APP_HEAD, app)]:
         source_maps[repo] = copy_sources(source, BUNDLE / 'sources' / repo)
         source_maps[repo]['commit'] = head
+        add_sparse_git_metadata(source, BUNDLE / 'sources' / repo, source_maps[repo])
     # Include only the existing SC entry and settings, for connection/repair without executing its indexer.
     implementation = Path(os.environ['GITHUB_WORKSPACE'])
     sc_files = ['Cocolon_前提資料/system_context/00_read_first.md',
                 'Cocolon_前提資料/system_context/workspace_profiles.json',
                 'Cocolon_前提資料/system_context/task_profiles.json']
+    # Exact current implementation inputs needed to update/verify Context.
+    sc_files += sorted(str(p.relative_to(implementation)) for directory, pattern in
+                       [('tools', 'cocolon_context*'), ('tests/cocolon_context', '*.py'),
+                        ('.devcontainer', '**/*'), ('.github/workflows', '*.yml')]
+                       for p in (implementation / directory).glob(pattern)
+                       if p.is_file() and not p.is_symlink())
     for name in sc_files:
         dest = BUNDLE / 'system-context-implementation' / name
         dest.parent.mkdir(parents=True, exist_ok=True)
