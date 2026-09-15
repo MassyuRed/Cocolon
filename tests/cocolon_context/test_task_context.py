@@ -3088,7 +3088,7 @@ def test_repository_task_profile_has_exact13_seed_and_exact_external_assets() ->
         if row["claim_id"] == "CLAIM.CMEE.PRODUCT_ROUTE"
     )
     assert product_route_claim["asserted_value_code"] == (
-        "ROUND0_FOLLOW_PRIMARY_VISIBLE_RESPONSE_CORRECTION_APPROVED"
+        "EMLIS_Q1_Q4_IMPLEMENTED_SHARED_QUESTION_ANSWER_QUALITY_CONTINUATION"
     )
     assert product_route_claim["asserted_by"] == "Mash"
     assert product_route_claim["decision_owner"] == "Mash"
@@ -3107,7 +3107,7 @@ def test_repository_task_profile_has_exact13_seed_and_exact_external_assets() ->
         "Cocolon_前提資料/designs/cmee/v1/"
         "06_implementation_order_migration_and_verification.md"
     )
-    assert product_route_source["section_locator"] == "§86"
+    assert product_route_source["section_locator"] == "Latest Q4 and subsequent valid continuation sections; see API current handoff"
     current_owner_claim = next(
         row
         for row in contract["claim_nodes"]
@@ -3373,7 +3373,7 @@ def test_repository_cmee_workspace_profile_keeps_disabled_acceptance_boundary() 
         "agent/three-core-cmee-current-structure-20260815"
     )
     assert product["expected_head"] == (
-        "4594e3358bed0d475dde87aa40bb9f7705079649"
+        "6a073151facb674efa412e80451403dd50f8bfa6"
     )
     assert "expected_ancestor" not in product
     api = cmee["repositories"]["mashos-api"]
@@ -3381,7 +3381,7 @@ def test_repository_cmee_workspace_profile_keeps_disabled_acceptance_boundary() 
         "agent/cmee-v1a-i1sx-source-explicit-20260815"
     )
     assert api["expected_head"] == (
-        "92cf86b9644771091d59c4a2b76ec9006ed37b47"
+        "ce8466253b99fcf0992a8b5c3ca38284d1fb5ef0"
     )
 
 
