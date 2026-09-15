@@ -1,0 +1,41 @@
+name: Stage exact current Context file blobs once
+
+# Bounded mechanical transport for Mash's 2026-09-15 current-reference update.
+# This stages only two precomputed public blob objects, never commits or moves refs.
+# Remove this temporary workflow and helper in the manual publication commit.
+on:
+  pull_request:
+    types: [synchronize]
+    paths:
+      - '.github/workflows/context-current-update-once.yml'
+      - 'tools/context_current_update_once.py'
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  stage-two-exact-public-blobs:
+    if: github.event.pull_request.number == 37 && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.draft == true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Prepare and stage only the exact two public blobs
+        env:
+          GH_TOKEN: ${{ github.token }}
+          EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD_SHA"
+          test -z "$(git status --porcelain --untracked-files=all)"
+          python3 tools/context_current_update_once.py --stage-exact-blobs
+          git diff --exit-code
+          test -z "$(git status --porcelain --untracked-files=all)"
