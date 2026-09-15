@@ -1,0 +1,174 @@
+name: Cocolon System Context actual workspace prepare
+
+# Mash's 2026-09-07 environment-restoration request.
+# Runs the existing CLI, not a replacement indexer or product generator.
+# The three existing exact-head verifier workflows remain unchanged.
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    paths:
+      - '.devcontainer/**'
+      - 'tools/cocolon_context*'
+      - 'Cocolon_前提資料/system_context/workspace_profiles.json'
+      - 'Cocolon_前提資料/system_context/task_profiles.json'
+      - '.github/workflows/cocolon-system-context-prepare.yml'
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: system-context-actual-prepare-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  prepare-current-workspace:
+    if: github.event.pull_request.number == 37 && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.base.repo.full_name == github.repository && github.event.pull_request.draft == true
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+      EXPECTED_HEAD_REF: ${{ github.event.pull_request.head.ref }}
+      EXPECTED_PR_NUMBER: ${{ github.event.pull_request.number }}
+    steps:
+      - name: Bind to the current open Draft implementation head
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$GITHUB_EVENT_NAME" = pull_request
+          gh api "repos/${GITHUB_REPOSITORY}/pulls/${EXPECTED_PR_NUMBER}" | jq -e --arg sha "$EXPECTED_HEAD_SHA" --arg ref "$EXPECTED_HEAD_REF" --arg repo "$GITHUB_REPOSITORY" '.state == "open" and .draft == true and .merged == false and .head.sha == $sha and .head.ref == $ref and .head.repo.full_name == $repo and .base.repo.full_name == $repo' >/dev/null
+          echo "STATE_ROOT=$RUNNER_TEMP/cocolon-context-actual" >> "$GITHUB_ENV"
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Read profile and bind the two current material heads
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD_SHA"
+          test -z "$(git status --porcelain=v1 --untracked-files=no)"
+          mkdir -p "$STATE_ROOT/logs" "$STATE_ROOT/cache" "$STATE_ROOT/material" "$STATE_ROOT/external/cycle001_working"
+          python3 - <<'PY'
+          import json, os, pathlib, re, subprocess
+          profile = json.loads(pathlib.Path('Cocolon_前提資料/system_context/workspace_profiles.json').read_text())
+          targets = []
+          for key, pr in [('Cocolon', 30), ('mashos-api', 3)]:
+              spec = profile['profiles']['cmee_working']['repositories'][key]
+              assert spec['repository'] == 'MassyuRed/' + key
+              assert re.fullmatch('[0-9a-f]{40}', spec['expected_head'])
+              actual = json.loads(subprocess.check_output(['gh', 'api', 'repos/' + spec['repository'] + '/pulls/' + str(pr)]))
+              assert actual['state'] == 'open' and actual['draft'] and not actual['merged']
+              assert actual['head']['sha'] == spec['expected_head']
+              assert actual['head']['ref'] == spec['checkout_ref']
+              targets.append({'repository': spec['repository'], 'pr': pr, 'head': spec['expected_head']})
+          state = pathlib.Path(os.environ['STATE_ROOT'])
+          (state / 'logs/material_heads.json').write_text(json.dumps(targets, indent=2) + '\n')
+          history = profile['profiles']['cycle001_working']['repositories']['mashos-api']
+          assert history['repository'] == 'MassyuRed/mashos-api'
+          assert re.fullmatch('[0-9a-f]{40}', history['expected_head'])
+          clones = [
+              (targets[0]['repository'], targets[0]['head'], state / 'material/Cocolon'),
+              (targets[1]['repository'], targets[1]['head'], state / 'external/mashos-api'),
+              (history['repository'], history['expected_head'], state / 'external/cycle001_working/mashos-api'),
+          ]
+          for repo, head, root in clones:
+              root.mkdir(parents=True)
+              subprocess.run(['git', 'init', '-q', str(root)], check=True)
+              subprocess.run(['git', '-C', str(root), 'remote', 'add', 'origin', 'https://github.com/' + repo + '.git'], check=True)
+              subprocess.run(['git', '-C', str(root), 'fetch', '--no-tags', '--depth=1', 'origin', head], check=True)
+              subprocess.run(['git', '-C', str(root), 'checkout', '-q', '--detach', head], check=True)
+              assert subprocess.check_output(['git', '-C', str(root), 'rev-parse', 'HEAD'], text=True).strip() == head
+          PY
+      - name: Restore the existing locked environment
+        run: docker build --file .devcontainer/Dockerfile --tag cocolon-system-context-actual .devcontainer
+      - name: Doctor then actual prepare and cache verification
+        run: |
+          set -euo pipefail
+          # No token or private input is passed into this container.
+          # prepare's existing owner resolver reads public Git refs over the network.
+          # SCIP Python recommends NODE_OPTIONS so spawned Node processes inherit the heap budget.
+          docker run --rm --read-only \
+            --tmpfs /tmp:rw,nosuid,nodev \
+            --volume "$GITHUB_WORKSPACE:/workspace:ro" \
+            --volume "$STATE_ROOT:/state:rw" \
+            --workdir /workspace \
+            --env PYTHONPYCACHEPREFIX=/tmp/pycache \
+            --env XDG_CACHE_HOME=/tmp/cache \
+            --env NODE_OPTIONS=--max-old-space-size=8192 \
+            --env GIT_CONFIG_COUNT=4 \
+            --env GIT_CONFIG_KEY_0=safe.directory --env GIT_CONFIG_VALUE_0=/workspace \
+            --env GIT_CONFIG_KEY_1=safe.directory --env GIT_CONFIG_VALUE_1=/state/material/Cocolon \
+            --env GIT_CONFIG_KEY_2=safe.directory --env GIT_CONFIG_VALUE_2=/state/external/mashos-api \
+            --env GIT_CONFIG_KEY_3=safe.directory --env GIT_CONFIG_VALUE_3=/state/external/cycle001_working/mashos-api \
+            cocolon-system-context-actual bash -euo pipefail -c '
+              python3 -m tools.cocolon_context doctor | tee /state/logs/doctor.json
+              args=(--workspace cmee_working --task cmee --repo-root /state/material/Cocolon --system-context-root /workspace/Cocolon_前提資料/system_context --external-workspace-root /state/external --cache-root /state/cache)
+              python3 -m tools.cocolon_context prepare "${args[@]}" 2>&1 | tee /state/logs/prepare.log
+              python3 -m tools.cocolon_context prepare "${args[@]}" --verify-only 2>&1 | tee /state/logs/verify-only.log
+            '
+      - name: Verify unchanged implementation and material trees and current remote heads
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD_SHA"
+          git diff --exit-code
+          git diff --cached --exit-code
+          test -z "$(git status --porcelain=v1 --untracked-files=no)"
+          gh api "repos/${GITHUB_REPOSITORY}/pulls/${EXPECTED_PR_NUMBER}" | jq -e --arg sha "$EXPECTED_HEAD_SHA" '.state == "open" and .draft == true and .merged == false and .head.sha == $sha' >/dev/null
+          python3 - <<'PY'
+          import json, os, pathlib, subprocess
+          state = pathlib.Path(os.environ['STATE_ROOT'])
+          targets = json.loads((state / 'logs/material_heads.json').read_text())
+          for item in targets:
+              actual = json.loads(subprocess.check_output(['gh', 'api', 'repos/' + item['repository'] + '/pulls/' + str(item['pr'])]))
+              assert actual['state'] == 'open' and actual['draft'] and not actual['merged']
+              assert actual['head']['sha'] == item['head']
+          roots = [state / 'material/Cocolon', state / 'external/mashos-api', state / 'external/cycle001_working/mashos-api']
+          profile = json.loads(pathlib.Path('Cocolon_前提資料/system_context/workspace_profiles.json').read_text())
+          heads = [targets[0]['head'], targets[1]['head'], profile['profiles']['cycle001_working']['repositories']['mashos-api']['expected_head']]
+          for root, head in zip(roots, heads):
+              assert subprocess.check_output(['git', '-c', 'safe.directory=' + str(root), '-C', str(root), 'rev-parse', 'HEAD'], text=True).strip() == head
+              assert not subprocess.check_output(['git', '-c', 'safe.directory=' + str(root), '-C', str(root), 'status', '--porcelain=v1', '--untracked-files=no'], text=True).strip()
+          PY
+      - name: Package only the verified regenerable cache
+        if: success()
+        run: |
+          set -euo pipefail
+          archive="$STATE_ROOT/system-context-cache.tar.gz"
+          # Preserve producer-owned restrictive directories; never chmod/chown the cache.
+          # Stream to a runner-owned archive, then compare every archived member to source.
+          docker run --rm --read-only --network none \
+            --volume "$STATE_ROOT/cache:/cache:ro" \
+            --workdir /cache \
+            cocolon-system-context-actual \
+            tar -czf - cmee_working > "$archive.partial"
+          docker run --rm -i --read-only --network none \
+            --volume "$STATE_ROOT/cache:/cache:ro" \
+            --workdir /cache \
+            cocolon-system-context-actual \
+            tar -dzf - < "$archive.partial"
+          mv "$archive.partial" "$archive"
+          sha256sum "$archive" > "$STATE_ROOT/logs/cache-archive.sha256"
+      - name: Retain public diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: system-context-diagnostics-${{ github.event.pull_request.head.sha }}
+          path: ${{ runner.temp }}/cocolon-context-actual/logs
+          retention-days: 7
+          if-no-files-found: error
+      - name: Retain the verified cache for the operator
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: system-context-cache-${{ github.event.pull_request.head.sha }}
+          path: ${{ runner.temp }}/cocolon-context-actual/system-context-cache.tar.gz
+          compression-level: 0
+          retention-days: 7
+          if-no-files-found: error

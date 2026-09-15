@@ -5,10 +5,15 @@
     "schema_version": "cocolon.system_context.code_index_configuration.v1",
     "toolchain": {
       "node_major": "20",
+      "node": "20.20.2",
+      "npm": "10.8.2",
+      "python": "3.11.16",
+      "platform": "linux/amd64",
       "typescript_syntax": "5.2.2",
       "scip_cli": "v0.7.1",
       "scip_typescript": "0.4.0",
-      "scip_python": "0.6.6"
+      "scip_python": "0.6.6",
+      "environment_lock": ".devcontainer/system-context-toolchain.lock.json"
     },
     "runs": [
       {
@@ -51,19 +56,24 @@
       }
     },
     "cmee_working": {
-      "purpose": "CMEE working view: stacked Cocolon context branch plus current disabled CMEE API draft",
+      "purpose": "Current Emlis question/answer quality continuation: exact App PR30 and API PR3; Pro runtime parity verification is separate from product acceptance; default OFF, NOT_CLEAR, no automatic progression. System Context implementation comes independently from PR37.",
+      "current_product_owner_adoption_state": "IMPLEMENTED_NOT_ACCEPTED",
+      "im10_state": "NON_PASS",
+      "candidate_ready": false,
+      "production_effect": 0,
+      "automatic_progression": false,
       "repositories": {
         "Cocolon": {
           "repository": "MassyuRed/Cocolon",
-          "checkout_ref": "SELF",
-          "expected_ancestor": "d29042f44e882110514b74dcc6a1b3f31ec746e6",
-          "role": "RN application, premise documents, CMEE design, and system-context owner"
+          "checkout_ref": "agent/three-core-cmee-current-structure-20260815",
+          "expected_head": "6a073151facb674efa412e80451403dd50f8bfa6",
+          "role": "RN application, premise documents, CMEE design, and product structure material"
         },
         "mashos-api": {
           "repository": "MassyuRed/mashos-api",
           "checkout_ref": "agent/cmee-v1a-i1sx-source-explicit-20260815",
-          "expected_head": "06ce311b3ea728b06f83439d268a34bed917c01c",
-          "role": "FastAPI backend plus disabled CMEE implementation Draft PR #3"
+          "expected_head": "ce8466253b99fcf0992a8b5c3ca38284d1fb5ef0",
+          "role": "FastAPI backend plus disabled CMEE inherited-owner implementation Draft PR #3"
         }
       }
     },
