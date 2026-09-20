@@ -8664,3 +8664,14 @@ Emlisの意味選択・本文作者・独立本文検証・保存処理はbyte�
 実装 `00143eddb65aa8df8e8a34136a42728adb04bb11`、tree `d23eacd3dfe94fe070acc9b567d31fc29d54db50`。必須2,909件＝2,455 PASS / 454 FAIL、追加20件すべてPASS。旧453失敗を保持し、旧singleton期待の1件が新たにFAIL。元の期待値は変更せず、停止後の独立inverse成功は別診断として記録。同じ100件は全record不変。保存329件・616状態も本文・問い・意味・制御は不変で、本文なし11状態を保持。追加保存3件・14状態も含め、rootが今回の全原入力・本文・問い・回答・訂正撤回・履歴・操作対応を確認した。
 
 撤回前の不自然な名詞化、明示的主語のfallback、同内容の反復、非隣接の肯定回答、長文の意味欠落・生成不可は残る。**NOT_CLEAR、Draft/open/unmerged、default OFF、全体45%・商品0/3**を維持する。最新weekly 2026-09-19の予定に変更なし。次は撤回後経路の明示的主語を含む残件を一単位だけ確認する。System Context未使用、原典直接確認。検証の全件数・失敗・限界は[APIの今回の引継ぎ](https://github.com/MassyuRed/mashos-api/blob/7eb4596ac60b91c2ca4edc540edc8b6a459e31d3/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)を参照。
+
+
+### 2026-09-20 最新継続 — 撤回後の明示的な本人主語
+
+出来事撤回後に残る感情の明示的な本人主語を、既存の共有authorと独立Gateで受け手への表現に対応させた。主体・時点・極性・助詞・丁寧形を含む型付きsource全範囲を保持し、実際に出た文から独立に確認する。意味選択・質問契約・service・API・DB・RN・外側の品質基準は変更していない。`STRUCTURE_MAP_DELTA_NONE`。
+
+実装 `e5fc77e09d123d729605867c90f4729086363b23`、tree `81d5bc5276f45f82345bf9adfa874342a75e1fd9`。必須57ファイル・2,937件＝**2,482 PASS / 455 FAIL**。追加28件は全PASS。旧454失敗を保持し、旧singleton期待の1件が新たにFAIL。旧入力・期待値・assertは変更せず、停止後の独立inverse成功は別診断に記録した。
+
+同じ100件は全record不変。保存329ケース・616状態も本文・問い・意味・制御は不変で、本文なし11状態を保持。元の保存再生36系列は14 PASS / 22 FAIL。前回追加3ケース・14状態も確認。今回追加保存5ケース・22状態では最終本文4ケース成功、複数出来事の撤回後1状態が本文なしで、同じ入力の修正前後でも変わらない。失敗した元検査と全状態収集の診断を分けて保持した。rootが原入力・実本文・問い・回答・訂正撤回・履歴・操作対応を全件読了。
+
+曖昧な主語、撤回前の名詞化、反復、非隣接の肯定回答、長文の意味欠落・生成不可は残る。次は複数出来事の撤回後に本文が出ない既存経路の原因を一単位だけ確認する。**NOT_CLEAR、Draft/open/unmerged、default OFF、全体45%・商品0/3**を維持する。最新weekly 2026-09-19の予定に変更なし。System Context未使用、原典直接確認。全件数・失敗・限界は[APIの今回の引継ぎ](https://github.com/MassyuRed/mashos-api/blob/f5f8fdcc1f850e047c838bbe66eadbeb93da7ba2/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)を参照。
