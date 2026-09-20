@@ -19,6 +19,7 @@ current_product_read_state: "EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFI
 candidate_ready: false
 ---
 
+> 2026-09-20 最新継続：独立した未決対象の共通文章化。最終API `d3f6785`、商品NOT_CLEAR／既定OFF。検証と09/19 weeklyに基づく次作業は末尾の同日節を参照。以下の過去集計は履歴。
 > 2026-09-11 Q4現在地：修正版v1.2のQ4コード実装・統合・公開接続準備と今回の検証を完了。公開用mode・単一作者・旧client/保存版互換・停止復旧・bootstrap/RNを接続し、初回/肯定的回答/当時訂正と回答名詞化・時点の不具合を修正した。API179 PASS、RNは保存済み56 PASS。新しい保存22ケースを全文確認し、既存100件は全読済みの前版と全record一致。長い再掲・定型性など商品品質はNOT_CLEARとして保持する。現行結果は正本06とAPI既存handoffの末尾Q4 continuation節。実DB・端末・実課金・Mash正式判断・公開操作は別作業、既定OFF。
 
 > 2026-09-11 Q3時点の記録：添付修正版Technical Design v1.2に従い、Q2のコード実装完了からQ3へ進めた。Plusの適格本人履歴、Premiumの本人続行による最大3問と確認・修正・否定できる解釈フレーム、限定条件のLayer3を保存・API・RNまで実装した。Q3のコード実装は完了し、次の実装単位はQ4の統合・実本文確認・互換性・公開接続準備。実DB適用、端末・実課金確認、Mashの正式商品判断、公開操作は別作業として未実施。default OFF、商品NOT_CLEAR、Draft/open/unmergedを維持する。以下の旧Q1/Q2段落・Product Read待ちの順序は当時の履歴であり、Q3/Q4のコード進行を止める現行条件ではない。現在の進行ownerは本系列の`06_implementation_order_migration_and_verification.md`末尾Q3節とAPI既存handoff末尾Q3節。
@@ -922,3 +923,14 @@ Human Reception作者、thread store/API、Q2/Q3 SQL、RN current readerは既�
 | `emlis_ai_grounded_observation_gate.py` | 原文の完全host・否定・検討開始の入れ子・独立性を本文から独立照合する。活用・focus順の対応は全対象一致が条件。 |
 
 既存の単一作者、sealed claim、非空・排他・全量の寄与分配を使用する。問い・回答理解・公開wire・保存・RN・activationの変更はない。意味は正本02、内部表現は05、検証と残件は06/API既存handoffの同見出しを参照する。
+
+### 2026-09-20 継続 — 独立した未決対象の共通文章化
+
+既存の二つの未決hostと選択済みのMoveを保ち、名詞句の列挙から独立性を述べる有限文へ構成する。09/13節の原文・意味・選択の契約を維持した文章化責務の差分である。
+
+| 既存owner（API `ai/services/ai_inference/`以下） | 今回の責務差分 |
+|---|---|
+| `emlis_ai_grounded_human_reception.py` | 必須のmaterial受容で完全な二hostと原文rolesが証明された場合に、独立性を一文として述べる。明示focus・未決・助詞・検討開始時期を保ち、別行動は別Moveへ残す。 |
+| `emlis_ai_grounded_observation_gate.py` | 実本文から二hostと独立性を読み、元の主体・時点・否定・行動候補を独立照合する。作者を呼び直して正解本文を得る検査へ置き換えない。 |
+
+STRUCTURE_MAP_DELTA_NONE。owner/file graph、新production file、renderer、source grammar、公開wire、質問／回答の採用条件、RN、保存、他中核・国家システムへのsource許可は同じ。2,573件の必須検査とsame100、保存329ケース616状態の最終結果、旧文面検査の失敗、未解消品質は[API既存引継ぎ](https://github.com/MassyuRed/mashos-api/blob/d3f67852e5f29a5713a507eece67d4dd6291eb1e/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)および正本06の同日節に保持する。変更した保存4件は問いのない初回FINALであり、回答後理解の改善とは呼ばない。商品NOT_CLEAR、Draft／既定OFF。
