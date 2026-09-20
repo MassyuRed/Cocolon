@@ -8691,3 +8691,22 @@ Emlisの意味選択・本文作者・独立本文検証・保存処理はbyte�
 rootが同じ初回100件と継承329ケース／616状態・前回追加8ケース／36状態の原入力、全文、質問・回答・訂正撤回・履歴・操作対応を読了した。公開実装commitは`10b9df7bcdb1d14a5b58f1c1eaf95a37ec2ab101`で、検証固定treeとの一致と全4変更ファイルの再取得byte一致を確認した。詳細は[API既存handoff](https://github.com/MassyuRed/mashos-api/blob/agent/cmee-v1a-i1sx-source-explicit-20260815/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)の同日節を参照。原入力・実本文・非公開証拠の識別子は公開しない。
 
 `STRUCTURE_MAP_DELTA_NONE`。今回の未提供解消を商品合格へ換算せず、NOT_CLEAR／default OFF／Draft、全体45%・商品0/3を維持する。次の限定候補は、撤回前の既認定丁寧形を受容文へ渡す`nominal_morphology`の不自然な名詞化。今回は未変更。9/23中間判断・9/26集中終了・9/27 Piece主軸・10/10内容・10/24運用の予定は維持する。
+
+---
+
+### 2026-09-21 継続 — 既認定回答の丁寧形と本人主語を保つ連体化
+
+前回の部分撤回後修正を引き継ぎ、撤回前の受容文で既認定回答を名詞句へ接続する際の不自然な丁寧形を修正した。既存Human Receptionのgroup内有限節fallbackで形容詞の終端を連体形へ戻し、認定済み本人sourceの文頭人称を助詞ごと保って受け手に対応させる。人称対応は丁寧形のない本人平叙節にも適用される。独立した逆復元では作者の変換関数を呼ばず元のsource全体と照合し、否定・程度・時制・出来事対応・時点・全文境界を照合する。意味選択、質問契約、外側品質基準は不変更。
+
+API実装`30bed4453c7c0b6571626c3f8afa30050e033e2c`は検証sourceとtree同一、全4変更ファイルを再取得して全文一致確認済み。
+
+- 旧58ファイル・2,963件：2,508 PASS／455 FAIL、ERROR／SKIP 0。旧test bytes同一、成否・失敗式・到達差・追加assert失敗0。
+- 新19件は全PASS。合計59ファイル・2,982件＝2,527 PASS／455 FAIL。
+- 同じ初手100件は全record一致、74 GENERATED／26 UNAVAILABLE。
+- 保存337ケース／652状態／829 GET一致。current本文変更10状態、履歴込み17状態。質問・操作制御変更0、本文なし11→11。
+- 元保存36系列は14 PASS／22 FAIL。停止後診断22系列は761条件371失敗・評価例外21、positive補助4条件3失敗を保持。別の診断5群39ケース433条件73失敗も不変。原物の書出し欠落2集合だけ、入力・assert不変で別出力先へ回復し、初回と回復の両方を保持した。
+- root本人が同じ100件、保存337ケース／652状態の全入力・完全本文・履歴・操作対応、変更前後の完全本文5組と全17状態対応を読了。DTO参照整合を確認し、内部graphの全派生ID検証まで済んだとは扱わない。
+
+具体的な原入力・実本文・非公開証拠識別子は公開資料に転記せず、詳細は[API既存handoff](https://github.com/MassyuRed/mashos-api/blob/agent/cmee-v1a-i1sx-source-explicit-20260815/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)の同日節に記録する。次の限定候補は、撤回前の既認定本人回答の与格表現が別の活用経路で一人称のまま残る箇所。今回追加修正はしない。
+
+**STRUCTURE_MAP_DELTA_NONE／NOT_CLEAR／default OFF／Draft・open・unmerged／45%・商品合格0/3**。主語付き名詞述語の丁寧形、standalone単一回答、人称の別経路、反復、長文の意味選択不足、未提供入力は残る。質問枠・保存・公開API・DB・RN・他中核の責務は変更しない。9/23中間判断、9/26集中終了、9/27以降Piece主軸・Emlis最大30%、10/10内容・10/24運用の予定を維持する。merge・ready化・deploy・enable・実DB・実機・実課金・外部生成AIは実施していない。
