@@ -94,7 +94,7 @@ Current shared PieceComposerはcaller-supplied candidateを評価するguard ada
 | State | Path／owner |
 |---|---|
 | B01 causal RED | ai/tests/piece_v2/ 以下のB01 protected tests |
-| B01 code-disabled owner | ai/services/ai_inference/piece_v2_contract.py | CODE_DISABLED_TARGET |
+| B01 code-disabled owner | ai/services/ai_inference/piece_v2_contract.py |
 | B02-A M0／M1 causal RED freeze | ai/tests/piece_v2/db/test_b02_m0_m1_legacy_bridge.py |
 | B02 implementation artifacts | current mainではrequired exact5がabsent。implementation／DDL／production applyは未成立 |
 
