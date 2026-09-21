@@ -14,7 +14,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**2026-09-21 PR候補の現在地：B8/B9の限定本文整形・実測レイアウトと開発用PNG出力を追加した。商品経路は未接続、B8/B9全体は未完了。新規ファイルと実行範囲は§13を優先する。以下の旧Q&A／V2未有効化の境界は維持する。**
+**2026-09-21 PR候補の現在地：CMEEのPiece専用source graph／intent／ArtifactPlanからcanonical本文を生成し、既存B9の実測レイアウト・開発PNGへ返すdisabled経路を接続した。意味処理と共有向け変換は限定範囲であり、商品経路・B8/B9全体は未完了。現行ファイルと実行範囲は§14を優先し、旧Q&A／V2未有効化の境界を維持する。**
 
 Pieceは三構造の中で最も専用資料が整っているが、現行old Q&A経路、将来Piece V2、RN／backendのactive owner、PCE-9A B02-A causal REDの進行状態を一枚で読めるcurrent mapがなかった。
 
@@ -191,7 +191,7 @@ shared tableのnon-Piece row／consumerは、exact Piece predicateとwriter／re
 3. canonical visual recipe／layout／PNG renderer／export receiptはruntime未実装。
 4. B02-Aはcausal RED test bytesだけが先行し、durable execution creditは未確認、implementation required artifactsはabsent。
 5. Piece current entry／manifestのB02-A stateはこのmapと同じwrite unitで同期済みであり、mergeまでDRAFT_CANDIDATEである。
-6. CMEE Piece adapter／runtime activationは別Mash判断まで開始しない。
+6. CMEE Piece adapterのdisabled候補はMashの継続指示で§14まで接続した。runtime activationは未承認・未実施であり、候補実装と混同しない。
 
 CMEE Piece detailed design candidate:
 
@@ -282,3 +282,46 @@ API PR #3の実装は `d27b4fe5310c95c463b6ddd2beb336d7f6cb0ccc`、親は `a4ec3
 **残件：** CMEEの意味graph／Piece intent／ArtifactPlanからの本文生成、共有向け意味保持変換、B5の認証済み保存入力取得、refined補足、RN preview／保存／履歴／native画像保存・共有。限定的な段落の並べ替えを汎用文章生成やB8/B9全体完了へ換算しない。次の主対象はCMEEから本文への未接続であり、末尾の言い回しや単語条件を増やすループにしない。
 
 `STRUCTURE_MAP_DELTA_UPDATED`：上記の新しいPiece段落編成ownerと共有meaning blockへの参照を本mapへ追加した。既存全体図・RN/API/保存/Nexusの所有者は変更しない。Emlis文面修正・未適用候補・既存失敗は今回変更しない。Draft／NOT_CLEAR／default OFF、全体45%・商品0/3、9/23・9/26・10/10の判断日を維持する。merge・Ready・deploy・実DB・実機・実課金・新native依存・外部生成AIは実施していない。
+
+## 14. 2026-09-21 — CMEE Piece consumerからcanonical本文・既存B9への接続
+
+API PR #3の実装は `a07cdc11e30fd48f9a8d4495c868f17f7addc5fe`、親は `d27b4fe5310c95c463b6ddd2beb336d7f6cb0ccc`。変更は下記6ファイルに限定した。GitHubへ同一commitで反映し、PR branchから6ファイルを再取得した際のblob SHAが検証済みローカル全文のGit blob SHAと全件一致した。§12・§13は各時点の履歴であり、現在のdisabled候補の接続先は本節を優先する。
+
+| path（mashos-api） | 現在の責務・接点 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py`（新規） | Piece original snapshotを既存CMEEのSourceEnvelope／EvidenceRef／GroundedMeaningGraphへ束ねる。原文の全完結文・重複・scalar/UTF-8範囲と保存入力ID・版・owner照合を保持する。共有meaning blockは暫定roleだけに利用し、summary・推測relationを本文にしない。 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py`（新規） | Piece専用request／intent／ArtifactPlan／artifact／outcome。source graphから本文を生成し、明示された人名と関係の対応だけを共有向けに抽象化する。本文・block・hash・形式は既存B8契約へ返す。 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py`（変更） | 型付きPiece requestをPiece consumerへdispatch。既存Emlis request、thread、元本文生成、更新checkpointの処理は保持する。 |
+| `ai/services/ai_inference/piece_v2_generation.py`（変更） | 既存B8の呼出形とsnapshot／文法ownerを維持し、本文生成は実CMEE呼出とPiece artifactの取得へ置換。旧段落compilerを包んで返す経路ではない。 |
+| `ai/tests/piece_v2/test_b08_cmee_piece_consumer.py`（新規） | 34の合成検査。実CMEE入口、旧author・Emlis本文を呼ばないこと、source/planの対応、限定的な人名抽象化、否定・条件・後続留保、同じ本文の既存B9渡しを検査する。 |
+| `scripts/piece_v2_preview_probe.py`（変更） | 旧8入力を保持し、単独・冒頭・途中の意向と明示人名関係の6合成入力を追加。既存描画処理・依存・fontを変えず、接続済み範囲と非完成の範囲をreportへ分ける。 |
+
+### 14.1 今回つながった経路と本文の差
+
+    disabled B8 generate_piece_candidate
+      -> MeaningExperienceEngine.generate(PieceGenerationRequest)
+      -> Piece original SourceEnvelope + existing GroundedMeaningGraph
+      -> PieceArtifactIntent / PieceArtifactPlan
+      -> source-bound Piece author + explicit-role publicization
+      -> PieceArtifact / canonical content_payload / piece_text / hash
+      -> existing B9 recipe / measured layout / development PNG probe
+
+Emlisのsource adapterやEmlis artifactを通してから本文を取り出す構造ではない。旧 `compile_piece_expression_plan` を呼ばなくても生成することを検査した。旧末尾意向経路のほか、認めた単独・冒頭・途中の一人称意向を扱い、後続の未決定・留保を意向と同じ読み取りgroupへ保持する。宣言形式へ昇格させるために留保を落とさない。
+
+共有向け変換は、原文に明示された「関係の人名さん」と、その対応が一意な同名参照の限定範囲である。原文の関係語を残し、人名を外す。誰との関係かを推測しない。同じ関係に別人がいる場合、同名の関係が衝突する場合、名前自体が話題の対象であると検出した場合は拒否する。過去の否定、条件付きの意向、現在の未決定を保持した実本文を確認した。
+
+### 14.2 実行・読取範囲
+
+固定portable Python3.12.13／pytest8.4.1／既存46依存、既存OSネットワーク拒否で、対象6検査ファイルは **146 PASS／0 FAIL／0 ERROR／0 SKIP**。旧5ファイル・112検査のbytesは変更していない。追加34検査を含む。既存Pydantic deprecation warningが1件ある。途中の検査では既存B01 loaderのexception class再読込との不一致を検出し、既存content ownerと同じValueError境界へ修正した後に全件成功した。
+
+14の合成入力を固定Pythonと開発PNG hostの両方で生成し、canonical candidate全体が14/14一致した。開発hostでは4:5／9:16の28 PNGを生成。全原文・全本文を読み、28画像を目視確認し、本文block完全再構成と実描画字形の収容を確認した。旧8入力の16件は、保存済み親版と全record・recipe・layout・復号画素・PNG bytesが一致した。新規6入力についても原文にない出来事・気持ち・原因・助言を付加していないことと、限定変換の実本文を読んだ。
+
+実行した検査は `ai/tests/piece_v2/` の `test_b01_piece_v2_contract_red.py`、`test_b08_piece_v2_generation.py`、`test_b08_piece_v2_expression.py`、`test_b08_source_contact_boundary.py`、`test_b09_piece_v2_visual.py`、`test_b08_cmee_piece_consumer.py`。既存Actions artifact `10381446286` の固定runtimeを継承した。runtime元snapshot全体をcurrent checkoutと呼ばず、現行Piece経路と無変更の共有依存を照合した対象検証である。B02 DB検査・全API・Emlis全文回帰・実機検証の成功数へ足さない。Emlis入口のdispatch保持検査もEmlis商品品質の全回帰を代替しない。
+
+### 14.3 完成扱いにしない範囲と次の接続
+
+**CMEEのPiece入口・source graph・専用plan・本文結果を既存B9へつなぐdisabledコード経路は成立したが、汎用の意味理解／文章生成とB8/B9全体は未完了。** 今回のgraphは原文の完結文単位とSOURCE_ORDERであり、述語・項・因果・照応・時点作用域を一般に解析する完成版ではない。段落計画も既存の限定文法と暫定roleを用いる。これを完全なSourceBoundMeaningGraph推論や、自然な文章の汎用生成へ換算しない。人名形式・関係語の適用範囲も限定され、あらゆる個人情報を処理できる公開安全性の完成版ではない。
+
+B5の認証済み保存入力取得、original/refined補足、実アプリpreview・保存・履歴・native画像書出し／共有は未接続。snapshotのowner照合は認証ではない。Linux開発PNGを製品rendererへ昇格せず、RN_FIRST／device-gatedを維持する。次はこの接続済みconsumer上で未解釈の意味と共有向け変換を進め、個別文末条件の追加や別の独立試作を本接続の代用にしない。
+
+`STRUCTURE_MAP_DELTA_UPDATED`。既存のRN／API公開契約／DB／保存／Nexus ownerは変更しない。Emlis通常文面・未適用候補・既存失敗は別作業のまま。Draft／NOT_CLEAR／default OFF、全体45%・商品0/3、9/23・9/26・10/10判断日を維持する。merge・Ready・deploy・実DB・実機・実課金・新native依存・外部生成AIは実施していない。公開記録へ利用者の私的入力・出力・識別子、runtimeやfontを追加しない。
