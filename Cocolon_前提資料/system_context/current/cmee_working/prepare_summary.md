@@ -1,17 +1,17 @@
 # Cocolon System Context prepare summary
 
-- status: `COMPLETE`
-- execution_mode: `TASK_CONTEXT_REMOTE_SEAL`
+- status: `PENDING_REMOTE_VERIFICATION`
+- execution_mode: `FULL_REBUILD_FALLBACK`
 - workspace: `cmee_working`
 - task: `cmee`
-- Cocolon: `d068856e35086cd301c1eaf46b3e5cc27dc1f88c`
+- Cocolon: `6b0973c841d536a2e6eaa97c586c320a93f83dc7`
 - mashos-api: `06ce311b3ea728b06f83439d268a34bed917c01c`
-- context_fingerprint: `2089a46768e39662d5a514eb27864bbb9b03921c4d0ce35bad748b65efcafe47`
-- task_status: `STEP4_TASK_CONTEXT_COMPILER_CMEE_ACTUAL_REVIEW_COMPLETE`
-- changed_path_count: `0`
+- context_fingerprint: `5a00a69ff5037aa97ab3d0429d66beda557d8673bc486836f236a45ff0f5d69c`
+- task_status: `STEP4_INCOMPLETE_BLOCKING_CONTEXT_OR_REMOTE_VERIFICATION`
+- changed_path_count: `49`
 - manual_operation_count: `0`
-- completion_claim: `STEP5_COCOLON_STANDARD_ENTRY_CONNECTED`
-- overall_claim: `COCOLON_SYSTEM_CONTEXT_STEPS1_TO_5_COMPLETE`
+- completion_claim: `None`
+- overall_claim: `None`
 - product_credit: `0`
 - automatic_progression: `false`
 

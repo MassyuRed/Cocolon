@@ -1,0 +1,64 @@
+name: Build Emlis Pro portable test runtime
+
+# Mash's 2026-09-15 explicit approval: build, transport and run a Pro startup test.
+# Separate from System Context indexing and from Emlis product-quality work.
+# 2026-09-22: restore the expired artifact using the unchanged pinned builder.
+# These guards describe live product heads, not the builder's historical source snapshot.
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    paths:
+      - '.github/workflows/emlis-pro-runtime.yml'
+      - 'tools/emlis_pro_runtime_build.py'
+      - 'tools/emlis_pro_runtime_run.py'
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: emlis-pro-runtime-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  build-runtime:
+    if: github.event.pull_request.number == 37 && github.event.pull_request.head.repo.full_name == github.repository && github.event.pull_request.draft == true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      EXPECTED_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Verify exact implementation and product heads
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          test "$(git rev-parse HEAD)" = "$EXPECTED_HEAD_SHA"
+          gh api repos/MassyuRed/Cocolon/pulls/37 | jq -e --arg head "$EXPECTED_HEAD_SHA" '.state == "open" and .draft and (.merged | not) and .head.sha == $head' >/dev/null
+          gh api repos/MassyuRed/Cocolon/pulls/30 | jq -e '.state == "open" and .draft and (.merged | not) and .head.sha == "4ece20b8ccc5e355ef440edb8c59b19458be883d"' >/dev/null
+          gh api repos/MassyuRed/mashos-api/pulls/3 | jq -e '.state == "open" and .draft and (.merged | not) and .head.sha == "52429d32f9bf998c1e7a8f89758863e64f5c7b39"' >/dev/null
+      - name: Build public runtime and text-source bundle without product execution
+        run: python3 tools/emlis_pro_runtime_build.py
+      - name: Verify unchanged heads before publishing
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          git diff --exit-code
+          test -z "$(git status --porcelain --untracked-files=no)"
+          gh api repos/MassyuRed/Cocolon/pulls/37 | jq -e --arg head "$EXPECTED_HEAD_SHA" '.state == "open" and .draft and (.merged | not) and .head.sha == $head' >/dev/null
+          gh api repos/MassyuRed/Cocolon/pulls/30 | jq -e '.head.sha == "4ece20b8ccc5e355ef440edb8c59b19458be883d"' >/dev/null
+          gh api repos/MassyuRed/mashos-api/pulls/3 | jq -e '.head.sha == "52429d32f9bf998c1e7a8f89758863e64f5c7b39"' >/dev/null
+      - name: Publish transport archive, not Emlis evaluation data
+        uses: actions/upload-artifact@v4
+        with:
+          name: emlis-pro-runtime-${{ github.event.pull_request.head.sha }}
+          path: ${{ runner.temp }}/emlis-pro-artifacts/
+          compression-level: 0
+          retention-days: 7
+          if-no-files-found: error
