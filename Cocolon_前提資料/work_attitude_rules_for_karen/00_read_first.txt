@@ -1,5 +1,5 @@
 work_attitude_rules_for_karen
-revision_date: 2026-08-20
+revision_date: 2026-09-24
 created_at: 2026-05-17 18:58:26 JST
 format: UTF-8 text / Notepad向け
 normative_status: CURRENT_ENTRY
@@ -22,6 +22,10 @@ normative_status: CURRENT_ENTRY
 議事録は仕様正本・実装承認・最新handoffの代替ではなく、全履歴の毎回必読や新しいGateを追加しません。
 
 # 0. Model Gate — 最初に必ず確認
+
+**2026-09-24 Mash決定：PieceはPro主体、EmlisAIはUltra主体、分析構造は変更なし。**
+
+Pieceは `18_chat_work_environment_selection_rule_2026_08_06.txt` §0を先に適用します。確認済みPro（GPT-6 Astra Proを含む）が既存承認範囲の技術設計・実装・検証・GitHub反映を担います。以下と `CURRENT_RULES.md` R4 / R9のGPT-5.6 Pro固定・Ultra専属役割の一般指定は、Pieceに限り同§0の限定決定を優先します。品質・禁止事項・個別承認・実際の独立review要件は変えません。
 
 CocolonのChat作業は、実際のモデルが`GPT-5.6 Pro`であることを確認できる場合だけ開始します。
 
@@ -67,7 +71,7 @@ non-Pro成果物は`UNTRUSTED_NOT_ADOPTED`として扱い、最後のPro verifie
 ## Cycle001 current navigation
 
 - `../08_cycle001_current_state.md`
-- Cycle001の次作業選択では、fresh applicable refのこのfileが唯一のcurrent navigation ownerです。mainがDraftより古い場合、mainをcurrentとして採用しません。監査時点のSHAを将来へ固定しません。
+- Cycle001の次作業選択に限り、fresh applicable refのこのfileが唯一のcurrent navigation ownerです。mainがDraftより古い場合、mainをcurrentとして採用しません。監査時点のSHAを将来へ固定しません。
 - `../07_latest_snapshot_diff.md`、Plan、Handoff、receipt、過去authorityの`next authority`は証拠・履歴であり、このfileと一致しない限りcurrent next actionへ採用しません。
 
 ## 実行Gate
