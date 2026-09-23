@@ -71,7 +71,7 @@ non-Pro成果物は`UNTRUSTED_NOT_ADOPTED`として扱い、最後のPro verifie
 ## Cycle001 current navigation
 
 - `../08_cycle001_current_state.md`
-- Cycle001の次作業選択に限り、fresh applicable refのこのfileが唯一のcurrent navigation ownerです。mainがDraftより古い場合、mainをcurrentとして採用しません。監査時点のSHAを将来へ固定しません。
+- Cycle001の次作業選択では、fresh applicable refのこのfileが唯一のcurrent navigation ownerです。mainがDraftより古い場合、mainをcurrentとして採用しません。監査時点のSHAを将来へ固定しません。
 - `../07_latest_snapshot_diff.md`、Plan、Handoff、receipt、過去authorityの`next authority`は証拠・履歴であり、このfileと一致しない限りcurrent next actionへ採用しません。
 
 ## 実行Gate
