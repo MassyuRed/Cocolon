@@ -2,7 +2,7 @@
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
 revision_date: "2026-09-26 JST"
-latest_api_implementation: "ef60a4f4a2551bd5d26c21aacc5698f5dd338b86"
+latest_api_implementation: "be889185be019010b14ed28f68e96e5c82b71333"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -15,7 +15,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**2026-09-26最新：API PR #3の `ef60a4f4a2551bd5d26c21aacc5698f5dd338b86` で、保存された選択感情・強度が、本人の記述した現在・肯定の感情文に明示されている場合の対応付けを追加した。先行 `33e1a8e0c8d7cb27aa78a53d31894a3d6865c793` の保存状態handoffを継承し、既存SQLと実Emlis処理が保存したINITIAL結果から、既存Piece本文まで到達した。認証サーバー照合は模擬、DBはPGliteであり、実Supabase・実アプリ成功ではない。本文に表れていない感情、refined補足、公開preview API／RN、保存・履歴・native共有は未完了。§17を最新、§12〜16を各時点の履歴として読む。Draft／default OFFと旧Q&A未切替を維持する。**
+**2026-09-26最新：API PR #3の `be889185be019010b14ed28f68e96e5c82b71333` で、自己理解の単独選択を感情へ変換せず保持し、既存Piece本文へ渡す限定修正を追加した。中断後、同一コードを再適用せず、追加68件（実engine7件を含む）と既存5,264件を実検証した。統合5,332件は5,199 PASS／133 FAIL。保存状態handoffと選択感情対応は§17を継承するが、先行handoff61件は今回は再実行していない。自己理解の実SQL保存状態・実認証・実アプリ往復は未確認。§18を最新、§12〜17を各時点の履歴として読む。公開preview API／RN、保存・履歴・native共有は未完了。Draft／default OFFと旧Q&A未切替を維持する。**
 
 Pieceは三構造の中で最も専用資料が整っているが、現行old Q&A経路、将来Piece V2、RN／backendのactive owner、PCE-9A B02-A causal REDの進行状態を一枚で読めるcurrent mapがなかった。
 
@@ -188,11 +188,11 @@ shared tableのnon-Piece row／consumerは、exact Piece predicateとwriter／re
 ## 8. Current gaps
 
 1. user-visible routeはold Q&Aのまま。
-2. 保存原入力の読取り・両記述欄・INITIAL保存状態handoffと、原文に明示された選択感情の限定対応は§17まで実装。本文に表れていない選択感情、refined補足、公開preview／RNは未接続。
-3. canonical recipe／実測layout／Linux開発PNGは§14・16・17で実行済み。製品native renderer／export receipt／端末保存・共有は未完了。
+2. 保存原入力の読取り・両記述欄・INITIAL保存状態handoffと、原文に明示された選択感情と自己理解modeの限定対応は§18まで実装。本文に表れていない選択感情、refined補足、公開preview／RNは未接続。
+3. canonical recipe／実測layout／Linux開発PNGは§14・16〜18で実行済み。製品native renderer／export receipt／端末保存・共有は未完了。
 4. B02-Aはcausal RED test bytesだけが先行し、durable execution creditは未確認、implementation required artifactsはabsent。
 5. Piece current entry／manifestのB02-A stateはこのmapと同じwrite unitで同期済みであり、mergeまでDRAFT_CANDIDATEである。
-6. CMEE Piece adapterのdisabled候補はMashの継続指示で§17まで接続した。runtime activationは未承認・未実施であり、候補実装と混同しない。
+6. CMEE Piece adapterのdisabled候補はMashの継続指示で§18まで接続した。runtime activationは未承認・未実施であり、候補実装と混同しない。
 
 CMEE Piece detailed design candidate:
 
@@ -480,3 +480,46 @@ Cocolon側は本map一つを同期する。全体地図01／01A／01B／01Cの�
 §15.4の接続先metadataは履歴のまま。今回の再照会・実ユーザー入力read・実DB書込み・migration・実機は0。開発環境／RPC／必要tableの未確認を、この検証用SQL成功で解消済みにしない。
 
 `STRUCTURE_MAP_DELTA_UPDATED`。primary outcomeはTECHNICAL_CREDIT、正式商品受入れは未成立。Draft／NOT_CLEAR／default OFF／商品0/3、最新議事録の全体管理48%を継承し、今回の検査件数で加点しない。Emlis／Analysis／共有契約／旧検査／公開API／RN／実DB／record／quota／visibility／native renderer／依存／merge／Ready／deploy／有効化は変更0。automatic_progression=false。
+
+
+## 18. 2026-09-26 — 自己理解の単独選択を保持した本文生成と中断後の実検証
+
+9/26議事録§5.4・§5.9の保存原入力→生成→プレビューの継続単位。中断前のAPI実装 `be889185be019010b14ed28f68e96e5c82b71333`（親 `ef60a4f4a2551bd5d26c21aacc5698f5dd338b86`）は反映済みで、再開時に同じbranch headと対象blobを取得した。コードを二重適用せず、残っていた実engine検証、既存検査の前後比較、実本文・開発画像の確認と本map同期を完了した。GPT-6 Astra Pro／CHAT_PRO_OK／Rule18§0・§11.3、Pro単一実行担当。
+
+### 18.1 原入力modeと本文の責務
+
+変更した商品コードは `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py` の17行追加だけ。blobは `cd5bcc1fc9796cc7e7a8eec62bb88392944bd65f`。新規 `ai/tests/piece_v2/test_b05a_piece_self_insight_mode.py` はblob `ee8848e798c41badca67659660dedf6e9ea00793`、61単体＋7実engineの68検査である。
+
+現行 `screens/InputScreen.js` は自己理解を単独選択し、強度UIを表示しないまま `medium` を送る。これを感情の強さや「自己理解できた」という命題へ変換しない。自己理解だけの選択と、強度未指定・空文字・現行UIのexact `medium` に限り、原保存JSONとそのidentityへ保持したまま、感情nodeを作らず既存本文生成へ進める。
+
+混在、重複、余分なkey、別の強度や未証明のaliasは拒否する。通常感情に必要な本人記述・程度・主体・時点の照合は変更しない。既存の保存状態handoff、両記述欄の出典、planと本文の再照合も継承する。source選択を消して成功にする処理や、意味・品質条件の緩和ではない。
+
+### 18.2 今回実行した検証と分母
+
+中断前commit messageの「7実engine検査は未実行」は当時の事実として保持し、この再開で実行した結果を追加する。撤回済みの旧「追加56件成功」は根拠にも分母にも使用していない。
+
+| 今回の実行集合 | 変更前 | 変更後 |
+|---|---:|---:|
+| 同じ新規68検査 | 54 PASS／14 FAIL | 68 PASS／0 FAIL |
+| 既存5,264検査 | 5,131 PASS／133 FAIL | 5,131 PASS／133 FAIL |
+| 変更後統合73ファイル／5,332検査 | — | 5,199 PASS／133 FAIL／0 ERROR／0 SKIP |
+
+既存5,264は§16の71ファイル5,198件と§17の選択感情66件。同じ5,264件のnode ID・成否・失敗詳細に差分0。比較の正規化はbaseline/work絶対pathとPython object addressだけで、旧test bytes・期待・除外・xfail・閾値変更は0。133失敗は未解消のまま保持する。
+
+**§17の保存状態handoff61検査は今回は再実行していない。** 先行記録を継承するだけで、今回の分母5,332へ加算しない。選択感情66検査は、実Q2 SQL／PGlite／Emlis保存状態から本文への2検査を含め全PASS。一方、新規の自己理解7実engine検査は合成した保存snapshotからの実CMEE呼出しであり、自己理解の実SQL保存状態・実認証・実アプリ往復の成功へ読み替えない。
+
+既存Actions artifact `MassyuRed/Cocolon:10679104273` のruntimeを取得した。ZIP SHA256 `3f3d9c30ec9ec7164bc93caa09021cbe2dbce011e45cc12b7de496349df16b9d`、TAR SHA256 `80217818d8693789f7f9b1ee44f0427a477f380d2cedc8e9894f9389e9f54485`、全18,548 checksumを照合。固定Python3.12.13／pytest8.4.1／既存46依存とOSネットワーク拒否を使った。旧snapshotにGitHub同一性を確認した関連overlayを載せる対象検証であり、全current repository・全Emlis・CIの合格ではない。環境再構築・新依存追加は0。
+
+### 18.3 本文と開発画像の実物
+
+同じ考え・行動欄を持つ7種類の保存形式で、変更前は全て選択情報未対応、変更後は全て実engineの本文生成まで到達した。全原入力・全本文を確認し、本人の意向と後続の未決定を保持した。同じ本文を使う保存形式差の確認であり、7種類の異なる意味を扱えるという主張ではない。modeを持たない同じ記述の本文との一致、元JSON保持、出典欄、identity差、snapshot差替え拒否も実engine検査で確認した。
+
+固定runtimeが返した候補exact1を無変更の既存B9 recipe／layout／開発描画へ渡し、4:5・9:16の2 PNGを作成。本文block完全再構成、実測字形収容、2画像の目視を確認した。hostで別の本文生成をした結果ではない。Linux開発画像はnative renderer、端末プレビュー・保存・共有、正式Product Readの合格ではない。font・runtime本体の配布は0。
+
+### 18.4 次の位置と維持する境界
+
+取得・欄別投影・保存状態判定・選択感情対応・今回の自己理解modeを再実装しない。次は採用済みの保存原入力→プレビューに沿って、対応入力をB5-Bと既存RNへ返す残差を扱う。公開API・共有契約・対象環境など既存承認を超える変更は別判断とする。未対応の通常感情、許可されたrefined補足、保存・履歴・同一本文再表示・native保存共有は必須残件のまま。
+
+全体地図01／01A／01B／01Cの既知の同一blob、全ファイル地図の役割path、最新議事録、対象の実sourceを照合した。歴史的役割地図の確認を全current source監査へ換算しない。本mapだけを同期し、旧§12〜17は履歴として保持する。
+
+`STRUCTURE_MAP_DELTA_UPDATED`。本単位は限定入力の本文提供を改善した技術結果であり、正式商品受入れではない。Draft／NOT_CLEAR／default OFF／商品0/3、全体管理48%を維持。今回の再開でAPI製品コードの追加変更は0。Emlis／Analysis／公開API／RN／実DB／record／quota／visibility／native renderer／依存／merge／Ready／deploy／有効化への変更も0。automatic_progression=false。
