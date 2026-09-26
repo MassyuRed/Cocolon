@@ -1,7 +1,8 @@
 ---
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
-revision_date: "2026-09-21 JST"
+revision_date: "2026-09-26 JST"
+latest_api_implementation: "dc6e9900f5fb8a7002eb88322c8e776bbed7647a"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -14,7 +15,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**2026-09-21 PR候補の現在地：CMEEのPiece専用source graph／intent／ArtifactPlanからcanonical本文を生成し、既存B9の実測レイアウト・開発PNGへ返すdisabled経路を接続した。意味処理と共有向け変換は限定範囲であり、商品経路・B8/B9全体は未完了。現行ファイルと実行範囲は§14を優先し、旧Q&A／V2未有効化の境界を維持する。**
+**2026-09-26最新：API PR #3の `dc6e9900f5fb8a7002eb88322c8e776bbed7647a` で、前回未反映だった保存原入力取得sliceと、考え・行動の両記述欄を既存CMEE／canonical本文へ渡す開発用接続を反映した。欄別の出典と段落を保持し、生成後に本人・保存内容・利用範囲を再照合する。選択感情／強度は意味処理が未接続のため、それらを含む新経路は明示UNAVAILABLE。実際の観測stage／terminal eligibility、preview API／RN、実認証・実DB・実機の一往復は未完了。§16を最新、§12〜15を各時点の履歴として読み、旧Q&A／V2未有効化を維持する。**
 
 Pieceは三構造の中で最も専用資料が整っているが、現行old Q&A経路、将来Piece V2、RN／backendのactive owner、PCE-9A B02-A causal REDの進行状態を一枚で読めるcurrent mapがなかった。
 
@@ -187,11 +188,11 @@ shared tableのnon-Piece row／consumerは、exact Piece predicateとwriter／re
 ## 8. Current gaps
 
 1. user-visible routeはold Q&Aのまま。
-2. saved-input exact1をsource authorityにするV2 runtimeは未接続。
-3. canonical visual recipe／layout／PNG renderer／export receiptはruntime未実装。
+2. 保存原入力の読取り・再照合と、両記述欄から既存生成への開発用接続は§16まで実装。選択感情、実stage／terminal handoff、公開preview／RNのV2 runtimeは未接続。
+3. canonical recipe／実測layout／Linux開発PNGは§14・16で実行済み。製品native renderer／export receipt／端末保存・共有は未完了。
 4. B02-Aはcausal RED test bytesだけが先行し、durable execution creditは未確認、implementation required artifactsはabsent。
 5. Piece current entry／manifestのB02-A stateはこのmapと同じwrite unitで同期済みであり、mergeまでDRAFT_CANDIDATEである。
-6. CMEE Piece adapterのdisabled候補はMashの継続指示で§14まで接続した。runtime activationは未承認・未実施であり、候補実装と混同しない。
+6. CMEE Piece adapterのdisabled候補はMashの継続指示で§16まで接続した。runtime activationは未承認・未実施であり、候補実装と混同しない。
 
 CMEE Piece detailed design candidate:
 
@@ -325,3 +326,103 @@ Emlisのsource adapterやEmlis artifactを通してから本文を取り出す�
 B5の認証済み保存入力取得、original/refined補足、実アプリpreview・保存・履歴・native画像書出し／共有は未接続。snapshotのowner照合は認証ではない。Linux開発PNGを製品rendererへ昇格せず、RN_FIRST／device-gatedを維持する。次はこの接続済みconsumer上で未解釈の意味と共有向け変換を進め、個別文末条件の追加や別の独立試作を本接続の代用にしない。
 
 `STRUCTURE_MAP_DELTA_UPDATED`。既存のRN／API公開契約／DB／保存／Nexus ownerは変更しない。Emlis通常文面・未適用候補・既存失敗は別作業のまま。Draft／NOT_CLEAR／default OFF、全体45%・商品0/3、9/23・9/26・10/10判断日を維持する。merge・Ready・deploy・実DB・実機・実課金・新native依存・外部生成AIは実施していない。公開記録へ利用者の私的入力・出力・識別子、runtimeやfontを追加しない。
+
+
+## 15. 2026-09-26 — B5-A保存原入力の取得・版照合（ローカル検証済み／GitHub未反映）
+
+本節は前回のローカル検証・未反映時点の履歴。続くGitHub反映と両記述欄の接続は§16を参照する。
+
+### 15.1 作業の位置づけと差分
+
+9/26週末議事録§5.4・§5.9で採用された「保存原入力→既存生成→プレビュー」を次の主対象とし、その最初の取得部分を実装した。基準はAPI PR #3 `5887cecd852a475f84d51b10d2f6a73aea46d5b5`とCocolon PR #30 `38a2ae8609dac4407e57da9ab2a10886c9338a5d`。前者の既存Piece source／writer／B9と既存検査は無変更である。
+
+本節と下記2ファイルは `LOCAL_TESTED_UNPUBLISHED_CANDIDATE`。本sessionで公開されたGitHub操作はread-onlyで、PRへの追加commitは0。保存された変更差分を再開に使い、反映済みの§14や前回の修正と混同しない。反映を行う実行ではfresh HEAD・差分を照合し、同じ実装と本mapを反映・再取得した事実に合わせて本節の公開状態を更新する。
+
+| repository / path | 今回の責務・接点 |
+|---|---|
+| mashos-api: `ai/services/ai_inference/piece_v2_source_adapter.py`（新規） | 既存bearer verifierで得たownerを、既存 `EmlisThreadStore.read` / `emlis_thread_read`へ渡す。保存原入力の全欄を分離して保持し、既存input-bundleのidentityと、空白・nullを含む原保存値のidentityを区別する。再使用前の再認証・再取得・版照合を行う。 |
+| mashos-api: `ai/tests/piece_v2/test_b05a_piece_v2_source_adapter.py`（新規） | 原入力・認証・版・失敗時非提供の64検査。うち12件は既存Q2 PostgreSQL WASM bridgeでrepository上の既存SQLを実行する。 |
+| Cocolon: `Cocolon_前提資料/current_structure/02_piece_current_structure.md`（本file） | 反映済み経路と、この未反映取得候補、次の未接続箇所を分離する。新しいcurrent mapは作らない。 |
+
+GPT-6 Astra Pro / CHAT_PRO_OK / Rule18§0・§11.3 / Pro single execution owner。現行のPiece限定分担内の作業であり、Emlisや共有契約の実装変更を含めない。
+
+### 15.2 取得で保持するものと、生成へ渡していないもの
+
+    authorization header
+      -> existing _require_user_id / verified owner
+      -> existing owner-scoped saved-original RPC
+      -> live saved original + current retention / tier
+      -> immutable PieceSavedOriginal (private)
+      -> revalidation before later operation (same input, current owner/access, exact revision)
+
+取得する原保存値は、`id`、`created_at`、`memo`、`memo_action`、`category`、`emotions`、`emotion_details`。考え・行動・選択感情・強度・分類を一つの文章へ潰さず、元のnullや空白も原保存snapshotへ保持する。正規化用copyは既存 `emlis_ai_current_input_bundle` を使い、保存時刻の正規化は現行保存入力request ownerと一致させる。input-bundle commitmentは既存NLSのNFC／LF規則を使用し、Pieceの本文hashへすり替えない。原保存値の別commitmentで、正規化後に同じでも原欄が編集された場合を検出する。
+
+RPCが返すthread／eventsの本文、Emlisの観測文、回答・補足は原入力へ入れない。取得に成功しただけでnormal／pre-question／refined stageやterminal eligibilityを発行しない。Emlis threadがまだない入力も原入力としてreadできることは、Piece生成を許可したこととは別である。
+
+別owner・削除済み・保存期間外はsourceとして返さない。入力の欄・記録時刻・tierが変われば、以前の取得物をそのまま再利用しない。通信・認証・保存読取の失敗ではraw診断・token・本文を例外へ転載せず、既存Piece error codeだけを返す。`PieceSavedOriginal`はprivate内部型でありpublic DTOではない。今の再取得はその瞬間の確認で、後続のpreview／saveまでを跨ぐtransactionや永続的な閲覧権限ではない。
+
+### 15.3 実行した検証と限界
+
+同一の最終追加test bytesを修正前後に実行し、未実装時64 FAILから実装後64 PASSを確認した。既存69ファイル／5,090件は前後とも4,957 PASS／133 FAIL。統合70ファイル／5,154件は5,021 PASS／133 FAIL、ERROR／SKIP0。既存全検査のbytes、status、失敗本文は不変（実行時間を比較対象から外し、tree絶対pathとPython object addressだけ正規化）。133件を解消済み・無害と判定したものではない。
+
+固定runtimeはPython3.12.13／pytest8.4.1／既存46依存・OSネットワーク拒否。runtime元の旧snapshotと、GitHub identityを照合した現在の関連overlayによる対象検証であり、全current repository／全Emlis／CIの合格ではない。既存の原入力read SQLをPGlite0.5.8で実行し、owner／削除／retention／変更／DB role拒否を検証した。bearer構文の実処理は使い、remote token lookupは合成値へ差し替えている。実Supabase認証や実DBの原入力取得は実行していない。
+
+途中で現行保存入力requestとの時刻・NFC／LF hash一致を追加検証し、不一致のREDを保存して修正した。初期試行・中断ログも保持し、最終XMLや成功結果へ置き換えて消していない。前回保存の2,323要求と開発PNGは今回再実行しておらず、新しいPiece本文・画像・画面出力を得たとはしない。
+
+### 15.4 次の未接続箇所と環境
+
+本候補はB5-Aの原入力取得sliceであって、B5-A／PCE8-U01全体完了ではない。stage snapshot、Emlis terminal control identity、許可されたsupplemental sourceとのhandoffは未成立として保持する。現在のCMEE Piece入口は単一 `original_text` を受けるため、次は原入力のthought／action／emotion等の区別を失わない投影と既存source／planへの接続を扱う。memoだけを渡して全原入力が接続されたとしない。B5-B preview API、既存RN画面、保存・履歴・native画像保存／共有は続く未完了である。既存の必要承認を超える契約・公開境界・実環境操作は自動実行しない。
+
+接続先のpublic schemaのtable一覧を読み取り専用で確認したところ、既存Q2 readが参照する `emlis_input_threads` と `emlis_thread_events` は返された一覧になかった。RPCそのものの存在・定義は今回の利用可能操作では確認していない。対象が承認済み開発環境であることも未確定であり、実接続確認の前提は未充足。migration・table作成・実ユーザー入力read・DB更新は行っていない。このmetadata確認を、実認証・保存原入力→プレビューの成功へ換算しない。
+
+`STRUCTURE_MAP_DELTA_UPDATED_LOCAL_ONLY`。production route登録、旧Q&A到達性、API／DB／RN／quota／record／visibility／renderer／Emlis／Analysis ownerは無変更。Draft／NOT_CLEAR／default OFF、商品受入未成立を維持する。GitHub反映、merge、Ready、deploy、有効化、新依存、実課金、実機、外部生成AIは今回行っていない。
+
+
+## 16. 2026-09-26 — 保存原入力の両記述欄から既存CMEEへの開発用接続
+
+最新週末議事録の§5.4・§5.9で採用された保存原入力→生成→プレビューのうち、生成前の欄別接続を進めた。前回の取得sliceを作り直さず、API PR #3へ下記6ファイルを同一commitで反映した。親 `5887cecd852a475f84d51b10d2f6a73aea46d5b5`、実装 `dc6e9900f5fb8a7002eb88322c8e776bbed7647a`、tree `0daeb040d71a1d0344c12d073ee57b00507a9f97`。全6作成blobと反映後のbranch読取が、検証済み全文のGit blob identityと一致した。Cocolon側は本mapの同期だけで、画面・API登録は変更しない。
+
+| path（mashos-api） | 責務・変更 |
+|---|---|
+| `ai/services/ai_inference/piece_v2_source_adapter.py` | 前回の本人限定原入力取得・再照合を継承。両記述欄のsnapshot投影と、取得→既存CMEE→再照合の開発用呼出しを追加。公開routeやstage権限を発行しない。 |
+| `ai/tests/piece_v2/test_b05a_piece_v2_source_adapter.py` | 前回の64検査をbyte不変で反映。既存Q2 SQLによる12検査を含む。 |
+| `ai/services/ai_inference/piece_v2_generation.py` | 既存private snapshotにoptionalな原保存JSONを保持。旧単一text呼出しのdefaultは不変。 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py` | 両記述欄を別出典へ対応付け、元欄に対するscalar座標とenvelope内UTF-8座標を保持。原保存値全体をidentityへbindし、選択感情の未対応を明示する。 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py` | 欄別出典をplan／realizationで照合。考え→行動の欄順と欄間段落を保持し、行動欄の意向の前置きや欄を跨ぐ主題省略を行わない。 |
+| `ai/tests/piece_v2/test_b05a_piece_saved_original_generation.py` | 今回の44検査。実CMEE／B9、欄・版・文字座標・欠落・再照合・未対応拒否、既存SQLから生成までの4検査を含む。 |
+
+### 16.1 成立した接続と範囲
+
+    development caller / explicit offline source_stage
+      -> existing bearer verifier and owner-scoped original read
+      -> immutable complete saved original
+      -> memo and memo_action field projection
+      -> existing CMEE Piece source / intent / ArtifactPlan / canonical body
+      -> owner / liveness / retention / exact revision / tier revalidation
+      -> development candidate; existing B9 can consume that same body
+
+原文にない接続詞・気持ち・因果・日付・決意を追加しない。欄順を出来事の時系列や因果と同一視しない。片方が空欄なら実際に書かれた側の出典を使い、途中で終わった欄を別欄につないで完結した文章に見せない。両欄の重複も、出典を失わせるために消さない。元欄の空白・null・分類・記録時刻をprivate recordへ保ち、分類や記録日時を勝手な本文説明へ変換しない。
+
+**選択された感情と強度の意味処理は未接続。** `emotions` または `emotion_details` に内容がある新saved-field経路は、`saved_emotion_meaning_not_yet_supported` でUNAVAILABLEにする。考え欄だけで成功にしたり、感情labelから意志を捏造したりしない。これは不足の明示であり、当該入力の商品対応を完成したという意味ではない。
+
+**source_stageは開発呼出側が明示した値であり、実際のEmlis terminal／stageの検証ではない。** normal／pre-questionの候補だけを扱い、refinedと補足は未接続。保存IDが読めたことをterminal success、生成適格、公開previewの許可へ読み替えない。後続のB5-A handoff／B5-Bが既存契約に沿って解決する必要がある。
+
+### 16.2 実行・出力確認
+
+前回分を含む既存70ファイル／5,154件は前後とも **5,021 PASS／133 FAIL**。今回の同一最終44検査は **44 FAIL→44 PASS**。統合71ファイル／5,198件は **5,065 PASS／133 FAIL／ERROR0／SKIP0**。旧70ファイルのbytes、全5,154件の成否と失敗本文は不変（tree絶対pathとPython object addressだけ正規化）。旧期待値更新、除外、xfail、閾値変更は0。全成功や133件の解消とはしない。
+
+今回の44件中4件は、既存Q2 SQL／PGliteを用いた保存原入力read→実CMEE→再照合を実行した。前回のSQL12件も同じ統合検査へ含む。remote token照合は模擬、DBは既存の検証用WASMであり、実Supabase・本番・端末ではない。Emlis thread／eventの新規保存が0であることも検証した。
+
+固定Python3.12.13／pytest8.4.1／既存46依存／OSネットワーク拒否を継承し、元archiveと18,548 checksumを再照合した。旧runtime snapshot＋現在の関連overlayの対象検証で、全repo／全Emlis／GitHub CIの合格を主張しない。初期40検査の結果、44検査初回実行の時間切れ、新規検査の冗長な原文一致assert修正を別記録へ保持し、最終44件のRED／GREENへ混ぜない。
+
+新規検査で記録した46回のengine呼出し（同一recordを除く29件）の原入力と実本文・拒否結果を読んだ。内部で本文生成後に再照合で返却を拒否した試行も含み、46件を最終返却成功数にしない。旧2,323要求の再実行は行わず、無変更の既存source／test結果から継承する。文章全般の自然さ、重複解消、汎用理解の合格ではない。
+
+実engine出力を固定した4候補から、無変更の開発renderer／B9で4:5と9:16の8 PNGを作成。本文blockの完全再構成、実測字形の収容、8画像の目視を確認した。開発hostで別の生成成功を捏造せず、固定Pythonの実候補をrenderer入力として使用した。font配布・新依存・native renderer昇格は0。商品受入れ・実アプリpreview／save／shareの合格ではない。
+
+### 16.3 次の未完了と保持境界
+
+残る直接接続は、選択感情／強度の意味処理と、実保存状態にboundされたstage／terminal control handoff、それを用いるpreview API／RNである。取得と本接続は再実装しない。refined補足、保存・履歴・同一本文再表示、native画像保存・共有は既存必須残件として維持する。公開API／DB／共有契約や実環境変更が必要な箇所は別の承認境界を守る。
+
+§15.4の接続先DB metadataは前回確認の履歴であり、今回再照会していない。参照テーブル不足、RPC定義・開発環境の未確認を解消済みにしない。実Supabase認証・実入力read・migration・実機は行っていない。
+
+`STRUCTURE_MAP_DELTA_UPDATED`。GitHubのコード反映と、このmap更新は実施するが、Draft／NOT_CLEAR／default OFF／正式商品0/3を維持する。全体48%は最新議事録の管理評価を継承し、今回の検査件数や文書更新で加点しない。Emlis／Analysis／共有契約／旧検査／公開API／RN／DB／record／quota／visibility／native renderer／依存／merge／Ready／deploy／有効化は変更0。automatic_progression=false。
