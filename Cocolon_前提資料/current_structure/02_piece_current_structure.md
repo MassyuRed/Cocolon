@@ -2,7 +2,7 @@
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
 revision_date: "2026-09-26 JST"
-latest_api_implementation: "be889185be019010b14ed28f68e96e5c82b71333"
+latest_api_implementation: "fa82077febb1363e286eb225fd53ff50ad863bbf"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -15,7 +15,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**2026-09-26最新：API PR #3の `be889185be019010b14ed28f68e96e5c82b71333` で、自己理解の単独選択を感情へ変換せず保持し、既存Piece本文へ渡す限定修正を追加した。中断後、同一コードを再適用せず、追加68件（実engine7件を含む）と既存5,264件を実検証した。統合5,332件は5,199 PASS／133 FAIL。保存状態handoffと選択感情対応は§17を継承するが、先行handoff61件は今回は再実行していない。自己理解の実SQL保存状態・実認証・実アプリ往復は未確認。§18を最新、§12〜17を各時点の履歴として読む。公開preview API／RN、保存・履歴・native共有は未完了。Draft／default OFFと旧Q&A未切替を維持する。**
+**2026-09-26最新：API PR #3の `fa82077febb1363e286eb225fd53ff50ad863bbf` で、保存前の内部組立物に対する画像設定だけの変更を実装した。本文を再生成せず、全本文・content payloadとhashを保持し、変更前後に元入力・保存状態・権限・tierを再照合する。追加54件は全PASS、統合5,446件は5,313 PASS／133 FAIL。前回 `57df8fc` の組立処理も反映済みだが、その60件のテストはツール安全性チェックで未反映のまま。今回の54件とは別であり、再送・代替していない。§20を最新、§19を前回組立の記録、§12〜18を履歴として読む。保存済みpreview発行・HTTP／RN・保存／履歴・native共有は未完成。Draft／default OFFと旧Q&A未切替を維持する。**
 
 Pieceは三構造の中で最も専用資料が整っているが、現行old Q&A経路、将来Piece V2、RN／backendのactive owner、PCE-9A B02-A causal REDの進行状態を一枚で読めるcurrent mapがなかった。
 
@@ -188,11 +188,11 @@ shared tableのnon-Piece row／consumerは、exact Piece predicateとwriter／re
 ## 8. Current gaps
 
 1. user-visible routeはold Q&Aのまま。
-2. 保存原入力の読取り・両記述欄・INITIAL保存状態handoffと、原文に明示された選択感情と自己理解modeの限定対応は§18まで実装。本文に表れていない選択感情、refined補足、公開preview／RNは未接続。
-3. canonical recipe／実測layout／Linux開発PNGは§14・16〜18で実行済み。製品native renderer／export receipt／端末保存・共有は未完了。
+2. 保存原入力・保存状態から本文／recipeの内部組立と画像設定だけの変更を§20まで実装。本文に表れていない選択感情、refined補足、保存済みpreview発行、HTTP／RNは未接続。
+3. canonical recipe／実測layout／Linux開発PNGは§14・16〜20で実行済み。製品native renderer／export receipt／端末保存・共有は未完了。
 4. B02-Aはcausal RED test bytesだけが先行し、durable execution creditは未確認、implementation required artifactsはabsent。
 5. Piece current entry／manifestのB02-A stateはこのmapと同じwrite unitで同期済みであり、mergeまでDRAFT_CANDIDATEである。
-6. CMEE Piece adapterのdisabled候補はMashの継続指示で§18まで接続した。runtime activationは未承認・未実施であり、候補実装と混同しない。
+6. CMEE Piece adapterとB5-B内部組立のdisabled候補はMashの継続指示で§20まで接続した。runtime activationは未承認・未実施であり、候補実装と混同しない。
 
 CMEE Piece detailed design candidate:
 
@@ -523,3 +523,59 @@ Cocolon側は本map一つを同期する。全体地図01／01A／01B／01Cの�
 全体地図01／01A／01B／01Cの既知の同一blob、全ファイル地図の役割path、最新議事録、対象の実sourceを照合した。歴史的役割地図の確認を全current source監査へ換算しない。本mapだけを同期し、旧§12〜17は履歴として保持する。
 
 `STRUCTURE_MAP_DELTA_UPDATED`。本単位は限定入力の本文提供を改善した技術結果であり、正式商品受入れではない。Draft／NOT_CLEAR／default OFF／商品0/3、全体管理48%を維持。今回の再開でAPI製品コードの追加変更は0。Emlis／Analysis／公開API／RN／実DB／record／quota／visibility／native renderer／依存／merge／Ready／deploy／有効化への変更も0。automatic_progression=false。
+
+
+## 19. 2026-09-26 — 保存原入力から本文・画像設定の内部組立（前回の反映状態）
+
+前回実装 `57df8fc3f2c331470f7b8a448579a82886e6361b` は `ai/services/ai_inference/piece_v2_preview_service.py` の新規1ファイル。初期blobは `288121d15a3e680fc9edb7dadfb3a60221ef55a4`。PCE-6のsource_refをB5-Aの保存状態handoffへ照合し、既存CMEE本文と現在tierのB9 recipeをimmutableな内部組立物へ結合、返却前に再照合する。Emlis本文やclient指定のowner／tier／本文をsourceにしない。
+
+前回追加 `ai/tests/piece_v2/test_b05b_piece_v2_preview_api.py`（blob `b008d163205c96081dccf4cb188ea23a522babf6`）は60件のローカル検証済みだが、GitHubへの書込みがツール安全性チェックでブロックされた。未反映のまま保持し、再送・別経路による迂回・別名への置換はしていない。前回のmap案も未反映だったため、本節で実装と未反映testを分けて同期する。
+
+前回の保存済み検証原物は既存5,332件＋追加60件の5,392件、5,259 PASS／133 FAIL／ERROR0／SKIP0。60件中2件は既存Q2 SQL／PGlite／Emlis保存状態を用い、外部認証は模擬。本文と画像設定の組立は保存済みpreviewではなく、ID・revision・expiry・idempotency・safety-ready・quota結果を発行していない。実HTTP／RNの成功ではない。
+
+## 20. 2026-09-26 — 本文を再生成しない画像設定変更
+
+最新議事録§5.4・§5.9の保存原入力→プレビューに必要な、PCE-6「visual-only changes may not change text/hash」の内部処理を実装した。実行担当はGPT-6 Astra Pro／CHAT_PRO_OK／Rule18§0・§11.3のPro単一owner。保存基盤を仮のin-memory storeで代替せず、実DB・migration・公開登録へ広げていない。
+
+### 20.1 変更ファイルと接続
+
+| path（mashos-api） | 今回の差分 |
+|---|---|
+| `ai/services/ai_inference/piece_v2_preview_service.py` | `prepare_visual_change`を追加。内部で保持したPreparedPiecePreviewに対し、画像設定だけを置換する。最終blob `c8751df0a0e02cc09855a6777db67dcecf0acc0e`。 |
+| `ai/tests/piece_v2/test_b05b_piece_visual_change.py` | 新しい変更操作の54検査。前回未反映60件の再送・代替ではない。blob `ed953d70c086acd26d3d6bd196b7ca878991e365`。 |
+
+テストcommit `c0487ae474ab25d062768afd77a8b9442c37dfff`、実装commit `fa82077febb1363e286eb225fd53ff50ad863bbf`。基準 `57df8fc` からの変更はこの2pathだけ。両ファイルをGitHubから再取得したblobが、検証した全文のGit blobと一致する。
+
+    server-held prepared original
+      -> copied complete visual selection
+      -> original/state/access/tier revalidation
+      -> existing content/recipe consistency check
+      -> existing B9 recipe under unchanged authoritative tier
+      -> original/state/access/tier revalidation
+      -> new immutable internal preparation; exact original content retained
+
+本文作者は呼ばない。piece_textのUTF-8 bytes、content payloadとhash、format、eligible formats、private状態は変更しない。元の内部組立物も変更しない。theme／aspect／brandingの全3selectorを受け、nullは既存B9のtier別defaultへ戻す。任意のclient本文、tier、recipeや文体変更を受け入れるHTTP APIではない。
+
+変更前後に原入力・保存状態・アクセス・tierの不一致があれば返却を拒否する。内部hash不整合を修復したふりで成功にしない。利用プランの画像選択範囲は既存B9のまま。これは内部データの新しい組立であり、保存previewのrevision更新、同一要求再試行保証、保存・quota消費の実装ではない。
+
+### 20.2 実検証と比較の根拠
+
+同じ最終54検査を旧serviceに対して実行すると54 FAIL、新実装では54 PASS。新規単体fixtureの本文が既存の文字数・形式条件を満たさなかった初回52 FAIL／2 PASSも原記録へ残し、fixtureだけを修正した。商品条件や旧テストは変更していない。
+
+統合75ファイル／5,446件は **5,313 PASS／133 FAIL／0 ERROR／0 SKIP**。うち既存74ファイル／5,392件は5,259 PASS／133 FAILで、前回の完走済み検証原物と全caseの成否・失敗詳細が一致した。比較で正規化したのは作業root pathとPython object addressだけ。旧テストbytes・期待・除外・xfail・閾値の変更は0。
+
+今回試した変更前の既存全件再実行は時間切れで中断したため、完走した前後二実行とは報告しない。上記比較は前回の検証済み5,392件を基準とする。前回未反映60件も同じbytesでローカル統合に含み、GitHubだけでその分母を再現できるとはしない。保存状態handoff61件は今回も未実行で、分母に含めない。133失敗は未解消のまま保持する。
+
+新54件には既存Q2 SQL／PGlite／実Emlis保存状態を使う2件を含む。Plusの保存入力から同じ本文のままテーマを変更でき、B9処理中に原入力を編集した場合は返却を拒否した。thread／eventは変更しない。外部認証は模擬で、実Supabase・端末の成功ではない。
+
+既存artifact `10679104273` の固定Python3.12.13／pytest8.4.1／46依存／OSネットワーク拒否を再利用。TARと全18,548 checksumを照合した。旧runtime snapshot＋照合済み関連overlayの対象検証であり、全current repository・全Emlis・GitHub CIの合格ではない。
+
+### 20.3 本文・画像と残る本経路
+
+同じ一つの記述に対する3形式×5選択の15組と、SQL保存入力の1組について、変更前後の実本文・artifactを確認した。15種類の意味を新しく理解したという主張ではない。固定runtimeが返した4artifactをそのまま既存の開発B9描画へ渡し、変更前後の4 PNGで本文block再構成・実測字形収容・目視を確認した。本文をhostで別生成していない。native renderer／実機保存共有／正式Product Readは未完了である。
+
+次の本経路は専用保存基盤からpreview ID／revision／expiry／同一要求再試行を成立させ、HTTP／RNへ接続する部分。既存PCE-6専用table設計とPCE-8のB2／B5を使い、旧Q&A保存の流用や仮成功はしない。migration・実DB・公開契約の既存承認境界を省略しない。今回の画像設定変更を理由に、同種の周辺機能追加を主経路へ戻る条件にしない。
+
+Cocolon側は本mapのみ更新する。全体地図01／01A／01B／01Cの同一blobと対象の役割接点、最新議事録、current rule・対象実ファイルを照合した。historical地図の確認を全current source監査へ換算しない。§12〜18は履歴として保持する。
+
+`STRUCTURE_MAP_DELTA_UPDATED`。今回の新規実装・54検査は反映済み、前回60検査は未反映のまま。Draft／NOT_CLEAR／default OFF／正式商品0/3／管理48%を維持。公開API／RN／実DB／migration／record／quota／visibility／native renderer／依存／Emlis／Analysis／merge／Ready／deploy／有効化は変更0。automatic_progression=false。
