@@ -2,7 +2,7 @@
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
 revision_date: "2026-09-26 JST"
-latest_api_implementation: "dc6e9900f5fb8a7002eb88322c8e776bbed7647a"
+latest_api_implementation: "ef60a4f4a2551bd5d26c21aacc5698f5dd338b86"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -15,7 +15,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**2026-09-26最新：API PR #3の `dc6e9900f5fb8a7002eb88322c8e776bbed7647a` で、前回未反映だった保存原入力取得sliceと、考え・行動の両記述欄を既存CMEE／canonical本文へ渡す開発用接続を反映した。欄別の出典と段落を保持し、生成後に本人・保存内容・利用範囲を再照合する。選択感情／強度は意味処理が未接続のため、それらを含む新経路は明示UNAVAILABLE。実際の観測stage／terminal eligibility、preview API／RN、実認証・実DB・実機の一往復は未完了。§16を最新、§12〜15を各時点の履歴として読み、旧Q&A／V2未有効化を維持する。**
+**2026-09-26最新：API PR #3の `ef60a4f4a2551bd5d26c21aacc5698f5dd338b86` で、保存された選択感情・強度が、本人の記述した現在・肯定の感情文に明示されている場合の対応付けを追加した。先行 `33e1a8e0c8d7cb27aa78a53d31894a3d6865c793` の保存状態handoffを継承し、既存SQLと実Emlis処理が保存したINITIAL結果から、既存Piece本文まで到達した。認証サーバー照合は模擬、DBはPGliteであり、実Supabase・実アプリ成功ではない。本文に表れていない感情、refined補足、公開preview API／RN、保存・履歴・native共有は未完了。§17を最新、§12〜16を各時点の履歴として読む。Draft／default OFFと旧Q&A未切替を維持する。**
 
 Pieceは三構造の中で最も専用資料が整っているが、現行old Q&A経路、将来Piece V2、RN／backendのactive owner、PCE-9A B02-A causal REDの進行状態を一枚で読めるcurrent mapがなかった。
 
@@ -188,11 +188,11 @@ shared tableのnon-Piece row／consumerは、exact Piece predicateとwriter／re
 ## 8. Current gaps
 
 1. user-visible routeはold Q&Aのまま。
-2. 保存原入力の読取り・再照合と、両記述欄から既存生成への開発用接続は§16まで実装。選択感情、実stage／terminal handoff、公開preview／RNのV2 runtimeは未接続。
-3. canonical recipe／実測layout／Linux開発PNGは§14・16で実行済み。製品native renderer／export receipt／端末保存・共有は未完了。
+2. 保存原入力の読取り・両記述欄・INITIAL保存状態handoffと、原文に明示された選択感情の限定対応は§17まで実装。本文に表れていない選択感情、refined補足、公開preview／RNは未接続。
+3. canonical recipe／実測layout／Linux開発PNGは§14・16・17で実行済み。製品native renderer／export receipt／端末保存・共有は未完了。
 4. B02-Aはcausal RED test bytesだけが先行し、durable execution creditは未確認、implementation required artifactsはabsent。
 5. Piece current entry／manifestのB02-A stateはこのmapと同じwrite unitで同期済みであり、mergeまでDRAFT_CANDIDATEである。
-6. CMEE Piece adapterのdisabled候補はMashの継続指示で§16まで接続した。runtime activationは未承認・未実施であり、候補実装と混同しない。
+6. CMEE Piece adapterのdisabled候補はMashの継続指示で§17まで接続した。runtime activationは未承認・未実施であり、候補実装と混同しない。
 
 CMEE Piece detailed design candidate:
 
@@ -426,3 +426,57 @@ RPCが返すthread／eventsの本文、Emlisの観測文、回答・補足は原
 §15.4の接続先DB metadataは前回確認の履歴であり、今回再照会していない。参照テーブル不足、RPC定義・開発環境の未確認を解消済みにしない。実Supabase認証・実入力read・migration・実機は行っていない。
 
 `STRUCTURE_MAP_DELTA_UPDATED`。GitHubのコード反映と、このmap更新は実施するが、Draft／NOT_CLEAR／default OFF／正式商品0/3を維持する。全体48%は最新議事録の管理評価を継承し、今回の検査件数や文書更新で加点しない。Emlis／Analysis／共有契約／旧検査／公開API／RN／DB／record／quota／visibility／native renderer／依存／merge／Ready／deploy／有効化は変更0。automatic_progression=false。
+
+
+## 17. 2026-09-26 — 保存状態からのPiece本文と、明示された選択感情の対応付け
+
+9/26議事録§5.4・§5.9の保存原入力→生成→プレビューを継続した。再開時、API PR #3は添付checkpointの `dc6e990` から `33e1a8e0c8d7cb27aa78a53d31894a3d6865c793` へ進んでいた。後者の保存状態handoffと追加61検査は継承し、重複実装せず再取得して照合した。本単位の新しい実装は `ef60a4f4a2551bd5d26c21aacc5698f5dd338b86`、親 `33e1a8e0c8d7cb27aa78a53d31894a3d6865c793`、tree `d74f583dc831e7fe9f767f2d354b9648a95f71cf`。GPT-6 Astra Pro／CHAT_PRO_OK／Rule18§0・§11.3、Pro単一実行担当。
+
+### 17.1 既存経路と今回の差分
+
+| path（mashos-api） | 扱いと責務 |
+|---|---|
+| `ai/services/ai_inference/piece_v2_source_adapter.py` | 先行33e1a8eを無変更で継承。保存済みINITIAL観測・同じ試行の完了・原入力版・現行利用条件から、回答前のoriginal-only normal／pre-questionを判定し、本文生成後に再照合する。呼出側のstageやeligible指定を権限にしない。 |
+| `ai/tests/piece_v2/test_b05a_piece_saved_state_handoff.py` | 先行61検査をbyte不変で継承。実SQL／Emlisで保存したpre-question・未回答skip／stopの状態判定と、未対応本文の拒否を含む。 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py` | 今回変更。全原保存値を保持し、選択欄のfield／indexと、本人が書いた感情のnode／evidenceを対応付ける。既存の欄別再導出をplan／realizationまで使う。 |
+| `ai/tests/piece_v2/test_b05a_piece_selected_feeling_binding.py` | 今回追加66検査。意味の一致・不一致、主体・程度・否定・過去・留保、複数選択、改変拒否、実SQL保存結果から本文までの到達と生成中の変更拒否。 |
+
+Cocolon側は本map一つを同期する。全体地図01／01A／01B／01Cの同一blobと全377の役割行、最新議事録、対象実ファイルを確認した。System Context prepareは継承snapshotの参照不一致で完了していないため、既存規定の原典直接読取りを用いた。全current repositoryの監査やSystem Contextの完了とはしない。
+
+### 17.2 選択感情の意味を本文へ欠落させない限定接続
+
+    saved original + current INITIAL observation/control
+      -> original-only saved-state handoff
+      -> complete memo / memo_action source graph
+      -> each selected feeling and specified strength bound to an explicit self proposition
+      -> existing ArtifactPlan / canonical body
+      -> saved source / state / access revalidation
+      -> disabled candidate / unchanged B9
+
+既存の感情集合・強度正規化をread-onlyで再利用する。対象は、本人が現在の感情を肯定形で明記した完結文と、そこに明示された程度が選択内容を覆う場合だけ。raw選択値、別欄、空白、null、版は既存snapshotに保持し、選択情報を削ってtext-only成功にしない。タグと詳細の両方がある場合、選択順も一致させる。
+
+感情名だけから原因・意志・行動を追加しない。選択強度が未指定なら程度を補わない。既存の強度aliasを正規化してもraw値と本文は変えない。自己理解は入力modeとして保持し、感情を捏造しない。否定・過去・可能性・条件・他者・伝聞や、複数候補・不一致・本文で表現されていない感情は、当該対応付けの根拠にせずUNAVAILABLEを維持する。これは感情の汎用文章化の完成ではない。
+
+本人の感情文そのものは、既存の原文保持処理で本文へ残す。選択欄に合わせて書き足した文章ではない。価値観・意向は既存作者が別に解釈し、感情だけで意志を作らない。本文の自然さや共有価値全般を、この対応検査だけで合格にしない。
+
+### 17.3 実際に到達した範囲と検証
+
+既存Q2 SQLとEmlisThreadService／CMEEを用いて検証用保存入力のINITIAL結果を作成し、その実保存結果のnormal_observation identityを既存adapterから受け取り、Pieceのcanonical本文まで通した。原入力の感情・強度と意向を保持した実本文を確認した。生成途中に選択強度を編集する対になる検査では、内部生成後でも返却前の再照合で候補を拒否した。Piece呼出しによるEmlis再生成、保存thread／event変更、record／quota消費は0。
+
+認証サーバーへの照合は模擬、SQL実行は既存PGlite／WASM。実Supabaseの原入力取得・実認証・実API・実画面の一往復ではない。先行33e1a8eの合成controlによる本文成功だけを実保存状態からの成功へ換算せず、今回のSQL結果を分離した。
+
+最終の同一新66検査は、変更前45 FAIL／21 PASSから、変更後66 PASS。既存71ファイル／5,198件の成否と133失敗の詳細は不変（実行時間・runtime絶対path・Python object addressのみ比較から除外）。先行の保存状態61検査も全PASS。公開するexact blobで再実行した統合73ファイル／5,325件は **5,192 PASS／133 FAIL／0 ERROR／0 SKIP**。旧検査の変更・除外・xfail・品質閾値変更は0。全件GREENではない。
+
+途中のSQL探索で確認した既存上流の未提供・強度未指定の拒否、新規検査の引数／recipe key誤り、最初の実行起動失敗は、それぞれの原記録へ保持した。旧検査を変更して解消したものではない。公開用転記で既存commentの英語冠詞のみ2byteが変わったため、AST一致を確認したうえで、その公開exact bytesで上記統合検査を完走した。途中結果を最終分母へ足さない。
+
+固定Python3.12.13／pytest8.4.1／既存46依存／OSネットワーク拒否、元archiveのZIP／TAR／全18,548 checksumを照合した継承runtimeを使用。現在の関連overlayを載せた対象検証であり、全repo・全Emlis・GitHub CIの合格ではない。旧2,323要求の再実行は今回行っていない。
+
+実engineの2候補を固定入力として、無変更の開発B9 rendererで4:5／9:16の4 PNGを作成。本文block完全再構成と実測字形収容を検査し、4画像を目視確認した。開発hostの別生成成功、端末rendererの受入れ、商品合格とはしない。font／runtime本体の配布、新依存は0。
+
+### 17.4 次の位置と保持する未完了
+
+取得、両記述欄投影、保存状態handoff、今回の明示感情対応を作り直さない。次は採用済みの保存原入力→プレビューに向け、対応する入力をB5-Bと既存RNへ返す残差を扱う。既存の公開API／共有契約／実環境の承認境界を越える差分は、具体化して別判断とする。未対応の選択感情、許可されたrefined補足、保存・履歴・同一本文再表示・native書出し共有は引き続き必須残件である。
+
+§15.4の接続先metadataは履歴のまま。今回の再照会・実ユーザー入力read・実DB書込み・migration・実機は0。開発環境／RPC／必要tableの未確認を、この検証用SQL成功で解消済みにしない。
+
+`STRUCTURE_MAP_DELTA_UPDATED`。primary outcomeはTECHNICAL_CREDIT、正式商品受入れは未成立。Draft／NOT_CLEAR／default OFF／商品0/3、最新議事録の全体管理48%を継承し、今回の検査件数で加点しない。Emlis／Analysis／共有契約／旧検査／公開API／RN／実DB／record／quota／visibility／native renderer／依存／merge／Ready／deploy／有効化は変更0。automatic_progression=false。
