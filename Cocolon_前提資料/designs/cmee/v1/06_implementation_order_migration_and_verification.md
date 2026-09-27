@@ -8961,3 +8961,36 @@ API公開commit **[`a748143ad76f45c4d0bb8893dc8d3f88e1075f13`](https://github.co
 **次の残件**：実本文に残る「少し私は不安でした」「私は私には不安です」のfallbackについて、中途/重複本人主語のsource全体を削らず扱う既存作者・独立逆読の共通原因を確認する。両者の原因が同一とは未確定。本人主語の機械的削除・認定拡張を解決としない。外側過去、反復・原文再掲・矛盾する反応の読み心地、未認定表現、長文の意味選択も未解消。
 
 **STRUCTURE_MAP_DELTA_NONE／全体48%・商品合格0/3／NOT_CLEAR／default OFF／Draft・open・unmerged**を維持。既存作者・独立Gate内部の修正でowner・route・質問・保存schema・公開API・DB・RN・他中核・全体構造は不変。Ready・merge・deploy・enable・実DB・実機・実課金・外部生成AI・正式Product Read PASSは実施していない。
+
+
+---
+
+### 2026-09-27 継続 — 程度語の後の本人主語をsourceの位置と意味を保って返す
+
+**主分類：TECHNICAL_CREDIT。** MashのEmlisAI残件継続指示と添付txtに基づき、API `a748143ad76f45c4d0bb8893dc8d3f88e1075f13`／本PR30 `2033d9d387466198854cd08157f89bc091942a93`を開始正本としてfresh確認した。前提資料・CURRENT_RULES・恒久incident全文・全体設計・current_structure・全tracked pathと既存ファイル地図・最新9/26 weeklyの§3.8と採用済み§5.9を確認した。read-firstに基づく原資料直接参照を使用し、System Context新規生成・最新化は主張しない。
+
+前節の中途/重複本人主語のうち、既存程度語一つの直後にSELF本人が一つある場合を修正した。既存作者・独立Gateが文頭本人だけを想定していた共通原因を扱い、source全体が既存感情述語まで証明される場合に限り、本人の元の位置で「あなた」へ転換する。程度・助詞・否定・時制・説明・回答所属時点を保持する。独立Gateは作者を呼ばず、実本文から元source全文を復元する。既存の出来事に結び付く回答と撤回後の回答の双方に適用し、認定・語彙・意味選択・Move選択/順序・品質閾値は変更していない。
+
+3出来事fixtureへの「今は少し私は不安でした。」と元出来事撤回では、「今、回答した時点で少し私は不安でしたことを見失わず、小さくせずに受け止めています。」から「その時は嬉しくなかったし、回答した時点で、少しあなたは不安だったのですね。」へ改善した。「今は少し私は嬉しかったのだ。」は従来の `emlis_refined_body_unavailable` から本文生成が復旧し、元反応と他の反応を残した後に「回答した時点で、少しあなたは嬉しかったのですね。」を返す。撤回済み出来事を戻さない。
+
+| 確認 | 結果と範囲 |
+|---|---|
+| baseline再実行 | 今回開始headの未変更worktreeで715件＝686 PASS／29 FAIL。ERROR／SKIP 0。 |
+| 最終再実行 | **759件＝730 PASS／29既存FAIL、ERROR／SKIP 0**。contracts他193件は選択外。旧715件の成否は全一致。旧29失敗内容もworkspace path・実行時addressだけの正規化で一致。 |
+| 新44件 | 全PASS。主要24・source全文/途中と終端3・重複/埋込み等の未証明7・既存未認定維持6・保存4。 |
+| 本文 | 直接48条件の前後比較は12本文改善・4生成復旧・21全文不変・11既存エラー不変。一出来事の8条件は6改善・2復旧で、独立逆読と第三者置換拒否も確認。変更後37＋8＋保存12＝57本文状態をrootが全文読了（重複あり）。エラーは読了数に含めず、保存12状態は変更後のみの確認。 |
+| 保存 | 一時PGliteで2時点×最終訂正/回答撤回の4系列。回答→継続→元出来事撤回→継続→訂正または回答撤回。12状態でoriginal DTO不変、生成停止下GET/再startと保存DTOの完全一致、他反応保持を確認。 |
+
+保存の訂正は「少し私は不安でした」→「少し私は怖くないのです」。回答時点所属なら「先の回答時点で、少しあなたは怖くないのですね。」、原時点所属なら「その時、少しあなたは怖くないのですね。」となる。回答撤回では当該回答だけを消す。
+
+初期の新38件は23 PASS／15 FAILで、未認定入力を既認定と仮定する等の新テスト側の前提を修正した。認定は拡張せず、最終44件では改善と既存未認定維持を分けた。初期38件を最終44件と同一のbefore値としては扱わない。最初の759件は729 PASS／30 FAIL（新44件は全PASS）で、増えた1件は既存attributive testが今回改善した「少し私は不安です」にもfallbackを要求したものだった。この1ケースだけ正しい二人称本文の全文一致と作者停止下逆読を追加し、一人称の不正本文の拒否は維持した。対象4件の再検査後、759件全体を取り直した。旧29失敗のテストは変更していない。
+
+旧29失敗はQ1 thread3・correction source scope15・received discourse8・detached feeling3で、解消済みとも全て旧期待だけとも扱わない。現行source由来のshared-owner identity fixtureだけを既存手順で再算出し、歴史的凍結証跡は不変。read-only差分レビューに修正必須の問題はなかった。
+
+API公開commit **[`6eaf46949e857684a21663a9872934018c5862aa`](https://github.com/MassyuRed/mashos-api/commit/6eaf46949e857684a21663a9872934018c5862aa)**、検証localと公開の共通tree **`d8a4c5a4e8964ab846a533abdb651afebe26e69c`**。GitHub connectorで反映し、変更6ファイル（production2・既存test2・派生fixture1・既存handoff1）のremote再取得全文、parent・tree・変更path集合を照合済み。本PRは既存正本06の追記のみ。実本文・検査経緯・再実行コマンドは[API引継ぎの同日末尾節](https://github.com/MassyuRed/mashos-api/blob/6eaf46949e857684a21663a9872934018c5862aa/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)を参照。
+
+実行環境はPython3.12.14／pytest9.1.1／pydantic2.13.5／FastAPI0.141.1／httpx0.28.1／Node24.19.0／PGlite0.5.8。production依存は不変。旧必須59ファイル・Q3全950件・初回100件・継承保存337ケースの全量再実行は行っていない。一時DBの検証を実DB・端末の証拠とせず、正式Product Read PASSを自己付与しない。
+
+**次の残件**：重複本人主語の「私は私には不安ですこと」「少し私は私には怖いですこと」が残る。複数の本人/助詞の所属と述語範囲をsource全体から扱う共通原因を確認し、機械的削除・一人への単純化・認定拡張を解決にしない。中途本人の二つの程度語や未証明主語、外側過去、反復・原文再掲・矛盾する反応の読み心地、未認定表現、長文の意味選択も未解消。
+
+**STRUCTURE_MAP_DELTA_NONE／全体48%・商品合格0/3／NOT_CLEAR／default OFF／Draft・open・unmerged**を維持。既存作者・独立Gate内部の修正でowner・route・質問・保存schema・公開API・DB・RN・他中核・全体構造は不変。Ready・merge・deploy・enable・実DB・実機・実課金・外部生成AIは実施していない。
