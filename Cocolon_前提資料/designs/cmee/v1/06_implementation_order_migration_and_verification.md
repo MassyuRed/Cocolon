@@ -8930,3 +8930,34 @@ API公開commit **[`465fb23fa0d181415705654b8c04d2a0aaff8195`](https://github.co
 **次の残件**：説明なしの丁寧名詞「今は私は不安です。」には、元出来事撤回後「回答した時点で私は不安ですことを見失わず、小さくせずに受け止めています。」が残る。一方「その時は私も少し不安だった。」は既存有限文で返ることを確認した。次は丁寧コピュラの共通経路を、説明形・内側時制・本人・時点と混同せず扱う。外側過去、中途/重複本人主語、反復・原文再掲・矛盾する反応の読み心地、未認定表現、長文の意味選択も残る。
 
 **STRUCTURE_MAP_DELTA_NONE／全体48%・商品合格0/3／NOT_CLEAR／default OFF／Draft・open・unmerged**を維持。既存作者・独立Gate内部の修正で、owner・route・質問・保存schema・公開API・DB・RN・他中核・回答認定・意味選択・Move選択/順序・品質閾値・全体構造は不変。Ready・merge・deploy・enable・実DB・実機・実課金・外部生成AI・正式Product Read PASSは実施していない。
+
+
+---
+
+### 2026-09-27 継続 — 元出来事撤回後の通常の名詞コピュラ
+
+**主分類：TECHNICAL_CREDIT。** Mashの継続指示により、API `465fb23fa0d181415705654b8c04d2a0aaff8195`／本PR30 `36bd30afe2ca05f01ef4375396b67cb9318bad31`を開始正本としてfresh確認した。恒久incident全文を再読し、前提資料・作業ルール・全体設計・全tracked path（Cocolon1645／API2300）と既存地図・current_structure・最新9/26 weeklyを継承照合した。rules／weekly／current_structureは前回から差分なし。採用済み§5.9に従い、前節の説明なし丁寧名詞という残件を修正した。System Context prepareは祖先関係検査で停止し、原資料直接参照を使用。生成contextの最新化は主張しない。
+
+既存detached作者と独立Gateで、source全体が既存感情名詞＋文頭本人/助詞/程度＋通常コピュラと証明される場合だけ、現在の「です／だ」と過去の「でした／だった」を扱う。途中は「不安だし」、実際の終端は「不安なのですね」、過去は「不安だったのですね」と返す。説明形「不安なのだし」と混同しない。証明外の既存有限過去、共有helperの通常動作を保持し、作者を呼ばない独立逆読で本人・助詞・程度・時制・回答所属時点を照合する。認定・語彙・意味選択・Move選択/順序・品質閾値は不変。
+
+3出来事のfixtureに「今は私は不安です。」と回答し、元出来事「褒められた」を撤回した本文は、「回答した時点で私は不安ですことを見失わず、小さくせずに受け止めています。」から「その時は嬉しくなかったし、回答した時点で、あなたは不安なのですね。」へ改善した。「今は私も少し不安でした。」も「あなたも少し不安だったのですね」と返る。撤回済み出来事を戻さず、元反応・他2反応を保持する。元反応も撤回した単独回答では「回答した時点で、あなたは不安なのですね。」となる。
+
+| 確認 | 結果と範囲 |
+|---|---|
+| 最終 | **715件＝686 PASS／29既存FAIL、ERROR／SKIP 0**。contracts他193件は選択外。旧684件の成否と、workspace path・行番号・実行時addressだけを正規化した29失敗内容は全一致。 |
+| baseline | 前節最終684件＝655 PASS／29 FAILの同じinstalled runtimeのlog/XMLを継承。前節検証localと今回開始remoteのtree `7617d671f1172506296c94d3a26d69cee85aff5b` は同一。baseline684件を今回再実行したとはしない。 |
+| 新31件 | 全PASS。主要8・明示本人なし4・単独4・source全文/途中と終端3・未証明本人の削除拒否2・既存有限過去2・未認定維持2・訂正2・保存4。旧テストの元bytesは完全保持。 |
+| 保存 | 一時PGliteの原時点/回答時点×訂正/回答撤回4系列。回答→継続→元出来事撤回→継続→訂正または回答撤回。更新後の生成停止下GET/再startで保存DTO完全一致、original DTO不変。実DB・端末の証拠ではない。 |
+| 本文 | rootが直接22例の前後を照合し10本文改善・8全文不変・4既存未認定エラー不変。直接18本文、保存12状態、単独回答4本文を全文読了（計34状態、重複あり）。保存12状態・単独4本文の変更前全文までは取得していない。 |
+
+新テスト初期稿の単独回答2件は、元反応撤回を回答訂正と取り違え「先の回答時点で」を期待していたため、sourceに沿う「回答した時点で」へ修正した。productionの時点処理は変更していない。production修正前の初期31件は23 FAIL／8 PASSだが、期待値2件が最終版と異なるため同一最終ケースのbefore値には使わない。独立逆読では人称・程度・助詞・時制/否定・伝聞・時点・元反応/他反応の改変、撤回済み出来事の追加、途中節の「不安なし」や説明の追加・偽因果を拒否する。read-only差分レビューに修正必須の問題はなかった。
+
+旧29失敗はQ1 thread3・correction source scope15・received discourse8・detached feeling3であり、解消済みとも全て旧期待だけとも扱わない。現行source由来のidentity fixtureのみ既存手順で再算出し、専用検査も715件に含む。歴史的凍結証跡は不変。
+
+API公開commit **[`a748143ad76f45c4d0bb8893dc8d3f88e1075f13`](https://github.com/MassyuRed/mashos-api/commit/a748143ad76f45c4d0bb8893dc8d3f88e1075f13)**、検証local **`d648baad1656e171974b4e0d2017a691b89f368b`**、共通tree **`86c8d50f902425ec6754da6776b5f421e7288196`**。GitHub connectorで反映し、全5ファイル（production2・既存test1・派生fixture1・既存handoff1）のremote再取得全文、parent・tree・変更path集合を照合済み。本PRは既存正本06の追記のみ。実本文・検査内訳・再実行方法は[API引継ぎの同日末尾節](https://github.com/MassyuRed/mashos-api/blob/a748143ad76f45c4d0bb8893dc8d3f88e1075f13/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)に記録した。
+
+実行環境はPython3.12.14／pytest9.1.1／pydantic2.13.5／FastAPI0.141.1／httpx0.28.1／Node24.19.0／PGlite0.5.8。production依存は不変。旧必須59ファイル・Q3全950件・初回100件・継承保存337ケースの全量再実行は行っていない。
+
+**次の残件**：実本文に残る「少し私は不安でした」「私は私には不安です」のfallbackについて、中途/重複本人主語のsource全体を削らず扱う既存作者・独立逆読の共通原因を確認する。両者の原因が同一とは未確定。本人主語の機械的削除・認定拡張を解決としない。外側過去、反復・原文再掲・矛盾する反応の読み心地、未認定表現、長文の意味選択も未解消。
+
+**STRUCTURE_MAP_DELTA_NONE／全体48%・商品合格0/3／NOT_CLEAR／default OFF／Draft・open・unmerged**を維持。既存作者・独立Gate内部の修正でowner・route・質問・保存schema・公開API・DB・RN・他中核・全体構造は不変。Ready・merge・deploy・enable・実DB・実機・実課金・外部生成AI・正式Product Read PASSは実施していない。
