@@ -9081,3 +9081,34 @@ API反映commitは `32be3343832b06d428fb6f7abe5518db16b9ff5e`。変更5ファイ
 再実行コマンドと詳細はAPI既存 `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` の前節759件コマンドおよび本日同名末尾節。今回対象の主語前/前後修飾は上記範囲で修正。重複本人主語、同一感情/同一時点の独立source反復、原文再掲、逆向き反応、途中の「のだったし」、未認定表現、長文の意味選択は残件。次は独立sourceの義務を消さず反復を文章へ返す既存複数節作者/readerを、最新実本文から確認する。単純dedupを解決としない。
 
 **STRUCTURE_MAP_DELTA_NONE／全体48%・商品合格0/3／NOT_CLEAR／default OFF／Draft・open・unmerged**。API production2・test1・派生fixture1・既存handoff1、本repoは本06追記だけ。既存owner/file graph・route・質問・保存/API/DB/RN・他中核は不変。Ready・merge・deploy・enable・実DB・実機・実課金・外部生成AIは実施していない。
+
+
+---
+
+### 2026-09-27 継続 — 二つの独立した感情記述を残す共有述語
+
+**主分類：TECHNICAL_CREDIT。** API PR3 `8974c80a4fac5d2eb1ae02d3182bd49859ec3fe5`／本PR30 `306322aaf48a0c2d9a74a737729fc00fb429c306`から継続。前回txt・正本・全体設計／全ファイル地図／current_structureを引き継ぎ、恒久incident全文、最新9/26 weekly §5.3／採用済み§5.9、fresh headsと省略なしtree（API2300／本repo1645 blobs）を確認。開始API全2300fileと本repo参照資料324fileはremote blob一致。既存承認内LEVEL_2、rootが唯一の編集／実行／反映担当、独立2担当はread-only review。追加依存・費用・Mash操作は0。
+
+同じ感情表現が二つの独立sourceに残ると、既存作者・節構成・独立readerが共有を拒否し、長い汎用受容の反復へ戻っていた。既存active 3 Move中、同じ**時点表現**・完全述語がちょうど2本、active順で隣接し、別nucleus／別evidence／別実source spanを持つ場合だけ、両方を受け取る共有述語にした。「同じ時点表現」は同一瞬間の認定ではない。撤回済み出来事・別時点・継続・二つの保存記録を推定しない。
+
+| 変更前 | 変更後 |
+|---|---|
+| 悲しかったことに目が留まり、それを小さくせずに受け止めています。悲しかったことを見失わず、小さくせずに受け止めています。頼まれたのに、寂しさを感じたのですね。 | その時は悲しかったという気持ちを、どちらの言葉からも受け取りました。頼まれたのに、寂しさを感じたのですね。 |
+
+共有はsourceのdedupではない。既存clause bindingの同じ本文範囲に2 Move／expression／source義務を保持し、独立readerが各source全文を別々に復元する。丁寧さが違うsourceも元bytesへ戻す。実本文の共有述語byte範囲を指し、`どちらの言葉からも` の削除・一方化を拒否する。Sentence Surfaceの既存receiveマーカーへ終端を接続し、新schema・新ownerは作らない。
+
+- 直接14条件（7表現×原入力前二箇所／後二箇所）は受け取り14変更。全14で観測部・完全plan・selected reception payload不変。保持するのは既存active Move順であり、原入力順と表示順の同一性ではない。
+- 保存3系列×3状態は2本文変更／7全文不変、観測部9/9不変。original DTO・他反応・生成停止下GET／再startの保存DTO一致を各状態で検証。一時PGliteで、実DB・実機ではない。時点／丁寧さ4状態と三重一致1状態も含む計28最終本文状態をrootが全文読了（重複あり）。
+- 977件＝949 PASS／既存28 FAIL、ERROR／SKIP 0、193 deselected。旧935件の同一test identityを全て保持し、今回の対象1件だけFAIL→PASS。他934件の成否は同一。残る28失敗のmessage／tracebackはruntime memory addressを正規化後に全件一致。新たな失敗0。
+- 追加42件：主要14、意味改変拒否15、source独立性5、三重一致1、時点／丁寧さ4、保存3。全42件PASS。 同じ最終42件の開始productionは14 PASS／28 FAIL、ERROR／SKIP 0。旧935件baselineは前回同一開始productionの906 PASS／29 FAIL log/XMLを継承し、今回全体を再実行していない。
+- 旧失敗1件の同一入力・test identityを保持し、「単独節で同文を二度出す」期待から、2義務を保つ共有文と作者停止下inverseへ更新した。旧失敗のassert無変更で直ったとはしない。他の旧入力/assertと歴史的凍結証跡は不変。現行shared-owner fixtureだけを再算出。
+
+初期41件は33 PASS／8 FAIL。7件は中途出来事を先に撤回した際の既存本文未提供で、開始productionでも全件再現。後二箇所の最終状態は利用可能な「末尾→中途」撤回順へtest操作を訂正した。1件は全3出来事撤回後の非隣接反復まで解消を期待した新assertの誤りで、未解決保持を検査する内容へ訂正。その後41件全PASSと時点4件全PASS。最終42件は横断結果の内数。起動時のcwd／import path不備は商品成果へ合算しない。
+
+既存runtimeと依存を再使用。旧必須59file・Q3全950件・初回100件・継承保存337ケースの全量は未再実行。System Context prepareはGit metadata不足で停止し、規定の原典直接参照を使用。独立静的reviewに修正必須の指摘なし。生成context最新化や正式Product Read PASSは主張しない。
+
+今回改善したのは隣接2sourceの受け取り反復に限定する。観測部の二重引用、形式的な響き、全3出来事撤回後の非隣接反復、三重一致、異なる時点表現、重複本人主語、長文の意味選択等は残る。**次は、before/afterとも7件で確認した中途出来事撤回直後の `emlis_refined_body_unavailable` を既存plan／active Move／作者／readerから確認する。** 反復群全体を完了としない。
+
+詳細と再実行はAPI既存 `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` の前節759件コマンドと本日同名末尾節。
+
+**STRUCTURE_MAP_DELTA_NONE／全体48%・商品合格0/3／NOT_CLEAR／default OFF／Draft・open・unmerged。** API production3・既存test1・派生fixture1・既存handoff1、本repoは本06追記1。file graph・route・認定/語彙・意味選択・active Move順・質問・保存/API/DB/RN・他中核・品質閾値は不変。Ready・merge・deploy・enable・実DB・実機・実課金・外部生成AIは未実施。
