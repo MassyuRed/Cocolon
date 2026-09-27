@@ -8994,3 +8994,33 @@ API公開commit **[`6eaf46949e857684a21663a9872934018c5862aa`](https://github.co
 **次の残件**：重複本人主語の「私は私には不安ですこと」「少し私は私には怖いですこと」が残る。複数の本人/助詞の所属と述語範囲をsource全体から扱う共通原因を確認し、機械的削除・一人への単純化・認定拡張を解決にしない。中途本人の二つの程度語や未証明主語、外側過去、反復・原文再掲・矛盾する反応の読み心地、未認定表現、長文の意味選択も未解消。
 
 **STRUCTURE_MAP_DELTA_NONE／全体48%・商品合格0/3／NOT_CLEAR／default OFF／Draft・open・unmerged**を維持。既存作者・独立Gate内部の修正でowner・route・質問・保存schema・公開API・DB・RN・他中核・全体構造は不変。Ready・merge・deploy・enable・実DB・実機・実課金・外部生成AIは実施していない。
+
+
+---
+
+### 2026-09-27 継続 — EmlisAIの外側過去と二重説明語尾
+
+**主分類：TECHNICAL_CREDIT。** Mashの継続指示により、API PR3 `6eaf46949e857684a21663a9872934018c5862aa`／Cocolon PR30 `2fadc0a23acabeeaa86342c16a7fc24f26741a5e`から開始。現行前提・作業ルール・恒久incident・全体設計と全ファイル地図・current_structure・最新9/26 weekly §3.8／採用済み§5.9を確認した。fresh recursive treeはCocolon1645／API2300 tracked files。System Context prepareは既存の祖先関係検査で停止したため原資料を直接参照し、生成contextの最新化とは扱わない。
+
+前回の重複本人主語「私は私には不安です」「少し私は私には怖いです」を先に調べた。現行意味表現のcurrent_userだけでは、二つの本人主語の言い直し・対比・対象の関係を証明できない。一方の削除も「あなたはあなたには」への置換も解決にせず、8条件の本文不変と未解決を残した。同じ引継ぎの残件である、外側過去の二重説明語尾を今回の直接修正対象とした。
+
+「私は不安なのだった」は、内側の現在と外側の説明の過去を分けて保ち、「あなたは不安なのでしたね」と返す。「不安だったのだ」へ移して時制の範囲を変えない。「不安だったのだった」「怖くないのだった」も内側の過去・否定を保つ。既存感情語とsource全文で証明できる範囲だけを扱い、本人・助詞・程度・回答所属時点を保持する。途中節の「のだったし」と実際の終端「のでしたね」を分け、独立Gateが元sourceを復元する。既存sentence surfaceの受け取りマーカーにも新語尾を追加した。一出来事で実測されたマーカー欠落への対応であり、独立したsource照合の代用ではない。認定・意味選択・Move順序は不変。
+
+公開3出来事fixtureへ「今は私は不安なのだった。」と回答し、元出来事「褒められた」を撤回した後の本文全体は、修正前の「その時は嬉しくなかったし、回答した時点で、あなたは不安なのだったのですね。誘われたのに、悲しさを感じ、頼まれたのに、寂しさを感じたのですね。」から、修正後の「その時は嬉しくなかったし、回答した時点で、あなたは不安なのでしたね。誘われたのに、悲しさを感じ、頼まれたのに、寂しさを感じたのですね。」へ変わった。文学的・形式的な響きや全体の反復・深さまで解決したとの判定ではない。
+
+| 検証 | 今回の結果 |
+|---|---|
+| 最終回帰 | **806件＝777 PASS／29既存FAIL、ERROR／SKIP 0**。他193件は選択外。前回検証済み759件の成否は全一致し、旧29失敗内容も実行時addressだけの正規化で全一致。759件baseline全体は今回再実行していない。 |
+| 新47件 | **全PASS**。同一の最終47件を開始treeの未変更productionで実行すると**8 PASS／39 FAIL**。既存testの元bytesは完全保持し、末尾に追加した。 |
+| 実本文 | 直接32条件・一出来事12条件・保存12状態の計56状態を同じ入力で前後比較し、変更後の全56本文をrootが読了（重複あり、全条件で本文あり）。40本文改善・16全文不変、観測部は56状態すべて全文不変。 |
+| 保存 | 原時点/回答時点×訂正/回答撤回の4系列。回答→継続→元出来事撤回→継続→最終更新の12状態でoriginal DTO不変、他反応保持、生成停止下GET/再startと保存DTOの完全一致を確認。一時PGliteを使用。 |
+
+初期の新47件は33 PASS／14 FAIL。8件は新語尾の既存マーカー不足として実装を修正し、4件は元反応の既存表現を新assertへ補い、2件は継続質問のないfixtureを既存3出来事fixtureへ訂正した。最終before47件はこの修正後に実行した。旧29失敗はQ1 thread3・correction source scope15・received discourse8・detached feeling3で、解消済みとも全て旧期待だけとも扱わない。read-only差分レビューに修正必須の問題はなかった。
+
+runtimeは既存venvの起動linkを既存primary Python3.12.14へ復元し、現在のimportを確認した。新規package install・production依存変更はない。現行source由来のshared-owner identity fixtureのみ既存手順で再算出し、歴史的凍結証跡は不変。旧必須59ファイル・Q3全950件・初回100件・継承保存337ケースの全量再実行は行っていない。
+
+API実装は[`e33eaca73cf24fa31051c1404429e6c2437aa51c`](https://github.com/MassyuRed/mashos-api/commit/e33eaca73cf24fa31051c1404429e6c2437aa51c)へ反映した。変更6ファイル（production3・既存test1への追加・派生fixture1・既存引継ぎ1）のremote全文、changed paths、parent、PR headをfresh照合し、local／remote tree `e1e98effab5b05d844772b1a89a4caee171f2a7b`の一致を確認。詳細・再実行方法・実本文は[同commitの既存引継ぎ](https://github.com/MassyuRed/mashos-api/blob/e33eaca73cf24fa31051c1404429e6c2437aa51c/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)末尾を参照する。Cocolonは本06への追記だけ。
+
+**次の残件：** 重複本人主語の関係・述語範囲は未解決として保持する。次は同一感情sourceの反復で有限文から原文列挙へ戻る既存経路を、独立した出来事・気持ちを消さずに扱う共通原因として確認する。途中の「のだったし」の硬さ、原文再掲・矛盾する反応、未認定表現、長文の意味選択も残る。
+
+**STRUCTURE_MAP_DELTA_NONE／全体48%・商品合格0/3／NOT_CLEAR／default OFF／両PR Draft・open・unmerged**を維持。owner/file graph・route・質問・保存schema・公開API・DB・RN・他中核・全体構造は不変。Ready・merge・deploy・enable・実DB・実機・実課金・外部生成AI・正式Product Read PASSは実施していない。
