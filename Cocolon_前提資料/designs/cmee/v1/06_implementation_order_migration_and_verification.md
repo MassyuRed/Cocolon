@@ -8720,3 +8720,13 @@ API実装`30bed4453c7c0b6571626c3f8afa30050e033e2c`は検証sourceとtree同一�
 合成入力の新12件と従来の連体化19件は **31 PASS**。Q3のローカル保存経路で初回→回答→訂正→撤回と生成なしの再取得・再開を確認し、owner identity整合の専用検査もPASS。隣接する既存検査の **137 PASS／8 FAIL** は修正前と同じケース・件数であり、8件の失敗は解消したとは扱わない。従来の必須59ファイル、初回100件、保存337ケースの全量は今回再実行していない。具体的な検査範囲と残件は[API引継ぎ](https://github.com/MassyuRed/mashos-api/blob/agent/cmee-v1a-i1sx-source-explicit-20260815/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)の同日節を参照する。
 
 別の原時点の与格経路はなお一人称のままで、反復・長文の意味選択・本文未提供も未解決。今回の部分修正を商品合格としない。最新weeklyの管理評価は **全体48%・商品合格0/3**。旧節の45%は当時の値として残す。**STRUCTURE_MAP_DELTA_NONE／NOT_CLEAR／default OFF／Draft・open・unmerged**。質問・保存・公開API・DB・RN・他中核の責務を変えず、merge・deploy・enable・実DB・実機は行っていない。
+
+---
+
+### 2026-09-27 継続 — 原時点と肯定回答の本人視点を修正
+
+前節に残した原時点の本人の一人称を、既存Human Receptionの否定回答経路と独立Observation Gateで対応させた。同じ誤帰属があった肯定回答の経路も、既認定sourceと既存作者・独立逆読みに限定して修正した。API公開実装`3b05ce83bd6c846a0cda80129962edcbff0e2250`と検証localのtree `74547b612e1c78a0f67a5dd8cb2e76ba86039273`は一致する。丁寧形が従来の連体経路へ進む境界は保つ。単一／複数出来事で「私には／僕には／私は」が受け手への文章に直り、Q3ローカル保存の初回→原時点回答→訂正→撤回、保存GET／再start、肯定回答の保存後表示まで対象検証した。質問枠・保存・公開API・DB・RN・他中核の責務と外側品質基準は不変。
+
+今回追加18件＋前節の12件＋連体化19件は **49 PASS**。派生owner identity専用検査 **1 PASS**。隣接received-discourseは **137 PASS／8 FAIL** で修正前のAPI `e507104`と同じ8件、旧期待は変更していない。旧必須59ファイル・初回100件・継承保存337ケースは今回全量再実行していない。合成の具体的な前後本文と検査範囲は[API引継ぎ](https://github.com/MassyuRed/mashos-api/blob/agent/cmee-v1a-i1sx-source-explicit-20260815/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)の同日末尾節へ記録した。
+
+肯定回答を訂正すると本文が消える既存経路は今回の修正前から残る。肯定回答と原出来事の繰り返し、`私にも`や一部丁寧形の未提供、長文の意味選択も未完了。次は欠落と関係の共通原因を実本文・sourceで調べる。最新weeklyの管理値は **48%・商品合格0/3**。**STRUCTURE_MAP_DELTA_NONE／NOT_CLEAR／default OFF／Draft・open・unmerged**。商品合格、merge、deploy、enable、実DB・実機は行っていない。
