@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_piece_read_first
 title: "Cocolon Piece — Read First"
-revision_date: "2026-08-15 JST"
+revision_date: "2026-09-27 JST"
 decision_owner: "Mash"
 workstream: "Cocolon / Piece"
 document_status: "CURRENT_PIECE_WORKSTREAM_ENTRY"
@@ -74,12 +74,13 @@ PCE-9A B01-I Contract Owner Implementation:
   COMPLETE_CODE_DISABLED_TARGETED_GREEN
 
 PCE-9A B02-A M0/M1 Tracked Migration + Legacy Bridge:
-  CAUSAL_RED_TEST_FROZEN_PRESENT
-  EXECUTION_CREDIT_UNVERIFIED
-  IMPLEMENTATION_ARTIFACTS_NOT_MATERIALIZED
+  FILE_ONLY_IMPLEMENTATION_APPROVED_BY_MASH_20260927
+  M1_SQL_AND_TEST_SUPPORT_EXACT5_PUBLISHED_IN_API_DRAFT
+  EXACT6_READER_REBINDING_PREPARED_NOT_PUBLISHED
+  FROZEN_TEST_FAILS_CALLER_NOT_EXACT0_ON_PUBLISHED_TREE
   DISPOSABLE_DATABASE_GREEN_NOT_RUN_NOT_CREDIT
   PRODUCTION_APPLY_NOT_AUTHORIZED
-  IMPLEMENTATION_REQUIRES_SEPARATE_MASH_APPROVAL
+  REPEAT_APPROVAL_FOR_SAME_B2A_SCOPE_NOT_REQUIRED
 
 Analysis roadmap:
   NOT_ACTIVATED
@@ -412,7 +413,7 @@ API registration / DB / migration / RN / runtime connection:
 
 ```text
 01 B1      COMPLETE
-02 B2-A    CAUSAL_RED_TEST_FROZEN_PRESENT__EXECUTION_UNVERIFIED__IMPLEMENTATION_INACTIVE
+02 B2-A    FILE_ONLY_APPROVED__EXACT5_PUBLISHED__READERS_AND_NATIVE_DB_PENDING
 03 B2-B    NOT_ACTIVATED
 04 B3      NOT_ACTIVATED
 05 B4      NOT_ACTIVATED
@@ -434,13 +435,13 @@ API registration / DB / migration / RN / runtime connection:
 21 PCE-U1  NOT_ACTIVATED
 ```
 
-B2-AはM0 tracked migration baselineとM1 legacy read bridge/current caller rebindを扱う。causal RED test bytesはcurrent mashos-api mainに存在するが、durable execution creditは未確認である。M0/M1 implementation、disposable PostgreSQL GREEN、production applyは未成立であり、B1完了またはtest存在による自動activationはない。
+B2-AはM0 tracked migration baselineとM1 legacy read bridge/current caller rebindを扱う。2026-09-27の限定提案に対するMashの続行指示で、同じfile-only範囲は承認済み。API Draft PR #3の`0ea9c99a8fcba9f017248237ccdb3abef0cce590`にSQL・検証用5ファイルを反映した。6readerは未反映で、反映済み構成の既存検査はcaller未切替を理由に1 FAIL。6readerを加えた別候補も通常PostgreSQL/psycopgの未確保でNONCREDIT。PGliteの17項目成功は補助確認のみ。正式GREEN、実DB適用、B2-B開始、商品合格を意味しない。詳細はcurrent structure map §4.3とAPI PR #3 comment 5850801467へ戻る。
 
 ## 11. Environment assignment
 
 ```text
 bounded B1-B15 design/code:
-  CHAT_5_6_PRO_OK
+  CHAT_PRO_OK (Rule 18 section 0; approved Piece scope only)
 
 actual DB transaction/RLS/migration evidence:
   ISOLATED_DB_REQUIRED
@@ -474,7 +475,7 @@ EmlisAI current executable Work-required task
 5. revised clean-cutover roadmap
 6. PCE-1 through PCE-8 canonical artifacts
 7. B01 RED test and pure contract owner at their pinned mashos-api commits
-8. B02-A frozen causal RED test bytes and exact target/current files for a separately approved implementation packet
+8. B02-A frozen causal RED test bytes and exact target/current files for the already approved bounded implementation
 9. PCE-7 RED/test matrix rows assigned to B02-A
 10. Analysis作業の場合だけ、`Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md`
 
@@ -499,21 +500,26 @@ EmlisAI current executable Work-required task
 ## 14. Current actual basis
 
 ```text
-Cocolon audited main head / tree:
+Cocolon historically audited main head / tree:
   de9c3d985053bbaaa7fc0d396e688cc2097ece40
   4e7901f8b3e10d20f242e19be91f6c725f625b2a
 
-mashos-api current head / tree:
+mashos-api historically audited main head / tree:
   a8ca4ddf7b7ae76bf7b3d73e74e3a5808d623428
   a7f782e48e8ac0c97992c74e5a0c5a828f1a9e00
 
-B02-A causal RED test:
+B02-A causal RED test at the historical snapshot:
   ai/tests/piece_v2/db/test_b02_m0_m1_legacy_bridge.py
   FROZEN_PRESENT
-  EXECUTION_CREDIT_UNVERIFIED
+  EXECUTION_CREDIT_UNVERIFIED_AT_THAT_TIME
 
-B02-A implementation required exact5:
+B02-A implementation required exact5 at the historical main snapshot above:
   absent
+
+2026-09-27 applicable API Draft (not the historical main snapshot):
+  0ea9c99a8fcba9f017248237ccdb3abef0cce590
+  exact5 present; exact6 readers unchanged
+  FROZEN_TEST_FAILS_CALLER_NOT_EXACT0; NATIVE_DATABASE_GREEN_NOT_ESTABLISHED
 
 current user-visible product:
   old Q&A Piece flow
@@ -524,31 +530,35 @@ new Piece pure contract owner:
 new Piece API registration:
   absent
 
-new Piece DB / migration / RN / runtime:
+B2-A tracked migration and test support:
+  exact5 present in the applicable API Draft
+  native database acceptance / production apply absent
+
+new Piece DB / RN / runtime connection:
   absent
 
 current Piece v2 feature flags:
   absent
 ```
 
-## 15. Next exact inactive group
+## 15. Current exact approved group
 
 ```text
 group:
   B2-A M0 Tracked Baseline + M1 Legacy Read Bridge
 
 environment:
-  CHAT_5_6_PRO_OK
+  CHAT_PRO_OK (Rule 18 §0 and the explicitly approved B2-A scope)
   ISOLATED_DB_REQUIRED for honest migration GREEN
 
 state:
-  CAUSAL_RED_TEST_FROZEN_PRESENT
-  EXECUTION_CREDIT_UNVERIFIED
-  IMPLEMENTATION_NOT_ACTIVATED
-  SEPARATE_MASH_APPROVAL_REQUIRED
+  FILE_ONLY_B2A_APPROVED_BY_MASH_20260927
+  M1_EXACT5_PUBLISHED_IN_API_DRAFT
+  EXACT6_READER_REBINDING_AND_NATIVE_DATABASE_GREEN_PENDING
+  SAME_B2A_SCOPE_REAPPROVAL_NOT_REQUIRED
 
 expected first lifecycle:
-  bounded M0/M1 implementation + isolated migration GREEN
+  finish the approved exact6 rebindings + unchanged isolated migration test + current-map sync
 
 production DB apply:
   exact0 until separately approved
@@ -582,5 +592,4 @@ release effect:
 automatic progression:
   false
 ```
-
 

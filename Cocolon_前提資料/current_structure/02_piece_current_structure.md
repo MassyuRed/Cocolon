@@ -1,8 +1,9 @@
 ---
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
-revision_date: "2026-09-26 JST"
+revision_date: "2026-09-27 JST"
 latest_api_implementation: "fa82077febb1363e286eb225fd53ff50ad863bbf"
+latest_storage_candidate: "0ea9c99a8fcba9f017248237ccdb3abef0cce590"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -14,6 +15,8 @@ automatic_progression: false
 # Piece構造 — Current Structure
 
 ## 0. Current conclusion
+
+**2026-09-27 保存基盤の現在地：B2-Aはfile-only範囲承認済み。API Draft `0ea9c99`にSQL・検証用5ファイルを反映し、6readerの切替と通常PostgreSQL/psycopgの正式検証は未完了。B2-A全体GREENではない。現在の内訳と次作業は§4.3を優先し、以下の9/26記載と§19〜20は本文・画像の前回到達点として継承する。**
 
 **2026-09-26最新：API PR #3の `fa82077febb1363e286eb225fd53ff50ad863bbf` で、保存前の内部組立物に対する画像設定だけの変更を実装した。本文を再生成せず、全本文・content payloadとhashを保持し、変更前後に元入力・保存状態・権限・tierを再照合する。追加54件は全PASS、統合5,446件は5,313 PASS／133 FAIL。前回 `57df8fc` の組立処理も反映済みだが、その60件のテストはツール安全性チェックで未反映のまま。今回の54件とは別であり、再送・代替していない。§20を最新、§19を前回組立の記録、§12〜18を履歴として読む。保存済みpreview発行・HTTP／RN・保存／履歴・native共有は未完成。Draft／default OFFと旧Q&A未切替を維持する。**
 
@@ -96,23 +99,37 @@ Current shared PieceComposerはcaller-supplied candidateを評価するguard ada
 |---|---|
 | B01 causal RED | ai/tests/piece_v2/ 以下のB01 protected tests |
 | B01 code-disabled owner | ai/services/ai_inference/piece_v2_contract.py |
-| B02-A M0／M1 causal RED freeze | ai/tests/piece_v2/db/test_b02_m0_m1_legacy_bridge.py |
-| B02 implementation artifacts | current mainではrequired exact5がabsent。implementation／DDL／production applyは未成立 |
+| B02-A M0／M1 causal RED freeze | ai/tests/piece_v2/db/test_b02_m0_m1_legacy_bridge.py（変更なし） |
+| B02 implementation artifacts | API Draft `0ea9c99`に下記5ファイルを反映。旧mainのabsent状態と区別する。6reader・通常PostgreSQL GREENは未完了。 |
 
-B02-A testはcurrent mainに存在するため、旧entryのNOT_ACTIVATEDだけではactualを表せない。正確なstateは次である。
+2026-09-27 JSTの限定B2-A提案後のMash続行指示により、同じfile-only実装・隔離DB検証・Draft反映は承認済み。同じ承認を取り直さない。本番適用、公開契約変更、B2-B、merge/deploy/有効化は含まない。
 
-    B02-A causal RED test:
-      FROZEN_PRESENT
-      EXECUTION_CREDIT_UNVERIFIED
+| published path（mashos-api） | B2-A責務 |
+|---|---|
+| `supabase/migrations/20260808_001_piece_v2_legacy_read_bridge.sql` | 旧`public.pieces`と元データを変えず、同じ21列の専用read viewを作る候補。 |
+| `supabase/migrations/README.md` | 未適用・検証条件・後日の適用順序と戻し方。 |
+| `supabase/migrations/manifest.json` | SQLの識別値、過去PCE-0と現在の2本のEmlis migrationを分離。実DB一致は未確認。 |
+| `requirements-piece-v2-test.txt` | 隔離試験の依存版固定。インストール済みの証拠ではない。 |
+| `ai/tests/piece_v2/db/conftest.py` | 検査対象を明示された使い捨てlocal DBに限定。DB作成・模擬成功・skip置換なし。 |
+
+    B02-A frozen test:
+      UNCHANGED / historical owner-absent RED observed
+      published exact5 + old exact6 readers: 1 FAIL / CALLER_NOT_EXACT0
 
     M0 / M1 implementation:
-      NOT_MATERIALIZED
+      PARTIAL_EXACT5_PUBLISHED
+      EXACT6_READERS_PREPARED_NOT_PUBLISHED
 
     disposable PostgreSQL GREEN:
       NOT_RUN / NOT_CREDIT
+      candidate exact6 reaches ISOLATED_DATABASE_UNAVAILABLE_NONCREDIT
 
     production apply:
-      NOT_AUTHORIZED
+      NOT_AUTHORIZED / NOT_PERFORMED
+
+前回のPGlite補助確認17 PASSは通常PostgreSQL/psycopgの合格ではない。反映済みcommitは`0ea9c99a8fcba9f017248237ccdb3abef0cce590`、詳細は[既存API PRの記録](https://github.com/MassyuRed/mashos-api/pull/3#issuecomment-5850801467)。6readerの対象は`astor_worker.py`、`api_piece_runtime.py`、`emlis_ai_readers.py`、`piece_generated_metrics.py`、`piece_generation_store.py`、`piece_public_read_store.py`。未反映差分はその記録を継承する。既存の2本のEmlis SQL、旧テスト・期待値、文章生成・Analysis・公開API/RNは変更しない。
+
+次は承認済みB2-Aの正式隔離DB検証・6reader反映と本map/入口の反映確認。内部本文/画像が作れることを保存preview発行の完成へ変換せず、B2-Bへ自動進行しない。
 
 ## 5. Product and design owners
 
@@ -190,8 +207,8 @@ shared tableのnon-Piece row／consumerは、exact Piece predicateとwriter／re
 1. user-visible routeはold Q&Aのまま。
 2. 保存原入力・保存状態から本文／recipeの内部組立と画像設定だけの変更を§20まで実装。本文に表れていない選択感情、refined補足、保存済みpreview発行、HTTP／RNは未接続。
 3. canonical recipe／実測layout／Linux開発PNGは§14・16〜20で実行済み。製品native renderer／export receipt／端末保存・共有は未完了。
-4. B02-Aはcausal RED test bytesだけが先行し、durable execution creditは未確認、implementation required artifactsはabsent。
-5. Piece current entry／manifestのB02-A stateはこのmapと同じwrite unitで同期済みであり、mergeまでDRAFT_CANDIDATEである。
+4. B02-Aは§4.3のとおり5ファイル反映済みの部分実装。6readerの反映・通常PostgreSQL/psycopgの正式検証は未完了。既存凍結テストの失敗を合格へ変更しない。
+5. B02-Aの本map・Piece current entry・manifestは同じ資料更新単位で現行の部分実装状態へ同期する。反映済み5ファイル、未反映6reader、未成立の正式DB検証を区別する資料修正であり、B2-A完了・商品合格ではない。
 6. CMEE Piece adapterとB5-B内部組立のdisabled候補はMashの継続指示で§20まで接続した。runtime activationは未承認・未実施であり、候補実装と混同しない。
 
 CMEE Piece detailed design candidate:
