@@ -8730,3 +8730,13 @@ API実装`30bed4453c7c0b6571626c3f8afa30050e033e2c`は検証sourceとtree同一�
 今回追加18件＋前節の12件＋連体化19件は **49 PASS**。派生owner identity専用検査 **1 PASS**。隣接received-discourseは **137 PASS／8 FAIL** で修正前のAPI `e507104`と同じ8件、旧期待は変更していない。旧必須59ファイル・初回100件・継承保存337ケースは今回全量再実行していない。合成の具体的な前後本文と検査範囲は[API引継ぎ](https://github.com/MassyuRed/mashos-api/blob/agent/cmee-v1a-i1sx-source-explicit-20260815/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)の同日末尾節へ記録した。
 
 肯定回答を訂正すると本文が消える既存経路は今回の修正前から残る。肯定回答と原出来事の繰り返し、`私にも`や一部丁寧形の未提供、長文の意味選択も未完了。次は欠落と関係の共通原因を実本文・sourceで調べる。最新weeklyの管理値は **48%・商品合格0/3**。**STRUCTURE_MAP_DELTA_NONE／NOT_CLEAR／default OFF／Draft・open・unmerged**。商品合格、merge、deploy、enable、実DB・実機は行っていない。
+
+---
+
+### 2026-09-27 継続 — 本人与格の肯定回答を訂正しても本文を保持する
+
+前節の欠落を、既存のQ3本人回答「今は私には嬉しい」→「『私には嬉しい』ではなく『私には楽しい』です」で再現した。訂正文の旧対象は正しく見つかったが、更新後の感情を認定できず撤回扱いになり、本文から回答が消えていた。認定だけを広げた途中状態では元の反応と受け手への人称まで欠けたため、既存意味更新ownerの完全一致した本人与格「私には／僕には」の肯定的な形容詞へ、既存の感情属性を対応させた。API実装は `6d229f8b9983c066c80ac041bbf9c2517ea058de`。新author・Gate・質問経路は追加していない。
+
+複数出来事の実本文で、元の反応を保持し「先の回答時点ではあなたには楽しい」を表示する。原時点の訂正は「その時はあなたには楽しかった」となり、独立逆読は主体・時点・原反応・旧回答への改変を拒否する。Q3ローカル保存で初回→回答→訂正→撤回、GET／再startを生成なしで確認した。今回追加9件を含む対象 **39 PASS**、隣接連体化 **19 PASS**、identity **1 PASS**、引用・未対応撤回の限定 **5 PASS**。received-discourse **137 PASS／8 FAIL** と引用訂正source-scope **3 PASS／15 FAIL** は、各々変更前HEADと同じ結果であり、旧失敗は残る。必須全量・初回100件・継承保存337ケースは今回再実行していない。
+
+元出来事の二文反復、裸の「楽しい」の複合撤回、「私は楽しい」の別経路、`私にも`や一部丁寧形の未提供、長文の意味選択は残件。詳細は[API引継ぎ](https://github.com/MassyuRed/mashos-api/blob/6d229f8b9983c066c80ac041bbf9c2517ea058de/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)の同日末尾節。**STRUCTURE_MAP_DELTA_NONE**：既存回答意味更新だけの補正で、質問・保存・公開API・DB・RN・他中核・品質基準・構造の変更はない。最新weeklyの管理値 **全体48%・商品合格0/3**、NOT_CLEAR／default OFF／Draft・open・unmergedを維持し、Ready・merge・deploy・enable・実DB・実機・正式商品合格は行っていない。
