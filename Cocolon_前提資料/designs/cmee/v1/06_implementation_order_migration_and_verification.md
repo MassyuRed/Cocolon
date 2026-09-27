@@ -9054,3 +9054,30 @@ API反映commitは `32be3343832b06d428fb6f7abe5518db16b9ff5e`。変更5ファイ
 **残件と次の一作業。** 同一感情・同一時点の別source反復と重複本人主語は未解決。次は主語前の複数修飾／主語前後の修飾を持つ既認定sourceについて、単一主体と完全な述語範囲を作者・独立readerで一致して扱えるか確認する。原文再掲、矛盾する反応、形式的な接続、未認定入力、長文の意味選択も残る。今回の限定修正でEmlis全体の自然さや深さを解決したとはしない。
 
 **STRUCTURE_MAP_DELTA_NONE／全体48%・商品合格0/3／NOT_CLEAR／default OFF／両PR Draft・open・unmerged**を維持。owner/file graph・route・質問・公開API・DB・RN・他中核・全体構造は不変。新規install・依存変更・Ready・merge・deploy・enable・実DB・実機・実課金・外部生成AI・正式Product Read PASSは実施していない。旧必須59ファイル・Q3全950件・初回100件・継承保存337ケースの全量再実行は行っていない。
+
+
+---
+
+### 2026-09-27 継続 — 本人主語の前後の修飾を保つ感情本文
+
+**主分類：TECHNICAL_CREDIT。** API PR3 `32be3343832b06d428fb6f7abe5518db16b9ff5e`／本PR30 `61d6e46793e9739eae4639112f5ff3409e0905ed`を開始headとし、前回txt、前提・作業ルール・恒久incident全文、全体設計と両repo全tracked path地図、current_structure、最新9/26 weekly §5.3／採用済み§5.9を確認した。Workでrootが単一編集/検証/反映担当、独立2担当は商品経路/原因/最終差分をread-only確認。既存承認内の限定修正で、追加費用・Mash操作は0。
+
+前節の次作業であった「まだ少し私は不安です」「少し私はまだ不安です」の文章化を修正した。既存Human Reception作者と独立Gateが、修飾語1個＋本人＋無修飾述語に限定していたため、認定済み回答を「ですこと」の列挙へ戻していた。既存修飾語の連続を単一本人の前後で完全述語として証明し、本文では位置・順序・回数、本人・助詞・否定・内外時制・回答所属時点を保つ。外側過去も既存host証明へ接続し、途中節と実際の終端を区別する。Gateは作者を呼ばず全文復元する。新語彙・回答認定・意味選択・Move順序・品質閾値は変えない。
+
+公開fixtureへの回答後、元出来事を撤回した受け取り本文の前後：
+
+| 変更前 | 変更後 |
+|---|---|
+| その時は嬉しくなかったのですね。回答した時点で少し私はまだ不安ですことを見失わず、小さくせずに受け止めています。誘われたのに、悲しさを感じ、頼まれたのに、寂しさを感じたのですね。 | その時は嬉しくなかったし、回答した時点で、少しあなたはまだ不安なのですね。誘われたのに、悲しさを感じ、頼まれたのに、寂しさを感じたのですね。 |
+
+- 直接48条件（8source×原時点/回答時点×単一/複数/撤回後）は45本文変更・3生成復旧。修正前にも本文がある45条件の観測部は全不変。肯定説明回答の原時点3経路の本文提供を復旧した。
+- 保存4系列の回答→元出来事撤回→訂正/回答撤回、計12状態は10本文変更・2全文不変、観測部全不変。original DTO、他反応、生成停止下GET／再startの保存DTO一致を確認。一時PGliteで、実DB・端末ではない。rootが変更後の全60本文状態を全文読了した。
+- 935件＝906 PASS／既存29 FAIL、ERROR／SKIP 0、193 deselected。旧873件はtest名・結果とも同一。29失敗のmessageとtracebackも実行workspace prefix・runtime memory addressのみ正規化後に全件一致。追加62件以外の増減・結果変化は0。baseline873件は同じ開始productionの前回log/XMLを継承し、今回全体を再実行していない。
+- 追加62件全PASS。同じ最終62件を未変更productionで実行すると6 PASS／56 FAIL。主要48・保存4・全文source/byte範囲/途中節4・主語等の拒否6。作者停止下で修飾の削除/本人をまたぐ移動/強さ/重複、人称・助詞・時制/否定・時点・他反応の改変を拒否する。
+- 旧testの入力・分母は保持。今回成立する主語前修飾8例の文面期待と単一主体2例の証明期待だけを更新し、旧29失敗の入力/assert、重複主語・他人・が・伝聞等の拒否は維持した。現行shared-owner fixtureのみ再算出し、歴史的凍結証跡は不変。独立静的reviewに修正必須の問題なし。
+
+初期63件と追加62件は成功。最初のpytest起動一回はcwd誤りによるfile not foundで0件、成功へ合算していない。既存Python3.12.14／pytest9.1.1／pydantic2.13.5／FastAPI0.141.1／httpx0.28.1と既存Node/PGliteを使用し、新規installなし。旧必須59file・Q3全950件・初回100件・継承保存337ケースは全量未再実行。System Context prepareはmaterialized copyのGit metadata不足で停止し、正本に従い原資料を直接読んだ。生成contextの最新化や正式Product Read PASSは主張しない。
+
+再実行コマンドと詳細はAPI既存 `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` の前節759件コマンドおよび本日同名末尾節。今回対象の主語前/前後修飾は上記範囲で修正。重複本人主語、同一感情/同一時点の独立source反復、原文再掲、逆向き反応、途中の「のだったし」、未認定表現、長文の意味選択は残件。次は独立sourceの義務を消さず反復を文章へ返す既存複数節作者/readerを、最新実本文から確認する。単純dedupを解決としない。
+
+**STRUCTURE_MAP_DELTA_NONE／全体48%・商品合格0/3／NOT_CLEAR／default OFF／Draft・open・unmerged**。API production2・test1・派生fixture1・既存handoff1、本repoは本06追記だけ。既存owner/file graph・route・質問・保存/API/DB/RN・他中核は不変。Ready・merge・deploy・enable・実DB・実機・実課金・外部生成AIは実施していない。
