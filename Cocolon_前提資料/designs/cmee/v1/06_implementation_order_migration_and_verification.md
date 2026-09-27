@@ -8740,3 +8740,21 @@ API実装`30bed4453c7c0b6571626c3f8afa30050e033e2c`は検証sourceとtree同一�
 複数出来事の実本文で、元の反応を保持し「先の回答時点ではあなたには楽しい」を表示する。原時点の訂正は「その時はあなたには楽しかった」となり、独立逆読は主体・時点・原反応・旧回答への改変を拒否する。Q3ローカル保存で初回→回答→訂正→撤回、GET／再startを生成なしで確認した。今回追加9件を含む対象 **39 PASS**、隣接連体化 **19 PASS**、identity **1 PASS**、引用・未対応撤回の限定 **5 PASS**。received-discourse **137 PASS／8 FAIL** と引用訂正source-scope **3 PASS／15 FAIL** は、各々変更前HEADと同じ結果であり、旧失敗は残る。必須全量・初回100件・継承保存337ケースは今回再実行していない。
 
 元出来事の二文反復、裸の「楽しい」の複合撤回、「私は楽しい」の別経路、`私にも`や一部丁寧形の未提供、長文の意味選択は残件。詳細は[API引継ぎ](https://github.com/MassyuRed/mashos-api/blob/6d229f8b9983c066c80ac041bbf9c2517ea058de/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)の同日末尾節。**STRUCTURE_MAP_DELTA_NONE**：既存回答意味更新だけの補正で、質問・保存・公開API・DB・RN・他中核・品質基準・構造の変更はない。最新weeklyの管理値 **全体48%・商品合格0/3**、NOT_CLEAR／default OFF／Draft・open・unmergedを維持し、Ready・merge・deploy・enable・実DB・実機・正式商品合格は行っていない。
+
+---
+
+### 2026-09-27 継続 — 裸形・本人主語の肯定回答も訂正後の原反応を保持する
+
+添付記録をAPI PR3 `6d229f8`と本PR30 `f2c00ff`へ照合し、前節が適用済みであることを確認した。必須前提、全体設計図・両repo全ファイル地図・current_structure、最新9/26 weekly、Emlis商品軽視の恒久記録を読んでから、残件の共通原因を既存ownerで修正した。System ContextはPR37のread-firstで認められた原資料直接参照を使う。現行配分はlatest weekly §3.8・§5.3・§5.7の「Work使用可能時はEmlis、回復待ちはProでPiece」で、過去節の9/27以降30%を現行方針として再適用しない。
+
+与格以外でも既に認定される肯定感情が、感情属性の欠落で訂正後に汎用の負荷表現へ流れ、元の反応を落としていた。既存回答意味更新の完全一致した肯定感情構文へ属性を揃え、既存Human Receptionと独立Gateでは文頭の認定済み本人主語を助詞・主体・時点ごと保って受け手の文へ直す。語彙辞書・認定構文・意味選択責務を増やさず、重複本人主語・丁寧形・出来事側主語の境界を保持した。独立Gateは作者を再生成せず実本文を元sourceへ逆復元する。
+
+実本文では裸形・「私は／私も／自分は」の訂正でも元の出来事への反応と更新回答が残る。原時点の訂正、与格の既修正、撤回で回答由来の内容だけを除く動作も確認した。単一出来事の本人主語は既存文脈から出来事名の反復を省ける。複数出来事では対象の明示が必要なため、反復全般は未解決。裸形の訂正と別出来事の撤回を同時に行うケースも、独立した悲しさ・残る出来事への元反応・訂正回答を本文へ返せる。
+
+API公開commitは`7c9a8e358a507b04c30feb5e14b45e24908a5822`。検証したローカルcommit `332e22118544a9bd19372f15c332493e9e7ae296`とtree `f40974cca498ec0aed4332beeb134a6e46871e40`が一致する。変更7ファイル（production3・test2・派生fixture1・引継ぎ1）のpath集合を確認し、remoteから再取得した全7ファイルのbytesが検証後のsourceと一致した。
+
+最終対象335件は **309 PASS／26 FAIL、ERROR／SKIP 0**。本人視点77件は全PASS（新38件を含む）、連体化19件と派生owner identity1件はPASS。Q1 thread72 PASS／3 FAIL、引用訂正source-scope3 PASS／15 FAIL、received-discourse137 PASS／8 FAIL。旧26失敗は変更前と同じケースで、path・行番号・実行時addressを除いた失敗内容も一致する。今回の意図した対応拡張で旧期待が合わなくなった2関数・3ケースは、同一入力のまま元反応・主体・時点・独立逆読と改変拒否を守る検査へ更新し、旧26失敗を成功へ換算していない。
+
+追加testの質問数設定と初回のimport環境指定に不備があり、productionを変えずに修正した。最終335件は同一productionの258件と、設定修正後に再実行した本人視点77件の合算である。Q3の追加保存4件は初回→回答→訂正→撤回と、各更新後の生成なしGET／再startで保存DTOの完全一致を確認した。ローカルPGliteでの検証であり、実DBではない。今回の環境はPython3.12.14／pytest9.1.1等で、過去の固定環境と同一とは扱わない。旧必須全量・同じ初回100件・継承保存337ケースは再実行していない。検査範囲・実本文・試行の詳細は[API引継ぎの同日末尾節](https://github.com/MassyuRed/mashos-api/blob/agent/cmee-v1a-i1sx-source-explicit-20260815/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)に記録する。
+
+残件は複数出来事の反復、原時点に矛盾する反応の読み心地、重複本人主語のfallback、`私にも`・一部丁寧形の本文未提供、長文の意味選択不足。次は最新weeklyと実本文を照合し、反復と出来事・時点の関係を既存owner内で一群として確認する。**STRUCTURE_MAP_DELTA_NONE**：既存回答意味更新・Human Reception・独立Gate内の修正であり、owner・route・質問・保存schema・公開API・DB・RN・他中核・品質閾値・全体構造は不変。**全体48%・商品合格0/3／NOT_CLEAR／default OFF／Draft・open・unmerged**を維持する。Ready・merge・deploy・enable・実DB・実機・実課金・外部生成AI・正式商品合格は実施していない。
