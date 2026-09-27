@@ -8872,3 +8872,32 @@ API反映commit **`2c75feb52529d0a4541ea8d2a22f0aa6f8ab669d`**、tree **`fd4cf15
 **次の残件**：原出来事「褒められた」そのものを撤回した後のdetached経路には、実本文2例で「回答した時点で私は嬉しいのですという気持ちを受け止めています。」「これまで、その時に私も嬉しかったのだという気持ちを受け止めています。」が残った。次は残る原反応・本人・時点・説明を保持する既存作者/独立逆読の因果箇所を扱う。原反応だけの撤回成功をこの別経路の成功へ換算しない。「のですね」の反復、原文再掲、矛盾する反応の読み心地、未認定表現・重複本人主語・長文の意味選択も未解消。肯定説明形全経路・週報の共通原因群全体・初回を含む全Emlisの商品完成ではない。
 
 **STRUCTURE_MAP_DELTA_NONE**：既存作者/独立Gate内の変更で、owner・route・質問・保存schema・公開API・DB・RN・他中核・回答認定・意味選択・品質閾値・全体構造は不変。Cocolon変更は本正本06だけ。**全体48%・商品合格0/3／NOT_CLEAR／default OFF／Draft・open・unmerged**を維持する。Ready・merge・deploy・enable・実DB・実機・実課金・外部生成AI・正式商品合格は実施していない。
+
+
+---
+
+### 2026-09-27 継続 — 元出来事の撤回後の説明形・本人視点・時点
+
+**主分類：TECHNICAL_CREDIT。** Mashの継続指示で、API `2c75feb52529d0a4541ea8d2a22f0aa6f8ab669d`／本PR30 `8a24a85162ddfc14472870c4b90165cb7c336cf6`を開始正本として照合した。前回txtの与格訂正は適用済み。必須前提・現行ルール・恒久incident全文、アプリ全体設計・両repo全tracked path（1645／2300）とファイル地図、current_structure、最新9/26 weekly §3.3・3.8・5.3・5.7・5.9を確認し、Work使用可能時はEmlisを進める方針で作業した。System Context prepareは祖先関係検査で停止したため原資料直接参照を使用し、生成contextの最新化は主張しない。
+
+前節の残件である元出来事そのものの撤回後に、形容詞の説明回答がdetached有限文の証明へ入らず、本人の「私」と「ですこと／という気持ちを受け止めています」のfallbackを残す共通経路を修正した。既存Human Receptionのdetached専用呼出しで説明形を認識し、文頭本人・助詞・程度・内側時制/否定・回答所属時点を保持する。共有helperの他用途は不変。途中は「のだし」、実際の終端は「のですね」とし、独立Gateは作者を呼ばず元source全文へ戻す。2節の左側に仮の終端を付けて読む際は、実際の末尾と区別して説明の「のだ」を要求する。意味認定・語彙・Move選択/順序・品質閾値は変更していない。
+
+3出来事のfixtureへの「今は私は嬉しいのです。」の後、`「褒められた」は誤りです。` と撤回すると、「回答した時点で私は嬉しいのですという気持ちを受け止めています。」から「回答した時点で、あなたは嬉しいのですね。」へ改善する。撤回済み出来事は消え、元の「その時は嬉しくなかった」と他2反応は残る。「私には少し怖くなかったのです」でも程度・与格・否定過去を保持する。出来事撤回後の回答訂正は「先の回答時点で、あなたも少し嬉しかったのですね。」、原時点なら「その時、あなたも少し嬉しかったのですね。」を返す。回答撤回では回答だけが消え、出来事を復活させない。
+
+| 確認 | 結果と範囲 |
+|---|---|
+| 今回取り直したbaseline | 開始HEADの638件＝609 PASS／29 FAIL。前回555件の529 PASS／26 FAILに、detached関連3ファイル83件の80 PASS／3 FAILを加えた範囲。全て今回の同じ環境で実行。 |
+| 最終 | **661件＝632 PASS／29既存FAIL、ERROR／SKIP 0**。contracts他193件は選択外。旧638件の成否と、29失敗のworkspace path・行番号・実行時addressだけを正規化した内容が全件一致。 |
+| 新23件 | 全PASS。主要10、明示本人なし2、途中説明節の独立reader1、未証明sourceの削除拒否4、出来事撤回後の訂正2、保存訂正/回答撤回4。production修正前は19 FAIL／4 PASSだった。旧テストの期待・入力・assertは一件も変更していない。 |
+| 保存4系列 | 一時PGliteで回答→継続→元出来事撤回→継続→訂正または回答撤回。各更新後GET/再startは生成停止下で保存DTOと完全一致、original DTO不変。実DB・端末の証拠ではない。 |
+| 本文の読了 | rootが直接18例の前後を照合。15本文のうち8改善・7全文不変、残る既存3エラーも不変。さらに保存4系列×3状態の12本文を全文読了。合計27本文状態で重複を含む。保存12状態の変更前全文までは取得していない。 |
+
+旧26失敗はQ1 thread3・correction source scope15・received discourse8。今回加えた既存3はdetached-feeling-discourseの単独Move期待2と同一sourceの2回表示期待1で、いずれも開始HEADと失敗内容が一致した。後者は名詞fallbackが残る。これらを解消済み、または全て旧期待にすぎないと断定しない。read-only再レビューで具体的な実装の修正必須事項はなく、古いコメントを対応範囲に合わせた。現行source由来のidentity fixtureを既存手順で再算出し、専用検査も661件に含む。歴史的な凍結証跡は不変。
+
+API公開commit **[`26cd60da9166d02cf431c9ff43fae7cea41b6ed4`](https://github.com/MassyuRed/mashos-api/commit/26cd60da9166d02cf431c9ff43fae7cea41b6ed4)**。検証local `bc22ebe97ca6f6803a0d89a486b62e53b001cfd5`とtree **`8b17289a1609dcac010fab6cbb873baa76979ff8`**が一致する。通常git pushは資格情報を取得できなかったため既存GitHub connectorで反映し、全5ファイル（production2・test1・派生fixture1・既存handoff1）のremote再取得全文、parent・tree・変更path集合を照合済み。1MB超のhandoffはContents応答に本文がなかったためGit blob取得で全文を確認した。本PR側は既存正本06のみの追記である。詳細な実本文・検査内訳・再実行コマンドは[API引継ぎの同日末尾節](https://github.com/MassyuRed/mashos-api/blob/26cd60da9166d02cf431c9ff43fae7cea41b6ed4/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)に保存した。
+
+実行環境はPython3.12.14／pytest9.1.1／pydantic2.13.5／FastAPI0.141.1／httpx0.28.1／Node24.19.0／PGlite0.5.8。production依存は不変。旧必須59ファイル・Q3全950件・初回100件・継承保存337ケースの全量再実行は行っていない。
+
+**次の残件**は、元出来事撤回後の名詞説明形「私は不安なのです」が「私は不安なのですことを見失わず、小さくせずに受け止めています。」へ戻る共通原因。内側のコピュラ・説明・本人・時点を保つ既存detached作者/独立Gateの範囲を確認する。外側過去「嬉しいのだったのですね」の読み心地、中途/重複本人主語のfallback/本文未提供、反復・原文再掲・矛盾する反応の読み心地、未認定表現・長文の意味選択も残る。形容詞説明形の限定改善を、名詞や全Emlisの商品完成へ換算しない。
+
+**STRUCTURE_MAP_DELTA_NONE／全体48%・商品合格0/3／NOT_CLEAR／default OFF／Draft・open・unmerged**を維持。既存作者・独立Gate内部の修正で、owner・route・質問・保存schema・公開API・DB・RN・他中核・全体構造は不変。Ready・merge・deploy・enable・実DB・実機・実課金・外部生成AI・正式Product Read PASSは実施していない。
