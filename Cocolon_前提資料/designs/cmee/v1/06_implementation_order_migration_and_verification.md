@@ -8710,3 +8710,13 @@ API実装`30bed4453c7c0b6571626c3f8afa30050e033e2c`は検証sourceとtree同一�
 具体的な原入力・実本文・非公開証拠識別子は公開資料に転記せず、詳細は[API既存handoff](https://github.com/MassyuRed/mashos-api/blob/agent/cmee-v1a-i1sx-source-explicit-20260815/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)の同日節に記録する。次の限定候補は、撤回前の既認定本人回答の与格表現が別の活用経路で一人称のまま残る箇所。今回追加修正はしない。
 
 **STRUCTURE_MAP_DELTA_NONE／NOT_CLEAR／default OFF／Draft・open・unmerged／45%・商品合格0/3**。主語付き名詞述語の丁寧形、standalone単一回答、人称の別経路、反復、長文の意味選択不足、未提供入力は残る。質問枠・保存・公開API・DB・RN・他中核の責務は変更しない。9/23中間判断、9/26集中終了、9/27以降Piece主軸・Emlis最大30%、10/10内容・10/24運用の予定を維持する。merge・ready化・deploy・enable・実DB・実機・実課金・外部生成AIは実施していない。
+
+---
+
+### 2026-09-27 継続 — 回答時点の本人の与格を受け手の文に直す
+
+最新weekly 2026-09-26 §3.3・§5.3で未適用と判明していた9/21の二箇所候補をAPI現行HEADへ照合し、既存Human Receptionと独立Observation Gateに適用した。API公開実装は`e507104eca365875bdb7e704e976ee089593ce04`、検証したローカル実装とtree `699f3b0c514db89b226cdd9cb3ffa3d8f940bcc6`が一致する。単一／複数出来事の回答時点に残った本人の一人称与格を、助詞・主体・時点・原出来事を保って受け手の文へ対応させる。訂正・撤回も同じ既存sourceに従う。新しい意味推測や契約変更ではない。
+
+合成入力の新12件と従来の連体化19件は **31 PASS**。Q3のローカル保存経路で初回→回答→訂正→撤回と生成なしの再取得・再開を確認し、owner identity整合の専用検査もPASS。隣接する既存検査の **137 PASS／8 FAIL** は修正前と同じケース・件数であり、8件の失敗は解消したとは扱わない。従来の必須59ファイル、初回100件、保存337ケースの全量は今回再実行していない。具体的な検査範囲と残件は[API引継ぎ](https://github.com/MassyuRed/mashos-api/blob/agent/cmee-v1a-i1sx-source-explicit-20260815/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)の同日節を参照する。
+
+別の原時点の与格経路はなお一人称のままで、反復・長文の意味選択・本文未提供も未解決。今回の部分修正を商品合格としない。最新weeklyの管理評価は **全体48%・商品合格0/3**。旧節の45%は当時の値として残す。**STRUCTURE_MAP_DELTA_NONE／NOT_CLEAR／default OFF／Draft・open・unmerged**。質問・保存・公開API・DB・RN・他中核の責務を変えず、merge・deploy・enable・実DB・実機は行っていない。
