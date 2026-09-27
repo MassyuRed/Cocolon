@@ -9112,3 +9112,28 @@ API反映commitは `32be3343832b06d428fb6f7abe5518db16b9ff5e`。変更5ファイ
 詳細と再実行はAPI既存 `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` の前節759件コマンドと本日同名末尾節。
 
 **STRUCTURE_MAP_DELTA_NONE／全体48%・商品合格0/3／NOT_CLEAR／default OFF／Draft・open・unmerged。** API production3・既存test1・派生fixture1・既存handoff1、本repoは本06追記1。file graph・route・認定/語彙・意味選択・active Move順・質問・保存/API/DB/RN・他中核・品質閾値は不変。Ready・merge・deploy・enable・実DB・実機・実課金・外部生成AIは未実施。
+
+## 2026-09-27 JST — 中央出来事撤回後の本文未提供を修正
+
+開始headはAPI `f83c30617552f5738d691bb62d4dd9c5b65466f5`／Cocolon `e7ef35019def1c65cac7c6ffc34007647d0074e3`。全体設計・全file map・current_structureは継続セッションの既読原典を保持し、入口・必読ProductNeglect監査全文・最新weekly 20260926 §5.3／§5.9・前回handoff末尾を再確認した。System Context prepareはGit metadata不足で停止し、原典直接参照のfallbackを使用した。生成context最新化とは主張しない。
+
+前回残した7表現の中央出来事撤回後は、意味planとHuman Receptionが作れても、観測が「残存対比・独立感情・残存対比」に分かれ、同構文反復／required arc分断で外側Gateに拒否されていた。既存Sentence Surface内で、source証明済み・全relationから独立した撤回後感情だけを越えて、両側の対比を一行へまとめる。独立感情は別群に保ち、各event/reaction・否定・程度・時制・source順・既存行数予算を維持する。中央→末尾の実操作で本文を提供し、順序を変える回避ではない。
+
+追加改変検査で判明したdegree欠落と単独detached時点付替えの見逃しも、既存独立readerで補修。thread原event→reaction/feelingのoperandを正規化typed source全文と照合し、単独撤回後感情の完全source・時点・無接続をwhole-lineから読む。新singleton適用は既存原reaction証明か明示answer feelingに限定し、state/wishや原positive/非過去形へ広げない。作者を停止した改変拒否と等価終端許容を確認。新しい認定・語彙・作者・品質閾値緩和はない。
+
+- 7表現×3撤回位置と既回答保持1の計22条件：本文未提供8→0。完全plan／selected reception／更新checkpointは全22前後同一。既存提供14本文も全文不変。
+- 7表現の中央→末尾撤回は、二本のsource義務を保つ前回の共有受け取りまで到達。
+- 保存3系列×2状態＝6状態：中央→末尾撤回、中央→reaction訂正、中央→reaction撤回。original DTO不変、生成停止下GET／再startで各current DTO完全一致。開始productionは全3系列が最初の中央撤回で本文未提供。訂正後の既存COMPLETEDを守り、第三回答を無理に出さない。一時PGliteで、実DB・実機ではない。
+- rootは22＋保存6の最終28本文状態を全文読了（重複あり）。観測の引用再掲や程度付き受け取りの名詞化は残る。正式Product Read PASSではない。
+
+最終source固定の横断は **1047件＝1019 PASS／既存28 FAIL、ERROR／SKIP 0、193 deselected**。旧977件のidentity・成否は全同一、28失敗のmessage／tracebackもruntime memory address正規化後に全一致。新たな失敗0。追加確認した既存観測26件はbefore/after全PASS、新規44件は全PASS。旧977 baselineは同じ開始productionの前回log/XMLを継承。途中探索1046件の結果を最終証拠へ流用せず、固定sourceで1047件を再実行した。
+
+初期追加42件は37 PASS／5 FAIL。3件はreader欠落を補修。1件は新assertが旧表現を想定していたため実所有関係へ訂正、1件はCOMPLETED後の第三回答を要求したtest操作を別撤回系列へ訂正。その後43件PASS、等価終端1件追加で最終44件。同じ最終44件のbeforeは14 PASS／30 FAIL、ERROR／SKIP 0。既存testの操作/assertは維持し、説明commentだけ更新した。現行shared-owner identity fixtureのみ再算出し、歴史的凍結証跡は不変。
+
+補助境界のunknown回答2例後の出来事撤回は前後とも未提供、positive answer 1例は前後全文一致。unknownを感情へ変換して閉じていない。独立静的reviewの適用範囲指摘を反映済みで、最終記録に修正必須の指摘なし。既存runtime再使用、新規依存導入なし。旧必須59file・Q3全950件・初回100件・継承保存337ケース全量は未再実行。
+
+次は、補助確認で残った**認定済みunknown回答を保持した出来事撤回後の本文未提供**を、既存意味plan・作者／readerから調べる。全3出来事撤回後の非隣接反復・三重一致・異なる時点・重複本人主語・観測再掲・長文の意味選択も残り、反復／撤回群全体の完了ではない。
+
+詳細・実本文・再実行のpaths/selectorはAPI既存 `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` の本日同名末尾節。
+
+**STRUCTURE_MAP_DELTA_NONE／全体48%・商品合格0/3／NOT_CLEAR／default OFF／Draft・open・unmerged。** API production2・既存test1・現行派生fixture1・既存handoff1、本repo本06追記1。file graph・route・認定/語彙・意味選択・Move順・質問・保存/API/DB/RN・他中核・品質閾値は不変。Ready・merge・deploy・enable・実DB・実機・実課金・外部生成AIは未実施。
