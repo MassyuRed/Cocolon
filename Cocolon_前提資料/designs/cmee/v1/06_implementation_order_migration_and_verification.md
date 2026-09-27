@@ -9154,3 +9154,20 @@ API反映commitは `32be3343832b06d428fb6f7abe5518db16b9ff5e`。変更5ファイ
 次は、**撤回前の複数出来事で不明回答だけへ受け取りが縮み、元反応と別出来事・反応がReceptionから落ちる既存経路**を扱う。今回も変更前後で同じ不足を確認している。二つ目の出来事撤回後の未提供2例、非隣接反復・三重一致・重複主語・長文の意味選択も残る。未認定表現や次質問のない単一出来事を無理に通していない。
 
 詳細な原因、実本文、途中経過、分母、再実行方法はAPI既存 `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` の同名末尾節へ記録。API production3・既存test1・派生fixture1・既存handoff1と、本正本06の追記1のみ。**STRUCTURE_MAP_DELTA_NONE**：既存owner内部の修正でroute・型・語彙／回答認定・質問・保存schema・公開API/DB/RN・他中核・品質条件は不変。旧必須全量・Q3全950・初回100・継承保存337ケース全量は今回未再実行。Draft/open/unmergedを維持し、Ready・merge・deploy・enable・実DB・実機・実課金・正式商品合格は行っていない。
+
+
+## 2026-09-27 継続 — 複数出来事への初回不明回答でReceptionの元反応を保持
+
+API開始 `7c5a76b564f7423cb338edaf7cc17dbe7aac26a4`、本repo開始 `b07a7db14dc9c02d450903685625ffb369698fa0`。全体設計・両repo全file map・作業rule・恒久incident・最新weekly 20260926 §5.3／§5.9を照合した既存承認内LEVEL_2。初回の認定済み不明回答1件に対し、元の出来事／反応がReceptionから落ちる既存経路を修正した。
+
+既存planはattached unknownを出来事1件へ限定しており、2〜3件ではgroupを失ってunknown代表だけを選択していた。出来事1〜3件が既に証明された同じselectorで出来事数1限定を外し、既存Human Reception IRの同じ制限も外した。state／uncertainを感情へ変換せず、完全source・本人・否定・程度・回答時点・一意ABOUTを保つ。元反応と他出来事を既存共有作者へ戻し、独立readerは変更しない。新しい受付・質問仕様・品質閾値・Move予算・保存／公開契約は追加変更しない。
+
+例：「褒められたのに、嬉しくなかった。誘われたのに、悲しかった。頼まれたのに、寂しかった。」へ「今はまだよく分からない。」と答えた後、旧Receptionはその不明だけだった。変更後は「褒められた時は嬉しくなく、回答した時点ではまだよく分からないし、誘われたのに、悲しさを感じたし、頼まれたのに、寂しさを感じたのですね。」と元反応・他出来事を共に保持する。
+
+- 最終横断 **1107件＝1079 PASS／既存28 FAIL、ERROR／SKIP 0、193 deselected**。旧1076件のtest identity・成否、および実行時memory addressだけ正規化した28失敗のmessage／tracebackは前節最終結果と全一致。旧1076 baseline全体は同じ開始production・同じruntimeの前節log/XMLを継承し、今回再実行していない。
+- 追加31件全PASS。同じ31件の開始productionは6 PASS／25 FAIL、ERROR／SKIP 0。旧test全文・assertは不変。隣接unknown 41件は前後25 PASS／16既存FAILで成否・正規化失敗内容同一（別分母）。
+- 直接8条件は8 Reception変更、意味checkpoint／accepted／Observation不変。前節46状態probeは4本文変更・42状態不変、意味情報は全不変。
+- 保存4系列12状態は6本文変更・6全文不変、Observation全不変。original DTO不変、生成停止下GET／再startの保存DTO一致を確認。一時PGliteで実DB・端末ではない。rootと独立担当が直接8＋保存12の全文を確認した。
+- 変更はAPIの既存prod2・test1・派生fixture1・handoff1、本repo既存06追記だけ。System Context prepareはresidual without markerで停止し、原典直接参照を使用した。詳細・再実行方法はAPI既存handoff同名末尾節。
+
+次は不明回答の後に別回答を追加すると新しい回答だけへ戻る既存Reception欠落。別出来事撤回／2回目出来事撤回の本文未提供も残る。長い「し」の列挙、回答対象の逆接が「時は」へ弱まる読後差、原文再掲、反復・重複主語・長文の意味選択を全解決とはしない。**TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_NONE／全体48%・商品合格0/3／NOT_CLEAR／default OFF／Draft・open・unmerged**。旧必須全量・Q3全950・初回100・保存337全量は未再実行。正式商品PASS・Ready・merge・deploy・enableは未実施。
