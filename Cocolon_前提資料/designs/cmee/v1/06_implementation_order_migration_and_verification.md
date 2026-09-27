@@ -9171,3 +9171,22 @@ API開始 `7c5a76b564f7423cb338edaf7cc17dbe7aac26a4`、本repo開始 `b07a7db14d
 - 変更はAPIの既存prod2・test1・派生fixture1・handoff1、本repo既存06追記だけ。System Context prepareはresidual without markerで停止し、原典直接参照を使用した。詳細・再実行方法はAPI既存handoff同名末尾節。
 
 次は不明回答の後に別回答を追加すると新しい回答だけへ戻る既存Reception欠落。別出来事撤回／2回目出来事撤回の本文未提供も残る。長い「し」の列挙、回答対象の逆接が「時は」へ弱まる読後差、原文再掲、反復・重複主語・長文の意味選択を全解決とはしない。**TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_NONE／全体48%・商品合格0/3／NOT_CLEAR／default OFF／Draft・open・unmerged**。旧必須全量・Q3全950・初回100・保存337全量は未再実行。正式商品PASS・Ready・merge・deploy・enableは未実施。
+
+
+## 2026-09-27 継続 — 複数回答でも不明回答と元反応を保持
+
+API開始 `e56c25cf29d8cde04d4916b761b015f58a3f990c`、本repo開始 `6f46a49a1c6f90d4186d0d67fbd38ee62274eced`。fresh PR・両repoの非省略tree／全tracked bytes、全体設計・全file map・現行rule・恒久incident全文・current_structure・最新weekly 20260926 §5.3／§5.9・前回記録を確認。DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、既存承認内LEVEL_2。root華恋が唯一の編集／検査／GitHub反映担当で、2担当がread-onlyで原因・差分・実本文を確認した。System Context prepareはresidual without markerで停止し、原典直接参照を使用した。
+
+不明回答後に別回答を加えると、元反応と先の不明がReceptionから落ちる既存条件を修正した。既存plan内のattached unknown認定が回答1件・撤回なしを要求していたため、各回答自身のsource証明と一意ABOUTで判定する形へ変更。detachedでは撤回markerと全relationからの独立を維持する。state／uncertainを感情化せず、元反応・出来事・回答時点・否定を保持する。独立source置換にリンクのないunknownは追加対象にしない。作者／reader・受付・質問・Move上限・品質閾値・保存／公開契約は変更しない。
+
+例：三出来事へ「今はまだよく分からない。」の後「その時は怖かった。」を加えると、旧Receptionは後者だけだった。修正後は「褒められた時は嬉しくなく、回答した時点ではまだよく分からないし、誘われた時は悲しく、怖かったし、頼まれたのに、寂しさを感じたのですね。」となり、元反応と両回答を保持する。
+
+- 最終横断 **1150件＝1122 PASS／既存28 FAIL、ERROR／SKIP 0、193 deselected**。旧1107件のidentity・成否と、実行時memory addressだけ正規化した28失敗のmessage／tracebackは前節最終結果と全一致。旧1107のbefore全体は同じ開始production・runtimeの前節log/XMLを継承し、今回は再実行していない。
+- 新43件全PASS。同じ最終43件を開始productionで実行すると4 PASS／39 FAIL、ERROR／SKIP 0。既存test全文・assertを保持。初回42 PASS／1 FAILは新assertが正当な否定活用を許さなかったため訂正し、同じ修正後testで前後比較した。productionの追加補修はない。
+- 直接27条件：既提供21本文変更、未提供2本文を提供、4状態不変。比較可能26条件の意味checkpoint／acceptedは一致し、既提供23本文のObservationも一致。未認定1条件を成功やpayload比較へ数えない。
+- 保存4系列12状態：既提供6本文変更、未提供1本文を提供、5本文不変。比較可能11本文のObservationは不変。original DTO保持、生成停止下GET／再startの保存DTO一致を全12状態で確認。一時PGliteであり実DB・実機ではない。
+- rootと独立担当が直接25＋保存12本文を全文確認し、重大な意味誤り・修正必須指摘なし。長い列挙、逆接の弱まり、原文再掲は残る。正式Product Read PASSではない。
+
+次は、不明＋怖さの二回答後に不明の元出来事「褒められた」を撤回したときの本文未提供。3Move・required nuclei 7/7・relations 3/3と表層検証は通るが、独立逆読の `body_inverse_answer_target_time_missing:2` で止まる。容量不足と混同せず、既存観測source／時点の整合を扱う。不明＋肯定2回答は本文が出ても最新肯定だけへ縮む既存欠落のまま。反復・重複主語・別の容量不足・長文の意味選択も残る。
+
+API既存prod1・test1・現行派生fixture1・handoff1、本repo既存06追記だけ。詳細・途中経過・再実行はAPI既存handoffの同名末尾節。新43件selectorは `test_cmee_emlis_received_discourse.py -k multi_unknown`。隣接unknown41、旧必須全量・Q3全950・初回100・保存337全量は今回未再実行。**TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_NONE／全体48%・商品合格0/3／NOT_CLEAR／default OFF／Draft・open・unmerged**。正式商品PASS・Ready・merge・deploy・enable・実DB・実機・実課金・外部生成AIは未実施。
