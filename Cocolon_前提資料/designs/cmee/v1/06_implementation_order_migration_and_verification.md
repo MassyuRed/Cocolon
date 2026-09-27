@@ -9137,3 +9137,20 @@ API反映commitは `32be3343832b06d428fb6f7abe5518db16b9ff5e`。変更5ファイ
 詳細・実本文・再実行のpaths/selectorはAPI既存 `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` の本日同名末尾節。
 
 **STRUCTURE_MAP_DELTA_NONE／全体48%・商品合格0/3／NOT_CLEAR／default OFF／Draft・open・unmerged。** API production2・既存test1・現行派生fixture1・既存handoff1、本repo本06追記1。file graph・route・認定/語彙・意味選択・Move順・質問・保存/API/DB/RN・他中核・品質閾値は不変。Ready・merge・deploy・enable・実DB・実機・実課金・外部生成AIは未実施。
+
+
+## 2026-09-27 JST — 不明回答を保持した出来事撤回後の本文提供
+
+**TECHNICAL_CREDIT／NOT_CLEAR／全体48%・商品合格0/3／default OFF。** API開始 `46115237b8dd49bd58d7c8c41be5b79490a8874d`、Cocolon開始 `f9c5936b3622faa3ffd8106eb2f9dd357e6da69a`。前回txt、前提・作業ルール、全体設計・両repo全path地図、current_structure01/04、最新weekly20260926 §5.3／採用済み§5.9を照合し、既存次群を修正した。System ContextはGit metadata不足でprepare不可、規定の原典直接参照を使用した。
+
+元出来事撤回後、すでに認定され保存されているstate/state/uncertainの回答が、既存Reception選択のfeeling条件で拒否されていた。既存証明を満たす、関係のない撤回後回答だけを独立Moveへ渡す。二つの出来事ではその先の同一文末反復も拒否原因だったため、既存Sentence Surfaceで `回答した時点では、「まだよく分からない」と書かれています。` と返し、独立Gateが一文全体からsourceと時点を検証する。不明を感情・処理失敗・解決済みへ変えず、旧出来事や別出来事へ結び直さない。新しい作者・Gate・閾値緩和はない。
+
+- 2／3出来事×既認定回答2表現の4条件で、最初の出来事撤回直後の本文未提供を解消。さらに回答訂正2／回答撤回2状態へ到達する。従来提供23本文は全文不変、比較可能30状態のcheckpoint／accepted nucleiは不変。
+- 保存4系列12状態でoriginal DTO不変・残存内容保持・生成停止下GET／再startのDTO一致を確認。開始版では各系列の出来事撤回で本文なしとなり後続へ進めなかった。既存回答直後4本文は不変。一時PGliteの確認で、実DB・実機ではない。
+- 最終横断 **1076件＝1048 PASS／既存28 FAIL、ERROR／SKIP 0**。旧1047件の成否と28失敗の正規化したmessage／tracebackは一致。追加29件全PASS。旧1047のbeforeは同じ開始productionの前節log/XMLを継承し、今回全量再実行していない。
+- 同じ最終追加29件のbeforeは8 FAIL／21 setup ERROR。共通contextが既知の本文生成例外で止まり、21件は改変assert未到達。隣接unknown41件は今回前後実行し25 PASS／16既存FAIL、全成否・失敗内容一致。横断とは別分母。
+- rootと独立担当は、新規到達8本文と保存12状態を全文確認した。引用再掲・汎用的な受け取りは残り、正式Product Read PASSではない。既存test本文／assertを保持し、現在source由来identity fixtureのみ再導出した。
+
+次は、**撤回前の複数出来事で不明回答だけへ受け取りが縮み、元反応と別出来事・反応がReceptionから落ちる既存経路**を扱う。今回も変更前後で同じ不足を確認している。二つ目の出来事撤回後の未提供2例、非隣接反復・三重一致・重複主語・長文の意味選択も残る。未認定表現や次質問のない単一出来事を無理に通していない。
+
+詳細な原因、実本文、途中経過、分母、再実行方法はAPI既存 `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` の同名末尾節へ記録。API production3・既存test1・派生fixture1・既存handoff1と、本正本06の追記1のみ。**STRUCTURE_MAP_DELTA_NONE**：既存owner内部の修正でroute・型・語彙／回答認定・質問・保存schema・公開API/DB/RN・他中核・品質条件は不変。旧必須全量・Q3全950・初回100・継承保存337ケース全量は今回未再実行。Draft/open/unmergedを維持し、Ready・merge・deploy・enable・実DB・実機・実課金・正式商品合格は行っていない。
