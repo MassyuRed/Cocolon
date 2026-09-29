@@ -10683,3 +10683,22 @@ current identityの各18payload/9owner・fixture key/scopeを保持した。今�
 **残件と再開点。** markerのない表現・解釈文・肯定混在/chain/detachedの旧列挙、長い中央名詞・定型句、二層再掲・受け取りの深さ、未反映境界・既知失敗は未完了。次は同じ複数出来事/回答/訂正群の実本文から、中央の長い受領列挙を既存責務内で減らせるか判断する。marker不足を扱う場合は意味解析側の範囲を先に定める。群全体完了へ繰り上げず、10/03休止、10/04以降Work/Ultra分析・Work不可時Pro Pieceを維持し、旧10/10期限を復活させない。
 
 **TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_NONE／全体48%・商品0/3・NOT_CLEAR・default OFF・Draft/open/unmerged。** API6path＋本06の計7pathをPR #3/#30へ反映し、両fresh head・親/tree・変更全fileのremote bytesを照合する。構造node/route/source権限/lifecycle・owner/API/DB/RN/schema/商品依存/flags・規範/凍結/閾値変更0。Ready/merge/deploy/enable・追加費用・Mash操作は行わない。
+
+
+## 2026-09-29 Work継続 u22：同じ出来事への重複参照を元時点回答でも省略
+
+API `fc8f2a8`／Cocolon `3d0906e`から継続。最新作業ルール・恒久incident全文・weekly 20260926の9/29合意・current_structure00/u21を再確認し、同一セッションの不変な全体設計/全ファイル地図/current overlays/current_structure/canonical/前回txtを継承した。System Context prepareは祖先不一致exit2のため正本直接読取を適用し、生成freshness成功とはしない。LEVEL_2の効果前A〜F/最大7path内、rootのみ編集・実行・反映、商品/技術担当は読取専任。
+
+既存HRのsingleton received source/IRで、完全な原反応とそのevent自身の元時点回答に限り、重複する「その出来事について、」を省く。Gateは同一eventのoriginal→answer exact2、完全source・元時点を独立に読む。複数target・原反応なし・detached/replacementの参照は従来通り。Plan/Surface/admission・意味marker・新owner・Move容量・role終端は変更しない。
+
+保存済みu21開始版と今回freshな同一41状態を比較し、生成37は13本文変更/24全文一致、全Observation・核・関係・Moveと取得できたcheckpoint/accepted一致、作者なし逆読成功。13変更は当該重複参照の削除だけ。root/商品担当が全13組の前後両層を実読し、二命題・本人・event・時点・訂正内容を保持、誤帰属/撤回内容復活なしと確認した。残る4は同じprobe制約/初回未提供で成功に数えない。開始版本文のfresh再生成ではない。
+
+初稿重点77の新6FAILは未要求の「旧prefix任意復元」assertと既存exact参照本文条件の不一致だった。この追加assertを除き、新表面と意味改変拒否を検査する。Gate条件の緩和はない。独立技術reviewに静的な追加blockerなし。両層全文・原因・詳細はAPI handoff u22を参照。
+
+最終3ファイル1061＝1050PASS/既存11FAILとowner-chain1PASS、計**1062＝1051PASS/既存11FAIL/ERROR・SKIP0**。同一セッション保存済みu21最終1053とのcase照合で脱落/既存成否変化0、新8全PASS、11失敗のmessage/traceも識別子等だけの正規化で全一致。開始版のfresh全量再実行や旧2474条件全量の結果ではなく、未再実行の既知44FAILは未解決扱い。
+
+新8は6sourceの短縮/公開生成/作者なし意味改変拒否と、複数targetの参照必須control2。36の改変assertは独立caseへ水増ししない。既存の訂正/撤回/追加と保存検査も実行し、PGliteで原DTO不変と生成禁止GET/start一致を確認。実DB/実機/再起動の証明ではない。既存宣言の削除0、received5検査/attributive1検査を同じ入力・意味保護で追従、新2検査。identity各18payload/9ownerを保持し、既存runtimeを再使用、再install/商品lock変更なし。詳細とidentityはAPI handoff u22に記録。
+
+長い中央名詞・定型受領句、二層再掲・受け取りの深さ、markerのない元時点表現/解釈文/肯定混在/chain/detachedの旧列挙、未反映境界・既知失敗は残件。次は同じ群の中央名詞と既存roleを保つ改善範囲を実本文から判断する。今回を群全体完了・正式商品合格とはしない。
+
+**TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_NONE／全体48%・商品0/3・NOT_CLEAR・default OFF・Draft/open/unmerged。** 効果前7path内（API6＋本06）をPR #3/#30へ反映し、fresh head・親/tree・変更path・全file remote bytesを照合。構造/owner/API/DB/RN/schema/依存/flags・規範/凍結/閾値変更0、Ready/merge/deploy/enable・追加費用・Mash操作0。10/03未完でも休止、10/04以降Work/Ultra分析・Work不可時Pro Piece、旧10/10期限未設定を維持。
