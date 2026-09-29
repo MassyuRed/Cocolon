@@ -10702,3 +10702,20 @@ API `fc8f2a8`／Cocolon `3d0906e`から継続。最新作業ルール・恒久in
 長い中央名詞・定型受領句、二層再掲・受け取りの深さ、markerのない元時点表現/解釈文/肯定混在/chain/detachedの旧列挙、未反映境界・既知失敗は残件。次は同じ群の中央名詞と既存roleを保つ改善範囲を実本文から判断する。今回を群全体完了・正式商品合格とはしない。
 
 **TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_NONE／全体48%・商品0/3・NOT_CLEAR・default OFF・Draft/open/unmerged。** 効果前7path内（API6＋本06）をPR #3/#30へ反映し、fresh head・親/tree・変更path・全file remote bytesを照合。構造/owner/API/DB/RN/schema/依存/flags・規範/凍結/閾値変更0、Ready/merge/deploy/enable・追加費用・Mash操作0。10/03未完でも休止、10/04以降Work/Ultra分析・Work不可時Pro Piece、旧10/10期限未設定を維持。
+
+
+## 2026-09-29 Work継続 u23：複数出来事の回答名詞を既存の活用へ統一
+
+API `20b1b56`／Cocolon `6c88f85`から継続。最新作業ルール・恒久incident全文・weekly 20260926の9/29合意/u22を再確認し、同一セッションで読んだ不変な全体設計/全ファイル地図/current_structure/canonical/前回txtを継承した。System Context prepareは祖先不一致exit2のため正本直接読取を適用。生成freshness成功とはしない。LEVEL_2の効果前A〜F/最大6path内、rootのみ編集/実行/反映、商品/技術担当は読取専任。
+
+中央significanceの短縮案は、既存finiteやdistributiveの役割・関係条件へそのまま接続できないため今回採用しなかった。同じ群で実測した、3回答がまとまった後の本文未提供と「不安でしたこと」「不安だったのですこと」を先に修正。HR source/IRで既存回答名詞活用をreceived target1からtarget2/3へ揃え、Gateの同じ回答枝で完全sourceと時点を独立復元する。一般answer group count0、原反応/参照省略のsingleton条件、role/marker/Plan/Surface/admission/Move容量は維持した。
+
+freshな前後24状態（6source×2時点×先頭/中央）は、12未提供の回復と12本文の名詞活用/説明名詞化修正。全24のcheckpoint/accepted/核/関係/Moveが一致し、生成済み12のObservationも一致、候補24の作者なし逆読成功。root/商品担当は全24の存在する前後両層を実読した。u22の対照41も保存済み開始版と全record一致（生成37、同じprobeエラー4）。初期診断や重点検査へ重複加算しない。両層全文と詳細根拠はAPI handoff u23を参照。
+
+最終3ファイル1089＝1078PASS/既存11FAILとowner-chain1PASSの計**1090＝1079PASS/既存11FAIL/ERROR・SKIP0**。同一セッション保存済みu22最終1061とcase ID/成否を照合し、脱落/既存成否変化0、新28全PASS。11失敗のmessage/traceはpath/行位置/UUID/addressだけの正規化で全一致。開始版3ファイル全量のfresh再実行、旧2474条件全量、未再実行44既知FAILの解消とはしない。
+
+新28は6source×2時点×2配置の本文/作者なし意味改変拒否24と、3roundの保存再表示4。全required核/関係、原反応・event/回答交換、時点、内外時制、説明・本人・助詞・程度、第三回答欠落等を検査する。保存は既存PGliteで原DTO不変と生成禁止GET/start一致を各round後に確認。実DB/実機/再起動や全更新順序の新規網羅証明ではない。既存訂正/撤回/追加検査も同じ回帰内で実行した。既存119宣言変更/削除0、新2検査のみ。identity各18payload/9owner維持、再install/商品lock変更なし。独立技術reviewに重大指摘なし。詳細・identityはAPI handoff u23に記録。
+
+長い列挙・複数SELF自体の不自然さ・中央定型句、二層再掲/深さ、markerのない表現/解釈文/肯定混在/chain/detachedの旧経路、他の未反映/既知失敗は残る。次は同じ群の原反応も含む名詞列挙と既存roleを保つ本文構成をactual sourceで判断する。今回を原反応修正・role短縮・対象群全体完了・正式商品合格にはしない。
+
+**TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_NONE／全体48%・商品0/3・NOT_CLEAR・default OFF・Draft/open/unmerged。** 効果前6path内（API5＋本06）をPR #3/#30へ反映し、fresh head・親/tree・変更path・全file remote bytesを照合。構造/owner/API/DB/RN/schema/依存/flags・規範/凍結/閾値変更0、Ready/merge/deploy/enable・追加費用・Mash操作0。10/03未完でも休止、10/04以降Work/Ultra分析・Work不可時Pro Piece、旧10/10期限未設定を維持。
