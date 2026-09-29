@@ -10625,3 +10625,20 @@ freshな前後38状態は16本文変更／22全文一致。全38のObservation�
 元場面時点とevent撤回後の不自然文、長い受領句、二層再掲、定型語尾、受け取りの深さ、未反映回答・既知失敗は残件。次は元時点／event撤回後の実本文と更新系列から既存経路の範囲を判断する。商品群の完了・正式商品合格とはせず、10/03休止を延長しない。
 
 **TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_NONE／全体48%・商品0/3・NOT_CLEAR・default OFF・Draft/open/unmerged。** LEVEL_2の開始前6path内（API5＋本06）、rootのみ編集・実行・GitHub反映。構造node/route/source権限/lifecycle、新owner/API/DB/RN/schema/依存/flags、規範・凍結証跡・品質閾値の変更0。install・商品lock変更・追加費用・Mash操作0。既存PR #3/#30へ結び付け、変更全fileのremote bytesとheadを照合する。Ready/merge/deploy/enableは行わない。
+
+
+## 2026-09-29 Work継続 u19：複数出来事の元時点回答にも本人所有を保持
+
+API `ef007dc`／Cocolon `5103f1f`から、Mashの残件継続指示に従って着手。最新ルール・weekly 20260926の9/29合意を再確認し、同一セッションの不変な全体設計/全ファイル地図/current_structure/canonical・恒久incident全文・前回txt・u18記録を継承した。最優先は複数出来事と回答・訂正の受け取り、10/03休止と10/04以降の分析配分を維持する。
+
+複数eventのreceived groupが「あなたは私には不安ですこと」へ戻る原因を補修した。既存HRのsource/IRで、完全な複数SELF命題を「私は私には不安だという、その時のあなたの気持ち」へ結び付ける。「その出来事について、」は保持し、他eventや他回答時点との混同を防ぐ。Gateは同じreceived専用reader内で完全source・本人所有・時点を独立復元する。通常の活用・一般answer group・有限文・admission・Plan/Surface・引用/Move予算は変更しない。
+
+前後18状態は16本文変更／2不変、全Observation・核・関係・Move一致、独立読取成功。rootと商品担当が前後両層全文を読み、否定・程度・内外過去・訂正後の元場面時点を保持し、撤回内容が復活しないことを確認。u18の34状態も元時点5だけ変更／29不変、意味項目は一致。二つの集合には重複があり合算しない。未反映回答6状態は未解決。
+
+最終は関連3ファイル963条件＝952PASS／既存11FAILとowner-chain1PASSの計**964条件＝953PASS／11FAIL／ERROR・SKIP0**。同一セッション保存済みu18の935条件とcase ID・成否が一致、新28全PASS、11失敗内容も識別子等だけの正規化で一致。旧全2474条件の再実行ではなく、残44既知FAILも未解決扱い。新28は本文/対象/元時点12、作者なし参照・回答交換・時間借用等拒否12、訂正/撤回/追加の保存4。保存は試験用PGliteで原DTO不変と生成禁止GET/start一致を確認したもので、実DB・実機・再起動の証明ではない。重点31全PASSは重複計上しない。
+
+既存1検査関数の表面期待だけを追従し、同じcase ID・入力・意味保護を維持。既存宣言の削除0、新3検査＋1fixture。各18payload/9ownerのcurrent identity導出範囲を保持し、技術reviewに追加blockerなし。詳細な両層本文・再現対象・identityはAPI handoff u19を参照。
+
+長い列挙、二層再掲、定型句、受け取りの深さ、未反映・既知失敗は残件。event撤回後の単独名詞には「これまで、その時に私は…ですこと」が残り、次は既存 `_source_grounded_current_expression_nominal` → `_source_grounded_response_argument` → Gate generic名詞照合を確認する。撤回eventやABOUTを復活させず本人と時点を保つ。今回のreceived群修正と別の未解決箇所である。
+
+**TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_NONE／全体48%・商品0/3・NOT_CLEAR・default OFF・Draft/open/unmerged。** LEVEL_2の開始前6path内（API5＋本06）、rootのみ編集・実行・GitHub反映。新owner/API/DB/RN/schema/依存/flags、構造・規範・凍結証跡・品質閾値の変更0。追加費用・Mash操作0。既存PR #3/#30へ反映後に6file全文bytesとheadを照合し、Ready/merge/deploy/enableは行わない。
