@@ -10657,3 +10657,29 @@ fresh18状態の前後両層をrootと商品担当が確認し、14本文変更/
 **残件。** 撤回後の名詞接続と時点所有を閉じた限定単位であり、長い列挙・二層再掲・定型受領句・原sourceの重複SELF・受け取りの深さ・未反映境界・既知失敗は残る。次は同一の複数出来事/回答/訂正群で長い受領列挙と二層の価値差を実本文から確認し、商品上の必要性と既存owner内の範囲を先に判断する。
 
 **TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_NONE／全体48%・商品0/3・NOT_CLEAR・default OFF・Draft/open/unmerged。** API5path＋本06の1pathを既存PR #3/#30へ反映、fresh head・変更path集合・全変更fileのremote bytesを照合。構造node/route/source権限/lifecycle・owner/API/DB/RN/schema/依存/flags・規範/凍結/閾値は変更0。Ready/merge/deploy/enable・追加費用・Mash操作0。10/03は未完でもEmlis休止、10/04以降はWork/Ultra分析、Work不可時Pro Pieceを維持し、旧10/10期限を復活させない。
+
+
+## 2026-09-29 Work継続 u21：元場面の気持ちを出来事ごとの受け取りへ分離
+
+API `6fd6ac2267f5eb6f2879ac360dd152a6eea6ce3e`／Cocolon `4b0a4158a19d1f88794b3a0ae7792f4a3c3b3c68`から、Mashの残件継続指示と前回txtを受けて着手。最新作業ルール・恒久incident全文、全体設計01/02・全ファイル地図01A/B/Cの現行経路/current_structure/canonical02/06/u20、weekly 20260926の9/29追加合意を確認した。全tracked pathはAPI2300／Cocolon1645。System Context prepareはmaterial commit祖先不一致でexit2となり、正本直接読取へ戻った。全歴史本文の再通読・生成freshness成功とはしない。LEVEL_2の効果前最大7path内でrootのみ編集/実行/反映、商品/技術担当は読取専任。
+
+元場面時点が混ざると全eventの原反応と回答を一文へ戻す既存Planの分割条件を限定して広げた。通常呼出し・`thread_time:original_occasion`・既存`operator:feeling`を持つ負回答を、それぞれのeventと原反応へ同じMoveで結び付ける。隣接する未回答eventだけを残りの群へまとめ、順序・全required核/関係・時点・既存2〜3 Move容量を保持する。唯一ABOUT、current_user、完全原反応、全回答negative、uncertaintyなし、独立/行動/replacement/detached/withdrawal/chain除外は維持。chain再帰は旧経路のまま。Gateは既存の元時点文法と独立読取を使い、変更しない。意味核/admission・観測層・新ownerを増やさない。
+
+既存markerは完全な感情文法の証明ではなく、「重かった」「こわかった」や解釈文を含む元時点群は旧列挙に残る。意味解析へmarkerを追加する変更は今回の範囲外。元時点の全許可という初稿は採用しなかった。
+
+freshな前後41状態中、生成37は19本文変更／18全文一致、全37のObservation・核・関係が一致し、作者なし逆読に成功した。取得できたcheckpoint/acceptedも一致。rootと独立商品担当が前後の両層全文を読み、対象・時点の取り違えや撤回内容の復活を今回差分では認めなかった。残る4は前後同じprobeエラーで、二出来事の質問完了後advanceというhelper制約3と、行動付きcontrolの初回未提供1。成功・新規失敗・正式pytest失敗とは区別した。初稿の21変更から最終で「重かった」入り2状態が旧全文へ戻ったため、最終は19変更である。
+
+改善は原反応と回答の読み分けに限る。中央の「その出来事について、その時に…ことを見失わず、小さくせずに受け止めています」は長いままで、全体文字数の短縮・二層の価値差・受け取りの深さを達成したとはしない。両層全文と詳細根拠はAPI handoff u21を参照する。
+
+
+関連回帰では中央の裸copula「不安です／不安でした」がどちらも「不安」へ縮む実問題4条件を発見した。HRのsingleton received回答に限り、この2種を既存FINITE名詞へ接続し、「不安なこと／不安だったこと」を保持した。source/IRを同じ条件に揃え、一般名詞helper・複数target・独立回答group・Gateは変更しない。追加4状態の前後両層をroot/商品担当が確認し、観測・核・関係一致と作者なし逆読成功。既存copula16条件も時制や所有等の改変拒否を保持して全PASS。編集前の範囲更新を経て、最終実変更はAPI6path＋本06の計7path。
+
+**検証と途中修正。** 同一環境のfresh開始版3ファイル1015＝1004PASS/11FAILに対し、最終は1053＝1042PASS/既存11FAIL、owner-chain1PASSを合わせて**1054＝1043PASS／既存11FAIL／ERROR・SKIP0**。case脱落0・既存成否変化0・新38全PASS、11失敗のmessage/traceはpath/行位置/UUID/addressだけ正規化して一致。旧2474全量の再実行や未再実行44既知FAILの解消ではない。全量GREEN・商品合格とはしない。
+
+新38は三出来事12・二出来事3・operator境界3・作者なし意味改変拒否16・三round保存4。試験用PGliteでoriginal DTO不変と生成禁止GET/start一致を確認し、実DB・実機・process再起動とは区別した。重点65・copula16・本文比較は重複加算しない。旧文形の期待衝突を追従した後も残った裸copula4FAILは実問題として修正し、最終3ファイルを再実行した。receivedの既存110宣言は削除0、2検査＋1fixtureを同じ入力・意味保護のまま追従、新5検査＋1fixture＋1helper。attributiveの既存27宣言は削除/追加0、12検査を文末/中央名詞へ追従し、全case IDと時制/所有/否定/程度/因果/説明/内外過去の改変拒否を保持した。独立技術reviewに追加blockerなし。
+
+current identityの各18payload/9owner・fixture key/scopeを保持した。今回はfresh scratchの試験環境にpytest9.1.1/FastAPI0.141.1/httpx0.28.1/PGlite0.5.8をinstallし、Python3.12.14/pydantic2.13.5を使用した。商品依存/lock変更0。再現対象、identity、途中結果、両層全文はAPI handoff u21に記録。
+
+**残件と再開点。** markerのない表現・解釈文・肯定混在/chain/detachedの旧列挙、長い中央名詞・定型句、二層再掲・受け取りの深さ、未反映境界・既知失敗は未完了。次は同じ複数出来事/回答/訂正群の実本文から、中央の長い受領列挙を既存責務内で減らせるか判断する。marker不足を扱う場合は意味解析側の範囲を先に定める。群全体完了へ繰り上げず、10/03休止、10/04以降Work/Ultra分析・Work不可時Pro Pieceを維持し、旧10/10期限を復活させない。
+
+**TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_NONE／全体48%・商品0/3・NOT_CLEAR・default OFF・Draft/open/unmerged。** API6path＋本06の計7pathをPR #3/#30へ反映し、両fresh head・親/tree・変更全fileのremote bytesを照合する。構造node/route/source権限/lifecycle・owner/API/DB/RN/schema/商品依存/flags・規範/凍結/閾値変更0。Ready/merge/deploy/enable・追加費用・Mash操作は行わない。
