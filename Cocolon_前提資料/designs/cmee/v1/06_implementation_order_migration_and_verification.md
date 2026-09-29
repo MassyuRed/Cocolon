@@ -10642,3 +10642,18 @@ API `ef007dc`／Cocolon `5103f1f`から、Mashの残件継続指示に従って�
 長い列挙、二層再掲、定型句、受け取りの深さ、未反映・既知失敗は残件。event撤回後の単独名詞には「これまで、その時に私は…ですこと」が残り、次は既存 `_source_grounded_current_expression_nominal` → `_source_grounded_response_argument` → Gate generic名詞照合を確認する。撤回eventやABOUTを復活させず本人と時点を保つ。今回のreceived群修正と別の未解決箇所である。
 
 **TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_NONE／全体48%・商品0/3・NOT_CLEAR・default OFF・Draft/open/unmerged。** LEVEL_2の開始前6path内（API5＋本06）、rootのみ編集・実行・GitHub反映。新owner/API/DB/RN/schema/依存/flags、構造・規範・凍結証跡・品質閾値の変更0。追加費用・Mash操作0。既存PR #3/#30へ反映後に6file全文bytesとheadを照合し、Ready/merge/deploy/enableは行わない。
+
+
+## 2026-09-29 Work継続 u20：出来事撤回後の回答に本人と時点の所有を保持
+
+**現在地。** API `68ff9142dfa1270315a91b8dad2cd401ee36d1b1`／Cocolon `0f32ef9cceb9cfddaca3b77d0a63cc128c42fa0e`から開始。最新作業ルール・weekly 20260926の9/29合意を再確認し、同一セッションの全体設計・全ファイル地図/current overlays・current_structure・canonical02/06・恒久incident・前回txt/u19の不変内容を継承。生成System Contextのfreshnessや全歴史再通読は主張しない。LEVEL_2の効果前A〜Fと既存6path内、rootのみ編集/実行/反映、商品/技術担当は読取専任。
+
+**限定改善。** event撤回後に独立して残る複数SELFのnegative回答を、既存HRの完全命題＋本人所有名詞へ接続した。単独target/support0/relation0・withdrawn private supplemental answerに限り、「…という、その時の／回答した時点の／先の回答時点のあなたの気持ち」とする。全sourceと時点を既存target NP/temporal ownerで照合し、余分な「これまで、」「今、」を除く。Gateは既存detached readerで完全名詞とrole終端を独立復元。新しい有限認定・一般SELF認定・Plan/Surface/answer admissionは作らず、撤回event/ABOUTも戻さない。u19の再開関数名 `_source_grounded_response_argument` は誤記で、正しくは `_source_grounded_target_np`。
+
+fresh18状態の前後両層をrootと商品担当が確認し、14本文変更/4全文不変、全18のObservation・核・関係・Move一致と作者なし逆読成功。本人・助詞・程度・否定・説明・内外過去・3時点を保持し、撤回内容の再出現なし。新52は受理12・意味改変拒否36・訂正/撤回の順序と2時点の保存4で全PASS。保存は既存PGliteのoriginal DTO不変と生成禁止GET/service.start完全一致であり、実DB/実機/process再起動の証明ではない。
+
+最終3ファイル1015＝1004PASS/既存11FAILとowner-chain1PASS、計**1016＝1005PASS/既存11FAIL**。同一セッションu19の963条件との比較でcase脱落・既存成否変更0、11失敗のmessage/traceはpath/行位置/UUID/addressのみ正規化して一致。開始版全量のfresh再実行やu17の2474条件全量の結果とはしない。未再実行の既知44FAILは未解消。既存test変更/削除0、3検査＋1fixtureのみ追加。identity各18payload/9owner維持、技術reviewに追加blockerなし。両層全文・根拠・identityはAPI handoff u20を参照。
+
+**残件。** 撤回後の名詞接続と時点所有を閉じた限定単位であり、長い列挙・二層再掲・定型受領句・原sourceの重複SELF・受け取りの深さ・未反映境界・既知失敗は残る。次は同一の複数出来事/回答/訂正群で長い受領列挙と二層の価値差を実本文から確認し、商品上の必要性と既存owner内の範囲を先に判断する。
+
+**TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_NONE／全体48%・商品0/3・NOT_CLEAR・default OFF・Draft/open/unmerged。** API5path＋本06の1pathを既存PR #3/#30へ反映、fresh head・変更path集合・全変更fileのremote bytesを照合。構造node/route/source権限/lifecycle・owner/API/DB/RN/schema/依存/flags・規範/凍結/閾値は変更0。Ready/merge/deploy/enable・追加費用・Mash操作0。10/03は未完でもEmlis休止、10/04以降はWork/Ultra分析、Work不可時Pro Pieceを維持し、旧10/10期限を復活させない。
