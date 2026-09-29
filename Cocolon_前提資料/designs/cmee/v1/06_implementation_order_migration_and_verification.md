@@ -10520,3 +10520,24 @@ Emlisから：
 **残件と再開先。** 二層の内容再掲、「のですね」の連続、主体付き残余列挙、中央回答や複数回答の長文、複合三核等の範囲外群、受け取りの深さ、既存39FAILと未提供1条件は未解決。語尾だけを次々に直すのではなく、次は残る中央・複数回答で、原文順と完全な意味所有を保ったまま受け取りが成立するかを実本文・訂正系列から判断する。今回の2文の改善を全群対応や商品受入へ繰り上げない。9/30中間確認・10/3対象群・10/10内容判断、別枠10/2開発実機一往復を維持する。
 
 **TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_NONE／全体48%・商品0/3・NOT_CLEAR・default OFF・Draft/open/unmerged。** 既存owner内の責務分配であり、構造地図のnode／route／source権限／lifecycleに変更なし。規範・凍結証跡・品質基準は変更0。実DB・実機・実課金・Ready／merge／deploy／enableは実施していない。反映commit・変更7path・remote全文照合は両Draft PRの今回記録へ結合する。
+
+
+## 2026-09-29 Work継続 u15：中央・複数の別時点回答を出来事単位へ分離
+
+Mashの継続指示と前回txtに従い、API `3711625cf57d77acda0e064d46045b03789c9e52`／Cocolon `f13bc6e5bbe6e4666d49c68c7ca081ecbd304e81`から開始。全体設計01/02、全ファイル地図01A/B/Cの関連owner/current overlays、current_structure00/01/04、canonical02/06、作業ルール・恒久incident全文、最新weeklyの9/29追加合意を確認した。System Context prepareはmaterial commit祖先不一致でexit2となり、正本直接読取へ戻った。freshness成功は主張しない。root華恋だけが編集・実行・GitHub反映、商品/技術担当は読取専任であり、未確認のPro/Ultra model identityは主張しない。
+
+**最新方針の適用。** 今週は中央・複数回答を含む受け取り群を優先する。10/03は未完了でもEmlisを休止し、10/04からWork/Ultraで分析、Work不可時はProでPieceへ進む。旧10/10のEmlis商品内容期限は再設定待ち。u14までに書いた旧期限を現行計画へ戻さない。9/30中間確認と別枠10/02開発実機等は最新weeklyに従う。対象群の完了と休止判断は別である。
+
+**今回の変更。** 既存Planで、二〜三組の原出来事・元反応と負の別時点回答を、原文順の完全な出来事単位へ分離した。中央の両側をまとめて順序を変えず、隣接した未回答原体験だけを共有群にする。三群は既存attention/significance/felt_responseの順と最大3 Move/3文を使う。元場面時点・肯定/混在・撤回event・独立感情/行動・三核chainの群へ新分割を拡張しない。Human Receptionは単一received groupだけで本人視点と名詞連体形を整え、Gateは完全sourceと時点を作者なしで復元し、既存の受け取り責務を保持する。新owner、schema、API、DB、RN、flags、依存、品質基準は変更しない。
+
+主比較48状態は20本文変更/28不変、追加6状態は5変更/1不変。全54で原核・関係が修正前と同一、独立読取成功。追加分には中央未回答の両端回答、現在名詞、二出来事への複数回答、三核chain不変controlを含む。rootと独立商品担当は前後両層を全文確認し、今回差分に新しい意味欠落・誤帰属・時点混同・撤回回答の復活を認めなかった。中央文はなお長く、両端の「のですね」や二層再掲も残るため、正式商品受入へ繰り上げない。
+
+**検証。** 最終sourceで関連7ファイル＋単一owner-chainの8対象を分けて実行し、**2440条件＝2385PASS／既存55FAIL／ERROR・SKIP 0**。同じ7ファイルの修正前2404条件を今回freshで確認し、case ID脱落0・既存合否変化0、55失敗のmessage/traceはpath/行位置/UUID/アドレスだけを正規化して一致。新35は全PASS。u14の2518条件/39FAILとは選択集合が違うため、39→55の回帰や455→55の解消とは扱わない。全量GREENではない。
+
+新35は意味所有14、作者なし改変拒否13、訂正/撤回/追加と保存8。既存検査は中央時の1文期待だけを3文へ追従し、同じ入力・case ID・順序・旧回答除去・独立読取を保持した。保存8は既存試験用PGliteでoriginal DTO不変と生成禁止GET/start一致を確認したもので、実DB・実機・process再起動の証明ではない。途中の一人称残存、「でしたこと」、現在名詞のmarker不足、significance欠落拒否不足は不合格を記録して修正し、最後の関連検証で再確認した。境界補正前の中断実行は成功件数へ算入しない。
+
+API変更は既存Plan/Reception/Gate、received discourse test、current identity fixture、既存handoffの6path、Cocolonは本06の1pathのみ。current identityの既存18payload/9ownerとfixture key/scopeを保持し、導出し直した。独立技術担当の最終静的レビューは新blockerなし。詳細な再現対象・実本文・途中失敗・identityはAPI handoffのu15に置く。
+
+**残件と次作業。** 中央・複数の別時点回答の読み分けは改善したが、長い受領句、二層再掲、定型締め、複合主体、元場面時点・肯定/混在・三核chain等の旧列挙、受け取りの深さ、既存失敗・未提供境界は未完了。次は今回の中央文と旧経路の実本文/更新系列から、完全な意味を保ちつつ長い再掲が起こる共通原因を限定して扱う。対象群全体の完了とはせず、10/03休止を自動延長しない。
+
+**TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_NONE／全体48%・商品0/3・NOT_CLEAR・default OFF・Draft/open/unmerged。** 構造node/route/source権限/lifecycle変更なし。実DB・実機・実課金・Ready/merge/deploy/enableは実施していない。既存PR #3/#30で管理する。
