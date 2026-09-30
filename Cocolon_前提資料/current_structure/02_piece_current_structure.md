@@ -1,9 +1,9 @@
 ---
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
-revision_date: "2026-09-27 JST"
+revision_date: "2026-09-30 JST"
 latest_api_implementation: "fa82077febb1363e286eb225fd53ff50ad863bbf"
-latest_storage_candidate: "0ea9c99a8fcba9f017248237ccdb3abef0cce590"
+latest_storage_candidate: "1a215c511858a574bf76b15d0ed20ddce984744b"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**2026-09-27 保存基盤の現在地：B2-Aはfile-only範囲承認済み。API Draft `0ea9c99`にSQL・検証用5ファイルを反映し、6readerの切替と通常PostgreSQL/psycopgの正式検証は未完了。B2-A全体GREENではない。現在の内訳と次作業は§4.3を優先し、以下の9/26記載と§19〜20は本文・画像の前回到達点として継承する。**
+**2026-09-30 保存基盤の現在地：B2-Aの既存5ファイルを保持し、6readerを専用read viewへ切り替えた。凍結試験はnative PostgreSQL／psycopgで1 PASS。file-only B2-Aの技術受入れに限り、live DB適用・保存preview／HTTP／RN・商品受入れは未完了。現在の内訳は§4.3を優先し、以下の9/26記載と§19〜20は本文・画像の前回到達点として継承する。**
 
 **2026-09-26最新：API PR #3の `fa82077febb1363e286eb225fd53ff50ad863bbf` で、保存前の内部組立物に対する画像設定だけの変更を実装した。本文を再生成せず、全本文・content payloadとhashを保持し、変更前後に元入力・保存状態・権限・tierを再照合する。追加54件は全PASS、統合5,446件は5,313 PASS／133 FAIL。前回 `57df8fc` の組立処理も反映済みだが、その60件のテストはツール安全性チェックで未反映のまま。今回の54件とは別であり、再送・代替していない。§20を最新、§19を前回組立の記録、§12〜18を履歴として読む。保存済みpreview発行・HTTP／RN・保存／履歴・native共有は未完成。Draft／default OFFと旧Q&A未切替を維持する。**
 
@@ -100,7 +100,7 @@ Current shared PieceComposerはcaller-supplied candidateを評価するguard ada
 | B01 causal RED | ai/tests/piece_v2/ 以下のB01 protected tests |
 | B01 code-disabled owner | ai/services/ai_inference/piece_v2_contract.py |
 | B02-A M0／M1 causal RED freeze | ai/tests/piece_v2/db/test_b02_m0_m1_legacy_bridge.py（変更なし） |
-| B02 implementation artifacts | API Draft `0ea9c99`に下記5ファイルを反映。旧mainのabsent状態と区別する。6reader・通常PostgreSQL GREENは未完了。 |
+| B02 implementation artifacts | API Draft `0ea9c99`の下記5ファイルを保持し、9/30続行で6readerのselectorだけ変更。native凍結試験1 PASS。旧mainのabsent状態と区別する。 |
 
 2026-09-27 JSTの限定B2-A提案後のMash続行指示により、同じfile-only実装・隔離DB検証・Draft反映は承認済み。同じ承認を取り直さない。本番適用、公開契約変更、B2-B、merge/deploy/有効化は含まない。
 
@@ -113,23 +113,23 @@ Current shared PieceComposerはcaller-supplied candidateを評価するguard ada
 | `ai/tests/piece_v2/db/conftest.py` | 検査対象を明示された使い捨てlocal DBに限定。DB作成・模擬成功・skip置換なし。 |
 
     B02-A frozen test:
-      UNCHANGED / historical owner-absent RED observed
-      published exact5 + old exact6 readers: 1 FAIL / CALLER_NOT_EXACT0
+      UNCHANGED / native PostgreSQL 16.15 + psycopg 3.3.6 + pytest 8.4.1
+      1 PASS / FAIL 0 / ERROR 0 / SKIP 0
 
     M0 / M1 implementation:
-      PARTIAL_EXACT5_PUBLISHED
-      EXACT6_READERS_PREPARED_NOT_PUBLISHED
+      EXISTING_EXACT5_PRESERVED
+      EXACT6_READ_SELECTORS_REBOUND_TO_MYMODEL_REFLECTIONS_READ
 
     disposable PostgreSQL GREEN:
-      NOT_RUN / NOT_CREDIT
-      candidate exact6 reaches ISOLATED_DATABASE_UNAVAILABLE_NONCREDIT
+      DISPOSABLE_LOCAL_DATABASE / NATIVE_ACCEPTANCE_PASSED
+      production catalog / full HTTP paths / full ACL matrix remain unverified
 
     production apply:
       NOT_AUTHORIZED / NOT_PERFORMED
 
-前回のPGlite補助確認17 PASSは通常PostgreSQL/psycopgの合格ではない。反映済みcommitは`0ea9c99a8fcba9f017248237ccdb3abef0cce590`、詳細は[既存API PRの記録](https://github.com/MassyuRed/mashos-api/pull/3#issuecomment-5850801467)。6readerの対象は`astor_worker.py`、`api_piece_runtime.py`、`emlis_ai_readers.py`、`piece_generated_metrics.py`、`piece_generation_store.py`、`piece_public_read_store.py`。未反映差分はその記録を継承する。既存の2本のEmlis SQL、旧テスト・期待値、文章生成・Analysis・公開API/RNは変更しない。
+前回のPGlite補助確認17 PASSとcaller未切替FAIL／DB未確保NONCREDITは履歴として保持する。9/30のnative試験では21列・security_invoker bridge、旧piecesの定義/options保持、合成generated行読取り、published_at欠落時の拒否とbridge不存在、rollbackを確認した。最初のsandbox内socket接続失敗はNONCREDIT、実行可能な隔離環境で同じ凍結試験を通した。6readerは`astor_worker.py`、`api_piece_runtime.py`、`emlis_ai_readers.py`、`piece_generated_metrics.py`、`piece_generation_store.py`、`piece_public_read_store.py`。旧COCOLON_PIECES overrideを外し、既存MYMODELのoverride優先順を保持し、既定／空文字fallbackだけ専用read viewへ変更。query・write・認証・公開interfaceは不変。既存SQL・requirements・凍結test・historical caller preimagesは不変更。最新の反映commitと全文照合は[API Draft PR #3](https://github.com/MassyuRed/mashos-api/pull/3)の要約へ戻る。
 
-次は承認済みB2-Aの正式隔離DB検証・6reader反映と本map/入口の反映確認。内部本文/画像が作れることを保存preview発行の完成へ変換せず、B2-Bへ自動進行しない。
+file-only B2-Aのこの技術受入れは成立した。API反映commitは`1a215c511858a574bf76b15d0ed20ddce984744b`。凍結受入れの識別値を保つため、API migration README／manifestの『native pending』状態文は9/27候補時点の履歴として不変更。この現在地記述がその状態文を更新するものであり、SQL・catalog baseline・caller preimagesを書き換えるものではない。新Pieceの保存preview発行・HTTP／RN・native renderer／実機の残件は§8・§20へ戻り、B2-B／live applyへ自動進行しない。本map・入口・manifestを同じ資料更新単位で同期する。EmlisAIの同日HR文章修正は別の責務であり、この橋渡し試験の商品creditに含めない。
 
 ## 5. Product and design owners
 
@@ -207,8 +207,8 @@ shared tableのnon-Piece row／consumerは、exact Piece predicateとwriter／re
 1. user-visible routeはold Q&Aのまま。
 2. 保存原入力・保存状態から本文／recipeの内部組立と画像設定だけの変更を§20まで実装。本文に表れていない選択感情、refined補足、保存済みpreview発行、HTTP／RNは未接続。
 3. canonical recipe／実測layout／Linux開発PNGは§14・16〜20で実行済み。製品native renderer／export receipt／端末保存・共有は未完了。
-4. B02-Aは§4.3のとおり5ファイル反映済みの部分実装。6readerの反映・通常PostgreSQL/psycopgの正式検証は未完了。既存凍結テストの失敗を合格へ変更しない。
-5. B02-Aの本map・Piece current entry・manifestは同じ資料更新単位で現行の部分実装状態へ同期する。反映済み5ファイル、未反映6reader、未成立の正式DB検証を区別する資料修正であり、B2-A完了・商品合格ではない。
+4. B02-Aは§4.3のとおり既存5ファイル＋6reader切替、native凍結試験1 PASSのfile-only技術受入れまで成立。live catalog／全HTTP読取／権限の全行列は未確認。
+5. B02-Aの本map・Piece current entry・manifestは同じ資料更新単位で同期。保存preview・新API／RN・native renderer／実機・商品受入れは未完了であり、内部bridge成立から商品合格へ昇格しない。
 6. CMEE Piece adapterとB5-B内部組立のdisabled候補はMashの継続指示で§20まで接続した。runtime activationは未承認・未実施であり、候補実装と混同しない。
 
 CMEE Piece detailed design candidate:

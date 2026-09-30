@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_piece_read_first
 title: "Cocolon Piece — Read First"
-revision_date: "2026-09-27 JST"
+revision_date: "2026-09-30 JST"
 decision_owner: "Mash"
 workstream: "Cocolon / Piece"
 document_status: "CURRENT_PIECE_WORKSTREAM_ENTRY"
@@ -76,9 +76,9 @@ PCE-9A B01-I Contract Owner Implementation:
 PCE-9A B02-A M0/M1 Tracked Migration + Legacy Bridge:
   FILE_ONLY_IMPLEMENTATION_APPROVED_BY_MASH_20260927
   M1_SQL_AND_TEST_SUPPORT_EXACT5_PUBLISHED_IN_API_DRAFT
-  EXACT6_READER_REBINDING_PREPARED_NOT_PUBLISHED
-  FROZEN_TEST_FAILS_CALLER_NOT_EXACT0_ON_PUBLISHED_TREE
-  DISPOSABLE_DATABASE_GREEN_NOT_RUN_NOT_CREDIT
+  EXACT6_READER_REBINDING_PUBLISHED_IN_API_DRAFT
+  FROZEN_TEST_UNCHANGED_NATIVE_POSTGRESQL_1_PASS
+  FILE_ONLY_TECHNICAL_ACCEPTANCE_PASSED
   PRODUCTION_APPLY_NOT_AUTHORIZED
   REPEAT_APPROVAL_FOR_SAME_B2A_SCOPE_NOT_REQUIRED
 
@@ -413,7 +413,7 @@ API registration / DB / migration / RN / runtime connection:
 
 ```text
 01 B1      COMPLETE
-02 B2-A    FILE_ONLY_APPROVED__EXACT5_PUBLISHED__READERS_AND_NATIVE_DB_PENDING
+02 B2-A    FILE_ONLY_TECHNICAL_ACCEPTANCE_PASSED__LIVE_APPLY_NOT_PERFORMED
 03 B2-B    NOT_ACTIVATED
 04 B3      NOT_ACTIVATED
 05 B4      NOT_ACTIVATED
@@ -435,7 +435,7 @@ API registration / DB / migration / RN / runtime connection:
 21 PCE-U1  NOT_ACTIVATED
 ```
 
-B2-AはM0 tracked migration baselineとM1 legacy read bridge/current caller rebindを扱う。2026-09-27の限定提案に対するMashの続行指示で、同じfile-only範囲は承認済み。API Draft PR #3の`0ea9c99a8fcba9f017248237ccdb3abef0cce590`にSQL・検証用5ファイルを反映した。6readerは未反映で、反映済み構成の既存検査はcaller未切替を理由に1 FAIL。6readerを加えた別候補も通常PostgreSQL/psycopgの未確保でNONCREDIT。PGliteの17項目成功は補助確認のみ。正式GREEN、実DB適用、B2-B開始、商品合格を意味しない。詳細はcurrent structure map §4.3とAPI PR #3 comment 5850801467へ戻る。
+B2-AはM0 tracked migration baselineとM1 legacy read bridge/current caller rebindを扱う。2026-09-27の限定提案に対するMashの続行指示で、同じfile-only範囲は承認済み。SQL・検証用5ファイルの既存反映を保持し、2026-09-30に6readerのselectorを専用`mymodel_reflections_read`へ切り替えた。凍結試験を変更せず、隔離したnative PostgreSQL 16.15／psycopg 3.3.6／pytest 8.4.1で1 PASS、FAIL／ERROR／SKIP0。これはfile-only B2-Aの技術受入れであり、live DB適用、全HTTP読取経路、保存preview／RN、B2-B開始、商品合格を示さない。詳細はcurrent structure map §4.3とAPI Draft PR #3の最新要約へ戻る。
 
 ## 11. Environment assignment
 
@@ -516,10 +516,16 @@ B02-A causal RED test at the historical snapshot:
 B02-A implementation required exact5 at the historical main snapshot above:
   absent
 
-2026-09-27 applicable API Draft (not the historical main snapshot):
+2026-09-27 published baseline (historical, not the latest Draft):
   0ea9c99a8fcba9f017248237ccdb3abef0cce590
   exact5 present; exact6 readers unchanged
   FROZEN_TEST_FAILS_CALLER_NOT_EXACT0; NATIVE_DATABASE_GREEN_NOT_ESTABLISHED
+
+2026-09-30 applicable API Draft continuation:
+  1a215c511858a574bf76b15d0ed20ddce984744b
+  exact5 preserved; exact6 read selectors rebound
+  FROZEN_TEST_UNCHANGED; NATIVE_POSTGRESQL_ACCEPTANCE_1_PASS
+  LIVE_DATABASE_APPLY_0; NEW_PIECE_RUNTIME_NOT_CONNECTED
 
 current user-visible product:
   old Q&A Piece flow
@@ -532,7 +538,7 @@ new Piece API registration:
 
 B2-A tracked migration and test support:
   exact5 present in the applicable API Draft
-  native database acceptance / production apply absent
+  isolated native database acceptance passed / production apply absent
 
 new Piece DB / RN / runtime connection:
   absent
@@ -541,7 +547,7 @@ current Piece v2 feature flags:
   absent
 ```
 
-## 15. Current exact approved group
+## 15. Current exact approved group and bounded result
 
 ```text
 group:
@@ -554,11 +560,15 @@ environment:
 state:
   FILE_ONLY_B2A_APPROVED_BY_MASH_20260927
   M1_EXACT5_PUBLISHED_IN_API_DRAFT
-  EXACT6_READER_REBINDING_AND_NATIVE_DATABASE_GREEN_PENDING
+  EXACT6_READER_REBINDING_AND_NATIVE_DATABASE_ACCEPTANCE_PASSED
   SAME_B2A_SCOPE_REAPPROVAL_NOT_REQUIRED
 
-expected first lifecycle:
-  finish the approved exact6 rebindings + unchanged isolated migration test + current-map sync
+bounded completed lifecycle:
+  exact6 rebindings + unchanged isolated migration test + current-map sync
+
+remaining product work:
+  saved preview issuance / HTTP / RN / native renderer / device acceptance
+  B2-B is not automatically activated by this result
 
 production DB apply:
   exact0 until separately approved
@@ -592,4 +602,3 @@ release effect:
 automatic progression:
   false
 ```
-
