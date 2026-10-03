@@ -19,7 +19,11 @@ current_product_read_state: "EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFI
 candidate_ready: false
 ---
 
-> 2026-10-03現行方針：作業配分と実機接続の優先順は[最新weekly §6.6〜6.10](../weekly_reviews/Cocolon_Weekly_Review_20261003.md)を参照。10/03でEmlis品質改善枠を区切り、10/04以降のWork主枠は分析。自然さ・深さ等の全面改善を開発実機確認の前提にせず、Emlis接続は限定した共通接続作業として扱う。重大な意味反転・出典混同、保存・本人権限等の保護を維持する。未完成と明示した動作確認を正式商品受入れへ換算せず、0/3・NOT_CLEAR・default OFF・Draft/open/unmergedを保持。最新の接続準備は正本06/API handoff末尾u84とAPI運用資料§11。
+> 2026-10-03現行方針：作業配分と実機接続の優先順は[最新weekly §6.6〜6.10](../weekly_reviews/Cocolon_Weekly_Review_20261003.md)を参照。10/03でEmlis品質改善枠を区切り、10/04以降のWork主枠は分析。自然さ・深さ等の全面改善を開発実機確認の前提にせず、Emlis接続は限定した共通接続作業として扱う。重大な意味反転・出典混同、保存・本人権限等の保護を維持する。未完成と明示した動作確認を正式商品受入れへ換算せず、0/3・NOT_CLEAR・default OFF・Draft/open/unmergedを保持。最新の接続準備は正本06/API handoff末尾u85とAPI運用資料§12。
+
+## 2026-10-03 u85 — API/認証/DBの同一性を確定
+
+`STRUCTURE_MAP_DELTA_NONE`。Mash提供のRender設定URLがapp認証先・直近のAPI通信先と一致した。次は既存共有DBへのQ2→Q3保存schema追加だけを、適用前後の確認込みで個別承認へ提示する。SQL適用・API配置・機能有効化・配布はまだ行っていない。正本06/API handoffのu85とAPI運用資料§12を参照する。
 
 ## 2026-10-03 u84 — 稼働APIと作業版の差を確認
 
