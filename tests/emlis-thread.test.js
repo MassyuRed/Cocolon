@@ -434,3 +434,77 @@ for (const configuredBase of [null, 'https://emlis-development.invalid///']) {
     assert.deepEqual(JSON.parse(calls[4].options.body), { emotion_id: row.id, is_secret: true, created_at: row.created_at });
   });
 }
+
+// This build regression also uses the app's existing RN / Metro dependencies.
+test('RN bundle embeds only public API URLs and invalidates cached transforms on rebuild', t => {
+  const { execFileSync } = require('node:child_process');
+  const fixture = fs.mkdtempSync(path.join(require('node:os').tmpdir(), 'emlis-api-bundle-'));
+  t.after(() => fs.rmSync(fixture, { recursive: true, force: true }));
+  const buildModules = path.dirname(path.dirname(require.resolve('metro/package.json')));
+  fs.mkdirSync(path.join(fixture, 'lib/compat'), { recursive: true });
+  for (const file of ['babel.config.js', 'metro.config.js', 'lib/compat/legacyWireContracts.js']) {
+    fs.copyFileSync(path.join(ROOT, file), path.join(fixture, file));
+  }
+  fs.symlinkSync(buildModules, path.join(fixture, 'node_modules'), 'dir');
+  fs.writeFileSync(path.join(fixture, 'entry.js'),
+    "globalThis.__emlisBase = require('./lib/compat/legacyWireContracts').readRuntimeApiBaseUrl();");
+  const keys = load('lib/compat/legacyWireContracts.js').RUNTIME_COMPAT_ENV.apiBaseUrlKeys;
+  const child = String.raw`
+    const assert = require('node:assert/strict'), path = require('node:path'), vm = require('node:vm');
+    const babel = require('@babel/core'), metro = require('metro');
+    const root = process.cwd(), filename = path.join(root, 'lib/compat/legacyWireContracts.js');
+    const options = { configFile: path.join(root, 'babel.config.js'), babelrc: false };
+    const transformed = babel.transformFileSync(filename, options).code;
+    assert.ok(!transformed.includes('not-public-api-sentinel'));
+    const values = [];
+    for (const runtime of [{}, { process: { env: {} } }]) {
+      const module = { exports: {} };
+      vm.runInNewContext(transformed, { ...runtime, module, exports: module.exports, require });
+      values.push(module.exports.readRuntimeApiBaseUrl());
+    }
+    const unrelated = babel.transformSync('module.exports = process?.env?.PRIVATE_API_TEST;',
+      { ...options, filename: path.join(root, 'unrelated.js') }).code;
+    assert.ok(unrelated.includes('process'));
+    assert.ok(!unrelated.includes('not-public-api-sentinel'));
+    const shadowed = babel.transformSync('module.exports = process => process?.env?.PRIVATE_API_TEST;',
+      { ...options, filename }).code;
+    const local = { exports: {} };
+    vm.runInNewContext(shadowed, { module: local });
+    assert.equal(local.exports({ env: { PRIVATE_API_TEST: 'local' } }), 'local');
+    (async () => {
+      const config = await metro.loadConfig({ cwd: root, config: path.join(root, 'metro.config.js') });
+      config.maxWorkers = 1;
+      config.reporter = { update() {} };
+      config.resolver.useWatchman = false;
+      config.watchFolders = [...config.watchFolders, require('node:fs').realpathSync(path.join(root, 'node_modules'))];
+      config.cacheStores = [new (require('metro-cache').FileStore)({ root: path.join(root, 'shared-cache') })];
+      // Exercise the real transformer/cache/resolver without booting native APIs.
+      config.serializer.getModulesRunBeforeMainModule = () => [];
+      config.serializer.getPolyfills = () => [];
+      const bundle = await metro.runBuild(config, { entry: 'entry.js', platform: 'ios', dev: false, minify: false });
+      assert.ok(!bundle.code.includes('not-public-api-sentinel'));
+      const runtime = {};
+      vm.runInNewContext(bundle.code, runtime);
+      process.stdout.write(JSON.stringify({ values, base: runtime.__emlisBase, cacheVersion: config.cacheVersion }));
+    })().catch(error => { console.error(error); process.exitCode = 1; });
+  `;
+  const cases = [
+    { values: [' https://api-build-a.invalid/// ', 'https://piece.invalid', 'https://analysis.invalid', 'https://model.invalid'], expected: 'https://api-build-a.invalid' },
+    { values: [' ', 'https://piece-build-b.invalid/', 'https://analysis.invalid', 'https://model.invalid'], expected: 'https://piece-build-b.invalid' },
+    { values: ['', '', 'https://analysis-build-c.invalid//', 'https://model.invalid'], expected: 'https://analysis-build-c.invalid' },
+    { values: ['', '', '', 'https://model-build-d.invalid/'], expected: 'https://model-build-d.invalid' },
+    { values: ['', '', '', ''], expected: 'https://mashos-api.onrender.com' },
+  ];
+  const cacheVersions = new Set();
+  for (const scenario of cases) {
+    const env = { ...process.env, NODE_PATH: buildModules, PRIVATE_API_TEST: 'not-public-api-sentinel' };
+    keys.forEach((key, i) => { if (scenario.values[i]) env[key] = scenario.values[i]; else delete env[key]; });
+    const result = JSON.parse(execFileSync(process.execPath, ['-'], {
+      cwd: fixture, env, input: child, encoding: 'utf8', timeout: 60000,
+    }));
+    assert.deepEqual(result.values, [scenario.expected, scenario.expected]);
+    assert.equal(result.base, scenario.expected);
+    cacheVersions.add(result.cacheVersion);
+  }
+  assert.equal(cacheVersions.size, cases.length);
+});

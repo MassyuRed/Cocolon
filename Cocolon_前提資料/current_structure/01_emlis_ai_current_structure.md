@@ -19,7 +19,17 @@ current_product_read_state: "EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFI
 candidate_ready: false
 ---
 
-> 2026-10-03現行方針：作業配分と実機接続の優先順は[最新weekly §6.6〜6.10](../weekly_reviews/Cocolon_Weekly_Review_20261003.md)を参照。10/03でEmlis品質改善枠を区切り、10/04以降のWork主枠は分析。自然さ・深さ等の全面改善を開発実機確認の前提にせず、Emlis接続は限定した共通接続作業として扱う。重大な意味反転・出典混同、保存・本人権限等の保護を維持する。未完成と明示した動作確認を正式商品受入れへ換算せず、0/3・NOT_CLEAR・default OFF・Draft/open/unmergedを保持。最新の限定修復は正本06/API handoff末尾u77。
+> 2026-10-03現行方針：作業配分と実機接続の優先順は[最新weekly §6.6〜6.10](../weekly_reviews/Cocolon_Weekly_Review_20261003.md)を参照。10/03でEmlis品質改善枠を区切り、10/04以降のWork主枠は分析。自然さ・深さ等の全面改善を開発実機確認の前提にせず、Emlis接続は限定した共通接続作業として扱う。重大な意味反転・出典混同、保存・本人権限等の保護を維持する。未完成と明示した動作確認を正式商品受入れへ換算せず、0/3・NOT_CLEAR・default OFF・Draft/open/unmergedを保持。最新の限定修復・接続準備は正本06/API handoff末尾u79。
+
+## 2026-10-03 u79 — 開発API接続先をRN bundleへ渡す既存設定
+
+| 既存file / owner | 接続責務 |
+|---|---|
+| `babel.config.js` | build processの公開API URL 4値だけを、`lib/compat/legacyWireContracts.js`の環境読取式へ埋め込む。RN presetのoptional-chain変換前に処理し、他file・他環境値・ローカルprocess bindingは対象外。 |
+| `metro.config.js` | 同じ4値をtransform cacheVersionへ含め、Metroを再起動した後の接続先変更で旧変換を再利用しない。 |
+| `lib/compat/legacyWireContracts.js` → `lib/apiClient.js` | 既存のAPI_BASE / PIECE / ANALYSIS / MYMODEL順、空値fallback、trim・末尾slash除去を保持。入力・bootstrap・Emlis・履歴操作は既存共通clientを使う。 |
+
+既存build設定から既存URL resolverへの辺を明記する差分。新file・公開route・DB・作者は追加しない。値はbuild時に固定され、変更時はMetro停止・環境指定・再起動とbundle再作成が必要。実RN preset／Metroの合成module bundleで確認し、アプリ全体のnative起動・署名配布・実API/DB接続は未確認。手順はAPI `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md` §6、結果は正本06/API handoffのu79。
 
 > 最新の実行結果と次作業は正本06末尾とAPI既存引継ぎを参照。商品NOT_CLEAR／既定OFF。以下は構造と過去時点の記録。
 > 2026-09-11 Q4現在地：修正版v1.2のQ4コード実装・統合・公開接続準備と今回の検証を完了。公開用mode・単一作者・旧client/保存版互換・停止復旧・bootstrap/RNを接続し、初回/肯定的回答/当時訂正と回答名詞化・時点の不具合を修正した。API179 PASS、RNは保存済み56 PASS。新しい保存22ケースを全文確認し、既存100件は全読済みの前版と全record一致。長い再掲・定型性など商品品質はNOT_CLEARとして保持する。現行結果は正本06とAPI既存handoffの末尾Q4 continuation節。実DB・端末・実課金・Mash正式判断・公開操作は別作業、既定OFF。
