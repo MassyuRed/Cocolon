@@ -19,7 +19,13 @@ current_product_read_state: "EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFI
 candidate_ready: false
 ---
 
-> 2026-10-03現行方針：作業配分と実機接続の優先順は[最新weekly §6.6〜6.10](../weekly_reviews/Cocolon_Weekly_Review_20261003.md)を参照。10/03でEmlis品質改善枠を区切り、10/04以降のWork主枠は分析。自然さ・深さ等の全面改善を開発実機確認の前提にせず、Emlis接続は限定した共通接続作業として扱う。重大な意味反転・出典混同、保存・本人権限等の保護を維持する。未完成と明示した動作確認を正式商品受入れへ換算せず、0/3・NOT_CLEAR・default OFF・Draft/open/unmergedを保持。最新の限定修復・接続準備は正本06/API handoff末尾u81。
+> 2026-10-03現行方針：作業配分と実機接続の優先順は[最新weekly §6.6〜6.10](../weekly_reviews/Cocolon_Weekly_Review_20261003.md)を参照。10/03でEmlis品質改善枠を区切り、10/04以降のWork主枠は分析。自然さ・深さ等の全面改善を開発実機確認の前提にせず、Emlis接続は限定した共通接続作業として扱う。重大な意味反転・出典混同、保存・本人権限等の保護を維持する。未完成と明示した動作確認を正式商品受入れへ換算せず、0/3・NOT_CLEAR・default OFF・Draft/open/unmergedを保持。最新の限定修復・接続準備は正本06/API handoff末尾u82。
+
+## 2026-10-03 u82 — 起動時の通信失敗後に接続情報を再確認する
+
+`runtime/AppRuntimeBootstrapGate.js` は、初回 `/app/bootstrap` 失敗後も通常画面を維持し、接続情報を手動で再確認する案内を表示する。既存 `runBootstrapCheck` → `AppRuntimeContext` → server feature flag → Emlis hook/readerの経路を再使用する。再取得中も入力画面の親・位置を保ち、未保存入力を消さない。自動retryなし、server false時はOFF、最低バージョン制限は従来どおり優先する。
+
+新API/flag/schema/作者/保存責務は追加・変更しない。既存Gateの回復導線だけを修復した。31検査の結果と実機未確認の境界は正本06/API handoffのu82を参照する。
 
 ## 2026-10-03 u81 — 質問終了後の未確定回答を同じ画面で解消する
 

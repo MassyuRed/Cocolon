@@ -693,3 +693,109 @@ for (const resolution of ['answered-elsewhere', 'skipped-elsewhere']) {
     }
   });
 }
+
+for (const readerEnabled of [true, false]) {
+  test(`bootstrap retry preserves input and respects server reader flag (${readerEnabled})`, async t => {
+    const priorVersion = process.env.EXPO_PUBLIC_APP_VERSION;
+    process.env.EXPO_PUBLIC_APP_VERSION = '1.0.0';
+    t.after(() => {
+      if (priorVersion === undefined) delete process.env.EXPO_PUBLIC_APP_VERSION;
+      else process.env.EXPO_PUBLIC_APP_VERSION = priorVersion;
+    });
+    t.mock.method(console, 'log', () => {});
+    const native = Object.fromEntries(['ActivityIndicator', 'Text', 'TouchableOpacity', 'View'].map(x => [x, x]));
+    Object.assign(native, { Platform: { OS: 'ios' }, Alert: { alert() {} } });
+    const client = load('lib/apiClient.js', {
+      'react-native': native,
+      './supabase': { supabase: { auth: { getSession: async () => ({ data: {
+        session: { user: { id: 'owner' }, access_token: 'synthetic-token' },
+      } }) } } },
+      './compat/legacyWireContracts': { readRuntimeApiBaseUrl: () => 'https://bootstrap.invalid' },
+      './monitoring': { captureApiError() {} },
+    });
+    const runtime = load('AppRuntimeContext.js', { './lib/apiClient': client }, false);
+    const { emlisThreadApi } = load('lib/api/emlisThreadApi.js', { '../apiClient': client });
+    const { useEmlisThread } = load('screens/input/useEmlisThread.js', {
+      '../../lib/api/emlisThreadApi': { emlisThreadApi }, '../../AppRuntimeContext': runtime,
+    }, false);
+    const { default: Gate } = load('runtime/AppRuntimeBootstrapGate.js', {
+      'react-native': native, '../AppRuntimeContext': runtime,
+      './AppRuntimeBlockingScreen': props => React.createElement('Blocked', props),
+      '../lib/monitoring': { captureClientError() {} },
+      '../theme/ThemeContext': { useTheme: () => ({ colors: {} }) },
+      'react-native-safe-area-context': { useSafeAreaInsets: () => ({ top: 24 }) },
+    }, false);
+    const calls = [];
+    let resolveRequest, rejectRequest;
+    const json = payload => ({ ok: true, status: 200, text: async () => JSON.stringify(payload), json: async () => payload });
+    t.mock.method(globalThis, 'fetch', (url, options) => {
+      calls.push({ url, options });
+      if (url.endsWith('/app/bootstrap')) {
+        if (calls.length === 1) return Promise.reject(Error('offline'));
+        return new Promise((resolve, reject) => { resolveRequest = resolve; rejectRequest = reject; });
+      }
+      assert.equal(url, 'https://bootstrap.invalid/emlis/threads/by-input/input');
+      return Promise.resolve(json(initial));
+    });
+    let root, thread, control, setInput, mounts = 0;
+    function Input() {
+      const [draft, setDraft] = React.useState('');
+      React.useEffect(() => { mounts += 1; }, []);
+      setInput = setDraft;
+      control = runtime.useAppRuntime();
+      thread = useEmlisThread({ userId: 'owner' });
+      return React.createElement('Input', { draft });
+    }
+    const retry = () => root.root.findAllByType('TouchableOpacity')
+      .find(button => button.props.accessibilityLabel === '接続情報を再確認する');
+    try {
+      await act(async () => { root = Renderer.create(React.createElement(runtime.AppRuntimeProvider, null,
+        React.createElement(Gate, null, React.createElement(Input)))); });
+      assert.equal(calls.length, 1, 'bootstrap failure must not start automatic retry');
+      assert.equal(thread.enabled, false);
+      await act(async () => setInput('保存前の入力を保持する'));
+      assert.ok(retry(), 'initial bootstrap failure needs a reachable retry control');
+      let request;
+      await act(async () => {
+        const press = retry().props.onPress;
+        request = press();
+        press();
+      });
+      assert.equal(calls.length, 2, 'repeated press must share the current bootstrap attempt');
+      assert.equal(retry().props.disabled, true);
+      assert.equal(root.root.findByType('Input').props.draft, '保存前の入力を保持する');
+      assert.equal(mounts, 1);
+      await act(async () => { rejectRequest(Error('still offline')); await request; });
+      assert.equal(retry().props.disabled, false);
+      assert.equal(thread.enabled, false);
+      assert.equal(mounts, 1);
+      await act(async () => { request = retry().props.onPress(); });
+      await act(async () => {
+        resolveRequest(json({ feature_flags: { emlis_threads_enabled: readerEnabled } }));
+        await request;
+      });
+      assert.equal(retry(), undefined);
+      assert.equal(thread.enabled, readerEnabled, 'only the server can enable the Emlis reader');
+      assert.equal(root.root.findByType('Input').props.draft, '保存前の入力を保持する');
+      assert.equal(mounts, 1);
+      assert.equal(calls.length, 3);
+      assert.ok(calls.every(call => call.url === 'https://bootstrap.invalid/app/bootstrap'));
+      assert.ok(calls.every(call => !call.options.headers.Authorization));
+      await act(async () => thread.open('input'));
+      assert.equal(calls.length, readerEnabled ? 4 : 3);
+      if (readerEnabled) assert.equal(thread.dto.pending_question.question_id, 'question');
+      if (readerEnabled) {
+        await act(async () => { request = control.refreshAppRuntime(); });
+        await act(async () => {
+          resolveRequest(json({ minimum_supported_version: '2.0.0', feature_flags: { emlis_threads_enabled: true } }));
+          await request;
+        });
+        assert.equal(root.root.findAllByType('Input').length, 0, 'minimum version block remains authoritative');
+        assert.equal(root.root.findAllByType('Blocked').length, 1);
+        assert.equal(typeof root.root.findByType('Blocked').props.onRetry, 'function');
+      }
+    } finally {
+      if (root) await act(async () => root.unmount());
+    }
+  });
+}
