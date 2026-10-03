@@ -2,7 +2,7 @@
 
 - document id: `cocolon.cmee.v1d_v1e.analysis_route.detailed_design`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102 content correctionは未配置
+- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102/u103 content correctionは未配置
 - IF-route runtime state: `NOT_IMPLEMENTED`
 - Analysis activation: `STORAGE_APPROVED_AND_APPLIED_2026_10_04_JST`; API315f5b5…配置済み、Mashが6201実機確認OKを報告
 - API source effect: V2保存・read分岐実装、default off
@@ -34,7 +34,7 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
-**2026-10-04 u102 current**：API315f5b5…がlive、TestFlight6201送信成功、Mashから実機確認OKの報告を受けた。本文/図の内容修正へ進み、通常補足と同一意味集約を§3.3で実装。修正版sourceは未配置。保存UUIDの独立実照合・global cutover・正式商品受入れを実機OK報告へ含めない。以下u94〜u97の配置前記述は各時点の履歴として保持する。
+**2026-10-04 u103 current**：API315f5b5…がlive、TestFlight6201送信成功、Mashから実機確認OKの報告を受けた。内容修正として通常補足/同一意味集約（§3.3）に続き、明示された記録内順序を§3.4で実装。u102/u103 sourceは未配置。保存UUIDの独立実照合・global cutover・正式商品受入れを実機OK報告へ含めない。以下u94〜u97の配置前記述は各時点の履歴として保持する。
 
 2026-10-03 u94更新：latest weekly §6.6〜6.10に沿い、offline source→部分graphに補足の明示引用訂正・撤回と本人向けsafe text／visual projectionを追加した。RNに閉じたDTOのvalidatorと専用renderer、latest／viewerのversion dispatchを実装。合成入力のbackend26検査、実RN componentを使う11検査、旧表示互換2検査PASS。全追加・変更fileの正本は`current_structure/03_analysis_current_structure.md` §4.5。u95で認証済みsaved period loader→ASTOR明示V2生成entryを追加し、13検査＋既存26検査PASS。u96/u97で専用保存と既存API接続を実装し、承認済みtableを実DBへ適用・照合した。稼働API配信・実ユーザー入力での実行・実機は未実施。
 
@@ -141,6 +141,14 @@ safe projectionは認証された本人向けのSELF_ONLY商品表示で、匿�
 既存intent_compiler内で、引用訂正/撤回以外の通常補足も、共有semantic frameと既存の完全節grammarが全文を解釈できる場合に採用する。元回答のexact scalar evidenceが全文を覆うことを確認し、未解釈/訂正混在を部分採用しない。親recordを同じ一機会とし、質問/生成文はsourceへ入れない。矛盾する同一候補の記述はどちらかへ決めずUNAVAILABLEを保持する。
 
 同じSELF主語・格/名詞・述語・極性・modality・時点は、格の語順や丁寧語の違いで分割しない。全evidenceを保持し、record件数と共起は独立記録を基準にする。関係・順序・原因を追加回答から推測しない。既存26＋追加7＝33検査PASS、合成生成本文3組を確認。通常日本語全般/複数補足/annotations/期間比較/IFの完成ではなく、API/DB/DTO/RN契約は不変。
+
+### 3.4 u103 明示された記録内順序の限定実装
+
+既存有限節の接頭辞「その後」「それから」を型と元evidence位置に保持する。同一source/fieldに隣接する完全SELF過去fact節で、間が文末区切り/空白だけの場合に限りOBSERVED_ORDERを作る。接続語もsafe表示で区別する。否定を保持し、希望は行動順序にしない。単なる列挙/共起/保存時刻は順序の根拠にせず、因果関係を表示しない。
+
+順序の両端はevidence occurrenceで区別し、A→B→Aを3node/2edgeとして保つ。別recordの順序は集約せず、順序外の同一意味集約だけをu102から継承する。未解釈の中間節、別field/source、元入力と補足、撤回/置換箇所を橋渡ししない。通常補足内で成立する順序は元answerの出典へbindする。成立pairの不足表示だけを解消し、接続先不明はunknownのまま。
+
+§3.2の順序positive未完了をこの限定範囲で更新する。vertical42/storage10/saved period13/API6＝71 PASS、A→B→Aの保存・再読取と既存RN contract/view modelの本文一致を確認。新規API/DTO/DB/RN契約なし。一般時点表現/任意複文、複数記録での反復route解釈、annotations/conflict/期間比較/IFは未完了。未配置sourceの技術成立であり、正式商品受入れではない。
 
 ## 4. Period source-set freeze
 

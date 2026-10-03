@@ -14,7 +14,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**u102 current**：指定Analysis API315f5b5…を開発配置済み、TestFlight6201送信済み、Mashが実機確認OKを報告した。現在は内容改善が主作業。通常補足の完全節採用と同一意味の二重計上修正を既存compilerへ実装し、33検査PASS（§4.8）。この修正版は未配置。以下のu94〜u97は配置前の履歴であり、再び配置/実機を内容修正の前提へ戻さない。
+**u103 current**：指定Analysis API315f5b5…を開発配置済み、TestFlight6201送信済み、Mashが実機確認OKを報告した。内容改善としてu102の通常補足/同一意味集約に続き、明示された記録内順序と出来事の反復保持を実装（§4.9）。関連71検査と既存RN表示契約への一回の照合PASS。u102/u103修正版は未配置。以下のu94〜u97は配置前の履歴であり、再び配置/実機を内容修正の前提へ戻さない。
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
@@ -231,6 +231,17 @@ Mashの専用table承認に基づく。DB適用済み、API/RN sourceはDraft・
 | mashos-api `ai/tests/test_cmee_analysis_v1d_vertical.py` | 追加7＋既存26＝33 PASS。文章/図、補足出典、非重複件数、無方向共起、未解釈/訂正混在/反対極性を確認 |
 
 通常補足も親recordの一機会で、別入力件数にしない。引用訂正/撤回の優先経路は維持。全文が読めない回答や矛盾の意図が未確定な回答を都合よく部分採用しない。新規path/owner/DB/DTO/RN/依存追加0。語彙は既存9動詞/名詞項に限定され、一般日本語・複数補足・意味annotation/比較/IFは残る。u102 sourceは未配置。実機OKはu101版に対するMash報告であり、修正版の本人実行や保存UUIDの華恋による照合ではない。
+
+### 4.9 明示された記録内順序と出来事の保持（2026-10-04 u103）
+
+| Repository / existing file | 更新した責務 |
+|---|---|
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 接頭接続語を型と元位置に保持。同一source/fieldの隣接する完全SELF過去factだけを順序へ接続。両端をoccurrenceで保持し、撤回/未解釈節を橋渡ししない |
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py` | 「その後」「それから」を区別してsafe表示へ再構成。否定/希望を保持 |
+| mashos-api `ai/tests/test_cmee_analysis_v1d_vertical.py` | 既存33＋追加9＝42 PASS。exact evidence、反復、願望、補足出典、訂正/撤回、未確定接続を確認 |
+| mashos-api `ai/tests/test_analysis_observed_storage.py` | 既存9＋追加1＝10 PASS。A→B→Aの3node/2edgeを保存・再読取で同一のまま保持、意味再生成/内部proposition漏出なし |
+
+saved period13/API6と合わせ71 PASS。既存RN validator/view modelへ新DTOを渡す一回の照合でbackend本文と完全一致。source/fieldを跨ぐ順序、記載順からの推測、因果化、独立recordを跨ぐ反復route集約は行わない。順序以外のu102同一意味集約は維持し、成立pair以外の不足を残す。新規file/契約/DB/RN変更0、source未配置。詳細はcanonical04 §3.4と06/API handoff末尾u103。
 
 ## 5. Source and artifact identity
 
