@@ -14,7 +14,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**u104 current**：指定Analysis API315f5b5…を開発配置済み、TestFlight6201送信済み、Mashが実機確認OKを報告した。u102通常補足/同一意味集約、u103明示順序に続き、「今日/昨日」を元の記述時点へ結び付けて保持（§4.10）。関連80検査と既存RN表示契約への一回の照合PASS。u102〜u104修正版は未配置。以下のu94〜u97は配置前の履歴であり、再び配置/実機を内容修正の前提へ戻さない。
+**u105 current**：指定Analysis API315f5b5…を開発配置済み、TestFlight6201送信済み、Mashが実機確認OKを報告した。u102〜u104の補足/集約/順序/相対日に続き、共有ownerが認定する現在の認識を「考え・注意」へ接続（§4.11）。可能性の内容を実行済みへ昇格せず、関連89検査とRN表示契約照合PASS。u102〜u105修正版は未配置。以下のu94〜u97は配置前の履歴であり、再び配置/実機を内容修正の前提へ戻さない。
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
@@ -253,6 +253,17 @@ saved period13/API6と合わせ71 PASS。既存RN validator/view modelへ新DTO�
 | mashos-api `ai/tests/test_analysis_observed_storage.py` | 既存10＋追加1＝11 PASS。相対日を含む保存DTO/文章を再解釈せず再読取、private項目漏出なし |
 
 saved period13/API6と合わせ80 PASS。既存RN contract/view modelでsafe DTOとbackend文章が一致。日語なしのu102集約とu103の順序occurrenceを継承。「昨日＋現在の希望」、任意時点/複数修飾は保留し、日語だけで順序や原因を作らない。新規path/owner/API/DB/DTO/RN/依存変更0、未配置。詳細はcanonical04 §3.5と06/API handoff末尾u104。
+
+### 4.11 可能性についての現在の考えを表示へ接続（2026-10-04 u105）
+
+| Repository / existing file | 更新した責務 |
+|---|---|
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 共有source_current_cognitionの完全節witnessと既存9動詞/格の補文解釈を両方要求。内側UNSPECIFIED/possibilityと外側SELF/current_inputを区別しATTENTIONへ。内側の極性/時制/対象とhost差を集約に保持 |
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py` | 型付けされた補文と現在hostから「〜かもしれないと思っている（この記述時点の考え）」等へ再構成。実行済み・確定結果にしない |
+| mashos-api `ai/tests/test_cmee_analysis_v1d_vertical.py` | 既存50＋追加8＝58 PASS。inner/outer分離、完全evidence、同fieldの実行保持、補足/訂正/撤回、未認定scopeの保留 |
+| mashos-api `ai/tests/test_analysis_observed_storage.py` | 既存11＋追加1＝12 PASS。保存した考えの文章/DTOを再生成せず読取、内部possible_contentの漏出なし |
+
+saved period13/API6と合わせ89 PASS。既存RN contract/view modelとbackend本文が一致。共有意味ownerは変更せず既存認定helperを参照。限定補文でのみ同じ9動詞の辞書形/否定形も扱い、主文の有限grammarは維持。場面/役割/結果、一般認識、過去/否定host、背景・複文の完成ではない。新規file/契約/DB/RN/依存変更0、未配置。canonical04 §3.6と06/API handoff末尾u105を参照。
 
 ## 5. Source and artifact identity
 

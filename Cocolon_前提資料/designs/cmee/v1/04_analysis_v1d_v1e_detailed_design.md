@@ -2,7 +2,7 @@
 
 - document id: `cocolon.cmee.v1d_v1e.analysis_route.detailed_design`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u104 content correctionは未配置
+- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u105 content correctionは未配置
 - IF-route runtime state: `NOT_IMPLEMENTED`
 - Analysis activation: `STORAGE_APPROVED_AND_APPLIED_2026_10_04_JST`; API315f5b5…配置済み、Mashが6201実機確認OKを報告
 - API source effect: V2保存・read分岐実装、default off
@@ -34,7 +34,7 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
-**2026-10-04 u104 current**：API315f5b5…がlive、TestFlight6201送信成功、Mashから実機確認OKの報告を受けた。通常補足/同一意味集約（§3.3）、明示順序（§3.4）に続き、今日/昨日の記述時点保持を§3.5で実装。u102〜u104 sourceは未配置。保存UUIDの独立実照合・global cutover・正式商品受入れを実機OK報告へ含めない。以下u94〜u97の配置前記述は各時点の履歴として保持する。
+**2026-10-04 u105 current**：API315f5b5…がlive、TestFlight6201送信成功、Mashから実機確認OKの報告を受けた。補足/集約/順序/相対日（§3.3〜3.5）に続き、現在の認識hostと可能性補文を分離して考えnodeへ接続（§3.6）。u102〜u105 sourceは未配置。保存UUIDの独立実照合・global cutover・正式商品受入れを実機OK報告へ含めない。以下u94〜u97の配置前記述は各時点の履歴として保持する。
 
 2026-10-03 u94更新：latest weekly §6.6〜6.10に沿い、offline source→部分graphに補足の明示引用訂正・撤回と本人向けsafe text／visual projectionを追加した。RNに閉じたDTOのvalidatorと専用renderer、latest／viewerのversion dispatchを実装。合成入力のbackend26検査、実RN componentを使う11検査、旧表示互換2検査PASS。全追加・変更fileの正本は`current_structure/03_analysis_current_structure.md` §4.5。u95で認証済みsaved period loader→ASTOR明示V2生成entryを追加し、13検査＋既存26検査PASS。u96/u97で専用保存と既存API接続を実装し、承認済みtableを実DBへ適用・照合した。稼働API配信・実ユーザー入力での実行・実機は未実施。
 
@@ -157,6 +157,16 @@ safe projectionは認証された本人向けのSELF_ONLY商品表示で、匿�
 日語付き観測はsource envelope＋明示日で分離し、同一source/同日の文法上同一内容だけをu102方式で集約する。順序参加節はu103のoccurrence分離を優先する。原入力のcreated_atを補足の記述日時へ流用しない。原入力と回答では異なる日語でも同じ実日を指す可能性があるため、対立する候補を日語だけで通さない。同一回答内の明示今日/昨日だけは別日として区別する。
 
 日語だけから順序edgeを作らず、後続節へ日を暗黙継承しない。引用訂正/撤回は日語を含む完全節へbindし、置換後の日は回答出典から解釈し直す。vertical50/storage11/saved period13/API6＝80 PASS、RN契約とbackend本文の一致を確認。§3.2の時点未対応をこの限定範囲で更新する。一般日時、主語後の日修飾、複数修飾/複文、annotations/conflict/比較/IFは残る。契約変更なし、source未配置。
+
+### 3.6 u105 可能性の補文と現在の認識host
+
+共有Stage1の_source_current_cognition/_partsが認定する現在の認識のうち、明示SELF・背景なし・可能性補文・現在の思う/考えるhostをAnalysisへ接続する。共有parserの広い文字列slotをそのままsafe化せず、内側も既存9動詞と格付き名詞grammarで完全に解釈する。補文限定inventoryは同じ動詞の過去/否定過去と辞書形/否定形を扱い、主文grammarは拡張しない。
+
+内部possible_contentはactor=UNSPECIFIED、modality=possibilityであり、省略された行為主体を本人と推測しない。外側はSELF・neutral/fact/current_inputの認識で、ATTENTION_OR_THOUGHTとして表示する。内側の否定・時制・対象と外側hostの継続/非意図性を集約とsafe表面へ保ち、実行済み事実や結果へ昇格しない。内側過去形から順序edgeを作らない。
+
+認定済み認識の完全範囲だけを可能性拒否の例外にし、同fieldにある別の確定行動を失わない。未認定/未解釈の可能性scope、他者・引用・条件・否定/過去hostは保留する。通常補足は全文解釈を要求し、引用訂正/撤回では外側/内側の旧scopeを置換後へ継承しない。補足が単なる可能性なら、元の確定記述を勝手に訂正せず別の考えとして保持する。
+
+vertical58/storage12/saved period13/API6＝89 PASS、既存RN契約との文章一致を確認。保存serializerのallowlistと閉じたDTOは変更せず、旧artifact読取を再解釈しない。一般認識/過去host、任意の補文、場面/役割/結果の接続、annotations/conflict/比較/IFは残る。新規owner/契約/配置効果なし。
 
 ## 4. Period source-set freeze
 
