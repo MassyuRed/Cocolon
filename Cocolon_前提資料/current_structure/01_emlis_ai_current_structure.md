@@ -19,7 +19,13 @@ current_product_read_state: "EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFI
 candidate_ready: false
 ---
 
-> 2026-10-03現行方針：作業配分と実機接続の優先順は[最新weekly §6.6〜6.10](../weekly_reviews/Cocolon_Weekly_Review_20261003.md)を参照。10/03でEmlis品質改善枠を区切り、10/04以降のWork主枠は分析。自然さ・深さ等の全面改善を開発実機確認の前提にせず、Emlis接続は限定した共通接続作業として扱う。重大な意味反転・出典混同、保存・本人権限等の保護を維持する。未完成と明示した動作確認を正式商品受入れへ換算せず、0/3・NOT_CLEAR・default OFF・Draft/open/unmergedを保持。最新の限定修復・接続準備は正本06/API handoff末尾u80。
+> 2026-10-03現行方針：作業配分と実機接続の優先順は[最新weekly §6.6〜6.10](../weekly_reviews/Cocolon_Weekly_Review_20261003.md)を参照。10/03でEmlis品質改善枠を区切り、10/04以降のWork主枠は分析。自然さ・深さ等の全面改善を開発実機確認の前提にせず、Emlis接続は限定した共通接続作業として扱う。重大な意味反転・出典混同、保存・本人権限等の保護を維持する。未完成と明示した動作確認を正式商品受入れへ換算せず、0/3・NOT_CLEAR・default OFF・Draft/open/unmergedを保持。最新の限定修復・接続準備は正本06/API handoff末尾u81。
+
+## 2026-10-03 u81 — 質問終了後の未確定回答を同じ画面で解消する
+
+`screens/input/EmlisThreadModal.js`の既存再送ボタンは、結果不明の回答があり質問が終了済みでも、GET確認後に同じ回答を再送できる。既存hookの`replayPending`と同一key/payload、serverのidempotency/409→GETを使用し、別端末で保存された別回答/skipを上書きせずに続行/終了へ戻る。read_only・busy・未照合時の抑止は維持する。
+
+owner/route/schema/保存/状態遷移の追加・変更なし。Modalの表示条件だけの修復であり、hook・API・serverは不変。検証と限界は正本06/API handoffのu81。実機接続は対象環境の確定後に行う未完了作業である。
 
 ## 2026-10-03 u80 — Emlis通信の本人と認証sessionを一致させる
 
@@ -952,5 +958,4 @@ Human Reception作者、thread store/API、Q2/Q3 SQL、RN current readerは既�
 | `emlis_ai_grounded_observation_gate.py` | 実本文から二hostと独立性を読み、元の主体・時点・否定・行動候補を独立照合する。作者を呼び直して正解本文を得る検査へ置き換えない。 |
 
 STRUCTURE_MAP_DELTA_NONE。owner/file graph、新production file、renderer、source grammar、公開wire、質問／回答の採用条件、RN、保存、他中核・国家システムへのsource許可は同じ。2,573件の必須検査とsame100、保存329ケース616状態の最終結果、旧文面検査の失敗、未解消品質は[API既存引継ぎ](https://github.com/MassyuRed/mashos-api/blob/d3f67852e5f29a5713a507eece67d4dd6291eb1e/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)および正本06の同日節に保持する。変更した保存4件は問いのない初回FINALであり、回答後理解の改善とは呼ばない。商品NOT_CLEAR、Draft／既定OFF。
-
 

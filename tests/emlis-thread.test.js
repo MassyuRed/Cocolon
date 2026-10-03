@@ -583,3 +583,113 @@ for (const method of ['get', 'answer', 'action', 'frame']) {
     }
   });
 }
+
+for (const resolution of ['answered-elsewhere', 'skipped-elsewhere']) {
+  test(`closed question keeps unknown answer recovery available (${resolution})`, async t => {
+    const native = Object.fromEntries(['ActivityIndicator', 'KeyboardAvoidingView', 'Modal', 'ScrollView',
+      'Text', 'TextInput', 'View'].map(x => [x, x]));
+    Object.assign(native, { Platform: { OS: 'ios' }, StyleSheet: { create: x => x } });
+    const client = load('lib/apiClient.js', {
+      'react-native': native,
+      './supabase': { supabase: { auth: { getSession: async () => ({ data: { session: {
+        user: { id: 'owner' }, access_token: 'owner-token',
+      } } }) } } },
+      './compat/legacyWireContracts': { readRuntimeApiBaseUrl: () => 'https://synthetic.invalid' },
+      './monitoring': { captureApiError: () => assert.fail('thread error must remain private') },
+    });
+    const { emlisThreadApi } = load('lib/api/emlisThreadApi.js', { '../apiClient': client });
+    const { useEmlisThread } = load('screens/input/useEmlisThread.js', {
+      '../../lib/api/emlisThreadApi': { emlisThreadApi },
+      '../../AppRuntimeContext': { useAppRuntime: () => ({ isFeatureEnabled: () => true }) },
+    });
+    const Modal = load('screens/input/EmlisThreadModal.js', {
+      'react-native': native, '../../components/CocolonButton': p => React.createElement('Button', p, p.children),
+    }).default;
+    const remoteAnswer = resolution === 'answered-elsewhere';
+    let saved = { ...initial, can_write: true };
+    const resolved = {
+      ...completed, can_write: true, state: remoteAnswer ? 'AWAITING_CONTINUE' : 'COMPLETED',
+      body_state: remoteAnswer ? 'REFINED' : 'FINAL', answer_saved: remoteAnswer,
+      can_continue: remoteAnswer, issued_count: 1, question_limit: 3,
+      current_observation: { event_id: 'saved-body', text: remoteAnswer ? '別端末の回答を反映した観測' : '保存済みの初回観測' },
+      timeline: [...initial.timeline, ...(remoteAnswer ? [{ event_id: 'remote-answer', kind: 'ANSWER',
+        question_id: 'question', text: '別端末から保存した回答' }] : [])],
+    };
+    const calls = [];
+    const answerBodies = [];
+    t.mock.method(globalThis, 'fetch', async (url, options) => {
+      calls.push({ url, options });
+      assert.equal(options.headers.Authorization, 'Bearer owner-token');
+      if (options.method === 'GET') return { ok: true, json: async () => saved };
+      const body = JSON.parse(options.body);
+      if (url.endsWith('/answers')) {
+        answerBodies.push(options.body);
+        if (answerBodies.length === 1) { saved = resolved; throw new Error('unknown response'); }
+        return { ok: false, status: 409, json: () => assert.fail('private error body is not read') };
+      }
+      assert.ok(url.endsWith('/actions'));
+      assert.equal(body.action, 'continue');
+      saved = { ...resolved, state: 'AWAITING_ANSWER', revision: 7, can_continue: false, issued_count: 2,
+        pending_question: { question_id: 'question-2', text: '続く質問' } };
+      return { ok: true, json: async () => saved };
+    });
+    let thread, root;
+    function Harness() {
+      thread = useEmlisThread({ userId: 'owner' });
+      return React.createElement(Modal, { thread, colors: {} });
+    }
+    const buttons = text => root.root.findAllByType('Button').filter(b => b.props.children === text);
+    const press = async text => {
+      assert.equal(buttons(text).length, 1, `one visible ${text} control is required`);
+      assert.notEqual(buttons(text)[0].props.disabled, true);
+      await act(async () => buttons(text)[0].props.onPress());
+    };
+    try {
+      await act(async () => { root = Renderer.create(React.createElement(Harness)); });
+      await act(async () => thread.open('input'));
+      await act(async () => thread.setDraft('この端末で送信した回答'));
+      await press('回答を送る');
+      assert.equal(thread.uncertain, true);
+      assert.equal(buttons('同じ回答を再送する').length, 1);
+      assert.equal(buttons('同じ回答を再送する')[0].props.disabled, true);
+      await press('保存状況を確認');
+      assert.equal(thread.dto.pending_question, null);
+      assert.equal(thread.uncertain, true);
+      assert.equal(thread.pendingAction, false);
+      assert.equal(answerBodies.length, 1, 'GET must not automatically resubmit');
+      assert.equal(buttons('同じ回答を再送する').length, 1);
+      assert.equal(buttons('同じ操作を再送する').length, 0);
+      if (remoteAnswer) assert.equal(buttons('もう一点続ける')[0].props.disabled, true);
+
+      saved = { ...resolved, can_write: false };
+      await press('保存状況を確認');
+      assert.equal(buttons('同じ回答を再送する')[0].props.disabled, true);
+      await act(async () => buttons('同じ回答を再送する')[0].props.onPress());
+      assert.equal(answerBodies.length, 1);
+      saved = resolved;
+      await press('保存状況を確認');
+      await press('同じ回答を再送する');
+      assert.equal(answerBodies.length, 2);
+      assert.equal(answerBodies[1], answerBodies[0], 'replay must preserve question, revision, key, text and authored time');
+      assert.equal(thread.uncertain, false);
+      assert.equal(thread.rejected, true);
+      assert.equal(thread.dto.current_observation.text, resolved.current_observation.text);
+      assert.equal(saved, resolved, 'rejected replay must not overwrite the saved answer or body');
+      assert.equal(buttons('同じ回答を再送する').length, 0);
+      await press('保存状況を確認');
+      assert.equal(thread.rejected, false);
+      assert.equal(thread.visible, true, 'recovery must not require closing the reader');
+      assert.equal(thread.dto, resolved);
+      if (remoteAnswer) {
+        await press('もう一点続ける');
+        assert.equal(thread.dto.pending_question.question_id, 'question-2');
+        assert.equal(thread.draft, '');
+      }
+      assert.equal(thread.busy, false);
+      assert.equal(thread.uncertain, false);
+      assert.equal(calls.filter(c => c.options.method === 'POST').length, remoteAnswer ? 3 : 2);
+    } finally {
+      if (root) await act(async () => root.unmount());
+    }
+  });
+}

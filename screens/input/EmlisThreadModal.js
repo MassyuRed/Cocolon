@@ -93,7 +93,9 @@ export default function EmlisThreadModal({ thread, colors }) {
           {dto?.can_continue && <Text style={textStyle}>この記録では、あと{Math.max(0, dto.question_limit - dto.issued_count)}問まで続けられます。</Text>}
           {(dto?.interpretive_frames || []).map(frame => <FrameEditor key={`${dto.thread_id}:${frame.frame_ref}`} frame={frame} thread={thread} textStyle={textStyle} borderColor={colors.CARD_BORDER} />)}
           {dto?.can_retry && <CocolonButton disabled={blocked || busy || uncertain} onPress={() => thread.action("retry_response")}>本文を再試行する</CocolonButton>}
-          {uncertain && thread.pendingAction && <CocolonButton disabled={blocked || busy || !thread.reconciled} onPress={thread.replayPending}>同じ操作を再送する</CocolonButton>}
+          {uncertain && (thread.pendingAction || !dto?.pending_question) && <CocolonButton disabled={blocked || busy || !thread.reconciled} onPress={thread.replayPending}>
+            {thread.pendingAction ? "同じ操作を再送する" : "同じ回答を再送する"}
+          </CocolonButton>}
           {!!dto?.thread_id && <CocolonButton variant="secondary" onPress={() => setHistoryOpen(!historyOpen)}>
             {historyOpen ? "履歴を閉じる" : "元の記録とこれまでのやり取り"}
           </CocolonButton>}
