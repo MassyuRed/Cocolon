@@ -19,7 +19,11 @@ current_product_read_state: "EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFI
 candidate_ready: false
 ---
 
-> 2026-10-03現行方針：作業配分と実機接続の優先順は[最新weekly §6.6〜6.10](../weekly_reviews/Cocolon_Weekly_Review_20261003.md)を参照。10/03でEmlis品質改善枠を区切り、10/04以降のWork主枠は分析。自然さ・深さ等の全面改善を開発実機確認の前提にせず、Emlis接続は限定した共通接続作業として扱う。重大な意味反転・出典混同、保存・本人権限等の保護を維持する。未完成と明示した動作確認を正式商品受入れへ換算せず、0/3・NOT_CLEAR・default OFF・Draft/open/unmergedを保持。最新の限定修復・接続準備は正本06/API handoff末尾u82。
+> 2026-10-03現行方針：作業配分と実機接続の優先順は[最新weekly §6.6〜6.10](../weekly_reviews/Cocolon_Weekly_Review_20261003.md)を参照。10/03でEmlis品質改善枠を区切り、10/04以降のWork主枠は分析。自然さ・深さ等の全面改善を開発実機確認の前提にせず、Emlis接続は限定した共通接続作業として扱う。重大な意味反転・出典混同、保存・本人権限等の保護を維持する。未完成と明示した動作確認を正式商品受入れへ換算せず、0/3・NOT_CLEAR・default OFF・Draft/open/unmergedを保持。最新の接続準備は正本06/API handoff末尾u83とAPI運用資料§10。
+
+## 2026-10-03 u83 — 実機接続対象の読取確認
+
+`STRUCTURE_MAP_DELTA_NONE`。appの既定API、固定認証先、既存Q2/Q3 migrationと親schema、TestFlight方針を確認した。認証先DBにEmlis保存用schemaは未導入。稼働APIの配置版・実DBは未確定のため、Render管理情報の読取確認が次の作業である。source/構造変更・DB適用・機能有効化・配布は行っていない。正本06/API handoffのu83とAPI運用資料§10を参照する。
 
 ## 2026-10-03 u82 — 起動時の通信失敗後に接続情報を再確認する
 
