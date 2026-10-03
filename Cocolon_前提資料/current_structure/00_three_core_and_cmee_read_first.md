@@ -71,8 +71,8 @@ CMEEは設計候補がlocal artifactに留まり、GitHub上のdurable ownerが�
 |---|---|---|---|
 | EmlisAI構造 | [01_emlis_ai_current_structure.md](01_emlis_ai_current_structure.md) | 入力を「読まれた形」の観測へ変え、必要な場合だけ一点を問い、回答分だけ観測を深める | production観測／受け取りはCURRENT_ACTUAL。問い／refined observationはQ1〜Q3コード実装済み、Q4統合が次。環境適用・商品判断は別作業 |
 | Piece構造 | [02_piece_current_structure.md](02_piece_current_structure.md) | 保存済み入力を、他者が単独で受け取れるcanonical textと画像artifactへ変える | current user-visibleはold Q&A。Piece V2はCODE_DISABLED／DESIGNED_NOT_IMPLEMENTED |
-| 分析構造 | [03_analysis_current_structure.md](03_analysis_current_structure.md) | 蓄積入力から現在の自己構造routeを根拠付きで示し、観測routeと分離したIF routeを扱う | current Watashi Mapはpresentation-oriented。evidence graph／IF routeはDESIGNED_NOT_IMPLEMENTED |
-| CMEE | [04_cmee_current_structure.md](04_cmee_current_structure.md) | exact3の商品に共通するsource・意味・plan・realization・traceを持つ共有生成中枢 | DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE／NO_SAFE_CMEE_V1A_CANDIDATE_STOP／NOT_IMPLEMENTED／NOT_PRODUCTION_CONNECTED |
+| 分析構造 | [03_analysis_current_structure.md](03_analysis_current_structure.md) | 蓄積入力から現在の自己構造routeを根拠付きで示し、観測routeと分離したIF routeを扱う | current Watashi Mapはpresentation-oriented。V1-Dの部分evidence graph＋private previewはOFFLINE_IMPLEMENTED。補足解釈／公開API・RN／IFは未実装。詳細は03 §4.5 |
+| CMEE | [04_cmee_current_structure.md](04_cmee_current_structure.md) | exact3の商品に共通するsource・意味・plan・realization・traceを持つ共有生成中枢 | core別currentは各map・最新06を参照。AnalysisはOFFLINE_PARTIAL_PRIVATE_PREVIEW実装、公開lifecycle未接続。技術成立と商品合格を分離 |
 
 CMEEは技術上first-classに育てる共有Engine targetであるが、独立したuser-facing商品目的を持たないため、商品構造上の「第四の中核」ではない。商品中核はEmlisAI／Piece／分析構造のexact3である。
 

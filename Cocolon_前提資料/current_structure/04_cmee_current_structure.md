@@ -1,7 +1,8 @@
 ---
 doc_id: cocolon_meaning_experience_engine_current_structure
 title: "CMEE — Current Structure"
-revision_date: "2026-09-11 JST"
+revision_date: "2026-10-03 JST"
+analysis_implementation_state: "PARTIAL_OFFLINE_PRIVATE_PREVIEW_ONLY"
 document_role: "CMEE_CURRENT_STRUCTURE_AND_PRODUCT_QUALITY_ROUTE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -11,8 +12,8 @@ stage1_language_route: "ROUTE_A_PROVIDERLESS_GROUNDED_DISCOURSE_COMPOSER_ONLY"
 external_generative_ai_allowed: false
 external_body_send: 0
 retired_provider_investigation: "REMOVED_FROM_CURRENT_TREE_GIT_HISTORY_ONLY"
-current_authorized_next_work: "EMLIS_Q4_CODE_VERIFIED_UNRESOLVED_PRODUCT_QUALITY_RETAINED"
-only_possible_future_implementation_class: "Q4_CODE_AND_BODY_CORRECTIONS_PER_20260911_V1_2"
+current_authorized_next_work: "ANALYSIS_V1D_MINIMUM_VERTICAL_PER_20261003_WEEKLY_AND_MASH_REQUEST"
+only_possible_future_implementation_class: "CORE_SPECIFIC_CURRENT_WEEKLY_AND_LATEST_HANDOFF"
 implementation_state: "DISABLED_IMPLEMENTED_NOT_ACCEPTED / ROOT_SAME100_NOT_CLEAR / REPLAY_INPUT_IMPLEMENTED"
 candidate_state: "DISABLED_IMPLEMENTED_NOT_ACCEPTED"
 candidate_ready: false
@@ -20,6 +21,14 @@ product_read_state: "CURRENT_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFICIENT / HI
 production_runtime_effect: 0
 automatic_progression: false
 ---
+
+
+## 2026-10-03 — Analysis V1-D offline consumer
+
+Mashの実装開始指示と最新weekly §6.6〜6.10に基づき、`cocolon_meaning_experience_engine/engine.py`へAnalysis専用request dispatchを追加した。新しい`cores/analysis/source_adapter.py`、`intent_compiler.py`、`observed_route_realizer.py`が期間sourceのidentity/evidence、部分observed graph、同一artifactからのprivate文章/図用previewを担当する。共有semantic frameを消費するが、Emlisの生成本文や旧text-generation-core Analysis skeletonはsourceにしない。全追加fileと責任・境界は[Analysis current map §4.5](03_analysis_current_structure.md)が正本。
+
+18件の合成入力検査PASS。公開safe DTO、補足訂正・撤回の意味反映、実DB期間loader、API/RN、実機は未完了。原文節を含むprivate previewは公開APIへ返さない。期間内に補足がある場合は生成を保留し、旧観測を現在へ付け替えない。IF/SavedRouteIntent/exportはHOLD。既存Emlis/Piece経路と国家systemは変更しない。下記の過去のAnalysis未接続・未実装記録は、このoffline範囲だけ本節で更新する。商品NOT_CLEAR／0/3、全体48%は保持する。
+
 
 > 2026-09-11 Q4現在地：修正版v1.2のQ4コード実装・統合・公開接続準備と今回の検証を完了。公開用mode・単一作者・旧client/保存版互換・停止復旧・bootstrap/RNを接続し、初回/肯定的回答/当時訂正と回答名詞化・時点の不具合を修正した。API179 PASS、RNは保存済み56 PASS。新しい保存22ケースを全文確認し、既存100件は全読済みの前版と全record一致。長い再掲・定型性など商品品質はNOT_CLEARとして保持する。現行結果は正本06とAPI既存handoffの末尾Q4 continuation節。実DB・端末・実課金・Mash正式判断・公開操作は別作業、既定OFF。
 
@@ -93,7 +102,7 @@ Current state:
     not production connected
     not Cycle001 proven
     Piece not connected
-    Analysis not connected
+    Analysis offline partial observed consumer connected; public lifecycle not connected
     automatic progression false
 
 2026-09-08前回実装（証明済み否定過去報告の全角文末を引用に保持／candidate64）：既存Sentence Surfaceで、原fieldと本人の否定過去報告が証明済みの単独spanだけ、末尾の全角ピリオドを引用内に保持した。元入力・根拠・意味計画・Gateは変更しない。公開合成57件は8件の本文成立／49件全record同一、全57件の根拠とplanは不変。必須332件329 PASS／継承3 FAIL、前回329全成否一致、新規3成功。旧I5等11成功。canonical100は全record・実plan不変、73/27・124責務を維持し、華恋が全100件全文確認してNOT_CLEAR。V2の17件6 PASS／11 FAIL・全42件213候補も同一。共有Ledger案は他の未修復な誤読まで本文を返したため不採用。中心感情の未選択、再掲・定型締め、対象外の報告scopeと他の全角文末は残件。GitHub正本・定例ZIPなしを継続。

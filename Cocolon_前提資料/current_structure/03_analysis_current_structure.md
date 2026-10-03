@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_analysis_current_structure
 title: "分析構造 — Current Structure"
-revision_date: "2026-08-15 JST"
+revision_date: "2026-10-03 JST"
 document_role: "ANALYSIS_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -14,11 +14,11 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-分析構造には、current RN／backend実装と広域の前提資料は存在する。
-しかし専用の00_read_first、current structure、history ownerがなく、Analysis、Piece、EmotionLog、rankingを混在させた巨大追記資料から復元する必要があった。
-
-また、current Watashi Mapと、将来構想であるevidence-bound observed route／IF routeを区別するdurable ownerがなかった。
-このmapを分析構造のcurrent structure ownerとする。
+current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
+2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
+期間内の保存原入力形式からexact evidence付きの部分graphを生成し、同一artifactからprivate text／visual previewを返すところまで実装した。実DBからの期間読取、公開safe projection、API／RN接続、実機Product Readは未実装・未実行。
+previewは原文節を含む開発内部出力であり、公開用のwatashi.map.v2ではない。現行Watashi Mapの置換、IF、SavedRouteIntentは未実施。
+このmapがAnalysisのcurrent ownerであり、旧混在資料01Bは歴史参照とする。Draft branch上の実装と稼働中productを区別する。
 
 ## 1. 商品目的
 
@@ -48,6 +48,8 @@ observed routeをbaseとし、ユーザーが選んだbranch intent／constraint
 | IF route | owner pathなし、runtime exact0 | HypotheticalScenarioGraph + IfRouteSimulation |
 | saved intent | owner pathなし | SavedRouteIntentをobserved／simulatedと別identityで保存 |
 | visual | current Watashi Map cards | observed／IF／unknownを見分けられるgraph + accessible text |
+
+上表のCurrent actualは稼働経路を示す。Draftのoffline observed実装は§4.5に分離する。
 
 Current frontend／backendにIF route authorityはない。future designをcurrent runtimeへ数えない。
 
@@ -142,6 +144,25 @@ Current AnalysisComposerはcaller-supplied textをguardするadapterであり、
 | Watashi Map service | ai/tests/test_watashi_map_service.py |
 
 current testsは主にpayload／label／presentation contractを守る。evidence-bound observed edgeまたはIF graphのauthority証明ではない。
+
+### 4.5 CMEE V1-D offline implementation（2026-10-03）
+
+以下はすべてmashos-api内。prefixは`ai/services/ai_inference/cocolon_meaning_experience_engine/`。
+
+| File | Responsibility | State |
+|---|---|---|
+| `cores/__init__.py`、`cores/analysis/__init__.py` | Analysis専用consumerのpackage境界 | OFFLINE_IMPLEMENTED |
+| `cores/analysis/source_adapter.py` | 期間・owner・LIVE・version・補足親identityの検証、record重複排除、exact原文byte/scalar evidence | OFFLINE_IMPLEMENTED |
+| `cores/analysis/intent_compiler.py` | 共有semantic frameからAnalysis専用node／edge／unknown生成、独立した複数記録の同時出現 | PARTIAL_OBSERVED_IMPLEMENTED |
+| `cores/analysis/observed_route_realizer.py` | 不変artifact、同一identityのprivate text／visual preview、本文を含まないdiagnostics | PRIVATE_PREVIEW_ONLY |
+| `engine.py` | `AnalysisObservedMapRequest`の専用dispatch。既存Emlis／Piece経路を保持 | OFFLINE_ONLY |
+| `ai/tests/test_cmee_analysis_v1d_vertical.py`（repo相対） | 合成入力のsource→artifact、根拠・誤採用・非公開境界の18検査 | PASS_LOCAL |
+
+`MAP_AND_EXPLORE / ANALYSIS_OBSERVED_MAP / OFFLINE_CANDIDATE`のみ受理する。本人の明示的な有限節から一部の行動・考えを採用し、場面・役割・結果など未成立部分をunknownとして保持する。同時出現線は無方向で原因を主張しない。順序線にはsource-boundの明示的時間関係が必要で、記録や配列の並びから生成しない。初回検証は同時出現を実測し、順序線のpositive cohortは未確認。
+
+保存補足の親version結合は実装済みだが、訂正・撤回の意味反映は未接続。期間内の補足がある場合は全体を`analysis_supplement_interpretation_pending`でUNAVAILABLEとし、訂正前の観測を返さない。引用・伝聞・条件・他者主体など未対応scopeは観測として確定しない。
+
+previewのschemaは`cocolon.cmee.analysis_private_preview.v1`、wireは`watashi.map.v2.private-preview`。原文由来の節を含むためpublic DTO／RN formatterへ渡さない。source-set取得の認証・tier・retention・削除再検査は将来のlifecycle callerの責任で、offline requestのowner文字列を認証と扱わない。
 
 ## 5. Source and artifact identity
 
@@ -251,12 +272,12 @@ missing reasonとscopeを持つ別claim／gap marker。observed factを作るた
 
 ## 9. Current gaps
 
-1. dedicated Analysis design roadmap／implementation routeは未activated。
+1. V1-Dのoffline実装を開始済み。公開safe surfaceと補足の訂正・撤回解釈を最小の次工程とする。
 2. current Watashi Mapはpresentation-orientedで、claim／edge evidence graph authorityではない。
-3. observed route edgeのformal evidence bindingは未実装。
+3. 初回部分graphにexact evidenceを結合済み。全段階・annotations・conflict・期間比較の意味実装は未完了。
 4. IF route／HypotheticalScenarioGraph／SavedRouteIntentのruntime ownerはexact0。
 5. Analysis専用Product Read packetとactual-device IF map verificationは未実行。
-6. CMEE Analysis connectionはfuture phaseであり、このmap作成から開始しない。
+6. 認証済み期間source loader、保存lifecycle、API、開発画面、実機一往復は未接続。今回の18検査PASSを商品完成へ換算しない。
 
 CMEE Analysis detailed design candidate:
 
@@ -289,10 +310,10 @@ CMEE Analysis detailed design candidate:
 
 ## 12. Last verified refs
 
-    Cocolon main
-      de9c3d985053bbaaa7fc0d396e688cc2097ece40
+    Cocolon PR30 implementation base（Draft/open/unmerged）
+      4e8892bbaaebb6c010a63f9f477575d462c7ead8
 
-    mashos-api main
-      a8ca4ddf7b7ae76bf7b3d73e74e3a5808d623428
+    mashos-api PR3 implementation base（Draft/open/unmerged）
+      e6882f1009a03640357d83d8b9fec7c656611f7a
 
 次回はfresh refと実fileを再確認する。

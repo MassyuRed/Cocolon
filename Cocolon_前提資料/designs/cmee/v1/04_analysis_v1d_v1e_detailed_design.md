@@ -2,9 +2,9 @@
 
 - document id: `cocolon.cmee.v1d_v1e.analysis_route.detailed_design`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- observed-route runtime state: `NOT_IMPLEMENTED`
+- observed-route runtime state: `PARTIAL_OFFLINE_IMPLEMENTED_PRIVATE_PREVIEW_ONLY`
 - IF-route runtime state: `NOT_IMPLEMENTED`
-- Analysis activation: `NOT_AUTHORIZED`
+- Analysis activation: `OFFLINE_IMPLEMENTATION_REQUESTED_2026_10_03`; public runtime未接続
 - API / DB / RN effect: `0`
 
 ---
@@ -31,7 +31,11 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
-V1-D / V1-Eのdesign contractは先に定義するが、runtime接続は次の順で別承認する。
+2026-10-03更新：最新weekly review §6.6〜6.10とMashの実装開始指示により、V1-Dのoffline source→部分observed graph→private text／visual previewを実装した。現在地と全追加fileは`current_structure/03_analysis_current_structure.md` §4.5を正本とする。保存補足は親version結合までで、補足を含む期間の意味生成は訂正・撤回解釈待ちのUNAVAILABLE。公開safe projection、実DB loader、API／RN、実機は未完了。
+
+次はsafeな意味表現と補足解釈を接続し、認証済み期間入力から開発画面で読む最小一本を進める。原文節を含むprivate previewを公開DTOへ昇格しない。IF／SavedRouteIntent／外部exportはHOLD。以下の旧順序は設計時の履歴であり、Emlis/Pieceの文章品質全体完了をV1-D開始の待機条件に戻さない。
+
+設計時の順序：
 
 1. Emlis V1-A actual proof
 2. V1-B Emlis Question operational proof
