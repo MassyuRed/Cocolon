@@ -19,7 +19,11 @@ current_product_read_state: "EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFI
 candidate_ready: false
 ---
 
-> 2026-10-03現行方針：作業配分と実機接続の優先順は[最新weekly §6.6〜6.10](../weekly_reviews/Cocolon_Weekly_Review_20261003.md)を参照。10/03でEmlis品質改善枠を区切り、10/04以降のWork主枠は分析。自然さ・深さ等の全面改善を開発実機確認の前提にせず、Emlis接続は限定した共通接続作業として扱う。重大な意味反転・出典混同、保存・本人権限等の保護を維持する。未完成と明示した動作確認を正式商品受入れへ換算せず、0/3・NOT_CLEAR・default OFF・Draft/open/unmergedを保持。最新の接続準備は正本06/API handoff末尾u85とAPI運用資料§12。
+> 2026-10-03現行方針：作業配分と実機接続の優先順は[最新weekly §6.6〜6.10](../weekly_reviews/Cocolon_Weekly_Review_20261003.md)を参照。10/03でEmlis品質改善枠を区切り、10/04以降のWork主枠は分析。自然さ・深さ等の全面改善を開発実機確認の前提にせず、Emlis接続は限定した共通接続作業として扱う。重大な意味反転・出典混同、保存・本人権限等の保護を維持する。未完成と明示した動作確認を正式商品受入れへ換算せず、0/3・NOT_CLEAR・default OFF・Draft/open/unmergedを保持。最新の接続準備は正本06/API handoff末尾u86とAPI運用資料§13。承認済みQ2/Q3の保存schema適用・catalog照合は完了し、問いシステム版API配置と実機確認が残る。
+
+## 2026-10-03 u86 — 承認済み保存schemaを配置・照合
+
+`STRUCTURE_MAP_DELTA_NONE` はsource owner/file graphについての記録。共有Supabase `oeahmpmigszggnkyiivq` には、Mashの個別承認を受け既存Q2→Q3を無変更で適用し、Emlis保存用3table・5functionを配置した。列/制約/index/FK/RLS/権限、関数本文と引数defaultを照合して不一致なし。問いシステム版APIの配置・実機一往復は未完了。商品0/3・NOT_CLEAR・default OFFを維持する。正本06/API handoffのu86とAPI運用資料§13を参照する。
 
 ## 2026-10-03 u85 — API/認証/DBの同一性を確定
 
