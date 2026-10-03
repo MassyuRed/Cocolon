@@ -19,7 +19,11 @@ current_product_read_state: "EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFI
 candidate_ready: false
 ---
 
-> 2026-10-03現行方針：作業配分と実機接続の優先順は[最新weekly §6.6〜6.10](../weekly_reviews/Cocolon_Weekly_Review_20261003.md)を参照。10/03でEmlis品質改善枠を区切り、10/04以降のWork主枠は分析。自然さ・深さ等の全面改善を開発実機確認の前提にせず、Emlis接続は限定した共通接続作業として扱う。重大な意味反転・出典混同、保存・本人権限等の保護を維持する。未完成と明示した動作確認を正式商品受入れへ換算せず、0/3・NOT_CLEAR・default OFF・Draft/open/unmergedを保持。最新の接続準備は正本06/API handoff末尾u83とAPI運用資料§10。
+> 2026-10-03現行方針：作業配分と実機接続の優先順は[最新weekly §6.6〜6.10](../weekly_reviews/Cocolon_Weekly_Review_20261003.md)を参照。10/03でEmlis品質改善枠を区切り、10/04以降のWork主枠は分析。自然さ・深さ等の全面改善を開発実機確認の前提にせず、Emlis接続は限定した共通接続作業として扱う。重大な意味反転・出典混同、保存・本人権限等の保護を維持する。未完成と明示した動作確認を正式商品受入れへ換算せず、0/3・NOT_CLEAR・default OFF・Draft/open/unmergedを保持。最新の接続準備は正本06/API handoff末尾u84とAPI運用資料§11。
+
+## 2026-10-03 u84 — 稼働APIと作業版の差を確認
+
+`STRUCTURE_MAP_DELTA_NONE`。Renderは8/14のmain版を配置しており、問いシステムのPR版は未配置。10/02の直近接続ログはappと同じSupabaseを指すが、現在の環境設定値は未読。別の既存開発APIは見つからなかった。次は当該serviceの設定値を限定読取し、適用対象を確定する。正本06/API handoffのu84とAPI運用資料§11を参照する。
 
 ## 2026-10-03 u83 — 実機接続対象の読取確認
 
