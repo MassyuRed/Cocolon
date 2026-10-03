@@ -4,7 +4,7 @@
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
 - observed-route runtime state: `PARTIAL_OFFLINE_SAFE_PROJECTION_AND_RN_RECEIVER_IMPLEMENTED`
 - IF-route runtime state: `NOT_IMPLEMENTED`
-- Analysis activation: `OFFLINE_IMPLEMENTATION_REQUESTED_2026_10_03`; public runtime未接続
+- Analysis activation: `SAVED_SOURCE_READ_ONLY_ENTRY_IMPLEMENTED_2026_10_03`; public runtime未接続
 - API / DB / runtime activation effect: `0`
 - RN source effect: versioned safe DTO receiver / renderer implemented; native未確認
 
@@ -32,9 +32,9 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
-2026-10-03 u94更新：latest weekly §6.6〜6.10に沿い、offline source→部分graphに補足の明示引用訂正・撤回と本人向けsafe text／visual projectionを追加した。RNに閉じたDTOのvalidatorと専用renderer、latest／viewerのversion dispatchを実装。合成入力のbackend26検査、実RN componentを使う11検査、旧表示互換2検査PASS。全追加・変更fileの正本は`current_structure/03_analysis_current_structure.md` §4.5。実DB loader・保存／実API配信・実機は未完了。
+2026-10-03 u94更新：latest weekly §6.6〜6.10に沿い、offline source→部分graphに補足の明示引用訂正・撤回と本人向けsafe text／visual projectionを追加した。RNに閉じたDTOのvalidatorと専用renderer、latest／viewerのversion dispatchを実装。合成入力のbackend26検査、実RN componentを使う11検査、旧表示互換2検査PASS。全追加・変更fileの正本は`current_structure/03_analysis_current_structure.md` §4.5。u95で認証済みsaved period loader→ASTOR明示V2生成entryを追加し、13検査＋既存26検査PASS。保存／実API配信・実ユーザー入力での実行・実機は未完了。
 
-次は認証済み期間入力のloaderとimmutable artifact保存・API lifecycleを接続し、開発画面で読む最小一本を進める。原文節を含むprivate previewを公開DTOへ昇格しない。IF／SavedRouteIntent／外部exportはHOLD。以下の旧順序は設計時の履歴であり、Emlis/Pieceの文章品質全体完了をV1-D開始の待機条件に戻さない。
+次は§15.1.1の専用保存先についてMash判断を受け、immutable artifact保存・API lifecycleを接続して開発画面で読む最小一本を進める。原文節を含むprivate previewを公開DTOへ昇格しない。IF／SavedRouteIntent／外部exportはHOLD。以下の旧順序は設計時の履歴であり、Emlis/Pieceの文章品質全体完了をV1-D開始の待機条件に戻さない。
 
 設計時の順序：
 
@@ -97,9 +97,9 @@ event framing、route induction、annotation、period comparisonは`intent_compi
 
 | Repository | Current / proposed path | V1-D disposition |
 |---|---|---|
-| mashos-api | `ai/services/ai_inference/astor_material_snapshots.py` | `KEEP_SOURCE_MATERIAL_OWNER / MODIFY_FOR_SOURCE_SET_REFS` |
+| mashos-api | `ai/services/ai_inference/astor_material_snapshots.py` | `SAVED_PERIOD_LOADER_IMPLEMENTED_READ_ONLY`: 認証・tier・元入力／補足・生成後再確認 |
 | mashos-api | `ai/services/ai_inference/analysis_engine_adapter.py` | `KEEP_MATERIAL_NORMALIZATION_PREIMAGE_ONLY / NOT_GRAPH_ORCHESTRATION_OWNER` |
-| mashos-api | `ai/services/ai_inference/astor_self_structure_report.py` | `ORCHESTRATION_AND_CUTOVER_OWNER / MODIFY_REQUIRED`: V1-D active requestのexceptionを握り潰してv1へ継続しない |
+| mashos-api | `ai/services/ai_inference/astor_self_structure_report.py` | `EXPLICIT_READ_ONLY_V2_ENTRY_IMPLEMENTED`: 旧builderから分離。保存／cutover未実装、v1 fallbackなし |
 | mashos-api | `ai/services/ai_inference/watashi_map_service.py` | `HISTORICAL_V1_GENERATOR / RETIRE_ACTIVE_AT_V1D_CUTOVER` |
 | mashos-api | `ai/services/ai_inference/analysis_report_validity_gate.py` | `KEEP_PUBLISH_VALIDITY_GUARD / NOT_MEANING_OR_ROUTE_AUTHORITY / EXTEND_FOR_V2_IDENTITY` |
 | mashos-api | `ai/services/ai_inference/api_analysis_reads.py` | `MUST_MAP_BEFORE_CUTOVER`: tier / access / unread / refresh semanticsを保護 |
@@ -580,6 +580,30 @@ existing tier、access、unread、dirty / refresh semanticsをregression gateに
 V1-Eのfirst storage candidateは、Analysis lifecycle ownerが`watashi.if-route-set.v1`と`watashi.saved-route-intent.v1`をobserved mapとは別artifact kind / namespaceでimmutable保存する。parent observed map、scenario set、selected scenarioのversion refを固定し、view-time regeneration 0とする。DB / RLS / payload size / latency / retention / read-policy preflightで安全に分離できなければ`NO_SAFE_ANALYSIS_V1E_STORAGE_STOP`とし、observed `watashi.map.v2`へ混ぜて通さない。
 
 V1-E safe projectionはcanonical IF / Saved identityからAnalysis access ownerが生成する。IF / SavedのAPI / RN pathとstorage exact ownerはV1-E separate approvalでfresh固定し、それまでmaterialize 0である。
+
+### 15.1.1 u95 actual storage fit-gapと別判断候補（未承認）
+
+2026-10-03にSupabase `cocolon-project` のcatalog／columns／constraints／grants／policies／view定義だけをread-only確認した。ユーザー行・入力本文は読んでいない。
+
+- `myprofile_reports`はRLS enabled、authenticatedのown SELECT policyがあり、content_jsonを含む本人行の直接読取が可能。safe API serializerを通さずprivate evidenceを取得できてしまう。
+- `self_structure_reports`は同tableの全列view、security_invoker=true、service_role SELECTのみ。viewが限定されても基底tableの本人direct SELECTは残る。
+- uniqueは`(user_id,report_type,period_start,period_end)`、期間列はdate。既存latest writerは固定1970期間へmerge-upsert、monthly writerも同uniqueへupsert／旧schema行削除を行う。private immutable versionの格納先にはそのまま使えない。
+- `emotions`のcreated_atはtimestamp without time zone、既存saved-input ownerはUTCと定義。version／deleted_at列はなく、exact7field commitmentと実在本人行を使う。
+- byte／latency／history costの実測や新schema validationは未実行。既に確認できたprivate read／immutabilityの不成立に対し、無関係な前段測定を増やさない。
+
+従って現行tableへの格納は`NO_SAFE_ANALYSIS_V1D_STORAGE_STOP`。上の§15.1に従い、次の**1案をMashの別判断へ出す**。この段落は承認済みschemaへの変更ではなくreviewable proposalで、SQL／table／flagはまだ追加・適用していない。
+
+| 候補 | 内容 |
+|---|---|
+| 保存先 | 同じSupabaseのbackend専用`analysis_observed_artifacts` table 1つ。外部service追加なし |
+| identity／access | immutable artifact_id＋version、本人owner、期間、report mode。user削除へ連動、RLS enabled、anon／authenticated直接権限なし、service_roleのみ |
+| 内容 | raw user body 0。closed serializerでcanonical evidence refs／source commitments／graph identityと、生成時のsafe projection／textを保存。`asdict(current artifact)`による原文label保存は禁止 |
+| freshness／削除 | commit時に本人・tier・source set／version／補足revisionを同transactionで再照合。元記録・補足の変更／削除時は影響artifactを無効化／削除し、readでも検証。request-local再読取をatomic writeと扱わない |
+| API | 既存self-structure latest／history／detailのV2分岐だけへ接続。同じ保存identityからsafe projectionを返し、view-time意味再生成0。Free履歴不可・Plus deep不可をserverでも実施 |
+| legacy | 旧myprofile_reportsと旧rendererを履歴用に維持。MyProfile互換はcanonicalへdelegate。`/mymodel/infer`／cron／workerの旧builderにprivate metaを共通追加しない |
+| 進め方 | この保存方式の判断後にmigration／serializer／保存RPCとAPI差分を実装・検証。現在のPR反映からDB適用・公開cutoverへ自動進行しない |
+
+既存tableのdirect SELECT権限と全旧writerを変える方式より、分析専用の1 tableへ限定する方が変更範囲が小さいため推奨する。旧table全体の権限を黙って剥奪して設計条件を満たしたことにはしない。
 
 ### 15.2 One-owner cutover
 

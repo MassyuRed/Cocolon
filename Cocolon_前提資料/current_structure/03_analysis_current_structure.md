@@ -16,7 +16,7 @@ automatic_progression: false
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
-u94で保存補足の明示的な訂正・撤回、owner向けsafe projection、同一artifactの文章と図を読むRN受信・表示経路を追加した。合成入力からbackend生成DTOを実際のRN component／latest・viewerへ渡す検査まで成立。実DBからの期間読取、永続化と実API配信、実機Product Readは未実装・未実行。
+u94で保存補足の明示的な訂正・撤回、owner向けsafe projection、同一artifactの文章と図を読むRN受信・表示経路を追加した。合成入力からbackend生成DTOを実際のRN component／latest・viewerへ渡す検査まで成立。u95で既存の本人認証・保存入力RPCを使う期間loaderと、ASTOR内の明示V2生成entryを追加した。合成DB応答→実loader／CMEE→safe文章・図の検査まで成立。永続化と実API配信、実ユーザー入力での実行、実機Product Readは未実装・未実行。
 private previewは原文節を含む開発内部出力として分離し、watashi.map.v2は閉じたsafe DTOだけを専用rendererへ渡す。safeは認証された本人向け商品表示で、匿名共有ではない。現行Watashi Mapの稼働経路の置換、IF、SavedRouteIntentは未実施。
 このmapがAnalysisのcurrent ownerであり、旧混在資料01Bは歴史参照とする。Draft branch上の実装と稼働中productを区別する。
 
@@ -180,7 +180,26 @@ safeラベルは閉じた述語grammar（9動詞）と名詞項・格、極性�
 
 private previewは`cocolon.cmee.analysis_private_preview.v1`／`watashi.map.v2.private-preview`として開発内部だけに保つ。safe DTOはcanonical05の`cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1`／`watashi.map.v2`に限定し、raw body、private source ID、evidence locator、digestを持たない。意味項として本人入力の名詞を保つため、匿名telemetryや外部共有へ転用しない。source取得の認証・tier・retention・削除再検査は将来のlifecycle callerの責任で、offline requestのowner文字列を認証と扱わない。
 
-実DB期間loader、immutable保存、latest／history／detailの同一保存identity解決、実API配信はまだ接続していない。RNは応答受信時の準備でありnative画面確認ではない。旧renderer自体は保持し、IF／SavedRouteIntent／外部exportはHOLD。
+期間loaderのsource接続はu95で実装した。immutable保存、latest／history／detailの同一保存identity解決、実API配信はまだ接続していない。RNは応答受信時の準備でありnative画面確認ではない。旧renderer自体は保持し、IF／SavedRouteIntent／外部exportはHOLD。
+
+### 4.6 保存入力からのread-only生成（2026-10-03 u95）
+
+すべてmashos-api repo相対。新しいservice／flag／routeを増やさず、既存material ownerとASTORへ置く。
+
+| File／function | 責任 | 状態 |
+|---|---|---|
+| `ai/services/ai_inference/astor_material_snapshots.py::load_analysis_saved_period` | 本人認証→tier/mode/期間確認→emotionsのID集合→既存EmlisThreadStore.read。元7fieldと1補足をexactに結合 | IMPLEMENTED_READ_ONLY |
+| 同 `recheck_analysis_saved_period` | 生成後に本人・tier・同期間ID集合・原入力commitment・thread revision・補足metadataを再読取 | IMPLEMENTED_READ_ONLY |
+| `ai/services/ai_inference/astor_self_structure_report.py::prepare_saved_analysis_observed_map` | 保存source→既存CMEE→safe文章／図。旧builder／upsertへ接続せず、private artifactを返さない | IMPLEMENTED_INTERNAL_ENTRY |
+| `.../cores/analysis/source_adapter.py::_time` | DB原入力created_atだけを既存保存owner同様UTCとして読む。naive原文字列・exact commitmentは不変、要求期間はtimezone必須 | MODIFIED |
+| `ai/tests/test_analysis_saved_period.py` | 実loader／CMEE／ASTORの13検査、HTTP/RPC・認証・tierのみ合成応答 | PASS_LOCAL |
+| `emlis_thread_store.py`、`emlis_thread_service.py`、`supabase_client.py`、`subscription.py`、`publish_governance.py`（同inference配下） | 既存の認証済みsaved source、回答束縛・保持期間・HTTP／tier ownerを再利用 | REVIEWED_UNCHANGED |
+
+ID取得は半開区間と`created_at.asc,id.asc`を固定し、count=exactと101件目で100件超・不完全取得を拒否する。保持期間に収まらない窓は切り詰めずUNAVAILABLE。DBにはsource version／LIVE列を捏造せず、実在本人行と保持期間、原7fieldのcommitmentで束縛する。threadの旧source_snapshot、回答の親／質問／round／event ID不一致を拒否し、Q3複数回答を最後の1件へ切り詰めない。質問は束縛確認にだけ使い、生成Emlis本文・意味checkpointはAnalysis sourceにしない。
+
+再読取は観測可能な競合を拒否するが、DB保存transactionの保証ではない。新entryは未登録・未配置で、`/mymodel/infer`／worker／cronが使う旧builderは変更しない。API39検査（新13＋既存26）PASS。実DBユーザー入力を使った生成は未実行。
+
+保存は`NO_SAFE_ANALYSIS_V1D_STORAGE_STOP`。fresh DB catalogで既存myprofile_reportsの本人direct SELECT・全content_json、date uniqueと現行merge-upsertを確認した。private evidenceをそのまま追加できないため、canonical04 §15.1.1のbackend専用immutable table候補をMashの別判断へ出す。loaderまでのコード反映を専用保存の承認・実API接続へ換算しない。
 
 ## 5. Source and artifact identity
 

@@ -2,7 +2,7 @@
 doc_id: cocolon_meaning_experience_engine_current_structure
 title: "CMEE — Current Structure"
 revision_date: "2026-10-03 JST"
-analysis_implementation_state: "PARTIAL_OFFLINE_SAFE_PROJECTION_RN_RECEIVER"
+analysis_implementation_state: "SAVED_SOURCE_READ_ONLY_ENTRY_STORAGE_DECISION_PENDING"
 document_role: "CMEE_CURRENT_STRUCTURE_AND_PRODUCT_QUALITY_ROUTE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -27,7 +27,7 @@ automatic_progression: false
 
 Mashの実装開始指示と最新weekly §6.6〜6.10に基づき、`cocolon_meaning_experience_engine/engine.py`へAnalysis専用request dispatchを追加した。新しい`cores/analysis/source_adapter.py`、`intent_compiler.py`、`observed_route_realizer.py`が期間sourceのidentity/evidence、部分observed graph、同一artifactからのprivate文章/図用previewを担当する。共有semantic frameを消費するが、Emlisの生成本文や旧text-generation-core Analysis skeletonはsourceにしない。全追加fileと責任・境界は[Analysis current map §4.5](03_analysis_current_structure.md)が正本。
 
-u94で補足の明示引用訂正・撤回、有限述語の意味から再構成する本人向けsafe DTO／文章、RN専用contract／rendererとlatest・viewer受信を実装した。backend26検査＋RN11検査＋旧互換2検査PASS。未対応の補足／意味は生成を保留し、原文節を含むprivate previewはsafe DTOへ混ぜない。safeは本人向け商品表示で、匿名共有ではない。実DB期間loader・永続化／実API配信・実機は未完了。IF/SavedRouteIntent/exportはHOLD。既存Emlis/Piece経路と国家systemは変更しない。下記の過去のAnalysis未接続・未実装記録は、このoffline範囲だけ本節で更新する。商品NOT_CLEAR／0/3、全体48%は保持する。
+u94で補足の明示引用訂正・撤回、有限述語の意味から再構成する本人向けsafe DTO／文章、RN専用contract／rendererとlatest・viewer受信を実装した。backend26検査＋RN11検査＋旧互換2検査PASS。未対応の補足／意味は生成を保留し、原文節を含むprivate previewはsafe DTOへ混ぜない。safeは本人向け商品表示で、匿名共有ではない。u95で認証済み保存期間loader→ASTOR明示V2生成を接続し、新13＋既存26検査PASS。実ユーザー入力の実行、永続化／実API配信・実機は未完了。現行tableのprivate読取／上書き不整合をcatalogで確認し、canonical04 §15.1.1の専用保存先はMash判断待ち。IF/SavedRouteIntent/exportはHOLD。既存Emlis/Piece経路と国家systemは変更しない。下記の過去のAnalysis未接続・未実装記録は、このoffline範囲だけ本節で更新する。商品NOT_CLEAR／0/3、全体48%は保持する。
 
 
 > 2026-09-11 Q4現在地：修正版v1.2のQ4コード実装・統合・公開接続準備と今回の検証を完了。公開用mode・単一作者・旧client/保存版互換・停止復旧・bootstrap/RNを接続し、初回/肯定的回答/当時訂正と回答名詞化・時点の不具合を修正した。API179 PASS、RNは保存済み56 PASS。新しい保存22ケースを全文確認し、既存100件は全読済みの前版と全record一致。長い再掲・定型性など商品品質はNOT_CLEARとして保持する。現行結果は正本06とAPI既存handoffの末尾Q4 continuation節。実DB・端末・実課金・Mash正式判断・公開操作は別作業、既定OFF。
