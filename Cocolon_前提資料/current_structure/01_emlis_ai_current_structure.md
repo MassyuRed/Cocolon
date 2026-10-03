@@ -19,7 +19,11 @@ current_product_read_state: "EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFI
 candidate_ready: false
 ---
 
-> 2026-10-03現行方針：作業配分と実機接続の優先順は[最新weekly §6.6〜6.10](../weekly_reviews/Cocolon_Weekly_Review_20261003.md)を参照。10/03でEmlis品質改善枠を区切り、10/04以降のWork主枠は分析。自然さ・深さ等の全面改善を開発実機確認の前提にせず、Emlis接続は限定した共通接続作業として扱う。重大な意味反転・出典混同、保存・本人権限等の保護を維持する。未完成と明示した動作確認を正式商品受入れへ換算せず、0/3・NOT_CLEAR・default OFF・Draft/open/unmergedを保持。最新の接続準備は正本06/API handoff末尾u87とAPI運用資料§14。Q2/Q3適用済み。Renderへread_onlyを保存した際にmain再配置が起きたが、問いシステムPR版は未配置で、指定commitの配置と実機確認が残る。
+> 2026-10-03現行方針：作業配分と実機接続の優先順は[最新weekly §6.6〜6.10](../weekly_reviews/Cocolon_Weekly_Review_20261003.md)を参照。10/03でEmlis品質改善枠を区切り、10/04以降のWork主枠は分析。自然さ・深さ等の全面改善を開発実機確認の前提にせず、Emlis接続は限定した共通接続作業として扱う。重大な意味反転・出典混同、保存・本人権限等の保護を維持する。未完成と明示した動作確認を正式商品受入れへ換算せず、0/3・NOT_CLEAR・default OFF・Draft/open/unmergedを保持。最新の接続確認は正本06/API handoff末尾u88とAPI運用資料§15。Q2/Q3適用済み、問いシステム版APIの指定commit配置・HTTP応答・未認証拒否を確認済み。次はTestFlight現行版での本人接続と実機確認。
+
+## 2026-10-03 u88 — 問いシステム版APIの配置とpublic応答を確認
+
+`STRUCTURE_MAP_DELTA_NONE`。既存RenderへAPI `7f1f7d92d296caeb913b8cab9599acab3318437d` がmanual deployされ、JST18:25にlive。health/bootstrapは200、reader flag=true、threadの未認証・無効tokenは401。autoDeployはOFF。source既定OFFと配置設定を分け、本人のDTO/書込拒否・保存往復は実機工程に残す。次は既存iOS workflowをPR30 branchで実行しTestFlight版を用意する。正本06/API handoffのu88、API運用資料§15を参照。
 
 ## 2026-10-03 u87 — APIの指定版配置経路を確定
 
