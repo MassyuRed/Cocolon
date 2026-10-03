@@ -2,13 +2,13 @@
 
 - document id: `cocolon.cmee.v1d_v1e.analysis_route.detailed_design`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- observed-route runtime state: `OBSERVED_STORAGE_AND_API_IMPLEMENTED_DEFAULT_OFF`
+- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102 content correctionは未配置
 - IF-route runtime state: `NOT_IMPLEMENTED`
-- Analysis activation: `STORAGE_APPROVED_AND_APPLIED_2026_10_04_JST`; API source接続済み・稼働未配置
+- Analysis activation: `STORAGE_APPROVED_AND_APPLIED_2026_10_04_JST`; API315f5b5…配置済み、Mashが6201実機確認OKを報告
 - API source effect: V2保存・read分岐実装、default off
 - DB effect: dedicated table 1 / migration 20261003204421 applied
-- production runtime activation effect: `0`
-- RN source effect: versioned safe DTO receiver / renderer implemented; native未確認
+- production runtime activation effect: 指定開発配置のみ。global cutover/正式公開は未完了
+- RN source effect: versioned safe DTO receiver / renderer implemented; 6201送信済み、実機OKはMash報告
 
 ---
 
@@ -33,6 +33,8 @@ ObservedSelfStructureMap + user-owned branch intent
 current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない。IFは未来予測、正解、命令、最適化ではない。
 
 ## 1. Activation boundary
+
+**2026-10-04 u102 current**：API315f5b5…がlive、TestFlight6201送信成功、Mashから実機確認OKの報告を受けた。本文/図の内容修正へ進み、通常補足と同一意味集約を§3.3で実装。修正版sourceは未配置。保存UUIDの独立実照合・global cutover・正式商品受入れを実機OK報告へ含めない。以下u94〜u97の配置前記述は各時点の履歴として保持する。
 
 2026-10-03 u94更新：latest weekly §6.6〜6.10に沿い、offline source→部分graphに補足の明示引用訂正・撤回と本人向けsafe text／visual projectionを追加した。RNに閉じたDTOのvalidatorと専用renderer、latest／viewerのversion dispatchを実装。合成入力のbackend26検査、実RN componentを使う11検査、旧表示互換2検査PASS。全追加・変更fileの正本は`current_structure/03_analysis_current_structure.md` §4.5。u95で認証済みsaved period loader→ASTOR明示V2生成entryを追加し、13検査＋既存26検査PASS。u96/u97で専用保存と既存API接続を実装し、承認済みtableを実DBへ適用・照合した。稼働API配信・実ユーザー入力での実行・実機は未実施。
 
@@ -133,6 +135,12 @@ V1-D Phase fit-gapはfresh caller / writer / reader graphとexact filenamesを�
 safeラベルは格を持つ名詞項と有限述語の型から再構成する。現段階は9動詞と限定名詞grammarの明示本人節のみで、任意の修飾／時点接頭句／複文は未対応。意味を削ってsafe化しない。生成不可を将来のlifecycle callerが扱う必要がある。annotations／conflict／期間比較と順序線のpositive cohortは未完了。
 
 safe projectionは認証された本人向けのSELF_ONLY商品表示で、匿名telemetryではない。意味項としてsource-bound名詞を保つが、原bodyやprivate source/evidence識別子は含めない。unknown／注記／競合は対象refを保持して図と文章へ出し、ラベルだけの重複排除で対象を消さない。端末側のtier検査は認証・server access policyの代用ではない。
+
+### 3.3 u102 通常補足と同一意味の集約
+
+既存intent_compiler内で、引用訂正/撤回以外の通常補足も、共有semantic frameと既存の完全節grammarが全文を解釈できる場合に採用する。元回答のexact scalar evidenceが全文を覆うことを確認し、未解釈/訂正混在を部分採用しない。親recordを同じ一機会とし、質問/生成文はsourceへ入れない。矛盾する同一候補の記述はどちらかへ決めずUNAVAILABLEを保持する。
+
+同じSELF主語・格/名詞・述語・極性・modality・時点は、格の語順や丁寧語の違いで分割しない。全evidenceを保持し、record件数と共起は独立記録を基準にする。関係・順序・原因を追加回答から推測しない。既存26＋追加7＝33検査PASS、合成生成本文3組を確認。通常日本語全般/複数補足/annotations/期間比較/IFの完成ではなく、API/DB/DTO/RN契約は不変。
 
 ## 4. Period source-set freeze
 

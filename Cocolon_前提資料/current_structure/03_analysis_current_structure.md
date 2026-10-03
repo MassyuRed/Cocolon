@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_analysis_current_structure
 title: "分析構造 — Current Structure"
-revision_date: "2026-10-03 JST"
+revision_date: "2026-10-04 JST"
 document_role: "ANALYSIS_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -13,6 +13,8 @@ automatic_progression: false
 # 分析構造 — Current Structure
 
 ## 0. Current conclusion
+
+**u102 current**：指定Analysis API315f5b5…を開発配置済み、TestFlight6201送信済み、Mashが実機確認OKを報告した。現在は内容改善が主作業。通常補足の完全節採用と同一意味の二重計上修正を既存compilerへ実装し、33検査PASS（§4.8）。この修正版は未配置。以下のu94〜u97は配置前の履歴であり、再び配置/実機を内容修正の前提へ戻さない。
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
@@ -220,6 +222,15 @@ Mashの専用table承認に基づく。DB適用済み、API/RN sourceはDraft・
 原文節のprivate previewは保存しない。DB専用guardとCMEE commitmentを分離し、commit時は短いSHARE NOWAIT lock内で全source/tierを照合。変更/削除で関連artifactを除去し、読取時も照合する。文章と図は同じ保存identityへ戻り、意味再生成0。Free latest lightのみ／履歴不可、Plus deep不可。read_onlyは有効保存版を維持する。
 
 `COCOLON_ANALYSIS_OBSERVED_MODE=off|read_only|development`（source既定off、稼働設定未変更）。月初半開期間、legacy履歴併存、safe本文一致検証を実装。既存/mymodel・cron・workerの旧builderは変更しておらず、global cutover・配置・本人入力一往復・nativeは次工程。詳細なDB照合・検証・残件はcanonical04 §15.1.2および06/API handoff末尾u96/u97。
+
+### 4.8 通常補足の分析採用と同一意味の集約（2026-10-04 u102）
+
+| Repository / existing file | 更新した責務 |
+|---|---|
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 通常補足の全文・本人・既存grammar解釈、exact evidence被覆、対立記述の保留。同じ意味の格順/丁寧語表記を一観測へ束ね、全evidenceと独立record件数を保持 |
+| mashos-api `ai/tests/test_cmee_analysis_v1d_vertical.py` | 追加7＋既存26＝33 PASS。文章/図、補足出典、非重複件数、無方向共起、未解釈/訂正混在/反対極性を確認 |
+
+通常補足も親recordの一機会で、別入力件数にしない。引用訂正/撤回の優先経路は維持。全文が読めない回答や矛盾の意図が未確定な回答を都合よく部分採用しない。新規path/owner/DB/DTO/RN/依存追加0。語彙は既存9動詞/名詞項に限定され、一般日本語・複数補足・意味annotation/比較/IFは残る。u102 sourceは未配置。実機OKはu101版に対するMash報告であり、修正版の本人実行や保存UUIDの華恋による照合ではない。
 
 ## 5. Source and artifact identity
 
