@@ -14,7 +14,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**u103 current**：指定Analysis API315f5b5…を開発配置済み、TestFlight6201送信済み、Mashが実機確認OKを報告した。内容改善としてu102の通常補足/同一意味集約に続き、明示された記録内順序と出来事の反復保持を実装（§4.9）。関連71検査と既存RN表示契約への一回の照合PASS。u102/u103修正版は未配置。以下のu94〜u97は配置前の履歴であり、再び配置/実機を内容修正の前提へ戻さない。
+**u104 current**：指定Analysis API315f5b5…を開発配置済み、TestFlight6201送信済み、Mashが実機確認OKを報告した。u102通常補足/同一意味集約、u103明示順序に続き、「今日/昨日」を元の記述時点へ結び付けて保持（§4.10）。関連80検査と既存RN表示契約への一回の照合PASS。u102〜u104修正版は未配置。以下のu94〜u97は配置前の履歴であり、再び配置/実機を内容修正の前提へ戻さない。
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
@@ -242,6 +242,17 @@ Mashの専用table承認に基づく。DB適用済み、API/RN sourceはDraft・
 | mashos-api `ai/tests/test_analysis_observed_storage.py` | 既存9＋追加1＝10 PASS。A→B→Aの3node/2edgeを保存・再読取で同一のまま保持、意味再生成/内部proposition漏出なし |
 
 saved period13/API6と合わせ71 PASS。既存RN validator/view modelへ新DTOを渡す一回の照合でbackend本文と完全一致。source/fieldを跨ぐ順序、記載順からの推測、因果化、独立recordを跨ぐ反復route集約は行わない。順序以外のu102同一意味集約は維持し、成立pair以外の不足を残す。新規file/契約/DB/RN変更0、source未配置。詳細はcanonical04 §3.4と06/API handoff末尾u103。
+
+### 4.10 明示された今日/昨日を記述時点へ保持（2026-10-04 u104）
+
+| Repository / existing file | 更新した責務 |
+|---|---|
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 完全SELF節の今日/昨日接頭辞をrelative_dayとexact source partsへ保持。元source/明示日ごとに集約し、別記録/補足の相対日を混ぜない。同一回答内の明示異日だけ対立候補を区別 |
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py` | 「この記述時点の今日/昨日」と表示。閲覧日・推定年月日へ置換せず、時制/否定/希望を保持 |
+| mashos-api `ai/tests/test_cmee_analysis_v1d_vertical.py` | 既存42＋追加8＝50 PASS。全節/evidence被覆、source別集約、補足対立、順序非推測、訂正/撤回、未解釈scopeを確認 |
+| mashos-api `ai/tests/test_analysis_observed_storage.py` | 既存10＋追加1＝11 PASS。相対日を含む保存DTO/文章を再解釈せず再読取、private項目漏出なし |
+
+saved period13/API6と合わせ80 PASS。既存RN contract/view modelでsafe DTOとbackend文章が一致。日語なしのu102集約とu103の順序occurrenceを継承。「昨日＋現在の希望」、任意時点/複数修飾は保留し、日語だけで順序や原因を作らない。新規path/owner/API/DB/DTO/RN/依存変更0、未配置。詳細はcanonical04 §3.5と06/API handoff末尾u104。
 
 ## 5. Source and artifact identity
 

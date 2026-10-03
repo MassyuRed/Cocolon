@@ -2,7 +2,7 @@
 
 - document id: `cocolon.cmee.v1d_v1e.analysis_route.detailed_design`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102/u103 content correctionは未配置
+- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u104 content correctionは未配置
 - IF-route runtime state: `NOT_IMPLEMENTED`
 - Analysis activation: `STORAGE_APPROVED_AND_APPLIED_2026_10_04_JST`; API315f5b5…配置済み、Mashが6201実機確認OKを報告
 - API source effect: V2保存・read分岐実装、default off
@@ -34,7 +34,7 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
-**2026-10-04 u103 current**：API315f5b5…がlive、TestFlight6201送信成功、Mashから実機確認OKの報告を受けた。内容修正として通常補足/同一意味集約（§3.3）に続き、明示された記録内順序を§3.4で実装。u102/u103 sourceは未配置。保存UUIDの独立実照合・global cutover・正式商品受入れを実機OK報告へ含めない。以下u94〜u97の配置前記述は各時点の履歴として保持する。
+**2026-10-04 u104 current**：API315f5b5…がlive、TestFlight6201送信成功、Mashから実機確認OKの報告を受けた。通常補足/同一意味集約（§3.3）、明示順序（§3.4）に続き、今日/昨日の記述時点保持を§3.5で実装。u102〜u104 sourceは未配置。保存UUIDの独立実照合・global cutover・正式商品受入れを実機OK報告へ含めない。以下u94〜u97の配置前記述は各時点の履歴として保持する。
 
 2026-10-03 u94更新：latest weekly §6.6〜6.10に沿い、offline source→部分graphに補足の明示引用訂正・撤回と本人向けsafe text／visual projectionを追加した。RNに閉じたDTOのvalidatorと専用renderer、latest／viewerのversion dispatchを実装。合成入力のbackend26検査、実RN componentを使う11検査、旧表示互換2検査PASS。全追加・変更fileの正本は`current_structure/03_analysis_current_structure.md` §4.5。u95で認証済みsaved period loader→ASTOR明示V2生成entryを追加し、13検査＋既存26検査PASS。u96/u97で専用保存と既存API接続を実装し、承認済みtableを実DBへ適用・照合した。稼働API配信・実ユーザー入力での実行・実機は未実施。
 
@@ -149,6 +149,14 @@ safe projectionは認証された本人向けのSELF_ONLY商品表示で、匿�
 順序の両端はevidence occurrenceで区別し、A→B→Aを3node/2edgeとして保つ。別recordの順序は集約せず、順序外の同一意味集約だけをu102から継承する。未解釈の中間節、別field/source、元入力と補足、撤回/置換箇所を橋渡ししない。通常補足内で成立する順序は元answerの出典へbindする。成立pairの不足表示だけを解消し、接続先不明はunknownのまま。
 
 §3.2の順序positive未完了をこの限定範囲で更新する。vertical42/storage10/saved period13/API6＝71 PASS、A→B→Aの保存・再読取と既存RN contract/view modelの本文一致を確認。新規API/DTO/DB/RN契約なし。一般時点表現/任意複文、複数記録での反復route解釈、annotations/conflict/期間比較/IFは未完了。未配置sourceの技術成立であり、正式商品受入れではない。
+
+### 3.5 u104 今日/昨日のsource-bound解釈
+
+既存の完全SELF有限節に付く単一接頭辞「今日」「昨日」を、relative_dayとsource_partsへ保持する。有限述語のpast/current_input、極性、fact/wishを上書きせず、「昨日＋現在の希望」は保留する。safe表示は「この記述時点の今日/昨日」とし、閲覧当日や推定した年月日に変換しない。
+
+日語付き観測はsource envelope＋明示日で分離し、同一source/同日の文法上同一内容だけをu102方式で集約する。順序参加節はu103のoccurrence分離を優先する。原入力のcreated_atを補足の記述日時へ流用しない。原入力と回答では異なる日語でも同じ実日を指す可能性があるため、対立する候補を日語だけで通さない。同一回答内の明示今日/昨日だけは別日として区別する。
+
+日語だけから順序edgeを作らず、後続節へ日を暗黙継承しない。引用訂正/撤回は日語を含む完全節へbindし、置換後の日は回答出典から解釈し直す。vertical50/storage11/saved period13/API6＝80 PASS、RN契約とbackend本文の一致を確認。§3.2の時点未対応をこの限定範囲で更新する。一般日時、主語後の日修飾、複数修飾/複文、annotations/conflict/比較/IFは残る。契約変更なし、source未配置。
 
 ## 4. Period source-set freeze
 
