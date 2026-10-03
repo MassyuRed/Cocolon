@@ -49,9 +49,9 @@ const PALETTES = {
     GOLD_BUTTON: "#B8860B", // Dark Goldenrod 系
     GOLD_BUTTON_BORDER: "#8B6914",
 
-    // ロゴ文字＆タイトル文字：ゴールド
-    TITLE_GOLD: "#D4AF37",
-    BRAND_GOLD: "#D4AF37",
+    // 枠の金色は維持し、文字は白背景で読める濃い金色にする。
+    TITLE_GOLD: "#8A6D1D",
+    BRAND_GOLD: "#8A6D1D",
 
     TEXT_ON_LIGHT: "#111827",
     TEXT_ON_DARK: "#F9FAFB",
@@ -76,9 +76,9 @@ const PALETTES = {
     GOLD_BUTTON: "#0B1120",
     GOLD_BUTTON_BORDER: "#1E3A8A",
 
-    // ロゴ文字＆タイトル文字：ネイビー
-    TITLE_GOLD: "#1E3A8A",
-    BRAND_GOLD: "#1E3A8A",
+    // 枠とボタンのネイビーは維持し、文字だけ青系の明度を上げる。
+    TITLE_GOLD: "#829AD6",
+    BRAND_GOLD: "#829AD6",
 
     TEXT_ON_LIGHT: "#F9FAFB",
     TEXT_ON_DARK: "#111827",

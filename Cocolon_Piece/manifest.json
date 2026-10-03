@@ -1,19 +1,22 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v14",
-  "generated_at": "2026-08-12 JST",
+  "schema_version": "cocolon.piece.workstream_manifest.v16",
+  "generated_at": "2026-09-30 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v13",
-    "predecessor_blob": "9df6e5ce25d127550e71c322ae6a1de46876c661",
-    "predecessor_head": "b3263b25a2105c9358318efdd1f2c274e052bdfb",
-    "carry_forward": "PCE-0 through PCE-9A B01 identities remain unchanged; this revision adds prospective Analysis role alignment only"
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v15",
+    "predecessor_blob": "9313af9bc94b3e5cce8dade7b2b9713526b56f52",
+    "predecessor_head": "98b3df26d9ca6076885d6d41d74745e540491e1a",
+    "carry_forward": "PCE-0 through B01 identities and B02A exact5/caller preimages remain unchanged; current file-only exact6 selectors and unchanged native acceptance are recorded without live apply or automatic B2B activation.",
+    "historical_scope": "Earlier pending states are historical. Current bounded B02A result is in phase_state and b02a_file_only_acceptance."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "96dd9c99fa27d539a02551b5343a749e88025099"
+    "git_blob_sha1": "844215255738f1d18a7226d1965e5249416bb4c7",
+    "raw_sha256": "b71c36781a37cb964561614d537db49c367f9ad8e8d7464970ac422b079d8fa3",
+    "utf8_bytes": 15171
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -51,10 +54,12 @@
     "pce9a_b01_red": "COMPLETE_TEST_ONLY_CAUSAL_RED",
     "pce9a_b01_implementation": "COMPLETE_CODE_DISABLED_TARGETED_GREEN",
     "pce9a_b01": "COMPLETE",
-    "pce9a_b02a": "NOT_ACTIVATED_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "pce9a_b02a": "FILE_ONLY_TECHNICAL_ACCEPTANCE_PASSED__LIVE_APPLY_0",
     "analysis_roadmap": "NOT_ACTIVATED_SEPARATE_MASH_APPROVAL_REQUIRED",
-    "next_piece_group": "B2_A_M0_TRACKED_BASELINE_AND_M1_LEGACY_READ_BRIDGE",
-    "automatic_packet_progression": false
+    "next_piece_group": "NO_AUTOMATIC_B02B_ACTIVATION__PRODUCT_PREVIEW_HTTP_RN_REMAIN",
+    "automatic_packet_progression": false,
+    "pce9a_b02a_red": "FROZEN_UNCHANGED__NATIVE_POSTGRESQL_1_PASS",
+    "pce9a_b02a_implementation": "EXACT5_PRESERVED__EXACT6_SELECTORS_PUBLISHED"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -136,27 +141,32 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "4979d8cf3590ec4e4a34db73dc583a953c89bf4e",
-    "cocolon_pre_sync_tree": "315d0984c453d428348e33494c487341eba00285",
-    "mashos_api_head": "7a10fc593b123cb9d9b02147c4b345894dba0c0b",
-    "mashos_api_tree": "842715d588c0573f0de5411dae62b8b8bb22f3a4",
+    "cocolon_pre_sync_head": "98b3df26d9ca6076885d6d41d74745e540491e1a",
+    "mashos_api_head": "1a215c511858a574bf76b15d0ed20ddce984744b",
+    "mashos_api_tree": "a216b862e786ad5900660bcef1e09395dea72b4d",
     "current_user_visible_piece_shape": "old_qna_piece_flow",
     "piece_v2_pure_contract_owner_present": true,
     "piece_v2_api_registration_present": false,
-    "piece_v2_migration_root_present": false,
+    "piece_v2_migration_root_present": true,
     "piece_v2_db_runtime_present": false,
     "piece_v2_rn_runtime_present": false,
     "piece_v2_feature_flags_present": false,
-    "production_database_catalog_drift_after_pce0": "UNCONFIRMED"
+    "production_database_catalog_drift_after_pce0": "UNCONFIRMED",
+    "b02a_causal_red_test_path": "ai/tests/piece_v2/db/test_b02_m0_m1_legacy_bridge.py",
+    "b02a_causal_red_test_present": true,
+    "b02a_causal_red_execution_credit": "FROZEN_UNCHANGED__NATIVE_ACCEPTANCE_1_PASS",
+    "b02a_required_implementation_exact5_present": true,
+    "b02a_exact6_reader_rebindings_published": true,
+    "b02a_native_postgresql_green": true
   },
   "next_group": {
     "id": "B2_A",
     "name": "M0_TRACKED_MIGRATION_BASELINE_AND_M1_LEGACY_READ_BRIDGE_CURRENT_CALLER_REBIND",
-    "environment": "CHAT_5_6_PRO_OK",
+    "environment": "CHAT_PRO_OK",
     "stronger_evidence_condition": "ISOLATED_DB_REQUIRED_FOR_MIGRATION_GREEN",
-    "first_lifecycle": "SEPARATELY_APPROVED_PACKET_SCOPED_PREFLIGHT_OR_CAUSAL_RED",
+    "first_lifecycle": "APPROVED_B2A_FILE_ONLY_BOUND_COMPLETED",
     "production_migration_apply_effect": 0,
-    "state": "NOT_ACTIVATED_SEPARATE_MASH_APPROVAL_REQUIRED",
+    "state": "FILE_ONLY_TECHNICAL_ACCEPTANCE_PASSED__LIVE_APPLY_0",
     "automatic_progression": false
   },
   "durable_history": {
@@ -167,15 +177,16 @@
     "pce8_owner": "Cocolon_Piece/pce8_design_freeze_work_packages/"
   },
   "sync_effects": {
-    "authority": "PCE9A_B01_COCOLON_WORKSTREAM_STATE_SYNC_DOC_ONLY",
-    "classification": "DOC_ONLY",
+    "authority": "PIECE_CURRENT_STRUCTURE_AND_B02A_RED_STATE_SYNC_DOC_ONLY",
+    "classification": "OBSERVED_BLOCKER_MINIMAL_FIX_DOCUMENTATION_NAVIGATION_ONLY",
     "cocolon_documentation_changed_path_count": 3,
     "mashos_api_change": 0,
     "test_execution": 0,
     "production_source_change": 0,
     "db_api_rn_migration_runtime_effect": 0,
     "analysis_or_emlis_state_effect": 0,
-    "release_effect": 0
+    "release_effect": 0,
+    "historical_scope": "This object records the earlier doc-only sync, not the 2026-09-30 continuation"
   },
   "technical_effects": {
     "b01_mashos_api_pure_source_addition": 1,
@@ -204,6 +215,110 @@
     "historical_bundle_change_count": 0,
     "cycle001_state_change_count": 0,
     "source_test_runtime_change_count": "0 / 0 / 0",
+    "automatic_progression": false
+  },
+  "current_structure": {
+    "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+    "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
+    "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
+    "git_blob_sha1": "2eecf34f36cb589c124f4de6961d3581704ce837",
+    "raw_sha256": "2819b38fad28e9b73a50a7a5e7a02ed7576eebc4c76f9c10e034f23d890494b6",
+    "utf8_bytes": 68259
+  },
+  "historical_actual_basis_before_b2a": {
+    "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
+    "cocolon_pre_sync_tree": "4e7901f8b3e10d20f242e19be91f6c725f625b2a",
+    "mashos_api_head": "a8ca4ddf7b7ae76bf7b3d73e74e3a5808d623428",
+    "mashos_api_tree": "a7f782e48e8ac0c97992c74e5a0c5a828f1a9e00",
+    "current_user_visible_piece_shape": "old_qna_piece_flow",
+    "piece_v2_pure_contract_owner_present": true,
+    "piece_v2_api_registration_present": false,
+    "piece_v2_migration_root_present": false,
+    "piece_v2_db_runtime_present": false,
+    "piece_v2_rn_runtime_present": false,
+    "piece_v2_feature_flags_present": false,
+    "production_database_catalog_drift_after_pce0": "UNCONFIRMED",
+    "b02a_causal_red_test_path": "ai/tests/piece_v2/db/test_b02_m0_m1_legacy_bridge.py",
+    "b02a_causal_red_test_present": true,
+    "b02a_causal_red_execution_credit": "UNVERIFIED",
+    "b02a_required_implementation_exact5_present": false
+  },
+  "b02a_partial_implementation": {
+    "approval_basis": "Mash continued after the expressly bounded B2-A proposal on 2026-09-27 JST; same-scope reapproval is not required",
+    "api_commit": "0ea9c99a8fcba9f017248237ccdb3abef0cce590",
+    "record": "https://github.com/MassyuRed/mashos-api/pull/3#issuecomment-5850801467",
+    "published_artifacts": [
+      "supabase/migrations/20260808_001_piece_v2_legacy_read_bridge.sql",
+      "supabase/migrations/README.md",
+      "supabase/migrations/manifest.json",
+      "requirements-piece-v2-test.txt",
+      "ai/tests/piece_v2/db/conftest.py"
+    ],
+    "exact6_readers_published": false,
+    "native_postgresql_acceptance": false,
+    "pglite_supplementary_previous_run": {
+      "passed": 17,
+      "failed": 0,
+      "not_native_acceptance": true
+    },
+    "historical_pce0_is_current_live_catalog": false,
+    "live_supabase_applied": false,
+    "b2b_authorized": false,
+    "automatic_progression": false,
+    "historical_scope": "2026-09-27 exact5 publication only; pending fields in this object remain historical, superseded by b02a_file_only_acceptance"
+  },
+  "b02a_document_sync": {
+    "status": "CURRENT_FILE_ONLY_EXACT6_AND_NATIVE_ACCEPTANCE_ALIGNED",
+    "target_files": [
+      "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+      "Cocolon_Piece/00_read_first.md",
+      "Cocolon_Piece/manifest.json"
+    ],
+    "api_product_effect": 0,
+    "verification_owner": "Fresh GitHub content, changed-path and final-head checks recorded in existing PR 30 conversation"
+  },
+  "b02a_file_only_acceptance": {
+    "api_commit": "1a215c511858a574bf76b15d0ed20ddce984744b",
+    "api_tree": "a216b862e786ad5900660bcef1e09395dea72b4d",
+    "exact5_preserved": true,
+    "exact6_reader_selectors_published": true,
+    "frozen_test_modified": false,
+    "test_path": "ai/tests/piece_v2/db/test_b02_m0_m1_legacy_bridge.py",
+    "native_postgresql": "16.15",
+    "psycopg": "3.3.6",
+    "pytest": "8.4.1",
+    "passed": 1,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "verified": [
+      "21-column security_invoker bridge",
+      "legacy pieces definition/options preserved",
+      "synthetic generated-row read",
+      "catalog mismatch rejected without bridge",
+      "transaction rollback"
+    ],
+    "all_http_rest_paths_verified": false,
+    "full_acl_matrix_verified": false,
+    "live_catalog_verified": false,
+    "live_supabase_applied": false,
+    "preview_http_rn_complete": false,
+    "product_acceptance": false,
+    "b2b_activated": false,
+    "automatic_progression": false,
+    "api_migration_readme_and_manifest_status": "historical 2026-09-27 candidate wording retained for frozen identity; current bounded state supersedes pending wording, not catalog baseline or caller preimages",
+    "verification_owner": "Fresh GitHub bytes, changed paths, parent and final heads in existing PR 3 / PR 30 summaries"
+  },
+  "current_sync_effects": {
+    "classification": "DIRECT_PRODUCT_OR_ACCEPTANCE_WORK",
+    "cocolon_changed_paths": 4,
+    "piece_documentation_paths": 3,
+    "emlis_handoff_paths": 1,
+    "api_changed_paths": 11,
+    "piece_selector_paths": 6,
+    "emlis_paths": 5,
+    "live_database_apply": 0,
+    "release_effect": 0,
     "automatic_progression": false
   }
 }

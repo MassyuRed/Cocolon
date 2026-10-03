@@ -1,6 +1,6 @@
 {
   "schema_version": "cocolon.work_attitude_rules.current.v3",
-  "revision_date": "2026-08-13",
+  "revision_date": "2026-08-15",
   "normative_status": "CURRENT",
   "status": "CURRENT_EFFECTIVE",
   "effective_when": "NECESSITY_PRODUCT_DIRECTNESS_AND_MINIMUM_SAFETY_BOUNDARY_REMOTE_POSTVERIFIED",
@@ -38,7 +38,16 @@
     "current_navigation": "../08_cycle001_current_state.md",
     "milestone_history_not_navigation": "../07_latest_snapshot_diff.md",
     "historical_baselines": "../historical_baselines/emlis_ai/",
-    "execution_facts": "actual source / protected test / body-free Receipt"
+    "execution_facts": "actual source / protected test / body-free Receipt",
+    "three_core_and_cmee_current_structure": {
+      "entry": "../current_structure/00_three_core_and_cmee_read_first.md",
+      "emlis_ai": "../current_structure/01_emlis_ai_current_structure.md",
+      "piece": "../current_structure/02_piece_current_structure.md",
+      "analysis": "../current_structure/03_analysis_current_structure.md",
+      "cmee": "../current_structure/04_cmee_current_structure.md",
+      "update_contract": "09_work_start_checklist.txt"
+    },
+    "current_navigation_ref_resolution": "fresh applicable ref required; audit-time working current is Cocolon Draft PR #29 @ 0854e21f92f841fd2cfdcef08b9e3117fc93f96a; after merge/head change re-resolve and never freeze this SHA as future current"
   },
   "current_workflow_policy": {
     "start_gate": "09_work_start_checklist.txt",
@@ -63,7 +72,8 @@
     "stable_design_review": "Pro review exact1 by default; bounded delta-only re-review only for material fresh actual, scope, product condition, cost-duration or remote-result change",
     "technical_candidate_owner": "Ultra Karen",
     "level2_standing_delegation": "Rule18 allowed scope only; Pro product-route alignment + Ultra initial/final technical design and TECHNICALLY_ADMISSIBLE; Ultra execution owner; post-work plain-language report",
-    "level3": "Pro plain-language decision brief + Ultra final technical body + Mash explicit decision / approval before first effect"
+    "level3": "Pro plain-language decision brief + Ultra final technical body + Mash explicit decision / approval before first effect",
+    "structure_map_update": "when EmlisAI, Piece, Analysis, or CMEE is affected: update affected map in same write unit, or STRUCTURE_MAP_DELTA_NONE with one-line reason; unrelated Cocolon work: NOT_APPLICABLE"
   },
   "current_reference_files": {
     "01_cocolon_business_life_funding_source.txt": "product / life-funding premise",
@@ -112,15 +122,30 @@
     ],
     "piece": [
       "11_cocolon_area_specific_do_not_break.txt",
+      "../current_structure/00_three_core_and_cmee_read_first.md",
+      "../current_structure/02_piece_current_structure.md",
       "../../Cocolon_Piece/00_read_first.md",
       "../../Cocolon_Piece/manifest.json"
     ],
     "analysis": [
       "11_cocolon_area_specific_do_not_break.txt",
+      "../current_structure/00_three_core_and_cmee_read_first.md",
+      "../current_structure/03_analysis_current_structure.md",
       "../../Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md"
     ],
     "api_db_rn_iap_account": [
       "../05_cocolon_rule_file_index.md"
+    ],
+    "emlis_ai": [
+      "11_cocolon_area_specific_do_not_break.txt",
+      "../current_structure/00_three_core_and_cmee_read_first.md",
+      "../current_structure/01_emlis_ai_current_structure.md"
+    ],
+    "cmee": [
+      "11_cocolon_area_specific_do_not_break.txt",
+      "../current_structure/00_three_core_and_cmee_read_first.md",
+      "../current_structure/04_cmee_current_structure.md",
+      "../designs/cmee/Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md"
     ]
   },
   "github_write_boundary": {
@@ -133,7 +158,7 @@
   },
   "piece_definition": {
     "qna_is_piece_identity": false,
-    "qna_role": "one_piece_format",
+    "qna_role": "pre_release_legacy_current_user_visible_not_new_active_format",
     "current_piece": "ユーザーの考えや価値観を他者に伝えるための文章へ整形し、画像化する機能",
     "current_owner": [
       "../../Cocolon_Piece/00_read_first.md",

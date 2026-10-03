@@ -2326,3 +2326,13 @@ DB physical schema / write path
 focused suite: 51 passed / 1 warning
 User Label Connection sanitizer focused: 1 passed / 1 warning
 ```
+
+## 2026-09-11 Q3 — 有料履歴・逐次質問・解釈フレーム
+
+Emlisは「今回の入力を読んだ観測→重要な一点の任意質問→本人回答で観測を深める」体験を担当する。回答・続行・フレーム操作は元入力に所属し、国家の入力件数・課金event・通知・Astor queueを増やさない。原入力の保存と既存fanoutは`emotion_submit_service`、履歴の閲覧期限は既存`publish_governance`が所有する。Piece／Analysisの入力許可、TodayQuestionの回答schema、旧I5 public wireを拡張しない。共有CMEE→既存Human Reception作者→Sentence Surface→独立逆検証の順を継承し、外部生成AIや別本文rendererは追加しない。
+
+Q3の全変更ownerと本文確認した影響先は[current structure / EmlisAIの末尾Q3節](current_structure/01_emlis_ai_current_structure.md)を参照。通常入力・履歴の専用modalから本人続行とフレーム編集を行い、sourceの所有者・現在権限をserverで確認する。共通基盤の認証、親入力削除、課金権限、履歴保持、旧I5経路との接点を保持する。
+
+Q1・Q2・Q3のコード実装を完了として記録し、次はQ4の実装統合、対象集合の初回/質問/回答後本文の確認と修正、旧client/保存版互換、公開用mode・単一生成ownerの接続準備、保存済み訂正を消さない停止・復旧のコードと検証へ進む。古いcandidate91単独修正ループやProduct Read PASS待ちへ戻さない。
+
+実DB適用、端末・実課金の環境確認、Mashの正式商品判断、merge/deploy/公開切替は、API `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md`へ分離した未実施作業。これらが未実施という理由だけでQ3/Q4のコード作業を停止しない。機械成功・華恋の本文確認・Mashの商品合格・公開を相互に代用しない。

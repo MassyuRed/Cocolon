@@ -1,0 +1,11 @@
+{
+  "name": "cocolon-emlis-q2-test-tools",
+  "private": true,
+  "dependencies": {
+    "react": "18.3.1",
+    "react-test-renderer": "18.3.1",
+    "@babel/core": "7.25.2",
+    "@babel/preset-react": "7.25.9",
+    "@babel/plugin-transform-modules-commonjs": "7.25.9"
+  }
+}
