@@ -41,8 +41,8 @@ export function useEmlisThread({ userId, enabled: explicitEnabled, api = emlisTh
     setState(s => ({ ...s, busy: true, error: "" }));
     try {
       const dto = method === "get"
-        ? await api.get(c.inputId, c.controller.signal)
-        : await api[method](body.threadId, body.payload, c.controller.signal);
+        ? await api.get(c.inputId, c.controller.signal, c.userId)
+        : await api[method](body.threadId, body.payload, c.controller.signal, c.userId);
       if (!active()) return false;
       // A GET that still sees an unanswered question cannot prove that a timed
       // out admission rolled back. Keep the original payload/key for a replay.
@@ -54,7 +54,7 @@ export function useEmlisThread({ userId, enabled: explicitEnabled, api = emlisTh
       return dto;
     } catch (error) {
       if (!active()) return false;
-      if (error?.status === 401 || error?.status === 404 || (method === "get" && error?.status === 409)) {
+      if (error?.name === "AccountChangedError" || error?.status === 401 || error?.status === 404 || (method === "get" && error?.status === 409)) {
         c.pending = null;
         setState(s => ({ ...s, dto: null, draft: "", uncertain: false, busy: false,
           error: "この観測は現在参照できません。" }));

@@ -508,3 +508,78 @@ test('RN bundle embeds only public API URLs and invalidates cached transforms on
   }
   assert.equal(cacheVersions.size, cases.length);
 });
+
+for (const method of ['get', 'answer', 'action', 'frame']) {
+  test(`Emlis ${method} binds delayed authentication to the reader owner`, async t => {
+    const sent = [];
+    t.mock.method(globalThis, 'fetch', async (url, options) => {
+      sent.push({ url, options });
+      return { ok: true, json: async () => options.method === 'GET' ? initial : completed };
+    });
+    for (const outcome of ['switched', 'logged-out', 'lookup-failed', 'same-owner']) {
+      let defer = false, finishSession, failSession;
+      const client = load('lib/apiClient.js', {
+        'react-native': { Platform: { OS: 'ios' } },
+        './supabase': { supabase: { auth: { getSession: () => defer
+          ? new Promise((resolve, reject) => { finishSession = resolve; failSession = reject; })
+          : Promise.resolve({ data: { session: { user: { id: 'owner' }, access_token: 'initial-token' } } }) } } },
+        './compat/legacyWireContracts': { readRuntimeApiBaseUrl: () => 'https://synthetic.invalid' },
+        './monitoring': { captureApiError: () => assert.fail('private thread error must not be reported') },
+      });
+      const { emlisThreadApi } = load('lib/api/emlisThreadApi.js', { '../apiClient': client });
+      const h = await mount(emlisThreadApi);
+      try {
+        await act(async () => h.value.open('input'));
+        await act(async () => h.value.setDraft('送信前の本人の回答'));
+        const before = sent.length;
+        defer = true;
+        let pending;
+        await act(async () => {
+          pending = method === 'get' ? h.value.refresh()
+            : method === 'answer' ? h.value.sendAnswer()
+              : method === 'action' ? h.value.action('skip')
+                : h.value.updateFrame({ frame_ref: 'frame' }, 'REVISED', '本人の訂正');
+        });
+        assert.equal(typeof finishSession, 'function');
+        assert.equal(sent.length, before);
+        // Auth notification/render has not arrived yet; only getSession has changed.
+        await act(async () => {
+          if (outcome === 'lookup-failed') failSession(new Error('session unavailable'));
+          else finishSession({ data: { session: outcome === 'logged-out' ? null : {
+            user: { id: outcome === 'switched' ? 'other-owner' : 'owner' }, access_token: 'refreshed-token',
+          } } });
+          await pending;
+        });
+        if (outcome === 'same-owner') {
+          assert.equal(sent.length, before + 1);
+          const request = sent.at(-1);
+          assert.equal(request.options.headers.Authorization, 'Bearer refreshed-token');
+          assert.equal(Object.hasOwn(request.options, 'expectedUserId'), false);
+          assert.equal(request.url, `https://synthetic.invalid/emlis/threads/${method === 'get' ? 'by-input/input' : `thread/${method === 'frame' ? 'frames' : method === 'answer' ? 'answers' : 'actions'}`}`);
+          if (method !== 'get') {
+            const body = JSON.parse(request.options.body);
+            assert.equal(body.expected_revision, initial.revision);
+            assert.ok(body.idempotency_key);
+            if (method === 'answer') assert.equal(body.answer_text, '送信前の本人の回答');
+            if (method === 'action') assert.equal(body.action, 'skip');
+            if (method === 'frame') assert.equal(body.correction_text, '本人の訂正');
+          }
+          assert.equal(h.value.dto, method === 'get' ? initial : completed);
+          assert.equal(h.value.error, '');
+        } else {
+          assert.equal(sent.length, before, `${outcome}: no request may use a different or missing session`);
+          assert.equal(h.value.dto, null);
+          assert.equal(h.value.draft, '');
+          assert.equal(h.value.uncertain, false);
+          assert.equal(h.value.pendingAction, false);
+          assert.equal(h.value.busy, false);
+          assert.ok(h.value.error);
+          await act(async () => h.value.replayPending());
+          assert.equal(sent.length, before);
+        }
+      } finally {
+        await act(async () => h.root.unmount());
+      }
+    }
+  });
+}

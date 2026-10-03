@@ -19,7 +19,13 @@ current_product_read_state: "EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFI
 candidate_ready: false
 ---
 
-> 2026-10-03現行方針：作業配分と実機接続の優先順は[最新weekly §6.6〜6.10](../weekly_reviews/Cocolon_Weekly_Review_20261003.md)を参照。10/03でEmlis品質改善枠を区切り、10/04以降のWork主枠は分析。自然さ・深さ等の全面改善を開発実機確認の前提にせず、Emlis接続は限定した共通接続作業として扱う。重大な意味反転・出典混同、保存・本人権限等の保護を維持する。未完成と明示した動作確認を正式商品受入れへ換算せず、0/3・NOT_CLEAR・default OFF・Draft/open/unmergedを保持。最新の限定修復・接続準備は正本06/API handoff末尾u79。
+> 2026-10-03現行方針：作業配分と実機接続の優先順は[最新weekly §6.6〜6.10](../weekly_reviews/Cocolon_Weekly_Review_20261003.md)を参照。10/03でEmlis品質改善枠を区切り、10/04以降のWork主枠は分析。自然さ・深さ等の全面改善を開発実機確認の前提にせず、Emlis接続は限定した共通接続作業として扱う。重大な意味反転・出典混同、保存・本人権限等の保護を維持する。未完成と明示した動作確認を正式商品受入れへ換算せず、0/3・NOT_CLEAR・default OFF・Draft/open/unmergedを保持。最新の限定修復・接続準備は正本06/API handoff末尾u80。
+
+## 2026-10-03 u80 — Emlis通信の本人と認証sessionを一致させる
+
+`screens/input/useEmlisThread.js`のcaptured user IDを、`lib/api/emlisThreadApi.js`のget/answer/action/frameから既存`lib/apiClient.js`の`expectedUserId`へ渡す。非同期の認証取得中に利用者が変わっても、前の利用者の要求を切替後の認証で送らない。送信前の`AccountChangedError`では旧DTO・下書き・pending操作を消し、通信不明の再送候補にしない。同一本人のtoken更新と既存の未知ACK再送は維持する。
+
+既存hook→専用API→共通clientの本人照合への配線修復。新owner/file/公開route/schema/保存/作者は追加・変更せず、server所有権確認は従来どおり。合成認証の遅延切替を4経路で再現し、既存bundleを含む27検査が成功。実機接続・本文品質の合格とは分け、結果と次の実機対象確認は正本06/API handoffのu80を参照する。
 
 ## 2026-10-03 u79 — 開発API接続先をRN bundleへ渡す既存設定
 
