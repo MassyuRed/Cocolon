@@ -349,3 +349,88 @@ test('unknown ACK labels the cached body as last confirmed, never current', asyn
   await act(async()=>root.update(React.createElement(Modal,{thread:{...thread,uncertain:false,busy:true},colors:{}})));out=JSON.stringify(root.toJSON());assert.match(out,/前回確認した観測/);assert.doesNotMatch(out,/現在の観測/);
   await act(async()=>root.unmount());
 });
+
+for (const configuredBase of [null, 'https://emlis-development.invalid///']) {
+  test(`history and saved Emlis use one API origin (${configuredBase ? 'development' : 'default'})`, async t => {
+    const wire = load('lib/compat/legacyWireContracts.js');
+    for (const key of wire.RUNTIME_COMPAT_ENV.apiBaseUrlKeys) {
+      const saved = process.env[key];
+      t.after(() => { if (saved === undefined) delete process.env[key]; else process.env[key] = saved; });
+      delete process.env[key];
+    }
+    if (configuredBase) process.env.EXPO_PUBLIC_API_BASE_URL = configuredBase;
+    const expectedBase = configuredBase ? 'https://emlis-development.invalid' : 'https://mashos-api.onrender.com';
+    const session = { user: { id: 'owner' }, access_token: 'synthetic-token' };
+    const auth = { supabase: { auth: { getSession: async () => ({ data: { session } }) } } };
+    const native = Object.fromEntries(['ActivityIndicator', 'KeyboardAvoidingView', 'Modal', 'ScrollView',
+      'RefreshControl', 'SafeAreaView', 'Text', 'TextInput', 'TouchableOpacity', 'View'].map(x => [x, x]));
+    let confirmDelete;
+    Object.assign(native, { Platform: { OS: 'ios' }, StyleSheet: { create: x => x },
+      Alert: { alert: (_title, _message, buttons) => { confirmDelete = buttons.find(b => b.style === 'destructive').onPress; } },
+      FlatList: ({ data, renderItem }) => React.createElement('List', null,
+        data.map(item => React.createElement(React.Fragment, { key: item.id }, renderItem({ item })))),
+    });
+    const client = load('lib/apiClient.js', { 'react-native': native, './supabase': auth,
+      './compat/legacyWireContracts': wire, './monitoring': { captureApiError: () => assert.fail('unexpected API error') } });
+    assert.equal(client.API_BASE_URL, expectedBase);
+    const { emlisThreadApi } = load('lib/api/emlisThreadApi.js', { '../apiClient': client });
+    const threadHook = load('screens/input/useEmlisThread.js', {
+      '../../lib/api/emlisThreadApi': { emlisThreadApi },
+      '../../AppRuntimeContext': { useAppRuntime: () => ({ isFeatureEnabled: key => key === 'emlis_threads_enabled' }) },
+    });
+    const Modal = load('screens/input/EmlisThreadModal.js', { 'react-native': native,
+      '../../components/CocolonButton': p => React.createElement('Button', p, p.children) }).default;
+    const Screen = load('screens/AnalysisHistoryScreen.js', {
+      'react-native': native, 'react-native-vector-icons/Ionicons': 'Icon',
+      '../components/CocolonBackButton': () => null, '../lib/supabase': auth,
+      '../theme/ThemeContext': { useTheme: () => ({ themeName: 'light', colors: {} }) },
+      '../ui/uiTokens': { makeUiTokens: () => ({}) }, '../ui/applyTypographyTokens': { applyTypographyTokens: x => x },
+      '../SubscriptionContext': { useSubscription: () => ({ tier: 'premium', loading: false }) },
+      '../lib/apiClient': client, '../lib/historyRetentionLabel': { getHistoryRetentionLabel: () => '' },
+      '../AuthContext': { useAuth: () => ({ session }) }, './input/useEmlisThread': threadHook,
+      './input/EmlisThreadModal': { default: Modal, __esModule: true },
+    }).default;
+    const row = { id: 'input', created_at: initial.original.created_at, memo: initial.original.memo, is_secret: false };
+    const calls = [];
+    let savedDto = { ...initial, can_write: true };
+    t.mock.method(globalThis, 'fetch', async (url, options) => {
+      calls.push({ url, options });
+      const route = new URL(url).pathname;
+      let value;
+      if (route === '/emotion/history/search') value = { items: [row], meta: { has_more: false } };
+      else if (route === '/emlis/threads/by-input/input') value = savedDto;
+      else if (route === '/emlis/threads/thread/answers') value = savedDto = { ...completed, can_write: true };
+      else if (route === '/emotion/secret' || route === '/emotion/history/input') value = {};
+      else assert.fail(`unexpected route: ${route}`);
+      return { ok: true, status: 200, json: async () => value, text: async () => JSON.stringify(value) };
+    });
+    let root;
+    t.after(async () => { if (root) await act(async () => root.unmount()); });
+    await act(async () => { root = Renderer.create(React.createElement(Screen)); });
+    const open = () => root.root.findByProps({ accessibilityLabel: 'この記録のEmlisの観測を開く' }).props.onPress();
+    await act(async () => open());
+    assert.match(JSON.stringify(root.toJSON()), /その時、どう感じましたか/);
+    await act(async () => root.root.findByProps({ accessibilityLabel: 'Emlisへの回答' }).props.onChangeText('今は嬉しい。'));
+    await act(async () => root.root.findAllByType('Button').find(b => b.props.children === '回答を送る').props.onPress());
+    assert.match(JSON.stringify(root.toJSON()), /更新した観測/);
+    await act(async () => root.root.findByProps({ accessibilityLabel: 'Emlisの観測を閉じる' }).props.onPress());
+    await act(async () => open());
+    assert.match(JSON.stringify(root.toJSON()), /更新した観測/);
+    await act(async () => root.root.findAllByType('TouchableOpacity').find(b =>
+      b.findAllByType('Icon').some(i => i.props.name === 'lock-open-outline')).props.onPress());
+    await act(async () => root.root.findAllByType('TouchableOpacity').find(b =>
+      b.findAllByType('Icon').some(i => i.props.name === 'trash-outline')).props.onPress());
+    await act(async () => confirmDelete());
+    assert.equal(root.root.findAllByProps({ accessibilityLabel: 'この記録のEmlisの観測を開く' }).length, 0);
+    assert.deepEqual(calls.map(({ url, options }) => [options.method, url]), [
+      ['POST', `${expectedBase}/emotion/history/search`], ['GET', `${expectedBase}/emlis/threads/by-input/input`],
+      ['POST', `${expectedBase}/emlis/threads/thread/answers`], ['GET', `${expectedBase}/emlis/threads/by-input/input`],
+      ['POST', `${expectedBase}/emotion/secret`], ['DELETE', `${expectedBase}/emotion/history/input`],
+    ]);
+    assert.ok(calls.every(c => c.options.headers.Authorization === 'Bearer synthetic-token'));
+    const submitted = JSON.parse(calls[2].options.body);
+    assert.equal(submitted.question_id, 'question'); assert.equal(submitted.answer_text, '今は嬉しい。');
+    assert.equal(submitted.expected_revision, initial.revision); assert.ok(submitted.idempotency_key);
+    assert.deepEqual(JSON.parse(calls[4].options.body), { emotion_id: row.id, is_secret: true, created_at: row.created_at });
+  });
+}

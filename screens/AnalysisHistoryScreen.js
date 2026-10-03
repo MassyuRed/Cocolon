@@ -24,9 +24,8 @@ import { useAuth } from "../AuthContext";
 import { useEmlisThread } from "./input/useEmlisThread";
 import EmlisThreadModal from "./input/EmlisThreadModal";
 
-const API_BASE = "https://mashos-api.onrender.com";
-const EMOTION_SECRET_URL = `${API_BASE}/emotion/secret`;
-const EMOTION_HISTORY_SEARCH_URL = `${API_BASE}/emotion/history/search`;
+const EMOTION_SECRET_URL = "/emotion/secret";
+const EMOTION_HISTORY_SEARCH_URL = "/emotion/history/search";
 
 // Phase2: no infinite scroll yet (Phase3). Keep this modest.
 const PAGE_LIMIT = 50;
