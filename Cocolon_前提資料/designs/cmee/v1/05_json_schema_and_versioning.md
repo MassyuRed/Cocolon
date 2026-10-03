@@ -1819,6 +1819,8 @@ included memberは`child_source_envelope_refs`に`ORIGINAL_INPUT` exact1と、�
 
 `AnalysisVisualPlan`はprivate planである。API / RNへは次のsafe projectionだけを渡し、private source / evidence identityを除外する。
 
+2026-10-03 u94補足：このDTOは認証された本人向けSELF_ONLY商品表示であり、匿名telemetry／外部共有用ではない。visible_labelは根拠にbindした名詞項・格・極性・modality／時点から再構成でき、意味上必要な本人入力の名詞を含みうる。raw bodyの複製、private source ID、evidence locator、source digestは含めない。unknown_gaps.between_node_refs、annotation_badges.target_ref、conflict_badges.target_refsをRN modelと文章にも保持し、同一ラベルのdedupeで対象関係を消さない。owner文字列一致は認証の代用ではなく、lifecycle ownerの認証／tier／retention／削除再検査が別途必要。u94はoffline producerとRN receiverまでで、実API配信は未接続。
+
 ```json
 {
   "$id": "cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1",

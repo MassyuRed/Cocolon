@@ -16,8 +16,8 @@ automatic_progression: false
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
-期間内の保存原入力形式からexact evidence付きの部分graphを生成し、同一artifactからprivate text／visual previewを返すところまで実装した。実DBからの期間読取、公開safe projection、API／RN接続、実機Product Readは未実装・未実行。
-previewは原文節を含む開発内部出力であり、公開用のwatashi.map.v2ではない。現行Watashi Mapの置換、IF、SavedRouteIntentは未実施。
+u94で保存補足の明示的な訂正・撤回、owner向けsafe projection、同一artifactの文章と図を読むRN受信・表示経路を追加した。合成入力からbackend生成DTOを実際のRN component／latest・viewerへ渡す検査まで成立。実DBからの期間読取、永続化と実API配信、実機Product Readは未実装・未実行。
+private previewは原文節を含む開発内部出力として分離し、watashi.map.v2は閉じたsafe DTOだけを専用rendererへ渡す。safeは認証された本人向け商品表示で、匿名共有ではない。現行Watashi Mapの稼働経路の置換、IF、SavedRouteIntentは未実施。
 このmapがAnalysisのcurrent ownerであり、旧混在資料01Bは歴史参照とする。Draft branch上の実装と稼働中productを区別する。
 
 ## 1. 商品目的
@@ -145,24 +145,42 @@ Current AnalysisComposerはcaller-supplied textをguardするadapterであり、
 
 current testsは主にpayload／label／presentation contractを守る。evidence-bound observed edgeまたはIF graphのauthority証明ではない。
 
-### 4.5 CMEE V1-D offline implementation（2026-10-03）
+### 4.5 CMEE V1-D offline implementation／RN受信（2026-10-03 u94）
 
-以下はすべてmashos-api内。prefixは`ai/services/ai_inference/cocolon_meaning_experience_engine/`。
+backend prefixはmashos-apiの`ai/services/ai_inference/cocolon_meaning_experience_engine/`。
 
 | File | Responsibility | State |
 |---|---|---|
 | `cores/__init__.py`、`cores/analysis/__init__.py` | Analysis専用consumerのpackage境界 | OFFLINE_IMPLEMENTED |
-| `cores/analysis/source_adapter.py` | 期間・owner・LIVE・version・補足親identityの検証、record重複排除、exact原文byte/scalar evidence | OFFLINE_IMPLEMENTED |
-| `cores/analysis/intent_compiler.py` | 共有semantic frameからAnalysis専用node／edge／unknown生成、独立した複数記録の同時出現 | PARTIAL_OBSERVED_IMPLEMENTED |
-| `cores/analysis/observed_route_realizer.py` | 不変artifact、同一identityのprivate text／visual preview、本文を含まないdiagnostics | PRIVATE_PREVIEW_ONLY |
-| `engine.py` | `AnalysisObservedMapRequest`の専用dispatch。既存Emlis／Piece経路を保持 | OFFLINE_ONLY |
-| `ai/tests/test_cmee_analysis_v1d_vertical.py`（repo相対） | 合成入力のsource→artifact、根拠・誤採用・非公開境界の18検査 | PASS_LOCAL |
+| `cores/analysis/source_adapter.py` | 期間・owner・LIVE・version・補足親identity、重複排除、exact byte/scalar evidence。置換節のparser viewは原answer envelopeの範囲へ戻す | OFFLINE_IMPLEMENTED |
+| `cores/analysis/intent_compiler.py` | 部分node／edge／unknown、独立記録の同時出現、対象occurrenceの訂正・撤回、格と有限述語operatorを保持するproposition | PARTIAL_OBSERVED_IMPLEMENTED |
+| `cores/analysis/observed_route_realizer.py` | 不変artifact、private previewと本人向けsafe text／visual projectionを別生成。unknown対象を保持 | OFFLINE_SAFE_PROJECTION_IMPLEMENTED |
+| `engine.py` | `AnalysisObservedMapRequest`専用dispatch。application modeは未許可 | OFFLINE_ONLY |
+| `ai/tests/test_cmee_analysis_v1d_vertical.py`（repo相対） | source／補足→artifact、operator、owner／evidence、safe表現の26検査 | PASS_LOCAL |
 
-`MAP_AND_EXPLORE / ANALYSIS_OBSERVED_MAP / OFFLINE_CANDIDATE`のみ受理する。本人の明示的な有限節から一部の行動・考えを採用し、場面・役割・結果など未成立部分をunknownとして保持する。同時出現線は無方向で原因を主張しない。順序線にはsource-boundの明示的時間関係が必要で、記録や配列の並びから生成しない。初回検証は同時出現を実測し、順序線のpositive cohortは未確認。
+RN側はCocolon repo相対。既存のlifecycle ownerを増やさず、受信済みprojectionの解釈と表示を分離する。
 
-保存補足の親version結合は実装済みだが、訂正・撤回の意味反映は未接続。期間内の補足がある場合は全体を`analysis_supplement_interpretation_pending`でUNAVAILABLEとし、訂正前の観測を返さない。引用・伝聞・条件・他者主体など未対応scopeは観測として確定しない。
+| File | Responsibility | State |
+|---|---|---|
+| `components/selfStructure/watashiMapV2Contract.js` | 閉じたDTO・version・参照整合性を検証し、同一graphから読み順・文章・表示modelを構成 | SOURCE_IMPLEMENTED |
+| `components/selfStructure/WatashiMapV2Renderer.js` | 観測node／同時出現／順序、対象を持つunknown／注記／競合、同一内容の読み上げ用文章 | SOURCE_IMPLEMENTED |
+| `components/selfStructure/watashiMapFormatters.js` | 旧v1専用。v2／private／不正・未知versionを旧map／旧本文へ戻さない | MODIFIED |
+| `components/selfStructure/watashiMapAccessPolicy.js` | 既存tier policyを使いv2のraw modeを検証。Free最新概要・Plus標準・Premium深いmap | MODIFIED |
+| `screens/SelfStructureReportGenerateScreen.js` | latest応答のversion dispatch。正しいDTOかつ許可modeのみ既読同期 | MODIFIED_RECEIVER_ONLY |
+| `screens/SelfStructureReportViewerScreen.js` | history/detail応答のversion dispatch。履歴／mode制限、不正JSON・privateの旧本文fallback拒否 | MODIFIED_RECEIVER_ONLY |
+| `screens/AnalysisContentFirstScreen.js` | latest embedded画面の既存caller | REVIEWED_UNCHANGED |
+| `tests/analysis-watashi-map-v2-contracts.test.js` | backend DTO→実component／latest・viewer、参照／tier／fallback／既読の11検査 | PASS_LOCAL |
+| `tests/fixtures/analysis-watashi-map-v2-synthetic.json` | backend生成の合成projection／text 2ケース。appのdummyデータではない | SYNTHETIC_TEST_ONLY |
 
-previewのschemaは`cocolon.cmee.analysis_private_preview.v1`、wireは`watashi.map.v2.private-preview`。原文由来の節を含むためpublic DTO／RN formatterへ渡さない。source-set取得の認証・tier・retention・削除再検査は将来のlifecycle callerの責任で、offline requestのowner文字列を認証と扱わない。
+`MAP_AND_EXPLORE / ANALYSIS_OBSERVED_MAP / OFFLINE_CANDIDATE`のみ受理する。本人の明示的な有限節から一部の行動・考えを採用し、場面・役割・結果など未成立部分をunknownとして保持する。同時出現線は無方向で原因を主張しない。順序線にはsource-boundの明示的時間関係が必要で、記録・配列順から生成しない。safe有限節grammarでは「昨日／その後」など時点接頭句は未対応であり、順序線のpositive cohortは未確認。
+
+補足は共有の引用撤回／置換grammarで、親recordの原fieldに一意の完全節として存在する対象だけを更新する。元発話も明示本人の観測であることを検証し、伝聞・質問を置換後に本人へ付け替えない。cross-record集約前に親occurrenceだけを取り除き、置換の否定・願望・時点を再解釈し、count／同時出現／unknownを再計算する。通常の追加回答、部分一致、曖昧対象、未対応置換はUNAVAILABLEとして旧観測を返さない。
+
+safeラベルは閉じた述語grammar（9動詞）と名詞項・格、極性、実行／願望、時点から再構成し、元節の全文・修飾語を黙って切り落として通さない。未対応意味はsafe projectionを生成できない。現段階は汎用日本語理解の完成ではなく、annotations／conflictの意味生成と期間比較も未完了。
+
+private previewは`cocolon.cmee.analysis_private_preview.v1`／`watashi.map.v2.private-preview`として開発内部だけに保つ。safe DTOはcanonical05の`cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1`／`watashi.map.v2`に限定し、raw body、private source ID、evidence locator、digestを持たない。意味項として本人入力の名詞を保つため、匿名telemetryや外部共有へ転用しない。source取得の認証・tier・retention・削除再検査は将来のlifecycle callerの責任で、offline requestのowner文字列を認証と扱わない。
+
+実DB期間loader、immutable保存、latest／history／detailの同一保存identity解決、実API配信はまだ接続していない。RNは応答受信時の準備でありnative画面確認ではない。旧renderer自体は保持し、IF／SavedRouteIntent／外部exportはHOLD。
 
 ## 5. Source and artifact identity
 

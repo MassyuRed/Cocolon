@@ -2,10 +2,11 @@
 
 - document id: `cocolon.cmee.v1d_v1e.analysis_route.detailed_design`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- observed-route runtime state: `PARTIAL_OFFLINE_IMPLEMENTED_PRIVATE_PREVIEW_ONLY`
+- observed-route runtime state: `PARTIAL_OFFLINE_SAFE_PROJECTION_AND_RN_RECEIVER_IMPLEMENTED`
 - IF-route runtime state: `NOT_IMPLEMENTED`
 - Analysis activation: `OFFLINE_IMPLEMENTATION_REQUESTED_2026_10_03`; public runtime未接続
-- API / DB / RN effect: `0`
+- API / DB / runtime activation effect: `0`
+- RN source effect: versioned safe DTO receiver / renderer implemented; native未確認
 
 ---
 
@@ -31,9 +32,9 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
-2026-10-03更新：最新weekly review §6.6〜6.10とMashの実装開始指示により、V1-Dのoffline source→部分observed graph→private text／visual previewを実装した。現在地と全追加fileは`current_structure/03_analysis_current_structure.md` §4.5を正本とする。保存補足は親version結合までで、補足を含む期間の意味生成は訂正・撤回解釈待ちのUNAVAILABLE。公開safe projection、実DB loader、API／RN、実機は未完了。
+2026-10-03 u94更新：latest weekly §6.6〜6.10に沿い、offline source→部分graphに補足の明示引用訂正・撤回と本人向けsafe text／visual projectionを追加した。RNに閉じたDTOのvalidatorと専用renderer、latest／viewerのversion dispatchを実装。合成入力のbackend26検査、実RN componentを使う11検査、旧表示互換2検査PASS。全追加・変更fileの正本は`current_structure/03_analysis_current_structure.md` §4.5。実DB loader・保存／実API配信・実機は未完了。
 
-次はsafeな意味表現と補足解釈を接続し、認証済み期間入力から開発画面で読む最小一本を進める。原文節を含むprivate previewを公開DTOへ昇格しない。IF／SavedRouteIntent／外部exportはHOLD。以下の旧順序は設計時の履歴であり、Emlis/Pieceの文章品質全体完了をV1-D開始の待機条件に戻さない。
+次は認証済み期間入力のloaderとimmutable artifact保存・API lifecycleを接続し、開発画面で読む最小一本を進める。原文節を含むprivate previewを公開DTOへ昇格しない。IF／SavedRouteIntent／外部exportはHOLD。以下の旧順序は設計時の履歴であり、Emlis/Pieceの文章品質全体完了をV1-D開始の待機条件に戻さない。
 
 設計時の順序：
 
@@ -44,7 +45,7 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 5. observed mapのProduct Read / lifecycle proof
 6. V1-E IF routeの別implementation / safety approval
 
-本設計反映からAnalysis route、latest/history、API、DB、RNを変更しない。
+設計のみの旧段階を越えてu94はRN sourceを変更した。API／DB／稼働cutoverは未実施。
 
 ## 2. Source model
 
@@ -107,18 +108,28 @@ event framing、route induction、annotation、period comparisonは`intent_compi
 | mashos-api | `ai/services/ai_inference/api_self_structure_reports.py` | `MODIFY_LATEST_HISTORY_DETAIL_TO_CANONICAL_REF` |
 | Cocolon RN | `components/selfStructure/WatashiMapRenderer.js` | `KEEP_HISTORICAL_V1_READ_RENDERER` |
 | Cocolon RN | `components/selfStructure/watashiMapFormatters.js` | `KEEP_V1_FORMATTER / DO_NOT_INTERPRET_V2_AS_V1` |
-| Cocolon RN | `screens/AnalysisSelfStructureScreen.js` | `MODIFY_VERSION_DISPATCH` |
+| Cocolon RN | `screens/AnalysisSelfStructureScreen.js` | `REVIEWED_EXISTING_CALLER`: v2受信はgenerate／viewer側 |
+| Cocolon RN | `screens/AnalysisContentFirstScreen.js` | `REVIEWED_EXISTING_EMBEDDED_GENERATE_CALLER` |
 | Cocolon RN | `screens/analysis/useAnalysisSelfStructureActions.js` | `MUST_MAP_BEFORE_CUTOVER`: generation / refresh / navigation actionをV2 identityへ接続 |
-| Cocolon RN | `screens/SelfStructureReportGenerateScreen.js` | `MUST_MAP_BEFORE_CUTOVER`: active generation version exact1を固定 |
-| Cocolon RN | `screens/SelfStructureReportViewerScreen.js` | `MODIFY_TO_STORED_ARTIFACT_IDENTITY` |
+| Cocolon RN | `screens/SelfStructureReportGenerateScreen.js` | `VERSION_RECEIVER_IMPLEMENTED`: 有効DTO／許可modeのみ既読。実API v2配信未接続 |
+| Cocolon RN | `screens/SelfStructureReportViewerScreen.js` | `VERSION_RECEIVER_IMPLEMENTED`: private／未知／不正JSONを旧本文へ戻さない。保存identity lifecycle未接続 |
 | Cocolon RN | `screens/SelfStructureReportHistoryScreen.js` | `MODIFY_TO_STORED_ARTIFACT_IDENTITY` |
 | Cocolon RN | `components/selfStructure/watashiMapAccessPolicy.js` | `KEEP_ACCESS_OWNER / VERIFY_SAFE_V2_PROJECTION` |
 | Cocolon RN | `lib/compat/legacyWireContracts.js` | `MUST_MAP_BEFORE_CUTOVER`: v2をv1 aliasへsilent変換しない |
-| Cocolon RN | `components/selfStructure/WatashiMapV2Renderer.js` | `PROPOSED_NEW_V1D_PATH` |
-| Cocolon RN | `components/selfStructure/WatashiMapRouteGraph.js` | `PROPOSED_NEW_V1D_PATH` |
-| Cocolon RN | `tests/analysis-watashi-map-v2-contracts.test.js` | `PROPOSED_NEW_VERSION_DISPATCH_TEST` |
+| Cocolon RN | `components/selfStructure/WatashiMapV2Renderer.js` | `IMPLEMENTED_SAFE_V2_RENDERER_SOURCE_ONLY` |
+| Cocolon RN | `components/selfStructure/watashiMapV2Contract.js` | `IMPLEMENTED_CLOSED_DTO_AND_TEXT_GRAPH_MODEL` |
+| Cocolon RN | `components/selfStructure/WatashiMapRouteGraph.js` | `NOT_MATERIALIZED`: 現段階のgraphはV2Renderer内。分割の必要性待ち |
+| Cocolon RN | `tests/analysis-watashi-map-v2-contracts.test.js`、`tests/fixtures/analysis-watashi-map-v2-synthetic.json` | `IMPLEMENTED_SYNTHETIC_BACKEND_TO_RN_TEST` |
 
 V1-D Phase fit-gapはfresh caller / writer / reader graphとexact filenamesを再確認し、上表からのdeltaをapprovalへ出す。V1-EのIF source、storage、API、RN filesは別approvalまでmaterialize 0である。
+
+### 3.2 u94 implementation limits
+
+引用付き補足の対象occurrenceは親recordの完全節へ一意にbindし、元の主体／伝聞／疑問scopeを検証してから集約前に撤回・置換する。answerのnew clauseは元answerのfield/hash/scalar/byteを保持するparser viewで、派生文を新sourceにしない。元の否定・願望は置換へ継承しない。未解釈の補足は期間全体をUNAVAILABLEとする。
+
+safeラベルは格を持つ名詞項と有限述語の型から再構成する。現段階は9動詞と限定名詞grammarの明示本人節のみで、任意の修飾／時点接頭句／複文は未対応。意味を削ってsafe化しない。生成不可を将来のlifecycle callerが扱う必要がある。annotations／conflict／期間比較と順序線のpositive cohortは未完了。
+
+safe projectionは認証された本人向けのSELF_ONLY商品表示で、匿名telemetryではない。意味項としてsource-bound名詞を保つが、原bodyやprivate source/evidence識別子は含めない。unknown／注記／競合は対象refを保持して図と文章へ出し、ラベルだけの重複排除で対象を消さない。端末側のtier検査は認証・server access policyの代用ではない。
 
 ## 4. Period source-set freeze
 

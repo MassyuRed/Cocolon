@@ -22,6 +22,9 @@ import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { apiFetch, apiGet, API_BASE_URL } from "../lib/apiClient";
 import { SELF_STRUCTURE_WIRE } from "../lib/compat/legacyWireContracts";
 import WatashiMapRenderer from "../components/selfStructure/WatashiMapRenderer";
+import WatashiMapV2Renderer from "../components/selfStructure/WatashiMapV2Renderer";
+import { classifyWatashiMapVersion, parseWatashiMapContent, readWatashiMapV2Projection } from "../components/selfStructure/watashiMapV2Contract";
+import { canViewWatashiMapMode, getWatashiMapDetailLockLabel } from "../components/selfStructure/watashiMapAccessPolicy";
 import {
   hasWatashiMapRenderableContent,
   normalizeWatashiMapPayload,
@@ -87,16 +90,7 @@ function defaultModeForTier(tier, allowedModes) {
 }
 
 function safeParseJson(raw) {
-  if (!raw) return null;
-  if (typeof raw === "object") return raw;
-  if (typeof raw === "string") {
-    try {
-      return JSON.parse(raw);
-    } catch {
-      return null;
-    }
-  }
-  return null;
+  return parseWatashiMapContent(raw);
 }
 
 function escapeHtml(s) {
@@ -338,12 +332,16 @@ const [loading, setLoading] = useState(true);
   const reportTitle = titleOverride || "今のわたしマップ";
 
   const contentJson = useMemo(() => safeParseJson(meta?.server_meta), [meta?.server_meta]);
+  const mapVersion = useMemo(() => classifyWatashiMapVersion(contentJson), [contentJson]);
+  const isLegacyMap = mapVersion === 'LEGACY';
   const fetchedReportMode = useMemo(() => {
     return normalizeSelfStructureMode(meta?.report_mode || contentJson?.report_mode || reportMode);
   }, [meta?.report_mode, contentJson?.report_mode, reportMode]);
+  const canViewVersionedMap = !tierLoading && canViewWatashiMapMode(subscriptionTier,
+    meta?.report_mode || contentJson?.report_mode || reportMode);
   const hasWatashiMapVisual = useMemo(() => {
-    return hasWatashiMapRenderableContent(contentJson);
-  }, [contentJson]);
+    return isLegacyMap && hasWatashiMapRenderableContent(contentJson);
+  }, [contentJson, isLegacyMap]);
   const watashiMapPayload = useMemo(() => {
     if (!hasWatashiMapVisual) return null;
     return normalizeWatashiMapPayload(contentJson, {
@@ -455,10 +453,13 @@ const run = useCallback(async ({ force = false } = {}) => {
 
     const json = await res.json();
     const serverMeta = safeParseJson(json?.meta);
-    const hasVisualContract = !!(serverMeta?.selfStructureDeepVisual || serverMeta?.watashiMap);
-    const text = sanitizeSelfStructureReportText(
+    const legacyResponse = classifyWatashiMapVersion(serverMeta) === 'LEGACY';
+    const versionedResponseDisplayable = !!readWatashiMapV2Projection(serverMeta)
+      && canViewWatashiMapMode(tier, json?.report_mode || effectiveMode);
+    const hasVisualContract = !legacyResponse || !!(serverMeta?.selfStructureDeepVisual || serverMeta?.watashiMap);
+    const text = legacyResponse ? sanitizeSelfStructureReportText(
       String(json?.content_text || "").trim()
-    );
+    ) : '';
     if (!text && !hasVisualContract) {
       throw new Error("わたしマップにできる観測がまだ少なめでした。");
     }
@@ -481,7 +482,7 @@ const run = useCallback(async ({ force = false } = {}) => {
       });
     });
 
-    if (typeof onLatestSeenVersion === "function") {
+    if ((legacyResponse || versionedResponseDisplayable) && typeof onLatestSeenVersion === "function") {
       try {
         const latestStatusJson = await apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus);
         const latestVersionKey = String(latestStatusJson?.version_key || "").trim();
@@ -672,6 +673,13 @@ const run = useCallback(async ({ force = false } = {}) => {
 
       {!loading && !errorMsg && (
         <>
+          {!isLegacyMap && canViewVersionedMap ? (
+            <WatashiMapV2Renderer contentJson={contentJson} colors={colors} isDark={isDark} />
+          ) : null}
+          {!isLegacyMap && !canViewVersionedMap ? (
+            <Text style={[styles.empty, themed.empty]}>{tierLoading ? 'プラン情報を確認しています…'
+              : getWatashiMapDetailLockLabel(subscriptionTier, fetchedReportMode)}</Text>
+          ) : null}
           {hasWatashiMapVisual ? (
             <WatashiMapRenderer
               contentJson={contentJson}
@@ -684,7 +692,7 @@ const run = useCallback(async ({ force = false } = {}) => {
             />
           ) : null}
 
-          {((reportText && (!hasWatashiMapVisual || shouldShowDetailText)) || (!hasWatashiMapVisual && !reportText)) ? (
+          {isLegacyMap && ((reportText && (!hasWatashiMapVisual || shouldShowDetailText)) || (!hasWatashiMapVisual && !reportText)) ? (
             <View style={[styles.bodyCard, themed.bodyCard]}>
               {hasWatashiMapVisual && reportText ? (
                 <Text style={[styles.sectionLabel, themed.sectionLabel]}>詳しい自己分析レポート</Text>
