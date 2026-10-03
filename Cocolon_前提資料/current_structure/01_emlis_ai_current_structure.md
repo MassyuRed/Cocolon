@@ -19,6 +19,8 @@ current_product_read_state: "EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFI
 candidate_ready: false
 ---
 
+> 2026-10-03現行方針：作業配分と実機接続の優先順は[最新weekly §6.6〜6.10](../weekly_reviews/Cocolon_Weekly_Review_20261003.md)を参照。10/03でEmlis品質改善枠を区切り、10/04以降のWork主枠は分析。自然さ・深さ等の全面改善を開発実機確認の前提にせず、Emlis接続は限定した共通接続作業として扱う。重大な意味反転・出典混同、保存・本人権限等の保護を維持する。未完成と明示した動作確認を正式商品受入れへ換算せず、0/3・NOT_CLEAR・default OFF・Draft/open/unmergedを保持。最新の限定修復は正本06/API handoff末尾u77。
+
 > 最新の実行結果と次作業は正本06末尾とAPI既存引継ぎを参照。商品NOT_CLEAR／既定OFF。以下は構造と過去時点の記録。
 > 2026-09-11 Q4現在地：修正版v1.2のQ4コード実装・統合・公開接続準備と今回の検証を完了。公開用mode・単一作者・旧client/保存版互換・停止復旧・bootstrap/RNを接続し、初回/肯定的回答/当時訂正と回答名詞化・時点の不具合を修正した。API179 PASS、RNは保存済み56 PASS。新しい保存22ケースを全文確認し、既存100件は全読済みの前版と全record一致。長い再掲・定型性など商品品質はNOT_CLEARとして保持する。現行結果は正本06とAPI既存handoffの末尾Q4 continuation節。実DB・端末・実課金・Mash正式判断・公開操作は別作業、既定OFF。
 
@@ -934,4 +936,5 @@ Human Reception作者、thread store/API、Q2/Q3 SQL、RN current readerは既�
 | `emlis_ai_grounded_observation_gate.py` | 実本文から二hostと独立性を読み、元の主体・時点・否定・行動候補を独立照合する。作者を呼び直して正解本文を得る検査へ置き換えない。 |
 
 STRUCTURE_MAP_DELTA_NONE。owner/file graph、新production file、renderer、source grammar、公開wire、質問／回答の採用条件、RN、保存、他中核・国家システムへのsource許可は同じ。2,573件の必須検査とsame100、保存329ケース616状態の最終結果、旧文面検査の失敗、未解消品質は[API既存引継ぎ](https://github.com/MassyuRed/mashos-api/blob/d3f67852e5f29a5713a507eece67d4dd6291eb1e/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)および正本06の同日節に保持する。変更した保存4件は問いのない初回FINALであり、回答後理解の改善とは呼ばない。商品NOT_CLEAR、Draft／既定OFF。
+
 
