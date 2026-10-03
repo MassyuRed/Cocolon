@@ -484,8 +484,13 @@ const run = useCallback(async ({ force = false } = {}) => {
 
     if ((legacyResponse || versionedResponseDisplayable) && typeof onLatestSeenVersion === "function") {
       try {
-        const latestStatusJson = await apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus);
-        const latestVersionKey = String(latestStatusJson?.version_key || "").trim();
+        // Mark the artifact actually displayed; a later status may name a
+        // different saved version generated concurrently on another device.
+        const latestStatusJson = legacyResponse
+          ? await apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus) : null;
+        const latestVersionKey = String(legacyResponse
+          ? latestStatusJson?.version_key || ""
+          : readWatashiMapV2Projection(serverMeta)?.projection_of || "").trim();
         if (latestVersionKey) {
           await onLatestSeenVersion(latestVersionKey);
         }

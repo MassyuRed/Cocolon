@@ -16,7 +16,7 @@ automatic_progression: false
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
-u94で保存補足の明示的な訂正・撤回、owner向けsafe projection、同一artifactの文章と図を読むRN受信・表示経路を追加した。合成入力からbackend生成DTOを実際のRN component／latest・viewerへ渡す検査まで成立。u95で既存の本人認証・保存入力RPCを使う期間loaderと、ASTOR内の明示V2生成entryを追加した。合成DB応答→実loader／CMEE→safe文章・図の検査まで成立。永続化と実API配信、実ユーザー入力での実行、実機Product Readは未実装・未実行。
+u94で保存補足の明示的な訂正・撤回、owner向けsafe projection、同一artifactの文章と図を読むRN受信・表示経路を追加した。合成入力からbackend生成DTOを実際のRN component／latest・viewerへ渡す検査まで成立。u95で既存の本人認証・保存入力RPCを使う期間loaderと、ASTOR内の明示V2生成entryを追加した。合成DB応答→実loader／CMEE→safe文章・図の検査まで成立。u96/u97で承認済み専用tableを実DBへ適用し、immutable保存と既存APIへのV2接続を実装・検証した（§4.7）。稼働APIの配置・機能有効化、実ユーザー入力での実行、実機Product Readは未実施。
 private previewは原文節を含む開発内部出力として分離し、watashi.map.v2は閉じたsafe DTOだけを専用rendererへ渡す。safeは認証された本人向け商品表示で、匿名共有ではない。現行Watashi Mapの稼働経路の置換、IF、SavedRouteIntentは未実施。
 このmapがAnalysisのcurrent ownerであり、旧混在資料01Bは歴史参照とする。Draft branch上の実装と稼働中productを区別する。
 
@@ -178,11 +178,11 @@ RN側はCocolon repo相対。既存のlifecycle ownerを増やさず、受信済
 
 safeラベルは閉じた述語grammar（9動詞）と名詞項・格、極性、実行／願望、時点から再構成し、元節の全文・修飾語を黙って切り落として通さない。未対応意味はsafe projectionを生成できない。現段階は汎用日本語理解の完成ではなく、annotations／conflictの意味生成と期間比較も未完了。
 
-private previewは`cocolon.cmee.analysis_private_preview.v1`／`watashi.map.v2.private-preview`として開発内部だけに保つ。safe DTOはcanonical05の`cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1`／`watashi.map.v2`に限定し、raw body、private source ID、evidence locator、digestを持たない。意味項として本人入力の名詞を保つため、匿名telemetryや外部共有へ転用しない。source取得の認証・tier・retention・削除再検査は将来のlifecycle callerの責任で、offline requestのowner文字列を認証と扱わない。
+private previewは`cocolon.cmee.analysis_private_preview.v1`／`watashi.map.v2.private-preview`として開発内部だけに保つ。safe DTOはcanonical05の`cocolon.cmee.analysis_watashi_map_safe_projection.v1alpha1`／`watashi.map.v2`に限定し、raw body、private source ID、evidence locator、digestを持たない。意味項として本人入力の名詞を保つため、匿名telemetryや外部共有へ転用しない。source取得の認証・tier・retention・削除再検査は§4.7のAPI/lifecycle ownerが担当し、offline requestのowner文字列を認証と扱わない。
 
-期間loaderのsource接続はu95で実装した。immutable保存、latest／history／detailの同一保存identity解決、実API配信はまだ接続していない。RNは応答受信時の準備でありnative画面確認ではない。旧renderer自体は保持し、IF／SavedRouteIntent／外部exportはHOLD。
+期間loaderのsource接続はu95、immutable保存とlatest／history／detailの同一保存identity解決はu96/u97で実装した。稼働API配信は未実施。RNは応答受信時の準備でありnative画面確認ではない。旧renderer自体は保持し、IF／SavedRouteIntent／外部exportはHOLD。
 
-### 4.6 保存入力からのread-only生成（2026-10-03 u95）
+### 4.6 保存入力からのread-only生成（2026-10-03 u95時点の履歴）
 
 すべてmashos-api repo相対。新しいservice／flag／routeを増やさず、既存material ownerとASTORへ置く。
 
@@ -200,6 +200,26 @@ ID取得は半開区間と`created_at.asc,id.asc`を固定し、count=exactと10
 再読取は観測可能な競合を拒否するが、DB保存transactionの保証ではない。新entryは未登録・未配置で、`/mymodel/infer`／worker／cronが使う旧builderは変更しない。API39検査（新13＋既存26）PASS。実DBユーザー入力を使った生成は未実行。
 
 保存は`NO_SAFE_ANALYSIS_V1D_STORAGE_STOP`。fresh DB catalogで既存myprofile_reportsの本人direct SELECT・全content_json、date uniqueと現行merge-upsertを確認した。private evidenceをそのまま追加できないため、canonical04 §15.1.1のbackend専用immutable table候補をMashの別判断へ出す。loaderまでのコード反映を専用保存の承認・実API接続へ換算しない。
+
+### 4.7 サーバー専用保存と既存API接続（2026-10-04 JST u96/u97）
+
+Mashの専用table承認に基づく。DB適用済み、API/RN sourceはDraft・稼働未配置。u95の保存方式判断待ちは解消した。
+
+| Repository / file | 責任・状態 |
+|---|---|
+| mashos-api `supabase/migrations/20261003134440_analysis_observed_artifacts.sql` | 新table1、immutable identity、server-only ACL、snapshot/commit/read、source変更無効化。実履歴20261003204421へ適用・照合済み |
+| mashos-api `ai/services/ai_inference/analysis_observed_service.py` | 新lifecycle owner。期間source→CMEE→closed evidence/safe文章・図の保存、読取時freshness、mode/期間別latest、既定off |
+| 同 `api_self_structure.py` | 認証後latest/status/monthlyのV2分岐。稼働への配置は未実施 |
+| 同 `report_artifact_read_service.py` | 旧履歴とV2のaccess後統合、同UUIDの詳細、プラン/不正V2拒否 |
+| 同 `api_report_reads.py` | 同じ可読履歴IDをunreadへ接続 |
+| mashos-api `ai/tests/test_analysis_observed_api.py`、`test_analysis_observed_storage.py` | 新HTTP 6＋保存9検査、通信だけ合成応答。既存39と計54 PASS |
+| mashos-api `ai/tests/analysis_observed_storage_sql.cjs` | 隔離Postgresへの実migrationと保存/ACL/変更・削除/競合前提31項目確認。外部一時test依存、製品依存変更なし |
+| Cocolon `screens/SelfStructureReportGenerateScreen.js` | 表示したV2 identityだけを既読化し、後続statusとのraceを除く |
+| Cocolon `tests/analysis-watashi-map-v2-contracts.test.js` | 上記既読race期待を更新、実component11 PASS。旧互換2 PASS |
+
+原文節のprivate previewは保存しない。DB専用guardとCMEE commitmentを分離し、commit時は短いSHARE NOWAIT lock内で全source/tierを照合。変更/削除で関連artifactを除去し、読取時も照合する。文章と図は同じ保存identityへ戻り、意味再生成0。Free latest lightのみ／履歴不可、Plus deep不可。read_onlyは有効保存版を維持する。
+
+`COCOLON_ANALYSIS_OBSERVED_MODE=off|read_only|development`（source既定off、稼働設定未変更）。月初半開期間、legacy履歴併存、safe本文一致検証を実装。既存/mymodel・cron・workerの旧builderは変更しておらず、global cutover・配置・本人入力一往復・nativeは次工程。詳細なDB照合・検証・残件はcanonical04 §15.1.2および06/API handoff末尾u96/u97。
 
 ## 5. Source and artifact identity
 

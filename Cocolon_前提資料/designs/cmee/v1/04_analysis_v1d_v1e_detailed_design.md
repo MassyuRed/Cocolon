@@ -2,10 +2,12 @@
 
 - document id: `cocolon.cmee.v1d_v1e.analysis_route.detailed_design`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- observed-route runtime state: `PARTIAL_OFFLINE_SAFE_PROJECTION_AND_RN_RECEIVER_IMPLEMENTED`
+- observed-route runtime state: `OBSERVED_STORAGE_AND_API_IMPLEMENTED_DEFAULT_OFF`
 - IF-route runtime state: `NOT_IMPLEMENTED`
-- Analysis activation: `SAVED_SOURCE_READ_ONLY_ENTRY_IMPLEMENTED_2026_10_03`; public runtime未接続
-- API / DB / runtime activation effect: `0`
+- Analysis activation: `STORAGE_APPROVED_AND_APPLIED_2026_10_04_JST`; API source接続済み・稼働未配置
+- API source effect: V2保存・read分岐実装、default off
+- DB effect: dedicated table 1 / migration 20261003204421 applied
+- production runtime activation effect: `0`
 - RN source effect: versioned safe DTO receiver / renderer implemented; native未確認
 
 ---
@@ -32,9 +34,9 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
-2026-10-03 u94更新：latest weekly §6.6〜6.10に沿い、offline source→部分graphに補足の明示引用訂正・撤回と本人向けsafe text／visual projectionを追加した。RNに閉じたDTOのvalidatorと専用renderer、latest／viewerのversion dispatchを実装。合成入力のbackend26検査、実RN componentを使う11検査、旧表示互換2検査PASS。全追加・変更fileの正本は`current_structure/03_analysis_current_structure.md` §4.5。u95で認証済みsaved period loader→ASTOR明示V2生成entryを追加し、13検査＋既存26検査PASS。保存／実API配信・実ユーザー入力での実行・実機は未完了。
+2026-10-03 u94更新：latest weekly §6.6〜6.10に沿い、offline source→部分graphに補足の明示引用訂正・撤回と本人向けsafe text／visual projectionを追加した。RNに閉じたDTOのvalidatorと専用renderer、latest／viewerのversion dispatchを実装。合成入力のbackend26検査、実RN componentを使う11検査、旧表示互換2検査PASS。全追加・変更fileの正本は`current_structure/03_analysis_current_structure.md` §4.5。u95で認証済みsaved period loader→ASTOR明示V2生成entryを追加し、13検査＋既存26検査PASS。u96/u97で専用保存と既存API接続を実装し、承認済みtableを実DBへ適用・照合した。稼働API配信・実ユーザー入力での実行・実機は未実施。
 
-次は§15.1.1の専用保存先についてMash判断を受け、immutable artifact保存・API lifecycleを接続して開発画面で読む最小一本を進める。原文節を含むprivate previewを公開DTOへ昇格しない。IF／SavedRouteIntent／外部exportはHOLD。以下の旧順序は設計時の履歴であり、Emlis/Pieceの文章品質全体完了をV1-D開始の待機条件に戻さない。
+専用保存先のMash判断はu96で承認され、§15.1.2の実装・DB適用まで完了した。次は指定API版の開発配置と本人入力から開発画面で読む一往復を進める。原文節を含むprivate previewを公開DTOへ昇格しない。IF／SavedRouteIntent／外部exportはHOLD。以下の旧順序は設計時の履歴であり、Emlis/Pieceの文章品質全体完了をV1-D開始の待機条件に戻さない。
 
 設計時の順序：
 
@@ -45,7 +47,7 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 5. observed mapのProduct Read / lifecycle proof
 6. V1-E IF routeの別implementation / safety approval
 
-設計のみの旧段階を越えてu94はRN sourceを変更した。API／DB／稼働cutoverは未実施。
+設計のみの旧段階を越えてRN/API sourceを変更し、専用DB schemaを適用した。稼働API配置・global cutoverは未実施。
 
 ## 2. Source model
 
@@ -99,21 +101,22 @@ event framing、route induction、annotation、period comparisonは`intent_compi
 |---|---|---|
 | mashos-api | `ai/services/ai_inference/astor_material_snapshots.py` | `SAVED_PERIOD_LOADER_IMPLEMENTED_READ_ONLY`: 認証・tier・元入力／補足・生成後再確認 |
 | mashos-api | `ai/services/ai_inference/analysis_engine_adapter.py` | `KEEP_MATERIAL_NORMALIZATION_PREIMAGE_ONLY / NOT_GRAPH_ORCHESTRATION_OWNER` |
-| mashos-api | `ai/services/ai_inference/astor_self_structure_report.py` | `EXPLICIT_READ_ONLY_V2_ENTRY_IMPLEMENTED`: 旧builderから分離。保存／cutover未実装、v1 fallbackなし |
+| mashos-api | `ai/services/ai_inference/astor_self_structure_report.py` | `EXPLICIT_READ_ONLY_V2_ENTRY_IMPLEMENTED`: u95内部preview。保存lifecycleはanalysis_observed_serviceへ分離、cutover未実施 |
 | mashos-api | `ai/services/ai_inference/watashi_map_service.py` | `HISTORICAL_V1_GENERATOR / RETIRE_ACTIVE_AT_V1D_CUTOVER` |
 | mashos-api | `ai/services/ai_inference/analysis_report_validity_gate.py` | `KEEP_PUBLISH_VALIDITY_GUARD / NOT_MEANING_OR_ROUTE_AUTHORITY / EXTEND_FOR_V2_IDENTITY` |
 | mashos-api | `ai/services/ai_inference/api_analysis_reads.py` | `MUST_MAP_BEFORE_CUTOVER`: tier / access / unread / refresh semanticsを保護 |
 | mashos-api | `ai/services/ai_inference/api_analysis_reports.py` | `MUST_MAP_BEFORE_CUTOVER`: report familyとのversion / identity境界を固定 |
-| mashos-api | `ai/services/ai_inference/api_self_structure.py` | `MODIFY_FOR_WATASHI_MAP_VERSION_DISPATCH` |
-| mashos-api | `ai/services/ai_inference/api_self_structure_reports.py` | `MODIFY_LATEST_HISTORY_DETAIL_TO_CANONICAL_REF` |
+| mashos-api | `ai/services/ai_inference/api_self_structure.py` | `IMPLEMENTED_DEFAULT_OFF`: latest/status/monthly V2保存read分岐 |
+| mashos-api | `ai/services/ai_inference/analysis_observed_service.py` / `report_artifact_read_service.py` / `api_report_reads.py` | `IMPLEMENTED_DEFAULT_OFF`: immutable保存、safe読取、旧履歴統合、unread同一ID |
+| mashos-api | `ai/services/ai_inference/api_self_structure_reports.py` | `DELEGATES_TO_UPDATED_READ_SERVICE`: existing route/response shape保持 |
 | Cocolon RN | `components/selfStructure/WatashiMapRenderer.js` | `KEEP_HISTORICAL_V1_READ_RENDERER` |
 | Cocolon RN | `components/selfStructure/watashiMapFormatters.js` | `KEEP_V1_FORMATTER / DO_NOT_INTERPRET_V2_AS_V1` |
 | Cocolon RN | `screens/AnalysisSelfStructureScreen.js` | `REVIEWED_EXISTING_CALLER`: v2受信はgenerate／viewer側 |
 | Cocolon RN | `screens/AnalysisContentFirstScreen.js` | `REVIEWED_EXISTING_EMBEDDED_GENERATE_CALLER` |
 | Cocolon RN | `screens/analysis/useAnalysisSelfStructureActions.js` | `MUST_MAP_BEFORE_CUTOVER`: generation / refresh / navigation actionをV2 identityへ接続 |
-| Cocolon RN | `screens/SelfStructureReportGenerateScreen.js` | `VERSION_RECEIVER_IMPLEMENTED`: 有効DTO／許可modeのみ既読。実API v2配信未接続 |
-| Cocolon RN | `screens/SelfStructureReportViewerScreen.js` | `VERSION_RECEIVER_IMPLEMENTED`: private／未知／不正JSONを旧本文へ戻さない。保存identity lifecycle未接続 |
-| Cocolon RN | `screens/SelfStructureReportHistoryScreen.js` | `MODIFY_TO_STORED_ARTIFACT_IDENTITY` |
+| Cocolon RN | `screens/SelfStructureReportGenerateScreen.js` | `VERSION_RECEIVER_IMPLEMENTED`: 有効DTO／許可modeのみ既読。API source接続済み・稼働未配置 |
+| Cocolon RN | `screens/SelfStructureReportViewerScreen.js` | `VERSION_RECEIVER_IMPLEMENTED`: private／未知／不正JSONを旧本文へ戻さない。保存identity lifecycle source接続済み・稼働未配置 |
+| Cocolon RN | `screens/SelfStructureReportHistoryScreen.js` | `EXISTING_UUID_READER_REUSED`: V2 UUIDを同じhistory/detailで使用 |
 | Cocolon RN | `components/selfStructure/watashiMapAccessPolicy.js` | `KEEP_ACCESS_OWNER / VERIFY_SAFE_V2_PROJECTION` |
 | Cocolon RN | `lib/compat/legacyWireContracts.js` | `MUST_MAP_BEFORE_CUTOVER`: v2をv1 aliasへsilent変換しない |
 | Cocolon RN | `components/selfStructure/WatashiMapV2Renderer.js` | `IMPLEMENTED_SAFE_V2_RENDERER_SOURCE_ONLY` |
@@ -581,7 +584,7 @@ V1-Eのfirst storage candidateは、Analysis lifecycle ownerが`watashi.if-route
 
 V1-E safe projectionはcanonical IF / Saved identityからAnalysis access ownerが生成する。IF / SavedのAPI / RN pathとstorage exact ownerはV1-E separate approvalでfresh固定し、それまでmaterialize 0である。
 
-### 15.1.1 u95 actual storage fit-gapと別判断候補（未承認）
+### 15.1.1 u95 actual storage fit-gapと別判断候補（当時未承認、u96承認済み）
 
 2026-10-03にSupabase `cocolon-project` のcatalog／columns／constraints／grants／policies／view定義だけをread-only確認した。ユーザー行・入力本文は読んでいない。
 
@@ -604,6 +607,18 @@ V1-E safe projectionはcanonical IF / Saved identityからAnalysis access owner�
 | 進め方 | この保存方式の判断後にmigration／serializer／保存RPCとAPI差分を実装・検証。現在のPR反映からDB適用・公開cutoverへ自動進行しない |
 
 既存tableのdirect SELECT権限と全旧writerを変える方式より、分析専用の1 tableへ限定する方が変更範囲が小さいため推奨する。旧table全体の権限を黙って剥奪して設計条件を満たしたことにはしない。
+
+### 15.1.2 u96/u97 承認済み保存実装・DB適用
+
+Mashの同じDBへのserver専用table1追加承認により、上記案を実装した。実migration `20261003204421 / analysis_observed_artifacts`、source `supabase/migrations/20261003134440_analysis_observed_artifacts.sql`。14列・14制約・4 index・6関数・5 triggerを事後照合し、関数body全文一致。RLS有効、anon/authenticated直接権限0。private evidenceのsource refs/commitmentと既に生成したsafe text/projectionを保存し、原入力JSON/private node labelは保存しない。
+
+新owner `analysis_observed_service.py` がSQL snapshot→既存CMEE→closed serializer→atomic commit→safe readを担当。DB guardはCMEE commitmentと別namespace。READ COMMITTED＋auth KEY SHARE NOWAIT＋4source表SHARE NOWAITで全cohort/tierを再照合する。生成はlock外。競合409・ACK不明503。source/補足変更・削除、account削除で関連artifactを除去し、read時も再照合。table lockは他user書込にも短く競合し得る。
+
+既存latest/status/monthly/history/detail/unreadへ同じ保存identityを接続。読取で意味を生成し直さず、保存text/graphの一致を検証。旧履歴はaccess後に混在表示し、Free履歴とPlus deepをserverで拒否する。status/latestはmode＋期間で選別してからlimit。RN既読は表示したprojection_ofに固定。
+
+`COCOLON_ANALYSIS_OBSERVED_MODE`はoff既定／read_only保存読取／development生成保存。稼働envは未変更。monthly include_secret=false/now_isoは未対応400。旧/mymodel・cron/workerは今回変更しておらず、下記global単一owner cutoverの完了ではない。
+
+Python54、RN11＋旧互換2、隔離PGlite31項目PASS。実ユーザー入力の生成・稼働APIの保存往復・複数接続負荷・nativeは未確認。適用応答待ちの停止からの再開経緯、実権限、既知範囲、次の指定API開発配置は06/API handoff末尾u96/u97に記録。全file mapはAnalysis map §4.7。
 
 ### 15.2 One-owner cutover
 

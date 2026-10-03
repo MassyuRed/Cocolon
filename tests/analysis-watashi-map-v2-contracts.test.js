@@ -160,8 +160,8 @@ test('latest seen advances only for an admitted v2 projection and an allowed mod
     const body = JSON.stringify(render.toJSON());
     assert.equal(body.includes('watashi-map-v2'), item.admitted, item.mode);
     assert.ok(!body.includes('DO_NOT_DISPLAY_OLD_BODY'));
-    assert.equal(statusReads, Number(item.admitted));
-    assert.deepEqual(seen, item.admitted ? ['synthetic-version'] : []);
+    assert.equal(statusReads, 0, 'V2 must not mark a concurrently newer status as seen');
+    assert.deepEqual(seen, item.admitted ? [fixtures[0].projection.projection_of] : []);
     await act(async () => render.unmount());
   }
 });
