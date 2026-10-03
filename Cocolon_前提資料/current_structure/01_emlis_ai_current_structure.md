@@ -19,7 +19,11 @@ current_product_read_state: "EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFI
 candidate_ready: false
 ---
 
-> 2026-10-03現行方針：作業配分と実機接続の優先順は[最新weekly §6.6〜6.10](../weekly_reviews/Cocolon_Weekly_Review_20261003.md)を参照。10/03でEmlis品質改善枠を区切り、10/04以降のWork主枠は分析。自然さ・深さ等の全面改善を開発実機確認の前提にせず、Emlis接続は限定した共通接続作業として扱う。重大な意味反転・出典混同、保存・本人権限等の保護を維持する。未完成と明示した動作確認を正式商品受入れへ換算せず、0/3・NOT_CLEAR・default OFF・Draft/open/unmergedを保持。最新の接続確認は正本06/API handoff末尾u89とAPI運用資料§16。Q2/Q3と指定API配置済み。iOS run #59はfmtのcompileで停止し未送信。既存Podfileへ互換修正を加え、修正版の新しいRun workflowによるnative確認が次。
+> 2026-10-03現行方針：作業配分と実機接続の優先順は[最新weekly §6.6〜6.10](../weekly_reviews/Cocolon_Weekly_Review_20261003.md)を参照。10/03でEmlis品質改善枠を区切り、10/04以降のWork主枠は分析。自然さ・深さ等の全面改善を開発実機確認の前提にせず、Emlis接続は限定した共通接続作業として扱う。重大な意味反転・出典混同、保存・本人権限等の保護を維持する。未完成と明示した動作確認を正式商品受入れへ換算せず、0/3・NOT_CLEAR・default OFF・Draft/open/unmergedを保持。最新の接続確認は正本06/API handoff末尾u90とAPI運用資料§17。Q2/Q3と指定API配置済み。修正版iOS run #60はarchive/IPA成功、TestFlight送信工程で失敗。次は取得できていない送信エラー詳細の確認。
+
+## 2026-10-03 u90 — native archive成功、TestFlight送信エラーの詳細待ち
+
+修正SHA5266c80…のrun #60でPods・archive・IPA exportが成功し、fmt互換修正を実native buildで確認した。Upload to TestFlightはfailureで、Apple側受領・配布可能性・実機は未確認。GitHub詳細ログ取得がTransport closedのため、次は同stepの実エラー部分を確認する。今回は既存記録のみ、`STRUCTURE_MAP_DELTA_NONE`。正本06/API handoffのu90、API運用資料§17を参照。
 
 ## 2026-10-03 u89 — 実機用ビルドのfmt互換修正
 
