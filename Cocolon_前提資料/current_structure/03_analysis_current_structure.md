@@ -14,7 +14,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**u111 candidate**：指定Analysis API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承。「私は会議の司会を担当した／担当しなかった」等の過去の担当4形をROLEへ接続（§4.17）。共有event/factと本人の完全節・文境界を照合し、能力/恒久身分/仕事の完了を推測しない。5種類のnodeを同一記録から表示する検査を含む関連129検査と既存RN本文一致を確認。u102〜u111修正版は未配置。以下の配置前記録は当時の履歴であり、実機再確認を内容修正の前提へ戻さない。
+**u112 candidate**：同じ原入力のSELF過去factにある肯定・否定を、対象2node付き未確定表示へ接続（§4.18）。同source/field/相対日/完全命題だけを比較し、同一機会や真偽は断定しない。訂正/撤回後の原証拠、保存再読取、既存RNの同じ文章/図を保持。関連135検査・RN11検査、6合成本文の一致を確認。u102〜u112修正版は未配置。指定API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承する。
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
@@ -335,6 +335,15 @@ saved period13/API6と合わせ129 PASS、359 subtests PASS。6合成本文の�
 
 名詞copula「私は司会者です」からROLEを推論しない。現在/未来/願望/可能/推測/伝聞/他者/引用/夢/未解釈修飾/疑問名詞、今日/昨日/その後付き担当、memo_actionの担当は今回対象外。「私は記録を担当した」は共有側が名詞keyword由来でactionにするため未対応として保留。新規file/共有owner/API/DB/DTO/RN/依存変更0、file配置不変。詳細はcanonical04 §3.12と06/API handoff末尾u111。一般ROLE・注記/conflict/期間比較/IFは未完了。u102〜u111は未配置。
 
+
+### 4.18 同じ原入力の肯定・否定を対象付き未確定表示へ接続（2026-10-04 u112）
+
+既存intent_compilerが同じ原入力の正負を別nodeとして保持しても不一致を表示しない不足を修正。SELF・past factのSCENE/ROLE/ACTION_OR_NONACTIONに限定し、同source/field/相対日・完全な命題内容で肯否だけが違う記述をObservedConflictへ結ぶ。別record、別field/day/対象、願望/認識、明示順序の参加evidence、接続語付きnode、従属形は比較しない。
+
+両nodeとexact evidenceを保持し、「同じ記録に肯定と否定の記述があります。同じ機会のことかは確定していません」と既存conflict_badgesへ表示。真偽・同一機会・心理的葛藤を決めず、訂正/撤回を先に適用する。通常補足の正負不一致の保留は維持。既存observed_route_realizerのprivate/safe文章・図、analysis_observed_serviceのprivate evidence allowlist/保存validatorへ接続し、旧空badgeも再生成なしで読める。
+
+vertical97/storage19/saved period13/API6＝135 PASS、379 subtests PASS。既存RN11 PASS、6合成出力のbackend/RN本文・identity・順序・badge件数一致。2件read-only reviewでblocking指摘なし。Auth/DBは合成検証。新規path/DTO/RN/SQL/依存変更0、未配置。一般的な矛盾理解、protective/burden注記、期間比較、IFは残る。詳細はcanonical04 §3.13と06/API handoff末尾u112。
+
 ## 5. Source and artifact identity
 
 ### 5.1 Grounded sources
@@ -443,12 +452,12 @@ missing reasonとscopeを持つ別claim／gap marker。observed factを作るた
 
 ## 9. Current gaps
 
-1. V1-Dのoffline実装を開始済み。公開safe surfaceと補足の訂正・撤回解釈を最小の次工程とする。
+1. V1-Dの生成・safe表示・補足・保存/API/RN接続は実装済み。稼働指定版への実機OKはMash報告。u102〜u112の内容修正版は未配置。
 2. current Watashi Mapはpresentation-orientedで、claim／edge evidence graph authorityではない。
-3. 初回部分graphにexact evidenceを結合済み。全段階・annotations・conflict・期間比較の意味実装は未完了。
+3. 五種類の限定nodeと原証拠、同一原入力の正負の未確定表示を接続済み。一般的な各段階/矛盾理解、protective/burden注記、期間比較は未完了。
 4. IF route／HypotheticalScenarioGraph／SavedRouteIntentのruntime ownerはexact0。
 5. Analysis専用Product Read packetとactual-device IF map verificationは未実行。
-6. 認証済み期間source loader、保存lifecycle、API、開発画面、実機一往復は未接続。今回の18検査PASSを商品完成へ換算しない。
+6. 保存identityの独立した実照合、修正版の実DB/端末検証、旧経路からのglobal cutoverと正式商品受入れは未完了。機械検証を商品完成へ換算しない。
 
 CMEE Analysis detailed design candidate:
 

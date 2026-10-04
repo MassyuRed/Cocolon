@@ -2,7 +2,7 @@
 
 - document id: `cocolon.cmee.v1d_v1e.analysis_route.detailed_design`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u111 content correctionは未配置
+- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u112 content correctionは未配置
 - IF-route runtime state: `NOT_IMPLEMENTED`
 - Analysis activation: `STORAGE_APPROVED_AND_APPLIED_2026_10_04_JST`; API315f5b5…配置済み、Mashが6201実機確認OKを報告
 - API source effect: V2保存・read分岐実装、default off
@@ -34,7 +34,7 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
-**2026-10-04 u111 candidate**：指定API315f5b5…/TestFlight6201と実機OKのMash報告を継承。明示SELFの過去の担当4形を、共有event/factと完全節・文境界からROLE表示へ接続（§3.12）。関連129検査・既存RN本文一致を確認。u102〜u111修正版は未配置。保存UUIDの独立実照合・global cutover・正式商品受入れを実機OK報告へ含めない。以下の配置前記述は各時点の履歴。
+**2026-10-04 u112 candidate**：同じ原入力のSELF過去factにある肯定・否定を、対象2node付き未確定表示へ接続（§3.13）。同source/field/相対日/完全命題だけを比較し、同一機会や真偽は断定しない。訂正/撤回後の原証拠、保存再読取、既存RNの同じ文章/図を保持。関連135検査・RN11検査、6合成本文の一致を確認。u102〜u112修正版は未配置。指定API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承する。
 
 2026-10-03 u94更新：latest weekly §6.6〜6.10に沿い、offline source→部分graphに補足の明示引用訂正・撤回と本人向けsafe text／visual projectionを追加した。RNに閉じたDTOのvalidatorと専用renderer、latest／viewerのversion dispatchを実装。合成入力のbackend26検査、実RN componentを使う11検査、旧表示互換2検査PASS。全追加・変更fileの正本は`current_structure/03_analysis_current_structure.md` §4.5。u95で認証済みsaved period loader→ASTOR明示V2生成entryを追加し、13検査＋既存26検査PASS。u96/u97で専用保存と既存API接続を実装し、承認済みtableを実DBへ適用・照合した。稼働API配信・実ユーザー入力での実行・実機は未実施。
 
@@ -223,6 +223,15 @@ u110の共有generic event witnessと文境界処理を共通化。explicit/curr
 場面/役割/考え/行動/結果を同じ記録から残しても、段階の順序を自動生成しない。後続「その後/それから＋本人過去行動」や既存action/change pairだけが既存の明示順序へ接続する。補足全文・同じ担当の反対極性保留・全文訂正/撤回・独立記録件数・正負別node・保存後の同一文章/図を維持。内部型はDB/公開DTO/RNへ追加しない。
 
 前置時点、現在/未来/願望/可能、他者/疑問/引用/伝聞/推測/夢/未解釈修飾、memo_actionは対象外。「記録を担当した」のような名詞keyword由来のshared actionも今回保留。関連129検査・359 subtests、6合成本文の既存RN一致を確認。一般ROLE理解、注記/比較/IF、商品受入れと稼働配置は未完了。
+
+
+### 3.13 u112 同じ原入力内の肯定・否定と未確定な機会
+
+既存のconflict_badges契約へ、同じ原入力source/field/相対日にある、完全命題が同じSELF過去factの正負を接続する。対象は既存SCENE/ROLE/ACTION_OR_NONACTION。元の記録を同じ機会だと断定せず、真偽を選ばず、両nodeを対象とした未確定表示にする。別record/field/day/対象、明示順序参加、接続語、従属形、願望/認識は除外する。通常補足の正負不一致は従来どおり保留し、引用訂正/撤回の除外を比較より先に適用する。
+
+ObservedConflictはtarget_refs・exact evidence_refs・閉じたreasonを持つAnalysis内部型。private保存は証拠位置とhash等のallowlistだけで、原文/名詞/propositionを加えない。safe DTOは既存conflict_ref/target_refs/visible_labelだけ。本文は同じDTOから組み、既存RNと一致させる。保存validatorは非空badgeの形・2対象・重複・表示文を確認し、旧空badgeの読取時再生成は行わない。DB/DTO/RN契約変更なし。
+
+135検査・379 subtestsと既存RN11検査PASS、6合成出力の同じ本文/identity/順序/badge件数を確認。Auth/DB I/Oは合成で、今回の修正版は未配置。§3.2のconflict未接続をこの限定範囲で更新する。一般的矛盾・注記・期間比較・IFの完成ではない。
 
 ## 4. Period source-set freeze
 

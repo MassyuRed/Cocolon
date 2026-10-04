@@ -71,8 +71,8 @@ CMEEは設計候補がlocal artifactに留まり、GitHub上のdurable ownerが�
 |---|---|---|---|
 | EmlisAI構造 | [01_emlis_ai_current_structure.md](01_emlis_ai_current_structure.md) | 入力を「読まれた形」の観測へ変え、必要な場合だけ一点を問い、回答分だけ観測を深める | production観測／受け取りはCURRENT_ACTUAL。問い／refined observationはQ1〜Q3コード実装済み、Q4統合が次。環境適用・商品判断は別作業 |
 | Piece構造 | [02_piece_current_structure.md](02_piece_current_structure.md) | 保存済み入力を、他者が単独で受け取れるcanonical textと画像artifactへ変える | current user-visibleはold Q&A。Piece V2はCODE_DISABLED／DESIGNED_NOT_IMPLEMENTED |
-| 分析構造 | [03_analysis_current_structure.md](03_analysis_current_structure.md) | 蓄積入力から現在の自己構造routeを根拠付きで示し、観測routeと分離したIF routeを扱う | V1-D指定API/6201は実機OKのMash報告あり。u111で明示SELFの過去の担当4形をROLE表示へ接続。5種類のnodeを同一記録から表示。関連129検査・RN本文一致。u102〜u111は未配置。旧経路併存/IF未実装。詳細は03 §4.7〜4.17 |
-| CMEE | [04_cmee_current_structure.md](04_cmee_current_structure.md) | exact3の商品に共通するsource・意味・plan・realization・traceを持つ共有生成中枢 | core別currentは各map・最新06を参照。Analysisの指定API/6201は実機OKのMash報告あり。u111は共有event/factと完全な担当節を照合しROLEへ限定消費。保持優先度shouldと根拠を分離。関連129検査・RN本文一致。修正版未配置、技術成立/本人報告と商品合格を分離 |
+| 分析構造 | [03_analysis_current_structure.md](03_analysis_current_structure.md) | 蓄積入力から現在の自己構造routeを根拠付きで示し、観測routeと分離したIF routeを扱う | V1-D指定API/6201は実機OKのMash報告あり。u112は同じ原入力の肯定/否定を、同一機会とは決めず対象付き未確定表示へ接続。関連135検査・RN11検査・6本文一致。u102〜u112は未配置。旧経路併存/注記/比較/IFは残る。詳細は03 §4.18 |
+| CMEE | [04_cmee_current_structure.md](04_cmee_current_structure.md) | exact3の商品に共通するsource・意味・plan・realization・traceを持つ共有生成中枢 | core別currentは各map・最新06を参照。Analysis u112は既存原証拠のSELF過去factの正負を限定比較し、両根拠・訂正/撤回・保存後の同一本文/図を保持。共有意味owner変更0。関連135検査・既存RN11検査。修正版未配置、技術成立/本人報告と商品合格を分離 |
 
 CMEEは技術上first-classに育てる共有Engine targetであるが、独立したuser-facing商品目的を持たないため、商品構造上の「第四の中核」ではない。商品中核はEmlisAI／Piece／分析構造のexact3である。
 
