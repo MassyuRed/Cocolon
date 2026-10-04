@@ -14,9 +14,9 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**u124 現在地**：指定API42ff019…はlive。Mashの新しい端末画面はanalysis_observed_map_unavailableで、同時刻のlatest/ensureは422・supabase_errors=0。生成エンジンが成果物を返さない理由は既存ログで失われていたため、既存realizerにcurrent/previous/comparisonと固定理由だけを記録する修正を用意した。本文/ID/任意例外文字列は記録せず、生成条件・422・保存・公開DTOは維持。関連186検査PASS、独立review blocking0。診断版は未配置であり、本人生成/保存再表示・期間比較成功は未成立。診断版APIの指定commitは `c4db3a3aae70d906ccb7a0c44c4862692b5287c1`。次はAPI運用§28の指定commit配置と本人端末からの再取得で実理由を確認する。DB/env/native変更は不要。詳細は06末尾u124。
+**u125 現在地**：診断版API `c4db3a3aae70d906ccb7a0c44c4862692b5287c1` は09:08:07Z（JST18:08）にlive（deploy `dep-db11ebe0tbcc7392hjn0`）。healthz200/status=ok、bootstrap200、未認証status401を実確認。起動直後の限定ログでapp/errorと固定診断ログは各0件。本人生成/保存再表示・期間比較成功は未確認。次は現在の端末アプリを開き直して **分析 → わたしマップ** を一度表示し、失敗が続いた場合は固定stage/reasonから原因を確認する。追加DB/env/native変更は不要。詳細はAPI運用§29・06末尾u125。
 
-**配置済みの基盤**：比較SQLはu120で共有DBへ適用・照合済み（実履歴20261004051211）。内容修正版API `42ff019975a5d94c3c6de2a63623fb0864630ed4` はJST16:12のdeploy `dep-db0vo2ou01pc73c5psa0` でlive。development2値はMashの設定手順報告で独立取得なし。実機の新しいエラーは生成分岐への到達を示すが、比較modeの値や比較成功を独立証明しない。TestFlight1.0(6301)送信成功、画像にbuild番号なし。u122のRN正常空表示修正は未build。商品受入れ・IF/global cutoverは未成立。以下のlegacy経路/過去節の未配置記述は当時の履歴で、最新状態はこの結論を参照する。
+**配置済みの基盤**：比較SQLはu120で共有DBへ適用・照合済み（実履歴20261004051211）。u102〜u118内容修正版を含む上記診断版APIが稼働中。development2値はMashの設定手順報告で独立取得なし。u124の実機422は生成分岐への到達を示すが、比較modeの値や比較成功を独立証明しない。TestFlight1.0(6301)送信成功、前回画像にbuild番号なし。u122のRN正常空表示修正は未build。商品受入れ・IF/global cutoverは未成立。以下のlegacy経路/過去節の未配置記述は当時の履歴で、最新状態はこの結論を参照する。
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
@@ -541,7 +541,7 @@ missing reasonとscopeを持つ別claim／gap marker。observed factを作るた
 
 ## 9. Current gaps
 
-1. V1-Dの生成・safe表示・補足・保存/API/RN接続とu102〜u118の内容修正版は配置済み。u124の実機422は未解決で、原因確認用の限定ログ修正は未配置。
+1. V1-Dの生成・safe表示・補足・保存/API/RN接続とu102〜u118の内容修正版は配置済み。u124の実機422は未解決で、原因確認用の限定ログ修正をu125で配置済み。次は端末からの再取得と固定理由の確認。
 2. current Watashi Mapはpresentation-orientedで、claim／edge evidence graph authorityではない。
 3. 五種類の限定node、原証拠、不一致の未確定表示、明示現在負荷と守る意向の注記を接続済み。一般的な各段階/矛盾/負荷/保護理解と解釈仮説は未完了。期間比較は永続保存/API接続まで実装し、SQL適用済み。development手順はMash報告、本人生成/期間比較の実機成功は未成立。
 4. IF route／HypotheticalScenarioGraph／SavedRouteIntentのruntime ownerはexact0。
