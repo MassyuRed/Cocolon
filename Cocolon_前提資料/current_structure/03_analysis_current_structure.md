@@ -14,7 +14,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**u125 現在地**：診断版API `c4db3a3aae70d906ccb7a0c44c4862692b5287c1` は09:08:07Z（JST18:08）にlive（deploy `dep-db11ebe0tbcc7392hjn0`）。healthz200/status=ok、bootstrap200、未認証status401を実確認。起動直後の限定ログでapp/errorと固定診断ログは各0件。本人生成/保存再表示・期間比較成功は未確認。次は現在の端末アプリを開き直して **分析 → わたしマップ** を一度表示し、失敗が続いた場合は固定stage/reasonから原因を確認する。追加DB/env/native変更は不要。詳細はAPI運用§29・06末尾u125。
+**u126 現在地**：診断版API `c4db3a3aae70d906ccb7a0c44c4862692b5287c1` は稼働中。Mash再確認後のJST18:14の2件はいずれも `stage=current reason=analysis_observed_route_not_established` / latest422・supabase_errors0。今回期間のgraphが要素0件で、前期間比較前に停止。空期間か全文未解釈かは未確定。本人記録の件数/本文有無の読取は、自動承認レビューで明示的読取許可不足として拒否され、取得なし。次は直近28日の件数と必要時最大3件の原入力の非公開読取についてMashの確認を得る。再deploy/build/同じ端末操作は今は不要。本文/IDは公開しない。生成復旧・本人保存再表示・商品受入れは未成立。詳細はAPI運用§30・06末尾u126。
 
 **配置済みの基盤**：比較SQLはu120で共有DBへ適用・照合済み（実履歴20261004051211）。u102〜u118内容修正版を含む上記診断版APIが稼働中。development2値はMashの設定手順報告で独立取得なし。u124の実機422は生成分岐への到達を示すが、比較modeの値や比較成功を独立証明しない。TestFlight1.0(6301)送信成功、前回画像にbuild番号なし。u122のRN正常空表示修正は未build。商品受入れ・IF/global cutoverは未成立。以下のlegacy経路/過去節の未配置記述は当時の履歴で、最新状態はこの結論を参照する。
 
@@ -541,7 +541,7 @@ missing reasonとscopeを持つ別claim／gap marker。observed factを作るた
 
 ## 9. Current gaps
 
-1. V1-Dの生成・safe表示・補足・保存/API/RN接続とu102〜u118の内容修正版は配置済み。u124の実機422は未解決で、原因確認用の限定ログ修正をu125で配置済み。次は端末からの再取得と固定理由の確認。
+1. V1-Dの生成・safe表示・補足・保存/API/RN接続とu102〜u118の内容修正版は配置済み。u124の実機422は未解決で、原因確認用ログでcurrentの要素0件まで絞れた。空期間/未解釈の区別に必要な本人記録読取の確認待ち。
 2. current Watashi Mapはpresentation-orientedで、claim／edge evidence graph authorityではない。
 3. 五種類の限定node、原証拠、不一致の未確定表示、明示現在負荷と守る意向の注記を接続済み。一般的な各段階/矛盾/負荷/保護理解と解釈仮説は未完了。期間比較は永続保存/API接続まで実装し、SQL適用済み。development手順はMash報告、本人生成/期間比較の実機成功は未成立。
 4. IF route／HypotheticalScenarioGraph／SavedRouteIntentのruntime ownerはexact0。
