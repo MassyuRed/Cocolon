@@ -14,9 +14,9 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**u127 現在地**：明示許可された直近28日の集計で今回期間が空と確認。本文取得なし。正常な空snapshotを生成未成立422にしていたAPIを修正し、既存の正常空envelope（refreshed=false・保存なし）へ接続した。記録ありの未解釈/前期間失敗・DB/Auth障害は維持。API191/RN17検査成功、独立read-only reviewでblockingなし。修正版APIは未配置で、liveは診断版c4db3a3…のまま。端末にはu122画面修正を含む新TestFlight buildも必要（6301未収録）。次はPR3先頭の固定commit指定配置と、PR30 branchで新規iOS build。本人の開始操作希望を維持。正常空表示と、本人入力からの実生成・保存再表示・比較成功を区別する。詳細はAPI運用§31・06末尾u127。
+**u128 現在地**：空期間を422にしていた処理の修正版API `1a42b9ebc25ba9765bdb17658cf47dd631d9f40d` は、既存Renderのdeploy dep-db146o2d0e5s73e1bc3gでJST21:16:55 live。healthz/bootstrap200、未認証status401を確認。u122正常空画面修正を含む **TestFlight 1.0（6401）** もJST21:35:58送信成功。run64/37201625245、実source `166343c0b160e787b857a7b9d407b6f0afce756d`、archive/export/uploadとrun全体success。次は新版の端末導入と、記録のない状態で「現在表示できるわたしマップはありません。」の正常表示確認。Apple側利用可能/端末導入・本人実応答は未確認。生成・保存再表示・比較の実成功とは分ける。詳細はAPI運用§32・06末尾u128。
 
-**配置済みの基盤**：比較SQLはu120で共有DBへ適用・照合済み（実履歴20261004051211）。u102〜u118内容修正版を含む上記診断版APIが稼働中。development2値はMashの設定手順報告で独立取得なし。u124の実機422は生成分岐への到達を示すが、比較modeの値や比較成功を独立証明しない。TestFlight1.0(6301)送信成功、前回画像にbuild番号なし。u122のRN正常空表示修正は未build。商品受入れ・IF/global cutoverは未成立。以下のlegacy経路/過去節の未配置記述は当時の履歴で、最新状態はこの結論を参照する。
+**配置済みの基盤**：比較SQLはu120で共有DBへ適用・照合済み（実履歴20261004051211）。上記APIにu102〜u118の内容修正版・u124診断・u127空期間処理を含む。development2値はMashの設定手順報告で、値の独立取得はしていない。u127のAPI191/RN17検査成功は合成検証として継承。6401は正常空表示修正を含み、旧6301とは区別する。商品受入れ・IF/global cutoverは未成立。以下のlegacy経路/過去節の未配置記述は当時の履歴で、最新状態はこの結論を参照する。
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
@@ -541,7 +541,7 @@ missing reasonとscopeを持つ別claim／gap marker。observed factを作るた
 
 ## 9. Current gaps
 
-1. V1-Dの生成・safe表示・補足・保存/API/RN接続とu102〜u118の内容修正版は配置済み。許可された集計で今回期間の不在を確認し、空snapshotを422にしていたAPIをu127で補正。修正版APIの配置とu122画面修正を含む新nativeの導入・正常空表示の実機確認が残る。実生成は後日の本人通常入力で別途確認する。
+1. V1-Dの生成・safe表示・補足・保存/API/RN接続とu102〜u118の内容修正版は配置済み。許可された集計で今回期間の不在を確認し、空snapshotを422にしていたAPIをu127で補正。修正版APIの配置とu122画面修正を含む6401のTestFlight送信はu128で成功。新版の端末導入・正常空表示の実機確認が残る。実生成は本人の通常入力後に別途確認する。
 2. current Watashi Mapはpresentation-orientedで、claim／edge evidence graph authorityではない。
 3. 五種類の限定node、原証拠、不一致の未確定表示、明示現在負荷と守る意向の注記を接続済み。一般的な各段階/矛盾/負荷/保護理解と解釈仮説は未完了。期間比較は永続保存/API接続まで実装し、SQL適用済み。development手順はMash報告、本人生成/期間比較の実機成功は未成立。
 4. IF route／HypotheticalScenarioGraph／SavedRouteIntentのruntime ownerはexact0。
