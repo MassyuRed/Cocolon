@@ -14,7 +14,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**u105 current**：指定Analysis API315f5b5…を開発配置済み、TestFlight6201送信済み、Mashが実機確認OKを報告した。u102〜u104の補足/集約/順序/相対日に続き、共有ownerが認定する現在の認識を「考え・注意」へ接続（§4.11）。可能性の内容を実行済みへ昇格せず、関連89検査とRN表示契約照合PASS。u102〜u105修正版は未配置。以下のu94〜u97は配置前の履歴であり、再び配置/実機を内容修正の前提へ戻さない。
+**u107 local candidate**：指定Analysis API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承。u106の未成立結果に続き、「本人の過去行動＋後/あと＋明記された変化」の完全な2節を行動・結果nodeと順序線へ接続（§4.13）。原因や改善とは解釈しない。関連104検査と既存RN表示契約の本文一致を確認。u106/u107の計9 file差分は自動承認審査による公開先への明示許可不足でGitHub未反映、u102〜u107修正版は未配置。以下の配置前記録は当時の履歴であり、実機再確認を内容修正の前提へ戻さない。
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
@@ -264,6 +264,28 @@ saved period13/API6と合わせ80 PASS。既存RN contract/view modelでsafe DTO
 | mashos-api `ai/tests/test_analysis_observed_storage.py` | 既存11＋追加1＝12 PASS。保存した考えの文章/DTOを再生成せず読取、内部possible_contentの漏出なし |
 
 saved period13/API6と合わせ89 PASS。既存RN contract/view modelとbackend本文が一致。共有意味ownerは変更せず既存認定helperを参照。限定補文でのみ同じ9動詞の辞書形/否定形も扱い、主文の有限grammarは維持。場面/役割/結果、一般認識、過去/否定host、背景・複文の完成ではない。新規file/契約/DB/RN/依存変更0、未配置。canonical04 §3.6と06/API handoff末尾u105を参照。
+
+### 4.12 明記された未成立の結果を表示へ接続（2026-10-04 u106）
+
+| Repository / existing file | 更新した責務 |
+|---|---|
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 共有present_unfinished完全節witnessと限定名詞/格/否定状態解釈を両方要求。actor未指定のNOT_YETを結果nodeへ接続し、全出典/助詞/述語を保持 |
+| 同 `observed_route_realizer.py` | 未成立状態を「まだ〜っていない（この記述時点）」として再構成。実行/未実行や原因を補わない |
+| mashos-api `ai/tests/test_cmee_analysis_v1d_vertical.py` | 既存58＋追加7＝65 PASS。型/全文evidence、未知部分、非順序、集約、補足/訂正/撤回、共有witness必須、疑問/未解釈scope保留 |
+| mashos-api `ai/tests/test_analysis_observed_storage.py` | 既存12＋追加1＝13 PASS。結果の文章/DTOをcommit後も同一identityで再読取、再生成0・内部型の非漏出 |
+
+saved period13/API6と合わせ97 PASS。合成6出力の既存RN view modelとbackend本文が一致。対応はmemoの完全な「まだ＋名詞句＋は/が/も＋見つかる/決まる/定まるの現在否定状態」。主体/先行行動/因果/順序は推測しない。共有意味owner/API/DB/DTO/RN/依存変更0、未配置。一般結果・複文・場面/役割・annotations/conflict/比較/IFは未完了。canonical04 §3.7と06/API handoff末尾u106を参照。
+
+### 4.13 明示された行動の後の変化を接続（2026-10-04 u107、local未反映）
+
+| Repository / existing file | 更新した責務 |
+|---|---|
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 同一memo spanの2核・required typed relation・exact範囲・完全なSELF過去行動と名詞の有限変化・後/あと接続を全て要求。片側未解釈なら行動だけも採らない。順序の元全文証拠、occurrence分離、補足全文と全文訂正/撤回を保持 |
+| 同 `observed_route_realizer.py` | 型から「疑問が減った（記録された変化）」等へ再構成。増減を改善/悪化と評価せず、既存の原因を主張しない順序表示を利用 |
+| mashos-api `ai/tests/test_cmee_analysis_v1d_vertical.py` | 既存65＋追加6＝71 PASS。2端点と接続詞のexact証拠、反復、補足、全文訂正/撤回、shared witness欠落、夢/伝聞/疑問/否定等の保留 |
+| mashos-api `ai/tests/test_analysis_observed_storage.py` | 既存13＋追加1＝14 PASS。行動・変化・順序のcommit/再読取、同一DTO/文章、再生成0、内部型非漏出 |
+
+saved period13/API6を合わせ104 PASS。6合成本文をrootが読み、既存RN view modelとbackend本文が完全一致。右端は既存名詞/の連結＋は/が/も＋減った/増えた/変わった/戻った、actor未指定のaffirmative/fact/past。両端の何/誰/幾を含む疑問名詞を保留。たら/てから、3節、一般的な感情変化、否定行動のpair、進んだ等は未対応。共有owner/API/DB/DTO/RN/依存変更0。地図全体のfile配置は不変、上記既存責務だけを更新。canonical04 §3.8、06/API handoff末尾u107へ同期。u106/u107はGitHub未反映、未配置。
 
 ## 5. Source and artifact identity
 

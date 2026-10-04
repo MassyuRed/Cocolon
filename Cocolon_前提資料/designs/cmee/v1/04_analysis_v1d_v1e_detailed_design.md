@@ -2,7 +2,7 @@
 
 - document id: `cocolon.cmee.v1d_v1e.analysis_route.detailed_design`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u105 content correctionは未配置
+- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u107 content correctionは未配置（u106/u107はGitHub未反映）
 - IF-route runtime state: `NOT_IMPLEMENTED`
 - Analysis activation: `STORAGE_APPROVED_AND_APPLIED_2026_10_04_JST`; API315f5b5…配置済み、Mashが6201実機確認OKを報告
 - API source effect: V2保存・read分岐実装、default off
@@ -34,7 +34,7 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
-**2026-10-04 u105 current**：API315f5b5…がlive、TestFlight6201送信成功、Mashから実機確認OKの報告を受けた。補足/集約/順序/相対日（§3.3〜3.5）に続き、現在の認識hostと可能性補文を分離して考えnodeへ接続（§3.6）。u102〜u105 sourceは未配置。保存UUIDの独立実照合・global cutover・正式商品受入れを実機OK報告へ含めない。以下u94〜u97の配置前記述は各時点の履歴として保持する。
+**2026-10-04 u107 local candidate**：API315f5b5…live/TestFlight6201と実機OKのMash報告を継承。未成立結果に続き、完全な行動/変化の2節と明示順序を接続（§3.8）。u106/u107はGitHub未反映、u102〜u107 sourceは未配置。保存UUIDの独立実照合・global cutover・正式商品受入れを実機OK報告へ含めない。以下の配置前記述は各時点の履歴。
 
 2026-10-03 u94更新：latest weekly §6.6〜6.10に沿い、offline source→部分graphに補足の明示引用訂正・撤回と本人向けsafe text／visual projectionを追加した。RNに閉じたDTOのvalidatorと専用renderer、latest／viewerのversion dispatchを実装。合成入力のbackend26検査、実RN componentを使う11検査、旧表示互換2検査PASS。全追加・変更fileの正本は`current_structure/03_analysis_current_structure.md` §4.5。u95で認証済みsaved period loader→ASTOR明示V2生成entryを追加し、13検査＋既存26検査PASS。u96/u97で専用保存と既存API接続を実装し、承認済みtableを実DBへ適用・照合した。稼働API配信・実ユーザー入力での実行・実機は未実施。
 
@@ -167,6 +167,24 @@ safe projectionは認証された本人向けのSELF_ONLY商品表示で、匿�
 認定済み認識の完全範囲だけを可能性拒否の例外にし、同fieldにある別の確定行動を失わない。未認定/未解釈の可能性scope、他者・引用・条件・否定/過去hostは保留する。通常補足は全文解釈を要求し、引用訂正/撤回では外側/内側の旧scopeを置換後へ継承しない。補足が単なる可能性なら、元の確定記述を勝手に訂正せず別の考えとして保持する。
 
 vertical58/storage12/saved period13/API6＝89 PASS、既存RN契約との文章一致を確認。保存serializerのallowlistと閉じたDTOは変更せず、旧artifact読取を再解釈しない。一般認識/過去host、任意の補文、場面/役割/結果の接続、annotations/conflict/比較/IFは残る。新規owner/契約/配置効果なし。
+
+### 3.7 u106 現在の未成立結果
+
+共有_final_source_unfinished_result_nucleiが認定する単一memo完全節を消費する。explicit/explicit_current_input/required/event、negative/fact、現在の時点、present_unfinishedのmarker、部分投影/依存関係なしを揃え、同共有完全節helperとAnalysisの既存名詞/の連結・は/が/も・見つかる/決まる/定まるの現在否定状態の解析を両方要求する。疑問名詞、未解釈接頭辞/修飾/複文、過去/肯定/二重否定/引用/伝聞/条件を切り落として通さない。
+
+actorはUNSPECIFIEDであり共有frameのcurrent_user既定値を本人の行為へ昇格しない。result_state=NOT_YET、名詞/助詞、否定、current_inputと元scalar/UTF-8証拠を保持し、IMMEDIATE_RESULT_OR_AFTERMATHへ接続する。safe表示は「まだ〜っていない（この記述時点）」。未実行・失敗・原因・順序・永続的不可能を作らず、解釈可能な結果だけを不足表示から除く。
+
+集約は同じ内容の丁寧語だけを束ね、助詞/名詞/述語を区別。通常補足/訂正/撤回と元出典を既存経路で保持。期間内の共起は無方向、現在結果を過去行動の順序へ混ぜない。保存serializerとDTOは変更せず、内部型は非公開。vertical65/storage13/saved period13/API6＝97 PASS、合成6本文と既存RN本文が一致。共有ownerの変更0、未配置。一般結果・場面/役割・複文/比較/IFの完成ではない。
+
+### 3.8 u107 過去行動の後の有限変化
+
+同一memo spanの完全なSELF過去行動＋後/あと（に）読点＋名詞の有限変化に限定する。共有Stage1のaction/change 2核、explicit/required/explicit_current_input・fact/past、action_before_change、source_fragmentのexact範囲とrequired user_stated_relation/typed_projection:perfective_action_before_bounded_changeを要求する。同じmarkerは夢/伝聞の長いhostにも付くため、全文を両端と接続語で完全に解釈できなければaction片側も採用しない。
+
+左端は既存の有限動詞/格と明示SELF、肯定の過去factだけ。右端は既存名詞/の連結・は/が/もと減った/増えた/変わった/戻ったを型付けし、result_state=BOUNDED_CHANGE、actor=UNSPECIFIED、positive（文法上の肯定）/fact/pastとして結果nodeへ置く。名詞の所有者を本人と補わず、増減を改善/悪化と評価しない。両端の疑問名詞（何/誰/幾）は保留。safe labelは「疑問が減った（記録された変化）」等に再構成する。
+
+shared action_supports_changeを因果として輸入せず、実際の後接続を根拠に既存OBSERVED_ORDERだけを作る。接続語を含む元の全文evidenceをedgeへ加え、各端点もexact scalar/UTF-8/hashを維持する。両端をoccurrenceとして分離し、反復した行動を一つにまとめない。通常補足は両端の解釈成立時だけconnectorを含む全文を被覆する。訂正/撤回は元の完全な2節span全体を対象にし、部分引用へ広げない。置換後の証拠は回答原文へ戻す。
+
+vertical71/storage14/saved period13/API6＝104 PASS、合成6本文と既存RN表示が一致。保存DTO/serializer、API/RN/共有ownerを変更せず旧artifactを再生成しない。たら/てから/3節、右端feeling、否定行動のpair、共有側が2核化しない進んだ、一般日本語/比較/IFは対象外。u106/u107の公開PR反映は自動審査で明示許可不足により停止、local実装候補として保持。新規owner/契約/配置効果なし。
 
 ## 4. Period source-set freeze
 
