@@ -2,7 +2,7 @@
 
 - document id: `cocolon.cmee.v1d_v1e.analysis_route.detailed_design`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u107 content correctionは未配置（u106/u107はPR反映済み）
+- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u108 content correctionは未配置（u106/u107はPR反映済み）
 - IF-route runtime state: `NOT_IMPLEMENTED`
 - Analysis activation: `STORAGE_APPROVED_AND_APPLIED_2026_10_04_JST`; API315f5b5…配置済み、Mashが6201実機確認OKを報告
 - API source effect: V2保存・read分岐実装、default off
@@ -34,7 +34,7 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
-**2026-10-04 u107 PR candidate**：API315f5b5…live/TestFlight6201と実機OKのMash報告を継承。未成立結果に続き、完全な行動/変化の2節と明示順序を接続（§3.8）。u106/u107はPR反映済み、u102〜u107 sourceは未配置。保存UUIDの独立実照合・global cutover・正式商品受入れを実機OK報告へ含めない。以下の配置前記述は各時点の履歴。
+**2026-10-04 u108 candidate**：API315f5b5…live/TestFlight6201と実機OKのMash報告を継承。後/あとに続き、共有認定された「てから＋過去変化」の完全pairを表示へ接続（§3.9）。u106/u107はPR反映済み、u102〜u108 sourceは未配置。保存UUIDの独立実照合・global cutover・正式商品受入れを実機OK報告へ含めない。以下の配置前記述は各時点の履歴。
 
 2026-10-03 u94更新：latest weekly §6.6〜6.10に沿い、offline source→部分graphに補足の明示引用訂正・撤回と本人向けsafe text／visual projectionを追加した。RNに閉じたDTOのvalidatorと専用renderer、latest／viewerのversion dispatchを実装。合成入力のbackend26検査、実RN componentを使う11検査、旧表示互換2検査PASS。全追加・変更fileの正本は`current_structure/03_analysis_current_structure.md` §4.5。u95で認証済みsaved period loader→ASTOR明示V2生成entryを追加し、13検査＋既存26検査PASS。u96/u97で専用保存と既存API接続を実装し、承認済みtableを実DBへ適用・照合した。稼働API配信・実ユーザー入力での実行・実機は未実施。
 
@@ -185,6 +185,16 @@ actorはUNSPECIFIEDであり共有frameのcurrent_user既定値を本人の行�
 shared action_supports_changeを因果として輸入せず、実際の後接続を根拠に既存OBSERVED_ORDERだけを作る。接続語を含む元の全文evidenceをedgeへ加え、各端点もexact scalar/UTF-8/hashを維持する。両端をoccurrenceとして分離し、反復した行動を一つにまとめない。通常補足は両端の解釈成立時だけconnectorを含む全文を被覆する。訂正/撤回は元の完全な2節span全体を対象にし、部分引用へ広げない。置換後の証拠は回答原文へ戻す。
 
 vertical71/storage14/saved period13/API6＝104 PASS、合成6本文と既存RN表示が一致。保存DTO/serializer、API/RN/共有ownerを変更せず旧artifactを再生成しない。たら/てから/3節、右端feeling、否定行動のpair、共有側が2核化しない進んだ、一般日本語/比較/IFは対象外。u106/u107は当初の自動審査停止後、Mashの明示公開許可を受けPR3/PR30へ反映・照合済み。新規owner/契約/配置効果なし。
+
+### 3.9 u108 「てから」の依存時制と完全な過去結果
+
+既存9動詞のte活用（書いて/調べて/試して/見て/作って/残して/記録して/メモして/続けて）は、通常の主文_propositionには加えない。専用の内部解析ではtemporal_scope=dependentとして、原文のte形・格・明示SELFと全source partsを保持する。原文を過去形へ置換した仮想証拠を作らない。
+
+_action_change_pairでu107の共有2核/required typed relation/exact範囲と、右端の4述語のpast fact、実際のから接続を全て確認した場合だけ左端をpastへ束縛し、private dependent_form=TE_BEFORE_PAST_CHANGEを付ける。各consumerはfragmentから同じ解釈を受け取り、単独teの再解析で意味を作り直さない。safe側はte原文の再解析に加え、その行動からpastの結果へ向かうOBSERVED_ORDERと、同一envelope/field/spanの両端およびexact全文evidenceを要求する。marker単独、別記録、順序なしでは実行済み表示へ変換しない。
+
+補足全文の被覆、全文引用訂正/撤回、元回答座標と反復occurrenceをu107経路で維持。単独teへの置換は旧結果を返さず保留。夢/3節/非過去/否定/他者/疑問名詞を切り落として通さない。未対応の願望は既存private ATTENTIONが残り得るが、実行済み行動・順序・safeラベルとして出さない。従属形は意味上の別の出来事を増やす集約keyにはせず、既存のevidence occurrenceで区別する。
+
+vertical76/storage15/saved period13/API6＝110 PASS。6合成本文と既存RN本文が一致。新private fieldはserializerのallowlistから外れ、保存DTO/API/RN/共有ownerの変更なし。既存「てから」拒否1例は今回のpositive cohortへ移し、他の保留期待は維持。未配置。たら/3節/右端feeling/一般場面/役割/比較/IFの解釈は未完了。
 
 ## 4. Period source-set freeze
 

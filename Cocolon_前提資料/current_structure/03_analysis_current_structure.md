@@ -14,7 +14,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**u107 PR candidate**：指定Analysis API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承。u106の未成立結果に続き、「本人の過去行動＋後/あと＋明記された変化」の完全な2節を行動・結果nodeと順序線へ接続（§4.13）。原因や改善とは解釈しない。関連104検査と既存RN表示契約の本文一致を確認。u106/u107の計9 file差分はMashの明示公開許可後にPR3（550f33f…）/PR30（8e36e8e…）へ反映・照合済み、u102〜u107修正版は未配置。以下の配置前記録は当時の履歴であり、実機再確認を内容修正の前提へ戻さない。
+**u108 candidate**：指定Analysis API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承。u107の後/あと接続に続き、既存9動詞の「てから＋明記された過去変化」を行動・結果nodeと順序線へ接続（§4.14）。単独te形は過去にせず、完全な共有2核と元全文証拠がある場合だけ解釈・表示する。関連110検査と既存RN表示契約の本文一致を確認。u106/u107はPR反映済み、u102〜u108修正版は未配置。以下の配置前記録は当時の履歴であり、実機再確認を内容修正の前提へ戻さない。
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
@@ -286,6 +286,17 @@ saved period13/API6と合わせ97 PASS。合成6出力の既存RN view modelとb
 | mashos-api `ai/tests/test_analysis_observed_storage.py` | 既存13＋追加1＝14 PASS。行動・変化・順序のcommit/再読取、同一DTO/文章、再生成0、内部型非漏出 |
 
 saved period13/API6を合わせ104 PASS。6合成本文をrootが読み、既存RN view modelとbackend本文が完全一致。右端は既存名詞/の連結＋は/が/も＋減った/増えた/変わった/戻った、actor未指定のaffirmative/fact/past。両端の何/誰/幾を含む疑問名詞を保留。たら/てから、3節、一般的な感情変化、否定行動のpair、進んだ等は未対応。共有owner/API/DB/DTO/RN/依存変更0。地図全体のfile配置は不変、上記既存責務だけを更新。canonical04 §3.8、06/API handoff末尾u107へ同期。u106/u107はPR反映済み、未配置。
+
+### 4.14 「てから」の行動と過去変化を表示へ接続（2026-10-04 u108）
+
+| Repository / existing file | 更新した責務 |
+|---|---|
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 既存9動詞のte形を時制未定として解析。共有2核・past結果・exactから接続を揃えたpair内だけで過去へ束縛。fragmentが文脈付きpropositionを持ち、元teのsource partsと通常補足/全文訂正/撤回を保持 |
+| 同 `observed_route_realizer.py` | te形の再解析に加え、そのnode自身から同一source/field/spanの過去結果へ向かう順序とexact全文evidenceがある場合だけ実行済み表現へ再構成 |
+| mashos-api `ai/tests/test_cmee_analysis_v1d_vertical.py` | 既存71＋追加5＝76 PASS。9活用の証拠・依存時制、順序context欠落、補足/訂正/撤回、反復、単独te/夢/非過去/願望等の不昇格 |
+| mashos-api `ai/tests/test_analysis_observed_storage.py` | 既存14＋追加1＝15 PASS。te形pairのcommit/再読取・文章/DTO一致・再生成0・private marker非漏出 |
+
+saved period13/API6と合わせ110 PASS、6合成出力の既存RN本文がbackendと一致。通常の主文有限grammarにteを加えず、同じ9動詞と4結果述語の範囲を維持。疑問名詞/否定/未解釈scopeの保留も維持する。共有owner/API/DB/DTO/RN/依存の変更0、file配置不変。canonical04 §3.9と06/API handoff末尾u108へ同期。たら/3節/一般感情変化/場面/役割/比較/IFは残る。u102〜u108は未配置。
 
 ## 5. Source and artifact identity
 
