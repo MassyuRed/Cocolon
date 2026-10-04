@@ -72,6 +72,32 @@ test('backend-generated projections yield identical JS text and artifact referen
   }
 });
 
+test('period comparison renders the same limited differences in cards and text', async () => {
+  const Renderer = moduleLoader()('components/selfStructure/WatashiMapV2Renderer.js').default;
+  for (const comparison of [
+    { state: 'COMPARABLE', reason_codes: [], safe_change_kinds: [
+      'ROUTE_EVIDENCE_CHANGED', 'ANNOTATION_EVIDENCE_CHANGED', 'UNKNOWN_SCOPE_CHANGED', 'CONFLICT_STATE_CHANGED'] },
+    { state: 'COMPARABLE', reason_codes: [], safe_change_kinds: [] },
+    { state: 'NOT_COMPARABLE', reason_codes: ['PERIOD_LENGTH_MISMATCH', 'PERIOD_OVERLAP'], safe_change_kinds: [] },
+  ]) {
+    const projection = copy(fixtures[0].projection);
+    projection.period_comparison = comparison;
+    const view = contract.buildWatashiMapV2ViewModel(projection);
+    let render;
+    await act(async () => { render = TestRenderer.create(React.createElement(Renderer, { contentJson: projection })); });
+    const body = JSON.stringify(render.toJSON());
+    assert.ok(body.includes('前の期間との比較'));
+    for (const line of view.comparisonText) {
+      assert.ok(view.text.includes(line));
+      assert.ok(body.includes(line));
+    }
+    if (comparison.state === 'NOT_COMPARABLE') assert.ok(view.text.includes('二つの期間が重なっています'));
+    else if (!comparison.safe_change_kinds.length) assert.ok(view.text.includes('記録の件数や、読み取れていない内容の変化は判断していません'));
+    else assert.ok(view.text.includes('改善・悪化や原因を示すものではありません'));
+    await act(async () => render.unmount());
+  }
+});
+
 test('protective intention renders a neutral heading and keeps target and uncertainty', async () => {
   const projection = copy(fixtures[0].projection);
   projection.nodes[0].node_kind = 'ATTENTION_OR_THOUGHT';

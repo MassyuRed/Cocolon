@@ -4,6 +4,29 @@ const NODE_LABELS = Object.freeze({
   SCENE: '場面', ROLE: '役割', ATTENTION_OR_THOUGHT: '考え・注意',
   ACTION_OR_NONACTION: '行動・非行動', IMMEDIATE_RESULT_OR_AFTERMATH: '結果・余韻',
 });
+const COMPARISON_CHANGES = Object.freeze({
+  ROUTE_EVIDENCE_CHANGED: '読み取れた内容・つながり',
+  ANNOTATION_EVIDENCE_CHANGED: '守る対象・負荷の記述',
+  UNKNOWN_SCOPE_CHANGED: '確定できない部分',
+  CONFLICT_STATE_CHANGED: '一致していない記述の組み合わせ',
+});
+const COMPARISON_REASONS = Object.freeze({
+  PERIOD_LENGTH_MISMATCH: '期間の長さが異なります。',
+  PREVIOUS_PERIOD_NOT_EARLIER: '比較対象が前の期間ではありません。',
+  PERIOD_OVERLAP: '二つの期間が重なっています。',
+  PERIOD_NOT_ADJACENT: '直前の期間ではありません。',
+  SHARED_RECORD_IDENTITY: '同じ記録が両方の期間に含まれています。',
+});
+function comparisonLines(comparison) {
+  if (comparison.state === 'NO_PREVIOUS') return [];
+  if (comparison.state === 'NOT_COMPARABLE') return ['期間比較：この二つの期間は比較できません。',
+    ...comparison.reason_codes.map((code) => COMPARISON_REASONS[code] || '比較条件を確認できません。')];
+  const changes = comparison.safe_change_kinds;
+  if (!changes.length) return ['期間比較：今回比較した記述内容では差分を検出していません。'
+    + '記録の件数や、読み取れていない内容の変化は判断していません。'];
+  return ['期間比較：前の同じ長さの期間と比べ、' + changes.map((kind) => COMPARISON_CHANGES[kind]).join('、')
+    + 'が異なります。', '記録上の違いであり、改善・悪化や原因を示すものではありません。'];
+}
 const object = (x) => x !== null && typeof x === 'object' && !Array.isArray(x);
 const text = (x) => typeof x === 'string' && x.trim().length > 0;
 const unique = (xs) => new Set(xs).size === xs.length;
@@ -136,8 +159,10 @@ function buildWatashiMapV2ViewModel(contentJson) {
   lines.push(...unknownGaps.map((g) => '未確定（' + g.targetLabels.join(' ／ ') + '）：' + g.visible_label));
   lines.push(...annotations.map((a) => '注記（' + a.targetLabel + '）：' + a.visible_label),
     ...conflicts.map((c) => '一致していない記録（' + c.targetLabels.join(' ／ ') + '）：' + c.visible_label));
+  const comparisonText = comparisonLines(p.period_comparison);
+  lines.push(...comparisonText);
   return { projectionOf: p.projection_of, periodLabel: p.period_label,
-    comparisonState: p.period_comparison.state, nodes, edges,
+    comparisonState: p.period_comparison.state, comparisonText, nodes, edges,
     annotations, unknownGaps, conflicts,
     text: lines.join('\n') };
 }

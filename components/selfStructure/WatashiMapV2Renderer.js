@@ -61,9 +61,12 @@ export default function WatashiMapV2Renderer({ contentJson, colors, isDark = fal
         <Text style={styles.subtle}>関連する観測：{badge.targetLabels.join(' ／ ')}</Text>
         <Text style={styles.body}>{badge.visible_label}</Text>
       </View>)}
-      <Text style={styles.subtle}>{model.comparisonState === 'NO_PREVIOUS'
-        ? '前の期間との比較はありません。' : model.comparisonState === 'NOT_COMPARABLE'
-          ? 'この期間は前回と比較できません。' : '前の期間と比較できる条件を満たしています。'}</Text>
+      {model.comparisonState === 'NO_PREVIOUS'
+        ? <Text style={styles.subtle}>前の期間との比較はありません。</Text>
+        : <View style={styles.card}>
+          <Text style={styles.section} accessibilityRole="header">前の期間との比較</Text>
+          {model.comparisonText.map((line, index) => <Text style={styles.body} key={index}>{line}</Text>)}
+        </View>}
       <View style={styles.card}>
         <Text style={styles.section} accessibilityRole="header">文章で読む</Text>
         <Text style={styles.body}>{model.text}</Text>
