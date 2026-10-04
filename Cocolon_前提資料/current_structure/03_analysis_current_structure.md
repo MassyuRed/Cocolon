@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_analysis_current_structure
 title: "分析構造 — Current Structure"
-revision_date: "2026-10-04 JST"
+revision_date: "2026-10-05 JST"
 document_role: "ANALYSIS_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -13,6 +13,8 @@ automatic_progression: false
 # 分析構造 — Current Structure
 
 ## 0. Current conclusion
+
+**u131 内容修正（2026-10-05 JST・未配置）**：「明日職場」「来週会議」「今朝資料」等の時点語を名詞へ吸収して確定表示する欠陥を補正。実測した明日／明後日／一昨日／今朝／昨夜／先週／来週の7語を対象に、完全解析候補の名詞連結を保留し、同じ原入力の読める別節と未確定表示を残す。「明日の会議／明日の資料／明日を記録した」は名詞の意味を保持。時点を新しく推定しない。141検査PASS、合成6本文のbackend／RN表示model一致。固有名詞「明日香」等も保留する制約、元々解析不能な「明日ノート」の表示拒否は残る。STRUCTURE_MAP_DELTA_NONE。詳細は06／API handoff末尾u131。
 
 **u130 内容修正（未配置）**：本人の過去の場面・担当でも、主語直後の「今日／昨日」を独立した時点として保持する。「私は昨日職場にいた」「私は今日、会議の司会を担当した」が文章と図へ出るようになり、否定・原文出典・補足の訂正／撤回を保持した。時間接尾・日語の重複・接続語との併用・無区切りの「…の…」は保留し、場面／担当の「今日の…」も日付へ変換しない。vertical136検査PASS、合成6本文のbackend／RN表示modelで全文・identity・node順・edge一致。実機未検証。STRUCTURE_MAP_DELTA_NONE、既存compiler以外の意味owner・API／DB／RN経路は不変。隣接する既存欠陥「明日職場」の誤名詞化は未修正で次対象。詳細は06／API handoff末尾u130。
 
