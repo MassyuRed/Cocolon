@@ -72,6 +72,119 @@ test('backend-generated projections yield identical JS text and artifact referen
   }
 });
 
+function latestResultHarness(responses) {
+  let requestCount = 0; let statusReads = 0; const seen = [];
+  const Screen = moduleLoader({
+    '../lib/supabase': { supabase: { auth: { getSession: async () => ({ data: {
+      session: { access_token: 'synthetic-session' },
+    } }) } } },
+    '../lib/user': { getCurrentUserId: async () => 'synthetic-owner',
+    },
+    '../lib/apiClient': { API_BASE_URL: 'https://synthetic.invalid',
+      apiGet: async () => { statusReads += 1; return { version_key: 'not-displayed' }; },
+      apiFetch: async () => {
+        const response = responses[requestCount++];
+        if (response instanceof Error) throw response;
+        return { ok: response.status === 200, status: response.status,
+          json: async () => response.body };
+      },
+    },
+    '../lib/compat/legacyWireContracts': { SELF_STRUCTURE_WIRE: {
+      routes: { latest: '/self-structure/latest', latestStatus: '/self-structure/latest/status' },
+    } },
+  })('screens/SelfStructureReportGenerateScreen.js').default;
+  return { Screen, seen, statusReads: () => statusReads, requests: () => requestCount,
+    props: { onLatestSeenVersion: (version) => { seen.push(version); } } };
+}
+const savedMapAbsent = {
+  status: 'ok', reason: 'no_visible_content', refreshed: false, report_mode: 'standard',
+  content_text: null, meta: null, has_visible_content: false,
+  skip_reason: 'analysis_saved_map_unavailable', generated_at: null,
+};
+
+test('declared absent saved map is neutral and never marks an undisplayed version as seen', async () => {
+  for (const content_text of [null, '']) {
+    const h = latestResultHarness([{ status: 200, body: { ...savedMapAbsent, content_text } }]);
+    let render;
+    await act(async () => { render = TestRenderer.create(React.createElement(h.Screen,
+      { ...h.props, embedded: true, hideHeader: true })); });
+    const body = JSON.stringify(render.toJSON());
+    assert.ok(body.includes('現在表示できるわたしマップはありません。'));
+    assert.ok(!body.includes('取得エラー'));
+    assert.ok(!body.includes('少なめ'));
+    assert.ok(!body.includes('LEGACY_RENDERER'));
+    assert.equal(h.requests(), 1);
+    assert.equal(h.statusReads(), 0);
+    assert.deepEqual(h.seen, []);
+    await act(async () => render.unmount());
+  }
+});
+
+test('refresh replaces an empty state with the actual saved map and marks only that artifact', async () => {
+  const h = latestResultHarness([
+    { status: 200, body: savedMapAbsent },
+    { status: 200, body: { meta: fixtures[0].projection, report_mode: 'standard' } },
+    { status: 200, body: savedMapAbsent },
+  ]);
+  let render;
+  await act(async () => { render = TestRenderer.create(React.createElement(h.Screen, h.props)); });
+  const refresh = () => render.root.findAllByType('TouchableOpacity').find((n) =>
+    n.findAllByType('Text').some((t) => t.props.children === '更新'));
+  await act(async () => { refresh().props.onPress(); });
+  let body = JSON.stringify(render.toJSON());
+  assert.ok(body.includes('watashi-map-v2'));
+  assert.ok(!body.includes('現在表示できるわたしマップはありません。'));
+  assert.deepEqual(h.seen, [fixtures[0].projection.projection_of]);
+  await act(async () => { refresh().props.onPress(); });
+  body = JSON.stringify(render.toJSON());
+  assert.ok(body.includes('現在表示できるわたしマップはありません。'));
+  assert.ok(!body.includes('watashi-map-v2'));
+  assert.deepEqual(h.seen, [fixtures[0].projection.projection_of]);
+  assert.equal(h.statusReads(), 0);
+  await act(async () => render.unmount());
+});
+
+test('HTTP and network failures remain errors instead of normal empty results', async () => {
+  for (const response of [
+    ...[401, 403, 409, 422, 503].map((status) => ({ status, body: {
+      ...savedMapAbsent, detail: 'synthetic_request_failure',
+    } })),
+    new Error('synthetic_network_failure'),
+  ]) {
+    const h = latestResultHarness([response]); let render;
+    await act(async () => { render = TestRenderer.create(React.createElement(h.Screen, h.props)); });
+    const body = JSON.stringify(render.toJSON());
+    assert.ok(body.includes('取得エラー'), String(response.status));
+    assert.ok(!body.includes('現在表示できるわたしマップはありません。'));
+    assert.deepEqual(h.seen, []);
+    assert.equal(h.statusReads(), 0);
+    await act(async () => render.unmount());
+  }
+});
+
+test('empty declarations do not hide malformed or unsupported map payloads', async () => {
+  const invalid = copy(fixtures[0].projection); invalid.nodes[0].source_id = 'private';
+  for (const meta of [invalid, '{"wire_kind":', { wire_kind: 'watashi.map.v3' },
+    { wire_kind: 'watashi.map.v2.private-preview' }]) {
+    const h = latestResultHarness([{ status: 200, body: { ...savedMapAbsent, meta } }]);
+    let render;
+    await act(async () => { render = TestRenderer.create(React.createElement(h.Screen, h.props)); });
+    const body = JSON.stringify(render.toJSON());
+    assert.ok(body.includes('この分析結果は表示できません'));
+    assert.ok(!body.includes('現在表示できるわたしマップはありません。'));
+    assert.deepEqual(h.seen, []);
+    assert.equal(h.statusReads(), 0);
+    await act(async () => render.unmount());
+  }
+  const h = latestResultHarness([{ status: 200, body: {} }]); let render;
+  await act(async () => { render = TestRenderer.create(React.createElement(h.Screen, h.props)); });
+  assert.ok(JSON.stringify(render.toJSON()).includes('取得エラー'));
+  assert.deepEqual(h.seen, []);
+  assert.equal(h.statusReads(), 0);
+  await act(async () => render.unmount());
+});
+
+
 test('period comparison renders the same limited differences in cards and text', async () => {
   const Renderer = moduleLoader()('components/selfStructure/WatashiMapV2Renderer.js').default;
   for (const comparison of [

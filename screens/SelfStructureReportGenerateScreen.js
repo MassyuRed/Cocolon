@@ -297,6 +297,7 @@ export default function SelfStructureReportGenerateScreen({ onBack, initialRepor
 
 const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
+  const [emptyMsg, setEmptyMsg] = useState("");
   const [reportText, setReportText] = useState("");
   const [meta, setMeta] = useState(null);
 
@@ -376,6 +377,7 @@ const run = useCallback(async ({ force = false } = {}) => {
   safeSet(() => {
     setLoading(true);
     setErrorMsg("");
+    setEmptyMsg("");
     setReportText("");
     setMeta(null);
   });
@@ -452,6 +454,16 @@ const run = useCallback(async ({ force = false } = {}) => {
     }
 
     const json = await res.json();
+    // A successful read can have no eligible saved map. This does not
+    // establish insufficient input (read-only mode also returns this shape).
+    if (json?.status === "ok" && json?.reason === "no_visible_content"
+      && json?.has_visible_content === false
+      && json?.skip_reason === "analysis_saved_map_unavailable"
+      && json?.meta === null
+      && (json?.content_text === null || json?.content_text === "")) {
+      safeSet(() => setEmptyMsg("現在表示できるわたしマップはありません。"));
+      return; // No artifact was displayed, so do not mark a version as seen.
+    }
     const serverMeta = safeParseJson(json?.meta);
     const legacyResponse = classifyWatashiMapVersion(serverMeta) === 'LEGACY';
     const versionedResponseDisplayable = !!readWatashiMapV2Projection(serverMeta)
@@ -461,7 +473,7 @@ const run = useCallback(async ({ force = false } = {}) => {
       String(json?.content_text || "").trim()
     ) : '';
     if (!text && !hasVisualContract) {
-      throw new Error("わたしマップにできる観測がまだ少なめでした。");
+      throw new Error("分析結果の形式を確認できませんでした。");
     }
 
     // ★ ここで画面がもう無い（戻った）なら、以降の setState を行わない
@@ -676,7 +688,11 @@ const run = useCallback(async ({ force = false } = {}) => {
         </Text>
       )}
 
-      {!loading && !errorMsg && (
+      {!loading && !errorMsg && !!emptyMsg && (
+        <Text style={[styles.empty, themed.empty]}>{emptyMsg}</Text>
+      )}
+
+      {!loading && !errorMsg && !emptyMsg && (
         <>
           {!isLegacyMap && canViewVersionedMap ? (
             <WatashiMapV2Renderer contentJson={contentJson} colors={colors} isDark={isDark} />
