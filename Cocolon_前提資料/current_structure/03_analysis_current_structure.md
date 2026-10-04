@@ -14,7 +14,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**u116 candidate**（§4.22）：同一本人の二期間を同じ実装で独立生成し、等長の直前隣接期間の記述差を根拠付きで比較。認証付き開発previewと同じ文章/図まで接続した。関連166検査・541 subtests、RN13検査、6合成本文の一致を確認。比較の永続保存・公開API接続は未実施。u102〜u116未配置。指定API315f5b5…/TestFlight6201への実機OKはMash報告として継承する。
+**u117 candidate**（§4.23）：等長の直前期間との比較を、既存の保存・latest/history/detail APIへ接続する候補を実装。両期間の訂正/削除/補足/保持期限を保存・読出しへ反映する。関連173検査・548 subtests、隔離DB58項目、RN13検査、3保存本文の一致を確認。SQLは未適用、比較は既定OFF、u102〜u117未配置。指定API315f5b5…/TestFlight6201実機OKはMash報告として継承する。
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
@@ -380,7 +380,7 @@ ObservedGraph/private保存の8gapと各record/evidenceは全て残す。private
 
 vertical112/storage25/saved period13/API6＝156 PASS・509 subtests PASS、RN12 PASS。rootが6合成本文を全文読み、backend/RNの本文・identity・node順・注記target一致を確認。独立read-only reviewの伝聞/夢prefix指摘を再現して修正。共有の名詞「気持ち」によるfeeling分類とwishの重なりは、完全な現在希望の条件を維持して局所対応した。Auth/DB I/Oは合成、未配置。新規path/共有owner/API契約/DTO/SQL/依存変更0。詳細はcanonical04 §3.16と06/API handoff末尾u115。
 
-### 4.22 二期間の記述差を認証付き開発previewへ接続（2026-10-04 u116）
+### 4.22 二期間の記述差を認証付き開発previewへ接続（2026-10-04 u116時点の履歴）
 
 既存の期間比較欄はNO_PREVIOUS固定だった。本人の現在期間と明示した前期間を同じCMEE実装で別artifactとして生成し、等長の直前隣接期間だけを比較する。重複/逆順/長さ違い/非隣接/同一record再使用は理由付きNOT_COMPARABLE・差分0。別owner、比較の連鎖、不正/空/未解釈の前期間は結果を返さない。
 
@@ -398,6 +398,25 @@ vertical112/storage25/saved period13/API6＝156 PASS・509 subtests PASS、RN12 
 vertical118/storage26/saved period16/API6＝166 PASS・541 subtests、RN13 PASS。6合成本文をrootが全文読み、backend/RNの本文・identity・node順・比較文一致を確認。独立reviewで依存形とunknown仮anchorによる偽差分を指摘され、再現・修正して回帰検査へ追加。最終blocking指摘0。Auth/DB I/Oは合成で、実機/稼働APIは未検証。
 
 現在の保存SQLのguard/read/無効化は一期間だけを対象にしている。比較入りcurrentを保存すると前期間の訂正/削除/閲覧期限が追えないため、保存serviceはNO_PREVIOUS限定を維持する。開発previewの二度読みはtransactional保存・継続的な閲覧権限の保証ではない。比較を保存/APIへ接続する前に、両期間の依存と失効を同じ保存境界で扱う必要がある。新規path/外部API・DTO/SQL/依存変更0。詳細はcanonical04 §3.17、06/API handoff末尾u116。
+
+### 4.23 期間比較の保存・既存API接続候補（2026-10-04 u117）
+
+u116のread-only比較を既存lifecycleへ接続する。新しいHTTP route/public DTO/tableは追加しない。直前等長期間をDBとserviceが内部導出し、二期間を同じsnapshot statementで読む。比較guardは両source guardから生成し、旧単期保存とidentityが衝突しない。
+
+| File | u117の責務差分 |
+|---|---|
+| mashos-api `supabase/migrations/20261004041627_analysis_period_comparison.sql`（新規・未適用） | comparison_snapshot RPC1、既存commit/read/invalidatorの両期間対応、private v2許容。旧migration/既存保存行は書換えない |
+| mashos-api `ai/services/ai_inference/analysis_observed_service.py` | `COCOLON_ANALYSIS_PERIOD_COMPARISON_MODE=development`時だけ比較生成。既定off。前artifactのallowlisted evidenceと比較をinline保存、既存safe比較3keyを読取検証 |
+| mashos-api `ai/tests/test_analysis_observed_storage.py`・`test_analysis_observed_api.py`・`analysis_observed_storage_sql.cjs` | 実CMEE/service/API、隔離PostgreSQLで旧行互換/比較identity/両期間失効/ACL/保持期限/UTC期間を確認 |
+| Cocolon `components/selfStructure/watashiMapV2Contract.js`・`WatashiMapV2Renderer.js` | u116の既存実装を変更せず、保存本文3ケースと同一text/identityを確認 |
+
+private v2はcurrentの既存証拠にperiod_comparison、previous_evidence、comparison_dependencyを追加する。前artifact/source-set refを同一行の閉じた証拠へ結び、raw本文/命題/labelは保存しない。publicには前artifact IDや証拠locatorを出さない。commitは既存auth→source table lock順を維持して両guardを再確認、readも両期間を再確認し再生成しない。前期間の原入力/補足の更新・削除・追加で比較行が失効する。
+
+前期間0件はNO_PREVIOUSを保存できるが、空の前期間も依存に残す。前期間に記録があり意味生成不能なら失敗を単期へ隠さない。前期間だけが保持期限外ならcomparison_eligible=falseとして現在の単期生成を保つ。一般のアクセス/通信/生成エラーをfallbackしない。保存済比較が後日期限外になれば返さず、単期本文へ改造しない。等長演算はUTC、guardの旧session timezone契約は維持する。
+
+vertical118/storage32/API7/saved period16＝173 PASS・548 subtests、既存Pydantic非推奨warning1。隔離PGlite58項目、RN13 PASS。比較あり/差分なし/初回の保存本文3ケースをrootが全文確認し、RNの本文/identityと一致。独立read-only reviewで前期間の保持期限によるcurrent消失を修正。SQL実行で元CHECK名とtimezoneを修正し、同じ期待を維持して再検証した。PGliteは単一接続の合成DBでありlive DB・同時接続・実機確認ではない。
+
+SQL候補は未適用。適用→対応API配置→比較flagの有効化を個別対象付きで進める必要があり、今回の実装を適用承認にしない。比較flagをoffへ戻すと新規比較生成が止まり、既存比較readはこの対応版が担当する。旧API版へ戻すと比較行を扱えないため、offだけを旧版rollback成立とはしない。詳細はcanonical04 §3.18と06/API handoff末尾u117。
 
 ## 5. Source and artifact identity
 
@@ -507,9 +526,9 @@ missing reasonとscopeを持つ別claim／gap marker。observed factを作るた
 
 ## 9. Current gaps
 
-1. V1-Dの生成・safe表示・補足・保存/API/RN接続は実装済み。稼働指定版への実機OKはMash報告。u102〜u116の内容修正版は未配置。
+1. V1-Dの生成・safe表示・補足・保存/API/RN接続は実装済み。稼働指定版への実機OKはMash報告。u102〜u117の内容修正版は未配置。
 2. current Watashi Mapはpresentation-orientedで、claim／edge evidence graph authorityではない。
-3. 五種類の限定node、原証拠、不一致の未確定表示、明示現在負荷と守る意向の注記を接続済み。一般的な各段階/矛盾/負荷/保護理解と解釈仮説は未完了。期間比較は認証付き開発previewまで実装し、比較の永続保存/API接続は未完了。
+3. 五種類の限定node、原証拠、不一致の未確定表示、明示現在負荷と守る意向の注記を接続済み。一般的な各段階/矛盾/負荷/保護理解と解釈仮説は未完了。期間比較は永続保存/API接続候補まで実装。SQL適用・有効化・修正版の実機確認は未実施。
 4. IF route／HypotheticalScenarioGraph／SavedRouteIntentのruntime ownerはexact0。
 5. Analysis専用Product Read packetとactual-device IF map verificationは未実行。
 6. 保存identityの独立した実照合、修正版の実DB/端末検証、旧経路からのglobal cutoverと正式商品受入れは未完了。機械検証を商品完成へ換算しない。
@@ -545,10 +564,10 @@ CMEE Analysis detailed design candidate:
 
 ## 12. Last verified refs
 
-    Cocolon PR30 u116作業前head（Draft/open/unmerged）
-      b699c7f2a3f81e00d03274a1d673d696d58411e8
+    Cocolon PR30 u117作業前head（Draft/open/unmerged）
+      be77fbfc79286ce086d1f51841c6e431d37ef7ef
 
-    mashos-api PR3 u116作業前head（Draft/open/unmerged）
-      7b02459aa9770ff636a5738b7c943a2d8d421f9a
+    mashos-api PR3 u117作業前head（Draft/open/unmerged）
+      269941e559132321cd8469c922c49dc3244b3431
 
 次回はfresh refと実fileを再確認する。

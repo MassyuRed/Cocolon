@@ -2,7 +2,7 @@
 
 - document id: `cocolon.cmee.v1d_v1e.analysis_route.detailed_design`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u116 content correctionは未配置
+- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u117 content correctionは未配置
 - IF-route runtime state: `NOT_IMPLEMENTED`
 - Analysis activation: `STORAGE_APPROVED_AND_APPLIED_2026_10_04_JST`; API315f5b5…配置済み、Mashが6201実機確認OKを報告
 - API source effect: V2保存・read分岐実装、default off
@@ -34,7 +34,7 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
-**2026-10-04 u116 candidate**（§3.17）：等長の直前期間との記述差を、根拠付き比較・認証付き開発preview・同一文章/図へ接続。関連166検査・541 subtests、RN13検査、6合成本文一致。比較の永続保存/API接続は未実施、u102〜u116未配置。指定API315f5b5…/TestFlight6201実機OKはMash報告として継承する。
+**2026-10-04 u117 candidate**（§3.18）：等長の直前期間との比較を、既存の保存・latest/history/detail APIへ接続する候補を実装。両期間の訂正/削除/補足/保持期限を保存・読出しへ反映する。関連173検査・548 subtests、隔離DB58項目、RN13検査、3保存本文の一致を確認。SQLは未適用、比較は既定OFF、u102〜u117未配置。指定API315f5b5…/TestFlight6201実機OKはMash報告として継承する。
 
 2026-10-03 u94更新：latest weekly §6.6〜6.10に沿い、offline source→部分graphに補足の明示引用訂正・撤回と本人向けsafe text／visual projectionを追加した。RNに閉じたDTOのvalidatorと専用renderer、latest／viewerのversion dispatchを実装。合成入力のbackend26検査、実RN componentを使う11検査、旧表示互換2検査PASS。全追加・変更fileの正本は`current_structure/03_analysis_current_structure.md` §4.5。u95で認証済みsaved period loader→ASTOR明示V2生成entryを追加し、13検査＋既存26検査PASS。u96/u97で専用保存と既存API接続を実装し、承認済みtableを実DBへ適用・照合した。稼働API配信・実ユーザー入力での実行・実機は未実施。
 
@@ -261,7 +261,7 @@ safe表示は対象nodeを「家族を守ることへの希望」等、注記を
 
 関連156検査・509 subtests、RN12 PASS。6合成本文の全文読取とbackend/RN本文・identity・node順・注記target照合、実生成→合成RPC commit→再生成なしreadを確認。Auth/DB I/Oは合成、修正版未配置。一般の注記/期間比較/IFの完了や商品受入れへ換算しない。
 
-### 3.17 u116 同じ条件の二期間を比較する開発preview
+### 3.17 u116 同じ条件の二期間を比較する開発preview（当時の履歴）
 
 内部AnalysisObservedMapRequestにoptional comparison_previous_requestを追加し、既存engine.generate入口で同じruntime/policyの現在/前期間を独立生成する。生成済み保存本文/DTOや旧policyのartifactを入力として再解釈しない。別owner、入れ子比較、不正/空/安全に表示できない前期間は拒否/UNAVAILABLE。現在artifactを初めて外へ返す前に§9.1のtyped PeriodComparisonをinline保持し、前artifactもprivate outcome.previous_artifactへ保持する。既存公開DTOへ前artifact ref/source locatorを流さない。
 
@@ -272,6 +272,16 @@ unknownは仮anchorや表示用の隣接pairから偽差分を作らず、不足
 ASTOR既存prepare_saved_analysis_observed_mapは任意の前期間boundsを同じauth/report_modeで読み、両source snapshotを既存recheckで再確認してからsafe本文/DTOを返す。これは認証付きread-only開発entryで、公開HTTP routeや保存writerを追加しない。RNは既存比較3keyの4kind/理由をカードと同一本文へ表示。NO_PREVIOUSでは旧本文を変えない。
 
 関連166検査・541 subtests、RN13 PASS。両期間の原入力/補足/権限変化で結果を保留し、6合成本文のbackend/RN一致を確認。Auth/DB I/Oは合成、未配置。現在の保存guard/read/無効化は当該一期間だけを守るため、保存validatorのNO_PREVIOUS限定は維持する。比較の永続保存/API接続には前期間の訂正/削除/期限切れも反映する依存処理が必要であり、previewの二度読みで保存競合を閉じたとは扱わない。
+
+### 3.18 u117 比較のimmutable保存と既存APIへの接続候補
+
+既存analysis_observed_artifacts一表のまま、直前等長期間を内部導出するcomparison_snapshot RPCを追加。単一statementで両source集合を取得し、両guardを比較専用namespaceへ結合する。既存commitは元のREAD COMMITTED/auth→source table lock内で再確認、readは両期間の鮮度・tier・保持期限を確認し保存済本文を返す。無効化triggerは前期間の原入力/補足の追加・変更・削除も対象にする。旧単期guard/行/RPC署名/public DTOは維持する。
+
+private-evidence.v2はcurrentのallowlisted graph/source_membersにcomparison_dependencyとtyped比較、previous_evidenceをinlineで加える。前artifact/source-set参照を同一行で解決でき、原文/命題/visible labelをprivateへ追加しない。current/previousの公開投影を混在させず、API/RNは既存比較3keyだけを扱う。空前期間はNO_PREVIOUSでも依存を保持し、後日追加で失効する。前期間に実記録があるが生成不能の場合は失敗を保つ。
+
+前期間だけが保持期限外のときは明示comparison_eligible=falseとし、現在の単期分析を利用可能にする。保存済比較の期限切れはguard不一致で非表示。一般の認可/通信/生成エラーから単期へfallbackしない。等長計算はUTCに限定し、既存単期guardのsession timezone契約は変更しない。
+
+serviceの比較生成flagはCOCOLON_ANALYSIS_PERIOD_COMPARISON_MODE、developmentだけ有効、既定off。新migration20261004041627は未適用で、稼働DB/API/端末への効果0。対応SQL→対応API→有効化の順で個別対象の判断が必要。flag offは新規比較生成の停止で、旧API版の比較read互換を保証しない。関連173検査・548 subtests、隔離PGlite58項目、RN13検査、3保存本文の一致を確認。live DBや独立同時接続での競合・実機の商品受入れは未検証。全file/責務はcurrent03 §4.23、実行記録は06/API handoff末尾u117。
 
 ## 4. Period source-set freeze
 
