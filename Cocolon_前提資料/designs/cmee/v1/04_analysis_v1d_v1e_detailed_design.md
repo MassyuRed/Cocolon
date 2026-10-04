@@ -2,7 +2,7 @@
 
 - document id: `cocolon.cmee.v1d_v1e.analysis_route.detailed_design`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u108 content correctionは未配置（u106/u107はPR反映済み）
+- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u109 content correctionは未配置（u106/u107はPR反映済み）
 - IF-route runtime state: `NOT_IMPLEMENTED`
 - Analysis activation: `STORAGE_APPROVED_AND_APPLIED_2026_10_04_JST`; API315f5b5…配置済み、Mashが6201実機確認OKを報告
 - API source effect: V2保存・read分岐実装、default off
@@ -34,7 +34,7 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
-**2026-10-04 u108 candidate**：API315f5b5…live/TestFlight6201と実機OKのMash報告を継承。後/あとに続き、共有認定された「てから＋過去変化」の完全pairを表示へ接続（§3.9）。u106/u107はPR反映済み、u102〜u108 sourceは未配置。保存UUIDの独立実照合・global cutover・正式商品受入れを実機OK報告へ含めない。以下の配置前記述は各時点の履歴。
+**2026-10-04 u109 candidate**：指定API315f5b5…/TestFlight6201と実機OKのMash報告を継承。後/あと/てからの共有pairに明記された過去感情を結果nodeへ接続（§3.10）。関連116検査・既存RN本文一致を確認。u102〜u109修正版は未配置。保存UUIDの独立実照合・global cutover・正式商品受入れを実機OK報告へ含めない。以下の配置前記述は各時点の履歴。
 
 2026-10-03 u94更新：latest weekly §6.6〜6.10に沿い、offline source→部分graphに補足の明示引用訂正・撤回と本人向けsafe text／visual projectionを追加した。RNに閉じたDTOのvalidatorと専用renderer、latest／viewerのversion dispatchを実装。合成入力のbackend26検査、実RN componentを使う11検査、旧表示互換2検査PASS。全追加・変更fileの正本は`current_structure/03_analysis_current_structure.md` §4.5。u95で認証済みsaved period loader→ASTOR明示V2生成entryを追加し、13検査＋既存26検査PASS。u96/u97で専用保存と既存API接続を実装し、承認済みtableを実DBへ適用・照合した。稼働API配信・実ユーザー入力での実行・実機は未実施。
 
@@ -195,6 +195,14 @@ _action_change_pairでu107の共有2核/required typed relation/exact範囲と�
 補足全文の被覆、全文引用訂正/撤回、元回答座標と反復occurrenceをu107経路で維持。単独teへの置換は旧結果を返さず保留。夢/3節/非過去/否定/他者/疑問名詞を切り落として通さない。未対応の願望は既存private ATTENTIONが残り得るが、実行済み行動・順序・safeラベルとして出さない。従属形は意味上の別の出来事を増やす集約keyにはせず、既存のevidence occurrenceで区別する。
 
 vertical76/storage15/saved period13/API6＝110 PASS。6合成本文と既存RN本文が一致。新private fieldはserializerのallowlistから外れ、保存DTO/API/RN/共有ownerの変更なし。既存「てから」拒否1例は今回のpositive cohortへ移し、他の保留期待は維持。未配置。たら/3節/右端feeling/一般場面/役割/比較/IFの解釈は未完了。
+
+### 3.10 u109 行動後の過去感情
+
+既存の共有action/change完全pairを消費する同じcompiler/realizer内で、右端の安心した/安心しました・落ち着いた・嬉しかった/うれしかったを有限形として解釈する。明示本人主語はSELF、省略主語はUNSPECIFIEDを保つ。Analysisの結果型はPAST_FEELING/feeling/past。共有側で安心はfact、他3lemmaはfeelingとなるwitnessを正確に照合し、一律factへ変更しない。
+
+元全文2核・required relation・exact範囲・明示接続の条件を維持する。safeラベルは型から「〜（記録された気持ち）」と再構成し、本人の実行、改善/悪化評価、原因へ昇格しない。te形の実行表示は同一source/field/spanの自身の順序線と右端過去結果・元全文証拠が必要。PAST_FEELINGは既存結果nodeへ投影する内部型で、公開DTO/DB/RN契約へfieldを追加しない。
+
+補足全文、全文引用訂正/撤回、反復episode、保存後の再生成なしを既存経路で維持。共有未認定形（ほっとした/落ち着きました）、程度修飾、否定、夢/伝聞/推測、単独感情、たら/3節はこの解釈を許可しない。関連116検査・6合成出力の既存RN本文一致を確認。一般感情理解・商品受入れ・稼働配置は未完了。
 
 ## 4. Period source-set freeze
 

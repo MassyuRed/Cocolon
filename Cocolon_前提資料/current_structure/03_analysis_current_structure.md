@@ -14,7 +14,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**u108 candidate**：指定Analysis API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承。u107の後/あと接続に続き、既存9動詞の「てから＋明記された過去変化」を行動・結果nodeと順序線へ接続（§4.14）。単独te形は過去にせず、完全な共有2核と元全文証拠がある場合だけ解釈・表示する。関連110検査と既存RN表示契約の本文一致を確認。u106/u107はPR反映済み、u102〜u108修正版は未配置。以下の配置前記録は当時の履歴であり、実機再確認を内容修正の前提へ戻さない。
+**u109 candidate**：指定Analysis API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承。行動の後/あと/てからに明記された「安心した」「落ち着いた」「嬉しかった」等を、過去の気持ちとして結果nodeへ接続（§4.15）。完全な共有pairと元全文証拠を要求し、行動の効果・改善とは断定しない。関連116検査と既存RN本文一致を確認。u102〜u109修正版は未配置。以下の配置前記録は当時の履歴であり、実機再確認を内容修正の前提へ戻さない。
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
@@ -297,6 +297,17 @@ saved period13/API6を合わせ104 PASS。6合成本文をrootが読み、既存
 | mashos-api `ai/tests/test_analysis_observed_storage.py` | 既存14＋追加1＝15 PASS。te形pairのcommit/再読取・文章/DTO一致・再生成0・private marker非漏出 |
 
 saved period13/API6と合わせ110 PASS、6合成出力の既存RN本文がbackendと一致。通常の主文有限grammarにteを加えず、同じ9動詞と4結果述語の範囲を維持。疑問名詞/否定/未解釈scopeの保留も維持する。共有owner/API/DB/DTO/RN/依存の変更0、file配置不変。canonical04 §3.9と06/API handoff末尾u108へ同期。たら/3節/一般感情変化/場面/役割/比較/IFは残る。u102〜u108は未配置。
+
+### 4.15 行動後の過去の気持ちを表示へ接続（2026-10-04 u109）
+
+| Repository / existing file | 更新した責務 |
+|---|---|
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 既存共有pair右端の5有限形を完全解釈しPAST_FEELINGへ。共有fact/feeling差を照合し、明示SELF/主体省略と元全文証拠を保持 |
+| 同 `observed_route_realizer.py` | 「記録された気持ち」として再構成し、te形自身の同一source順序contextへ感情結果を含める。原因/改善を補わない |
+| mashos-api `ai/tests/test_cmee_analysis_v1d_vertical.py` | 81 PASS。有限形/主体/証拠/共有witness、未解釈scope、補足/全文訂正/撤回、反復、te context欠落 |
+| mashos-api `ai/tests/test_analysis_observed_storage.py` | 16 PASS。過去感情pairの保存/再読取・同一文章/DTO・再生成0・内部型非漏出 |
+
+saved period13/API6と合わせ116 PASS、242 subtests PASS。6合成本文の既存RN表示modelとbackend本文が一致。安心した/安心しました、落ち着いた、嬉しかった/うれしかったの5形と省略/明示SELFに限定。単独感情、未認定のほっとした/落ち着きました、程度修飾、否定、夢/伝聞/推測は今回の認定へ含めない。新規file/共有owner/API/DB/DTO/RN/依存変更0、file配置不変。詳細はcanonical04 §3.10と06/API handoff末尾u109。u102〜u109は未配置。
 
 ## 5. Source and artifact identity
 
