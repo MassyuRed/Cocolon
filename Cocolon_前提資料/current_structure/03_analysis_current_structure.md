@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u130 内容修正（未配置）**：本人の過去の場面・担当でも、主語直後の「今日／昨日」を独立した時点として保持する。「私は昨日職場にいた」「私は今日、会議の司会を担当した」が文章と図へ出るようになり、否定・原文出典・補足の訂正／撤回を保持した。時間接尾・日語の重複・接続語との併用・無区切りの「…の…」は保留し、場面／担当の「今日の…」も日付へ変換しない。vertical136検査PASS、合成6本文のbackend／RN表示modelで全文・identity・node順・edge一致。実機未検証。STRUCTURE_MAP_DELTA_NONE、既存compiler以外の意味owner・API／DB／RN経路は不変。隣接する既存欠陥「明日職場」の誤名詞化は未修正で次対象。詳細は06／API handoff末尾u130。
+
 **u129 内容修正（未配置）**：既存9動詞の本人有限節で、主語直後の「今日／昨日」を対象名詞へ混入させず、原文の時点・否定・希望を文章と図へ保持する。前置型との語順差だけで期間差を出さない。「今日の資料」は名詞修飾のまま。時間接尾／範囲／日の細分と、日語後に区切りなしで続く「…の…」は保留（「昨日仕事の資料」も現段階は保留。「昨日、仕事の資料」は保持）。補足・訂正・撤回の出典も確認。vertical131検査PASS、合成6本文のbackend／RN表示modelの全文・identity・node順・edge一致。実機／React suiteの今回再検証ではない。変更は既存Analysis compiler内、共有owner／DTO／DB／RN経路は不変。詳細は06／API handoff末尾u129。
 
 **直前の配置確認（u128）**：空期間を422にしていた処理の修正版API `1a42b9ebc25ba9765bdb17658cf47dd631d9f40d` は、既存Renderのdeploy dep-db146o2d0e5s73e1bc3gでJST21:16:55 live。healthz/bootstrap200、未認証status401を確認。u122正常空画面修正を含む **TestFlight 1.0（6401）** もJST21:35:58送信成功。run64/37201625245、実source `166343c0b160e787b857a7b9d407b6f0afce756d`、archive/export/uploadとrun全体success。次は新版の端末導入と、記録のない状態で「現在表示できるわたしマップはありません。」の正常表示確認。Apple側利用可能/端末導入・本人実応答は未確認。生成・保存再表示・比較の実成功とは分ける。詳細はAPI運用§32・06末尾u128。
