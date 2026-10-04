@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u123 配置確認**：Mashのdevelopment2値設定手順後、指定API42ff019…をJST16:12に再配置live（dep-db0vo2ou01pc73c5psa0）。公開health200/未認証401を確認。env値の独立取得・本人生成/比較は未確認。次は6301を開き直してわたしマップの生成/表示→同じ結果の再表示。u122正常空表示のRN修正は未build。実行記録はAPI運用§27・06末尾u123。
+
 **u122 端末エラー対応**：正常な保存結果なし応答をRNが取得エラーにする不具合を修正。明示emptyは中立表示・既読更新なし、通信/HTTP失敗と不正versionの拒否を維持。関連RN17検査成功、端末修正版は未build。画像時刻前後のAPIは200だが保存結果再表示は未成立。次は承認済みのdevelopment2値を同じAPI42ff019…へ反映して本人生成/再表示を確認する。新RN buildを生成再開の前提にしない。詳細はAPI運用§26・06末尾u122。
 
 **u121 配置現在地**：比較SQLはu120で共有DBへ適用・照合済み（実履歴20261004051211）。API `42ff019975a5d94c3c6de2a63623fb0864630ed4` はJST14:24 live、health200/未認証status401確認。新TestFlight **1.0(6301)** はrun63/37179645655でJST14:35にarchive/export/upload成功。初期read_only/比較OFFはMashの設定手順実施報告で、環境変数値の独立取得はしていない。新版端末導入・保存読取、比較development有効化と本人生成/再表示が次の承認済み作業。§4.24までの内容実装181検査/606 subtests・RN13検査は過去の候補検証として保持する。商品受入れ・IF/global cutoverは未成立。実行記録は正本06末尾u121とAPI運用資料§25。以下のlegacy構成やu96/u97時点の未配置記述は当時の経路・履歴であり、最新の配置状態は本段落を参照する。
