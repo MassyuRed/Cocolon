@@ -2,7 +2,7 @@
 
 - document id: `cocolon.cmee.v1d_v1e.analysis_route.detailed_design`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u110 content correctionは未配置
+- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u111 content correctionは未配置
 - IF-route runtime state: `NOT_IMPLEMENTED`
 - Analysis activation: `STORAGE_APPROVED_AND_APPLIED_2026_10_04_JST`; API315f5b5…配置済み、Mashが6201実機確認OKを報告
 - API source effect: V2保存・read分岐実装、default off
@@ -34,7 +34,7 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
-**2026-10-04 u110 candidate**：指定API315f5b5…/TestFlight6201と実機OKのMash報告を継承。明示SELFの過去の所在4形を、共有event/factと完全な文境界を照合してSCENE表示へ接続（§3.11）。関連124検査・既存RN本文一致を確認。u102〜u110修正版は未配置。保存UUIDの独立実照合・global cutover・正式商品受入れを実機OK報告へ含めない。以下の配置前記述は各時点の履歴。
+**2026-10-04 u111 candidate**：指定API315f5b5…/TestFlight6201と実機OKのMash報告を継承。明示SELFの過去の担当4形を、共有event/factと完全節・文境界からROLE表示へ接続（§3.12）。関連129検査・既存RN本文一致を確認。u102〜u111修正版は未配置。保存UUIDの独立実照合・global cutover・正式商品受入れを実機OK報告へ含めない。以下の配置前記述は各時点の履歴。
 
 2026-10-03 u94更新：latest weekly §6.6〜6.10に沿い、offline source→部分graphに補足の明示引用訂正・撤回と本人向けsafe text／visual projectionを追加した。RNに閉じたDTOのvalidatorと専用renderer、latest／viewerのversion dispatchを実装。合成入力のbackend26検査、実RN componentを使う11検査、旧表示互換2検査PASS。全追加・変更fileの正本は`current_structure/03_analysis_current_structure.md` §4.5。u95で認証済みsaved period loader→ASTOR明示V2生成entryを追加し、13検査＋既存26検査PASS。u96/u97で専用保存と既存API接続を実装し、承認済みtableを実DBへ適用・照合した。稼働API配信・実ユーザー入力での実行・実機は未実施。
 
@@ -213,6 +213,16 @@ ledgerの全文span一致に加え、parser field上の前後が句点/改行/fi
 表示は「職場にいた／いなかった（記録された場面）」等を型から再構成。行動・勤務・所属・役割・因果は補わない。後続する本人過去行動の「その後/それから」は既存明示順序の条件だけで接続する。通常補足の完全解釈、同じ所在の反対極性の保留、全文訂正/撤回、独立記録件数、保存後の再生成なしを維持する。公開DTO/DB/RNに内部型を追加しない。
 
 今日/昨日/その後付き所在、現在/未来/願望、他者/疑問名詞/夢/引用/伝聞/推測/未解釈修飾、memo_actionは対象外。ROLEは未実装。関連124検査・305 subtests、6合成本文の既存RN一致を確認。一般場面理解・商品受入れ・稼働配置は未完了。
+
+### 3.12 u111 明示された本人の過去の担当
+
+既存compiler/realizerで「私/僕/わたし/自分は＋既存名詞句＋を＋担当した/担当しました/担当しなかった/担当しませんでした」を完全解釈し、内部role_state=PAST_RESPONSIBILITY、SELF/fact/pastと正負をROLEへ投影する。担当関係は述語が根拠であり、名詞の職業/肩書き分類表や「私はNです」から推測しない。safe表示は「〜を担当した／担当しなかった（記録された担当）」で、恒久身分・能力・責任感・担当対象の実行完了を補わない。
+
+u110の共有generic event witnessと文境界処理を共通化。explicit/current_input claim scope、memo単独span、event predicate/current_user/fact、対応する極性、past/current_input時制、fragment/dependencyなし、完全な本人有限節と元scalar/UTF-8証拠が必要。ROLEだけretention=required/shouldを許可する。共有保持ownerは4節以上で普通の明示本文をshouldへ下げており、grounding/claim scope/certaintyとは独立している。共有retentionを書き換えず、optional断片は拒否し、SCENEのrequired条件も変えない。
+
+場面/役割/考え/行動/結果を同じ記録から残しても、段階の順序を自動生成しない。後続「その後/それから＋本人過去行動」や既存action/change pairだけが既存の明示順序へ接続する。補足全文・同じ担当の反対極性保留・全文訂正/撤回・独立記録件数・正負別node・保存後の同一文章/図を維持。内部型はDB/公開DTO/RNへ追加しない。
+
+前置時点、現在/未来/願望/可能、他者/疑問/引用/伝聞/推測/夢/未解釈修飾、memo_actionは対象外。「記録を担当した」のような名詞keyword由来のshared actionも今回保留。関連129検査・359 subtests、6合成本文の既存RN一致を確認。一般ROLE理解、注記/比較/IF、商品受入れと稼働配置は未完了。
 
 ## 4. Period source-set freeze
 

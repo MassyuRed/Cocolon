@@ -14,7 +14,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**u110 candidate**：指定Analysis API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承。「私は職場にいた／いなかった」等の明示された過去の所在4形をSCENEへ接続（§4.16）。共有event/factと完全節・真の文境界を照合し、勤務/役割/原因を推測しない。関連124検査と既存RN本文一致を確認。u102〜u110修正版は未配置。以下の配置前記録は当時の履歴であり、実機再確認を内容修正の前提へ戻さない。
+**u111 candidate**：指定Analysis API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承。「私は会議の司会を担当した／担当しなかった」等の過去の担当4形をROLEへ接続（§4.17）。共有event/factと本人の完全節・文境界を照合し、能力/恒久身分/仕事の完了を推測しない。5種類のnodeを同一記録から表示する検査を含む関連129検査と既存RN本文一致を確認。u102〜u111修正版は未配置。以下の配置前記録は当時の履歴であり、実機再確認を内容修正の前提へ戻さない。
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
@@ -321,6 +321,19 @@ saved period13/API6と合わせ116 PASS、242 subtests PASS。6合成本文の�
 saved period13/API6と合わせ124 PASS、305 subtests PASS。6合成本文の既存RN表示modelとbackendが一致。単なる隣接から順序は作らず、後続「その後/それから＋本人過去行動」の明示接続だけ既存順序処理へ渡る。「〜で調べた」の「で」から場所を推測しない。共有default actorだけで本人とせず、共有current_input時制は完全有限形のpastで具体化する。今日/昨日/その後を前置した所在、現在/未来/願望/推測/他者/夢/引用/未解釈修飾、memo_actionからの所在は今回含めない。
 
 新規file/共有owner/API/DB/DTO/RN/依存変更0、file配置不変。詳細はcanonical04 §3.11と06/API handoff末尾u110。ROLE、一般場面、annotations/conflict/比較/IFは未完了。u102〜u110は未配置。
+
+### 4.17 本人が明記した過去の担当を役割表示へ接続（2026-10-04 u111）
+
+| Repository / existing file | 更新した責務 |
+|---|---|
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 明示SELF＋既存名詞句＋を＋担当した/担当しました/担当しなかった/担当しませんでしたを全文解釈。共有event/factと文境界を確認し内部PAST_RESPONSIBILITYからROLEへ。ROLEだけrequired/shouldを許可しoptionalは拒否 |
+| 同 `observed_route_realizer.py` | 「会議の司会を担当した／担当しなかった（記録された担当）」等へ型から再構成。担当対象を実行完了/能力/身分へ変換しない |
+| mashos-api `ai/tests/test_cmee_analysis_v1d_vertical.py` | 93 PASS。4形/主体/全文証拠、共有witness、未解釈scopeと長文境界、補足/全文訂正/撤回、同一内容と正負分離、5種類のnodeと明示順序 |
+| mashos-api `ai/tests/test_analysis_observed_storage.py` | 17 PASS。既存SCENE正負を維持しROLE正負の保存/再読取を追加。文章/DTO/identity一致、再生成0、内部型非漏出 |
+
+saved period13/API6と合わせ129 PASS、359 subtests PASS。6合成本文の既存RN表示modelとbackendが一致。共有retentionは4節以上で通常本文をshouldへ下げる保持優先度であり、明示された担当を不確かな内容と扱わない。SCENEのrequired条件は従来どおり。5種類がそろっても段階間の順序/原因は推測せず、明示された接続だけを描く。
+
+名詞copula「私は司会者です」からROLEを推論しない。現在/未来/願望/可能/推測/伝聞/他者/引用/夢/未解釈修飾/疑問名詞、今日/昨日/その後付き担当、memo_actionの担当は今回対象外。「私は記録を担当した」は共有側が名詞keyword由来でactionにするため未対応として保留。新規file/共有owner/API/DB/DTO/RN/依存変更0、file配置不変。詳細はcanonical04 §3.12と06/API handoff末尾u111。一般ROLE・注記/conflict/期間比較/IFは未完了。u102〜u111は未配置。
 
 ## 5. Source and artifact identity
 
