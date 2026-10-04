@@ -14,7 +14,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**u118 candidate**（§4.24）：場面・担当の完全な本人過去節に付く「今日/昨日/その後/それから」を文章・図へ接続し、場面→担当→行動の明示順序を保持。関連181検査・606 subtests、RN13検査、合成6本文の一致を確認。u102〜u118未配置。u117の比較SQLは未適用・既定OFF、指定版の実機OKはMashの既報。
+**u121 配置現在地**：比較SQLはu120で共有DBへ適用・照合済み（実履歴20261004051211）。API `42ff019975a5d94c3c6de2a63623fb0864630ed4` はJST14:24 live、health200/未認証status401確認。新TestFlight **1.0(6301)** はrun63/37179645655でJST14:35にarchive/export/upload成功。初期read_only/比較OFFはMashの設定手順実施報告で、環境変数値の独立取得はしていない。新版端末導入・保存読取、比較development有効化と本人生成/再表示が次の承認済み作業。§4.24までの内容実装181検査/606 subtests・RN13検査は過去の候補検証として保持する。商品受入れ・IF/global cutoverは未成立。実行記録は正本06末尾u121とAPI運用資料§25。以下のlegacy構成やu96/u97時点の未配置記述は当時の経路・履歴であり、最新の配置状態は本段落を参照する。
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
