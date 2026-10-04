@@ -14,7 +14,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**u107 local candidate**：指定Analysis API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承。u106の未成立結果に続き、「本人の過去行動＋後/あと＋明記された変化」の完全な2節を行動・結果nodeと順序線へ接続（§4.13）。原因や改善とは解釈しない。関連104検査と既存RN表示契約の本文一致を確認。u106/u107の計9 file差分は自動承認審査による公開先への明示許可不足でGitHub未反映、u102〜u107修正版は未配置。以下の配置前記録は当時の履歴であり、実機再確認を内容修正の前提へ戻さない。
+**u107 PR candidate**：指定Analysis API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承。u106の未成立結果に続き、「本人の過去行動＋後/あと＋明記された変化」の完全な2節を行動・結果nodeと順序線へ接続（§4.13）。原因や改善とは解釈しない。関連104検査と既存RN表示契約の本文一致を確認。u106/u107の計9 file差分はMashの明示公開許可後にPR3（550f33f…）/PR30（8e36e8e…）へ反映・照合済み、u102〜u107修正版は未配置。以下の配置前記録は当時の履歴であり、実機再確認を内容修正の前提へ戻さない。
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
@@ -276,7 +276,7 @@ saved period13/API6と合わせ89 PASS。既存RN contract/view modelとbackend�
 
 saved period13/API6と合わせ97 PASS。合成6出力の既存RN view modelとbackend本文が一致。対応はmemoの完全な「まだ＋名詞句＋は/が/も＋見つかる/決まる/定まるの現在否定状態」。主体/先行行動/因果/順序は推測しない。共有意味owner/API/DB/DTO/RN/依存変更0、未配置。一般結果・複文・場面/役割・annotations/conflict/比較/IFは未完了。canonical04 §3.7と06/API handoff末尾u106を参照。
 
-### 4.13 明示された行動の後の変化を接続（2026-10-04 u107、local未反映）
+### 4.13 明示された行動の後の変化を接続（2026-10-04 u107、PR反映済み）
 
 | Repository / existing file | 更新した責務 |
 |---|---|
@@ -285,7 +285,7 @@ saved period13/API6と合わせ97 PASS。合成6出力の既存RN view modelとb
 | mashos-api `ai/tests/test_cmee_analysis_v1d_vertical.py` | 既存65＋追加6＝71 PASS。2端点と接続詞のexact証拠、反復、補足、全文訂正/撤回、shared witness欠落、夢/伝聞/疑問/否定等の保留 |
 | mashos-api `ai/tests/test_analysis_observed_storage.py` | 既存13＋追加1＝14 PASS。行動・変化・順序のcommit/再読取、同一DTO/文章、再生成0、内部型非漏出 |
 
-saved period13/API6を合わせ104 PASS。6合成本文をrootが読み、既存RN view modelとbackend本文が完全一致。右端は既存名詞/の連結＋は/が/も＋減った/増えた/変わった/戻った、actor未指定のaffirmative/fact/past。両端の何/誰/幾を含む疑問名詞を保留。たら/てから、3節、一般的な感情変化、否定行動のpair、進んだ等は未対応。共有owner/API/DB/DTO/RN/依存変更0。地図全体のfile配置は不変、上記既存責務だけを更新。canonical04 §3.8、06/API handoff末尾u107へ同期。u106/u107はGitHub未反映、未配置。
+saved period13/API6を合わせ104 PASS。6合成本文をrootが読み、既存RN view modelとbackend本文が完全一致。右端は既存名詞/の連結＋は/が/も＋減った/増えた/変わった/戻った、actor未指定のaffirmative/fact/past。両端の何/誰/幾を含む疑問名詞を保留。たら/てから、3節、一般的な感情変化、否定行動のpair、進んだ等は未対応。共有owner/API/DB/DTO/RN/依存変更0。地図全体のfile配置は不変、上記既存責務だけを更新。canonical04 §3.8、06/API handoff末尾u107へ同期。u106/u107はPR反映済み、未配置。
 
 ## 5. Source and artifact identity
 

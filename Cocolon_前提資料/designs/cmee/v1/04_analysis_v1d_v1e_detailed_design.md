@@ -2,7 +2,7 @@
 
 - document id: `cocolon.cmee.v1d_v1e.analysis_route.detailed_design`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u107 content correctionは未配置（u106/u107はGitHub未反映）
+- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u107 content correctionは未配置（u106/u107はPR反映済み）
 - IF-route runtime state: `NOT_IMPLEMENTED`
 - Analysis activation: `STORAGE_APPROVED_AND_APPLIED_2026_10_04_JST`; API315f5b5…配置済み、Mashが6201実機確認OKを報告
 - API source effect: V2保存・read分岐実装、default off
@@ -34,7 +34,7 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
-**2026-10-04 u107 local candidate**：API315f5b5…live/TestFlight6201と実機OKのMash報告を継承。未成立結果に続き、完全な行動/変化の2節と明示順序を接続（§3.8）。u106/u107はGitHub未反映、u102〜u107 sourceは未配置。保存UUIDの独立実照合・global cutover・正式商品受入れを実機OK報告へ含めない。以下の配置前記述は各時点の履歴。
+**2026-10-04 u107 PR candidate**：API315f5b5…live/TestFlight6201と実機OKのMash報告を継承。未成立結果に続き、完全な行動/変化の2節と明示順序を接続（§3.8）。u106/u107はPR反映済み、u102〜u107 sourceは未配置。保存UUIDの独立実照合・global cutover・正式商品受入れを実機OK報告へ含めない。以下の配置前記述は各時点の履歴。
 
 2026-10-03 u94更新：latest weekly §6.6〜6.10に沿い、offline source→部分graphに補足の明示引用訂正・撤回と本人向けsafe text／visual projectionを追加した。RNに閉じたDTOのvalidatorと専用renderer、latest／viewerのversion dispatchを実装。合成入力のbackend26検査、実RN componentを使う11検査、旧表示互換2検査PASS。全追加・変更fileの正本は`current_structure/03_analysis_current_structure.md` §4.5。u95で認証済みsaved period loader→ASTOR明示V2生成entryを追加し、13検査＋既存26検査PASS。u96/u97で専用保存と既存API接続を実装し、承認済みtableを実DBへ適用・照合した。稼働API配信・実ユーザー入力での実行・実機は未実施。
 
@@ -184,7 +184,7 @@ actorはUNSPECIFIEDであり共有frameのcurrent_user既定値を本人の行�
 
 shared action_supports_changeを因果として輸入せず、実際の後接続を根拠に既存OBSERVED_ORDERだけを作る。接続語を含む元の全文evidenceをedgeへ加え、各端点もexact scalar/UTF-8/hashを維持する。両端をoccurrenceとして分離し、反復した行動を一つにまとめない。通常補足は両端の解釈成立時だけconnectorを含む全文を被覆する。訂正/撤回は元の完全な2節span全体を対象にし、部分引用へ広げない。置換後の証拠は回答原文へ戻す。
 
-vertical71/storage14/saved period13/API6＝104 PASS、合成6本文と既存RN表示が一致。保存DTO/serializer、API/RN/共有ownerを変更せず旧artifactを再生成しない。たら/てから/3節、右端feeling、否定行動のpair、共有側が2核化しない進んだ、一般日本語/比較/IFは対象外。u106/u107の公開PR反映は自動審査で明示許可不足により停止、local実装候補として保持。新規owner/契約/配置効果なし。
+vertical71/storage14/saved period13/API6＝104 PASS、合成6本文と既存RN表示が一致。保存DTO/serializer、API/RN/共有ownerを変更せず旧artifactを再生成しない。たら/てから/3節、右端feeling、否定行動のpair、共有側が2核化しない進んだ、一般日本語/比較/IFは対象外。u106/u107は当初の自動審査停止後、Mashの明示公開許可を受けPR3/PR30へ反映・照合済み。新規owner/契約/配置効果なし。
 
 ## 4. Period source-set freeze
 
