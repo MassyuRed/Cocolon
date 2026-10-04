@@ -14,7 +14,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**u109 candidate**：指定Analysis API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承。行動の後/あと/てからに明記された「安心した」「落ち着いた」「嬉しかった」等を、過去の気持ちとして結果nodeへ接続（§4.15）。完全な共有pairと元全文証拠を要求し、行動の効果・改善とは断定しない。関連116検査と既存RN本文一致を確認。u102〜u109修正版は未配置。以下の配置前記録は当時の履歴であり、実機再確認を内容修正の前提へ戻さない。
+**u110 candidate**：指定Analysis API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承。「私は職場にいた／いなかった」等の明示された過去の所在4形をSCENEへ接続（§4.16）。共有event/factと完全節・真の文境界を照合し、勤務/役割/原因を推測しない。関連124検査と既存RN本文一致を確認。u102〜u110修正版は未配置。以下の配置前記録は当時の履歴であり、実機再確認を内容修正の前提へ戻さない。
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
@@ -308,6 +308,19 @@ saved period13/API6と合わせ110 PASS、6合成出力の既存RN本文がbacke
 | mashos-api `ai/tests/test_analysis_observed_storage.py` | 16 PASS。過去感情pairの保存/再読取・同一文章/DTO・再生成0・内部型非漏出 |
 
 saved period13/API6と合わせ116 PASS、242 subtests PASS。6合成本文の既存RN表示modelとbackend本文が一致。安心した/安心しました、落ち着いた、嬉しかった/うれしかったの5形と省略/明示SELFに限定。単独感情、未認定のほっとした/落ち着きました、程度修飾、否定、夢/伝聞/推測は今回の認定へ含めない。新規file/共有owner/API/DB/DTO/RN/依存変更0、file配置不変。詳細はcanonical04 §3.10と06/API handoff末尾u109。u102〜u109は未配置。
+
+### 4.16 本人が明記した過去の所在を場面表示へ接続（2026-10-04 u110）
+
+| Repository / existing file | 更新した責務 |
+|---|---|
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 明示SELF＋既存名詞句＋に＋いた/いました/いなかった/いませんでしたを全文解釈。共有event/fact/極性と原文境界を照合し、内部PAST_PRESENCEからSCENEへ。長文の読点/固定長分割を完全節と扱わない |
+| 同 `observed_route_realizer.py` | 所在の肯定/否定を「〜にいた／いなかった（記録された場面）」へ型から再構成。実行/勤務/役割を補わない |
+| mashos-api `ai/tests/test_cmee_analysis_v1d_vertical.py` | 88 PASS。4形/SELF/出典、共有witness、未解釈scopeと長文分割、明示順序、補足/全文訂正/撤回、件数と正負分離 |
+| mashos-api `ai/tests/test_analysis_observed_storage.py` | 17 PASS。場面正負と後続行動順序の保存/再読取、文章/DTO/identity一致、再生成0、内部型非漏出 |
+
+saved period13/API6と合わせ124 PASS、305 subtests PASS。6合成本文の既存RN表示modelとbackendが一致。単なる隣接から順序は作らず、後続「その後/それから＋本人過去行動」の明示接続だけ既存順序処理へ渡る。「〜で調べた」の「で」から場所を推測しない。共有default actorだけで本人とせず、共有current_input時制は完全有限形のpastで具体化する。今日/昨日/その後を前置した所在、現在/未来/願望/推測/他者/夢/引用/未解釈修飾、memo_actionからの所在は今回含めない。
+
+新規file/共有owner/API/DB/DTO/RN/依存変更0、file配置不変。詳細はcanonical04 §3.11と06/API handoff末尾u110。ROLE、一般場面、annotations/conflict/比較/IFは未完了。u102〜u110は未配置。
 
 ## 5. Source and artifact identity
 
