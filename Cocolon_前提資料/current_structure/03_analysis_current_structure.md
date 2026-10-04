@@ -14,7 +14,9 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**u128 現在地**：空期間を422にしていた処理の修正版API `1a42b9ebc25ba9765bdb17658cf47dd631d9f40d` は、既存Renderのdeploy dep-db146o2d0e5s73e1bc3gでJST21:16:55 live。healthz/bootstrap200、未認証status401を確認。u122正常空画面修正を含む **TestFlight 1.0（6401）** もJST21:35:58送信成功。run64/37201625245、実source `166343c0b160e787b857a7b9d407b6f0afce756d`、archive/export/uploadとrun全体success。次は新版の端末導入と、記録のない状態で「現在表示できるわたしマップはありません。」の正常表示確認。Apple側利用可能/端末導入・本人実応答は未確認。生成・保存再表示・比較の実成功とは分ける。詳細はAPI運用§32・06末尾u128。
+**u129 内容修正（未配置）**：既存9動詞の本人有限節で、主語直後の「今日／昨日」を対象名詞へ混入させず、原文の時点・否定・希望を文章と図へ保持する。前置型との語順差だけで期間差を出さない。「今日の資料」は名詞修飾のまま。時間接尾／範囲／日の細分と、日語後に区切りなしで続く「…の…」は保留（「昨日仕事の資料」も現段階は保留。「昨日、仕事の資料」は保持）。補足・訂正・撤回の出典も確認。vertical131検査PASS、合成6本文のbackend／RN表示modelの全文・identity・node順・edge一致。実機／React suiteの今回再検証ではない。変更は既存Analysis compiler内、共有owner／DTO／DB／RN経路は不変。詳細は06／API handoff末尾u129。
+
+**直前の配置確認（u128）**：空期間を422にしていた処理の修正版API `1a42b9ebc25ba9765bdb17658cf47dd631d9f40d` は、既存Renderのdeploy dep-db146o2d0e5s73e1bc3gでJST21:16:55 live。healthz/bootstrap200、未認証status401を確認。u122正常空画面修正を含む **TestFlight 1.0（6401）** もJST21:35:58送信成功。run64/37201625245、実source `166343c0b160e787b857a7b9d407b6f0afce756d`、archive/export/uploadとrun全体success。次は新版の端末導入と、記録のない状態で「現在表示できるわたしマップはありません。」の正常表示確認。Apple側利用可能/端末導入・本人実応答は未確認。生成・保存再表示・比較の実成功とは分ける。詳細はAPI運用§32・06末尾u128。
 
 **配置済みの基盤**：比較SQLはu120で共有DBへ適用・照合済み（実履歴20261004051211）。上記APIにu102〜u118の内容修正版・u124診断・u127空期間処理を含む。development2値はMashの設定手順報告で、値の独立取得はしていない。u127のAPI191/RN17検査成功は合成検証として継承。6401は正常空表示修正を含み、旧6301とは区別する。商品受入れ・IF/global cutoverは未成立。以下のlegacy経路/過去節の未配置記述は当時の履歴で、最新状態はこの結論を参照する。
 
