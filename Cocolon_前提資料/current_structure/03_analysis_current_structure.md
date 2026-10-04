@@ -14,11 +14,9 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**u123 配置確認**：Mashのdevelopment2値設定手順後、指定API42ff019…をJST16:12に再配置live（dep-db0vo2ou01pc73c5psa0）。公開health200/未認証401を確認。env値の独立取得・本人生成/比較は未確認。次は6301を開き直してわたしマップの生成/表示→同じ結果の再表示。u122正常空表示のRN修正は未build。実行記録はAPI運用§27・06末尾u123。
+**u124 現在地**：指定API42ff019…はlive。Mashの新しい端末画面はanalysis_observed_map_unavailableで、同時刻のlatest/ensureは422・supabase_errors=0。生成エンジンが成果物を返さない理由は既存ログで失われていたため、既存realizerにcurrent/previous/comparisonと固定理由だけを記録する修正を用意した。本文/ID/任意例外文字列は記録せず、生成条件・422・保存・公開DTOは維持。関連186検査PASS、独立review blocking0。診断版は未配置であり、本人生成/保存再表示・期間比較成功は未成立。診断版APIの指定commitは `c4db3a3aae70d906ccb7a0c44c4862692b5287c1`。次はAPI運用§28の指定commit配置と本人端末からの再取得で実理由を確認する。DB/env/native変更は不要。詳細は06末尾u124。
 
-**u122 端末エラー対応**：正常な保存結果なし応答をRNが取得エラーにする不具合を修正。明示emptyは中立表示・既読更新なし、通信/HTTP失敗と不正versionの拒否を維持。関連RN17検査成功、端末修正版は未build。画像時刻前後のAPIは200だが保存結果再表示は未成立。次は承認済みのdevelopment2値を同じAPI42ff019…へ反映して本人生成/再表示を確認する。新RN buildを生成再開の前提にしない。詳細はAPI運用§26・06末尾u122。
-
-**u121 配置現在地**：比較SQLはu120で共有DBへ適用・照合済み（実履歴20261004051211）。API `42ff019975a5d94c3c6de2a63623fb0864630ed4` はJST14:24 live、health200/未認証status401確認。新TestFlight **1.0(6301)** はrun63/37179645655でJST14:35にarchive/export/upload成功。初期read_only/比較OFFはMashの設定手順実施報告で、環境変数値の独立取得はしていない。新版端末導入・保存読取、比較development有効化と本人生成/再表示が次の承認済み作業。§4.24までの内容実装181検査/606 subtests・RN13検査は過去の候補検証として保持する。商品受入れ・IF/global cutoverは未成立。実行記録は正本06末尾u121とAPI運用資料§25。以下のlegacy構成やu96/u97時点の未配置記述は当時の経路・履歴であり、最新の配置状態は本段落を参照する。
+**配置済みの基盤**：比較SQLはu120で共有DBへ適用・照合済み（実履歴20261004051211）。内容修正版API `42ff019975a5d94c3c6de2a63623fb0864630ed4` はJST16:12のdeploy `dep-db0vo2ou01pc73c5psa0` でlive。development2値はMashの設定手順報告で独立取得なし。実機の新しいエラーは生成分岐への到達を示すが、比較modeの値や比較成功を独立証明しない。TestFlight1.0(6301)送信成功、画像にbuild番号なし。u122のRN正常空表示修正は未build。商品受入れ・IF/global cutoverは未成立。以下のlegacy経路/過去節の未配置記述は当時の履歴で、最新状態はこの結論を参照する。
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
@@ -543,9 +541,9 @@ missing reasonとscopeを持つ別claim／gap marker。observed factを作るた
 
 ## 9. Current gaps
 
-1. V1-Dの生成・safe表示・補足・保存/API/RN接続は実装済み。稼働指定版への実機OKはMash報告。u102〜u118の内容修正版は未配置。
+1. V1-Dの生成・safe表示・補足・保存/API/RN接続とu102〜u118の内容修正版は配置済み。u124の実機422は未解決で、原因確認用の限定ログ修正は未配置。
 2. current Watashi Mapはpresentation-orientedで、claim／edge evidence graph authorityではない。
-3. 五種類の限定node、原証拠、不一致の未確定表示、明示現在負荷と守る意向の注記を接続済み。一般的な各段階/矛盾/負荷/保護理解と解釈仮説は未完了。期間比較は永続保存/API接続候補まで実装。SQL適用・有効化・修正版の実機確認は未実施。
+3. 五種類の限定node、原証拠、不一致の未確定表示、明示現在負荷と守る意向の注記を接続済み。一般的な各段階/矛盾/負荷/保護理解と解釈仮説は未完了。期間比較は永続保存/API接続まで実装し、SQL適用済み。development手順はMash報告、本人生成/期間比較の実機成功は未成立。
 4. IF route／HypotheticalScenarioGraph／SavedRouteIntentのruntime ownerはexact0。
 5. Analysis専用Product Read packetとactual-device IF map verificationは未実行。
 6. 保存identityの独立した実照合、修正版の実DB/端末検証、旧経路からのglobal cutoverと正式商品受入れは未完了。機械検証を商品完成へ換算しない。
