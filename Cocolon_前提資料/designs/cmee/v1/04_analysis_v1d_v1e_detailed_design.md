@@ -2,7 +2,7 @@
 
 - document id: `cocolon.cmee.v1d_v1e.analysis_route.detailed_design`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u114 content correctionは未配置
+- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u115 content correctionは未配置
 - IF-route runtime state: `NOT_IMPLEMENTED`
 - Analysis activation: `STORAGE_APPROVED_AND_APPLIED_2026_10_04_JST`; API315f5b5…配置済み、Mashが6201実機確認OKを報告
 - API source effect: V2保存・read分岐実装、default off
@@ -34,7 +34,7 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
-**2026-10-04 u114 candidate**（§3.15）：同じnodeへ集約された複数記録の未確定表示を、対象の順序・不足範囲・理由が完全一致する場合だけ一つにまとめる。原graph/証拠と旧保存本文は保持。関連148検査・447 subtests、既存RN11検査、新規3＋旧保存形式1の本文一致を確認。u102〜u114修正版は未配置。指定API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承する。
+**2026-10-04 u115 candidate**（§3.16）：本人の明示現在希望「守りたい」を対象付きPROTECTIVE注記へ接続。原証拠、集約、補足更新、保存後の同一文章/図を保持する。保護の実効や他行動の動機は確定しない。関連156検査・509 subtests、RN12検査、6合成本文のbackend/RN一致を確認。u102〜u115修正版は未配置。指定API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承する。
 
 2026-10-03 u94更新：latest weekly §6.6〜6.10に沿い、offline source→部分graphに補足の明示引用訂正・撤回と本人向けsafe text／visual projectionを追加した。RNに閉じたDTOのvalidatorと専用renderer、latest／viewerのversion dispatchを実装。合成入力のbackend26検査、実RN componentを使う11検査、旧表示互換2検査PASS。全追加・変更fileの正本は`current_structure/03_analysis_current_structure.md` §4.5。u95で認証済みsaved period loader→ASTOR明示V2生成entryを追加し、13検査＋既存26検査PASS。u96/u97で専用保存と既存API接続を実装し、承認済みtableを実DBへ適用・照合した。稼働API配信・実ユーザー入力での実行・実機は未実施。
 
@@ -250,6 +250,16 @@ safe DTOは既存annotation_ref/target_ref/kind/visible_labelのみ。原節/述
 safe DTOの構造、文章/図の単一artifact、元の証拠と記録件数を変更しない。_text_from_visualや保存readへこの集約を適用しないため、旧保存artifactは旧本文/DTO/identityのまま読める。欠番のあるgap_refは既存API/RN contract内。原graphの再解釈、旧保存の書換えは行わない。
 
 2記録の同じ希望でvisible8→4/private8保持を確認。別対象/未読内容、理由/対象順、新規保存再読取、旧保存互換を含め関連148検査・447 subtests、既存RN11 PASS。新規3＋旧保存形式1の本文/identity/unknown対象をRNと照合。Auth/DBは合成、修正版未配置。§3.14で残した重複表示の不足をこの範囲で解消する。
+
+### 3.16 u115 明示された現在の保護意向
+
+明示SELF（私/僕/わたし/自分）は＋既存名詞句＋を＋守りたい/守りたいですを全文解析する。共有explicit/current-input/requiredまたはshould、wish nucleus、current_user/positive/wish/current_inputとoperator:wishを要求。共有predicate_kindはwish、または名詞「気持ち」等でoperator:feelingも存在するfeelingに限定する。文の一部、他者発言/伝聞/夢の未解決な帰属、否定/過去/推測/未解釈修飾/複文、memo_actionからこの意向を作らない。共有意味ownerや一般の守る活用文法は変更しない。
+
+希望nodeと同じ全文証拠でPROTECTIVE / SOURCE_EXPLICIT_ANNOTATIONを作り、対象別に集約して全記録と更新refを保持する。原文にない保護成果、他の行動の動機、原因、性格、診断、route順序へ変換しない。通常補足と完全引用訂正/撤回は既存のsource更新を通し、撤回された原spanを再利用しない。
+
+safe表示は対象nodeを「家族を守ることへの希望」等、注記を「守りたいという意向の記録です。実際に守れているかは確定していません。」とする。RN見出しは「守る対象」。realizerは対象の完全希望形・意味・同一全文証拠、保存validatorは希望対象と規定表示を照合する。既存4key annotation DTO、単一artifactの文章/図、private evidence分離、旧保存readを維持。別対象のBURDENとの共存は可能だが、一般的な保護行動や複文の保護意向の解釈は未実装。
+
+関連156検査・509 subtests、RN12 PASS。6合成本文の全文読取とbackend/RN本文・identity・node順・注記target照合、実生成→合成RPC commit→再生成なしreadを確認。Auth/DB I/Oは合成、修正版未配置。一般の注記/期間比較/IFの完了や商品受入れへ換算しない。
 
 ## 4. Period source-set freeze
 

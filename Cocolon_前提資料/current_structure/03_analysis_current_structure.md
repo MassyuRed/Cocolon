@@ -14,7 +14,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**u114 candidate**（§4.20）：同じnodeへ集約された複数記録の未確定表示を、対象の順序・不足範囲・理由が完全一致する場合だけ一つにまとめる。原graph/証拠と旧保存本文は保持。関連148検査・447 subtests、既存RN11検査、新規3＋旧保存形式1の本文一致を確認。u102〜u114修正版は未配置。指定API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承する。
+**u115 candidate**（§4.21）：本人が明記した現在の「守りたい」を希望nodeと対象付きPROTECTIVE注記へ接続。全文証拠、複数記録の集約、補足/訂正/撤回、保存後の同一文章/図を保持し、守れているという成果や他行動の動機は推測しない。関連156検査・509 subtests、RN12検査、6合成本文のbackend/RN一致を確認。u102〜u115修正版は未配置。指定API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承する。
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
@@ -366,6 +366,20 @@ ObservedGraph/private保存の8gapと各record/evidenceは全て残す。private
 
 既存vertical106/storage23/saved period13/API6＝148 PASS・447 subtests PASS、RN11 PASS。新規3本文と旧保存形式1本文のbackend/RN本文・identity・node順・unknown対象を照合。独立read-only reviewでblocking指摘なし。Auth/DB I/Oは合成、未配置。詳細はcanonical04 §3.15と06/API handoff末尾u114。次は未接続PROTECTIVEの最小明示根拠を既存共有意味と照合する。
 
+### 4.21 本人が明記した守る対象を希望と注記へ接続（2026-10-04 u115）
+
+「私は家族を守りたい」の共有wishは、従来Analysisのsafe表示へ到達していなかった。明示SELF＋既存名詞句＋を＋守りたい/守りたいですの全文を、既存ATTENTION_OR_THOUGHTとPROTECTIVE注記へ接続する。現在の肯定希望、共有の明示根拠、元の文境界が必要。対象を名詞から推測せず、成果/原因/行動の動機/性格へ昇格しない。過去/否定/推測/伝聞/夢/他者/未解釈複文/memo_actionはこの新注記の対象外。
+
+| 既存file | u115の責務差分 |
+|---|---|
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 完全有限形と共有wishを照合。PROTECTIVE対象nodeと同じ全文証拠、集約、更新refを保持。通常補足/明示訂正/撤回に接続 |
+| 同 `observed_route_realizer.py` | 対象/希望意味/全証拠を再照合し、守る意向と未確定な実効を既存safe DTOへ投影 |
+| mashos-api `ai/services/ai_inference/analysis_observed_service.py` | PROTECTIVEの対象と表示を保存readで検証。private evidence分離と既存保存互換を維持 |
+| mashos-api `ai/tests/test_cmee_analysis_v1d_vertical.py`・`ai/tests/test_analysis_observed_storage.py` | 全文証拠、共有witness、帰属/時制/文境界、集約と更新、実生成→合成RPC保存→再読取、破損DTO拒否 |
+| Cocolon `components/selfStructure/WatashiMapV2Renderer.js`・`tests/analysis-watashi-map-v2-contracts.test.js` | PROTECTIVEの見出しを「守る対象」へ。意向を達成済みと読ませず、対象と未確定の説明を表示 |
+
+vertical112/storage25/saved period13/API6＝156 PASS・509 subtests PASS、RN12 PASS。rootが6合成本文を全文読み、backend/RNの本文・identity・node順・注記target一致を確認。独立read-only reviewの伝聞/夢prefix指摘を再現して修正。共有の名詞「気持ち」によるfeeling分類とwishの重なりは、完全な現在希望の条件を維持して局所対応した。Auth/DB I/Oは合成、未配置。新規path/共有owner/API契約/DTO/SQL/依存変更0。詳細はcanonical04 §3.16と06/API handoff末尾u115。
+
 ## 5. Source and artifact identity
 
 ### 5.1 Grounded sources
@@ -474,9 +488,9 @@ missing reasonとscopeを持つ別claim／gap marker。observed factを作るた
 
 ## 9. Current gaps
 
-1. V1-Dの生成・safe表示・補足・保存/API/RN接続は実装済み。稼働指定版への実機OKはMash報告。u102〜u114の内容修正版は未配置。
+1. V1-Dの生成・safe表示・補足・保存/API/RN接続は実装済み。稼働指定版への実機OKはMash報告。u102〜u115の内容修正版は未配置。
 2. current Watashi Mapはpresentation-orientedで、claim／edge evidence graph authorityではない。
-3. 五種類の限定node、原証拠、不一致の未確定表示、明示現在負荷の注記を接続済み。一般的な各段階/矛盾/負荷理解、protective注記、解釈仮説、期間比較は未完了。
+3. 五種類の限定node、原証拠、不一致の未確定表示、明示現在負荷と守る意向の注記を接続済み。一般的な各段階/矛盾/負荷/保護理解、解釈仮説、期間比較は未完了。
 4. IF route／HypotheticalScenarioGraph／SavedRouteIntentのruntime ownerはexact0。
 5. Analysis専用Product Read packetとactual-device IF map verificationは未実行。
 6. 保存identityの独立した実照合、修正版の実DB/端末検証、旧経路からのglobal cutoverと正式商品受入れは未完了。機械検証を商品完成へ換算しない。
@@ -512,10 +526,10 @@ CMEE Analysis detailed design candidate:
 
 ## 12. Last verified refs
 
-    Cocolon PR30 implementation base（Draft/open/unmerged）
-      4e8892bbaaebb6c010a63f9f477575d462c7ead8
+    Cocolon PR30 u115作業前head（Draft/open/unmerged）
+      0caf2e22a69986c315ed970e31dce6c5cc3ec070
 
-    mashos-api PR3 implementation base（Draft/open/unmerged）
-      e6882f1009a03640357d83d8b9fec7c656611f7a
+    mashos-api PR3 u115作業前head（Draft/open/unmerged）
+      0488b30a4e6b0ef0de07a9de909340ca1771711e
 
 次回はfresh refと実fileを再確認する。

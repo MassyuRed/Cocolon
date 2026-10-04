@@ -72,6 +72,26 @@ test('backend-generated projections yield identical JS text and artifact referen
   }
 });
 
+test('protective intention renders a neutral heading and keeps target and uncertainty', async () => {
+  const projection = copy(fixtures[0].projection);
+  projection.nodes[0].node_kind = 'ATTENTION_OR_THOUGHT';
+  projection.nodes[0].visible_label = '家族を守ることへの希望';
+  projection.annotation_badges = [{ annotation_ref: 'a1', target_ref: projection.nodes[0].node_ref,
+    kind: 'PROTECTIVE', visible_label: '守りたいという意向の記録です。実際に守れているかは確定していません。' }];
+  const Renderer = moduleLoader()('components/selfStructure/WatashiMapV2Renderer.js').default;
+  let render;
+  await act(async () => { render = TestRenderer.create(React.createElement(Renderer, { contentJson: projection })); });
+  const body = JSON.stringify(render.toJSON());
+  assert.ok(body.includes('守る対象'));
+  assert.ok(!body.includes('守っているもの'));
+  assert.ok(body.includes(projection.nodes[0].visible_label));
+  assert.ok(body.includes(projection.annotation_badges[0].visible_label));
+  const view = contract.buildWatashiMapV2ViewModel(projection);
+  assert.equal(view.annotations[0].targetLabel, projection.nodes[0].visible_label);
+  assert.ok(view.text.includes(projection.annotation_badges[0].visible_label));
+  await act(async () => render.unmount());
+});
+
 test('uncertainty, annotations and conflicts keep their graph targets in text and view model', () => {
   const projection = copy(fixtures[0].projection);
   projection.annotation_badges = [{ annotation_ref: 'a1', target_ref: projection.edges[0].edge_ref,

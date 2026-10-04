@@ -45,7 +45,7 @@ export default function WatashiMapV2Renderer({ contentJson, colors, isDark = fal
         </View>
       ))}
       {model.annotations.map((badge) => <View style={styles.card} key={badge.annotation_ref}>
-        <Text style={styles.kind}>{badge.kind === 'PROTECTIVE' ? '守っているもの' : '負荷'}</Text>
+        <Text style={styles.kind}>{badge.kind === 'PROTECTIVE' ? '守る対象' : '負荷'}</Text>
         <Text style={styles.subtle}>関連する観測：{badge.targetLabel}</Text>
         <Text style={styles.body}>{badge.visible_label}</Text>
       </View>)}
