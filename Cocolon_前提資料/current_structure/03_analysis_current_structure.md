@@ -14,7 +14,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**u113 candidate**（§4.19）：本人が同じ文で明示した現在の希望とつらさを、根拠付きBURDEN注記へ接続。両端と対比全文の証拠、補足/全文訂正/撤回、保存後の同じ文章/図を保持する。関連143検査・447 subtests、既存RN11検査、6合成本文の一致を確認。u102〜u113修正版は未配置。指定API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承する。
+**u114 candidate**（§4.20）：同じnodeへ集約された複数記録の未確定表示を、対象の順序・不足範囲・理由が完全一致する場合だけ一つにまとめる。原graph/証拠と旧保存本文は保持。関連148検査・447 subtests、既存RN11検査、新規3＋旧保存形式1の本文一致を確認。u102〜u114修正版は未配置。指定API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承する。
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
@@ -358,6 +358,14 @@ vertical97/storage19/saved period13/API6＝135 PASS、379 subtests PASS。既存
 
 saved period13/API6と合わせ143 PASS・447 subtests PASS。既存RN11 PASS、6合成本文のbackend/RN本文・identity・node順・注記target一致。DB/auth I/Oは合成。新規path/共有owner/API契約/DTO/RN/SQL/依存変更0。PROTECTIVE・解釈仮説・一般の負荷・期間比較・IFは残る。複数記録で同じ未確定項目が重複する既存表示は次の直接改善候補として記録。詳細はcanonical04 §3.14と06/API handoff末尾u113、未配置。
 
+### 4.20 同じ対象・不足範囲・理由の未確定表示を集約（2026-10-04 u114）
+
+u113実出力で、同じ希望へ集約した2記録から同じ未確定項目が8行表示されていた。既存 `mashos-api/ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py` の生成projectionだけで、順序付きbetween_node_refs・missing_scope・reason_codeの完全一致を初出gap_refへまとめ、同例は4行とする。文言だけではまとめず、別対象・別理由・対象順の差を保持する。
+
+ObservedGraph/private保存の8gapと各record/evidenceは全て残す。private previewとsafe表示に同じhelperを使い、文章と図は同じDTOから作る。_text_from_visualとread_savedは変更しないので、旧保存の8重複gap/本文/identityはそのまま読める。API/RNはgap_refの連番を要求しない。新しいpathやcontract、compiler/共有意味/保存service/RN source/DB/依存の変更はない。
+
+既存vertical106/storage23/saved period13/API6＝148 PASS・447 subtests PASS、RN11 PASS。新規3本文と旧保存形式1本文のbackend/RN本文・identity・node順・unknown対象を照合。独立read-only reviewでblocking指摘なし。Auth/DB I/Oは合成、未配置。詳細はcanonical04 §3.15と06/API handoff末尾u114。次は未接続PROTECTIVEの最小明示根拠を既存共有意味と照合する。
+
 ## 5. Source and artifact identity
 
 ### 5.1 Grounded sources
@@ -466,7 +474,7 @@ missing reasonとscopeを持つ別claim／gap marker。observed factを作るた
 
 ## 9. Current gaps
 
-1. V1-Dの生成・safe表示・補足・保存/API/RN接続は実装済み。稼働指定版への実機OKはMash報告。u102〜u113の内容修正版は未配置。
+1. V1-Dの生成・safe表示・補足・保存/API/RN接続は実装済み。稼働指定版への実機OKはMash報告。u102〜u114の内容修正版は未配置。
 2. current Watashi Mapはpresentation-orientedで、claim／edge evidence graph authorityではない。
 3. 五種類の限定node、原証拠、不一致の未確定表示、明示現在負荷の注記を接続済み。一般的な各段階/矛盾/負荷理解、protective注記、解釈仮説、期間比較は未完了。
 4. IF route／HypotheticalScenarioGraph／SavedRouteIntentのruntime ownerはexact0。

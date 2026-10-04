@@ -2,7 +2,7 @@
 
 - document id: `cocolon.cmee.v1d_v1e.analysis_route.detailed_design`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u113 content correctionは未配置
+- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u114 content correctionは未配置
 - IF-route runtime state: `NOT_IMPLEMENTED`
 - Analysis activation: `STORAGE_APPROVED_AND_APPLIED_2026_10_04_JST`; API315f5b5…配置済み、Mashが6201実機確認OKを報告
 - API source effect: V2保存・read分岐実装、default off
@@ -34,7 +34,7 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
-**2026-10-04 u113 candidate**（§3.14）：本人が同じ文で明示した現在の希望とつらさを、根拠付きBURDEN注記へ接続。両端と対比全文の証拠、補足/全文訂正/撤回、保存後の同じ文章/図を保持する。関連143検査・447 subtests、既存RN11検査、6合成本文の一致を確認。u102〜u113修正版は未配置。指定API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承する。
+**2026-10-04 u114 candidate**（§3.15）：同じnodeへ集約された複数記録の未確定表示を、対象の順序・不足範囲・理由が完全一致する場合だけ一つにまとめる。原graph/証拠と旧保存本文は保持。関連148検査・447 subtests、既存RN11検査、新規3＋旧保存形式1の本文一致を確認。u102〜u114修正版は未配置。指定API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承する。
 
 2026-10-03 u94更新：latest weekly §6.6〜6.10に沿い、offline source→部分graphに補足の明示引用訂正・撤回と本人向けsafe text／visual projectionを追加した。RNに閉じたDTOのvalidatorと専用renderer、latest／viewerのversion dispatchを実装。合成入力のbackend26検査、実RN componentを使う11検査、旧表示互換2検査PASS。全追加・変更fileの正本は`current_structure/03_analysis_current_structure.md` §4.5。u95で認証済みsaved period loader→ASTOR明示V2生成entryを追加し、13検査＋既存26検査PASS。u96/u97で専用保存と既存API接続を実装し、承認済みtableを実DBへ適用・照合した。稼働API配信・実ユーザー入力での実行・実機は未実施。
 
@@ -242,6 +242,14 @@ Analysis内部ObservedAnnotationは対象、原文両端と対比全文の3 evid
 safe DTOは既存annotation_ref/target_ref/kind/visible_labelのみ。原節/述語/対象/3証拠を照合して表示文を再構成し、既存RNと同じ順で本文へ含める。private保存はraw/source_labels/predicate_lemmaを含めない。保存validatorはBURDEN/既存thought対象/閉じた表示文/重複/shapeを確認し、旧空注記も読取時再生成しない。DB/DTO/RN契約変更なし。
 
 関連143検査・447 subtests、既存RN11、6合成本文/identity/注記target一致。Auth/DBは合成、未配置。PROTECTIVE・解釈仮説・一般の負荷理解・期間比較・IFは対象外。複数記録で重複する既存未確定表示は別の具体的改善候補として残す。
+
+### 3.15 u114 同一未確定表示の期間集約
+
+同じnodeへ集約された複数記録から、対象/不足範囲/理由が同じ未確定項目を繰り返し表示しない。ObservedGraphとprivate保存は全gapを保ち、生成時のprivate/safe projectionだけで順序付きbetween_node_refs・missing_scope・reason_codeの完全一致を初出gap_refへまとめる。ラベルだけのdedupeは禁止を維持し、別対象・別理由・対象順の差を消さない。
+
+safe DTOの構造、文章/図の単一artifact、元の証拠と記録件数を変更しない。_text_from_visualや保存readへこの集約を適用しないため、旧保存artifactは旧本文/DTO/identityのまま読める。欠番のあるgap_refは既存API/RN contract内。原graphの再解釈、旧保存の書換えは行わない。
+
+2記録の同じ希望でvisible8→4/private8保持を確認。別対象/未読内容、理由/対象順、新規保存再読取、旧保存互換を含め関連148検査・447 subtests、既存RN11 PASS。新規3＋旧保存形式1の本文/identity/unknown対象をRNと照合。Auth/DBは合成、修正版未配置。§3.14で残した重複表示の不足をこの範囲で解消する。
 
 ## 4. Period source-set freeze
 
