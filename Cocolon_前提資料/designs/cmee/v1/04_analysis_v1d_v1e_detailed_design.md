@@ -2,7 +2,7 @@
 
 - document id: `cocolon.cmee.v1d_v1e.analysis_route.detailed_design`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u112 content correctionは未配置
+- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u113 content correctionは未配置
 - IF-route runtime state: `NOT_IMPLEMENTED`
 - Analysis activation: `STORAGE_APPROVED_AND_APPLIED_2026_10_04_JST`; API315f5b5…配置済み、Mashが6201実機確認OKを報告
 - API source effect: V2保存・read分岐実装、default off
@@ -34,7 +34,7 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
-**2026-10-04 u112 candidate**：同じ原入力のSELF過去factにある肯定・否定を、対象2node付き未確定表示へ接続（§3.13）。同source/field/相対日/完全命題だけを比較し、同一機会や真偽は断定しない。訂正/撤回後の原証拠、保存再読取、既存RNの同じ文章/図を保持。関連135検査・RN11検査、6合成本文の一致を確認。u102〜u112修正版は未配置。指定API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承する。
+**2026-10-04 u113 candidate**（§3.14）：本人が同じ文で明示した現在の希望とつらさを、根拠付きBURDEN注記へ接続。両端と対比全文の証拠、補足/全文訂正/撤回、保存後の同じ文章/図を保持する。関連143検査・447 subtests、既存RN11検査、6合成本文の一致を確認。u102〜u113修正版は未配置。指定API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承する。
 
 2026-10-03 u94更新：latest weekly §6.6〜6.10に沿い、offline source→部分graphに補足の明示引用訂正・撤回と本人向けsafe text／visual projectionを追加した。RNに閉じたDTOのvalidatorと専用renderer、latest／viewerのversion dispatchを実装。合成入力のbackend26検査、実RN componentを使う11検査、旧表示互換2検査PASS。全追加・変更fileの正本は`current_structure/03_analysis_current_structure.md` §4.5。u95で認証済みsaved period loader→ASTOR明示V2生成entryを追加し、13検査＋既存26検査PASS。u96/u97で専用保存と既存API接続を実装し、承認済みtableを実DBへ適用・照合した。稼働API配信・実ユーザー入力での実行・実機は未実施。
 
@@ -232,6 +232,16 @@ u110の共有generic event witnessと文境界処理を共通化。explicit/curr
 ObservedConflictはtarget_refs・exact evidence_refs・閉じたreasonを持つAnalysis内部型。private保存は証拠位置とhash等のallowlistだけで、原文/名詞/propositionを加えない。safe DTOは既存conflict_ref/target_refs/visible_labelだけ。本文は同じDTOから組み、既存RNと一致させる。保存validatorは非空badgeの形・2対象・重複・表示文を確認し、旧空badgeの読取時再生成は行わない。DB/DTO/RN契約変更なし。
 
 135検査・379 subtestsと既存RN11検査PASS、6合成出力の同じ本文/identity/順序/badge件数を確認。Auth/DB I/Oは合成で、今回の修正版は未配置。§3.2のconflict未接続をこの限定範囲で更新する。一般的矛盾・注記・期間比較・IFの完成ではない。
+
+### 3.14 u113 希望と明示された現在負荷の非連続注記
+
+§8のSOURCE_EXPLICIT_ANNOTATIONを最小範囲で接続。既存願望grammarのSELF/current/positive/wishと、明示SELFのつらい/苦しい（です形含む）が一文で対比される場合に限る。shared exact2、finite contrast feeling、contrast relation、元文の完全境界と接続語を照合する。negative極性だけで負荷を推測しない。負荷をroute node/順序edge/因果へせず、対象の希望nodeにBURDENを付ける。
+
+Analysis内部ObservedAnnotationは対象、原文両端と対比全文の3 evidence、SOURCE_EXPLICIT_ANNOTATION、原因/継続期間の未確定、禁止昇格、更新refを保持する。同一対象/同一述語のbadgeは集約するが各source証拠を残す。型付き負荷核だけを消費し、他の未知scopeを消さない。通常補足の全文coverageと全文訂正/撤回へ同じ完全pair証明を使う。撤回されたsourceだけを除外し、別記録の注記を消さない。
+
+safe DTOは既存annotation_ref/target_ref/kind/visible_labelのみ。原節/述語/対象/3証拠を照合して表示文を再構成し、既存RNと同じ順で本文へ含める。private保存はraw/source_labels/predicate_lemmaを含めない。保存validatorはBURDEN/既存thought対象/閉じた表示文/重複/shapeを確認し、旧空注記も読取時再生成しない。DB/DTO/RN契約変更なし。
+
+関連143検査・447 subtests、既存RN11、6合成本文/identity/注記target一致。Auth/DBは合成、未配置。PROTECTIVE・解釈仮説・一般の負荷理解・期間比較・IFは対象外。複数記録で重複する既存未確定表示は別の具体的改善候補として残す。
 
 ## 4. Period source-set freeze
 

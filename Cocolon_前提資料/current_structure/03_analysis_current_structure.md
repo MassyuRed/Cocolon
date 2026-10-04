@@ -14,7 +14,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**u112 candidate**：同じ原入力のSELF過去factにある肯定・否定を、対象2node付き未確定表示へ接続（§4.18）。同source/field/相対日/完全命題だけを比較し、同一機会や真偽は断定しない。訂正/撤回後の原証拠、保存再読取、既存RNの同じ文章/図を保持。関連135検査・RN11検査、6合成本文の一致を確認。u102〜u112修正版は未配置。指定API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承する。
+**u113 candidate**（§4.19）：本人が同じ文で明示した現在の希望とつらさを、根拠付きBURDEN注記へ接続。両端と対比全文の証拠、補足/全文訂正/撤回、保存後の同じ文章/図を保持する。関連143検査・447 subtests、既存RN11検査、6合成本文の一致を確認。u102〜u113修正版は未配置。指定API315f5b5…/TestFlight6201への実機確認OKはMash報告として継承する。
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
@@ -344,6 +344,20 @@ saved period13/API6と合わせ129 PASS、359 subtests PASS。6合成本文の�
 
 vertical97/storage19/saved period13/API6＝135 PASS、379 subtests PASS。既存RN11 PASS、6合成出力のbackend/RN本文・identity・順序・badge件数一致。2件read-only reviewでblocking指摘なし。Auth/DBは合成検証。新規path/DTO/RN/SQL/依存変更0、未配置。一般的な矛盾理解、protective/burden注記、期間比較、IFは残る。詳細はcanonical04 §3.13と06/API handoff末尾u112。
 
+### 4.19 希望と対比して明示された現在の負荷を注記表示へ接続（2026-10-04 u113）
+
+既存共有意味のexact2核・finite contrast feeling witness・contrast relationから、明示SELF現在肯定願望と明示SELFのつらい/苦しい（丁寧形含む）の完全な一文だけを採用する。両端と接続を含む全文、元の文境界を要求し、否定/過去/推測/伝聞/他者/修飾/別文の隣接は負荷へ昇格しない。表示は「この希望と対比して、つらいと記述されています。原因や続いている期間は確定していません」。route nodeや順序線を増やさず、非連続の対象付き注記とする。
+
+| 既存file | u113の責務差分 |
+|---|---|
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | ObservedAnnotation、SOURCE_EXPLICIT_ANNOTATION、希望target、両端/全文の3証拠。同じ対象/述語の集約、補足の全文coverage、訂正/撤回と更新ref、その他の未知scope温存 |
+| 同 `observed_route_realizer.py` | 原節/有限形/対象/証拠を照合し既存annotation_badgesへ投影。同じDTOからRNと一致する本文を構成 |
+| mashos-api `ai/services/ai_inference/analysis_observed_service.py` | private evidence allowlist、非空注記の保存validator、空注記の旧artifact互換。原文/内部意味型をAPIへ漏らさない |
+| mashos-api `ai/tests/test_cmee_analysis_v1d_vertical.py` | 103 PASS。完全根拠、境界/witness、集約、未知scope、補足/訂正/撤回、safe replay |
+| mashos-api `ai/tests/test_analysis_observed_storage.py` | 21 PASS。保存/再読取の同一DTO・本文・identity、再生成0、private非漏出、破損注記拒否 |
+
+saved period13/API6と合わせ143 PASS・447 subtests PASS。既存RN11 PASS、6合成本文のbackend/RN本文・identity・node順・注記target一致。DB/auth I/Oは合成。新規path/共有owner/API契約/DTO/RN/SQL/依存変更0。PROTECTIVE・解釈仮説・一般の負荷・期間比較・IFは残る。複数記録で同じ未確定項目が重複する既存表示は次の直接改善候補として記録。詳細はcanonical04 §3.14と06/API handoff末尾u113、未配置。
+
 ## 5. Source and artifact identity
 
 ### 5.1 Grounded sources
@@ -452,9 +466,9 @@ missing reasonとscopeを持つ別claim／gap marker。observed factを作るた
 
 ## 9. Current gaps
 
-1. V1-Dの生成・safe表示・補足・保存/API/RN接続は実装済み。稼働指定版への実機OKはMash報告。u102〜u112の内容修正版は未配置。
+1. V1-Dの生成・safe表示・補足・保存/API/RN接続は実装済み。稼働指定版への実機OKはMash報告。u102〜u113の内容修正版は未配置。
 2. current Watashi Mapはpresentation-orientedで、claim／edge evidence graph authorityではない。
-3. 五種類の限定nodeと原証拠、同一原入力の正負の未確定表示を接続済み。一般的な各段階/矛盾理解、protective/burden注記、期間比較は未完了。
+3. 五種類の限定node、原証拠、不一致の未確定表示、明示現在負荷の注記を接続済み。一般的な各段階/矛盾/負荷理解、protective注記、解釈仮説、期間比較は未完了。
 4. IF route／HypotheticalScenarioGraph／SavedRouteIntentのruntime ownerはexact0。
 5. Analysis専用Product Read packetとactual-device IF map verificationは未実行。
 6. 保存identityの独立した実照合、修正版の実DB/端末検証、旧経路からのglobal cutoverと正式商品受入れは未完了。機械検証を商品完成へ換算しない。
