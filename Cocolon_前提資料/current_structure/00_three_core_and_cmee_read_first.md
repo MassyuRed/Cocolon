@@ -71,7 +71,7 @@ CMEEは設計候補がlocal artifactに留まり、GitHub上のdurable ownerが�
 |---|---|---|---|
 | EmlisAI構造 | [01_emlis_ai_current_structure.md](01_emlis_ai_current_structure.md) | 入力を「読まれた形」の観測へ変え、必要な場合だけ一点を問い、回答分だけ観測を深める | production観測／受け取りはCURRENT_ACTUAL。問い／refined observationはQ1〜Q3コード実装済み、Q4統合が次。環境適用・商品判断は別作業 |
 | Piece構造 | [02_piece_current_structure.md](02_piece_current_structure.md) | 保存済み入力を、他者が単独で受け取れるcanonical textと画像artifactへ変える | current user-visibleはold Q&A。Piece V2はCODE_DISABLED／DESIGNED_NOT_IMPLEMENTED |
-| 分析構造 | [03_analysis_current_structure.md](03_analysis_current_structure.md) | 蓄積入力から現在の自己構造routeを根拠付きで示し、観測routeと分離したIF routeを扱う | 場面・担当の完全な本人過去節に付く「今日/昨日/その後/それから」を文章・図へ接続し、場面→担当→行動の明示順序を保持。関連181検査・606 subtests、RN13検査、合成6本文の一致を確認。u102〜u118未配置。u117の比較SQLは未適用・既定OFF、指定版の実機OKはMashの既報。 詳細は03 §4.24 |
+| 分析構造 | [03_analysis_current_structure.md](03_analysis_current_structure.md) | 蓄積入力から現在の自己構造routeを根拠付きで示し、観測routeと分離したIF routeを扱う | 場面・担当の完全な本人過去節に付く「今日/昨日/その後/それから」を文章・図へ接続し、場面→担当→行動の明示順序を保持。関連181検査・606 subtests、RN13検査、合成6本文の一致を確認。u119で共有DB/稼働APIを照合し、比較SQL1本・API42ff019…・新nativeの適用対象を固定。6201は比較本文未対応。u102〜u118未配置・SQL未適用、追加適用は個別判断待ち。内容実装は03 §4.24、接続手順はAPI運用資料§23・正本06末尾u119 |
 | CMEE | [04_cmee_current_structure.md](04_cmee_current_structure.md) | exact3の商品に共通するsource・意味・plan・realization・traceを持つ共有生成中枢 | core別currentは各map・最新06を参照。Analysis u118は既存compiler/realizerの場面・担当の明示日/順序を接続。共有意味owner/外部DTO変更0。比較SQL未適用・内容修正版未配置、商品受入れは未成立 |
 
 CMEEは技術上first-classに育てる共有Engine targetであるが、独立したuser-facing商品目的を持たないため、商品構造上の「第四の中核」ではない。商品中核はEmlisAI／Piece／分析構造のexact3である。
