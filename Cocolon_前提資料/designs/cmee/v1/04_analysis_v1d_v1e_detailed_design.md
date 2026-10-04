@@ -2,7 +2,7 @@
 
 - document id: `cocolon.cmee.v1d_v1e.analysis_route.detailed_design`
 - lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
-- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u117 content correctionは未配置
+- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u118 content correctionは未配置
 - IF-route runtime state: `NOT_IMPLEMENTED`
 - Analysis activation: `STORAGE_APPROVED_AND_APPLIED_2026_10_04_JST`; API315f5b5…配置済み、Mashが6201実機確認OKを報告
 - API source effect: V2保存・read分岐実装、default off
@@ -34,7 +34,7 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
-**2026-10-04 u117 candidate**（§3.18）：等長の直前期間との比較を、既存の保存・latest/history/detail APIへ接続する候補を実装。両期間の訂正/削除/補足/保持期限を保存・読出しへ反映する。関連173検査・548 subtests、隔離DB58項目、RN13検査、3保存本文の一致を確認。SQLは未適用、比較は既定OFF、u102〜u117未配置。指定API315f5b5…/TestFlight6201実機OKはMash報告として継承する。
+**2026-10-04 u118 candidate**（§3.19）：場面・担当の完全な本人過去節に付く「今日/昨日/その後/それから」を文章・図へ接続し、場面→担当→行動の明示順序を保持。関連181検査・606 subtests、RN13検査、合成6本文の一致を確認。u102〜u118未配置。u117の比較SQLは未適用・既定OFF、指定版の実機OKはMashの既報。
 
 2026-10-03 u94更新：latest weekly §6.6〜6.10に沿い、offline source→部分graphに補足の明示引用訂正・撤回と本人向けsafe text／visual projectionを追加した。RNに閉じたDTOのvalidatorと専用renderer、latest／viewerのversion dispatchを実装。合成入力のbackend26検査、実RN componentを使う11検査、旧表示互換2検査PASS。全追加・変更fileの正本は`current_structure/03_analysis_current_structure.md` §4.5。u95で認証済みsaved period loader→ASTOR明示V2生成entryを追加し、13検査＋既存26検査PASS。u96/u97で専用保存と既存API接続を実装し、承認済みtableを実DBへ適用・照合した。稼働API配信・実ユーザー入力での実行・実機は未実施。
 
@@ -282,6 +282,15 @@ private-evidence.v2はcurrentのallowlisted graph/source_membersにcomparison_de
 前期間だけが保持期限外のときは明示comparison_eligible=falseとし、現在の単期分析を利用可能にする。保存済比較の期限切れはguard不一致で非表示。一般の認可/通信/生成エラーから単期へfallbackしない。等長計算はUTCに限定し、既存単期guardのsession timezone契約は変更しない。
 
 serviceの比較生成flagはCOCOLON_ANALYSIS_PERIOD_COMPARISON_MODE、developmentだけ有効、既定off。新migration20261004041627は未適用で、稼働DB/API/端末への効果0。対応SQL→対応API→有効化の順で個別対象の判断が必要。flag offは新規比較生成の停止で、旧API版の比較read互換を保証しない。関連173検査・548 subtests、隔離PGlite58項目、RN13検査、3保存本文の一致を確認。live DBや独立同時接続での競合・実機の商品受入れは未検証。全file/責務はcurrent03 §4.23、実行記録は06/API handoff末尾u117。
+
+
+### 3.19 u118 場面/担当に付く記述時点と明示接続
+
+既存PAST_PRESENCE/PAST_RESPONSIBILITYの完全SELF過去節へ、単一の今日/昨日/その後/それからを接続する。解析入口とfragment witness入口を同じprefix保持関数へ揃え、全文の元source_partsを維持。TODAYの共有presentは記述日のwitnessとして限定許可し、有限形のpast/正負は不変。SCENE retention・ROLE required/shouldの既存条件を維持する。safeの場面/担当にも同じprefixを投影し、元の完全命題へ再照合する。
+
+日語はsource-boundで、別sourceや後続節へ継承しない。日語だけで順序を作らず、既存の隣接完全節と明示接続からのみOBSERVED_ORDERへ接続。A→B→Aは3occurrence、訂正/撤回後の中間を橋渡ししない。開いた伝聞/夢や主語後の日語を名詞として誤採用する形は保留する。複数prefix/主語後日時/一般日時を新対応としない。
+
+関連181検査・606 subtests、既存RN13検査、合成6本文の同一text/identity/node・edge順を確認。保存/再読取は実service＋合成Auth/DB I/O、実機未検証。新規path/共有owner/API/DTO/RN/SQL/依存変更0。u117の未適用SQL/対応API配置を完了とはしない。全file/責務はcurrent03 §4.24、実行記録は06/API handoff末尾u118。
 
 ## 4. Period source-set freeze
 

@@ -14,7 +14,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**u117 candidate**（§4.23）：等長の直前期間との比較を、既存の保存・latest/history/detail APIへ接続する候補を実装。両期間の訂正/削除/補足/保持期限を保存・読出しへ反映する。関連173検査・548 subtests、隔離DB58項目、RN13検査、3保存本文の一致を確認。SQLは未適用、比較は既定OFF、u102〜u117未配置。指定API315f5b5…/TestFlight6201実機OKはMash報告として継承する。
+**u118 candidate**（§4.24）：場面・担当の完全な本人過去節に付く「今日/昨日/その後/それから」を文章・図へ接続し、場面→担当→行動の明示順序を保持。関連181検査・606 subtests、RN13検査、合成6本文の一致を確認。u102〜u118未配置。u117の比較SQLは未適用・既定OFF、指定版の実機OKはMashの既報。
 
 current RN／backendのWatashi Mapに加え、CMEE V1-Dのoffline observed-map実装を開始した。
 2026-10-03 weekly review §6.6〜6.10とMashの「分析構造の実装に進んで」に基づく。Emlis/Pieceの文章品質全体完了を開始条件にしない。
@@ -418,6 +418,19 @@ vertical118/storage32/API7/saved period16＝173 PASS・548 subtests、既存Pyda
 
 SQL候補は未適用。適用→対応API配置→比較flagの有効化を個別対象付きで進める必要があり、今回の実装を適用承認にしない。比較flagをoffへ戻すと新規比較生成が止まり、既存比較readはこの対応版が担当する。旧API版へ戻すと比較行を扱えないため、offだけを旧版rollback成立とはしない。詳細はcanonical04 §3.18と06/API handoff末尾u117。
 
+
+### 4.24 場面・担当の日語と明示順序（2026-10-04 u118）
+
+既存の完全なSELF過去所在/担当節に、単一の今日/昨日/その後/それからを保持する。日語・接続語を含む全文source_partsと共有event witnessを、同じcompilerの解析入口/証拠検査入口で確認する。共有presentは全文TODAYに限定し、有限形のpastや正負を変えない。SCENEのretention条件は維持する。
+
+| 既存file | 責務差分 |
+|---|---|
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 日語/接続語付きの場面・担当を同じ完全解釈へ接続。開いた伝聞/夢、主語後の日語の名詞化を保留。既存順序・補足・訂正・撤回を保持 |
+| 同 `observed_route_realizer.py` | 場面/担当のsafeラベルにも記述時点の日と接続語を保持。既存完全命題再照合と共通表示を使用 |
+| `ai/tests/test_cmee_analysis_v1d_vertical.py`・`test_analysis_observed_storage.py` | 3段階順序、正負、日語、反復、source座標、訂正/撤回、期間比較、保存再読取を確認 |
+
+日語だけの順序・後続節への日継承・原因・恒久身分・担当仕事の完了は作らない。元の役割を撤回/置換した場合は順序を橋渡ししない。3node/2順序の合成例を文章/図へ接続し、関連181検査・606 subtests、RN13検査、6合成本文のbackend/RN一致を確認。Auth/DB I/Oは合成、新規owner/API/DTO/RN/SQL/依存変更0。u102〜u118未配置。u117の比較SQL適用・対応API配置は残り、今回修正をその新しい前提条件にしない。詳細はcanonical04 §3.19と06/API handoff末尾u118。
+
 ## 5. Source and artifact identity
 
 ### 5.1 Grounded sources
@@ -526,7 +539,7 @@ missing reasonとscopeを持つ別claim／gap marker。observed factを作るた
 
 ## 9. Current gaps
 
-1. V1-Dの生成・safe表示・補足・保存/API/RN接続は実装済み。稼働指定版への実機OKはMash報告。u102〜u117の内容修正版は未配置。
+1. V1-Dの生成・safe表示・補足・保存/API/RN接続は実装済み。稼働指定版への実機OKはMash報告。u102〜u118の内容修正版は未配置。
 2. current Watashi Mapはpresentation-orientedで、claim／edge evidence graph authorityではない。
 3. 五種類の限定node、原証拠、不一致の未確定表示、明示現在負荷と守る意向の注記を接続済み。一般的な各段階/矛盾/負荷/保護理解と解釈仮説は未完了。期間比較は永続保存/API接続候補まで実装。SQL適用・有効化・修正版の実機確認は未実施。
 4. IF route／HypotheticalScenarioGraph／SavedRouteIntentのruntime ownerはexact0。
@@ -564,10 +577,10 @@ CMEE Analysis detailed design candidate:
 
 ## 12. Last verified refs
 
-    Cocolon PR30 u117作業前head（Draft/open/unmerged）
-      be77fbfc79286ce086d1f51841c6e431d37ef7ef
+    Cocolon PR30 u118作業前head（Draft/open/unmerged）
+      b9f3041a9ea0eecffd6a733663976b7d0de9e598
 
-    mashos-api PR3 u117作業前head（Draft/open/unmerged）
-      269941e559132321cd8469c922c49dc3244b3431
+    mashos-api PR3 u118作業前head（Draft/open/unmerged）
+      aa87c02fcebc7e950e3dabdb4a289cb53141a3bf
 
 次回はfresh refと実fileを再確認する。
