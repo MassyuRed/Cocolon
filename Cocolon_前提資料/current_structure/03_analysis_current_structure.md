@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u143 内容修正（2026-10-05 JST・未配置）**：行動後の「私は、安心しました」等が本人主語の読点だけで分析不能になる問題を既存Analysis parser内で補正。明示主語・既存感情形・原文出典・順序を文章と図へ保持し、原因や改善を推測しない。単独感情、別主体、否定、伝聞等の保留は維持。vertical192／storage47／saved-period16、計255検査PASS。合成8本文を全文確認し実RN表示modelと一致、保存後の再生成なし再表示を確認。共有owner／Emlis／Piece／API／DTO／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE。本人実機・実DB・商品受入れは未確認。詳細は06／API handoff末尾u143。
+
 **u142 内容修正（2026-10-05 JST・未配置）**：本人主語の読点で「私は、資料を調べてから、不安が減りました」の行動・変化が読み落とされる問題を修正。Analysisの従属te節と既存共有の敬体増減・復帰witnessで、読点1個＋半角／全角空白を受理する。原文全節・出典・明示順序を保持し、敬体増減・復帰の共有witnessはneutralのまま。因果や感情所有者を補わない。共有変更が影響するEmlisの既存作者／独立readerもtopic省略時の読点を処理し、具体的なepisodeを本文へ保持する。対象417検査を確認（初回416PASS＋新検査の表示空白期待1件補正後1PASS）、Analysis189／storage47／saved-period16を含む。合成Analysis8本文と実RN表示model一致、Emlis3全文確認、保存後の再生成なし再表示を確認。API／DTO／DB／RN／Piece source不変、STRUCTURE_MAP_DELTA_NONE。実DB・実機・商品受入れは未確認。詳細は06／API handoff末尾u142。
 
 **u141 内容修正（2026-10-05 JST・未配置）**：本人主語直後の読点だけで「私は、家族を守りたい」が分析不能になる問題を既存Analysis compilerで補正。読点1個と半角／全角空白を原文座標へ保持し、対象・現在の希望を文章と図へ反映する。実際に守れているという結果へ転換しない。共有wish根拠・全文照合・safe再解析と保留条件は不変。vertical185／storage47／saved-period16、計248検査PASS。合成7本文を全文確認し実RN表示modelと一致、保存後再生成なし再表示を確認。共有owner／Emlis／Piece／API／DTO／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE。実DB・実機・商品受入れは未確認。詳細は06／API handoff末尾u141。
