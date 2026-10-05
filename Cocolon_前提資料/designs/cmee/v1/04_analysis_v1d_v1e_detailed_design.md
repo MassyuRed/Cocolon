@@ -34,6 +34,8 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
+**u153 内容修正（2026-10-06 JST・未配置）**：共有根拠が成立している「ぼくは」の記述をAnalysisが読み落とす不一致を修正。既存7主語regexと読取入口1箇所へ「ぼく」を追加し、「僕は」と同じ明示本人節として原文・否定・希望・場面・担当・認知・順序・注記を保持する。複数主体や省略を補完せず、共有未成立の敬体名詞変化は保留。vertical220／storage55／saved-period16＝291検査PASS、1492 subtests PASS。合成7全文と実RN表示model一致、実service＋合成RPCで保存後の再生成なし再表示を確認。独立read-only reviewに具体的blockerなし。STRUCTURE_MAP_DELTA_NONE、実DB・本人実機・商品受入れは未確認。詳細は06／API handoff末尾u153。
+
 **u152 内容修正（2026-10-06 JST・未配置）**：行動後の「嬉しかった／うれしかった」の表記差だけで期間比較が内容差になる欠陥を修正。既存PAST_FEELINGの2表記だけを同じ意味keyで扱い、原命題・原文出典・表示表記は維持する。別感情・主体の明示／未確定・行動対象・順序は区別し、別episodeを統合しない。vertical217／storage54／saved-period16＝287検査PASS、1451 subtests PASS。合成6全文と実RN表示model一致、実service＋合成RPCで保存後の再生成なし再表示を確認。既存期待緩和0、STRUCTURE_MAP_DELTA_NONE。実DB・本人実機・商品受入れは未確認。詳細は06／API handoff末尾u152。
 
 **u151 内容修正（2026-10-06 JST・未配置）**：「私は職場にいなかったです／私は会議を担当しなかったです」を、既存の所在・担当の否定過去として文章と図へ保持する。Analysisの2正規表現と2否定判定だけを補正し、通常行動・埋込認知・共有ownerは不変。memoのみの既存根拠境界、原文出典・時点・補足／訂正／撤回・明示順序・競合・期間比較を保持。vertical215／storage53／saved-period16＝284検査PASS、1441 subtests PASS。合成8全文と実RN表示model一致、実service＋合成RPCで保存後の再生成なし再表示を確認。既存期待緩和0、STRUCTURE_MAP_DELTA_NONE。実DB・本人実機・商品受入れは未確認。詳細は06／API handoff末尾u151。
