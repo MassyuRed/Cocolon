@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u148 内容修正（2026-10-05 JST・未配置）**：夢・聞いた話・読んだ内容の中の行動や希望を、本人の現実の事実として表示する適用漏れを補正。既存Analysisのrecord単位の帰属判定を通常行動・希望・認知等にも適用し、独立した別recordの明示行動と未確定表示を保持する。vertical206／storage50／saved-period16＝272検査PASS、1344 subtests PASS。合成6全文と実RN表示model一致、実service＋合成RPCで保存後再生成なし再表示、夢／伝聞だけの生成失敗時commitなしを確認。STRUCTURE_MAP_DELTA_NONE、共有owner／API／DB／RN変更0。実DB・実機・商品受入れ未確認。同一record内で現実へ戻る境界は引き続き判別せず保留。詳細は06／API handoff末尾u148。
+
 **u147 内容修正（2026-10-05 JST・未配置）**：「たくありません／たくありませんでした」の否定希望が読み落とされる不一致を、既存Analysisの有限形2行で補正。既存9動詞の対象・格・否定・現在／過去・原文証拠を文章と図へ保持し、非行動や行動順序へ変換しない。vertical203／storage49／saved-period16、計268検査PASS・1306 subtests PASS。合成8全文と実RN表示model一致、実service＋合成RPCで保存後の再生成なし再表示を確認。既存期待／共有owner／API契約／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE。plain幾は疑問と不定数量を今回判別できず一律拒否しない。実DB・実機・商品受入れ未確認。詳細は06／API handoff末尾u147。
 
 **u146 内容修正（2026-10-05 JST・未配置）**：既存9動詞の「たかったです／たくなかったです」を過去の希望として文章・図へ保持する。Analysisの有限形一覧2行だけを補い、肯否定・過去・格付き対象・原文出典を維持。常体との差を期間差にせず、希望を実行済みや行動順序へ昇格しない。vertical201／storage48／saved-period16、計265検査PASS・1273 subtests PASS。合成8本文を全文確認し実RN表示model一致、実service＋合成RPCで保存後の再生成なし再表示を確認。既存期待の変更0、独立read-only最終reviewに具体的blockerなし。共有owner／API契約／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE。実DB・本人実機・商品受入れ未確認。詳細は06／API handoff末尾u146。
