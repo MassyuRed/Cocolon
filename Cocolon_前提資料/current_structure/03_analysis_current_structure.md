@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u146 内容修正（2026-10-05 JST・未配置）**：既存9動詞の「たかったです／たくなかったです」を過去の希望として文章・図へ保持する。Analysisの有限形一覧2行だけを補い、肯否定・過去・格付き対象・原文出典を維持。常体との差を期間差にせず、希望を実行済みや行動順序へ昇格しない。vertical201／storage48／saved-period16、計265検査PASS・1273 subtests PASS。合成8本文を全文確認し実RN表示model一致、実service＋合成RPCで保存後の再生成なし再表示を確認。既存期待の変更0、独立read-only最終reviewに具体的blockerなし。共有owner／API契約／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE。実DB・本人実機・商品受入れ未確認。詳細は06／API handoff末尾u146。
+
 **u145 内容修正（2026-10-05 JST・未配置）**：「私は何を調べた」「私は誰の資料を見た」を確定した行動へ変換していた問題を、既存Analysisの未解析名詞判定で補正。何／誰で始まる名詞部分は認知内側も保留し、併存する読める節と未確定表示を残す。未知節を越す順序や訂正対象を作らない。通常の幾何学／幾何は維持し、plain幾の判別は別残件。vertical198／storage47／saved-period16の261検査PASS後、保存失敗2例を当該methodで追加確認。合成7本文を全文読取し実RN表示model一致、保存後の再生成なし再表示を確認。共有owner／API契約／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE。実DB・本人実機・商品受入れ未確認。詳細は06／API handoff末尾u145。
 
 **u144 内容修正（2026-10-05 JST・未配置）**：本人主語の読点で「私は、資料を調べるかもしれないと思う」が分析不能になる不一致を既存Analysis parser内で補正。共有根拠が認める読点（、／ASCII ,）だけを原文出典へ含め、内側の可能性・主体未確定・否定・時制を文章と図へ保持する。行動の事実や因果へ昇格しない。vertical195／storage47／saved-period16、計258検査PASS。合成8本文を全文確認し実RN表示modelと一致、保存後の再生成なし再表示を確認。共有owner／Emlis／Piece／API／DTO／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE。本人実機・実DB・商品受入れは未確認。詳細は06／API handoff末尾u144。
