@@ -34,6 +34,8 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
+**u135 内容修正（2026-10-05 JST・未配置）**：漢字とカタカナが連続する名詞（仕事メモ／メモ帳等）を未解析にしていた既存名詞文法を補正。明示された行動・場面・担当・結果・希望・認識の名詞全体を原文の出典とともに文章・図へ保持する。任意のひらがな修飾、主語省略の本人補完、未対応時点の推定は追加しない。vertical161／storage43／saved-period16、計220検査PASS、既存214の期待変更0。合成8本文と実RN表示modelの文章・identity・node／edge／unknown／注記一致、実service＋合成RPCの保存→再生成なし再表示を確認。独立静的reviewにblockerなし。STRUCTURE_MAP_DELTA_NONE。実DB・実機・商品受入れは未確認。詳細は06／API handoff末尾u135。
+
 **u134 内容修正（2026-10-05 JST・未配置）**：本人の過去の場面／担当でも、主語直後の読点を原文座標のまま保持する。「私は、職場にいた」「私は、会議を担当した」が文章・図へ出るようになり、否定、今日／昨日、明示順序、補足／訂正／撤回を維持した。読点差だけの比較差0。vertical156／storage42／saved-period16、計214検査PASS。合成6本文を読み、実RN表示modelの全文・identity・node／edge／unknown対象一致を確認。STRUCTURE_MAP_DELTA_NONE。実DB／実機／商品受入れは未確認。詳細は06／API handoff末尾u134。
 
 **u133 内容修正（2026-10-05 JST・未配置）**：明示本人主語の直後の読点「私は、資料を調べた」等を未解析にしていた箇所を補正。既存9動詞の行動・否定・希望に、読点1個と直後の半角／全角spaceを原文座標のまま保持する。明示順序、既存行動→変化・希望＋負荷、補足／訂正／撤回も確認。読点差だけで期間差を作らない。vertical152／storage41／saved-period16、計209検査PASS、合成8本文の実RN表示model一致。場面／担当等の別parser、主語省略、tab・改行跨ぎへは拡張しない。STRUCTURE_MAP_DELTA_NONE。詳細は06／API handoff末尾u133。
