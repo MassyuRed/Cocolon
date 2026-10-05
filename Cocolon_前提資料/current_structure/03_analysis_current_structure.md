@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_analysis_current_structure
 title: "分析構造 — Current Structure"
-revision_date: "2026-10-05 JST"
+revision_date: "2026-10-06 JST"
 document_role: "ANALYSIS_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -13,6 +13,8 @@ automatic_progression: false
 # 分析構造 — Current Structure
 
 ## 0. Current conclusion
+
+**u151 内容修正（2026-10-06 JST・未配置）**：「私は職場にいなかったです／私は会議を担当しなかったです」を、既存の所在・担当の否定過去として文章と図へ保持する。Analysisの2正規表現と2否定判定だけを補正し、通常行動・埋込認知・共有ownerは不変。memoのみの既存根拠境界、原文出典・時点・補足／訂正／撤回・明示順序・競合・期間比較を保持。vertical215／storage53／saved-period16＝284検査PASS、1441 subtests PASS。合成8全文と実RN表示model一致、実service＋合成RPCで保存後の再生成なし再表示を確認。既存期待緩和0、STRUCTURE_MAP_DELTA_NONE。実DB・本人実機・商品受入れは未確認。詳細は06／API handoff末尾u151。
 
 **u150 内容修正（2026-10-06 JST・未配置）**：「資料を調べなかったです」等の過去非行動が読み落とされる不一致を、既存Analysisの独立文有限形へ限定して補正。既存9動詞の否定・過去・対象・原文証拠を文章と図へ保持し、希望や実行済みと区別する。埋込認知の有限形表はu149と同一。対象280methodは279PASS＋新storage期待1件訂正後の当該1PASS、1403 subtests PASS。合成8全文と実RN表示model一致、合成RPCで保存後再生成なし再表示を確認。既存期待緩和0、STRUCTURE_MAP_DELTA_NONE、共有owner／API／DB／RN変更0、実DB・実機・商品受入れ未確認。詳細は06／API handoff末尾u150。
 
