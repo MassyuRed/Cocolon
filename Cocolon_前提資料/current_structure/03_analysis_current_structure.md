@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u156 内容修正（2026-10-06 JST・未配置）**：「私は仕事を続けたいけれど、私は辛い／辛いです」の負荷注記の読み落としを補正。共有根拠のある本人希望と本人現在感情の明示対比だけを対象に、完全一致した辛いの意味lemmaをつらいへ揃える。原文表記・出典・訂正対象は保持し、味覚や一般感情へ拡張しない。表記だけの期間差は0、苦しい・別希望は区別。vertical227／storage56／saved-period16＝299検査PASS、1637 subtests PASS。合成7全文と実RN表示model一致、実service＋合成RPCで保存後再生成なし再表示を確認。STRUCTURE_MAP_DELTA_NONE、実DB・本人実機・商品受入れ未確認。詳細は06／API handoff末尾u156。
+
 **u155 内容修正（2026-10-06 JST・未配置）**：今朝／今週／今月／今年を含む未対応認知により同fieldの独立した正常節まで失う不一致を補正。共有側が消費した「今」1字を、既存時点prefix一致と完全有限節・未解析scope確認の下で元本文境界へ戻す。認知自身は保留し、証明済みの別記述と原文出典だけを保持する。認知名詞の受理・時点解釈・順序推測は拡張しない。vertical225／storage55／saved-period16＝296検査PASS、1594 subtests PASS。合成7全文と実RN表示model一致、実service＋合成RPCで保存後再生成なし再表示を確認。STRUCTURE_MAP_DELTA_NONE、実DB・本人実機・商品受入れ未確認。独立reviewの条件限定指摘を修正済み。詳細は06／API handoff末尾u155。
 
 **u154 内容修正（2026-10-06 JST・未配置）**：「今週資料／今年仕事」などの未対応時点を対象名詞に取り込む誤読を補正。既存Analysisの名詞保留判定に今週／今月／今年／先月／来月／昨年／来年を追加し、読める独立節と未確定表示を保持する。「今週の資料／今年を記録」と、完全な年度・月号名詞は従来どおり保持し、行動の日付へ転換しない。vertical222／storage55／saved-period16＝293検査PASS、1568 subtests PASS。合成7本文を全文確認し実RN表示modelと一致、実service＋合成RPCで保存後の再生成なし再表示を確認。独立read-only reviewに具体的blockerなし。STRUCTURE_MAP_DELTA_NONE、実DB・本人実機・商品受入れは未確認。詳細と既存の認知保留境界は06／API handoff末尾u154。
