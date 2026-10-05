@@ -34,6 +34,8 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
+**u150 内容修正（2026-10-06 JST・未配置）**：「資料を調べなかったです」等の過去非行動が読み落とされる不一致を、既存Analysisの独立文有限形へ限定して補正。既存9動詞の否定・過去・対象・原文証拠を文章と図へ保持し、希望や実行済みと区別する。埋込認知の有限形表はu149と同一。対象280methodは279PASS＋新storage期待1件訂正後の当該1PASS、1403 subtests PASS。合成8全文と実RN表示model一致、合成RPCで保存後再生成なし再表示を確認。既存期待緩和0、STRUCTURE_MAP_DELTA_NONE、共有owner／API／DB／RN変更0、実DB・実機・商品受入れ未確認。詳細は06／API handoff末尾u150。
+
 **u149 内容修正（2026-10-05 JST・未配置）**：長文の読点／固定長分割で後半の否定・不確実性を落とし、通常行動・希望を確定表示する適用漏れを補正。既存Analysisの元field上の完全文確認を全claimへ適用する。独立した別文、通常節のセミコロン、原文出典と未確定表示、証明済みcompoundを維持。vertical209／storage51／saved-period16＝276検査PASS、1367 subtests PASS。合成6全文と実RN表示model一致、合成RPCで保存後再生成なし再表示を確認。STRUCTURE_MAP_DELTA_NONE、共有owner／API／DB／RN変更0、実DB・実機・商品受入れ未確認。任意の長文理解は未完了。詳細は06／API handoff末尾u149。
 
 **u148 内容修正（2026-10-05 JST・未配置）**：夢・聞いた話・読んだ内容の中の行動や希望を、本人の現実の事実として表示する適用漏れを補正。既存Analysisのrecord単位の帰属判定を通常行動・希望・認知等にも適用し、独立した別recordの明示行動と未確定表示を保持する。vertical206／storage50／saved-period16＝272検査PASS、1344 subtests PASS。合成6全文と実RN表示model一致、実service＋合成RPCで保存後再生成なし再表示、夢／伝聞だけの生成失敗時commitなしを確認。STRUCTURE_MAP_DELTA_NONE、共有owner／API／DB／RN変更0。実DB・実機・商品受入れ未確認。同一record内で現実へ戻る境界は引き続き判別せず保留。詳細は06／API handoff末尾u148。
