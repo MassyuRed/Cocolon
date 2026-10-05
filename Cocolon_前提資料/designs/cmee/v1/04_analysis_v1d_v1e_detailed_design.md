@@ -34,6 +34,8 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
+**u140 内容修正（2026-10-05 JST・未配置）**：明示された本人行動の後の「減りました／増えました／戻りました」を、共有ownerの完全節・原文境界の証拠とAnalysisの命題解析で保持する。疑問・引用・伝聞・仮定・否定・別主体・属格・未対応時点は新共有証拠へ昇格しない。変化はneutral、Analysisでは対象・肯定過去・明示順序を保持し、所有者／原因／改善を推測しない。共有変更でEmlisへ生じた「行動が支えている」という評価は、既存source-owned受取と独立inverseの限定補正で元の順序を保つ文章へ修正。品質閾値は不変。対象381検査PASS（Analysis245を含む）、合成Analysis8本文＋実RN model一致、Emlis6本文確認。別途旧generic0058の期待1件は修正前でも同一失敗、期待は変更しない。既存owner内の補正でAPI／DTO／DB／RN／Piece source不変、STRUCTURE_MAP_DELTA_NONE。本人実機・実DB・商品受入れは未確認。詳細は06／API handoff末尾u140。
+
 **u139 内容修正（2026-10-05 JST・未配置）**：共有根拠が成立している行動後の「変わりました」を既存Analysis compilerで受理し、対象・明示順序・原文出典を文章と図へ保持する。常体との期間差0、補足・訂正／撤回、保存後の再生成なし再表示を確認。vertical179／storage46／saved-period16、計241検査PASS、合成7本文と実RN表示model一致。共有根拠が未成立の「減りました／増えました／戻りました」は未対応。感情所有者・原因・改善を推測せず、属格feeling等の保留を維持。共有owner／realizer／API／DTO／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE。本人実機・実DB・商品受入れは未確認。詳細は06／API handoff末尾u139。
 
 **u138 内容修正（2026-10-05 JST・未配置）**：行動の後の「不安が減った／気持ちが変わった／気持ちメモが増えた」が共有分類のfeelingだけで分析不能になる不一致を補正。完全解析済みの名詞の過去変化と既存bounded-change証拠に限り受け取り、対象・出典・明示順序を文章と図へ保持する。本人の感情所有者・因果・改善を推測しない。新分岐の属格（友人の不安／私の不安等）は保留し、既存fact属格・有限感情述語の照合は維持。vertical176／storage46／saved-period16、計238検査PASS。合成7本文と実RN表示model全文一致、実service＋合成RPC保存後再表示を確認。独立静的reviewにblockerなし。STRUCTURE_MAP_DELTA_NONE。実DB・実機・商品受入れの確認なし。u137の共有witness未成立という説明は、witness自体は存在し分析側のmodality照合で拒否していた、と訂正する。詳細は06／API handoff末尾u138。
