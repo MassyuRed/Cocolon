@@ -34,6 +34,8 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
+**u139 内容修正（2026-10-05 JST・未配置）**：共有根拠が成立している行動後の「変わりました」を既存Analysis compilerで受理し、対象・明示順序・原文出典を文章と図へ保持する。常体との期間差0、補足・訂正／撤回、保存後の再生成なし再表示を確認。vertical179／storage46／saved-period16、計241検査PASS、合成7本文と実RN表示model一致。共有根拠が未成立の「減りました／増えました／戻りました」は未対応。感情所有者・原因・改善を推測せず、属格feeling等の保留を維持。共有owner／realizer／API／DTO／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE。本人実機・実DB・商品受入れは未確認。詳細は06／API handoff末尾u139。
+
 **u138 内容修正（2026-10-05 JST・未配置）**：行動の後の「不安が減った／気持ちが変わった／気持ちメモが増えた」が共有分類のfeelingだけで分析不能になる不一致を補正。完全解析済みの名詞の過去変化と既存bounded-change証拠に限り受け取り、対象・出典・明示順序を文章と図へ保持する。本人の感情所有者・因果・改善を推測しない。新分岐の属格（友人の不安／私の不安等）は保留し、既存fact属格・有限感情述語の照合は維持。vertical176／storage46／saved-period16、計238検査PASS。合成7本文と実RN表示model全文一致、実service＋合成RPC保存後再表示を確認。独立静的reviewにblockerなし。STRUCTURE_MAP_DELTA_NONE。実DB・実機・商品受入れの確認なし。u137の共有witness未成立という説明は、witness自体は存在し分析側のmodality照合で拒否していた、と訂正する。詳細は06／API handoff末尾u138。
 
 **u137 内容修正（2026-10-05 JST・未配置）**：既存の仮名入り名詞一語に漢字・カタカナの接尾部分が続く「振り返りメモ／気持ちメモ／学びノート／取り組み方」等を一つの対象として文章・図へ保持する。名詞全体・連体修飾・格・否定・希望・時点・訂正／撤回・期間差を維持。新しい接尾境界でも未対応時点・疑問語を確定名詞へ吸収しない。vertical172／storage45／saved-period16、計233検査PASS。合成8本文の全文確認と実RN表示model一致、実service＋合成RPCで保存後の再生成なし再表示を確認。独立静的reviewにblockerなし。共有witnessの未対応、任意かな・主語省略は保留。STRUCTURE_MAP_DELTA_NONE。実DB・実機・商品受入れの今回確認なし。前回u136の大文書2本の転送省略は復元し、実git取得と一致を確認した。詳細は06／API handoff末尾u137。
