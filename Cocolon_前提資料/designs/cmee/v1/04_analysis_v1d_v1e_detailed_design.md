@@ -34,6 +34,8 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
+**u137 内容修正（2026-10-05 JST・未配置）**：既存の仮名入り名詞一語に漢字・カタカナの接尾部分が続く「振り返りメモ／気持ちメモ／学びノート／取り組み方」等を一つの対象として文章・図へ保持する。名詞全体・連体修飾・格・否定・希望・時点・訂正／撤回・期間差を維持。新しい接尾境界でも未対応時点・疑問語を確定名詞へ吸収しない。vertical172／storage45／saved-period16、計233検査PASS。合成8本文の全文確認と実RN表示model一致、実service＋合成RPCで保存後の再生成なし再表示を確認。独立静的reviewにblockerなし。共有witnessの未対応、任意かな・主語省略は保留。STRUCTURE_MAP_DELTA_NONE。実DB・実機・商品受入れの今回確認なし。前回u136の大文書2本の転送省略は復元し、実git取得と一致を確認した。詳細は06／API handoff末尾u137。
+
 **u136 内容修正（2026-10-05 JST・未配置）**：既存の完全な名詞句で「新しい／古い／大きい／小さい／長い／短い／詳しい／難しい／易しい／良い／悪い」の連体形を一区間一つだけ保持する。「新しいメモ帳」等を落とさず、否定・希望・時点・訂正／撤回・比較の差へ反映。修飾の背後にある未対応時点・疑問語を確定名詞にしない。vertical167／storage44／saved-period16、計227検査PASS。合成8本文の全文確認と実RN表示model一致、実service＋合成RPCの保存後再表示を確認。独立静的reviewにblockerなし。共有witnessの未対応、副詞・形容詞の否定／過去形・主語省略は保留。STRUCTURE_MAP_DELTA_NONE。実DB・実機・商品受入れの今回確認なし。詳細は06／API handoff末尾u136。
 
 **u135 内容修正（2026-10-05 JST・未配置）**：漢字とカタカナが連続する名詞（仕事メモ／メモ帳等）を未解析にしていた既存名詞文法を補正。明示された行動・場面・担当・結果・希望・認識の名詞全体を原文の出典とともに文章・図へ保持する。任意のひらがな修飾、主語省略の本人補完、未対応時点の推定は追加しない。vertical161／storage43／saved-period16、計220検査PASS、既存214の期待変更0。合成8本文と実RN表示modelの文章・identity・node／edge／unknown／注記一致、実service＋合成RPCの保存→再生成なし再表示を確認。独立静的reviewにblockerなし。STRUCTURE_MAP_DELTA_NONE。実DB・実機・商品受入れは未確認。詳細は06／API handoff末尾u135。
