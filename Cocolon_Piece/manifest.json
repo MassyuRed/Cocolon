@@ -1,22 +1,22 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v20",
-  "generated_at": "2026-10-06 JST",
+  "schema_version": "cocolon.piece.workstream_manifest.v21",
+  "generated_at": "2026-10-07 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v19",
-    "predecessor_blob": "5f3294b7b16a1cba15233fb1aeddb56666512e0e",
-    "predecessor_head": "f2adaf164468cd805d29535a476626e7ee8b5890",
-    "carry_forward": "Prior saved-record and CI evidence remains historical. Latin role-name correction does not grant public safety or issue previews.",
-    "historical_scope": "b07_owner_reads and 414 PASS describe e697d4f8; current bounded work is b08_latin_role_binding, map section 24 and entry section 20."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v20",
+    "predecessor_blob": "fee837d42aee9a30a69b098aadb9a15c3be205ab",
+    "predecessor_head": "fa0a54573d33485fa97fd1f9f66ced6eafdd5d2f",
+    "carry_forward": "Preserve all earlier objects and evidence. Explicit-role hiragana fix is 4033e1f; B7 HTTP and isolated PostgreSQL verification are reflected at 0c1f69e. Documentation staging does not imply remote application.",
+    "historical_scope": "Current bounded state: b08_hiragana_role_binding and b07_mutation_http. Earlier scopes remain commit-bound history."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "73c39c376a9a9f8656da756c819c98f0c14df951",
-    "raw_sha256": "da670df7889b660a4bfc962bcb4801049c696542d85bb63a15ef8f0e16119cf4",
-    "utf8_bytes": 25386
+    "git_blob_sha1": "5923b970b5bdfc2567a17b951ec393081b28c8ff",
+    "raw_sha256": "941fc752f69e5c4c8edf33d91a37d5216ddd872935020d3082a2e65939ac3243",
+    "utf8_bytes": 28098
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -56,14 +56,16 @@
     "pce9a_b01": "COMPLETE",
     "pce9a_b02a": "FILE_ONLY_TECHNICAL_ACCEPTANCE_PASSED__LIVE_APPLY_0",
     "analysis_roadmap": "REFER_TO_ANALYSIS_CURRENT_STRUCTURE__HISTORICAL_NOT_ACTIVATED_STATE_NOT_CURRENT",
-    "next_piece_group": "AUTHENTIC_PREVIEW_ISSUANCE_AND_PUBLIC_SAFETY_ADMISSION__HISTORY_SELECTION_CHANGES_AND_NONPROFILE_WRITERS_UNRESOLVED",
+    "next_piece_group": "ACTUAL_PUBLIC_SAFETY_ADMISSION_THEN_PERSISTED_PREVIEW_AND_DEVELOPMENT_SCREEN__DO_NOT_REIMPLEMENT_CONFIRMED_B7",
     "automatic_packet_progression": false,
     "pce9a_b02a_red": "FROZEN_UNCHANGED__NATIVE_POSTGRESQL_1_PASS",
     "pce9a_b02a_implementation": "EXACT5_PRESERVED__EXACT6_SELECTORS_PUBLISHED",
     "pce9a_b06_save_connection": "HISTORICAL_BEE830_UNREGISTERED_DRAFT__CI_347_PASS__NOT_B6_COMPLETE",
     "pce9a_b06_q3_context_fence": "HISTORICAL_D71FDB4_CONSUMED_CONTEXT_FENCE__CI_373_PASS__LIVE_APPLY_0__NOT_B6_COMPLETE",
     "pce9a_b07_owner_reads": "HISTORICAL_E697D4F8_OWNER_GET_ONLY__CI_414_PASS__NOT_B7_COMPLETE",
-    "pce9b_b08_latin_role_binding": "DRAFT_ASCII_FULLWIDTH_LATIN_EXPLICIT_ROLE_ONLY__SELECTED_CI_643_PASS__NOT_B8_COMPLETE"
+    "pce9b_b08_latin_role_binding": "HISTORICAL_EE81B492_LATIN_ONLY__CURRENT_HIRAGANA_SCOPE_SEPARATE",
+    "pce9b_b08_hiragana_role_binding": "REMOTE_DRAFT_4033E1F_EXPLICIT_ROLE_ONLY__HISTORICAL_CI_676_PASS__NOT_B8_COMPLETE",
+    "pce9a_b07_mutation_http": "REMOTE_DRAFT_0C1F69E__HTTP_152_PASS__ISOLATED_POSTGRESQL_13_PASS__REAL_AUTH_POSTGREST_DEVICE_PENDING__NOT_B7_COMPLETE"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -161,16 +163,21 @@
     "b02a_causal_red_execution_credit": "FROZEN_UNCHANGED__NATIVE_ACCEPTANCE_1_PASS",
     "b02a_required_implementation_exact5_present": true,
     "b02a_exact6_reader_rebindings_published": true,
-    "b02a_native_postgresql_green": true
+    "b02a_native_postgresql_green": true,
+    "historical_scope": "B2-A checkpoint only. Current Piece API reference is b07_mutation_http.api_commit; current next work is next_group."
   },
   "next_group": {
-    "id": "B2_A",
-    "name": "M0_TRACKED_MIGRATION_BASELINE_AND_M1_LEGACY_READ_BRIDGE_CURRENT_CALLER_REBIND",
+    "id": "B5_B",
+    "name": "AUTHENTIC_PREVIEW_ISSUANCE_AND_PUBLIC_SAFETY_ADMISSION_TO_DEVELOPMENT_SCREEN",
     "environment": "CHAT_PRO_OK",
-    "stronger_evidence_condition": "ISOLATED_DB_REQUIRED_FOR_MIGRATION_GREEN",
-    "first_lifecycle": "APPROVED_B2A_FILE_ONLY_BOUND_COMPLETED",
+    "state": "EXISTING_MAINLINE_UNFINISHED__NOT_AUTOMATIC_ACTIVATION",
+    "current_map_section": "26.3",
+    "current_entry_section": "22",
+    "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261003.md",
+    "weekly_review_section": "5.3",
+    "first_unfinished_work": "Actual PCE-4 safety admission of generated content; persist the admitted preview and connect the same body/recipe to the development screen.",
+    "repeat_completed_b2a_or_b7": false,
     "production_migration_apply_effect": 0,
-    "state": "FILE_ONLY_TECHNICAL_ACCEPTANCE_PASSED__LIVE_APPLY_0",
     "automatic_progression": false
   },
   "durable_history": {
@@ -225,9 +232,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "bf8cf970866b65363c1379632cff924f301b881d",
-    "raw_sha256": "d4356e02a37cd3d8d683adf7da6d55dd54c8a38a53fb2848452d0b9c521d3c1c",
-    "utf8_bytes": 98107
+    "git_blob_sha1": "e83b25d8b6ece7176cf411763470cb0535eace45",
+    "raw_sha256": "1413d8184a26e8f2f3801b328de427440880fc0ad0fabb6a9fbb035e644525df",
+    "utf8_bytes": 105776
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -402,13 +409,17 @@
   "current_sync_effects": {
     "classification": "OBSERVED_BLOCKER_MINIMAL_FIX",
     "piece_documentation_paths": 3,
-    "api_changed_paths": 3,
-    "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
+    "api_changed_paths_in_recorded_b7_unit": 4,
+    "api_changes_in_this_document_sync": 0,
+    "documentation_state": "STAGED_CANDIDATE__REMOTE_APPLICATION_AND_POSTVERIFY_REQUIRED",
+    "documentation_full_byte_application_verified": true,
+    "structure_map": "STRUCTURE_MAP_DELTA_PREPARED_NOT_REMOTE",
     "live_database_apply": 0,
     "production_registration": 0,
     "release_effect": 0,
     "product_acceptance": false,
-    "automatic_progression": false
+    "automatic_progression": false,
+    "verification_scope": "FULL_LOCAL_DOCUMENT_BYTES_VERIFIED__REMOTE_POSTVERIFY_REQUIRED"
   },
   "b06_q3_context_fence": {
     "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
@@ -641,7 +652,7 @@
     "prior_implementation": "e697d4f8ece3cfcd8ea9d26cc2d9c0e2cb9ddf4d",
     "current_map_section": "24",
     "current_entry_section": "20",
-    "state": "CURRENT_WORKING_DRAFT_SELECTED_CI_643_PASS_OFFLINE_NOT_ACCEPTED",
+    "state": "HISTORICAL_EE81B492_SELECTED_CI_643_PASS_OFFLINE_NOT_ACCEPTED",
     "classification": "OBSERVED_BLOCKER_MINIMAL_FIX",
     "changed_paths": [
       "ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py",
@@ -746,6 +757,98 @@
     "product_acceptance": false,
     "automatic_progression": false,
     "api_tree": "8f93040f02d527125f36b48f236d2626c16f6c63",
-    "actual_body_read": "Two synthetic input-to-candidate examples in map 24.1 show the role, unresolved availability and conditional negation retained; not formal human Product Read acceptance."
+    "actual_body_read": "Two synthetic input-to-candidate examples in map 24.1 show the role, unresolved availability and conditional negation retained; not formal human Product Read acceptance.",
+    "historical_scope": "This object records ee81b492 Latin-only implementation and its selected CI. Current explicit-role hiragana and B7 results are separate objects; remaining fields here are historical."
+  },
+  "b08_hiragana_role_binding": {
+    "api_commit": "4033e1f323c06c4bad369b03583d5b87e84fb0d5",
+    "red_commit": "355226b95c23d6a552ebb800332f1b75f88a6e7c",
+    "state": "REMOTE_DRAFT_EXPLICIT_ROLE_PURE_HIRAGANA_ONLY__NOT_B8_COMPLETE",
+    "current_map_section": "25",
+    "current_entry_section": "21",
+    "historical_ci": {
+      "run_id": 37461341829,
+      "job_id": 112261400773,
+      "passed": 676,
+      "failed": 0,
+      "new_cases": 33,
+      "new_accept": 14,
+      "new_reject": 19,
+      "warnings": {
+        "PytestCacheWarning": 1,
+        "PydanticDeprecatedSince20": 3
+      },
+      "same_676_case_id_set_reverified_in_document_preparation": false
+    },
+    "production_enabled": false,
+    "safety_issuer_complete": false,
+    "automatic_progression": false
+  },
+  "b07_mutation_http": {
+    "state": "REMOTE_DRAFT_HTTP_IMPLEMENTED__ISOLATED_POSTGRESQL_VERIFIED__NOT_B7_COMPLETE",
+    "api_base_head": "4033e1f323c06c4bad369b03583d5b87e84fb0d5",
+    "api_commit": "0c1f69ed25d6e5bb7a887c125ae900ab61ee4996",
+    "http_implementation_commit": "8f68b44e3a64b565fb6d922b109907c639c37e85",
+    "current_map_section": "26",
+    "current_entry_section": "22",
+    "changed_paths": [
+      "ai/services/ai_inference/api_piece_v2.py",
+      "ai/tests/piece_v2/test_b07_piece_v2_mutation_http.py",
+      "ai/tests/piece_v2/db/test_b07_piece_v2_mutation_http_native.py",
+      ".github/workflows/piece-b2b-isolated-postgres.yml"
+    ],
+    "routes": [
+      "PATCH /emotion/piece/{piece_id}/visibility",
+      "DELETE /emotion/piece/{piece_id}"
+    ],
+    "historical_local_candidate": {
+      "base_head": "4033e1f323c06c4bad369b03583d5b87e84fb0d5",
+      "tests": 140,
+      "passed": 140,
+      "state": "HISTORICAL_SUPERSEDED_NOT_CURRENT_UNPUBLISHED_CANDIDATE"
+    },
+    "normalization_fix": {
+      "same_tests": 152,
+      "before_passed": 144,
+      "before_failed": 8,
+      "after_passed": 152,
+      "after_failed": 0,
+      "origin": "prior 2026-10-07 local evidence; no rerun in documentation preparation"
+    },
+    "ci": {
+      "run_id": 37533895479,
+      "job_id": 112509836141,
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/37533895479",
+      "head_sha": "0c1f69ed25d6e5bb7a887c125ae900ab61ee4996",
+      "status": "completed",
+      "conclusion": "success",
+      "http_passed": 152,
+      "isolated_native_sql_passed": 13,
+      "existing_b2_to_b8_steps": "completed/success",
+      "counts_origin": "retained prior verification record",
+      "step_status_refetched_in_document_preparation": true,
+      "rerun_in_document_preparation": false,
+      "summed_with_historical_676": false
+    },
+    "test_boundary": "Actual router/store/shared HTTP client/SQL/disposable PostgreSQL; synthetic bearer lookup and PostgREST transport. Not live Supabase/Auth/PostgREST, RN/device or product acceptance.",
+    "production_router_registered": false,
+    "m4_live_applied": false,
+    "safety_issuer_complete": false,
+    "persisted_preview_end_to_end_complete": false,
+    "development_screen_connected": false,
+    "historical_133_failures_resolved": false,
+    "b7_complete": false,
+    "product_acceptance": false,
+    "automatic_progression": false
+  },
+  "historical_next_group_before_20261007_sync": {
+    "id": "B2_A",
+    "name": "M0_TRACKED_MIGRATION_BASELINE_AND_M1_LEGACY_READ_BRIDGE_CURRENT_CALLER_REBIND",
+    "environment": "CHAT_PRO_OK",
+    "stronger_evidence_condition": "ISOLATED_DB_REQUIRED_FOR_MIGRATION_GREEN",
+    "first_lifecycle": "APPROVED_B2A_FILE_ONLY_BOUND_COMPLETED",
+    "production_migration_apply_effect": 0,
+    "state": "FILE_ONLY_TECHNICAL_ACCEPTANCE_PASSED__LIVE_APPLY_0",
+    "automatic_progression": false
   }
 }

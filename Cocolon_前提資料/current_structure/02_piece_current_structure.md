@@ -1,8 +1,8 @@
 ---
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
-revision_date: "2026-10-06 JST"
-latest_api_implementation: "ee81b49203509c92c63a776b22c54176f9f57d37"
+revision_date: "2026-10-07 JST"
+latest_api_implementation: "0c1f69ed25d6e5bb7a887c125ae900ab61ee4996"
 latest_storage_candidate: "d71fdb40238f2c99751f0c20e578ab654f72308e"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**2026-10-06の現在地は§24です。今回のAPI候補 `ee81b49203509c92c63a776b22c54176f9f57d37` は、原文に役割が明記されたASCII／全角Latin人名を、既存の関係表現へ置換する本文修正です。今回の選択検査は643 PASS／0 FAIL／0 ERROR／0 SKIP。ひらがな人名、第三者への断定、PCE-4全体の安全性判定と永続preview発行は未完了です。候補は`OFFLINE_NOT_ACCEPTED`を維持し、安全性承認や画面接続へ昇格しません。§23以前は履歴として保持し、最新の範囲・結果・残件は§24を優先します。**
+**GitHub反映済みのAPI再開位置は `0c1f69ed25d6e5bb7a887c125ae900ab61ee4996`（§26）です。§25に役割明記ひらがな人名の修正と旧CI 676 PASSを分離して保持します。§26のB7公開切替・削除HTTPは反映済みで、2026-10-07の既存隔離PostgreSQL workflowにおいてB7 HTTP 152件とnative SQL接続13件が成功しています。実Auth／実PostgREST／実機の確認ではなく、B7全体・商品合格は未成立です。公開安全性の実判定→永続preview発行→開発画面という本線は未完了です。§24以前の結果は各commitの履歴として保持します。**
 
 ### 9/30・9/26の到達点（履歴）
 
@@ -208,7 +208,7 @@ shared tableのnon-Piece row／consumerは、exact Piece predicateとwriter／re
 
 ## 8. Current gaps
 
-現在の未完了は§24.3へ集約する。以下は9/30時点の残件であり、後続のB2-B／B3／B4／B5永続化／B6保存接続が未実装という意味には使用しない。
+現在の未完了は§26.3へ集約する。以下は9/30時点の残件であり、後続のB2-B／B3／B4／B5永続化／B6保存接続が未実装という意味には使用しない。
 
 1. user-visible routeはold Q&Aのまま。
 2. 保存原入力・保存状態から本文／recipeの内部組立と画像設定だけの変更を§20まで実装。本文に表れていない選択感情、refined補足、保存済みpreview発行、HTTP／RNは未接続。
@@ -789,3 +789,62 @@ Q3履歴選択のphantomは別残件のまま。今回は既存submit gateway→
 最新weekly reviewは2026-10-03。恒久incident全文、current rules、Piece入口／manifest、map§14・§23、PCE-4／PCE-8と実source／関連testへ戻り、今回の修正を選んだ。01の全体flowと01A／01B／01Cの関連mappingを確認したが、全mapping行・全sourceの再監査ではない。System Context prepareは既知のdescendant整合条件で成立せず、許可された原典直接読取りを継続した。
 
 `STRUCTURE_MAP_DELTA_UPDATED`として既存map・入口・manifestを同期する。保存済みrecord、API契約、DB／migration、RN、共有source writer、Emlis／Analysis本体、production登録、main／merge／deploy／有効化への変更0。`automatic_progression=false`を維持する。
+
+
+## 25. 2026-10-06 — GitHub反映済みの役割明記ひらがな名と資料同期の回復
+
+API実装は `4033e1f323c06c4bad369b03583d5b87e84fb0d5`、先行する新規33検査は `355226b95c23d6a552ebb800332f1b75f88a6e7c`、開始点は `ee81b49203509c92c63a776b22c54176f9f57d37`。変更対象は既存 `piece_source.py` と `test_b08_piece_latin_role_binding.py` であり、今回のB7候補からこれらの内容は変更しない。
+
+原文で関係が明記された純ひらがな＋「さん」の名前だけを関係表現に対応させる限定修正である。名前の境界、役割衝突、関係の所有者連鎖、条件・否定・未決定を対象検査で確認した。一般的な人名検出や安全性issuerの完成ではない。普通語を一律に人物扱いせず、名前そのものが主題の文や未証明の参照は拒否する。
+
+既存FIX run `37461341829`／job `112261400773` の結果は676 PASS／0 FAIL（保存・権限・取消等414件、人名・関係262件）。新33件は受理14件・拒否19件。前回RED記録は648 PASS／28 FAILである。676 PASSはrun 37461341829固有の履歴である。後続B7 run 37533895479にはB8を含む既存工程の成功があるが、旧676へ新B7件数を足して統合件数を作らない。
+
+- FIX: https://github.com/MassyuRed/mashos-api/actions/runs/37461341829
+- RED: https://github.com/MassyuRed/mashos-api/actions/runs/37460456046
+- 訂正済み記録: https://github.com/MassyuRed/mashos-api/pull/3#issuecomment-6016091963
+- 旧FIXの警告はPytestCacheWarning 1件＋PydanticDeprecatedSince20 3件。初版コメントのhttpx表記は訂正済み。
+- 旧FIX実装SHA-256: `f3a73e86d6af93adad8b52253c58970237af0191db7f70daff5fcf189b02c71a`
+- 旧FIX検査SHA-256: `139cf3d1bd11f761566c9fa90e174a00da64590cbd307e7dec657d98bb25c162`
+
+§24のLatin対応はその時点の履歴として残す。過去の広域133失敗は今回未再実行・未解消扱いであり、676件成功を全Piece合格へ広げない。
+
+
+## 26. 2026-10-07 — B7公開切替・削除HTTPの反映と隔離PostgreSQL接続確認
+
+### 26.1 反映済みの範囲
+
+APIの確認済みHEADは `0c1f69ed25d6e5bb7a887c125ae900ab61ee4996`、このB7単位の開始点は `4033e1f323c06c4bad369b03583d5b87e84fb0d5`。2026-10-06の140件ローカル候補は履歴であり、現在の未反映候補ではない。既存router・store・SQLを作り直さず、未登録routerの `PATCH /emotion/piece/{piece_id}/visibility` と `DELETE /emotion/piece/{piece_id}` を既存terminalへ接続した。production登録・本番適用は行っていない。
+
+| commit | 反映内容 |
+|---|---|
+| `fa92752b1c556910c972fd039e1b13e16ac1f868` | 元140件を保持し、正規化境界12件を加えたB7 HTTP検査。 |
+| `8f68b44e3a64b565fb6d922b109907c639c37e85` | 公開切替・削除HTTPと正規化済み公開状態による応答照合。 |
+| `093aefc5642a7d1d3fa14469a689f2b653bdfe9e3` | 既存隔離PostgreSQLへ接続するB7検査13件。 |
+| `0c1f69ed25d6e5bb7a887c125ae900ab61ee4996` | 既存隔離DB workflowへのB7検査追加。 |
+
+変更pathは `ai/services/ai_inference/api_piece_v2.py`、`ai/tests/piece_v2/test_b07_piece_v2_mutation_http.py`、`ai/tests/piece_v2/db/test_b07_piece_v2_mutation_http_native.py`、`.github/workflows/piece-b2b-isolated-postgres.yml` の4点。SQL・store・contract自体はこのB7単位で変更していない。
+
+本人認証、expected row version、削除の同じ再送識別キーを既存terminalへ渡す。clientのowner・本文・recipe・tier・safety追加を拒否する。本文と画像設定を再生成せず、利用回数を消費・返却しない。削除前のrow取得によって削除後の同一キー再送を拒否しない。不正応答・providerの401/404・通信結果不明を成功や本人権限・不存在と誤認せず、自動再送しない。
+
+旧候補には、保存側が空白付き公開状態を正規化して更新しても、APIが未正規化の要求と応答を比較して503とする不一致があった。既存 `normalize_visibility_scope` と同じ結果で照合する限定修正で解消した。要求と反対の公開状態の応答は引き続き拒否する。
+
+### 26.2 検証結果と証拠の限界
+
+2026-10-07の保存済み検証記録を反映する資料更新であり、この資料同期作業で製品検査を新しく実行した意味ではない。
+
+- ローカルの同じ152件は、正規化修正前144 PASS／8 FAILから、修正後152 PASS／0 FAILへ変化した。旧140件を削除・緩和していない。
+- [GitHub Actions run 37533895479](https://github.com/MassyuRed/mashos-api/actions/runs/37533895479)／job `112509836141`／HEAD `0c1f69ed25d6e5bb7a887c125ae900ab61ee4996` はcompleted／success。B7 HTTPは152 PASS、B7隔離native SQL接続は13 PASS。既存B2〜B8の工程も成功した。
+- 今回の資料準備時にも当該jobのB7工程・既存工程のcompleted／successを再取得した。152件・13件の件数は前回の検証原記録による。再実行やCI全ログの新規取得とはしない。
+- 旧676件と新B7件数を単純合算して新しい全体実行件数にしない。広域133失敗の全再実行・解消は未成立。
+
+隔離DBでは本人／別人・不在、古い版番号、本文／recipe／quota保持、子行削除、削除receipt永続化、削除後同一キー再送、commit後ACK喪失時の自動再送なし、同時更新、実row-lock待ち後の版番号再確認、削除失敗時のrollbackを確認した。実API・store・共有HTTP client・既存SQL・使い捨てPostgreSQLを使用したが、Bearer照会とPostgREST transportは合成である。実Supabase/Auth/PostgREST、Nexus/cache非表示化、RN・端末の画像保存共有、独立Ultra受入れ・正式human Product Readを証明した結果ではない。
+
+### 26.3 未完了・再開位置
+
+本線は10/03週次レビュー§5.3の **保存原入力→実CMEE/B9→公開安全性の実判定→永続preview発行→同じ本文・画像設定の開発画面**。B7の確認済み実装と隔離検証を初めから作り直さない。
+
+現在の `piece_v2_content_policy.py::check_existing_detectors` は既存detectorによる候補拒否であって、完全な公開安全性判定ではない。同owner自身がその限界を明記している。`piece_v2_preview_service.py` の内部組立物と `piece_v2_store.py::issue_piece_preview` の永続化を、仮のready/adjustedや常時成功する判定でつながない。PCE-4のS0〜S8が成立した候補だけをS9へ進める。private/planを理由に安全性を省略しない。
+
+第三者への未確認断定、未証明の広い人名／参照境界、実安全性判定と永続preview発行・変更、HTTP/RN接続、許可されたrefined補足、Q3履歴選択集合とshared writer、Nexus/read-through非表示化、native保存共有・実機は残る。10/07の開発画面接続を本資料だけで成立扱いにせず、10/10完成も予定通りと断言しない。週次判断点の不足を残したまま、履歴拡張・画像微調整・別の周辺機能へ逸れない。
+
+`automatic_progression=false`、Draft/default OFF、production router未登録を維持する。資料同期の準備と、remote適用・再取得の成功は別に記録する。共有DB・SQL migration・Render・RN・Emlis/Analysis・merge/deploy/activation・実ユーザーデータの変更0。B7／B8／Piece全体の完了や商品合格creditを付与しない。

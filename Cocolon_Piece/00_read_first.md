@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_piece_read_first
 title: "Cocolon Piece — Read First"
-revision_date: "2026-10-06 JST"
+revision_date: "2026-10-07 JST"
 decision_owner: "Mash"
 workstream: "Cocolon / Piece"
 document_status: "CURRENT_PIECE_WORKSTREAM_ENTRY"
@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在の再開先は§20と`Cocolon_前提資料/current_structure/02_piece_current_structure.md` §24です。今回のAPI候補 `ee81b49203509c92c63a776b22c54176f9f57d37` は、原文に役割が明記されたASCII／全角Latin人名を既存の関係表現へ置換する本文修正です。今回の選択検査は643 PASS／失敗0。ひらがな人名・第三者断定・公開安全性判定とpreview発行は未完了で、`OFFLINE_NOT_ACCEPTED`を維持します。§19以前は履歴として保持し、今回の範囲・結果・残件は§20を優先します。**
+**GitHub反映済みのAPI再開位置は `0c1f69ed25d6e5bb7a887c125ae900ab61ee4996`（§22／current map §26）です。B7公開切替・削除HTTPの実装と隔離PostgreSQL接続確認を反映し、役割明記ひらがな名と旧676 PASSは§21／map §25へ分離します。前回B7 runのHTTP 152件・native SQL接続13件の成功は、実Auth／実PostgREST／実機・商品合格を意味しません。公開安全性の実判定→永続preview→開発画面の本線は未完了です。§20以前は各commitの履歴として保持します。**
 
 ## 1. Current owner
 
@@ -58,7 +58,7 @@ Q&A:
 
 ## 3. Phase state
 
-最新の実装状態：§17〜19の保存・消費済みcontext照合・本人履歴読取りを継承し、§20で明示された役割へのLatin人名置換を扱う。今回の選択検査は643 PASS／失敗0。以前の347／373／414 PASSは各commitの履歴として保持し、B5／B6／B7／B8全体完了にはしない。以下のPCE-0〜B2-Aは成立済み設計・過去実装の履歴として保持する。Analysisの現在地はAnalysis自身のcurrent mapに従い、以下の旧未着手記述を再開判断へ使用しない。
+最新の実装状態は§21〜22／current map §25〜26です。保存・消費済みcontext照合・本人履歴読取りを継承し、役割明記ひらがな名とB7公開切替・削除HTTPを反映済みとして分けて記録します。643／676 PASSは各旧commitの履歴であり、B7 runのHTTP 152件・native SQL接続13件とは別の実行結果です。公開安全性の実判定・永続preview発行・開発画面接続は未完了で、B5／B6／B7／B8全体完了へ換算しません。以下のPCE-0〜B2-Aは成立済み設計・過去実装の履歴として保持します。Analysisは自身のcurrent mapに従い、以下の旧未着手記述を再開判断へ使用しません。
 
 ```text
 PCE-0: COMPLETE
@@ -413,7 +413,9 @@ API registration / DB / migration / RN / runtime connection:
 
 このDOC_ONLY同期ではpytestを再実行していない。B01-Iの実行結果をcurrent workstreamへ記録し、GitHub上のtest/owner commit・blob identityをfresh確認した。
 
-## 10. Frozen implementation order and current next
+## 10. Frozen implementation order — historical B2-A checkpoint
+
+以下はB2-A完了時点の履歴であり、現在の次作業・未着手判定には使用しません。最新の実装・残件は§21〜22とcurrent map §25〜26へ戻ります。確認済みB2-AやB7を再実装せず、公開安全性の実判定→永続preview発行→開発画面接続を本線とします。
 
 ```text
 01 B1      COMPLETE
@@ -664,3 +666,21 @@ Q3の新規・過去日付入力による履歴集合の変化は、profile lock
 - ひらがな人名・第三者断定・PCE-4安全性判定issuer・永続preview発行・RN接続は残件。今回候補は`OFFLINE_NOT_ACCEPTED`、production false、record／quota 0のままである。
 
 既存3資料を同期し、新しい地図や安全性機構を追加しない。原典確認・環境と検証範囲はmap §24へ記録。DB／API契約／RN／共有writer／merge／deploy／有効化への変更0、正式商品受入れ未成立、`automatic_progression=false`。
+
+
+## 21. GitHub反映済み再開点 — 役割明記のひらがな人名
+
+API `4033e1f323c06c4bad369b03583d5b87e84fb0d5` と、先行する33検査 `355226b95c23d6a552ebb800332f1b75f88a6e7c` を保持する。詳細はcurrent map §25。原文に書かれた関係と名前の対応に限る限定修正であり、PCE-4全体・preview発行の完成ではない。
+
+旧FIX run `37461341829` は676 PASS／0 FAIL。後続B7 runの工程成功・対象件数とは分け、単純加算しない。旧警告・SHA-256の訂正はAPI PR #3 comment `6016091963` の記録とmap §25へ戻る。§20の643 PASSは旧Latin修正時点の履歴として残す。
+
+
+## 22. 反映済み再開点 — 保存済みPieceの公開切替・削除HTTP
+
+API `0c1f69ed25d6e5bb7a887c125ae900ab61ee4996`。詳細はcurrent map §26。既存の未登録routerを既存store／SQL terminalへ接続する4pathの変更であり、GitHub未反映の140件候補へ戻さない。本人認証・版番号・削除の同じキーを保持し、本文／recipe再生成、quota操作、仮の安全性付与、自動再送を加えない。
+
+2026-10-07の[run 37533895479](https://github.com/MassyuRed/mashos-api/actions/runs/37533895479)はHTTP 152件・隔離native SQL接続13件が成功、既存B2〜B8工程も成功した。前回実行の結果を記録したもので、資料同期作業での再実行ではない。Auth／PostgREST transportは合成、実Supabase・実機・Nexus/cache非表示化・商品受入れは未確認。
+
+次の本線は公開安全性実判定→永続preview発行→同じ本文と画像設定の開発画面である。既存detector成功や内部組立物の存在を安全性判定へ昇格せず、PCE-4 S0〜S8の不成立を残したまま発行しない。B7の確認済み実装・隔離検証を作り直さず、3資料の更新後全文と適用差分を作成・照合済み。GitHub反映と反映後の再取得は別に確認し、ZIPだけでremote同期済みにしない。
+
+production未登録、共有DB・Render・RN・旧Q&A・Emlis/Analysis・merge/deploy変更0、`automatic_progression=false`。B7全体や10/07の画面接続・10/10完成を成立した扱いにしない。
