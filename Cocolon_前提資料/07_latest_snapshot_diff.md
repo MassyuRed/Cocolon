@@ -40453,3 +40453,7 @@ STRUCTURE_MAP_DELTA_NONE。国家／API／DB／RN／Piece／Analysis接続は不
 ## 2026-09-11 milestone — Q1確認後のQ2開発候補
 
 Q1 pure一往復53件を再確認し、Q2の専用永続化/認証API/RN入力・履歴/明示再試行を既存Draft PR3/30に実装。実SQL一往復と障害時の意味保持、hook/panel動作を検証。全体/Home/国家/三core地図とv1正本02/05/06、API registry/DB migration資料を同期。稼働DB適用と端末の開発アプリ確認が残り、Q2完了・商品PASS・公開としない。次作業の正本はAPI既存handoff末尾Q2節。
+
+## 2026-10-06 checkpoint — Emlis実機無応答
+
+現行詳細はdesigns/cmee/v1/06末尾「Emlis実機無応答の原因切分けと履歴の未作成表示」、接続地図はcurrent_structure/01の同日節。原入力保存／thread未作成／replyの3秒timeoutを確認。最新コードの隔離SQL再現で3秒中断・10秒生成保存を切り分け、履歴NOT_CREATEDを黙って閉じるRNを修正した。関連30検査PASS、Metro1件・native・実機復旧は未確認。稼働API1a42b9eb、調査時開発API468663c8、現mode未取得。次は実設定の読取りと指定版／生成設定を揃えた本人実機確認。DB/env/deploy変更0、private本文公開0、Draft/open/unmerged、商品NOT_CLEARを維持。

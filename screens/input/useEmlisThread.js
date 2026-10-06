@@ -74,14 +74,14 @@ export function useEmlisThread({ userId, enabled: explicitEnabled, api = emlisTh
     } finally { if (active()) c.busy = false; }
   }
 
-  async function open(inputId) {
+  async function open(inputId, { showNotCreated = false } = {}) {
     if (!enabled || !userId || !inputId || owner.current !== userId) return false;
     reset();
     context.current.inputId = String(inputId);
     setState({ ...empty(), visible: true });
     const result = await perform("get");
     if (context.current.inputId !== String(inputId) || owner.current !== userId) return false;
-    if (result?.state === "NOT_CREATED") {
+    if (result?.state === "NOT_CREATED" && !showNotCreated) {
       reset();
       return false;
     }

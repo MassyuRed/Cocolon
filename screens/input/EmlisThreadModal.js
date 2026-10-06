@@ -3,8 +3,8 @@ import { ActivityIndicator, KeyboardAvoidingView, Modal, Platform, ScrollView, S
 import CocolonButton from "../../components/CocolonButton";
 
 export function threadStatus(dto) {
-  if (dto?.can_write === false) return "観測の更新を一時停止しています。保存済みの本文と回答は確認できます。";
   if (!dto || dto.state === "NOT_CREATED") return "この記録の観測はまだありません。";
+  if (dto?.can_write === false) return "観測の更新を一時停止しています。保存済みの本文と回答は確認できます。";
   if (dto.body_state === "CONTEXT_CHANGED") return "参照できる記録や解釈が変わっています。以前の観測は履歴として表示しています。";
   if (dto.failure_code === "save_result_unknown") return "処理の完了を確認できません。保存状況を確認してください。";
   if (dto.failure_code === "separate_safety_owner_required") return "この回答は通常の観測として扱えません。";

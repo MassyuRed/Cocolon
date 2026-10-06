@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_emlis_ai_current_structure
 title: "EmlisAI構造 — Current Structure"
-revision_date: "2026-09-11 JST"
+revision_date: "2026-10-06 JST"
 document_role: "EMLIS_AI_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -18,6 +18,16 @@ im10_state: "NON_PASS"
 current_product_read_state: "EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFICIENT"
 candidate_ready: false
 ---
+
+## 2026-10-06 — 実機無応答の調査と履歴表示修正
+
+最新の接続確認は本節と正本06末尾を優先する。Renderの実稼働APIは `1a42b9ebc25ba9765bdb17658cf47dd631d9f40d`、調査時の開発API HEADは `468663c8effc51c1bc33f165313eeb9417d16dc9`。最新成功native build候補は6401だが、本人端末の導入版は未確認。過去の6101／u92を現在の配置版へ固定しない。
+
+報告対象は原入力のみ保存され、Emlis thread／eventがない。入力後のreplyに3秒budgetのTimeoutErrorがあり、続くGETの200は観測生成成功を意味しない。実modeは未取得で、read_only残存と、development開始前の中断をログだけで区別できない。Q3はsubmitから単一のthread作者へ接続され、GETは生成しない。最新コードの非公開ローカル再現では3秒で本文なし、既存設定の10秒では生成・SQL保存・再読込が成立した。実機復旧・商品品質合格の証拠ではない。
+
+既存 `screens/AnalysisHistoryScreen.js` の明示押下だけ `useEmlisThread.open` に `showNotCreated` を渡し、未作成でも `EmlisThreadModal` を残して既存の未作成文言を表示する。`can_write:false` より未作成判定を優先する。入力画面の旧feedback fallback、本人認証、API／DB契約、GETの副作用なしを維持。生成／再生成routeは追加しない。この修正版はGitHub作業版で、端末配置は未実施。
+
+次は実mode等の非secret設定を確認し、生成有効設定と既存10秒設定・指定API版の配置を揃えて、本人の新規入力→生成→保存→再表示を検証する。未作成の過去入力は履歴GETだけで生成されない。read_onlyを解除した、最新APIが配置された、実機復旧したとは未確認のまま主張しない。
 
 > 2026-10-03現行方針：作業配分と実機接続の優先順は[最新weekly §6.6〜6.10](../weekly_reviews/Cocolon_Weekly_Review_20261003.md)を参照。10/03でEmlis品質改善枠を区切り、10/04以降のWork主枠は分析。自然さ・深さ等の全面改善を開発実機確認の前提にせず、Emlis接続は限定した共通接続作業として扱う。重大な意味反転・出典混同、保存・本人権限等の保護を維持する。未完成と明示した動作確認を正式商品受入れへ換算せず、0/3・NOT_CLEAR・default OFF・Draft/open/unmergedを保持。最新の接続確認は正本06/API handoff末尾u91/u92とAPI運用資料§18。Q2/Q3と指定API配置済み。Apple契約への同意後、iOS run #61のarchive/IPA/TestFlight送信が成功。次は1.0 (6101)の端末導入・本人接続確認。
 

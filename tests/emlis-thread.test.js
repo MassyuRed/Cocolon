@@ -416,6 +416,25 @@ for (const configuredBase of [null, 'https://emlis-development.invalid///']) {
     await act(async () => root.root.findByProps({ accessibilityLabel: 'Emlisの観測を閉じる' }).props.onPress());
     await act(async () => open());
     assert.match(JSON.stringify(root.toJSON()), /更新した観測/);
+    await act(async () => root.root.findByProps({ accessibilityLabel: 'Emlisの観測を閉じる' }).props.onPress());
+    savedDto = {
+      schema_version: initial.schema_version, state: 'NOT_CREATED',
+      thread_id: null, body_state: null, can_write: false,
+      can_retry: false, can_continue: false, current_observation: null,
+      pending_question: null, timeline: [], interpretive_frames: [],
+      original: initial.original,
+    };
+    const beforeMissingRead = calls.length;
+    await act(async () => open());
+    assert.equal(root.root.findByType('Modal').props.visible, true);
+    assert.match(JSON.stringify(root.toJSON()), /この記録の観測はまだありません/);
+    assert.doesNotMatch(JSON.stringify(root.toJSON()), /保存済みの本文と回答は確認できます/);
+    assert.equal(root.root.findAllByProps({ accessibilityLabel: 'Emlisへの回答' }).length, 0);
+    await act(async () => root.root.findAllByType('Button').find(b => b.props.children === '保存状況を確認').props.onPress());
+    assert.equal(root.root.findByType('Modal').props.visible, true);
+    assert.equal(calls.length - beforeMissingRead, 2);
+    assert.ok(calls.slice(beforeMissingRead).every(c =>
+      c.options.method === 'GET' && c.url === `${expectedBase}/emlis/threads/by-input/input`));
     await act(async () => root.root.findAllByType('TouchableOpacity').find(b =>
       b.findAllByType('Icon').some(i => i.props.name === 'lock-open-outline')).props.onPress());
     await act(async () => root.root.findAllByType('TouchableOpacity').find(b =>
@@ -425,13 +444,14 @@ for (const configuredBase of [null, 'https://emlis-development.invalid///']) {
     assert.deepEqual(calls.map(({ url, options }) => [options.method, url]), [
       ['POST', `${expectedBase}/emotion/history/search`], ['GET', `${expectedBase}/emlis/threads/by-input/input`],
       ['POST', `${expectedBase}/emlis/threads/thread/answers`], ['GET', `${expectedBase}/emlis/threads/by-input/input`],
+      ['GET', `${expectedBase}/emlis/threads/by-input/input`], ['GET', `${expectedBase}/emlis/threads/by-input/input`],
       ['POST', `${expectedBase}/emotion/secret`], ['DELETE', `${expectedBase}/emotion/history/input`],
     ]);
     assert.ok(calls.every(c => c.options.headers.Authorization === 'Bearer synthetic-token'));
     const submitted = JSON.parse(calls[2].options.body);
     assert.equal(submitted.question_id, 'question'); assert.equal(submitted.answer_text, '今は嬉しい。');
     assert.equal(submitted.expected_revision, initial.revision); assert.ok(submitted.idempotency_key);
-    assert.deepEqual(JSON.parse(calls[4].options.body), { emotion_id: row.id, is_secret: true, created_at: row.created_at });
+    assert.deepEqual(JSON.parse(calls[6].options.body), { emotion_id: row.id, is_secret: true, created_at: row.created_at });
   });
 }
 

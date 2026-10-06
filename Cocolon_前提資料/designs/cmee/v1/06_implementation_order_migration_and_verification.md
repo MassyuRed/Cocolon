@@ -14459,3 +14459,19 @@ rootが合成7全文（主語読点、僕＋全角空白、二記録集約、通
 STRUCTURE_MAP_DELTA_NONE：既存Analysis compiler1／共有plan1／test3／API handoff1、Cocolon current03／設計04／06の計9file、新規repo file0。共有意味owner内の既存parserを変更しているがownerの追加・移動はない。Piece／realizer／API契約／DTO／DB／SQL／RN／製品依存変更0。env／deploy／build／main／merge／IF操作0。u157未配置。限定TECHNICAL_CREDIT、商品0/3・NOT_CLEAR・48%、最後の確認済み稼働API1a42b9e…／TestFlight6401・本人実機残件は継承値で、今回再確認していない。旧generic0058期待差も未再検証・未修正。
 
 残件は一般感情、全角／ASCIIコンマ、保護意向を含む希望と負荷の複合、未対応認知そのもの、夢／伝聞から現実へ戻る境界、plain幾等と、指定版での本人生成・保存再表示・比較。次も実出力の内容不一致から限定対象を選ぶ。PR説明上限に合わせ先頭u156要約をu157へ更新し、u156全文は本handoff／06とGit履歴に保持する。
+
+## 2026-10-06 — Emlis実機無応答の原因切分けと履歴の未作成表示
+
+Mashの実機無応答報告を受けたOBSERVED_BLOCKER_MINIMAL_FIX。開始app d22261cb674838bd4b335682524665edf3fccbce／API468663c8effc51c1bc33f165313eeb9417d16dc9。全体設計01／01A〜01C・tracked全file地図、current Emlis／CMEE地図、最新weekly20261003、現行作業規則と関連actual sourceを確認。Codex Workのroot華恋が単一編集・検証・反映owner、同環境agentは読取り補助。別model Pro reviewとは扱わない。
+
+読取り確認：Render実稼働はAPI1a42b9ebc25ba9765bdb17658cf47dd631d9f40d、autoDeploy OFF。最新成功native build候補6401の履歴・入力・thread hook・API clientは調査時HEADと一致するが本人端末版は未確認。報告対象の原入力はDBにあり、thread／eventは0。入力保存後のreplyでTimeoutError、reply4967ms／budget3000ms、その後のthread GETは200。本文生成前の失敗であり、GET200／bootstrap reader=trueを生成成功と数えない。実envはMCPで取得できず、Dashboardはsign-inが必要なため現mode未確認。過去記録のread_onlyから現値を断定しない。
+
+現物の経路はsubmit→Home gateway→emotion_submit_service→render_emlis_ai_reply→Q3 EmlisThreadService。read_onlyはgetのみ、三値成立developmentはstart、条件不足development／未知modeはread_only。両方とも初回readとcontextが外側3秒制限内にあり、thread0だけでmodeは判別できない。過去入力GETは初回生成を行わない。liveと最新ではthread関連ownerは同じで、共有Reception／plan／gateの3fileは異なる。
+
+同じ報告入力を非公開ローカルで再現した。最新CMEE Q3_FREEの純粋生成は本文あり、約7767ms。既存Q2＋Q3 migrationを隔離PGlite0.5.8へ適用し、実reply／service／SQL RPCで別のcold processを比較した。3秒budgetでは3235msでTimeoutError、RESPONSE_FAILED／worker_interrupted、本文なし。既存設定で許容される10秒では7519ms、COMPLETED、本文のSQL保存あり。作者を使用禁止にしたGETを2回行い、保存本文とDTO一致を確認した。実アカウントDBへの書込み・本文外部送信なし。private入力、生成本文、本人識別子、個別digest、作業pathは公開しない。この1入力のローカル成立は実機の成功や一般的商品品質の合格ではない。
+
+実装は既存RN3fileと既存test1だけ。履歴の明示openでNOT_CREATEDを黙って閉じず、未作成文言とGET再確認を残す。NOT_CREATEDをcan_write=falseより先に表示し、存在しない保存本文を案内しない。InputScreenのopen(id)→false→旧feedback／記録済み通知を維持。tests/emlis-thread.test.jsで既存互換と履歴2originの実onPress→表示→再GETのみを検証。30 tests PASS。別のMetro bundle検査1は依存未導入でMODULE_NOT_FOUNDとなり未検証。全31 PASS／native PASSとしない。rootの最終差分とread-only agent reviewで追加指摘なし。
+
+primaryは限定TECHNICAL_CREDIT（履歴無反応の修正）、実機復旧credit0。API source／DB／env／deploy／native build／main／merge変更0。既存owner内の表示補正で新routeなし、user-visible flow差はcurrent01へ同期。07には本checkpointのpointerだけを追記。商品NOT_CLEAR、正式受入れ0/3を保持する。
+
+未完了：現設定COCOLON_EMLIS_THREAD_MODE、COCOLON_ENV、COCOLON_EMLIS_THREAD_DEVELOPMENT、EMLIS_AI_REPLY_TIMEOUT_SECONDSの読取り、必要な生成設定と指定版配置、本人端末の新規入力→生成→保存→再表示。10秒でもRender実環境の成立は未検証。未作成の旧入力にGETから新規生成を追加せず、既存入力を無断編集・複製しない。設定更新MCPはmainを自動配置する既知の副作用があるため使用せず、指定版と設定を一緒に確認できる既存運用で続行する。automatic_progression=false。
