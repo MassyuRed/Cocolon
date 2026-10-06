@@ -2,7 +2,7 @@
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
 revision_date: "2026-10-06 JST"
-latest_api_implementation: "d71fdb40238f2c99751f0c20e578ab654f72308e"
+latest_api_implementation: "e697d4f8ece3cfcd8ea9d26cc2d9c0e2cb9ddf4d"
 latest_storage_candidate: "d71fdb40238f2c99751f0c20e578ab654f72308e"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**2026-10-06の現在地は§22です。API Draft候補 `d71fdb40238f2c99751f0c20e578ab654f72308e` は、§21で残したQ3保存判定のうち、観測が実際に消費した既存履歴・thread・premium feedbackの変更を原子的保存まで照合・保護します。同じ新26件は変更前21 FAIL／5 PASSから全PASSとなり、今回CIは既存347件を含む373 PASS／0 FAIL／0 ERROR／0 SKIP。新規・過去日付入力の追加等による履歴選択集合の変化と、profileロックを共有しないwriterまで解消したとは扱いません。公開安全性を判定した永続preview発行が次の本経路であり、B5／B6全体完了・商品受入れではありません。§21以前は各時点の履歴として保持し、今回の範囲・検証・再開先は§22を優先します。**
+**2026-10-06の現在地は§23です。API Draft候補 `e697d4f8ece3cfcd8ea9d26cc2d9c0e2cb9ddf4d` に、本人の保存済みPiece履歴・詳細を同じ本文と画像設定で再取得するB7読取り入口を追加しました。今回CIは既存373件＋新41件の414 PASS／0 FAIL／0 ERROR／0 SKIP。公開安全性付きpreview発行には実名の残留と第三者への断定の残留があり、未完成のままです。今回の保存後再表示を、10/03議事録§5.3のpreview→画面完了やB7全体完了へ数えません。§22以前は履歴として保持し、最新の範囲・残件は§23を優先します。**
 
 ### 9/30・9/26の到達点（履歴）
 
@@ -208,7 +208,7 @@ shared tableのnon-Piece row／consumerは、exact Piece predicateとwriter／re
 
 ## 8. Current gaps
 
-現在の未完了は§22.4へ集約する。以下は9/30時点の残件であり、後続のB2-B／B3／B4／B5永続化／B6保存接続が未実装という意味には使用しない。
+現在の未完了は§23.4へ集約する。以下は9/30時点の残件であり、後続のB2-B／B3／B4／B5永続化／B6保存接続が未実装という意味には使用しない。
 
 1. user-visible routeはold Q&Aのまま。
 2. 保存原入力・保存状態から本文／recipeの内部組立と画像設定だけの変更を§20まで実装。本文に表れていない選択感情、refined補足、保存済みpreview発行、HTTP／RNは未接続。
@@ -653,6 +653,8 @@ M4は未適用の候補。production router登録、稼働DB適用、旧Q&A切�
 
 ## 22. 2026-10-06 — Q3観測が消費したcontextの保存時再照合
 
+本節は`d71fdb40238f2c99751f0c20e578ab654f72308e`時点の履歴。後続の本人向け再取得と現在の残件は§23を優先する。
+
 ### 22.1 今回扱う保存不整合と選択理由
 
 §21.4で残した、Q3観測の判定後に履歴側が変わってもPieceを保存できる競合のうち、既存の消費済みcontextを扱う。API対象は `d71fdb40238f2c99751f0c20e578ab654f72308e`、直前の保存入口は `bee83063ce11b42de64f1c635149bbd5066ec3e5`。保存時の原入力・profile・現在threadだけでなく、観測で使用した履歴source／履歴threadとpremium feedbackを同じatomic saveの成立条件へ加える。
@@ -695,3 +697,49 @@ quota待ちの後に取得する保存時刻で、消費履歴の閲覧・保持
 最新weekly reviewは2026-10-03のまま。永久incidentとcurrent rule、PCE-4／PCE-6／PCE-8の原典、対象sourceへ戻って進行を選択した。全体設計・file mapは§21記載の実在する01／01A／01B／01Cの全体構造とPiece関連ownerの確認範囲を継承し、全mapping行や全current sourceの再監査とは報告しない。今回のSystem Context prepareもdocs `d40ac6ba1a8ab5a9b52fb32fd2f975643363580e`のancestry条件で成立せず、許可された原典の直接読取りを使用した。
 
 `STRUCTURE_MAP_DELTA_UPDATED`として本map・Piece入口・manifestの既存3点を同期する。M4は未適用候補、production router未登録のまま。実DB／稼働アプリ／RN／旧Q&A切替／merge／deploy／有効化は今回0。商品受入れは未成立、`automatic_progression=false`を維持する。
+
+
+## 23. 2026-10-06 — 本人の保存済みPiece履歴・詳細の再取得
+
+### 23.1 今回の直接経路とpreview本線の残差
+
+API対象は `e697d4f8ece3cfcd8ea9d26cc2d9c0e2cb9ddf4d`。§21・§22の保存経路に続き、PCE-6／PCE-8 B7のうち、保存したPieceを本人が後から同じ本文・画像設定で読み出す部分を接続した。`GET /emotion/piece/history`と`GET /emotion/piece/{piece_id}`を専用routerへ追加する。公開Nexusや旧Q&A履歴の流用ではなく、本人の保存recordから返す独立した読取りである。
+
+公開安全性付きpreviewの調査では、sourceに役割が明記されたLatin／ひらがなの人名が抽象化されず候補へ残ること、第三者へのallegationが断定のまま残ることを確認した。source graph・役割処理・既存detectorの成功だけで公開`ready`を付与できない具体的残差である。安全性判定と発行は後続に残し、今回は既存保存後の再表示を限定単位として実装した。10/03議事録§5.3の「生成→永続preview→開発画面」は未完了であり、本単位をその完成へ換算しない。
+
+### 23.2 ownerと読取り契約
+
+| path（mashos-api） | 今回の差分 |
+|---|---|
+| `ai/services/ai_inference/api_piece_v2.py` | 未登録routerに本人history／detailのGETを追加。Bearer認証、閉じたquery、GET body拒否、固定エラー、`no-store`を使う。固定`/history`を`/{piece_id}`より先に置く。 |
+| `ai/services/ai_inference/piece_v2_owner_service.py` | 新規のB7本人読取りowner。認証本人＋savedに限定した`piece_records` queryと、保存内容を検証する専用projectionを持つ。 |
+| `ai/tests/piece_v2/test_b07_piece_v2_owner_api.py` | 新規の本人API・内容同一性・ページ継続・隔離native保存recordの検査。 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存隔離DB workflowへ新B7検査を追加。 |
+
+GETごとに本人認証し、queryと返却前の両方で`owner_user_id`と`lifecycle_status=saved`を確認する。B3のowner-only判定を使い、private／publicの両方を本人に返す。本人以外・不在・保存前・削除済みの詳細はnot-found相当とし、公開済みでも他人へこの入口を開かない。
+
+保存済みの`piece_text`、content payload、visual recipe、そのhash、renderer／contract versionを保持して返す。公開可能な状態は既存保存値の`content_status=ready|adjusted`へ投影するだけで、新しい安全性判定は行わない。source lineage、raw source、安全性詳細、idempotency hashなどを除いた閉じたresponseにする。保存本文・payload・recipeの不整合は固定503で失敗し、部分的な本文や自動修復を返さない。
+
+履歴は既定20件・最大100件、`saved_at DESC, id DESC`のkeysetで継続する。cursorは認証ownerに結び付く継続境界であり、認可tokenではない。次ページも改めて本人とsavedを絞り、境界行の削除や先頭への新規保存でoffsetがずれて重複することを避ける。不正・別ownerのcursorは400、取得結果の順序やownerなどの不整合はページ全体を503にする。全ページを同じ時点へ固定したsnapshot履歴の保証ではない。
+
+原入力・Emlis context・現在プラン・本文作者を呼ばず、保存recordを再取得する。元入力の削除やプラン変更によって保存済み本文・合法に保存されたrecipeを作り直さない。quota・metrics・read stateを含む書込みは0。M2／M3／M4、source writer、CMEE、RNは変更しない。
+
+### 23.3 検証状態
+
+修正commit `e697d4f8ece3cfcd8ea9d26cc2d9c0e2cb9ddf4d`のGitHub Actions [run 37453508303](https://github.com/MassyuRed/mashos-api/actions/runs/37453508303)、job `112235434764`は完了／成功。**既存373件＋新B7 41件＝414 PASS／0 FAIL／0 ERROR／0 SKIP**。新41件のうち隔離native DBの4件も全PASS。警告4件は失敗と分ける。実行環境はPython 3.12.14／pytest 8.4.1／psycopg 3.3.6／PostgreSQL 16.15。
+
+test-only baseline commit `2fddb201f8bfe0a6b68e14098d9495d83c5c405d`の[run 37453282548](https://github.com/MassyuRed/mashos-api/actions/runs/37453282548)、job `112234690313`では、既存373件は全PASS、新41件は40 FAIL／1 PASS／0 ERROR／0 SKIP。失敗は旧routerの404または規定エラー応答の不在で、fixture不具合ではない。修正後は同じtest bytesで全PASSとなり、既存373件も再実行した。新testのRED／修正後、local／remoteのbytes一致、親commitと全単位4pathを確認した。§22の373 PASSを今回の再実行結果へ転用していない。
+
+native検査は保存済みartifactからの本人取得を確認する。現在tierへ依存しない検査では、source tableのない隔離DBで`profiles.subscription_tier`をunknownへ変更しても同じ保存artifactを取得した。有料プランからfreeへ実際に変更した試験や、実ユーザー原入力を削除した試験とは報告しない。
+
+構文と同環境read-only確認は実行済みだが、CI・実機の成功の代用にはしない。新検査は認証を模擬し、HTTP clientのPostgREST応答模擬と隔離native DBでの実保存を分ける。実Auth／実PostgREST／安全性付きpreview発行／RN再表示・native共有の商品受入れは証明しない。作業環境はCodex Workであり、同環境の確認をPro／Ultra間の独立受入れへ換算しない。
+
+### 23.4 残件・原典・再開先
+
+次の本線は公開安全性判定と、実生成物の永続preview発行・開発画面接続である。人名・第三者断定は今回確認した不足例であり、その2点の修正だけでPCE-4全体が成立したとは扱わない。B7も今回GETだけであり、visibility／delete API、RN本人履歴、native画像保存・共有、refined補足、実機・正式商品受入れを残す。B5／B6／B7全体完了にはしない。
+
+Q3履歴選択のphantomは別残件のまま。今回は既存submit gateway→legacy→PostgRESTの`emotions` INSERTが`created_at`を保持し、Q3のprofile lockへ参加しない経路を確認した。新規・過去日付入力による履歴集合の変化を保護するには、共有writer protocolの変更が必要である。§22の消費済み既存行lockで解消済みとはせず、本単位ではsource writerを変更しない。
+
+最新weekly review（2026-10-03、§5.3・§6.6〜6.10）、恒久incident全文、current rule、PCE-3／4／5／6／8へ戻った。全体地図01のflow／coverageと01A／01B／01CのApp・入力・Piece・read/access関連fileの役割を現在docs `89e508871f2a08bfcbfa1c1285407321d784f971`で確認した。全mapping行や全sourceの再監査ではない。System Context prepareは同headのancestry条件で成立せず、許可された原典直接読取りを使用した。
+
+`STRUCTURE_MAP_DELTA_UPDATED`として既存map・Piece入口・manifestを同期する。production router未登録、M4未適用候補、稼働DB・アプリ・main・merge・deploy・有効化への変更0。`automatic_progression=false`を維持する。

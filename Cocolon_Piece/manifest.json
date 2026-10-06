@@ -1,22 +1,22 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v18",
+  "schema_version": "cocolon.piece.workstream_manifest.v19",
   "generated_at": "2026-10-06 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v17",
-    "predecessor_blob": "902383dae82eb10ea3bff1db6562a1a911262994",
-    "predecessor_head": "d40ac6ba1a8ab5a9b52fb32fd2f975643363580e",
-    "carry_forward": "Prior design, B02A and B06 save connection identities and results are preserved. The current bounded Q3 context change does not activate production or grant preview safety.",
-    "historical_scope": "b06_save_connection and its 347 PASS are the bee830 baseline. Current working scope is b06_q3_context_fence, structure section 22 and entry section 18."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v18",
+    "predecessor_blob": "5ad2092eeb273158b211d5290d6c8aa344c2c9db",
+    "predecessor_head": "89e508871f2a08bfcbfa1c1285407321d784f971",
+    "carry_forward": "Prior identities and CI results remain historical. Owner saved-record reads do not issue previews, grant safety, change shared source writers, or activate production.",
+    "historical_scope": "b06_q3_context_fence and its 373 PASS describe d71fdb4. Current scope is b07_owner_reads, structure section 23 and entry section 19."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "0669453a606ead7d5dc7a33454219035e3a10359",
-    "raw_sha256": "65f2b944b4b51e86d2dc27878bdc69db92de3df539782f4c385e8d363f672717",
-    "utf8_bytes": 21149
+    "git_blob_sha1": "345c583a07c0bc132633cce5e1e9a5e9d499bb5b",
+    "raw_sha256": "a7f281999769983d79da0a6e89580a65d3d543a05c4391fc240a01c150b36719",
+    "utf8_bytes": 23457
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -61,7 +61,8 @@
     "pce9a_b02a_red": "FROZEN_UNCHANGED__NATIVE_POSTGRESQL_1_PASS",
     "pce9a_b02a_implementation": "EXACT5_PRESERVED__EXACT6_SELECTORS_PUBLISHED",
     "pce9a_b06_save_connection": "HISTORICAL_BEE830_UNREGISTERED_DRAFT__CI_347_PASS__NOT_B6_COMPLETE",
-    "pce9a_b06_q3_context_fence": "DRAFT_EXISTING_CONSUMED_CONTEXT_FENCE__CI_373_PASS__LIVE_APPLY_0__NOT_B6_COMPLETE"
+    "pce9a_b06_q3_context_fence": "HISTORICAL_D71FDB4_CONSUMED_CONTEXT_FENCE__CI_373_PASS__LIVE_APPLY_0__NOT_B6_COMPLETE",
+    "pce9a_b07_owner_reads": "DRAFT_OWNER_HISTORY_DETAIL_GET_ONLY__CI_414_PASS__NOT_B7_COMPLETE"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -223,9 +224,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "54d97d809029aeb481f7005829144ba51a1301c5",
-    "raw_sha256": "760caa7b64289347ce69f4c0bfb63dffefea0315d42dae6ca35b9a5466440d68",
-    "utf8_bytes": 84050
+    "git_blob_sha1": "99c813129711439d0da1409a246c4d4e3761c7e6",
+    "raw_sha256": "3548fa0f8431b5abdf86dc0517e3168295ff4f06d53667e38b2ed0a683c5ee64",
+    "utf8_bytes": 91311
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -398,7 +399,7 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "OBSERVED_BLOCKER_MINIMAL_FIX",
+    "classification": "DIRECT_PRODUCT_OR_ACCEPTANCE_WORK",
     "piece_documentation_paths": 3,
     "api_changed_paths": 4,
     "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
@@ -413,7 +414,7 @@
     "api_predecessor": "f3df2dc36a03dc4009c83ee5e2eafc64db9a730a",
     "current_map_section": "22",
     "current_entry_section": "18",
-    "state": "CURRENT_WORKING_DRAFT_CI_373_PASS_UNREGISTERED_UNAPPLIED",
+    "state": "HISTORICAL_D71FDB4_BASELINE__CURRENT_B07_OWNER_READS_BELOW",
     "classification": "OBSERVED_BLOCKER_MINIMAL_FIX",
     "change_reason": "The already-recorded Q3 save context race permits stale consumed history or feedback after source admission. Authentic preview issuance lacks a complete public-safety verdict owner and is retained as the next main connection.",
     "changed_paths": [
@@ -498,6 +499,138 @@
     "product_acceptance": false,
     "merge_deploy_activation": false,
     "automatic_progression": false,
-    "prior_save_implementation": "bee83063ce11b42de64f1c635149bbd5066ec3e5"
+    "prior_save_implementation": "bee83063ce11b42de64f1c635149bbd5066ec3e5",
+    "historical_scope": "All results and remaining fields in this object describe d71fdb4; current B7 reads and concrete preview/shared-writer gaps are b07_owner_reads."
+  },
+  "b07_owner_reads": {
+    "api_commit": "e697d4f8ece3cfcd8ea9d26cc2d9c0e2cb9ddf4d",
+    "api_predecessor": "2fddb201f8bfe0a6b68e14098d9495d83c5c405d",
+    "prior_implementation": "d71fdb40238f2c99751f0c20e578ab654f72308e",
+    "current_map_section": "23",
+    "current_entry_section": "19",
+    "state": "CURRENT_WORKING_DRAFT_CI_414_PASS_UNREGISTERED",
+    "classification": "DIRECT_PRODUCT_OR_ACCEPTANCE_WORK",
+    "new_owner": "ai/services/ai_inference/piece_v2_owner_service.py",
+    "changed_paths": [
+      "ai/services/ai_inference/piece_v2_owner_service.py",
+      "ai/services/ai_inference/api_piece_v2.py",
+      "ai/tests/piece_v2/test_b07_piece_v2_owner_api.py",
+      ".github/workflows/piece-b2b-isolated-postgres.yml"
+    ],
+    "routes": [
+      "GET /emotion/piece/history",
+      "GET /emotion/piece/{piece_id}"
+    ],
+    "owner_read_contract": {
+      "fresh_auth_each_request": true,
+      "owner_scoped_saved_records_only": true,
+      "visibility": [
+        "private",
+        "public"
+      ],
+      "preserved": [
+        "piece_text",
+        "content_payload",
+        "visual_recipe",
+        "hashes",
+        "renderer_version",
+        "contract_versions"
+      ],
+      "content_status_from_saved_state": [
+        "ready",
+        "adjusted"
+      ],
+      "closed_projection": true,
+      "source_or_current_tier_read": false,
+      "generation_or_safety_grant": false,
+      "writes_or_quota": false
+    },
+    "pagination": {
+      "default_limit": 20,
+      "maximum_limit": 100,
+      "order": "saved_at DESC, id DESC",
+      "cursor": "OWNER_BOUND_OPAQUE_KEYSET_CONTINUATION_NOT_AUTHORIZATION",
+      "snapshot_across_pages": false
+    },
+    "ci": {
+      "state": "COMPLETED_SUCCESS",
+      "head_sha": "e697d4f8ece3cfcd8ea9d26cc2d9c0e2cb9ddf4d",
+      "baseline": {
+        "commit": "2fddb201f8bfe0a6b68e14098d9495d83c5c405d",
+        "run_id": 37453282548,
+        "job_id": 112234690313,
+        "url": "https://github.com/MassyuRed/mashos-api/actions/runs/37453282548",
+        "state": "COMPLETED_CAUSAL_RED",
+        "existing_cases": 373,
+        "new_owner_cases": 41,
+        "new_native_cases": 4,
+        "existing_tests_rerun_passed": 373,
+        "new_owner_failed": 40,
+        "new_owner_passed": 1,
+        "errors": 0,
+        "skipped": 0,
+        "failure_kind": "OLD_ROUTER_404_OR_MISSING_DEFINED_ERROR_RESPONSE_NOT_FIXTURE_ERRORS"
+      },
+      "new_test_bytes_identical_between_red_and_fix": true,
+      "fixed_commit_changed_paths": [
+        "ai/services/ai_inference/piece_v2_owner_service.py",
+        "ai/services/ai_inference/api_piece_v2.py",
+        ".github/workflows/piece-b2b-isolated-postgres.yml"
+      ],
+      "run_id": 37453508303,
+      "job_id": 112235434764,
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/37453508303",
+      "passed": 414,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "warnings": 4,
+      "existing_tests_rerun_passed": 373,
+      "new_owner_cases_passed": 41,
+      "new_native_cases_passed": 4,
+      "runtime": {
+        "python": "3.12.14",
+        "pytest": "8.4.1",
+        "psycopg": "3.3.6",
+        "postgresql": "16.15"
+      },
+      "local_remote_test_bytes_identical": true,
+      "tier_independence_evidence": "Saved artifact retrieval succeeds after profile tier is set to unknown in isolated DB without source tables; not an actual paid-to-free transition or live source deletion test."
+    },
+    "evidence_boundary": "Synthetic authentication and mocked PostgREST HTTP replies, plus native saved-record cases in an isolated DB. No live Auth/PostgREST, authentic safe preview issuance, RN display or device acceptance.",
+    "environment": "CODEX_WORK_WITH_SAME_ENVIRONMENT_READ_ONLY_SUBAGENT_REVIEW_NOT_PRO_ULTRA_ACCEPTANCE",
+    "preview_mainline_gap": [
+      "Latin or hiragana person names with explicit source roles remain in candidates",
+      "Third-party allegations remain assertive in candidates"
+    ],
+    "weekly_preview_to_screen_complete": false,
+    "q3_history_selection_gap": "Submit gateway through legacy PostgREST emotions INSERT retains created_at without the Q3 profile lock; shared writer protocol changes remain separate.",
+    "current_read_basis": {
+      "latest_weekly_review": "2026-10-03",
+      "weekly_sections": "5.3 and 6.6-6.10",
+      "system_context_prepare": "89E5088_ANCESTRY_CONDITION_FAILED__ALLOWED_ORIGINAL_READ_FALLBACK",
+      "map_scope": "01 overview/flow/coverage and relevant App/input/Piece/read/access mappings in 01A/01B/01C, not every mapping row or all-source audit."
+    },
+    "remaining": [
+      "authentic_public_safety_and_preview_issuance",
+      "preview_development_screen_connection",
+      "q3_new_or_backdated_input_history_selection_and_shared_writer_protocol",
+      "b7_visibility_delete_api",
+      "rn_owner_history",
+      "refined_source",
+      "native_export_share",
+      "actual_device_and_product_acceptance"
+    ],
+    "b5_b6_b7_complete": false,
+    "source_writer_changed": false,
+    "cmee_changed": false,
+    "rn_changed": false,
+    "production_router_registered": false,
+    "live_database_applied": false,
+    "merge_deploy_activation": false,
+    "product_acceptance": false,
+    "automatic_progression": false,
+    "api_tree": "d1a8cba0b916209a45823d83dfbbafc40e4a83da",
+    "preview_gap_scope": "These are observed gap examples; correcting only these two does not establish full PCE-4 safety compliance."
   }
 }

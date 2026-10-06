@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在の再開先は§18と`Cocolon_前提資料/current_structure/02_piece_current_structure.md` §22です。2026-10-06、API Draft候補 `d71fdb40238f2c99751f0c20e578ab654f72308e` で、Q3観測が消費した既存履歴・thread・premium feedbackを保存時に再照合・保護する差分を追加しました。今回CIは既存347件＋新26件の373 PASS／失敗0。全writerの競合解消やB5／B6完成ではなく、公開安全性を判定した永続preview発行が次の主経路です。§9〜17のcurrent表記と347 PASSは各時点の履歴として保持し、今回の範囲・残件には§18を優先します。**
+**現在の再開先は§19と`Cocolon_前提資料/current_structure/02_piece_current_structure.md` §23です。API Draft候補 `e697d4f8ece3cfcd8ea9d26cc2d9c0e2cb9ddf4d` に本人の保存済み履歴・詳細GETを追加し、保存と同じ本文・画像設定を再取得する部分を接続しました。今回CIは414 PASS／失敗0。公開安全性付きpreviewと開発画面は未完成であり、今回をB7全体完了にも数えません。§18以前は各時点の履歴として保持し、現在の範囲・残件は§19を優先します。**
 
 ## 1. Current owner
 
@@ -58,7 +58,7 @@ Q&A:
 
 ## 3. Phase state
 
-最新の実装状態：B2-B／B3／B4／B5永続化・取消／B6保存時プラン確認と§17の認証済み保存入口を継承し、§18で消費済みQ3 contextの保存時照合を追加した。今回CIは既存347件＋新26件の373 PASS／失敗0。§17の347 PASSは前回commitの履歴であり、B5／B6全体完了ではない。以下のPCE-0〜B2-Aは成立済み設計・過去実装の履歴として保持する。Analysisの現在地はAnalysis自身のcurrent mapに従い、以下の旧未着手記述を再開判断へ使用しない。
+最新の実装状態：§17の認証済み保存入口と§18の消費済みQ3 context照合を継承し、§19でB7の本人履歴・詳細読取りを追加した。今回CIは既存373件＋新41件の414 PASS／失敗0。§17の347 PASS／§18の373 PASSは各commitの履歴であり、B5／B6／B7全体完了ではない。以下のPCE-0〜B2-Aは成立済み設計・過去実装の履歴として保持する。Analysisの現在地はAnalysis自身のcurrent mapに従い、以下の旧未着手記述を再開判断へ使用しない。
 
 ```text
 PCE-0: COMPLETE
@@ -626,6 +626,8 @@ automatic progression:
 
 ## 18. 2026-10-06現在地 — 消費済みQ3 contextの保存時照合
 
+本節は`d71fdb40238f2c99751f0c20e578ab654f72308e`時点の履歴。後続の再取得と現在の残件は§19を優先する。
+
 対象APIは `d71fdb40238f2c99751f0c20e578ab654f72308e`。詳細owner・競合の範囲・検証状態は[Piece current map §22](../Cocolon_前提資料/current_structure/02_piece_current_structure.md#22-2026-10-06--q3観測が消費したcontextの保存時再照合)を参照する。
 
 - §17で残したQ3保存競合のうち、観測が消費した既存履歴source／threadとpremium feedbackの変更をatomic saveまで保護する。評価tier、現在履歴へのguard包含、feedbackの完全一致、quota待ち後の履歴期限を既存`emlis_thread_context`と照合する。
@@ -635,3 +637,16 @@ automatic progression:
 - preview発行の調査では完全な公開安全性判定の実装ownerが未完成だった。source graph／役割抽象化やdetectorの拒否だけで`ready`にせず、今回は既に記録された保存不整合を直接修正した。実生成物の公開安全性判定と永続preview発行が次の本経路である。
 
 最新weekly reviewは2026-10-03、原典読取りとSystem Context prepareの不成立範囲はmap §22.4に記録した。Codex Workと同環境read-only確認による作業であり、Pro／Ultraの独立受入れではない。M4未適用・production未登録を維持し、B5／B6全体完了、RN・実機・商品受入れ、merge／deploy／有効化は未成立。本入口・current map・manifestの既存3点を同期し、`automatic_progression=false`を維持する。
+
+
+## 19. 2026-10-06現在地 — 本人の保存済み履歴・詳細GET
+
+対象APIは `e697d4f8ece3cfcd8ea9d26cc2d9c0e2cb9ddf4d`。詳細は[Piece current map §23](../Cocolon_前提資料/current_structure/02_piece_current_structure.md#23-2026-10-06--本人の保存済みpiece履歴詳細の再取得)を参照する。
+
+- `GET /emotion/piece/history`と`GET /emotion/piece/{piece_id}`で、認証本人のsaved private／public recordだけを専用projectionから返す。公開Nexus・旧Q&A履歴を流用しない。
+- 同じ本文・payload・recipe・hash・renderer／contract versionを再取得する。保存済み`ready|adjusted`を返すだけで新たな安全性承認はせず、原入力・現在プラン・本文作者を呼ばない。書込み・quota消費0。
+- 履歴は既定20件／最大100件、保存日時・IDの降順keyset。ownerに結び付いたcursorを使い、境界削除や先頭への追加によるoffsetの重複を避ける。
+- 修正後CI [run 37453508303](https://github.com/MassyuRed/mashos-api/actions/runs/37453508303)は414 PASS／0 FAIL／0 ERROR／0 SKIP。新41件（native 4件）はbaselineの40 FAIL／1 PASSから同じtest bytesで全PASS、既存373件も両commitで再実行して成功した。模擬認証／PostgREST応答と隔離DBの範囲であり、実Auth・実機の商品受入れではない。
+- 公開安全性には、役割が明記されたLatin／ひらがなの人名と第三者への断定が候補へ残る具体的不足がある。preview発行を`ready`で代用せず、今回の保存後再表示を独立した限定単位とした。10/03議事録§5.3のpreview→開発画面は未完了。
+
+Q3の新規・過去日付入力による履歴集合の変化は、profile lockへ参加しない既存submit／INSERT経路を含む共有writer protocolの残件として保持する。今回source writer・CMEE・RNは変更0。B7のvisibility／delete、RN履歴、native保存共有も残り、B5／B6／B7全体・商品受入れは未完了。原典確認、Codex Workの同環境確認、System Context prepare不成立と直接読取りの範囲はmap §23へ記録した。production未登録・M4未適用・merge／deploy／有効化0、`automatic_progression=false`。
