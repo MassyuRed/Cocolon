@@ -1,22 +1,22 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v17",
+  "schema_version": "cocolon.piece.workstream_manifest.v18",
   "generated_at": "2026-10-06 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v16",
-    "predecessor_blob": "805707452f62ad97b81bf2fad2bcc6515a83da89",
-    "predecessor_head": "39d53f5c5c2b0854d44b0ccafac43c329b177119",
-    "carry_forward": "PCE-0 through B02A historical identities and results are preserved; current B6 Draft save connection does not activate production or grant preview safety.",
-    "historical_scope": "Earlier B02A-only pending states are historical. Latest working Draft and remaining work are b06_save_connection and current structure section 21."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v17",
+    "predecessor_blob": "902383dae82eb10ea3bff1db6562a1a911262994",
+    "predecessor_head": "d40ac6ba1a8ab5a9b52fb32fd2f975643363580e",
+    "carry_forward": "Prior design, B02A and B06 save connection identities and results are preserved. The current bounded Q3 context change does not activate production or grant preview safety.",
+    "historical_scope": "b06_save_connection and its 347 PASS are the bee830 baseline. Current working scope is b06_q3_context_fence, structure section 22 and entry section 18."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "53b541f1c672ed11d1d81d75d992371f19fc0a8d",
-    "raw_sha256": "dff54f8a97254559595347f83469b11080f4c4043a00bf45276e5a3f4715ce89",
-    "utf8_bytes": 18276
+    "git_blob_sha1": "0669453a606ead7d5dc7a33454219035e3a10359",
+    "raw_sha256": "65f2b944b4b51e86d2dc27878bdc69db92de3df539782f4c385e8d363f672717",
+    "utf8_bytes": 21149
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -56,11 +56,12 @@
     "pce9a_b01": "COMPLETE",
     "pce9a_b02a": "FILE_ONLY_TECHNICAL_ACCEPTANCE_PASSED__LIVE_APPLY_0",
     "analysis_roadmap": "REFER_TO_ANALYSIS_CURRENT_STRUCTURE__HISTORICAL_NOT_ACTIVATED_STATE_NOT_CURRENT",
-    "next_piece_group": "AUTHENTIC_PREVIEW_ISSUANCE_AND_PUBLIC_SAFETY_ADMISSION__Q3_CONTEXT_RACE_UNRESOLVED",
+    "next_piece_group": "AUTHENTIC_PREVIEW_ISSUANCE_AND_PUBLIC_SAFETY_ADMISSION__HISTORY_SELECTION_CHANGES_AND_NONPROFILE_WRITERS_UNRESOLVED",
     "automatic_packet_progression": false,
     "pce9a_b02a_red": "FROZEN_UNCHANGED__NATIVE_POSTGRESQL_1_PASS",
     "pce9a_b02a_implementation": "EXACT5_PRESERVED__EXACT6_SELECTORS_PUBLISHED",
-    "pce9a_b06_save_connection": "UNREGISTERED_DRAFT_IMPLEMENTED__CI_347_PASS__LIVE_APPLY_0__NOT_B6_COMPLETE"
+    "pce9a_b06_save_connection": "HISTORICAL_BEE830_UNREGISTERED_DRAFT__CI_347_PASS__NOT_B6_COMPLETE",
+    "pce9a_b06_q3_context_fence": "DRAFT_EXISTING_CONSUMED_CONTEXT_FENCE__CI_373_PASS__LIVE_APPLY_0__NOT_B6_COMPLETE"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -222,9 +223,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "c73881bf80ab39d7c0eafbcdc073ce3714331dd7",
-    "raw_sha256": "5df3cada276d111f31f929f38e7af82b0a58ca4a86707a72d3014928c7d6d1fd",
-    "utf8_bytes": 76484
+    "git_blob_sha1": "54d97d809029aeb481f7005829144ba51a1301c5",
+    "raw_sha256": "760caa7b64289347ce69f4c0bfb63dffefea0315d42dae6ca35b9a5466440d68",
+    "utf8_bytes": 84050
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -327,7 +328,7 @@
     "api_predecessor": "f803956a1a0902277c246c05875e4b3381184066",
     "current_map_section": "21",
     "current_entry_section": "17",
-    "state": "CURRENT_WORKING_DRAFT_UNREGISTERED_UNAPPLIED",
+    "state": "HISTORICAL_BEE830_BASELINE__CURRENT_BOUNDED_Q3_CONTEXT_CHANGE_BELOW",
     "new_owner": "ai/services/ai_inference/piece_v2_save_service.py",
     "http_path": "POST /emotion/piece/save",
     "source_flow": [
@@ -393,17 +394,110 @@
     "production_router_registered": false,
     "rn_changed": false,
     "merge_deploy_activation": false,
-    "automatic_progression": false
+    "automatic_progression": false,
+    "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "DIRECT_PRODUCT_OR_ACCEPTANCE_WORK",
+    "classification": "OBSERVED_BLOCKER_MINIMAL_FIX",
     "piece_documentation_paths": 3,
-    "api_changed_paths": 6,
+    "api_changed_paths": 4,
     "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
     "live_database_apply": 0,
     "production_registration": 0,
     "release_effect": 0,
     "product_acceptance": false,
     "automatic_progression": false
+  },
+  "b06_q3_context_fence": {
+    "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
+    "api_predecessor": "f3df2dc36a03dc4009c83ee5e2eafc64db9a730a",
+    "current_map_section": "22",
+    "current_entry_section": "18",
+    "state": "CURRENT_WORKING_DRAFT_CI_373_PASS_UNREGISTERED_UNAPPLIED",
+    "classification": "OBSERVED_BLOCKER_MINIMAL_FIX",
+    "change_reason": "The already-recorded Q3 save context race permits stale consumed history or feedback after source admission. Authentic preview issuance lacks a complete public-safety verdict owner and is retained as the next main connection.",
+    "changed_paths": [
+      "supabase/migrations/20260808_004_piece_v2_atomic_functions.sql",
+      "ai/services/ai_inference/piece_v2_save_service.py",
+      "ai/tests/piece_v2/db/test_b06_save_context_fence.py",
+      ".github/workflows/piece-b2b-isolated-postgres.yml"
+    ],
+    "service_logic_changed": false,
+    "first_save_scope": [
+      "Q3 runtime profile with server-provided source expectation",
+      "evaluated tier and persisted context shape",
+      "consumed existing history source hash and thread revision under SHARE locks",
+      "existing premium feedback under SHARE locks",
+      "consumed guard subset of current emlis_thread_context history",
+      "exact current feedback frame key and version vector",
+      "post-quota-wait consumed history retention"
+    ],
+    "writer_protocol": "Existing Q3 thread and feedback writers take profile UPDATE; save holds profile SHARE. This is not an all-writers or new-history phantom guarantee.",
+    "preview_body_rewrite": false,
+    "history_body_passed_to_piece_author": false,
+    "preview_safety_granted": false,
+    "saved_replay_reads_current_context": false,
+    "saved_replay_fallback_to_first_save": false,
+    "ci": {
+      "state": "COMPLETED_SUCCESS",
+      "head_sha": "d71fdb40238f2c99751f0c20e578ab654f72308e",
+      "run_id": 37451592242,
+      "job_id": 112229192204,
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/37451592242",
+      "passed": 373,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "warnings": 3,
+      "existing_tests_rerun_passed": 347,
+      "new_native_context_cases_passed": 26,
+      "new_real_lock_wait_cases": {
+        "consumed_rows_commit_rollback": 6,
+        "normal_profile_writer": 1,
+        "quota_wait_retention_expiry": 1
+      },
+      "baseline": {
+        "commit": "f3df2dc36a03dc4009c83ee5e2eafc64db9a730a",
+        "run_id": 37451349778,
+        "job_id": 112228407192,
+        "url": "https://github.com/MassyuRed/mashos-api/actions/runs/37451349778",
+        "state": "COMPLETED_CAUSAL_RED",
+        "existing_tests_rerun_passed": 347,
+        "new_context_passed": 5,
+        "new_context_failed": 21,
+        "errors": 0,
+        "skipped": 0,
+        "failure_kind": "ASSERTIONS_SHOW_STALE_SAVE_OR_ABSENT_REQUIRED_LOCK_WAIT_NOT_FIXTURE_ERRORS"
+      },
+      "new_test_bytes_identical_between_red_and_fix": true,
+      "fixed_commit_changed_paths": [
+        "supabase/migrations/20260808_004_piece_v2_atomic_functions.sql",
+        "ai/services/ai_inference/piece_v2_save_service.py"
+      ]
+    },
+    "evidence_boundary": "Synthetic authentication, admitted preview and source handoff with real isolated PostgreSQL Q2/Q3/M4. No live Auth/PostgREST, public-safety issuance, CMEE product acceptance or device operation is established.",
+    "environment": "CODEX_WORK_WITH_SAME_ENVIRONMENT_READ_ONLY_SUBAGENT_REVIEW_NOT_PRO_ULTRA_ACCEPTANCE",
+    "current_read_basis": {
+      "latest_weekly_review": "2026-10-03",
+      "system_context_prepare": "D40AC6B_ANCESTRY_CONDITION_FAILED__ALLOWED_ORIGINAL_READ_FALLBACK",
+      "map_scope": "Existing 01/01A/01B/01C overview and Piece-related owners; not every mapping row or an all-source audit."
+    },
+    "remaining": [
+      "authentic_preview_issuance_with_actual_public_safety_admission",
+      "history_selection_changes_from_new_or_backdated_inputs",
+      "writers_not_sharing_the_profile_lock_protocol",
+      "refined_supplemental_source",
+      "remaining_http_and_rn_connection",
+      "native_export_share",
+      "actual_device_and_product_acceptance"
+    ],
+    "m4_live_applied": false,
+    "production_router_registered": false,
+    "rn_changed": false,
+    "b5_b6_complete": false,
+    "product_acceptance": false,
+    "merge_deploy_activation": false,
+    "automatic_progression": false,
+    "prior_save_implementation": "bee83063ce11b42de64f1c635149bbd5066ec3e5"
   }
 }
