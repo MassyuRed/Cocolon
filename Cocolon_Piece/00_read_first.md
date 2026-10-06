@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_piece_read_first
 title: "Cocolon Piece — Read First"
-revision_date: "2026-09-30 JST"
+revision_date: "2026-10-06 JST"
 decision_owner: "Mash"
 workstream: "Cocolon / Piece"
 document_status: "CURRENT_PIECE_WORKSTREAM_ENTRY"
@@ -9,6 +9,8 @@ automatic_progression: false
 ---
 
 # Cocolon Piece — Read First
+
+**現在の再開先は§17と`Cocolon_前提資料/current_structure/02_piece_current_structure.md` §21です。2026-10-06、API Draft `bee83063ce11b42de64f1c635149bbd5066ec3e5`にB6保存HTTPと原入力／プラン／threadの保存競合確認を接続しました。今回CIは既存285件を含む347 PASS／失敗0、production未登録・M4未適用です。§9〜16のB01／B2-Aのcurrent表記は各時点の履歴であり、最新の実装範囲や次作業には§17を優先します。**
 
 ## 1. Current owner
 
@@ -55,6 +57,8 @@ Q&A:
 ```
 
 ## 3. Phase state
+
+最新の実装状態：B2-B／B3／B4／B5永続化・取消／B6保存時プラン確認を既存Draftから継承し、B6の認証済み保存入口を§17まで接続した。今回commitは347 PASSですが、B5/B6全体完了ではない。以下のPCE-0〜B2-Aは成立済み設計・過去実装の履歴として保持する。Analysisの現在地はAnalysis自身のcurrent mapに従い、以下の旧未着手記述を再開判断へ使用しない。
 
 ```text
 PCE-0: COMPLETE
@@ -497,7 +501,7 @@ EmlisAI current executable Work-required task
 - PCE-U1、Analysisまたはproductionへautomatic progressionする。
 - historical `Cocolon_Piece_Analysis_ProFirst_Design_Workstream_Handoff_20260807`を書き換え、current role ownerとして再利用する。
 
-## 14. Current actual basis
+## 14. 9/30時点のactual basis（履歴）
 
 ```text
 Cocolon historically audited main head / tree:
@@ -547,7 +551,7 @@ current Piece v2 feature flags:
   absent
 ```
 
-## 15. Current exact approved group and bounded result
+## 15. 9/30時点のapproved group and bounded result（履歴）
 
 ```text
 group:
@@ -602,3 +606,17 @@ release effect:
 automatic progression:
   false
 ```
+
+
+## 17. 2026-10-06現在地 — B6保存入口と残るpreview発行
+
+実装はAPI Draft PR #3の`bee83063ce11b42de64f1c635149bbd5066ec3e5`。詳細owner・責務・確認範囲は[Piece current map §21](../Cocolon_前提資料/current_structure/02_piece_current_structure.md#21-2026-10-06--保存済みpreviewからb6保存httpへの接続)へ戻る。
+
+- 本人認証した保存HTTP→本人限定の永続preview読取り→現在の保存原入力／Emlis状態／tier／format／recipe照合→既存atomic saveを接続した。クライアントから本文・本人ID・プランを採用しない。
+- SQLは原入力→profile→threadを`FOR SHARE`し、変更競合と保存時の閲覧期限を確認する。本文・payload・recipeを保存時に書き換えない。
+- 保存済み再送は`replay_only`で同じ保存結果へ戻り、元入力削除・プラン変更後も初回保存へ戻らない。結果不明の自動再送はしない。
+- CI [run 37449500208](https://github.com/MassyuRed/mashos-api/actions/runs/37449500208)は今回commitで成功。既存285件の再実行と新規62件を合わせて347 PASS／0 FAIL／0 ERROR／0 SKIP。新規62件にはnative SQL／実lock待ちの10件を含む。ローカルpytestは依存install阻害で未実行。検査は合成認証／preview／handoffとPostgREST応答模擬を含み、実Auth・実PostgREST・実機の成功ではない。
+- 次作業は、既存本文組立から公開安全性を実際に判定した永続preview発行への接続。Q3履歴contextとの競合も未解消。`PreparedPiecePreview`を安全性承認済みへ変換しない。
+- M4未適用、production router未登録。RN、native保存共有、商品受入れ、merge／deploy／有効化は未完了。旧Q&Aの公開経路は変更しない。
+
+作業環境はCodex Work。同環境のread-only subagent確認は検査補助であり、Pro／Ultraの独立受入れとは扱わない。本入口・current map・manifestの既存3点を同期し、新しい地図や補助機構は作らない。`automatic_progression=false`。

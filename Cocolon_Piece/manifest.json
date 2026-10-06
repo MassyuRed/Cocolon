@@ -1,22 +1,22 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v16",
-  "generated_at": "2026-09-30 JST",
+  "schema_version": "cocolon.piece.workstream_manifest.v17",
+  "generated_at": "2026-10-06 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v15",
-    "predecessor_blob": "9313af9bc94b3e5cce8dade7b2b9713526b56f52",
-    "predecessor_head": "98b3df26d9ca6076885d6d41d74745e540491e1a",
-    "carry_forward": "PCE-0 through B01 identities and B02A exact5/caller preimages remain unchanged; current file-only exact6 selectors and unchanged native acceptance are recorded without live apply or automatic B2B activation.",
-    "historical_scope": "Earlier pending states are historical. Current bounded B02A result is in phase_state and b02a_file_only_acceptance."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v16",
+    "predecessor_blob": "805707452f62ad97b81bf2fad2bcc6515a83da89",
+    "predecessor_head": "39d53f5c5c2b0854d44b0ccafac43c329b177119",
+    "carry_forward": "PCE-0 through B02A historical identities and results are preserved; current B6 Draft save connection does not activate production or grant preview safety.",
+    "historical_scope": "Earlier B02A-only pending states are historical. Latest working Draft and remaining work are b06_save_connection and current structure section 21."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "844215255738f1d18a7226d1965e5249416bb4c7",
-    "raw_sha256": "b71c36781a37cb964561614d537db49c367f9ad8e8d7464970ac422b079d8fa3",
-    "utf8_bytes": 15171
+    "git_blob_sha1": "53b541f1c672ed11d1d81d75d992371f19fc0a8d",
+    "raw_sha256": "dff54f8a97254559595347f83469b11080f4c4043a00bf45276e5a3f4715ce89",
+    "utf8_bytes": 18276
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -55,11 +55,12 @@
     "pce9a_b01_implementation": "COMPLETE_CODE_DISABLED_TARGETED_GREEN",
     "pce9a_b01": "COMPLETE",
     "pce9a_b02a": "FILE_ONLY_TECHNICAL_ACCEPTANCE_PASSED__LIVE_APPLY_0",
-    "analysis_roadmap": "NOT_ACTIVATED_SEPARATE_MASH_APPROVAL_REQUIRED",
-    "next_piece_group": "NO_AUTOMATIC_B02B_ACTIVATION__PRODUCT_PREVIEW_HTTP_RN_REMAIN",
+    "analysis_roadmap": "REFER_TO_ANALYSIS_CURRENT_STRUCTURE__HISTORICAL_NOT_ACTIVATED_STATE_NOT_CURRENT",
+    "next_piece_group": "AUTHENTIC_PREVIEW_ISSUANCE_AND_PUBLIC_SAFETY_ADMISSION__Q3_CONTEXT_RACE_UNRESOLVED",
     "automatic_packet_progression": false,
     "pce9a_b02a_red": "FROZEN_UNCHANGED__NATIVE_POSTGRESQL_1_PASS",
-    "pce9a_b02a_implementation": "EXACT5_PRESERVED__EXACT6_SELECTORS_PUBLISHED"
+    "pce9a_b02a_implementation": "EXACT5_PRESERVED__EXACT6_SELECTORS_PUBLISHED",
+    "pce9a_b06_save_connection": "UNREGISTERED_DRAFT_IMPLEMENTED__CI_347_PASS__LIVE_APPLY_0__NOT_B6_COMPLETE"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -221,9 +222,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "2eecf34f36cb589c124f4de6961d3581704ce837",
-    "raw_sha256": "2819b38fad28e9b73a50a7a5e7a02ed7576eebc4c76f9c10e034f23d890494b6",
-    "utf8_bytes": 68259
+    "git_blob_sha1": "c73881bf80ab39d7c0eafbcdc073ce3714331dd7",
+    "raw_sha256": "5df3cada276d111f31f929f38e7af82b0a58ca4a86707a72d3014928c7d6d1fd",
+    "utf8_bytes": 76484
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -268,7 +269,7 @@
     "historical_scope": "2026-09-27 exact5 publication only; pending fields in this object remain historical, superseded by b02a_file_only_acceptance"
   },
   "b02a_document_sync": {
-    "status": "CURRENT_FILE_ONLY_EXACT6_AND_NATIVE_ACCEPTANCE_ALIGNED",
+    "status": "HISTORICAL_20260930_B02A_SYNC__CURRENT_B06_OWNER_BELOW",
     "target_files": [
       "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
       "Cocolon_Piece/00_read_first.md",
@@ -309,7 +310,7 @@
     "api_migration_readme_and_manifest_status": "historical 2026-09-27 candidate wording retained for frozen identity; current bounded state supersedes pending wording, not catalog baseline or caller preimages",
     "verification_owner": "Fresh GitHub bytes, changed paths, parent and final heads in existing PR 3 / PR 30 summaries"
   },
-  "current_sync_effects": {
+  "historical_sync_effects_20260930": {
     "classification": "DIRECT_PRODUCT_OR_ACCEPTANCE_WORK",
     "cocolon_changed_paths": 4,
     "piece_documentation_paths": 3,
@@ -319,6 +320,90 @@
     "emlis_paths": 5,
     "live_database_apply": 0,
     "release_effect": 0,
+    "automatic_progression": false
+  },
+  "b06_save_connection": {
+    "api_commit": "bee83063ce11b42de64f1c635149bbd5066ec3e5",
+    "api_predecessor": "f803956a1a0902277c246c05875e4b3381184066",
+    "current_map_section": "21",
+    "current_entry_section": "17",
+    "state": "CURRENT_WORKING_DRAFT_UNREGISTERED_UNAPPLIED",
+    "new_owner": "ai/services/ai_inference/piece_v2_save_service.py",
+    "http_path": "POST /emotion/piece/save",
+    "source_flow": [
+      "authenticated_owner",
+      "owner_scoped_persisted_preview",
+      "current_original_handoff",
+      "tier_format_recipe_revalidation",
+      "source_profile_thread_share_locks",
+      "atomic_save"
+    ],
+    "preview_body_rewrite": false,
+    "preview_safety_granted": false,
+    "saved_replay_only": true,
+    "saved_replay_fallback_to_first_save": false,
+    "ci": {
+      "run_id": 37449500208,
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/37449500208",
+      "state": "COMPLETED_SUCCESS",
+      "job_id": 112222328168,
+      "head_sha": "bee83063ce11b42de64f1c635149bbd5066ec3e5",
+      "passed": 347,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "warnings": 2,
+      "existing_tests_rerun_passed": 285,
+      "new_save_tests_passed": 62,
+      "new_native_cases_passed": 10,
+      "breakdown": {
+        "b2_foundation": 46,
+        "b3_native": 4,
+        "b3_policy": 61,
+        "b4_atomic": 48,
+        "b5_persistence": 36,
+        "b5_cancel": 57,
+        "b6_tier": 33,
+        "b6_save_api": 62
+      },
+      "runtime": {
+        "python": "3.12.14",
+        "pytest": "8.4.1",
+        "psycopg": "3.3.6",
+        "postgresql": "16.15"
+      }
+    },
+    "previous_ci": {
+      "api_commit_prefix": "f803956",
+      "passed": 285,
+      "classification": "HISTORICAL_NOT_CURRENT_COMMIT_CREDIT"
+    },
+    "local_pytest": "NOT_RUN_DEPENDENCY_INSTALL_BLOCKED",
+    "test_evidence_boundary": "Synthetic auth, persisted preview and source handoff; native disposable PostgreSQL does not establish live Auth/PostgREST, safety issuer, CMEE acceptance or device operation.",
+    "environment": "CODEX_WORK_WITH_SAME_ENVIRONMENT_READ_ONLY_SUBAGENT_REVIEW_NOT_PRO_ULTRA_ACCEPTANCE",
+    "remaining": [
+      "authentic_preview_issuance_with_actual_public_safety_admission",
+      "q3_historical_context_race",
+      "refined_supplemental_source",
+      "remaining_http_and_rn_connection",
+      "native_export_share",
+      "actual_device_and_product_acceptance"
+    ],
+    "m4_live_applied": false,
+    "production_router_registered": false,
+    "rn_changed": false,
+    "merge_deploy_activation": false,
+    "automatic_progression": false
+  },
+  "current_sync_effects": {
+    "classification": "DIRECT_PRODUCT_OR_ACCEPTANCE_WORK",
+    "piece_documentation_paths": 3,
+    "api_changed_paths": 6,
+    "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
+    "live_database_apply": 0,
+    "production_registration": 0,
+    "release_effect": 0,
+    "product_acceptance": false,
     "automatic_progression": false
   }
 }
