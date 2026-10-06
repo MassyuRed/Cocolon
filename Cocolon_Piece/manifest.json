@@ -1,22 +1,22 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v19",
+  "schema_version": "cocolon.piece.workstream_manifest.v20",
   "generated_at": "2026-10-06 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v18",
-    "predecessor_blob": "5ad2092eeb273158b211d5290d6c8aa344c2c9db",
-    "predecessor_head": "89e508871f2a08bfcbfa1c1285407321d784f971",
-    "carry_forward": "Prior identities and CI results remain historical. Owner saved-record reads do not issue previews, grant safety, change shared source writers, or activate production.",
-    "historical_scope": "b06_q3_context_fence and its 373 PASS describe d71fdb4. Current scope is b07_owner_reads, structure section 23 and entry section 19."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v19",
+    "predecessor_blob": "5f3294b7b16a1cba15233fb1aeddb56666512e0e",
+    "predecessor_head": "f2adaf164468cd805d29535a476626e7ee8b5890",
+    "carry_forward": "Prior saved-record and CI evidence remains historical. Latin role-name correction does not grant public safety or issue previews.",
+    "historical_scope": "b07_owner_reads and 414 PASS describe e697d4f8; current bounded work is b08_latin_role_binding, map section 24 and entry section 20."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "345c583a07c0bc132633cce5e1e9a5e9d499bb5b",
-    "raw_sha256": "a7f281999769983d79da0a6e89580a65d3d543a05c4391fc240a01c150b36719",
-    "utf8_bytes": 23457
+    "git_blob_sha1": "73c39c376a9a9f8656da756c819c98f0c14df951",
+    "raw_sha256": "da670df7889b660a4bfc962bcb4801049c696542d85bb63a15ef8f0e16119cf4",
+    "utf8_bytes": 25386
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -62,7 +62,8 @@
     "pce9a_b02a_implementation": "EXACT5_PRESERVED__EXACT6_SELECTORS_PUBLISHED",
     "pce9a_b06_save_connection": "HISTORICAL_BEE830_UNREGISTERED_DRAFT__CI_347_PASS__NOT_B6_COMPLETE",
     "pce9a_b06_q3_context_fence": "HISTORICAL_D71FDB4_CONSUMED_CONTEXT_FENCE__CI_373_PASS__LIVE_APPLY_0__NOT_B6_COMPLETE",
-    "pce9a_b07_owner_reads": "DRAFT_OWNER_HISTORY_DETAIL_GET_ONLY__CI_414_PASS__NOT_B7_COMPLETE"
+    "pce9a_b07_owner_reads": "HISTORICAL_E697D4F8_OWNER_GET_ONLY__CI_414_PASS__NOT_B7_COMPLETE",
+    "pce9b_b08_latin_role_binding": "DRAFT_ASCII_FULLWIDTH_LATIN_EXPLICIT_ROLE_ONLY__SELECTED_CI_643_PASS__NOT_B8_COMPLETE"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -224,9 +225,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "99c813129711439d0da1409a246c4d4e3761c7e6",
-    "raw_sha256": "3548fa0f8431b5abdf86dc0517e3168295ff4f06d53667e38b2ed0a683c5ee64",
-    "utf8_bytes": 91311
+    "git_blob_sha1": "bf8cf970866b65363c1379632cff924f301b881d",
+    "raw_sha256": "d4356e02a37cd3d8d683adf7da6d55dd54c8a38a53fb2848452d0b9c521d3c1c",
+    "utf8_bytes": 98107
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -399,9 +400,9 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "DIRECT_PRODUCT_OR_ACCEPTANCE_WORK",
+    "classification": "OBSERVED_BLOCKER_MINIMAL_FIX",
     "piece_documentation_paths": 3,
-    "api_changed_paths": 4,
+    "api_changed_paths": 3,
     "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
     "live_database_apply": 0,
     "production_registration": 0,
@@ -508,7 +509,7 @@
     "prior_implementation": "d71fdb40238f2c99751f0c20e578ab654f72308e",
     "current_map_section": "23",
     "current_entry_section": "19",
-    "state": "CURRENT_WORKING_DRAFT_CI_414_PASS_UNREGISTERED",
+    "state": "HISTORICAL_E697D4F8_BASELINE__CURRENT_LATIN_ROLE_FIX_BELOW",
     "classification": "DIRECT_PRODUCT_OR_ACCEPTANCE_WORK",
     "new_owner": "ai/services/ai_inference/piece_v2_owner_service.py",
     "changed_paths": [
@@ -631,6 +632,120 @@
     "product_acceptance": false,
     "automatic_progression": false,
     "api_tree": "d1a8cba0b916209a45823d83dfbbafc40e4a83da",
-    "preview_gap_scope": "These are observed gap examples; correcting only these two does not establish full PCE-4 safety compliance."
+    "preview_gap_scope": "These are observed gap examples; correcting only these two does not establish full PCE-4 safety compliance.",
+    "historical_scope": "Latin and hiragana were observed gaps at e697d4f8. Current Latin-only correction and remaining safety gaps are b08_latin_role_binding."
+  },
+  "b08_latin_role_binding": {
+    "api_commit": "ee81b49203509c92c63a776b22c54176f9f57d37",
+    "api_predecessor": "71b79ae84ed8028968f509bd16c465a6a71b31cb",
+    "prior_implementation": "e697d4f8ece3cfcd8ea9d26cc2d9c0e2cb9ddf4d",
+    "current_map_section": "24",
+    "current_entry_section": "20",
+    "state": "CURRENT_WORKING_DRAFT_SELECTED_CI_643_PASS_OFFLINE_NOT_ACCEPTED",
+    "classification": "OBSERVED_BLOCKER_MINIMAL_FIX",
+    "changed_paths": [
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py",
+      "ai/tests/piece_v2/test_b08_piece_latin_role_binding.py",
+      ".github/workflows/piece-b2b-isolated-postgres.yml"
+    ],
+    "admitted_name_extension": "ASCII A-Za-z and fullwidth Ａ-Ｚａ-ｚ with existing Han/kana/middle-dot forms; exact source-written role and owner proof required",
+    "preserved": [
+      "source bytes and spans",
+      "role and intermediate owner chain",
+      "negation condition and uncertainty",
+      "exact case and width identity",
+      "verified ordinary-word examples たくさん and みなさん"
+    ],
+    "unsupported_names": "Accents, combining marks, digits, hyphens and apostrophes must not expose a known shorter suffix; broader potential-token recognition is rejection protection, not name admission. Unsupported hyphen/apostrophe joins after completed honorifics must not disagree between scanner and writer; existing middle-dot separators remain supported.",
+    "candidate_state": "OFFLINE_NOT_ACCEPTED",
+    "production_enabled": false,
+    "record_effect": 0,
+    "quota_effect": 0,
+    "safety_state_granted": false,
+    "ci": {
+      "state": "COMPLETED_SUCCESS",
+      "head_sha": "ee81b49203509c92c63a776b22c54176f9f57d37",
+      "final_red": {
+        "commit": "71b79ae84ed8028968f509bd16c465a6a71b31cb",
+        "tree": "5d33f286902a6b35c8386646e0224c5e171a7e9e",
+        "state": "COMPLETED_CAUSAL_RED",
+        "fixed_new_cases": 35,
+        "run_id": 37455824577,
+        "job_id": 112243056826,
+        "url": "https://github.com/MassyuRed/mashos-api/actions/runs/37455824577",
+        "new_failed": 33,
+        "new_passed": 2,
+        "existing_role_cases_passed": 194,
+        "existing_api_db_cases_passed": 414,
+        "errors": 0,
+        "skipped": 0,
+        "warnings": 4
+      },
+      "selected_prior_role_suites": [
+        "ai/tests/piece_v2/test_b08_piece_script_role_binding.py",
+        "ai/tests/piece_v2/test_b08_piece_joined_kana_role_binding.py",
+        "ai/tests/piece_v2/test_b08_piece_named_role_owner.py"
+      ],
+      "full_piece_suite_rerun": false,
+      "historical_full_piece_failures": 133,
+      "historical_failures_resolved": false,
+      "old_explicit_named_owner_expectation_conflict_resolved": false,
+      "test_workflow_bytes_unchanged_in_fix": true,
+      "fixed_commit_changed_paths": [
+        "ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py"
+      ],
+      "run_id": 37456010795,
+      "job_id": 112243680293,
+      "url": "https://github.com/MassyuRed/mashos-api/actions/runs/37456010795",
+      "passed": 643,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "warnings": 4,
+      "new_latin_cases_passed": 35,
+      "selected_prior_role_cases_passed": 194,
+      "prior_api_db_cases_passed": 414,
+      "b8_step_passed": 229,
+      "runtime": {
+        "python": "3.12.14",
+        "pytest": "8.4.1",
+        "psycopg": "3.3.6",
+        "postgresql": "16.15"
+      },
+      "source_sha256": "2238de456fa2403d76d9b2e86418913eb826dc3d7d8e8d8fdae59491becc4ba2",
+      "test_sha256": "8b0f6202bc181da625a545deb38ca4b8361e044efc6071a6edabb1735cc7cccc",
+      "ci_log_hashes_match": true,
+      "local_remote_all_three_paths_identical": true
+    },
+    "evidence_boundary": "Synthetic inputs through real CMEE and B8, not mocked text generation. No live authentication, saved-user source, native renderer/device, public-safety issuance or formal human Product Read is established.",
+    "environment": "CODEX_WORK_WITH_SAME_ENVIRONMENT_READ_ONLY_SUBAGENT_REVIEW_NOT_PRO_ULTRA_ACCEPTANCE",
+    "remaining": [
+      "hiragana_name_particle_and_ordinary_word_boundaries",
+      "third_party_allegation_transform",
+      "complete_pce4_public_safety_verdict",
+      "authentic_persisted_preview_issuance_and_http_rn_connection",
+      "b7_visibility_delete_and_rn_history",
+      "native_export_share",
+      "refined_source",
+      "q3_new_backdated_input_shared_writer_protocol",
+      "actual_device_and_product_acceptance"
+    ],
+    "current_read_basis": {
+      "latest_weekly_review": "2026-10-03",
+      "docs_head": "f2adaf164468cd805d29535a476626e7ee8b5890",
+      "system_context_prepare": "DESCENDANT_CONSISTENCY_FAILED__ALLOWED_ORIGINAL_READ_FALLBACK",
+      "map_scope": "01 overall flow and related 01A/01B/01C mappings, plus current Piece sections 14/23; not every mapping row or all-source audit."
+    },
+    "api_contract_changed": false,
+    "db_migration_changed": false,
+    "rn_changed": false,
+    "shared_source_writer_changed": false,
+    "emlis_analysis_runtime_changed": false,
+    "production_router_registered": false,
+    "merge_deploy_activation": false,
+    "product_acceptance": false,
+    "automatic_progression": false,
+    "api_tree": "8f93040f02d527125f36b48f236d2626c16f6c63",
+    "actual_body_read": "Two synthetic input-to-candidate examples in map 24.1 show the role, unresolved availability and conditional negation retained; not formal human Product Read acceptance."
   }
 }

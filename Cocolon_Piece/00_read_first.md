@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在の再開先は§19と`Cocolon_前提資料/current_structure/02_piece_current_structure.md` §23です。API Draft候補 `e697d4f8ece3cfcd8ea9d26cc2d9c0e2cb9ddf4d` に本人の保存済み履歴・詳細GETを追加し、保存と同じ本文・画像設定を再取得する部分を接続しました。今回CIは414 PASS／失敗0。公開安全性付きpreviewと開発画面は未完成であり、今回をB7全体完了にも数えません。§18以前は各時点の履歴として保持し、現在の範囲・残件は§19を優先します。**
+**現在の再開先は§20と`Cocolon_前提資料/current_structure/02_piece_current_structure.md` §24です。今回のAPI候補 `ee81b49203509c92c63a776b22c54176f9f57d37` は、原文に役割が明記されたASCII／全角Latin人名を既存の関係表現へ置換する本文修正です。今回の選択検査は643 PASS／失敗0。ひらがな人名・第三者断定・公開安全性判定とpreview発行は未完了で、`OFFLINE_NOT_ACCEPTED`を維持します。§19以前は履歴として保持し、今回の範囲・結果・残件は§20を優先します。**
 
 ## 1. Current owner
 
@@ -58,7 +58,7 @@ Q&A:
 
 ## 3. Phase state
 
-最新の実装状態：§17の認証済み保存入口と§18の消費済みQ3 context照合を継承し、§19でB7の本人履歴・詳細読取りを追加した。今回CIは既存373件＋新41件の414 PASS／失敗0。§17の347 PASS／§18の373 PASSは各commitの履歴であり、B5／B6／B7全体完了ではない。以下のPCE-0〜B2-Aは成立済み設計・過去実装の履歴として保持する。Analysisの現在地はAnalysis自身のcurrent mapに従い、以下の旧未着手記述を再開判断へ使用しない。
+最新の実装状態：§17〜19の保存・消費済みcontext照合・本人履歴読取りを継承し、§20で明示された役割へのLatin人名置換を扱う。今回の選択検査は643 PASS／失敗0。以前の347／373／414 PASSは各commitの履歴として保持し、B5／B6／B7／B8全体完了にはしない。以下のPCE-0〜B2-Aは成立済み設計・過去実装の履歴として保持する。Analysisの現在地はAnalysis自身のcurrent mapに従い、以下の旧未着手記述を再開判断へ使用しない。
 
 ```text
 PCE-0: COMPLETE
@@ -641,6 +641,8 @@ automatic progression:
 
 ## 19. 2026-10-06現在地 — 本人の保存済み履歴・詳細GET
 
+本節は`e697d4f8ece3cfcd8ea9d26cc2d9c0e2cb9ddf4d`時点の履歴。後続のLatin人名対応と現在の残件は§20を優先する。
+
 対象APIは `e697d4f8ece3cfcd8ea9d26cc2d9c0e2cb9ddf4d`。詳細は[Piece current map §23](../Cocolon_前提資料/current_structure/02_piece_current_structure.md#23-2026-10-06--本人の保存済みpiece履歴詳細の再取得)を参照する。
 
 - `GET /emotion/piece/history`と`GET /emotion/piece/{piece_id}`で、認証本人のsaved private／public recordだけを専用projectionから返す。公開Nexus・旧Q&A履歴を流用しない。
@@ -650,3 +652,15 @@ automatic progression:
 - 公開安全性には、役割が明記されたLatin／ひらがなの人名と第三者への断定が候補へ残る具体的不足がある。preview発行を`ready`で代用せず、今回の保存後再表示を独立した限定単位とした。10/03議事録§5.3のpreview→開発画面は未完了。
 
 Q3の新規・過去日付入力による履歴集合の変化は、profile lockへ参加しない既存submit／INSERT経路を含む共有writer protocolの残件として保持する。今回source writer・CMEE・RNは変更0。B7のvisibility／delete、RN履歴、native保存共有も残り、B5／B6／B7全体・商品受入れは未完了。原典確認、Codex Workの同環境確認、System Context prepare不成立と直接読取りの範囲はmap §23へ記録した。production未登録・M4未適用・merge／deploy／有効化0、`automatic_progression=false`。
+
+
+## 20. 2026-10-06現在地 — 明示された役割へのLatin人名置換
+
+対象APIは `ee81b49203509c92c63a776b22c54176f9f57d37`。詳細は[Piece current map §24](../Cocolon_前提資料/current_structure/02_piece_current_structure.md#24-2026-10-06--明示された役割へlatin人名を置換する本文修正)を参照する。
+
+- ASCII／全角Latinと既存漢字／カナの混在人名を全tokenで扱い、明記された「友人のAliceさん」等を既存の関係表現へ置換する。条件・否定・留保・owner連鎖を保持する。
+- 大文字小文字・全半角を同一人物へ正規化しない。アクセント・結合文字・数字・ハイフン・アポストロフィ等の未対応名を既知末尾へ部分置換せず、`たくさん`／`みなさん`の確認例は人物扱いせず保持する。
+- 最終CI [run 37456010795](https://github.com/MassyuRed/mashos-api/actions/runs/37456010795)は新35件＋近傍旧3suite194件＋API／DB414件の643 PASS／0 FAIL／0 ERROR／0 SKIP。新35件は同じtest bytesでREDの33 FAIL／2 PASSから全PASSとなり、旧集合も両commitで再実行した。過去の全Piece133失敗は今回全再実行しておらず、解消済み・全Piece合格としない。
+- ひらがな人名・第三者断定・PCE-4安全性判定issuer・永続preview発行・RN接続は残件。今回候補は`OFFLINE_NOT_ACCEPTED`、production false、record／quota 0のままである。
+
+既存3資料を同期し、新しい地図や安全性機構を追加しない。原典確認・環境と検証範囲はmap §24へ記録。DB／API契約／RN／共有writer／merge／deploy／有効化への変更0、正式商品受入れ未成立、`automatic_progression=false`。

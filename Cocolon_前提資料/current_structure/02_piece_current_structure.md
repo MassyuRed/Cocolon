@@ -2,7 +2,7 @@
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
 revision_date: "2026-10-06 JST"
-latest_api_implementation: "e697d4f8ece3cfcd8ea9d26cc2d9c0e2cb9ddf4d"
+latest_api_implementation: "ee81b49203509c92c63a776b22c54176f9f57d37"
 latest_storage_candidate: "d71fdb40238f2c99751f0c20e578ab654f72308e"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**2026-10-06の現在地は§23です。API Draft候補 `e697d4f8ece3cfcd8ea9d26cc2d9c0e2cb9ddf4d` に、本人の保存済みPiece履歴・詳細を同じ本文と画像設定で再取得するB7読取り入口を追加しました。今回CIは既存373件＋新41件の414 PASS／0 FAIL／0 ERROR／0 SKIP。公開安全性付きpreview発行には実名の残留と第三者への断定の残留があり、未完成のままです。今回の保存後再表示を、10/03議事録§5.3のpreview→画面完了やB7全体完了へ数えません。§22以前は履歴として保持し、最新の範囲・残件は§23を優先します。**
+**2026-10-06の現在地は§24です。今回のAPI候補 `ee81b49203509c92c63a776b22c54176f9f57d37` は、原文に役割が明記されたASCII／全角Latin人名を、既存の関係表現へ置換する本文修正です。今回の選択検査は643 PASS／0 FAIL／0 ERROR／0 SKIP。ひらがな人名、第三者への断定、PCE-4全体の安全性判定と永続preview発行は未完了です。候補は`OFFLINE_NOT_ACCEPTED`を維持し、安全性承認や画面接続へ昇格しません。§23以前は履歴として保持し、最新の範囲・結果・残件は§24を優先します。**
 
 ### 9/30・9/26の到達点（履歴）
 
@@ -208,7 +208,7 @@ shared tableのnon-Piece row／consumerは、exact Piece predicateとwriter／re
 
 ## 8. Current gaps
 
-現在の未完了は§23.4へ集約する。以下は9/30時点の残件であり、後続のB2-B／B3／B4／B5永続化／B6保存接続が未実装という意味には使用しない。
+現在の未完了は§24.3へ集約する。以下は9/30時点の残件であり、後続のB2-B／B3／B4／B5永続化／B6保存接続が未実装という意味には使用しない。
 
 1. user-visible routeはold Q&Aのまま。
 2. 保存原入力・保存状態から本文／recipeの内部組立と画像設定だけの変更を§20まで実装。本文に表れていない選択感情、refined補足、保存済みpreview発行、HTTP／RNは未接続。
@@ -701,6 +701,8 @@ quota待ちの後に取得する保存時刻で、消費履歴の閲覧・保持
 
 ## 23. 2026-10-06 — 本人の保存済みPiece履歴・詳細の再取得
 
+本節は`e697d4f8ece3cfcd8ea9d26cc2d9c0e2cb9ddf4d`時点の履歴。後続のLatin人名対応と現在の残件は§24を優先する。
+
 ### 23.1 今回の直接経路とpreview本線の残差
 
 API対象は `e697d4f8ece3cfcd8ea9d26cc2d9c0e2cb9ddf4d`。§21・§22の保存経路に続き、PCE-6／PCE-8 B7のうち、保存したPieceを本人が後から同じ本文・画像設定で読み出す部分を接続した。`GET /emotion/piece/history`と`GET /emotion/piece/{piece_id}`を専用routerへ追加する。公開Nexusや旧Q&A履歴の流用ではなく、本人の保存recordから返す独立した読取りである。
@@ -743,3 +745,47 @@ Q3履歴選択のphantomは別残件のまま。今回は既存submit gateway→
 最新weekly review（2026-10-03、§5.3・§6.6〜6.10）、恒久incident全文、current rule、PCE-3／4／5／6／8へ戻った。全体地図01のflow／coverageと01A／01B／01CのApp・入力・Piece・read/access関連fileの役割を現在docs `89e508871f2a08bfcbfa1c1285407321d784f971`で確認した。全mapping行や全sourceの再監査ではない。System Context prepareは同headのancestry条件で成立せず、許可された原典直接読取りを使用した。
 
 `STRUCTURE_MAP_DELTA_UPDATED`として既存map・Piece入口・manifestを同期する。production router未登録、M4未適用候補、稼働DB・アプリ・main・merge・deploy・有効化への変更0。`automatic_progression=false`を維持する。
+
+
+## 24. 2026-10-06 — 明示された役割へLatin人名を置換する本文修正
+
+### 24.1 欠陥と限定した修正
+
+§23で確認した人名残留のうち、ASCII／全角Latinの名前を既存のsource-role処理へ接続する。API対象は `ee81b49203509c92c63a776b22c54176f9f57d37`、直前の実装は `e697d4f8ece3cfcd8ea9d26cc2d9c0e2cb9ddf4d`。ひらがなまで一括拡張すると助詞や普通語の境界が崩れるため、今回は`A-Za-zＡ-Ｚａ-ｚ`だけを既存の漢字／カナ名に加えた。
+
+| path（mashos-api） | 今回の差分 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py` | 明記された役割・ownerと人名の対応へASCII／全角Latinを接続し、混在名も全tokenとして扱う。未対応の長い名前を既知末尾として部分置換しない。 |
+| `ai/tests/piece_v2/test_b08_piece_latin_role_binding.py` | 新規の合成入力検査。実CMEE／B8本文、原文と出典、役割・owner連鎖、拒否境界、普通語を確認する。 |
+| `.github/workflows/piece-b2b-isolated-postgres.yml` | 既存workflowでscript／joined-kana／named-ownerの近傍3suiteと新Latin検査を実行する。 |
+
+原文に「友人のAliceさん」と明記された場合、同じ人物への後続参照を含めて「友人」へ置換する。既存の関係語を増やしたり、誰の友人かを推測したりしない。条件、否定、未決定・留保と、明示された中間owner・関係連鎖を保持する。原文bytesとsource spanを変えず、本文側だけを既存の対応に従って変換する。
+
+今回確認した実CMEEの合成入力と候補本文を2例示す。名前の除去に加え、関係と未決定、条件付きの否定が本文に残ることを読んだ確認であり、正式human Product Readの合格ではない。
+
+| 合成入力 | 候補本文 |
+|---|---|
+| 私は友人のAliceさんと落ち着いて話したい。Aliceさんの都合はまだ分からない。 | 私は、友人と落ち着いて話したい。友人の都合はまだ分からない。 |
+| 私は友人のAliceさんが来られるなら、Aliceさんと急いで話したくない。まだ、会う日は決めていない。 | 私は、友人が来られるなら、友人と急いで話したくない。まだ、会う日は決めていない。 |
+
+大文字／小文字、全角／半角はexactな綴りごとに扱い、同一人物のaliasへ正規化しない。アクセント文字・結合文字・数字・ハイフン・アポストロフィなどを含む未対応名も、より広い候補token境界で捉えて既知の短い末尾へ切り詰めず、対応が証明できなければ候補を出さない。この拒否境界は、それらの名前を生成対象として受理することではない。完了した「さん」をハイフン・アポストロフィでつないだ未対応名も、scannerと本文置換で別人へ分割して成功させない。「さん」直後の中黒による既存の区切りは保持する。普通語については`たくさん`・`みなさん`の確認例で、人物へ読み替えず本文を保持した。
+
+本文は既存のCMEE Piece authorからB8へ戻り、`OFFLINE_NOT_ACCEPTED`／`production_enabled=false`／record・quota effect 0を維持する。安全性stateの付与、汎用PII認識、別の生成器・人名辞書、preview発行は追加しない。
+
+### 24.2 検証の区別
+
+修正commit `ee81b49203509c92c63a776b22c54176f9f57d37`のGitHub Actions [run 37456010795](https://github.com/MassyuRed/mashos-api/actions/runs/37456010795)、job `112243680293`は完了／成功。**新35件＋近傍旧3suite194件＋API／DB414件＝643 PASS／0 FAIL／0 ERROR／0 SKIP**。B8 stepは229 PASS、既存警告4件は失敗と分ける。Python 3.12.14／pytest 8.4.1／psycopg 3.3.6／PostgreSQL 16.15で実行した。
+
+同じ35件を固定したtest-only RED `71b79ae84ed8028968f509bd16c465a6a71b31cb`の[run 37455824577](https://github.com/MassyuRed/mashos-api/actions/runs/37455824577)、job `112243056826`では、新35件が33 FAIL／2 PASS、旧194件とAPI／DB414件は全PASS、ERROR／SKIP0だった。修正commitはこのREDを親とし、`piece_source.py`だけを変更。test／workflowは同じbytesのまま再実行し、新35件が全PASSとなった。最終commitの親・差分、全単位3pathのlocal／remote一致、CI logのsource／test SHA-256も確認した。中間試行の結果を最終35件へ代用していない。
+
+対象は近傍旧3suite194件と新Latin検査、既存API／DB414件である。過去のPiece全体検査に残る133失敗は今回全再実行せず、解消済みとも扱わない。旧`explicit_role_owner`のnamed-owner拒否期待と後続`named_role_owner`の生成期待の矛盾も未解消のまま保持し、今回その旧testを変更して合格を作らない。選択した近傍回帰の成功を全Piece／全CMEE合格へ拡張しない。
+
+新しい本文検査は合成入力から実CMEEとB8を呼ぶもので、本文生成mockではない。一方、実認証・実保存入力・公開安全性判定・端末画像・正式human Product Readの証拠ではない。Codex Workと同環境のread-only確認を、Pro／Ultra間の独立受入れへ換算しない。
+
+### 24.3 残件と次の本線
+
+ひらがな人名の助詞・普通語境界、第三者へのallegationを事実のように残さない変換、PCE-4全体の公開安全性判定は残る。今回のLatin名対応だけで安全性判定issuerを成立させず、永続preview発行・HTTP／RN本接続・10/03議事録§5.3の開発画面完了へ数えない。B7のvisibility／delete、RN履歴、native保存共有、refined補足、Q3の新規・過去日付入力に対する共有writer protocolも引き続き未完了である。
+
+最新weekly reviewは2026-10-03。恒久incident全文、current rules、Piece入口／manifest、map§14・§23、PCE-4／PCE-8と実source／関連testへ戻り、今回の修正を選んだ。01の全体flowと01A／01B／01Cの関連mappingを確認したが、全mapping行・全sourceの再監査ではない。System Context prepareは既知のdescendant整合条件で成立せず、許可された原典直接読取りを継続した。
+
+`STRUCTURE_MAP_DELTA_UPDATED`として既存map・入口・manifestを同期する。保存済みrecord、API契約、DB／migration、RN、共有source writer、Emlis／Analysis本体、production登録、main／merge／deploy／有効化への変更0。`automatic_progression=false`を維持する。
