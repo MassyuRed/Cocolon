@@ -34,6 +34,8 @@ current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない�
 
 ## 1. Activation boundary
 
+**u158 内容修正（2026-10-07 JST・未配置）**：「私は家族を守りたいけれど、私はつらい」が分析不能になる問題を補正。既存Analysis内で共有根拠のある完全な希望・負荷の対比に限り保護意向の節を受理し、同じ希望へPROTECTIVEとBURDENを保持する。原文・全文訂正／撤回・集約・期間比較を維持。関連308 tests／1759 subtests PASS、合成7全文と実RN表示model一致、実service＋合成RPCで保存後再生成なし再表示を確認。STRUCTURE_MAP_DELTA_NONE、共有owner／API／DB／RN変更0。実DB・本人実機・商品受入れ未確認。「家族の時間」の共有別分岐は保留。詳細は06／API handoff末尾u158。
+
 **u157 内容修正（2026-10-06 JST・未配置）**：「私は仕事を続けたいけれど、私は、つらい。」で主語読点だけにより負荷注記が落ちる問題を補正。既存共有planとAnalysis内の完全一致を、明示本人5表記＋和文読点＋半角／全角空白＋現在肯定のつらい／辛い／苦しい（任意のです）に限定して追加し、共有witnessの要求を維持。原文出典・正確な訂正対象を保ち、読点差の期間比較は差分なし。Analysis元fieldのタブは保留し、Emlisの既存ledger空白正規化は維持する。Analysis303 tests／1707 subtestsと共有contrast選択74 tests PASS、合計377 tests。合成7全文と実RN表示model一致、実service＋合成RPCで保存後再生成なし再表示を確認。STRUCTURE_MAP_DELTA_NONE、共有既存parserの変更あり・owner変更なし。実DB・本人実機・商品受入れ未確認。詳細は06／API handoff末尾u157。
 
 **u156 内容修正（2026-10-06 JST・未配置）**：「私は仕事を続けたいけれど、私は辛い／辛いです」の負荷注記の読み落としを補正。共有根拠のある本人希望と本人現在感情の明示対比だけを対象に、完全一致した辛いの意味lemmaをつらいへ揃える。原文表記・出典・訂正対象は保持し、味覚や一般感情へ拡張しない。表記だけの期間差は0、苦しい・別希望は区別。vertical227／storage56／saved-period16＝299検査PASS、1637 subtests PASS。合成7全文と実RN表示model一致、実service＋合成RPCで保存後再生成なし再表示を確認。STRUCTURE_MAP_DELTA_NONE、実DB・本人実機・商品受入れ未確認。詳細は06／API handoff末尾u156。
