@@ -14,6 +14,8 @@
 
 ## 0. Product result
 
+**u163 内容修正（2026-10-08 JST・未配置）**：「私は悪い職場にいた／いなかった」を自己評価と誤認する停止を修正。既存共有Safetyの名詞修飾判定を、完全な過去所在5形と文末に限定して補正し、所在・否定・昨日・後続行動の順序を文章と図へ保持する。SELF／人prefix・独立自己否定・緊急/支援・未閉包hostは従来判定を維持。最終465 tests PASS／既存Emlis1 FAIL（開始版と同一診断）、分析315件・合成9全文のRN表示model一致・再生成禁止の保存再表示を確認。STRUCTURE_MAP_DELTA_NONE。実DB・実機・商品受入れ未確認。「良い職場」の別value誤分類は残件。詳細は06／API handoff末尾u163。
+
 分析構造のCMEE connectionは、期間sourceから現在よく通る自己構造routeを根拠付きで形にし、希望時だけ観測routeとは別identityのIF routeを作る。
 
 ```text
