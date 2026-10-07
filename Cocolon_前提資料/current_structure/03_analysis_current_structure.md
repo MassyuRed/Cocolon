@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u161 内容修正（2026-10-07 JST・未配置）**：「家族の新しい生活を守りたい＋つらい」等の生成停止と「資料の詳しい振り返りを調べたい＋つらい」の負荷欠落を補正。共有Planの目的語各名詞区間に、既存Analysisと同じ任意1個の連体修飾を許可し、修飾位置を含む対象全体を保持する。実出力は10語、11語の構文判定を確認。「悪い」は別の既存Safety／自己評価判定で保留し、今回の対応完了には含めない。Analysis313 tests／1853 subtests、共有129 tests、identity1件PASS。合成10全文と実RN表示model一致、再生成を禁止した保存再読を確認。STRUCTURE_MAP_DELTA_NONE、実DB・本人実機・商品受入れ未確認。詳細は06／API handoff末尾u161。
+
 **u160 内容修正（2026-10-07 JST・未配置）**：「家族の気持ちを守りたい＋つらい」の生成停止と「資料の振り返りを調べたい＋つらい」の負荷欠落を補正。共有Planの希望目的語に既存の仮名入り名詞と属格連鎖の完全一致を適用し、名詞内の感情語を別の述語と誤認しない。Analysis311 tests／1810 subtests、共有98 tests、identity1件PASS。合成10本文を全読し実RN表示modelの全文・図用データと一致、保存後の再生成なし再表示を確認。一般の仮名・別主体・伝聞等の保留は維持。旧contracts残差は今回未再検証。STRUCTURE_MAP_DELTA_NONE、実DB・本人実機・商品受入れ未確認。詳細は06／API handoff末尾u160。
 
 **u159 内容修正（2026-10-07 JST・未配置）**：「家族の時間を守りたい＋つらい」の生成停止を補正。共有Planが目的語内の「の」を別の話し手と誤認する箇所を、明示SELF・限定属格目的語・完全な現在希望へ限定して修正。Analysisの根拠条件を維持し、意向と負荷を同じ文章・図へ保持する。Analysis310 tests／1787 subtests、対象共有86 testsとidentity確認PASS、合成8全文と実RN表示model一致、合成保存再表示を確認。旧契約の86 subfail／1 setup errorは開始版と全診断一致。STRUCTURE_MAP_DELTA_NONE、API／DB／RN変更0、実DB・本人実機・商品受入れ未確認。ひらがなを含む「家族の気持ち」等は残件。詳細は06／API handoff末尾u159。
