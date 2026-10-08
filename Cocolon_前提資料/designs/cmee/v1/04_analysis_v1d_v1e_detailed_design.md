@@ -290,6 +290,10 @@ vertical76/storage15/saved period13/API6＝110 PASS。6合成本文と既存RN�
 
 ### 3.10 u109 行動後の過去感情
 
+**u182 先頭marker＋丁寧形の共有根拠（2026-10-09 JST・未配置）**：u181の別残件だった「その後／それから」で始まる完全SELF行動＋後/てから＋丁寧3感情、または減りました/増えました/戻りましたを、共有finalの有限形判定で認定する。原文scalar/全文/帰属/required pairを保持し、Analysis既存u181の前後順序へ接続する。新prefix付き名詞変化では夢・両field報告・後続の認知/撤回hostも拒否し、旧prefixなし経路を拡大しない。Emlis作者と独立readerはmarkerを残して直後のSELFだけ省略し、原source bytesへ復元する。因果/supportは追加せず、感情の省略主体や名詞の「自分」を改変しない。
+
+Analysis370＋共有256 tests／2970 subtests、current identity1成功、実保存runtime未設定の既存3 skip。合成8本文/RN model本文・identity一致、実service＋合成RPC保存再読。未配置・実DB/本人実機/商品受入れ未確認。読点なし「それから私は…」等へ成功範囲を一般化しない。過去節の未完了記録は履歴として保持し、本有限範囲だけ更新する。詳細は06/API handoff末尾u182。
+
 **u181 compoundへの前方明示順序（2026-10-09 JST・未配置）**：§3.8/本節の「前方接続は未対応」を、既存共有exact2核・required typed relationで全文証明済みの範囲だけ更新する。Analysisの行動側に既存2marker（その後/それから）を許容し、te形もmarkerを含む元source_partsを保持する。完全pairの両端/whole evidence一致後、初端を既存隣接判定へ登録することで前件→行動→結果→後続を同じ意味・原文で表示する。compound間も前の末端から次の初端へ接続し、出来事を集約して消さない。
 
 前件のないmarkerを補完せず、内部順序と未確定表示を残す。未知文/希望/別field/source/撤回・訂正を橋渡ししない。teの過去表示は内部3証拠線に依存し、前方線だけでは認定しない。共有Plan/Emlis/API/DB/RN変更0。先頭marker＋丁寧3感情や一部名詞変化等の共有pair未成立は別残件。Analysis366 tests／2927 subtests＋identity1成功、8全文/RN一致、合成RPC保存再読を確認。未配置・実DB/本人実機/商品受入れ未確認。詳細は06/API handoff末尾u181。
