@@ -290,6 +290,10 @@ vertical76/storage15/saved period13/API6＝110 PASS。6合成本文と既存RN�
 
 ### 3.10 u109 行動後の過去感情
 
+**u181 compoundへの前方明示順序（2026-10-09 JST・未配置）**：§3.8/本節の「前方接続は未対応」を、既存共有exact2核・required typed relationで全文証明済みの範囲だけ更新する。Analysisの行動側に既存2marker（その後/それから）を許容し、te形もmarkerを含む元source_partsを保持する。完全pairの両端/whole evidence一致後、初端を既存隣接判定へ登録することで前件→行動→結果→後続を同じ意味・原文で表示する。compound間も前の末端から次の初端へ接続し、出来事を集約して消さない。
+
+前件のないmarkerを補完せず、内部順序と未確定表示を残す。未知文/希望/別field/source/撤回・訂正を橋渡ししない。teの過去表示は内部3証拠線に依存し、前方線だけでは認定しない。共有Plan/Emlis/API/DB/RN変更0。先頭marker＋丁寧3感情や一部名詞変化等の共有pair未成立は別残件。Analysis366 tests／2927 subtests＋identity1成功、8全文/RN一致、合成RPC保存再読を確認。未配置・実DB/本人実機/商品受入れ未確認。詳細は06/API handoff末尾u181。
+
 **u180 丁寧形の行動後compound（2026-10-09 JST・未配置）**：明示SELFの完全な実行済み行動＋後/あと（に）、またはて/でから、＋落ち着きました／嬉しかったです／うれしかったですを共有final pairへ限定追加する。格付き名詞1〜2項、原文全文一致・文境界・帰属・有限活用を証明し、引用/報告/夢/疑問/句点後の認知・撤回hostを保留する。Analysis compiler変更0で既存PAST_FEELING/feeling/past、右端の省略主体非推定、OBSERVED_ORDERと原文証拠、後続の明示順序、補足/訂正/撤回/期間比較を維持する。
 
 Emlisは既存source-owned action/changeの原文順序を全recoveryで実現し、行動によるsupportへ広げない。MATERIAL_WEIGHT、または新3形だけのRELATIONAL_NONCOLLAPSEを、既存作者のfocal関係検査と独立readerの同一関係検査で受ける。有限丁寧語尾を常体へ戻し、感情の明示SELFをEmlis自身の発話にしない。既存名詞変化の右端「自分」などは除去しない。最終5suite565 PASS／2889 subtests／3 SKIP、合成8全文/RN model一致、保存再読を確認。u179のcompound見送りは履歴として保持し、この有限範囲を更新する。実DB/本人実機/商品受入れ未確認。詳細は06/API handoff末尾u180。
