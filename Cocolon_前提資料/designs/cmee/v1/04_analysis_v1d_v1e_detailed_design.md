@@ -14,6 +14,8 @@
 
 ## 0. Product result
 
+**u166 内容修正（2026-10-08 JST・未配置）**：4文目以降の完全な本人過去所在が表示優先度だけで分析から抜け、「場面は未確定」となる不一致を補正。既存Analysisの場面証拠判定でrequired/shouldを同等に扱い、optional・不確実な帰属・不完全節は従来どおり保留する。肯否定・今日/昨日・明示順序・原文証拠・補足/訂正/撤回を保持。分析3suite計320 tests／2050 subtests PASS、合成7全文と実RN表示model一致、再生成を禁止した保存再表示を確認。STRUCTURE_MAP_DELTA_NONE。共有owner・API/DB/DTO/RN製品変更0。実DB・実機・商品受入れ未確認。詳細は06／API handoff末尾u166。過去u110/u111/u118のSCENE required限定は当時の実装記録であり、この限定修正後の条件ではない。
+
 **u165 内容修正（2026-10-08 JST・未配置）**：「俺は／おれは」の明示本人記述が分析に出ない表記漏れを修正。既存Analysisの8箇所と共有Planの属格希望・読点付き現在負荷の2箇所へ本人表記だけを追加し、有限節・原文出典・主体・肯否定・順序を保持する。最終対象548 tests PASS（Analysis316・共有231・identity1）、2027 subtests PASS。合成10全文と実RN表示model一致、保存後の再生成禁止readを確認。STRUCTURE_MAP_DELTA_NONE。全日本語表現対応・実DB・実機・商品受入れ未確認。詳細は06／API handoff末尾u165。
 
 **u164 内容修正（2026-10-08 JST・未配置）**：「良い職場にいた／いなかった」の「良い」を独立valueと誤認し、所在と後続行動の順序を失う問題を修正。既存共有Planの分類とoperator判定で、完全名詞句＋過去所在5形に属する修飾だけを区別する。独立評価・未閉包host・原文出典・Safety／Analysis witnessは維持。最終472 tests PASS（分析316・共有155・identity1）、合成10全文と実RN表示model一致、再生成禁止の保存再表示を確認。STRUCTURE_MAP_DELTA_NONE。実DB・実機・商品受入れ未確認。旧0066等の失敗は今回未再検証。詳細は06／API handoff末尾u164。
