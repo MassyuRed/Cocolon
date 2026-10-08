@@ -309,6 +309,9 @@ u110の共有generic event witnessと文境界処理を共通化。explicit/curr
 前置時点、現在/未来/願望/可能、他者/疑問/引用/伝聞/推測/夢/未解釈修飾、memo_actionは対象外。「記録を担当した」のような名詞keyword由来のshared actionも今回保留。関連129検査・359 subtests、6合成本文の既存RN一致を確認。一般ROLE理解、注記/比較/IF、商品受入れと稼働配置は未完了。
 
 
+**u170限定更新（2026-10-08 JST・未配置）**：上記u111の「記録を担当した」保留は当時の状態。既存の完全なPAST_RESPONSIBILITYについてのみ、共有kind/predicate_kindがaction/actionでoperator:actionを持つ一貫した根拠も受理する。名詞の記録/メモに由来する共有分類差で本人過去担当を落とさない。全節/原文証拠、explicit/current_input claim、required/should、memo単独span、current_user/fact、対応極性、past/current_input、fragment/dependency拒否と帰属境界は維持。ROLEは「担当する」から作り、shared performed_actionを担当対象の実行完了へ投影しない。SCENEのevent/event条件は不変。既存の読点/相対日/属格対象・更新/比較/保存にも同じ限定修正を適用し、旧保留4期待をpositiveへ変更。最終Analysis330 tests／2176 subtests、合成9全文と実RN表示model一致。一般ROLE理解・実機・商品受入れの完了ではない。詳細はAPI handoff/06末尾u170。
+
+
 ### 3.13 u112 同じ原入力内の肯定・否定と未確定な機会
 
 既存のconflict_badges契約へ、同じ原入力source/field/相対日にある、完全命題が同じSELF過去factの正負を接続する。対象は既存SCENE/ROLE/ACTION_OR_NONACTION。元の記録を同じ機会だと断定せず、真偽を選ばず、両nodeを対象とした未確定表示にする。別record/field/day/対象、明示順序参加、接続語、従属形、願望/認識は除外する。通常補足の正負不一致は従来どおり保留し、引用訂正/撤回の除外を比較より先に適用する。

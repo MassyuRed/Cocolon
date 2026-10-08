@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u170 内容修正（2026-10-08 JST・未配置）**：「私は記録を担当した／メモを担当しなかった」等を名詞由来の共有action分類だけで分析から落とす問題を補正。完全解析済み本人過去担当に限り一貫したaction根拠も受理し、担当対象の実行完了を補わずROLEとして保持。原文/正負/相対日/明示順序/更新/比較/保存を維持。旧保留4期待を限定更新し、最終Analysis330 tests／2176 subtests PASS、合成9全文と実RN表示model一致。STRUCTURE_MAP_DELTA_NONE、共有owner・API/DB/DTO/RN製品変更0。未配置・実DB/実機/商品受入れ未確認。詳細は06/API handoff末尾u170。
+
 **u169 内容修正（2026-10-08 JST・未配置）**：「私は記録を書いた。まだ昨日の方針が決まっていない。」で書字を伝聞導入と誤認し、未完了を落とす問題を補正。共有helper内で明示SELF＋単一名詞＋完結した書字だけを区別し、他人/引用導入/別fieldの報告保留を維持。分析326＋identity1、共有限定68、計395検査PASS。合成8全文と実RN表示model一致、保存後再生成なしread確認。STRUCTURE_MAP_DELTA_NONE、API/DB/DTO/RN製品変更0。Emlis複合2例の生成停止は開始版でも同じで未解消。未配置・実DB/実機/商品受入れ未確認。詳細は06/API handoff末尾u169。
 
 **u168 内容修正（2026-10-08 JST・未配置）**：「まだ昨日の方針が決まっていない」等の昨日を名詞区間に保ち、現在の未完了状態が分析から抜ける問題を補正。共有の既存未完了判定内で完全名詞/現在否定hostと帰属境界を証明し、時制と属性を同期。Analysisのmarker必須・原文・否定・主体非推定・更新/比較/保存は維持。分析324＋identity1 PASS、共有限定35 PASS/開始版でも同じ既存6 FAIL。合成8全文と実RN表示model一致。STRUCTURE_MAP_DELTA_NONE、API/DB/DTO/RN製品変更0。未配置・実DB/実機/商品受入れ未確認。詳細は06／API handoff末尾u168。u167の昨日名詞付き未完了4例の保留は当時の状態であり、今回この限定範囲を回復。

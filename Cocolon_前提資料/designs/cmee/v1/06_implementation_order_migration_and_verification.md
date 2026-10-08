@@ -14852,3 +14852,12 @@ u168の明示残件を実測し、本人の「記録を書いた」を伝聞の�
 最終Analysis326＋identity1＝327 tests/2127 subtests PASS（34.26秒）、共有帰属境界68 PASS（13.02秒）、計395 tests PASS。rootが合成8全文を読み、実RN表示modelの本文/identity/node順/edge/unknown/注記/競合/比較が一致。合成RPCの保存後再生成なしreadも確認した。実DB/native/本人実機・商品受入れは未確認、未配置・限定TECHNICAL_CREDIT・NOT_CLEAR。
 
 Emlis複合文2例の実本文検査初稿はLIMITED_RECEPTION_CAPABILITY_GAP_STOP。未変更開始版でも同じ停止を確認し、新検査は今回の共有source witnessへ範囲訂正した。既存期待の緩和・skip/xfail0、これら2例の本文は未解消。最初の結合検査の`tools` import不足は既存ai rootのPYTHONPATH指定で解消。既存共有6FAIL等は未再検証。詳細・開始HEAD・変更path構成・過程・残件の再開正本はAPI handoffの同日u169と追跡source/test。旧高品質全面完成を実機の前提にしないweekly20261003 §6.6〜6.10を維持する。
+
+
+## 2026-10-08 JST u170 — 記録・メモの担当を役割として保持（未配置）
+
+完全な「私は記録を担当した／メモを担当しなかった」等が共有action分類だけでROLEから落ちる問題を、既存Analysis witnessのPAST_RESPONSIBILITY限定で補正。共有action/action＋operator:actionの一致を要求し、全節/原文/主体/正負/時制/帰属の既存条件を維持。担当対象の実行完了へ転換せず、SCENEのevent条件を広げない。shared owner/API/DB/DTO/RN製品変更0、STRUCTURE_MAP_DELTA_NONE。
+
+新検査の修正前24FAIL（23sub＋1method）、修正後選択8PASSを経て、全Analysisの旧保留3subFAILを診断。今回の4旧保留（裸・読点・前置/主語後の昨日）だけをROLE/対象/相対日のpositive検査へ変更した。最終vertical255/storage59/saved-period16＝**330 tests PASS／2176 subtests PASS**。原文証拠、補足/訂正/撤回、順序、集約、相反、比較、合成RPCで再生成を禁止した保存readを確認。rootが合成9本文を全読し、実RN表示modelの本文・図用データが9/9一致。同環境read-onlyレビューに具体的blockerなし。
+
+既存PR3/30の7fileへ反映し、remote head/parent/tree/変更pathと全bytesを照合する。未配置、実DB・本人実機・商品受入れ未確認。開始HEAD・正確な過程/検査scope・変更境界・残件の再開正本はAPI handoff同日u170と追跡source/test。共有/Emlisは今回未実行で、u169の複合2例生成停止や以前の既存FAILを解消したとはしない。unknown反復と本人実機の生成→保存再表示→比較は残る。weekly20261003の最小実動作優先を維持し、全日本語対応を実機接続の前提にしない。
