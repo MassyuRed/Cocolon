@@ -14897,3 +14897,12 @@ STRUCTURE_MAP_DELTA_NONE、既存共有owner内の補正。API6/Cocolon3、計9f
 最終Analysis339 tests／2297 subtests、共有限定58、identity1、計398 tests PASS。合成Analysis8全文をrootが読み、実RN表示modelの全文/identity/node順/edge/unknown/注記/競合/比較が8/8一致。実保存service＋合成RPCで再生成なし再読を確認。新検査のDTO text key誤参照は検査のみ訂正、旧期待変更/skip/xfail0。Emlis単独3本文は開始helper復元比較と一致、複合2例は両版ともLIMITED_RECEPTION_CAPABILITY_GAP_STOP。Emlis品質の解消/開始版全suite検証とはしない。
 
 開始API96b7c5a／Cocolon51bef30、Codex Work rootが単一write owner、同環境read-only reviewに具体的blockerなし。System Context prepareはPUBLICATION_RECOVERY_AMBIGUOUSで失敗し追跡原典を直接参照。STRUCTURE_MAP_DELTA_NONE、既存計9file modify・新規0、Analysis専用source/API/DTO/DB/RN製品変更0。未配置・実DB/本人実機/商品受入れ未確認、main/merge/deploy/native操作0。限定TECHNICAL_CREDIT・商品NOT_CLEAR。詳細・identity・修正前失敗・残件はAPI handoff末尾u174と詳細04 §3.7、current03。同helperの属格/3項、未認定の落ち着きました、従来の共有/Emlis残差・実機確認を完了へ変換しない。
+
+
+## 2026-10-08 JST u175 — 感情語を含む名詞の未完了状態を保持（未配置）
+
+「まだ気持ちが定まっていない／まだ不安の原因が見つかっていない」が名詞内感情語だけでreaction/feelingとなり、分析から抜ける問題を共有の既存未完了ownerで補正。完全名詞＋現在否定の既存範囲に限りevent/factへ整合し、operator:feelingを除く。否定/現在時点/原文・出典と主体非推定を保持。独立感情/過去/推量/疑問/引用/夢/伝聞・別field帰属を保留し、root追加probeで発見した何/誰の名詞を確定扱いする新分岐も2FAIL再現後に限定修正した。
+
+最終Analysis341＋identity1＝342 tests／2339 subtests、共有限定84（新26＋旧58）、計426 tests PASS。合成Analysis8全文をrootが読み、最終source再生成と実RN表示modelの全文/identity/node順/edge/unknown/注記/競合/比較が8/8一致。実保存service＋合成RPCで再生成なし再読を確認。旧期待変更/skip/xfail0。Emlis単独4本文は開始helper復元比較と一致、複合1例は両版で既存STOP。感覚への定型化とEmlis複合生成停止は未解消。開始版全suite成功・商品受入れへ換算しない。
+
+開始API95b03c7／Cocolon549e721、rootが単一write owner。同環境read-only reviewに具体的blockerなし、別model Pro reviewではない。System Context prepareは既存residualで失敗し原典直接参照。STRUCTURE_MAP_DELTA_NONE、既存計9file modify・新規0、Analysis専用source/Safety/API/DTO/DB/RN製品変更0。未配置・実DB/本人実機/商品受入れ未確認、main/merge/deploy/native操作0。限定TECHNICAL_CREDIT・商品NOT_CLEAR。詳細と実行経過・identity・残件はAPI handoff末尾u175、詳細04 §3.7、current03。

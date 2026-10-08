@@ -262,6 +262,8 @@ actorはUNSPECIFIEDであり共有frameのcurrent_user既定値を本人の行�
 
 **u174 限定補正（2026-10-08 JST）**：上記u169の目的語1項に、同じ単一名詞文法の場所/媒体1項（に/で）を前後どちらかに追加できる。「考えをノートに書いた／ノートに考えを書いた／職場で記録を書きました」が後続未完了を伝聞化しない。前後両方・3項・格重複は保留し、既存の何/誰/次/以下/上記/下記/話/発言/引用/説明/報告/内容の拒否を目的語と場所/媒体の全区間へ適用する。一般属格/他者/引用/未閉包・他文/別fieldの報告条件、書いた/書きましたへの限定は不変。未完了は現在否定・主体未指定のまま、書字との因果/順序を推定しない。文章/図・補足/訂正/撤回・期間比較・保存再読を確認し、限定398 tests PASS。新しい文法ownerや依存方向は増やさずSTRUCTURE_MAP_DELTA_NONE。Emlis複合出力の既存停止は未解消。詳細は06/API handoff u174。
 
+**u175 限定補正（2026-10-08 JST）**：「まだ気持ちが定まっていない／まだ不安の原因が見つかっていない」は既存の現在未完了に該当する。共有Planが名詞内の感情語でreaction/feelingへ分類していた不一致を、同じ未完了owner内で補正する。まだ＋完全な既存名詞/属格＋は/が/も＋見つかる/決まる/定まるの現在否定、原文/範囲/explicit根拠、reaction/feeling/negativeの一致を満たす場合だけevent/factへ戻し、operator:feelingを除く。疑問名詞の何/誰/幾、独立感情、未閉包/過去/推量/疑問/引用/夢/伝聞と別field帰属は新分岐で昇格しない。昨日/昨日分は既存の完全名詞内時点の条件のみ継承。Analysisのactor=UNSPECIFIED、現在否定・原文/出典、補足/訂正/撤回・比較・保存を維持し、原因/順序/本人感情を推測しない。STRUCTURE_MAP_DELTA_NONE、共有owner/既存文法内の補正。Emlisの感覚への定型化と複合生成停止は別残件。検証結果は06/API handoff末尾u175。
+
 ### 3.8 u107 過去行動の後の有限変化
 
 同一memo spanの完全なSELF過去行動＋後/あと（に）読点＋名詞の有限変化に限定する。共有Stage1のaction/change 2核、explicit/required/explicit_current_input・fact/past、action_before_change、source_fragmentのexact範囲とrequired user_stated_relation/typed_projection:perfective_action_before_bounded_changeを要求する。同じmarkerは夢/伝聞の長いhostにも付くため、全文を両端と接続語で完全に解釈できなければaction片側も採用しない。
