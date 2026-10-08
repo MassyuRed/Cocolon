@@ -187,24 +187,30 @@ async function requireSession(expectedUserId) {
   }
 }
 
-export async function requestPiecePreview(value, options = {}) {
+async function requestPieceData(value, options = {}, savedInputId = null) {
   let signal;
   try {
     if (!object(options)) reject('PIECE_REQUEST_INVALID');
     const { expectedUserId, idempotencyKey } = options;
     signal = options.signal;
     checkAbort(signal);
-    const body = requestBody(value);
+    const sourceRead = savedInputId !== null;
+    if (sourceRead && (typeof savedInputId !== 'string' ||
+        !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(savedInputId) ||
+        savedInputId === '00000000-0000-0000-0000-000000000000')) reject('PIECE_REQUEST_INVALID');
+    const body = sourceRead ? undefined : requestBody(value);
     if (!text(expectedUserId)) reject('PIECE_AUTH_REQUIRED');
     // Keys use an unchanged HTTP-visible representation. Reject values that
     // Fetch could trim/reject; never trim, replace or generate a retry key.
-    if (typeof idempotencyKey !== 'string' ||
-        !/^[\x21-\x7e](?:[\x20-\x7e]*[\x21-\x7e])?$/.test(idempotencyKey)) reject('PIECE_REQUEST_INVALID');
+    if (!sourceRead && (typeof idempotencyKey !== 'string' ||
+        !/^[\x21-\x7e](?:[\x20-\x7e]*[\x21-\x7e])?$/.test(idempotencyKey))) reject('PIECE_REQUEST_INVALID');
     await requireSession(expectedUserId);
     checkAbort(signal);
-    const response = await apiFetch(PATH, {
-      method: 'POST', auth: true, expectedUserId,
-      headers: { 'Idempotency-Key': idempotencyKey }, body, signal,
+    const endpoint = sourceRead ? `/emotion/piece/source-ref/${encodeURIComponent(savedInputId)}` : PATH;
+    const response = await apiFetch(endpoint, {
+      method: sourceRead ? 'GET' : 'POST', auth: true, expectedUserId,
+      headers: sourceRead ? { 'Cache-Control': 'no-store' } : { 'Idempotency-Key': idempotencyKey },
+      body, signal,
     });
     checkAbort(signal);
     const result = await response.json();
@@ -212,8 +218,23 @@ export async function requestPiecePreview(value, options = {}) {
     await requireSession(expectedUserId);
     checkAbort(signal);
     if (response.status !== 200) {
-      reject(exact(result, ['code']) && Object.prototype.hasOwnProperty.call(STATUS, result.code) &&
+      const sourceCodes = ['PIECE_REQUEST_INVALID', 'PIECE_AUTH_REQUIRED', 'PIECE_SOURCE_NOT_FOUND',
+        'PIECE_SOURCE_NOT_ELIGIBLE', 'PIECE_CONFLICT', 'PIECE_TEMPORARILY_UNAVAILABLE'];
+      reject((!sourceRead || sourceCodes.includes(result?.code)) && exact(result, ['code']) && Object.prototype.hasOwnProperty.call(STATUS, result.code) &&
         STATUS[result.code] === response.status ? result.code : 'PIECE_TEMPORARILY_UNAVAILABLE');
+    }
+    if (sourceRead) {
+      // This endpoint returns the existing seven fields, not a new
+      // eligibility/flag decision. Reuse the preview request's closed reader.
+      let request;
+      try { request = JSON.parse(requestBody({ source_ref: result, requested_format: null,
+        visual_selection: { theme_id: null, aspect_ratio: null, branding_mode: null } })); }
+      catch { reject('PIECE_TEMPORARILY_UNAVAILABLE'); }
+      const ref = request.source_ref;
+      if (ref.source_input_id !== savedInputId ||
+          (ref.emlis_observation_stage === 'normal_observation' ? ref.question_need_decision_identity !== null
+            : !text(ref.question_need_decision_identity))) reject('PIECE_TEMPORARILY_UNAVAILABLE');
+      return freeze(ref);
     }
     return previewSnapshot(result);
   } catch (error) {
@@ -223,6 +244,20 @@ export async function requestPiecePreview(value, options = {}) {
     // No body, cause, raw message, token, provider detail, logging or auto retry.
     reject('PIECE_TEMPORARILY_UNAVAILABLE');
   }
+}
+
+/** Existing POST contract; no automatic source read or changed retry key. */
+export async function requestPiecePreview(value, options = {}) {
+  return requestPieceData(value, options);
+}
+
+/** Unregistered PCE-9C transport. No existing screen calls it yet.
+ * A source read is an explicit GET, not generation, saved-state authority,
+ * feature activation or permission to reuse Emlis/Analysis text.
+ */
+export async function requestPieceSourceRef(savedInputId, options = {}) {
+  if (savedInputId === null || savedInputId === undefined) reject('PIECE_REQUEST_INVALID');
+  return requestPieceData(null, options, savedInputId);
 }
 
 // B10 state model uses the same closed wire readers as the transport.

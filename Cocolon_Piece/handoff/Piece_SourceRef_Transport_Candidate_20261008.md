@@ -1,3 +1,5 @@
+> Current continuation: the source-reference GET binding and non-running code application are recorded in the final section below. Earlier candidate/adoption-pending paragraphs are history, not the current restart instruction. Production registration and activation remain excluded.
+
 # Piece source_ref transport — inactive implementation candidate
 
 Date: 2026-10-08 JST. Execution owner: Karen / GPT-6 Astra Pro / CHAT_PRO_OK.
@@ -115,3 +117,91 @@ React hooks, JSX linkage, effect replay, AppState, HTTP and native UI primitives
 Source reading used the current work-attitude entry/Rule 18, permanent incident, System Context direct-original fallback, three-core/Piece maps, overall AppRuntime roles, October 3 weekly plan already read in this conversation and its latest-entry check, current source/handoff and the matching prior full-byte artifacts. A fresh System Context prepare and full historical-map audit were not completed. Canonical Piece entry/current-map/manifest synchronization remains outstanding, separately from this in-place foreground extension. The pending source-reference DocSync patch must include both runtime continuations when reconciled; it remains unapplied.
 
 Next direct work remains the saved-input-to-preview connection: canonical document synchronization, adoption of the already prepared source-reference GET binding, server-effective flags and per-operation enforcement, and InputScreen wiring. Authenticated-session refresh and PIECE_FEATURE_DISABLED handling are still incomplete; foreground freshness alone does not close B14-B. Native image creation/extraction/save/share, actual device checks, formal product acceptance and the October 10 completion target remain uncompleted. No backend/DB/env/deploy/build/main/merge/activation/legacy Q&A/Emlis/Analysis changes. automatic_progression=false.
+
+
+## 2026-10-08 continuation — source-reference GET applied to non-running code
+
+Execution owner: Karen / GPT-6 Astra Pro / CHAT_PRO_OK. The current continuation
+followed the immediately preceding proposal to adopt the exact GET binding and
+apply its prepared candidate to non-running code, explicitly excluding live DB,
+deployment and activation. It is used only for that bounded scope, not as blanket
+approval of other API contracts, effective server flags, production registration
+or release. Earlier adoption-pending statements above describe earlier turns.
+The additional API binding is recorded in the existing PCE-6 API document,
+`pce6_api_db_rn_migration/Piece_API_CleanCutover_Design_20260808.md` section 11.
+
+API application: `0312a0fc3b07f8e46344d5746cafd7760458badd`, parent
+`93c26f7c6f76963a10dc349dce2ef7b81654f96f`. The branch update and its two-path
+compare were read back. RN application is included in this Cocolon revision,
+whose parent is `467cc5890055caa6366eede3f602248b14e55c13`.
+
+| Applied path | Exact Git blob |
+|---|---|
+| API ai/services/ai_inference/piece_v2_source_ref_http.py | 0f4471d519438b985c8b56c05ddc041d1a2dee9e |
+| API ai/tests/piece_v2/test_b05_source_ref_http_candidate.py | e40e26774159f99b117fe072cf0bceca0d158a58 |
+| RN features/piece/pieceApi.js | f549579d37ac6e986b1d90adf9883d7762880208 |
+| RN tests/piece-v2-source-ref.test.js | 0f600d9ada528294b11d858d5b86443f0033500e |
+
+The GET returns only the existing seven original-source references after shared
+HTTP authentication and the existing saved adapter's current-state revalidation.
+It accepts neither source body nor caller owner/tier/eligibility. It creates no
+preview, record or quota effect. Missing/extra/malformed responses are rejected.
+RN checks its expected session before and after IO, preserves the reference
+snapshot, and can pass it to the unchanged preview request on a separate explicit
+action. Existing POST request/key semantics, full-text model/controller/modal,
+strict flags and foreground refresh are retained; their source bytes are unchanged
+apart from the explicitly listed pieceApi transport extension.
+
+### Actual execution evidence
+
+- HTTP: 36 passed, zero failures. Python 3.13.5, FastAPI 0.128.2, Starlette 0.50.0,
+  httpx 0.28.1, pytest 9.0.2. Actual ASGI routing and handler; remote bearer and
+  saved-adapter result boundaries are doubles. The unrelated top-level
+  cancel_piece_preview store import is a never-call double in the local runner.
+  Current api_piece_v2.py full bytes match a395b19e33d9718f3e31189553fa8dcb35ef0bfa,
+  and full piece_v2_contract.py matches e4d20c9d0994b0a05f086ff6543de9d5cf2f31aa.
+  This does not execute the current real store, real saved adapter, DB or CMEE.
+- RN: 239 passed, zero failures/skips/cancellations, Node v22.16.0. This combines
+  unchanged prior 203 tests and the previously prepared source-ref candidate's
+  36 tests; it is not 36 newly repaired defects. Command: node --test
+  tests/piece-v2-contracts.test.js tests/piece-v2-state-models.test.js
+  tests/piece-v2-preview-display.test.js tests/piece-v2-runtime.test.js
+  tests/piece-v2-source-ref.test.js. No existing expectation was relaxed.
+- The real ASGI normal/pre-question responses were also consumed by four real
+  linked ESM modules: pieceApi, piecePreviewModel, PieceCreateController and
+  PiecePreviewModal. Both stages preserved the complete displayed text, content
+  payload and three hashes after a separate explicit preview POST. Session/HTTP,
+  React/RN primitives, the preview response and time were synthetic. VM Modules
+  reported its experimental warning. This is not InputScreen or native evidence.
+
+The original HTTP/RN candidate patches remain historical and must not be reapplied
+to these source paths. The code comments distinguish unregistered implementation
+from a live endpoint. The separate source_ref_router remains absent from both
+api_piece_v2.router and app.py. Existing InputScreen has no new caller. No server
+flag is supplied or enabled by this change.
+
+### Documentation and remaining work
+
+The PCE-6 API document and this existing handoff are updated. Canonical Piece
+entry/current-map/manifest synchronization is still NOT APPLIED. Complete matching
+preimages were recovered, and a revised three-document patch and full resulting
+files were prepared with prior history retained. Their hashes and exact patch are
+included in the continuation artifact. Preparation is not canonical publication;
+no current navigation/manifest success is claimed. The earlier remote DocSync
+patch predates both runtime continuations and GET adoption and must not be blindly
+applied. Reconcile that pending synchronization with the actual source blobs above.
+
+System Context prepare was attempted and failed because the partial materialized
+copy lacks tools.cocolon_context. The existing technical owner's direct-original
+fallback was used. Current rules and mandatory incident, the October 3 weekly
+policy, app/current maps and relevant real source were consulted; a fresh complete
+System Context or whole historical-map/source audit is not claimed.
+
+Next direct work is authoritative server-effective flag supply/enforcement and
+saved-input InputScreen wiring along the same preview path, with canonical document
+synchronization still owed. Session-change refresh, PIECE_FEATURE_DISABLED handling,
+capabilities/quota, native image creation/extraction/save/share, live Auth/DB/device
+checks and product acceptance remain unfinished. Source references cannot stand in
+for enabled/eligible/safety or renderer decisions. No DB/env/deploy/build/dependency/
+main/merge/activation/user-data/Emlis/Analysis change. The October 10 completion
+milestone is not credited. automatic_progression=false.
