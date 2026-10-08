@@ -14843,3 +14843,12 @@ u167で意図的に保留したNOT_YET＋昨日nominalの4期待を、今回の�
 STRUCTURE_MAP_DELTA_NONE：既存の共有意味owner・依存方向・route・artifact/保存lifecycle内の修正。API Plan1/test3/current identity1/handoff1、Cocolon current03/詳細04/06の計9file modify、新規repo file0。Analysis専用製品source、Safety、Piece、API契約/DTO/DB/SQL/RN・依存変更0。main/merge/deploy/env/native build操作0、u168未配置。実DB・React component/native・本人実機・商品受入れ未確認。限定TECHNICAL_CREDIT・商品NOT_CLEAR維持。既存PR3/30への反映後にremote head/parent/tree/変更path集合と全9fileのbytesを照合する。
 
 残件：今回の完全昨日名詞以外の時点、一般感情/認知、夢/伝聞から現実へ戻る境界、unknown反復、共有の旧期待差を維持。既存report helperは「私は記録を書いた。」の併存にも保守的に反応し得るため、この組合せの一般対応は主張しない（静的制約、今回の回帰ではない）。本人の指定版生成→保存再表示→比較の実機確認も別に保持。本節と追跡source/testを再開原典とし、scratch JSON/logやbaseline worktreeを正式再開原典にしない。
+
+
+## 2026-10-08 JST u169 — 完結した本人書字と現在の未完了を両方保持（未配置）
+
+u168の明示残件を実測し、本人の「記録を書いた」を伝聞の導入と誤認して昨日名詞付き未完了を落とす原因を、共有Planの既存report helper内10行で補正。単一名詞/明示SELF/書いた・書きましただけを完全照合し、別主体・引用導入・報告内容・一般属格・他文/他fieldのreport保留は維持する。Analysis専用source、Safety、API/DB/DTO/RNは変更0、STRUCTURE_MAP_DELTA_NONE。
+
+最終Analysis326＋identity1＝327 tests/2127 subtests PASS（34.26秒）、共有帰属境界68 PASS（13.02秒）、計395 tests PASS。rootが合成8全文を読み、実RN表示modelの本文/identity/node順/edge/unknown/注記/競合/比較が一致。合成RPCの保存後再生成なしreadも確認した。実DB/native/本人実機・商品受入れは未確認、未配置・限定TECHNICAL_CREDIT・NOT_CLEAR。
+
+Emlis複合文2例の実本文検査初稿はLIMITED_RECEPTION_CAPABILITY_GAP_STOP。未変更開始版でも同じ停止を確認し、新検査は今回の共有source witnessへ範囲訂正した。既存期待の緩和・skip/xfail0、これら2例の本文は未解消。最初の結合検査の`tools` import不足は既存ai rootのPYTHONPATH指定で解消。既存共有6FAIL等は未再検証。詳細・開始HEAD・変更path構成・過程・残件の再開正本はAPI handoffの同日u169と追跡source/test。旧高品質全面完成を実機の前提にしないweekly20261003 §6.6〜6.10を維持する。
