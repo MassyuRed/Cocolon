@@ -14870,3 +14870,12 @@ u170実出力で同文となっていた「二つの内容の順序不明」と�
 修正前は新/拡張2methodで7FAIL（6sub＋1method）。修正後はAnalysis3suite **333 tests／2185 subtests PASS**。rootが合成6全文を読み、実RN表示modelと本文・図用データが6/6一致。合成RPCと実保存serviceで新文面の保存後再読を確認し、旧保存文も再生成なしで元のまま表示する。read-only diff reviewに具体的blockerなし。
 
 API realizer/test2/handoff、Cocolon current03/詳細04/06の計7file。既存PR3/30反映時にremote head/parent/tree/変更path/全内容を照合する。main/merge/deploy/実DB/実機操作0、商品受入れ未確認。開始HEAD・理由の意味差・実行scope・残件の再開正本はAPI handoff同日u171と追跡source/test。unknown反復一般、未対応表現、以前の共有/Emlis残差、本人実機確認は未解消。weeklyの最小実動作優先を維持する。
+
+
+## 2026-10-08 JST u172 — 良い担当対象の保持と担当/実行の区別（未配置）
+
+「良い会議を担当した」等がvalue誤分類で分析から落ちる原因を既存共有Planで補正。初稿の実本文確認で記録/メモという名詞からEmlisへ行動称賛が追加される問題を発見し、完全名詞＋を＋過去担当5形のaction語も名詞として区別した。kindとoperatorを同じ判定に揃え、Analysisの原文/主体/正負/時点/順序/更新/比較条件を緩めない。実書字・独立value・未閉包/格違い・memo_actionの既存条件は維持。
+
+修正前Analysis新2methodで24FAIL（23sub＋1method）、追加action検査3FAILを確認。最終Analysis335＋identity1＝**336 tests／2224 subtests PASS**、共有限定56PASS、計392PASS。合成保存再表示、Analysis9全文と最終RN表示model一致、Emlis5全文で担当対象・否定保持と追加行動称賛の除去を確認。Emlisの復唱・定型性は未解消。u170の根拠改変検査はcoherent action候補を明示構成して既存拒否範囲を保持した。
+
+STRUCTURE_MAP_DELTA_NONE。既存共有owner内の補正、API6/Cocolon3の計9file、Analysis専用source/API契約/DTO/DB/RN変更0。既存PR3/30反映時にremote head/parent/tree/変更pathと全内容を照合する。未配置・実DB/本人実機/商品受入れ未確認。開始HEAD・過程・identity・検査scope・残件の再開正本はAPI handoff同日u172と追跡source/test。以前の未解消残差とweeklyの最小実動作優先を維持する。

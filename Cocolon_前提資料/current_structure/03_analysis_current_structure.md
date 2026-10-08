@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u172 内容修正（2026-10-08 JST・未配置）**：「良い会議を担当した」等の良いを独立valueと誤認してROLEを落とす問題を共有Plan内で補正。本文確認で発見した名詞記録/メモのaction誤認も同じ完全過去担当に限定して直し、担当対象の実行へ昇格させない。原文/否定/時点/順序/更新/比較/保存を維持。最終Analysis335＋identity1、共有限定56、計392検査PASS。合成Analysis9全文と実RN表示model一致、Emlis5全文確認。STRUCTURE_MAP_DELTA_NONE、API/DTO/DB/RN製品変更0。未配置・実DB/実機/商品受入れ未確認。詳細は06/API handoff末尾u172。
+
 **u171 内容修正（2026-10-08 JST・未配置）**：「その後／それから」が何に続くか不明な場合を、二つの内容の順序が不明な場合と同じ文面にしていた問題を補正。既存realizerで前件未確定の理由にだけ具体的な説明を付け、graph/対象/ID/比較と他の未確定情報を維持。Analysis333 tests／2185 subtests PASS、合成6全文と実RN表示model一致。新結果の保存再読・旧保存文の維持も確認。STRUCTURE_MAP_DELTA_NONE、API/DTO/DB/RN製品変更0。未配置・実DB/実機/商品受入れ未確認。詳細は06/API handoff末尾u171。
 
 **u170 内容修正（2026-10-08 JST・未配置）**：「私は記録を担当した／メモを担当しなかった」等を名詞由来の共有action分類だけで分析から落とす問題を補正。完全解析済み本人過去担当に限り一貫したaction根拠も受理し、担当対象の実行完了を補わずROLEとして保持。原文/正負/相対日/明示順序/更新/比較/保存を維持。旧保留4期待を限定更新し、最終Analysis330 tests／2176 subtests PASS、合成9全文と実RN表示model一致。STRUCTURE_MAP_DELTA_NONE、共有owner・API/DB/DTO/RN製品変更0。未配置・実DB/実機/商品受入れ未確認。詳細は06/API handoff末尾u170。
