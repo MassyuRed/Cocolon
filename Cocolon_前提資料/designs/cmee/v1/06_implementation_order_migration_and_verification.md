@@ -14861,3 +14861,12 @@ Emlis複合文2例の実本文検査初稿はLIMITED_RECEPTION_CAPABILITY_GAP_ST
 新検査の修正前24FAIL（23sub＋1method）、修正後選択8PASSを経て、全Analysisの旧保留3subFAILを診断。今回の4旧保留（裸・読点・前置/主語後の昨日）だけをROLE/対象/相対日のpositive検査へ変更した。最終vertical255/storage59/saved-period16＝**330 tests PASS／2176 subtests PASS**。原文証拠、補足/訂正/撤回、順序、集約、相反、比較、合成RPCで再生成を禁止した保存readを確認。rootが合成9本文を全読し、実RN表示modelの本文・図用データが9/9一致。同環境read-onlyレビューに具体的blockerなし。
 
 既存PR3/30の7fileへ反映し、remote head/parent/tree/変更pathと全bytesを照合する。未配置、実DB・本人実機・商品受入れ未確認。開始HEAD・正確な過程/検査scope・変更境界・残件の再開正本はAPI handoff同日u170と追跡source/test。共有/Emlisは今回未実行で、u169の複合2例生成停止や以前の既存FAILを解消したとはしない。unknown反復と本人実機の生成→保存再表示→比較は残る。weekly20261003の最小実動作優先を維持し、全日本語対応を実機接続の前提にしない。
+
+
+## 2026-10-08 JST u171 — 接続先が未確定である理由を本文と図へ表示（未配置）
+
+u170実出力で同文となっていた「二つの内容の順序不明」と「その後／それからが何に続くか不明」を、既存realizerの理由別文面で区別する。後者のみ「この記述がどの内容に続くのかは、この記録からは確定していません。」とし、別の不明点を統合/削除しない。graph・gap対象/ID・比較・保存schemaは不変、STRUCTURE_MAP_DELTA_NONE。
+
+修正前は新/拡張2methodで7FAIL（6sub＋1method）。修正後はAnalysis3suite **333 tests／2185 subtests PASS**。rootが合成6全文を読み、実RN表示modelと本文・図用データが6/6一致。合成RPCと実保存serviceで新文面の保存後再読を確認し、旧保存文も再生成なしで元のまま表示する。read-only diff reviewに具体的blockerなし。
+
+API realizer/test2/handoff、Cocolon current03/詳細04/06の計7file。既存PR3/30反映時にremote head/parent/tree/変更path/全内容を照合する。main/merge/deploy/実DB/実機操作0、商品受入れ未確認。開始HEAD・理由の意味差・実行scope・残件の再開正本はAPI handoff同日u171と追跡source/test。unknown反復一般、未対応表現、以前の共有/Emlis残差、本人実機確認は未解消。weeklyの最小実動作優先を維持する。

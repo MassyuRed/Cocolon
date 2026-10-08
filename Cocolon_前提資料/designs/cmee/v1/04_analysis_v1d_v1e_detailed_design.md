@@ -332,6 +332,8 @@ safe DTOは既存annotation_ref/target_ref/kind/visible_labelのみ。原節/述
 
 ### 3.15 u114 同一未確定表示の期間集約
 
+**u171表示補正（2026-10-08 JST・未配置）**：ROUTE_CONNECTIONのうちEXPLICIT_PREDECESSOR_NOT_ESTABLISHEDは「この記述がどの内容に続くのかは、この記録からは確定していません。」と表示する。二つの内容の順序不明を表すONLY_EXPLICIT_ORDER_IS_SHOWNとは別の不明点として保持し、統合/削除しない。対象・ID・順序・重複判定・private graph・期間比較は変更0。新生成時のprivate/safe表示だけに適用し、既存の保存済み文面を再生成/書換えしない。最終Analysis333 tests／2185 subtests、合成6全文と実RN表示model一致。実DB/実機/商品受入れ未確認。
+
 同じnodeへ集約された複数記録から、対象/不足範囲/理由が同じ未確定項目を繰り返し表示しない。ObservedGraphとprivate保存は全gapを保ち、生成時のprivate/safe projectionだけで順序付きbetween_node_refs・missing_scope・reason_codeの完全一致を初出gap_refへまとめる。ラベルだけのdedupeは禁止を維持し、別対象・別理由・対象順の差を消さない。
 
 safe DTOの構造、文章/図の単一artifact、元の証拠と記録件数を変更しない。_text_from_visualや保存readへこの集約を適用しないため、旧保存artifactは旧本文/DTO/identityのまま読める。欠番のあるgap_refは既存API/RN contract内。原graphの再解釈、旧保存の書換えは行わない。
