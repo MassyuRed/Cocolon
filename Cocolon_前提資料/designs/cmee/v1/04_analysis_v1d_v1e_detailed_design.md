@@ -290,6 +290,12 @@ vertical76/storage15/saved period13/API6＝110 PASS。6合成本文と既存RN�
 
 ### 3.10 u109 行動後の過去感情
 
+**u178 明示SELFの単独過去感情（2026-10-08 JST・未配置）**：この節の従来の単独感情保留を、完全な本人主語（私/僕/ぼく/俺/おれ/わたし/自分は、既存主語読点可）＋既存5有限形に限り更新する。memo単独span・全文境界・explicit/current-input claim・required/should、current_user/positive、安心はvalue/value/fact、他形はreaction/feeling/feeling、positive_change/current_change等の共有witnessを照合する。fragment/range/thread/dependency付き核は保留。pastは全文有限形から確定し、共有current_inputを現在時制にせず、actor既定値から主語省略をSELFにしない。元のscalar/UTF-8/hash/source_partsとPAST_FEELING/feeling/pastを保持する。
+
+この完全SELF感情の証拠IDを、既存の同一field・隣接・明示「その後／それから」・後続fact/pastによる順序起点へ追加する。未知文・希望・別source・撤回/訂正を橋渡しせず、原因や改善を補わない。句点/改行/semicolon等の直後に「わけではない／と思う／とは言えない」等の依存接尾が続くときは、新しい単独許可だけを保留して未解析hostを切り捨てない。これは任意の後文による訂正の一般理解ではない。主語省略、落ち着きました等の未認定形、否定/程度修飾、夢/伝聞等の既存境界は維持する。
+
+Analysis355 tests／2685 subtests PASS、7合成全文と最終実RN model一致、実保存service＋合成RPCの再生成なし再読を確認。公開契約/共有owner変更0、未配置・実DB/本人実機/商品受入れ未確認。詳細は06/API handoff末尾u178。
+
 **u177 感情末尾の後続順序（2026-10-08 JST・未配置）**：u176の後続接続条件へ、既存完全pair内の末尾PAST_FEELING/feeling/pastを追加する。非撤回・両端fragment受理・全文終端一致の下で、その証拠IDだけを感情の起点として認め、次の完全fact/past節に同一fieldの「その後／それから」と文末区切りだけの隣接根拠がある場合に接続する。感情をfactへ変換せず、SELF/UNSPECIFIED、内部3証拠/後続2証拠を保持する。単独感情・未認定活用・他者・推量・未解析介在・別source・撤回/訂正への橋渡しはしない。原因や改善を補わない。
 
 u176 §3.8のPAST_FEELING保留は本範囲で更新し、複合文への前方接続は未対応を維持。既存保存結果の再生成や公開契約変更はしない。Analysis349 tests／2417 subtests PASS、7合成全文と実RN model一致、実保存service＋合成RPCで再生成なし再読を確認。未配置・実DB/本人実機/商品受入れ未確認。詳細は06/API handoff末尾u177。
