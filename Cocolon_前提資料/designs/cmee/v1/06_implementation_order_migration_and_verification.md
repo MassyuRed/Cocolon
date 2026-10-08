@@ -14879,3 +14879,12 @@ API realizer/test2/handoff、Cocolon current03/詳細04/06の計7file。既存PR
 修正前Analysis新2methodで24FAIL（23sub＋1method）、追加action検査3FAILを確認。最終Analysis335＋identity1＝**336 tests／2224 subtests PASS**、共有限定56PASS、計392PASS。合成保存再表示、Analysis9全文と最終RN表示model一致、Emlis5全文で担当対象・否定保持と追加行動称賛の除去を確認。Emlisの復唱・定型性は未解消。u170の根拠改変検査はcoherent action候補を明示構成して既存拒否範囲を保持した。
 
 STRUCTURE_MAP_DELTA_NONE。既存共有owner内の補正、API6/Cocolon3の計9file、Analysis専用source/API契約/DTO/DB/RN変更0。既存PR3/30反映時にremote head/parent/tree/変更pathと全内容を照合する。未配置・実DB/本人実機/商品受入れ未確認。開始HEAD・過程・identity・検査scope・残件の再開正本はAPI handoff同日u172と追跡source/test。以前の未解消残差とweeklyの最小実動作優先を維持する。
+
+
+## 2026-10-08 JST u173 — 難しい担当対象・所在の意味保持（未配置）
+
+「難しい会議を担当した／難しい職場にいた」を独立constraintと誤認して文章/図から落とす原因を、既存共有Planのkind/operator共通判定で補正。完全名詞＋既存過去担当/所在5形だけに限定し、難しい・対象・正負・時点・明示順序を保持する。独立制約、別constraint語、未閉包・伝聞/夢/疑問、帰属/原文境界は維持。負担・努力・担当対象の実行を推測しない。
+
+最終Analysis337＋identity1＝**338 tests／2276 subtests PASS**、共有限定84PASS、計422 tests PASS。合成保存再読、Analysis9全文と実RN表示model一致、Emlis5全文を確認。旧u136の難しいイベント企画の保留期待1件を、今回回復したROLEの完全意味確認へ更新した。新ADD検査誤期待とcollection path修正の経過はAPI handoff末尾u173へ記録。Emlis復唱/定型性・unknown反復・以前の共有検査残差は継承し、全repo PASSとはしない。
+
+STRUCTURE_MAP_DELTA_NONE、既存共有owner内の補正。API6/Cocolon3、計9file modify。Analysis専用source/API/DTO/DB/RN製品変更0、未配置・実DB/本人実機/商品受入れ未確認、限定TECHNICAL_CREDIT。main/merge/deploy/env/native build操作0。開始HEAD・実測・identity・検証scope・残件の再開正本はAPI handoff同日u173と追跡source/test。既存PR3/30反映後にremote対象全内容・変更path集合・headを確認する。weeklyの最小実動作優先を維持し、全表現対応を実機の前提にしない。

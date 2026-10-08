@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u173 内容修正（2026-10-08 JST・未配置）**：「難しい会議を担当した／難しい職場にいた」の名詞修飾を独立constraintと誤認し、ROLE/SCENEと明示順序を落とす問題を共有Planで補正。完全名詞＋既存過去担当/所在5形だけを区別し、難しい・対象・否定・時点を保持する。独立制約、未閉包、伝聞/夢/疑問、別constraint語の条件は維持。最終Analysis337＋identity1＝338 tests／2276 subtests、共有限定84 tests、計422 tests PASS。合成Analysis9全文と実RN表示model一致、保存後再生成なし再読、Emlis5全文を確認。STRUCTURE_MAP_DELTA_NONE、Analysis専用source/API/DTO/DB/RN製品変更0。未配置・実DB/本人実機/商品受入れ未確認。詳細は06/API handoff末尾u173。
+
 **u172 内容修正（2026-10-08 JST・未配置）**：「良い会議を担当した」等の良いを独立valueと誤認してROLEを落とす問題を共有Plan内で補正。本文確認で発見した名詞記録/メモのaction誤認も同じ完全過去担当に限定して直し、担当対象の実行へ昇格させない。原文/否定/時点/順序/更新/比較/保存を維持。最終Analysis335＋identity1、共有限定56、計392検査PASS。合成Analysis9全文と実RN表示model一致、Emlis5全文確認。STRUCTURE_MAP_DELTA_NONE、API/DTO/DB/RN製品変更0。未配置・実DB/実機/商品受入れ未確認。詳細は06/API handoff末尾u172。
 
 **u171 内容修正（2026-10-08 JST・未配置）**：「その後／それから」が何に続くか不明な場合を、二つの内容の順序が不明な場合と同じ文面にしていた問題を補正。既存realizerで前件未確定の理由にだけ具体的な説明を付け、graph/対象/ID/比較と他の未確定情報を維持。Analysis333 tests／2185 subtests PASS、合成6全文と実RN表示model一致。新結果の保存再読・旧保存文の維持も確認。STRUCTURE_MAP_DELTA_NONE、API/DTO/DB/RN製品変更0。未配置・実DB/実機/商品受入れ未確認。詳細は06/API handoff末尾u171。

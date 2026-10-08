@@ -300,6 +300,10 @@ ledgerの全文span一致に加え、parser field上の前後が句点/改行/fi
 
 ### 3.12 u111 明示された本人の過去の担当
 
+**u173共有側補正（2026-10-08 JST・未配置）**：過去所在（§3.11）と担当の完全名詞修飾「難しい」を、独立した難しさ/制約と区別する。既存共有Planのkind選択とoperator生成で同じ判定を使い、完全名詞＋に＋過去所在5形、または完全名詞＋を＋過去担当5形だけはconstraintへ分類しない。難しくない等の別形、無理/制約/限界、独立述語、未閉包・格違いは従来判定を維持。Analysisの原文・主体・極性・時点・帰属条件は緩めず、修飾を削除したり遂行能力/負担へ変換したりしない。旧「難しいイベント企画を担当した」の保留期待1件を、今回回復した完全なROLE・対象・肯定過去の確認へ更新。最終422限定検査PASS、合成Analysis9全文と実RN表示model一致、保存再読/Emlis5全文確認。未配置・実DB/実機/商品受入れ未確認。詳細はAPI handoff/06末尾u173。
+
+
+
 既存compiler/realizerで「私/僕/わたし/自分は＋既存名詞句＋を＋担当した/担当しました/担当しなかった/担当しませんでした」を完全解釈し、内部role_state=PAST_RESPONSIBILITY、SELF/fact/pastと正負をROLEへ投影する。担当関係は述語が根拠であり、名詞の職業/肩書き分類表や「私はNです」から推測しない。safe表示は「〜を担当した／担当しなかった（記録された担当）」で、恒久身分・能力・責任感・担当対象の実行完了を補わない。
 
 u110の共有generic event witnessと文境界処理を共通化。explicit/current_input claim scope、memo単独span、event predicate/current_user/fact、対応する極性、past/current_input時制、fragment/dependencyなし、完全な本人有限節と元scalar/UTF-8証拠が必要。ROLEだけretention=required/shouldを許可する。共有保持ownerは4節以上で普通の明示本文をshouldへ下げており、grounding/claim scope/certaintyとは独立している。共有retentionを書き換えず、optional断片は拒否し、SCENEのrequired条件も変えない。
