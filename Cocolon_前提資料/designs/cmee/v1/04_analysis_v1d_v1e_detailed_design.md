@@ -290,6 +290,8 @@ vertical76/storage15/saved period13/API6＝110 PASS。6合成本文と既存RN�
 
 ### 3.10 u109 行動後の過去感情
 
+**u184 内容修正（2026-10-09 JST・未配置）**：先頭「その後/それから」付き常体の行動後3感情/名詞3変化を全文根拠に限定して保持。marker内の助詞誤認と、Emlisで順序をsupport断定へ変える連動問題を既存3owner内で補修した。引用/伝聞/夢/後続hostは保留し、丁寧形・原文/主体/前後順序・訂正/撤回/比較/保存再読を維持。Analysis370＋共有限定432 tests／3099 subtests、current identity1成功、既存実保存fixture3skip。Analysis8全文と実RN表示model一致、Emlis4全文と全recovery/独立inverseを確認。STRUCTURE_MAP_DELTA_NONE。配置/本人実機/商品受入れは未確認。次は追加活用網羅より指定修正版の生成→保存再表示の実機到達を優先する。詳細は06/API handoff末尾u184。
+
 **u183 読点なしmarkerの格誤認補修（2026-10-09 JST・未配置）**：既存全文証明済みの丁寧3感情/名詞3変化compoundについて、明示SELFに先行する単一markerを格検索範囲から除く。`それから` 内の「から」を助詞と取り違える欠落を直し、原文/全operator/証拠座標は変更しない。generic endpointの検索位置は0不変。常体への試行拡張はEmlisのsupport断定を実測したため不採用とし、別残件を明示。Analysis370＋共有312、3013 subtests、identity1成功、実保存runtime未設定3skip。合成8全文/RN一致、合成RPC保存再読と訂正/撤回/読点差比較、独立readerを確認。STRUCTURE_MAP_DELTA_NONE。未配置・実DB/本人実機/商品受入れ未確認。詳細は06/API handoff末尾u183。
 
 **u182 先頭marker＋丁寧形の共有根拠（2026-10-09 JST・未配置）**：u181の別残件だった「その後／それから」で始まる完全SELF行動＋後/てから＋丁寧3感情、または減りました/増えました/戻りましたを、共有finalの有限形判定で認定する。原文scalar/全文/帰属/required pairを保持し、Analysis既存u181の前後順序へ接続する。新prefix付き名詞変化では夢・両field報告・後続の認知/撤回hostも拒否し、旧prefixなし経路を拡大しない。Emlis作者と独立readerはmarkerを残して直後のSELFだけ省略し、原source bytesへ復元する。因果/supportは追加せず、感情の省略主体や名詞の「自分」を改変しない。

@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u184 内容修正（2026-10-09 JST・未配置）**：先頭「その後/それから」付き常体の行動後3感情/名詞3変化を全文根拠に限定して保持。marker内の助詞誤認と、Emlisで順序をsupport断定へ変える連動問題を既存3owner内で補修した。引用/伝聞/夢/後続hostは保留し、丁寧形・原文/主体/前後順序・訂正/撤回/比較/保存再読を維持。Analysis370＋共有限定432 tests／3099 subtests、current identity1成功、既存実保存fixture3skip。Analysis8全文と実RN表示model一致、Emlis4全文と全recovery/独立inverseを確認。STRUCTURE_MAP_DELTA_NONE。配置/本人実機/商品受入れは未確認。次は追加活用網羅より指定修正版の生成→保存再表示の実機到達を優先する。詳細は06/API handoff末尾u184。
+
 **u183 内容修正（2026-10-09 JST・未配置）**：読点なし「それから私は…」のmarker内「から」を格と誤認し、丁寧形の行動/結果が欠落する問題を補修。既存完全形で証明済みのcompoundだけ格検索位置をずらし、原文/主体/否定/順序と保存再読を保持する。常体まで広げる試行はEmlisの根拠のないsupport出力を確認したため不採用。Analysis370＋共有312 tests／3013 subtests、identity1成功、既存実保存test3 skip。Analysis8全文とRN本文/identity一致、合成RPC保存再読、Emlis4全文を確認。常体の連動問題、配置/実機/商品受入れは残る。STRUCTURE_MAP_DELTA_NONE。詳細は06/API handoff末尾u183。
 
 **u182 内容修正（2026-10-09 JST・未配置）**：「その後／それから、明示SELF行動の後／てから、落ち着きました／嬉しかったです／うれしかったです」および減りました/増えました/戻りましたの共有pair欠落を補正。元の原文/順序/帰属を保持し、Emlisはmarkerを残して本人主語だけ省略する。新prefix名詞変化の夢/報告/後続hostを保留。Analysis370＋共有256 tests／2970 subtests、identity1成功、既存実保存test3 skip。合成8全文/RN本文・identity一致、合成RPCで保存再読を確認。読点なし等の未認定形、unknown反復、配置/実機/商品受入れは残る。STRUCTURE_MAP_DELTA_NONE。詳細は06/API handoff末尾u182。
