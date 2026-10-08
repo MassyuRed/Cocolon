@@ -290,6 +290,10 @@ vertical76/storage15/saved period13/API6＝110 PASS。6合成本文と既存RN�
 
 ### 3.10 u109 行動後の過去感情
 
+**u177 感情末尾の後続順序（2026-10-08 JST・未配置）**：u176の後続接続条件へ、既存完全pair内の末尾PAST_FEELING/feeling/pastを追加する。非撤回・両端fragment受理・全文終端一致の下で、その証拠IDだけを感情の起点として認め、次の完全fact/past節に同一fieldの「その後／それから」と文末区切りだけの隣接根拠がある場合に接続する。感情をfactへ変換せず、SELF/UNSPECIFIED、内部3証拠/後続2証拠を保持する。単独感情・未認定活用・他者・推量・未解析介在・別source・撤回/訂正への橋渡しはしない。原因や改善を補わない。
+
+u176 §3.8のPAST_FEELING保留は本範囲で更新し、複合文への前方接続は未対応を維持。既存保存結果の再生成や公開契約変更はしない。Analysis349 tests／2417 subtests PASS、7合成全文と実RN model一致、実保存service＋合成RPCで再生成なし再読を確認。未配置・実DB/本人実機/商品受入れ未確認。詳細は06/API handoff末尾u177。
+
 既存の共有action/change完全pairを消費する同じcompiler/realizer内で、右端の安心した/安心しました・落ち着いた・嬉しかった/うれしかったを有限形として解釈する。明示本人主語はSELF、省略主語はUNSPECIFIEDを保つ。Analysisの結果型はPAST_FEELING/feeling/past。共有側で安心はfact、他3lemmaはfeelingとなるwitnessを正確に照合し、一律factへ変更しない。
 
 元全文2核・required relation・exact範囲・明示接続の条件を維持する。safeラベルは型から「〜（記録された気持ち）」と再構成し、本人の実行、改善/悪化評価、原因へ昇格しない。te形の実行表示は同一source/field/spanの自身の順序線と右端過去結果・元全文証拠が必要。PAST_FEELINGは既存結果nodeへ投影する内部型で、公開DTO/DB/RN契約へfieldを追加しない。
