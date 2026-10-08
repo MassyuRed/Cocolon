@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u183 内容修正（2026-10-09 JST・未配置）**：読点なし「それから私は…」のmarker内「から」を格と誤認し、丁寧形の行動/結果が欠落する問題を補修。既存完全形で証明済みのcompoundだけ格検索位置をずらし、原文/主体/否定/順序と保存再読を保持する。常体まで広げる試行はEmlisの根拠のないsupport出力を確認したため不採用。Analysis370＋共有312 tests／3013 subtests、identity1成功、既存実保存test3 skip。Analysis8全文とRN本文/identity一致、合成RPC保存再読、Emlis4全文を確認。常体の連動問題、配置/実機/商品受入れは残る。STRUCTURE_MAP_DELTA_NONE。詳細は06/API handoff末尾u183。
+
 **u182 内容修正（2026-10-09 JST・未配置）**：「その後／それから、明示SELF行動の後／てから、落ち着きました／嬉しかったです／うれしかったです」および減りました/増えました/戻りましたの共有pair欠落を補正。元の原文/順序/帰属を保持し、Emlisはmarkerを残して本人主語だけ省略する。新prefix名詞変化の夢/報告/後続hostを保留。Analysis370＋共有256 tests／2970 subtests、identity1成功、既存実保存test3 skip。合成8全文/RN本文・identity一致、合成RPCで保存再読を確認。読点なし等の未認定形、unknown反復、配置/実機/商品受入れは残る。STRUCTURE_MAP_DELTA_NONE。詳細は06/API handoff末尾u182。
 
 **u181 内容修正（2026-10-09 JST・未配置）**：共有pair成立済みの「その後／それから、行動した後／してから、結果・感情」がAnalysisから丸ごと落ちる問題を補正。既存compilerだけでmarker/原文座標を保持し、完全pairの初端を既存隣接判定へ加える。前件→行動→結果→後続、compound間の順序を保持し、未知文/希望/別source/撤回を橋渡ししない。前件なしは内部順序と未確定を表示。Analysis366 tests／2927 subtests＋identity1 PASS、合成8全文/RN model一致、合成RPC保存再読を確認。共有側でpair未成立の先頭marker＋新丁寧感情等は別残件。STRUCTURE_MAP_DELTA_NONE、共有/API/DB/RN製品変更0。未配置・実DB/本人実機/商品受入れ未確認。詳細は06/API handoff末尾u181。

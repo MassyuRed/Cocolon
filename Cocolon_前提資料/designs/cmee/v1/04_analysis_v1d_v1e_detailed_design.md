@@ -290,6 +290,8 @@ vertical76/storage15/saved period13/API6＝110 PASS。6合成本文と既存RN�
 
 ### 3.10 u109 行動後の過去感情
 
+**u183 読点なしmarkerの格誤認補修（2026-10-09 JST・未配置）**：既存全文証明済みの丁寧3感情/名詞3変化compoundについて、明示SELFに先行する単一markerを格検索範囲から除く。`それから` 内の「から」を助詞と取り違える欠落を直し、原文/全operator/証拠座標は変更しない。generic endpointの検索位置は0不変。常体への試行拡張はEmlisのsupport断定を実測したため不採用とし、別残件を明示。Analysis370＋共有312、3013 subtests、identity1成功、実保存runtime未設定3skip。合成8全文/RN一致、合成RPC保存再読と訂正/撤回/読点差比較、独立readerを確認。STRUCTURE_MAP_DELTA_NONE。未配置・実DB/本人実機/商品受入れ未確認。詳細は06/API handoff末尾u183。
+
 **u182 先頭marker＋丁寧形の共有根拠（2026-10-09 JST・未配置）**：u181の別残件だった「その後／それから」で始まる完全SELF行動＋後/てから＋丁寧3感情、または減りました/増えました/戻りましたを、共有finalの有限形判定で認定する。原文scalar/全文/帰属/required pairを保持し、Analysis既存u181の前後順序へ接続する。新prefix付き名詞変化では夢・両field報告・後続の認知/撤回hostも拒否し、旧prefixなし経路を拡大しない。Emlis作者と独立readerはmarkerを残して直後のSELFだけ省略し、原source bytesへ復元する。因果/supportは追加せず、感情の省略主体や名詞の「自分」を改変しない。
 
 Analysis370＋共有256 tests／2970 subtests、current identity1成功、実保存runtime未設定の既存3 skip。合成8本文/RN model本文・identity一致、実service＋合成RPC保存再読。未配置・実DB/本人実機/商品受入れ未確認。読点なし「それから私は…」等へ成功範囲を一般化しない。過去節の未完了記録は履歴として保持し、本有限範囲だけ更新する。詳細は06/API handoff末尾u182。
