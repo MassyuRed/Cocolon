@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u176 内容修正（2026-10-08 JST・未配置）**：完全に読める「行動した後／してから、変化した。その後／それから、行動した」の末尾への明示順序が欠落する問題を修正。既存Analysis compilerで、証明済み複合文の末尾の過去変化だけを後続接続の起点に加え、成立済み順序線を原文順で表示する。未解析文・希望・撤回/訂正・別field/sourceを橋渡しせず、感情結果の後続接続は保留。Analysis345 tests／2369 subtests PASS、合成7全文と実RN表示model一致、実保存service＋合成RPCで再生成なし再読を確認。STRUCTURE_MAP_DELTA_NONE、共有意味owner/API/DTO/DB/RN製品変更0。未配置・実DB/本人実機/商品受入れ未確認。詳細は06/API handoff末尾u176。
+
 **u175 内容修正（2026-10-08 JST・未配置）**：「まだ気持ちが定まっていない／まだ不安の原因が見つかっていない」を名詞内感情語だけでfeelingへ誤分類し、未完了状態が分析から抜ける問題を補正。共有の既存完全名詞＋現在否定の未完了owner内で、整合したreaction/feelingをevent/factへ限定して戻す。否定/現在時点/対象/出典と主体非推定を維持し、疑問名詞/独立感情/推量/過去/伝聞/夢を新分岐で断定しない。最終Analysis341＋identity1＝342 tests／2339 subtests、共有限定84、計426 tests PASS。合成Analysis8全文と最終実RN表示model一致、保存後再生成なし再読を確認。Emlisの単独4本文と複合1停止は開始helperとの比較で不変、定型化は未解消。STRUCTURE_MAP_DELTA_NONE、Analysis専用source/API/DTO/DB/RN製品変更0。未配置・実DB/本人実機/商品受入れ未確認。詳細は06/API handoff末尾u175。
 
 **u174 内容修正（2026-10-08 JST・未配置）**：「考えをノートに書いた。まだ昨日の方針が決まっていない」で後半が落ちる問題を補正。共有Planの本人書字判定に、既存の目的語1項＋場所/媒体（に/で）1項の前後配置を保持し、完結した書字を伝聞導入と取り違えない。引用/報告・他者・属格・3項等の保留は維持。Analysis339＋identity1＋共有限定58＝398 tests PASS、Analysis2297 subtests PASS。合成Analysis8全文と実RN表示model一致、保存後の再生成なし再読を確認。Emlis単独3本文は開始helperと一致、複合2例は両版とも既存生成停止。STRUCTURE_MAP_DELTA_NONE、Analysis専用source/API/DTO/DB/RN製品変更0。未配置・実DB/本人実機/商品受入れ未確認。詳細は06/API handoff末尾u174。

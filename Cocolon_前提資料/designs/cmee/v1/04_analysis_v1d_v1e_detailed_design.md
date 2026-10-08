@@ -266,6 +266,10 @@ actorはUNSPECIFIEDであり共有frameのcurrent_user既定値を本人の行�
 
 ### 3.8 u107 過去行動の後の有限変化
 
+**u176後続順序の限定補正（2026-10-08 JST・未配置）**：`_explicit_order_pairs`は、既存`_action_change_pair`で全文を証明し、両端を`_fragment`で実際に受理した非撤回の複合文について、末尾がBOUNDED_CHANGE/fact/pastかつ全文証拠の終端と一致する場合だけ、その末尾を既存の後続順序候補へ加える。次節は従来どおり同一fieldの完全な過去factで「その後／それから」を明記し、間が文末区切り/空白だけであることが必要。初めの行動片へ直結せず、未解析文・希望・別field/source・撤回/置換箇所を飛び越えない。PAST_FEELINGの後続接続と複合文の前方接続は拡張しない。
+
+内部順序の両端＋元全文3証拠と、後続線の末尾＋次節2証拠を保持する。成立した線だけを元field/scalar順で表示し、配列順から新しい順序や原因を作らない。期間意味比較は線の表示ID/配列順を意味差にしない。既存保存結果は再生成しない。最終Analysis345 tests／2369 subtests PASS、7合成本文・実RN model一致、保存後再読確認。契約/共有owner/DB/RN製品変更0。詳細は06/API handoff末尾u176。
+
 同一memo spanの完全なSELF過去行動＋後/あと（に）読点＋名詞の有限変化に限定する。共有Stage1のaction/change 2核、explicit/required/explicit_current_input・fact/past、action_before_change、source_fragmentのexact範囲とrequired user_stated_relation/typed_projection:perfective_action_before_bounded_changeを要求する。同じmarkerは夢/伝聞の長いhostにも付くため、全文を両端と接続語で完全に解釈できなければaction片側も採用しない。
 
 左端は既存の有限動詞/格と明示SELF、肯定の過去factだけ。右端は既存名詞/の連結・は/が/もと減った/増えた/変わった/戻ったを型付けし、result_state=BOUNDED_CHANGE、actor=UNSPECIFIED、positive（文法上の肯定）/fact/pastとして結果nodeへ置く。名詞の所有者を本人と補わず、増減を改善/悪化と評価しない。両端の疑問名詞（何/誰/幾）は保留。safe labelは「疑問が減った（記録された変化）」等に再構成する。
