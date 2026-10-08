@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u185 内容表示補修（2026-10-09 JST・未配置）**：同じ対象に通常の不足段階を一行ずつ反復する表示を、全不足項目の列挙へまとめた。順序付き対象と理由が同じ場合だけ集約し、先頭ID/表示位置、単一項目の旧文面、未読内容/接続先不明/別対象・別理由を保持。private graphの全gap、訂正/撤回後の既知node・出典・順序線、期間比較は変更0。最終Analysis集合374 tests／3103 subtests成功、生成8例＋旧保存1例の全文と実RN表示modelが一致。実service＋合成RPCで訂正/撤回後の保存再読と旧本文保持を確認。STRUCTURE_MAP_DELTA_NONE。配置/本人実機/商品受入れ未確認で、表示の追加磨き込みを実機接続の前提にしない。詳細は04 §3.15と06/API handoff末尾u185。
+
 **u184 内容修正（2026-10-09 JST・未配置）**：先頭「その後/それから」付き常体の行動後3感情/名詞3変化を全文根拠に限定して保持。marker内の助詞誤認と、Emlisで順序をsupport断定へ変える連動問題を既存3owner内で補修した。引用/伝聞/夢/後続hostは保留し、丁寧形・原文/主体/前後順序・訂正/撤回/比較/保存再読を維持。Analysis370＋共有限定432 tests／3099 subtests、current identity1成功、既存実保存fixture3skip。Analysis8全文と実RN表示model一致、Emlis4全文と全recovery/独立inverseを確認。STRUCTURE_MAP_DELTA_NONE。配置/本人実機/商品受入れは未確認。次は追加活用網羅より指定修正版の生成→保存再表示の実機到達を優先する。詳細は06/API handoff末尾u184。
 
 **u183 内容修正（2026-10-09 JST・未配置）**：読点なし「それから私は…」のmarker内「から」を格と誤認し、丁寧形の行動/結果が欠落する問題を補修。既存完全形で証明済みのcompoundだけ格検索位置をずらし、原文/主体/否定/順序と保存再読を保持する。常体まで広げる試行はEmlisの根拠のないsupport出力を確認したため不採用。Analysis370＋共有312 tests／3013 subtests、identity1成功、既存実保存test3 skip。Analysis8全文とRN本文/identity一致、合成RPC保存再読、Emlis4全文を確認。常体の連動問題、配置/実機/商品受入れは残る。STRUCTURE_MAP_DELTA_NONE。詳細は06/API handoff末尾u183。

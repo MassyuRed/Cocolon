@@ -379,6 +379,8 @@ safe DTOは既存annotation_ref/target_ref/kind/visible_labelのみ。原節/述
 
 ### 3.15 u114 同一未確定表示の期間集約
 
+**u185限定表示更新（2026-10-09 JST・未配置）**：以下u114のscope完全一致だけの表示集約を、既存の通常不足段階に限り拡張する。同一の順序付きbetween_node_refs・NOT_ESTABLISHED_FROM_SOURCE・NODE_KINDSの複数scopeを、初出gap_ref/表示位置に「確定していない項目：場面、考え・注意。」のように全項目を列挙してまとめる。複数記録から別々の不足が来る場合もあるため、同一記録で全項目が同時に欠けたと断定しない。単一scopeは旧文面を保持。別対象/対象順/理由、SOURCE_SCOPE、ROUTE_CONNECTIONはこの束ねへ入れず、従来の完全一致dedupeだけを継承する。private全gap・graph・証拠・訂正/撤回・比較意味・DTO形・保存readは変更しない。新生成のprivate/safe projectionのみへ適用し、旧保存本文/identityを再生成しない。実例の訂正後6→5行、撤回後5→3行、同じ希望の2記録4→1行（private8gap維持）。最終集合374 tests／3103 subtests成功、生成8＋旧保存1全文と実RN表示model一致、訂正/撤回後の実service＋合成RPC保存再読を確認。実DB/実機/正式商品受入れ未確認。詳細は06/API handoff末尾u185。
+
 **u171表示補正（2026-10-08 JST・未配置）**：ROUTE_CONNECTIONのうちEXPLICIT_PREDECESSOR_NOT_ESTABLISHEDは「この記述がどの内容に続くのかは、この記録からは確定していません。」と表示する。二つの内容の順序不明を表すONLY_EXPLICIT_ORDER_IS_SHOWNとは別の不明点として保持し、統合/削除しない。対象・ID・順序・重複判定・private graph・期間比較は変更0。新生成時のprivate/safe表示だけに適用し、既存の保存済み文面を再生成/書換えしない。最終Analysis333 tests／2185 subtests、合成6全文と実RN表示model一致。実DB/実機/商品受入れ未確認。
 
 同じnodeへ集約された複数記録から、対象/不足範囲/理由が同じ未確定項目を繰り返し表示しない。ObservedGraphとprivate保存は全gapを保ち、生成時のprivate/safe projectionだけで順序付きbetween_node_refs・missing_scope・reason_codeの完全一致を初出gap_refへまとめる。ラベルだけのdedupeは禁止を維持し、別対象・別理由・対象順の差を消さない。
