@@ -25,6 +25,17 @@ function deferred() {
 function harness(initialAppState = 'active') {
   const pending = [], hooks = [], effects = [], appListeners = new Set();
   let stateWrites = 0;
+  const authListeners = new Set(), authTimers = new Map();
+  let nextTimer = 0, insideAuthCallback = false;
+  const supabase = { auth: { onAuthStateChange: callback => {
+    authListeners.add(callback);
+    return { data: { subscription: { unsubscribe: () => authListeners.delete(callback) } } };
+  } } };
+  const setTimeout = (callback, delay) => {
+    assert.equal(delay, 0, 'only a deferred auth notification, never polling');
+    const id = ++nextTimer; authTimers.set(id, callback); return id;
+  };
+  const clearTimeout = id => authTimers.delete(id);
   const AppState = {
     currentState: initialAppState,
     addEventListener: (name, listener) => {
@@ -71,9 +82,10 @@ function harness(initialAppState = 'active') {
     },
   };
   React.useCallback = (fn, deps) => React.useMemo(() => fn, deps);
-  const context = vm.createContext({ ...React, React, AppState,
+  const context = vm.createContext({ ...React, React, AppState, supabase, setTimeout, clearTimeout,
     process: { env: { EXPO_PUBLIC_APP_VERSION: '1.0.0', EXPO_PUBLIC_APP_BUILD: '100' } },
     apiGet: async (url, options) => {
+      assert.equal(insideAuthCallback, false, 'bootstrap runs after the auth callback returns');
       assert.equal(url, '/app/bootstrap'); assert.equal(options.auth, false);
       const d = deferred(); pending.push(d); return d.promise;
     },
@@ -106,7 +118,18 @@ function harness(initialAppState = 'active') {
   }
   return { render, pending, piece: context.piece, contextDefault: () => contextDefault,
     flushEffects, emit, cleanupEffects, setupEffectsAgain, AppState, appListeners,
-    stateWrites: () => stateWrites };
+    stateWrites: () => stateWrites, authListeners, authTimers,
+    emitAuth: (event, session = { user: { id: 'synthetic-owner' }, access_token: 'PRIVATE_SYNTHETIC' }) => {
+      insideAuthCallback = true;
+      try {
+        for (const callback of [...authListeners]) assert.equal(callback(event, session), undefined);
+      } finally { insideAuthCallback = false; }
+    },
+    flushAuthTimers: () => {
+      for (const [id, callback] of [...authTimers]) {
+        if (authTimers.delete(id)) callback();
+      }
+    } };
 
 }
 
@@ -425,5 +448,169 @@ test('effect replay restarts an interrupted bootstrap even when the existing gat
   assert.equal(h.render().runtime.loading, false);
   assert.equal(h.render().isFeatureEnabled(PREVIEW, false), true);
   assert.notEqual(h.render().runtime.maintenanceMessage, 'old mount');
+  h.cleanupEffects();
+});
+
+
+// Auth events/timers are test doubles. These assertions do not execute a live
+// Supabase client, real React reconciliation, Hermes or device auth transitions.
+async function loadedRuntime(h) {
+  h.render(); h.flushEffects();
+  const p = h.render().refreshAppRuntime();
+  h.pending[0].resolve({ feature_flags: { ...all(true), subscription_sales_enabled: false },
+    maintenance_message: 'existing notice', recommended_version: '1.1.0' });
+  await p;
+  return h.render();
+}
+
+for (const event of ['INITIAL_SESSION', 'SIGNED_IN', 'SIGNED_OUT', 'TOKEN_REFRESHED',
+  'USER_UPDATED', 'PASSWORD_RECOVERY', 'MFA_CHALLENGE_VERIFIED', 'FUTURE_AUTH_EVENT']) {
+  test(`auth ${event} clears all cached Piece flags synchronously before one deferred bootstrap`, async () => {
+    const h = harness(), r = await loadedRuntime(h), captured = r.isFeatureEnabled;
+    assert.equal(h.authListeners.size, 1);
+    h.emitAuth(event, event === 'SIGNED_OUT' ? null : undefined);
+    for (const flag of FLAGS) assert.equal(captured(flag, true), false);
+    assert.deepEqual(clone(h.piece.normalizePieceFeatureFlags(h.render().featureFlags)), all(false));
+    assert.equal(h.pending.length, 1, 'no HTTP inside the auth callback');
+    assert.equal(h.authTimers.size, 1);
+    assert.equal(h.render().isFeatureEnabled('subscription_sales_enabled'), false);
+    assert.equal(h.render().runtime.maintenanceMessage, 'existing notice');
+    assert.equal(h.render().runtime.versionStatus.recommendedOutdated, true);
+    h.flushAuthTimers(); assert.equal(h.pending.length, 2);
+    assert.equal(captured(PREVIEW), false);
+    h.pending[1].resolve({ feature_flags: all(true) }); await settleForeground();
+    assert.equal(h.render().isFeatureEnabled(PREVIEW), true, 'presentation only, not authenticated authority');
+    assert.doesNotMatch(JSON.stringify(h.render().runtime), /PRIVATE_SYNTHETIC|synthetic-owner/);
+    h.cleanupEffects();
+  });
+}
+
+test('auth bursts coalesce without keeping session payloads or treating them as feature decisions', async () => {
+  const h = harness(); await loadedRuntime(h);
+  const unreadable = new Proxy({}, { get() { throw new Error('session must not be read'); } });
+  h.emitAuth('SIGNED_OUT', null); h.emitAuth('SIGNED_IN', unreadable); h.emitAuth('TOKEN_REFRESHED', unreadable);
+  assert.equal(h.authTimers.size, 1); assert.equal(h.pending.length, 1);
+  h.flushAuthTimers(); assert.equal(h.pending.length, 2);
+  h.pending[1].resolve({ feature_flags: all(false) }); await settleForeground();
+  assert.equal(h.render().isFeatureEnabled(PREVIEW, true), false);
+  h.flushAuthTimers(); assert.equal(h.pending.length, 2); h.cleanupEffects();
+});
+
+test('auth event fences a bootstrap already in flight, including the promise return snapshot', async () => {
+  const h = harness(); await loadedRuntime(h);
+  const old = h.render().refreshAppRuntime();
+  h.emitAuth('TOKEN_REFRESHED');
+  h.pending[1].resolve({ feature_flags: all(true), maintenance_message: 'obsolete session notice' });
+  const oldResult = await old;
+  assert.equal(oldResult.featureFlags[PREVIEW], false);
+  assert.notEqual(h.render().runtime.maintenanceMessage, 'obsolete session notice');
+  h.flushAuthTimers();
+  h.pending[2].resolve({ feature_flags: all(false) }); await settleForeground();
+  assert.equal(h.render().isFeatureEnabled(PREVIEW, true), false); h.cleanupEffects();
+});
+
+test('new auth boundary during auth refresh rejects the prior result and permits only the newer refresh', async () => {
+  const h = harness(); await loadedRuntime(h);
+  h.emitAuth('SIGNED_IN'); h.flushAuthTimers();
+  h.emitAuth('SIGNED_OUT', null); h.emitAuth('SIGNED_IN'); h.flushAuthTimers();
+  assert.equal(h.pending.length, 3);
+  h.pending[2].resolve({ feature_flags: all(false), maintenance_message: 'current notice' }); await settleForeground();
+  h.pending[1].resolve({ feature_flags: all(true), maintenance_message: 'old notice' }); await settleForeground();
+  assert.equal(h.render().isFeatureEnabled(PREVIEW, true), false);
+  assert.equal(h.render().runtime.maintenanceMessage, 'current notice'); h.cleanupEffects();
+});
+
+for (const state of ['background', 'inactive', null]) {
+  test(`auth in ${state} does not fetch until foreground and cannot restore cached Piece`, async () => {
+    const h = harness(); await loadedRuntime(h);
+    h.emit(state); h.emitAuth('TOKEN_REFRESHED'); h.flushAuthTimers();
+    assert.equal(h.pending.length, 1); assert.equal(h.authTimers.size, 0);
+    assert.equal(h.render().isFeatureEnabled(PREVIEW, true), false);
+    h.emit('active'); assert.equal(h.pending.length, 2);
+    h.pending[1].resolve({ feature_flags: all(true) }); await settleForeground();
+    assert.equal(h.render().isFeatureEnabled(PREVIEW), true); h.cleanupEffects();
+  });
+}
+
+test('background before the deferred auth refresh cancels it; foreground supplies the single replacement', async () => {
+  const h = harness(); await loadedRuntime(h);
+  h.emitAuth('TOKEN_REFRESHED'); assert.equal(h.authTimers.size, 1);
+  h.emit('background'); assert.equal(h.authTimers.size, 0);
+  h.flushAuthTimers(); assert.equal(h.pending.length, 1);
+  h.emit('active'); h.flushAuthTimers(); assert.equal(h.pending.length, 2);
+  h.pending[1].resolve({ feature_flags: all(true) }); await settleForeground(); h.cleanupEffects();
+});
+
+test('an explicit current bootstrap replaces a queued auth refresh instead of fetching twice', async () => {
+  const h = harness(); await loadedRuntime(h);
+  h.emitAuth('SIGNED_IN');
+  const explicit = h.render().refreshAppRuntime();
+  assert.equal(h.authTimers.size, 0);
+  h.flushAuthTimers(); assert.equal(h.pending.length, 2);
+  h.pending[1].resolve({ feature_flags: all(true) }); await explicit;
+  assert.equal(h.render().isFeatureEnabled(PREVIEW), true); h.cleanupEffects();
+});
+
+test('auth bootstrap failure remains OFF without automatic retry or an unhandled rejection', async () => {
+  const h = harness(); await loadedRuntime(h);
+  h.emitAuth('TOKEN_REFRESHED'); h.flushAuthTimers();
+  const failure = new Error('synthetic unavailable');
+  assert.equal(h.pending.length, 2, 'auth notification must schedule a bootstrap');
+  h.pending[1].reject(failure); await settleForeground();
+  assert.equal(h.render().runtime.error, failure);
+  assert.equal(h.render().isFeatureEnabled(PREVIEW), false);
+  h.flushAuthTimers(); await settleForeground(); assert.equal(h.pending.length, 2);
+  const retry = h.render().refreshAppRuntime();
+  h.pending[2].resolve({ feature_flags: all(true) }); await retry; h.cleanupEffects();
+});
+
+test('cleanup removes auth subscription and timer; queued or captured callbacks cannot update an unmounted provider', async () => {
+  const h = harness(); await loadedRuntime(h);
+  const callback = [...h.authListeners][0];
+  assert.equal(typeof callback, 'function');
+  h.emitAuth('TOKEN_REFRESHED'); const deferredCallback = [...h.authTimers.values()][0];
+  h.cleanupEffects(); const writes = h.stateWrites();
+  assert.equal(h.authListeners.size, 0); assert.equal(h.authTimers.size, 0);
+  callback('SIGNED_IN', {}); deferredCallback(); h.flushAuthTimers();
+  assert.equal(h.stateWrites(), writes); assert.equal(h.pending.length, 1);
+});
+
+test('effect replay resumes a cancelled queued auth refresh and keeps one listener', async () => {
+  const h = harness(); await loadedRuntime(h);
+  h.emitAuth('TOKEN_REFRESHED'); h.cleanupEffects(); h.setupEffectsAgain();
+  assert.equal(h.authListeners.size, 1); assert.equal(h.appListeners.size, 1);
+  h.flushAuthTimers(); assert.equal(h.pending.length, 2);
+  h.pending[1].resolve({ feature_flags: all(true) }); await settleForeground();
+  assert.equal(h.render().runtime.loading, false);
+  assert.equal(h.render().isFeatureEnabled(PREVIEW), true); h.cleanupEffects();
+});
+
+test('auth refresh hides an already displayed Piece and never revives or automatically regenerates it', async () => {
+  const h = harness(), fixture = displayHarness(), u = fixture.create();
+  await loadedRuntime(h);
+  const contextFor = () => fixture.input({ enabled: h.render().isFeatureEnabled(PREVIEW, false) });
+  u.host.props = { context: contextFor() }; u.mount(); u.host.start(); await settleForeground();
+  assert.ok(u.nodes(u.tree()).some(n => n.props.testID === 'piece-canonical-text'));
+  h.emitAuth('SIGNED_OUT', null); u.host.props = { context: contextFor() };
+  assert.equal(u.tree(), null); u.host.componentDidUpdate();
+  h.emitAuth('SIGNED_IN'); h.flushAuthTimers();
+  h.pending[1].resolve({ feature_flags: all(true) }); await settleForeground();
+  u.host.props = { context: contextFor() }; u.host.componentDidUpdate();
+  assert.ok(u.nodes(u.tree()).some(n => n.type === 'Button'));
+  assert.ok(!u.nodes(u.tree()).some(n => n.props.testID === 'piece-canonical-text'));
+  assert.equal(u.calls.length, 1);
+  u.host.componentWillUnmount(); h.cleanupEffects();
+});
+
+test('an obsolete deferred auth callback cannot consume the current timer or send stale IO', async () => {
+  const h = harness(); await loadedRuntime(h);
+  h.emitAuth('SIGNED_OUT', null); const old = [...h.authTimers.values()][0];
+  assert.equal(typeof old, 'function');
+  h.emitAuth('SIGNED_IN'); const currentTimer = [...h.authTimers.keys()][0];
+  old();
+  assert.equal(h.pending.length, 1);
+  assert.deepEqual([...h.authTimers.keys()], [currentTimer]);
+  h.flushAuthTimers(); assert.equal(h.pending.length, 2);
+  h.pending[1].resolve({ feature_flags: all(true) }); await settleForeground();
   h.cleanupEffects();
 });

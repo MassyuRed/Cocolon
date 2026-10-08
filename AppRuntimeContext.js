@@ -2,6 +2,7 @@ import React, { createContext, useCallback, useContext, useEffect, useMemo, useR
 import { AppState } from "react-native";
 
 import { apiGet } from "./lib/apiClient";
+import { supabase } from "./lib/supabase";
 import { PIECE_FEATURE_DEFAULTS, isPieceFeatureFlag, normalizePieceFeatureFlags, withoutPieceFeatureFlags, isPieceFeatureEnabled } from "./features/piece/pieceRuntime";
 
 const DEFAULT_FEATURE_FLAGS = Object.freeze({
@@ -128,8 +129,15 @@ export function AppRuntimeProvider({ children }) {
   const refreshSequence = useRef(0);
   const latestRuntime = useRef(INITIAL_RUNTIME_STATE);
   const restartInterruptedRefresh = useRef(false);
+  const deferredSessionRefresh = useRef(null);
 
   const refreshAppRuntime = useCallback(async () => {
+    // An explicit or foreground read also satisfies an already queued auth
+    // refresh. Never issue a second bootstrap just because its timer remains.
+    if (deferredSessionRefresh.current !== null) {
+      clearTimeout(deferredSessionRefresh.current);
+      deferredSessionRefresh.current = null;
+    }
     const sequence = ++refreshSequence.current;
     // Do not expose cached Piece=true while checking a newer server state.
     // Keep the previous non-Piece flags, version data and child placement.
@@ -182,6 +190,10 @@ export function AppRuntimeProvider({ children }) {
       // Fence a request that began before this lifecycle boundary. No server
       // operation is cancelled or retried, and no non-Piece flag is reset.
       refreshSequence.current += 1;
+      if (deferredSessionRefresh.current !== null) {
+        clearTimeout(deferredSessionRefresh.current);
+        deferredSessionRefresh.current = null;
+      }
       const invalidated = {
         ...latestRuntime.current,
         featureFlags: withoutPieceFeatureFlags(latestRuntime.current.featureFlags),
@@ -203,6 +215,24 @@ export function AppRuntimeProvider({ children }) {
       void refreshAppRuntime().catch(() => {});
     });
 
+    // AuthProvider is a child of this provider. Observe the same existing
+    // client without reordering providers or retaining a session/token/user ID.
+    // All auth notifications invalidate advisory flags; none grants access.
+    const authSubscription = supabase.auth.onAuthStateChange(() => {
+      if (!listening) return;
+      invalidatePiecePresentation(true);
+      if (AppState.currentState !== "active") return;
+      // Keep the auth callback synchronous. Coalesce the current event burst
+      // and perform IO only after the auth callback has returned.
+      const timer = setTimeout(() => {
+        if (!listening || deferredSessionRefresh.current !== timer) return;
+        deferredSessionRefresh.current = null;
+        if (AppState.currentState !== "active") return;
+        void refreshAppRuntime().catch(() => {});
+      }, 0);
+      deferredSessionRefresh.current = timer;
+    });
+
     if (previousAppState !== "active") invalidatePiecePresentation(true);
     else if (restartInterruptedRefresh.current) {
       // Effect replay can cancel the bootstrap while the child gate is still
@@ -214,8 +244,10 @@ export function AppRuntimeProvider({ children }) {
     // Initial active startup remains owned by AppRuntimeBootstrapGate.
     return () => {
       listening = false;
-      restartInterruptedRefresh.current = latestRuntime.current.loading && refreshSequence.current > 0;
+      restartInterruptedRefresh.current = deferredSessionRefresh.current !== null ||
+        (latestRuntime.current.loading && refreshSequence.current > 0);
       subscription.remove();
+      authSubscription.data.subscription.unsubscribe();
       invalidatePiecePresentation(false);
     };
   }, [refreshAppRuntime]);
