@@ -89,3 +89,29 @@ Formal-document synchronization remains incomplete: this appendix updates the ex
 Next work stays on the same saved-input-to-preview path: reconcile canonical documentation, obtain the separately required GET-binding decision before applying that candidate, implement server-effective flag supply/enforcement, and connect the saved/terminal input boundary to InputScreen. No source_ref, enabled or eligible value may be fabricated from raw/Emlis text. Native image creation/extraction/save/share and actual device checks remain unfinished. The October 7 screen connection and October 10 completion targets are not credited by this runtime-only step.
 
 This continuation changes no backend, database, environment variable, dependency, deployment, build, production feature activation, main branch, merge, user data, Emlis or Analysis ownership. automatic_progression=false. Branch publication and subsequent remote verification are recorded in the continuation result; blob creation alone is not treated as a branch update.
+
+
+## 2026-10-08 continuation — foreground bootstrap refresh
+
+Execution owner: Karen / GPT-6 Astra Pro / CHAT_PRO_OK. Base: `b03311fdfce6c26c2790d86c43f4639aa6e40baf`. This is the existing PCE-7 section 12 foreground-freshness requirement, within Rule 18 section 0 / existing Piece delegation. It does not adopt the pending source-reference URL or activate Piece.
+
+The existing AppRuntimeContext now observes AppState. Leaving active invalidates the eight Piece presentation flags and fences pending bootstrap results. Returning active starts one existing `/app/bootstrap` read; duplicate active events and background events start no additional read. Piece remains OFF until a successful current active-state response. Initial active startup remains with the existing AppRuntimeBootstrapGate. The effect cleanup removes its listener and fences late results without writing React state; an interrupted bootstrap is restarted on effect setup replay so the existing gate's single-flight guard cannot leave loading stuck.
+
+No Piece preview is generated, retried, saved or exported by a lifecycle event. The existing full-text host is only composed with this runtime in tests, not mounted into InputScreen. AppRuntimeContext retains its public interface, provider/child placement, non-Piece defaults and version parsing. The shared bootstrap now refreshes normal app metadata on foreground as well; a pre-boundary response is ignored as a whole, not just its Piece fields. This impact is explicit, not claimed to be a Piece-only network payload.
+
+Changed existing code/test paths and tested blobs:
+
+| Path | Git blob |
+|---|---|
+| AppRuntimeContext.js | ad9bb85fd56a7863ce7f1b1b1afb0327d2a93bd7 |
+| tests/piece-v2-runtime.test.js | 77e6417cc3646989add93621d9eea4f6f57a4aa2 |
+
+The third changed path is this existing handoff. The eight earlier preview paths and the pure pieceRuntime owner are unchanged. STRUCTURE_MAP_DELTA_NONE for this bounded extension: the same existing bootstrap/provider/Piece projection owners, application interfaces, routes and test owner remain; only lifecycle-triggering inside AppRuntimeContext changes, using the already installed React Native AppState. This statement does not erase the earlier uncompleted registration of runtime/preview owners in the canonical documents.
+
+Verification: Node v22.16.0, `node --test tests/piece-v2-contracts.test.js tests/piece-v2-state-models.test.js tests/piece-v2-preview-display.test.js tests/piece-v2-runtime.test.js`: **203 passed, 0 failed, 0 skipped, 0 cancelled**. This is prior 189 plus 14 new regression cases. The original 27 runtime test bodies and expectations are byte-unchanged; their harness gained explicit AppState and effect-scheduling doubles. Before the implementation, the first 13 new cases failed while those 27 passed. The first implementation passed 202 total; the added interrupted-bootstrap case then failed (runtime-only 40 pass / 1 fail), and its production fix produced the final 203. No existing expectation was weakened. A separate preimage patch replay passed git apply --check, produced the same three target byte sequences, and passed the same 203; repeat runs are not added together.
+
+React hooks, JSX linkage, effect replay, AppState, HTTP and native UI primitives are doubles. The simulation is not real React reconciliation/StrictMode, Hermes, actual OS lifecycle, device, actual HTTP/Auth/DB, CI, full-repository or independent-review evidence. There was no live session, user input, configuration activation, dependency installation or backend modification.
+
+Source reading used the current work-attitude entry/Rule 18, permanent incident, System Context direct-original fallback, three-core/Piece maps, overall AppRuntime roles, October 3 weekly plan already read in this conversation and its latest-entry check, current source/handoff and the matching prior full-byte artifacts. A fresh System Context prepare and full historical-map audit were not completed. Canonical Piece entry/current-map/manifest synchronization remains outstanding, separately from this in-place foreground extension. The pending source-reference DocSync patch must include both runtime continuations when reconciled; it remains unapplied.
+
+Next direct work remains the saved-input-to-preview connection: canonical document synchronization, adoption of the already prepared source-reference GET binding, server-effective flags and per-operation enforcement, and InputScreen wiring. Authenticated-session refresh and PIECE_FEATURE_DISABLED handling are still incomplete; foreground freshness alone does not close B14-B. Native image creation/extraction/save/share, actual device checks, formal product acceptance and the October 10 completion target remain uncompleted. No backend/DB/env/deploy/build/main/merge/activation/legacy Q&A/Emlis/Analysis changes. automatic_progression=false.

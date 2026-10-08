@@ -22,8 +22,17 @@ function deferred() {
   return { promise, resolve, reject };
 }
 
-function harness() {
-  const pending = [], hooks = [];
+function harness(initialAppState = 'active') {
+  const pending = [], hooks = [], effects = [], appListeners = new Set();
+  let stateWrites = 0;
+  const AppState = {
+    currentState: initialAppState,
+    addEventListener: (name, listener) => {
+      assert.equal(name, 'change');
+      appListeners.add(listener);
+      return { remove: () => appListeners.delete(listener) };
+    },
+  };
   let cursor = 0, contextDefault;
   const React = {
     createContext: value => { contextDefault = value; return { Provider: 'RuntimeProvider' }; },
@@ -33,8 +42,20 @@ function harness() {
       const index = cursor++;
       if (!hooks[index]) hooks[index] = { value: initial };
       return [hooks[index].value, update => {
+        stateWrites += 1;
         hooks[index].value = typeof update === 'function' ? update(hooks[index].value) : update;
       }];
+    },
+    useEffect: (factory, deps) => {
+      const index = cursor++;
+      if (!hooks[index] || !deps.every((v, n) => Object.is(v, hooks[index].deps[n]))) {
+        const previous = hooks[index];
+        hooks[index] = { factory, deps, cleanup: previous?.cleanup };
+        effects.push(() => {
+          hooks[index].cleanup?.();
+          hooks[index].cleanup = factory();
+        });
+      }
     },
     useRef: initial => {
       const index = cursor++;
@@ -50,7 +71,7 @@ function harness() {
     },
   };
   React.useCallback = (fn, deps) => React.useMemo(() => fn, deps);
-  const context = vm.createContext({ ...React, React,
+  const context = vm.createContext({ ...React, React, AppState,
     process: { env: { EXPO_PUBLIC_APP_VERSION: '1.0.0', EXPO_PUBLIC_APP_BUILD: '100' } },
     apiGet: async (url, options) => {
       assert.equal(url, '/app/bootstrap'); assert.equal(options.auth, false);
@@ -70,7 +91,23 @@ function harness() {
     .replace(jsx, 'return React.createElement(AppRuntimeContext.Provider, {value}, children);');
   vm.runInContext(source + '\nglobalThis.runtimeProvider = AppRuntimeProvider;', context);
   function render() { cursor = 0; return context.runtimeProvider({ children: 'same-child' }).props.value; }
-  return { render, pending, piece: context.piece, contextDefault: () => contextDefault };
+  function flushEffects() { while (effects.length) effects.shift()(); }
+  function emit(next) {
+    AppState.currentState = next;
+    for (const listener of [...appListeners]) listener(next);
+  }
+  function cleanupEffects() {
+    for (const hook of hooks) {
+      if (hook?.factory) { hook.cleanup?.(); hook.cleanup = undefined; }
+    }
+  }
+  function setupEffectsAgain() {
+    for (const hook of hooks) if (hook?.factory) hook.cleanup = hook.factory();
+  }
+  return { render, pending, piece: context.piece, contextDefault: () => contextDefault,
+    flushEffects, emit, cleanupEffects, setupEffectsAgain, AppState, appListeners,
+    stateWrites: () => stateWrites };
+
 }
 
 for (const flag of FLAGS) {
@@ -235,4 +272,158 @@ test('a previously captured Piece predicate reads pending/failed invalidation im
   assert.equal(captured(PREVIEW), false, 'do not require another React render to invalidate a callback');
   h.pending[1].reject(new Error('failure')); await assert.rejects(p);
   assert.equal(captured(PREVIEW), false);
+});
+
+// AppState / effect scheduling below is explicit simulation, not an on-device
+// lifecycle or real React StrictMode result. No session/credential is supplied.
+const settleForeground = () => new Promise(resolve => setImmediate(resolve));
+
+test('foreground subscription does not duplicate the existing startup bootstrap', () => {
+  const h = harness(); h.render(); h.flushEffects();
+  assert.equal(h.appListeners.size, 1);
+  assert.equal(h.pending.length, 0);
+  h.emit('active'); h.emit('active');
+  assert.equal(h.pending.length, 0);
+  h.cleanupEffects(); assert.equal(h.appListeners.size, 0);
+});
+
+test('background immediately clears all Piece flags and preserves unrelated runtime data', async () => {
+  const h = harness(); let r = h.render(); h.flushEffects();
+  const p = r.refreshAppRuntime();
+  h.pending[0].resolve({ feature_flags: { ...all(true), subscription_sales_enabled: false },
+    recommended_version: '1.1.0', maintenance_message: 'retained notice' }); await p;
+  const captured = h.render().isFeatureEnabled;
+  h.emit('inactive');
+  for (const flag of FLAGS) assert.equal(captured(flag, true), false);
+  r = h.render(); assert.deepEqual(clone(h.piece.normalizePieceFeatureFlags(r.featureFlags)), all(false));
+  assert.equal(r.isFeatureEnabled('subscription_sales_enabled'), false);
+  assert.equal(r.runtime.maintenanceMessage, 'retained notice');
+  assert.equal(r.runtime.versionStatus.recommendedOutdated, true);
+  h.emit('background'); assert.equal(h.pending.length, 1, 'no background request');
+  h.cleanupEffects();
+});
+
+test('returning active fetches once and does not restore Piece before successful refresh', async () => {
+  const h = harness(); h.render(); h.flushEffects();
+  h.emit('inactive'); h.emit('background'); h.emit('active'); h.emit('active');
+  assert.equal(h.pending.length, 1);
+  for (const flag of FLAGS) assert.equal(h.render().isFeatureEnabled(flag, true), false);
+  h.pending[0].resolve({ feature_flags: all(true) }); await settleForeground();
+  for (const flag of FLAGS) assert.equal(h.render().isFeatureEnabled(flag, false), true);
+  h.cleanupEffects();
+});
+
+test('a bootstrap started before background cannot restore Piece or stale metadata afterwards', async () => {
+  const h = harness(); h.render(); h.flushEffects();
+  const old = h.render().refreshAppRuntime(); h.emit('background');
+  h.pending[0].resolve({ feature_flags: all(true), maintenance_message: 'obsolete' });
+  const returned = await old;
+  assert.equal(returned.featureFlags[PREVIEW], false);
+  assert.notEqual(h.render().runtime.maintenanceMessage, 'obsolete');
+  h.emit('active'); h.pending[1].resolve({ feature_flags: all(false) }); await settleForeground();
+  assert.equal(h.render().isFeatureEnabled(PREVIEW, true), false);
+  h.cleanupEffects();
+});
+
+for (const initial of [null, 'unknown', 'inactive', 'background']) {
+  test(`bootstrap while AppState=${initial} cannot enable Piece; active transition rechecks`, async () => {
+    const h = harness(initial); h.render(); h.flushEffects();
+    const p = h.render().refreshAppRuntime();
+    h.pending[0].resolve({ feature_flags: all(true), minimum_supported_version: '2.0.0' });
+    const returned = await p;
+    assert.equal(returned.featureFlags[PREVIEW], false);
+    assert.equal(h.render().isFeatureEnabled(PREVIEW, true), false);
+    assert.equal(h.render().runtime.versionStatus.minimumBlocked, true);
+    h.emit('active'); assert.equal(h.pending.length, 2);
+    h.pending[1].resolve({ feature_flags: all(true) }); await settleForeground();
+    assert.equal(h.render().isFeatureEnabled(PREVIEW, false), true);
+    h.cleanupEffects();
+  });
+}
+
+test('failed foreground refresh stays OFF without unhandled rejection, polling or auto-retry', async () => {
+  const h = harness(); h.render(); h.flushEffects();
+  h.emit('background'); h.emit('active');
+  const error = new Error('synthetic foreground failure');
+  h.pending[0].reject(error); await settleForeground();
+  assert.equal(h.render().runtime.error, error);
+  assert.equal(h.render().isFeatureEnabled(PREVIEW, true), false);
+  h.emit('active'); await settleForeground(); assert.equal(h.pending.length, 1);
+  const retry = h.render().refreshAppRuntime();
+  h.pending[1].resolve({ feature_flags: all(true) }); await retry;
+  assert.equal(h.render().isFeatureEnabled(PREVIEW, false), true);
+  h.cleanupEffects();
+});
+
+test('rapid background and active transitions fence an older foreground success', async () => {
+  const h = harness(); h.render(); h.flushEffects();
+  h.emit('background'); h.emit('active'); h.emit('background'); h.emit('active');
+  assert.equal(h.pending.length, 2);
+  const error = new Error('newest failure');
+  h.pending[1].reject(error); await settleForeground();
+  h.pending[0].resolve({ feature_flags: all(true) }); await settleForeground();
+  assert.equal(h.render().runtime.error, error);
+  assert.equal(h.render().isFeatureEnabled(PREVIEW, true), false);
+  h.cleanupEffects();
+});
+
+test('cleanup removes AppState listener and fences pending results without writing React state', async () => {
+  const h = harness(); h.render(); h.flushEffects();
+  const listener = [...h.appListeners][0];
+  h.emit('background'); h.emit('active');
+  const captured = h.render().isFeatureEnabled;
+  h.cleanupEffects(); const writes = h.stateWrites();
+  assert.equal(h.appListeners.size, 0);
+  listener('background'); listener('active');
+  h.pending[0].resolve({ feature_flags: all(true) }); await settleForeground();
+  assert.equal(h.pending.length, 1);
+  assert.equal(h.stateWrites(), writes);
+  assert.equal(captured(PREVIEW, true), false);
+});
+
+test('effect cleanup/setup replay retains one subscription and does not duplicate startup requests', async () => {
+  const h = harness(); h.render(); h.flushEffects();
+  h.cleanupEffects(); h.setupEffectsAgain();
+  assert.equal(h.appListeners.size, 1); assert.equal(h.pending.length, 0);
+  h.emit('background'); h.emit('active'); assert.equal(h.pending.length, 1);
+  h.pending[0].resolve({ feature_flags: all(true) }); await settleForeground();
+  assert.equal(h.render().isFeatureEnabled(PREVIEW, false), true);
+  h.cleanupEffects();
+});
+
+test('foreground refresh composes with the existing preview host without resending a Piece', async () => {
+  const h = harness(), fixture = displayHarness(), u = fixture.create();
+  h.render(); h.flushEffects();
+  const contextFor = () => fixture.input({ enabled: h.render().isFeatureEnabled(PREVIEW, false) });
+  u.host.props = { context: contextFor() }; u.mount();
+  const p = h.render().refreshAppRuntime(); h.pending[0].resolve({ feature_flags: all(true) }); await p;
+  u.host.props = { context: contextFor() }; u.host.componentDidUpdate();
+  u.host.start(); await settleForeground();
+  assert.ok(u.nodes(u.tree()).some(n => n.props.testID === 'piece-canonical-text'));
+  h.emit('background'); u.host.props = { context: contextFor() };
+  assert.equal(u.tree(), null); u.host.componentDidUpdate();
+  h.emit('active'); u.host.props = { context: contextFor() }; u.host.componentDidUpdate();
+  assert.equal(u.tree(), null);
+  h.pending[1].resolve({ feature_flags: all(true) }); await settleForeground();
+  u.host.props = { context: contextFor() }; u.host.componentDidUpdate();
+  assert.ok(u.nodes(u.tree()).some(n => n.type === 'Button'));
+  assert.ok(!u.nodes(u.tree()).some(n => n.props.testID === 'piece-canonical-text'));
+  assert.equal(u.calls.length, 1, 'foreground never automatically generates/replays Piece');
+  u.host.componentWillUnmount(); h.cleanupEffects();
+});
+
+test('effect replay restarts an interrupted bootstrap even when the existing gate is single-flight', async () => {
+  const h = harness(); h.render(); h.flushEffects();
+  const first = h.render().refreshAppRuntime();
+  // AppRuntimeBootstrapGate may still be waiting for its first promise, so
+  // its own repeated effect cannot be relied on to start another request.
+  h.cleanupEffects(); h.setupEffectsAgain();
+  assert.equal(h.pending.length, 2);
+  h.pending[0].resolve({ feature_flags: all(true), maintenance_message: 'old mount' });
+  await first; assert.equal(h.render().isFeatureEnabled(PREVIEW, true), false);
+  h.pending[1].resolve({ feature_flags: all(true) }); await settleForeground();
+  assert.equal(h.render().runtime.loading, false);
+  assert.equal(h.render().isFeatureEnabled(PREVIEW, false), true);
+  assert.notEqual(h.render().runtime.maintenanceMessage, 'old mount');
+  h.cleanupEffects();
 });

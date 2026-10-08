@@ -1,4 +1,5 @@
-import React, { createContext, useCallback, useContext, useMemo, useRef, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { AppState } from "react-native";
 
 import { apiGet } from "./lib/apiClient";
 import { PIECE_FEATURE_DEFAULTS, isPieceFeatureFlag, normalizePieceFeatureFlags, withoutPieceFeatureFlags, isPieceFeatureEnabled } from "./features/piece/pieceRuntime";
@@ -126,6 +127,7 @@ export function AppRuntimeProvider({ children }) {
   const [runtime, setRuntime] = useState(INITIAL_RUNTIME_STATE);
   const refreshSequence = useRef(0);
   const latestRuntime = useRef(INITIAL_RUNTIME_STATE);
+  const restartInterruptedRefresh = useRef(false);
 
   const refreshAppRuntime = useCallback(async () => {
     const sequence = ++refreshSequence.current;
@@ -146,6 +148,11 @@ export function AppRuntimeProvider({ children }) {
       // current snapshot, not a stale true value for this promise's caller.
       if (sequence !== refreshSequence.current) return latestRuntime.current;
       const nextRuntime = buildRuntimeState(payload);
+      // A background/unknown-state bootstrap may update normal app metadata,
+      // but it cannot authorize a cached Piece presentation on the next resume.
+      if (AppState.currentState !== "active") {
+        nextRuntime.featureFlags = withoutPieceFeatureFlags(nextRuntime.featureFlags);
+      }
       latestRuntime.current = nextRuntime;
       setRuntime(nextRuntime);
       return nextRuntime;
@@ -167,11 +174,59 @@ export function AppRuntimeProvider({ children }) {
     }
   }, []);
 
+  useEffect(() => {
+    let listening = true;
+    let previousAppState = AppState.currentState;
+
+    const invalidatePiecePresentation = (publish) => {
+      // Fence a request that began before this lifecycle boundary. No server
+      // operation is cancelled or retried, and no non-Piece flag is reset.
+      refreshSequence.current += 1;
+      const invalidated = {
+        ...latestRuntime.current,
+        featureFlags: withoutPieceFeatureFlags(latestRuntime.current.featureFlags),
+      };
+      latestRuntime.current = invalidated;
+      if (publish) setRuntime(invalidated);
+    };
+
+    const subscription = AppState.addEventListener("change", (nextAppState) => {
+      if (!listening || nextAppState === previousAppState) return;
+      previousAppState = nextAppState;
+      if (nextAppState !== "active") {
+        invalidatePiecePresentation(true);
+        return;
+      }
+      // The existing refresh synchronously clears cached Piece=true. This is
+      // one bootstrap per active transition, never a preview generation/retry.
+      // Its failure state is already published by the existing runtime owner.
+      void refreshAppRuntime().catch(() => {});
+    });
+
+    if (previousAppState !== "active") invalidatePiecePresentation(true);
+    else if (restartInterruptedRefresh.current) {
+      // Effect replay can cancel the bootstrap while the child gate is still
+      // single-flight. Restart that interrupted read instead of leaving loading
+      // stuck; this is not a retry of generation or a failed server operation.
+      restartInterruptedRefresh.current = false;
+      void refreshAppRuntime().catch(() => {});
+    } else setRuntime(latestRuntime.current);
+    // Initial active startup remains owned by AppRuntimeBootstrapGate.
+    return () => {
+      listening = false;
+      restartInterruptedRefresh.current = latestRuntime.current.loading && refreshSequence.current > 0;
+      subscription.remove();
+      invalidatePiecePresentation(false);
+    };
+  }, [refreshAppRuntime]);
+
   const isFeatureEnabled = useCallback(
     (name, fallback = true) => {
       const key = String(name || "").trim();
       if (!key) return Boolean(fallback);
-      if (isPieceFeatureFlag(key)) return isPieceFeatureEnabled(key, latestRuntime.current);
+      if (isPieceFeatureFlag(key)) {
+        return AppState.currentState === "active" && isPieceFeatureEnabled(key, latestRuntime.current);
+      }
       const value = runtime?.featureFlags?.[key];
       return typeof value === "boolean" ? value : Boolean(fallback);
     },
