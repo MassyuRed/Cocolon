@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u168 内容修正（2026-10-08 JST・未配置）**：「まだ昨日の方針が決まっていない」等の昨日を名詞区間に保ち、現在の未完了状態が分析から抜ける問題を補正。共有の既存未完了判定内で完全名詞/現在否定hostと帰属境界を証明し、時制と属性を同期。Analysisのmarker必須・原文・否定・主体非推定・更新/比較/保存は維持。分析324＋identity1 PASS、共有限定35 PASS/開始版でも同じ既存6 FAIL。合成8全文と実RN表示model一致。STRUCTURE_MAP_DELTA_NONE、API/DB/DTO/RN製品変更0。未配置・実DB/実機/商品受入れ未確認。詳細は06／API handoff末尾u168。u167の昨日名詞付き未完了4例の保留は当時の状態であり、今回この限定範囲を回復。
+
 **u167 内容修正（2026-10-08 JST・未配置）**：変化／未完了の「今日疑問」「今日方針」等を名詞へ吸収して確定する誤解析を補正。結果にまだ時点parserがないため未解析部分を保留し、別の完全な場面・行動・原文証拠を保持する。「今日の疑問」「昨日分の疑問」等の完全な名詞境界と既存の行動／場面の日語解析は維持。共有witnessで元から保留される昨日付き未完了は未対応のまま。Analysis3suite 323 tests／2087 subtests PASS、合成8全文と実RN表示model一致、保存再表示を確認。STRUCTURE_MAP_DELTA_NONE、共有owner・API/DB/DTO/RN製品変更0。実DB・実機・商品受入れ未確認。詳細は06／API handoff末尾u167。
 
 **u166 内容修正（2026-10-08 JST・未配置）**：4文目以降の完全な本人過去所在が表示優先度だけで分析から抜け、「場面は未確定」となる不一致を補正。既存Analysisの場面証拠判定でrequired/shouldを同等に扱い、optional・不確実な帰属・不完全節は従来どおり保留する。肯否定・今日/昨日・明示順序・原文証拠・補足/訂正/撤回を保持。分析3suite計320 tests／2050 subtests PASS、合成7全文と実RN表示model一致、再生成を禁止した保存再表示を確認。STRUCTURE_MAP_DELTA_NONE。共有owner・API/DB/DTO/RN製品変更0。実DB・実機・商品受入れ未確認。詳細は06／API handoff末尾u166。過去u110/u111/u118のSCENE required限定は当時の実装記録であり、この限定修正後の条件ではない。
