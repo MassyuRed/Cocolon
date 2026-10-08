@@ -60,3 +60,32 @@ The complete copies were used to generate and replay the bounded synchronization
 Obtain the adoption decision for this exact source-reference GET binding. Then apply and verify the candidate in each repository, connect server-effective flags and the saved/terminal input boundary to the existing InputPieceActionArea, and complete the same-input development-screen path. No synthetic enabled/eligible values may become application configuration.
 
 Native visual preview and image extraction/save/share, capabilities/quota, and actual Auth/device checks remain unfinished. Approval of the GET binding alone is not approval for deployment, migration, production activation, payment, release, or changes to Emlis/Analysis ownership. automatic_progression=false.
+
+## 2026-10-08 continuation — runtime prerequisite, separate from GET adoption
+
+The runtime-only continuation applies the previously uploaded, locally tested B14-B candidate to three application/test paths in the same commit as this appendix. It does not apply any of the three source-reference candidate patches above. Their adoption status, API URL boundary and prior checks remain unchanged.
+
+Base: Cocolon `f2e9343da68e32b512beb0bd39ce1ba8622f6ec7`, tree `a6c309efbc85cbd0c1608e9618e6e336392ff25e`. The four commits after the earlier `c78b0b1f` baseline added only these source-reference handoff files. Fresh checks preserved all eight prior preview source/test blobs and verified the existing AppRuntimeContext preimage `720cd7a747061adf280ff8c12f654d4e1a6be1a2` and absence of the two new runtime paths.
+
+| Applied path | Verified resulting Git blob | Scope |
+|---|---|---|
+| AppRuntimeContext.js | 2b61828af315bdbfa87715461cc0dc529bdfe79b | Existing bootstrap projection: exact Piece flags default OFF; pending/failure invalidation; latest-started refresh wins. Non-Piece defaults/version/child placement retained. |
+| features/piece/pieceRuntime.js | 9e32f43671f975f53c1eb1998d3e0a40bcecfb9b | Pure RN presentation projection of the eight existing PCE-7 names. Missing, invalid and unknown Piece flags cannot inherit generic fallback=true. No authorization or readiness computation. |
+| tests/piece-v2-runtime.test.js | 923a566c080c36ceab1a56bd20df6bb255cf5e0b | Previous candidate's 27 cases, unchanged; not 27 newly written tests in this continuation. |
+
+Re-executed in this continuation with Node v22.16.0:
+
+```text
+node --test tests/piece-v2-contracts.test.js tests/piece-v2-state-models.test.js tests/piece-v2-preview-display.test.js tests/piece-v2-runtime.test.js
+189 passed / 0 failed / 0 skipped / 0 cancelled
+```
+
+This is the unchanged prior 162 plus the prior runtime candidate's 27. It is separate from the earlier source-reference candidate's 198-case result above; they are not combined or presented as a new HTTP integration run. React hooks, JSX linkage, HTTP and native primitives are test doubles. Git blob identities tie the applied code to the locally tested full bytes. Real React reconciliation, Hermes/native device, live HTTP/Auth/DB, CI, full repository and independent review remain unverified.
+
+The current API branch was rechecked at `93c26f7c6f76963a10dc349dce2ef7b81654f96f`. Its `api_app_bootstrap.py` still returns no Piece flags. This RN change therefore leaves Piece OFF; it neither supplies nor enforces server flags and does not make InputScreen or native image export usable. Foreground/session bootstrap refresh and PIECE_FEATURE_DISABLED handling also remain unfinished. The existing provider placement and bootstrap gate files are unchanged.
+
+Formal-document synchronization remains incomplete: this appendix updates the existing handoff, not the canonical Piece entry/current map/manifest or overall map bodies. The source-reference DocSync patch remains unapplied and must be reconciled with this runtime addition, not blindly replayed as a complete synchronization. Current entry identity was freshly checked, but the recovered local entry/manifest copies in this continuation did not match the current entry/manifest identities; they were not written over the remote originals. Overall maps were retrieved and relevant roles/path indexes checked, but not every historical map line was reread. Fresh System Context prepare was not executed. None of these missing checks is credited as complete.
+
+Next work stays on the same saved-input-to-preview path: reconcile canonical documentation, obtain the separately required GET-binding decision before applying that candidate, implement server-effective flag supply/enforcement, and connect the saved/terminal input boundary to InputScreen. No source_ref, enabled or eligible value may be fabricated from raw/Emlis text. Native image creation/extraction/save/share and actual device checks remain unfinished. The October 7 screen connection and October 10 completion targets are not credited by this runtime-only step.
+
+This continuation changes no backend, database, environment variable, dependency, deployment, build, production feature activation, main branch, merge, user data, Emlis or Analysis ownership. automatic_progression=false. Branch publication and subsequent remote verification are recorded in the continuation result; blob creation alone is not treated as a branch update.

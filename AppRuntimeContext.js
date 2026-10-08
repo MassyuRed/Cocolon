@@ -1,8 +1,10 @@
-import React, { createContext, useCallback, useContext, useMemo, useState } from "react";
+import React, { createContext, useCallback, useContext, useMemo, useRef, useState } from "react";
 
 import { apiGet } from "./lib/apiClient";
+import { PIECE_FEATURE_DEFAULTS, isPieceFeatureFlag, normalizePieceFeatureFlags, withoutPieceFeatureFlags, isPieceFeatureEnabled } from "./features/piece/pieceRuntime";
 
 const DEFAULT_FEATURE_FLAGS = Object.freeze({
+  ...PIECE_FEATURE_DEFAULTS,
   account_delete_enabled: true,
   emlis_threads_enabled: false,
   myweb_mock_enabled: false,
@@ -24,13 +26,13 @@ function normalizeFeatureFlags(rawFlags) {
   if (rawFlags && typeof rawFlags === "object" && !Array.isArray(rawFlags)) {
     for (const [key, value] of Object.entries(rawFlags)) {
       const normalizedKey = String(key || "").trim();
-      if (!normalizedKey) continue;
+      if (!normalizedKey || isPieceFeatureFlag(normalizedKey)) continue;
       if (typeof value === "boolean") {
         nextFlags[normalizedKey] = value;
       }
     }
   }
-  return nextFlags;
+  return { ...nextFlags, ...normalizePieceFeatureFlags(rawFlags) };
 }
 
 function parseVersionParts(value) {
@@ -117,31 +119,50 @@ const AppRuntimeContext = createContext({
   runtime: INITIAL_RUNTIME_STATE,
   featureFlags: INITIAL_RUNTIME_STATE.featureFlags,
   refreshAppRuntime: async () => INITIAL_RUNTIME_STATE,
-  isFeatureEnabled: (name, fallback = true) => Boolean(fallback),
+  isFeatureEnabled: (name, fallback = true) => isPieceFeatureFlag(String(name || "").trim()) ? false : Boolean(fallback),
 });
 
 export function AppRuntimeProvider({ children }) {
   const [runtime, setRuntime] = useState(INITIAL_RUNTIME_STATE);
+  const refreshSequence = useRef(0);
+  const latestRuntime = useRef(INITIAL_RUNTIME_STATE);
 
   const refreshAppRuntime = useCallback(async () => {
-    setRuntime((prev) => ({
-      ...prev,
+    const sequence = ++refreshSequence.current;
+    // Do not expose cached Piece=true while checking a newer server state.
+    // Keep the previous non-Piece flags, version data and child placement.
+    const pending = {
+      ...latestRuntime.current,
       loading: true,
       error: null,
-    }));
+      featureFlags: withoutPieceFeatureFlags(latestRuntime.current.featureFlags),
+    };
+    latestRuntime.current = pending;
+    setRuntime(pending);
 
     try {
       const payload = await apiGet("/app/bootstrap", { auth: false });
+      // A late success cannot undo a newer failure/OFF response. Return the
+      // current snapshot, not a stale true value for this promise's caller.
+      if (sequence !== refreshSequence.current) return latestRuntime.current;
       const nextRuntime = buildRuntimeState(payload);
+      latestRuntime.current = nextRuntime;
       setRuntime(nextRuntime);
       return nextRuntime;
     } catch (error) {
-      setRuntime((prev) => ({
-        ...prev,
-        loaded: true,
-        loading: false,
-        error,
-      }));
+      if (sequence === refreshSequence.current) {
+        const failed = {
+          ...latestRuntime.current,
+          loaded: true,
+          loading: false,
+          error,
+          featureFlags: withoutPieceFeatureFlags(latestRuntime.current.featureFlags),
+        };
+        latestRuntime.current = failed;
+        setRuntime(failed);
+      }
+      // Preserve the existing rejection contract; obsolete errors do not
+      // replace a newer successful global runtime state.
       throw error;
     }
   }, []);
@@ -150,6 +171,7 @@ export function AppRuntimeProvider({ children }) {
     (name, fallback = true) => {
       const key = String(name || "").trim();
       if (!key) return Boolean(fallback);
+      if (isPieceFeatureFlag(key)) return isPieceFeatureEnabled(key, latestRuntime.current);
       const value = runtime?.featureFlags?.[key];
       return typeof value === "boolean" ? value : Boolean(fallback);
     },
