@@ -290,6 +290,10 @@ vertical76/storage15/saved period13/API6＝110 PASS。6合成本文と既存RN�
 
 ### 3.10 u109 行動後の過去感情
 
+**u180 丁寧形の行動後compound（2026-10-09 JST・未配置）**：明示SELFの完全な実行済み行動＋後/あと（に）、またはて/でから、＋落ち着きました／嬉しかったです／うれしかったですを共有final pairへ限定追加する。格付き名詞1〜2項、原文全文一致・文境界・帰属・有限活用を証明し、引用/報告/夢/疑問/句点後の認知・撤回hostを保留する。Analysis compiler変更0で既存PAST_FEELING/feeling/past、右端の省略主体非推定、OBSERVED_ORDERと原文証拠、後続の明示順序、補足/訂正/撤回/期間比較を維持する。
+
+Emlisは既存source-owned action/changeの原文順序を全recoveryで実現し、行動によるsupportへ広げない。MATERIAL_WEIGHT、または新3形だけのRELATIONAL_NONCOLLAPSEを、既存作者のfocal関係検査と独立readerの同一関係検査で受ける。有限丁寧語尾を常体へ戻し、感情の明示SELFをEmlis自身の発話にしない。既存名詞変化の右端「自分」などは除去しない。最終5suite565 PASS／2889 subtests／3 SKIP、合成8全文/RN model一致、保存再読を確認。u179のcompound見送りは履歴として保持し、この有限範囲を更新する。実DB/本人実機/商品受入れ未確認。詳細は06/API handoff末尾u180。
+
 **u179 丁寧形の単独過去感情（2026-10-08 JST・未配置）**：u178の単独明示SELFに、落ち着きました／嬉しかったです／うれしかったですを追加する。前者は共有global positive語形に不在でreaction既定negativeとなるため、既存shared finalのno-projection部で、explicit/current-input claim、required/should、memo単独span、current_user/reaction/feeling/negative/feeling/current_inputと全文有限形を照合してpositive/positive_change/current_changeへ補正する。global keyword regex・pair投影・Safetyは変更しない。
 
 新3形全てのAnalysis受理に、同じshared source-host証明（明示本人主語、原source一致、文境界、引用/報告/夢/疑問/後続依存接尾の保留）を要求する。既に共有positiveの嬉/うれ2形も報告prefix検査を省略しない。PAST_FEELING/SELF/positive/feeling/past、原文出典、既存の後続明示順序を保ち、丁寧さだけを期間差にしない。主語省略/程度/否定/他時点を推測しない。

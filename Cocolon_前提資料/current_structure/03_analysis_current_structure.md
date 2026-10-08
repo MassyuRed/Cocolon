@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_analysis_current_structure
 title: "分析構造 — Current Structure"
-revision_date: "2026-10-08 JST"
+revision_date: "2026-10-09 JST"
 document_role: "ANALYSIS_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -13,6 +13,8 @@ automatic_progression: false
 # 分析構造 — Current Structure
 
 ## 0. Current conclusion
+
+**u180 内容修正（2026-10-09 JST・未配置）**：u179で見送った「行動した後／してから、落ち着きました／嬉しかったです／うれしかったです」を限定して保持。共有finalの全文・帰属・有限行動/感情・順序証拠を要求し、既存Analysisの型・省略主体非推定・原文・後続順序・更新/比較を維持する。Emlisは既存原文順序の経路で全recoveryを通し、support/因果を追加しない。報告/認知/撤回host、名詞SELF欠落、後続文付き生成停止を最終reviewで修正。最終5suite565 PASS／2889 subtests／3 SKIP（Emlis実保存runtime未設定）。Analysis8全文/RN model一致、合成RPC保存再読、独立inverseと48後続条件を確認。STRUCTURE_MAP_DELTA_NONE、Analysis compiler/API/DTO/DB/RN/Safety製品変更0。未配置・実DB/本人実機/商品受入れ未確認。以下u179のcompound未完了は当時の状態で、この3形の限定範囲だけ更新。詳細は06/API handoff末尾u180。
 
 **u179 内容修正（2026-10-08 JST・未配置）**：「私は落ち着きました／嬉しかったです／うれしかったです」の単独過去感情を保持。共有finalで落ち着きましたの誤ったnegative既定値を全文/帰属根拠に限って補正し、Analysisの3有限形に同じsource-host条件を要求する。型・時制・明示順序・更新/比較/原文を保つ。行動後の3丁寧形compoundは、試行するとEmlisに根拠のないsupport断定が増えるactual出力を確認したため追加を不採用とし、欠落と連動する残件を保持。Analysis358 tests／2799 subtests、共有限定134＋identity1成功。Analysis8全文/RN model一致、保存後再生成なし再読、Emlis6全文を確認。STRUCTURE_MAP_DELTA_NONE、API/DTO/DB/RN/Safety製品変更0。未配置・実DB/本人実機/商品受入れ未確認。以下u178の未認定形保留は上記の単独範囲だけ更新。詳細は06/API handoff末尾u179。
 
