@@ -290,6 +290,12 @@ vertical76/storage15/saved period13/API6＝110 PASS。6合成本文と既存RN�
 
 ### 3.10 u109 行動後の過去感情
 
+**u179 丁寧形の単独過去感情（2026-10-08 JST・未配置）**：u178の単独明示SELFに、落ち着きました／嬉しかったです／うれしかったですを追加する。前者は共有global positive語形に不在でreaction既定negativeとなるため、既存shared finalのno-projection部で、explicit/current-input claim、required/should、memo単独span、current_user/reaction/feeling/negative/feeling/current_inputと全文有限形を照合してpositive/positive_change/current_changeへ補正する。global keyword regex・pair投影・Safetyは変更しない。
+
+新3形全てのAnalysis受理に、同じshared source-host証明（明示本人主語、原source一致、文境界、引用/報告/夢/疑問/後続依存接尾の保留）を要求する。既に共有positiveの嬉/うれ2形も報告prefix検査を省略しない。PAST_FEELING/SELF/positive/feeling/past、原文出典、既存の後続明示順序を保ち、丁寧さだけを期間差にしない。主語省略/程度/否定/他時点を推測しない。
+
+行動後compoundの3丁寧形追加は未採用。試行でEmlisに「行動が感情を支えている」という根拠のないsupport断定が新たに生じたため、pair追加を撤去して従来の保留を維持した。この欠落とsupport説明の修正を一体の残件とする。Analysis358 tests／2799 subtests、共有限定134＋current identity1成功、8全文/RN model一致、保存再読とEmlis6全文を確認。実DB/本人実機/商品受入れは未確認。詳細は06/API handoff末尾u179。
+
 **u178 明示SELFの単独過去感情（2026-10-08 JST・未配置）**：この節の従来の単独感情保留を、完全な本人主語（私/僕/ぼく/俺/おれ/わたし/自分は、既存主語読点可）＋既存5有限形に限り更新する。memo単独span・全文境界・explicit/current-input claim・required/should、current_user/positive、安心はvalue/value/fact、他形はreaction/feeling/feeling、positive_change/current_change等の共有witnessを照合する。fragment/range/thread/dependency付き核は保留。pastは全文有限形から確定し、共有current_inputを現在時制にせず、actor既定値から主語省略をSELFにしない。元のscalar/UTF-8/hash/source_partsとPAST_FEELING/feeling/pastを保持する。
 
 この完全SELF感情の証拠IDを、既存の同一field・隣接・明示「その後／それから」・後続fact/pastによる順序起点へ追加する。未知文・希望・別source・撤回/訂正を橋渡しせず、原因や改善を補わない。句点/改行/semicolon等の直後に「わけではない／と思う／とは言えない」等の依存接尾が続くときは、新しい単独許可だけを保留して未解析hostを切り捨てない。これは任意の後文による訂正の一般理解ではない。主語省略、落ち着きました等の未認定形、否定/程度修飾、夢/伝聞等の既存境界は維持する。

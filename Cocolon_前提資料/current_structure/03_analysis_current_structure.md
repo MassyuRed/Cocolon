@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u179 内容修正（2026-10-08 JST・未配置）**：「私は落ち着きました／嬉しかったです／うれしかったです」の単独過去感情を保持。共有finalで落ち着きましたの誤ったnegative既定値を全文/帰属根拠に限って補正し、Analysisの3有限形に同じsource-host条件を要求する。型・時制・明示順序・更新/比較/原文を保つ。行動後の3丁寧形compoundは、試行するとEmlisに根拠のないsupport断定が増えるactual出力を確認したため追加を不採用とし、欠落と連動する残件を保持。Analysis358 tests／2799 subtests、共有限定134＋identity1成功。Analysis8全文/RN model一致、保存後再生成なし再読、Emlis6全文を確認。STRUCTURE_MAP_DELTA_NONE、API/DTO/DB/RN/Safety製品変更0。未配置・実DB/本人実機/商品受入れ未確認。以下u178の未認定形保留は上記の単独範囲だけ更新。詳細は06/API handoff末尾u179。
+
 **u178 内容修正（2026-10-08 JST・未配置）**：「私は安心した／嬉しかった」等、本人を明記した単独の過去感情が抜ける問題を補正。既存5有限形の全文と共有根拠が一致するmemo節だけをPAST_FEELING/SELF/feeling/pastへ保持し、隣接する「その後／それから」の過去行動へ既存条件で接続する。主語省略・他者・未認定形、否定/認知へ続く未閉包hostは保留し、未知文・別source・撤回/訂正を越えない。Analysis355 tests／2685 subtests PASS、7合成全文と最終実RN表示model一致、実service＋合成RPCで保存後再生成なし再読を確認。STRUCTURE_MAP_DELTA_NONE、共有owner/API/DTO/DB/RN製品変更0。未配置・実DB/本人実機/商品受入れ未確認。以下u177等の単独感情保留は当時の状態で、今回の明示SELF・5有限形の範囲だけ更新。詳細は06/API handoff末尾u178。
 
 **u177 内容修正（2026-10-08 JST・未配置）**：u176で残した「行動した後／してから、安心した等。その後／それから、行動した」の感情末尾からの順序欠落を限定修正。完全pairと全文境界を証明したPAST_FEELING/feeling/pastの証拠IDだけを起点に認め、感情の型・主体・出典を保持する。別field/source、未解析文、希望、撤回/置換箇所を越えて接続しない。Analysis349 tests／2417 subtests PASS、7合成全文と実RN表示model一致、実service＋合成RPCの保存後再生成なし再読を確認。STRUCTURE_MAP_DELTA_NONE、共有owner/API/DTO/DB/RN製品変更0。未配置・実DB/本人実機/商品受入れ未確認。以下u176の「感情結果の後続接続は保留」は当時の状態で、今回の既存完全pair範囲だけ更新。詳細は06/API handoff末尾u177。
