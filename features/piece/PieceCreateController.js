@@ -23,7 +23,7 @@
  * integration remain outside this bounded continuation. No new dependencies.
  */
 import { PieceApiError, preparePiecePreviewRequest, requestPiecePreview } from './pieceApi';
-import { createPiecePreviewState, closePiecePreview, beginPiecePreview, completePiecePreview, failPiecePreview, retryPiecePreview, readPiecePreviewView } from './piecePreviewModel';
+import { createPiecePreviewState, closePiecePreview, beginPiecePreview, completePiecePreview, failPiecePreview, retryPiecePreview, readPiecePreviewView, expirePiecePreview } from './piecePreviewModel';
 
 export function createPieceCreateController(configuration = {}) {
   const now = typeof configuration?.now === 'function' ? configuration.now : Date.now;
@@ -191,6 +191,12 @@ export function createPieceCreateController(configuration = {}) {
     return () => { listeners.delete(listener); };
   }
 
+  function refresh() {
+    if (disposed) return;
+    state = expirePiecePreview(state, clock());
+    notify();
+  }
+
   function dispose() {
     if (disposed) return;
     disposed = true;
@@ -201,5 +207,5 @@ export function createPieceCreateController(configuration = {}) {
     clearAttempt();
   }
 
-  return Object.freeze({ setContext, getView, start, retry, close, subscribe, refresh: notify, dispose });
+  return Object.freeze({ setContext, getView, start, retry, close, subscribe, refresh, dispose });
 }
