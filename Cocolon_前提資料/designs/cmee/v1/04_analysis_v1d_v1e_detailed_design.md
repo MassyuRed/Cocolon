@@ -260,6 +260,8 @@ actorはUNSPECIFIEDであり共有frameのcurrent_user既定値を本人の行�
 
 **u169 限定補正（2026-10-08 JST）**：u168の昨日名詞付き未完了と完結した本人書字の併存を、共有 `_source_prefix_opens_report` の既存責務内で区別する。明示SELF7表記＋は/が/も＋任意の読点/半角・全角空白＋既存単一名詞区間＋を＋書いた/書きましただけを閉じた書字と証明する。一般属格/別主体/主語なし/報告内容/次・以下等は保留、別文/別fieldの報告は残す。Analysisの正規present_unfinished、否定/current_input/UNSPECIFIED、exact evidence・更新・比較・保存・同一文/図の条件は不変。既存owner/route内の修正でSTRUCTURE_MAP_DELTA_NONE。Emlis複合文の受取能力は別残件、検証と制約は06/API handoff u169。
 
+**u174 限定補正（2026-10-08 JST）**：上記u169の目的語1項に、同じ単一名詞文法の場所/媒体1項（に/で）を前後どちらかに追加できる。「考えをノートに書いた／ノートに考えを書いた／職場で記録を書きました」が後続未完了を伝聞化しない。前後両方・3項・格重複は保留し、既存の何/誰/次/以下/上記/下記/話/発言/引用/説明/報告/内容の拒否を目的語と場所/媒体の全区間へ適用する。一般属格/他者/引用/未閉包・他文/別fieldの報告条件、書いた/書きましたへの限定は不変。未完了は現在否定・主体未指定のまま、書字との因果/順序を推定しない。文章/図・補足/訂正/撤回・期間比較・保存再読を確認し、限定398 tests PASS。新しい文法ownerや依存方向は増やさずSTRUCTURE_MAP_DELTA_NONE。Emlis複合出力の既存停止は未解消。詳細は06/API handoff u174。
+
 ### 3.8 u107 過去行動の後の有限変化
 
 同一memo spanの完全なSELF過去行動＋後/あと（に）読点＋名詞の有限変化に限定する。共有Stage1のaction/change 2核、explicit/required/explicit_current_input・fact/past、action_before_change、source_fragmentのexact範囲とrequired user_stated_relation/typed_projection:perfective_action_before_bounded_changeを要求する。同じmarkerは夢/伝聞の長いhostにも付くため、全文を両端と接続語で完全に解釈できなければaction片側も採用しない。

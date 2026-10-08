@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u174 内容修正（2026-10-08 JST・未配置）**：「考えをノートに書いた。まだ昨日の方針が決まっていない」で後半が落ちる問題を補正。共有Planの本人書字判定に、既存の目的語1項＋場所/媒体（に/で）1項の前後配置を保持し、完結した書字を伝聞導入と取り違えない。引用/報告・他者・属格・3項等の保留は維持。Analysis339＋identity1＋共有限定58＝398 tests PASS、Analysis2297 subtests PASS。合成Analysis8全文と実RN表示model一致、保存後の再生成なし再読を確認。Emlis単独3本文は開始helperと一致、複合2例は両版とも既存生成停止。STRUCTURE_MAP_DELTA_NONE、Analysis専用source/API/DTO/DB/RN製品変更0。未配置・実DB/本人実機/商品受入れ未確認。詳細は06/API handoff末尾u174。
+
 **u173 内容修正（2026-10-08 JST・未配置）**：「難しい会議を担当した／難しい職場にいた」の名詞修飾を独立constraintと誤認し、ROLE/SCENEと明示順序を落とす問題を共有Planで補正。完全名詞＋既存過去担当/所在5形だけを区別し、難しい・対象・否定・時点を保持する。独立制約、未閉包、伝聞/夢/疑問、別constraint語の条件は維持。最終Analysis337＋identity1＝338 tests／2276 subtests、共有限定84 tests、計422 tests PASS。合成Analysis9全文と実RN表示model一致、保存後再生成なし再読、Emlis5全文を確認。STRUCTURE_MAP_DELTA_NONE、Analysis専用source/API/DTO/DB/RN製品変更0。未配置・実DB/本人実機/商品受入れ未確認。詳細は06/API handoff末尾u173。
 
 **u172 内容修正（2026-10-08 JST・未配置）**：「良い会議を担当した」等の良いを独立valueと誤認してROLEを落とす問題を共有Plan内で補正。本文確認で発見した名詞記録/メモのaction誤認も同じ完全過去担当に限定して直し、担当対象の実行へ昇格させない。原文/否定/時点/順序/更新/比較/保存を維持。最終Analysis335＋identity1、共有限定56、計392検査PASS。合成Analysis9全文と実RN表示model一致、Emlis5全文確認。STRUCTURE_MAP_DELTA_NONE、API/DTO/DB/RN製品変更0。未配置・実DB/実機/商品受入れ未確認。詳細は06/API handoff末尾u172。

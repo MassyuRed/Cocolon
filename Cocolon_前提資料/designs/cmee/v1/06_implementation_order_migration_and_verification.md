@@ -14888,3 +14888,12 @@ STRUCTURE_MAP_DELTA_NONE。既存共有owner内の補正、API6/Cocolon3の計9f
 最終Analysis337＋identity1＝**338 tests／2276 subtests PASS**、共有限定84PASS、計422 tests PASS。合成保存再読、Analysis9全文と実RN表示model一致、Emlis5全文を確認。旧u136の難しいイベント企画の保留期待1件を、今回回復したROLEの完全意味確認へ更新した。新ADD検査誤期待とcollection path修正の経過はAPI handoff末尾u173へ記録。Emlis復唱/定型性・unknown反復・以前の共有検査残差は継承し、全repo PASSとはしない。
 
 STRUCTURE_MAP_DELTA_NONE、既存共有owner内の補正。API6/Cocolon3、計9file modify。Analysis専用source/API/DTO/DB/RN製品変更0、未配置・実DB/本人実機/商品受入れ未確認、限定TECHNICAL_CREDIT。main/merge/deploy/env/native build操作0。開始HEAD・実測・identity・検証scope・残件の再開正本はAPI handoff同日u173と追跡source/test。既存PR3/30反映後にremote対象全内容・変更path集合・headを確認する。weeklyの最小実動作優先を維持し、全表現対応を実機の前提にしない。
+
+
+## 2026-10-08 JST u174 — 媒体・場所付き書字の後の未完了を保持（未配置）
+
+「私は考えをノートに書いた。まだ昨日の方針が決まっていない」で後半が落ちる問題を、共有Planの既存書字/伝聞判定で補正。目的語1項に、同じ有限名詞の場所/媒体（に/で）1項を前後どちらかへ許す。3項・格重複・引用/報告・属格・他者・未閉包・別文/別fieldの保留を維持。現在否定・主体未指定の未完了を、書字と一緒に文章/図へ残し、因果/順序を追加しない。
+
+最終Analysis339 tests／2297 subtests、共有限定58、identity1、計398 tests PASS。合成Analysis8全文をrootが読み、実RN表示modelの全文/identity/node順/edge/unknown/注記/競合/比較が8/8一致。実保存service＋合成RPCで再生成なし再読を確認。新検査のDTO text key誤参照は検査のみ訂正、旧期待変更/skip/xfail0。Emlis単独3本文は開始helper復元比較と一致、複合2例は両版ともLIMITED_RECEPTION_CAPABILITY_GAP_STOP。Emlis品質の解消/開始版全suite検証とはしない。
+
+開始API96b7c5a／Cocolon51bef30、Codex Work rootが単一write owner、同環境read-only reviewに具体的blockerなし。System Context prepareはPUBLICATION_RECOVERY_AMBIGUOUSで失敗し追跡原典を直接参照。STRUCTURE_MAP_DELTA_NONE、既存計9file modify・新規0、Analysis専用source/API/DTO/DB/RN製品変更0。未配置・実DB/本人実機/商品受入れ未確認、main/merge/deploy/native操作0。限定TECHNICAL_CREDIT・商品NOT_CLEAR。詳細・identity・修正前失敗・残件はAPI handoff末尾u174と詳細04 §3.7、current03。同helperの属格/3項、未認定の落ち着きました、従来の共有/Emlis残差・実機確認を完了へ変換しない。
