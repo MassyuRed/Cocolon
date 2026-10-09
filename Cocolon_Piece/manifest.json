@@ -1,5 +1,5 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v24",
+  "schema_version": "cocolon.piece.workstream_manifest.v26",
   "generated_at": "2026-10-09 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
@@ -14,9 +14,9 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "3ef160d39dedddbb51a09878df160d3d0fb2045c",
-    "raw_sha256": "200421b9621103ba7bf4e5eba596bace30ede3ad172a5923f1e4fc5cb36d3e53",
-    "utf8_bytes": 35720
+    "git_blob_sha1": "2f2271787b295488df00a01fefffced0a7a98e53",
+    "raw_sha256": "95bda652f9281e2d9d8ed9cace76b3a284fa1c8c55ca0f31d82234b0b6fb2b35",
+    "utf8_bytes": 40698
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -56,7 +56,7 @@
     "pce9a_b01": "COMPLETE",
     "pce9a_b02a": "FILE_ONLY_TECHNICAL_ACCEPTANCE_PASSED__LIVE_APPLY_0",
     "analysis_roadmap": "REFER_TO_ANALYSIS_CURRENT_STRUCTURE__HISTORICAL_NOT_ACTIVATED_STATE_NOT_CURRENT",
-    "next_piece_group": "SAME_SAVED_INPUT_TO_PREVIEW_SCREEN__SERVER_EFFECTIVE_FLAGS_AND_INPUTSCREEN_UNCONNECTED",
+    "next_piece_group": "SAME_SAVED_INPUT_TO_PREVIEW_SCREEN__INPUTSCREEN_AND_ADMITTED_RUNTIME_COMPOSITION_UNCONNECTED",
     "automatic_packet_progression": false,
     "pce9a_b02a_red": "FROZEN_UNCHANGED__NATIVE_POSTGRESQL_1_PASS",
     "pce9a_b02a_implementation": "EXACT5_PRESERVED__EXACT6_SELECTORS_PUBLISHED",
@@ -67,7 +67,8 @@
     "pce9b_b08_hiragana_role_binding": "REMOTE_DRAFT_4033E1F_EXPLICIT_ROLE_ONLY__HISTORICAL_CI_676_PASS__NOT_B8_COMPLETE",
     "pce9a_b07_mutation_http": "REMOTE_DRAFT_0C1F69E__HTTP_152_PASS__ISOLATED_POSTGRESQL_13_PASS__REAL_AUTH_POSTGREST_DEVICE_PENDING__NOT_B7_COMPLETE",
     "pce9c_source_ref_transport": "CODE_APPLIED_UNREGISTERED__HTTP36_RN239_LOCAL_PASS__NOT_LIVE",
-    "pce9d_runtime_projection": "RN8_FLAGS_FOREGROUND_AND_AUTH_EVENT_REFRESH_APPLIED__DISABLED_RESPONSE_PENDING"
+    "pce9d_runtime_projection": "RN8_FLAGS_FOREGROUND_AUTH_REFRESH_PREVIEW_DISABLED_AND_SAVED_SOURCE_HOST_APPLIED__INPUTSCREEN_PENDING",
+    "pce9a_runtime_preview_control": "API_AA6CF858_RESOLVER_BOOTSTRAP_SOURCE_GET_PREVIEW_POST_GATES__CODE_DISABLED__NOT_B14A_COMPLETE"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -169,15 +170,15 @@
     "historical_scope": "B2-A checkpoint only. Current Piece API reference is b07_mutation_http.api_commit; current next work is next_group."
   },
   "next_group": {
-    "id": "B5_B",
-    "name": "AUTHENTIC_PREVIEW_ISSUANCE_AND_PUBLIC_SAFETY_ADMISSION_TO_DEVELOPMENT_SCREEN",
+    "id": "B10",
+    "name": "SAVED_INPUTSCREEN_TO_EXISTING_PREVIEW_HOST",
     "environment": "CHAT_PRO_OK",
     "state": "EXISTING_MAINLINE_UNFINISHED__NOT_AUTOMATIC_ACTIVATION",
-    "current_map_section": "29",
-    "current_entry_section": "25",
+    "current_map_section": "31.4",
+    "current_entry_section": "27",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261003.md",
     "weekly_review_section": "5.3",
-    "first_unfinished_work": "Authoritative server-effective flags/per-operation enforcement and saved-input InputScreen wiring for the same preview. No fabricated enabled/eligible or live activation.",
+    "first_unfinished_work": "Bind InputScreen saved-success ID/current owner/observation state and a stable caller-owned key to the existing savedInput host. Host GET-to-preview is reflected at c1485bf1. Production readiness/TTL/renderer/routes and real Auth/DB/device remain unfinished.",
     "repeat_completed_b2a_or_b7": false,
     "production_migration_apply_effect": 0,
     "automatic_progression": false
@@ -234,9 +235,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "0764be1875340a81babbf4fa2c6b04155e3b9d6c",
-    "raw_sha256": "19ea84a6c560955e69730df2b1ea2dd32ab826cfe98d508521dfa0b30a23d67b",
-    "utf8_bytes": 121169
+    "git_blob_sha1": "57be69fee3633fcbcbb902647f00badebee43d8b",
+    "raw_sha256": "ae980e3f9da313a712e903774055c6cc631ee35319f127be82fbdae15d8df99c",
+    "utf8_bytes": 134940
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -413,15 +414,15 @@
     "piece_documentation_paths": 3,
     "api_changed_paths_in_recorded_b7_unit": 4,
     "api_changes_in_this_document_sync": 0,
-    "documentation_state": "STAGED_CANDIDATE__REMOTE_APPLICATION_AND_POSTVERIFY_REQUIRED",
+    "documentation_state": "STAGED_IN_EXISTING_DRAFT_PR",
     "documentation_full_byte_application_verified": true,
-    "structure_map": "STRUCTURE_MAP_DELTA_PREPARED_NOT_REMOTE",
+    "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
     "live_database_apply": 0,
     "production_registration": 0,
     "release_effect": 0,
     "product_acceptance": false,
     "automatic_progression": false,
-    "verification_scope": "FULL_LOCAL_DOCUMENT_BYTES_VERIFIED__REMOTE_POSTVERIFY_REQUIRED"
+    "verification_scope": "LOCAL_DOCUMENT_BYTES_VERIFIED__REMOTE_RESULT_RECORDED_SEPARATELY"
   },
   "b06_q3_context_fence": {
     "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
@@ -959,5 +960,103 @@
     "live_auth_db_native_verified": false,
     "product_acceptance": false,
     "automatic_progression": false
+  },
+  "server_preview_control_recovery_20261009": {
+    "api_commit": "aa6cf858ee8d258772fc1d9b96ac5d27133c53df",
+    "api_parent": "fa174b8ffd308be1374cc4bacc108e3eff0e2c6b",
+    "rn_unchanged_commit": "d553a6a864e09aab87961f40a67aec557ae45f59",
+    "api_reapplied": false,
+    "source_blob_map": {
+      "ai/services/ai_inference/api_app_bootstrap.py": {
+        "git_blob_sha1": "033a3e88c785728ec4d48234ebe270dbdd86d8ea",
+        "raw_sha256": "7bb3245a4b006a35d790c4c50261e73c28bb83a8eed6367c59db99b24b4b0031",
+        "utf8_bytes": 6396
+      },
+      "ai/services/ai_inference/api_piece_v2.py": {
+        "git_blob_sha1": "07ba489b2a22107bd9e2993a62a917c75efbf903",
+        "raw_sha256": "1f26a39922d5d05f42735c990af1c7f3bae95de9b2546837a80728f18bf845ff",
+        "utf8_bytes": 19518
+      },
+      "ai/services/ai_inference/piece_v2_runtime_control.py": {
+        "git_blob_sha1": "7ae5cfb17c86992ece6f59020d8a2064776f4920",
+        "raw_sha256": "89d107b6cf18cfec0304747a9bc08476066289dc6b3bb5bd098e56f7ee809159",
+        "utf8_bytes": 2972
+      },
+      "ai/services/ai_inference/piece_v2_source_ref_http.py": {
+        "git_blob_sha1": "ddc8a3f215a7645a8f6bdf03fb0dfee56171fc37",
+        "raw_sha256": "67b18d999fd3cf127362f0f18b19d230a2f6df9a76c7ee2c54ef02f621aaea7e",
+        "utf8_bytes": 4832
+      },
+      "ai/tests/piece_v2/test_b05_source_ref_http_candidate.py": {
+        "git_blob_sha1": "92380927018e383920834f65c2e6411699076926",
+        "raw_sha256": "b24cbbe8ac5afaed02f74a6fe1eb65f9a8417dae0a8216f21fa31194ef3674ae",
+        "utf8_bytes": 7016
+      },
+      "ai/tests/piece_v2/test_b14a_piece_v2_runtime_control.py": {
+        "git_blob_sha1": "27221ee906e0610b811d2cf2e4d173fb65153096",
+        "raw_sha256": "9a35e564870504c5f9c0a485de9818b6b38d19feb9d46ea3e093271ef7c2bb5d",
+        "utf8_bytes": 16859
+      }
+    },
+    "native_fixture_blob": "726686b572d16b752ef5ac4fc5dc4ad3144b953b",
+    "native_suite_rerun": false,
+    "api_tests": 86,
+    "api_prior_cases": 36,
+    "api_existing_new_parameter": 1,
+    "b14a_cases": 49,
+    "rn_tests": 282,
+    "rn_source_or_test_change": false,
+    "actual_asgi_packets_to_rn": 4,
+    "verification": "SYNTHETIC_AUTH_SOURCE_SERVICE_RPC_REACT_NATIVE_BOUNDARIES",
+    "source_get_preview_post_enforced": true,
+    "all_operations_enforced": false,
+    "production_state_supplier_implemented": false,
+    "input_screen_connected": false,
+    "live_auth_db_native_verified": false,
+    "ci_verified": false,
+    "product_acceptance": false,
+    "automatic_progression": false
+  },
+  "saved_input_host_20261009": {
+    "rn_commit": "c1485bf13e4e3a1c57b52037cb13d802f568f308",
+    "rn_parent": "d553a6a864e09aab87961f40a67aec557ae45f59",
+    "scope": "EXISTING_DETACHED_HOST_SAVED_SOURCE_GET_TO_SEPARATE_PREVIEW_ACTION",
+    "source_blob_map": {
+      "screens/input/InputPieceActionArea.js": {
+        "git_blob_sha1": "5ca09a4b72f9f727825346a48324d114fa1b5fe4",
+        "raw_sha256": "5d5159d12906ee31bb0da805a6fb12235806eefa4f52937fed55286fe20e6e13",
+        "utf8_bytes": 12870
+      },
+      "tests/piece-v2-saved-input-host.test.js": {
+        "git_blob_sha1": "e4c729828e0e6b540ccf25c2af1ae9b06000f7fd",
+        "raw_sha256": "1fa2333587d78dfbf8d54c7e712adad57ca48ef053a3c3f54fd8c425f36ff58a",
+        "utf8_bytes": 12265
+      }
+    },
+    "rn_tests": 303,
+    "prior_tests_unchanged": 282,
+    "new_tests": 21,
+    "same_final_tests_original_host": {
+      "pass": 282,
+      "fail": 21,
+      "skip": 0,
+      "cancelled": 0
+    },
+    "verification": "REAL_SOURCE_MODULES__SYNTHETIC_REACT_NATIVE_AUTH_HTTP_RUNTIME_CLOCK",
+    "input_screen_connected": false,
+    "source_get_host_caller_connected": true,
+    "source_get_ui_refresh_connected": true,
+    "new_key_generation": false,
+    "automatic_source_read_or_preview": false,
+    "api_tests_rerun": false,
+    "live_auth_db_native_verified": false,
+    "ci_verified": false,
+    "independent_review": false,
+    "product_acceptance": false,
+    "automatic_progression": false,
+    "historical_prose_transcription_deltas": [
+      "Current map historical 10/08 lead: foreground刷新は保持する -> foreground刷新を保持する.",
+      "Current map historical gaps item 5: 新API／RN・native renderer -> 新API／RN／native renderer."
+    ]
   }
 }

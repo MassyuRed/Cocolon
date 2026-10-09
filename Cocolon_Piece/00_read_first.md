@@ -10,6 +10,9 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
+**最新の再開位置は§27／current map §31です。既存の開発用InputPieceActionAreaへ保存入力IDの参照取得を接続しました。コードはCocolon `c1485bf1`、今回のRN検査は303 PASS。InputScreen本体への組込み・実環境・実機は未完了です。以前の記録と件数は各実行時点の履歴です。**
+**最新の再開位置は§26／current map §30です。中断前のAPI `aa6cf858` の実効フラグ・preview操作時制御を確認し、再開後API86件・RN282件を再検査しました。InputScreen・稼働構成・実機は未完了です。以下の以前の記録は履歴として保持します。**
+
 **2026-10-09現在：既存AppRuntimeContextへ認証通知時のPiece表示フラグ無効化とbootstrap再取得を接続した。保存参照GET・RN本文プレビュー・既定OFF・foreground刷新を継承する。サーバー実効flag／操作時強制、InputScreen、PIECE_FEATURE_DISABLED、実機の完成ではない。現在の追加差分は末尾の2026-10-09節、10/08以前の状態と検査件数は各時点の履歴として読む。**
 **2026-10-08現在：保存参照GETの非稼働コードをAPI `0312a0fc3b07f8e46344d5746cafd7760458badd`へ反映し、RN `df88a0e0f46cdbfc005039177983dbec740efb3f`で明示GETと既存preview要求への受渡しを反映した。先行の本文プレビュー、既定OFF、再取得失敗時OFF、foreground刷新は保持する。これはInputScreen・実サーバーの登録／実効flag・実機画像の完成ではない。参照取得URLの採用と、稼働環境への登録・有効化を分離する。現在の内訳は末尾の2026-10-08節を優先し、以下の10/07以前の結果は履歴として保持する。**
 
@@ -61,7 +64,7 @@ Q&A:
 
 ## 3. Phase state
 
-現在の実装・残件は§24／current map §28を優先する。次の段落と状態表は10/07以前の履歴であり、未着手判定に使わない。
+現在の実装・残件は§27／current map §31を優先する。次の段落と状態表は10/07以前の履歴であり、未着手判定に使わない。
 
 最新の実装状態は§21〜22／current map §25〜26です。保存・消費済みcontext照合・本人履歴読取りを継承し、役割明記ひらがな名とB7公開切替・削除HTTPを反映済みとして分けて記録します。643／676 PASSは各旧commitの履歴であり、B7 runのHTTP 152件・native SQL接続13件とは別の実行結果です。公開安全性の実判定・永続preview発行・開発画面接続は未完了で、B5／B6／B7／B8全体完了へ換算しません。以下のPCE-0〜B2-Aは成立済み設計・過去実装の履歴として保持します。Analysisは自身のcurrent mapに従い、以下の旧未着手記述を再開判断へ使用しません。
 
@@ -727,3 +730,23 @@ PCE-7 §12の停止応答の受取りを、既存Piece API／controller／host�
 Nodeの対象6suiteは282 PASS、失敗・skip・取消し0。既存260件の本文・期待値は保持し、追加22件の同じ最終検査は修正前11 PASS／11 FAILから修正後22 PASS。React／認証／通信／端末は代替であり、実機成功ではない。詳細・現在の制約はcurrent map §29。
 
 サーバー実効flagと操作時強制、InputScreenと保存入力GETの画面接続は未完了。今回の503はRN受取側の限定対応であり、稼働サーバーからの発行を確認したものではない。実DB・env・deploy・build・新依存・main／merge・有効化・実ユーザーデータ・旧Q&A・Emlis／Analysis変更0。`automatic_progression=false`。
+
+
+## 26. 2026-10-09 — 中断復旧：サーバー実効フラグとpreview操作時制御
+
+中断前にAPI `aa6cf858ee8d258772fc1d9b96ac5d27133c53df` へ反映されたB14-Aの限定差分を再取得し、作り直さず検証した。既存8フラグの単一resolverを既存bootstrap/startupへ接続し、source-ref GETとpreview POSTを認証後・処理前・返却前で制御する。POSTはRPC送信直前にも確認する。requestedとreadyは別のサーバー内部値で、欠落・不正値はOFF。実環境の設定供給・readinessの成立を今回実装・承認したものではない。
+
+今回再開後の検査はAPI86 PASS、無変更RN282 PASS、失敗・skip・取消し0。APIの内訳は従来source-ref36件＋停止codeの既存parameter展開1件＋B14-A49件。件数を新しい欠陥解消数へ換算しない。実ASGIが返したbootstrap ON/OFFとGET/POST停止応答の4packetを既存RNへ渡し、modal終了・既存bootstrap再取得・自動retry/本文復活なしを確認した。React・認証・保存/生成・RPC・HTTP transportは代替を含み、実DB・実機・商品受入れではない。詳しい内訳と限界はcurrent map §30。
+
+次は本人保存入力からInputScreenへつなぐ同じpreview経路。稼働構成のreadiness/TTL/renderer供給、ルート登録、実認証/DB/端末は別に未完了。取消し・保存済み操作等の全フラグ制御、capabilities/quota、native画像生成/取り出し/保存/共有も残る。今回のAPI制御はsource-ref GETとpreview POSTの範囲であり、B14-A全体・10/10目標を完了扱いにしない。実DB・env・deploy・build・依存・main/merge・有効化・利用者データ・旧Q&A・Emlis/Analysis変更0。`automatic_progression=false`。
+
+
+## 27. 2026-10-09 — 保存入力の参照取得を既存開発hostへ接続
+
+Cocolon `c1485bf13e4e3a1c57b52037cb13d802f568f308` で、既存 `screens/input/InputPieceActionArea.js` と追加検査 `tests/piece-v2-saved-input-host.test.js` を反映した。既存の確定済みrequestを受け取るcontext方式を保持し、保存入力ID・認証照合用owner・呼出し元が保持する同一キーだけを受け取るsavedInput方式を追加した。現在のAppRuntimeContextが許可する場合だけ、明示操作で既存source-ref GETを呼ぶ。返った7項目を既存controllerへ渡し、別の「この入力をPieceにする」操作で既存preview POSTを呼ぶ。取得成功だけで自動生成・保存・画像化しない。
+
+同じowner/keyへ別の要求を付け替えない。入力・アカウント・runtime・背景化・破棄後の古い取得結果を採用せず、現在の停止応答では既存bootstrapを一回再取得する。取得中の二重送信を避け、通信失敗の再試行は本人の明示操作だけにする。本文・3hash・recipeを既存表示経路へそのまま渡し、原入力やEmlis本文を再送・保存しない。元の入力へ戻った時に、同じcontroller contextでも参照取得完了の表示更新を通知する不具合修正を含む。
+
+今回の最終Node検査は303 PASS／FAIL0／SKIP0／cancelled0。既存6suiteの282件をbyte不変で保持し、追加21件の同じ最終test bytesを元hostへ戻して実行すると21 FAIL、既存282 PASSだった。React/native・HTTP/Auth・runtime・時刻は検査用代替であり、InputScreenをmountした結果、実Auth/DB/端末・CI・商品受入れではない。API86件とASGI4packetは前回復旧の記録で、今回の再実行ではない。
+
+**InputScreen本体は未変更・未接続。** 現在の入力保存成功 `submitResult.id` と本人・観測表示の既存経路を読み取ったが、本hostへ保存IDとキーを供給する実画面の組込みまでは完了していない。次はその同じ保存入力→既存host→previewを接続する。機能有効化・稼働設定のreadiness/TTL/renderer供給・API登録・実認証/DB/端末・capabilities/quota・native画像保存共有も未完了で、10/10目標やB10全体を完了にしない。前回の未同期§26/map§30を本3資料候補へ含め、反映結果はGitHubの実ファイルと別に照合する。`automatic_progression=false`。

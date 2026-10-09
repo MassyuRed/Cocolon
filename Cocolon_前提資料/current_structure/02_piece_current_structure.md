@@ -2,7 +2,7 @@
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
 revision_date: "2026-10-09 JST"
-latest_api_implementation: "0312a0fc3b07f8e46344d5746cafd7760458badd"
+latest_api_implementation: "aa6cf858ee8d258772fc1d9b96ac5d27133c53df"
 latest_storage_candidate: "d71fdb40238f2c99751f0c20e578ab654f72308e"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
@@ -16,8 +16,11 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**最新の再開位置はPiece入口§27／本map §31です。既存の開発用InputPieceActionAreaへ保存入力IDの参照取得を接続しました。コードはCocolon `c1485bf1`、今回のRN検査は303 PASS。InputScreen本体への組込み・実環境・実機は未完了です。以前の記録と件数は各実行時点の履歴です。**
+**最新は§30です。API `aa6cf858` の単一実効フラグresolver・bootstrap投影・source-ref GET/preview POSTの操作時制御が反映済みで、再開後API86件・RN282件を確認しました。稼働構成・InputScreen・実機は未完了です。以前の「サーバー制御未実装」は各時点の履歴として区別します。**
+
 **2026-10-09現在：既存AppRuntimeContextへ認証通知時のPiece表示フラグ無効化とbootstrap再取得を接続した。保存参照GET・RN本文プレビュー・既定OFF・foreground刷新を継承する。サーバー実効flag／操作時強制、InputScreen、PIECE_FEATURE_DISABLED、実機の完成ではない。現在の追加差分は末尾の2026-10-09節、10/08以前の状態と検査件数は各時点の履歴として読む。**
-**2026-10-08現在：保存参照GETの非稼働コードをAPI `0312a0fc3b07f8e46344d5746cafd7760458badd`へ反映し、RN `df88a0e0f46cdbfc005039177983dbec740efb3f`で明示GETと既存preview要求への受渡しを反映した。先行の本文プレビュー、既定OFF、再取得失敗時OFF、foreground刷新は保持する。これはInputScreen・実サーバーの登録／実効flag・実機画像の完成ではない。参照取得URLの採用と、稼働環境への登録・有効化を分離する。現在の内訳は末尾の2026-10-08節を優先し、以下の10/07以前の結果は履歴として保持する。**
+**2026-10-08現在：保存参照GETの非稼働コードをAPI `0312a0fc3b07f8e46344d5746cafd7760458badd`へ反映し、RN `df88a0e0f46cdbfc005039177983dbec740efb3f`で明示GETと既存preview要求への受渡しを反映した。先行の本文プレビュー、既定OFF、再取得失敗時OFF、foreground刷新を保持する。これはInputScreen・実サーバーの登録／実効flag・実機画像の完成ではない。参照取得URLの採用と、稼働環境への登録・有効化を分離する。現在の内訳は末尾の2026-10-08節を優先し、以下の10/07以前の結果は履歴として保持する。**
 
 **GitHub反映済みのAPI再開位置は `0c1f69ed25d6e5bb7a887c125ae900ab61ee4996`（§26）です。§25に役割明記ひらがな人名の修正と旧CI 676 PASSを分離して保持します。§26のB7公開切替・削除HTTPは反映済みで、2026-10-07の既存隔離PostgreSQL workflowにおいてB7 HTTP 152件とnative SQL接続13件が成功しています。実Auth／実PostgREST／実機の確認ではなく、B7全体・商品合格は未成立です。公開安全性の実判定→永続preview発行→開発画面という本線は未完了です。§24以前の結果は各commitの履歴として保持します。**
 
@@ -211,13 +214,13 @@ shared tableのnon-Piece row／consumerは、exact Piece predicateとwriter／re
 
 ## 8. Current gaps
 
-現在の未完了は§28.3へ集約する。以下は9/30時点の残件であり、後続のB2-B／B3／B4／B5永続化／B6保存接続が未実装という意味には使用しない。
+現在の未完了は§31.4へ集約する。以下は9/30時点の残件であり、後続のB2-B／B3／B4／B5永続化／B6保存接続が未実装という意味には使用しない。
 
 1. user-visible routeはold Q&Aのまま。
 2. 保存原入力・保存状態から本文／recipeの内部組立と画像設定だけの変更を§20まで実装。本文に表れていない選択感情、refined補足、保存済みpreview発行、HTTP／RNは未接続。
 3. canonical recipe／実測layout／Linux開発PNGは§14・16〜20で実行済み。製品native renderer／export receipt／端末保存・共有は未完了。
 4. B02-Aは§4.3のとおり既存5ファイル＋6reader切替、native凍結試験1 PASSのfile-only技術受入れまで成立。live catalog／全HTTP読取／権限の全行列は未確認。
-5. B02-Aの本map・Piece current entry・manifestは同じ資料更新単位で同期。保存preview・新API／RN・native renderer／実機・商品受入れは未完了であり、内部bridge成立から商品合格へ昇格しない。
+5. B02-Aの本map・Piece current entry・manifestは同じ資料更新単位で同期。保存preview・新API／RN／native renderer／実機・商品受入れは未完了であり、内部bridge成立から商品合格へ昇格しない。
 6. CMEE Piece adapterとB5-B内部組立のdisabled候補はMashの継続指示で§20まで接続した。runtime activationは未承認・未実施であり、候補実装と混同しない。
 
 CMEE Piece detailed design candidate:
@@ -947,3 +950,93 @@ System Context prepareは今回も部分コピーの `tools.cocolon_context` 不
 今回の503は停止コードのRN受取側の限定対応であり、サーバーの発行statusや実効flag制御の検証ではない。source GETの停止コードは読めるが、GETの画面callerは未接続。次の直接残件はサーバー実効flag供給・操作時強制と、本人の保存入力→InputScreen→同じpreviewの接続。native画像生成／保存／共有、capabilities／quota、実認証／DB／端末、商品受入れと10/10目標は未完了。
 
 System Context prepareは部分コピーのmodule不足で不成立、既存正本の原典直接参照を継続した。恒久incidentを全文再読し、同じ会話で確認した作業規則・全体地図の関連役割・最新10/03週次方針と今回の対象現物を照合した。全歴史地図・全sourceの新規監査は主張しない。資料の準備とbranch反映・再取得確認は別に記録する。実DB・env・deploy・build・新依存・main／merge・有効化・実ユーザーデータ・旧Q&A・Emlis／Analysis変更0。`automatic_progression=false`。
+
+
+## 30. 2026-10-09 — 中断済みB14-A実装の復元確認
+
+### 30.1 反映済みの現在地と今回の再開
+
+API `aa6cf858ee8d258772fc1d9b96ac5d27133c53df` は中断前の反映済みcommitで、親は `fa174b8ffd308be1374cc4bacc108e3eff0e2c6b`。再開時Cocolonは `d553a6a864e09aab87961f40a67aec557ae45f59` のままで、当該APIの資料同期は未実施だった。APIを書き直さず、現在のsource/testを復元・再検査し、本map・既存入口・manifestの同じ3点へ同期する。以下の再検査と、GitHubの資料反映後確認は区別する。
+
+PCE-7の既存8フラグとPCE-8 B14-A ownerを使うCODE_DISABLEDのpreview sliceである。requestedは機能の要求、readyはその機能の非フラグ前提が成立したことをサーバー構成側が渡す値であり、要求・TTL・renderer・source_refからreadinessを推論しない。今回その構成をproductionへ供給する処理や環境変数は追加していない。新しい認証owner・公開管理API・flag名・依存は0。
+
+| API path（ai/以下） | 現在の責務 |
+|---|---|
+| `services/ai_inference/piece_v2_runtime_control.py` | app-scopedなrequested/readyの両方が厳密なtrueのときだけ有効とし、既存PCE-7のフラグ依存も照合。欠落・不正はOFF。プロセス共通cacheやクライアントoverrideなし。 |
+| `services/ai_inference/api_app_bootstrap.py` | 既存bootstrapとstartupに同じresolverの実効booleanだけを投影。非Piece情報は保持。requested/readyの内部値は返さない。 |
+| `services/ai_inference/piece_v2_source_ref_http.py` | 認証後・adapter呼出前・返却前にpreview flagを照合。既存7項目のsource_refとclosed errorを保持。停止は503/PIECE_FEATURE_DISABLED。 |
+| `services/ai_inference/api_piece_v2.py` | preview POSTの認証後・service前・RPC送信直前・返却前で同じflagを照合。観測済み停止をB5のエラー変換後も保持。既存要求・キー・TTL・renderer・本文projectionは保持。 |
+| `tests/piece_v2/test_b14a_piece_v2_runtime_control.py` | 49件のresolver/ASGI制御検査。source/service/認証/RPC等の境界は代替。 |
+| `tests/piece_v2/test_b05_source_ref_http_candidate.py` | 既存fixtureだけに明示的な合成ready/requestedを追加。従来検査本文・期待値を保持し、既存parameterが停止codeも検査。 |
+| `tests/piece_v2/db/test_b05_reviewed_preview_issuance.py` | 既存隔離app fixtureへの合成ready/requestedの5行追加だけ。今回このnative DB suiteは再実行していない。 |
+
+上記7pathの一commit比較を確認した。最初の6pathの実行用完全bytesは再取得したGit blobと一致し、追加のpure contractも既存の完全bytesを用いた。native fixtureは今回差分と対象行を確認したもので、全native suite再監査・実DB成功へ換算しない。
+
+### 30.2 操作時の停止と未完了境界
+
+OFFなら本人認証後に503/PIECE_FEATURE_DISABLEDを返し、原入力取得・生成service・RPCを始めない。未認証は401のまま。body受信中のOFFはservice開始を止め、生成後のOFFは未送信RPCを止める。送信済みRPCの処理中にOFFとなった場合は本文返却を抑止するが、既に送ったDB操作を取り消した・rollbackしたとはしない。自動retryは0。B5内のエラー変換や同一要求中の再ONで、いったん観測した停止を通常通信失敗へ戻さない。
+
+制御を接続したHTTP操作はsource-ref GETとpreview POSTだけである。preview取消し・変更、保存・所有者履歴/詳細/公開切替/削除等の全操作へ制御を追加した結果ではない。既存旧Q&A・Emlis・Analysisの経路を変更していない。安全性審査・source版照合・保存済み再送・本文とrecipeの整合をフラグで代替しない。
+
+### 30.3 再開後に実行した検査
+
+Python3.13.5 / FastAPI0.128.2 / Starlette0.50.0 / httpx0.28.1 / pytest9.0.2でAPI2suite **86 PASS**。Nodev22.16.0で無変更RN6suite **282 PASS**、FAIL/SKIP/cancelled0。API86は従来36＋既存parameterの停止code1＋B14-A49で、86個の新規欠陥修正ではない。中断commitに記録された49件の修正前41 FAIL/8 PASSは先行実行の記録として区別し、今回新たにそのREDを実行したとはしない。
+
+同じAPIの実ASGI応答4packet（bootstrap ON/OFF、source-ref GET停止、preview POST停止）を既存RNの実API/controller/host/runtimeへ渡した。サーバーOFF時のsource/service/RPC呼出し0、RNのプレビュー要求1回、初期を含むbootstrap取得2回、modal終了、再試行抑止、古い本文を戻さないことを確認した。source GETの停止解釈も確認したが、その画面callerは未接続。プローブの最初の失敗は公開viewに存在しないcode欄を読んだ確認スクリプトの誤りで、既存のmessage欄へ照合を修正した。製品コード・既存検査期待の修正ではなく、商品不具合として数えない。
+
+無関係なcancel storeのtop-level importはnever-call代替、API検査ではBearer/source/service/RPCと一部projection/bootstrap依存、RNではReact/Auth/timer/通信/native部品が代替である。実React/Hermes、実Supabase/Auth/PostgREST/DB、実CMEE生成、OS/端末、CI、独立review、商品受入れの成功ではない。完全bytes一致は対象範囲の根拠であり、全repositoryのcheckout・全検査成功ではない。
+
+### 30.4 同期・次の直接作業
+
+今回の原典確認は恒久incident全文、現在の作業ルール入口、同じ会話で確認済みのCURRENT_RULES/Rule18・全体地図01/01A/01B/01Cの関連役割・10/03週次方針、PCE-7/PCE-8、現在のsource/test/mapへ接続した。全歴史地図の全行や全sourceの新規監査は主張しない。fresh System Context prepare成功は未成立で、既存技術正本が認める原典直接参照を使用した。部分コピーの既知のmodule不足を追加の準備工程へ拡張しない。
+
+次の主作業は、本人の保存入力からInputScreenを通し同じpreviewを開く接続である。稼働構成のreadiness/TTL/renderer供給・ルート登録、実認証/DB/端末の一往復と必要な個別承認は別に残る。フラグだけで適格性・権限・renderer合格を作らない。取消し/保存済み等の未接続制御、capabilities/quota、native画像生成/取り出し/保存/共有、正式商品受入れも未完了。B14-A全体・B10全体・10/10目標を達成済みにしない。
+
+API source反映は中断前、Cocolon資料は本復旧での別repository変更であり、同時原子的反映ではない。旧source-ref・認証刷新・停止受取patchを再適用せず、既存履歴と前提を保持する。実DB・env・deploy・build・依存追加・main/merge・有効化・利用者データ・旧Q&A・Emlis/Analysis変更0。`automatic_progression=false`。
+
+
+## 31. 2026-10-09 — 保存入力IDから既存開発hostへのsource-ref接続
+
+### 31.1 実装と直接の接続
+
+Cocolon PR #30 `c1485bf13e4e3a1c57b52037cb13d802f568f308`、親 `d553a6a864e09aab87961f40a67aec557ae45f59`。API PR #3 `aa6cf858ee8d258772fc1d9b96ac5d27133c53df` は無変更。
+
+| path（Cocolon） | 今回の変更 |
+|---|---|
+| `screens/input/InputPieceActionArea.js` | 既存context方式を維持し、保存入力ID・本人照合用ID・呼出し元の同一キーだけを受け取るsavedInput方式を追加。既存runtime predicate→明示source-ref GET→既存controller→別の明示preview POSTを接続。新しいcontroller、API契約、生成作者を作らない。 |
+| `tests/piece-v2-saved-input-host.test.js` | 追加21件。実際の既存JS各ownerを評価し、保存参照取得とpreviewの別操作、否認、同じキー、遅着応答、runtime/背景化、同じ入力へ戻った時の表示更新を確認する。React/native/Auth/HTTP等は代替。 |
+
+    caller-supplied saved input ID + expected owner + unchanged POST key
+      -> existing current AppRuntimeContext predicate
+      -> explicit GET /emotion/piece/source-ref/{saved_input_id}
+      -> exact existing seven-field source_ref
+      -> existing PieceCreateController context, without start
+      -> separate explicit preview action
+      -> existing POST /emotion/piece/preview
+      -> same model / three-hash display check / full-text modal
+
+source-ref取得前に生成CTAは出さず、取得用操作だけを置く。取得成功を安全性・保存・export権限へ変換しない。原入力・Emlis/Analysis本文・tier・quota・tokenをhostへ加えず、キーを生成・正規化・交換しない。native画像の部品ではない。InputScreenから本hostへのimport/callerは、今回もまだない。
+
+### 31.2 状態・失敗・不変条件
+
+同じ本人/runtime内では前のrequest/keyの対応を既存controllerへ保持し、別の保存入力を同じキーへ付け替える要求を拒否する。入力・本人・キー・runtimeの変更はrender時点で旧表示を隠し、遅いGETを新しい状態へ採用しない。背景化・unmount・取得中のcloseでは試行を無効化する。取得中の連打は一回のGETに限定する。
+
+GETの停止は通常の通信失敗と分離し、現在の要求だけが既存bootstrapを一回再取得する。古い要求の停止は新しいアカウント/runtimeを再取得しない。失敗時の原文・認証情報・例外詳細を表示せず、既存の閉じたメッセージを使う。GETの一時失敗とPOSTの一時失敗の再試行は明示操作だけで、後者は同じ本文・キーを維持する。再取得・foreground・runtime復帰で本文を復活・再生成しない。
+
+同じ保存入力へ戻った後に、controllerが同じcontextのため通知を省略する場合にも、sourceのready遷移自身が表示更新を通知する。追加検査で未修正版の失敗を確認して修正した。React stateはrevision/openだけで、sourceや本文を保持しない。
+
+### 31.3 検証事実と限界
+
+Node v22.16.0で最終7suite、303 PASS／FAIL0／SKIP0／cancelled0。既存6suite282件の全bytesは添付復旧JSONの検証済み版と一致し、変更していない。追加21件の同じ最終test bytesを元hostへ戻した再実行は21 FAIL／既存282 PASSであり、collection/import失敗ではなくcall-phaseの失敗だった。既存hostへ戻した試験後、変更済みhostを復元した。初期のUUID正規表現不備とVMを跨ぐ配列比較のtest harness不備は別の途中失敗記録で、最終の21件の原因確認とは混同しない。
+
+実行したのは実際のPiece API/model/controller/hostのソースであるが、React reconciliation・native描画・HTTP/Auth・runtime publication・clockは代替である。成功例のsource/preview packetも合成で、実保存入力からのCMEE生成結果ではない。InputScreenのmount、実Auth/DB/端末、CI、独立review、商品受入れを実施したとはしない。前回API86件・ASGI4packetの再実行も行っていない。初期試行と最終RED/GREENのログは継続資料へ保持する。
+
+読取りは現行作業ルール、恒久incident全文、全体地図01/01A/01B/01Cとcurrent入口の関連範囲、10/03週次のPiece主経路・完成条件、PCE-6 RN/PCE-8 B10、対象現物を照合した範囲である。全歴史地図・全sourceの新規全面監査やfresh System Context prepare成功とはしない。原典直接参照を使用し、今回prepareを実行したとは記録しない。
+
+### 31.4 残件と次の一作業
+
+InputScreen本体への保存成功ID・本人/観測状態・同一キーの受渡しとhostの組込みが、次の直接残件である。`screens/InputScreen.js`の `submitEmotionInput`→`submitResult.id`→既存Emlis表示経路は読み取ったが、今回は変更していない。本hostの開発用接続を、実アプリの入力選択→preview完了へ昇格させない。
+
+稼働構成のreadiness/TTL/renderer供給・API登録、実認証/DB/端末の一往復、取消し/保存/履歴/削除等の残る操作制御、capabilities/quota、native画像生成/取り出し/保存/共有も残る。これらを削減・完了・承認済みにしない。前回の§30を含む入口・map・manifestの同期は、本候補の生成とGitHub実反映を分けて確認する。
+
+`STRUCTURE_MAP_DELTA_UPDATED`は本hostの保存参照取得責務と現行次作業の記録を指す。新しい地図や管理機構は追加しない。GPT-6 Astra Pro / CHAT_PRO_OK、華恋単一実行。実DB・env・deploy・build・依存・main/merge・有効化・利用者データ・旧Q&A・Emlis/Analysis変更0。B10全体・Piece全体・10/10完成・正式商品受入れは未成立。`automatic_progression=false`。
