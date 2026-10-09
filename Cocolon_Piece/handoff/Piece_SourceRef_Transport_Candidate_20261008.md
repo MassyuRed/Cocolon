@@ -1,4 +1,4 @@
-> Current continuation: the source-reference GET binding and non-running code application are recorded in the final section below. Earlier candidate/adoption-pending paragraphs are history, not the current restart instruction. Production registration and activation remain excluded.
+> Current continuation: the final 2026-10-09 section adds authenticated-session bootstrap refresh and synchronizes the pending Piece entry/current map/manifest. Source-reference GET adoption and its code reflection are retained; production registration, activation and device acceptance are still excluded.
 
 # Piece source_ref transport — inactive implementation candidate
 
@@ -205,3 +205,99 @@ checks and product acceptance remain unfinished. Source references cannot stand 
 for enabled/eligible/safety or renderer decisions. No DB/env/deploy/build/dependency/
 main/merge/activation/user-data/Emlis/Analysis change. The October 10 completion
 milestone is not credited. automatic_progression=false.
+
+
+## 2026-10-09 continuation — authenticated-session bootstrap freshness
+
+Execution owner: Karen / GPT-6 Astra Pro / CHAT_PRO_OK, single execution owner.
+Base Cocolon: `8297b2a76c172ec6550424accd62506dfa896b2d`.
+Code reflected and read back: `1492c9c875485809789b4ebaf7fa33403b2ea2fe` (source/test exact2).
+The four documentation paths are synchronized in this following revision.
+Base API read-only check: `fa174b8ffd308be1374cc4bacc108e3eff0e2c6b`.
+The Cocolon compare since `df88a0e0` contained only the three Analysis documents;
+all preceding Piece code is preserved. The API compare since `0312a0fc` contains
+Emlis/Analysis changes, not a new Piece route/flag implementation. No API write
+belongs to this continuation.
+
+### Scope fixed before publication
+
+This closes the existing PCE-7 section 12 client-session-refresh gap within the
+October 3 weekly review's same-input-to-preview path, not a new auth subsystem.
+Only AppRuntimeContext.js, tests/piece-v2-runtime.test.js, this existing handoff,
+Cocolon_Piece/00_read_first.md, Cocolon_前提資料/current_structure/02_piece_current_structure.md
+and Cocolon_Piece/manifest.json are publication targets. The latter three also
+reconcile the preceding continuation's still-unapplied document patch. Existing
+history is retained. Source-ref HTTP/RN patches must not be reapplied.
+
+### Implemented behavior
+
+The existing provider observes the existing Supabase client without changing
+AuthProvider or provider order. An auth event synchronously clears the eight
+Piece presentation flags and fences pre-event bootstrap results. A zero-delay
+callback makes the existing auth:false bootstrap read outside the auth callback.
+The callback never inspects or retains session payloads, tokens, user IDs or
+metadata, and no auth event grants authorization or supplies an effective flag.
+
+Event bursts replace one queued callback. Explicit/foreground refreshes cancel
+the pending duplicate. Backgrounding and cleanup cancel it; obsolete callbacks
+cannot clear a later timer or send requests. Effect setup replay restarts an
+interrupted queued refresh as well as the already supported in-flight refresh.
+Failures remain OFF without auto-retry. Non-Piece defaults/version semantics and
+child placement are unchanged. Shared bootstrap metadata is refreshed too.
+
+The existing preview host hides a displayed body after invalidation. A later
+bootstrap success permits only a new explicit action, never automatic preview
+regeneration, save, export or resurrection of the previous body. The source-ref,
+POST body/key, canonical text/content/recipe and three-hash contracts are unchanged.
+
+| Changed source/test | Exact resulting Git blob |
+|---|---|
+| AppRuntimeContext.js | a066c2e8b2002992bff718c3e371824fcac71a22 |
+| tests/piece-v2-runtime.test.js | 4e182649cd2e039a6f32c688bf1d35c2d4027012 |
+
+### Actual verification and limits
+
+Node v22.16.0. Baseline five-suite run: 239 PASS. Final five-suite run: 260 PASS,
+FAIL/SKIP/cancelled 0. New cases: 21. The first 20 cases produced 16 FAIL / 4 PASS
+against the prior source, while the existing runtime 41 all passed. One later
+obsolete-timer case failed against the first implementation (61 PASS / 1 FAIL)
+and passed after the timer identity fix. Prior test bodies/expectations are
+unchanged; only the existing runtime harness gains auth/timer doubles. The final
+identical 21 new cases were also rerun against the original source: 17 FAIL /
+4 PASS, while all 239 pre-existing cases passed (243 PASS / 17 FAIL total). Repeated
+runs and patch replay are not added to these counts.
+
+React hooks/JSX, auth event delivery, timers, HTTP and native components are
+synthetic boundaries. This is not real Supabase authentication, React/StrictMode,
+Hermes, OS lifecycle, actual HTTP/DB, CI, full-repository, independent-review or
+product-acceptance evidence. The earlier HTTP36 and ASGI-to-ESM results are history,
+not newly executed API results in this continuation.
+
+Supabase's official onAuthStateChange reference was checked for the synchronous
+callback and unsubscribe interface. The changelog markdown fetch was rejected by
+the web transport and the HTML index was unavailable; no claim of a complete
+changelog review is made. No SDK version or dependency is changed.
+
+### Documentation, read scope and remaining work
+
+The complete pending document preimages match the fresh GitHub identities:
+entry 5923b970b5bdfc2567a17b951ec393081b28c8ff;
+map e83b25d8b6ece7176cf411763470cb0535eace45;
+manifest ef62e730f69d09e87ae8c7d25907eb333f7e7f9f.
+Their old content and the supplied pending source-ref sections are retained, with
+this new state appended. The manifest binds the resulting complete entry/map.
+Publication success is established only by the subsequent branch/path/blob readback.
+
+The mandatory incident, current work rules/Rule18, System Context technical
+entry/direct-original fallback, current three-core/Piece maps, applicable overall
+map entries, October 3 weekly policy and relevant source were consulted. Fresh
+prepare failed: tools.cocolon_context is absent from this partial materialization.
+No fresh full historical-map or whole-source audit is claimed.
+
+Next direct gaps: authoritative server-effective flag supply and operation-time
+enforcement, saved-input InputScreen wiring and PIECE_FEATURE_DISABLED handling.
+Capabilities/quota, real Auth/DB/device flow, native image creation/extraction/
+save/share, release cutover and formal product acceptance remain unfinished.
+The October 10 target and B14-B as a whole are not credited. No live DB, env,
+deploy, build, dependencies, main/merge, activation, user data, old Q&A, Emlis or
+Analysis writes. automatic_progression=false.

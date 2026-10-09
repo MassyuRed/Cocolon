@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_piece_read_first
 title: "Cocolon Piece — Read First"
-revision_date: "2026-10-07 JST"
+revision_date: "2026-10-09 JST"
 decision_owner: "Mash"
 workstream: "Cocolon / Piece"
 document_status: "CURRENT_PIECE_WORKSTREAM_ENTRY"
@@ -9,6 +9,9 @@ automatic_progression: false
 ---
 
 # Cocolon Piece — Read First
+
+**2026-10-09現在：既存AppRuntimeContextへ認証通知時のPiece表示フラグ無効化とbootstrap再取得を接続した。保存参照GET・RN本文プレビュー・既定OFF・foreground刷新を継承する。サーバー実効flag／操作時強制、InputScreen、PIECE_FEATURE_DISABLED、実機の完成ではない。現在の追加差分は末尾の2026-10-09節、10/08以前の状態と検査件数は各時点の履歴として読む。**
+**2026-10-08現在：保存参照GETの非稼働コードをAPI `0312a0fc3b07f8e46344d5746cafd7760458badd`へ反映し、RN `df88a0e0f46cdbfc005039177983dbec740efb3f`で明示GETと既存preview要求への受渡しを反映した。先行の本文プレビュー、既定OFF、再取得失敗時OFF、foreground刷新は保持する。これはInputScreen・実サーバーの登録／実効flag・実機画像の完成ではない。参照取得URLの採用と、稼働環境への登録・有効化を分離する。現在の内訳は末尾の2026-10-08節を優先し、以下の10/07以前の結果は履歴として保持する。**
 
 **GitHub反映済みのAPI再開位置は `0c1f69ed25d6e5bb7a887c125ae900ab61ee4996`（§22／current map §26）です。B7公開切替・削除HTTPの実装と隔離PostgreSQL接続確認を反映し、役割明記ひらがな名と旧676 PASSは§21／map §25へ分離します。前回B7 runのHTTP 152件・native SQL接続13件の成功は、実Auth／実PostgREST／実機・商品合格を意味しません。公開安全性の実判定→永続preview→開発画面の本線は未完了です。§20以前は各commitの履歴として保持します。**
 
@@ -57,6 +60,8 @@ Q&A:
 ```
 
 ## 3. Phase state
+
+現在の実装・残件は§24／current map §28を優先する。次の段落と状態表は10/07以前の履歴であり、未着手判定に使わない。
 
 最新の実装状態は§21〜22／current map §25〜26です。保存・消費済みcontext照合・本人履歴読取りを継承し、役割明記ひらがな名とB7公開切替・削除HTTPを反映済みとして分けて記録します。643／676 PASSは各旧commitの履歴であり、B7 runのHTTP 152件・native SQL接続13件とは別の実行結果です。公開安全性の実判定・永続preview発行・開発画面接続は未完了で、B5／B6／B7／B8全体完了へ換算しません。以下のPCE-0〜B2-Aは成立済み設計・過去実装の履歴として保持します。Analysisは自身のcurrent mapに従い、以下の旧未着手記述を再開判断へ使用しません。
 
@@ -684,3 +689,33 @@ API `0c1f69ed25d6e5bb7a887c125ae900ab61ee4996`。詳細はcurrent map §26。既
 次の本線は公開安全性実判定→永続preview発行→同じ本文と画像設定の開発画面である。既存detector成功や内部組立物の存在を安全性判定へ昇格せず、PCE-4 S0〜S8の不成立を残したまま発行しない。B7の確認済み実装・隔離検証を作り直さず、3資料の更新後全文と適用差分を作成・照合済み。GitHub反映と反映後の再取得は別に確認し、ZIPだけでremote同期済みにしない。
 
 production未登録、共有DB・Render・RN・旧Q&A・Emlis/Analysis・merge/deploy変更0、`automatic_progression=false`。B7全体や10/07の画面接続・10/10完成を成立した扱いにしない。
+
+
+## 23. 2026-10-08 — 保存参照GET・RN受渡し・起動フラグの現在地
+
+最新の実装はAPI `0312a0fc`と、RN `df88a0e0`の `features/piece/pieceApi.js::requestPieceSourceRef`。対応する構造はcurrent map §27、API契約の追加は `pce6_api_db_rn_migration/Piece_API_CleanCutover_Design_20260808.md` §11。直前に提示した参照取得GETの採用・非稼働コード反映の範囲に対するMashの続行指示として実施し、実DB・デプロイ・有効化へ拡張していない。
+
+本人の保存入力IDから既存7項目のsource_refを取得し、別の明示操作で既存preview POSTへ渡す。GETだけで本文生成・保存・quota消費は起こさない。原入力やEmlis／Analysis本文を再送せず、source_refからeligible／enabledを推測しない。
+
+APIの別routerとRN関数は実装pathへ反映済みだが、app.py・InputScreenへ未登録。先行RN `c78b0b1f`の本文表示、`b03311fd`の8フラグ受取、`467cc589`のforeground刷新を作り直さない。新しい認証状態変更時の刷新とPIECE_FEATURE_DISABLED連携、サーバーの実効flag供給・操作時強制、保存後のInputScreen接続、native画像出力は未完了。
+
+今回HTTP36件、RN239件（既存203＋既存候補36）が成功。ASGIが返した2段階のJSONを実ESM4モジュールへ渡し、明示POST後のmodal全文と3hashの一致も確認した。認証・保存adapter・React/RN・通信は検査用代替を含み、実Auth／DB／実画面／native／CIの成功ではない。詳細とimport代替は既存handoff末尾の本続行節へ戻る。
+
+旧source-ref候補patchは履歴であり、現行コードへ再適用しない。旧DocSync候補は本改訂に含まれる現在地に追い付いていないため、盲目的に適用しない。今回の入口・map・manifest同期の結果は反映後のblob／head確認で別に記録する。System Context prepareは部分コピーにmoduleがなく失敗し、既存正本が許可する実ファイル直接参照を使用した。全repo・全歴史地図の新規監査ではない。
+
+次は同じ保存入力→preview→開発画面の未接続箇所を閉じる。文章微調整や履歴拡張を主作業へ置かず、default OFF・旧Q&A未切替・商品未受入れ・10/10目標の達成未確認を維持する。
+
+
+## 24. 2026-10-09 — 認証通知後の表示フラグ再取得
+
+コード反映先は `1492c9c875485809789b4ebaf7fa33403b2ea2fe`。今回の資料同期より先行する別commitで、source／testの2pathと反映後blobを確認した。
+
+既存 `AppRuntimeContext.js` が既存 `lib/supabase.ts` の認証通知を購読し、通知時にPieceの8表示フラグを同期的にOFFへ戻す。認証処理のコールバック内ではHTTPを呼ばず、通知後に既存 `/app/bootstrap` を一回再取得する。通知の連続は予約をまとめ、手動・foregroundの再取得が先に始まれば重複しない。背景化・破棄で予約を取り消し、古い応答は新しい状態へ戻さない。認証情報や本人IDをruntimeへ保持せず、通知そのものを権限・有効化と解釈しない。
+
+既存hostとの検査では、表示済み本文を認証通知で隠し、bootstrap成功後も古い本文を復活・自動再生成しない。本文・source_ref・API要求と同一キー・3hash・画像設定の意味は変えていない。App／AuthProvider／bootstrap gateの配置、非Pieceの既定値と版情報、既存foreground処理を維持した。共有bootstrapなので正常な他機能のmetadataも再取得されることは、明示した影響である。
+
+Node v22.16.0で260 PASS／FAIL0／SKIP0／cancelled0。既存239件を保持し、認証通知の21回帰検査を追加。最初の20件は未修正で16 FAIL／4 PASS、旧runtime41件は成功。取消済みtimerの追加1件は初版修正でFAILを再現し、最終版で解消した。旧検査の本文・期待値は変更せず、runtime harnessに認証通知／timerの代替を追加した。実React、Supabase Auth、HTTP、OS、端末での成功ではない。
+
+前回未反映だった入口・map・manifestの同期候補を現行preimageと照合し、今回の追加差分を同じ資料単位へ含めた。実際のGitHub反映はbranch／blobの再取得結果と区別して報告する。API／RNの反映済みsource-ref patchを再適用しない。詳細ownerと制約はcurrent map §28、実行記録は既存source-ref handoff末尾。
+
+次の直接残件はサーバー実効flag供給・操作時強制、保存入力からInputScreenへの接続、PIECE_FEATURE_DISABLED連携。今回をB14-B／10/10目標全体の完成とせず、実Auth／DB／端末の一往復・native画像出力・商品受入れは未完了のまま保持する。実DB・env・deploy・build・依存追加・main／merge・有効化・実ユーザーデータ・Emlis／Analysis変更0。`automatic_progression=false`。

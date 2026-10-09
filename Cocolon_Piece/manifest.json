@@ -1,6 +1,6 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v21",
-  "generated_at": "2026-10-07 JST",
+  "schema_version": "cocolon.piece.workstream_manifest.v23",
+  "generated_at": "2026-10-09 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
@@ -14,9 +14,9 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "5923b970b5bdfc2567a17b951ec393081b28c8ff",
-    "raw_sha256": "941fc752f69e5c4c8edf33d91a37d5216ddd872935020d3082a2e65939ac3243",
-    "utf8_bytes": 28098
+    "git_blob_sha1": "615d4185b415991f8a9cc1c7883a61073827f5e0",
+    "raw_sha256": "019e70033de0d8e46717921bb8ceefd0b36209b14120a2584e7518b1cc22a902",
+    "utf8_bytes": 34413
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -56,7 +56,7 @@
     "pce9a_b01": "COMPLETE",
     "pce9a_b02a": "FILE_ONLY_TECHNICAL_ACCEPTANCE_PASSED__LIVE_APPLY_0",
     "analysis_roadmap": "REFER_TO_ANALYSIS_CURRENT_STRUCTURE__HISTORICAL_NOT_ACTIVATED_STATE_NOT_CURRENT",
-    "next_piece_group": "ACTUAL_PUBLIC_SAFETY_ADMISSION_THEN_PERSISTED_PREVIEW_AND_DEVELOPMENT_SCREEN__DO_NOT_REIMPLEMENT_CONFIRMED_B7",
+    "next_piece_group": "SAME_SAVED_INPUT_TO_PREVIEW_SCREEN__SERVER_EFFECTIVE_FLAGS_AND_INPUTSCREEN_UNCONNECTED",
     "automatic_packet_progression": false,
     "pce9a_b02a_red": "FROZEN_UNCHANGED__NATIVE_POSTGRESQL_1_PASS",
     "pce9a_b02a_implementation": "EXACT5_PRESERVED__EXACT6_SELECTORS_PUBLISHED",
@@ -65,7 +65,9 @@
     "pce9a_b07_owner_reads": "HISTORICAL_E697D4F8_OWNER_GET_ONLY__CI_414_PASS__NOT_B7_COMPLETE",
     "pce9b_b08_latin_role_binding": "HISTORICAL_EE81B492_LATIN_ONLY__CURRENT_HIRAGANA_SCOPE_SEPARATE",
     "pce9b_b08_hiragana_role_binding": "REMOTE_DRAFT_4033E1F_EXPLICIT_ROLE_ONLY__HISTORICAL_CI_676_PASS__NOT_B8_COMPLETE",
-    "pce9a_b07_mutation_http": "REMOTE_DRAFT_0C1F69E__HTTP_152_PASS__ISOLATED_POSTGRESQL_13_PASS__REAL_AUTH_POSTGREST_DEVICE_PENDING__NOT_B7_COMPLETE"
+    "pce9a_b07_mutation_http": "REMOTE_DRAFT_0C1F69E__HTTP_152_PASS__ISOLATED_POSTGRESQL_13_PASS__REAL_AUTH_POSTGREST_DEVICE_PENDING__NOT_B7_COMPLETE",
+    "pce9c_source_ref_transport": "CODE_APPLIED_UNREGISTERED__HTTP36_RN239_LOCAL_PASS__NOT_LIVE",
+    "pce9d_runtime_projection": "RN8_FLAGS_FOREGROUND_AND_AUTH_EVENT_REFRESH_APPLIED__DISABLED_RESPONSE_PENDING"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -171,11 +173,11 @@
     "name": "AUTHENTIC_PREVIEW_ISSUANCE_AND_PUBLIC_SAFETY_ADMISSION_TO_DEVELOPMENT_SCREEN",
     "environment": "CHAT_PRO_OK",
     "state": "EXISTING_MAINLINE_UNFINISHED__NOT_AUTOMATIC_ACTIVATION",
-    "current_map_section": "26.3",
-    "current_entry_section": "22",
+    "current_map_section": "28.3",
+    "current_entry_section": "24",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261003.md",
     "weekly_review_section": "5.3",
-    "first_unfinished_work": "Actual PCE-4 safety admission of generated content; persist the admitted preview and connect the same body/recipe to the development screen.",
+    "first_unfinished_work": "Authoritative server-effective flags/per-operation enforcement and saved-input InputScreen wiring for the same preview. No fabricated enabled/eligible or live activation.",
     "repeat_completed_b2a_or_b7": false,
     "production_migration_apply_effect": 0,
     "automatic_progression": false
@@ -232,9 +234,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "e83b25d8b6ece7176cf411763470cb0535eace45",
-    "raw_sha256": "1413d8184a26e8f2f3801b328de427440880fc0ad0fabb6a9fbb035e644525df",
-    "utf8_bytes": 105776
+    "git_blob_sha1": "5f66f78ddec642dba0b28e1a88802fe982889b72",
+    "raw_sha256": "e4c34eef6571373578aca71fbdc9373eb2572d742c15d5eff1a4c22d9ef68666",
+    "utf8_bytes": 117437
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -850,5 +852,62 @@
     "production_migration_apply_effect": 0,
     "state": "FILE_ONLY_TECHNICAL_ACCEPTANCE_PASSED__LIVE_APPLY_0",
     "automatic_progression": false
+  },
+  "source_ref_transport_20261008": {
+    "api_commit": "0312a0fc3b07f8e46344d5746cafd7760458badd",
+    "rn_base_commit": "467cc5890055caa6366eede3f602248b14e55c13",
+    "rn_change_in_this_revision": false,
+    "binding": "GET /emotion/piece/source-ref/{saved_input_id}",
+    "contract_owner": "Cocolon_Piece/pce6_api_db_rn_migration/Piece_API_CleanCutover_Design_20260808.md#11-2026-10-08-source-reference-transport-binding--non-production-scope",
+    "approval_basis": "Continuation immediately after the specific non-running source-ref adoption/application proposal; DB/deploy/enable excluded.",
+    "api_source_blob": "0f4471d519438b985c8b56c05ddc041d1a2dee9e",
+    "api_test_blob": "e40e26774159f99b117fe072cf0bceca0d158a58",
+    "rn_api_blob": "f549579d37ac6e986b1d90adf9883d7762880208",
+    "rn_test_blob": "0f600d9ada528294b11d858d5b86443f0033500e",
+    "http_tests": 36,
+    "rn_tests": 239,
+    "prior_rn_tests_unchanged": 203,
+    "verification": "LOCAL_SYNTHETIC_BOUNDARIES__CURRENT_FULL_API_AND_CONTRACT__UNUSED_CANCEL_STORE_IMPORT_DOUBLE",
+    "asgi_json_to_actual_esm_and_modal_stages": 2,
+    "production_route_registered": false,
+    "input_screen_connected": false,
+    "backend_effective_flags_complete": false,
+    "live_auth_db_or_native_verified": false,
+    "ci_verified": false,
+    "product_acceptance": false,
+    "prior_runtime_commits": [
+      "b03311fdfce6c26c2790d86c43f4639aa6e40baf",
+      "467cc5890055caa6366eede3f602248b14e55c13"
+    ],
+    "fresh_system_context_prepare": "FAILED_MODULE_NOT_PRESENT__DIRECT_ORIGINAL_FALLBACK",
+    "automatic_progression": false,
+    "rn_commit": "df88a0e0f46cdbfc005039177983dbec740efb3f"
+  },
+  "authenticated_session_refresh_20261009": {
+    "rn_base_commit": "8297b2a76c172ec6550424accd62506dfa896b2d",
+    "rn_change_in_this_revision": false,
+    "source_path": "AppRuntimeContext.js",
+    "source_blob": "a066c2e8b2002992bff718c3e371824fcac71a22",
+    "test_path": "tests/piece-v2-runtime.test.js",
+    "test_blob": "4e182649cd2e039a6f32c688bf1d35c2d4027012",
+    "rn_tests": 260,
+    "prior_rn_tests_unchanged": 239,
+    "new_tests": 21,
+    "verification": "LOCAL_SYNTHETIC_REACT_AUTH_TIMER_HTTP_AND_NATIVE_BOUNDARIES",
+    "auth_notification_is_authorization": false,
+    "session_payload_retained": false,
+    "backend_effective_flags_complete": false,
+    "input_screen_connected": false,
+    "feature_disabled_handling_complete": false,
+    "live_auth_db_or_native_verified": false,
+    "ci_verified": false,
+    "product_acceptance": false,
+    "fresh_system_context_prepare": "FAILED_MODULE_NOT_PRESENT__DIRECT_ORIGINAL_FALLBACK",
+    "automatic_progression": false,
+    "same_final_new_tests_before_fix": {
+      "pass": 4,
+      "fail": 17
+    },
+    "rn_commit": "1492c9c875485809789b4ebaf7fa33403b2ea2fe"
   }
 }

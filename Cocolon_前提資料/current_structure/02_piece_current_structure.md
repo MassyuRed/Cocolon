@@ -1,8 +1,8 @@
 ---
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
-revision_date: "2026-10-07 JST"
-latest_api_implementation: "0c1f69ed25d6e5bb7a887c125ae900ab61ee4996"
+revision_date: "2026-10-09 JST"
+latest_api_implementation: "0312a0fc3b07f8e46344d5746cafd7760458badd"
 latest_storage_candidate: "d71fdb40238f2c99751f0c20e578ab654f72308e"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
@@ -15,6 +15,9 @@ automatic_progression: false
 # Piece構造 — Current Structure
 
 ## 0. Current conclusion
+
+**2026-10-09現在：既存AppRuntimeContextへ認証通知時のPiece表示フラグ無効化とbootstrap再取得を接続した。保存参照GET・RN本文プレビュー・既定OFF・foreground刷新を継承する。サーバー実効flag／操作時強制、InputScreen、PIECE_FEATURE_DISABLED、実機の完成ではない。現在の追加差分は末尾の2026-10-09節、10/08以前の状態と検査件数は各時点の履歴として読む。**
+**2026-10-08現在：保存参照GETの非稼働コードをAPI `0312a0fc3b07f8e46344d5746cafd7760458badd`へ反映し、RN `df88a0e0f46cdbfc005039177983dbec740efb3f`で明示GETと既存preview要求への受渡しを反映した。先行の本文プレビュー、既定OFF、再取得失敗時OFF、foreground刷新は保持する。これはInputScreen・実サーバーの登録／実効flag・実機画像の完成ではない。参照取得URLの採用と、稼働環境への登録・有効化を分離する。現在の内訳は末尾の2026-10-08節を優先し、以下の10/07以前の結果は履歴として保持する。**
 
 **GitHub反映済みのAPI再開位置は `0c1f69ed25d6e5bb7a887c125ae900ab61ee4996`（§26）です。§25に役割明記ひらがな人名の修正と旧CI 676 PASSを分離して保持します。§26のB7公開切替・削除HTTPは反映済みで、2026-10-07の既存隔離PostgreSQL workflowにおいてB7 HTTP 152件とnative SQL接続13件が成功しています。実Auth／実PostgREST／実機の確認ではなく、B7全体・商品合格は未成立です。公開安全性の実判定→永続preview発行→開発画面という本線は未完了です。§24以前の結果は各commitの履歴として保持します。**
 
@@ -208,7 +211,7 @@ shared tableのnon-Piece row／consumerは、exact Piece predicateとwriter／re
 
 ## 8. Current gaps
 
-現在の未完了は§26.3へ集約する。以下は9/30時点の残件であり、後続のB2-B／B3／B4／B5永続化／B6保存接続が未実装という意味には使用しない。
+現在の未完了は§28.3へ集約する。以下は9/30時点の残件であり、後続のB2-B／B3／B4／B5永続化／B6保存接続が未実装という意味には使用しない。
 
 1. user-visible routeはold Q&Aのまま。
 2. 保存原入力・保存状態から本文／recipeの内部組立と画像設定だけの変更を§20まで実装。本文に表れていない選択感情、refined補足、保存済みpreview発行、HTTP／RNは未接続。
@@ -848,3 +851,78 @@ APIの確認済みHEADは `0c1f69ed25d6e5bb7a887c125ae900ab61ee4996`、このB7�
 第三者への未確認断定、未証明の広い人名／参照境界、実安全性判定と永続preview発行・変更、HTTP/RN接続、許可されたrefined補足、Q3履歴選択集合とshared writer、Nexus/read-through非表示化、native保存共有・実機は残る。10/07の開発画面接続を本資料だけで成立扱いにせず、10/10完成も予定通りと断言しない。週次判断点の不足を残したまま、履歴拡張・画像微調整・別の周辺機能へ逸れない。
 
 `automatic_progression=false`、Draft/default OFF、production router未登録を維持する。資料同期の準備と、remote適用・再取得の成功は別に記録する。共有DB・SQL migration・Render・RN・Emlis/Analysis・merge/deploy/activation・実ユーザーデータの変更0。B7／B8／Piece全体の完了や商品合格creditを付与しない。
+
+
+## 27. 2026-10-08 — 保存参照GETからRN本文プレビューへの非稼働接続
+
+### 27.1 現行ownerと接続範囲
+
+| Repository / path | 現在の責務 |
+|---|---|
+| API `piece_v2_source_adapter.py` | `93c26f7c`で既存の保存handoffと返却前再照合からsource_refの7項目を供給。原入力・Emlis本文・Analysis推論は応答へ含めない。今回不変更。 |
+| API `piece_v2_source_ref_http.py` | `0312a0fc`の別 `source_ref_router`。本人認証→UUID／query／body照合→既存adapter→7項目のclosed応答。app.pyと既存api_piece_v2.routerには未登録。 |
+| API `api_piece_v2.py` | `0c6cb565`のPOST preview初回発行／同一キー再取得を維持。今回不変更。実サーバーの実効flag・登録は未完了。 |
+| RN `features/piece/pieceApi.js` | 明示 `requestPieceSourceRef` GETを追加し、取得前後の本人session照合後、既存preview要求へ7項目を渡せる。POSTの要求・応答・同一キー規則を維持。InputScreenはまだ呼ばない。 |
+| RN `features/piece/piecePreviewModel.js` | 正規本文・content／recipe・3hashと期限の照合。保存／export権限は付与しない。今回不変更。 |
+| RN `features/piece/PieceCreateController.js` | 明示start／retry、古い要求排除、close／dispose。今回不変更。 |
+| RN `screens/input/InputPieceActionArea.js`・`components/piece/PiecePreviewModal.js` | 切り離されたhostと全文閲覧。画像生成・保存・共有ではない。InputScreen未組込み。今回不変更。 |
+| RN `features/piece/pieceRuntime.js`・`AppRuntimeContext.js` | `b03311fd`で8フラグの既定OFF、欠落／不正／再取得中／失敗OFF。`467cc589`で背景化時の無効化とforegroundでのbootstrap刷新。今回不変更。 |
+| API `ai/tests/piece_v2/test_b05_source_ref_http_candidate.py` | 既存候補36件を実装pathへ配置。認証・保存adapter境界は代替。 |
+| RN `tests/piece-v2-source-ref.test.js` | 既存候補36件を実装pathへ配置。従来の4検査ファイル203件は変更せず維持。 |
+
+APIのpathは `ai/services/ai_inference/` 以下。RNの実装commitは `df88a0e0f46cdbfc005039177983dbec740efb3f`。先行source／consumer／B2-A／B7を再実装していない。
+
+### 27.2 API採用と稼働権限を分ける
+
+直前の「`GET /emotion/piece/source-ref/{saved_input_id}`を採用し、候補を非稼働コードへ反映する。実DB変更・デプロイ・有効化は含めない」という提案に続くMashの続行指示により、提示した範囲で実施した。API契約の追加は既存PCE-6 API資料§11。既存source_refの7項目、原入力のみのnormal／pre-question、本人認証・保存状態再照合、closed error、no-storeを維持する。
+
+GETは本文生成・preview発行・record保存・quota消費・自動retryを行わない。後続のpreview POSTは別の明示操作であり、その時点の権限・版・保存状態を独立に再確認する。source_refは継続権限、eligible、flag、安全性判定またはrenderer admissionではない。
+
+production route登録、実効flag resolverと各操作の強制、保存入力からのInputScreen導線、認証状態変更時のbootstrap刷新、PIECE_FEATURE_DISABLED連携は残る。default OFFを保ち、旧Q&Aとのuser-visible併走を作らない。
+
+### 27.3 今回の検証と限界
+
+HTTP36 PASS、RN239 PASS（前回203不変更＋既存source-ref候補36）。新しく36欠陥を閉じたという意味ではない。HTTPは実FastAPI／Starlette ASGIとhandlerを実行し、Bearer検証と保存adapter結果を代替する。部分materializationでは無関係なcancel storeのtop-level importをnever-call代替とした。API本体全文は `a395b19e33d9718f3e31189553fa8dcb35ef0bfa`、contract全文は `e4d20c9d0994b0a05f086ff6543de9d5cf2f31aa` と一致し、抜粋APIではない。実store／実認証／DB／CMEE生成の統合検査ではない。
+
+ASGIのnormal／pre-questionの2応答を実ESM4モジュールへ渡し、明示POST後の既存modal全文、content payload、3hashが一致した。HTTP/session、React/RN部品と時刻は代替で、InputScreenやHermes／実機の成功ではない。VM Modulesのexperimental warningあり。旧検査の期待削除・緩和0。全repo、CI、独立review、商品受入れ、10/10目標の達成を主張しない。
+
+### 27.4 再開位置と資料の扱い
+
+旧source-ref HTTP／RN候補patchは過去の候補を保持したものであり、現行コードに再適用しない。旧DocSync候補もruntime2続行と本採用前の記述であり、本改訂への適用は禁止ではなく不要・不整合な再実行となる。現物と本節を優先する。
+
+今回の構造差分は別source_ref routerと既存RN API内の明示GET。入口・本map・manifestは同じ資料変更単位で同期する。コードは先行反映済みであり、コードと同時の同期ではない。API側は別repoの先行commitとして記録し、二repoの同時原子的反映とは扱わない。全体01／01A／01B／01Cの全履歴再監査や全面再生成は行わない。System Context prepareは部分コピーにmoduleがなく失敗し、現行技術正本のdirect-original fallbackで対象現物を参照した。
+
+次の本線はサーバー実効flag／操作時強制と保存済み入力からのInputScreen接続。native画像生成・取り出し・保存・共有、許可refined補足、保存／履歴等の後続残件は保持する。実DB・env・deploy・build・依存追加・main／merge・有効化・実ユーザーデータ・Emlis／Analysisの変更0。`automatic_progression=false`。
+
+
+## 28. 2026-10-09 — 認証通知と既存bootstrapの接続
+
+### 28.1 今回の差分と既存owner
+
+コード反映先は `1492c9c875485809789b4ebaf7fa33403b2ea2fe`。source／testの2pathを先に反映し、資料はこの後続commitで同期する。同じ作業単位内の別commitであり、同時原子的反映とは扱わない。
+
+| Path | 今回の責務・境界 |
+|---|---|
+| `AppRuntimeContext.js` | 既存Supabase clientの `onAuthStateChange` を購読。認証通知を受けたら8つのPiece表示フラグと進行中の古いbootstrap結果を無効化し、active時だけ通知後に既存bootstrapを再取得する。 |
+| `lib/supabase.ts` | 既存clientを参照するだけ。client／Auth設定／保存先／資格情報／依存版を変更しない。 |
+| `tests/piece-v2-runtime.test.js` | 既存41件の本文・期待値を保持し、認証イベント／予約timerのharnessを追加。新21件で同期無効化、古い応答・timer、背景化、重複、失敗、破棄／effect再設定と既存本文hostへの影響を検査する。 |
+| `App.js`・`AuthContext.js`・`runtime/AppRuntimeBootstrapGate.js` | 参照のみ。provider順序、認証状態の所有者、初期bootstrap gateと子画面の位置は不変更。 |
+| 既存Piece API／model／controller／host／modal | 参照のみ。認証通知からpreview発行・再送・保存・画像出力を呼ばない。 |
+
+これはPCE-7 feature flag設計§12に既存の認証状態刷新を接続した限定差分である。新しい認証の正本、外部client、flag resolver、専用bootstrap routeを作らない。共有 `/app/bootstrap` の再取得は非Piece metadataにも及ぶ。成功時の他機能の更新を隠して「Pieceだけの通信」とは呼ばない。入口・本map・manifestへ前回source-ref／runtimeの未同期差分も同じ資料変更単位で反映する。全体01／01A／01B／01Cは既存owner参照として使用し、全歴史を再生成していない。
+
+### 28.2 動作と検証範囲
+
+認証通知の種類やsession本文から有効・権限・プランを推論しない。通知直後に既存の表示判定がOFFを読み、HTTPはコールバックの外へ遅延する。連続通知は予約を置き換え、手動／foregroundのbootstrapが先行すれば予約を取り消す。背景化・破棄でも取り消し、取消済みcallbackは次の予約を消したりHTTPを開始したりできない。破棄で中断した予約・進行中取得はeffectの再設定で必要な一回を再開する。取得失敗はOFFのままで自動retryをしない。
+
+Node v22.16.0の対象5suiteは260 PASS／FAIL0／SKIP0／cancelled0。既存239件は変更なし、新21件。最初の20件は未修正時16 FAIL／4 PASS、旧runtime41件は成功。追加timer回帰1件は初版実装で61 PASS／1 FAILのREDから最終修正で成功した。新検査を期待値の緩和で通していない。再実行や別コピーのpatch replayを件数へ加算しない。
+
+既存本文hostとの合成接続で、認証通知→本文非表示→bootstrap成功後も本文を復活させず、明示操作を待つことを確認した。React hooks／JSX、認証通知／timer、HTTPとnative部品は代替であり、実React reconciliation、Hermes、Supabase Auth、実HTTP／DB、OS、端末、CI、独立review、商品受入れの成功ではない。今回HTTP36件やAPI側の生成検査を再実行した意味でもない。
+
+### 28.3 現在の再開位置
+
+前回のsource-ref GETとRN受取のコードは反映済みのまま、再適用しない。認証通知後のbootstrap刷新のコード差分は本節、前回までのforegroundとGETの実装履歴は§27と既存handoffを参照する。次は同じ保存入力→preview→開発画面のサーバー実効flag供給・操作時強制、InputScreen接続、PIECE_FEATURE_DISABLED連携。参照値や通知をeligible／enabledに昇格させない。
+
+System Context prepareは今回も部分コピーの `tools.cocolon_context` 不在で不成立。現行技術入口が許可する原典直接読取りを用いた。恒久incident、作業規則・Rule18、最新10/03週次方針と関連設計／map／現物を確認したが、全歴史地図・全sourceの新規監査を主張しない。
+
+前回の入口・map・manifestの未反映は今回の同期対象へ含めるが、更新準備とGitHubの反映後確認を混同しない。実DB・env・deploy・build・新依存・main／merge・有効化・実ユーザーデータ・旧Q&A・Emlis／Analysis変更0。実認証／端末の一往復、native画像生成／保存／共有、商品受入れ、10/10目標の達成は未完了。`automatic_progression=false`。
