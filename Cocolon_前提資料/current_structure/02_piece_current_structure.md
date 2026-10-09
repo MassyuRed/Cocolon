@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新の再開位置はPiece入口§27／本map §31です。既存の開発用InputPieceActionAreaへ保存入力IDの参照取得を接続しました。コードはCocolon `c1485bf1`、今回のRN検査は303 PASS。InputScreen本体への組込み・実環境・実機は未完了です。以前の記録と件数は各実行時点の履歴です。**
+**最新は§32です。InputScreenの保存成功IDを既存hostへ渡す開発経路を組み込んだ。332件の検査は代替環境であり、API登録・稼働設定・実機・商品受入れの成功ではない。**
 **最新は§30です。API `aa6cf858` の単一実効フラグresolver・bootstrap投影・source-ref GET/preview POSTの操作時制御が反映済みで、再開後API86件・RN282件を確認しました。稼働構成・InputScreen・実機は未完了です。以前の「サーバー制御未実装」は各時点の履歴として区別します。**
 
 **2026-10-09現在：既存AppRuntimeContextへ認証通知時のPiece表示フラグ無効化とbootstrap再取得を接続した。保存参照GET・RN本文プレビュー・既定OFF・foreground刷新を継承する。サーバー実効flag／操作時強制、InputScreen、PIECE_FEATURE_DISABLED、実機の完成ではない。現在の追加差分は末尾の2026-10-09節、10/08以前の状態と検査件数は各時点の履歴として読む。**
@@ -214,7 +214,7 @@ shared tableのnon-Piece row／consumerは、exact Piece predicateとwriter／re
 
 ## 8. Current gaps
 
-現在の未完了は§31.4へ集約する。以下は9/30時点の残件であり、後続のB2-B／B3／B4／B5永続化／B6保存接続が未実装という意味には使用しない。
+現在の未完了は§32.4へ集約する。以下は9/30時点の残件であり、後続のB2-B／B3／B4／B5永続化／B6保存接続が未実装という意味には使用しない。
 
 1. user-visible routeはold Q&Aのまま。
 2. 保存原入力・保存状態から本文／recipeの内部組立と画像設定だけの変更を§20まで実装。本文に表れていない選択感情、refined補足、保存済みpreview発行、HTTP／RNは未接続。
@@ -1040,3 +1040,41 @@ InputScreen本体への保存成功ID・本人/観測状態・同一キーの受
 稼働構成のreadiness/TTL/renderer供給・API登録、実認証/DB/端末の一往復、取消し/保存/履歴/削除等の残る操作制御、capabilities/quota、native画像生成/取り出し/保存/共有も残る。これらを削減・完了・承認済みにしない。前回の§30を含む入口・map・manifestの同期は、本候補の生成とGitHub実反映を分けて確認する。
 
 `STRUCTURE_MAP_DELTA_UPDATED`は本hostの保存参照取得責務と現行次作業の記録を指す。新しい地図や管理機構は追加しない。GPT-6 Astra Pro / CHAT_PRO_OK、華恋単一実行。実DB・env・deploy・build・依存・main/merge・有効化・利用者データ・旧Q&A・Emlis/Analysis変更0。B10全体・Piece全体・10/10完成・正式商品受入れは未成立。`automatic_progression=false`。
+
+## 32. 2026-10-09 — InputScreenから直前の保存入力を渡す開発経路
+
+### 32.1 同じ未完了経路を画面へ組み込む
+
+実装commitは `f65c19e01d630a31499414fea10fb20eecff0c5c`。§31のhost、既存source-ref GET／preview POST／本文表示を作り直さず、`screens/InputScreen.js` の保存成功 `submitResult.id` からbody-freeなsavedInputを渡す。変更する製品ソースはInputScreenのみ。新検査は `tests/piece-v2-input-screen.test.js`。本map、既存Piece入口、manifestを同じ変更範囲へ同期し、PCE-6／PCE-8の契約や旧Q&Aの公開経路は変更しない。
+
+    InputScreenの本人入力保存成功
+      -> 応答時の本人／画面生存／選択ticket／実効表示flagを照合
+      -> 保存ID + 本人照合ID + 選択に固定した不透明キー
+      -> 既存Emlis表示を閉じた後のHome「直前に保存した入力」
+      -> 本人の明示source-ref GET（保存／terminal適格性はサーバー判断）
+      -> 別の明示preview POST
+      -> 既存modelの3hash照合と同じcanonical本文／画像設定表示
+
+Emlisのopenは通信不明のreaderを表示する場合もあるため、openのbooleanや本文の存在からsource適格性を作らない。確認用の操作と、GET成功後だけの作成CTAを分離する。Emlis処理・原入力／観測本文・source_refの7項目・POST契約・画像設定の意味・本文作者は変更しない。今回の選択は直前に保存した一入力であり、履歴一覧から任意入力を選ぶ実装ではない。
+
+### 32.2 同一要求と画面境界
+
+キーは既存index.jsで最初に導入されるrandom-values polyfillのgetRandomValuesを使って保存選択ごとに一度作る。新依存・時刻／本人ID／保存ID由来のキー・Math.random fallbackは追加しない。キーの発行失敗ではPiece選択を作らず、入力保存の成否を変えない。GETではキーを送らず、明示POST／同一再試行へ同じキーを渡す。
+
+InputScreenは本文でなくsavedInputとlocal lifetime／ticketだけを保持する。本人／tutorial／resetの変化はrender境界で旧選択を隠し、画面blur・破棄では遅れた保存結果を無効にする。未保存、不正ID、保存失敗・timeout、OFFでは選択しない。次の入力編集中、Emlis／旧Piece／起動／下書きmodal表示中にはhostを混在させない。hostの背景化・取消し・期限・停止応答処理は継承し、再表示で自動GET／POSTや本文復活を起こさない。
+
+### 32.3 検証と限界
+
+Node v22.16.0、既存7検査ファイル303件＋新規29件の計332 PASS／FAIL0／SKIP0／cancelled0。既存7ファイルおよび既存host／API／model／controller／modal／runtimeのbytesは§31の反映済み版と一致し、変更していない。最終の同じ29件を元InputScreenへ戻した比較は16 PASS／13 FAILで、既存303件は前後とも成功した。修正前の13件は画面callerがないことに結び付くcall-phase失敗で、collection失敗ではない。
+
+最初の試行はnew29件が元画面15 PASS／14 FAIL、候補26 PASS／3 FAILだった。VMを跨いだ配列比較と、mockの下書きcallbackが毎回別identityとなる不備を新検査側だけ直した。これらを製品の欠陥解消や最終causal REDに混ぜない。保存成功→観測閉鎖→実host→GET→POST→modal全文一致、同一キー再試行、失敗／未確定入力、本人切替／ABA、離脱／破棄／reset、新入力編集中を最終集合で確認した。
+
+全文のInputScreenをTypeScript 5.8.3でJSX／module構文変換して評価した。検査は実Piece JSを呼ぶが、React reconciliation／hooks、Home／Emlis、認証、通信、乱数、native描画、時刻は検査用代替で、source／preview packetは合成である。repositoryの指定TypeScript 5.2.2での実行、実React／Hermes、実Supabase／DB／CMEE生成、端末、全RN契約suite、CI、独立review、商品受入れは未実施。本文生成品質の新しい合格を、この画面配線検査から認定しない。
+
+### 32.4 現在の残件と読取り
+
+InputScreenのコード上の呼出しは本節で接続した。次の直接残件は、同じ画面が呼ぶAPIの未登録と稼働構成のreadiness／TTL／renderer供給である。実環境の適用／有効化は別承認境界で、今回実施しない。capabilities／quota、取消し・保存済み等の全操作制御、native画像生成・取り出し・保存・共有、実認証／DB／端末の一往復と正式商品受入れも残る。B10全体・Piece全体・10/10完成を認定しない。
+
+現行前提資料・作業入口／CURRENT_RULES／Rule18、同じ会話で参照した全体地図01／01A／01B／01Cとcurrent mapの関連責務、PCE-6 RN／PCE-8 B10、最新10/03週次の主経路を継承し、今回InputScreen全文・Emlis reader・API client・index.js・package.json等を照合した。恒久incidentは今回も全文を再読。部分materializationでSystem Context prepareを一度実行したがtools.cocolon_contextがなく不成立、正本が認める原典直接参照を使用した。全歴史地図／全repoの全面新規監査ではない。
+
+`STRUCTURE_MAP_DELTA_UPDATED`。華恋／GPT-6 Astra Pro／CHAT_PRO_OK、Rule18§0・§11.3内の単一実行。API repository・実DB・env・deploy・build・依存・main／merge・有効化・利用者データ・旧Q&A・Emlis／Analysis変更0。GitHub反映は応答だけで完了にせず、対象bytes／変更path／最終headを別途再取得して照合する。`automatic_progression=false`。

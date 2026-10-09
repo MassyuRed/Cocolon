@@ -1,5 +1,5 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v26",
+  "schema_version": "cocolon.piece.workstream_manifest.v27",
   "generated_at": "2026-10-09 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
@@ -14,9 +14,9 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "2f2271787b295488df00a01fefffced0a7a98e53",
-    "raw_sha256": "95bda652f9281e2d9d8ed9cace76b3a284fa1c8c55ca0f31d82234b0b6fb2b35",
-    "utf8_bytes": 40698
+    "git_blob_sha1": "e02827cb9aa61768d9f4456915ccbc793c43f2ca",
+    "raw_sha256": "6465bd679361a787c00de149e2c2d381bc6c45b53115784134edcb1346a71dcb",
+    "utf8_bytes": 43207
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -56,7 +56,7 @@
     "pce9a_b01": "COMPLETE",
     "pce9a_b02a": "FILE_ONLY_TECHNICAL_ACCEPTANCE_PASSED__LIVE_APPLY_0",
     "analysis_roadmap": "REFER_TO_ANALYSIS_CURRENT_STRUCTURE__HISTORICAL_NOT_ACTIVATED_STATE_NOT_CURRENT",
-    "next_piece_group": "SAME_SAVED_INPUT_TO_PREVIEW_SCREEN__INPUTSCREEN_AND_ADMITTED_RUNTIME_COMPOSITION_UNCONNECTED",
+    "next_piece_group": "SAME_INPUTSCREEN_PREVIEW_ROUTE__ADMITTED_RUNTIME_CONFIGURATION_AND_API_REGISTRATION_PENDING",
     "automatic_packet_progression": false,
     "pce9a_b02a_red": "FROZEN_UNCHANGED__NATIVE_POSTGRESQL_1_PASS",
     "pce9a_b02a_implementation": "EXACT5_PRESERVED__EXACT6_SELECTORS_PUBLISHED",
@@ -67,7 +67,7 @@
     "pce9b_b08_hiragana_role_binding": "REMOTE_DRAFT_4033E1F_EXPLICIT_ROLE_ONLY__HISTORICAL_CI_676_PASS__NOT_B8_COMPLETE",
     "pce9a_b07_mutation_http": "REMOTE_DRAFT_0C1F69E__HTTP_152_PASS__ISOLATED_POSTGRESQL_13_PASS__REAL_AUTH_POSTGREST_DEVICE_PENDING__NOT_B7_COMPLETE",
     "pce9c_source_ref_transport": "CODE_APPLIED_UNREGISTERED__HTTP36_RN239_LOCAL_PASS__NOT_LIVE",
-    "pce9d_runtime_projection": "RN8_FLAGS_FOREGROUND_AUTH_REFRESH_PREVIEW_DISABLED_AND_SAVED_SOURCE_HOST_APPLIED__INPUTSCREEN_PENDING",
+    "pce9d_runtime_projection": "INPUTSCREEN_LAST_CONFIRMED_SAVE_TO_EXISTING_HOST_CONNECTED_CODE_DISABLED__LIVE_RUNTIME_PENDING",
     "pce9a_runtime_preview_control": "API_AA6CF858_RESOLVER_BOOTSTRAP_SOURCE_GET_PREVIEW_POST_GATES__CODE_DISABLED__NOT_B14A_COMPLETE"
   },
   "analysis_role_alignment": {
@@ -171,14 +171,14 @@
   },
   "next_group": {
     "id": "B10",
-    "name": "SAVED_INPUTSCREEN_TO_EXISTING_PREVIEW_HOST",
+    "name": "SAME_INPUTSCREEN_PREVIEW_ROUTE__ADMITTED_RUNTIME_CONFIGURATION_AND_API_REGISTRATION_PENDING",
     "environment": "CHAT_PRO_OK",
     "state": "EXISTING_MAINLINE_UNFINISHED__NOT_AUTOMATIC_ACTIVATION",
-    "current_map_section": "31.4",
-    "current_entry_section": "27",
+    "current_map_section": "32.4",
+    "current_entry_section": "28",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261003.md",
     "weekly_review_section": "5.3",
-    "first_unfinished_work": "Bind InputScreen saved-success ID/current owner/observation state and a stable caller-owned key to the existing savedInput host. Host GET-to-preview is reflected at c1485bf1. Production readiness/TTL/renderer/routes and real Auth/DB/device remain unfinished.",
+    "first_unfinished_work": "Connect the same InputScreen preview route to admitted server runtime readiness/TTL/renderer and route registration; live application and activation retain separate approvals. InputScreen last-confirmed-save wiring is implemented; real Auth/DB/native remains unverified.",
     "repeat_completed_b2a_or_b7": false,
     "production_migration_apply_effect": 0,
     "automatic_progression": false
@@ -235,9 +235,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "57be69fee3633fcbcbb902647f00badebee43d8b",
-    "raw_sha256": "ae980e3f9da313a712e903774055c6cc631ee35319f127be82fbdae15d8df99c",
-    "utf8_bytes": 134940
+    "git_blob_sha1": "382052f4effd1fb9f193bde1664f292511e98291",
+    "raw_sha256": "ab3330ff7e9f56b9f90dc7c4dbccf3c611d1d5424015be37f872b80d9d66d46b",
+    "utf8_bytes": 140562
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -1058,5 +1058,53 @@
       "Current map historical 10/08 lead: foreground刷新は保持する -> foreground刷新を保持する.",
       "Current map historical gaps item 5: 新API／RN・native renderer -> 新API／RN／native renderer."
     ]
+  },
+  "input_screen_connection_20261009": {
+    "base_head": "e8d26e1324f9fa87058da6be7d85ddddba6bf067",
+    "scope": "INPUTSCREEN_LAST_CONFIRMED_SAVE_TO_EXISTING_SAVED_INPUT_HOST__CODE_DISABLED",
+    "source_blob_map": {
+      "screens/InputScreen.js": {
+        "git_blob_sha1": "857194fab83cca9c6842a2545ecf4252b416ea90",
+        "raw_sha256": "4af21194ae26d60f2e659ec173b598981fb3edbdf222c582f97244247d811abc",
+        "utf8_bytes": 84452
+      },
+      "tests/piece-v2-input-screen.test.js": {
+        "git_blob_sha1": "da89d8c0b5508abff7539314a7950a19cbf8dda7",
+        "raw_sha256": "f85397c4852bf277b39ece89650669e8ad7478a723e4e9ece1384a45f5c196ea",
+        "utf8_bytes": 24698
+      }
+    },
+    "tests": {
+      "total": 332,
+      "passed": 332,
+      "failed": 0,
+      "skipped": 0,
+      "cancelled": 0,
+      "prior_unchanged": 303,
+      "new": 29,
+      "same_final_tests_original_screen": {
+        "passed": 319,
+        "failed": 13,
+        "skipped": 0,
+        "cancelled": 0
+      }
+    },
+    "environment": {
+      "node": "v22.16.0",
+      "typescript_syntax_transform": "5.8.3",
+      "repository_pinned_typescript_executed": false,
+      "react_auth_home_emlis_http_entropy_native": "TEST_DOUBLES"
+    },
+    "input_screen_code_connected": true,
+    "history_selection_connected": false,
+    "automatic_get_or_post": false,
+    "caller_key_generation": "EXISTING_RANDOM_VALUES_POLYFILL__ONE_KEY_PER_CONFIRMED_SELECTION",
+    "ci_verified": false,
+    "live_auth_db_device_verified": false,
+    "independent_review": false,
+    "product_acceptance": false,
+    "next_direct_work": "Existing preview route registration and admitted runtime readiness/TTL/renderer supply; live effects retain separate approvals.",
+    "automatic_progression": false,
+    "rn_commit": "f65c19e01d630a31499414fea10fb20eecff0c5c"
   }
 }

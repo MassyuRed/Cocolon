@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新の再開位置は§27／current map §31です。既存の開発用InputPieceActionAreaへ保存入力IDの参照取得を接続しました。コードはCocolon `c1485bf1`、今回のRN検査は303 PASS。InputScreen本体への組込み・実環境・実機は未完了です。以前の記録と件数は各実行時点の履歴です。**
+**最新のコード上の再開位置は§28／current map §32です。InputScreenの直前保存入力から既存hostへ組み込み、同じ本文プレビューまでの検査332件が成功。稼働API登録・設定供給・実機は未完了です。以下の記録は各時点の履歴として保持します。**
 **最新の再開位置は§26／current map §30です。中断前のAPI `aa6cf858` の実効フラグ・preview操作時制御を確認し、再開後API86件・RN282件を再検査しました。InputScreen・稼働構成・実機は未完了です。以下の以前の記録は履歴として保持します。**
 
 **2026-10-09現在：既存AppRuntimeContextへ認証通知時のPiece表示フラグ無効化とbootstrap再取得を接続した。保存参照GET・RN本文プレビュー・既定OFF・foreground刷新を継承する。サーバー実効flag／操作時強制、InputScreen、PIECE_FEATURE_DISABLED、実機の完成ではない。現在の追加差分は末尾の2026-10-09節、10/08以前の状態と検査件数は各時点の履歴として読む。**
@@ -64,7 +64,7 @@ Q&A:
 
 ## 3. Phase state
 
-現在の実装・残件は§27／current map §31を優先する。次の段落と状態表は10/07以前の履歴であり、未着手判定に使わない。
+現在の実装・残件は§28／current map §32を優先する。次の段落と状態表は10/07以前の履歴であり、未着手判定に使わない。
 
 最新の実装状態は§21〜22／current map §25〜26です。保存・消費済みcontext照合・本人履歴読取りを継承し、役割明記ひらがな名とB7公開切替・削除HTTPを反映済みとして分けて記録します。643／676 PASSは各旧commitの履歴であり、B7 runのHTTP 152件・native SQL接続13件とは別の実行結果です。公開安全性の実判定・永続preview発行・開発画面接続は未完了で、B5／B6／B7／B8全体完了へ換算しません。以下のPCE-0〜B2-Aは成立済み設計・過去実装の履歴として保持します。Analysisは自身のcurrent mapに従い、以下の旧未着手記述を再開判断へ使用しません。
 
@@ -750,3 +750,13 @@ Cocolon `c1485bf13e4e3a1c57b52037cb13d802f568f308` で、既存 `screens/input/I
 今回の最終Node検査は303 PASS／FAIL0／SKIP0／cancelled0。既存6suiteの282件をbyte不変で保持し、追加21件の同じ最終test bytesを元hostへ戻して実行すると21 FAIL、既存282 PASSだった。React/native・HTTP/Auth・runtime・時刻は検査用代替であり、InputScreenをmountした結果、実Auth/DB/端末・CI・商品受入れではない。API86件とASGI4packetは前回復旧の記録で、今回の再実行ではない。
 
 **InputScreen本体は未変更・未接続。** 現在の入力保存成功 `submitResult.id` と本人・観測表示の既存経路を読み取ったが、本hostへ保存IDとキーを供給する実画面の組込みまでは完了していない。次はその同じ保存入力→既存host→previewを接続する。機能有効化・稼働設定のreadiness/TTL/renderer供給・API登録・実認証/DB/端末・capabilities/quota・native画像保存共有も未完了で、10/10目標やB10全体を完了にしない。前回の未同期§26/map§30を本3資料候補へ含め、反映結果はGitHubの実ファイルと別に照合する。`automatic_progression=false`。
+
+## 28. 2026-10-09 — InputScreenの保存成功から本文プレビューへの組込み
+
+Cocolon `f65c19e01d630a31499414fea10fb20eecff0c5c` で既存 `screens/InputScreen.js` に、直前に保存が確認された入力IDを `InputPieceActionArea` のsavedInput方式へ渡す呼出しを組み込んだ。元入力やEmlis本文は渡さず、既存Emlis表示が閉じた後のHomeに「直前に保存した入力」を示す。本人の「保存入力を確認」で既存GETを呼び、その成功後の「この入力をPieceにする」で既存preview POSTと同じ本文・3hash・画像設定の表示へ進む。Emlis readerが開いた／閉じたこと自体をterminal適格性にせず、GETの保存状態照合を省略しない。
+
+入力画面は保存ID・認証照合用owner・一度作成した不透明な同一キーだけを保持する。既存index.jsのrandom-values polyfillを使い、鍵用乱数取得に失敗しても入力保存を失敗へ変換しない。再表示・通信再試行でキーを作り直さない。未保存・保存失敗／timeout・不正ID・チュートリアル・OFFでは接続せず、本人切替／画面離脱／破棄／tutorial reset後の古い保存結果を採用しない。新しい入力編集中や他modal表示中には混在させない。
+
+最終Node検査は既存303件＋追加29件の332 PASS、失敗・skip・取消し0。同じ最終検査を元のInputScreenへ戻すと319 PASS／13 FAILで、既存303件は両方で成功した。最初の検査用環境でのVM配列比較・不安定なmock callbackによる失敗は修正したが、商品不具合数には数えない。InputScreen全文をTypeScript 5.8.3で構文変換して実行し、既存Piece実ソースへ接続した検査である。React hooks／Home／Emlis／認証／HTTP／乱数／nativeは代替、成功packetも合成で、実React・Hermes・実DB・実機・CI・商品受入れの成功ではない。
+
+今回のInputScreen組込みはコード上で成立し、履歴一覧からの入力選択や実アプリの稼働一往復まで成立したとはしない。次は同じ画面が呼ぶAPIの登録・readiness／TTL／renderer供給の未接続を扱う。稼働DB・deploy・有効化の個別承認は維持し、capabilities／quota、native画像生成・保存・共有、残る操作制御、正式商品受入れは未完了。旧Q&Aの切替・Emlis／Analysis変更・新依存・main／mergeは行わない。`automatic_progression=false`。
