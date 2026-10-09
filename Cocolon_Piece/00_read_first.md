@@ -719,3 +719,11 @@ Node v22.16.0で260 PASS／FAIL0／SKIP0／cancelled0。既存239件を保持し
 前回未反映だった入口・map・manifestの同期候補を現行preimageと照合し、今回の追加差分を同じ資料単位へ含めた。実際のGitHub反映はbranch／blobの再取得結果と区別して報告する。API／RNの反映済みsource-ref patchを再適用しない。詳細ownerと制約はcurrent map §28、実行記録は既存source-ref handoff末尾。
 
 次の直接残件はサーバー実効flag供給・操作時強制、保存入力からInputScreenへの接続、PIECE_FEATURE_DISABLED連携。今回をB14-B／10/10目標全体の完成とせず、実Auth／DB／端末の一往復・native画像出力・商品受入れは未完了のまま保持する。実DB・env・deploy・build・依存追加・main／merge・有効化・実ユーザーデータ・Emlis／Analysis変更0。`automatic_progression=false`。
+
+## 25. 2026-10-09 — 開発用プレビューの機能停止応答
+
+PCE-7 §12の停止応答の受取りを、既存Piece API／controller／hostから既存AppRuntimeContextの再取得へ接続した。`503 {"code":"PIECE_FEATURE_DISABLED"}`だけを停止として受け取り、通常の通信失敗と区別する。開発hostはプレビューを閉じ、同じ要求の再試行を抑止してbootstrapを一回再取得する。成功しても本文の復活・自動生成はしない。新しい所有者・保存入力へ変わった後の古い応答では再取得しない。
+
+Nodeの対象6suiteは282 PASS、失敗・skip・取消し0。既存260件の本文・期待値は保持し、追加22件の同じ最終検査は修正前11 PASS／11 FAILから修正後22 PASS。React／認証／通信／端末は代替であり、実機成功ではない。詳細・現在の制約はcurrent map §29。
+
+サーバー実効flagと操作時強制、InputScreenと保存入力GETの画面接続は未完了。今回の503はRN受取側の限定対応であり、稼働サーバーからの発行を確認したものではない。実DB・env・deploy・build・新依存・main／merge・有効化・実ユーザーデータ・旧Q&A・Emlis／Analysis変更0。`automatic_progression=false`。

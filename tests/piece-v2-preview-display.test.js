@@ -73,7 +73,7 @@ function previewUiHarness({ send, currentState = 'active' } = {}) {
     assert.equal(event, 'change'); appListeners.add(listener);
     return { remove: () => appListeners.delete(listener) };
   } };
-  const context = vm.createContext({ React, AppState, AbortController,
+  const context = vm.createContext({ React, AppState, AbortController, AppRuntimeContext: {},
     Date: class extends Date { static now() { return now; } },
     Modal: 'Modal', View: 'View', Text: 'Text', ScrollView: 'ScrollView', Button: 'Button',
     ActivityIndicator: 'ActivityIndicator', SafeAreaView: 'SafeAreaView',

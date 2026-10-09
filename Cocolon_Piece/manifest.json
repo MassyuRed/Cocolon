@@ -1,5 +1,5 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v23",
+  "schema_version": "cocolon.piece.workstream_manifest.v24",
   "generated_at": "2026-10-09 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
@@ -14,9 +14,9 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "615d4185b415991f8a9cc1c7883a61073827f5e0",
-    "raw_sha256": "019e70033de0d8e46717921bb8ceefd0b36209b14120a2584e7518b1cc22a902",
-    "utf8_bytes": 34413
+    "git_blob_sha1": "3ef160d39dedddbb51a09878df160d3d0fb2045c",
+    "raw_sha256": "200421b9621103ba7bf4e5eba596bace30ede3ad172a5923f1e4fc5cb36d3e53",
+    "utf8_bytes": 35720
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -173,8 +173,8 @@
     "name": "AUTHENTIC_PREVIEW_ISSUANCE_AND_PUBLIC_SAFETY_ADMISSION_TO_DEVELOPMENT_SCREEN",
     "environment": "CHAT_PRO_OK",
     "state": "EXISTING_MAINLINE_UNFINISHED__NOT_AUTOMATIC_ACTIVATION",
-    "current_map_section": "28.3",
-    "current_entry_section": "24",
+    "current_map_section": "29",
+    "current_entry_section": "25",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261003.md",
     "weekly_review_section": "5.3",
     "first_unfinished_work": "Authoritative server-effective flags/per-operation enforcement and saved-input InputScreen wiring for the same preview. No fabricated enabled/eligible or live activation.",
@@ -234,9 +234,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "5f66f78ddec642dba0b28e1a88802fe982889b72",
-    "raw_sha256": "e4c34eef6571373578aca71fbdc9373eb2572d742c15d5eff1a4c22d9ef68666",
-    "utf8_bytes": 117437
+    "git_blob_sha1": "0764be1875340a81babbf4fa2c6b04155e3b9d6c",
+    "raw_sha256": "19ea84a6c560955e69730df2b1ea2dd32ab826cfe98d508521dfa0b30a23d67b",
+    "utf8_bytes": 121169
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -909,5 +909,55 @@
       "fail": 17
     },
     "rn_commit": "1492c9c875485809789b4ebaf7fa33403b2ea2fe"
+  },
+  "preview_feature_disabled_20261009": {
+    "rn_base_commit": "5fb3b6ac61e9c2efa2a353deecb2bb1386585636",
+    "scope": "DETACHED_RN_DISABLED_RESPONSE_TO_EXISTING_RUNTIME_REFRESH",
+    "source_blob_map": {
+      "AppRuntimeContext.js": {
+        "git_blob_sha1": "be875054b73593b2a62be6a6dd95110ce176e21d",
+        "raw_sha256": "edcac230030cd1b6fd256a46bfb819f465b0dd3e5397868bd31fa3537b454135",
+        "utf8_bytes": 10895
+      },
+      "features/piece/pieceApi.js": {
+        "git_blob_sha1": "7943bdd0d791acfdf0f8c5c8602556825bbc575e",
+        "raw_sha256": "3b458a15d37920ac68159015645c52a693a95118b4577cf586a1fda0c340a6ff",
+        "utf8_bytes": 15217
+      },
+      "features/piece/PieceCreateController.js": {
+        "git_blob_sha1": "76191dd01dd1c12a4bdc138a21b780a8ab9a3856",
+        "raw_sha256": "bbea239ce203e7d90bce5bbe146f99224ea0337fab537013044d7a1a29431e2c",
+        "utf8_bytes": 9046
+      },
+      "screens/input/InputPieceActionArea.js": {
+        "git_blob_sha1": "3e112e49c7a10ded2ecb121ace67d6a30250da6e",
+        "raw_sha256": "351ba152662f583984845b859d52970ddb9bea6a209d362ee74ce72094f35aa5",
+        "utf8_bytes": 6019
+      },
+      "tests/piece-v2-preview-display.test.js": {
+        "git_blob_sha1": "636e6bcabdabb69270d0cdc62794cb91491f76bb",
+        "raw_sha256": "c9b600c36772dc463365e2186097df0098335ceb7dfcb0ac95a6b4ce660a80f0",
+        "utf8_bytes": 19053
+      },
+      "tests/piece-v2-feature-disabled.test.js": {
+        "git_blob_sha1": "3d6c745ddebd0aac2091609b856f32fbf9c7cce2",
+        "raw_sha256": "5618c6a040e0f8345397570d01dda80aaea4776b3c0b9448af9b8c3de22cc33a",
+        "utf8_bytes": 9934
+      }
+    },
+    "rn_tests": 282,
+    "prior_tests_retained": 260,
+    "new_tests": 22,
+    "same_new_tests_before_fix": {
+      "pass": 11,
+      "fail": 11
+    },
+    "verification": "LOCAL_SYNTHETIC_REACT_AUTH_HTTP_TIMER_NATIVE_BOUNDARIES",
+    "backend_effective_flags_complete": false,
+    "input_screen_connected": false,
+    "source_get_ui_refresh_connected": false,
+    "live_auth_db_native_verified": false,
+    "product_acceptance": false,
+    "automatic_progression": false
   }
 }

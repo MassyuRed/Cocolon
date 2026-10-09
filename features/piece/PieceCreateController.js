@@ -27,6 +27,8 @@ import { createPiecePreviewState, closePiecePreview, beginPiecePreview, complete
 
 export function createPieceCreateController(configuration = {}) {
   const now = typeof configuration?.now === 'function' ? configuration.now : Date.now;
+  const onFeatureDisabled = typeof configuration?.onFeatureDisabled === 'function'
+    ? configuration.onFeatureDisabled : null;
   const listeners = new Set();
   let state = createPiecePreviewState();
   let operation = null;
@@ -112,7 +114,10 @@ export function createPieceCreateController(configuration = {}) {
       notify();
       return;
     }
-    if (enabled && !boundaryCode && equivalent(operation, next)) return;
+    // A repeated stale true/source/key must not clear a server-disabled result.
+    // A genuine disable/re-enable boundary or different intent can reset it;
+    // neither begins a request automatically.
+    if (enabled && (!boundaryCode || boundaryCode === 'PIECE_FEATURE_DISABLED') && equivalent(operation, next)) return;
     enabled = true;
     operation = next;
     boundaryCode = null;
@@ -137,6 +142,7 @@ export function createPieceCreateController(configuration = {}) {
     }
     const attempt = { ticket: begun.ticket, abort };
     const captured = state.operation;
+    const operationAtStart = operation;
     active = attempt;
     notify();
     // A subscriber may have closed, disabled, unmounted or selected a different
@@ -163,7 +169,16 @@ export function createPieceCreateController(configuration = {}) {
       operation = null;
       boundaryCode = 'PIECE_AUTH_REQUIRED';
     }
+    const featureDisabled = state.code === 'PIECE_FEATURE_DISABLED';
+    if (featureDisabled) boundaryCode = 'PIECE_FEATURE_DISABLED';
     notify();
+    // Notify only for the still-current settled intent, never for an obsolete
+    // request, disposed host or a new context selected by a subscriber.
+    if (featureDisabled && !disposed && enabled && operation === operationAtStart &&
+        boundaryCode === 'PIECE_FEATURE_DISABLED' && onFeatureDisabled) {
+      try { Promise.resolve(onFeatureDisabled()).catch(() => {}); }
+      catch { /* Runtime refresh failure cannot convert disabled into retry. */ }
+    }
   }
 
   async function start() {

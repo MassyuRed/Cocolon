@@ -136,7 +136,7 @@ Current shared PieceComposerはcaller-supplied candidateを評価するguard ada
 
 前回のPGlite補助確認17 PASSとcaller未切替FAIL／DB未確保NONCREDITは履歴として保持する。9/30のnative試験では21列・security_invoker bridge、旧piecesの定義/options保持、合成generated行読取り、published_at欠落時の拒否とbridge不存在、rollbackを確認した。最初のsandbox内socket接続失敗はNONCREDIT、実行可能な隔離環境で同じ凍結試験を通した。6readerは`astor_worker.py`、`api_piece_runtime.py`、`emlis_ai_readers.py`、`piece_generated_metrics.py`、`piece_generation_store.py`、`piece_public_read_store.py`。旧COCOLON_PIECES overrideを外し、既存MYMODELのoverride優先順を保持し、既定／空文字fallbackだけ専用read viewへ変更。query・write・認証・公開interfaceは不変。既存SQL・requirements・凍結test・historical caller preimagesは不変更。最新の反映commitと全文照合は[API Draft PR #3](https://github.com/MassyuRed/mashos-api/pull/3)の要約へ戻る。
 
-file-only B2-Aのこの技術受入れは成立した。API反映commitは`1a215c511858a574bf76b15d0ed20ddce984744b`。凍結受入れの識別値を保つため、API migration README／manifestの『native pending』状態文は9/27候補時点の履歴として不変更。この現在地記述がその状態文を更新するものであり、SQL・catalog baseline・caller preimagesを書き換えるものではない。新Pieceの保存preview発行・HTTP／RN・native renderer／実機の残件は§8・§20へ戻り、B2-B／live applyへ自動進行しない。本map・入口・manifestを同じ資料更新単位で同期する。EmlisAIの同日HR文章修正は別の責務であり、この橋渡し試験の商品creditに含めない。
+file-only B2-Aのこの技術受入れは成立した。API反映commitは`1a215c511858a574bf76b15d0ed20ddce984744b`。凍結受入れの識別値を保つため、API migration README／manifestの『native pending』状態文は9/27候補時点の履歴として不変更。この現在地記述がその状態文を更新するものであり、SQL・catalog baseline・caller preimagesを書き換えるものではない。新Pieceの保存preview発行・HTTP／RN／native renderer／実機の残件は§8・§20へ戻り、B2-B／live applyへ自動進行しない。本map・入口・manifestを同じ資料更新単位で同期する。EmlisAIの同日HR文章修正は別の責務であり、この橋渡し試験の商品creditに含めない。
 
 ## 5. Product and design owners
 
@@ -926,3 +926,24 @@ Node v22.16.0の対象5suiteは260 PASS／FAIL0／SKIP0／cancelled0。既存239
 System Context prepareは今回も部分コピーの `tools.cocolon_context` 不在で不成立。現行技術入口が許可する原典直接読取りを用いた。恒久incident、作業規則・Rule18、最新10/03週次方針と関連設計／map／現物を確認したが、全歴史地図・全sourceの新規監査を主張しない。
 
 前回の入口・map・manifestの未反映は今回の同期対象へ含めるが、更新準備とGitHubの反映後確認を混同しない。実DB・env・deploy・build・新依存・main／merge・有効化・実ユーザーデータ・旧Q&A・Emlis／Analysis変更0。実認証／端末の一往復、native画像生成／保存／共有、商品受入れ、10/10目標の達成は未完了。`automatic_progression=false`。
+
+## 29. 2026-10-09 — 開発プレビューの停止応答と既存runtimeへの接続
+
+既存PCE-7 §12の `PIECE_FEATURE_DISABLED` 受取りを、既存API→controller→InputPieceActionArea→AppRuntimeContextへつないだ。新しい公開route、flag resolver、event bus、認証ownerは追加しない。InputScreen未組込み・サーバー未登録の開発コードである。
+
+| Path | 今回の差分 |
+|---|---|
+| `features/piece/pieceApi.js` | source GET／preview POSTでexact503・code単独の停止応答を通常の通信失敗と区別する。要求・source_ref・同一キー・本文／recipe／3hashは不変更。 |
+| `features/piece/PieceCreateController.js` | 停止応答を同じ要求に保持し、明示closeや同じcontextの再設定で再試行可能へ戻さない。現在の要求だけが停止通知を一度発行する。 |
+| `screens/input/InputPieceActionArea.js` | 既存AppRuntimeContextをclass contextTypeで参照。現在の停止通知でmodalを閉じ、既存refreshAppRuntimeを一度呼ぶ。古いprops／背景／破棄後の応答を採用しない。 |
+| `AppRuntimeContext.js` | 既存Contextのnamed exportだけ追加。再取得・認証・foreground処理、provider配置・非Piece既定値は不変更。 |
+| `tests/piece-v2-feature-disabled.test.js` | 追加22検査。停止と通信失敗、古い応答、再取得成功／失敗、同じ要求の再試行抑止を検査する。 |
+| `tests/piece-v2-preview-display.test.js` | 既存harnessへContextの代替値を一つ追加。旧検査本文・期待値は不変更。 |
+
+停止時は「Pieceは現在利用できません。」とし、再試行ボタン・本文・保存／exportを出さない。既存bootstrap再取得はPiece表示flagを同期OFFにし、正常な再取得後も生成は別の明示操作である。通常の通信失敗では既存の同じ本文・同じキーによる明示再試行を保持する。共有bootstrapの他機能metadata再取得は既存どおり行う。
+
+検証はNode v22.16.0、対象6suite282 PASS／FAIL0／SKIP0／cancelled0。同じ最終22検査を旧4sourceへ戻して実行すると追加11 PASS／11 FAIL、旧260件は成功。初回の22失敗は新規検査harnessのAbortController不足でNONCREDITとして分離し、因果REDへ含めない。別コピーへの差分再適用と全文一致・282 PASSも確認した。ESMの実7moduleを連結し同一Context参照を確認したが、React・Auth・HTTP・timer・native部品は代替で、実React／Hermes／Auth／DB／端末／CI／独立review／商品受入れの成功ではない。
+
+今回の503は停止コードのRN受取側の限定対応であり、サーバーの発行statusや実効flag制御の検証ではない。source GETの停止コードは読めるが、GETの画面callerは未接続。次の直接残件はサーバー実効flag供給・操作時強制と、本人の保存入力→InputScreen→同じpreviewの接続。native画像生成／保存／共有、capabilities／quota、実認証／DB／端末、商品受入れと10/10目標は未完了。
+
+System Context prepareは部分コピーのmodule不足で不成立、既存正本の原典直接参照を継続した。恒久incidentを全文再読し、同じ会話で確認した作業規則・全体地図の関連役割・最新10/03週次方針と今回の対象現物を照合した。全歴史地図・全sourceの新規監査は主張しない。資料の準備とbranch反映・再取得確認は別に記録する。実DB・env・deploy・build・新依存・main／merge・有効化・実ユーザーデータ・旧Q&A・Emlis／Analysis変更0。`automatic_progression=false`。

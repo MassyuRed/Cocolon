@@ -33,9 +33,10 @@ const STATUS = Object.freeze({
   PIECE_CONFLICT: 409, PIECE_HASH_MISMATCH: 409,
   PIECE_SOURCE_NOT_ELIGIBLE: 422, PIECE_FORMAT_NOT_ELIGIBLE: 422,
   PIECE_VISUAL_SELECTION_NOT_ALLOWED: 422, PIECE_SAFETY_UNAVAILABLE: 422,
-  PIECE_TEMPORARILY_UNAVAILABLE: 503,
+  PIECE_TEMPORARILY_UNAVAILABLE: 503, PIECE_FEATURE_DISABLED: 503,
 });
 const MESSAGES = Object.freeze({
+  PIECE_FEATURE_DISABLED: 'Pieceは現在利用できません。',
   PIECE_REQUEST_INVALID: 'Pieceの要求を確認できませんでした。',
   PIECE_AUTH_REQUIRED: 'ログイン状態が変わった可能性があります。アカウントを確認してください。',
   PIECE_SOURCE_NOT_FOUND: 'この入力は現在利用できません。',
@@ -219,7 +220,7 @@ async function requestPieceData(value, options = {}, savedInputId = null) {
     checkAbort(signal);
     if (response.status !== 200) {
       const sourceCodes = ['PIECE_REQUEST_INVALID', 'PIECE_AUTH_REQUIRED', 'PIECE_SOURCE_NOT_FOUND',
-        'PIECE_SOURCE_NOT_ELIGIBLE', 'PIECE_CONFLICT', 'PIECE_TEMPORARILY_UNAVAILABLE'];
+        'PIECE_SOURCE_NOT_ELIGIBLE', 'PIECE_CONFLICT', 'PIECE_TEMPORARILY_UNAVAILABLE', 'PIECE_FEATURE_DISABLED'];
       reject((!sourceRead || sourceCodes.includes(result?.code)) && exact(result, ['code']) && Object.prototype.hasOwnProperty.call(STATUS, result.code) &&
         STATUS[result.code] === response.status ? result.code : 'PIECE_TEMPORARILY_UNAVAILABLE');
     }

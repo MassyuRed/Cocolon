@@ -117,7 +117,7 @@ const INITIAL_RUNTIME_STATE = Object.freeze({
   },
 });
 
-const AppRuntimeContext = createContext({
+export const AppRuntimeContext = createContext({
   runtime: INITIAL_RUNTIME_STATE,
   featureFlags: INITIAL_RUNTIME_STATE.featureFlags,
   refreshAppRuntime: async () => INITIAL_RUNTIME_STATE,

@@ -5,6 +5,7 @@
  * body, runtime flag activation, key generation, quota default, save or export.
  */
 import React from 'react';
+import { AppRuntimeContext } from '../../AppRuntimeContext';
 import { AppState, View, Button, Text } from 'react-native';
 import { createPieceCreateController } from '../../features/piece/PieceCreateController';
 import { preparePiecePreviewRequest } from '../../features/piece/pieceApi';
@@ -23,6 +24,8 @@ function contextStamp(value) {
 }
 
 export default class InputPieceActionArea extends React.Component {
+  static contextType = AppRuntimeContext;
+
   constructor(props) {
     super(props);
     this.state = { revision: 0, open: false };
@@ -44,7 +47,16 @@ export default class InputPieceActionArea extends React.Component {
     this.mounted = true;
     this.foreground = AppState.currentState === 'active';
     this.boundStamp = null;
-    this.controller = createPieceCreateController();
+    this.controller = createPieceCreateController({ onFeatureDisabled: () => {
+      // Props may have changed before componentDidUpdate; an old response must
+      // not close or refresh the next account/source's runtime presentation.
+      if (!this.isCurrent()) return;
+      this.setState({ open: false });
+      // Existing runtime refresh clears cached Piece flags synchronously. No
+      // new resolver, event bus, auth payload, preview retry or legacy fallback.
+      try { return Promise.resolve(this.context?.refreshAppRuntime?.()).catch(() => {}); }
+      catch { return undefined; }
+    } });
     this.unsubscribe = this.controller.subscribe(this.changed);
     this.appSubscription = AppState.addEventListener('change', next => {
       if (!this.mounted) return;
