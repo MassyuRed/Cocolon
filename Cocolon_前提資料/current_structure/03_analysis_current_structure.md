@@ -14,7 +14,9 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**2026-10-10 配置確認**：入力不足の正常案内API `5c8bd8e5d7f876335eb840ceee26883a030a34a5` は **18:32:12 JST live**。healthz/bootstrap200、未認証latest/status401、起動完了を確認した。iOSは[run65](https://github.com/MassyuRed/Cocolon/actions/runs/38041653252)、attempt1、source `55142229b6860b9c8195989cdddf0f218f07700a` でarchive/export/uploadが全てsuccess、**18:47:24 JSTにTestFlight送信成功**。対象sourceの版番号と成功した採番工程から **1.0（6501）** と照合（ログ取得は連携切断のため未読）。Apple側利用可能性・本人端末の通常案内は未確認。現行6301の再起動だけでは今回の画面文言は届かない。配置/buildの実行記録と確認再開はAPI運用記録§39。前候補4bb37a0の配置案内は取消しを維持し、分析生成条件を緩める変更は撤回済み。
+**2026-10-10 18:51 JST 本人実機確認済み**：Mashから「入力情報が少ないため、まだ分析を表示できません。」の表示確認報告を受けた。今回の入力不足を通常案内にする表示対応は、本人実機の確認まで完了。再表示/再起動や分析生成・内容品質の確認へは拡張しない。追加入力・再配置は不要。詳細はAPI運用記録§40。
+
+**2026-10-10 配置確認**：入力不足の正常案内API `5c8bd8e5d7f876335eb840ceee26883a030a34a5` は **18:32:12 JST live**。healthz/bootstrap200、未認証latest/status401、起動完了を確認した。iOSは[run65](https://github.com/MassyuRed/Cocolon/actions/runs/38041653252)、attempt1、source `55142229b6860b9c8195989cdddf0f218f07700a` でarchive/export/uploadが全てsuccess、**18:47:24 JSTにTestFlight送信成功**。対象sourceの版番号と成功した採番工程から **1.0（6501）** と照合（ログ取得は連携切断のため未読）。この配置確認時点では本人端末の通常案内は未確認だったが、上記18:51 JSTの本人報告で表示確認済みへ更新。端末build番号の独立照合はしていない。配置/buildの実行記録はAPI運用記録§39、本人表示確認は§40。前候補4bb37a0の配置案内は取消しを維持し、分析生成条件を緩める変更は撤回済み。
 
 
 **2026-10-10 18:19 JST 本人訂正 — 入力不足の正常案内へ修正（未配置）**：Mashの意図は、少ない情報から分析を無理に表示することではなく、分析に必要な情報がそろうまで「入力情報が少ないため、まだ分析を表示できません。」と案内すること。直前のAPI `4bb37a0afdc020576b0c1e33fa454674fd5b36c7` の配置案内を撤回し、追加した省略主語の文法分岐とその専用検査を戻した。分析生成条件は変更しない。既存engineが現在入力について返すUNAVAILABLE／`analysis_observed_route_not_established`／artifactなしの組だけを、APIの正常200・`reason=insufficient_input`・`skip_reason=analysis_insufficient_input`へ変換する。分析本文・図・保存・既読登録は作らない。空期間/読取専用のno_visible_content、内部処理/比較/権限/DB障害は区別したまま。既存RN画面でこの状態だけを案内表示へ接続する。STRUCTURE_MAP_DELTA_NONE（既存service/画面内の状態処理、公開キー追加なし）。API配置と新しいiOSビルドが必要で、6301へAPIだけ配置しても新文言は届かない。検証・反映先・操作再開はmashos-api `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md` §38。本人実機の案内表示は未確認。
