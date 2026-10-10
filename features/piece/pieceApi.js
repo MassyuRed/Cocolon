@@ -3,11 +3,8 @@
  * Connects to api_piece_v2.py at 0c6cb565; no legacy client or runtime caller
  * is changed. Importing this module performs no network operation.
  *
- * This is a detached wire snapshot, NOT renderer admission or a complete
- * preview UI. Formal structure-map/manifest synchronization remains pending.
- * Hashes are carried unchanged, not recomputed here. The current
- * backend response lacks PCE-6 capabilities/quota; those and the source CTA,
- * effective flags, preview model and native renderer still need integration.
+ * Capabilities/quota are closed display snapshots, not save admission.
+ * The native renderer, mutation and save/export delivery remain separate.
  * No default entitlement, expiry, renderer, safety verdict or key is invented.
  */
 import { apiFetch, getAccessToken } from "../../lib/apiClient";
@@ -24,7 +21,7 @@ const PREVIEW_FIELDS = [
   'preview_revision', 'row_version', 'expires_at', 'visibility_scope',
   'content_status', 'format_type', 'eligible_formats', 'content_payload',
   'content_payload_hash', 'piece_text', 'piece_text_hash', 'visual_recipe',
-  'visual_recipe_hash', 'renderer_version',
+  'visual_recipe_hash', 'renderer_version', 'quota', 'plan_capabilities',
 ];
 const STATUS = Object.freeze({
   PIECE_REQUEST_INVALID: 400, PIECE_AUTH_REQUIRED: 401,
@@ -113,6 +110,39 @@ function freeze(value) {
   return value;
 }
 
+function validatePreviewPlan(value) {
+  const quota = value.quota, caps = value.plan_capabilities, recipe = value.visual_recipe;
+  if (!exact(quota, ['contract_version', 'subscription_tier', 'month_key',
+    'save_limit', 'saved_count', 'remaining_count', 'can_save']) ||
+      quota.contract_version !== 'piece.quota_consumption.v1' ||
+      !['free', 'plus', 'premium'].includes(quota.subscription_tier) ||
+      typeof quota.month_key !== 'string' || !/^[0-9]{4}-(?:0[1-9]|1[0-2])$/.test(quota.month_key) ||
+      !Number.isSafeInteger(quota.saved_count) || quota.saved_count < 0) {
+    reject('PIECE_TEMPORARILY_UNAVAILABLE');
+  }
+  const tier = quota.subscription_tier;
+  const limit = { free: 5, plus: 30, premium: null }[tier];
+  const allowed = {
+    format_selection: { free: 'fixed', plus: 'automatic', premium: 'eligible_choice' }[tier],
+    theme_ids: tier === 'free' ? ['soft_paper'] : ['soft_paper', 'quiet_night'],
+    aspect_ratios: tier === 'premium' ? ['4:5', '9:16'] : ['4:5'],
+    branding_modes: tier === 'free' ? ['required_small'] :
+      tier === 'premium' ? ['required_subtle', 'off'] : ['required_subtle'],
+  };
+  if (quota.save_limit !== limit ||
+      quota.remaining_count !== (limit === null ? null : Math.max(0, limit - quota.saved_count)) ||
+      quota.can_save !== (limit === null || quota.saved_count < limit) ||
+      !exact(caps, Object.keys(allowed)) || caps.format_selection !== allowed.format_selection ||
+      !['theme_ids', 'aspect_ratios', 'branding_modes'].every(key => Array.isArray(caps[key]) &&
+        caps[key].length === allowed[key].length && caps[key].every((item, i) => item === allowed[key][i])) ||
+      (tier === 'free' && value.format_type !== 'short_essay') ||
+      !allowed.theme_ids.includes(recipe.theme.theme_id) ||
+      !allowed.aspect_ratios.includes(recipe.aspect_ratio) ||
+      !allowed.branding_modes.includes(recipe.branding.branding_mode)) {
+    reject('PIECE_TEMPORARILY_UNAVAILABLE');
+  }
+}
+
 function previewSnapshot(raw) {
   if (!exact(raw, PREVIEW_FIELDS)) reject('PIECE_TEMPORARILY_UNAVAILABLE');
   const value = JSON.parse(JSON.stringify(raw));
@@ -167,6 +197,7 @@ function previewSnapshot(raw) {
         (recipe.aspect_ratio !== '4:5' || recipe.theme.theme_id !== 'soft_paper'))) {
     reject('PIECE_TEMPORARILY_UNAVAILABLE');
   }
+  validatePreviewPlan(value);
   // Only the supported v1 representation is read here. Entitlement decisions,
   // SHA recomputation, layout fit and native rendering remain separate.
   return freeze(value);

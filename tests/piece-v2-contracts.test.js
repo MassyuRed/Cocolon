@@ -49,7 +49,7 @@ function preview(format = 'short_essay') {
     theme: { theme_id: 'soft_paper', theme_version: 1 },
     font_style: { font_style_id: 'system_readable', font_style_version: 1 },
     aspect_ratio: '4:5',
-    branding: { branding_mode: 'required_small', branding_mark_id: 'cocolon_text_mark', branding_mark_version: 1 },
+    branding: { branding_mode: format === 'short_essay' ? 'required_small' : 'required_subtle', branding_mark_id: 'cocolon_text_mark', branding_mark_version: 1 },
     layout_policy_version: 'piece.long_text_layout.v1', language: 'ja',
   };
   const text = blocks.join(format === 'short_essay' ? '\n\n' : '\n');
@@ -62,6 +62,14 @@ function preview(format = 'short_essay') {
     content_payload_hash: digest(JSON.stringify(canonical(payload))),
     piece_text: text, piece_text_hash: digest(text), visual_recipe: recipe,
     visual_recipe_hash: digest(JSON.stringify(canonical(recipe))),
+    quota: { contract_version: 'piece.quota_consumption.v1',
+      subscription_tier: format === 'short_essay' ? 'free' : 'premium', month_key: '2026-10',
+      save_limit: format === 'short_essay' ? 5 : null, saved_count: 2,
+      remaining_count: format === 'short_essay' ? 3 : null, can_save: true },
+    plan_capabilities: { format_selection: format === 'short_essay' ? 'fixed' : 'eligible_choice',
+      theme_ids: format === 'short_essay' ? ['soft_paper'] : ['soft_paper', 'quiet_night'],
+      aspect_ratios: format === 'short_essay' ? ['4:5'] : ['4:5', '9:16'],
+      branding_modes: format === 'short_essay' ? ['required_small'] : ['required_subtle', 'off'] },
     renderer_version: 'synthetic-renderer.v1',
   };
 }
@@ -296,7 +304,8 @@ test('transport carries hash identities but does not award renderer or cryptogra
   assert.equal(result.hash_verified, undefined);
   assert.equal(result.render_ready, undefined);
   assert.equal(result.capabilities, undefined);
-  assert.equal(result.quota, undefined);
+  assert.deepEqual(copy(result.quota), preview().quota);
+  assert.deepEqual(copy(result.plan_capabilities), preview().plan_capabilities);
 });
 
 test('null options are a closed request error, not a raw TypeError', async () => {
@@ -326,8 +335,8 @@ for (const mutate of [
   });
 }
 
-test('accepted 9:16 adjusted preview retains its server recipe and does not invent capability data', async () => {
-  const value = preview();
+test('accepted Premium 9:16 adjusted preview retains server recipe and plan metadata', async () => {
+  const value = preview('quote');
   value.content_status = 'adjusted';
   value.visual_recipe.aspect_ratio = '9:16';
   value.visual_recipe.branding.branding_mode = 'required_subtle';
@@ -349,3 +358,54 @@ for (const mutate of [
     assert.equal(api.calls.length, 0);
   });
 }
+
+
+const planCases = {
+  free: { format_selection: 'fixed', theme_ids: ['soft_paper'], aspect_ratios: ['4:5'], branding_modes: ['required_small'] },
+  plus: { format_selection: 'automatic', theme_ids: ['soft_paper', 'quiet_night'], aspect_ratios: ['4:5'], branding_modes: ['required_subtle'] },
+  premium: { format_selection: 'eligible_choice', theme_ids: ['soft_paper', 'quiet_night'], aspect_ratios: ['4:5', '9:16'], branding_modes: ['required_subtle', 'off'] },
+};
+for (const tier of ['free', 'plus', 'premium']) {
+  test(`current ${tier} plan and quota survive transport as immutable display metadata`, async () => {
+    const raw = preview();
+    const limit = { free: 5, plus: 30, premium: null }[tier];
+    raw.quota = { contract_version: 'piece.quota_consumption.v1', subscription_tier: tier,
+      month_key: '2026-10', save_limit: limit, saved_count: 32,
+      remaining_count: limit === null ? null : 0, can_save: limit === null };
+    raw.plan_capabilities = copy(planCases[tier]);
+    raw.visual_recipe.branding.branding_mode = tier === 'free' ? 'required_small' : 'required_subtle';
+    raw.visual_recipe_hash = digest(JSON.stringify(canonical(raw.visual_recipe)));
+    const api = load({ send: async () => ({ status: 200, json: async () => raw }) });
+    const received = await api.requestPiecePreview(request(), options());
+    assert.deepEqual(copy(received), raw);
+    assert.ok(Object.isFrozen(received.quota)); assert.ok(Object.isFrozen(received.plan_capabilities.theme_ids));
+    assert.equal(api.calls.length, 1);
+  });
+}
+const badPlanMetadata = [
+  raw => { delete raw.quota; }, raw => { delete raw.plan_capabilities; },
+  raw => { raw.quota = null; }, raw => { raw.plan_capabilities = []; },
+  raw => { raw.quota.extra = true; }, raw => { raw.plan_capabilities.save_enabled = true; },
+  raw => { raw.quota.contract_version = 'v0'; }, raw => { raw.quota.subscription_tier = 'unknown'; },
+  raw => { raw.quota.subscription_tier = 'premium'; }, raw => { raw.quota.month_key = '2026-13'; },
+  raw => { raw.quota.month_key = '2026-1'; }, raw => { raw.quota.saved_count = -1; },
+  raw => { raw.quota.saved_count = true; }, raw => { raw.quota.saved_count = 1.5; },
+  raw => { raw.quota.saved_count = Number.MAX_SAFE_INTEGER + 1; },
+  raw => { raw.quota.save_limit = null; }, raw => { raw.quota.remaining_count = null; },
+  raw => { raw.quota.remaining_count = 4; }, raw => { raw.quota.can_save = false; },
+  raw => { raw.quota.can_save = 1; }, raw => { raw.plan_capabilities.format_selection = 'eligible_choice'; },
+  raw => { raw.plan_capabilities.theme_ids.push('quiet_night'); },
+  raw => { raw.plan_capabilities.theme_ids.push('soft_paper'); },
+  raw => { raw.plan_capabilities.aspect_ratios.push('9:16'); },
+  raw => { raw.plan_capabilities.branding_modes = ['off']; },
+  raw => { raw.visual_recipe.branding.branding_mode = 'required_subtle'; },
+  raw => { raw.plan_capabilities.theme_ids = 'soft_paper'; },
+];
+badPlanMetadata.forEach((change, index) => {
+  test(`malformed or inconsistent preview plan/quota ${index + 1} is closed`, async () => {
+    const raw = preview(); change(raw);
+    const api = load({ send: async () => ({ status: 200, json: async () => raw }) });
+    await assert.rejects(api.requestPiecePreview(request(), options()),
+      error => error.code === 'PIECE_TEMPORARILY_UNAVAILABLE');
+  });
+});

@@ -32,7 +32,7 @@ function response(format = 'short_essay') {
   const visual_recipe = { visual_recipe_version: 'piece.visual_recipe.v1', visual_catalog_version: 'piece.visual_catalog.v1',
     format_type: format, template: { template_id: { short_essay: 'essay_frame', quote: 'focus_frame', declaration: 'stance_frame' }[format], template_version: 1 },
     theme: { theme_id: 'soft_paper', theme_version: 1 }, font_style: { font_style_id: 'system_readable', font_style_version: 1 },
-    aspect_ratio: '4:5', branding: { branding_mode: 'required_small', branding_mark_id: 'cocolon_text_mark', branding_mark_version: 1 },
+    aspect_ratio: '4:5', branding: { branding_mode: format === 'short_essay' ? 'required_small' : 'required_subtle', branding_mark_id: 'cocolon_text_mark', branding_mark_version: 1 },
     layout_policy_version: 'piece.long_text_layout.v1', language: 'ja' };
   const piece_text = blocks.join(format === 'short_essay' ? '\n\n' : '\n');
   return { api_contract_version: 'piece.api.v2', piece_contract_version: 'piece.record.v2',
@@ -40,6 +40,14 @@ function response(format = 'short_essay') {
     expires_at: '2026-10-08T10:00:01.123456+00:00', visibility_scope: 'private', content_status: 'ready',
     format_type: format, eligible_formats: [format], content_payload, content_payload_hash: hash(JSON.stringify(canonical(content_payload))),
     piece_text, piece_text_hash: hash(piece_text), visual_recipe, visual_recipe_hash: hash(JSON.stringify(canonical(visual_recipe))),
+    quota: { contract_version: 'piece.quota_consumption.v1',
+      subscription_tier: format === 'short_essay' ? 'free' : 'premium', month_key: '2026-10',
+      save_limit: format === 'short_essay' ? 5 : null, saved_count: 2,
+      remaining_count: format === 'short_essay' ? 3 : null, can_save: true },
+    plan_capabilities: { format_selection: format === 'short_essay' ? 'fixed' : 'eligible_choice',
+      theme_ids: format === 'short_essay' ? ['soft_paper'] : ['soft_paper', 'quiet_night'],
+      aspect_ratios: format === 'short_essay' ? ['4:5'] : ['4:5', '9:16'],
+      branding_modes: format === 'short_essay' ? ['required_small'] : ['required_subtle', 'off'] },
     renderer_version: 'synthetic-renderer.v1' };
 }
 function load() {

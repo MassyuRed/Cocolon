@@ -32,7 +32,7 @@ function response(format = 'short_essay') {
   const visual_recipe = { visual_recipe_version: 'piece.visual_recipe.v1', visual_catalog_version: 'piece.visual_catalog.v1',
     format_type: format, template: { template_id: { short_essay: 'essay_frame', quote: 'focus_frame', declaration: 'stance_frame' }[format], template_version: 1 },
     theme: { theme_id: 'soft_paper', theme_version: 1 }, font_style: { font_style_id: 'system_readable', font_style_version: 1 },
-    aspect_ratio: '4:5', branding: { branding_mode: 'required_small', branding_mark_id: 'cocolon_text_mark', branding_mark_version: 1 },
+    aspect_ratio: '4:5', branding: { branding_mode: format === 'short_essay' ? 'required_small' : 'required_subtle', branding_mark_id: 'cocolon_text_mark', branding_mark_version: 1 },
     layout_policy_version: 'piece.long_text_layout.v1', language: 'ja' };
   const piece_text = blocks.join(format === 'short_essay' ? '\n\n' : '\n');
   return { api_contract_version: 'piece.api.v2', piece_contract_version: 'piece.record.v2',
@@ -40,6 +40,14 @@ function response(format = 'short_essay') {
     expires_at: '2026-10-08T10:00:01.123456+00:00', visibility_scope: 'private', content_status: 'ready',
     format_type: format, eligible_formats: [format], content_payload, content_payload_hash: hash(JSON.stringify(canonical(content_payload))),
     piece_text, piece_text_hash: hash(piece_text), visual_recipe, visual_recipe_hash: hash(JSON.stringify(canonical(visual_recipe))),
+    quota: { contract_version: 'piece.quota_consumption.v1',
+      subscription_tier: format === 'short_essay' ? 'free' : 'premium', month_key: '2026-10',
+      save_limit: format === 'short_essay' ? 5 : null, saved_count: 2,
+      remaining_count: format === 'short_essay' ? 3 : null, can_save: true },
+    plan_capabilities: { format_selection: format === 'short_essay' ? 'fixed' : 'eligible_choice',
+      theme_ids: format === 'short_essay' ? ['soft_paper'] : ['soft_paper', 'quiet_night'],
+      aspect_ratios: format === 'short_essay' ? ['4:5'] : ['4:5', '9:16'],
+      branding_modes: format === 'short_essay' ? ['required_small'] : ['required_subtle', 'off'] },
     renderer_version: 'synthetic-renderer.v1' };
 }
 
@@ -284,3 +292,34 @@ test('an observed native-host expiry cannot reappear after a later local clock r
   assert.equal(u.calls.length, 1); assert.equal(u.timers.size, 0);
   u.host.componentWillUnmount();
 });
+
+
+for (const tier of ['free', 'plus', 'premium']) {
+  test(`preview shows ${tier} capability and current-month quota without granting actions`, async () => {
+    const raw = response(tier === 'premium' ? 'quote' : 'short_essay');
+    if (tier === 'plus') {
+      raw.quota = { ...raw.quota, subscription_tier: 'plus', save_limit: 30, remaining_count: 28 };
+      raw.plan_capabilities = { format_selection: 'automatic', theme_ids: ['soft_paper', 'quiet_night'],
+        aspect_ratios: ['4:5'], branding_modes: ['required_subtle'] };
+      raw.visual_recipe.branding.branding_mode = 'required_subtle';
+      raw.visual_recipe_hash = hash(JSON.stringify(canonical(raw.visual_recipe)));
+    }
+    if (tier === 'free') raw.quota = { ...raw.quota, saved_count: 5, remaining_count: 0, can_save: false };
+    const u = previewUiHarness({ send: async () => pieceHttp(raw) });
+    u.mount(); u.host.start(); await pieceTick();
+    const nodes = u.nodes(u.tree());
+    const labels = nodes.filter(n => n.type === 'Text').map(n => n.children.join('')).join('\n');
+    assert.match(labels, /2026-10（日本時間）の保存枠/);
+    assert.ok(labels.includes({ free: '残り0回 / 5回', plus: '残り28回 / 30回', premium: '回数制限なし' }[tier]));
+    assert.ok(labels.includes({ free: '形式：エッセイ（固定）', plus: '形式：入力に合う形式を自動選択', premium: '選択できる形式：引用' }[tier]));
+    assert.equal(labels.includes('静かな夜'), tier !== 'free');
+    assert.equal(labels.includes('9:16'), tier === 'premium');
+    assert.equal(labels.includes('表示なし'), tier === 'premium');
+    assert.equal(nodes.filter(n => n.type === 'Button').map(n => n.props.title).join(','), '閉じる');
+    const display = u.read(receivedView(raw), NOW);
+    assert.equal(display.canSave, false); assert.equal(display.canExport, false);
+    u.advance(1123);
+    assert.equal(u.nodes(u.tree()).some(n => n.props.testID === 'piece-plan-details'), false);
+    u.host.componentWillUnmount();
+  });
+}

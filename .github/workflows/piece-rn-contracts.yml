@@ -1,0 +1,41 @@
+# Source-level Piece integration only; no native build, live credentials or deploy.
+name: Piece RN preview contracts
+'on':
+  push:
+    branches:
+      - agent/three-core-cmee-current-structure-20260815
+    paths:
+      - .github/workflows/piece-rn-contracts.yml
+      - features/piece/**
+      - components/piece/**
+      - screens/input/InputPieceActionArea.js
+      - screens/InputScreen.js
+      - AppRuntimeContext.js
+      - tests/piece-v2-*.test.js
+      - package.json
+permissions:
+  contents: read
+jobs:
+  piece-rn-contracts:
+    if: github.repository == 'MassyuRed/Cocolon'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Install only the existing test compiler in a disposable directory
+        run: npm install --prefix "$RUNNER_TEMP/piece-node-tests" --ignore-scripts --no-audit --no-fund typescript@5.2.2
+      - name: Verify the eight existing Piece source suites
+        shell: bash
+        run: |
+          set -euo pipefail
+          export NODE_PATH="$RUNNER_TEMP/piece-node-tests/node_modules"
+          git rev-parse HEAD
+          node --version
+          node -p "require('typescript').version"
+          node --test tests/piece-v2-contracts.test.js tests/piece-v2-state-models.test.js tests/piece-v2-preview-display.test.js tests/piece-v2-runtime.test.js tests/piece-v2-feature-disabled.test.js tests/piece-v2-saved-input-host.test.js tests/piece-v2-source-ref.test.js tests/piece-v2-input-screen.test.js
