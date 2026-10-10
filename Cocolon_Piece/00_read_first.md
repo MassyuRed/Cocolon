@@ -840,3 +840,6 @@ API CI 38019674020＝1,537 PASS、RN CI 38019722996＝365 PASS（既存8suite）
 今回のgeometry_checkedは画像レイアウトの確認用表示。glyph/実ink/禁則・B9とのlayout同等性・指定renderer対応・PNG/export・実機は未成立で、保存前fit成功ではない。canSave/canExport=false。次は同じnative canvasのglyph/inkとlayout/renderer admissionを成立させ、既存保存API接続へ進む。SQL005稼働未適用、001〜004適用済み、M5/設定変更/画像保存共有/実Auth実機の残件を維持する。
 
 local既存368＋新renderer18＝386 PASS／FAIL0／SKIP0。InputScreen含むCI結果は後続確認。測定値/React/nativeは代替で、実機合格ではない。根拠・owner map・検証境界はcurrent_structure/02_piece_current_structure.md §39。API/DB/env/deploy/activation/native build/main merge変更0。weekly review §5.5・12/18目標・automatic_progression=falseを維持。
+
+
+§35最終確認：source `1976de5ca9f2d9c6c68b3cdfb8ca7f1bc2f19c6e` の[CI 38022110375](https://github.com/MassyuRed/Cocolon/actions/runs/38022110375)でInputScreenを含む10suite **415 PASS／FAIL0／SKIP0**。remote再取得で今回9fileのbytesと変更path集合を確認済み。native試作のコード接続が成立した結果であり、保存前fit・PNG/共有・実機の完成ではない。

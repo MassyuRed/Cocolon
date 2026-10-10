@@ -1359,3 +1359,8 @@ local Node 24.19.0で既存8suite368件＋renderer新18件＝**386 PASS／FAIL0�
 次はこの同じnative canvasについて、glyph/inkの測定手段とgrapheme/禁則を含むlayout同等性、target renderer versionのadmissionを接続し、保存前fitを成立させる工程。その後に同じpreview identity/revision/3hashで保存操作へ進む。画像capture/端末保存/共有の依存preflight、owner/Nexusへの同じ描画接続、preview設定変更、M5の旧経路移行、005適用、実Auth/実機も残る。
 
 既存001〜004適用済み／005稼働未適用を保持。今回はlive DB照会/適用0、API/SQL/env/deploy/activation/native build/main merge/本人データ試験0。全体設計図01/関連01Bと全ファイル構造地図、Piece current map/原典、現行作業ルールと恒久incident、最新10/10 weekly review §5.5を確認し、Emlis＋分析の先行実機順と12/18公開目標を保持した。生成System Contextの過去失敗を成功に変えず、許可された原典直接読取を使用。今回の明示Piece続行に基づく既存設計内の可逆的RN準備・GitHub反映。DIRECT_PRODUCT_OR_ACCEPTANCE_WORK／TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_UPDATED、automatic_progression=false。
+
+
+### 39.5 GitHub反映と最終CI
+
+source＋再開資料9fileをcommit `1976de5ca9f2d9c6c68b3cdfb8ca7f1bc2f19c6e` でPR #30へnon-force反映し、remote再取得で全9fileのbytesと変更path集合の一致を確認した。[Piece RN CI 38022110375](https://github.com/MassyuRed/Cocolon/actions/runs/38022110375)／job 114125130449は同commitでsuccess。InputScreen29件を含む10suite＝**415 PASS／FAIL0／SKIP0／cancelled0**（既存397＋新renderer18）。Node 24.21.0、既存TypeScript 5.2.2。local386件との差29件はInputScreenで、件数を合算しない。sourceはこのCI版から変更していない。本節・入口・manifestへの最終結果追記だけを後続反映する。実native計測・実機画像・保存前fit・商品受入れは未成立のまま。

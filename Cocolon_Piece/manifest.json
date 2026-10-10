@@ -13,9 +13,9 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "d8b7c8cfa61ab5042f7d9ed18f424486d938fc22",
-    "raw_sha256": "8185f627e6afad5eeaa904df9835900bf9afe2be6fea7ab80e6a6a049f76621e",
-    "utf8_bytes": 56978
+    "git_blob_sha1": "098f7c87102f89f3e6e0881ab04beb6ecf7b7a65",
+    "raw_sha256": "867c5c5573b460139779ac3baeaf1d8f807dab16d1b40f4f777d7be13522c708",
+    "utf8_bytes": 57389
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -1983,7 +1983,7 @@
     "source_postcheck": "14 target files byte-equal and exact changed-path set verified from fetched remote"
   },
   "native_preview_20261010": {
-    "status": "LOCAL_SOURCE_TESTED_REMOTE_CI_PENDING",
+    "status": "REMOTE_SOURCE_VERIFIED_CI_PASSED",
     "map": "Cocolon_前提資料/current_structure/02_piece_current_structure.md section39",
     "owner_paths": [
       "features/piece/pieceLayout.js",
@@ -2002,9 +2002,17 @@
       "failed": 0,
       "skipped": 0,
       "node": "24.19.0",
-      "input_screen_ci_pending": true,
+      "input_screen_ci_pending": false,
       "native_device": false,
-      "native_font_metrics": false
+      "native_font_metrics": false,
+      "ci_run_id": 38022110375,
+      "ci_job_id": 114125130449,
+      "ci_tested_sha": "1976de5ca9f2d9c6c68b3cdfb8ca7f1bc2f19c6e",
+      "ci_passed": 415,
+      "ci_suites": 10,
+      "ci_conclusion": "success",
+      "node_ci": "24.21.0",
+      "typescript_ci": "5.2.2"
     },
     "save_fit": false,
     "can_save": false,
@@ -2017,6 +2025,8 @@
     "native_build": 0,
     "main_merge": 0,
     "product_acceptance": false,
-    "automatic_progression": false
+    "automatic_progression": false,
+    "source_commit": "1976de5ca9f2d9c6c68b3cdfb8ca7f1bc2f19c6e",
+    "source_postcheck": "9 target files byte-equal and exact changed-path set verified from fetched remote"
   }
 }
