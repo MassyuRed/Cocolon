@@ -9,13 +9,13 @@
     "predecessor_schema_version": "cocolon.piece.workstream_manifest.v48",
     "predecessor_blob": "8fc829b2626f271251e3a02dbc5f14b36dbc6199",
     "predecessor_head": "e5980b4ee1d8164fc2eca73b7a12d1e0269566d7",
-    "carry_forward": "Native export library compilation in progress; existing raw directory initialization repaired. No admission, device acceptance or product UI enablement."
+    "carry_forward": "Four pinned export libraries compiled on iOS simulator and Android. Raw-cache restart bug fixed; 572 JS tests pass. Device rendering, formal admission/fit, UI connection and shared-copy recovery remain pending."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "55d5e19e6ff79b1b9462be09243faf0a1dfefe80",
-    "raw_sha256": "90e592a051baa5ce92e38e7d58c437ea3e520bef087b31d098c1147cbfc05d16",
-    "utf8_bytes": 86875
+    "git_blob_sha1": "17d8856176819a99c7148bab0a90d5075ee07392",
+    "raw_sha256": "a0c4b8bf7ced61d827389681e62b27ce55e49a5f143dc8a67d6ddc5b83bd2aca",
+    "utf8_bytes": 87615
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -81,7 +81,8 @@
     "pce9a_quota_composition": "REMOTE_CANDIDATE_REGISTERED__ISOLATED_CI1774_PASS__NOT_LIVE",
     "pce9a_private_save_composition": "REMOTE_CANDIDATE_REGISTERED__ISOLATED_CI1789_PASS__NOT_LIVE",
     "pce9c_save_transport": "REMOTE_CI557_PASS__SAVE_ACTION_NATIVE_FIT_DEVICE_PENDING",
-    "pce9e_export_preflight": "SOURCE_REVIEWED_PINNED_PROPOSAL_INSTALL_NOT_APPROVED"
+    "pce9e_export_preflight": "HISTORICAL_SOURCE_REVIEWED_PINNED_PROPOSAL__CURRENT_IMPLEMENTATION_IN_EXPORT_NATIVE_COMPILE_20261011",
+    "pce9e_export_native_compile": "REMOTE_E4F4984__IOS_ANDROID_LIBRARY_COMPILE_PASS__JS572_PASS__DEVICE_ADMISSION_PENDING"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -218,12 +219,12 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "NATIVE_DEVICE_RENDERER_ADMISSION_THEN_SAVE_FIT_AND_BOUND_SAVE",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "EXPORT_DEPENDENCY_PROPOSAL_AWAITING_APPROVAL__NATIVE_FIT_PENDING",
-    "current_map_section": "52.4",
-    "current_entry_section": "48",
+    "state": "NATIVE_EXPORT_LIBRARIES_COMPILED__DEVICE_FIT_PENDING",
+    "current_map_section": "54.3",
+    "current_entry_section": "50",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
     "weekly_review_section": "5.5",
-    "first_unfinished_work": "Native compile and B9 device equivalence -> renderer admission -> save fit -> UI save/export integration. Shared-copy recovery and B13-B receipt pending; export completion is not a prerequisite for first device inspection.",
+    "first_unfinished_work": "B9 device equivalence and native PNG/photo/share behavior -> renderer admission -> save fit -> UI save/export integration. Shared-copy recovery and B13-B receipt pending; export completion is not a prerequisite for first device inspection.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 4,
@@ -303,9 +304,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "e958a59af7ac59053882338dd953528c15d4d19e",
-    "raw_sha256": "71658f8e912f6e96124f2dfc2258f968bd8ace2bde7878115706cfca4a521bce",
-    "utf8_bytes": 292933
+    "git_blob_sha1": "bcf6ed4984f3de38f6bc92d9cc0c8597c01910ab",
+    "raw_sha256": "8dcf56fb7abb229aaf0d736345d7a81c96b43560576a6c7c1e8cb05bae2bbcd1",
+    "utf8_bytes": 295926
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -478,23 +479,26 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "EXPORT_DEPENDENCY_PREFLIGHT_PROPOSAL",
+    "classification": "EXPORT_RAW_CACHE_RESTART_FIX_AND_NATIVE_LIBRARY_COMPILE",
     "piece_documentation_paths": 3,
     "api_product_paths": 0,
     "api_test_paths": 0,
-    "rn_changed_paths": 0,
+    "rn_changed_paths": 1,
+    "rn_test_paths": 1,
+    "workflow_changed_paths": 1,
     "native_changed_paths": 0,
     "sql_changed_paths": 0,
     "new_dependency": 0,
     "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
+    "local_js_passed": 572,
+    "ci_js_passed": 572,
+    "ios_native_library_compile": "SUCCESS",
+    "android_native_library_compile": "SUCCESS",
     "live_database_apply": 0,
     "release_effect": 0,
+    "native_app_builds": 0,
     "product_acceptance": false,
-    "automatic_progression": false,
-    "rn_test_paths": 0,
-    "outcome": "BLOCKER_NARROWED",
-    "new_test_runs": 0,
-    "native_app_builds": 0
+    "automatic_progression": false
   },
   "b06_q3_context_fence": {
     "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
@@ -3463,7 +3467,8 @@
     "product_source_changes": 0,
     "live_effect": 0,
     "automatic_progression": false,
-    "remaining": "Native device renderer admission -> save fit -> controller save; B13-C/B13-B export, format mutation, Nexus public read/visibility, M5/live Auth and configuration."
+    "remaining": "Native device renderer admission -> save fit -> controller save; B13-C/B13-B export, format mutation, Nexus public read/visibility, M5/live Auth and configuration.",
+    "historical_scope": "Pre-install proposal snapshot at entry48/map52; installed=false and INSTALL_NOT_APPROVED describe that time only. Current implementation and remaining work: export_native_compile_20261011."
   },
   "export_native_prototype_20261011": {
     "current_entry_section": "49",
@@ -3521,17 +3526,18 @@
       "path": "ios/Podfile.lock",
       "raw_sha256": "bf5408ca4be634c9723b95015aa54035fff3ab81259c2eb1a62d4d745618d113",
       "utf8_bytes": 68710
-    }
+    },
+    "historical_scope": "Prototype and Pod-resolution snapshot at entry49/map53; native_compile_verified=false describes that time only. Current library compile evidence and remaining device work: export_native_compile_20261011."
   },
   "export_native_compile_20261011": {
     "current_entry_section": "50",
     "current_map_section": "54",
     "base_head": "e5980b4ee1d8164fc2eca73b7a12d1e0269566d7",
-    "state": "NATIVE_COMPILE_IN_PROGRESS",
+    "state": "NATIVE_LIBRARY_COMPILE_PASS__DEVICE_ADMISSION_PENDING",
     "android_raw_cache_restart_fixed": true,
     "local_export_passed": 14,
     "local_export_failed": 0,
-    "ci_pending": true,
+    "ci_pending": false,
     "native_device_acceptance": false,
     "formal_fit_admission": false,
     "product_ui_connected": false,
@@ -3541,6 +3547,45 @@
     "live_database_write": 0,
     "activation": 0,
     "main_merge": 0,
-    "automatic_progression": false
+    "automatic_progression": false,
+    "source_commit": "198e8ba06a0c2da41ebad761e98d182f3bc96f8f",
+    "ci_fix_commit": "e4f498426ef69f8a0f5acba2039f1adcd79c5ad1",
+    "ci_run_id": 38094296963,
+    "ci_head": "e4f498426ef69f8a0f5acba2039f1adcd79c5ad1",
+    "ci_jobs_success": 5,
+    "local_js_passed": 572,
+    "ci_js_passed": 572,
+    "ci_js_failed": 0,
+    "ci_js_skipped": 0,
+    "ios_pods_job_id": 114336895163,
+    "ios_arm64_simulator_library_build": "SUCCESS",
+    "pod_lock_diff": 0,
+    "android_libraries_job_id": 114336895237,
+    "android_java_kotlin_compile_tasks_passed": 5,
+    "android_gradle_executed_tasks": 43,
+    "initial_android_run_id": 38094134300,
+    "initial_android_failure": "Tracked key.properties precheck failed before Gradle; fixed by no-output backup, temporary public debug settings and EXIT restore.",
+    "new_native_dependency_version_changes": 0,
+    "shared_copy_recovery_connected": false,
+    "receipt_connected": false
+  },
+  "historical_current_sync_effects_before_export_native_compile_20261011": {
+    "classification": "EXPORT_DEPENDENCY_PREFLIGHT_PROPOSAL",
+    "piece_documentation_paths": 3,
+    "api_product_paths": 0,
+    "api_test_paths": 0,
+    "rn_changed_paths": 0,
+    "native_changed_paths": 0,
+    "sql_changed_paths": 0,
+    "new_dependency": 0,
+    "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
+    "live_database_apply": 0,
+    "release_effect": 0,
+    "product_acceptance": false,
+    "automatic_progression": false,
+    "rn_test_paths": 0,
+    "outcome": "BLOCKER_NARROWED",
+    "new_test_runs": 0,
+    "native_app_builds": 0
   }
 }

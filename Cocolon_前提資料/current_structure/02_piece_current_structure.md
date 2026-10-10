@@ -1968,12 +1968,29 @@ Pod jobはNode24.19.0／CocoaPods1.17.0、99 total Podsを解決。artifact `116
 
 ### 54.1 範囲・実在owner
 
-直前head `e5980b4ee1d8164fc2eca73b7a12d1e0269566d7`、入口§49／本map§53、最新weekly§5.4／5.5から再開。依存解決だけでは未確認だった4ライブラリの実compileを、既存 `.github/workflows/piece-rn-contracts.yml` で行う。iOSはPods projectのview-shot／RNShare／camera-roll／ReactNativeFileAccessと必要な依存だけをarm64 simulator向けにbuildする。Androidは既存Gradle/autolinkで同4ライブラリのJava・Kotlin compile taskだけを実行。root Gradleがapp設定を評価するため、CI内だけで既存tracked debug.keystoreの公開debug設定を一時key.propertiesへ置き、終了時に削除する。本番鍵・秘密情報・署名taskを使わない。app assemble/archive、TestFlight／Play配布、env／DB／flag変更を含めない。native検査は依存／platform設定変更時に限定し、通常のJS変更ごとに全native buildを増やさない。
+直前head `e5980b4ee1d8164fc2eca73b7a12d1e0269566d7`、入口§49／本map§53、最新weekly§5.4／5.5から再開。依存解決だけでは未確認だった4ライブラリの実compileを、既存 `.github/workflows/piece-rn-contracts.yml` で行う。iOSはPods projectのview-shot／RNShare／camera-roll／ReactNativeFileAccessと必要な依存だけをarm64 simulator向けにbuildする。Androidは既存Gradle/autolinkで同4ライブラリのJava・Kotlin compile taskだけを実行。root Gradleがapp設定を評価するため、CI内だけで既存tracked key.propertiesを内容非出力で退避し、既存tracked debug.keystoreの公開debug設定へ一時置換して終了時に原本を復元する。本番鍵・秘密情報・署名taskを使わない。app assemble/archive、TestFlight／Play配布、env／DB／flag変更を含めない。native検査は依存／platform設定変更時に限定し、通常のJS変更ごとに全native buildを増やさない。
 
 `features/piece/pieceExport.js` のraw cache初期化も補修する。RNFA3.2.0 Android実sourceでは既存directoryへのmkdirはEEXISTで失敗する。従来の無条件mkdirは再起動後のcapture準備・残存raw回収を止めるため、未存在時だけ作成し、既存時もtype=directoryを確認して既存の限定清掃へ進む。`tests/piece-v2-export.test.js` の代替filesystemを同挙動へ合わせ、再起動後の既存directory成功・1process1回清掃と、同pathがfileのときの操作拒否を追加した。local export14 PASS／FAIL0／SKIP0。native実行結果ではない。
 
 本作業は既存画像書出しの端末到達に必要な互換確認と観測済み不具合の最小修正。同環境read-only分担で両OSの対象／コマンドと既存sourceを確認し、rootだけが変更する。source/model reviewを実端末の受入れへ換算しない。system_context prepareは今回もshallow cloneの祖先判定でexit2だったためcanonical原本を直接参照。全体設計／file map・current rules・恒久incident全文・weekly・Pieceのcurrent ownerを照合し、過去のQ&A設計を現行へ戻さない。
 
-### 54.2 検証の現在地
+### 54.2 実コンパイルと回帰の結果
 
-native compileと全体回帰を実行中。結果は後続追記へ記録し、実行前に成功扱いしない。前回の570 PASS／Pod解決とnative acceptanceの区別を維持する。次は実nativeで残った互換不具合の補修、端末描画／PNG／写真保存共有、正式renderer admission→保存前fit→UI接続。共有copy回収・B13-B receipt・形式変更・Nexus・M5／実Auth／稼働構成は引き続き残る。画像共有の全完成を初回実機確認への追加前提にしない。STRUCTURE_MAP_DELTA_UPDATED（既存実装ownerの再起動動作と検証範囲）／automatic_progression=false。
+source `198e8ba06a0c2da41ebad761e98d182f3bc96f8f`（6file）とCI補修 `e4f498426ef69f8a0f5acba2039f1adcd79c5ad1`（workflow1file）をDraft PR #30へ反映し、それぞれremote全文・親head・変更path集合を照合した。[CI38094296963](https://github.com/MassyuRed/Cocolon/actions/runs/38094296963)は最新source e4f4984で**全5job success**。localとCIを合算しない。
+
+| 検査 | 実結果・証拠範囲 |
+| --- | --- |
+| JS12suite | local／CIとも **572 PASS／FAIL0／SKIP0**。先行570＋再起動2件。HTTP/Auth/React/native代替を含む。CI job114336895200。 |
+| iOS export Pods | job114336895163。Node24.19.0、固定lockのnpm ci・3patch再適用・pod install・Podfile.lock差分0・plist lint成功。Pods projectの4targetをDebug／arm64／iphonesimulatorで実buildし、compile step success。RNViewShot.mm／RNShare.mm／RNCCameraRoll.mm／FileAccess.swiftのcompiler出力を確認。必要なRN等の依存buildを含む。 |
+| Android export libraries | job114336895237。Node24.19.0／Temurin17.0.20／Gradle8.11.1。view-shot・share・camera-roll・file-accessのcompileDebugJavaWithJavac、file-accessのcompileDebugKotlinの5taskすべて実行成功。BUILD SUCCESSFUL in 4m 43s／43 actionable tasks: 43 executed。app task・assemble・署名・publishは実行していない。 |
+| 既存bridge source | piece-android-source／piece-ios-sourceともsuccess。従来の単体javac／syntax-only・patch・pbxproj検査であり、上記4依存の実buildとは別。 |
+
+初回[CI38094134300](https://github.com/MassyuRed/Cocolon/actions/runs/38094134300)のAndroidは、tracked key.propertiesの存在を想定していない `test ! -e key.properties` がGradle実行前にexit1となった。compile不適合ではない。既存fileを内容非出力で退避し、公開debug設定だけへ一時置換、EXITで原本復元するe4f4984へ補修して成功した。既存鍵の値・ファイル自体の変更は今回差分に含めない。初回iOSもsuccessだが、受入れ証拠は両OSが揃った最新runを用いる。
+
+iOS logはcompiler warning130行を含む。既存依存のdeprecated API・nullability／型・format警告とRN/Pods script phaseの出力未定義などで、error0。AndroidはJavaのdeprecated／uncheckedとRNFA Kotlinのdeprecated3件を含む。新たなwarning抑制や依存の一括更新は加えていない。同環境read-only分担で実logと対象範囲を照合し、独立modelの正式商品受入れとは扱わない。
+
+### 54.3 再開位置
+
+4依存は固定構成で両OSのlibrary compileまで確認できた。次は**端末上のB9描画同等性・glyph/ink/性能、PNG実bytes／寸法／色、写真への追加権限と保存、共有先の読取継続**。app全体build・実端末動作は今回未確認。正式renderer admission→保存前fit→既存保存controller／export hostのUI接続が残り、canSave/canExport=falseとprototype v3を維持する。ライブラリcompile成功で操作を有効化しない。
+
+共有copy回収・B13-B body-free receipt・形式変更・Nexus公開読取／切替・M5／実Auth／稼働構成も残る。画像共有の全完成を初回実機確認への追加前提にしない。API/SQL/native library patch／依存版の追加変更0、Supabase操作・DB書込・env/deploy/activation・app build・署名／配布・main merge0。weekly§5.5・12/18目標を維持。STRUCTURE_MAP_DELTA_UPDATED（再起動動作と両OS検証範囲）／automatic_progression=false。

@@ -996,4 +996,8 @@ GitHub CI38093232063も570 PASS、既存Android/iOS source検査、macOSのnpm c
 
 ## 50. 2026-10-11 — 4依存のnative compileと再起動時のcapture準備
 
-詳細ownerはcurrent map §54。前回の依存解決成功から、既存CIで4ライブラリ自体のiOS simulator／Android Java・Kotlin compileへ進める。アプリの署名・配布は行わない。Android FileAccessは既存directoryへのmkdirを拒否するため、再起動時に既存raw directoryを検査して清掃へ進むよう修正した。追加の回帰2件を含むexport14件がlocalで成功。native compileと全体回帰の結果は実行後に追記する。
+詳細ownerはcurrent map §54。Android FileAccessが既存directoryへのmkdirを拒否するため、再起動後も既存raw directoryを検査して限定清掃・captureへ進むよう修正した。同pathがfileなら操作を拒否し、共有cache全体を削除しない。
+
+source198e8ba／CI補修e4f4984をDraft PR #30へ反映し、remote全文・変更path集合・親headを照合済み。[CI38094296963](https://github.com/MassyuRed/Cocolon/actions/runs/38094296963)は**全5job success**。JS12suiteはlocal／CIそれぞれ **572 PASS／FAIL0／SKIP0**。view-shot／share／camera-roll／file-accessはiOS arm64 simulatorの4Pod実buildとAndroid Java/Kotlinの5compile taskが成功した。Podfile.lock差分0も確認。初回AndroidのCI前提check失敗と既存依存のwarningはmap §54.2に記録した。
+
+次は端末B9描画／PNG／写真保存／共有と正式renderer admission→保存前fit→UI接続。共有copy回収・B13-B receipt等も残る。canSave/canExport=falseを維持し、今回のlibrary compileをapp build・実機受入れへ換算しない。DB書込・本番切替・署名／配布・main merge0。画像共有全完成を初回実機確認の追加前提にしない。
