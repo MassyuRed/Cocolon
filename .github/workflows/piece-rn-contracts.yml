@@ -223,11 +223,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          test ! -e key.properties
+          test -f key.properties
           test -f app/debug.keystore
           # Root Gradle evaluates :app even for library tasks. Only the tracked
           # public debug keystore is referenced; no signing task is requested.
-          trap 'rm -f key.properties' EXIT
+          cp key.properties "$RUNNER_TEMP/piece-original-key.properties"
+          trap 'mv "$RUNNER_TEMP/piece-original-key.properties" key.properties' EXIT
           cat > key.properties <<'PROPERTIES'
           storeFile=debug.keystore
           storePassword=android
