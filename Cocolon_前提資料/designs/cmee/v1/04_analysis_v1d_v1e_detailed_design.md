@@ -430,6 +430,14 @@ serviceの比較生成flagはCOCOLON_ANALYSIS_PERIOD_COMPARISON_MODE、developme
 
 関連181検査・606 subtests、既存RN13検査、合成6本文の同一text/identity/node・edge順を確認。保存/再読取は実service＋合成Auth/DB I/O、実機未検証。新規path/共有owner/API/DTO/RN/SQL/依存変更0。u117の未適用SQL/対応API配置を完了とはしない。全file/責務はcurrent03 §4.24、実行記録は06/API handoff末尾u118。
 
+### 3.20 2026-10-10 実機取得エラーの直接修正（未配置）
+
+原入力の `memo_action` 全体が「既存の限定名詞（属格を含む）＋で＋2〜3文字の仮名反復表現＋した／しました」の単一有限節として閉じる場合を、既存Analysis compilerの追加解釈範囲とする。共有の明示action/past/performed witnessと元field/全文evidenceを要求し、語彙を入力例と応答の対応表にしない。省略されたactorは `UNSPECIFIED`、safe labelには「主体の記載なし」を残す。SELF、因果、順序、時点、場所の意味分類を推測しない。
+
+前後の別節や未解析の後続host、引用/伝聞/夢/疑問、否定/希望、未解析の今日/昨日接頭語をこの分岐で採用しない。memoや補足への同じ省略解釈は広げない。原文・private evidence・保存時本文の検証とunknown保持を継承する。全0要素の成功扱い、旧mapへのfallback、読み取れていないmemoの要約補完は行わない。
+
+この追加範囲は今回の実機停止を解消する部分mapの実装であり、一般日本語・分析全文の完成ではない。API/DB/RN/依存と共有作者は変更しない。検証結果・配置境界はAPI運用記録 §37を参照する。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
