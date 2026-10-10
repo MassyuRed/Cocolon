@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v48",
+  "schema_version": "cocolon.piece.workstream_manifest.v49",
   "generated_at": "2026-10-11 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v47",
-    "predecessor_blob": "e00c898099b5d8a1d1b0b901b98b8aceaeae3fc6",
-    "predecessor_head": "69039eab15a501ff724543a863bda431eea640f5",
-    "carry_forward": "Four pinned export dependencies, limited native patches and unmounted export prototype. Native admission, UI, shared-copy recovery, receipt and device acceptance remain pending."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v48",
+    "predecessor_blob": "8fc829b2626f271251e3a02dbc5f14b36dbc6199",
+    "predecessor_head": "e5980b4ee1d8164fc2eca73b7a12d1e0269566d7",
+    "carry_forward": "Native export library compilation in progress; existing raw directory initialization repaired. No admission, device acceptance or product UI enablement."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "112facebc7e64b7d5e553aac0a0547c90741b594",
-    "raw_sha256": "a6c0644e850da0d9e5da44cfa2a299f7c6410963355b051663353988251da78c",
-    "utf8_bytes": 86370
+    "git_blob_sha1": "55d5e19e6ff79b1b9462be09243faf0a1dfefe80",
+    "raw_sha256": "90e592a051baa5ce92e38e7d58c437ea3e520bef087b31d098c1147cbfc05d16",
+    "utf8_bytes": 86875
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -163,7 +163,7 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "69039eab15a501ff724543a863bda431eea640f5",
+    "cocolon_pre_sync_head": "e5980b4ee1d8164fc2eca73b7a12d1e0269566d7",
     "mashos_api_head": "6b901a1df0037c047513e794624917a09b0f3ac4",
     "current_user_visible_piece_shape": "OLD_QNA_REGISTERED_IN_SOURCE__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
@@ -179,7 +179,7 @@
     "input_screen_source_connected": true,
     "live_auth_input_to_preview_to_device_verified": false,
     "database_evidence_owner": "live_db_apply_20261010",
-    "remaining_work_owner": "export_native_prototype_20261011",
+    "remaining_work_owner": "export_native_compile_20261011",
     "product_acceptance": false,
     "piece_v2_default_application_registered": false,
     "piece_v2_quota_http_present": true,
@@ -249,7 +249,7 @@
     "repeat_private_save_candidate_connection": false,
     "repeat_rn_save_transport": false,
     "export_proposal_owner": "export_dependency_preflight_20261011",
-    "export_implementation_owner": "export_native_prototype_20261011"
+    "export_implementation_owner": "export_native_compile_20261011"
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -303,9 +303,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "7be8e643fa95a357e70eef86096ee1967aa10356",
-    "raw_sha256": "eef2bdc73a88aa845a5a0f89c594d9ff05a76a91f4f9e05a4548f448f3a97017",
-    "utf8_bytes": 290136
+    "git_blob_sha1": "e958a59af7ac59053882338dd953528c15d4d19e",
+    "raw_sha256": "71658f8e912f6e96124f2dfc2258f968bd8ace2bde7878115706cfca4a521bce",
+    "utf8_bytes": 292933
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -3522,5 +3522,25 @@
       "raw_sha256": "bf5408ca4be634c9723b95015aa54035fff3ab81259c2eb1a62d4d745618d113",
       "utf8_bytes": 68710
     }
+  },
+  "export_native_compile_20261011": {
+    "current_entry_section": "50",
+    "current_map_section": "54",
+    "base_head": "e5980b4ee1d8164fc2eca73b7a12d1e0269566d7",
+    "state": "NATIVE_COMPILE_IN_PROGRESS",
+    "android_raw_cache_restart_fixed": true,
+    "local_export_passed": 14,
+    "local_export_failed": 0,
+    "ci_pending": true,
+    "native_device_acceptance": false,
+    "formal_fit_admission": false,
+    "product_ui_connected": false,
+    "app_build": 0,
+    "signing": 0,
+    "distribution": 0,
+    "live_database_write": 0,
+    "activation": 0,
+    "main_merge": 0,
+    "automatic_progression": false
   }
 }

@@ -26,8 +26,9 @@ function harness({os='ios', version=35, record=fixture()} = {}) {
   const header = Buffer.alloc(24); Buffer.from([137,80,78,71,13,10,26,10]).copy(header); header.writeUInt32BE(13,8);
   header.write('IHDR',12); header.writeUInt32BE(1080,16); header.writeUInt32BE(1350,20);
   const FileSystem = {
-    mkdir: async p => {calls.push(['mkdir',p]); files.set(p,'directory');},
-    ls: async () => ['piece-old.png','foreign.png'],
+    exists: async p => files.has(p),
+    mkdir: async p => {calls.push(['mkdir',p]); if(files.has(p)) throw Error('EEXIST'); files.set(p,'directory');},
+    ls: async p => {calls.push(['ls',p]); return ['piece-old.png','foreign.png'];},
     unlink: async p => { calls.push(['unlink',p]); files.delete(p); },
     cp: async (a,b) => {calls.push(['cp',a,b]);files.set(b,'file');},
     stat: async p => ({type:files.get(p),size:100}),
@@ -85,6 +86,20 @@ test('first-use raw cleanup owns only its exact filenames and dispose is idempot
   assert.equal(h.calls.some(c=>c[0]==='unlink'&&c[1].endsWith('foreign.png')),false);
   assert.equal(h.calls.filter(c=>c[0]==='unlink'&&c[1].startsWith('/cache/piece-export/')).length,1);
   await failure(asset.openShare());
+});
+test('existing raw directory survives restart and is cleaned once before new captures',async()=>{
+  const h=harness({os:'android'}); h.files.set('/cache/piece-capture','directory');
+  const first=await h.prepare(); await h.prepare();
+  assert.equal(h.calls.some(c=>c[0]==='mkdir'&&c[1]==='/cache/piece-capture'),false);
+  assert.equal(count(h,'ls'),1);
+  assert.equal(h.calls.filter(c=>c[0]==='unlink'&&c[1]==='/cache/piece-capture/piece-old.png').length,1);
+  const asset=await first.capture(h.target()); await asset.dispose();
+  assert.equal(count(h,'capture'),1);
+});
+test('a file occupying the raw directory cannot be enumerated or deleted as a directory',async()=>{
+  const h=harness({os:'android'}); h.files.set('/cache/piece-capture','file');
+  await failure(h.prepare());
+  assert.equal(count(h,'ls'),0); assert.equal(count(h,'unlink'),0); assert.equal(count(h,'capture'),0);
 });
 test('bad saved hashes, unsupported platform and stale runtime never capture',async()=>{
   for(const mutate of [h=>h.record.piece_text_hash='0'.repeat(64), h=>h.state.current=false]) {

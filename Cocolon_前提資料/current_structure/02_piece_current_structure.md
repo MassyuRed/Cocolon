@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は§53を優先します。固定4依存とnative補修を導入し、既存canvasを使うPNG capture・写真保存・共有prototypeを追加しました。製品画面へ未接続で、canSave/canExport=false、正式fit/admission未付与です。native適合・実機・共有copy回収・receiptを残件として保持します。**
+**現在は§54を優先します。追加4依存のnative compileを実行し、Android再起動時の既存cache処理を補修しています。canSave/canExport=false、正式fit/admission未付与、製品UI未接続です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1962,3 +1962,18 @@ source `d9debbff318441f3064ae87c3b725ffd2454ae52` の18fileをremote全文・変
 Pod jobはNode24.19.0／CocoaPods1.17.0、99 total Podsを解決。artifact `11684881687` のzip SHA256 `39d7411bb1eef2e785c885d870bf1e489106b4288fb596e997bd112eb80321fa`を検証し、実出力68,710bytesを `ios/Podfile.lock` へ反映。追加はRNShare12.3.1／ReactNativeFileAccess3.2.0／camera-roll7.10.2／view-shot5.1.1／ZIPFoundation0.9.20。既存158 Pod identitiesの版／依存edge／external source変更・削除0。CocoaPods1.16.2→1.17.0と既存spec checksum69件の再計算は実出力を保持し、手で旧checksumへ戻さない。Podfile checksumも実bytesと一致。lockの独立read-only reviewで重大指摘なし。
 
 これは依存解決と既存bridge source検査の成功であり、追加4依存を含むapp/native compile、実機画像・OS保存共有、renderer fit/admissionを合格にしない。§53.4の残件と製品UI非接続を維持する。
+
+
+## 54. 2026-10-11 — 導入したnative依存を実コンパイルする
+
+### 54.1 範囲・実在owner
+
+直前head `e5980b4ee1d8164fc2eca73b7a12d1e0269566d7`、入口§49／本map§53、最新weekly§5.4／5.5から再開。依存解決だけでは未確認だった4ライブラリの実compileを、既存 `.github/workflows/piece-rn-contracts.yml` で行う。iOSはPods projectのview-shot／RNShare／camera-roll／ReactNativeFileAccessと必要な依存だけをarm64 simulator向けにbuildする。Androidは既存Gradle/autolinkで同4ライブラリのJava・Kotlin compile taskだけを実行。root Gradleがapp設定を評価するため、CI内だけで既存tracked debug.keystoreの公開debug設定を一時key.propertiesへ置き、終了時に削除する。本番鍵・秘密情報・署名taskを使わない。app assemble/archive、TestFlight／Play配布、env／DB／flag変更を含めない。native検査は依存／platform設定変更時に限定し、通常のJS変更ごとに全native buildを増やさない。
+
+`features/piece/pieceExport.js` のraw cache初期化も補修する。RNFA3.2.0 Android実sourceでは既存directoryへのmkdirはEEXISTで失敗する。従来の無条件mkdirは再起動後のcapture準備・残存raw回収を止めるため、未存在時だけ作成し、既存時もtype=directoryを確認して既存の限定清掃へ進む。`tests/piece-v2-export.test.js` の代替filesystemを同挙動へ合わせ、再起動後の既存directory成功・1process1回清掃と、同pathがfileのときの操作拒否を追加した。local export14 PASS／FAIL0／SKIP0。native実行結果ではない。
+
+本作業は既存画像書出しの端末到達に必要な互換確認と観測済み不具合の最小修正。同環境read-only分担で両OSの対象／コマンドと既存sourceを確認し、rootだけが変更する。source/model reviewを実端末の受入れへ換算しない。system_context prepareは今回もshallow cloneの祖先判定でexit2だったためcanonical原本を直接参照。全体設計／file map・current rules・恒久incident全文・weekly・Pieceのcurrent ownerを照合し、過去のQ&A設計を現行へ戻さない。
+
+### 54.2 検証の現在地
+
+native compileと全体回帰を実行中。結果は後続追記へ記録し、実行前に成功扱いしない。前回の570 PASS／Pod解決とnative acceptanceの区別を維持する。次は実nativeで残った互換不具合の補修、端末描画／PNG／写真保存共有、正式renderer admission→保存前fit→UI接続。共有copy回収・B13-B receipt・形式変更・Nexus・M5／実Auth／稼働構成は引き続き残る。画像共有の全完成を初回実機確認への追加前提にしない。STRUCTURE_MAP_DELTA_UPDATED（既存実装ownerの再起動動作と検証範囲）／automatic_progression=false。

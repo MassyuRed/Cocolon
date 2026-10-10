@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§49／current map §53を優先する。前回提示した4依存・native設定を導入し、既存canvasによるPNG capture・写真保存・共有の非公開prototypeを追加しました。画面への接続、native適合／実機描画、renderer admission・保存前fit・共有copy回収・receiptは未完了です。canSave/canExport=falseを維持します。**
+**現在は§50／current map §54を優先する。導入済み4依存のiOS／Android native compileを進めています。Android再起動後の既存raw cacheで書出し準備が失敗する不具合を修正。正式fit/admission・画面接続・実機確認・共有copy回収・receiptは未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -992,3 +992,8 @@ source `ca4ce05cf1f62ed5fad3a0a72733e2956d8ae0a7` の製品1＋test1をDraft PR 
 iOS追加のみ保存で発生する保存後のPHAsset読取をPiece限定patchで除き、raw PNGは両OSとも専用cacheへ限定。共有先の読取終了をcallbackから推測しないため、共有copyの回収は未接続のまま残す。既存依存の版更新なし。クリーンnpm ciと3新patchの再適用成功。JS12suite **570 PASS／FAIL0／SKIP0**。native/OS/HTTPは代替を含み、端末写真保存成功を検証した結果ではない。独立読取reviewで文字計測停止・iOS追加のみ保存・非同期共有直前検査を補修した。
 
 GitHub CI38093232063も570 PASS、既存Android/iOS source検査、macOSのnpm ci／4依存autolink／CocoaPods1.17.0解決が成功。実生成Podfile.lock（ZIPFoundation0.9.20を含む）と検証結果をmap §53.5へ記録した。実native compile・実機描画／PNG／権限／共有・共有copy寿命・receipt・UI接続は残件。本線はnative B9実機描画受入れ→renderer admission→保存前fit→保存操作。形式変更・Nexus・M5/実Auth/稼働構成も残す。Supabaseはproject/migration履歴の読取のみ。DB変更・flag有効化・API配置・TestFlight配布・main mergeなし。weekly§5.5の実機順序と12/18目標を維持する。
+
+
+## 50. 2026-10-11 — 4依存のnative compileと再起動時のcapture準備
+
+詳細ownerはcurrent map §54。前回の依存解決成功から、既存CIで4ライブラリ自体のiOS simulator／Android Java・Kotlin compileへ進める。アプリの署名・配布は行わない。Android FileAccessは既存directoryへのmkdirを拒否するため、再起動時に既存raw directoryを検査して清掃へ進むよう修正した。追加の回帰2件を含むexport14件がlocalで成功。native compileと全体回帰の結果は実行後に追記する。

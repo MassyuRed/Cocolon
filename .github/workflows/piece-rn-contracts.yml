@@ -1,4 +1,4 @@
-# Piece source tests and isolated native source compilation; no app build, signing or deploy.
+# Piece contracts and native library compilation; no app build, signing or deploy.
 name: Piece RN preview and owner contracts
 'on':
   push:
@@ -24,6 +24,11 @@ name: Piece RN preview and owner contracts
       - patches/react-native-view-shot+5.1.1.patch
       - patches/react-native-file-access+3.2.0.patch
       - patches/@react-native-camera-roll+camera-roll+7.10.2.patch
+      - android/build.gradle
+      - android/app/build.gradle
+      - android/settings.gradle
+      - android/gradle.properties
+      - android/gradle/wrapper/gradle-wrapper.properties
       - android/app/src/main/res/xml/share_download_paths.xml
       - android/app/src/main/java/com/anonymous/cocolonmvp/piece/**
       - android/app/src/main/java/com/anonymous/cocolonmvp/MainApplication.java
@@ -160,9 +165,78 @@ jobs:
           pod --version
           pod install
           plutil -lint tempCocolon/Info.plist
+          git diff --exit-code -- Podfile.lock
+      - name: Compile the four export Pods for the simulator without signing
+        if: steps.scope.outputs.changed == 'true'
+        working-directory: ios
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcodebuild -quiet -jobs 3 -project Pods/Pods.xcodeproj -configuration Debug \
+            -sdk iphonesimulator -arch arm64 \
+            -target react-native-view-shot -target RNShare \
+            -target react-native-cameraroll -target ReactNativeFileAccess build \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY= \
+            ONLY_ACTIVE_ARCH=YES \
+            SYMROOT="$RUNNER_TEMP/piece-export-ios-build" \
+            OBJROOT="$RUNNER_TEMP/piece-export-ios-obj"
       - uses: actions/upload-artifact@v4
         if: steps.scope.outputs.changed == 'true' && success()
         with:
           name: piece-export-pod-lock
           path: ios/Podfile.lock
           retention-days: 7
+
+  piece-export-android:
+    if: github.repository == 'MassyuRed/Cocolon'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Limit native compilation to dependency or Android build changes
+        id: scope
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null || ! git diff --quiet "$BEFORE" HEAD -- package.json package-lock.json patches android .github/workflows/piece-rn-contracts.yml; then
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/setup-node@v6
+        if: steps.scope.outputs.changed == 'true'
+        with:
+          node-version: '24.19.0'
+      - uses: actions/setup-java@v4
+        if: steps.scope.outputs.changed == 'true'
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Install locked packages and apply native patches
+        if: steps.scope.outputs.changed == 'true'
+        run: npm ci --no-audit --no-fund
+      - name: Compile only the four Android export libraries
+        if: steps.scope.outputs.changed == 'true'
+        working-directory: android
+        shell: bash
+        run: |
+          set -euo pipefail
+          test ! -e key.properties
+          test -f app/debug.keystore
+          # Root Gradle evaluates :app even for library tasks. Only the tracked
+          # public debug keystore is referenced; no signing task is requested.
+          trap 'rm -f key.properties' EXIT
+          cat > key.properties <<'PROPERTIES'
+          storeFile=debug.keystore
+          storePassword=android
+          keyAlias=androiddebugkey
+          keyPassword=android
+          PROPERTIES
+          bash ./gradlew --no-daemon --console=plain --stacktrace \
+            :react-native-view-shot:compileDebugJavaWithJavac \
+            :react-native-share:compileDebugJavaWithJavac \
+            :react-native-camera-roll_camera-roll:compileDebugJavaWithJavac \
+            :react-native-file-access:compileDebugKotlin \
+            :react-native-file-access:compileDebugJavaWithJavac

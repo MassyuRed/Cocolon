@@ -33,7 +33,9 @@ function rawPath(value, root) {
 // owned raw names are removed; shared files, common caches and photos are not.
 async function prepareRawCache(root) {
   if (!rawCleanup) rawCleanup = (async () => {
-    await FileSystem.mkdir(root);
+    // RNFA on Android rejects mkdir for an existing directory after restart.
+    if (!await FileSystem.exists(root)) await FileSystem.mkdir(root);
+    if ((await FileSystem.stat(root)).type !== 'directory') throw failed();
     const names = await FileSystem.ls(root);
     for (const name of names) {
       if (/^piece-[A-Za-z0-9-]+\.png$/.test(name)) await FileSystem.unlink(`${root}/${name}`);
