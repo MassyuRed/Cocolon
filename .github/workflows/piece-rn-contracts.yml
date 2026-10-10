@@ -63,18 +63,22 @@ jobs:
           set -euo pipefail
           export PIECE_COMPILE_DIR="$RUNNER_TEMP/piece-android-source"
           python3 - <<'PY'
-          import os, pathlib, urllib.request, zipfile
+          import hashlib, os, pathlib, urllib.request, zipfile
           root = pathlib.Path(os.environ['PIECE_COMPILE_DIR'])
           root.mkdir()
           artifacts = {
-            'react': 'https://repo.maven.apache.org/maven2/com/facebook/react/react-android/0.77.3/react-android-0.77.3-debug.aar',
+            'react': 'https://maven-central.storage-download.googleapis.com/maven2/com/facebook/react/react-android/0.77.3/react-android-0.77.3-debug.aar',
             'appcompat': 'https://dl.google.com/dl/android/maven2/androidx/appcompat/appcompat/1.6.1/appcompat-1.6.1.aar',
             'core': 'https://dl.google.com/dl/android/maven2/androidx/core/core/1.9.0/core-1.9.0.aar',
             'kotlin': 'https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.0.21/kotlin-stdlib-2.0.21.jar',
           }
           for name, url in artifacts.items():
             target = root / (name + ('.aar' if url.endswith('.aar') else '.jar'))
+            print('Fetching pinned compiler artifact:', name, flush=True)
             urllib.request.urlretrieve(url, target)
+            if name == 'react':
+              # Maven Central's pinned 0.77.3 Gradle metadata checksum.
+              assert hashlib.sha256(target.read_bytes()).hexdigest() == 'a10e4f6140bc6e081e9852b0b535bd2175d1e28f7ef1da6a63dc345a6dc6f501'
             if target.suffix == '.aar':
               with zipfile.ZipFile(target) as archive:
                 (root / (name + '.jar')).write_bytes(archive.read('classes.jar'))
@@ -109,6 +113,7 @@ jobs:
               if header.name.startswith(('RCT', 'UIView+React')):
                 link = root / 'include/React' / header.name
                 if not link.exists(): link.symlink_to(header)
+          (root / 'include/RCTDeprecation').symlink_to(source / 'ReactApple/Libraries/RCTFoundation/RCTDeprecation/Exported', target_is_directory=True)
           PY
           xcrun clang --version
           xcrun clang -fsyntax-only -x objective-c++ -std=c++20 -fobjc-arc -fblocks -fmodules -target arm64-apple-ios15.1-simulator -isysroot "$(xcrun --sdk iphonesimulator --show-sdk-path)" -I "$PIECE_COMPILE_DIR/include" -I "$PIECE_COMPILE_DIR/node_modules/react-native/ReactCommon/yoga" -Werror=objc-method-access -Werror=implicit-function-declaration ios/tempCocolon/PieceTextMetrics.mm
