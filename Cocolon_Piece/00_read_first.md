@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§40／current map §44を優先する。発行済みpreviewの画像設定を既存RN画面から変更できるsourceを接続しました。テーマ・比率・Cocolon表記は取得済みcapabilities内だけで選び、本文は再生成しません。不明応答・競合は元POSTの同request/keyで明示回収します。local・GitHub CIとも520件成功。APIの稼働route登録、追加2本のmigration適用、native実機描画同等性・renderer admission・保存前fit・保存共有は未完了です。**
+**現在は§41／current map §45を優先する。画像設定変更PATCHを既存の専用preview／shared候補factoryへ登録しました。元POST/keyで変更後の同じ候補を回収する経路を両構成で検証し、隔離CIは1,675件成功しました。default app／旧Q&Aの配置は変更していません。native実機描画同等性・renderer admission・保存前fit・保存共有、稼働設定と追加2本のmigrationは残っています。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -901,3 +901,15 @@ API source `4fcb140b778850a1b7a5a65d8e0a26005b3a24c4`、7fileのremote全文・�
 
 
 §40最終確認：source `ef4806198352c3dde1a084d2eeb343fdb5f40c56` の対象10fileをremote全文・変更path集合・親head一致確認済み。[CI38028229338](https://github.com/MassyuRed/Cocolon/actions/runs/38028229338)はInputScreen込み11suite **520 PASS／FAIL0／SKIP0**、Android単体source compile・iOS syntax-only/既存patch/pbxprojも成功。既存contract guardsもsuccess。localとの合算なし。Android既存annotation警告18件と検査限界はmap §44.4へ記録。画面接続sourceの反映であり、稼働有効化・実機受入れ・保存共有の完成ではない。
+
+
+## 41. 2026-10-10 — 画像設定変更をpreview／shared候補構成へ登録
+
+詳細ownerはcurrent map §45。既存PATCH handlerを専用preview factoryへ直接登録し、そのfactoryを使うshared候補にも接続した。candidate専用contract registryを追加し、default app・旧Q&A・既定registryは保持。専用構成は従来4route＋PATCHの5routeで、保存等のfull routerは登録していない。RNは§40の接続をそのまま使用する。
+
+API `f1762879d7983adc6b4f9b5728791d6404dbbe88` の6fileはremote全文・変更path集合・親head一致確認済み。local関連5file **243 PASS／FAIL0／SKIP0**。両構成での生成→画像変更→同request/key再取得とcommit前後停止・ACK消失を既存の隔離PostgreSQL CIで確認した。synthetic Auth/source/HTTP transportを含み、実機・稼働受入れではない。
+
+次はnative B9実機描画同等性／renderer admission→保存前fit→保存。形式変更・画像保存共有・Nexus・保存等のAPI接続・M5/実Auth・稼働採用も残る。今回API製品2＋test4、RN/native/SQL・依存の変更0、Supabase操作・env/deploy/activation/build/main merge0。001〜004適用済みと追加2本未適用は先行確認を継承。weekly§5.5・12/18目標・automatic_progression=falseを維持する。
+
+
+§41最終確認：fixtureの既存Q3 schema不足による初回native12 FAILを補修し、head `d5731750b9cf4018de9af454e93184f011e32f17` の[隔離CI38029243416](https://github.com/MassyuRed/mashos-api/actions/runs/38029243416)は **1,675 PASS／FAIL0／SKIP0**（先行1,658＋追加17）。両factoryの実SQL更新・元POST回収が成立。最終全6fileのremote全文、変更集合・親headを照合。製品sourceはf176287から不変。初回失敗と検査限界はmap §45.2/45.4。実機確認・保存共有・稼働配置の完了ではない。

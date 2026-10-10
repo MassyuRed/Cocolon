@@ -2,7 +2,7 @@
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
 revision_date: "2026-10-10 JST"
-latest_api_implementation: "4fcb140b778850a1b7a5a65d8e0a26005b3a24c4"
+latest_api_implementation: "d5731750b9cf4018de9af454e93184f011e32f17"
 latest_storage_candidate: "4fcb140b778850a1b7a5a65d8e0a26005b3a24c4"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は§44を優先します。発行済みpreviewの画像設定を既存RN画面から変更できるsourceを接続しました。テーマ・比率・Cocolon表記は取得済みcapabilities内だけで選び、本文は再生成しません。不明応答・競合は元POSTの同request/keyで明示回収します。local・GitHub CIとも520件成功。APIの稼働route登録、追加2本のmigration適用、native実機描画同等性・renderer admission・保存前fit・保存共有は未完了です。**
+**現在は§45を優先します。画像設定変更PATCHを既存の専用preview／shared候補factoryへ登録しました。元POST/keyで変更後の同じ候補を回収する経路を両構成で検証し、隔離CIは1,675件成功しました。default app／旧Q&Aの配置は変更していません。native実機描画同等性・renderer admission・保存前fit・保存共有、稼働設定と追加2本のmigrationは残っています。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1612,3 +1612,47 @@ source `ef4806198352c3dde1a084d2eeb343fdb5f40c56`（親 `584d9788d7d78b14a10f7b0
 [Piece CI 38028229338](https://github.com/MassyuRed/Cocolon/actions/runs/38028229338)は全3job成功。`piece-rn-contracts`はInputScreen込み11suite **520 PASS／FAIL0／SKIP0／cancelled0**。Android単体javac source compile、iOS clang syntax-only・既存patch適用・pbxproj検査も成功。[既存contract guards 38028229336](https://github.com/MassyuRed/Cocolon/actions/runs/38028229336)もsuccess。local520件とCI520件は同じ検査を別環境で実行した結果であり、合算しない。
 
 Androidのannotation不足に由来する既存`Scope.LIBRARY_GROUP_PREFIX`警告18件を保持。nativeソース検査は実端末での描画・app build・商品受入れを証明しない。今回の画像設定操作sourceは反映済みで、§44.3の稼働登録・実機・保存前fit・保存共有等は残る。この最終追記は入口・map・manifestの3資料だけで、検証済みsource/testを変更しない。
+
+
+## 45. 2026-10-10 — 画像設定変更を既存preview構成へ登録（未配置）
+
+### 45.1 目的・実装owner
+
+MashのPiece続行指示により§44.3の最初の残件を実施。Cocolon開始head `b5c09914c2a88f9c6d2af00fea890211a00015b5`、API開始head `4fcb140b778850a1b7a5a65d8e0a26005b3a24c4`。全体設計／地図・前提・作業rule/Rule18・恒久incident全文・Karen-Diary・weekly10/10 §5.5・Piece原典を継承確認し、同じ内容を再生成しない設定操作を、実際に呼べるAPI構成へつなげた。System Context prepareはb5c0991でも祖先不一致によりcode2。入口の原典直接読取を使用し、凍結済みSystem Contextを変更していない。
+
+Workでの既存承認範囲の実装（LEVEL_2相当、DIRECT_PRODUCT_OR_ACCEPTANCE_WORK）。root華恋が単一write owner、補助agentは既存接続調査と差分read-only review。別modelの独立Pro/Ultra受入れとは扱わない。既存preview factoryを再実装せず、新runtime／依存／自動有効化を加えない。
+
+| mashos-api owner | 今回の変更 |
+|---|---|
+| `ai/services/ai_inference/piece_v2_runtime_control.py` | 既存`mutate_preview_visual`を`PATCH /emotion/piece/preview/{preview_id}`へ直接登録。専用構成は従来4route＋PATCHの5route。既存shared候補は同factoryを継承。full Piece routerをmountしない。 |
+| `ai/services/ai_inference/api_contract_registry.py` | candidate専用registryに`emotion.piece.preview.visual.v2`を追加し、既存middlewareがそのappだけの応答headerを選択。default registryとpolicy versionは不変。 |
+| `ai/tests/piece_v2/test_b14a_piece_preview_composition.py` / `test_b12_shared_preview_composition.py` | handler同一性・重複なし・default/旧経路不変、auth→OFF、候補だけのheader、無効時のIOなし。 |
+| `ai/tests/piece_v2/db/test_b10_preview_application_native.py` | 既存の4route固定検査をPATCH追加の5routeへ更新。既存生成検査は維持。 |
+| `ai/tests/piece_v2/db/test_b12_shared_preview_native.py` | 既存native fixtureを使い、両構成で3tierの生成→PATCH→旧revision拒否→元POST再取得、review後停止・commit後停止・ACK消失の回収を追加。 |
+
+製品は2file、testは4file。`app.py`／middleware／既定app／旧Q&A／API・DBのDTO／SQL source／RN・native sourceは変更0。専用previewで同じpathへの未登録DELETEは404から405になるが、DELETE handlerを公開したわけではない。shared候補のdefault route集合差分は既存source-ref追加・旧preview alias除外に今回PATCHを加えたものだけ。
+
+### 45.2 検証と反映
+
+local Python3.12.14、pytest8.4.1、FastAPI0.143.0、Starlette1.7.0、Pydantic2.14.0、httpx0.28.1、psycopg3.3.6。既存requirementsを一時venvに導入し、製品requirements／lockfile変更なし。B14 runtime/composition、source-ref、shared composition、visual mutationの5fileは **243 PASS／FAIL0／SKIP0**。初回は旧DELETE404固定の1件が405となり、未登録methodの現挙動へ期待を直した（242 PASS/1 FAILから全243 PASS）。reader等は既存fixtureのmodule stubに実importを戻し、製品handlerを検査都合で変更していない。
+
+localにはnative PostgreSQLがなく、新native12件はcollect-onlyでは合格にしない。GitHubの既存隔離workflowで実行確認した（下記§45.4）。read-only reviewの指摘はnative transport fixtureのSQL例外に`code=P0001`が欠けていた1点で、既存HTTP readerと同じcode/messageへ補修済み。製品の追加blockerなし。
+
+API source `f1762879d7983adc6b4f9b5728791d6404dbbe88` をGitHub connectorでexpected parent一致・force=falseによりPR #3へ反映。対象6fileのremote全文・変更path集合・親head（4fcb140）を照合済み。CI最終結果は次の確認欄へ記録する。
+
+初回[CI38029047086](https://github.com/MassyuRed/mashos-api/actions/runs/38029047086)は既存を含む1,663 PASS、新native12件がsetup時の`PIECE_PREVIEW_VISUAL_PRECONDITION`でFAIL。再利用したB5 fixtureがQ2だけを適用し、visual SQLの前提であるQ3の`emlis_frame_feedback`／`emlis_thread_context`がなかった。新fixture内だけに既存Q3 migrationを先行適用する修正を`d5731750b9cf4018de9af454e93184f011e32f17`（test1fileのみ）で反映した。製品2file・既存SQL・期待する本文/版/権限条件は変えていない。read-only reviewでも原因と最小修正範囲を確認。初回FAILを後続PASSへ合算しない。
+
+### 45.3 残る利用経路と稼働境界
+
+次はnative B9の実端末描画同等性・glyph/ink/性能、正式renderer admission、保存前fit→保存の接続。画像を測れたことだけで保存可にしない。形式変更、capture/画像保存共有、Nexus、保存等のAPI構成への接続、M5/実Auth・稼働設定も残る。今回のfactory/PATCH登録を次回再実装しない。
+
+稼働利用には既存005 quotaとvisual変更SQLの追加2本、サーバー設定採用、共有候補の配置境界が残る。001〜004は先行履歴確認の適用済みを保持し再適用しない。今回Supabase/live DB読取・書込・migration適用、env/deploy/activation、native app build、main merge、本人データ操作は0。隔離PostgreSQLの操作を稼働DB適用と混同しない。実Auth/PostgREST・実機・商品受入れは未確認。weekly§5.5の実機確認順序と12/18公開目標を維持し、Pieceの全内容完成を実機確認の前提にしない。TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false。
+
+
+### 45.4 最終CI・反映後確認
+
+検査用準備を補ったhead `d5731750b9cf4018de9af454e93184f011e32f17` の[隔離CI38029243416](https://github.com/MassyuRed/mashos-api/actions/runs/38029243416)／job `114146515867`は全工程success、重複しない23回の検査集合で **1,675 PASS／FAIL0／SKIP0**（先行1,658＋source5＋新native12）。local243件と初回CIは合算しない。Python3.12.15、PostgreSQL16.15、pytest8.4.1、psycopg3.3.6。既存Pydantic root_validator／FastAPI on_eventの非推奨警告を保持する。
+
+両factoryのFree/Plus/Premiumで実生成・実bounded review・実SQLを通し、画像設定だけの変更後に本文/期限/renderer保持、revision増分、旧版拒否、元request/key再取得、追加authorなし・保存回数消費なしを確認した。review後停止はSQL未送信、commit後停止とACK消失はcommit済み行を保持し、再起動した構成の元POST/keyからその版を回収する。native追加12件は最終14件（既存2含む）として成功。Auth・保存source・PostgREST transportは代替で、実ユーザーや端末の受入れではない。
+
+最終API headから対象全6fileを再取得し、今回の最終内容と一致確認。初回6path＋補修1pathの変更集合、各commitの親headも照合済み。製品2fileは最初のf176287から不変で、補修は検査用DB準備4行だけ。この資料更新はCocolonの入口・map・manifestの3fileで、RN/native/test sourceやweeklyの方針を変更しない。§45.3の実機・保存前fit・稼働採用へ戻り、同じ接続準備を繰り返さない。
