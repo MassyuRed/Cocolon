@@ -2,7 +2,7 @@
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
 revision_date: "2026-10-10 JST"
-latest_api_implementation: "875dca35c02715c8f572344c78715850862d2902"
+latest_api_implementation: "227bacf8a1925345fc680a6b54d6e0ba484e6f27"
 latest_storage_candidate: "d71fdb40238f2c99751f0c20e578ab654f72308e"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在の再開位置は§34です。明示承認の範囲で共有APIの切替用コードと隔離検証を完了し、通常起動の旧構成を保持しています。既存001〜004は実DBへ適用・確認済みで再実行しません。候補は同じAPIに入力保存・bootstrap・新source-ref／previewを構成し、CIは1,452件成功。稼働設定の採用、M5全面移行、実Auth・同じInputScreenの実機往復、画像保存共有は未完了です。**
+**現在は§35を優先します。共有APIの非稼働切替候補を保持し、保存・本人履歴／詳細・公開範囲変更・削除へ既存PCE-7フラグのサーバー側強制を接続しました。稼働切替の前提となる旧経路移行・設定採用・実Auth／実機・画像保存共有は未完了です。既存001〜004は適用済みで再実行しません。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1174,3 +1174,41 @@ native2件は既存B5 fixtureのguard付き使い捨てPostgreSQLを使用する
 `STRUCTURE_MAP_DELTA_UPDATED`。B10全体・M5・Piece全体・実機プレビュー・画像保存共有の完了とはしない。`automatic_progression=false`。
 
 
+
+## 35. 2026-10-10 — 保存・本人操作の機能停止を既存APIへ接続
+
+### 35.1 対象と根拠
+
+§34の次工程としてPCE-6／PCE-7の稼働条件を原典と現物で照合した。preview以外の既存保存・本人操作にはサーバー実効フラグの確認がなく、停止時にも処理へ到達できる具体的な不足があった。今回のMashのPiece続行指示、先行の非稼働切替準備・隔離検証承認、Rule18の既存設計内実装範囲に基づき、PCE-7 §5／6／9の未接続だけを補修した。分類はDIRECT_PRODUCT_OR_ACCEPTANCE_WORK／TECHNICAL_CREDIT。華恋rootが書込を担当し、補助agentは読取reviewのみ。
+
+対象API commitは `227bacf8a1925345fc680a6b54d6e0ba484e6f27`。製品変更は `ai/services/ai_inference/api_piece_v2.py` 1file、既存B6／B7検査4file。resolver・service・store・SQL・共有app・RNは変更しない。全v2 routerと保存／本人操作は引き続き稼働app・共有preview候補に未登録であり、この変更は有効化ではない。
+
+| 操作 | 同じresolverで要求する実効フラグ |
+|---|---|
+| 保存 | save（依存preview）、public指定の場合だけpublic_write（依存public_read）を追加。既存schemaで正規化した値を使い、空白付きpublicも同じ扱い。 |
+| 本人履歴・詳細 | owner_read。生成・保存・公開・exportの停止とは独立。 |
+| 公開範囲変更 | visibility_toggle（依存owner_read／public_read）、public対象にpublic_writeを追加。既存のprivate-target-only例外を新設しない。 |
+| 本人削除 | delete（依存owner_read）。生成／保存／公開停止中でも健康な本人回復を保持。 |
+| preview取消し | 新しいフラグ条件なし。既存認証・所有権・revisionと取消RPCを保持。 |
+
+認証後・本文検証前に確認し、既存のIO注入点を使ってDB読取／書込直前と完了後、結果返却前にも確認する。一度観測したOFFを要求内で保持し、service/storeの閉じたエラー変換を通っても503／`PIECE_FEATURE_DISABLED`を返す。自動retry・取消SQL・別設定resolverは追加しない。送信済みRPCのcommitを後から取り消したとは扱わず、書込後の停止はACKを返さず状態不明を保持する。既存の共有GET transportの限定再試行は維持する。task cancellationは伝播する。
+
+### 35.2 検証
+
+[CI run 38017728318](https://github.com/MassyuRed/mashos-api/actions/runs/38017728318) はAPI `227bacf8a1925345fc680a6b54d6e0ba484e6f27` でsuccess。既存workflow全20検査batchは1,489 PASS／FAIL0／SKIP0（先行1,452件に今回37件追加）。Python 3.12.15、pytest 8.4.1、FastAPI 0.143.0、PostgreSQL 16.15。既存の共有候補・default契約・native接続検査も成功し、Pydantic validator／on_eventの既存非推奨警告は残る。local pytestは実行していない。
+
+新規検査は、既定OFF・認証優先・公開のみ停止・public正規化・依存フラグ・本人回復・読取／source照合中停止・RPC送信後停止と再送なし・停止後の再ONで同要求を復活させないこと・取消し継続を確認する。native PostgreSQLではsource照合中停止によりpreviewが未消費のまま、保存RPC送信0・quota消費0であることを確認する。既存の正常系fixtureへ明示requested／readyを供給し、既存期待値とSQLは変更しない。検査用readyを稼働readyへ採用しない。
+
+実Auth／実PostgREST／本人データ／端末の検証ではない。正式商品受入れ、B14-A全体、M5、Piece全体完成を主張しない。GitHub反映後、変更5pathの全文とcommitの変更pathを再取得して一致を確認した。
+
+### 35.3 次の位置と維持する境界
+
+保存・本人操作のフラグ未接続は今回の対象範囲で補修。次は同じ実機利用経路の未完成部分（capabilities／quota、保存・本人操作のRN接続、renderer／画像保存共有）を完成させ、PCE-6 M5／PCE-7 §8の一括切替条件へつなぐ。旧経路を残したままpreviewだけを有効にすることをM5成立へ読み替えない。
+
+旧quota／publish／cancel、reflection系、Nexus旧Piece、`/piece/*`、`/mymodel/qna/*`の残存と、稼働TTL／renderer／requested／readyの採用根拠は継続残件。検査用600秒やsynthetic-rendererを稼働値にしない。稼働変更の前には対象版・設定・旧経路移行・復旧方法を具体化して既存承認境界と照合する。
+
+DB001〜004適用済みの証拠は§33.2を維持。今回DB再照会／再適用・env／deploy／activation／native build／main merge・利用者データ試験0。Emlis／Analysis変更0。最新weekly review §5.5の実機順序と12/18公開目標を保持。
+
+System Context prepareは実行したが、浅いcheckoutで既定の祖先commitとの連続性を証明できず終了code2となった。prepare成功とはせず、System Context入口が認める原典直接読取で、前提・全体構造／ファイル地図・current map・PCE原典・今回の実ファイルを確認した。補助機構の再開発は行わない。読取reviewで新しい検査のGET再試行回数の不一致を指摘され、共有clientの既存仕様どおりに固定してからCIへ反映した。
+
+`STRUCTURE_MAP_DELTA_UPDATED`。現在のAPI制御責任を本mapへ反映し、入口・manifestを同じ資料更新で同期する。`automatic_progression=false`。

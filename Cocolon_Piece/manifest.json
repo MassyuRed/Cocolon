@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v29",
+  "schema_version": "cocolon.piece.workstream_manifest.v30",
   "generated_at": "2026-10-10 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v28",
-    "predecessor_blob": "af4df64055e81698a95cd6d23628936d29de7f18",
-    "predecessor_head": "3cabfbb7a10c9fb72c27a59769b8d7b23efec0a3",
-    "carry_forward": "Preserve prior commit-bound evidence and applied live DB facts. Current limited approval, shared source preparation and isolated CI are shared_preview_preparation_20261010; running cutover remains unperformed."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v29",
+    "predecessor_blob": "5e46c92df69f711196e8d5656fdb61650c0c7b6c",
+    "predecessor_head": "054e1f8f57dd947755de2b458d6d08329abc2e81",
+    "carry_forward": "Preserve prior commit-bound evidence, shared preview preparation and applied live DB facts. Current saved-operation enforcement and isolated CI are saved_operation_control_20261010; running cutover remains unperformed."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "464a16fa2c5b2f14784d3b83969278e3832712cc",
-    "raw_sha256": "a63c268676cb856686992cfa3f676b96bc14cbea269bced7b972d07ddf2df148",
-    "utf8_bytes": 48452
+    "git_blob_sha1": "1f14f9e060b13df6519066b3dfd784bb36c1663b",
+    "raw_sha256": "b55c59a0a66f83775a936305cb3d1765114c9fb1bb05fab039b9a5d0b5e14441",
+    "utf8_bytes": 50183
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -55,7 +55,7 @@
     "pce9a_b01": "COMPLETE",
     "pce9a_b02a": "NATIVE_ACCEPTANCE_RETAINED__LIVE_BRIDGE_APPLIED_20261010",
     "analysis_roadmap": "REFER_TO_ANALYSIS_CURRENT_STRUCTURE__HISTORICAL_NOT_ACTIVATED_STATE_NOT_CURRENT",
-    "next_piece_group": "B10_RUNTIME_ADMISSION_AND_M5_REMAINING_CONDITIONS__SHARED_PREPARATION_VERIFIED",
+    "next_piece_group": "B10_CAPABILITIES_QUOTA_RN_AND_M5_REMAINING_CONDITIONS__SAVED_OPERATION_CONTROL_VERIFIED",
     "automatic_packet_progression": false,
     "pce9a_b02a_red": "FROZEN_UNCHANGED__NATIVE_POSTGRESQL_1_PASS",
     "pce9a_b02a_implementation": "EXACT5_PRESERVED__EXACT6_SELECTORS_PUBLISHED",
@@ -67,7 +67,8 @@
     "pce9a_b07_mutation_http": "REMOTE_DRAFT_0C1F69E__HTTP_152_PASS__ISOLATED_POSTGRESQL_13_PASS__REAL_AUTH_POSTGREST_DEVICE_PENDING__NOT_B7_COMPLETE",
     "pce9c_source_ref_transport": "EXPLICIT_SHARED_CANDIDATE_REGISTERED_AND_ISOLATED_VERIFIED__DEFAULT_LEGACY__NOT_LIVE_AUTH_VERIFIED",
     "pce9d_runtime_projection": "INPUTSCREEN_LAST_CONFIRMED_SAVE_TO_EXISTING_HOST_CONNECTED_CODE_DISABLED__LIVE_RUNTIME_PENDING",
-    "pce9a_runtime_preview_control": "SHARED_CANDIDATE_REUSES_EXISTING_FACTORY__PRODUCTION_VALUES_AND_M5_PENDING"
+    "pce9a_runtime_preview_control": "SHARED_CANDIDATE_REUSES_EXISTING_FACTORY__PRODUCTION_VALUES_AND_M5_PENDING",
+    "pce9a_saved_operation_control": "REMOTE_DRAFT_227BACF__CI_1489_PASS__UNREGISTERED__NOT_LIVE_ACCEPTANCE"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -149,8 +150,8 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "3cabfbb7a10c9fb72c27a59769b8d7b23efec0a3",
-    "mashos_api_head": "875dca35c02715c8f572344c78715850862d2902",
+    "cocolon_pre_sync_head": "054e1f8f57dd947755de2b458d6d08329abc2e81",
+    "mashos_api_head": "227bacf8a1925345fc680a6b54d6e0ba484e6f27",
     "current_user_visible_piece_shape": "OLD_QNA_REGISTERED_IN_SOURCE__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
     "piece_v2_api_registration_present": true,
@@ -161,30 +162,31 @@
     "piece_v2_db_runtime_present": false,
     "piece_v2_rn_runtime_present": false,
     "piece_v2_feature_flags_present": true,
-    "piece_v2_feature_flags_scope": "Per-app resolver and RN projection implemented; explicitly supplied candidate runtime verified with synthetic values; no production supplier or admitted production values.",
+    "piece_v2_feature_flags_scope": "Existing per-app resolver now enforced by save, owner history/detail, visibility and delete handlers at IO boundaries; preview cancel unchanged. Saved-operation router remains unregistered in default and shared-preview apps. Synthetic readiness only; no production supplier or admitted production values.",
     "input_screen_source_connected": true,
     "live_auth_input_to_preview_to_device_verified": false,
     "database_evidence_owner": "live_db_apply_20261010",
-    "remaining_work_owner": "shared_preview_preparation_20261010",
+    "remaining_work_owner": "saved_operation_control_20261010",
     "product_acceptance": false,
     "piece_v2_default_application_registered": false
   },
   "next_group": {
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
-    "name": "RUNTIME_ADMISSION_AND_M5_TRANSITION_CONDITIONS_BEFORE_REAL_AUTH_INPUTSCREEN_CONNECTION",
+    "name": "COMPLETE_EXISTING_PRODUCT_PATH_AND_M5_CONDITIONS_BEFORE_REAL_AUTH_DEVICE_CONNECTION",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "APPROVED_SOURCE_PREPARATION_AND_ISOLATED_TESTS_COMPLETE__RUNNING_CUTOVER_NOT_PERFORMED",
-    "current_map_section": "34.3",
-    "current_entry_section": "30",
+    "state": "SAVED_OPERATION_FLAGS_CONNECTED_AND_ISOLATED_VERIFIED__RUNNING_CUTOVER_NOT_PERFORMED",
+    "current_map_section": "35.3",
+    "current_entry_section": "31",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
     "weekly_review_section": "5.5",
-    "first_unfinished_work": "Establish adopted TTL/renderer and requested/ready evidence, resolve remaining PCE-6/PCE-7 M5 legacy-transition conditions and match the running-change authorization. Real Auth/saved input/same InputScreen/device remains unverified. Do not repeat the completed shared preparation, prior preview factory or applied migrations.",
+    "first_unfinished_work": "Complete remaining capabilities/quota, RN save/owner operations and renderer/image save/share along the same device path, then resolve PCE-6/PCE-7 M5 legacy retirement and adopted TTL/renderer/requested/ready evidence. Match concrete running changes to existing authorization. Real Auth/saved input/same InputScreen/device remains unverified. Do not repeat completed shared preparation, existing factories, operation controls or applied migrations.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 4,
     "production_migration_apply_effect": 0,
     "automatic_progression": false,
-    "repeat_shared_preparation": false
+    "repeat_shared_preparation": false,
+    "repeat_saved_operation_control": false
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -238,9 +240,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "7deed4d576f307901d3a86ae380156f23964346d",
-    "raw_sha256": "38fd450eb90e3a336118475c989f946d9f37ae028e9c622df91d3a769a42b750",
-    "utf8_bytes": 154614
+    "git_blob_sha1": "68a0b45c940c4be7f8aef9222f64a670a53c2021",
+    "raw_sha256": "078f9cc36679d50a04e2332c9e7efd4e8332db7bd3dc08fc31ae24cee2019e63",
+    "utf8_bytes": 160116
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -413,18 +415,19 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "APPROVED_SHARED_PREVIEW_SOURCE_PREPARATION_AND_ISOLATED_VERIFICATION",
+    "classification": "EXISTING_PCE7_SAVED_OPERATION_CONTROL_AND_ISOLATED_VERIFICATION",
     "piece_documentation_paths": 3,
-    "api_changed_paths": 9,
+    "api_changed_paths": 5,
+    "product_source_paths": 1,
+    "test_paths": 4,
     "documentation_state": "EXISTING_DRAFT_PR__REMOTE_POSTCHECK_RECORDED_IN_PR_COMMENTS",
     "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
     "live_database_apply": 0,
     "recorded_prior_live_database_apply": 4,
     "default_application_cutover": 0,
-    "explicit_candidate_registration": true,
-    "new_test_cases": 18,
-    "unchanged_default_contract_cases_executed": 10,
-    "workflow_passed_cases": 1452,
+    "saved_operation_registration": false,
+    "new_test_cases": 37,
+    "workflow_passed_cases": 1489,
     "workflow_failed_cases": 0,
     "workflow_skipped_cases": 0,
     "release_effect": 0,
@@ -1361,6 +1364,178 @@
     "native_build": 0,
     "main_merge": 0,
     "user_data_test": false,
+    "product_acceptance": false,
+    "automatic_progression": false
+  },
+  "historical_current_actual_basis_before_saved_operation_control_20261010": {
+    "cocolon_pre_sync_head": "3cabfbb7a10c9fb72c27a59769b8d7b23efec0a3",
+    "mashos_api_head": "875dca35c02715c8f572344c78715850862d2902",
+    "current_user_visible_piece_shape": "OLD_QNA_REGISTERED_IN_SOURCE__DEPLOYED_STATE_NOT_RECHECKED",
+    "piece_v2_pure_contract_owner_present": true,
+    "piece_v2_api_registration_present": true,
+    "piece_v2_api_registration_scope": "Explicit shared candidate registers existing preview/source-ref and bootstrap alongside input submit; default module-level app remains legacy.",
+    "piece_v2_dedicated_preview_application_present": true,
+    "piece_v2_migration_root_present": true,
+    "piece_v2_live_database_objects_present": true,
+    "piece_v2_db_runtime_present": false,
+    "piece_v2_rn_runtime_present": false,
+    "piece_v2_feature_flags_present": true,
+    "piece_v2_feature_flags_scope": "Per-app resolver and RN projection implemented; explicitly supplied candidate runtime verified with synthetic values; no production supplier or admitted production values.",
+    "input_screen_source_connected": true,
+    "live_auth_input_to_preview_to_device_verified": false,
+    "database_evidence_owner": "live_db_apply_20261010",
+    "remaining_work_owner": "shared_preview_preparation_20261010",
+    "product_acceptance": false,
+    "piece_v2_default_application_registered": false
+  },
+  "historical_next_group_before_saved_operation_control_20261010": {
+    "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
+    "name": "RUNTIME_ADMISSION_AND_M5_TRANSITION_CONDITIONS_BEFORE_REAL_AUTH_INPUTSCREEN_CONNECTION",
+    "environment": "WORK_SELECTED_BY_MASH",
+    "state": "APPROVED_SOURCE_PREPARATION_AND_ISOLATED_TESTS_COMPLETE__RUNNING_CUTOVER_NOT_PERFORMED",
+    "current_map_section": "34.3",
+    "current_entry_section": "30",
+    "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
+    "weekly_review_section": "5.5",
+    "first_unfinished_work": "Establish adopted TTL/renderer and requested/ready evidence, resolve remaining PCE-6/PCE-7 M5 legacy-transition conditions and match the running-change authorization. Real Auth/saved input/same InputScreen/device remains unverified. Do not repeat the completed shared preparation, prior preview factory or applied migrations.",
+    "repeat_completed_b2a_or_b7": false,
+    "repeat_existing_preview_factory": false,
+    "piece_migrations_already_applied": 4,
+    "production_migration_apply_effect": 0,
+    "automatic_progression": false,
+    "repeat_shared_preparation": false
+  },
+  "historical_current_sync_effects_before_saved_operation_control_20261010": {
+    "classification": "APPROVED_SHARED_PREVIEW_SOURCE_PREPARATION_AND_ISOLATED_VERIFICATION",
+    "piece_documentation_paths": 3,
+    "api_changed_paths": 9,
+    "documentation_state": "EXISTING_DRAFT_PR__REMOTE_POSTCHECK_RECORDED_IN_PR_COMMENTS",
+    "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
+    "live_database_apply": 0,
+    "recorded_prior_live_database_apply": 4,
+    "default_application_cutover": 0,
+    "explicit_candidate_registration": true,
+    "new_test_cases": 18,
+    "unchanged_default_contract_cases_executed": 10,
+    "workflow_passed_cases": 1452,
+    "workflow_failed_cases": 0,
+    "workflow_skipped_cases": 0,
+    "release_effect": 0,
+    "product_acceptance": false,
+    "automatic_progression": false
+  },
+  "saved_operation_control_20261010": {
+    "approval_basis": "Mash requested Piece continuation; prior explicit source-preparation and isolated-verification authorization is retained. No running cutover authorization inferred.",
+    "design_basis": "PCE-7 sections 5/6/9; current map section 35; Rule18 existing-design implementation.",
+    "api_base_commit": "875dca35c02715c8f572344c78715850862d2902",
+    "api_verified_commit": "227bacf8a1925345fc680a6b54d6e0ba484e6f27",
+    "product_source": "ai/services/ai_inference/api_piece_v2.py",
+    "changed_paths": [
+      "ai/services/ai_inference/api_piece_v2.py",
+      "ai/tests/piece_v2/test_b06_piece_v2_save_api.py",
+      "ai/tests/piece_v2/test_b07_piece_v2_owner_api.py",
+      "ai/tests/piece_v2/test_b07_piece_v2_mutation_http.py",
+      "ai/tests/piece_v2/db/test_b07_piece_v2_mutation_http_native.py"
+    ],
+    "effective_requirements": {
+      "save": [
+        "piece_v2_save_enabled",
+        "piece_v2_public_write_enabled only for normalized public scope"
+      ],
+      "owner_history_detail": [
+        "piece_v2_owner_read_enabled"
+      ],
+      "visibility": [
+        "piece_v2_visibility_toggle_enabled",
+        "piece_v2_public_write_enabled only for normalized public target"
+      ],
+      "delete": [
+        "piece_v2_delete_enabled"
+      ],
+      "preview_cancel": "No new gate; existing authenticated owner/revision/RPC retained"
+    },
+    "request_boundary": "Auth first, gate before schema/access, gate before and after existing injected IO and before response; observed disablement remains latched for request.",
+    "disabled_response": "503 PIECE_FEATURE_DISABLED",
+    "existing_dependency_resolver_reused": true,
+    "default_off_preserved": true,
+    "owner_recovery_independent_from_preview_save_export": true,
+    "write_retry_added": false,
+    "dispatched_write_rollback_claimed": false,
+    "existing_get_transport_retry_preserved": true,
+    "task_cancellation_propagates": true,
+    "service_store_sql_shared_app_rn_workflow_dependencies_changed": false,
+    "saved_operations_registered_in_running_or_shared_preview_app": false,
+    "tests": {
+      "run_id": 38017728318,
+      "job_id": 114111651881,
+      "conclusion": "success",
+      "tested_sha": "227bacf8a1925345fc680a6b54d6e0ba484e6f27",
+      "batches": 20,
+      "batch_passed_counts": [
+        46,
+        4,
+        61,
+        48,
+        36,
+        57,
+        33,
+        77,
+        26,
+        49,
+        166,
+        13,
+        458,
+        67,
+        36,
+        125,
+        146,
+        13,
+        26,
+        2
+      ],
+      "new_cases": 37,
+      "workflow_total_passed": 1489,
+      "failed": 0,
+      "skipped": 0,
+      "native_stop_before_save": {
+        "preview_state": "preview_draft",
+        "save_rpc_posts": 0,
+        "quota_consumption": 0
+      },
+      "auth_source_and_postgrest_transport": "SYNTHETIC_BOUNDARIES",
+      "runtime": {
+        "python": "3.12.15",
+        "pytest": "8.4.1",
+        "fastapi": "0.143.0",
+        "postgresql": "16.15"
+      },
+      "remaining_warnings": "Existing Pydantic validator and on_event deprecations.",
+      "local_pytest_executed": false,
+      "device_verified": false,
+      "real_auth_verified": false,
+      "read_only_review_correction": "New owner-read timeout expectation corrected to existing one-retry GET behavior before CI; product retry policy unchanged."
+    },
+    "source_postcheck": "All five published source/test files fetched in full and compared; commit changed-path set matches.",
+    "context_prepare": "Attempted but exit 2: shallow checkout could not prove required ancestor. Used documented direct-original reading fallback; no prepare-success claim.",
+    "weekly_review": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md section 5.5",
+    "remaining_product_work": [
+      "capabilities/quota",
+      "RN save and owner operations",
+      "renderer and native image save/share",
+      "M5 legacy retirement and production configuration evidence",
+      "real Auth/InputScreen/device acceptance"
+    ],
+    "db_reapply": 0,
+    "live_db_queries": 0,
+    "rn_changes": 0,
+    "deploy": 0,
+    "environment_changes": 0,
+    "activation": 0,
+    "native_build": 0,
+    "main_merge": 0,
+    "user_data_test": false,
+    "m5_complete": false,
+    "piece_complete": false,
     "product_acceptance": false,
     "automatic_progression": false
   }

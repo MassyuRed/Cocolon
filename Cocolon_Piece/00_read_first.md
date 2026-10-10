@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§30／current map §34を優先する。新Piece DBの既存001〜004は適用・確認済みで再実行しない。共有APIの切替用コードと隔離検証は明示承認の範囲で完了し、通常起動は旧構成を保持する。候補では入力保存・bootstrap・source-ref・previewを同じappへ接続した。稼働設定の採用・M5全面移行・実Auth／実機・画像保存共有・商品完成は未成立。**
+**現在は§31／current map §35を優先する。保存・本人履歴／詳細・公開範囲変更・削除へ既存PCE-7フラグのサーバー側強制を接続した。共有preview候補と通常起動の構成を保持し、稼働切替・実Auth／実機・画像保存共有は未完了。DB001〜004は適用済みで再実行しない。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -68,7 +68,7 @@ Q&A:
 
 ## 3. Phase state
 
-現在の実装・残件は§30／current map §34を優先する。次の段落と状態表は10/07以前の履歴であり、未着手判定に使わない。
+現在の実装・残件は§31／current map §35を優先する。次の段落と状態表は10/07以前の履歴であり、未着手判定に使わない。
 
 最新の実装状態は§21〜22／current map §25〜26です。保存・消費済みcontext照合・本人履歴読取りを継承し、役割明記ひらがな名とB7公開切替・削除HTTPを反映済みとして分けて記録します。643／676 PASSは各旧commitの履歴であり、B7 runのHTTP 152件・native SQL接続13件とは別の実行結果です。公開安全性の実判定・永続preview発行・開発画面接続は未完了で、B5／B6／B7／B8全体完了へ換算しません。以下のPCE-0〜B2-Aは成立済み設計・過去実装の履歴として保持します。Analysisは自身のcurrent mapに従い、以下の旧未着手記述を再開判断へ使用しません。
 
@@ -790,3 +790,13 @@ Cocolon `f65c19e01d630a31499414fea10fb20eecff0c5c` で既存 `screens/InputScree
 再開位置は稼働TTL／renderer・requested／readyの採用根拠と、PCE-6/PCE-7 M5の残る移行条件を確定する工程。稼働切替・実Authから同じInputScreenの実機往復・画像保存共有は未実施。DB4本は適用済みで再実行しない。今回の限定準備承認を稼働変更承認へ拡張しない。`automatic_progression=false`。
 
 
+
+## 31. 2026-10-10 — 保存・本人操作へPCE-7停止制御を接続
+
+API `227bacf8a1925345fc680a6b54d6e0ba484e6f27` で、未登録の保存・本人履歴／詳細・公開範囲変更・削除を既存サーバー実効フラグへ接続した。認証後に確認し、既存IO境界の直前／直後と返却前でも再確認する。公開指定にはpublic_writeを追加し、空白付きpublicも既存正規化で同じ扱いとする。本人回復とpreview取消しの独立性を保持する。詳細はmap §35。
+
+[CI run 38017728318](https://github.com/MassyuRed/mashos-api/actions/runs/38017728318) はAPI `227bacf8a1925345fc680a6b54d6e0ba484e6f27` でsuccess。既存workflow全20検査batchは1,489 PASS／FAIL0／SKIP0（先行1,452件に今回37件追加）。Python 3.12.15、pytest 8.4.1、FastAPI 0.143.0、PostgreSQL 16.15。既存の共有候補・default契約・native接続検査も成功し、Pydantic validator／on_eventの既存非推奨警告は残る。local pytestは実行していない。
+
+製品変更は既存API 1file、検査は既存4file。既存resolver・service/store・SQL・共有app・RN・workflow・依存は変更しない。実Auth・本人データ・実機・正式商品受入れは未確認。DB4本の適用済み記録を維持し、再適用・稼働env／deploy／activation／native build／main mergeを実行していない。
+
+次はcapabilities／quota、保存・本人操作のRN接続、renderer／画像保存共有等の未完成部分と、M5の旧経路一括移行・設定採用条件。今回のsource補修だけでpreviewを稼働有効化せず、個別の稼働変更承認を省略しない。既存factory/InputScreen/生成・保存処理を作り直さず、weekly review §5.5の順序を維持する。`automatic_progression=false`。
