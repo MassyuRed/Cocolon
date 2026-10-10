@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§42／current map §46を優先する。候補の明示取消をRNから既存DELETEへ接続しました。通信結果が不明な場合は同じID/revisionで取消を再試行し、取消済みの候補を再生成しません。runtime再取得を伴う背景復帰でも、同じ本人・入力・操作のbody-free取消対象だけを保持します。API隔離CIは1,682 PASS、RN CIは545 PASS。実機描画・保存前fit・保存共有・稼働配置は残っています。**
+**現在は§43／current map §47を優先する。保存済みPieceの本人向け一覧・詳細を、既存の専用preview/shared候補構成へ接続しました。生成を停止しても独立した読取flagで保存時の本文・画像設定を読めます。既存quota URLの優先順位も保持。既定OFF・未配置で、実機描画・保存前fit・保存共有・稼働採用は残っています。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -925,3 +925,11 @@ RN local **545 PASS／FAIL0／SKIP0**、API local84 PASS、API [CI38030365374](h
 
 
 §42最終確認：RN [CI38030732508](https://github.com/MassyuRed/Cocolon/actions/runs/38030732508)は **545 PASS／FAIL0／SKIP0**、既存Android/iOS source検査とcontract guardsもsuccess。API CI1,682 PASSとともに記録し、localとCIの重複加算はしない。実端末・保存前fit・保存共有の完成ではない。詳細はmap §46.4。
+
+## 43. 2026-10-10 — 保存済みPieceの一覧・詳細を既存候補APIへ接続
+
+詳細ownerはcurrent map §47。API `d7e1cabf6f3f622f7e0f042d137eb1c29237dd42` で既存owner history/detail GETを専用preview/shared候補へ登録した。読取requested/readyをpreviewから独立させ、両方Trueのときだけ保存時の本文・画像設定・rendererを返す。現tier・元入力・本文再生成を読取条件に加えない。sharedの既存quotaは静的routeを優先し、UUID/public ID双方を保持した。既定OFFで、default appは変更しない。
+
+local関連5file **223 PASS／FAIL0／4 deselected**。最終headの[隔離CI38034228175](https://github.com/MassyuRed/mashos-api/actions/runs/38034228175)は **1,717 PASS／FAIL0／SKIP0**。localとの合算なし。 全7fileのremote全文・変更path集合・親headを照合済み。合成artifactを実SQLへ保存して読む検査であり、実Auth/PostgREST・端末・商品受入れではない。途中補修と検査限界はmap §47.2。
+
+次は実機描画/renderer admission→保存前fit→保存。形式変更・capture共有・Nexus・保存/公開切替/削除の候補API接続・quota v2採用・M5/実Auth・稼働採用も残る。今回RN/native/SQL/依存・稼働DB書込/env/deploy/activation/build/main merge0。Supabase migration履歴の読取で001〜004適用済み、追加2本未適用を再確認。入口/map/manifestを同期し、weekly§5.5・12/18目標・automatic_progression=falseを維持する。

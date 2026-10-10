@@ -2,7 +2,7 @@
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
 revision_date: "2026-10-10 JST"
-latest_api_implementation: "7a4d16a8ad6c23b130f883797d3846f3049c8e23"
+latest_api_implementation: "d7e1cabf6f3f622f7e0f042d137eb1c29237dd42"
 latest_storage_candidate: "4fcb140b778850a1b7a5a65d8e0a26005b3a24c4"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は§46を優先します。候補の明示取消をRNから既存DELETEへ接続しました。通信結果が不明な場合は同じID/revisionで取消を再試行し、取消済みの候補を再生成しません。runtime再取得を伴う背景復帰でも、同じ本人・入力・操作のbody-free取消対象だけを保持します。API隔離CIは1,682 PASS、RN CIは545 PASS。実機描画・保存前fit・保存共有・稼働配置は残っています。**
+**現在は§47を優先します。保存済みPieceの本人向け一覧・詳細を、既存の専用preview/shared候補構成へ接続しました。生成を停止しても独立した読取flagで保存時の本文・画像設定を読めます。既存quota URLの優先順位も保持。既定OFF・未配置で、実機描画・保存前fit・保存共有・稼働採用は残っています。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1694,3 +1694,35 @@ Supabase操作・live DB書込/追加migration適用、env/deploy/activation、n
 ### 46.4 最終RN CI
 
 RN source `ae389bf40dba9d8a0e3d5457895922d2b8fd3442` の[CI38030732508](https://github.com/MassyuRed/Cocolon/actions/runs/38030732508)は全3job成功。Node24.21.0／TypeScript5.2.2でInputScreen込み11suite **545 PASS／FAIL0／SKIP0**（job114150944944）。Android単体source compile（114150944831）、iOS syntax-only/既存patch/pbxproj（114150945057）も成功。[既存contract guards38030732449](https://github.com/MassyuRed/Cocolon/actions/runs/38030732449)もsuccess。Android既存annotation警告18件を維持。native app build・実端末描画・保存前fitの成功ではない。local545件をCI545件へ合算しない。§46.3の残件を保持し、今回の検証済み製品source/testは資料同期で変更しない。
+
+## 47. 2026-10-10 — 保存済みPieceの本人向け一覧・詳細を候補構成へ接続（未配置）
+
+### 47.1 製品上の残件と既存owner
+
+保存したPieceを後で読み返すため、PCE6の既存GETとPCE7 §5〜7の独立したowner_read制御を、すでにある専用preview/shared候補へ登録した。RNの既存履歴・詳細、本文/画像設定のprojectionは再実装しない。native renderer admissionに依存しない保存済みデータの読取を進め、実機・保存前fitの未達は維持する。
+
+開始headはCocolon `d1122f299c81d4b6a0fe7f0ebe02d422d6635240`／API `7a4d16a8ad6c23b130f883797d3846f3049c8e23`。全体設計・全ファイル地図・現行入口・Piece原典・前回txt・最新weekly §5.5・恒久incident全文を照合。System Context prepareは既知の祖先不一致code2のため、既存入口に従って原典を直接読んだ。WorkでのLEVEL_2相当の直接製品作業、root華恋が単一write owner、補助agentは同環境の読取reviewのみ。別modelによる正式Pro/Ultra受入れではない。
+
+| 既存owner | 今回の変更と意味 |
+|---|---|
+| API `ai/services/ai_inference/piece_v2_runtime_control.py` | 既存owner_history/owner_detailをGET `/emotion/piece/history`・`/emotion/piece/{piece_id}`へ登録。`owner_read_requested` / `owner_read_ready` は両方が厳密にTrueの場合だけ有効。preview・TTL・現rendererとは独立し、既定OFF。専用構成は8route。 |
+| API `ai/services/ai_inference/app.py` | shared候補では同じdetail route objectを静的routeの後へ移し、既存GET `/emotion/piece/quota`を先に選ぶ。UUIDと`piece:<UUID>`の両方を保持。default appの登録は変更しない。 |
+| API `ai/services/ai_inference/api_contract_registry.py` | 明示candidateだけにhistory.v2/detail.v2のcontract headerを追加。既定registry・quota.v1は保持。 |
+| 既存 `api_piece_v2.py` / `piece_v2_owner_service.py` | 今回変更なし。認証→独立flag→入力検証→owner/saved限定SELECT→保存時artifactのhash/closed projection→応答直前flag確認を再利用。現プラン判定・元入力の再読・本文再生成・書込なし。 |
+| API検査4file | `test_b14a_piece_preview_composition.py`、`test_b12_shared_preview_composition.py`、`db/test_b10_preview_application_native.py`、`db/test_b12_shared_preview_native.py`。既存fixtureとworkflowを使用。 |
+
+### 47.2 確認結果と限界
+
+API製品commit `eabcd21ba7b8f079a89346c40ca94ff88b167ac2`、最終head `d7e1cabf6f3f622f7e0f042d137eb1c29237dd42`（後者はnative検査docstringの合成artifact範囲を明記しただけ）。全7fileのremote全文、初回7path＋補修1path、各commitの親headを照合した。
+
+local関連5fileは **223 PASS／FAIL0／4 deselected**。4件は既存B7 native専用検査で、localにはPostgreSQLを用意せず既存隔離CIへ委ねた。初回の4file検査は旧route件数6の期待が1 FAIL（177 PASS）となり8へ補修。読取reviewで検出したgeneric detailによるquota遮蔽は、sharedの登録順変更と回帰検査で解消。新native2件は合成本文・recipe・rendererを実SQLで保存し実projectionで再読する。新2件そのものをCMEE生成/reviewの検査とは数えない。
+
+最終headの[隔離CI38034228175](https://github.com/MassyuRed/mashos-api/actions/runs/38034228175)／job `114161231439` は全工程success。重複しない23回の検査集合で **1,717 PASS／FAIL0／SKIP0**。shared native検査20件（今回owner読取2件を含む）も成功。Python3.12.15／PostgreSQL16.15／pytest8.4.1／psycopg3.3.6。local223件や先行commitのCIを加算しない。
+
+本人のprivate/public履歴とページング、UUID/public ID両方の詳細、別owner/未保存の非表示、保存後の現tier不明でも本文・recipe・renderer保持、DB/回数変更なし、IO後停止時の本文遮断を確認した。Auth/HTTP transportとartifact準備は代替を含む。実Auth/PostgREST・実データ・端末・商品受入れを意味しない。既存Pydantic root_validator／FastAPI on_eventの非推奨警告は維持。
+
+### 47.3 再開位置と稼働境界
+
+次はnative B9の実端末描画同等性・glyph/ink/性能、renderer admission→保存前fit→保存。形式変更、capture/画像保存共有、Nexus、保存・公開切替・削除等の候補API接続、quota v2採用、M5/実Auth・稼働設定が残る。今回のowner GET登録・preview取消・画像設定接続を作り直さない。Piece V2のsave/visibility/delete/public/exportは今回の構成で有効化できない。
+
+今回の変更はAPI製品3file＋test4file、Cocolon入口/map/manifest3file。RN/native/SQL・新依存・稼働DB書込・env/deploy/activation/app build/main mergeは0。Supabase project状態とmigration履歴だけを読取り、001〜004適用済み、005 quotaとvisual変更SQLの2本未適用を再確認した。weekly §5.5の実機確認順序と12/18公開目標を維持し、Pieceの全内容完成を実機確認の前提にしない。TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false。

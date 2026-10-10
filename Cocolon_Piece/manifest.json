@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v41",
+  "schema_version": "cocolon.piece.workstream_manifest.v42",
   "generated_at": "2026-10-10 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v40",
-    "predecessor_blob": "92c994d348f27fd598120167281ae531645ba3ee",
-    "predecessor_head": "237aae1a485564554747fbdcf842e992fe5825b0",
-    "carry_forward": "Existing source/preview/visual flows retained. Explicit terminal cancellation connected in RN and candidate factories; runtime refresh preserves only same-selection body-free cancellation. Native device/fit/save/live remain pending."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v41",
+    "predecessor_blob": "1aaf785de864829789defc4e35ddfba95ebb5b9a",
+    "predecessor_head": "d1122f299c81d4b6a0fe7f0ebe02d422d6635240",
+    "carry_forward": "Existing RN/source/preview/visual/cancel flows retained. Existing owner GET handlers now connected in explicit preview/shared candidates with independent default-OFF read readiness. Native device/fit/save/live remain pending."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "65427d5a33b7ac42485f367872a3bc0f49cba075",
-    "raw_sha256": "8fe8b21fb42115aefa911a96f3c5de8abc46ea818231a3096a8984492c670a08",
-    "utf8_bytes": 73074
+    "git_blob_sha1": "c1bdf0ab540dc89e702aeff37f34f1fc2b3d30b0",
+    "raw_sha256": "62f79e90de1640bfcf23a3add56a3933c0006fb95d9e4fd964d8562ede374929",
+    "utf8_bytes": 74528
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -75,7 +75,8 @@
     "pce9a_persisted_visual_mutation": "HISTORICAL_4FCB140_SERVICE_HTTP74_NATIVE47_TOTAL1658__CURRENT_COMPOSITION_BELOW__LIVE_SQL_UNAPPLIED",
     "pce9c_visual_settings_rn": "SOURCE_REMOTE_CI520_PASS__RUNTIME_DEVICE_PENDING",
     "pce9a_visual_mutation_composition": "EXPLICIT_PREVIEW_SHARED_REGISTERED_REMOTE_CI1675_PASS__LIVE_DEVICE_PENDING",
-    "pce9c_preview_cancellation": "RN_REMOTE_CI545_PASS__API_REMOTE_CI1682_PASS__NOT_LIVE"
+    "pce9c_preview_cancellation": "RN_REMOTE_CI545_PASS__API_REMOTE_CI1682_PASS__NOT_LIVE",
+    "pce9a_owner_read_composition": "REMOTE_CANDIDATE_REGISTERED__ISOLATED_CI1717_PASS__NOT_LIVE"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -157,23 +158,23 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "ae389bf40dba9d8a0e3d5457895922d2b8fd3442",
-    "mashos_api_head": "7a4d16a8ad6c23b130f883797d3846f3049c8e23",
+    "cocolon_pre_sync_head": "d1122f299c81d4b6a0fe7f0ebe02d422d6635240",
+    "mashos_api_head": "d7e1cabf6f3f622f7e0f042d137eb1c29237dd42",
     "current_user_visible_piece_shape": "OLD_QNA_REGISTERED_IN_SOURCE__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
     "piece_v2_api_registration_present": true,
-    "piece_v2_api_registration_scope": "Explicit shared candidate registers preview POST, visual PATCH, cancellation DELETE, source-ref and bootstrap alongside input submit; default app remains legacy.",
+    "piece_v2_api_registration_scope": "Explicit shared candidate registers preview POST/visual PATCH/cancel DELETE, source-ref/bootstrap and owner history/detail GET; default app remains legacy.",
     "piece_v2_dedicated_preview_application_present": true,
     "piece_v2_migration_root_present": true,
     "piece_v2_live_database_objects_present": true,
     "piece_v2_db_runtime_present": false,
     "piece_v2_rn_runtime_present": false,
     "piece_v2_feature_flags_present": true,
-    "piece_v2_feature_flags_scope": "Existing per-app resolver now enforced by save, owner history/detail, visibility and delete handlers at IO boundaries; preview cancel unchanged. Saved-operation router remains unregistered in default and shared-preview apps. Synthetic readiness only; no production supplier or admitted production values.",
+    "piece_v2_feature_flags_scope": "Independent strict owner-read requested/ready pair in explicit candidates; preview/save/public/export readiness is not implied. Existing IO-boundary enforcement retained. Default app unchanged; no production settings supplier or admission.",
     "input_screen_source_connected": true,
     "live_auth_input_to_preview_to_device_verified": false,
     "database_evidence_owner": "live_db_apply_20261010",
-    "remaining_work_owner": "preview_cancellation_20261010",
+    "remaining_work_owner": "owner_read_composition_20261010",
     "product_acceptance": false,
     "piece_v2_default_application_registered": false,
     "piece_v2_quota_http_present": true,
@@ -193,18 +194,20 @@
     "piece_v2_visual_mutation_candidate_registered": true,
     "piece_v2_preview_cancellation_rn_connected": true,
     "piece_v2_preview_cancellation_candidate_registered": true,
-    "piece_v2_preview_cancellation_runtime_registered": false
+    "piece_v2_preview_cancellation_runtime_registered": false,
+    "piece_v2_owner_read_candidate_registered": true,
+    "piece_v2_owner_read_runtime_registered": false
   },
   "next_group": {
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "NATIVE_DEVICE_RENDERER_ADMISSION_THEN_SAVE_FIT_AND_BOUND_SAVE",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "PREVIEW_CANCELLATION_CONNECTED__NATIVE_DEVICE_FIT_LIVE_PENDING",
-    "current_map_section": "46.3",
-    "current_entry_section": "42",
+    "state": "OWNER_READ_CANDIDATE_CONNECTED__NATIVE_DEVICE_FIT_LIVE_PENDING",
+    "current_map_section": "47.3",
+    "current_entry_section": "43",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
     "weekly_review_section": "5.5",
-    "first_unfinished_work": "Native B9 device drawing equivalence/glyph/ink/performance and renderer admission, then save fit/save. Format mutation, capture/share/Nexus, saved-operation composition, M5/live005+visual SQL/Auth remain.",
+    "first_unfinished_work": "Native B9 device drawing equivalence/glyph/ink/performance and renderer admission, then save fit/save. Format mutation, capture/share/Nexus, save/visibility/delete composition, quota v2 adoption, M5/live005+visual SQL/Auth remain.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 4,
@@ -223,7 +226,8 @@
     "repeat_persisted_visual_mutation_backend": false,
     "repeat_visual_mutation_rn_connection": false,
     "repeat_preview_visual_patch_registration": false,
-    "repeat_preview_cancellation_connection": false
+    "repeat_preview_cancellation_connection": false,
+    "repeat_owner_read_composition": false
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -277,9 +281,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "54eff8dae35e38c57d0b91d84bdbe6ca1c79112e",
-    "raw_sha256": "276a50fa6e5cc4ff469f11d054c74d7bac3dd2707c94fe576c16b8041b4978ec",
-    "utf8_bytes": 244050
+    "git_blob_sha1": "ff2ce8235393589f638fed572c2c25396b830435",
+    "raw_sha256": "34818ec4ad43e9e0bb0fafb92afc10ad8b8de63ee8fdf7d41b7c744379beb699",
+    "utf8_bytes": 249189
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -452,11 +456,11 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "EXPLICIT_PREVIEW_CANCELLATION_RN_AND_CANDIDATE_COMPOSITION",
+    "classification": "EXISTING_OWNER_HISTORY_DETAIL_CANDIDATE_COMPOSITION",
     "piece_documentation_paths": 3,
-    "api_product_paths": 2,
+    "api_product_paths": 3,
     "api_test_paths": 4,
-    "rn_changed_paths": 10,
+    "rn_changed_paths": 0,
     "native_changed_paths": 0,
     "sql_changed_paths": 0,
     "new_dependency": 0,
@@ -2999,6 +3003,66 @@
     "native_source_changed": false,
     "sql_changed": false,
     "live_database_operation": 0,
+    "deploy": 0,
+    "activation": 0,
+    "main_merge": 0,
+    "product_acceptance": false,
+    "automatic_progression": false
+  },
+  "owner_read_composition_20261010": {
+    "status": "REMOTE_ISOLATED_CI_VERIFIED_NOT_DEPLOYED",
+    "source_commit": "d7e1cabf6f3f622f7e0f042d137eb1c29237dd42",
+    "product_source_commit": "eabcd21ba7b8f079a89346c40ca94ff88b167ac2",
+    "base_head": "7a4d16a8ad6c23b130f883797d3846f3049c8e23",
+    "owner_paths": [
+      "ai/services/ai_inference/piece_v2_runtime_control.py",
+      "ai/services/ai_inference/app.py",
+      "ai/services/ai_inference/api_contract_registry.py"
+    ],
+    "test_paths": [
+      "ai/tests/piece_v2/test_b14a_piece_preview_composition.py",
+      "ai/tests/piece_v2/test_b12_shared_preview_composition.py",
+      "ai/tests/piece_v2/db/test_b10_preview_application_native.py",
+      "ai/tests/piece_v2/db/test_b12_shared_preview_native.py"
+    ],
+    "verification": {
+      "local_passed": 223,
+      "local_failed": 0,
+      "local_deselected_native": 4,
+      "local_initial_passed": 177,
+      "local_initial_failed": 1,
+      "local_initial_failure": "STALE_ROUTE_COUNT_6_FIXED_TO_8",
+      "ci_pending": false,
+      "remote_file_matches": 7,
+      "remote_changed_paths_match": true,
+      "remote_parents_match": true,
+      "review": "READ_ONLY_SAME_ENVIRONMENT__STATIC_QUOTA_ROUTE_PRECEDENCE_FIXED__SYNTHETIC_ARTIFACT_SCOPE_CLARIFIED__NO_REMAINING_PRODUCT_BLOCKER",
+      "synthetic_auth_http_artifact": true,
+      "real_native_sql_projection": true,
+      "real_auth_postgrest_device": false,
+      "ci_run_id": 38034228175,
+      "ci_job_id": 114161231439,
+      "ci_passed": 1717,
+      "ci_failed": 0,
+      "ci_skipped": 0,
+      "ci_conclusion": "success",
+      "ci_disjoint_invocations": 23,
+      "shared_native_passed": 20,
+      "owner_native_new_cases": 2,
+      "python": "3.12.15",
+      "postgresql": "16.15",
+      "pytest": "8.4.1",
+      "psycopg": "3.3.6"
+    },
+    "dedicated_route_count": 8,
+    "owner_read_independent_of_preview": true,
+    "default_application_changed": false,
+    "default_registry_changed": false,
+    "new_saved_mutations_enabled": false,
+    "native_source_changed": false,
+    "sql_changed": false,
+    "live_migration_history_read_only": true,
+    "live_database_write": 0,
     "deploy": 0,
     "activation": 0,
     "main_merge": 0,
