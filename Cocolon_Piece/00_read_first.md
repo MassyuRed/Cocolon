@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§39／current map §43を優先する。発行済みpreviewの本文を保った画像設定変更をAPI・SQL候補へ接続した。revision照合で同時更新を防ぎ、元POSTの同key再取得は更新後の候補を返す。RN設定操作・稼働登録は未接続。native B9の実機同等性・renderer admission・保存前fit・保存共有は引き続き未完了。001〜004は適用済みで再実行しない。005と今回追加のvisual変更SQLは稼働未適用。**
+**現在は§40／current map §44を優先する。発行済みpreviewの画像設定を既存RN画面から変更できるsourceを接続しました。テーマ・比率・Cocolon表記は取得済みcapabilities内だけで選び、本文は再生成しません。不明応答・競合は元POSTの同request/keyで明示回収します。520件のlocal検査が成功。APIの稼働route登録、追加2本のmigration適用、native実機描画同等性・renderer admission・保存前fit・保存共有は未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -889,3 +889,12 @@ local10suite449 PASS／FAIL0／SKIP0（renderer39、planner39・Python由来orac
 API source `4fcb140b778850a1b7a5a65d8e0a26005b3a24c4`、7fileのremote全文・変更path集合・親head一致を確認済み。local新規74 PASS、既存非DB回帰216 PASS／4 deselected。最初の回帰実行では既存DB専用4件がlocal runtime未用意でsetup errorとなり、製品PASSへ含めていない。隔離CI [38027073893](https://github.com/MassyuRed/mashos-api/actions/runs/38027073893) は **1,658 PASS／FAIL0／SKIP0**（新規service/HTTP74＋native47、既存1,537）。詳細はcurrent map §43.4。001〜004再実行・live DB query/apply・env/deploy/activation/main merge・native build 0。005と `supabase/migrations/20261010050940_piece_v2_preview_visual_change.sql` は稼働未適用。週次10/10 §5.5、12/18目標、automatic_progression=falseを維持。
 
 次は既存PATCHへのRN設定操作・中断/再取得の接続と、既存native B9の実端末描画同等性・glyph/ink/性能、renderer admission、保存前fit→保存。形式変更、capture/共有、Nexus、M5/稼働構成、実Authも残る。§38の478 PASS/Android source compile/iOS syntax-onlyは先行証拠として保持し、今回の実機結果へ数え直さない。
+
+
+## 40. 2026-10-10 — 発行済み画像設定をプレビュー画面から変更
+
+詳細ownerはcurrent map §44。既存PATCHへテーマ・比率・Cocolon表記の操作を接続した。取得済みcapabilities内だけ選択し、変更しない項目は現在recipeの具体値で保持。本文・形式・期限・rendererを変えず、更新版と3hashを確認後に新canvasを測定する。旧表示の操作と遅延応答を採用しない。
+
+不明ACK/競合は自動PATCHせず「最新のプレビューを取得」から元POSTの同request/keyで回収。close→同候補再表示やsource A→B→Aでも旧ボタンを拒否する。local InputScreen込み11suite **520 PASS／FAIL0／SKIP0**。Auth/HTTP/React/nativeは代替を含み、実機合格ではない。途中失敗・review補修の内訳はmap §44.2。
+
+次は既存preview/shared候補factoryへのPATCH登録準備と隔離往復、その後の稼働採用・実機確認。native描画同等性/renderer admission→保存前fit→保存、形式変更・画像保存共有・Nexus・M5/実Authが残る。001〜004はmigration履歴読取で適用済みを確認、005とvisual変更SQLは未登録。今回API/SQL/native source・新依存・稼働DB書込/env/deploy/activation/build/main mergeは0。weekly§5.5・12/18目標・automatic_progression=falseを維持する。

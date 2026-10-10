@@ -92,7 +92,7 @@ function load({ send, session } = {}) {
   // Evaluate the actual application module. Only ESM linkage is replaced;
   // the request/response/error/session implementation is not reimplemented.
   vm.runInContext(source.replace(dependency, '').replace(/^export /gm, '') +
-    '\n globalThis.testApi = { requestPiecePreview, PieceApiError };', context, { filename: sourcePath });
+    '\n globalThis.testApi = { requestPiecePreview, requestPiecePreviewVisualChange, PieceApiError };', context, { filename: sourcePath });
   return { ...context.testApi, calls, sessions };
 }
 const options = extras => ({ expectedUserId: OWNER, idempotencyKey: KEY, ...extras });
@@ -410,4 +410,58 @@ badPlanMetadata.forEach((change, index) => {
     await assert.rejects(api.requestPiecePreview(request(), options()),
       error => error.code === 'PIECE_TEMPORARILY_UNAVAILABLE');
   });
+});
+
+const visualRequest = () => ({ preview_id: preview('quote').preview_id, expected_preview_revision: 1,
+  visual_selection: { theme_id: 'quiet_night', aspect_ratio: '4:5', branding_mode: 'required_subtle' } });
+function visualReply() {
+  const result = preview('quote'); result.preview_revision = 2; result.row_version = 2;
+  result.visual_recipe.theme.theme_id = 'quiet_night';
+  result.visual_recipe_hash = digest(JSON.stringify(canonical(result.visual_recipe)));
+  return result;
+}
+const visualOptions = extras => ({ expectedUserId: OWNER, ...extras });
+
+test('PATCH reuses authenticated transport/session recheck with exact2 body, no key or source/body fields', async () => {
+  const expected = visualReply(), api = load({ send: async () => ({ status: 200, json: async () => expected }) });
+  const result = await api.requestPiecePreviewVisualChange(visualRequest(), visualOptions());
+  assert.deepEqual(copy(result), expected); assert.ok(Object.isFrozen(result));
+  assert.equal(api.calls[0][0], '/emotion/piece/preview/' + expected.preview_id);
+  const sent = api.calls[0][1]; assert.equal(sent.method, 'PATCH'); assert.equal(sent.auth, true);
+  assert.equal(sent.expectedUserId, OWNER); assert.equal(sent.headers['Idempotency-Key'], undefined);
+  assert.deepEqual(JSON.parse(sent.body), { expected_preview_revision: 1, visual_selection: visualRequest().visual_selection });
+  assert.deepEqual(api.sessions, [OWNER, OWNER]);
+});
+for (const defect of ['extra', 'id', 'revision', 'missing_selection', 'extra_selection', 'bad_choice', 'key']) {
+  test(`invalid visual ${defect} rejects before network`, async () => {
+    const api = load(), value = visualRequest(), opt = visualOptions();
+    if (defect === 'extra') value.piece_text = 'private';
+    if (defect === 'id') value.preview_id = '../private';
+    if (defect === 'revision') value.expected_preview_revision = '1';
+    if (defect === 'missing_selection') delete value.visual_selection.aspect_ratio;
+    if (defect === 'extra_selection') value.visual_selection.font_size = 10;
+    if (defect === 'bad_choice') value.visual_selection.theme_id = 'not-a-theme';
+    if (defect === 'key') opt.idempotencyKey = KEY;
+    await assert.rejects(api.requestPiecePreviewVisualChange(value, opt));
+    assert.equal(api.calls.length, 0);
+  });
+}
+test('PATCH captures caller-owned selection before session awaits', async () => {
+  const api = load({ send: async () => ({ status: 200, json: async () => visualReply() }) }), value = visualRequest();
+  const pending = api.requestPiecePreviewVisualChange(value, visualOptions());
+  value.visual_selection.theme_id = 'soft_paper'; value.expected_preview_revision = 99;
+  await pending;
+  assert.equal(JSON.parse(api.calls[0][1].body).visual_selection.theme_id, 'quiet_night');
+  assert.equal(JSON.parse(api.calls[0][1].body).expected_preview_revision, 1);
+});
+test('PATCH rejects account change after response without exposing its content', async () => {
+  const api = load({ session: (owner, count) => count === 1 ? 'synthetic' : null,
+    send: async () => ({ status: 200, json: async () => visualReply() }) });
+  await assert.rejects(api.requestPiecePreviewVisualChange(visualRequest(), visualOptions()), isCode('PIECE_AUTH_REQUIRED'));
+  assert.equal(api.calls.length, 1);
+});
+test('PATCH network failure does not automatically retry or expose a raw exception', async () => {
+  const api = load({ send: async () => { throw new Error('private transport body'); } });
+  await assert.rejects(api.requestPiecePreviewVisualChange(visualRequest(), visualOptions()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+  assert.equal(api.calls.length, 1);
 });

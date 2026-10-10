@@ -1,5 +1,5 @@
 /** PCE-8 B10 detached React Native host for the existing request controller.
- * Not imported by InputScreen yet. The existing resolved `context` mode is
+ * Connected from InputScreen. The existing resolved `context` mode is
  * retained. `savedInput` mode explicitly reads the saved ID, then waits for a
  * separate preview action; it requires the existing live runtime predicate.
  * The host only reads body-free request/session identity. No raw input/Emlis
@@ -64,6 +64,7 @@ export default class InputPieceActionArea extends React.Component {
     this.appSubscription = null;
     this.start = this.start.bind(this);
     this.retry = this.retry.bind(this);
+    this.changeVisual = this.changeVisual.bind(this);
     this.close = this.close.bind(this);
     this.changed = this.changed.bind(this);
     this.resolveSavedInput = this.resolveSavedInput.bind(this);
@@ -250,6 +251,11 @@ export default class InputPieceActionArea extends React.Component {
     if (display.canRetry) void this.controller.retry();
   }
 
+  changeVisual(selection, identity, visualToken) {
+    if (!this.isCurrent() || !this.state.open) return;
+    void this.controller.changeVisual(selection, identity, visualToken);
+  }
+
   close() {
     if (!this.mounted) return;
     if (this.sourceAttempt) this.clearSource();
@@ -280,7 +286,8 @@ export default class InputPieceActionArea extends React.Component {
         title: 'この入力をPieceにする', onPress: this.start, accessibilityLabel: 'この入力をPieceにする',
       }) : null,
       display.phase === 'unavailable' && !this.state.open ? element(Text, { accessibilityRole: 'alert' }, display.message) : null,
-      element(PiecePreviewModal, { visible: this.state.open, display, onClose: this.close, onRetry: this.retry }),
+      element(PiecePreviewModal, { visible: this.state.open, display, onClose: this.close,
+        onRetry: this.retry, onVisualChange: this.changeVisual }),
     );
   }
 }

@@ -183,14 +183,17 @@ export function readPiecePreviewDisplay(view, nowMs = Date.now()) {
   if (view.phase !== 'received') return frozen({ ...base,
     phase: ['idle', 'loading', 'unavailable'].includes(view.phase) ? view.phase : 'unavailable',
     message: typeof view.message === 'string' ? view.message : '',
-    canRetry: view.phase === 'unavailable' && view.canRetry === true });
+    canRetry: view.phase === 'unavailable' && view.canRetry === true,
+    retryKind: view.retryKind === 'recover' ? 'recover' : 'preview',
+    loadingKind: ['visual', 'recover'].includes(view.loadingKind) ? view.loadingKind : 'preview' });
   try {
     const preview = readPiecePreviewSnapshot(view.preview);
     const expiresAtMs = expiryMilliseconds(preview.expires_at);
     if (!Number.isFinite(nowMs) || !Number.isFinite(expiresAtMs)) throw new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE');
     if (nowMs >= expiresAtMs) throw new PieceApiError('PIECE_PREVIEW_EXPIRED');
     verifyPieceArtifactHashes(preview);
-    return frozen({ ...base, phase: 'received', preview, hashVerified: true, expiresAtMs });
+    return frozen({ ...base, phase: 'received', preview, hashVerified: true, expiresAtMs,
+      visualUpdated: view.visualUpdated === true, visualToken: view.visualToken || null });
   } catch (error) {
     const code = error instanceof PieceApiError ? error.code : 'PIECE_TEMPORARILY_UNAVAILABLE';
     return frozen({ ...base, phase: 'unavailable', message: new PieceApiError(code).message });

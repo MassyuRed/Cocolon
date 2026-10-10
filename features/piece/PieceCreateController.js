@@ -1,7 +1,7 @@
 /**
  * PCE-8 B10 request lifecycle owner: existing API -> model -> view invalidation.
  * This is the headless part of PieceCreateController, not a React component.
- * No existing screen imports it yet; importing/constructing it sends nothing.
+ * The input action host uses it; importing/constructing it sends nothing.
  *
  * Host contract:
  * - One instance per mounted preview host. Subscribe, read getView(), and call
@@ -18,12 +18,13 @@
  * - close() abandons the local attempt, NOT a server DELETE. Reopening the same
  *   context can replay the same server request/key; disable/dispose clears it.
  *
- * Receipt is NOT hash verification, renderer admission, save/export authority
- * or completed B10 UI. Native rendering, capabilities/quota and source CTA
- * integration remain outside this bounded continuation. No new dependencies.
+ * Visual-only changes use the received candidate and a local display ticket.
+ * Unknown outcomes recover via the original POST/key, never a PATCH retry.
+ * Receipt alone is NOT hash verification or renderer/save/export admission.
+ * The display reader and native renderer own their separate checks.
  */
-import { PieceApiError, preparePiecePreviewRequest, requestPiecePreview } from './pieceApi';
-import { createPiecePreviewState, closePiecePreview, beginPiecePreview, completePiecePreview, failPiecePreview, retryPiecePreview, readPiecePreviewView, expirePiecePreview } from './piecePreviewModel';
+import { PieceApiError, preparePiecePreviewRequest, preparePieceVisualChange, requestPiecePreview, requestPiecePreviewVisualChange } from './pieceApi';
+import { createPiecePreviewState, closePiecePreview, beginPiecePreview, completePiecePreview, failPiecePreview, retryPiecePreview, readPiecePreviewView, readPiecePreviewDisplay, verifyPieceArtifactHashes, expirePiecePreview } from './piecePreviewModel';
 
 export function createPieceCreateController(configuration = {}) {
   const now = typeof configuration?.now === 'function' ? configuration.now : Date.now;
@@ -36,6 +37,10 @@ export function createPieceCreateController(configuration = {}) {
   let boundaryCode = null;
   let active = null;
   let disposed = false;
+  let visualRecovery = null;
+  let visualUpdated = false;
+  const recoverable = ['PIECE_TEMPORARILY_UNAVAILABLE', 'PIECE_PREVIEW_STALE',
+    'PIECE_CONFLICT', 'PIECE_VISUAL_SELECTION_NOT_ALLOWED'];
 
   // Both sides are detached JSON snapshots made by the existing API reader.
   // Key order does not create a new intent or change exact retry bytes.
@@ -64,6 +69,8 @@ export function createPieceCreateController(configuration = {}) {
   function clearAttempt() {
     const previous = active;
     active = null;
+    visualRecovery = null;
+    visualUpdated = false;
     state = closePiecePreview();
     // Invalidate identity BEFORE notifying the underlying AbortSignal. Even a
     // synchronous/reentrant abort observer sees the cleared current attempt.
@@ -80,7 +87,13 @@ export function createPieceCreateController(configuration = {}) {
       return Object.freeze({ ...view, phase: 'unavailable', preview: null,
         message: new PieceApiError(boundaryCode).message, canRetry: false });
     }
-    return view;
+    if (visualRecovery && view.phase === 'unavailable' && recoverable.includes(state.code)) {
+      return Object.freeze({ ...view, canRetry: true, retryKind: 'recover',
+        message: '変更結果を確認できませんでした。最新のプレビューを取得してください。' });
+    }
+    return Object.freeze({ ...view, visualUpdated: visualUpdated && view.phase === 'received',
+      visualToken: view.phase === 'received' ? state.ticket : null,
+      loadingKind: visualRecovery && view.phase === 'loading' ? active?.mutation ? 'visual' : 'recover' : 'preview' });
   }
 
   function setContext(value = {}) {
@@ -130,7 +143,36 @@ export function createPieceCreateController(configuration = {}) {
       state.ticket === attempt.ticket;
   }
 
-  async function run(begun) {
+  // A visual response/recovery may refresh quota, but must never replace the
+  // body, expiry or renderer. Compare actual content as well as all three hashes.
+  function checkVisualResult(result, mutation) {
+    if (!visualRecovery) return;
+    try { verifyPieceArtifactHashes(result); }
+    catch { throw new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE'); }
+    for (const key of ['api_contract_version', 'piece_contract_version', 'preview_id',
+      'expires_at', 'visibility_scope', 'content_status', 'format_type', 'eligible_formats',
+      'content_payload', 'content_payload_hash', 'piece_text', 'piece_text_hash', 'renderer_version']) {
+      if (!equivalent(result[key], visualRecovery[key])) throw new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE');
+    }
+    const delta = result.preview_revision - visualRecovery.preview_revision;
+    if (delta < 0 || result.row_version - visualRecovery.row_version !== delta ||
+        mutation && delta !== 1 || !delta && !equivalent(result.visual_recipe, visualRecovery.visual_recipe)) {
+      throw new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE');
+    }
+    // All non-selectable recipe fields must remain exactly the same too.
+    const expectedRecipe = JSON.parse(JSON.stringify(visualRecovery.visual_recipe));
+    expectedRecipe.theme.theme_id = result.visual_recipe.theme.theme_id;
+    expectedRecipe.aspect_ratio = result.visual_recipe.aspect_ratio;
+    expectedRecipe.branding.branding_mode = result.visual_recipe.branding.branding_mode;
+    if (!equivalent(expectedRecipe, result.visual_recipe)) throw new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE');
+    if (mutation && (result.visual_recipe.theme.theme_id !== mutation.visual_selection.theme_id ||
+        result.visual_recipe.aspect_ratio !== mutation.visual_selection.aspect_ratio ||
+        result.visual_recipe.branding.branding_mode !== mutation.visual_selection.branding_mode)) {
+      throw new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE');
+    }
+  }
+
+  async function run(begun, mutation = null) {
     if (!begun.ticket) return;
     state = begun.state;
     let abort;
@@ -140,7 +182,7 @@ export function createPieceCreateController(configuration = {}) {
       notify();
       return;
     }
-    const attempt = { ticket: begun.ticket, abort };
+    const attempt = { ticket: begun.ticket, abort, mutation };
     const captured = state.operation;
     const operationAtStart = operation;
     active = attempt;
@@ -149,15 +191,22 @@ export function createPieceCreateController(configuration = {}) {
     // input in response to loading. Do not start HTTP for that obsolete action.
     if (!current(attempt)) return;
     try {
-      const result = await requestPiecePreview(captured.request, {
+      const result = mutation ? await requestPiecePreviewVisualChange(mutation, {
+        expectedUserId: captured.expectedUserId, signal: abort.signal,
+      }) : await requestPiecePreview(captured.request, {
         expectedUserId: captured.expectedUserId,
         idempotencyKey: captured.idempotencyKey,
         signal: abort.signal,
       });
       if (!current(attempt)) return;
+      checkVisualResult(result, mutation);
       state = completePiecePreview(state, attempt.ticket, result, {
         expectedUserId: operation?.expectedUserId, nowMs: clock(),
       });
+      if (state.phase === 'received' && visualRecovery) {
+        visualUpdated = state.preview.preview_revision > visualRecovery.preview_revision;
+        visualRecovery = null;
+      }
     } catch (error) {
       if (!current(attempt)) return;
       state = failPiecePreview(state, attempt.ticket, error, { expectedUserId: operation?.expectedUserId });
@@ -171,6 +220,7 @@ export function createPieceCreateController(configuration = {}) {
     }
     const featureDisabled = state.code === 'PIECE_FEATURE_DISABLED';
     if (featureDisabled) boundaryCode = 'PIECE_FEATURE_DISABLED';
+    if (state.phase !== 'received' && !recoverable.includes(state.code)) visualRecovery = null;
     notify();
     // Notify only for the still-current settled intent, never for an obsolete
     // request, disposed host or a new context selected by a subscriber.
@@ -188,7 +238,38 @@ export function createPieceCreateController(configuration = {}) {
 
   async function retry() {
     if (disposed || !enabled || !operation || boundaryCode) return;
+    if (visualRecovery) {
+      if (state.phase !== 'unavailable' || !recoverable.includes(state.code)) return;
+      // Replay only the original POST/key. Never resend a mutation or invent a
+      // new key/body after an ambiguous commit or stale revision.
+      await run(beginPiecePreview(state, operation.request, { ...operation, enabled: true }));
+      return;
+    }
     await run(retryPiecePreview(state, { enabled: true, expectedUserId: operation.expectedUserId }));
+  }
+
+  async function changeVisual(selection, identity, visualToken) {
+    if (disposed || !enabled || !operation || boundaryCode || active || visualRecovery) return;
+    if (!visualToken || visualToken !== state.ticket) return;
+    const display = readPiecePreviewDisplay(getView(), clock());
+    if (display.phase !== 'received' || !display.hashVerified) return;
+    const preview = display.preview;
+    if (!identity || identity.preview_id !== preview.preview_id ||
+        identity.preview_revision !== preview.preview_revision ||
+        identity.visual_recipe_hash !== preview.visual_recipe_hash) return;
+    let mutation;
+    try {
+      mutation = preparePieceVisualChange({ preview_id: preview.preview_id,
+        expected_preview_revision: preview.preview_revision, visual_selection: selection });
+      const choice = mutation.visual_selection, caps = preview.plan_capabilities;
+      if (!caps.theme_ids.includes(choice.theme_id) || !caps.aspect_ratios.includes(choice.aspect_ratio) ||
+          !caps.branding_modes.includes(choice.branding_mode)) return;
+      if (choice.theme_id === preview.visual_recipe.theme.theme_id && choice.aspect_ratio === preview.visual_recipe.aspect_ratio &&
+          choice.branding_mode === preview.visual_recipe.branding.branding_mode) return;
+    } catch { return; }
+    visualRecovery = preview;
+    visualUpdated = false;
+    await run(beginPiecePreview(state, operation.request, { ...operation, enabled: true }), mutation);
   }
 
   function close() {
@@ -222,5 +303,5 @@ export function createPieceCreateController(configuration = {}) {
     clearAttempt();
   }
 
-  return Object.freeze({ setContext, getView, start, retry, close, subscribe, refresh, dispose });
+  return Object.freeze({ setContext, getView, start, retry, changeVisual, close, subscribe, refresh, dispose });
 }

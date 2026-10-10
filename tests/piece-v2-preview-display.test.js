@@ -198,7 +198,8 @@ for (const format of ['short_essay', 'quote', 'declaration']) {
     assert.equal(body.props.numberOfLines, undefined); assert.equal(body.props.ellipsizeMode, undefined);
     assert.ok(all.some(n => n.type === 'ScrollView')); assert.ok(all.some(n => n.type === 'Modal'));
     assert.ok(all.some(n => n.props.testID === 'piece-visual-preview'));
-    assert.equal(all.filter(n => n.type === 'Button').map(n => n.props.title).join(','), '閉じる');
+    assert.ok(all.some(n => n.type === 'Button' && n.props.title === '閉じる'));
+    assert.equal(all.some(n => n.type === 'Button' && /保存|書き出し|共有/.test(n.props.title)), false);
     assert.equal(all.some(n => n.type === 'Image'), false); assert.equal(u.calls.length, 1);
     assert.equal(JSON.stringify(u.host.state).includes(expected.piece_text), false);
     u.host.componentWillUnmount();
@@ -299,7 +300,7 @@ test('an observed native-host expiry cannot reappear after a later local clock r
 
 
 for (const tier of ['free', 'plus', 'premium']) {
-  test(`preview shows ${tier} capability and current-month quota without granting actions`, async () => {
+  test(`preview shows ${tier} capability and quota with only entitled visual choices, no save/export`, async () => {
     const raw = response(tier === 'premium' ? 'quote' : 'short_essay');
     if (tier === 'plus') {
       raw.quota = { ...raw.quota, subscription_tier: 'plus', save_limit: 30, remaining_count: 28 };
@@ -319,11 +320,197 @@ for (const tier of ['free', 'plus', 'premium']) {
     assert.equal(labels.includes('静かな夜'), tier !== 'free');
     assert.equal(labels.includes('9:16'), tier === 'premium');
     assert.equal(labels.includes('表示なし'), tier === 'premium');
-    assert.equal(nodes.filter(n => n.type === 'Button').map(n => n.props.title).join(','), '閉じる');
+    assert.equal(nodes.some(n => n.props.testID === 'piece-visual-theme_id'), tier !== 'free');
+    assert.equal(nodes.some(n => n.props.testID === 'piece-visual-aspect_ratio'), tier === 'premium');
+    assert.equal(nodes.some(n => n.props.testID === 'piece-visual-branding_mode'), tier === 'premium');
+    assert.equal(nodes.some(n => n.type === 'Button' && /保存|書き出し|共有/.test(n.props.title)), false);
     const display = u.read(receivedView(raw), NOW);
     assert.equal(display.canSave, false); assert.equal(display.canExport, false);
     u.advance(1123);
     assert.equal(u.nodes(u.tree()).some(n => n.props.testID === 'piece-plan-details'), false);
+    u.host.componentWillUnmount();
+  });
+}
+
+// Visual-only PATCH: actual host/controller/transport/model, synthetic HTTP/RN.
+const visualIdentity = p => ({ preview_id: p.preview_id, preview_revision: p.preview_revision,
+  visual_recipe_hash: p.visual_recipe_hash });
+const visualSelection = p => ({ theme_id: p.visual_recipe.theme.theme_id,
+  aspect_ratio: p.visual_recipe.aspect_ratio, branding_mode: p.visual_recipe.branding.branding_mode });
+function changedVisual(p, choice = { theme_id: 'quiet_night' }, delta = 1) {
+  const next = clone(p);
+  next.preview_revision += delta; next.row_version += delta;
+  if (choice.theme_id) next.visual_recipe.theme.theme_id = choice.theme_id;
+  if (choice.aspect_ratio) next.visual_recipe.aspect_ratio = choice.aspect_ratio;
+  if (choice.branding_mode) next.visual_recipe.branding.branding_mode = choice.branding_mode;
+  next.visual_recipe_hash = hash(JSON.stringify(canonical(next.visual_recipe)));
+  return next;
+}
+const uiButton = (u, name) => u.nodes(u.tree()).find(n => n.type === 'Button' && n.props.accessibilityLabel === name);
+
+test('visual controls send current values, replace only recipe/revisions, and announce the update', async () => {
+  const original = response('quote'); let current = original;
+  const u = previewUiHarness({ send: async (url, opt) => {
+    if (opt.method === 'PATCH') current = changedVisual(current, JSON.parse(opt.body).visual_selection);
+    return pieceHttp(current);
+  } });
+  u.mount(); u.host.start(); await pieceTick();
+  const staleControl = uiButton(u, 'テーマ：静かな夜');
+  assert.equal(uiButton(u, 'テーマ：ソフトペーパー').props.accessibilityState.selected, true);
+  staleControl.props.onPress(); staleControl.props.onPress();
+  assert.equal(u.nodes(u.tree()).some(n => n.props.testID === 'piece-canonical-text'), false);
+  await pieceTick();
+  assert.equal(u.calls.length, 2);
+  const [url, sent] = u.calls[1];
+  assert.equal(url, '/emotion/piece/preview/' + original.preview_id); assert.equal(sent.method, 'PATCH');
+  assert.equal(sent.headers['Idempotency-Key'], undefined);
+  assert.deepEqual(JSON.parse(sent.body), { expected_preview_revision: 1,
+    visual_selection: { theme_id: 'quiet_night', aspect_ratio: '4:5', branding_mode: 'required_subtle' } });
+  const view = u.read(u.host.controller.getView(), NOW);
+  assert.equal(view.preview.piece_text, original.piece_text); assert.equal(view.preview.expires_at, original.expires_at);
+  assert.equal(view.preview.preview_revision, 2); assert.equal(view.hashVerified, true);
+  assert.equal(view.canSave, false); assert.equal(view.canExport, false);
+  assert.ok(u.nodes(u.tree()).some(n => n.children.includes('画像設定を更新しました。')));
+  staleControl.props.onPress(); await pieceTick(); assert.equal(u.calls.length, 2, 'obsolete controls cannot mutate a new revision');
+  uiButton(u, '画像比率：9:16').props.onPress(); await pieceTick();
+  assert.deepEqual(JSON.parse(u.calls[2][1].body), { expected_preview_revision: 2,
+    visual_selection: { theme_id: 'quiet_night', aspect_ratio: '9:16', branding_mode: 'required_subtle' } });
+  uiButton(u, 'Cocolonの表記：表示なし').props.onPress(); await pieceTick();
+  assert.equal(u.read(u.host.controller.getView(), NOW).preview.visual_recipe.branding.branding_mode, 'off');
+  u.host.componentWillUnmount();
+});
+
+for (const outcome of ['lost_after_commit', 'lost_before_commit', 'stale', 'conflict', 'bad_hash', 'wrong_body', 'wrong_id', 'wrong_expiry', 'wrong_renderer', 'wrong_recipe', 'wrong_revision', 'wrong_row_version']) {
+  test(`visual ${outcome}: recover with exact original POST/key, never repeat PATCH`, async () => {
+    const original = response('quote'), updated = changedVisual(original);
+    const u = previewUiHarness({ send: async (url, opt) => {
+      if (opt.method !== 'PATCH') return pieceHttp(u.calls.length === 1 || outcome === 'lost_before_commit' ? original : updated);
+      if (outcome.startsWith('lost_')) throw new Error('private network details');
+      if (['stale', 'conflict'].includes(outcome)) return { status: 409, json: async () => ({ code: outcome === 'stale' ? 'PIECE_PREVIEW_STALE' : 'PIECE_CONFLICT' }) };
+      const bad = clone(updated);
+      if (outcome === 'bad_hash') bad.visual_recipe_hash = 'f'.repeat(64);
+      if (outcome === 'wrong_body') { bad.piece_text = '別の本文'; bad.content_payload.body_blocks = [bad.piece_text]; bad.piece_text_hash = hash(bad.piece_text); bad.content_payload_hash = hash(JSON.stringify(canonical(bad.content_payload))); }
+      if (outcome === 'wrong_id') bad.preview_id = '30000000-0000-4000-8000-000000000004';
+      if (outcome === 'wrong_expiry') bad.expires_at = '2026-10-08T12:00:00Z';
+      if (outcome === 'wrong_renderer') bad.renderer_version = 'another-renderer';
+      if (outcome === 'wrong_recipe') { bad.visual_recipe.aspect_ratio = '9:16'; bad.visual_recipe_hash = hash(JSON.stringify(canonical(bad.visual_recipe))); }
+      if (outcome === 'wrong_revision') bad.preview_revision = 3;
+      if (outcome === 'wrong_row_version') bad.row_version = 3;
+      return pieceHttp(bad);
+    } });
+    u.mount(); u.host.start(); await pieceTick();
+    uiButton(u, 'テーマ：静かな夜').props.onPress(); await pieceTick();
+    assert.equal(u.host.controller.getView().preview, null);
+    assert.ok(uiButton(u, '最新のプレビューを取得'));
+    assert.equal(u.calls.length, 2, 'no automatic retry');
+    u.host.retry(); u.host.retry(); await pieceTick();
+    assert.equal(u.calls.length, 3); assert.equal(u.calls[2][1].method, 'POST');
+    assert.equal(u.calls[2][1].body, u.calls[0][1].body);
+    assert.equal(u.calls[2][1].headers['Idempotency-Key'], u.calls[0][1].headers['Idempotency-Key']);
+    const view = u.read(u.host.controller.getView(), NOW);
+    assert.equal(view.preview.preview_revision, outcome === 'lost_before_commit' ? 1 : 2);
+    assert.equal(view.preview.piece_text, original.piece_text); assert.equal(view.canSave, false);
+    u.host.componentWillUnmount();
+  });
+}
+
+for (const boundary of ['close', 'background', 'account', 'source', 'disable', 'unmount']) {
+  test(`late visual success after ${boundary} cannot restore the preview or run old controls`, async () => {
+    const d = deferredPieceResponse(), original = response('quote');
+    const u = previewUiHarness({ send: async (url, opt) => opt.method === 'PATCH' ? d.promise : pieceHttp(original) });
+    u.mount(); u.host.start(); await pieceTick();
+    const control = uiButton(u, 'テーマ：静かな夜'); control.props.onPress(); await pieceTick();
+    if (boundary === 'close') u.host.close();
+    if (boundary === 'background') u.background('background');
+    if (boundary === 'unmount') u.host.componentWillUnmount();
+    if (['account', 'source', 'disable'].includes(boundary)) {
+      const next = controllerInput();
+      if (boundary === 'account') next.expectedUserId = 'another-owner';
+      if (boundary === 'source') { next.request.source_ref.source_input_id = 'another-source'; next.idempotencyKey = 'another-key'; }
+      if (boundary === 'disable') next.enabled = false;
+      u.host.props = { context: next };
+      control.props.onPress(); assert.equal(u.tree(), null);
+      u.host.componentDidUpdate();
+    }
+    assert.equal(u.calls[1][1].signal.aborted, true);
+    d.resolve(pieceHttp(changedVisual(original))); await pieceTick();
+    assert.equal(u.nodes(u.tree()).some(n => n.props.testID === 'piece-canonical-text'), false);
+    control.props.onPress(); await pieceTick(); assert.equal(u.calls.length, 2);
+    if (boundary !== 'unmount') u.host.componentWillUnmount();
+  });
+}
+
+test('late visual success at expiry is rejected without reviving the previous text or retry', async () => {
+  const original = response('quote'), d = deferredPieceResponse();
+  const u = previewUiHarness({ send: async (url, opt) => opt.method === 'PATCH' ? d.promise : pieceHttp(original) });
+  u.mount(); u.host.start(); await pieceTick(); uiButton(u, 'テーマ：静かな夜').props.onPress(); await pieceTick();
+  u.advance(1123); d.resolve(pieceHttp(changedVisual(original))); await pieceTick();
+  assert.equal(u.host.controller.getView().preview, null); assert.equal(u.host.controller.getView().canRetry, false);
+  assert.equal(u.calls.length, 2); u.host.componentWillUnmount();
+});
+
+for (const code of ['PIECE_AUTH_REQUIRED', 'PIECE_FEATURE_DISABLED', 'PIECE_PREVIEW_EXPIRED', 'PIECE_NOT_FOUND']) {
+  test(`visual ${code} stays unavailable without automatic recovery or old body`, async () => {
+    const status = { PIECE_AUTH_REQUIRED: 401, PIECE_FEATURE_DISABLED: 503, PIECE_PREVIEW_EXPIRED: 409, PIECE_NOT_FOUND: 404 }[code];
+    const u = previewUiHarness({ send: async (url, opt) => opt.method === 'PATCH'
+      ? { status, json: async () => ({ code }) } : pieceHttp(response('quote')) });
+    u.mount(); u.host.start(); await pieceTick(); uiButton(u, 'テーマ：静かな夜').props.onPress(); await pieceTick();
+    assert.equal(u.host.controller.getView().preview, null); assert.equal(u.host.controller.getView().canRetry, false);
+    u.host.retry(); await pieceTick(); assert.equal(u.calls.length, 2); u.host.componentWillUnmount();
+  });
+}
+
+test('forged choices, null defaults, no-op and wrong revision cannot issue PATCH', async () => {
+  const original = response('quote'), u = previewUiHarness({ send: async () => pieceHttp(original) });
+  u.mount(); u.host.start(); await pieceTick();
+  for (const choice of [{ ...visualSelection(original), theme_id: 'unknown' },
+    { ...visualSelection(original), branding_mode: 'required_small' },
+    { ...visualSelection(original), theme_id: null }, visualSelection(original),
+    { ...visualSelection(original), format_type: 'declaration' }]) {
+    u.host.changeVisual(choice, visualIdentity(original), u.host.controller.getView().visualToken);
+  }
+  u.host.changeVisual({ ...visualSelection(original), theme_id: 'quiet_night' }, { ...visualIdentity(original), preview_revision: 2 }, u.host.controller.getView().visualToken);
+  await pieceTick(); assert.equal(u.calls.length, 1); u.host.componentWillUnmount();
+});
+
+for (const boundary of ['close_reopen', 'source_a_b_a']) {
+  test(`old visual controls cannot mutate identical artifact after ${boundary}`, async () => {
+    const original = response('quote'), u = previewUiHarness({ send: async (url, opt) =>
+      pieceHttp(opt.method === 'PATCH' ? changedVisual(original) : original) });
+    u.mount(); u.host.start(); await pieceTick();
+    const stale = uiButton(u, 'テーマ：静かな夜');
+    if (boundary === 'close_reopen') u.host.close();
+    else {
+      u.host.props = { context: controllerInput({ idempotencyKey: 'other' }) }; u.host.componentDidUpdate();
+      u.host.props = { context: controllerInput() }; u.host.componentDidUpdate();
+    }
+    u.host.start(); await pieceTick(); assert.equal(u.calls.length, 2);
+    stale.props.onPress(); await pieceTick(); assert.equal(u.calls.length, 2);
+    uiButton(u, 'テーマ：静かな夜').props.onPress(); await pieceTick();
+    assert.equal(u.calls.length, 3); assert.equal(u.calls[2][1].method, 'PATCH');
+    u.host.componentWillUnmount();
+  });
+}
+
+for (const replay of ['older_revision', 'changed_body', 'different_id', 'advanced_revision']) {
+  test(`visual recovery validates ${replay} against original artifact`, async () => {
+    const original = response('quote'); original.preview_revision = 2; original.row_version = 3;
+    const recovered = changedVisual(original, { theme_id: 'quiet_night' }, 2);
+    if (replay === 'older_revision') { recovered.preview_revision = 1; recovered.row_version = 2; }
+    if (replay === 'different_id') recovered.preview_id = '30000000-0000-4000-8000-000000000004';
+    if (replay === 'changed_body') {
+      recovered.piece_text = '別の本文'; recovered.content_payload.body_blocks = [recovered.piece_text];
+      recovered.piece_text_hash = hash(recovered.piece_text);
+      recovered.content_payload_hash = hash(JSON.stringify(canonical(recovered.content_payload)));
+    }
+    const u = previewUiHarness({ send: async (url, opt) => {
+      if (opt.method === 'PATCH') throw new Error('lost');
+      return pieceHttp(u.calls.length === 1 ? original : recovered);
+    } });
+    u.mount(); u.host.start(); await pieceTick(); uiButton(u, 'テーマ：静かな夜').props.onPress(); await pieceTick();
+    u.host.retry(); await pieceTick();
+    assert.equal(u.host.controller.getView().phase, replay === 'advanced_revision' ? 'received' : 'unavailable');
+    assert.equal(u.calls.length, 3); assert.equal(u.calls.filter(c => c[1].method === 'PATCH').length, 1);
     u.host.componentWillUnmount();
   });
 }

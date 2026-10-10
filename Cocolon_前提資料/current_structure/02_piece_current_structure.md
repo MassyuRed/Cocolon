@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は§43を優先します。発行済みpreviewの本文を保った画像設定変更を、revisionと現在の元入力/資格を照合するAPI・SQL候補へ接続しました。元POSTの同key再取得は更新後の候補を回収します。RN設定操作・稼働登録は未接続。§42のprototype v3を継承し、実機描画同等性・renderer admission・保存前fit・保存共有は未完了。001〜004は適用済み、005と今回追加visual変更SQLは稼働未適用です。**
+**現在は§44を優先します。発行済みpreviewの画像設定を既存RN画面から変更できるsourceを接続しました。テーマ・比率・Cocolon表記は取得済みcapabilities内だけで選び、本文は再生成しません。不明応答・競合は元POSTの同request/keyで明示回収します。520件のlocal検査が成功。APIの稼働route登録、追加2本のmigration適用、native実機描画同等性・renderer admission・保存前fit・保存共有は未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1571,3 +1571,35 @@ API source `4fcb140b778850a1b7a5a65d8e0a26005b3a24c4` を既存Draft PR #3へnon
 既存quota native2件はこのCIのquota39 PASSに含む。localで未実行だった既存PGlite専用2件はこのworkflow対象外であり、今回PASSへ読み替えない。既存Pydantic root_validator／FastAPI on_eventの非推奨警告を保持。callback/HTTP境界は代替を含み、本文安全性全般・native描画・保存fitの承認ではない。
 
 次はこのPATCHのRN画像設定操作・current revision/再取得/中断との接続。並行して先行native B9の実端末描画同等性・glyph/ink/性能、renderer admission、保存前fit→保存が必要。形式変更、capture/画像保存共有、Nexus、M5/設定供給、上記2 migration適用、実Authが残る。既存B9選択器・preview factory・owner/quota/save基盤を作り直さない。§42の478 PASS・native source compileは今回再実行せず先行証拠として保持。今回RN/native source・新依存・live DB query/apply・env/deploy/activation/app build/main merge・本人データ試験0。TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false、商品全体完成ではない。
+
+
+## 44. 2026-10-10 — 発行済みPieceの画像設定をRN画面へ接続（未配置）
+
+### 44.1 根拠と実装範囲
+
+MashのPiece続行指示から、§43の最初の残件である既存PATCHの画面接続を実施。開始headはCocolon `584d9788d7d78b14a10f7b09d07fd3a1d8e8e5e7`、API `4fcb140b778850a1b7a5a65d8e0a26005b3a24c4`。txtの423件時点より新しいGitHubを採用した。前提資料・作業ルール/Rule18・恒久incident・Karen-Diary、全体設計/ファイル地図01/01B・対象current map・PCE-6 RN/API契約、weekly10/10 §5.5と12/18目標を確認。System Context prepareは祖先不一致で失敗し、入口の原典読取fallbackを使用した。Workでの既存承認範囲のRN実装（LEVEL_2相当、DIRECT_PRODUCT_OR_ACCEPTANCE_WORK）。root華恋が単一write owner、補助agentはread-only API調査と差分review。別modelのPro/Ultra正式受入れとは扱わない。
+
+| Cocolon owner | 変更内容 |
+|---|---|
+| `features/piece/pieceApi.js` | 既存認証transport・厳密応答readerへvisual-only PATCHを接続。exact2 body、preview ID/revision照合、前後の本人確認、再送なし。 |
+| `features/piece/PieceCreateController.js` | 現候補と画面世代を照合し、変更中は旧候補を隠す。本文/3hash/期限/renderer/非選択recipe保持とrevision増分を確認。不明結果は元POST/keyで明示回収。 |
+| `features/piece/piecePreviewModel.js` | 既存hash/expiry検証を保持し、更新中・再取得・変更告知とbody-freeな表示ticketを渡す。保存/export許可はfalse。 |
+| `components/piece/PiecePreviewModal.js` | 現capabilitiesに含むテーマ・比率・表記の選択操作、選択状態、変更告知、明示再取得ボタン。Free固定項目を無理に選択させず、形式変更は未接続。 |
+| `screens/input/InputPieceActionArea.js` | 現owner/source/runtime/foreground/openの確認後だけ設定操作を既存controllerへ渡す。 |
+| `tests/piece-v2-contracts.test.js` / `tests/piece-v2-preview-display.test.js` | 上記transport・実host/controller/display sourceの回帰を既存suiteへ追加。 |
+
+変更しない設定は現在recipeの具体値を送る（nullで既定値へ戻さない）。元POSTの凍結request/keyは書き換えない。PATCH応答の紛失・不正ACK・STALE/CONFLICTでは旧候補を操作可能に戻さず、同じPOST/keyの回収だけを明示操作で許可する。回収の同revisionは元recipe一致、進んだrevisionはrow_version同増分・本文/期限等保持を要件とする。閉じる/背景化/本人やsource変更/破棄で遅延応答を棄却し、同候補を再表示しても旧ボタンcallbackを表示ticketで拒否する。変更後は既存canvasが新revision/recipe hashで再測定する。
+
+### 44.2 検証と限界
+
+local Node24.19.0、既存test compiler TypeScript5.2.2を一時検査用directoryに準備。`NODE_PATH=… node --test tests/piece-v2-*.test.js` のInputScreen込み11suite **520 PASS／FAIL0／SKIP0／cancelled0**（既存478＋追加42）。本文保持、3項目の連続変更、二重押下、lost commit前後、STALE/CONFLICT、不正hash/本文/ID/期限/renderer/recipe/版、旧世代callback、owner/背景/close/disable/unmount、期限切れ、回収の古い/異なる候補拒否を確認した。新依存/lockfile変更なし。
+
+途中の初回195件では設定ボタン未提供を前提にした既存4assertionが失敗し、保存/export無効を保持したまま今回の選択UIに更新した。新規bad-hash回収テストの1失敗はlocal検証例外を不明応答として扱う修正で解消。read-only reviewで再表示後の旧callbackがPATCHできることを実harnessで再現し、表示ticket照合と2回帰を追加して解消した。最初の全suite実行では既存TypeScript不足のcollection1件が失敗し、検査用の既存固定compilerを用意した後に全520件を実行した。これら途中失敗をPASSへ合算しない。
+
+HTTP/Auth/React/nativeは合成・代替を含む。実native測定の再実行、実機・稼働API/Supabase往復・商品受入れではない。既存native sourceは変更なし。最終差分reviewで具体的blockerなし。GitHub CIと反映後確認は後続の最終確認欄に記録する。
+
+### 44.3 稼働境界と次の直接作業
+
+Supabaseはproject metadataとmigration履歴の読取のみ。001〜004の登録済みを確認し、再適用なし。005 quotaとvisual変更SQLは履歴未登録のまま。DB query/write/apply、環境変数、deploy、activation、native app build、main mergeは0。API・SQL・native source・新ライブラリ変更0。保存前fit未成立のためcanSave/canExport=falseを保持する。
+
+次は、今回のPATCHを既存preview/shared候補factoryの明示構成に含める接続準備と、その隔離往復確認。既存の生成/保存/rendererを作り直さない。稼働配置に必要な追加2本のmigration・設定採用は個別境界を維持し、001〜004を再実行しない。native B9実端末描画同等性・glyph/ink/性能とrenderer admission→保存前fit→保存、形式変更、capture/共有、Nexus、M5/実Authも残る。Pieceの全内容完成を実機確認の前提にせず、準備した利用経路ごとに確認する。TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false。

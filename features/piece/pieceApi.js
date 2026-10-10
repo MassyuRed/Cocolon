@@ -3,7 +3,7 @@
  * Importing this module performs no network operation. No legacy fallback.
  *
  * Capabilities/quota are closed display snapshots, not save admission.
- * The native renderer, preview mutation and save/export remain separate.
+ * The native renderer and save/export remain separate.
  * No default entitlement, expiry, renderer, safety verdict or key is invented.
  */
 import { apiFetch, getAccessToken } from "../../lib/apiClient";
@@ -222,7 +222,20 @@ async function requireSession(expectedUserId) {
   }
 }
 
-async function requestPieceData(value, options = {}, savedInputId = null) {
+export function preparePieceVisualChange(value) {
+  if (!exact(value, ['preview_id', 'expected_preview_revision', 'visual_selection']) ||
+      !exact(value.visual_selection, ['theme_id', 'aspect_ratio', 'branding_mode'])) reject('PIECE_REQUEST_INVALID');
+  const input = JSON.parse(JSON.stringify(value));
+  if (!pieceUuid(input.preview_id) || !positive(input.expected_preview_revision) ||
+      !exact(input.visual_selection, ['theme_id', 'aspect_ratio', 'branding_mode'])) reject('PIECE_REQUEST_INVALID');
+  for (const [key, allowed] of Object.entries({ theme_id: ['soft_paper', 'quiet_night'],
+    aspect_ratio: ['4:5', '9:16'], branding_mode: ['required_small', 'required_subtle', 'off'] })) {
+    if (input.visual_selection[key] !== null && !allowed.includes(input.visual_selection[key])) reject('PIECE_VISUAL_SELECTION_NOT_ALLOWED');
+  }
+  return freeze(input);
+}
+
+async function requestPieceData(value, options = {}, savedInputId = null, visualChange = false) {
   let signal;
   try {
     if (!object(options)) reject('PIECE_REQUEST_INVALID');
@@ -233,18 +246,23 @@ async function requestPieceData(value, options = {}, savedInputId = null) {
     if (sourceRead && (typeof savedInputId !== 'string' ||
         !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(savedInputId) ||
         savedInputId === '00000000-0000-0000-0000-000000000000')) reject('PIECE_REQUEST_INVALID');
-    const body = sourceRead ? undefined : requestBody(value);
+    const mutation = visualChange ? preparePieceVisualChange(value) : null;
+    const body = sourceRead ? undefined : mutation ? JSON.stringify({
+      expected_preview_revision: mutation.expected_preview_revision, visual_selection: mutation.visual_selection,
+    }) : requestBody(value);
     if (!text(expectedUserId)) reject('PIECE_AUTH_REQUIRED');
     // Keys use an unchanged HTTP-visible representation. Reject values that
     // Fetch could trim/reject; never trim, replace or generate a retry key.
-    if (!sourceRead && (typeof idempotencyKey !== 'string' ||
+    if (mutation && Object.prototype.hasOwnProperty.call(options, 'idempotencyKey')) reject('PIECE_REQUEST_INVALID');
+    if (!sourceRead && !mutation && (typeof idempotencyKey !== 'string' ||
         !/^[\x21-\x7e](?:[\x20-\x7e]*[\x21-\x7e])?$/.test(idempotencyKey))) reject('PIECE_REQUEST_INVALID');
     await requireSession(expectedUserId);
     checkAbort(signal);
-    const endpoint = sourceRead ? `/emotion/piece/source-ref/${encodeURIComponent(savedInputId)}` : PATH;
+    const endpoint = sourceRead ? `/emotion/piece/source-ref/${encodeURIComponent(savedInputId)}` :
+      mutation ? `${PATH}/${mutation.preview_id}` : PATH;
     const response = await apiFetch(endpoint, {
-      method: sourceRead ? 'GET' : 'POST', auth: true, expectedUserId,
-      headers: sourceRead ? { 'Cache-Control': 'no-store' } : { 'Idempotency-Key': idempotencyKey },
+      method: sourceRead ? 'GET' : mutation ? 'PATCH' : 'POST', auth: true, expectedUserId,
+      headers: sourceRead || mutation ? { 'Cache-Control': 'no-store' } : { 'Idempotency-Key': idempotencyKey },
       body, signal,
     });
     checkAbort(signal);
@@ -271,7 +289,10 @@ async function requestPieceData(value, options = {}, savedInputId = null) {
             : !text(ref.question_need_decision_identity))) reject('PIECE_TEMPORARILY_UNAVAILABLE');
       return freeze(ref);
     }
-    return previewSnapshot(result);
+    const preview = previewSnapshot(result);
+    if (mutation && (preview.preview_id !== mutation.preview_id ||
+        preview.preview_revision !== mutation.expected_preview_revision + 1)) reject('PIECE_TEMPORARILY_UNAVAILABLE');
+    return preview;
   } catch (error) {
     checkAbort(signal);
     if (error instanceof PieceApiError) throw error;
@@ -284,6 +305,11 @@ async function requestPieceData(value, options = {}, savedInputId = null) {
 /** Existing POST contract; no automatic source read or changed retry key. */
 export async function requestPiecePreview(value, options = {}) {
   return requestPieceData(value, options);
+}
+
+/** No PATCH retry. Unknown outcomes are recovered with the original POST/key. */
+export async function requestPiecePreviewVisualChange(value, options = {}) {
+  return requestPieceData(value, options, null, true);
 }
 
 /** Unregistered PCE-9C transport. No existing screen calls it yet.
