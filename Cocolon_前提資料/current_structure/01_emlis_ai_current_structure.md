@@ -20,6 +20,12 @@ candidate_ready: false
 ---
 
 
+## 2026-10-10 — NULL修正版live、次は6301の本人入力・履歴再表示
+
+Mashが開始した指定API `7626e1f6e6cc7b2d8a71b9ea1032b840bbc9799b` は、deploy `dep-db4vkrid0e5s73dlrl40` により **17:43:46 JSTにlive**。起動完了ログと17:44:09のhealthz200/status=ok・bootstrap200/`emlis_threads_enabled=true`・未認証thread401を確認した。詳細はAPI運用資料§35。下の配置待ち節は配置前の履歴として保持する。
+
+次は6301で通常の新規入力1件→直後のEmlis本文→閉じる→履歴から同じ本文の再表示を本人実機で確認する。10/07の未作成観測は履歴GETだけでは生成されない。稼働版確認と実機復旧を区別し、本人生成/保存/画面の成功はまだ未確認。今回の華恋による追加deploy・DB/env変更・native build・mergeは0、文書同期のみ、`STRUCTURE_MAP_DELTA_NONE`。
+
 ## 2026-10-10 — 任意欄NULLのAPI修正済み、配置・実機確認待ち
 
 Mashの指示により、既存 `emlis_thread_service._request` の生成用コピーだけでmemo/memo_actionのNULLを空文字へ変換した。DB原本・source_snapshot・CAS・本人履歴guard・非NULL文字列・共有source kernelを保持する。製品差分は既存ownerの5行、新file/route/schemaなし、`STRUCTURE_MAP_DELTA_NONE`。API修正候補は [`7626e1f6e6cc7b2d8a71b9ea1032b840bbc9799b`](https://github.com/MassyuRed/mashos-api/commit/7626e1f6e6cc7b2d8a71b9ea1032b840bbc9799b)。詳細はAPI運用資料§34。
