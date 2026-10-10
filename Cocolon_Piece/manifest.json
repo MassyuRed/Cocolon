@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v32",
+  "schema_version": "cocolon.piece.workstream_manifest.v33",
   "generated_at": "2026-10-10 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v31",
-    "predecessor_blob": "8622b05ed0e6012e01223cf32bf10f906dfb7a15",
-    "predecessor_head": "67a71724edcc04a494419d9106d6733c4c58c581",
-    "carry_forward": "Preserve applied001-004, unapplied005, shared preparation, saved-operation and quota-read historical evidence. Current delivery is preview_plan_delivery_20261010; no live cutover."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v32",
+    "predecessor_blob": "9730e3dacd7bd3ed8272014286b0bd41416887b6",
+    "predecessor_head": "681394d7e2de169b8d1bcdc1381514e6e6e0cf7b",
+    "carry_forward": "Preserve existing evidence. Current increment is native_preview_20261010; geometry prototype is not save-time fit or live activation."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "012b06ff84b0759cf16c2824c628d9542ca37625",
-    "raw_sha256": "f135ba71fad2b8f451d5744140cc7606aa50a2925199d773b2976b3776d0a6cb",
-    "utf8_bytes": 53686
+    "git_blob_sha1": "d8b7c8cfa61ab5042f7d9ed18f424486d938fc22",
+    "raw_sha256": "8185f627e6afad5eeaa904df9835900bf9afe2be6fea7ab80e6a6a049f76621e",
+    "utf8_bytes": 56978
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -55,7 +55,7 @@
     "pce9a_b01": "COMPLETE",
     "pce9a_b02a": "NATIVE_ACCEPTANCE_RETAINED__LIVE_BRIDGE_APPLIED_20261010",
     "analysis_roadmap": "REFER_TO_ANALYSIS_CURRENT_STRUCTURE__HISTORICAL_NOT_ACTIVATED_STATE_NOT_CURRENT",
-    "next_piece_group": "B10_NATIVE_VISUAL_PREVIEW_AND_SAVE_TIME_FIT__B11_TEXT_OWNER_OPERATIONS_CONNECTED",
+    "next_piece_group": "B13_NATIVE_GLYPH_INK_LAYOUT_AND_RENDERER_ADMISSION__THEN_B10_SAVE_CONNECTION",
     "automatic_packet_progression": false,
     "pce9a_b02a_red": "FROZEN_UNCHANGED__NATIVE_POSTGRESQL_1_PASS",
     "pce9a_b02a_implementation": "EXACT5_PRESERVED__EXACT6_SELECTORS_PUBLISHED",
@@ -1981,5 +1981,42 @@
     "automatic_progression": false,
     "source_commit": "11b61579ff0f119bfbbf12e1fecd60354667ffb3",
     "source_postcheck": "14 target files byte-equal and exact changed-path set verified from fetched remote"
+  },
+  "native_preview_20261010": {
+    "status": "LOCAL_SOURCE_TESTED_REMOTE_CI_PENDING",
+    "map": "Cocolon_前提資料/current_structure/02_piece_current_structure.md section39",
+    "owner_paths": [
+      "features/piece/pieceLayout.js",
+      "components/piece/PieceVisualCard.js",
+      "components/piece/PiecePreviewModal.js",
+      "tests/piece-v2-renderer.test.js",
+      "tests/piece-v2-preview-display.test.js",
+      ".github/workflows/piece-rn-contracts.yml"
+    ],
+    "prototype_version": "piece.rn_native_preview.prototype.v1",
+    "geometry_state": "geometry_checked_only",
+    "verification": {
+      "local_passed": 386,
+      "renderer_new_passed": 18,
+      "local_suites": 9,
+      "failed": 0,
+      "skipped": 0,
+      "node": "24.19.0",
+      "input_screen_ci_pending": true,
+      "native_device": false,
+      "native_font_metrics": false
+    },
+    "save_fit": false,
+    "can_save": false,
+    "can_export": false,
+    "next": "Native glyph/ink, grapheme/kinsoku layout equivalence and renderer admission, then bound save operation",
+    "new005_unapplied": true,
+    "db_apply": 0,
+    "deploy": 0,
+    "activation": 0,
+    "native_build": 0,
+    "main_merge": 0,
+    "product_acceptance": false,
+    "automatic_progression": false
   }
 }

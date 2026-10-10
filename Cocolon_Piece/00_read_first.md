@@ -831,3 +831,12 @@ API CI 38019674020＝1,537 PASS、RN CI 38019722996＝365 PASS（既存8suite）
 今回のlocal検査はowner32件＋既存7suite336件＝368 PASS。別途既存CIでInputScreenも含め確認する。Auth/HTTP/React/nativeは代替を含み、実機・B11全体・商品受入れの成立ではない。保存前native fitが未接続と判明したため、本文からの保存は有効化していない。次はnative画像プレビューと保存前fit、その後に同じpreviewの保存接続。画像保存共有・M5・005稼働適用・実Auth/実機も残る。001〜004適用済みをread-only migration履歴で確認し、再適用なし。製品API/SQL/env/deploy/native build/main mergeは不変更。weekly review §5.5と12/18目標を維持し、automatic_progression=false。
 
 §34最終確認：実装commit `11b61579ff0f119bfbbf12e1fecd60354667ffb3` の[CI 38021152558](https://github.com/MassyuRed/Cocolon/actions/runs/38021152558)で、InputScreenを含む9suite **397 PASS／FAIL0／SKIP0**。GitHub再取得で対象14fileの内容と変更pathを照合した。local368件とは別に足さない。今回のコード接続は反映済み、稼働有効化・native画像/保存・実機は未実施。
+
+
+## 35. 2026-10-10 — 固定比率の確認用画像プレビューを本文modalへ接続
+
+既存PiecePreviewModalへB10指定PieceVisualCardを接続し、B13-C指定pieceLayoutが1080 logical canvas、既定catalog、native行寸法によるサイズ候補調整を持つ。全文blockとbrandingの測定が揃うまで透明、overflowは規定サイズだけ降順、floor失敗／欠イベント8秒は表示不可。本文確認は維持する。preview identity/3hash・候補font・測定世代に結ぶため、旧eventや旧timeoutを新表示へ流用しない。
+
+今回のgeometry_checkedは画像レイアウトの確認用表示。glyph/実ink/禁則・B9とのlayout同等性・指定renderer対応・PNG/export・実機は未成立で、保存前fit成功ではない。canSave/canExport=false。次は同じnative canvasのglyph/inkとlayout/renderer admissionを成立させ、既存保存API接続へ進む。SQL005稼働未適用、001〜004適用済み、M5/設定変更/画像保存共有/実Auth実機の残件を維持する。
+
+local既存368＋新renderer18＝386 PASS／FAIL0／SKIP0。InputScreen含むCI結果は後続確認。測定値/React/nativeは代替で、実機合格ではない。根拠・owner map・検証境界はcurrent_structure/02_piece_current_structure.md §39。API/DB/env/deploy/activation/native build/main merge変更0。weekly review §5.5・12/18目標・automatic_progression=falseを維持。

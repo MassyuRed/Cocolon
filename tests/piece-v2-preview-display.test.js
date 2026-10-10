@@ -90,18 +90,20 @@ function previewUiHarness({ send, currentState = 'active' } = {}) {
     apiFetch: async (...args) => { calls.push(args); return send ? send(...args) : pieceHttp(response()); },
     getAccessToken: async () => 'synthetic-ui-session',
   });
-  const pure = ['pieceApi.js', 'piecePreviewModel.js', 'PieceCreateController.js'].map(file =>
+  const pure = ['pieceApi.js', 'piecePreviewModel.js', 'PieceCreateController.js', 'pieceLayout.js'].map(file =>
     fs.readFileSync(path.join(__dirname, '../features/piece', file), 'utf8')
       .replace(/^import .*;$/gm, '').replace(/^export /gm, '')).join('\n');
   vm.runInContext(pure + '\nglobalThis.displayReader = readPiecePreviewDisplay; globalThis.digestUnderTest = pieceUtf8Digest;', context);
-  for (const [file, name] of [[modalPath, 'PiecePreviewModal'], [hostPath, 'InputPieceActionArea']]) {
+  for (const [file, name] of [[path.join(__dirname, '../components/piece/PieceVisualCard.js'), 'PieceVisualCard'],
+    [modalPath, 'PiecePreviewModal'], [hostPath, 'InputPieceActionArea']]) {
     const source = fs.readFileSync(file, 'utf8').replace(/^import .*;$/gm, '').replace(/^export default /gm, '');
     vm.runInContext(`{\n${source}\nglobalThis.${name} = ${name};\n}`, context, { filename: file });
   }
   function expand(node) {
     if (node === null || node === undefined || node === false) return null;
     if (typeof node !== 'object') return node;
-    if (typeof node.type === 'function') return expand(node.type(node.props));
+    if (typeof node.type === 'function') return expand(node.type.prototype?.render
+      ? new node.type(node.props).render() : node.type(node.props));
     return { ...node, children: node.children.flat(Infinity).map(expand).filter(x => x !== null) };
   }
   function nodes(node) {
@@ -186,7 +188,7 @@ test('native host defaults hidden and constructing/mounting sends nothing', () =
   u.host.componentWillUnmount(); assert.equal(u.appListeners.size, 0);
 });
 for (const format of ['short_essay', 'quote', 'declaration']) {
-  test(`native component sources display exact full ${format} text with scroll and no image/save controls`, async () => {
+  test(`native component sources retain exact full ${format} text beside layout prototype without save controls`, async () => {
     const expected = response(format), u = previewUiHarness({ send: async () => pieceHttp(expected) });
     u.mount(); assert.equal(u.calls.length, 0);
     u.host.start(); u.host.start(); await pieceTick();
@@ -194,6 +196,7 @@ for (const format of ['short_essay', 'quote', 'declaration']) {
     assert.ok(body); assert.equal(body.children.join(''), expected.piece_text);
     assert.equal(body.props.numberOfLines, undefined); assert.equal(body.props.ellipsizeMode, undefined);
     assert.ok(all.some(n => n.type === 'ScrollView')); assert.ok(all.some(n => n.type === 'Modal'));
+    assert.ok(all.some(n => n.props.testID === 'piece-visual-preview'));
     assert.equal(all.filter(n => n.type === 'Button').map(n => n.props.title).join(','), '閉じる');
     assert.equal(all.some(n => n.type === 'Image'), false); assert.equal(u.calls.length, 1);
     assert.equal(JSON.stringify(u.host.state).includes(expected.piece_text), false);

@@ -1330,3 +1330,32 @@ React reconciliation・Hermes・native画像・実Auth/PostgREST/DBは合成ま�
 実装と資料14fileをcommit `11b61579ff0f119bfbbf12e1fecd60354667ffb3` でPR #30へ反映。通常git pushはHTTPS認証情報なしで失敗したため、利用可能なGitHub connectorから同じ14fileをnon-force反映し、GitHub再取得で全対象bytesと変更path集合の一致を確認した。
 
 [Piece RN CI 38021152558](https://github.com/MassyuRed/Cocolon/actions/runs/38021152558)／job 114122211809は同commitでsuccess。既存8suite365件＋今回owner32件＝**397 PASS／FAIL0／SKIP0／cancelled0**。InputScreen29件を含む。Node 24.21.0、既存TypeScript 5.2.2。local368件との差29件はInputScreenであり、API検査件数とは合算しない。最終sourceはこのCI版から変更していない。本追記と入口/manifestの結果記録だけを後続反映する。実機・画像出力・正式商品受入れは未成立。
+
+
+## 39. 2026-10-10 — RN固定キャンバスの確認用プレビューとnative行寸法の接続
+
+### 39.1 今回成立させた範囲
+
+前回§38.3からnative画像プレビューの未実装へ進み、既存本文modalにPCE-8 B10指定の `components/piece/PieceVisualCard.js` を接続した。PCE-8 B13-C指定の `features/piece/pieceLayout.js` がPCE-5のcatalog/geometryと測定状態を保持する。`tests/piece-v2-renderer.test.js` を既存Piece RN workflowへ追加し、既存preview表示検査も実component読取へ更新する。新しいdependency、workflow、API、DB保存先は追加しない。
+
+1080×1350／1080×1920のlogical canvasへ全文blockを描画し、表示だけ一様transformで縮小する。theme exact2、template別の整列・font候補・行高、essay段落間隔、marginとbranding予約領域は既存B9 `piece_v2_visual.py` と一致する。branding OFFでも本文領域を広げない。固定branding色を使い、確認用RN表現ではrequired_subtleにopacity 0.8を適用し、surfaceとのcontrast 3:1以上を数値確認する。system body、文字拡縮OFF、規定discrete sizeのみ、本文のtrim／正規化／省略／numberOfLinesは使用しない。既存selectableな全文と読み上げ表示を残す。
+
+同じnative TextでonLayoutとonTextLayoutを受け、全段落と必要なCocolon表記についてline textの完全再構成、有限座標、順序、行boxの範囲と総高さを確認する。overflowなら次の規定サイズへ進み、floorでも収まらなければcanvasを取り除く。未測定canvasは透明で読み上げ対象外、8秒以内に測定が揃わなければunavailable。native eventにはpreview identity/revision/row_version/expiry/3hash/server renderer文字列に由来するkey、font候補、測定世代を結ぶ。同じartifactへ戻った場合も古い世代は使わない。props変更はrender時に旧表示を遮断し、閉じる／本人変更／背景化等は既存hostの破棄を継承する。timeout自身も世代を持ち、新候補のtimerを破棄しない。測定後stateは数値だけで、native event本文の副正本・永続cache・log・network送信を作らない。
+
+### 39.2 保存前fitとの明確な差
+
+**今回の成功stateは `geometry_checked` という確認用表示だけであり、PCE-5の `layout_state=fit` ではない。** RN 0.77 Text公開仕様のonTextLayoutは行寸法を返すが、glyph存在・実ink boxを保証しない。公式資料: https://reactnative.dev/docs/0.77/text 。公式sourceの個別取得は成立しなかったため、実nativeのline.text挙動も端末確認済みとはしない。textが欠落／変化したeventはunavailableになる。
+
+Python B9のgrapheme/禁則/読取単位を守るwrapとRN native wrapの同等性、実ink欠け0、glyph availability、実機、PNG capture/export共通性は未証明。Python build_measured_layoutは現在のpreview/save製品経路から未呼出で、serverのrenderer_version文字列だけではこの穴を埋めない。prototype実装version `piece.rn_native_preview.prototype.v1` を使用し、server指定renderer対応済み・rn_renderer完成・出力PNG成功へ昇格しない。canSave／canExportはfalseを保持し、同APIへの保存操作は今回も未接続。新schemaやclient自己申告fitを保存許可へ通さない。
+
+### 39.3 検証・review
+
+local Node 24.19.0で既存8suite368件＋renderer新18件＝**386 PASS／FAIL0／SKIP0／cancelled0**。全format/ratio・2theme token・Free/Premium branding、複数native行の空白/混在言語/結合文字/ZWJ emojiを含む全文一致、全block待機、横/縦overflow、下限拒否、縮小transform、遅延event・props切替・同一候補へ戻る世代、期限/hash拒否、timeoutとunmountを合成eventで検査した。React/native計測・Hermes・実機・glyph/inkの実測テストではない。InputScreen29件はlocal TypeScript不在のため既存CIで確認する。
+
+読取reviewは同環境の補助agent2名、実装／統合／検査はroot華恋。指摘された無期限計測待ちとbranding token流用を修正した。別model Pro確認や商品受入れではない。GitHub/CIの最終結果は本節へ追記する。
+
+### 39.4 次の直接作業と稼働状態
+
+次はこの同じnative canvasについて、glyph/inkの測定手段とgrapheme/禁則を含むlayout同等性、target renderer versionのadmissionを接続し、保存前fitを成立させる工程。その後に同じpreview identity/revision/3hashで保存操作へ進む。画像capture/端末保存/共有の依存preflight、owner/Nexusへの同じ描画接続、preview設定変更、M5の旧経路移行、005適用、実Auth/実機も残る。
+
+既存001〜004適用済み／005稼働未適用を保持。今回はlive DB照会/適用0、API/SQL/env/deploy/activation/native build/main merge/本人データ試験0。全体設計図01/関連01Bと全ファイル構造地図、Piece current map/原典、現行作業ルールと恒久incident、最新10/10 weekly review §5.5を確認し、Emlis＋分析の先行実機順と12/18公開目標を保持した。生成System Contextの過去失敗を成功に変えず、許可された原典直接読取を使用。今回の明示Piece続行に基づく既存設計内の可逆的RN準備・GitHub反映。DIRECT_PRODUCT_OR_ACCEPTANCE_WORK／TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_UPDATED、automatic_progression=false。
