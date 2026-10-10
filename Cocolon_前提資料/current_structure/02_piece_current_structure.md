@@ -2,7 +2,7 @@
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
 revision_date: "2026-10-10 JST"
-latest_api_implementation: "d3904888f31f105b8c77bcfda9ec9cc80aa5be0b"
+latest_api_implementation: "004a85eeb7af83b68ae1c1fba42ec2d6941b6874"
 latest_storage_candidate: "d3904888f31f105b8c77bcfda9ec9cc80aa5be0b"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は§36を優先します。保存・本人操作の停止制御に続き、本人の当月Piece保存回数を返すquota GETと集計専用RPCのコードを反映しました。追加005は稼働DB未適用。001〜004は適用済みのままで再実行しません。稼働切替・capabilities／RN接続・画像保存共有・実Auth／実機は未完了です。**
+**現在は§37を優先します。プラン別の形式・画像設定と当月の残り保存回数を、preview応答とRN本文プレビューへ接続しました。保存／設定変更操作・画像保存共有・実Auth／実機・稼働切替は未完了。追加005は稼働DB未適用、001〜004は適用済みで再実行しません。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1250,3 +1250,43 @@ HTTP検査は公開応答exact7、Free／Plus／Premium、認証優先、client�
 次の一作業は、既存PCE-6のplan capabilitiesとquotaをpreview／RNの同じ契約へ接続すること。現RNはPREVIEW_FIELDS完全一致のためbackendだけへ項目を追加しない。今回の単独quota GETは稼働app・共有preview候補へ未登録で、旧quotaの契約は保持している。その後に保存／本人操作のRN、renderer／画像保存共有、M5の旧経路移行と設定採用、実Auth／同じInputScreen／実機を続ける。M5やPiece全体の完了とはしない。
 
 今回のlive DB照会／適用、env／deploy／activation／native build／main merge・本人データ試験は0。Emlis／Analysis変更0。最新weekly review 10/10 §5.5と12/18目標は維持する。現行前提・作業ルール・恒久incident全文・全体構造／ファイル地図・Piece原典と現物を照合した。System Context prepareは新headでも祖先証明ができずcode2となり、許可された原典直接読取を使用した。読取reviewは補助agent、書込・最終確認は華恋root。`STRUCTURE_MAP_DELTA_UPDATED`／`automatic_progression=false`。
+
+
+## 37. 2026-10-10 — プラン別設定と残り保存回数をpreview／RNへ接続
+
+### 37.1 同じ応答契約での実装
+
+API `004a85eeb7af83b68ae1c1fba42ec2d6941b6874`、RN `e5f112a826c6b99732aaaa01f365ea95114037ef`。§36.3の未完了だったPCE-6 RN flow §5のplan capability／remaining saves表示を、既存preview POSTと既存本文modalへ接続した。API片側だけの項目追加ではなく、RNのPREVIEW_FIELDS完全一致も同じ実装単位で更新する。APIは製品3file・既存検査2file、RNは製品2file・既存検査3file・対象検査workflow1file。新しい画面、controller、保存権限ownerは追加しない。
+
+| owner path | 今回の役割 |
+|---|---|
+| API `api_piece_v2.py` | 認証・要求・runtime検証後、既存005 RPCでquotaを先に読み、既存生成／再取得へ期待tierを渡す。公開応答exact19にquota／plan_capabilitiesの2項目を追加。 |
+| API `piece_v2_preview_service.py` | issue_originalとread_original_previewでserver-only expected_subscription_tierと現在handoffを照合。不一致はPIECE_CONFLICT。従来の再照合・SQL fenceを保持。 |
+| API `piece_v2_quota.py` | 既存exact7 quotaを再利用し、PCE-6表からexact4のplan_capabilitiesを投影。 |
+| RN `features/piece/pieceApi.js` | exact19と追加nested契約を検証し、tier・制限・残数・can_save算術・recipeとの整合を確認。saved_countは安全な非負整数、Premium limit／remainingはnull。 |
+| RN `components/piece/PiecePreviewModal.js` | 現在の設定とは別にプランで利用できる形式／テーマ／比率／Cocolon表記、JST対象月と残回数を表示。設定変更ボタンは追加しない。 |
+| `.github/workflows/piece-rn-contracts.yml` | 既存8種のPiece Node検査を対象branch／pathで実行。package.jsonと同じTypeScript 5.2.2だけを使い捨てディレクトリへ導入し、native build／deployなし。 |
+
+capabilitiesは `format_selection`、`theme_ids`、`aspect_ratios`、`branding_modes` の4項目。Free＝fixed／soft_paper／4:5／required_small、Plus＝automatic／exact2 theme／4:5／required_subtle、Premium＝eligible_choice／exact2 theme／4:5・9:16／required_subtle・off。形式候補は既存eligible_formatsを使い、全形式を新たに適格認定しない。Plusに手動形式変更を約束しない。
+
+quotaのRPC欠落・失敗では生成／preview書込前に503で停止する。新規発行と同じキーの再取得の両方で現在tierを照合し、再取得途中のtier変化も閉じる。quota残0はpreview生成を禁止する新条件にしない。同じキーでもquotaは再読取し、本文・payload・recipe・3hash・preview identity・expiryは保存済みのまま。追加metadataを保存artifactやhashへ混ぜず、SQL／migrationを変更しない。取得後の保存・プラン変更・月境界で表示が古くなる可能性は残り、最終保存RPCが再判定する。
+
+preview HTTPも既存_OperationFeaturesを用い、quota IO前後・preview write前後と返却前のOFFを要求中保持する。停止後の自動再送／書込取消しはしない。RNは既存model／controller／hostをそのまま通り、本人変更・停止・閉じる・期限切れでmetadataも破棄される。quota.can_saveを画面canSave／canExportへ昇格せず、今回は両操作falseを維持する。
+
+### 37.2 検証と限界
+
+[API CI run 38019674020](https://github.com/MassyuRed/mashos-api/actions/runs/38019674020) は `004a85eeb7af83b68ae1c1fba42ec2d6941b6874` でsuccess、全21batch＝1,537 PASS／FAIL0／SKIP0。既存1,528件に新規9件（native7、停止制御2）を追加した。Free／Plus／Premiumのmetadata、残0でもpreview可能、同一キー再取得時のquotaだけの更新、RPC欠落で生成0、初回／再取得のtier不一致、再取得の第2handoffでのtier変化、quota読取中OFFを確認した。既存本文・hash・保存／再取得検査を維持する。native HTTP fixtureは既存001〜004の隔離DBへ005を追加し、quota RPCとpreview書込のcounter／fault注入を分けた。Python 3.12.15、pytest 8.4.1、FastAPI 0.143.0、PostgreSQL 16.15。既存非推奨警告は残る。
+
+[RN CI run 38019722996](https://github.com/MassyuRed/Cocolon/actions/runs/38019722996) は `e5f112a826c6b99732aaaa01f365ea95114037ef` でsuccess。InputScreenを含む既存8suiteで365 PASS／FAIL0／SKIP0／cancelled0。新規33件で3plan・不正metadata・残0／無制限表示・期限切れ後非表示・操作を有効化しないことを確認した。Node 24.21.0／TypeScript 5.2.2。手元はTypeScriptがなく7suiteを実行し、最終336 PASS。最初の334 PASS／2 FAILは旧quota不存在期待とFreeの9:16成功fixtureが新契約と不整合だったため、正しいmetadata期待・Premium fixtureへ更新した。validatorを緩めていない。
+
+APIのBearer／source／PostgREST transport、RNのReact／native／HTTP／sessionは代替境界を含む。実Auth、実PostgREST、実機画像、商品受入れの成功ではない。local pytest未実行。公開済みAPI5path・RN6pathの全文とcommit変更path集合を再取得して一致確認し、資料3pathも公開後に同じ確認を行う。
+
+### 37.3 次の未完了と適用境界
+
+capabilities／quotaの応答・本文画面表示を未実装へ戻さない。次は既存preview identity／revision／3hashを使う保存・本人操作のRN接続を扱う。PCE-6 §6のpreview形式／画像設定変更とprivate／public選択も未接続であり、表示した候補が操作可能とは記録しない。その後もnative画像preview／保存共有、M5旧経路移行・稼働設定採用、実Auth→同じInputScreen→端末での確認が残る。内部prepare_visual_changeを、永続previewのPATCH API実装済みへ読み替えない。
+
+005は引き続き稼働DB未適用。preview候補も005読取が前提となり、未適用なら503。現在のAPI／RNの応答形は一組で配置する必要があるが、今回のPR反映は配置・activationではない。既存001〜004適用済みを維持し、再実行しない。稼働005適用は対象・権限を確認した具体的な別操作として扱う。
+
+最新10/10 weekly review §5.5と12/18公開目標を保持し、今回の明示Piece指示による準備を進めた。全体設計／ファイル地図、Piece原典、現行作業ルール、恒久incident全文と現物を照合した。System Context prepareは旧HEADで祖先確認失敗、整合した67a71724ではPUBLICATION_RECOVERY_AMBIGUOUS（residual without marker）で停止。推測cleanupや生成結果の採用はせず、入口が許可する原典直接読取を継続した。fresh prepare成功・全面再監査は主張しない。
+
+live DB照会／適用・env／deploy／activation／native build／main merge・本人データ試験は0。Emlis／Analysis製品変更0。補助agentは読取reviewのみ、書込・最終確認は華恋root。`STRUCTURE_MAP_DELTA_UPDATED`／`automatic_progression=false`。B10／Piece全体・実機利用・商品受入れ完了ではない。

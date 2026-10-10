@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§32／current map §36を優先する。本人の当月Piece保存利用枠を返すquota APIと集計専用RPCを反映した。新規005は稼働DB未適用、既存001〜004は適用済みで再実行しない。capabilities／RN接続・画像保存共有・稼働切替・実Auth／実機は未完了。**
+**現在は§33／current map §37を優先する。プラン別設定と当月残り保存回数をpreview応答・RN本文画面へ接続した。保存／設定変更操作・画像保存共有・稼働切替・実Auth／実機は未完了。新005は稼働DB未適用、既存001〜004は適用済みで再実行しない。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -811,3 +811,14 @@ API `d3904888f31f105b8c77bcfda9ec9cc80aa5be0b`。未登録v2 routerの`GET /emot
 [CI run 38018804564](https://github.com/MassyuRed/mashos-api/actions/runs/38018804564) はcommit `d3904888f31f105b8c77bcfda9ec9cc80aa5be0b` でsuccess。追加quota検査39件（native2件を含む）が成功し、既存workflow全21 batchは1,528 PASS／FAIL0／SKIP0。Python 3.12.15、pytest 8.4.1、FastAPI 0.143.0、PostgreSQL 16.15。既存Pydantic validator／on_eventの非推奨警告は残る。local pytestは未実行。
 
 **001〜004適用済み／005稼働未適用**を区別する。本番DB・env・deploy・有効化・native build・main mergeは変更していない。次はPCE-6のcapabilitiesとquotaをpreview／RNへ同時に接続する工程。現RNの厳密な応答検証を保持し、backend単独の応答追加はしない。保存・本人操作の画面、画像保存共有、旧経路切替・実機の残件を継承する。`automatic_progression=false`。
+
+
+## 33. 2026-10-10 — previewのプラン別設定・利用枠を本文画面へ接続
+
+API `004a85eeb7af83b68ae1c1fba42ec2d6941b6874`、RN `e5f112a826c6b99732aaaa01f365ea95114037ef`。PCE-6のplan capabilitiesと既存exact7 quotaをpreview応答へ加え、RNの厳密な契約検証と既存本文modalの表示を同時更新した。Free固定形式、Plus自動形式、Premium適格形式選択、各planのテーマ／比率／Cocolon表記とJST月の残回数を表示する。画像設定変更・保存／export操作は有効化していない。
+
+quotaは生成前・同じキーの再取得でも読み、現在source tierと一致しなければCONFLICT。RPC欠落／失敗は本文生成前に503。保存artifact・3hash・expiryは維持し、quota残0でもpreviewを禁止しない。最終保存は従来のSQL再判定がownerであり、can_saveは表示情報に限る。
+
+API CI 38019674020＝1,537 PASS、RN CI 38019722996＝365 PASS（既存8suite）。FAIL／SKIP0。実Auth・PostgREST／React-native等は代替を含み、実機・商品合格ではない。初回RN検査の旧fixture不整合2件は修正済み。詳細、各path・検証範囲・System Context失敗からの原典fallbackはcurrent map §37。
+
+次は既存preview identity／revision／3hashを保持した保存・本人操作のRN接続。preview形式／画像設定変更・private／public選択・native画像保存共有・M5・稼働設定・実Auth／実機も残る。既存001〜004を再適用しない。005は稼働DB未適用で、preview候補の利用にも必要。APIとRNを同じ応答形で配置する必要はあるが、今回配置／有効化はしていない。最新weekly review §5.5・12/18目標と既存実行境界を保持。`automatic_progression=false`。
