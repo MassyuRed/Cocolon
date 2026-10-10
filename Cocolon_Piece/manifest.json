@@ -13,9 +13,9 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "777798ca26cda66a778990693c7f9d5994bab0f4",
-    "raw_sha256": "ea86d41ecb660a8f85537d4f67d4b59f8ef77cb469bf212afdb222ab25b33727",
-    "utf8_bytes": 89006
+    "git_blob_sha1": "337cc327812762d24e4f49b86b5ad860b731afe2",
+    "raw_sha256": "b5becabb6555c83d14dbd610b57716d35d14c87dfca96261501c1c1cdee58a95",
+    "utf8_bytes": 89429
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -83,7 +83,7 @@
     "pce9c_save_transport": "REMOTE_CI557_PASS__SAVE_ACTION_NATIVE_FIT_DEVICE_PENDING",
     "pce9e_export_preflight": "HISTORICAL_SOURCE_REVIEWED_PINNED_PROPOSAL__CURRENT_IMPLEMENTATION_IN_EXPORT_NATIVE_COMPILE_20261011",
     "pce9e_export_native_compile": "REMOTE_E4F4984__IOS_ANDROID_LIBRARY_COMPILE_PASS__JS572_PASS__DEVICE_ADMISSION_PENDING",
-    "pce9e_export_share_completion": "IOS_NORMAL_COMPLETION_COPY_CLEANUP__LOCAL_JS577_PASS__DEVICE_PENDING"
+    "pce9e_export_share_completion": "REMOTE_1C6FBD3__IOS_NORMAL_COMPLETION_COPY_CLEANUP__CI577_PASS__DEVICE_PENDING"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -305,9 +305,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "a5c390435486e4cae7366003ec095bacc6da54ad",
-    "raw_sha256": "72053faf081c714538ac9f8b9aab5b72e282edc3fe08b769d3f38483368d4825",
-    "utf8_bytes": 301098
+    "git_blob_sha1": "78c9d775c377e80e2bdf72908d60b70f31ecfaf4",
+    "raw_sha256": "70c34befd4554a8cc213a9bd1497ca38cc99e30671bc95b2fccca9a9c2da0e5c",
+    "utf8_bytes": 302120
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -491,12 +491,15 @@
     "new_dependency": 0,
     "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
     "local_js_passed": 577,
-    "ci_pending": true,
+    "ci_pending": false,
     "live_database_apply": 0,
     "release_effect": 0,
     "native_app_builds": 0,
     "product_acceptance": false,
-    "automatic_progression": false
+    "automatic_progression": false,
+    "ci_js_passed": 577,
+    "ci_js_failed": 0,
+    "ci_js_skipped": 0
   },
   "b06_q3_context_fence": {
     "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
@@ -3612,7 +3615,7 @@
     "current_entry_section": "51",
     "current_map_section": "55",
     "base_head": "0892b49913557cfeb258a66e3923b057e6b515aa",
-    "state": "IOS_SHARE_COMPLETION_CLEANUP_CONNECTED__CI_PENDING",
+    "state": "REMOTE_IOS_SHARE_COMPLETION_CLEANUP__CI577_PASS__DEVICE_PENDING",
     "ios_known_session_end_cleanup": true,
     "cancelled_outcome_present": true,
     "android_shared_copy_recovery": false,
@@ -3625,7 +3628,7 @@
     "local_js_passed": 577,
     "local_js_failed": 0,
     "local_js_skipped": 0,
-    "ci_pending": true,
+    "ci_pending": false,
     "prior_native_compile_evidence_owner": "export_native_compile_20261011",
     "native_device_acceptance": false,
     "formal_fit_admission": false,
@@ -3640,6 +3643,15 @@
     "automatic_progression": false,
     "cleanup_failure_preserves_share_outcome": true,
     "review_causal_red_passed": 18,
-    "review_causal_red_failed": 1
+    "review_causal_red_failed": 1,
+    "source_commit": "1c6fbd3d4787e5fbd5a06d9eed92344f6e452800",
+    "ci_run_id": 38095920492,
+    "ci_head": "1c6fbd3d4787e5fbd5a06d9eed92344f6e452800",
+    "ci_js_job_id": 114341668316,
+    "ci_js_passed": 577,
+    "ci_js_failed": 0,
+    "ci_js_skipped": 0,
+    "native_library_compile_rerun": false,
+    "native_library_compile_skip_reason": "No dependency/platform/workflow changes; existing CI scope skipped both export library compile steps."
   }
 }

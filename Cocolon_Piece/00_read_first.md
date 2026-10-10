@@ -1007,6 +1007,8 @@ source198e8ba／CI補修e4f4984をDraft PR #30へ反映し、remote全文・変�
 
 詳細ownerはcurrent map §55。固定RNShareのiOS終了通知を受けた後だけ、その操作専用directoryを回収するよう既存export処理へ接続した。共有中のdispose／本人変更では削除せず、正規の終了結果を待つ。取消は本文・共有先名を含まない `cancelled` として返す。終了後の削除失敗は `cleanup_failed:true` で分け、取消・共有結果を上書きしない。Androidの共有先選択通知、未知・矛盾した結果、rejectではcopyを保持し、再起動や任意TTLによる削除を加えない。
 
-修正前19検査中15 PASS／4 FAILで未接続を確認し、修正後はexport19 PASS。InputScreen込み12suiteはlocal **577 PASS／FAIL0／SKIP0**（先行572＋5件）。CI結果は反映後に記録する。OS通知・filesystemは代替であり、実機の共有受入れではない。前回の両OS library compileは§50の実結果を継承し、今回はnative／依存／workflowを変更しない。
+修正前19検査中15 PASS／4 FAILで未接続を確認し、修正後はexport19 PASS。InputScreen込み12suiteはlocal **577 PASS／FAIL0／SKIP0**（先行572＋5件）。[CI38095920492](https://github.com/MassyuRed/Cocolon/actions/runs/38095920492)でも **577 PASS／FAIL0／SKIP0**、既存Android bridge／iOS source検査success。依存差分がないため4依存の再compileはscopeどおりskip。OS通知・filesystemは代替であり、実機の共有受入れではない。前回の両OS library compileは§50の実結果を継承し、今回はnative／依存／workflowを変更しない。
 
 保存・画像化の製品caller、正式renderer admission→保存前fit→UI接続、実端末B9／PNG／写真保存共有が残る。画像共有全完成を初回実機確認の追加前提にしない。canSave/canExport=false、DB書込・本番切替・署名／配布・main merge0。
+
+§51反映確認：source `1c6fbd3d4787e5fbd5a06d9eed92344f6e452800` の製品1＋test1＋資料3をDraft PR #30へ反映し、remote全文・変更path集合・親head一致を確認した。localとCIは合算しない。

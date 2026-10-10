@@ -2013,7 +2013,7 @@ Androidの同版TargetChosenReceiverは共有先選択時にsuccess=trueを返�
 | `features/piece/pieceExport.js` | iOSのsuccess=trueかつdismissedAction未付与、又はsuccess=falseかつdismissedAction=trueのときだけhandedOffを解除し、既存finallyから専用session directoryを回収。取消はbody-free `cancelled`、その他は既存 `share_result_returned`。未知・矛盾・reject・Androidはcopy保持。 |
 | `tests/piece-v2-export.test.js` | iOS成功／取消終了前のdisposeと本人変更、終了後だけの限定削除・再dispose、Android取消の分類と保持、未知／矛盾した応答、cleanup失敗時の結果保持と再共有拒否を追加。既存の二重操作検査はAndroid正規successで保持を確認。 |
 
-新5件を加えた修正前export検査は **15 PASS／4 FAIL**、原因は未実装の回収・取消分類。source補修後 **19 PASS／FAIL0／SKIP0**。local全12suiteは **577 PASS／FAIL0／SKIP0**。API/Auth/React/native/filesystem/OSは代替を含み、実native share callbackや外部appで観測した結果ではない。CI結果は後続へ記録する。
+新5件を加えた修正前export検査は **15 PASS／4 FAIL**、原因は未実装の回収・取消分類。source補修後 **19 PASS／FAIL0／SKIP0**。local全12suiteは **577 PASS／FAIL0／SKIP0**。API/Auth/React/native/filesystem/OSは代替を含み、実native share callbackや外部appで観測した結果ではない。CIの実結果は§55.4に記録する。
 
 補助reviewで、確定した取消結果がfinallyのcleanup例外で上書きされる不具合を検出した。追加条件で19件中18 PASS／1 FAILを確認後、共有結果の確定後はoutcomeを保持し、後片付けの失敗だけbody-free `cleanup_failed:true` を付けるよう補修した。確定前の失敗は既存coarse errorを維持する。file pathやnative exceptionを出さず、同じassetを再共有しない。取消を共有失敗metricへ変換せず、画像送信成功や正式receiptを新設しない。今回のnative source／依存／workflow変更は0で、前回CI38094296963の両OS library compile成功を今回の再実行結果へ換算しない。
 
@@ -2022,3 +2022,10 @@ Androidの同版TargetChosenReceiverは共有先選択時にsuccess=trueを返�
 次は正式renderer admissionと保存前fit、既存保存controller／export hostのUI接続、および端末B9描画／PNG実bytes／写真保存共有の確認。`PieceExportCanvas` と `preparePieceExportPrototype` に製品callerがない状態を保持している。simulator appを起動するだけではこの経路へ到達しない。隔離描画用entryの調査では、cardからpieceApi→apiClient→Supabaseの間接初期化と、AppDelegateのFirebase初期化を確認した。entry差替えだけを通信隔離済みとせず、今回新しいharness／native app buildは追加していない。この調査を新しい恒久Gateや初回実機確認の追加前提にしない。
 
 Android／結果不明／異常終了後の共有copy回収、B13-B receipt、形式変更、Nexus公開読取／切替、M5／実Auth／稼働構成も残る。canSave/canExport=false、prototype v3を維持。画像共有の全完成を初回実機確認までの追加前提にしない。API／SQL／Supabase操作・DB書込・env/deploy/activation・署名／配布・main merge0。全体設計・file map・作業ルール・恒久incident全文を参照し、system_context prepareはshallow clone祖先判定exit2のためcanonical原本を直接確認した。weekly§5.5・12/18目標・automatic_progression=falseを維持。STRUCTURE_MAP_DELTA_UPDATED（一時file lifecycle）。
+
+
+### 55.4 GitHub最終確認
+
+source `1c6fbd3d4787e5fbd5a06d9eed92344f6e452800` の製品1＋test1＋資料3をGitHubへ反映し、全5fileのremote全文・変更path集合・親headを照合した。[CI38095920492](https://github.com/MassyuRed/Cocolon/actions/runs/38095920492)のJS job114341668316は **577 PASS／FAIL0／SKIP0**。既存Android bridge source compile／iOS source syntax・patch検査もsuccess。workflow全5jobはsuccessだが、export Pods／Android4依存のcompile stepは依存差分がないためscopeどおり**skip**。今回はnative libraryを再compileしたとはせず、前回run38094296963の成功と区別する。
+
+同環境read-only差分reviewで指摘された取消とcleanup失敗の混同は修正済みで、最終差分に追加重大指摘なし。current entry§51／manifest v50へ同期した。実機・画像・写真保存・共有先受信・正式fit/admission・製品UI接続の受入れは未成立のまま、今回の共有session回収と分ける。
