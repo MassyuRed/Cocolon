@@ -4,12 +4,14 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { preparePieceNativePreview, createPieceNativeMeasurement, pieceNativeTypography, recordPieceNativeMeasurement } from '../../features/piece/pieceLayout';
+import { inspectPieceText } from '../../features/piece/pieceRenderer';
 
 export default class PieceVisualCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = { measurement: createPieceNativeMeasurement(preparePieceNativePreview(props.display)), width: 0 };
     this.active = true;
+    this.textNodes = new Map();
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -18,8 +20,8 @@ export default class PieceVisualCard extends React.Component {
   }
 
   componentDidMount() { this.active = true; this.syncDeadline(); }
-  componentDidUpdate() { this.syncDeadline(); }
-  componentWillUnmount() { this.active = false; this.clearDeadline(); }
+  componentDidUpdate() { this.syncDeadline(); this.inspectDrawing(); }
+  componentWillUnmount() { this.active = false; this.clearDeadline(); this.inspection = null; this.textNodes.clear(); }
 
   clearDeadline = () => {
     if (this.deadline) clearTimeout(this.deadline.handle);
@@ -28,7 +30,8 @@ export default class PieceVisualCard extends React.Component {
 
   syncDeadline = () => {
     const input = preparePieceNativePreview(this.props.display);
-    if (!this.active || !input || input.key !== this.state.measurement.key || this.state.measurement.phase !== 'measuring') {
+    if (!this.active || !input || input.key !== this.state.measurement.key ||
+        !['measuring', 'geometry_checked'].includes(this.state.measurement.phase)) {
       this.clearDeadline(); return;
     }
     if (this.deadline?.key === input.key) return;
@@ -40,10 +43,44 @@ export default class PieceVisualCard extends React.Component {
       if (this.deadline !== deadline) return;
       this.deadline = null;
       if (!this.active || preparePieceNativePreview(this.props.display)?.key !== key) return;
-      this.setState(previous => previous.measurement.key === key && previous.measurement.phase === 'measuring'
+      const generation = this.state.measurement.generation;
+      this.setState(previous => this.active && preparePieceNativePreview(this.props.display)?.key === key &&
+        previous.measurement.key === key && previous.measurement.generation === generation &&
+        ['measuring', 'geometry_checked'].includes(previous.measurement.phase)
         ? { measurement: { ...previous.measurement, phase: 'unavailable', blocks: {}, compositionHeight: null, reason: 'measurement_timeout' } }
         : null);
     }, 8000);
+  };
+
+  inspectDrawing = async () => {
+    const snapshot = this.state.measurement, input = preparePieceNativePreview(this.props.display);
+    if (!this.active || !input || input.key !== snapshot.key || snapshot.phase !== 'geometry_checked' || this.inspection?.snapshot === snapshot) return;
+    const operation = { snapshot }; this.inspection = operation;
+    const current = () => this.active && this.inspection === operation && this.state.measurement === snapshot &&
+      preparePieceNativePreview(this.props.display)?.key === input.key;
+    try {
+      const evidence = [];
+      const count = input.blocks.length + (input.brandingMode === 'off' ? 0 : 1);
+      for (let index = 0; index < count; index++) {
+        if (!current()) return;
+        const node = this.textNodes.get(index);
+        if (node?.generation !== snapshot.generation) throw new Error('PIECE_NATIVE_MEASUREMENT_UNAVAILABLE');
+        evidence.push(await inspectPieceText(node.value, {
+          text: index < input.blocks.length ? input.blocks[index] : 'Cocolon',
+          fontSize: index < input.blocks.length ? input.sizes[snapshot.sizeIndex] : 28,
+          box: snapshot.blocks[index].box, lineEnds: snapshot.blocks[index].lines.map(line => line.end),
+        }));
+      }
+      if (!current()) return;
+      const overflow = evidence.some(result => result.overflow);
+      this.setState(previous => current() && previous.measurement === snapshot ? { measurement: overflow ? snapshot.sizeIndex + 1 < input.sizes.length
+        ? { ...createPieceNativeMeasurement(input), sizeIndex: snapshot.sizeIndex + 1 }
+        : { ...snapshot, phase: 'unavailable', blocks: {}, compositionHeight: null, reason: 'native_ink_overflow' }
+        : { ...snapshot, phase: 'native_checked', inspection: evidence } } : null);
+    } catch {
+      if (current()) this.setState(previous => current() && previous.measurement === snapshot
+        ? { measurement: { ...snapshot, phase: 'unavailable', blocks: {}, compositionHeight: null, reason: 'native_measurement_unavailable' } } : null);
+    }
   };
 
   measure = (ticket, index, kind, value) => {
@@ -58,12 +95,17 @@ export default class PieceVisualCard extends React.Component {
   render() {
     const input = preparePieceNativePreview(this.props.display), measurement = this.state.measurement;
     if (!input || input.key !== measurement.key) return null;
-    const element = React.createElement, ready = measurement.phase === 'geometry_checked';
+    const element = React.createElement, ready = measurement.phase === 'native_checked';
     const { fontSize, lineHeight, gap } = pieceNativeTypography(input, measurement.sizeIndex);
     const ticket = { key: input.key, sizeIndex: measurement.sizeIndex, generation: measurement.generation };
     const scale = this.state.width / input.width;
     const textProps = index => ({
       key: `${input.key}:${measurement.sizeIndex}:${index}`, testID: `piece-visual-block-${index}`,
+      ref: value => {
+        if (value) this.textNodes.set(index, { value, generation: measurement.generation });
+        else if (this.textNodes.get(index)?.generation === measurement.generation) this.textNodes.delete(index);
+      },
+      collapsable: false,
       allowFontScaling: false, adjustsFontSizeToFit: false, accessible: false,
       android_hyphenationFrequency: 'none', textBreakStrategy: 'highQuality', lineBreakStrategyIOS: 'standard',
       onLayout: event => this.measure(ticket, index, 'box', event.nativeEvent?.layout),

@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は§37を優先します。プラン別の形式・画像設定と当月の残り保存回数を、preview応答とRN本文プレビューへ接続しました。保存／設定変更操作・画像保存共有・実Auth／実機・稼働切替は未完了。追加005は稼働DB未適用、001〜004は適用済みで再実行しません。**
+**現在は§40を優先します。同じnative Textの描画範囲・glyph観測・文字境界／改行位置を確認する処理を追加しました。確認用表示のnative_checkedは保存前fitではありません。保存／設定変更・画像保存共有・実機・稼働切替は未完了。005は稼働未適用、001〜004は適用済みです。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1364,3 +1364,39 @@ local Node 24.19.0で既存8suite368件＋renderer新18件＝**386 PASS／FAIL0�
 ### 39.5 GitHub反映と最終CI
 
 source＋再開資料9fileをcommit `1976de5ca9f2d9c6c68b3cdfb8ca7f1bc2f19c6e` でPR #30へnon-force反映し、remote再取得で全9fileのbytesと変更path集合の一致を確認した。[Piece RN CI 38022110375](https://github.com/MassyuRed/Cocolon/actions/runs/38022110375)／job 114125130449は同commitでsuccess。InputScreen29件を含む10suite＝**415 PASS／FAIL0／SKIP0／cancelled0**（既存397＋新renderer18）。Node 24.21.0、既存TypeScript 5.2.2。local386件との差29件はInputScreenで、件数を合算しない。sourceはこのCI版から変更していない。本節・入口・manifestへの最終結果追記だけを後続反映する。実native計測・実機画像・保存前fit・商品受入れは未成立のまま。
+
+
+## 40. 2026-10-10 — 実際のnative Textの描画検査を確認用プレビューへ接続
+
+### 40.1 ownerと同一描画条件
+
+§39の外枠測定を継承し、B13-C指定pieceRendererから、画面へmountした同じPaper Textのnative layoutを読む。新レンダリングライブラリ・別canvas・本文正本・保存APIは追加しない。RN 0.77.3の公式npm配布sourceを取得して、RCTTextView、ReactTextView、UIManagerとonTextLayoutの実装を確認した。§39.2の「個別source取得未成立」は前回の履歴であり、今回は固定versionのsource確認が成立した。端末実行済みには読み替えない。
+
+| owner path | 今回の変更 |
+|---|---|
+| features/piece/pieceRenderer.js | mounted Textのtag、expected全文/fontをlocal bridgeへ渡す。exact10の数値中心応答を検査し、行末とnative grapheme境界・既存B9硬い禁則集合、描画範囲を確認する。 |
+| features/piece/pieceLayout.js | 完全再構成済み行へUTF-16終端を保持。再測定では旧native検査を無効化する。 |
+| components/piece/PieceVisualCard.js | 全block＋brandingの検査完了まで透明。overflowは規定sizeだけ降順、floor/不明/8秒失敗は全文表示へ戻る。native_checkedもcanSave/canExport=false。 |
+| android/app/src/main/java/com/anonymous/cocolonmvp/piece/PieceTextMetricsModule.java | ReactTextViewの同じLayout/実MetricAffectingSpanのfont、ICU grapheme、切詰めなしの行末を読む。同じLayoutをoverscan付き一時Bitmapへ描画しalpha範囲を検査する。4M pixel上限、finally recycle、file/network/logなし。 |
+| android/app/src/main/java/com/anonymous/cocolonmvp/MainApplication.java | 既存package listへ上記local moduleを登録する。 |
+| ios/tempCocolon/PieceTextMetrics.mm | UIManagerのqueue→UI blockで同じTextKit storage/layoutを読む。全文/font/行末、composed characters、glyph0/LastResort観測とglyph bounding rectを確認する。 |
+| ios/tempCocolon.xcodeproj/project.pbxproj | 上記1sourceを既存app targetに登録する。 |
+| patches/react-native+0.77.3.patch | 既存patch-package運用でRCTTextViewへread-only storage/frame accessorを2つ追加する。setter/描画/測定処理は変更せず、KVCやswizzleを使わない。 |
+| tests/piece-v2-renderer.test.js／tests/piece-v2-preview-display.test.js | 実JS sourceを合成native応答と測定で確認。失敗・遅延・batch queueの取り違えを追加する。 |
+| .github/workflows/piece-rn-contracts.yml | 既存10suiteに加え、Androidのjavac単体source compileとiOSのclang syntax-only／固定RN patch適用を確認する。app build/signing/deployではない。 |
+
+native pathとRN本体patchも変更範囲に含めてGitHub反映前にここへ固定する。B13-Aの未選定capture/media-save依存は導入しない。本変更は既存RN-first interface内の描画検査の具体化で、PCE-8 freeze §9のtooling substitutionとしてSTOP/保存前fit/実機受入条件を保持する。既存package.json/lock/Podfile/Gradle依存versionは不変だが、RN本体へのpatch変更はあるため「native依存ファイル変更0」とは記録しない。実バイナリへの組込みは将来のnative build時に必要で、module/accessor不存在は表示不可へ閉じる。
+
+### 40.2 判定と非同期の境界
+
+native応答はversion/platform/font/box/UTF-16 length/grapheme boundaries/line ends/ink/glyph_checkのexact10。本文はlocal照合だけに使用し、応答・stateに本文を複製しない。glyph_check=no_missing_observedは欠損を観測しなかった意味に限る。Android hasGlyph falseやiOS不明font/glyph、改行不一致、grapheme途中の分割、禁則違反はunavailable。妥当な複雑文字も保守的に拒否する可能性があり、missing_glyph=falseの保証にはしない。
+
+native promiseは測定snapshot・operation identity・generationに結び、functional updater内でも再照合する。測定変更を先にqueueした後の古い成功/失敗で上書きしない。発火済みtimeoutもupdaterに世代を結び、A→B→Aの新世代を破棄しない。既存hostの本人変更/閉じる/背景化/期限切れを継承する。補助agentの読取reviewで上記batch raceとiOS addUIBlockのqueue制約を指摘され、実sourceを修正した。
+
+### 40.3 検証と残件
+
+local Node 24.19.0、9suite **394 PASS／FAIL0／SKIP0**。renderer26件（前回18＋今回8）を含む。固定RN 0.77.3の原本にpatchがfuzz0で適用できることを確認済み。CIのInputScreen込み検査、実SDK/固定RN定義に対するnative sourceコンパイルはGitHub反映後に確認し、結果を本節へ追記する。JS検査のReact/native応答は代替であり、ネイティブの実描画検査・Hermes・端末合格は未実施。
+
+次はB9の読取単位/soft wrapとnative wrapの同等性、target renderer versionのadmission、実端末での同じcanvasのglyph/ink受入を揃えて保存前fitへ接続する。native_checkedをlayout_state=fitと記録せず、server renderer文字列やclient自己申告だけでは保存を許可しない。保存操作、capture/端末保存/共有、owner/Nexusの共通描画、preview設定変更、M5、005適用、実Auth/実機も残る。
+
+全体設計図01/関連01B・全ファイル地図、現行rules/Rule18・恒久incident全文、最新weekly 10/10 §5.5を照合。Emlis＋分析の先行実機順と12/18目標を保持する。System Context prepareの既知失敗を成功にせず、許可された原典直接読取を使用した。Mashの明示Piece続行による可逆的source準備。実装/統合/書込はroot華恋、補助2名は読取review。新依存導入・API/SQL/live DB/env/deploy/activation/app native build/main merge/本人データ試験0。001〜004適用済み／005稼働未適用。TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false。商品全体完成ではない。

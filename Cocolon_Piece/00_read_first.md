@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§33／current map §37を優先する。プラン別設定と当月残り保存回数をpreview応答・RN本文画面へ接続した。保存／設定変更操作・画像保存共有・稼働切替・実Auth／実機は未完了。新005は稼働DB未適用、既存001〜004は適用済みで再実行しない。**
+**現在は§36／current map §40を優先する。同じnative Textの描画範囲・glyph観測・文字境界／改行位置の確認を接続した。native_checkedは確認用であり保存前fitではない。保存・画像保存共有・実機・稼働切替は未完了。005は稼働未適用、001〜004は適用済みで再実行しない。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -843,3 +843,12 @@ local既存368＋新renderer18＝386 PASS／FAIL0／SKIP0。InputScreen含むCI�
 
 
 §35最終確認：source `1976de5ca9f2d9c6c68b3cdfb8ca7f1bc2f19c6e` の[CI 38022110375](https://github.com/MassyuRed/Cocolon/actions/runs/38022110375)でInputScreenを含む10suite **415 PASS／FAIL0／SKIP0**。remote再取得で今回9fileのbytesと変更path集合を確認済み。native試作のコード接続が成立した結果であり、保存前fit・PNG/共有・実機の完成ではない。
+
+
+## 36. 2026-10-10 — 同じnative Textのglyph観測・描画範囲・改行を検査
+
+current map §40が現在の詳細owner。Androidはmount済みReactTextViewのLayout＋実font spanを使い、一時Bitmapの描画範囲を調べる。iOSは同じTextKit storage/layoutを既存RN 0.77.3へのread-only accessor patchで読み、glyph/font観測と描画範囲を調べる。両方とも全文・font・行末をJS測定と照合し、native文字境界と硬い禁則も確認する。新ライブラリ・capture依存は導入しないが、RN本体patchとnative module登録の変更は含む。
+
+全blockの検査が揃うまで画像は透明。不明・欠損観測・timeoutは全文確認へ戻り、描画範囲overflowだけ規定font候補を降順に試す。古いnative promiseや発火済みtimeoutを新測定世代へ反映しない。native_checkedはno_missing_observedの確認用で、保存前fit/指定renderer admission/実機合格ではない。canSave/canExport=falseを保持する。
+
+local9suite394 PASS／FAIL0／SKIP0、rendererは26件（今回8追加）。固定RN原本へのpatch適用は成功。CI/単体native sourceコンパイル結果は後続確認。app build・実機は未実施。次はB9 soft-wrap同等性とrenderer admission/実機描画受入、その後に保存を接続する。native capture/共有・preview設定変更・M5・005・実Authも残る。weekly§5.5、12/18目標、既存001〜004適用済み、automatic_progression=falseを維持する。

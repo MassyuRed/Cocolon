@@ -1,4 +1,4 @@
-# Source-level Piece integration only; no native build, live credentials or deploy.
+# Piece source tests and isolated native source compilation; no app build, signing or deploy.
 name: Piece RN preview and owner contracts
 'on':
   push:
@@ -16,6 +16,11 @@ name: Piece RN preview and owner contracts
       - AppRuntimeContext.js
       - tests/piece-v2-*.test.js
       - package.json
+      - android/app/src/main/java/com/anonymous/cocolonmvp/piece/**
+      - android/app/src/main/java/com/anonymous/cocolonmvp/MainApplication.java
+      - ios/tempCocolon/PieceTextMetrics.mm
+      - ios/tempCocolon.xcodeproj/project.pbxproj
+      - patches/react-native+0.77.3.patch
 permissions:
   contents: read
 jobs:
@@ -42,3 +47,69 @@ jobs:
           node --version
           node -p "require('typescript').version"
           node --test tests/piece-v2-contracts.test.js tests/piece-v2-state-models.test.js tests/piece-v2-preview-display.test.js tests/piece-v2-runtime.test.js tests/piece-v2-feature-disabled.test.js tests/piece-v2-saved-input-host.test.js tests/piece-v2-source-ref.test.js tests/piece-v2-input-screen.test.js tests/piece-v2-owner-history.test.js tests/piece-v2-renderer.test.js
+
+  piece-android-source:
+    if: github.repository == 'MassyuRed/Cocolon'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Compile only the Piece bridge against pinned RN and Android APIs
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PIECE_COMPILE_DIR="$RUNNER_TEMP/piece-android-source"
+          python3 - <<'PY'
+          import os, pathlib, urllib.request, zipfile
+          root = pathlib.Path(os.environ['PIECE_COMPILE_DIR'])
+          root.mkdir()
+          artifacts = {
+            'react': 'https://repo.maven.apache.org/maven2/com/facebook/react/react-android/0.77.3/react-android-0.77.3-debug.aar',
+            'appcompat': 'https://dl.google.com/dl/android/maven2/androidx/appcompat/appcompat/1.6.1/appcompat-1.6.1.aar',
+            'core': 'https://dl.google.com/dl/android/maven2/androidx/core/core/1.9.0/core-1.9.0.aar',
+            'kotlin': 'https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.0.21/kotlin-stdlib-2.0.21.jar',
+          }
+          for name, url in artifacts.items():
+            target = root / (name + ('.aar' if url.endswith('.aar') else '.jar'))
+            urllib.request.urlretrieve(url, target)
+            if target.suffix == '.aar':
+              with zipfile.ZipFile(target) as archive:
+                (root / (name + '.jar')).write_bytes(archive.read('classes.jar'))
+          PY
+          javac -version
+          test -f "$ANDROID_HOME/platforms/android-35/android.jar"
+          javac -proc:none -source 17 -target 17 -classpath "$ANDROID_HOME/platforms/android-35/android.jar:$PIECE_COMPILE_DIR/*" -d "$PIECE_COMPILE_DIR/classes" android/app/src/main/java/com/anonymous/cocolonmvp/piece/PieceTextMetricsModule.java
+  piece-ios-source:
+    if: github.repository == 'MassyuRed/Cocolon'
+    runs-on: macos-15
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Check the RN patch and compile only the Piece Objective-C++ source
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PIECE_COMPILE_DIR="$RUNNER_TEMP/piece-ios-source"
+          mkdir -p "$PIECE_COMPILE_DIR/node_modules/react-native" "$PIECE_COMPILE_DIR/include/React"
+          curl --fail --silent --show-error --location https://registry.npmjs.org/react-native/-/react-native-0.77.3.tgz -o "$PIECE_COMPILE_DIR/react-native.tgz"
+          tar -xzf "$PIECE_COMPILE_DIR/react-native.tgz" --strip-components=1 -C "$PIECE_COMPILE_DIR/node_modules/react-native"
+          patch --batch --fuzz=0 -d "$PIECE_COMPILE_DIR" -p1 < patches/react-native+0.77.3.patch
+          python3 - <<'PY'
+          import os, pathlib
+          root = pathlib.Path(os.environ['PIECE_COMPILE_DIR'])
+          source = root / 'node_modules/react-native'
+          for directory in ['React', 'Libraries']:
+            for header in sorted((source / directory).rglob('*.h')):
+              if header.name.startswith(('RCT', 'UIView+React')):
+                link = root / 'include/React' / header.name
+                if not link.exists(): link.symlink_to(header)
+          PY
+          xcrun clang --version
+          xcrun clang -fsyntax-only -x objective-c++ -std=c++20 -fobjc-arc -fblocks -fmodules -target arm64-apple-ios15.1-simulator -isysroot "$(xcrun --sdk iphonesimulator --show-sdk-path)" -I "$PIECE_COMPILE_DIR/include" -I "$PIECE_COMPILE_DIR/node_modules/react-native/ReactCommon/yoga" -Werror=objc-method-access -Werror=implicit-function-declaration ios/tempCocolon/PieceTextMetrics.mm
+          plutil -lint ios/tempCocolon.xcodeproj/project.pbxproj

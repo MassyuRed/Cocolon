@@ -85,12 +85,13 @@ function previewUiHarness({ send, currentState = 'active' } = {}) {
     Date: class extends Date { static now() { return now; } },
     Modal: 'Modal', View: 'View', Text: 'Text', ScrollView: 'ScrollView', Button: 'Button',
     ActivityIndicator: 'ActivityIndicator', SafeAreaView: 'SafeAreaView',
+    NativeModules: {}, Platform: { OS: 'ios' }, findNodeHandle: () => null,
     setTimeout: (callback, delay) => { const id = ++serial; timers.set(id, { callback, at: now + delay }); return id; },
     clearTimeout: id => timers.delete(id),
     apiFetch: async (...args) => { calls.push(args); return send ? send(...args) : pieceHttp(response()); },
     getAccessToken: async () => 'synthetic-ui-session',
   });
-  const pure = ['pieceApi.js', 'piecePreviewModel.js', 'PieceCreateController.js', 'pieceLayout.js'].map(file =>
+  const pure = ['pieceApi.js', 'piecePreviewModel.js', 'PieceCreateController.js', 'pieceLayout.js', 'pieceRenderer.js'].map(file =>
     fs.readFileSync(path.join(__dirname, '../features/piece', file), 'utf8')
       .replace(/^import .*;$/gm, '').replace(/^export /gm, '')).join('\n');
   vm.runInContext(pure + '\nglobalThis.displayReader = readPiecePreviewDisplay; globalThis.digestUnderTest = pieceUtf8Digest;', context);

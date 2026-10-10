@@ -78,12 +78,13 @@ export function recordPieceNativeMeasurement(input, state, ticket, blockIndex, k
     if (value.map(line => line.text).join('') !== (branding ? 'Cocolon' : input.blocks[blockIndex])) {
       return nativeReject(state, 'text_mismatch');
     }
-    measurement = value.map(({ x, y, width, height }) => ({ x, y, width, height }));
+    let end = 0;
+    measurement = value.map(({ text, x, y, width, height }) => ({ x, y, width, height, end: end += text.length }));
   } else return state;
   const old = state.blocks[blockIndex] || {};
   if (JSON.stringify(old[kind]) === JSON.stringify(measurement)) return state;
   const blocks = { ...state.blocks, [blockIndex]: { ...old, [kind]: measurement } };
-  const next = { ...state, phase: 'measuring', blocks, compositionHeight: null };
+  const next = { ...state, phase: 'measuring', blocks, compositionHeight: null, inspection: null };
   const count = input.blocks.length + (input.brandingMode === 'off' ? 0 : 1);
   if (Object.keys(blocks).length !== count || Object.values(blocks).some(b => !b.lines || !b.box)) return next;
   const { gap } = pieceNativeTypography(input, state.sizeIndex);
