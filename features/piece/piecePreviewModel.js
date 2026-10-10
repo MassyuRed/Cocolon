@@ -181,11 +181,11 @@ export function readPiecePreviewDisplay(view, nowMs = Date.now()) {
     canSave: false, canExport: false, hashVerified: false, expiresAtMs: null };
   if (!view || view.phase === 'hidden') return frozen(base);
   if (view.phase !== 'received') return frozen({ ...base,
-    phase: ['idle', 'loading', 'unavailable'].includes(view.phase) ? view.phase : 'unavailable',
+    phase: ['idle', 'loading', 'unavailable', 'cancelled'].includes(view.phase) ? view.phase : 'unavailable',
     message: typeof view.message === 'string' ? view.message : '',
     canRetry: view.phase === 'unavailable' && view.canRetry === true,
-    retryKind: view.retryKind === 'recover' ? 'recover' : 'preview',
-    loadingKind: ['visual', 'recover'].includes(view.loadingKind) ? view.loadingKind : 'preview' });
+    retryKind: ['recover', 'cancel'].includes(view.retryKind) ? view.retryKind : 'preview',
+    loadingKind: ['visual', 'recover', 'cancel'].includes(view.loadingKind) ? view.loadingKind : 'preview' });
   try {
     const preview = readPiecePreviewSnapshot(view.preview);
     const expiresAtMs = expiryMilliseconds(preview.expires_at);

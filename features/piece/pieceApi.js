@@ -312,6 +312,49 @@ export async function requestPiecePreviewVisualChange(value, options = {}) {
   return requestPieceData(value, options, null, true);
 }
 
+/** Explicit owner cancellation. An unknown outcome permits only the same
+ * ID/revision DELETE again; expiry must not block its terminal replay. */
+export async function requestPiecePreviewCancellation(value, options = {}) {
+  let signal;
+  try {
+    if (!object(options) || !exact(value, ['preview_id', 'expected_preview_revision']) ||
+        !pieceUuid(value.preview_id) || !positive(value.expected_preview_revision) ||
+        Object.prototype.hasOwnProperty.call(options, 'idempotencyKey')) reject('PIECE_REQUEST_INVALID');
+    const { preview_id, expected_preview_revision } = value;
+    const { expectedUserId } = options;
+    signal = options.signal;
+    checkAbort(signal);
+    if (!text(expectedUserId)) reject('PIECE_AUTH_REQUIRED');
+    await requireSession(expectedUserId);
+    checkAbort(signal);
+    const response = await apiFetch(`${PATH}/${preview_id}`, {
+      method: 'DELETE', auth: true, expectedUserId, signal,
+      headers: { 'Cache-Control': 'no-store' },
+      body: JSON.stringify({ expected_preview_revision }),
+    });
+    checkAbort(signal);
+    const result = await response.json();
+    await requireSession(expectedUserId);
+    checkAbort(signal);
+    if (response.status !== 200) {
+      const codes = ['PIECE_REQUEST_INVALID', 'PIECE_AUTH_REQUIRED', 'PIECE_NOT_FOUND',
+        'PIECE_PREVIEW_STALE', 'PIECE_PREVIEW_EXPIRED', 'PIECE_CONFLICT', 'PIECE_TEMPORARILY_UNAVAILABLE'];
+      reject(exact(result, ['code']) && codes.includes(result.code) && STATUS[result.code] === response.status
+        ? result.code : 'PIECE_TEMPORARILY_UNAVAILABLE');
+    }
+    if (!exact(result, ['preview_id', 'preview_revision', 'row_version', 'lifecycle_status', 'idempotency_replayed']) ||
+        result.preview_id !== preview_id || result.preview_revision !== expected_preview_revision ||
+        !positive(result.row_version) || result.lifecycle_status !== 'cancelled' ||
+        typeof result.idempotency_replayed !== 'boolean') reject('PIECE_TEMPORARILY_UNAVAILABLE');
+    return freeze({ ...result });
+  } catch (error) {
+    checkAbort(signal);
+    if (error instanceof PieceApiError) throw error;
+    if (error?.name === 'AccountChangedError') reject('PIECE_AUTH_REQUIRED');
+    reject('PIECE_TEMPORARILY_UNAVAILABLE');
+  }
+}
+
 /** Unregistered PCE-9C transport. No existing screen calls it yet.
  * A source read is an explicit GET, not generation, saved-state authority,
  * feature activation or permission to reuse Emlis/Analysis text.

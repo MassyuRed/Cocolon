@@ -54,6 +54,7 @@ export default class InputPieceActionArea extends React.Component {
     this.controller = null;
     this.boundStamp = null;
     this.boundRuntime = null;
+    this.boundSavedInputStamp = null;
     this.savedMode = false;
     this.sourceAttempt = null;
     this.sourcePhase = 'idle';
@@ -65,6 +66,7 @@ export default class InputPieceActionArea extends React.Component {
     this.start = this.start.bind(this);
     this.retry = this.retry.bind(this);
     this.changeVisual = this.changeVisual.bind(this);
+    this.cancelPreview = this.cancelPreview.bind(this);
     this.close = this.close.bind(this);
     this.changed = this.changed.bind(this);
     this.resolveSavedInput = this.resolveSavedInput.bind(this);
@@ -76,6 +78,7 @@ export default class InputPieceActionArea extends React.Component {
     this.foreground = AppState.currentState === 'active';
     this.boundStamp = null;
     this.boundRuntime = null;
+    this.boundSavedInputStamp = null;
     this.clearSource();
     this.controller = createPieceCreateController({ onFeatureDisabled: () => {
       // Props may have changed before componentDidUpdate; an old response must
@@ -94,10 +97,13 @@ export default class InputPieceActionArea extends React.Component {
       if (!this.foreground) {
         if (this.savedMode) {
           this.clearSource();
-          this.controller.setContext({ enabled: false });
+          if (!this.controller.setCancellationEnabled(false)) this.controller.setContext({ enabled: false });
         } else this.controller.close();
         this.setState({ open: false });
-      } else this.controller.refresh();
+      } else {
+        if (this.savedMode && this.isCurrent()) this.controller.setCancellationEnabled(true);
+        this.controller.refresh();
+      }
     });
     this.syncContext();
     this.setState({ open: false });
@@ -116,6 +122,7 @@ export default class InputPieceActionArea extends React.Component {
     this.controller = null;
     this.boundStamp = null;
     this.boundRuntime = null;
+    this.boundSavedInputStamp = null;
   }
 
   savedEnabled() {
@@ -142,7 +149,8 @@ export default class InputPieceActionArea extends React.Component {
       ? this.savedEnabled() && sourceStamp !== null ? 'saved:' + sourceStamp : 'saved-disabled'
       : contextStamp(this.props.context);
     const runtime = savedMode ? this.context?.runtime : null;
-    if (stamp === this.boundStamp && runtime === this.boundRuntime && savedMode === this.savedMode) return;
+    if (stamp === this.boundStamp && runtime === this.boundRuntime && savedMode === this.savedMode &&
+        sourceStamp === this.boundSavedInputStamp) return;
     // While the same account/runtime remains current, close only the local
     // preview so the existing controller can reject a changed request with the
     // same key. Disabling here would erase that request/key binding.
@@ -151,13 +159,22 @@ export default class InputPieceActionArea extends React.Component {
     const next = sourceStamp !== null ? JSON.parse(sourceStamp) : null;
     const retainBinding = savedMode && this.savedMode && this.savedEnabled() &&
       runtime === this.boundRuntime && previous && next && previous[1] === next[1];
+    const sameSavedSelection = savedMode && this.savedMode && sourceStamp !== null &&
+      sourceStamp === this.boundSavedInputStamp;
     this.clearSource();
     this.savedMode = savedMode;
     this.boundStamp = stamp;
     this.boundRuntime = runtime;
+    this.boundSavedInputStamp = sourceStamp;
     // The render boundary hides old data before this lifecycle runs. A source
     // read does not occur on mount, context change, refresh or re-enable.
-    if (retainBinding) this.controller.close();
+    // Runtime refresh hides all Piece actions, but a same-selection terminal
+    // cancellation needs no fresh source/author. Retain its body-free identity
+    // until flags return, then require a new explicit DELETE and fresh Auth.
+    // A different saved ID, account or original key uses the normal clear.
+    if (sameSavedSelection && this.controller.setCancellationEnabled(this.savedEnabled() && this.foreground)) {
+      // No source fetch, preview revival or automatic cancellation retry.
+    } else if (retainBinding && this.controller.getView().retryKind !== 'cancel') this.controller.close();
     else this.controller.setContext(savedMode ? { enabled: false } : this.props.context);
     this.setState({ open: false });
   }
@@ -175,6 +192,7 @@ export default class InputPieceActionArea extends React.Component {
 
   async resolveSavedInput() {
     if (!this.savedMode || !this.isCurrent() || this.sourceAttempt ||
+        this.controller.getView().retryKind === 'cancel' ||
         !(this.sourcePhase === 'idle' || this.sourceCode === 'PIECE_TEMPORARILY_UNAVAILABLE')) return;
     // Capture the exact saved ID, owner and future POST key before any await.
     const [savedInputId, expectedUserId, idempotencyKey] = JSON.parse(this.boundStamp.slice(6));
@@ -246,14 +264,23 @@ export default class InputPieceActionArea extends React.Component {
   }
 
   retry() {
-    if (!this.isCurrent() || !this.state.open) return;
+    if (!this.isCurrent()) return;
     const display = readPiecePreviewDisplay(this.controller.getView());
-    if (display.canRetry) void this.controller.retry();
+    if (!this.state.open && display.retryKind !== 'cancel') return;
+    if (display.canRetry) {
+      this.setState({ open: true });
+      void this.controller.retry();
+    }
   }
 
   changeVisual(selection, identity, visualToken) {
     if (!this.isCurrent() || !this.state.open) return;
     void this.controller.changeVisual(selection, identity, visualToken);
+  }
+
+  cancelPreview(identity, displayToken) {
+    if (!this.isCurrent() || !this.state.open) return;
+    void this.controller.cancelPreview(identity, displayToken);
   }
 
   close() {
@@ -267,7 +294,8 @@ export default class InputPieceActionArea extends React.Component {
     // A changed account/source/key/selection is concealed in this render,
     // not one effect later. There is no render-time mutation or HTTP call.
     if (!this.isCurrent()) return null;
-    if (this.savedMode && this.sourcePhase !== 'ready') {
+    const display = readPiecePreviewDisplay(this.controller.getView());
+    if (this.savedMode && this.sourcePhase !== 'ready' && display.retryKind !== 'cancel') {
       const unavailable = this.sourcePhase === 'unavailable';
       const canRead = this.sourcePhase === 'idle' ||
         (unavailable && this.sourceCode === 'PIECE_TEMPORARILY_UNAVAILABLE');
@@ -279,15 +307,19 @@ export default class InputPieceActionArea extends React.Component {
           accessibilityLabel: 'Pieceに使う保存入力を確認' }) : null,
       );
     }
-    const display = readPiecePreviewDisplay(this.controller.getView());
     if (display.phase === 'hidden') return null;
     return element(View, { testID: 'piece-input-action-area' },
       display.phase === 'idle' ? element(Button, {
         title: 'この入力をPieceにする', onPress: this.start, accessibilityLabel: 'この入力をPieceにする',
       }) : null,
-      display.phase === 'unavailable' && !this.state.open ? element(Text, { accessibilityRole: 'alert' }, display.message) : null,
+      ['unavailable', 'cancelled'].includes(display.phase) && !this.state.open
+        ? element(Text, { accessibilityRole: 'alert' }, display.message) : null,
+      !this.state.open && display.canRetry && display.retryKind === 'cancel' ? element(Button, {
+        title: '同じ候補の取消を再試行', onPress: this.retry,
+        accessibilityLabel: '同じ候補の取消を再試行',
+      }) : null,
       element(PiecePreviewModal, { visible: this.state.open, display, onClose: this.close,
-        onRetry: this.retry, onVisualChange: this.changeVisual }),
+        onRetry: this.retry, onVisualChange: this.changeVisual, onCancel: this.cancelPreview }),
     );
   }
 }

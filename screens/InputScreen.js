@@ -657,13 +657,17 @@ const safeInsets = useSafeAreaInsets();
     !piecePreviewLoading &&
     !piecePublishLoading &&
     canSubmit;
-  const showSavedPieceInput =
+  const mountSavedPieceInput =
     savedPieceInput?.lifetime === pieceInputLifetime.current &&
     !isTutorialMode && !submitting && !emlisThread.visible && !emlisThread.busy &&
     !inputFeedbackModalVisible && !piecePreviewVisible &&
     !piecePreviewLoading && !piecePublishLoading && !startupModalVisible &&
     !draftRestoreModalVisible && !hasMemoInput && selectedEmotions.length === 0 &&
-    selectedCategories.length === 0 && activeField === null &&
+    selectedCategories.length === 0 && activeField === null;
+  // Keep the existing saved-input host through runtime refresh so its
+  // body-free cancellation receipt/unknown outcome survives. The host hides
+  // all actions while OFF and clears on owner/input/key/lifetime changes.
+  const showSavedPieceInput = mountSavedPieceInput &&
     isFeatureEnabled("piece_v2_preview_enabled", false) === true;
   const hasUserStartedInput =
     selectedEmotions.length > 0 ||
@@ -1660,9 +1664,9 @@ ${String(error?.message || error)}`
                 />
               </View>
 
-              {showSavedPieceInput ? (
-                <View testID="piece-saved-input-entry" style={styles.section}>
-                  <Text style={styles.sectionLabel}>直前に保存した入力</Text>
+              {mountSavedPieceInput ? (
+                <View testID="piece-saved-input-entry" style={showSavedPieceInput ? styles.section : undefined}>
+                  {showSavedPieceInput ? <Text style={styles.sectionLabel}>直前に保存した入力</Text> : null}
                   <InputPieceActionArea savedInput={savedPieceInput.savedInput} />
                 </View>
               ) : null}

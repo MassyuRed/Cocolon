@@ -514,3 +514,92 @@ for (const replay of ['older_revision', 'changed_body', 'different_id', 'advance
     u.host.componentWillUnmount();
   });
 }
+
+const cancelledReply = (p, replayed = false) => pieceHttp({ preview_id: p.preview_id,
+  preview_revision: p.preview_revision, row_version: p.row_version + 1,
+  lifecycle_status: 'cancelled', idempotency_replayed: replayed });
+test('explicit cancellation removes the displayed candidate and keeps terminal state through close/reopen', async () => {
+  const original = response('quote'), d = deferredPieceResponse();
+  const u = previewUiHarness({ send: async (url, opt) => opt.method === 'DELETE' ? d.promise : pieceHttp(original) });
+  u.mount(); u.host.start(); await pieceTick();
+  const cancel = uiButton(u, 'このPiece候補を取り消す'), visual = uiButton(u, 'テーマ：静かな夜');
+  cancel.props.onPress(); await pieceTick();
+  assert.equal(u.host.controller.getView().preview, null);
+  assert.equal(u.host.controller.getView().loadingKind, 'cancel');
+  assert.equal(u.nodes(u.tree()).some(n => n.props.testID === 'piece-canonical-text'), false);
+  cancel.props.onPress(); visual.props.onPress(); u.host.retry(); await pieceTick();
+  assert.equal(u.calls.length, 2);
+  d.resolve(cancelledReply(original)); await pieceTick();
+  assert.equal(u.host.controller.getView().phase, 'cancelled');
+  assert.equal(u.host.controller.getView().canSave, false);
+  u.host.close(); u.host.start(); u.host.retry(); await pieceTick();
+  assert.equal(u.calls.length, 2); assert.equal(u.host.controller.getView().phase, 'cancelled');
+  assert.equal(uiButton(u, 'この入力をPieceにする'), undefined);
+  assert.match(JSON.stringify(u.tree()), /候補を取り消しました/);
+  u.host.componentWillUnmount();
+});
+test('unknown cancel outcome explicitly retries same DELETE after original expiry without POST recovery', async () => {
+  const original = response(), u = previewUiHarness({ send: async (url, opt) => {
+    if (opt.method !== 'DELETE') return pieceHttp(original);
+    if (u.calls.length === 2) throw new Error('lost ack');
+    return cancelledReply(original, true);
+  } });
+  u.mount(); u.host.start(); await pieceTick(); uiButton(u, 'このPiece候補を取り消す').props.onPress(); await pieceTick();
+  assert.ok(uiButton(u, '同じ候補の取消を再試行'));
+  u.host.close(); u.advance(2000);
+  assert.equal(u.host.controller.getView().preview, null);
+  uiButton(u, '同じ候補の取消を再試行').props.onPress(); await pieceTick();
+  assert.deepEqual(u.calls.map(c => c[1].method), ['POST', 'DELETE', 'DELETE']);
+  assert.equal(u.calls[1][0], u.calls[2][0]); assert.equal(u.calls[1][1].body, u.calls[2][1].body);
+  assert.equal(u.host.controller.getView().phase, 'cancelled'); u.host.componentWillUnmount();
+});
+for (const boundary of ['close', 'background', 'account', 'source', 'disable', 'unmount']) {
+  test(`late cancellation does not change context after ${boundary}`, async () => {
+    const original = response(), d = deferredPieceResponse();
+    const u = previewUiHarness({ send: async (url, opt) => opt.method === 'DELETE' ? d.promise : pieceHttp(original) });
+    u.mount(); u.host.start(); await pieceTick();
+    const control = uiButton(u, 'このPiece候補を取り消す'); control.props.onPress(); await pieceTick();
+    if (boundary === 'close') u.host.close();
+    else if (boundary === 'background') u.background('background');
+    else if (boundary === 'unmount') u.host.componentWillUnmount();
+    else {
+      const next = controllerInput();
+      if (boundary === 'account') next.expectedUserId = 'other-owner';
+      if (boundary === 'source') next.idempotencyKey = 'new-source-key';
+      if (boundary === 'disable') next.enabled = false;
+      u.host.props = { context: next }; u.host.componentDidUpdate();
+    }
+    assert.equal(u.calls[1][1].signal.aborted, true);
+    d.resolve(cancelledReply(original)); await pieceTick();
+    assert.notEqual(u.host.controller?.getView().phase, 'cancelled');
+    control.props.onPress(); await pieceTick(); assert.equal(u.calls.length, 2);
+    if (boundary !== 'unmount') u.host.componentWillUnmount();
+  });
+}
+for (const code of ['PIECE_PREVIEW_STALE', 'PIECE_CONFLICT', 'PIECE_PREVIEW_EXPIRED', 'PIECE_AUTH_REQUIRED']) {
+  test(`cancel ${code} cannot rebind revision, retry POST or report success`, async () => {
+    const u = previewUiHarness({ send: async (url, opt) => opt.method === 'DELETE'
+      ? { status: code === 'PIECE_AUTH_REQUIRED' ? 401 : 409, json: async () => ({ code }) } : pieceHttp(response()) });
+    u.mount(); u.host.start(); await pieceTick(); uiButton(u, 'このPiece候補を取り消す').props.onPress(); await pieceTick();
+    assert.equal(u.host.controller.getView().phase, 'unavailable');
+    assert.equal(u.host.controller.getView().canRetry, false);
+    u.host.close(); u.host.start(); u.host.retry(); await pieceTick(); assert.equal(u.calls.length, 2);
+    u.host.componentWillUnmount();
+  });
+}
+test('old cancel callback after reopening same candidate and first action after expiry send no DELETE', async () => {
+  const u = previewUiHarness(); u.mount(); u.host.start(); await pieceTick();
+  const stale = uiButton(u, 'このPiece候補を取り消す');
+  u.host.close(); u.host.start(); await pieceTick();
+  stale.props.onPress(); await pieceTick(); assert.equal(u.calls.length, 2);
+  const current = uiButton(u, 'このPiece候補を取り消す'); u.advance(1123);
+  current.props.onPress(); await pieceTick(); assert.equal(u.calls.length, 2);
+  u.host.componentWillUnmount();
+});
+test('cancel receipt with unexpected row version stays unknown instead of claiming cancellation', async () => {
+  const u = previewUiHarness({ send: async (url, opt) => opt.method === 'DELETE'
+    ? cancelledReply({ ...response(), row_version: 4 }) : pieceHttp(response()) });
+  u.mount(); u.host.start(); await pieceTick(); uiButton(u, 'このPiece候補を取り消す').props.onPress(); await pieceTick();
+  assert.equal(u.host.controller.getView().phase, 'unavailable');
+  assert.equal(u.host.controller.getView().retryKind, 'cancel'); u.host.componentWillUnmount();
+});

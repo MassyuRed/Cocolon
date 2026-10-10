@@ -364,6 +364,37 @@ test('runtime denial before save settlement prevents a key; a later enable never
   assert.equal(h.slot(), undefined); assert.equal(h.entropyCalls(), 0); assert.equal(h.u.calls.length, 0); h.dispose();
 });
 
+test('InputScreen keeps the same cancellation host through background runtime OFF and explicit retry after refresh', async () => {
+  const d = deferred(); let h, deletes = 0;
+  h = await saved({ send: async (_url, opt) => {
+    if (opt.method === 'GET') return packet(h.ref());
+    if (opt.method === 'POST') return packet(h.u.expected);
+    assert.equal(opt.method, 'DELETE');
+    if (++deletes === 1) return d.promise;
+    return packet({ preview_id: h.u.expected.preview_id, preview_revision: 1, row_version: 2,
+      lifecycle_status: 'cancelled', idempotency_replayed: true });
+  } });
+  await h.u.host.resolveSavedInput(); h.u.host.start(); await tick();
+  const controller = h.u.host.controller, key = h.slot().props.savedInput.idempotencyKey;
+  h.u.nodes(h.u.tree()).find(n => n.props.title === '候補を取り消す').props.onPress(); await tick();
+  h.u.background('inactive'); h.control.enabled = false;
+  h.u.host.context.runtime = { loaded: true, loading: true }; h.render();
+  assert.ok(h.slot()); assert.equal(h.u.host.controller, controller);
+  assert.equal(h.u.tree(), null); assert.equal(h.entry().props.style, undefined);
+  assert.equal(h.entry().children.flat(Infinity).filter(n => n?.type === 'Text').length, 0);
+  d.resolve(packet({ preview_id: h.u.expected.preview_id, preview_revision: 1, row_version: 2,
+    lifecycle_status: 'cancelled', idempotency_replayed: false })); await tick();
+  h.u.background('active'); h.render(); assert.equal(h.u.tree(), null);
+  h.control.enabled = true; h.u.host.context.runtime = { loaded: true, loading: false }; h.render();
+  assert.equal(h.u.host.controller, controller); assert.equal(h.slot().props.savedInput.idempotencyKey, key);
+  assert.equal(h.u.calls.length, 3); assert.equal(h.u.body(), undefined);
+  assert.deepEqual(clone(h.u.names()), ['同じ候補の取消を再試行']);
+  h.u.host.retry(); await tick();
+  assert.deepEqual(clone(h.u.calls.map(c => c[1].method)), ['GET', 'POST', 'DELETE', 'DELETE']);
+  assert.equal(h.u.calls[2][1].body, h.u.calls[3][1].body);
+  assert.equal(controller.getView().phase, 'cancelled'); h.dispose();
+});
+
 test('screen-fed preview failure retries exactly the original request and key', async () => {
   let posts = 0, h;
   h = await saved({ send: async (_url, options) => {

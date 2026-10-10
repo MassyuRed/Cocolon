@@ -17,13 +17,15 @@
  *   does not install an expiry timer, AppState hook, Auth or runtime subscription.
  * - close() abandons the local attempt, NOT a server DELETE. Reopening the same
  *   context can replay the same server request/key; disable/dispose clears it.
+ *   An explicit cancelPreview keeps a body-free terminal/unknown cancellation
+ *   across close and can only retry the same DELETE, never the original POST.
  *
  * Visual-only changes use the received candidate and a local display ticket.
  * Unknown outcomes recover via the original POST/key, never a PATCH retry.
  * Receipt alone is NOT hash verification or renderer/save/export admission.
  * The display reader and native renderer own their separate checks.
  */
-import { PieceApiError, preparePiecePreviewRequest, preparePieceVisualChange, requestPiecePreview, requestPiecePreviewVisualChange } from './pieceApi';
+import { PieceApiError, preparePiecePreviewRequest, preparePieceVisualChange, requestPiecePreview, requestPiecePreviewVisualChange, requestPiecePreviewCancellation } from './pieceApi';
 import { createPiecePreviewState, closePiecePreview, beginPiecePreview, completePiecePreview, failPiecePreview, retryPiecePreview, readPiecePreviewView, readPiecePreviewDisplay, verifyPieceArtifactHashes, expirePiecePreview } from './piecePreviewModel';
 
 export function createPieceCreateController(configuration = {}) {
@@ -39,6 +41,9 @@ export function createPieceCreateController(configuration = {}) {
   let disposed = false;
   let visualRecovery = null;
   let visualUpdated = false;
+  let cancelIntent = null;
+  let cancelPhase = null;
+  let cancelCode = null;
   const recoverable = ['PIECE_TEMPORARILY_UNAVAILABLE', 'PIECE_PREVIEW_STALE',
     'PIECE_CONFLICT', 'PIECE_VISUAL_SELECTION_NOT_ALLOWED'];
 
@@ -66,11 +71,19 @@ export function createPieceCreateController(configuration = {}) {
     }
   }
 
-  function clearAttempt() {
+  function clearAttempt(keepCancellation = false) {
     const previous = active;
     active = null;
     visualRecovery = null;
     visualUpdated = false;
+    if (!keepCancellation) {
+      cancelIntent = null;
+      cancelPhase = null;
+      cancelCode = null;
+    } else if (cancelPhase === 'loading') {
+      cancelPhase = 'unavailable';
+      cancelCode = 'PIECE_TEMPORARILY_UNAVAILABLE';
+    }
     state = closePiecePreview();
     // Invalidate identity BEFORE notifying the underlying AbortSignal. Even a
     // synchronous/reentrant abort observer sees the cleared current attempt.
@@ -86,6 +99,15 @@ export function createPieceCreateController(configuration = {}) {
     if (!disposed && enabled && boundaryCode) {
       return Object.freeze({ ...view, phase: 'unavailable', preview: null,
         message: new PieceApiError(boundaryCode).message, canRetry: false });
+    }
+    if (!disposed && enabled && cancelIntent) {
+      return Object.freeze({ ...view, phase: cancelPhase, preview: null,
+        loadingKind: 'cancel', retryKind: 'cancel',
+        canRetry: cancelPhase === 'unavailable' && cancelCode === 'PIECE_TEMPORARILY_UNAVAILABLE',
+        message: cancelPhase === 'cancelled' ? '候補を取り消しました。保存回数は消費していません。' :
+          cancelCode === 'PIECE_TEMPORARILY_UNAVAILABLE'
+            ? '取消結果を確認できませんでした。同じ候補の取消を再試行できます。'
+            : cancelCode ? new PieceApiError(cancelCode).message : '' });
     }
     if (visualRecovery && view.phase === 'unavailable' && recoverable.includes(state.code)) {
       return Object.freeze({ ...view, canRetry: true, retryKind: 'recover',
@@ -232,12 +254,16 @@ export function createPieceCreateController(configuration = {}) {
   }
 
   async function start() {
-    if (disposed || !enabled || !operation || boundaryCode || state.phase !== 'idle') return;
+    if (disposed || !enabled || !operation || boundaryCode || cancelIntent || state.phase !== 'idle') return;
     await run(beginPiecePreview(state, operation.request, { ...operation, enabled: true }));
   }
 
   async function retry() {
     if (disposed || !enabled || !operation || boundaryCode) return;
+    if (cancelIntent) {
+      if (cancelPhase === 'unavailable' && cancelCode === 'PIECE_TEMPORARILY_UNAVAILABLE') await runCancellation();
+      return;
+    }
     if (visualRecovery) {
       if (state.phase !== 'unavailable' || !recoverable.includes(state.code)) return;
       // Replay only the original POST/key. Never resend a mutation or invent a
@@ -249,7 +275,7 @@ export function createPieceCreateController(configuration = {}) {
   }
 
   async function changeVisual(selection, identity, visualToken) {
-    if (disposed || !enabled || !operation || boundaryCode || active || visualRecovery) return;
+    if (disposed || !enabled || !operation || boundaryCode || active || visualRecovery || cancelIntent) return;
     if (!visualToken || visualToken !== state.ticket) return;
     const display = readPiecePreviewDisplay(getView(), clock());
     if (display.phase !== 'received' || !display.hashVerified) return;
@@ -272,11 +298,81 @@ export function createPieceCreateController(configuration = {}) {
     await run(beginPiecePreview(state, operation.request, { ...operation, enabled: true }), mutation);
   }
 
+  async function runCancellation() {
+    if (active || !cancelIntent) return;
+    const intent = cancelIntent, captured = operation;
+    // Retain only the body-free cancellation identity, never the old preview.
+    state = closePiecePreview();
+    visualUpdated = false;
+    cancelPhase = 'loading';
+    cancelCode = null;
+    let abort;
+    try { abort = new AbortController(); }
+    catch {
+      cancelPhase = 'unavailable';
+      cancelCode = 'PIECE_TEMPORARILY_UNAVAILABLE';
+      notify();
+      return;
+    }
+    const attempt = { abort };
+    active = attempt;
+    const isCurrent = () => !disposed && enabled && !boundaryCode &&
+      active === attempt && cancelIntent === intent && operation === captured;
+    notify();
+    if (!isCurrent()) return;
+    try {
+      const result = await requestPiecePreviewCancellation(intent.request, {
+        expectedUserId: captured.expectedUserId, signal: abort.signal,
+      });
+      if (!isCurrent()) return;
+      if (result.row_version !== intent.rowVersion + 1) throw new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE');
+      cancelPhase = 'cancelled';
+    } catch (error) {
+      if (!isCurrent()) return;
+      cancelPhase = 'unavailable';
+      cancelCode = error instanceof PieceApiError ? error.code : 'PIECE_TEMPORARILY_UNAVAILABLE';
+      if (cancelCode === 'PIECE_AUTH_REQUIRED') {
+        operation = null;
+        boundaryCode = cancelCode;
+        cancelIntent = null;
+      }
+    }
+    active = null;
+    notify();
+  }
+
+  async function cancelPreview(identity, displayToken) {
+    if (disposed || !enabled || !operation || boundaryCode || active || visualRecovery || cancelIntent ||
+        !displayToken || displayToken !== state.ticket) return;
+    const display = readPiecePreviewDisplay(getView(), clock());
+    if (display.phase !== 'received' || !display.hashVerified) return;
+    const preview = display.preview;
+    if (!identity || identity.preview_id !== preview.preview_id ||
+        identity.preview_revision !== preview.preview_revision ||
+        identity.visual_recipe_hash !== preview.visual_recipe_hash) return;
+    cancelIntent = Object.freeze({ request: Object.freeze({ preview_id: preview.preview_id,
+      expected_preview_revision: preview.preview_revision }), rowVersion: preview.row_version });
+    await runCancellation();
+  }
+
+  // The saved-input host may suspend a body-free cancellation during runtime
+  // refresh. It must check the same saved ID/owner/key before resuming. This
+  // never restores preview content or begins HTTP; transport reauthenticates.
+  function setCancellationEnabled(value) {
+    if (disposed || !cancelIntent || !operation || boundaryCode) return false;
+    enabled = value === true;
+    clearAttempt(true);
+    notify();
+    return true;
+  }
+
   function close() {
     if (disposed) return;
     // A conflict/invalid context remains blocked until a valid context update.
     // Retain only the current body-free request/key; drop the received body.
-    clearAttempt();
+    // Explicit cancellation is terminal/uncertain for this original request.
+    // Closing drops display data, but cannot restore POST or retry another ID.
+    clearAttempt(!!cancelIntent);
     notify();
   }
 
@@ -303,5 +399,5 @@ export function createPieceCreateController(configuration = {}) {
     clearAttempt();
   }
 
-  return Object.freeze({ setContext, getView, start, retry, changeVisual, close, subscribe, refresh, dispose });
+  return Object.freeze({ setContext, getView, start, retry, changeVisual, cancelPreview, setCancellationEnabled, close, subscribe, refresh, dispose });
 }

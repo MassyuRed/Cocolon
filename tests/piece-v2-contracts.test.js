@@ -92,7 +92,7 @@ function load({ send, session } = {}) {
   // Evaluate the actual application module. Only ESM linkage is replaced;
   // the request/response/error/session implementation is not reimplemented.
   vm.runInContext(source.replace(dependency, '').replace(/^export /gm, '') +
-    '\n globalThis.testApi = { requestPiecePreview, requestPiecePreviewVisualChange, PieceApiError };', context, { filename: sourcePath });
+    '\n globalThis.testApi = { requestPiecePreview, requestPiecePreviewVisualChange, requestPiecePreviewCancellation, PieceApiError };', context, { filename: sourcePath });
   return { ...context.testApi, calls, sessions };
 }
 const options = extras => ({ expectedUserId: OWNER, idempotencyKey: KEY, ...extras });
@@ -112,9 +112,9 @@ test('actual module reuses shared authenticated transport, without legacy/runtim
   const source = fs.readFileSync(sourcePath, 'utf8');
   assert.match(source, /import \{ apiFetch, getAccessToken \} from "\.\.\/\.\.\/lib\/apiClient"/);
   assert.doesNotMatch(source, /emotionPieceApi|PIECE_WIRE|captureApiError|AsyncStorage|console\.|setTimeout|fetch\(/);
-  // Preview/source-ref and owner operations share the same authenticated
+  // Preview/source-ref, terminal cancellation and saved-owner operations use
   // transport, each with its own closed contract and session recheck.
-  assert.equal((source.match(/await apiFetch\(/g) || []).length, 2);
+  assert.equal((source.match(/await apiFetch\(/g) || []).length, 3);
 });
 
 for (const format of ['short_essay', 'quote', 'declaration']) {
@@ -464,4 +464,55 @@ test('PATCH network failure does not automatically retry or expose a raw excepti
   const api = load({ send: async () => { throw new Error('private transport body'); } });
   await assert.rejects(api.requestPiecePreviewVisualChange(visualRequest(), visualOptions()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
   assert.equal(api.calls.length, 1);
+});
+
+const cancelRequest = () => ({ preview_id: preview().preview_id, expected_preview_revision: 1 });
+const cancelReceipt = () => ({ preview_id: preview().preview_id, preview_revision: 1,
+  row_version: 2, lifecycle_status: 'cancelled', idempotency_replayed: false });
+test('DELETE captures exact revision with owner session checks and no generation key or private fields', async () => {
+  const api = load({ send: async () => ({ status: 200, json: async () => cancelReceipt() }) });
+  const value = cancelRequest(), pending = api.requestPiecePreviewCancellation(value, visualOptions());
+  value.expected_preview_revision = 9;
+  const result = await pending, sent = api.calls[0][1];
+  assert.deepEqual(copy(result), cancelReceipt()); assert.ok(Object.isFrozen(result));
+  assert.equal(api.calls[0][0], '/emotion/piece/preview/' + result.preview_id);
+  assert.equal(sent.method, 'DELETE'); assert.equal(sent.auth, true);
+  assert.deepEqual(JSON.parse(sent.body), { expected_preview_revision: 1 });
+  assert.equal(sent.headers['Idempotency-Key'], undefined);
+  assert.equal(sent.headers['Cache-Control'], 'no-store');
+  assert.deepEqual(api.sessions, [OWNER, OWNER]);
+});
+test('invalid cancellation identity or replacement fields cannot reach HTTP', async () => {
+  for (const value of [null, {}, { ...cancelRequest(), preview_id: '../private' },
+    { ...cancelRequest(), expected_preview_revision: true },
+    { ...cancelRequest(), expected_preview_revision: 0 },
+    { ...cancelRequest(), piece_text: 'private' }]) {
+    const api = load();
+    await assert.rejects(api.requestPiecePreviewCancellation(value, visualOptions()), isCode('PIECE_REQUEST_INVALID'));
+    assert.equal(api.calls.length, 0);
+  }
+  const api = load();
+  await assert.rejects(api.requestPiecePreviewCancellation(cancelRequest(), options()), isCode('PIECE_REQUEST_INVALID'));
+  assert.equal(api.calls.length, 0);
+});
+test('cancellation never accepts a different artifact, saved state, malformed or body-bearing receipt', async () => {
+  for (const update of [{ preview_id: 'other' }, { preview_revision: 2 }, { row_version: true },
+    { lifecycle_status: 'saved' }, { idempotency_replayed: 1 }, { piece_text: 'private' }]) {
+    const api = load({ send: async () => ({ status: 200, json: async () => ({ ...cancelReceipt(), ...update }) }) });
+    await assert.rejects(api.requestPiecePreviewCancellation(cancelRequest(), visualOptions()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+    assert.equal(api.calls.length, 1);
+  }
+});
+test('cancellation account change after response conceals its receipt', async () => {
+  const api = load({ session: (owner, count) => count === 1 ? 'synthetic' : null,
+    send: async () => ({ status: 200, json: async () => cancelReceipt() }) });
+  await assert.rejects(api.requestPiecePreviewCancellation(cancelRequest(), visualOptions()), isCode('PIECE_AUTH_REQUIRED'));
+});
+test('cancellation abort remains local and an unknown network outcome is not automatically retried', async () => {
+  const a = new AbortController(); a.abort(); const api = load();
+  await assert.rejects(api.requestPiecePreviewCancellation(cancelRequest(), visualOptions({ signal: a.signal })), e => e.name === 'AbortError');
+  assert.equal(api.calls.length, 0);
+  const failing = load({ send: async () => { throw new Error('private provider detail'); } });
+  await assert.rejects(failing.requestPiecePreviewCancellation(cancelRequest(), visualOptions()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+  assert.equal(failing.calls.length, 1);
 });

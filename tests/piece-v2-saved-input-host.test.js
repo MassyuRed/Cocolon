@@ -193,3 +193,60 @@ test('a source read returning to the same retained request still publishes the r
   assert.deepEqual(u.names(), ['この入力をPieceにする']);
   assert.equal(u.calls.length, 2); u.host.componentWillUnmount();
 });
+
+for (const completed of [false, true]) {
+  test(`saved-input cancellation ${completed ? 'success' : 'unknown'} survives background runtime off/refresh without authoring`, async () => {
+    const f = fixture(), d = f.deferred();
+    const receipt = { preview_id: f.expected.preview_id, preview_revision: 1, row_version: 2,
+      lifecycle_status: 'cancelled', idempotency_replayed: completed };
+    let deletes = 0;
+    const u = fixture({ send: async (_url, opt) => {
+      if (opt.method === 'GET') return packet(ref());
+      if (opt.method === 'POST') return packet(f.expected);
+      assert.equal(opt.method, 'DELETE');
+      return ++deletes === 1 && !completed ? d.promise : packet(receipt);
+    } });
+    u.mount(); await resolver(u); u.host.start(); await tick();
+    const cancel = u.nodes(u.tree()).find(n => n.props.title === '候補を取り消す');
+    cancel.props.onPress(); await tick();
+    u.background('inactive'); u.publish(false); u.host.componentDidUpdate();
+    assert.equal(u.tree(), null); assert.equal(u.body(), undefined);
+    d.resolve(packet(receipt)); await tick();
+    u.background('active'); assert.equal(u.tree(), null);
+    u.publish(true); u.host.componentDidUpdate();
+    await resolver(u); u.host.start(); await tick();
+    assert.equal(u.calls.length, 3, 'no source read or preview replay on return');
+    assert.equal(u.body(), undefined);
+    if (!completed) {
+      assert.deepEqual(u.names(), ['同じ候補の取消を再試行']);
+      u.advance(2000);
+      u.nodes(u.tree()).find(n => n.props.title === '同じ候補の取消を再試行').props.onPress();
+      await tick();
+      assert.equal(u.calls.length, 4);
+      assert.equal(u.calls[2][0], u.calls[3][0]); assert.equal(u.calls[2][1].body, u.calls[3][1].body);
+    }
+    assert.equal(u.host.controller.getView().phase, 'cancelled');
+    u.host.componentWillUnmount();
+  });
+}
+for (const changed of ['owner', 'input', 'key']) {
+  test(`saved-input suspended cancellation cannot survive ${changed} A-B-A while runtime stays off`, async () => {
+    const f = fixture(), d = f.deferred();
+    const u = fixture({ send: async (_url, opt) => opt.method === 'GET' ? packet(ref()) :
+      opt.method === 'POST' ? packet(f.expected) : d.promise });
+    u.mount(); await resolver(u); u.host.start(); await tick();
+    u.nodes(u.tree()).find(n => n.props.title === '候補を取り消す').props.onPress(); await tick();
+    u.background('inactive'); u.publish(false); u.host.componentDidUpdate();
+    const original = { ...u.host.props.savedInput }, next = { ...original };
+    next[{ owner: 'expectedUserId', input: 'savedInputId', key: 'idempotencyKey' }[changed]] = OTHER;
+    u.host.props = { savedInput: next }; u.host.componentDidUpdate();
+    u.host.props = { savedInput: original }; u.host.componentDidUpdate();
+    u.background('active'); u.publish(true); u.host.componentDidUpdate();
+    assert.deepEqual(u.names(), ['保存入力を確認']);
+    assert.equal(u.host.controller.getView().preview, null);
+    u.host.retry(); await tick(); assert.equal(u.calls.length, 3);
+    d.resolve(packet({ preview_id: f.expected.preview_id, preview_revision: 1, row_version: 2,
+      lifecycle_status: 'cancelled', idempotency_replayed: false }));
+    await tick(); assert.deepEqual(u.names(), ['保存入力を確認']); u.host.componentWillUnmount();
+  });
+}

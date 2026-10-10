@@ -13,7 +13,7 @@ const plans = { free: 'Free', plus: 'Plus', premium: 'Premium' };
 const branding = { required_small: '小さく表示', required_subtle: '控えめに表示', off: '表示なし' };
 const themes = { soft_paper: 'ソフトペーパー', quiet_night: '静かな夜' };
 
-export default function PiecePreviewModal({ visible = false, display, onClose, onRetry, onVisualChange }) {
+export default function PiecePreviewModal({ visible = false, display, onClose, onRetry, onVisualChange, onCancel }) {
   if (visible !== true || !display || display.phase === 'hidden') return null;
   const received = display.phase === 'received' && display.hashVerified === true && display.preview;
   const preview = received ? display.preview : null;
@@ -32,8 +32,11 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
           visual_recipe_hash: preview.visual_recipe_hash,
         }, display.visualToken),
       }))) : null;
-  const loading = display.loadingKind === 'visual' ? '画像設定を更新しています。' :
+  const loading = display.loadingKind === 'cancel' ? '候補を取り消しています。' :
+    display.loadingKind === 'visual' ? '画像設定を更新しています。' :
     display.loadingKind === 'recover' ? '最新のプレビューを取得しています。' : 'Pieceを取得しています。';
+  const retryLabel = display.retryKind === 'cancel' ? '同じ候補の取消を再試行' :
+    display.retryKind === 'recover' ? '最新のプレビューを取得' : '同じ要求で再試行';
   return element(Modal, {
     visible: true, animationType: 'slide', presentationStyle: 'fullScreen', onRequestClose: onClose,
   }, element(SafeAreaView, { style: { flex: 1, backgroundColor: '#FFFFFF' } },
@@ -73,15 +76,19 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
         preview ? element(PieceVisualCard, { display }) : null,
         preview ? element(Text, { testID: 'piece-canonical-text', selectable: true,
           style: { fontSize: 18, lineHeight: 29, color: '#202020' } }, preview.piece_text) : null,
-        display.phase === 'unavailable' ? element(Text, { accessibilityRole: 'alert',
+        ['unavailable', 'cancelled'].includes(display.phase) ? element(Text, { accessibilityRole: 'alert',
           style: { fontSize: 16, color: '#202020' } }, display.message) : null,
         element(Text, { style: { fontSize: 14, lineHeight: 22, color: '#494949', marginTop: 20 } },
           'Pieceの保存・画像の書き出し・共有は、まだ利用できません。'),
       ),
       element(View, { style: { paddingTop: 12 } },
         display.canRetry === true ? element(Button, {
-          title: display.retryKind === 'recover' ? '最新のプレビューを取得' : '同じ要求で再試行', onPress: onRetry,
-          accessibilityLabel: display.retryKind === 'recover' ? '最新のプレビューを取得' : '同じ要求で再試行' }) : null,
+          title: retryLabel, onPress: onRetry, accessibilityLabel: retryLabel }) : null,
+        preview && typeof onCancel === 'function' ? element(Button, {
+          title: '候補を取り消す', accessibilityLabel: 'このPiece候補を取り消す',
+          onPress: () => onCancel({ preview_id: preview.preview_id,
+            preview_revision: preview.preview_revision, visual_recipe_hash: preview.visual_recipe_hash }, display.visualToken),
+        }) : null,
         element(Button, { title: '閉じる', onPress: onClose, accessibilityLabel: 'Pieceの本文プレビューを閉じる' }),
       ),
     ),
