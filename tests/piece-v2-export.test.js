@@ -29,7 +29,7 @@ function harness({os='ios', version=35, record=fixture()} = {}) {
     exists: async p => files.has(p),
     mkdir: async p => {calls.push(['mkdir',p]); if(files.has(p)) throw Error('EEXIST'); files.set(p,'directory');},
     ls: async p => {calls.push(['ls',p]); return ['piece-old.png','foreign.png'];},
-    unlink: async p => { calls.push(['unlink',p]); files.delete(p); },
+    unlink: async p => { calls.push(['unlink',p]); if(state.cleanupError && p.startsWith('/cache/piece-export/')) throw Error('PRIVATE '+p); files.delete(p); },
     cp: async (a,b) => {calls.push(['cp',a,b]);files.set(b,'file');},
     stat: async p => ({type:files.get(p),size:100}),
     readFileChunk: async () => state.validPng ? header.toString('base64') : 'bad',
@@ -42,7 +42,7 @@ function harness({os='ios', version=35, record=fixture()} = {}) {
     captureRef: async (node, options) => {calls.push(['capture',clone(options)]); if(state.captureWait) await state.captureWait.promise;
       return state.raw || '/cache/piece-capture/piece-new.png';},
     releaseCapture:p=>calls.push(['release',p]),
-    Share:{open:async options=>{calls.push(['share',clone(options)]); if(state.shareWait) await state.shareWait.promise; if(state.shareError) throw Error('PRIVATE');}},
+    Share:{open:async options=>{calls.push(['share',clone(options)]); if(state.shareWait) await state.shareWait.promise; if(state.shareError) throw Error('PRIVATE'); return state.shareResult;}},
     CameraRoll:{saveAsset:async(...args)=>{calls.push(['photo',...args]); if(state.photoWait) await state.photoWait.promise;}},
     NativeModules:{RNCCameraRoll:{saveToCameraRoll:async(...args)=>{calls.push(['photo',...args]); return {saved:true};}}},
   });
@@ -124,10 +124,46 @@ test('invalid pixels and changed bytes cannot reach either OS action',async()=>{
   assert.ok(changed.calls.some(c=>c[0]==='unlink'&&c[1].startsWith('/cache/piece-export/')));
 });
 test('share reserves one action before asynchronous verification and retains handed-off bytes',async()=>{
-  const h=harness(),asset=await image(h);h.state.hashWait=deferred();
+  const h=harness({os:'android'}),asset=await image(h);h.state.hashWait=deferred();h.state.shareResult={success:true};
   const share=asset.openShare();await failure(asset.saveToPhotos());h.state.hashWait.resolve();await share;
   await asset.dispose();assert.equal(count(h,'share'),1);assert.equal(count(h,'photo'),0);
   assert.equal(h.calls.some(c=>c[0]==='unlink'&&c[1].startsWith('/cache/piece-export/')),false);
+});
+for (const completed of [true,false]) test(`iOS ${completed?'completed':'cancelled'} share clears only its copy after the native session ends`,async()=>{
+  const h=harness(),asset=await image(h);
+  h.state.shareWait=deferred();h.state.shareResult=completed?{success:true,message:'PRIVATE_APP'}:{success:false,dismissedAction:true,message:'PRIVATE_APP'};
+  const pending=asset.openShare();await new Promise(r=>setImmediate(r));
+  const copied=h.calls.find(c=>c[0]==='cp')[2],directory=path.dirname(copied);
+  assert.equal(count(h,'share'),1);
+  await asset.dispose();h.state.current=false;
+  assert.equal(h.calls.some(c=>c[0]==='unlink'&&c[1]===directory),false);
+  h.state.shareWait.resolve();
+  assert.deepEqual(clone(await pending),{outcome:completed?'share_result_returned':'cancelled'});
+  assert.equal(h.calls.filter(c=>c[0]==='unlink'&&c[1]===directory).length,1);
+  await asset.dispose();assert.equal(h.calls.filter(c=>c[0]==='unlink'&&c[1]===directory).length,1);
+  assert.equal(h.calls.some(c=>c[0]==='unlink'&&c[1]==='/cache/piece-export'),false);
+  await failure(asset.openShare());
+});
+test('Android cancellation is distinct from failure but does not prove the external file can be deleted',async()=>{
+  const h=harness({os:'android'}),asset=await image(h);
+  h.state.shareResult={success:false,dismissedAction:true,message:'PRIVATE_APP'};
+  assert.deepEqual(clone(await asset.openShare()),{outcome:'cancelled'});await asset.dispose();
+  assert.equal(h.calls.some(c=>c[0]==='unlink'&&c[1].startsWith('/cache/piece-export/')),false);
+});
+test('unknown or contradictory iOS share results do not authorize cleanup or cancellation',async()=>{
+  for(const result of [undefined,null,{}, {success:'true'}, {success:false}, {success:true,dismissedAction:true}]) {
+    const h=harness(),asset=await image(h);h.state.shareResult=result;
+    assert.deepEqual(clone(await asset.openShare()),{outcome:'share_result_returned'});await asset.dispose();
+    assert.equal(h.calls.some(c=>c[0]==='unlink'&&c[1].startsWith('/cache/piece-export/')),false);
+  }
+});
+test('cleanup failure preserves iOS completion or cancellation without exposing details or sharing again',async()=>{
+  for(const completed of [true,false]) {
+    const h=harness(),asset=await image(h);
+    h.state.shareResult=completed?{success:true}:{success:false,dismissedAction:true};h.state.cleanupError=true;
+    assert.deepEqual(clone(await asset.openShare()),{outcome:completed?'share_result_returned':'cancelled',cleanup_failed:true});
+    await failure(asset.openShare());assert.equal(count(h,'share'),1);
+  }
 });
 test('dispose while verifying prevents OS handoff and waits before deleting the file',async()=>{
   const h=harness(),asset=await image(h);h.state.hashWait=deferred();const share=asset.openShare();

@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は§54を優先します。追加4依存のnative compileを実行し、Android再起動時の既存cache処理を補修しています。canSave/canExport=false、正式fit/admission未付与、製品UI未接続です。**
+**現在は§55を優先します。4依存の両OS library compile成功を継承。iOS共有session終了後の専用copy回収と取消結果を接続しました。Android／結果不明のcopy回収、正式fit/admission・製品UI接続・実機確認は残ります。canSave/canExport=falseを維持します。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1994,3 +1994,31 @@ iOS logはcompiler warning130行を含む。既存依存のdeprecated API・null
 4依存は固定構成で両OSのlibrary compileまで確認できた。次は**端末上のB9描画同等性・glyph/ink/性能、PNG実bytes／寸法／色、写真への追加権限と保存、共有先の読取継続**。app全体build・実端末動作は今回未確認。正式renderer admission→保存前fit→既存保存controller／export hostのUI接続が残り、canSave/canExport=falseとprototype v3を維持する。ライブラリcompile成功で操作を有効化しない。
 
 共有copy回収・B13-B body-free receipt・形式変更・Nexus公開読取／切替・M5／実Auth／稼働構成も残る。画像共有の全完成を初回実機確認への追加前提にしない。API/SQL/native library patch／依存版の追加変更0、Supabase操作・DB書込・env/deploy/activation・app build・署名／配布・main merge0。weekly§5.5・12/18目標を維持。STRUCTURE_MAP_DELTA_UPDATED（再起動動作と両OS検証範囲）／automatic_progression=false。
+
+
+## 55. 2026-10-11 — iOS共有session終了後のcopy回収
+
+### 55.1 直接作業・判断根拠
+
+基準head `0892b49913557cfeb258a66e3923b057e6b515aa`、入口§50／本map§54と最新weekly§5.5から再開。PCE5 `Piece_Export_Owner_Comparison_20260808.md` §12が定めるshare/save completion後の一時file回収のうち、iOSで終了を確認できる共有sessionを実装対象にした。DIRECT_PRODUCT_OR_ACCEPTANCE_WORK／既存設計内の可逆なsource補修。root一人がsource1・test1・資料3を編集し、同環境read-only補助reviewを使用する。別modelの正式受入れとはしない。
+
+[AppleのcompletionWithItemsHandler仕様](https://developer.apple.com/documentation/uikit/uiactivityviewcontroller/completionwithitemshandler-swift.property?changes=_9)は、選択serviceのdata操作終了またはview controllerのdismiss時にfinal resultを返す。固定 `react-native-share@12.3.1` の `ios/RNShare.mm` はこのcallbackからsuccess booleanをresolveし、`src/index.tsx` はsuccess=falseをdismissedAction=trueへ正規化する。今回呼ぶ通常Share.openはsaveToFiles／shareSingleを使わない。この実sourceと仕様を照合し、iOSの正規resolveをlocal共有session終了として回収へ使う。相手への送信・配達・受信成功を認定するものではない。
+
+Androidの同版TargetChosenReceiverは共有先選択時にsuccess=trueを返すため、同条件での削除はできない。PCE5のapp start時stale cleanupはcandidateであり、再起動を読取終了へ読み替える条件ではない。従来§53.4のhandoff後一律保持は本節のiOS正規終了だけ更新し、Android・未知／例外・異常終了残存は保持する。任意TTLや新しい回収契約を追加しない。
+
+### 55.2 実在owner・動作と検証
+
+| path | 変更内容 |
+| --- | --- |
+| `features/piece/pieceExport.js` | iOSのsuccess=trueかつdismissedAction未付与、又はsuccess=falseかつdismissedAction=trueのときだけhandedOffを解除し、既存finallyから専用session directoryを回収。取消はbody-free `cancelled`、その他は既存 `share_result_returned`。未知・矛盾・reject・Androidはcopy保持。 |
+| `tests/piece-v2-export.test.js` | iOS成功／取消終了前のdisposeと本人変更、終了後だけの限定削除・再dispose、Android取消の分類と保持、未知／矛盾した応答、cleanup失敗時の結果保持と再共有拒否を追加。既存の二重操作検査はAndroid正規successで保持を確認。 |
+
+新5件を加えた修正前export検査は **15 PASS／4 FAIL**、原因は未実装の回収・取消分類。source補修後 **19 PASS／FAIL0／SKIP0**。local全12suiteは **577 PASS／FAIL0／SKIP0**。API/Auth/React/native/filesystem/OSは代替を含み、実native share callbackや外部appで観測した結果ではない。CI結果は後続へ記録する。
+
+補助reviewで、確定した取消結果がfinallyのcleanup例外で上書きされる不具合を検出した。追加条件で19件中18 PASS／1 FAILを確認後、共有結果の確定後はoutcomeを保持し、後片付けの失敗だけbody-free `cleanup_failed:true` を付けるよう補修した。確定前の失敗は既存coarse errorを維持する。file pathやnative exceptionを出さず、同じassetを再共有しない。取消を共有失敗metricへ変換せず、画像送信成功や正式receiptを新設しない。今回のnative source／依存／workflow変更は0で、前回CI38094296963の両OS library compile成功を今回の再実行結果へ換算しない。
+
+### 55.3 残る直接経路
+
+次は正式renderer admissionと保存前fit、既存保存controller／export hostのUI接続、および端末B9描画／PNG実bytes／写真保存共有の確認。`PieceExportCanvas` と `preparePieceExportPrototype` に製品callerがない状態を保持している。simulator appを起動するだけではこの経路へ到達しない。隔離描画用entryの調査では、cardからpieceApi→apiClient→Supabaseの間接初期化と、AppDelegateのFirebase初期化を確認した。entry差替えだけを通信隔離済みとせず、今回新しいharness／native app buildは追加していない。この調査を新しい恒久Gateや初回実機確認の追加前提にしない。
+
+Android／結果不明／異常終了後の共有copy回収、B13-B receipt、形式変更、Nexus公開読取／切替、M5／実Auth／稼働構成も残る。canSave/canExport=false、prototype v3を維持。画像共有の全完成を初回実機確認までの追加前提にしない。API／SQL／Supabase操作・DB書込・env/deploy/activation・署名／配布・main merge0。全体設計・file map・作業ルール・恒久incident全文を参照し、system_context prepareはshallow clone祖先判定exit2のためcanonical原本を直接確認した。weekly§5.5・12/18目標・automatic_progression=falseを維持。STRUCTURE_MAP_DELTA_UPDATED（一時file lifecycle）。

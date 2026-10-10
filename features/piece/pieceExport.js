@@ -154,16 +154,34 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
         },
         async openShare() {
           begin();
+          let outcome = null, cleanupFailed = false;
           try {
             await verify();
             current(); if (disposed) throw failed();
-            // Android resolves when a target is selected, not when it stops
-            // reading. Neither callback, backgrounding nor dispose deletes this.
+            // Hand off conservatively until a platform's session-end result is
+            // known. Backgrounding, dispose and a rejected/unknown result do
+            // not establish that an external reader has finished.
             handedOff = true;
-            await Share.open({ url: `file://${path}`, type: 'image/png', filename, failOnCancel: false });
-            return Object.freeze({ outcome: 'share_result_returned' });
+            const result = await Share.open({ url: `file://${path}`, type: 'image/png', filename, failOnCancel: false });
+            const cancelled = result?.success === false && result.dismissedAction === true;
+            const completed = result?.success === true && result.dismissedAction === undefined;
+            // Pinned RNShare on iOS resolves from UIActivityViewController's
+            // completionWithItemsHandler after the service ends/dismisses.
+            // Android success resolves at target selection, so its copy stays.
+            if (Platform.OS === 'ios' && (completed || cancelled)) handedOff = false;
+            outcome = cancelled ? 'cancelled' : 'share_result_returned';
           } catch { throw failed(); }
-          finally { operating = false; disposed = true; await cleanup(); }
+          finally {
+            operating = false; disposed = true;
+            try { await cleanup(); }
+            catch {
+              // An observed share result must survive a later cleanup failure,
+              // especially cancellation. Never expose native errors or paths.
+              if (!outcome) throw failed();
+              cleanupFailed = true;
+            }
+          }
+          return Object.freeze({ outcome, ...(cleanupFailed ? { cleanup_failed: true } : {}) });
         },
         async dispose() { disposed = true; await cleanup(); },
       });

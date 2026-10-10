@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v49",
+  "schema_version": "cocolon.piece.workstream_manifest.v50",
   "generated_at": "2026-10-11 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v48",
-    "predecessor_blob": "8fc829b2626f271251e3a02dbc5f14b36dbc6199",
-    "predecessor_head": "e5980b4ee1d8164fc2eca73b7a12d1e0269566d7",
-    "carry_forward": "Four pinned export libraries compiled on iOS simulator and Android. Raw-cache restart bug fixed; 572 JS tests pass. Device rendering, formal admission/fit, UI connection and shared-copy recovery remain pending."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v49",
+    "predecessor_blob": "59aa6ab933b6ba40e411d41872f9b46f3db7f227",
+    "predecessor_head": "0892b49913557cfeb258a66e3923b057e6b515aa",
+    "carry_forward": "iOS normal share-session completion now releases its owned temporary copy; cancellation is explicit. Android and unknown handoff recovery, device admission, save fit, UI and receipt remain pending."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "17d8856176819a99c7148bab0a90d5075ee07392",
-    "raw_sha256": "a0c4b8bf7ced61d827389681e62b27ce55e49a5f143dc8a67d6ddc5b83bd2aca",
-    "utf8_bytes": 87615
+    "git_blob_sha1": "777798ca26cda66a778990693c7f9d5994bab0f4",
+    "raw_sha256": "ea86d41ecb660a8f85537d4f67d4b59f8ef77cb469bf212afdb222ab25b33727",
+    "utf8_bytes": 89006
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -82,7 +82,8 @@
     "pce9a_private_save_composition": "REMOTE_CANDIDATE_REGISTERED__ISOLATED_CI1789_PASS__NOT_LIVE",
     "pce9c_save_transport": "REMOTE_CI557_PASS__SAVE_ACTION_NATIVE_FIT_DEVICE_PENDING",
     "pce9e_export_preflight": "HISTORICAL_SOURCE_REVIEWED_PINNED_PROPOSAL__CURRENT_IMPLEMENTATION_IN_EXPORT_NATIVE_COMPILE_20261011",
-    "pce9e_export_native_compile": "REMOTE_E4F4984__IOS_ANDROID_LIBRARY_COMPILE_PASS__JS572_PASS__DEVICE_ADMISSION_PENDING"
+    "pce9e_export_native_compile": "REMOTE_E4F4984__IOS_ANDROID_LIBRARY_COMPILE_PASS__JS572_PASS__DEVICE_ADMISSION_PENDING",
+    "pce9e_export_share_completion": "IOS_NORMAL_COMPLETION_COPY_CLEANUP__LOCAL_JS577_PASS__DEVICE_PENDING"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -164,7 +165,7 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "e5980b4ee1d8164fc2eca73b7a12d1e0269566d7",
+    "cocolon_pre_sync_head": "0892b49913557cfeb258a66e3923b057e6b515aa",
     "mashos_api_head": "6b901a1df0037c047513e794624917a09b0f3ac4",
     "current_user_visible_piece_shape": "OLD_QNA_REGISTERED_IN_SOURCE__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
@@ -180,7 +181,7 @@
     "input_screen_source_connected": true,
     "live_auth_input_to_preview_to_device_verified": false,
     "database_evidence_owner": "live_db_apply_20261010",
-    "remaining_work_owner": "export_native_compile_20261011",
+    "remaining_work_owner": "export_share_completion_20261011",
     "product_acceptance": false,
     "piece_v2_default_application_registered": false,
     "piece_v2_quota_http_present": true,
@@ -219,12 +220,12 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "NATIVE_DEVICE_RENDERER_ADMISSION_THEN_SAVE_FIT_AND_BOUND_SAVE",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "NATIVE_EXPORT_LIBRARIES_COMPILED__DEVICE_FIT_PENDING",
-    "current_map_section": "54.3",
-    "current_entry_section": "50",
+    "state": "IOS_SHARE_COMPLETION_CLEANUP_CONNECTED__DEVICE_FIT_PENDING",
+    "current_map_section": "55.3",
+    "current_entry_section": "51",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
     "weekly_review_section": "5.5",
-    "first_unfinished_work": "B9 device equivalence and native PNG/photo/share behavior -> renderer admission -> save fit -> UI save/export integration. Shared-copy recovery and B13-B receipt pending; export completion is not a prerequisite for first device inspection.",
+    "first_unfinished_work": "B9 device equivalence and native PNG/photo/share behavior -> renderer admission -> save fit -> UI integration. Android/unknown shared-copy recovery and B13-B receipt pending; export completion is not a prerequisite for first device inspection.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 4,
@@ -250,7 +251,7 @@
     "repeat_private_save_candidate_connection": false,
     "repeat_rn_save_transport": false,
     "export_proposal_owner": "export_dependency_preflight_20261011",
-    "export_implementation_owner": "export_native_compile_20261011"
+    "export_implementation_owner": "export_share_completion_20261011"
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -304,9 +305,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "bcf6ed4984f3de38f6bc92d9cc0c8597c01910ab",
-    "raw_sha256": "8dcf56fb7abb229aaf0d736345d7a81c96b43560576a6c7c1e8cb05bae2bbcd1",
-    "utf8_bytes": 295926
+    "git_blob_sha1": "a5c390435486e4cae7366003ec095bacc6da54ad",
+    "raw_sha256": "72053faf081c714538ac9f8b9aab5b72e282edc3fe08b769d3f38483368d4825",
+    "utf8_bytes": 301098
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -479,21 +480,18 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "EXPORT_RAW_CACHE_RESTART_FIX_AND_NATIVE_LIBRARY_COMPILE",
+    "classification": "IOS_SHARE_SESSION_COMPLETION_CLEANUP_AND_CANCEL_RESULT",
     "piece_documentation_paths": 3,
-    "api_product_paths": 0,
-    "api_test_paths": 0,
     "rn_changed_paths": 1,
     "rn_test_paths": 1,
-    "workflow_changed_paths": 1,
+    "workflow_changed_paths": 0,
     "native_changed_paths": 0,
+    "api_product_paths": 0,
     "sql_changed_paths": 0,
     "new_dependency": 0,
     "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
-    "local_js_passed": 572,
-    "ci_js_passed": 572,
-    "ios_native_library_compile": "SUCCESS",
-    "android_native_library_compile": "SUCCESS",
+    "local_js_passed": 577,
+    "ci_pending": true,
     "live_database_apply": 0,
     "release_effect": 0,
     "native_app_builds": 0,
@@ -3587,5 +3585,61 @@
     "outcome": "BLOCKER_NARROWED",
     "new_test_runs": 0,
     "native_app_builds": 0
+  },
+  "historical_current_sync_effects_before_export_share_completion_20261011": {
+    "classification": "EXPORT_RAW_CACHE_RESTART_FIX_AND_NATIVE_LIBRARY_COMPILE",
+    "piece_documentation_paths": 3,
+    "api_product_paths": 0,
+    "api_test_paths": 0,
+    "rn_changed_paths": 1,
+    "rn_test_paths": 1,
+    "workflow_changed_paths": 1,
+    "native_changed_paths": 0,
+    "sql_changed_paths": 0,
+    "new_dependency": 0,
+    "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
+    "local_js_passed": 572,
+    "ci_js_passed": 572,
+    "ios_native_library_compile": "SUCCESS",
+    "android_native_library_compile": "SUCCESS",
+    "live_database_apply": 0,
+    "release_effect": 0,
+    "native_app_builds": 0,
+    "product_acceptance": false,
+    "automatic_progression": false
+  },
+  "export_share_completion_20261011": {
+    "current_entry_section": "51",
+    "current_map_section": "55",
+    "base_head": "0892b49913557cfeb258a66e3923b057e6b515aa",
+    "state": "IOS_SHARE_COMPLETION_CLEANUP_CONNECTED__CI_PENDING",
+    "ios_known_session_end_cleanup": true,
+    "cancelled_outcome_present": true,
+    "android_shared_copy_recovery": false,
+    "unknown_result_copy_recovery": false,
+    "cleanup_on_background_or_restart": false,
+    "local_causal_red_passed": 15,
+    "local_causal_red_failed": 4,
+    "local_export_passed": 19,
+    "local_export_failed": 0,
+    "local_js_passed": 577,
+    "local_js_failed": 0,
+    "local_js_skipped": 0,
+    "ci_pending": true,
+    "prior_native_compile_evidence_owner": "export_native_compile_20261011",
+    "native_device_acceptance": false,
+    "formal_fit_admission": false,
+    "product_ui_connected": false,
+    "receipt_connected": false,
+    "app_build": 0,
+    "signing": 0,
+    "distribution": 0,
+    "live_database_write": 0,
+    "activation": 0,
+    "main_merge": 0,
+    "automatic_progression": false,
+    "cleanup_failure_preserves_share_outcome": true,
+    "review_causal_red_passed": 18,
+    "review_causal_red_failed": 1
   }
 }
