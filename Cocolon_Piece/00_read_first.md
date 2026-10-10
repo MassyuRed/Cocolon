@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§47／current map §51を優先する。既存RNへ保存APIの通信処理を追加しました。本文を再送せずpreviewの版・3hashと同じkeyを保持し、再取得では現在の公開範囲を受け取ります。local/CIとも11suite557 PASS／FAIL0／SKIP0。実機描画・保存前fit・保存ボタン接続・画像共有・稼働採用は残っています。**
+**現在は§48／current map §52を優先する。画像保存・共有に必要な直接4依存の固定版・native設定・互換修正を、B13-Aの導入候補として整理しました。未導入・未ビルドで、個別承認待ちです。既存の保存通信は維持し、native描画受入れ・保存前fit・保存操作・画像共有・稼働採用は未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -974,3 +974,12 @@ source `ca4ce05cf1f62ed5fad3a0a72733e2956d8ae0a7` の製品1＋test1をDraft PR 
 
 
 §47最終確認：[CI38090399330](https://github.com/MassyuRed/Cocolon/actions/runs/38090399330)はInputScreen込み11suite **557 PASS／FAIL0／SKIP0**、Android単体source compile・iOS syntax-only/既存patch/pbxprojも成功。Node24.21.0／TypeScript5.2.2。既存contract guards等も全success。localとCIの合算なし。Android既存annotation不足警告18件と検査境界はmap§51.2へ記録した。保存操作・native fit・実機の完成ではない。
+
+
+## 48. 2026-10-11 — 画像保存・共有の依存導入案（B13-A・未導入）
+
+詳細ownerはcurrent map §52。既読の全体設計・全ファイル地図・前回txtと最新weekly10/10 §5.4–5.5を引き継ぎ、既存source・PCE5/PCE6・PCE8 B13-A/Cを照合した。MashのPiece続行指示に基づき、画像保存共有に必要な直接4依存の候補を一次sourceの固定SHAで確認した。`react-native-view-shot@5.1.1`、`react-native-share@12.3.1`、`@react-native-camera-roll/camera-roll@7.10.2`、`react-native-file-access@3.2.0`。最新版への無条件追従はせず、RN0.77.3・旧architectureを維持する案とする。
+
+規定filename・内部cacheへのコピー・同じPNGのhash・限定した共有provider・写真への追加権限と、Node更新およびRNFAのAndroid互換patchが必要。共有先選択を読取完了と誤認した即時削除、異常終了時のraw capture残存は実装で解消すべき未確認点として明記した。動作適合済み・cleanup完了とは扱わない。
+
+今回は入口/map/manifestの3資料のみ更新。製品source・依存追加・lock/native設定変更・新規検査・ビルド・Supabase操作・env/deploy/activation/main mergeは0。先行RN557件/API1,789件は今回再実行していない。B13-A/Cとweekly§5.4に従い、4依存＋記載したnative設定/互換修正の個別承認を求め、その後に既存B13-Cの画像保存共有実装へ進む。承認に稼働有効化・TestFlight配布は含めない。native B9実機描画/renderer admission→保存前fit→保存操作の本線を保持し、画像exportの全完成を実機確認の新しい前提にしない。BLOCKER_NARROWED／automatic_progression=false。

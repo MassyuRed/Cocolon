@@ -1851,3 +1851,60 @@ Auth/HTTP/React/nativeは合成を含む。通信の要求固定・結果検証�
 次は既存native B9の実端末描画同等性・glyph/ink/性能、renderer admission→保存前fit→controller/modalの同preview保存操作。新transportを利用し、同key/要求保持・未知結果・停止・本人切替を画面状態へ結ぶ。今回の通信ownerや§50の候補APIを再実装しない。形式変更、capture/画像保存共有、Nexus v2公開読取/公開切替、M5/実Auth・稼働構成が残る。
 
 API/native/SQL/依存定義/workflow変更0、Supabase操作0、env/deploy/activation/native app build/main merge0。001〜004適用済み、005 quotaとvisual変更SQLの2本未適用は§50の先行確認を継承し、今回再照会したとは扱わない。weekly §5.5の実機順序と12/18公開目標を保持し、Piece全内容完成を実機確認の前提へ追加しない。TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false。
+
+
+## 52. 2026-10-11 — B13-A画像保存・共有依存の導入候補（未導入）
+
+### 52.1 現在の残件と今回の範囲
+
+開始Cocolon `163b9aff9d3ba8c0c4b5f13c9383361b90db4e77`、API `6b901a1df0037c047513e794624917a09b0f3ac4`。全体設計・全ファイル地図・前回txtの既読を引き継ぎ、CURRENT_RULES、必読incident全文、最新weekly10/10 §5.4–5.5、PCE5画像/export契約、PCE6 RN flow、PCE8 B10/B13-A/Cと環境ledger、現行sourceを照合した。全sourceの再監査ではない。Mashの今回の明示対象はPieceであり、週次の先行実機対象・12/18目標を変更しない。
+
+§51の保存通信は既存ownerを利用する。`native_checked` は現prototypeの測定結果で、正式renderer admission／保存前fitではない。APIのsave-readyもnative admissionを認定しない。quotaや文字列の一致だけでcanSave/canExportを有効にしない。端末確認を合成検査へ置き換えず、既存の別残件B13-A（読取と導入判断準備）を進めた。
+
+`package.json` にcapture/share/camera-roll/file-accessは現在ない。RN0.77.3／React18.3.1／両OS旧architecture、iOS15.1、Android minSdk24／compileSdk35／AGP8.9.0を維持する導入候補とする。以下はソースと宣言上の整合確認であり、この組合せのnative build成功は未確認。
+
+### 52.2 直接依存4件の固定候補と一次資料
+
+| 用途・package固定版 | 固定source（tag対応commit） | 採用理由・制約 |
+|---|---|---|
+| PNG capture：`react-native-view-shot` **5.1.1** | [v5.1.1](https://github.com/gre/react-native-view-shot/tree/b92795723f4aba2538d10b121f872493bd1c7d2e) | packageはReact>=18／RN>=0.76、Node>=20.19.4／npm>=10。旧architectureのsourceあり。v6系はRN>=0.80のため採用しない。5.1.1 releaseは2026-06-20。 |
+| OS共有：`react-native-share` **12.3.1** | [v12.3.1](https://github.com/react-native-share/react-native-share/tree/7a429e6a6199e55dad9fbfc6b46fd7a5c25f9970) | PNGのローカルfile共有に限定。Node>=16、旧architectureのsourceあり。releaseは2026-05-04。RN core ShareのAndroidは画像file共有を満たさないため使用。 |
+| 写真へ保存：`@react-native-camera-roll/camera-roll` **7.10.2** | [v7.10.2](https://github.com/react-native-cameraroll/react-native-cameraroll/tree/e56436f1d3e0a7b95d392e9a7c2c3d8c066731c7) | Node>=18.17、RN>=0.59宣言。iOS add-only、Android29以上MediaStoreのsave sourceを確認。releaseは2025-08-06。 |
+| 一時file管理：`react-native-file-access` **3.2.0** | [v3.2.0](https://github.com/alpha0010/react-native-file-access/tree/e8c8816f8732457ae49e034eda0e8c0123fd3b42) | 規定filenameで内部CacheDirへcp、SHA-256、限定dirのls/unlinkに使用。README上の旧architecture対応3.x。4.xは旧architectureを廃止しており代用しない。3.2.0 releaseは2025-08-22。下記AGP互換patchが必要。 |
+
+4件ともpackageのlicense宣言はMIT。公開release日時・指定tagの実sourceを確認したが、将来の保守やnative適合を保証する評価ではない。直接JS依存を完全一致版（`^`/`~`なし）にし、承認後のinstall時にregistry integrityと全推移依存をlockへ固定する。view-shotにはhtml2canvas、RNFA podspecには版未指定のZIPFoundationがある。「native追加も4個だけ」とは扱わない。
+
+3依存のみでraw captureを直接渡す案では規定filename・内部cache・限定清掃を満たせない。特にview-shotのiOSはfileNameを使わず、Androidは空き容量により外部cacheを選ぶ。一方shareの標準FileProviderにはexternal-cache-pathがない。4件目はこの差を吸収するfile管理ownerであり、hashのためだけに導入するものではない。backend/hybridへの切替やRN本体upgradeは提案に含めない。
+
+### 52.3 承認後の変更箇所・実装条件・戻し方
+
+| 変更候補path | 具体的内容 |
+|---|---|
+| `package.json` / `package-lock.json` | 上記直接4件を完全一致版で追加。既存依存を一括更新しない。推移依存とintegrity差分を確認。 |
+| `.github/workflows/ios-build.yml` | 現Node18を、既存RN source CIでも使用した**24.21.0**へ固定し、view-shot engine条件を満たす。workflow編集とdispatchは別。 |
+| `ios/Podfile` / `ios/Podfile.lock` | autolinkとlock差分を確認。RNFAでfile-space/timestamp APIを使用しないため `$RNFANoPrivacyAPI = true` を設定。ZIPFoundation等の実際の版はinstall後に記録。 |
+| `ios/tempCocolon/Info.plist` | `NSPhotoLibraryAddUsageDescription`＝「Pieceの画像を写真ライブラリに保存するために使用します。」を追加。album指定なしのadd-only保存を用いる。 |
+| `patches/react-native-file-access+3.2.0.patch` | 既存patch-packageでAGP8.9対応を限定補修：`namespace "com.alpha0010.fs"`、`buildFeatures { buildConfig = true }`、library manifestのpackage属性をnamespaceへ移す。現3.2.0にはnamespace/buildConfig有効化がなく、無修正の適合とは扱えない。適用後の実compileで確認する。 |
+| `android/app/src/main/res/xml/share_download_paths.xml` | library resourceをapp側で上書きし、共有対象を `<cache-path name="piece_export" path="piece-export/" />` に限定。外部cache全体やapp cache rootを公開対象にしない。 |
+| `features/piece/pieceExport.js` / `components/piece/PieceExportCanvas.js` と既存visual/owner UI | PCE8 B13-Cの既存owner計画に沿ってcapture・端末保存・共有を接続。すでに存在するrenderer/layoutを新規再実装しない。操作停止・本人切替・古い描画結果の破棄は既存契約を継承。 |
+
+想定file経路は、同一の保存済みPiece/recipe/hashからPNGをcaptureし、`Dirs.CacheDir/piece-export/<session-random>/` へコピーしてPCE5の `cocolon-piece_<piece-uuid-no-hyphen>_<visual-recipe-hash-first12>_<ratio-token>.png` を付ける。そのコピーのSHA-256を計算し、同じbytesを共有／写真保存へ渡す。本文・画像bytes・temp pathを監視ログやサーバーreceiptへ入れない。raw captureの戻り値はそのまま保持し、URI正規化した共有用値とは分けて `releaseCapture` に返す（iOSはraw pathを前提とする）。
+
+端末権限は保存操作時に限る。iOSは写真への追加権限で、一覧読取権限を要求しない。Android29以上はこの自作画像のMediaStore追加、24–28は既存WRITE_EXTERNAL_STORAGEの実行時権限を利用する。画像一覧読取・個別SNSの追加queries・base64共有を導入しない。既存の無関係なmanifest権限整理は今回範囲外。
+
+以下は実装・端末確認で閉じる必要があり、preflightで解消済みにしない。
+
+- **共有file寿命**：Androidのshare成功callbackは共有先選択時にも返る。外部appの読み終わりではないため、成功直後のfinallyでunlinkしない。共有session終了・次回起動時の限定清掃へ結び、共有先の読取を壊さない条件を実機で確認する。OS復帰だけを読取完了の証明にも使わない。未定の保持時間を契約へ追加しない。
+- **capture直後の異常終了**：cp→release前に終了すると、元のcache root／iOS ReactNative tmpへraw PNGが残り得る。`piece-export/` の清掃だけでは回収できない。capture出力を専用領域へ限定する小さなview-shot patch等の実装を検討し、必要差分を記録・検証する。app cache全体やReactNative共用tmpを削除しない。未解決のままexportを有効化しない。
+- **native適合と描画**：4件同時autolink、RNFA patch、PNG寸法/透過/字体・同一canvas、保存権限拒否、共有中の中断・本人変更・再起動を実nativeで確認する。現prototype v3の `native_checked` を正式fit/admissionへ読み替えない。
+- **B13-B receipt**：同じ保存record/hashに束縛したbody-free export receiptのbackend残件を保持する。クライアントのhash計算だけでreceipt保存・正式export完了とは扱わない。
+
+導入は依存/native設定とexport実装の差分を分けて確認可能にする。失敗時は今回追加した依存・lock・plist/provider・patch・workflow差分とexport配線だけを戻し、既存保存通信とrendererを保持する。featureは既定OFFを維持し、DBや保存済みPieceを移行しない。すでに端末写真／共有先へ出たコピーの回収はできない。既存iOS workflowはTestFlight uploadまで行うため、compile確認のつもりでdispatchしない。
+
+### 52.4 今回の結果と再開位置
+
+入口§48・本節・manifestの3資料だけを更新。製品source/API/SQL/native設定/lock/workflow変更0、新依存install0、新規test実行0、Supabase操作0、env/deploy/activation/native app build/main merge0。先行RN557 PASS／API1,789 PASSは今回再実行していない。001〜004適用済み、005 quota／visual変更SQL未適用も先行証拠を継承する。rootが一次資料を読み、同環境read-only補助reviewでRNFAのAGP設定不足・共有callbackとraw cleanupの限界を追加した。独立modelの正式受入れではない。
+
+**次の個別判断は上記4依存と列挙したnative設定／互換修正の導入**。PCE8 B13-Aはread-only、B13-CはB13-A承認後だけpackage/native依存を変更する指定であり、weekly§5.4でも新依存は承認範囲を個別に照合する。今回の一般的な続行指示を、この新しい具体構成の導入承認へ自動換算しない。承認後は同じ資料調査を繰り返さず、lock固定・必要互換修正・B13-Cの画像保存共有source準備へ進む。現段階はSOURCE_REVIEWED_PINNED_PROPOSAL、native適合済みでもB13完了でもない。
+
+§51.3の本線（実機native B9描画同等性/glyph/ink/性能・renderer admission→保存前fit→同previewの保存操作）と、形式変更、Nexus公開読取/切替、M5/実Auth/稼働配置は残る。画像共有の全完成をPieceの実機確認に対する追加前提へしない。導入承認に本番flag変更・API配置・TestFlight配布・DB適用を含めない。BLOCKER_NARROWED／STRUCTURE_MAP_DELTA_UPDATED（導入候補と実在ownerの区別）／automatic_progression=false。
