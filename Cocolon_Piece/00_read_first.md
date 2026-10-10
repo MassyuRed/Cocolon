@@ -829,3 +829,5 @@ API CI 38019674020＝1,537 PASS、RN CI 38019722996＝365 PASS（既存8suite）
 最新の詳細ownerはcurrent map §38。既存履歴メニューからowner_read flag有効時だけ「自分のPiece」へ進み、canonical全文・公開状態・保存日時・形式/テーマ/比率を表示する。本人専用APIを使い、Nexus/共鳴履歴を流用しない。公開変更は明示確認＋expected_row_version、競合時は最新詳細再読。削除は外部画像回収不可/回数不返還の確認後だけで、応答不明時は同じkey/versionによる明示再試行。本人切替/背景化/離脱/停止後の古い結果を表示しない。
 
 今回のlocal検査はowner32件＋既存7suite336件＝368 PASS。別途既存CIでInputScreenも含め確認する。Auth/HTTP/React/nativeは代替を含み、実機・B11全体・商品受入れの成立ではない。保存前native fitが未接続と判明したため、本文からの保存は有効化していない。次はnative画像プレビューと保存前fit、その後に同じpreviewの保存接続。画像保存共有・M5・005稼働適用・実Auth/実機も残る。001〜004適用済みをread-only migration履歴で確認し、再適用なし。製品API/SQL/env/deploy/native build/main mergeは不変更。weekly review §5.5と12/18目標を維持し、automatic_progression=false。
+
+§34最終確認：実装commit `11b61579ff0f119bfbbf12e1fecd60354667ffb3` の[CI 38021152558](https://github.com/MassyuRed/Cocolon/actions/runs/38021152558)で、InputScreenを含む9suite **397 PASS／FAIL0／SKIP0**。GitHub再取得で対象14fileの内容と変更pathを照合した。local368件とは別に足さない。今回のコード接続は反映済み、稼働有効化・native画像/保存・実機は未実施。

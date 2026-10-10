@@ -1324,3 +1324,9 @@ React reconciliation・Hermes・native画像・実Auth/PostgREST/DBは合成ま�
 次の直接残件はPCE-5の同じlayout ownerを使うnative画像プレビューと保存前fitの接続。その結果を表示中のpreview identity/revision/3hashへ結び、既存保存APIへ進める。画像capture/端末保存/外部共有、preview設定変更、M5旧経路移行と稼働設定、005適用、実Auth/端末確認は残る。本文履歴接続を新Piece全体の完成にしない。
 
 設計図01と関連01B、全ファイルの構造地図・historical inventory、current map、作業CURRENT_RULES/Rule18/恒久incident全文、PCE-5/6/7/8、最新weekly review 10/10 §5.5を照合した。生成System Contextの過去prepare成功を継承せず、入口の原典直接読取fallbackに従いcurrent GitHubと一致するcheckoutの原典を参照した。本作業でprepare成功を主張しない。Emlis/分析の先行実機確認順と12/18公開目標を維持する。API製品・SQL・環境設定・deploy・activation・native build・main mergeは変更しない。STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false。
+
+### 38.4 GitHub反映・最終CI確認
+
+実装と資料14fileをcommit `11b61579ff0f119bfbbf12e1fecd60354667ffb3` でPR #30へ反映。通常git pushはHTTPS認証情報なしで失敗したため、利用可能なGitHub connectorから同じ14fileをnon-force反映し、GitHub再取得で全対象bytesと変更path集合の一致を確認した。
+
+[Piece RN CI 38021152558](https://github.com/MassyuRed/Cocolon/actions/runs/38021152558)／job 114122211809は同commitでsuccess。既存8suite365件＋今回owner32件＝**397 PASS／FAIL0／SKIP0／cancelled0**。InputScreen29件を含む。Node 24.21.0、既存TypeScript 5.2.2。local368件との差29件はInputScreenであり、API検査件数とは合算しない。最終sourceはこのCI版から変更していない。本追記と入口/manifestの結果記録だけを後続反映する。実機・画像出力・正式商品受入れは未成立。

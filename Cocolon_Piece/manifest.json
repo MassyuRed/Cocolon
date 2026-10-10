@@ -71,7 +71,7 @@
     "pce9a_saved_operation_control": "REMOTE_DRAFT_227BACF__CI_1489_PASS__UNREGISTERED__NOT_LIVE_ACCEPTANCE",
     "pce9a_quota_read": "REMOTE_DRAFT_D390488__QUOTA_39_PASS__TOTAL_1528_PASS__NEW005_UNAPPLIED_LIVE",
     "pce9c_preview_plan_display": "API_1537_PASS__RN_365_PASS__NONLIVE_PREVIEW_DISPLAY_ONLY",
-    "pce9c_owner_rn": "LOCAL_368_PASS__CI_PENDING__NONLIVE_TEXT_HISTORY_DETAIL_VISIBILITY_DELETE"
+    "pce9c_owner_rn": "REMOTE_11B6157__CI_397_PASS__NONLIVE_TEXT_HISTORY_DETAIL_VISIBILITY_DELETE"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -1928,7 +1928,7 @@
     "automatic_progression": false
   },
   "owner_rn_20261010": {
-    "status": "SOURCE_CANDIDATE_LOCAL_VERIFIED_CI_PENDING",
+    "status": "REMOTE_SOURCE_VERIFIED_CI_PASSED",
     "map": "Cocolon_前提資料/current_structure/02_piece_current_structure.md section38",
     "owner_paths": [
       ".github/workflows/piece-rn-contracts.yml",
@@ -1950,9 +1950,17 @@
       "failed": 0,
       "skipped": 0,
       "node": "24.19.0",
-      "input_screen_ci_pending": true,
+      "input_screen_ci_pending": false,
       "real_auth": false,
-      "native_device": false
+      "native_device": false,
+      "ci_run_id": 38021152558,
+      "ci_job_id": 114122211809,
+      "ci_tested_sha": "11b61579ff0f119bfbbf12e1fecd60354667ffb3",
+      "ci_passed": 397,
+      "ci_suites": 9,
+      "ci_conclusion": "success",
+      "node_ci": "24.21.0",
+      "typescript_ci": "5.2.2"
     },
     "db_migrations_read_only": true,
     "live_applied_existing": [
@@ -1970,6 +1978,8 @@
     "native_build": 0,
     "main_merge": 0,
     "product_acceptance": false,
-    "automatic_progression": false
+    "automatic_progression": false,
+    "source_commit": "11b61579ff0f119bfbbf12e1fecd60354667ffb3",
+    "source_postcheck": "14 target files byte-equal and exact changed-path set verified from fetched remote"
   }
 }
