@@ -2,8 +2,8 @@
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
 revision_date: "2026-10-10 JST"
-latest_api_implementation: "227bacf8a1925345fc680a6b54d6e0ba484e6f27"
-latest_storage_candidate: "d71fdb40238f2c99751f0c20e578ab654f72308e"
+latest_api_implementation: "d3904888f31f105b8c77bcfda9ec9cc80aa5be0b"
+latest_storage_candidate: "d3904888f31f105b8c77bcfda9ec9cc80aa5be0b"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は§35を優先します。共有APIの非稼働切替候補を保持し、保存・本人履歴／詳細・公開範囲変更・削除へ既存PCE-7フラグのサーバー側強制を接続しました。稼働切替の前提となる旧経路移行・設定採用・実Auth／実機・画像保存共有は未完了です。既存001〜004は適用済みで再実行しません。**
+**現在は§36を優先します。保存・本人操作の停止制御に続き、本人の当月Piece保存回数を返すquota GETと集計専用RPCのコードを反映しました。追加005は稼働DB未適用。001〜004は適用済みのままで再実行しません。稼働切替・capabilities／RN接続・画像保存共有・実Auth／実機は未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1212,3 +1212,41 @@ DB001〜004適用済みの証拠は§33.2を維持。今回DB再照会／再適�
 System Context prepareは実行したが、浅いcheckoutで既定の祖先commitとの連続性を証明できず終了code2となった。prepare成功とはせず、System Context入口が認める原典直接読取で、前提・全体構造／ファイル地図・current map・PCE原典・今回の実ファイルを確認した。補助機構の再開発は行わない。読取reviewで新しい検査のGET再試行回数の不一致を指摘され、共有clientの既存仕様どおりに固定してからCIへ反映した。
 
 `STRUCTURE_MAP_DELTA_UPDATED`。現在のAPI制御責任を本mapへ反映し、入口・manifestを同じ資料更新で同期する。`automatic_progression=false`。
+
+
+## 36. 2026-10-10 — 本人の保存利用枠を返すquota APIと読取専用RPC
+
+### 36.1 実装と権限の接続
+
+MashのPiece続行指示と既存の非稼働コード準備・隔離検証承認に基づく、PCE-3 quota §12／PCE-6 API §3／PCE-8 B5の未接続部分。API commit `d3904888f31f105b8c77bcfda9ec9cc80aa5be0b`。分類はDIRECT_PRODUCT_OR_ACCEPTANCE_WORK／TECHNICAL_CREDIT。保存利用枠の計算は既存`project_piece_quota`を再利用し、本文作者・旧quota・保存transactionを作り直さない。
+
+| 変更owner（mashos-api） | 責任 |
+|---|---|
+| `ai/services/ai_inference/api_piece_v2.py` | 未登録routerの静的`GET /emotion/piece/quota`。認証由来ownerだけを使い、query／bodyを拒否、no-storeと閉じたエラーを返す。 |
+| `ai/services/ai_inference/piece_v2_quota.py` | 既存投影へservice-only RPCの閉じたsnapshotを接続。失敗・欠落・不正応答を503へ閉じ、free／使用0へ偽装しない。 |
+| `supabase/migrations/20261010_005_piece_v2_quota_read.sql` | 新規の非稼働SQL候補。`piece_read_quota_v2(uuid)`だけを追加する。既存テーブル・データ・ACL・RLSは変更しない。 |
+| `ai/tests/piece_v2/test_b05_piece_v2_quota_api.py`／既存隔離workflow | Auth／transport合成HTTPと、既存B4使い捨てDB・SQL保存削除・実RPCへの接続検査。新しいworkflowや依存は追加しない。 |
+
+最初の直接GET案は、読取reviewでM2〜M4がquota ledgerへservice_role SELECTを許可していないと確認して採用を中止した。fixtureの権限を緩めず、原典のservice-only RPC境界に合わせた。直接GET案はGitHub未反映・未実行であり、稼働失敗や成功検査には数えない。
+
+新関数はSTABLE／SECURITY DEFINER、固定`search_path=pg_catalog`、`row_security=off`。適用主体にsuperuserまたはBYPASSRLSを要求し、同名関数があれば停止する。PUBLIC・anon・authenticated・その他の非owner既定EXECUTEを除去し、service_roleへだけEXECUTEを許可する。`row_security=off`自体で権限を昇格するとは扱わない。NULL／zero ownerは拒否する。通常clientがowner IDを任意指定して使えるRPCにはしない。
+
+DBの単一`statement_timestamp()`とSTABLEの読取snapshotで、現時点の`profiles.subscription_tier`と`piece_quota_consumptions`の本人・JST月別件数を取得する。既存SQLと同じく、profileなし／null／未知プランはfree。内部snapshotはtier・count・server_nowだけで、HTTPは既存exact7 fields（contract_version／subscription_tier／month_key／save_limit／saved_count／remaining_count／can_save）に投影する。上限free5／plus30／premium無制限を維持する。削除後も残る消費行を数え、旧published行・現存Piece数から導出しない。
+
+quotaはPCE-8 B5のpreview表示経路として既存preview_enabledに従う。これはPCE-7にquota専用の明文行があるという主張ではなく、既存役割からの技術的な対応付けである。save停止中にもpreviewの利用枠は取得できる。can_saveは回数だけの参考値であり、保存機能の有効化・source適格性・実際の保存許可ではない。最終判定は既存保存SQLが現在値で行う。認証後、RPC直前／直後、応答直前で既存停止制御を再確認し、POSTの自動再送は行わない。
+
+### 36.2 検証と公開確認
+
+[CI run 38018804564](https://github.com/MassyuRed/mashos-api/actions/runs/38018804564) はcommit `d3904888f31f105b8c77bcfda9ec9cc80aa5be0b` でsuccess。追加quota検査39件（native2件を含む）が成功し、既存workflow全21 batchは1,528 PASS／FAIL0／SKIP0。Python 3.12.15、pytest 8.4.1、FastAPI 0.143.0、PostgreSQL 16.15。既存Pydantic validator／on_eventの非推奨警告は残る。local pytestは未実行。
+
+新規native検査では既存001〜004を既存fixtureどおり隔離DBへ展開後、005候補を適用する。既存tableのACL／RLSが不変であること、NOBYPASSRLSのservice_roleから関数だけを呼べること、anon／authenticatedのEXECUTE拒否、serviceのprofile／ledger直接SELECT拒否を確認する。実保存→実削除後も使用回数が1で残り、他人／別月を除外し、プラン再取得に応じ残数が変わる。RPCはREAD ONLY transactionでも実行する。
+
+HTTP検査は公開応答exact7、Free／Plus／Premium、認証優先、client値拒否、既定OFF、実行中停止、RPC欠落／権限エラー／timeout／壊れた応答、DB時刻のJST月境界、取消し伝播を確認する。実Auth／実PostgREST transportは合成であり、本番適用・本人データ・端末検証の代用ではない。GitHub上の全5pathを全文再取得し、commitの変更pathとの一致を確認した。
+
+### 36.3 適用状態と次の一作業
+
+**既存001〜004は適用済み。新規005だけが稼働DB未適用。** 過去の4本を未適用へ戻さず、再実行しない。005の適用と配置／有効化は今回行っていない。稼働で利用する前に対象DBの現在構造・関数不存在・適用主体の権限を照合し、具体的な005適用について別途承認範囲を確認する。未適用RPCを呼ぶ場合は503となる。
+
+次の一作業は、既存PCE-6のplan capabilitiesとquotaをpreview／RNの同じ契約へ接続すること。現RNはPREVIEW_FIELDS完全一致のためbackendだけへ項目を追加しない。今回の単独quota GETは稼働app・共有preview候補へ未登録で、旧quotaの契約は保持している。その後に保存／本人操作のRN、renderer／画像保存共有、M5の旧経路移行と設定採用、実Auth／同じInputScreen／実機を続ける。M5やPiece全体の完了とはしない。
+
+今回のlive DB照会／適用、env／deploy／activation／native build／main merge・本人データ試験は0。Emlis／Analysis変更0。最新weekly review 10/10 §5.5と12/18目標は維持する。現行前提・作業ルール・恒久incident全文・全体構造／ファイル地図・Piece原典と現物を照合した。System Context prepareは新headでも祖先証明ができずcode2となり、許可された原典直接読取を使用した。読取reviewは補助agent、書込・最終確認は華恋root。`STRUCTURE_MAP_DELTA_UPDATED`／`automatic_progression=false`。

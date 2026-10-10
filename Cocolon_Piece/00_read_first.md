@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§31／current map §35を優先する。保存・本人履歴／詳細・公開範囲変更・削除へ既存PCE-7フラグのサーバー側強制を接続した。共有preview候補と通常起動の構成を保持し、稼働切替・実Auth／実機・画像保存共有は未完了。DB001〜004は適用済みで再実行しない。**
+**現在は§32／current map §36を優先する。本人の当月Piece保存利用枠を返すquota APIと集計専用RPCを反映した。新規005は稼働DB未適用、既存001〜004は適用済みで再実行しない。capabilities／RN接続・画像保存共有・稼働切替・実Auth／実機は未完了。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -68,7 +68,7 @@ Q&A:
 
 ## 3. Phase state
 
-現在の実装・残件は§31／current map §35を優先する。次の段落と状態表は10/07以前の履歴であり、未着手判定に使わない。
+現在の実装・残件は§32／current map §36を優先する。次の段落と状態表は10/07以前の履歴であり、未着手判定に使わない。
 
 最新の実装状態は§21〜22／current map §25〜26です。保存・消費済みcontext照合・本人履歴読取りを継承し、役割明記ひらがな名とB7公開切替・削除HTTPを反映済みとして分けて記録します。643／676 PASSは各旧commitの履歴であり、B7 runのHTTP 152件・native SQL接続13件とは別の実行結果です。公開安全性の実判定・永続preview発行・開発画面接続は未完了で、B5／B6／B7／B8全体完了へ換算しません。以下のPCE-0〜B2-Aは成立済み設計・過去実装の履歴として保持します。Analysisは自身のcurrent mapに従い、以下の旧未着手記述を再開判断へ使用しません。
 
@@ -800,3 +800,14 @@ API `227bacf8a1925345fc680a6b54d6e0ba484e6f27` で、未登録の保存・本人
 製品変更は既存API 1file、検査は既存4file。既存resolver・service/store・SQL・共有app・RN・workflow・依存は変更しない。実Auth・本人データ・実機・正式商品受入れは未確認。DB4本の適用済み記録を維持し、再適用・稼働env／deploy／activation／native build／main mergeを実行していない。
 
 次はcapabilities／quota、保存・本人操作のRN接続、renderer／画像保存共有等の未完成部分と、M5の旧経路一括移行・設定採用条件。今回のsource補修だけでpreviewを稼働有効化せず、個別の稼働変更承認を省略しない。既存factory/InputScreen/生成・保存処理を作り直さず、weekly review §5.5の順序を維持する。`automatic_progression=false`。
+
+
+## 32. 2026-10-10 — quota読取APIとservice-only集計関数
+
+API `d3904888f31f105b8c77bcfda9ec9cc80aa5be0b`。未登録v2 routerの`GET /emotion/piece/quota`を、本人の現在プランとJST当月の不変消費台帳へ接続した。既存exact7応答とFree5／Plus30／Premium無制限を保持。削除で回数を戻さず、DB失敗を使用0へ変換しない。can_saveは回数の参考値で、最終保存許可は既存SQLが担当する。
+
+直接table SELECTは既存権限で不可能なため、新規`20261010_005_piece_v2_quota_read.sql`の読取専用RPCを使用する。既存tableのACL／RLSを緩めず、service_roleだけが実行できる。preview表示経路として既存previewフラグへ対応付け、RPC前後の停止確認を行う。詳細・対応付けの根拠はmap §36。
+
+[CI run 38018804564](https://github.com/MassyuRed/mashos-api/actions/runs/38018804564) はcommit `d3904888f31f105b8c77bcfda9ec9cc80aa5be0b` でsuccess。追加quota検査39件（native2件を含む）が成功し、既存workflow全21 batchは1,528 PASS／FAIL0／SKIP0。Python 3.12.15、pytest 8.4.1、FastAPI 0.143.0、PostgreSQL 16.15。既存Pydantic validator／on_eventの非推奨警告は残る。local pytestは未実行。
+
+**001〜004適用済み／005稼働未適用**を区別する。本番DB・env・deploy・有効化・native build・main mergeは変更していない。次はPCE-6のcapabilitiesとquotaをpreview／RNへ同時に接続する工程。現RNの厳密な応答検証を保持し、backend単独の応答追加はしない。保存・本人操作の画面、画像保存共有、旧経路切替・実機の残件を継承する。`automatic_progression=false`。
