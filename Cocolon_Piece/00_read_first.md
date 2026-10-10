@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§29／current map §33を優先する。新Piece DBの既存001〜004は適用・確認済みで再実行しない。既存InputScreen、専用preview factory、実生成→隔離DBの経路を保持する。残件は、共有APIの旧previewと同じURLを重複させず、入力保存・bootstrapを保つ採用構成と個別cutoverの確認。実Auth・実画面・画像保存共有・商品完成は未成立。**
+**現在は§30／current map §34を優先する。新Piece DBの既存001〜004は適用・確認済みで再実行しない。共有APIの切替用コードと隔離検証は明示承認の範囲で完了し、通常起動は旧構成を保持する。候補では入力保存・bootstrap・source-ref・previewを同じappへ接続した。稼働設定の採用・M5全面移行・実Auth／実機・画像保存共有・商品完成は未成立。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -68,7 +68,7 @@ Q&A:
 
 ## 3. Phase state
 
-現在の実装・残件は§29／current map §33を優先する。次の段落と状態表は10/07以前の履歴であり、未着手判定に使わない。
+現在の実装・残件は§30／current map §34を優先する。次の段落と状態表は10/07以前の履歴であり、未着手判定に使わない。
 
 最新の実装状態は§21〜22／current map §25〜26です。保存・消費済みcontext照合・本人履歴読取りを継承し、役割明記ひらがな名とB7公開切替・削除HTTPを反映済みとして分けて記録します。643／676 PASSは各旧commitの履歴であり、B7 runのHTTP 152件・native SQL接続13件とは別の実行結果です。公開安全性の実判定・永続preview発行・開発画面接続は未完了で、B5／B6／B7／B8全体完了へ換算しません。以下のPCE-0〜B2-Aは成立済み設計・過去実装の履歴として保持します。Analysisは自身のcurrent mapに従い、以下の旧未着手記述を再開判断へ使用しません。
 
@@ -776,4 +776,17 @@ Cocolon `f65c19e01d630a31499414fea10fb20eecff0c5c` で既存 `screens/InputScree
 次はmap §33.4の共有app採用構成、preview/source-refの契約台帳整合、明示TTL／renderer／requested／ready供給、同一baseの隔離検証を一組として確認する。旧Q&A切替はPCE-6 §7／§11・PCE-8 B12-Cの個別境界。今回除外されたdeploy/env/activation/native build/main merge・実利用者生成試験も未実施。DB成功だけでreadyを立てず、検査設定を稼働値へ採用しない。未呼出helper、別factory、CLI、追加CIを成果として増やしていない。
 
 本同期は既存3資料だけを変更する。製品source/SQL変更、新規pytest/Node/CIは0。実Auth・実InputScreen往復・実機preview・native画像保存共有・Piece全体完成は未確認／未完了。最新weekly ownerは10/10議事録§5.5で、Emlis＋分析の先行実機確認と12/18公開目標を維持。`automatic_progression=false`。
+
+## 30. 2026-10-10 — 共有API切替用コードと隔離検証を反映
+
+最新の現在地はcurrent map §34。Mashの明示承認を受け、稼働環境を切り替えないsource準備・隔離検証を実施した。APIの最終検証commitは `875dca35c02715c8f572344c78715850862d2902`。§29の共有API不足は、明示候補の `app.create_application(piece_preview_configuration=...)` により、入力保存・bootstrap・source-ref・previewを同じappへ構成するコードを反映した。通常のmodule-level `app` は旧構成のままで、新しい環境変数や起動CLIは追加しない。
+
+新previewのownerは1本、候補のheaderはv2。候補だけ旧reflection-preview aliasを404にし、旧DTOを新handlerへ渡さない。他の旧Piece/Q&A経路は残り、M5全面移行ではない。空configurationは全OFF、検査用TTL／rendererは稼働値へ採用していない。
+
+[CI run 38016668498](https://github.com/MassyuRed/mashos-api/actions/runs/38016668498) は最終commit `875dca35c02715c8f572344c78715850862d2902` でsuccess。共有HTTP新規16件＋既存公開契約10件＝26 PASS、共有native新規2 PASS。既存preview契約146件・既存composed native13件も再実行してPASS、workflow全20検査batchの合計は1,452 PASS／FAIL0／SKIP0。Python 3.12.15、pytest 8.4.1、FastAPI 0.143.0、PostgreSQL 16.15。従来のPydantic validatorとon_eventの非推奨警告は残る。サーバーlifespan方式の変更は今回行っていない。
+
+最初のrunは私の変更したshutdown登録方法がFastAPIに存在せず、共有app importで停止した。既存のon_event登録へ修正して再実行し、期待値を緩めていない。既存InputScreen・host・実生成経路・SQLは保持する。RN332件は先行証拠のままで、今回再実行していない。
+
+再開位置は稼働TTL／renderer・requested／readyの採用根拠と、PCE-6/PCE-7 M5の残る移行条件を確定する工程。稼働切替・実Authから同じInputScreenの実機往復・画像保存共有は未実施。DB4本は適用済みで再実行しない。今回の限定準備承認を稼働変更承認へ拡張しない。`automatic_progression=false`。
+
 

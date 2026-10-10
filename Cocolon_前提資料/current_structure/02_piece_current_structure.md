@@ -2,7 +2,7 @@
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
 revision_date: "2026-10-10 JST"
-latest_api_implementation: "e81c112900f5439a49cd99c7178c2959237984c3"
+latest_api_implementation: "875dca35c02715c8f572344c78715850862d2902"
 latest_storage_candidate: "d71fdb40238f2c99751f0c20e578ab654f72308e"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在の再開位置は§33です。既存001〜004はcocolon-projectへ適用・確認済み。API `e81c1129` の専用factoryと実生成→隔離DBの成立を継承する。共有appは旧previewと同じURLを所有するため、次の実接続は設定追加だけでは成立しない。InputScreen・bootstrap・入力保存を同じ接続先で保つ採用構成と、旧契約の切替範囲を先に確定する。実Auth・実機・商品受入れは未確認。**
+**現在の再開位置は§34です。明示承認の範囲で共有APIの切替用コードと隔離検証を完了し、通常起動の旧構成を保持しています。既存001〜004は実DBへ適用・確認済みで再実行しません。候補は同じAPIに入力保存・bootstrap・新source-ref／previewを構成し、CIは1,452件成功。稼働設定の採用、M5全面移行、実Auth・同じInputScreenの実機往復、画像保存共有は未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1133,4 +1133,44 @@ API PR #3のheadは `e81c112900f5439a49cd99c7178c2959237984c3`、今回の資料
 今回の変更は既存入口・本map・manifestの3資料だけ。新しい起動CLI、helper、テスト、CI、依存、API/RNソース、SQL変更は0。確認済みのDB適用結果と専用factoryを現在の入口へ反映し、次の実接続変更を確定する資料同期である。恒久incident全文、現行作業ルール、全体地図の関連owner、最新10/10 weekly review §1.4／§5.5と原典を確認。fresh System Context prepare成功、全repo全面監査、新規実機検証は主張しない。10/10週次の実機順序・12/18公開目標を維持する。
 
 `STRUCTURE_MAP_DELTA_UPDATED`。Workの読取専用補助を用い、書込は華恋root。GitHub反映後に3path全文・変更path・PR headを再取得して照合し、両PRへ結果と再開位置を記録する。`automatic_progression=false`。
+
+## 34. 2026-10-10 — 共有APIの切替準備・隔離検証（稼働切替なし）
+
+### 34.1 今回の承認と反映範囲
+
+Mashから「稼働環境は切り替えず、切替用コードの準備・隔離検証まで進めてよい」への明示承認を受けた。§33.4の「未承認」はその時点の履歴であり、この限定範囲を再承認待ちへ戻さない。APIの準備commitは `fed81845a0667d58bf84ce02dd94c700fc68d186`、最終検証commitは `875dca35c02715c8f572344c78715850862d2902`。Cocolonは `3cabfbb7a10c9fb72c27a59769b8d7b23efec0a3` を今回の資料変更のpreimageとした。
+
+`app.py::create_application(piece_preview_configuration=...)` へ共有appの組立をまとめ、明示dictionaryを渡した場合だけ、既存 `create_piece_preview_application` を同じ共有APIの構成に使う。別base・起動CLI・別の生成serviceは追加しない。引数を省略した通常のmodule-level `app` は旧構成を維持する。空dictionaryの候補は全PieceフラグOFFであり、ONには既存requested／ready・TTL／renderer検証が必要である。検査値を稼働値に採用していない。
+
+| owner | 今回の変更 |
+|---|---|
+| `app.py` | 共有登録・middleware・shutdownを同じfactoryへ集約。入力保存・bootstrap・非Piece登録を保持し、候補は既存4経路factoryを利用する。 |
+| `api_emotion_piece.py` | 既定trueのpreview登録選択を追加。候補では旧previewを登録せず、同じPOST pathのownerを新handler1本にする。既存処理本体は変更しない。 |
+| `api_piece_compat.py` | 候補だけ旧 `/emotion/reflection/preview` aliasを未登録404にする。旧DTOを新handlerへdelegateしない。defaultでは従来どおり。 |
+| `api_contract_registry.py`／`middleware_api_contract.py` | app別の候補台帳を使い、previewを `emotion.piece.preview.v2`、source-refを `emotion.piece.source_ref.v2` とする。default台帳・policy versionは維持し、flagをOFFにしても契約をv1へ偽装しない。 |
+| `ai/docs/PUBLIC_API_REGISTRY.md` | default台帳と候補の差、未登録alias、未完了のM5を明記する。 |
+| 追加2検査／既存隔離workflow | shared HTTP接続・契約とnative保存・再取得を検証する。既存fixture／SQL／13件／146件は変更しない。 |
+
+APIは上記9path、Cocolonは既存の本map・入口・manifestの3pathだけ。InputScreenと既存host・API/model/controller、CMEE/Emlis/Analysis、SQLを作り直していない。他の旧Piece／Q&A経路は候補にも残るため、**M5／B12-C全面移行完了・旧Q&A残存0ではない**。これはPCE-6 §7、PCE-7 §7〜8が区別する非稼働準備の範囲である。
+
+### 34.2 実行した隔離検証と途中失敗
+
+[CI run 38016668498](https://github.com/MassyuRed/mashos-api/actions/runs/38016668498) は最終commit `875dca35c02715c8f572344c78715850862d2902` でsuccess。共有HTTP新規16件＋既存公開契約10件＝26 PASS、共有native新規2 PASS。既存preview契約146件・既存composed native13件も再実行してPASS、workflow全20検査batchの合計は1,452 PASS／FAIL0／SKIP0。Python 3.12.15、pytest 8.4.1、FastAPI 0.143.0、PostgreSQL 16.15。従来のPydantic validatorとon_eventの非推奨警告は残る。サーバーlifespan方式の変更は今回行っていない。
+
+共有HTTP検査は実app組立・middleware・submit/preview/source-ref handlerを使い、Bearer、保存元、submit command、preview service/RPC/projectionを合成で置換する。新DTO validatorは実物で、旧raw-inputの拒否・同一baseでの順序・一意登録・app間の契約とstate分離・OFF/Auth順序を確認する。
+
+native2件は既存B5 fixtureのguard付き使い捨てPostgreSQLを使用する。Bearer・保存元IO・PostgREST transport・active-user Auth照会は合成、CMEE/B9・限定review・orchestration・response projection・native SQLは実物。本文／3hash／DB行の一致、別appへの同じキーで再取得、再生成なし・行1件・quota0、OFF時の生成／書込0を確認する。外部active-user照会はテスト境界でのみ置換し、製品middlewareは保持する。実Auth、ASGI lifespan、実利用者入力、RN実機を検証したとはしない。
+
+最初の [run 38016471168](https://github.com/MassyuRed/mashos-api/actions/runs/38016471168) は共有app importで `FastAPI.add_event_handler` が存在しないcollection errorとなった。今回の組立変更で導入した登録方法の不備であり、安全性拒否・DB権限不足ではない。既存と同じ `app.on_event("shutdown")(handler)` に1行修正して再実行した。検査の期待値・fixtureを緩めていない。最初のnative2件は未到達であり、成功件数に含めない。
+
+### 34.3 現在地と次の具体的対応
+
+共有baseの構成不足に対する切替用source準備・今回の隔離検証は完了。稼働構成の採用と実機接続は未実施である。次は、採用するTTL／rendererとrequested／readyの根拠、旧経路の残存を解消するPCE-6／PCE-7 M5条件を確定し、稼働変更の許可範囲と照合する。その後の実Auth→本人の保存入力→同じInputScreenの一往復は別の実接続証拠であり、現在のCIを代用しない。capabilities/quota・他操作の全制御・native画像保存共有・商品受入れも未完了。
+
+実DBの001〜004は§33.2の適用済み記録を保持し、今回再照会・再適用していない。対象4本の未適用0を未適用へ戻さない。今回の稼働env変更・deploy・activation・native build・main merge・利用者データ試験・旧入力削除は0。稼働環境が切り替わったとは記録しない。
+
+現行ルール、恒久incident全文、前提／全体地図の関連owner、Piece入口・current map・manifest、最新10/10 weekly reviewと両PR記録を継承・照合した。fresh System Context prepare成功や全repoの新規全面監査は主張しない。Workの読取専用補助レビューを使用し、書込は華恋root。公開後の全文・変更path・headと両PRへの結果記録は再取得して確認する。
+
+`STRUCTURE_MAP_DELTA_UPDATED`。B10全体・M5・Piece全体・実機プレビュー・画像保存共有の完了とはしない。`automatic_progression=false`。
+
 
