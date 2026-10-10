@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は§44を優先します。発行済みpreviewの画像設定を既存RN画面から変更できるsourceを接続しました。テーマ・比率・Cocolon表記は取得済みcapabilities内だけで選び、本文は再生成しません。不明応答・競合は元POSTの同request/keyで明示回収します。520件のlocal検査が成功。APIの稼働route登録、追加2本のmigration適用、native実機描画同等性・renderer admission・保存前fit・保存共有は未完了です。**
+**現在は§44を優先します。発行済みpreviewの画像設定を既存RN画面から変更できるsourceを接続しました。テーマ・比率・Cocolon表記は取得済みcapabilities内だけで選び、本文は再生成しません。不明応答・競合は元POSTの同request/keyで明示回収します。local・GitHub CIとも520件成功。APIの稼働route登録、追加2本のmigration適用、native実機描画同等性・renderer admission・保存前fit・保存共有は未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1603,3 +1603,12 @@ HTTP/Auth/React/nativeは合成・代替を含む。実native測定の再実行�
 Supabaseはproject metadataとmigration履歴の読取のみ。001〜004の登録済みを確認し、再適用なし。005 quotaとvisual変更SQLは履歴未登録のまま。DB query/write/apply、環境変数、deploy、activation、native app build、main mergeは0。API・SQL・native source・新ライブラリ変更0。保存前fit未成立のためcanSave/canExport=falseを保持する。
 
 次は、今回のPATCHを既存preview/shared候補factoryの明示構成に含める接続準備と、その隔離往復確認。既存の生成/保存/rendererを作り直さない。稼働配置に必要な追加2本のmigration・設定採用は個別境界を維持し、001〜004を再実行しない。native B9実端末描画同等性・glyph/ink/性能とrenderer admission→保存前fit→保存、形式変更、capture/共有、Nexus、M5/実Authも残る。Pieceの全内容完成を実機確認の前提にせず、準備した利用経路ごとに確認する。TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false。
+
+
+### 44.4 GitHub反映・CI最終確認
+
+source `ef4806198352c3dde1a084d2eeb343fdb5f40c56`（親 `584d9788d7d78b14a10f7b09d07fd3a1d8e8e5e7`）の対象10fileをGitHubから再取得し、全文・変更path集合・親headを照合した。通常git pushの認証が利用できなかったため、既存GitHub connectorのtree/commit/refでexpected head一致・force=falseにより反映した。local treeとremote treeは一致。既存draft PR #30を継続し、API headは変更していない。
+
+[Piece CI 38028229338](https://github.com/MassyuRed/Cocolon/actions/runs/38028229338)は全3job成功。`piece-rn-contracts`はInputScreen込み11suite **520 PASS／FAIL0／SKIP0／cancelled0**。Android単体javac source compile、iOS clang syntax-only・既存patch適用・pbxproj検査も成功。[既存contract guards 38028229336](https://github.com/MassyuRed/Cocolon/actions/runs/38028229336)もsuccess。local520件とCI520件は同じ検査を別環境で実行した結果であり、合算しない。
+
+Androidのannotation不足に由来する既存`Scope.LIBRARY_GROUP_PREFIX`警告18件を保持。nativeソース検査は実端末での描画・app build・商品受入れを証明しない。今回の画像設定操作sourceは反映済みで、§44.3の稼働登録・実機・保存前fit・保存共有等は残る。この最終追記は入口・map・manifestの3資料だけで、検証済みsource/testを変更しない。

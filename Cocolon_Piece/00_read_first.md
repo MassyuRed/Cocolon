@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§40／current map §44を優先する。発行済みpreviewの画像設定を既存RN画面から変更できるsourceを接続しました。テーマ・比率・Cocolon表記は取得済みcapabilities内だけで選び、本文は再生成しません。不明応答・競合は元POSTの同request/keyで明示回収します。520件のlocal検査が成功。APIの稼働route登録、追加2本のmigration適用、native実機描画同等性・renderer admission・保存前fit・保存共有は未完了です。**
+**現在は§40／current map §44を優先する。発行済みpreviewの画像設定を既存RN画面から変更できるsourceを接続しました。テーマ・比率・Cocolon表記は取得済みcapabilities内だけで選び、本文は再生成しません。不明応答・競合は元POSTの同request/keyで明示回収します。local・GitHub CIとも520件成功。APIの稼働route登録、追加2本のmigration適用、native実機描画同等性・renderer admission・保存前fit・保存共有は未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -898,3 +898,6 @@ API source `4fcb140b778850a1b7a5a65d8e0a26005b3a24c4`、7fileのremote全文・�
 不明ACK/競合は自動PATCHせず「最新のプレビューを取得」から元POSTの同request/keyで回収。close→同候補再表示やsource A→B→Aでも旧ボタンを拒否する。local InputScreen込み11suite **520 PASS／FAIL0／SKIP0**。Auth/HTTP/React/nativeは代替を含み、実機合格ではない。途中失敗・review補修の内訳はmap §44.2。
 
 次は既存preview/shared候補factoryへのPATCH登録準備と隔離往復、その後の稼働採用・実機確認。native描画同等性/renderer admission→保存前fit→保存、形式変更・画像保存共有・Nexus・M5/実Authが残る。001〜004はmigration履歴読取で適用済みを確認、005とvisual変更SQLは未登録。今回API/SQL/native source・新依存・稼働DB書込/env/deploy/activation/build/main mergeは0。weekly§5.5・12/18目標・automatic_progression=falseを維持する。
+
+
+§40最終確認：source `ef4806198352c3dde1a084d2eeb343fdb5f40c56` の対象10fileをremote全文・変更path集合・親head一致確認済み。[CI38028229338](https://github.com/MassyuRed/Cocolon/actions/runs/38028229338)はInputScreen込み11suite **520 PASS／FAIL0／SKIP0**、Android単体source compile・iOS syntax-only/既存patch/pbxprojも成功。既存contract guardsもsuccess。localとの合算なし。Android既存annotation警告18件と検査限界はmap §44.4へ記録。画面接続sourceの反映であり、稼働有効化・実機受入れ・保存共有の完成ではない。

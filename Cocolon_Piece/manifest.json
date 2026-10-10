@@ -13,9 +13,9 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "161e8fb22aea1681b1d78c4f43f6b013bcdd56c1",
-    "raw_sha256": "4a662bae9c6b5e0d9ebeba6405729377fa44f805a69dd0071da46adcacf1751e",
-    "utf8_bytes": 68741
+    "git_blob_sha1": "f6c8145c79763352f1ff1af475f16a9c5b9e5d2d",
+    "raw_sha256": "82be5b4819422c038a030ddb57e1468886302ed1f08b08ed00eccfcd6f02ec5d",
+    "utf8_bytes": 69358
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -73,7 +73,7 @@
     "pce9c_preview_plan_display": "API_1537_PASS__RN_365_PASS__NONLIVE_PREVIEW_DISPLAY_ONLY",
     "pce9c_owner_rn": "REMOTE_11B6157__CI_397_PASS__NONLIVE_TEXT_HISTORY_DETAIL_VISIBILITY_DELETE",
     "pce9a_persisted_visual_mutation": "REMOTE_DRAFT_4FCB140__SERVICE_HTTP74_NATIVE47_PASS__TOTAL1658_PASS__UNREGISTERED_UNAPPLIED",
-    "pce9c_visual_settings_rn": "SOURCE_LOCAL520_PASS__RUNTIME_DEVICE_PENDING"
+    "pce9c_visual_settings_rn": "SOURCE_REMOTE_CI520_PASS__RUNTIME_DEVICE_PENDING"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -193,7 +193,7 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "PREVIEW_FACTORY_VISUAL_PATCH_REGISTRATION_AND_NATIVE_DEVICE_ADMISSION_THEN_BOUND_SAVE",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "RN_VISUAL_SETTINGS_LOCAL520_PASS__RUNTIME_DEVICE_FIT_PENDING",
+    "state": "RN_VISUAL_SETTINGS_REMOTE_CI520_PASS__RUNTIME_DEVICE_FIT_PENDING",
     "current_map_section": "44.3",
     "current_entry_section": "40",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
@@ -269,9 +269,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "22f85c4e92d70c5c666a91ccb069427fb362cc9c",
-    "raw_sha256": "e1042454fd5215f2c92f571d8d54dcbd1afa3673d6f8b75299b6081e06f3ac2b",
-    "utf8_bytes": 229072
+    "git_blob_sha1": "31a4af4117d0e27aa5cf125a153ada4d6650b7f9",
+    "raw_sha256": "fc37029e54d18b07f2b291811b1afc249b7d0a525cc0018804485b9ec00afcb1",
+    "utf8_bytes": 230532
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -2662,7 +2662,7 @@
     "automatic_progression": false
   },
   "rn_visual_settings_20261010": {
-    "status": "LOCAL_VERIFIED_NOT_DEPLOYED",
+    "status": "REMOTE_CI_VERIFIED_NOT_DEPLOYED",
     "base_head": "584d9788d7d78b14a10f7b09d07fd3a1d8e8e5e7",
     "api_dependency": "4fcb140b778850a1b7a5a65d8e0a26005b3a24c4",
     "map": "Cocolon_前提資料/current_structure/02_piece_current_structure.md section44",
@@ -2687,8 +2687,24 @@
       "node": "24.19.0",
       "typescript": "5.2.2",
       "http_auth_react_native_synthetic": true,
-      "ci_pending": true,
-      "review": "READ_ONLY_SAME_ENVIRONMENT_HELPER__DISPLAY_GENERATION_CALLBACK_FIXED__NO_FINAL_BLOCKER"
+      "ci_pending": false,
+      "review": "READ_ONLY_SAME_ENVIRONMENT_HELPER__DISPLAY_GENERATION_CALLBACK_FIXED__NO_FINAL_BLOCKER",
+      "ci_run_id": 38028229338,
+      "ci_passed": 520,
+      "ci_failed": 0,
+      "ci_skipped": 0,
+      "ci_cancelled": 0,
+      "ci_jobs": {
+        "piece-rn-contracts": "success",
+        "piece-android-source": "success",
+        "piece-ios-source": "success"
+      },
+      "android_annotation_warnings": 18,
+      "contract_guards_run_id": 38028229336,
+      "contract_guards": "success",
+      "remote_file_content_matches": 10,
+      "remote_changed_paths_match": true,
+      "remote_parent_match": true
     },
     "unknown_outcome_recovery": "EXPLICIT_ORIGINAL_POST_SAME_REQUEST_SAME_KEY",
     "patch_auto_retry": false,
@@ -2704,6 +2720,7 @@
     "deploy": 0,
     "activation": 0,
     "main_merge": 0,
-    "automatic_progression": false
+    "automatic_progression": false,
+    "source_commit": "ef4806198352c3dde1a084d2eeb343fdb5f40c56"
   }
 }
