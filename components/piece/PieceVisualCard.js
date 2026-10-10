@@ -73,9 +73,11 @@ export default class PieceVisualCard extends React.Component {
       }
       if (!current()) return;
       const overflow = evidence.some(result => result.overflow);
-      this.setState(previous => current() && previous.measurement === snapshot ? { measurement: overflow ? snapshot.sizeIndex + 1 < input.sizes.length
+      const wrapViolation = evidence.some(result => result.wrapViolation);
+      this.setState(previous => current() && previous.measurement === snapshot ? { measurement: overflow || wrapViolation ? snapshot.sizeIndex + 1 < input.sizes.length
         ? { ...createPieceNativeMeasurement(input), sizeIndex: snapshot.sizeIndex + 1 }
-        : { ...snapshot, phase: 'unavailable', blocks: {}, compositionHeight: null, reason: 'native_ink_overflow' }
+        : { ...snapshot, phase: 'unavailable', blocks: {}, compositionHeight: null,
+          reason: overflow ? 'native_ink_overflow' : 'native_kinsoku_unavailable' }
         : { ...snapshot, phase: 'native_checked', inspection: evidence } } : null);
     } catch {
       if (current()) this.setState(previous => current() && previous.measurement === snapshot

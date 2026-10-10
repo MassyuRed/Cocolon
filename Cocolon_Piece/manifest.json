@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v34",
+  "schema_version": "cocolon.piece.workstream_manifest.v35",
   "generated_at": "2026-10-10 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v33",
-    "predecessor_blob": "0ee066e28cd47386db42e67b005e7cde4bea12fd",
-    "predecessor_head": "e699b4f6fd48ce5c4ecd245178af71a7231a9d71",
-    "carry_forward": "Prior records retained; native_text_inspection_20261010 is source preparation, not save-time fit or device acceptance."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v34",
+    "predecessor_blob": "630a592baf5058d33cd6e2953a5d9426101a4fa8",
+    "predecessor_head": "475e5711c5c8ff78a5bd510fb8ab89dba6a19ef3",
+    "carry_forward": "Prior records retained; hard kinsoku remeasurement is preview-only, not B9 soft-wrap equivalence, save fit or device acceptance."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "b9826e939c2bc38ad55a9ecb91d4cc35731bd6b6",
-    "raw_sha256": "e36c0341ca86e26e4bc26f217def160954cea4b1e404c39f926ef04386aca2c5",
-    "utf8_bytes": 59541
+    "git_blob_sha1": "f3d6b9a11f90eb6213d82d2b1fde0554fa998752",
+    "raw_sha256": "a7ff3fd45d88113b238e293d46ac5c6a1811bf40d23eab075b2f08829fb68834",
+    "utf8_bytes": 60333
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -2164,5 +2164,41 @@
     "source_commit": "7554b9cd716efab15e03d3c321c2ac4900da4bfb",
     "ci_configuration_commit": "888723804129afe63bf35b8dac50720b2d8757ee",
     "source_postcheck": "Initial14 and compiler-workflow1 path bytes and exact changed-path sets verified from fetched remote"
+  },
+  "native_kinsoku_remeasurement_20261010": {
+    "status": "LOCAL_VERIFIED_CI_PENDING",
+    "map": "Cocolon_前提資料/current_structure/02_piece_current_structure.md section40.5",
+    "base_head": "475e5711c5c8ff78a5bd510fb8ab89dba6a19ef3",
+    "owner_paths": [
+      "features/piece/pieceRenderer.js",
+      "features/piece/pieceLayout.js",
+      "components/piece/PieceVisualCard.js",
+      "tests/piece-v2-renderer.test.js"
+    ],
+    "prototype_version": "piece.rn_native_preview.prototype.v2",
+    "verification": {
+      "causal_red_observed": true,
+      "local_passed": 399,
+      "local_suites": 9,
+      "renderer_passed": 31,
+      "new_cases": 5,
+      "failed": 0,
+      "skipped": 0,
+      "ci_pending": true,
+      "native_device": false
+    },
+    "native_b9_soft_wrap_equivalence": false,
+    "save_fit": false,
+    "can_save": false,
+    "can_export": false,
+    "db_migrations_read_only": true,
+    "db_apply": 0,
+    "new005_unapplied": true,
+    "native_build": 0,
+    "deploy": 0,
+    "activation": 0,
+    "main_merge": 0,
+    "product_acceptance": false,
+    "automatic_progression": false
   }
 }

@@ -6,7 +6,7 @@
  */
 import { readPiecePreviewDisplay } from './piecePreviewModel';
 
-export const PIECE_NATIVE_PREVIEW_VERSION = 'piece.rn_native_preview.prototype.v1';
+export const PIECE_NATIVE_PREVIEW_VERSION = 'piece.rn_native_preview.prototype.v2';
 const nativeThemes = {
   soft_paper: { canvas: '#F6F1E8', surface: '#FFFDF8', text: '#111827', secondary: '#4B5563',
     accent: '#800020', border: '#D7D2C9', branding: '#800020', vector_end: '#FFFFFF' },

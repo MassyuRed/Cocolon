@@ -21,18 +21,22 @@ export function readPieceTextInspection(value, { text, fontSize, box, lineEnds, 
       !Array.isArray(value.ink) || value.ink.length !== 4 || !value.ink.every(finite) ||
       value.ink[2] <= value.ink[0] || value.ink[3] <= value.ink[1]) throw measurementError();
   const boundaries = new Set(value.boundaries);
+  let wrapViolation = false;
   for (const end of value.line_ends) {
     if (!boundaries.has(end)) throw measurementError();
     if (end !== text.length) {
       const left = Array.from(text.slice(0, end)).pop(), right = Array.from(text.slice(end))[0];
-      if (pieceNoEnd.has(left) || pieceNoStart.has(right)) throw measurementError();
+      if (pieceNoEnd.has(left) || pieceNoStart.has(right)) wrapViolation = true;
     }
   }
+  // Only a fully validated native response can request a smaller catalog
+  // size. Unknown glyphs, broken graphemes and bridge failures still throw.
+  // A forbidden break never authorizes display at the current size.
   // Do not call these pixel bounds a font availability guarantee. OS fallback,
   // B9 soft wrap equivalence and capture/device acceptance remain separate.
   return Object.freeze({ overflow: value.ink[0] < 0 || value.ink[1] < 0 ||
     value.ink[2] > box.width || value.ink[3] > box.height,
-    platform, glyphCheck: value.glyph_check, ink: Object.freeze([...value.ink]) });
+    wrapViolation, platform, glyphCheck: value.glyph_check, ink: Object.freeze([...value.ink]) });
 }
 
 export async function inspectPieceText(node, expected) {

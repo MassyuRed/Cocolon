@@ -93,6 +93,109 @@ async function finish(h, height = 100) {
   await new Promise(resolve => setImmediate(resolve));
 }
 
+async function finishWithBreak(h, end) {
+  const body = h.input().blocks[0];
+  sendBlock(h, 0, { height: 100, lines: [
+    { text: body.slice(0, end), x: 0, y: 0, width: 400, height: 50 },
+    { text: body.slice(end), x: 0, y: 50, width: 400, height: 50 },
+  ] });
+  for (let index = 1; index < h.input().blocks.length; index++) sendBlock(h, index);
+  if (h.input().brandingMode !== 'off') sendBlock(h, h.input().blocks.length, { height: 40 });
+  await new Promise(resolve => setImmediate(resolve));
+}
+
+test('a measured kinsoku violation tries the next catalog size and keeps the complete body', async () => {
+  const h = harness(), before = copy(h.card.props.display.preview);
+  const old = h.find('piece-visual-block-0'), generation = h.card.state.measurement.generation;
+  await finishWithBreak(h, h.input().blocks[0].indexOf('、'));
+  assert.equal(h.card.state.measurement.phase, 'measuring');
+  assert.equal(h.card.state.measurement.sizeIndex, 1);
+  assert.notEqual(h.card.state.measurement.generation, generation);
+  assert.equal(h.find('piece-logical-canvas').props.style.opacity, 0);
+  old.props.onLayout({ nativeEvent: { layout: { width: 888, height: 100 } } });
+  assert.deepEqual(copy(h.card.state.measurement.blocks), {});
+  await finish(h);
+  assert.equal(h.card.state.measurement.phase, 'native_checked');
+  assert.equal(h.find('piece-visual-block-0').props.style.fontSize, 44);
+  assert.equal(h.find('piece-logical-canvas').props.style.opacity, 1);
+  assert.deepEqual(copy(h.card.props.display.preview), before);
+  assert.deepEqual(h.input().blocks.map((_, i) => h.find(`piece-visual-block-${i}`).children.join('')), h.input().blocks);
+  assert.equal(h.card.state.measurement.canSave, false);
+  assert.equal(h.card.state.measurement.canExport, false);
+});
+
+test('opening-bracket reflow waits for all paragraphs and branding before using a smaller size', async () => {
+  const p = sample();
+  p.content_payload.body_blocks[0] = '私は「自分で考える時間」を大切にしています。';
+  p.piece_text = p.content_payload.body_blocks.join('\n\n');
+  p.piece_text_hash = hash(p.piece_text);
+  p.content_payload_hash = hash(JSON.stringify(canonical(p.content_payload)));
+  const h = harness(p), body = h.input().blocks[0], end = body.indexOf('「') + 1;
+  sendBlock(h, 0, { height: 100, lines: [
+    { text: body.slice(0, end), x: 0, y: 0, width: 400, height: 50 },
+    { text: body.slice(end), x: 0, y: 50, width: 400, height: 50 },
+  ] });
+  sendBlock(h, 1);
+  assert.equal(h.nativeCalls.length, 0);
+  assert.equal(h.card.state.measurement.sizeIndex, 0);
+  sendBlock(h, 2, { height: 40 });
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(h.card.state.measurement.sizeIndex, 1);
+  assert.equal(h.find('piece-logical-canvas').props.style.opacity, 0);
+  await finish(h);
+  assert.equal(h.card.state.measurement.phase, 'native_checked');
+  assert.equal(h.find('piece-visual-block-0').children.join(''), body);
+});
+
+test('kinsoku remeasurement never passes the font floor or renews the original deadline', async () => {
+  for (const format of ['short_essay', 'quote', 'declaration']) {
+    const h = harness(sample(format)), deadline = [...h.timers.keys()][0];
+    for (const size of [...h.input().sizes]) {
+      assert.equal(h.find('piece-visual-block-0').props.style.fontSize, size);
+      assert.equal([...h.timers.keys()][0], deadline);
+      await finishWithBreak(h, h.input().blocks[0].indexOf('、'));
+      assert.notEqual(h.card.state.measurement.phase, 'native_checked');
+    }
+    assert.equal(h.card.state.measurement.phase, 'unavailable');
+    assert.equal(h.card.state.measurement.reason, 'native_kinsoku_unavailable');
+    assert.equal(h.find('piece-logical-canvas'), undefined);
+    assert.equal(h.timers.size, 0);
+    assert.equal(h.card.state.measurement.canSave, false);
+    assert.equal(h.card.state.measurement.canExport, false);
+  }
+});
+
+test('kinsoku never converts unknown glyphs, malformed ink or a later split grapheme into reflow', async () => {
+  for (const native of [r => ({ ...r, glyph_check: 'unknown' }), r => ({ ...r, ink: [0,0,NaN,100] })]) {
+    const h = harness(sample(), native);
+    await finishWithBreak(h, h.input().blocks[0].indexOf('、'));
+    assert.equal(h.card.state.measurement.phase, 'unavailable');
+    assert.equal(h.card.state.measurement.sizeIndex, 0);
+    assert.equal(h.card.state.measurement.reason, 'native_measurement_unavailable');
+  }
+  const h = harness(), text = '私は「考えます」、話します。';
+  const expected = { text, fontSize:48, box:{width:888,height:150}, lineEnds:[3,4,text.length], platform:'ios' };
+  assert.throws(() => h.readPieceTextInspection({ version:'piece.native_text.v1', platform:'ios', font_size:48,
+    width:888, height:150, utf16_length:text.length,
+    boundaries:[...Array(text.length + 1).keys()].filter(end => end !== 4),
+    line_ends:expected.lineEnds, ink:[0,0,800,140], glyph_check:'no_missing_observed' }, expected));
+});
+
+test('a delayed kinsoku result cannot shrink an already checked new measurement generation', async () => {
+  let release;
+  const h = harness(sample(), (r, call) => call === 1 ? new Promise(resolve => { release = () => resolve(r); }) : r);
+  await finishWithBreak(h, h.input().blocks[0].indexOf('、'));
+  assert.equal(h.card.state.measurement.phase, 'geometry_checked');
+  sendBlock(h, 0, { height: 1800 });
+  assert.equal(h.card.state.measurement.sizeIndex, 1);
+  await finish(h);
+  const current = h.card.state.measurement;
+  assert.equal(current.phase, 'native_checked');
+  release(); await new Promise(resolve => setImmediate(resolve));
+  assert.equal(h.card.state.measurement, current);
+  assert.equal(h.card.state.measurement.sizeIndex, 1);
+});
+
 test('immutable v1 geometry, colors and discrete type scales cover all formats/ratios', async () => {
   const scales = { short_essay: [[48,44,40,36],[52,48,44,40]], quote: [[72,64,56],[80,72,64]], declaration: [[64,56,48],[72,64,56]] };
   for (const format of Object.keys(scales)) for (const [ri, ratio] of ['4:5', '9:16'].entries()) {
@@ -322,12 +425,14 @@ test('native line ends must exactly match the measured body and platform graphem
   assert.throws(() => h.readPieceTextInspection({version:'piece.native_text.v1', platform:'ios',font_size:48,width:888,height:150,
     utf16_length:text.length,boundaries:[0,1,text.length-1,text.length],line_ends:expected.lineEnds,ink:[0,0,800,140],glyph_check:'no_missing_observed'},expected));
 });
-test('kinsoku rejects line-start punctuation and a line-end opening bracket without changing the body', async () => {
+test('kinsoku classifies line-start punctuation and a line-end opening bracket for remeasurement', async () => {
   const h = harness();
   for (const [text, end] of [['考えます。',4],['私は「考えます」',3]]) {
     const expected={text,fontSize:48,box:{width:888,height:150},lineEnds:[end,text.length],platform:'ios'};
-    assert.throws(() => h.readPieceTextInspection({version:'piece.native_text.v1',platform:'ios',font_size:48,width:888,height:150,
-      utf16_length:text.length,boundaries:[...Array(text.length+1).keys()],line_ends:expected.lineEnds,ink:[0,0,800,140],glyph_check:'no_missing_observed'},expected));
+    const inspected = h.readPieceTextInspection({version:'piece.native_text.v1',platform:'ios',font_size:48,width:888,height:150,
+      utf16_length:text.length,boundaries:[...Array(text.length+1).keys()],line_ends:expected.lineEnds,ink:[0,0,800,140],glyph_check:'no_missing_observed'},expected);
+    assert.equal(inspected.wrapViolation, true);
+    assert.equal(inspected.overflow, false);
   }
 });
 test('late native promises cannot revive timeout, unmount, replacement, or a changed metric snapshot', async () => {

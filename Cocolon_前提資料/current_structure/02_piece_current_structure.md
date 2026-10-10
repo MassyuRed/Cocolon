@@ -1415,3 +1415,17 @@ local Node 24.19.0、9suite **394 PASS／FAIL0／SKIP0**。renderer26件（前�
 | piece-ios-source／job 114129792360 | 固定RN patch適用、Apple clang17.0.0/Xcode16.4のiOS simulator SDKでObjective-C++ syntax-only成功、pbxproj plutil OK。link/signing/app build/実機ではない。 |
 
 既存phase6-contract-guards run38023650552もsuccess。製品sourceは7554b9版から変更していない。最終結果を本map・入口・manifestへ追記して後続反映する。nativeのfont engineを実行した欠損0/描画fit、React実reconciliation、端末保存共有、商品合格は未成立。§40.3の残件を保持する。
+
+### 40.5 2026-10-10 — 硬い禁則違反でも規定サイズで再測定する補修
+
+再開headはCocolon `475e5711c5c8ff78a5bd510fb8ab89dba6a19ef3`、API `004a85eeb7af83b68ae1c1fba42ec2d6941b6874`。前回txtより§38〜40が進んでいたため、最新sourceを優先した。今回の未完了条件は、同じ全文が次の規定fontで描画できる場合でも、最初のhard-kinsoku違反だけで確認用画像が消えること。現componentに合成native行末を与えた検査で、期待measuringに対しunavailableとなるREDを確認した。実OSの自然改行による発生頻度は未確認であり、端末不具合を実測したとはしない。
+
+`pieceRenderer.js`は全native応答と全行末の書記素境界を検証し終えた後、禁則違反だけを`wrapViolation`へ分類する。`PieceVisualCard.js`は全段落・brandingの検査が揃うまで透明を維持し、違反時は既存の規定font降順で再測定する。下限でも違反なら`native_kinsoku_unavailable`、欠損glyph／不正応答／書記素分割／bridge例外は従来どおり即unavailable。最初の8秒期限を更新せず、旧測定世代のevent/promiseを採用しない。本文、段落、比率、recipe、font下限は不変。可視挙動が変わるため`pieceLayout.js`の確認用prototypeを`piece.rn_native_preview.prototype.v2`へ上げる。保存recordのrenderer versionは変えない。
+
+既存renderer検査へ5件追加し、行頭句読点／行末開き括弧→次候補で全文表示、3formatの全規定サイズ不成立、期限維持、禁則と不正情報の混在、遅れた禁則応答の無効化を検証した。local Node 24.19.0で9suite **399 PASS／FAIL0／SKIP0／cancelled0**（renderer31）。InputScreen29件はlocal compiler不在のため既存CIで確認する。React/nativeは合成境界であり、実機・Hermes・フォントengineを実行した検査ではない。読取補助reviewで具体blockerなし、別model Pro審査や商品合格ではない。
+
+分類はOBSERVED_BLOCKER_MINIMAL_FIX／LEVEL_2相当の既存設計内補修。Mashの明示Piece続行・Work選択と既存可逆的実装/GitHub反映範囲に基づき、root華恋が製品3file・既存test1file・既存資料3fileを統合する。新しい検証system・dependencyは追加しない。完成条件はこの因果箇所の補修・対象回帰・remote確認、打切り条件は本文/品質条件変更や実機受入れなしでは成立できない追加範囲。今回は禁則を解決した候補だけ確認用表示に進め、soft hintを硬い禁止条件に変えない。構成owner・外部契約の差分はなく`STRUCTURE_MAP_DELTA_NONE`、primaryはTECHNICAL_CREDIT。実行環境はWork、確認不能なPro/Ultra名称や独立審査の成立を推定しない。
+
+全体設計図01/関連01Bのファイル関係地図、current map、Piece原典PCE-5/PCE-8、現行ruleと恒久incident全文、weekly 10/10 §5.5を照合。System Context prepareは475e571が保存基準a77b79の子孫でないと報告して停止したため、生成結果を採用せず許可された原典直接読取を使用した。新しいcontext再構築は行わない。Supabase migration履歴のみread-onlyで確認し、001〜004登録済み／005未登録。本人本文・API製品・SQL・DB適用・env/deploy/activation/app native build/main mergeは変更0。
+
+**次は引き続きB9の読取単位・soft-wrapとnative選択処理の接続、target renderer admission、同canvasの実機glyph/ink確認。** 現native応答には代替行候補の実測がないため、行末validatorだけでB9同等性とはしない。今回もnative_checkedは保存前fitではなく、canSave/canExport=false。保存接続、capture/共有、設定変更、M5、005適用、実Auth/実機を残す。weekly§5.5の先行Emlis＋分析実機順、12/18目標、automatic_progression=falseを維持する。
