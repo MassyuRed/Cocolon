@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_analysis_current_structure
 title: "分析構造 — Current Structure"
-revision_date: "2026-10-09 JST"
+revision_date: "2026-10-10 JST"
 document_role: "ANALYSIS_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -14,9 +14,9 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-2026-10-10の分析取得エラー修正版APIは **`4bb37a0afdc020576b0c1e33fa454674fd5b36c7`**。最終Analysis 389検査、隔離実SQL 58 checksが成功し、今回の非公開snapshotでも生成・合成保存再読・RN表示modelの本文一致を確認した。次はこのSHAの指定配置と本人実機確認。既存設定・DB・native buildの変更は不要。
+今回の正常な不足案内に対応するAPI配置候補は **`5c8bd8e5d7f876335eb840ceee26883a030a34a5`**。API関連386検査・RN画面20検査が成功。APIだけでなく、下記の画面修正を含む本branchの新しいiOSビルドを配布して確認する。前候補4bb37a0の配置案内は取消し。
 
-**2026-10-10 実機の分析取得エラー修正（未配置）**：build 6301の `analysis_observed_map_unavailable` を調査し、保存入力取得は成功している一方、主語省略等の未対応文によりcurrent graphが0要素になっていたことを確認した。既存Analysis compiler/realizerで、原入力の行動欄全体が既存名詞＋「で」＋2〜3仮名の反復表現＋「した／しました」の単一有限節となる場合だけ採用する。主体はUNSPECIFIED、表示は「主体の記載なし」とし、本人・原因・順序を補わない。未解析memoと不足段階はunknownで保持する。原文引用の無検査表示や空mapの成功化ではない。後続の否定・仮定・伝聞host、今日/昨日を名詞に吸収する誤読も保留する。保存/API/DB/RN/共有意味ownerの契約・構成変更なし（STRUCTURE_MAP_DELTA_NONE）。検証・指定commit配置と実機確認の再開先はmashos-api `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md` §37。本人の今回の3記録で部分生成を確認したが、全内容の解釈・商品品質合格・修正版の実機復旧は未確認。
+**2026-10-10 18:19 JST 本人訂正 — 入力不足の正常案内へ修正（未配置）**：Mashの意図は、少ない情報から分析を無理に表示することではなく、分析に必要な情報がそろうまで「入力情報が少ないため、まだ分析を表示できません。」と案内すること。直前のAPI `4bb37a0afdc020576b0c1e33fa454674fd5b36c7` の配置案内を撤回し、追加した省略主語の文法分岐とその専用検査を戻した。分析生成条件は変更しない。既存engineが現在入力について返すUNAVAILABLE／`analysis_observed_route_not_established`／artifactなしの組だけを、APIの正常200・`reason=insufficient_input`・`skip_reason=analysis_insufficient_input`へ変換する。分析本文・図・保存・既読登録は作らない。空期間/読取専用のno_visible_content、内部処理/比較/権限/DB障害は区別したまま。既存RN画面でこの状態だけを案内表示へ接続する。STRUCTURE_MAP_DELTA_NONE（既存service/画面内の状態処理、公開キー追加なし）。API配置と新しいiOSビルドが必要で、6301へAPIだけ配置しても新文言は届かない。検証・反映先・操作再開はmashos-api `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md` §38。本人実機の案内表示は未確認。
 
 **u185 内容表示補修（2026-10-09 JST・未配置）**：同じ対象に通常の不足段階を一行ずつ反復する表示を、全不足項目の列挙へまとめた。順序付き対象と理由が同じ場合だけ集約し、先頭ID/表示位置、単一項目の旧文面、未読内容/接続先不明/別対象・別理由を保持。private graphの全gap、訂正/撤回後の既知node・出典・順序線、期間比較は変更0。最終Analysis集合374 tests／3103 subtests成功、生成8例＋旧保存1例の全文と実RN表示modelが一致。実service＋合成RPCで訂正/撤回後の保存再読と旧本文保持を確認。STRUCTURE_MAP_DELTA_NONE。配置/本人実機/商品受入れ未確認で、表示の追加磨き込みを実機接続の前提にしない。詳細は04 §3.15と06/API handoff末尾u185。
 

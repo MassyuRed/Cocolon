@@ -101,6 +101,76 @@ const savedMapAbsent = {
   content_text: null, meta: null, has_visible_content: false,
   skip_reason: 'analysis_saved_map_unavailable', generated_at: null,
 };
+const insufficientInput = {
+  status: 'ok', reason: 'insufficient_input', refreshed: false, report_mode: 'standard',
+  skip_reason: 'analysis_insufficient_input', content_text: null, meta: null,
+  has_visible_content: false, title: null, generated_at: null, latest_generated_at: null,
+};
+
+test('declared insufficient input renders waiting text without an artifact or read acknowledgement', async () => {
+  const h = latestResultHarness([{ status: 200, body: insufficientInput }]);
+  let render;
+  await act(async () => { render = TestRenderer.create(React.createElement(h.Screen,
+    { ...h.props, embedded: true, hideHeader: true })); });
+  const body = JSON.stringify(render.toJSON());
+  assert.ok(body.includes('入力情報が少ないため、まだ分析を表示できません。'));
+  assert.ok(!body.includes('取得エラー'));
+  assert.ok(!body.includes('現在表示できるわたしマップはありません。'));
+  assert.ok(!body.includes('LEGACY_RENDERER'));
+  assert.ok(!body.includes('watashi-map-v2'));
+  assert.equal(h.requests(), 1);
+  assert.equal(h.statusReads(), 0);
+  assert.deepEqual(h.seen, []);
+  await act(async () => render.unmount());
+});
+
+test('refresh moves between insufficient input and the actual saved map without retaining stale output', async () => {
+  const h = latestResultHarness([
+    { status: 200, body: insufficientInput },
+    { status: 200, body: { meta: fixtures[0].projection, report_mode: 'standard' } },
+    { status: 200, body: insufficientInput },
+  ]);
+  let render;
+  await act(async () => { render = TestRenderer.create(React.createElement(h.Screen, h.props)); });
+  const refresh = () => render.root.findAllByType('TouchableOpacity').find((n) =>
+    n.findAllByType('Text').some((t) => t.props.children === '更新'));
+  await act(async () => { refresh().props.onPress(); });
+  let body = JSON.stringify(render.toJSON());
+  assert.ok(body.includes('watashi-map-v2'));
+  assert.ok(!body.includes('入力情報が少ないため、まだ分析を表示できません。'));
+  assert.deepEqual(h.seen, [fixtures[0].projection.projection_of]);
+  await act(async () => { refresh().props.onPress(); });
+  body = JSON.stringify(render.toJSON());
+  assert.ok(body.includes('入力情報が少ないため、まだ分析を表示できません。'));
+  assert.ok(!body.includes('watashi-map-v2'));
+  assert.deepEqual(h.seen, [fixtures[0].projection.projection_of]);
+  assert.equal(h.statusReads(), 0);
+  await act(async () => render.unmount());
+});
+
+test('insufficient-input declarations cannot hide HTTP failures or contradictory payloads', async () => {
+  const contradictory = [
+    { status: 'error' }, { refreshed: true }, { has_visible_content: true },
+    { skip_reason: 'analysis_saved_map_unavailable' }, { title: 'unexpected title' },
+    { generated_at: '2026-10-10T00:00:00Z' }, { latest_generated_at: '2026-10-10T00:00:00Z' },
+    { meta: fixtures[0].projection }, { meta: '{"wire_kind":' },
+    { content_text: 'synthetic unexpected analysis text' }, { content_text: '' },
+  ];
+  for (const response of [
+    ...[401, 403, 422, 503].map((status) => ({ status, body: insufficientInput })),
+    ...contradictory.map((fields) => ({ status: 200, body: { ...insufficientInput, ...fields } })),
+  ]) {
+    const h = latestResultHarness([response]); let render;
+    await act(async () => { render = TestRenderer.create(React.createElement(h.Screen, h.props)); });
+    const body = JSON.stringify(render.toJSON());
+    assert.ok(body.includes('取得エラー'));
+    assert.ok(!body.includes('入力情報が少ないため、まだ分析を表示できません。'));
+    assert.ok(!body.includes('watashi-map-v2'));
+    assert.deepEqual(h.seen, []);
+    assert.equal(h.statusReads(), 0);
+    await act(async () => render.unmount());
+  }
+});
 
 test('declared absent saved map is neutral and never marks an undisplayed version as seen', async () => {
   for (const content_text of [null, '']) {

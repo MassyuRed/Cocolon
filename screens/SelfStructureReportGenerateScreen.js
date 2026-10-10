@@ -454,6 +454,19 @@ const run = useCallback(async ({ force = false } = {}) => {
     }
 
     const json = await res.json();
+    // Insufficient material is a declared waiting state, not a failed read
+    // or an analysis artifact. Never infer it from an error or missing DTO.
+    if (json?.reason === "insufficient_input") {
+      if (json?.status !== "ok" || json?.refreshed !== false
+        || json?.skip_reason !== "analysis_insufficient_input"
+        || json?.has_visible_content !== false || json?.meta !== null
+        || json?.content_text !== null || json?.title !== null
+        || json?.generated_at !== null || json?.latest_generated_at !== null) {
+        throw new Error("分析結果の形式を確認できませんでした。");
+      }
+      safeSet(() => setEmptyMsg("入力情報が少ないため、まだ分析を表示できません。"));
+      return; // No artifact exists to render, export, or mark as seen.
+    }
     // A successful read can have no eligible saved map. This does not
     // establish insufficient input (read-only mode also returns this shape).
     if (json?.status === "ok" && json?.reason === "no_visible_content"

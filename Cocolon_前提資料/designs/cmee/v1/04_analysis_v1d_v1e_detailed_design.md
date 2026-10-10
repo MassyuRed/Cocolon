@@ -430,13 +430,17 @@ serviceの比較生成flagはCOCOLON_ANALYSIS_PERIOD_COMPARISON_MODE、developme
 
 関連181検査・606 subtests、既存RN13検査、合成6本文の同一text/identity/node・edge順を確認。保存/再読取は実service＋合成Auth/DB I/O、実機未検証。新規path/共有owner/API/DTO/RN/SQL/依存変更0。u117の未適用SQL/対応API配置を完了とはしない。全file/責務はcurrent03 §4.24、実行記録は06/API handoff末尾u118。
 
-### 3.20 2026-10-10 実機取得エラーの直接修正（未配置）
+### 3.20 2026-10-10 直前の文法拡張方針を撤回
 
-原入力の `memo_action` 全体が「既存の限定名詞（属格を含む）＋で＋2〜3文字の仮名反復表現＋した／しました」の単一有限節として閉じる場合を、既存Analysis compilerの追加解釈範囲とする。共有の明示action/past/performed witnessと元field/全文evidenceを要求し、語彙を入力例と応答の対応表にしない。省略されたactorは `UNSPECIFIED`、safe labelには「主体の記載なし」を残す。SELF、因果、順序、時点、場所の意味分類を推測しない。
+Mashの18:19 JSTの訂正により、直前に追加した行動欄の省略主語・仮名反復過去形の分岐を撤回した。API `4bb37a0afdc020576b0c1e33fa454674fd5b36c7` は配置候補ではない。compiler/realizerと専用vertical検査を直前の631c状態へ戻し、生成条件を緩めない。旧検証結果はAPI運用記録§37の経緯としてのみ保持する。
 
-前後の別節や未解析の後続host、引用/伝聞/夢/疑問、否定/希望、未解析の今日/昨日接頭語をこの分岐で採用しない。memoや補足への同じ省略解釈は広げない。原文・private evidence・保存時本文の検証とunknown保持を継承する。全0要素の成功扱い、旧mapへのfallback、読み取れていないmemoの要約補完は行わない。
+### 3.21 2026-10-10 分析に必要な入力不足の正常な待ち状態
 
-この追加範囲は今回の実機停止を解消する部分mapの実装であり、一般日本語・分析全文の完成ではない。API/DB/RN/依存と共有作者は変更しない。検証結果・配置境界はAPI運用記録 §37を参照する。
+既存engineがsource freezeとgraph compileを終えた後、現在期間のnodeが0件で `UNAVAILABLE`／`analysis_observed_route_not_established`／artifactなしを返した場合だけ、保存serviceは「まだ分析を表示できる情報がない」状態として扱う。件数・文字数の新しい閾値を設けず、分析要素を補って生成しない。
+
+latest/月次ensureはHTTP200・status=ok・reason=insufficient_input・skip_reason=analysis_insufficient_input、refreshed/has_visible_content/history_saved=false、本文/meta/title/生成時刻nullを返す。保存commit・未完成map・不足案内のDB保存は行わない。既存の正常空期間、ensure=false/read_onlyの保存不在はno_visible_contentを維持する。内部処理/前期比較/無効source/権限/通信・保存障害は情報不足へ変換しない。force再生成の不足で古い結果をfallback表示しない。
+
+RNの既存わたしマップ画面は、整合した不足状態だけに「入力情報が少ないため、まだ分析を表示できません。」を通常表示する。分析renderer/出力/既読登録を呼ばず、後日の成立結果へ通常更新できる。HTTP失敗や矛盾したDTOをこの文言で隠さない。今回の変更は保存schema・共有意味作者・語彙を変えず、既存API値と画面分岐の追加に限定する。検証と指定配置・nativeビルドはAPI運用記録§38。
 
 ## 4. Period source-set freeze
 
