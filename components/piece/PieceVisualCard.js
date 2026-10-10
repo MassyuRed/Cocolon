@@ -3,19 +3,19 @@
  */
 import React from 'react';
 import { View, Text } from 'react-native';
-import { preparePieceNativePreview, createPieceNativeMeasurement, pieceNativeTypography, recordPieceNativeMeasurement } from '../../features/piece/pieceLayout';
+import { preparePieceNativeCard, createPieceNativeMeasurement, pieceNativeTypography, recordPieceNativeMeasurement } from '../../features/piece/pieceLayout';
 import { inspectPieceText } from '../../features/piece/pieceRenderer';
 
 export default class PieceVisualCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { measurement: createPieceNativeMeasurement(preparePieceNativePreview(props.display)), width: 0 };
+    this.state = { measurement: createPieceNativeMeasurement(preparePieceNativeCard(props)), width: 0 };
     this.active = true;
     this.textNodes = new Map();
   }
 
   static getDerivedStateFromProps(props, state) {
-    const input = preparePieceNativePreview(props.display);
+    const input = preparePieceNativeCard(props);
     return state.measurement.key === (input?.key ?? null) ? null : { measurement: createPieceNativeMeasurement(input) };
   }
 
@@ -29,7 +29,7 @@ export default class PieceVisualCard extends React.Component {
   };
 
   syncDeadline = () => {
-    const input = preparePieceNativePreview(this.props.display);
+    const input = preparePieceNativeCard(this.props);
     if (!this.active || !input || input.key !== this.state.measurement.key ||
         !['measuring', 'geometry_checked'].includes(this.state.measurement.phase)) {
       this.clearDeadline(); return;
@@ -42,9 +42,9 @@ export default class PieceVisualCard extends React.Component {
     deadline.handle = setTimeout(() => {
       if (this.deadline !== deadline) return;
       this.deadline = null;
-      if (!this.active || preparePieceNativePreview(this.props.display)?.key !== key) return;
+      if (!this.active || preparePieceNativeCard(this.props)?.key !== key) return;
       const generation = this.state.measurement.generation;
-      this.setState(previous => this.active && preparePieceNativePreview(this.props.display)?.key === key &&
+      this.setState(previous => this.active && preparePieceNativeCard(this.props)?.key === key &&
         previous.measurement.key === key && previous.measurement.generation === generation &&
         ['measuring', 'geometry_checked'].includes(previous.measurement.phase)
         ? { measurement: { ...previous.measurement, phase: 'unavailable', blocks: {}, compositionHeight: null, reason: 'measurement_timeout' } }
@@ -53,11 +53,11 @@ export default class PieceVisualCard extends React.Component {
   };
 
   inspectDrawing = async () => {
-    const snapshot = this.state.measurement, input = preparePieceNativePreview(this.props.display);
+    const snapshot = this.state.measurement, input = preparePieceNativeCard(this.props);
     if (!this.active || !input || input.key !== snapshot.key || snapshot.phase !== 'geometry_checked' || this.inspection?.snapshot === snapshot) return;
     const operation = { snapshot }; this.inspection = operation;
     const current = () => this.active && this.inspection === operation && this.state.measurement === snapshot &&
-      preparePieceNativePreview(this.props.display)?.key === input.key;
+      preparePieceNativeCard(this.props)?.key === input.key;
     try {
       const evidence = [];
       const count = input.blocks.length + (input.brandingMode === 'off' ? 0 : 1);
@@ -87,7 +87,7 @@ export default class PieceVisualCard extends React.Component {
 
   measure = (ticket, index, kind, value) => {
     if (!this.active) return;
-    const input = preparePieceNativePreview(this.props.display);
+    const input = preparePieceNativeCard(this.props);
     this.setState(previous => {
       const measurement = recordPieceNativeMeasurement(input, previous.measurement, ticket, index, kind, value);
       return measurement === previous.measurement ? null : { measurement };
@@ -95,8 +95,10 @@ export default class PieceVisualCard extends React.Component {
   };
 
   render() {
-    const input = preparePieceNativePreview(this.props.display), measurement = this.state.measurement;
-    if (!input || input.key !== measurement.key) return null;
+    const input = preparePieceNativeCard(this.props), measurement = this.state.measurement;
+    if (!input || input.key !== measurement.key) return Object.prototype.hasOwnProperty.call(this.props, 'savedRecord')
+      ? React.createElement(Text, { testID: 'piece-visual-unavailable', style: { color: '#494949', fontSize: 14, lineHeight: 22, marginBottom: 12 } },
+        'このPieceの画像レイアウトは現在確認できません。本文は下で確認できます。') : null;
     const element = React.createElement, ready = measurement.phase === 'native_checked';
     const { fontSize, lineHeight, gap } = pieceNativeTypography(input, measurement.sizeIndex);
     const ticket = { key: input.key, sizeIndex: measurement.sizeIndex, generation: measurement.generation };
@@ -148,7 +150,10 @@ export default class PieceVisualCard extends React.Component {
       element(Text, { testID: 'piece-visual-status', accessibilityLiveRegion: 'polite',
         style: { fontSize: 14, lineHeight: 22, color: '#494949', marginTop: 8 } },
         measurement.phase === 'unavailable' ? '画像レイアウトを確認できませんでした。本文は下で確認できます。' :
-          ready ? '画像レイアウトの確認用表示です。保存・書き出しはまだ利用できません。' : '画像レイアウトを確認しています。'),
+          ready ? Object.prototype.hasOwnProperty.call(this.props, 'savedRecord')
+            ? '保存済みPieceの画像レイアウトの確認用表示です。画像の保存・共有はまだ利用できません。'
+            : '画像レイアウトの確認用表示です。保存・書き出しはまだ利用できません。'
+          : '画像レイアウトを確認しています。'),
     );
   }
 }

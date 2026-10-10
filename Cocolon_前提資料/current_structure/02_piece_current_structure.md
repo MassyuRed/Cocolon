@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は§40を優先します。同じnative Textの描画範囲・glyph観測・文字境界／改行位置を確認する処理を追加しました。確認用表示のnative_checkedは保存前fitではありません。保存／設定変更・画像保存共有・実機・稼働切替は未完了。005は稼働未適用、001〜004は適用済みです。**
+**現在は§41を優先します。保存済み本人詳細へ、既存と同じnative画像レイアウトの確認用表示を接続しました。対応は実装済みprototype版に限り、未知の保存rendererを代替しません。保存前fit・画像保存共有・実機・稼働切替は未完了。005は稼働未適用、001〜004は適用済みです。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1430,4 +1430,36 @@ local Node 24.19.0、9suite **394 PASS／FAIL0／SKIP0**。renderer26件（前�
 
 **次は引き続きB9の読取単位・soft-wrapとnative選択処理の接続、target renderer admission、同canvasの実機glyph/ink確認。** 現native応答には代替行候補の実測がないため、行末validatorだけでB9同等性とはしない。今回もnative_checkedは保存前fitではなく、canSave/canExport=false。保存接続、capture/共有、設定変更、M5、005適用、実Auth/実機を残す。weekly§5.5の先行Emlis＋分析実機順、12/18目標、automatic_progression=falseを維持する。
 
+
 §40.5結果：source `01088f7a69828c08a8c9ec0a98536f47efab0772`、[CI run38024570077](https://github.com/MassyuRed/Cocolon/actions/runs/38024570077) の全3job成功。JS job114132549261はInputScreenを含む10file **428 PASS／FAIL0／SKIP0／cancelled0**。Android job114132549134はjavac17.0.20.1で単体source compile成功（従来のannotation不足警告18件）、iOS job114132549290は固定RN patch適用・clang17 syntax-only・pbxproj検査成功。既存phase6-contract-guards run38024570014もsuccess。GitHubから再取得したsource7fileの全bytes・変更path集合・親headと、入口のmanifest hashを照合済み。後続はこの結果の資料3fileだけを反映する。native source、workflow、依存は今回変更しておらず、実機・保存前fit・商品受入れの成立は主張しない。
+
+## 41. 2026-10-10 — 保存済み本人詳細で同じ確認用canvasを使う（未配置）
+
+### 41.1 今回の直接作業とowner
+
+§40.3に残る本人詳細への共通描画接続を実装した。B9 soft-wrap同等性と保存前fitは未完了のまま保持し、その成立を偽らず、独立して進められる保存済み詳細の確認用表示へ同じcanvasを接続する。別の画像renderer・本文・API・状態controllerを作らない。
+
+| path | 責任・変更 |
+|---|---|
+| `features/piece/pieceLayout.js` | saved専用入口で既存readPieceOwnerDisplayの閉じた契約と3hashを再確認。previewと共通のcatalog/geometryへ渡す。saved identityをpreviewと別namespaceにし、piece/public ID・row_version・saved_at・3hash・rendererへ測定を結ぶ。 |
+| `components/piece/PieceVisualCard.js` | displayまたはsavedRecordの一方だけを受け、同じText・native検査・サイズ候補・timeoutを使用。未対応時は画像を除き、全文への案内を表示する。 |
+| `screens/PieceOwnerHistoryScreen.js` | 本人APIから検証済みのfresh詳細だけへ共通componentを置く。一覧は全文cardを維持し、全件native測定を開始しない。 |
+| `tests/piece-v2-renderer.test.js` / `tests/piece-v2-owner-history.test.js` | 共通geometry、保存済みの期限/現在plan非依存、3hash/lifecycle/未知renderer、詳細限定表示、本人/背景/停止/操作中の非表示、古いnative結果の拒否を確認。 |
+
+保存済みをpreviewへ偽装しない。保存時の合法なtheme/ratio/branding・全文・段落を保持し、現在plan・quota・期限・sourceの再判定を加えない。本人切替、背景化、離脱、停止、履歴再読、公開変更・削除開始時のrecord破棄は既存host/controllerをそのまま使用する。本文のselect/読み上げと本人操作を残す。
+
+PCE-5再現性§7〜8に従い、保存rendererが実装済み`piece.rn_native_preview.prototype.v2`に一致する場合だけ確認用canvasへ渡す。設計例の`piece.rn_renderer.v1`や任意の過去版は非対応のままで、latest外観へ置き換えない。これは保存用renderer admissionではなく、既存prototypeへの限定接続である。実保存recordに対応versionが存在することは確認していない。native_checked、no_missing_observedを保存前fit・欠け0保証・PNG成功へ変換せず、canSave/canExport=falseを保持する。
+
+### 41.2 検証と実行境界
+
+local Node24.19.0で既存9suite **405 PASS／FAIL0／SKIP0**（並行補修後399＋今回6、renderer34・owner35）。React/HTTP/Auth/native応答は合成代替であり、font engine/実React/端末の実行ではない。初回の検査組立は未追加symbol参照で失敗し、causal RED creditにしていない。全10suiteのlocal試行はInputScreenの既存TypeScriptが環境に無く収集で失敗したため、9suite結果と分けた。InputScreen込みの既存CIを反映後に確認する。製品依存の追加はない。
+
+root華恋が実装・確認・書込を担当。補助2名の読取でdirect sliceとsaved/renderer境界を検討し、実diffの読取reviewに具体的blockerなし。正式な別model Pro/Ultra受入れではない。全体構造01/関連01B・全file tree/対象map、前提資料・作業ルール・恒久incident、最新weekly§5.5を確認した。System Context prepareはmaterial ancestry不一致で終了し、正本が許可する原典直接読取を使用した。generated成功と扱わない。
+
+範囲は製品JS3＋既存test2＋既存資料3の計8file。API/SQL/native source/RN patch/依存/稼働DB/env/deploy/activation/app build/main mergeを変更しない。weekly§5.5の先行実機順序・12/18公開目標、001〜004適用済み／005稼働未適用を継承する。今回DB再照会はしていない。TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false。
+
+反映直前にremoteが`01088f7a69828c08a8c9ec0a98536f47efab0772`へ進んだため、§40.5の禁則再測定・prototype v2・追加5検査を保持して統合した。保存版も実装中のv2一致だけを対応対象とし、v1をv2外観へ置き換えない。統合後9suite405 PASSを確認した。保存済みfixtureの旧v1指定による途中2失敗はv2へ合わせて修正し、旧v1拒否検査も保持した。上流の結果記録`231000211e5a8f4347b7221e7ac4cc34af133464`も取り込み、履歴を保持した。
+
+### 41.3 再開位置
+
+本線は§40.3のB9読取単位/soft-wrapと実native metricsの同等性、target renderer admission・実機描画、保存前fit→同じpreviewの保存接続。保存済み詳細の共通canvas接続を作り直さない。capture/端末保存/共有・Nexus共通描画・preview設定変更・M5・005稼働適用・実Auth/実機は残る。本変更を全保存renderer対応やPiece全体完成にしない。

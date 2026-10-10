@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§36／current map §40（最新補修は§40.5）を優先する。同じnative Textの検査に加え、硬い禁則違反は規定font候補で再測定する。native_checkedは確認用であり保存前fitではない。B9 soft-wrap・renderer admission・保存・画像保存共有・実機・稼働切替は未完了。005は稼働未適用、001〜004は適用済みで再実行しない。**
+**現在は§37／current map §41を優先する。§40.5の禁則再測定を保持し、保存済み本人詳細へ同じ確認用canvasを接続した。対応はprototype v2に限定。保存前fit・B9同等性・保存共有・実機・稼働切替は未完了。005は稼働未適用、001〜004は適用済みで再実行しない。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -857,3 +857,11 @@ local9suite394 PASS／FAIL0／SKIP0、rendererは26件（今回8追加）。固�
 §36最終確認：source `7554b9cd716efab15e03d3c321c2ac4900da4bfb` の14fileをremote全文/path一致確認済み。検査環境だけを直した `888723804129afe63bf35b8dac50720b2d8757ee` の[CI 38023650569](https://github.com/MassyuRed/Cocolon/actions/runs/38023650569)は全3job成功。JSはInputScreenを含む423 PASS／FAIL0／SKIP0、Android javac単体source compileとiOS clang syntax-only・patch適用・pbxproj確認も成功。Androidのannotation不足警告18件はmap§40.4に記録。app build/実機描画/保存前fitは未成立で、保存・共有を有効化しない。
 
 §36追加補修：nativeの硬い禁則違反で最初のfont候補から直ちに画像不可へ落ちる動作を、実component＋合成native応答で再現した。全応答・書記素・描画範囲を照合した後、禁則違反だけは次の規定fontで全文を再測定する。全候補失敗は画像不可、glyph不明・不正応答は即停止。prototypeをv2へ更新し、本文・recipe・保存rendererのversionは変えない。local9suite399 PASS（renderer31件）。source `01088f7a69828c08a8c9ec0a98536f47efab0772` の[CI 38024570077](https://github.com/MassyuRed/Cocolon/actions/runs/38024570077)はInputScreen込み428 PASS／FAIL0／SKIP0、Android/iOS単体source検査も成功。対象7fileのremote bytesと変更path集合一致を確認済み。OS上の自然改行での発生・実機解消は未確認。詳細と次工程はmap§40.5。B9のsoft-wrap選択器を接続した結果ではなく、§40.3の保存前fit残件を継承する。
+
+## 37. 2026-10-10 — 保存済み本人詳細へ確認用画像レイアウトを共通接続
+
+詳細はcurrent map §41。freshな本人詳細に限り、既存PieceVisualCardとpieceLayoutの同じcatalog/geometry/native検査を使用する。saved契約＋3hashを再確認し、preview expiryや現在plan/quotaを持ち込まない。対応は実装済み`piece.rn_native_preview.prototype.v2`だけ。未知の保存rendererを現在の外観へ置き換えず、画像を表示できない場合も全文・本人操作を残す。一覧全件のnative測定は行わない。
+
+本人変更・背景化・停止・履歴再読・公開変更/削除中は既存host/controllerにより画像を除く。測定は保存identity/版/3hash/rendererへ結び、遅延結果を新しい詳細へ流用しない。native_checkedは確認用で、保存前fit・export・実機合格ではない。対応versionの実保存record存在も未確認。
+
+local9suite405 PASS／FAIL0／SKIP0（今回6追加）。InputScreenはlocal TypeScript欠落により未実行で、既存CIを反映後に確認する。ソース準備のみで、依存/native/API/DB/env/deploy/activation/build/main merge変更0。次はB9 soft-wrap・native metrics・renderer admission/実機・保存前fit→保存。本工程の詳細接続を再実装しない。画像保存共有・Nexus・設定変更・M5・005・実Authも残る。weekly§5.5・12/18目標、automatic_progression=falseを維持。

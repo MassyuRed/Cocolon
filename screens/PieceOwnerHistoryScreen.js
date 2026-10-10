@@ -7,6 +7,7 @@ import { useAppRuntime } from '../AppRuntimeContext';
 import { useTutorial } from '../TutorialContext';
 import { createPieceOwnerHistoryController } from '../features/piece/PieceOwnerHistoryController';
 import PieceOwnerCard from '../components/piece/PieceOwnerCard';
+import PieceVisualCard from '../components/piece/PieceVisualCard';
 
 const h = React.createElement;
 const flagNames = ['piece_v2_owner_read_enabled', 'piece_v2_visibility_toggle_enabled',
@@ -79,6 +80,7 @@ export class PieceOwnerHistoryHost extends React.Component {
           available && view.phase === 'loading' ? h(ActivityIndicator, { accessibilityLabel: 'Pieceを確認中' }) : null,
           available && view.phase === 'history' && view.items.length === 0 ? h(Text, { style: { color: '#202020', fontSize: 16 } }, '保存済みのPieceはありません。') : null,
           ...(available ? view.items.map(item => h(PieceOwnerCard, { key: item.piece_id, record: item, onOpen: () => this.act('openDetail', item.piece_id) })) : []),
+          record ? h(PieceVisualCard, { savedRecord: record }) : null,
           record ? h(PieceOwnerCard, { record }) : null,
           record && view.permissions.visibility && (record.visibility_scope === 'public' || view.permissions.publish)
             ? h(Button, { title: record.visibility_scope === 'public' ? '非公開にする' : '公開する', onPress: () => this.confirmVisibility(record) }) : null,
@@ -86,7 +88,7 @@ export class PieceOwnerHistoryHost extends React.Component {
           available && view.canRetryDelete ? h(Button, { title: '同じ削除要求で結果を確認', onPress: () => this.act('retryDelete') }) : null,
           available && view.phase !== 'loading' ? h(Button, { title: record ? '履歴に戻る' : '保存済みPieceを読み込む', onPress: () => this.act('loadHistory') }) : null,
           available && view.phase === 'history' && view.nextCursor ? h(Button, { title: '続きを読み込む', onPress: () => this.act('loadMore') }) : null,
-          h(Text, { style: { color: '#494949', fontSize: 14, lineHeight: 22, marginTop: 16 } }, '保存済み本文を確認する画面です。画像表示・画像の保存・共有は、まだ利用できません。'),
+          h(Text, { style: { color: '#494949', fontSize: 14, lineHeight: 22, marginTop: 16 } }, '保存済み本文を確認できます。詳細では、対応する画像レイアウトも確認できます。画像の保存・共有は、まだ利用できません。'),
         ),
         h(Button, { title: '戻る', onPress: () => { this.controller?.close(); this.props.navigation?.goBack?.(); } }),
       ),

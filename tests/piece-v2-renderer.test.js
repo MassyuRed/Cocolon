@@ -26,7 +26,7 @@ function sample(format = 'short_essay', ratio = '4:5', theme = 'soft_paper', bra
   return p;
 }
 const display = p => ({ phase: 'received', preview: p, hashVerified: true });
-function harness(p = sample(), nativeInspect) {
+function harness(p = sample(), nativeInspect, saved = false) {
   let now = NOW, serial = 0;
   const timers = new Map(), nativeCalls = [];
   let card;
@@ -50,9 +50,10 @@ function harness(p = sample(), nativeInspect) {
     clearTimeout: id => timers.delete(id),
     Date: class extends Date { static now() { return now; } } });
   const modules = [
-    ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot']],
-    ['features/piece/piecePreviewModel.js', ['readPiecePreviewDisplay']],
-    ['features/piece/pieceLayout.js', ['preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
+    ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'readPieceOwnerSnapshot']],
+    ['features/piece/piecePreviewModel.js', ['readPiecePreviewDisplay', 'verifyPieceArtifactHashes']],
+    ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay']],
+    ['features/piece/pieceLayout.js', ['preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
     ['features/piece/pieceRenderer.js', ['inspectPieceText', 'readPieceTextInspection']],
     ['components/piece/PieceVisualCard.js', ['PieceVisualCard']],
   ];
@@ -61,7 +62,7 @@ function harness(p = sample(), nativeInspect) {
       .replace(/^export default /gm, '').replace(/^export /gm, '');
     vm.runInContext(`{\n${source}\n${names.map(n => `globalThis.${n} = ${n};`).join('\n')}\n}`, context, { filename: file });
   }
-  card = new context.PieceVisualCard({ display: display(p) }); card.componentDidMount();
+  card = new context.PieceVisualCard(saved ? { savedRecord: p } : { display: display(p) }); card.componentDidMount();
   const render = () => {
     const tree = card.render();
     for (const node of nodes(tree)) if (typeof node.props.ref === 'function') {
@@ -74,8 +75,8 @@ function harness(p = sample(), nativeInspect) {
   const resize = width => find('piece-visual-preview').props.onLayout({ nativeEvent: { layout: { width } } });
   resize(324);
   return { ...context, card, nodes, find, resize, render, timers, nativeCalls, now: value => { now = value; },
-    input: () => context.preparePieceNativePreview(card.props.display),
-    replace: packet => { card.props = { display: display(packet) };
+    input: () => context.preparePieceNativeCard(card.props),
+    replace: packet => { card.props = saved ? { savedRecord: packet } : { display: display(packet) };
       card.setState(context.PieceVisualCard.getDerivedStateFromProps(card.props, card.state)); },
   };
 }
@@ -479,4 +480,64 @@ test('a batched fired timeout cannot discard a new generation of the same artifa
   for (const update of queue) apply(update);
   assert.equal(h.card.state.measurement, fresh);
   await finish(h); assert.equal(h.card.state.measurement.phase, 'native_checked');
+});
+
+function savedSample(p = sample()) {
+  const value = copy(p);
+  for (const k of ['preview_id', 'preview_revision', 'expires_at', 'eligible_formats', 'quota', 'plan_capabilities']) delete value[k];
+  const id = '30000000-0000-4000-8000-000000000003';
+  return { ...value, piece_id: id, public_id: 'piece:' + id, row_version: 2,
+    lifecycle_status: 'saved', saved_at: '2026-01-01T00:00:00Z',
+    export_contract_version: 'piece.export_contract.v1', render_interface_version: 'piece.render_interface.v1',
+    render_reproducibility_version: 'piece.render_reproducibility.v1',
+    renderer_version: 'piece.rn_native_preview.prototype.v2' };
+}
+test('saved detail uses the same canvas with immutable recipe, all formats and no preview/tier admission', async () => {
+  for (const format of ['short_essay', 'quote', 'declaration']) for (const ratio of ['4:5', '9:16']) {
+    const p = sample(format, ratio, 'quiet_night', 'off');
+    const preview = harness(p), saved = harness(savedSample(p), undefined, true);
+    const withoutKey = input => { const out = copy(input); delete out.key; return out; };
+    assert.deepEqual(withoutKey(saved.input()), withoutKey(preview.input()));
+    assert.notEqual(saved.input().key, preview.input().key);
+    assert.ok(!('quota' in saved.input()));
+    saved.now(Date.parse('2031-01-01T00:00:00Z'));
+    await finish(saved);
+    assert.equal(saved.card.state.measurement.phase, 'native_checked');
+    assert.equal(saved.find('piece-logical-canvas').props.style.opacity, 1);
+    assert.equal(saved.card.state.measurement.canSave, false);
+    assert.equal(saved.card.state.measurement.canExport, false);
+    assert.equal(saved.card.state.measurement.layout_state, undefined);
+  }
+});
+test('saved rendering validates all hashes, lifecycle and pinned renderer without substituting preview data', () => {
+  const h = harness();
+  for (const mutate of [r => { r.piece_text_hash = 'a'.repeat(64); },
+    r => { r.content_payload_hash = 'a'.repeat(64); }, r => { r.visual_recipe_hash = 'a'.repeat(64); },
+    r => { r.lifecycle_status = 'deleted'; }, r => { r.renderer_version = 'piece.rn_renderer.v1'; },
+    r => { r.renderer_version = 'piece.rn_native_preview.prototype.v1'; },
+    r => { r.renderer_version = 'unknown'; }, r => { r.quota = {}; }]) {
+    const r = savedSample(); mutate(r);
+    assert.equal(h.preparePieceNativeSavedDisplay(r), null);
+  }
+  assert.equal(h.preparePieceNativeCard({ savedRecord: savedSample(), display: display(sample()) }), null);
+  assert.equal(h.preparePieceNativeCard({}), null);
+});
+test('saved row-version/detail replacement cannot reuse pending native success or old measurement events', async () => {
+  let release;
+  const h = harness(savedSample(), result => new Promise(resolve => { release = () => resolve(result); }), true);
+  const originalKey = h.input().key;
+  for (let i = 0; i <= h.input().blocks.length; i++) sendBlock(h, i, { height: i === h.input().blocks.length ? 40 : 100 });
+  const stale = h.find('piece-visual-block-0');
+  h.replace({ ...savedSample(), row_version: 3 });
+  assert.notEqual(h.input().key, originalKey);
+  stale.props.onLayout({ nativeEvent: { layout: { width: 888, height: 1 } } });
+  release(); await new Promise(resolve => setImmediate(resolve));
+  assert.equal(h.card.state.measurement.phase, 'measuring');
+  assert.deepEqual(copy(h.card.state.measurement.blocks), {});
+  assert.equal(h.find('piece-logical-canvas').props.style.opacity, 0);
+  const id = '40000000-0000-4000-8000-000000000004';
+  h.replace({ ...savedSample(), piece_id: id, public_id: 'piece:' + id });
+  assert.notEqual(h.input().key, originalKey);
+  h.card.componentWillUnmount();
+  assert.equal(h.timers.size, 0); assert.equal(h.card.textNodes.size, 0);
 });

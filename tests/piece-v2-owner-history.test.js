@@ -39,7 +39,7 @@ function harness({ send, session, random } = {}) {
     getAccessToken: async owner => { sessions.push(owner); return session ? session(owner, sessions.length) : 'synthetic'; },
     Alert: { alert: (...args) => alerts.push(args) },
     AppState: { currentState: 'active', addEventListener: (event, fn) => { appListeners.add(fn); return { remove: () => appListeners.delete(fn) }; } },
-    View: 'View', Text: 'Text', ScrollView: 'ScrollView', Button: 'Button', SafeAreaView: 'SafeAreaView', ActivityIndicator: 'ActivityIndicator',
+    PieceVisualCard: 'PieceVisualCard', View: 'View', Text: 'Text', ScrollView: 'ScrollView', Button: 'Button', SafeAreaView: 'SafeAreaView', ActivityIndicator: 'ActivityIndicator',
   });
   // Each ESM module retains a distinct scope, as in the application bundle.
   const exports = [
@@ -241,4 +241,54 @@ test('disabled delete cannot write, and key generation failure does not report d
   await open(broken); await broken.controller.deleteConfirmed(broken.controller.getView().record);
   assert.equal(broken.calls.length, 2); assert.equal(broken.controller.getView().canRetryDelete, false);
   assert.match(broken.controller.getView().message, /開始できませんでした/);
+});
+
+
+test('only fresh owner detail mounts the shared saved canvas while keeping the complete accessible text', async () => {
+  const h = harness({ send: ownerSend });
+  const host = new h.PieceOwnerHistoryHost({ owner: OWNER, flags, enabled: true });
+  host.componentDidMount(); await host.act('loadHistory');
+  const images = () => nodes(host.render()).filter(n => n.type === 'PieceVisualCard');
+  assert.equal(images().length, 0);
+  await host.act('openDetail', PID);
+  assert.equal(images().length, 1);
+  assert.equal(images()[0].props.savedRecord, host.controller.getView().record);
+  assert.equal(images()[0].props.display, undefined);
+  const body = nodes(host.render()).find(n => n.props.testID === 'piece-owner-text');
+  assert.equal(body.props.selectable, true); assert.ok(body.children.includes(record().piece_text));
+  await host.act('loadHistory'); assert.equal(images().length, 0);
+  host.componentWillUnmount();
+});
+test('owner identity, background, disabled reader, close and leaving the screen remove the saved canvas immediately', async () => {
+  for (const change of [host => { host.props = { ...host.props, owner: RID }; },
+    (host, h) => h.background('background'),
+    host => { host.props = { ...host.props, flags: {} }; },
+    host => { host.props = { ...host.props, enabled: false }; },
+    host => host.controller.close()]) {
+    const h = harness({ send: ownerSend });
+    const host = new h.PieceOwnerHistoryHost({ owner: OWNER, flags, enabled: true });
+    host.componentDidMount(); await host.act('loadHistory'); await host.act('openDetail', PID);
+    assert.equal(nodes(host.render()).filter(n => n.type === 'PieceVisualCard').length, 1);
+    change(host, h);
+    assert.equal(nodes(host.render()).filter(n => n.type === 'PieceVisualCard').length, 0);
+    assert.ok(!texts(host.render()).includes(record().piece_text));
+    host.componentWillUnmount();
+  }
+});
+test('visibility and deletion hide saved canvas during mutation and never reuse an unconfirmed record', async () => {
+  for (const action of ['visibility', 'delete']) {
+    let release;
+    const h = harness({ send: (url, init) => ['PATCH', 'DELETE'].includes(init.method)
+      ? new Promise(resolve => { release = resolve; }) : ownerSend(url, init) });
+    const host = new h.PieceOwnerHistoryHost({ owner: OWNER, flags, enabled: true });
+    host.componentDidMount(); await host.act('loadHistory'); await host.act('openDetail', PID);
+    const before = host.controller.getView().record;
+    const pending = action === 'visibility' ? host.act('setVisibility', 'public') : host.act('deleteConfirmed', before);
+    await tick();
+    assert.equal(nodes(host.render()).filter(n => n.type === 'PieceVisualCard').length, 0);
+    release(packet({ code: 'PIECE_TEMPORARILY_UNAVAILABLE' }, 503)); await pending;
+    assert.equal(nodes(host.render()).filter(n => n.type === 'PieceVisualCard').length, 0);
+    assert.ok(!texts(host.render()).includes(before.piece_text));
+    host.componentWillUnmount();
+  }
 });

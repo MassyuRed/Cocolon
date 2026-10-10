@@ -5,6 +5,7 @@
  * geometry_checked never means layout_state=fit or canSave/canExport.
  */
 import { readPiecePreviewDisplay } from './piecePreviewModel';
+import { readPieceOwnerDisplay } from './pieceOwnerModel';
 
 export const PIECE_NATIVE_PREVIEW_VERSION = 'piece.rn_native_preview.prototype.v2';
 const nativeThemes = {
@@ -29,10 +30,37 @@ const frozenNative = value => {
 export function preparePieceNativePreview(display, nowMs = Date.now()) {
   const checked = readPiecePreviewDisplay(display, nowMs);
   if (!checked.hashVerified || !checked.preview) return null;
-  const p = checked.preview, recipe = p.visual_recipe, ratio = recipe.aspect_ratio;
-  const tall = ratio === '9:16', margin = tall ? 108 : 96, brandingZone = tall ? 84 : 72;
-  const key = JSON.stringify([PIECE_NATIVE_PREVIEW_VERSION, p.preview_id, p.preview_revision,
+  const p = checked.preview;
+  const key = JSON.stringify([PIECE_NATIVE_PREVIEW_VERSION, 'preview', p.preview_id, p.preview_revision,
     p.row_version, p.expires_at, p.piece_text_hash, p.content_payload_hash, p.visual_recipe_hash, p.renderer_version]);
+  return preparePieceNativeArtifact(p, key);
+}
+
+// A saved record is not a preview. Recheck the closed saved contract and all
+// three hashes, without inventing expiry, source, quota or current-plan data.
+// Only this implemented prototype can be reconstructed here. In particular,
+// the design's rn_renderer.v1 example is not an admitted implementation.
+export function preparePieceNativeSavedDisplay(raw) {
+  try {
+    const p = readPieceOwnerDisplay(raw);
+    if (p.renderer_version !== PIECE_NATIVE_PREVIEW_VERSION) return null;
+    const key = JSON.stringify([PIECE_NATIVE_PREVIEW_VERSION, 'saved', p.piece_id, p.public_id,
+      p.row_version, p.saved_at, p.piece_text_hash, p.content_payload_hash, p.visual_recipe_hash, p.renderer_version]);
+    return preparePieceNativeArtifact(p, key);
+  } catch { return null; }
+}
+
+export function preparePieceNativeCard(props) {
+  const saved = Object.prototype.hasOwnProperty.call(props, 'savedRecord');
+  if (saved && Object.prototype.hasOwnProperty.call(props, 'display')) return null;
+  return saved ? preparePieceNativeSavedDisplay(props.savedRecord) : preparePieceNativePreview(props.display);
+}
+
+// One catalog/layout owner for both paths; neither grants save/export or
+// claims native-device acceptance. The host owns access and unmounting.
+function preparePieceNativeArtifact(p, key) {
+  const recipe = p.visual_recipe, ratio = recipe.aspect_ratio;
+  const tall = ratio === '9:16', margin = tall ? 108 : 96, brandingZone = tall ? 84 : 72;
   return frozenNative({ key, width: 1080, height: tall ? 1920 : 1350, margin, brandingZone,
     contentWidth: 1080 - 2 * margin, contentHeight: (tall ? 1920 : 1350) - 2 * margin - brandingZone,
     blocks: [...p.content_payload.body_blocks], sizes: [...nativeScales[p.format_type][ratio]],
