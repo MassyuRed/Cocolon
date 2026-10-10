@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§46／current map §50を優先する。既存preview/shared候補へ非公開保存を接続しました。保存は独立した厳密なrequested/readyと実効previewに依存し、回数表示から許可しません。local261件成功、隔離CIは1,789 PASS／FAIL0／SKIP0。実機描画・保存前fit・RN保存/画像共有・稼働採用は残っています。**
+**現在は§47／current map §51を優先する。既存RNへ保存APIの通信処理を追加しました。本文を再送せずpreviewの版・3hashと同じkeyを保持し、再取得では現在の公開範囲を受け取ります。local/CIとも11suite557 PASS／FAIL0／SKIP0。実機描画・保存前fit・保存ボタン接続・画像共有・稼働採用は残っています。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -960,3 +960,17 @@ local関連3file **211 PASS／FAIL0／SKIP0**。既存構成の旧応答、候�
 local関連5file **261 PASS／FAIL0／SKIP0**。両候補の独立した保存準備、preview依存、認証優先、bootstrap、default registryを検査。既存の[隔離CI38089343394](https://github.com/MassyuRed/mashos-api/actions/runs/38089343394)は **1,789 PASS／FAIL0／SKIP0**。新native12件を含み、同じ本文・画像設定の保存/本人再取得、commit後停止・ACK消失からの同key復旧と回数1回を確認した。localとの合算なし。全6fileのremote全文・変更path集合・親headを照合済み。合成Auth/source/HTTP境界であり、実端末の保存・画像共有の受入れとは区別する。途中の検査補修と結果はmap §50.2へ記録する。
 
 次はnative B9実端末の描画同等性・glyph/ink/性能とrenderer admission→保存前fit→RN保存操作。形式変更・capture/画像保存共有・Nexus v2公開読取/公開切替・M5/実Auth・稼働採用も残る。今回のprivate save候補接続と、既存quota・owner GET/DELETE・preview取消/visual PATCHを再実装しない。Supabaseはproject/migration履歴の読取のみで001〜004適用済み・005 quotaとvisual変更SQL未適用を確認。DB書込・env/deploy/activation・native app build・main merge0。weekly§5.5・12/18目標・automatic_progression=falseを維持する。
+
+
+## 47. 2026-10-11 — RNに同じプレビューの保存通信を追加
+
+詳細ownerはcurrent map §51。B10既存 `features/piece/pieceApi.js` に `requestPieceSave` を追加した。preview ID・revision・3hashと公開範囲（省略/nullはprivate）だけを閉じた要求として送り、本文/recipe・client fit・権限情報は送らない。要求・owner・keyを最初のawait前に固定し、本人切替やabort後の結果を採用しない。応答不明でも自動再送や別key発行は行わず、呼出元の明示再試行で同じkey/requestを使う。
+
+保存後に公開範囲が変わった場合、正規replayは現在のvisibilityとrow versionを返す既存SQL契約に合わせた。初回は要求visibility一致を検査し、replayはprivate/publicのenumを検査して現在状態を保持する。保存回数上限は固定の日本語文言にし、previewの拒否条件へ流用しない。
+
+source `ca4ce05cf1f62ed5fad3a0a72733e2956d8ae0a7` の製品1＋test1をDraft PR #30へ反映し、remote全文/変更path集合/親head一致を確認済み。localはInputScreen込み既存11suite **557 PASS／FAIL0／SKIP0**（先行545＋追加12）。同環境read-only reviewでreplay visibilityの不一致を検出し、回帰検査追加と修正後にblocking指摘なし。Auth/HTTP/React/nativeは合成を含み、今回SQL・実Auth・実機を実行した結果ではない。CI最終値は以下に記録。
+
+次はnative B9実機描画同等性/glyph/ink/性能・renderer admission→保存前fit→既存controller/modalの保存操作。通信処理は今回のownerを使用し再実装しない。canSave/canExport=falseを保持し、形式変更・画像保存共有・Nexus v2公開読取/切替・M5/実Auth/稼働構成も残る。API/native/SQL/依存/workflowの変更0、Supabase操作・env/deploy/activation/app build/main merge0。001〜004適用済みと追加2本未適用は先行確認を継承。weekly10/10 §5.5・12/18目標・automatic_progression=falseを維持する。
+
+
+§47最終確認：[CI38090399330](https://github.com/MassyuRed/Cocolon/actions/runs/38090399330)はInputScreen込み11suite **557 PASS／FAIL0／SKIP0**、Android単体source compile・iOS syntax-only/既存patch/pbxprojも成功。Node24.21.0／TypeScript5.2.2。既存contract guards等も全success。localとCIの合算なし。Android既存annotation不足警告18件と検査境界はmap§51.2へ記録した。保存操作・native fit・実機の完成ではない。

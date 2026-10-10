@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は§50を優先します。既存の専用preview/shared候補構成へ非公開保存を接続しました。同じプレビューの本文・画像設定を保存し、同keyで保存結果を取り戻す既存処理を使用します。保存は独立した厳密なrequested/readyと実効previewに依存します。既定OFF・未配置で、実機描画・保存前fit・RN保存/画像共有・稼働採用は残っています。**
+**現在は§51を優先します。既存RNの保存通信を追加し、同じpreviewの版・3hash・keyによる保存結果の受取を実装しました。既定private、本人切替/中断後の応答拒否、正規replayの現在visibility保持を検査しています。保存操作とnative fitは未接続で、canSave/canExport=falseです。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1823,3 +1823,31 @@ API source `6b901a1df0037c047513e794624917a09b0f3ac4`、製品2＋test4を既存
 次はnative B9実端末の描画同等性・glyph/ink/性能、renderer admission→保存前fit→RN保存操作。形式変更、capture/画像保存共有、Nexus v2公開読取/公開切替、M5/実Auth・稼働設定が残る。private saveの候補API構成は今回の接続を使い、quota・owner GET/DELETE・preview取消/visual PATCHとともに再実装しない。公開切替のowner_read/public_read/public_write依存を保持し、未接続の公開読取をready扱いしない。
 
 Supabase project metadataとmigration履歴の読取で001〜004適用済み、005 quotaとvisual変更SQLの追加2本未適用を確認。live DB query/write/apply、env/deploy/activation、native app build、main mergeは0。RN canSave/canExport=falseを維持する。weekly §5.5の実機確認順序と12/18公開目標を保持し、Piece全内容完成を実機確認の前提へ追加しない。TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false。
+
+
+## 51. 2026-10-11 — RNの保存通信と同keyでの結果受取（操作未接続）
+
+### 51.1 残件と既存owner
+
+MashのPiece残件続行指示に基づくB10の通信接続。前回の§50で候補APIへ登録した保存処理に対して、RN側のHTTP ownerが未実装だった。既読の全体設計・全ファイル地図・前回txtと最新weekly10/10 §5.5を引き継ぎ、今回もCURRENT_RULES・必読incident全文・§50、PCE6 RN flow/clean cutover、PCE5保存前fit、PCE8 B10と現行sourceを照合した。開始Cocolon `6e601b40ed675c99801ba84f4e5994eb0fc701c6`、API `6b901a1df0037c047513e794624917a09b0f3ac4`。root華恋が単一writer、補助agentは同環境read-only reviewであり、独立modelによる正式商品受入れではない。
+
+| 既存owner | 今回の変更・責務 |
+|---|---|
+| `features/piece/pieceApi.js` | `requestPieceSave` を追加。既存shared auth transportへPOST `/emotion/piece/save`。exact5 identity/version/hashにvisibilityだけを追加し、省略/nullはprivate。本文/recipe/fit/権限の混入を拒否。callerのowner/key/requestを最初のawait前に固定。 |
+| 同保存transport | HTTP前後の本人再照合、各await境界のabort、no-store、closed errorとexact7 receipt。piece ID・消費UUID・保存状態・正数版・日時・replay boolを検査し、detached frozen receiptを返す。自動再送・別key発行・生成/expiryによる再取得阻害を追加しない。 |
+| `tests/piece-v2-contracts.test.js` | 実moduleでprivate既定・要求snapshot・不正入力/receipt・本人切替・abort・未知結果から同key再取得・現在visibility/versionの保持・quota errorのpreview隔離を追加。 |
+| `PieceCreateController.js` / `piecePreviewModel.js` / `PiecePreviewModal.js` / native renderer | 変更なし。保存操作・native fit/admissionは接続していない。quota表示、`native_checked`、renderer文字列から保存許可を作らず、canSave/canExport=falseを保持する。 |
+
+初回receiptは要求visibility一致が必要。正規same-key replayは既存atomic SQLとB4検査に従い、現在のprivate/public・row versionを受け取り、古い公開範囲へ戻さない。public要求の契約は受け付けるが許可は推測せず、前回の候補APIが返すfeature-disabled等を保持する。保存上限の固定文言を追加し、previewではquotaコードを一時利用不可へ閉じる。保存済み本文や生エラーをログ/永続領域へ出さない。
+
+### 51.2 検証と反映
+
+source `ca4ce05cf1f62ed5fad3a0a72733e2956d8ae0a7`、製品1＋test1を既存Draft PR #30へ反映。全2fileのremote全文・変更path集合・親head一致を確認済み。local Node24.19.0／既存TypeScript5.2.2でInputScreen込み既存11suite **557 PASS／FAIL0／SKIP0**（先行545＋追加12、contracts126）。既存test compilerはscratchに補い、repositoryの依存定義は変更しない。先行targeted125 PASS後、read-only reviewで正規replayのvisibility equality過剰制約を発見し修正。正規public replay/version3/同consumptionの回帰1件と不正enum拒否を追加した。再reviewでblocking指摘なし。検査の途中FAILは0。[CI38090399330](https://github.com/MassyuRed/Cocolon/actions/runs/38090399330)／job114325475500も同じ11suite **557 PASS／FAIL0／SKIP0**。Node24.21.0／TypeScript5.2.2。Android source compile job114325475644、iOS syntax-only/既存patch/pbxproj job114325475560はsuccess。Androidには既存のannotation不足警告18件（Scope.LIBRARY_GROUP_PREFIX）があり、native app buildや端末実行を意味しない。既存contract guardsとread-only workflow policy/exact Draft pytest/terminal Step7も全success。localとの合算なし。
+
+Auth/HTTP/React/nativeは合成を含む。通信の要求固定・結果検証を確認する検査であり、実native描画、実Auth/PostgREST、SQL実行、保存ボタン経路、商品受入れの証拠ではない。§50のAPI隔離CI1,789件は先行証拠として保持し、今回の557件へ合算しない。
+
+### 51.3 再開位置と稼働境界
+
+次は既存native B9の実端末描画同等性・glyph/ink/性能、renderer admission→保存前fit→controller/modalの同preview保存操作。新transportを利用し、同key/要求保持・未知結果・停止・本人切替を画面状態へ結ぶ。今回の通信ownerや§50の候補APIを再実装しない。形式変更、capture/画像保存共有、Nexus v2公開読取/公開切替、M5/実Auth・稼働構成が残る。
+
+API/native/SQL/依存定義/workflow変更0、Supabase操作0、env/deploy/activation/native app build/main merge0。001〜004適用済み、005 quotaとvisual変更SQLの2本未適用は§50の先行確認を継承し、今回再照会したとは扱わない。weekly §5.5の実機順序と12/18公開目標を保持し、Piece全内容完成を実機確認の前提へ追加しない。TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false。

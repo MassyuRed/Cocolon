@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v45",
+  "schema_version": "cocolon.piece.workstream_manifest.v46",
   "generated_at": "2026-10-11 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v44",
-    "predecessor_blob": "9f58cddf960a81f0a20a832eba7a38aecc0ddce4",
-    "predecessor_head": "16c6275f694a33200a6fc7cc1961be5b9c1bc0e6",
-    "carry_forward": "Explicit preview/shared candidates register private save using an independent strict requested/ready pair and effective preview dependency. Native device/fit/RN save/live remain pending."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v45",
+    "predecessor_blob": "4ebab2c4a36fe16bd16dd8e9ee78f373a9a8dbf4",
+    "predecessor_head": "6e601b40ed675c99801ba84f4e5994eb0fc701c6",
+    "carry_forward": "Existing RN save transport preserves exact preview identity/revision/hashes, private default and caller retry key. Current visibility/version is retained on replay. Native fit and save actions remain pending."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "a370a943ddaba996d41eb879940a92503be4c6e9",
-    "raw_sha256": "cc618f8f5fbe815e83d2e5f29da08953f1c2cd8d64e2d9a110ac16f19e2b97f6",
-    "utf8_bytes": 80212
+    "git_blob_sha1": "0bd785a81bf07f79a5d6b743ed4b4c3b8dae14d3",
+    "raw_sha256": "c5e198688107138f735688630b2c6a4294d35e4ed22121c258b4e2306f0af74e",
+    "utf8_bytes": 82760
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -79,7 +79,8 @@
     "pce9a_owner_read_composition": "REMOTE_CANDIDATE_REGISTERED__ISOLATED_CI1717_PASS__NOT_LIVE",
     "pce9a_owner_delete_composition": "REMOTE_CANDIDATE_REGISTERED__ISOLATED_CI1759_PASS__NOT_LIVE",
     "pce9a_quota_composition": "REMOTE_CANDIDATE_REGISTERED__ISOLATED_CI1774_PASS__NOT_LIVE",
-    "pce9a_private_save_composition": "REMOTE_CANDIDATE_REGISTERED__ISOLATED_CI1789_PASS__NOT_LIVE"
+    "pce9a_private_save_composition": "REMOTE_CANDIDATE_REGISTERED__ISOLATED_CI1789_PASS__NOT_LIVE",
+    "pce9c_save_transport": "REMOTE_CI557_PASS__SAVE_ACTION_NATIVE_FIT_DEVICE_PENDING"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -161,7 +162,7 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "16c6275f694a33200a6fc7cc1961be5b9c1bc0e6",
+    "cocolon_pre_sync_head": "6e601b40ed675c99801ba84f4e5994eb0fc701c6",
     "mashos_api_head": "6b901a1df0037c047513e794624917a09b0f3ac4",
     "current_user_visible_piece_shape": "OLD_QNA_REGISTERED_IN_SOURCE__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
@@ -177,7 +178,7 @@
     "input_screen_source_connected": true,
     "live_auth_input_to_preview_to_device_verified": false,
     "database_evidence_owner": "live_db_apply_20261010",
-    "remaining_work_owner": "private_save_composition_20261011",
+    "remaining_work_owner": "rn_save_transport_20261011",
     "product_acceptance": false,
     "piece_v2_default_application_registered": false,
     "piece_v2_quota_http_present": true,
@@ -205,18 +206,20 @@
     "piece_v2_quota_candidate_registered": true,
     "piece_v2_quota_runtime_registered": false,
     "piece_v2_private_save_candidate_registered": true,
-    "piece_v2_private_save_runtime_registered": false
+    "piece_v2_private_save_runtime_registered": false,
+    "piece_v2_rn_save_transport_present": true,
+    "piece_v2_rn_save_action_connected": false
   },
   "next_group": {
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "NATIVE_DEVICE_RENDERER_ADMISSION_THEN_SAVE_FIT_AND_BOUND_SAVE",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "PRIVATE_SAVE_OWNER_READ_DELETE_QUOTA_CANDIDATE_CONNECTED__NATIVE_DEVICE_FIT_RN_SAVE_LIVE_PENDING",
-    "current_map_section": "50.3",
-    "current_entry_section": "46",
+    "state": "RN_SAVE_TRANSPORT_CONNECTED__NATIVE_DEVICE_FIT_SAVE_ACTION_LIVE_PENDING",
+    "current_map_section": "51.3",
+    "current_entry_section": "47",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
     "weekly_review_section": "5.5",
-    "first_unfinished_work": "Native B9 device drawing equivalence/glyph/ink/performance and renderer admission, then save fit/RN save. Format mutation, capture/share, Nexus v2 public read/visibility composition, M5/live005+visual SQL/Auth remain.",
+    "first_unfinished_work": "Native B9 device drawing equivalence/glyph/ink/performance and renderer admission, then save fit and controller/modal save action using existing transport. Format mutation, capture/share, Nexus v2 public read/visibility, M5/live005+visual SQL/Auth remain.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 4,
@@ -239,7 +242,8 @@
     "repeat_owner_read_composition": false,
     "repeat_owner_delete_composition": false,
     "repeat_quota_candidate_connection": false,
-    "repeat_private_save_candidate_connection": false
+    "repeat_private_save_candidate_connection": false,
+    "repeat_rn_save_transport": false
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -293,9 +297,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "2e102aa1b3b9fc698b8c5ee7583a08384103016b",
-    "raw_sha256": "46252af35024f836d69959d00db39fbcc343d0c90ec50c566ef747956f4c9690",
-    "utf8_bytes": 260474
+    "git_blob_sha1": "32cff15340d570075e0c6f23622f0147d4cc4e26",
+    "raw_sha256": "a8b1110520d24a6ef7e1791cc0fb3ea7bceb21f5edb930db866b8db0e41c4752",
+    "utf8_bytes": 271298
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -468,11 +472,11 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "EXISTING_PRIVATE_SAVE_CANDIDATE_COMPOSITION",
+    "classification": "EXISTING_RN_PRIVATE_SAVE_TRANSPORT",
     "piece_documentation_paths": 3,
-    "api_product_paths": 2,
-    "api_test_paths": 4,
-    "rn_changed_paths": 0,
+    "api_product_paths": 0,
+    "api_test_paths": 0,
+    "rn_changed_paths": 1,
     "native_changed_paths": 0,
     "sql_changed_paths": 0,
     "new_dependency": 0,
@@ -480,7 +484,8 @@
     "live_database_apply": 0,
     "release_effect": 0,
     "product_acceptance": false,
-    "automatic_progression": false
+    "automatic_progression": false,
+    "rn_test_paths": 1
   },
   "b06_q3_context_fence": {
     "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
@@ -3329,6 +3334,64 @@
     "native_fit_admission": false,
     "live_metadata_and_migration_reads_only": true,
     "live_database_query_write_apply": 0,
+    "deploy": 0,
+    "activation": 0,
+    "main_merge": 0,
+    "product_acceptance": false,
+    "automatic_progression": false
+  },
+  "rn_save_transport_20261011": {
+    "status": "REMOTE_CI557_PASS__NOT_DEPLOYED",
+    "source_commit": "ca4ce05cf1f62ed5fad3a0a72733e2956d8ae0a7",
+    "base_head": "6e601b40ed675c99801ba84f4e5994eb0fc701c6",
+    "owner_paths": [
+      "features/piece/pieceApi.js"
+    ],
+    "test_paths": [
+      "tests/piece-v2-contracts.test.js"
+    ],
+    "verification": {
+      "local_passed": 557,
+      "local_failed": 0,
+      "local_skipped": 0,
+      "local_suites": 11,
+      "contracts_passed": 126,
+      "new_cases": 12,
+      "node_local": "24.19.0",
+      "typescript": "5.2.2",
+      "ci_pending": false,
+      "ci_run_id": 38090399330,
+      "remote_file_matches": 2,
+      "remote_changed_paths_match": true,
+      "remote_parent_match": true,
+      "review": "READ_ONLY_SAME_ENVIRONMENT__CURRENT_VISIBILITY_REPLAY_FIXED__NO_REMAINING_BLOCKER",
+      "synthetic_auth_http_react_native": true,
+      "real_auth_sql_device": false,
+      "ci_job_id": 114325475500,
+      "ci_passed": 557,
+      "ci_failed": 0,
+      "ci_skipped": 0,
+      "ci_conclusion": "success",
+      "node_ci": "24.21.0",
+      "android_source_job_id": 114325475644,
+      "android_source_conclusion": "success",
+      "android_existing_annotation_warnings": 18,
+      "ios_source_job_id": 114325475560,
+      "ios_source_conclusion": "success",
+      "contract_guards_run_ids": [
+        38090399447,
+        38090412724
+      ],
+      "contract_guards_conclusion": "success"
+    },
+    "private_default": true,
+    "same_caller_key_no_automatic_retry": true,
+    "replay_keeps_current_visibility_version": true,
+    "save_action_connected": false,
+    "native_fit_admission": false,
+    "can_save": false,
+    "can_export": false,
+    "live_database_operations": 0,
     "deploy": 0,
     "activation": 0,
     "main_merge": 0,
