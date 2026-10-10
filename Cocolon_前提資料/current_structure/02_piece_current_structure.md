@@ -1,8 +1,8 @@
 ---
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
-revision_date: "2026-10-10 JST"
-latest_api_implementation: "d7e1cabf6f3f622f7e0f042d137eb1c29237dd42"
+revision_date: "2026-10-11 JST"
+latest_api_implementation: "6b901a1df0037c047513e794624917a09b0f3ac4"
 latest_storage_candidate: "4fcb140b778850a1b7a5a65d8e0a26005b3a24c4"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は§47を優先します。保存済みPieceの本人向け一覧・詳細を、既存の専用preview/shared候補構成へ接続しました。生成を停止しても独立した読取flagで保存時の本文・画像設定を読めます。既存quota URLの優先順位も保持。既定OFF・未配置で、実機描画・保存前fit・保存共有・稼働採用は残っています。**
+**現在は§50を優先します。既存の専用preview/shared候補構成へ非公開保存を接続しました。同じプレビューの本文・画像設定を保存し、同keyで保存結果を取り戻す既存処理を使用します。保存は独立した厳密なrequested/readyと実効previewに依存します。既定OFF・未配置で、実機描画・保存前fit・RN保存/画像共有・稼働採用は残っています。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1791,3 +1791,35 @@ API source `6384f8b165337a47adf052e3ccc4f2fe3a2a28c3`、製品5＋test4。local�
 公開切替は現resolverでowner_read AND public_readが必要で、public指定時はpublic_write（save/preview/public_read依存）も要求する。現公開読取は旧Q&Aのownerであるため、visibility requested/readyだけを追加して成立扱いにしない。private対象だけの例外やpublic_readの準備済み捏造も行わない。今回の回数表示からcanSave/canExportを有効化しない。
 
 Supabase操作・live DB query/write/apply、env/deploy/activation、native app build、main mergeは0。RN/native/SQL/依存/workflow変更0。001〜004適用済み、005 quotaとvisual変更SQLの稼働未適用は先行確認を継承し、再照会や再適用はしていない。weekly §5.5・12/18公開目標を維持し、Piece全内容完成を実機確認の前提へ追加しない。TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false。
+
+
+## 50. 2026-10-11 — 同じプレビューの非公開保存を候補APIへ接続（未配置）
+
+### 50.1 残件と実装owner
+
+MashのPiece残件続行指示に基づき、§49.3の保存API構成を接続した。既存save handler/service/store/SQLは実装済みで、専用preview/shared候補から呼べなかった。今回は同じプレビューをprivateで保存する候補接続に限定し、端末描画・保存前fitや公開読取の準備済みを捏造しない。
+
+開始headはCocolon `16c6275f694a33200a6fc7cc1961be5b9c1bc0e6`／API `6384f8b165337a47adf052e3ccc4f2fe3a2a28c3`。添付の前回作業txt、全体設計01/01B・全ファイル地図とcurrent map、Piece入口/manifestとPCE6・PCE7・PCE8/B6、最新weekly 10/10 §5.5と§4.7、作業ルールと恒久incidentを確認した。System Context prepareはworkspace配下のmashos-api不在でcode2となり、原典の直接読取を使用。Workの既存非稼働実装/隔離検証範囲、root華恋が単一writer、補助agentは同環境read-only review。独立modelの正式商品受入れとは扱わない。
+
+| 既存owner | 今回の変更 |
+|---|---|
+| `ai/services/ai_inference/piece_v2_runtime_control.py` | 既存 `api_piece_v2.save_preview` を `POST /emotion/piece/save` へ直接登録。専用構成11route。`save_requested` / `save_ready` を両方 `is True` で採用し、既存resolverの実効preview依存を保持。defaultはFalse。 |
+| `ai/services/ai_inference/api_contract_registry.py` | candidateだけ `emotion.piece.save.v2` を追加。default registryとpolicy versionは保持。 |
+| 既存 `app.py` / `api_piece_v2.py` / `piece_v2_save_service.py` / store / atomic SQL | 変更なし。既存factory転送、認証→実効flag→closed request、owner/version/3hash・source/tier再照合、IO前後の停止、原子保存/消費と同key receipt再取得を再利用する。 |
+| 既存test4file | `test_b14a_piece_preview_composition.py`、`test_b12_shared_preview_composition.py`、`db/test_b10_preview_application_native.py`、`db/test_b12_shared_preview_native.py`。経路一覧更新とstrict flag、生成previewから保存/再取得/復旧するnative12件を追加。 |
+
+public_write/public_read/visibility/exportは今回の引数で準備済みにならない。public指定は既存handlerが拒否する。quota.can_saveやrenderer文字列・テスト成功をsave_readyやnative admissionへ転用しない。既存default appと旧経路、RN、native、SQL、依存定義・workflowは変更しない。
+
+### 50.2 検証と反映
+
+API source `6b901a1df0037c047513e794624917a09b0f3ac4`、製品2＋test4を既存Draft PR #3へ反映。local control/dedicated/source-ref/shared/registryの5fileは **261 PASS／FAIL0／SKIP0**。Python3.12.14／pytest9.1.1／FastAPI0.142.2／Starlette1.7.0／Pydantic2.14.0／httpx0.28.1。既存非推奨警告181件を保持する。最初はlocal環境のPyJWT欠落で収集1 ERROR、続く専用検査はsource module stubが保存用型を隠したため2 FAIL／147 PASS。scratchに既存実行依存を補い、testで実save moduleをfixture置換前に読み込むように修正。製品・入力判定・失敗条件は緩めていない。
+
+両候補で独立したstrict save pairとpreview依存、認証優先・default OFF、bootstrapの実効flag、candidate contractとdefault registry不変を確認。新native12件は実CMEE生成/既存bounded review→SQL preview発行から、private保存・同key receipt再取得・本人詳細で本文/3hash/payload/recipe/renderer一致・他人404・旧data不変・消費1回を検査する。stale/hash/public拒否、load後停止時RPC0、commit後停止/ACK消失時503→同keyで同じ消費ID回収・別key409を含む。保存後のsource再照会禁止はfixtureで検出し、実原入力削除や実プラン変更を実施したとは扱わない。
+
+[隔離CI38089343394](https://github.com/MassyuRed/mashos-api/actions/runs/38089343394)／job114322377201は全工程success。重複しない23検査集合で **1,789 PASS／FAIL0／SKIP0**（先行1,774＋composition純増3＋native12）。専用/source-ref/control149件、shared/registry112件、shared native46件を含む。Python3.12.15／PostgreSQL16.15／pytest8.4.1／psycopg3.3.6／FastAPI0.143.0。全6fileのremote全文・変更path集合・親headを照合済み。localとCIの件数は合算しない。同環境read-only reviewにblocking指摘なし。reviewで本人詳細の必須field欠落を許さない比較へ改善した。Auth/source/PostgREST transportは合成、生成・review・projection・PostgreSQLの保存/再取得は実コードであり、live Auth/Supabase・RN実機・商品受入れではない。
+
+### 50.3 再開位置と稼働境界
+
+次はnative B9実端末の描画同等性・glyph/ink/性能、renderer admission→保存前fit→RN保存操作。形式変更、capture/画像保存共有、Nexus v2公開読取/公開切替、M5/実Auth・稼働設定が残る。private saveの候補API構成は今回の接続を使い、quota・owner GET/DELETE・preview取消/visual PATCHとともに再実装しない。公開切替のowner_read/public_read/public_write依存を保持し、未接続の公開読取をready扱いしない。
+
+Supabase project metadataとmigration履歴の読取で001〜004適用済み、005 quotaとvisual変更SQLの追加2本未適用を確認。live DB query/write/apply、env/deploy/activation、native app build、main mergeは0。RN canSave/canExport=falseを維持する。weekly §5.5の実機確認順序と12/18公開目標を保持し、Piece全内容完成を実機確認の前提へ追加しない。TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false。

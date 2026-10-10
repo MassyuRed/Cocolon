@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_piece_read_first
 title: "Cocolon Piece — Read First"
-revision_date: "2026-10-10 JST"
+revision_date: "2026-10-11 JST"
 decision_owner: "Mash"
 workstream: "Cocolon / Piece"
 document_status: "CURRENT_PIECE_WORKSTREAM_ENTRY"
@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§45／current map §49を優先する。既存preview/shared候補の回数取得を、旧公開回数からV2の保存回数へ接続しました。既存preview flagで制御し、保存権限とは分離。local211件成功、隔離CIは1,774 PASS／FAIL0／SKIP0。実機描画・保存前fit・保存共有・稼働採用は残っています。**
+**現在は§46／current map §50を優先する。既存preview/shared候補へ非公開保存を接続しました。保存は独立した厳密なrequested/readyと実効previewに依存し、回数表示から許可しません。local261件成功、隔離CIは1,789 PASS／FAIL0／SKIP0。実機描画・保存前fit・RN保存/画像共有・稼働採用は残っています。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -951,3 +951,12 @@ local関連4file **370 PASS／FAIL0／SKIP0**。最初の収集はsource import 
 local関連3file **211 PASS／FAIL0／SKIP0**。既存構成の旧応答、候補の厳密な本人認証/OFF/不正要求、停止後の回数応答抑止、handler同一性を確認。[隔離CI38045414597](https://github.com/MassyuRed/mashos-api/actions/runs/38045414597)は **1,774 PASS／FAIL0／SKIP0**。両候補からのSQL読取→preview内表示一致・回数不消費・新しい使用回数の取得・005不在時503を確認した。localとの合算なし。合成Auth/source/HTTPを含み、実Auth・端末・稼働受入れではない。全9fileのremote全文・変更path集合・親headを照合済み。詳細はmap §49.2。
 
 次はnative B9実機描画/renderer admission→保存前fit→保存。形式変更・capture共有・Nexus v2公開読取と公開切替・保存API構成・M5/実Auth・稼働採用が残る。公開切替はowner_read/public_readへ依存し、public指定にはpublic_writeも必要。未接続の公開読取をready扱いしたり、private対象だけの例外を作ったりしない。今回quota候補登録・本人GET/DELETE・preview取消/visual PATCHを再実装しない。005 quotaとvisual変更SQLの稼働未適用は先行確認を継承し、今回Supabase操作なし。RN/native/SQL/依存/workflow・env/deploy/activation/build/main merge変更0。weekly§5.5・12/18目標・automatic_progression=falseを維持する。
+
+
+## 46. 2026-10-11 — 同じプレビューの非公開保存を候補APIへ接続
+
+詳細ownerはcurrent map §50。API `6b901a1df0037c047513e794624917a09b0f3ac4` で既存 `save_preview` を専用preview/shared候補の `POST /emotion/piece/save` へ直接登録した。`save_requested` / `save_ready` の両方が厳密Trueで、previewも有効な場合に限る。既存source再照合・原子保存/回数消費・同key再取得を再利用し、public保存を有効化しない。default app・RNのcanSave/canExport=false・native admission境界を保持する。
+
+local関連5file **261 PASS／FAIL0／SKIP0**。両候補の独立した保存準備、preview依存、認証優先、bootstrap、default registryを検査。既存の[隔離CI38089343394](https://github.com/MassyuRed/mashos-api/actions/runs/38089343394)は **1,789 PASS／FAIL0／SKIP0**。新native12件を含み、同じ本文・画像設定の保存/本人再取得、commit後停止・ACK消失からの同key復旧と回数1回を確認した。localとの合算なし。全6fileのremote全文・変更path集合・親headを照合済み。合成Auth/source/HTTP境界であり、実端末の保存・画像共有の受入れとは区別する。途中の検査補修と結果はmap §50.2へ記録する。
+
+次はnative B9実端末の描画同等性・glyph/ink/性能とrenderer admission→保存前fit→RN保存操作。形式変更・capture/画像保存共有・Nexus v2公開読取/公開切替・M5/実Auth・稼働採用も残る。今回のprivate save候補接続と、既存quota・owner GET/DELETE・preview取消/visual PATCHを再実装しない。Supabaseはproject/migration履歴の読取のみで001〜004適用済み・005 quotaとvisual変更SQL未適用を確認。DB書込・env/deploy/activation・native app build・main merge0。weekly§5.5・12/18目標・automatic_progression=falseを維持する。
