@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_emlis_ai_current_structure
 title: "EmlisAI構造 — Current Structure"
-revision_date: "2026-10-06 JST"
+revision_date: "2026-10-10 JST"
 document_role: "EMLIS_AI_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -18,6 +18,17 @@ im10_state: "NON_PASS"
 current_product_read_state: "EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFICIENT"
 candidate_ready: false
 ---
+
+
+## 2026-10-10 — 未表示原因：任意メモNULLとsource admissionの不整合（調査完了・未修正）
+
+最新weekly 20261010 §5.5のEmlis/分析実機先行方針に従い、Emlisの原入力保存→生成→保存→画面を調査した。詳細・根拠・次作業はAPI `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md` §33を参照。
+
+実稼働APIは `468663c8effc51c1bc33f165313eeb9417d16dc9`。直近対象は10秒budget内にSourceAdmissionErrorとなり、原入力保存は成功、thread/本文は未作成。以前の3秒TimeoutErrorとは別の原因である。任意欄memo_actionがDB NULLのままthread adapterへ渡り、source kernelの両メモstr必須検査で拒否されることを、配置版の無改変sourceで再現した。メモリ上のコピーでNULLだけを空文字にする候補はsource admissionを通るが、本文生成・保存往復の復旧検証は未実施。関連5ownerはPR3調査時head d7e1cabf…でも同じblobで、最新配置だけではこの原因は直らない。
+
+RNの待機はsubmit30秒/thread35秒。NOT_CREATEDを閉じ、fallback本文もなければ保存toastだけとなるため、失敗が画面に出ない。最新成功配布候補6401には10/06の履歴未作成説明修正が未収載。現在の端末導入版は未確認。GETは生成しないため、過去未作成観測は履歴を開くだけでは回復しない。
+
+次は既存thread application adapter内のNULL正規化を最小補修し、原本/source_snapshot/CAS・既存source identity・本人履歴の整合、生成→保存→再読を確認する。稼働変更と実機確認はその後であり、今回実施していない。製品source/API/DB/RN構造変更なし、STRUCTURE_MAP_DELTA_NONE。個人本文・IDは公開資料へ残さない。
 
 ## 2026-10-06 — 実機無応答の調査と履歴表示修正
 
