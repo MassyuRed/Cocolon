@@ -1400,3 +1400,18 @@ local Node 24.19.0、9suite **394 PASS／FAIL0／SKIP0**。renderer26件（前�
 次はB9の読取単位/soft wrapとnative wrapの同等性、target renderer versionのadmission、実端末での同じcanvasのglyph/ink受入を揃えて保存前fitへ接続する。native_checkedをlayout_state=fitと記録せず、server renderer文字列やclient自己申告だけでは保存を許可しない。保存操作、capture/端末保存/共有、owner/Nexusの共通描画、preview設定変更、M5、005適用、実Auth/実機も残る。
 
 全体設計図01/関連01B・全ファイル地図、現行rules/Rule18・恒久incident全文、最新weekly 10/10 §5.5を照合。Emlis＋分析の先行実機順と12/18目標を保持する。System Context prepareの既知失敗を成功にせず、許可された原典直接読取を使用した。Mashの明示Piece続行による可逆的source準備。実装/統合/書込はroot華恋、補助2名は読取review。新依存導入・API/SQL/live DB/env/deploy/activation/app native build/main merge/本人データ試験0。001〜004適用済み／005稼働未適用。TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false。商品全体完成ではない。
+
+
+### 40.4 GitHub反映と最終CI
+
+実装＋資料14fileは `7554b9cd716efab15e03d3c321c2ac4900da4bfb` でPR #30へnon-force反映し、remote再取得で全対象bytesと変更path集合の一致を確認した。初回CIのJS423件は成功したが、native source検査はiOSのRCTDeprecation header探索不足／AndroidのMaven artifact転送先403で停止した。製品sourceを緩めず、既存workflow1fileだけを `888723804129afe63bf35b8dac50720b2d8757ee` で修正した。iOSは固定RN同梱headerを探索へ追加し、Androidは公開Maven Central mirrorから同じ0.77.3 artifactを取得して公式Gradle metadataのSHA-256一致を必須化した。修正1fileもremote全文/path一致確認済み。
+
+[最終CI run 38023650569](https://github.com/MassyuRed/Cocolon/actions/runs/38023650569) は `888723804129afe63bf35b8dac50720b2d8757ee` で全3job success。
+
+| 確認 | 結果と範囲 |
+|---|---|
+| piece-rn-contracts／job 114129792372 | InputScreenを含む10suite **423 PASS／FAIL0／SKIP0／cancelled0**。前回415＋今回8。Node 24.21.0／TypeScript 5.2.2。local394との差29はInputScreenで、件数を合算しない。 |
+| piece-android-source／job 114129792263 | javac 17.0.20.1、Android35 APIと固定RN0.77.3/既存transitive APIで新moduleをcompile成功。検査用最小classpathにAndroidX annotation定義を含めないためRestrictTo.Scopeの警告18件は残る。app全体/端末ではない。 |
+| piece-ios-source／job 114129792360 | 固定RN patch適用、Apple clang17.0.0/Xcode16.4のiOS simulator SDKでObjective-C++ syntax-only成功、pbxproj plutil OK。link/signing/app build/実機ではない。 |
+
+既存phase6-contract-guards run38023650552もsuccess。製品sourceは7554b9版から変更していない。最終結果を本map・入口・manifestへ追記して後続反映する。nativeのfont engineを実行した欠損0/描画fit、React実reconciliation、端末保存共有、商品合格は未成立。§40.3の残件を保持する。

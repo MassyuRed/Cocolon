@@ -852,3 +852,6 @@ current map §40が現在の詳細owner。Androidはmount済みReactTextViewのL
 全blockの検査が揃うまで画像は透明。不明・欠損観測・timeoutは全文確認へ戻り、描画範囲overflowだけ規定font候補を降順に試す。古いnative promiseや発火済みtimeoutを新測定世代へ反映しない。native_checkedはno_missing_observedの確認用で、保存前fit/指定renderer admission/実機合格ではない。canSave/canExport=falseを保持する。
 
 local9suite394 PASS／FAIL0／SKIP0、rendererは26件（今回8追加）。固定RN原本へのpatch適用は成功。CI/単体native sourceコンパイル結果は後続確認。app build・実機は未実施。次はB9 soft-wrap同等性とrenderer admission/実機描画受入、その後に保存を接続する。native capture/共有・preview設定変更・M5・005・実Authも残る。weekly§5.5、12/18目標、既存001〜004適用済み、automatic_progression=falseを維持する。
+
+
+§36最終確認：source `7554b9cd716efab15e03d3c321c2ac4900da4bfb` の14fileをremote全文/path一致確認済み。検査環境だけを直した `888723804129afe63bf35b8dac50720b2d8757ee` の[CI 38023650569](https://github.com/MassyuRed/Cocolon/actions/runs/38023650569)は全3job成功。JSはInputScreenを含む423 PASS／FAIL0／SKIP0、Android javac単体source compileとiOS clang syntax-only・patch適用・pbxproj確認も成功。Androidのannotation不足警告18件はmap§40.4に記録。app build/実機描画/保存前fitは未成立で、保存・共有を有効化しない。

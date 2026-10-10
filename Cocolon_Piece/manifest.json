@@ -13,9 +13,9 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "6cabc867ea9e7be817413c6cfb577c2413831c13",
-    "raw_sha256": "394f69269c34c84bb3633c556faafdf73d6fd5cfe5757202a36f2366be45a42b",
-    "utf8_bytes": 58940
+    "git_blob_sha1": "b9826e939c2bc38ad55a9ecb91d4cc35731bd6b6",
+    "raw_sha256": "e36c0341ca86e26e4bc26f217def160954cea4b1e404c39f926ef04386aca2c5",
+    "utf8_bytes": 59541
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -185,7 +185,7 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "NATIVE_LAYOUT_EQUIVALENCE_RENDERER_ADMISSION_THEN_BOUND_SAVE",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "NATIVE_TEXT_INSPECTION_SOURCE_PREPARED__DEVICE_FIT_PENDING",
+    "state": "NATIVE_SOURCE_COMPILE_VERIFIED__LAYOUT_EQUIVALENCE_ADMISSION_DEVICE_FIT_PENDING",
     "current_map_section": "40.3",
     "current_entry_section": "36",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
@@ -257,9 +257,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "69c0de4e28d159dd7387f563cbe12e263ca64603",
-    "raw_sha256": "03c8e74eccb42f991af528843d129b0889448c8c8be509078e254ff43a88c268",
-    "utf8_bytes": 192912
+    "git_blob_sha1": "3c98211755a5a96d5b59bb295d9e944f6a4e7875",
+    "raw_sha256": "7bd5e89901c1a5e32ca414b75abed322c7ec6d4670dec18d615d7b48d3b3d062",
+    "utf8_bytes": 194937
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -2100,7 +2100,7 @@
     "automatic_progression": false
   },
   "native_text_inspection_20261010": {
-    "status": "LOCAL_TESTED_CI_PENDING",
+    "status": "REMOTE_SOURCE_VERIFIED_CI_AND_NATIVE_SOURCE_COMPILE_PASSED",
     "map": "Cocolon_前提資料/current_structure/02_piece_current_structure.md section40",
     "owner_paths": [
       "features/piece/pieceRenderer.js",
@@ -2127,9 +2127,27 @@
       "skipped": 0,
       "node": "24.19.0",
       "pinned_rn_patch_fuzz0_passed": true,
-      "ci_pending": true,
-      "native_source_compile_pending": true,
-      "native_device": false
+      "ci_pending": false,
+      "native_source_compile_pending": false,
+      "native_device": false,
+      "ci_run_id": 38023650569,
+      "ci_tested_sha": "888723804129afe63bf35b8dac50720b2d8757ee",
+      "ci_conclusion": "success",
+      "ci_passed": 423,
+      "ci_suites": 10,
+      "node_ci": "24.21.0",
+      "typescript_ci": "5.2.2",
+      "rn_job_id": 114129792372,
+      "android_job_id": 114129792263,
+      "ios_job_id": 114129792360,
+      "android_javac": "17.0.20.1",
+      "android_compile_sdk": 35,
+      "android_annotation_warnings": 18,
+      "ios_clang": "17.0.0",
+      "ios_xcode": "16.4",
+      "ios_syntax_only_passed": true,
+      "android_module_compile_passed": true,
+      "app_link_or_build": false
     },
     "save_fit": false,
     "can_save": false,
@@ -2142,6 +2160,9 @@
     "activation": 0,
     "main_merge": 0,
     "product_acceptance": false,
-    "automatic_progression": false
+    "automatic_progression": false,
+    "source_commit": "7554b9cd716efab15e03d3c321c2ac4900da4bfb",
+    "ci_configuration_commit": "888723804129afe63bf35b8dac50720b2d8757ee",
+    "source_postcheck": "Initial14 and compiler-workflow1 path bytes and exact changed-path sets verified from fetched remote"
   }
 }
