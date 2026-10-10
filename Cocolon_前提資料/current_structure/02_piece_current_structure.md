@@ -1509,8 +1509,21 @@ protocolは`piece.native_candidates.v1`。UI側では同じmounted Textの全文
 
 ### 42.4 検証と次工程
 
-local Node24.19.0の10suite **449 PASS／FAIL0／SKIP0／cancelled0**。renderer39件、追加planner39件（Python原本由来oracle25例を含む）。oracleは合成計測であり、font engineの端末実測ではない。oracle生成元は上記API head、Python3.12.14/Unicode15.0.0をfixtureに記録した。InputScreen29件はlocal TypeScript欠落のため未実行。GitHub反映後にInputScreen込みCIとAndroid/iOS source compileを確認する。
+local Node24.19.0の10suite **449 PASS／FAIL0／SKIP0／cancelled0**。renderer39件、追加planner39件（Python原本由来oracle25例を含む）。oracleは合成計測であり、font engineの端末実測ではない。oracle生成元は上記API head、Python3.12.14/Unicode15.0.0をfixtureに記録した。InputScreen29件はlocal TypeScript欠落のため未実行。InputScreen込みCIとAndroid/iOS source compileの最終結果は§42.5。
 
 同環境reviewが指摘した、既にclipしたTextを移動して受理する問題と、最終promiseが8秒後にtimer callbackより先に完了する問題は、各回帰検査の因果REDを確認して製品sourceを修正し、上記449件で成功した。途中の旧自然改行fixture/時刻設定を新しいplanningと元deadlineへ適合させた結果も含む。実機上の症状再現・解消とは記録しない。
 
 次は選択済み行を含む同じcanvasについて実端末のglyph/ink/性能とnative B9描画同等性を確認し、対象renderer admission・保存前fitを揃えて既存保存APIへ接続する。planner、本人詳細の共通canvas、quota/owner APIを再実装しない。capture/端末保存/共有、Nexus共通描画、preview設定変更、M5/稼働構成、005、実Authも残る。今回DB query/apply・env/deploy/activation/app native build/main merge/本人データ試験0。001〜004適用済み、005稼働未適用を継承。TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false。商品全体完成ではない。
+
+
+### 42.5 GitHub反映と最終CI
+
+source＋資料13pathは `c77f3aed07ce8514d7505bc169d00a4114804904` で既存Draft PR #30へnon-force反映した。GitHub再取得で全13fileの全文bytes、変更path集合、親`a53c6d1`、PR headの一致を確認済み。[CI run 38026057042](https://github.com/MassyuRed/Cocolon/actions/runs/38026057042) は同じsource headで全3job success。
+
+| 確認 | 結果と範囲 |
+|---|---|
+| piece-rn-contracts／job114137021092 | InputScreenを含む11suite **478 PASS／FAIL0／SKIP0／cancelled0**。前回434＋今回44。Node24.21.0／TypeScript5.2.2。local449との差29はInputScreenで、合算しない。 |
+| piece-android-source／job114137021304 | Android35 API／固定RN0.77.3に対するjavac17.0.20.1の単体source compile成功。既存の最小classpathによるAndroidX annotation不足警告18件を保持。 |
+| piece-ios-source／job114137021280 | RN0.77.3の既存patch適用、Apple clang17.0.0／Xcode16.4／iOS simulator SDKのObjective-C++ syntax-only成功、pbxproj plutil OK。 |
+
+既存phase6-contract-guards run38026057020もsuccess。CIでnative font engine自体を実行したわけではなく、app link/build/signing/実機・保存前fit・正式renderer admissionは未成立。今回の最終結果を本map・入口・manifestへ同期し、製品sourceを変えずに後続の資料commitで反映する。§42.3〜42.4の描画上の限界と残件を維持する。

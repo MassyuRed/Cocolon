@@ -875,4 +875,7 @@ local9suite405 PASS／FAIL0／SKIP0（今回6追加）。InputScreenはlocal Typ
 
 最終inkがText自身のboxに収まる場合だけ行slotで揃える。すでにclipしたTextを位置移動で修復した扱いにはしない。確認用prototypeはv3に更新し、保存済み旧v1/v2・未知版は全文表示を残して画像を代替しない。対応版の実保存record存在は未確認。native_checked／候補測定は保存前fitや正式renderer admissionを意味せず、canSave/canExport=false。
 
-local10suite449 PASS／FAIL0／SKIP0（renderer39、planner39・Python由来oracle25例を含む）。候補値とReact/native応答は合成を含み、端末合格ではない。clipと期限raceの2回帰検査は因果RED後に修正済み。InputScreenとAndroid/iOS source CIは反映後確認。source6＋test/fixture3＋既存workflow1＋資料3。次は実端末のnative B9描画同等性/glyph/ink/性能とrenderer admission→保存前fit→保存。B9選択器を重複実装しない。画像保存共有・Nexus・設定変更・M5・005・実Authは残る。新依存/API/SQL・DB操作・env/deploy/activation/app build/main merge変更0、001〜004適用済み／005稼働未適用、weekly§5.5・12/18目標・automatic_progression=falseを維持する。
+local10suite449 PASS／FAIL0／SKIP0（renderer39、planner39・Python由来oracle25例を含む）。候補値とReact/native応答は合成を含み、端末合格ではない。clipと期限raceの2回帰検査は因果RED後に修正済み。InputScreenとAndroid/iOS source CIの最終結果は以下に記録。source6＋test/fixture3＋既存workflow1＋資料3。次は実端末のnative B9描画同等性/glyph/ink/性能とrenderer admission→保存前fit→保存。B9選択器を重複実装しない。画像保存共有・Nexus・設定変更・M5・005・実Authは残る。新依存/API/SQL・DB操作・env/deploy/activation/app build/main merge変更0、001〜004適用済み／005稼働未適用、weekly§5.5・12/18目標・automatic_progression=falseを維持する。
+
+
+§38最終確認：source `c77f3aed07ce8514d7505bc169d00a4114804904` の13fileをremote全文／変更path集合／親head一致確認済み。[CI38026057042](https://github.com/MassyuRed/Cocolon/actions/runs/38026057042) はInputScreen込み11suite **478 PASS／FAIL0／SKIP0**、Android単体source compile・iOS syntax-only/既存patch/pbxprojも成功。既存contract guardsもsuccess。native実行・app build・実機受入れは含まない。従来のAndroid annotation警告18件と描画上の限界・残件はcurrent map §42に記録した。

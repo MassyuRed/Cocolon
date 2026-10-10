@@ -13,9 +13,9 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "94dcc042b6982c04f0b573e68baacd529f3b434c",
-    "raw_sha256": "f40e95dd2bc19127681c851ffa0b99ef71241e55e1095a97e3d9cfdc6cd25f2f",
-    "utf8_bytes": 64345
+    "git_blob_sha1": "4d66dc057740f306317392ff0f73c6c381045021",
+    "raw_sha256": "742a3d3ae56cc03c3461efbaa4f3fc1ad8ad29b9d5fea539f49ce09cb5830c9f",
+    "utf8_bytes": 64920
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -187,7 +187,7 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "NATIVE_LAYOUT_EQUIVALENCE_RENDERER_ADMISSION_THEN_BOUND_SAVE",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "B9_MEASURED_SELECTION_SOURCE_CONNECTED__NATIVE_DEVICE_EQUIVALENCE_ADMISSION_FIT_PENDING",
+    "state": "B9_MEASURED_SELECTION_SOURCE_AND_CI_VERIFIED__NATIVE_DEVICE_EQUIVALENCE_ADMISSION_FIT_PENDING",
     "current_map_section": "42.4",
     "current_entry_section": "38",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
@@ -260,9 +260,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "5e4a08675aeae75dcd784f9ef0ba9dd93dce9343",
-    "raw_sha256": "aeea2428c70a1756d06a1aec649daa00c3dbe9b72597c0e5729c6b4115e2aa55",
-    "utf8_bytes": 213614
+    "git_blob_sha1": "71d37a03739fde5be0c42ea4012026a8db546ec6",
+    "raw_sha256": "2e55cce50b77fb612f8da2c00925738900feec8a0f88741ff46f6e73b8fa00eb",
+    "utf8_bytes": 215058
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -2332,7 +2332,7 @@
     "automatic_progression": false
   },
   "native_measured_b9_20261010": {
-    "status": "LOCAL_VERIFIED_REMOTE_CI_PENDING",
+    "status": "SOURCE_REMOTE_VERIFIED_CI_PASSED_DEVICE_ADMISSION_FIT_PENDING",
     "map": "Cocolon_前提資料/current_structure/02_piece_current_structure.md section42",
     "base_head": "a53c6d1b4847283449007f8091d0294317f89fad",
     "api_oracle_head": "004a85eeb7af83b68ae1c1fba42ec2d6941b6874",
@@ -2373,10 +2373,33 @@
       "cancelled": 0,
       "node_local": "24.19.0",
       "local_inputscreen": "UNEXECUTED_TYPESCRIPT_DEPENDENCY_MISSING",
-      "ci_pending": true,
+      "ci_pending": false,
       "native_device": false,
       "native_font_engine_runtime": false,
-      "review": "SAME_ENVIRONMENT_HELPER_REVIEW_NOT_INDEPENDENT_MODEL_ACCEPTANCE"
+      "review": "SAME_ENVIRONMENT_HELPER_REVIEW_NOT_INDEPENDENT_MODEL_ACCEPTANCE",
+      "ci_run_id": 38026057042,
+      "ci_tested_sha": "c77f3aed07ce8514d7505bc169d00a4114804904",
+      "ci_conclusion": "success",
+      "ci_passed": 478,
+      "ci_suite_files": 11,
+      "ci_jobs_success": 3,
+      "ci_node": "24.21.0",
+      "ci_typescript": "5.2.2",
+      "rn_job_id": 114137021092,
+      "android_job_id": 114137021304,
+      "ios_job_id": 114137021280,
+      "android_source_compile": true,
+      "android_javac": "17.0.20.1",
+      "android_sdk": 35,
+      "android_existing_annotation_warnings": 18,
+      "ios_source_syntax": true,
+      "ios_clang": "17.0.0",
+      "ios_xcode": "16.4",
+      "rn_patch_applied": true,
+      "pbxproj_valid": true,
+      "existing_contract_guards_run": 38026057020,
+      "existing_contract_guards_success": true,
+      "app_link_or_build": false
     },
     "native_b9_full_drawing_equivalence": false,
     "renderer_admission": false,
@@ -2393,6 +2416,8 @@
     "native_app_build": 0,
     "main_merge": 0,
     "product_acceptance": false,
-    "automatic_progression": false
+    "automatic_progression": false,
+    "source_commit": "c77f3aed07ce8514d7505bc169d00a4114804904",
+    "source_postcheck": "Remote13 full contents, exact changed-path set, parent head and current PR head matched inspected local source"
   }
 }
