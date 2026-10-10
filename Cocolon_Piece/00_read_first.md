@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§41／current map §45を優先する。画像設定変更PATCHを既存の専用preview／shared候補factoryへ登録しました。元POST/keyで変更後の同じ候補を回収する経路を両構成で検証し、隔離CIは1,675件成功しました。default app／旧Q&Aの配置は変更していません。native実機描画同等性・renderer admission・保存前fit・保存共有、稼働設定と追加2本のmigrationは残っています。**
+**現在は§42／current map §46を優先する。候補の明示取消をRNから既存DELETEへ接続しました。通信結果が不明な場合は同じID/revisionで取消を再試行し、取消済みの候補を再生成しません。runtime再取得を伴う背景復帰でも、同じ本人・入力・操作のbody-free取消対象だけを保持します。API隔離CIは1,682 PASS、RN CIは545 PASS。実機描画・保存前fit・保存共有・稼働配置は残っています。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -913,3 +913,15 @@ API `f1762879d7983adc6b4f9b5728791d6404dbbe88` の6fileはremote全文・変更p
 
 
 §41最終確認：fixtureの既存Q3 schema不足による初回native12 FAILを補修し、head `d5731750b9cf4018de9af454e93184f011e32f17` の[隔離CI38029243416](https://github.com/MassyuRed/mashos-api/actions/runs/38029243416)は **1,675 PASS／FAIL0／SKIP0**（先行1,658＋追加17）。両factoryの実SQL更新・元POST回収が成立。最終全6fileのremote全文、変更集合・親headを照合。製品sourceはf176287から不変。初回失敗と検査限界はmap §45.2/45.4。実機確認・保存共有・稼働配置の完了ではない。
+
+
+## 42. 2026-10-10 — 候補の明示取消と同じ候補への再試行
+
+詳細ownerはcurrent map §46。RN `ae389bf40dba9d8a0e3d5457895922d2b8fd3442` で「候補を取り消す」を既存DELETEへ接続。API `7a4d16a8ad6c23b130f883797d3846f3049c8e23` で専用preview/shared候補へ登録した。通常の閉じるは通信なし。取消結果不明は本文を保持せず同ID/revisionのDELETEを明示再試行し、成功後は同じPOST/keyの再生成をしない。runtime OFFでは非表示、同じ本人・入力・keyの背景復帰時だけ取消対象を再開できる。本人/入力/key変更・画面離脱・unmountで破棄する。
+
+RN local **545 PASS／FAIL0／SKIP0**、API local84 PASS、API [CI38030365374](https://github.com/MassyuRed/mashos-api/actions/runs/38030365374) **1,682 PASS／FAIL0／SKIP0**。両factoryで実SQLの取消・古い版拒否・ACK消失後の期限後再試行・保存回数消費0を確認。実機/live Auth検査ではない。全16source/test pathのremote全文・変更集合・親headを確認。review補修・途中検査の内訳はmap §46.2。
+
+次は実機描画/renderer admission→保存前fit→保存。形式変更・capture共有・Nexus・保存API構成・M5/実Auth・稼働採用も残る。今回native/SQL/依存・Supabase操作・env/deploy/activation/build/main merge0。入口/map/manifestの3資料を同期し、weekly§5.5・12/18目標・automatic_progression=falseを維持する。
+
+
+§42最終確認：RN [CI38030732508](https://github.com/MassyuRed/Cocolon/actions/runs/38030732508)は **545 PASS／FAIL0／SKIP0**、既存Android/iOS source検査とcontract guardsもsuccess。API CI1,682 PASSとともに記録し、localとCIの重複加算はしない。実端末・保存前fit・保存共有の完成ではない。詳細はmap §46.4。

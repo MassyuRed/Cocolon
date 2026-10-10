@@ -2,7 +2,7 @@
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
 revision_date: "2026-10-10 JST"
-latest_api_implementation: "d5731750b9cf4018de9af454e93184f011e32f17"
+latest_api_implementation: "7a4d16a8ad6c23b130f883797d3846f3049c8e23"
 latest_storage_candidate: "4fcb140b778850a1b7a5a65d8e0a26005b3a24c4"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は§45を優先します。画像設定変更PATCHを既存の専用preview／shared候補factoryへ登録しました。元POST/keyで変更後の同じ候補を回収する経路を両構成で検証し、隔離CIは1,675件成功しました。default app／旧Q&Aの配置は変更していません。native実機描画同等性・renderer admission・保存前fit・保存共有、稼働設定と追加2本のmigrationは残っています。**
+**現在は§46を優先します。候補の明示取消をRNから既存DELETEへ接続しました。通信結果が不明な場合は同じID/revisionで取消を再試行し、取消済みの候補を再生成しません。runtime再取得を伴う背景復帰でも、同じ本人・入力・操作のbody-free取消対象だけを保持します。API隔離CIは1,682 PASS、RN CIは545 PASS。実機描画・保存前fit・保存共有・稼働配置は残っています。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1656,3 +1656,41 @@ API source `f1762879d7983adc6b4f9b5728791d6404dbbe88` をGitHub connectorでexpe
 両factoryのFree/Plus/Premiumで実生成・実bounded review・実SQLを通し、画像設定だけの変更後に本文/期限/renderer保持、revision増分、旧版拒否、元request/key再取得、追加authorなし・保存回数消費なしを確認した。review後停止はSQL未送信、commit後停止とACK消失はcommit済み行を保持し、再起動した構成の元POST/keyからその版を回収する。native追加12件は最終14件（既存2含む）として成功。Auth・保存source・PostgREST transportは代替で、実ユーザーや端末の受入れではない。
 
 最終API headから対象全6fileを再取得し、今回の最終内容と一致確認。初回6path＋補修1pathの変更集合、各commitの親headも照合済み。製品2fileは最初のf176287から不変で、補修は検査用DB準備4行だけ。この資料更新はCocolonの入口・map・manifestの3fileで、RN/native/test sourceやweeklyの方針を変更しない。§45.3の実機・保存前fit・稼働採用へ戻り、同じ接続準備を繰り返さない。
+
+
+## 46. 2026-10-10 — 候補を取り消す操作を画面から接続（未配置）
+
+### 46.1 直接の残件と実装owner
+
+MashのPiece続行指示により、rendererの実機確認とは独立して実装できる、PCE3/PCE6の明示取消を接続した。全体設計・全ファイル地図・Piece原典・最新weekly §5.5と前回引き継ぎを照合し、恒久incident全文を再読。開始headはRN `237aae1a485564554747fbdcf842e992fe5825b0`／API `d5731750b9cf4018de9af454e93184f011e32f17`。System Context prepareは同RN headで既知の祖先不一致code2となり、既存入口の原典直接読取を使用した。WorkでのLEVEL_2相当の直接製品作業。root華恋が単一write owner、補助agentは読取reviewのみ。別modelによる正式Pro/Ultra受入れではない。
+
+| 既存owner | 今回の変更 |
+|---|---|
+| RN `features/piece/pieceApi.js` | 認証済みDELETE。bodyはexpected_preview_revisionのみ、成功は既存exact5項目。前後の本人照合、closed error、abort、no-store。同ID/revisionの明示再試行だけを許し、新key・POST回収なし。 |
+| RN `features/piece/PieceCreateController.js` | 現在の表示ticket・ID/revision/hash・期限で初回取消をbind。処理開始で本文を破棄し、取消対象ID/revision/rowVersionだけを保持。成功rowVersion+1を照合。unknownだけ同DELETE再試行、STALEの自動付替えなし。 |
+| RN `features/piece/piecePreviewModel.js` / `components/piece/PiecePreviewModal.js` | 「候補を取り消す」、取消中、結果不明の再試行、取消完了の表示。成功後は保存回数未消費を示し、同じ候補を復活させない。通常の閉じる/戻るはDELETEしない。 |
+| RN `screens/input/InputPieceActionArea.js` / `screens/InputScreen.js` | 同じsaved ID/owner/keyの取消だけruntime OFFで非表示のまま保持し、fresh runtime復帰後に本人が再試行。親はruntime OFFだけでhostをunmountしない。本人/入力/key変更（OFF中A→B→A含む）、画面離脱、unmountは破棄。通常preview本文の破棄は継承。 |
+| API `ai/services/ai_inference/piece_v2_runtime_control.py` / `api_contract_registry.py` | 既存cancel_previewを専用preview/shared候補へ直接登録し、candidate専用contract headerを追加。専用構成は6route。生成停止後も既存の本人・revision照合による取消を維持。save flagや新flagを追加しない。 |
+
+RN製品6＋test4、API製品2＋test4。既存取消HTTP handler/store/SQL、native renderer、依存、default app/registryは変更0。本文・形式変更、保存、画像出力を同時に有効化しない。
+
+### 46.2 検証・review・反映
+
+RN source `ae389bf40dba9d8a0e3d5457895922d2b8fd3442`、API source `7a4d16a8ad6c23b130f883797d3846f3049c8e23`。GitHub connectorのexpected parent一致・force=falseで既存draft PR #30/#3へ反映し、全16fileのremote全文・変更path集合・親head/treeを確認した。
+
+RN localはNode24.19.0／既存TypeScript5.2.2でInputScreenを含む11suite **545 PASS／FAIL0／SKIP0**（先行520＋今回25）。API localの両compositionは **84 PASS**。API [隔離CI38030365374](https://github.com/MassyuRed/mashos-api/actions/runs/38030365374)／job114149821874は23集合 **1,682 PASS／FAIL0／SKIP0**（先行1,675＋source4＋native4−旧DELETE未登録固定1）。localとCIを合算しない。Python3.12.15／PostgreSQL16.15。既存Pydantic/FastAPI非推奨警告を保持。
+
+両factoryで実生成→画像設定変更revision2→古いrevision取消拒否→正しいrevision取消row3を通し、生成OFF・ACK消失・元期限後の同DELETE再取得、追加author/保存回数消費0を実SQLで確認した。Auth/source/HTTP transportは検査用代替。RNは実JSを使うがReact/native/clock/runtime通知/Authは代替で、実端末・live Auth/PostgREST受入れではない。
+
+read-only reviewでsaved-input背景時の取消破棄、runtime OFF中のA→B→A見逃し、親InputScreenのOFF unmountを特定し、上表の保持と破棄境界を補修した。最終read-only reviewに追加blockerなし。途中のlocal検査ではtransport呼出箇所の旧固定数、VM realmの配列比較を修正。fixture抽出より前へ置いた新検査の多重登録は末尾へ移動し、途中694件を成果件数に使わない。545件は重複解消後の最終集合である。
+
+### 46.3 残件・稼働境界
+
+次はnative B9実端末の描画同等性・glyph/ink/性能、renderer admission、保存前fit→保存。形式変更、capture/画像保存共有、Nexus、保存等のAPI構成、M5/実Auth・稼働設定も未完了。今回の取消接続や画像設定PATCH登録を次回作り直さない。runtime OFF中は取消ボタンも非表示であり、本文や権限を復元していない。取消identityはメモリだけで、画面離脱・アプリ再起動を越える永続回収は今回の範囲外。
+
+Supabase操作・live DB書込/追加migration適用、env/deploy/activation、native app build、main mergeは0。001〜004適用済みは先行確認を継承し、005 quotaとvisual変更SQLの追加2本は未適用のまま。weekly §5.5の実機確認順序と12/18公開目標を維持し、全内容完成をPiece実機確認の前提にしない。TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false。
+
+
+### 46.4 最終RN CI
+
+RN source `ae389bf40dba9d8a0e3d5457895922d2b8fd3442` の[CI38030732508](https://github.com/MassyuRed/Cocolon/actions/runs/38030732508)は全3job成功。Node24.21.0／TypeScript5.2.2でInputScreen込み11suite **545 PASS／FAIL0／SKIP0**（job114150944944）。Android単体source compile（114150944831）、iOS syntax-only/既存patch/pbxproj（114150945057）も成功。[既存contract guards38030732449](https://github.com/MassyuRed/Cocolon/actions/runs/38030732449)もsuccess。Android既存annotation警告18件を維持。native app build・実端末描画・保存前fitの成功ではない。local545件をCI545件へ合算しない。§46.3の残件を保持し、今回の検証済み製品source/testは資料同期で変更しない。
