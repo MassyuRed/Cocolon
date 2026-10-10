@@ -13,9 +13,9 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "f3d6b9a11f90eb6213d82d2b1fde0554fa998752",
-    "raw_sha256": "a7ff3fd45d88113b238e293d46ac5c6a1811bf40d23eab075b2f08829fb68834",
-    "utf8_bytes": 60333
+    "git_blob_sha1": "344c15e34f2c2a84747220bbc76cb78af415ff67",
+    "raw_sha256": "ee2801255145c84603273842e53074adf2abebc81b6f5edffdf695613e6ce2ab",
+    "utf8_bytes": 60585
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -2166,7 +2166,7 @@
     "source_postcheck": "Initial14 and compiler-workflow1 path bytes and exact changed-path sets verified from fetched remote"
   },
   "native_kinsoku_remeasurement_20261010": {
-    "status": "LOCAL_VERIFIED_CI_PENDING",
+    "status": "SOURCE_VERIFIED_DEVICE_PENDING",
     "map": "Cocolon_前提資料/current_structure/02_piece_current_structure.md section40.5",
     "base_head": "475e5711c5c8ff78a5bd510fb8ab89dba6a19ef3",
     "owner_paths": [
@@ -2184,8 +2184,15 @@
       "new_cases": 5,
       "failed": 0,
       "skipped": 0,
-      "ci_pending": true,
-      "native_device": false
+      "ci_pending": false,
+      "native_device": false,
+      "ci_run_id": 38024570077,
+      "ci_passed": 428,
+      "ci_suite_files": 10,
+      "ci_jobs_success": 3,
+      "android_source_compile": true,
+      "ios_source_syntax": true,
+      "android_existing_annotation_warnings": 18
     },
     "native_b9_soft_wrap_equivalence": false,
     "save_fit": false,
@@ -2199,6 +2206,8 @@
     "activation": 0,
     "main_merge": 0,
     "product_acceptance": false,
-    "automatic_progression": false
+    "automatic_progression": false,
+    "source_commit": "01088f7a69828c08a8c9ec0a98536f47efab0772",
+    "source_postcheck": "Remote7 file bytes, exact changed paths, parent head and current entry hashes matched local tested contents"
   }
 }
