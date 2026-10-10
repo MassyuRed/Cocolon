@@ -991,4 +991,4 @@ source `ca4ce05cf1f62ed5fad3a0a72733e2956d8ae0a7` の製品1＋test1をDraft PR 
 
 iOS追加のみ保存で発生する保存後のPHAsset読取をPiece限定patchで除き、raw PNGは両OSとも専用cacheへ限定。共有先の読取終了をcallbackから推測しないため、共有copyの回収は未接続のまま残す。既存依存の版更新なし。クリーンnpm ciと3新patchの再適用成功。JS12suite **570 PASS／FAIL0／SKIP0**。native/OS/HTTPは代替を含み、端末写真保存成功を検証した結果ではない。独立読取reviewで文字計測停止・iOS追加のみ保存・非同期共有直前検査を補修した。
 
-GitHubの依存差分限定Pod解決を進め、結果と生成lockはmap §53へ記録する。実native compile・実機描画／PNG／権限／共有・共有copy寿命・receipt・UI接続は残件。本線はnative B9実機描画受入れ→renderer admission→保存前fit→保存操作。形式変更・Nexus・M5/実Auth/稼働構成も残す。Supabaseはproject/migration履歴の読取のみ。DB変更・flag有効化・API配置・TestFlight配布・main mergeなし。weekly§5.5の実機順序と12/18目標を維持する。
+GitHub CI38093232063も570 PASS、既存Android/iOS source検査、macOSのnpm ci／4依存autolink／CocoaPods1.17.0解決が成功。実生成Podfile.lock（ZIPFoundation0.9.20を含む）と検証結果をmap §53.5へ記録した。実native compile・実機描画／PNG／権限／共有・共有copy寿命・receipt・UI接続は残件。本線はnative B9実機描画受入れ→renderer admission→保存前fit→保存操作。形式変更・Nexus・M5/実Auth/稼働構成も残す。Supabaseはproject/migration履歴の読取のみ。DB変更・flag有効化・API配置・TestFlight配布・main mergeなし。weekly§5.5の実機順序と12/18目標を維持する。

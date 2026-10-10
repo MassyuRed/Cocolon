@@ -1921,7 +1921,7 @@ API/native/SQL/依存定義/workflow変更0、Supabase操作0、env/deploy/activ
 | 実在path | 今回の役割 |
 | --- | --- |
 | `package.json` / `package-lock.json` | view-shot5.1.1・share12.3.1・camera-roll7.10.2・file-access3.2.0をexact固定。取得integrityを確認。推移5件追加。既存package版・integrity・optional peerを保持。 |
-| `ios/Podfile` / `ios/tempCocolon/Info.plist` | RNFA未使用privacy API除外、写真への追加のみの用途説明。RN0.77.3・旧architecture・iOS15.1を保持。Pod lockは実CocoaPods解決後に記録し、手で生成しない。 |
+| `ios/Podfile` / `ios/tempCocolon/Info.plist` | RNFA未使用privacy API除外、写真への追加のみの用途説明。RN0.77.3・旧architecture・iOS15.1を保持。Pod lockはCI38093232063のCocoaPods1.17.0実出力を採用（§53.5）。 |
 | `.github/workflows/ios-build.yml` | Node24.19.0とnpm ciへ変更。TestFlight workflowはdispatchしていない。 |
 | `.github/workflows/piece-rn-contracts.yml` | 既存JS検査へexport suiteを追加。依存／Podfile／patch差分時だけmacOSでnpm ci→pod install→lock artifactを取得。署名・app build・配布なし。 |
 | `patches/react-native-file-access+3.2.0.patch` | AGP8.9用namespace／buildConfig／library manifest補修。 |
@@ -1943,13 +1943,22 @@ local Node24.19.0／npm11.9.0で固定lockのクリーンnpm ci成功、新3patc
 
 同環境read-only分担reviewで、export時Text onLayoutを止める誤配置、iOS写真保存後のPHAsset読取、share直前await復帰時の再確認不足を検出して修正し、回帰検査を追加。途中のexport検査1FAILは既存hash不一致の安全なエラーcodeに対するtest期待を補正したもの。検証不足を成功扱いする変更なし。補修後のnative source reviewに追加重大指摘なし。
 
-現在のネイティブ適合はsource reviewとpatch適用まで。Pod解決、app compile、sRGB/PNG実bytes、実字体／glyph／ink／性能、実写真の追加権限、共有先の読取継続は実行結果なし。GitHub検証結果は追記する。system_context prepareはshallow cloneの祖先判定で停止したため、canonical入口・全体設計／file map・最新weeklyと本Piece原本を直接読んで進めた。
+現在のネイティブ適合はsource review・patch適用・Pod解決まで（§53.5）。app compile、sRGB/PNG実bytes、実字体／glyph／ink／性能、実写真の追加権限、共有先の読取継続は実行結果なし。system_context prepareはshallow cloneの祖先判定で停止したため、canonical入口・全体設計／file map・最新weeklyと本Piece原本を直接読んで進めた。
 
 ### 53.4 再開位置
 
-- Pod解決結果と実lockを反映し、4依存のautolink／native compileと端末上のcapture・写真保存・共有を確認する。
+- Pod解決／autolink／実lock反映は§53.5で完了。次は4依存のnative compileと端末上のcapture・写真保存・共有を確認する。
 - 共有copyはhandoff後（失敗・取消を含む）に削除せず保持する。外部読取終了を推測しない回収条件／次回起動時限定回収は未接続。任意TTLを新設しない。これを理由にtemp cleanup完成とは扱わない。
 - 正式renderer admission／保存前fit後に既存保存controller／UIとexport hostを接続する。現prototypeのnative_checked・hash確認だけで操作を有効化しない。B13-B body-free receiptはbackend未接続。
 - 本線のnative B9実機描画受入れ→保存前fit→同preview保存、および形式変更、Nexus公開読取／切替、M5／実Auth／稼働構成を残す。画像共有の全完成を初回実機確認への追加前提にしない。
 
 Supabase project／migration履歴読取で001〜004適用済み、005 quotaとvisual変更SQL未登録を再確認。API/SQL source変更・DB書込・env/deploy/activation・TestFlight配布・main merge0。weekly§5.5・12/18目標・automatic_progression=falseを維持。
+
+
+### 53.5 GitHub検証と実生成Pod lock
+
+source `d9debbff318441f3064ae87c3b725ffd2454ae52` の18fileをremote全文・変更path集合・親headで照合した。通常git pushは認証情報がなく終了128となったため、接続済GitHubのGit Dataで同じtreeを反映した（local treeとremote tree一致）。[CI38093232063](https://github.com/MassyuRed/Cocolon/actions/runs/38093232063)は全4job success：JS12suite **570 PASS／FAIL0／SKIP0**（Node24.21.0/TS5.2.2）、既存Android Piece bridge単体compile、既存iOS Piece source syntax-only、新Pod jobのnpm ci／3新patch／4依存autolink／pod install／plist lint。localとCIを合算しない。既存contract guardsとread-only workflow policyもsuccess。
+
+Pod jobはNode24.19.0／CocoaPods1.17.0、99 total Podsを解決。artifact `11684881687` のzip SHA256 `39d7411bb1eef2e785c885d870bf1e489106b4288fb596e997bd112eb80321fa`を検証し、実出力68,710bytesを `ios/Podfile.lock` へ反映。追加はRNShare12.3.1／ReactNativeFileAccess3.2.0／camera-roll7.10.2／view-shot5.1.1／ZIPFoundation0.9.20。既存158 Pod identitiesの版／依存edge／external source変更・削除0。CocoaPods1.16.2→1.17.0と既存spec checksum69件の再計算は実出力を保持し、手で旧checksumへ戻さない。Podfile checksumも実bytesと一致。lockの独立read-only reviewで重大指摘なし。
+
+これは依存解決と既存bridge source検査の成功であり、追加4依存を含むapp/native compile、実機画像・OS保存共有、renderer fit/admissionを合格にしない。§53.4の残件と製品UI非接続を維持する。

@@ -13,9 +13,9 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "2ab2b0703eca44ef8cd7adefde77de9d98cd39f9",
-    "raw_sha256": "f7fbe1a5c5251b3137891c4d56c339b335da0ca1131e0682935ebda745835203",
-    "utf8_bytes": 86230
+    "git_blob_sha1": "112facebc7e64b7d5e553aac0a0547c90741b594",
+    "raw_sha256": "a6c0644e850da0d9e5da44cfa2a299f7c6410963355b051663353988251da78c",
+    "utf8_bytes": 86370
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -223,7 +223,7 @@
     "current_entry_section": "48",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
     "weekly_review_section": "5.5",
-    "first_unfinished_work": "Native Pod resolution/compile and B9 device equivalence -> renderer admission -> save fit -> UI save/export integration. Shared-copy recovery and B13-B receipt pending; export completion is not a prerequisite for first device inspection.",
+    "first_unfinished_work": "Native compile and B9 device equivalence -> renderer admission -> save fit -> UI save/export integration. Shared-copy recovery and B13-B receipt pending; export completion is not a prerequisite for first device inspection.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 4,
@@ -303,9 +303,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "4003525af4adde790f02cee169057acb69a5b137",
-    "raw_sha256": "826ab59ed2ac3bb170f890acc857a1dc7234643fbc5840c25d00c88a788ad5f5",
-    "utf8_bytes": 288502
+    "git_blob_sha1": "7be8e643fa95a357e70eef86096ee1967aa10356",
+    "raw_sha256": "eef2bdc73a88aa845a5a0f89c594d9ff05a76a91f4f9e05a4548f448f3a97017",
+    "utf8_bytes": 290136
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -3485,8 +3485,8 @@
     "local_passed": 570,
     "local_failed": 0,
     "local_skipped": 0,
-    "ci_pending": true,
-    "pod_lock_resolved": false,
+    "ci_pending": false,
+    "pod_lock_resolved": true,
     "native_compile_verified": false,
     "native_device_acceptance": false,
     "formal_fit_admission": false,
@@ -3499,6 +3499,28 @@
     "deploy": 0,
     "activation": 0,
     "main_merge": 0,
-    "automatic_progression": false
+    "automatic_progression": false,
+    "source_commit": "d9debbff318441f3064ae87c3b725ffd2454ae52",
+    "ci_run_id": 38093232063,
+    "ci_passed": 570,
+    "ci_failed": 0,
+    "ci_skipped": 0,
+    "ci_conclusion": "success",
+    "ci_js_node": "24.21.0",
+    "remote_file_matches": 18,
+    "remote_changed_paths_match": true,
+    "remote_parent_match": true,
+    "pod_cocoapods": "1.17.0",
+    "pod_node": "24.19.0",
+    "pod_zipfoundation": "0.9.20",
+    "pod_artifact_id": 11684881687,
+    "pod_artifact_zip_sha256": "39d7411bb1eef2e785c885d870bf1e489106b4288fb596e997bd112eb80321fa",
+    "existing_pod_versions_or_edges_changed": 0,
+    "existing_pod_spec_checksums_recomputed": 69,
+    "pod_lock": {
+      "path": "ios/Podfile.lock",
+      "raw_sha256": "bf5408ca4be634c9723b95015aa54035fff3ab81259c2eb1a62d4d745618d113",
+      "utf8_bytes": 68710
+    }
   }
 }
