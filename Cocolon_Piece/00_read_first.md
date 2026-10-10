@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§44／current map §48を優先する。保存済みPieceの本人削除を、既存preview/shared候補APIへ接続しました。閲覧と削除だけを独立して許可する既存設計を実装し、既定OFFを保持。local370件成功、最終隔離PostgreSQL CIは1,759 PASS／FAIL0／SKIP0です。実機描画・保存前fit・保存共有・稼働採用は残っています。**
+**現在は§45／current map §49を優先する。既存preview/shared候補の回数取得を、旧公開回数からV2の保存回数へ接続しました。既存preview flagで制御し、保存権限とは分離。local211件成功、隔離CIは1,774 PASS／FAIL0／SKIP0。実機描画・保存前fit・保存共有・稼働採用は残っています。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -942,3 +942,12 @@ local関連5file **223 PASS／FAIL0／4 deselected**。最終headの[隔離CI380
 local関連4file **370 PASS／FAIL0／SKIP0**。最初の収集はsource import path不足で1 ERRORとなり、既存sourceの探索pathを明示して検証した。製品の判定緩和はない。初回CIは既存B10の経路一覧にDELETEを追加し忘れたため6 FAIL。期待する経路を1件追加した最終head `5773dbf3794090b4cee64ef5843f52b78e88cfad` の[隔離CI38044205689](https://github.com/MassyuRed/mashos-api/actions/runs/38044205689)は **1,759 PASS／FAIL0／SKIP0**。localとの合算なし。合成artifact/Auth/HTTPを含み、稼働データや実機の受入れではない。製品2＋test4の最終remote全文・変更path集合・親headを照合済み。詳細はmap §48.2。
 
 次はnative B9実機描画/renderer admission→保存前fit→保存。形式変更・画像保存共有・Nexus・保存/公開切替の候補API接続・quota v2採用・M5/実Auth・稼働採用は残る。今回の本人削除登録、既存owner GET・候補取消・visual PATCHを再実装しない。Supabaseはproject/migration履歴読取のみ、001〜004適用済み・追加2本未適用。RN/native/SQL/依存・live DB書込・deploy/activation/build/main mergeの変更0。weekly§5.5・12/18目標・automatic_progression=falseを維持する。
+
+
+## 45. 2026-10-10 — 候補APIの回数取得を保存回数へそろえる
+
+詳細ownerはcurrent map §49。API `6384f8b165337a47adf052e3ccc4f2fe3a2a28c3` で既存 `read_quota` を専用preview/shared候補へ登録した。`GET /emotion/piece/quota` はプレビュー内quotaと同じ保存回数を返し、既存preview flagで制御する。`can_save`は回数上の表示であり保存許可ではない。shared候補だけ旧quota登録と旧DTO前提の `/emotion/reflection/quota` を除き、candidate contractをv2へ選択。default構成・旧DTO・旧aliasは保持する。
+
+local関連3file **211 PASS／FAIL0／SKIP0**。既存構成の旧応答、候補の厳密な本人認証/OFF/不正要求、停止後の回数応答抑止、handler同一性を確認。[隔離CI38045414597](https://github.com/MassyuRed/mashos-api/actions/runs/38045414597)は **1,774 PASS／FAIL0／SKIP0**。両候補からのSQL読取→preview内表示一致・回数不消費・新しい使用回数の取得・005不在時503を確認した。localとの合算なし。合成Auth/source/HTTPを含み、実Auth・端末・稼働受入れではない。全9fileのremote全文・変更path集合・親headを照合済み。詳細はmap §49.2。
+
+次はnative B9実機描画/renderer admission→保存前fit→保存。形式変更・capture共有・Nexus v2公開読取と公開切替・保存API構成・M5/実Auth・稼働採用が残る。公開切替はowner_read/public_readへ依存し、public指定にはpublic_writeも必要。未接続の公開読取をready扱いしたり、private対象だけの例外を作ったりしない。今回quota候補登録・本人GET/DELETE・preview取消/visual PATCHを再実装しない。005 quotaとvisual変更SQLの稼働未適用は先行確認を継承し、今回Supabase操作なし。RN/native/SQL/依存/workflow・env/deploy/activation/build/main merge変更0。weekly§5.5・12/18目標・automatic_progression=falseを維持する。

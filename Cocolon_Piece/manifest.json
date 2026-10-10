@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v43",
+  "schema_version": "cocolon.piece.workstream_manifest.v44",
   "generated_at": "2026-10-10 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v42",
-    "predecessor_blob": "ef0e0afb2eff222a21c8081b675d824d75dba083",
-    "predecessor_head": "7037539bec710522c2fd01de10f7a92a4d9cf12c",
-    "carry_forward": "Existing flows retained; owner deletion connected to explicit candidates with independent strict requested/ready and owner-read dependency. Default OFF; native device/fit/save/live pending."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v43",
+    "predecessor_blob": "40c4a7e2dfa58e4ab74632e2692b5c1395a7fce3",
+    "predecessor_head": "d461873a59df8fed0f4b4569ea999628d7bd0fc5",
+    "carry_forward": "Explicit candidates now expose saved-use quota with the existing preview flag; default publish DTO/aliases preserved. Native device/fit/save/live remain pending."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "c78ec344115ca05c605ccd59fe525ef734d6401a",
-    "raw_sha256": "81450aa524f6bfbc32ee6c02d88986ec542156135ff4e007a3814deb5e4ce86e",
-    "utf8_bytes": 76313
+    "git_blob_sha1": "05f1202a243035f154a0344d79f3f090844a41c9",
+    "raw_sha256": "1785ae99604aae715ba832aebd8496a8db6ac2142683b7847ed20619172fd44c",
+    "utf8_bytes": 78271
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -77,7 +77,8 @@
     "pce9a_visual_mutation_composition": "EXPLICIT_PREVIEW_SHARED_REGISTERED_REMOTE_CI1675_PASS__LIVE_DEVICE_PENDING",
     "pce9c_preview_cancellation": "RN_REMOTE_CI545_PASS__API_REMOTE_CI1682_PASS__NOT_LIVE",
     "pce9a_owner_read_composition": "REMOTE_CANDIDATE_REGISTERED__ISOLATED_CI1717_PASS__NOT_LIVE",
-    "pce9a_owner_delete_composition": "REMOTE_CANDIDATE_REGISTERED__ISOLATED_CI1759_PASS__NOT_LIVE"
+    "pce9a_owner_delete_composition": "REMOTE_CANDIDATE_REGISTERED__ISOLATED_CI1759_PASS__NOT_LIVE",
+    "pce9a_quota_composition": "REMOTE_CANDIDATE_REGISTERED__ISOLATED_CI1774_PASS__NOT_LIVE"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -159,12 +160,12 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "7037539bec710522c2fd01de10f7a92a4d9cf12c",
-    "mashos_api_head": "5773dbf3794090b4cee64ef5843f52b78e88cfad",
+    "cocolon_pre_sync_head": "d461873a59df8fed0f4b4569ea999628d7bd0fc5",
+    "mashos_api_head": "6384f8b165337a47adf052e3ccc4f2fe3a2a28c3",
     "current_user_visible_piece_shape": "OLD_QNA_REGISTERED_IN_SOURCE__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
     "piece_v2_api_registration_present": true,
-    "piece_v2_api_registration_scope": "Explicit preview/shared candidates register preview POST/visual PATCH/cancel DELETE, source-ref/bootstrap, owner history/detail GET and owner DELETE; default app remains legacy.",
+    "piece_v2_api_registration_scope": "Explicit preview/shared candidates register preview POST/visual PATCH/cancel DELETE, saved quota GET, source-ref/bootstrap, owner history/detail GET and owner DELETE; default app remains legacy.",
     "piece_v2_dedicated_preview_application_present": true,
     "piece_v2_migration_root_present": true,
     "piece_v2_live_database_objects_present": true,
@@ -175,11 +176,11 @@
     "input_screen_source_connected": true,
     "live_auth_input_to_preview_to_device_verified": false,
     "database_evidence_owner": "live_db_apply_20261010",
-    "remaining_work_owner": "owner_delete_composition_20261010",
+    "remaining_work_owner": "quota_composition_20261010",
     "product_acceptance": false,
     "piece_v2_default_application_registered": false,
     "piece_v2_quota_http_present": true,
-    "piece_v2_quota_http_scope": "Unregistered v2 GET with service-only read snapshot; not mounted in running or shared-preview app.",
+    "piece_v2_quota_http_scope": "Explicit preview/shared candidates use existing saved-use GET and preview flag. Legacy reflection quota alias omitted only there; default app remains publish quota.",
     "piece_v2_quota_read_sql_scope": "New005 source-only; existing live001-004 preserved; live quota function presence not claimed.",
     "piece_v2_quota_read_live_applied": false,
     "piece_v2_preview_plan_display_present": true,
@@ -199,18 +200,20 @@
     "piece_v2_owner_read_candidate_registered": true,
     "piece_v2_owner_read_runtime_registered": false,
     "piece_v2_owner_delete_candidate_registered": true,
-    "piece_v2_owner_delete_runtime_registered": false
+    "piece_v2_owner_delete_runtime_registered": false,
+    "piece_v2_quota_candidate_registered": true,
+    "piece_v2_quota_runtime_registered": false
   },
   "next_group": {
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "NATIVE_DEVICE_RENDERER_ADMISSION_THEN_SAVE_FIT_AND_BOUND_SAVE",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "OWNER_READ_DELETE_CANDIDATE_CONNECTED__NATIVE_DEVICE_FIT_LIVE_PENDING",
-    "current_map_section": "48.3",
-    "current_entry_section": "44",
+    "state": "OWNER_READ_DELETE_QUOTA_CANDIDATE_CONNECTED__NATIVE_DEVICE_FIT_LIVE_PENDING",
+    "current_map_section": "49.3",
+    "current_entry_section": "45",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
     "weekly_review_section": "5.5",
-    "first_unfinished_work": "Native B9 device drawing equivalence/glyph/ink/performance and renderer admission, then save fit/save. Format mutation, capture/share/Nexus, save/visibility composition, quota v2 adoption, M5/live005+visual SQL/Auth remain.",
+    "first_unfinished_work": "Native B9 device drawing equivalence/glyph/ink/performance and renderer admission, then save fit/save. Format mutation, capture/share, Nexus v2 public read, save/visibility composition, M5/live005+visual SQL/Auth remain.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 4,
@@ -231,7 +234,8 @@
     "repeat_preview_visual_patch_registration": false,
     "repeat_preview_cancellation_connection": false,
     "repeat_owner_read_composition": false,
-    "repeat_owner_delete_composition": false
+    "repeat_owner_delete_composition": false,
+    "repeat_quota_candidate_connection": false
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -285,9 +289,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "dbc5ca1de1138a05974cb17424a026ea60512698",
-    "raw_sha256": "7ad15b5af1f799879d7178011c5573c53b48d3f86a814940f61ee6f9851c32a8",
-    "utf8_bytes": 254625
+    "git_blob_sha1": "2e102aa1b3b9fc698b8c5ee7583a08384103016b",
+    "raw_sha256": "46252af35024f836d69959d00db39fbcc343d0c90ec50c566ef747956f4c9690",
+    "utf8_bytes": 260474
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -3128,5 +3132,57 @@
     "product_acceptance": false,
     "automatic_progression": false,
     "final_head": "5773dbf3794090b4cee64ef5843f52b78e88cfad"
+  },
+  "quota_composition_20261010": {
+    "status": "REMOTE_ISOLATED_CI1774_PASS__NOT_DEPLOYED",
+    "source_commit": "6384f8b165337a47adf052e3ccc4f2fe3a2a28c3",
+    "base_head": "5773dbf3794090b4cee64ef5843f52b78e88cfad",
+    "owner_paths": [
+      "ai/services/ai_inference/piece_v2_runtime_control.py",
+      "ai/services/ai_inference/api_emotion_piece.py",
+      "ai/services/ai_inference/api_piece_compat.py",
+      "ai/services/ai_inference/app.py",
+      "ai/services/ai_inference/api_contract_registry.py"
+    ],
+    "test_paths": [
+      "ai/tests/piece_v2/test_b14a_piece_preview_composition.py",
+      "ai/tests/piece_v2/test_b12_shared_preview_composition.py",
+      "ai/tests/piece_v2/db/test_b10_preview_application_native.py",
+      "ai/tests/piece_v2/db/test_b12_shared_preview_native.py"
+    ],
+    "verification": {
+      "local_passed": 211,
+      "local_failed": 0,
+      "local_skipped": 0,
+      "new_composition_cases": 7,
+      "new_native_cases": 8,
+      "ci_pending": false,
+      "review": "READ_ONLY_SAME_ENVIRONMENT_NO_CONCRETE_BLOCKER",
+      "synthetic_auth_source_http": true,
+      "real_auth_postgrest_device": false,
+      "ci_run_id": 38045414597,
+      "ci_job_id": 114193834651,
+      "ci_passed": 1774,
+      "ci_failed": 0,
+      "ci_skipped": 0,
+      "ci_disjoint_invocations": 23,
+      "shared_composition_passed": 110,
+      "shared_native_passed": 34,
+      "remote_file_matches": 9,
+      "remote_changed_paths_match": true,
+      "remote_parent_match": true
+    },
+    "dedicated_route_count": 10,
+    "existing_preview_flag": true,
+    "new_flags": 0,
+    "default_routes_and_dto_preserved": true,
+    "legacy_quota_alias_excluded_only_in_candidate": true,
+    "quota_read_is_not_save_permission": true,
+    "live_database_operations": 0,
+    "deploy": 0,
+    "activation": 0,
+    "main_merge": 0,
+    "product_acceptance": false,
+    "automatic_progression": false
   }
 }

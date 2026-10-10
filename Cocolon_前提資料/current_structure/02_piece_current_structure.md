@@ -1756,3 +1756,38 @@ API `fd15babe24e8dbcb28e0b20f5cf7960385106130`、製品2＋test3をPR #3へ反�
 次はnative B9の実端末描画同等性・glyph/ink/性能、renderer admission→保存前fit→保存。形式変更、capture/画像保存共有、Nexus、保存/公開切替の候補API接続、quota v2採用、M5/実Auth・稼働設定が残る。今回のDELETE登録、owner GET・候補取消・visual PATCHは再実装しない。保存・public・visibility・exportの有効化は今回0。canSave/canExport=falseのRN境界を維持。
 
 Supabase project metadataとmigration履歴の読取で001〜004適用済み、005 quotaとvisual変更SQLの追加2本未適用を確認。稼働DB query/write/apply、利用者データ削除、env/deploy/activation、native app build、main mergeは0。RN/native/SQL/依存・workflow変更0。weekly §5.5の実機確認順序と12/18公開目標を維持し、Piece全内容完成を実機確認の前提へ追加しない。TECHNICAL_CREDIT（local接続・隔離実SQL検証）／STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false。
+
+
+## 49. 2026-10-10 — プレビューと同じ保存回数を候補APIから取得（未配置）
+
+### 49.1 残件と実装owner
+
+MashのPiece続行指示に基づき、§48.3に残るquota v2候補採用を進めた。プレビューのquotaは保存回数だが、shared候補の独立GETは旧公開回数だった。既存のV2読取handler/SQLを同じ候補へ登録し、取得する回数の意味をそろえる。RN操作を新設せず、保存許可・native fitの成立とは分離する。PCE6のsave quota、PCE8/B5と既存preview flagの境界を保持。
+
+開始headはCocolon `d461873a59df8fed0f4b4569ea999628d7bd0fc5`／API `5773dbf3794090b4cee64ef5843f52b78e88cfad`。同会話の必須資料読取を継承し、現行ルール、設計01/01B・ファイル地図/current map、Piece入口/原典、weekly 10/10 §5.5と最新PR headを照合。System Context prepareはd461873の祖先不一致code2で、原典直接読取を使用した。DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、Workの既存非稼働切替準備・隔離検証範囲。root華恋が単一writer、補助agentは同環境read-only review。独立modelによる正式商品受入れではない。
+
+| 既存owner | 今回の変更 |
+|---|---|
+| `ai/services/ai_inference/piece_v2_runtime_control.py` | 既存 `api_piece_v2.read_quota` をGET `/emotion/piece/quota`へ直接登録し、generic owner GETより先に選ぶ。専用構成10route。既存preview flagを使い、新flagを追加しない。 |
+| `ai/services/ai_inference/api_emotion_piece.py` / `api_piece_compat.py` | 両登録関数へ既定Trueの `include_quota`。旧quota本体と旧reflection quota aliasを個別に登録選択できるようにする。旧aliasは公開回数のDTOで、新保存回数へ委譲しない。 |
+| `ai/services/ai_inference/app.py` | 明示candidateだけ両include_quota=False。factoryのV2 GETを一つだけ保持し、defaultは旧DTOと旧aliasを維持。既存publish/cancel/Homeの旧quota owner等は変更せず、M5完了としない。 |
+| `ai/services/ai_inference/api_contract_registry.py` | candidateだけ `emotion.piece.quota.v2`。旧quota v1とreflection quota aliasをcandidate registryから除外。既定registryは保持。 |
+| 既存test4file | `test_b14a_piece_preview_composition.py`、`test_b12_shared_preview_composition.py`、`db/test_b10_preview_application_native.py`、`db/test_b12_shared_preview_native.py`。新source接続7件とnative8件。 |
+
+HTTP `read_quota`、`piece_v2_quota`、既存005、認証・flagのIO前後照合・closed応答・server JST月/本人/現tier集計は変更しない。回数を予約/消費せず、生成・保存・本人データ操作へ置換しない。RPC不在や読取失敗を旧回数やfree/0へfallbackしない。
+
+### 49.2 検証と反映
+
+API source `6384f8b165337a47adf052e3ccc4f2fe3a2a28c3`、製品5＋test4。local既存control/dedicated/shared compositionの3fileで **211 PASS／FAIL0／SKIP0**。Python3.12.14／pytest8.4.1。既存FastAPI/Pydantic非推奨警告131件を保持。default2構成で旧quota本体/aliasの実handlerと旧DTOを確認し、候補ではV2 handler同一性、旧alias404、auth先行・default OFF・不正body/queryのIO0・IO後停止・保存flag OFFを確認した。
+
+新native8件は両factoryを通し、Free上限到達・Plus・Premiumの6件で実SQL読取、同じpreview内quotaとの一致、GET前後のrecord/消費履歴/profile不変、回数上限でもpreview可能、新しい使用回数の再取得、旧data不変を確認した。追加2件は005 RPC欠落時に503となり生成や保存へ進まないことを確認した。既存B10経路集合も10routeへ更新。[隔離CI38045414597](https://github.com/MassyuRed/mashos-api/actions/runs/38045414597)／job114193834651は全工程success。23の重複しない検査集合で **1,774 PASS／FAIL0／SKIP0**（先行1,759＋composition7＋native8）。shared composition110件、shared native34件を含む。Python3.12.15／PostgreSQL16.15／pytest8.4.1／psycopg3.3.6。全9fileのremote全文・変更path集合・親headを照合済み。localとCIを合算しない。
+
+同環境read-only reviewで具体的blockerなし。fixtureのSQL/tier準備、RPC回数4回、旧aliasのDTO不一致と候補限定除外を照合済み。Auth/source/PostgREST transportは合成であり、実Auth・稼働Supabase・RN実機・商品受入れを意味しない。
+
+### 49.3 再開位置と稼働境界
+
+次はnative B9実端末の描画同等性・glyph/ink/性能とrenderer admission→保存前fit→保存。形式変更、capture/画像保存共有、Nexus v2公開読取、保存/公開切替の候補API構成、M5/実Auth・稼働設定が残る。今回完了したquota v2候補登録を繰り返さず、005の稼働適用と採用は別残件として保持する。owner GET/DELETE・preview取消・visual PATCHも再実装しない。
+
+公開切替は現resolverでowner_read AND public_readが必要で、public指定時はpublic_write（save/preview/public_read依存）も要求する。現公開読取は旧Q&Aのownerであるため、visibility requested/readyだけを追加して成立扱いにしない。private対象だけの例外やpublic_readの準備済み捏造も行わない。今回の回数表示からcanSave/canExportを有効化しない。
+
+Supabase操作・live DB query/write/apply、env/deploy/activation、native app build、main mergeは0。RN/native/SQL/依存/workflow変更0。001〜004適用済み、005 quotaとvisual変更SQLの稼働未適用は先行確認を継承し、再照会や再適用はしていない。weekly §5.5・12/18公開目標を維持し、Piece全内容完成を実機確認の前提へ追加しない。TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false。
