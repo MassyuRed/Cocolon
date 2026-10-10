@@ -1,8 +1,8 @@
 ---
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
-revision_date: "2026-10-09 JST"
-latest_api_implementation: "aa6cf858ee8d258772fc1d9b96ac5d27133c53df"
+revision_date: "2026-10-10 JST"
+latest_api_implementation: "e81c112900f5439a49cd99c7178c2959237984c3"
 latest_storage_candidate: "d71fdb40238f2c99751f0c20e578ab654f72308e"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
@@ -15,6 +15,10 @@ automatic_progression: false
 # Piece構造 — Current Structure
 
 ## 0. Current conclusion
+
+**現在の再開位置は§33です。既存001〜004はcocolon-projectへ適用・確認済み。API `e81c1129` の専用factoryと実生成→隔離DBの成立を継承する。共有appは旧previewと同じURLを所有するため、次の実接続は設定追加だけでは成立しない。InputScreen・bootstrap・入力保存を同じ接続先で保つ採用構成と、旧契約の切替範囲を先に確定する。実Auth・実機・商品受入れは未確認。**
+
+### 10/09以前の先頭要約（履歴）
 
 **最新は§32です。InputScreenの保存成功IDを既存hostへ渡す開発経路を組み込んだ。332件の検査は代替環境であり、API登録・稼働設定・実機・商品受入れの成功ではない。**
 **最新は§30です。API `aa6cf858` の単一実効フラグresolver・bootstrap投影・source-ref GET/preview POSTの操作時制御が反映済みで、再開後API86件・RN282件を確認しました。稼働構成・InputScreen・実機は未完了です。以前の「サーバー制御未実装」は各時点の履歴として区別します。**
@@ -214,7 +218,7 @@ shared tableのnon-Piece row／consumerは、exact Piece predicateとwriter／re
 
 ## 8. Current gaps
 
-現在の未完了は§32.4へ集約する。以下は9/30時点の残件であり、後続のB2-B／B3／B4／B5永続化／B6保存接続が未実装という意味には使用しない。
+現在の未完了は§33.4へ集約する。以下は9/30時点の残件であり、後続のB2-B／B3／B4／B5永続化／B6保存接続が未実装という意味には使用しない。
 
 1. user-visible routeはold Q&Aのまま。
 2. 保存原入力・保存状態から本文／recipeの内部組立と画像設定だけの変更を§20まで実装。本文に表れていない選択感情、refined補足、保存済みpreview発行、HTTP／RNは未接続。
@@ -1078,3 +1082,55 @@ InputScreenのコード上の呼出しは本節で接続した。次の直接残
 現行前提資料・作業入口／CURRENT_RULES／Rule18、同じ会話で参照した全体地図01／01A／01B／01Cとcurrent mapの関連責務、PCE-6 RN／PCE-8 B10、最新10/03週次の主経路を継承し、今回InputScreen全文・Emlis reader・API client・index.js・package.json等を照合した。恒久incidentは今回も全文を再読。部分materializationでSystem Context prepareを一度実行したがtools.cocolon_contextがなく不成立、正本が認める原典直接参照を使用した。全歴史地図／全repoの全面新規監査ではない。
 
 `STRUCTURE_MAP_DELTA_UPDATED`。華恋／GPT-6 Astra Pro／CHAT_PRO_OK、Rule18§0・§11.3内の単一実行。API repository・実DB・env・deploy・build・依存・main／merge・有効化・利用者データ・旧Q&A・Emlis／Analysis変更0。GitHub反映は応答だけで完了にせず、対象bytes／変更path／最終headを別途再取得して照合する。`automatic_progression=false`。
+
+## 33. 2026-10-10 — DB4本適用済み・実接続に必要な共有API採用
+
+### 33.1 先行実装と検証を継承する
+
+API PR #3のheadは `e81c112900f5439a49cd99c7178c2959237984c3`、今回の資料更新前Cocolon PR #30は `bc8c2ef1a9b67a8af549251c0bda2fce45abdf95`。InputScreenの `f65c19e0` と既存hostを保持する。APIの `piece_v2_runtime_control.py::create_piece_preview_application` は、source-ref GET、preview POST、bootstrap、startupの4経路を持つ独立した開発appとして既に実装済み。旧 `register_piece_preview_routes` 候補を再適用しない。
+
+[10/09実装記録](https://github.com/MassyuRed/mashos-api/pull/3#issuecomment-6078985237)と[CI run 37916159645](https://github.com/MassyuRed/mashos-api/actions/runs/37916159645)を再取得した。既存契約146件と実CMEE/B9→限定安全性判定→service/store→隔離PostgreSQLの13件の成功は先行実行の証拠であり、今回再実行した件数ではない。Bearer照会・保存元取得・PostgREST transport・TTL/rendererは検査用代替。RN332件も先行結果である。実Auth、実利用者の保存入力GETから同じInputScreenまでの一往復、実機画像の成功へ換算しない。
+
+### 33.2 実DBの適用結果
+
+同じ会話の先行工程で、`cocolon-project / oeahmpmigszggnkyiivq` を確認し、既存原典全文のままSupabase `apply_migration` を001→004の順に各1回実行した。各段階で構造・権限・履歴を確認し、最終view/ACL照合は **2026-10-10 10:46:43.976675 JST**。今回の資料同期ではDB照会・再適用を行っていない。
+
+| 既存SQL（supabase/migrations/） | 記録されたmigration version | 状態 |
+|---|---|---|
+| 20260808_001_piece_v2_legacy_read_bridge.sql | 20261010014326 | 適用・確認済み |
+| 20260808_002_piece_v2_foundation.sql | 20261010014413 | 適用・確認済み |
+| 20260808_003_piece_v2_rls_and_staging.sql | 20261010014441 | 適用・確認済み |
+| 20260808_004_piece_v2_atomic_functions.sql | 20261010014516 | 適用・確認済み |
+
+8テーブル・2ビュー・5関数名／6シグネチャが存在し、ENABLE＋FORCE RLS、予定policy、service_role限定SELECT/EXECUTE、clientの直接アクセス禁止、constraint/index、6関数本文hashを照合済み。旧 `public.pieces` の定義・ACLは適用前と一致。履歴は既存4＋Piece4の計8件で重複なし。詳細・SQL blob・各段階の結果は[API適用記録](https://github.com/MassyuRed/mashos-api/pull/3#issuecomment-6092348061)、対応する[アプリ側記録](https://github.com/MassyuRed/Cocolon/pull/30#issuecomment-6092352103)を参照する。
+
+対象4本の未適用は0。**古いmanifestや本mapの履歴にある未適用記述を根拠に再実行しない。** 今後DB変更が必要な場合は、その時点の実履歴・catalogと照合する。前回Chatの内部拒否理由は今も不明だが、Workの4呼出しは成功した。解除待ち・サポート回答待ちを現在のDB停止理由にしない。DB準備完了と稼働readinessを分ける。
+
+### 33.3 設定だけでは閉じない実接続の不足
+
+| owner | 確認した現在の構造 |
+|---|---|
+| Cocolon `screens/InputScreen.js` → `lib/api/home/emotionSubmitApi.js` | 入力保存は共有 `lib/apiClient.js` 経由の `/emotion/submit`。 |
+| `features/piece/pieceApi.js` | source-ref／previewも同じapiFetchと既定API base。個別base指定なし。 |
+| `AppRuntimeContext.js` | 表示flagは同じbaseの `/app/bootstrap` から取得。 |
+| API `app.py`／`api_emotion_piece.py` | 共有appは旧 `POST /emotion/piece/preview` を登録。新source-refと新runtime stateは未供給。 |
+| `piece_v2_runtime_control.py` | 専用factoryの引数供給・4経路の結線は実装済み。`/emotion/submit` は持たない。 |
+| `api_contract_registry.py`／`ai/docs/PUBLIC_API_REGISTRY.md` | 共有previewの台帳は旧 `emotion.piece.preview.v1`。`middleware_api_contract.py` もこの台帳を使用する。 |
+
+したがって専用factoryへ共通baseを付け替えるだけでは入力保存が成立せず、共有appへ新previewを後付けするだけでは同一method/pathが重複する。未呼出helperや起動CLIを増やしても解消しない。今回これらを追加していない。共有appの実際の配置状態や端末接続は、ソース読取だけでは確認済みにしない。
+
+### 33.4 次の具体的な変更範囲と実行境界
+
+次に必要なのはB10の実接続に関わるB12-Cの採用確認であり、以下を一組としてレビューする。
+
+1. `app.py` と `api_emotion_piece.py` の登録構成で、入力保存・bootstrap・非Piece機能を保ち、新source-refとpreviewを同じappへ接続する。同じPOST pathのownerは1本とする。未完成の全v2 routerを登録しない。
+2. `api_contract_registry.py`、`ai/docs/PUBLIC_API_REGISTRY.md`、既存契約検査を、新saved-source DTOの採用と同時に整合させる。旧v1 headerのまま新DTOを返さず、未登録routeを先に公開済み台帳へ記載しない。
+3. 既存resolver/validatorへpreviewのrequested／readyと採用TTL／rendererを渡す。値・readiness根拠は未確定。DBの存在や検査用600秒／synthetic-renderer.v1を稼働承認へ流用しない。
+4. 同じ接続先で入力保存・bootstrap・参照GET・preview POSTの結線、重複登録なし、OFF時停止を隔離環境で検証する。旧Q&Aの到達性変更はPCE-6 §7／§11とPCE-8 B12-Cの個別境界に従い、片側だけの変更で既存clean-cutover条件を緩めない。
+
+上記は具体的な次変更候補であり、今回ソースへ適用・稼働承認したものではない。元の依頼は旧Q&A切替・deploy/env/activation/native build/main mergeを除外しているため、その境界を越える変更は実行しない。既存ソースが不足している箇所と、未承認／未確認の環境条件を区別する。実Auth・本人の保存入力・同じInputScreenの一往復、その後のcapabilities/quota・残る操作制御・native画像保存共有・商品受入れも未完了。
+
+今回の変更は既存入口・本map・manifestの3資料だけ。新しい起動CLI、helper、テスト、CI、依存、API/RNソース、SQL変更は0。確認済みのDB適用結果と専用factoryを現在の入口へ反映し、次の実接続変更を確定する資料同期である。恒久incident全文、現行作業ルール、全体地図の関連owner、最新10/10 weekly review §1.4／§5.5と原典を確認。fresh System Context prepare成功、全repo全面監査、新規実機検証は主張しない。10/10週次の実機順序・12/18公開目標を維持する。
+
+`STRUCTURE_MAP_DELTA_UPDATED`。Workの読取専用補助を用い、書込は華恋root。GitHub反映後に3path全文・変更path・PR headを再取得して照合し、両PRへ結果と再開位置を記録する。`automatic_progression=false`。
+

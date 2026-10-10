@@ -1,22 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v27",
-  "generated_at": "2026-10-09 JST",
+  "schema_version": "cocolon.piece.workstream_manifest.v28",
+  "generated_at": "2026-10-10 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v20",
-    "predecessor_blob": "fee837d42aee9a30a69b098aadb9a15c3be205ab",
-    "predecessor_head": "fa0a54573d33485fa97fd1f9f66ced6eafdd5d2f",
-    "carry_forward": "Preserve all earlier objects and evidence. Explicit-role hiragana fix is 4033e1f; B7 HTTP and isolated PostgreSQL verification are reflected at 0c1f69e. Documentation staging does not imply remote application.",
-    "historical_scope": "Current bounded state: b08_hiragana_role_binding and b07_mutation_http. Earlier scopes remain commit-bound history."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v27",
+    "predecessor_blob": "f0781acb06bbc797e1dc72a97c220d35da369029",
+    "predecessor_head": "bc8c2ef1a9b67a8af549251c0bda2fce45abdf95",
+    "carry_forward": "Preserve commit-bound historical objects. Current DB status and remaining shared-app adoption are live_db_apply_20261010 and shared_api_connection_20261010; earlier unapplied states do not authorize replay."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "e02827cb9aa61768d9f4456915ccbc793c43f2ca",
-    "raw_sha256": "6465bd679361a787c00de149e2c2d381bc6c45b53115784134edcb1346a71dcb",
-    "utf8_bytes": 43207
+    "git_blob_sha1": "b36e84a61c34c478c7d11e58b0e4b4f2064e99c3",
+    "raw_sha256": "673684f844536517d3a8e2a3ea43ae46ac1e9d2c627d8ec1e7583fe5fc622419",
+    "utf8_bytes": 46194
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -54,9 +53,9 @@
     "pce9a_b01_red": "COMPLETE_TEST_ONLY_CAUSAL_RED",
     "pce9a_b01_implementation": "COMPLETE_CODE_DISABLED_TARGETED_GREEN",
     "pce9a_b01": "COMPLETE",
-    "pce9a_b02a": "FILE_ONLY_TECHNICAL_ACCEPTANCE_PASSED__LIVE_APPLY_0",
+    "pce9a_b02a": "NATIVE_ACCEPTANCE_RETAINED__LIVE_BRIDGE_APPLIED_20261010",
     "analysis_roadmap": "REFER_TO_ANALYSIS_CURRENT_STRUCTURE__HISTORICAL_NOT_ACTIVATED_STATE_NOT_CURRENT",
-    "next_piece_group": "SAME_INPUTSCREEN_PREVIEW_ROUTE__ADMITTED_RUNTIME_CONFIGURATION_AND_API_REGISTRATION_PENDING",
+    "next_piece_group": "B10_SHARED_APP_ADOPTION_REQUIRES_B12C_CONTRACT_AND_CUTOVER_REVIEW",
     "automatic_packet_progression": false,
     "pce9a_b02a_red": "FROZEN_UNCHANGED__NATIVE_POSTGRESQL_1_PASS",
     "pce9a_b02a_implementation": "EXACT5_PRESERVED__EXACT6_SELECTORS_PUBLISHED",
@@ -66,9 +65,9 @@
     "pce9b_b08_latin_role_binding": "HISTORICAL_EE81B492_LATIN_ONLY__CURRENT_HIRAGANA_SCOPE_SEPARATE",
     "pce9b_b08_hiragana_role_binding": "REMOTE_DRAFT_4033E1F_EXPLICIT_ROLE_ONLY__HISTORICAL_CI_676_PASS__NOT_B8_COMPLETE",
     "pce9a_b07_mutation_http": "REMOTE_DRAFT_0C1F69E__HTTP_152_PASS__ISOLATED_POSTGRESQL_13_PASS__REAL_AUTH_POSTGREST_DEVICE_PENDING__NOT_B7_COMPLETE",
-    "pce9c_source_ref_transport": "CODE_APPLIED_UNREGISTERED__HTTP36_RN239_LOCAL_PASS__NOT_LIVE",
+    "pce9c_source_ref_transport": "DEDICATED_PREVIEW_APPLICATION_REGISTERED__SHARED_APP_UNREGISTERED__NOT_LIVE_AUTH_VERIFIED",
     "pce9d_runtime_projection": "INPUTSCREEN_LAST_CONFIRMED_SAVE_TO_EXISTING_HOST_CONNECTED_CODE_DISABLED__LIVE_RUNTIME_PENDING",
-    "pce9a_runtime_preview_control": "API_AA6CF858_RESOLVER_BOOTSTRAP_SOURCE_GET_PREVIEW_POST_GATES__CODE_DISABLED__NOT_B14A_COMPLETE"
+    "pce9a_runtime_preview_control": "E81C1129_EXISTING_DEDICATED_FACTORY__PRODUCTION_SUPPLIER_AND_CUTOVER_PENDING"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -150,36 +149,38 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "98b3df26d9ca6076885d6d41d74745e540491e1a",
-    "mashos_api_head": "1a215c511858a574bf76b15d0ed20ddce984744b",
-    "mashos_api_tree": "a216b862e786ad5900660bcef1e09395dea72b4d",
-    "current_user_visible_piece_shape": "old_qna_piece_flow",
+    "cocolon_pre_sync_head": "bc8c2ef1a9b67a8af549251c0bda2fce45abdf95",
+    "mashos_api_head": "e81c112900f5439a49cd99c7178c2959237984c3",
+    "current_user_visible_piece_shape": "OLD_QNA_REGISTERED_IN_SOURCE__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
     "piece_v2_api_registration_present": false,
+    "piece_v2_api_registration_scope": "Shared production app remains legacy; dedicated development factory has four registered routes.",
+    "piece_v2_dedicated_preview_application_present": true,
     "piece_v2_migration_root_present": true,
+    "piece_v2_live_database_objects_present": true,
     "piece_v2_db_runtime_present": false,
     "piece_v2_rn_runtime_present": false,
-    "piece_v2_feature_flags_present": false,
-    "production_database_catalog_drift_after_pce0": "UNCONFIRMED",
-    "b02a_causal_red_test_path": "ai/tests/piece_v2/db/test_b02_m0_m1_legacy_bridge.py",
-    "b02a_causal_red_test_present": true,
-    "b02a_causal_red_execution_credit": "FROZEN_UNCHANGED__NATIVE_ACCEPTANCE_1_PASS",
-    "b02a_required_implementation_exact5_present": true,
-    "b02a_exact6_reader_rebindings_published": true,
-    "b02a_native_postgresql_green": true,
-    "historical_scope": "B2-A checkpoint only. Current Piece API reference is b07_mutation_http.api_commit; current next work is next_group."
+    "piece_v2_feature_flags_present": true,
+    "piece_v2_feature_flags_scope": "Resolver and RN projection implemented; production state supplier absent; default OFF.",
+    "input_screen_source_connected": true,
+    "live_auth_input_to_preview_to_device_verified": false,
+    "database_evidence_owner": "live_db_apply_20261010",
+    "remaining_work_owner": "shared_api_connection_20261010",
+    "product_acceptance": false
   },
   "next_group": {
-    "id": "B10",
-    "name": "SAME_INPUTSCREEN_PREVIEW_ROUTE__ADMITTED_RUNTIME_CONFIGURATION_AND_API_REGISTRATION_PENDING",
-    "environment": "CHAT_PRO_OK",
-    "state": "EXISTING_MAINLINE_UNFINISHED__NOT_AUTOMATIC_ACTIVATION",
-    "current_map_section": "32.4",
-    "current_entry_section": "28",
-    "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261003.md",
-    "weekly_review_section": "5.3",
-    "first_unfinished_work": "Connect the same InputScreen preview route to admitted server runtime readiness/TTL/renderer and route registration; live application and activation retain separate approvals. InputScreen last-confirmed-save wiring is implemented; real Auth/DB/native remains unverified.",
+    "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
+    "name": "SHARED_API_ADOPTION_AND_CONTRACT_REVIEW_BEFORE_SAME_INPUTSCREEN_LIVE_CONNECTION",
+    "environment": "WORK_SELECTED_BY_MASH",
+    "state": "CONCRETE_SHARED_APP_GAP_IDENTIFIED__CUTOVER_NOT_AUTHORIZED_BY_DB_APPLY",
+    "current_map_section": "33.4",
+    "current_entry_section": "29",
+    "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
+    "weekly_review_section": "5.5",
+    "first_unfinished_work": "Review shared-app route ownership, public contract migration and admitted preview runtime together; preserve input submit/bootstrap on the same API base. Existing dedicated factory alone does not provide input submission. Do not activate or change old Q&A reachability under the DB-only approval.",
     "repeat_completed_b2a_or_b7": false,
+    "repeat_existing_preview_factory": false,
+    "piece_migrations_already_applied": 4,
     "production_migration_apply_effect": 0,
     "automatic_progression": false
   },
@@ -235,9 +236,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "382052f4effd1fb9f193bde1664f292511e98291",
-    "raw_sha256": "ab3330ff7e9f56b9f90dc7c4dbccf3c611d1d5424015be37f872b80d9d66d46b",
-    "utf8_bytes": 140562
+    "git_blob_sha1": "cc6417ddb227d9535a1269faea265af99af9c498",
+    "raw_sha256": "6da9ee6fa1740dc63131651d7bdcfbc92802478cc7434c693150a2d01952cc1c",
+    "utf8_bytes": 148171
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -410,19 +411,18 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "OBSERVED_BLOCKER_MINIMAL_FIX",
+    "classification": "CURRENT_DB_AND_SHARED_API_GAP_DOCUMENT_SYNC",
     "piece_documentation_paths": 3,
-    "api_changed_paths_in_recorded_b7_unit": 4,
     "api_changes_in_this_document_sync": 0,
-    "documentation_state": "STAGED_IN_EXISTING_DRAFT_PR",
-    "documentation_full_byte_application_verified": true,
+    "documentation_state": "EXISTING_DRAFT_PR__REMOTE_POSTCHECK_RECORDED_IN_PR_COMMENTS",
     "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
     "live_database_apply": 0,
+    "recorded_prior_live_database_apply": 4,
     "production_registration": 0,
+    "new_test_execution": 0,
     "release_effect": 0,
     "product_acceptance": false,
-    "automatic_progression": false,
-    "verification_scope": "LOCAL_DOCUMENT_BYTES_VERIFIED__REMOTE_RESULT_RECORDED_SEPARATELY"
+    "automatic_progression": false
   },
   "b06_q3_context_fence": {
     "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
@@ -1106,5 +1106,137 @@
     "next_direct_work": "Existing preview route registration and admitted runtime readiness/TTL/renderer supply; live effects retain separate approvals.",
     "automatic_progression": false,
     "rn_commit": "f65c19e01d630a31499414fea10fb20eecff0c5c"
+  },
+  "historical_actual_basis_before_20261010_sync": {
+    "cocolon_pre_sync_head": "98b3df26d9ca6076885d6d41d74745e540491e1a",
+    "mashos_api_head": "1a215c511858a574bf76b15d0ed20ddce984744b",
+    "mashos_api_tree": "a216b862e786ad5900660bcef1e09395dea72b4d",
+    "current_user_visible_piece_shape": "old_qna_piece_flow",
+    "piece_v2_pure_contract_owner_present": true,
+    "piece_v2_api_registration_present": false,
+    "piece_v2_migration_root_present": true,
+    "piece_v2_db_runtime_present": false,
+    "piece_v2_rn_runtime_present": false,
+    "piece_v2_feature_flags_present": false,
+    "production_database_catalog_drift_after_pce0": "UNCONFIRMED",
+    "b02a_causal_red_test_path": "ai/tests/piece_v2/db/test_b02_m0_m1_legacy_bridge.py",
+    "b02a_causal_red_test_present": true,
+    "b02a_causal_red_execution_credit": "FROZEN_UNCHANGED__NATIVE_ACCEPTANCE_1_PASS",
+    "b02a_required_implementation_exact5_present": true,
+    "b02a_exact6_reader_rebindings_published": true,
+    "b02a_native_postgresql_green": true,
+    "historical_scope": "B2-A checkpoint only. Current Piece API reference is b07_mutation_http.api_commit; current next work is next_group."
+  },
+  "historical_next_group_before_20261010_sync": {
+    "id": "B10",
+    "name": "SAME_INPUTSCREEN_PREVIEW_ROUTE__ADMITTED_RUNTIME_CONFIGURATION_AND_API_REGISTRATION_PENDING",
+    "environment": "CHAT_PRO_OK",
+    "state": "EXISTING_MAINLINE_UNFINISHED__NOT_AUTOMATIC_ACTIVATION",
+    "current_map_section": "32.4",
+    "current_entry_section": "28",
+    "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261003.md",
+    "weekly_review_section": "5.3",
+    "first_unfinished_work": "Connect the same InputScreen preview route to admitted server runtime readiness/TTL/renderer and route registration; live application and activation retain separate approvals. InputScreen last-confirmed-save wiring is implemented; real Auth/DB/native remains unverified.",
+    "repeat_completed_b2a_or_b7": false,
+    "production_migration_apply_effect": 0,
+    "automatic_progression": false
+  },
+  "historical_sync_effects_before_20261010_sync": {
+    "classification": "OBSERVED_BLOCKER_MINIMAL_FIX",
+    "piece_documentation_paths": 3,
+    "api_changed_paths_in_recorded_b7_unit": 4,
+    "api_changes_in_this_document_sync": 0,
+    "documentation_state": "STAGED_IN_EXISTING_DRAFT_PR",
+    "documentation_full_byte_application_verified": true,
+    "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
+    "live_database_apply": 0,
+    "production_registration": 0,
+    "release_effect": 0,
+    "product_acceptance": false,
+    "automatic_progression": false,
+    "verification_scope": "LOCAL_DOCUMENT_BYTES_VERIFIED__REMOTE_RESULT_RECORDED_SEPARATELY"
+  },
+  "live_db_apply_20261010": {
+    "project_name": "cocolon-project",
+    "project_ref": "oeahmpmigszggnkyiivq",
+    "api_source_commit": "e81c112900f5439a49cd99c7178c2959237984c3",
+    "execution_record": "https://github.com/MassyuRed/mashos-api/pull/3#issuecomment-6092348061",
+    "app_record": "https://github.com/MassyuRed/Cocolon/pull/30#issuecomment-6092352103",
+    "final_view_acl_checked_at": "2026-10-10T10:46:43.976675+09:00",
+    "state": "APPLIED_AND_CATALOG_ACL_HISTORY_VERIFIED",
+    "migrations": [
+      {
+        "file": "20260808_001_piece_v2_legacy_read_bridge.sql",
+        "name": "piece_v2_legacy_read_bridge",
+        "version": "20261010014326",
+        "git_blob_sha1": "150d50c2a0c2b162da4243095e0273b28dbfaf5a"
+      },
+      {
+        "file": "20260808_002_piece_v2_foundation.sql",
+        "name": "piece_v2_foundation",
+        "version": "20261010014413",
+        "git_blob_sha1": "36b7bb0aa356b2ea5bc61e3a9de19834b0aa97c0"
+      },
+      {
+        "file": "20260808_003_piece_v2_rls_and_staging.sql",
+        "name": "piece_v2_rls_and_staging",
+        "version": "20261010014441",
+        "git_blob_sha1": "335e150d5da81b8a4310e2b99620de5a083488dd"
+      },
+      {
+        "file": "20260808_004_piece_v2_atomic_functions.sql",
+        "name": "piece_v2_atomic_functions",
+        "version": "20261010014516",
+        "git_blob_sha1": "7048062a879da0cdd178b03e70c20e9ee41a0bad"
+      }
+    ],
+    "table_count": 8,
+    "view_count": 2,
+    "function_names": 5,
+    "function_signatures": 6,
+    "unapplied_target_count": 0,
+    "repeat_apply_allowed": false,
+    "old_pieces_definition_acl_unchanged": true,
+    "prior_chat_rejection_internal_reason": "UNKNOWN__NOT_CURRENT_DB_BLOCKER",
+    "fresh_db_reads_in_this_document_sync": 0,
+    "db_apply_in_this_document_sync": 0,
+    "live_user_generation_or_save_test": false,
+    "product_acceptance": false
+  },
+  "shared_api_connection_20261010": {
+    "source_basis_api": "e81c112900f5439a49cd99c7178c2959237984c3",
+    "source_basis_rn": "bc8c2ef1a9b67a8af549251c0bda2fce45abdf95",
+    "shared_base_consumers": [
+      "/emotion/submit",
+      "/app/bootstrap",
+      "/emotion/piece/source-ref/{saved_input_id}",
+      "/emotion/piece/preview"
+    ],
+    "shared_app_preview_owner": "api_emotion_piece.register_emotion_piece_routes",
+    "shared_app_preview_contract": "emotion.piece.preview.v1",
+    "dedicated_factory": "piece_v2_runtime_control.create_piece_preview_application",
+    "dedicated_factory_has_input_submit": false,
+    "configuration_only_is_sufficient": false,
+    "shared_app_contract_and_cutover_change_required": true,
+    "ttl_renderer_values_adopted": false,
+    "production_readiness_established": false,
+    "new_cli_or_registration_helper_added": false,
+    "proposed_owner_paths": [
+      "ai/services/ai_inference/app.py",
+      "ai/services/ai_inference/api_emotion_piece.py",
+      "ai/services/ai_inference/api_contract_registry.py",
+      "ai/docs/PUBLIC_API_REGISTRY.md"
+    ],
+    "cutover_boundary": "PCE6_API_DESIGN_SECTIONS_7_11_AND_PCE8_B12C__OLD_QNA_SWITCH_EXCLUDED_FROM_CURRENT_DB_REQUEST",
+    "prior_ci": {
+      "run_id": 37916159645,
+      "conclusion_retrieved": "success",
+      "existing_contract_cases": 146,
+      "isolated_native_cases": 13,
+      "rerun_in_this_sync": false,
+      "live_auth_or_device_evidence": false
+    },
+    "current_code_changes": 0,
+    "automatic_progression": false
   }
 }

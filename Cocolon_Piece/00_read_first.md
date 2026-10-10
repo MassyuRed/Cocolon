@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_piece_read_first
 title: "Cocolon Piece — Read First"
-revision_date: "2026-10-09 JST"
+revision_date: "2026-10-10 JST"
 decision_owner: "Mash"
 workstream: "Cocolon / Piece"
 document_status: "CURRENT_PIECE_WORKSTREAM_ENTRY"
@@ -9,6 +9,10 @@ automatic_progression: false
 ---
 
 # Cocolon Piece — Read First
+
+**現在は§29／current map §33を優先する。新Piece DBの既存001〜004は適用・確認済みで再実行しない。既存InputScreen、専用preview factory、実生成→隔離DBの経路を保持する。残件は、共有APIの旧previewと同じURLを重複させず、入力保存・bootstrapを保つ採用構成と個別cutoverの確認。実Auth・実画面・画像保存共有・商品完成は未成立。**
+
+### 10/09以前の先頭要約（履歴）
 
 **最新のコード上の再開位置は§28／current map §32です。InputScreenの直前保存入力から既存hostへ組み込み、同じ本文プレビューまでの検査332件が成功。稼働API登録・設定供給・実機は未完了です。以下の記録は各時点の履歴として保持します。**
 **最新の再開位置は§26／current map §30です。中断前のAPI `aa6cf858` の実効フラグ・preview操作時制御を確認し、再開後API86件・RN282件を再検査しました。InputScreen・稼働構成・実機は未完了です。以下の以前の記録は履歴として保持します。**
@@ -64,7 +68,7 @@ Q&A:
 
 ## 3. Phase state
 
-現在の実装・残件は§28／current map §32を優先する。次の段落と状態表は10/07以前の履歴であり、未着手判定に使わない。
+現在の実装・残件は§29／current map §33を優先する。次の段落と状態表は10/07以前の履歴であり、未着手判定に使わない。
 
 最新の実装状態は§21〜22／current map §25〜26です。保存・消費済みcontext照合・本人履歴読取りを継承し、役割明記ひらがな名とB7公開切替・削除HTTPを反映済みとして分けて記録します。643／676 PASSは各旧commitの履歴であり、B7 runのHTTP 152件・native SQL接続13件とは別の実行結果です。公開安全性の実判定・永続preview発行・開発画面接続は未完了で、B5／B6／B7／B8全体完了へ換算しません。以下のPCE-0〜B2-Aは成立済み設計・過去実装の履歴として保持します。Analysisは自身のcurrent mapに従い、以下の旧未着手記述を再開判断へ使用しません。
 
@@ -760,3 +764,16 @@ Cocolon `f65c19e01d630a31499414fea10fb20eecff0c5c` で既存 `screens/InputScree
 最終Node検査は既存303件＋追加29件の332 PASS、失敗・skip・取消し0。同じ最終検査を元のInputScreenへ戻すと319 PASS／13 FAILで、既存303件は両方で成功した。最初の検査用環境でのVM配列比較・不安定なmock callbackによる失敗は修正したが、商品不具合数には数えない。InputScreen全文をTypeScript 5.8.3で構文変換して実行し、既存Piece実ソースへ接続した検査である。React hooks／Home／Emlis／認証／HTTP／乱数／nativeは代替、成功packetも合成で、実React・Hermes・実DB・実機・CI・商品受入れの成功ではない。
 
 今回のInputScreen組込みはコード上で成立し、履歴一覧からの入力選択や実アプリの稼働一往復まで成立したとはしない。次は同じ画面が呼ぶAPIの登録・readiness／TTL／renderer供給の未接続を扱う。稼働DB・deploy・有効化の個別承認は維持し、capabilities／quota、native画像生成・保存・共有、残る操作制御、正式商品受入れは未完了。旧Q&Aの切替・Emlis／Analysis変更・新依存・main／mergeは行わない。`automatic_progression=false`。
+
+## 29. 2026-10-10 — DB適用完了後の実接続再開位置
+
+詳細はcurrent map §33。API `e81c112900f5439a49cd99c7178c2959237984c3` の専用 `create_piece_preview_application`、実CMEE/B9→限定安全性判定→隔離DBの13件、既存契約146件を継承する。InputScreen `f65c19e0`、既存host、認証・停止時のフラグ処理も作り直さない。これらは先行実行の記録であり、今回再実行していない。
+
+**新Piece DBの既存001〜004は適用・確認済み。未適用は0。** `cocolon-project / oeahmpmigszggnkyiivq` の記録versionは順に `20261010014326`、`20261010014413`、`20261010014441`、`20261010014516`。8テーブル・2ビュー・5関数名／6シグネチャと構造・権限・履歴を確認済み。旧piecesの定義・ACLは保持。詳細は[API実行記録](https://github.com/MassyuRed/mashos-api/pull/3#issuecomment-6092348061)と[PR30適用記録](https://github.com/MassyuRed/Cocolon/pull/30#issuecomment-6092352103)。今回の資料同期でDB照会・再適用はしていない。古い未適用表示から4本を再実行しない。前回Chatの拒否理由は不明だが、Workでは4本成功済みで解除待ちへ戻さない。
+
+実接続の残りは設定だけではない。入力保存・bootstrap・新Pieceは同じAPI baseを使用する。共有appは旧previewを同じURLへ登録済みで、新source-refとruntime stateは未接続。専用factoryは4経路だけで入力保存を持たないため、base変更や起動CLIだけではInputScreenの一往復を成立させられない。
+
+次はmap §33.4の共有app採用構成、preview/source-refの契約台帳整合、明示TTL／renderer／requested／ready供給、同一baseの隔離検証を一組として確認する。旧Q&A切替はPCE-6 §7／§11・PCE-8 B12-Cの個別境界。今回除外されたdeploy/env/activation/native build/main merge・実利用者生成試験も未実施。DB成功だけでreadyを立てず、検査設定を稼働値へ採用しない。未呼出helper、別factory、CLI、追加CIを成果として増やしていない。
+
+本同期は既存3資料だけを変更する。製品source/SQL変更、新規pytest/Node/CIは0。実Auth・実InputScreen往復・実機preview・native画像保存共有・Piece全体完成は未確認／未完了。最新weekly ownerは10/10議事録§5.5で、Emlis＋分析の先行実機確認と12/18公開目標を維持。`automatic_progression=false`。
+
