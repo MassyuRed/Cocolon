@@ -1290,3 +1290,37 @@ capabilities／quotaの応答・本文画面表示を未実装へ戻さない。
 最新10/10 weekly review §5.5と12/18公開目標を保持し、今回の明示Piece指示による準備を進めた。全体設計／ファイル地図、Piece原典、現行作業ルール、恒久incident全文と現物を照合した。System Context prepareは旧HEADで祖先確認失敗、整合した67a71724ではPUBLICATION_RECOVERY_AMBIGUOUS（residual without marker）で停止。推測cleanupや生成結果の採用はせず、入口が許可する原典直接読取を継続した。fresh prepare成功・全面再監査は主張しない。
 
 live DB照会／適用・env／deploy／activation／native build／main merge・本人データ試験は0。Emlis／Analysis製品変更0。補助agentは読取reviewのみ、書込・最終確認は華恋root。`STRUCTURE_MAP_DELTA_UPDATED`／`automatic_progression=false`。B10／Piece全体・実機利用・商品受入れ完了ではない。
+
+
+## 38. 2026-10-10 — 保存済みPieceの本人履歴・詳細・公開範囲変更・削除をRNへ接続
+
+### 38.1 再開判断と実装範囲
+
+前回§37の次工程を実コードとPCE-5 §8へ照合し、保存前のselected text/recipe/target profileによるnative実測fitが未接続と確認した。preview/save serviceはrecipeやhashの検証を持つが、renderer_version文字列・本文hash一致をfitの代わりにはできない。従って本文modalの保存ボタンは有効化せず、独立して進められるPCE-8 B11の保存済み本人操作を今回の直接作業とした。保存の未完了を消さず、準備用transportだけを追加する迂回もしない。
+
+MashのPiece続行指示に基づく既存設計内の可逆的RN実装・検査・GitHub反映。実行・最終統合はroot華恋、二つの補助agentは読取reviewのみ。同環境reviewであり別model Pro reviewや商品受入れとは主張しない。分類はDIRECT_PRODUCT_OR_ACCEPTANCE_WORK／TECHNICAL_CREDIT。稼働有効化・実DB変更・native build・本人データ操作・旧Q&A切替は対象外。
+
+| owner（Cocolon） | 責任と接続 |
+|---|---|
+| features/piece/pieceApi.js | 既存本人history/detail/visibility/delete APIの閉じた要求・応答。既存apiFetch、送受信前後の本人照合、no-storeを使用。previewとsavedのartifact形状検証だけを共有。 |
+| features/piece/piecePreviewModel.js | 既存3hash検証をsaved表示でも使える関数に抽出。previewのexpiry・quota・plan検証は維持。 |
+| features/piece/pieceOwnerModel.js | PCE-8 B11指定owner。保存済み本文・payload・recipeの3hashと本人操作flagを検証。現在tier・source・preview expiryで保存済みartifactを再判定しない。 |
+| features/piece/PieceOwnerHistoryController.js | PCE-8 B11指定owner。一覧/ページ送り、fresh詳細、version付き公開範囲変更、確認済み削除と同じkeyでの結果確認。競合時に詳細を再取得し、自動上書きしない。 |
+| components/piece/PieceOwnerCard.js | PCE-8 B11指定owner。canonical全文、非公開/公開の文字、保存日時・形式・テーマ・比率。画像rendererとしては扱わない。 |
+| screens/PieceOwnerHistoryScreen.js | PCE-8 B11指定owner。既存Auth/Runtime/Tutorial/Navigationへ接続。初回も明示読取。本人変更、flag停止、背景化、画面離脱で本文とpendingを破棄。 |
+| navigation/PieceStackNavigator.js／screens/PieceHistoryMenuScreen.js | 既存履歴メニューからowner_read有効時だけ「自分のPiece」へ接続。共鳴履歴/Nexusのモデル・cacheを本人履歴へ流用しない。 |
+| tests/piece-v2-owner-history.test.js／既存contracts test／既存Piece RN workflow | 合成Auth/HTTP/React/nativeによる実source確認。既存workflowにowner suiteと変更画面pathを追加。新依存・新workflowなし。 |
+
+公開変更は本人の確認後だけ。private→publicにはpublic_writeを追加要求する。expected_row_version競合時は一回fresh詳細を読み、本人が内容を確認してから次の操作を行う。削除確認はCocolon内削除・外部画像回収不可・保存回数不返還を明記。応答不明時は同一key/versionの明示再試行だけを許し、成功ACK前に削除済み表示へ変えない。preview/save停止とowner_readを独立させる。PIECE_FEATURE_DISABLEDでは本文を閉じ既存bootstrapを一回更新する。本文やtokenを永続cache・ログ・navigation paramsへ保存しない。
+
+### 38.2 検証状態とDB確認
+
+初回のowner検査27件が成功し、ページ送り・不正page・二重tap/離脱・delete競合・削除flag/乱数失敗を追加した最終owner検査は32件。既存7suite336件と合わせlocal Node 24.19.0で368 PASS／FAIL0／SKIP0／cancelled0。初回の既存検査ではAPI transport call site数を1に固定した1件だけが失敗し、既存経路と新owner経路の2箇所を期待するよう更新した。既存の本人照合・閉じた契約の期待は弱めていない。追加後の最終CI結果はこの節の追記で確定する。InputScreen29件はlocal compiler不在のため未実行、既存CIのTypeScript 5.2.2で確認する。
+
+React reconciliation・Hermes・native画像・実Auth/PostgREST/DBは合成または未実行で、端末確認・商品合格・B11全体完成ではない。今回Supabase list_migrationsだけをread-only実行し、001〜004の適用履歴を再確認した。005は履歴に未登録。本人のrecord本文読取・稼働SQL適用は0。
+
+### 38.3 次工程と境界
+
+次の直接残件はPCE-5の同じlayout ownerを使うnative画像プレビューと保存前fitの接続。その結果を表示中のpreview identity/revision/3hashへ結び、既存保存APIへ進める。画像capture/端末保存/外部共有、preview設定変更、M5旧経路移行と稼働設定、005適用、実Auth/端末確認は残る。本文履歴接続を新Piece全体の完成にしない。
+
+設計図01と関連01B、全ファイルの構造地図・historical inventory、current map、作業CURRENT_RULES/Rule18/恒久incident全文、PCE-5/6/7/8、最新weekly review 10/10 §5.5を照合した。生成System Contextの過去prepare成功を継承せず、入口の原典直接読取fallbackに従いcurrent GitHubと一致するcheckoutの原典を参照した。本作業でprepare成功を主張しない。Emlis/分析の先行実機確認順と12/18公開目標を維持する。API製品・SQL・環境設定・deploy・activation・native build・main mergeは変更しない。STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false。

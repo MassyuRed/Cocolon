@@ -822,3 +822,10 @@ quotaは生成前・同じキーの再取得でも読み、現在source tierと�
 API CI 38019674020＝1,537 PASS、RN CI 38019722996＝365 PASS（既存8suite）。FAIL／SKIP0。実Auth・PostgREST／React-native等は代替を含み、実機・商品合格ではない。初回RN検査の旧fixture不整合2件は修正済み。詳細、各path・検証範囲・System Context失敗からの原典fallbackはcurrent map §37。
 
 次は既存preview identity／revision／3hashを保持した保存・本人操作のRN接続。preview形式／画像設定変更・private／public選択・native画像保存共有・M5・稼働設定・実Auth／実機も残る。既存001〜004を再適用しない。005は稼働DB未適用で、preview候補の利用にも必要。APIとRNを同じ応答形で配置する必要はあるが、今回配置／有効化はしていない。最新weekly review §5.5・12/18目標と既存実行境界を保持。`automatic_progression=false`。
+
+
+## 34. 2026-10-10 — 保存済み本人履歴・詳細・公開範囲変更・削除のRN接続
+
+最新の詳細ownerはcurrent map §38。既存履歴メニューからowner_read flag有効時だけ「自分のPiece」へ進み、canonical全文・公開状態・保存日時・形式/テーマ/比率を表示する。本人専用APIを使い、Nexus/共鳴履歴を流用しない。公開変更は明示確認＋expected_row_version、競合時は最新詳細再読。削除は外部画像回収不可/回数不返還の確認後だけで、応答不明時は同じkey/versionによる明示再試行。本人切替/背景化/離脱/停止後の古い結果を表示しない。
+
+今回のlocal検査はowner32件＋既存7suite336件＝368 PASS。別途既存CIでInputScreenも含め確認する。Auth/HTTP/React/nativeは代替を含み、実機・B11全体・商品受入れの成立ではない。保存前native fitが未接続と判明したため、本文からの保存は有効化していない。次はnative画像プレビューと保存前fit、その後に同じpreviewの保存接続。画像保存共有・M5・005稼働適用・実Auth/実機も残る。001〜004適用済みをread-only migration履歴で確認し、再適用なし。製品API/SQL/env/deploy/native build/main mergeは不変更。weekly review §5.5と12/18目標を維持し、automatic_progression=false。

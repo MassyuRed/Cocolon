@@ -112,7 +112,9 @@ test('actual module reuses shared authenticated transport, without legacy/runtim
   const source = fs.readFileSync(sourcePath, 'utf8');
   assert.match(source, /import \{ apiFetch, getAccessToken \} from "\.\.\/\.\.\/lib\/apiClient"/);
   assert.doesNotMatch(source, /emotionPieceApi|PIECE_WIRE|captureApiError|AsyncStorage|console\.|setTimeout|fetch\(/);
-  assert.equal((source.match(/await apiFetch\(/g) || []).length, 1);
+  // Preview/source-ref and owner operations share the same authenticated
+  // transport, each with its own closed contract and session recheck.
+  assert.equal((source.match(/await apiFetch\(/g) || []).length, 2);
 });
 
 for (const format of ['short_essay', 'quote', 'declaration']) {

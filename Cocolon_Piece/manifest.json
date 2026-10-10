@@ -55,7 +55,7 @@
     "pce9a_b01": "COMPLETE",
     "pce9a_b02a": "NATIVE_ACCEPTANCE_RETAINED__LIVE_BRIDGE_APPLIED_20261010",
     "analysis_roadmap": "REFER_TO_ANALYSIS_CURRENT_STRUCTURE__HISTORICAL_NOT_ACTIVATED_STATE_NOT_CURRENT",
-    "next_piece_group": "B10_SAVE_AND_OWNER_RN_CONNECTION__PREVIEW_PLAN_DISPLAY_ISOLATED_VERIFIED",
+    "next_piece_group": "B10_NATIVE_VISUAL_PREVIEW_AND_SAVE_TIME_FIT__B11_TEXT_OWNER_OPERATIONS_CONNECTED",
     "automatic_packet_progression": false,
     "pce9a_b02a_red": "FROZEN_UNCHANGED__NATIVE_POSTGRESQL_1_PASS",
     "pce9a_b02a_implementation": "EXACT5_PRESERVED__EXACT6_SELECTORS_PUBLISHED",
@@ -70,7 +70,8 @@
     "pce9a_runtime_preview_control": "SHARED_CANDIDATE_REUSES_EXISTING_FACTORY__PRODUCTION_VALUES_AND_M5_PENDING",
     "pce9a_saved_operation_control": "REMOTE_DRAFT_227BACF__CI_1489_PASS__UNREGISTERED__NOT_LIVE_ACCEPTANCE",
     "pce9a_quota_read": "REMOTE_DRAFT_D390488__QUOTA_39_PASS__TOTAL_1528_PASS__NEW005_UNAPPLIED_LIVE",
-    "pce9c_preview_plan_display": "API_1537_PASS__RN_365_PASS__NONLIVE_PREVIEW_DISPLAY_ONLY"
+    "pce9c_preview_plan_display": "API_1537_PASS__RN_365_PASS__NONLIVE_PREVIEW_DISPLAY_ONLY",
+    "pce9c_owner_rn": "LOCAL_368_PASS__CI_PENDING__NONLIVE_TEXT_HISTORY_DETAIL_VISIBILITY_DELETE"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -1923,6 +1924,51 @@
     "main_merge": 0,
     "user_data_test": false,
     "piece_complete": false,
+    "product_acceptance": false,
+    "automatic_progression": false
+  },
+  "owner_rn_20261010": {
+    "status": "SOURCE_CANDIDATE_LOCAL_VERIFIED_CI_PENDING",
+    "map": "Cocolon_前提資料/current_structure/02_piece_current_structure.md section38",
+    "owner_paths": [
+      ".github/workflows/piece-rn-contracts.yml",
+      "features/piece/pieceApi.js",
+      "features/piece/piecePreviewModel.js",
+      "features/piece/pieceOwnerModel.js",
+      "features/piece/PieceOwnerHistoryController.js",
+      "components/piece/PieceOwnerCard.js",
+      "screens/PieceOwnerHistoryScreen.js",
+      "navigation/PieceStackNavigator.js",
+      "screens/PieceHistoryMenuScreen.js",
+      "tests/piece-v2-contracts.test.js",
+      "tests/piece-v2-owner-history.test.js"
+    ],
+    "verification": {
+      "local_passed": 368,
+      "owner_new_passed": 32,
+      "local_suites": 8,
+      "failed": 0,
+      "skipped": 0,
+      "node": "24.19.0",
+      "input_screen_ci_pending": true,
+      "real_auth": false,
+      "native_device": false
+    },
+    "db_migrations_read_only": true,
+    "live_applied_existing": [
+      "001",
+      "002",
+      "003",
+      "004"
+    ],
+    "new005_unapplied": true,
+    "save_before_native_fit_enabled": false,
+    "next": "native image preview and save-time fit, then existing save API connection",
+    "db_apply": 0,
+    "deploy": 0,
+    "activation": 0,
+    "native_build": 0,
+    "main_merge": 0,
     "product_acceptance": false,
     "automatic_progression": false
   }

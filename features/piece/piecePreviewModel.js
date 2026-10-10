@@ -167,6 +167,15 @@ function pieceCanonicalValue(value) {
   return value;
 }
 
+// Shared by preview and saved-owner display. No expiry or current-plan rules.
+export function verifyPieceArtifactHashes(value) {
+  if (pieceUtf8Digest(value.piece_text) !== value.piece_text_hash ||
+      pieceUtf8Digest(JSON.stringify(pieceCanonicalValue(value.content_payload))) !== value.content_payload_hash ||
+      pieceUtf8Digest(JSON.stringify(pieceCanonicalValue(value.visual_recipe))) !== value.visual_recipe_hash) {
+    throw new PieceApiError('PIECE_HASH_MISMATCH');
+  }
+}
+
 export function readPiecePreviewDisplay(view, nowMs = Date.now()) {
   const base = { phase: 'hidden', preview: null, message: '', canRetry: false,
     canSave: false, canExport: false, hashVerified: false, expiresAtMs: null };
@@ -180,11 +189,7 @@ export function readPiecePreviewDisplay(view, nowMs = Date.now()) {
     const expiresAtMs = expiryMilliseconds(preview.expires_at);
     if (!Number.isFinite(nowMs) || !Number.isFinite(expiresAtMs)) throw new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE');
     if (nowMs >= expiresAtMs) throw new PieceApiError('PIECE_PREVIEW_EXPIRED');
-    if (pieceUtf8Digest(preview.piece_text) !== preview.piece_text_hash ||
-        pieceUtf8Digest(JSON.stringify(pieceCanonicalValue(preview.content_payload))) !== preview.content_payload_hash ||
-        pieceUtf8Digest(JSON.stringify(pieceCanonicalValue(preview.visual_recipe))) !== preview.visual_recipe_hash) {
-      throw new PieceApiError('PIECE_HASH_MISMATCH');
-    }
+    verifyPieceArtifactHashes(preview);
     return frozen({ ...base, phase: 'received', preview, hashVerified: true, expiresAtMs });
   } catch (error) {
     const code = error instanceof PieceApiError ? error.code : 'PIECE_TEMPORARILY_UNAVAILABLE';

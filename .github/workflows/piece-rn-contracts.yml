@@ -1,5 +1,5 @@
 # Source-level Piece integration only; no native build, live credentials or deploy.
-name: Piece RN preview contracts
+name: Piece RN preview and owner contracts
 'on':
   push:
     branches:
@@ -10,6 +10,9 @@ name: Piece RN preview contracts
       - components/piece/**
       - screens/input/InputPieceActionArea.js
       - screens/InputScreen.js
+      - screens/PieceOwnerHistoryScreen.js
+      - screens/PieceHistoryMenuScreen.js
+      - navigation/PieceStackNavigator.js
       - AppRuntimeContext.js
       - tests/piece-v2-*.test.js
       - package.json
@@ -30,7 +33,7 @@ jobs:
           node-version: '24'
       - name: Install only the existing test compiler in a disposable directory
         run: npm install --prefix "$RUNNER_TEMP/piece-node-tests" --ignore-scripts --no-audit --no-fund typescript@5.2.2
-      - name: Verify the eight existing Piece source suites
+      - name: Verify Piece preview and owner source suites
         shell: bash
         run: |
           set -euo pipefail
@@ -38,4 +41,4 @@ jobs:
           git rev-parse HEAD
           node --version
           node -p "require('typescript').version"
-          node --test tests/piece-v2-contracts.test.js tests/piece-v2-state-models.test.js tests/piece-v2-preview-display.test.js tests/piece-v2-runtime.test.js tests/piece-v2-feature-disabled.test.js tests/piece-v2-saved-input-host.test.js tests/piece-v2-source-ref.test.js tests/piece-v2-input-screen.test.js
+          node --test tests/piece-v2-contracts.test.js tests/piece-v2-state-models.test.js tests/piece-v2-preview-display.test.js tests/piece-v2-runtime.test.js tests/piece-v2-feature-disabled.test.js tests/piece-v2-saved-input-host.test.js tests/piece-v2-source-ref.test.js tests/piece-v2-input-screen.test.js tests/piece-v2-owner-history.test.js

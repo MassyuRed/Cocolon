@@ -1,10 +1,9 @@
 /**
- * B10 development-only Piece v2 preview transport (PCE-8's RN API owner).
- * Connects to api_piece_v2.py at 0c6cb565; no legacy client or runtime caller
- * is changed. Importing this module performs no network operation.
+ * Development-only Piece v2 preview and owner transport (PCE-8 RN owner).
+ * Importing this module performs no network operation. No legacy fallback.
  *
  * Capabilities/quota are closed display snapshots, not save admission.
- * The native renderer, mutation and save/export delivery remain separate.
+ * The native renderer, preview mutation and save/export remain separate.
  * No default entitlement, expiry, renderer, safety verdict or key is invented.
  */
 import { apiFetch, getAccessToken } from "../../lib/apiClient";
@@ -146,7 +145,6 @@ function validatePreviewPlan(value) {
 function previewSnapshot(raw) {
   if (!exact(raw, PREVIEW_FIELDS)) reject('PIECE_TEMPORARILY_UNAVAILABLE');
   const value = JSON.parse(JSON.stringify(raw));
-  const payload = value.content_payload, recipe = value.visual_recipe;
   const formats = value.eligible_formats;
   if (value.api_contract_version !== 'piece.api.v2' ||
       value.piece_contract_version !== 'piece.record.v2' ||
@@ -164,6 +162,15 @@ function previewSnapshot(raw) {
       !['piece_text_hash', 'content_payload_hash', 'visual_recipe_hash'].every(key => hash(value[key]))) {
     reject('PIECE_TEMPORARILY_UNAVAILABLE');
   }
+  validatePieceArtifact(value);
+  validatePreviewPlan(value);
+  // Only the supported v1 representation is read here. Entitlement decisions,
+  // SHA recomputation, layout fit and native rendering remain separate.
+  return freeze(value);
+}
+
+function validatePieceArtifact(value) {
+  const payload = value.content_payload, recipe = value.visual_recipe;
   if (!exact(payload, ['schema_version', 'meaning_contract_version', 'safety_contract_version',
     'language', 'format_type', 'title', 'body_blocks']) ||
       payload.schema_version !== 'piece.content_payload.v1' ||
@@ -197,10 +204,6 @@ function previewSnapshot(raw) {
         (recipe.aspect_ratio !== '4:5' || recipe.theme.theme_id !== 'soft_paper'))) {
     reject('PIECE_TEMPORARILY_UNAVAILABLE');
   }
-  validatePreviewPlan(value);
-  // Only the supported v1 representation is read here. Entitlement decisions,
-  // SHA recomputation, layout fit and native rendering remain separate.
-  return freeze(value);
 }
 
 function checkAbort(signal) {
@@ -307,4 +310,116 @@ export function preparePiecePreviewRequest(value, options = {}) {
 export function readPiecePreviewSnapshot(value) {
   try { return previewSnapshot(value); }
   catch { reject('PIECE_TEMPORARILY_UNAVAILABLE'); }
+}
+
+const OWNER_FIELDS = ['api_contract_version', 'piece_contract_version', 'export_contract_version',
+  'render_interface_version', 'render_reproducibility_version', 'format_type', 'piece_text',
+  'piece_text_hash', 'content_payload', 'content_payload_hash', 'visual_recipe', 'visual_recipe_hash',
+  'renderer_version', 'piece_id', 'public_id', 'lifecycle_status', 'visibility_scope',
+  'row_version', 'saved_at', 'content_status'];
+const pieceUuid = value => typeof value === 'string' &&
+  /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(value) &&
+  value !== '00000000-0000-0000-0000-000000000000';
+
+export function readPieceOwnerSnapshot(raw) {
+  try {
+    if (!exact(raw, OWNER_FIELDS)) reject('PIECE_TEMPORARILY_UNAVAILABLE');
+    const value = JSON.parse(JSON.stringify(raw));
+    if (value.api_contract_version !== 'piece.api.v2' || value.piece_contract_version !== 'piece.record.v2' ||
+        value.export_contract_version !== 'piece.export_contract.v1' ||
+        value.render_interface_version !== 'piece.render_interface.v1' ||
+        value.render_reproducibility_version !== 'piece.render_reproducibility.v1' ||
+        !pieceUuid(value.piece_id) || value.public_id !== 'piece:' + value.piece_id ||
+        value.lifecycle_status !== 'saved' || !['private', 'public'].includes(value.visibility_scope) ||
+        !positive(value.row_version) || !FORMATS.includes(value.format_type) ||
+        !['ready', 'adjusted'].includes(value.content_status) ||
+        typeof value.saved_at !== 'string' ||
+        !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(value.saved_at) ||
+        !Number.isFinite(Date.parse(value.saved_at)) ||
+        !text(value.renderer_version) || !/^[A-Za-z0-9_.:\\-]{1,128}$/.test(value.renderer_version) ||
+        !['piece_text_hash', 'content_payload_hash', 'visual_recipe_hash'].every(key => hash(value[key]))) {
+      reject('PIECE_TEMPORARILY_UNAVAILABLE');
+    }
+    // Saved artifacts retain their catalog/recipe after a plan change. Do not
+    // inject preview quota, entitlement, expiry or a new eligibility decision.
+    validatePieceArtifact(value);
+    return freeze(value);
+  } catch { reject('PIECE_TEMPORARILY_UNAVAILABLE'); }
+}
+
+/** Owner-only v2 routes; never use Nexus, legacy aliases or persistent caches. */
+export async function requestPieceOwner(action, value = {}, options = {}) {
+  let signal;
+  try {
+    if (!object(options) || !object(value)) reject('PIECE_REQUEST_INVALID');
+    const { expectedUserId, idempotencyKey } = options;
+    signal = options.signal;
+    checkAbort(signal);
+    if (!text(expectedUserId)) reject('PIECE_AUTH_REQUIRED');
+    const input = JSON.parse(JSON.stringify(value));
+    const headers = { 'Cache-Control': 'no-store' };
+    let endpoint, method = 'GET', body;
+    if (action === 'history') {
+      if (!exact(input, ['cursor']) || !(input.cursor === null ||
+          typeof input.cursor === 'string' && /^[A-Za-z0-9_-]{1,512}$/.test(input.cursor))) reject('PIECE_REQUEST_INVALID');
+      endpoint = '/emotion/piece/history?limit=20' + (input.cursor === null ? '' : '&cursor=' + encodeURIComponent(input.cursor));
+    } else {
+      if (!pieceUuid(input.piece_id)) reject('PIECE_REQUEST_INVALID');
+      endpoint = '/emotion/piece/' + input.piece_id;
+      if (action === 'detail') {
+        if (!exact(input, ['piece_id'])) reject('PIECE_REQUEST_INVALID');
+      } else if (action === 'visibility') {
+        if (!exact(input, ['piece_id', 'expected_row_version', 'visibility_scope']) ||
+            !positive(input.expected_row_version) || !['private', 'public'].includes(input.visibility_scope)) reject('PIECE_REQUEST_INVALID');
+        method = 'PATCH'; endpoint += '/visibility';
+        body = JSON.stringify({ expected_row_version: input.expected_row_version, visibility_scope: input.visibility_scope });
+      } else if (action === 'delete') {
+        if (!exact(input, ['piece_id', 'expected_row_version']) || !positive(input.expected_row_version) ||
+            typeof idempotencyKey !== 'string' || !/^[\x21-\x7e](?:[\x20-\x7e]*[\x21-\x7e])?$/.test(idempotencyKey)) reject('PIECE_REQUEST_INVALID');
+        method = 'DELETE'; body = JSON.stringify({ expected_row_version: input.expected_row_version });
+        headers['Idempotency-Key'] = idempotencyKey;
+      } else reject('PIECE_REQUEST_INVALID');
+    }
+    await requireSession(expectedUserId);
+    checkAbort(signal);
+    const response = await apiFetch(endpoint, { method, auth: true, expectedUserId, headers, body, signal });
+    checkAbort(signal);
+    const result = await response.json();
+    await requireSession(expectedUserId);
+    checkAbort(signal);
+    if (response.status !== 200) {
+      const codes = ['PIECE_REQUEST_INVALID', 'PIECE_AUTH_REQUIRED', 'PIECE_NOT_FOUND',
+        'PIECE_TEMPORARILY_UNAVAILABLE', 'PIECE_FEATURE_DISABLED', ...(method === 'GET' ? [] : ['PIECE_CONFLICT'])];
+      reject(exact(result, ['code']) && codes.includes(result.code) && STATUS[result.code] === response.status
+        ? result.code : 'PIECE_TEMPORARILY_UNAVAILABLE');
+    }
+    if (action === 'history') {
+      if (!exact(result, ['api_contract_version', 'items', 'next_cursor']) || result.api_contract_version !== 'piece.api.v2' ||
+          !Array.isArray(result.items) || result.items.length > 20 ||
+          !(result.next_cursor === null || typeof result.next_cursor === 'string' && /^[A-Za-z0-9_-]{1,512}$/.test(result.next_cursor)) ||
+          result.next_cursor !== null && (result.items.length !== 20 || result.next_cursor === input.cursor)) reject('PIECE_TEMPORARILY_UNAVAILABLE');
+      const items = result.items.map(readPieceOwnerSnapshot);
+      if (new Set(items.map(item => item.piece_id)).size !== items.length) reject('PIECE_TEMPORARILY_UNAVAILABLE');
+      return freeze({ items, next_cursor: result.next_cursor });
+    }
+    if (action === 'detail') {
+      const record = readPieceOwnerSnapshot(result);
+      if (record.piece_id !== input.piece_id) reject('PIECE_TEMPORARILY_UNAVAILABLE');
+      return record;
+    }
+    const fields = action === 'visibility' ? ['piece_id', 'visibility_scope', 'row_version']
+      : ['piece_id', 'receipt_id', 'outcome', 'idempotency_replayed'];
+    if (!exact(result, fields) || result.piece_id !== input.piece_id ||
+        (action === 'visibility' ? result.visibility_scope !== input.visibility_scope || !positive(result.row_version) ||
+          result.row_version < input.expected_row_version :
+          !pieceUuid(result.receipt_id) || result.outcome !== 'succeeded' || typeof result.idempotency_replayed !== 'boolean')) {
+      reject('PIECE_TEMPORARILY_UNAVAILABLE');
+    }
+    return freeze(JSON.parse(JSON.stringify(result)));
+  } catch (error) {
+    checkAbort(signal);
+    if (error instanceof PieceApiError) throw error;
+    if (error?.name === 'AccountChangedError') reject('PIECE_AUTH_REQUIRED');
+    reject('PIECE_TEMPORARILY_UNAVAILABLE');
+  }
 }
