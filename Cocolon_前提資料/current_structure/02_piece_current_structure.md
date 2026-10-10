@@ -1726,3 +1726,33 @@ local関連5fileは **223 PASS／FAIL0／4 deselected**。4件は既存B7 native
 次はnative B9の実端末描画同等性・glyph/ink/性能、renderer admission→保存前fit→保存。形式変更、capture/画像保存共有、Nexus、保存・公開切替・削除等の候補API接続、quota v2採用、M5/実Auth・稼働設定が残る。今回のowner GET登録・preview取消・画像設定接続を作り直さない。Piece V2のsave/visibility/delete/public/exportは今回の構成で有効化できない。
 
 今回の変更はAPI製品3file＋test4file、Cocolon入口/map/manifest3file。RN/native/SQL・新依存・稼働DB書込・env/deploy/activation/app build/main mergeは0。Supabase project状態とmigration履歴だけを読取り、001〜004適用済み、005 quotaとvisual変更SQLの2本未適用を再確認した。weekly §5.5の実機確認順序と12/18公開目標を維持し、Pieceの全内容完成を実機確認の前提にしない。TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false。
+
+
+## 48. 2026-10-10 — 保存済み本人Pieceの削除を候補構成へ接続（未配置）
+
+### 48.1 直接の残件と変更owner
+
+保存済みPieceを本人が取り消せる利用経路の残件として、PCE3のowner deleteとPCE6の既存DELETEを、専用preview/shared候補へ登録した。PCE7 §5〜7・§11のowner_read＋deleteだけの回復状態を保持する。RN `PieceOwnerHistoryController` の削除/同key再試行、HTTP `owner_delete`、store、SQLのpurge/receiptは実装済みのため再実装しない。保存や公開切替の前提を緩めない。
+
+開始headはCocolon `7037539bec710522c2fd01de10f7a92a4d9cf12c`／API `a90d590bb66e4cecc87e5da9c5f5b1859d387686`。前回txt、全体設計01/01B、国家システム02、全ファイル地図とcurrent map、Piece原典、最新weekly §5.5、作業ルールと恒久incident全文を確認。System Context prepareは祖先不一致code2のため、既存入口の原典直接読取へ戻った。Workでの既存承認範囲内LEVEL_2相当の直接製品作業。root華恋が単一writer、補助agentは同環境read-only review。別modelによる正式受入れとは扱わない。
+
+| 既存owner | 今回の変更 |
+|---|---|
+| API `ai/services/ai_inference/piece_v2_runtime_control.py` | 既存 `owner_delete` をDELETE `/emotion/piece/{piece_id}`へ登録。`owner_delete_requested` / `owner_delete_ready`を両方厳密Trueで採用し、既存resolverのowner_read依存を維持。専用構成は9route。TTL/rendererや生成の準備を削除条件にしない。 |
+| API `ai/services/ai_inference/api_contract_registry.py` | candidate専用 `emotion.piece.delete.v2` headerを登録。default registryは変更しない。 |
+| 既存 `app.py` / `api_piece_v2.py` / `piece_v2_store.py` / atomic SQL | 変更なし。既存factory引数転送、認証→実効flag→closed request→owner/version/key照合、IO前後の停止確認、atomic purgeとbody-free receiptを再利用。 |
+| 既存test4file | `test_b14a_piece_preview_composition.py`、`test_b12_shared_preview_composition.py`、`db/test_b10_preview_application_native.py`、`db/test_b12_shared_preview_native.py`。既存workflowで検証する。 |
+
+### 48.2 検証と反映
+
+API `fd15babe24e8dbcb28e0b20f5cf7960385106130`、製品2＋test3をPR #3へ反映し、全5fileのremote全文・変更path集合・親headを照合。local関連4fileは **370 PASS／FAIL0／SKIP0**。Python3.12.14、pytest8.4.1、FastAPI0.143.0、Starlette1.7.0、Pydantic2.14.0、httpx0.28.1。初回の収集はsource import path不足で1 ERROR、製品/testを緩めず探索pathを明示した。既存Pydantic/FastAPI非推奨警告を保持。native test追記時の既存関数末尾の位置は実行前に確認し元の関数へ保持した。
+
+両候補で認証優先・default OFF・strict bool・owner_read依存、UUID/public ID両方、同key/RPC引数、bootstrapの実効flagを検査。新native6件は、合成保存artifactを実SQLで削除し、他人404・古い版409・停止時SQL0・commit後停止/ACK消失・同key receipt回収・削除後GET/履歴非表示・子state purge・quota不返却・旧data不変を対象とする。初回[隔離CI38043904568](https://github.com/MassyuRed/mashos-api/actions/runs/38043904568)／job114189457494は既存B10の厳密route集合にDELETEを追加し忘れたため6 FAILとなった。製品を変更せず、期待経路1行を `5773dbf3794090b4cee64ef5843f52b78e88cfad` で補った。再実行[CI38044205689](https://github.com/MassyuRed/mashos-api/actions/runs/38044205689)／job114190332088は全工程success。重複しない23検査集合で **1,759 PASS／FAIL0／SKIP0**（先行1,717＋strict flag32＋HTTP4＋bootstrap1＋native6−旧未登録DELETE固定1）。新native6件を含むshared native26件、既存B10の13件も成功。Python3.12.15／PostgreSQL16.15／pytest8.4.1／psycopg3.3.6。最終全6fileのremote全文、初回5pathと補修1path、各commitの親headを照合済み。local370件と初回CIは最終CIへ加算しない。
+
+同環境read-only差分reviewに具体的blockerなし。sharedの既存静的GET/POSTはmethod完全一致で選ばれ、generic DELETEは遮蔽しないためapp.pyは変更不要。合成Auth/artifact/PostgREST transportを含み、live Auth/Supabase・実データ・RN実機・商品受入れではない。
+
+### 48.3 残件と稼働境界
+
+次はnative B9の実端末描画同等性・glyph/ink/性能、renderer admission→保存前fit→保存。形式変更、capture/画像保存共有、Nexus、保存/公開切替の候補API接続、quota v2採用、M5/実Auth・稼働設定が残る。今回のDELETE登録、owner GET・候補取消・visual PATCHは再実装しない。保存・public・visibility・exportの有効化は今回0。canSave/canExport=falseのRN境界を維持。
+
+Supabase project metadataとmigration履歴の読取で001〜004適用済み、005 quotaとvisual変更SQLの追加2本未適用を確認。稼働DB query/write/apply、利用者データ削除、env/deploy/activation、native app build、main mergeは0。RN/native/SQL/依存・workflow変更0。weekly §5.5の実機確認順序と12/18公開目標を維持し、Piece全内容完成を実機確認の前提へ追加しない。TECHNICAL_CREDIT（local接続・隔離実SQL検証）／STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false。

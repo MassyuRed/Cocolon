@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§43／current map §47を優先する。保存済みPieceの本人向け一覧・詳細を、既存の専用preview/shared候補構成へ接続しました。生成を停止しても独立した読取flagで保存時の本文・画像設定を読めます。既存quota URLの優先順位も保持。既定OFF・未配置で、実機描画・保存前fit・保存共有・稼働採用は残っています。**
+**現在は§44／current map §48を優先する。保存済みPieceの本人削除を、既存preview/shared候補APIへ接続しました。閲覧と削除だけを独立して許可する既存設計を実装し、既定OFFを保持。local370件成功、最終隔離PostgreSQL CIは1,759 PASS／FAIL0／SKIP0です。実機描画・保存前fit・保存共有・稼働採用は残っています。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -933,3 +933,12 @@ RN local **545 PASS／FAIL0／SKIP0**、API local84 PASS、API [CI38030365374](h
 local関連5file **223 PASS／FAIL0／4 deselected**。最終headの[隔離CI38034228175](https://github.com/MassyuRed/mashos-api/actions/runs/38034228175)は **1,717 PASS／FAIL0／SKIP0**。localとの合算なし。 全7fileのremote全文・変更path集合・親headを照合済み。合成artifactを実SQLへ保存して読む検査であり、実Auth/PostgREST・端末・商品受入れではない。途中補修と検査限界はmap §47.2。
 
 次は実機描画/renderer admission→保存前fit→保存。形式変更・capture共有・Nexus・保存/公開切替/削除の候補API接続・quota v2採用・M5/実Auth・稼働採用も残る。今回RN/native/SQL/依存・稼働DB書込/env/deploy/activation/build/main merge0。Supabase migration履歴の読取で001〜004適用済み、追加2本未適用を再確認。入口/map/manifestを同期し、weekly§5.5・12/18目標・automatic_progression=falseを維持する。
+
+
+## 44. 2026-10-10 — 保存済みPieceの本人削除を既存候補APIへ接続
+
+詳細ownerはcurrent map §48。API `fd15babe24e8dbcb28e0b20f5cf7960385106130` で既存 `owner_delete` を専用preview/shared候補へ直接登録した。削除requested/readyの両方が厳密Trueで、既存owner_readも有効な場合だけ操作できる。生成・保存・public・exportをOFFのまま、PCE7の本人閲覧/削除だけの回復状態を構成できる。既定構成・稼働環境は変更しない。
+
+local関連4file **370 PASS／FAIL0／SKIP0**。最初の収集はsource import path不足で1 ERRORとなり、既存sourceの探索pathを明示して検証した。製品の判定緩和はない。初回CIは既存B10の経路一覧にDELETEを追加し忘れたため6 FAIL。期待する経路を1件追加した最終head `5773dbf3794090b4cee64ef5843f52b78e88cfad` の[隔離CI38044205689](https://github.com/MassyuRed/mashos-api/actions/runs/38044205689)は **1,759 PASS／FAIL0／SKIP0**。localとの合算なし。合成artifact/Auth/HTTPを含み、稼働データや実機の受入れではない。製品2＋test4の最終remote全文・変更path集合・親headを照合済み。詳細はmap §48.2。
+
+次はnative B9実機描画/renderer admission→保存前fit→保存。形式変更・画像保存共有・Nexus・保存/公開切替の候補API接続・quota v2採用・M5/実Auth・稼働採用は残る。今回の本人削除登録、既存owner GET・候補取消・visual PATCHを再実装しない。Supabaseはproject/migration履歴読取のみ、001〜004適用済み・追加2本未適用。RN/native/SQL/依存・live DB書込・deploy/activation/build/main mergeの変更0。weekly§5.5・12/18目標・automatic_progression=falseを維持する。
