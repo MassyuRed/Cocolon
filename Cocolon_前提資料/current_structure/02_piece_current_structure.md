@@ -2,8 +2,8 @@
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
 revision_date: "2026-10-10 JST"
-latest_api_implementation: "004a85eeb7af83b68ae1c1fba42ec2d6941b6874"
-latest_storage_candidate: "d3904888f31f105b8c77bcfda9ec9cc80aa5be0b"
+latest_api_implementation: "4fcb140b778850a1b7a5a65d8e0a26005b3a24c4"
+latest_storage_candidate: "4fcb140b778850a1b7a5a65d8e0a26005b3a24c4"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は§42を優先します。同じnative fontで行候補を実測し、既存B9の読取単位・禁則・段落共通の行数制約で選んだ行を確認用canvasへ接続しました。prototype v3のみ対応し、旧保存rendererを代替しません。実端末でのnative描画同等性・renderer admission・保存前fit・保存共有・稼働切替は未完了。005は稼働未適用、001〜004は適用済みです。**
+**現在は§43を優先します。発行済みpreviewの本文を保った画像設定変更を、revisionと現在の元入力/資格を照合するAPI・SQL候補へ接続しました。元POSTの同key再取得は更新後の候補を回収します。RN設定操作・稼働登録は未接続。§42のprototype v3を継承し、実機描画同等性・renderer admission・保存前fit・保存共有は未完了。001〜004は適用済み、005と今回追加visual変更SQLは稼働未適用です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1527,3 +1527,47 @@ source＋資料13pathは `c77f3aed07ce8514d7505bc169d00a4114804904` で既存Dra
 | piece-ios-source／job114137021280 | RN0.77.3の既存patch適用、Apple clang17.0.0／Xcode16.4／iOS simulator SDKのObjective-C++ syntax-only成功、pbxproj plutil OK。 |
 
 既存phase6-contract-guards run38026057020もsuccess。CIでnative font engine自体を実行したわけではなく、app link/build/signing/実機・保存前fit・正式renderer admissionは未成立。今回の最終結果を本map・入口・manifestへ同期し、製品sourceを変えずに後続の資料commitで反映する。§42.3〜42.4の描画上の限界と残件を維持する。
+
+## 43. 2026-10-10 — 発行済みpreviewの画像設定だけをrevision付きで更新
+
+### 43.1 作業根拠と変更owner
+
+Mashの明示Piece続行に従い、§42.4の設定変更残件を進めた。再開headはCocolon `48f0263cb3043f681abde3f4230d1d083bff7b56`、API `004a85eeb7af83b68ae1c1fba42ec2d6941b6874`。既存の発行前画像設定変更は永続previewの更新APIではなく、別POSTで本文を再生成する代用をしない。PCE-6のpreview PATCH設計とB5-B/B10、全体設計図01/01B・current rules/Rule18・恒久incident・週次10/10 §5.5を照合し、12/18目標とEmlis＋分析の先行実機順を継承した。System Context prepareはlocal祖先不一致で失敗し、入口が許可する原典読取を行った。
+
+| owner path（mashos-api） | 変更 |
+|---|---|
+| ai/services/ai_inference/api_piece_v2.py | 既存full routerへvisual-only PATCH。認証→feature→closed request→quota/tier→service→既存exact19投影。default/shared/専用preview factoryには未登録。 |
+| ai/services/ai_inference/piece_v2_preview_service.py | owned exact20 recordを読み、現source/tier/形式・安全性を再確認して既存recipe builderを再利用。元POSTのrev>1再読は現在recipeを返す。 |
+| ai/services/ai_inference/piece_v2_store.py | server-only snapshot/recipe/sourceを8引数RPCへ渡す。成功応答のbody/期限/rendererと期待revisionを検証。 |
+| supabase/migrations/20261010050940_piece_v2_preview_visual_change.sql | CLI migration newで生成した追加source。既存M4に揃えたrow/source/profile/thread/context lock、revision CAS、待機後期限確認、service_roleだけEXECUTE。 |
+| ai/tests/piece_v2/test_b05_preview_visual_mutation.py | 実CMEE fixtureと実reviewer、合成Auth/DB/transportによるservice/HTTP検査。 |
+| ai/tests/piece_v2/db/test_b05_preview_visual_mutation_native.py | 既存disposable native PostgreSQL fixtureを使う同時更新・lock wait・ACL・rollback検査。 |
+| .github/workflows/piece-b2b-isolated-postgres.yml | 既存隔離workflowへ上記2suiteとpath triggerを追加。新workflow/依存なし。 |
+
+API7path（製品Python3、SQL1、test2、既存workflow1）、Cocolon資料3path。同環境補助2名が新test/SQLと差分reviewを分担し、rootがAPI/service/store・統合・全文review・GitHub反映を担った。別modelの正式受入れではない。Supabase/PG skillsを読み、CLI生成・既存lock順序を使用した。live Supabase操作は行っていない。
+
+### 43.2 画像設定変更の契約と回収
+
+`PATCH /emotion/piece/preview/{preview_id}` のexact2は `expected_preview_revision` と `visual_selection`。後者は既存 `theme_id` / `aspect_ratio` / `branding_mode` のexact3、nullは現在tierの既定選択。client本文・形式・recipe・owner/tier・TTL・renderer・新Idempotency-Key・queryは受け付けない。本文・payload/各hash・format/eligible formats・safety・renderer・source lineage・preview ID・元request hash・expiryは保持する。更新列はrecipe/hash、preview_revision/row_version各+1、updated_atの5列。保存回数/消費履歴/予約lockは変更せず、同じ設定を指定した場合も受理された更新は版を進める。
+
+owned rowの3hashを検証し、現original handoffの所有者/観測lineageとquota由来tierを照合、現tierで同じ形式が使えることを検査する。新画像設定は既存build_visual_recipeへ渡し、現在sourceと本文についてauthorを再実行しない既存reviewerを通す。stored ready/adjustedとreviewerのready/transformedが不一致なら拒否し、本文や安全状態を変更して続行しない。sourceを再照合してからserver snapshotをSQLへ渡す。
+
+通信応答が不明でも自動でPATCHを繰り返さない。commit済みなら旧revisionはSTALEとなる。元POSTの同key/同request hashでのread-only回収は更新後のrecipe/revisionを返し、元の画像設定へ戻したり本文を再生成したりしない。revision1の元選択照合は保持。現tierで現在の形式/recipeが使えない場合は閉じた既存エラーとなる。将来のRN接続では新keyで再生成する代わりにこの回収経路を扱う。
+
+### 43.3 DBと稼働境界
+
+新 `piece_mutate_preview_visual_v2` はservice_role専用。preview FOR UPDATE→original SHARE→profile SHARE→thread SHARE→既存Q3順のhistory/feedback lockを取り、server読取時のexact20 snapshotとsource expectationを比較する。expires_atの同一時刻表記差だけを許容し、それ以外は完全一致。全lock待機後のclockでoriginal/historyの可視期限とpreview期限を再検査し、同時更新・保存・取消しへ古いrevisionを持ち越さない。既存table ACL/RLS/関数・default privilegesは変更せず、新関数に継承された他role権限を剥がす。既存同名関数があれば移行を拒否する。
+
+今回の追加はsource-only。稼働001〜004は先行適用済みで再適用しない。未適用は `20261010_005_piece_v2_quota_read.sql` と `20261010050940_piece_v2_preview_visual_change.sql` の2本。既存004を編集せず、profile/元入力のschemaや運用権限を広げない。default/shared/専用preview factoryの登録、RN selector、形式変更、実Auth/PostgREST/端末接続は未実装または未確認のまま。source上のPATCH存在を利用可能な画面と扱わない。
+
+### 43.4 検証と次工程
+
+API source `4fcb140b778850a1b7a5a65d8e0a26005b3a24c4` を既存Draft PR #3へnon-force反映し、remote全7fileの全文bytes・変更path集合・親`004a85ee`を確認した。local Python3.12.14の新規service/HTTPは **74 PASS／FAIL0**。既存非DB5fileの回帰は **216 PASS／4 deselected**。最初はDB専用4件がlocal PGlite/native PostgreSQL未用意でsetup errorとなったため、DB成功として数えず、再実行では該当4件を明示除外した。新native47件はcollection後、以下の隔離PostgreSQL CIでも全件成功した。合成fixtureのfull lineage不足とPYTHONPATHなしのimport設定不足は新test内で補修し、CI同等invokeの74 PASSを確認した。
+
+[隔離CI run38027073893](https://github.com/MassyuRed/mashos-api/actions/runs/38027073893)／job114140066988は同じsource head `4fcb140b778850a1b7a5a65d8e0a26005b3a24c4` をcheckoutし、全step success。23回のpytest実行は **1,658 PASS／FAIL0／SKIP0**（既存1,537＋新service/HTTP74＋新native47）。Python3.12.15／pytest8.4.1／psycopg3.3.6／PostgreSQL16.15、FastAPI0.143.0／Starlette1.7.0／Pydantic2.14.0／httpx0.28.1。logから実行sourceと各件数を照合した。
+
+新native47件で同revision並行更新の片側STALE、旧save/取消しrevision拒否、新revisionの保存接続、owner/期限/全snapshot/recipe制約、preview・original・profile・thread・history source/thread・feedbackの7箇所で実lock待機を観測してcommit/rollbackを検査した。preview/historyが待機中に期限切れとなる例、service_role ACLとtable/default ACL保持、既存関数拒否、更新失敗のrollbackも成功。合成source/recordと隔離native PostgreSQLによる結果であり、live Supabase/Auth/PostgREST/端末の受入れではない。
+
+既存quota native2件はこのCIのquota39 PASSに含む。localで未実行だった既存PGlite専用2件はこのworkflow対象外であり、今回PASSへ読み替えない。既存Pydantic root_validator／FastAPI on_eventの非推奨警告を保持。callback/HTTP境界は代替を含み、本文安全性全般・native描画・保存fitの承認ではない。
+
+次はこのPATCHのRN画像設定操作・current revision/再取得/中断との接続。並行して先行native B9の実端末描画同等性・glyph/ink/性能、renderer admission、保存前fit→保存が必要。形式変更、capture/画像保存共有、Nexus、M5/設定供給、上記2 migration適用、実Authが残る。既存B9選択器・preview factory・owner/quota/save基盤を作り直さない。§42の478 PASS・native source compileは今回再実行せず先行証拠として保持。今回RN/native source・新依存・live DB query/apply・env/deploy/activation/app build/main merge・本人データ試験0。TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false、商品全体完成ではない。

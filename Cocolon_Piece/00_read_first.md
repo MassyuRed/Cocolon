@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§38／current map §42を優先する。同じnative fontの候補実測→既存B9の行選択→選択行の描画→native描画検査を確認用canvasへ接続した。対応はprototype v3に限定。実端末での描画同等性・renderer admission・保存前fit・保存共有・稼働切替は未完了。005は稼働未適用、001〜004は適用済みで再実行しない。**
+**現在は§39／current map §43を優先する。発行済みpreviewの本文を保った画像設定変更をAPI・SQL候補へ接続した。revision照合で同時更新を防ぎ、元POSTの同key再取得は更新後の候補を返す。RN設定操作・稼働登録は未接続。native B9の実機同等性・renderer admission・保存前fit・保存共有は引き続き未完了。001〜004は適用済みで再実行しない。005と今回追加のvisual変更SQLは稼働未適用。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -879,3 +879,13 @@ local10suite449 PASS／FAIL0／SKIP0（renderer39、planner39・Python由来orac
 
 
 §38最終確認：source `c77f3aed07ce8514d7505bc169d00a4114804904` の13fileをremote全文／変更path集合／親head一致確認済み。[CI38026057042](https://github.com/MassyuRed/Cocolon/actions/runs/38026057042) はInputScreen込み11suite **478 PASS／FAIL0／SKIP0**、Android単体source compile・iOS syntax-only/既存patch/pbxprojも成功。既存contract guardsもsuccess。native実行・app build・実機受入れは含まない。従来のAndroid annotation警告18件と描画上の限界・残件はcurrent map §42に記録した。
+
+## 39. 2026-10-10 — 発行済みプレビューの画像設定だけを更新
+
+詳細ownerはcurrent map §43。既存の発行前 `prepare_visual_change` を再利用し、`PATCH /emotion/piece/preview/{preview_id}` とservice・store・service_role専用SQL候補へ接続した。受理するのは `expected_preview_revision` と3項目の `visual_selection` だけ。本文・content payload/各hash・形式・安全判定・renderer・元入力・期限・元POSTのrequest hashを保ち、recipe/hashとrevision/row_version/updated_atだけを更新する。保存回数を消費せず、期限を延長しない。
+
+現所有者・現tier・元入力/観測と消費済みQ3 contextを再検査し、既存のauthorを呼ばない安全性判定を通す。SQLは既存M4のlock順序を継承し、待機後もpreview/履歴期限を検査する。応答消失時は自動で再PATCHせず、元POSTの同key/同requestで最新revisionを読み直す。旧revisionはSTALE。形式変更・RN selector・稼働route登録は今回含まず、既存preview factory/shared/default appは変えていない。
+
+API source `4fcb140b778850a1b7a5a65d8e0a26005b3a24c4`、7fileのremote全文・変更path集合・親head一致を確認済み。local新規74 PASS、既存非DB回帰216 PASS／4 deselected。最初の回帰実行では既存DB専用4件がlocal runtime未用意でsetup errorとなり、製品PASSへ含めていない。隔離CI [38027073893](https://github.com/MassyuRed/mashos-api/actions/runs/38027073893) は **1,658 PASS／FAIL0／SKIP0**（新規service/HTTP74＋native47、既存1,537）。詳細はcurrent map §43.4。001〜004再実行・live DB query/apply・env/deploy/activation/main merge・native build 0。005と `supabase/migrations/20261010050940_piece_v2_preview_visual_change.sql` は稼働未適用。週次10/10 §5.5、12/18目標、automatic_progression=falseを維持。
+
+次は既存PATCHへのRN設定操作・中断/再取得の接続と、既存native B9の実端末描画同等性・glyph/ink/性能、renderer admission、保存前fit→保存。形式変更、capture/共有、Nexus、M5/稼働構成、実Authも残る。§38の478 PASS/Android source compile/iOS syntax-onlyは先行証拠として保持し、今回の実機結果へ数え直さない。
