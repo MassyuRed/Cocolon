@@ -1463,3 +1463,11 @@ root華恋が実装・確認・書込を担当。補助2名の読取でdirect sl
 ### 41.3 再開位置
 
 本線は§40.3のB9読取単位/soft-wrapと実native metricsの同等性、target renderer admission・実機描画、保存前fit→同じpreviewの保存接続。保存済み詳細の共通canvas接続を作り直さない。capture/端末保存/共有・Nexus共通描画・preview設定変更・M5・005稼働適用・実Auth/実機は残る。本変更を全保存renderer対応やPiece全体完成にしない。
+
+### 41.4 GitHub最終検証
+
+製品source `631873265959a3a3c4ff0949744b9c1cb342f193` を上流最終記録2310002の子としてnon-force反映した。対象8fileをGitHubから全文再取得して検査済みlocalとのbytes一致、変更path集合の完全一致、親headを確認済み。上流§40.5と結果記録を保持し、統合後の読取補助reviewにも具体的blockerなし。
+
+[CI run38024824965](https://github.com/MassyuRed/Cocolon/actions/runs/38024824965) は全3job成功。JS job114133332822はNode24.21.0／TypeScript5.2.2でInputScreenを含む10file **434 PASS／FAIL0／SKIP0／cancelled0**（上流428＋今回6、local405との差29はInputScreen）。Android job114133332833はjavac17.0.20.1で単体source compile成功、既存のannotation不足警告18件を保持。iOS job114133332925は固定RN patch適用・clang17 syntax-only・pbxproj検査成功。既存phase6-contract-guards run38024825008もsuccess。app build・実機描画・保存前fit・商品受入れは未成立。
+
+後続反映は本map・Piece入口・manifestの結果記録3fileのみ。現在のsourceを繰り返し作り直さず、§41.3の残件から再開する。対応prototype v2を持つ実保存recordは未確認で、旧v1を代替描画しない。

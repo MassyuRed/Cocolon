@@ -13,9 +13,9 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "b22d852cdc0c59f149d4e7d3022d576964faa94e",
-    "raw_sha256": "be437834639871656f2c87fd4be5edd4051ab5cc88e1750555f4d94d7e424d1d",
-    "utf8_bytes": 62001
+    "git_blob_sha1": "341430d51b4aa294ac479f1a0c9ab412be7ce64e",
+    "raw_sha256": "3b7eefc8068b193f1e35feabfbdcf9c34259ab51b7ff9103fa18e87da68605d7",
+    "utf8_bytes": 62493
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -258,9 +258,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "40ee46bbc91526a22fd147623fd0ad75a6b7600c",
-    "raw_sha256": "a058699407bcab3f0405e86883ec1c3e5e2d408224510e0718f900dc4c20b1ac",
-    "utf8_bytes": 204781
+    "git_blob_sha1": "ad478766c9b06ea9709bc36f7e86f24c0736f887",
+    "raw_sha256": "4b364498dd95333c9702fe02649f8b85461b2ddf13694a857672994b6fab64a4",
+    "utf8_bytes": 206060
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -2208,7 +2208,7 @@
     "source_postcheck": "Remote7 file bytes, exact changed paths, parent head and current entry hashes matched local tested contents"
   },
   "owner_native_preview_20261010": {
-    "status": "LOCAL_SOURCE_VERIFIED_REMOTE_CI_PENDING",
+    "status": "SOURCE_REMOTE_VERIFIED_DEVICE_AND_SAVE_FIT_PENDING",
     "map": "Cocolon_前提資料/current_structure/02_piece_current_structure.md section41",
     "owner_paths": [
       "features/piece/pieceLayout.js",
@@ -2232,8 +2232,19 @@
       "node": "24.19.0",
       "local_inputscreen": "UNEXECUTED_TYPESCRIPT_DEPENDENCY_MISSING",
       "initial_red": "HARNESS_MISSING_SYMBOL_NOT_CAUSAL_RED_CREDIT",
-      "ci_pending": true,
-      "native_device": false
+      "ci_pending": false,
+      "native_device": false,
+      "ci_run_id": 38024824965,
+      "ci_passed": 434,
+      "ci_suite_files": 10,
+      "ci_jobs_success": 3,
+      "ci_node": "24.21.0",
+      "ci_typescript": "5.2.2",
+      "android_source_compile": true,
+      "ios_source_syntax": true,
+      "android_existing_annotation_warnings": 18,
+      "existing_contract_guards_run": 38024825008,
+      "existing_contract_guards_success": true
     },
     "save_fit": false,
     "can_save": false,
@@ -2245,6 +2256,8 @@
     "main_merge": 0,
     "product_acceptance": false,
     "automatic_progression": false,
-    "integrated_remote_head": "231000211e5a8f4347b7221e7ac4cc34af133464"
+    "integrated_remote_head": "231000211e5a8f4347b7221e7ac4cc34af133464",
+    "source_commit": "631873265959a3a3c4ff0949744b9c1cb342f193",
+    "source_postcheck": "Remote8 full contents, exact changed-path set and parent head matched inspected local source"
   }
 }
