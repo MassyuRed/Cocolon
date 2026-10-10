@@ -15,6 +15,7 @@ name: Piece RN preview and owner contracts
       - navigation/PieceStackNavigator.js
       - AppRuntimeContext.js
       - tests/piece-v2-*.test.js
+      - tests/fixtures/piece-b9-wrap-oracle.json
       - package.json
       - android/app/src/main/java/com/anonymous/cocolonmvp/piece/**
       - android/app/src/main/java/com/anonymous/cocolonmvp/MainApplication.java
@@ -46,7 +47,7 @@ jobs:
           git rev-parse HEAD
           node --version
           node -p "require('typescript').version"
-          node --test tests/piece-v2-contracts.test.js tests/piece-v2-state-models.test.js tests/piece-v2-preview-display.test.js tests/piece-v2-runtime.test.js tests/piece-v2-feature-disabled.test.js tests/piece-v2-saved-input-host.test.js tests/piece-v2-source-ref.test.js tests/piece-v2-input-screen.test.js tests/piece-v2-owner-history.test.js tests/piece-v2-renderer.test.js
+          node --test tests/piece-v2-contracts.test.js tests/piece-v2-state-models.test.js tests/piece-v2-preview-display.test.js tests/piece-v2-runtime.test.js tests/piece-v2-feature-disabled.test.js tests/piece-v2-saved-input-host.test.js tests/piece-v2-source-ref.test.js tests/piece-v2-input-screen.test.js tests/piece-v2-owner-history.test.js tests/piece-v2-renderer.test.js tests/piece-v2-measured-wrap.test.js
 
   piece-android-source:
     if: github.repository == 'MassyuRed/Cocolon'

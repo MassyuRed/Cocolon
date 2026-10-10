@@ -47,3 +47,20 @@ export async function inspectPieceText(node, expected) {
   catch { throw measurementError(); }
   return readPieceTextInspection(result, { ...expected, platform: Platform.OS });
 }
+
+// Candidates are shaped with an immutable snapshot of the mounted Text's
+// font. They guide B9 selection; each selected Text is inspected again.
+export async function measurePieceCandidates(node, text, fontSize) {
+  const tag = findNodeHandle(node), module = NativeModules.PieceTextMetrics;
+  if (!Number.isInteger(tag) || tag <= 0 || typeof module?.measureCandidates !== 'function') throw measurementError();
+  let value;
+  try { value = await module.measureCandidates(tag, text, fontSize); }
+  catch { throw measurementError(); }
+  const fields = ['version', 'platform', 'font_size', 'utf16_length', 'boundaries', 'rows', 'glyph_check'];
+  if (!value || Object.keys(value).sort().join() !== fields.sort().join() || value.version !== 'piece.native_candidates.v1' ||
+      value.platform !== Platform.OS || !['ios', 'android'].includes(Platform.OS) ||
+      value.glyph_check !== 'no_missing_observed' || value.utf16_length !== text.length ||
+      !finite(value.font_size) || Math.abs(value.font_size - fontSize) > 0.5) throw measurementError();
+  // The planner validates exact boundary/row coverage and every metric.
+  return { boundaries: value.boundaries, rows: value.rows };
+}

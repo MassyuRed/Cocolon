@@ -2,7 +2,9 @@ package com.anonymous.cocolonmvp.piece;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Rect;
 import android.icu.text.BreakIterator;
+import android.os.SystemClock;
 import android.text.Layout;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -17,14 +19,19 @@ import com.facebook.react.views.text.ReactTextView;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /** Read the mounted Paper Text's actual Layout. No file, network or body log.
  * hasGlyph(false) is unavailable, not a claim that a combining sequence is
  * certainly missing. Raster bounds are inspected at logical export scale.
  */
 public final class PieceTextMetricsModule extends ReactContextBaseJavaModule {
+  private final ExecutorService candidateWorker = Executors.newSingleThreadExecutor();
   public PieceTextMetricsModule(ReactApplicationContext context) { super(context); }
   @Override public String getName() { return "PieceTextMetrics"; }
+  @Override public void invalidate() { candidateWorker.shutdownNow(); super.invalidate(); }
 
   public static final class Package implements ReactPackage {
     @Override public List<NativeModule> createNativeModules(ReactApplicationContext context) {
@@ -37,6 +44,74 @@ public final class PieceTextMetricsModule extends ReactContextBaseJavaModule {
 
   private static void unavailable(Promise promise) {
     promise.reject("PIECE_NATIVE_MEASUREMENT_UNAVAILABLE", "Text measurement unavailable");
+  }
+
+  /** Snapshot only the mounted uniform font on the UI queue. The quadratic
+   * substring shaping runs off the UI thread, under the caller's old deadline.
+   * These candidate metrics never replace final inspection of the drawn rows.
+   */
+  @ReactMethod public void measureCandidates(double tag, String expected, double expectedSize, Promise promise) {
+    final long deadline = SystemClock.uptimeMillis() + 8000;
+    if (!Double.isFinite(tag) || tag <= 0 || tag != Math.rint(tag) || tag > Integer.MAX_VALUE || expected == null ||
+        expected.length() == 0 || expected.length() > 4096 || !Double.isFinite(expectedSize) || expectedSize < 1 || expectedSize > 100) {
+      unavailable(promise); return;
+    }
+    UIManagerModule manager = getReactApplicationContext().getNativeModule(UIManagerModule.class);
+    if (manager == null) { unavailable(promise); return; }
+    manager.addUIBlock(hierarchy -> {
+      try {
+        View candidate = hierarchy.resolveView((int) tag);
+        if (!(candidate instanceof ReactTextView) || !candidate.isAttachedToWindow()) { unavailable(promise); return; }
+        ReactTextView view = (ReactTextView) candidate;
+        Layout layout = view.getLayout();
+        if (layout == null || !expected.contentEquals(view.getText()) || !expected.contentEquals(layout.getText())) {
+          unavailable(promise); return;
+        }
+        final float density = view.getResources().getDisplayMetrics().density;
+        final TextPaint paint = new TextPaint(layout.getPaint());
+        if (layout.getText() instanceof Spanned) {
+          Spanned spans = (Spanned) layout.getText();
+          if (spans.getSpans(0, expected.length(), ReplacementSpan.class).length != 0) { unavailable(promise); return; }
+          for (MetricAffectingSpan span : spans.getSpans(0, expected.length(), MetricAffectingSpan.class)) {
+            // Piece's body is one uniform style, never an attributed subrange.
+            if (spans.getSpanStart(span) != 0 || spans.getSpanEnd(span) != expected.length()) { unavailable(promise); return; }
+            span.updateMeasureState(paint);
+          }
+        }
+        if (!Float.isFinite(density) || density <= 0 || Math.abs(paint.getTextSize() / density - expectedSize) > 0.5 || paint.baselineShift != 0) {
+          unavailable(promise); return;
+        }
+        candidateWorker.execute(() -> {
+          try {
+            BreakIterator iterator = BreakIterator.getCharacterInstance(Locale.ROOT); iterator.setText(expected);
+            ArrayList<Integer> offsets = new ArrayList<>(); offsets.add(0);
+            for (int end = iterator.next(); end != BreakIterator.DONE; end = iterator.next()) offsets.add(end);
+            int n = offsets.size() - 1;
+            if (n < 1 || n > 420) { unavailable(promise); return; }
+            WritableArray boundaries = Arguments.createArray(), rows = Arguments.createArray();
+            for (int offset : offsets) boundaries.pushInt(offset);
+            for (int i = 0; i < n; i++) {
+              if (!paint.hasGlyph(expected.substring(offsets.get(i), offsets.get(i + 1)))) { unavailable(promise); return; }
+            }
+            Rect ink = new Rect();
+            for (int start = 0; start < n; start++) for (int end = start + 1; end <= n; end++) {
+              if (Thread.currentThread().isInterrupted() || SystemClock.uptimeMillis() >= deadline) { unavailable(promise); return; }
+              String part = expected.substring(offsets.get(start), offsets.get(end));
+              double advance = Layout.getDesiredWidth(part, paint) / density;
+              paint.getTextBounds(part, 0, part.length(), ink);
+              WritableArray row = Arguments.createArray(); row.pushInt(start); row.pushInt(end);
+              row.pushDouble(advance); row.pushDouble(ink.left / (double) density); row.pushDouble(ink.top / (double) density);
+              row.pushDouble(ink.right / (double) density); row.pushDouble(ink.bottom / (double) density); rows.pushArray(row);
+            }
+            WritableMap result = Arguments.createMap();
+            result.putString("version", "piece.native_candidates.v1"); result.putString("platform", "android");
+            result.putDouble("font_size", expectedSize); result.putInt("utf16_length", expected.length());
+            result.putArray("boundaries", boundaries); result.putArray("rows", rows); result.putString("glyph_check", "no_missing_observed");
+            promise.resolve(result);
+          } catch (RuntimeException | OutOfMemoryError error) { unavailable(promise); }
+        });
+      } catch (RuntimeException | OutOfMemoryError error) { unavailable(promise); }
+    });
   }
 
   @ReactMethod public void inspect(double tag, String expected, double expectedSize, Promise promise) {

@@ -4,7 +4,8 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { preparePieceNativeCard, createPieceNativeMeasurement, pieceNativeTypography, recordPieceNativeMeasurement } from '../../features/piece/pieceLayout';
-import { inspectPieceText } from '../../features/piece/pieceRenderer';
+import { inspectPieceText, measurePieceCandidates } from '../../features/piece/pieceRenderer';
+import { planPieceMeasuredRows } from '../../features/piece/pieceMeasuredWrap';
 
 export default class PieceVisualCard extends React.Component {
   constructor(props) {
@@ -12,6 +13,7 @@ export default class PieceVisualCard extends React.Component {
     this.state = { measurement: createPieceNativeMeasurement(preparePieceNativeCard(props)), width: 0 };
     this.active = true;
     this.textNodes = new Map();
+    this.probeReady = new Map();
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -21,7 +23,7 @@ export default class PieceVisualCard extends React.Component {
 
   componentDidMount() { this.active = true; this.syncDeadline(); }
   componentDidUpdate() { this.syncDeadline(); this.inspectDrawing(); }
-  componentWillUnmount() { this.active = false; this.clearDeadline(); this.inspection = null; this.textNodes.clear(); }
+  componentWillUnmount() { this.active = false; this.clearDeadline(); this.inspection = null; this.planning = null; this.textNodes.clear(); this.probeReady.clear(); }
 
   clearDeadline = () => {
     if (this.deadline) clearTimeout(this.deadline.handle);
@@ -31,13 +33,13 @@ export default class PieceVisualCard extends React.Component {
   syncDeadline = () => {
     const input = preparePieceNativeCard(this.props);
     if (!this.active || !input || input.key !== this.state.measurement.key ||
-        !['measuring', 'geometry_checked'].includes(this.state.measurement.phase)) {
+        !['planning', 'measuring', 'geometry_checked'].includes(this.state.measurement.phase)) {
       this.clearDeadline(); return;
     }
     if (this.deadline?.key === input.key) return;
     this.clearDeadline();
     const key = input.key;
-    const deadline = { key, handle: null };
+    const deadline = { key, handle: null, expiresAt: Date.now() + 8000 };
     this.deadline = deadline;
     deadline.handle = setTimeout(() => {
       if (this.deadline !== deadline) return;
@@ -46,18 +48,57 @@ export default class PieceVisualCard extends React.Component {
       const generation = this.state.measurement.generation;
       this.setState(previous => this.active && preparePieceNativeCard(this.props)?.key === key &&
         previous.measurement.key === key && previous.measurement.generation === generation &&
-        ['measuring', 'geometry_checked'].includes(previous.measurement.phase)
+        ['planning', 'measuring', 'geometry_checked'].includes(previous.measurement.phase)
         ? { measurement: { ...previous.measurement, phase: 'unavailable', blocks: {}, compositionHeight: null, reason: 'measurement_timeout' } }
         : null);
     }, 8000);
   };
 
-  inspectDrawing = async () => {
+  drawingInput = (input, measurement = this.state.measurement) => {
+    if (!measurement.plan) return input;
+    const blocks = [], rowGaps = [];
+    measurement.plan.groups.forEach((group, index) => group.forEach((body, row) => {
+      blocks.push(body);
+      rowGaps.push(row === group.length - 1 && index < measurement.plan.groups.length - 1 ? measurement.plan.gap : 0);
+    }));
+    return { ...input, blocks, rowGaps, plannedRows: true };
+  };
+
+  planDrawing = async () => {
     const snapshot = this.state.measurement, input = preparePieceNativeCard(this.props);
+    if (!this.active || !input || input.key !== snapshot.key || snapshot.phase !== 'planning' ||
+        this.planning?.snapshot === snapshot || input.blocks.some((_, i) => this.probeReady.get(i) !== snapshot.generation)) return;
+    const operation = { snapshot }; this.planning = operation;
+    const current = () => this.active && this.planning === operation && this.state.measurement === snapshot &&
+      preparePieceNativeCard(this.props)?.key === input.key && this.deadline && Date.now() < this.deadline.expiresAt;
+    try {
+      const measurements = [];
+      for (let index = 0; index < input.blocks.length; index++) {
+        if (!current()) return;
+        const node = this.textNodes.get(index);
+        if (node?.generation !== snapshot.generation) throw new Error('PIECE_NATIVE_MEASUREMENT_UNAVAILABLE');
+        measurements.push(await measurePieceCandidates(node.value, input.blocks[index], input.sizes[snapshot.sizeIndex]));
+      }
+      if (!current()) return;
+      const plan = planPieceMeasuredRows(input, snapshot.sizeIndex, measurements);
+      if (!current()) return;
+      this.setState(previous => current() && previous.measurement === snapshot ? {
+        measurement: plan ? { ...snapshot, phase: 'measuring', plan, generation: Object.freeze({}), blocks: {} }
+          : snapshot.sizeIndex + 1 < input.sizes.length ? { ...createPieceNativeMeasurement(input), sizeIndex: snapshot.sizeIndex + 1 }
+          : { ...snapshot, phase: 'unavailable', reason: 'font_floor_overflow' },
+      } : null);
+    } catch {
+      if (current()) this.setState(previous => current() && previous.measurement === snapshot
+        ? { measurement: { ...snapshot, phase: 'unavailable', reason: 'native_candidates_unavailable' } } : null);
+    }
+  };
+
+  inspectDrawing = async () => {
+    const snapshot = this.state.measurement, raw = preparePieceNativeCard(this.props), input = raw && this.drawingInput(raw, snapshot);
     if (!this.active || !input || input.key !== snapshot.key || snapshot.phase !== 'geometry_checked' || this.inspection?.snapshot === snapshot) return;
     const operation = { snapshot }; this.inspection = operation;
     const current = () => this.active && this.inspection === operation && this.state.measurement === snapshot &&
-      preparePieceNativeCard(this.props)?.key === input.key;
+      preparePieceNativeCard(this.props)?.key === input.key && this.deadline && Date.now() < this.deadline.expiresAt;
     try {
       const evidence = [];
       const count = input.blocks.length + (input.brandingMode === 'off' ? 0 : 1);
@@ -72,13 +113,23 @@ export default class PieceVisualCard extends React.Component {
         }));
       }
       if (!current()) return;
-      const overflow = evidence.some(result => result.overflow);
+      const { lineHeight } = pieceNativeTypography(input, snapshot.sizeIndex);
+      const rowOffsets = evidence.slice(0, input.blocks.length).map((result, index) => {
+        const [left, top, right, bottom] = result.ink;
+        const width = Math.max(snapshot.blocks[index].lines[0].width, right) - Math.min(0, left);
+        return { x: -Math.min(0, left) + (input.alignment === 'center' ? (input.contentWidth - width) / 2 : 0),
+          y: (lineHeight - (bottom - top)) / 2 - top, width, height: bottom - top };
+      });
+      // Moving a Text view cannot recover ink clipped by its own bounds.
+      // Only already-contained ink may be repositioned within its row.
+      const overflow = evidence.some(result => result.overflow) ||
+        rowOffsets.some(row => row.width > input.contentWidth || row.height > lineHeight);
       const wrapViolation = evidence.some(result => result.wrapViolation);
       this.setState(previous => current() && previous.measurement === snapshot ? { measurement: overflow || wrapViolation ? snapshot.sizeIndex + 1 < input.sizes.length
         ? { ...createPieceNativeMeasurement(input), sizeIndex: snapshot.sizeIndex + 1 }
         : { ...snapshot, phase: 'unavailable', blocks: {}, compositionHeight: null,
           reason: overflow ? 'native_ink_overflow' : 'native_kinsoku_unavailable' }
-        : { ...snapshot, phase: 'native_checked', inspection: evidence } } : null);
+        : { ...snapshot, phase: 'native_checked', inspection: evidence, rowOffsets } } : null);
     } catch {
       if (current()) this.setState(previous => current() && previous.measurement === snapshot
         ? { measurement: { ...snapshot, phase: 'unavailable', blocks: {}, compositionHeight: null, reason: 'native_measurement_unavailable' } } : null);
@@ -87,7 +138,8 @@ export default class PieceVisualCard extends React.Component {
 
   measure = (ticket, index, kind, value) => {
     if (!this.active) return;
-    const input = preparePieceNativeCard(this.props);
+    const raw = preparePieceNativeCard(this.props), input = raw && this.drawingInput(raw);
+    if (this.state.measurement.phase === 'planning') return;
     this.setState(previous => {
       const measurement = recordPieceNativeMeasurement(input, previous.measurement, ticket, index, kind, value);
       return measurement === previous.measurement ? null : { measurement };
@@ -95,16 +147,17 @@ export default class PieceVisualCard extends React.Component {
   };
 
   render() {
-    const input = preparePieceNativeCard(this.props), measurement = this.state.measurement;
+    const raw = preparePieceNativeCard(this.props), measurement = this.state.measurement;
+    const input = raw && this.drawingInput(raw, measurement);
     if (!input || input.key !== measurement.key) return Object.prototype.hasOwnProperty.call(this.props, 'savedRecord')
       ? React.createElement(Text, { testID: 'piece-visual-unavailable', style: { color: '#494949', fontSize: 14, lineHeight: 22, marginBottom: 12 } },
         'このPieceの画像レイアウトは現在確認できません。本文は下で確認できます。') : null;
-    const element = React.createElement, ready = measurement.phase === 'native_checked';
+    const element = React.createElement, ready = measurement.phase === 'native_checked', planning = measurement.phase === 'planning';
     const { fontSize, lineHeight, gap } = pieceNativeTypography(input, measurement.sizeIndex);
     const ticket = { key: input.key, sizeIndex: measurement.sizeIndex, generation: measurement.generation };
     const scale = this.state.width / input.width;
     const textProps = index => ({
-      key: `${input.key}:${measurement.sizeIndex}:${index}`, testID: `piece-visual-block-${index}`,
+      key: `${input.key}:${measurement.sizeIndex}:${planning ? 'probe' : 'row'}:${index}`, testID: `piece-${planning ? 'probe' : 'visual'}-block-${index}`,
       ref: value => {
         if (value) this.textNodes.set(index, { value, generation: measurement.generation });
         else if (this.textNodes.get(index)?.generation === measurement.generation) this.textNodes.delete(index);
@@ -112,7 +165,13 @@ export default class PieceVisualCard extends React.Component {
       collapsable: false,
       allowFontScaling: false, adjustsFontSizeToFit: false, accessible: false,
       android_hyphenationFrequency: 'none', textBreakStrategy: 'highQuality', lineBreakStrategyIOS: 'standard',
-      onLayout: event => this.measure(ticket, index, 'box', event.nativeEvent?.layout),
+      onLayout: event => {
+        if (planning) {
+          if (!this.active || this.state.measurement.generation !== ticket.generation ||
+              preparePieceNativeCard(this.props)?.key !== ticket.key || this.state.measurement.phase !== 'planning') return;
+          this.probeReady.set(index, ticket.generation); this.planDrawing();
+        } else this.measure(ticket, index, 'box', event.nativeEvent?.layout);
+      },
       onTextLayout: event => this.measure(ticket, index, 'lines', event.nativeEvent?.lines),
     });
     return element(View, { testID: 'piece-visual-preview', style: { marginBottom: 20 },
@@ -136,12 +195,15 @@ export default class PieceVisualCard extends React.Component {
           borderColor: input.colors.border, borderWidth: 2 } }),
         element(View, { style: { position: 'absolute', left: input.margin, width: input.contentWidth,
           top: input.margin + (ready ? (input.contentHeight - measurement.compositionHeight) / 2 : 0) } },
-          ...input.blocks.map((body, index) => element(Text, { ...textProps(index), style: {
+          ...input.blocks.map((body, index) => element(View, {
+            key: `row:${index}`, style: { height: planning ? undefined : lineHeight, marginBottom: input.rowGaps?.[index] ?? (index < input.blocks.length - 1 ? gap : 0) },
+          }, element(Text, { ...textProps(index), style: {
             width: input.contentWidth, fontSize, lineHeight, fontWeight: '400', fontStyle: 'normal',
-            letterSpacing: 0, includeFontPadding: false, textAlign: input.alignment, color: input.colors.text,
-            marginBottom: index < input.blocks.length - 1 ? gap : 0,
-          } }, body))),
-        input.brandingMode === 'off' ? null : element(Text, { ...textProps(input.blocks.length), style: {
+            letterSpacing: 0, includeFontPadding: false, textAlign: 'left', color: input.colors.text,
+            position: planning ? 'relative' : 'absolute', left: ready ? measurement.rowOffsets[index].x : 0,
+            top: ready ? measurement.rowOffsets[index].y : 0,
+          } }, body)))),
+        planning || input.brandingMode === 'off' ? null : element(Text, { ...textProps(input.blocks.length), style: {
           position: 'absolute', left: input.margin, width: input.contentWidth,
           top: input.height - input.margin - input.brandingZone,
           fontSize: 28, lineHeight: 40, includeFontPadding: false, textAlign: 'center',

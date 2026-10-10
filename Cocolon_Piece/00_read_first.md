@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§37／current map §41を優先する。§40.5の禁則再測定を保持し、保存済み本人詳細へ同じ確認用canvasを接続した。対応はprototype v2に限定。保存前fit・B9同等性・保存共有・実機・稼働切替は未完了。005は稼働未適用、001〜004は適用済みで再実行しない。**
+**現在は§38／current map §42を優先する。同じnative fontの候補実測→既存B9の行選択→選択行の描画→native描画検査を確認用canvasへ接続した。対応はprototype v3に限定。実端末での描画同等性・renderer admission・保存前fit・保存共有・稼働切替は未完了。005は稼働未適用、001〜004は適用済みで再実行しない。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -867,3 +867,12 @@ local9suite394 PASS／FAIL0／SKIP0、rendererは26件（今回8追加）。固�
 local9suite405 PASS／FAIL0／SKIP0（今回6追加）。InputScreenはlocal TypeScript欠落により未実行で、既存CIを反映後に確認する。ソース準備のみで、依存/native/API/DB/env/deploy/activation/build/main merge変更0。次はB9 soft-wrap・native metrics・renderer admission/実機・保存前fit→保存。本工程の詳細接続を再実装しない。画像保存共有・Nexus・設定変更・M5・005・実Authも残る。weekly§5.5・12/18目標、automatic_progression=falseを維持。
 
 §37最終確認：source `631873265959a3a3c4ff0949744b9c1cb342f193` の対象8fileをremote全文／変更path集合／親head一致確認済み。[CI 38024824965](https://github.com/MassyuRed/Cocolon/actions/runs/38024824965) はInputScreenを含む434 PASS／FAIL0／SKIP0、Android/iOS単体source検査も成功。既存contract guardsもsuccess。nativeのannotation不足警告18件と、実機・保存前fit・実保存renderer存在未確認をcurrent map §41.4へ記録した。
+
+
+## 38. 2026-10-10 — nativeで測った候補からB9の行を選んで描画
+
+詳細ownerはcurrent map §42。既存Python B9を純粋JSへ移植し、同じmounted Textのfontでnative候補実測→読取単位/禁則/段落共通行数予算による選択→個別Text描画→既存native最終検査を接続した。本文へ改行を挿入せず、元段落・空白を保持する。候補はbackgroundで測り、全表の不足/重複/不正値、不明glyph、選択行の再改行、元8秒deadline超過は表示不可。規定font以外を選ばない。
+
+最終inkがText自身のboxに収まる場合だけ行slotで揃える。すでにclipしたTextを位置移動で修復した扱いにはしない。確認用prototypeはv3に更新し、保存済み旧v1/v2・未知版は全文表示を残して画像を代替しない。対応版の実保存record存在は未確認。native_checked／候補測定は保存前fitや正式renderer admissionを意味せず、canSave/canExport=false。
+
+local10suite449 PASS／FAIL0／SKIP0（renderer39、planner39・Python由来oracle25例を含む）。候補値とReact/native応答は合成を含み、端末合格ではない。clipと期限raceの2回帰検査は因果RED後に修正済み。InputScreenとAndroid/iOS source CIは反映後確認。source6＋test/fixture3＋既存workflow1＋資料3。次は実端末のnative B9描画同等性/glyph/ink/性能とrenderer admission→保存前fit→保存。B9選択器を重複実装しない。画像保存共有・Nexus・設定変更・M5・005・実Authは残る。新依存/API/SQL・DB操作・env/deploy/activation/app build/main merge変更0、001〜004適用済み／005稼働未適用、weekly§5.5・12/18目標・automatic_progression=falseを維持する。

@@ -1,13 +1,13 @@
 /** B13 RN-first preview geometry. No capture, persistence or save authority.
  * Catalog values mirror PCE-5 / backend piece_v2_visual.py v1. Native wrapping
- * is a prototype target, not the Python B9 measured-ink algorithm or its proof.
+ * uses B9 measured row selection; native/device equivalence remains unaccepted.
  * onTextLayout supplies line boxes, NOT glyph availability/ink bounds. Thus
  * geometry_checked never means layout_state=fit or canSave/canExport.
  */
 import { readPiecePreviewDisplay } from './piecePreviewModel';
 import { readPieceOwnerDisplay } from './pieceOwnerModel';
 
-export const PIECE_NATIVE_PREVIEW_VERSION = 'piece.rn_native_preview.prototype.v2';
+export const PIECE_NATIVE_PREVIEW_VERSION = 'piece.rn_native_preview.prototype.v3';
 const nativeThemes = {
   soft_paper: { canvas: '#F6F1E8', surface: '#FFFDF8', text: '#111827', secondary: '#4B5563',
     accent: '#800020', border: '#D7D2C9', branding: '#800020', vector_end: '#FFFFFF' },
@@ -70,7 +70,7 @@ function preparePieceNativeArtifact(p, key) {
 }
 
 export function createPieceNativeMeasurement(input) {
-  return { key: input?.key ?? null, phase: input ? 'measuring' : 'unavailable', sizeIndex: 0,
+  return { key: input?.key ?? null, phase: input ? 'planning' : 'unavailable', sizeIndex: 0, plan: null,
     generation: Object.freeze({}), blocks: {}, compositionHeight: null, reason: null, canSave: false, canExport: false };
 }
 
@@ -106,6 +106,7 @@ export function recordPieceNativeMeasurement(input, state, ticket, blockIndex, k
     if (value.map(line => line.text).join('') !== (branding ? 'Cocolon' : input.blocks[blockIndex])) {
       return nativeReject(state, 'text_mismatch');
     }
+    if (input.plannedRows && !branding && value.length !== 1) return nativeReject(state, 'native_rewrap');
     let end = 0;
     measurement = value.map(({ text, x, y, width, height }) => ({ x, y, width, height, end: end += text.length }));
   } else return state;
@@ -115,13 +116,15 @@ export function recordPieceNativeMeasurement(input, state, ticket, blockIndex, k
   const next = { ...state, phase: 'measuring', blocks, compositionHeight: null, inspection: null };
   const count = input.blocks.length + (input.brandingMode === 'off' ? 0 : 1);
   if (Object.keys(blocks).length !== count || Object.values(blocks).some(b => !b.lines || !b.box)) return next;
-  const { gap } = pieceNativeTypography(input, state.sizeIndex);
-  const compositionHeight = input.blocks.reduce((total, _, index) => total + blocks[index].box.height, 0) + gap * (input.blocks.length - 1);
+  const { gap, lineHeight } = pieceNativeTypography(input, state.sizeIndex);
+  const compositionHeight = input.plannedRows ? state.plan.totalHeight : input.blocks.reduce((total, _, index) => total + blocks[index].box.height, 0) +
+    (input.rowGaps ? input.rowGaps.reduce((a, b) => a + b, 0) : gap * (input.blocks.length - 1));
   const tolerance = 0.01;
   let overflow = compositionHeight > input.contentHeight + tolerance;
   for (let index = 0; index < count; index++) {
     const { box, lines } = blocks[index];
     if (Math.abs(box.width - input.contentWidth) > tolerance ||
+        input.plannedRows && index < input.blocks.length && Math.abs(box.height - lineHeight) > 0.5 ||
         index === input.blocks.length && box.height > input.brandingZone) overflow = true;
     let bottom = 0;
     for (const line of lines) {

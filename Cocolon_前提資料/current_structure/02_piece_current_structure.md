@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は§41を優先します。保存済み本人詳細へ、既存と同じnative画像レイアウトの確認用表示を接続しました。対応は実装済みprototype版に限り、未知の保存rendererを代替しません。保存前fit・画像保存共有・実機・稼働切替は未完了。005は稼働未適用、001〜004は適用済みです。**
+**現在は§42を優先します。同じnative fontで行候補を実測し、既存B9の読取単位・禁則・段落共通の行数制約で選んだ行を確認用canvasへ接続しました。prototype v3のみ対応し、旧保存rendererを代替しません。実端末でのnative描画同等性・renderer admission・保存前fit・保存共有・稼働切替は未完了。005は稼働未適用、001〜004は適用済みです。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1471,3 +1471,46 @@ root華恋が実装・確認・書込を担当。補助2名の読取でdirect sl
 [CI run38024824965](https://github.com/MassyuRed/Cocolon/actions/runs/38024824965) は全3job成功。JS job114133332822はNode24.21.0／TypeScript5.2.2でInputScreenを含む10file **434 PASS／FAIL0／SKIP0／cancelled0**（上流428＋今回6、local405との差29はInputScreen）。Android job114133332833はjavac17.0.20.1で単体source compile成功、既存のannotation不足警告18件を保持。iOS job114133332925は固定RN patch適用・clang17 syntax-only・pbxproj検査成功。既存phase6-contract-guards run38024825008もsuccess。app build・実機描画・保存前fit・商品受入れは未成立。
 
 後続反映は本map・Piece入口・manifestの結果記録3fileのみ。現在のsourceを繰り返し作り直さず、§41.3の残件から再開する。対応prototype v2を持つ実保存recordは未確認で、旧v1を代替描画しない。
+
+
+## 42. 2026-10-10 — native候補実測とB9の行選択を確認用canvasへ接続
+
+### 42.1 作業根拠とowner
+
+再開headはCocolon `a53c6d1b4847283449007f8091d0294317f89fad`、API `004a85eeb7af83b68ae1c1fba42ec2d6941b6874`。Mashの明示Piece続行に従い、§41.3のB9接続残件を進めた。APIの既存`piece_v2_layout.py`を原本として読み、B9自体の新仕様・別render ownerを作らない。全体設計図01/01B・current map、current rules/Rule18・恒久incident、weekly10/10 §5.5を照合した。System Context prepareはlocal祖先不一致で失敗し、入口が許可する原典直接読取を使用した。成功扱いにせず、Emlis＋分析の先行実機順と12/18目標を維持する。
+
+| owner path | 今回の変更 |
+|---|---|
+| features/piece/pieceMeasuredWrap.js | 新規。実測済み候補表を厳密に検証し、既存Python B9と同じ順序の比較・高さ制約で段落ごとの行を選ぶ純粋関数。 |
+| features/piece/pieceLayout.js | planning段階と選択済み行の固定lineHeight/段落gapを導入。再改行を拒否し、prototypeをv3へ更新。 |
+| features/piece/pieceRenderer.js | mounted Textから候補計測を要求し、exact7の応答metadataを検証するlocal bridge。 |
+| components/piece/PieceVisualCard.js | 同じfontのprobe→候補実測→B9行選択→各行の実描画→全行とbrandingの既存native検査へ接続。previewと本人詳細で共通利用。 |
+| android/app/src/main/java/com/anonymous/cocolonmvp/piece/PieceTextMetricsModule.java | 実ReactTextViewのTextPaintと有効font spanを取得し、専用background workerで全候補のadvance/inkを測定する。 |
+| ios/tempCocolon/PieceTextMetrics.mm | 同じTextKit storageのimmutable snapshotを取り、background CoreTextで全候補のadvance/inkを測定する。 |
+| tests/piece-v2-measured-wrap.test.js／tests/fixtures/piece-b9-wrap-oracle.json | Python B9由来の合成oracleと不正候補表の検査。CIでPython実行は不要。 |
+| tests/piece-v2-renderer.test.js | 実componentのplanning、font再試行、identity/期限/世代、行配置、既に欠けたTextを位置移動で受理しない境界を検査。 |
+| .github/workflows/piece-rn-contracts.yml | 既存JS jobへ上記suiteとfixtureのpath triggerを追加。既存Android/iOS source jobを継承する。 |
+
+製品source6、test2＋fixture1、既存workflow1、資料3の計13path。RN0.77.3既存patch/Paper/local moduleを使用し、依存・本体patch・native登録・API/SQL契約を追加変更しない。実装補助2名がplannerとoracleを分担し、root華恋が原本照合・native/UI実装・統合・相互reviewの修正・書込を担う。同環境の補助reviewであり、別modelの正式受入れではない。
+
+### 42.2 候補計測と選択
+
+protocolは`piece.native_candidates.v1`。UI側では同じmounted Textの全文/fontを照合してsnapshotだけを取り、候補の二次元計測はUI queue外で行う。OSの書記素境界を使い、段落最大420書記素、全文UTF-16長/文字サイズの上限、native処理8秒上限を検査する。各連続部分文字列のadvanceとink座標を返し、全n(n+1)/2候補が一つずつ揃うことをJSで確認する。不明なfont/span/glyph・欠落/重複候補・非有限値・書記素途中の分割は表示不可。文字数比例などの推測幅を補わず、本文をnetwork/log/fileへ出力しない。
+
+既存B9の漢字・カタカナrun、仮名付着/bridge、幅に収まる連結、連体語・視点語・長い仮名/競合する仮名・数値期間、硬い禁則、空白保持を移植した。比較tupleの優先順はcohesion＋singleton＋long-kana orphan、行数、ASCII空白split、script/sokuon split、sentence-head orphan、kana attachment、short bridge、余白二乗和。Python3.12/Unicode15.0の文字分類を固定し、NFCは比較だけに使う。本文・測定文字列を正規化しない。まず制約なし最適行を求め、高さに収まらなければ同じfontで段落共通の行数予算を再配分し、それでも不成立のときだけ次の規定fontへ進む。
+
+選んだ各行を個別のTextへ渡すため、本文へ改行文字を追加しない。元段落のgapを保ち、実Textが再び複数行へ折り返した場合は受理しない。probe・行・brandingのrefを分け、世代を更新してremountする。全工程は元の8秒deadlineを継承し、font変更で延長しない。候補/最終検査promiseはidentity・operation・snapshot・絶対期限を再確認し、古い成功/失敗やqueue済み更新を新しい描画へ流用しない。
+
+### 42.3 最終描画の境界
+
+候補のadvance/inkは行選択用で、実描画の合格証拠ではない。全行を既存Android raster／iOS TextKit検査へ再度渡し、全文・font・書記素・禁則・glyph・実ink・brandingを確認する。各Text自身のbox内に収まるinkだけを行slot内で揃える。Text内部ですでにclipしたinkをText全体の位置移動で回復したとは扱わず、bodyにもnative overflowの次サイズ／下限失敗を適用する。負の張出し等によって、内容が妥当でも現native Text構造では確認画像を出せない場合が残る。
+
+挙動変更により確認用versionは`piece.rn_native_preview.prototype.v3`。保存済み表示はexact v3のみで、旧v1/v2や未知rendererを最新外観に置き換えない。実保存recordに対応versionが存在するかは未確認。native_checkedは確認用に限り、canSave/canExport=false。OS font・fallback・書記素version・実React/native再描画・性能を実端末で受け入れた結果ではなく、B9のnative描画全体同等性、保存renderer admission、保存前fitは未成立。
+
+### 42.4 検証と次工程
+
+local Node24.19.0の10suite **449 PASS／FAIL0／SKIP0／cancelled0**。renderer39件、追加planner39件（Python原本由来oracle25例を含む）。oracleは合成計測であり、font engineの端末実測ではない。oracle生成元は上記API head、Python3.12.14/Unicode15.0.0をfixtureに記録した。InputScreen29件はlocal TypeScript欠落のため未実行。GitHub反映後にInputScreen込みCIとAndroid/iOS source compileを確認する。
+
+同環境reviewが指摘した、既にclipしたTextを移動して受理する問題と、最終promiseが8秒後にtimer callbackより先に完了する問題は、各回帰検査の因果REDを確認して製品sourceを修正し、上記449件で成功した。途中の旧自然改行fixture/時刻設定を新しいplanningと元deadlineへ適合させた結果も含む。実機上の症状再現・解消とは記録しない。
+
+次は選択済み行を含む同じcanvasについて実端末のglyph/ink/性能とnative B9描画同等性を確認し、対象renderer admission・保存前fitを揃えて既存保存APIへ接続する。planner、本人詳細の共通canvas、quota/owner APIを再実装しない。capture/端末保存/共有、Nexus共通描画、preview設定変更、M5/稼働構成、005、実Authも残る。今回DB query/apply・env/deploy/activation/app native build/main merge/本人データ試験0。001〜004適用済み、005稼働未適用を継承。TECHNICAL_CREDIT／STRUCTURE_MAP_DELTA_UPDATED／automatic_progression=false。商品全体完成ではない。

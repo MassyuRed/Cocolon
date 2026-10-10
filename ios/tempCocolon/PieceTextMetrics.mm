@@ -22,6 +22,84 @@ RCT_EXPORT_MODULE();
 + (BOOL)requiresMainQueueSetup { return NO; }
 - (dispatch_queue_t)methodQueue { return RCTGetUIManagerQueue(); }
 
+RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize
+                  resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+{
+  void (^unavailable)(void) = ^{ reject(@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE", @"Text measurement unavailable", nil); };
+  const NSTimeInterval deadline = NSProcessInfo.processInfo.systemUptime + 8;
+  if (!isfinite(tag.doubleValue) || tag.doubleValue <= 0 || tag.doubleValue != floor(tag.doubleValue) ||
+      expected.length == 0 || expected.length > 4096 || !isfinite(fontSize) || fontSize < 1 || fontSize > 100 || !_bridge.uiManager) {
+    unavailable(); return;
+  }
+  [_bridge.uiManager addUIBlock:^(__unused RCTUIManager *manager, NSDictionary<NSNumber *, UIView *> *registry) {
+    @try {
+      RCTTextView *view = (RCTTextView *)registry[tag];
+      if (![view isKindOfClass:RCTTextView.class] || !view.window ||
+          ![view respondsToSelector:@selector(cocolonPieceTextStorage)]) { unavailable(); return; }
+      NSTextStorage *storage = [view cocolonPieceTextStorage];
+      if (![storage.string isEqualToString:expected]) { unavailable(); return; }
+      __block BOOL valid = YES;
+      [storage enumerateAttribute:NSFontAttributeName inRange:NSMakeRange(0, expected.length) options:0
+        usingBlock:^(UIFont *font, NSRange range, BOOL *stop) {
+          if (![font isKindOfClass:UIFont.class] || fabs(font.pointSize - fontSize) > 0.5) { valid = NO; *stop = YES; }
+        }];
+      if (!valid) { unavailable(); return; }
+      // A private immutable snapshot; never access UIView/TextKit off its UI queue.
+      NSAttributedString *snapshot = [storage copy];
+      dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+        @try {
+          NSMutableArray<NSNumber *> *boundaries = [NSMutableArray arrayWithObject:@0];
+          [expected enumerateSubstringsInRange:NSMakeRange(0, expected.length) options:NSStringEnumerationByComposedCharacterSequences
+            usingBlock:^(NSString *substring, NSRange range, NSRange enclosing, BOOL *stop) { [boundaries addObject:@(NSMaxRange(range))]; }];
+          NSUInteger count = boundaries.count - 1;
+          if (count < 1 || count > 420) { unavailable(); return; }
+          CTLineRef full = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)snapshot);
+          if (!full) { unavailable(); return; }
+          BOOL glyphs = YES;
+          for (id object in (__bridge NSArray *)CTLineGetGlyphRuns(full)) {
+            CTRunRef run = (__bridge CTRunRef)object;
+            CTFontRef font = (CTFontRef)CFDictionaryGetValue(CTRunGetAttributes(run), kCTFontAttributeName);
+            NSString *name = font ? CFBridgingRelease(CTFontCopyPostScriptName(font)) : nil;
+            if (!font || [name rangeOfString:@"LastResort" options:NSCaseInsensitiveSearch].location != NSNotFound) glyphs = NO;
+            for (CFIndex i = 0; i < CTRunGetGlyphCount(run); i++) { CGGlyph glyph; CTRunGetGlyphs(run, CFRangeMake(i, 1), &glyph); if (glyph == 0) glyphs = NO; }
+          }
+          CFRelease(full);
+          if (!glyphs) { unavailable(); return; }
+          NSMutableArray *rows = [NSMutableArray new];
+          for (NSUInteger start = 0; start < count; start++) {
+            @autoreleasepool {
+              for (NSUInteger end = start + 1; end <= count; end++) {
+                if (NSProcessInfo.processInfo.systemUptime >= deadline) { unavailable(); return; }
+                NSUInteger offset = boundaries[start].unsignedIntegerValue;
+                NSAttributedString *part = [snapshot attributedSubstringFromRange:NSMakeRange(offset, boundaries[end].unsignedIntegerValue - offset)];
+                CTLineRef line = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)part);
+                if (!line) { unavailable(); return; }
+                double advance = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
+                CGRect ink = CTLineGetImageBounds(line, NULL);
+                CFRelease(line);
+                // A whitespace-only candidate has an advance and no painted ink.
+                if (CGRectIsNull(ink)) {
+                  if ([part.string rangeOfCharacterFromSet:NSCharacterSet.whitespaceAndNewlineCharacterSet.invertedSet].location != NSNotFound) {
+                    unavailable(); return;
+                  }
+                  ink = CGRectZero;
+                }
+                if (!isfinite(advance) || !isfinite(ink.origin.x) || !isfinite(ink.origin.y) ||
+                    !isfinite(ink.size.width) || !isfinite(ink.size.height)) { unavailable(); return; }
+                // CoreText's y axis points up; B9 uses baseline-relative y down.
+                [rows addObject:@[@(start), @(end), @(advance), @(CGRectGetMinX(ink)), @(-CGRectGetMaxY(ink)),
+                                  @(CGRectGetMaxX(ink)), @(-CGRectGetMinY(ink))]];
+              }
+            }
+          }
+          resolve(@{ @"version": @"piece.native_candidates.v1", @"platform": @"ios", @"font_size": @(fontSize),
+            @"utf16_length": @(expected.length), @"boundaries": boundaries, @"rows": rows, @"glyph_check": @"no_missing_observed" });
+        } @catch (__unused NSException *exception) { unavailable(); }
+      });
+    } @catch (__unused NSException *exception) { unavailable(); }
+  }];
+}
+
 RCT_EXPORT_METHOD(inspect:(nonnull NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize
                   resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
