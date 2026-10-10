@@ -20,6 +20,16 @@ candidate_ready: false
 ---
 
 
+## 2026-10-10 — 任意欄NULLのAPI修正済み、配置・実機確認待ち
+
+Mashの指示により、既存 `emlis_thread_service._request` の生成用コピーだけでmemo/memo_actionのNULLを空文字へ変換した。DB原本・source_snapshot・CAS・本人履歴guard・非NULL文字列・共有source kernelを保持する。製品差分は既存ownerの5行、新file/route/schemaなし、`STRUCTURE_MAP_DELTA_NONE`。API修正候補は [`7626e1f6e6cc7b2d8a71b9ea1032b840bbc9799b`](https://github.com/MassyuRed/mashos-api/commit/7626e1f6e6cc7b2d8a71b9ea1032b840bbc9799b)。詳細はAPI運用資料§34。
+
+追加NULL回帰17件は成功。実reply入口・作者・隔離PGliteの実migration/RPCで生成→保存し、作者呼出しを禁止した新serviceのHTTP GETで同一本文を返すことを確認した。回答後の再取得、原本変更409、Plus/Premium履歴、欠落/不正型/全空拒否を含む。Q2/Q3/Q4計197件は180 PASS / 17 FAIL。既存17 FAILは修正前無変更worktreeでも失敗node・assertionが一致し、文面等の既存期待に関する残件。既存テスト緩和・skip/xfailなし。本人原入力1件と公開合成2例の隔離DB出力も全文確認したが、稼働DB/実Bearer/RN描画・商品品質合格の証拠へ換算しない。
+
+端末版は本人確認で **6301**、最新症状は **10/07の入力直後・履歴の両方**。次は上記API commitを既存Renderの **Manual Deploy → Deploy a specific commit** で本人が開始し、華恋がlive/health/logを照合してから、6301の通常の新規入力→応答→履歴再表示を実機確認する。SQL/環境変数再保存・native再buildを今回修正の追加条件としない。10/07の未作成観測はGETだけでは生成されず、過去行backfillは追加していない。
+
+今回の稼働DB/env変更・deploy/build/mergeは0。GitHub修正をlive反映済みとはしない。追加情報の提出は現時点で不要。下の「調査完了・未修正」節は修正前の履歴として保持する。
+
 ## 2026-10-10 — 未表示原因：任意メモNULLとsource admissionの不整合（調査完了・未修正）
 
 最新weekly 20261010 §5.5のEmlis/分析実機先行方針に従い、Emlisの原入力保存→生成→保存→画面を調査した。詳細・根拠・次作業はAPI `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md` §33を参照。
