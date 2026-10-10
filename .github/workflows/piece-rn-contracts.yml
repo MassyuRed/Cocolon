@@ -17,6 +17,14 @@ name: Piece RN preview and owner contracts
       - tests/piece-v2-*.test.js
       - tests/fixtures/piece-b9-wrap-oracle.json
       - package.json
+      - package-lock.json
+      - ios/Podfile
+      - ios/Podfile.lock
+      - ios/tempCocolon/Info.plist
+      - patches/react-native-view-shot+5.1.1.patch
+      - patches/react-native-file-access+3.2.0.patch
+      - patches/@react-native-camera-roll+camera-roll+7.10.2.patch
+      - android/app/src/main/res/xml/share_download_paths.xml
       - android/app/src/main/java/com/anonymous/cocolonmvp/piece/**
       - android/app/src/main/java/com/anonymous/cocolonmvp/MainApplication.java
       - ios/tempCocolon/PieceTextMetrics.mm
@@ -47,7 +55,7 @@ jobs:
           git rev-parse HEAD
           node --version
           node -p "require('typescript').version"
-          node --test tests/piece-v2-contracts.test.js tests/piece-v2-state-models.test.js tests/piece-v2-preview-display.test.js tests/piece-v2-runtime.test.js tests/piece-v2-feature-disabled.test.js tests/piece-v2-saved-input-host.test.js tests/piece-v2-source-ref.test.js tests/piece-v2-input-screen.test.js tests/piece-v2-owner-history.test.js tests/piece-v2-renderer.test.js tests/piece-v2-measured-wrap.test.js
+          node --test tests/piece-v2-contracts.test.js tests/piece-v2-state-models.test.js tests/piece-v2-preview-display.test.js tests/piece-v2-runtime.test.js tests/piece-v2-feature-disabled.test.js tests/piece-v2-saved-input-host.test.js tests/piece-v2-source-ref.test.js tests/piece-v2-input-screen.test.js tests/piece-v2-owner-history.test.js tests/piece-v2-renderer.test.js tests/piece-v2-measured-wrap.test.js tests/piece-v2-export.test.js
 
   piece-android-source:
     if: github.repository == 'MassyuRed/Cocolon'
@@ -119,3 +127,42 @@ jobs:
           xcrun clang --version
           xcrun clang -fsyntax-only -x objective-c++ -std=c++20 -fobjc-arc -fblocks -fmodules -target arm64-apple-ios15.1-simulator -isysroot "$(xcrun --sdk iphonesimulator --show-sdk-path)" -I "$PIECE_COMPILE_DIR/include" -I "$PIECE_COMPILE_DIR/node_modules/react-native/ReactCommon/yoga" -Werror=objc-method-access -Werror=implicit-function-declaration ios/tempCocolon/PieceTextMetrics.mm
           plutil -lint ios/tempCocolon.xcodeproj/project.pbxproj
+
+  piece-export-pods:
+    if: github.repository == 'MassyuRed/Cocolon'
+    runs-on: macos-15
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Limit Pod resolution to native dependency changes
+        id: scope
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null || ! git diff --quiet "$BEFORE" HEAD -- package.json package-lock.json ios/Podfile ios/Podfile.lock patches .github/workflows/piece-rn-contracts.yml; then
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/setup-node@v6
+        if: steps.scope.outputs.changed == 'true'
+        with:
+          node-version: '24.19.0'
+      - name: Install locked packages and apply native patches
+        if: steps.scope.outputs.changed == 'true'
+        run: npm ci --no-audit --no-fund
+      - name: Resolve native Pods without building, signing or distribution
+        if: steps.scope.outputs.changed == 'true'
+        working-directory: ios
+        run: |
+          pod --version
+          pod install
+          plutil -lint tempCocolon/Info.plist
+      - uses: actions/upload-artifact@v4
+        if: steps.scope.outputs.changed == 'true' && success()
+        with:
+          name: piece-export-pod-lock
+          path: ios/Podfile.lock
+          retention-days: 7

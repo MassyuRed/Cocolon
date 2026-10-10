@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v47",
+  "schema_version": "cocolon.piece.workstream_manifest.v48",
   "generated_at": "2026-10-11 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v46",
-    "predecessor_blob": "7f169b87da70f04ebfafd7939e8ca51c9e7b94dd",
-    "predecessor_head": "163b9aff9d3ba8c0c4b5f13c9383361b90db4e77",
-    "carry_forward": "Four direct export dependency versions and native configuration/compatibility changes proposed from primary source review. No dependency installation or native acceptance. Existing save transport and native admission boundary retained."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v47",
+    "predecessor_blob": "e00c898099b5d8a1d1b0b901b98b8aceaeae3fc6",
+    "predecessor_head": "69039eab15a501ff724543a863bda431eea640f5",
+    "carry_forward": "Four pinned export dependencies, limited native patches and unmounted export prototype. Native admission, UI, shared-copy recovery, receipt and device acceptance remain pending."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "898da917bcd0b93c4263a553d56f2b003aa21037",
-    "raw_sha256": "7fa5358268aec4733302162687583e4bf2899425f752c01c21a6ab4dba194885",
-    "utf8_bytes": 84521
+    "git_blob_sha1": "2ab2b0703eca44ef8cd7adefde77de9d98cd39f9",
+    "raw_sha256": "f7fbe1a5c5251b3137891c4d56c339b335da0ca1131e0682935ebda745835203",
+    "utf8_bytes": 86230
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -163,7 +163,7 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "163b9aff9d3ba8c0c4b5f13c9383361b90db4e77",
+    "cocolon_pre_sync_head": "69039eab15a501ff724543a863bda431eea640f5",
     "mashos_api_head": "6b901a1df0037c047513e794624917a09b0f3ac4",
     "current_user_visible_piece_shape": "OLD_QNA_REGISTERED_IN_SOURCE__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
@@ -179,7 +179,7 @@
     "input_screen_source_connected": true,
     "live_auth_input_to_preview_to_device_verified": false,
     "database_evidence_owner": "live_db_apply_20261010",
-    "remaining_work_owner": "export_dependency_preflight_20261011",
+    "remaining_work_owner": "export_native_prototype_20261011",
     "product_acceptance": false,
     "piece_v2_default_application_registered": false,
     "piece_v2_quota_http_present": true,
@@ -211,7 +211,8 @@
     "piece_v2_rn_save_transport_present": true,
     "piece_v2_rn_save_action_connected": false,
     "piece_v2_export_dependency_preflight_present": true,
-    "piece_v2_export_dependencies_installed": false
+    "piece_v2_export_dependencies_installed": true,
+    "piece_v2_export_native_prototype_present": true
   },
   "next_group": {
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
@@ -222,7 +223,7 @@
     "current_entry_section": "48",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
     "weekly_review_section": "5.5",
-    "first_unfinished_work": "Approve the pinned four direct dependencies and listed native configuration/compatibility scope, then existing B13-C export preparation. Mainline native B9 device equivalence and renderer admission -> save fit -> existing save action remains pending. Export completion is not a new prerequisite for initial device inspection.",
+    "first_unfinished_work": "Native Pod resolution/compile and B9 device equivalence -> renderer admission -> save fit -> UI save/export integration. Shared-copy recovery and B13-B receipt pending; export completion is not a prerequisite for first device inspection.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 4,
@@ -247,7 +248,8 @@
     "repeat_quota_candidate_connection": false,
     "repeat_private_save_candidate_connection": false,
     "repeat_rn_save_transport": false,
-    "export_proposal_owner": "export_dependency_preflight_20261011"
+    "export_proposal_owner": "export_dependency_preflight_20261011",
+    "export_implementation_owner": "export_native_prototype_20261011"
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -301,9 +303,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "0fd55a51eaec8fc4aec913e528a177ebd3278a24",
-    "raw_sha256": "dcbde7c46015fb4fffcafa0b88e5ad6241c91f680b099dd4b629b1cd9d65c68b",
-    "utf8_bytes": 281769
+    "git_blob_sha1": "4003525af4adde790f02cee169057acb69a5b137",
+    "raw_sha256": "826ab59ed2ac3bb170f890acc857a1dc7234643fbc5840c25d00c88a788ad5f5",
+    "utf8_bytes": 288502
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -3462,5 +3464,41 @@
     "live_effect": 0,
     "automatic_progression": false,
     "remaining": "Native device renderer admission -> save fit -> controller save; B13-C/B13-B export, format mutation, Nexus public read/visibility, M5/live Auth and configuration."
+  },
+  "export_native_prototype_20261011": {
+    "current_entry_section": "49",
+    "current_map_section": "53",
+    "state": "SOURCE_IMPLEMENTED_UNMOUNTED_NATIVE_ACCEPTANCE_PENDING",
+    "base_head": "69039eab15a501ff724543a863bda431eea640f5",
+    "authorization_context": "User attached prior concrete four-dependency/native-change proposal and instructed continuation. Scope excludes production activation/distribution.",
+    "direct_dependencies": {
+      "react-native-view-shot": "5.1.1",
+      "react-native-share": "12.3.1",
+      "@react-native-camera-roll/camera-roll": "7.10.2",
+      "react-native-file-access": "3.2.0"
+    },
+    "new_transitive_dependencies": 5,
+    "existing_dependency_versions_changed": 0,
+    "native_patches": 3,
+    "clean_npm_ci": true,
+    "local_suites": 12,
+    "local_passed": 570,
+    "local_failed": 0,
+    "local_skipped": 0,
+    "ci_pending": true,
+    "pod_lock_resolved": false,
+    "native_compile_verified": false,
+    "native_device_acceptance": false,
+    "formal_fit_admission": false,
+    "product_ui_connected": false,
+    "can_save": false,
+    "can_export": false,
+    "share_copy_cleanup_complete": false,
+    "receipt_connected": false,
+    "live_database_write": 0,
+    "deploy": 0,
+    "activation": 0,
+    "main_merge": 0,
+    "automatic_progression": false
   }
 }

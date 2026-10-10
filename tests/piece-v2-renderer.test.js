@@ -26,7 +26,7 @@ function sample(format = 'short_essay', ratio = '4:5', theme = 'soft_paper', bra
   return p;
 }
 const display = p => ({ phase: 'received', preview: p, hashVerified: true });
-function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates, initialNow = NOW) {
+function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates, initialNow = NOW, exportCanvas = false) {
   let now = initialNow, serial = 0;
   const timers = new Map(), nativeCalls = [], candidateCalls = [];
   let card;
@@ -66,7 +66,7 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
       .replace(/^export default /gm, '').replace(/^export /gm, '');
     vm.runInContext(`{\n${source}\n${names.map(n => `globalThis.${n} = ${n};`).join('\n')}\n}`, context, { filename: file });
   }
-  card = new context.PieceVisualCard(saved ? { savedRecord: p } : { display: display(p) }); card.componentDidMount();
+  card = new context.PieceVisualCard(saved ? { savedRecord: p, exportCanvas } : { display: display(p) }); card.componentDidMount();
   const render = () => {
     const tree = card.render();
     for (const node of nodes(tree)) if (typeof node.props.ref === 'function') {
@@ -81,7 +81,7 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
   return { ...context, card, nodes, find, resize, render, timers, nativeCalls, candidateCalls, now: value => { now = value; },
     input: () => context.preparePieceNativeCard(card.props),
     drawing: () => card.drawingInput(context.preparePieceNativeCard(card.props)),
-    replace: packet => { card.props = saved ? { savedRecord: packet } : { display: display(packet) };
+    replace: packet => { card.props = saved ? { savedRecord: packet, exportCanvas } : { display: display(packet) };
       card.setState(context.PieceVisualCard.getDerivedStateFromProps(card.props, card.state)); },
   };
 }
@@ -571,4 +571,29 @@ test('saved final inspection cannot pass an elapsed deadline before the timer ca
   h.now(NOW+8001);release();await new Promise(resolve=>setImmediate(resolve));
   assert.equal(h.card.state.measurement,before);assert.notEqual(h.card.state.measurement.phase,'native_checked');
   [...h.timers.values()][0]();assert.equal(h.card.state.measurement.reason,'measurement_timeout');
+});
+
+
+test('export canvas measures at fixed size and exposes only a current saved inner target', async () => {
+  const h = await harness(savedSample(), undefined, true, undefined, NOW, true);
+  assert.equal(h.card.getCaptureTarget(), null);
+  await finish(h);
+  const canvas = h.find('piece-logical-canvas');
+  assert.equal(canvas.props.collapsable, false);
+  assert.equal(canvas.props.style.transform[0].scale, 1);
+  h.resize(180);
+  assert.equal(h.card.state.width, 1080);
+  const target = h.card.getCaptureTarget();
+  assert.deepEqual([target.width, target.height], [1080,1350]);
+  assert.equal(target.isCurrent(), true);
+  h.replace({...savedSample(), row_version: 3});
+  assert.equal(target.isCurrent(), false);
+  assert.equal(h.card.getCaptureTarget(), null);
+  await finish(h); h.render();
+  const next = h.card.getCaptureTarget();
+  h.card.componentWillUnmount();
+  assert.equal(next.isCurrent(), false);
+  assert.equal(h.card.getCaptureTarget(), null);
+  const preview = await harness(); await finish(preview);
+  assert.equal(preview.card.getCaptureTarget(), null);
 });

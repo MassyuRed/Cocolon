@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は§51を優先します。既存RNの保存通信を追加し、同じpreviewの版・3hash・keyによる保存結果の受取を実装しました。既定private、本人切替/中断後の応答拒否、正規replayの現在visibility保持を検査しています。保存操作とnative fitは未接続で、canSave/canExport=falseです。**
+**現在は§53を優先します。固定4依存とnative補修を導入し、既存canvasを使うPNG capture・写真保存・共有prototypeを追加しました。製品画面へ未接続で、canSave/canExport=false、正式fit/admission未付与です。native適合・実機・共有copy回収・receiptを残件として保持します。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1908,3 +1908,48 @@ API/native/SQL/依存定義/workflow変更0、Supabase操作0、env/deploy/activ
 **次の個別判断は上記4依存と列挙したnative設定／互換修正の導入**。PCE8 B13-Aはread-only、B13-CはB13-A承認後だけpackage/native依存を変更する指定であり、weekly§5.4でも新依存は承認範囲を個別に照合する。今回の一般的な続行指示を、この新しい具体構成の導入承認へ自動換算しない。承認後は同じ資料調査を繰り返さず、lock固定・必要互換修正・B13-Cの画像保存共有source準備へ進む。現段階はSOURCE_REVIEWED_PINNED_PROPOSAL、native適合済みでもB13完了でもない。
 
 §51.3の本線（実機native B9描画同等性/glyph/ink/性能・renderer admission→保存前fit→同previewの保存操作）と、形式変更、Nexus公開読取/切替、M5/実Auth/稼働配置は残る。画像共有の全完成をPieceの実機確認に対する追加前提へしない。導入承認に本番flag変更・API配置・TestFlight配布・DB適用を含めない。BLOCKER_NARROWED／STRUCTURE_MAP_DELTA_UPDATED（導入候補と実在ownerの区別）／automatic_progression=false。
+
+
+## 53. 2026-10-11 — B13-Cの固定依存と画像書出しprototype
+
+### 53.1 目的・範囲
+
+§52の具体的な4依存導入案を記した添付「前回作業内容(20261010-223724).txt」を参照する今回の「Pieceの残件作業を進めて」に沿って、提案済みの可逆な導入・source準備を実施した。導入案の再提示を繰り返さず進める指示として扱い、本番有効化・DB適用・配布は含めない。基準RN head `69039eab15a501ff724543a863bda431eea640f5`／API `6b901a1df0037c047513e794624917a09b0f3ac4`。旧§52は導入前の履歴。本節が現状owner。
+
+### 53.2 実在ownerと経路
+
+| 実在path | 今回の役割 |
+| --- | --- |
+| `package.json` / `package-lock.json` | view-shot5.1.1・share12.3.1・camera-roll7.10.2・file-access3.2.0をexact固定。取得integrityを確認。推移5件追加。既存package版・integrity・optional peerを保持。 |
+| `ios/Podfile` / `ios/tempCocolon/Info.plist` | RNFA未使用privacy API除外、写真への追加のみの用途説明。RN0.77.3・旧architecture・iOS15.1を保持。Pod lockは実CocoaPods解決後に記録し、手で生成しない。 |
+| `.github/workflows/ios-build.yml` | Node24.19.0とnpm ciへ変更。TestFlight workflowはdispatchしていない。 |
+| `.github/workflows/piece-rn-contracts.yml` | 既存JS検査へexport suiteを追加。依存／Podfile／patch差分時だけmacOSでnpm ci→pod install→lock artifactを取得。署名・app build・配布なし。 |
+| `patches/react-native-file-access+3.2.0.patch` | AGP8.9用namespace／buildConfig／library manifest補修。 |
+| `patches/react-native-view-shot+5.1.1.patch` | `cocolonPieceCache`限定でinternal CacheDir/piece-captureにrawを保存。専用rawのcanonical parentを検査してrelease。iOSはscale1／standard rangeで指定pixel寸法を保持。通常captureは保持。 |
+| `patches/@react-native-camera-roll+camera-roll+7.10.2.patch` | `cocolonAddOnly`＋local PNG＋photo＋album空だけ、performChanges成功後のPHAsset再読取を省略してsaved:trueを返す。既存saveAssetの挙動は保持。 |
+| `android/app/src/main/res/xml/share_download_paths.xml` | RNShareのFileProvider resourceをinternal cache `piece-export/`だけへ限定。raw用piece-captureは共有対象外。 |
+| `components/piece/PieceVisualCard.js` | 既存計測／row／catalogを再利用。export専用時だけ固定幅1080・scale1、内側canvas ref、保存済み同key/native_checkedのcapture targetと失効検査。通常previewとcanSave/canExport=falseは保持。 |
+| `components/piece/PieceExportCanvas.js` | 保存済みrecordを上記cardへ渡す薄いwrapper。別rendererを作らない。製品UIからのmountなし。 |
+| `features/piece/pieceExport.js` | 本人detail再取得→3hash／保存recipe／prototype v3検査→同keyの内側canvas capture→専用session copy→PNG prefix／寸法／SHA-256→写真またはshare。本文／URIをreceipt・logへ送らない。 |
+| `tests/piece-v2-export.test.js` / `tests/piece-v2-renderer.test.js` | 実JS sourceと代替native/OS境界で失効・二重操作・bytes変化・権限拒否・cleanup範囲・固定canvasを検査。 |
+
+copy名はPCE5の `cocolon-piece_<uuid-no-hyphen>_<recipe-hash-first12>_<ratio-token>.png`。random session下の同bytesを使い、native操作直前までruntime／本人／disposeを検査。非同期検証の前に操作を予約し二重save/shareを拒否。操作中disposeでは読取中copyを消さず、保存完了後またはhandoff前失敗に限定して回収する。rawはcapture後releaseし、異常終了残存は次JS processの初回capture準備時に専用名前だけ回収する。共用cache・写真libraryは削除しない。
+
+iOSは固定旧architectureの `NativeModules.RNCCameraRoll.saveToCameraRoll` を上記opt-inで呼ぶ。Android29以上は権限追加なし、24–28は保存直前だけ既存WRITE権限を要求。share callbackは送信成功や受信完了ではなく `share_result_returned` として返す。ローカルcandidate metadataは正式receiptではない。
+
+### 53.3 検証と限界
+
+local Node24.19.0／npm11.9.0で固定lockのクリーンnpm ci成功、新3patchと既存有効patchが再適用された。既存の古いslider/svg patchをpostinstallが除外する動作と既存deprecation warningは継承。plist/XML/JSONをparseし、既存依存の版変更・削除0を照合。JSはInputScreen込み12suite **570 PASS／FAIL0／SKIP0**（先行557＋追加13）。native/OS/filesystem/Auth/HTTPの代替を含み、実native受入れと合算しない。
+
+同環境read-only分担reviewで、export時Text onLayoutを止める誤配置、iOS写真保存後のPHAsset読取、share直前await復帰時の再確認不足を検出して修正し、回帰検査を追加。途中のexport検査1FAILは既存hash不一致の安全なエラーcodeに対するtest期待を補正したもの。検証不足を成功扱いする変更なし。補修後のnative source reviewに追加重大指摘なし。
+
+現在のネイティブ適合はsource reviewとpatch適用まで。Pod解決、app compile、sRGB/PNG実bytes、実字体／glyph／ink／性能、実写真の追加権限、共有先の読取継続は実行結果なし。GitHub検証結果は追記する。system_context prepareはshallow cloneの祖先判定で停止したため、canonical入口・全体設計／file map・最新weeklyと本Piece原本を直接読んで進めた。
+
+### 53.4 再開位置
+
+- Pod解決結果と実lockを反映し、4依存のautolink／native compileと端末上のcapture・写真保存・共有を確認する。
+- 共有copyはhandoff後（失敗・取消を含む）に削除せず保持する。外部読取終了を推測しない回収条件／次回起動時限定回収は未接続。任意TTLを新設しない。これを理由にtemp cleanup完成とは扱わない。
+- 正式renderer admission／保存前fit後に既存保存controller／UIとexport hostを接続する。現prototypeのnative_checked・hash確認だけで操作を有効化しない。B13-B body-free receiptはbackend未接続。
+- 本線のnative B9実機描画受入れ→保存前fit→同preview保存、および形式変更、Nexus公開読取／切替、M5／実Auth／稼働構成を残す。画像共有の全完成を初回実機確認への追加前提にしない。
+
+Supabase project／migration履歴読取で001〜004適用済み、005 quotaとvisual変更SQL未登録を再確認。API/SQL source変更・DB書込・env/deploy/activation・TestFlight配布・main merge0。weekly§5.5・12/18目標・automatic_progression=falseを維持。

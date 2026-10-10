@@ -10,7 +10,7 @@ import { planPieceMeasuredRows } from '../../features/piece/pieceMeasuredWrap';
 export default class PieceVisualCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { measurement: createPieceNativeMeasurement(preparePieceNativeCard(props)), width: 0 };
+    this.state = { measurement: createPieceNativeMeasurement(preparePieceNativeCard(props)), width: props.exportCanvas === true ? 1080 : 0 };
     this.active = true;
     this.textNodes = new Map();
     this.probeReady = new Map();
@@ -146,6 +146,18 @@ export default class PieceVisualCard extends React.Component {
     });
   };
 
+  // A local capture target, not renderer admission or permission to export.
+  // Only the dedicated saved-record canvas exposes it, after its final render.
+  getCaptureTarget = () => {
+    const input = preparePieceNativeCard(this.props), snapshot = this.state.measurement;
+    const node = this.canvasNode;
+    if (!this.active || this.props.exportCanvas !== true || !this.props.savedRecord ||
+        !input || input.key !== snapshot.key || snapshot.phase !== 'native_checked' || !node) return null;
+    return Object.freeze({ node, key: input.key, width: input.width, height: input.height,
+      isCurrent: () => this.active && this.props.exportCanvas === true && this.canvasNode === node &&
+        this.state.measurement === snapshot && preparePieceNativeCard(this.props)?.key === input.key });
+  };
+
   render() {
     const raw = preparePieceNativeCard(this.props), measurement = this.state.measurement;
     const input = raw && this.drawingInput(raw, measurement);
@@ -176,6 +188,7 @@ export default class PieceVisualCard extends React.Component {
     });
     return element(View, { testID: 'piece-visual-preview', style: { marginBottom: 20 },
       onLayout: event => {
+        if (this.props.exportCanvas === true) return;
         const width = event.nativeEvent?.layout?.width;
         if (this.active && Number.isFinite(width) && width > 0 && Math.min(width, 1080) !== this.state.width) {
           this.setState({ width: Math.min(width, 1080) });
@@ -185,7 +198,8 @@ export default class PieceVisualCard extends React.Component {
       element(View, { style: { width: this.state.width, height: measurement.phase === 'unavailable' ? 0 : input.height * scale },
         accessible: false, accessibilityElementsHidden: true, importantForAccessibility: 'no-hide-descendants' },
         measurement.phase !== 'unavailable' && this.state.width > 0 ? element(View, {
-          testID: 'piece-logical-canvas', pointerEvents: 'none',
+          testID: 'piece-logical-canvas', pointerEvents: 'none', collapsable: false,
+          ref: node => { this.canvasNode = node; },
           style: { position: 'absolute', width: input.width, height: input.height,
             left: (this.state.width - input.width) / 2, top: (input.height * scale - input.height) / 2,
             transform: [{ scale }], opacity: ready ? 1 : 0, backgroundColor: input.colors.canvas },

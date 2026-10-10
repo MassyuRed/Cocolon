@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§48／current map §52を優先する。画像保存・共有に必要な直接4依存の固定版・native設定・互換修正を、B13-Aの導入候補として整理しました。未導入・未ビルドで、個別承認待ちです。既存の保存通信は維持し、native描画受入れ・保存前fit・保存操作・画像共有・稼働採用は未完了です。**
+**現在は§49／current map §53を優先する。前回提示した4依存・native設定を導入し、既存canvasによるPNG capture・写真保存・共有の非公開prototypeを追加しました。画面への接続、native適合／実機描画、renderer admission・保存前fit・共有copy回収・receiptは未完了です。canSave/canExport=falseを維持します。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -983,3 +983,12 @@ source `ca4ce05cf1f62ed5fad3a0a72733e2956d8ae0a7` の製品1＋test1をDraft PR 
 規定filename・内部cacheへのコピー・同じPNGのhash・限定した共有provider・写真への追加権限と、Node更新およびRNFAのAndroid互換patchが必要。共有先選択を読取完了と誤認した即時削除、異常終了時のraw capture残存は実装で解消すべき未確認点として明記した。動作適合済み・cleanup完了とは扱わない。
 
 今回は入口/map/manifestの3資料のみ更新。製品source・依存追加・lock/native設定変更・新規検査・ビルド・Supabase操作・env/deploy/activation/main mergeは0。先行RN557件/API1,789件は今回再実行していない。B13-A/Cとweekly§5.4に従い、4依存＋記載したnative設定/互換修正の個別承認を求め、その後に既存B13-Cの画像保存共有実装へ進む。承認に稼働有効化・TestFlight配布は含めない。native B9実機描画/renderer admission→保存前fit→保存操作の本線を保持し、画像exportの全完成を実機確認の新しい前提にしない。BLOCKER_NARROWED／automatic_progression=false。
+
+
+## 49. 2026-10-11 — 画像capture・写真保存・共有のnative prototype
+
+詳細ownerはcurrent map §53。前回の具体導入案を記した添付txtを参照する今回の続行指示に沿い、固定4依存とnative設定／必要互換patchを導入した。保存済み本人detailの3hashとprototype v3を確認し、既存PieceVisualCardの固定1080幅の内側canvasからPNGを作り、寸法・SHA-256を確認して同じcopyを写真／共有へ渡すprototypeを追加した。製品画面へは未接続で、正式renderer fit/admissionを付与しない。
+
+iOS追加のみ保存で発生する保存後のPHAsset読取をPiece限定patchで除き、raw PNGは両OSとも専用cacheへ限定。共有先の読取終了をcallbackから推測しないため、共有copyの回収は未接続のまま残す。既存依存の版更新なし。クリーンnpm ciと3新patchの再適用成功。JS12suite **570 PASS／FAIL0／SKIP0**。native/OS/HTTPは代替を含み、端末写真保存成功を検証した結果ではない。独立読取reviewで文字計測停止・iOS追加のみ保存・非同期共有直前検査を補修した。
+
+GitHubの依存差分限定Pod解決を進め、結果と生成lockはmap §53へ記録する。実native compile・実機描画／PNG／権限／共有・共有copy寿命・receipt・UI接続は残件。本線はnative B9実機描画受入れ→renderer admission→保存前fit→保存操作。形式変更・Nexus・M5/実Auth/稼働構成も残す。Supabaseはproject/migration履歴の読取のみ。DB変更・flag有効化・API配置・TestFlight配布・main mergeなし。weekly§5.5の実機順序と12/18目標を維持する。
