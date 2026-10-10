@@ -3,7 +3,7 @@
  * Importing this module performs no network operation. No legacy fallback.
  *
  * Capabilities/quota are closed display snapshots, not save admission.
- * The native renderer and save/export remain separate.
+ * Save transport does not establish native fit or expose a save/export action.
  * No default entitlement, expiry, renderer, safety verdict or key is invented.
  */
 import { apiFetch, getAccessToken } from "../../lib/apiClient";
@@ -26,7 +26,7 @@ const STATUS = Object.freeze({
   PIECE_REQUEST_INVALID: 400, PIECE_AUTH_REQUIRED: 401,
   PIECE_SOURCE_NOT_FOUND: 404, PIECE_NOT_FOUND: 404,
   PIECE_PREVIEW_STALE: 409, PIECE_PREVIEW_EXPIRED: 409,
-  PIECE_CONFLICT: 409, PIECE_HASH_MISMATCH: 409,
+  PIECE_CONFLICT: 409, PIECE_HASH_MISMATCH: 409, PIECE_QUOTA_EXHAUSTED: 409,
   PIECE_SOURCE_NOT_ELIGIBLE: 422, PIECE_FORMAT_NOT_ELIGIBLE: 422,
   PIECE_VISUAL_SELECTION_NOT_ALLOWED: 422, PIECE_SAFETY_UNAVAILABLE: 422,
   PIECE_TEMPORARILY_UNAVAILABLE: 503, PIECE_FEATURE_DISABLED: 503,
@@ -41,6 +41,7 @@ const MESSAGES = Object.freeze({
   PIECE_PREVIEW_EXPIRED: 'プレビューの有効期限が切れています。',
   PIECE_CONFLICT: '入力またはプレビューの状態が変わっています。',
   PIECE_HASH_MISMATCH: 'プレビューの内容を確認できませんでした。',
+  PIECE_QUOTA_EXHAUSTED: '今月のPiece保存回数の上限に達しています。',
   PIECE_SOURCE_NOT_ELIGIBLE: 'この入力からは現在Pieceを作成できません。',
   PIECE_FORMAT_NOT_ELIGIBLE: 'この形式は現在選択できません。',
   PIECE_VISUAL_SELECTION_NOT_ALLOWED: 'この画像設定は現在選択できません。',
@@ -273,7 +274,7 @@ async function requestPieceData(value, options = {}, savedInputId = null, visual
     if (response.status !== 200) {
       const sourceCodes = ['PIECE_REQUEST_INVALID', 'PIECE_AUTH_REQUIRED', 'PIECE_SOURCE_NOT_FOUND',
         'PIECE_SOURCE_NOT_ELIGIBLE', 'PIECE_CONFLICT', 'PIECE_TEMPORARILY_UNAVAILABLE', 'PIECE_FEATURE_DISABLED'];
-      reject((!sourceRead || sourceCodes.includes(result?.code)) && exact(result, ['code']) && Object.prototype.hasOwnProperty.call(STATUS, result.code) &&
+      reject(result?.code !== 'PIECE_QUOTA_EXHAUSTED' && (!sourceRead || sourceCodes.includes(result?.code)) && exact(result, ['code']) && Object.prototype.hasOwnProperty.call(STATUS, result.code) &&
         STATUS[result.code] === response.status ? result.code : 'PIECE_TEMPORARILY_UNAVAILABLE');
     }
     if (sourceRead) {
@@ -310,6 +311,66 @@ export async function requestPiecePreview(value, options = {}) {
 /** No PATCH retry. Unknown outcomes are recovered with the original POST/key. */
 export async function requestPiecePreviewVisualChange(value, options = {}) {
   return requestPieceData(value, options, null, true);
+}
+
+/** Explicit save transport for an already reviewed/fitted candidate. The host
+ * owns effective flags, native admission, current display and the retry key.
+ * No body, replacement recipe, local fit assertion or entitlement is sent.
+ * An unknown outcome never starts another request or invents another key.
+ */
+export async function requestPieceSave(value, options = {}) {
+  let signal;
+  try {
+    const fields = ['preview_id', 'expected_preview_revision', 'piece_text_hash',
+      'content_payload_hash', 'visual_recipe_hash'];
+    if (!object(options) || !(exact(value, fields) || exact(value, [...fields, 'visibility_scope']))) {
+      reject('PIECE_REQUEST_INVALID');
+    }
+    const input = JSON.parse(JSON.stringify(value));
+    if (!(exact(input, fields) || exact(input, [...fields, 'visibility_scope'])) ||
+        !pieceUuid(input.preview_id) || !positive(input.expected_preview_revision) ||
+        !fields.slice(2).every(key => hash(input[key]))) reject('PIECE_REQUEST_INVALID');
+    if (input.visibility_scope === undefined || input.visibility_scope === null) input.visibility_scope = 'private';
+    if (!['private', 'public'].includes(input.visibility_scope)) reject('PIECE_REQUEST_INVALID');
+    const { expectedUserId, idempotencyKey } = options;
+    signal = options.signal;
+    checkAbort(signal);
+    if (!text(expectedUserId)) reject('PIECE_AUTH_REQUIRED');
+    if (typeof idempotencyKey !== 'string' ||
+        !/^[\x21-\x7e](?:[\x20-\x7e]*[\x21-\x7e])?$/.test(idempotencyKey)) reject('PIECE_REQUEST_INVALID');
+    const body = JSON.stringify(input);
+    await requireSession(expectedUserId);
+    checkAbort(signal);
+    const response = await apiFetch('/emotion/piece/save', {
+      method: 'POST', auth: true, expectedUserId, signal,
+      headers: { 'Idempotency-Key': idempotencyKey, 'Cache-Control': 'no-store' }, body,
+    });
+    checkAbort(signal);
+    const result = await response.json();
+    await requireSession(expectedUserId);
+    checkAbort(signal);
+    if (response.status !== 200) {
+      reject(exact(result, ['code']) && Object.prototype.hasOwnProperty.call(STATUS, result.code) &&
+        STATUS[result.code] === response.status ? result.code : 'PIECE_TEMPORARILY_UNAVAILABLE');
+    }
+    if (!exact(result, ['piece_id', 'consumption_id', 'lifecycle_status', 'visibility_scope',
+      'row_version', 'saved_at', 'idempotency_replayed']) || result.piece_id !== input.preview_id ||
+        !pieceUuid(result.consumption_id) || result.lifecycle_status !== 'saved' ||
+        !['private', 'public'].includes(result.visibility_scope) ||
+        (result.idempotency_replayed !== true && result.visibility_scope !== input.visibility_scope) ||
+        !positive(result.row_version) ||
+        typeof result.saved_at !== 'string' ||
+        !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?(?:Z|[+-]\d{2}:\d{2})$/.test(result.saved_at) ||
+        !Number.isFinite(Date.parse(result.saved_at)) || typeof result.idempotency_replayed !== 'boolean') {
+      reject('PIECE_TEMPORARILY_UNAVAILABLE');
+    }
+    return freeze(JSON.parse(JSON.stringify(result)));
+  } catch (error) {
+    checkAbort(signal);
+    if (error instanceof PieceApiError) throw error;
+    if (error?.name === 'AccountChangedError') reject('PIECE_AUTH_REQUIRED');
+    reject('PIECE_TEMPORARILY_UNAVAILABLE');
+  }
 }
 
 /** Explicit owner cancellation. An unknown outcome permits only the same

@@ -92,7 +92,7 @@ function load({ send, session } = {}) {
   // Evaluate the actual application module. Only ESM linkage is replaced;
   // the request/response/error/session implementation is not reimplemented.
   vm.runInContext(source.replace(dependency, '').replace(/^export /gm, '') +
-    '\n globalThis.testApi = { requestPiecePreview, requestPiecePreviewVisualChange, requestPiecePreviewCancellation, PieceApiError };', context, { filename: sourcePath });
+    '\n globalThis.testApi = { requestPiecePreview, requestPiecePreviewVisualChange, requestPiecePreviewCancellation, requestPieceSave, PieceApiError };', context, { filename: sourcePath });
   return { ...context.testApi, calls, sessions };
 }
 const options = extras => ({ expectedUserId: OWNER, idempotencyKey: KEY, ...extras });
@@ -112,9 +112,9 @@ test('actual module reuses shared authenticated transport, without legacy/runtim
   const source = fs.readFileSync(sourcePath, 'utf8');
   assert.match(source, /import \{ apiFetch, getAccessToken \} from "\.\.\/\.\.\/lib\/apiClient"/);
   assert.doesNotMatch(source, /emotionPieceApi|PIECE_WIRE|captureApiError|AsyncStorage|console\.|setTimeout|fetch\(/);
-  // Preview/source-ref, terminal cancellation and saved-owner operations use
+  // Preview/source-ref, explicit save, cancellation and saved-owner operations use
   // transport, each with its own closed contract and session recheck.
-  assert.equal((source.match(/await apiFetch\(/g) || []).length, 3);
+  assert.equal((source.match(/await apiFetch\(/g) || []).length, 4);
 });
 
 for (const format of ['short_essay', 'quote', 'declaration']) {
@@ -515,4 +515,183 @@ test('cancellation abort remains local and an unknown network outcome is not aut
   const failing = load({ send: async () => { throw new Error('private provider detail'); } });
   await assert.rejects(failing.requestPiecePreviewCancellation(cancelRequest(), visualOptions()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
   assert.equal(failing.calls.length, 1);
+});
+
+const saveRequest = () => {
+  const p = preview();
+  return { preview_id: p.preview_id, expected_preview_revision: p.preview_revision,
+    piece_text_hash: p.piece_text_hash, content_payload_hash: p.content_payload_hash,
+    visual_recipe_hash: p.visual_recipe_hash };
+};
+const saveReceipt = (idempotency_replayed = false) => ({
+  piece_id: preview().preview_id, consumption_id: '40000000-0000-4000-8000-000000000004',
+  lifecycle_status: 'saved', visibility_scope: 'private', row_version: 2,
+  saved_at: '2026-10-08T11:59:59.123456+00:00', idempotency_replayed,
+});
+
+for (const visibility of ['omitted', null, 'private']) {
+  test(`save ${visibility} sends private with exact preview identities and a closed receipt`, async () => {
+    const raw = saveReceipt();
+    const api = load({ send: async () => ({ status: 200, json: async () => raw }) });
+    const input = saveRequest();
+    if (visibility !== 'omitted') input.visibility_scope = visibility;
+    const result = await api.requestPieceSave(input, options());
+    assert.deepEqual(copy(result), saveReceipt()); assert.ok(Object.isFrozen(result));
+    const [url, sent] = api.calls[0];
+    assert.equal(url, '/emotion/piece/save'); assert.equal(sent.method, 'POST');
+    assert.equal(sent.auth, true); assert.equal(sent.expectedUserId, OWNER);
+    assert.equal(sent.headers['Idempotency-Key'], KEY);
+    assert.equal(sent.headers['Cache-Control'], 'no-store');
+    assert.deepEqual(JSON.parse(sent.body), { ...saveRequest(), visibility_scope: 'private' });
+    assert.deepEqual(api.sessions, [OWNER, OWNER]);
+    assert.equal(api.calls.length, 1);
+    raw.consumption_id = 'changed outside receipt';
+    assert.equal(result.consumption_id, saveReceipt().consumption_id);
+  });
+}
+
+test('save captures identity, visibility, owner and retry key before its first await', async () => {
+  let release;
+  const api = load({ session: (_owner, nth) => nth === 1 ? new Promise(resolve => { release = resolve; }) : 'synthetic',
+    send: async () => ({ status: 200, json: async () => saveReceipt() }) });
+  const input = saveRequest(), opts = options();
+  const pending = api.requestPieceSave(input, opts);
+  input.expected_preview_revision = 9; input.visual_recipe_hash = 'b'.repeat(64);
+  input.visibility_scope = 'public'; opts.expectedUserId = 'another-owner'; opts.idempotencyKey = 'another-key';
+  release('synthetic'); await pending;
+  assert.deepEqual(JSON.parse(api.calls[0][1].body), { ...saveRequest(), visibility_scope: 'private' });
+  assert.equal(api.calls[0][1].headers['Idempotency-Key'], KEY);
+  assert.deepEqual(api.sessions, [OWNER, OWNER]);
+});
+
+test('save rejects replacement content, client admission and malformed identities before any IO', async () => {
+  const values = [null, {}, [],
+    { ...saveRequest(), preview_id: 'piece:' + preview().preview_id },
+    { ...saveRequest(), preview_id: '../private' },
+    { ...saveRequest(), preview_id: '00000000-0000-0000-0000-000000000000' },
+    ...[0, -1, true, 1.5, '1', Number.MAX_SAFE_INTEGER + 1].map(expected_preview_revision => ({ ...saveRequest(), expected_preview_revision })),
+    ...['piece_text_hash', 'content_payload_hash', 'visual_recipe_hash'].flatMap(field =>
+      [null, 'sha256:' + 'a'.repeat(64), 'A'.repeat(64), 'short'].map(value => ({ ...saveRequest(), [field]: value }))),
+    ...['', 'unknown', false, 0].map(visibility_scope => ({ ...saveRequest(), visibility_scope })),
+    ...['piece_text', 'content_payload', 'visual_recipe', 'owner_user_id', 'subscription_tier',
+      'source_lineage', 'can_save', 'fit', 'replay_only', 'expires_at'].map(key => ({ ...saveRequest(), [key]: 'private' })),
+  ];
+  for (const value of values) {
+    const api = load();
+    await assert.rejects(api.requestPieceSave(value, options()), isCode('PIECE_REQUEST_INVALID'));
+    assert.equal(api.calls.length, 0); assert.equal(api.sessions.length, 0);
+  }
+  for (const idempotencyKey of [undefined, null, '', ' ', ' key', 'key ', 'key\nother', 'キー', 1]) {
+    const api = load();
+    await assert.rejects(api.requestPieceSave(saveRequest(), options({ idempotencyKey })), isCode('PIECE_REQUEST_INVALID'));
+    assert.equal(api.calls.length, 0); assert.equal(api.sessions.length, 0);
+  }
+});
+
+test('save requires current owner before HTTP and conceals a receipt after account changes', async () => {
+  for (const changedAt of [1, 2]) {
+    const api = load({ session: (_owner, nth) => nth === changedAt ? null : 'synthetic',
+      send: async () => ({ status: 200, json: async () => saveReceipt() }) });
+    await assert.rejects(api.requestPieceSave(saveRequest(), options()), isCode('PIECE_AUTH_REQUIRED'));
+    assert.equal(api.calls.length, changedAt === 1 ? 0 : 1);
+  }
+  const api = load({ send: async () => { throw Object.assign(new Error('private token'), { name: 'AccountChangedError' }); } });
+  await assert.rejects(api.requestPieceSave(saveRequest(), options()), isCode('PIECE_AUTH_REQUIRED'));
+  assert.equal(api.calls.length, 1);
+});
+
+test('save abort at each await boundary prevents stale receipt adoption without automatic retry', async () => {
+  for (const stage of ['initial', 'session', 'http', 'json', 'final_session']) {
+    const abort = new AbortController();
+    if (stage === 'initial') abort.abort();
+    const api = load({ session: (_owner, nth) => {
+      if (stage === 'session' && nth === 1 || stage === 'final_session' && nth === 2) abort.abort();
+      return 'synthetic';
+    }, send: async () => {
+      if (stage === 'http') abort.abort();
+      return { status: 200, json: async () => { if (stage === 'json') abort.abort(); return saveReceipt(); } };
+    } });
+    await assert.rejects(api.requestPieceSave(saveRequest(), options({ signal: abort.signal })), e => e.name === 'AbortError');
+    assert.equal(api.calls.length, ['initial', 'session'].includes(stage) ? 0 : 1);
+  }
+});
+
+test('unknown save outcome is explicitly retried with unchanged request and key, without local expiry or regeneration', async () => {
+  let sends = 0;
+  const api = load({ send: async () => {
+    if (++sends === 1) throw new Error('private transport detail');
+    return { status: 200, json: async () => saveReceipt(true) };
+  } });
+  const input = saveRequest();
+  await assert.rejects(api.requestPieceSave(input, options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+  assert.equal(api.calls.length, 1);
+  // The old saved_at is valid for committed replay. There is no fresh preview
+  // or expiry check in transport; this synthetic receipt is not native SQL proof.
+  const recovered = await api.requestPieceSave(input, options());
+  assert.equal(recovered.idempotency_replayed, true);
+  assert.equal(recovered.consumption_id, saveReceipt().consumption_id);
+  assert.equal(api.calls.length, 2);
+  assert.ok(api.calls.every(([url]) => url === '/emotion/piece/save'));
+  assert.equal(api.calls[0][1].body, api.calls[1][1].body);
+  assert.equal(api.calls[0][1].headers['Idempotency-Key'], api.calls[1][1].headers['Idempotency-Key']);
+});
+
+test('same-key save replay preserves current visibility and version without restoring the old request', async () => {
+  const current = { ...saveReceipt(true), visibility_scope: 'public', row_version: 3 };
+  const api = load({ send: async () => ({ status: 200, json: async () => current }) });
+  const result = await api.requestPieceSave(saveRequest(), options());
+  assert.deepEqual(copy(result), current);
+  assert.equal(result.consumption_id, saveReceipt().consumption_id);
+  assert.equal(api.calls.length, 1);
+  const [url, sent] = api.calls[0];
+  assert.equal(url, '/emotion/piece/save'); assert.equal(sent.method, 'POST');
+  assert.equal(sent.headers['Idempotency-Key'], KEY);
+  assert.deepEqual(JSON.parse(sent.body), { ...saveRequest(), visibility_scope: 'private' });
+});
+
+test('save rejects a different artifact, initial public substitution and malformed or body-bearing receipts', async () => {
+  const changes = [{ piece_id: OWNER }, { consumption_id: 'private' },
+    { consumption_id: '00000000-0000-0000-0000-000000000000' }, { lifecycle_status: 'preview_draft' },
+    { visibility_scope: 'public' }, { visibility_scope: 'unknown', idempotency_replayed: true },
+    { row_version: true }, { row_version: 0 },
+    { row_version: Number.MAX_SAFE_INTEGER + 1 }, { saved_at: '2026-13-01T00:00:00Z' },
+    { saved_at: '2026-10-08' }, { saved_at: null }, { idempotency_replayed: 1 },
+    { piece_text: 'private response' }, { owner_user_id: OWNER }];
+  for (const value of [null, {}, [], ...changes.map(change => ({ ...saveReceipt(), ...change }))]) {
+    const api = load({ send: async () => ({ status: 200, json: async () => value }) });
+    await assert.rejects(api.requestPieceSave(saveRequest(), options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+    assert.equal(api.calls.length, 1);
+  }
+});
+
+test('save returns only matching closed server errors and does not infer public permission', async () => {
+  for (const [status, code] of [[400, 'PIECE_REQUEST_INVALID'], [401, 'PIECE_AUTH_REQUIRED'],
+    [404, 'PIECE_NOT_FOUND'], [404, 'PIECE_SOURCE_NOT_FOUND'], [409, 'PIECE_PREVIEW_STALE'],
+    [409, 'PIECE_PREVIEW_EXPIRED'], [409, 'PIECE_HASH_MISMATCH'], [409, 'PIECE_CONFLICT'],
+    [409, 'PIECE_QUOTA_EXHAUSTED'], [422, 'PIECE_SOURCE_NOT_ELIGIBLE'], [422, 'PIECE_FORMAT_NOT_ELIGIBLE'],
+    [422, 'PIECE_VISUAL_SELECTION_NOT_ALLOWED'], [422, 'PIECE_SAFETY_UNAVAILABLE'],
+    [503, 'PIECE_FEATURE_DISABLED'], [503, 'PIECE_TEMPORARILY_UNAVAILABLE']]) {
+    const api = load({ send: async () => ({ status, json: async () => ({ code }) }) });
+    await assert.rejects(api.requestPieceSave({ ...saveRequest(), visibility_scope: 'public' }, options()), isCode(code));
+    assert.equal(api.calls.length, 1);
+    assert.equal(JSON.parse(api.calls[0][1].body).visibility_scope, 'public');
+  }
+  for (const [status, raw] of [[400, { code: 'PIECE_QUOTA_EXHAUSTED' }],
+    [409, { code: 'PIECE_QUOTA_EXHAUSTED', message: 'private provider detail' }],
+    [409, { code: 'private unknown' }], [500, { code: 'PIECE_TEMPORARILY_UNAVAILABLE' }]]) {
+    const api = load({ send: async () => ({ status, json: async () => raw }) });
+    await assert.rejects(api.requestPieceSave(saveRequest(), options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+    assert.equal(api.calls.length, 1);
+  }
+  const api = load({ send: async () => ({ status: 200, json: async () => { throw new Error('private malformed JSON'); } }) });
+  await assert.rejects(api.requestPieceSave(saveRequest(), options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
+});
+
+test('quota exhaustion is a save error and never a preview rejection or save admission', async () => {
+  const api = load({ send: async () => ({ status: 409, json: async () => ({ code: 'PIECE_QUOTA_EXHAUSTED' }) }) });
+  await assert.rejects(api.requestPieceSave(saveRequest(), options()), error => {
+    assert.equal(error.message, '今月のPiece保存回数の上限に達しています。');
+    return isCode('PIECE_QUOTA_EXHAUSTED')(error);
+  });
+  await assert.rejects(api.requestPiecePreview(request(), options()), isCode('PIECE_TEMPORARILY_UNAVAILABLE'));
 });
