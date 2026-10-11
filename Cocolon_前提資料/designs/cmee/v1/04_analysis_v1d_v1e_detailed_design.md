@@ -663,6 +663,17 @@ standalone witnessはexplicit scope・retention・memo単一span・本人・reac
 合成14入力の前後28結果（20生成全文）で8入力改善・6対照不変。実RN modelと合成RPC保存再読4入力を確認。ローカル5suite **1345 tests／5409 subtests PASS**。固定source/最終CIと次の否定不安等の残件は06/API handoff u215。既存compiler1・test2のみのsource変更、共有Plan/Emlis/realizer/API/DTO/DB/RN製品変更0、新規repo file0、STRUCTURE_MAP_DELTA_NONE。未配置、本人実機・稼働DB保存再読・正式商品受入れは未確認。
 
 
+## 3.46 u216 明示本人の過去の不安の否定（2026-10-12・未配置）
+
+u215で未対応だった「では／じゃ」×「なかった／なかったです／ありませんでした」の6形を、既存有限過去否定表で「不安だ」・文法negativeとして扱う。本人7表記と完全な独立過去節に限定し、表示形「不安ではなかった」、原文範囲/UTF8/hash、否定と帰属を保持する。共有Planは既に全6形の負情動とnegation証拠を持っているため変更しない。
+
+不安のstandalone witnessは肯定ならnegationなし・否定ならありの一致を必要とし、両方でpositive_change/current_changeを拒否する。u215の本人/explicit/retention/単一span/memo/feeling/時点とsource-hostの条件を維持する。複合pairには流用せず、省略/他者主体・日付/程度/現在・報告/引用/否認/不確実は今回広げない。
+
+「不安ではなかった」を安心・改善・行動の効果に読み替えず、「安心しなかった」とも別nodeで保持する。明示順序のみを結び、未知文/別field/別recordを橋渡ししない。明示訂正/撤回は旧claimと依存順序を除去し、通常補足を暗黙訂正にしない。期間比較では6形を同義、肯定不安・安心/安心不成立を別意味とする。
+
+合成18入力の前後36結果（24生成全文）で12入力の欠落が減り、6対照の本文/node/edgeは不変。実RN modelと実service＋合成RPC保存再読2入力、対象8 tests／167 subtestsを確認。固定source・最終回帰/CI・残件は06/API handoff u216。source変更は既存compiler1・test2のみ。STRUCTURE_MAP_DELTA_NONE、新規repo file/外部契約変更0。未配置、稼働DB保存再読・本人実機・正式商品受入れは未確認。
+
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
