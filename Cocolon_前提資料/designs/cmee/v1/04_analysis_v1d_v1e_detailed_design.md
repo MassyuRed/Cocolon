@@ -630,6 +630,17 @@ Analysis前後26全文と実RN model、実service＋合成RPC保存再読3ルー
 合成13入力の前後26結果のうち生成22全文をrootが読解し、実RN modelの本文/identity/順序/各要素数が一致。実service＋合成RPC保存再読3ルートとEmlis前後6全文を確認した。Emlisは既存Receptionの追加が対象1例にあり、商品品質合格ではない。最終回帰/CI・反映・残件は06/API handoff u212。新規repo file0、Analysis compiler/realizer/API/DTO/DB/RN製品変更0、STRUCTURE_MAP_DELTA_NONE。稼働DBでの生成・保存再読、本人実機、正式商品受入れは未確認。
 
 
+## 3.43 u213 仮名所有・省略主体の完全書字（2026-10-12・未配置）
+
+「わたしの考えを書いた。それから、私は落ち着きました。」等がUNAVAILABLEになる欠落を補修。既存 `_finite_proposition` の仮名所有fallbackを、SELFとUNSPECIFIEDの完全な肯定過去書字に限定して共用する。仮名所有3形、目的語必須、前後どちらか1個の場所/媒体、有限名詞と「への／との／での」の境界は維持。所有を行為者の根拠にせず、原綴り・source範囲・肯否・日付を保持する。一般名詞/他動詞/否定書字/wish/cognition/teへは拡張しない。共有報告判定も既存の漢字/仮名7所有prefixを共用する。
+
+既存unattributed_actionとsource-host検査を通し、報告の両field方向、引用/否認、未完主題、曖昧な日付や未解析の時点/疑問語を保持する。別recordの不明行為者は統合せず、原文内の順序を因果に変換しない。通常4例はUNAVAILABLE→2node/1edge、場面付きは1node/0edge→3node/2edge、未知文/別field/現在未完了は2node/0edge。報告/他者は両版UNAVAILABLE、明示SELF/漢字所有省略は不変。
+
+「ぼくの気持ちを書きました。それから、私は安心しなかった。」は感情だけ1nodeで、書字欠落は残る。漢字所有/所有なしの省略主体にもあった、共有Planが目的語内の気持ちをreaction/feelingと扱う別原因。次の因果ownerは `_FEELING_RE` からoperator/kind、clause signals、semantic frameへの経路であり、Analysisのframe保護検査を緩めて回避しない。
+
+合成13入力の前後26結果のうち14生成全文、実RN modelの本文/identity/順序/各要素数、実service＋合成RPC保存再読3ルート、Emlis前後6全文を確認。Emlisの汎用Reception/復唱は未解消。最終回帰/CI・反映は06/API handoff u213。新規repo file0、realizer/API/DTO/DB/RN製品変更0、STRUCTURE_MAP_DELTA_NONE。稼働DBでの生成・保存再読、本人実機、正式商品受入れは未確認。
+
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
