@@ -730,3 +730,90 @@ for (const kind of ['save', 'cancel']) {
     u.host.componentWillUnmount();
   });
 }
+
+async function savedNavigationFixture() {
+  const navigations = []; let canRead = true;
+  const u = previewUiHarness({ admitSave: true, send: async url => pieceHttp(url.endsWith('/save') ? uiSaveReceipt() : response()) });
+  u.host.props = { context: controllerInput({ saveEnabled: true }),
+    navigation: { getParent: () => ({ navigate: (...args) => navigations.push(args) }) } };
+  u.host.context = { runtime: {}, isFeatureEnabled: (name, fallback) => name === 'piece_v2_owner_read_enabled' ? canRead : fallback };
+  u.mount(); u.host.start(); await pieceTick(); await startSyntheticSave(u);
+  return { ...u, navigations, allowRead: value => { canRead = value; } };
+}
+test('saved confirmation opens the existing owner screen with only piece ID and expected owner, including after close', async () => {
+  const u = await savedNavigationFixture();
+  const first = uiButton(u, '保存したPieceを確認'); assert.ok(first);
+  first.props.onPress(); assert.equal(u.host.state.open, false);
+  assert.deepEqual(clone(u.navigations), [['Piece', { screen: 'PieceOwnerHistory', params: {
+    savedPiece: { pieceId: response().preview_id, expectedUserId: OWNER },
+  }, initial: false }]]);
+  assert.equal(u.calls.length, 2, 'navigation does not reread or save in the source host');
+  uiButton(u, '保存したPieceを確認').props.onPress(); assert.equal(u.navigations.length, 2);
+  assert.equal(u.host.controller.getView().phase, 'saved'); u.host.componentWillUnmount();
+});
+for (const boundary of ['owner', 'source', 'background', 'owner-read', 'unmount']) {
+  test(`old saved-open button cannot navigate after ${boundary}`, async () => {
+    const u = await savedNavigationFixture(), old = uiButton(u, '保存したPieceを確認');
+    if (boundary === 'owner') u.host.props = { ...u.host.props, context: controllerInput({ saveEnabled: true, expectedUserId: 'another-owner' }) };
+    if (boundary === 'source') {
+      const next = controllerInput({ saveEnabled: true, idempotencyKey: 'next-preview-key' });
+      u.host.props = { ...u.host.props, context: next };
+    }
+    if (boundary === 'background') u.background('inactive');
+    if (boundary === 'owner-read') u.allowRead('true');
+    if (boundary === 'unmount') u.host.componentWillUnmount();
+    old.props.onPress(); assert.equal(u.navigations.length, 0); assert.equal(u.calls.length, 2);
+    if (boundary !== 'unmount') u.host.componentWillUnmount();
+  });
+}
+test('saved-open rechecks identity if closing synchronously changes the source context', async () => {
+  const u = await savedNavigationFixture(), old = uiButton(u, '保存したPieceを確認');
+  u.host.controller.subscribe(() => {
+    u.host.props = { ...u.host.props, context: controllerInput({ saveEnabled: true, idempotencyKey: 'changed-during-close' }) };
+  });
+  old.props.onPress(); assert.equal(u.navigations.length, 0); u.host.componentWillUnmount();
+});
+test('saved navigation target reaches actual owner detail GET and displays the freshly fetched saved record', async () => {
+  const u = await savedNavigationFixture(); uiButton(u, '保存したPieceを確認').props.onPress();
+  const source = fs.readFileSync(path.join(__dirname, 'piece-v2-owner-history.test.js'), 'utf8').split('const detailInput =')[0];
+  const context = vm.createContext({ require, __dirname, AbortController, setImmediate });
+  vm.runInContext(source + '\nglobalThis.ownerHarness = harness;', context);
+  const saved = clone(response());
+  for (const key of ['preview_id', 'preview_revision', 'expires_at', 'eligible_formats', 'quota', 'plan_capabilities']) delete saved[key];
+  Object.assign(saved, { piece_id: response().preview_id, public_id: 'piece:' + response().preview_id,
+    lifecycle_status: 'saved', saved_at: '2026-10-08T10:00:00Z', row_version: 2,
+    export_contract_version: 'piece.export_contract.v1', render_interface_version: 'piece.render_interface.v1',
+    render_reproducibility_version: 'piece.render_reproducibility.v1' });
+  const dest = context.ownerHarness({ send: async () => pieceHttp(saved) });
+  const target = u.navigations[0][1].params.savedPiece;
+  const host = new dest.PieceOwnerHistoryHost({ owner: OWNER, flags: { piece_v2_owner_read_enabled: true },
+    enabled: true, savedPiece: target });
+  host.componentDidMount(); await pieceTick();
+  assert.equal(dest.calls.length, 1); assert.equal(dest.calls[0][0], '/emotion/piece/' + target.pieceId);
+  assert.equal(host.controller.getView().record?.piece_text, response().piece_text);
+  assert.equal(host.controller.getView().record?.piece_text_hash, response().piece_text_hash);
+  assert.equal(host.controller.getView().record?.visual_recipe_hash, response().visual_recipe_hash);
+  assert.equal(u.calls.length, 2); host.componentWillUnmount(); u.host.componentWillUnmount();
+});
+
+
+test('actual saved-input binding reaches saved navigation after separate source, preview and synthetic save actions', async () => {
+  const navigations = [], source = request().source_ref;
+  const u = previewUiHarness({ admitSave: true, send: async (url, init) => pieceHttp(
+    init.method === 'GET' ? source : url.endsWith('/save') ? uiSaveReceipt() : response()) });
+  u.host.props = { savedInput: { savedInputId: source.source_input_id, expectedUserId: OWNER,
+    idempotencyKey: 'synthetic-saved-input-navigation-key' },
+    navigation: { getParent: () => ({ navigate: (...args) => navigations.push(args) }) } };
+  u.host.context = { runtime: {}, isFeatureEnabled: name =>
+    ['piece_v2_preview_enabled', 'piece_v2_save_enabled', 'piece_v2_owner_read_enabled'].includes(name) };
+  u.mount(); assert.equal(u.calls.length, 0);
+  await u.host.resolveSavedInput(); assert.equal(u.calls.length, 1);
+  u.host.start(); await pieceTick(); await startSyntheticSave(u);
+  uiButton(u, '保存したPieceを確認').props.onPress();
+  assert.deepEqual(clone(navigations), [['Piece', { screen: 'PieceOwnerHistory', params: {
+    savedPiece: { pieceId: response().preview_id, expectedUserId: OWNER },
+  }, initial: false }]]);
+  assert.deepEqual(u.calls.map(([url]) => url), ['/emotion/piece/source-ref/' + source.source_input_id,
+    '/emotion/piece/preview', '/emotion/piece/save']);
+  assert.equal(u.host.controller.getView().phase, 'saved'); u.host.componentWillUnmount();
+});

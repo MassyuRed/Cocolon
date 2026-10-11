@@ -321,6 +321,29 @@ export default class InputPieceActionArea extends React.Component {
     void this.controller.cancelPreview(identity, displayToken);
   }
 
+  canOpenSavedPiece() {
+    try {
+      return this.context?.runtime != null &&
+        this.context?.isFeatureEnabled?.('piece_v2_owner_read_enabled', false) === true &&
+        typeof this.props.navigation?.getParent?.()?.navigate === 'function';
+    } catch { return false; }
+  }
+
+  openSavedPiece(receipt) {
+    if (!this.isCurrent() || !this.canOpenSavedPiece()) return;
+    const view = this.controller.getView();
+    if (view.phase !== 'saved' || !receipt || view.savedReceipt !== receipt) return;
+    const expectedUserId = this.savedMode
+      ? JSON.parse(this.boundSavedInputStamp)[1] : this.props.context.expectedUserId;
+    // Navigation carries no preview body, recipe, save key or cached artifact.
+    const target = Object.freeze({ pieceId: receipt.piece_id, expectedUserId });
+    this.close();
+    if (!this.isCurrent() || !this.canOpenSavedPiece() || this.controller.getView().savedReceipt !== receipt) return;
+    try { this.props.navigation.getParent().navigate('Piece', {
+      screen: 'PieceOwnerHistory', params: { savedPiece: target }, initial: false,
+    }); } catch { /* Saved state remains available for another explicit open. */ }
+  }
+
   close() {
     if (!this.mounted) return;
     if (this.sourceAttempt) this.clearSource();
@@ -332,7 +355,10 @@ export default class InputPieceActionArea extends React.Component {
     // A changed account/source/key/selection is concealed in this render,
     // not one effect later. There is no render-time mutation or HTTP call.
     if (!this.isCurrent()) return null;
-    const display = readPiecePreviewDisplay(this.controller.getView());
+    const view = this.controller.getView();
+    const display = readPiecePreviewDisplay(view);
+    const onOpenSaved = display.phase === 'saved' && this.canOpenSavedPiece()
+      ? () => this.openSavedPiece(view.savedReceipt) : null;
     if (this.savedMode && this.sourcePhase !== 'ready' && !['cancel', 'save'].includes(display.retryKind)) {
       const unavailable = this.sourcePhase === 'unavailable';
       const canRead = this.sourcePhase === 'idle' ||
@@ -357,7 +383,9 @@ export default class InputPieceActionArea extends React.Component {
         title: display.retryKind === 'save' ? '同じ保存要求で結果を確認' : '同じ候補の取消を再試行', onPress: this.retry,
         accessibilityLabel: display.retryKind === 'save' ? '同じ保存要求で結果を確認' : '同じ候補の取消を再試行',
       }) : null,
-      element(PiecePreviewModal, { visible: this.state.open, display, onClose: this.close,
+      !this.state.open && onOpenSaved ? element(Button, { title: '保存したPieceを確認',
+        accessibilityLabel: '保存したPieceを確認', onPress: onOpenSaved }) : null,
+      element(PiecePreviewModal, { visible: this.state.open, display, onClose: this.close, onOpenSaved,
         onRetry: this.retry, onVisualChange: this.changeVisual, onCancel: this.cancelPreview }),
     );
   }

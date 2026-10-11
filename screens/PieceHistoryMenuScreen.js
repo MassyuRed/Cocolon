@@ -66,7 +66,7 @@ export default function PieceHistoryMenuScreen({ navigation }) {
       {canReadOwnPieces ? <PieceMediumCard
         title="自分のPiece"
         description="保存したPieceの本文と公開範囲を確認します"
-        onPress={() => navigation?.navigate?.("PieceOwnerHistory")}
+        onPress={() => navigation?.navigate?.("PieceOwnerHistory", { savedPiece: null })}
         chevron="forward"
         accessibilityLabel="自分のPieceを開く"
       /> : null}

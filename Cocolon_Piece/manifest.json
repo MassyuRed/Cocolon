@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v52",
+  "schema_version": "cocolon.piece.workstream_manifest.v53",
   "generated_at": "2026-10-11 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v51",
-    "predecessor_blob": "f68cea709d03f2c4279b6290294ebf6b3249c3a1",
-    "predecessor_head": "a5381afeabd56ce5fb98a2df39d7558f18c1bf6e",
-    "carry_forward": "Save outcomes and same-request recovery are wired through the existing display/modal/host. Initial save action, formal renderer admission, owner-detail refresh and device acceptance remain pending."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v52",
+    "predecessor_blob": "d9cbe8861e614c1dd9bfa1fde0e988a8a5e82e8b",
+    "predecessor_head": "5aa8878aebdffdbc9a1cb0b74d94a7a5b2980134",
+    "carry_forward": "Saved confirmation now reaches the existing owner detail GET and verified saved-record display. Initial save action, formal renderer admission and device acceptance remain pending."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "5f216b7df070c6eecd74f83536f622f736e44635",
-    "raw_sha256": "fc495a4c259e3d8160a33d9c4a315a7afae5c9c6fbcb589193d208bb2f60d1f6",
-    "utf8_bytes": 94026
+    "git_blob_sha1": "c82df42a36843f278111e04e5572a7b6b15c7f79",
+    "raw_sha256": "cbb59ef1d6c564806ae1ae9e69588671f738eb239e11f5c0e317c26091f4c49c",
+    "utf8_bytes": 95894
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -85,7 +85,8 @@
     "pce9e_export_native_compile": "REMOTE_E4F4984__IOS_ANDROID_LIBRARY_COMPILE_PASS__JS572_PASS__DEVICE_ADMISSION_PENDING",
     "pce9e_export_share_completion": "REMOTE_1C6FBD3__IOS_NORMAL_COMPLETION_COPY_CLEANUP__CI577_PASS__DEVICE_PENDING",
     "pce9c_save_lifecycle": "CONTROLLER_IMPLEMENTED__CURRENT_DISPLAY_OWNER_SAVE_OUTCOME_UI_20261011__INITIAL_SAVE_ADMISSION_PENDING",
-    "pce9c_save_outcome_ui": "REMOTE_703C60B__SAVE_OUTCOME_UI_RECOVERY_CONNECTED__CI611_PASS__INITIAL_SAVE_ADMISSION_DEVICE_PENDING"
+    "pce9c_save_outcome_ui": "REMOTE_703C60B__SAVE_OUTCOME_UI_RECOVERY_CONNECTED__CI611_PASS__INITIAL_SAVE_ADMISSION_DEVICE_PENDING",
+    "pce9c_saved_owner_detail": "SOURCE_CONNECTED_LOCAL634_PASS__CI_PENDING__INITIAL_SAVE_ADMISSION_DEVICE_PENDING"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -167,7 +168,7 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "a5381afeabd56ce5fb98a2df39d7558f18c1bf6e",
+    "cocolon_pre_sync_head": "5aa8878aebdffdbc9a1cb0b74d94a7a5b2980134",
     "mashos_api_head": "6b901a1df0037c047513e794624917a09b0f3ac4",
     "current_user_visible_piece_shape": "OLD_QNA_REGISTERED_IN_SOURCE__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
@@ -183,7 +184,7 @@
     "input_screen_source_connected": true,
     "live_auth_input_to_preview_to_device_verified": false,
     "database_evidence_owner": "live_db_apply_20261010",
-    "remaining_work_owner": "save_outcome_ui_20261011",
+    "remaining_work_owner": "saved_owner_detail_20261011",
     "product_acceptance": false,
     "piece_v2_default_application_registered": false,
     "piece_v2_quota_http_present": true,
@@ -219,18 +220,19 @@
     "piece_v2_export_native_prototype_present": true,
     "piece_v2_headless_save_lifecycle_present": true,
     "piece_v2_save_outcome_display_connected": true,
-    "piece_v2_save_recovery_host_connected": true
+    "piece_v2_save_recovery_host_connected": true,
+    "piece_v2_saved_owner_detail_refresh_connected": true
   },
   "next_group": {
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "NATIVE_DEVICE_RENDERER_ADMISSION_THEN_SAVE_FIT_AND_BOUND_SAVE",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "SAVE_RESULT_UI_CONNECTED__INITIAL_SAVE_ADMISSION_DEVICE_PENDING",
-    "current_map_section": "57.3",
-    "current_entry_section": "53",
+    "state": "SAVED_OWNER_DETAIL_CONNECTED__INITIAL_SAVE_ADMISSION_DEVICE_PENDING",
+    "current_map_section": "58.3",
+    "current_entry_section": "54",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
     "weekly_review_section": "5.5",
-    "first_unfinished_work": "B9 device equivalence -> formal renderer admission -> save fit -> initial save action and saved owner detail refresh. Reuse the now-connected save outcome display and same-request recovery. PNG/photo/share device checks remain; export completion is not a prerequisite for first device inspection.",
+    "first_unfinished_work": "B9 device equivalence -> formal renderer admission -> save fit -> initial save action. Reuse the connected saved owner detail refresh, save outcome display and same-request recovery. PNG/photo/share device checks remain; export completion is not a prerequisite for first device inspection.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 4,
@@ -260,7 +262,9 @@
     "repeat_headless_save_lifecycle": false,
     "save_controller_owner": "save_lifecycle_20261011",
     "repeat_save_outcome_ui": false,
-    "save_outcome_ui_owner": "save_outcome_ui_20261011"
+    "save_outcome_ui_owner": "save_outcome_ui_20261011",
+    "repeat_saved_owner_detail": false,
+    "saved_owner_detail_owner": "saved_owner_detail_20261011"
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -314,9 +318,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "429b8710e5666ba528afb21896c22af654a8ca63",
-    "raw_sha256": "de5794a4c5864f92f6c1ee6eb9011105b625dec93e60c793cf14261c98f2c6fa",
-    "utf8_bytes": 312948
+    "git_blob_sha1": "c63afbfd39f986f6d1b8448fbd289bcab9d4ce52",
+    "raw_sha256": "2d371263488e3a250e9f6e611c051e4d7875771abb380ca24fbfdceff60ca006",
+    "utf8_bytes": 317490
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -489,28 +493,25 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "SAVE_OUTCOME_DISPLAY_AND_SAME_REQUEST_RECOVERY_CONNECTED__INITIAL_SAVE_ADMISSION_PENDING",
+    "classification": "SAVED_CONFIRMATION_TO_EXISTING_OWNER_DETAIL_CONNECTED__INITIAL_SAVE_ADMISSION_PENDING",
     "piece_documentation_paths": 3,
-    "rn_changed_paths": 4,
-    "rn_test_paths": 2,
+    "rn_changed_paths": 6,
+    "rn_test_paths": 3,
     "workflow_changed_paths": 0,
     "native_changed_paths": 0,
     "api_product_paths": 0,
     "sql_changed_paths": 0,
     "new_dependency": 0,
     "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
-    "local_js_passed": 611,
+    "local_js_passed": 634,
     "local_js_failed": 0,
     "local_js_skipped": 0,
-    "ci_pending": false,
+    "ci_pending": true,
     "live_database_apply": 0,
     "release_effect": 0,
     "native_app_builds": 0,
     "product_acceptance": false,
-    "automatic_progression": false,
-    "ci_js_passed": 611,
-    "ci_js_failed": 0,
-    "ci_js_skipped": 0
+    "automatic_progression": false
   },
   "b06_q3_context_fence": {
     "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
@@ -3808,7 +3809,78 @@
     "ci_js_skipped": 0,
     "ci_all_five_jobs_success": true,
     "native_library_compile_rerun": false,
-    "native_library_compile_skip_reason": "No dependency/platform/workflow changes; existing scope skipped both export library compile steps."
+    "native_library_compile_skip_reason": "No dependency/platform/workflow changes; existing scope skipped both export library compile steps.",
+    "historical_scope": "Outcome/recovery snapshot at entry53/map57; saved_owner_detail_refresh_connected=false describes that time only. Current owner-detail connection: saved_owner_detail_20261011."
+  },
+  "historical_current_sync_effects_before_saved_owner_detail_20261011": {
+    "classification": "SAVE_OUTCOME_DISPLAY_AND_SAME_REQUEST_RECOVERY_CONNECTED__INITIAL_SAVE_ADMISSION_PENDING",
+    "piece_documentation_paths": 3,
+    "rn_changed_paths": 4,
+    "rn_test_paths": 2,
+    "workflow_changed_paths": 0,
+    "native_changed_paths": 0,
+    "api_product_paths": 0,
+    "sql_changed_paths": 0,
+    "new_dependency": 0,
+    "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
+    "local_js_passed": 611,
+    "local_js_failed": 0,
+    "local_js_skipped": 0,
+    "ci_pending": false,
+    "live_database_apply": 0,
+    "release_effect": 0,
+    "native_app_builds": 0,
+    "product_acceptance": false,
+    "automatic_progression": false,
+    "ci_js_passed": 611,
+    "ci_js_failed": 0,
+    "ci_js_skipped": 0
+  },
+  "saved_owner_detail_20261011": {
+    "current_entry_section": "54",
+    "current_map_section": "58",
+    "base_head": "5aa8878aebdffdbc9a1cb0b74d94a7a5b2980134",
+    "state": "SOURCE_CONNECTED_LOCAL634_PASS__CI_PENDING__INITIAL_SAVE_ADMISSION_DEVICE_PENDING",
+    "changed_product_paths": [
+      "screens/InputScreen.js",
+      "screens/input/InputPieceActionArea.js",
+      "components/piece/PiecePreviewModal.js",
+      "features/piece/PieceOwnerHistoryController.js",
+      "screens/PieceOwnerHistoryScreen.js",
+      "screens/PieceHistoryMenuScreen.js"
+    ],
+    "changed_test_paths": [
+      "tests/piece-v2-preview-display.test.js",
+      "tests/piece-v2-owner-history.test.js",
+      "tests/piece-v2-input-screen.test.js"
+    ],
+    "saved_owner_detail_refresh_connected": true,
+    "route_fields": [
+      "pieceId",
+      "expectedUserId"
+    ],
+    "fresh_owner_auth_and_existing_three_hash_validation": true,
+    "old_delete_intent_preserved_during_read_attempt": true,
+    "initial_save_action_connected": false,
+    "formal_admission_supplier_connected": false,
+    "can_save": false,
+    "can_export": false,
+    "native_device_acceptance": false,
+    "product_acceptance": false,
+    "local_js_passed": 634,
+    "local_js_failed": 0,
+    "local_js_skipped": 0,
+    "added_tests": 23,
+    "ci_pending": true,
+    "review_environment": "CODEX_WORK_WITH_SAME_ENVIRONMENT_READ_ONLY_SUBAGENT_REVIEW_NOT_PRO_ULTRA_ACCEPTANCE",
+    "review_findings_fixed": 1,
+    "review_after_fix_no_additional_blockers": true,
+    "supabase_operations": 0,
+    "live_database_write": 0,
+    "activation": 0,
+    "app_build": 0,
+    "main_merge": 0,
+    "automatic_progression": false
   }
 }
 

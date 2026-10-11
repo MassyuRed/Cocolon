@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は§57を優先します。保存状態を既存display／modal／hostへ接続し、close・背景復帰後の同じ保存要求の結果確認に対応しました。初回保存操作・正式renderer admission・保存後本人detail取得は未接続。canSave/canExport=falseを維持し、正式fit・実機と画像保存共有の残件を継続します。**
+**現在は§58を優先します。保存後の確認操作から既存本人履歴へ進み、保存済みdetailの再取得・検証・表示を接続しました。初回保存操作と正式renderer admissionは未接続。canSave/canExport=falseを維持し、正式fit・実機と画像保存共有の残件を継続します。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -2102,3 +2102,34 @@ canSave/canExport=false。画像共有の全完成を初回実機確認へ追加
 source `703c60b05ffa5851ade5eb366c24c74a4c90a19a` の製品4＋test2＋資料3をDraft PR #30へ反映し、全9fileのremote全文・変更path集合・親headを照合した。[CI38100005424](https://github.com/MassyuRed/Cocolon/actions/runs/38100005424)は**全5job success**。JS job114353801014は **611 PASS／FAIL0／SKIP0**。local611件との合算はしない。既存Android bridge source compileとiOS source syntax／patch検査もsuccess。export Pods／Android4依存compile stepは依存差分がなくscopeどおりskipであり、今回の実native再buildではない。
 
 read-only reviewのhidden選択切替・save flagだけの通常preview破棄・context mode背景中のintent破棄の3指摘は補修済み。限定再確認で追加指摘なし。入口§53／manifest v52へ同期した。保存結果の表示と回収導線は接続したが、初回保存buttonと正式admission、保存後本人detail再取得、実機確認は未完了。
+
+
+## 58. 2026-10-11 — 保存確認から既存本人detailへの接続
+
+### 58.1 直接変更と既存owner
+
+基準head `5aa8878aebdffdbc9a1cb0b74d94a7a5b2980134`／入口§53／本map§57から継続。全体設計・全ファイル地図・作業ルール・恒久incident全文・最新weekly10/10 §5.5・PCE5/PCE6の保存／再取得契約を参照した。前回txtと既読資料の履歴を引き継ぎ、既存の保存receipt、Pieceタブ、owner GETと表示cardをつないだ。新しい画面・API・controllerは追加しない。
+
+| path | 変更内容 |
+| --- | --- |
+| `screens/InputScreen.js` | 既存navigationをInputPieceActionAreaへ渡す。保存入力の3字段は維持。 |
+| `screens/input/InputPieceActionArea.js` | saved状態の「保存したPieceを確認」。同一receipt、本人／入力binding、foregroundと厳密owner-read flagを確認し、close後も再確認してPieceタブの既存owner画面へ進む。 |
+| `components/piece/PiecePreviewModal.js` | saved時だけ同じ確認操作を表示。初回保存buttonは追加しない。 |
+| `features/piece/PieceOwnerHistoryController.js` | contextに束縛した保存IDだけは履歴一覧取得なしに既存detail GETで読める。通信中／無効時の読取は状態変更前に拒否し、削除intentを保持。 |
+| `screens/PieceOwnerHistoryScreen.js` | routeの閉じた2字段（pieceId/expectedUserId）と現在本人を照合。対象ごとのfresh GET→既存検証済みrecord→PieceVisualCard/PieceOwnerCard。本人・対象・背景／無効化で旧本文を破棄。復帰だけでは既取得対象を自動再読せず、明示読取を用意。 |
+| `screens/PieceHistoryMenuScreen.js` | 通常の本人履歴入口はsavedPiece=nullで保存直後の対象を消す。戻る操作も対象paramを消す。 |
+| `tests/piece-v2-preview-display.test.js`／`tests/piece-v2-owner-history.test.js`／`tests/piece-v2-input-screen.test.js` | 実sourceの保存確認→navigation→fresh owner GET→検証済み表示、closed route、stale操作、本人／対象変更・hash不一致／削除済み、通常履歴への復帰、同key削除回収を検査。 |
+
+画面間に本文、recipe、quota、sourceや新しいhash契約を追加しない。取得先は保存時artifactと既存の本人認証・ID／3hash検証を使い、現preview／save flagや再生成を読取条件にしない。保存元の初回saveは依然未接続で、検査だけが合成admissionを注入する。
+
+### 58.2 レビューと検証
+
+同環境read-only reviewで、保存対象IDを直接読めるようにした結果、古い読取callbackがDELETE通信中にdeletion intentを消し得る点を検出。openDetailの冒頭で無効／通信中を拒否し、DELETE応答保留→同ID読取→503→同key/body削除回収を検査した。限定再確認で追加の重大指摘なし。実savedInputモードから確認操作までの検査も追加した。
+
+local既存12suite **634 PASS／FAIL0／SKIP0**（先行611＋追加23）、Node24.19.0／TypeScript5.2.2。追加検査作成時にVMのAbortController供給不足とnavigation検査変数／期待URLを補修し、最終全件を実行した。製品判定は緩めていない。React/native/navigation/HTTP/Auth/admissionは代替で、実React Navigation runtime・実Auth・端末保存の受入れではない。環境区分CODEX_WORK_WITH_SAME_ENVIRONMENT_READ_ONLY_SUBAGENT_REVIEW_NOT_PRO_ULTRA_ACCEPTANCE、作業区分DIRECT_PRODUCT_OR_ACCEPTANCE_WORK。CIの確定結果は以下へ追記する。
+
+### 58.3 再開位置
+
+B9実端末描画同等性・glyph/ink/性能→正式renderer admission→保存前fit→初回保存buttonが残る。今回の保存後本人detail接続、保存結果表示／同key回収、既存controller/APIを再実装しない。PNG／写真権限・保存／共有の実機、Android・結果不明／異常終了時の共有copy回収、receipt、形式変更、Nexus公開読取／切替、M5／実Auth／稼働構成は継承する。
+
+canSave/canExport=false。画像共有の全完成を初回実機確認へ追加しない。今回はAPI／SQL／native／依存／workflow変更、Supabase操作・DB書込、env/deploy/activation、app build・署名／配布・main merge0。001〜004適用済み／追加2本未適用は先行確認を継承し、今回DB再検査とはしない。weekly§5.5・2026年12月18日目標・automatic_progression=falseを維持。STRUCTURE_MAP_DELTA_UPDATED（保存確認から既存本人detailへ）。

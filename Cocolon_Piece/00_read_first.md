@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§53／current map §57を優先します。保存中・結果不明・保存完了を既存の表示／modal／hostへ接続し、close・背景復帰後も同じ要求を確認する導線を追加しました。初回保存ボタンと正式renderer admissionは未接続で、canSave/canExport=falseを維持します。正式fit・実機・保存後本人detail取得が残ります。**
+**現在は§54／current map §58を優先します。保存後の「保存したPieceを確認」から既存の本人履歴画面へ進み、保存済みdetailを再取得して表示するコードを接続しました。初回保存ボタンと正式renderer admissionは未接続で、canSave/canExport=falseを維持します。正式fit・実機確認が残ります。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1036,3 +1036,14 @@ Supabaseはprojectとmigration履歴の読取のみ。001〜004適用済み・00
 正式admissionを供給する製品callerと初回保存ボタンは未接続。canSave/canExport=falseを保持し、今回の表示／復帰検査では合成admissionを注入した。実端末保存や描画受入れの成功ではない。次はB9実機描画・正式renderer admission→保存前fit→初回保存操作と保存後本人detail取得。画像共有の全完成を初回実機確認の前提にしない。検査とGitHub結果はmap §57へ記録する。
 
 §53最終確認：source `703c60b05ffa5851ade5eb366c24c74a4c90a19a` の製品4＋test2＋資料3をDraft PR #30へ反映し、全9fileのremote全文・変更path集合・親headを照合した。[CI38100005424](https://github.com/MassyuRed/Cocolon/actions/runs/38100005424)は全5job success、JSはlocal／CIそれぞれ **611 PASS／FAIL0／SKIP0**。既存Android／iOS bridge source検査も成功。依存差分がないためexport library compile stepは両OSともskip。同環境read-only reviewの3指摘を修正し、限定再確認に追加指摘なし。初回保存操作・正式admission・実機の完成とは区別する。
+
+
+## 54. 2026-10-11 — 保存後の本人詳細を再取得して表示
+
+詳細ownerはcurrent map §58。InputScreenの既存navigationをhostへ渡し、保存完了時の「保存したPieceを確認」からPieceタブの既存PieceOwnerHistoryへ接続した。画面間では保存receiptのPiece IDと期待する本人IDだけを渡す。保存前本文／recipeやsourceを持ち越さず、既存owner detail GETの本人照合・ID照合・3hash検証を通った保存済みrecordを表示する。
+
+保存元は同じreceiptと本人／入力binding、foreground、厳密owner-read flagを再確認する。取得先も本人・対象・focus／foreground・read flagを確認し、切替後の遅延応答を表示しない。取得失敗は同じGETを明示再試行し、preview生成／保存要求へ戻らない。通常の履歴入口は保存直後の対象を消す。
+
+local既存12suite **634 PASS／FAIL0／SKIP0**（先行611＋追加23）。InputScreenのnavigation受渡し、実savedInputモードから合成save後の遷移、保存元から実owner hostのfresh detail表示、遅延応答と本人／対象切替、削除中の古い読取操作から同key削除回収を検査した。React/navigation/native/HTTP/Auth/admissionは代替を含む。正式admission供給と初回保存buttonがないため、稼働アプリで保存可能になったとは扱わない。GitHub結果は本節とmap §58へ追記する。
+
+次はB9実機描画・正式renderer admission→保存前fit→初回保存操作。保存後本人detail接続を再実装しない。画像保存共有の全完成を初回実機確認の前提にしない。API/native/SQL/依存/workflow変更・Supabase操作・DB書込・env/deploy/activation/app build/署名/配布/main merge0。weekly10/10 §5.5・2026年12月18日目標・automatic_progression=falseを維持する。

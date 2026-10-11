@@ -13,7 +13,7 @@ const plans = { free: 'Free', plus: 'Plus', premium: 'Premium' };
 const branding = { required_small: '小さく表示', required_subtle: '控えめに表示', off: '表示なし' };
 const themes = { soft_paper: 'ソフトペーパー', quiet_night: '静かな夜' };
 
-export default function PiecePreviewModal({ visible = false, display, onClose, onRetry, onVisualChange, onCancel }) {
+export default function PiecePreviewModal({ visible = false, display, onClose, onRetry, onVisualChange, onCancel, onOpenSaved }) {
   if (visible !== true || !display || display.phase === 'hidden') return null;
   const received = display.phase === 'received' && display.hashVerified === true && display.preview;
   const preview = received ? display.preview : null;
@@ -86,6 +86,8 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
             'Pieceの保存・画像の書き出し・共有は、まだ利用できません。'),
       ),
       element(View, { style: { paddingTop: 12 } },
+        display.phase === 'saved' && typeof onOpenSaved === 'function' ? element(Button, {
+          title: '保存したPieceを確認', accessibilityLabel: '保存したPieceを確認', onPress: onOpenSaved }) : null,
         display.canRetry === true ? element(Button, {
           title: retryLabel, onPress: onRetry, accessibilityLabel: retryLabel }) : null,
         preview && typeof onCancel === 'function' ? element(Button, {

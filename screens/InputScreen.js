@@ -1667,7 +1667,7 @@ ${String(error?.message || error)}`
               {mountSavedPieceInput ? (
                 <View testID="piece-saved-input-entry" style={showSavedPieceInput ? styles.section : undefined}>
                   {showSavedPieceInput ? <Text style={styles.sectionLabel}>直前に保存した入力</Text> : null}
-                  <InputPieceActionArea savedInput={savedPieceInput.savedInput} />
+                  <InputPieceActionArea savedInput={savedPieceInput.savedInput} navigation={navigation} />
                 </View>
               ) : null}
 

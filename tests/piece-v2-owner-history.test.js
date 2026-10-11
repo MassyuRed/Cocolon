@@ -292,3 +292,128 @@ test('visibility and deletion hide saved canvas during mutation and never reuse 
     host.componentWillUnmount();
   }
 });
+
+
+const savedEntry = (pieceId = PID, expectedUserId = OWNER) => ({ pieceId, expectedUserId });
+const ownerHost = (h, savedPiece = savedEntry(), extra = {}) => new h.PieceOwnerHistoryHost({
+  owner: OWNER, enabled: true, flags: { piece_v2_owner_read_enabled: true }, savedPiece, ...extra,
+});
+const button = (host, title) => nodes(host.render()).find(n => n.type === 'Button' && n.props.title === title);
+
+test('saved entry directly fetches the exact owner detail without source, quota or history requests', async () => {
+  const h = harness(); const host = ownerHost(h); host.componentDidMount(); await tick();
+  assert.equal(h.calls.length, 1); assert.equal(h.calls[0][0], '/emotion/piece/' + PID);
+  assert.equal(h.calls[0][1].method, 'GET'); assert.equal(h.calls[0][1].body, undefined);
+  assert.equal(h.calls[0][1].headers['Idempotency-Key'], undefined);
+  assert.equal(h.calls[0][1].expectedUserId, OWNER); assert.equal(h.sessions.length, 2);
+  assert.equal(host.controller.getView().phase, 'detail');
+  assert.ok(texts(host.render()).includes(record().piece_text));
+  assert.ok(nodes(host.render()).some(n => n.type === 'PieceVisualCard' && n.props.savedRecord.piece_id === PID));
+  assert.equal(button(host, '保存したPieceを読み込む'), undefined);
+  host.componentDidUpdate(); await tick(); assert.equal(h.calls.length, 1);
+  host.componentWillUnmount();
+});
+test('malformed, body-bearing, foreign-owner or unreadable saved targets issue no request', async () => {
+  const variants = [savedEntry(PID, RID), { ...savedEntry(), piece_text: 'PRIVATE' },
+    savedEntry('piece:' + PID), savedEntry('bad'), savedEntry('00000000-0000-0000-0000-000000000000'), {}, []];
+  for (const target of variants) {
+    const h = harness(); const host = ownerHost(h, target); host.componentDidMount(); await tick();
+    assert.equal(h.calls.length, 0); assert.equal(host.controller.getView().phase, 'hidden');
+    assert.doesNotMatch(JSON.stringify(host.state), /PRIVATE|piece_text/); host.componentWillUnmount();
+  }
+  for (const read of [false, 'true', undefined]) {
+    const h = harness(); const host = ownerHost(h, savedEntry(), { flags: { piece_v2_owner_read_enabled: read } });
+    host.componentDidMount(); await tick(); assert.equal(h.calls.length, 0); host.componentWillUnmount();
+  }
+});
+test('saved detail transport loss retries only the same GET and validates the fresh body', async () => {
+  let reads = 0;
+  const h = harness({ send: () => ++reads === 1 ? Promise.reject(Error('PRIVATE')) : packet(record()) });
+  const host = ownerHost(h); host.componentDidMount(); await tick();
+  assert.equal(host.controller.getView().phase, 'unavailable');
+  assert.doesNotMatch(JSON.stringify(host.render()), /PRIVATE/);
+  await button(host, '保存したPieceを読み込む').props.onPress();
+  assert.equal(h.calls.length, 2); assert.equal(h.calls[0][0], h.calls[1][0]);
+  assert.ok(h.calls.every(([, init]) => init.method === 'GET' && init.body === undefined));
+  assert.ok(texts(host.render()).includes(record().piece_text)); host.componentWillUnmount();
+});
+test('saved detail with a hash mismatch or deleted record never displays the supplied body', async () => {
+  for (const reply of [packet(record({ piece_text: 'PRIVATE_CORRUPT' })), packet({ code: 'PIECE_NOT_FOUND' }, 404)]) {
+    const h = harness({ send: () => reply }); const host = ownerHost(h); host.componentDidMount(); await tick();
+    assert.equal(host.controller.getView().record, null); assert.equal(host.controller.getView().phase, 'unavailable');
+    assert.doesNotMatch(JSON.stringify(host.render()), /PRIVATE_CORRUPT/); assert.equal(h.calls.length, 1);
+    host.componentWillUnmount();
+  }
+});
+for (const boundary of ['target', 'owner', 'background', 'disable', 'unmount']) {
+  test(`saved-entry ${boundary} discards the prior delayed detail response`, async () => {
+    let resolve; const pending = new Promise(r => { resolve = r; });
+    const h = harness({ send: url => url.endsWith('/' + RID) ? packet(record({ piece_id: RID, public_id: 'piece:' + RID })) : pending });
+    const host = ownerHost(h); host.componentDidMount(); await tick();
+    if (boundary === 'target') host.props = { ...host.props, savedPiece: savedEntry(RID) };
+    if (boundary === 'owner') host.props = { ...host.props, owner: RID };
+    if (boundary === 'disable') host.props = { ...host.props, enabled: false };
+    if (['target', 'owner', 'disable'].includes(boundary)) {
+      assert.equal(host.current(), false); host.componentDidUpdate();
+    }
+    if (boundary === 'background') h.background('inactive');
+    if (boundary === 'unmount') host.componentWillUnmount();
+    resolve(packet(record())); await tick();
+    assert.notEqual(host.controller.getView().record?.piece_id, PID);
+    if (boundary === 'target') assert.equal(host.controller.getView().record?.piece_id, RID);
+    if (boundary === 'background') {
+      h.background('active'); await tick(); assert.equal(h.calls.length, 1);
+      assert.ok(button(host, '保存したPieceを読み込む')); assert.equal(host.controller.getView().record, null);
+    }
+    if (boundary !== 'unmount') host.componentWillUnmount();
+  });
+}
+test('stale saved-entry read button cannot fetch an earlier target after route change', async () => {
+  const h = harness({ send: () => Promise.reject(Error('lost read')) }); const host = ownerHost(h);
+  host.componentDidMount(); await tick();
+  const stale = button(host, '保存したPieceを読み込む');
+  host.props = { ...host.props, savedPiece: savedEntry(RID) }; host.componentDidUpdate(); await tick();
+  assert.equal(h.calls.length, 2); await stale.props.onPress(); assert.equal(h.calls.length, 2);
+  await button(host, '保存したPieceを読み込む').props.onPress();
+  assert.equal(h.calls.length, 3); assert.ok(h.calls[2][0].endsWith('/' + RID)); host.componentWillUnmount();
+});
+test('ordinary history clears the saved-entry target and returning clears its navigation params', async () => {
+  const params = [], backs = [];
+  const h = harness({ send: ownerSend }); const host = ownerHost(h, savedEntry(), {
+    navigation: { setParams: v => params.push(v), goBack: () => backs.push(true) },
+  });
+  host.componentDidMount(); await tick();
+  host.props = { ...host.props, savedPiece: null }; host.componentDidUpdate(); await tick();
+  assert.equal(h.calls.length, 1); assert.equal(host.controller.getView().record, null);
+  await button(host, '保存済みPieceを読み込む').props.onPress();
+  assert.equal(h.calls.length, 2); assert.ok(h.calls[1][0].includes('/history?'));
+  button(host, '戻る').props.onPress(); assert.deepEqual(copy(params), [{ savedPiece: null }]);
+  assert.equal(backs.length, 1); host.componentWillUnmount();
+});
+test('direct saved-entry controller target does not admit a different history-unseen ID', async () => {
+  const h = harness(); h.controller.setContext({ enabled: true, expectedUserId: OWNER, flags, savedPieceId: PID });
+  await h.controller.openDetail(RID); assert.equal(h.calls.length, 0);
+  await h.controller.openDetail(PID); assert.equal(h.calls.length, 1);
+  assert.equal(h.controller.getView().record.piece_id, PID);
+});
+
+
+test('stale saved-detail read cannot erase an in-flight deletion recovery key', async () => {
+  let resolve, deletes = 0;
+  const pending = new Promise(r => { resolve = r; });
+  const h = harness({ send: (url, init) => {
+    if (init.method !== 'DELETE') return packet(record());
+    return ++deletes === 1 ? pending : packet({ piece_id: PID, receipt_id: RID,
+      outcome: 'succeeded', idempotency_replayed: true });
+  } });
+  h.controller.setContext({ enabled: true, expectedUserId: OWNER, flags, savedPieceId: PID });
+  await h.controller.openDetail(PID);
+  const deleting = h.controller.deleteConfirmed(h.controller.getView().record); await tick();
+  await h.controller.openDetail(PID); assert.equal(h.calls.length, 2);
+  resolve(packet({ code: 'PIECE_TEMPORARILY_UNAVAILABLE' }, 503)); await deleting;
+  assert.equal(h.controller.getView().canRetryDelete, true);
+  await h.controller.retryDelete(); assert.equal(h.calls.length, 3);
+  assert.equal(h.calls[1][1].body, h.calls[2][1].body);
+  assert.equal(h.calls[1][1].headers['Idempotency-Key'], h.calls[2][1].headers['Idempotency-Key']);
+  assert.match(h.controller.getView().message, /削除しました/);
+});

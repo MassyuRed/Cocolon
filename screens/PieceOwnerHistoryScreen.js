@@ -18,13 +18,28 @@ export class PieceOwnerHistoryHost extends React.Component {
     super(props);
     this.state = { revision: 0 };
     this.mounted = false; this.foreground = false; this.controller = null; this.binding = null;
+    this.requestedSavedTarget = null;
+  }
+  savedTarget() {
+    const value = this.props.savedPiece;
+    if (!value || typeof value !== 'object' || Array.isArray(value) ||
+        Object.keys(value).sort().join() !== 'expectedUserId,pieceId' ||
+        typeof value.pieceId !== 'string' ||
+        !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(value.pieceId) ||
+        value.pieceId === '00000000-0000-0000-0000-000000000000' ||
+        typeof value.expectedUserId !== 'string' || !value.expectedUserId.trim()) return null;
+    return { pieceId: value.pieceId, expectedUserId: value.expectedUserId };
+  }
+  targetKey() {
+    return this.props.savedPiece == null ? null : JSON.stringify(this.savedTarget() || 'invalid');
   }
   stamp() {
-    return JSON.stringify([this.props.owner, this.props.enabled, this.props.flags]);
+    return JSON.stringify([this.props.owner, this.props.enabled, this.props.flags, this.targetKey()]);
   }
   current() {
     return this.mounted && this.foreground && this.props.enabled === true &&
-      !!this.props.owner && this.binding === this.stamp();
+      !!this.props.owner && this.binding === this.stamp() &&
+      (this.props.savedPiece == null || this.savedTarget()?.expectedUserId === this.props.owner);
   }
   componentDidMount() {
     this.mounted = true; this.foreground = AppState.currentState === 'active';
@@ -48,9 +63,25 @@ export class PieceOwnerHistoryHost extends React.Component {
     const next = this.stamp();
     if (next === this.binding) return;
     this.binding = next;
-    this.controller.setContext({ enabled: this.foreground && this.props.enabled,
-      expectedUserId: this.props.owner, flags: this.props.flags });
+    const target = this.savedTarget(), targetKey = this.targetKey();
+    if (targetKey === null) this.requestedSavedTarget = null;
+    // A target-only route change must also hide/abort the previous record.
+    this.controller.close();
+    this.controller.setContext({ enabled: this.current(), expectedUserId: this.props.owner,
+      flags: this.props.flags, savedPieceId: target?.pieceId });
+    // The navigation tap requests this read once. Background/flag refresh drops
+    // the body; coming back offers an explicit same-ID read, not an auto retry.
+    if (target && this.current() && this.controller.getView().phase !== 'hidden' &&
+        this.requestedSavedTarget !== targetKey) {
+      this.requestedSavedTarget = targetKey;
+      void this.controller.openDetail(target.pieceId);
+    }
     this.setState(s => ({ revision: s.revision + 1 }));
+  }
+  openSavedDetail(targetKey, pieceId) {
+    if (this.current() && targetKey === this.targetKey() && pieceId === this.savedTarget()?.pieceId) {
+      return this.act('openDetail', pieceId);
+    }
   }
   act(action, ...args) { if (this.current()) return this.controller[action](...args); }
   confirmVisibility(record) {
@@ -71,6 +102,7 @@ export class PieceOwnerHistoryHost extends React.Component {
     const view = this.current() ? this.controller.getView() : null;
     const available = view && view.phase !== 'hidden';
     const record = available ? view.record : null;
+    const target = this.savedTarget(), targetKey = this.targetKey();
     return h(SafeAreaView, { style: { flex: 1, backgroundColor: '#FFFFFF' } },
       h(View, { style: { flex: 1, padding: 20 } },
         h(Text, { accessibilityRole: 'header', style: { color: '#202020', fontSize: 22, marginBottom: 12 } }, '自分のPiece'),
@@ -86,23 +118,27 @@ export class PieceOwnerHistoryHost extends React.Component {
             ? h(Button, { title: record.visibility_scope === 'public' ? '非公開にする' : '公開する', onPress: () => this.confirmVisibility(record) }) : null,
           record && view.permissions.delete ? h(Button, { title: 'このPieceを削除', onPress: () => this.confirmDelete(record) }) : null,
           available && view.canRetryDelete ? h(Button, { title: '同じ削除要求で結果を確認', onPress: () => this.act('retryDelete') }) : null,
-          available && view.phase !== 'loading' ? h(Button, { title: record ? '履歴に戻る' : '保存済みPieceを読み込む', onPress: () => this.act('loadHistory') }) : null,
+          available && target && (view.phase === 'idle' ||
+            view.phase === 'unavailable' && view.code === 'PIECE_TEMPORARILY_UNAVAILABLE') ? h(Button, {
+            title: '保存したPieceを読み込む', onPress: () => this.openSavedDetail(targetKey, target.pieceId) }) : null,
+          available && view.phase !== 'loading' ? h(Button, { title: record ? '履歴に戻る' : target ? '履歴を読み込む' : '保存済みPieceを読み込む', onPress: () => this.act('loadHistory') }) : null,
           available && view.phase === 'history' && view.nextCursor ? h(Button, { title: '続きを読み込む', onPress: () => this.act('loadMore') }) : null,
           h(Text, { style: { color: '#494949', fontSize: 14, lineHeight: 22, marginTop: 16 } }, '保存済み本文を確認できます。詳細では、対応する画像レイアウトも確認できます。画像の保存・共有は、まだ利用できません。'),
         ),
-        h(Button, { title: '戻る', onPress: () => { this.controller?.close(); this.props.navigation?.goBack?.(); } }),
+        h(Button, { title: '戻る', onPress: () => { this.controller?.close();
+          this.props.navigation?.setParams?.({ savedPiece: null }); this.props.navigation?.goBack?.(); } }),
       ),
     );
   }
 }
 
-export default function PieceOwnerHistoryScreen({ navigation }) {
+export default function PieceOwnerHistoryScreen({ navigation, route }) {
   const { session } = useAuth();
   const runtime = useAppRuntime();
   const { isTutorialMode } = useTutorial();
   const focused = useIsFocused();
   const flags = Object.fromEntries(flagNames.map(name => [name, runtime.isFeatureEnabled(name, false) === true]));
-  return h(PieceOwnerHistoryHost, { navigation, owner: session?.user?.id || '', flags,
+  return h(PieceOwnerHistoryHost, { navigation, savedPiece: route?.params?.savedPiece, owner: session?.user?.id || '', flags,
     enabled: focused && !isTutorialMode && flags.piece_v2_owner_read_enabled,
     refreshRuntime: runtime.refreshAppRuntime });
 }

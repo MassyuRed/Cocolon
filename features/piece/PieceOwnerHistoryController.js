@@ -16,12 +16,14 @@ export function createPieceOwnerHistoryController(configuration = {}) {
   }
   function setContext(next) {
     const snapshot = { enabled: next?.enabled === true && typeof next?.expectedUserId === 'string' && !!next.expectedUserId,
-      expectedUserId: next?.expectedUserId, flags: pieceOwnerPermissions(next?.flags) };
+      expectedUserId: next?.expectedUserId, savedPieceId: typeof next?.savedPieceId === 'string' ? next.savedPieceId : null,
+      flags: pieceOwnerPermissions(next?.flags) };
     // Compare effective permissions, not mutable caller-owned objects.
     const stamp = JSON.stringify(snapshot);
     if (context?.stamp === stamp) return;
     clear(); blocked = false;
     context = { stamp, enabled: snapshot.enabled, expectedUserId: snapshot.expectedUserId,
+      savedPieceId: snapshot.savedPieceId,
       flags: { piece_v2_owner_read_enabled: snapshot.flags.read,
         piece_v2_visibility_toggle_enabled: snapshot.flags.visibility,
         piece_v2_public_write_enabled: snapshot.flags.publish, piece_v2_delete_enabled: snapshot.flags.delete } };
@@ -77,7 +79,7 @@ export function createPieceOwnerHistoryController(configuration = {}) {
         ? '削除の結果を確認できませんでした。同じ削除要求で結果を確認できます。'
         : action === 'visibility'
           ? '公開範囲の変更結果を確認できませんでした。履歴を読み直して確認してください。'
-          : 'Pieceを読み込めませんでした。履歴をもう一度読み込んでください。';
+          : 'Pieceを読み込めませんでした。もう一度読み込んでください。';
       if (code !== 'PIECE_TEMPORARILY_UNAVAILABLE') deletion = null;
       if (code === 'PIECE_CONFLICT' && (action === 'visibility' || action === 'delete')) {
         active = null;
@@ -101,7 +103,10 @@ export function createPieceOwnerHistoryController(configuration = {}) {
     if (state.phase === 'history' && state.nextCursor) return run('history', { cursor: state.nextCursor });
   }
   function openDetail(id) {
-    if (!state.items.some(item => item.piece_id === id)) return;
+    if (!enabled() || active) return;
+    // A saved-entry target is independently owner-authenticated by detail GET;
+    // it does not require fetching every history page to locate the new record.
+    if (id !== context?.savedPieceId && !state.items.some(item => item.piece_id === id)) return;
     deletion = null; return run('detail', { piece_id: id });
   }
   function setVisibility(scope) {

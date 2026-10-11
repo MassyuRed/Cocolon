@@ -191,7 +191,7 @@ function harness(options = {}) {
   };
   render();
   return { control, u, ref: f.ref, submits, notices, logs, threadIds, render, find, fill, finishObservation,
-    slot: () => find(Host), entry: () => nodes(tree).find(n => n.props.testID === 'piece-saved-input-entry'),
+    navigation, slot: () => find(Host), entry: () => nodes(tree).find(n => n.props.testID === 'piece-saved-input-entry'),
     submit: () => find('InputActionArea').props.handleOk(),
     entropyCalls: () => entropyCalls, writes: () => writes,
     blur: () => { for (const fn of listeners.get('blur') || []) fn(); render(); },
@@ -409,4 +409,12 @@ test('screen-fed preview failure retries exactly the original request and key', 
   assert.equal(h.u.calls[1][1].body, h.u.calls[2][1].body);
   assert.equal(h.u.calls[1][1].headers['Idempotency-Key'], h.u.calls[2][1].headers['Idempotency-Key']);
   assert.equal(h.entropyCalls(), 1); assert.equal(h.u.body().children.join(''), h.u.expected.piece_text); h.dispose();
+});
+
+
+test('InputScreen supplies its existing navigator to the saved Piece host without widening saved-input data', async () => {
+  const h = await saved();
+  assert.equal(h.slot().props.navigation, h.navigation);
+  assert.deepEqual(Object.keys(h.slot().props.savedInput).sort(), ['expectedUserId', 'idempotencyKey', 'savedInputId']);
+  assert.equal(h.u.calls.length, 0); h.dispose();
 });
