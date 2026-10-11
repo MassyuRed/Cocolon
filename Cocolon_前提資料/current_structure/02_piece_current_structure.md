@@ -2197,3 +2197,9 @@ TutorialContextのseedは既存ローカル処理。固定sample・step7の操�
 通常入力側の旧通信衝突はsourceで除去した。旧tutorialのQ&A sample、Nexus等の旧reader、既定APIとM5全面は残る。この候補版を配布してもV2構成／flagが供給されなければ通常Piece入口は現れず、旧APIへ代替しない。稼働API構成・必要migration・対象アプリ版をそろえた実Auth／本人入力の利用確認は未実施。現行の非稼働準備を配置・配布の許可へ読み替えない。
 
 本線はB9実端末描画同等性・glyph/ink/性能→正式renderer admission→保存前fit→初回保存。保存結果表示／本人detail／写真保存結果保持を再実装しない。形式変更、画像保存／共有の実機、Nexus公開読取／切替、M5残差を継承。共有全完成を初回実機確認の前提に追加しない。今回API／SQL／native／依存／workflow／Supabase操作・DB書込・env/deploy/activation・app build・署名／配布・main merge0。weekly§5.5・12/18目標・automatic_progression=false。STRUCTURE_MAP_DELTA_UPDATED（通常InputScreenの呼出しowner）。
+
+### 60.4 GitHub／CI確認と同期
+
+source `e9045aaa7be8b74b37e484c64661e19ba1ea2bcf` の製品2＋test2＋資料3をDraft PR #30へ反映し、全7fileのremote全文・変更path集合・親headを照合した。[CI38103585515](https://github.com/MassyuRed/Cocolon/actions/runs/38103585515)は**全5job success**。JS job114364337316は **654 PASS／FAIL0／SKIP0**、Node24.21.0／TypeScript5.2.2。local654件との合算はせず、別のscreen/IAP/theme77件はlocal結果だけ。Android bridge source compileとiOS source syntax／patch検査もsuccess。export Pods／Android依存compile stepは依存差分がなくscopeどおりskip。
+
+入口§56／manifest v55へ同期した。通常入力の旧通信を取り除いたsource準備に限る。チュートリアル・Nexus等を含む全面M5、API稼働構成、実機描画受入れ、保存前fit・初回保存は未完了。

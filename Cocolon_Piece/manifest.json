@@ -13,9 +13,9 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "7e4938bcebef35a2dba5dac989f2da07d669889d",
-    "raw_sha256": "4713a360f7b487b6520ce552ad25898e42f412cca42aa87564a81abcfe39116f",
-    "utf8_bytes": 99897
+    "git_blob_sha1": "f76e415f047a7521ed56b72e19d9ff6c5040ec3c",
+    "raw_sha256": "c460a063c1ecd7e602318b533ad99188a982bb53e800dcfb84359571be6247a5",
+    "utf8_bytes": 100399
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -88,7 +88,7 @@
     "pce9c_save_outcome_ui": "REMOTE_703C60B__SAVE_OUTCOME_UI_RECOVERY_CONNECTED__CI611_PASS__INITIAL_SAVE_ADMISSION_DEVICE_PENDING",
     "pce9c_saved_owner_detail": "REMOTE_7BD5930__SAVED_OWNER_DETAIL_CONNECTED__CI634_PASS__INITIAL_SAVE_ADMISSION_DEVICE_PENDING",
     "pce9e_photo_save_result": "REMOTE_1DF91CC__CONFIRMED_PHOTO_SAVE_RESULT_PRESERVED__CI643_PASS__DEVICE_PENDING",
-    "pce9f_b12c_input_screen": "CODE_NORMAL_INPUT_V2_ONLY__LOCAL654_PASS__M5_DEVICE_PENDING"
+    "pce9f_b12c_input_screen": "REMOTE_E9045AA__NORMAL_INPUT_V2_ONLY__CI654_PASS__M5_DEVICE_PENDING"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -323,9 +323,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "325c24e35fe05c44e411d8f2793216adabd87c56",
-    "raw_sha256": "8952f123c036f7148acc5fb65a8fc88d02d3a0af8943c3987802748185798f5b",
-    "utf8_bytes": 326630
+    "git_blob_sha1": "9532465a1d619c68db8468c27cdd08b042e714ee",
+    "raw_sha256": "c47673b7b8a1dc161611a2e500dd7e4a4ee7e4ceb4a1a1a65997c906f9ac6ad3",
+    "utf8_bytes": 327527
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -511,14 +511,17 @@
     "local_js_passed": 654,
     "local_js_failed": 0,
     "local_js_skipped": 0,
-    "ci_pending": true,
+    "ci_pending": false,
     "live_database_apply": 0,
     "release_effect": 0,
     "native_app_builds": 0,
     "product_acceptance": false,
     "automatic_progression": false,
     "local_screen_iap_theme_passed": 77,
-    "local_screen_iap_theme_failed": 0
+    "local_screen_iap_theme_failed": 0,
+    "ci_js_passed": 654,
+    "ci_js_failed": 0,
+    "ci_js_skipped": 0
   },
   "b06_q3_context_fence": {
     "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
@@ -4001,7 +4004,7 @@
   },
   "input_screen_cutover_20261011": {
     "base_head": "63e161965cfbba61d525dc82396eeefb0527cfc7",
-    "state": "LOCAL654_PASS__CI_PENDING",
+    "state": "REMOTE_E9045AA__CI654_PASS__M5_DEVICE_PENDING",
     "current_entry_section": "56",
     "current_map_section": "60",
     "changed_product_paths": [
@@ -4025,7 +4028,7 @@
     "local_screen_iap_theme_passed": 77,
     "local_screen_iap_theme_failed": 0,
     "added_tests": 11,
-    "ci_pending": true,
+    "ci_pending": false,
     "full_m5_complete": false,
     "native_device_acceptance": false,
     "product_acceptance": false,
@@ -4037,6 +4040,19 @@
     "app_build": 0,
     "main_merge": 0,
     "automatic_progression": false,
-    "review_blockers": 0
+    "review_blockers": 0,
+    "source_commit": "e9045aaa7be8b74b37e484c64661e19ba1ea2bcf",
+    "ci_run_id": 38103585515,
+    "ci_url": "https://github.com/MassyuRed/Cocolon/actions/runs/38103585515",
+    "ci_all_five_jobs_success": true,
+    "ci_js_job_id": 114364337316,
+    "ci_js_passed": 654,
+    "ci_js_failed": 0,
+    "ci_js_skipped": 0,
+    "remote_files_verified": 7,
+    "remote_changed_paths_match": true,
+    "remote_parent_match": true,
+    "native_library_compile_rerun": false,
+    "native_library_compile_skip_reason": "No dependency/platform/workflow changes; existing scope skipped both export library compile steps."
   }
 }
