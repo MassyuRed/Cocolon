@@ -603,6 +603,14 @@ Analysis compiler/realizerを変えず、行動の日付/SELF/原文と感情の
 
 合成Analysis12入力の前後20全文と実RN表示model、実service＋合成RPC保存再読3ルート、Emlis前後6全文を確認。対象205 tests／331 subtests、共有identity1成功。共有初回受領に肯定7例・拒否18例を追加し、旧拒否期待を弱めていない。同環境read-only補助reviewで具体的blocking findingなし。最終回帰/CI・remote照合・残件は06/API handoff u209。未配置・稼働DB/本人実機・正式商品受入れ未確認。
 
+## 3.40 u210 明示本人が自身の考え等を書いた後の感情（2026-10-11・未配置）
+
+「私は自分の考えを書いた」の後続本人感情が落ちる原因を、共有Plan `_source_prefix_opens_report` のwriting fallback内で修正。明示SELFの書き手がいる場合に限り、目的語と、任意で付く前後どちらか1個の場所・媒体の先頭へ `私／僕／自分／俺＋の` を認める。名詞本体と関係は既存の有限文法を再利用し、所有prefixを除いた本体にも未解析時点/疑問語検査を適用。whole-clause完全一致・一項制限・報告語検査を保持する。
+
+原文の所有表現、行動の日付、後続感情の独立したSELF/肯否定を保持。新範囲で主語省略、仮名所有代名詞、他者所有、一般の「の／からの」、任意の入れ子を拡張しない。未知文/別fieldを越す順序線や原因を補わず、訂正/撤回も保持。旧単純書字分岐と他発話にも使うcompleted fallbackは不変で、その既存残差は今回解消したと扱わない。
+
+Analysis前後26全文と実RN model、実service＋合成RPC保存再読3ルート、Emlis前後6全文を確認。対象239 tests／387 subtestsと共有identity1成功。同環境read-only補助reviewで具体的blocking findingなし。最終CI・実装経緯・remote照合・残件は06/API handoff u210。Analysis compiler/realizer/API/DTO/DB/RN製品変更0、STRUCTURE_MAP_DELTA_NONE。未配置・稼働DB/本人実機・正式商品受入れ未確認。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:

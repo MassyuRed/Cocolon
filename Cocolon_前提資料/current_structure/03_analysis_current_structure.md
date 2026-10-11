@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u210 内容修正（2026-10-11 JST・未配置）**：明示本人が「自分の考え」「私の気持ち」等を書いた後に、独立した本人感情が欠ける問題を共有報告判定内で補修。既存の名詞文法で解析できる本人所有prefix4形と、目的語/前後どちらか1個の場所・媒体だけを扱う。主語省略・他者所有・一般属格は拡張せず、旧completed fallbackを保持。Analysis前後26全文と実RN model、合成保存再読3ルート、Emlis前後6全文を確認。対象239 tests／387 subtestsと共有identity1成功。STRUCTURE_MAP_DELTA_NONE。最終CI・反映・残件は詳細04 §3.40、06/API handoff末尾u210。
+
 **u209 内容修正（2026-10-11 JST・未配置）**：場所・媒体内の「への／との／での」を含む完全書字後で、明示本人感情が欠ける問題を共有報告判定内で補修。既存の前後どちらか1項という制限と報告/未解析名詞の検査を保持し、省略主体・日付・独立したSELF感情を混同しない。Analysis前後20全文と実RN model、合成保存再読3ルート、Emlis前後6全文を確認。対象205 tests／331 subtestsと共有identity1成功。STRUCTURE_MAP_DELTA_NONE。最終回帰/CI・反映・残件は詳細04 §3.39、06/API handoff末尾u209。
 
 **u208 内容修正（2026-10-11 JST・未配置）**：主語省略の完全な書字後に明示本人感情が欠ける問題を共有報告判定内で補修。書字の主体未確定・日付と後続感情の独立したSELF根拠を保持し、別記録の行為者や未知区間を結び付けない。Analysis前後16全文と実RN model、合成保存再読3ルート、Emlis前後6全文を確認。対象177 tests／275 subtestsと共有identity1成功。STRUCTURE_MAP_DELTA_NONE。最終CI・反映・残件は詳細04 §3.38、06/API handoff末尾u208。
