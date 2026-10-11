@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u202 内容修正（2026-10-11 JST・未配置）**：今日/昨日付きの否定過去行動後に本人の丁寧感情3形が欠ける問題を共有報告判定内で補修。日語4配置・否定2形、行動の日付/否定/主体と感情の独立した帰属を保持し、時刻/範囲・重複日付・未解析名詞・真の報告は保留。Analysis4suite **455 tests／4628 subtests PASS**、共有新規対象49成功、owner identity1成功。前後16分析本文と実RN、合成保存再読9ルート、共有Emlis前後6全文を確認。共有Plan1変更、STRUCTURE_MAP_DELTA_NONE。詳細04 §3.32、06/API handoff末尾u202。
+
 **u201 内容修正（2026-10-11 JST・未配置）**：省略主体の「その後、資料を調べませんでした」等の後で丁寧感情3形が欠ける問題を、共有の報告前置き判定内で補修。既存9動詞・丁寧否定2形・完全な格項だけを区別し、否定/主体未確定/本人感情と明示順序を保持。Analysis4suite **451 tests／4558 subtests PASS**、共有新規対象76成功、owner identity1成功。前後16分析本文と実RN model、合成保存再読6ルートを確認。共有Plan1変更、STRUCTURE_MAP_DELTA_NONE。詳細04 §3.31、06/API handoff末尾u201。
 
 **u200 内容修正（2026-10-11 JST・未配置）**：「同僚からの資料を調べた」等の主語省略の過去行動を、誰の行動か未確定のまま文章・図へ保持。既存9動詞・完全なを対象・肯否定に限定し、別記録の行為者を同一化しない。場面→省略行動→本人感情は2node/0edge→3node/2edge。関連4suite **447 tests／4529 subtests PASS**、合成8例の前後全文と実RN表示model一致、実service＋合成RPC保存再読4ルートを確認。既存compiler1・test3のみの補修、共有/API/DTO/DB/RN製品変更0、STRUCTURE_MAP_DELTA_NONE。一般副詞/対象省略、一部報告host、本人生成→保存再表示・商品受入れは残件。詳細04 §3.30、06/API handoff末尾u200。
