@@ -497,6 +497,16 @@ RNの既存わたしマップ画面は、整合した不足状態だけに「入
 
 最終4suite 426 tests／4263 subtests PASS。合成12例の実出力比較、生成9全文の実RN表示model一致、実service＋合成RPCで4ルートの保存後再生成禁止readを確認。詳細は06/API handoff末尾u196。STRUCTURE_MAP_DELTA_NONE。未配置・本人実機未確認・商品受入れ未完了。主語省略/副詞と全体ルートUIは未対応であり、本修正を実機確認の新しい前提にしない。
 
+### 3.27 u197 主語未確定の決定と書かれた修飾の保持（2026-10-11・未配置）
+
+既存Analysisの過去決定/準備形と完全な「を」対象を再利用し、主語省略時だけactor=UNSPECIFIEDとして内容を保持する。共有frameのcurrent_user既定値を本人の証拠にしない。明示SELFは従来どおり区別し、希望/能力/義務/推量/他者の報告/否認や未対応形を完了行動へ変換しない。全文有限節、共有performed/否定witness、原文座標、前後/別fieldの帰属判定を維持する。
+
+「今回は」「事前に」を既存private propositionのwritten_modifiersに保持し、意味identityとsafe labelへ反映する。今回は日付に変換せず、事前にから関係先や因果を作らない。主体未確定なら「（誰の行動かは未確定）」と表示する。対象文は「今回は、事前に同僚と分担を決めておく（実行済み）（誰の行動かは未確定）」となる。新分岐で消費できない/重複した「事前に」を名詞項へ転用しない。
+
+主体未確定の決定はevidenceごとに別nodeとして保持し、同じ人の反復や矛盾とみなさない。明示SELFでも「今回」はsource単位に分ける。期間比較は原文の意味を比較する既存keyを維持し、source/evidence IDを意味へ混入しない。書かれた順序だけを接続し、別field/別記録/未読内容/訂正や撤回を越える線を作らない。訂正後のactor/修飾/肯否定と保存後の文章/図の一致を確認する。
+
+4suite 433 tests／4371 subtests PASS。実engineの合成12入力を前後比較し、生成10全文と実RN表示modelが一致。実service＋合成RPCの3ルートを保存し、再生成禁止readで同一本文/図を確認。詳細は06/API handoff末尾u197。STRUCTURE_MAP_DELTA_NONE：既存compiler/realizerの解釈・表現責務内で、公開DTO・保存schema・routeを追加しない。元28日/14記録全体と実機は再検証していない。一般的な主語省略行動・別修飾語順・全体ルートUI・本人生成→保存再表示・正式商品受入れは残件。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
