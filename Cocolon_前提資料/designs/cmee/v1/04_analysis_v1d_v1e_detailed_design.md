@@ -641,6 +641,17 @@ Analysis前後26全文と実RN model、実service＋合成RPC保存再読3ルー
 合成13入力の前後26結果のうち14生成全文、実RN modelの本文/identity/順序/各要素数、実service＋合成RPC保存再読3ルート、Emlis前後6全文を確認。Emlisの汎用Reception/復唱は未解消。最終回帰/CI・反映は06/API handoff u213。新規repo file0、realizer/API/DTO/DB/RN製品変更0、STRUCTURE_MAP_DELTA_NONE。稼働DBでの生成・保存再読、本人実機、正式商品受入れは未確認。
 
 
+## 3.44 u214 書字の名詞内感情語と述語の区別（2026-10-12・未配置）
+
+「ぼくの気持ちを書きました。それから、私は安心しなかった。」で後者だけが残る原因は、共有Planが目的語の気持ちをreaction/feelingへ分類することだった。完全な肯定過去書字・必須目的語・前後どちらか1個の場所/媒体について、既存有限名詞と本人所有/「への／との／での」の区間を確認し、そこにある感情語だけをspan operatorから除外する。kindも同じoperator集合を使う。書き手を所有表現から補わず、Analysisのunattributed_action/source-hostガードを維持する。
+
+補正には原field/座標/全span一致と独立節境界が必要。両fieldの報告・伝聞・引用・否認・疑問・未完話題を除外し、sourceなし/不一致/sliceでは旧判定を保つ。text-only試作で発生したEmlisの報告内容への行動断定は採用せず、原sourceのscope確認後にだけ補正する。句点付き「私は、。」も除外し、報告例と未完話題例のEmlis全文が元に戻ることを確認した。否定書字・希望・非完結/埋込述語は拡張しない。
+
+合成16入力の前後32結果のうち26生成全文を読解。通常6例は1node/0edge→2node/1edge、場面付きは2/0→3/2、未知文/現在未完了付きは1/0→2/0。別fieldは2/0のまま、報告・他者・埋込はUNAVAILABLEのまま。原文・UTF8/hash・主体・日付・否定感情・明示順序を保持し、因果を補わない。実RN modelの26投影と、実service＋合成RPC保存再読3ルートも確認した。
+
+Emlis5入力の前後10結果（8生成全文）も読解。通常書字/明示SELFの2例でObservationとReceptionの選択が変わるが、報告と考えの対照は全文一致。汎用応答・復唱の品質合格とはしない。「私は不安だった」がAnalysisで落ちる既存残件は今回の語彙補正で解消したとしない。最終回帰/CI・反映・次の因果ownerは06/API handoff u214。新規repo file0、Analysis compiler/realizer/API/DTO/DB/RN製品変更0、STRUCTURE_MAP_DELTA_NONE。稼働DB・本人実機・正式商品受入れは未確認。
+
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
