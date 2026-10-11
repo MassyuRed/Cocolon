@@ -611,6 +611,16 @@ Analysis compiler/realizerを変えず、行動の日付/SELF/原文と感情の
 
 Analysis前後26全文と実RN model、実service＋合成RPC保存再読3ルート、Emlis前後6全文を確認。対象239 tests／387 subtestsと共有identity1成功。同環境read-only補助reviewで具体的blocking findingなし。最終CI・実装経緯・remote照合・残件は06/API handoff u210。Analysis compiler/realizer/API/DTO/DB/RN製品変更0、STRUCTURE_MAP_DELTA_NONE。未配置・稼働DB/本人実機・正式商品受入れ未確認。
 
+## 3.41 u211 仮名の本人所有表現を含む書字と後続感情（2026-10-12・未配置）
+
+実engineで「私はわたしの考えを書いた。それから、私は落ち着きました。」がUNAVAILABLEとなる欠陥を確認。Analysisの一般名詞文法は仮名の所有代名詞を認識せず、共有Planも本人所有prefixを漢字4形に限定していた。
+
+既存 `_finite_proposition` 内で、明示SELF・肯定・過去・書くに限り、先頭の本人所有を持つ完全格項を補完解析する。`わたし／ぼく／おれ＋の` の原綴りとsource位置を保持し、目的語必須、場所/媒体は前後どちらか1個まで、全格項は既存の有限名詞と「への／との／での」に限定する。一般名詞、書く以外の動詞、否定書字、wish/cognition/te、省略主体へ拡張しない。日付直後の無区切り所有名詞を曖昧なまま採用せず、名詞内の未解析時点/疑問語も既存検査へ通す。
+
+新たに読める仮名所有書字は既存のsource-host帰属検査を必須にし、memo/memo_action両方向の先行報告、後続引用/否認を尊重する。共有 `_source_prefix_opens_report` の明示本人用prefixも同じ3形を追加し、後続本人感情/現在未完了を保持。旧completed fallbackは不変。「説明」等の名詞を含む書字自体が読めても、後続感情まで本人のものと確定するわけではない。
+
+通常3例で生成不能から行動＋感情2node/明示順序1edgeへ、場面付きは1node/0edgeから3node/2edgeへ変わった。未知文・別fieldを橋渡しせず、日付は書字だけに所属し、原因を補わない。合成12入力の前後24結果のうち生成10全文をrootが読解し、実RN modelの本文/identity/順序/各要素数が一致。実service＋合成RPCの保存再読3ルートとEmlis前後6全文も確認した。最終回帰/CI、反映、残件は06/API handoff u211。新規repo file0、renderer/API/DTO/DB/RN製品変更0、STRUCTURE_MAP_DELTA_NONE。本人実機・稼働DB・正式商品受入れは未確認。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:

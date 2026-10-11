@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_analysis_current_structure
 title: "分析構造 — Current Structure"
-revision_date: "2026-10-11 JST"
+revision_date: "2026-10-12 JST"
 document_role: "ANALYSIS_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -13,6 +13,8 @@ automatic_progression: false
 # 分析構造 — Current Structure
 
 ## 0. Current conclusion
+
+**u211 内容修正（2026-10-12 JST・未配置）**：「私はわたしの考えを書いた」等で分析生成できない問題を、既存Analysisの格項解析と共有Planの報告判定で補修。明示SELFの肯定過去書字に限り、仮名の本人所有3形を目的語/前後どちらか1個の場所・媒体へ保持する。原文、日付、後続本人感情、報告/否認/別fieldの帰属境界を維持。合成Analysis12入力の前後24結果（生成10全文）と実RN model、保存再読3ルート、Emlis前後6全文を確認。新規ファイル/外部契約変更0、STRUCTURE_MAP_DELTA_NONE。詳細04 §3.41と06/API handoff u211に最終検証・反映・残件を記録。
 
 **u210 内容修正（2026-10-11 JST・未配置）**：明示本人が「自分の考え」「私の気持ち」等を書いた後に、独立した本人感情が欠ける問題を共有報告判定内で補修。既存の名詞文法で解析できる本人所有prefix4形と、目的語/前後どちらか1個の場所・媒体だけを扱う。主語省略・他者所有・一般属格は拡張せず、旧completed fallbackを保持。Analysis前後26全文と実RN model、合成保存再読3ルート、Emlis前後6全文を確認。対象239 tests／387 subtestsと共有identity1成功。STRUCTURE_MAP_DELTA_NONE。最終CI・反映・残件は詳細04 §3.40、06/API handoff末尾u210。
 
