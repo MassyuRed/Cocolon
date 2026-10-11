@@ -579,6 +579,14 @@ Analysis compiler/realizerを変えず、通常例は場面→書字→感情の
 
 実engine合成11入力の前後16生成全文と実RN表示model、実service＋合成RPC保存再読2ルート、Emlis前後6全文を確認。対象103 tests／131 subtestsと共有identity1成功。Emlisの追加1文は明記された感情への応答であり、既存の汎用Reception品質は未解消。最終CI・remote照合・範囲と残件は06/API handoff u206。STRUCTURE_MAP_DELTA_NONE。未配置・実DB/本人実機・正式商品受入れ未確認。
 
+## 3.37 u207 日付付きの本人書字後の感情（2026-10-11・未配置）
+
+共有Planの `_source_prefix_opens_report` が、今日/昨日付きの完全な本人書字を報告前置きと誤認し、後続感情を落とす原因を修正した。明示SELFの「は」と日語3配置（日→SELF直結、日→区切り→SELF、SELF→日→区切り）を、書字判定内だけで区別する。後置日の区切りは必須で、空白等の後戻りによる未解析時点の受理を禁止する。既存の単純/関係付き目的語・場所/媒体1項・書いた/書きましたと未解析名詞検査を使用し、順序語混用・重複日付・主体省略/他者・裸属格・報告等は広げない。
+
+Analysis compiler/realizerを変えず、行動の日付/SELF/原文と感情の独立した根拠を保持する。日付を感情へ継承せず、明示順序だけを線にする。未知文/別fieldの橋渡し、場面から行動への未記載の順序や原因を補わない。旧単純書字/順序付き書字/completed fallbackは保持する。
+
+合成Analysis13入力の前後20生成全文と実RN表示model、実service＋合成RPC保存再読3ルート、Emlis前後6全文を確認。対象139 tests／187 subtests、共有identity1成功。u205の日付付き書字1拒否fixtureは肯定側へ移し、日付境界/報告等26例を追加。最終CI・反映・残件は06/API handoff u207。STRUCTURE_MAP_DELTA_NONE。未配置・実DB/本人実機・正式商品受入れ未確認。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
