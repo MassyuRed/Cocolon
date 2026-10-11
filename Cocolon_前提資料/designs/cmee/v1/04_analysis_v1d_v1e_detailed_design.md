@@ -483,6 +483,12 @@ RNの既存わたしマップ画面は、整合した不足状態だけに「入
 
 既存9動詞の希望/認知内容/te inventoryは増やさず、決定のcompound、準備相、主体省略、未閉包hostは保留する。明示隣接順序・訂正/撤回・集約・比較・保存は既存ownerで処理し、決定の実行を達成、改善または相手との合意へ昇格しない。製品変更はAnalysis intent_compiler.pyだけ。STRUCTURE_MAP_DELTA_NONE。実行証拠と未対応の主語後「昨日、分担」・否定決定後の感情witnessは06/API handoff u194。本人実機・全体ルートUI・商品受入れは別残件。
 
+### 3.25 u195 明示本人の過去準備を通常決定と区別して保持
+
+既存Analysis compilerの過去決定inventoryへ「決めておいた／決めておきました／決めておかなかった／決めておかなかったです／決めておきませんでした」を追加。lemmaを「決めておく」とし、準備相を本文と意味identityに保持する。単なる「決める」と同一化せず、準備をしなかったことから決定自体の不存在を推定しない。完全SELF・を対象・共有行動/否定根拠・原文全文・帰属/否認を既存境界で検証する。compound、意図、希望、推量、主語省略、副詞の新解釈へ拡大しない。
+
+調べた→決めておいた→安心したの同入力は2node/0edgeから3node/2edge、6節例は4node/2edgeから6node/5edgeとなった。期間比較では通常決定との違いを保持し、訂正/撤回後の古いnode/線を復活させない。分析4suite 421 tests／4149 subtests PASS、合成10例の前後全文比較、生成8例と実RN表示modelの全文一致、実service＋合成RPCの保存→再生成なし再読を確認。共有owner/realizer/API/DTO/DB/RN/製品依存は変更0、STRUCTURE_MAP_DELTA_NONE。主語省略等の元28日例・全体ルートUI・本人実機・商品受入れは残件。詳細は06/API handoff末尾u195。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
