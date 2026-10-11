@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_analysis_current_structure
 title: "分析構造 — Current Structure"
-revision_date: "2026-10-10 JST"
+revision_date: "2026-10-11 JST"
 document_role: "ANALYSIS_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -13,6 +13,8 @@ automatic_progression: false
 # 分析構造 — Current Structure
 
 ## 0. Current conclusion
+
+**u186 内容修正（2026-10-11 JST・未配置）**：本人が明記した「安心しなかった」等の否定過去感情が、文章・図から落ちる欠落を補修。既存明示本人主語と12有限形だけで、共有の否定根拠・原文出典を照合し、否定と後続の明示順序を保持する。負荷・因果・改善を補わず、他者/省略主語/引用/推測/撤回host/未証明compoundは保留。Analysis 389 tests／3282 subtests成功、生成7全文と実RN表示model一致、実service＋合成RPCの保存再読を確認。STRUCTURE_MAP_DELTA_NONE。今回の明示内容修正指示をweekly20261010 §5.4の再配分として扱う。下記の入力不足案内確認は維持し、本人の分析生成→保存後再表示は未完了。本修正を配置・実機確認済みへ換算しない。詳細は04 §3.10と06/API handoff末尾u186。
 
 **2026-10-10 18:51 JST 本人実機確認済み**：Mashから「入力情報が少ないため、まだ分析を表示できません。」の表示確認報告を受けた。今回の入力不足を通常案内にする表示対応は、本人実機の確認まで完了。再表示/再起動や分析生成・内容品質の確認へは拡張しない。追加入力・再配置は不要。詳細はAPI運用記録§40。
 

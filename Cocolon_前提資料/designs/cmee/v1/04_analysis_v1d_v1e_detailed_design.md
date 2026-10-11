@@ -290,6 +290,12 @@ vertical76/storage15/saved period13/API6＝110 PASS。6合成本文と既存RN�
 
 ### 3.10 u109 行動後の過去感情
 
+**u186 単独の否定過去感情（2026-10-11 JST・未配置）**：u178/u179の単独明示SELFに、安心しなかった/落ち着かなかった/嬉しくなかった/うれしくなかった、各「です」形と対応する「ませんでした/ありませんでした」の計12有限形を追加する。既存7本人主語＋完全節、memo単独span、explicit/current-input claim、required/should、共有核の主体/種類/negative/negationを照合し、PAST_FEELING/SELF/negative/feeling/pastと原文scalar/UTF-8/hash/source_partsを保持。安心はvalue/value/fact、他形はreaction/feeling/feelingの既存根拠を使い、共有核を書き換えない。
+
+realizerは否定の過去形を表示し、安心の不在を苦痛や行動失敗と推論しない。後続の明示順序は既存隣接条件だけで保持し、因果/改善を補わない。引用/報告/夢/疑問/推測、句点後の認知/報告/撤回host、主語省略/他者/程度を保留する。行動後compoundの共有否定証明は未成立のため、本追加をcompoundへ適用しない。通常の矛盾補足を暗黙訂正にせず、訂正/撤回/未知文/別sourceを橋渡ししない。丁寧さ/同義表記差は同義比較、肯否定差は内容差として保持。従来節の「否定は未対応」は履歴として残し、この単独有限範囲だけ更新する。
+
+最終Analysis 4suite389 tests／3282 subtests成功（47.13秒）、生成7全文と実RN表示modelの本文/identity/node順一致、実service＋合成RPCで否定5例の保存→再生成なし再読を確認。STRUCTURE_MAP_DELTA_NONE。共有/Emlis/公開契約/DTO/DB/RN変更0。入力不足の正常案内と省略主語分岐撤回を維持。実DB/本人実機/商品受入れは未確認。最新weeklyの実機生成→保存再表示を活用追加の完成待ちにしない。詳細は06/API handoff末尾u186。
+
 **u184 内容修正（2026-10-09 JST・未配置）**：先頭「その後/それから」付き常体の行動後3感情/名詞3変化を全文根拠に限定して保持。marker内の助詞誤認と、Emlisで順序をsupport断定へ変える連動問題を既存3owner内で補修した。引用/伝聞/夢/後続hostは保留し、丁寧形・原文/主体/前後順序・訂正/撤回/比較/保存再読を維持。Analysis370＋共有限定432 tests／3099 subtests、current identity1成功、既存実保存fixture3skip。Analysis8全文と実RN表示model一致、Emlis4全文と全recovery/独立inverseを確認。STRUCTURE_MAP_DELTA_NONE。配置/本人実機/商品受入れは未確認。次は追加活用網羅より指定修正版の生成→保存再表示の実機到達を優先する。詳細は06/API handoff末尾u184。
 
 **u183 読点なしmarkerの格誤認補修（2026-10-09 JST・未配置）**：既存全文証明済みの丁寧3感情/名詞3変化compoundについて、明示SELFに先行する単一markerを格検索範囲から除く。`それから` 内の「から」を助詞と取り違える欠落を直し、原文/全operator/証拠座標は変更しない。generic endpointの検索位置は0不変。常体への試行拡張はEmlisのsupport断定を実測したため不採用とし、別残件を明示。Analysis370＋共有312、3013 subtests、identity1成功、実保存runtime未設定3skip。合成8全文/RN一致、合成RPC保存再読と訂正/撤回/読点差比較、独立readerを確認。STRUCTURE_MAP_DELTA_NONE。未配置・実DB/本人実機/商品受入れ未確認。詳細は06/API handoff末尾u183。
