@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u198 内容修正（2026-10-11 JST・未配置）**：「その後、…決めませんでした」を報告の前置きと誤認し、後続の「安心した」を落とす問題を補修。完全な明示SELFの過去決定/準備だけをAnalysis内で区別し、肯否定・感情・原文・書かれた順序を保持する。真の報告/別field/他者/否認/訂正/撤回は従来どおり保留。隔離CIで4suite **436 tests／4398 subtests PASS**、合成4全文の読解、実service＋合成RPC保存再読6ルートを確認。新規検査workflowは§4.26。共有側も判定する丁寧感情3形、省略主体、本人生成→保存再表示・商品受入れは残る。詳細は04 §3.28と06/API handoff末尾u198。
+
 **u197 内容修正（2026-10-11 JST・未配置）**：「今回は事前に同僚と分担を決めておいた」を、主語を本人と推定せず分析へ保持。既存の過去決定/準備形に限定して主体未確定・今回/事前・肯否定・原文を文章と図へ残し、不明な行為者や別sourceの「今回」を同一化しない。4suite 433 tests／4371 subtests PASS、合成12入力の前後比較、生成10全文と実RN表示model一致、実service＋合成RPC保存再読3ルートを確認。STRUCTURE_MAP_DELTA_NONE。共有/API/DTO/DB/RN製品変更0。一般の主語省略/修飾、全体ルートUI、本人生成→保存再表示・商品受入れは残る。詳細は04 §3.27と06/API handoff末尾u197。
 
 **u196 内容修正（2026-10-11 JST・未配置）**：日付後の「分担/分室/分類」を暦接尾辞「分」と誤認して欠落させる共通原因を、区切りと完全名詞に限定して補修。場面/担当/行動/今日の希望の型・日付・肯否定・原文・明示順序を保持し、同名詞の先行/後続/別field帰属も既存条件で確認する。4suite 426 tests／4263 subtests PASS、合成12入力の前後比較、生成9全文と実RN表示model一致、実service＋合成RPCで4ルート保存再読を確認。STRUCTURE_MAP_DELTA_NONE。共有/API/DB/RN製品変更0。主語省略/副詞、全体ルートUI、本人生成→保存再表示・商品受入れは残る。詳細は04 §3.26と06/API handoff末尾u196。
@@ -605,6 +607,16 @@ SQL候補は未適用。適用→対応API配置→比較flagの有効化を個�
 runtime構造の追加はない。API/DTO/DB/共有Emlis/RN製品コードは変更せず、期間入力→既存Analysis→保存projection→既存表示modelという経路を維持する。元の28日例と「分担を決めておいた」等は今回未改善。検証・未配置状態は06/API handoff u192。
 
 u193の内部補修ownerは既存Analysis `intent_compiler.py`（接続語付き完全SELF過去感情・隣接順序）、`observed_route_realizer.py`（同じ命題の接続語を表示）、共有 `emlis_ai_grounded_observation_plan.py::_source_polite_past_feeling_is_bound`（3丁寧形の原文・帰属条件）である。既存vertical/storage/limited_change_feeling検査とcurrent shared identityを更新。新規file/runtime owner、API/DB/RN経路の変更はない。検査用合成RPCの保存再読は実DB・端末受入れではない。
+
+### 4.26 否定決定後の感情と内容検査の実行経路（2026-10-11 u198）
+
+| File | 責務・変更 |
+|---|---|
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 完全な明示SELFの過去決定/準備を報告prefixと誤認しない。感情witnessや真の話者帰属は維持し、後続感情/決定を保持する。 |
+| mashos-api `ai/tests/test_cmee_analysis_v1d_vertical.py`・`test_analysis_observed_storage.py` | 肯否定・原文証拠・感情metadata・報告/別field・訂正/撤回、6ルート保存再読を実engine/service＋合成入力で検査する。 |
+| mashos-api `.github/workflows/analysis-observed-content.yml`（新規） | 対象Draft branchのcommit固定・read権限で既存Analysis4suiteと合成4全文を実行。ローカルruntime不通からの直接検証経路。live DB/secret/deployなし。製品依存は変更しない。 |
+
+製品runtime/公開DTO/保存責任の追加はない。検査fileの追加を本mapに記録し、全file追加0とは表記しない。CI38123765929は436 tests／4398 subtests成功。実RN表示model/端末は今回未再検証。丁寧感情3形の共有prefix判定は残件。詳細・実行範囲は06/API handoff u198。
 
 ## 5. Source and artifact identity
 
