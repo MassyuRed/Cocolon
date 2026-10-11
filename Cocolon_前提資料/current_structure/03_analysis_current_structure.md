@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u196 内容修正（2026-10-11 JST・未配置）**：日付後の「分担/分室/分類」を暦接尾辞「分」と誤認して欠落させる共通原因を、区切りと完全名詞に限定して補修。場面/担当/行動/今日の希望の型・日付・肯否定・原文・明示順序を保持し、同名詞の先行/後続/別field帰属も既存条件で確認する。4suite 426 tests／4263 subtests PASS、合成12入力の前後比較、生成9全文と実RN表示model一致、実service＋合成RPCで4ルート保存再読を確認。STRUCTURE_MAP_DELTA_NONE。共有/API/DB/RN製品変更0。主語省略/副詞、全体ルートUI、本人生成→保存再表示・商品受入れは残る。詳細は04 §3.26と06/API handoff末尾u196。
+
 **u195 内容修正（2026-10-11 JST・未配置）**：明示本人の「分担を決めておいた」が欠落する問題を、既存Analysis compilerの過去準備5形に限定して修正。「決めておく」の意味を文章・図・期間比較へ残し、通常決定やその否定と同一化しない。原文・肯否定・明示順序・訂正/撤回・話者帰属を保持。分析4suite 421 tests／4149 subtests PASS、実engineの合成10例を前後比較し、生成8例の実RN表示model全文一致と実service＋合成RPC保存再読を確認。STRUCTURE_MAP_DELTA_NONE。共有owner/API/DB/RN変更0。主語省略/副詞付きの元28日例、全体ルートUI、本人生成→保存再表示・商品受入れは未完了。詳細は04 §3.25と06/API handoff末尾u195。
 
 **u194 内容修正（2026-10-11 JST・未配置）**：「私は同僚と分担を決めた」等の完全な本人過去行動が分析から欠落する問題を修正。「決める」の過去肯否定5形を、対象・共有action根拠・原文に結んで文章と図へ保持する。調べた→決めた→安心したの例は2node/0edgeから3node/2edge。希望・準備相・主語省略・compoundへ拡大せず、他者の発言/否認、別fieldの話者、訂正/撤回を保持。分析4suite 417 tests／4061 subtests PASS、合成11例を全文確認し生成8例で実RN表示model一致、実service＋合成RPCで保存再読を確認。STRUCTURE_MAP_DELTA_NONE。共有owner/API/DB/RN製品変更0。詳細・未対応は04 §3.24と06/API handoff末尾u194。本人生成→保存再表示と全体ルートUIは未完了。
