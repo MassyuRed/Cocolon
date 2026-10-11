@@ -2057,7 +2057,7 @@ HTTP/Auth/React/nativeは代替を含み、実DB保存・端末描画／画像�
 
 画像PNG／写真権限・保存／共有の実端末確認、Android・結果不明／異常終了時の共有copy回収、receipt、形式変更、Nexus公開読取／切替、M5／実Auth／稼働構成も残る。画像共有の全完成を初回実機確認の追加前提にしない。既存controller・save API・原子保存SQLを再実装しない。
 
-Supabase projectはACTIVE_HEALTHY、Piece001〜004は適用済み、005 quotaとvisual変更SQLはmigration履歴に未適用。今回読取のみでDB書込0。API／SQL／native／依存／workflow変更・env/deploy/activation・app build・署名／配布・main merge0。system_context prepareは部分取得環境のtask_profiles.json不足でexit2のため、指定されたcanonical原本の直接参照へ切り替えた。最新weekly§5.5・12/18目標・automatic_progression=falseを維持。STRUCTURE_MAP_DELTA_UPDATED（保存要求と結果のlifecycle）。GitHub／CI結果は以下へ追記する。
+Supabase projectはACTIVE_HEALTHY、Piece001〜004は適用済み、005 quotaとvisual変更SQLはmigration履歴に未適用。今回読取のみでDB書込0。API／SQL／native／依存／workflow変更・env/deploy/activation・app build・署名／配布・main merge0。system_context prepareは部分取得環境のtask_profiles.json不足でexit2のため、指定されたcanonical原本の直接参照へ切り替えた。最新weekly§5.5・12/18目標・automatic_progression=falseを維持。STRUCTURE_MAP_DELTA_UPDATED（保存要求と結果のlifecycle）。GitHub／CI結果は§59.4を参照する。
 
 
 
@@ -2163,4 +2163,10 @@ B9実端末描画同等性・glyph/ink/性能→正式renderer admission→保�
 
 PNG／写真権限・保存／共有の実機、Android・結果不明／異常終了後の共有copy回収、receipt、形式変更、Nexus公開読取／切替、M5／実Auth／稼働構成は継承する。画像共有の全完成を初回実機確認に追加しない。実機へ進むには対象版と利用経路をそろえる必要がある。既存`ios-build.yml`はTestFlight送信まで行うため描画調査だけの目的ではdispatchしていない。
 
-Supabaseはprojectとmigration履歴を今回読取。ACTIVE_HEALTHY、Piece001〜004登録済み、quota005とvisual変更の追加2本未登録を確認。DB書込・API／SQL／native／依存／workflow変更・env/deploy/activation・app build・署名／配布・main merge0。weekly§5.5と2026年12月18日公開目標、automatic_progression=falseを維持。STRUCTURE_MAP_DELTA_UPDATED（写真保存結果とcleanupの責務）。GitHub／CI結果は以下へ追記する。
+Supabaseはprojectとmigration履歴を今回読取。ACTIVE_HEALTHY、Piece001〜004登録済み、quota005とvisual変更の追加2本未登録を確認。DB書込・API／SQL／native／依存／workflow変更・env/deploy/activation・app build・署名／配布・main merge0。weekly§5.5と2026年12月18日公開目標、automatic_progression=falseを維持。STRUCTURE_MAP_DELTA_UPDATED（写真保存結果とcleanupの責務）。GitHub／CI結果は§59.4を参照する。
+
+### 59.4 GitHub／CI確認と同期
+
+source `1df91cc74b92e59d9ac6bba126a2c8fbfa696e84` の製品1＋test1＋資料3をDraft PR #30へ反映し、全5fileのremote全文・変更path集合・親headを照合した。[CI38102760544](https://github.com/MassyuRed/Cocolon/actions/runs/38102760544)は**全5job success**。JS job114361926045は **643 PASS／FAIL0／SKIP0**、Node24.21.0／TypeScript5.2.2。local643件との合算はしない。Android bridge source compileとiOS source syntax／patch検査もsuccess。export Pods／Android4依存compile stepは依存差分がなくscopeどおりskipであり、今回の実native再buildではない。
+
+入口§55／manifest v54へ同期した。写真保存成功後の失敗化はコード修正済み。初回保存button・正式renderer admission・保存前fit・実機受入れは未完了。
