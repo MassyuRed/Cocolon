@@ -527,6 +527,14 @@ u198のAnalysis内判定だけでは、共有の丁寧感情hostが同じprefix�
 
 調べた→否定決定→丁寧感情を3node/2順序線に保持し、unknownを挟むと感情は残し、未読区間をまたぐ線は作らない。Analysis4＋共有限定感情1suite 987 tests／4434 subtests PASS、current共有identity1成功。合成8例の前後と実RN表示modelを照合し、実service＋合成RPC保存再読6ルートを確認。共有owner1変更、STRUCTURE_MAP_DELTA_NONE。実DB/本人実機/正式商品受入れは未確認。06/API handoff u199参照。
 
+### 3.30 u200 主語が書かれていない過去行動の保持（2026-10-11・未配置）
+
+既存9動詞（書く/調べる/試す/見る/作る/残す/記録する/メモする/続ける）で、完全なを対象と過去肯否定が書かれた節を、actor=UNSPECIFIEDとして保持する。共有frameの既定current_userからSELFを推定せず、既存safe labelで「誰の行動かは未確定」を明示する。対象の内部関係、日付、原文証拠、肯否定を保持する。主体省略であることを理由に事実の内容全体を捨てず、主体が明示された節とは区別する。
+
+新範囲は既存有限文法と共有explicit/fact/polarity・完全source境界を併用する。希望/非過去/認知/te複合文、自由副詞、今回/事前付き一般行動、を対象なしは対象外。未完主題「私は、」が改行/句点で分断された入力は、日/順序prefix付きも含め主体省略として採用しない。前後/両方向の別fieldの帰属、報告/夢/否認を保持する。省略否定行動をの…でしたの報告前置きと誤認するAnalysis内の判定だけを補修し、共有の丁寧感情判定へ拡張しない。
+
+主体未確定の各occurrenceは集約せず、同一人物の反復/矛盾へ変換しない。明示された隣接順序、訂正/撤回、期間比較、保存再読は既存責任を再利用する。4suite447 tests／4529 subtests成功、合成8例の前後全文と実RN model一致、合成RPC保存再読4ルートを確認。STRUCTURE_MAP_DELTA_NONE、製品変更は既存compiler1だけ。実DB/実機/正式商品受入れは未確認。実行結果・既存期待の更新理由・残件は06/API handoff u200を参照。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
