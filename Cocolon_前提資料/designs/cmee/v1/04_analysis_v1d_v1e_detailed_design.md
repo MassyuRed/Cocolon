@@ -477,6 +477,12 @@ RNの既存わたしマップ画面は、整合した不足状態だけに「入
 
 共有の3丁寧形の肯定根拠は同じ二接続語と完全SELF節に限定し、先行話者・後続の明示話者/否認とsource bytesを確認する。既存Emlis品質gate、語彙全体、主体推定を広げない。本文と図は同一命題から接続語・肯否定を表示し、訂正/撤回後に古い線を復活させない。実行証拠は06/API handoff u193。STRUCTURE_MAP_DELTA_NONE。
 
+### 3.24 u194 対象を明記した本人の過去決定を保持
+
+「私は同僚と分担を決めた」等の完全SELF節に対して、決めた/決めました/決めなかった/決めなかったです/決めませんでしたの5形と、原文にある「を」対象を解析する。肯定は共有performed-actionと過去、否定は共有action/negationと完全な過去有限形を要求する。required/shouldを同じ意味根拠として扱い、後半の記述を表示優先度だけで落とさない。既存の今日/昨日・順序・名詞内部の関係を保持し、別fieldの先行話者も両方向に確認する。
+
+既存9動詞の希望/認知内容/te inventoryは増やさず、決定のcompound、準備相、主体省略、未閉包hostは保留する。明示隣接順序・訂正/撤回・集約・比較・保存は既存ownerで処理し、決定の実行を達成、改善または相手との合意へ昇格しない。製品変更はAnalysis intent_compiler.pyだけ。STRUCTURE_MAP_DELTA_NONE。実行証拠と未対応の主語後「昨日、分担」・否定決定後の感情witnessは06/API handoff u194。本人実機・全体ルートUI・商品受入れは別残件。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
