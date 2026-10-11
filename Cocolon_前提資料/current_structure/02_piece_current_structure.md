@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は§55を優先します。4依存の両OS library compile成功を継承。iOS共有session終了後の専用copy回収と取消結果を接続しました。Android／結果不明のcopy回収、正式fit/admission・製品UI接続・実機確認は残ります。canSave/canExport=falseを維持します。**
+**現在は§56を優先します。既存controllerへ保存中・結果不明・同一要求の再確認・保存完了を追加しました。正式renderer admissionを供給するhost・表示model・保存画面は未接続です。canSave/canExport=falseを維持し、正式fit・実機と画像保存共有の残件を継続します。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -2029,3 +2029,34 @@ Android／結果不明／異常終了後の共有copy回収、B13-B receipt、�
 source `1c6fbd3d4787e5fbd5a06d9eed92344f6e452800` の製品1＋test1＋資料3をGitHubへ反映し、全5fileのremote全文・変更path集合・親headを照合した。[CI38095920492](https://github.com/MassyuRed/Cocolon/actions/runs/38095920492)のJS job114341668316は **577 PASS／FAIL0／SKIP0**。既存Android bridge source compile／iOS source syntax・patch検査もsuccess。workflow全5jobはsuccessだが、export Pods／Android4依存のcompile stepは依存差分がないためscopeどおり**skip**。今回はnative libraryを再compileしたとはせず、前回run38094296963の成功と区別する。
 
 同環境read-only差分reviewで指摘された取消とcleanup失敗の混同は修正済みで、最終差分に追加重大指摘なし。current entry§51／manifest v50へ同期した。実機・画像・写真保存・共有先受信・正式fit/admission・製品UI接続の受入れは未成立のまま、今回の共有session回収と分ける。
+
+## 56. 2026-10-11 — 既存保存controllerの状態管理
+
+### 56.1 現在地と変更owner
+
+基準head `eb24b240af9315739019ce216ae06d76d9c30020`、入口§51／本map§55と添付前回txtから再開。全体設計・全ファイル地図・最新weekly10/10 §5.5・PCE5の描画再現契約・PCE6の保存flow・PCE8の既存ownerを確認した。既存save通信はあるがcontrollerの保存状態が欠けていたため、今回はその直接実装を進めた。実機と正式renderer admissionが未完了のため、画面操作の有効化は行わない。
+
+| path | 今回の変更 |
+| --- | --- |
+| `features/piece/PieceCreateController.js` | 既存APIを使うsavePreviewと保存中／結果不明／保存完了を追加。厳密なsaveEnabledと将来hostのisSaveAdmitted=trueを要し、既定では送信しない。表示token、preview ID/revision/3hash、期限を検査してprivate要求と明示keyを固定する。 |
+| `tests/piece-v2-state-models.test.js` | 追加15件。未許可／未admissionの送信拒否、要求固定、ACK不明から同key再確認、期限後回収、重複操作拒否、close／本人・入力変更／無効化／dispose、同期再入、既知拒否、feature-disabled刷新を検査。admission callbackは合成で、正式rendererの証拠ではない。 |
+
+save開始時はpreview本文を破棄する。結果不明は明示retryだけで同じ要求を確認し、期限が過ぎてもkeyを更新しない。close後も本文を含まない保存要求／receiptを保持してpreview POSTへ戻さない。saveEnabledのみの取消は中断と再送停止、全体無効化・owner/source変更・disposeは要求を破棄する。初回保存はprivate、正規replayは既存APIが検証した現在visibility／row versionを保持する。保存後owner detailの再取得は将来の画面接続で行う。
+
+### 56.2 検証と証拠範囲
+
+Node24.19.0／TypeScript5.2.2で既存12suiteは **592 PASS／FAIL0／SKIP0**。先行577＋追加15で、localとCIは合算しない。最初の全件実行はこのscratch環境のTypeScript不足によりInputScreen suiteのmodule-loadが失敗したため、作業用directoryへ既存固定版5.2.2を用意して全件再実行した。repoのpackage／lock変更はない。
+
+同環境read-only分担reviewが、save許可取消のabort通知から同期retryすると旧許可で再送できる順序を検出した。saveEnabledを先に更新してからabortするよう補修し、同期abort listenerの回帰検査を追加した。別modelの正式受入れではない。作業区分はDIRECT_PRODUCT_OR_ACCEPTANCE_WORK、環境記録はCODEX_WORK_WITH_SAME_ENVIRONMENT_READ_ONLY_SUBAGENT_REVIEW_NOT_PRO_ULTRA_ACCEPTANCE。
+
+HTTP/Auth/React/nativeは代替を含み、実DB保存・端末描画／画像・正式fit/admissionの成功を示さない。既存の両OS library compile成功は前回証拠であり、今回sourceはnative／依存を変更していない。
+
+### 56.3 次の直接経路と未接続範囲
+
+正式B9実機描画同等性・glyph/ink/性能→renderer admission→保存前fit→既存controllerの保存画面接続が本線。今回のisSaveAdmittedは将来の正式判定を受け取る未接続口であり、判定ownerや商品合格条件を置き換えない。表示model／modalは今回のsave状態に未対応。hostで実効save flag、foreground/runtime失効、保存後owner detail再取得を接続する作業が残る。現行のcanSave/canExport=falseを保持する。
+
+画像PNG／写真権限・保存／共有の実端末確認、Android・結果不明／異常終了時の共有copy回収、receipt、形式変更、Nexus公開読取／切替、M5／実Auth／稼働構成も残る。画像共有の全完成を初回実機確認の追加前提にしない。既存controller・save API・原子保存SQLを再実装しない。
+
+Supabase projectはACTIVE_HEALTHY、Piece001〜004は適用済み、005 quotaとvisual変更SQLはmigration履歴に未適用。今回読取のみでDB書込0。API／SQL／native／依存／workflow変更・env/deploy/activation・app build・署名／配布・main merge0。system_context prepareは部分取得環境のtask_profiles.json不足でexit2のため、指定されたcanonical原本の直接参照へ切り替えた。最新weekly§5.5・12/18目標・automatic_progression=falseを維持。STRUCTURE_MAP_DELTA_UPDATED（保存要求と結果のlifecycle）。GitHub／CI結果は以下へ追記する。
+
+

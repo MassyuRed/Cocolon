@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§51／current map §55を優先します。4依存の両OS library compile成功を継承し、iOS共有session終了後の一時画像回収と取消結果を接続しました。正式fit/admission・画面接続・実機確認・Android／結果不明時の共有copy回収・receiptは未完了です。**
+**現在は§52／current map §56を優先します。既存controllerに保存中・結果不明・同一要求の再確認・保存完了を追加しました。正式renderer admissionを供給するhostと保存画面は未接続で、canSave/canExport=falseを維持します。正式fit・実機・画像保存共有の残件は継続します。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1012,3 +1012,15 @@ source198e8ba／CI補修e4f4984をDraft PR #30へ反映し、remote全文・変�
 保存・画像化の製品caller、正式renderer admission→保存前fit→UI接続、実端末B9／PNG／写真保存共有が残る。画像共有全完成を初回実機確認の追加前提にしない。canSave/canExport=false、DB書込・本番切替・署名／配布・main merge0。
 
 §51反映確認：source `1c6fbd3d4787e5fbd5a06d9eed92344f6e452800` の製品1＋test1＋資料3をDraft PR #30へ反映し、remote全文・変更path集合・親head一致を確認した。localとCIは合算しない。
+
+## 52. 2026-10-11 — 既存controllerの保存状態管理（画面未接続）
+
+詳細ownerはcurrent map §56。既存 `PieceCreateController` に、同じpreviewの非公開保存・保存中・結果不明から同key/requestでの明示再確認・保存receiptの保持を追加した。既存 `requestPieceSave` を使用する。表示tokenとID/revision/3hash、期限を確認し、将来のhostから厳密なsave許可と正式admissionが供給されない限り送信しない。正式admissionの判定実装を新設したものではなく、製品callerも未接続である。
+
+close後は本文を破棄して保存要求／receiptだけを保持し、結果不明から新しいpreview POSTや別keyへ戻さない。本人・入力変更／全体無効化／dispose後の遅延結果を捨てる。save許可のみの取消は要求を保持して再送を止める。同環境read-only reviewで見つかったabort通知内の同期retryを、許可取消を先に確定する順序と回帰検査で修正した。
+
+local既存12suite **592 PASS／FAIL0／SKIP0**（先行577＋追加15）。合成HTTP/Auth/React/nativeを含み、実保存・実機・正式fitの受入れではない。表示model／modal／runtimeへの保存接続、保存後owner detail取得は未実装。次はB9実機描画とrenderer admission→保存前fit→既存controllerを使う画面接続。画像共有の全完成を初回実機確認の前提にしない。
+
+Supabaseはprojectとmigration履歴の読取のみ。001〜004適用済み・005 quotaとvisual変更SQL未適用を確認。DB書込・API／native／依存／workflow変更・env/deploy/activation/app build/main merge0。最新weekly10/10 §5.5・12/18目標・automatic_progression=falseを維持する。GitHub／CI結果はcurrent map §56に記録する。
+
+

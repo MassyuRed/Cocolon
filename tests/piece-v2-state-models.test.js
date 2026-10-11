@@ -232,7 +232,7 @@ function deferredPieceResponse() {
   const promise = new Promise((yes, no) => { resolve = yes; reject = no; });
   return { promise, resolve, reject };
 }
-function controllerHarness({ send, session, clock = () => NOW, abort = AbortController } = {}) {
+function controllerHarness({ send, session, clock = () => NOW, abort = AbortController, configuration = {} } = {}) {
   const calls = [], sessions = [];
   const context = vm.createContext({
     AbortController: abort,
@@ -249,12 +249,178 @@ function controllerHarness({ send, session, clock = () => NOW, abort = AbortCont
     fs.readFileSync(path.join(__dirname, '../features/piece', file), 'utf8')
       .replace(/^import .*;$/gm, '').replace(/^export /gm, '')).join('\n');
   vm.runInContext(sources + '\n globalThis.controllerFactory = createPieceCreateController;', context);
-  const controller = context.controllerFactory({ now: clock });
+  const controller = context.controllerFactory({ ...configuration, now: clock });
   return { controller, calls, sessions };
 }
 const controllerInput = extras => ({ ...options, request: request(), ...extras });
 const pieceTick = () => new Promise(resolve => setImmediate(resolve));
 const pieceHttp = value => ({ status: 200, json: async () => value });
+
+// Save lifecycle uses a synthetic admission function only. No renderer/device
+// admission or product host activation is asserted by these tests.
+const saveIdentity = value => ({ preview_id: value.preview_id,
+  preview_revision: value.preview_revision, visual_recipe_hash: value.visual_recipe_hash });
+const saveReceipt = (extras = {}) => ({ piece_id: response().preview_id,
+  consumption_id: '40000000-0000-4000-8000-000000000004', lifecycle_status: 'saved',
+  visibility_scope: 'private', row_version: 2, saved_at: '2026-10-08T10:00:00Z',
+  idempotency_replayed: false, ...extras });
+async function saveHarness(extra = {}) {
+  const u = controllerHarness({ configuration: { isSaveAdmitted: () => true },
+    send: async url => pieceHttp(url.endsWith('/save') ? saveReceipt() : response()), ...extra });
+  u.controller.setContext(controllerInput({ saveEnabled: true }));
+  await u.controller.start();
+  u.identity = saveIdentity(response()); u.token = u.controller.getView().visualToken;
+  u.save = (key = 'explicit-save-key') => u.controller.savePreview(u.identity, u.token, key);
+  return u;
+}
+
+test('save stays inert without actual admission and strict save enablement', async () => {
+  for (const isSaveAdmitted of [undefined, null, () => false, () => 1, () => 'true', () => Promise.resolve(true),
+    () => { throw new Error('PRIVATE_ADMISSION'); }]) {
+    const u = await saveHarness({ configuration: { isSaveAdmitted } });
+    await u.save(); assert.equal(u.calls.length, 1); assert.equal(u.controller.getView().phase, 'received');
+    assert.equal(u.controller.getView().canSave, false); assert.equal(u.controller.getView().canExport, false);
+  }
+  for (const saveEnabled of [undefined, false, 1, 'true']) {
+    const u = await saveHarness(); u.controller.setContext(controllerInput({ saveEnabled }));
+    await u.save(); assert.equal(u.calls.length, 1);
+  }
+});
+
+test('save binds the displayed identity and explicit key; sends no body/recipe/authority', async () => {
+  let admitted;
+  const u = await saveHarness({ configuration: { isSaveAdmitted: (preview, token) => {
+    admitted = { preview, token }; return true;
+  } } });
+  await u.save();
+  const [url, opts] = u.calls[1], raw = response();
+  assert.equal(url, '/emotion/piece/save'); assert.equal(opts.headers['Idempotency-Key'], 'explicit-save-key');
+  assert.deepEqual(JSON.parse(opts.body), { preview_id: raw.preview_id, expected_preview_revision: 1,
+    piece_text_hash: raw.piece_text_hash, content_payload_hash: raw.content_payload_hash,
+    visual_recipe_hash: raw.visual_recipe_hash, visibility_scope: 'private' });
+  assert.ok(Object.isFrozen(admitted.preview.content_payload.body_blocks)); assert.equal(admitted.token, u.token);
+  assert.equal(u.controller.getView().phase, 'saved'); assert.equal(u.controller.getView().preview, null);
+  assert.deepEqual(clone(u.controller.getView().savedReceipt), saveReceipt());
+  assert.equal(u.controller.getView().canRetry, false); assert.equal(u.controller.getView().canSave, false);
+  await u.save('another-key'); await u.controller.retry(); await u.controller.start();
+  u.controller.close(); await u.controller.start(); assert.equal(u.calls.length, 2);
+});
+
+test('save rejects stale display tokens, identities, expired candidates, invalid keys and hash damage', async () => {
+  for (const type of ['token', 'id', 'revision', 'hash', 'key', 'expiry', 'body']) {
+    let now = NOW;
+    const raw = response(); if (type === 'body') raw.piece_text_hash = '0'.repeat(64);
+    const u = await saveHarness({ clock: () => now, send: async () => pieceHttp(raw) });
+    if (type === 'token') u.token = {};
+    if (type === 'id') u.identity.preview_id = saveReceipt().consumption_id;
+    if (type === 'revision') u.identity.preview_revision++;
+    if (type === 'hash') u.identity.visual_recipe_hash = '0'.repeat(64);
+    if (type === 'expiry') now += 1123;
+    await u.save(type === 'key' ? ' invalid ' : 'explicit-save-key');
+    assert.equal(u.calls.length, 1, type);
+  }
+});
+
+test('save uncertainty retries only the same body-free save after expiry and close', async () => {
+  let now = NOW, count = 0;
+  const u = await saveHarness({ clock: () => now, send: async url => {
+    if (!url.endsWith('/save')) return pieceHttp(response());
+    if (++count === 1) throw new Error('PRIVATE_ACK_LOST');
+    return pieceHttp(saveReceipt({ idempotency_replayed: true, visibility_scope: 'public', row_version: 5 }));
+  } });
+  await u.save(); assert.equal(u.controller.getView().canRetry, true);
+  assert.equal(u.controller.getView().retryKind, 'save'); assert.equal(u.controller.getView().preview, null);
+  assert.doesNotMatch(JSON.stringify(u.controller.getView()), /PRIVATE_ACK_LOST|静か|explicit-save-key/);
+  now += 100000; u.controller.refresh(); u.controller.close();
+  await u.save('replacement-key'); await u.controller.start(); assert.equal(u.calls.length, 2);
+  await u.controller.retry();
+  assert.equal(u.calls.length, 3); assert.equal(u.calls[1][1].body, u.calls[2][1].body);
+  assert.equal(u.calls[2][1].headers['Idempotency-Key'], 'explicit-save-key');
+  assert.equal(u.controller.getView().phase, 'saved');
+  assert.equal(u.controller.getView().savedReceipt.visibility_scope, 'public');
+});
+
+test('save reserves one operation and excludes preview mutations, cancellation and duplicate save', async () => {
+  const pending = deferredPieceResponse();
+  const u = await saveHarness({ send: async url => url.endsWith('/save') ? pending.promise : pieceHttp(response()) });
+  const first = u.save(); await pieceTick();
+  assert.equal(u.controller.getView().loadingKind, 'save');
+  await u.save(); await u.controller.retry(); await u.controller.start();
+  await u.controller.cancelPreview(u.identity, u.token);
+  await u.controller.changeVisual({}, u.identity, u.token);
+  assert.equal(u.calls.length, 2);
+  pending.resolve(pieceHttp(saveReceipt())); await first;
+  assert.equal(u.controller.getView().phase, 'saved');
+});
+
+for (const change of ['close', 'owner', 'source', 'disabled', 'save-disabled', 'dispose']) {
+  test(`save rejects delayed results after ${change} even when abort is ignored`, async () => {
+    class IgnoredAbort { constructor() { this.signal = {}; } abort() {} }
+    const pending = deferredPieceResponse();
+    const u = await saveHarness({ abort: IgnoredAbort,
+      send: async url => url.endsWith('/save') ? pending.promise : pieceHttp(response()) });
+    const first = u.save(); await pieceTick();
+    if (change === 'close') u.controller.close();
+    if (change === 'owner') u.controller.setContext(controllerInput({ saveEnabled: true, expectedUserId: 'other' }));
+    if (change === 'source') u.controller.setContext(controllerInput({ saveEnabled: true, idempotencyKey: 'new-source' }));
+    if (change === 'disabled') u.controller.setContext({ enabled: false });
+    if (change === 'save-disabled') u.controller.setContext(controllerInput({ saveEnabled: false }));
+    if (change === 'dispose') u.controller.dispose();
+    pending.resolve(pieceHttp(saveReceipt())); await first;
+    assert.notEqual(u.controller.getView().phase, 'saved'); assert.equal(u.controller.getView().preview, null);
+    if (change === 'save-disabled') {
+      await u.controller.retry(); assert.equal(u.calls.length, 2);
+      u.controller.setContext(controllerInput({ saveEnabled: true }));
+      assert.equal(u.controller.getView().canRetry, true);
+    }
+  });
+}
+
+test('admission reentrancy and loading subscriber revocation cannot send an obsolete save', async () => {
+  for (const point of ['admission', 'loading']) {
+    let c;
+    const u = await saveHarness({ configuration: { isSaveAdmitted: () => {
+      if (point === 'admission') c.close(); return true;
+    } } }); c = u.controller;
+    c.subscribe(() => { if (point === 'loading' && c.getView().loadingKind === 'save') c.dispose(); });
+    await u.save(); assert.equal(u.calls.length, 1);
+  }
+});
+
+test('known save rejection never retries, regenerates or reports success', async () => {
+  for (const [status, code] of [[409, 'PIECE_QUOTA_EXHAUSTED'], [409, 'PIECE_PREVIEW_STALE'],
+    [409, 'PIECE_PREVIEW_EXPIRED'], [409, 'PIECE_HASH_MISMATCH'], [409, 'PIECE_CONFLICT'], [401, 'PIECE_AUTH_REQUIRED']]) {
+    const u = await saveHarness({ send: async url => url.endsWith('/save')
+      ? { status, json: async () => ({ code }) } : pieceHttp(response()) });
+    await u.save(); assert.equal(u.controller.getView().phase, 'unavailable');
+    assert.equal(u.controller.getView().canRetry, false); assert.equal(u.controller.getView().preview, null);
+    await u.controller.retry(); await u.controller.start(); await u.save('new-key'); assert.equal(u.calls.length, 2, code);
+  }
+});
+
+test('server-disabled save triggers the existing runtime refresh once and stays blocked', async () => {
+  let refreshes = 0;
+  const u = await saveHarness({ configuration: { isSaveAdmitted: () => true, onFeatureDisabled: () => refreshes++ },
+    send: async url => url.endsWith('/save') ? { status: 503, json: async () => ({ code: 'PIECE_FEATURE_DISABLED' }) } : pieceHttp(response()) });
+  await u.save(); assert.equal(refreshes, 1); assert.equal(u.controller.getView().canRetry, false);
+  u.controller.setContext(controllerInput({ saveEnabled: true }));
+  await u.controller.retry(); await u.controller.start(); assert.equal(u.calls.length, 2);
+});
+
+test('save flag revocation is visible to synchronous abort listeners before they can retry', async () => {
+  const pending = deferredPieceResponse(); let c, abortRetries = 0;
+  const u = await saveHarness({ send: async (url, opts) => {
+    if (!url.endsWith('/save')) return pieceHttp(response());
+    opts.signal.addEventListener('abort', () => { abortRetries++; c.retry(); });
+    return pending.promise;
+  } }); c = u.controller;
+  const first = u.save(); await pieceTick();
+  c.setContext(controllerInput({ saveEnabled: false })); await pieceTick();
+  assert.equal(abortRetries, 1); assert.equal(u.calls.length, 2);
+  assert.equal(c.getView().phase, 'unavailable'); assert.equal(c.getView().canRetry, false);
+  pending.resolve(pieceHttp(saveReceipt())); await first;
+  assert.notEqual(c.getView().phase, 'saved');
+});
 
 test('B10 async controller owner exists at the PCE-8 exact path', () => {
   assert.ok(fs.existsSync(controllerPath), 'B10_ASYNC_CONTROLLER_OWNER_ABSENT');
@@ -501,3 +667,4 @@ for (const outcome of ['success', 'failure']) {
     assert.equal(c.getView().phase, 'received'); assert.equal(c.getView().preview.format_type, 'quote');
   });
 }
+

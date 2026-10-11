@@ -19,13 +19,19 @@
  *   context can replay the same server request/key; disable/dispose clears it.
  *   An explicit cancelPreview keeps a body-free terminal/unknown cancellation
  *   across close and can only retry the same DELETE, never the original POST.
+ * - savePreview is an unconnected preparation seam. A future admitted host
+ *   supplies strict saveEnabled, isSaveAdmitted and an explicit save key.
+ *   close retains only the save intent/receipt; retry never returns to preview
+ *   POST. Revoking saveEnabled alone keeps the intent but stops requests.
+ *   General disable, changed context or dispose clears it. The future host
+ *   must handle runtime/foreground suspension before exposing save controls.
  *
  * Visual-only changes use the received candidate and a local display ticket.
  * Unknown outcomes recover via the original POST/key, never a PATCH retry.
  * Receipt alone is NOT hash verification or renderer/save/export admission.
  * The display reader and native renderer own their separate checks.
  */
-import { PieceApiError, preparePiecePreviewRequest, preparePieceVisualChange, requestPiecePreview, requestPiecePreviewVisualChange, requestPiecePreviewCancellation } from './pieceApi';
+import { PieceApiError, preparePiecePreviewRequest, preparePieceVisualChange, requestPiecePreview, requestPiecePreviewVisualChange, requestPiecePreviewCancellation, requestPieceSave } from './pieceApi';
 import { createPiecePreviewState, closePiecePreview, beginPiecePreview, completePiecePreview, failPiecePreview, retryPiecePreview, readPiecePreviewView, readPiecePreviewDisplay, verifyPieceArtifactHashes, expirePiecePreview } from './piecePreviewModel';
 
 export function createPieceCreateController(configuration = {}) {
@@ -44,6 +50,11 @@ export function createPieceCreateController(configuration = {}) {
   let cancelIntent = null;
   let cancelPhase = null;
   let cancelCode = null;
+  let saveEnabled = false;
+  let saveIntent = null;
+  let savePhase = null;
+  let saveCode = null;
+  let savedReceipt = null;
   const recoverable = ['PIECE_TEMPORARILY_UNAVAILABLE', 'PIECE_PREVIEW_STALE',
     'PIECE_CONFLICT', 'PIECE_VISUAL_SELECTION_NOT_ALLOWED'];
 
@@ -71,11 +82,20 @@ export function createPieceCreateController(configuration = {}) {
     }
   }
 
-  function clearAttempt(keepCancellation = false) {
+  function clearAttempt(keepCancellation = false, keepSave = false) {
     const previous = active;
     active = null;
     visualRecovery = null;
     visualUpdated = false;
+    if (!keepSave) {
+      saveIntent = null;
+      savePhase = null;
+      saveCode = null;
+      savedReceipt = null;
+    } else if (savePhase === 'loading') {
+      savePhase = 'unavailable';
+      saveCode = 'PIECE_TEMPORARILY_UNAVAILABLE';
+    }
     if (!keepCancellation) {
       cancelIntent = null;
       cancelPhase = null;
@@ -100,6 +120,15 @@ export function createPieceCreateController(configuration = {}) {
       return Object.freeze({ ...view, phase: 'unavailable', preview: null,
         message: new PieceApiError(boundaryCode).message, canRetry: false });
     }
+    if (!disposed && enabled && saveIntent) {
+      return Object.freeze({ ...view, phase: savePhase, preview: null,
+        loadingKind: 'save', retryKind: 'save', savedReceipt,
+        canRetry: saveEnabled && savePhase === 'unavailable' && saveCode === 'PIECE_TEMPORARILY_UNAVAILABLE',
+        message: savePhase === 'saved' ? 'Pieceを保存しました。' :
+          saveCode === 'PIECE_TEMPORARILY_UNAVAILABLE'
+            ? '保存結果を確認できませんでした。同じ保存要求で結果を確認できます。'
+            : saveCode ? new PieceApiError(saveCode).message : '' });
+    }
     if (!disposed && enabled && cancelIntent) {
       return Object.freeze({ ...view, phase: cancelPhase, preview: null,
         loadingKind: 'cancel', retryKind: 'cancel',
@@ -120,6 +149,11 @@ export function createPieceCreateController(configuration = {}) {
 
   function setContext(value = {}) {
     if (disposed) return;
+    const nextSaveEnabled = value?.enabled === true && value?.saveEnabled === true;
+    const saveFlagChanged = saveEnabled !== nextSaveEnabled;
+    saveEnabled = nextSaveEnabled;
+    // Revoke before abort: a synchronous abort listener may call retry().
+    if (saveFlagChanged && !saveEnabled && saveIntent) clearAttempt(false, true);
     if (value?.enabled !== true) {
       enabled = false;
       operation = null;
@@ -152,7 +186,10 @@ export function createPieceCreateController(configuration = {}) {
     // A repeated stale true/source/key must not clear a server-disabled result.
     // A genuine disable/re-enable boundary or different intent can reset it;
     // neither begins a request automatically.
-    if (enabled && (!boundaryCode || boundaryCode === 'PIECE_FEATURE_DISABLED') && equivalent(operation, next)) return;
+    if (enabled && (!boundaryCode || boundaryCode === 'PIECE_FEATURE_DISABLED') && equivalent(operation, next)) {
+      if (saveFlagChanged) notify();
+      return;
+    }
     enabled = true;
     operation = next;
     boundaryCode = null;
@@ -254,12 +291,16 @@ export function createPieceCreateController(configuration = {}) {
   }
 
   async function start() {
-    if (disposed || !enabled || !operation || boundaryCode || cancelIntent || state.phase !== 'idle') return;
+    if (disposed || !enabled || !operation || boundaryCode || cancelIntent || saveIntent || state.phase !== 'idle') return;
     await run(beginPiecePreview(state, operation.request, { ...operation, enabled: true }));
   }
 
   async function retry() {
     if (disposed || !enabled || !operation || boundaryCode) return;
+    if (saveIntent) {
+      if (saveEnabled && savePhase === 'unavailable' && saveCode === 'PIECE_TEMPORARILY_UNAVAILABLE') await runSave();
+      return;
+    }
     if (cancelIntent) {
       if (cancelPhase === 'unavailable' && cancelCode === 'PIECE_TEMPORARILY_UNAVAILABLE') await runCancellation();
       return;
@@ -275,7 +316,7 @@ export function createPieceCreateController(configuration = {}) {
   }
 
   async function changeVisual(selection, identity, visualToken) {
-    if (disposed || !enabled || !operation || boundaryCode || active || visualRecovery || cancelIntent) return;
+    if (disposed || !enabled || !operation || boundaryCode || active || visualRecovery || cancelIntent || saveIntent) return;
     if (!visualToken || visualToken !== state.ticket) return;
     const display = readPiecePreviewDisplay(getView(), clock());
     if (display.phase !== 'received' || !display.hashVerified) return;
@@ -342,7 +383,7 @@ export function createPieceCreateController(configuration = {}) {
   }
 
   async function cancelPreview(identity, displayToken) {
-    if (disposed || !enabled || !operation || boundaryCode || active || visualRecovery || cancelIntent ||
+    if (disposed || !enabled || !operation || boundaryCode || active || visualRecovery || cancelIntent || saveIntent ||
         !displayToken || displayToken !== state.ticket) return;
     const display = readPiecePreviewDisplay(getView(), clock());
     if (display.phase !== 'received' || !display.hashVerified) return;
@@ -353,6 +394,77 @@ export function createPieceCreateController(configuration = {}) {
     cancelIntent = Object.freeze({ request: Object.freeze({ preview_id: preview.preview_id,
       expected_preview_revision: preview.preview_revision }), rowVersion: preview.row_version });
     await runCancellation();
+  }
+
+  // Preparation only: no current product host supplies isSaveAdmitted or
+  // saveEnabled. The future renderer owner must bind actual admission/fit to
+  // this exact preview/token. Quota, native_checked and version strings alone
+  // are not admission. This seam does not promote canSave/canExport.
+  async function savePreview(identity, displayToken, idempotencyKey) {
+    if (disposed || !enabled || !saveEnabled || !operation || boundaryCode || active ||
+        visualRecovery || cancelIntent || saveIntent || !displayToken || displayToken !== state.ticket ||
+        typeof idempotencyKey !== 'string' || !/^[\x21-\x7e](?:[\x20-\x7e]*[\x21-\x7e])?$/.test(idempotencyKey)) return;
+    const display = readPiecePreviewDisplay(getView(), clock()), captured = operation;
+    if (display.phase !== 'received' || !display.hashVerified) return;
+    const preview = display.preview;
+    if (!identity || identity.preview_id !== preview.preview_id ||
+        identity.preview_revision !== preview.preview_revision ||
+        identity.visual_recipe_hash !== preview.visual_recipe_hash) return;
+    try {
+      if (typeof configuration.isSaveAdmitted !== 'function' ||
+          configuration.isSaveAdmitted(preview, displayToken) !== true) return;
+    } catch { return; }
+    // Admission code can synchronously close, revoke, or change the context.
+    if (disposed || !enabled || !saveEnabled || operation !== captured || boundaryCode || active ||
+        saveIntent || cancelIntent || visualRecovery || state.ticket !== displayToken ||
+        readPiecePreviewDisplay(getView(), clock()).phase !== 'received') return;
+    saveIntent = Object.freeze({ idempotencyKey, request: Object.freeze({
+      preview_id: preview.preview_id, expected_preview_revision: preview.preview_revision,
+      piece_text_hash: preview.piece_text_hash, content_payload_hash: preview.content_payload_hash,
+      visual_recipe_hash: preview.visual_recipe_hash, visibility_scope: 'private',
+    }) });
+    await runSave();
+  }
+
+  async function runSave() {
+    if (active || !saveIntent || !saveEnabled) return;
+    const intent = saveIntent, captured = operation;
+    // No private body or renderer object is retained by the retry intent.
+    state = closePiecePreview();
+    visualUpdated = false;
+    savePhase = 'loading'; saveCode = null;
+    let abort;
+    try { abort = new AbortController(); }
+    catch {
+      savePhase = 'unavailable'; saveCode = 'PIECE_TEMPORARILY_UNAVAILABLE'; notify(); return;
+    }
+    const attempt = { abort };
+    active = attempt;
+    const isCurrent = () => !disposed && enabled && saveEnabled && !boundaryCode &&
+      active === attempt && saveIntent === intent && operation === captured;
+    notify();
+    if (!isCurrent()) return;
+    try {
+      const result = await requestPieceSave(intent.request, { expectedUserId: captured.expectedUserId,
+        idempotencyKey: intent.idempotencyKey, signal: abort.signal });
+      if (!isCurrent()) return;
+      savedReceipt = result;
+      savePhase = 'saved';
+    } catch (error) {
+      if (!isCurrent()) return;
+      savePhase = 'unavailable';
+      saveCode = error instanceof PieceApiError ? error.code : 'PIECE_TEMPORARILY_UNAVAILABLE';
+      if (saveCode === 'PIECE_AUTH_REQUIRED' || saveCode === 'PIECE_FEATURE_DISABLED') {
+        boundaryCode = saveCode;
+        if (saveCode === 'PIECE_AUTH_REQUIRED') { operation = null; saveIntent = null; }
+      }
+    }
+    active = null;
+    notify();
+    if (saveCode === 'PIECE_FEATURE_DISABLED' && !disposed && enabled && operation === captured &&
+        boundaryCode === 'PIECE_FEATURE_DISABLED' && onFeatureDisabled) {
+      try { Promise.resolve(onFeatureDisabled()).catch(() => {}); } catch {}
+    }
   }
 
   // The saved-input host may suspend a body-free cancellation during runtime
@@ -370,9 +482,9 @@ export function createPieceCreateController(configuration = {}) {
     if (disposed) return;
     // A conflict/invalid context remains blocked until a valid context update.
     // Retain only the current body-free request/key; drop the received body.
-    // Explicit cancellation is terminal/uncertain for this original request.
+    // Cancellation or save is terminal/uncertain for this original request.
     // Closing drops display data, but cannot restore POST or retry another ID.
-    clearAttempt(!!cancelIntent);
+    clearAttempt(!!cancelIntent, !!saveIntent);
     notify();
   }
 
@@ -399,5 +511,6 @@ export function createPieceCreateController(configuration = {}) {
     clearAttempt();
   }
 
-  return Object.freeze({ setContext, getView, start, retry, changeVisual, cancelPreview, setCancellationEnabled, close, subscribe, refresh, dispose });
+  return Object.freeze({ setContext, getView, start, retry, changeVisual, cancelPreview, savePreview, setCancellationEnabled, close, subscribe, refresh, dispose });
 }
+
