@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u199 内容修正（2026-10-11 JST・未配置）**：否定決定の後の「落ち着きました／嬉しかったです／うれしかったです」が欠落するu198残件を、共有の報告prefix判定内で補修。明示SELF・完全な名詞格項・既存の否定決定/準備4形だけを区別し、感情・否定・原文・明示順序を文章/図/保存再読に保持する。Analysis4＋共有限定感情1suite **987 tests／4434 subtests PASS**、共有identity1成功。合成8例の前後比較と生成全文、実RN表示model一致、実service＋合成RPC保存再読6ルートを確認。STRUCTURE_MAP_DELTA_NONE。共有owner1変更、API/DTO/DB/RN製品変更0。一般の省略主体・修飾語/連体形、本人生成→保存再表示・商品受入れは残る。詳細は04 §3.29、06/API handoff末尾u199。
+
 **u198 内容修正（2026-10-11 JST・未配置）**：「その後、…決めませんでした」を報告の前置きと誤認し、後続の「安心した」を落とす問題を補修。完全な明示SELFの過去決定/準備だけをAnalysis内で区別し、肯否定・感情・原文・書かれた順序を保持する。真の報告/別field/他者/否認/訂正/撤回は従来どおり保留。隔離CIで4suite **436 tests／4398 subtests PASS**、合成4全文の読解、実service＋合成RPC保存再読6ルートを確認。新規検査workflowは§4.26。共有側も判定する丁寧感情3形、省略主体、本人生成→保存再表示・商品受入れは残る。詳細は04 §3.28と06/API handoff末尾u198。
 
 **u197 内容修正（2026-10-11 JST・未配置）**：「今回は事前に同僚と分担を決めておいた」を、主語を本人と推定せず分析へ保持。既存の過去決定/準備形に限定して主体未確定・今回/事前・肯否定・原文を文章と図へ残し、不明な行為者や別sourceの「今回」を同一化しない。4suite 433 tests／4371 subtests PASS、合成12入力の前後比較、生成10全文と実RN表示model一致、実service＋合成RPC保存再読3ルートを確認。STRUCTURE_MAP_DELTA_NONE。共有/API/DTO/DB/RN製品変更0。一般の主語省略/修飾、全体ルートUI、本人生成→保存再表示・商品受入れは残る。詳細は04 §3.27と06/API handoff末尾u197。
@@ -617,6 +619,17 @@ u193の内部補修ownerは既存Analysis `intent_compiler.py`（接続語付き
 | mashos-api `.github/workflows/analysis-observed-content.yml`（新規） | 対象Draft branchのcommit固定・read権限で既存Analysis4suiteと合成4全文を実行。ローカルruntime不通からの直接検証経路。live DB/secret/deployなし。製品依存は変更しない。 |
 
 製品runtime/公開DTO/保存責任の追加はない。検査fileの追加を本mapに記録し、全file追加0とは表記しない。CI38123765929は436 tests／4398 subtests成功。実RN表示model/端末は今回未再検証。丁寧感情3形の共有prefix判定は残件。詳細・実行範囲は06/API handoff u198。
+
+### 4.27 否定決定後の丁寧感情と共有owner（2026-10-11 u199）
+
+| File | 責務・変更 |
+|---|---|
+| mashos-api `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 既存の共有報告prefix判定内で、閉じた明示SELFの否定決定/準備4形だけを名詞報告から区別する。Analysisの丁寧感情hostも同じ判定を使う。 |
+| mashos-api `ai/tests/test_cmee_analysis_v1d_vertical.py`・`test_analysis_observed_storage.py`・`test_cmee_emlis_limited_change_feeling.py` | 感情/否定/原文/順序、報告境界、訂正/撤回、6ルートの保存再読と共有witnessを検査する。 |
+| mashos-api `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | current共有ownerのidentityを実sourceから同期。歴史IM03は保持する。 |
+| mashos-api `.github/workflows/analysis-observed-content.yml` | §4.26の既存隔離CIを5suite＋共有identity・合成7全文へ更新。新しい検査ownerやlive接続は追加しない。 |
+
+STRUCTURE_MAP_DELTA_NONE：既存owner内の補修で新規file/公開API/DTO/DB/RN製品構造の変更なし。共有owner1変更。987 tests／4434 subtests PASSとidentity1成功、実RN表示model照合は合成8例の前後。実機/商品受入れは未完了。詳細は06/API handoff u199。
 
 ## 5. Source and artifact identity
 
