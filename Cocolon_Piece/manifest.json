@@ -13,9 +13,9 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "eb46e07243dc458c8eee53db7e399ad63a76e963",
-    "raw_sha256": "81bfade9f11dad8ebd954e8903018fa18acfceb3a1c72c43db885b5b7e2bf5d4",
-    "utf8_bytes": 91307
+    "git_blob_sha1": "3c1a1e753f9c0aefd001dd70b8b3c4bb0f1baafa",
+    "raw_sha256": "04af521fde5a96dcdffd5cb6c4ace68cf8ca47a4aa744ceb6e9a6f2ef8c4cc31",
+    "utf8_bytes": 91941
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -84,7 +84,7 @@
     "pce9e_export_preflight": "HISTORICAL_SOURCE_REVIEWED_PINNED_PROPOSAL__CURRENT_IMPLEMENTATION_IN_EXPORT_NATIVE_COMPILE_20261011",
     "pce9e_export_native_compile": "REMOTE_E4F4984__IOS_ANDROID_LIBRARY_COMPILE_PASS__JS572_PASS__DEVICE_ADMISSION_PENDING",
     "pce9e_export_share_completion": "REMOTE_1C6FBD3__IOS_NORMAL_COMPLETION_COPY_CLEANUP__CI577_PASS__DEVICE_PENDING",
-    "pce9c_save_lifecycle": "HEADLESS_CONTROLLER_PREPARATION__LOCAL592_PASS__HOST_DISPLAY_ADMISSION_PENDING"
+    "pce9c_save_lifecycle": "REMOTE_9ACA322__HEADLESS_SAVE_PREPARATION__CI592_PASS__HOST_DISPLAY_ADMISSION_PENDING"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -309,9 +309,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "62602858f9b492a000411e07274506b9d3d147c5",
-    "raw_sha256": "5af6c0586e04de768bddcebfd0593945b3d5e030d2ca26eb3c83f9c2c3079c49",
-    "utf8_bytes": 306698
+    "git_blob_sha1": "facae6e1a05eec97d49c2c0d76cd92e7cc561a50",
+    "raw_sha256": "29215030c2352223ed55bdd8048a6a867c869c0fe341212657ad11adcc5cb562",
+    "utf8_bytes": 307673
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -497,12 +497,15 @@
     "local_js_passed": 592,
     "local_js_failed": 0,
     "local_js_skipped": 0,
-    "ci_pending": true,
+    "ci_pending": false,
     "live_database_apply": 0,
     "release_effect": 0,
     "native_app_builds": 0,
     "product_acceptance": false,
-    "automatic_progression": false
+    "automatic_progression": false,
+    "ci_js_passed": 592,
+    "ci_js_failed": 0,
+    "ci_js_skipped": 0
   },
   "b06_q3_context_fence": {
     "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
@@ -3683,7 +3686,7 @@
     "current_entry_section": "52",
     "current_map_section": "56",
     "base_head": "eb24b240af9315739019ce216ae06d76d9c30020",
-    "state": "HEADLESS_SAVE_PREPARATION__LOCAL592_PASS__CI_PENDING",
+    "state": "REMOTE_HEADLESS_SAVE_PREPARATION__CI592_PASS__HOST_DISPLAY_ADMISSION_PENDING",
     "source_path": "features/piece/PieceCreateController.js",
     "test_path": "tests/piece-v2-state-models.test.js",
     "reuses_transport": "requestPieceSave",
@@ -3698,7 +3701,7 @@
     "local_js_failed": 0,
     "local_js_skipped": 0,
     "added_tests": 15,
-    "ci_pending": true,
+    "ci_pending": false,
     "review_environment": "CODEX_WORK_WITH_SAME_ENVIRONMENT_READ_ONLY_SUBAGENT_REVIEW_NOT_PRO_ULTRA_ACCEPTANCE",
     "product_host_connected": false,
     "display_model_connected": false,
@@ -3712,7 +3715,18 @@
     "activation": 0,
     "app_build": 0,
     "main_merge": 0,
-    "automatic_progression": false
+    "automatic_progression": false,
+    "source_commit": "9aca322808cbf877e883feab8f235ec1ab7a61a5",
+    "ci_run_id": 38099147844,
+    "ci_head": "9aca322808cbf877e883feab8f235ec1ab7a61a5",
+    "ci_js_job_id": 114351256203,
+    "ci_js_passed": 592,
+    "ci_js_failed": 0,
+    "ci_js_skipped": 0,
+    "ci_all_five_jobs_success": true,
+    "native_library_compile_rerun": false,
+    "native_library_compile_skip_reason": "No dependency/platform/workflow changes; existing scope skipped both export library compile steps.",
+    "review_after_fix_no_additional_blockers": true
   }
 }
 
