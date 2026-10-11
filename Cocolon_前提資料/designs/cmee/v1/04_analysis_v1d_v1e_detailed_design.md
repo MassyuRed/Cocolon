@@ -290,6 +290,12 @@ vertical76/storage15/saved period13/API6＝110 PASS。6合成本文と既存RN�
 
 ### 3.10 u109 行動後の過去感情
 
+**u187 行動後の否定過去感情（2026-10-11 JST・未配置）**：u186で保留したcompoundを、既存完全SELF行動＋後/あと/てから＋同じ12否定有限形に限って受理する。共有Planは全文・帰属・境界を証明し、negative/negationと専用source_proven_negative_feeling_sequenceを保持、positive_changeを付けない。Analysisは共有2核/required typed relation、原文scalar/UTF-8/hash/whole evidenceを照合し、PAST_FEELING/negative/feeling/pastへ保持する。右端の省略主語はUNSPECIFIEDを維持し、苦痛/失敗/改善/原因を補わない。先頭/後続の明示順序は既存隣接条件だけへ接続する。
+
+否定行動・たら・程度/疑問/推測・他者・引用/夢/報告/後続認知/撤回hostは保留。通常補足の矛盾を暗黙訂正にせず、訂正/撤回/未知文/別field/sourceを橋渡ししない。同義の常体/丁寧形は期間差を作らず、肯否定の差は保持する。Emlisの観測作者/受取作者/独立readerも同じ限定根拠に接続し、原文端点と接続語を保つ。否定された感情を「変化」「支えている」へ転換せず、本文の完全な意味検査を通らない否定関係は拒否する。
+
+Analysis4suite391 tests／3386 subtests成功、共有限定154・identity1・短文品質保留1成功、既存実保存fixture3skip。Analysis9全文と実RN表示modelが一致、実service＋合成RPCで追加8caseの保存再読を確認。短いEmlis一文は意味検証を通過した候補も既存echo品質gateで未生成になり、閾値を緩めて通さない。STRUCTURE_MAP_DELTA_NONE、既存ownerの責務はcurrent03 §4.15へ明示。DB/API/DTO/RN/Safety/製品依存変更0。本人の分析生成→保存後再表示は未完了、本修正は未配置。下記u186のcompound保留は履歴とし、この有限範囲だけ更新する。詳細は06/API handoff末尾u187。
+
 **u186 単独の否定過去感情（2026-10-11 JST・未配置）**：u178/u179の単独明示SELFに、安心しなかった/落ち着かなかった/嬉しくなかった/うれしくなかった、各「です」形と対応する「ませんでした/ありませんでした」の計12有限形を追加する。既存7本人主語＋完全節、memo単独span、explicit/current-input claim、required/should、共有核の主体/種類/negative/negationを照合し、PAST_FEELING/SELF/negative/feeling/pastと原文scalar/UTF-8/hash/source_partsを保持。安心はvalue/value/fact、他形はreaction/feeling/feelingの既存根拠を使い、共有核を書き換えない。
 
 realizerは否定の過去形を表示し、安心の不在を苦痛や行動失敗と推論しない。後続の明示順序は既存隣接条件だけで保持し、因果/改善を補わない。引用/報告/夢/疑問/推測、句点後の認知/報告/撤回host、主語省略/他者/程度を保留する。行動後compoundの共有否定証明は未成立のため、本追加をcompoundへ適用しない。通常の矛盾補足を暗黙訂正にせず、訂正/撤回/未知文/別sourceを橋渡ししない。丁寧さ/同義表記差は同義比較、肯否定差は内容差として保持。従来節の「否定は未対応」は履歴として残し、この単独有限範囲だけ更新する。

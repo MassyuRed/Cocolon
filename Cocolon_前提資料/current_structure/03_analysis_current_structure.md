@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u187 内容修正（2026-10-11 JST・未配置）**：「資料を調べた後、安心しなかった」等の行動後12否定有限形が分析から落ちる欠落を補修。共有のnegative/negationと全文根拠を要求し、文章・図・原文証拠・書かれた順序を保持する。右端の省略主体、原因/改善/失敗は補わない。連動するEmlisの誤った「変化」「支えている」表現も除去し、独立readerで改変を拒否。Analysis391 tests／3386 subtests、共有限定154＋identity1＋品質保留1が成功、既存実保存fixture3skip。Analysis9全文と実RN表示model一致、実service＋合成RPCの保存再読を確認。短いEmlis一文は意味検証を通っても既存echo品質gateで未生成の例を保持。STRUCTURE_MAP_DELTA_NONE、既存owner責務は§4.15へ追記。weekly20261010 §5.4の明示内容修正として実施し、§5.5の本人生成→保存再表示は未完了。詳細は04 §3.10と06/API handoff末尾u187。
+
 **u186 内容修正（2026-10-11 JST・未配置）**：本人が明記した「安心しなかった」等の否定過去感情が、文章・図から落ちる欠落を補修。既存明示本人主語と12有限形だけで、共有の否定根拠・原文出典を照合し、否定と後続の明示順序を保持する。負荷・因果・改善を補わず、他者/省略主語/引用/推測/撤回host/未証明compoundは保留。Analysis 389 tests／3282 subtests成功、生成7全文と実RN表示model一致、実service＋合成RPCの保存再読を確認。STRUCTURE_MAP_DELTA_NONE。今回の明示内容修正指示をweekly20261010 §5.4の再配分として扱う。下記の入力不足案内確認は維持し、本人の分析生成→保存後再表示は未完了。本修正を配置・実機確認済みへ換算しない。詳細は04 §3.10と06/API handoff末尾u186。
 
 **2026-10-10 18:51 JST 本人実機確認済み**：Mashから「入力情報が少ないため、まだ分析を表示できません。」の表示確認報告を受けた。今回の入力不足を通常案内にする表示対応は、本人実機の確認まで完了。再表示/再起動や分析生成・内容品質の確認へは拡張しない。追加入力・再配置は不要。詳細はAPI運用記録§40。
@@ -433,6 +435,20 @@ saved period13/API6と合わせ110 PASS、6合成出力の既存RN本文がbacke
 | mashos-api `ai/tests/test_analysis_observed_storage.py` | 16 PASS。過去感情pairの保存/再読取・同一文章/DTO・再生成0・内部型非漏出 |
 
 saved period13/API6と合わせ116 PASS、242 subtests PASS。6合成本文の既存RN表示modelとbackend本文が一致。安心した/安心しました、落ち着いた、嬉しかった/うれしかったの5形と省略/明示SELFに限定。単独感情、未認定のほっとした/落ち着きました、程度修飾、否定、夢/伝聞/推測は今回の認定へ含めない。新規file/共有owner/API/DB/DTO/RN/依存変更0、file配置不変。詳細はcanonical04 §3.10と06/API handoff末尾u109。u102〜u109は未配置。
+
+**u187 追記（2026-10-11 JST）**：上記u109の否定未対応は当時の状態。u186単独形に続き、明示SELF行動＋既存接続語＋12否定過去感情の有限compoundを追加した。既存fileの今回の責務を以下に明示する。新owner/生成route/保存lifecycleは追加しない。
+
+| Repository / existing file | u187の責務 |
+|---|---|
+| mashos-api `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 全文/帰属/有限形を証明したnegative sequenceの共有根拠と原文端点・接続語。positive_changeを付けず、報告/推測/撤回hostは保留 |
+| 同 `emlis_ai_grounded_human_reception.py` | 実際の時間接続と否定を保持した受取。support/価値判断を追加しない |
+| 同 `emlis_ai_grounded_sentence_surface.py` | 通常/limitedの否定sequence観測文で元の端点と接続語を保持し、感情の不在を変化と呼ばない |
+| 同 `emlis_ai_grounded_observation_gate.py` | 作者非参照で観測全文・受取・否定・順序を復元。対象の証明不足と誤った因果/主体/肯定化を拒否し、既存echo品質条件は維持 |
+| 同 `cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 共有negative/negation/専用根拠と元pairを照合し、PAST_FEELING/negativeと主体未指定・証拠・順序を保持 |
+| mashos-api `ai/tests/test_cmee_emlis_limited_change_feeling.py` | 否定24正常/64境界、全recovery候補の意味保持と作者無効の改変拒否、短文echo品質保留。Analysis vertical/storageの既存fileにも96有限形caseと保存再読8caseを追加 |
+| mashos-api `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | current共有ownerのidentityのみ同期。historical manifest/9owner/18payloadは保持 |
+
+未配置。合成検査と実RN表示modelの照合は本人実機の生成/再表示を代替しない。詳しい採用範囲・検証・残件は04 §3.10、06/API handoff末尾u187。
 
 ### 4.16 本人が明記した過去の所在を場面表示へ接続（2026-10-04 u110）
 
