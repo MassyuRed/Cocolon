@@ -621,6 +621,15 @@ Analysis前後26全文と実RN model、実service＋合成RPC保存再読3ルー
 
 通常3例で生成不能から行動＋感情2node/明示順序1edgeへ、場面付きは1node/0edgeから3node/2edgeへ変わった。未知文・別fieldを橋渡しせず、日付は書字だけに所属し、原因を補わない。合成12入力の前後24結果のうち生成10全文をrootが読解し、実RN modelの本文/identity/順序/各要素数が一致。実service＋合成RPCの保存再読3ルートとEmlis前後6全文も確認した。最終回帰/CI、反映、残件は06/API handoff u211。新規repo file0、renderer/API/DTO/DB/RN製品変更0、STRUCTURE_MAP_DELTA_NONE。本人実機・稼働DB・正式商品受入れは未確認。
 
+## 3.42 u212 省略主体の本人所有書字と独立した後続感情（2026-10-12・未配置）
+
+「自分の考えを書いた。それから、私は落ち着きました。」では、既存Analysisは書字を主体未確定として解析するが、共有Planがそれを報告前置きと判定して後続感情を落としていた。既存 `_source_prefix_opens_report` のwriting fallbackで、省略主体の場合に限り `私／僕／自分／俺＋の` を名詞内の所有表現として保持する。明示SELFの漢字/仮名所有範囲、肯定過去書字・目的語必須・前後どちらか1個の場所/媒体、既存有限名詞と「への／との／での」、未解析時点/疑問/報告語の検査は維持する。所有を行為者の証明にせず、UNSPECIFIEDの行動と独立したSELF感情を区別する。旧completed fallbackは変更しない。
+
+通常5例は1node/0edge→2node/1edge、場面付きは2/1→3/2。未知文/別field/現在未完了は2node/0edgeで、日付・主体・因果や未知の接続を補わない。報告/仮名所有の省略主体は両版UNAVAILABLE、明示SELF/否定書字は不変。報告の両field方向を保持するが、memo=書字／memo_action=感情の逆配置で感情が採用されない既存制限は今回の解消範囲に含めない。感情直後の引用/否認が感情だけを除外する既存scopeも維持する。
+
+合成13入力の前後26結果のうち生成22全文をrootが読解し、実RN modelの本文/identity/順序/各要素数が一致。実service＋合成RPC保存再読3ルートとEmlis前後6全文を確認した。Emlisは既存Receptionの追加が対象1例にあり、商品品質合格ではない。最終回帰/CI・反映・残件は06/API handoff u212。新規repo file0、Analysis compiler/realizer/API/DTO/DB/RN製品変更0、STRUCTURE_MAP_DELTA_NONE。稼働DBでの生成・保存再読、本人実機、正式商品受入れは未確認。
+
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
