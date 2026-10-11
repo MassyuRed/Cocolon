@@ -547,6 +547,14 @@ u200の省略主体の行動後でも、共有報告判定が「の…でした�
 
 日付重複/順序語混用・改行・他者・時刻/範囲・未解析時点/疑問名詞は新日分岐で保留する。SELFが日と対象を隔てる「朝の資料」、分担、明日の資料、今月号/今年度の完全名詞と、日付なしの既存文法は維持。訂正/撤回・真の報告・別fieldは既存帰属条件を通す。最終Analysis4suite455 tests/4628 subtests、共有対象49、owner identity1成功。前後16分析本文/実RN・合成保存再読9ルート・共有Emlis前後6全文を確認。共有Plan1変更、STRUCTURE_MAP_DELTA_NONE。日付付き決定等の残件・実出力・反映結果は06/API handoff u202参照。
 
+## 3.33 u203 日付付き否定決定・準備後の本人感情（2026-10-11・未配置）
+
+共有Planの報告判定が、日付付き決定の「の…でした」を話の紹介と誤認していた。既存の本人否定決定・準備4形に今日/昨日の3配置（day→SELF、day→区切り→SELF、SELF→day→区切り）を追加し、u202の日境界/未解析名詞判定を共用する。明示SELF、完全格項、否定、決める/決めておくの区別を保持し、後続の丁寧感情3形へ日付/原因/主体を補わない。
+
+省略主体の決定・他者・改行・重複日語/順序混用・真の報告・未解析時刻/範囲/疑問名詞は保留。完全名詞の分担、明日の分担、今月号等は維持。通常行動と日付なし決定の文法は不変。Analysis compiler/realizer/API/DTO/DB/RN製品変更0、共有Plan1のみの製品補修、STRUCTURE_MAP_DELTA_NONE。
+
+正常3例は1node/0edge→2node/1edge、不明文/別fieldは感情を保持して線を補わない。前後12生成全文と実RN表示model、実service＋合成RPC保存再読6ルート、Emlis前後6全文を確認。限定58 tests/89 subtestsと共有identity1成功。最終回帰・CI・remote照合と未完了範囲は06/API handoff u203参照。未配置・実DB/本人実機・正式商品受入れ未確認。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
