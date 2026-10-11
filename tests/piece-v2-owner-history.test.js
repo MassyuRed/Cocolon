@@ -417,3 +417,146 @@ test('stale saved-detail read cannot erase an in-flight deletion recovery key', 
   assert.equal(h.calls[1][1].headers['Idempotency-Key'], h.calls[2][1].headers['Idempotency-Key']);
   assert.match(h.controller.getView().message, /削除しました/);
 });
+
+// Actual NexusScreen/Header JSX with synthetic hooks, Auth/runtime and legacy
+// feeds. The existing owner host below still executes its real API/controller.
+function nexusEntryHarness(options = {}) {
+  const ts = require('typescript');
+  const control = { owner: OWNER, enabled: true, tutorial: false, initializing: false, focused: true, ...options };
+  const hooks = [], effects = [], routes = [], legacyCalls = [], modules = new Map();
+  let cursor = 0, dirty = false, tree;
+  const noop = () => {}, colors = {}, tutorialPieces = [];
+  const same = (a, b) => a && b && a.length === b.length && a.every((v, i) => Object.is(v, b[i]));
+  const React = {
+    createElement: (type, props, ...children) => ({ type, props: props || {}, children }),
+    useState: initial => {
+      const i = cursor++;
+      if (!hooks[i]) hooks[i] = { value: typeof initial === 'function' ? initial() : initial };
+      return [hooks[i].value, update => {
+        const next = typeof update === 'function' ? update(hooks[i].value) : update;
+        if (!Object.is(next, hooks[i].value)) { hooks[i].value = next; dirty = true; }
+      }];
+    },
+    useRef: initial => { const i = cursor++; return hooks[i] ||= { current: initial }; },
+    useMemo: (fn, deps) => {
+      const i = cursor++;
+      if (!hooks[i] || !same(hooks[i].deps, deps)) hooks[i] = { deps, value: fn() };
+      return hooks[i].value;
+    },
+    useEffect: (fn, deps) => {
+      const i = cursor++;
+      if (!hooks[i] || !same(hooks[i].deps, deps)) {
+        const previous = hooks[i]; hooks[i] = { deps, cleanup: previous?.cleanup };
+        effects.push(() => { previous?.cleanup?.(); hooks[i].cleanup = fn(); });
+      }
+    },
+  };
+  React.useCallback = (fn, deps) => React.useMemo(() => fn, deps);
+  React.useLayoutEffect = React.useEffect;
+  const navigation = { navigate: (...args) => routes.push(copy(args)), addListener: () => noop,
+    isFocused: () => control.focused };
+  const runtime = { isFeatureEnabled: name => name === 'piece_v2_owner_read_enabled' ? control.enabled : false };
+  function load(file) {
+    if (modules.has(file)) return modules.get(file);
+    const module = { exports: {} };
+    const dependency = name => {
+      if (name === 'react') return { __esModule: true, default: React, ...React };
+      if (name === 'react-native') return { View: 'View', Text: 'Text', SafeAreaView: 'SafeAreaView',
+        ScrollView: 'ScrollView', StatusBar: 'StatusBar', Alert: { alert: noop },
+        StyleSheet: { create: x => x }, useWindowDimensions: () => ({ height: 800 }) };
+      if (name.endsWith('/AuthContext')) return { useAuth: () => ({ user: control.owner ? { id: control.owner } : null,
+        initializing: control.initializing }) };
+      if (name.endsWith('/AppRuntimeContext')) return { useAppRuntime: () => runtime };
+      if (name.endsWith('/UnreadContext')) return { useUnread: () => ({ getFeatureUnread: noop, setUnread: noop }) };
+      if (name.endsWith('/TutorialContext')) return { useTutorial: () => ({ isTutorialMode: control.tutorial,
+        tutorialStep: 0, tutorialPieces, setTutorialStep: noop, ensureTutorialPiecesSeed: noop }) };
+      if (name.endsWith('/ThemeContext')) return { useTheme: () => ({ colors, themeName: 'light' }) };
+      if (name.endsWith('/uiTokens')) return { makeUiTokens: () => ({}) };
+      if (name.endsWith('/applyTypographyTokens')) return { applyTypographyTokens: x => x };
+      if (name === 'react-native-safe-area-context') return { useSafeAreaInsets: () => ({}) };
+      if (name.endsWith('/nexusApi')) return new Proxy({}, { get: (_, key) => async (...args) => {
+        legacyCalls.push([key, args]);
+        if (control.feedFailure && ['getNexusPieces', 'getNexusResonancePieces'].includes(key)) throw Error('feed unavailable');
+        return { items: [] };
+      } });
+      if (name.endsWith('/legacyWireContracts')) return { readShareCode: noop };
+      if (name.endsWith('/tutorialScenarioData')) return { TUTORIAL_TOTAL_STEPS: 16 };
+      if (name.endsWith('/TutorialOverlay')) return { __esModule: true, default: 'TutorialOverlay',
+        syncTutorialSpotlightTarget: async () => null, waitForTutorialFrames: async () => {} };
+      if (/\/(NexusHeader|nexusRouteModel|nexusNormalize|nexusHistoryModel)$/.test(name)) {
+        return load(path.resolve(path.dirname(file), name + '.js'));
+      }
+      return { __esModule: true, default: name.split('/').pop() };
+    };
+    const compiled = ts.transpileModule(fs.readFileSync(file, 'utf8'), { fileName: file.replace(/\.js$/, '.tsx'),
+      reportDiagnostics: true, compilerOptions: { target: ts.ScriptTarget.ES2022,
+        module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.React } });
+    assert.equal((compiled.diagnostics || []).filter(d => d.category === ts.DiagnosticCategory.Error).length, 0);
+    vm.runInNewContext(compiled.outputText, { require: dependency, module, exports: module.exports,
+      console: { warn: noop }, setTimeout: () => 1, clearTimeout: noop }, { filename: file });
+    modules.set(file, module.exports); return module.exports;
+  }
+  const Screen = load(path.join(ROOT, 'screens/NexusScreen.js')).default;
+  const Header = load(path.join(ROOT, 'screens/nexus/NexusHeader.js')).default;
+  function render() {
+    let count = 0;
+    do {
+      assert.ok(++count < 30, 'bounded Nexus render/effect simulation');
+      dirty = false; cursor = 0; tree = Screen({ navigation });
+      while (effects.length) effects.shift()();
+    } while (dirty);
+    return tree;
+  }
+  const find = type => nodes(tree).find(n => n.type === type);
+  render();
+  return { control, routes, legacyCalls, render, find,
+    entry: () => nodes(Header(find(Header).props)).find(n => n.props.accessibilityLabel === '自分のPieceを開く'),
+    tab: value => { find('NexusTabBar').props.setActiveTab(value); render(); },
+    dispose: () => { for (const hook of hooks) hook?.cleanup?.(); },
+  };
+}
+
+test('ordinary Piece header opens owner history and its existing dedicated read without a saved target', async () => {
+  const n = nexusEntryHarness();
+  assert.ok(n.entry()); assert.ok(texts({ children: [n.entry()] }).includes('自分のPieceを開く'));
+  n.entry().props.onPress();
+  assert.deepEqual(n.routes, [['PieceOwnerHistory', { savedPiece: null }]]);
+  const h = harness({ send: ownerSend }), host = ownerHost(h, n.routes[0][1].savedPiece);
+  host.componentDidMount(); await tick(); assert.equal(h.calls.length, 0);
+  await button(host, '保存済みPieceを読み込む').props.onPress();
+  assert.equal(h.calls.length, 1); assert.equal(h.calls[0][0], '/emotion/piece/history?limit=20');
+  assert.equal(h.calls[0][1].expectedUserId, OWNER);
+  assert.equal(host.controller.getView().items.length, 1);
+  host.componentWillUnmount(); n.dispose();
+});
+for (const unavailable of [{ enabled: false }, { enabled: 'true' }, { enabled: undefined },
+  { owner: null }, { initializing: true }, { tutorial: true }]) {
+  test('ordinary owner entry is absent when unavailable: ' + JSON.stringify(unavailable), () => {
+    const n = nexusEntryHarness(unavailable); assert.equal(n.entry(), undefined); assert.equal(n.routes.length, 0); n.dispose();
+  });
+}
+for (const [key, changed] of [['owner', RID], ['enabled', false], ['tutorial', true], ['initializing', true]]) {
+  test(`old owner entry cannot revive after ${key} changes away and back`, () => {
+    const n = nexusEntryHarness(), stale = n.entry().props.onPress, previous = n.control[key];
+    n.control[key] = changed; n.render(); stale(); assert.equal(n.routes.length, 0);
+    n.control[key] = previous; n.render(); stale(); assert.equal(n.routes.length, 0);
+    n.entry().props.onPress(); assert.equal(n.routes.length, 1); n.dispose();
+  });
+}
+test('owner entry ignores a press after blur or unmount', () => {
+  const n = nexusEntryHarness(), stale = n.entry().props.onPress;
+  n.control.focused = false; stale(); assert.equal(n.routes.length, 0);
+  n.control.focused = true; n.dispose(); stale(); assert.equal(n.routes.length, 0);
+});
+test('owner entry remains available independently of public and resonance loading, errors and selected tab', async () => {
+  const n = nexusEntryHarness({ feedFailure: true });
+  assert.equal(n.find('NexusPieceFeedSection').props.pieceState.loading, true); assert.ok(n.entry());
+  await tick(); n.render(); assert.equal(n.find('NexusPieceFeedSection').props.pieceState.error, 'feed unavailable');
+  for (const tab of ['history', 'emotion_log', 'recommend', 'piece']) {
+    n.tab(tab); assert.ok(n.entry()); await tick(); n.render(); assert.ok(n.entry());
+    if (tab === 'history') assert.equal(n.find('NexusHistorySection').props.historyState.error, 'feed unavailable');
+  }
+  n.entry().props.onPress(); assert.equal(n.routes.length, 1);
+  assert.ok(!n.legacyCalls.some(([, args]) => args.some(arg => arg?.user_id === OWNER)));
+  n.dispose();
+});
