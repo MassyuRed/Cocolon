@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は§56を優先します。既存controllerへ保存中・結果不明・同一要求の再確認・保存完了を追加しました。正式renderer admissionを供給するhost・表示model・保存画面は未接続です。canSave/canExport=falseを維持し、正式fit・実機と画像保存共有の残件を継続します。**
+**現在は§57を優先します。保存状態を既存display／modal／hostへ接続し、close・背景復帰後の同じ保存要求の結果確認に対応しました。初回保存操作・正式renderer admission・保存後本人detail取得は未接続。canSave/canExport=falseを維持し、正式fit・実機と画像保存共有の残件を継続します。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -2066,3 +2066,33 @@ Supabase projectはACTIVE_HEALTHY、Piece001〜004は適用済み、005 quotaと
 source `9aca322808cbf877e883feab8f235ec1ab7a61a5` の製品1＋test1＋資料3をDraft PR #30へ反映し、5fileのremote全文・変更path集合・基準headとの親子関係を照合した。[CI38099147844](https://github.com/MassyuRed/Cocolon/actions/runs/38099147844)は**全5job success**。JS job114351256203は **592 PASS／FAIL0／SKIP0**。既存Android bridge source compileとiOS source syntax／patch検査もsuccess。依存差分がないためexport Pods／Android4依存compile stepはscopeどおりskipであり、前回library compile証拠を今回の実行結果へ換算しない。
 
 同環境read-only reviewで許可取消と同期abort retryの修正成立を再確認し、追加重大指摘なし。entry§52／manifest v51へ結果を同期。保存状態の制御は実装済みだが、正式admission・表示model／modal・保存後owner再取得・実機／商品受入れは未完了のまま区別する。
+
+## 57. 2026-10-11 — 保存状態の画面表示と中断後の結果確認
+
+### 57.1 直接変更と既存owner
+
+基準head `a5381afeabd56ce5fb98a2df39d7558f18c1bf6e`／入口§52／本map§56から継続。全体設計・全ファイル地図・作業ルール・恒久incident全文・最新weekly10/10 §5.5・PCE5描画契約・PCE6の保存flowを参照した。前回の保存controllerに対して、表示modelがsavedを未知状態に変え、hostが背景化で保存intentを失っていたため、その既存画面経路を直接接続した。
+
+| path | 変更内容 |
+| --- | --- |
+| `features/piece/piecePreviewModel.js` | save loading/retryとsavedを表示へ投影。本文やsaved receiptを画面へコピーせず、canSave/canExport=falseを維持。 |
+| `components/piece/PiecePreviewModal.js` | 保存中・同じ要求での結果確認・保存完了の文言と見出し。保存結果表示中に保存不可の説明を重ねない。初回保存buttonは追加しない。 |
+| `screens/input/InputPieceActionArea.js` | close後の結果確認と保存完了表示。同一owner/input/keyでの背景・runtime停止／復帰。saveの厳密flag監視、別選択の破棄、結果不明中のsource GET／preview POSTへの戻りを禁止。 |
+| `features/piece/PieceCreateController.js` | 既存intentのsetSaveAvailabilityを追加。許可を先に更新してabortし、再開は明示retryのみ。同一contextのsave flagだけの変更では通常previewを保持する。 |
+| `tests/piece-v2-preview-display.test.js`／`tests/piece-v2-saved-input-host.test.js` | 実際のcontroller→display→modal→host sourceを使って保存表示・同key回収・背景復帰・本人/input/key切替・厳密flagと既定未admissionを検査。React/native/HTTP/Auth/admissionは代替である。 |
+
+初回saveを実行する製品UIはまだない。今回検査だけで合成admissionから保存状態を作り、表示と結果回収の実sourceを通した。正式renderer判定・実際の保存操作の有効化・実機商品受入れへ換算しない。
+
+### 57.2 レビューと検証
+
+同環境read-only reviewで二つの問題を検出し修正した。①背景中はgetViewがhiddenでretryKindを隠すため、同runtimeで入力／keyを切り替えると旧save intentを保持し得た。hidden状態の別選択は明示clearへ進め、A→B／A→B→Aを検査した。②save flagだけの変化が通常previewを消していた。同一contextのflag変更だけを限定処理し、本文／ticket／source readyを保持する。runtime自体の新publicationでは従来どおりpreviewを破棄する。
+
+context modeでも背景中のsave flag変更が保存intentを消さないよう、既存save／cancelの停止・復帰を先に扱うよう修正し、同じURL/bodyによる結果回収を検査した。
+
+local既存12suiteは **611 PASS／FAIL0／SKIP0**（先行592＋追加19）。Node24.19.0／既存TypeScript5.2.2。環境区分はCODEX_WORK_WITH_SAME_ENVIRONMENT_READ_ONLY_SUBAGENT_REVIEW_NOT_PRO_ULTRA_ACCEPTANCE、作業区分はDIRECT_PRODUCT_OR_ACCEPTANCE_WORK。正式な別model商品受入れではない。CIの確定結果は以下へ追記する。
+
+### 57.3 再開位置
+
+B9実端末描画同等性・glyph/ink/性能→正式renderer admission→保存前fit→初回保存buttonと保存後本人detail取得が残る。今回のdisplayと保存結果回収、前回controller/save APIは再実装しない。画像PNG／写真権限・保存／共有の実機、Android・結果不明／異常終了時の共有copy回収、receipt、形式変更、Nexus公開読取／切替、M5／実Auth／稼働構成は継承する。
+
+canSave/canExport=false。画像共有の全完成を初回実機確認へ追加しない。今回はAPI／SQL／native／依存／workflow変更、Supabase操作・DB書込、env/deploy/activation、app build・署名／配布・main merge0。前回確認の001〜004適用済み／追加2本未適用を継承し、今回DB再検査とはしない。weekly§5.5・2026年12月18日目標・automatic_progression=falseを維持。STRUCTURE_MAP_DELTA_UPDATED（保存状態の表示とhost中断／復帰）。

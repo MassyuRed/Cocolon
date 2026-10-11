@@ -181,11 +181,11 @@ export function readPiecePreviewDisplay(view, nowMs = Date.now()) {
     canSave: false, canExport: false, hashVerified: false, expiresAtMs: null };
   if (!view || view.phase === 'hidden') return frozen(base);
   if (view.phase !== 'received') return frozen({ ...base,
-    phase: ['idle', 'loading', 'unavailable', 'cancelled'].includes(view.phase) ? view.phase : 'unavailable',
-    message: typeof view.message === 'string' ? view.message : '',
+    phase: ['idle', 'loading', 'unavailable', 'cancelled', 'saved'].includes(view.phase) ? view.phase : 'unavailable',
+    message: view.phase === 'saved' ? 'Pieceを保存しました。' : typeof view.message === 'string' ? view.message : '',
     canRetry: view.phase === 'unavailable' && view.canRetry === true,
-    retryKind: ['recover', 'cancel'].includes(view.retryKind) ? view.retryKind : 'preview',
-    loadingKind: ['visual', 'recover', 'cancel'].includes(view.loadingKind) ? view.loadingKind : 'preview' });
+    retryKind: ['recover', 'cancel', 'save'].includes(view.retryKind) ? view.retryKind : 'preview',
+    loadingKind: ['visual', 'recover', 'cancel', 'save'].includes(view.loadingKind) ? view.loadingKind : 'preview' });
   try {
     const preview = readPiecePreviewSnapshot(view.preview);
     const expiresAtMs = expiryMilliseconds(preview.expires_at);
@@ -208,3 +208,4 @@ export function expirePiecePreview(state, nowMs = Date.now()) {
   if (!Number.isFinite(nowMs) || !Number.isFinite(expires)) return failure(state, 'PIECE_TEMPORARILY_UNAVAILABLE');
   return nowMs >= expires ? failure(state, 'PIECE_PREVIEW_EXPIRED') : state;
 }
+

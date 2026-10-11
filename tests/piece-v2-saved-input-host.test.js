@@ -21,23 +21,27 @@ function ref(id = INPUT, pre = false) {
     question_need_decision_identity: pre ? 'synthetic-question' : null,
     supplemental_answer_identity: null };
 }
-function fixture({ send, enabled = true, currentState = 'active', pre = false } = {}) {
+function fixture({ send, enabled = true, currentState = 'active', pre = false, admitSave = false, saveEnabled = false } = {}) {
   const file = path.join(__dirname, 'piece-v2-preview-display.test.js');
   const source = fs.readFileSync(file, 'utf8').split('const receivedView =')[0];
   const context = vm.createContext({ require, __dirname, AbortController, setImmediate });
-  vm.runInContext(source + '\nglobalThis.fixtures = {previewUiHarness,response,deferredPieceResponse};', context);
+  vm.runInContext(source + '\nglobalThis.fixtures = {previewUiHarness,response,deferredPieceResponse,uiSaveReceipt,startSyntheticSave};', context);
   const f = context.fixtures;
   const expected = copy(f.response());
-  const u = f.previewUiHarness({ currentState, send: send || (async (_url, options) =>
+  const u = f.previewUiHarness({ currentState, admitSave, send: send || (async (_url, options) =>
     packet(options.method === 'GET' ? ref(INPUT, pre) : expected)) });
-  let allowed = enabled, refreshes = 0;
+  let allowed = enabled, saveAllowed = saveEnabled, refreshes = 0;
   u.host.props = { savedInput: { savedInputId: INPUT, expectedUserId: OWNER, idempotencyKey: KEY } };
   const runtime = () => ({ runtime: { loaded: true, loading: false, error: null },
     isFeatureEnabled: (name, fallback) => {
-      assert.equal(name, 'piece_v2_preview_enabled'); assert.equal(fallback, false); return allowed;
+      assert.ok(['piece_v2_preview_enabled', 'piece_v2_save_enabled'].includes(name));
+      assert.equal(fallback, false); return name === 'piece_v2_preview_enabled' ? allowed : saveAllowed;
     }, refreshAppRuntime: async () => { refreshes++; } });
   u.host.context = runtime();
   return { ...u, expected, deferred: f.deferredPieceResponse,
+    saveReceipt: f.uiSaveReceipt, startSave: () => f.startSyntheticSave(u),
+    publishSave: value => { saveAllowed = value; u.host.context = runtime(); },
+    immediateSave: value => { saveAllowed = value; },
     refreshes: () => refreshes,
     publish: value => { allowed = value; u.host.context = runtime(); },
     immediateOff: () => { allowed = false; },
@@ -250,3 +254,116 @@ for (const changed of ['owner', 'input', 'key']) {
     await tick(); assert.deepEqual(u.names(), ['保存入力を確認']); u.host.componentWillUnmount();
   });
 }
+
+
+for (const completed of [false, true]) {
+  test(`saved-input save ${completed ? 'success' : 'unknown'} survives background/runtime pause without GET or preview POST`, async () => {
+    const f = fixture(), d = f.deferred(); let saves = 0;
+    const u = fixture({ admitSave: true, saveEnabled: true, send: async (url, opt) => {
+      if (opt.method === 'GET') return packet(ref());
+      if (!url.endsWith('/save')) return packet(f.expected);
+      return ++saves === 1 && !completed ? d.promise : packet(f.saveReceipt({ idempotency_replayed: saves > 1 }));
+    } });
+    u.mount(); await resolver(u); u.host.start(); await tick(); const pending = u.startSave(); await tick();
+    u.background('inactive'); u.publish(false); u.host.componentDidUpdate();
+    assert.equal(u.tree(), null); d.resolve(packet(f.saveReceipt())); await pending;
+    u.background('active'); u.publish(true); u.host.componentDidUpdate();
+    await resolver(u); u.host.start(); await tick();
+    assert.equal(u.calls.length, 3); assert.equal(u.body(), undefined);
+    assert.doesNotMatch(JSON.stringify(u.tree()), /保存入力を確認|この入力をPieceにする/);
+    if (!completed) {
+      assert.deepEqual(u.names(), ['同じ保存要求で結果を確認']); u.advance(2000);
+      u.nodes(u.tree()).find(n => n.props.title === '同じ保存要求で結果を確認').props.onPress(); await tick();
+      assert.equal(u.calls.length, 4); assert.equal(u.calls[2][1].body, u.calls[3][1].body);
+      assert.equal(u.calls[2][1].headers['Idempotency-Key'], u.calls[3][1].headers['Idempotency-Key']);
+    }
+    assert.equal(u.host.controller.getView().phase, 'saved');
+    assert.match(JSON.stringify(u.tree()), /Pieceを保存しました。/); u.host.componentWillUnmount();
+  });
+}
+for (const changed of ['owner', 'input', 'key']) {
+  test(`suspended save cannot survive ${changed} A-B-A while runtime remains off`, async () => {
+    const f = fixture(), d = f.deferred();
+    const u = fixture({ admitSave: true, saveEnabled: true, send: async (url, opt) => opt.method === 'GET'
+      ? packet(ref()) : url.endsWith('/save') ? d.promise : packet(f.expected) });
+    u.mount(); await resolver(u); u.host.start(); await tick(); const pending = u.startSave(); await tick();
+    u.background('inactive'); u.publish(false); u.host.componentDidUpdate();
+    const original = { ...u.host.props.savedInput }, next = { ...original };
+    next[{ owner: 'expectedUserId', input: 'savedInputId', key: 'idempotencyKey' }[changed]] = OTHER;
+    u.host.props = { savedInput: next }; u.host.componentDidUpdate();
+    u.host.props = { savedInput: original }; u.host.componentDidUpdate();
+    u.background('active'); u.publish(true); u.host.componentDidUpdate();
+    assert.deepEqual(u.names(), ['保存入力を確認']); u.host.retry(); assert.equal(u.calls.length, 3);
+    d.resolve(packet(f.saveReceipt())); await pending;
+    assert.deepEqual(u.names(), ['保存入力を確認']); u.host.componentWillUnmount();
+  });
+}
+test('saved-input save flag must be strict true for retry; immediate off hides stale callbacks before lifecycle', async () => {
+  const f = fixture(); let saves = 0;
+  const u = fixture({ admitSave: true, saveEnabled: true, send: async (url, opt) => {
+    if (opt.method === 'GET') return packet(ref());
+    if (!url.endsWith('/save')) return packet(f.expected);
+    if (++saves === 1) throw Error('lost ACK');
+    return packet(f.saveReceipt({ idempotency_replayed: true }));
+  } });
+  u.mount(); await resolver(u); u.host.start(); await tick(); await u.startSave(); u.host.close();
+  const retry = u.nodes(u.tree()).find(n => n.props.title === '同じ保存要求で結果を確認');
+  for (const value of [false, 'true', undefined]) {
+    u.immediateSave(value); assert.equal(u.tree(), null); retry.props.onPress(); await tick();
+    assert.equal(saves, 1); u.host.componentDidUpdate();
+    assert.deepEqual(u.names(), []); assert.match(JSON.stringify(u.tree()), /保存結果を確認できませんでした/);
+    u.publishSave(true); u.host.componentDidUpdate();
+  }
+  u.host.retry(); await tick(); assert.equal(saves, 2); assert.equal(u.calls.length, 4);
+  assert.equal(u.calls[2][1].body, u.calls[3][1].body); u.host.componentWillUnmount();
+});
+test('runtime publication with unchanged flags still abandons the pending save response', async () => {
+  const f = fixture(), d = f.deferred();
+  const u = fixture({ admitSave: true, saveEnabled: true, send: async (url, opt) => opt.method === 'GET'
+    ? packet(ref()) : url.endsWith('/save') ? d.promise : packet(f.expected) });
+  u.mount(); await resolver(u); u.host.start(); await tick(); const pending = u.startSave(); await tick();
+  u.publish(true); assert.equal(u.tree(), null); u.host.componentDidUpdate();
+  d.resolve(packet(f.saveReceipt())); await pending;
+  assert.equal(u.host.controller.getView().phase, 'unavailable');
+  assert.deepEqual(u.names(), ['同じ保存要求で結果を確認']); assert.equal(u.calls.length, 3);
+  u.host.componentWillUnmount();
+});
+
+for (const changed of ['input', 'key']) for (const backToA of [false, true]) {
+  test(`background save ${changed} A-B${backToA ? '-A' : ''} clears the hidden intent with unchanged runtime`, async () => {
+    const f = fixture(), d = f.deferred();
+    const u = fixture({ admitSave: true, saveEnabled: true, send: async (url, opt) => opt.method === 'GET'
+      ? packet(ref()) : url.endsWith('/save') ? d.promise : packet(f.expected) });
+    u.mount(); await resolver(u); u.host.start(); await tick(); const pending = u.startSave(); await tick();
+    u.background('inactive');
+    const original = { ...u.host.props.savedInput }, next = { ...original };
+    next[changed === 'input' ? 'savedInputId' : 'idempotencyKey'] = OTHER;
+    u.host.props = { savedInput: next }; u.host.componentDidUpdate();
+    if (backToA) { u.host.props = { savedInput: original }; u.host.componentDidUpdate(); }
+    u.background('active');
+    assert.deepEqual(u.names(), ['保存入力を確認']); u.host.retry(); await tick(); assert.equal(u.calls.length, 3);
+    d.resolve(packet(f.saveReceipt())); await pending;
+    assert.deepEqual(u.names(), ['保存入力を確認']);
+    assert.notEqual(u.host.controller.getView().retryKind, 'save'); u.host.componentWillUnmount();
+  });
+}
+
+test('same-runtime save-only flag changes preserve received preview, source readiness and display ticket', async () => {
+  const u = fixture({ saveEnabled: true });
+  u.mount(); await resolver(u); u.host.start(); await tick();
+  const before = u.host.controller.getView();
+  assert.ok(u.body()); assert.equal(u.host.state.open, true);
+  for (const value of [false, true]) {
+    u.immediateSave(value); assert.equal(u.tree(), null); u.host.componentDidUpdate();
+    const after = u.host.controller.getView();
+    assert.equal(after.preview, before.preview); assert.equal(after.visualToken, before.visualToken);
+    assert.equal(u.body().children.join(''), u.expected.piece_text);
+    assert.equal(u.host.sourcePhase, 'ready'); assert.equal(u.host.state.open, true);
+    await resolver(u); assert.equal(u.calls.length, 2);
+    assert.equal(u.read(after).canSave, false); assert.equal(u.read(after).canExport, false);
+  }
+  u.publish(true); u.host.componentDidUpdate();
+  assert.equal(u.body(), undefined); assert.deepEqual(u.names(), ['保存入力を確認']);
+  assert.equal(u.calls.length, 2);
+  u.host.componentWillUnmount();
+});

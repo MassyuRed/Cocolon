@@ -3,7 +3,7 @@
  * retained. `savedInput` mode explicitly reads the saved ID, then waits for a
  * separate preview action; it requires the existing live runtime predicate.
  * The host only reads body-free request/session identity. No raw input/Emlis
- * body, runtime flag activation, key generation, quota default, save or export.
+ * body, runtime flag activation, key generation, quota default, initial save or export. Existing save outcomes/retries are displayed.
  */
 import React from 'react';
 import { AppRuntimeContext } from '../../AppRuntimeContext';
@@ -54,6 +54,7 @@ export default class InputPieceActionArea extends React.Component {
     this.controller = null;
     this.boundStamp = null;
     this.boundRuntime = null;
+    this.boundSaveEnabled = null;
     this.boundSavedInputStamp = null;
     this.savedMode = false;
     this.sourceAttempt = null;
@@ -78,6 +79,7 @@ export default class InputPieceActionArea extends React.Component {
     this.foreground = AppState.currentState === 'active';
     this.boundStamp = null;
     this.boundRuntime = null;
+    this.boundSaveEnabled = null;
     this.boundSavedInputStamp = null;
     this.clearSource();
     this.controller = createPieceCreateController({ onFeatureDisabled: () => {
@@ -95,13 +97,14 @@ export default class InputPieceActionArea extends React.Component {
       if (!this.mounted) return;
       this.foreground = next === 'active';
       if (!this.foreground) {
-        if (this.savedMode) {
-          this.clearSource();
-          if (!this.controller.setCancellationEnabled(false)) this.controller.setContext({ enabled: false });
-        } else this.controller.close();
+        if (this.savedMode) this.clearSource();
+        if (!this.syncSavedOperation(false)) {
+          if (this.savedMode) this.controller.setContext({ enabled: false });
+          else this.controller.close();
+        }
         this.setState({ open: false });
       } else {
-        if (this.savedMode && this.isCurrent()) this.controller.setCancellationEnabled(true);
+        if (this.isCurrent()) this.syncSavedOperation(true);
         this.controller.refresh();
       }
     });
@@ -122,6 +125,7 @@ export default class InputPieceActionArea extends React.Component {
     this.controller = null;
     this.boundStamp = null;
     this.boundRuntime = null;
+    this.boundSaveEnabled = null;
     this.boundSavedInputStamp = null;
   }
 
@@ -130,6 +134,21 @@ export default class InputPieceActionArea extends React.Component {
       return this.context?.runtime != null &&
         this.context?.isFeatureEnabled?.('piece_v2_preview_enabled', false) === true;
     } catch { return false; }
+  }
+
+  saveEnabled() {
+    try {
+      if (Object.prototype.hasOwnProperty.call(this.props, 'savedInput')) {
+        return this.savedEnabled() &&
+          this.context?.isFeatureEnabled?.('piece_v2_save_enabled', false) === true;
+      }
+      return this.props.context?.enabled === true && this.props.context?.saveEnabled === true;
+    } catch { return false; }
+  }
+
+  syncSavedOperation(enabled) {
+    return this.controller.setSaveAvailability({ enabled, saveEnabled: this.saveEnabled() }) ||
+      this.controller.setCancellationEnabled(enabled);
   }
 
   clearSource() {
@@ -149,8 +168,22 @@ export default class InputPieceActionArea extends React.Component {
       ? this.savedEnabled() && sourceStamp !== null ? 'saved:' + sourceStamp : 'saved-disabled'
       : contextStamp(this.props.context);
     const runtime = savedMode ? this.context?.runtime : null;
+    const saveEnabled = this.saveEnabled();
     if (stamp === this.boundStamp && runtime === this.boundRuntime && savedMode === this.savedMode &&
-        sourceStamp === this.boundSavedInputStamp) return;
+        sourceStamp === this.boundSavedInputStamp) {
+      if (saveEnabled === this.boundSaveEnabled) return;
+      // A save-only flag update must not discard a valid source read or preview.
+      // A new runtime publication still takes the normal suspension path below.
+      this.boundSaveEnabled = saveEnabled;
+      if (savedMode) this.controller.setSaveAvailability({
+        enabled: this.savedEnabled() && this.foreground, saveEnabled, preservePreview: true,
+      });
+      else if (!this.syncSavedOperation(this.props.context?.enabled === true && this.foreground)) {
+        this.controller.setContext(this.props.context);
+      }
+      this.changed();
+      return;
+    }
     // While the same account/runtime remains current, close only the local
     // preview so the existing controller can reject a changed request with the
     // same key. Disabling here would erase that request/key binding.
@@ -165,16 +198,20 @@ export default class InputPieceActionArea extends React.Component {
     this.savedMode = savedMode;
     this.boundStamp = stamp;
     this.boundRuntime = runtime;
+    this.boundSaveEnabled = saveEnabled;
     this.boundSavedInputStamp = sourceStamp;
     // The render boundary hides old data before this lifecycle runs. A source
     // read does not occur on mount, context change, refresh or re-enable.
     // Runtime refresh hides all Piece actions, but a same-selection terminal
-    // cancellation needs no fresh source/author. Retain its body-free identity
-    // until flags return, then require a new explicit DELETE and fresh Auth.
+    // save/cancellation needs no fresh source/author. Retain its body-free identity
+    // until flags return, then require an explicit retry and fresh Auth.
     // A different saved ID, account or original key uses the normal clear.
-    if (sameSavedSelection && this.controller.setCancellationEnabled(this.savedEnabled() && this.foreground)) {
-      // No source fetch, preview revival or automatic cancellation retry.
-    } else if (retainBinding && this.controller.getView().retryKind !== 'cancel') this.controller.close();
+    if (sameSavedSelection && this.syncSavedOperation(this.savedEnabled() && this.foreground)) {
+      // No source fetch, preview revival or automatic save/cancellation retry.
+    } else if (retainBinding && this.controller.getView().phase !== 'hidden' &&
+        !['cancel', 'save'].includes(this.controller.getView().retryKind)) this.controller.close();
+    // A hidden operation may retain a save/cancel intent. A different selection
+    // must clear it, even when getView intentionally conceals its retryKind.
     else this.controller.setContext(savedMode ? { enabled: false } : this.props.context);
     this.setState({ open: false });
   }
@@ -183,6 +220,7 @@ export default class InputPieceActionArea extends React.Component {
     if (!this.mounted || !this.foreground || !this.controller) return false;
     const savedMode = Object.prototype.hasOwnProperty.call(this.props, 'savedInput');
     if (savedMode !== this.savedMode) return false;
+    if (this.boundSaveEnabled !== this.saveEnabled()) return false;
     if (!savedMode) return this.props.context?.enabled === true &&
       this.boundStamp === contextStamp(this.props.context);
     const stamp = savedInputStamp(this.props);
@@ -192,7 +230,7 @@ export default class InputPieceActionArea extends React.Component {
 
   async resolveSavedInput() {
     if (!this.savedMode || !this.isCurrent() || this.sourceAttempt ||
-        this.controller.getView().retryKind === 'cancel' ||
+        ['cancel', 'save'].includes(this.controller.getView().retryKind) ||
         !(this.sourcePhase === 'idle' || this.sourceCode === 'PIECE_TEMPORARILY_UNAVAILABLE')) return;
     // Capture the exact saved ID, owner and future POST key before any await.
     const [savedInputId, expectedUserId, idempotencyKey] = JSON.parse(this.boundStamp.slice(6));
@@ -219,7 +257,7 @@ export default class InputPieceActionArea extends React.Component {
       this.sourceAttempt = null;
       this.sourcePhase = 'ready';
       this.sourceCode = null;
-      this.controller.setContext({ ...prepared, enabled: true });
+      this.controller.setContext({ ...prepared, enabled: true, saveEnabled: this.saveEnabled() });
       // An equivalent retained controller context deliberately emits nothing.
       // The source-read phase still changed and must publish its own UI update.
       this.changed();
@@ -266,7 +304,7 @@ export default class InputPieceActionArea extends React.Component {
   retry() {
     if (!this.isCurrent()) return;
     const display = readPiecePreviewDisplay(this.controller.getView());
-    if (!this.state.open && display.retryKind !== 'cancel') return;
+    if (!this.state.open && !['cancel', 'save'].includes(display.retryKind)) return;
     if (display.canRetry) {
       this.setState({ open: true });
       void this.controller.retry();
@@ -295,7 +333,7 @@ export default class InputPieceActionArea extends React.Component {
     // not one effect later. There is no render-time mutation or HTTP call.
     if (!this.isCurrent()) return null;
     const display = readPiecePreviewDisplay(this.controller.getView());
-    if (this.savedMode && this.sourcePhase !== 'ready' && display.retryKind !== 'cancel') {
+    if (this.savedMode && this.sourcePhase !== 'ready' && !['cancel', 'save'].includes(display.retryKind)) {
       const unavailable = this.sourcePhase === 'unavailable';
       const canRead = this.sourcePhase === 'idle' ||
         (unavailable && this.sourceCode === 'PIECE_TEMPORARILY_UNAVAILABLE');
@@ -312,14 +350,16 @@ export default class InputPieceActionArea extends React.Component {
       display.phase === 'idle' ? element(Button, {
         title: 'この入力をPieceにする', onPress: this.start, accessibilityLabel: 'この入力をPieceにする',
       }) : null,
-      ['unavailable', 'cancelled'].includes(display.phase) && !this.state.open
-        ? element(Text, { accessibilityRole: 'alert' }, display.message) : null,
-      !this.state.open && display.canRetry && display.retryKind === 'cancel' ? element(Button, {
-        title: '同じ候補の取消を再試行', onPress: this.retry,
-        accessibilityLabel: '同じ候補の取消を再試行',
+      ['unavailable', 'cancelled', 'saved'].includes(display.phase) && !this.state.open
+        ? element(Text, { accessibilityRole: display.phase === 'saved' ? undefined : 'alert',
+          accessibilityLiveRegion: 'polite' }, display.message) : null,
+      !this.state.open && display.canRetry && ['cancel', 'save'].includes(display.retryKind) ? element(Button, {
+        title: display.retryKind === 'save' ? '同じ保存要求で結果を確認' : '同じ候補の取消を再試行', onPress: this.retry,
+        accessibilityLabel: display.retryKind === 'save' ? '同じ保存要求で結果を確認' : '同じ候補の取消を再試行',
       }) : null,
       element(PiecePreviewModal, { visible: this.state.open, display, onClose: this.close,
         onRetry: this.retry, onVisualChange: this.changeVisual, onCancel: this.cancelPreview }),
     );
   }
 }
+

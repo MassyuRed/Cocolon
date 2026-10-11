@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v51",
+  "schema_version": "cocolon.piece.workstream_manifest.v52",
   "generated_at": "2026-10-11 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v50",
-    "predecessor_blob": "e22d61de4faea5ef626b23ab671d2327e4ff27d4",
-    "predecessor_head": "eb24b240af9315739019ce216ae06d76d9c30020",
-    "carry_forward": "Existing controller now retains private-save intent and handles pending, unknown, same-key recovery and saved receipt. Product host/display and formal renderer admission remain unconnected; save/export stay disabled."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v51",
+    "predecessor_blob": "f68cea709d03f2c4279b6290294ebf6b3249c3a1",
+    "predecessor_head": "a5381afeabd56ce5fb98a2df39d7558f18c1bf6e",
+    "carry_forward": "Save outcomes and same-request recovery are wired through the existing display/modal/host. Initial save action, formal renderer admission, owner-detail refresh and device acceptance remain pending."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "3c1a1e753f9c0aefd001dd70b8b3c4bb0f1baafa",
-    "raw_sha256": "04af521fde5a96dcdffd5cb6c4ace68cf8ca47a4aa744ceb6e9a6f2ef8c4cc31",
-    "utf8_bytes": 91941
+    "git_blob_sha1": "0b3dc556bbae9ed4f64192409846196e015a07bb",
+    "raw_sha256": "5fea4b166345bcafa300a3fade00cc273a58d4ecb702433940d800a6f6c4e1a2",
+    "utf8_bytes": 93379
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -84,7 +84,8 @@
     "pce9e_export_preflight": "HISTORICAL_SOURCE_REVIEWED_PINNED_PROPOSAL__CURRENT_IMPLEMENTATION_IN_EXPORT_NATIVE_COMPILE_20261011",
     "pce9e_export_native_compile": "REMOTE_E4F4984__IOS_ANDROID_LIBRARY_COMPILE_PASS__JS572_PASS__DEVICE_ADMISSION_PENDING",
     "pce9e_export_share_completion": "REMOTE_1C6FBD3__IOS_NORMAL_COMPLETION_COPY_CLEANUP__CI577_PASS__DEVICE_PENDING",
-    "pce9c_save_lifecycle": "REMOTE_9ACA322__HEADLESS_SAVE_PREPARATION__CI592_PASS__HOST_DISPLAY_ADMISSION_PENDING"
+    "pce9c_save_lifecycle": "CONTROLLER_IMPLEMENTED__CURRENT_DISPLAY_OWNER_SAVE_OUTCOME_UI_20261011__INITIAL_SAVE_ADMISSION_PENDING",
+    "pce9c_save_outcome_ui": "SOURCE_DISPLAY_AND_SAME_REQUEST_RECOVERY_CONNECTED__LOCAL611_PASS__INITIAL_SAVE_ADMISSION_DEVICE_PENDING"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -166,7 +167,7 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "eb24b240af9315739019ce216ae06d76d9c30020",
+    "cocolon_pre_sync_head": "a5381afeabd56ce5fb98a2df39d7558f18c1bf6e",
     "mashos_api_head": "6b901a1df0037c047513e794624917a09b0f3ac4",
     "current_user_visible_piece_shape": "OLD_QNA_REGISTERED_IN_SOURCE__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
@@ -182,7 +183,7 @@
     "input_screen_source_connected": true,
     "live_auth_input_to_preview_to_device_verified": false,
     "database_evidence_owner": "live_db_apply_20261010",
-    "remaining_work_owner": "save_lifecycle_20261011",
+    "remaining_work_owner": "save_outcome_ui_20261011",
     "product_acceptance": false,
     "piece_v2_default_application_registered": false,
     "piece_v2_quota_http_present": true,
@@ -216,18 +217,20 @@
     "piece_v2_export_dependency_preflight_present": true,
     "piece_v2_export_dependencies_installed": true,
     "piece_v2_export_native_prototype_present": true,
-    "piece_v2_headless_save_lifecycle_present": true
+    "piece_v2_headless_save_lifecycle_present": true,
+    "piece_v2_save_outcome_display_connected": true,
+    "piece_v2_save_recovery_host_connected": true
   },
   "next_group": {
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "NATIVE_DEVICE_RENDERER_ADMISSION_THEN_SAVE_FIT_AND_BOUND_SAVE",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "HEADLESS_SAVE_LIFECYCLE_PREPARED__DEVICE_FIT_HOST_PENDING",
-    "current_map_section": "56.3",
-    "current_entry_section": "52",
+    "state": "SAVE_RESULT_UI_CONNECTED__INITIAL_SAVE_ADMISSION_DEVICE_PENDING",
+    "current_map_section": "57.3",
+    "current_entry_section": "53",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
     "weekly_review_section": "5.5",
-    "first_unfinished_work": "B9 device equivalence -> formal renderer admission -> save fit -> host/display/modal integration using the existing controller and save API, including runtime/foreground suspension and saved owner detail refresh. PNG/photo/share device checks remain; export completion is not a prerequisite for first device inspection.",
+    "first_unfinished_work": "B9 device equivalence -> formal renderer admission -> save fit -> initial save action and saved owner detail refresh. Reuse the now-connected save outcome display and same-request recovery. PNG/photo/share device checks remain; export completion is not a prerequisite for first device inspection.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 4,
@@ -255,7 +258,9 @@
     "export_proposal_owner": "export_dependency_preflight_20261011",
     "export_implementation_owner": "export_share_completion_20261011",
     "repeat_headless_save_lifecycle": false,
-    "save_controller_owner": "save_lifecycle_20261011"
+    "save_controller_owner": "save_lifecycle_20261011",
+    "repeat_save_outcome_ui": false,
+    "save_outcome_ui_owner": "save_outcome_ui_20261011"
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -309,9 +314,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "facae6e1a05eec97d49c2c0d76cd92e7cc561a50",
-    "raw_sha256": "29215030c2352223ed55bdd8048a6a867c869c0fe341212657ad11adcc5cb562",
-    "utf8_bytes": 307673
+    "git_blob_sha1": "a472c9f3c86f809c18188ba315632153e424f6fd",
+    "raw_sha256": "6a4f3f26da1583cc3a8cd34bf8689c186d187024fd899fd455fc9abb3c9eaec0",
+    "utf8_bytes": 311944
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -484,28 +489,25 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "HEADLESS_PRIVATE_SAVE_LIFECYCLE_PREPARATION__HOST_AND_ADMISSION_UNCONNECTED",
+    "classification": "SAVE_OUTCOME_DISPLAY_AND_SAME_REQUEST_RECOVERY_CONNECTED__INITIAL_SAVE_ADMISSION_PENDING",
     "piece_documentation_paths": 3,
-    "rn_changed_paths": 1,
-    "rn_test_paths": 1,
+    "rn_changed_paths": 4,
+    "rn_test_paths": 2,
     "workflow_changed_paths": 0,
     "native_changed_paths": 0,
     "api_product_paths": 0,
     "sql_changed_paths": 0,
     "new_dependency": 0,
     "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
-    "local_js_passed": 592,
+    "local_js_passed": 611,
     "local_js_failed": 0,
     "local_js_skipped": 0,
-    "ci_pending": false,
+    "ci_pending": true,
     "live_database_apply": 0,
     "release_effect": 0,
     "native_app_builds": 0,
     "product_acceptance": false,
-    "automatic_progression": false,
-    "ci_js_passed": 592,
-    "ci_js_failed": 0,
-    "ci_js_skipped": 0
+    "automatic_progression": false
   },
   "b06_q3_context_fence": {
     "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
@@ -3727,6 +3729,73 @@
     "native_library_compile_rerun": false,
     "native_library_compile_skip_reason": "No dependency/platform/workflow changes; existing scope skipped both export library compile steps.",
     "review_after_fix_no_additional_blockers": true
+  },
+  "historical_current_sync_effects_before_save_outcome_ui_20261011": {
+    "classification": "HEADLESS_PRIVATE_SAVE_LIFECYCLE_PREPARATION__HOST_AND_ADMISSION_UNCONNECTED",
+    "piece_documentation_paths": 3,
+    "rn_changed_paths": 1,
+    "rn_test_paths": 1,
+    "workflow_changed_paths": 0,
+    "native_changed_paths": 0,
+    "api_product_paths": 0,
+    "sql_changed_paths": 0,
+    "new_dependency": 0,
+    "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
+    "local_js_passed": 592,
+    "local_js_failed": 0,
+    "local_js_skipped": 0,
+    "ci_pending": false,
+    "live_database_apply": 0,
+    "release_effect": 0,
+    "native_app_builds": 0,
+    "product_acceptance": false,
+    "automatic_progression": false,
+    "ci_js_passed": 592,
+    "ci_js_failed": 0,
+    "ci_js_skipped": 0
+  },
+  "save_outcome_ui_20261011": {
+    "current_entry_section": "53",
+    "current_map_section": "57",
+    "base_head": "a5381afeabd56ce5fb98a2df39d7558f18c1bf6e",
+    "state": "SOURCE_SAVE_OUTCOME_DISPLAY_AND_RECOVERY__LOCAL611_PASS__CI_PENDING",
+    "changed_product_paths": [
+      "features/piece/PieceCreateController.js",
+      "features/piece/piecePreviewModel.js",
+      "components/piece/PiecePreviewModal.js",
+      "screens/input/InputPieceActionArea.js"
+    ],
+    "changed_test_paths": [
+      "tests/piece-v2-preview-display.test.js",
+      "tests/piece-v2-saved-input-host.test.js"
+    ],
+    "outcome_display_connected": true,
+    "close_recovery_connected": true,
+    "same_selection_runtime_foreground_recovery": true,
+    "new_selection_drops_hidden_intent": true,
+    "save_only_flag_preserves_preview": true,
+    "context_mode_paused_intent_preserved": true,
+    "initial_save_action_connected": false,
+    "formal_admission_supplier_connected": false,
+    "saved_owner_detail_refresh_connected": false,
+    "can_save": false,
+    "can_export": false,
+    "native_device_acceptance": false,
+    "product_acceptance": false,
+    "local_js_passed": 611,
+    "local_js_failed": 0,
+    "local_js_skipped": 0,
+    "added_tests": 19,
+    "ci_pending": true,
+    "review_environment": "CODEX_WORK_WITH_SAME_ENVIRONMENT_READ_ONLY_SUBAGENT_REVIEW_NOT_PRO_ULTRA_ACCEPTANCE",
+    "review_findings_fixed": 3,
+    "review_after_fix_no_additional_findings": true,
+    "supabase_operations": 0,
+    "live_database_write": 0,
+    "activation": 0,
+    "app_build": 0,
+    "main_merge": 0,
+    "automatic_progression": false
   }
 }
 

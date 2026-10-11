@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§52／current map §56を優先します。既存controllerに保存中・結果不明・同一要求の再確認・保存完了を追加しました。正式renderer admissionを供給するhostと保存画面は未接続で、canSave/canExport=falseを維持します。正式fit・実機・画像保存共有の残件は継続します。**
+**現在は§53／current map §57を優先します。保存中・結果不明・保存完了を既存の表示／modal／hostへ接続し、close・背景復帰後も同じ要求を確認する導線を追加しました。初回保存ボタンと正式renderer admissionは未接続で、canSave/canExport=falseを維持します。正式fit・実機・保存後本人detail取得が残ります。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1026,3 +1026,11 @@ Supabaseはprojectとmigration履歴の読取のみ。001〜004適用済み・00
 
 
 §52最終確認：source `9aca322808cbf877e883feab8f235ec1ab7a61a5` の5fileをDraft PR #30へ反映し、remote全文・変更path集合・親headを照合した。[CI38099147844](https://github.com/MassyuRed/Cocolon/actions/runs/38099147844)は全5job success、JSは **592 PASS／FAIL0／SKIP0**。既存Android bridge source／iOS syntax・patch検査も成功。依存差分がないため両OS export library compile stepはscopeどおりskipで、今回の実native再buildとはしない。修正後のread-only reviewに追加重大指摘なし。正式admission・表示／画面接続・実機は引き続き未完了。
+
+## 53. 2026-10-11 — 保存結果の表示と復帰後の確認導線
+
+詳細ownerはcurrent map §57。前回controllerの保存状態を既存display→modal→InputPieceActionAreaへ接続した。保存中は「Pieceを保存しています。」、結果不明は「同じ保存要求で結果を確認」、保存済みは「Pieceを保存しました。」と表示する。保存後に保存不可の説明を重ねない。本文／receiptの内部値を画面stateへ複製しない。
+
+同じ本人・保存入力ID・元keyに限り、背景化／runtime刷新をまたいで本文を含まない保存要求を保持する。復帰だけでは通信せず、結果確認操作だけで同key/requestを再送する。入力・本人・key切替とunmountでは破棄する。保存flagのみの変更は受信済みpreviewとsource readyを保持し、新runtimeの刷新とは区別する。
+
+正式admissionを供給する製品callerと初回保存ボタンは未接続。canSave/canExport=falseを保持し、今回の表示／復帰検査では合成admissionを注入した。実端末保存や描画受入れの成功ではない。次はB9実機描画・正式renderer admission→保存前fit→初回保存操作と保存後本人detail取得。画像共有の全完成を初回実機確認の前提にしない。検査とGitHub結果はmap §57へ記録する。

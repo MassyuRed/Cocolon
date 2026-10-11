@@ -24,7 +24,8 @@
  *   close retains only the save intent/receipt; retry never returns to preview
  *   POST. Revoking saveEnabled alone keeps the intent but stops requests.
  *   General disable, changed context or dispose clears it. The future host
- *   must handle runtime/foreground suspension before exposing save controls.
+ *   handles same-selection runtime/foreground suspension via setSaveAvailability.
+ *   Initial save controls and the actual admission supplier remain unconnected.
  *
  * Visual-only changes use the received candidate and a local display ticket.
  * Unknown outcomes recover via the original POST/key, never a PATCH retry.
@@ -478,6 +479,28 @@ export function createPieceCreateController(configuration = {}) {
     return true;
   }
 
+  // Update save permission without discarding a received preview. Preserve an
+  // existing save intent across the same saved-input host's
+  // runtime/foreground suspension. The host must clear on owner/input/key
+  // changes. Neither resuming flags nor a saved receipt grants fresh admission.
+  function setSaveAvailability(value = {}) {
+    if (disposed || !operation || boundaryCode || cancelIntent) return false;
+    const nextEnabled = value?.enabled === true;
+    const nextSaveEnabled = nextEnabled && value?.saveEnabled === true;
+    if (!saveIntent) {
+      // Preview visibility/lifecycle remains owned by setContext/close.
+      if (value?.preservePreview !== true || enabled !== nextEnabled) return false;
+      saveEnabled = nextSaveEnabled;
+      notify();
+      return true;
+    }
+    enabled = nextEnabled;
+    saveEnabled = nextSaveEnabled;
+    clearAttempt(false, true);
+    notify();
+    return true;
+  }
+
   function close() {
     if (disposed) return;
     // A conflict/invalid context remains blocked until a valid context update.
@@ -511,6 +534,6 @@ export function createPieceCreateController(configuration = {}) {
     clearAttempt();
   }
 
-  return Object.freeze({ setContext, getView, start, retry, changeVisual, cancelPreview, savePreview, setCancellationEnabled, close, subscribe, refresh, dispose });
+  return Object.freeze({ setContext, getView, start, retry, changeVisual, cancelPreview, savePreview, setCancellationEnabled, setSaveAvailability, close, subscribe, refresh, dispose });
 }
 

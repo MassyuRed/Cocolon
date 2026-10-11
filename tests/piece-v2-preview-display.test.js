@@ -64,7 +64,7 @@ const pieceHttp = value => ({ status: 200, json: async () => value });
 // below are test doubles, NOT a React renderer or a device/image acceptance test.
 const modalPath = path.join(__dirname, '../components/piece/PiecePreviewModal.js');
 const hostPath = path.join(__dirname, '../screens/input/InputPieceActionArea.js');
-function previewUiHarness({ send, currentState = 'active' } = {}) {
+function previewUiHarness({ send, currentState = 'active', admitSave = false } = {}) {
   let now = NOW, serial = 0;
   const calls = [], timers = new Map(), appListeners = new Set();
   const React = {
@@ -95,6 +95,10 @@ function previewUiHarness({ send, currentState = 'active' } = {}) {
     fs.readFileSync(path.join(__dirname, '../features/piece', file), 'utf8')
       .replace(/^import .*;$/gm, '').replace(/^export /gm, '')).join('\n');
   vm.runInContext(pure + '\nglobalThis.displayReader = readPiecePreviewDisplay; globalThis.digestUnderTest = pieceUtf8Digest;', context);
+  // Synthetic admission only for save-outcome wiring tests. No production host
+  // supplies this callback, and these tests do not qualify a native renderer.
+  if (admitSave) vm.runInContext(`const makeController = createPieceCreateController;
+    createPieceCreateController = config => makeController({ ...config, isSaveAdmitted: () => true });`, context);
   for (const [file, name] of [[path.join(__dirname, '../components/piece/PieceVisualCard.js'), 'PieceVisualCard'],
     [modalPath, 'PiecePreviewModal'], [hostPath, 'InputPieceActionArea']]) {
     const source = fs.readFileSync(file, 'utf8').replace(/^import .*;$/gm, '').replace(/^export default /gm, '');
@@ -124,6 +128,16 @@ function previewUiHarness({ send, currentState = 'active' } = {}) {
       }
     },
   };
+}
+const uiSaveReceipt = (extras = {}) => ({ piece_id: response().preview_id,
+  consumption_id: '40000000-0000-4000-8000-000000000004', lifecycle_status: 'saved',
+  visibility_scope: 'private', row_version: 2, saved_at: '2026-10-08T10:00:00Z',
+  idempotency_replayed: false, ...extras });
+function startSyntheticSave(u) {
+  const view = u.host.controller.getView(), p = view.preview;
+  return u.host.controller.savePreview({ preview_id: p.preview_id,
+    preview_revision: p.preview_revision, visual_recipe_hash: p.visual_recipe_hash },
+  view.visualToken, 'synthetic-explicit-save-key');
 }
 const receivedView = value => ({ phase: 'received', preview: value, canSave: true, canExport: true, hashVerified: true });
 
@@ -603,3 +617,116 @@ test('cancel receipt with unexpected row version stays unknown instead of claimi
   assert.equal(u.host.controller.getView().phase, 'unavailable');
   assert.equal(u.host.controller.getView().retryKind, 'cancel'); u.host.componentWillUnmount();
 });
+
+
+// Save initiation is synthetic here; the production UI still has no first-save
+// control or renderer admission supplier. These verify actual outcome wiring.
+test('save display preserves pending/unknown/saved without receipt fields or new save/export authority', () => {
+  const u = previewUiHarness();
+  for (const phase of ['loading', 'unavailable', 'saved']) {
+    const display = u.read({ phase, loadingKind: 'save', retryKind: 'save', canRetry: true,
+      canSave: true, canExport: true, preview: response(), savedReceipt: { raw: 'PRIVATE' },
+      message: phase === 'saved' ? 'PRIVATE' : '保存結果を確認できませんでした。' }, NOW);
+    assert.equal(display.phase, phase); assert.equal(display.loadingKind, 'save');
+    assert.equal(display.retryKind, 'save'); assert.equal(display.canRetry, phase === 'unavailable');
+    assert.equal(display.preview, null); assert.equal(display.savedReceipt, undefined);
+    assert.equal(display.canSave, false); assert.equal(display.canExport, false);
+    assert.doesNotMatch(JSON.stringify(display), /PRIVATE/);
+    if (phase === 'saved') assert.equal(display.message, 'Pieceを保存しました。');
+  }
+});
+test('actual modal shows pending, unknown retry and saved confirmation from the existing controller', async () => {
+  const pending = deferredPieceResponse(); let saves = 0;
+  const u = previewUiHarness({ admitSave: true, send: async url => {
+    if (!url.endsWith('/save')) return pieceHttp(response());
+    return ++saves === 1 ? pending.promise : pieceHttp(uiSaveReceipt({ idempotency_replayed: true }));
+  } });
+  u.host.props = { context: controllerInput({ saveEnabled: true }) };
+  u.mount(); u.host.start(); await pieceTick();
+  const saving = startSyntheticSave(u); await pieceTick();
+  assert.match(JSON.stringify(u.tree()), /Pieceを保存しています。/);
+  assert.doesNotMatch(JSON.stringify(u.tree()), /Pieceの保存・画像/);
+  assert.equal(u.nodes(u.tree()).some(n => n.props.testID === 'piece-canonical-text'), false);
+  pending.reject(Error('PRIVATE transport cause')); await saving;
+  assert.match(JSON.stringify(u.tree()), /保存結果を確認できませんでした/);
+  u.host.close(); u.advance(2000);
+  const retry = uiButton(u, '同じ保存要求で結果を確認'); assert.ok(retry);
+  retry.props.onPress(); await pieceTick();
+  assert.equal(saves, 2); assert.equal(u.calls[1][1].body, u.calls[2][1].body);
+  assert.equal(u.calls[1][1].headers['Idempotency-Key'], u.calls[2][1].headers['Idempotency-Key']);
+  assert.match(JSON.stringify(u.tree()), /Pieceを保存しました。/);
+  assert.deepEqual(u.nodes(u.tree()).filter(n => n.type === 'Button').map(n => n.props.title), ['閉じる']);
+  u.host.close(); assert.match(JSON.stringify(u.tree()), /Pieceを保存しました。/);
+  u.host.start(); u.host.retry(); await pieceTick(); assert.equal(u.calls.length, 3);
+  assert.doesNotMatch(JSON.stringify(u.host.state), /PRIVATE|piece_text|preview_id/);
+  u.host.componentWillUnmount();
+});
+test('real host construction never supplies admission even when a strict save flag is present', async () => {
+  const u = previewUiHarness(); u.host.props = { context: controllerInput({ saveEnabled: true }) };
+  u.mount(); u.host.start(); await pieceTick(); await startSyntheticSave(u);
+  assert.equal(u.calls.length, 1); assert.equal(u.host.controller.getView().phase, 'received');
+  assert.equal(u.nodes(u.tree()).some(n => n.type === 'Button' && /保存|共有|書き出し/.test(n.props.title)), false);
+  u.host.componentWillUnmount();
+});
+test('resolved context observes save-only revocation before retry and preserves the same intent on reenable', async () => {
+  let saves = 0;
+  const u = previewUiHarness({ admitSave: true, send: async url => {
+    if (!url.endsWith('/save')) return pieceHttp(response());
+    if (++saves === 1) throw Error('lost ACK');
+    return pieceHttp(uiSaveReceipt({ idempotency_replayed: true }));
+  } });
+  u.host.props = { context: controllerInput({ saveEnabled: true }) };
+  u.mount(); u.host.start(); await pieceTick(); await startSyntheticSave(u); u.host.close();
+  const oldRetry = uiButton(u, '同じ保存要求で結果を確認');
+  u.host.props = { context: controllerInput({ saveEnabled: false }) };
+  assert.equal(u.tree(), null); oldRetry.props.onPress(); await pieceTick(); assert.equal(saves, 1);
+  u.host.componentDidUpdate(); assert.equal(uiButton(u, '同じ保存要求で結果を確認'), undefined);
+  u.host.props = { context: controllerInput({ saveEnabled: true }) }; u.host.componentDidUpdate();
+  uiButton(u, '同じ保存要求で結果を確認').props.onPress(); await pieceTick();
+  assert.equal(saves, 2); assert.equal(u.host.controller.getView().phase, 'saved');
+  assert.equal(u.calls[1][1].body, u.calls[2][1].body); u.host.componentWillUnmount();
+});
+test('resolved-context background suspends a save before abort and foreground needs an explicit retry', async () => {
+  const d = deferredPieceResponse(); let observed = false;
+  const u = previewUiHarness({ admitSave: true, send: async (url, options) => {
+    if (!url.endsWith('/save')) return pieceHttp(response());
+    options.signal.addEventListener('abort', () => { observed = true; void u.host.controller.retry(); });
+    return d.promise;
+  } });
+  u.host.props = { context: controllerInput({ saveEnabled: true }) };
+  u.mount(); u.host.start(); await pieceTick(); const pending = startSyntheticSave(u); await pieceTick();
+  u.background('inactive'); await pieceTick(); assert.equal(observed, true); assert.equal(u.calls.length, 2);
+  assert.equal(u.tree(), null); d.resolve(pieceHttp(uiSaveReceipt())); await pending;
+  u.background('active'); assert.ok(uiButton(u, '同じ保存要求で結果を確認'));
+  assert.equal(u.host.controller.getView().phase, 'unavailable'); assert.equal(u.calls.length, 2);
+  u.host.componentWillUnmount();
+});
+
+for (const kind of ['save', 'cancel']) {
+  test(`resolved-context background save-flag changes preserve the same ${kind} recovery intent`, async () => {
+    let attempts = 0;
+    const u = previewUiHarness({ admitSave: true, send: async (url, options) => {
+      if (!url.endsWith('/save') && options.method !== 'DELETE') return pieceHttp(response());
+      if (++attempts === 1) throw Error('lost ACK');
+      return kind === 'save' ? pieceHttp(uiSaveReceipt({ idempotency_replayed: true })) : cancelledReply(response(), true);
+    } });
+    u.host.props = { context: controllerInput({ saveEnabled: true }) };
+    u.mount(); u.host.start(); await pieceTick();
+    if (kind === 'save') await startSyntheticSave(u);
+    else { uiButton(u, 'このPiece候補を取り消す').props.onPress(); await pieceTick(); }
+    u.background('inactive');
+    for (const flag of [false, true]) {
+      u.host.props = { context: controllerInput({ saveEnabled: flag }) }; u.host.componentDidUpdate();
+      assert.equal(u.tree(), null); assert.equal(u.host.controller.getView().phase, 'hidden');
+      u.host.retry(); await pieceTick(); assert.equal(attempts, 1);
+    }
+    u.background('active');
+    assert.equal(u.host.controller.getView().retryKind, kind);
+    const label = kind === 'save' ? '同じ保存要求で結果を確認' : '同じ候補の取消を再試行';
+    uiButton(u, label).props.onPress(); await pieceTick();
+    assert.equal(attempts, 2); assert.equal(u.calls.length, 3);
+    assert.equal(u.calls[1][0], u.calls[2][0]); assert.equal(u.calls[1][1].body, u.calls[2][1].body);
+    assert.equal(u.host.controller.getView().phase, kind === 'save' ? 'saved' : 'cancelled');
+    u.host.componentWillUnmount();
+  });
+}

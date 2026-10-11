@@ -1,6 +1,6 @@
 /** PCE-8 B10 review surface with a bounded RN image-layout prototype.
  * The host provides a freshly checked display view from readPiecePreviewDisplay.
- * No text editing, publication, entitlement defaults, image or save success.
+ * Shows the controller's save outcome; does not start saving or grant renderer admission.
  */
 import React from 'react';
 import { Modal, View, Text, ScrollView, Button, ActivityIndicator } from 'react-native';
@@ -32,16 +32,17 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
           visual_recipe_hash: preview.visual_recipe_hash,
         }, display.visualToken),
       }))) : null;
-  const loading = display.loadingKind === 'cancel' ? '候補を取り消しています。' :
+  const saving = display.loadingKind === 'save' || display.retryKind === 'save';
+  const loading = display.loadingKind === 'save' ? 'Pieceを保存しています。' : display.loadingKind === 'cancel' ? '候補を取り消しています。' :
     display.loadingKind === 'visual' ? '画像設定を更新しています。' :
     display.loadingKind === 'recover' ? '最新のプレビューを取得しています。' : 'Pieceを取得しています。';
-  const retryLabel = display.retryKind === 'cancel' ? '同じ候補の取消を再試行' :
+  const retryLabel = display.retryKind === 'save' ? '同じ保存要求で結果を確認' : display.retryKind === 'cancel' ? '同じ候補の取消を再試行' :
     display.retryKind === 'recover' ? '最新のプレビューを取得' : '同じ要求で再試行';
   return element(Modal, {
     visible: true, animationType: 'slide', presentationStyle: 'fullScreen', onRequestClose: onClose,
   }, element(SafeAreaView, { style: { flex: 1, backgroundColor: '#FFFFFF' } },
     element(View, { style: { flex: 1, padding: 20 }, accessibilityViewIsModal: true },
-      element(Text, { accessibilityRole: 'header', style: { fontSize: 22, color: '#202020', marginBottom: 12 } }, 'Pieceのプレビュー'),
+      element(Text, { accessibilityRole: 'header', style: { fontSize: 22, color: '#202020', marginBottom: 12 } }, saving ? 'Pieceの保存' : 'Pieceのプレビュー'),
       element(ScrollView, { style: { flex: 1 }, contentContainerStyle: { paddingBottom: 24 } },
         display.phase === 'loading' ? element(ActivityIndicator, { accessibilityLabel: loading }) : null,
         display.phase === 'loading' ? element(Text, { style: { color: '#202020', fontSize: 16 }, accessibilityLiveRegion: 'polite' }, loading) : null,
@@ -76,10 +77,13 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
         preview ? element(PieceVisualCard, { display }) : null,
         preview ? element(Text, { testID: 'piece-canonical-text', selectable: true,
           style: { fontSize: 18, lineHeight: 29, color: '#202020' } }, preview.piece_text) : null,
+        display.phase === 'saved' ? element(Text, { accessibilityLiveRegion: 'polite',
+          style: { fontSize: 18, color: '#202020' } }, 'Pieceを保存しました。') : null,
         ['unavailable', 'cancelled'].includes(display.phase) ? element(Text, { accessibilityRole: 'alert',
           style: { fontSize: 16, color: '#202020' } }, display.message) : null,
         element(Text, { style: { fontSize: 14, lineHeight: 22, color: '#494949', marginTop: 20 } },
-          'Pieceの保存・画像の書き出し・共有は、まだ利用できません。'),
+          saving ? '画像の書き出し・共有は、まだ利用できません。' :
+            'Pieceの保存・画像の書き出し・共有は、まだ利用できません。'),
       ),
       element(View, { style: { paddingTop: 12 } },
         display.canRetry === true ? element(Button, {
@@ -89,8 +93,9 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
           onPress: () => onCancel({ preview_id: preview.preview_id,
             preview_revision: preview.preview_revision, visual_recipe_hash: preview.visual_recipe_hash }, display.visualToken),
         }) : null,
-        element(Button, { title: '閉じる', onPress: onClose, accessibilityLabel: 'Pieceの本文プレビューを閉じる' }),
+        element(Button, { title: '閉じる', onPress: onClose, accessibilityLabel: 'Pieceの画面を閉じる' }),
       ),
     ),
   ));
 }
+
