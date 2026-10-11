@@ -555,6 +555,14 @@ u200の省略主体の行動後でも、共有報告判定が「の…でした�
 
 正常3例は1node/0edge→2node/1edge、不明文/別fieldは感情を保持して線を補わない。前後12生成全文と実RN表示model、実service＋合成RPC保存再読6ルート、Emlis前後6全文を確認。限定58 tests/89 subtestsと共有identity1成功。最終回帰・CI・remote照合と未完了範囲は06/API handoff u203参照。未配置・実DB/本人実機・正式商品受入れ未確認。
 
+## 3.34 u204 省略主体の否定決定・準備後の本人感情（2026-10-11・未配置）
+
+共有の報告判定が、完全な省略主体決定の「の…でした」を報告前置きと誤認し、後続の明示SELF感情（丁寧3形・常体安心した）を落としていた。既存SELF分岐を変えず、prefixなし/その後/それから/今日昨日＋区切り、既存否定4形、完全格項1〜4個・を必須・格重複なしの省略決定分岐を追加。新分岐では日付なしでも既存名詞検査を適用し、未解析時点/疑問名詞・日語重複/区切り不足・時刻/範囲・真の報告を保留する。
+
+先行決定はUNSPECIFIEDと否定/準備相/日付を保持し、後続の明示本人感情へactor/day/causeを継承しない。未知区間/別fieldを越す線を作らず、報告・他者・感情の主語省略・訂正/撤回を維持する。Analysisは既存共有fallbackを利用でき、compiler/realizer/API/DTO/DB/RN製品変更0。STRUCTURE_MAP_DELTA_NONE。
+
+実engine合成11入力の前後18生成全文と実RN表示model、実service＋合成RPCの保存再読4ルート、共有Emlis前後6全文を確認。対象65 tests／91 subtests、共有identity1成功。最終回帰・CI・remote照合、既存1020probe同値と残件は06/API handoff u204を参照。未配置・実DB/本人実機・正式商品受入れ未確認。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
