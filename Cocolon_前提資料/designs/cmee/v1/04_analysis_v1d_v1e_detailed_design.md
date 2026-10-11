@@ -595,6 +595,14 @@ Analysis compiler/realizerを変えず、行動の日付/SELF/原文と感情の
 
 合成Analysis12入力の前後16生成全文と実RN表示model、実service＋合成RPC保存再読3ルート、Emlis前後6全文を確認。対象177 tests／275 subtests、共有identity1成功。旧拒否5例を意図した肯定側へ移し、肯定3例と拒否32例を追加。日付付き省略分岐が「私が／私も」まで通すreview指摘を修正済み。最終CI・remote照合・実装経緯・残件は06/API handoff u208。未配置・実DB/本人実機・正式商品受入れ未確認。
 
+## 3.39 u209 関係を含む場所・媒体での書字後の本人感情（2026-10-11・未配置）
+
+「私は家族との会議でメモを書いた」等を報告前置きと誤認し、後続の明示SELF感情を落とす原因を共有Plan `_source_prefix_opens_report` 内で修正した。既存fallbackの名詞パターンを共通化し、「への／との／での」を目的語だけでなく、その前後いずれか1個の場所・媒体でも保持する。旧単純書字分岐、whole-clause完全一致、二重場所の禁止、全名詞の報告/未解析時点/疑問語検査、actor/日付/順序語の既存制限は維持する。
+
+省略書字actorはUNSPECIFIED、後続感情は独立した明示SELFのまま、日付/actor/原因を継承しない。未知文/別fieldを越す順序接続を追加せず、真の報告/他者/否認/訂正/撤回を保持。Analysis compiler/realizer/API/DTO/DB/RN製品変更0、STRUCTURE_MAP_DELTA_NONE。
+
+合成Analysis12入力の前後20全文と実RN表示model、実service＋合成RPC保存再読3ルート、Emlis前後6全文を確認。対象205 tests／331 subtests、共有identity1成功。共有初回受領に肯定7例・拒否18例を追加し、旧拒否期待を弱めていない。同環境read-only補助reviewで具体的blocking findingなし。最終回帰/CI・remote照合・残件は06/API handoff u209。未配置・稼働DB/本人実機・正式商品受入れ未確認。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:

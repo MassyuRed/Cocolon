@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u209 内容修正（2026-10-11 JST・未配置）**：場所・媒体内の「への／との／での」を含む完全書字後で、明示本人感情が欠ける問題を共有報告判定内で補修。既存の前後どちらか1項という制限と報告/未解析名詞の検査を保持し、省略主体・日付・独立したSELF感情を混同しない。Analysis前後20全文と実RN model、合成保存再読3ルート、Emlis前後6全文を確認。対象205 tests／331 subtestsと共有identity1成功。STRUCTURE_MAP_DELTA_NONE。最終回帰/CI・反映・残件は詳細04 §3.39、06/API handoff末尾u209。
+
 **u208 内容修正（2026-10-11 JST・未配置）**：主語省略の完全な書字後に明示本人感情が欠ける問題を共有報告判定内で補修。書字の主体未確定・日付と後続感情の独立したSELF根拠を保持し、別記録の行為者や未知区間を結び付けない。Analysis前後16全文と実RN model、合成保存再読3ルート、Emlis前後6全文を確認。対象177 tests／275 subtestsと共有identity1成功。STRUCTURE_MAP_DELTA_NONE。最終CI・反映・残件は詳細04 §3.38、06/API handoff末尾u208。
 
 **u207 内容修正（2026-10-11 JST・未配置）**：今日/昨日付きの本人書字後に明示感情が欠ける問題を共有報告判定内で補修。明示SELFは・日語3配置・既存の完全書字だけを区別し、行動の日付と感情の独立した根拠を保持。後置日の区切りの後戻りを禁止し、未解析時点/報告/省略主体の境界を保持する。Analysis前後20全文と実RN model、合成保存再読3ルート、Emlis前後6全文を確認。対象139 tests／187 subtestsと共有identity1成功。STRUCTURE_MAP_DELTA_NONE。最終CI・反映・残件は詳細04 §3.37、06/API handoff末尾u207。
