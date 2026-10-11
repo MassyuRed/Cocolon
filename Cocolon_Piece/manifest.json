@@ -13,9 +13,9 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "c82df42a36843f278111e04e5572a7b6b15c7f79",
-    "raw_sha256": "cbb59ef1d6c564806ae1ae9e69588671f738eb239e11f5c0e317c26091f4c49c",
-    "utf8_bytes": 95894
+    "git_blob_sha1": "043cc1e421705a7303539d87b509fc202210f2ec",
+    "raw_sha256": "0c31f99d0cc6b36c715741230ca47def2de92dd2e8a8f0bdec504479dc0e0b03",
+    "utf8_bytes": 96453
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -86,7 +86,7 @@
     "pce9e_export_share_completion": "REMOTE_1C6FBD3__IOS_NORMAL_COMPLETION_COPY_CLEANUP__CI577_PASS__DEVICE_PENDING",
     "pce9c_save_lifecycle": "CONTROLLER_IMPLEMENTED__CURRENT_DISPLAY_OWNER_SAVE_OUTCOME_UI_20261011__INITIAL_SAVE_ADMISSION_PENDING",
     "pce9c_save_outcome_ui": "REMOTE_703C60B__SAVE_OUTCOME_UI_RECOVERY_CONNECTED__CI611_PASS__INITIAL_SAVE_ADMISSION_DEVICE_PENDING",
-    "pce9c_saved_owner_detail": "SOURCE_CONNECTED_LOCAL634_PASS__CI_PENDING__INITIAL_SAVE_ADMISSION_DEVICE_PENDING"
+    "pce9c_saved_owner_detail": "REMOTE_7BD5930__SAVED_OWNER_DETAIL_CONNECTED__CI634_PASS__INITIAL_SAVE_ADMISSION_DEVICE_PENDING"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -318,9 +318,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "c63afbfd39f986f6d1b8448fbd289bcab9d4ce52",
-    "raw_sha256": "2d371263488e3a250e9f6e611c051e4d7875771abb380ca24fbfdceff60ca006",
-    "utf8_bytes": 317490
+    "git_blob_sha1": "0bbff94a4ecf301ed627f2ee6a1bef69d20e20eb",
+    "raw_sha256": "226f224ad205e276df2186585bbd9d1c13d1e01d42ca4aab6a5629b5b8f68c3f",
+    "utf8_bytes": 318335
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -506,12 +506,15 @@
     "local_js_passed": 634,
     "local_js_failed": 0,
     "local_js_skipped": 0,
-    "ci_pending": true,
+    "ci_pending": false,
     "live_database_apply": 0,
     "release_effect": 0,
     "native_app_builds": 0,
     "product_acceptance": false,
-    "automatic_progression": false
+    "automatic_progression": false,
+    "ci_js_passed": 634,
+    "ci_js_failed": 0,
+    "ci_js_skipped": 0
   },
   "b06_q3_context_fence": {
     "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
@@ -3840,7 +3843,7 @@
     "current_entry_section": "54",
     "current_map_section": "58",
     "base_head": "5aa8878aebdffdbc9a1cb0b74d94a7a5b2980134",
-    "state": "SOURCE_CONNECTED_LOCAL634_PASS__CI_PENDING__INITIAL_SAVE_ADMISSION_DEVICE_PENDING",
+    "state": "REMOTE_SAVED_OWNER_DETAIL_CONNECTED__CI634_PASS__INITIAL_SAVE_ADMISSION_DEVICE_PENDING",
     "changed_product_paths": [
       "screens/InputScreen.js",
       "screens/input/InputPieceActionArea.js",
@@ -3871,7 +3874,7 @@
     "local_js_failed": 0,
     "local_js_skipped": 0,
     "added_tests": 23,
-    "ci_pending": true,
+    "ci_pending": false,
     "review_environment": "CODEX_WORK_WITH_SAME_ENVIRONMENT_READ_ONLY_SUBAGENT_REVIEW_NOT_PRO_ULTRA_ACCEPTANCE",
     "review_findings_fixed": 1,
     "review_after_fix_no_additional_blockers": true,
@@ -3880,7 +3883,20 @@
     "activation": 0,
     "app_build": 0,
     "main_merge": 0,
-    "automatic_progression": false
+    "automatic_progression": false,
+    "source_commit": "7bd593040bc6ab317def5f0f209ca8cbb720d7af",
+    "ci_run_id": 38101826766,
+    "ci_head": "7bd593040bc6ab317def5f0f209ca8cbb720d7af",
+    "ci_js_job_id": 114359158646,
+    "ci_js_passed": 634,
+    "ci_js_failed": 0,
+    "ci_js_skipped": 0,
+    "ci_all_five_jobs_success": true,
+    "remote_file_matches": 12,
+    "remote_changed_paths_match": true,
+    "remote_parent_match": true,
+    "native_library_compile_rerun": false,
+    "native_library_compile_skip_reason": "No dependency/platform/workflow changes; existing scope skipped both export library compile steps."
   }
 }
 

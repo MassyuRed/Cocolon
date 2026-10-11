@@ -2133,3 +2133,9 @@ local既存12suite **634 PASS／FAIL0／SKIP0**（先行611＋追加23）、Node
 B9実端末描画同等性・glyph/ink/性能→正式renderer admission→保存前fit→初回保存buttonが残る。今回の保存後本人detail接続、保存結果表示／同key回収、既存controller/APIを再実装しない。PNG／写真権限・保存／共有の実機、Android・結果不明／異常終了時の共有copy回収、receipt、形式変更、Nexus公開読取／切替、M5／実Auth／稼働構成は継承する。
 
 canSave/canExport=false。画像共有の全完成を初回実機確認へ追加しない。今回はAPI／SQL／native／依存／workflow変更、Supabase操作・DB書込、env/deploy/activation、app build・署名／配布・main merge0。001〜004適用済み／追加2本未適用は先行確認を継承し、今回DB再検査とはしない。weekly§5.5・2026年12月18日目標・automatic_progression=falseを維持。STRUCTURE_MAP_DELTA_UPDATED（保存確認から既存本人detailへ）。
+
+### 58.4 GitHub最終確認
+
+source `7bd593040bc6ab317def5f0f209ca8cbb720d7af` の製品6＋test3＋資料3をDraft PR #30へ反映し、全12fileのremote全文・変更path集合・親headを照合した。[CI38101826766](https://github.com/MassyuRed/Cocolon/actions/runs/38101826766)は**全5job success**。JS job114359158646は **634 PASS／FAIL0／SKIP0**、Node24.21.0／TypeScript5.2.2。local634件との合算はしない。既存Android bridge source compileとiOS source syntax／patch検査もsuccess。export Pods／Android4依存compile stepは依存差分がなくscopeどおりskipであり、今回の実native再buildではない。
+
+入口§54／manifest v53へ同期した。保存後本人detailの再取得・検証・表示はコード接続済み。初回保存button・正式admission・実機受入れは未完了。
