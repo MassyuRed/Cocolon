@@ -290,6 +290,10 @@ vertical76/storage15/saved period13/API6＝110 PASS。6合成本文と既存RN�
 
 ### 3.10 u109 行動後の過去感情
 
+**u188 主体未確定を表示へ保持（2026-10-11 JST・未配置）**：PAST_FEELINGのSELF/UNSPECIFIEDは内部に保持されていたが、公開labelが同じだった。既存realizerの型再照合を通ったUNSPECIFIEDだけ、肯定・否定とも「（誰の気持ちかは未確定）」と表示する。SELFは「（記録された気持ち）」を維持。「書かれていません」と原文の欠落を断定せず、分析で主体を確定していない状態を示す。行動側の本人を感情側へ補完せず、感情の内容自体や否定を不確定にしない。
+
+新規生成の本文・図・順序線の端点は同じlabelを使う。主体明示への訂正とその逆、主体差の非集約と期間差、同一主体の丁寧同義比較を保持する。新規保存は新表示、旧保存の本文・図・identityは再読時に再解釈せず維持。受理文法、private graph、共有意味owner、公開schema、保存lifecycleは変更しない。生成8全文と実RN表示modelの全文/identity/node順/edge/比較が一致。検査の詳細は06/API handoff末尾u188。STRUCTURE_MAP_DELTA_NONE。本人の生成→保存再表示は未完了、本修正は未配置。
+
 **u187 行動後の否定過去感情（2026-10-11 JST・未配置）**：u186で保留したcompoundを、既存完全SELF行動＋後/あと/てから＋同じ12否定有限形に限って受理する。共有Planは全文・帰属・境界を証明し、negative/negationと専用source_proven_negative_feeling_sequenceを保持、positive_changeを付けない。Analysisは共有2核/required typed relation、原文scalar/UTF-8/hash/whole evidenceを照合し、PAST_FEELING/negative/feeling/pastへ保持する。右端の省略主語はUNSPECIFIEDを維持し、苦痛/失敗/改善/原因を補わない。先頭/後続の明示順序は既存隣接条件だけへ接続する。
 
 否定行動・たら・程度/疑問/推測・他者・引用/夢/報告/後続認知/撤回hostは保留。通常補足の矛盾を暗黙訂正にせず、訂正/撤回/未知文/別field/sourceを橋渡ししない。同義の常体/丁寧形は期間差を作らず、肯否定の差は保持する。Emlisの観測作者/受取作者/独立readerも同じ限定根拠に接続し、原文端点と接続語を保つ。否定された感情を「変化」「支えている」へ転換せず、本文の完全な意味検査を通らない否定関係は拒否する。

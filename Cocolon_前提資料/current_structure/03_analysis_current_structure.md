@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u188 内容修正（2026-10-11 JST・未配置）**：過去感情の主体SELF/UNSPECIFIEDが同じ文章・図の表示になる不足を補修。主体を確定していない場合だけ「（誰の気持ちかは未確定）」と表示し、明示本人の「（記録された気持ち）」、肯否定、原文証拠と順序を保持する。訂正・期間比較・新規保存と旧保存の再解釈なし読取を確認。生成8全文と実RN表示modelが一致。Analysis4suiteの検査後、旧表示期待値2件だけを補正して当該testを再検証済み。STRUCTURE_MAP_DELTA_NONE、既存realizerの責務は§4.15へ追記。weekly20261010 §5.4の明示内容修正として実施、§5.5の本人生成→保存再表示は未完了。詳細は04 §3.10と06/API handoff末尾u188。
+
 **u187 内容修正（2026-10-11 JST・未配置）**：「資料を調べた後、安心しなかった」等の行動後12否定有限形が分析から落ちる欠落を補修。共有のnegative/negationと全文根拠を要求し、文章・図・原文証拠・書かれた順序を保持する。右端の省略主体、原因/改善/失敗は補わない。連動するEmlisの誤った「変化」「支えている」表現も除去し、独立readerで改変を拒否。Analysis391 tests／3386 subtests、共有限定154＋identity1＋品質保留1が成功、既存実保存fixture3skip。Analysis9全文と実RN表示model一致、実service＋合成RPCの保存再読を確認。短いEmlis一文は意味検証を通っても既存echo品質gateで未生成の例を保持。STRUCTURE_MAP_DELTA_NONE、既存owner責務は§4.15へ追記。weekly20261010 §5.4の明示内容修正として実施し、§5.5の本人生成→保存再表示は未完了。詳細は04 §3.10と06/API handoff末尾u187。
 
 **u186 内容修正（2026-10-11 JST・未配置）**：本人が明記した「安心しなかった」等の否定過去感情が、文章・図から落ちる欠落を補修。既存明示本人主語と12有限形だけで、共有の否定根拠・原文出典を照合し、否定と後続の明示順序を保持する。負荷・因果・改善を補わず、他者/省略主語/引用/推測/撤回host/未証明compoundは保留。Analysis 389 tests／3282 subtests成功、生成7全文と実RN表示model一致、実service＋合成RPCの保存再読を確認。STRUCTURE_MAP_DELTA_NONE。今回の明示内容修正指示をweekly20261010 §5.4の再配分として扱う。下記の入力不足案内確認は維持し、本人の分析生成→保存後再表示は未完了。本修正を配置・実機確認済みへ換算しない。詳細は04 §3.10と06/API handoff末尾u186。
@@ -449,6 +451,8 @@ saved period13/API6と合わせ116 PASS、242 subtests PASS。6合成本文の�
 | mashos-api `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | current共有ownerのidentityのみ同期。historical manifest/9owner/18payloadは保持 |
 
 未配置。合成検査と実RN表示modelの照合は本人実機の生成/再表示を代替しない。詳しい採用範囲・検証・残件は04 §3.10、06/API handoff末尾u187。
+
+**u188 追記（2026-10-11 JST・未配置）**：既存 `observed_route_realizer.py` のPAST_FEELING表示で、型の再照合後にUNSPECIFIEDだけ「（誰の気持ちかは未確定）」を付ける。SELFは従来表示。文章・図・順序線の端点は同じsafe projectionから生成し、保存読取は保存済み表示を保持する。compiler/共有owner/DTO/RN/DBの配置・契約変更0。vertical/storageの既存testに主体別表示、訂正両方向、非集約、比較、旧保存不変を接続。詳細は04 §3.10と06/API handoff末尾u188。
 
 ### 4.16 本人が明記した過去の所在を場面表示へ接続（2026-10-04 u110）
 
