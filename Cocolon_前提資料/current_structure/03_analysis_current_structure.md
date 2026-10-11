@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u193 内容修正（2026-10-11 JST・未配置）**：「その後／それから、私は安心した」等の単独過去感情が欠落する問題を補修。既存の肯否定・丁寧形と明示SELFを保ち、原文内の順序だけを文章・図へ接続する。場面→担当→行動→感情の例は3node/2edgeから4node/3edgeとなる。未読文・希望・別記録・訂正/撤回を越える線は作らない。共有の3丁寧形の完全原文判定を同じ二接続語へ限定して補修し、Emlis実本文の連動を確認。元の28日例の本文・表示内容は不変。STRUCTURE_MAP_DELTA_NONE、検証・残件は04 §3.23と06/API handoff末尾u193。本人生成→保存再表示・全体ルートUI・商品受入れは未完了。
+
 **u192 内容修正（2026-10-11 JST・未配置）**：本人の過去行動で「同僚からの資料」「家族への手紙」等の対象内部の関係が読めず分析から落ちる欠落を補修。からの/への/との/でのを対象内に保持し、引用・否認・時点の未解釈は保留。期間集約・明示順序・原文・訂正/比較・合成保存再読と実RN modelを確認。計388テストを確認（初回の未取得依存による3errorは依存復元後に該当3件を再実行して成功）。元の28日例の本文は変わらず、未対応行動と全体ルートUIは残件。新規検査fileの地図は§4.25、詳細は04 §3.22と06/API handoff末尾u192。本人生成→保存再表示は未完了。
 
 **u191 内容修正（2026-10-11 JST・未配置）**：「ところで、／とりあえず、」を引用助詞と誤認し、その前の単独否定感情を落とす不整合を補修。接続語直後の読点3形を必須とし、本人節・否定・原文証拠を保持。後続の未読内容と不明なつながりは保留する。Analysis3suite 394 tests／3872 subtests PASS、生成7全文と実RN一致、合成保存再読4例を確認。未区切り「とても」とcompound側は残件。STRUCTURE_MAP_DELTA_NONE、本人生成→保存再表示は未完了。詳細は04 §3.10と06/API handoff末尾u191。
@@ -593,6 +595,8 @@ SQL候補は未適用。適用→対応API配置→比較flagの有効化を個�
 | mashos-api `ai/tests/test_cmee_analysis_nominal_relations.py`（新規） | 9件の内容回帰検査＋1件の隔離保存再読検査。対象の関係、原文証拠、期間内集約、明示順序/未知の間隔、肯否定、引用、補足/訂正/撤回、期間比較を確認する。既存vertical検査のfixtureを共用。 |
 
 runtime構造の追加はない。API/DTO/DB/共有Emlis/RN製品コードは変更せず、期間入力→既存Analysis→保存projection→既存表示modelという経路を維持する。元の28日例と「分担を決めておいた」等は今回未改善。検証・未配置状態は06/API handoff u192。
+
+u193の内部補修ownerは既存Analysis `intent_compiler.py`（接続語付き完全SELF過去感情・隣接順序）、`observed_route_realizer.py`（同じ命題の接続語を表示）、共有 `emlis_ai_grounded_observation_plan.py::_source_polite_past_feeling_is_bound`（3丁寧形の原文・帰属条件）である。既存vertical/storage/limited_change_feeling検査とcurrent shared identityを更新。新規file/runtime owner、API/DB/RN経路の変更はない。検査用合成RPCの保存再読は実DB・端末受入れではない。
 
 ## 5. Source and artifact identity
 
