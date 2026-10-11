@@ -587,6 +587,14 @@ Analysis compiler/realizerを変えず、行動の日付/SELF/原文と感情の
 
 合成Analysis13入力の前後20生成全文と実RN表示model、実service＋合成RPC保存再読3ルート、Emlis前後6全文を確認。対象139 tests／187 subtests、共有identity1成功。u205の日付付き書字1拒否fixtureは肯定側へ移し、日付境界/報告等26例を追加。最終CI・反映・残件は06/API handoff u207。STRUCTURE_MAP_DELTA_NONE。未配置・実DB/本人実機・正式商品受入れ未確認。
 
+## 3.38 u208 主語省略の書字後の本人感情（2026-10-11・未配置）
+
+共有Planの `_source_prefix_opens_report` が「家族への手紙を書いた」等の完全な主語省略書字を報告前置きと誤認し、後続の明示SELF感情を落とす原因を修正した。既存書字の主語を任意にし、prefixなし/その後/それから/今日昨日＋区切り、単純名詞/目的語内の「への／との／での」、書いた/書きました、単純な場所/媒体1項に限定する。新受理の省略形には既存名詞検査を適用し、未解析時点/疑問名詞を取り込まない。日付付き明示SELFは従来の「は」の範囲を保持する。
+
+書字のactorはUNSPECIFIED、後続感情は独立した明示SELFとして保持し、日付/actor/原因を継承しない。未知文/別fieldを越す接続や別記録の不明行為者の統合を禁止し、不完全topic、報告/他者/否認/訂正/撤回、日付と順序語の混用等の境界を保持する。Analysis compiler/realizer/API/DTO/DB/RN製品変更0。STRUCTURE_MAP_DELTA_NONE。
+
+合成Analysis12入力の前後16生成全文と実RN表示model、実service＋合成RPC保存再読3ルート、Emlis前後6全文を確認。対象177 tests／275 subtests、共有identity1成功。旧拒否5例を意図した肯定側へ移し、肯定3例と拒否32例を追加。日付付き省略分岐が「私が／私も」まで通すreview指摘を修正済み。最終CI・remote照合・実装経緯・残件は06/API handoff u208。未配置・実DB/本人実機・正式商品受入れ未確認。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
