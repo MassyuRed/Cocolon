@@ -2,6 +2,7 @@ import React, { useCallback } from "react";
 import { Alert } from "react-native";
 
 import { useTutorial } from "../TutorialContext";
+import { useAppRuntime } from "../AppRuntimeContext";
 import {
   PieceDescription,
   PieceMediumCard,
@@ -11,6 +12,8 @@ import {
 
 export default function PieceHistoryMenuScreen({ navigation }) {
   const { isTutorialMode } = useTutorial();
+  const { isFeatureEnabled } = useAppRuntime();
+  const canReadOwnPieces = !isTutorialMode && isFeatureEnabled('piece_v2_owner_read_enabled', false);
 
   const handleBack = useCallback(() => {
     try {
@@ -60,6 +63,13 @@ export default function PieceHistoryMenuScreen({ navigation }) {
         chevron="forward"
         accessibilityLabel="共鳴履歴を開く"
       />
+      {canReadOwnPieces ? <PieceMediumCard
+        title="自分のPiece"
+        description="保存したPieceの本文と公開範囲を確認します"
+        onPress={() => navigation?.navigate?.("PieceOwnerHistory")}
+        chevron="forward"
+        accessibilityLabel="自分のPieceを開く"
+      /> : null}
     </PieceMenuScroll>
   );
 }

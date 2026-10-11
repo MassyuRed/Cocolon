@@ -18,11 +18,15 @@ import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useSubscription } from "../SubscriptionContext";
 import {
   canViewWatashiMapDetailReport,
+  canViewWatashiMapHistory,
+  canViewWatashiMapMode,
   formatWatashiMapReportModeLabel,
   getWatashiMapDetailLockLabel,
   normalizeWatashiMapTier,
 } from "../components/selfStructure/watashiMapAccessPolicy";
 import WatashiMapRenderer from "../components/selfStructure/WatashiMapRenderer";
+import WatashiMapV2Renderer from "../components/selfStructure/WatashiMapV2Renderer";
+import { classifyWatashiMapVersion, parseWatashiMapContent } from "../components/selfStructure/watashiMapV2Contract";
 import {
   hasWatashiMapRenderableContent,
   normalizeWatashiMapPayload,
@@ -119,16 +123,7 @@ async function exportTextToPdf(title, text) {
 }
 
 function safeParseJson(raw) {
-  if (!raw) return null;
-  if (typeof raw === "object") return raw;
-  if (typeof raw === "string") {
-    try {
-      return JSON.parse(raw);
-    } catch {
-      return null;
-    }
-  }
-  return null;
+  return parseWatashiMapContent(raw);
 }
 
 function normalizeSelfStructureMode(mode) {
@@ -224,17 +219,21 @@ export default function SelfStructureReportViewerScreen({
     return formatRange(report.period_start, report.period_end);
   }, [report?.period_start, report?.period_end]);
 
-  const contentText = report?.content_text || "";
   const contentJson = useMemo(() => safeParseJson(report?.content_json), [report?.content_json]);
+  const mapVersion = useMemo(() => classifyWatashiMapVersion(contentJson), [contentJson]);
+  const isLegacyMap = mapVersion === 'LEGACY';
+  const contentText = isLegacyMap ? report?.content_text || "" : '';
   const fetchedReportMode = useMemo(() => {
     return normalizeSelfStructureMode(contentJson?.report_mode || report?.report_mode);
   }, [contentJson?.report_mode, report?.report_mode]);
+  const canViewVersionedMap = canViewWatashiMapHistory(viewerTier)
+    && canViewWatashiMapMode(viewerTier, contentJson?.report_mode || report?.report_mode || 'standard');
   const canViewFullText = useMemo(() => {
     return !subscriptionLoading && canViewWatashiMapDetailReport(viewerTier, fetchedReportMode);
   }, [fetchedReportMode, subscriptionLoading, viewerTier]);
   const hasWatashiMapVisual = useMemo(() => {
-    return hasWatashiMapRenderableContent(contentJson);
-  }, [contentJson]);
+    return isLegacyMap && hasWatashiMapRenderableContent(contentJson);
+  }, [contentJson, isLegacyMap]);
   const watashiMapPayload = useMemo(() => {
     if (!hasWatashiMapVisual) return null;
     return normalizeWatashiMapPayload(contentJson, {
@@ -330,10 +329,19 @@ export default function SelfStructureReportViewerScreen({
       {!!range ? <Text style={[styles.range, themed.range]}>{range}</Text> : null}
 
       <ScrollView ref={scrollRef} contentContainerStyle={styles.body}>
-        {subscriptionLoading && !hasWatashiMapVisual ? (
+        {subscriptionLoading ? (
           <Text style={[styles.empty, themed.empty]}>プラン情報を確認しています…</Text>
         ) : (
           <>
+            {!isLegacyMap && canViewVersionedMap ? (
+              <WatashiMapV2Renderer contentJson={contentJson} colors={colors} isDark={isDark} />
+            ) : null}
+
+            {!isLegacyMap && !canViewVersionedMap ? (
+              <Text style={[styles.empty, themed.empty]}>{!canViewWatashiMapHistory(viewerTier)
+                ? '過去のわたしマップはPlusプラン以上で読めます。'
+                : getWatashiMapDetailLockLabel(viewerTier, fetchedReportMode)}</Text>
+            ) : null}
             {hasWatashiMapVisual ? (
               <WatashiMapRenderer
                 contentJson={contentJson}
@@ -346,13 +354,13 @@ export default function SelfStructureReportViewerScreen({
               />
             ) : null}
 
-            {!canViewFullText && !hasWatashiMapVisual ? (
+            {isLegacyMap && !canViewFullText && !hasWatashiMapVisual ? (
               <Text style={[styles.empty, themed.empty]}>
                 {getWatashiMapDetailLockLabel(viewerTier, fetchedReportMode)}
               </Text>
             ) : null}
 
-            {((contentText && canViewFullText && (!hasWatashiMapVisual || detailReportVisible)) || (!hasWatashiMapVisual && canViewFullText && !contentText)) ? (
+            {isLegacyMap && ((contentText && canViewFullText && (!hasWatashiMapVisual || detailReportVisible)) || (!hasWatashiMapVisual && canViewFullText && !contentText)) ? (
               <View style={[styles.bodyCard, themed.bodyCard]}>
                 {hasWatashiMapVisual && contentText ? (
                   <Text style={[styles.sectionLabel, themed.sectionLabel]}>詳しい自己分析レポート</Text>

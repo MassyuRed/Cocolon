@@ -18,6 +18,9 @@ import {
 // Supabase Auth
 import { useAuth } from "../AuthContext";
 import { submitEmotionInput } from "../lib/api/home/emotionSubmitApi";
+import { useEmlisThread } from "./input/useEmlisThread";
+import { useAppRuntime } from "../AppRuntimeContext";
+import EmlisThreadModal from "./input/EmlisThreadModal";
 import {
   cancelEmotionPiece,
   previewEmotionPiece,
@@ -68,6 +71,7 @@ import { useInputDraftPersistence } from "./input/useInputDraftPersistence";
 import { useInputFeedbackModal } from "./input/useInputFeedbackModal";
 import { useInputKeyboardAwareMemo } from "./input/useInputKeyboardAwareMemo";
 import InputActionArea from "./input/InputActionArea";
+import InputPieceActionArea from "./input/InputPieceActionArea";
 import InputCategorySection from "./input/InputCategorySection";
 import InputEmotionSection from "./input/InputEmotionSection";
 import InputFeedbackReplyModal from "./input/InputFeedbackReplyModal";
@@ -120,6 +124,22 @@ async function refreshHomeStateAfterEmotionSubmitTimeout(loadHomeState) {
   }
 }
 
+// One opaque key per confirmed saved-input selection. The already-installed
+// index.js random-values polyfill supplies entropy; never fall back to a clock,
+// source ID, owner ID or Math.random. Failure cannot fail the input save itself.
+function buildSavedPieceInput(savedInputId, expectedUserId) {
+  if (typeof savedInputId !== "string" ||
+      !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(savedInputId) ||
+      savedInputId === "00000000-0000-0000-0000-000000000000") return null;
+  try {
+    const bytes = new Uint8Array(16);
+    globalThis.crypto.getRandomValues(bytes);
+    const idempotencyKey = "piece-preview-" + Array.from(bytes,
+      value => value.toString(16).padStart(2, "0")).join("");
+    return Object.freeze({ savedInputId, expectedUserId, idempotencyKey });
+  } catch { return null; }
+}
+
 /**
  * Home（InputScreen）
  * - 背景・パネル・ボタンなどを ThemeContext から取得
@@ -140,6 +160,37 @@ export default function InputScreen({ navigation, route }) {
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const currentUserId = String(session?.user?.id || "").trim();
+  const { isFeatureEnabled } = useAppRuntime();
+  const feedbackOwner = useRef({ id: currentUserId, epoch: 0 });
+  if (feedbackOwner.current.id !== currentUserId) feedbackOwner.current = { id: currentUserId, epoch: feedbackOwner.current.epoch + 1 };
+  useEffect(() => () => { feedbackOwner.current = { id: "", epoch: feedbackOwner.current.epoch + 1 }; }, []);
+  const emlisThread = useEmlisThread({ userId: currentUserId, enabled: isFeatureEnabled("emlis_threads_enabled", false) && !isTutorialMode });
+  // Piece keeps only a saved ID/key, not the input or Emlis body. A render-time
+  // owner/tutorial boundary conceals a previous selection before effect cleanup.
+  const pieceInputLifetime = useRef(null);
+  if (!pieceInputLifetime.current || pieceInputLifetime.current.owner !== feedbackOwner.current ||
+      pieceInputLifetime.current.tutorial !== isTutorialMode ||
+      pieceInputLifetime.current.reset !== tutorialResetToken) {
+    pieceInputLifetime.current = { owner: feedbackOwner.current,
+      tutorial: isTutorialMode, reset: tutorialResetToken, ticket: null };
+  }
+  const [savedPieceInput, setSavedPieceInput] = useState(null);
+  const pieceInputMounted = useRef(false);
+  useEffect(() => {
+    pieceInputMounted.current = true;
+    return () => {
+      pieceInputMounted.current = false;
+      pieceInputLifetime.current.ticket = null;
+    };
+  }, []);
+  useEffect(() => { setSavedPieceInput(null); }, [currentUserId, isTutorialMode, tutorialResetToken]);
+  useEffect(() => {
+    const unsubscribe = navigation?.addListener?.("blur", () => {
+      pieceInputLifetime.current.ticket = null;
+      setSavedPieceInput(null);
+    });
+    return typeof unsubscribe === "function" ? unsubscribe : undefined;
+  }, [navigation]);
   const tutorialDisplayName = useMemo(() => {
     const metadata = session?.user?.user_metadata || {};
     return (
@@ -174,6 +225,15 @@ export default function InputScreen({ navigation, route }) {
     navigation,
     setTutorialStep,
   });
+
+  useEffect(() => {
+    resetInputFeedbackModal();
+    setSubmitting(false);
+    setPiecePreviewVisible(false);
+    setPiecePreviewPayload(null);
+    setPiecePublishLoading(false);
+    setPiecePreviewLoading(false);
+  }, [currentUserId, resetInputFeedbackModal]);
 
   const {
     keyboardInset,
@@ -210,6 +270,8 @@ export default function InputScreen({ navigation, route }) {
   const wasTutorialModeRef = useRef(false);
 
   const resetLocalInputState = useCallback(() => {
+    pieceInputLifetime.current.ticket = null;
+    setSavedPieceInput(null);
     setSelectedEmotions([]);
     setMemo("");
     setMemoAction("");
@@ -558,7 +620,7 @@ const safeInsets = useSafeAreaInsets();
     startupModalVisible,
     noticeLoading,
     todayQuestionLoading,
-    inputFeedbackModalVisible,
+    inputFeedbackModalVisible: inputFeedbackModalVisible || emlisThread.visible,
     applyInputDraft,
     showToast,
   });
@@ -595,6 +657,18 @@ const safeInsets = useSafeAreaInsets();
     !piecePreviewLoading &&
     !piecePublishLoading &&
     canSubmit;
+  const mountSavedPieceInput =
+    savedPieceInput?.lifetime === pieceInputLifetime.current &&
+    !isTutorialMode && !submitting && !emlisThread.visible && !emlisThread.busy &&
+    !inputFeedbackModalVisible && !piecePreviewVisible &&
+    !piecePreviewLoading && !piecePublishLoading && !startupModalVisible &&
+    !draftRestoreModalVisible && !hasMemoInput && selectedEmotions.length === 0 &&
+    selectedCategories.length === 0 && activeField === null;
+  // Keep the existing saved-input host through runtime refresh so its
+  // body-free cancellation receipt/unknown outcome survives. The host hides
+  // all actions while OFF and clears on owner/input/key/lifetime changes.
+  const showSavedPieceInput = mountSavedPieceInput &&
+    isFeatureEnabled("piece_v2_preview_enabled", false) === true;
   const hasUserStartedInput =
     selectedEmotions.length > 0 ||
     memo.trim().length > 0 ||
@@ -896,6 +970,9 @@ const safeInsets = useSafeAreaInsets();
 
 
   const handlePreviewPiece = useCallback(async () => {
+    const requestOwner = feedbackOwner.current;
+    if (requestOwner.id !== currentUserId) return;
+    const ownsResponse = () => feedbackOwner.current === requestOwner;
     if (!canPreviewPiece) return;
 
     registerInputInteraction();
@@ -909,7 +986,8 @@ const safeInsets = useSafeAreaInsets();
     setPiecePreviewLoading(true);
     try {
       const payload = buildEmotionSubmitPayload();
-      const preview = await previewEmotionPiece(payload);
+      const preview = await previewEmotionPiece(payload, { expectedUserId: requestOwner.id });
+      if (!ownsResponse()) return;
       const quota = preview?.quota && typeof preview.quota === "object"
         ? preview.quota
         : null;
@@ -919,15 +997,18 @@ const safeInsets = useSafeAreaInsets();
       setPiecePreviewPayload(preview && typeof preview === "object" ? preview : null);
       setPiecePreviewVisible(true);
     } catch (e) {
+      if (!ownsResponse()) return;
       console.warn("InputScreen: previewEmotionPiece failed", e);
       Alert.alert(
         "ピースの生成",
         String(e?.message || "ピースの生成に失敗しました。")
       );
     } finally {
+      if (!ownsResponse()) return;
       setPiecePreviewLoading(false);
     }
   }, [
+    currentUserId,
     buildEmotionSubmitPayload,
     canPreviewPiece,
     isTutorialMode,
@@ -935,6 +1016,9 @@ const safeInsets = useSafeAreaInsets();
   ]);
 
   const handleCancelPiecePreview = useCallback(async () => {
+    const requestOwner = feedbackOwner.current;
+    if (requestOwner.id !== currentUserId) return;
+    const ownsResponse = () => feedbackOwner.current === requestOwner;
     const previewId = String(piecePreviewPayload?.preview_id || "").trim();
     setPiecePreviewVisible(false);
 
@@ -948,15 +1032,21 @@ const safeInsets = useSafeAreaInsets();
       return;
     }
     try {
-      await cancelEmotionPiece(previewId);
+      await cancelEmotionPiece(previewId, { expectedUserId: requestOwner.id });
+      if (!ownsResponse()) return;
     } catch (e) {
+      if (!ownsResponse()) return;
       console.warn("InputScreen: cancelEmotionPiece failed", e);
     } finally {
+      if (!ownsResponse()) return;
       setPiecePreviewPayload(null);
     }
-  }, [isTutorialMode, piecePreviewPayload?.preview_id]);
+  }, [currentUserId, isTutorialMode, piecePreviewPayload?.preview_id]);
 
   const handlePublishPiece = useCallback(async () => {
+    const requestOwner = feedbackOwner.current;
+    if (requestOwner.id !== currentUserId) return;
+    const ownsResponse = () => feedbackOwner.current === requestOwner;
     const previewId = String(piecePreviewPayload?.preview_id || "").trim();
     if (!previewId || piecePublishLoading) return;
 
@@ -966,6 +1056,7 @@ const safeInsets = useSafeAreaInsets();
       setPiecePreviewPayload(null);
       void ensureTutorialPiecesSeed();
       await clearPersistedInputDraft();
+      if (!ownsResponse()) return;
       setPendingInputDraft(null);
       setDraftRestoreModalVisible(false);
       Keyboard.dismiss();
@@ -986,7 +1077,8 @@ const safeInsets = useSafeAreaInsets();
 
     setPiecePublishLoading(true);
     try {
-      const publishResult = await publishEmotionPiece(previewId);
+      const publishResult = await publishEmotionPiece(previewId, { expectedUserId: requestOwner.id });
+      if (!ownsResponse()) return;
       const inputFeedback = publishResult?.input_feedback || null;
       const inputFeedbackText = String(
         inputFeedback?.comment_text || ""
@@ -995,6 +1087,7 @@ const safeInsets = useSafeAreaInsets();
       const inputFeedbackEmotionMeta = buildInputFeedbackEmotionMeta(selectedEmotions);
 
       await clearPersistedInputDraft();
+      if (!ownsResponse()) return;
       setPendingInputDraft(null);
       setDraftRestoreModalVisible(false);
 
@@ -1019,7 +1112,9 @@ const safeInsets = useSafeAreaInsets();
       }
 
       await loadHomeState({ force: true, includeStartupCandidate: false });
+      if (!ownsResponse()) return;
       await markAnalysisHomeSummaryDirty();
+      if (!ownsResponse()) return;
 
       const openedObservation = inputFeedbackText
         ? openInputFeedbackModal({
@@ -1034,15 +1129,18 @@ const safeInsets = useSafeAreaInsets();
         showToast("ピースを生成しました");
       }
     } catch (e) {
+      if (!ownsResponse()) return;
       console.warn("InputScreen: publishEmotionPiece failed", e);
       Alert.alert(
         "ピースの生成",
         String(e?.message || "ピースの生成に失敗しました。")
       );
     } finally {
+      if (!ownsResponse()) return;
       setPiecePublishLoading(false);
     }
   }, [
+    currentUserId,
     clearPersistedInputDraft,
     completeTutorialAfterReply,
     ensureTutorialPiecesSeed,
@@ -1059,7 +1157,21 @@ const safeInsets = useSafeAreaInsets();
   ]);
 
   const handleOk = async () => {
+    const requestOwner = feedbackOwner.current;
+    if (requestOwner.id !== currentUserId) return;
+    const ownsResponse = () => feedbackOwner.current === requestOwner;
     if (!canSubmit) return;
+    const pieceLifetime = pieceInputLifetime.current;
+    const pieceTicket = {};
+    pieceLifetime.ticket = pieceTicket;
+    setSavedPieceInput(null);
+    const rememberSavedPieceInput = (savedInputId) => {
+      if (!pieceInputMounted.current || !ownsResponse() || isTutorialMode ||
+          pieceInputLifetime.current !== pieceLifetime || pieceLifetime.ticket !== pieceTicket ||
+          isFeatureEnabled("piece_v2_preview_enabled", false) !== true) return;
+      const savedInput = buildSavedPieceInput(savedInputId, requestOwner.id);
+      if (savedInput) setSavedPieceInput({ lifetime: pieceLifetime, savedInput });
+    };
     setSubmitting(true);
     try {
       // 1) 入力内容を MashOS Emotion Submit API 用のペイロードに変換
@@ -1078,6 +1190,7 @@ const safeInsets = useSafeAreaInsets();
         void ensureTutorialPiecesSeed();
 
         await clearPersistedInputDraft();
+        if (!ownsResponse()) return;
         setPendingInputDraft(null);
         setDraftRestoreModalVisible(false);
         Keyboard.dismiss();
@@ -1097,7 +1210,9 @@ const safeInsets = useSafeAreaInsets();
         return;
       }
 
-      const submitResult = await submitEmotionInput(payload);
+      const submitResult = await submitEmotionInput(payload, { expectedUserId: requestOwner.id });
+      if (!ownsResponse()) return;
+      const savedInputIdForPiece = submitResult?.id;
       const inputFeedback = submitResult?.input_feedback || null;
       const inputFeedbackAI = inputFeedback?.emlis_ai || null;
       const inputFeedbackText = String(
@@ -1108,6 +1223,7 @@ const safeInsets = useSafeAreaInsets();
 
 
       await clearPersistedInputDraft();
+      if (!ownsResponse()) return;
       setPendingInputDraft(null);
       setDraftRestoreModalVisible(false);
 
@@ -1123,7 +1239,16 @@ const safeInsets = useSafeAreaInsets();
       Keyboard.dismiss();
 
       await loadHomeState({ force: true, includeStartupCandidate: false });
+      if (!ownsResponse()) return;
       await markAnalysisHomeSummaryDirty();
+      if (!ownsResponse()) return;
+
+      const openedThread = await emlisThread.open(submitResult?.id);
+      if (!ownsResponse()) return;
+      // Opening a reader is not terminal eligibility. The Piece host performs
+      // the existing authoritative source-ref GET only on a separate action.
+      rememberSavedPieceInput(savedInputIdForPiece);
+      if (openedThread) return;
 
       const openedObservation = inputFeedbackText
         ? openInputFeedbackModal({
@@ -1144,9 +1269,11 @@ const safeInsets = useSafeAreaInsets();
 ${inputFeedbackEmotionMeta.emotionSummary}` : ""}`);
       }
     } catch (error) {
+      if (!ownsResponse()) return;
       if (isRequestTimeoutError(error)) {
         console.warn("InputScreen: emotion submit completion timed out", error);
         const refreshedAfterTimeout = await refreshHomeStateAfterEmotionSubmitTimeout(loadHomeState);
+        if (!ownsResponse()) return;
         Alert.alert(
           "記録の確認",
           getEmotionSubmitTimeoutRecoveryMessage(refreshedAfterTimeout)
@@ -1161,6 +1288,7 @@ ${inputFeedbackEmotionMeta.emotionSummary}` : ""}`);
 ${String(error?.message || error)}`
       );
     } finally {
+      if (!ownsResponse()) return;
       setSubmitting(false);
     }
   };
@@ -1536,6 +1664,13 @@ ${String(error?.message || error)}`
                 />
               </View>
 
+              {mountSavedPieceInput ? (
+                <View testID="piece-saved-input-entry" style={showSavedPieceInput ? styles.section : undefined}>
+                  {showSavedPieceInput ? <Text style={styles.sectionLabel}>直前に保存した入力</Text> : null}
+                  <InputPieceActionArea savedInput={savedPieceInput.savedInput} />
+                </View>
+              ) : null}
+
           </ScrollView>
         </TouchableWithoutFeedback>
       </KeyboardAvoidingView>
@@ -1566,7 +1701,8 @@ ${String(error?.message || error)}`
   discardPendingInputDraft={discardPendingInputDraft}
 />
 
-<InputFeedbackReplyModal
+      <EmlisThreadModal thread={emlisThread} colors={colors} />
+      <InputFeedbackReplyModal
   visible={inputFeedbackModalVisible}
   text={inputFeedbackModalText}
   meta={inputFeedbackModalMeta}
@@ -2662,4 +2798,3 @@ toastText: {
 },
   }, ui));
 }
-

@@ -20,10 +20,12 @@ import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { useSubscription } from "../SubscriptionContext";
 import { apiJson, apiFetch } from "../lib/apiClient";
 import { getHistoryRetentionLabel } from "../lib/historyRetentionLabel";
+import { useAuth } from "../AuthContext";
+import { useEmlisThread } from "./input/useEmlisThread";
+import EmlisThreadModal from "./input/EmlisThreadModal";
 
-const API_BASE = "https://mashos-api.onrender.com";
-const EMOTION_SECRET_URL = `${API_BASE}/emotion/secret`;
-const EMOTION_HISTORY_SEARCH_URL = `${API_BASE}/emotion/history/search`;
+const EMOTION_SECRET_URL = "/emotion/secret";
+const EMOTION_HISTORY_SEARCH_URL = "/emotion/history/search";
 
 // Phase2: no infinite scroll yet (Phase3). Keep this modest.
 const PAGE_LIMIT = 50;
@@ -196,6 +198,8 @@ function renderHighlightedText(text, rx, highlightStyle) {
 }
 
 export default function AnalysisHistoryScreen({ onBack }) {
+  const { session } = useAuth();
+  const emlisThread = useEmlisThread({ userId: session?.user?.id || "" });
   const [query, setQuery] = useState(""); // 入力中（未実行でも変わる）
   const [executedQuery, setExecutedQuery] = useState(""); // 最後に実行した検索語
   const [secretFilter, setSecretFilter] = useState("all"); // all | public | secret
@@ -592,6 +596,7 @@ export default function AnalysisHistoryScreen({ onBack }) {
         method: "DELETE",
       });
       setRows((prev) => prev.filter((r) => r.id !== row.id));
+      emlisThread.reset();
     } catch (e) {
       setErrorMsg(String(e?.message || e));
     } finally {
@@ -645,6 +650,7 @@ export default function AnalysisHistoryScreen({ onBack }) {
 
   return (
     <SafeAreaView style={[styles.container, themed.container]}>
+      <EmlisThreadModal thread={emlisThread} colors={colors} />
       {/* ヘッダー（上段：戻る＋検索、右にソート） */}
       <View style={[styles.header, themed.header]}>
         <View style={styles.headerRow}>
@@ -943,6 +949,10 @@ export default function AnalysisHistoryScreen({ onBack }) {
           }
           renderItem={({ item }) => (
             <View style={[styles.row, themed.row]}>
+              {emlisThread.enabled && <TouchableOpacity onPress={() => emlisThread.open(item.id, { showNotCreated: true })}
+                accessibilityRole="button" accessibilityLabel="この記録のEmlisの観測を開く" style={{ paddingVertical: 12 }}>
+                <Text style={{ color: colors.TITLE_GOLD }}>Emlisの観測を開く</Text>
+              </TouchableOpacity>}
               <View style={styles.rowTop}>
                 <Text style={[styles.date, themed.date]}>{item.date}</Text>
                 <View style={styles.rowActions}>

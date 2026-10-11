@@ -36,6 +36,12 @@ export function canViewWatashiMapHistory(rawTier) {
   return tier === WATASHI_MAP_TIERS.PLUS || tier === WATASHI_MAP_TIERS.PREMIUM;
 }
 
+export function canViewWatashiMapMode(rawTier, rawMode) {
+  if (!['light', 'standard', 'deep', 'structural'].includes(String(rawMode || '').trim().toLowerCase())) return false;
+  return normalizeWatashiMapReportMode(rawMode) === 'light'
+    || canViewWatashiMapDetailReport(rawTier, rawMode);
+}
+
 export function canViewWatashiMapDetailReport(rawTier, rawMode = "standard") {
   const tier = normalizeWatashiMapTier(rawTier);
   const mode = normalizeWatashiMapReportMode(rawMode);

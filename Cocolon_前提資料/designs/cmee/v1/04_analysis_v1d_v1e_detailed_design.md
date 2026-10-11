@@ -1,0 +1,974 @@
+# CMEE V1-D / V1-E — Analysis Observed / IF Route 詳細設計
+
+- document id: `cocolon.cmee.v1d_v1e.analysis_route.detailed_design`
+- lifecycle: `DETAILED_IMPLEMENTATION_DESIGN_CANDIDATE`
+- observed-route runtime state: `SPECIFIC_DEVELOPMENT_API_DEPLOYED`; u102〜u118 content correctionは未配置
+- IF-route runtime state: `NOT_IMPLEMENTED`
+- Analysis activation: `STORAGE_APPROVED_AND_APPLIED_2026_10_04_JST`; API315f5b5…配置済み、Mashが6201実機確認OKを報告
+- API source effect: V2保存・read分岐実装、default off
+- DB effect: dedicated table 1 / migration 20261003204421 applied
+- production runtime activation effect: 指定開発配置のみ。global cutover/正式公開は未完了
+- RN source effect: versioned safe DTO receiver / renderer implemented; 6201送信済み、実機OKはMash報告
+
+---
+
+## 0. Product result
+
+**u168 内容修正（2026-10-08 JST・未配置）**：「まだ昨日の方針が決まっていない」等の昨日を名詞区間に保ち、現在の未完了状態が分析から抜ける問題を補正。共有の既存未完了判定内で完全名詞/現在否定hostと帰属境界を証明し、時制と属性を同期。Analysisのmarker必須・原文・否定・主体非推定・更新/比較/保存は維持。分析324＋identity1 PASS、共有限定35 PASS/開始版でも同じ既存6 FAIL。合成8全文と実RN表示model一致。STRUCTURE_MAP_DELTA_NONE、API/DB/DTO/RN製品変更0。未配置・実DB/実機/商品受入れ未確認。詳細は06／API handoff末尾u168。u167の昨日名詞付き未完了4例の保留は当時の状態であり、今回この限定範囲を回復。
+
+**u167 内容修正（2026-10-08 JST・未配置）**：変化／未完了の「今日疑問」「今日方針」等を名詞へ吸収して確定する誤解析を補正。結果にまだ時点parserがないため未解析部分を保留し、別の完全な場面・行動・原文証拠を保持する。「今日の疑問」「昨日分の疑問」等の完全な名詞境界と既存の行動／場面の日語解析は維持。共有witnessで元から保留される昨日付き未完了は未対応のまま。Analysis3suite 323 tests／2087 subtests PASS、合成8全文と実RN表示model一致、保存再表示を確認。STRUCTURE_MAP_DELTA_NONE、共有owner・API/DB/DTO/RN製品変更0。実DB・実機・商品受入れ未確認。詳細は06／API handoff末尾u167。
+
+**u166 内容修正（2026-10-08 JST・未配置）**：4文目以降の完全な本人過去所在が表示優先度だけで分析から抜け、「場面は未確定」となる不一致を補正。既存Analysisの場面証拠判定でrequired/shouldを同等に扱い、optional・不確実な帰属・不完全節は従来どおり保留する。肯否定・今日/昨日・明示順序・原文証拠・補足/訂正/撤回を保持。分析3suite計320 tests／2050 subtests PASS、合成7全文と実RN表示model一致、再生成を禁止した保存再表示を確認。STRUCTURE_MAP_DELTA_NONE。共有owner・API/DB/DTO/RN製品変更0。実DB・実機・商品受入れ未確認。詳細は06／API handoff末尾u166。過去u110/u111/u118のSCENE required限定は当時の実装記録であり、この限定修正後の条件ではない。
+
+**u165 内容修正（2026-10-08 JST・未配置）**：「俺は／おれは」の明示本人記述が分析に出ない表記漏れを修正。既存Analysisの8箇所と共有Planの属格希望・読点付き現在負荷の2箇所へ本人表記だけを追加し、有限節・原文出典・主体・肯否定・順序を保持する。最終対象548 tests PASS（Analysis316・共有231・identity1）、2027 subtests PASS。合成10全文と実RN表示model一致、保存後の再生成禁止readを確認。STRUCTURE_MAP_DELTA_NONE。全日本語表現対応・実DB・実機・商品受入れ未確認。詳細は06／API handoff末尾u165。
+
+**u164 内容修正（2026-10-08 JST・未配置）**：「良い職場にいた／いなかった」の「良い」を独立valueと誤認し、所在と後続行動の順序を失う問題を修正。既存共有Planの分類とoperator判定で、完全名詞句＋過去所在5形に属する修飾だけを区別する。独立評価・未閉包host・原文出典・Safety／Analysis witnessは維持。最終472 tests PASS（分析316・共有155・identity1）、合成10全文と実RN表示model一致、再生成禁止の保存再表示を確認。STRUCTURE_MAP_DELTA_NONE。実DB・実機・商品受入れ未確認。旧0066等の失敗は今回未再検証。詳細は06／API handoff末尾u164。
+
+**u163 内容修正（2026-10-08 JST・未配置）**：「私は悪い職場にいた／いなかった」を自己評価と誤認する停止を修正。既存共有Safetyの名詞修飾判定を、完全な過去所在5形と文末に限定して補正し、所在・否定・昨日・後続行動の順序を文章と図へ保持する。SELF／人prefix・独立自己否定・緊急/支援・未閉包hostは従来判定を維持。最終465 tests PASS／既存Emlis1 FAIL（開始版と同一診断）、分析315件・合成9全文のRN表示model一致・再生成禁止の保存再表示を確認。STRUCTURE_MAP_DELTA_NONE。実DB・実機・商品受入れ未確認。「良い職場」の別value誤分類は残件。詳細は06／API handoff末尾u163。
+
+分析構造のCMEE connectionは、期間sourceから現在よく通る自己構造routeを根拠付きで形にし、希望時だけ観測routeとは別identityのIF routeを作る。
+
+```text
+period source set
+-> event frames and evidence graph
+-> evidence-bound observed route
+-> protective / burden annotations and unknown gaps
+-> text + visual projection
+-> ObservedSelfStructureMap
+
+ObservedSelfStructureMap + user-owned branch intent
+-> separate HypotheticalScenarioGraph candidate set
+-> parallel IF route artifacts
+-> optional SavedRouteIntent
+```
+
+current Watashi Mapのfixed presentation routeをtruth graphへ昇格しない。IFは未来予測、正解、命令、最適化ではない。
+
+## 1. Activation boundary
+
+**u162 内容修正（2026-10-08 JST・未配置）**：「家族の悪い取り組みを守りたい＋つらい」を本人の自己否定と誤認して分析が止まる問題を補正。共有SafetyとPlanの自己評価検出で、完全な名詞句＋属格連鎖＋「を」に属する「悪い」だけを名詞修飾として区別する。SELF／人を表す語で始まる名詞、独立自己評価、他の自己否定、緊急・支援は従来判定を保持。最終対象460 tests PASS、既存Emlis検査1 FAILは開始版でも同一診断。分析314件を含み、合成9全文と実RN表示model一致、再生成禁止の保存再表示を確認。STRUCTURE_MAP_DELTA_NONE、実DB・本人実機・商品受入れ未確認。詳細は06／API handoff末尾u162。
+
+**u161 内容修正（2026-10-07 JST・未配置）**：「家族の新しい生活を守りたい＋つらい」等の生成停止と「資料の詳しい振り返りを調べたい＋つらい」の負荷欠落を補正。共有Planの目的語各名詞区間に、既存Analysisと同じ任意1個の連体修飾を許可し、修飾位置を含む対象全体を保持する。実出力は10語、11語の構文判定を確認。「悪い」は別の既存Safety／自己評価判定で保留し、今回の対応完了には含めない。Analysis313 tests／1853 subtests、共有129 tests、identity1件PASS。合成10全文と実RN表示model一致、再生成を禁止した保存再読を確認。STRUCTURE_MAP_DELTA_NONE、実DB・本人実機・商品受入れ未確認。詳細は06／API handoff末尾u161。
+
+**u160 内容修正（2026-10-07 JST・未配置）**：「家族の気持ちを守りたい＋つらい」の生成停止と「資料の振り返りを調べたい＋つらい」の負荷欠落を補正。共有Planの希望目的語に既存の仮名入り名詞と属格連鎖の完全一致を適用し、名詞内の感情語を別の述語と誤認しない。Analysis311 tests／1810 subtests、共有98 tests、identity1件PASS。合成10本文を全読し実RN表示modelの全文・図用データと一致、保存後の再生成なし再表示を確認。一般の仮名・別主体・伝聞等の保留は維持。旧contracts残差は今回未再検証。STRUCTURE_MAP_DELTA_NONE、実DB・本人実機・商品受入れ未確認。詳細は06／API handoff末尾u160。
+
+**u159 内容修正（2026-10-07 JST・未配置）**：「家族の時間を守りたい＋つらい」の生成停止を補正。共有Planが目的語内の「の」を別の話し手と誤認する箇所を、明示SELF・限定属格目的語・完全な現在希望へ限定して修正。Analysisの根拠条件を維持し、意向と負荷を同じ文章・図へ保持する。Analysis310 tests／1787 subtests、対象共有86 testsとidentity確認PASS、合成8全文と実RN表示model一致、合成保存再表示を確認。旧契約の86 subfail／1 setup errorは開始版と全診断一致。STRUCTURE_MAP_DELTA_NONE、API／DB／RN変更0、実DB・本人実機・商品受入れ未確認。ひらがなを含む「家族の気持ち」等は残件。詳細は06／API handoff末尾u159。
+
+**u158 内容修正（2026-10-07 JST・未配置）**：「私は家族を守りたいけれど、私はつらい」が分析不能になる問題を補正。既存Analysis内で共有根拠のある完全な希望・負荷の対比に限り保護意向の節を受理し、同じ希望へPROTECTIVEとBURDENを保持する。原文・全文訂正／撤回・集約・期間比較を維持。関連308 tests／1759 subtests PASS、合成7全文と実RN表示model一致、実service＋合成RPCで保存後再生成なし再表示を確認。STRUCTURE_MAP_DELTA_NONE、共有owner／API／DB／RN変更0。実DB・本人実機・商品受入れ未確認。「家族の時間」の共有別分岐は保留。詳細は06／API handoff末尾u158。
+
+**u157 内容修正（2026-10-06 JST・未配置）**：「私は仕事を続けたいけれど、私は、つらい。」で主語読点だけにより負荷注記が落ちる問題を補正。既存共有planとAnalysis内の完全一致を、明示本人5表記＋和文読点＋半角／全角空白＋現在肯定のつらい／辛い／苦しい（任意のです）に限定して追加し、共有witnessの要求を維持。原文出典・正確な訂正対象を保ち、読点差の期間比較は差分なし。Analysis元fieldのタブは保留し、Emlisの既存ledger空白正規化は維持する。Analysis303 tests／1707 subtestsと共有contrast選択74 tests PASS、合計377 tests。合成7全文と実RN表示model一致、実service＋合成RPCで保存後再生成なし再表示を確認。STRUCTURE_MAP_DELTA_NONE、共有既存parserの変更あり・owner変更なし。実DB・本人実機・商品受入れ未確認。詳細は06／API handoff末尾u157。
+
+**u156 内容修正（2026-10-06 JST・未配置）**：「私は仕事を続けたいけれど、私は辛い／辛いです」の負荷注記の読み落としを補正。共有根拠のある本人希望と本人現在感情の明示対比だけを対象に、完全一致した辛いの意味lemmaをつらいへ揃える。原文表記・出典・訂正対象は保持し、味覚や一般感情へ拡張しない。表記だけの期間差は0、苦しい・別希望は区別。vertical227／storage56／saved-period16＝299検査PASS、1637 subtests PASS。合成7全文と実RN表示model一致、実service＋合成RPCで保存後再生成なし再表示を確認。STRUCTURE_MAP_DELTA_NONE、実DB・本人実機・商品受入れ未確認。詳細は06／API handoff末尾u156。
+
+**u155 内容修正（2026-10-06 JST・未配置）**：今朝／今週／今月／今年を含む未対応認知により同fieldの独立した正常節まで失う不一致を補正。共有側が消費した「今」1字を、既存時点prefix一致と完全有限節・未解析scope確認の下で元本文境界へ戻す。認知自身は保留し、証明済みの別記述と原文出典だけを保持する。認知名詞の受理・時点解釈・順序推測は拡張しない。vertical225／storage55／saved-period16＝296検査PASS、1594 subtests PASS。合成7全文と実RN表示model一致、実service＋合成RPCで保存後再生成なし再表示を確認。STRUCTURE_MAP_DELTA_NONE、実DB・本人実機・商品受入れ未確認。独立reviewの条件限定指摘を修正済み。詳細は06／API handoff末尾u155。
+
+**u154 内容修正（2026-10-06 JST・未配置）**：「今週資料／今年仕事」などの未対応時点を対象名詞に取り込む誤読を補正。既存Analysisの名詞保留判定に今週／今月／今年／先月／来月／昨年／来年を追加し、読める独立節と未確定表示を保持する。「今週の資料／今年を記録」と、完全な年度・月号名詞は従来どおり保持し、行動の日付へ転換しない。vertical222／storage55／saved-period16＝293検査PASS、1568 subtests PASS。合成7本文を全文確認し実RN表示modelと一致、実service＋合成RPCで保存後の再生成なし再表示を確認。独立read-only reviewに具体的blockerなし。STRUCTURE_MAP_DELTA_NONE、実DB・本人実機・商品受入れは未確認。詳細と既存の認知保留境界は06／API handoff末尾u154。
+
+**u153 内容修正（2026-10-06 JST・未配置）**：共有根拠が成立している「ぼくは」の記述をAnalysisが読み落とす不一致を修正。既存7主語regexと読取入口1箇所へ「ぼく」を追加し、「僕は」と同じ明示本人節として原文・否定・希望・場面・担当・認知・順序・注記を保持する。複数主体や省略を補完せず、共有未成立の敬体名詞変化は保留。vertical220／storage55／saved-period16＝291検査PASS、1492 subtests PASS。合成7全文と実RN表示model一致、実service＋合成RPCで保存後の再生成なし再表示を確認。独立read-only reviewに具体的blockerなし。STRUCTURE_MAP_DELTA_NONE、実DB・本人実機・商品受入れは未確認。詳細は06／API handoff末尾u153。
+
+**u152 内容修正（2026-10-06 JST・未配置）**：行動後の「嬉しかった／うれしかった」の表記差だけで期間比較が内容差になる欠陥を修正。既存PAST_FEELINGの2表記だけを同じ意味keyで扱い、原命題・原文出典・表示表記は維持する。別感情・主体の明示／未確定・行動対象・順序は区別し、別episodeを統合しない。vertical217／storage54／saved-period16＝287検査PASS、1451 subtests PASS。合成6全文と実RN表示model一致、実service＋合成RPCで保存後の再生成なし再表示を確認。既存期待緩和0、STRUCTURE_MAP_DELTA_NONE。実DB・本人実機・商品受入れは未確認。詳細は06／API handoff末尾u152。
+
+**u151 内容修正（2026-10-06 JST・未配置）**：「私は職場にいなかったです／私は会議を担当しなかったです」を、既存の所在・担当の否定過去として文章と図へ保持する。Analysisの2正規表現と2否定判定だけを補正し、通常行動・埋込認知・共有ownerは不変。memoのみの既存根拠境界、原文出典・時点・補足／訂正／撤回・明示順序・競合・期間比較を保持。vertical215／storage53／saved-period16＝284検査PASS、1441 subtests PASS。合成8全文と実RN表示model一致、実service＋合成RPCで保存後の再生成なし再表示を確認。既存期待緩和0、STRUCTURE_MAP_DELTA_NONE。実DB・本人実機・商品受入れは未確認。詳細は06／API handoff末尾u151。
+
+**u150 内容修正（2026-10-06 JST・未配置）**：「資料を調べなかったです」等の過去非行動が読み落とされる不一致を、既存Analysisの独立文有限形へ限定して補正。既存9動詞の否定・過去・対象・原文証拠を文章と図へ保持し、希望や実行済みと区別する。埋込認知の有限形表はu149と同一。対象280methodは279PASS＋新storage期待1件訂正後の当該1PASS、1403 subtests PASS。合成8全文と実RN表示model一致、合成RPCで保存後再生成なし再表示を確認。既存期待緩和0、STRUCTURE_MAP_DELTA_NONE、共有owner／API／DB／RN変更0、実DB・実機・商品受入れ未確認。詳細は06／API handoff末尾u150。
+
+**u149 内容修正（2026-10-05 JST・未配置）**：長文の読点／固定長分割で後半の否定・不確実性を落とし、通常行動・希望を確定表示する適用漏れを補正。既存Analysisの元field上の完全文確認を全claimへ適用する。独立した別文、通常節のセミコロン、原文出典と未確定表示、証明済みcompoundを維持。vertical209／storage51／saved-period16＝276検査PASS、1367 subtests PASS。合成6全文と実RN表示model一致、合成RPCで保存後再生成なし再表示を確認。STRUCTURE_MAP_DELTA_NONE、共有owner／API／DB／RN変更0、実DB・実機・商品受入れ未確認。任意の長文理解は未完了。詳細は06／API handoff末尾u149。
+
+**u148 内容修正（2026-10-05 JST・未配置）**：夢・聞いた話・読んだ内容の中の行動や希望を、本人の現実の事実として表示する適用漏れを補正。既存Analysisのrecord単位の帰属判定を通常行動・希望・認知等にも適用し、独立した別recordの明示行動と未確定表示を保持する。vertical206／storage50／saved-period16＝272検査PASS、1344 subtests PASS。合成6全文と実RN表示model一致、実service＋合成RPCで保存後再生成なし再表示、夢／伝聞だけの生成失敗時commitなしを確認。STRUCTURE_MAP_DELTA_NONE、共有owner／API／DB／RN変更0。実DB・実機・商品受入れ未確認。同一record内で現実へ戻る境界は引き続き判別せず保留。詳細は06／API handoff末尾u148。
+
+**u147 内容修正（2026-10-05 JST・未配置）**：「たくありません／たくありませんでした」の否定希望が読み落とされる不一致を、既存Analysisの有限形2行で補正。既存9動詞の対象・格・否定・現在／過去・原文証拠を文章と図へ保持し、非行動や行動順序へ変換しない。vertical203／storage49／saved-period16、計268検査PASS・1306 subtests PASS。合成8全文と実RN表示model一致、実service＋合成RPCで保存後の再生成なし再表示を確認。既存期待／共有owner／API契約／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE。plain幾は疑問と不定数量を今回判別できず一律拒否しない。実DB・実機・商品受入れ未確認。詳細は06／API handoff末尾u147。
+
+**u146 内容修正（2026-10-05 JST・未配置）**：既存9動詞の「たかったです／たくなかったです」を過去の希望として文章・図へ保持する。Analysisの有限形一覧2行だけを補い、肯否定・過去・格付き対象・原文出典を維持。常体との差を期間差にせず、希望を実行済みや行動順序へ昇格しない。vertical201／storage48／saved-period16、計265検査PASS・1273 subtests PASS。合成8本文を全文確認し実RN表示model一致、実service＋合成RPCで保存後の再生成なし再表示を確認。既存期待の変更0、独立read-only最終reviewに具体的blockerなし。共有owner／API契約／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE。実DB・本人実機・商品受入れ未確認。詳細は06／API handoff末尾u146。
+
+**u145 内容修正（2026-10-05 JST・未配置）**：「私は何を調べた」「私は誰の資料を見た」を確定した行動へ変換していた問題を、既存Analysisの未解析名詞判定で補正。何／誰で始まる名詞部分は認知内側も保留し、併存する読める節と未確定表示を残す。未知節を越す順序や訂正対象を作らない。通常の幾何学／幾何は維持し、plain幾の判別は別残件。vertical198／storage47／saved-period16の261検査PASS後、保存失敗2例を当該methodで追加確認。合成7本文を全文読取し実RN表示model一致、保存後の再生成なし再表示を確認。共有owner／API契約／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE。実DB・本人実機・商品受入れ未確認。詳細は06／API handoff末尾u145。
+
+**u144 内容修正（2026-10-05 JST・未配置）**：本人主語の読点で「私は、資料を調べるかもしれないと思う」が分析不能になる不一致を既存Analysis parser内で補正。共有根拠が認める読点（、／ASCII ,）だけを原文出典へ含め、内側の可能性・主体未確定・否定・時制を文章と図へ保持する。行動の事実や因果へ昇格しない。vertical195／storage47／saved-period16、計258検査PASS。合成8本文を全文確認し実RN表示modelと一致、保存後の再生成なし再表示を確認。共有owner／Emlis／Piece／API／DTO／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE。本人実機・実DB・商品受入れは未確認。詳細は06／API handoff末尾u144。
+
+**u143 内容修正（2026-10-05 JST・未配置）**：行動後の「私は、安心しました」等が本人主語の読点だけで分析不能になる問題を既存Analysis parser内で補正。明示主語・既存感情形・原文出典・順序を文章と図へ保持し、原因や改善を推測しない。単独感情、別主体、否定、伝聞等の保留は維持。vertical192／storage47／saved-period16、計255検査PASS。合成8本文を全文確認し実RN表示modelと一致、保存後の再生成なし再表示を確認。共有owner／Emlis／Piece／API／DTO／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE。本人実機・実DB・商品受入れは未確認。詳細は06／API handoff末尾u143。
+
+**u142 内容修正（2026-10-05 JST・未配置）**：本人主語の読点で「私は、資料を調べてから、不安が減りました」の行動・変化が読み落とされる問題を修正。Analysisの従属te節と既存共有の敬体増減・復帰witnessで、読点1個＋半角／全角空白を受理する。原文全節・出典・明示順序を保持し、敬体増減・復帰の共有witnessはneutralのまま。因果や感情所有者を補わない。共有変更が影響するEmlisの既存作者／独立readerもtopic省略時の読点を処理し、具体的なepisodeを本文へ保持する。対象417検査を確認（初回416PASS＋新検査の表示空白期待1件補正後1PASS）、Analysis189／storage47／saved-period16を含む。合成Analysis8本文と実RN表示model一致、Emlis3全文確認、保存後の再生成なし再表示を確認。API／DTO／DB／RN／Piece source不変、STRUCTURE_MAP_DELTA_NONE。実DB・実機・商品受入れは未確認。詳細は06／API handoff末尾u142。
+
+**u141 内容修正（2026-10-05 JST・未配置）**：本人主語直後の読点だけで「私は、家族を守りたい」が分析不能になる問題を既存Analysis compilerで補正。読点1個と半角／全角空白を原文座標へ保持し、対象・現在の希望を文章と図へ反映する。実際に守れているという結果へ転換しない。共有wish根拠・全文照合・safe再解析と保留条件は不変。vertical185／storage47／saved-period16、計248検査PASS。合成7本文を全文確認し実RN表示modelと一致、保存後再生成なし再表示を確認。共有owner／Emlis／Piece／API／DTO／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE。実DB・実機・商品受入れは未確認。詳細は06／API handoff末尾u141。
+
+**u140 内容修正（2026-10-05 JST・未配置）**：明示された本人行動の後の「減りました／増えました／戻りました」を、共有ownerの完全節・原文境界の証拠とAnalysisの命題解析で保持する。疑問・引用・伝聞・仮定・否定・別主体・属格・未対応時点は新共有証拠へ昇格しない。変化はneutral、Analysisでは対象・肯定過去・明示順序を保持し、所有者／原因／改善を推測しない。共有変更でEmlisへ生じた「行動が支えている」という評価は、既存source-owned受取と独立inverseの限定補正で元の順序を保つ文章へ修正。品質閾値は不変。対象381検査PASS（Analysis245を含む）、合成Analysis8本文＋実RN model一致、Emlis6本文確認。別途旧generic0058の期待1件は修正前でも同一失敗、期待は変更しない。既存owner内の補正でAPI／DTO／DB／RN／Piece source不変、STRUCTURE_MAP_DELTA_NONE。本人実機・実DB・商品受入れは未確認。詳細は06／API handoff末尾u140。
+
+**u139 内容修正（2026-10-05 JST・未配置）**：共有根拠が成立している行動後の「変わりました」を既存Analysis compilerで受理し、対象・明示順序・原文出典を文章と図へ保持する。常体との期間差0、補足・訂正／撤回、保存後の再生成なし再表示を確認。vertical179／storage46／saved-period16、計241検査PASS、合成7本文と実RN表示model一致。共有根拠が未成立の「減りました／増えました／戻りました」は未対応。感情所有者・原因・改善を推測せず、属格feeling等の保留を維持。共有owner／realizer／API／DTO／DB／RN変更0、STRUCTURE_MAP_DELTA_NONE。本人実機・実DB・商品受入れは未確認。詳細は06／API handoff末尾u139。
+
+**u138 内容修正（2026-10-05 JST・未配置）**：行動の後の「不安が減った／気持ちが変わった／気持ちメモが増えた」が共有分類のfeelingだけで分析不能になる不一致を補正。完全解析済みの名詞の過去変化と既存bounded-change証拠に限り受け取り、対象・出典・明示順序を文章と図へ保持する。本人の感情所有者・因果・改善を推測しない。新分岐の属格（友人の不安／私の不安等）は保留し、既存fact属格・有限感情述語の照合は維持。vertical176／storage46／saved-period16、計238検査PASS。合成7本文と実RN表示model全文一致、実service＋合成RPC保存後再表示を確認。独立静的reviewにblockerなし。STRUCTURE_MAP_DELTA_NONE。実DB・実機・商品受入れの確認なし。u137の共有witness未成立という説明は、witness自体は存在し分析側のmodality照合で拒否していた、と訂正する。詳細は06／API handoff末尾u138。
+
+**u137 内容修正（2026-10-05 JST・未配置）**：既存の仮名入り名詞一語に漢字・カタカナの接尾部分が続く「振り返りメモ／気持ちメモ／学びノート／取り組み方」等を一つの対象として文章・図へ保持する。名詞全体・連体修飾・格・否定・希望・時点・訂正／撤回・期間差を維持。新しい接尾境界でも未対応時点・疑問語を確定名詞へ吸収しない。vertical172／storage45／saved-period16、計233検査PASS。合成8本文の全文確認と実RN表示model一致、実service＋合成RPCで保存後の再生成なし再表示を確認。独立静的reviewにblockerなし。共有witnessの未対応、任意かな・主語省略は保留。STRUCTURE_MAP_DELTA_NONE。実DB・実機・商品受入れの今回確認なし。前回u136の大文書2本の転送省略は復元し、実git取得と一致を確認した。詳細は06／API handoff末尾u137。
+
+**u136 内容修正（2026-10-05 JST・未配置）**：既存の完全な名詞句で「新しい／古い／大きい／小さい／長い／短い／詳しい／難しい／易しい／良い／悪い」の連体形を一区間一つだけ保持する。「新しいメモ帳」等を落とさず、否定・希望・時点・訂正／撤回・比較の差へ反映。修飾の背後にある未対応時点・疑問語を確定名詞にしない。vertical167／storage44／saved-period16、計227検査PASS。合成8本文の全文確認と実RN表示model一致、実service＋合成RPCの保存後再表示を確認。独立静的reviewにblockerなし。共有witnessの未対応、副詞・形容詞の否定／過去形・主語省略は保留。STRUCTURE_MAP_DELTA_NONE。実DB・実機・商品受入れの今回確認なし。詳細は06／API handoff末尾u136。
+
+**u135 内容修正（2026-10-05 JST・未配置）**：漢字とカタカナが連続する名詞（仕事メモ／メモ帳等）を未解析にしていた既存名詞文法を補正。明示された行動・場面・担当・結果・希望・認識の名詞全体を原文の出典とともに文章・図へ保持する。任意のひらがな修飾、主語省略の本人補完、未対応時点の推定は追加しない。vertical161／storage43／saved-period16、計220検査PASS、既存214の期待変更0。合成8本文と実RN表示modelの文章・identity・node／edge／unknown／注記一致、実service＋合成RPCの保存→再生成なし再表示を確認。独立静的reviewにblockerなし。STRUCTURE_MAP_DELTA_NONE。実DB・実機・商品受入れは未確認。詳細は06／API handoff末尾u135。
+
+**u134 内容修正（2026-10-05 JST・未配置）**：本人の過去の場面／担当でも、主語直後の読点を原文座標のまま保持する。「私は、職場にいた」「私は、会議を担当した」が文章・図へ出るようになり、否定、今日／昨日、明示順序、補足／訂正／撤回を維持した。読点差だけの比較差0。vertical156／storage42／saved-period16、計214検査PASS。合成6本文を読み、実RN表示modelの全文・identity・node／edge／unknown対象一致を確認。STRUCTURE_MAP_DELTA_NONE。実DB／実機／商品受入れは未確認。詳細は06／API handoff末尾u134。
+
+**u133 内容修正（2026-10-05 JST・未配置）**：明示本人主語の直後の読点「私は、資料を調べた」等を未解析にしていた箇所を補正。既存9動詞の行動・否定・希望に、読点1個と直後の半角／全角spaceを原文座標のまま保持する。明示順序、既存行動→変化・希望＋負荷、補足／訂正／撤回も確認。読点差だけで期間差を作らない。vertical152／storage41／saved-period16、計209検査PASS、合成8本文の実RN表示model一致。場面／担当等の別parser、主語省略、tab・改行跨ぎへは拡張しない。STRUCTURE_MAP_DELTA_NONE。詳細は06／API handoff末尾u133。
+
+**u132 内容修正（2026-10-05 JST・未配置）**：未解析の原入力をraw nodeへ採用し、読めた別の記述までsafe表示不能にする問題を補正。完全に解釈できたnodeと既存の未確定表示を文章・図へ残す。未解析originalの訂正／撤回対象への昇格を止め、補足・置換全文の保留、負荷注記、改竄拒否を保持。vertical146／storage41／saved-period16、計203検査PASS。合成6本文と実RN表示modelの全文・identity・node／edge・unknown対象一致。未解析内容の意味理解、実DB／実機／商品受入れは未成立。STRUCTURE_MAP_DELTA_NONE。詳細は06／API handoff末尾u132。
+
+**u131 内容修正（2026-10-05 JST・未配置）**：「明日職場」「来週会議」「今朝資料」等の時点語を名詞へ吸収して確定表示する欠陥を補正。実測した明日／明後日／一昨日／今朝／昨夜／先週／来週の7語を対象に、完全解析候補の名詞連結を保留し、同じ原入力の読める別節と未確定表示を残す。「明日の会議／明日の資料／明日を記録した」は名詞の意味を保持。時点を新しく推定しない。141検査PASS、合成6本文のbackend／RN表示model一致。固有名詞「明日香」等も保留する制約、元々解析不能な「明日ノート」の表示拒否は残る。STRUCTURE_MAP_DELTA_NONE。詳細は06／API handoff末尾u131。
+
+**u130 内容修正（未配置）**：本人の過去の場面・担当でも、主語直後の「今日／昨日」を独立した時点として保持する。「私は昨日職場にいた」「私は今日、会議の司会を担当した」が文章と図へ出るようになり、否定・原文出典・補足の訂正／撤回を保持した。時間接尾・日語の重複・接続語との併用・無区切りの「…の…」は保留し、場面／担当の「今日の…」も日付へ変換しない。vertical136検査PASS、合成6本文のbackend／RN表示modelで全文・identity・node順・edge一致。実機未検証。STRUCTURE_MAP_DELTA_NONE、既存compiler以外の意味owner・API／DB／RN経路は不変。隣接する既存欠陥「明日職場」の誤名詞化は未修正で次対象。詳細は06／API handoff末尾u130。
+
+**u129 内容修正（未配置）**：既存9動詞の本人有限節で、主語直後の「今日／昨日」を対象名詞へ混入させず、原文の時点・否定・希望を文章と図へ保持する。前置型との語順差だけで期間差を出さない。「今日の資料」は名詞修飾のまま。時間接尾／範囲／日の細分と、日語後に区切りなしで続く「…の…」は保留（「昨日仕事の資料」も現段階は保留。「昨日、仕事の資料」は保持）。補足・訂正・撤回の出典も確認。vertical131検査PASS、合成6本文のbackend／RN表示modelの全文・identity・node順・edge一致。実機／React suiteの今回再検証ではない。変更は既存Analysis compiler内、共有owner／DTO／DB／RN経路は不変。詳細は06／API handoff末尾u129。
+
+稼働状態はcurrent03のu128配置記録を参照。以下のu118未配置等は当時の履歴で、今回のu129〜u134コードは未配置。
+
+**2026-10-04 u118 candidate**（§3.19）：場面・担当の完全な本人過去節に付く「今日/昨日/その後/それから」を文章・図へ接続し、場面→担当→行動の明示順序を保持。関連181検査・606 subtests、RN13検査、合成6本文の一致を確認。u102〜u118未配置。u117の比較SQLは未適用・既定OFF、指定版の実機OKはMashの既報。
+
+2026-10-03 u94更新：latest weekly §6.6〜6.10に沿い、offline source→部分graphに補足の明示引用訂正・撤回と本人向けsafe text／visual projectionを追加した。RNに閉じたDTOのvalidatorと専用renderer、latest／viewerのversion dispatchを実装。合成入力のbackend26検査、実RN componentを使う11検査、旧表示互換2検査PASS。全追加・変更fileの正本は`current_structure/03_analysis_current_structure.md` §4.5。u95で認証済みsaved period loader→ASTOR明示V2生成entryを追加し、13検査＋既存26検査PASS。u96/u97で専用保存と既存API接続を実装し、承認済みtableを実DBへ適用・照合した。稼働API配信・実ユーザー入力での実行・実機は未実施。
+
+専用保存先のMash判断はu96で承認され、§15.1.2の実装・DB適用まで完了した。次は指定API版の開発配置と本人入力から開発画面で読む一往復を進める。原文節を含むprivate previewを公開DTOへ昇格しない。IF／SavedRouteIntent／外部exportはHOLD。以下の旧順序は設計時の履歴であり、Emlis/Pieceの文章品質全体完了をV1-D開始の待機条件に戻さない。
+
+設計時の順序：
+
+1. Emlis V1-A actual proof
+2. V1-B Emlis Question operational proof
+3. V1-C Piece visual operational proof
+4. V1-D observed routeのimplementation / migration approval
+5. observed mapのProduct Read / lifecycle proof
+6. V1-E IF routeの別implementation / safety approval
+
+設計のみの旧段階を越えてRN/API sourceを変更し、専用DB schemaを適用した。稼働API配置・global cutoverは未実施。
+
+## 2. Source model
+
+`SourceEnvelope`へ入れてよいのはauthentic input materialだけである。
+
+```text
+ORIGINAL_INPUT
+SUPPLEMENTAL_ANSWER
+PERIOD_METADATA
+USER_CORRECTION
+SIMULATION_SESSION_MATERIAL
+```
+
+`PERIOD_RECORD_IDENTITY`は本文を持つ`SourceEnvelope` roleではなく、`AnalysisSourceSet.members[].member_role`のmembership metadataである。record childの`ORIGINAL_INPUT`とoptional `SUPPLEMENTAL_ANSWER`だけをmeaning-bearing SourceEnvelopeにする。
+
+period source-set memberはsaved record identityを持ち、そのchild commitmentとして`ORIGINAL_INPUT`とoptional `SUPPLEMENTAL_ANSWER`を別`SourceEnvelope`でfreezeする。question decision / option / skip等のcontrol lineageとEmlis visible bodyはmeaning source 0である。
+
+次はsource roleではなくderived artifact / lineage refである。
+
+```text
+AnalysisClaimRef
+ObservedSelfStructureMapRef
+IfScenarioArtifactRef
+SavedRouteIntentRef
+```
+
+`observed_analysis_claim`、`simulated_route_material`、`saved_route_intent`をsource namespaceへ戻さない。simulation-session materialはobserved period sourceへ混ぜない。
+
+Analysis lifecycle ownerがDBからowner-authenticated saved recordを取得してrequest-local private materialを渡す。CMEEはsourceをadmitするだけで、DB read policy、DB owner、storage writeを持たない。
+
+## 3. Proposed future module topology
+
+```text
+ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/__init__.py
+ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/source_adapter.py
+ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py
+ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py
+```
+
+V1-Eで初めてmaterializeする候補:
+
+```text
+ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/if_route_realizer.py
+```
+
+event framing、route induction、annotation、period comparisonは`intent_compiler.py`のAnalysis-owned責任として最初のverticalで閉じ、必要性をactual codeで示した場合だけ分割する。第1phaseでIF empty stubを置かない。exact pathはV1-D / V1-EそれぞれのPhase fit-gapで再固定する。
+
+### 3.1 Current owner integration disposition
+
+| Repository | Current / proposed path | V1-D disposition |
+|---|---|---|
+| mashos-api | `ai/services/ai_inference/astor_material_snapshots.py` | `SAVED_PERIOD_LOADER_IMPLEMENTED_READ_ONLY`: 認証・tier・元入力／補足・生成後再確認 |
+| mashos-api | `ai/services/ai_inference/analysis_engine_adapter.py` | `KEEP_MATERIAL_NORMALIZATION_PREIMAGE_ONLY / NOT_GRAPH_ORCHESTRATION_OWNER` |
+| mashos-api | `ai/services/ai_inference/astor_self_structure_report.py` | `EXPLICIT_READ_ONLY_V2_ENTRY_IMPLEMENTED`: u95内部preview。保存lifecycleはanalysis_observed_serviceへ分離、cutover未実施 |
+| mashos-api | `ai/services/ai_inference/watashi_map_service.py` | `HISTORICAL_V1_GENERATOR / RETIRE_ACTIVE_AT_V1D_CUTOVER` |
+| mashos-api | `ai/services/ai_inference/analysis_report_validity_gate.py` | `KEEP_PUBLISH_VALIDITY_GUARD / NOT_MEANING_OR_ROUTE_AUTHORITY / EXTEND_FOR_V2_IDENTITY` |
+| mashos-api | `ai/services/ai_inference/api_analysis_reads.py` | `MUST_MAP_BEFORE_CUTOVER`: tier / access / unread / refresh semanticsを保護 |
+| mashos-api | `ai/services/ai_inference/api_analysis_reports.py` | `MUST_MAP_BEFORE_CUTOVER`: report familyとのversion / identity境界を固定 |
+| mashos-api | `ai/services/ai_inference/api_self_structure.py` | `IMPLEMENTED_DEFAULT_OFF`: latest/status/monthly V2保存read分岐 |
+| mashos-api | `ai/services/ai_inference/analysis_observed_service.py` / `report_artifact_read_service.py` / `api_report_reads.py` | `IMPLEMENTED_DEFAULT_OFF`: immutable保存、safe読取、旧履歴統合、unread同一ID |
+| mashos-api | `ai/services/ai_inference/api_self_structure_reports.py` | `DELEGATES_TO_UPDATED_READ_SERVICE`: existing route/response shape保持 |
+| Cocolon RN | `components/selfStructure/WatashiMapRenderer.js` | `KEEP_HISTORICAL_V1_READ_RENDERER` |
+| Cocolon RN | `components/selfStructure/watashiMapFormatters.js` | `KEEP_V1_FORMATTER / DO_NOT_INTERPRET_V2_AS_V1` |
+| Cocolon RN | `screens/AnalysisSelfStructureScreen.js` | `REVIEWED_EXISTING_CALLER`: v2受信はgenerate／viewer側 |
+| Cocolon RN | `screens/AnalysisContentFirstScreen.js` | `REVIEWED_EXISTING_EMBEDDED_GENERATE_CALLER` |
+| Cocolon RN | `screens/analysis/useAnalysisSelfStructureActions.js` | `MUST_MAP_BEFORE_CUTOVER`: generation / refresh / navigation actionをV2 identityへ接続 |
+| Cocolon RN | `screens/SelfStructureReportGenerateScreen.js` | `VERSION_RECEIVER_IMPLEMENTED`: 有効DTO／許可modeのみ既読。API source接続済み・稼働未配置 |
+| Cocolon RN | `screens/SelfStructureReportViewerScreen.js` | `VERSION_RECEIVER_IMPLEMENTED`: private／未知／不正JSONを旧本文へ戻さない。保存identity lifecycle source接続済み・稼働未配置 |
+| Cocolon RN | `screens/SelfStructureReportHistoryScreen.js` | `EXISTING_UUID_READER_REUSED`: V2 UUIDを同じhistory/detailで使用 |
+| Cocolon RN | `components/selfStructure/watashiMapAccessPolicy.js` | `KEEP_ACCESS_OWNER / VERIFY_SAFE_V2_PROJECTION` |
+| Cocolon RN | `lib/compat/legacyWireContracts.js` | `MUST_MAP_BEFORE_CUTOVER`: v2をv1 aliasへsilent変換しない |
+| Cocolon RN | `components/selfStructure/WatashiMapV2Renderer.js` | `IMPLEMENTED_SAFE_V2_RENDERER_SOURCE_ONLY` |
+| Cocolon RN | `components/selfStructure/watashiMapV2Contract.js` | `IMPLEMENTED_CLOSED_DTO_AND_TEXT_GRAPH_MODEL` |
+| Cocolon RN | `components/selfStructure/WatashiMapRouteGraph.js` | `NOT_MATERIALIZED`: 現段階のgraphはV2Renderer内。分割の必要性待ち |
+| Cocolon RN | `tests/analysis-watashi-map-v2-contracts.test.js`、`tests/fixtures/analysis-watashi-map-v2-synthetic.json` | `IMPLEMENTED_SYNTHETIC_BACKEND_TO_RN_TEST` |
+
+V1-D Phase fit-gapはfresh caller / writer / reader graphとexact filenamesを再確認し、上表からのdeltaをapprovalへ出す。V1-EのIF source、storage、API、RN filesは別approvalまでmaterialize 0である。
+
+### 3.2 u94 implementation limits
+
+引用付き補足の対象occurrenceは親recordの完全節へ一意にbindし、元の主体／伝聞／疑問scopeを検証してから集約前に撤回・置換する。answerのnew clauseは元answerのfield/hash/scalar/byteを保持するparser viewで、派生文を新sourceにしない。元の否定・願望は置換へ継承しない。未解釈の補足は期間全体をUNAVAILABLEとする。
+
+safeラベルは格を持つ名詞項と有限述語の型から再構成する。現段階は9動詞と限定名詞grammarの明示本人節のみで、任意の修飾／時点接頭句／複文は未対応。意味を削ってsafe化しない。生成不可を将来のlifecycle callerが扱う必要がある。annotations／conflict／期間比較と順序線のpositive cohortは未完了。
+
+safe projectionは認証された本人向けのSELF_ONLY商品表示で、匿名telemetryではない。意味項としてsource-bound名詞を保つが、原bodyやprivate source/evidence識別子は含めない。unknown／注記／競合は対象refを保持して図と文章へ出し、ラベルだけの重複排除で対象を消さない。端末側のtier検査は認証・server access policyの代用ではない。
+
+### 3.3 u102 通常補足と同一意味の集約
+
+既存intent_compiler内で、引用訂正/撤回以外の通常補足も、共有semantic frameと既存の完全節grammarが全文を解釈できる場合に採用する。元回答のexact scalar evidenceが全文を覆うことを確認し、未解釈/訂正混在を部分採用しない。親recordを同じ一機会とし、質問/生成文はsourceへ入れない。矛盾する同一候補の記述はどちらかへ決めずUNAVAILABLEを保持する。
+
+同じSELF主語・格/名詞・述語・極性・modality・時点は、格の語順や丁寧語の違いで分割しない。全evidenceを保持し、record件数と共起は独立記録を基準にする。関係・順序・原因を追加回答から推測しない。既存26＋追加7＝33検査PASS、合成生成本文3組を確認。通常日本語全般/複数補足/annotations/期間比較/IFの完成ではなく、API/DB/DTO/RN契約は不変。
+
+### 3.4 u103 明示された記録内順序の限定実装
+
+既存有限節の接頭辞「その後」「それから」を型と元evidence位置に保持する。同一source/fieldに隣接する完全SELF過去fact節で、間が文末区切り/空白だけの場合に限りOBSERVED_ORDERを作る。接続語もsafe表示で区別する。否定を保持し、希望は行動順序にしない。単なる列挙/共起/保存時刻は順序の根拠にせず、因果関係を表示しない。
+
+順序の両端はevidence occurrenceで区別し、A→B→Aを3node/2edgeとして保つ。別recordの順序は集約せず、順序外の同一意味集約だけをu102から継承する。未解釈の中間節、別field/source、元入力と補足、撤回/置換箇所を橋渡ししない。通常補足内で成立する順序は元answerの出典へbindする。成立pairの不足表示だけを解消し、接続先不明はunknownのまま。
+
+§3.2の順序positive未完了をこの限定範囲で更新する。vertical42/storage10/saved period13/API6＝71 PASS、A→B→Aの保存・再読取と既存RN contract/view modelの本文一致を確認。新規API/DTO/DB/RN契約なし。一般時点表現/任意複文、複数記録での反復route解釈、annotations/conflict/期間比較/IFは未完了。未配置sourceの技術成立であり、正式商品受入れではない。
+
+### 3.5 u104 今日/昨日のsource-bound解釈
+
+既存の完全SELF有限節に付く単一接頭辞「今日」「昨日」を、relative_dayとsource_partsへ保持する。有限述語のpast/current_input、極性、fact/wishを上書きせず、「昨日＋現在の希望」は保留する。safe表示は「この記述時点の今日/昨日」とし、閲覧当日や推定した年月日に変換しない。
+
+日語付き観測はsource envelope＋明示日で分離し、同一source/同日の文法上同一内容だけをu102方式で集約する。順序参加節はu103のoccurrence分離を優先する。原入力のcreated_atを補足の記述日時へ流用しない。原入力と回答では異なる日語でも同じ実日を指す可能性があるため、対立する候補を日語だけで通さない。同一回答内の明示今日/昨日だけは別日として区別する。
+
+日語だけから順序edgeを作らず、後続節へ日を暗黙継承しない。引用訂正/撤回は日語を含む完全節へbindし、置換後の日は回答出典から解釈し直す。vertical50/storage11/saved period13/API6＝80 PASS、RN契約とbackend本文の一致を確認。§3.2の時点未対応をこの限定範囲で更新する。一般日時、主語後の日修飾、複数修飾/複文、annotations/conflict/比較/IFは残る。契約変更なし、source未配置。
+
+### 3.6 u105 可能性の補文と現在の認識host
+
+共有Stage1の_source_current_cognition/_partsが認定する現在の認識のうち、明示SELF・背景なし・可能性補文・現在の思う/考えるhostをAnalysisへ接続する。共有parserの広い文字列slotをそのままsafe化せず、内側も既存9動詞と格付き名詞grammarで完全に解釈する。補文限定inventoryは同じ動詞の過去/否定過去と辞書形/否定形を扱い、主文grammarは拡張しない。
+
+内部possible_contentはactor=UNSPECIFIED、modality=possibilityであり、省略された行為主体を本人と推測しない。外側はSELF・neutral/fact/current_inputの認識で、ATTENTION_OR_THOUGHTとして表示する。内側の否定・時制・対象と外側hostの継続/非意図性を集約とsafe表面へ保ち、実行済み事実や結果へ昇格しない。内側過去形から順序edgeを作らない。
+
+認定済み認識の完全範囲だけを可能性拒否の例外にし、同fieldにある別の確定行動を失わない。未認定/未解釈の可能性scope、他者・引用・条件・否定/過去hostは保留する。通常補足は全文解釈を要求し、引用訂正/撤回では外側/内側の旧scopeを置換後へ継承しない。補足が単なる可能性なら、元の確定記述を勝手に訂正せず別の考えとして保持する。
+
+vertical58/storage12/saved period13/API6＝89 PASS、既存RN契約との文章一致を確認。保存serializerのallowlistと閉じたDTOは変更せず、旧artifact読取を再解釈しない。一般認識/過去host、任意の補文、場面/役割/結果の接続、annotations/conflict/比較/IFは残る。新規owner/契約/配置効果なし。
+
+### 3.7 u106 現在の未成立結果
+
+共有_final_source_unfinished_result_nucleiが認定する単一memo完全節を消費する。explicit/explicit_current_input/required/event、negative/fact、現在の時点、present_unfinishedのmarker、部分投影/依存関係なしを揃え、同共有完全節helperとAnalysisの既存名詞/の連結・は/が/も・見つかる/決まる/定まるの現在否定状態の解析を両方要求する。疑問名詞、未解釈接頭辞/修飾/複文、過去/肯定/二重否定/引用/伝聞/条件を切り落として通さない。
+
+actorはUNSPECIFIEDであり共有frameのcurrent_user既定値を本人の行為へ昇格しない。result_state=NOT_YET、名詞/助詞、否定、current_inputと元scalar/UTF-8証拠を保持し、IMMEDIATE_RESULT_OR_AFTERMATHへ接続する。safe表示は「まだ〜っていない（この記述時点）」。未実行・失敗・原因・順序・永続的不可能を作らず、解釈可能な結果だけを不足表示から除く。
+
+集約は同じ内容の丁寧語だけを束ね、助詞/名詞/述語を区別。通常補足/訂正/撤回と元出典を既存経路で保持。期間内の共起は無方向、現在結果を過去行動の順序へ混ぜない。保存serializerとDTOは変更せず、内部型は非公開。vertical65/storage13/saved period13/API6＝97 PASS、合成6本文と既存RN本文が一致。共有ownerの変更0、未配置。一般結果・場面/役割・複文/比較/IFの完成ではない。
+
+**u169 限定補正（2026-10-08 JST）**：u168の昨日名詞付き未完了と完結した本人書字の併存を、共有 `_source_prefix_opens_report` の既存責務内で区別する。明示SELF7表記＋は/が/も＋任意の読点/半角・全角空白＋既存単一名詞区間＋を＋書いた/書きましただけを閉じた書字と証明する。一般属格/別主体/主語なし/報告内容/次・以下等は保留、別文/別fieldの報告は残す。Analysisの正規present_unfinished、否定/current_input/UNSPECIFIED、exact evidence・更新・比較・保存・同一文/図の条件は不変。既存owner/route内の修正でSTRUCTURE_MAP_DELTA_NONE。Emlis複合文の受取能力は別残件、検証と制約は06/API handoff u169。
+
+**u174 限定補正（2026-10-08 JST）**：上記u169の目的語1項に、同じ単一名詞文法の場所/媒体1項（に/で）を前後どちらかに追加できる。「考えをノートに書いた／ノートに考えを書いた／職場で記録を書きました」が後続未完了を伝聞化しない。前後両方・3項・格重複は保留し、既存の何/誰/次/以下/上記/下記/話/発言/引用/説明/報告/内容の拒否を目的語と場所/媒体の全区間へ適用する。一般属格/他者/引用/未閉包・他文/別fieldの報告条件、書いた/書きましたへの限定は不変。未完了は現在否定・主体未指定のまま、書字との因果/順序を推定しない。文章/図・補足/訂正/撤回・期間比較・保存再読を確認し、限定398 tests PASS。新しい文法ownerや依存方向は増やさずSTRUCTURE_MAP_DELTA_NONE。Emlis複合出力の既存停止は未解消。詳細は06/API handoff u174。
+
+**u175 限定補正（2026-10-08 JST）**：「まだ気持ちが定まっていない／まだ不安の原因が見つかっていない」は既存の現在未完了に該当する。共有Planが名詞内の感情語でreaction/feelingへ分類していた不一致を、同じ未完了owner内で補正する。まだ＋完全な既存名詞/属格＋は/が/も＋見つかる/決まる/定まるの現在否定、原文/範囲/explicit根拠、reaction/feeling/negativeの一致を満たす場合だけevent/factへ戻し、operator:feelingを除く。疑問名詞の何/誰/幾、独立感情、未閉包/過去/推量/疑問/引用/夢/伝聞と別field帰属は新分岐で昇格しない。昨日/昨日分は既存の完全名詞内時点の条件のみ継承。Analysisのactor=UNSPECIFIED、現在否定・原文/出典、補足/訂正/撤回・比較・保存を維持し、原因/順序/本人感情を推測しない。STRUCTURE_MAP_DELTA_NONE、共有owner/既存文法内の補正。Emlisの感覚への定型化と複合生成停止は別残件。検証結果は06/API handoff末尾u175。
+
+### 3.8 u107 過去行動の後の有限変化
+
+**u176後続順序の限定補正（2026-10-08 JST・未配置）**：`_explicit_order_pairs`は、既存`_action_change_pair`で全文を証明し、両端を`_fragment`で実際に受理した非撤回の複合文について、末尾がBOUNDED_CHANGE/fact/pastかつ全文証拠の終端と一致する場合だけ、その末尾を既存の後続順序候補へ加える。次節は従来どおり同一fieldの完全な過去factで「その後／それから」を明記し、間が文末区切り/空白だけであることが必要。初めの行動片へ直結せず、未解析文・希望・別field/source・撤回/置換箇所を飛び越えない。PAST_FEELINGの後続接続と複合文の前方接続は拡張しない。
+
+内部順序の両端＋元全文3証拠と、後続線の末尾＋次節2証拠を保持する。成立した線だけを元field/scalar順で表示し、配列順から新しい順序や原因を作らない。期間意味比較は線の表示ID/配列順を意味差にしない。既存保存結果は再生成しない。最終Analysis345 tests／2369 subtests PASS、7合成本文・実RN model一致、保存後再読確認。契約/共有owner/DB/RN製品変更0。詳細は06/API handoff末尾u176。
+
+同一memo spanの完全なSELF過去行動＋後/あと（に）読点＋名詞の有限変化に限定する。共有Stage1のaction/change 2核、explicit/required/explicit_current_input・fact/past、action_before_change、source_fragmentのexact範囲とrequired user_stated_relation/typed_projection:perfective_action_before_bounded_changeを要求する。同じmarkerは夢/伝聞の長いhostにも付くため、全文を両端と接続語で完全に解釈できなければaction片側も採用しない。
+
+左端は既存の有限動詞/格と明示SELF、肯定の過去factだけ。右端は既存名詞/の連結・は/が/もと減った/増えた/変わった/戻ったを型付けし、result_state=BOUNDED_CHANGE、actor=UNSPECIFIED、positive（文法上の肯定）/fact/pastとして結果nodeへ置く。名詞の所有者を本人と補わず、増減を改善/悪化と評価しない。両端の疑問名詞（何/誰/幾）は保留。safe labelは「疑問が減った（記録された変化）」等に再構成する。
+
+shared action_supports_changeを因果として輸入せず、実際の後接続を根拠に既存OBSERVED_ORDERだけを作る。接続語を含む元の全文evidenceをedgeへ加え、各端点もexact scalar/UTF-8/hashを維持する。両端をoccurrenceとして分離し、反復した行動を一つにまとめない。通常補足は両端の解釈成立時だけconnectorを含む全文を被覆する。訂正/撤回は元の完全な2節span全体を対象にし、部分引用へ広げない。置換後の証拠は回答原文へ戻す。
+
+vertical71/storage14/saved period13/API6＝104 PASS、合成6本文と既存RN表示が一致。保存DTO/serializer、API/RN/共有ownerを変更せず旧artifactを再生成しない。たら/てから/3節、右端feeling、否定行動のpair、共有側が2核化しない進んだ、一般日本語/比較/IFは対象外。u106/u107は当初の自動審査停止後、Mashの明示公開許可を受けPR3/PR30へ反映・照合済み。新規owner/契約/配置効果なし。
+
+### 3.9 u108 「てから」の依存時制と完全な過去結果
+
+既存9動詞のte活用（書いて/調べて/試して/見て/作って/残して/記録して/メモして/続けて）は、通常の主文_propositionには加えない。専用の内部解析ではtemporal_scope=dependentとして、原文のte形・格・明示SELFと全source partsを保持する。原文を過去形へ置換した仮想証拠を作らない。
+
+_action_change_pairでu107の共有2核/required typed relation/exact範囲と、右端の4述語のpast fact、実際のから接続を全て確認した場合だけ左端をpastへ束縛し、private dependent_form=TE_BEFORE_PAST_CHANGEを付ける。各consumerはfragmentから同じ解釈を受け取り、単独teの再解析で意味を作り直さない。safe側はte原文の再解析に加え、その行動からpastの結果へ向かうOBSERVED_ORDERと、同一envelope/field/spanの両端およびexact全文evidenceを要求する。marker単独、別記録、順序なしでは実行済み表示へ変換しない。
+
+補足全文の被覆、全文引用訂正/撤回、元回答座標と反復occurrenceをu107経路で維持。単独teへの置換は旧結果を返さず保留。夢/3節/非過去/否定/他者/疑問名詞を切り落として通さない。未対応の願望は既存private ATTENTIONが残り得るが、実行済み行動・順序・safeラベルとして出さない。従属形は意味上の別の出来事を増やす集約keyにはせず、既存のevidence occurrenceで区別する。
+
+vertical76/storage15/saved period13/API6＝110 PASS。6合成本文と既存RN本文が一致。新private fieldはserializerのallowlistから外れ、保存DTO/API/RN/共有ownerの変更なし。既存「てから」拒否1例は今回のpositive cohortへ移し、他の保留期待は維持。未配置。たら/3節/右端feeling/一般場面/役割/比較/IFの解釈は未完了。
+
+### 3.10 u109 行動後の過去感情
+
+**u184 内容修正（2026-10-09 JST・未配置）**：先頭「その後/それから」付き常体の行動後3感情/名詞3変化を全文根拠に限定して保持。marker内の助詞誤認と、Emlisで順序をsupport断定へ変える連動問題を既存3owner内で補修した。引用/伝聞/夢/後続hostは保留し、丁寧形・原文/主体/前後順序・訂正/撤回/比較/保存再読を維持。Analysis370＋共有限定432 tests／3099 subtests、current identity1成功、既存実保存fixture3skip。Analysis8全文と実RN表示model一致、Emlis4全文と全recovery/独立inverseを確認。STRUCTURE_MAP_DELTA_NONE。配置/本人実機/商品受入れは未確認。次は追加活用網羅より指定修正版の生成→保存再表示の実機到達を優先する。詳細は06/API handoff末尾u184。
+
+**u183 読点なしmarkerの格誤認補修（2026-10-09 JST・未配置）**：既存全文証明済みの丁寧3感情/名詞3変化compoundについて、明示SELFに先行する単一markerを格検索範囲から除く。`それから` 内の「から」を助詞と取り違える欠落を直し、原文/全operator/証拠座標は変更しない。generic endpointの検索位置は0不変。常体への試行拡張はEmlisのsupport断定を実測したため不採用とし、別残件を明示。Analysis370＋共有312、3013 subtests、identity1成功、実保存runtime未設定3skip。合成8全文/RN一致、合成RPC保存再読と訂正/撤回/読点差比較、独立readerを確認。STRUCTURE_MAP_DELTA_NONE。未配置・実DB/本人実機/商品受入れ未確認。詳細は06/API handoff末尾u183。
+
+**u182 先頭marker＋丁寧形の共有根拠（2026-10-09 JST・未配置）**：u181の別残件だった「その後／それから」で始まる完全SELF行動＋後/てから＋丁寧3感情、または減りました/増えました/戻りましたを、共有finalの有限形判定で認定する。原文scalar/全文/帰属/required pairを保持し、Analysis既存u181の前後順序へ接続する。新prefix付き名詞変化では夢・両field報告・後続の認知/撤回hostも拒否し、旧prefixなし経路を拡大しない。Emlis作者と独立readerはmarkerを残して直後のSELFだけ省略し、原source bytesへ復元する。因果/supportは追加せず、感情の省略主体や名詞の「自分」を改変しない。
+
+Analysis370＋共有256 tests／2970 subtests、current identity1成功、実保存runtime未設定の既存3 skip。合成8本文/RN model本文・identity一致、実service＋合成RPC保存再読。未配置・実DB/本人実機/商品受入れ未確認。読点なし「それから私は…」等へ成功範囲を一般化しない。過去節の未完了記録は履歴として保持し、本有限範囲だけ更新する。詳細は06/API handoff末尾u182。
+
+**u181 compoundへの前方明示順序（2026-10-09 JST・未配置）**：§3.8/本節の「前方接続は未対応」を、既存共有exact2核・required typed relationで全文証明済みの範囲だけ更新する。Analysisの行動側に既存2marker（その後/それから）を許容し、te形もmarkerを含む元source_partsを保持する。完全pairの両端/whole evidence一致後、初端を既存隣接判定へ登録することで前件→行動→結果→後続を同じ意味・原文で表示する。compound間も前の末端から次の初端へ接続し、出来事を集約して消さない。
+
+前件のないmarkerを補完せず、内部順序と未確定表示を残す。未知文/希望/別field/source/撤回・訂正を橋渡ししない。teの過去表示は内部3証拠線に依存し、前方線だけでは認定しない。共有Plan/Emlis/API/DB/RN変更0。先頭marker＋丁寧3感情や一部名詞変化等の共有pair未成立は別残件。Analysis366 tests／2927 subtests＋identity1成功、8全文/RN一致、合成RPC保存再読を確認。未配置・実DB/本人実機/商品受入れ未確認。詳細は06/API handoff末尾u181。
+
+**u180 丁寧形の行動後compound（2026-10-09 JST・未配置）**：明示SELFの完全な実行済み行動＋後/あと（に）、またはて/でから、＋落ち着きました／嬉しかったです／うれしかったですを共有final pairへ限定追加する。格付き名詞1〜2項、原文全文一致・文境界・帰属・有限活用を証明し、引用/報告/夢/疑問/句点後の認知・撤回hostを保留する。Analysis compiler変更0で既存PAST_FEELING/feeling/past、右端の省略主体非推定、OBSERVED_ORDERと原文証拠、後続の明示順序、補足/訂正/撤回/期間比較を維持する。
+
+Emlisは既存source-owned action/changeの原文順序を全recoveryで実現し、行動によるsupportへ広げない。MATERIAL_WEIGHT、または新3形だけのRELATIONAL_NONCOLLAPSEを、既存作者のfocal関係検査と独立readerの同一関係検査で受ける。有限丁寧語尾を常体へ戻し、感情の明示SELFをEmlis自身の発話にしない。既存名詞変化の右端「自分」などは除去しない。最終5suite565 PASS／2889 subtests／3 SKIP、合成8全文/RN model一致、保存再読を確認。u179のcompound見送りは履歴として保持し、この有限範囲を更新する。実DB/本人実機/商品受入れ未確認。詳細は06/API handoff末尾u180。
+
+**u179 丁寧形の単独過去感情（2026-10-08 JST・未配置）**：u178の単独明示SELFに、落ち着きました／嬉しかったです／うれしかったですを追加する。前者は共有global positive語形に不在でreaction既定negativeとなるため、既存shared finalのno-projection部で、explicit/current-input claim、required/should、memo単独span、current_user/reaction/feeling/negative/feeling/current_inputと全文有限形を照合してpositive/positive_change/current_changeへ補正する。global keyword regex・pair投影・Safetyは変更しない。
+
+新3形全てのAnalysis受理に、同じshared source-host証明（明示本人主語、原source一致、文境界、引用/報告/夢/疑問/後続依存接尾の保留）を要求する。既に共有positiveの嬉/うれ2形も報告prefix検査を省略しない。PAST_FEELING/SELF/positive/feeling/past、原文出典、既存の後続明示順序を保ち、丁寧さだけを期間差にしない。主語省略/程度/否定/他時点を推測しない。
+
+行動後compoundの3丁寧形追加は未採用。試行でEmlisに「行動が感情を支えている」という根拠のないsupport断定が新たに生じたため、pair追加を撤去して従来の保留を維持した。この欠落とsupport説明の修正を一体の残件とする。Analysis358 tests／2799 subtests、共有限定134＋current identity1成功、8全文/RN model一致、保存再読とEmlis6全文を確認。実DB/本人実機/商品受入れは未確認。詳細は06/API handoff末尾u179。
+
+**u178 明示SELFの単独過去感情（2026-10-08 JST・未配置）**：この節の従来の単独感情保留を、完全な本人主語（私/僕/ぼく/俺/おれ/わたし/自分は、既存主語読点可）＋既存5有限形に限り更新する。memo単独span・全文境界・explicit/current-input claim・required/should、current_user/positive、安心はvalue/value/fact、他形はreaction/feeling/feeling、positive_change/current_change等の共有witnessを照合する。fragment/range/thread/dependency付き核は保留。pastは全文有限形から確定し、共有current_inputを現在時制にせず、actor既定値から主語省略をSELFにしない。元のscalar/UTF-8/hash/source_partsとPAST_FEELING/feeling/pastを保持する。
+
+この完全SELF感情の証拠IDを、既存の同一field・隣接・明示「その後／それから」・後続fact/pastによる順序起点へ追加する。未知文・希望・別source・撤回/訂正を橋渡しせず、原因や改善を補わない。句点/改行/semicolon等の直後に「わけではない／と思う／とは言えない」等の依存接尾が続くときは、新しい単独許可だけを保留して未解析hostを切り捨てない。これは任意の後文による訂正の一般理解ではない。主語省略、落ち着きました等の未認定形、否定/程度修飾、夢/伝聞等の既存境界は維持する。
+
+Analysis355 tests／2685 subtests PASS、7合成全文と最終実RN model一致、実保存service＋合成RPCの再生成なし再読を確認。公開契約/共有owner変更0、未配置・実DB/本人実機/商品受入れ未確認。詳細は06/API handoff末尾u178。
+
+**u177 感情末尾の後続順序（2026-10-08 JST・未配置）**：u176の後続接続条件へ、既存完全pair内の末尾PAST_FEELING/feeling/pastを追加する。非撤回・両端fragment受理・全文終端一致の下で、その証拠IDだけを感情の起点として認め、次の完全fact/past節に同一fieldの「その後／それから」と文末区切りだけの隣接根拠がある場合に接続する。感情をfactへ変換せず、SELF/UNSPECIFIED、内部3証拠/後続2証拠を保持する。単独感情・未認定活用・他者・推量・未解析介在・別source・撤回/訂正への橋渡しはしない。原因や改善を補わない。
+
+u176 §3.8のPAST_FEELING保留は本範囲で更新し、複合文への前方接続は未対応を維持。既存保存結果の再生成や公開契約変更はしない。Analysis349 tests／2417 subtests PASS、7合成全文と実RN model一致、実保存service＋合成RPCで再生成なし再読を確認。未配置・実DB/本人実機/商品受入れ未確認。詳細は06/API handoff末尾u177。
+
+既存の共有action/change完全pairを消費する同じcompiler/realizer内で、右端の安心した/安心しました・落ち着いた・嬉しかった/うれしかったを有限形として解釈する。明示本人主語はSELF、省略主語はUNSPECIFIEDを保つ。Analysisの結果型はPAST_FEELING/feeling/past。共有側で安心はfact、他3lemmaはfeelingとなるwitnessを正確に照合し、一律factへ変更しない。
+
+元全文2核・required relation・exact範囲・明示接続の条件を維持する。safeラベルは型から「〜（記録された気持ち）」と再構成し、本人の実行、改善/悪化評価、原因へ昇格しない。te形の実行表示は同一source/field/spanの自身の順序線と右端過去結果・元全文証拠が必要。PAST_FEELINGは既存結果nodeへ投影する内部型で、公開DTO/DB/RN契約へfieldを追加しない。
+
+補足全文、全文引用訂正/撤回、反復episode、保存後の再生成なしを既存経路で維持。共有未認定形（ほっとした/落ち着きました）、程度修飾、否定、夢/伝聞/推測、単独感情、たら/3節はこの解釈を許可しない。関連116検査・6合成出力の既存RN本文一致を確認。一般感情理解・商品受入れ・稼働配置は未完了。
+
+### 3.11 u110 明示された本人の過去の所在
+
+既存compiler/realizerで「私/僕/わたし/自分は＋既存名詞句＋に＋いた/いました/いなかった/いませんでした」の完全節だけをSCENEへ接続する。内部scene_state=PAST_PRESENCE、actor=SELF、modality=fact、time=pastを保つ。共有側はrequired/explicit/current_input scope、memo単独span、event predicate/current_user/fact、肯定neutralまたは否定negative、past/current_input時制が必要。fragment/range/dependency付き核は対象外。shared actor既定値やni格単独から所在を推論しない。pastは全文有限形から読む。
+
+ledgerの全文span一致に加え、parser field上の前後が句点/改行/field端に接することを確認する。72字超の読点・固定長分割や関係prefixで切られた断片を、夢/修飾から独立した事実にしない。全文訂正時のparser viewは既存の対象証明を継承し、証拠scalar/UTF-8は原回答のまま保つ。
+
+表示は「職場にいた／いなかった（記録された場面）」等を型から再構成。行動・勤務・所属・役割・因果は補わない。後続する本人過去行動の「その後/それから」は既存明示順序の条件だけで接続する。通常補足の完全解釈、同じ所在の反対極性の保留、全文訂正/撤回、独立記録件数、保存後の再生成なしを維持する。公開DTO/DB/RNに内部型を追加しない。
+
+今日/昨日/その後付き所在、現在/未来/願望、他者/疑問名詞/夢/引用/伝聞/推測/未解釈修飾、memo_actionは対象外。ROLEは未実装。関連124検査・305 subtests、6合成本文の既存RN一致を確認。一般場面理解・商品受入れ・稼働配置は未完了。
+
+### 3.12 u111 明示された本人の過去の担当
+
+**u173共有側補正（2026-10-08 JST・未配置）**：過去所在（§3.11）と担当の完全名詞修飾「難しい」を、独立した難しさ/制約と区別する。既存共有Planのkind選択とoperator生成で同じ判定を使い、完全名詞＋に＋過去所在5形、または完全名詞＋を＋過去担当5形だけはconstraintへ分類しない。難しくない等の別形、無理/制約/限界、独立述語、未閉包・格違いは従来判定を維持。Analysisの原文・主体・極性・時点・帰属条件は緩めず、修飾を削除したり遂行能力/負担へ変換したりしない。旧「難しいイベント企画を担当した」の保留期待1件を、今回回復した完全なROLE・対象・肯定過去の確認へ更新。最終422限定検査PASS、合成Analysis9全文と実RN表示model一致、保存再読/Emlis5全文確認。未配置・実DB/実機/商品受入れ未確認。詳細はAPI handoff/06末尾u173。
+
+
+
+既存compiler/realizerで「私/僕/わたし/自分は＋既存名詞句＋を＋担当した/担当しました/担当しなかった/担当しませんでした」を完全解釈し、内部role_state=PAST_RESPONSIBILITY、SELF/fact/pastと正負をROLEへ投影する。担当関係は述語が根拠であり、名詞の職業/肩書き分類表や「私はNです」から推測しない。safe表示は「〜を担当した／担当しなかった（記録された担当）」で、恒久身分・能力・責任感・担当対象の実行完了を補わない。
+
+u110の共有generic event witnessと文境界処理を共通化。explicit/current_input claim scope、memo単独span、event predicate/current_user/fact、対応する極性、past/current_input時制、fragment/dependencyなし、完全な本人有限節と元scalar/UTF-8証拠が必要。ROLEだけretention=required/shouldを許可する。共有保持ownerは4節以上で普通の明示本文をshouldへ下げており、grounding/claim scope/certaintyとは独立している。共有retentionを書き換えず、optional断片は拒否し、SCENEのrequired条件も変えない。
+
+場面/役割/考え/行動/結果を同じ記録から残しても、段階の順序を自動生成しない。後続「その後/それから＋本人過去行動」や既存action/change pairだけが既存の明示順序へ接続する。補足全文・同じ担当の反対極性保留・全文訂正/撤回・独立記録件数・正負別node・保存後の同一文章/図を維持。内部型はDB/公開DTO/RNへ追加しない。
+
+前置時点、現在/未来/願望/可能、他者/疑問/引用/伝聞/推測/夢/未解釈修飾、memo_actionは対象外。「記録を担当した」のような名詞keyword由来のshared actionも今回保留。関連129検査・359 subtests、6合成本文の既存RN一致を確認。一般ROLE理解、注記/比較/IF、商品受入れと稼働配置は未完了。
+
+
+**u170限定更新（2026-10-08 JST・未配置）**：上記u111の「記録を担当した」保留は当時の状態。既存の完全なPAST_RESPONSIBILITYについてのみ、共有kind/predicate_kindがaction/actionでoperator:actionを持つ一貫した根拠も受理する。名詞の記録/メモに由来する共有分類差で本人過去担当を落とさない。全節/原文証拠、explicit/current_input claim、required/should、memo単独span、current_user/fact、対応極性、past/current_input、fragment/dependency拒否と帰属境界は維持。ROLEは「担当する」から作り、shared performed_actionを担当対象の実行完了へ投影しない。SCENEのevent/event条件は不変。既存の読点/相対日/属格対象・更新/比較/保存にも同じ限定修正を適用し、旧保留4期待をpositiveへ変更。最終Analysis330 tests／2176 subtests、合成9全文と実RN表示model一致。一般ROLE理解・実機・商品受入れの完了ではない。詳細はAPI handoff/06末尾u170。
+
+
+**u172共有側補正（2026-10-08 JST・未配置）**：完全名詞＋を＋既存過去担当5形で閉じる場合、名詞修飾の良いは独立valueへ、名詞の記録/メモ等はactionへ分類しない。共有Planのkindとoperatorを同じ判定に揃え、memoの担当はevent/event・肯定neutral/否定negative・action/performed_actionなしで保持する。u170のaction分類の説明は当時の状態であり今回この限定範囲を更新。Analysis専用sourceの根拠条件は変更0、u170のcoherent action受理と改変拒否検査も保持する。実書字/独立value/未閉包hostとmemo_actionの既存条件は不変。最終392限定検査、合成Analysis9全文と実RN model一致、Emlis5全文確認。担当の意味を作業実行に置換しない。詳細はAPI handoff/06末尾u172。
+
+
+### 3.13 u112 同じ原入力内の肯定・否定と未確定な機会
+
+既存のconflict_badges契約へ、同じ原入力source/field/相対日にある、完全命題が同じSELF過去factの正負を接続する。対象は既存SCENE/ROLE/ACTION_OR_NONACTION。元の記録を同じ機会だと断定せず、真偽を選ばず、両nodeを対象とした未確定表示にする。別record/field/day/対象、明示順序参加、接続語、従属形、願望/認識は除外する。通常補足の正負不一致は従来どおり保留し、引用訂正/撤回の除外を比較より先に適用する。
+
+ObservedConflictはtarget_refs・exact evidence_refs・閉じたreasonを持つAnalysis内部型。private保存は証拠位置とhash等のallowlistだけで、原文/名詞/propositionを加えない。safe DTOは既存conflict_ref/target_refs/visible_labelだけ。本文は同じDTOから組み、既存RNと一致させる。保存validatorは非空badgeの形・2対象・重複・表示文を確認し、旧空badgeの読取時再生成は行わない。DB/DTO/RN契約変更なし。
+
+135検査・379 subtestsと既存RN11検査PASS、6合成出力の同じ本文/identity/順序/badge件数を確認。Auth/DB I/Oは合成で、今回の修正版は未配置。§3.2のconflict未接続をこの限定範囲で更新する。一般的矛盾・注記・期間比較・IFの完成ではない。
+
+### 3.14 u113 希望と明示された現在負荷の非連続注記
+
+§8のSOURCE_EXPLICIT_ANNOTATIONを最小範囲で接続。既存願望grammarのSELF/current/positive/wishと、明示SELFのつらい/苦しい（です形含む）が一文で対比される場合に限る。shared exact2、finite contrast feeling、contrast relation、元文の完全境界と接続語を照合する。negative極性だけで負荷を推測しない。負荷をroute node/順序edge/因果へせず、対象の希望nodeにBURDENを付ける。
+
+Analysis内部ObservedAnnotationは対象、原文両端と対比全文の3 evidence、SOURCE_EXPLICIT_ANNOTATION、原因/継続期間の未確定、禁止昇格、更新refを保持する。同一対象/同一述語のbadgeは集約するが各source証拠を残す。型付き負荷核だけを消費し、他の未知scopeを消さない。通常補足の全文coverageと全文訂正/撤回へ同じ完全pair証明を使う。撤回されたsourceだけを除外し、別記録の注記を消さない。
+
+safe DTOは既存annotation_ref/target_ref/kind/visible_labelのみ。原節/述語/対象/3証拠を照合して表示文を再構成し、既存RNと同じ順で本文へ含める。private保存はraw/source_labels/predicate_lemmaを含めない。保存validatorはBURDEN/既存thought対象/閉じた表示文/重複/shapeを確認し、旧空注記も読取時再生成しない。DB/DTO/RN契約変更なし。
+
+関連143検査・447 subtests、既存RN11、6合成本文/identity/注記target一致。Auth/DBは合成、未配置。PROTECTIVE・解釈仮説・一般の負荷理解・期間比較・IFは対象外。複数記録で重複する既存未確定表示は別の具体的改善候補として残す。
+
+### 3.15 u114 同一未確定表示の期間集約
+
+**u185限定表示更新（2026-10-09 JST・未配置）**：以下u114のscope完全一致だけの表示集約を、既存の通常不足段階に限り拡張する。同一の順序付きbetween_node_refs・NOT_ESTABLISHED_FROM_SOURCE・NODE_KINDSの複数scopeを、初出gap_ref/表示位置に「確定していない項目：場面、考え・注意。」のように全項目を列挙してまとめる。複数記録から別々の不足が来る場合もあるため、同一記録で全項目が同時に欠けたと断定しない。単一scopeは旧文面を保持。別対象/対象順/理由、SOURCE_SCOPE、ROUTE_CONNECTIONはこの束ねへ入れず、従来の完全一致dedupeだけを継承する。private全gap・graph・証拠・訂正/撤回・比較意味・DTO形・保存readは変更しない。新生成のprivate/safe projectionのみへ適用し、旧保存本文/identityを再生成しない。実例の訂正後6→5行、撤回後5→3行、同じ希望の2記録4→1行（private8gap維持）。最終集合374 tests／3103 subtests成功、生成8＋旧保存1全文と実RN表示model一致、訂正/撤回後の実service＋合成RPC保存再読を確認。実DB/実機/正式商品受入れ未確認。詳細は06/API handoff末尾u185。
+
+**u171表示補正（2026-10-08 JST・未配置）**：ROUTE_CONNECTIONのうちEXPLICIT_PREDECESSOR_NOT_ESTABLISHEDは「この記述がどの内容に続くのかは、この記録からは確定していません。」と表示する。二つの内容の順序不明を表すONLY_EXPLICIT_ORDER_IS_SHOWNとは別の不明点として保持し、統合/削除しない。対象・ID・順序・重複判定・private graph・期間比較は変更0。新生成時のprivate/safe表示だけに適用し、既存の保存済み文面を再生成/書換えしない。最終Analysis333 tests／2185 subtests、合成6全文と実RN表示model一致。実DB/実機/商品受入れ未確認。
+
+同じnodeへ集約された複数記録から、対象/不足範囲/理由が同じ未確定項目を繰り返し表示しない。ObservedGraphとprivate保存は全gapを保ち、生成時のprivate/safe projectionだけで順序付きbetween_node_refs・missing_scope・reason_codeの完全一致を初出gap_refへまとめる。ラベルだけのdedupeは禁止を維持し、別対象・別理由・対象順の差を消さない。
+
+safe DTOの構造、文章/図の単一artifact、元の証拠と記録件数を変更しない。_text_from_visualや保存readへこの集約を適用しないため、旧保存artifactは旧本文/DTO/identityのまま読める。欠番のあるgap_refは既存API/RN contract内。原graphの再解釈、旧保存の書換えは行わない。
+
+2記録の同じ希望でvisible8→4/private8保持を確認。別対象/未読内容、理由/対象順、新規保存再読取、旧保存互換を含め関連148検査・447 subtests、既存RN11 PASS。新規3＋旧保存形式1の本文/identity/unknown対象をRNと照合。Auth/DBは合成、修正版未配置。§3.14で残した重複表示の不足をこの範囲で解消する。
+
+### 3.16 u115 明示された現在の保護意向
+
+明示SELF（私/僕/わたし/自分）は＋既存名詞句＋を＋守りたい/守りたいですを全文解析する。共有explicit/current-input/requiredまたはshould、wish nucleus、current_user/positive/wish/current_inputとoperator:wishを要求。共有predicate_kindはwish、または名詞「気持ち」等でoperator:feelingも存在するfeelingに限定する。文の一部、他者発言/伝聞/夢の未解決な帰属、否定/過去/推測/未解釈修飾/複文、memo_actionからこの意向を作らない。共有意味ownerや一般の守る活用文法は変更しない。
+
+希望nodeと同じ全文証拠でPROTECTIVE / SOURCE_EXPLICIT_ANNOTATIONを作り、対象別に集約して全記録と更新refを保持する。原文にない保護成果、他の行動の動機、原因、性格、診断、route順序へ変換しない。通常補足と完全引用訂正/撤回は既存のsource更新を通し、撤回された原spanを再利用しない。
+
+safe表示は対象nodeを「家族を守ることへの希望」等、注記を「守りたいという意向の記録です。実際に守れているかは確定していません。」とする。RN見出しは「守る対象」。realizerは対象の完全希望形・意味・同一全文証拠、保存validatorは希望対象と規定表示を照合する。既存4key annotation DTO、単一artifactの文章/図、private evidence分離、旧保存readを維持。別対象のBURDENとの共存は可能だが、一般的な保護行動や複文の保護意向の解釈は未実装。
+
+関連156検査・509 subtests、RN12 PASS。6合成本文の全文読取とbackend/RN本文・identity・node順・注記target照合、実生成→合成RPC commit→再生成なしreadを確認。Auth/DB I/Oは合成、修正版未配置。一般の注記/期間比較/IFの完了や商品受入れへ換算しない。
+
+### 3.17 u116 同じ条件の二期間を比較する開発preview（当時の履歴）
+
+内部AnalysisObservedMapRequestにoptional comparison_previous_requestを追加し、既存engine.generate入口で同じruntime/policyの現在/前期間を独立生成する。生成済み保存本文/DTOや旧policyのartifactを入力として再解釈しない。別owner、入れ子比較、不正/空/安全に表示できない前期間は拒否/UNAVAILABLE。現在artifactを初めて外へ返す前に§9.1のtyped PeriodComparisonをinline保持し、前artifactもprivate outcome.previous_artifactへ保持する。既存公開DTOへ前artifact ref/source locatorを流さない。
+
+COMPARABLEはUTC正規化した等長の直前隣接半開区間に限定。長さ違い、逆順、重複、非隣接、同一included record identityの再使用はNOT_COMPARABLE・理由あり・change_claims0。changeは既存4kind、両artifact/source-set refと差分を支えるevidence IDを持つ。nodeは命題の対象/格/述語/型/極性/様相/時制/相対日・明示接続、edgeは方向付き順序または無方向共起、注記はkind/対象意味/述語、不一致は対象意味集合を比較する。ID、source位置、丁寧形、成立pastへ解決済みのte依存形、記録件数差そのものを差分にしない。
+
+unknownは仮anchorや表示用の隣接pairから偽差分を作らず、不足scope/reasonの種類集合に限定する。明示先行欠落だけは実際にその記述へ結び付くため対象意味も比較する。原graphの対象/全証拠は保持し、未読内容全体や反復頻度を比較済みとはしない。差分なしの説明は「今回比較した記述内容では差分を検出していません」とし、本人の状態が不変とは言わない。差分ありも記録上の違いとし、改善/悪化/原因/達成へ変換しない。
+
+ASTOR既存prepare_saved_analysis_observed_mapは任意の前期間boundsを同じauth/report_modeで読み、両source snapshotを既存recheckで再確認してからsafe本文/DTOを返す。これは認証付きread-only開発entryで、公開HTTP routeや保存writerを追加しない。RNは既存比較3keyの4kind/理由をカードと同一本文へ表示。NO_PREVIOUSでは旧本文を変えない。
+
+関連166検査・541 subtests、RN13 PASS。両期間の原入力/補足/権限変化で結果を保留し、6合成本文のbackend/RN一致を確認。Auth/DB I/Oは合成、未配置。現在の保存guard/read/無効化は当該一期間だけを守るため、保存validatorのNO_PREVIOUS限定は維持する。比較の永続保存/API接続には前期間の訂正/削除/期限切れも反映する依存処理が必要であり、previewの二度読みで保存競合を閉じたとは扱わない。
+
+### 3.18 u117 比較のimmutable保存と既存APIへの接続候補
+
+既存analysis_observed_artifacts一表のまま、直前等長期間を内部導出するcomparison_snapshot RPCを追加。単一statementで両source集合を取得し、両guardを比較専用namespaceへ結合する。既存commitは元のREAD COMMITTED/auth→source table lock内で再確認、readは両期間の鮮度・tier・保持期限を確認し保存済本文を返す。無効化triggerは前期間の原入力/補足の追加・変更・削除も対象にする。旧単期guard/行/RPC署名/public DTOは維持する。
+
+private-evidence.v2はcurrentのallowlisted graph/source_membersにcomparison_dependencyとtyped比較、previous_evidenceをinlineで加える。前artifact/source-set参照を同一行で解決でき、原文/命題/visible labelをprivateへ追加しない。current/previousの公開投影を混在させず、API/RNは既存比較3keyだけを扱う。空前期間はNO_PREVIOUSでも依存を保持し、後日追加で失効する。前期間に実記録があるが生成不能の場合は失敗を保つ。
+
+前期間だけが保持期限外のときは明示comparison_eligible=falseとし、現在の単期分析を利用可能にする。保存済比較の期限切れはguard不一致で非表示。一般の認可/通信/生成エラーから単期へfallbackしない。等長計算はUTCに限定し、既存単期guardのsession timezone契約は変更しない。
+
+serviceの比較生成flagはCOCOLON_ANALYSIS_PERIOD_COMPARISON_MODE、developmentだけ有効、既定off。新migration20261004041627は未適用で、稼働DB/API/端末への効果0。対応SQL→対応API→有効化の順で個別対象の判断が必要。flag offは新規比較生成の停止で、旧API版の比較read互換を保証しない。関連173検査・548 subtests、隔離PGlite58項目、RN13検査、3保存本文の一致を確認。live DBや独立同時接続での競合・実機の商品受入れは未検証。全file/責務はcurrent03 §4.23、実行記録は06/API handoff末尾u117。
+
+
+### 3.19 u118 場面/担当に付く記述時点と明示接続
+
+既存PAST_PRESENCE/PAST_RESPONSIBILITYの完全SELF過去節へ、単一の今日/昨日/その後/それからを接続する。解析入口とfragment witness入口を同じprefix保持関数へ揃え、全文の元source_partsを維持。TODAYの共有presentは記述日のwitnessとして限定許可し、有限形のpast/正負は不変。SCENE retention・ROLE required/shouldの既存条件を維持する。safeの場面/担当にも同じprefixを投影し、元の完全命題へ再照合する。
+
+日語はsource-boundで、別sourceや後続節へ継承しない。日語だけで順序を作らず、既存の隣接完全節と明示接続からのみOBSERVED_ORDERへ接続。A→B→Aは3occurrence、訂正/撤回後の中間を橋渡ししない。開いた伝聞/夢や主語後の日語を名詞として誤採用する形は保留する。複数prefix/主語後日時/一般日時を新対応としない。
+
+関連181検査・606 subtests、既存RN13検査、合成6本文の同一text/identity/node・edge順を確認。保存/再読取は実service＋合成Auth/DB I/O、実機未検証。新規path/共有owner/API/DTO/RN/SQL/依存変更0。u117の未適用SQL/対応API配置を完了とはしない。全file/責務はcurrent03 §4.24、実行記録は06/API handoff末尾u118。
+
+### 3.20 2026-10-10 直前の文法拡張方針を撤回
+
+Mashの18:19 JSTの訂正により、直前に追加した行動欄の省略主語・仮名反復過去形の分岐を撤回した。API `4bb37a0afdc020576b0c1e33fa454674fd5b36c7` は配置候補ではない。compiler/realizerと専用vertical検査を直前の631c状態へ戻し、生成条件を緩めない。旧検証結果はAPI運用記録§37の経緯としてのみ保持する。
+
+### 3.21 2026-10-10 分析に必要な入力不足の正常な待ち状態
+
+既存engineがsource freezeとgraph compileを終えた後、現在期間のnodeが0件で `UNAVAILABLE`／`analysis_observed_route_not_established`／artifactなしを返した場合だけ、保存serviceは「まだ分析を表示できる情報がない」状態として扱う。件数・文字数の新しい閾値を設けず、分析要素を補って生成しない。
+
+latest/月次ensureはHTTP200・status=ok・reason=insufficient_input・skip_reason=analysis_insufficient_input、refreshed/has_visible_content/history_saved=false、本文/meta/title/生成時刻nullを返す。保存commit・未完成map・不足案内のDB保存は行わない。既存の正常空期間、ensure=false/read_onlyの保存不在はno_visible_contentを維持する。内部処理/前期比較/無効source/権限/通信・保存障害は情報不足へ変換しない。force再生成の不足で古い結果をfallback表示しない。
+
+RNの既存わたしマップ画面は、整合した不足状態だけに「入力情報が少ないため、まだ分析を表示できません。」を通常表示する。分析renderer/出力/既読登録を呼ばず、後日の成立結果へ通常更新できる。HTTP失敗や矛盾したDTOをこの文言で隠さない。今回の変更は保存schema・共有意味作者・語彙を変えず、既存API値と画面分岐の追加に限定する。検証と指定配置・nativeビルドはAPI運用記録§38。
+
+## 4. Period source-set freeze
+
+`AnalysisObservedMapRequest`:
+
+```text
+request_id
+authenticated_owner_scope
+period_start / period_end
+members[]:
+  saved_record_ref
+  saved_record_version
+  member_role = PERIOD_RECORD_IDENTITY
+  source_commitment
+  inclusion_status
+  inclusion_or_exclusion_reason
+  child_source_envelope_refs[]:
+    ORIGINAL_INPUT exact1
+    optional SUPPLEMENTAL_ANSWER exact1
+source_set_version
+dedupe_policy_version
+comparability_policy_version
+analysis_policy_version
+locale = ja-JP
+```
+
+source adapter minimum duties:
+
+- same-owner entitlement
+- period inclusion / exclusion reason
+- record version freeze
+- duplicate detection
+- source ordering evidence
+- privacy class
+- conflict / missing source preservation
+- Piece / Emlis bodyとsimulation outputのsource mixing拒否
+
+`members[]`はparallel arrayにせず、record identity / version / membership role / commitment / include-exclude reason / child envelope refsを一objectへ束ねる。`PERIOD_RECORD_IDENTITY`はSourceEnvelope roleではない。included recordのoriginal / supplemental childだけを別meaning-bearing SourceEnvelope refとして持つ。
+
+一件の記録を傾向へ昇格しない。record countだけでroute edgeを作らない。
+
+## 5. Event frame
+
+各recordから次のtyped frameを作る。
+
+```text
+scene
+role
+attention_or_thought
+action_or_nonaction
+immediate_result_or_aftermath
+participants
+temporal_scope
+polarity / modality
+unknown fields
+source evidence refs
+conflict refs
+```
+
+欠けたstepをfixed labelやgeneric resultで補わない。partial frameはvalid resultである。
+
+## 6. `GroundedMeaningGraph` and `HypotheticalScenarioGraph`
+
+`GroundedMeaningGraph`はsource-grounded observed / derived / user-confirmed / user-corrected / unknown / conflictだけを持つ。
+
+```text
+epistemic_state:
+  SOURCE_EXPLICIT
+  FORMAL_DERIVED
+  USER_CONFIRMED
+  USER_CORRECTED
+  UNKNOWN
+  CONFLICT
+```
+
+IFは別graphである。
+
+```text
+HypotheticalScenarioGraph
+  scenario_graph_id
+  scenario_graph_version
+  base_observed_map_ref
+  base_route_ref
+  branch_point_id
+  branch_intent_source_ref
+  constraint_source_refs[]
+  scenario_nodes[]
+  scenario_edges[]
+  unmodelled_factors[]
+  status
+```
+
+observed graphをIF nodeでmutationしない。IF graphのstepはoriginを必須とする。
+
+```text
+OBSERVED_ANCHOR
+USER_CHOICE
+SIMULATED_EXTENSION
+UNKNOWN
+```
+
+## 7. Observed route model
+
+### 7.1 Path nodes
+
+Observed route pathのnode kindは次だけである。
+
+```text
+SCENE
+ROLE
+ATTENTION_OR_THOUGHT
+ACTION_OR_NONACTION
+IMMEDIATE_RESULT_OR_AFTERMATH
+```
+
+protective、burden、unknownはpath nodeへ混ぜない。
+
+### 7.2 Observed edges
+
+```text
+OBSERVED_ORDER
+REPEATED_COOCCURRENCE
+```
+
+- `OBSERVED_ORDER`: same-record等のexplicit order evidenceがある。
+- `REPEATED_COOCCURRENCE`:複数sourceで一緒に現れるが、direction / causalityを主張しない。
+
+共起を矢印因果へ変換しない。
+
+`SOURCE_EXPLICIT` / `FORMAL_DERIVED` claimと上記edgeにはexact evidence refsを必須とする。evidenceなしobserved claimを`UNKNOWN`で代替しない。
+
+### 7.3 Unknown gap
+
+`UNKNOWN_GAP`は別identityで、次を持つ。
+
+```text
+gap_id
+between_node_refs[]
+missing_scope
+reason_code
+source_set_ref
+```
+
+unknownはobserved factではなく、足りない範囲を示す非矢印markerである。
+
+## 8. Protective / burden annotations
+
+protectiveとburdenはroute pathではなくnon-sequential annotation claimである。
+
+```text
+AnalysisAnnotationClaim
+  annotation_id
+  kind = PROTECTIVE | BURDEN
+  target_node_or_edge_ref
+  annotation_state = SOURCE_EXPLICIT_ANNOTATION | EVIDENCE_BOUND_INTERPRETIVE_HYPOTHESIS
+  evidence_refs[]
+  uncertainty
+  alternative_explanations[]
+  forbidden_promotions[]
+```
+
+direct source statementとinterpretive hypothesisを分ける。`INTERPRETIVE_HYPOTHESIS` edgeはannotation graphだけに存在し、observed route edgeへ入れない。
+
+## 9. `ObservedSelfStructureMap`
+
+```text
+ObservedSelfStructureMapPayload
+  kind = ANALYSIS_OBSERVED_SELF_STRUCTURE_MAP
+  wire_kind = watashi.map.v2
+  source_set_ref
+  period
+  route_graph
+  annotation_claims[]
+  unknown_gaps[]
+  conflict_refs[]
+  comparison_availability = NO_PREVIOUS | COMPARISON_PRESENT
+  period_comparisons[] = exact0..1, canonical payload内へinline
+  text_projection_ref
+  visual_projection_ref
+
+ObservedSelfStructureMap = GenerationArtifactBundle<ObservedSelfStructureMapPayload>
+  artifact_id
+  artifact_version
+  artifact_kind = ANALYSIS_OBSERVED_SELF_STRUCTURE_MAP
+  epistemic_partition = OBSERVED
+  semantic_graph_ref
+  experience_plan_ref
+  primary_artifact = ObservedSelfStructureMapPayload
+  realization_trace_ref
+  quality_report_ref
+  lifecycle_bindings
+```
+
+各period artifactは別identityである。latest pointer、history item、detail、text、graphは同じcanonical `artifact_id@version`へresolveする。comparison objectも同じimmutable stored artifactに含め、別のunresolved private locatorへ逃がさない。
+
+### 9.1 Period comparison
+
+```text
+PeriodComparison
+  comparison_id
+  current_artifact_ref
+  current_source_set_ref
+  previous_artifact_ref
+  previous_source_set_ref
+  comparability_state = COMPARABLE | NOT_COMPARABLE
+  reason_codes[]
+  change_claims[]:
+    change_kind = ROUTE_EVIDENCE_CHANGED
+                | ANNOTATION_EVIDENCE_CHANGED
+                | UNKNOWN_SCOPE_CHANGED
+                | CONFLICT_STATE_CHANGED
+    current_ref
+    previous_ref
+    evidence_refs[]
+```
+
+`NOT_COMPARABLE`では`change_claims` exact0、reason exact1以上とする。`COMPARABLE`でも差分を改善、悪化、原因、達成へ自動昇格しない。
+
+previous artifactがない初回は`comparison_availability=NO_PREVIOUS`、`period_comparisons` exact0とする。safe projectionも`NO_PREVIOUS`を明示し、架空のprevious / change claimを作らない。
+
+## 10. IF route
+
+### 10.1 Request
+
+```text
+AnalysisIfRouteRequest
+  base_observed_map_ref
+  base_route_ref
+  branch_point_id
+  branch_intent_source_ref
+  constraint_source_refs[]
+  requested_candidate_count = 1..3
+  analysis_if_policy_version
+```
+
+branch point / intent / constraintが足りない場合、Analysis ownerが`ClarificationRequest`を決める。Emlis question policyを流用しない。answerはsimulation-session sourceであり、period observed sourceへ入れない。
+
+### 10.2 Scenario candidates
+
+Analysis ownerはmeaningの異なるscenarioを1–3含む`IfScenarioCandidateSet`をexact1作れる。
+
+- candidate間をsuccess / improvement / likelihoodでrankしない。
+- best routeを自動選択しない。
+- 1–3を並列提示する。
+- required conditions、frictions、unknown、unmodelled factorsを表示する。
+- result probability、future guarantee、optimality scoreを生成しない。
+
+CMEE comparatorが選べるのは、同じscenario graphの`RealizationCandidateSet`だけである。意味の異なるscenarioをsurface qualityで一つへ選ばない。
+
+### 10.3 IF scenario set artifact
+
+```text
+IfRouteSimulationPayload
+  kind = ANALYSIS_IF_ROUTE_SIMULATION
+  wire_kind = watashi.if-route.v1
+  scenario_artifact_ref
+  base_observed_map_ref
+  base_route_ref
+  branch_point_id
+  scenario_graph_ref
+  branch_intent_source_ref
+  condition_refs[]
+  unmodelled_factor_refs[]
+  text_projection_ref
+  visual_projection_ref
+  scenario_display_label
+
+IfScenarioCandidateSetPayload
+  kind = ANALYSIS_IF_SCENARIO_SET
+  wire_kind = watashi.if-route-set.v1
+  candidate_set_id
+  base_observed_map_ref
+  base_route_ref
+  scenarios[] = IfRouteSimulationPayload, exact1..3
+  display_order[] = scenario_artifact_ref exact set
+  selection_policy = PARALLEL_NOT_RANKED
+
+IfScenarioCandidateSet = GenerationArtifactBundle<IfScenarioCandidateSetPayload>
+  artifact_id
+  artifact_version
+  artifact_kind = ANALYSIS_IF_SCENARIO_SET
+  epistemic_partition = HYPOTHETICAL
+  semantic_graph_ref = candidate_set_id
+  experience_plan_ref
+  primary_artifact = IfScenarioCandidateSetPayload
+  realization_trace_ref
+  quality_report_ref
+  lifecycle_bindings
+```
+
+scenario candidateの意味identityはcandidate set内で保ち、Bundleの`companion_artifacts`へ曖昧に並べない。全scenarioは同一`base_observed_map_ref` / `base_route_ref`へbindする。`display_order`は表示順でありrankではない。
+
+branch point / intent / constraint不足時は`EngineOutcome(status=QUESTION_PENDING, artifact_bundle=null, clarification_request=...)`を返し、空の`HypotheticalScenarioGraph`やIF artifactを作らない。
+
+## 11. `SavedRouteIntent`
+
+userが明示保存した関心方向は、IF artifactともobserved mapとも別identityである。
+
+```text
+SavedRouteIntentPayload
+  kind = ANALYSIS_SAVED_ROUTE_INTENT
+  wire_kind = watashi.saved-route-intent.v1
+  source_scenario_set_ref
+  selected_scenario_ref
+  selection_source_ref
+  user_note_source_ref?
+  saved_at
+
+SavedRouteIntent = GenerationArtifactBundle<SavedRouteIntentPayload>
+  artifact_id
+  artifact_version
+  artifact_kind = ANALYSIS_SAVED_ROUTE_INTENT
+  epistemic_partition = USER_SAVED_INTENT
+  semantic_graph_ref = selected scenario graph
+  parent_artifact_refs includes source scenario set
+  source_commitments includes user selection source + optional note only
+  experience_plan_ref
+  primary_artifact = SavedRouteIntentPayload
+  realization_trace_ref
+  quality_report_ref
+  lifecycle_bindings
+```
+
+SavedRouteIntentは`ANALYSIS_SAVE_ROUTE_INTENT` operationでCMEEがcompileし、Analysis lifecycle serviceがauth、retrieval、persistence、read accessを所有する。userがscenarioを選択した操作を`SIMULATION_SESSION_MATERIAL` SourceEnvelope exact1としてcommitし、optional noteも別sourceにする。scenario set / simulation / scenario graphはderived parentでありsource commitmentではない。`selected_scenario_ref`はsource set member exact1でなければREJECTする。
+
+saved intentをobservedへ自動昇格しない。後続記録との比較をachievement / failure / causal proofへしない。
+
+## 12. Text / visual projection
+
+CMEE shared graph projection protocolはsemantic edgeを発明しない。Analysis compilerが作ったtyped graphを表示planへ投影するだけである。
+
+`AnalysisVisualPlan`:
+
+```text
+projection_id
+projection_of = artifact_id@version
+node_specs[]
+edge_specs[]
+lane_specs[]
+group_specs[]
+evidence_badges[]
+unknown_badges[]
+branch_markers[]
+style_tokens:
+  theme_ref
+  layout_policy_ref
+  accessibility_policy_ref
+accessibility_linear_order[]
+text_fallback_ref
+```
+
+V1-D observed mapでは`branch_markers` exact0でよい。V1-E scenarioではbranch point / user-selected branchを`branch_markers`で明示する。`group_specs`はvisual groupingだけを表し、semantic edgeやscenario rankを作らない。
+
+visual semantics:
+
+- observed route: solid + label
+- simulated route: clearly labelled dashed + icon
+- unknown gap: broken / dotted + unknown label
+- user-selected branch: explicit marker
+- 色だけに依存しない
+
+RN rendererはAnalysis product ownerである。text / graph / accessible linear viewは同じcanonical artifactへresolveする。
+
+canonical stored `watashi.map.v2` artifactはprivateで、exact evidence / source refsを保持する。API / RNへはaccess ownerがversioned safe projectionを作り、`projection_of = artifact_id@version`、visible node / edge / badge、anonymous evidence count、unknown / conflict / period comparison stateだけを渡す。raw body、private source ID、private evidence locator、source digestはprojection 0である。latest / history / detailが同じcanonical identityへresolveすることは、private stored JSONと全audience向けprojection bytesが同一であることを意味しない。
+
+projectionでも`OBSERVED_ORDER`だけが`from_ref / to_ref`を持つ。`REPEATED_COOCCURRENCE`はunordered `endpoint_refs[]`で表し、矢印化しない。annotation / unknown / conflictはvisible labelだけのstring listにせず、safeな`target_ref` / `between_node_refs`を保持してgraph上の対応を失わない。
+
+V1-E safe projectionは`watashi.if-route-set.v1`、SavedRouteIntent safe projectionは`watashi.saved-route-intent.v1`を使う。IF projectionはscenario origin、required condition、friction、unmodelled factorを保ち、rank / score / probabilityを持たない。SavedRouteIntent projectionはowner-authorized exact1で、選択scenarioとoptional noteだけを返す。どちらもobserved safe projectionへ混ぜない。
+
+## 13. Safety and epistemic gates
+
+hard reject:
+
+- unsupported diagnosis / personality / hidden cause
+- one record -> trend
+- cooccurrence -> causal order
+- observed / simulated / saved identity mixing
+- protective / burden -> fact promotion
+- future / probability / optimality claim
+- filler step / generic result
+- evidence ref absent observed claim / edge
+- hidden conflict / insufficient data
+- high-care IF without required confirmation
+- Piece / Emlis voice or body reuse
+
+valid failure resultはpartial map、unknown gap、conflict表示、IF unavailableである。fixed four-step fallbackへ戻さない。
+
+## 14. Verification
+
+V1-D proposed tests:
+
+```text
+ai/tests/test_cmee_analysis_v1d_source_adapter.py
+ai/tests/test_cmee_analysis_v1d_intent_compiler.py
+ai/tests/test_cmee_analysis_v1d_observed_route_realizer.py
+ai/tests/test_cmee_analysis_v1d_vertical.py
+ai/tests/test_cmee_analysis_v1d_negative_contracts.py
+```
+
+V1-E proposed tests:
+
+```text
+ai/tests/test_cmee_analysis_v1e_if_route_realizer.py
+ai/tests/test_cmee_analysis_v1e_identity_separation.py
+ai/tests/test_cmee_analysis_v1e_negative_contracts.py
+```
+
+machine acceptance:
+
+- visible observed claim / edge evidence ref coverage 100%
+- filler step / result 0
+- observed graph simulation mutation 0
+- simulated step origin label 100%
+- future / causal / diagnosis / personality / optimality assertion 0
+- text / visual / pointer / history identity mismatch 0
+- unknown / conflict concealment 0
+- safe projectionのraw body / private source ID / private evidence locator / source digest leakage 0
+- policy-external projection read 0
+
+Human Product Read:
+
+- 観測・仮想・unknownを区別できる。
+- 現在のrouteとして読めるが、人格診断に見えない。
+- protectiveとburdenが原因断定に見えない。
+- IFが正解や予測として押し付けられていない。
+- actual RN表示でroute / branch / evidence / unknownが読める。
+
+## 15. Migration and cutover
+
+### 15.1 Stored artifact and wire identity
+
+V1-D first storage candidateはcurrent self-structure report familyへimmutable `watashi.map.v2` JSONをadditive保存する。
+
+```text
+wire kind = watashi.map.v2
+stored raw user body = 0
+stored evidence refs = required
+stored artifact_id@version = canonical
+latest pointer / history item / detail / text / graph = same stored artifact
+view-time meaning or route regeneration = 0
+API / RN = audience-authorized safe projection_of canonical artifact
+```
+
+implementation前にfresh DB row contract、payload bytes、read/write latency、index / history cost、retention、RLS / accessをpreflightする。current table boundary内で成立しない場合、evidenceを落として通さず`NO_SAFE_ANALYSIS_V1D_STORAGE_STOP`とし、child tableまたはdedicated artifact storageをseparate Mash decisionへ出す。
+
+existing tier、access、unread、dirty / refresh semanticsをregression gateに含める。historical `watashi.map.v1`はread-only version dispatchで既存rendererへ渡す。global V1-D activationがOFFの間はv1 generationを選べるが、V1-D active requestの失敗からv1へper-request fallbackしない。v2 payloadをv1 shapeとして解釈しない。
+
+V1-Eのfirst storage candidateは、Analysis lifecycle ownerが`watashi.if-route-set.v1`と`watashi.saved-route-intent.v1`をobserved mapとは別artifact kind / namespaceでimmutable保存する。parent observed map、scenario set、selected scenarioのversion refを固定し、view-time regeneration 0とする。DB / RLS / payload size / latency / retention / read-policy preflightで安全に分離できなければ`NO_SAFE_ANALYSIS_V1E_STORAGE_STOP`とし、observed `watashi.map.v2`へ混ぜて通さない。
+
+V1-E safe projectionはcanonical IF / Saved identityからAnalysis access ownerが生成する。IF / SavedのAPI / RN pathとstorage exact ownerはV1-E separate approvalでfresh固定し、それまでmaterialize 0である。
+
+### 15.1.1 u95 actual storage fit-gapと別判断候補（当時未承認、u96承認済み）
+
+2026-10-03にSupabase `cocolon-project` のcatalog／columns／constraints／grants／policies／view定義だけをread-only確認した。ユーザー行・入力本文は読んでいない。
+
+- `myprofile_reports`はRLS enabled、authenticatedのown SELECT policyがあり、content_jsonを含む本人行の直接読取が可能。safe API serializerを通さずprivate evidenceを取得できてしまう。
+- `self_structure_reports`は同tableの全列view、security_invoker=true、service_role SELECTのみ。viewが限定されても基底tableの本人direct SELECTは残る。
+- uniqueは`(user_id,report_type,period_start,period_end)`、期間列はdate。既存latest writerは固定1970期間へmerge-upsert、monthly writerも同uniqueへupsert／旧schema行削除を行う。private immutable versionの格納先にはそのまま使えない。
+- `emotions`のcreated_atはtimestamp without time zone、既存saved-input ownerはUTCと定義。version／deleted_at列はなく、exact7field commitmentと実在本人行を使う。
+- byte／latency／history costの実測や新schema validationは未実行。既に確認できたprivate read／immutabilityの不成立に対し、無関係な前段測定を増やさない。
+
+従って現行tableへの格納は`NO_SAFE_ANALYSIS_V1D_STORAGE_STOP`。上の§15.1に従い、次の**1案をMashの別判断へ出す**。この段落は承認済みschemaへの変更ではなくreviewable proposalで、SQL／table／flagはまだ追加・適用していない。
+
+| 候補 | 内容 |
+|---|---|
+| 保存先 | 同じSupabaseのbackend専用`analysis_observed_artifacts` table 1つ。外部service追加なし |
+| identity／access | immutable artifact_id＋version、本人owner、期間、report mode。user削除へ連動、RLS enabled、anon／authenticated直接権限なし、service_roleのみ |
+| 内容 | raw user body 0。closed serializerでcanonical evidence refs／source commitments／graph identityと、生成時のsafe projection／textを保存。`asdict(current artifact)`による原文label保存は禁止 |
+| freshness／削除 | commit時に本人・tier・source set／version／補足revisionを同transactionで再照合。元記録・補足の変更／削除時は影響artifactを無効化／削除し、readでも検証。request-local再読取をatomic writeと扱わない |
+| API | 既存self-structure latest／history／detailのV2分岐だけへ接続。同じ保存identityからsafe projectionを返し、view-time意味再生成0。Free履歴不可・Plus deep不可をserverでも実施 |
+| legacy | 旧myprofile_reportsと旧rendererを履歴用に維持。MyProfile互換はcanonicalへdelegate。`/mymodel/infer`／cron／workerの旧builderにprivate metaを共通追加しない |
+| 進め方 | この保存方式の判断後にmigration／serializer／保存RPCとAPI差分を実装・検証。現在のPR反映からDB適用・公開cutoverへ自動進行しない |
+
+既存tableのdirect SELECT権限と全旧writerを変える方式より、分析専用の1 tableへ限定する方が変更範囲が小さいため推奨する。旧table全体の権限を黙って剥奪して設計条件を満たしたことにはしない。
+
+### 15.1.2 u96/u97 承認済み保存実装・DB適用
+
+Mashの同じDBへのserver専用table1追加承認により、上記案を実装した。実migration `20261003204421 / analysis_observed_artifacts`、source `supabase/migrations/20261003134440_analysis_observed_artifacts.sql`。14列・14制約・4 index・6関数・5 triggerを事後照合し、関数body全文一致。RLS有効、anon/authenticated直接権限0。private evidenceのsource refs/commitmentと既に生成したsafe text/projectionを保存し、原入力JSON/private node labelは保存しない。
+
+新owner `analysis_observed_service.py` がSQL snapshot→既存CMEE→closed serializer→atomic commit→safe readを担当。DB guardはCMEE commitmentと別namespace。READ COMMITTED＋auth KEY SHARE NOWAIT＋4source表SHARE NOWAITで全cohort/tierを再照合する。生成はlock外。競合409・ACK不明503。source/補足変更・削除、account削除で関連artifactを除去し、read時も再照合。table lockは他user書込にも短く競合し得る。
+
+既存latest/status/monthly/history/detail/unreadへ同じ保存identityを接続。読取で意味を生成し直さず、保存text/graphの一致を検証。旧履歴はaccess後に混在表示し、Free履歴とPlus deepをserverで拒否する。status/latestはmode＋期間で選別してからlimit。RN既読は表示したprojection_ofに固定。
+
+`COCOLON_ANALYSIS_OBSERVED_MODE`はoff既定／read_only保存読取／development生成保存。稼働envは未変更。monthly include_secret=false/now_isoは未対応400。旧/mymodel・cron/workerは今回変更しておらず、下記global単一owner cutoverの完了ではない。
+
+Python54、RN11＋旧互換2、隔離PGlite31項目PASS。実ユーザー入力の生成・稼働APIの保存往復・複数接続負荷・nativeは未確認。適用応答待ちの停止からの再開経緯、実権限、既知範囲、次の指定API開発配置は06/API handoff末尾u96/u97に記録。全file mapはAnalysis map §4.7。
+
+### 15.2 One-owner cutover
+
+V1-D activation packet:
+
+```text
+new observed-map generation owner exact1
+current Watashi Map v1 generation owner active ingress 0
+per-request silent fallback 0
+dual-write / dual-render truth owner 0
+```
+
+old renderer / API shapeをcompatibility projectionとして使う場合も、truth generation ownerはexact1とする。安全なmigrationができなければ`NO_SAFE_ANALYSIS_V1D_CUTOVER_STOP`。
+
+V1-E activationはV1-D後の別packetで行う。V1-DとIFを一度にactivateしない。
+
+## 16. Completion
+
+```text
+CMEE_V1D_ANALYSIS_OBSERVED_ROUTE_OPERATIONAL
+```
+
+requires:
+
+- period sourceからpartialを許すevidence-bound observed routeを作る。
+- observed / annotation / unknown / conflict identityが分離する。
+- latest / history / detail / text / visualがcanonical identityへ一致する。
+- current generic fallback ownerがactive ingress 0になる。
+- Product Readとactual RN proofを通過する。
+
+```text
+CMEE_V1E_ANALYSIS_IF_ROUTE_OPERATIONAL
+```
+
+requires:
+
+- observed mapをmutationせず1–3 scenarioを作る。
+- candidate set exact1内でsame base map / routeを持ち、表示順をrankへ昇格しない。
+- scenarioをrank / optimal選択しない。
+- observed / hypothetical / saved identityが分離する。
+- user selection sourceとderived scenario parentを分離する。
+- IF / Savedのseparate immutable storage / safe projectionを通過する。
+- simulation safety / clarification / display proofを通過する。
+
+V1-DまたはV1-Eをthree-core completionへ自動変換しない。

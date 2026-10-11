@@ -1,0 +1,243 @@
+# Piece contracts and native library compilation; no app build, signing or deploy.
+name: Piece RN preview and owner contracts
+'on':
+  push:
+    branches:
+      - agent/three-core-cmee-current-structure-20260815
+    paths:
+      - .github/workflows/piece-rn-contracts.yml
+      - features/piece/**
+      - components/piece/**
+      - screens/input/InputPieceActionArea.js
+      - screens/InputScreen.js
+      - screens/PieceOwnerHistoryScreen.js
+      - screens/PieceHistoryMenuScreen.js
+      - navigation/PieceStackNavigator.js
+      - AppRuntimeContext.js
+      - tests/piece-v2-*.test.js
+      - tests/fixtures/piece-b9-wrap-oracle.json
+      - package.json
+      - package-lock.json
+      - ios/Podfile
+      - ios/Podfile.lock
+      - ios/tempCocolon/Info.plist
+      - patches/react-native-view-shot+5.1.1.patch
+      - patches/react-native-file-access+3.2.0.patch
+      - patches/@react-native-camera-roll+camera-roll+7.10.2.patch
+      - android/build.gradle
+      - android/app/build.gradle
+      - android/settings.gradle
+      - android/gradle.properties
+      - android/gradle/wrapper/gradle-wrapper.properties
+      - android/app/src/main/res/xml/share_download_paths.xml
+      - android/app/src/main/java/com/anonymous/cocolonmvp/piece/**
+      - android/app/src/main/java/com/anonymous/cocolonmvp/MainApplication.java
+      - ios/tempCocolon/PieceTextMetrics.mm
+      - ios/tempCocolon.xcodeproj/project.pbxproj
+      - patches/react-native+0.77.3.patch
+permissions:
+  contents: read
+jobs:
+  piece-rn-contracts:
+    if: github.repository == 'MassyuRed/Cocolon'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Install only the existing test compiler in a disposable directory
+        run: npm install --prefix "$RUNNER_TEMP/piece-node-tests" --ignore-scripts --no-audit --no-fund typescript@5.2.2
+      - name: Verify Piece preview and owner source suites
+        shell: bash
+        run: |
+          set -euo pipefail
+          export NODE_PATH="$RUNNER_TEMP/piece-node-tests/node_modules"
+          git rev-parse HEAD
+          node --version
+          node -p "require('typescript').version"
+          node --test tests/piece-v2-contracts.test.js tests/piece-v2-state-models.test.js tests/piece-v2-preview-display.test.js tests/piece-v2-runtime.test.js tests/piece-v2-feature-disabled.test.js tests/piece-v2-saved-input-host.test.js tests/piece-v2-source-ref.test.js tests/piece-v2-input-screen.test.js tests/piece-v2-owner-history.test.js tests/piece-v2-renderer.test.js tests/piece-v2-measured-wrap.test.js tests/piece-v2-export.test.js
+
+  piece-android-source:
+    if: github.repository == 'MassyuRed/Cocolon'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Compile only the Piece bridge against pinned RN and Android APIs
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PIECE_COMPILE_DIR="$RUNNER_TEMP/piece-android-source"
+          python3 - <<'PY'
+          import hashlib, os, pathlib, urllib.request, zipfile
+          root = pathlib.Path(os.environ['PIECE_COMPILE_DIR'])
+          root.mkdir()
+          artifacts = {
+            'react': 'https://maven-central.storage-download.googleapis.com/maven2/com/facebook/react/react-android/0.77.3/react-android-0.77.3-debug.aar',
+            'appcompat': 'https://dl.google.com/dl/android/maven2/androidx/appcompat/appcompat/1.6.1/appcompat-1.6.1.aar',
+            'core': 'https://dl.google.com/dl/android/maven2/androidx/core/core/1.9.0/core-1.9.0.aar',
+            'kotlin': 'https://repo.maven.apache.org/maven2/org/jetbrains/kotlin/kotlin-stdlib/2.0.21/kotlin-stdlib-2.0.21.jar',
+          }
+          for name, url in artifacts.items():
+            target = root / (name + ('.aar' if url.endswith('.aar') else '.jar'))
+            print('Fetching pinned compiler artifact:', name, flush=True)
+            urllib.request.urlretrieve(url, target)
+            if name == 'react':
+              # Maven Central's pinned 0.77.3 Gradle metadata checksum.
+              assert hashlib.sha256(target.read_bytes()).hexdigest() == 'a10e4f6140bc6e081e9852b0b535bd2175d1e28f7ef1da6a63dc345a6dc6f501'
+            if target.suffix == '.aar':
+              with zipfile.ZipFile(target) as archive:
+                (root / (name + '.jar')).write_bytes(archive.read('classes.jar'))
+          PY
+          javac -version
+          test -f "$ANDROID_HOME/platforms/android-35/android.jar"
+          javac -proc:none -source 17 -target 17 -classpath "$ANDROID_HOME/platforms/android-35/android.jar:$PIECE_COMPILE_DIR/*" -d "$PIECE_COMPILE_DIR/classes" android/app/src/main/java/com/anonymous/cocolonmvp/piece/PieceTextMetricsModule.java
+  piece-ios-source:
+    if: github.repository == 'MassyuRed/Cocolon'
+    runs-on: macos-15
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - name: Check the RN patch and compile only the Piece Objective-C++ source
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PIECE_COMPILE_DIR="$RUNNER_TEMP/piece-ios-source"
+          mkdir -p "$PIECE_COMPILE_DIR/node_modules/react-native" "$PIECE_COMPILE_DIR/include/React"
+          curl --fail --silent --show-error --location https://registry.npmjs.org/react-native/-/react-native-0.77.3.tgz -o "$PIECE_COMPILE_DIR/react-native.tgz"
+          tar -xzf "$PIECE_COMPILE_DIR/react-native.tgz" --strip-components=1 -C "$PIECE_COMPILE_DIR/node_modules/react-native"
+          patch --batch --fuzz=0 -d "$PIECE_COMPILE_DIR" -p1 < patches/react-native+0.77.3.patch
+          python3 - <<'PY'
+          import os, pathlib
+          root = pathlib.Path(os.environ['PIECE_COMPILE_DIR'])
+          source = root / 'node_modules/react-native'
+          for directory in ['React', 'Libraries']:
+            for header in sorted((source / directory).rglob('*.h')):
+              if header.name.startswith(('RCT', 'UIView+React')):
+                link = root / 'include/React' / header.name
+                if not link.exists(): link.symlink_to(header)
+          (root / 'include/RCTDeprecation').symlink_to(source / 'ReactApple/Libraries/RCTFoundation/RCTDeprecation/Exported', target_is_directory=True)
+          PY
+          xcrun clang --version
+          xcrun clang -fsyntax-only -x objective-c++ -std=c++20 -fobjc-arc -fblocks -fmodules -target arm64-apple-ios15.1-simulator -isysroot "$(xcrun --sdk iphonesimulator --show-sdk-path)" -I "$PIECE_COMPILE_DIR/include" -I "$PIECE_COMPILE_DIR/node_modules/react-native/ReactCommon/yoga" -Werror=objc-method-access -Werror=implicit-function-declaration ios/tempCocolon/PieceTextMetrics.mm
+          plutil -lint ios/tempCocolon.xcodeproj/project.pbxproj
+
+  piece-export-pods:
+    if: github.repository == 'MassyuRed/Cocolon'
+    runs-on: macos-15
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Limit Pod resolution to native dependency changes
+        id: scope
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null || ! git diff --quiet "$BEFORE" HEAD -- package.json package-lock.json ios/Podfile ios/Podfile.lock patches .github/workflows/piece-rn-contracts.yml; then
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/setup-node@v6
+        if: steps.scope.outputs.changed == 'true'
+        with:
+          node-version: '24.19.0'
+      - name: Install locked packages and apply native patches
+        if: steps.scope.outputs.changed == 'true'
+        run: npm ci --no-audit --no-fund
+      - name: Resolve native Pods without building, signing or distribution
+        if: steps.scope.outputs.changed == 'true'
+        working-directory: ios
+        run: |
+          pod --version
+          pod install
+          plutil -lint tempCocolon/Info.plist
+          git diff --exit-code -- Podfile.lock
+      - name: Compile the four export Pods for the simulator without signing
+        if: steps.scope.outputs.changed == 'true'
+        working-directory: ios
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcodebuild -quiet -jobs 3 -project Pods/Pods.xcodeproj -configuration Debug \
+            -sdk iphonesimulator -arch arm64 \
+            -target react-native-view-shot -target RNShare \
+            -target react-native-cameraroll -target ReactNativeFileAccess build \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY= \
+            ONLY_ACTIVE_ARCH=YES \
+            SYMROOT="$RUNNER_TEMP/piece-export-ios-build" \
+            OBJROOT="$RUNNER_TEMP/piece-export-ios-obj"
+      - uses: actions/upload-artifact@v4
+        if: steps.scope.outputs.changed == 'true' && success()
+        with:
+          name: piece-export-pod-lock
+          path: ios/Podfile.lock
+          retention-days: 7
+
+  piece-export-android:
+    if: github.repository == 'MassyuRed/Cocolon'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Limit native compilation to dependency or Android build changes
+        id: scope
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null || ! git diff --quiet "$BEFORE" HEAD -- package.json package-lock.json patches android .github/workflows/piece-rn-contracts.yml; then
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/setup-node@v6
+        if: steps.scope.outputs.changed == 'true'
+        with:
+          node-version: '24.19.0'
+      - uses: actions/setup-java@v4
+        if: steps.scope.outputs.changed == 'true'
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Install locked packages and apply native patches
+        if: steps.scope.outputs.changed == 'true'
+        run: npm ci --no-audit --no-fund
+      - name: Compile only the four Android export libraries
+        if: steps.scope.outputs.changed == 'true'
+        working-directory: android
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -f key.properties
+          test -f app/debug.keystore
+          # Root Gradle evaluates :app even for library tasks. Only the tracked
+          # public debug keystore is referenced; no signing task is requested.
+          cp key.properties "$RUNNER_TEMP/piece-original-key.properties"
+          trap 'mv "$RUNNER_TEMP/piece-original-key.properties" key.properties' EXIT
+          cat > key.properties <<'PROPERTIES'
+          storeFile=debug.keystore
+          storePassword=android
+          keyAlias=androiddebugkey
+          keyPassword=android
+          PROPERTIES
+          bash ./gradlew --no-daemon --console=plain --stacktrace \
+            :react-native-view-shot:compileDebugJavaWithJavac \
+            :react-native-share:compileDebugJavaWithJavac \
+            :react-native-camera-roll_camera-roll:compileDebugJavaWithJavac \
+            :react-native-file-access:compileDebugKotlin \
+            :react-native-file-access:compileDebugJavaWithJavac
