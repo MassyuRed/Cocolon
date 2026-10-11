@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u192 内容修正（2026-10-11 JST・未配置）**：本人の過去行動で「同僚からの資料」「家族への手紙」等の対象内部の関係が読めず分析から落ちる欠落を補修。からの/への/との/でのを対象内に保持し、引用・否認・時点の未解釈は保留。期間集約・明示順序・原文・訂正/比較・合成保存再読と実RN modelを確認。計388テストを確認（初回の未取得依存による3errorは依存復元後に該当3件を再実行して成功）。元の28日例の本文は変わらず、未対応行動と全体ルートUIは残件。新規検査fileの地図は§4.25、詳細は04 §3.22と06/API handoff末尾u192。本人生成→保存再表示は未完了。
+
 **u191 内容修正（2026-10-11 JST・未配置）**：「ところで、／とりあえず、」を引用助詞と誤認し、その前の単独否定感情を落とす不整合を補修。接続語直後の読点3形を必須とし、本人節・否定・原文証拠を保持。後続の未読内容と不明なつながりは保留する。Analysis3suite 394 tests／3872 subtests PASS、生成7全文と実RN一致、合成保存再読4例を確認。未区切り「とても」とcompound側は残件。STRUCTURE_MAP_DELTA_NONE、本人生成→保存再表示は未完了。詳細は04 §3.10と06/API handoff末尾u191。
 
 **u190 内容修正（2026-10-11 JST・未配置）**：単独の肯定過去感情で、句点後の「と友人が言った／のは嘘だった」等を落とし本人感情へ確定する不整合を補修。既存compilerの後続host判定へ明示主語付き帰属と撤回を追加し、独立行動・原文証拠・未確定範囲を保持。「とても／ところで」等の別文は一律拒否しない。Analysis3suite 390 tests／3640 subtests PASS、生成7全文と実RN一致、合成保存再読2例と入力不足commit0を確認。STRUCTURE_MAP_DELTA_NONE。weekly §5.4の明示内容修正、§5.5の本人生成→保存再表示は未完了。詳細は04 §3.10と06/API handoff末尾u190。
@@ -581,6 +583,16 @@ SQL候補は未適用。適用→対応API配置→比較flagの有効化を個�
 | `ai/tests/test_cmee_analysis_v1d_vertical.py`・`test_analysis_observed_storage.py` | 3段階順序、正負、日語、反復、source座標、訂正/撤回、期間比較、保存再読取を確認 |
 
 日語だけの順序・後続節への日継承・原因・恒久身分・担当仕事の完了は作らない。元の役割を撤回/置換した場合は順序を橋渡ししない。3node/2順序の合成例を文章/図へ接続し、関連181検査・606 subtests、RN13検査、6合成本文のbackend/RN一致を確認。Auth/DB I/Oは合成、新規owner/API/DTO/RN/SQL/依存変更0。u102〜u118未配置。u117の比較SQL適用・対応API配置は残り、今回修正をその新しい前提条件にしない。詳細はcanonical04 §3.19と06/API handoff末尾u118。
+
+
+### 4.25 対象内部の相手・場所との関係を持つ過去行動（2026-10-11 u192）
+
+| File | 責務・今回の変更 |
+|---|---|
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py` | 既存owner内で過去事実の名詞引数にからの/への/との/でのを保持。新しい主体・動詞・希望/認識/te文法へ拡張せず、共有根拠と完全節、前後の発言/否認hostを確認する。 |
+| mashos-api `ai/tests/test_cmee_analysis_nominal_relations.py`（新規） | 9件の内容回帰検査＋1件の隔離保存再読検査。対象の関係、原文証拠、期間内集約、明示順序/未知の間隔、肯否定、引用、補足/訂正/撤回、期間比較を確認する。既存vertical検査のfixtureを共用。 |
+
+runtime構造の追加はない。API/DTO/DB/共有Emlis/RN製品コードは変更せず、期間入力→既存Analysis→保存projection→既存表示modelという経路を維持する。元の28日例と「分担を決めておいた」等は今回未改善。検証・未配置状態は06/API handoff u192。
 
 ## 5. Source and artifact identity
 
