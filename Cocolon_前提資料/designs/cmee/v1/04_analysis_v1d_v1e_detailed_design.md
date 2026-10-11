@@ -563,6 +563,14 @@ u200の省略主体の行動後でも、共有報告判定が「の…でした�
 
 実engine合成11入力の前後18生成全文と実RN表示model、実service＋合成RPCの保存再読4ルート、共有Emlis前後6全文を確認。対象65 tests／91 subtests、共有identity1成功。最終回帰・CI・remote照合、既存1020probe同値と残件は06/API handoff u204を参照。未配置・実DB/本人実機・正式商品受入れ未確認。
 
+## 3.35 u205 関係を含む本人の書字後の感情（2026-10-11・未配置）
+
+「私は家族への手紙を書いた。その後、私は落ち着きました」の後半を報告内容として保留していた共有判定を補修。既存の単純名詞書字分岐は保持し、明示SELF＋目的語内「への／との／での」＋書いた/書きましたの完全一致を追加する。任意の単純場所/媒体1項は目的語の前後に置ける。新分岐の全名詞segmentで既存の未解析時点/疑問名詞検査を行い、裸の「の／からの」、場所/媒体内の関係、日付/順序prefix、主体省略、他者、複数場所、報告/引用/説明/指示語へ広げない。
+
+名詞内関係・SELF・原文・独立した後続感情と現在未完了の根拠を保持する。順序は原因へ変えず、未知区間/別fieldを橋渡ししない。訂正/撤回後と保存再読でも本文/図/identityを維持。Analysisは既存共有fallbackを使用し、compiler/realizer/API/DTO/DB/RN製品変更0。STRUCTURE_MAP_DELTA_NONE。
+
+実engine合成13入力の前後22生成全文と実RN表示model、実service＋合成RPCの保存再読4ルート、Emlis前後6全文を確認。対象76 tests／100 subtests、共有identity1成功。Emlisの追加汎用文は新保持の感情を対象とする必須Moveのため維持し、反復は既存Receptionの残件とする。最終回帰・CI・remote照合、旧364probe同値と残件は06/API handoff u205を参照。未配置・実DB/本人実機・正式商品受入れ未確認。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
