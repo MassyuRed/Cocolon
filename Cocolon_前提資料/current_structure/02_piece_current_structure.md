@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は§58を優先します。保存後の確認操作から既存本人履歴へ進み、保存済みdetailの再取得・検証・表示を接続しました。初回保存操作と正式renderer admissionは未接続。canSave/canExport=falseを維持し、正式fit・実機と画像保存共有の残件を継続します。**
+**最新の作業記録は§59。写真保存の確定結果を後片付け失敗で上書きする不具合を補修しました。保存後本人detailは§58を継承し、正式renderer admission・保存前fit・初回保存操作・実機は未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -2139,3 +2139,28 @@ canSave/canExport=false。画像共有の全完成を初回実機確認へ追加
 source `7bd593040bc6ab317def5f0f209ca8cbb720d7af` の製品6＋test3＋資料3をDraft PR #30へ反映し、全12fileのremote全文・変更path集合・親headを照合した。[CI38101826766](https://github.com/MassyuRed/Cocolon/actions/runs/38101826766)は**全5job success**。JS job114359158646は **634 PASS／FAIL0／SKIP0**、Node24.21.0／TypeScript5.2.2。local634件との合算はしない。既存Android bridge source compileとiOS source syntax／patch検査もsuccess。export Pods／Android4依存compile stepは依存差分がなくscopeどおりskipであり、今回の実native再buildではない。
 
 入口§54／manifest v53へ同期した。保存後本人detailの再取得・検証・表示はコード接続済み。初回保存button・正式admission・実機受入れは未完了。
+
+## 59. 2026-10-11 — 写真保存後の成功結果を失敗へ変えない
+
+### 59.1 対象と修正
+
+基準head `d00a51124e55d61da316aa9b89864b8fdb5cca08`／入口§54／本map§58と添付txtから継続。前提資料・作業ルール／恒久incident全文、全体設計01とファイル／国家flow02・current map、最新weekly10/10 §5.5、PCE5/PCE6/PCE8と現sourceを参照した。初回保存の正式admissionが未成立なのを確認し、合成判定で有効化せず、既存画像保存処理で実測できた成功結果の上書きを直接補修した。
+
+| path | 修正内容 |
+| --- | --- |
+| `features/piece/pieceExport.js` | 写真保存がnativeで確定した後の`current()`による失敗化を除去し、一時画像cleanupの失敗を`cleanup_failed: true`へ分離。OS呼出し前の本人／runtime／bytes／権限／dispose確認と一回限りの制御は保持。 |
+| `tests/piece-v2-export.test.js` | 両OSの成功後cleanup失敗、保存中の本人失効・dispose、native拒否＋cleanup失敗、送信前本人失効、iOS不正ackの9検査を追加。 |
+
+保存成功はiOSの`result.saved === true`、Androidの既存`saveAsset` resolveでのみ確定。nativeが失敗／結果不明の場合は成功へ変換しない。OS呼出し後に画面や本人が変わっても、既に保存された写真を保存されなかったと扱わない。返す結果は本文・pathを含まず、将来host側で古い画面への表示を防ぐ責務を残す。copyは処理中に削除せず、終了後にその操作のdirectoryだけを回収する。
+
+### 59.2 検証
+
+新検査を先に実行して28件中 **24 PASS／4 FAIL**、修正後 **28 PASS／FAIL0**。local既存12suiteは **643 PASS／FAIL0／SKIP0**（634＋追加9）、Node24.19.0／既存TypeScript5.2.2。native／OS／filesystemは代替であり、実機での保存成功ではない。同環境read-only差分reviewで重大指摘なし。CODEX_WORK_WITH_SAME_ENVIRONMENT_READ_ONLY_SUBAGENT_REVIEW_NOT_PRO_ULTRA_ACCEPTANCE。OBSERVED_BLOCKER_MINIMAL_FIX／TECHNICAL_CREDIT。正式rendererや商品合格へ換算しない。
+
+### 59.3 再開位置と境界
+
+B9実端末描画同等性・glyph/ink/性能→正式renderer admission→保存前fit→初回保存buttonが本線の未完了として残る。現`PieceVisualCard`はprototype v3/native_checkedであり、hostへの正式admission供給なし。今回新しい判定口・controller・feature flag・authorityは追加しない。`canSave/canExport=false`。保存後本人detail・保存結果表示／同key回収と今回の写真結果保持を再実装しない。
+
+PNG／写真権限・保存／共有の実機、Android・結果不明／異常終了後の共有copy回収、receipt、形式変更、Nexus公開読取／切替、M5／実Auth／稼働構成は継承する。画像共有の全完成を初回実機確認に追加しない。実機へ進むには対象版と利用経路をそろえる必要がある。既存`ios-build.yml`はTestFlight送信まで行うため描画調査だけの目的ではdispatchしていない。
+
+Supabaseはprojectとmigration履歴を今回読取。ACTIVE_HEALTHY、Piece001〜004登録済み、quota005とvisual変更の追加2本未登録を確認。DB書込・API／SQL／native／依存／workflow変更・env/deploy/activation・app build・署名／配布・main merge0。weekly§5.5と2026年12月18日公開目標、automatic_progression=falseを維持。STRUCTURE_MAP_DELTA_UPDATED（写真保存結果とcleanupの責務）。GitHub／CI結果は以下へ追記する。

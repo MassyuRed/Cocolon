@@ -43,8 +43,11 @@ function harness({os='ios', version=35, record=fixture()} = {}) {
       return state.raw || '/cache/piece-capture/piece-new.png';},
     releaseCapture:p=>calls.push(['release',p]),
     Share:{open:async options=>{calls.push(['share',clone(options)]); if(state.shareWait) await state.shareWait.promise; if(state.shareError) throw Error('PRIVATE'); return state.shareResult;}},
-    CameraRoll:{saveAsset:async(...args)=>{calls.push(['photo',...args]); if(state.photoWait) await state.photoWait.promise;}},
-    NativeModules:{RNCCameraRoll:{saveToCameraRoll:async(...args)=>{calls.push(['photo',...args]); return {saved:true};}}},
+    CameraRoll:{saveAsset:async(...args)=>{calls.push(['photo',...args]); if(state.photoWait) await state.photoWait.promise;
+      if(state.photoError) throw Error('PRIVATE_PHOTO');}},
+    NativeModules:{RNCCameraRoll:{saveToCameraRoll:async(...args)=>{calls.push(['photo',...args]);
+      if(state.photoWait) await state.photoWait.promise; if(state.photoError) throw Error('PRIVATE_PHOTO');
+      return Object.hasOwn(state,'photoResult') ? state.photoResult : {saved:true};}}},
   });
   for (const [file,names] of [
     ['features/piece/pieceApi.js',['PieceApiError','readPiecePreviewSnapshot','readPieceOwnerSnapshot']],
@@ -195,4 +198,40 @@ test('owner change between verification return and share continuation prevents h
   const h=harness(),asset=await image(h);
   h.state.revokeAtCurrent=h.state.currentCalls+3;
   await failure(asset.openShare());assert.equal(count(h,'share'),0);
+});
+
+for (const os of ['ios','android']) {
+  test(`${os} photo success survives copy cleanup failure without another OS save`,async()=>{
+    const h=harness({os}),asset=await image(h);h.state.cleanupError=true;
+    assert.deepEqual(clone(await asset.saveToPhotos()),{outcome:'saved_to_photos',cleanup_failed:true});
+    await failure(asset.saveToPhotos());await failure(asset.openShare());await asset.dispose();
+    assert.equal(count(h,'photo'),1);assert.equal(count(h,'share'),0);
+  });
+  test(`${os} confirmed photo result survives owner loss and dispose during native save`,async()=>{
+    const h=harness({os}),asset=await image(h);h.state.photoWait=deferred();
+    const pending=asset.saveToPhotos();await new Promise(r=>setImmediate(r));
+    assert.equal(count(h,'photo'),1);h.state.current=false;await asset.dispose();
+    assert.equal(h.calls.some(c=>c[0]==='unlink'&&c[1].startsWith('/cache/piece-export/')),false);
+    h.state.photoWait.resolve();assert.deepEqual(clone(await pending),{outcome:'saved_to_photos'});
+    assert.equal(h.calls.filter(c=>c[0]==='unlink'&&c[1].startsWith('/cache/piece-export/')).length,1);
+    await failure(asset.saveToPhotos());assert.equal(count(h,'photo'),1);
+  });
+  test(`${os} rejected native photo save remains an error even when cleanup also fails`,async()=>{
+    const h=harness({os}),asset=await image(h);h.state.photoError=true;h.state.cleanupError=true;
+    await assert.rejects(asset.saveToPhotos(),e=>e.code==='PIECE_TEMPORARILY_UNAVAILABLE'&&
+      !/PRIVATE|cache|piece-export/.test(e.message));
+    await failure(asset.saveToPhotos());assert.equal(count(h,'photo'),1);
+  });
+  test(`${os} owner loss before photo handoff prevents saving`,async()=>{
+    const h=harness({os}),asset=await image(h);h.state.hashWait=deferred();
+    const pending=asset.saveToPhotos();h.state.current=false;h.state.hashWait.resolve();
+    await failure(pending);assert.equal(count(h,'photo'),0);
+  });
+}
+
+test('iOS missing or non-boolean save acknowledgement never becomes photo success',async()=>{
+  for(const result of [undefined,null,{}, {saved:false}, {saved:'true'}, {saved:1}]) {
+    const h=harness(),asset=await image(h);h.state.photoResult=result;h.state.cleanupError=true;
+    await failure(asset.saveToPhotos());assert.equal(count(h,'photo'),1);
+  }
 });

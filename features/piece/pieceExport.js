@@ -131,6 +131,7 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
           asset_sha256: assetHash, mime_type: 'image/png', width: input.width, height: input.height }),
         async saveToPhotos() {
           begin();
+          let saved = false, cleanupFailed = false;
           try {
             await verify();
             if (Platform.OS === 'android' && Number(Platform.Version) < 29) {
@@ -147,10 +148,20 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
                 { type: 'photo', album: '', cocolonAddOnly: true });
               if (result?.saved !== true) throw failed();
             } else await CameraRoll.saveAsset(`file://${path}`, { type: 'photo' });
-            current();
-            return Object.freeze({ outcome: 'saved_to_photos' });
+            // The native operation has committed. Later owner/runtime loss or
+            // local copy cleanup cannot undo that photo or make it retryable.
+            // The host still owns whether this outcome belongs on its screen.
+            saved = true;
           } catch { throw failed(); }
-          finally { operating = false; disposed = true; await cleanup(); }
+          finally {
+            operating = false; disposed = true;
+            try { await cleanup(); }
+            catch {
+              if (!saved) throw failed();
+              cleanupFailed = true;
+            }
+          }
+          return Object.freeze({ outcome: 'saved_to_photos', ...(cleanupFailed ? { cleanup_failed: true } : {}) });
         },
         async openShare() {
           begin();

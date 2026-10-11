@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§54／current map §58を優先します。保存後の「保存したPieceを確認」から既存の本人履歴画面へ進み、保存済みdetailを再取得して表示するコードを接続しました。初回保存ボタンと正式renderer admissionは未接続で、canSave/canExport=falseを維持します。正式fit・実機確認が残ります。**
+**現在は§55／current map §59を優先します。写真保存成功を、保存後の一時画像削除失敗や本人・runtime失効で失敗へ変えてしまう不具合を修正しました。保存前fit・正式renderer admission・初回保存ボタン・実機は未完了です。保存後本人detailの接続は§54を継承します。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1049,3 +1049,11 @@ local既存12suite **634 PASS／FAIL0／SKIP0**（先行611＋追加23）。Inpu
 次はB9実機描画・正式renderer admission→保存前fit→初回保存操作。保存後本人detail接続を再実装しない。画像保存共有の全完成を初回実機確認の前提にしない。API/native/SQL/依存/workflow変更・Supabase操作・DB書込・env/deploy/activation/app build/署名/配布/main merge0。weekly10/10 §5.5・2026年12月18日目標・automatic_progression=falseを維持する。
 
 §54最終確認：source `7bd593040bc6ab317def5f0f209ca8cbb720d7af` の製品6＋test3＋資料3をDraft PR #30へ反映し、全12fileのremote全文・変更path集合・親headを照合した。[CI38101826766](https://github.com/MassyuRed/Cocolon/actions/runs/38101826766)は全5job success、JSはlocal／CIそれぞれ **634 PASS／FAIL0／SKIP0**。既存Android／iOS bridge source検査も成功。依存差分がなくexport library compile stepは両OSともskip。初回保存操作・正式admission・実機確認の完成とは区別する。
+
+## 55. 2026-10-11 — 写真保存の確定結果を保持
+
+既存`features/piece/pieceExport.js`の写真保存処理を補修。OSが保存成功を確定した後は、一時copyの削除失敗を`cleanup_failed: true`として分離し、本人／runtime失効でも実際の保存済み結果を失敗へ変えない。画面へ表示するかは将来hostの本人・lifecycle照合が担当する。保存前の本人・bytes・権限・dispose確認、iOSの厳密な成功応答、一回限りの操作は保持する。
+
+既存export検査へ9件追加し、修正前24 PASS／4 FAIL、修正後28 PASS。local既存12suite **643 PASS／FAIL0／SKIP0**。同環境read-only reviewの重大指摘なし。OS/native/filesystemは代替で、端末保存や正式描画受入れの結果ではない。製品1＋test1＋既存資料3。実DBはproject/migration履歴を読取のみ。稼働切替・配布は未実施。詳細とGitHub／CI結果はcurrent map §59へ記録する。
+
+保存の本線は **B9実端末描画確認→正式renderer admission→保存前fit→初回保存操作**。prototype v3/native_checkedを正式判定へ昇格させない。保存結果表示・同key回収・本人detailは再実装しない。画像共有の全完成を初回実機確認へ追加せず、weekly10/10 §5.5と12/18公開目標を継承する。
