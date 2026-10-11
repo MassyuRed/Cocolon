@@ -15,7 +15,6 @@ export default function InputActionArea({
   setSendEmotionNotification,
   handlePreviewPiece,
   canPreviewPiece,
-  piecePreviewLoading,
   handleOk,
   canSubmit,
   submitting,
@@ -66,17 +65,16 @@ export default function InputActionArea({
         </View>
       </View>
 
-      <View ref={pieceButtonRef} collapsable={false} style={styles.buttonWrapper}>
+      {isTutorialMode ? <View ref={pieceButtonRef} collapsable={false} style={styles.buttonWrapper}>
         <CocolonButton
           variant="secondary"
           onPress={handlePreviewPiece}
           disabled={!canPreviewPiece}
-          loading={piecePreviewLoading}
           accessibilityLabel="ピースを生成する"
         >
           ピースを生成する
         </CocolonButton>
-      </View>
+      </View> : null}
 
       <View ref={okButtonRef} collapsable={false} style={styles.buttonWrapper}>
         <CocolonButton

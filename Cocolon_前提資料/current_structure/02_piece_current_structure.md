@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新の作業記録は§59。写真保存の確定結果を後片付け失敗で上書きする不具合を補修しました。保存後本人detailは§58を継承し、正式renderer admission・保存前fit・初回保存操作・実機は未完了です。**
+**最新の作業記録は§60。通常入力画面の旧raw-input preview/publish/cancelを除去し、保存入力V2 hostへ一本化しました。tutorialのローカル旧sampleは保持。非稼働切替準備の一部で、M5全面・実機・正式renderer admission・保存前fit・初回保存は未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -2170,3 +2170,30 @@ Supabaseはprojectとmigration履歴を今回読取。ACTIVE_HEALTHY、Piece001�
 source `1df91cc74b92e59d9ac6bba126a2c8fbfa696e84` の製品1＋test1＋資料3をDraft PR #30へ反映し、全5fileのremote全文・変更path集合・親headを照合した。[CI38102760544](https://github.com/MassyuRed/Cocolon/actions/runs/38102760544)は**全5job success**。JS job114361926045は **643 PASS／FAIL0／SKIP0**、Node24.21.0／TypeScript5.2.2。local643件との合算はしない。Android bridge source compileとiOS source syntax／patch検査もsuccess。export Pods／Android4依存compile stepは依存差分がなくscopeどおりskipであり、今回の実native再buildではない。
 
 入口§55／manifest v54へ同期した。写真保存成功後の失敗化はコード修正済み。初回保存button・正式renderer admission・保存前fit・実機受入れは未完了。
+
+## 60. 2026-10-11 — InputScreenの通常Piece操作を保存入力へ一本化
+
+### 60.1 対象と変更
+
+基準Cocolon `63e161965cfbba61d525dc82396eeefb0527cfc7`／API `6b901a1df0037c047513e794624917a09b0f3ac4`。全体設計・全ファイル地図・前回txt・恒久incidentの同会話読取を継承し、CURRENT_RULES／Rule18 §11.3、入口§55／本map§59、weekly10/10 §5.5、PCE5／PCE6 RN flow・clean-cutoverとPCE8 B12-C、現物を照合した。§34の「非稼働切替準備・隔離検証」承認内のDIRECT_PRODUCT_OR_ACCEPTANCE_WORK。root華恋が単一writer、同環境read-only補助reviewを使用し、独立Pro/Ultra正式受入れとは扱わない。
+
+既存V2 hostは保存ID→source-ref GET→明示preview→native確認用画像まで接続されていたが、並行して通常入力の旧buttonがraw memo/emotionsを同じpreview URLへ送っていた。新共有API構成はflag OFFでも契約をv1へ戻さないため、flagだけで旧buttonを再露出する案は採用しない。新flag／判定器／保存口は追加しない。
+
+| path | 変更 |
+| --- | --- |
+| `screens/InputScreen.js` | 旧preview/publish/cancel importと実ユーザー通信分岐、不要loading/quota stateを除去。旧modalはtutorialだけ。通常入力保存→Emlis→既存saved-input hostを保持。 |
+| `screens/input/InputActionArea.js` | 旧buttonをtutorialだけに限定。通常入力は保存buttonを使用し、V2 OFF時も旧通信へ戻らない。 |
+| `tests/piece-v2-input-screen.test.js` | 実InputActionAreaも描画し、ON/OFF時の旧操作不在、raw HTTP不在、tutorial維持、owner/mode/reset後の古いcallback・継続処理拒否の11件を追加。 |
+| `tests/rn-screen-contracts.test.js` | 旧通信・旧publish toastを必須にしていた期待だけを現V2 ownerへ更新。既存入力保存／Emlis観測状態の検査は保持。 |
+
+TutorialContextのseedは既存ローカル処理。固定sample・step7の操作・説明後の遷移は変えず、既存pieceInputLifetimeに属するcallbackを操作前とawait後に照合する。本人／tutorial／resetが変わった古い処理が次画面を開かない。
+
+### 60.2 検証
+
+入力画面42件はRed **34 PASS／8 FAIL**、修正後42 PASS。local Piece既存12suite **654 PASS／FAIL0／SKIP0**（643＋追加11）。既存screen/IAP/themeは別集合 **77 PASS／FAIL0／SKIP0**。Node24.19.0／TypeScript5.2.2。React/hooks、native、Auth、HTTPは代替で、端末描画や稼働APIの成功ではない。既存保存入力→previewの往復も同じsuiteで保持。同環境read-only差分reviewで修正必須の指摘なし。
+
+### 60.3 再開位置と境界
+
+通常入力側の旧通信衝突はsourceで除去した。旧tutorialのQ&A sample、Nexus等の旧reader、既定APIとM5全面は残る。この候補版を配布してもV2構成／flagが供給されなければ通常Piece入口は現れず、旧APIへ代替しない。稼働API構成・必要migration・対象アプリ版をそろえた実Auth／本人入力の利用確認は未実施。現行の非稼働準備を配置・配布の許可へ読み替えない。
+
+本線はB9実端末描画同等性・glyph/ink/性能→正式renderer admission→保存前fit→初回保存。保存結果表示／本人detail／写真保存結果保持を再実装しない。形式変更、画像保存／共有の実機、Nexus公開読取／切替、M5残差を継承。共有全完成を初回実機確認の前提に追加しない。今回API／SQL／native／依存／workflow／Supabase操作・DB書込・env/deploy/activation・app build・署名／配布・main merge0。weekly§5.5・12/18目標・automatic_progression=false。STRUCTURE_MAP_DELTA_UPDATED（通常InputScreenの呼出しowner）。

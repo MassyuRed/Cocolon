@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v54",
+  "schema_version": "cocolon.piece.workstream_manifest.v55",
   "generated_at": "2026-10-11 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v53",
-    "predecessor_blob": "706b20a3c5fc58a7d15edfa827a44c6d829eca90",
-    "predecessor_head": "d00a51124e55d61da316aa9b89864b8fdb5cca08",
-    "carry_forward": "Preserve confirmed native photo save through cleanup failure and owner/runtime loss. Formal renderer admission, pre-save fit, initial save UI and device checks remain pending."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v54",
+    "predecessor_blob": "eb38d9605104f7f974740357efa227c53abeccb6",
+    "predecessor_head": "63e161965cfbba61d525dc82396eeefb0527cfc7",
+    "carry_forward": "Normal InputScreen uses only the saved-input V2 route. Legacy tutorial samples remain local; full M5, deployment, device admission and initial save remain pending."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "94aa75beb2e12ef7ce751b8154341109ef2590d8",
-    "raw_sha256": "1258ef89c82f31b340ace05ffe4ecd8605d8dcb4eed06b62077ac744526147fa",
-    "utf8_bytes": 98330
+    "git_blob_sha1": "7e4938bcebef35a2dba5dac989f2da07d669889d",
+    "raw_sha256": "4713a360f7b487b6520ce552ad25898e42f412cca42aa87564a81abcfe39116f",
+    "utf8_bytes": 99897
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -87,7 +87,8 @@
     "pce9c_save_lifecycle": "CONTROLLER_IMPLEMENTED__CURRENT_DISPLAY_OWNER_SAVE_OUTCOME_UI_20261011__INITIAL_SAVE_ADMISSION_PENDING",
     "pce9c_save_outcome_ui": "REMOTE_703C60B__SAVE_OUTCOME_UI_RECOVERY_CONNECTED__CI611_PASS__INITIAL_SAVE_ADMISSION_DEVICE_PENDING",
     "pce9c_saved_owner_detail": "REMOTE_7BD5930__SAVED_OWNER_DETAIL_CONNECTED__CI634_PASS__INITIAL_SAVE_ADMISSION_DEVICE_PENDING",
-    "pce9e_photo_save_result": "REMOTE_1DF91CC__CONFIRMED_PHOTO_SAVE_RESULT_PRESERVED__CI643_PASS__DEVICE_PENDING"
+    "pce9e_photo_save_result": "REMOTE_1DF91CC__CONFIRMED_PHOTO_SAVE_RESULT_PRESERVED__CI643_PASS__DEVICE_PENDING",
+    "pce9f_b12c_input_screen": "CODE_NORMAL_INPUT_V2_ONLY__LOCAL654_PASS__M5_DEVICE_PENDING"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -169,9 +170,9 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "d00a51124e55d61da316aa9b89864b8fdb5cca08",
+    "cocolon_pre_sync_head": "63e161965cfbba61d525dc82396eeefb0527cfc7",
     "mashos_api_head": "6b901a1df0037c047513e794624917a09b0f3ac4",
-    "current_user_visible_piece_shape": "OLD_QNA_REGISTERED_IN_SOURCE__DEPLOYED_STATE_NOT_RECHECKED",
+    "current_user_visible_piece_shape": "CANDIDATE_NORMAL_INPUT_V2_SAVED_SOURCE_ONLY__TUTORIAL_NEXUS_LEGACY_REMAIN__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
     "piece_v2_api_registration_present": true,
     "piece_v2_api_registration_scope": "Explicit preview/shared candidates register private save POST, preview POST/visual PATCH/cancel DELETE, saved quota GET, source-ref/bootstrap, owner history/detail GET and owner DELETE; default app remains legacy.",
@@ -185,7 +186,7 @@
     "input_screen_source_connected": true,
     "live_auth_input_to_preview_to_device_verified": false,
     "database_evidence_owner": "live_db_apply_20261010",
-    "remaining_work_owner": "photo_save_result_20261011",
+    "remaining_work_owner": "input_screen_cutover_20261011",
     "product_acceptance": false,
     "piece_v2_default_application_registered": false,
     "piece_v2_quota_http_present": true,
@@ -222,15 +223,16 @@
     "piece_v2_headless_save_lifecycle_present": true,
     "piece_v2_save_outcome_display_connected": true,
     "piece_v2_save_recovery_host_connected": true,
-    "piece_v2_saved_owner_detail_refresh_connected": true
+    "piece_v2_saved_owner_detail_refresh_connected": true,
+    "input_screen_legacy_piece_http_reachable": false
   },
   "next_group": {
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "NATIVE_DEVICE_RENDERER_ADMISSION_THEN_SAVE_FIT_AND_BOUND_SAVE",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "PHOTO_SAVE_RESULT_FIXED__INITIAL_SAVE_ADMISSION_DEVICE_PENDING",
-    "current_map_section": "59.3",
-    "current_entry_section": "55",
+    "state": "INPUT_SAVED_SOURCE_ONLY__M5_DEVICE_ADMISSION_PENDING",
+    "current_map_section": "60.3",
+    "current_entry_section": "56",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
     "weekly_review_section": "5.5",
     "first_unfinished_work": "B9 device equivalence -> formal renderer admission -> save fit -> initial save action. Reuse the connected saved owner detail refresh, save outcome display and same-request recovery. PNG/photo/share device checks remain; export completion is not a prerequisite for first device inspection.",
@@ -266,7 +268,8 @@
     "save_outcome_ui_owner": "save_outcome_ui_20261011",
     "repeat_saved_owner_detail": false,
     "saved_owner_detail_owner": "saved_owner_detail_20261011",
-    "photo_save_result_owner": "photo_save_result_20261011"
+    "photo_save_result_owner": "photo_save_result_20261011",
+    "input_screen_cutover_owner": "input_screen_cutover_20261011"
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -320,9 +323,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "e8ab9625484056f006334f691d22dbfb04140294",
-    "raw_sha256": "ced299664f47e290f402b57411f502276fced1c75c37016ea191a8aa2dcb1d19",
-    "utf8_bytes": 322744
+    "git_blob_sha1": "325c24e35fe05c44e411d8f2793216adabd87c56",
+    "raw_sha256": "8952f123c036f7148acc5fb65a8fc88d02d3a0af8943c3987802748185798f5b",
+    "utf8_bytes": 326630
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -495,28 +498,27 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "CONFIRMED_PHOTO_SAVE_RESULT_PRESERVED__DEVICE_ADMISSION_PENDING",
+    "classification": "NORMAL_INPUT_LEGACY_PIECE_HTTP_REMOVED__SAVED_SOURCE_V2_ONLY",
     "piece_documentation_paths": 3,
-    "rn_changed_paths": 1,
-    "rn_test_paths": 1,
+    "rn_changed_paths": 2,
+    "rn_test_paths": 2,
     "workflow_changed_paths": 0,
     "native_changed_paths": 0,
     "api_product_paths": 0,
     "sql_changed_paths": 0,
     "new_dependency": 0,
     "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
-    "local_js_passed": 643,
+    "local_js_passed": 654,
     "local_js_failed": 0,
     "local_js_skipped": 0,
-    "ci_pending": false,
+    "ci_pending": true,
     "live_database_apply": 0,
     "release_effect": 0,
     "native_app_builds": 0,
     "product_acceptance": false,
     "automatic_progression": false,
-    "ci_js_passed": 643,
-    "ci_js_failed": 0,
-    "ci_js_skipped": 0
+    "local_screen_iap_theme_passed": 77,
+    "local_screen_iap_theme_failed": 0
   },
   "b06_q3_context_fence": {
     "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
@@ -3972,5 +3974,69 @@
     "remote_parent_match": true,
     "native_library_compile_rerun": false,
     "native_library_compile_skip_reason": "No dependency/platform/workflow changes; existing scope skipped both export library compile steps."
+  },
+  "historical_current_sync_effects_before_input_screen_cutover_20261011": {
+    "classification": "CONFIRMED_PHOTO_SAVE_RESULT_PRESERVED__DEVICE_ADMISSION_PENDING",
+    "piece_documentation_paths": 3,
+    "rn_changed_paths": 1,
+    "rn_test_paths": 1,
+    "workflow_changed_paths": 0,
+    "native_changed_paths": 0,
+    "api_product_paths": 0,
+    "sql_changed_paths": 0,
+    "new_dependency": 0,
+    "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
+    "local_js_passed": 643,
+    "local_js_failed": 0,
+    "local_js_skipped": 0,
+    "ci_pending": false,
+    "live_database_apply": 0,
+    "release_effect": 0,
+    "native_app_builds": 0,
+    "product_acceptance": false,
+    "automatic_progression": false,
+    "ci_js_passed": 643,
+    "ci_js_failed": 0,
+    "ci_js_skipped": 0
+  },
+  "input_screen_cutover_20261011": {
+    "base_head": "63e161965cfbba61d525dc82396eeefb0527cfc7",
+    "state": "LOCAL654_PASS__CI_PENDING",
+    "current_entry_section": "56",
+    "current_map_section": "60",
+    "changed_product_paths": [
+      "screens/InputScreen.js",
+      "screens/input/InputActionArea.js"
+    ],
+    "changed_test_paths": [
+      "tests/piece-v2-input-screen.test.js",
+      "tests/rn-screen-contracts.test.js"
+    ],
+    "legacy_normal_input_http_removed": true,
+    "v2_off_legacy_fallback": false,
+    "tutorial_local_sample_preserved": true,
+    "tutorial_lifetime_bound": true,
+    "input_screen_red_passed": 34,
+    "input_screen_red_failed": 8,
+    "input_screen_green_passed": 42,
+    "local_js_passed": 654,
+    "local_js_failed": 0,
+    "local_js_skipped": 0,
+    "local_screen_iap_theme_passed": 77,
+    "local_screen_iap_theme_failed": 0,
+    "added_tests": 11,
+    "ci_pending": true,
+    "full_m5_complete": false,
+    "native_device_acceptance": false,
+    "product_acceptance": false,
+    "can_save": false,
+    "can_export": false,
+    "review_environment": "CODEX_WORK_WITH_SAME_ENVIRONMENT_READ_ONLY_SUBAGENT_REVIEW_NOT_PRO_ULTRA_ACCEPTANCE",
+    "live_database_write": 0,
+    "activation": 0,
+    "app_build": 0,
+    "main_merge": 0,
+    "automatic_progression": false,
+    "review_blockers": 0
   }
 }

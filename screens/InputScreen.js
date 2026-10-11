@@ -21,11 +21,6 @@ import { submitEmotionInput } from "../lib/api/home/emotionSubmitApi";
 import { useEmlisThread } from "./input/useEmlisThread";
 import { useAppRuntime } from "../AppRuntimeContext";
 import EmlisThreadModal from "./input/EmlisThreadModal";
-import {
-  cancelEmotionPiece,
-  previewEmotionPiece,
-  publishEmotionPiece,
-} from "../lib/api/home/emotionPieceApi";
 import { openNoticeAction } from "../lib/noticeActionRuntime";
 import { markAnalysisHomeSummaryDirty } from "../lib/analysisHomeSummaryRefreshSignal";
 import { STARTUP_POPUP_KIND, useHomeState } from "../features/home/useHomeState";
@@ -174,6 +169,7 @@ export default function InputScreen({ navigation, route }) {
     pieceInputLifetime.current = { owner: feedbackOwner.current,
       tutorial: isTutorialMode, reset: tutorialResetToken, ticket: null };
   }
+  const renderedPieceLifetime = pieceInputLifetime.current;
   const [savedPieceInput, setSavedPieceInput] = useState(null);
   const pieceInputMounted = useRef(false);
   useEffect(() => {
@@ -231,8 +227,6 @@ export default function InputScreen({ navigation, route }) {
     setSubmitting(false);
     setPiecePreviewVisible(false);
     setPiecePreviewPayload(null);
-    setPiecePublishLoading(false);
-    setPiecePreviewLoading(false);
   }, [currentUserId, resetInputFeedbackModal]);
 
   const {
@@ -264,8 +258,6 @@ export default function InputScreen({ navigation, route }) {
   const [sendEmotionNotification, setSendEmotionNotification] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [piecePreviewVisible, setPiecePreviewVisible] = useState(false);
-  const [piecePreviewLoading, setPiecePreviewLoading] = useState(false);
-  const [piecePublishLoading, setPiecePublishLoading] = useState(false);
   const [piecePreviewPayload, setPiecePreviewPayload] = useState(null);
   const wasTutorialModeRef = useRef(false);
 
@@ -282,8 +274,6 @@ export default function InputScreen({ navigation, route }) {
     setIsSecret(false);
     setSendEmotionNotification(true);
     setPiecePreviewVisible(false);
-    setPiecePreviewLoading(false);
-    setPiecePublishLoading(false);
     setPiecePreviewPayload(null);
     resetInputFeedbackModal();
     currentScrollYRef.current = 0;
@@ -388,8 +378,6 @@ const homeState = useHomeState({
     todayQuestionLoading,
   } = homeState;
 
-  const pieceQuota = homeState.pieceQuota;
-  const setPieceQuota = homeState.setPieceQuota;
 
 
 const {
@@ -653,15 +641,13 @@ const safeInsets = useSafeAreaInsets();
     hasMemoInput &&
     selectedEmotions.length > 0 &&
     hasSelectedCategories;
-  const canPreviewPiece =
-    !piecePreviewLoading &&
-    !piecePublishLoading &&
-    canSubmit;
+  // The old preview is a local tutorial demonstration only. Real Piece uses
+  // the confirmed saved-input host; disabling V2 never restores legacy HTTP.
+  const canPreviewPiece = isTutorialMode && canSubmit;
   const mountSavedPieceInput =
     savedPieceInput?.lifetime === pieceInputLifetime.current &&
     !isTutorialMode && !submitting && !emlisThread.visible && !emlisThread.busy &&
-    !inputFeedbackModalVisible && !piecePreviewVisible &&
-    !piecePreviewLoading && !piecePublishLoading && !startupModalVisible &&
+    !inputFeedbackModalVisible && !startupModalVisible &&
     !draftRestoreModalVisible && !hasMemoInput && selectedEmotions.length === 0 &&
     selectedCategories.length === 0 && activeField === null;
   // Keep the existing saved-input host through runtime refresh so its
@@ -969,192 +955,55 @@ const safeInsets = useSafeAreaInsets();
   ]);
 
 
-  const handlePreviewPiece = useCallback(async () => {
-    const requestOwner = feedbackOwner.current;
-    if (requestOwner.id !== currentUserId) return;
-    const ownsResponse = () => feedbackOwner.current === requestOwner;
-    if (!canPreviewPiece) return;
-
+  // Preserve the existing tutorial sample without retaining raw-input Piece
+  // HTTP. Bind its callbacks to the already-existing owner/tutorial lifetime.
+  const handlePreviewPiece = useCallback(() => {
+    if (!pieceInputMounted.current || !isTutorialMode || !canPreviewPiece ||
+        pieceInputLifetime.current !== renderedPieceLifetime ||
+        feedbackOwner.current !== renderedPieceLifetime.owner) return;
     registerInputInteraction();
+    setPiecePreviewPayload({ ...TUTORIAL_PIECE_PREVIEW });
+    setPiecePreviewVisible(true);
+  }, [canPreviewPiece, isTutorialMode, registerInputInteraction, renderedPieceLifetime]);
 
-    if (isTutorialMode) {
-      setPiecePreviewPayload({ ...TUTORIAL_PIECE_PREVIEW });
-      setPiecePreviewVisible(true);
-      return;
-    }
-
-    setPiecePreviewLoading(true);
-    try {
-      const payload = buildEmotionSubmitPayload();
-      const preview = await previewEmotionPiece(payload, { expectedUserId: requestOwner.id });
-      if (!ownsResponse()) return;
-      const quota = preview?.quota && typeof preview.quota === "object"
-        ? preview.quota
-        : null;
-      if (quota) {
-        setPieceQuota(quota);
-      }
-      setPiecePreviewPayload(preview && typeof preview === "object" ? preview : null);
-      setPiecePreviewVisible(true);
-    } catch (e) {
-      if (!ownsResponse()) return;
-      console.warn("InputScreen: previewEmotionPiece failed", e);
-      Alert.alert(
-        "ピースの生成",
-        String(e?.message || "ピースの生成に失敗しました。")
-      );
-    } finally {
-      if (!ownsResponse()) return;
-      setPiecePreviewLoading(false);
-    }
-  }, [
-    currentUserId,
-    buildEmotionSubmitPayload,
-    canPreviewPiece,
-    isTutorialMode,
-    registerInputInteraction,
-  ]);
-
-  const handleCancelPiecePreview = useCallback(async () => {
-    const requestOwner = feedbackOwner.current;
-    if (requestOwner.id !== currentUserId) return;
-    const ownsResponse = () => feedbackOwner.current === requestOwner;
-    const previewId = String(piecePreviewPayload?.preview_id || "").trim();
+  const handleCancelPiecePreview = useCallback(() => {
+    if (!pieceInputMounted.current || !isTutorialMode ||
+        pieceInputLifetime.current !== renderedPieceLifetime ||
+        feedbackOwner.current !== renderedPieceLifetime.owner) return;
     setPiecePreviewVisible(false);
-
-    if (isTutorialMode) {
-      setPiecePreviewPayload(null);
-      return;
-    }
-
-    if (!previewId) {
-      setPiecePreviewPayload(null);
-      return;
-    }
-    try {
-      await cancelEmotionPiece(previewId, { expectedUserId: requestOwner.id });
-      if (!ownsResponse()) return;
-    } catch (e) {
-      if (!ownsResponse()) return;
-      console.warn("InputScreen: cancelEmotionPiece failed", e);
-    } finally {
-      if (!ownsResponse()) return;
-      setPiecePreviewPayload(null);
-    }
-  }, [currentUserId, isTutorialMode, piecePreviewPayload?.preview_id]);
+    setPiecePreviewPayload(null);
+  }, [isTutorialMode, renderedPieceLifetime]);
 
   const handlePublishPiece = useCallback(async () => {
-    const requestOwner = feedbackOwner.current;
-    if (requestOwner.id !== currentUserId) return;
-    const ownsResponse = () => feedbackOwner.current === requestOwner;
-    const previewId = String(piecePreviewPayload?.preview_id || "").trim();
-    if (!previewId || piecePublishLoading) return;
-
-    if (isTutorialMode) {
-      const inputFeedbackEmotionMeta = buildInputFeedbackEmotionMeta(selectedEmotions);
-      setPiecePreviewVisible(false);
-      setPiecePreviewPayload(null);
-      void ensureTutorialPiecesSeed();
-      await clearPersistedInputDraft();
-      if (!ownsResponse()) return;
-      setPendingInputDraft(null);
-      setDraftRestoreModalVisible(false);
-      Keyboard.dismiss();
-      const openedObservation = openInputFeedbackModal({
-        commentText: tutorialEmlisReplyText,
-        ...inputFeedbackEmotionMeta,
-        contextLabel: TUTORIAL_EMLIS_REPLY.contextLabel,
-        emlisAiMeta: TUTORIAL_EMLIS_REPLY.meta,
-        observationStatus: TUTORIAL_EMLIS_REPLY.meta?.observation_status,
-      });
-      if (openedObservation) {
-        setTutorialNavigateAfterReply(true);
-      } else {
-        completeTutorialAfterReply();
-      }
-      return;
+    const ownsResponse = () => pieceInputMounted.current && isTutorialMode &&
+      pieceInputLifetime.current === renderedPieceLifetime &&
+      feedbackOwner.current === renderedPieceLifetime.owner;
+    if (!ownsResponse() || !piecePreviewPayload?.preview_id) return;
+    const inputFeedbackEmotionMeta = buildInputFeedbackEmotionMeta(selectedEmotions);
+    setPiecePreviewVisible(false);
+    setPiecePreviewPayload(null);
+    void ensureTutorialPiecesSeed();
+    await clearPersistedInputDraft();
+    if (!ownsResponse()) return;
+    setPendingInputDraft(null);
+    setDraftRestoreModalVisible(false);
+    Keyboard.dismiss();
+    const openedObservation = openInputFeedbackModal({
+      commentText: tutorialEmlisReplyText,
+      ...inputFeedbackEmotionMeta,
+      contextLabel: TUTORIAL_EMLIS_REPLY.contextLabel,
+      emlisAiMeta: TUTORIAL_EMLIS_REPLY.meta,
+      observationStatus: TUTORIAL_EMLIS_REPLY.meta?.observation_status,
+    });
+    if (openedObservation) {
+      setTutorialNavigateAfterReply(true);
+    } else {
+      completeTutorialAfterReply();
     }
-
-    setPiecePublishLoading(true);
-    try {
-      const publishResult = await publishEmotionPiece(previewId, { expectedUserId: requestOwner.id });
-      if (!ownsResponse()) return;
-      const inputFeedback = publishResult?.input_feedback || null;
-      const inputFeedbackText = String(
-        inputFeedback?.comment_text || ""
-      ).trim();
-      const inputFeedbackAI = inputFeedback?.emlis_ai || null;
-      const inputFeedbackEmotionMeta = buildInputFeedbackEmotionMeta(selectedEmotions);
-
-      await clearPersistedInputDraft();
-      if (!ownsResponse()) return;
-      setPendingInputDraft(null);
-      setDraftRestoreModalVisible(false);
-
-      setSelectedEmotions([]);
-      setMemo("");
-      setMemoAction("");
-      setSelectedCategories([]);
-      setShowMemoSection(true);
-      setActiveField(null);
-      resetMemoInputHeights();
-      setIsSecret(false);
-      Keyboard.dismiss();
-
-      setPiecePreviewVisible(false);
-      setPiecePreviewPayload(null);
-
-      const nextQuota = publishResult?.quota && typeof publishResult.quota === "object"
-        ? publishResult.quota
-        : null;
-      if (nextQuota) {
-        setPieceQuota(nextQuota);
-      }
-
-      await loadHomeState({ force: true, includeStartupCandidate: false });
-      if (!ownsResponse()) return;
-      await markAnalysisHomeSummaryDirty();
-      if (!ownsResponse()) return;
-
-      const openedObservation = inputFeedbackText
-        ? openInputFeedbackModal({
-            commentText: inputFeedbackText,
-            ...inputFeedbackEmotionMeta,
-            contextLabel: "ピースを生成しました",
-            emlisAiMeta: inputFeedbackAI,
-            observationStatus: inputFeedbackAI?.observation_status,
-          })
-        : false;
-      if (!openedObservation) {
-        showToast("ピースを生成しました");
-      }
-    } catch (e) {
-      if (!ownsResponse()) return;
-      console.warn("InputScreen: publishEmotionPiece failed", e);
-      Alert.alert(
-        "ピースの生成",
-        String(e?.message || "ピースの生成に失敗しました。")
-      );
-    } finally {
-      if (!ownsResponse()) return;
-      setPiecePublishLoading(false);
-    }
-  }, [
-    currentUserId,
-    clearPersistedInputDraft,
-    completeTutorialAfterReply,
-    ensureTutorialPiecesSeed,
-    isTutorialMode,
-    loadHomeState,
-    openInputFeedbackModal,
-    piecePreviewPayload?.preview_id,
-    piecePublishLoading,
-    resetMemoInputHeights,
-    selectedEmotions,
-    setTutorialStep,
-    showToast,
-    tutorialEmlisReplyText,
-  ]);
+  }, [clearPersistedInputDraft, completeTutorialAfterReply, ensureTutorialPiecesSeed,
+    isTutorialMode, openInputFeedbackModal, piecePreviewPayload?.preview_id,
+    renderedPieceLifetime, selectedEmotions, setDraftRestoreModalVisible,
+    setPendingInputDraft, setTutorialNavigateAfterReply, tutorialEmlisReplyText]);
 
   const handleOk = async () => {
     const requestOwner = feedbackOwner.current;
@@ -1655,7 +1504,6 @@ ${String(error?.message || error)}`
                   setSendEmotionNotification={setSendEmotionNotification}
                   handlePreviewPiece={handlePreviewPiece}
                   canPreviewPiece={canPreviewPiece}
-                  piecePreviewLoading={piecePreviewLoading}
                   handleOk={handleOk}
                   canSubmit={canSubmit}
                   submitting={submitting}
@@ -1713,15 +1561,13 @@ ${String(error?.message || error)}`
   colors={colors}
 />
 
-<InputPiecePreviewController
+{isTutorialMode ? <InputPiecePreviewController
   visible={piecePreviewVisible}
   previewPayload={piecePreviewPayload}
-  pieceQuota={pieceQuota}
-  publishLoading={piecePublishLoading}
   onClose={handleCancelPiecePreview}
   onPublish={handlePublishPiece}
-  hideCancelButton={isTutorialMode}
-/>
+  hideCancelButton={true}
+/> : null}
       </View>
 
 {tutorialOverlayConfig ? (

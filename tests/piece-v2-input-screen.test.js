@@ -34,15 +34,15 @@ function pieceFixture(send) {
   return { ui: context.fixtureExports.fixture({ send }), ref: context.fixtureExports.ref };
 }
 function harness(options = {}) {
-  const control = { owner: OWNER, enabled: true, tutorial: false, reset: 0,
+  const control = { owner: OWNER, enabled: true, tutorial: false, reset: 0, step: 8,
     threadVisible: false, threadBusy: false, threadMode: false,
     result: { id: INPUT, input_feedback: { comment_text: 'PRIVATE_EMLIS_BODY', emlis_ai: {} } },
     ...options };
-  const submits = [], notices = [], logs = [], threadIds = [], listeners = new Map();
+  const submits = [], notices = [], logs = [], threadIds = [], legacyCalls = [], tutorialSeeds = [], listeners = new Map();
   let entropyCalls = 0, writes = 0, mounted = false, cursor = 0, dirty = false, tree;
   const hooks = [], effects = [];
   const noop = () => {};
-  const clearDraft = async () => {};
+  const clearDraft = async () => { if (control.clearDraft) await control.clearDraft(); };
   const sameDeps = (a, b) => Array.isArray(a) && Array.isArray(b) && a.length === b.length && a.every((v, i) => Object.is(v, b[i]));
   const React = {
     createElement: (type, props, ...children) => ({ type, props: props || {}, children }),
@@ -102,8 +102,8 @@ function harness(options = {}) {
     if (name === '../AppRuntimeContext') return { useAppRuntime: () => screenRuntime };
     if (name === '../UnreadContext') return { useUnread: () => ({ setUnread: noop }) };
     if (name === '../TutorialContext') return { useTutorial: () => ({ isTutorialMode: control.tutorial,
-      tutorialFlagsLoaded: true, tutorialStep: 8, tutorialResetToken: control.reset,
-      addTutorialEmotion: noop, ensureTutorialPiecesSeed: noop, setTutorialStep: noop }) };
+      tutorialFlagsLoaded: true, tutorialStep: control.step, tutorialResetToken: control.reset,
+      addTutorialEmotion: noop, ensureTutorialPiecesSeed: () => tutorialSeeds.push(true), setTutorialStep: noop }) };
     if (name === '../theme/ThemeContext') return { useTheme: () => ({ colors, themeName: 'light' }) };
     if (name === '../ui/uiTokens') return { makeUiTokens: () => ({}) };
     if (name === '../ui/applyTypographyTokens') return { applyTypographyTokens: x => x };
@@ -115,12 +115,17 @@ function harness(options = {}) {
       submits.push({ payload: clone(payload), options: clone(opts) });
       return control.submit ? control.submit(submits.length) : clone(control.result);
     } };
-    if (name === '../lib/api/home/emotionPieceApi') return { previewEmotionPiece: async () => { throw Error('legacy not part of Piece v2'); },
-      publishEmotionPiece: async () => { throw Error('legacy not part of Piece v2'); }, cancelEmotionPiece: noop };
+    if (name === '../lib/api/home/emotionPieceApi') return Object.fromEntries(
+      ['previewEmotionPiece','publishEmotionPiece','cancelEmotionPiece'].map(name => [name, async (...args) => {
+        legacyCalls.push({ name, args }); return { preview_id: 'old-preview' };
+      }]));
     if (name === '../lib/noticeActionRuntime') return { openNoticeAction: noop };
     if (name === '../lib/analysisHomeSummaryRefreshSignal') return { markAnalysisHomeSummaryDirty: async () => {} };
     if (name === '../lib/compat/legacyWireContracts') return { EMOTION_NOTIFICATION_WIRE: { submitField: 'send_emotion_notification' } };
-    if (name === '../tutorial/tutorialScenarioData') return { getTutorialEmlisReplyText: () => 'TUTORIAL_ONLY', TUTORIAL_EMLIS_REPLY: { meta: {} }, TUTORIAL_INPUT_SAMPLE: {} };
+    if (name === '../tutorial/tutorialScenarioData') return { getTutorialEmlisReplyText: () => 'TUTORIAL_ONLY',
+      TUTORIAL_EMLIS_REPLY: { meta: {} }, TUTORIAL_INPUT_SAMPLE: { memo: 'TUTORIAL_INPUT', memoAction: '',
+        emotions: [{ type: 'self_insight', strength: 1 }], categories: ['value'] },
+      TUTORIAL_PIECE_PREVIEW: { preview_id: 'tutorial-preview', reflection_text: 'TUTORIAL_ONLY' } };
     if (name === './input/inputOptions') return { SELF_INSIGHT: 'self_insight', INPUT_TUTORIAL_STEP_START: 2, INPUT_TUTORIAL_STEP_END: 7 };
     if (name === './input/inputDraftModel') return { normalizeInputDraftData: x => x };
     if (name === './input/inputFeedbackModel') return { buildInputFeedbackEmotionMeta: () => ({}) };
@@ -190,7 +195,7 @@ function harness(options = {}) {
     find('EmlisThreadModal')?.props.thread.close(); render();
   };
   render();
-  return { control, u, ref: f.ref, submits, notices, logs, threadIds, render, find, fill, finishObservation,
+  return { control, u, ref: f.ref, submits, notices, logs, threadIds, legacyCalls, tutorialSeeds, render, find, fill, finishObservation,
     navigation, slot: () => find(Host), entry: () => nodes(tree).find(n => n.props.testID === 'piece-saved-input-entry'),
     submit: () => find('InputActionArea').props.handleOk(),
     entropyCalls: () => entropyCalls, writes: () => writes,
@@ -418,3 +423,70 @@ test('InputScreen supplies its existing navigator to the saved Piece host withou
   assert.deepEqual(Object.keys(h.slot().props.savedInput).sort(), ['expectedUserId', 'idempotencyKey', 'savedInputId']);
   assert.equal(h.u.calls.length, 0); h.dispose();
 });
+
+// Render the actual action component: the InputScreen harness deliberately
+// leaves ordinary child components opaque, which alone cannot check buttons.
+function actionButtons(h) {
+  const output = ts.transpileModule(fs.readFileSync(path.join(ROOT, 'screens/input/InputActionArea.js'), 'utf8'),
+    { fileName: 'InputActionArea.tsx', compilerOptions: { target: ts.ScriptTarget.ES2022,
+      module: ts.ModuleKind.CommonJS, jsx: ts.JsxEmit.React, esModuleInterop: false } }).outputText;
+  const module = { exports: {} }, React = { createElement: (type, props, ...children) => ({ type, props, children }) };
+  vm.runInNewContext(output, { module, exports: module.exports, require: name => name === 'react'
+    ? { default: React } : name === 'react-native' ? { Platform: { OS: 'ios' }, Text: 'Text', View: 'View' }
+      : { default: name.split('/').pop() } });
+  const walk = node => !node || typeof node !== 'object' ? []
+    : [node, ...(node.children || []).flat(Infinity).flatMap(walk)];
+  return walk(module.exports.default(h.find('InputActionArea').props)).filter(n => n.type === 'CocolonButton');
+}
+
+for (const enabled of [false, true]) {
+  test(`normal input has only the submit action and no old modal with Piece v2 ${enabled ? 'ON' : 'OFF'}`, () => {
+    const h = harness({ enabled }); h.fill();
+    assert.deepEqual(actionButtons(h).map(n => n.props.accessibilityLabel), ['この内容でOK']);
+    assert.equal(h.find('InputPiecePreviewController'), undefined); h.dispose();
+  });
+  test(`normal input cannot call raw Piece preview even by a retained callback with v2 ${enabled ? 'ON' : 'OFF'}`, async () => {
+    const h = harness({ enabled }); h.fill();
+    await h.find('InputActionArea').props.handlePreviewPiece(); h.render();
+    assert.equal(h.legacyCalls.length, 0); assert.equal(h.u.calls.length, 0);
+    assert.equal(h.find('InputPiecePreviewController'), undefined); h.dispose();
+  });
+}
+
+test('tutorial keeps its local sample preview and observation flow without any Piece HTTP', async () => {
+  const h = harness({ tutorial: true, step: 7 }); h.fill();
+  const button = actionButtons(h).find(n => n.props.accessibilityLabel === 'ピースを生成する');
+  assert.ok(button); assert.equal(button.props.disabled, false);
+  await button.props.onPress(); h.render();
+  const modal = h.find('InputPiecePreviewController');
+  assert.equal(modal.props.visible, true); assert.equal(modal.props.previewPayload.preview_id, 'tutorial-preview');
+  await modal.props.onPublish(); h.render();
+  assert.equal(h.tutorialSeeds.length, 1); assert.equal(h.control.observation.commentText, 'TUTORIAL_ONLY');
+  assert.equal(h.legacyCalls.length, 0); assert.equal(h.u.calls.length, 0); assert.equal(h.submits.length, 0); h.dispose();
+});
+
+const leaveTutorialSelection = {
+  mode: h => { h.control.tutorial = false; },
+  owner: h => { h.control.owner = 'other-owner'; },
+  reset: h => { h.control.reset++; },
+};
+for (const [name, change] of Object.entries(leaveTutorialSelection)) {
+  test(`old tutorial preview callback cannot reopen after ${name} changes`, async () => {
+    const h = harness({ tutorial: true, step: 7 }); h.fill();
+    assert.equal(h.find('InputActionArea').props.canPreviewPiece, true);
+    const preview = h.find('InputActionArea').props.handlePreviewPiece;
+    change(h); h.render(); const writes = h.writes();
+    await preview(); assert.equal(h.writes(), writes); assert.equal(h.legacyCalls.length, 0); h.dispose();
+  });
+  test(`pending tutorial confirmation cannot show its observation after ${name} changes`, async () => {
+    const h = harness({ tutorial: true, step: 7 }); h.fill();
+    await h.find('InputActionArea').props.handlePreviewPiece(); h.render();
+    assert.equal(h.find('InputPiecePreviewController').props.visible, true);
+    const wait = deferred(); h.control.clearDraft = () => wait.promise;
+    const pending = h.find('InputPiecePreviewController').props.onPublish();
+    await tick(); change(h); h.render(); const writes = h.writes();
+    wait.resolve(); await pending;
+    assert.equal(h.writes(), writes); assert.equal(h.control.observation, undefined);
+    assert.equal(h.legacyCalls.length, 0); h.dispose();
+  });
+}

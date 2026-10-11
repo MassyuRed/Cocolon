@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§55／current map §59を優先します。写真保存成功を、保存後の一時画像削除失敗や本人・runtime失効で失敗へ変えてしまう不具合を修正しました。保存前fit・正式renderer admission・初回保存ボタン・実機は未完了です。保存後本人detailの接続は§54を継承します。**
+**現在は§56／current map §60を優先します。通常入力画面の旧raw-input Piece通信を除去し、保存入力からのV2経路へ一本化しました。旧サンプル表示はtutorialだけに限定します。非稼働の切替準備であり、実機・正式renderer admission・保存前fit・初回保存は未完了です。前回の写真保存結果保持は§55を継承します。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1059,3 +1059,13 @@ local既存12suite **634 PASS／FAIL0／SKIP0**（先行611＋追加23）。Inpu
 保存の本線は **B9実端末描画確認→正式renderer admission→保存前fit→初回保存操作**。prototype v3/native_checkedを正式判定へ昇格させない。保存結果表示・同key回収・本人detailは再実装しない。画像共有の全完成を初回実機確認へ追加せず、weekly10/10 §5.5と12/18公開目標を継承する。
 
 §55最終確認：source `1df91cc74b92e59d9ac6bba126a2c8fbfa696e84` の製品1＋test1＋資料3をDraft PR #30へ反映し、全5fileのremote全文・変更path集合・親headを照合した。[CI38102760544](https://github.com/MassyuRed/Cocolon/actions/runs/38102760544)は全5job success、JSはlocal／CIそれぞれ **643 PASS／FAIL0／SKIP0**。Android／iOS bridge source検査も成功。export library compile stepは依存差分がなく両OSともskip。正式描画判定・初回保存・実機受入れは未完了。
+
+## 56. 2026-10-11 — 通常入力から旧Piece通信を除去
+
+通常InputScreenの旧「ピースを生成する」は、未保存のraw本文をV2と同じpreview URLへ送り、旧publish/cancelも保持していた。PCE6／PCE8 B12-Cの既承認非稼働切替準備として、この3通信とimportを除去。通常入力は「この内容でOK」で保存し、Emlis表示が閉じた後に既存saved-input V2 hostを使う。V2 flag OFFでも旧操作へ戻さない。
+
+既存チュートリアルの固定sample／step7／説明後の遷移は保持し、旧button/modalをtutorialだけに限定した。古いtutorial callbackと途中処理は、既存owner/tutorial/reset lifetimeで失効させる。通常入力・Emlisの所有範囲は変更しない。
+
+追加11検査。入力画面42件は修正前34 PASS／8 FAIL、修正後42 PASS。Piece既存12suite **654 PASS／FAIL0／SKIP0**、既存screen/IAP/themeは別集合 **77 PASS／FAIL0／SKIP0**。React/native/Auth/HTTPは代替であり実機結果ではない。製品2＋test2＋資料3。GitHub／CIと再開点はcurrent map §60。
+
+通常入力の通信衝突を除く部分準備で、tutorial・Nexus・旧API等を含む全面M5は未完了。次は既存候補APIの稼働構成／対象アプリ版と実機経路をそろえ、B9描画確認→正式renderer admission→保存前fit→初回保存へ進む。稼働変更・配布は別の範囲。画像共有の全完成を初回実機確認へ追加しない。
