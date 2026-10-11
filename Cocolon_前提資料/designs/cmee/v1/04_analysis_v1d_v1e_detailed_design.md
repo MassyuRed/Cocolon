@@ -652,6 +652,17 @@ Analysis前後26全文と実RN model、実service＋合成RPC保存再読3ルー
 Emlis5入力の前後10結果（8生成全文）も読解。通常書字/明示SELFの2例でObservationとReceptionの選択が変わるが、報告と考えの対照は全文一致。汎用応答・復唱の品質合格とはしない。「私は不安だった」がAnalysisで落ちる既存残件は今回の語彙補正で解消したとしない。最終回帰/CI・反映・次の因果ownerは06/API handoff u214。新規repo file0、Analysis compiler/realizer/API/DTO/DB/RN製品変更0、STRUCTURE_MAP_DELTA_NONE。稼働DB・本人実機・正式商品受入れは未確認。
 
 
+## 3.45 u215 明示本人の過去の不安（2026-10-12・未配置）
+
+「私は不安だった」が採用されず、後続「私は安心しなかった」だけ残る欠落を補修する。共有Planにはreaction/feeling・negative affectの本人証拠が既にある。Analysisの既存有限過去表へ「不安だった／不安でした」→「不安だ」を追加し、経験を述べた文法positiveと負情動を示すshared negativeを区別する。本人7表記・完全な独立過去節だけを扱い、source/原文範囲/UTF8/hashを保持する。
+
+standalone witnessはexplicit scope・retention・memo単一span・本人・reaction/feeling・許可時点・feeling operatorを要求し、negation/positive_change/current_changeがあれば拒否する。既存の両field source-host検査を適用し、報告/引用/否認/疑問や別人の話を本人の事実にしない。複合action-change pairの証拠では採用しない。省略/他者主体・日付/程度/現在・否定不安・複合節は未対応として保持する。
+
+独立した不安と安心不成立を2nodeで残し、明示順序だけを1edgeで表す。行動の効果/原因は追加せず、未知文/別field/別recordの接続を補わない。訂正/撤回で古い感情と順序を取り除き、丁寧形を同じ意味へ集約する一方、不安と安心不成立を同一視しない。
+
+合成14入力の前後28結果（20生成全文）で8入力改善・6対照不変。実RN modelと合成RPC保存再読4入力を確認。ローカル5suite **1345 tests／5409 subtests PASS**。固定source/最終CIと次の否定不安等の残件は06/API handoff u215。既存compiler1・test2のみのsource変更、共有Plan/Emlis/realizer/API/DTO/DB/RN製品変更0、新規repo file0、STRUCTURE_MAP_DELTA_NONE。未配置、本人実機・稼働DB保存再読・正式商品受入れは未確認。
+
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
