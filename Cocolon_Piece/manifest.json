@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v55",
+  "schema_version": "cocolon.piece.workstream_manifest.v56",
   "generated_at": "2026-10-11 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v54",
-    "predecessor_blob": "eb38d9605104f7f974740357efa227c53abeccb6",
-    "predecessor_head": "63e161965cfbba61d525dc82396eeefb0527cfc7",
-    "carry_forward": "Normal InputScreen uses only the saved-input V2 route. Legacy tutorial samples remain local; full M5, deployment, device admission and initial save remain pending."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v55",
+    "predecessor_blob": "33fbba89d1c3bcbff79f4726198e81f75dc7c01d",
+    "predecessor_head": "351c42c59d5e8b0083c14a66caaef87d2702911f",
+    "carry_forward": "Normal Nexus header connects to existing owner history under strict owner-read availability. Input V2 cutover and saved result handling remain. Device admission, initial save and full M5 remain pending."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "f76e415f047a7521ed56b72e19d9ff6c5040ec3c",
-    "raw_sha256": "c460a063c1ecd7e602318b533ad99188a982bb53e800dcfb84359571be6247a5",
-    "utf8_bytes": 100399
+    "git_blob_sha1": "bb1b3e4b8db1bc8933afbf0490563f808c35bb3d",
+    "raw_sha256": "fc2ce8bf95fb396f6561f009494afed9e7127fe793b9b42c5792f24dd021a2c6",
+    "utf8_bytes": 102647
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -88,7 +88,8 @@
     "pce9c_save_outcome_ui": "REMOTE_703C60B__SAVE_OUTCOME_UI_RECOVERY_CONNECTED__CI611_PASS__INITIAL_SAVE_ADMISSION_DEVICE_PENDING",
     "pce9c_saved_owner_detail": "REMOTE_7BD5930__SAVED_OWNER_DETAIL_CONNECTED__CI634_PASS__INITIAL_SAVE_ADMISSION_DEVICE_PENDING",
     "pce9e_photo_save_result": "REMOTE_1DF91CC__CONFIRMED_PHOTO_SAVE_RESULT_PRESERVED__CI643_PASS__DEVICE_PENDING",
-    "pce9f_b12c_input_screen": "REMOTE_E9045AA__NORMAL_INPUT_V2_ONLY__CI654_PASS__M5_DEVICE_PENDING"
+    "pce9f_b12c_input_screen": "REMOTE_E9045AA__NORMAL_INPUT_V2_ONLY__CI654_PASS__M5_DEVICE_PENDING",
+    "pce9c_owner_history_entry": "REMOTE_D866DC0__NORMAL_NEXUS_OWNER_ENTRY__CI667_PASS__DEVICE_PENDING"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -170,7 +171,7 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "63e161965cfbba61d525dc82396eeefb0527cfc7",
+    "cocolon_pre_sync_head": "351c42c59d5e8b0083c14a66caaef87d2702911f",
     "mashos_api_head": "6b901a1df0037c047513e794624917a09b0f3ac4",
     "current_user_visible_piece_shape": "CANDIDATE_NORMAL_INPUT_V2_SAVED_SOURCE_ONLY__TUTORIAL_NEXUS_LEGACY_REMAIN__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
@@ -186,7 +187,7 @@
     "input_screen_source_connected": true,
     "live_auth_input_to_preview_to_device_verified": false,
     "database_evidence_owner": "live_db_apply_20261010",
-    "remaining_work_owner": "input_screen_cutover_20261011",
+    "remaining_work_owner": "owner_history_entry_20261011",
     "product_acceptance": false,
     "piece_v2_default_application_registered": false,
     "piece_v2_quota_http_present": true,
@@ -224,15 +225,16 @@
     "piece_v2_save_outcome_display_connected": true,
     "piece_v2_save_recovery_host_connected": true,
     "piece_v2_saved_owner_detail_refresh_connected": true,
-    "input_screen_legacy_piece_http_reachable": false
+    "input_screen_legacy_piece_http_reachable": false,
+    "piece_v2_normal_owner_history_entry_connected": true
   },
   "next_group": {
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "NATIVE_DEVICE_RENDERER_ADMISSION_THEN_SAVE_FIT_AND_BOUND_SAVE",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "INPUT_SAVED_SOURCE_ONLY__M5_DEVICE_ADMISSION_PENDING",
-    "current_map_section": "60.3",
-    "current_entry_section": "56",
+    "state": "NORMAL_OWNER_HISTORY_ENTRY_CONNECTED__DEVICE_ADMISSION_PENDING",
+    "current_map_section": "61.3",
+    "current_entry_section": "57",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
     "weekly_review_section": "5.5",
     "first_unfinished_work": "B9 device equivalence -> formal renderer admission -> save fit -> initial save action. Reuse the connected saved owner detail refresh, save outcome display and same-request recovery. PNG/photo/share device checks remain; export completion is not a prerequisite for first device inspection.",
@@ -269,7 +271,9 @@
     "repeat_saved_owner_detail": false,
     "saved_owner_detail_owner": "saved_owner_detail_20261011",
     "photo_save_result_owner": "photo_save_result_20261011",
-    "input_screen_cutover_owner": "input_screen_cutover_20261011"
+    "input_screen_cutover_owner": "input_screen_cutover_20261011",
+    "owner_history_entry_owner": "owner_history_entry_20261011",
+    "repeat_normal_owner_history_entry": false
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -323,9 +327,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "9532465a1d619c68db8468c27cdd08b042e714ee",
-    "raw_sha256": "c47673b7b8a1dc161611a2e500dd7e4a4ee7e4ceb4a1a1a65997c906f9ac6ad3",
-    "utf8_bytes": 327527
+    "git_blob_sha1": "0d07a1529dc24425a7faa332e6c962c9a4490810",
+    "raw_sha256": "80eb164ab58e23d9da51461557f8150aba708d540175a7c6b08925188426e0b7",
+    "utf8_bytes": 332503
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -498,17 +502,17 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "NORMAL_INPUT_LEGACY_PIECE_HTTP_REMOVED__SAVED_SOURCE_V2_ONLY",
+    "classification": "NORMAL_NEXUS_TO_OWNER_HISTORY_CONNECTED__RUNTIME_DEVICE_PENDING",
     "piece_documentation_paths": 3,
     "rn_changed_paths": 2,
-    "rn_test_paths": 2,
+    "rn_test_paths": 1,
     "workflow_changed_paths": 0,
     "native_changed_paths": 0,
     "api_product_paths": 0,
     "sql_changed_paths": 0,
     "new_dependency": 0,
     "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
-    "local_js_passed": 654,
+    "local_js_passed": 667,
     "local_js_failed": 0,
     "local_js_skipped": 0,
     "ci_pending": false,
@@ -519,7 +523,7 @@
     "automatic_progression": false,
     "local_screen_iap_theme_passed": 77,
     "local_screen_iap_theme_failed": 0,
-    "ci_js_passed": 654,
+    "ci_js_passed": 667,
     "ci_js_failed": 0,
     "ci_js_skipped": 0
   },
@@ -4052,6 +4056,85 @@
     "remote_files_verified": 7,
     "remote_changed_paths_match": true,
     "remote_parent_match": true,
+    "native_library_compile_rerun": false,
+    "native_library_compile_skip_reason": "No dependency/platform/workflow changes; existing scope skipped both export library compile steps."
+  },
+  "historical_current_sync_effects_before_owner_history_entry_20261011": {
+    "classification": "NORMAL_INPUT_LEGACY_PIECE_HTTP_REMOVED__SAVED_SOURCE_V2_ONLY",
+    "piece_documentation_paths": 3,
+    "rn_changed_paths": 2,
+    "rn_test_paths": 2,
+    "workflow_changed_paths": 0,
+    "native_changed_paths": 0,
+    "api_product_paths": 0,
+    "sql_changed_paths": 0,
+    "new_dependency": 0,
+    "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
+    "local_js_passed": 654,
+    "local_js_failed": 0,
+    "local_js_skipped": 0,
+    "ci_pending": false,
+    "live_database_apply": 0,
+    "release_effect": 0,
+    "native_app_builds": 0,
+    "product_acceptance": false,
+    "automatic_progression": false,
+    "local_screen_iap_theme_passed": 77,
+    "local_screen_iap_theme_failed": 0,
+    "ci_js_passed": 654,
+    "ci_js_failed": 0,
+    "ci_js_skipped": 0
+  },
+  "owner_history_entry_20261011": {
+    "base_head": "351c42c59d5e8b0083c14a66caaef87d2702911f",
+    "source_commit": "d866dc081bfc8f9cbae3bfb21bb2777b74b1ff63",
+    "state": "REMOTE_D866DC0__CI667_PASS__DEVICE_PENDING",
+    "current_entry_section": "57",
+    "current_map_section": "61",
+    "changed_product_paths": [
+      "screens/NexusScreen.js",
+      "screens/nexus/NexusHeader.js"
+    ],
+    "changed_test_paths": [
+      "tests/piece-v2-owner-history.test.js"
+    ],
+    "normal_header_entry_connected": true,
+    "strict_owner_read_flag_required": true,
+    "tutorial_entry": false,
+    "stale_owner_or_availability_callback_revives": false,
+    "saved_detail_target_reset": true,
+    "private_history_via_legacy_public_filter": false,
+    "existing_owner_api_controller_reused": true,
+    "owner_history_red_passed": 54,
+    "owner_history_red_failed": 7,
+    "owner_history_green_passed": 61,
+    "local_js_passed": 667,
+    "local_js_failed": 0,
+    "local_js_skipped": 0,
+    "local_screen_iap_theme_passed": 77,
+    "local_screen_iap_theme_failed": 0,
+    "added_tests": 13,
+    "ci_pending": false,
+    "full_m5_complete": false,
+    "native_device_acceptance": false,
+    "product_acceptance": false,
+    "review_environment": "CODEX_WORK_WITH_SAME_ENVIRONMENT_READ_ONLY_SUBAGENT_REVIEW_NOT_PRO_ULTRA_ACCEPTANCE",
+    "review_blockers": 0,
+    "live_database_write": 0,
+    "activation": 0,
+    "app_build": 0,
+    "main_merge": 0,
+    "automatic_progression": false,
+    "ci_run_id": 38104312149,
+    "ci_url": "https://github.com/MassyuRed/Cocolon/actions/runs/38104312149",
+    "ci_all_five_jobs_success": true,
+    "ci_js_job_id": 114366443700,
+    "ci_js_passed": 667,
+    "ci_js_failed": 0,
+    "ci_js_skipped": 0,
+    "remote_source_files_verified": 3,
+    "remote_source_changed_paths_match": true,
+    "remote_source_parent_match": true,
     "native_library_compile_rerun": false,
     "native_library_compile_skip_reason": "No dependency/platform/workflow changes; existing scope skipped both export library compile steps."
   }

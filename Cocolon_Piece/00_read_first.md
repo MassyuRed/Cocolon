@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§56／current map §60を優先します。通常入力画面の旧raw-input Piece通信を除去し、保存入力からのV2経路へ一本化しました。旧サンプル表示はtutorialだけに限定します。非稼働の切替準備であり、実機・正式renderer admission・保存前fit・初回保存は未完了です。前回の写真保存結果保持は§55を継承します。**
+**現在は§57／current map §61を優先します。通常Piece画面の見出し直下から「自分のPiece」を開けるよう、既存本人履歴へ接続しました。本人読取flagが有効な認証済み通常画面だけに表示します。実機・正式renderer admission・保存前fit・初回保存は未完了です。通常入力のV2一本化は§56、写真保存結果保持は§55を継承します。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1071,3 +1071,16 @@ local既存12suite **634 PASS／FAIL0／SKIP0**（先行611＋追加23）。Inpu
 通常入力の通信衝突を除く部分準備で、tutorial・Nexus・旧API等を含む全面M5は未完了。次は既存候補APIの稼働構成／対象アプリ版と実機経路をそろえ、B9描画確認→正式renderer admission→保存前fit→初回保存へ進む。稼働変更・配布は別の範囲。画像共有の全完成を初回実機確認へ追加しない。
 
 §56最終確認：source `e9045aaa7be8b74b37e484c64661e19ba1ea2bcf` の製品2＋test2＋資料3をDraft PR #30へ反映し、全7fileのremote全文・変更path集合・親headを照合した。[CI38103585515](https://github.com/MassyuRed/Cocolon/actions/runs/38103585515)は全5job success、Piece JSはlocal／CIそれぞれ **654 PASS／FAIL0／SKIP0**。既存screen/IAP/theme77件はlocalの別検査でありCI件数へ含めない。実機・正式保存判定・稼働切替は未完了。
+
+
+## 57. 2026-10-11 — 通常Piece画面から自分の保存履歴を開く
+
+通常のPiece入口はPieceEntryScreen→Nexusで、既存の本人履歴menuへ進む導線がなかった。Nexusの見出し直下に「自分のPieceを開く」を置き、既存PieceOwnerHistoryへ `savedPiece: null` で接続した。以前の保存直後detail対象を解除し、到着先の「保存済みPieceを読み込む」で既存本人専用GETを使う。公開feedの「自分」filterや表示上「共鳴」のtabへ本人保存dataを混ぜない。
+
+認証初期化完了・本人あり・非tutorial・既存owner-read flag厳密trueの場合だけ表示。本人／利用可否が変わると古い操作を失効させ、元の値へ戻っても復活させない。blur／unmount後も移動しない。公開feed・共鳴のloading/errorと入口を分離する。
+
+追加13検査。既存owner-history集合61件は修正前54 PASS／7 FAIL、修正後61 PASS。Piece既存12suiteは **667 PASS／FAIL0／SKIP0**。既存screen/IAP/themeは別集合 **77 PASS／FAIL0／SKIP0**。実Screen/Header→route→既存本人controller/APIを代替React/Auth/HTTPで確認し、実機受入れとはしない。製品2＋test1＋既存資料3。詳細・GitHub／CI・次の残件はcurrent map §61。
+
+本線はB9実機描画→正式renderer admission→保存前fit→初回保存。画像共有の全完成を初回実機確認の前提にしない。今回の入口接続はAPI有効化・アプリ配布ではなく、全面M5の完了でもない。weekly10/10 §5.5と12/18目標を継承する。
+
+§57反映確認：source `d866dc081bfc8f9cbae3bfb21bb2777b74b1ff63` の製品2＋test1をDraft PR #30へ反映し、remote全文・変更path集合・親head一致を確認した。[CI38104312149](https://github.com/MassyuRed/Cocolon/actions/runs/38104312149)は全5job success、JSはlocal／CIそれぞれ **667 PASS／FAIL0／SKIP0**。screen/IAP/theme77件はlocalの別検査。既存Android／iOS bridge source検査も成功。依存差分がないためexport library compileは両OSともskip。入口§57／map§61／manifest v56を同期する。実機・正式保存判定・稼働切替は未完了。

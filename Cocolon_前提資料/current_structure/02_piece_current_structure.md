@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新の作業記録は§60。通常入力画面の旧raw-input preview/publish/cancelを除去し、保存入力V2 hostへ一本化しました。tutorialのローカル旧sampleは保持。非稼働切替準備の一部で、M5全面・実機・正式renderer admission・保存前fit・初回保存は未完了です。**
+**最新の作業記録は§61。通常Piece画面（Nexus）の見出し直下へ本人履歴の入口を接続しました。既存owner-read flagと本人・画面状態で制御し、旧公開投稿／共鳴の読取とは独立します。非稼働のコード準備であり、実機・正式renderer admission・保存前fit・初回保存・M5全面は未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -2203,3 +2203,38 @@ TutorialContextのseedは既存ローカル処理。固定sample・step7の操�
 source `e9045aaa7be8b74b37e484c64661e19ba1ea2bcf` の製品2＋test2＋資料3をDraft PR #30へ反映し、全7fileのremote全文・変更path集合・親headを照合した。[CI38103585515](https://github.com/MassyuRed/Cocolon/actions/runs/38103585515)は**全5job success**。JS job114364337316は **654 PASS／FAIL0／SKIP0**、Node24.21.0／TypeScript5.2.2。local654件との合算はせず、別のscreen/IAP/theme77件はlocal結果だけ。Android bridge source compileとiOS source syntax／patch検査もsuccess。export Pods／Android依存compile stepは依存差分がなくscopeどおりskip。
 
 入口§56／manifest v55へ同期した。通常入力の旧通信を取り除いたsource準備に限る。チュートリアル・Nexus等を含む全面M5、API稼働構成、実機描画受入れ、保存前fit・初回保存は未完了。
+
+
+## 61. 2026-10-11 — Nexus通常入口から本人保存履歴へ接続
+
+### 61.1 対象と変更
+
+基準Cocolon `351c42c59d5e8b0083c14a66caaef87d2702911f`／API `6b901a1df0037c047513e794624917a09b0f3ac4` をremoteで確認。全体設計・全ファイル地図・前回txt・CURRENT_RULES／Rule18 §11.3・恒久incident・PCE5／PCE6／PCE8の同会話読取を継承し、最新weekly10/10 §5.5・入口§56／本map§60・現物経路を照合した。既承認の非稼働準備内のDIRECT_PRODUCT_OR_ACCEPTANCE_WORK。root華恋の単一writer、同環境read-only補助reviewであり、独立Pro/Ultra正式受入れではない。
+
+通常入口 `PieceEntryScreen` はlinkPayloadがなければNexusを表示し、既存本人履歴menuは通常導線に存在しなかった。保存直後detailから離れた後も、自分の保存済みPieceを開く入口が必要だった。Nexus内部のhistory tabの表示名は「共鳴」のため、そこへ混在させず見出し直下へ独立入口を置く。
+
+| path | 変更と責務 |
+| --- | --- |
+| `screens/NexusScreen.js` | 既存AppRuntimeのowner-read厳密true・認証初期化完了・本人あり・非tutorialで入口を許可。本人／可否の変更で古いcallbackを失効させ、blur／unmountも照合。既存 `PieceOwnerHistory` へ `{ savedPiece: null }` を渡す。 |
+| `screens/nexus/NexusHeader.js` | 既存header行・titleRef・guide/follow/refreshを保持し、その下へ既存CocolonPressableとTextの「自分のPieceを開く」を追加。通常の各tab共通、旧feedのloading/errorから独立。 |
+| `tests/piece-v2-owner-history.test.js` | 実Screen/Headerの入口から既存本人host/APIの専用GETまで確認。flag・認証・tutorialでの不在、本人／可否の往復後の古いcallback、blur/unmount、feedエラー独立の13件を追加。 |
+
+到着先のowner controller／履歴APIは既存のまま。`savedPiece: null` は保存直後detail対象を解除し、本人一覧は既存「保存済みPieceを読み込む」で `/emotion/piece/history?limit=20` をGETする。本人履歴を旧公開feedの自分filterで代用せず、本文をnavigation paramsに載せない。新flag／API／checker／controllerは追加しない。
+
+### 61.2 検証
+
+owner-history61件はRed **54 PASS／7 FAIL**、Green61 PASS。local Piece既存12suite **667 PASS／FAIL0／SKIP0**（先行654＋13）。既存screen/IAP/themeは別集合 **77 PASS／FAIL0／SKIP0**。Node24.19.0／TypeScript5.2.2。React/hooks・native・Auth・HTTPと旧feedは明示的な代替で、実機／稼働環境の成功ではない。同環境read-only差分reviewの修正必須指摘0。
+
+### 61.3 再開位置と境界
+
+通常入力のV2一本化（§60）、保存結果表示／同key再確認／保存直後本人detail、写真保存結果保持を継承し再実装しない。本線はB9実端末描画同等性・glyph/ink/性能→正式renderer admission→保存前fit→初回保存。prototype native_checkedを正式admissionへ昇格させない。今回の入口も既存owner-read有効時のコード準備で、実Auth／稼働API／対象アプリをそろえた利用確認は未実施。
+
+形式変更、画像保存／共有の実機、Nexus公開読取／切替、tutorial・旧APIを含むM5残差は継承する。read-only調査ではAPI shared候補に旧publish/cancelとreflection互換aliasの計4write routeが意図的に保持されている。候補構成での旧write除去と既存registry整合は別の残件で、今回は変更しない。画像共有全完成を初回実機確認の前提に追加しない。
+
+API／SQL／native／依存／workflow／Supabase操作・DB書込・env/deploy/activation・app build・署名／配布・main merge0。weekly§5.5・2026年12月18日公開目標・automatic_progression=false。STRUCTURE_MAP_DELTA_UPDATED（通常Nexusから本人履歴への呼出し経路）。
+
+### 61.4 GitHub／CI確認と同期
+
+source `d866dc081bfc8f9cbae3bfb21bb2777b74b1ff63` の製品2＋test1をDraft PR #30へ反映し、全3fileのremote全文・変更path集合・親headを照合した。[CI38104312149](https://github.com/MassyuRed/Cocolon/actions/runs/38104312149)は**全5job success**。JS job114366443700は **667 PASS／FAIL0／SKIP0**、Node24.21.0／TypeScript5.2.2。local667件と合算せず、別のscreen/IAP/theme77件はlocal結果だけ。Android bridge source compileとiOS source syntax／patch検査もsuccess。export Pods／Android依存compile stepは依存差分がなくscopeどおりskipで、今回の実native再buildではない。
+
+既存入口§57／本map§61／manifest v56を別の資料commitで同じPRへ同期する。通常入口の接続と既存本人読取のsource検査を完了した範囲に限り、API稼働構成、実機受入れ、保存前fit・初回保存、全面M5は未完了。
