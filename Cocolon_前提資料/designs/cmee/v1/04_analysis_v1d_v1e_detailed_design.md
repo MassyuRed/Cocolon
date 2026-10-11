@@ -571,6 +571,14 @@ u200の省略主体の行動後でも、共有報告判定が「の…でした�
 
 実engine合成13入力の前後22生成全文と実RN表示model、実service＋合成RPCの保存再読4ルート、Emlis前後6全文を確認。対象76 tests／100 subtests、共有identity1成功。Emlisの追加汎用文は新保持の感情を対象とする必須Moveのため維持し、反復は既存Receptionの残件とする。最終回帰・CI・remote照合、旧364probe同値と残件は06/API handoff u205を参照。未配置・実DB/本人実機・正式商品受入れ未確認。
 
+## 3.36 u206 順序語付きの本人書字後の感情（2026-10-11・未配置）
+
+共有Planの `_source_prefix_opens_report` が「その後、私は家族への手紙を書いた」を報告前置きと誤認し、後続の明示本人感情が欠ける原因を修正した。書字の完全一致判定内だけで「その後／それから」1個を区別する。単純名詞または目的語内の「への／との／での」、書いた/書きました、明示SELF、単純な場所/媒体の前後1項という既存境界を使用し、新受理の単純名詞にも未解析日付/疑問名詞検査を適用する。prefixなしの既存単純分岐・旧completed fallback・source座標は保持する。
+
+Analysis compiler/realizerを変えず、通常例は場面→書字→感情の3node/2順序線になる。未知文/別fieldを越す接続や、感情への主体/日付/原因補完はしない。重複順序語/日付混用/主体省略/他者/報告/裸の属格/二重場所等は保留。u205の順序付き書字1拒否fixtureは肯定側へ移し、16境界例を追加した。
+
+実engine合成11入力の前後16生成全文と実RN表示model、実service＋合成RPC保存再読2ルート、Emlis前後6全文を確認。対象103 tests／131 subtestsと共有identity1成功。Emlisの追加1文は明記された感情への応答であり、既存の汎用Reception品質は未解消。最終CI・remote照合・範囲と残件は06/API handoff u206。STRUCTURE_MAP_DELTA_NONE。未配置・実DB/本人実機・正式商品受入れ未確認。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
