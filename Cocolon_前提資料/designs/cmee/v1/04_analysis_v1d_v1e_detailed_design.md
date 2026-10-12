@@ -816,6 +816,12 @@ Analysis compilerで、明示SELFの完全な不安の否定形に「全く／�
 
 通常補足・訂正置換の全文coverageは緩めず、既知節と未解釈推量を混ぜた回答は全体を保留する。原入力の既知節の明示訂正/撤回は適用し、未知範囲は残す。期間比較は未知範囲の差として扱い、推量から観察routeや不一致状態の差を作らない。文章/図・保存/再読は既存契約を使用。合成28入力で8件の欠落解消・20対照不変、12全文と実RN model、5入力の合成保存再読を確認した。固定source/CI・初回検査修正・残件は06/API handoff u234。STRUCTURE_MAP_DELTA_NONE。一般的な推量/引用作用域の解決、推量自体の表示、全体ルートUI/IF/Savedと本人実機・稼働DB・正式商品受入れは残件。未配置。
 
+## 3.65 u235 丁寧な感情推量の横で明示内容を保持（2026-10-12・未配置）
+
+u234のscope helperに完全な「かもしれません／かも知れません」だけを追加する。推量の「ません」は感情の否定ではなく推量operatorの一部として扱い、既存SELF感情文法・共有witness・実句点の条件を維持する。推量をobserved nodeへ昇格させず、別の根拠付き明示節とSOURCE_SCOPEを残す。後続host・未解釈推量・報告/引用/夢/条件等を保留し、未知節を跨ぐ順序、不一致badge、補足/訂正の部分採用は行わない。語尾の一般拡張はしない。
+
+合成22入力で9欠落解消・13対照不変、13生成全文と実RN modelの一致、保存後再生成なし再読と不完全更新の非保存を確認。対象11 tests／223 subtests PASS。source `97c0925ec0ed011a845dfa39b371d98ca2f12c28`、固定source CIと未完了は06/API handoff u235。STRUCTURE_MAP_DELTA_NONE。一般意味理解、全体ルートUI/IF/Saved、最新修正版の本人実機・稼働DB・正式商品受入れは残る。未配置。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
