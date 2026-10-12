@@ -838,6 +838,12 @@ u234のscope helperに完全な「かもしれません／かも知れません�
 
 合成26入力の前後52結果で12誤帰属を解消、14対照は不変。前後36生成投影は実RN modelと一致。原文UTF-8/scalar/hash、訂正/撤回/不完全更新拒否、未知範囲だけの期間差、実engine/service＋合成RPCの未確定6入力非commitと独立内容4入力保存再読を確認した。最終対象31 tests／1177 subtests PASS。source `53503158b58d122bcf2c272b69de700ebaa05fc1`、最終CIと途中検査の修正記録は06/API handoff u237。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。条件regexの「頼もしい」誤一致は未変更・未解消。本人実機/稼働DB/正式商品受入れは未確認、未配置。weekly20261010 §5.4/§5.5の本人一往復への戻る位置を維持する。
 
+## 3.68 u238 希望・場面・担当の既知後置hostを保持（2026-10-12・未配置）
+
+完全な明示SELFの希望/過去所在/過去担当へ既存の後置host判定を適用する。whole span・compoundなし・既存有限節/共有根拠を維持し、引用/思考/否認を本人の事実・希望へ切り離さない。speaker/host式はhelperへ移すだけで変更せず、前方報告判定全体と未知speaker文法は拡張しない。後続独立行動を保持するための先行節/host閉鎖にも同じ既知host条件を要求し、未知speaker・未完host・先行open報告・別fieldを閉じない。
+
+合成30入力で14誤帰属を解消、16対照不変（既知未解消例を含む）。前後46投影が実RN modelと一致。原文出典、訂正/撤回/不完全更新、未知範囲だけの期間差、6入力の非commitと3入力の合成保存再読を確認。対象6 tests／123 subtests PASS。source `65aeb3f650d51eb17a3efc60303f9c0752a70c06`。CIと途中修正・未完了は06/API handoff u238。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。条件regexの「頼もしい」誤一致と未知speaker付き後置引用は未解消。本人実機/稼働DB/正式商品受入れは未確認、未配置。weekly20261010 §5.4/§5.5の本人一往復への戻る位置を維持する。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
