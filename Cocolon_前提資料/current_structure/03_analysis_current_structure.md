@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_analysis_current_structure
 title: "分析構造 — Current Structure"
-revision_date: "2026-10-12 JST"
+revision_date: "2026-10-13 JST"
 document_role: "ANALYSIS_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -13,6 +13,8 @@ automatic_progression: false
 # 分析構造 — Current Structure
 
 ## 0. Current conclusion
+
+**u250 内容修正（2026-10-13 JST・未配置）**：「親しい新しい友人」「親しい知っている友人」等、既知修飾が重なると引用を本人の事実へ変え、独立行動を落とす不整合を補修。既知修飾単位の連続を前方/後置hostへ共用し、肯定過去の全文一致だけで閉鎖。原文と残余marker検査を保持。合成32入力で15保留・6前後行動保持/回復・5先行行動保持・6不変（未対応2例を含む）、実RN model49投影一致、6非commit/10合成保存再読。対象15 tests／1041 subtests成功。source `e9bd8469170fe827c074b155915986cbc1ecb1b5`、CI/残件は詳細04 §3.80・06/API handoff u250。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。未知修飾/未完発言、本人実機/稼働DB/商品受入れは未完了。
 
 **u249 内容修正（2026-10-12 JST・未配置）**：「友人が話さない。私は職場にいた。」等の前方否定発言で後続を本人の事実へ誤帰属する漏れを補修。既知の明示話者＋既存7動詞の否定42形を全文一致で確認し、先行記述・別record・後置引用前後の独立内容を保持。合成40入力で25保留・7誤行動除去と先行行動保持・8不変（未対応3例を含む）、実RN model55投影の本文/identity一致、7非commit/14合成保存再読。対象23 tests／2264 subtests成功。source `a70ab180519fa4cfe3250f8d4766beebdc97ad3e`、CI/残件は詳細04 §3.79・06/API handoff u249。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。一般引用理解・本人実機/稼働DB/商品受入れは未完了。
 
