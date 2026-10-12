@@ -682,6 +682,14 @@ u215で未対応だった「では／じゃ」×「なかった／なかった�
 
 合成16入力の前後32結果（24生成全文）をrootが読解し、8入力で欠落解消、8対照の本文・node/edgeは不変。実RN model24投影、実service＋合成RPC保存再読3入力、対象13 tests／246 subtestsを確認。固定source・最終回帰/CIは06/API handoff u217。製品compiler/realizer2file・既存test2のみ。STRUCTURE_MAP_DELTA_NONE。共有Plan/Emlis・外部契約変更0。未配置、本人実機・稼働DB保存再読・正式商品受入れは未確認。本修正を最新weeklyの本人実機確認の新たな前提にはしない。
 
+## 3.48 u218 過去の不安に書かれた程度4語（2026-10-12・未配置）
+
+u217の少し専用判定で落ちる「とても／かなり／やや／ちょっと」＋肯定過去不安2形を補修する。共有Planは8形全てで原文1span・明示本人・required reaction/feeling・負情動・operator:feelingを保持しており、共有sourceは変更しない。既存compilerの有限程度表を5語へし、元のSLIGHT identityを保ったまま、新4語を各々別のprivate written_modifiersへ保持する。realizerは原綴りを戻す。語同士の同義推定・数値序列・強度増減・改善を加えない。
+
+既存7種SELF・主語直後の程度1個・完全な肯定過去2形に限定する。同じ語の常体/丁寧形は同義、別語・無修飾は別記述として集約/期間比較する。原文UTF8/hash、訂正/撤回、明示順序、safe再解析を保持。程度付き否定の作用域・引用/報告/否認・他者/省略主体・複合節・日付/現在形・助詞付き/二重程度は従来の保留を維持する。未知文/別field/別recordを順序で橋渡ししない。
+
+合成22入力の前後44結果（30生成全文）をrootが読解し、14入力で欠落解消・8対照不変。実RN model30投影、実service＋合成RPCで新4語の12入力を保存再読。対象15 tests／487 subtests成功。固定source・最終回帰/CI・残件は06/API handoff u218。既存compiler/realizer2・既存test2のみ、STRUCTURE_MAP_DELTA_NONE。未配置、本人実機・稼働DB保存再読・正式商品受入れは未確認。最新weeklyの実機確認を今回の有限補修に従属させない。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
