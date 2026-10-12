@@ -690,6 +690,14 @@ u217の少し専用判定で落ちる「とても／かなり／やや／ちょ�
 
 合成22入力の前後44結果（30生成全文）をrootが読解し、14入力で欠落解消・8対照不変。実RN model30投影、実service＋合成RPCで新4語の12入力を保存再読。対象15 tests／487 subtests成功。固定source・最終回帰/CI・残件は06/API handoff u218。既存compiler/realizer2・既存test2のみ、STRUCTURE_MAP_DELTA_NONE。未配置、本人実機・稼働DB保存再読・正式商品受入れは未確認。最新weeklyの実機確認を今回の有限補修に従属させない。
 
+## 3.49 u219 明示本人の現在の不安（2026-10-12・未配置）
+
+過去専用の有限感情文法から落ちていた、明示SELF＋程度なしの肯定「不安だ／不安です」を既存Analysis compiler/realizer内で扱う。現在の共有reaction/feeling根拠と完全節を照合し、private CURRENT_FEELING/current_input、表示「不安だ（この記述時点の気持ち）」で過去と分離する。負情動を文法否定へせず、現在までの継続・性格・原因・行動の効果を加えない。
+
+原文座標、7種SELF/主語読点、記載された順序語、報告/引用/否認・後続host・別field境界を保持する。currentの共有時点はcurrent_inputを要求し、過去/過去の順序条件は拡張しない。現在の「だ／です」は同義、過去形は別記述として集約/期間比較する。訂正・撤回・補足・safe再解析を維持。現在否定・程度付き現在形・日付/省略主体/複合節は別残件である。
+
+合成14入力の前後28結果（19生成全文）で8入力の欠落解消・6対照不変。実RN model19投影、実service＋合成RPC保存再読3入力を確認。固定source・最終回帰/CIは06/API handoff u219。既存compiler/realizer2・test2のみ。STRUCTURE_MAP_DELTA_NONE。未配置、本人実機・稼働DB保存再読・正式商品受入れは未確認。この修正を最新weeklyの実機確認の新たな前提にしない。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
