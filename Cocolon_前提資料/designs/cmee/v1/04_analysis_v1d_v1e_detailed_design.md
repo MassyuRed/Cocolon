@@ -698,6 +698,12 @@ u217の少し専用判定で落ちる「とても／かなり／やや／ちょ�
 
 合成14入力の前後28結果（19生成全文）で8入力の欠落解消・6対照不変。実RN model19投影、実service＋合成RPC保存再読3入力を確認。固定source・最終回帰/CIは06/API handoff u219。既存compiler/realizer2・test2のみ。STRUCTURE_MAP_DELTA_NONE。未配置、本人実機・稼働DB保存再読・正式商品受入れは未確認。この修正を最新weeklyの実機確認の新たな前提にしない。
 
+## 3.50 u220 明示本人の現在の不安の否定（2026-10-12・未配置）
+
+既存compiler/realizerで現在否定6形（不安ではない／ではないです／ではありません／じゃない／じゃないです／じゃありません）を明示SELF・程度なしの完全節として採用。CURRENT_FEELING/current_input/negativeを保持し、「不安ではない（この記述時点の気持ち）」を返す。共有Planの負情動を文法否定と混同せず、operator:negation一致・current_input・完全な原文証拠を要求する。安心/改善・継続は推定しない。
+
+6形は同義集約し、現在肯定・過去否定等と区別する。明示訂正/撤回を反映し、逆極性の通常補足は保留。同一原入力の肯否は両方保持するが現在感情の競合badgeや時制をまたぐ順序は未証明のまま。報告/引用/否認/他者/省略/程度付き/複合節等の境界は維持。合成18入力で12改善・6対照不変、24生成全文と実RN model、現在否定9入力の保存再読を確認。最終回帰/CI・source反映は06/API handoff u220。STRUCTURE_MAP_DELTA_NONE、共有/API/DTO/DB/RN製品変更0。本人実機・稼働DB・正式商品受入れは未確認。次は程度付き現在形等。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
