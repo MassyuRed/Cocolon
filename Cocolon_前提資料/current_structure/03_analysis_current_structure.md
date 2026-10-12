@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u241 内容修正（2026-10-12 JST・未配置）**：修飾話者の「言わなかった／言わなかったです／言いませんでした」で引用が落ち、本人の希望/所在/担当/行動/感情になる誤帰属を補修。既存host認識のみ拡張し、名詞文法・共有命題・完全host閉鎖を維持。前後/別recordの独立内容・原文出典を保持。合成30入力で20誤帰属解消・10対照不変（未対応引用2例を含む）、実RN model39投影一致、非commit/合成保存再読を確認。source `5717a65ce78a558005e17333a7f4a70ec619fd6a`、CI・残件は詳細04 §3.71・06/API handoff u241。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。一般の引用作用域/未知speaker、本人実機/稼働DB/正式商品受入れは残る。
+
 **u240 内容修正（2026-10-12 JST・未配置）**：話者修飾の「親しかった／親しくない／親しくなかった」等で後置引用が落ち、本人の希望/所在/担当/行動/感情へ誤帰属する不整合を補修。「漢字＋しい」系列の3活用だけを追加し、一般のかった形・名詞文法・共有命題は広げない。前後/別recordの独立内容と出典を保持。合成32入力で20誤帰属解消・12対照不変（未対応引用を含む）、48投影と実RN model一致、非commit/合成保存再読を確認。対象8 tests／272 subtests PASS。source `320cfadb9c7938126b972a359c9e49b8b3c05669`、CI/残件は詳細04 §3.70・06/API handoff u240。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。一般の連体節/否定発言/未知speaker、本人実機/稼働DB/正式商品受入れは残る。
 
 **u239 内容修正（2026-10-12 JST・未配置）**：単一の漢字語幹＋しい/いで修飾された話者の過去発言（親しい友人が言った等）を本人の希望/所在/担当/行動/感情へ誤帰属させる欠落を補修。一般名詞文法を変えず、引用前後の独立内容・原文証拠を保持する。合成28入力で16誤帰属解消・12対照不変（未対応3例を含む）、46前後投影と実RN model一致、非commitと合成保存再読を確認。対象8 tests／198 subtests PASS。source `8cbf5d8635dd2ee09bd0b2cc9da4fac7871d627d`、CI/残件は詳細04 §3.69・06/API handoff u239。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。一般の未知speaker・条件語誤一致・本人実機/稼働DB/正式商品受入れは残る。
