@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u245 内容修正（2026-10-12 JST・未配置）**：既知修飾話者の「言わない／言わないです／言いません」に含まれる引用を本人の事実とする誤帰属を補修。拒否用の2prefix追加に限定し、発言閉鎖・一般名詞文法・原文/証拠を維持。合成33入力で20保留・3誤所在除去と前後行動保持・10不変（未対応2例を含む）、実RN model44投影一致、4非commit/4合成保存再読、対象16 tests／974 subtests成功。source `b40fbee34059b642e2f0e3373936b2f7dea684be`、CI/残件は詳細04 §3.75・06/API handoff u245。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。一般引用理解・本人実機/稼働DB/商品受入れは未完了。
+
 **u244 内容修正（2026-10-12 JST・未配置）**：「話した／語った／述べた／伝えた／答えた／説明した」と各丁寧過去形で、引用を本人の事実にして後続行動を落とす不整合を補修。既存の前方報告14形と後置認識を共有し、新12形は読点の有無によらず既知host全文一致で閉じる。原文・証拠・入れ子拒否を維持。合成34入力で19独立行動回復・9出力保留・6不変（未対応2例を含む）、実RN model59投影一致、4非commit/4合成保存再読、対象16 tests／865 subtests成功。source `503983da88677111f45f6cbbce3db0388ae15b4f`、CI/残件は詳細04 §3.74・06/API handoff u244。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。一般引用理解・本人実機/稼働DB/商品受入れは未完了。
 
 **u243 内容修正（2026-10-12 JST・未配置）**：既知の話者＋読点＋肯定過去発言の後で、独立した本人行動まで消える不具合を補修。「、／，」と通常/全角空白に限り、既知speaker/hostの全文一致を閉鎖条件とする。広い拒否prefixを閉鎖根拠にせず、原文・入れ子拒否・未知範囲を維持。合成36入力で21行動回復・未完host1例の誤確定解消・14対照不変（未対応4例を含む）、実RN model45投影一致、3非commit/4合成保存再読、対象10 tests／554 subtests成功。source `4f2db73edb4c22a1a0f8d19a6e87ffce072b955a`、CI/残件は詳細04 §3.73・06/API handoff u243。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。一般引用理解・本人実機/稼働DB/商品受入れは未完了。
