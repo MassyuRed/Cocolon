@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u239 内容修正（2026-10-12 JST・未配置）**：単一の漢字語幹＋しい/いで修飾された話者の過去発言（親しい友人が言った等）を本人の希望/所在/担当/行動/感情へ誤帰属させる欠落を補修。一般名詞文法を変えず、引用前後の独立内容・原文証拠を保持する。合成28入力で16誤帰属解消・12対照不変（未対応3例を含む）、46前後投影と実RN model一致、非commitと合成保存再読を確認。対象8 tests／198 subtests PASS。source `8cbf5d8635dd2ee09bd0b2cc9da4fac7871d627d`、CI/残件は詳細04 §3.69・06/API handoff u239。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。一般の未知speaker・条件語誤一致・本人実機/稼働DB/正式商品受入れは残る。
+
 **u238 内容修正（2026-10-12 JST・未配置）**：完全な本人の希望・場面・担当で、後置の「と友人が言った／のは嘘だった」等を落として本人の事実へ変える誤帰属を補修。既存host文法だけを適用し、引用前/引用後/別recordの独立内容・原文・未知範囲を保持する。合成30入力で14誤帰属解消・16対照不変、46前後投影と実RN model一致、非commitと合成保存再読を確認。対象6 tests／123 subtests PASS。source `65aeb3f650d51eb17a3efc60303f9c0752a70c06`、CI/残件は詳細04 §3.68・06/API handoff u238。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。条件語誤一致・未知speaker等は残り、最新修正版の本人実機/稼働DB/正式商品受入れは未確認。
 
 **u237 内容修正（2026-10-12 JST・未配置）**：「友人が話した。私は資料を調べた。」等を本人の実行済み行動にしていた誤帰属を修正。既存9動詞のwholeな明示SELF過去行動に、前方報告・別field・後置host検査を適用する。既存保留が成立する直前節と完全hostの組だけを閉じ、独立した内容・原文出典・未知区間を保持。合成26入力で12誤帰属解消・14対照不変、前後36生成投影と実RN model一致。合成保存では未確定6入力の非commitと独立内容4入力の保存再読を確認。最終対象31 tests／1177 subtests PASS。source `53503158b58d122bcf2c272b69de700ebaa05fc1`。最終CI/残件は詳細04 §3.67・06/API handoff u237。「頼もしい」の誤一致と希望/場面/役割一般の後置引用は残件。STRUCTURE_MAP_DELTA_NONE。本人実機・稼働DB保存再読・正式商品受入れは未確認。
