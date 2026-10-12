@@ -868,6 +868,12 @@ u234のscope helperに完全な「かもしれません／かも知れません�
 
 合成35入力で27誤帰属解消、8対照不変（未対応引用2例を含む）。前後46投影と実RN modelの本文/identity一致、原文出典・通常補足・訂正/撤回・期間差、5入力非commit・4入力合成保存再読を確認。対象9 tests／477 subtests成功。source `3414c840c1990cce44cbcdbf4670b0885f5e173b`、CI/残件は06/API handoff u242。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。一般連体節/未知speaker・一般作用域と本人実機/稼働DB/正式商品受入れは未完了。未配置、本人実機確認の追加前提にしない。
 
+## 3.73 u243 既知の読点付き発言の閉鎖と独立内容（2026-10-12・未配置）
+
+後置発言の閉鎖へ単一「、／，」と通常/全角空白を追加する。読点がある場合は `_known_postposed_host(..., closed_speech=True)` で、既存の単一修飾/名詞・属格・助詞＋肯定過去発言「言った／言いました」の全文一致を必須にする。広い拒否prefix（と信/などと等）は閉鎖根拠とせず、通常の拒否判定と読点なしの既存閉鎖を維持する。u242の語中って区別・残余入れ子拒否・原文/座標/証拠不変を維持。ASCII comma・連続読点・改行、未知修飾/連体節、未完/入れ子、先行open報告、別fieldを一般に閉じない。
+
+合成36入力で21入力の独立行動を回復し、「言ったけれど」の未完host1入力の誤確定を保留へ戻した。14対照不変（未対応引用4例を含む）。前後45投影と実RN modelの本文/identity一致、未知範囲を跨ぐ辺/不一致の非生成、出典・通常補足・訂正/撤回・期間差、3入力非commit・4入力合成保存再読を確認。対象10 tests／554 subtests成功。既存の単一読点の保留例は成立側へ移し、連続読点の保留を維持。source `4f2db73edb4c22a1a0f8d19a6e87ffce072b955a`、CI/残件は06/API handoff u243。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。一般引用作用域/未知speakerと本人実機/稼働DB/正式商品受入れは未完了。未配置、本人実機確認の追加前提にしない。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:

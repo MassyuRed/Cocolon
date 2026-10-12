@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u243 内容修正（2026-10-12 JST・未配置）**：既知の話者＋読点＋肯定過去発言の後で、独立した本人行動まで消える不具合を補修。「、／，」と通常/全角空白に限り、既知speaker/hostの全文一致を閉鎖条件とする。広い拒否prefixを閉鎖根拠にせず、原文・入れ子拒否・未知範囲を維持。合成36入力で21行動回復・未完host1例の誤確定解消・14対照不変（未対応4例を含む）、実RN model45投影一致、3非commit/4合成保存再読、対象10 tests／554 subtests成功。source `4f2db73edb4c22a1a0f8d19a6e87ffce072b955a`、CI/残件は詳細04 §3.73・06/API handoff u243。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。一般引用理解・本人実機/稼働DB/商品受入れは未完了。
+
 **u242 内容修正（2026-10-12 JST・未配置）**：「知らない／知らなかった／知っている／知っていた」で修飾された話者の発言を本人の希望/所在/担当/行動/感情へ誤帰属する不具合を補修。後置host専用の4形に限定し、既知2形の語中ってだけを閉鎖検査で区別する。原文・完全一致・残余入れ子拒否を維持し、独立内容を保持/回復。合成35入力で27誤帰属解消・8対照不変（未対応2例を含む）、実RN model46投影一致、5非commit/4合成保存再読、対象9 tests／477 subtests成功。source `3414c840c1990cce44cbcdbf4670b0885f5e173b`、CI/残件は詳細04 §3.72・06/API handoff u242。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。一般引用理解・本人実機/稼働DB/商品受入れは未完了。
 
 **u241 内容修正（2026-10-12 JST・未配置）**：修飾話者の「言わなかった／言わなかったです／言いませんでした」で引用が落ち、本人の希望/所在/担当/行動/感情になる誤帰属を補修。既存host認識のみ拡張し、名詞文法・共有命題・完全host閉鎖を維持。前後/別recordの独立内容・原文出典を保持。合成30入力で20誤帰属解消・10対照不変（未対応引用2例を含む）、実RN model39投影一致、非commit/合成保存再読を確認。source `5717a65ce78a558005e17333a7f4a70ec619fd6a`、CI・残件は詳細04 §3.71・06/API handoff u241。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。一般の引用作用域/未知speaker、本人実機/稼働DB/正式商品受入れは残る。
