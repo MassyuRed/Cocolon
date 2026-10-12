@@ -822,6 +822,14 @@ u234のscope helperに完全な「かもしれません／かも知れません�
 
 合成22入力で9欠落解消・13対照不変、13生成全文と実RN modelの一致、保存後再生成なし再読と不完全更新の非保存を確認。対象11 tests／223 subtests PASS。source `97c0925ec0ed011a845dfa39b371d98ca2f12c28`、固定source CIと未完了は06/API handoff u235。STRUCTURE_MAP_DELTA_NONE。一般意味理解、全体ルートUI/IF/Saved、最新修正版の本人実機・稼働DB・正式商品受入れは残る。未配置。
 
+## 3.66 u236 独立した行動推量の横で明示内容を保持（2026-10-12・未配置）
+
+既存scope helperを `_closed_possibility_scope` とし、従来の感情に加えて既存9動詞の行動推量を識別する。明示SELF、完全なを格を含む既存名詞・時点解析、常体過去肯否、既存の完全な推量4形、実句点（。/.）を要求する。決定/願望/非過去/省略主体/未解釈述語や名詞・日付、文末丁寧形を推量へ直結した語尾は拡張しない。この解析は作用域の識別にだけ使い、推量からobserved nodeや共有witnessを作らない。
+
+独立した明示節は従来の共有根拠とhost検査で採用し、推量はSOURCE_SCOPEに残す。引用/報告/夢/条件/後続hostと未解釈推量の保留、補足/訂正の全文coverage、未知を跨がない順序を維持する。同じ行動の否定推量を不一致badgeへ転換せず、期間差はUNKNOWN_SCOPE_CHANGEDのまま扱う。
+
+合成24入力で8欠落解消・16対照不変、前後18生成投影の本文/identity/読み順/各種件数と実RN modelが一致。実engine/service＋合成RPCの既存検査へ保存再読5入力と非保存2入力を追加し、対象14 tests／324 subtests PASS。source `4a941ea6a36a2db51be4ef28014cf4c408229d92`、固定source CIと残件は06/API handoff u236。STRUCTURE_MAP_DELTA_NONE。一般の推量/条件語作用域、全体ルートUI/IF/Saved、本人実機・稼働DB・正式商品受入れは残る。未配置。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
