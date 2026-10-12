@@ -674,6 +674,14 @@ u215で未対応だった「では／じゃ」×「なかった／なかった�
 合成18入力の前後36結果（24生成全文）で12入力の欠落が減り、6対照の本文/node/edgeは不変。実RN modelと実service＋合成RPC保存再読2入力、対象8 tests／167 subtestsを確認。固定source・最終回帰/CI・残件は06/API handoff u216。source変更は既存compiler1・test2のみ。STRUCTURE_MAP_DELTA_NONE、新規repo file/外部契約変更0。未配置、稼働DB保存再読・本人実機・正式商品受入れは未確認。
 
 
+## 3.47 u217 明示本人の過去の不安に書かれた程度（2026-10-12・未配置）
+
+「私は少し不安だった／不安でした」の共有Planは既に本人のreaction/feelingを持つが、Analysisの有限過去文法が程度語を読めず感情が欠けていた。既存7種の明示SELF直後の「少し」1個と肯定過去2形だけを扱い、原文の程度範囲を既存private written_modifiersのDEGREE_SLIGHTに保持する。有限述語の範囲と分離し、safe realizerで「少し不安だった」と表す。数値強度・安心・改善・原因には読み替えない。
+
+既存のmeaning identityに程度を含め、丁寧形同士は同義、程度なし/否定不安とは別の意味にする。訂正・撤回・原UTF8/hash・明示された記述順序を保持する。報告/引用/否認・別field・未知区間・複合節の境界は従来どおり検査する。shared degree=source_boundedは裸の不安にもあるため強度の証明には使わない。「少し不安ではなかった」は否定との作用域が未証明で保留し、他程度/他感情/省略主体/現在形/日付付きへ一般化しない。safe再解析で程度の除去・別修飾へのすり替えを拒否する。
+
+合成16入力の前後32結果（24生成全文）をrootが読解し、8入力で欠落解消、8対照の本文・node/edgeは不変。実RN model24投影、実service＋合成RPC保存再読3入力、対象13 tests／246 subtestsを確認。固定source・最終回帰/CIは06/API handoff u217。製品compiler/realizer2file・既存test2のみ。STRUCTURE_MAP_DELTA_NONE。共有Plan/Emlis・外部契約変更0。未配置、本人実機・稼働DB保存再読・正式商品受入れは未確認。本修正を最新weeklyの本人実機確認の新たな前提にはしない。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
