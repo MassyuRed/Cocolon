@@ -798,6 +798,16 @@ Analysis compilerで、明示SELFの完全な不安の否定形に「全く／�
 
 合成26入力で11欠落/生成停止解消・1対立補足の片側表示修正・14対照不変。20生成全文と実RN modelを照合。実engine/service＋合成RPCでは前後置の72入力（既存肯定30＋新規否定42）と、部分否定を含む補足4組の保存再読を再生成なしで検査した。固定source・最終CIは06/API handoff u232。STRUCTURE_MAP_DELTA_NONE。原入力内/別構文間の感情矛盾、一般意味理解、全体ルートUI/IF/Saved、最新修正版の本人実機・稼働DB・正式商品受入れは残件で、未配置。
 
+## 3.63 u233 原入力内の感情の肯否併記を不一致表示へ接続（2026-10-12・未配置）
+
+§3.13の既存conflict_badgesへ、独立した明示SELFのPAST_FEELING/pastまたはCURRENT_FEELING/current_inputを追加する。既存parserと共有witnessで成立した感情nodeだけを消費し、同じ原入力source/field、actor・構文/述語・argument・modality・時制・相対日を要求する。順序に参加するevidence、接続語付き・従属形は除外し、訂正/撤回の除外後に比較する。別record/field/助詞・copular/存在・現在/過去・別日は同一視しない。
+
+無修飾の既存感情の肯否対に加え、不安の完全否定（無修飾、全く／まったく／全然／少しも／ちっとも）と感情肯定（無修飾、少し／とても／かなり／やや／ちょっと）を、「不安だ」系または存在構文それぞれの同じ構文内で照合する。modifierを除く照合はこの不安の関係判定内だけに限定し、元命題・原綴り・表示・集約/期間比較の意味キーを変更しない。「あまり/あんまり」の部分否定は、強い肯定との組合せでも今回の不一致表示へ昇格しない。
+
+両node・exact evidenceを既存ObservedConflictへ結び、「同じ記録に肯定と否定の記述があります。同じ機会のことかは確定していません。」を文章/図へ出す。真偽・心理的葛藤・改善・原因を決めず、順序線を追加しない。通常補足の保留とu232の限定両立は不変。期間比較のCONFLICT_STATE_CHANGED、private証拠保存、再生成しない読取、旧空badgeの互換は既存責務を使う。DB/DTO/RN/realizer変更なし。
+
+合成30入力で12件の表示欠落解消・18対照不変。54生成全文と実RN modelの本文・identity・対象label等が一致し、感情6入力を加えた既存保存test（計7入力）で再生成なしの本文/図/ID再読を確認。既存期待は新しく成立する対象pairだけ変更し、部分否定はbadge対象から除外。検査結果・固定source/CIは06/API handoff u233。STRUCTURE_MAP_DELTA_NONE。一般的な矛盾判断、未解釈の複合節、全体ルートUI/IF/Saved、最新修正版の本人実機・稼働DB・正式商品受入れは残件で、未配置。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
