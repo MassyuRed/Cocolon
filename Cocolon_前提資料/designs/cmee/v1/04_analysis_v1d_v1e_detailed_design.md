@@ -830,6 +830,14 @@ u234のscope helperに完全な「かもしれません／かも知れません�
 
 合成24入力で8欠落解消・16対照不変、前後18生成投影の本文/identity/読み順/各種件数と実RN modelが一致。実engine/service＋合成RPCの既存検査へ保存再読5入力と非保存2入力を追加し、対象14 tests／324 subtests PASS。source `4a941ea6a36a2db51be4ef28014cf4c408229d92`、固定source CIと残件は06/API handoff u236。STRUCTURE_MAP_DELTA_NONE。一般の推量/条件語作用域、全体ルートUI/IF/Saved、本人実機・稼働DB・正式商品受入れは残る。未配置。
 
+## 3.67 u237 帰属未確定の過去行動を本人へ誤帰属しない（2026-10-12・未配置）
+
+既存9動詞・fact/past・whole spanの通常の明示SELF行動へ、明示speech・報告名詞・書字報告に限定した前方/別fieldの帰属検査と既存の後置host検査を適用する。既存strict対象（名詞関係/決定/省略主体/日付/かな所有書字）は新規対象から除外し、従来の検査を維持する。未解釈書字や丁寧語尾だけを報告の根拠にしない。「友人が話した。私は資料を調べた。」や別fieldの報告、後置引用/思考/撤回を本人の実行済み行動にしない。単にSELFと書かれていても報告作用域は閉じない。compound endpointは既存証明を維持する。
+
+完全な後置hostと直前節の組は、後置host検査が既に成立する感情・過去行動/決定・既存名詞/日付資格だけに限定し、組の後にある独立行動を保持する。fieldを跨ぐ組、先行する別報告の解除、余分語尾、未解釈先行節は認めない。一般の希望/無日場面/役割の帰属解消は今回の成立に含めない。報告前/別recordの独立内容、原文出典・肯否・順序を保持し、未知節跨ぎの線や報告recordの証拠加算は作らない。
+
+合成26入力の前後52結果で12誤帰属を解消、14対照は不変。前後36生成投影は実RN modelと一致。原文UTF-8/scalar/hash、訂正/撤回/不完全更新拒否、未知範囲だけの期間差、実engine/service＋合成RPCの未確定6入力非commitと独立内容4入力保存再読を確認した。最終対象31 tests／1177 subtests PASS。source `53503158b58d122bcf2c272b69de700ebaa05fc1`、最終CIと途中検査の修正記録は06/API handoff u237。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。条件regexの「頼もしい」誤一致は未変更・未解消。本人実機/稼働DB/正式商品受入れは未確認、未配置。weekly20261010 §5.4/§5.5の本人一往復への戻る位置を維持する。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
