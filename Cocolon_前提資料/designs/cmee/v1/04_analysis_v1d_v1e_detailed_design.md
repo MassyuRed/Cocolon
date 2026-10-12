@@ -716,6 +716,14 @@ u217の少し専用判定で落ちる「とても／かなり／やや／ちょ�
 
 肯否/程度・原文・訂正/撤回・未知区間/別field/別recordを保持。日語付き現在形、重複日や細かい時点、省略主体、程度付き否定、複合節は保留。日語付き「落ち着きました／嬉しかったです／うれしかったです」は共有source-host witnessの別制限で保留し、今回の対応完了には含めない。合成20入力で12改善・8対照不変、23生成全文と実RN model、日語付き6入力の保存再読を確認。最終回帰/CI・反映は06/API handoff u222。STRUCTURE_MAP_DELTA_NONE、共有/realizer/外部契約変更0。未配置、本人実機・稼働DB・正式商品受入れは未確認。
 
+## 3.53 u223 日語付き本人過去感情の敬体3形（2026-10-12・未配置）
+
+共有Planの既存source-host helperで、明示SELFの前/直後の今日/昨日1個と「落ち着きました／嬉しかったです／うれしかったです」を完全節として保持する。極性defaultの補正は原文日語と共有time_scope（今日/present・昨日/past・無日/current_input）が一致する場合だけ。frame時点や過去の有限述語は書換えず、Analysisの既存日語/原文/本人保持へ接続する。
+
+日語付きにも前後/別fieldの報告・否認境界を適用。日語の転用・実日付化・原因/改善を補わず、二重日、日語＋順序語、細かい時間、省略主語/他者、未解析の程度、引用/報告/否認/複合節は保留。compound分岐、共有語彙regex、Analysis compiler/realizerは変更0。合成18入力で10改善・8対照不変、25生成全文と実RN model、7入力の保存再読、訂正/撤回・期間比較を確認。共有Emlis前後16全文では2入力の感情応答追加・6本文不変。Emlisの定型文品質は未解消。
+
+最終回帰/CI・current shared-owner snapshotの導出更新・反映は06/API handoff u223。STRUCTURE_MAP_DELTA_NONE。日語付き現在感情、程度付き否定等は残件。未配置、本人実機・稼働DB・正式商品受入れは未確認。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
