@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u247 内容修正（2026-10-12 JST・未配置）**：既存7発言動詞の肯定現在14形で、引用を本人の希望/所在/担当/行動/感情へ誤帰属する漏れを補修。後置引用の拒否と不透明speaker内部のmarker検査だけへ追加し、肯定過去だけの閉鎖・原文/証拠を維持。合成34入力で19保留・7誤所在除去と前後行動保持・8不変（未対応3例を含む）、実RN model47投影の本文一致、7非commit/7合成保存再読。対象20 tests／1804 subtests成功。source `ae53d726d4df27e3c145d7e93f8900f652211c79`、CI/残件は詳細04 §3.77・06/API handoff u247。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。一般引用理解・本人実機/稼働DB/商品受入れは未完了。
+
 **u246 内容修正（2026-10-12 JST・未配置）**：話す/語る/述べる/伝える/答える/説明するの否定発言を本人の事実へ誤帰属する漏れを補修。既存7発言動詞の否定式を拒否へ共用し、不透明speaker内部の否定発言からの誤閉鎖も防ぐ。肯定過去の閉鎖形・一般名詞文法・原文/証拠は維持。合成40入力で25保留・6誤所在除去と前後行動保持・9不変（未対応3例を含む）、実RN model55投影一致、6非commit/6合成保存再読、対象18 tests／1454 subtests成功。source `8926eef92439cf83dee5ca564b640119e3814e23`、CI/残件は詳細04 §3.76・06/API handoff u246。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。一般引用理解・本人実機/稼働DB/商品受入れは未完了。
 
 **u245 内容修正（2026-10-12 JST・未配置）**：既知修飾話者の「言わない／言わないです／言いません」に含まれる引用を本人の事実とする誤帰属を補修。拒否用の2prefix追加に限定し、発言閉鎖・一般名詞文法・原文/証拠を維持。合成33入力で20保留・3誤所在除去と前後行動保持・10不変（未対応2例を含む）、実RN model44投影一致、4非commit/4合成保存再読、対象16 tests／974 subtests成功。source `b40fbee34059b642e2f0e3373936b2f7dea684be`、CI/残件は詳細04 §3.75・06/API handoff u245。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。一般引用理解・本人実機/稼働DB/商品受入れは未完了。

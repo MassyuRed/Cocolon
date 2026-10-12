@@ -892,6 +892,12 @@ u234のscope helperに完全な「かもしれません／かも知れません�
 
 合成40入力で25出力保留、6誤所在除去と前後2行動保持、9不変（未知/重ね修飾と肯定現在発言の未対応3例を含む）。前後55投影と実RN model一致、原文出典・通常補足・訂正/撤回・期間差、6非commit/6合成保存再読、対象18 tests／1454 subtests成功。source `8926eef92439cf83dee5ca564b640119e3814e23`、CIと詳細は06/API handoff u246。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。一般引用作用域/未知speaker・肯定現在発言と本人実機/稼働DB/正式商品受入れは未完了。未配置、weekly §5.5の本人生成→保存再表示を待たせる追加前提にしない。
 
+## 3.77 u247 現在形の発言でも引用の帰属を保持（2026-10-12・未配置）
+
+「私は職場にいた。と親しい友人が話す。」等で、引用内の本人表現を本人の事実へ誤帰属する不具合を修正。既存7動詞の肯定現在14形 `_PRESENT_SPEECH` を後置引用の拒否へ共用し、不透明speaker内部の現在発言による誤閉鎖も防ぐ。拒否prefixは完全host閉鎖の根拠にせず、肯定過去だけの閉鎖・一般名詞文法・原文/証拠を維持する。
+
+合成34入力で19保留・7誤所在除去と前後行動保持・8不変（既存誤帰属3例を含む）。実RN model47投影の本文一致、新規7入力の非commit/7入力の合成保存再読、出典・補足/訂正/撤回・期間差を確認。対象20 tests／1804 subtests成功。source `ae53d726d4df27e3c145d7e93f8900f652211c79`、CIと生成全文・限界は06/API handoff u247。未知/重ね修飾話者・前方現在報告等、一般引用作用域と本人実機・稼働DB・正式商品受入れは残件。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT、未配置。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:
