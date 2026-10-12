@@ -904,6 +904,14 @@ u234のscope helperに完全な「かもしれません／かも知れません�
 
 合成34入力で18保留・7誤行動除去と先行行動保持・9不変（未対応4例を含む）。実RN model50投影の本文/identity一致、新規7非commit/14合成保存再読、出典・補足/訂正/撤回・期間差を確認。対象22 tests／2010 subtests成功。source `8bf533ea633cab38e59c890bf755c43635dc87a1`、CIと生成全文は06/API handoff u248。前方否定/未完発言・未知/重ね修飾話者、一般引用作用域と本人実機/稼働DB/正式商品受入れは残件。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT、未配置。
 
+## 3.79 u249 前方否定発言でも本人帰属の未確定を保持（2026-10-12・未配置）
+
+「友人が話さない。私は職場にいた。」等を本人の所在/希望/担当/行動/感情へ誤帰属する漏れを修正。u248のAnalysis内前方guardで、既知の明示話者＋既存7動詞の否定42形も全文一致で確認する。既存の否定式を共用し、「ないです」を全文一致できる形へ整理。否定発言の実行や後続内容の否定を認定せず、帰属未確定として扱う。
+
+同fieldの先行記述・別record・後置引用前後の独立内容・目的語付き本人発言を保持し、肯定過去だけの閉鎖、共有Plan/source helper、原文/証拠を維持する。主語省略・未完形・思考hostを語尾だけで新しい前方hostにしない。
+
+合成40入力で25保留・7誤行動除去と先行行動保持・8不変（未対応3例を含む）。実RN model55投影の本文/identity一致、新規7非commit/14合成保存再読、出典・補足/訂正/撤回・期間差を確認。対象23 tests／2264 subtests成功。source `a70ab180519fa4cfe3250f8d4766beebdc97ad3e`、CIと生成全文は06/API handoff u249。未知/重ね修飾話者・未完発言・否定思考、一般引用作用域と本人実機/稼働DB/正式商品受入れは残件。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT、未配置。
+
 ## 4. Period source-set freeze
 
 `AnalysisObservedMapRequest`:

@@ -14,6 +14,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**u249 内容修正（2026-10-12 JST・未配置）**：「友人が話さない。私は職場にいた。」等の前方否定発言で後続を本人の事実へ誤帰属する漏れを補修。既知の明示話者＋既存7動詞の否定42形を全文一致で確認し、先行記述・別record・後置引用前後の独立内容を保持。合成40入力で25保留・7誤行動除去と先行行動保持・8不変（未対応3例を含む）、実RN model55投影の本文/identity一致、7非commit/14合成保存再読。対象23 tests／2264 subtests成功。source `a70ab180519fa4cfe3250f8d4766beebdc97ad3e`、CI/残件は詳細04 §3.79・06/API handoff u249。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。一般引用理解・本人実機/稼働DB/商品受入れは未完了。
+
 **u248 内容修正（2026-10-12 JST・未配置）**：「友人が話す。私は職場にいた。」等の前方現在発言で本人へ誤帰属する漏れを補修。既知の明示話者＋現在14形の全文一致をAnalysis内で確認し、同fieldの先行記述・別record・u247の後置引用前後を保持。合成34入力で18保留・7誤行動除去と先行行動保持・9不変（未対応4例を含む）、実RN model50投影の本文/identity一致、7非commit/14合成保存再読。対象22 tests／2010 subtests成功。source `8bf533ea633cab38e59c890bf755c43635dc87a1`、CI/残件は詳細04 §3.78・06/API handoff u248。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。一般引用理解・本人実機/稼働DB/商品受入れは未完了。
 
 **u247 内容修正（2026-10-12 JST・未配置）**：既存7発言動詞の肯定現在14形で、引用を本人の希望/所在/担当/行動/感情へ誤帰属する漏れを補修。後置引用の拒否と不透明speaker内部のmarker検査だけへ追加し、肯定過去だけの閉鎖・原文/証拠を維持。合成34入力で19保留・7誤所在除去と前後行動保持・8不変（未対応3例を含む）、実RN model47投影の本文一致、7非commit/7合成保存再読。対象20 tests／1804 subtests成功。source `ae53d726d4df27e3c145d7e93f8900f652211c79`、CI/残件は詳細04 §3.77・06/API handoff u247。STRUCTURE_MAP_DELTA_NONE・TECHNICAL_CREDIT。一般引用理解・本人実機/稼働DB/商品受入れは未完了。
