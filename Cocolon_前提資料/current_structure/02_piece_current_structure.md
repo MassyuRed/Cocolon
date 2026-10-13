@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は入口§62／current map §65.10を優先します。byte列受渡しのrun38433766446は4ケース通過、420文字は次のfont候補へ進んだものの全体8,111.817msで時間切れでした。source `6be0bed` で完全一致候補を事前に分類し最大4workerで独立計測する修正を反映。run38437753643のnative59件は全てbit同値確認まで成功し、実RN5ケースは確認中です。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
+**現在は入口§63／current map §65.11を優先します。source `6be0bed` の実RNは4ケースを画像まで確認しましたが、420文字は8,095.899msで時間切れです。source `b46f453` で完全一致候補の文字列key生成・重複値転送・不成立fontの改行計算を削減し、run38441898578でnative59件と実RN5ケースを検証中です。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -2505,3 +2505,29 @@ local83 PASS／FAIL0／SKIP0、diff check成功。同環境のread-only review�
 正式renderer supplier／保存直前fit／通常InputScreen初回保存／実機受入れは未完了。次の接続ownerはCardの同一mount/世代/plan/inspection→Modalの同じpreview/token→hostの既存isSaveAdmitted→InputScreenの正式supplier。既存Controller/API保存は再実装しない。これらを今回のnative_checkedで正式受入れしたとはしない。weekly10/10 §5.5と12/18目標を継承。default OFF、Draft/open/unmerged、STRUCTURE_MAP_DELTA_NONE、稼働DB/env/deploy/署名/配布/main merge効果0。
 
 §65.10 native確認：同source/runのnative job115436093723は59 PASS／FAIL0／SKIP0。混在420文字4,524.926ms・全88,410候補bit同値、「あ」420文字633.233ms、非均一属性反復を含む全14fixtureの旧計算比較を通過した。CoreText集計は作成11,382回／2,320,415 UTF-16 units／作成4,330.487ms／幅0.767ms／ink1,175.945ms。並列操作の時間の和であり、wall-clockや単独の短縮効果ではない。JS job115436093608は751 PASS／FAIL0／SKIP0。実RN job115436093716は確認中で、全体8秒・全5ケース・実機・正式受入れはまだ未成立。
+
+
+### 65.11 48pt候補・復元・B9の実時間を分離し、完全一致処理の重複を削減
+
+source `6be0bed` のrun38437753643／実RN job115436093716はfailureで完了。artifact11834343516（61,099,781 bytes、SHA256 `2700b138e79a7ea69abcdad24f7892c9d05206ab8f3019b8e8235dcc03424d5b`）を取得・digest検証し、5件JSONと4枚PNGを実読した。
+
+| 合成ケース | 全体時間 | 実結果 |
+| --- | ---: | --- |
+| essay_paragraphs | 1,034.884ms | native_checked、本文保持・canvas有効、PNG確認 |
+| quote_unicode | 505.629ms | native_checked、本文保持・canvas有効、PNG確認 |
+| declaration_no_brand | 344.842ms | native_checked、本文保持・brandingなし、PNG確認 |
+| essay_max420 | 8,095.899ms | unavailable／measurement_timeout、size1、plan・PNGなし |
+| saved_essay_canvas | 2,470.387ms | native_checked、本文保持・canvas有効、PNG確認 |
+
+4画像の本文・段落・余白・brandingを確認し、全ケースcanSave/canExport=false。420文字は48ptの全88,410候補を4,707.749msで受信、adapter処理全体5,864.281ms、B9は601.744msでnofit。全体6,582.341msで44ptへ移行し、その候補がpendingのまま8,048.404msでunavailableとなった。adapterとnativeの差約1,156.532msには復号・復元と周辺実行を含み、純粋なbase64時間と断定しない。native59とJS751の通過は§65.10末尾のとおり。全体合格は未成立。4font直列の残費用もあり、B9だけの削減を解決とは扱わない。
+
+source `b46f4537582a047d25339abcf005ca9d85a7f1d0` の変更は既存6path。
+
+- `ios/tempCocolon/PieceTextMetrics.mm`：全候補ごとのNSString substring key生成をやめ、prefixからrange hashを算出する。候補bucketは長さ・生UTF-16・全属性IDを照合し、hash衝突だけでは共有しない。16,384代表／4Mi UTF-16の上限と未登録rangeの通常計算を保持。同じ文字で別属性の代表も区別する。CoreText計算・専用layout object・最大4worker・単一deadlineは維持。
+- 同nativeと`features/piece/pieceRenderer.js`：内部候補`piece.native_candidates.v3`は代表ごとの5 Float64と全start/end順のuint32参照をlittle-endianで送る。JSはcount上限、厳密byte長とbase64、全参照範囲、全代表の使用を確認し、元の全7数値行を復元する。代表11,381件ならbinaryは4,950,960→808,880 bytes。ただし代表数は入力に依存し、この縮小率を全420文字へ一般化しない。v1/v2受容・B9全metric検証を保持する。
+- `features/piece/pieceMeasuredWrap.js`：全blockContext検証後、実測range・ink高さ・禁則から最小行数を求める。段落gap込みでも高さに収まらない場合だけnullとし、可能な場合は従来のhint／score／constrained DPを実行する。幅の単調性、文字数、font間の比例換算では候補を省略しない。
+- `tests/native/piece-text-metrics-ios.mm`はv3を独立decodeして従来59assertion・uncached全候補bit比較へ渡す。`tests/native/piece-rn-canvas-entry.js`はv3行数と代表数を記録する。`tests/piece-v2-renderer.test.js`へ数値bit・同じplanner結果・不正参照／未使用代表／破損payload拒否を3件追加。native assertion・実RN5入力・8秒期限は緩和しない。
+
+local renderer/B9 86 PASS／FAIL0／SKIP0、diff check成功。Python owner oracleと、非単調幅・ink・禁則を含む合成2,000graphで旧B9との結果一致を確認した。これを実機性能へ換算しない。同環境read-only補助reviewに重大指摘なし。source exact6pathのfresh remote全文・blob・親51ca57b・変更pathを照合済み。[run38441898578](https://github.com/MassyuRed/Cocolon/actions/runs/38441898578)はnative59と実RN5ケースを検証中。次は同じ420文字の全候補同値・全体時間と5画像を読む。
+
+正式renderer supplier／保存直前fit／通常InputScreen初回保存／実機受入れのownerは§65.10末尾を継承する。既存host/controller/API保存を再実装しない。weekly10/10 §5.5・12/18目標、default OFF、Draft/open/unmerged、STRUCTURE_MAP_DELTA_NONE、DB/env/deploy/署名/配布/main merge効果0。

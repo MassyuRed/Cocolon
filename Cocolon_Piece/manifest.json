@@ -1,5 +1,5 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v67",
+  "schema_version": "cocolon.piece.workstream_manifest.v68",
   "generated_at": "2026-10-14 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
@@ -13,9 +13,9 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "b833a61daaef38ceb9a1b99708880ec812f00fc8",
-    "raw_sha256": "66049b168dde1edd88c1e5e4d16370f40325375e326fc0f75c9082f573db6563",
-    "utf8_bytes": 124528
+    "git_blob_sha1": "ab9d723b6a3adb5646b8712057b44a2a52e4b415",
+    "raw_sha256": "1eaa8b636f964032442fbac345ad9d0be6b2ee52c5874298d69d71f713ab5693",
+    "utf8_bytes": 126632
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -174,7 +174,7 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "6be0bed18fa33d5414d4834bf29ecc8b6d25c6d5",
+    "cocolon_pre_sync_head": "b46f4537582a047d25339abcf005ca9d85a7f1d0",
     "mashos_api_head": "804beca66f9f02e18dc4522232478466f4d52b13",
     "current_user_visible_piece_shape": "CANDIDATE_NORMAL_INPUT_V2_SAVED_SOURCE_ONLY__TUTORIAL_NEXUS_LEGACY_REMAIN__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
@@ -338,9 +338,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "a8ad764d7cdeeeeb19041e9d29d60d051d2069fb",
-    "raw_sha256": "9150ef240728bc231226793aae503de25a328ab70ef6cac618f53367e4048ba3",
-    "utf8_bytes": 381165
+    "git_blob_sha1": "7833c5e1d72ec9ca6cd3821557837c1e18a9f881",
+    "raw_sha256": "46f9daef723f36c41f0eb49aa90902e4f9058b6ecdf7f2720d2843a676ab95f2",
+    "utf8_bytes": 385363
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -513,7 +513,7 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "BOUNDED_CANDIDATE_WORKERS_NATIVE59_VERIFIED__FULL_RN_PENDING",
+    "classification": "EXACT_RANGE_GROUPING_INDEXED_TRANSPORT_AND_NOFIT_PREFLIGHT__NATIVE_RN_PENDING",
     "source_commits": [
       "2c7c554cf51cff38efc84a99df80565f736fe9d9",
       "5c501d9eaed60257b202de418c936a1f7acb3bf6",
@@ -525,10 +525,11 @@
       "ff386719fcd6bddb4809d6557901c148d61298b4",
       "70a597384009c26ccd9c0826422b0ee8058edc58",
       "b6a135613c7f443e61740c02873d26424208d8ac",
-      "6be0bed18fa33d5414d4834bf29ecc8b6d25c6d5"
+      "6be0bed18fa33d5414d4834bf29ecc8b6d25c6d5",
+      "b46f4537582a047d25339abcf005ca9d85a7f1d0"
     ],
-    "product_source_changes": 1,
-    "test_source_paths": 2,
+    "product_source_changes": 3,
+    "test_source_paths": 3,
     "workflow_paths": 0,
     "piece_documentation_paths": 3,
     "structure_map": "STRUCTURE_MAP_DELTA_NONE",
@@ -538,7 +539,7 @@
     "release_effect": 0,
     "product_acceptance": false,
     "automatic_progression": false,
-    "simulator_execution_attempts": 11,
+    "simulator_execution_attempts": 12,
     "native_only_reruns": 2
   },
   "b06_q3_context_fence": {
@@ -4323,8 +4324,8 @@
   "real_rn_canvas_execution_20261013": {
     "initial_source_commit": "2c7c554cf51cff38efc84a99df80565f736fe9d9",
     "runner_fix_commit": "5c501d9eaed60257b202de418c936a1f7acb3bf6",
-    "entry_section": "62",
-    "map_section": "65.10",
+    "entry_section": "63",
+    "map_section": "65.11",
     "synthetic_cases": 5,
     "react_native_text_and_piece_modules": "ACTUAL",
     "transport_auth": "THROW_ONLY_TEST_ALIAS",
@@ -4351,42 +4352,42 @@
     "retry_changed_spec_checksums": 66,
     "lock_verification_relaxed": false,
     "runner_restore_commit": "5c685b4b658f5e08ed78039ea3ecd68761582e79",
-    "current_state": "NATIVE59_EXACT_METRICS_PASSED__REAL_RN_IN_PROGRESS",
+    "current_state": "EXACT_RANGE_GROUPING_INDEXED_TRANSPORT_AND_NOFIT_PREFLIGHT__NATIVE_RN_PENDING",
     "previous_current_run": 38371898401,
     "previous_current_job": 115210663296,
     "previous_current_state": "FAILED_AFTER_XCTEST_STARTED__NULL_CAPTURE_REJECTED__ZERO_REPORTS",
     "previous_artifact_id": 11799973603,
     "null_canvas_origin_identified": false,
     "harness_fix_commit": "1667ecd64a10345987b5fcb7be307f9ee315a0a1",
-    "current_run": 38437753643,
+    "current_run": 38441898578,
     "latest_completed_js_passed": 751,
     "latest_completed_native_passed": 59,
     "latest_completed_max420_candidate_elapsed_ms": 633.233,
-    "current_job": 115436093716,
+    "current_job": null,
     "diagnostic_source_commit": "545c7cc3476bdcd84e88624d29137e51089169d6",
-    "latest_completed_run": 38433766446,
-    "latest_completed_job": 115422361678,
+    "latest_completed_run": 38437753643,
+    "latest_completed_job": 115436093716,
     "latest_completed_state": "FOUR_CASES_PASSED__MIXED420_SECOND_FONT_TIMEOUT",
-    "latest_completed_artifact_id": 11833417176,
-    "latest_completed_artifact_sha256": "58054a255f6daa9486c8772e87a41f7ecbd2e2a372c935af0ccb6e12e9627e1b",
+    "latest_completed_artifact_id": 11834343516,
+    "latest_completed_artifact_sha256": "2700b138e79a7ea69abcdad24f7892c9d05206ab8f3019b8e8235dcc03424d5b",
     "latest_completed_case_reports": 5,
     "latest_completed_pngs": 4,
     "latest_completed_duplicate_objc_warnings": 0,
     "latest_completed_export_compile_steps": "SKIPPED_NO_DEPENDENCY_DELTA",
-    "mixed420_full_canvas_elapsed_ms": 8111.816833,
+    "mixed420_full_canvas_elapsed_ms": 8095.899334,
     "mixed420_timeout_size_index": 1,
     "mixed420_root_cause_identified": false,
     "all_five_cases_passed": false,
     "verified_case_elapsed_ms": {
-      "essay_paragraphs": 1165.085417,
-      "quote_unicode": 447.89425,
-      "declaration_no_brand": 419.395834,
-      "saved_essay_canvas": 334.674375
+      "essay_paragraphs": 1034.883833,
+      "quote_unicode": 505.629209,
+      "declaration_no_brand": 344.842125,
+      "saved_essay_canvas": 2470.387083
     },
     "diagnostic_native_job": 115235392168,
     "diagnostic_native_state": "FAILED_BEFORE_ASSERTIONS__INITIAL_VIEW_INIT_STALL_ALARM",
     "mixed420_direct_native_duration_measured": true,
-    "current_native_job": 115436093723,
+    "current_native_job": null,
     "latest_completed_native_failed": 0,
     "mixed420_failure_stage": "FIRST_FONT_PLAN_REJECTED__SECOND_FONT_CANDIDATES_PENDING_AT_TOTAL_TIMEOUT",
     "mixed420_direct_native_elapsed_ms": 4524.926,
@@ -4394,9 +4395,9 @@
     "diagnostic_native_retry_job": 115244155034,
     "diagnostic_native_retry_state": "COMPLETE_45_ASSERTIONS__44_PASS_1_MIXED420_TIMEOUT",
     "diagnostic_native_retry_attempt": 2,
-    "quote_first_native_checked_ms": 319.130667,
+    "quote_first_native_checked_ms": 369.941667,
     "quote_capture_phase": "native_checked",
-    "quote_capture_ms": 447.89425,
+    "quote_capture_ms": 505.629209,
     "quote_permanent_instability_proven": false,
     "previous_verified_case_elapsed_ms": {
       "essay_paragraphs": 524.520292,
@@ -4425,8 +4426,8 @@
       "mixed420_timeout_resolved": false
     },
     "latest_completed_xctest_assertion_failures": 5,
-    "current_native_state": "SUCCESS",
-    "current_native_assertions_executed": 59,
+    "current_native_state": "PENDING",
+    "current_native_assertions_executed": 0,
     "previous_current_js_job": 115248073281,
     "previous_current_js_passed": 747,
     "previous_current_js_failed": 0,
@@ -4446,10 +4447,10 @@
       "quote_capture_ms": 478.03325,
       "scope": "One synthetic Unicode case on isolated iOS simulator; not physical-device or product acceptance."
     },
-    "current_js_job": 115436093608,
-    "current_js_passed": 751,
-    "current_js_failed": 0,
-    "current_js_skipped": 0,
+    "current_js_job": null,
+    "current_js_passed": null,
+    "current_js_failed": null,
+    "current_js_skipped": null,
     "historical_run3_diagnostics": {
       "xctest_executed": 1,
       "xctest_assertion_failures": 2,
@@ -4463,7 +4464,7 @@
       "run": 38383082112
     },
     "current_native_assertions_expected": 59,
-    "mixed420_root_cause_scope": "Lossless transport reaches second font; native call and remaining adapter/B9/fallback costs still require total-time verification.",
+    "mixed420_root_cause_scope": "First font native call 4707.749ms, adapter including native 5864.281ms, B9 nofit 601.744ms; second font pending at shared deadline. Specific native substage costs remain unmeasured.",
     "latest_completed_native_run": 38437753643,
     "latest_completed_native_job": 115436093723,
     "latest_completed_max420_candidate_scope": "HOMOGENEOUS_HIRAGANA_A_420_NOT_MIXED_TEXT",
@@ -4538,7 +4539,7 @@
       "saved_essay_canvas": 453.478417
     },
     "historical_run8_candidate_bridge_rejection_elapsed_ms": 8314.234292,
-    "mixed420_candidate_bridge_resolved_elapsed_ms": 5917.120417,
+    "mixed420_candidate_bridge_resolved_elapsed_ms": 4707.748875,
     "lossless_candidate_transport": {
       "source_commit": "b6a135613c7f443e61740c02873d26424208d8ac",
       "candidate_protocol_ios": "piece.native_candidates.v2",
@@ -4583,7 +4584,7 @@
       "run": 38437753643,
       "native_job": 115436093723,
       "rn_job": 115436093716,
-      "state": "NATIVE59_EXACT_METRICS_PASSED__REAL_RN_IN_PROGRESS",
+      "state": "NATIVE59_EXACT_METRICS_PASSED__FOUR_RN_CASES_PASSED__MIXED420_TIMEOUT",
       "native_exact_equivalence_verified": true,
       "full_canvas_timeout_resolved": false,
       "local_renderer_b9_passed": 83,
@@ -4604,7 +4605,41 @@
         "typographic_ms": 0.767,
         "image_ms": 1175.945,
         "times_are_parallel_operation_sums": true
-      }
+      },
+      "full_rn_result_read": true,
+      "rn_passed_cases": 4,
+      "rn_failed_cases": 1,
+      "rn_mixed420_ms": 8095.899334,
+      "rn_first_candidate_ms": 4707.748875,
+      "rn_first_adapter_ms": 5864.2805,
+      "rn_first_plan_ms": 601.744292,
+      "rn_fallback_size_index": 1,
+      "pngs_visually_checked": 4
+    },
+    "exact_range_indexed_transport_and_nofit": {
+      "source_commit": "b46f4537582a047d25339abcf005ca9d85a7f1d0",
+      "run": 38441898578,
+      "state": "PENDING_NATIVE59_AND_REAL_RN5",
+      "entry_section": "63",
+      "map_section": "65.11",
+      "candidate_protocol_ios": "piece.native_candidates.v3",
+      "legacy_v1_v2_adapter_supported": true,
+      "renderer_recipe_changed": false,
+      "range_hash_requires_raw_text_and_full_attribute_memcmp": true,
+      "cache_budget_retained": true,
+      "max_workers": 4,
+      "all_ranges_retained": true,
+      "raw_float64_bits_retained": true,
+      "uint32_references_little_endian": true,
+      "unreferenced_or_out_of_range_metrics_rejected": true,
+      "nofit_preflight_after_all_metrics_validation": true,
+      "feasible_b9_scoring_unchanged": true,
+      "font_order_and_deadline_retained": true,
+      "local_renderer_b9_passed": 86,
+      "synthetic_nonmonotonic_graphs_matched": 2000,
+      "native_exact_equivalence_verified": false,
+      "full_canvas_timeout_resolved": false,
+      "product_acceptance": false
     }
   }
 }

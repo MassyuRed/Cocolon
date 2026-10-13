@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は入口§62／current map §65.10を優先します。byte列受渡しのrun38433766446は4ケース通過、420文字は次のfont候補へ進んだものの全体8,111.817msで時間切れでした。source `6be0bed` で完全一致候補を事前に分類し最大4workerで独立計測する修正を反映。run38437753643のnative59件は全てbit同値確認まで成功し、実RN5ケースは確認中です。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
+**現在は入口§63／current map §65.11を優先します。source `6be0bed` の実RNは4ケースを画像まで確認しましたが、420文字は8,095.899msで時間切れです。source `b46f453` で完全一致候補の文字列key生成・重複値転送・不成立fontの改行計算を削減し、run38441898578でnative59件と実RN5ケースを検証中です。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1184,3 +1184,12 @@ localのrenderer/B9は83 PASS／FAIL0／SKIP0、[run38433766446](https://github.
 source `6be0bed18fa33d5414d4834bf29ecc8b6d25c6d5` で、同じ完全一致条件・cache上限により候補を先に分類し、各substring／CTLineをworker専用にした最大4並列の独立計測へ変更した。元の全行順に全7数値を復元してv2で渡す。全workerの終了を待ち、失敗・同じ8秒期限は一度だけ拒否する。glyph・数値式・font順・B9・最終検査・save/export禁止は維持。testだけのprofileをatomic化し、実RNのadapter／B9時間を別記録にした。local83件は成功。run38437753643のnative59と実RN5ケースを確認中であり、並列化の数値同値・全体短縮はまだ認定しない。詳細はmap §65.10。旧版のnative再実行より、現在sourceのnative59検査を優先する。
 
 §62 native確認：run38437753643のjob115436093723は59 PASS／FAIL0／SKIP0。14fixtureの旧uncached全候補bit比較を含め通過した。混在420文字の単体候補4,524.926ms、「あ」420文字633.233ms。JS job115436093608も751 PASS／FAIL0／SKIP0。別runnerの前回時間との差から並列化単独の短縮率を求めず、実RN5ケースの全体8秒は引き続き確認中。
+
+
+## 63. 2026-10-14 JST — 全候補を保持した分類・転送・不成立判定の削減
+
+source `6be0bed` の[run38437753643](https://github.com/MassyuRed/Cocolon/actions/runs/38437753643)は完了。native59件の旧方式bit同値・JS751件は通過した。実RNは短文1,034.884ms／引用505.629ms／宣言344.842ms／保存済み2,470.387msでnative_checkedとなり、本文・余白・brandingと4枚PNGを確認した。420文字は8,095.899msでmeasurement_timeout、size1、plan／PNGなし。最初の48ptはnative候補4,707.749ms、adapter全体5,864.281ms、B9不成立601.744ms。44pt候補中に全体期限へ到達した。単体成功を全体合格へ換算しない。
+
+source `b46f4537582a047d25339abcf005ca9d85a7f1d0` は製品3file／test3file。native分類はrange hashで候補を探し、生UTF-16と全属性の完全一致をmemcmpで確認してから再利用する。hash衝突だけでは再利用しない。既存上限・4worker・同じCoreText式を維持する。内部候補v3は代表jobのFloat64計測値と全候補のuint32参照を送り、JSで元の全7数値行へ復元する。v1/v2の受容、全metric検証、font順、最終native inspection、recipe prototype.v3、8秒期限は維持した。B9は全検証後に実測rangeで最小行数を求め、高さに入らないと証明できる場合だけ早期nullとする。収まる場合の元のscore処理は同じ。
+
+local renderer/B9は86 PASS／FAIL0／SKIP0。Python ownerの既存oracleと追加の非単調widthを含む合成2,000graphも旧実装と一致した。remote exact6fileの全文・blob・path・parent51ca57bを照合。同環境read-only reviewに重大指摘なし。独立Pro受入れでも性能証明でもない。[run38441898578](https://github.com/MassyuRed/Cocolon/actions/runs/38441898578)のnative59と実RN5ケースを待ち、完成結果・画像・全体時間で判定する。map §65.11を再開位置とする。正式renderer供給・保存直前fit・通常初回保存・実機は引き続き未完了。weekly10/10 §5.5と12/18目標、default OFF、Draft/open/unmergedを継承する。
