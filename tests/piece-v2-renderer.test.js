@@ -102,6 +102,62 @@ function candidateTable(text, fontSize, unit = 4) {
   return { version:'piece.native_candidates.v1', platform:'ios', font_size:fontSize,
     utf16_length:text.length, boundaries, rows, glyph_check:'no_missing_observed' };
 }
+function packedCandidates(table) {
+  const { rows, ...metadata } = table;
+  const bytes = Buffer.alloc(rows.length * 56);
+  rows.forEach((row, i) => row.forEach((number, j) => bytes.writeDoubleLE(number, (i * 7 + j) * 8)));
+  return { ...metadata, version: 'piece.native_candidates.v2', rows_f64le: bytes.toString('base64') };
+}
+test('packed native rows preserve every double bit, including signed zero and subnormal values', async () => {
+  let expected;
+  const h = rawHarness(sample(), undefined, false, value => {
+    expected = value;
+    value.rows[0].splice(2, 5, Math.PI, -0, -Number.MIN_VALUE, Math.PI, Number.MIN_VALUE);
+    return packedCandidates(value);
+  });
+  const actual = await h.measurePieceCandidates({ tag: 1 }, 'ab', 48);
+  assert.deepEqual(copy(actual.boundaries), expected.boundaries);
+  actual.rows.forEach((row, i) => row.forEach((number, j) => assert.ok(Object.is(number, expected.rows[i][j]))));
+});
+test('packed native transport reaches the same actual planner and inspected canvas as legacy rows', async () => {
+  const old = await harness();
+  const packed = await harness(sample(), undefined, false, packedCandidates);
+  assert.deepEqual(copy(packed.card.state.measurement.plan), copy(old.card.state.measurement.plan));
+  await finish(packed);
+  assert.equal(packed.card.state.measurement.phase, 'native_checked');
+  assert.equal(packed.card.state.measurement.canSave, false);
+  assert.equal(packed.card.state.measurement.canExport, false);
+});
+test('packed transport rejects malformed bytes and preserves full candidate validation', async () => {
+  for (const mutate of [
+    r => ({ ...r, rows_f64le: null }),
+    r => ({ ...r, rows_f64le: r.rows_f64le.slice(4) }),
+    r => ({ ...r, rows_f64le: '!' + r.rows_f64le.slice(1) }),
+    r => ({ ...r, rows_f64le: 'é' + r.rows_f64le.slice(1) }),
+    r => ({ ...r, rows_f64le: '=' + r.rows_f64le.slice(1) }),
+    r => ({ ...r, rows: [] }),
+    r => ({ ...r, boundaries: new Array(422).fill(0) }),
+    r => {
+      const bytes = Buffer.from(r.rows_f64le, 'base64'); bytes.writeDoubleLE(NaN, 16);
+      return { ...r, rows_f64le: bytes.toString('base64') };
+    },
+    r => {
+      const bytes = Buffer.from(r.rows_f64le, 'base64'); bytes.copy(bytes, 56, 0, 56);
+      return { ...r, rows_f64le: bytes.toString('base64') };
+    },
+  ]) {
+    const h = await harness(sample(), undefined, false, value => mutate(packedCandidates(value)));
+    assert.equal(h.card.state.measurement.phase, 'unavailable');
+    assert.equal(h.card.state.measurement.reason, 'native_candidates_unavailable');
+    assert.equal(h.nativeCalls.length, 0);
+  }
+  const h = rawHarness(sample(), undefined, false, value => {
+    const packed = packedCandidates(value);
+    // One row is 56 bytes: one '=' is required; discarded bits must be zero.
+    return { ...packed, rows_f64le: packed.rows_f64le.slice(0, -2) + 'B=' };
+  });
+  await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'a', 48), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+});
 async function prepare(h) {
   if (h.card.state.measurement.phase !== 'planning') return h;
   for (let i = 0; i < h.input().blocks.length; i++) {

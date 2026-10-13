@@ -14,7 +14,10 @@ NativeModules.PieceTextMetrics.measureCandidates = (...args) => {
   const sample = { font_size: args[2], utf16_length: args[1].length, status: 'pending' };
   activeTrace?.candidates.push(sample);
   return nativeCandidates(...args).then(value => {
-    Object.assign(sample, { status: 'resolved', elapsed_ms: performance.now() - started, rows: value.rows?.length });
+    const packedBytes = typeof value.rows_f64le === 'string'
+      ? value.rows_f64le.length / 4 * 3 - (value.rows_f64le.endsWith('==') ? 2 : value.rows_f64le.endsWith('=') ? 1 : 0) : null;
+    Object.assign(sample, { status: 'resolved', elapsed_ms: performance.now() - started,
+      rows: value.rows?.length ?? (packedBytes === null ? null : packedBytes / 56), version: value.version });
     console.log('PIECE_RN_CANDIDATES', JSON.stringify(sample));
     return value;
   }, error => {

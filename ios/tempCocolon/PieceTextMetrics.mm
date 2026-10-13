@@ -81,7 +81,10 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
             }];
           std::vector<unichar> textUnits(snapshot.length);
           [snapshotText getCharacters:textUnits.data() range:NSMakeRange(0, snapshot.length)];
-          NSMutableArray *rows = [NSMutableArray new];
+          // One lossless byte buffer avoids converting hundreds of thousands
+          // of NSNumber objects through the RN bridge for a long paragraph.
+          std::vector<uint64_t> rows;
+          rows.reserve(count * (count + 1) / 2 * 7);
           // Repeated ranges can have identical text but different attributes.
           // Reuse only an exact attributed-string match within this snapshot.
           // Bound retained keys; a miss after the budget still gets measured.
@@ -124,12 +127,19 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
                     cache[key] = @[@(offset), @(range.length), metrics]; cachedUnits += part.length;
                   }
                 }
-                [rows addObject:@[@(start), @(end), metrics[0], metrics[1], metrics[2], metrics[3], metrics[4]]];
+                const double values[] = { (double)start, (double)end, [metrics[0] doubleValue],
+                  [metrics[1] doubleValue], [metrics[2] doubleValue], [metrics[3] doubleValue], [metrics[4] doubleValue] };
+                for (double value : values) {
+                  uint64_t bits; memcpy(&bits, &value, sizeof(bits));
+                  rows.push_back(CFSwapInt64HostToLittle(bits));
+                }
               }
             }
           }
-          resolve(@{ @"version": @"piece.native_candidates.v1", @"platform": @"ios", @"font_size": @(fontSize),
-            @"utf16_length": @(expected.length), @"boundaries": boundaries, @"rows": rows, @"glyph_check": @"no_missing_observed" });
+          NSData *bytes = [NSData dataWithBytes:rows.data() length:rows.size() * sizeof(uint64_t)];
+          resolve(@{ @"version": @"piece.native_candidates.v2", @"platform": @"ios", @"font_size": @(fontSize),
+            @"utf16_length": @(expected.length), @"boundaries": boundaries,
+            @"rows_f64le": [bytes base64EncodedStringWithOptions:0], @"glyph_check": @"no_missing_observed" });
         } @catch (__unused NSException *exception) { unavailable(); }
       });
     } @catch (__unused NSException *exception) { unavailable(); }
