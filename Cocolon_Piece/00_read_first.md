@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§61／current map §65を優先します。`2c7c554` で実RNのPiece全体描画5ケースを実行する既存iOS test targetへの接続を追加しました。初回CIは35分上限でcancelledとなり、実描画は未判定です。`5c501d9` でbuildとsimulator起動を分け、通常iOS buildと同じmacos-26でrun38370566662を実行中です。正式renderer admission・保存前fit・通常アプリの初回保存・実機受入れは未完了です。**
+**現在は入口§61／current map §65.8を優先します。引用の再検査時に配置を原点へ戻す往復を修正し、実RNの引用を含む4ケースで安定描画・本文保持・PNGを確認しました。source `70a5973` の完全属性ID比較で混在420文字のnative計測は3,045.567ms、従来値比較を含む59件が通過しました。run38390527878の実RN全体描画は確認中です。正式renderer admission・保存直前fit・通常アプリの初回保存・実機受入れは未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1159,3 +1159,10 @@ source `5c501d9eaed60257b202de418c936a1f7acb3bf6` でbuild-for-testing→simulat
 
 
 source `6d20e1c` の完了結果は、実RN3ケース通過・混在420文字8,115.294msのtimeout・引用10,087.829msで再検査中だった。native単体の再実行は58件中56 PASS／2 FAILで、混在420文字の計測とその数値比較が未達。重複計測の再利用だけでは混在文の期限超過を解消できていない。引用では再検査のたびに配置を原点へ戻す製品側の往復を確認したため、source `f7a4c61d4d30c8e7ab360f59f508d20e5d4692c8` で同じ計測世代の配置を保持し、表示・capture・再検査の条件は維持した。修正前に位置変更で失敗する回帰検査を確認し、修正後は既存renderer／B9計80件を通過。[run38387379229](https://github.com/MassyuRed/Cocolon/actions/runs/38387379229)の実RN5ケースと、検査内だけのCoreText時間集計を確認する。詳細と再開位置はmap §65.7。正式admission・保存直前fit・通常初回保存・実機受入れは未完了。
+
+
+source `f7a4c61` の[run38387379229](https://github.com/MassyuRed/Cocolon/actions/runs/38387379229)は、引用478.033msを含む4ケースで安定したnative_checked／本文保持／canvasを確認した。4枚のPNGを目視確認し、引用の黒い画像・再検査時の位置往復は今回の合成ケースでは解消した。混在420文字は8,088.625msで時間切れとなり、全5ケースの合格ではない。JS748件は通過した。
+
+source `ff38671` の全文属性が一様な場合だけの比較削減でも、native混在420文字は8,000.106msで時間切れだった。source `70a597384009c26ccd9c0826422b0ee8058edc58` は、同じsnapshotの全属性辞書を一度だけ同値分類し、候補間の生UTF-16列と属性ID列が完全一致する場合に限り既存計測値を再利用する。未命中時のCoreText入力・数値・全候補順序・8秒基準は保持する。異なる位置にある同じ非均一属性列の旧計算比較を追加し、native検査は59件。[run38390527878](https://github.com/MassyuRed/Cocolon/actions/runs/38390527878)のJS748件とnative59件は全て通過した。混在420文字のnative候補計測は3,045.567ms、全88,410候補の旧計算とのbit同値も確認した。実RN5ケースの全体描画は確認中。詳細はmap §65.8。native段階の改善は確認したが、環境差を含む各時間差を一つの処理だけの効果とは断定しない。
+
+次はこの結果を読み、420文字の計測値同値・全体描画・8秒以内を確認する。その後の正式renderer供給、保存直前fit、同じpreview/tokenによる通常画面の初回保存、実機受入れは別の残件。最新weekly10/10 §5.5・12/18公開目標を継承し、既存host/controllerを再実装しない。default OFF・Draft/open/unmerged・canSave/canExport=falseを維持する。

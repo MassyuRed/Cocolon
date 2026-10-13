@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新の作業記録は§65。実RNのPiece全体描画5ケースを既存iOS test targetへ追加しました。初回runはbuild中の35分上限でcancelledとなり、全体描画は未判定です。`5c501d9` でbuildとsimulator起動を分離し、macos-26でrun38370566662を実行中です。正式renderer admission・保存前fit・通常アプリの初回保存・実機は未完了です。**
+**現在は入口§61／current map §65.8を優先します。引用の再検査時に配置を原点へ戻す往復を修正し、実RNの引用を含む4ケースで安定描画・本文保持・PNGを確認しました。source `70a5973` の完全属性ID比較で混在420文字のnative計測は3,045.567ms、従来値比較を含む59件が通過しました。run38390527878の実RN全体描画は確認中です。正式renderer admission・保存直前fit・通常アプリの初回保存・実機受入れは未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -2440,3 +2440,28 @@ source `f7a4c61d4d30c8e7ab360f59f508d20e5d4692c8` は3path。
 - 既存native testの製品source include区間だけ、CoreTextのline生成・typographic bounds・image boundsを同じ引数と戻り値のまま集計する。混在420文字の呼出だけ回数・UTF16総量・経過時間を出力し、旧方式の独立oracle前にwrapperを解除する。58 assertion・8秒期限・製品API／ログは変更しない。計時の小さな追加負荷を含むため、数値はこの検査条件の内訳として扱う。全体typesetter共有はsubstring文脈が変わるため未採用。
 
 同source3pathのremote全文・blob・親head・変更pathを確認済み。同環境read-only補助reviewで重大指摘なし、独立Pro正式受入れとはしない。[run38387379229](https://github.com/MassyuRed/Cocolon/actions/runs/38387379229)のJS job `115262373822` は748 PASS／FAIL0／SKIP0。実RN job `115262373746`／native job `115262373836` は検証中。次は引用の安定画像と全体時間、420文字のCoreText内訳を読み、実測に基づく修正へ進む。正式renderer supplier・保存直前fit・通常初回保存・実機受入れは残る。別のhost/controller・registry・TTLを新設しない。weekly10/10 §5.5と12/18目標、default OFF、Draft/open/unmergedを継承する。
+
+
+### 65.8 引用の安定描画を確認、完全属性比較の反復を削減
+
+source `f7a4c61d4d30c8e7ab360f59f508d20e5d4692c8` の[run38387379229](https://github.com/MassyuRed/Cocolon/actions/runs/38387379229)、実RN job `115262373746` は完了した。artifact `11808745059`（57,112,509 bytes、SHA256 `065ca59bda5a2ef06fb7aa2ca5286331942752194b68c10fae2a2470a2e25396`）を取得・digest確認し、5ケースJSON／stdout／4枚PNGを実読した。1 XCTestのassertion失敗は5件で全て420文字に属し、RN class重複警告は0件。
+
+| 合成ケース | 実RN全体時間 | 結果 |
+| --- | ---: | --- |
+| essay_paragraphs | 691.321ms | native_checked、本文保持、canvas有効、PNG確認 |
+| quote_unicode | 478.033ms | native_checked、本文保持、canvas有効、PNG確認 |
+| declaration_no_brand | 780.121ms | native_checked、本文保持、brandingなし、PNG確認 |
+| essay_max420 | 8,088.625ms | unavailable／measurement_timeout、size0、planなし、PNGなし |
+| saved_essay_canvas | 453.478ms | native_checked、本文保持、canvas有効、PNG確認 |
+
+引用は348.264msでnative_checkedに達し、撮影直前の同snapshot確認を通過した。再検査の間も同じ世代の配置を保持する修正の効果をこの合成ケースで確認した。表示・captureはnative_checkedが必要なままで、新入力／font fallbackでは配置を捨てる。全4画像の本文・余白・段落・brandingを目視確認した。全ケースのcanSave/canExportはfalse。物理端末・生成品質・通常Auth/API・保存受入れへは昇格しない。
+
+同runのnative job `115262373836` は58件中56 PASS／2 FAIL／SKIP0。「あ」420文字332.079msと旧計算との全候補比較は通過したが、混在420文字8,001.779msは計測・比較の2件が失敗した。test内だけの集計はCTLine作成11,382回（全文glyph用1回を含む）、入力計2,320,415 UTF-16 units、作成2,476.134ms／幅0.574ms／ink731.323ms。残る時間にはそれ以外の処理・待機も含むため、Foundation比較だけの時間とは断定しない。JS job `115262373822` は748 PASS／FAIL0／SKIP0、Android source成功。export2jobのlibrary compileは依存差分なしでskip。
+
+source `ff386719fcd6bddb4809d6557901c148d61298b4` は、snapshotの全属性が一様なら候補文字列の一致だけで再利用できる経路を追加した。[run38388545601](https://github.com/MassyuRed/Cocolon/actions/runs/38388545601)のnative job `115266259806` は58件中56 PASS／2 FAIL／SKIP0。「あ」420文字213.867msは同値比較まで通過、混在文は8,000.106msで時間切れだった。作成11,382回／入力2,320,415 units、作成2,055.185ms／幅0.402ms／ink625.585ms。JS job `115266259743` は748 PASS／FAIL0／SKIP0。同sourceの実RN job `115266259476` も完了し、artifact `11809335326`（57,472,181 bytes、SHA256 `95df5a66dc1db88dea7eb080d7c8bec5a16b1ac1452bb46cfe38552c4e6869ae`）のdigest・5件JSON・stdoutを確認した。短文1,067.216ms／引用1,328.172ms／宣言401.977ms／保存済み603.690msはnative_checked・本文保持・canvas有効、引用PNGも目視確認した。混在420文字は8,115.135msでsize0／候補pendingのままtimeout、後続候補拒否8,314.234ms。1 XCTest／assertion失敗5件、class重複警告0件。これらはff版の結果で、70a版の全体結果ではない。
+
+source `70a597384009c26ccd9c0826422b0ee8058edc58` はnative計測とnative検査の2path。immutable snapshot内の完全な属性辞書をNSDictionaryの同値で分類し、UTF-16位置ごとのID列を作る。キャッシュ命中には長さ・範囲・生UTF-16列・全属性ID列の完全一致を要求し、同じ文字でも属性が異なれば従来の独立CTLine計算を行う。未命中時の元substring、CoreText入力、5数値、88,410候補の順序、glyph／有限値／空白ink検査、8秒判定、cache上限は保持する。renderer出力契約を変更しないためprototype.v3を維持する。保存済みrecipeを最新rendererへ読み替えない。
+
+native検査へ、kern／baseline／同サイズ別fontを含む非均一属性列を別位置に反復したfixtureの全候補bit同値比較を1件追加（計59件）。同じ環境のread-only確認で境界・完全属性同値・vector寿命・未命中計算の保持を確認したが、独立Pro/Ultra受入れではない。remote exact bytes/blob・2path・parent・Draft headを照合済み。[run38390527878](https://github.com/MassyuRed/Cocolon/actions/runs/38390527878)のJS job `115272925683` は748 PASS／FAIL0／SKIP0。native job `115272925963` は完了ログで **59 PASS／FAIL0／SKIP0** を確認した。「あ」420文字165.636ms、混在420文字3,045.567msで候補を返し、両方の全88,410候補5数値が旧計算とbit同値だった。10種の小fixture、異なる属性、反復する非均一属性も同値比較を通過した。混在文のprofileは作成11,382回／2,320,415 units、作成1,466.394ms／幅0.244ms／ink409.609ms。native計測段階の期限超過はこの実行で解消した。simulator環境差を含むため改善時間の全てを属性処理だけへ帰属させない。実RN job `115272925790` の全体5ケースは確認中。
+
+次は同sourceの実RN完了結果を読み、420文字の候補bridge転送・B9・font試行・最終inspect／配置まで含む全体時間を判定する。native単体での期限超過解消を、全体8秒・全5ケース合格・任意420文字性能へ読み替えない。正式renderer supplier、保存直前fit、同じpreview/tokenと通常初回保存、実機受入れは残る。既存保存処理の再実装や共有全完成を追加前提にしない。weekly10/10 §5.5・12/18目標、default OFF、Draft/open/unmergedを継承。STRUCTURE_MAP_DELTA_NONE。DB/env/deploy/署名/配布/main mergeへの効果は0。
