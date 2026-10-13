@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は入口§63／current map §65.11を優先します。source `6be0bed` の実RNは4ケースを画像まで確認しましたが、420文字は8,095.899msで時間切れです。source `b46f453` で完全一致候補の文字列key生成・重複値転送・不成立fontの改行計算を削減し、run38441898578でnative59件と実RN5ケースを検証中です。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
+**現在は入口§63／current map §65.11末尾を優先します。source `b46f453` の実RNは4ケースを画像まで確認しました。420文字は48pt・44ptの全候補と不成立判定を終えて40ptへ進みましたが、全体8,113.899msで時間切れです。native単体は再実行で59件すべて通過し、全候補の旧計測とのbit一致を確認済みです。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -2533,3 +2533,19 @@ local renderer/B9 86 PASS／FAIL0／SKIP0、diff check成功。Python owner orac
 正式renderer supplier／保存直前fit／通常InputScreen初回保存／実機受入れのownerは§65.10末尾を継承する。既存host/controller/API保存を再実装しない。weekly10/10 §5.5・12/18目標、default OFF、Draft/open/unmerged、STRUCTURE_MAP_DELTA_NONE、DB/env/deploy/署名/配布/main merge効果0。
 
 §65.11 検査途中：run38441898578のJS job115450309138は754 PASS／FAIL0／SKIP0。native単体job115450309219はコンパイル後17:54:22 UTCの最初のview_initで止まり、17:55:53に90秒alarmで終了した。59assertion開始前で、計測値の比較結果はない。実RN job115450308931は進行中。workflow完了後に単体jobを再実行する。
+
+§65.11 実RN完了：同sourceのattempt1 job115450308931はfailureで終了。artifact11838285425（56,532,504 bytes、SHA256 `bbd8fc59986e9be5bbaab4258d0a664270ba07a39ced1c1bca85d5fde12c179f`）を取得・digest検証し、5件JSON・4枚PNG・xcresult stdoutを実読した。1 XCTest／assertion失敗5件はすべて420文字に属し、RN ObjC class重複警告は0件。短文810.885ms、引用396.497ms、宣言1,083.560ms、保存済み1,327.600msはnative_checked／本文保持／canvas有効。4画像の本文・段落・余白・brandingを目視確認。全canSave/canExport=false。
+
+| 420文字のfont | native候補呼出 | adapter全体（nativeを含む） | B9 | 結果 |
+| --- | ---: | ---: | ---: | --- |
+| 48pt | 2,793.299ms | 3,039.565ms | 292.267ms | 全88,410候補／11,381代表、nofit |
+| 44pt | 3,280.519ms | 3,543.499ms | 217.106ms | 全88,410候補／11,381代表、nofit |
+| 40pt | pending | pending | 未到達 | shared deadline到達 |
+
+全体3,443.392msで44pt、7,288.208msで40ptへ進み、8,052.320msでunavailable:2。最終reportは8,113.899ms、measurement_timeout、plan・PNGなし。各段階の相対時計と全体時計は別起点で、adapterへnativeを重ねて加算しない。48ptで観測したadapterとnativeの差は246.266ms（前R11は1,156.532ms）、B9は292.267ms（前601.744ms）。別runner差も含むので、各変更単独の改善率には換算しない。内部payloadのbinary 808,880 bytesは返却された11,381代表から確認できる。全体描画成功・任意420文字・物理端末性能は未成立。
+
+残る主対象はfontごとのnative候補呼出の反復である。文字数・TextKit標準行数・font間の比例幅から48/44/40を飛ばす方法は、独立substringのB9結果を保証しないため採らない。実mount済みの各fontを先行計測して採用判定だけ元順に保つ案は未採用であり、実装する場合は総worker数の上限・同じpreview世代・同じ全体deadline・全候補数値を守って別途実結果を確認する必要がある。既存全体timerの延長や初期fontの近似変更では埋めない。
+
+親workflow完了後にnative単体jobだけを再実行した。attempt2 job115462431082は進行中で、元の59assertion・独立uncached bit比較を維持している。attempt1のview_init停止は最初のUIView生成中で、UIFont取得・R12計測・semaphore待ちの前。standalone executableのUIKit起動条件が通常アプリと異なるが、停止stackがないため原因確定とはしない。実RNの4ケース通過を、未完了の全候補数値比較へ読み替えない。
+
+§65.11 native再実行完了：attempt2 job115462431082は59 PASS／FAIL0／SKIP0。v3を検査側で独立decodeし、混在420文字の全88,410候補と非均一属性を含む14fixtureすべてで旧uncached計測とのbit一致を確認した。「あ」420文字368.540ms、混在420文字7,974.885ms（単体検査の候補呼出・decodeを含む時計）。CoreTextの操作時間の和は作成6,981.997ms／幅0.922ms／ink1,692.260ms、11,382作成／2,320,415 UTF-16 units。並列操作の和をwall-clockへ加算せず、この別runnerの単体値を実RN性能へ換算しない。初期化停止の原因解消を意味せず、今回の再実行は全判定まで到達したという結果である。JS754件とnative59件は通過したが、実RNは4ケース成功・420文字は40pt候補中の全体timeoutが残る。次の本線はこの反復計測を全体8秒へ収める修正であり、その後の正式renderer供給・保存直前fit・通常初回保存・実機受入れは未完了。

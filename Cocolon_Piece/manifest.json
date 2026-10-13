@@ -9,13 +9,13 @@
     "predecessor_schema_version": "cocolon.piece.workstream_manifest.v67",
     "predecessor_blob": "fd232e9e7837311e77257af424466ffccd902f79",
     "predecessor_head": "51ca57b89bfe714db47ab473ecd01034ef569f1c",
-    "carry_forward": "R11 passed native59 exact comparisons and four real RN canvases; mixed420 timed out at 8095.899ms during the second font. R12 exact range grouping, indexed transport and no-fit preflight are under native and full RN verification. Formal admission/save/device remain unavailable."
+    "carry_forward": "R11 exact native comparisons and four RN canvases passed, but mixed420 timed out. R12 preserves all candidates and reduces grouping, transport and no-fit work; native59 exact comparisons pass after an initialization-stall retry. Four RN canvases pass and mixed420 reaches the third font but still times out. Formal admission/save/device remain unavailable."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "79dc021e26306031ae1a24f6bb2197914d516b2c",
-    "raw_sha256": "b1503f3bb81fd0190f7a9b9f6537581f46faffa2fa8e887f4d60f97d759eeece",
-    "utf8_bytes": 127002
+    "git_blob_sha1": "d09bf77221210405e31baee8406cf64987c2cd5b",
+    "raw_sha256": "17ec7323e14825f63edd7f3242c589d6c5f73e2c66ef945835cc0dc85dff590b",
+    "utf8_bytes": 128873
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -240,12 +240,12 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "NATIVE_DEVICE_RENDERER_ADMISSION_THEN_SAVE_FIT_AND_BOUND_SAVE",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "EXACT_RANGE_GROUPING_INDEXED_TRANSPORT_AND_NOFIT_PREFLIGHT__NATIVE_RN_PENDING",
+    "state": "NATIVE59_EXACT_METRICS_PASSED__FOUR_RN_CASES_PASSED__MIXED420_THIRD_FONT_TIMEOUT",
     "current_map_section": "65.11",
     "current_entry_section": "63",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
     "weekly_review_section": "5.5",
-    "first_unfinished_work": "Read run38441898578 native59 exact comparisons and actual RN five-case canvas with adapter/B9/fallback timing. R11 completed with four canvases and mixed420 timeout; R12 total eight-second render is pending. Then formal renderer/save fit/device admission.",
+    "first_unfinished_work": "Reduce repeated per-font native candidate work within the unchanged eight-second total. R12 actual RN38441898578 is fully read: mixed420 reaches font40 after font48/44 no-fit, then times out at 8113.899ms. Native retry115462431082 passed all59 including fourteen bit-equivalence fixtures. Formal renderer/save fit/normal initial save/device remain unfinished.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 4,
@@ -338,9 +338,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "3b0ce615425b1998c1e54b849cddfc6c2452644f",
-    "raw_sha256": "b9f6f949195c8e8cb5905326f312048570c5ce4e18dba02b09aaec86248b6483",
-    "utf8_bytes": 385736
+    "git_blob_sha1": "da69b2a31f5657f2c64486220a2a73576e1fa344",
+    "raw_sha256": "b0dd3e7d16fb6a6a4f4b3c2155715c1c403b3ff056e20fe23d271966396a903b",
+    "utf8_bytes": 389455
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -513,7 +513,7 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "EXACT_RANGE_GROUPING_INDEXED_TRANSPORT_AND_NOFIT_PREFLIGHT__NATIVE_RN_PENDING",
+    "classification": "NATIVE59_EXACT_METRICS_PASSED__FOUR_RN_CASES_PASSED__MIXED420_THIRD_FONT_TIMEOUT",
     "source_commits": [
       "2c7c554cf51cff38efc84a99df80565f736fe9d9",
       "5c501d9eaed60257b202de418c936a1f7acb3bf6",
@@ -540,7 +540,7 @@
     "product_acceptance": false,
     "automatic_progression": false,
     "simulator_execution_attempts": 12,
-    "native_only_reruns": 2
+    "native_only_reruns": 3
   },
   "b06_q3_context_fence": {
     "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
@@ -4352,7 +4352,7 @@
     "retry_changed_spec_checksums": 66,
     "lock_verification_relaxed": false,
     "runner_restore_commit": "5c685b4b658f5e08ed78039ea3ecd68761582e79",
-    "current_state": "EXACT_RANGE_GROUPING_INDEXED_TRANSPORT_AND_NOFIT_PREFLIGHT__NATIVE_RN_PENDING",
+    "current_state": "NATIVE59_EXACT_METRICS_PASSED__FOUR_RN_CASES_PASSED__MIXED420_THIRD_FONT_TIMEOUT",
     "previous_current_run": 38371898401,
     "previous_current_job": 115210663296,
     "previous_current_state": "FAILED_AFTER_XCTEST_STARTED__NULL_CAPTURE_REJECTED__ZERO_REPORTS",
@@ -4362,42 +4362,42 @@
     "current_run": 38441898578,
     "latest_completed_js_passed": 754,
     "latest_completed_native_passed": 59,
-    "latest_completed_max420_candidate_elapsed_ms": 633.233,
+    "latest_completed_max420_candidate_elapsed_ms": 368.54,
     "current_job": 115450308931,
     "diagnostic_source_commit": "545c7cc3476bdcd84e88624d29137e51089169d6",
-    "latest_completed_run": 38437753643,
-    "latest_completed_job": 115436093716,
-    "latest_completed_state": "FOUR_CASES_PASSED__MIXED420_SECOND_FONT_TIMEOUT",
-    "latest_completed_artifact_id": 11834343516,
-    "latest_completed_artifact_sha256": "2700b138e79a7ea69abcdad24f7892c9d05206ab8f3019b8e8235dcc03424d5b",
+    "latest_completed_run": 38441898578,
+    "latest_completed_job": 115450308931,
+    "latest_completed_state": "FOUR_CASES_PASSED__MIXED420_THIRD_FONT_TIMEOUT",
+    "latest_completed_artifact_id": 11838285425,
+    "latest_completed_artifact_sha256": "bbd8fc59986e9be5bbaab4258d0a664270ba07a39ced1c1bca85d5fde12c179f",
     "latest_completed_case_reports": 5,
     "latest_completed_pngs": 4,
     "latest_completed_duplicate_objc_warnings": 0,
     "latest_completed_export_compile_steps": "SKIPPED_NO_DEPENDENCY_DELTA",
-    "mixed420_full_canvas_elapsed_ms": 8095.899334,
-    "mixed420_timeout_size_index": 1,
+    "mixed420_full_canvas_elapsed_ms": 8113.898917,
+    "mixed420_timeout_size_index": 2,
     "mixed420_root_cause_identified": false,
     "all_five_cases_passed": false,
     "verified_case_elapsed_ms": {
-      "essay_paragraphs": 1034.883833,
-      "quote_unicode": 505.629209,
-      "declaration_no_brand": 344.842125,
-      "saved_essay_canvas": 2470.387083
+      "essay_paragraphs": 810.885458,
+      "quote_unicode": 396.497417,
+      "declaration_no_brand": 1083.560417,
+      "saved_essay_canvas": 1327.600417
     },
     "diagnostic_native_job": 115235392168,
     "diagnostic_native_state": "FAILED_BEFORE_ASSERTIONS__INITIAL_VIEW_INIT_STALL_ALARM",
     "mixed420_direct_native_duration_measured": true,
-    "current_native_job": 115450309219,
+    "current_native_job": 115462431082,
     "latest_completed_native_failed": 0,
-    "mixed420_failure_stage": "FIRST_FONT_PLAN_REJECTED__SECOND_FONT_CANDIDATES_PENDING_AT_TOTAL_TIMEOUT",
-    "mixed420_direct_native_elapsed_ms": 4524.926,
+    "mixed420_failure_stage": "FIRST_TWO_FONT_PLANS_REJECTED__THIRD_FONT_CANDIDATES_PENDING_AT_TOTAL_TIMEOUT",
+    "mixed420_direct_native_elapsed_ms": 7974.885,
     "mixed420_candidate_bridge_rejection_elapsed_ms": null,
     "diagnostic_native_retry_job": 115244155034,
     "diagnostic_native_retry_state": "COMPLETE_45_ASSERTIONS__44_PASS_1_MIXED420_TIMEOUT",
     "diagnostic_native_retry_attempt": 2,
-    "quote_first_native_checked_ms": 369.941667,
+    "quote_first_native_checked_ms": 370.736667,
     "quote_capture_phase": "native_checked",
-    "quote_capture_ms": 505.629209,
+    "quote_capture_ms": 396.497417,
     "quote_permanent_instability_proven": false,
     "previous_verified_case_elapsed_ms": {
       "essay_paragraphs": 524.520292,
@@ -4426,8 +4426,8 @@
       "mixed420_timeout_resolved": false
     },
     "latest_completed_xctest_assertion_failures": 5,
-    "current_native_state": "FAILED_BEFORE_ASSERTIONS__INITIAL_VIEW_INIT_STALL_ALARM",
-    "current_native_assertions_executed": 0,
+    "current_native_state": "SUCCESS",
+    "current_native_assertions_executed": 59,
     "previous_current_js_job": 115248073281,
     "previous_current_js_passed": 747,
     "previous_current_js_failed": 0,
@@ -4464,9 +4464,9 @@
       "run": 38383082112
     },
     "current_native_assertions_expected": 59,
-    "mixed420_root_cause_scope": "First font native call 4707.749ms, adapter including native 5864.281ms, B9 nofit 601.744ms; second font pending at shared deadline. Specific native substage costs remain unmeasured.",
-    "latest_completed_native_run": 38437753643,
-    "latest_completed_native_job": 115436093723,
+    "mixed420_root_cause_scope": "R12 font48/44 native candidate calls 2793.299/3280.519ms and no-fit plans 292.267/217.106ms; font40 starts at 7288.208ms, pending at the shared deadline. Per-font native repetition remains the main measured cost.",
+    "latest_completed_native_run": 38441898578,
+    "latest_completed_native_job": 115462431082,
     "latest_completed_max420_candidate_scope": "HOMOGENEOUS_HIRAGANA_A_420_NOT_MIXED_TEXT",
     "uniform_attributes_comparison": {
       "source_commit": "ff386719fcd6bddb4809d6557901c148d61298b4",
@@ -4539,7 +4539,7 @@
       "saved_essay_canvas": 453.478417
     },
     "historical_run8_candidate_bridge_rejection_elapsed_ms": 8314.234292,
-    "mixed420_candidate_bridge_resolved_elapsed_ms": 4707.748875,
+    "mixed420_candidate_bridge_resolved_elapsed_ms": 2793.298875,
     "lossless_candidate_transport": {
       "source_commit": "b6a135613c7f443e61740c02873d26424208d8ac",
       "candidate_protocol_ios": "piece.native_candidates.v2",
@@ -4619,7 +4619,7 @@
     "exact_range_indexed_transport_and_nofit": {
       "source_commit": "b46f4537582a047d25339abcf005ca9d85a7f1d0",
       "run": 38441898578,
-      "state": "PENDING_NATIVE59_AND_REAL_RN5",
+      "state": "NATIVE59_EXACT_METRICS_PASSED__FOUR_RN_CASES_PASSED__MIXED420_THIRD_FONT_TIMEOUT",
       "entry_section": "63",
       "map_section": "65.11",
       "candidate_protocol_ios": "piece.native_candidates.v3",
@@ -4637,7 +4637,7 @@
       "font_order_and_deadline_retained": true,
       "local_renderer_b9_passed": 86,
       "synthetic_nonmonotonic_graphs_matched": 2000,
-      "native_exact_equivalence_verified": false,
+      "native_exact_equivalence_verified": true,
       "full_canvas_timeout_resolved": false,
       "product_acceptance": false,
       "native_job": 115450309219,
@@ -4648,7 +4648,39 @@
       "js_skipped": 0,
       "native_state": "FAILED_BEFORE_ASSERTIONS__INITIAL_VIEW_INIT_STALL_ALARM",
       "native_assertions_executed": 0,
-      "native_compile_passed": true
+      "native_compile_passed": true,
+      "full_rn_result_read": true,
+      "rn_passed_cases": 4,
+      "rn_failed_cases": 1,
+      "rn_mixed420_ms": 8113.898917,
+      "rn_fallback_size_index": 2,
+      "pngs_visually_checked": 4,
+      "rn_first_candidate_ms": 2793.298875,
+      "rn_first_adapter_ms": 3039.565042,
+      "rn_first_plan_ms": 292.266625,
+      "rn_second_candidate_ms": 3280.518542,
+      "rn_second_adapter_ms": 3543.498542,
+      "rn_second_plan_ms": 217.105709,
+      "rn_metric_count_per_completed_font": 11381,
+      "rn_binary_bytes_per_completed_font": 808880,
+      "native_retry_job": 115462431082,
+      "native_retry_attempt": 2,
+      "native_retry_state": "SUCCESS",
+      "native_passed": 59,
+      "native_failed": 0,
+      "native_skipped": 0,
+      "uncached_equivalence_passed_cases": 14,
+      "homogeneous420_ms": 368.54,
+      "mixed420_ms": 7974.885,
+      "native_elapsed_scope": "STANDALONE_CALL_AND_TEST_DECODE__NOT_REAL_RN_WHOLE_CANVAS",
+      "coretext_profile": {
+        "creates_including_full": 11382,
+        "utf16_units": 2320415,
+        "create_ms": 6981.997,
+        "typographic_ms": 0.922,
+        "image_ms": 1692.26,
+        "times_are_parallel_operation_sums": true
+      }
     }
   }
 }

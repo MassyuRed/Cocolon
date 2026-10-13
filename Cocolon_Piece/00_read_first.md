@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は入口§63／current map §65.11を優先します。source `6be0bed` の実RNは4ケースを画像まで確認しましたが、420文字は8,095.899msで時間切れです。source `b46f453` で完全一致候補の文字列key生成・重複値転送・不成立fontの改行計算を削減し、run38441898578でnative59件と実RN5ケースを検証中です。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
+**現在は入口§63／current map §65.11末尾を優先します。source `b46f453` の実RNは4ケースを画像まで確認しました。420文字は48pt・44ptの全候補と不成立判定を終えて40ptへ進みましたが、全体8,113.899msで時間切れです。native単体は再実行で59件すべて通過し、全候補の旧計測とのbit一致を確認済みです。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1195,3 +1195,7 @@ source `b46f4537582a047d25339abcf005ca9d85a7f1d0` は製品3file／test3file。n
 local renderer/B9は86 PASS／FAIL0／SKIP0。Python ownerの既存oracleと追加の非単調widthを含む合成2,000graphも旧実装と一致した。remote exact6fileの全文・blob・path・parent51ca57bを照合。同環境read-only reviewに重大指摘なし。独立Pro受入れでも性能証明でもない。[run38441898578](https://github.com/MassyuRed/Cocolon/actions/runs/38441898578)のnative59と実RN5ケースを待ち、完成結果・画像・全体時間で判定する。map §65.11を再開位置とする。正式renderer供給・保存直前fit・通常初回保存・実機は引き続き未完了。weekly10/10 §5.5と12/18目標、default OFF、Draft/open/unmergedを継承する。
 
 §63 検査途中：run38441898578のJS job115450309138は754 PASS／FAIL0／SKIP0。native単体job115450309219はコンパイル後17:54:22 UTCの最初のview_initで止まり、17:55:53に90秒alarmで終了した。59assertion開始前で、計測値の比較結果はない。実RN job115450308931は進行中。workflow完了後に単体jobを再実行する。
+
+§63 実RN完了：run38441898578のjob115450308931は4ケースnative_checked、420文字のみ失敗。artifact11838285425のdigest・5件JSON・4枚PNGを確認した。短文810.885ms／引用396.497ms／宣言1,083.560ms／保存済み1,327.600ms。420文字は48pt候補2,793.299ms→adapter3,039.565ms→B9不成立292.267ms、44pt候補3,280.519ms→adapter3,543.499ms→B9不成立217.106ms。全体7,288.208msに40ptへ進んだが、計測中に期限へ達し、最終8,113.899ms。全体8秒は未達でplan・PNGなし。採用順を保った各fontのnative反復を収めることが次の修正対象。全候補・本文・font順・期限を緩和して成功扱いしない。workflow完了後にnative単体のみを再実行し、attempt2 job115462431082の全59判定を待つ。詳細はmap §65.11末尾。
+
+§63 native再実行完了：attempt2 job115462431082は59 PASS／FAIL0／SKIP0。v3を検査側で独立decodeし、混在420文字の全88,410候補と非均一属性を含む14fixtureすべてで旧uncached計測とのbit一致を確認した。「あ」420文字368.540ms、混在420文字7,974.885ms（単体検査の候補呼出・decodeを含む時計）。CoreTextの操作時間の和は作成6,981.997ms／幅0.922ms／ink1,692.260ms、11,382作成／2,320,415 UTF-16 units。並列操作の和をwall-clockへ加算せず、この別runnerの単体値を実RN性能へ換算しない。初期化停止の原因解消を意味せず、今回の再実行は全判定まで到達したという結果である。JS754件とnative59件は通過したが、実RNは4ケース成功・420文字は40pt候補中の全体timeoutが残る。次の本線はこの反復計測を全体8秒へ収める修正であり、その後の正式renderer供給・保存直前fit・通常初回保存・実機受入れは未完了。
