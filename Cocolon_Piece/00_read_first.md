@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§60／current map §64を優先します。`502c875` のiOS simulator実行で、前回未判定だったnative描画検査44件がすべて成功し、既存JS747件も成功しました。前回の停止は再現せず、原因は未特定です。次は実RN上のPiece全体描画・全体処理時間の確認から、正式renderer admissionと保存前fitへ進みます。`f026adb` の条件付き初回保存hostは接続済みですが、InputScreenに正式判定供給元がなく、通常アプリの初回保存・実機受入れは未完了です。**
+**現在は§61／current map §65を優先します。`2c7c554` で実RNのPiece全体描画5ケースを実行する既存iOS test targetへの接続を追加しました。初回CIは35分上限でcancelledとなり、実描画は未判定です。`5c501d9` でbuildとsimulator起動を分け、通常iOS buildと同じmacos-26でrun38370566662を実行中です。正式renderer admission・保存前fit・通常アプリの初回保存・実機受入れは未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1143,3 +1143,14 @@ source `502c87527b3a28961ae3138754fe46d3cb731e08` は既存 `tests/native/piece-
 前回の停止は再現せず、原因は未特定。起動完了出力からmainの最初の出力まで約95.3秒のログ上の間隔があり、起動処理だけの時間とは断定しない。420文字の候補計測は1,703.604msだったが、Piece全体の時間ではない。実UIKit/TextKit/CoreTextを使う一方、RN bridge/view境界は代替であり、実RN描画・実機・正式renderer admissionには昇格しない。詳細と各jobの範囲はcurrent map §64。
 
 次は既存 `PieceVisualCard` の実RN描画で、同じ本文・recipeから候補計測→B9行選択→全行の最終検査→固定canvas配置を確認する。段落・branding・長文を含む全体描画と全体処理時間を確認し、その結果に基づく正式renderer判定、保存直前fit、同じpreview/tokenへの結合へ進む。既存host/controllerを再実装せず、`native_checked`だけで保存を許可しない。通常InputScreenの正式判定供給は未接続。画像共有全完成を初回実機確認の追加条件にしない。weekly10/10 §5.5と12/18目標を継承する。
+
+
+## 61. 2026-10-13 — 実React Nativeの全体描画検査へ接続（実行中checkpoint）
+
+source `2c7c554cf51cff38efc84a99df80565f736fe9d9` は、既存 `tempCocolonTests` で実RCTBridge／RCTRootView／Textと製品のPieceVisualCard・B9・PieceTextMetricsを実行する検査を追加した。段落、Unicode／中央揃え、宣言／brandingなし、420文字、保存済みcanvasの5ケースで、実Textの本文・最終ink配置・画像寸法・全体時間を確認し、PNGを取得する。本文・preview/saved packetは合成で、生成品質・実API保存・実機受入れの確認ではない。
+
+検査用のdisposable checkoutだけで通常AppDelegateを空の起動へ置き換え、専用bundleを載せる。検査用Metroは `lib/apiClient.js` だけを呼出し時に拒否する代替にし、Auth/APIを使わない。製品のPiece、RN Text、native計測は差し替えない。製品のAppDelegate・project・Podfile・lockはrepository上では変更しない。署名・配布・稼働有効化はない。
+
+初回[run38366036318](https://github.com/MassyuRed/Cocolon/actions/runs/38366036318)は既存JS747 PASSとnative44 PASS、両OSの既存library compile成功。実RN job `115191277280` は35分上限でcancelled。完了ログにcompile errorはなく、simulator起動後もnative buildが継続し、XCTest結果・5ケースJSON／PNGは得られなかった。既存検査の成功を全体描画へ読み替えない。
+
+source `5c501d9eaed60257b202de418c936a1f7acb3bf6` でbuild-for-testing→simulator起動→同じ出力先のtest-without-buildingへ分け、通常iOS build実績のあるmacos-26に合わせた。CI全体上限は45分へ変更したが、描画8秒・5ケースのfixture／判定・製品sourceは変更していない。[run38370566662](https://github.com/MassyuRed/Cocolon/actions/runs/38370566662)はbuild前のPodfile.lock完全照合で停止した。差分は66個のSPEC CHECKSUMS値だけで、依存version・取得元・Podfile checksum・CocoaPods版の差分はなかった。環境差の原因は未特定。`5c685b4b658f5e08ed78039ea3ecd68761582e79` で実RN jobだけlock完全一致の実績があるmacos-15へ戻し、build先行・45分・lock完全照合を保持した。[run38371898401](https://github.com/MassyuRed/Cocolon/actions/runs/38371898401)はcheckpoint時点で実行中。次はこのrunの実行1test・5ケースJSON・5PNGを取得して実読し、必要なら観測した直接原因を修正する。未判定だけでMashの確認待ちにしない。

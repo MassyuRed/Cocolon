@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v59",
+  "schema_version": "cocolon.piece.workstream_manifest.v60",
   "generated_at": "2026-10-13 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v58",
-    "predecessor_blob": "ed19bb3c9625c3845d6130ac40fd9b36e28f7c5a",
-    "predecessor_head": "502c87527b3a28961ae3138754fe46d3cb731e08",
-    "carry_forward": "iOS native 44 checks and existing JS 747 passed; prior stall not reproduced and cause unresolved. Real RN whole-canvas/device validation, formal renderer admission and save-time fit remain incomplete."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v59",
+    "predecessor_blob": "863e227e392d41ada734c9b75c201ddcb85d699d",
+    "predecessor_head": "5c685b4b658f5e08ed78039ea3ecd68761582e79",
+    "carry_forward": "Real RN full-canvas execution pending. First build timed out; macos-26 retry stopped on lock checksum-only differences. Restored macos-15 with exact lock verification and build-before-boot; run38371898401 in progress."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "7b723ab119aaf9f68885535e065a470cb6458f2a",
-    "raw_sha256": "25c8e39c2e7db591dfce9343c3d10cb1f9502cd5c8ddd8cadda70249e485f8c2",
-    "utf8_bytes": 113252
+    "git_blob_sha1": "5cdf9015e0f135b7f43098acad117489d4620667",
+    "raw_sha256": "5b2a9888cd66db6fbd0904169f2df8cab17b856bdf6c26cfee68004186be1867",
+    "utf8_bytes": 115735
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -174,7 +174,7 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "502c87527b3a28961ae3138754fe46d3cb731e08",
+    "cocolon_pre_sync_head": "5c501d9eaed60257b202de418c936a1f7acb3bf6",
     "mashos_api_head": "804beca66f9f02e18dc4522232478466f4d52b13",
     "current_user_visible_piece_shape": "CANDIDATE_NORMAL_INPUT_V2_SAVED_SOURCE_ONLY__TUTORIAL_NEXUS_LEGACY_REMAIN__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
@@ -190,7 +190,7 @@
     "input_screen_source_connected": true,
     "live_auth_input_to_preview_to_device_verified": false,
     "database_evidence_owner": "live_db_apply_20261010",
-    "remaining_work_owner": "native_metrics_execution_20261013",
+    "remaining_work_owner": "real_rn_canvas_execution_20261013",
     "product_acceptance": false,
     "piece_v2_default_application_registered": false,
     "piece_v2_quota_http_present": true,
@@ -240,12 +240,12 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "NATIVE_DEVICE_RENDERER_ADMISSION_THEN_SAVE_FIT_AND_BOUND_SAVE",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "IOS_NATIVE_44_AND_JS_747_PASS__REAL_RN_RENDERER_FIT_DEVICE_PENDING",
-    "current_map_section": "64.2",
-    "current_entry_section": "60",
+    "state": "REAL_RN_CANVAS_RUN_IN_PROGRESS__NO_RENDER_ACCEPTANCE",
+    "current_map_section": "65.3",
+    "current_entry_section": "61",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
     "weekly_review_section": "5.5",
-    "first_unfinished_work": "Real RN PieceVisualCard candidate measurement -> B9 row plan -> full-row inspection -> fixed canvas placement and end-to-end timing; then accepted renderer admission and fresh save fit bound to the same preview/token. Existing host/controller/results/detail are reused. Full image sharing remains outside the first-device prerequisite.",
+    "first_unfinished_work": "Retrieve run38371898401 XCTest/5-case JSON/5 PNG; inspect actual images and fix only observed rendering defects. Formal admission, fresh save fit and ordinary app save remain pending.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 4,
@@ -338,9 +338,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "5e6ebf5a6784c024660d4590cf5823cef65f4e91",
-    "raw_sha256": "fb64e87dd4fa80e813e88ab47f8e420fb453aecbc0d97031d6c38f294173d4a6",
-    "utf8_bytes": 345887
+    "git_blob_sha1": "ecac2e147726681bfb124b8f6b51b9f8b5aa28f1",
+    "raw_sha256": "8c4c119f3c2b00cfcb00a66615e1c9feac6f5d63113731293d4c3131317c76d0",
+    "utf8_bytes": 351382
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -513,19 +513,24 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "EXISTING_IOS_NATIVE_TEST_EXECUTION_AND_RESULT_SYNC",
-    "source_commit": "502c87527b3a28961ae3138754fe46d3cb731e08",
+    "classification": "REAL_RN_FULL_CANVAS_EXECUTION_PREPARATION__RUN_IN_PROGRESS",
+    "source_commits": [
+      "2c7c554cf51cff38efc84a99df80565f736fe9d9",
+      "5c501d9eaed60257b202de418c936a1f7acb3bf6",
+      "5c685b4b658f5e08ed78039ea3ecd68761582e79"
+    ],
     "product_source_changes": 0,
-    "test_source_changes": 1,
-    "new_test_cases": 0,
+    "test_source_paths": 4,
+    "workflow_paths": 1,
     "piece_documentation_paths": 3,
-    "workflow_changes": 0,
     "structure_map": "STRUCTURE_MAP_DELTA_NONE",
+    "signing": 0,
+    "distribution": 0,
     "live_database_apply": 0,
     "release_effect": 0,
-    "native_app_builds": 0,
     "product_acceptance": false,
-    "automatic_progression": false
+    "automatic_progression": false,
+    "simulator_execution_attempts": 3
   },
   "b06_q3_context_fence": {
     "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
@@ -4290,5 +4295,55 @@
     "native_device_acceptance": false,
     "product_acceptance": false,
     "automatic_progression": false
+  },
+  "historical_current_sync_effects_before_20261013_real_rn_canvas": {
+    "classification": "EXISTING_IOS_NATIVE_TEST_EXECUTION_AND_RESULT_SYNC",
+    "source_commit": "502c87527b3a28961ae3138754fe46d3cb731e08",
+    "product_source_changes": 0,
+    "test_source_changes": 1,
+    "new_test_cases": 0,
+    "piece_documentation_paths": 3,
+    "workflow_changes": 0,
+    "structure_map": "STRUCTURE_MAP_DELTA_NONE",
+    "live_database_apply": 0,
+    "release_effect": 0,
+    "native_app_builds": 0,
+    "product_acceptance": false,
+    "automatic_progression": false
+  },
+  "real_rn_canvas_execution_20261013": {
+    "initial_source_commit": "2c7c554cf51cff38efc84a99df80565f736fe9d9",
+    "runner_fix_commit": "5c501d9eaed60257b202de418c936a1f7acb3bf6",
+    "entry_section": "61",
+    "map_section": "65",
+    "synthetic_cases": 5,
+    "react_native_text_and_piece_modules": "ACTUAL",
+    "transport_auth": "THROW_ONLY_TEST_ALIAS",
+    "blank_test_launcher": "DISPOSABLE_CHECKOUT_ONLY",
+    "initial_run": 38366036318,
+    "initial_job": 115191277280,
+    "initial_result": "CANCELLED_AT_35_MINUTES__NO_TEST_RESULT",
+    "initial_artifact_id": 11797978324,
+    "initial_js_passed": 747,
+    "initial_native_passed": 44,
+    "initial_export_libraries_compile": "SUCCESS_BOTH_OS",
+    "retry_run": 38370566662,
+    "retry_job": 115206230614,
+    "retry_state": "FAILED_BEFORE_BUILD__LOCK_SPEC_CHECKSUMS_ONLY",
+    "draw_deadline_ms": 8000,
+    "job_timeout_minutes": 45,
+    "real_rn_whole_canvas_verified": false,
+    "native_save_fit": false,
+    "formal_renderer_admission": false,
+    "ordinary_app_initial_save_complete": false,
+    "native_device_acceptance": false,
+    "product_acceptance": false,
+    "automatic_progression": false,
+    "retry_changed_spec_checksums": 66,
+    "lock_verification_relaxed": false,
+    "runner_restore_commit": "5c685b4b658f5e08ed78039ea3ecd68761582e79",
+    "current_run": 38371898401,
+    "current_job": 115210663296,
+    "current_state": "IN_PROGRESS"
   }
 }

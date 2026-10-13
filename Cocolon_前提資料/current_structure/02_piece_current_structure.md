@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新の作業記録は§64。`502c875` のiOS simulator実行でnative描画検査44件と既存JS747件が成功しました。前回の停止は再現せず、原因は未特定です。実RN上のPiece全体描画・全体処理時間は未確認で、正式renderer admission、保存前fit、通常アプリの初回保存、実機、M5全面も未完了です。`f026adb` の条件付き初回保存host、API `804beca`、§61の本人履歴入口を継承します。**
+**最新の作業記録は§65。実RNのPiece全体描画5ケースを既存iOS test targetへ追加しました。初回runはbuild中の35分上限でcancelledとなり、全体描画は未判定です。`5c501d9` でbuildとsimulator起動を分離し、macos-26でrun38370566662を実行中です。正式renderer admission・保存前fit・通常アプリの初回保存・実機は未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -2321,3 +2321,38 @@ RN commit `f026adb805ae6795845e22bef14edb6ee301becd`。既存 `screens/input/Inp
 確認したrendererに基づく正式判定と保存直前fitを同じpreview/tokenへ結び、既存 `isSaveAdmitted` と初回保存host/controllerへ接続する。`native_checked`と今回の44 PASSだけでは許可しない。通常InputScreenへの正式判定供給、通常アプリの初回保存、実機受入れは未完了。既存結果表示・同key再確認・本人detailを再実装しない。画像保存共有、形式変更、Nexus公開切替、M5残差、稼働構成も継承し、共有全完成を初回実機確認の前提にしない。
 
 全体設計・全ファイル地図・最新weekly10/10 §5.5を原本確認した。SystemContext prepareは基準commitの祖先条件で終了したため、既定の原本直接読取へ戻し、凍結済みcontextを更新していない。入口§60／本map§64／manifest v59へ今回の結果と再開点を同期する。製品構造変更はない（STRUCTURE_MAP_DELTA_NONE）。API `804beca`、host `f026adb`、公開目標2026-12-18、Draft/open/unmerged、default OFF、automatic_progression=falseを継承。製品source・API・DB・env・deploy・activation・native app build・署名／配布・main mergeへの変更は0。
+
+
+## 65. 2026-10-13 — 実RNのPiece全体描画へ進行（実行中checkpoint）
+
+### 65.1 変更対象と範囲
+
+`2c7c554cf51cff38efc84a99df80565f736fe9d9` の5pathをremote全文・blob・変更path集合・親headで照合した。rootが実装・反映し、補助agentは同環境read-only reviewのみ。製品実装の追加や正式受入れではなく、既存の全体描画経路を実行する直接検証である。
+
+| path | 今回の役割 |
+| --- | --- |
+| `tests/native/piece-rn-canvas-fixtures.cjs` | 既存のclosed preview fixtureを再利用し、合成本文・hash・recipeとsaved packetを構成。5ケース全てを実parser/hash/layoutへ入力できることをlocal確認。 |
+| `tests/native/piece-rn-canvas-entry.js` | 実PieceVisualCardをmountし、段落、Unicode／中央揃え、宣言／brandingなし、上限420文字、保存済みcanvasの5ケースを順に実行。計測値やnative_checkedを代入しない。 |
+| `tests/native/piece-rn-canvas-ios.m` | 既存hosted XCTestへ実RCTBridge／RCTRootViewと結果通知moduleを接続。実Text本文・全行の最終ink位置・canvas寸法を確認し、PNG／JSONを残す。 |
+| `tests/native/run-piece-rn-canvas-ios.sh` | CI disposable checkoutでだけblank AppDelegateと専用bundleを使い、通常Firebase/index起動を避ける。検査用MetroはapiClientだけを拒否用の代替へ向ける。製品Piece/RN/native計測を保持して署名なしsimulator実行。 |
+| `.github/workflows/piece-rn-contracts.yml` | 描画関連差分に限る `piece-ios-rn-canvas` jobを既存CIへ追加。既存JS747／native44のfixture・判定式は保持。 |
+
+UI/Auth/APIの全体結合や本文生成品質は対象外。画像は合成本文の実描画であり、Cocolonが入力から生成したPieceという意味ではない。既存Welcome testは変更せず、今回のtestだけを選択する。test hostはbuildするが、製品appの署名・配布・稼働切替ではない。製品source・API・DB・既存契約の変更0、STRUCTURE_MAP_DELTA_NONE。
+
+### 65.2 初回実行の結果
+
+[run38366036318](https://github.com/MassyuRed/Cocolon/actions/runs/38366036318)、source `2c7c554`。JS job `115191277405` は747 PASS／FAIL0／SKIP0。native job `115191277325` は44 PASS／FAIL0／SKIP0、420文字候補単体1,838.164ms。Android source jobとexport2jobもsuccessで、今回は両OSの4 library compile stepを実行した。実RN5ケースとは別集合であり合算しない。
+
+実RN job `115191277280` は35分上限でcancelled。専用bundleは07:59:32 UTC、Pod installは08:01:24、simulator起動完了は08:03:43。native compileの警告が08:31まで続き、08:32にapp側build script、08:33にcancelが記録された。取得した完了ログにcompile error・XCTest実行結果・PIECE_RN_CASEはなく、5ケースのJSON／PNGも未取得。描画失敗の根因や製品不具合を確定したとはしない。artifact `11797978324` はbuild log／途中xcresultの保存であり、描画成功の証拠ではない。
+
+### 65.3 実行阻害への最小修正と再開位置
+
+`5c501d9eaed60257b202de418c936a1f7acb3bf6` はworkflowと既存runner scriptの2pathだけを変更した。build-for-testingを先に完了し、simulator起動後に同じscheme／configuration／destination／derivedDataPathでtest-without-buildingを実行する。通常iOS buildの直近成功run `38041653252` と同じmacos-26へ合わせ、job上限を45分にした。メモリ／CPU競合が確定原因だとは主張せず、simulatorと初回buildの同時実行を除く。描画の8秒期限、5ケースの入力・判定基準、製品sourceは不変。
+
+[run38370566662](https://github.com/MassyuRed/Cocolon/actions/runs/38370566662)の実RN job `115206230614` は08:42:07 UTCにbuild前のPodfile.lock完全照合で停止した。完了ログの差分は66個のSPEC CHECKSUMS値のみで、PODS／DEPENDENCIES／EXTERNAL SOURCES／PODFILE CHECKSUM／COCOAPODSの差分はない。環境要因は未特定で、製品依存を更新したりlock検証を緩和したりしない。XCTest／5ケースJSON／PNGは未実行・未取得。
+
+`5c685b4b658f5e08ed78039ea3ecd68761582e79` の変更は実RN jobのrunnerをmacos-15へ戻す1行だけ。初回にlock完全一致を確認した環境を使い、build先行・45分・8秒描画期限・fixture／判定・lock完全照合を保持する。3source commitのremote全文・blob・変更path・親headを確認済み。同環境read-only補助reviewに追加の重大懸念はなく、独立Pro正式reviewとはしない。
+
+[run38371898401](https://github.com/MassyuRed/Cocolon/actions/runs/38371898401)、source `5c685b4`、実RN job `115210663296` はcheckpoint時点で実行中。次は同runのXCTest実行1件と5ケースJSON／5PNGを取得し、実画像の空白・縮小・欠けも確認する。終了コード0だけで描画成立としない。実RNで観測した不具合があれば、その直接箇所だけを修正して同じケースで確認する。
+
+その後の本線は実機を含むrenderer確認→正式renderer判定供給→保存直前fit→同じpreview/tokenによる既存初回保存hostへの結合。`native_checked`単独で保存を有効にせず、既存host/controller／本人detail／結果再確認を再実装しない。weekly10/10 §5.5、12/18目標、default OFF、Draft/open/unmergedを維持する。SystemContext prepareは祖先条件で終了し、原本直接読取を使用した。
