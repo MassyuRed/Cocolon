@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
-revision_date: "2026-10-13 JST"
+revision_date: "2026-10-14 JST"
 latest_api_implementation: "804beca66f9f02e18dc4522232478466f4d52b13"
 latest_storage_candidate: "4fcb140b778850a1b7a5a65d8e0a26005b3a24c4"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は入口§61／current map §65.8を優先します。引用の再検査時に配置を原点へ戻す往復を修正し、実RNの引用を含む4ケースで安定描画・本文保持・PNGを確認しました。source `70a5973` の完全属性ID比較で混在420文字のnative計測は3,045.567ms、従来値比較を含む59件が通過しました。run38390527878の実RN全体描画は確認中です。正式renderer admission・保存直前fit・通常アプリの初回保存・実機受入れは未完了です。**
+**現在は入口§62／current map §65.9を優先します。前回run38390527878は4ケース通過、混在420文字は全体8,776.295msで時間切れでした。source `b6a1356` で計測値をbit同値のbyte列として渡す修正を反映し、run38433766446の実RNを確認中です。JS751件は成功、native単体は最初のview初期化で停止し59検査未実行。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -2465,3 +2465,26 @@ source `70a597384009c26ccd9c0826422b0ee8058edc58` はnative計測とnative検査
 native検査へ、kern／baseline／同サイズ別fontを含む非均一属性列を別位置に反復したfixtureの全候補bit同値比較を1件追加（計59件）。同じ環境のread-only確認で境界・完全属性同値・vector寿命・未命中計算の保持を確認したが、独立Pro/Ultra受入れではない。remote exact bytes/blob・2path・parent・Draft headを照合済み。[run38390527878](https://github.com/MassyuRed/Cocolon/actions/runs/38390527878)のJS job `115272925683` は748 PASS／FAIL0／SKIP0。native job `115272925963` は完了ログで **59 PASS／FAIL0／SKIP0** を確認した。「あ」420文字165.636ms、混在420文字3,045.567msで候補を返し、両方の全88,410候補5数値が旧計算とbit同値だった。10種の小fixture、異なる属性、反復する非均一属性も同値比較を通過した。混在文のprofileは作成11,382回／2,320,415 units、作成1,466.394ms／幅0.244ms／ink409.609ms。native計測段階の期限超過はこの実行で解消した。simulator環境差を含むため改善時間の全てを属性処理だけへ帰属させない。実RN job `115272925790` の全体5ケースは確認中。
 
 次は同sourceの実RN完了結果を読み、420文字の候補bridge転送・B9・font試行・最終inspect／配置まで含む全体時間を判定する。native単体での期限超過解消を、全体8秒・全5ケース合格・任意420文字性能へ読み替えない。正式renderer supplier、保存直前fit、同じpreview/tokenと通常初回保存、実機受入れは残る。既存保存処理の再実装や共有全完成を追加前提にしない。weekly10/10 §5.5・12/18目標、default OFF、Draft/open/unmergedを継承。STRUCTURE_MAP_DELTA_NONE。DB/env/deploy/署名/配布/main mergeへの効果は0。
+
+
+### 65.9 計測値を変えずにnative候補の受渡しを削減
+
+前回source `70a597384009c26ccd9c0826422b0ee8058edc58` の[run38390527878](https://github.com/MassyuRed/Cocolon/actions/runs/38390527878)、実RN job115272925790は完了し、保存された5ケースJSONを実読した。
+
+| 合成ケース | 実RN全体時間 | 結果 |
+| --- | ---: | --- |
+| essay_paragraphs | 974.235ms | native_checked、本文保持 |
+| quote_unicode | 668.122ms | native_checked、本文保持 |
+| declaration_no_brand | 420.115ms | native_checked、本文保持 |
+| essay_max420 | 8,776.295ms | unavailable／measurement_timeout、size0、plan・PNGなし |
+| saved_essay_canvas | 437.084ms | native_checked、本文保持 |
+
+混在420文字の48pt候補呼出は7,878.5245msで88,410行を返したが、全体時計の8,727.017ms時点でunavailableへ遷移した。候補呼出時計と全体時計の開始点は異なるため、差だけでB9処理時間を求めない。単体native59全PASS・混在3,045.567ms・旧全候補bit同値の事実は維持するが、実RN5ケース合格ではない。従来の「native計測が未返却」の原因区間を、この版へそのまま引き継がない。
+
+source `b6a135613c7f443e61740c02873d26424208d8ac` は製品2＋test3の5path。`ios/tempCocolon/PieceTextMetrics.mm` が、従来の7数値／行をそのままlittle-endian Float64の連続byte列へ格納してbase64化する。全88,410行は4,950,960byteで、数値object約619,000個をbridgeで逐次変換する必要を除く。完全属性比較のcache、未命中CoreText入力、全文glyph検査、候補順序、8秒期限は保持する。内部responseをpiece.native_candidates.v2とし、`features/piece/pieceRenderer.js` が長さ・文字集合・paddingを検証して元の行へbit同値で復元する。既存B9が全境界・候補網羅・数値を検証する。Android既存v1を受け、renderer recipeはprototype.v3のまま。正式admissionの追加ではない。
+
+`tests/native/piece-text-metrics-ios.mm` はv2を従来行列へ復元して既存59判定と独立uncached bit比較を実行する。`tests/native/piece-rn-canvas-entry.js` はv2の行数／versionを記録するだけでresponseを加工しない。`tests/piece-v2-renderer.test.js` に独立Bufferによるbit復元（負のzero・subnormalを含む）、v1/v2の同じ改行・最終検査、破損payload拒否の3検査を追加。local83 PASS／FAIL0／SKIP0、diff check成功。同環境read-only reviewで重大指摘なし。独立Pro/実機受入れではない。
+
+[run38433766446](https://github.com/MassyuRed/Cocolon/actions/runs/38433766446)のJS job115422361691は751 PASS／FAIL0／SKIP0。Android source成功、export両jobのlibrary compileは依存差分なしでskip。iOS source job115422361806はcompile成功後、最初のview_initで90秒alarmとなり59判定未実行（製品候補計測へ未到達）。実RN job115422361678は確認中。成功した単体結果を流用せず、実RN完了後に停止した単体jobだけを再実行する。sourceはfresh remote全文・exact5path・parent603cb2a・Draft branch headを照合済み。
+
+次は同sourceの実RN5ケース、全体8秒、本文保持、画像を確認し、旧数値との同値をnative単体で確認する。短縮や全5ケース合格を未確認で認定しない。正式renderer supplier、保存直前fit、通常InputScreenの初回保存、実機受入れは未完了。weekly10/10 §5.5・12/18目標、default OFF、Draft/open/unmergedを継承。STRUCTURE_MAP_DELTA_NONE。稼働DB/env/deploy/署名/配布/main mergeへの効果は0。

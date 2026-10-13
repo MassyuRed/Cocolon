@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_piece_read_first
 title: "Cocolon Piece — Read First"
-revision_date: "2026-10-13 JST"
+revision_date: "2026-10-14 JST"
 decision_owner: "Mash"
 workstream: "Cocolon / Piece"
 document_status: "CURRENT_PIECE_WORKSTREAM_ENTRY"
@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は入口§61／current map §65.8を優先します。引用の再検査時に配置を原点へ戻す往復を修正し、実RNの引用を含む4ケースで安定描画・本文保持・PNGを確認しました。source `70a5973` の完全属性ID比較で混在420文字のnative計測は3,045.567ms、従来値比較を含む59件が通過しました。run38390527878の実RN全体描画は確認中です。正式renderer admission・保存直前fit・通常アプリの初回保存・実機受入れは未完了です。**
+**現在は入口§62／current map §65.9を優先します。前回run38390527878は4ケース通過、混在420文字は全体8,776.295msで時間切れでした。source `b6a1356` で計測値をbit同値のbyte列として渡す修正を反映し、run38433766446の実RNを確認中です。JS751件は成功、native単体は最初のview初期化で停止し59検査未実行。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1166,3 +1166,14 @@ source `f7a4c61` の[run38387379229](https://github.com/MassyuRed/Cocolon/action
 source `ff38671` の全文属性が一様な場合だけの比較削減でも、native混在420文字は8,000.106msで時間切れだった。source `70a597384009c26ccd9c0826422b0ee8058edc58` は、同じsnapshotの全属性辞書を一度だけ同値分類し、候補間の生UTF-16列と属性ID列が完全一致する場合に限り既存計測値を再利用する。未命中時のCoreText入力・数値・全候補順序・8秒基準は保持する。異なる位置にある同じ非均一属性列の旧計算比較を追加し、native検査は59件。[run38390527878](https://github.com/MassyuRed/Cocolon/actions/runs/38390527878)のJS748件とnative59件は全て通過した。混在420文字のnative候補計測は3,045.567ms、全88,410候補の旧計算とのbit同値も確認した。実RN5ケースの全体描画は確認中。詳細はmap §65.8。native段階の改善は確認したが、環境差を含む各時間差を一つの処理だけの効果とは断定しない。
 
 次はこの結果を読み、420文字の計測値同値・全体描画・8秒以内を確認する。その後の正式renderer供給、保存直前fit、同じpreview/tokenによる通常画面の初回保存、実機受入れは別の残件。最新weekly10/10 §5.5・12/18公開目標を継承し、既存host/controllerを再実装しない。default OFF・Draft/open/unmerged・canSave/canExport=falseを維持する。
+
+
+## 62. 2026-10-14 JST — 計測値を保持した候補の受渡し削減
+
+前回source `70a5973` の[run38390527878](https://github.com/MassyuRed/Cocolon/actions/runs/38390527878)を完了結果まで確認した。native59件は全て通過し混在420文字の単体計測は3,045.567msだったが、実RNでは候補呼出の完了まで7,878.525ms、全体8,776.295msでmeasurement_timeoutとなった。残る4ケースはnative_checked／本文保持、420文字はplan・PNGなし。単体計測の成功を全体描画の成功へ読み替えない。native単体と実RNの差にはsnapshot／環境差もあり、全差分をbridgeだけの費用とは断定しない。
+
+source `b6a135613c7f443e61740c02873d26424208d8ac` は、native候補の各7数値をlittle-endian Float64のbyte列にまとめ、base64文字列を通じてRNへ渡す。JSで元の行列へ復元し、既存B9の全候補・有限値・境界検証を行う。数値の丸め、候補削除、font順序、改行score、8秒期限、最終native検査の変更はない。iOS内部候補protocolはv2、Androidの既存v1を保持し、描画recipeのprototype.v3は変更しない。
+
+localのrenderer/B9は83 PASS／FAIL0／SKIP0、[run38433766446](https://github.com/MassyuRed/Cocolon/actions/runs/38433766446)のJSは751 PASS／FAIL0／SKIP0。native単体job115422361806はcompile成功後、最初のview_initで90秒alarmとなり59検査へ未到達。実RN job115422361678は確認中。source5fileのremote全文・親・変更path一致は確認済み。次は実RN5ケースの結果と画像を読み、停止したnative単体だけを再実行して旧計測とのbit同値を確かめる。詳細はmap §65.9。
+
+正式rendererの供給、保存直前fit、同じpreview/tokenと通常InputScreenの初回保存、実機受入れは別の残件。既存host/controllerは再実装しない。weekly10/10 §5.5・12/18公開目標、default OFF、Draft/open/unmerged、canSave/canExport=falseを維持する。
