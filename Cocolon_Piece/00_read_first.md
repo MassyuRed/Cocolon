@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は入口§66／current map §65.14を優先します。先行source785cのnative63件とJS758件は成功、実RNは4件成功・420文字8,056.995msで36pt待ちのtimeoutです。後続5ef1の共有CF属性データはnative検査中にcrashしたため成功扱いしません。source `ec5db637` でworkerごとに内部データを独立させ、run38476571738のnative63件／実RN5ケースを確認中です。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
+**現在は入口§66／current map §65.14を優先します。source `ec5db637` はnative63件・JS758件を通過し、実RN4ケースと4枚PNGを確認しました。420文字は48→44→40→36ptの全候補計測・復号が返りましたが、36ptのB9開始前に全体8,118.417msでtimeoutとなり、未解消です。共有CF版のcrashは専用workerデータへ修正し、最新native/実RNでは再発しませんでした。次は候補の反復と最終復号を短縮し、36ptのB9・最終inspectionまで同じ8秒内へ収めることです。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1244,3 +1244,13 @@ source `5ef1e0301fec0e8ab87290829dffe4883baee0b9` は複数属性の全runをCF�
 最新source `ec5db637523c047a67a427c69f88d5685e3e4fa5` は既存 `ios/tempCocolon/PieceTextMetrics.mm` の1pathだけです。並列開始前に、各worker専用のCFデータをCreateMutable→全文→全属性run→immutable化で別々に構築します。同じimmutableオブジェクトのcopyだけでは独立とみなしません。workerは専用snapshotから候補を作るため、substring作成時に共有CF run-arrayを読みません。文字・全属性・全候補・CoreText式・48→44→40→36pt・総4worker・元の8秒期限・最終inspectionを保持します。native63判定は変更していません。
 
 remote全文・親5ef1・変更1pathは一致確認済み。同環境read-only補助reviewに重大指摘なし。run38476571738のJS job115568602141は758 PASS／FAIL0／SKIP0。native job115568602020（期待63判定）と実RN job115568602208（5ケース）の結果を次に確認します。正式renderer supplier→保存直前fit→同じpreview/tokenの通常初回保存→実機受入れは描画確認後の残件です。weekly10/10 §5.5・12/18目標、default OFF、Draft/open/unmerged、STRUCTURE_MAP_DELTA_NONE、DB/env/deploy/署名/配布/main merge効果0を保持します。
+
+§66 native再検証：source ec5db637／run38476571738／job115568602020は63 PASS／FAIL0／SKIP0。混在420文字の全88,410候補、非均一属性、uniform全属性、別module/2fontを含む旧uncached bit比較を完走し、今回のcrashは再発しませんでした。混在420文字は2,898.438ms（検査decode500.362msを含む）、queue0.045ms、glyph＋分類85.379ms、worker実時間2,273.151ms、pack＋resolve33.396ms。累積はCF部分文字列472.582ms／generic部分文字列0ms／CoreText作成3,487.415ms／ink910.367ms。「あ」420文字887.024ms。並列累積や別runner差を性能証明へ換算せず、実RN全体8秒は未確認です。
+
+§66 実RN完了：source ec5db637／[run38476571738](https://github.com/MassyuRed/Cocolon/actions/runs/38476571738)／job115568602208は完了しました。短文2,024.390ms／引用1,433.250ms／宣言256.899ms／保存済み249.688msはnative_checked、本文保持、native_canvas_valid。artifact11856136762（56,143,057 bytes、SHA256 `4ae72dec7bd3b48b82e70421f8c1fe3a3df2cd718ae08f6f7e2af8ea6708225e`）のdigestを照合し、5件JSONと4枚PNGの本文／余白／brandingを確認しました。
+
+420文字は8,118.417msのmeasurement_timeout、size3、plan／PNGなし。48→44→40→36ptの全native候補・全adapterはresolvedで、各88,410行・11,381代表値が返りました。48ptのnative1,583.702ms／adapter1,745.653ms、44pt3,271.316／3,448.172ms、40pt3,352.568／3,591.154ms、36pt4,002.509／4,164.934ms。後続の呼出時間はqueue待ちを含み、合計時間として加算しません。48／44／40ptのB9は216.672／247.412／254.773msで不成立。stateは44ptへ2,065.573ms、40ptへ3,815.238ms、36ptへ6,008.826ms、unavailableへ8,087.806msでした。36ptのB9記録はなく、adapter返却後の同じdeadline確認で採用されていません。36pt B9の処理が遅いと確定した結果ではありません。
+
+旧共有CF版source5ef1のrun38475623262／RN job115565457118も完了し、joblogにsignal segvを確認しました。最初の3ケースだけが完了し、420以降は未完了です。symbolicated stackはjoblogになく、内部cache競合は引き続き仮説です。最新ec5db637はnative63件を完走し実RN全5ケースの結果を返し、今回のcrashは再発しませんでした。ただし全5ケース合格・全体8秒の達成ではありません。旧profile-only source59f7の実RNも4件成功・420文字8,094.463ms（size1）のtimeoutでした。
+
+次の本線は、全4fontのnative反復と最後の候補復号をさらに短縮し、36ptのB9・実Text描画・最終inspectionの時間を同じ8秒内に確保することです。全候補、bit同値、font順、全体deadlineを緩和しません。未測定のworker数変更・font間比例・候補省略を解決策として採用していません。現在sourceのJS758／native63は成功ですが、実RN全体は4成功・420文字未解消です。保存接続へはまだ進めません。正式renderer supplier→保存直前fit→通常初回保存→実機受入れのownerは§65.10を継承し、既存host/controller/API保存を再実装しません。default OFF、canSave/canExport=false、Draft/open/unmerged、STRUCTURE_MAP_DELTA_NONEを保持します。
