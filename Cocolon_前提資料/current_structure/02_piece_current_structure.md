@@ -2323,7 +2323,7 @@ RN commit `f026adb805ae6795845e22bef14edb6ee301becd`。既存 `screens/input/Inp
 全体設計・全ファイル地図・最新weekly10/10 §5.5を原本確認した。SystemContext prepareは基準commitの祖先条件で終了したため、既定の原本直接読取へ戻し、凍結済みcontextを更新していない。入口§60／本map§64／manifest v59へ今回の結果と再開点を同期する。製品構造変更はない（STRUCTURE_MAP_DELTA_NONE）。API `804beca`、host `f026adb`、公開目標2026-12-18、Draft/open/unmerged、default OFF、automatic_progression=falseを継承。製品source・API・DB・env・deploy・activation・native app build・署名／配布・main mergeへの変更は0。
 
 
-## 65. 2026-10-13 — 実RNのPiece全体描画へ進行（文字計測修正の検証中）
+## 65. 2026-10-13 — 実RNのPiece全体描画へ進行（再検査時の配置保持を検証中）
 
 ### 65.1 変更対象と範囲
 
@@ -2398,7 +2398,7 @@ source `545c7cc3476bdcd84e88624d29137e51089169d6` はtest2pathだけを変更し
 [run38379288880](https://github.com/MassyuRed/Cocolon/actions/runs/38379288880)、実RN job `115235392066` は調査の再実行中。native job `115235392168` は09:54:32.890 UTCの最初のview_initから戻らず、09:56:02.885に90秒alarmで終了した。assertion開始前なので追加した混在文の計測も未実行であり、45件失敗・候補計測が遅いという意味ではない。実RN jobの結果を先に読み、必要ならworkflow完了後にnative jobを再実行する（稼働中のjob再実行APIはalready runningで拒否された）。次は実際に得られた段階時間から遅い処理を特定して修正し、同じ420文字で全体描画を確認する。候補計測の単体合格を全体合格へ置き換えない。その後の正式renderer供給・保存直前fit・通常画面の初回保存・実機確認は§65.4末尾を継承する。
 
 
-### 65.6 混在文420文字のnative候補計測timeoutを修正
+### 65.6 混在文420文字のnative候補計測timeoutへの修正
 
 source `545c7cc` のrun `38379288880` attempt1／実RN job `115235392066` はfailure。artifact `11803229117`（82,070,853 bytes、SHA256 `ace2d00d8c2e1a7198b702172eddf02f7fffd1b6bbc17c9f9dda7655a0b87553`）のdigestを確認し、5ケースJSONとstdoutを実読した。短文733.504ms／宣言251.408ms／保存済み335.541msはnative_checked。420文字は8,095.284ms、size0、候補Promise pending、planなしでtimeoutとなった。同Promiseの後続拒否ログは8,056.495msで、JS plannerには到達していない。
 
@@ -2415,3 +2415,28 @@ source `6d20e1c10c427850cec5c2b8567e74507dbad631` の変更は3path。
 local既存renderer／B9 suitesは79 PASS／FAIL0／SKIP0、diff checkも通過。nativeAPI shape／数値意味／font候補／描画配置・recipeは変更していない。renderer prototype.v3とnative_candidates.v1を保持し、全候補数値同値と実画像は次runで確認する。同環境read-only補助reviewに重大指摘なし。独立Pro受入れとはしない。
 
 [run38383082112](https://github.com/MassyuRed/Cocolon/actions/runs/38383082112)のJS job `115248073281` は747 PASS／FAIL0／SKIP0、Android source compileはsuccess。export2jobは依存差分なしでlibrary compile stepをskipした。native job `115248073323` はcompileを通過したが、10:27:43.078 UTCの最初のview_initから戻らず、10:29:13.022に90秒alarmで終了。assertion／追加したuncached比較は未実行であり、58件失敗とはしない。実RN job `115248073429` は実行中。次は全5ケースの安定した描画と8秒以内の全体時間を実読し、workflow完了後にnative単体jobを再実行して58件のbit同値・混在420文字単体時間を確認する。反復する合成文章での改善を任意の420文字・実機性能の全面保証へ広げない。画像、正式renderer supplier、保存直前fit、通常InputScreen保存、実機受入れは確認範囲を分けて進める。
+
+
+### 65.7 配置の往復を修正、混在420文字の遅延は残件
+
+source `6d20e1c` のrun `38383082112`／実RN job `115248073429` はfailure。buildは10:41:27 UTCに完了し、1 XCTest／8 assertion失敗だった。artifact `11805871191`（58,701,324 bytes、SHA256 `ce21d642cb21454e202987537cd977d12823c393dd53e1c1c6430ec4e69d35b1`）を取得・digest検証し、5件のJSONとtest stdoutを実読した。RN class重複警告は0件。結果は次のとおり。
+
+| ケース | 全体時間 | 結果 |
+| --- | ---: | --- |
+| essay_paragraphs | 1,182.574ms | native_checked／本文・canvas有効 |
+| quote_unicode | 10,087.829ms | geometry_checked／canvas無効、PNGは黒い状態 |
+| declaration_no_brand | 398.010ms | native_checked／本文・canvas有効 |
+| essay_max420 | 8,115.294ms | unavailable／measurement_timeout、size0・planなし |
+| saved_essay_canvas | 460.985ms | native_checked／本文・canvas有効 |
+
+420文字の候補Promiseは撮影時pending、後続ログで8,164.338msの拒否。重複substring再利用だけではこの混在文の期限超過を解消できていない。native単体をworkflow終了後に1回再実行したattempt2 job `115257949909` は58件まで到達し、56 PASS／2 FAIL／SKIP0。「あ」420文字は236.812ms、全88,410候補の旧計算とのbit同値も通過。混在420文字は8,000.993msでtimeoutとなり、完全候補取得とその同値比較の2件が失敗した。10種の小fixtureと属性差分fixtureの同値比較は通過しているが、全対象の数値同値確認完了とはしない。初回のview_init停止の原因が解決したという意味でもない。
+
+引用は候補134.225ms、一度481.089msでnative_checkedになった後、10秒にわたりgeometry_checkedとnative_checkedを繰り返した。現Cardは再検査に入るとcomposition topと本文left/topを未配置位置へ戻すため、metrics変更→位置リセット→再配置という往復が成立する。実RNで変わった個々のmetric fieldまでは未特定だが、同じ製品sourceの局所回帰検査でrow left 0.5→0、親top 864→108への変更を確認した。
+
+source `f7a4c61d4d30c8e7ab360f59f508d20e5d4692c8` は3path。
+
+- `PieceVisualCard.js` は同じ計測世代のrowOffsetsがある間、再検査中もその配置とplan.totalHeightによる中央位置を維持する。opacity・captureは引き続きnative_checked時だけ。変更metricsの失効・fresh native inspection・font fallback／入力変更時の配置破棄を保持。成功時の配置式と数値契約は同じで、prototype.v3を変更しない。
+- 既存renderer testへ位置保持・再検査・重複イベント不変の1件を追加し、fallback／入力変更でoffsetが破棄されることも確認。変更前は位置保持でFAIL、変更後は既存renderer／B9合わせて80 PASS／FAIL0／SKIP0。
+- 既存native testの製品source include区間だけ、CoreTextのline生成・typographic bounds・image boundsを同じ引数と戻り値のまま集計する。混在420文字の呼出だけ回数・UTF16総量・経過時間を出力し、旧方式の独立oracle前にwrapperを解除する。58 assertion・8秒期限・製品API／ログは変更しない。計時の小さな追加負荷を含むため、数値はこの検査条件の内訳として扱う。全体typesetter共有はsubstring文脈が変わるため未採用。
+
+同source3pathのremote全文・blob・親head・変更pathを確認済み。同環境read-only補助reviewで重大指摘なし、独立Pro正式受入れとはしない。[run38387379229](https://github.com/MassyuRed/Cocolon/actions/runs/38387379229)のJS job `115262373822` は748 PASS／FAIL0／SKIP0。実RN job `115262373746`／native job `115262373836` は検証中。次は引用の安定画像と全体時間、420文字のCoreText内訳を読み、実測に基づく修正へ進む。正式renderer supplier・保存直前fit・通常初回保存・実機受入れは残る。別のhost/controller・registry・TTLを新設しない。weekly10/10 §5.5と12/18目標、default OFF、Draft/open/unmergedを継承する。
