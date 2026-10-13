@@ -13,9 +13,9 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "ab9d723b6a3adb5646b8712057b44a2a52e4b415",
-    "raw_sha256": "1eaa8b636f964032442fbac345ad9d0be6b2ee52c5874298d69d71f713ab5693",
-    "utf8_bytes": 126632
+    "git_blob_sha1": "79dc021e26306031ae1a24f6bb2197914d516b2c",
+    "raw_sha256": "b1503f3bb81fd0190f7a9b9f6537581f46faffa2fa8e887f4d60f97d759eeece",
+    "utf8_bytes": 127002
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -338,9 +338,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "7833c5e1d72ec9ca6cd3821557837c1e18a9f881",
-    "raw_sha256": "46f9daef723f36c41f0eb49aa90902e4f9058b6ecdf7f2720d2843a676ab95f2",
-    "utf8_bytes": 385363
+    "git_blob_sha1": "3b0ce615425b1998c1e54b849cddfc6c2452644f",
+    "raw_sha256": "b9f6f949195c8e8cb5905326f312048570c5ce4e18dba02b09aaec86248b6483",
+    "utf8_bytes": 385736
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -4426,7 +4426,7 @@
       "mixed420_timeout_resolved": false
     },
     "latest_completed_xctest_assertion_failures": 5,
-    "current_native_state": "PENDING",
+    "current_native_state": "FAILED_BEFORE_ASSERTIONS__INITIAL_VIEW_INIT_STALL_ALARM",
     "current_native_assertions_executed": 0,
     "previous_current_js_job": 115248073281,
     "previous_current_js_passed": 747,
@@ -4645,7 +4645,10 @@
       "js_job": 115450309138,
       "js_passed": 754,
       "js_failed": 0,
-      "js_skipped": 0
+      "js_skipped": 0,
+      "native_state": "FAILED_BEFORE_ASSERTIONS__INITIAL_VIEW_INIT_STALL_ALARM",
+      "native_assertions_executed": 0,
+      "native_compile_passed": true
     }
   }
 }

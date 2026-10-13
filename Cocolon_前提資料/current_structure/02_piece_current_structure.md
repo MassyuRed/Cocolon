@@ -2531,3 +2531,5 @@ source `b46f4537582a047d25339abcf005ca9d85a7f1d0` の変更は既存6path。
 local renderer/B9 86 PASS／FAIL0／SKIP0、diff check成功。Python owner oracleと、非単調幅・ink・禁則を含む合成2,000graphで旧B9との結果一致を確認した。これを実機性能へ換算しない。同環境read-only補助reviewに重大指摘なし。source exact6pathのfresh remote全文・blob・親51ca57b・変更pathを照合済み。[run38441898578](https://github.com/MassyuRed/Cocolon/actions/runs/38441898578)はnative59と実RN5ケースを検証中。次は同じ420文字の全候補同値・全体時間と5画像を読む。
 
 正式renderer supplier／保存直前fit／通常InputScreen初回保存／実機受入れのownerは§65.10末尾を継承する。既存host/controller/API保存を再実装しない。weekly10/10 §5.5・12/18目標、default OFF、Draft/open/unmerged、STRUCTURE_MAP_DELTA_NONE、DB/env/deploy/署名/配布/main merge効果0。
+
+§65.11 検査途中：run38441898578のJS job115450309138は754 PASS／FAIL0／SKIP0。native単体job115450309219はコンパイル後17:54:22 UTCの最初のview_initで止まり、17:55:53に90秒alarmで終了した。59assertion開始前で、計測値の比較結果はない。実RN job115450308931は進行中。workflow完了後に単体jobを再実行する。

@@ -1193,3 +1193,5 @@ source `6be0bed` の[run38437753643](https://github.com/MassyuRed/Cocolon/action
 source `b46f4537582a047d25339abcf005ca9d85a7f1d0` は製品3file／test3file。native分類はrange hashで候補を探し、生UTF-16と全属性の完全一致をmemcmpで確認してから再利用する。hash衝突だけでは再利用しない。既存上限・4worker・同じCoreText式を維持する。内部候補v3は代表jobのFloat64計測値と全候補のuint32参照を送り、JSで元の全7数値行へ復元する。v1/v2の受容、全metric検証、font順、最終native inspection、recipe prototype.v3、8秒期限は維持した。B9は全検証後に実測rangeで最小行数を求め、高さに入らないと証明できる場合だけ早期nullとする。収まる場合の元のscore処理は同じ。
 
 local renderer/B9は86 PASS／FAIL0／SKIP0。Python ownerの既存oracleと追加の非単調widthを含む合成2,000graphも旧実装と一致した。remote exact6fileの全文・blob・path・parent51ca57bを照合。同環境read-only reviewに重大指摘なし。独立Pro受入れでも性能証明でもない。[run38441898578](https://github.com/MassyuRed/Cocolon/actions/runs/38441898578)のnative59と実RN5ケースを待ち、完成結果・画像・全体時間で判定する。map §65.11を再開位置とする。正式renderer供給・保存直前fit・通常初回保存・実機は引き続き未完了。weekly10/10 §5.5と12/18目標、default OFF、Draft/open/unmergedを継承する。
+
+§63 検査途中：run38441898578のJS job115450309138は754 PASS／FAIL0／SKIP0。native単体job115450309219はコンパイル後17:54:22 UTCの最初のview_initで止まり、17:55:53に90秒alarmで終了した。59assertion開始前で、計測値の比較結果はない。実RN job115450308931は進行中。workflow完了後に単体jobを再実行する。
