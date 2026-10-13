@@ -1,4 +1,4 @@
-# Piece contracts and native library compilation; no app build, signing or deploy.
+# Piece contracts, native metrics tests and library compilation; no product app build or deploy.
 name: Piece RN preview and owner contracts
 'on':
   push:
@@ -16,6 +16,8 @@ name: Piece RN preview and owner contracts
       - AppRuntimeContext.js
       - tests/piece-v2-*.test.js
       - tests/fixtures/piece-b9-wrap-oracle.json
+      - tests/native/piece-ios-react-shim.h
+      - tests/native/piece-text-metrics-ios.mm
       - package.json
       - package-lock.json
       - ios/Podfile
@@ -132,6 +134,51 @@ jobs:
           xcrun clang --version
           xcrun clang -fsyntax-only -x objective-c++ -std=c++20 -fobjc-arc -fblocks -fmodules -target arm64-apple-ios15.1-simulator -isysroot "$(xcrun --sdk iphonesimulator --show-sdk-path)" -I "$PIECE_COMPILE_DIR/include" -I "$PIECE_COMPILE_DIR/node_modules/react-native/ReactCommon/yoga" -Werror=objc-method-access -Werror=implicit-function-declaration ios/tempCocolon/PieceTextMetrics.mm
           plutil -lint ios/tempCocolon.xcodeproj/project.pbxproj
+      - name: Execute the actual Piece metrics with iOS TextKit and CoreText
+        shell: bash
+        run: |
+          set -euo pipefail
+          TEST_DIR="$RUNNER_TEMP/piece-ios-source/native-unit"
+          mkdir -p "$TEST_DIR/include/React"
+          for header in RCTBridgeModule RCTBridge RCTUIManager RCTUIManagerUtils RCTTextView; do
+            printf '#import "piece-ios-react-shim.h"\n' > "$TEST_DIR/include/React/$header.h"
+          done
+          git rev-parse HEAD
+          git hash-object ios/tempCocolon/PieceTextMetrics.mm
+          xcodebuild -version
+          ARCH="$(uname -m)"
+          xcrun clang++ -std=c++20 -fobjc-arc -fblocks -fmodules \
+            -target "$ARCH-apple-ios15.1-simulator" \
+            -isysroot "$(xcrun --sdk iphonesimulator --show-sdk-path)" \
+            -I "$TEST_DIR/include" -I tests/native \
+            -framework UIKit -framework Foundation -framework CoreText \
+            -Werror=objc-method-access -Werror=implicit-function-declaration \
+            tests/native/piece-text-metrics-ios.mm -o "$TEST_DIR/piece-native-metrics"
+          xcrun simctl list devices available --json > "$TEST_DIR/devices.json"
+          read -r DEVICE STATE < <(python3 - "$TEST_DIR/devices.json" <<'PY_DEVICE'
+          import json, re, sys
+          devices = json.load(open(sys.argv[1]))['devices']
+          candidates = []
+          for runtime, rows in devices.items():
+              match = re.search(r'\.iOS-(\d+)(?:-(\d+))?', runtime)
+              if not match:
+                  continue
+              version = tuple(int(x or 0) for x in match.groups())
+              for device in rows:
+                  if device.get('isAvailable') is True and device['name'].startswith('iPhone'):
+                      candidates.append((version, device))
+          if not candidates:
+              raise SystemExit('No installed iPhone simulator; native execution is NOT verified')
+          _, device = max(candidates, key=lambda item: item[0])
+          print(device['udid'], device['state'])
+          PY_DEVICE
+          )
+          if [ "$STATE" != 'Booted' ]; then
+            xcrun simctl boot "$DEVICE"
+            trap 'xcrun simctl shutdown "$DEVICE" >/dev/null 2>&1 || true' EXIT
+          fi
+          xcrun simctl bootstatus "$DEVICE" -b
+          xcrun simctl spawn "$DEVICE" "$TEST_DIR/piece-native-metrics"
 
   piece-export-pods:
     if: github.repository == 'MassyuRed/Cocolon'
