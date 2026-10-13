@@ -1,4 +1,4 @@
-# Piece contracts, native metrics tests and library compilation; no product app build or deploy.
+# Piece contracts, native metrics and isolated RN simulator rendering; no signing or deployment.
 name: Piece RN preview and owner contracts
 'on':
   push:
@@ -18,6 +18,8 @@ name: Piece RN preview and owner contracts
       - tests/fixtures/piece-b9-wrap-oracle.json
       - tests/native/piece-ios-react-shim.h
       - tests/native/piece-text-metrics-ios.mm
+      - tests/native/piece-rn-canvas-*
+      - tests/native/run-piece-rn-canvas-ios.sh
       - package.json
       - package-lock.json
       - ios/Podfile
@@ -179,6 +181,47 @@ jobs:
           fi
           xcrun simctl bootstatus "$DEVICE" -b
           xcrun simctl spawn "$DEVICE" "$TEST_DIR/piece-native-metrics"
+
+  piece-ios-rn-canvas:
+    if: github.repository == 'MassyuRed/Cocolon'
+    runs-on: macos-15
+    timeout-minutes: 35
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Limit full simulator execution to rendering changes
+        id: scope
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          if ! git cat-file -e "$BEFORE^{commit}" 2>/dev/null || ! git diff --quiet "$BEFORE" HEAD -- components/piece/PieceVisualCard.js features/piece/pieceLayout.js features/piece/pieceMeasuredWrap.js features/piece/pieceRenderer.js ios/tempCocolon/PieceTextMetrics.mm tests/native package.json package-lock.json ios/Podfile ios/Podfile.lock patches .github/workflows/piece-rn-contracts.yml; then
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+          fi
+      - uses: actions/setup-node@v6
+        if: steps.scope.outputs.changed == 'true'
+        with:
+          node-version: '24.19.0'
+      - name: Install locked packages and existing native patches
+        if: steps.scope.outputs.changed == 'true'
+        run: npm ci --no-audit --no-fund
+      - name: Render the actual Piece component in an isolated simulator test host
+        if: steps.scope.outputs.changed == 'true'
+        env:
+          RCT_NEW_ARCH_ENABLED: '0'
+          COCOAPODS_DISABLE_STATS: 'true'
+        run: bash tests/native/run-piece-rn-canvas-ios.sh
+      - uses: actions/upload-artifact@v4
+        if: always() && steps.scope.outputs.changed == 'true'
+        with:
+          name: piece-rn-canvas-ios
+          path: |
+            ${{ runner.temp }}/piece-rn-canvas/evidence
+            ${{ runner.temp }}/piece-rn-canvas/xcodebuild.log
+            ${{ runner.temp }}/piece-rn-canvas/result.xcresult
+          retention-days: 7
 
   piece-export-pods:
     if: github.repository == 'MassyuRed/Cocolon'
