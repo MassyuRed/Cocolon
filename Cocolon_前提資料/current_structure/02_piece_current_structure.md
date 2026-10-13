@@ -2323,7 +2323,7 @@ RN commit `f026adb805ae6795845e22bef14edb6ee301becd`。既存 `screens/input/Inp
 全体設計・全ファイル地図・最新weekly10/10 §5.5を原本確認した。SystemContext prepareは基準commitの祖先条件で終了したため、既定の原本直接読取へ戻し、凍結済みcontextを更新していない。入口§60／本map§64／manifest v59へ今回の結果と再開点を同期する。製品構造変更はない（STRUCTURE_MAP_DELTA_NONE）。API `804beca`、host `f026adb`、公開目標2026-12-18、Draft/open/unmerged、default OFF、automatic_progression=falseを継承。製品source・API・DB・env・deploy・activation・native app build・署名／配布・main mergeへの変更は0。
 
 
-## 65. 2026-10-13 — 実RNのPiece全体描画へ進行（実行中checkpoint）
+## 65. 2026-10-13 — 実RNのPiece全体描画へ進行（420文字の時間切れを確認）
 
 ### 65.1 変更対象と範囲
 
@@ -2372,6 +2372,27 @@ source `1667ecd64a10345987b5fcb7be307f9ee315a0a1` は既存test3pathのみ。
 
 同source3pathはremote全文・blob・変更path・親headを照合した。補助agentは同環境read-only reviewであり独立Pro正式reviewではない。前runの既存検査はJS747 PASS／native44 PASS、両OS source／export library compile成功。420文字のnative候補単体2,327.948msは全体描画時間へ換算しない。
 
-[run38375322124](https://github.com/MassyuRed/Cocolon/actions/runs/38375322124) はこのcheckpoint時点で実行中。次はXCTest・5ケース結果・5PNG・重複class解消を確認し、直接観測した描画失敗へ対応する。確認前に合格へ上げない。
+[run38375322124](https://github.com/MassyuRed/Cocolon/actions/runs/38375322124) は完了した。5ケースの実結果と再開位置は§65.5。
 
 保存側の具体的な未接続は、Modalから実Cardのmount／計測世代／plan／最終inspectionを同じpreview／displayTokenへ結ぶ部分と、InputScreenの正式判定供給である。保存直前にselected candidateのtext＋recipe＋target profileとの一致とfitを再確認し、既存host/controllerへ渡す。同期isSaveAdmittedのrender呼出し内でnative処理を起動しない。毎tapの全420文字候補再計測・別registry・TTLは要件ではない。現prototype previewが異なるrenderer文字列を受ける挙動は既存検査の意図した範囲であり、保存済みv3 pinとの違いを今の確定不具合にしない。正式renderer対応範囲・実機受入れ・通常アプリ保存は残る。
+
+
+### 65.5 全体描画4ケース確認と420文字の実失敗
+
+source `1667ecd` の実RN job `115222124418` はbuild開始09:21:55 UTC／完了09:31:07、XCTest実行1件／assertion失敗5件でfailureとなった。5件のassertion失敗は全て420文字ケースに属する。artifact `11801923146`（74,429,169 bytes、SHA256 `aaa4b8ec0446335aacba0ab2ca5cc801b949f22270d44d0da41447bb9ba6311e`）を取得・digest検証し、results.json全5件、PNG4枚、圧縮xcresult内のstdoutを実読した。今回stdoutのObjC class重複警告は0件で、5ケースともreportが完了した。
+
+| 合成ケース | 実RN全体時間 | 結果 |
+| --- | ---: | --- |
+| essay_paragraphs | 524.520ms | native_checked、本文保持、1080×1350、実Text／ink／margin確認、PNGあり |
+| quote_unicode | 674.117ms | native_checked、結合文字・ZWJ・modifier・旗・前後空白保持、1080×1920、PNGあり |
+| declaration_no_brand | 252.164ms | native_checked、本文保持、brandingなし、1080×1920、PNGあり |
+| essay_max420 | 8,094.264ms | unavailable／measurement_timeout、size_index=0、planなし、PNGなし |
+| saved_essay_canvas | 302.969ms | native_checked、本文保持、1080×1350、PNGあり |
+
+4枚は本文の切れ・重なり、余白、段落、brandingの有無を目視確認した。保存済みfixtureはpreview短文と同じ行構成だった。これは合成fixtureのisolated simulator描画であり、生成品質・物理端末・通常Auth/API接続・保存許可を証明しない。全ケースcanSave／canExport=falseを保持した。
+
+420文字は最初の成功planがcommitされる前の時間切れ。既存timeout処理はplanを消さないため、最終行の描画／inspect以前が調査対象になる。既存native44の最大試験は「あ」×420の候補計測だけで、今回の混在文やbridge転送／JS plannerと同じ条件ではない。このrunのJS job `115222124794` は747 PASS／FAIL0／SKIP0、native job `115222124342` は44 PASS／FAIL0／SKIP0、同質420文字の候補単体1,546.229ms。Android sourceはsuccess。export2jobはsuccessだがlibrary compile stepは依存差分なしでskip。
+
+source `545c7cc3476bdcd84e88624d29137e51089169d6` はtest2pathだけを変更した。実RN entryにnative候補呼出の開始／解決・拒否／所要時間／返却行数とphase遷移を記録し、元の値・エラーは保持する。localでは同一値／同一errorをそのまま返すことを確認した。既存native44は保持し、RNと同じ混在文420文字の候補計測を1件追加した。文字数・8秒期限・描画assertionは緩和しない。製品source変更なし、STRUCTURE_MAP_DELTA_NONE。
+
+[run38379288880](https://github.com/MassyuRed/Cocolon/actions/runs/38379288880)、実RN job `115235392066` は調査の再実行中。native job `115235392168` は09:54:32.890 UTCの最初のview_initから戻らず、09:56:02.885に90秒alarmで終了した。assertion開始前なので追加した混在文の計測も未実行であり、45件失敗・候補計測が遅いという意味ではない。実RN jobの結果を先に読み、必要ならworkflow完了後にnative jobを再実行する（稼働中のjob再実行APIはalready runningで拒否された）。次は実際に得られた段階時間から遅い処理を特定して修正し、同じ420文字で全体描画を確認する。候補計測の単体合格を全体合格へ置き換えない。その後の正式renderer供給・保存直前fit・通常画面の初回保存・実機確認は§65.4末尾を継承する。

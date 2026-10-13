@@ -1145,7 +1145,7 @@ source `502c87527b3a28961ae3138754fe46d3cb731e08` は既存 `tests/native/piece-
 次は既存 `PieceVisualCard` の実RN描画で、同じ本文・recipeから候補計測→B9行選択→全行の最終検査→固定canvas配置を確認する。段落・branding・長文を含む全体描画と全体処理時間を確認し、その結果に基づく正式renderer判定、保存直前fit、同じpreview/tokenへの結合へ進む。既存host/controllerを再実装せず、`native_checked`だけで保存を許可しない。通常InputScreenの正式判定供給は未接続。画像共有全完成を初回実機確認の追加条件にしない。weekly10/10 §5.5と12/18目標を継承する。
 
 
-## 61. 2026-10-13 — 実React Nativeの全体描画検査へ接続（実行中checkpoint）
+## 61. 2026-10-13 — 実React Nativeの全体描画検査へ接続（420文字の時間切れを確認）
 
 source `2c7c554cf51cff38efc84a99df80565f736fe9d9` は、既存 `tempCocolonTests` で実RCTBridge／RCTRootView／Textと製品のPieceVisualCard・B9・PieceTextMetricsを実行する検査を追加した。段落、Unicode／中央揃え、宣言／brandingなし、420文字、保存済みcanvasの5ケースで、実Textの本文・最終ink配置・画像寸法・全体時間を確認し、PNGを取得する。本文・preview/saved packetは合成で、生成品質・実API保存・実機受入れの確認ではない。
 
@@ -1155,4 +1155,4 @@ source `2c7c554cf51cff38efc84a99df80565f736fe9d9` は、既存 `tempCocolonTests
 
 source `5c501d9eaed60257b202de418c936a1f7acb3bf6` でbuild-for-testing→simulator起動→同じ出力先のtest-without-buildingへ分け、通常iOS build実績のあるmacos-26に合わせた。CI全体上限は45分へ変更したが、描画8秒・5ケースのfixture／判定・製品sourceは変更していない。[run38370566662](https://github.com/MassyuRed/Cocolon/actions/runs/38370566662)はbuild前のPodfile.lock完全照合で停止した。差分は66個のSPEC CHECKSUMS値だけで、依存version・取得元・Podfile checksum・CocoaPods版の差分はなかった。環境差の原因は未特定。`5c685b4b658f5e08ed78039ea3ecd68761582e79` で実RN jobだけlock完全一致の実績があるmacos-15へ戻し、build先行・45分・lock完全照合を保持した。[run38371898401](https://github.com/MassyuRed/Cocolon/actions/runs/38371898401)はbuild・simulator起動・XCTest実行まで到達したが、検査用captureへnull tagが渡って結果通知が停止し、90秒timeout／reports 0件で失敗した。保存artifactのxcresultからJS起動とRN引数拒否を取得した。appとtest binaryのRN class重複も観測したが、nullの元原因とはまだ断定しない。
 
-`1667ecd64a10345987b5fcb7be307f9ee315a0a1` のtest3fileで、無効tagは既存recordへ失敗結果を送り、captureをnonnullにした。CI projectのtest targetだけPod全体の重複リンクを除き、既存BUNDLE_LOADERでhostのRNを使う。製品source／Podfile／lock／fixture／8秒描画判定は不変。無効tagの実finishCaseはlocalで変更前pending→変更後report保持・次ケース進行を確認した。[run38375322124](https://github.com/MassyuRed/Cocolon/actions/runs/38375322124)はcheckpoint時点で実行中。次は5ケースJSON／PNGを実読し、重複class解消と描画の実結果を確認する。詳細はmap §65.4。
+`1667ecd64a10345987b5fcb7be307f9ee315a0a1` のtest3fileで、無効tagは既存recordへ失敗結果を送り、captureをnonnullにした。CI projectのtest targetだけPod全体の重複リンクを除き、既存BUNDLE_LOADERでhostのRNを使う。製品source／Podfile／lock／fixture／8秒描画判定は不変。無効tagの実finishCaseはlocalで変更前pending→変更後report保持・次ケース進行を確認した。[run38375322124](https://github.com/MassyuRed/Cocolon/actions/runs/38375322124)は完了し、5ケースJSONと4枚のPNGを取得した。短文・Unicode・宣言・保存済みcanvasは本文保持／配置／8秒以内を通過したが、420文字はsize0で8,094.264msのmeasurement_timeoutとなり画像なし。4枚を目視確認し、今回stdoutのRN class重複警告は0件。全5ケース合格・実機受入れ・正式admissionではない。既存native44は「あ」420文字で本文条件も異なるため、同じ混在文のnative計測と実RN候補呼出の段階時間をtestだけに追加した（source `545c7cc3476bdcd84e88624d29137e51089169d6`）。[run38379288880](https://github.com/MassyuRed/Cocolon/actions/runs/38379288880)の結果から遅い処理を確定し、製品側の最小修正へ進む。詳細はmap §65.5。
