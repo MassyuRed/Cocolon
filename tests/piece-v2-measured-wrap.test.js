@@ -51,6 +51,31 @@ for (const c of fixture.cases) test('Python B9 measured-row parity: ' + c.id, ()
 });
 
 const validCase = () => copy(fixture.cases.find(c => c.id === 'short_bridge'));
+test('complete measured tables retain the same B9 result in reverse row order', () => {
+  for (const c of fixture.cases) {
+    const measurements = copy(c.measurements);
+    for (const table of measurements) table.rows.reverse();
+    assert.deepEqual(copy(plan(copy(c.input), c.sizeIndex, measurements)), c.expected);
+  }
+});
+test('every metric position rejects nonfinite, nonnumeric and missing values', () => {
+  for (let field = 2; field < 7; field++) for (const invalid of [NaN, Infinity, -Infinity, '1', null, undefined]) {
+    const c = validCase(); c.measurements[0].rows[0][field] = invalid;
+    assert.throws(() => plan(c.input, c.sizeIndex, c.measurements), unavailable);
+  }
+  for (let field = 2; field < 7; field++) {
+    const c = validCase(); delete c.measurements[0].rows[0][field];
+    assert.throws(() => plan(c.input, c.sizeIndex, c.measurements), unavailable);
+  }
+});
+test('kinsoku protects internal boundaries without rejecting paragraph start or terminal boundary', () => {
+  const input = { blocks: ['、a「'], contentWidth: 30, contentHeight: 40, sizes: [10], lineRatio: 1, paragraphRatio: 0 };
+  const table = { boundaries: [0, 1, 2, 3], rows: [] };
+  for (let start = 0; start < 3; start++) for (let end = start + 1; end <= 3; end++) {
+    table.rows.push([start, end, (end - start) * 10, 0, -8, (end - start) * 10, 2]);
+  }
+  assert.deepEqual(copy(plan(input, 0, [table])).groups, [['、a「']]);
+});
 for (const [label, mutate] of [
   ['missing substring', c => c.measurements[0].rows.pop()],
   ['duplicate substring', c => { c.measurements[0].rows[1] = [...c.measurements[0].rows[0]]; }],

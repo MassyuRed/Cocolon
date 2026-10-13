@@ -62,7 +62,19 @@ function unpackBytes(encoded, byteLength) {
   for (let i = 0; i < alphabet.length; i++) codes[alphabet.charCodeAt(i)] = i;
   const bytes = new Uint8Array(byteLength);
   let offset = 0;
-  for (let i = 0; i < encoded.length; i += 4) {
+  // Only the final quartet can contain padding. Decode every preceding
+  // quartet without repeating the tail rules, still rejecting every invalid
+  // character (including non-ASCII and misplaced '=').
+  const tail = encoded.length - 4;
+  for (let i = 0; i < tail; i += 4) {
+    const a = codes[encoded.charCodeAt(i)], b = codes[encoded.charCodeAt(i + 1)],
+      c = codes[encoded.charCodeAt(i + 2)], d = codes[encoded.charCodeAt(i + 3)];
+    if (!(a >= 0 && b >= 0 && c >= 0 && d >= 0)) throw measurementError();
+    bytes[offset++] = (a << 2) | (b >> 4);
+    bytes[offset++] = ((b & 15) << 4) | (c >> 2);
+    bytes[offset++] = ((c & 3) << 6) | d;
+  }
+  for (let i = Math.max(0, tail); i < encoded.length; i += 4) {
     const a = codes[encoded.charCodeAt(i)], b = codes[encoded.charCodeAt(i + 1)];
     const pad2 = encoded[i + 2] === '=', pad3 = encoded[i + 3] === '=';
     const c = pad2 ? 0 : codes[encoded.charCodeAt(i + 2)], d = pad3 ? 0 : codes[encoded.charCodeAt(i + 3)];

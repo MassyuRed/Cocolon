@@ -66,10 +66,17 @@ function blockContext(text, table, width) {
   }
   const rows = Array.from({ length: n }, () => new Array(n + 1));
   for (const row of table.rows) {
-    if (!Array.isArray(row) || row.length !== 7 || !row.every(finite) ||
+    if (!Array.isArray(row) || row.length !== 7 ||
         !Number.isInteger(row[0]) || !Number.isInteger(row[1]) || row[0] < 0 || row[1] > n || row[0] >= row[1] ||
+        !finite(row[2]) || !finite(row[3]) || !finite(row[4]) || !finite(row[5]) || !finite(row[6]) ||
         row[2] < 0 || row[5] < row[3] || row[6] < row[4] || rows[row[0]][row[1]]) unavailable();
     rows[row[0]][row[1]] = row;
+  }
+  // Break legality depends only on this paragraph's boundary, not the start
+  // of each of its n*(n+1)/2 ranges. Keep the terminal boundary admissible.
+  const forbiddenBreak = flags(n);
+  for (let end = 1; end < n; end++) {
+    forbiddenBreak[end] = noStart.has(first(clusters[end])) || noEnd.has(last(clusters[end - 1]));
   }
   const metric = (start, end) => rows[start]?.[end] || unavailable();
   const part = (start, end) => text.slice(boundaries[start], boundaries[end]);
@@ -78,7 +85,7 @@ function blockContext(text, table, width) {
     while (end < n && noStart.has(first(clusters[end]))) end++;
     return measuredWidth(metric(start, end)) <= width;
   };
-  return { text, clusters, boundaries, n, metric, part, fits, width, scripts: clusters.map(scriptKind) };
+  return { text, clusters, boundaries, n, metric, part, fits, width, forbiddenBreak, scripts: clusters.map(scriptKind) };
 }
 
 function attachmentHints(ctx) {
@@ -253,7 +260,7 @@ function wrapSolutions(ctx, maxLines = null, lineHeight = null) {
   for (let start = n - 1; start >= 0; start--) {
     let best = new Map();
     for (let end = start + 1; end <= n; end++) {
-      if (!costs.has(end) || end < n && (noStart.has(first(clusters[end])) || noEnd.has(last(clusters[end - 1])))) continue;
+      if (!costs.has(end) || ctx.forbiddenBreak[end]) continue;
       const m = ctx.metric(start, end), measured = measuredWidth(m);
       if (measured > width || lineHeight !== null && m[6] - m[4] > lineHeight) continue;
       const split = Number(end < n && (h.words[end - 1] && h.words[end] ||
@@ -299,12 +306,11 @@ function wrapSolutions(ctx, maxLines = null, lineHeight = null) {
 // A shortest path over exact measured ranges proves impossibility only.
 // It never supplies rows or changes the ordered B9 scoring for feasible input.
 function minimumMeasuredLineCount(ctx, lineHeight) {
-  const { n, clusters, width } = ctx, counts = new Uint16Array(n + 1).fill(n + 1);
+  const { n, width } = ctx, counts = new Uint16Array(n + 1).fill(n + 1);
   counts[n] = 0;
   for (let start = n - 1; start >= 0; start--) {
     for (let end = start + 1; end <= n; end++) {
-      if (counts[end] === n + 1 || end < n &&
-          (noStart.has(first(clusters[end])) || noEnd.has(last(clusters[end - 1])))) continue;
+      if (counts[end] === n + 1 || ctx.forbiddenBreak[end]) continue;
       const metric = ctx.metric(start, end);
       if (measuredWidth(metric) <= width && metric[6] - metric[4] <= lineHeight) {
         counts[start] = Math.min(counts[start], counts[end] + 1);

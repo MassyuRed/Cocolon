@@ -142,6 +142,38 @@ test('indexed transport keeps the legacy planner result and actual inspection re
   assert.equal(indexed.card.state.measurement.canSave, false);
   assert.equal(indexed.card.state.measurement.canExport, false);
 });
+test('packed and indexed decoding preserve bits for every valid padding length', async () => {
+  for (const encode of [packedCandidates, indexedCandidates]) {
+    let expected;
+    const h = rawHarness(sample(), undefined, false, value => {
+      expected = value;
+      for (const row of value.rows) row.splice(2, 5, Math.PI, -0, -Number.MIN_VALUE, Math.PI, Number.MIN_VALUE);
+      return encode(value);
+    });
+    for (const text of ['a', 'ab', 'abc', 'abcd']) {
+      const actual = await h.measurePieceCandidates({ tag: 1 }, text, 48);
+      assert.equal(actual.rows.length, expected.rows.length);
+      actual.rows.forEach((row, i) => row.forEach((number, j) => assert.ok(Object.is(number, expected.rows[i][j]))));
+    }
+  }
+});
+test('every position of an interior base64 quartet rejects padding and non-alphabet code units', async () => {
+  for (const [encode, fields] of [[packedCandidates, ['rows_f64le']],
+    [indexedCandidates, ['metrics_f64le', 'row_indices_u32le']]]) {
+    let mutation;
+    const h = rawHarness(sample(), undefined, false, value => mutation(encode(value)));
+    for (const field of fields) for (const quartet of [0, 4]) for (let position = 0; position < 4; position++) {
+      for (const invalid of ['=', '!', '\u0080', '\u0100', '\ud800']) {
+        mutation = value => {
+          const at = quartet + position, encoded = value[field];
+          assert.ok(quartet < encoded.length - 4, 'must exercise the non-tail decoder');
+          return { ...value, [field]: encoded.slice(0, at) + invalid + encoded.slice(at + 1) };
+        };
+        await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'abcd', 48), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+      }
+    }
+  }
+});
 test('indexed transport rejects malformed, unreferenced, out-of-range and invalid metrics', async () => {
   for (const mutate of [
     r => ({ ...r, metric_count: 0 }),
