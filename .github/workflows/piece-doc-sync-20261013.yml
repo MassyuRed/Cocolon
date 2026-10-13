@@ -1,4 +1,4 @@
-# One-off documentation synchronization. No product tests/build/deploy/DB changes.
+# Bounded successor document sync for f026adb. No tests/build/deploy/DB changes.
 name: Piece documentation synchronization 20261013
 'on':
   push:
@@ -17,7 +17,7 @@ jobs:
         with:
           ref: ${{ github.sha }}
           persist-credentials: true
-      - name: Update only the three existing Piece documents
+      - name: Synchronize the three existing Piece documents to the verified host source
         shell: bash
         run: |
           set -euo pipefail
@@ -25,146 +25,140 @@ jobs:
           import hashlib
           import json
           from pathlib import Path
-          
+
           ENTRY = 'Cocolon_Piece/00_read_first.md'
           MAP = 'Cocolon_前提資料/current_structure/02_piece_current_structure.md'
           MANIFEST = 'Cocolon_Piece/manifest.json'
           EXPECTED = {
-              ENTRY: 'bb1b3e4b8db1bc8933afbf0490563f808c35bb3d',
-              MAP: '0d07a1529dc24425a7faa332e6c962c9a4490810',
-              MANIFEST: '5ef93b922bf44ee543a092ed87b24c03ae807927',
+              ENTRY: 'cd0fbb32bbb396e821ab8dce4a209faccc19042e',
+              MAP: 'a7a5918b17daac073580f975e632121e3dc1011f',
+              MANIFEST: '80af157ca5a72cf226f830c09b42a03bad5bd415',
           }
-          RN = 'd9ccbc1d62851f7792c2384497ee817171c45ee1'
-          API = '804beca66f9f02e18dc4522232478466f4d52b13'
-          
-          
+          SOURCE = {
+              'screens/input/InputPieceActionArea.js': 'caa964f0d7554dee78ef06e0892bbb86f404ef12',
+              'tests/piece-v2-initial-save-modal.test.js': '03e5768065d79105126f0a9e3dc67ec5986a0f04',
+              'tests/piece-v2-initial-save-host.test.js': '9f0d6dc91167936ecd51324f80de5b4bc70d249b',
+          }
+          RN = 'f026adb805ae6795845e22bef14edb6ee301becd'
+
           def blob(data):
               return hashlib.sha1(b'blob ' + str(len(data)).encode('ascii') + b'\0' + data).hexdigest()
-          
-          
-          def replace_one(text, old, new):
-              if text.count(old) != 1:
-                  raise ValueError('Documentation anchor is not unique')
-              return text.replace(old, new, 1)
-          
-          
+
           def metadata(path, data):
               return {'path': path, 'git_blob_sha1': blob(data),
                       'raw_sha256': hashlib.sha256(data).hexdigest(), 'utf8_bytes': len(data)}
-          
-          
-          def prepare(original):
-              entry = original[ENTRY].decode('utf-8')
-              mapping = original[MAP].decode('utf-8')
-              manifest = json.loads(original[MANIFEST])
-              if manifest['schema_version'] != 'cocolon.piece.workstream_manifest.v56':
-                  raise ValueError('Unexpected manifest version')
-              for key, path in [('current_entry', ENTRY), ('current_structure', MAP)]:
-                  for field in ('git_blob_sha1', 'raw_sha256', 'utf8_bytes'):
-                      if manifest[key][field] != metadata(path, original[path])[field]:
-                          raise ValueError('Existing document identity does not match the manifest')
-              entry = replace_one(entry, 'revision_date: "2026-10-11 JST"', 'revision_date: "2026-10-13 JST"')
-              mapping = replace_one(mapping, 'revision_date: "2026-10-11 JST"', 'revision_date: "2026-10-13 JST"')
-              mapping = replace_one(mapping, 'latest_api_implementation: "6b901a1df0037c047513e794624917a09b0f3ac4"',
-                                    f'latest_api_implementation: "{API}"')
-              entry = replace_one(entry,
-                  '**現在は§57／current map §61を優先します。通常Piece画面の見出し直下から「自分のPiece」を開けるよう、既存本人履歴へ接続しました。本人読取flagが有効な認証済み通常画面だけに表示します。実機・正式renderer admission・保存前fit・初回保存は未完了です。通常入力のV2一本化は§56、写真保存結果保持は§55を継承します。**',
-                  '**現在は§58／current map §62を優先します。API `804beca` の候補構成限定の旧4 write経路除去と、RN `d9ccbc1` の初回保存Modal準備を反映済みとして同期しました。Modalの初回保存操作は親画面・正式描画判定へ未接続で、アプリからの初回保存は未完成です。保存結果・同一要求の再確認・本人詳細・通常Nexusの本人履歴入口は既存実装を継承します。**')
-              mapping = replace_one(mapping,
-                  '**最新の作業記録は§61。通常Piece画面（Nexus）の見出し直下へ本人履歴の入口を接続しました。既存owner-read flagと本人・画面状態で制御し、旧公開投稿／共鳴の読取とは独立します。非稼働のコード準備であり、実機・正式renderer admission・保存前fit・初回保存・M5全面は未完了です。**',
-                  '**最新の作業記録は§62。API `804beca` で明示shared V2候補から旧4 write経路を除去し、RN `d9ccbc1` で初回保存Modalの準備コードを反映しました。今回の同期では製品コードを追加変更していません。正式renderer admission・保存前fit・親画面からの初回保存・実機・M5全面は未完了です。§61の通常Nexus本人履歴入口は継承します。**')
-              shared = '''
-          ### 反映済みの範囲
-          
-          API `804beca66f9f02e18dc4522232478466f4d52b13` は `ai/services/ai_inference/app.py` と `api_contract_registry.py` を変更した。`piece_preview_configuration` が明示されたshared V2候補に限り、旧POST `/emotion/piece/publish`、`/emotion/piece/cancel`、`/emotion/reflection/publish`、`/emotion/reflection/cancel` を除去する。V2へのalias化やredirectはせず、既定のlegacy構成と対象外のNexus/Q&A経路は保持する。この差分とPR #3のheadを再取得して確認した。稼働切替・M5全面完了・今回のAPI検査再実行を意味しない。同じ4経路除去を再実装しない。
-          
-          RN `d9ccbc1d62851f7792c2384497ee817171c45ee1` は既存 `components/piece/PiecePreviewModal.js` に `onSave` を追加した。received/hash-verified preview、厳密な `display.canSave === true`、表示token、callbackがそろった場合だけ初回保存操作を表示し、固定した候補ID・revision・recipe hashと同じtokenを渡す。Modal自身は保存許可・保存key・本文・HTTPを生成しない。保存結果、同一保存要求の再確認、取消、保存直後の本人詳細は保持する。前回の未反映patchを再適用しない。
-          
-          ### 既存検証の記録と限界
-          
-          同commitの `tests/piece-v2-initial-save-modal.test.js` は通常のNode source-VM方式で42件を検査する。前回確認済みの同じ42件は変更前38 PASS／4 FAIL、変更後42 PASS／FAIL0／SKIP0。既存 `.github/workflows/piece-rn-contracts.yml` へこの検査を追加し、run `38345010905` のJS job `115124267331` はNode24.21.0／TypeScript5.2.2で709 PASS／FAIL0／SKIP0。709には42を含み、合算しない。これは実際のモジュールを用いた合成React/native/Auth/HTTP境界の検査であり、端末・稼働DB・商品受入れではない。この文書同期で新しい商品検査を実行したとはしない。
-          
-          2026-10-13の追加取得では、同runのiOS source、Android source、Android export libraryの各jobもsuccess。Android export job `115124268056` の4 library compile stepは完了。iOS export Pods job `115124267502` は最終取得時点でin_progressのため、run全体成功・iOS export library compile完了を認定しない。以前の「export2 job未確認」は当時の記録として保持する。
+
+          def replace_one(text, old, new):
+              if text.count(old) != 1:
+                  raise ValueError('Document anchor is not unique')
+              return text.replace(old, new, 1)
+
+          original = {path: Path(path).read_bytes() for path in EXPECTED}
+          for path, expected in {**EXPECTED, **SOURCE}.items():
+              if blob(Path(path).read_bytes()) != expected:
+                  raise SystemExit('Source changed; no document was modified: ' + path)
+          manifest = json.loads(original[MANIFEST])
+          assert manifest['schema_version'] == 'cocolon.piece.workstream_manifest.v57'
+          assert manifest['automatic_progression'] is False
+          for key, path in [('current_entry', ENTRY), ('current_structure', MAP)]:
+              for field, value in metadata(path, original[path]).items():
+                  assert manifest[key][field] == value
+          entry = replace_one(original[ENTRY].decode('utf-8'),
+              '**現在は§58／current map §62を優先します。API `804beca` の候補構成限定の旧4 write経路除去と、RN `d9ccbc1` の初回保存Modal準備を反映済みとして同期しました。Modalの初回保存操作は親画面・正式描画判定へ未接続で、アプリからの初回保存は未完成です。保存結果・同一要求の再確認・本人詳細・通常Nexusの本人履歴入口は既存実装を継承します。**',
+              '**現在は§59／current map §63を優先します。RN `f026adb` で初回保存Modalから既存保存controllerへの親画面接続を実装し、CI 747件が成功しました。接続は正式な描画判定の供給を必須とし、現在のInputScreenはその供給元を持ちません。通常アプリでの初回保存・正式renderer admission・保存前fit・実機は未完了です。API `804beca` と既存の保存結果・再確認・本人履歴は継承します。**')
+          mapping = replace_one(original[MAP].decode('utf-8'),
+              '**最新の作業記録は§62。API `804beca` で明示shared V2候補から旧4 write経路を除去し、RN `d9ccbc1` で初回保存Modalの準備コードを反映しました。今回の同期では製品コードを追加変更していません。正式renderer admission・保存前fit・親画面からの初回保存・実機・M5全面は未完了です。§61の通常Nexus本人履歴入口は継承します。**',
+              '**最新の作業記録は§63。RN `f026adb` で初回保存の親画面から既存controllerへの条件付き接続を反映し、CI 747件が成功しました。正式判定がない状態では保存を許可しません。現在のInputScreenへの正式描画判定供給、保存前fit、通常アプリの初回保存、実機、M5全面は未完了です。API `804beca` と§61の本人履歴入口を継承します。**')
+          shared = '''
+          ### 反映した製品接続
+
+          RN commit `f026adb805ae6795845e22bef14edb6ee301becd`。既存 `screens/input/InputPieceActionArea.js` が、`PiecePreviewModal.onSave` から既存 `PieceCreateController.savePreview(identity, displayToken, idempotencyKey)` へつながる。別途供給される同期・副作用なしの `isSaveAdmitted(preview, displayToken)` が厳密にtrueを返す場合だけ、host側の表示へ初回保存を許可する。本文hash・候補ID/revision・recipe hash・表示token・期限・本人/source/key・画面状態・runtime/save flag・判定供給元を再照合する。共有display readerの `canSave:false` とnative prototypeの非正式状態は変更しない。
+
+          保存keyは明示した初回操作で既存random-values基盤から16byteを生成する。本文・本人ID・保存入力ID・preview keyを流用しない。乱数取得失敗は本文や例外詳細を含まない再試行案内とし、previewを保持する。二重押下は単一要求に限定し、結果不明時は既存controllerが保持する同じ要求・同じkeyで再確認する。判定・乱数処理中に画面や候補が変わっても古い保存を送らない。保存API、保存結果保持、取消、本人詳細、Nexus本人履歴、画像export処理は再実装しない。
+
+          構造差分：既存InputScreen → InputPieceActionArea → PiecePreviewModalという表示経路に、条件付きの明示保存 → 既存PieceCreateController → 既存private save transportという操作接続を追加した。新しいAPI、DB、画像renderer、権限、データ契約は追加しない。STRUCTURE_MAP_DELTA_UPDATED。
+
+          ### 今回確認した検査と限界
+
+          新しい `tests/piece-v2-initial-save-host.test.js` は30件のhost単体検査と8件の既存実モジュール接続検査。既存 `tests/piece-v2-initial-save-modal.test.js` の42件は変更せず、末尾で新検査を読み込む。既存CIの対象コマンド・基準・workflowは変更していない。
+
+          同じhost単体30件を、元sourceのGit blob `16ce6b3d66bd6ddfb6bafd8b234c5ea85397f3b3` と照合した作業コピーで実行：変更前9 PASS／21 FAIL、変更後30 PASS／FAIL0／SKIP0（Node22.16.0）。GitHub Actions run `38353118223`、JS job `115149790070` は正確な `f026adb` head・Node24.21.0・TypeScript5.2.2で747 PASS／FAIL0／SKIP0。完了ログを取得し、新規38件と既存709件が含まれることを確認した。38件や単体30件を747へ重複加算しない。
+
+          8件の接続検査では実際のAPI/model/controller/host/Modalを使い、保存済みsourceの明示GET → 別操作でpreview → 初回保存ボタン → private save → 保存結果表示、および結果不明時のruntime停止・復帰後の同一要求/key再確認を通した。ただしReact/native/Auth/HTTP/runtime/乱数・正式判定は合成境界である。端末描画・稼働API/DB保存・正式なrenderer合格・商品受入れを意味しない。この資料同期は検査の再実行ではない。Native job全体の完了はこのJSログから推測せず、既存PR #30の追加確認記録に分離する。
           '''
-              remaining = '''
-          `features/piece/piecePreviewModel.js::readPiecePreviewDisplay` は現在も `canSave:false`。`screens/input/InputPieceActionArea.js` は初回 `onSave` と正式な `isSaveAdmitted` を供給していない。既存 `PieceCreateController.savePreview(identity, displayToken, idempotencyKey)` は再照合・単一要求・保存結果保持を実装済みだが、正式な供給元との接続が残る。`PieceVisualCard` の `native_checked` とローカルcapture targetは正式renderer admissionではない。quota、flag、hash、version文字列、合成テストを正式な描画合格へ置き換えない。
-          
-          本線はB9の実機描画同等性・glyph/ink/性能、正式renderer admission、保存直前のfit、同じ候補/token/keyによる初回保存の親画面接続。既存保存controller・結果再確認・本人詳細・Nexus本人履歴入口・写真保存結果保持を再実装しない。画像保存共有、形式変更、Nexus公開読取/切替、tutorial/旧APIを含むM5残差、稼働接続は引き続き未完了。画像共有の全完成を初回実機確認の追加前提にしない。
-          
-          最新weekly `Cocolon_Weekly_Review_20261010.md` §5.5、公開目標2026-12-18、default OFF、Draft/open/unmerged、automatic_progression=falseを維持する。この同期は既に反映したsourceと現在地の文書同期であり、稼働DB・env・deploy・activation・native app build・署名・配布・main mergeへの効果は0。実機未確認だけでなく実装未接続が残るため、単にMashの確認待ちとはしない。
+          remaining = '''
+          `InputPieceActionArea` の条件付き初回保存接続は再実装しない。現在の `InputScreen` は正式な `isSaveAdmitted` を供給していないため、通常アプリから初回保存できる完成状態ではない。`PieceVisualCard.native_checked`、quota、flag、hash、renderer version文字列、今回の合成trueを正式描画合格へ置き換えない。
+
+          次はB9の実機描画同等性・glyph/ink/性能、正式renderer admissionの供給元、保存直前のfitと同じ候補/tokenへの結合、通常画面での初回保存・本人詳細の確認。画像保存共有・形式変更・Nexus公開読取/切替・tutorial/旧APIを含むM5残差・稼働接続も未完了。画像共有の全完成を初回実機確認の追加前提にしない。単にMashの実機確認待ちとはしない。
+
+          最新weekly `Cocolon_Weekly_Review_20261010.md` §5.5、2026-12-18公開目標、default OFF、Draft/open/unmerged、automatic_progression=falseを維持する。今回の稼働DB・env・deploy・activation・native app build・署名・配布・main mergeへの効果は0。既存API `804beca` の候補構成限定の旧4write除去と通常legacy構成保持を継承し、API変更・検査再実行は行っていない。
           '''
-              entry += '\n\n## 58. 2026-10-13 — 旧write除去と初回保存Modal準備の同期\n' + shared
-              entry += '\n### 次の再開位置\n' + remaining
-              mapping += '\n\n## 62. 2026-10-13 — 反映済みAPIと初回保存Modal準備を現在地へ同期\n'
-              mapping += '\n### 62.1 反映済みsourceと検証\n' + shared
-              mapping += '\n### 62.2 文書同期の範囲\n\n既存入口§58、本map§62、manifest v57を同期する。既存本文・過去の履歴を保持し、currentの案内と実装状態だけを更新する。3資料の全文とGit blob識別値を既存v56と照合したうえで変更し、入口/mapの新しい全文からmanifestのhashとbyte数を計算する。製品コード・契約・検査基準の変更は0。GitHub反映後の確認は既存PR #30へ記録する。STRUCTURE_MAP_DELTA_UPDATED（反映済みsourceの現在地同期）。\n'
-              mapping += '\n### 62.3 再開位置と未完了\n' + remaining
-              encoded = {ENTRY: entry.encode('utf-8'), MAP: mapping.encode('utf-8')}
-              manifest['schema_version'] = 'cocolon.piece.workstream_manifest.v57'
-              manifest['generated_at'] = '2026-10-13 JST'
-              manifest['manifest_lineage'] = {
-                  'predecessor_schema_version': 'cocolon.piece.workstream_manifest.v56',
-                  'predecessor_blob': EXPECTED[MANIFEST], 'predecessor_head': RN,
-                  'carry_forward': 'Synchronize already-published API legacy-write retirement and initial-save modal preparation. No host/admission/fit/device or production completion is granted.'}
-              manifest['current_entry'].update(metadata(ENTRY, encoded[ENTRY]))
-              manifest['current_structure'].update(metadata(MAP, encoded[MAP]))
-              manifest['current_actual_basis'].update({
-                  'cocolon_pre_sync_head': RN, 'mashos_api_head': API,
-                  'remaining_work_owner': 'initial_save_modal_and_api_sync_20261013',
-                  'piece_v2_initial_save_modal_present': True,
-                  'piece_v2_rn_save_action_connected': False,
-                  'piece_v2_native_save_fit': False,
-                  'shared_candidate_legacy_publish_cancel_writes_present': False,
-                  'default_legacy_publish_cancel_writes_preserved': True})
-              manifest['phase_state']['pce9f_shared_legacy_write_retirement'] = 'REMOTE_804BECA__EXPLICIT_SHARED_CANDIDATE_ONLY__NOT_LIVE_M5'
-              manifest['phase_state']['pce9c_initial_save_modal'] = 'REMOTE_D9CCBC1__MODAL_PREPARATION_CI709_PASS__HOST_ADMISSION_FIT_PENDING'
-              manifest['next_group'].update({
-                  'state': 'INITIAL_SAVE_MODAL_SOURCE_PUBLISHED__HOST_ADMISSION_FIT_DEVICE_PENDING',
-                  'current_map_section': '62.3', 'current_entry_section': '58',
-                  'repeat_initial_save_modal': False, 'repeat_shared_legacy_write_retirement': False})
-              manifest['historical_current_sync_effects_before_20261013_doc_sync'] = manifest['current_sync_effects']
-              manifest['current_sync_effects'] = {
-                  'classification': 'PUBLISHED_SOURCE_CURRENT_STATE_DOCUMENT_SYNC',
-                  'piece_documentation_paths': 3, 'product_source_changes': 0,
-                  'new_product_test_execution': 0, 'structure_map': 'STRUCTURE_MAP_DELTA_UPDATED',
-                  'live_database_apply': 0, 'release_effect': 0, 'native_app_builds': 0,
-                  'product_acceptance': False, 'automatic_progression': False}
-              manifest['initial_save_modal_and_api_sync_20261013'] = {
-                  'api_commit': API, 'rn_commit': RN, 'map_section': '62', 'entry_section': '58',
-                  'api_diff_retrieved': True, 'api_tests_rerun_in_sync': False,
-                  'rn_ci_run_id': 38345010905, 'rn_ci_job_id': 115124267331,
-                  'rn_ci_passed': 709, 'rn_ci_failed': 0, 'rn_ci_skipped': 0,
-                  'modal_cases_included': 42, 'rn_ci_node': '24.21.0', 'rn_ci_typescript': '5.2.2',
-                  'ci_counts_origin': 'Previously retrieved completed JS job log; not rerun in this sync',
-                  'ios_source': 'success', 'android_source': 'success', 'android_export_libraries': 'success',
-                  'android_export_job_id': 115124268056, 'ios_export_job_id': 115124267502,
-                  'ios_export_state_at_last_read': 'in_progress', 'full_run_success_claimed': False,
-                  'formal_renderer_admission': False, 'initial_save_host_connected': False,
-                  'device_save_export_share_verified': False, 'product_acceptance': False,
-                  'verification_owner': 'Existing PR 30 postverification record', 'automatic_progression': False}
-              encoded[MANIFEST] = (json.dumps(manifest, ensure_ascii=False, indent=2) + '\n').encode('utf-8')
-              check = json.loads(encoded[MANIFEST])
-              assert check['automatic_progression'] is False
-              assert check['current_actual_basis']['piece_v2_rn_save_action_connected'] is False
-              assert check['current_actual_basis']['piece_v2_native_save_fit'] is False
-              for key, path in [('current_entry', ENTRY), ('current_structure', MAP)]:
-                  for field, value in metadata(path, encoded[path]).items():
-                      assert check[key][field] == value
-              assert set(encoded) == set(EXPECTED)
-              return encoded
-          
-          
-          if __name__ == '__main__':
-              original = {path: Path(path).read_bytes() for path in EXPECTED}
-              for path, expected in EXPECTED.items():
-                  if blob(original[path]) != expected:
-                      raise SystemExit('Source changed; no document was modified: ' + path)
-              output = prepare(original)
-              for path, data in output.items():
-                  Path(path).write_bytes(data)
-              for path, data in output.items():
-                  assert Path(path).read_bytes() == data
-                  print(json.dumps(metadata(path, data), ensure_ascii=False))
+          assert '\n## 59. ' not in entry and '\n## 63. ' not in mapping
+          entry += '\n\n## 59. 2026-10-13 — 初回保存の親画面接続と既存保存処理の結合\n' + shared
+          entry += '\n### 次の再開位置\n' + remaining
+          mapping += '\n\n## 63. 2026-10-13 — 条件付き初回保存host接続\n' + shared
+          mapping += '\n### 63.1 再開位置と未完了\n' + remaining
+          encoded = {ENTRY: entry.encode('utf-8'), MAP: mapping.encode('utf-8')}
+          manifest['schema_version'] = 'cocolon.piece.workstream_manifest.v58'
+          manifest['generated_at'] = '2026-10-13 JST'
+          manifest['manifest_lineage'] = {
+              'predecessor_schema_version': 'cocolon.piece.workstream_manifest.v57',
+              'predecessor_blob': EXPECTED[MANIFEST],
+              'predecessor_head': '74d300a547f42c621d42b04704d82a445fcd230d',
+              'carry_forward': 'Conditional initial-save host connection and verified CI; formal renderer provider, native fit, device and ordinary app save remain incomplete.'}
+          for key, path in [('current_entry', ENTRY), ('current_structure', MAP)]:
+              manifest[key].update(metadata(path, encoded[path]))
+          manifest['current_actual_basis'].update({
+              'cocolon_pre_sync_head': RN,
+              'remaining_work_owner': 'initial_save_host_connection_20261013',
+              'piece_v2_initial_save_modal_present': True,
+              'piece_v2_initial_save_host_conditional_connected': True,
+              'piece_v2_rn_save_action_connected': False,
+              'piece_v2_formal_renderer_admission_supplied': False,
+              'piece_v2_native_save_fit': False})
+          manifest['phase_state']['pce9c_initial_save_host'] = 'REMOTE_F026ADB__CONDITIONAL_HOST_CONNECTED__CI747_PASS__FORMAL_PROVIDER_FIT_DEVICE_PENDING'
+          manifest['phase_state']['next_piece_group'] = 'FORMAL_RENDERER_ADMISSION_AND_SAVE_FIT__ORDINARY_APP_SAVE_DEVICE_PENDING'
+          manifest['next_group'].update({
+              'state': 'CONDITIONAL_INITIAL_SAVE_HOST_CONNECTED__FORMAL_PROVIDER_FIT_DEVICE_PENDING',
+              'current_map_section': '63.1', 'current_entry_section': '59',
+              'repeat_initial_save_modal': False, 'repeat_initial_save_host_connection': False,
+              'repeat_shared_legacy_write_retirement': False})
+          manifest['historical_current_sync_effects_before_20261013_initial_save_host'] = manifest['current_sync_effects']
+          manifest['current_sync_effects'] = {
+              'classification': 'CONDITIONAL_INITIAL_SAVE_HOST_SOURCE_AND_DOCUMENT_SYNC',
+              'source_commit': RN, 'product_source_changes': 1, 'test_source_changes': 2,
+              'piece_documentation_paths': 3, 'document_sync_product_source_changes': 0,
+              'structure_map': 'STRUCTURE_MAP_DELTA_UPDATED', 'live_database_apply': 0,
+              'release_effect': 0, 'native_app_builds': 0, 'product_acceptance': False,
+              'automatic_progression': False}
+          manifest['initial_save_host_connection_20261013'] = {
+              'rn_commit': RN, 'source_blobs': SOURCE, 'map_section': '63', 'entry_section': '59',
+              'local_node': '22.16.0', 'local_unit_cases': 30, 'local_baseline_pass': 9,
+              'local_baseline_fail': 21, 'local_modified_pass': 30, 'local_modified_fail': 0,
+              'rn_ci_run_id': 38353118223, 'rn_ci_job_id': 115149790070,
+              'rn_ci_passed': 747, 'rn_ci_failed': 0, 'rn_ci_skipped': 0,
+              'new_cases_included': 38, 'new_integration_cases_included': 8,
+              'rn_ci_node': '24.21.0', 'rn_ci_typescript': '5.2.2',
+              'ci_counts_origin': 'Completed exact-head JS job log retrieved in this task; not rerun by document sync',
+              'initial_save_host_conditional_connected': True,
+              'formal_renderer_admission': False, 'formal_provider_supplied_by_input_screen': False,
+              'ordinary_app_initial_save_complete': False, 'native_save_fit': False,
+              'device_save_export_share_verified': False, 'product_acceptance': False,
+              'verification_owner': 'Existing PR 30 postverification record', 'automatic_progression': False}
+          assert manifest['automatic_progression'] is False
+          assert manifest['current_actual_basis']['piece_v2_rn_save_action_connected'] is False
+          assert manifest['current_actual_basis']['piece_v2_native_save_fit'] is False
+          encoded[MANIFEST] = (json.dumps(manifest, ensure_ascii=False, indent=2) + '\n').encode('utf-8')
+          check = json.loads(encoded[MANIFEST])
+          for key, path in [('current_entry', ENTRY), ('current_structure', MAP)]:
+              for field, value in metadata(path, encoded[path]).items():
+                  assert check[key][field] == value
+          assert set(encoded) == set(EXPECTED)
+          for path, data in encoded.items():
+              Path(path).write_bytes(data)
+          for path, data in encoded.items():
+              assert Path(path).read_bytes() == data
+              print(json.dumps(metadata(path, data), ensure_ascii=False))
           PY_SYNC
           git diff --check
           python3 - <<'PY_CHECK'
@@ -174,5 +168,5 @@ jobs:
           assert changed == expected, 'Unexpected changed paths'
           PY_CHECK
           git add -- Cocolon_Piece/00_read_first.md Cocolon_Piece/manifest.json Cocolon_前提資料/current_structure/02_piece_current_structure.md
-          git -c user.name='Karen documentation sync' -c user.email='noreply@github.com' commit -m 'docs(piece): synchronize published API retirement and initial-save modal state'
+          git -c user.name='Karen documentation sync' -c user.email='noreply@github.com' commit -m 'docs(piece): record conditional initial-save host and verified CI747'
           git push origin HEAD:refs/heads/agent/three-core-cmee-current-structure-20260815
