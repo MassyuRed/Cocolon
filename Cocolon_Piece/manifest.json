@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v68",
+  "schema_version": "cocolon.piece.workstream_manifest.v69",
   "generated_at": "2026-10-14 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v67",
-    "predecessor_blob": "fd232e9e7837311e77257af424466ffccd902f79",
-    "predecessor_head": "51ca57b89bfe714db47ab473ecd01034ef569f1c",
-    "carry_forward": "R11 exact native comparisons and four RN canvases passed, but mixed420 timed out. R12 preserves all candidates and reduces grouping, transport and no-fit work; native59 exact comparisons pass after an initialization-stall retry. Four RN canvases pass and mixed420 reaches the third font but still times out. Formal admission/save/device remain unavailable."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v68",
+    "predecessor_blob": "f6d0d5d3b45308c1c6658a7fdfe6dc5970275911",
+    "predecessor_head": "70b96315a14c095646b41c5172c151b5a487da0e",
+    "carry_forward": "R12 had four canvases pass and mixed420 time out at 40pt. R13 premeasures one mounted next font with a module-wide native serial queue; local JS758 pass. Native62 and full RN5 pending; no 8s success or admission claimed."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "d09bf77221210405e31baee8406cf64987c2cd5b",
-    "raw_sha256": "17ec7323e14825f63edd7f3242c589d6c5f73e2c66ef945835cc0dc85dff590b",
-    "utf8_bytes": 128873
+    "git_blob_sha1": "df38f8e31bcadf55325b0f2403e3f465275f573b",
+    "raw_sha256": "c3981d0583d3f602aecdeb352f7861994005b10c4e6567d2007077ca492596c7",
+    "utf8_bytes": 131301
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -4324,8 +4324,8 @@
   "real_rn_canvas_execution_20261013": {
     "initial_source_commit": "2c7c554cf51cff38efc84a99df80565f736fe9d9",
     "runner_fix_commit": "5c501d9eaed60257b202de418c936a1f7acb3bf6",
-    "entry_section": "63",
-    "map_section": "65.11",
+    "entry_section": "64",
+    "map_section": "65.12",
     "synthetic_cases": 5,
     "react_native_text_and_piece_modules": "ACTUAL",
     "transport_auth": "THROW_ONLY_TEST_ALIAS",
@@ -4359,7 +4359,7 @@
     "previous_artifact_id": 11799973603,
     "null_canvas_origin_identified": false,
     "harness_fix_commit": "1667ecd64a10345987b5fcb7be307f9ee315a0a1",
-    "current_run": 38441898578,
+    "current_run": 38470057115,
     "latest_completed_js_passed": 754,
     "latest_completed_native_passed": 59,
     "latest_completed_max420_candidate_elapsed_ms": 368.54,
@@ -4681,6 +4681,20 @@
         "image_ms": 1692.26,
         "times_are_parallel_operation_sums": true
       }
+    },
+    "ordered_font_lookahead": {
+      "source_commit": "ecfda5730681ade9374cfcbfcd6916e187b8fb26",
+      "run": 38470057115,
+      "rn_job": 115546511987,
+      "native_job": 115546512207,
+      "state": "LOCAL758_PASS__NATIVE62_AND_REAL_RN5_PENDING",
+      "native_assertions_expected": 62,
+      "next_font_lookahead": 1,
+      "global_ios_candidate_workers_max": 4,
+      "selection_order_retained": true,
+      "all_candidate_metrics_retained": true,
+      "draw_deadline_ms": 8000,
+      "timeout_resolved": false
     }
   }
 }

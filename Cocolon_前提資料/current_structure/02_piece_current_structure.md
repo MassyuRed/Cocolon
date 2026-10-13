@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は入口§63／current map §65.11末尾を優先します。source `b46f453` の実RNは4ケースを画像まで確認しました。420文字は48pt・44ptの全候補と不成立判定を終えて40ptへ進みましたが、全体8,113.899msで時間切れです。native単体は再実行で59件すべて通過し、全候補の旧計測とのbit一致を確認済みです。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
+**現在は入口§64／current map §65.12を優先します。source `ecfda573` で、次の文字サイズの実測を現在サイズの復元・B9判定と重ねる修正を反映しました。local JS758件は成功し、run38470057115でnative単体と実RN5ケースを検証中です。420文字の全体8秒以内・最終画像は未確認です。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -2549,3 +2549,17 @@ local renderer/B9 86 PASS／FAIL0／SKIP0、diff check成功。Python owner orac
 親workflow完了後にnative単体jobだけを再実行した。attempt2 job115462431082は進行中で、元の59assertion・独立uncached bit比較を維持している。attempt1のview_init停止は最初のUIView生成中で、UIFont取得・R12計測・semaphore待ちの前。standalone executableのUIKit起動条件が通常アプリと異なるが、停止stackがないため原因確定とはしない。実RNの4ケース通過を、未完了の全候補数値比較へ読み替えない。
 
 §65.11 native再実行完了：attempt2 job115462431082は59 PASS／FAIL0／SKIP0。v3を検査側で独立decodeし、混在420文字の全88,410候補と非均一属性を含む14fixtureすべてで旧uncached計測とのbit一致を確認した。「あ」420文字368.540ms、混在420文字7,974.885ms（単体検査の候補呼出・decodeを含む時計）。CoreTextの操作時間の和は作成6,981.997ms／幅0.922ms／ink1,692.260ms、11,382作成／2,320,415 UTF-16 units。並列操作の和をwall-clockへ加算せず、この別runnerの単体値を実RN性能へ換算しない。初期化停止の原因解消を意味せず、今回の再実行は全判定まで到達したという結果である。JS754件とnative59件は通過したが、実RNは4ケース成功・420文字は40pt候補中の全体timeoutが残る。次の本線はこの反復計測を全体8秒へ収める修正であり、その後の正式renderer供給・保存直前fit・通常初回保存・実機受入れは未完了。
+
+
+### 65.12 次fontの実測を先行させ、採用順と総worker上限を保持
+
+source `ecfda5730681ade9374cfcbfcd6916e187b8fb26` は既存製品2path・test2pathの変更です。前回の混在420文字は全体8,113.899msで40pt候補待ちのtimeoutでした。
+
+- `components/piece/PieceVisualCard.js`：現在fontの全段落を先に発行し、実mount済みの次font一段だけを先行計測します。同じ入力batchのpromiseを引き継ぎ、48→44→40→36ptの採用順、元の全体8秒、全候補、本文、最終inspectionを保持します。別入力・A→B→A・unmount・期限後の結果を採用せず、先行fontの失敗はそのfontが必要になった時だけ反映します。
+- `ios/tempCocolon/PieceTextMetrics.mm`：module横断の共有serial queueに候補呼出を載せ、各呼出内の最大4workerを保持します。前fontのJS復元/B9中に次fontを計測できます。queue待ちでnative期限を延長せず、開始直後も期限を確認します。CoreText計算・候補値・v3転送・属性比較を変更しません。
+- `tests/piece-v2-renderer.test.js`：先行完了でも順序保持、段落順、再計測不要、失敗の遅延反映、世代/期限失効、固定export canvasを4検査で確認。localの既存13suiteは758 PASS／FAIL0／SKIP0。最初の追加検査1件のVM配列比較を補正して最終成功しました。実RN性能の代用ではありません。
+- `tests/native/piece-text-metrics-ios.mm`：独立decoderを既存検査と共用し、別module・別fontの同時要求3判定を追加。先行59判定・全候補の旧uncached bit比較は保持します。
+
+4pathのremote全文・親head・変更pathを照合しました。同環境read-only補助reviewに重大指摘なし。[run38470057115](https://github.com/MassyuRed/Cocolon/actions/runs/38470057115)の実RN job115546511987、native job115546512207で検証中です。最新の次作業はこのrunの完了結果・全候補比較・5ケースの時間/画像を読むことです。未完了runを成功へ換算しません。
+
+STRUCTURE_MAP_DELTA_NONE（既存Cardと計測ownerの内部順序のみ）。weekly10/10 §5.5、12/18目標、default OFF、Draft/open/unmergedを保持。API/DB/依存/workflow/本番有効化/配布/main mergeの変更0。正式renderer supplier→保存直前fit→通常初回保存→実機受入れはこの描画確認後の残件です。
