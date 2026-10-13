@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は入口§62／current map §65.9を優先します。前回run38390527878は4ケース通過、混在420文字は全体8,776.295msで時間切れでした。source `b6a1356` で計測値をbit同値のbyte列として渡す修正を反映し、run38433766446の実RNを確認中です。JS751件は成功、native単体は最初のview初期化で停止し59検査未実行。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
+**現在は入口§62／current map §65.10を優先します。byte列受渡しのrun38433766446は4ケース通過、420文字は次のfont候補へ進んだものの全体8,111.817msで時間切れでした。source `6be0bed` で完全一致候補を事前に分類し最大4workerで独立計測する修正を反映。run38437753643のnative59件と実RN5ケースを確認中です。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1177,3 +1177,8 @@ source `b6a135613c7f443e61740c02873d26424208d8ac` は、native候補の各7数�
 localのrenderer/B9は83 PASS／FAIL0／SKIP0、[run38433766446](https://github.com/MassyuRed/Cocolon/actions/runs/38433766446)のJSは751 PASS／FAIL0／SKIP0。native単体job115422361806はcompile成功後、最初のview_initで90秒alarmとなり59検査へ未到達。実RN job115422361678は確認中。source5fileのremote全文・親・変更path一致は確認済み。次は実RN5ケースの結果と画像を読み、停止したnative単体だけを再実行して旧計測とのbit同値を確かめる。詳細はmap §65.9。
 
 正式rendererの供給、保存直前fit、同じpreview/tokenと通常InputScreenの初回保存、実機受入れは別の残件。既存host/controllerは再実装しない。weekly10/10 §5.5・12/18公開目標、default OFF、Draft/open/unmerged、canSave/canExport=falseを維持する。
+
+
+§62継続：source `b6a1356` のrun38433766446は完了し、4ケースnative_checkedと4枚のPNGを確認した。混在420文字は48pt候補が5,917.120msで返り、全体7,611.359msで44ptへ進んだが、全体8,111.817msで時間切れとなった。受渡し削減だけでは全体8秒を満たしていない。native単体はview_init停止のため59判定未実行。
+
+source `6be0bed18fa33d5414d4834bf29ecc8b6d25c6d5` で、同じ完全一致条件・cache上限により候補を先に分類し、各substring／CTLineをworker専用にした最大4並列の独立計測へ変更した。元の全行順に全7数値を復元してv2で渡す。全workerの終了を待ち、失敗・同じ8秒期限は一度だけ拒否する。glyph・数値式・font順・B9・最終検査・save/export禁止は維持。testだけのprofileをatomic化し、実RNのadapter／B9時間を別記録にした。local83件は成功。run38437753643のnative59と実RN5ケースを確認中であり、並列化の数値同値・全体短縮はまだ認定しない。詳細はmap §65.10。旧版のnative再実行より、現在sourceのnative59検査を優先する。

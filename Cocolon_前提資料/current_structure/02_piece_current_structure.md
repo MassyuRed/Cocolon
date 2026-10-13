@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は入口§62／current map §65.9を優先します。前回run38390527878は4ケース通過、混在420文字は全体8,776.295msで時間切れでした。source `b6a1356` で計測値をbit同値のbyte列として渡す修正を反映し、run38433766446の実RNを確認中です。JS751件は成功、native単体は最初のview初期化で停止し59検査未実行。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
+**現在は入口§62／current map §65.10を優先します。byte列受渡しのrun38433766446は4ケース通過、420文字は次のfont候補へ進んだものの全体8,111.817msで時間切れでした。source `6be0bed` で完全一致候補を事前に分類し最大4workerで独立計測する修正を反映。run38437753643のnative59件と実RN5ケースを確認中です。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -2488,3 +2488,18 @@ source `b6a135613c7f443e61740c02873d26424208d8ac` は製品2＋test3の5path。`
 [run38433766446](https://github.com/MassyuRed/Cocolon/actions/runs/38433766446)のJS job115422361691は751 PASS／FAIL0／SKIP0。Android source成功、export両jobのlibrary compileは依存差分なしでskip。iOS source job115422361806はcompile成功後、最初のview_initで90秒alarmとなり59判定未実行（製品候補計測へ未到達）。実RN job115422361678は確認中。成功した単体結果を流用せず、実RN完了後に停止した単体jobだけを再実行する。sourceはfresh remote全文・exact5path・parent603cb2a・Draft branch headを照合済み。
 
 次は同sourceの実RN5ケース、全体8秒、本文保持、画像を確認し、旧数値との同値をnative単体で確認する。短縮や全5ケース合格を未確認で認定しない。正式renderer supplier、保存直前fit、通常InputScreenの初回保存、実機受入れは未完了。weekly10/10 §5.5・12/18目標、default OFF、Draft/open/unmergedを継承。STRUCTURE_MAP_DELTA_NONE。稼働DB/env/deploy/署名/配布/main mergeへの効果は0。
+
+
+### 65.10 全体timeoutの残存を確認、独立候補を最大4並列で計測
+
+source `b6a1356` の[run38433766446](https://github.com/MassyuRed/Cocolon/actions/runs/38433766446)・実RN job115422361678は完了。artifact11833417176（62,536,858 bytes、SHA256 `58054a255f6daa9486c8772e87a41f7ecbd2e2a372c935af0ccb6e12e9627e1b`）を取得してdigest照合し、5件のJSON・4枚PNGを実読した。段落1,165.085ms、引用447.894ms、宣言419.396ms、保存済み334.674msはnative_checked／本文保持、本文配置・余白・brandingの画像を確認した。全canSave/canExport=false。
+
+混在420文字は48ptの全88,410候補を5,917.120msで受け取り、全体7,611.359msにplanning:1へ進んだ。44pt候補はpendingのまま、全体8,052.404msでunavailable:1、撮影時8,111.817ms。plan・PNGはなく、全5ケース合格ではない。以前の候補返却7,878.525msより今回の観測値は短いが、別runner／実行差を含み、差の全量を受渡しだけの効果と断定しない。decode・B9・次fontを含む全体性能の未達が残る。iOS単体job115422361806は最初のview_initで90秒alarm、59判定未実行。JS751件は全PASS。run中の単体job再実行はGitHubから「runが実行中」と拒否され、再実行効果は0。現在は次sourceのnative59を優先する。
+
+source `6be0bed18fa33d5414d4834bf29ecc8b6d25c6d5` は製品1＋test2。`PieceTextMetrics.mm` 内で、元のstart/end順・生UTF-16列・全属性ID列・16,384key／4Mi UTF-16上限を保持して代表jobを作成する。失敗時やcache不一致時の候補を省略せず、同じsubstringを独立計測する。少量は1worker、256job以上は最大4workerとし、各workerが専用のsubstringとCTLineで従来の5数値を計算する。UIKit/TextKitはUI上でsnapshot作成まで、workerへはimmutable snapshotを渡す。各workerの書込先は別slot。全workerが終了するまでbufferを保持し、元順で全7数値をbyte列へ復元する。期限は分類・計測・再展開で同じ単一8秒を共用し、failureをatomic集約して一度だけ拒否する。
+
+CoreTextの個別関数のthread safetyとlayout objectを各操作内へ隔離する条件は[Apple公式Core Text](https://developer.apple.com/documentation/CoreText)を確認した。既存native59の旧uncached比較は変更せず、test-only profile集計をatomic化した。集計されたCoreText時間は並列処理の操作時間の和であり、全体wall-clockへ加算しない。実RN entryは実adapterと実B9を一度だけ呼び、戻り値・例外を変えずに時間を別配列へ記録する。追加dependency、font近似、候補省略、B9 score、recipe prototype.v3、最終inspection、描画8秒の変更は0。
+
+local83 PASS／FAIL0／SKIP0、diff check成功。同環境のread-only reviewに重大指摘なし。source exact3fileのfresh remote全文・blob・path集合・parent96baac7を照合した。[run38437753643](https://github.com/MassyuRed/Cocolon/actions/runs/38437753643)のnative job115436093723と実RN job115436093716は確認中。native59のbit同値、混在420文字の4fontを含む全体時間、全5画像を実結果で判定する。
+
+正式renderer supplier／保存直前fit／通常InputScreen初回保存／実機受入れは未完了。次の接続ownerはCardの同一mount/世代/plan/inspection→Modalの同じpreview/token→hostの既存isSaveAdmitted→InputScreenの正式supplier。既存Controller/API保存は再実装しない。これらを今回のnative_checkedで正式受入れしたとはしない。weekly10/10 §5.5と12/18目標を継承。default OFF、Draft/open/unmerged、STRUCTURE_MAP_DELTA_NONE、稼働DB/env/deploy/署名/配布/main merge効果0。
