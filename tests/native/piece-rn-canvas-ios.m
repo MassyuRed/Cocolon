@@ -43,7 +43,7 @@ RCT_EXPORT_METHOD(record:(NSDictionary *)report) {
   if ([view isKindOfClass:RCTTextView.class]) [texts addObject:view];
   for (UIView *child in view.subviews) [self collectText:child into:texts];
 }
-RCT_EXPORT_METHOD(capture:(NSNumber *)tag report:(NSDictionary *)raw resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+RCT_EXPORT_METHOD(capture:(nonnull NSNumber *)tag report:(NSDictionary *)raw resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
   [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *manager, NSDictionary<NSNumber *,UIView *> *registry) {
     UIView *canvas = tag ? registry[tag] : nil;
     NSMutableDictionary *report = [raw mutableCopy];

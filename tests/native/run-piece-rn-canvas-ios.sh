@@ -54,6 +54,12 @@ ruby - "$OUT" <<'RUBY'
 require 'xcodeproj'
 p = Xcodeproj::Project.open('tempCocolon.xcodeproj')
 tests = p.targets.find { |t| t.name == 'tempCocolonTests' }
+# Hosted tests resolve RN from TEST_HOST via the existing BUNDLE_LOADER.
+# Inheriting all static Pod frameworks with -ObjC creates a second RN runtime
+# in the test binary (including RCTBridge/RCTTextView/RCTUIManager).
+tests.build_configurations.each do |config|
+  config.build_settings['OTHER_LDFLAGS'] = ['-lc++']
+end
 ref = p.main_group.new_file('../tests/native/piece-rn-canvas-ios.m')
 tests.source_build_phase.add_file_reference(ref)
 app = p.targets.find { |t| t.name == 'tempCocolon' }
@@ -82,6 +88,9 @@ collect() {
     cp -R "$container/Documents/piece-rn-canvas" "$OUT/evidence"
     cat "$OUT/evidence/results.json"
   fi
+  if [ -d "$OUT/result.xcresult" ]; then
+    xcrun xcresulttool get --legacy --path "$OUT/result.xcresult" --format json 2>&1 | tee -a "$OUT/xcodebuild.log" || true
+  fi
   xcrun simctl shutdown "$DEVICE" >/dev/null 2>&1 || true
 }
 trap collect EXIT
@@ -91,7 +100,7 @@ XCODE=(xcodebuild -quiet -jobs 3 -workspace tempCocolon.xcworkspace -scheme temp
   -derivedDataPath "$OUT/build" \
   -parallel-testing-enabled NO -only-testing:tempCocolonTests/PieceRNCanvasTests \
   CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY= \
-  ONLY_ACTIVE_ARCH=YES)
+  ONLY_ACTIVE_ARCH=YES ENABLE_DEBUG_DYLIB=NO)
 # Compile before booting the simulator, so its memory/CPU does not compete
 # with the first full native build. The draw deadline/assertions stay unchanged.
 echo 'PIECE_RN_PHASE build_started'

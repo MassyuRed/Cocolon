@@ -35,7 +35,13 @@ class CanvasCases extends React.Component {
       branding: input?.brandingMode !== 'off', state_can_save: m?.canSave, state_can_export: m?.canExport,
       body_preserved: !!m?.plan && m.plan.groups.every((rows, index) => rows.join('') === input.blocks[index]),
     };
-    try { await NativeModules.PieceCanvasTest.capture(findNodeHandle(card?.canvasNode), report); }
+    try {
+      const tag = findNodeHandle(card?.canvasNode);
+      // RN rejects a null NSNumber before calling native, leaving its Promise
+      // pending. Preserve the failure report so all five cases still finish.
+      if (!Number.isInteger(tag) || tag <= 0) NativeModules.PieceCanvasTest.record({ ...report, capture_error: true });
+      else await NativeModules.PieceCanvasTest.capture(tag, report);
+    }
     catch { NativeModules.PieceCanvasTest.record({ ...report, capture_error: true }); }
     if (this.state.index + 1 === fixtures.length) { NativeModules.PieceCanvasTest.done(); return; }
     this.setState(({ index }) => ({ index: index + 1 }), this.startCase);
