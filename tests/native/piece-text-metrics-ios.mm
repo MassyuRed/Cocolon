@@ -4,6 +4,7 @@
 #import "piece-ios-react-shim.h"
 #include <math.h>
 #include <stdio.h>
+#include <string.h>
 #include <unistd.h>
 @implementation RCTBridge
 @end
@@ -91,6 +92,34 @@ static BOOL validCandidates(NSDictionary *result, NSString *text) {
   }
   return YES;
 }
+// Independent uncached shaping, using the pre-optimization calculation for
+// EVERY returned range. Compare boxed doubles bit-for-bit, not a tolerance.
+static BOOL matchesUncachedCandidates(NSDictionary *result, RCTTextView *view) {
+  if (!validCandidates(result, view.fixtureStorage.string)) return NO;
+  NSAttributedString *snapshot = [view.fixtureStorage copy];
+  NSArray *boundaries = result[@"boundaries"];
+  for (NSArray *row in result[@"rows"]) {
+    @autoreleasepool {
+      NSUInteger start = [boundaries[[row[0] unsignedIntegerValue]] unsignedIntegerValue];
+      NSUInteger end = [boundaries[[row[1] unsignedIntegerValue]] unsignedIntegerValue];
+      NSAttributedString *part = [snapshot attributedSubstringFromRange:NSMakeRange(start, end - start)];
+      CTLineRef line = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)part);
+      if (!line) return NO;
+      double advance = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
+      CGRect ink = CTLineGetImageBounds(line, NULL); CFRelease(line);
+      if (CGRectIsNull(ink)) {
+        if ([part.string rangeOfCharacterFromSet:NSCharacterSet.whitespaceAndNewlineCharacterSet.invertedSet].location != NSNotFound) return NO;
+        ink = CGRectZero;
+      }
+      NSArray *expected = @[@(advance), @(CGRectGetMinX(ink)), @(-CGRectGetMaxY(ink)), @(CGRectGetMaxX(ink)), @(-CGRectGetMinY(ink))];
+      for (NSUInteger i = 0; i < 5; i++) {
+        double actualValue = [row[i + 2] doubleValue], expectedValue = [expected[i] doubleValue];
+        if (memcmp(&actualValue, &expectedValue, sizeof(double)) != 0) return NO;
+      }
+    }
+  }
+  return YES;
+}
 // Independent paint observation of the same TextKit layout, at logical scale.
 // Check outward-rounded reported bounds: fractional antialiasing may occupy
 // the edge pixel. No extra content-pixel or clipping tolerance is introduced.
@@ -157,6 +186,7 @@ int main(void) {
       RCTTextView *view = makeView(text, font); bridge.uiManager.registry = @{@1:view};
       NSDictionary *candidates = call(module, YES, text, font, &code);
       check([name stringByAppendingString:@"_candidate_metrics"], code == nil && validCandidates(candidates, text));
+      check([name stringByAppendingString:@"_uncached_equivalence"], matchesUncachedCandidates(candidates, view));
       if (!candidates) printf("native rejection %s candidates %s\n", name.UTF8String, code.UTF8String);
       if ([@[@"combining",@"emoji_zwj",@"emoji_modifier",@"regional_pair",@"variation_selector",@"supplementary_han"] containsObject:name]) {
         check([name stringByAppendingString:@"_one_grapheme"], [candidates[@"boundaries"] isEqual:@[@0,@(text.length)]]);
@@ -188,6 +218,7 @@ int main(void) {
     NSDictionary *longResult = call(module, YES, longText, 48, &code);
     printf("max420_candidate_elapsed_ms=%.3f\n", (NSProcessInfo.processInfo.systemUptime-started)*1000);
     check(@"max420_complete_metrics", code == nil && validCandidates(longResult, longText));
+    check(@"max420_uncached_equivalence", matchesUncachedCandidates(longResult, bridge.uiManager.registry[@1]));
     // Same mixed Japanese input as the full RN case, so a homogeneous glyph
     // benchmark cannot hide native shaping cost. Existing 420 test stays intact.
     NSString *mixedText = [[[@"考える時間と対話を大切にしながら、自分の言葉で伝えたい。"
@@ -198,6 +229,14 @@ int main(void) {
     NSDictionary *mixedResult = call(module, YES, mixedText, 48, &code);
     printf("mixed420_candidate_elapsed_ms=%.3f\n", (NSProcessInfo.processInfo.systemUptime-started)*1000);
     check(@"mixed420_complete_metrics", code == nil && validCandidates(mixedResult, mixedText));
+    check(@"mixed420_uncached_equivalence", matchesUncachedCandidates(mixedResult, bridge.uiManager.registry[@1]));
+    RCTTextView *variants = makeView(@"AaAaAaAa", 48);
+    [variants.fixtureStorage addAttribute:NSKernAttributeName value:@4 range:NSMakeRange(2, 2)];
+    [variants.fixtureStorage addAttribute:NSBaselineOffsetAttributeName value:@3 range:NSMakeRange(4, 2)];
+    [variants.fixtureStorage addAttribute:NSFontAttributeName value:[UIFont monospacedSystemFontOfSize:48 weight:UIFontWeightRegular] range:NSMakeRange(6, 2)];
+    bridge.uiManager.registry = @{@1:variants};
+    NSDictionary *variantResult = call(module, YES, variants.fixtureStorage.string, 48, &code);
+    check(@"same_text_different_attributes_uncached_equivalence", code == nil && matchesUncachedCandidates(variantResult, variants));
     printf("NATIVE_CHECKS=%lu PASS=%lu FAIL=%lu SKIP=0\n", (unsigned long)checks,
       (unsigned long)(checks-failures), (unsigned long)failures);
     return failures ? 1 : 0;

@@ -66,29 +66,42 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
           CFRelease(full);
           if (!glyphs) { unavailable(); return; }
           NSMutableArray *rows = [NSMutableArray new];
+          // Repeated ranges can have identical text but different attributes.
+          // Reuse only an exact attributed-string match within this snapshot.
+          // Bound retained keys; a miss after the budget still gets measured.
+          NSMutableDictionary<NSString *, NSArray *> *cache = [NSMutableDictionary new];
+          NSUInteger cachedUnits = 0;
           for (NSUInteger start = 0; start < count; start++) {
             @autoreleasepool {
               for (NSUInteger end = start + 1; end <= count; end++) {
                 if (NSProcessInfo.processInfo.systemUptime >= deadline) { unavailable(); return; }
                 NSUInteger offset = boundaries[start].unsignedIntegerValue;
                 NSAttributedString *part = [snapshot attributedSubstringFromRange:NSMakeRange(offset, boundaries[end].unsignedIntegerValue - offset)];
-                CTLineRef line = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)part);
-                if (!line) { unavailable(); return; }
-                double advance = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
-                CGRect ink = CTLineGetImageBounds(line, NULL);
-                CFRelease(line);
-                // A whitespace-only candidate has an advance and no painted ink.
-                if (CGRectIsNull(ink)) {
-                  if ([part.string rangeOfCharacterFromSet:NSCharacterSet.whitespaceAndNewlineCharacterSet.invertedSet].location != NSNotFound) {
-                    unavailable(); return;
+                NSArray *cached = cache[part.string];
+                NSArray *metrics = cached && [cached[0] isEqualToAttributedString:part] ? cached[1] : nil;
+                if (!metrics) {
+                  CTLineRef line = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)part);
+                  if (!line) { unavailable(); return; }
+                  double advance = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
+                  CGRect ink = CTLineGetImageBounds(line, NULL);
+                  CFRelease(line);
+                  // A whitespace-only candidate has an advance and no painted ink.
+                  if (CGRectIsNull(ink)) {
+                    if ([part.string rangeOfCharacterFromSet:NSCharacterSet.whitespaceAndNewlineCharacterSet.invertedSet].location != NSNotFound) {
+                      unavailable(); return;
+                    }
+                    ink = CGRectZero;
                   }
-                  ink = CGRectZero;
+                  if (!isfinite(advance) || !isfinite(ink.origin.x) || !isfinite(ink.origin.y) ||
+                      !isfinite(ink.size.width) || !isfinite(ink.size.height)) { unavailable(); return; }
+                  // CoreText's y axis points up; B9 uses baseline-relative y down.
+                  metrics = @[@(advance), @(CGRectGetMinX(ink)), @(-CGRectGetMaxY(ink)),
+                              @(CGRectGetMaxX(ink)), @(-CGRectGetMinY(ink))];
+                  if (!cached && cache.count < 16384 && cachedUnits + part.length <= 4 * 1024 * 1024) {
+                    cache[part.string] = @[part, metrics]; cachedUnits += part.length;
+                  }
                 }
-                if (!isfinite(advance) || !isfinite(ink.origin.x) || !isfinite(ink.origin.y) ||
-                    !isfinite(ink.size.width) || !isfinite(ink.size.height)) { unavailable(); return; }
-                // CoreText's y axis points up; B9 uses baseline-relative y down.
-                [rows addObject:@[@(start), @(end), @(advance), @(CGRectGetMinX(ink)), @(-CGRectGetMaxY(ink)),
-                                  @(CGRectGetMaxX(ink)), @(-CGRectGetMinY(ink))]];
+                [rows addObject:@[@(start), @(end), metrics[0], metrics[1], metrics[2], metrics[3], metrics[4]]];
               }
             }
           }

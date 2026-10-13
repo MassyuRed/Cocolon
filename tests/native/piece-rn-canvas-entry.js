@@ -41,7 +41,14 @@ class CanvasCases extends React.Component {
     if (state && this.trace.states[this.trace.states.length - 1]?.state !== state) this.trace.states.push({ state, elapsed_ms: performance.now() - this.started });
     if (!this.finishing && snapshot && (['native_checked', 'unavailable'].includes(snapshot.phase) || performance.now() - this.started > 10000)) {
       this.finishing = true;
-      requestAnimationFrame(() => requestAnimationFrame(() => this.finishCase()));
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        // A legitimate late layout event can invalidate the first ready state.
+        // Keep the original time budget and capture only a stable snapshot.
+        if ((this.card !== card || card.state.measurement !== snapshot) && performance.now() - this.started <= 10000) {
+          this.finishing = false; this.poll(); return;
+        }
+        this.finishCase();
+      }));
       return;
     }
     this.timer = setTimeout(this.poll, 20);
