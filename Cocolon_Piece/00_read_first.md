@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は入口§65／current map §65.13を優先します。先行計測版の実RNは4件成功・420文字8,089.435msのtimeoutで、未解決です。native62件とJS758件は成功。source `785c37a9` で完全に同じ属性を持つ本文の部分文字列作成を局所修正し、run38474295233のnative63件／実RN5ケースで検証中です。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
+**現在は入口§66／current map §65.14を優先します。先行source785cのnative63件とJS758件は成功、実RNは4件成功・420文字8,056.995msで36pt待ちのtimeoutです。後続5ef1の共有CF属性データはnative検査中にcrashしたため成功扱いしません。source `ec5db637` でworkerごとに内部データを独立させ、run38476571738のnative63件／実RN5ケースを確認中です。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1231,3 +1231,16 @@ source `f882601c` のnative job115553723717は62 PASS／FAIL0／SKIP0、GitHub J
 最新source `785c37a950932af96eb39c92dc721aa6dc8e02fd` は製品1＋test1の2pathです。`ios/tempCocolon/PieceTextMetrics.mm` は既存の完全属性dictionary分類が1種類だけの場合、同じUTF-16 substringとdictionary全体からimmutable NSAttributedStringを直接作ります。複数属性の場合は元のattributedSubstringFromRange経路を保持します。文字・全属性・全候補・CoreText式・4worker・font順・8秒を維持し、font比例や候補省略を使いません。`tests/native/piece-text-metrics-ios.mm` は全文uniformのkern／baselineOffset／monospaced fontの独立uncached bit比較を1件追加し、未到達phaseの時計はNaNとしました。計測名generic_substring_sum_msは旧経路だけを表し、新規文字列生成コストはworker実時間で読みます。
 
 2pathのremote全文・親head・変更pathを確認済みです。最新[run38474295233](https://github.com/MassyuRed/Cocolon/actions/runs/38474295233)のnative job115561053058（期待63判定）と実RN job115561052750（5ケース）を次に確認します。全体8秒や高速化を未確認で成功扱いしません。正式renderer supplier→保存直前fit→同じpreview/tokenの通常初回保存→実機受入れは未完了です。既存host/controller/API保存を再実装せず、この描画確認後に接続を進めます。weekly10/10 §5.5・12/18目標、default OFF、Draft/open/unmerged、STRUCTURE_MAP_DELTA_NONE、DB/env/deploy/署名/配布/main merge効果0を保持します。
+
+
+## 66. 2026-10-14 JST — 複数属性の計測データをworkerごとに独立
+
+source `785c37a9` のrun38474295233はnative job115561053058で63 PASS／FAIL0／SKIP0、JS job115561053139で758 PASS／FAIL0／SKIP0でした。uniformなkern／baselineOffset／monospaced fontを含む全候補の旧uncached bit比較が通過しました。ただしmixed420は複数属性で、このuniform経路の対象ではありません。単体mixed420は3,011.834ms（検査decode含む）、worker実時間2,709.033ms、generic部分文字列の累積2,107.025ms。別runnerの時間差を修正単独の効果へ換算しません。
+
+同runの実RN job115561052750は短文514.682ms／引用340.039ms／宣言251.090ms／保存済み1,923.948msでnative_checked・本文保持・native_canvas_valid。artifact11854250812（62,494,151 bytes、SHA256 `7c9d05af18a36a315b0453b3b9d74c58916f712a24924c01650e05e4036dae35`）のdigest、5件JSON、4枚PNGの本文／余白／brandingを確認しました。420文字は8,056.995msのmeasurement_timeoutで36pt（size3）待ち、plan／PNGなし。48／44／40ptの各88,410行・11,381代表値は返りましたがB9は不成立でした。native呼出は2,581.425／4,771.826／4,114.919msで、後続はqueue待ちを含むため加算しません。先行f882のrun38472162457も4件成功・420文字8,079.121ms（size1）で未解決です。
+
+source `5ef1e0301fec0e8ab87290829dffe4883baee0b9` は複数属性の全runをCF内部データへ一度転記し、その部分文字列を使う製品1＋test1pathの修正でした。JS758件は通過しましたが、run38475623262／native job115565457508は55 PASSの後、mixed420 candidate_call中にsignal11／exit139となり、63判定を完走していません。高速化・計測値同値の成功へ換算しません。公開Swift corelibsのCFRunArray読取に内部位置cacheの無ロック更新を確認しましたが、その公開実装と当該iOSの一致やcrashの直接原因は未確定です。
+
+最新source `ec5db637523c047a67a427c69f88d5685e3e4fa5` は既存 `ios/tempCocolon/PieceTextMetrics.mm` の1pathだけです。並列開始前に、各worker専用のCFデータをCreateMutable→全文→全属性run→immutable化で別々に構築します。同じimmutableオブジェクトのcopyだけでは独立とみなしません。workerは専用snapshotから候補を作るため、substring作成時に共有CF run-arrayを読みません。文字・全属性・全候補・CoreText式・48→44→40→36pt・総4worker・元の8秒期限・最終inspectionを保持します。native63判定は変更していません。
+
+remote全文・親5ef1・変更1pathは一致確認済み。同環境read-only補助reviewに重大指摘なし。run38476571738のJS job115568602141は758 PASS／FAIL0／SKIP0。native job115568602020（期待63判定）と実RN job115568602208（5ケース）の結果を次に確認します。正式renderer supplier→保存直前fit→同じpreview/tokenの通常初回保存→実機受入れは描画確認後の残件です。weekly10/10 §5.5・12/18目標、default OFF、Draft/open/unmerged、STRUCTURE_MAP_DELTA_NONE、DB/env/deploy/署名/配布/main merge効果0を保持します。
