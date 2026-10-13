@@ -28,7 +28,56 @@
 static std::atomic_bool profileCandidates{false};
 static struct {
   std::atomic<uint64_t> creates{0}, units{0}, createTicks{0}, typographicTicks{0}, imageTicks{0};
+  std::atomic<uint64_t> queuedAt{0}, queueStarted{0}, workersStarted{0}, workersJoined{0}, resolvedAt{0}, decodeTicks{0};
+  std::atomic<uint64_t> substringTicks{0}, releaseTicks{0}, uptimeTicks{0}, uptimeCalls{0};
 } candidateProfile;
+// Only the included production source uses these transparent wrappers. Keep
+// worker wall time separate from per-operation sums and the test's decoder.
+static void profiledAsync(dispatch_queue_t queue, dispatch_block_t block) {
+  if (!profileCandidates) { dispatch_async(queue, block); return; }
+  candidateProfile.queuedAt = mach_absolute_time();
+  dispatch_async(queue, ^{
+    candidateProfile.queueStarted = mach_absolute_time();
+    block();
+  });
+}
+static void profiledApply(size_t count, dispatch_queue_t queue, void (^block)(size_t)) {
+  if (!profileCandidates) { dispatch_apply(count, queue, block); return; }
+  candidateProfile.workersStarted = mach_absolute_time();
+  dispatch_apply(count, queue, block);
+  candidateProfile.workersJoined = mach_absolute_time();
+}
+@interface NSAttributedString (PieceCandidateProfile)
+- (NSAttributedString *)pieceProfiledSubstringFromRange:(NSRange)range;
+@end
+@implementation NSAttributedString (PieceCandidateProfile)
+- (NSAttributedString *)pieceProfiledSubstringFromRange:(NSRange)range {
+  if (!profileCandidates) return [self attributedSubstringFromRange:range];
+  uint64_t start = mach_absolute_time();
+  NSAttributedString *result = [self attributedSubstringFromRange:range];
+  candidateProfile.substringTicks += mach_absolute_time() - start;
+  return result;
+}
+@end
+@interface NSProcessInfo (PieceCandidateProfile)
+- (NSTimeInterval)pieceProfiledSystemUptime;
+@end
+@implementation NSProcessInfo (PieceCandidateProfile)
+- (NSTimeInterval)pieceProfiledSystemUptime {
+  if (!profileCandidates) return self.systemUptime;
+  uint64_t start = mach_absolute_time();
+  NSTimeInterval result = self.systemUptime;
+  candidateProfile.uptimeTicks += mach_absolute_time() - start;
+  candidateProfile.uptimeCalls++;
+  return result;
+}
+@end
+static void profiledRelease(CFTypeRef value) {
+  if (!profileCandidates) { CFRelease(value); return; }
+  uint64_t start = mach_absolute_time();
+  CFRelease(value);
+  candidateProfile.releaseTicks += mach_absolute_time() - start;
+}
 static CTLineRef profiledCreateLine(CFAttributedStringRef text) {
   if (!profileCandidates) return CTLineCreateWithAttributedString(text);
   uint64_t start = mach_absolute_time();
@@ -54,10 +103,20 @@ static CGRect profiledImageBounds(CTLineRef line, CGContextRef context) {
 #define CTLineCreateWithAttributedString profiledCreateLine
 #define CTLineGetTypographicBounds profiledTypographicBounds
 #define CTLineGetImageBounds profiledImageBounds
+#define dispatch_async profiledAsync
+#define dispatch_apply profiledApply
+#define attributedSubstringFromRange pieceProfiledSubstringFromRange
+#define systemUptime pieceProfiledSystemUptime
+#define CFRelease profiledRelease
 #include "../../ios/tempCocolon/PieceTextMetrics.mm"
 #undef CTLineCreateWithAttributedString
 #undef CTLineGetTypographicBounds
 #undef CTLineGetImageBounds
+#undef dispatch_async
+#undef dispatch_apply
+#undef attributedSubstringFromRange
+#undef systemUptime
+#undef CFRelease
 
 static NSUInteger checks = 0, failures = 0;
 static void check(NSString *name, BOOL passed) {
@@ -128,6 +187,7 @@ static NSDictionary *call(PieceTextMetrics *module, BOOL candidates, NSString *t
   __block NSDictionary *result = nil; __block NSString *error = nil;
   dispatch_semaphore_t done = dispatch_semaphore_create(0);
   RCTPromiseResolveBlock resolve = ^(id value) {
+    if (profileCandidates) candidateProfile.resolvedAt = mach_absolute_time();
     if ([value isKindOfClass:NSDictionary.class]) result = value;
     else error = @"INVALID_RESULT";
     dispatch_semaphore_signal(done);
@@ -144,7 +204,10 @@ static NSDictionary *call(PieceTextMetrics *module, BOOL candidates, NSString *t
   }
   printf("STAGE callback_ready\n");
   *code = error;
-  return candidates ? decodeCandidates(result, code) : result;
+  uint64_t decodeStarted = mach_absolute_time();
+  NSDictionary *decoded = candidates ? decodeCandidates(result, code) : result;
+  if (profileCandidates) candidateProfile.decodeTicks = mach_absolute_time() - decodeStarted;
+  return decoded;
 }
 static BOOL validCandidates(NSDictionary *result, NSString *text) {
   if (![result[@"version"] isEqual:@"piece.native_candidates.v1"] ||
@@ -312,6 +375,16 @@ int main(void) {
       (unsigned long long)candidateProfile.creates.load(), (unsigned long long)candidateProfile.units.load(),
       candidateProfile.createTicks.load()*millisecondsPerTick, candidateProfile.typographicTicks.load()*millisecondsPerTick,
       candidateProfile.imageTicks.load()*millisecondsPerTick);
+    printf("mixed420_phase_profile queue_ms=%.3f glyph_and_group_ms=%.3f workers_wall_ms=%.3f pack_and_resolve_ms=%.3f test_decode_ms=%.3f substring_sum_ms=%.3f release_sum_ms=%.3f uptime_sum_ms=%.3f uptime_calls=%llu\n",
+      (candidateProfile.queueStarted.load()-candidateProfile.queuedAt.load())*millisecondsPerTick,
+      (candidateProfile.workersStarted.load()-candidateProfile.queueStarted.load())*millisecondsPerTick,
+      (candidateProfile.workersJoined.load()-candidateProfile.workersStarted.load())*millisecondsPerTick,
+      (candidateProfile.resolvedAt.load()-candidateProfile.workersJoined.load())*millisecondsPerTick,
+      candidateProfile.decodeTicks.load()*millisecondsPerTick,
+      candidateProfile.substringTicks.load()*millisecondsPerTick,
+      candidateProfile.releaseTicks.load()*millisecondsPerTick,
+      candidateProfile.uptimeTicks.load()*millisecondsPerTick,
+      (unsigned long long)candidateProfile.uptimeCalls.load());
     check(@"mixed420_complete_metrics", code == nil && validCandidates(mixedResult, mixedText));
     check(@"mixed420_uncached_equivalence", matchesUncachedCandidates(mixedResult, (RCTTextView *)bridge.uiManager.registry[@1]));
     RCTTextView *variants = makeView(@"AaAaAaAa", 48);
