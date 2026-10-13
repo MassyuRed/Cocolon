@@ -10,6 +10,8 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
+**最新作業は§67／current map §65.15です。source `f93f9108` のJS復号・禁則判定の重複削減を反映し、local763件を確認しました。実RNの420文字はrun38480929335の結果確認待ちです。前回§66の420文字timeoutを解消済みとはしていません。**
+
 **現在は入口§66／current map §65.14を優先します。source `ec5db637` はnative63件・JS758件を通過し、実RN4ケースと4枚PNGを確認しました。420文字は48→44→40→36ptの全候補計測・復号が返りましたが、36ptのB9開始前に全体8,118.417msでtimeoutとなり、未解消です。共有CF版のcrashは専用workerデータへ修正し、最新native/実RNでは再発しませんでした。次は候補の反復と最終復号を短縮し、36ptのB9・最終inspectionまで同じ8秒内へ収めることです。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
@@ -1254,3 +1256,17 @@ remote全文・親5ef1・変更1pathは一致確認済み。同環境read-only�
 旧共有CF版source5ef1のrun38475623262／RN job115565457118も完了し、joblogにsignal segvを確認しました。最初の3ケースだけが完了し、420以降は未完了です。symbolicated stackはjoblogになく、内部cache競合は引き続き仮説です。最新ec5db637はnative63件を完走し実RN全5ケースの結果を返し、今回のcrashは再発しませんでした。ただし全5ケース合格・全体8秒の達成ではありません。旧profile-only source59f7の実RNも4件成功・420文字8,094.463ms（size1）のtimeoutでした。
 
 次の本線は、全4fontのnative反復と最後の候補復号をさらに短縮し、36ptのB9・実Text描画・最終inspectionの時間を同じ8秒内に確保することです。全候補、bit同値、font順、全体deadlineを緩和しません。未測定のworker数変更・font間比例・候補省略を解決策として採用していません。現在sourceのJS758／native63は成功ですが、実RN全体は4成功・420文字未解消です。保存接続へはまだ進めません。正式renderer supplier→保存直前fit→通常初回保存→実機受入れのownerは§65.10を継承し、既存host/controller/API保存を再実装しません。default OFF、canSave/canExport=false、Draft/open/unmerged、STRUCTURE_MAP_DELTA_NONEを保持します。
+
+## 67. 2026-10-14 JST — JS復号とB9境界判定の反復削減
+
+source `f93f9108cc8e3fb798ebc0fb99dd8e916d57a145` は既存製品2＋test2pathです。前回実RNは全4fontの候補返却後、36pt B9の開始前に8,118.417msで停止しました。今回は同じ全候補を使う復号・計画側の重複処理を削減します。
+
+- `features/piece/pieceRenderer.js` はbase64の途中quartetと最終quartetを分離し、padding／末尾bitの判定を最後だけに行います。途中の全4文字の妥当性と出力長、非ASCII／途中paddingの拒否、全Float64値・全range復元を保持します。
+- `features/piece/pieceMeasuredWrap.js` は禁則を段落内の境界ごとに一度計算し、最短行数とB9で再利用します。全候補の検証・DP順序・得点式・終端境界の例外は保持します。数値5slotの検証を明示し、従来everyがskipし得た疎配列の欠損metricも拒否します。
+- `tests/piece-v2-renderer.test.js` と `tests/piece-v2-measured-wrap.test.js` に、padding全形のbit同値、途中quartet各位置の不正文字拒否、全oracleの逆順table一致、数値全slotの不正／欠損拒否、先頭句読点と末尾開き括弧の境界検査を追加しました。localの既存13suiteは763 PASS／FAIL0／SKIP0（Node24.19.0／TypeScript5.2.2）。native／Hermes性能の代用ではありません。
+
+同環境read-only補助review後、華恋が原典と差分を確認し、4pathのremote全文一致・親head・変更path集合を照合しました。native source／worker数／CoreText式／font順／8秒／最終inspection／workflow／依存は変更0です。CTTypesetterによる段落全体の再利用はsubstring外contextが変わり得るため採用していません。
+
+最新検証は[run38480929335](https://github.com/MassyuRed/Cocolon/actions/runs/38480929335)。実RN job115583041976、native job115583042506、JS job115583042448の完了結果を確認します。5件JSON・実画像・全体時間の取得前に420文字解消や全5件成功を主張しません。描画確認後の正式renderer供給→保存直前fit→通常初回保存→実機受入れは引き続き未完了です。
+
+必須前提・作業rule・全体構造01系・現行Piece map・weekly10/10 §5.5／12/18基準・前回txtを確認。System Context prepareは作業用sparse treeにtools.cocolon_contextがなくModuleNotFoundErrorで未成立、technical entryが許す原典直接読取りで継続しました。生成contextの成功は主張しません。STRUCTURE_MAP_DELTA_NONE（既存JS内部処理のみ）。default OFF、canSave/canExport=false、Draft/open/unmerged、DB/env/deploy/署名/配布/main merge効果0を保持します。

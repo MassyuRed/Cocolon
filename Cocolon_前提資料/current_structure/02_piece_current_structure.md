@@ -16,6 +16,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**最新作業は入口§67／本map §65.15です。source `f93f9108` のJS復号・禁則判定の重複削減を反映し、local763件を確認しました。実RNの420文字はrun38480929335の結果確認待ちです。前回§65.14の420文字timeoutを解消済みとはしていません。**
+
 **現在は入口§66／current map §65.14を優先します。source `ec5db637` はnative63件・JS758件を通過し、実RN4ケースと4枚PNGを確認しました。420文字は48→44→40→36ptの全候補計測・復号が返りましたが、36ptのB9開始前に全体8,118.417msでtimeoutとなり、未解消です。共有CF版のcrashは専用workerデータへ修正し、最新native/実RNでは再発しませんでした。次は候補の反復と最終復号を短縮し、36ptのB9・最終inspectionまで同じ8秒内へ収めることです。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
@@ -2604,3 +2606,11 @@ remote全文・親5ef1・変更1pathは一致確認済み。同環境read-only�
 旧共有CF版source5ef1のrun38475623262／RN job115565457118も完了し、joblogにsignal segvを確認しました。最初の3ケースだけが完了し、420以降は未完了です。symbolicated stackはjoblogになく、内部cache競合は引き続き仮説です。最新ec5db637はnative63件を完走し実RN全5ケースの結果を返し、今回のcrashは再発しませんでした。ただし全5ケース合格・全体8秒の達成ではありません。旧profile-only source59f7の実RNも4件成功・420文字8,094.463ms（size1）のtimeoutでした。
 
 次の本線は、全4fontのnative反復と最後の候補復号をさらに短縮し、36ptのB9・実Text描画・最終inspectionの時間を同じ8秒内に確保することです。全候補、bit同値、font順、全体deadlineを緩和しません。未測定のworker数変更・font間比例・候補省略を解決策として採用していません。現在sourceのJS758／native63は成功ですが、実RN全体は4成功・420文字未解消です。保存接続へはまだ進めません。正式renderer supplier→保存直前fit→通常初回保存→実機受入れのownerは§65.10を継承し、既存host/controller/API保存を再実装しません。default OFF、canSave/canExport=false、Draft/open/unmerged、STRUCTURE_MAP_DELTA_NONEを保持します。
+
+### 65.15 JS復号とB9境界判定の反復削減
+
+source `f93f9108cc8e3fb798ebc0fb99dd8e916d57a145` は `features/piece/pieceRenderer.js`、`features/piece/pieceMeasuredWrap.js` と対応test2pathです。base64の末尾処理を最後のquartetへ分離し、B9の禁則を段落境界ごとに一度計算して最短行数・wrap探索で再利用します。全候補・Float64値・全row検証・DP順序・得点式・終端例外を保持し、欠損metricの拒否を明確にしました。native／worker数／font順／8秒／最終inspection／workflow／依存は変更0。
+
+local13suiteは763 PASS／FAIL0／SKIP0。padding全形のbit同値、途中各位置の不正文字、逆順tableで全oracle一致、全数値slotの欠損／不正拒否、段落端の禁則例外を確認しました。4pathのGitHub全文・親fa862606・変更path集合は一致確認済み。同環境read-only補助reviewに重大指摘なし。詳細は入口§67です。
+
+[run38480929335](https://github.com/MassyuRed/Cocolon/actions/runs/38480929335)の実RN job115583041976／native job115583042506／JS job115583042448を確認中。実RNの5件JSON・画像・全体時間の確認が次の一作業で、420文字timeout解消・全5件成功は未成立です。正式renderer供給→保存直前fit→通常初回保存→実機受入れは描画確認後の残件。STRUCTURE_MAP_DELTA_NONE（既存内部処理のみ）、default OFF、canSave/canExport=false、Draft/open/unmerged、DB/env/deploy/署名/配布/main merge効果0を保持します。
