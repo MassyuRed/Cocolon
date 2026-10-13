@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v62",
+  "schema_version": "cocolon.piece.workstream_manifest.v63",
   "generated_at": "2026-10-13 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v61",
-    "predecessor_blob": "c1893a35c0e3a1642c597187ca4b663c58bdd689",
-    "predecessor_head": "545c7cc3476bdcd84e88624d29137e51089169d6",
-    "carry_forward": "Real RN four cases rendered and PNGs inspected; mixed 420-character case timed out at size0. Candidate bridge timing and identical mixed-text native benchmark added; run38379288880 in progress. No full render or formal admission acceptance."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v62",
+    "predecessor_blob": "5e78771a8b6bd49c288532bcccb9e529f35a1b27",
+    "predecessor_head": "6d20e1c10c427850cec5c2b8567e74507dbad631",
+    "carry_forward": "Mixed420 native-only computation reached 8000ms; exact attributed-substring reuse implemented preserving candidate coverage and numeric meaning. run38383082112 JS747 passed; native unit stopped at initial view_init before assertions; real RN five cases in progress. Admission remains unavailable."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "c1d8a25e7984a675a168e409a66ee06403973c5e",
-    "raw_sha256": "fa212054cea21d34c4f11b10e82e96d9f51f087d3884fe9336077b16899bbaba",
-    "utf8_bytes": 117181
+    "git_blob_sha1": "2fedbfe04cb1fb3525a564f8207bddf4166f8042",
+    "raw_sha256": "7632e6135ff69d406fceaf9afe28db05a4387921805f755dd692df0d4931adec",
+    "utf8_bytes": 117974
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -174,7 +174,7 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "545c7cc3476bdcd84e88624d29137e51089169d6",
+    "cocolon_pre_sync_head": "6d20e1c10c427850cec5c2b8567e74507dbad631",
     "mashos_api_head": "804beca66f9f02e18dc4522232478466f4d52b13",
     "current_user_visible_piece_shape": "CANDIDATE_NORMAL_INPUT_V2_SAVED_SOURCE_ONLY__TUTORIAL_NEXUS_LEGACY_REMAIN__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
@@ -240,12 +240,12 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "NATIVE_DEVICE_RENDERER_ADMISSION_THEN_SAVE_FIT_AND_BOUND_SAVE",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "REAL_RN_FOUR_CASES_VERIFIED__MIXED420_TIMEOUT_INVESTIGATION",
-    "current_map_section": "65.5",
+    "state": "NATIVE_CANDIDATE_MEMO_FIX_VERIFICATION_IN_PROGRESS",
+    "current_map_section": "65.6",
     "current_entry_section": "61",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
     "weekly_review_section": "5.5",
-    "first_unfinished_work": "Inspect run38379288880 bridge timing and identical mixed420 native benchmark; fix directly observed latency while retaining all candidates, 420 characters and 8-second deadline, then rerun full canvas before renderer/save fit admission.",
+    "first_unfinished_work": "Read run38383082112 native58 exact metric comparison, mixed420 timing and all five stable RN canvases. Keep failed or unverified cases distinct before renderer/save fit admission.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 4,
@@ -338,9 +338,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "d787aa216a8cbc4c2258339327dcd3ba6e526582",
-    "raw_sha256": "0ee61d20075e70259dd2ee32315239c2514f2f30cc1aa9e4ab426c278b1904a8",
-    "utf8_bytes": 358097
+    "git_blob_sha1": "09690806584133d97a185d7a9a1068dcac240123",
+    "raw_sha256": "e0736eba0b67e60a11b7e7d90b3908198a8d5ea5f0d1721d9a89b47111ad3ded",
+    "utf8_bytes": 362772
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -513,15 +513,16 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "REAL_RN_FOUR_CASES_VERIFIED__MIXED420_TIMEOUT_INVESTIGATION",
+    "classification": "NATIVE_CANDIDATE_DUPLICATE_COMPUTATION_FIX__VERIFICATION_IN_PROGRESS",
     "source_commits": [
       "2c7c554cf51cff38efc84a99df80565f736fe9d9",
       "5c501d9eaed60257b202de418c936a1f7acb3bf6",
       "5c685b4b658f5e08ed78039ea3ecd68761582e79",
       "1667ecd64a10345987b5fcb7be307f9ee315a0a1",
-      "545c7cc3476bdcd84e88624d29137e51089169d6"
+      "545c7cc3476bdcd84e88624d29137e51089169d6",
+      "6d20e1c10c427850cec5c2b8567e74507dbad631"
     ],
-    "product_source_changes": 0,
+    "product_source_changes": 1,
     "test_source_paths": 5,
     "workflow_paths": 1,
     "piece_documentation_paths": 3,
@@ -532,7 +533,8 @@
     "release_effect": 0,
     "product_acceptance": false,
     "automatic_progression": false,
-    "simulator_execution_attempts": 5
+    "simulator_execution_attempts": 6,
+    "native_only_reruns": 1
   },
   "b06_q3_context_fence": {
     "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
@@ -4344,7 +4346,7 @@
     "retry_changed_spec_checksums": 66,
     "lock_verification_relaxed": false,
     "runner_restore_commit": "5c685b4b658f5e08ed78039ea3ecd68761582e79",
-    "current_state": "IN_PROGRESS_TIMING_DIAGNOSTIC",
+    "current_state": "IN_PROGRESS_FIX_VERIFICATION",
     "previous_current_run": 38371898401,
     "previous_current_job": 115210663296,
     "previous_current_state": "FAILED_AFTER_XCTEST_STARTED__NULL_CAPTURE_REJECTED__ZERO_REPORTS",
@@ -4354,34 +4356,72 @@
     "duplicate_objc_classes_observed": 781,
     "null_canvas_origin_identified": false,
     "harness_fix_commit": "1667ecd64a10345987b5fcb7be307f9ee315a0a1",
-    "current_run": 38379288880,
+    "current_run": 38383082112,
     "latest_completed_js_passed": 747,
     "latest_completed_native_passed": 44,
-    "latest_completed_max420_candidate_elapsed_ms": 1546.229,
-    "current_job": 115235392066,
+    "latest_completed_max420_candidate_elapsed_ms": 2049.657,
+    "current_job": 115248073429,
     "diagnostic_source_commit": "545c7cc3476bdcd84e88624d29137e51089169d6",
-    "latest_completed_run": 38375322124,
-    "latest_completed_job": 115222124418,
-    "latest_completed_state": "FOUR_CASES_NATIVE_CHECKED__MIXED420_MEASUREMENT_TIMEOUT",
-    "latest_completed_artifact_id": 11801923146,
-    "latest_completed_artifact_sha256": "aaa4b8ec0446335aacba0ab2ca5cc801b949f22270d44d0da41447bb9ba6311e",
-    "latest_completed_xctest_assertion_failures": 5,
+    "latest_completed_run": 38379288880,
+    "latest_completed_job": 115235392066,
+    "latest_completed_state": "THREE_CASES_NATIVE_CHECKED__MIXED420_TIMEOUT__QUOTE_CAPTURE_DURING_REINSPECTION",
+    "latest_completed_artifact_id": 11803229117,
+    "latest_completed_artifact_sha256": "ace2d00d8c2e1a7198b702172eddf02f7fffd1b6bbc17c9f9dda7655a0b87553",
     "latest_completed_case_reports": 5,
     "latest_completed_pngs": 4,
     "latest_completed_duplicate_objc_warnings": 0,
     "latest_completed_export_compile_steps": "SKIPPED_NO_DEPENDENCY_DELTA",
-    "mixed420_full_canvas_elapsed_ms": 8094.264208,
+    "mixed420_full_canvas_elapsed_ms": 8095.284334,
     "mixed420_timeout_size_index": 0,
-    "mixed420_root_cause_identified": false,
+    "mixed420_root_cause_identified": true,
     "all_five_cases_passed": false,
     "verified_case_elapsed_ms": {
+      "essay_paragraphs": 733.504458,
+      "declaration_no_brand": 251.407792,
+      "saved_essay_canvas": 335.540875
+    },
+    "diagnostic_native_job": 115235392168,
+    "diagnostic_native_state": "FAILED_BEFORE_ASSERTIONS__INITIAL_VIEW_INIT_STALL_ALARM",
+    "mixed420_direct_native_duration_measured": true,
+    "current_native_job": 115248073323,
+    "latest_completed_native_failed": 1,
+    "mixed420_failure_stage": "NATIVE_CANDIDATE_COMPUTATION_BEFORE_BRIDGE_RETURN_OR_JS_PLANNER",
+    "mixed420_direct_native_elapsed_ms": 8000.101,
+    "mixed420_candidate_bridge_rejection_elapsed_ms": 8056.494625,
+    "diagnostic_native_retry_job": 115244155034,
+    "diagnostic_native_retry_state": "COMPLETE_45_ASSERTIONS__44_PASS_1_MIXED420_TIMEOUT",
+    "diagnostic_native_retry_attempt": 2,
+    "quote_first_native_checked_ms": 2915.186542,
+    "quote_capture_phase": "geometry_checked",
+    "quote_capture_ms": 3110.053875,
+    "quote_permanent_instability_proven": false,
+    "previous_verified_case_elapsed_ms": {
       "essay_paragraphs": 524.520292,
       "quote_unicode": 674.1165,
       "declaration_no_brand": 252.163875,
       "saved_essay_canvas": 302.969
     },
-    "diagnostic_native_job": 115235392168,
-    "diagnostic_native_state": "FAILED_BEFORE_ASSERTIONS__INITIAL_VIEW_INIT_STALL_ALARM",
-    "mixed420_direct_native_duration_measured": false
+    "candidate_memo_fix": {
+      "source_commit": "6d20e1c10c427850cec5c2b8567e74507dbad631",
+      "full_attributed_equality_required": true,
+      "call_local_only": true,
+      "max_retained_utf16_units": 4194304,
+      "max_retained_keys": 16384,
+      "complete_range_coverage_retained": true,
+      "numeric_contract_unchanged": true,
+      "native_assertions_expected": 58,
+      "native_exact_equivalence_verified": false,
+      "local_renderer_b9_passed": 79,
+      "stable_capture_clock_reset": false,
+      "all_five_rn_cases_verified": false,
+      "arbitrary_420_character_or_device_performance_guaranteed": false
+    },
+    "latest_completed_xctest_assertion_failures": 7,
+    "current_native_state": "FAILED_BEFORE_ASSERTIONS__INITIAL_VIEW_INIT_STALL_ALARM",
+    "current_native_assertions_executed": 0,
+    "current_js_job": 115248073281,
+    "current_js_passed": 747,
+    "current_js_failed": 0,
+    "current_js_skipped": 0
   }
 }

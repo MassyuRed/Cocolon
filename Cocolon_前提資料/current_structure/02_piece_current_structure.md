@@ -2323,7 +2323,7 @@ RN commit `f026adb805ae6795845e22bef14edb6ee301becd`。既存 `screens/input/Inp
 全体設計・全ファイル地図・最新weekly10/10 §5.5を原本確認した。SystemContext prepareは基準commitの祖先条件で終了したため、既定の原本直接読取へ戻し、凍結済みcontextを更新していない。入口§60／本map§64／manifest v59へ今回の結果と再開点を同期する。製品構造変更はない（STRUCTURE_MAP_DELTA_NONE）。API `804beca`、host `f026adb`、公開目標2026-12-18、Draft/open/unmerged、default OFF、automatic_progression=falseを継承。製品source・API・DB・env・deploy・activation・native app build・署名／配布・main mergeへの変更は0。
 
 
-## 65. 2026-10-13 — 実RNのPiece全体描画へ進行（420文字の時間切れを確認）
+## 65. 2026-10-13 — 実RNのPiece全体描画へ進行（文字計測修正の検証中）
 
 ### 65.1 変更対象と範囲
 
@@ -2396,3 +2396,22 @@ source `1667ecd` の実RN job `115222124418` はbuild開始09:21:55 UTC／完了
 source `545c7cc3476bdcd84e88624d29137e51089169d6` はtest2pathだけを変更した。実RN entryにnative候補呼出の開始／解決・拒否／所要時間／返却行数とphase遷移を記録し、元の値・エラーは保持する。localでは同一値／同一errorをそのまま返すことを確認した。既存native44は保持し、RNと同じ混在文420文字の候補計測を1件追加した。文字数・8秒期限・描画assertionは緩和しない。製品source変更なし、STRUCTURE_MAP_DELTA_NONE。
 
 [run38379288880](https://github.com/MassyuRed/Cocolon/actions/runs/38379288880)、実RN job `115235392066` は調査の再実行中。native job `115235392168` は09:54:32.890 UTCの最初のview_initから戻らず、09:56:02.885に90秒alarmで終了した。assertion開始前なので追加した混在文の計測も未実行であり、45件失敗・候補計測が遅いという意味ではない。実RN jobの結果を先に読み、必要ならworkflow完了後にnative jobを再実行する（稼働中のjob再実行APIはalready runningで拒否された）。次は実際に得られた段階時間から遅い処理を特定して修正し、同じ420文字で全体描画を確認する。候補計測の単体合格を全体合格へ置き換えない。その後の正式renderer供給・保存直前fit・通常画面の初回保存・実機確認は§65.4末尾を継承する。
+
+
+### 65.6 混在文420文字のnative候補計測timeoutを修正
+
+source `545c7cc` のrun `38379288880` attempt1／実RN job `115235392066` はfailure。artifact `11803229117`（82,070,853 bytes、SHA256 `ace2d00d8c2e1a7198b702172eddf02f7fffd1b6bbc17c9f9dda7655a0b87553`）のdigestを確認し、5ケースJSONとstdoutを実読した。短文733.504ms／宣言251.408ms／保存済み335.541msはnative_checked。420文字は8,095.284ms、size0、候補Promise pending、planなしでtimeoutとなった。同Promiseの後続拒否ログは8,056.495msで、JS plannerには到達していない。
+
+Unicodeは候補75.690msで返却され、一度2,915.187msでnative_checkedになったが、撮影時3,110.054msではgeometry_checked／inspectionなし／canvas無効となり、PNGも黒い状態を目視確認した。前runの4ケース成功を撤回する意味ではなく、今回のrunは3ケース成功である。検査は最初のready観測から2RAFを待つだけで、その間のsnapshot変更を再確認していなかった。製品は変更されたgeometryを再検査する設計で、同sourceの局所再現でも有効なline幅変更→geometry_checked→native_checkedへ復帰した。永久loop・文字位置調整の不具合はまだ確定していない。製品の配置・許容誤差を推測で変更しない。
+
+workflow完了後にnative jobを1回だけ再実行し、attempt2 job `115244155034` はassertionまで完了した。`NATIVE_CHECKS=45 PASS=44 FAIL=1 SKIP=0`。既存「あ」420文字は2,049.657msで通過し、追加した同じ混在文420文字は8,000.101msでnative候補の期限に達した。よって今回の混在文は、bridge転送やJS plannerを除いても候補計測だけで8秒を使い切る。attempt1のview初期化停止とは別問題である。
+
+source `6d20e1c10c427850cec5c2b8567e74507dbad631` の変更は3path。
+
+- 製品 `ios/tempCocolon/PieceTextMetrics.mm`：1回のimmutable snapshot内で、文字と全attributesが完全一致するsubstringの検証済み5数値だけを再利用する。文字列だけが同じ場合は再利用しない。全88,410候補と順序、start/end、全文glyph検査、数値・空白inkの検証、各候補の8秒判定を保持する。保持keyは16,384件／合計4,194,304 UTF-16 unitsまでで、超過時は登録せず従来計算へ戻る。これは文字部分の論理予算であり、Foundation全体のRSS上限ではない。別本文／font／callへのcache持越しはない。
+- `tests/native/piece-text-metrics-ios.mm`：既存45assertionを保持し、10種の文字fixtureと2種の420文字に旧方式の独立したuncached計算を追加。全候補5数値のdouble bit列を完全比較する。同じ文字に異なるkern／baseline／同サイズ別fontを設定した例も比較する。計13追加、計58assertionの実行結果は次runで確認する。
+- `tests/native/piece-rn-canvas-entry.js`：2RAF後にも同じCard／measurement参照であることを確認し、変わっていれば元の開始時刻のままpollへ戻す。8秒の描画assertion、10秒の最終打切り、5入力を保持。局所実行で再検査中は撮影せず、安定後に撮影し、10秒を超えた場合は失敗結果の確定へ進むことを確認した。
+
+local既存renderer／B9 suitesは79 PASS／FAIL0／SKIP0、diff checkも通過。nativeAPI shape／数値意味／font候補／描画配置・recipeは変更していない。renderer prototype.v3とnative_candidates.v1を保持し、全候補数値同値と実画像は次runで確認する。同環境read-only補助reviewに重大指摘なし。独立Pro受入れとはしない。
+
+[run38383082112](https://github.com/MassyuRed/Cocolon/actions/runs/38383082112)のJS job `115248073281` は747 PASS／FAIL0／SKIP0、Android source compileはsuccess。export2jobは依存差分なしでlibrary compile stepをskipした。native job `115248073323` はcompileを通過したが、10:27:43.078 UTCの最初のview_initから戻らず、10:29:13.022に90秒alarmで終了。assertion／追加したuncached比較は未実行であり、58件失敗とはしない。実RN job `115248073429` は実行中。次は全5ケースの安定した描画と8秒以内の全体時間を実読し、workflow完了後にnative単体jobを再実行して58件のbit同値・混在420文字単体時間を確認する。反復する合成文章での改善を任意の420文字・実機性能の全面保証へ広げない。画像、正式renderer supplier、保存直前fit、通常InputScreen保存、実機受入れは確認範囲を分けて進める。
