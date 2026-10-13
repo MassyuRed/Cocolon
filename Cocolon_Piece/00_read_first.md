@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§59／current map §63を優先します。RN `f026adb` で初回保存Modalから既存保存controllerへの親画面接続を実装し、CI 747件が成功しました。接続は正式な描画判定の供給を必須とし、現在のInputScreenはその供給元を持ちません。通常アプリでの初回保存・正式renderer admission・保存前fit・実機は未完了です。API `804beca` と既存の保存結果・再確認・本人履歴は継承します。**
+**現在は§60／current map §64を優先します。`502c875` のiOS simulator実行で、前回未判定だったnative描画検査44件がすべて成功し、既存JS747件も成功しました。前回の停止は再現せず、原因は未特定です。次は実RN上のPiece全体描画・全体処理時間の確認から、正式renderer admissionと保存前fitへ進みます。`f026adb` の条件付き初回保存hostは接続済みですが、InputScreenに正式判定供給元がなく、通常アプリの初回保存・実機受入れは未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1134,3 +1134,12 @@ RN commit `f026adb805ae6795845e22bef14edb6ee301becd`。既存 `screens/input/Inp
 次はB9の実機描画同等性・glyph/ink/性能、正式renderer admissionの供給元、保存直前のfitと同じ候補/tokenへの結合、通常画面での初回保存・本人詳細の確認。画像保存共有・形式変更・Nexus公開読取/切替・tutorial/旧APIを含むM5残差・稼働接続も未完了。画像共有の全完成を初回実機確認の追加前提にしない。単にMashの実機確認待ちとはしない。
 
 最新weekly `Cocolon_Weekly_Review_20261010.md` §5.5、2026-12-18公開目標、default OFF、Draft/open/unmerged、automatic_progression=falseを維持する。今回の稼働DB・env・deploy・activation・native app build・署名・配布・main mergeへの効果は0。既存API `804beca` の候補構成限定の旧4write除去と通常legacy構成保持を継承し、API変更・検査再実行は行っていない。
+
+
+## 60. 2026-10-13 — 未判定だったiOS描画44項目の実行確認
+
+source `502c87527b3a28961ae3138754fe46d3cb731e08` は既存 `tests/native/piece-text-metrics-ios.mm` だけに進行出力・stdout非buffer化・main開始後90秒の実行上限を追加した。44件のfixture・判定式、製品native source、workflowは変更していない。[CI38362941699](https://github.com/MassyuRed/Cocolon/actions/runs/38362941699)の完了ログを取得し、iOS 26.2 simulatorで **44 PASS／FAIL0／SKIP0**、JSは別集合 **747 PASS／FAIL0／SKIP0** を確認した。製品コードの追加実装ではなく、前回未判定だったnative計測・描画範囲の技術確認である。
+
+前回の停止は再現せず、原因は未特定。起動完了出力からmainの最初の出力まで約95.3秒のログ上の間隔があり、起動処理だけの時間とは断定しない。420文字の候補計測は1,703.604msだったが、Piece全体の時間ではない。実UIKit/TextKit/CoreTextを使う一方、RN bridge/view境界は代替であり、実RN描画・実機・正式renderer admissionには昇格しない。詳細と各jobの範囲はcurrent map §64。
+
+次は既存 `PieceVisualCard` の実RN描画で、同じ本文・recipeから候補計測→B9行選択→全行の最終検査→固定canvas配置を確認する。段落・branding・長文を含む全体描画と全体処理時間を確認し、その結果に基づく正式renderer判定、保存直前fit、同じpreview/tokenへの結合へ進む。既存host/controllerを再実装せず、`native_checked`だけで保存を許可しない。通常InputScreenの正式判定供給は未接続。画像共有全完成を初回実機確認の追加条件にしない。weekly10/10 §5.5と12/18目標を継承する。

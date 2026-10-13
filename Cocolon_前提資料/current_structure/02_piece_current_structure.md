@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新の作業記録は§63。RN `f026adb` で初回保存の親画面から既存controllerへの条件付き接続を反映し、CI 747件が成功しました。正式判定がない状態では保存を許可しません。現在のInputScreenへの正式描画判定供給、保存前fit、通常アプリの初回保存、実機、M5全面は未完了です。API `804beca` と§61の本人履歴入口を継承します。**
+**最新の作業記録は§64。`502c875` のiOS simulator実行でnative描画検査44件と既存JS747件が成功しました。前回の停止は再現せず、原因は未特定です。実RN上のPiece全体描画・全体処理時間は未確認で、正式renderer admission、保存前fit、通常アプリの初回保存、実機、M5全面も未完了です。`f026adb` の条件付き初回保存host、API `804beca`、§61の本人履歴入口を継承します。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -2294,3 +2294,30 @@ RN commit `f026adb805ae6795845e22bef14edb6ee301becd`。既存 `screens/input/Inp
 次はB9の実機描画同等性・glyph/ink/性能、正式renderer admissionの供給元、保存直前のfitと同じ候補/tokenへの結合、通常画面での初回保存・本人詳細の確認。画像保存共有・形式変更・Nexus公開読取/切替・tutorial/旧APIを含むM5残差・稼働接続も未完了。画像共有の全完成を初回実機確認の追加前提にしない。単にMashの実機確認待ちとはしない。
 
 最新weekly `Cocolon_Weekly_Review_20261010.md` §5.5、2026-12-18公開目標、default OFF、Draft/open/unmerged、automatic_progression=falseを維持する。今回の稼働DB・env・deploy・activation・native app build・署名・配布・main mergeへの効果は0。既存API `804beca` の候補構成限定の旧4write除去と通常legacy構成保持を継承し、API変更・検査再実行は行っていない。
+
+
+## 64. 2026-10-13 — iOS native描画検査の未判定を解消
+
+### 64.1 今回の差分と検証
+
+基準head `06935d2fa8e5f8fa30fb6c58fe9569e02c876f95` の前回run `38357241932` はsimulator起動完了後に検査結果が出ずcancelledとなり、44件は未判定だった。今回source `502c87527b3a28961ae3138754fe46d3cb731e08` は `tests/native/piece-text-metrics-ios.mm` に段階出力・stdout非buffer化・main開始後90秒のalarmだけを追加した。44件のfixture・判定式・合格基準、製品 `PieceTextMetrics.mm`、workflowは保持した。view/font/layout生成やcallbackの停止を推測で修正していない。
+
+[run38362941699](https://github.com/MassyuRed/Cocolon/actions/runs/38362941699)のsource headと完了ログを照合した。
+
+| 対象 | 結果と範囲 |
+| --- | --- |
+| iOS job `115181218478` | iOS 26.2 (23C54) simulator。`NATIVE_CHECKS=44 PASS=44 FAIL=0 SKIP=0`。10種の文字fixtureの候補計測・mounted inspection・独立rasterのink包囲、grapheme境界、拒否条件、420文字候補を確認。実UIKit/TextKit/CoreText、RN bridge/view境界は代替。 |
+| 420文字候補計測 | `max420_candidate_elapsed_ms=1703.604`。候補計測単体であり、全行の描画・inspect・配置を含む全体時間や実機性能合格ではない。 |
+| JS job `115181218644` | 747 PASS／FAIL0／SKIP0。44件とは別集合。既存747へ新規件数を加算しない。 |
+| Android bridge job `115181218427` | source compile success。Android端末描画の確認ではない。 |
+| export Android／iOS Pods jobs `115181218327`／`115181218474` | job success。ただし今回の依存差分はなくlibrary compile stepはscopeどおりskip。前回のlibrary compile成功と今回の再実行を混同しない。 |
+
+起動完了ログ07:33:06.811 UTCから最初のmain出力07:34:42.118 UTCまで約95.307秒のログ上の間隔がある。ログ配送も含み得るため起動処理だけの所要時間とは断定しない。alarmはmainの中で開始するため、この間隔やmain以前を制限しない。今回はalarm発火なく全検査が完了し、前回の停止は再現しなかった。停止原因の確定や製品側の不具合修正を主張しない。同環境read-only補助reviewも同結論であり、独立Pro/Ultra正式受入れではない。
+
+### 64.2 再開位置
+
+既存 `components/piece/PieceVisualCard.js` を実RNで描画し、同じ本文・recipeによる候補計測→B9行選択→全行の最終検査→固定canvas配置と全体処理時間を確認する。既存PCE-5/PCE-7の段落・branding・長文を含める。shim検査では実mounted Text・全体画像の配置・実機性能を代替できない。起動診断や別validatorを追加し続けず、この既存製品経路へ戻る。
+
+確認したrendererに基づく正式判定と保存直前fitを同じpreview/tokenへ結び、既存 `isSaveAdmitted` と初回保存host/controllerへ接続する。`native_checked`と今回の44 PASSだけでは許可しない。通常InputScreenへの正式判定供給、通常アプリの初回保存、実機受入れは未完了。既存結果表示・同key再確認・本人detailを再実装しない。画像保存共有、形式変更、Nexus公開切替、M5残差、稼働構成も継承し、共有全完成を初回実機確認の前提にしない。
+
+全体設計・全ファイル地図・最新weekly10/10 §5.5を原本確認した。SystemContext prepareは基準commitの祖先条件で終了したため、既定の原本直接読取へ戻し、凍結済みcontextを更新していない。入口§60／本map§64／manifest v59へ今回の結果と再開点を同期する。製品構造変更はない（STRUCTURE_MAP_DELTA_NONE）。API `804beca`、host `f026adb`、公開目標2026-12-18、Draft/open/unmerged、default OFF、automatic_progression=falseを継承。製品source・API・DB・env・deploy・activation・native app build・署名／配布・main mergeへの変更は0。
