@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は入口§62／current map §65.10を優先します。byte列受渡しのrun38433766446は4ケース通過、420文字は次のfont候補へ進んだものの全体8,111.817msで時間切れでした。source `6be0bed` で完全一致候補を事前に分類し最大4workerで独立計測する修正を反映。run38437753643のnative59件と実RN5ケースを確認中です。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
+**現在は入口§62／current map §65.10を優先します。byte列受渡しのrun38433766446は4ケース通過、420文字は次のfont候補へ進んだものの全体8,111.817msで時間切れでした。source `6be0bed` で完全一致候補を事前に分類し最大4workerで独立計測する修正を反映。run38437753643のnative59件は全てbit同値確認まで成功し、実RN5ケースは確認中です。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -2503,3 +2503,5 @@ CoreTextの個別関数のthread safetyとlayout objectを各操作内へ隔離�
 local83 PASS／FAIL0／SKIP0、diff check成功。同環境のread-only reviewに重大指摘なし。source exact3fileのfresh remote全文・blob・path集合・parent96baac7を照合した。[run38437753643](https://github.com/MassyuRed/Cocolon/actions/runs/38437753643)のnative job115436093723と実RN job115436093716は確認中。native59のbit同値、混在420文字の4fontを含む全体時間、全5画像を実結果で判定する。
 
 正式renderer supplier／保存直前fit／通常InputScreen初回保存／実機受入れは未完了。次の接続ownerはCardの同一mount/世代/plan/inspection→Modalの同じpreview/token→hostの既存isSaveAdmitted→InputScreenの正式supplier。既存Controller/API保存は再実装しない。これらを今回のnative_checkedで正式受入れしたとはしない。weekly10/10 §5.5と12/18目標を継承。default OFF、Draft/open/unmerged、STRUCTURE_MAP_DELTA_NONE、稼働DB/env/deploy/署名/配布/main merge効果0。
+
+§65.10 native確認：同source/runのnative job115436093723は59 PASS／FAIL0／SKIP0。混在420文字4,524.926ms・全88,410候補bit同値、「あ」420文字633.233ms、非均一属性反復を含む全14fixtureの旧計算比較を通過した。CoreText集計は作成11,382回／2,320,415 UTF-16 units／作成4,330.487ms／幅0.767ms／ink1,175.945ms。並列操作の時間の和であり、wall-clockや単独の短縮効果ではない。JS job115436093608は751 PASS／FAIL0／SKIP0。実RN job115436093716は確認中で、全体8秒・全5ケース・実機・正式受入れはまだ未成立。

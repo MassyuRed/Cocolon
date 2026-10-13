@@ -9,13 +9,13 @@
     "predecessor_schema_version": "cocolon.piece.workstream_manifest.v66",
     "predecessor_blob": "6fad893398b6e38b3b8dc0f56af14143bb186b12",
     "predecessor_head": "96baac7c99c1c1efd040e3285c654025046d35d0",
-    "carry_forward": "R10 lossless transport retained four canvases but mixed420 timed out during second font. Bounded independent candidate workers published; native59 and actual RN verification in progress. Formal admission/save/device remain unavailable."
+    "carry_forward": "R10 lossless transport retained four canvases but mixed420 timed out during second font. R11 bounded candidate workers passed native59 including bit equality; full RN verification remains in progress. Formal admission/save/device remain unavailable."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "90ea17a9b71bb038fb50591ff3e4510b0714587d",
-    "raw_sha256": "4d6f864c00dddcda4828083117b16a52b5b3aec7d16f0e526e8c1a0f474ace58",
-    "utf8_bytes": 124083
+    "git_blob_sha1": "b833a61daaef38ceb9a1b99708880ec812f00fc8",
+    "raw_sha256": "66049b168dde1edd88c1e5e4d16370f40325375e326fc0f75c9082f573db6563",
+    "utf8_bytes": 124528
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -240,12 +240,12 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "NATIVE_DEVICE_RENDERER_ADMISSION_THEN_SAVE_FIT_AND_BOUND_SAVE",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "BOUNDED_PARALLEL_CANDIDATES__NATIVE59_AND_FULL_RN_PENDING",
+    "state": "NATIVE59_EXACT_PARALLEL_METRICS_VERIFIED__FULL_RN_PENDING",
     "current_map_section": "65.10",
     "current_entry_section": "62",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
     "weekly_review_section": "5.5",
-    "first_unfinished_work": "Read run38437753643 native59 exact metric comparisons and all five actual RN results, including adapter/B9 and fallback timings; preserve full eight-second deadline. Then formal renderer/save fit/device admission.",
+    "first_unfinished_work": "Read run38437753643 actual RN five-case canvas and adapter/B9/fallback timing. Current native59 exact comparisons passed; total eight-second render remains pending. Then formal renderer/save fit/device admission.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 4,
@@ -338,9 +338,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "6d5404a4c288ad7cd59fcccbd0b41f76c44ec3dc",
-    "raw_sha256": "8b8a94bff30aef6e1c010f90819584a31603b08e36349fb71e373b114dfcf60e",
-    "utf8_bytes": 380511
+    "git_blob_sha1": "a8ad764d7cdeeeeb19041e9d29d60d051d2069fb",
+    "raw_sha256": "9150ef240728bc231226793aae503de25a328ab70ef6cac618f53367e4048ba3",
+    "utf8_bytes": 381165
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -513,7 +513,7 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "BOUNDED_INDEPENDENT_CANDIDATE_WORKERS__VERIFICATION_IN_PROGRESS",
+    "classification": "BOUNDED_CANDIDATE_WORKERS_NATIVE59_VERIFIED__FULL_RN_PENDING",
     "source_commits": [
       "2c7c554cf51cff38efc84a99df80565f736fe9d9",
       "5c501d9eaed60257b202de418c936a1f7acb3bf6",
@@ -4351,7 +4351,7 @@
     "retry_changed_spec_checksums": 66,
     "lock_verification_relaxed": false,
     "runner_restore_commit": "5c685b4b658f5e08ed78039ea3ecd68761582e79",
-    "current_state": "BOUNDED_PARALLEL_CANDIDATES__NATIVE59_AND_REAL_RN_PENDING",
+    "current_state": "NATIVE59_EXACT_METRICS_PASSED__REAL_RN_IN_PROGRESS",
     "previous_current_run": 38371898401,
     "previous_current_job": 115210663296,
     "previous_current_state": "FAILED_AFTER_XCTEST_STARTED__NULL_CAPTURE_REJECTED__ZERO_REPORTS",
@@ -4361,7 +4361,7 @@
     "current_run": 38437753643,
     "latest_completed_js_passed": 751,
     "latest_completed_native_passed": 59,
-    "latest_completed_max420_candidate_elapsed_ms": 165.636,
+    "latest_completed_max420_candidate_elapsed_ms": 633.233,
     "current_job": 115436093716,
     "diagnostic_source_commit": "545c7cc3476bdcd84e88624d29137e51089169d6",
     "latest_completed_run": 38433766446,
@@ -4389,7 +4389,7 @@
     "current_native_job": 115436093723,
     "latest_completed_native_failed": 0,
     "mixed420_failure_stage": "FIRST_FONT_PLAN_REJECTED__SECOND_FONT_CANDIDATES_PENDING_AT_TOTAL_TIMEOUT",
-    "mixed420_direct_native_elapsed_ms": 3045.567,
+    "mixed420_direct_native_elapsed_ms": 4524.926,
     "mixed420_candidate_bridge_rejection_elapsed_ms": null,
     "diagnostic_native_retry_job": 115244155034,
     "diagnostic_native_retry_state": "COMPLETE_45_ASSERTIONS__44_PASS_1_MIXED420_TIMEOUT",
@@ -4425,8 +4425,8 @@
       "mixed420_timeout_resolved": false
     },
     "latest_completed_xctest_assertion_failures": 5,
-    "current_native_state": "IN_PROGRESS",
-    "current_native_assertions_executed": 0,
+    "current_native_state": "SUCCESS",
+    "current_native_assertions_executed": 59,
     "previous_current_js_job": 115248073281,
     "previous_current_js_passed": 747,
     "previous_current_js_failed": 0,
@@ -4464,8 +4464,8 @@
     },
     "current_native_assertions_expected": 59,
     "mixed420_root_cause_scope": "Lossless transport reaches second font; native call and remaining adapter/B9/fallback costs still require total-time verification.",
-    "latest_completed_native_run": 38390527878,
-    "latest_completed_native_job": 115272925963,
+    "latest_completed_native_run": 38437753643,
+    "latest_completed_native_job": 115436093723,
     "latest_completed_max420_candidate_scope": "HOMOGENEOUS_HIRAGANA_A_420_NOT_MIXED_TEXT",
     "uniform_attributes_comparison": {
       "source_commit": "ff386719fcd6bddb4809d6557901c148d61298b4",
@@ -4583,10 +4583,28 @@
       "run": 38437753643,
       "native_job": 115436093723,
       "rn_job": 115436093716,
-      "state": "IN_PROGRESS",
-      "native_exact_equivalence_verified": false,
+      "state": "NATIVE59_EXACT_METRICS_PASSED__REAL_RN_IN_PROGRESS",
+      "native_exact_equivalence_verified": true,
       "full_canvas_timeout_resolved": false,
-      "local_renderer_b9_passed": 83
+      "local_renderer_b9_passed": 83,
+      "native_passed": 59,
+      "native_failed": 0,
+      "native_skipped": 0,
+      "uncached_equivalence_passed_cases": 14,
+      "homogeneous420_ms": 633.233,
+      "mixed420_ms": 4524.926,
+      "js_job": 115436093608,
+      "js_passed": 751,
+      "js_failed": 0,
+      "js_skipped": 0,
+      "coretext_profile": {
+        "creates_including_full": 11382,
+        "utf16_units": 2320415,
+        "create_ms": 4330.487,
+        "typographic_ms": 0.767,
+        "image_ms": 1175.945,
+        "times_are_parallel_operation_sums": true
+      }
     }
   }
 }
