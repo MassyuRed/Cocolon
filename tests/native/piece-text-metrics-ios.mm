@@ -4,6 +4,7 @@
 #import "piece-ios-react-shim.h"
 #include <math.h>
 #include <stdio.h>
+#include <unistd.h>
 @implementation RCTBridge
 @end
 @implementation RCTUIManager
@@ -25,20 +26,27 @@ static void check(NSString *name, BOOL passed) {
   printf("%s %s\n", passed ? "PASS" : "FAIL", name.UTF8String); fflush(stdout);
 }
 static RCTTextView *makeView(NSString *text, CGFloat size) {
+  printf("STAGE view_init\n");
   RCTTextView *view = [[RCTTextView alloc] initWithFrame:CGRectMake(0, 0, 888, 140)];
+  printf("STAGE view_ready\n");
   view.fixtureAttached = YES; view.fixtureContentFrame = view.bounds;
   NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
   paragraph.minimumLineHeight = ceil(size * 1.55);
   paragraph.maximumLineHeight = paragraph.minimumLineHeight;
   paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+  printf("STAGE font_init\n");
+  UIFont *font = [UIFont systemFontOfSize:size];
+  printf("STAGE font_ready\n");
   view.fixtureStorage = [[NSTextStorage alloc] initWithString:text attributes:@{
-    NSFontAttributeName: [UIFont systemFontOfSize:size], NSForegroundColorAttributeName: UIColor.blackColor,
+    NSFontAttributeName: font, NSForegroundColorAttributeName: UIColor.blackColor,
     NSParagraphStyleAttributeName: paragraph }];
   NSLayoutManager *layout = [NSLayoutManager new];
   NSTextContainer *container = [[NSTextContainer alloc] initWithSize:view.bounds.size];
   container.lineFragmentPadding = 0; container.maximumNumberOfLines = 0;
   [layout addTextContainer:container]; [view.fixtureStorage addLayoutManager:layout];
+  printf("STAGE layout_init\n");
   [layout ensureLayoutForTextContainer:container];
+  printf("STAGE layout_ready\n");
   return view;
 }
 static NSDictionary *call(PieceTextMetrics *module, BOOL candidates, NSString *text, double size, NSString **code) {
@@ -52,11 +60,14 @@ static NSDictionary *call(PieceTextMetrics *module, BOOL candidates, NSString *t
   RCTPromiseRejectBlock reject = ^(NSString *value, __unused NSString *message, __unused NSError *cause) {
     error = value; dispatch_semaphore_signal(done);
   };
+  printf("STAGE %s_call\n", candidates ? "candidate" : "inspection");
   if (candidates) [module measureCandidates:@1 text:text fontSize:size resolver:resolve rejecter:reject];
   else [module inspect:@1 text:text fontSize:size resolver:resolve rejecter:reject];
+  printf("STAGE callback_wait\n");
   if (dispatch_semaphore_wait(done, dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC)) != 0) {
     *code = @"TEST_CALLBACK_TIMEOUT"; return nil;
   }
+  printf("STAGE callback_ready\n");
   *code = error; return result;
 }
 static BOOL validCandidates(NSDictionary *result, NSString *text) {
@@ -123,6 +134,11 @@ static BOOL inkEnclosesPaint(RCTTextView *view, NSDictionary *inspection) {
   return enclosed;
 }
 int main(void) {
+  // Diagnose startup/UI work before the first assertion, even when simctl
+  // pipes stdout. The alarm bounds a synchronous UIKit stall in this test only.
+  setvbuf(stdout, NULL, _IONBF, 0);
+  alarm(90);
+  printf("STAGE main_entered\n");
   @autoreleasepool {
     printf("iOS native metrics source test; synthetic RN boundary; real UIKit/TextKit/CoreText\n");
     printf("OS=%s\n", NSProcessInfo.processInfo.operatingSystemVersionString.UTF8String);
@@ -136,6 +152,7 @@ int main(void) {
       @[@"variation_selector", @"☕️"], @[@"supplementary_han", @"𠮷"], @[@"branding", @"Cocolon"] ];
     for (NSArray *fixture in cases) {
       NSString *name = fixture[0], *text = fixture[1], *code = nil;
+      printf("CASE %s\n", name.UTF8String);
       CGFloat font = [name isEqual:@"branding"] ? 28 : 48;
       RCTTextView *view = makeView(text, font); bridge.uiManager.registry = @{@1:view};
       NSDictionary *candidates = call(module, YES, text, font, &code);
@@ -148,6 +165,7 @@ int main(void) {
       check([name stringByAppendingString:@"_mounted_inspection"], code == nil &&
         [inspection[@"glyph_check"] isEqual:@"no_missing_observed"] &&
         [inspection[@"line_ends"] isEqual:@[@(text.length)]]);
+      printf("STAGE paint\n");
       check([name stringByAppendingString:@"_paint_bounds"], inspection && inkEnclosesPaint(view, inspection));
     }
     for (NSString *name in @[@"wrong_text", @"wrong_font", @"detached", @"limited_lines", @"oversized_view"]) {
