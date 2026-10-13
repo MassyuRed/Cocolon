@@ -88,28 +88,10 @@ static RCTTextView *makeView(NSString *text, CGFloat size) {
   printf("STAGE layout_ready\n");
   return view;
 }
-static NSDictionary *call(PieceTextMetrics *module, BOOL candidates, NSString *text, double size, NSString **code) {
-  __block NSDictionary *result = nil; __block NSString *error = nil;
-  dispatch_semaphore_t done = dispatch_semaphore_create(0);
-  RCTPromiseResolveBlock resolve = ^(id value) {
-    if ([value isKindOfClass:NSDictionary.class]) result = value;
-    else error = @"INVALID_RESULT";
-    dispatch_semaphore_signal(done);
-  };
-  RCTPromiseRejectBlock reject = ^(NSString *value, __unused NSString *message, __unused NSError *cause) {
-    error = value; dispatch_semaphore_signal(done);
-  };
-  printf("STAGE %s_call\n", candidates ? "candidate" : "inspection");
-  if (candidates) [module measureCandidates:@1 text:text fontSize:size resolver:resolve rejecter:reject];
-  else [module inspect:@1 text:text fontSize:size resolver:resolve rejecter:reject];
-  printf("STAGE callback_wait\n");
-  if (dispatch_semaphore_wait(done, dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC)) != 0) {
-    *code = @"TEST_CALLBACK_TIMEOUT"; return nil;
-  }
-  printf("STAGE callback_ready\n");
+static NSDictionary *decodeCandidates(NSDictionary *result, NSString **code) {
   // Decode the actual wire bytes before every pre-existing candidate check
   // and bit-for-bit uncached oracle comparison. No numeric JSON round-trip.
-  if (candidates && result) {
+  if (result) {
     NSData *data = [[NSData alloc] initWithBase64EncodedString:result[@"metrics_f64le"] options:0];
     NSData *indices = [[NSData alloc] initWithBase64EncodedString:result[@"row_indices_u32le"] options:0];
     NSArray *boundaries = result[@"boundaries"];
@@ -140,7 +122,29 @@ static NSDictionary *call(PieceTextMetrics *module, BOOL candidates, NSString *t
     decoded[@"version"] = @"piece.native_candidates.v1"; decoded[@"rows"] = rows;
     [decoded removeObjectsForKeys:@[@"metric_count", @"metrics_f64le", @"row_indices_u32le"]]; result = decoded;
   }
-  *code = error; return result;
+  return result;
+}
+static NSDictionary *call(PieceTextMetrics *module, BOOL candidates, NSString *text, double size, NSString **code) {
+  __block NSDictionary *result = nil; __block NSString *error = nil;
+  dispatch_semaphore_t done = dispatch_semaphore_create(0);
+  RCTPromiseResolveBlock resolve = ^(id value) {
+    if ([value isKindOfClass:NSDictionary.class]) result = value;
+    else error = @"INVALID_RESULT";
+    dispatch_semaphore_signal(done);
+  };
+  RCTPromiseRejectBlock reject = ^(NSString *value, __unused NSString *message, __unused NSError *cause) {
+    error = value; dispatch_semaphore_signal(done);
+  };
+  printf("STAGE %s_call\n", candidates ? "candidate" : "inspection");
+  if (candidates) [module measureCandidates:@1 text:text fontSize:size resolver:resolve rejecter:reject];
+  else [module inspect:@1 text:text fontSize:size resolver:resolve rejecter:reject];
+  printf("STAGE callback_wait\n");
+  if (dispatch_semaphore_wait(done, dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC)) != 0) {
+    *code = @"TEST_CALLBACK_TIMEOUT"; return nil;
+  }
+  printf("STAGE callback_ready\n");
+  *code = error;
+  return candidates ? decodeCandidates(result, code) : result;
 }
 static BOOL validCandidates(NSDictionary *result, NSString *text) {
   if (![result[@"version"] isEqual:@"piece.native_candidates.v1"] ||
@@ -324,6 +328,33 @@ int main(void) {
     bridge.uiManager.registry = @{@1:repeatedView};
     NSDictionary *repeatedResult = call(module, YES, repeatedView.fixtureStorage.string, 48, &code);
     check(@"repeated_mixed_attributes_uncached_equivalence", code == nil && matchesUncachedCandidates(repeatedResult, repeatedView));
+    // Issue two fonts before either resolves, as the mounted RN lookahead does.
+    // Compare each result independently with the original uncached calculation.
+    NSString *overlapText = @"考える時間と対話を大切にしながら、自分の言葉で伝えたい。";
+    RCTTextView *firstView = makeView(overlapText, 48), *nextView = makeView(overlapText, 44);
+    bridge.uiManager.registry = @{@1:firstView};
+    RCTBridge *nextBridge = [RCTBridge new]; nextBridge.uiManager = [RCTUIManager new];
+    nextBridge.uiManager.registry = @{@1:nextView};
+    PieceTextMetrics *nextModule = [PieceTextMetrics new]; nextModule.bridge = nextBridge;
+    dispatch_semaphore_t overlapDone = dispatch_semaphore_create(0);
+    __block NSDictionary *firstResult = nil, *nextResult = nil;
+    __block NSUInteger overlapErrors = 0;
+    RCTPromiseRejectBlock overlapReject = ^(__unused NSString *value, __unused NSString *message, __unused NSError *cause) {
+      overlapErrors++; dispatch_semaphore_signal(overlapDone);
+    };
+    [module measureCandidates:@1 text:overlapText fontSize:48 resolver:^(id value) {
+      firstResult = value; dispatch_semaphore_signal(overlapDone);
+    } rejecter:overlapReject];
+    [nextModule measureCandidates:@1 text:overlapText fontSize:44 resolver:^(id value) {
+      nextResult = value; dispatch_semaphore_signal(overlapDone);
+    } rejecter:overlapReject];
+    BOOL bothCompleted = dispatch_semaphore_wait(overlapDone, dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC)) == 0;
+    bothCompleted = (dispatch_semaphore_wait(overlapDone, dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC)) == 0) && bothCompleted;
+    NSString *firstCode = nil, *nextCode = nil;
+    firstResult = decodeCandidates(firstResult, &firstCode); nextResult = decodeCandidates(nextResult, &nextCode);
+    check(@"queued_two_fonts_complete", bothCompleted && overlapErrors == 0 && firstCode == nil && nextCode == nil);
+    check(@"queued_current_font_uncached_equivalence", matchesUncachedCandidates(firstResult, firstView));
+    check(@"queued_next_font_uncached_equivalence", matchesUncachedCandidates(nextResult, nextView));
     printf("NATIVE_CHECKS=%lu PASS=%lu FAIL=%lu SKIP=0\n", (unsigned long)checks,
       (unsigned long)(checks-failures), (unsigned long)failures);
     return failures ? 1 : 0;

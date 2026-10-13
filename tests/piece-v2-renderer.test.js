@@ -236,6 +236,87 @@ async function prepare(h) {
   return h;
 }
 async function harness(...args) { return prepare(rawHarness(...args)); }
+function primeNextFont(h) {
+  const size = h.card.state.measurement.sizeIndex + 1;
+  for (let i = 0; i < h.input().blocks.length; i++) {
+    h.find(`piece-prefetch-${size}-block-${i}`).props.onLayout();
+  }
+}
+
+test('next-font work overlaps pending current work but selection and paragraph order stay unchanged', async () => {
+  const pending = [];
+  const h = rawHarness(sample(), undefined, false, r => new Promise(resolve => pending.push({ r, resolve })));
+  primeNextFont(h);
+  assert.equal(h.candidateCalls.length, 0, 'next layout alone must not overtake current font');
+  await prepare(h);
+  assert.deepEqual(h.candidateCalls.map(c => c.fontSize), [48, 48, 44, 44]);
+  assert.deepEqual(h.candidateCalls.map(c => c.text), [...h.input().blocks, ...h.input().blocks]);
+  const deadline = h.card.deadline;
+  for (const p of pending.filter(p => p.r.font_size === 44)) p.resolve(p.r);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(h.card.state.measurement.phase, 'planning');
+  assert.equal(h.card.state.measurement.sizeIndex, 0, 'early next result cannot skip current B9');
+  for (const p of pending.filter(p => p.r.font_size === 48)) {
+    p.resolve({ ...p.r, rows: p.r.rows.map(row => [row[0], row[1], 9999, 0, -30, 9999, 10]) });
+  }
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(h.card.state.measurement.sizeIndex, 1);
+  await finish(h);
+  assert.equal(h.card.state.measurement.phase, 'native_checked');
+  assert.equal(h.candidateCalls.length, 4, 'adoption must reuse the exact next-font measurements');
+  assert.deepEqual(copy(h.card.state.measurement.plan.groups.map(g => g.join(''))), copy(h.input().blocks));
+  assert.equal(deadline.expiresAt, NOW + 8000);
+  assert.equal(h.card.state.measurement.canSave, false);
+});
+
+test('speculative rejection is harmless for a fitting current font and fails closed on adoption', async () => {
+  for (const currentFits of [true, false]) {
+    const pending = [];
+    const h = rawHarness(sample(), undefined, false, r => r.font_size === 44
+      ? Promise.reject(new Error('unavailable')) : new Promise(resolve => pending.push({ r, resolve })));
+    await prepare(h); primeNextFont(h);
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(h.card.state.measurement.phase, 'planning');
+    for (const p of pending) p.resolve(currentFits ? p.r
+      : { ...p.r, rows: p.r.rows.map(row => [row[0], row[1], 9999, 0, -30, 9999, 10]) });
+    await new Promise(resolve => setImmediate(resolve));
+    await finish(h);
+    assert.equal(h.card.state.measurement.phase, currentFits ? 'native_checked' : 'unavailable');
+    if (!currentFits) assert.equal(h.card.state.measurement.reason, 'native_candidates_unavailable');
+  }
+});
+
+test('prefetch results cannot cross unmount, timeout, expiry or an A-B-A input generation', async () => {
+  for (const action of ['unmount', 'timeout', 'expired', 'replace']) {
+    const pending = [];
+    const h = rawHarness(sample(), undefined, false, r => new Promise(resolve => pending.push({ r, resolve })));
+    await prepare(h); primeNextFont(h);
+    const oldProbe = h.find('piece-prefetch-1-block-0'), oldBatch = h.card.candidates;
+    if (action === 'unmount') h.card.componentWillUnmount();
+    if (action === 'timeout') [...h.timers.values()][0]();
+    if (action === 'expired') h.now(NOW + 8001);
+    if (action === 'replace') { const next = sample(); next.preview_revision++; h.replace(next); h.replace(sample()); }
+    const state = h.card.state.measurement;
+    for (const p of pending) p.resolve(p.r);
+    oldProbe.props.onLayout();
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(h.card.state.measurement, state);
+    assert.equal(h.candidateCalls.length, 4);
+    if (action === 'replace') assert.notEqual(h.card.candidates, oldBatch);
+  }
+});
+
+test('fixed export canvas mounts its next-font probes before any resize event', async () => {
+  const pending = [];
+  const h = rawHarness(savedSample(), undefined, true, r => new Promise(resolve => pending.push({ r, resolve })), NOW, true);
+  primeNextFont(h); await prepare(h);
+  assert.deepEqual(h.candidateCalls.map(c => c.fontSize), [48, 48, 44, 44]);
+  h.card.componentWillUnmount();
+  for (const p of pending) p.resolve(p.r);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(h.card.getCaptureTarget(), null);
+});
+
 async function finish(h, height) {
   await prepare(h);
   if (h.card.state.measurement.phase === 'unavailable') return;

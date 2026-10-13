@@ -14,6 +14,7 @@ export default class PieceVisualCard extends React.Component {
     this.active = true;
     this.textNodes = new Map();
     this.probeReady = new Map();
+    this.candidates = { key: this.state.measurement.key, entries: new Map() };
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -28,6 +29,7 @@ export default class PieceVisualCard extends React.Component {
   clearDeadline = () => {
     if (this.deadline) clearTimeout(this.deadline.handle);
     this.deadline = null;
+    this.candidates = null;
   };
 
   syncDeadline = () => {
@@ -37,10 +39,14 @@ export default class PieceVisualCard extends React.Component {
       this.clearDeadline(); return;
     }
     if (this.deadline?.key === input.key) return;
+    const batch = this.candidates;
     this.clearDeadline();
     const key = input.key;
     const deadline = { key, handle: null, expiresAt: Date.now() + 8000 };
     this.deadline = deadline;
+    // Separate from the per-font/drawing generation. A -> B -> A must create
+    // a new batch even when the artifact key eventually returns to A.
+    this.candidates = batch?.key === key ? batch : { key, entries: new Map() };
     deadline.handle = setTimeout(() => {
       if (this.deadline !== deadline) return;
       this.deadline = null;
@@ -64,6 +70,26 @@ export default class PieceVisualCard extends React.Component {
     return { ...input, blocks, rowGaps, plannedRows: true };
   };
 
+  candidatesCurrent = batch => this.active && batch && this.candidates === batch &&
+    preparePieceNativeCard(this.props)?.key === batch.key && this.deadline &&
+    Date.now() < this.deadline.expiresAt && this.state.measurement.phase !== 'unavailable';
+
+  measureCandidateBlocks = (input, sizeIndex, nodes) => Promise.all(input.blocks.map((text, index) =>
+    measurePieceCandidates(nodes[index], text, input.sizes[sizeIndex])))
+    // Speculation may fail after a larger font has already succeeded. Handle
+    // it immediately; only adoption of this font may make the card unavailable.
+    .then(measurements => ({ measurements }), () => ({ failed: true }));
+
+  prefetchCandidates = () => {
+    const batch = this.candidates, snapshot = this.state.measurement, input = preparePieceNativeCard(this.props);
+    if (!this.candidatesCurrent(batch) || !input || snapshot.phase !== 'planning' ||
+        this.planning?.snapshot !== snapshot) return;
+    const entry = batch.entries.get(snapshot.sizeIndex + 1);
+    if (!entry || entry.promise || input.blocks.some((_, index) => !entry.ready.has(index) || !entry.nodes.has(index))) return;
+    entry.promise = this.measureCandidateBlocks(input, snapshot.sizeIndex + 1,
+      input.blocks.map((_, index) => entry.nodes.get(index)));
+  };
+
   planDrawing = async () => {
     const snapshot = this.state.measurement, input = preparePieceNativeCard(this.props);
     if (!this.active || !input || input.key !== snapshot.key || snapshot.phase !== 'planning' ||
@@ -72,14 +98,21 @@ export default class PieceVisualCard extends React.Component {
     const current = () => this.active && this.planning === operation && this.state.measurement === snapshot &&
       preparePieceNativeCard(this.props)?.key === input.key && this.deadline && Date.now() < this.deadline.expiresAt;
     try {
-      const measurements = [];
-      for (let index = 0; index < input.blocks.length; index++) {
-        if (!current()) return;
-        const node = this.textNodes.get(index);
-        if (node?.generation !== snapshot.generation) throw new Error('PIECE_NATIVE_MEASUREMENT_UNAVAILABLE');
-        measurements.push(await measurePieceCandidates(node.value, input.blocks[index], input.sizes[snapshot.sizeIndex]));
-      }
+      const batch = this.candidates;
+      if (!current() || !this.candidatesCurrent(batch)) return;
+      const prefetched = batch.entries.get(snapshot.sizeIndex);
+      const pending = prefetched?.promise || this.measureCandidateBlocks(input, snapshot.sizeIndex,
+        input.blocks.map((_, index) => {
+          const node = this.textNodes.get(index);
+          if (node?.generation !== snapshot.generation) throw new Error('PIECE_NATIVE_MEASUREMENT_UNAVAILABLE');
+          return node.value;
+        }));
+      // Enqueue every current paragraph before any speculative next font.
+      this.prefetchCandidates();
+      const { measurements, failed } = await pending;
       if (!current()) return;
+      if (failed) throw new Error('PIECE_NATIVE_MEASUREMENT_UNAVAILABLE');
+      batch.entries.delete(snapshot.sizeIndex);
       const plan = planPieceMeasuredRows(input, snapshot.sizeIndex, measurements);
       if (!current()) return;
       this.setState(previous => current() && previous.measurement === snapshot ? {
@@ -171,6 +204,17 @@ export default class PieceVisualCard extends React.Component {
     const positioned = !!measurement.rowOffsets;
     const ticket = { key: input.key, sizeIndex: measurement.sizeIndex, generation: measurement.generation };
     const scale = this.state.width / input.width;
+    if (planning && this.candidates?.key !== input.key) this.candidates = { key: input.key, entries: new Map() };
+    const batch = this.candidates, nextSize = measurement.sizeIndex + 1;
+    const nextTypography = nextSize < raw.sizes.length ? pieceNativeTypography(raw, nextSize) : null;
+    let nextEntry;
+    if (planning && batch?.key === input.key && nextSize < raw.sizes.length) {
+      nextEntry = batch.entries.get(nextSize);
+      if (!nextEntry) {
+        nextEntry = { nodes: new Map(), ready: new Set(), promise: null };
+        batch.entries.set(nextSize, nextEntry);
+      }
+    }
     const textProps = index => ({
       key: `${input.key}:${measurement.sizeIndex}:${planning ? 'probe' : 'row'}:${index}`, testID: `piece-${planning ? 'probe' : 'visual'}-block-${index}`,
       ref: value => {
@@ -207,6 +251,24 @@ export default class PieceVisualCard extends React.Component {
             left: (this.state.width - input.width) / 2, top: (input.height * scale - input.height) / 2,
             transform: [{ scale }], opacity: ready ? 1 : 0, backgroundColor: input.colors.canvas },
         },
+        nextEntry ? element(View, { key: `prefetch:${nextSize}`, pointerEvents: 'none',
+          style: { position: 'absolute', left: 0, top: 0, opacity: 0 },
+          accessible: false, accessibilityElementsHidden: true, importantForAccessibility: 'no-hide-descendants' },
+          ...raw.blocks.map((body, index) => element(Text, {
+            key: index, testID: `piece-prefetch-${nextSize}-block-${index}`,
+            ref: value => {
+              if (value) nextEntry.nodes.set(index, value);
+              else nextEntry.nodes.delete(index);
+            },
+            collapsable: false, allowFontScaling: false, adjustsFontSizeToFit: false, accessible: false,
+            android_hyphenationFrequency: 'none', textBreakStrategy: 'highQuality', lineBreakStrategyIOS: 'standard',
+            onLayout: () => {
+              if (!this.candidatesCurrent(batch) || batch.entries.get(nextSize) !== nextEntry) return;
+              nextEntry.ready.add(index); this.prefetchCandidates();
+            },
+            style: { width: raw.contentWidth, fontSize: nextTypography.fontSize, lineHeight: nextTypography.lineHeight,
+              fontWeight: '400', fontStyle: 'normal', letterSpacing: 0, includeFontPadding: false, textAlign: 'left', color: raw.colors.text },
+          }, body))) : null,
         element(View, { style: { position: 'absolute', left: input.margin / 2, top: input.margin / 2,
           right: input.margin / 2, bottom: input.margin / 2, backgroundColor: input.colors.surface,
           borderColor: input.colors.border, borderWidth: 2 } }),

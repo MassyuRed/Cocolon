@@ -20,6 +20,18 @@
 @property(nonatomic, weak) RCTBridge *bridge;
 @end
 
+// One candidate call at a time across every module/card. Its joined workers
+// remain capped at four while JS decodes/plans the preceding font size.
+static dispatch_queue_t PieceCandidateQueue(void) {
+  static dispatch_queue_t queue;
+  static dispatch_once_t once;
+  dispatch_once(&once, ^{
+    queue = dispatch_queue_create("com.cocolon.piece.candidates",
+      dispatch_queue_attr_make_with_qos_class(DISPATCH_QUEUE_SERIAL, QOS_CLASS_USER_INITIATED, 0));
+  });
+  return queue;
+}
+
 @implementation PieceTextMetrics
 RCT_EXPORT_MODULE();
 @synthesize bridge = _bridge;
@@ -50,8 +62,10 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
       if (!valid) { unavailable(); return; }
       // A private immutable snapshot; never access UIView/TextKit off its UI queue.
       NSAttributedString *snapshot = [storage copy];
-      dispatch_async(dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^{
+      dispatch_async(PieceCandidateQueue(), ^{
         @try {
+          // Queueing never renews the call's original deadline.
+          if (NSProcessInfo.processInfo.systemUptime >= deadline) { unavailable(); return; }
           NSMutableArray<NSNumber *> *boundaries = [NSMutableArray arrayWithObject:@0];
           [expected enumerateSubstringsInRange:NSMakeRange(0, expected.length) options:NSStringEnumerationByComposedCharacterSequences
             usingBlock:^(NSString *substring, NSRange range, NSRange enclosing, BOOL *stop) { [boundaries addObject:@(NSMaxRange(range))]; }];
