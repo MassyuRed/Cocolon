@@ -1,6 +1,8 @@
 /** PCE-8 B10 review surface with a bounded RN image-layout prototype.
  * The host provides a freshly checked display view from readPiecePreviewDisplay.
- * Shows the controller's save outcome; does not start saving or grant renderer admission.
+ * Forwards an explicit initial save only when the host supplies canSave=true
+ * and onSave. This surface never grants renderer admission, performs HTTP,
+ * or creates a save key. The current host/admission supplier remains separate.
  */
 import React from 'react';
 import { Modal, View, Text, ScrollView, Button, ActivityIndicator } from 'react-native';
@@ -13,7 +15,7 @@ const plans = { free: 'Free', plus: 'Plus', premium: 'Premium' };
 const branding = { required_small: '小さく表示', required_subtle: '控えめに表示', off: '表示なし' };
 const themes = { soft_paper: 'ソフトペーパー', quiet_night: '静かな夜' };
 
-export default function PiecePreviewModal({ visible = false, display, onClose, onRetry, onVisualChange, onCancel, onOpenSaved }) {
+export default function PiecePreviewModal({ visible = false, display, onClose, onRetry, onVisualChange, onCancel, onOpenSaved, onSave }) {
   if (visible !== true || !display || display.phase === 'hidden') return null;
   const received = display.phase === 'received' && display.hashVerified === true && display.preview;
   const preview = received ? display.preview : null;
@@ -33,6 +35,13 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
         }, display.visualToken),
       }))) : null;
   const saving = display.loadingKind === 'save' || display.retryKind === 'save';
+  // canSave is a host projection, not a conclusion from quota/hash/native
+  // inspection. The controller must recheck current admission at the click.
+  const canSave = !!preview && !saving && display.canSave === true &&
+    !!display.visualToken && typeof onSave === 'function';
+  const saveIdentity = canSave ? Object.freeze({ preview_id: preview.preview_id,
+    preview_revision: preview.preview_revision, visual_recipe_hash: preview.visual_recipe_hash }) : null;
+  const saveToken = display.visualToken;
   const loading = display.loadingKind === 'save' ? 'Pieceを保存しています。' : display.loadingKind === 'cancel' ? '候補を取り消しています。' :
     display.loadingKind === 'visual' ? '画像設定を更新しています。' :
     display.loadingKind === 'recover' ? '最新のプレビューを取得しています。' : 'Pieceを取得しています。';
@@ -82,10 +91,15 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
         ['unavailable', 'cancelled'].includes(display.phase) ? element(Text, { accessibilityRole: 'alert',
           style: { fontSize: 16, color: '#202020' } }, display.message) : null,
         element(Text, { style: { fontSize: 14, lineHeight: 22, color: '#494949', marginTop: 20 } },
-          saving ? '画像の書き出し・共有は、まだ利用できません。' :
+          saving || canSave ? '画像の書き出し・共有は、まだ利用できません。' :
             'Pieceの保存・画像の書き出し・共有は、まだ利用できません。'),
       ),
       element(View, { style: { paddingTop: 12 } },
+        canSave ? element(Button, {
+          testID: 'piece-initial-save', title: 'Pieceを保存',
+          accessibilityLabel: 'このPieceを自分用に保存',
+          onPress: () => onSave(saveIdentity, saveToken),
+        }) : null,
         display.phase === 'saved' && typeof onOpenSaved === 'function' ? element(Button, {
           title: '保存したPieceを確認', accessibilityLabel: '保存したPieceを確認', onPress: onOpenSaved }) : null,
         display.canRetry === true ? element(Button, {
