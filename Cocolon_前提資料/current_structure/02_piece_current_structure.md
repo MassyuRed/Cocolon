@@ -2353,6 +2353,25 @@ UI/Auth/APIの全体結合や本文生成品質は対象外。画像は合成本
 
 `5c685b4b658f5e08ed78039ea3ecd68761582e79` の変更は実RN jobのrunnerをmacos-15へ戻す1行だけ。初回にlock完全一致を確認した環境を使い、build先行・45分・8秒描画期限・fixture／判定・lock完全照合を保持する。3source commitのremote全文・blob・変更path・親headを確認済み。同環境read-only補助reviewに追加の重大懸念はなく、独立Pro正式reviewとはしない。
 
-[run38371898401](https://github.com/MassyuRed/Cocolon/actions/runs/38371898401)、source `5c685b4`、実RN job `115210663296` はcheckpoint時点で実行中。次は同runのXCTest実行1件と5ケースJSON／5PNGを取得し、実画像の空白・縮小・欠けも確認する。終了コード0だけで描画成立としない。実RNで観測した不具合があれば、その直接箇所だけを修正して同じケースで確認する。
+[run38371898401](https://github.com/MassyuRed/Cocolon/actions/runs/38371898401)、source `5c685b4`、実RN job `115210663296` は当初checkpointで実行中だった。完了後の結果と修正は§65.4へ進む。
 
 その後の本線は実機を含むrenderer確認→正式renderer判定供給→保存直前fit→同じpreview/tokenによる既存初回保存hostへの結合。`native_checked`単独で保存を有効にせず、既存host/controller／本人detail／結果再確認を再実装しない。weekly10/10 §5.5、12/18目標、default OFF、Draft/open/unmergedを維持する。SystemContext prepareは祖先条件で終了し、原本直接読取を使用した。
+
+
+### 65.4 実RN起動後の検査停止と修正
+
+run `38371898401` は08:52:37 UTCにbuild開始、09:02:12にbuild完了、09:03:32にtest開始。xcresultを含むartifact `11799973603`（SHA256 `19a5a4111389bb2a10e903be17dcef55f8817c6d8209d562dccc9663f3346501`）を取得・検証し、圧縮されたtest stdout／resultを実読した。XCTest1件は実行されたが、90秒timeoutとreports 0／期待5の2失敗。JSは09:05:51.484に起動し、同51.894〜51.900に検査用 `PieceCanvasTest.capture` のnull NSNumber引数がRNで拒否された。method実行前に中断されPromiseが完了せず、失敗結果も記録されなかった。5ケースJSON／PNGはない。これは描画合格ではなく、nullになった元の製品状態もまだ不明である。
+
+同stdoutにはapp.debug.dylibとtest binary間で `RCTBridge`／`RCTUIManager`／`RCTTextView` を含む781件のObjC class重複があった。null tagの確定原因とはしないが、hosted testが別のRN runtimeを重ねる構成は取り除く。
+
+source `1667ecd64a10345987b5fcb7be307f9ee315a0a1` は既存test3pathのみ。
+
+- entry.jsは非正整数tagをcaptureへ渡さず、既存recordでphase／reason／capture_errorを保持して次へ進む。native capture引数はnonnullを明示。実finishCaseのlocal再現では変更前pending／record0、変更後finished／record1／次index1。境界は合成で、描画成功の検査とは別。
+- runnerはPod install後の完全lock照合を維持し、disposable projectのtest targetだけ `OTHER_LDFLAGS=['-lc++']` に置き換える。header/module検索・BUNDLE_LOADER／TEST_HOST・app側のPodリンクは保持。build/test共通 `ENABLE_DEBUG_DYLIB=NO` でhostの通常実行fileへ解決する。Podfile・依存version・製品projectをrepository上で変更しない。
+- 完了xcresultの要約を既存build logにも出す。検査終了コード、8秒描画期限、5入力と元assertionは変えない。重複リンク除去の実効性は次runで確認する。
+
+同source3pathはremote全文・blob・変更path・親headを照合した。補助agentは同環境read-only reviewであり独立Pro正式reviewではない。前runの既存検査はJS747 PASS／native44 PASS、両OS source／export library compile成功。420文字のnative候補単体2,327.948msは全体描画時間へ換算しない。
+
+[run38375322124](https://github.com/MassyuRed/Cocolon/actions/runs/38375322124) はこのcheckpoint時点で実行中。次はXCTest・5ケース結果・5PNG・重複class解消を確認し、直接観測した描画失敗へ対応する。確認前に合格へ上げない。
+
+保存側の具体的な未接続は、Modalから実Cardのmount／計測世代／plan／最終inspectionを同じpreview／displayTokenへ結ぶ部分と、InputScreenの正式判定供給である。保存直前にselected candidateのtext＋recipe＋target profileとの一致とfitを再確認し、既存host/controllerへ渡す。同期isSaveAdmittedのrender呼出し内でnative処理を起動しない。毎tapの全420文字候補再計測・別registry・TTLは要件ではない。現prototype previewが異なるrenderer文字列を受ける挙動は既存検査の意図した範囲であり、保存済みv3 pinとの違いを今の確定不具合にしない。正式renderer対応範囲・実機受入れ・通常アプリ保存は残る。

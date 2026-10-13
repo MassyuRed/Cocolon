@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v60",
+  "schema_version": "cocolon.piece.workstream_manifest.v61",
   "generated_at": "2026-10-13 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v59",
-    "predecessor_blob": "863e227e392d41ada734c9b75c201ddcb85d699d",
-    "predecessor_head": "5c685b4b658f5e08ed78039ea3ecd68761582e79",
-    "carry_forward": "Real RN full-canvas execution pending. First build timed out; macos-26 retry stopped on lock checksum-only differences. Restored macos-15 with exact lock verification and build-before-boot; run38371898401 in progress."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v60",
+    "predecessor_blob": "b797c01b5b5a73b0575d9aa50490d4abd7dfcfa4",
+    "predecessor_head": "1667ecd64a10345987b5fcb7be307f9ee315a0a1",
+    "carry_forward": "Build and XCTest now execute; null capture tag caused report starvation and timeout. Test reporting and duplicate hosted RN linking corrected; run38375322124 pending. Product drawing/admission remain unverified."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "5cdf9015e0f135b7f43098acad117489d4620667",
-    "raw_sha256": "5b2a9888cd66db6fbd0904169f2df8cab17b856bdf6c26cfee68004186be1867",
-    "utf8_bytes": 115735
+    "git_blob_sha1": "da91b7aaf308f606e06b53ce74933b318ac27817",
+    "raw_sha256": "ab181d13807012065c93539194823c4f1b7dbdf2fe7ae86788928ba55caadc27",
+    "utf8_bytes": 116538
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -241,11 +241,11 @@
     "name": "NATIVE_DEVICE_RENDERER_ADMISSION_THEN_SAVE_FIT_AND_BOUND_SAVE",
     "environment": "WORK_SELECTED_BY_MASH",
     "state": "REAL_RN_CANVAS_RUN_IN_PROGRESS__NO_RENDER_ACCEPTANCE",
-    "current_map_section": "65.3",
+    "current_map_section": "65.4",
     "current_entry_section": "61",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
     "weekly_review_section": "5.5",
-    "first_unfinished_work": "Retrieve run38371898401 XCTest/5-case JSON/5 PNG; inspect actual images and fix only observed rendering defects. Formal admission, fresh save fit and ordinary app save remain pending.",
+    "first_unfinished_work": "Read run38375322124 XCTest, five case reports and PNGs; verify single host RN runtime and inspect actual drawing failures before formal renderer/save fit connection.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 4,
@@ -338,9 +338,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "ecac2e147726681bfb124b8f6b51b9f8b5aa28f1",
-    "raw_sha256": "8c4c119f3c2b00cfcb00a66615e1c9feac6f5d63113731293d4c3131317c76d0",
-    "utf8_bytes": 351382
+    "git_blob_sha1": "884fc911ac9b9a39c5df6596bdcf4e20e4cecb35",
+    "raw_sha256": "876e047faa1ee2111ac222eee6e6aa0dc3a5291ddaaa62714136872f46404aae",
+    "utf8_bytes": 354579
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -517,7 +517,8 @@
     "source_commits": [
       "2c7c554cf51cff38efc84a99df80565f736fe9d9",
       "5c501d9eaed60257b202de418c936a1f7acb3bf6",
-      "5c685b4b658f5e08ed78039ea3ecd68761582e79"
+      "5c685b4b658f5e08ed78039ea3ecd68761582e79",
+      "1667ecd64a10345987b5fcb7be307f9ee315a0a1"
     ],
     "product_source_changes": 0,
     "test_source_paths": 4,
@@ -530,7 +531,7 @@
     "release_effect": 0,
     "product_acceptance": false,
     "automatic_progression": false,
-    "simulator_execution_attempts": 3
+    "simulator_execution_attempts": 4
   },
   "b06_q3_context_fence": {
     "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
@@ -4342,8 +4343,20 @@
     "retry_changed_spec_checksums": 66,
     "lock_verification_relaxed": false,
     "runner_restore_commit": "5c685b4b658f5e08ed78039ea3ecd68761582e79",
-    "current_run": 38371898401,
-    "current_job": 115210663296,
-    "current_state": "IN_PROGRESS"
+    "current_state": "IN_PROGRESS",
+    "previous_current_run": 38371898401,
+    "previous_current_job": 115210663296,
+    "previous_current_state": "FAILED_AFTER_XCTEST_STARTED__NULL_CAPTURE_REJECTED__ZERO_REPORTS",
+    "previous_artifact_id": 11799973603,
+    "xctest_executed": 1,
+    "xctest_assertion_failures": 2,
+    "duplicate_objc_classes_observed": 781,
+    "null_canvas_origin_identified": false,
+    "harness_fix_commit": "1667ecd64a10345987b5fcb7be307f9ee315a0a1",
+    "current_run": 38375322124,
+    "latest_completed_js_passed": 747,
+    "latest_completed_native_passed": 44,
+    "latest_completed_max420_candidate_elapsed_ms": 2327.948,
+    "current_job": 115222124418
   }
 }
