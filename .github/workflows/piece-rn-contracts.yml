@@ -184,7 +184,7 @@ jobs:
 
   piece-ios-rn-canvas:
     if: github.repository == 'MassyuRed/Cocolon'
-    runs-on: macos-26
+    runs-on: macos-15
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd
