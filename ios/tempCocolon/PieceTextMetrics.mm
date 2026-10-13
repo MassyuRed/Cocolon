@@ -150,28 +150,34 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
           // attributes. Build the same immutable substring directly instead
           // of slicing attributed runs.
           NSDictionary *uniformAttributes = attributeClasses.count == 1 ? attributeClasses[0] : nil;
-          NSAttributedString *nativeSnapshot = nil;
+          NSMutableArray<NSAttributedString *> *workerSnapshots = [NSMutableArray new];
           if (!uniformAttributes) {
-            // Build the complete attribute runs once in CF storage. Merely
-            // casting the TextKit copy may route substring creation back to
-            // its generic Objective-C run-copying implementation.
-            NSMutableAttributedString *nativeMutable = CFBridgingRelease(CFAttributedStringCreateMutable(NULL, 0));
-            if (!nativeMutable) { unavailable(); return; }
-            CFAttributedStringReplaceString((__bridge CFMutableAttributedStringRef)nativeMutable,
-              CFRangeMake(0, 0), (__bridge CFStringRef)snapshotText);
-            [snapshot enumerateAttributesInRange:NSMakeRange(0, snapshot.length) options:0
-              usingBlock:^(NSDictionary *attributes, NSRange range, BOOL *stop) {
-                CFAttributedStringSetAttributes((__bridge CFMutableAttributedStringRef)nativeMutable,
-                  CFRangeMake(range.location, range.length), (__bridge CFDictionaryRef)attributes, true);
-              }];
-            nativeSnapshot = CFBridgingRelease(CFAttributedStringCreateCopy(NULL,
-              (__bridge CFAttributedStringRef)nativeMutable));
-            if (!nativeSnapshot) { unavailable(); return; }
+            // Build independent CF storage for each worker. Do not share a
+            // CF run-array's internal lookup cache across concurrent substring
+            // calls, or rely on immutable copy to detach its backing storage.
+            for (NSUInteger worker = 0; worker < workers; worker++) {
+              if (NSProcessInfo.processInfo.systemUptime >= deadline) { unavailable(); return; }
+              NSMutableAttributedString *nativeMutable = CFBridgingRelease(CFAttributedStringCreateMutable(NULL, 0));
+              if (!nativeMutable) { unavailable(); return; }
+              CFAttributedStringReplaceString((__bridge CFMutableAttributedStringRef)nativeMutable,
+                CFRangeMake(0, 0), (__bridge CFStringRef)snapshotText);
+              [snapshot enumerateAttributesInRange:NSMakeRange(0, snapshot.length) options:0
+                usingBlock:^(NSDictionary *attributes, NSRange range, BOOL *stop) {
+                  CFAttributedStringSetAttributes((__bridge CFMutableAttributedStringRef)nativeMutable,
+                    CFRangeMake(range.location, range.length), (__bridge CFDictionaryRef)attributes, true);
+                }];
+              NSAttributedString *nativeSnapshot = CFBridgingRelease(CFAttributedStringCreateCopy(NULL,
+                (__bridge CFAttributedStringRef)nativeMutable));
+              if (!nativeSnapshot) { unavailable(); return; }
+              [workerSnapshots addObject:nativeSnapshot];
+            }
           }
+          NSArray<NSAttributedString *> *nativeSnapshots = [workerSnapshots copy];
           std::atomic_bool failed(false);
           std::atomic_bool *failure = &failed;
           dispatch_apply(workers, dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^(size_t worker) {
             @try {
+              NSAttributedString *nativeSnapshot = uniformAttributes ? nil : nativeSnapshots[worker];
               for (NSUInteger index = worker; index < jobCount; index += workers) {
                 @autoreleasepool {
                   if (failure->load(std::memory_order_relaxed)) return;
