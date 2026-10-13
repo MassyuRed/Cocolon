@@ -29,7 +29,7 @@ static std::atomic_bool profileCandidates{false};
 static struct {
   std::atomic<uint64_t> creates{0}, units{0}, createTicks{0}, typographicTicks{0}, imageTicks{0};
   std::atomic<uint64_t> queuedAt{0}, queueStarted{0}, workersStarted{0}, workersJoined{0}, resolvedAt{0}, decodeTicks{0};
-  std::atomic<uint64_t> substringTicks{0}, releaseTicks{0}, uptimeTicks{0}, uptimeCalls{0};
+  std::atomic<uint64_t> substringTicks{0}, cfSubstringTicks{0}, releaseTicks{0}, uptimeTicks{0}, uptimeCalls{0};
 } candidateProfile;
 static double profileMilliseconds(uint64_t start, uint64_t end, double scale) {
   return start && end >= start ? (end - start) * scale : NAN;
@@ -81,6 +81,13 @@ static void profiledRelease(CFTypeRef value) {
   CFRelease(value);
   candidateProfile.releaseTicks += mach_absolute_time() - start;
 }
+static CFAttributedStringRef profiledCFSubstring(CFAllocatorRef allocator, CFAttributedStringRef text, CFRange range) {
+  if (!profileCandidates) return CFAttributedStringCreateWithSubstring(allocator, text, range);
+  uint64_t start = mach_absolute_time();
+  CFAttributedStringRef result = CFAttributedStringCreateWithSubstring(allocator, text, range);
+  candidateProfile.cfSubstringTicks += mach_absolute_time() - start;
+  return result;
+}
 static CTLineRef profiledCreateLine(CFAttributedStringRef text) {
   if (!profileCandidates) return CTLineCreateWithAttributedString(text);
   uint64_t start = mach_absolute_time();
@@ -111,6 +118,7 @@ static CGRect profiledImageBounds(CTLineRef line, CGContextRef context) {
 #define attributedSubstringFromRange pieceProfiledSubstringFromRange
 #define systemUptime pieceProfiledSystemUptime
 #define CFRelease profiledRelease
+#define CFAttributedStringCreateWithSubstring profiledCFSubstring
 #include "../../ios/tempCocolon/PieceTextMetrics.mm"
 #undef CTLineCreateWithAttributedString
 #undef CTLineGetTypographicBounds
@@ -120,6 +128,7 @@ static CGRect profiledImageBounds(CTLineRef line, CGContextRef context) {
 #undef attributedSubstringFromRange
 #undef systemUptime
 #undef CFRelease
+#undef CFAttributedStringCreateWithSubstring
 
 static NSUInteger checks = 0, failures = 0;
 static void check(NSString *name, BOOL passed) {
@@ -378,13 +387,14 @@ int main(void) {
       (unsigned long long)candidateProfile.creates.load(), (unsigned long long)candidateProfile.units.load(),
       candidateProfile.createTicks.load()*millisecondsPerTick, candidateProfile.typographicTicks.load()*millisecondsPerTick,
       candidateProfile.imageTicks.load()*millisecondsPerTick);
-    printf("mixed420_phase_profile queue_ms=%.3f glyph_and_group_ms=%.3f workers_wall_ms=%.3f pack_and_resolve_ms=%.3f test_decode_ms=%.3f generic_substring_sum_ms=%.3f release_sum_ms=%.3f uptime_sum_ms=%.3f uptime_calls=%llu\n",
+    printf("mixed420_phase_profile queue_ms=%.3f glyph_and_group_ms=%.3f workers_wall_ms=%.3f pack_and_resolve_ms=%.3f test_decode_ms=%.3f generic_substring_sum_ms=%.3f cf_substring_sum_ms=%.3f release_sum_ms=%.3f uptime_sum_ms=%.3f uptime_calls=%llu\n",
       profileMilliseconds(candidateProfile.queuedAt.load(), candidateProfile.queueStarted.load(), millisecondsPerTick),
       profileMilliseconds(candidateProfile.queueStarted.load(), candidateProfile.workersStarted.load(), millisecondsPerTick),
       profileMilliseconds(candidateProfile.workersStarted.load(), candidateProfile.workersJoined.load(), millisecondsPerTick),
       profileMilliseconds(candidateProfile.workersJoined.load(), candidateProfile.resolvedAt.load(), millisecondsPerTick),
       candidateProfile.decodeTicks.load()*millisecondsPerTick,
       candidateProfile.substringTicks.load()*millisecondsPerTick,
+      candidateProfile.cfSubstringTicks.load()*millisecondsPerTick,
       candidateProfile.releaseTicks.load()*millisecondsPerTick,
       candidateProfile.uptimeTicks.load()*millisecondsPerTick,
       (unsigned long long)candidateProfile.uptimeCalls.load());

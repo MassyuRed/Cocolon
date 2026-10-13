@@ -148,8 +148,26 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
           const NSUInteger jobCount = jobs.size(), workers = jobCount < 256 ? 1 : 4;
           // A single complete attribute class proves uniform pointwise
           // attributes. Build the same immutable substring directly instead
-          // of slicing attributed runs; heterogeneous input keeps that path.
+          // of slicing attributed runs.
           NSDictionary *uniformAttributes = attributeClasses.count == 1 ? attributeClasses[0] : nil;
+          NSAttributedString *nativeSnapshot = nil;
+          if (!uniformAttributes) {
+            // Build the complete attribute runs once in CF storage. Merely
+            // casting the TextKit copy may route substring creation back to
+            // its generic Objective-C run-copying implementation.
+            NSMutableAttributedString *nativeMutable = CFBridgingRelease(CFAttributedStringCreateMutable(NULL, 0));
+            if (!nativeMutable) { unavailable(); return; }
+            CFAttributedStringReplaceString((__bridge CFMutableAttributedStringRef)nativeMutable,
+              CFRangeMake(0, 0), (__bridge CFStringRef)snapshotText);
+            [snapshot enumerateAttributesInRange:NSMakeRange(0, snapshot.length) options:0
+              usingBlock:^(NSDictionary *attributes, NSRange range, BOOL *stop) {
+                CFAttributedStringSetAttributes((__bridge CFMutableAttributedStringRef)nativeMutable,
+                  CFRangeMake(range.location, range.length), (__bridge CFDictionaryRef)attributes, true);
+              }];
+            nativeSnapshot = CFBridgingRelease(CFAttributedStringCreateCopy(NULL,
+              (__bridge CFAttributedStringRef)nativeMutable));
+            if (!nativeSnapshot) { unavailable(); return; }
+          }
           std::atomic_bool failed(false);
           std::atomic_bool *failure = &failed;
           dispatch_apply(workers, dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^(size_t worker) {
@@ -161,7 +179,9 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
                   NSRange range = jobData[index].range;
                   NSAttributedString *part = uniformAttributes
                     ? [[NSAttributedString alloc] initWithString:[snapshotText substringWithRange:range] attributes:uniformAttributes]
-                    : [snapshot attributedSubstringFromRange:range];
+                    : CFBridgingRelease(CFAttributedStringCreateWithSubstring(NULL,
+                        (__bridge CFAttributedStringRef)nativeSnapshot, CFRangeMake(range.location, range.length)));
+                  if (!part) { failure->store(true, std::memory_order_relaxed); return; }
                   CTLineRef line = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)part);
                   if (!line) { failure->store(true, std::memory_order_relaxed); return; }
                   double advance = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
