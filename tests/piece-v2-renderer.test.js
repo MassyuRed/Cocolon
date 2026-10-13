@@ -278,6 +278,32 @@ test('duplicates are inert; changed native metrics revoke a previously checked i
   sendBlock(h, 0); assert.equal(h.card.updates, updates);
   sendBlock(h, 0, { height: 1800 });
   assert.equal(h.card.state.measurement.sizeIndex, 1); assert.equal(h.find('piece-logical-canvas').props.style.opacity, 0);
+  assert.equal(h.card.state.measurement.rowOffsets, undefined);
+});
+test('reinspection hides a checked quote without moving its current row placement', async () => {
+  const h = await harness(sample('quote', '9:16')); await finish(h);
+  const before = h.card.state.measurement, calls = h.nativeCalls.length;
+  const placement = () => {
+    const row = h.find('piece-visual-block-0').props.style;
+    const composition = h.find('piece-logical-canvas').children[1].props.style;
+    return { left: row.left, top: row.top, compositionTop: composition.top };
+  };
+  const positioned = placement(); assert.ok(positioned.left > 0);
+  const { end, ...line } = before.blocks[0].lines[0];
+  const lines = [{ ...line, text: h.drawing().blocks[0], width: line.width - 0.00001 }];
+  h.find('piece-visual-block-0').props.onTextLayout({ nativeEvent: { lines } });
+  assert.equal(h.card.state.measurement.phase, 'geometry_checked');
+  assert.equal(h.card.state.measurement.inspection, null);
+  assert.equal(h.find('piece-logical-canvas').props.style.opacity, 0);
+  assert.deepEqual(placement(), positioned);
+  await new Promise(resolve => setImmediate(resolve));
+  const checked = h.card.state.measurement;
+  assert.equal(checked.phase, 'native_checked'); assert.ok(h.nativeCalls.length > calls);
+  assert.notEqual(checked.inspection, before.inspection);
+  assert.deepEqual(placement(), positioned);
+  h.find('piece-visual-block-0').props.onTextLayout({ nativeEvent: { lines } });
+  assert.equal(h.card.state.measurement, checked);
+  assert.equal(checked.canSave, false); assert.equal(checked.canExport, false);
 });
 test('revision, recipe, renderer and preview identity changes reset measurement and reject late events', async () => {
   for (const mutate of [p => { p.preview_revision++; }, p => { p.row_version++; },
@@ -289,6 +315,7 @@ test('revision, recipe, renderer and preview identity changes reset measurement 
     h.replace(p); old.props.onLayout({ nativeEvent: { layout: { width: 888, height: 100 } } });
     assert.deepEqual(copy(h.card.state.measurement.blocks), {});
     assert.equal(h.card.state.measurement.phase, 'planning');
+    assert.equal(h.card.state.measurement.rowOffsets, undefined);
   }
 });
 test('expiry, hidden display and hash mismatch hide canvas before late measurement can be accepted', async () => {

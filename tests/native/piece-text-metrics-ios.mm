@@ -2,6 +2,8 @@
 // Only RN bridge dispatch and the mounted-view wrapper are doubles. This is
 // not a React render, physical-device check, capture-library or admission test.
 #import "piece-ios-react-shim.h"
+#import <CoreText/CoreText.h>
+#include <mach/mach_time.h>
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
@@ -19,7 +21,41 @@
 - (NSTextStorage *)cocolonPieceTextStorage { return self.fixtureStorage; }
 - (CGRect)cocolonPieceContentFrame { return self.fixtureContentFrame; }
 @end
+// Aggregate only the mixed420 candidate call, without changing native results.
+// Undefine these wrappers before the independent uncached reference below.
+static BOOL profileCandidates = NO;
+static struct {
+  uint64_t creates, units, createTicks, typographicTicks, imageTicks;
+} candidateProfile;
+static CTLineRef profiledCreateLine(CFAttributedStringRef text) {
+  if (!profileCandidates) return CTLineCreateWithAttributedString(text);
+  uint64_t start = mach_absolute_time();
+  CTLineRef result = CTLineCreateWithAttributedString(text);
+  candidateProfile.createTicks += mach_absolute_time() - start;
+  candidateProfile.creates++; candidateProfile.units += CFAttributedStringGetLength(text);
+  return result;
+}
+static double profiledTypographicBounds(CTLineRef line, CGFloat *ascent, CGFloat *descent, CGFloat *leading) {
+  if (!profileCandidates) return CTLineGetTypographicBounds(line, ascent, descent, leading);
+  uint64_t start = mach_absolute_time();
+  double result = CTLineGetTypographicBounds(line, ascent, descent, leading);
+  candidateProfile.typographicTicks += mach_absolute_time() - start;
+  return result;
+}
+static CGRect profiledImageBounds(CTLineRef line, CGContextRef context) {
+  if (!profileCandidates) return CTLineGetImageBounds(line, context);
+  uint64_t start = mach_absolute_time();
+  CGRect result = CTLineGetImageBounds(line, context);
+  candidateProfile.imageTicks += mach_absolute_time() - start;
+  return result;
+}
+#define CTLineCreateWithAttributedString profiledCreateLine
+#define CTLineGetTypographicBounds profiledTypographicBounds
+#define CTLineGetImageBounds profiledImageBounds
 #include "../../ios/tempCocolon/PieceTextMetrics.mm"
+#undef CTLineCreateWithAttributedString
+#undef CTLineGetTypographicBounds
+#undef CTLineGetImageBounds
 
 static NSUInteger checks = 0, failures = 0;
 static void check(NSString *name, BOOL passed) {
@@ -218,18 +254,26 @@ int main(void) {
     NSDictionary *longResult = call(module, YES, longText, 48, &code);
     printf("max420_candidate_elapsed_ms=%.3f\n", (NSProcessInfo.processInfo.systemUptime-started)*1000);
     check(@"max420_complete_metrics", code == nil && validCandidates(longResult, longText));
-    check(@"max420_uncached_equivalence", matchesUncachedCandidates(longResult, bridge.uiManager.registry[@1]));
+    check(@"max420_uncached_equivalence", matchesUncachedCandidates(longResult, (RCTTextView *)bridge.uiManager.registry[@1]));
     // Same mixed Japanese input as the full RN case, so a homogeneous glyph
     // benchmark cannot hide native shaping cost. Existing 420 test stays intact.
     NSString *mixedText = [[[@"考える時間と対話を大切にしながら、自分の言葉で伝えたい。"
       stringByPaddingToLength:419 withString:@"考える時間と対話を大切にしながら、自分の言葉で伝えたい。" startingAtIndex:0]
       stringByAppendingString:@"。"] copy];
     bridge.uiManager.registry = @{@1:makeView(mixedText, 48)};
+    memset(&candidateProfile, 0, sizeof(candidateProfile)); profileCandidates = YES;
     started = NSProcessInfo.processInfo.systemUptime;
     NSDictionary *mixedResult = call(module, YES, mixedText, 48, &code);
+    profileCandidates = NO;
     printf("mixed420_candidate_elapsed_ms=%.3f\n", (NSProcessInfo.processInfo.systemUptime-started)*1000);
+    mach_timebase_info_data_t timebase; mach_timebase_info(&timebase);
+    double millisecondsPerTick = (double)timebase.numer / timebase.denom / 1000000;
+    printf("mixed420_coretext_profile creates=%llu units=%llu create_ms=%.3f typographic_ms=%.3f image_ms=%.3f includes_full_glyph_line=1\n",
+      (unsigned long long)candidateProfile.creates, (unsigned long long)candidateProfile.units,
+      candidateProfile.createTicks*millisecondsPerTick, candidateProfile.typographicTicks*millisecondsPerTick,
+      candidateProfile.imageTicks*millisecondsPerTick);
     check(@"mixed420_complete_metrics", code == nil && validCandidates(mixedResult, mixedText));
-    check(@"mixed420_uncached_equivalence", matchesUncachedCandidates(mixedResult, bridge.uiManager.registry[@1]));
+    check(@"mixed420_uncached_equivalence", matchesUncachedCandidates(mixedResult, (RCTTextView *)bridge.uiManager.registry[@1]));
     RCTTextView *variants = makeView(@"AaAaAaAa", 48);
     [variants.fixtureStorage addAttribute:NSKernAttributeName value:@4 range:NSMakeRange(2, 2)];
     [variants.fixtureStorage addAttribute:NSBaselineOffsetAttributeName value:@3 range:NSMakeRange(4, 2)];

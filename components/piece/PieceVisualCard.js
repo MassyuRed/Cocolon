@@ -166,6 +166,9 @@ export default class PieceVisualCard extends React.Component {
         'このPieceの画像レイアウトは現在確認できません。本文は下で確認できます。') : null;
     const element = React.createElement, ready = measurement.phase === 'native_checked', planning = measurement.phase === 'planning';
     const { fontSize, lineHeight, gap } = pieceNativeTypography(input, measurement.sizeIndex);
+    // Reinspection revokes visibility, not this generation's existing placement.
+    // Moving the rows back to zero would trigger another layout/inspection cycle.
+    const positioned = !!measurement.rowOffsets;
     const ticket = { key: input.key, sizeIndex: measurement.sizeIndex, generation: measurement.generation };
     const scale = this.state.width / input.width;
     const textProps = index => ({
@@ -208,14 +211,14 @@ export default class PieceVisualCard extends React.Component {
           right: input.margin / 2, bottom: input.margin / 2, backgroundColor: input.colors.surface,
           borderColor: input.colors.border, borderWidth: 2 } }),
         element(View, { style: { position: 'absolute', left: input.margin, width: input.contentWidth,
-          top: input.margin + (ready ? (input.contentHeight - measurement.compositionHeight) / 2 : 0) } },
+          top: input.margin + (positioned ? (input.contentHeight - measurement.plan.totalHeight) / 2 : 0) } },
           ...input.blocks.map((body, index) => element(View, {
             key: `row:${index}`, style: { height: planning ? undefined : lineHeight, marginBottom: input.rowGaps?.[index] ?? (index < input.blocks.length - 1 ? gap : 0) },
           }, element(Text, { ...textProps(index), style: {
             width: input.contentWidth, fontSize, lineHeight, fontWeight: '400', fontStyle: 'normal',
             letterSpacing: 0, includeFontPadding: false, textAlign: 'left', color: input.colors.text,
-            position: planning ? 'relative' : 'absolute', left: ready ? measurement.rowOffsets[index].x : 0,
-            top: ready ? measurement.rowOffsets[index].y : 0,
+            position: planning ? 'relative' : 'absolute', left: positioned ? measurement.rowOffsets[index].x : 0,
+            top: positioned ? measurement.rowOffsets[index].y : 0,
           } }, body)))),
         planning || input.brandingMode === 'off' ? null : element(Text, { ...textProps(input.blocks.length), style: {
           position: 'absolute', left: input.margin, width: input.contentWidth,
