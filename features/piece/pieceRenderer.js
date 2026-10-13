@@ -50,11 +50,13 @@ export async function inspectPieceText(node, expected) {
 
 // Candidates are shaped with an immutable snapshot of the mounted Text's
 // font. They guide B9 selection; each selected Text is inspected again.
-function unpackCandidateRows(encoded, boundaries) {
+function candidateRowCount(boundaries) {
   const n = Array.isArray(boundaries) ? boundaries.length - 1 : 0;
-  if (n < 1 || n > 420 || typeof encoded !== 'string') throw measurementError();
-  const count = n * (n + 1) / 2, byteLength = count * 7 * 8;
-  if (encoded.length !== Math.ceil(byteLength / 3) * 4) throw measurementError();
+  if (n < 1 || n > 420) throw measurementError();
+  return n * (n + 1) / 2;
+}
+function unpackBytes(encoded, byteLength) {
+  if (typeof encoded !== 'string' || encoded.length !== Math.ceil(byteLength / 3) * 4) throw measurementError();
   const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/';
   const codes = new Int16Array(128).fill(-1);
   for (let i = 0; i < alphabet.length; i++) codes[alphabet.charCodeAt(i)] = i;
@@ -71,12 +73,34 @@ function unpackCandidateRows(encoded, boundaries) {
     if (!pad3) bytes[offset++] = ((c & 3) << 6) | d;
   }
   if (offset !== byteLength) throw measurementError();
-  const view = new DataView(bytes.buffer), rows = new Array(count);
+  return new DataView(bytes.buffer);
+}
+function unpackCandidateRows(encoded, boundaries) {
+  const count = candidateRowCount(boundaries), view = unpackBytes(encoded, count * 56), rows = new Array(count);
   for (let i = 0; i < count; i++) {
     const row = new Array(7);
     for (let j = 0; j < 7; j++) row[j] = view.getFloat64((i * 7 + j) * 8, true);
     rows[i] = row;
   }
+  return rows;
+}
+
+function unpackIndexedCandidateRows(value) {
+  const count = candidateRowCount(value.boundaries), unique = value.metric_count;
+  if (!Number.isInteger(unique) || unique < 1 || unique > count) throw measurementError();
+  const metrics = unpackBytes(value.metrics_f64le, unique * 40);
+  const indices = unpackBytes(value.row_indices_u32le, count * 4);
+  const used = new Uint8Array(unique), rows = new Array(count), n = value.boundaries.length - 1;
+  let i = 0, seen = 0;
+  for (let start = 0; start < n; start++) for (let end = start + 1; end <= n; end++) {
+    const index = indices.getUint32(i * 4, true);
+    if (index >= unique) throw measurementError();
+    if (!used[index]) { used[index] = 1; seen++; }
+    const row = [start, end];
+    for (let j = 0; j < 5; j++) row.push(metrics.getFloat64(index * 40 + j * 8, true));
+    rows[i++] = row;
+  }
+  if (seen !== unique) throw measurementError();
   return rows;
 }
 
@@ -87,12 +111,15 @@ export async function measurePieceCandidates(node, text, fontSize) {
   try { value = await module.measureCandidates(tag, text, fontSize); }
   catch { throw measurementError(); }
   const packed = value?.version === 'piece.native_candidates.v2';
-  const fields = ['version', 'platform', 'font_size', 'utf16_length', 'boundaries', packed ? 'rows_f64le' : 'rows', 'glyph_check'];
+  const indexed = value?.version === 'piece.native_candidates.v3';
+  const fields = ['version', 'platform', 'font_size', 'utf16_length', 'boundaries', 'glyph_check',
+    ...(indexed ? ['metric_count', 'metrics_f64le', 'row_indices_u32le'] : [packed ? 'rows_f64le' : 'rows'])];
   if (!value || Object.keys(value).sort().join() !== fields.sort().join() ||
-      !['piece.native_candidates.v1', 'piece.native_candidates.v2'].includes(value.version) ||
+      !['piece.native_candidates.v1', 'piece.native_candidates.v2', 'piece.native_candidates.v3'].includes(value.version) ||
       value.platform !== Platform.OS || !['ios', 'android'].includes(Platform.OS) ||
       value.glyph_check !== 'no_missing_observed' || value.utf16_length !== text.length ||
       !finite(value.font_size) || Math.abs(value.font_size - fontSize) > 0.5) throw measurementError();
   // The planner validates exact boundary/row coverage and every metric.
-  return { boundaries: value.boundaries, rows: packed ? unpackCandidateRows(value.rows_f64le, value.boundaries) : value.rows };
+  return { boundaries: value.boundaries, rows: indexed ? unpackIndexedCandidateRows(value)
+    : packed ? unpackCandidateRows(value.rows_f64le, value.boundaries) : value.rows };
 }

@@ -8,6 +8,7 @@
 #include <string.h>
 #include <vector>
 #include <atomic>
+#include <unordered_map>
 
 // Read-only accessors added by the pinned RN patch; no KVC/private-ivar read.
 @interface RCTTextView (CocolonPieceMetrics)
@@ -82,32 +83,43 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
             }];
           std::vector<unichar> textUnits(snapshot.length);
           [snapshotText getCharacters:textUnits.data() range:NSMakeRange(0, snapshot.length)];
+          // Hashes only locate possible matches. Raw text AND complete attribute
+          // spans must still match; even a hash collision never reuses metrics.
+          const uint64_t hashBase = 1099511628211ULL;
+          std::vector<uint64_t> prefixes(snapshot.length + 1, 0), powers(snapshot.length + 1, 1);
+          for (NSUInteger i = 0; i < snapshot.length; i++) {
+            prefixes[i + 1] = prefixes[i] * hashBase + textUnits[i] + attributeIds[i] * 65537ULL;
+            powers[i + 1] = powers[i] * hashBase;
+          }
           // Group only exact text/attribute matches before any parallel work.
           // Keep the existing retained-key budget; uncached ranges remain jobs.
           struct MetricJob { NSRange range; double values[5]; };
           std::vector<MetricJob> jobs;
           std::vector<NSUInteger> rowJobs;
           rowJobs.reserve(count * (count + 1) / 2);
-          NSMutableDictionary<NSString *, NSArray *> *cache = [NSMutableDictionary new];
-          NSUInteger cachedUnits = 0;
+          std::unordered_map<uint64_t, std::vector<NSUInteger>> cache;
+          NSUInteger cachedUnits = 0, cachedKeys = 0;
           for (NSUInteger start = 0; start < count; start++) {
             @autoreleasepool {
               for (NSUInteger end = start + 1; end <= count; end++) {
                 if (NSProcessInfo.processInfo.systemUptime >= deadline) { unavailable(); return; }
                 NSUInteger offset = boundaries[start].unsignedIntegerValue;
                 NSRange range = NSMakeRange(offset, boundaries[end].unsignedIntegerValue - offset);
-                NSString *key = [snapshotText substringWithRange:range];
-                NSArray *cached = cache[key];
-                NSUInteger cachedOffset = cached ? [cached[0] unsignedIntegerValue] : 0;
-                BOOL identical = cached && [cached[1] unsignedIntegerValue] == range.length &&
-                  cachedOffset <= snapshot.length - range.length &&
-                  memcmp(textUnits.data() + cachedOffset, textUnits.data() + offset, range.length * sizeof(unichar)) == 0 &&
-                  memcmp(attributeIds.data() + cachedOffset, attributeIds.data() + offset, range.length * sizeof(NSUInteger)) == 0;
-                NSUInteger index = identical ? [cached[2] unsignedIntegerValue] : jobs.size();
-                if (!identical) {
+                uint64_t key = prefixes[NSMaxRange(range)] - prefixes[offset] * powers[range.length];
+                auto bucket = cache.find(key);
+                NSUInteger index = jobs.size();
+                if (bucket != cache.end()) for (NSUInteger candidate : bucket->second) {
+                  NSRange prior = jobs[candidate].range;
+                  if (prior.length == range.length &&
+                      memcmp(textUnits.data() + prior.location, textUnits.data() + offset, range.length * sizeof(unichar)) == 0 &&
+                      memcmp(attributeIds.data() + prior.location, attributeIds.data() + offset, range.length * sizeof(NSUInteger)) == 0) {
+                    index = candidate; break;
+                  }
+                }
+                if (index == jobs.size()) {
                   jobs.push_back({range, {0, 0, 0, 0, 0}});
-                  if (!cached && cache.count < 16384 && cachedUnits + range.length <= 4 * 1024 * 1024) {
-                    cache[key] = @[@(offset), @(range.length), @(index)]; cachedUnits += range.length;
+                  if (cachedKeys < 16384 && cachedUnits + range.length <= 4 * 1024 * 1024) {
+                    cache[key].push_back(index); cachedUnits += range.length; cachedKeys++;
                   }
                 }
                 rowJobs.push_back(index);
@@ -152,26 +164,29 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
             } @catch (__unused NSException *exception) { failure->store(true, std::memory_order_relaxed); }
           });
           if (failed.load(std::memory_order_relaxed)) { unavailable(); return; }
-          // Reconstruct every range in the original order, preserving all five
-          // measured doubles bit-for-bit and the lossless bridge representation.
-          std::vector<uint64_t> rows;
-          rows.reserve(count * (count + 1) / 2 * 7);
-          NSUInteger rowIndex = 0;
-          for (NSUInteger start = 0; start < count; start++) {
-            for (NSUInteger end = start + 1; end <= count; end++) {
-              if (NSProcessInfo.processInfo.systemUptime >= deadline) { unavailable(); return; }
-              const double *metrics = jobData[rowJobs[rowIndex++]].values;
-              const double values[] = {(double)start, (double)end, metrics[0], metrics[1], metrics[2], metrics[3], metrics[4]};
-              for (double value : values) {
-                uint64_t bits; memcpy(&bits, &value, sizeof(bits));
-                rows.push_back(CFSwapInt64HostToLittle(bits));
-              }
+          // Send each exact job once plus one reference for EVERY ordered range.
+          // The adapter restores the complete seven-value rows before B9.
+          std::vector<uint64_t> metrics;
+          metrics.reserve(jobCount * 5);
+          for (NSUInteger index = 0; index < jobCount; index++) {
+            if (NSProcessInfo.processInfo.systemUptime >= deadline) { unavailable(); return; }
+            for (double value : jobData[index].values) {
+              uint64_t bits; memcpy(&bits, &value, sizeof(bits));
+              metrics.push_back(CFSwapInt64HostToLittle(bits));
             }
           }
-          NSData *bytes = [NSData dataWithBytes:rows.data() length:rows.size() * sizeof(uint64_t)];
-          resolve(@{ @"version": @"piece.native_candidates.v2", @"platform": @"ios", @"font_size": @(fontSize),
+          std::vector<uint32_t> references;
+          references.reserve(rowJobs.size());
+          for (NSUInteger index : rowJobs) {
+            if (NSProcessInfo.processInfo.systemUptime >= deadline) { unavailable(); return; }
+            references.push_back(CFSwapInt32HostToLittle((uint32_t)index));
+          }
+          NSData *metricBytes = [NSData dataWithBytes:metrics.data() length:metrics.size() * sizeof(uint64_t)];
+          NSData *referenceBytes = [NSData dataWithBytes:references.data() length:references.size() * sizeof(uint32_t)];
+          resolve(@{ @"version": @"piece.native_candidates.v3", @"platform": @"ios", @"font_size": @(fontSize),
             @"utf16_length": @(expected.length), @"boundaries": boundaries,
-            @"rows_f64le": [bytes base64EncodedStringWithOptions:0], @"glyph_check": @"no_missing_observed" });
+            @"metric_count": @(jobCount), @"metrics_f64le": [metricBytes base64EncodedStringWithOptions:0],
+            @"row_indices_u32le": [referenceBytes base64EncodedStringWithOptions:0], @"glyph_check": @"no_missing_observed" });
         } @catch (__unused NSException *exception) { unavailable(); }
       });
     } @catch (__unused NSException *exception) { unavailable(); }

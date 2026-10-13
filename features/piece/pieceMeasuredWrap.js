@@ -296,6 +296,24 @@ function wrapSolutions(ctx, maxLines = null, lineHeight = null) {
   return solutions;
 }
 
+// A shortest path over exact measured ranges proves impossibility only.
+// It never supplies rows or changes the ordered B9 scoring for feasible input.
+function minimumMeasuredLineCount(ctx, lineHeight) {
+  const { n, clusters, width } = ctx, counts = new Uint16Array(n + 1).fill(n + 1);
+  counts[n] = 0;
+  for (let start = n - 1; start >= 0; start--) {
+    for (let end = start + 1; end <= n; end++) {
+      if (counts[end] === n + 1 || end < n &&
+          (noStart.has(first(clusters[end])) || noEnd.has(last(clusters[end - 1])))) continue;
+      const metric = ctx.metric(start, end);
+      if (measuredWidth(metric) <= width && metric[6] - metric[4] <= lineHeight) {
+        counts[start] = Math.min(counts[start], counts[end] + 1);
+      }
+    }
+  }
+  return counts[0] === n + 1 ? Infinity : counts[0];
+}
+
 function minimum(values) {
   let best = null;
   for (const value of values) if (best === null || less(value.score, best.score)) best = value;
@@ -344,6 +362,8 @@ export function planPieceMeasuredRows(input, sizeIndex, measurements) {
   const lineHeight = Math.ceil(input.sizes[sizeIndex] * input.lineRatio), gap = lineHeight * input.paragraphRatio;
   if (!finite(lineHeight) || lineHeight <= 0 || !finite(gap)) unavailable();
   const contexts = input.blocks.map((text, index) => blockContext(text, measurements[index], input.contentWidth));
+  const minimumLines = contexts.reduce((sum, context) => sum + minimumMeasuredLineCount(context, lineHeight), 0);
+  if (minimumLines * lineHeight + (contexts.length - 1) * gap > input.contentHeight) return null;
   for (const context of contexts) context.hints = prepareHints(context);
   let groups = [];
   for (const context of contexts) {

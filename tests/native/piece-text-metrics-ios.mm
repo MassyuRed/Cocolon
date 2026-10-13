@@ -110,26 +110,35 @@ static NSDictionary *call(PieceTextMetrics *module, BOOL candidates, NSString *t
   // Decode the actual wire bytes before every pre-existing candidate check
   // and bit-for-bit uncached oracle comparison. No numeric JSON round-trip.
   if (candidates && result) {
-    NSData *data = [[NSData alloc] initWithBase64EncodedString:result[@"rows_f64le"] options:0];
+    NSData *data = [[NSData alloc] initWithBase64EncodedString:result[@"metrics_f64le"] options:0];
+    NSData *indices = [[NSData alloc] initWithBase64EncodedString:result[@"row_indices_u32le"] options:0];
     NSArray *boundaries = result[@"boundaries"];
     NSUInteger n = boundaries.count ? boundaries.count - 1 : 0;
-    if (![result[@"version"] isEqual:@"piece.native_candidates.v2"] || n < 1 || n > 420 ||
-        data.length != n * (n + 1) / 2 * 7 * sizeof(uint64_t)) {
+    NSUInteger unique = [result[@"metric_count"] unsignedIntegerValue], count = n * (n + 1) / 2;
+    if (![result[@"version"] isEqual:@"piece.native_candidates.v3"] || n < 1 || n > 420 ||
+        unique < 1 || unique > count || data.length != unique * 5 * sizeof(uint64_t) ||
+        indices.length != count * sizeof(uint32_t)) {
       *code = @"INVALID_PACKED_RESULT"; return nil;
     }
     NSMutableArray *rows = [NSMutableArray new];
-    for (NSUInteger i = 0; i < data.length; i += 7 * sizeof(uint64_t)) {
-      NSMutableArray *row = [NSMutableArray new];
-      for (NSUInteger j = 0; j < 7; j++) {
-        uint64_t bits; memcpy(&bits, (const uint8_t *)data.bytes + i + j * sizeof(bits), sizeof(bits));
+    NSMutableIndexSet *used = [NSMutableIndexSet new];
+    for (NSUInteger start = 0; start < n; start++) for (NSUInteger end = start + 1; end <= n; end++) {
+      uint32_t index; memcpy(&index, (const uint8_t *)indices.bytes + rows.count * sizeof(index), sizeof(index));
+      index = CFSwapInt32LittleToHost(index);
+      if (index >= unique) { *code = @"INVALID_PACKED_RESULT"; return nil; }
+      [used addIndex:index];
+      NSMutableArray *row = [NSMutableArray arrayWithObjects:@(start), @(end), nil];
+      for (NSUInteger j = 0; j < 5; j++) {
+        uint64_t bits; memcpy(&bits, (const uint8_t *)data.bytes + (index * 5 + j) * sizeof(bits), sizeof(bits));
         bits = CFSwapInt64LittleToHost(bits);
         double value; memcpy(&value, &bits, sizeof(value)); [row addObject:@(value)];
       }
       [rows addObject:row];
     }
+    if (used.count != unique) { *code = @"INVALID_PACKED_RESULT"; return nil; }
     NSMutableDictionary *decoded = [result mutableCopy];
     decoded[@"version"] = @"piece.native_candidates.v1"; decoded[@"rows"] = rows;
-    [decoded removeObjectForKey:@"rows_f64le"]; result = decoded;
+    [decoded removeObjectsForKeys:@[@"metric_count", @"metrics_f64le", @"row_indices_u32le"]]; result = decoded;
   }
   *code = error; return result;
 }

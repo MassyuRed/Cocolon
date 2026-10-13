@@ -42,7 +42,9 @@ NativeModules.PieceTextMetrics.measureCandidates = (...args) => {
     const packedBytes = typeof value.rows_f64le === 'string'
       ? value.rows_f64le.length / 4 * 3 - (value.rows_f64le.endsWith('==') ? 2 : value.rows_f64le.endsWith('=') ? 1 : 0) : null;
     Object.assign(sample, { status: 'resolved', elapsed_ms: performance.now() - started,
-      rows: value.rows?.length ?? (packedBytes === null ? null : packedBytes / 56), version: value.version });
+      rows: value.rows?.length ?? (value.version === 'piece.native_candidates.v3'
+        ? value.boundaries.length * (value.boundaries.length - 1) / 2 : packedBytes === null ? null : packedBytes / 56),
+      metric_count: value.metric_count ?? null, version: value.version });
     console.log('PIECE_RN_CANDIDATES', JSON.stringify(sample));
     return value;
   }, error => {

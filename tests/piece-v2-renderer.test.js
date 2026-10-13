@@ -108,6 +108,75 @@ function packedCandidates(table) {
   rows.forEach((row, i) => row.forEach((number, j) => bytes.writeDoubleLE(number, (i * 7 + j) * 8)));
   return { ...metadata, version: 'piece.native_candidates.v2', rows_f64le: bytes.toString('base64') };
 }
+function indexedCandidates(table) {
+  const { rows, ...metadata } = table, unique = [], keys = new Map(), indices = Buffer.alloc(rows.length * 4);
+  rows.forEach((row, i) => {
+    const bytes = Buffer.alloc(40);
+    row.slice(2).forEach((number, j) => bytes.writeDoubleLE(number, j * 8));
+    const key = bytes.toString('hex');
+    if (!keys.has(key)) { keys.set(key, unique.length); unique.push(bytes); }
+    indices.writeUInt32LE(keys.get(key), i * 4);
+  });
+  return { ...metadata, version: 'piece.native_candidates.v3', metric_count: unique.length,
+    metrics_f64le: Buffer.concat(unique).toString('base64'), row_indices_u32le: indices.toString('base64') };
+}
+test('indexed native rows preserve every range and exact double bits with shared metrics', async () => {
+  let expected, wire;
+  const h = rawHarness(sample(), undefined, false, value => {
+    expected = value;
+    for (const row of value.rows) if (row[1] - row[0] === 1) {
+      row.splice(2, 5, Math.PI, -0, -Number.MIN_VALUE, Math.PI, Number.MIN_VALUE);
+    }
+    wire = indexedCandidates(value); return wire;
+  });
+  const actual = await h.measurePieceCandidates({ tag: 1 }, 'abc', 48);
+  assert.ok(wire.metric_count < expected.rows.length);
+  assert.deepEqual(copy(actual.boundaries), expected.boundaries);
+  actual.rows.forEach((row, i) => row.forEach((number, j) => assert.ok(Object.is(number, expected.rows[i][j]))));
+});
+test('indexed transport keeps the legacy planner result and actual inspection requirements', async () => {
+  const old = await harness(), indexed = await harness(sample(), undefined, false, indexedCandidates);
+  assert.deepEqual(copy(indexed.card.state.measurement.plan), copy(old.card.state.measurement.plan));
+  await finish(indexed);
+  assert.equal(indexed.card.state.measurement.phase, 'native_checked');
+  assert.equal(indexed.card.state.measurement.canSave, false);
+  assert.equal(indexed.card.state.measurement.canExport, false);
+});
+test('indexed transport rejects malformed, unreferenced, out-of-range and invalid metrics', async () => {
+  for (const mutate of [
+    r => ({ ...r, metric_count: 0 }),
+    r => ({ ...r, metric_count: 0.5 }),
+    r => ({ ...r, metric_count: 88411 }),
+    r => ({ ...r, rows: [] }),
+    r => ({ ...r, metrics_f64le: null }),
+    r => ({ ...r, metrics_f64le: r.metrics_f64le.slice(4) }),
+    r => ({ ...r, row_indices_u32le: r.row_indices_u32le.slice(4) }),
+    r => ({ ...r, row_indices_u32le: '!' + r.row_indices_u32le.slice(1) }),
+    r => ({ ...r, boundaries: new Array(422).fill(0) }),
+    r => {
+      const bytes = Buffer.from(r.row_indices_u32le, 'base64'); bytes.writeUInt32LE(r.metric_count, 0);
+      return { ...r, row_indices_u32le: bytes.toString('base64') };
+    },
+    r => {
+      const bytes = Buffer.from(r.metrics_f64le, 'base64'); bytes.writeDoubleLE(NaN, 0);
+      return { ...r, metrics_f64le: bytes.toString('base64') };
+    },
+    r => ({ ...r, metric_count: r.metric_count + 1,
+      metrics_f64le: Buffer.concat([Buffer.from(r.metrics_f64le, 'base64'), Buffer.alloc(40)]).toString('base64') }),
+  ]) {
+    const h = await harness(sample(), undefined, false, value => mutate(indexedCandidates(value)));
+    assert.equal(h.card.state.measurement.phase, 'unavailable');
+    assert.equal(h.card.state.measurement.reason, 'native_candidates_unavailable');
+    assert.equal(h.nativeCalls.length, 0);
+  }
+  for (const field of ['metrics_f64le', 'row_indices_u32le']) {
+    const h = rawHarness(sample(), undefined, false, value => {
+      const packed = indexedCandidates(value);
+      return { ...packed, [field]: packed[field].slice(0, -3) + 'B==' };
+    });
+    await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'a', 48), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+  }
+});
 test('packed native rows preserve every double bit, including signed zero and subnormal values', async () => {
   let expected;
   const h = rawHarness(sample(), undefined, false, value => {
