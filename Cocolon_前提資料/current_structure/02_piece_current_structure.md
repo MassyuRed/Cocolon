@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新作業は入口§67／本map §65.15です。source `f93f9108` はJS763件・native63件成功。実RN run38480929335は4ケース成功、420文字は40pt候補待ちで8,113.969msのtimeoutとなり未解消です。5件JSON・4画像を確認済みで、保存接続へはまだ進めません。**
+**最新作業は入口§68／本map §65.16です。source `015dda53` で候補ごとのCoreText初期化をbounded batchへ変更し、旧独立計測との全候補bit一致と実RN5ケースを検証中です。JS763件は成功。420文字の解消は未確認です。**
 
 **現在は入口§66／current map §65.14を優先します。source `ec5db637` はnative63件・JS758件を通過し、実RN4ケースと4枚PNGを確認しました。420文字は48→44→40→36ptの全候補計測・復号が返りましたが、36ptのB9開始前に全体8,118.417msでtimeoutとなり、未解消です。共有CF版のcrashは専用workerデータへ修正し、最新native/実RNでは再発しませんでした。次は候補の反復と最終復号を短縮し、36ptのB9・最終inspectionまで同じ8秒内へ収めることです。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
 
@@ -2620,3 +2620,17 @@ local13suiteは763 PASS／FAIL0／SKIP0。padding全形のbit同値、途中各�
 入口§67.1に全結果・artifact identity・read-only worker配分調査・保存supplierの一次定義を記録しました。既存4workerのUTF16量差は最大3で、長さの偏りを理由に方式や数を変える根拠はありません。次は既存 `ios/tempCocolon/PieceTextMetrics.mm` の同一属性substring／CoreText行作成の反復を、既存profileとbit同値を保って直接短縮し、同じ実RN5ケースで8秒・最終inspectionを確認すること。JS検査成功を420文字解消へ変換しません。primary outcome=BLOCKER_NARROWED。
 
 正式renderer供給→保存直前fit→通常初回保存→実機受入れは描画確認後の残件。Card→Modal→既存host判定が接続箇所で、prototype native_checked・例示versionを正式採用の根拠にしません。STRUCTURE_MAP_DELTA_NONE（既存内部処理のみ）、default OFF、canSave/canExport=false、Draft/open/unmerged、DB/env/deploy/署名/配布/main merge効果0を保持します。
+
+### 65.16 独立候補を段落ごとに束ねたCoreText計測
+
+source `015dda53ece8a65dbc3ce374e9fc814a4c1840a3` は既存 `ios/tempCocolon/PieceTextMetrics.mm` と `tests/native/piece-text-metrics-ios.mm` の2pathです。420文字が全体8秒で停止する残件に対し、候補ごとのCoreText初期化をまとめる内部実装を検証します。
+
+- 各worker専用のattributed batchへ、元の独立substringと完全属性をそのまま転記し、候補間へU+2029を置きます。1batchは最大16,384 UTF16単位・256候補。separatorをcandidate range・本文・返却値へ含めず、各rangeをCTTypesetterCreateLineで計測します。全候補表、v3 Float64転送、B9、4worker、48→44→40→36pt、元の8秒、最終mounted Text inspectionは維持します。
+- typesetterとCF storageをworker専有にし、早期returnを含む所有期間を明示しました。旧独立CTLineとの全range・全5metricのbit一致を採用条件のまま保持します。段落全体のsubstring contextを共有する方式ではありませんが、separatorによる影響がないと未検証で決めません。
+- 既存native63判定を保持し、Latin合字／Arabic／Hebrew／bidi混在／絵文字／属性の全候補比較6件と、batch先頭・中間・末尾／前後neighbor／末尾separator有無の直接比較5件を追加。tab・改行・未閉鎖bidiは直接CoreText比較へ分離し、製品のglyph判定を弱めません。期待74判定、alarm90秒は不変です。新typesetter作成・行作成のprofileを別々に計上します。
+
+local既存13suiteは763 PASS／FAIL0／SKIP0。GitHub [run38485611654](https://github.com/MassyuRed/Cocolon/actions/runs/38485611654) のJS job115598400212も763 PASS／FAIL0／SKIP0（Node24.21.0／TypeScript5.2.2）。source2pathのremote全文・親071f3d8・変更path集合は一致確認済み。同環境の独立補助reviewで、範囲対応・属性・worker所有・deadlineに静的blockerなし。別modelのreview実績へ換算しません。
+
+native job115598400327は最初のCASE japaneseのSTAGE view_initで停止し、90秒alarm／signal14／exit142で終了しました。STAGE view_ready・candidate_call・最初のassertionへ到達しておらず、今回の計測変更の同値／性能は未検証です。同じsourceの単体jobだけを再実行する要求は、並行する実RN job115598400455が実行中のためGitHubに拒否されました（workflow already running）。実RN完了後に単体jobを一度再実行して確認します。実RN job115598400455は検証中です。全候補bit一致、5ケースの本文・最終inspection・PNG・8秒を実結果で判断します。候補の高速化や420文字の解消はまだ未確認です。正式renderer供給→保存直前fit→同じpreview/tokenの初回保存→実機受入れは未完了です。
+
+STRUCTURE_MAP_DELTA_NONE（既存native内部実装と対応検査のみ）。全体設計・全file地図・最新weekly10/10 §5.5・12/18目標を確認済み。default OFF、canSave/canExport=false、Draft/open/unmerged、DB/env/deploy/署名/配布/main merge効果0を保持します。
