@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_piece_read_first
 title: "Cocolon Piece — Read First"
-revision_date: "2026-10-11 JST"
+revision_date: "2026-10-13 JST"
 decision_owner: "Mash"
 workstream: "Cocolon / Piece"
 document_status: "CURRENT_PIECE_WORKSTREAM_ENTRY"
@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§57／current map §61を優先します。通常Piece画面の見出し直下から「自分のPiece」を開けるよう、既存本人履歴へ接続しました。本人読取flagが有効な認証済み通常画面だけに表示します。実機・正式renderer admission・保存前fit・初回保存は未完了です。通常入力のV2一本化は§56、写真保存結果保持は§55を継承します。**
+**現在は§58／current map §62を優先します。API `804beca` の候補構成限定の旧4 write経路除去と、RN `d9ccbc1` の初回保存Modal準備を反映済みとして同期しました。Modalの初回保存操作は親画面・正式描画判定へ未接続で、アプリからの初回保存は未完成です。保存結果・同一要求の再確認・本人詳細・通常Nexusの本人履歴入口は既存実装を継承します。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1084,3 +1084,26 @@ local既存12suite **634 PASS／FAIL0／SKIP0**（先行611＋追加23）。Inpu
 本線はB9実機描画→正式renderer admission→保存前fit→初回保存。画像共有の全完成を初回実機確認の前提にしない。今回の入口接続はAPI有効化・アプリ配布ではなく、全面M5の完了でもない。weekly10/10 §5.5と12/18目標を継承する。
 
 §57反映確認：source `d866dc081bfc8f9cbae3bfb21bb2777b74b1ff63` の製品2＋test1をDraft PR #30へ反映し、remote全文・変更path集合・親head一致を確認した。[CI38104312149](https://github.com/MassyuRed/Cocolon/actions/runs/38104312149)は全5job success、JSはlocal／CIそれぞれ **667 PASS／FAIL0／SKIP0**。screen/IAP/theme77件はlocalの別検査。既存Android／iOS bridge source検査も成功。依存差分がないためexport library compileは両OSともskip。入口§57／map§61／manifest v56を同期する。実機・正式保存判定・稼働切替は未完了。
+
+
+## 58. 2026-10-13 — 旧write除去と初回保存Modal準備の同期
+
+### 反映済みの範囲
+
+API `804beca66f9f02e18dc4522232478466f4d52b13` は `ai/services/ai_inference/app.py` と `api_contract_registry.py` を変更した。`piece_preview_configuration` が明示されたshared V2候補に限り、旧POST `/emotion/piece/publish`、`/emotion/piece/cancel`、`/emotion/reflection/publish`、`/emotion/reflection/cancel` を除去する。V2へのalias化やredirectはせず、既定のlegacy構成と対象外のNexus/Q&A経路は保持する。この差分とPR #3のheadを再取得して確認した。稼働切替・M5全面完了・今回のAPI検査再実行を意味しない。同じ4経路除去を再実装しない。
+
+RN `d9ccbc1d62851f7792c2384497ee817171c45ee1` は既存 `components/piece/PiecePreviewModal.js` に `onSave` を追加した。received/hash-verified preview、厳密な `display.canSave === true`、表示token、callbackがそろった場合だけ初回保存操作を表示し、固定した候補ID・revision・recipe hashと同じtokenを渡す。Modal自身は保存許可・保存key・本文・HTTPを生成しない。保存結果、同一保存要求の再確認、取消、保存直後の本人詳細は保持する。前回の未反映patchを再適用しない。
+
+### 既存検証の記録と限界
+
+同commitの `tests/piece-v2-initial-save-modal.test.js` は通常のNode source-VM方式で42件を検査する。前回確認済みの同じ42件は変更前38 PASS／4 FAIL、変更後42 PASS／FAIL0／SKIP0。既存 `.github/workflows/piece-rn-contracts.yml` へこの検査を追加し、run `38345010905` のJS job `115124267331` はNode24.21.0／TypeScript5.2.2で709 PASS／FAIL0／SKIP0。709には42を含み、合算しない。これは実際のモジュールを用いた合成React/native/Auth/HTTP境界の検査であり、端末・稼働DB・商品受入れではない。この文書同期で新しい商品検査を実行したとはしない。
+
+2026-10-13の追加取得では、同runのiOS source、Android source、Android export libraryの各jobもsuccess。Android export job `115124268056` の4 library compile stepは完了。iOS export Pods job `115124267502` は最終取得時点でin_progressのため、run全体成功・iOS export library compile完了を認定しない。以前の「export2 job未確認」は当時の記録として保持する。
+
+### 次の再開位置
+
+`features/piece/piecePreviewModel.js::readPiecePreviewDisplay` は現在も `canSave:false`。`screens/input/InputPieceActionArea.js` は初回 `onSave` と正式な `isSaveAdmitted` を供給していない。既存 `PieceCreateController.savePreview(identity, displayToken, idempotencyKey)` は再照合・単一要求・保存結果保持を実装済みだが、正式な供給元との接続が残る。`PieceVisualCard` の `native_checked` とローカルcapture targetは正式renderer admissionではない。quota、flag、hash、version文字列、合成テストを正式な描画合格へ置き換えない。
+
+本線はB9の実機描画同等性・glyph/ink/性能、正式renderer admission、保存直前のfit、同じ候補/token/keyによる初回保存の親画面接続。既存保存controller・結果再確認・本人詳細・Nexus本人履歴入口・写真保存結果保持を再実装しない。画像保存共有、形式変更、Nexus公開読取/切替、tutorial/旧APIを含むM5残差、稼働接続は引き続き未完了。画像共有の全完成を初回実機確認の追加前提にしない。
+
+最新weekly `Cocolon_Weekly_Review_20261010.md` §5.5、公開目標2026-12-18、default OFF、Draft/open/unmerged、automatic_progression=falseを維持する。この同期は既に反映したsourceと現在地の文書同期であり、稼働DB・env・deploy・activation・native app build・署名・配布・main mergeへの効果は0。実機未確認だけでなく実装未接続が残るため、単にMashの確認待ちとはしない。

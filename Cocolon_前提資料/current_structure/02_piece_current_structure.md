@@ -1,8 +1,8 @@
 ---
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
-revision_date: "2026-10-11 JST"
-latest_api_implementation: "6b901a1df0037c047513e794624917a09b0f3ac4"
+revision_date: "2026-10-13 JST"
+latest_api_implementation: "804beca66f9f02e18dc4522232478466f4d52b13"
 latest_storage_candidate: "4fcb140b778850a1b7a5a65d8e0a26005b3a24c4"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新の作業記録は§61。通常Piece画面（Nexus）の見出し直下へ本人履歴の入口を接続しました。既存owner-read flagと本人・画面状態で制御し、旧公開投稿／共鳴の読取とは独立します。非稼働のコード準備であり、実機・正式renderer admission・保存前fit・初回保存・M5全面は未完了です。**
+**最新の作業記録は§62。API `804beca` で明示shared V2候補から旧4 write経路を除去し、RN `d9ccbc1` で初回保存Modalの準備コードを反映しました。今回の同期では製品コードを追加変更していません。正式renderer admission・保存前fit・親画面からの初回保存・実機・M5全面は未完了です。§61の通常Nexus本人履歴入口は継承します。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -2238,3 +2238,32 @@ API／SQL／native／依存／workflow／Supabase操作・DB書込・env/deploy/
 source `d866dc081bfc8f9cbae3bfb21bb2777b74b1ff63` の製品2＋test1をDraft PR #30へ反映し、全3fileのremote全文・変更path集合・親headを照合した。[CI38104312149](https://github.com/MassyuRed/Cocolon/actions/runs/38104312149)は**全5job success**。JS job114366443700は **667 PASS／FAIL0／SKIP0**、Node24.21.0／TypeScript5.2.2。local667件と合算せず、別のscreen/IAP/theme77件はlocal結果だけ。Android bridge source compileとiOS source syntax／patch検査もsuccess。export Pods／Android依存compile stepは依存差分がなくscopeどおりskipで、今回の実native再buildではない。
 
 既存入口§57／本map§61／manifest v56を別の資料commitで同じPRへ同期する。通常入口の接続と既存本人読取のsource検査を完了した範囲に限り、API稼働構成、実機受入れ、保存前fit・初回保存、全面M5は未完了。
+
+
+## 62. 2026-10-13 — 反映済みAPIと初回保存Modal準備を現在地へ同期
+
+### 62.1 反映済みsourceと検証
+
+### 反映済みの範囲
+
+API `804beca66f9f02e18dc4522232478466f4d52b13` は `ai/services/ai_inference/app.py` と `api_contract_registry.py` を変更した。`piece_preview_configuration` が明示されたshared V2候補に限り、旧POST `/emotion/piece/publish`、`/emotion/piece/cancel`、`/emotion/reflection/publish`、`/emotion/reflection/cancel` を除去する。V2へのalias化やredirectはせず、既定のlegacy構成と対象外のNexus/Q&A経路は保持する。この差分とPR #3のheadを再取得して確認した。稼働切替・M5全面完了・今回のAPI検査再実行を意味しない。同じ4経路除去を再実装しない。
+
+RN `d9ccbc1d62851f7792c2384497ee817171c45ee1` は既存 `components/piece/PiecePreviewModal.js` に `onSave` を追加した。received/hash-verified preview、厳密な `display.canSave === true`、表示token、callbackがそろった場合だけ初回保存操作を表示し、固定した候補ID・revision・recipe hashと同じtokenを渡す。Modal自身は保存許可・保存key・本文・HTTPを生成しない。保存結果、同一保存要求の再確認、取消、保存直後の本人詳細は保持する。前回の未反映patchを再適用しない。
+
+### 既存検証の記録と限界
+
+同commitの `tests/piece-v2-initial-save-modal.test.js` は通常のNode source-VM方式で42件を検査する。前回確認済みの同じ42件は変更前38 PASS／4 FAIL、変更後42 PASS／FAIL0／SKIP0。既存 `.github/workflows/piece-rn-contracts.yml` へこの検査を追加し、run `38345010905` のJS job `115124267331` はNode24.21.0／TypeScript5.2.2で709 PASS／FAIL0／SKIP0。709には42を含み、合算しない。これは実際のモジュールを用いた合成React/native/Auth/HTTP境界の検査であり、端末・稼働DB・商品受入れではない。この文書同期で新しい商品検査を実行したとはしない。
+
+2026-10-13の追加取得では、同runのiOS source、Android source、Android export libraryの各jobもsuccess。Android export job `115124268056` の4 library compile stepは完了。iOS export Pods job `115124267502` は最終取得時点でin_progressのため、run全体成功・iOS export library compile完了を認定しない。以前の「export2 job未確認」は当時の記録として保持する。
+
+### 62.2 文書同期の範囲
+
+既存入口§58、本map§62、manifest v57を同期する。既存本文・過去の履歴を保持し、currentの案内と実装状態だけを更新する。3資料の全文とGit blob識別値を既存v56と照合したうえで変更し、入口/mapの新しい全文からmanifestのhashとbyte数を計算する。製品コード・契約・検査基準の変更は0。GitHub反映後の確認は既存PR #30へ記録する。STRUCTURE_MAP_DELTA_UPDATED（反映済みsourceの現在地同期）。
+
+### 62.3 再開位置と未完了
+
+`features/piece/piecePreviewModel.js::readPiecePreviewDisplay` は現在も `canSave:false`。`screens/input/InputPieceActionArea.js` は初回 `onSave` と正式な `isSaveAdmitted` を供給していない。既存 `PieceCreateController.savePreview(identity, displayToken, idempotencyKey)` は再照合・単一要求・保存結果保持を実装済みだが、正式な供給元との接続が残る。`PieceVisualCard` の `native_checked` とローカルcapture targetは正式renderer admissionではない。quota、flag、hash、version文字列、合成テストを正式な描画合格へ置き換えない。
+
+本線はB9の実機描画同等性・glyph/ink/性能、正式renderer admission、保存直前のfit、同じ候補/token/keyによる初回保存の親画面接続。既存保存controller・結果再確認・本人詳細・Nexus本人履歴入口・写真保存結果保持を再実装しない。画像保存共有、形式変更、Nexus公開読取/切替、tutorial/旧APIを含むM5残差、稼働接続は引き続き未完了。画像共有の全完成を初回実機確認の追加前提にしない。
+
+最新weekly `Cocolon_Weekly_Review_20261010.md` §5.5、公開目標2026-12-18、default OFF、Draft/open/unmerged、automatic_progression=falseを維持する。この同期は既に反映したsourceと現在地の文書同期であり、稼働DB・env・deploy・activation・native app build・署名・配布・main mergeへの効果は0。実機未確認だけでなく実装未接続が残るため、単にMashの確認待ちとはしない。
