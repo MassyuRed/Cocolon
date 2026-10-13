@@ -65,6 +65,10 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
           }
           CFRelease(full);
           if (!glyphs) { unavailable(); return; }
+          NSRange allAttributes = NSMakeRange(0, snapshot.length), sameAttributes = NSMakeRange(0, 0);
+          [snapshot attributesAtIndex:0 longestEffectiveRange:&sameAttributes inRange:allAttributes];
+          BOOL uniformAttributes = NSEqualRanges(sameAttributes, allAttributes);
+          NSString *snapshotText = snapshot.string;
           NSMutableArray *rows = [NSMutableArray new];
           // Repeated ranges can have identical text but different attributes.
           // Reuse only an exact attributed-string match within this snapshot.
@@ -76,10 +80,15 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
               for (NSUInteger end = start + 1; end <= count; end++) {
                 if (NSProcessInfo.processInfo.systemUptime >= deadline) { unavailable(); return; }
                 NSUInteger offset = boundaries[start].unsignedIntegerValue;
-                NSAttributedString *part = [snapshot attributedSubstringFromRange:NSMakeRange(offset, boundaries[end].unsignedIntegerValue - offset)];
-                NSArray *cached = cache[part.string];
-                NSArray *metrics = cached && [cached[0] isEqualToAttributedString:part] ? cached[1] : nil;
+                NSRange range = NSMakeRange(offset, boundaries[end].unsignedIntegerValue - offset);
+                // One complete attribute run proves equal text has equal attributes.
+                // Avoid constructing another attributed substring on those cache hits.
+                NSAttributedString *part = uniformAttributes ? nil : [snapshot attributedSubstringFromRange:range];
+                NSString *key = uniformAttributes ? [snapshotText substringWithRange:range] : part.string;
+                NSArray *cached = cache[key];
+                NSArray *metrics = cached && (uniformAttributes || [cached[0] isEqualToAttributedString:part]) ? cached[1] : nil;
                 if (!metrics) {
+                  if (!part) part = [snapshot attributedSubstringFromRange:range];
                   CTLineRef line = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)part);
                   if (!line) { unavailable(); return; }
                   double advance = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
@@ -98,7 +107,7 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
                   metrics = @[@(advance), @(CGRectGetMinX(ink)), @(-CGRectGetMaxY(ink)),
                               @(CGRectGetMaxX(ink)), @(-CGRectGetMinY(ink))];
                   if (!cached && cache.count < 16384 && cachedUnits + part.length <= 4 * 1024 * 1024) {
-                    cache[part.string] = @[part, metrics]; cachedUnits += part.length;
+                    cache[key] = @[part, metrics]; cachedUnits += part.length;
                   }
                 }
                 [rows addObject:@[@(start), @(end), metrics[0], metrics[1], metrics[2], metrics[3], metrics[4]]];
