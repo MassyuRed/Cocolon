@@ -90,15 +90,19 @@ function unpackIndexedCandidateRows(value) {
   if (!Number.isInteger(unique) || unique < 1 || unique > count) throw measurementError();
   const metrics = unpackBytes(value.metrics_f64le, unique * 40);
   const indices = unpackBytes(value.row_indices_u32le, count * 4);
+  // Decode each exact representative once; every ordered range still gets
+  // its complete row and the planner validates every value as before.
+  const decoded = new Float64Array(unique * 5);
+  for (let j = 0; j < decoded.length; j++) decoded[j] = metrics.getFloat64(j * 8, true);
   const used = new Uint8Array(unique), rows = new Array(count), n = value.boundaries.length - 1;
   let i = 0, seen = 0;
   for (let start = 0; start < n; start++) for (let end = start + 1; end <= n; end++) {
     const index = indices.getUint32(i * 4, true);
     if (index >= unique) throw measurementError();
     if (!used[index]) { used[index] = 1; seen++; }
-    const row = [start, end];
-    for (let j = 0; j < 5; j++) row.push(metrics.getFloat64(index * 40 + j * 8, true));
-    rows[i++] = row;
+    const offset = index * 5;
+    rows[i++] = [start, end, decoded[offset], decoded[offset + 1], decoded[offset + 2],
+      decoded[offset + 3], decoded[offset + 4]];
   }
   if (seen !== unique) throw measurementError();
   return rows;

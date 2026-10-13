@@ -251,7 +251,7 @@ export default class PieceVisualCard extends React.Component {
             left: (this.state.width - input.width) / 2, top: (input.height * scale - input.height) / 2,
             transform: [{ scale }], opacity: ready ? 1 : 0, backgroundColor: input.colors.canvas },
         },
-        nextEntry ? element(View, { key: `prefetch:${nextSize}`, pointerEvents: 'none',
+        nextEntry ? element(View, { key: `prefetch:${input.key}:${nextSize}`, pointerEvents: 'none',
           style: { position: 'absolute', left: 0, top: 0, opacity: 0 },
           accessible: false, accessibilityElementsHidden: true, importantForAccessibility: 'no-hide-descendants' },
           ...raw.blocks.map((body, index) => element(Text, {
