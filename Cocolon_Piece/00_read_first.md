@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は入口§64／current map §65.12を優先します。source `ecfda573` で次fontの先行実測を反映し、native62件／GitHub JS758件が成功しました。source `f882601c` は入力切替時のprobe再mountと代表計測値の一度だけの復号を補正し、local JS758件が成功しています。最新run38472162457の実RN5ケースを検証中で、420文字の全体8秒以内・最終画像は未確認です。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
+**現在は入口§65／current map §65.13を優先します。先行計測版の実RNは4件成功・420文字8,089.435msのtimeoutで、未解決です。native62件とJS758件は成功。source `785c37a9` で完全に同じ属性を持つ本文の部分文字列作成を局所修正し、run38474295233のnative63件／実RN5ケースで検証中です。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1218,3 +1218,16 @@ STRUCTURE_MAP_DELTA_NONE（既存Cardと計測ownerの内部順序のみ）。we
 §64 追加修正：source `f882601c115bd075d1379a09837d4d9043caa6e1` は既存製品2pathです。`PieceVisualCard.js` の先行probeのReact keyを入力keyに結び、同じ寸法の別入力でもonLayoutを取り直します。`pieceRenderer.js` はv3代表値を一度だけFloat64へ復号し、全候補の7数値行へコピーします。混在420文字の11,381代表ではFloat64読取が442,050回から56,905回、追加typed bufferは455,240 bytesです。全88,410候補、参照と全代表使用の検証、符号付き0／subnormalを含む有限値、B9全数値検証、font順、8秒を保持します。local13suiteは758 PASS／FAIL0／SKIP0。2pathのremote全文・親head・変更pathを照合済みです。
 
 先行source `ecfda573` のnative job115546512207は62 PASS／FAIL0／SKIP0、混在420文字を含む旧uncached全候補比較と別module/48・44ptの3追加判定が成功しました。単体混在420文字は2,575.993msであり、実RN全体時間ではありません。GitHub JS job115546512276は758 PASS／FAIL0／SKIP0。先行実RN job115546511987はまだ進行中です。最新sourceの[run38472162457](https://github.com/MassyuRed/Cocolon/actions/runs/38472162457)、実RN job115553723490の5件JSON／PNGと全体時間を次に確認します。未完了runを成功へ換算しません。
+
+
+## 65. 2026-10-14 JST — 実RN期限超過の内訳と完全属性の部分文字列作成
+
+先行source `ecfda573` の[run38470057115](https://github.com/MassyuRed/Cocolon/actions/runs/38470057115)は完了しました。短文1,368.814ms／引用1,636.797ms／宣言299.457ms／保存済み5,483.014msはnative_checked、本文保持・native_canvas_valid・4枚PNGの本文／余白／brandingを確認しました。artifact11851834939（59,317,729 bytes、SHA256 `24acbe0b0ea8452b4ee7cdd5c75a9c6a692e73957722cb0e984e5dcba411468d`）のdigestを照合済みです。
+
+420文字は8,089.435msでmeasurement_timeout、40ptのsize2、plan／PNGなし。48pt候補3,126.507ms／adapter3,393.581ms／B9不成立242.812ms、44pt候補6,687.866ms／adapter6,940.100ms／B9不成立224.464msでした。44pt呼出時間にはqueue待ちが含まれ、単純加算しません。44ptへの状態移行は3,766.830ms、40ptへ7,301.694ms。40／36ptも先行発行済みですが期限内に解決しませんでした。保存済みcaseの候補待ち約5.2秒は、直前の未完了候補が共有queueに残ることと整合しますが、単独原因確定とはしません。
+
+source `f882601c` のnative job115553723717は62 PASS／FAIL0／SKIP0、GitHub JS job115553723621は758 PASS／FAIL0／SKIP0。実RN job115553723490は検証中です。source `59f7fa7d38ac8ac1aff90da5c05943047ea0bc82` は既存native検査1pathだけの観測拡張で、製品sourceを変更しません。run38473518272／job115558365099は62 PASS／FAIL0／SKIP0。混在420文字の時計は2,083.495ms（検査decode含む）、queue0.015ms、glyph＋分類48.232ms、worker実時間1,676.862ms、pack＋resolve19.645ms、検査decode337.325msでした。worker内累積はCoreText作成1,817.048ms／ink485.550ms／generic部分文字列1,126.983ms／release154.248ms、時計取得8.555ms（199,584回）。累積を実時間へ加算／4で除算して未計測時間と断定しません。時計poll頻度の変更は採用せず、実測で支配的なworker処理を対象にしました。
+
+最新source `785c37a950932af96eb39c92dc721aa6dc8e02fd` は製品1＋test1の2pathです。`ios/tempCocolon/PieceTextMetrics.mm` は既存の完全属性dictionary分類が1種類だけの場合、同じUTF-16 substringとdictionary全体からimmutable NSAttributedStringを直接作ります。複数属性の場合は元のattributedSubstringFromRange経路を保持します。文字・全属性・全候補・CoreText式・4worker・font順・8秒を維持し、font比例や候補省略を使いません。`tests/native/piece-text-metrics-ios.mm` は全文uniformのkern／baselineOffset／monospaced fontの独立uncached bit比較を1件追加し、未到達phaseの時計はNaNとしました。計測名generic_substring_sum_msは旧経路だけを表し、新規文字列生成コストはworker実時間で読みます。
+
+2pathのremote全文・親head・変更pathを確認済みです。最新[run38474295233](https://github.com/MassyuRed/Cocolon/actions/runs/38474295233)のnative job115561053058（期待63判定）と実RN job115561052750（5ケース）を次に確認します。全体8秒や高速化を未確認で成功扱いしません。正式renderer supplier→保存直前fit→同じpreview/tokenの通常初回保存→実機受入れは未完了です。既存host/controller/API保存を再実装せず、この描画確認後に接続を進めます。weekly10/10 §5.5・12/18目標、default OFF、Draft/open/unmerged、STRUCTURE_MAP_DELTA_NONE、DB/env/deploy/署名/配布/main merge効果0を保持します。
