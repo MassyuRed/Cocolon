@@ -3,11 +3,16 @@
  * retained. `savedInput` mode explicitly reads the saved ID, then waits for a
  * separate preview action; it requires the existing live runtime predicate.
  * The host only reads body-free request/session identity. No raw input/Emlis
- * body, runtime flag activation, key generation, quota default, initial save or export. Existing save outcomes/retries are displayed.
+ * body, runtime flag activation, quota default or export. Initial save delegates
+ * to the existing controller only with a separately supplied, synchronous,
+ * side-effect-free `isSaveAdmitted(preview, displayToken)` predicate. The current
+ * InputScreen supplies no such predicate: native_checked is not admission.
+ * A fresh opaque save key is created only on the explicit initial-save press;
+ * retries remain owned by the controller's immutable request/key.
  */
 import React from 'react';
 import { AppRuntimeContext } from '../../AppRuntimeContext';
-import { AppState, View, Button, Text } from 'react-native';
+import { Alert, AppState, View, Button, Text } from 'react-native';
 import { createPieceCreateController } from '../../features/piece/PieceCreateController';
 import { PieceApiError, preparePiecePreviewRequest, requestPieceSourceRef } from '../../features/piece/pieceApi';
 import { readPiecePreviewDisplay } from '../../features/piece/piecePreviewModel';
@@ -57,6 +62,7 @@ export default class InputPieceActionArea extends React.Component {
     this.boundSaveEnabled = null;
     this.boundSavedInputStamp = null;
     this.savedMode = false;
+    this.saveDispatching = false;
     this.sourceAttempt = null;
     this.sourcePhase = 'idle';
     this.sourceCode = null;
@@ -82,7 +88,9 @@ export default class InputPieceActionArea extends React.Component {
     this.boundSaveEnabled = null;
     this.boundSavedInputStamp = null;
     this.clearSource();
-    this.controller = createPieceCreateController({ onFeatureDisabled: () => {
+    this.controller = createPieceCreateController({
+      isSaveAdmitted: (preview, token) => this.isSaveAdmitted(preview, token),
+      onFeatureDisabled: () => {
       // Props may have changed before componentDidUpdate; an old response must
       // not close or refresh the next account/source's runtime presentation.
       if (!this.isCurrent()) return;
@@ -321,6 +329,57 @@ export default class InputPieceActionArea extends React.Component {
     void this.controller.cancelPreview(identity, displayToken);
   }
 
+  // The predicate belongs to the future admitted renderer owner. Neither this
+  // host nor the display reader turns a flag/quota/native_checked into admission.
+  // Recheck the live selection and exact candidate on both sides of the call.
+  isSaveAdmitted(preview, displayToken) {
+    const provider = this.props.isSaveAdmitted;
+    if (typeof provider !== 'function' || !preview || !displayToken) return false;
+    const current = () => {
+      if (!this.isCurrent() || !this.state.open || !this.saveEnabled() ||
+          this.savedMode && this.sourcePhase !== 'ready') return false;
+      const display = readPiecePreviewDisplay(this.controller.getView());
+      return display.phase === 'received' && display.hashVerified === true &&
+        display.visualToken === displayToken && display.preview != null &&
+        ['preview_id', 'preview_revision', 'piece_text_hash', 'content_payload_hash',
+          'visual_recipe_hash', 'renderer_version', 'expires_at'].every(key => display.preview[key] === preview[key]);
+    };
+    try {
+      return current() && provider(preview, displayToken) === true &&
+        this.props.isSaveAdmitted === provider && current();
+    } catch { return false; }
+  }
+
+  savePreview(identity, displayToken, provider) {
+    if (this.saveDispatching || !this.isCurrent() || !this.state.open ||
+        provider !== this.props.isSaveAdmitted) return;
+    this.saveDispatching = true;
+    try {
+      const display = readPiecePreviewDisplay(this.controller.getView()), preview = display.preview;
+      if (!identity || !preview || display.visualToken !== displayToken ||
+          identity.preview_id !== preview.preview_id || identity.preview_revision !== preview.preview_revision ||
+          identity.visual_recipe_hash !== preview.visual_recipe_hash || !this.isSaveAdmitted(preview, displayToken)) return;
+      let key;
+      try {
+        // Use the already-installed random-values polyfill, as InputScreen does.
+        // No clock, Math.random, source ID, owner ID or preview key fallback.
+        const bytes = new Uint8Array(16);
+        globalThis.crypto.getRandomValues(bytes);
+        key = 'piece-save-' + Array.from(bytes, value => value.toString(16).padStart(2, '0')).join('');
+      } catch {
+        if (this.isCurrent() && this.state.open && this.controller.getView().visualToken === displayToken) {
+          try { Alert.alert('Pieceの保存', '保存の準備ができませんでした。もう一度お試しください。'); } catch {}
+        }
+        return;
+      }
+      // Entropy/admission implementations must not move this press onto a new
+      // selection. The controller independently rechecks admission immediately
+      // before retaining the body-free request and issuing the private save.
+      if (provider !== this.props.isSaveAdmitted || !this.isSaveAdmitted(preview, displayToken)) return;
+      void this.controller.savePreview(identity, displayToken, key);
+    } finally { this.saveDispatching = false; }
+  }
+
   canOpenSavedPiece() {
     try {
       return this.context?.runtime != null &&
@@ -356,7 +415,14 @@ export default class InputPieceActionArea extends React.Component {
     // not one effect later. There is no render-time mutation or HTTP call.
     if (!this.isCurrent()) return null;
     const view = this.controller.getView();
-    const display = readPiecePreviewDisplay(view);
+    const checked = readPiecePreviewDisplay(view);
+    const provider = this.props.isSaveAdmitted;
+    const canSave = this.isSaveAdmitted(checked.preview, checked.visualToken);
+    // Only this host projection can expose initial-save controls. The shared
+    // display reader and native card retain their independent canSave:false.
+    const display = canSave ? Object.freeze({ ...checked, canSave: true }) : checked;
+    if (!this.isCurrent() || view.visualToken !== this.controller.getView().visualToken) return null;
+    const onSave = canSave ? (identity, token) => this.savePreview(identity, token, provider) : null;
     const onOpenSaved = display.phase === 'saved' && this.canOpenSavedPiece()
       ? () => this.openSavedPiece(view.savedReceipt) : null;
     if (this.savedMode && this.sourcePhase !== 'ready' && !['cancel', 'save'].includes(display.retryKind)) {
@@ -386,7 +452,7 @@ export default class InputPieceActionArea extends React.Component {
       !this.state.open && onOpenSaved ? element(Button, { title: '保存したPieceを確認',
         accessibilityLabel: '保存したPieceを確認', onPress: onOpenSaved }) : null,
       element(PiecePreviewModal, { visible: this.state.open, display, onClose: this.close, onOpenSaved,
-        onRetry: this.retry, onVisualChange: this.changeVisual, onCancel: this.cancelPreview }),
+        onRetry: this.retry, onVisualChange: this.changeVisual, onCancel: this.cancelPreview, onSave }),
     );
   }
 }

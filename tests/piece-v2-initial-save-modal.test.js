@@ -220,3 +220,7 @@ test('saving spinner and message remain the existing save outcome UI', async () 
   assert.equal(nodes(tree).filter(node => node.type?.component === 'ActivityIndicator').length, 1);
   assert.ok(text(tree).includes('Pieceを保存しています。'));
 });
+
+// Keep the existing CI entry point; these additional cases exercise the host
+// separately and include the existing actual controller with synthetic IO.
+require('./piece-v2-initial-save-host.test.js');
