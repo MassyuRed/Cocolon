@@ -75,8 +75,6 @@ if not c: raise SystemExit('No iPhone simulator')
 print(max(c)[1])
 PY
 )
-xcrun simctl boot "$DEVICE"
-xcrun simctl bootstatus "$DEVICE" -b
 # Export inspection PNG/JSON even when the assertion fails. No app archive or upload.
 collect() {
   container=$(xcrun simctl get_app_container "$DEVICE" org.reactjs.native.example.tempCocolon data 2>/dev/null || true)
@@ -88,9 +86,18 @@ collect() {
 }
 trap collect EXIT
 export SKIP_BUNDLING=1 RCT_NEW_ARCH_ENABLED=0
-xcodebuild -quiet -jobs 3 -workspace tempCocolon.xcworkspace -scheme tempCocolon \
+XCODE=(xcodebuild -quiet -jobs 3 -workspace tempCocolon.xcworkspace -scheme tempCocolon \
   -configuration Debug -destination "platform=iOS Simulator,id=$DEVICE" \
-  -derivedDataPath "$OUT/build" -resultBundlePath "$OUT/result.xcresult" \
+  -derivedDataPath "$OUT/build" \
   -parallel-testing-enabled NO -only-testing:tempCocolonTests/PieceRNCanvasTests \
   CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO CODE_SIGN_IDENTITY= \
-  ONLY_ACTIVE_ARCH=YES test 2>&1 | tee "$OUT/xcodebuild.log"
+  ONLY_ACTIVE_ARCH=YES)
+# Compile before booting the simulator, so its memory/CPU does not compete
+# with the first full native build. The draw deadline/assertions stay unchanged.
+echo 'PIECE_RN_PHASE build_started'
+"${XCODE[@]}" build-for-testing 2>&1 | tee "$OUT/xcodebuild.log"
+echo 'PIECE_RN_PHASE build_completed'
+xcrun simctl boot "$DEVICE"
+xcrun simctl bootstatus "$DEVICE" -b
+echo 'PIECE_RN_PHASE test_started'
+"${XCODE[@]}" -resultBundlePath "$OUT/result.xcresult" test-without-building 2>&1 | tee -a "$OUT/xcodebuild.log"
