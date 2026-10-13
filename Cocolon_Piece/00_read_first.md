@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は入口§64／current map §65.12を優先します。source `ecfda573` で、次の文字サイズの実測を現在サイズの復元・B9判定と重ねる修正を反映しました。local JS758件は成功し、run38470057115でnative単体と実RN5ケースを検証中です。420文字の全体8秒以内・最終画像は未確認です。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
+**現在は入口§64／current map §65.12を優先します。source `ecfda573` で次fontの先行実測を反映し、native62件／GitHub JS758件が成功しました。source `f882601c` は入力切替時のprobe再mountと代表計測値の一度だけの復号を補正し、local JS758件が成功しています。最新run38472162457の実RN5ケースを検証中で、420文字の全体8秒以内・最終画像は未確認です。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1213,3 +1213,8 @@ source `ecfda5730681ade9374cfcbfcd6916e187b8fb26` は既存製品2path・test2pa
 4pathのremote全文・親head・変更pathを照合しました。同環境read-only補助reviewに重大指摘なし。[run38470057115](https://github.com/MassyuRed/Cocolon/actions/runs/38470057115)の実RN job115546511987、native job115546512207で検証中です。最新の次作業はこのrunの完了結果・全候補比較・5ケースの時間/画像を読むことです。未完了runを成功へ換算しません。
 
 STRUCTURE_MAP_DELTA_NONE（既存Cardと計測ownerの内部順序のみ）。weekly10/10 §5.5、12/18目標、default OFF、Draft/open/unmergedを保持。API/DB/依存/workflow/本番有効化/配布/main mergeの変更0。正式renderer supplier→保存直前fit→通常初回保存→実機受入れはこの描画確認後の残件です。
+
+
+§64 追加修正：source `f882601c115bd075d1379a09837d4d9043caa6e1` は既存製品2pathです。`PieceVisualCard.js` の先行probeのReact keyを入力keyに結び、同じ寸法の別入力でもonLayoutを取り直します。`pieceRenderer.js` はv3代表値を一度だけFloat64へ復号し、全候補の7数値行へコピーします。混在420文字の11,381代表ではFloat64読取が442,050回から56,905回、追加typed bufferは455,240 bytesです。全88,410候補、参照と全代表使用の検証、符号付き0／subnormalを含む有限値、B9全数値検証、font順、8秒を保持します。local13suiteは758 PASS／FAIL0／SKIP0。2pathのremote全文・親head・変更pathを照合済みです。
+
+先行source `ecfda573` のnative job115546512207は62 PASS／FAIL0／SKIP0、混在420文字を含む旧uncached全候補比較と別module/48・44ptの3追加判定が成功しました。単体混在420文字は2,575.993msであり、実RN全体時間ではありません。GitHub JS job115546512276は758 PASS／FAIL0／SKIP0。先行実RN job115546511987はまだ進行中です。最新sourceの[run38472162457](https://github.com/MassyuRed/Cocolon/actions/runs/38472162457)、実RN job115553723490の5件JSON／PNGと全体時間を次に確認します。未完了runを成功へ換算しません。
