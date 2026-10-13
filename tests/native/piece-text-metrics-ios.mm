@@ -8,6 +8,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <unistd.h>
+#include <atomic>
 @implementation RCTBridge
 @end
 @implementation RCTUIManager
@@ -22,10 +23,11 @@
 - (CGRect)cocolonPieceContentFrame { return self.fixtureContentFrame; }
 @end
 // Aggregate only the mixed420 candidate call, without changing native results.
+// Atomic counters sum per-operation time across workers, not wall-clock time.
 // Undefine these wrappers before the independent uncached reference below.
-static BOOL profileCandidates = NO;
+static std::atomic_bool profileCandidates{false};
 static struct {
-  uint64_t creates, units, createTicks, typographicTicks, imageTicks;
+  std::atomic<uint64_t> creates{0}, units{0}, createTicks{0}, typographicTicks{0}, imageTicks{0};
 } candidateProfile;
 static CTLineRef profiledCreateLine(CFAttributedStringRef text) {
   if (!profileCandidates) return CTLineCreateWithAttributedString(text);
@@ -285,7 +287,8 @@ int main(void) {
       stringByPaddingToLength:419 withString:@"考える時間と対話を大切にしながら、自分の言葉で伝えたい。" startingAtIndex:0]
       stringByAppendingString:@"。"] copy];
     bridge.uiManager.registry = @{@1:makeView(mixedText, 48)};
-    memset(&candidateProfile, 0, sizeof(candidateProfile)); profileCandidates = YES;
+    candidateProfile.creates = 0; candidateProfile.units = 0; candidateProfile.createTicks = 0;
+    candidateProfile.typographicTicks = 0; candidateProfile.imageTicks = 0; profileCandidates = YES;
     started = NSProcessInfo.processInfo.systemUptime;
     NSDictionary *mixedResult = call(module, YES, mixedText, 48, &code);
     profileCandidates = NO;
@@ -293,9 +296,9 @@ int main(void) {
     mach_timebase_info_data_t timebase; mach_timebase_info(&timebase);
     double millisecondsPerTick = (double)timebase.numer / timebase.denom / 1000000;
     printf("mixed420_coretext_profile creates=%llu units=%llu create_ms=%.3f typographic_ms=%.3f image_ms=%.3f includes_full_glyph_line=1\n",
-      (unsigned long long)candidateProfile.creates, (unsigned long long)candidateProfile.units,
-      candidateProfile.createTicks*millisecondsPerTick, candidateProfile.typographicTicks*millisecondsPerTick,
-      candidateProfile.imageTicks*millisecondsPerTick);
+      (unsigned long long)candidateProfile.creates.load(), (unsigned long long)candidateProfile.units.load(),
+      candidateProfile.createTicks.load()*millisecondsPerTick, candidateProfile.typographicTicks.load()*millisecondsPerTick,
+      candidateProfile.imageTicks.load()*millisecondsPerTick);
     check(@"mixed420_complete_metrics", code == nil && validCandidates(mixedResult, mixedText));
     check(@"mixed420_uncached_equivalence", matchesUncachedCandidates(mixedResult, (RCTTextView *)bridge.uiManager.registry[@1]));
     RCTTextView *variants = makeView(@"AaAaAaAa", 48);

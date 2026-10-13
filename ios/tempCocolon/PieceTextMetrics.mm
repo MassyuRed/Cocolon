@@ -7,6 +7,7 @@
 #include <math.h>
 #include <string.h>
 #include <vector>
+#include <atomic>
 
 // Read-only accessors added by the pinned RN patch; no KVC/private-ivar read.
 @interface RCTTextView (CocolonPieceMetrics)
@@ -81,13 +82,12 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
             }];
           std::vector<unichar> textUnits(snapshot.length);
           [snapshotText getCharacters:textUnits.data() range:NSMakeRange(0, snapshot.length)];
-          // One lossless byte buffer avoids converting hundreds of thousands
-          // of NSNumber objects through the RN bridge for a long paragraph.
-          std::vector<uint64_t> rows;
-          rows.reserve(count * (count + 1) / 2 * 7);
-          // Repeated ranges can have identical text but different attributes.
-          // Reuse only an exact attributed-string match within this snapshot.
-          // Bound retained keys; a miss after the budget still gets measured.
+          // Group only exact text/attribute matches before any parallel work.
+          // Keep the existing retained-key budget; uncached ranges remain jobs.
+          struct MetricJob { NSRange range; double values[5]; };
+          std::vector<MetricJob> jobs;
+          std::vector<NSUInteger> rowJobs;
+          rowJobs.reserve(count * (count + 1) / 2);
           NSMutableDictionary<NSString *, NSArray *> *cache = [NSMutableDictionary new];
           NSUInteger cachedUnits = 0;
           for (NSUInteger start = 0; start < count; start++) {
@@ -103,36 +103,68 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
                   cachedOffset <= snapshot.length - range.length &&
                   memcmp(textUnits.data() + cachedOffset, textUnits.data() + offset, range.length * sizeof(unichar)) == 0 &&
                   memcmp(attributeIds.data() + cachedOffset, attributeIds.data() + offset, range.length * sizeof(NSUInteger)) == 0;
-                NSArray *metrics = identical ? cached[2] : nil;
-                if (!metrics) {
-                  NSAttributedString *part = [snapshot attributedSubstringFromRange:range];
+                NSUInteger index = identical ? [cached[2] unsignedIntegerValue] : jobs.size();
+                if (!identical) {
+                  jobs.push_back({range, {0, 0, 0, 0, 0}});
+                  if (!cached && cache.count < 16384 && cachedUnits + range.length <= 4 * 1024 * 1024) {
+                    cache[key] = @[@(offset), @(range.length), @(index)]; cachedUnits += range.length;
+                  }
+                }
+                rowJobs.push_back(index);
+              }
+            }
+          }
+          // Each worker owns its substring and CTLine. Only immutable font and
+          // attributed-string snapshots are shared; UIKit stays on its UI queue.
+          // Fixed workers avoid one dispatch block per candidate and write only
+          // disjoint metrics. dispatch_apply joins before any buffer is released.
+          MetricJob *jobData = jobs.data();
+          const NSUInteger jobCount = jobs.size(), workers = jobCount < 256 ? 1 : 4;
+          std::atomic_bool failed(false);
+          std::atomic_bool *failure = &failed;
+          dispatch_apply(workers, dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^(size_t worker) {
+            @try {
+              for (NSUInteger index = worker; index < jobCount; index += workers) {
+                @autoreleasepool {
+                  if (failure->load(std::memory_order_relaxed)) return;
+                  if (NSProcessInfo.processInfo.systemUptime >= deadline) { failure->store(true, std::memory_order_relaxed); return; }
+                  NSAttributedString *part = [snapshot attributedSubstringFromRange:jobData[index].range];
                   CTLineRef line = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)part);
-                  if (!line) { unavailable(); return; }
+                  if (!line) { failure->store(true, std::memory_order_relaxed); return; }
                   double advance = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
                   CGRect ink = CTLineGetImageBounds(line, NULL);
                   CFRelease(line);
-                  // A whitespace-only candidate has an advance and no painted ink.
                   if (CGRectIsNull(ink)) {
                     if ([part.string rangeOfCharacterFromSet:NSCharacterSet.whitespaceAndNewlineCharacterSet.invertedSet].location != NSNotFound) {
-                      unavailable(); return;
+                      failure->store(true, std::memory_order_relaxed); return;
                     }
                     ink = CGRectZero;
                   }
                   if (!isfinite(advance) || !isfinite(ink.origin.x) || !isfinite(ink.origin.y) ||
-                      !isfinite(ink.size.width) || !isfinite(ink.size.height)) { unavailable(); return; }
-                  // CoreText's y axis points up; B9 uses baseline-relative y down.
-                  metrics = @[@(advance), @(CGRectGetMinX(ink)), @(-CGRectGetMaxY(ink)),
-                              @(CGRectGetMaxX(ink)), @(-CGRectGetMinY(ink))];
-                  if (!cached && cache.count < 16384 && cachedUnits + part.length <= 4 * 1024 * 1024) {
-                    cache[key] = @[@(offset), @(range.length), metrics]; cachedUnits += part.length;
+                      !isfinite(ink.size.width) || !isfinite(ink.size.height)) {
+                    failure->store(true, std::memory_order_relaxed); return;
                   }
+                  const double metrics[] = {advance, CGRectGetMinX(ink), -CGRectGetMaxY(ink),
+                    CGRectGetMaxX(ink), -CGRectGetMinY(ink)};
+                  memcpy(jobData[index].values, metrics, sizeof(metrics));
                 }
-                const double values[] = { (double)start, (double)end, [metrics[0] doubleValue],
-                  [metrics[1] doubleValue], [metrics[2] doubleValue], [metrics[3] doubleValue], [metrics[4] doubleValue] };
-                for (double value : values) {
-                  uint64_t bits; memcpy(&bits, &value, sizeof(bits));
-                  rows.push_back(CFSwapInt64HostToLittle(bits));
-                }
+              }
+            } @catch (__unused NSException *exception) { failure->store(true, std::memory_order_relaxed); }
+          });
+          if (failed.load(std::memory_order_relaxed)) { unavailable(); return; }
+          // Reconstruct every range in the original order, preserving all five
+          // measured doubles bit-for-bit and the lossless bridge representation.
+          std::vector<uint64_t> rows;
+          rows.reserve(count * (count + 1) / 2 * 7);
+          NSUInteger rowIndex = 0;
+          for (NSUInteger start = 0; start < count; start++) {
+            for (NSUInteger end = start + 1; end <= count; end++) {
+              if (NSProcessInfo.processInfo.systemUptime >= deadline) { unavailable(); return; }
+              const double *metrics = jobData[rowJobs[rowIndex++]].values;
+              const double values[] = {(double)start, (double)end, metrics[0], metrics[1], metrics[2], metrics[3], metrics[4]};
+              for (double value : values) {
+                uint64_t bits; memcpy(&bits, &value, sizeof(bits));
+                rows.push_back(CFSwapInt64HostToLittle(bits));
               }
             }
           }

@@ -8,6 +8,31 @@ import fixtures from './piece-rn-canvas-fixtures.json';
 // Test-only timing around the unchanged native bridge call. In particular,
 // distinguish a pending candidate table from planner/render/inspection work.
 let activeTrace;
+// Keep adapter decoding and B9 time separate from the raw native call. These
+// wrappers observe the real functions; no candidate, plan or deadline changes.
+const renderer = require('../../features/piece/pieceRenderer');
+const measuredWrap = require('../../features/piece/pieceMeasuredWrap');
+const measureCandidates = renderer.measurePieceCandidates;
+renderer.measurePieceCandidates = async (...args) => {
+  const started = performance.now(), sample = { font_size: args[2], status: 'pending' };
+  activeTrace?.adapters.push(sample);
+  try {
+    const value = await measureCandidates(...args);
+    Object.assign(sample, { status: 'resolved', elapsed_ms: performance.now() - started });
+    return value;
+  } catch (error) {
+    Object.assign(sample, { status: 'rejected', elapsed_ms: performance.now() - started });
+    throw error;
+  }
+};
+const planRows = measuredWrap.planPieceMeasuredRows;
+measuredWrap.planPieceMeasuredRows = (...args) => {
+  const started = performance.now(), sample = { size_index: args[1] };
+  activeTrace?.plans.push(sample);
+  const plan = planRows(...args);
+  Object.assign(sample, { elapsed_ms: performance.now() - started, fit: !!plan });
+  return plan;
+};
 const nativeCandidates = NativeModules.PieceTextMetrics.measureCandidates;
 NativeModules.PieceTextMetrics.measureCandidates = (...args) => {
   const started = performance.now();
@@ -33,7 +58,7 @@ class CanvasCases extends React.Component {
   componentWillUnmount() { clearTimeout(this.timer); }
   startCase = () => {
     this.started = performance.now();
-    this.trace = { candidates: [], states: [] };
+    this.trace = { candidates: [], adapters: [], plans: [], states: [] };
     activeTrace = this.trace;
     this.finishing = false;
     this.poll();
