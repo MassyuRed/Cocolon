@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在は§58／current map §62を優先します。API `804beca` の候補構成限定の旧4 write経路除去と、RN `d9ccbc1` の初回保存Modal準備を反映済みとして同期しました。Modalの初回保存操作は親画面・正式描画判定へ未接続で、アプリからの初回保存は未完成です。保存結果・同一要求の再確認・本人詳細・通常Nexusの本人履歴入口は既存実装を継承します。**
+**現在は§59／current map §63を優先します。RN `f026adb` で初回保存Modalから既存保存controllerへの親画面接続を実装し、CI 747件が成功しました。接続は正式な描画判定の供給を必須とし、現在のInputScreenはその供給元を持ちません。通常アプリでの初回保存・正式renderer admission・保存前fit・実機は未完了です。API `804beca` と既存の保存結果・再確認・本人履歴は継承します。**
 
 ### 10/09以前の先頭要約（履歴）
 
@@ -1107,3 +1107,30 @@ RN `d9ccbc1d62851f7792c2384497ee817171c45ee1` は既存 `components/piece/PieceP
 本線はB9の実機描画同等性・glyph/ink/性能、正式renderer admission、保存直前のfit、同じ候補/token/keyによる初回保存の親画面接続。既存保存controller・結果再確認・本人詳細・Nexus本人履歴入口・写真保存結果保持を再実装しない。画像保存共有、形式変更、Nexus公開読取/切替、tutorial/旧APIを含むM5残差、稼働接続は引き続き未完了。画像共有の全完成を初回実機確認の追加前提にしない。
 
 最新weekly `Cocolon_Weekly_Review_20261010.md` §5.5、公開目標2026-12-18、default OFF、Draft/open/unmerged、automatic_progression=falseを維持する。この同期は既に反映したsourceと現在地の文書同期であり、稼働DB・env・deploy・activation・native app build・署名・配布・main mergeへの効果は0。実機未確認だけでなく実装未接続が残るため、単にMashの確認待ちとはしない。
+
+
+## 59. 2026-10-13 — 初回保存の親画面接続と既存保存処理の結合
+
+### 反映した製品接続
+
+RN commit `f026adb805ae6795845e22bef14edb6ee301becd`。既存 `screens/input/InputPieceActionArea.js` が、`PiecePreviewModal.onSave` から既存 `PieceCreateController.savePreview(identity, displayToken, idempotencyKey)` へつながる。別途供給される同期・副作用なしの `isSaveAdmitted(preview, displayToken)` が厳密にtrueを返す場合だけ、host側の表示へ初回保存を許可する。本文hash・候補ID/revision・recipe hash・表示token・期限・本人/source/key・画面状態・runtime/save flag・判定供給元を再照合する。共有display readerの `canSave:false` とnative prototypeの非正式状態は変更しない。
+
+保存keyは明示した初回操作で既存random-values基盤から16byteを生成する。本文・本人ID・保存入力ID・preview keyを流用しない。乱数取得失敗は本文や例外詳細を含まない再試行案内とし、previewを保持する。二重押下は単一要求に限定し、結果不明時は既存controllerが保持する同じ要求・同じkeyで再確認する。判定・乱数処理中に画面や候補が変わっても古い保存を送らない。保存API、保存結果保持、取消、本人詳細、Nexus本人履歴、画像export処理は再実装しない。
+
+構造差分：既存InputScreen → InputPieceActionArea → PiecePreviewModalという表示経路に、条件付きの明示保存 → 既存PieceCreateController → 既存private save transportという操作接続を追加した。新しいAPI、DB、画像renderer、権限、データ契約は追加しない。STRUCTURE_MAP_DELTA_UPDATED。
+
+### 今回確認した検査と限界
+
+新しい `tests/piece-v2-initial-save-host.test.js` は30件のhost単体検査と8件の既存実モジュール接続検査。既存 `tests/piece-v2-initial-save-modal.test.js` の42件は変更せず、末尾で新検査を読み込む。既存CIの対象コマンド・基準・workflowは変更していない。
+
+同じhost単体30件を、元sourceのGit blob `16ce6b3d66bd6ddfb6bafd8b234c5ea85397f3b3` と照合した作業コピーで実行：変更前9 PASS／21 FAIL、変更後30 PASS／FAIL0／SKIP0（Node22.16.0）。GitHub Actions run `38353118223`、JS job `115149790070` は正確な `f026adb` head・Node24.21.0・TypeScript5.2.2で747 PASS／FAIL0／SKIP0。完了ログを取得し、新規38件と既存709件が含まれることを確認した。38件や単体30件を747へ重複加算しない。
+
+8件の接続検査では実際のAPI/model/controller/host/Modalを使い、保存済みsourceの明示GET → 別操作でpreview → 初回保存ボタン → private save → 保存結果表示、および結果不明時のruntime停止・復帰後の同一要求/key再確認を通した。ただしReact/native/Auth/HTTP/runtime/乱数・正式判定は合成境界である。端末描画・稼働API/DB保存・正式なrenderer合格・商品受入れを意味しない。この資料同期は検査の再実行ではない。Native job全体の完了はこのJSログから推測せず、既存PR #30の追加確認記録に分離する。
+
+### 次の再開位置
+
+`InputPieceActionArea` の条件付き初回保存接続は再実装しない。現在の `InputScreen` は正式な `isSaveAdmitted` を供給していないため、通常アプリから初回保存できる完成状態ではない。`PieceVisualCard.native_checked`、quota、flag、hash、renderer version文字列、今回の合成trueを正式描画合格へ置き換えない。
+
+次はB9の実機描画同等性・glyph/ink/性能、正式renderer admissionの供給元、保存直前のfitと同じ候補/tokenへの結合、通常画面での初回保存・本人詳細の確認。画像保存共有・形式変更・Nexus公開読取/切替・tutorial/旧APIを含むM5残差・稼働接続も未完了。画像共有の全完成を初回実機確認の追加前提にしない。単にMashの実機確認待ちとはしない。
+
+最新weekly `Cocolon_Weekly_Review_20261010.md` §5.5、2026-12-18公開目標、default OFF、Draft/open/unmerged、automatic_progression=falseを維持する。今回の稼働DB・env・deploy・activation・native app build・署名・配布・main mergeへの効果は0。既存API `804beca` の候補構成限定の旧4write除去と通常legacy構成保持を継承し、API変更・検査再実行は行っていない。

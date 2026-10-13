@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v57",
+  "schema_version": "cocolon.piece.workstream_manifest.v58",
   "generated_at": "2026-10-13 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v56",
-    "predecessor_blob": "5ef93b922bf44ee543a092ed87b24c03ae807927",
-    "predecessor_head": "d9ccbc1d62851f7792c2384497ee817171c45ee1",
-    "carry_forward": "Synchronize already-published API legacy-write retirement and initial-save modal preparation. No host/admission/fit/device or production completion is granted."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v57",
+    "predecessor_blob": "80af157ca5a72cf226f830c09b42a03bad5bd415",
+    "predecessor_head": "74d300a547f42c621d42b04704d82a445fcd230d",
+    "carry_forward": "Conditional initial-save host connection and verified CI; formal renderer provider, native fit, device and ordinary app save remain incomplete."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "cd0fbb32bbb396e821ab8dce4a209faccc19042e",
-    "raw_sha256": "13d185faa0c421eb19e05bb1878409acdd5a6260461e93ab681fafcb978e5c1f",
-    "utf8_bytes": 106734
+    "git_blob_sha1": "eb1040e6b50deb532456c5d920ecd3cb7e42ffa4",
+    "raw_sha256": "d5b8d7e04aea4efaac918eae92be4532a99c738f23cfaccac9f83a511185ef4c",
+    "utf8_bytes": 111343
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -55,7 +55,7 @@
     "pce9a_b01": "COMPLETE",
     "pce9a_b02a": "NATIVE_ACCEPTANCE_RETAINED__LIVE_BRIDGE_APPLIED_20261010",
     "analysis_roadmap": "REFER_TO_ANALYSIS_CURRENT_STRUCTURE__HISTORICAL_NOT_ACTIVATED_STATE_NOT_CURRENT",
-    "next_piece_group": "NATIVE_DEVICE_RENDERER_ADMISSION_THEN_SAVE_FIT_AND_BOUND_SAVE",
+    "next_piece_group": "FORMAL_RENDERER_ADMISSION_AND_SAVE_FIT__ORDINARY_APP_SAVE_DEVICE_PENDING",
     "automatic_packet_progression": false,
     "pce9a_b02a_red": "FROZEN_UNCHANGED__NATIVE_POSTGRESQL_1_PASS",
     "pce9a_b02a_implementation": "EXACT5_PRESERVED__EXACT6_SELECTORS_PUBLISHED",
@@ -91,7 +91,8 @@
     "pce9f_b12c_input_screen": "REMOTE_E9045AA__NORMAL_INPUT_V2_ONLY__CI654_PASS__M5_DEVICE_PENDING",
     "pce9c_owner_history_entry": "REMOTE_D866DC0__NORMAL_NEXUS_OWNER_ENTRY__CI667_PASS__DEVICE_PENDING",
     "pce9f_shared_legacy_write_retirement": "REMOTE_804BECA__EXPLICIT_SHARED_CANDIDATE_ONLY__NOT_LIVE_M5",
-    "pce9c_initial_save_modal": "REMOTE_D9CCBC1__MODAL_PREPARATION_CI709_PASS__HOST_ADMISSION_FIT_PENDING"
+    "pce9c_initial_save_modal": "REMOTE_D9CCBC1__MODAL_PREPARATION_CI709_PASS__HOST_ADMISSION_FIT_PENDING",
+    "pce9c_initial_save_host": "REMOTE_F026ADB__CONDITIONAL_HOST_CONNECTED__CI747_PASS__FORMAL_PROVIDER_FIT_DEVICE_PENDING"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -173,7 +174,7 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "d9ccbc1d62851f7792c2384497ee817171c45ee1",
+    "cocolon_pre_sync_head": "f026adb805ae6795845e22bef14edb6ee301becd",
     "mashos_api_head": "804beca66f9f02e18dc4522232478466f4d52b13",
     "current_user_visible_piece_shape": "CANDIDATE_NORMAL_INPUT_V2_SAVED_SOURCE_ONLY__TUTORIAL_NEXUS_LEGACY_REMAIN__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
@@ -189,7 +190,7 @@
     "input_screen_source_connected": true,
     "live_auth_input_to_preview_to_device_verified": false,
     "database_evidence_owner": "live_db_apply_20261010",
-    "remaining_work_owner": "initial_save_modal_and_api_sync_20261013",
+    "remaining_work_owner": "initial_save_host_connection_20261013",
     "product_acceptance": false,
     "piece_v2_default_application_registered": false,
     "piece_v2_quota_http_present": true,
@@ -231,15 +232,17 @@
     "piece_v2_normal_owner_history_entry_connected": true,
     "piece_v2_initial_save_modal_present": true,
     "shared_candidate_legacy_publish_cancel_writes_present": false,
-    "default_legacy_publish_cancel_writes_preserved": true
+    "default_legacy_publish_cancel_writes_preserved": true,
+    "piece_v2_initial_save_host_conditional_connected": true,
+    "piece_v2_formal_renderer_admission_supplied": false
   },
   "next_group": {
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "NATIVE_DEVICE_RENDERER_ADMISSION_THEN_SAVE_FIT_AND_BOUND_SAVE",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "INITIAL_SAVE_MODAL_SOURCE_PUBLISHED__HOST_ADMISSION_FIT_DEVICE_PENDING",
-    "current_map_section": "62.3",
-    "current_entry_section": "58",
+    "state": "CONDITIONAL_INITIAL_SAVE_HOST_CONNECTED__FORMAL_PROVIDER_FIT_DEVICE_PENDING",
+    "current_map_section": "63.1",
+    "current_entry_section": "59",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
     "weekly_review_section": "5.5",
     "first_unfinished_work": "B9 device equivalence -> formal renderer admission -> save fit -> initial save action. Reuse the connected saved owner detail refresh, save outcome display and same-request recovery. PNG/photo/share device checks remain; export completion is not a prerequisite for first device inspection.",
@@ -280,7 +283,8 @@
     "owner_history_entry_owner": "owner_history_entry_20261011",
     "repeat_normal_owner_history_entry": false,
     "repeat_initial_save_modal": false,
-    "repeat_shared_legacy_write_retirement": false
+    "repeat_shared_legacy_write_retirement": false,
+    "repeat_initial_save_host_connection": false
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -334,9 +338,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "a7a5918b17daac073580f975e632121e3dc1011f",
-    "raw_sha256": "27a1d8f0d3f9fb5906594daa6218cd01650f5a437f289a1a1eb2c19e6a1c0bda",
-    "utf8_bytes": 337212
+    "git_blob_sha1": "7615b0f2d07b5c10347089f745346311b85b65af",
+    "raw_sha256": "de0ff14122c7ee944d03e2ef6ffb7b51470743129fc245149a9419618ad393c8",
+    "utf8_bytes": 341779
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -509,10 +513,12 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "PUBLISHED_SOURCE_CURRENT_STATE_DOCUMENT_SYNC",
+    "classification": "CONDITIONAL_INITIAL_SAVE_HOST_SOURCE_AND_DOCUMENT_SYNC",
+    "source_commit": "f026adb805ae6795845e22bef14edb6ee301becd",
+    "product_source_changes": 1,
+    "test_source_changes": 2,
     "piece_documentation_paths": 3,
-    "product_source_changes": 0,
-    "new_product_test_execution": 0,
+    "document_sync_product_source_changes": 0,
     "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
     "live_database_apply": 0,
     "release_effect": 0,
@@ -4182,6 +4188,53 @@
     "full_run_success_claimed": false,
     "formal_renderer_admission": false,
     "initial_save_host_connected": false,
+    "device_save_export_share_verified": false,
+    "product_acceptance": false,
+    "verification_owner": "Existing PR 30 postverification record",
+    "automatic_progression": false
+  },
+  "historical_current_sync_effects_before_20261013_initial_save_host": {
+    "classification": "PUBLISHED_SOURCE_CURRENT_STATE_DOCUMENT_SYNC",
+    "piece_documentation_paths": 3,
+    "product_source_changes": 0,
+    "new_product_test_execution": 0,
+    "structure_map": "STRUCTURE_MAP_DELTA_UPDATED",
+    "live_database_apply": 0,
+    "release_effect": 0,
+    "native_app_builds": 0,
+    "product_acceptance": false,
+    "automatic_progression": false
+  },
+  "initial_save_host_connection_20261013": {
+    "rn_commit": "f026adb805ae6795845e22bef14edb6ee301becd",
+    "source_blobs": {
+      "screens/input/InputPieceActionArea.js": "caa964f0d7554dee78ef06e0892bbb86f404ef12",
+      "tests/piece-v2-initial-save-modal.test.js": "03e5768065d79105126f0a9e3dc67ec5986a0f04",
+      "tests/piece-v2-initial-save-host.test.js": "9f0d6dc91167936ecd51324f80de5b4bc70d249b"
+    },
+    "map_section": "63",
+    "entry_section": "59",
+    "local_node": "22.16.0",
+    "local_unit_cases": 30,
+    "local_baseline_pass": 9,
+    "local_baseline_fail": 21,
+    "local_modified_pass": 30,
+    "local_modified_fail": 0,
+    "rn_ci_run_id": 38353118223,
+    "rn_ci_job_id": 115149790070,
+    "rn_ci_passed": 747,
+    "rn_ci_failed": 0,
+    "rn_ci_skipped": 0,
+    "new_cases_included": 38,
+    "new_integration_cases_included": 8,
+    "rn_ci_node": "24.21.0",
+    "rn_ci_typescript": "5.2.2",
+    "ci_counts_origin": "Completed exact-head JS job log retrieved in this task; not rerun by document sync",
+    "initial_save_host_conditional_connected": true,
+    "formal_renderer_admission": false,
+    "formal_provider_supplied_by_input_screen": false,
+    "ordinary_app_initial_save_complete": false,
+    "native_save_fit": false,
     "device_save_export_share_verified": false,
     "product_acceptance": false,
     "verification_owner": "Existing PR 30 postverification record",
