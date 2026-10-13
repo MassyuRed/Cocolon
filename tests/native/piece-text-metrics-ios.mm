@@ -281,6 +281,13 @@ int main(void) {
     bridge.uiManager.registry = @{@1:variants};
     NSDictionary *variantResult = call(module, YES, variants.fixtureStorage.string, 48, &code);
     check(@"same_text_different_attributes_uncached_equivalence", code == nil && matchesUncachedCandidates(variantResult, variants));
+    NSMutableAttributedString *repeatedAttributes = [variants.fixtureStorage mutableCopy];
+    [repeatedAttributes appendAttributedString:[variants.fixtureStorage copy]];
+    RCTTextView *repeatedView = makeView(repeatedAttributes.string, 48);
+    [repeatedView.fixtureStorage setAttributedString:repeatedAttributes];
+    bridge.uiManager.registry = @{@1:repeatedView};
+    NSDictionary *repeatedResult = call(module, YES, repeatedView.fixtureStorage.string, 48, &code);
+    check(@"repeated_mixed_attributes_uncached_equivalence", code == nil && matchesUncachedCandidates(repeatedResult, repeatedView));
     printf("NATIVE_CHECKS=%lu PASS=%lu FAIL=%lu SKIP=0\n", (unsigned long)checks,
       (unsigned long)(checks-failures), (unsigned long)failures);
     return failures ? 1 : 0;

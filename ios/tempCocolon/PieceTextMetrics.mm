@@ -5,6 +5,8 @@
 #import <React/RCTTextView.h>
 #import <CoreText/CoreText.h>
 #include <math.h>
+#include <string.h>
+#include <vector>
 
 // Read-only accessors added by the pinned RN patch; no KVC/private-ivar read.
 @interface RCTTextView (CocolonPieceMetrics)
@@ -65,10 +67,20 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
           }
           CFRelease(full);
           if (!glyphs) { unavailable(); return; }
-          NSRange allAttributes = NSMakeRange(0, snapshot.length), sameAttributes = NSMakeRange(0, 0);
-          [snapshot attributesAtIndex:0 longestEffectiveRange:&sameAttributes inRange:allAttributes];
-          BOOL uniformAttributes = NSEqualRanges(sameAttributes, allAttributes);
           NSString *snapshotText = snapshot.string;
+          // Canonicalize complete attribute dictionaries once. Equal ID spans
+          // prove pointwise equality even when a substring has many font runs.
+          std::vector<NSUInteger> attributeIds(snapshot.length);
+          NSUInteger *attributeIdData = attributeIds.data();
+          NSMutableArray<NSDictionary *> *attributeClasses = [NSMutableArray new];
+          [snapshot enumerateAttributesInRange:NSMakeRange(0, snapshot.length) options:0
+            usingBlock:^(NSDictionary *attributes, NSRange range, BOOL *stop) {
+              NSUInteger index = [attributeClasses indexOfObject:attributes];
+              if (index == NSNotFound) { index = attributeClasses.count; [attributeClasses addObject:attributes]; }
+              for (NSUInteger i = range.location; i < NSMaxRange(range); i++) attributeIdData[i] = index + 1;
+            }];
+          std::vector<unichar> textUnits(snapshot.length);
+          [snapshotText getCharacters:textUnits.data() range:NSMakeRange(0, snapshot.length)];
           NSMutableArray *rows = [NSMutableArray new];
           // Repeated ranges can have identical text but different attributes.
           // Reuse only an exact attributed-string match within this snapshot.
@@ -81,14 +93,16 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
                 if (NSProcessInfo.processInfo.systemUptime >= deadline) { unavailable(); return; }
                 NSUInteger offset = boundaries[start].unsignedIntegerValue;
                 NSRange range = NSMakeRange(offset, boundaries[end].unsignedIntegerValue - offset);
-                // One complete attribute run proves equal text has equal attributes.
-                // Avoid constructing another attributed substring on those cache hits.
-                NSAttributedString *part = uniformAttributes ? nil : [snapshot attributedSubstringFromRange:range];
-                NSString *key = uniformAttributes ? [snapshotText substringWithRange:range] : part.string;
+                NSString *key = [snapshotText substringWithRange:range];
                 NSArray *cached = cache[key];
-                NSArray *metrics = cached && (uniformAttributes || [cached[0] isEqualToAttributedString:part]) ? cached[1] : nil;
+                NSUInteger cachedOffset = cached ? [cached[0] unsignedIntegerValue] : 0;
+                BOOL identical = cached && [cached[1] unsignedIntegerValue] == range.length &&
+                  cachedOffset <= snapshot.length - range.length &&
+                  memcmp(textUnits.data() + cachedOffset, textUnits.data() + offset, range.length * sizeof(unichar)) == 0 &&
+                  memcmp(attributeIds.data() + cachedOffset, attributeIds.data() + offset, range.length * sizeof(NSUInteger)) == 0;
+                NSArray *metrics = identical ? cached[2] : nil;
                 if (!metrics) {
-                  if (!part) part = [snapshot attributedSubstringFromRange:range];
+                  NSAttributedString *part = [snapshot attributedSubstringFromRange:range];
                   CTLineRef line = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)part);
                   if (!line) { unavailable(); return; }
                   double advance = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
@@ -107,7 +121,7 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
                   metrics = @[@(advance), @(CGRectGetMinX(ink)), @(-CGRectGetMaxY(ink)),
                               @(CGRectGetMaxX(ink)), @(-CGRectGetMinY(ink))];
                   if (!cached && cache.count < 16384 && cachedUnits + part.length <= 4 * 1024 * 1024) {
-                    cache[key] = @[part, metrics]; cachedUnits += part.length;
+                    cache[key] = @[@(offset), @(range.length), metrics]; cachedUnits += part.length;
                   }
                 }
                 [rows addObject:@[@(start), @(end), metrics[0], metrics[1], metrics[2], metrics[3], metrics[4]]];
