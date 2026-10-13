@@ -146,6 +146,10 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
           // disjoint metrics. dispatch_apply joins before any buffer is released.
           MetricJob *jobData = jobs.data();
           const NSUInteger jobCount = jobs.size(), workers = jobCount < 256 ? 1 : 4;
+          // A single complete attribute class proves uniform pointwise
+          // attributes. Build the same immutable substring directly instead
+          // of slicing attributed runs; heterogeneous input keeps that path.
+          NSDictionary *uniformAttributes = attributeClasses.count == 1 ? attributeClasses[0] : nil;
           std::atomic_bool failed(false);
           std::atomic_bool *failure = &failed;
           dispatch_apply(workers, dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^(size_t worker) {
@@ -154,7 +158,10 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
                 @autoreleasepool {
                   if (failure->load(std::memory_order_relaxed)) return;
                   if (NSProcessInfo.processInfo.systemUptime >= deadline) { failure->store(true, std::memory_order_relaxed); return; }
-                  NSAttributedString *part = [snapshot attributedSubstringFromRange:jobData[index].range];
+                  NSRange range = jobData[index].range;
+                  NSAttributedString *part = uniformAttributes
+                    ? [[NSAttributedString alloc] initWithString:[snapshotText substringWithRange:range] attributes:uniformAttributes]
+                    : [snapshot attributedSubstringFromRange:range];
                   CTLineRef line = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)part);
                   if (!line) { failure->store(true, std::memory_order_relaxed); return; }
                   double advance = CTLineGetTypographicBounds(line, NULL, NULL, NULL);

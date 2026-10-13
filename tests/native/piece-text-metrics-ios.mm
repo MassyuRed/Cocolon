@@ -31,6 +31,9 @@ static struct {
   std::atomic<uint64_t> queuedAt{0}, queueStarted{0}, workersStarted{0}, workersJoined{0}, resolvedAt{0}, decodeTicks{0};
   std::atomic<uint64_t> substringTicks{0}, releaseTicks{0}, uptimeTicks{0}, uptimeCalls{0};
 } candidateProfile;
+static double profileMilliseconds(uint64_t start, uint64_t end, double scale) {
+  return start && end >= start ? (end - start) * scale : NAN;
+}
 // Only the included production source uses these transparent wrappers. Keep
 // worker wall time separate from per-operation sums and the test's decoder.
 static void profiledAsync(dispatch_queue_t queue, dispatch_block_t block) {
@@ -375,11 +378,11 @@ int main(void) {
       (unsigned long long)candidateProfile.creates.load(), (unsigned long long)candidateProfile.units.load(),
       candidateProfile.createTicks.load()*millisecondsPerTick, candidateProfile.typographicTicks.load()*millisecondsPerTick,
       candidateProfile.imageTicks.load()*millisecondsPerTick);
-    printf("mixed420_phase_profile queue_ms=%.3f glyph_and_group_ms=%.3f workers_wall_ms=%.3f pack_and_resolve_ms=%.3f test_decode_ms=%.3f substring_sum_ms=%.3f release_sum_ms=%.3f uptime_sum_ms=%.3f uptime_calls=%llu\n",
-      (candidateProfile.queueStarted.load()-candidateProfile.queuedAt.load())*millisecondsPerTick,
-      (candidateProfile.workersStarted.load()-candidateProfile.queueStarted.load())*millisecondsPerTick,
-      (candidateProfile.workersJoined.load()-candidateProfile.workersStarted.load())*millisecondsPerTick,
-      (candidateProfile.resolvedAt.load()-candidateProfile.workersJoined.load())*millisecondsPerTick,
+    printf("mixed420_phase_profile queue_ms=%.3f glyph_and_group_ms=%.3f workers_wall_ms=%.3f pack_and_resolve_ms=%.3f test_decode_ms=%.3f generic_substring_sum_ms=%.3f release_sum_ms=%.3f uptime_sum_ms=%.3f uptime_calls=%llu\n",
+      profileMilliseconds(candidateProfile.queuedAt.load(), candidateProfile.queueStarted.load(), millisecondsPerTick),
+      profileMilliseconds(candidateProfile.queueStarted.load(), candidateProfile.workersStarted.load(), millisecondsPerTick),
+      profileMilliseconds(candidateProfile.workersStarted.load(), candidateProfile.workersJoined.load(), millisecondsPerTick),
+      profileMilliseconds(candidateProfile.workersJoined.load(), candidateProfile.resolvedAt.load(), millisecondsPerTick),
       candidateProfile.decodeTicks.load()*millisecondsPerTick,
       candidateProfile.substringTicks.load()*millisecondsPerTick,
       candidateProfile.releaseTicks.load()*millisecondsPerTick,
@@ -387,6 +390,13 @@ int main(void) {
       (unsigned long long)candidateProfile.uptimeCalls.load());
     check(@"mixed420_complete_metrics", code == nil && validCandidates(mixedResult, mixedText));
     check(@"mixed420_uncached_equivalence", matchesUncachedCandidates(mixedResult, (RCTTextView *)bridge.uiManager.registry[@1]));
+    RCTTextView *uniform = makeView(@"AaAaAaAa", 48);
+    [uniform.fixtureStorage addAttributes:@{ NSKernAttributeName:@4, NSBaselineOffsetAttributeName:@3,
+      NSFontAttributeName:[UIFont monospacedSystemFontOfSize:48 weight:UIFontWeightRegular] }
+      range:NSMakeRange(0, uniform.fixtureStorage.length)];
+    bridge.uiManager.registry = @{@1:uniform};
+    NSDictionary *uniformResult = call(module, YES, uniform.fixtureStorage.string, 48, &code);
+    check(@"uniform_complete_attributes_uncached_equivalence", code == nil && matchesUncachedCandidates(uniformResult, uniform));
     RCTTextView *variants = makeView(@"AaAaAaAa", 48);
     [variants.fixtureStorage addAttribute:NSKernAttributeName value:@4 range:NSMakeRange(2, 2)];
     [variants.fixtureStorage addAttribute:NSBaselineOffsetAttributeName value:@3 range:NSMakeRange(4, 2)];
