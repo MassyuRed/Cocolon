@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新作業は§67／current map §65.15です。source `f93f9108` のJS復号・禁則判定の重複削減を反映し、local763件を確認しました。実RNの420文字はrun38480929335の結果確認待ちです。前回§66の420文字timeoutを解消済みとはしていません。**
+**最新作業は§67／current map §65.15です。source `f93f9108` はJS763件・native63件成功。実RN run38480929335は4ケース成功、420文字は40pt候補待ちで8,113.969msのtimeoutとなり未解消です。5件JSON・4画像を確認済みで、保存接続へはまだ進めません。**
 
 **現在は入口§66／current map §65.14を優先します。source `ec5db637` はnative63件・JS758件を通過し、実RN4ケースと4枚PNGを確認しました。420文字は48→44→40→36ptの全候補計測・復号が返りましたが、36ptのB9開始前に全体8,118.417msでtimeoutとなり、未解消です。共有CF版のcrashは専用workerデータへ修正し、最新native/実RNでは再発しませんでした。次は候補の反復と最終復号を短縮し、36ptのB9・最終inspectionまで同じ8秒内へ収めることです。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
 
@@ -1267,6 +1267,30 @@ source `f93f9108cc8e3fb798ebc0fb99dd8e916d57a145` は既存製品2＋test2path�
 
 同環境read-only補助review後、華恋が原典と差分を確認し、4pathのremote全文一致・親head・変更path集合を照合しました。native source／worker数／CoreText式／font順／8秒／最終inspection／workflow／依存は変更0です。CTTypesetterによる段落全体の再利用はsubstring外contextが変わり得るため採用していません。
 
-最新検証は[run38480929335](https://github.com/MassyuRed/Cocolon/actions/runs/38480929335)。実RN job115583041976、native job115583042506、JS job115583042448の完了結果を確認します。5件JSON・実画像・全体時間の取得前に420文字解消や全5件成功を主張しません。描画確認後の正式renderer供給→保存直前fit→通常初回保存→実機受入れは引き続き未完了です。
+最新検証は[run38480929335](https://github.com/MassyuRed/Cocolon/actions/runs/38480929335)。実RN job115583041976はfailure、native job115583042506は63 PASS／FAIL0／SKIP0、JS job115583042448は763 PASS／FAIL0／SKIP0です。完了結果は次項へ記録しました。描画確認後の正式renderer供給→保存直前fit→通常初回保存→実機受入れは引き続き未完了です。
 
 必須前提・作業rule・全体構造01系・現行Piece map・weekly10/10 §5.5／12/18基準・前回txtを確認。System Context prepareは作業用sparse treeにtools.cocolon_contextがなくModuleNotFoundErrorで未成立、technical entryが許す原典直接読取りで継続しました。生成contextの成功は主張しません。STRUCTURE_MAP_DELTA_NONE（既存JS内部処理のみ）。default OFF、canSave/canExport=false、Draft/open/unmerged、DB/env/deploy/署名/配布/main merge効果0を保持します。
+
+### 67.1 同じsourceの実RN完了結果 — 420文字は未解消
+
+実RN jobは2026-10-13 22:55:11〜23:14:25 UTC（約19分14秒、ビルドを含む）。artifact11857877697のZIP SHA-256 `35819bfdeb5797986444e52efad4cee504e20978d4ae543990ce48995c1ac7ab` を照合し、5件results.jsonと4 PNGを取得しました。results.json SHA-256は `ff8364481e17ce8e97bfdfcd097c7ae83acd99d6d9687f97d2eea5e527da8316`。artifactの期限は2026-10-20です。
+
+| case | 最終状態 | 全体ms | 描画確認 |
+|---|---|---:|---|
+| essay_paragraphs | native_checked | 1,243.988 | 全文・段落・branding、1080×1350 |
+| quote_unicode | native_checked | 584.907 | 結合文字・emoji・branding、1080×1920 |
+| declaration_no_brand | native_checked | 377.571 | 全文・brandingなし、1080×1920 |
+| essay_max420 | measurement_timeout / size2 | 8,113.969 | plan・最終inspection・PNGなし |
+| saved_essay_canvas | native_checked | 3,295.463 | 保存済み合成recordの全文・branding、1080×1350 |
+
+成功4件はJSONのbody_preserved／native_canvas_valid=true、native_textsと選択行＋brandingの一致、PNG寸法を確認し、華恋が4画像の本文・改行・欠け・配置を読みました。420文字のbody_preserved=falseはplan未成立によるもので、画像を生成できていません。全ケースでcanSave/canExport=false。実機・正式保存・release受入れの証拠ではありません。
+
+420文字の48ptはnative2,680.218ms／adapter2,898.100ms、44ptは5,728.085／5,975.691ms。各88,410行・11,381代表値を返し、B9は137.328／175.843msで不成立でした。stateは44ptへ3,200.344ms、40ptへ6,366.127ms、unavailableへ8,065.025ms。保存されたtraceでは40pt／36ptのnative・adapterはpendingで、B9も未実行です。呼出時間にはqueue待ちを含むため合計へ加算しません。前回は36ptまで返却、今回は40pt待ちであり、異なるrun間の時間差を今回変更だけの速度効果・退行とは断定しません。JS変更だけで8秒を満たすという見込みは成立しませんでした。
+
+native単体は63件成功し、mixed420は2,837.208ms、全候補・従来uncached計測とのbit同値を確認しました。profileはCoreText creates11,382／units2,320,415、create累計3,630.224ms／image累計858.217ms、workers wall2,214.111ms。並列worker累計とwallは別量です。native sourceは不変で、この結果を今回のnative性能改善とは扱いません。
+
+read-only補助調査と原典で、nativeは候補indexを4workerへ交互配分していることを確認しました。fixtureのunique11,381候補のUTF16量は579,999／580,000／579,999／579,997（合計2,319,995＋全文glyph420がprofileと一致）。長さの配分偏りを根拠にworker方式・数を変える判断は成立しません。追加helper・並列方式変更・通るまでの再実行は行っていません。
+
+**primary outcome: BLOCKER_NARROWED。** 重複JS処理の削減と欠損metric拒否は検証済みですが、420文字の商品上の停止は未解消です。次の本線は、既存 `ios/tempCocolon/PieceTextMetrics.mm` の同一属性substring／CoreText行作成の反復コストを、既存profile・同値検査に基づいて直接短縮し、同じ実RN5ケースで全体8秒・最終inspectionを確認すること。全候補・bit同値・font順・8秒の緩和、根拠のないworker変更、font比例、全段落shapingへの置換は解決として採用しません。
+
+保存側は `PieceVisualCard` の同一mount・generation・plan・inspectionと同じpreview/tokenを `PiecePreviewModal` 経由で既存 `InputPieceActionArea.isSaveAdmitted` へ結ぶ箇所が残っています。Controller/API保存を重複実装しません。PCE5 `Piece_Export_Owner_Comparison_20260808.md` §1/8/15–16と `Piece_Render_Reproducibility_Contract_20260808.md` §6–7に従い、prototype native_checkedや例示versionを正式renderer採用・実機受入れへ昇格しません。一方、実機matrix全体を接続コードの着手条件へ拡張する根拠もありません。今回は未解消の描画を先に扱います。
