@@ -5,17 +5,40 @@ import PieceVisualCard from '../../components/piece/PieceVisualCard';
 import { preparePieceNativeCard } from '../../features/piece/pieceLayout';
 import fixtures from './piece-rn-canvas-fixtures.json';
 
+// Test-only timing around the unchanged native bridge call. In particular,
+// distinguish a pending candidate table from planner/render/inspection work.
+let activeTrace;
+const nativeCandidates = NativeModules.PieceTextMetrics.measureCandidates;
+NativeModules.PieceTextMetrics.measureCandidates = (...args) => {
+  const started = performance.now();
+  const sample = { font_size: args[2], utf16_length: args[1].length, status: 'pending' };
+  activeTrace?.candidates.push(sample);
+  return nativeCandidates(...args).then(value => {
+    Object.assign(sample, { status: 'resolved', elapsed_ms: performance.now() - started, rows: value.rows?.length });
+    console.log('PIECE_RN_CANDIDATES', JSON.stringify(sample));
+    return value;
+  }, error => {
+    Object.assign(sample, { status: 'rejected', elapsed_ms: performance.now() - started });
+    console.log('PIECE_RN_CANDIDATES', JSON.stringify(sample));
+    throw error;
+  });
+};
+
 class CanvasCases extends React.Component {
   state = { index: 0 };
   componentDidMount() { this.startCase(); }
   componentWillUnmount() { clearTimeout(this.timer); }
   startCase = () => {
     this.started = performance.now();
+    this.trace = { candidates: [], states: [] };
+    activeTrace = this.trace;
     this.finishing = false;
     this.poll();
   };
   poll = () => {
     const card = this.card, snapshot = card?.state.measurement;
+    const state = snapshot && `${snapshot.phase}:${snapshot.sizeIndex}`;
+    if (state && this.trace.states[this.trace.states.length - 1]?.state !== state) this.trace.states.push({ state, elapsed_ms: performance.now() - this.started });
     if (!this.finishing && snapshot && (['native_checked', 'unavailable'].includes(snapshot.phase) || performance.now() - this.started > 10000)) {
       this.finishing = true;
       requestAnimationFrame(() => requestAnimationFrame(() => this.finishCase()));
@@ -28,6 +51,7 @@ class CanvasCases extends React.Component {
     const input = preparePieceNativeCard(fixture.props);
     const report = { name: fixture.name, phase: m?.phase ?? 'missing', reason: m?.reason ?? null,
       elapsed_ms: performance.now() - this.started, size_index: m?.sizeIndex,
+      trace: this.trace,
       width: input?.width, height: input?.height, content_width: input?.contentWidth,
       content_height: input?.contentHeight, margin: input?.margin, branding_zone: input?.brandingZone,
       composition_height: m?.compositionHeight, blocks: input?.blocks,

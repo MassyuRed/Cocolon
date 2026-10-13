@@ -188,6 +188,16 @@ int main(void) {
     NSDictionary *longResult = call(module, YES, longText, 48, &code);
     printf("max420_candidate_elapsed_ms=%.3f\n", (NSProcessInfo.processInfo.systemUptime-started)*1000);
     check(@"max420_complete_metrics", code == nil && validCandidates(longResult, longText));
+    // Same mixed Japanese input as the full RN case, so a homogeneous glyph
+    // benchmark cannot hide native shaping cost. Existing 420 test stays intact.
+    NSString *mixedText = [[[@"考える時間と対話を大切にしながら、自分の言葉で伝えたい。"
+      stringByPaddingToLength:419 withString:@"考える時間と対話を大切にしながら、自分の言葉で伝えたい。" startingAtIndex:0]
+      stringByAppendingString:@"。"] copy];
+    bridge.uiManager.registry = @{@1:makeView(mixedText, 48)};
+    started = NSProcessInfo.processInfo.systemUptime;
+    NSDictionary *mixedResult = call(module, YES, mixedText, 48, &code);
+    printf("mixed420_candidate_elapsed_ms=%.3f\n", (NSProcessInfo.processInfo.systemUptime-started)*1000);
+    check(@"mixed420_complete_metrics", code == nil && validCandidates(mixedResult, mixedText));
     printf("NATIVE_CHECKS=%lu PASS=%lu FAIL=%lu SKIP=0\n", (unsigned long)checks,
       (unsigned long)(checks-failures), (unsigned long)failures);
     return failures ? 1 : 0;
