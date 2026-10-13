@@ -140,8 +140,8 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
               }
             }
           }
-          // Each worker owns its substring and CTLine. Only immutable font and
-          // attributed-string snapshots are shared; UIKit stays on its UI queue.
+          // Each worker owns its attributed storage, typesetter and CTLines.
+          // UIKit stays on its UI queue.
           // Fixed workers avoid one dispatch block per candidate and write only
           // disjoint metrics. dispatch_apply joins before any buffer is released.
           MetricJob *jobData = jobs.data();
@@ -178,34 +178,63 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
           dispatch_apply(workers, dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^(size_t worker) {
             @try {
               NSAttributedString *nativeSnapshot = uniformAttributes ? nil : nativeSnapshots[worker];
-              for (NSUInteger index = worker; index < jobCount; index += workers) {
+              NSUInteger next = worker;
+              while (next < jobCount) {
                 @autoreleasepool {
                   if (failure->load(std::memory_order_relaxed)) return;
                   if (NSProcessInfo.processInfo.systemUptime >= deadline) { failure->store(true, std::memory_order_relaxed); return; }
-                  NSRange range = jobData[index].range;
-                  NSAttributedString *part = uniformAttributes
-                    ? [[NSAttributedString alloc] initWithString:[snapshotText substringWithRange:range] attributes:uniformAttributes]
-                    : CFBridgingRelease(CFAttributedStringCreateWithSubstring(NULL,
-                        (__bridge CFAttributedStringRef)nativeSnapshot, CFRangeMake(range.location, range.length)));
-                  if (!part) { failure->store(true, std::memory_order_relaxed); return; }
-                  CTLineRef line = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)part);
-                  if (!line) { failure->store(true, std::memory_order_relaxed); return; }
-                  double advance = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
-                  CGRect ink = CTLineGetImageBounds(line, NULL);
-                  CFRelease(line);
-                  if (CGRectIsNull(ink)) {
-                    if ([part.string rangeOfCharacterFromSet:NSCharacterSet.whitespaceAndNewlineCharacterSet.invertedSet].location != NSNotFound) {
+                  // Candidates are separate paragraphs, never adjacent pieces
+                  // of one shaped paragraph. Bound both the UTF-16 allocation
+                  // and job count; do not concatenate the entire O(n^2) table.
+                  NSMutableAttributedString *batch = CFBridgingRelease(CFAttributedStringCreateMutable(NULL, 0));
+                  if (!batch) { failure->store(true, std::memory_order_relaxed); return; }
+                  std::vector<CFRange> batchRanges;
+                  const NSUInteger first = next;
+                  while (next < jobCount && batchRanges.size() < 256) {
+                    NSRange range = jobData[next].range;
+                    if (batchRanges.size() && batch.length + range.length + 1 > 16384) break;
+                    if (failure->load(std::memory_order_relaxed)) return;
+                    if (NSProcessInfo.processInfo.systemUptime >= deadline) { failure->store(true, std::memory_order_relaxed); return; }
+                    NSAttributedString *part = uniformAttributes
+                      ? [[NSAttributedString alloc] initWithString:[snapshotText substringWithRange:range] attributes:uniformAttributes]
+                      : CFBridgingRelease(CFAttributedStringCreateWithSubstring(NULL,
+                          (__bridge CFAttributedStringRef)nativeSnapshot, CFRangeMake(range.location, range.length)));
+                    if (!part) { failure->store(true, std::memory_order_relaxed); return; }
+                    batchRanges.push_back(CFRangeMake(batch.length, part.length));
+                    [batch appendAttributedString:part];
+                    [batch appendAttributedString:[[NSAttributedString alloc] initWithString:@"\u2029"
+                      attributes:[part attributesAtIndex:part.length - 1 effectiveRange:NULL]]];
+                    next += workers;
+                  }
+                  // ARC owns the CF object too, including every early return.
+                  __attribute__((objc_precise_lifetime)) id typesetterOwner =
+                    CFBridgingRelease(CTTypesetterCreateWithAttributedString((__bridge CFAttributedStringRef)batch));
+                  CTTypesetterRef typesetter = (__bridge CTTypesetterRef)typesetterOwner;
+                  if (!typesetter) { failure->store(true, std::memory_order_relaxed); return; }
+                  for (NSUInteger offset = 0; offset < batchRanges.size(); offset++) {
+                    if (failure->load(std::memory_order_relaxed)) return;
+                    if (NSProcessInfo.processInfo.systemUptime >= deadline) { failure->store(true, std::memory_order_relaxed); return; }
+                    NSUInteger index = first + offset * workers;
+                    CTLineRef line = CTTypesetterCreateLine(typesetter, batchRanges[offset]);
+                    if (!line) { failure->store(true, std::memory_order_relaxed); return; }
+                    double advance = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
+                    CGRect ink = CTLineGetImageBounds(line, NULL);
+                    CFRelease(line);
+                    if (CGRectIsNull(ink)) {
+                      if ([[snapshotText substringWithRange:jobData[index].range]
+                          rangeOfCharacterFromSet:NSCharacterSet.whitespaceAndNewlineCharacterSet.invertedSet].location != NSNotFound) {
+                        failure->store(true, std::memory_order_relaxed); return;
+                      }
+                      ink = CGRectZero;
+                    }
+                    if (!isfinite(advance) || !isfinite(ink.origin.x) || !isfinite(ink.origin.y) ||
+                        !isfinite(ink.size.width) || !isfinite(ink.size.height)) {
                       failure->store(true, std::memory_order_relaxed); return;
                     }
-                    ink = CGRectZero;
+                    const double metrics[] = {advance, CGRectGetMinX(ink), -CGRectGetMaxY(ink),
+                      CGRectGetMaxX(ink), -CGRectGetMinY(ink)};
+                    memcpy(jobData[index].values, metrics, sizeof(metrics));
                   }
-                  if (!isfinite(advance) || !isfinite(ink.origin.x) || !isfinite(ink.origin.y) ||
-                      !isfinite(ink.size.width) || !isfinite(ink.size.height)) {
-                    failure->store(true, std::memory_order_relaxed); return;
-                  }
-                  const double metrics[] = {advance, CGRectGetMinX(ink), -CGRectGetMaxY(ink),
-                    CGRectGetMaxX(ink), -CGRectGetMinY(ink)};
-                  memcpy(jobData[index].values, metrics, sizeof(metrics));
                 }
               }
             } @catch (__unused NSException *exception) { failure->store(true, std::memory_order_relaxed); }
