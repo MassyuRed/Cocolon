@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§72／本map §65.20です。source `f49238ac` で最終描画検査を同じ画面の全Textへまとめて依頼します。local14ファイル806件成功。実RN run38495258157は未確定で、420文字・正式renderer・保存の完了は未成立です。**
+**最新は入口§72／本map §65.20です。source `f49238ac` で最終描画検査を同じ画面の全Textへまとめて依頼します。local14ファイル806件、CI JS768件・native69件成功。実RN run38495258157は4成功・420文字8,100.109msでtimeout（入口§72.1）。420文字・正式renderer・保存は未完了です。**
 
 ### §70〜71時点の要約（履歴）
 
@@ -2675,6 +2675,10 @@ source562e6a38は既存native製品／native検査／workflowの3pathです。�
 
 source `f49238acc8a94f4560af4918effa31b428919c9f` は既存Cardとrenderer testの2pathです。選択した全行・brandingのnode/generationと期待値を先に固定し、逐次awaitをPromise.allへ変更。nativeは既存UIManager上のread-only検査のままです。全結果の順序、全件完了前非表示、1件失敗時拒否、current／元8秒／setState照合を保持します。全候補・独立CoreText・5double・B9・font順・4worker・保存許可は不変です。
 
-local対象55件、既存14ファイル806件が成功。CIの13ファイルとの差はinitial-save-host38件。同環境read-only差分reviewとremote2path全文・親・変更集合の一致を確認しました。実RN job115629460856／native115629460966／JS115629460888はrun38495258157で確認中。未完了結果を成功・420文字解消へ換算しません。根拠と再開位置は入口§72。
+local対象55件、既存14ファイル806件が成功。CIの13ファイルとの差はinitial-save-host38件。同環境read-only差分reviewとremote2path全文・親・変更集合の一致を確認しました。run38495258157のJS115629460888は768 PASS／FAIL0／SKIP0、Android source115629460943は実compile成功、phase6 guards38495258123も成功。export Pods／Androidはcompile stepをscope skip。native115629460966も全行bit比較を含む69 PASS／FAIL0／SKIP0。実RN job115629460856は4成功・420文字timeoutでfailureとして完了。420文字解消へ換算しません。根拠と再開位置は入口§72。
 
 候補処理を減らす別契約案と初回保存の接続不足は同節の未採用調査として記録。現在のv3・全行oracleを黙って変更せず、prototype native_checkedを正式rendererへ昇格しません。正式renderer供給・保存直前fit・初回保存・物理実機受入れは未完了。STRUCTURE_MAP_DELTA_NONE、default OFF、canSave/canExport=false、Draft/open/unmerged、DB/env/deploy/署名/配布/main merge効果0。
+
+#### 65.20.1 実RNの完了結果
+
+sourcef49238ac／run38495258157／job115629460856は4ケースnative_checked、420文字measurement_timeoutでfailure。essay1,902.520／quote631.281／declaration345.065／saved1,205.142msの本文一致・native text・全inspection・画像寸法と4枚PNGを確認しました。420文字は8,100.109ms、36ptのnative／adapterがreport時pending、B9・最終inspection・PNGなし。今回は最終検査の前で期限へ到達しています。前回36pt fit成立との実行環境差を今回変更の改善／悪化と断定せず、候補計測量と返却／復号を次の優先課題とします。全5件canSave/canExport=false。artifact11864476166のZIP／JSON digestを照合済みです。各font時間・state・失敗範囲・identityは入口§72.1を参照。正式renderer・保存前fit・初回保存・物理実機受入れは未完了です。

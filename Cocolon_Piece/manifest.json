@@ -13,9 +13,9 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "538d3e55430a11aa7ab10653db79e6d1dcdbee30",
-    "raw_sha256": "1f742abb3b4520ba656d4f528e1625ec067057ccee670307591e84d4f0eff9e7",
-    "utf8_bytes": 176036
+    "git_blob_sha1": "ae6bc7868df38fb8ec8ac94fe55e17aa852e6ad6",
+    "raw_sha256": "8b453ba5ebb83ec90fb47a540fb219ba166d4c48e8dcf3fa4be8a7db0e046b56",
+    "utf8_bytes": 181360
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -4868,9 +4868,30 @@
     "rn_job": 115629460856,
     "native_job": 115629460966,
     "js_job": 115629460888,
-    "ci_state": "IN_PROGRESS_NOT_CREDITED",
+    "ci_state": "COMPLETED_RN_FAILURE_MAX420_TIMEOUT",
     "all_candidates_and_five_double_contract_unchanged": true,
     "timeout_ms": 8000,
-    "formal_renderer_or_save_admission": false
+    "formal_renderer_or_save_admission": false,
+    "ci_js_pass": 768,
+    "ci_native_pass": 69,
+    "android_source_compile": "success",
+    "phase6_guard_run": 38495258123,
+    "export_native_compiles": "scope_skipped",
+    "artifact_id": 11864476166,
+    "artifact_zip_sha256": "a607ee49316877c4879950aa23d0aa6a5789832d86c594312eba0d91339d110e",
+    "results_json_sha256": "3a6e91aa60def5411c355da05fe82c2c1b18e4f2286cc3f808f78ed3a7b414b7",
+    "rn_success_cases": 4,
+    "pngs_visually_reviewed": 4,
+    "max420": {
+      "elapsed_ms": 8100.108833000064,
+      "phase": "unavailable",
+      "reason": "measurement_timeout",
+      "size_index": 3,
+      "font36_native_and_adapter_at_report": "pending",
+      "font36_b9_completed": false,
+      "final_inspection_completed": false,
+      "png": false
+    },
+    "next_work": "Prioritize exact candidate workload and adapter costs before final inspection; proposed v4 overflow classification remains unadopted because it changes the full-five-metric contract. Formal renderer supplier, current snapshot fit gate, initial save and physical device acceptance remain incomplete."
   }
 }

@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は§72／current map §65.20です。最終描画検査を同じ画面の全Textへまとめて依頼する変更をsource `f49238acc8a94f4560af4918effa31b428919c9f`へ反映しました。local14ファイル806件成功。実RN run38495258157の結果はまだ未確定で、420文字の解消・正式保存は未成立です。**
+**最新は§72／current map §65.20です。最終描画検査を同じ画面の全Textへまとめて依頼する変更をsource `f49238acc8a94f4560af4918effa31b428919c9f`へ反映しました。local14ファイル806件、CI JS768件・native69件成功。実RN run38495258157は4ケース成功・420文字8,100.109msでtimeout（§72.1）。420文字・正式保存は未成立です。**
 
 ### §70〜71時点の要約（履歴）
 
@@ -1417,10 +1417,24 @@ source `f49238acc8a94f4560af4918effa31b428919c9f` は `components/piece/PieceVis
 
 追加2件は、全検査が応答待ちより先に依頼されること、逆順完了でも行順を保持して最後の結果まで隠すこと、先頭待機中の後続rejectで全体拒否し後着成功で復活しないことを確認。既存のdeadline・unmount・入力差替え・計測snapshot変更の検査も保持。local対象55 PASS、既存14ファイル全体806 PASS／FAIL0／SKIP0（Node24.19.0／TypeScript5.2.2）。CIの既存13ファイルとの件数差はinitial-save-hostの38件です。同環境の別担当が実差分をread-only確認し、華恋が原典と差分・反映2pathのremote全文・親head・changed pathsを照合しました。別model reviewとは扱いません。
 
-実RN5ケース・native69・JS13ファイルは [run38495258157](https://github.com/MassyuRed/Cocolon/actions/runs/38495258157) で確認中です。完了前にPASS・速度改善値・420文字解消を記録しません。実RN job115629460856、native job115629460966、JS job115629460888。sourceは上記commitに固定します。正式renderer供給→保存直前fit→同じpreview/tokenの初回保存→物理実機受入れは未完了です。
+[run38495258157](https://github.com/MassyuRed/Cocolon/actions/runs/38495258157) のJS job115629460888は768 PASS／FAIL0／SKIP0、Android source job115629460943は実compile成功です。phase6-contract-guards run38495258123も成功。export Pods／Androidは対象変更なしでcompile stepがskipされ、新しい実compile証拠へ加点しません。native job115629460966も69 PASS／FAIL0／SKIP0で完了しました（全行bit比較を含む）。mixed420単体は1,923.468ms、worker実時間1,686.725ms、検査decode154.717msでした。異なるrunの計測時間差を今回の性能改善へ換算しません。実RN job115629460856も4成功・420文字timeoutでfailureとして完了しました。結果と画像確認は§72.1です。今回の差分を420文字解消や確定した速度改善値へ換算しません。sourceは上記commitに固定します。正式renderer供給→保存直前fit→同じpreview/tokenの初回保存→物理実機受入れは未完了です。
 
 設計調査で、全候補の独立行を維持したまま、実測advanceがcontentWidthを超えた候補を明示的な幅超過として返す案を確認しました。B9の幅はmax(advance,right)-min(0,left)でありadvance以上なので、幅超過拒否には文字幅の単調性・font比例・前後文脈の仮定は不要です。ただし、この案は幅超過行のink計測を省くため、全行5doubleと未使用行の不正inkも拒否する現行v3契約を変えます。未採用・未実装です。現行検査を削除・緩和せず、候補契約・比較範囲・必要な判断を先に具体化する必要があります。過去profileでink計測はCoreText作成より小さく、この案でも8秒解消は保証できません。batch／suffix再利用は復活させません。
 
-初回保存の読取り確認では、Cardの同一mount／generation／plan／inspectionを同じpreviewとvisualTokenへ結ぶ証拠の受渡しが未接続、InputScreenの正式isSaveAdmitted供給も未接続です。native_checkedだけを許可へ昇格しません。visualTokenだけが替わる場合は現行measurement keyが同じになるため、将来の証拠接続ではtoken変更も再計測・失効へ反映します。今回この経路の製品変更はありません。
+この未採用案を評価する場合も、同値の範囲は「旧v3の全行が有効で、両方式が期限内に計測を完了した入力」に限られます。native要求・返却table・B9のcontentWidthを同じ有限正値に固定し、advanceのNaN／±Infinity／負値を拒否した後にstrict advance>widthだけを分類します。advance=widthはink取得を残し、既存の0.5許容差を転用しません。overflowを偽の0／Infinityのinkへ変換せず、明示状態とadvanceの矛盾を拒否します。全範囲・順序・参照・代表値使用・バッファ検証を維持し、B9のfits／protectViewpoint／wrapSolutions／minimumMeasuredLineCountの全4経路で状態を扱います。比較は各幅判定、fit/null、font、行本文、段落、gap、総高さ、同点時選択まで必要です。全文glyph、独立substringの属性／空の前後文脈、4worker、元deadline、CTLine解放、Androidの既存呼出し互換も維持対象です。幅超過行の非空白null ink／非有限ink／逆転inkに対する旧拒否は省略後に保証できず、選択行の最終inspectionでも取り戻せません。これを現行契約不変の最適化と称しません。
+
+初回保存の読取り確認では、Cardの同一mount／generation／plan／inspectionを同じpreviewとvisualTokenへ結ぶ証拠の受渡しが未接続、InputScreenの正式isSaveAdmitted供給も未接続です。native_checkedだけを許可へ昇格しません。visualTokenだけが替わる場合は現行measurement keyが同じになるため、将来の証拠接続ではtoken変更でも旧証拠を必ず失効させます。今回この経路の製品変更はありません。
+
+次の最小接続案（未採用・未実装）は、Cardが現在の同一mount/token/generation/plan/inspectionを照合できるローカルhandleを供給し、Modalがhandleと状態変更を渡し、InputPieceActionAreaが現在preview/tokenおよび正式supplierを合わせて既存の同期isSaveAdmittedを判定する形です。InputScreenの正式supplier供給元と採用family/version/platformの対応は未決です。prototypeの版文字列を許可リストに書くだけでは成立しません。LongText §§6–8は保存前の選択候補text＋recipe＋target profileのfit検証を要求しますが、毎回全native計測を再実行するとの明文はありません。有効snapshotの現在性照合という案を、正式renderer採用・実機受入れ完了と混同しません。handleの本文・行文字列・native nodeを保存bodyや永続receiptへ追加しません。
 
 必須前提・作業rule・恒久incident・全体設計01系・全ファイル地図・Piece現行map／manifest・PCE5・最新weekly20261010 §5.5と12/18目標・添付前回txtを確認。System Context prepareはshallow checkoutの祖先照合で停止し、管理入口が許す原典直接読取りで継続しました。生成contextの成功や全文全repo監査は主張しません。STRUCTURE_MAP_DELTA_NONE（既存Cardの検査呼出し順のみ）。default OFF、Draft/open/unmerged、DB/env/deploy/署名/配布/main merge効果0を維持します。
+
+### 72.1 実RN完了 — 4ケースの描画を確認、420文字は候補計測中にtimeout
+
+sourcef49238ac／[run38495258157](https://github.com/MassyuRed/Cocolon/actions/runs/38495258157)／実RN job115629460856はfailureで完了しました。essay_paragraphs 1,902.520ms、quote_unicode 631.281ms、declaration_no_brand 345.065ms、saved_essay_canvas 1,205.142msの4ケースはnative_checkedです。body_preserved／native_canvas_valid=true、native_textsが選択行＋任意brandingと一致し、inspection数は順に6／4／5／6です。PNGのessay／savedは1080×1350、quote／declarationは1080×1920。華恋が4枚を開き、本文・段落・欠け・余白・brandingを確認しました。全5件canSave/canExport=falseです。
+
+420文字は8,100.109msでmeasurement_timeout、size3。48／44／40ptは各88,410行・11,381代表値が返り、native呼出2,530.129／4,658.188／3,594.676ms、adapter2,700.742／4,797.367／3,736.438msでした。queue待ちを含む時間を合算しません。36ptはreport採取時にnative／adapterともpendingで、B9未実行。48／44／40ptのB9は110.499／103.093／124.229msでいずれもfit=falseでした。stateはplanning1 2,950.828ms→planning2 5,043.914ms→planning3 6,954.630ms→unavailable3 8,043.447msです。選択plan／最終inspection／PNGはなく、body_preserved=falseは完成planがないためのharness判定、capture_error=trueです。本文の削除を行ったという記録ではありません。
+
+今回の420文字は最終inspectionへ到達していないため、検査依頼の一括化だけでこの残件が解消したとは扱いません。前回§71.2は36ptのfitまで到達しましたが、今回との別runner・別実行の時間差を改善／悪化の因果と断定しません。8秒を延ばさず、次は最終検査前の候補計測量・返却／復号を減らす設計を優先します。§72のv4案は契約変更を伴う未採用案で、現行5double／全行比較を黙って変更しません。
+
+artifact11864476166（55,431,860 bytes、期限2026-10-21T01:40:49Z）のZIP SHA256 `a607ee49316877c4879950aa23d0aa6a5789832d86c594312eba0d91339d110e` とresults.json SHA256 `3a6e91aa60def5411c355da05fe82c2c1b18e4f2286cc3f808f78ed3a7b414b7` を照合しました。native69／JS768／Android source／phase6 guardsは成功、export Pods／Androidはscope skip、workflow全体はRN failureです。物理実機受入れ・正式renderer供給・保存直前fit・通常初回保存は未完了です。
