@@ -6863,3 +6863,12 @@ STRUCTURE_MAP_DELTA_PRESENT。新production file・engine・checker・registry�
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 正式商品受入れ0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。今回の理由欠落改善を§9.2/9.4全体の完成へ換算しない。
 
 Observationに「満足した」が二度現れる説明的反復、現在形の「入力した時点での」という重い表現は残る。有限語形以外の理由や今回除外した意味契約は未実装。2 received＋2評価の初回gap、既存共有17失敗、same100、本人実機、正式Product Readも残る。新しい意味契約へ黙って広げず、次は今回の限定改善を10/17確認点へ反映し、既存の初回一体単位・受け取り内容の残件へ戻る。10/31・12/18とPiece/Analysis主枠は維持する。
+
+
+### u265 — 同一欄の本人received文に続く評価の読み落としを修正（2026-10-15 JST）
+
+u253の既存評価の承認範囲で、同一欄の先頭にある本人のreceived event＋reaction一文に続く、理由／未成立contextを伴わない明示評価の欠落を修正した。u264の理由契約を広げる変更ではない。全体01・全file地図01A/B/C・current01/04・8/28設計§9.2/9.4・最新weekly20261010・Rule18 §11.3・8/16商品軽視incidentを確認した。前回API ba6a7adのCI38646841959は同headでcompleted/successだった。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production 4fileの責務変更のみ。新file/engine/author/checker/registry/service、内部意味schema・公開API/DTO/DB/SQL/RN、製品依存、Piece/Analysisの変更0。検査は既存test_cmee_emlis_result_appraisal.pyと現行shared-owner identity fixtureへ追加／更新し、歴史fixture/IM03 proofは変更しない。
+
+同一欄の本人received一文に続く明示評価を既存source→meaning→本文へ保持した。全file責務差分は01A u265の4owner。旧checkpointを完全再導出し、保存済み本文のreadには作者を呼ばない。実測と残件は最新weekly§5.6.15、実全文と検証は06／API handoff u265。初回単位未完了・0/3・未配置を維持。

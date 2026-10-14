@@ -772,3 +772,20 @@ STRUCTURE_MAP_DELTA_PRESENT。新production file・engine・checker・registry�
 Observationに「満足した」が二度現れる説明的反復、現在形の「入力した時点での」という重い表現は残る。有限語形以外の理由や今回除外した意味契約は未実装。2 received＋2評価の初回gap、既存共有17失敗、same100、本人実機、正式Product Readも残る。新しい意味契約へ黙って広げず、次は今回の限定改善を10/17確認点へ反映し、既存の初回一体単位・受け取り内容の残件へ戻る。10/31・12/18とPiece/Analysis主枠は維持する。
 
 承認・契約詳細は8/28設計u264、途中失敗と実本文は06／API handoff u264。構造は全体01/01A・current01/04、反映位置は07。
+
+
+### 5.6.15 u265 — 同一欄の本人received文に続く評価の読み落としを修正（2026-10-15 JST）
+
+u253の既存評価の承認範囲で、同一欄の先頭にある本人のreceived event＋reaction一文に続く、理由／未成立contextを伴わない明示評価の欠落を修正した。u264の理由契約を広げる変更ではない。全体01・全file地図01A/B/C・current01/04・8/28設計§9.2/9.4・最新weekly20261010・Rule18 §11.3・8/16商品軽視incidentを確認した。前回API ba6a7adのCI38646841959は同headでcompleted/successだった。
+
+同一欄では満足が落ちて植木だけを受け取っていた問題を、既存receivedの本人判定を限定して共有することで修正した。実本文に「資料を分類できたことについて、当時は満足したのですね」が戻り、訂正・撤回も既存経路で成立した。
+
+最終評価suite **275 PASS（既存236＋新39）**、Q2/Q3 application **54 PASS**、計 **329 PASS・115.04秒・既存依存deprecation warning2**。現行shared-owner identity **1 PASS・22.82秒**、総計330 PASS。language `4dd2c8bd0bbe34b65f30f672934b6a334a6fa6adedc0644216ae55f8d9d4d09b`／runtime `d4d3f48b5f61802f49d18151023d841f59344c3a1f3d47c78e0e12c228764f7a`。新39件は同一欄の実本文8・境界拒否12・SELF giver拒否5・実質問からの回答/訂正/撤回5・本文の対象/肯否/時点/欠落改変拒否1・旧完全checkpoint6・既発行質問2。合成4本文（memo初回/action初回/現在評価へ訂正/全評価文撤回）を実service＋隔離PGliteへ保存し、event payload一致・NoAuthor restart GET/startを確認した。回答2件は同じidempotency keyの再試行で保存本文とevent数も一致。実RN hook/modalの履歴展開・close/reopenでcurrent本文/event一致を4件確認。native実機／正式Product Readではない。git diff --check成功。既存Python3.12.14/PGlite0.5.8/React18.3.1を使用し、外部AI呼出・新有料service・製品依存追加0。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production 4fileの責務変更のみ。新file/engine/author/checker/registry/service、内部意味schema・公開API/DTO/DB/SQL/RN、製品依存、Piece/Analysisの変更0。検査は既存test_cmee_emlis_result_appraisal.pyと現行shared-owner identity fixtureへ追加／更新し、歴史fixture/IM03 proofは変更しない。
+
+未変更ba6a7adで取得した初回／実回答の旧完全checkpoint6件を再導出した。Q3の5件は本文・質問も完全一致。Q1の1件はcheckpoint・Reception・質問が一致するが、Observationは旧generic形式から既存Stage1 surfaceへ変わる。「異なる向きが確認できます」から「異なる向きのまま同時にあります」等の差を単なる整形差とは扱わず、旧本文完全一致6件とは報告しない。保存済み本文のread/reopenは作者を呼ばず保存bytesを返す。既発行質問のうち今回の2件は現行planでも完全canonicalであり、未保存の新回答は現行意味で新checkpointを作る。旧完全checkpointを明示した再試行だけ旧意味へ戻す。質問文改変／foreign checkpointは拒否。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 今回は評価脱落の回復であり、LIMITED本文の関係反復・固定的な受け取りを§9.2/9.4の完成に換算しない。独立行動もReceptionに残るため「独立行動非混入」とはしない。理由＋receivedを別欄に置いた初回は両配置ともMEANING_REALIZATION_CAUSAL_TRACE_GAPで本文停止、2 received＋2評価もLIMITED_RECEPTION_CAPABILITY_GAP_STOPを今回実測した。次の第一候補は前者をsource→選択内容→作者/独立readerの単位で直すこと。新しい意味契約が必要と判明すれば、その具体差分にだけRule18 §11.3を適用する。旧received文法全般のgiver誤帰属、複数先行文への評価継続も今回の修正範囲には含めない。既存共有17失敗・same100・本人実機・正式Product Readは未解消／未実施。正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmerged、10/17確認点・10/31/12/18とPiece/Analysis主枠を維持する。
+
+責務地図は01A、実本文・途中失敗は06／API handoff u265。
