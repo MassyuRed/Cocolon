@@ -17608,3 +17608,14 @@ Python3.12.14、既存pinのpytest8.4.1/Pydantic2.13.5等、PGlite0.5.8、前回
 次は同じ承認内で、満足/納得の肯否訂正（現在`correction_replacement_unsupported`）と、対象eventだけを撤回して評価を残す経路（現在`human_reception_withdrawal_capability_gap`）のsource・正負・時点を揃える。旧評価のcodesを新回答へコピーせず、回答の実source rangeから形成する。受け取り本文の内容形成は引き続き同じ初回単位の未完了条件。same100全件・本人実機の保存往復・正式Product Readは未実施、0/3・NOT_CLEAR・candidate_ready=false・automatic_progression=falseを維持。10/17/10/31/12/18の管理点とPiece/Analysis主枠も維持する。配置・本人データ・稼働DB・native build・main merge・PR ready化は0。
 
 補足実測：最終sourceのQ2実service＋隔離SQLでも4ケースを確認。received-event＋appraisalの初回→通常回答はREFINED、同初回→「わからない」はUNCHANGEDで本文/event ID不変（generate禁止）、appraisal＋独立行動はFINAL/質問0、received-eventのみ対照も成功。実engineの発行questionと保存QUESTION、現行Plan選択、fullcheckpoint、保存effective ref、NoAuthor GET/startが一致した。
+
+
+### u255 — 評価訂正・単独対象撤回・旧PARTIALの互換（2026-10-14 JST）
+
+u254末尾の残件を同じ限定承認内で継続。評価の肯否・時点・程度・継続は訂正後の実source rangeから形成し、旧評価codesをコピーしない。単独対象だけ撤回した評価は独立した材料として残し、新しい対象を推測しない。既存有限述語訂正は維持。明示「今は」を含む評価訂正は原入力時点へ付け替えず未対応とする。
+
+実装owner5fileと検査配置は[current01のu255節](../../../current_structure/01_emlis_ai_current_structure.md)、実本文・旧版fixture・全検証と停止点は[API既存handoff u255](https://github.com/MassyuRed/mashos-api/blob/442c00630f23a0200679e15043788bdd1fc43550/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)を正本として参照する。旧u254のPARTIAL意味は全source・質問・checkpoint一致で再導出し、保存payload・ID・意味eventを保持する。新規回答だけが新版のRESOLVEDになる。
+
+評価関連107PASS、既存Q2/Q3 application54PASS、現行shared owner identity1PASS。Q1の既存3失敗、Q3既存撤回関連14失敗は開始headでも同じnodeで再現した。旧fixtureは未変更8d635579から実生成した2件。実SQLの本文保存503→retryで同意味event/operation・新attempt、保存3本文のNoAuthor GET/startとreplay、実RN hook/modalの本文1表示・履歴展開・再open・GET2回/生成投稿0を確認。React rendererであり本人実機ではない。初回の試験側期待4件は実DTO/retry契約へ修正し最終107件を通したが、製品検査の判定は緩めていない。
+
+STRUCTURE_MAP_DELTA_PRESENT、公開API/DTO/DB/SQL/RN・依存変更0。**PRODUCT_NOT_CLEAR**。受け取り本文は評価の再表現に留まり、経験内容形成は未達。複数評価＋received-eventの初回停止、複数撤回group、明示回答時点の訂正が残る。same100、本人実機、正式Product Read未実施。10/17・10/31・12/18とPiece/Analysis主枠を保ち、配置・main merge・PR ready化へ自動進行しない。

@@ -657,3 +657,18 @@ GitHub指定の継続指示によりu253から再開し、同じ限定承認内�
 最終限定検査84PASS/193deselected。共有4fileは196PASS/3FAILで、3件はbaselineでも同じ失敗を再現。Q2/Q3旧pending初回/回答後4件、旧完成read2件、非appraisal pending2件を実service＋隔離DBで確認。旧Q2質問→新回答も保存/再read成功。撤回後4合成DTOは実RN hook/modalで現在本文・履歴・再open一致。前回64458e5のAPI CI成功も確認した。本人DB/native実機の実績へは換算しない。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、最初の一体修正は未完了。** 本人の満足を行為全体のよさへ広げる受け取り候補と、未納得を時間のずれとする候補は不採用。復唱を越える受け取り内容、評価の肯否訂正、対象だけ撤回して評価を残す経路、same100全件・本人実機・正式Product Readは残る。今回の修正を商品品質や公開見通しの上積みにしない。設計・全体地図01/01A・current01/04・06/API handoff u254へ責務と実測を同期。STRUCTURE_MAP_DELTA_PRESENT。10/17/10/31/12/18、Piece/Analysis主枠、未配置・merge/PR ready化0を維持する。
+
+
+## 5.6.5 評価訂正・対象撤回と旧PARTIAL再開 — 2026-10-14 JST
+
+MashのGitHub指定による継続指示と添付の前回作業記録からu254を再開した。全体設計・全file地図の該当/隣接owner、最新weeklyの§5.6.4/6.5、既存規則・恒久incidentを確認し、同じ限定承認内で実装した。承認の取り直しは不要。開始headはAPI `8d6355796ab6a8a0db38bf5fbf7d7c34bf64d250`／Cocolon `63b250a1f7b067e2feca796dd2f6a04751bc3904`。
+
+満足／納得の肯否・過去現在・程度・継続を訂正後のsourceから読み直す。単独対象eventだけの撤回では評価を残し、旧対象や別の行動へ結び直さない。本文の「その時」と現在評価の混同も修正。保存済みu254の旧PARTIAL checkpointは既知の旧parserから全内容を再導出し、ID・意味event・operationを保ってretryできる。保存payloadや一致検査を緩めていない。原入力時点の訂正に明示「今は」を付けた回答は、回答時点へ別途結び付ける必要があり、この限定構文では未対応として残す。
+
+実生成・保存した本文では、肯否訂正が「資料を分類できたことについて、当時は満足しなかったのですね。」となり、対象だけ撤回した場合は評価を残して「資料を分類」の対象が消える。評価関連107PASS、Q2/Q3 application54PASS、現行identity1PASS。NoAuthor再read/replay、旧checkpointから本文保存503後のretry、保存3本文の実RN hook/modal表示・履歴・再openを確認。Q1共有3失敗とQ3既存撤回関連14失敗は未変更headでも再現し、検査全合格とはしない。native実機は未実施。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、最初の一体修正は未完了。** 今回の受け取りはまだ評価命題の言い換えであり、経験として何を受け取るかの内容形成は未達。「満足」を達成・成長・手応えへ、未納得を時間差へ無根拠に昇格しない。複数評価＋received-eventの例は初回本文が先に停止し、複数対象撤回のgroupも未解決。静的レビューと実際に到達した経路を区別してAPI handoff u255／正本06へ記録した。Route A全体の不能とは断定しない。
+
+既存5production ownerの限定変更。全体地図01/01A・current01/04を同期しSTRUCTURE_MAP_DELTA_PRESENT。same100・本人実機・正式Product Read、0/3・NOT_CLEAR・candidate_ready=falseを維持。10/17/10/31/12/18とPiece/Analysis主枠、未配置・本番DB/本人データ変更0・main merge/PR ready化0を維持する。
+
+API実装commit：`442c00630f23a0200679e15043788bdd1fc43550`（PR3）。

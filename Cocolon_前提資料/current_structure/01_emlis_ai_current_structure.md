@@ -1088,3 +1088,21 @@ u253の限定承認を継続。STRUCTURE_MAP_DELTA_PRESENT。新production file/
 検査は既存`ai/tests/test_cmee_emlis_result_appraisal.py`と現行identity snapshot、新規`ai/tests/fixtures/cmee_emlis_pre_appraisal_checkpoint_v1.json`（未変更c458で実生成した合成checkpoint/question）に配置。保存store/SQL/公開DTO/API/RN/依存の契約は不変。Q2/Q3の旧pending再試行、旧完成本文の再read、旧Q2真正質問への新規回答、撤回後の保存/RN表示を確認。全過去版・Premium全履歴互換の保証ではない。
 
 最終限定検査84PASS、共有4fileは196PASS/3FAILで旧3失敗をbaseline再現。詳細は06/API handoff u254。**PRODUCT_NOT_CLEAR**：経験の受け取り本文、評価の肯否訂正、対象だけ撤回した評価の残存は未完了。source保持と再開の修正を最初の一体単位の完成へ換算しない。
+
+
+### u255 — 評価訂正と単独対象撤回の意味・本文責務（2026-10-14 JST）
+
+`EMLIS_APPRAISAL_COMPONENT_MEANING_20261014`の限定承認を継続。STRUCTURE_MAP_DELTA_PRESENT。既存の意味更新→共有作者→独立本文検証→保存readの配置は同じ。
+
+| 既存owner（API `ai/services/ai_inference/`以下） | 今回の差分 |
+|---|---|
+| `cocolon_meaning_experience_engine/emlis_answer_update.py` | 評価の置換sourceから肯否・時点・程度・継続を再導出。保存u254のPARTIAL checkpointは旧訂正parserの完全再導出と一致で再開する。 |
+| `emlis_ai_grounded_observation_plan.py` | 訂正評価のABOUT所有と、対象撤回後に独立して残る評価を区別する。原文有限述語と意味codesを照合する。 |
+| `emlis_ai_grounded_human_reception.py` | 選択済みLIMITED material受容内で訂正評価の対象と時点を文章化。対象撤回後に新しい対象を補わない。 |
+| `emlis_ai_grounded_sentence_surface.py`・`emlis_ai_grounded_observation_gate.py` | 評価・時点を本文に残し、sourceから独立に再照合する。肯否復活・対象乗換え・回答時点への付替えを拒否する。 |
+
+検査配置は既存`ai/tests/test_cmee_emlis_result_appraisal.py`と現行shared owner identity、新規`ai/tests/fixtures/cmee_emlis_pre_appraisal_correction_checkpoint_v1.json`（未変更8d635579の旧PARTIAL実生成2件）。production新file/service/外部AI、公開API/DTO/DB/SQL/RN、依存の変更はない。旧pre-appraisal互換・単一作者・Route A・他中核と国家の責務を保つ。
+
+評価関連107PASS、Q2/Q3 application54PASS、現行identity1PASS。Q1の3失敗とQ3既存撤回関連14失敗は開始headでも再現し、全回帰合格とはしない。保存3本文のRN表示・履歴展開・再openも確認したがnative実機ではない。詳細は正本06／API handoff u255。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR。** 単独評価の肯否訂正と対象撤回は今回改善。経験の受け取り内容形成、複数評価の初回停止と撤回group、明示「今は」を含む訂正時点、same100・本人実機・正式Product Readは残る。今回の本文保持と互換を最初の一体単位の完成へ換算しない。
