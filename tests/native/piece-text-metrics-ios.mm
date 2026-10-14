@@ -299,9 +299,9 @@ static BOOL matchesUncachedCandidates(NSDictionary *result, RCTTextView *view) {
   }
   return YES;
 }
-// Exercise the same candidate at batch start, middle and end, changing its
-// neighbors and whether the last paragraph has a separator. This supplements
-// (and does not replace) the production method's all-range uncached oracle.
+// Exercise the same candidate at string start with different remaining
+// contexts. This supplements (and does not replace) the production method's
+// all-range uncached oracle.
 static BOOL readContextMetrics(CTLineRef line, NSString *text, double values[5]) {
   if (!line) return NO;
   double advance = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
@@ -315,7 +315,7 @@ static BOOL readContextMetrics(CTLineRef line, NSString *text, double values[5])
   memcpy(values, metrics, sizeof(metrics));
   return YES;
 }
-static BOOL matchesTypesetterBatchPositions(NSAttributedString *candidate) {
+static BOOL matchesTypesetterSuffixContexts(NSAttributedString *candidate) {
   CTLineRef reference = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)candidate);
   double expected[5]; BOOL valid = readContextMetrics(reference, candidate.string, expected);
   if (reference) CFRelease(reference);
@@ -326,33 +326,28 @@ static BOOL matchesTypesetterBatchPositions(NSAttributedString *candidate) {
       NSFontAttributeName:[UIFont systemFontOfSize:31], NSKernAttributeName:@2, NSBaselineOffsetAttributeName:@-2 }],
     [[NSAttributedString alloc] initWithString:@"שלום (مرحبا)" attributes:@{
       NSFontAttributeName:[UIFont systemFontOfSize:37], NSParagraphStyleAttributeName:rtl, NSBaselineOffsetAttributeName:@4 }] ];
-  for (NSUInteger order = 0; order < 2; order++) for (NSUInteger finalSeparator = 0; finalSeparator < 2; finalSeparator++) {
-    NSMutableAttributedString *batch = CFBridgingRelease(CFAttributedStringCreateMutable(NULL, 0));
-    if (!batch) return NO;
-    NSArray<NSAttributedString *> *parts = @[candidate, neighbors[order], candidate, neighbors[1-order], candidate];
-    std::vector<CFRange> ranges;
-    for (NSUInteger index = 0; index < parts.count; index++) {
-      NSAttributedString *part = parts[index];
-      if (index % 2 == 0) ranges.push_back(CFRangeMake(batch.length, part.length));
-      [batch appendAttributedString:part];
-      if (index + 1 < parts.count || finalSeparator) [batch appendAttributedString:
-        [[NSAttributedString alloc] initWithString:@"\u2029" attributes:[part attributesAtIndex:part.length - 1 effectiveRange:NULL]]];
-    }
-    CTTypesetterRef typesetter = CTTypesetterCreateWithAttributedString((__bridge CFAttributedStringRef)batch);
+  // 0: empty, 1: LTR, 2: RTL, 3: paragraph separator + LTR,
+  // 4: paragraph separator + RTL. Candidate bytes/attributes never change.
+  for (NSUInteger neighborCase = 0; neighborCase < 5; neighborCase++) {
+    NSMutableAttributedString *suffix = CFBridgingRelease(CFAttributedStringCreateMutable(NULL, 0));
+    if (!suffix) return NO;
+    [suffix appendAttributedString:candidate];
+    if (neighborCase >= 3) [suffix appendAttributedString:[[NSAttributedString alloc] initWithString:@"\u2029"
+      attributes:[candidate attributesAtIndex:candidate.length - 1 effectiveRange:NULL]]];
+    if (neighborCase) [suffix appendAttributedString:neighbors[(neighborCase - 1) % 2]];
+    CTTypesetterRef typesetter = CTTypesetterCreateWithAttributedString((__bridge CFAttributedStringRef)suffix);
     if (!typesetter) return NO;
-    for (NSUInteger position = 0; position < ranges.size(); position++) {
-      CTLineRef line = CTTypesetterCreateLine(typesetter, ranges[position]);
-      double actual[5]; valid = readContextMetrics(line, candidate.string, actual);
-      if (line) CFRelease(line);
-      if (!valid) { CFRelease(typesetter); return NO; }
-      for (NSUInteger metric = 0; metric < 5; metric++) if (memcmp(actual + metric, expected + metric, sizeof(double)) != 0) {
-        uint64_t actualBits, expectedBits;
-        memcpy(&actualBits, actual + metric, sizeof(actualBits)); memcpy(&expectedBits, expected + metric, sizeof(expectedBits));
-        printf("batch_context_mismatch position=%lu neighbor_order=%lu final_separator=%lu metric=%lu actual_bits=%016llx expected_bits=%016llx\n",
-          (unsigned long)position, (unsigned long)order, (unsigned long)finalSeparator, (unsigned long)metric,
-          (unsigned long long)actualBits, (unsigned long long)expectedBits);
-        CFRelease(typesetter); return NO;
-      }
+    CTLineRef line = CTTypesetterCreateLine(typesetter, CFRangeMake(0, candidate.length));
+    double actual[5]; valid = readContextMetrics(line, candidate.string, actual);
+    if (line) CFRelease(line);
+    if (!valid) { CFRelease(typesetter); return NO; }
+    for (NSUInteger metric = 0; metric < 5; metric++) if (memcmp(actual + metric, expected + metric, sizeof(double)) != 0) {
+      uint64_t actualBits, expectedBits;
+      memcpy(&actualBits, actual + metric, sizeof(actualBits)); memcpy(&expectedBits, expected + metric, sizeof(expectedBits));
+      printf("suffix_context_mismatch neighbor_case=%lu metric=%lu actual_bits=%016llx expected_bits=%016llx\n",
+        (unsigned long)neighborCase, (unsigned long)metric,
+        (unsigned long long)actualBits, (unsigned long long)expectedBits);
+      CFRelease(typesetter); return NO;
     }
     CFRelease(typesetter);
   }
@@ -477,7 +472,7 @@ int main(void) {
       (unsigned long long)candidateProfile.creates.load(), (unsigned long long)candidateProfile.units.load(),
       candidateProfile.createTicks.load()*millisecondsPerTick, candidateProfile.typographicTicks.load()*millisecondsPerTick,
       candidateProfile.imageTicks.load()*millisecondsPerTick);
-    printf("mixed420_typesetter_profile creates=%llu units_including_separators=%llu create_ms=%.3f lines=%llu candidate_units=%llu line_ms=%.3f\n",
+    printf("mixed420_typesetter_profile creates=%llu input_units=%llu create_ms=%.3f lines=%llu candidate_units=%llu line_ms=%.3f\n",
       (unsigned long long)candidateProfile.typesetters.load(), (unsigned long long)candidateProfile.typesetterUnits.load(),
       candidateProfile.typesetterTicks.load()*millisecondsPerTick,
       (unsigned long long)candidateProfile.typesetterLines.load(), (unsigned long long)candidateProfile.typesetterLineUnits.load(),
@@ -538,18 +533,18 @@ int main(void) {
     bridge.uiManager.registry = @{@1:paragraphView};
     NSDictionary *paragraphResult = call(module, YES, paragraphView.fixtureStorage.string, 48, &code);
     check(@"paragraph_direction_attributes_uncached_equivalence", code == nil && matchesUncachedCandidates(paragraphResult, paragraphView));
-    NSArray *batchFixtures = @[
-      @[@"batch_positions_ligature", @" AV office fi "], @[@"batch_positions_whitespace", @" \t "],
-      @[@"batch_positions_unmatched_bidi", @"abc \u202Eשלום"],
-      @[@"batch_positions_line_boundaries", @"A\tB\nC\rD\u2028E\u2029F"] ];
-    for (NSArray *fixture in batchFixtures) {
+    NSArray *suffixFixtures = @[
+      @[@"suffix_contexts_ligature", @" AV office fi "], @[@"suffix_contexts_whitespace", @" \t "],
+      @[@"suffix_contexts_unmatched_bidi", @"abc \u202Eשלום"],
+      @[@"suffix_contexts_line_boundaries", @"A\tB\nC\rD\u2028E\u2029F"] ];
+    for (NSArray *fixture in suffixFixtures) {
       NSAttributedString *candidate = [[NSAttributedString alloc] initWithString:fixture[1] attributes:@{
         NSFontAttributeName:[UIFont systemFontOfSize:48], NSLigatureAttributeName:@2 }];
-      check(fixture[0], matchesTypesetterBatchPositions(candidate));
+      check(fixture[0], matchesTypesetterSuffixContexts(candidate));
     }
     NSMutableAttributedString *tabbedCandidate = [paragraphView.fixtureStorage mutableCopy];
     [tabbedCandidate replaceCharactersInRange:NSMakeRange(5, 1) withString:@"\t"];
-    check(@"batch_positions_paragraph_attributes", matchesTypesetterBatchPositions(tabbedCandidate));
+    check(@"suffix_contexts_paragraph_attributes", matchesTypesetterSuffixContexts(tabbedCandidate));
     // Issue two fonts before either resolves, as the mounted RN lookahead does.
     // Compare each result independently with the original uncached calculation.
     NSString *overlapText = @"考える時間と対話を大切にしながら、自分の言葉で伝えたい。";

@@ -178,63 +178,48 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
           dispatch_apply(workers, dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^(size_t worker) {
             @try {
               NSAttributedString *nativeSnapshot = uniformAttributes ? nil : nativeSnapshots[worker];
-              NSUInteger next = worker;
-              while (next < jobCount) {
+              __attribute__((objc_precise_lifetime)) id typesetterOwner = nil;
+              NSUInteger suffixStart = NSNotFound;
+              for (NSUInteger index = worker; index < jobCount; index += workers) {
                 @autoreleasepool {
                   if (failure->load(std::memory_order_relaxed)) return;
                   if (NSProcessInfo.processInfo.systemUptime >= deadline) { failure->store(true, std::memory_order_relaxed); return; }
-                  // Candidates are separate paragraphs, never adjacent pieces
-                  // of one shaped paragraph. Bound both the UTF-16 allocation
-                  // and job count; do not concatenate the entire O(n^2) table.
-                  NSMutableAttributedString *batch = CFBridgingRelease(CFAttributedStringCreateMutable(NULL, 0));
-                  if (!batch) { failure->store(true, std::memory_order_relaxed); return; }
-                  std::vector<CFRange> batchRanges;
-                  const NSUInteger first = next;
-                  while (next < jobCount && batchRanges.size() < 256) {
-                    NSRange range = jobData[next].range;
-                    if (batchRanges.size() && batch.length + range.length + 1 > 16384) break;
-                    if (failure->load(std::memory_order_relaxed)) return;
-                    if (NSProcessInfo.processInfo.systemUptime >= deadline) { failure->store(true, std::memory_order_relaxed); return; }
-                    NSAttributedString *part = uniformAttributes
-                      ? [[NSAttributedString alloc] initWithString:[snapshotText substringWithRange:range] attributes:uniformAttributes]
+                  NSRange range = jobData[index].range;
+                  // Jobs are ordered by start then end. Start each typesetter
+                  // at the candidate's own beginning, and reuse it only while
+                  // that beginning remains unchanged. Each CTLine ends at the
+                  // requested candidate boundary; no separator is introduced.
+                  if (suffixStart != range.location) {
+                    NSRange suffixRange = NSMakeRange(range.location, snapshot.length - range.location);
+                    NSAttributedString *suffix = uniformAttributes
+                      ? [[NSAttributedString alloc] initWithString:[snapshotText substringWithRange:suffixRange] attributes:uniformAttributes]
                       : CFBridgingRelease(CFAttributedStringCreateWithSubstring(NULL,
-                          (__bridge CFAttributedStringRef)nativeSnapshot, CFRangeMake(range.location, range.length)));
-                    if (!part) { failure->store(true, std::memory_order_relaxed); return; }
-                    batchRanges.push_back(CFRangeMake(batch.length, part.length));
-                    [batch appendAttributedString:part];
-                    [batch appendAttributedString:[[NSAttributedString alloc] initWithString:@"\u2029"
-                      attributes:[part attributesAtIndex:part.length - 1 effectiveRange:NULL]]];
-                    next += workers;
+                          (__bridge CFAttributedStringRef)nativeSnapshot, CFRangeMake(suffixRange.location, suffixRange.length)));
+                    if (!suffix) { failure->store(true, std::memory_order_relaxed); return; }
+                    typesetterOwner = CFBridgingRelease(CTTypesetterCreateWithAttributedString((__bridge CFAttributedStringRef)suffix));
+                    if (!typesetterOwner) { failure->store(true, std::memory_order_relaxed); return; }
+                    suffixStart = range.location;
                   }
-                  // ARC owns the CF object too, including every early return.
-                  __attribute__((objc_precise_lifetime)) id typesetterOwner =
-                    CFBridgingRelease(CTTypesetterCreateWithAttributedString((__bridge CFAttributedStringRef)batch));
-                  CTTypesetterRef typesetter = (__bridge CTTypesetterRef)typesetterOwner;
-                  if (!typesetter) { failure->store(true, std::memory_order_relaxed); return; }
-                  for (NSUInteger offset = 0; offset < batchRanges.size(); offset++) {
-                    if (failure->load(std::memory_order_relaxed)) return;
-                    if (NSProcessInfo.processInfo.systemUptime >= deadline) { failure->store(true, std::memory_order_relaxed); return; }
-                    NSUInteger index = first + offset * workers;
-                    CTLineRef line = CTTypesetterCreateLine(typesetter, batchRanges[offset]);
-                    if (!line) { failure->store(true, std::memory_order_relaxed); return; }
-                    double advance = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
-                    CGRect ink = CTLineGetImageBounds(line, NULL);
-                    CFRelease(line);
-                    if (CGRectIsNull(ink)) {
-                      if ([[snapshotText substringWithRange:jobData[index].range]
-                          rangeOfCharacterFromSet:NSCharacterSet.whitespaceAndNewlineCharacterSet.invertedSet].location != NSNotFound) {
-                        failure->store(true, std::memory_order_relaxed); return;
-                      }
-                      ink = CGRectZero;
-                    }
-                    if (!isfinite(advance) || !isfinite(ink.origin.x) || !isfinite(ink.origin.y) ||
-                        !isfinite(ink.size.width) || !isfinite(ink.size.height)) {
+                  if (NSProcessInfo.processInfo.systemUptime >= deadline) { failure->store(true, std::memory_order_relaxed); return; }
+                  CTLineRef line = CTTypesetterCreateLine((__bridge CTTypesetterRef)typesetterOwner, CFRangeMake(0, range.length));
+                  if (!line) { failure->store(true, std::memory_order_relaxed); return; }
+                  double advance = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
+                  CGRect ink = CTLineGetImageBounds(line, NULL);
+                  CFRelease(line);
+                  if (CGRectIsNull(ink)) {
+                    if ([[snapshotText substringWithRange:range]
+                        rangeOfCharacterFromSet:NSCharacterSet.whitespaceAndNewlineCharacterSet.invertedSet].location != NSNotFound) {
                       failure->store(true, std::memory_order_relaxed); return;
                     }
-                    const double metrics[] = {advance, CGRectGetMinX(ink), -CGRectGetMaxY(ink),
-                      CGRectGetMaxX(ink), -CGRectGetMinY(ink)};
-                    memcpy(jobData[index].values, metrics, sizeof(metrics));
+                    ink = CGRectZero;
                   }
+                  if (!isfinite(advance) || !isfinite(ink.origin.x) || !isfinite(ink.origin.y) ||
+                      !isfinite(ink.size.width) || !isfinite(ink.size.height)) {
+                    failure->store(true, std::memory_order_relaxed); return;
+                  }
+                  const double metrics[] = {advance, CGRectGetMinX(ink), -CGRectGetMaxY(ink),
+                    CGRectGetMaxX(ink), -CGRectGetMinY(ink)};
+                  memcpy(jobData[index].values, metrics, sizeof(metrics));
                 }
               }
             } @catch (__unused NSException *exception) { failure->store(true, std::memory_order_relaxed); }
