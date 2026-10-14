@@ -6813,3 +6813,12 @@ u253の限定承認を継続。STRUCTURE_MAP_DELTA_PRESENT。新production file/
 検査は既存`ai/tests/test_cmee_emlis_result_appraisal.py`（152 PASS）、現行shared owner identity snapshot（実検査1 PASS）、未変更458a1fccから実生成した新規`ai/tests/fixtures/cmee_emlis_pre_appraisal_answer_time_checkpoint_v1.json`（旧PARTIAL2件）。Q2/Q3 application54 PASS、実service＋隔離SQL保存4本文のRN hook/modal表示・履歴・再open一致。native実機ではない。既存共有17失敗は未修正・未再実行。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR。** 元入力と回答の評価時点を分けたが、経験の内容形成は未達。次の主課題は§9.2/9.4の受け取り内容であり、時点修正完了を初回単位の完成にしない。2 received＋2評価の初回capability gap、same100・本人実機・正式Product Readも残る。詳細は正本06／API handoff u257。0/3・candidate_ready=false・automatic_progression=falseを維持。
+
+
+### u258 — 明示「その時は」の再訂正と旧保存互換（2026-10-14 JST）
+
+同じ限定承認内で先行u257（API11720b6／資料39a4714）を保持し、`cocolon_meaning_experience_engine/emlis_answer_update.py`の責務だけを追加修正した。先行回答の「今は」評価を新たな「その時は」で再訂正した場合、元入力envelopeへ戻し、旧回答anchorを残さない。対象撤回後も当時の評価だけを保持する。u257のsource検証・共通作者helper・独立readerは不変。先行u257で同訂正をPARTIAL保存した場合はprivateな旧解析modeで完全checkpointを再導出し、旧意味のまま再開する。
+
+新fixture `ai/tests/fixtures/cmee_emlis_pre_appraisal_original_time_checkpoint_v1.json`は未変更11720b6の2round実checkpoint・本文2件。既存評価testへ新解釈2件＋旧互換2件を追加し156 PASS、既存Q2/Q3 application54 PASS、現行shared identity1 PASS。新しい保存2本文の実service＋隔離PGliteとRN hook/modal再open、旧PARTIALの本文保存503→retryを確認（native実機ではない）。新production file・意味schema・公開API/DB/SQL/RN・依存・他中核の変更なし。STRUCTURE_MAP_DELTA_PRESENT。詳細・反映版は設計06／API handoff u258。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR。** 次の主課題は先行u257のとおり§9.2/9.4の経験の受け取り内容形成。追加の組合せ検査を完成の代用にしない。2 received＋2評価の初回停止・既存共有17失敗・same100・本人実機・正式Product Readは別の残件として維持。0/3・candidate_ready=false・automatic_progression=false、10/17・10/31・12/18とPiece/Analysis主枠は不変。

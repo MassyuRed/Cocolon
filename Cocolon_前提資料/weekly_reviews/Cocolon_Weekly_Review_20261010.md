@@ -1,6 +1,6 @@
 # Cocolon 第6回週末報告会 — 2026-10-10
 
-> **2026-10-14更新：EmlisAIの残件・再開順は§3.5・§5.6・§6.5、初回不採用試作は§5.6.1、原因の分離と未承認の限定変更案は末尾§5.6.2を参照する。** CMEE実機接続は確認済みだが本文品質は未解消。最初の修正単位は未完了。Piece・分析の主枠と§5.5の配分、12/18公開目標は維持する。
+> **2026-10-14更新：EmlisAIの残件・再開順は§3.5・§5.6・§6.5、初回不採用試作は§5.6.1、原因の分離は§5.6.2、限定承認は§5.6.3、最新実装と残件は末尾§5.6.8を参照する。** CMEE実機接続は確認済みだが本文品質は未解消。最初の修正単位は未完了。Piece・分析の主枠と§5.5の配分、12/18公開目標は維持する。
 
 > **最新の実行順序は末尾「5.5 実機確認対象と、その後の作業順序の更新」を優先する。** 10/10〜12に先行して実機稼働を確認する対象はEmlisAIと分析構造。二つの稼働確認後はPieceと分析構造の内容修正を進め、Pieceは利用経路の準備ができた時点で実機確認する。分析を任意の追加確認へ下げず、Pieceを三連休中の全操作確認の必達対象に戻さない。公開目標2026-12-18は§4.7のまま維持する。
 
@@ -689,3 +689,14 @@ API実装commit：`442c00630f23a0200679e15043788bdd1fc43550`（PR3）。
 評価152 PASS、Q2/Q3 application54 PASS、現行identity1 PASS。新fixture対照の初回2失敗は検査側の必須checkpoint参照漏れを修正して解消。保存4本文の実RN hook/modal表示・履歴・再openも一致した。native実機ではない。開始headのAPI CI38563812728とCocolon5workflowはsuccess。本変更後CIとは区別する。既存共有17失敗は未修正・未再実行で、全回帰成功とはしない。詳細は正本06／API handoff u257。新production file/API/DB/RN/依存変更はなく、既存5ownerの時点・再開責務を全体地図01/01Aとcurrent01/04へ同期した（STRUCTURE_MAP_DELTA_PRESENT）。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、最初の一体修正は未完了。** 実本文「資料を分類できたことについて、回答した時点では満足していないのですね。」まで時点を保持したが、評価命題の言い換えを越える内容形成は未達。次の主課題は同じ承認内の§9.2/9.4の経験としての受け取り内容であり、追加の組合せ検査だけを次の主課題にし続けない。2 received＋2評価の初回capability gap、same100・本人実機・正式Product Readは残件。0/3・candidate_ready=false・automatic_progression=false、10/17・10/31・12/18とPiece/Analysis主枠、未配置・main merge/PR ready化0を維持する。
+
+
+## 5.6.8 「その時は」の再訂正と先行u257の保存互換 — 2026-10-14 JST
+
+同じ限定承認内のu258。作業中に入った先行u257（API11720b6／資料39a4714）を上書きせず、その上に残った時点不具合だけを修正した。「今は満足していない」を「その時は納得した」に訂正するとPARTIALになることを再現し、新しい明示指定を元入力の出来事時点へ結び直した。対象維持でも撤回後でも「当時」として本文に残る。先行u257で既に保存したPARTIALは完全checkpoint再導出により旧意味のまま再開し、新しい訂正だけが新解釈になる。
+
+最終評価156 PASS、Q2/Q3 application54 PASS、現行identity1 PASS。保存2ケースは実service＋隔離PGliteと現在のRN hook/modalの本文・履歴・再openを確認し、旧2round PARTIALから本文保存503後のretryでも意味event・operation不変を確認した。native実機・正式Product Readではない。最初の新互換test2失敗はforeign checkpointの既存拒否codeを一種類に限定した検査の誤りで、新しい負例を正して再実行した。受理guardは変更していない。既存共有17失敗は未修正・未再実行で、全回帰成功とはしない。正本06／API handoff u258に詳細を保存し、全体地図01/01A・current01/04を同期した（STRUCTURE_MAP_DELTA_PRESENT）。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、最初の一体修正は未完了。** 実Reception「資料を分類できたことについて、当時は納得したのですね。」は時点保持の改善であり、経験の内容形成の完成ではない。次の主課題は§5.6.7のまま§9.2/9.4の受け取り内容とする。2 received＋2評価の初回停止等の個別残差を別管理し、組合せ検査だけを主課題にし続けない。0/3・candidate_ready=false・automatic_progression=false、10/17・10/31・12/18とPiece/Analysis主枠、未配置・本人データ/稼働DB変更0・main merge/PR ready化0を維持。
+
+API実装：[211eb09b](https://github.com/MassyuRed/mashos-api/commit/211eb09bee50a2d53d9b91f7a65c7947512cd5f2)（PR #3、Draft/open/unmerged）。
