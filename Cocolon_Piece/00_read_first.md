@@ -10,6 +10,10 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
+**最新は§72／current map §65.20です。最終描画検査を同じ画面の全Textへまとめて依頼する変更をsource `f49238acc8a94f4560af4918effa31b428919c9f`へ反映しました。local14ファイル806件成功。実RN run38495258157の結果はまだ未確定で、420文字の解消・正式保存は未成立です。**
+
+### §70〜71時点の要約（履歴）
+
 **最新作業は入口§70〜71／current map §65.18〜65.19です。書き出し初期整理の失敗後に復帰できない不具合を修正しました。source `562e6a38` は従来の独立計測へ復元し、通常UIKit起動でnative69件・JS766件が成功。CoreText再利用2案は数値不一致で撤回しました。復元後の実RNは4ケース成功・420文字timeout（§71.2）で、420文字は未解消です。**
 
 ### §66／map §65.14時点の先頭要約（履歴）
@@ -1404,3 +1408,19 @@ B9は48／44／40ptでfit=false（133.912／98.720／95.513ms）、36ptでfit=tr
 artifact11862032995（56,533,434 bytes、期限2026-10-21T00:47:28Z）のZIP SHA256 `a2692cf793bbf088b25eb36ff9e6c3e1e4614f46d4696781f598b07d6e0d1e6d` とresults.json SHA256 `9143012b454509ee0973fac0fe5c8d7365ef5d4ff5c00dee3c1795cc5b5a256b` を照合しました。§71.1のnative69・JS766・Android source・export Pods／Androidは成功ですが、workflow全体はこのRN jobの失敗により成功ではありません。これはiOS simulator上の実RN検証であり、物理実機の受入れや正式保存の完了ではありません。
 
 次の設計では、計測対象の文字列と前後文脈を実際に描画する行と一致させることを明記します。全候補先行計測の処理量を見直す際も、owner／native-JS境界／全候補契約／5doubleのbit比較基準を先に整理し、既存の比較を緩めて速度だけを採用しません。本文・段落保持、離散font順、4worker上限、8秒、最終inspectionを維持します。正式renderer供給→保存直前fit→同じpreview/tokenの通常初回保存→実機受入れは未完了です。失敗した2案は撤回済みで、現行nativeはbaseline071f3d8と同一です。
+
+## 72. 2026-10-14 JST — 最終描画検査の逐次bridge待ちを削減
+
+source `f49238acc8a94f4560af4918effa31b428919c9f` は `components/piece/PieceVisualCard.js` と `tests/piece-v2-renderer.test.js` の2pathです。旧実装は選択された行とbrandingの検査を一つずつawaitし、前行のnative応答が返るまで次行を依頼できませんでした。同じmeasurement snapshotの全node・generation・期待本文・box・lineEndsを先に収集し、Promise.allで依頼します。native処理は両OSとも既存UIManagerのUI block上で実行するため、UIKitを別workerへ移しません。
+
+全検査結果の順序と各result validator、全件完了前の非表示、1件でも失敗した場合の全体拒否、current／元の8秒deadline／setState直前の再照合を維持します。全候補88,410行の独立substring計測、5doubleのbit比較、v3転送、B9、4worker上限、48→44→40→36pt、本文・段落、canSave/canExport=falseは変更していません。これは候補処理自体を減らす変更ではなく、§71.2の約7,984ms時点まで候補側に費やす問題が解消したとは未確認です。
+
+追加2件は、全検査が応答待ちより先に依頼されること、逆順完了でも行順を保持して最後の結果まで隠すこと、先頭待機中の後続rejectで全体拒否し後着成功で復活しないことを確認。既存のdeadline・unmount・入力差替え・計測snapshot変更の検査も保持。local対象55 PASS、既存14ファイル全体806 PASS／FAIL0／SKIP0（Node24.19.0／TypeScript5.2.2）。CIの既存13ファイルとの件数差はinitial-save-hostの38件です。同環境の別担当が実差分をread-only確認し、華恋が原典と差分・反映2pathのremote全文・親head・changed pathsを照合しました。別model reviewとは扱いません。
+
+実RN5ケース・native69・JS13ファイルは [run38495258157](https://github.com/MassyuRed/Cocolon/actions/runs/38495258157) で確認中です。完了前にPASS・速度改善値・420文字解消を記録しません。実RN job115629460856、native job115629460966、JS job115629460888。sourceは上記commitに固定します。正式renderer供給→保存直前fit→同じpreview/tokenの初回保存→物理実機受入れは未完了です。
+
+設計調査で、全候補の独立行を維持したまま、実測advanceがcontentWidthを超えた候補を明示的な幅超過として返す案を確認しました。B9の幅はmax(advance,right)-min(0,left)でありadvance以上なので、幅超過拒否には文字幅の単調性・font比例・前後文脈の仮定は不要です。ただし、この案は幅超過行のink計測を省くため、全行5doubleと未使用行の不正inkも拒否する現行v3契約を変えます。未採用・未実装です。現行検査を削除・緩和せず、候補契約・比較範囲・必要な判断を先に具体化する必要があります。過去profileでink計測はCoreText作成より小さく、この案でも8秒解消は保証できません。batch／suffix再利用は復活させません。
+
+初回保存の読取り確認では、Cardの同一mount／generation／plan／inspectionを同じpreviewとvisualTokenへ結ぶ証拠の受渡しが未接続、InputScreenの正式isSaveAdmitted供給も未接続です。native_checkedだけを許可へ昇格しません。visualTokenだけが替わる場合は現行measurement keyが同じになるため、将来の証拠接続ではtoken変更も再計測・失効へ反映します。今回この経路の製品変更はありません。
+
+必須前提・作業rule・恒久incident・全体設計01系・全ファイル地図・Piece現行map／manifest・PCE5・最新weekly20261010 §5.5と12/18目標・添付前回txtを確認。System Context prepareはshallow checkoutの祖先照合で停止し、管理入口が許す原典直接読取りで継続しました。生成contextの成功や全文全repo監査は主張しません。STRUCTURE_MAP_DELTA_NONE（既存Cardの検査呼出し順のみ）。default OFF、Draft/open/unmerged、DB/env/deploy/署名/配布/main merge効果0を維持します。

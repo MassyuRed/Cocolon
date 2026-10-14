@@ -13,9 +13,9 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "3848c812e5b9da6a6c43dd1a1f32e9e66924247f",
-    "raw_sha256": "838ad9b230b443dee2311707ee9117dcdbc0842a6ce90b01337630d6bba8c14b",
-    "utf8_bytes": 143087
+    "git_blob_sha1": "538d3e55430a11aa7ab10653db79e6d1dcdbee30",
+    "raw_sha256": "1f742abb3b4520ba656d4f528e1625ec067057ccee670307591e84d4f0eff9e7",
+    "utf8_bytes": 176036
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -4855,5 +4855,22 @@
       ]
     },
     "next_work": "Reduce exact native candidate repetition and final adapter cost enough to leave time for36pt B9, mounted Text rendering and final inspection within unchanged total8000ms. Keep all candidates, exact bits,48→44→40→36 and max4 total workers. Do not wire saving before this rendering check passes."
+  },
+  "final_inspection_batch_20261014": {
+    "source_commit": "f49238acc8a94f4560af4918effa31b428919c9f",
+    "entry_section": "72",
+    "structure_map_section": "65.20",
+    "local_target_pass": 55,
+    "local_14_files_pass": 806,
+    "failed": 0,
+    "skipped": 0,
+    "run": 38495258157,
+    "rn_job": 115629460856,
+    "native_job": 115629460966,
+    "js_job": 115629460888,
+    "ci_state": "IN_PROGRESS_NOT_CREDITED",
+    "all_candidates_and_five_double_contract_unchanged": true,
+    "timeout_ms": 8000,
+    "formal_renderer_or_save_admission": false
   }
 }

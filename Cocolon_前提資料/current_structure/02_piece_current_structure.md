@@ -16,6 +16,10 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**最新は入口§72／本map §65.20です。source `f49238ac` で最終描画検査を同じ画面の全Textへまとめて依頼します。local14ファイル806件成功。実RN run38495258157は未確定で、420文字・正式renderer・保存の完了は未成立です。**
+
+### §70〜71時点の要約（履歴）
+
 **最新作業は入口§70〜71／current map §65.18〜65.19です。書き出し初期整理の失敗後に復帰できない不具合を修正しました。source `562e6a38` は従来の独立計測へ復元し、通常UIKit起動でnative69件・JS766件が成功。CoreText再利用2案は数値不一致で撤回しました。復元後の実RNは4ケース成功・420文字timeout（§71.2）で、420文字は未解消です。**
 
 ### §66／map §65.14時点の先頭要約（履歴）
@@ -2666,3 +2670,11 @@ source562e6a38は既存native製品／native検査／workflowの3pathです。�
 最新の実RN job115613701309は4ケースnative_checked・420文字measurement_timeoutでfailureになりました。essay650.189／quote545.958／declaration1,135.125／saved408.752ms。4件の本文・native text・画像寸法とPNGを確認済みです。420文字は全4fontの候補が返り、36ptのB9 fit=true、trace上で7,984.063msにmeasuringを観測しましたが、最終inspection・PNGへ到達せず9,227.129msでtimeoutです。reportのplan=nullだけを根拠に「plan未成立」とはしません。8秒deadlineは変更していません。artifact11862032995のZIP／JSON digest照合・5件JSON・4枚PNG確認済み。詳細とidentityは入口§71.2です。native69／JS766／Android source／export Pods／export Androidは成功、workflow全体はRN failureです。
 
 次の設計要件は、計測対象の文字列と前後文脈を実際に描画する行と一致させ、全候補先行計測の処理量を見直す際にowner／native-JS境界／候補契約／5doubleのbit比較基準を先に整理することです。独立計測との差を許容して速度だけを採用しません。本文・段落保持、離散font順、4worker上限、8秒、最終inspectionを維持します。現行nativeはbaseline071f3d8と同一であり、420文字・正式renderer供給・保存直前fit・通常初回保存・物理実機受入れは未完了です。
+
+### 65.20 最終描画検査を同じsnapshotでまとめて依頼
+
+source `f49238acc8a94f4560af4918effa31b428919c9f` は既存Cardとrenderer testの2pathです。選択した全行・brandingのnode/generationと期待値を先に固定し、逐次awaitをPromise.allへ変更。nativeは既存UIManager上のread-only検査のままです。全結果の順序、全件完了前非表示、1件失敗時拒否、current／元8秒／setState照合を保持します。全候補・独立CoreText・5double・B9・font順・4worker・保存許可は不変です。
+
+local対象55件、既存14ファイル806件が成功。CIの13ファイルとの差はinitial-save-host38件。同環境read-only差分reviewとremote2path全文・親・変更集合の一致を確認しました。実RN job115629460856／native115629460966／JS115629460888はrun38495258157で確認中。未完了結果を成功・420文字解消へ換算しません。根拠と再開位置は入口§72。
+
+候補処理を減らす別契約案と初回保存の接続不足は同節の未採用調査として記録。現在のv3・全行oracleを黙って変更せず、prototype native_checkedを正式rendererへ昇格しません。正式renderer供給・保存直前fit・初回保存・物理実機受入れは未完了。STRUCTURE_MAP_DELTA_NONE、default OFF、canSave/canExport=false、Draft/open/unmerged、DB/env/deploy/署名/配布/main merge効果0。
