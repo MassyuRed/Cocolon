@@ -141,7 +141,8 @@ jobs:
         run: |
           set -euo pipefail
           TEST_DIR="$RUNNER_TEMP/piece-ios-source/native-unit"
-          mkdir -p "$TEST_DIR/include/React"
+          APP_DIR="$TEST_DIR/PieceNativeMetrics.app"
+          mkdir -p "$TEST_DIR/include/React" "$APP_DIR"
           for header in RCTBridgeModule RCTBridge RCTUIManager RCTUIManagerUtils RCTTextView; do
             printf '#import "piece-ios-react-shim.h"\n' > "$TEST_DIR/include/React/$header.h"
           done
@@ -155,7 +156,24 @@ jobs:
             -I "$TEST_DIR/include" -I tests/native \
             -framework UIKit -framework Foundation -framework CoreText -framework CoreGraphics \
             -Werror=objc-method-access -Werror=implicit-function-declaration \
-            tests/native/piece-text-metrics-ios.mm -o "$TEST_DIR/piece-native-metrics"
+            tests/native/piece-text-metrics-ios.mm -o "$APP_DIR/piece-native-metrics"
+          python3 - "$APP_DIR/Info.plist" <<'PY_PLIST'
+          import plistlib, sys
+          with open(sys.argv[1], 'wb') as target:
+              plistlib.dump({
+                  'CFBundleExecutable': 'piece-native-metrics',
+                  'CFBundleIdentifier': 'com.cocolon.piece-native-metrics',
+                  'CFBundleName': 'PieceNativeMetrics',
+                  'CFBundlePackageType': 'APPL',
+                  'CFBundleInfoDictionaryVersion': '6.0',
+                  'CFBundleVersion': '1',
+                  'CFBundleShortVersionString': '1.0',
+                  'LSRequiresIPhoneOS': True,
+                  'MinimumOSVersion': '15.1',
+                  'UIDeviceFamily': [1, 2],
+                  'UILaunchScreen': {},
+              }, target)
+          PY_PLIST
           xcrun simctl list devices available --json > "$TEST_DIR/devices.json"
           read -r DEVICE STATE < <(python3 - "$TEST_DIR/devices.json" <<'PY_DEVICE'
           import json, re, sys
@@ -180,7 +198,19 @@ jobs:
             trap 'xcrun simctl shutdown "$DEVICE" >/dev/null 2>&1 || true' EXIT
           fi
           xcrun simctl bootstatus "$DEVICE" -b
-          xcrun simctl spawn "$DEVICE" "$TEST_DIR/piece-native-metrics"
+          xcrun simctl install "$DEVICE" "$APP_DIR"
+          set +e
+          xcrun simctl launch --console "$DEVICE" com.cocolon.piece-native-metrics 2>&1 | tee "$TEST_DIR/native-metrics.log"
+          PIECE_NATIVE_LAUNCH_STATUS=$?
+          set -e
+          python3 - "$TEST_DIR/native-metrics.log" "$PIECE_NATIVE_LAUNCH_STATUS" <<'PY_RESULT'
+          import pathlib, sys
+          lines = pathlib.Path(sys.argv[1]).read_text(errors='replace').splitlines()
+          summaries = [line for line in lines if line.startswith('NATIVE_CHECKS=')]
+          expected = 'NATIVE_CHECKS=69 PASS=69 FAIL=0 SKIP=0'
+          if int(sys.argv[2]) != 0 or summaries != [expected] or any(line.startswith('FAIL ') for line in lines):
+              raise SystemExit('Native metrics did not finish all 69 checks successfully')
+          PY_RESULT
 
   piece-ios-rn-canvas:
     if: github.repository == 'MassyuRed/Cocolon'

@@ -140,8 +140,8 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
               }
             }
           }
-          // Each worker owns its attributed storage, typesetter and CTLines.
-          // UIKit stays on its UI queue.
+          // Each worker owns its substring and CTLine. Only immutable font and
+          // attributed-string snapshots are shared; UIKit stays on its UI queue.
           // Fixed workers avoid one dispatch block per candidate and write only
           // disjoint metrics. dispatch_apply joins before any buffer is released.
           MetricJob *jobData = jobs.data();
@@ -178,37 +178,23 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
           dispatch_apply(workers, dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^(size_t worker) {
             @try {
               NSAttributedString *nativeSnapshot = uniformAttributes ? nil : nativeSnapshots[worker];
-              __attribute__((objc_precise_lifetime)) id typesetterOwner = nil;
-              NSUInteger suffixStart = NSNotFound;
               for (NSUInteger index = worker; index < jobCount; index += workers) {
                 @autoreleasepool {
                   if (failure->load(std::memory_order_relaxed)) return;
                   if (NSProcessInfo.processInfo.systemUptime >= deadline) { failure->store(true, std::memory_order_relaxed); return; }
                   NSRange range = jobData[index].range;
-                  // Jobs are ordered by start then end. Start each typesetter
-                  // at the candidate's own beginning, and reuse it only while
-                  // that beginning remains unchanged. Each CTLine ends at the
-                  // requested candidate boundary; no separator is introduced.
-                  if (suffixStart != range.location) {
-                    NSRange suffixRange = NSMakeRange(range.location, snapshot.length - range.location);
-                    NSAttributedString *suffix = uniformAttributes
-                      ? [[NSAttributedString alloc] initWithString:[snapshotText substringWithRange:suffixRange] attributes:uniformAttributes]
-                      : CFBridgingRelease(CFAttributedStringCreateWithSubstring(NULL,
-                          (__bridge CFAttributedStringRef)nativeSnapshot, CFRangeMake(suffixRange.location, suffixRange.length)));
-                    if (!suffix) { failure->store(true, std::memory_order_relaxed); return; }
-                    typesetterOwner = CFBridgingRelease(CTTypesetterCreateWithAttributedString((__bridge CFAttributedStringRef)suffix));
-                    if (!typesetterOwner) { failure->store(true, std::memory_order_relaxed); return; }
-                    suffixStart = range.location;
-                  }
-                  if (NSProcessInfo.processInfo.systemUptime >= deadline) { failure->store(true, std::memory_order_relaxed); return; }
-                  CTLineRef line = CTTypesetterCreateLine((__bridge CTTypesetterRef)typesetterOwner, CFRangeMake(0, range.length));
+                  NSAttributedString *part = uniformAttributes
+                    ? [[NSAttributedString alloc] initWithString:[snapshotText substringWithRange:range] attributes:uniformAttributes]
+                    : CFBridgingRelease(CFAttributedStringCreateWithSubstring(NULL,
+                        (__bridge CFAttributedStringRef)nativeSnapshot, CFRangeMake(range.location, range.length)));
+                  if (!part) { failure->store(true, std::memory_order_relaxed); return; }
+                  CTLineRef line = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)part);
                   if (!line) { failure->store(true, std::memory_order_relaxed); return; }
                   double advance = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
                   CGRect ink = CTLineGetImageBounds(line, NULL);
                   CFRelease(line);
                   if (CGRectIsNull(ink)) {
-                    if ([[snapshotText substringWithRange:range]
-                        rangeOfCharacterFromSet:NSCharacterSet.whitespaceAndNewlineCharacterSet.invertedSet].location != NSNotFound) {
+                    if ([part.string rangeOfCharacterFromSet:NSCharacterSet.whitespaceAndNewlineCharacterSet.invertedSet].location != NSNotFound) {
                       failure->store(true, std::memory_order_relaxed); return;
                     }
                     ink = CGRectZero;
