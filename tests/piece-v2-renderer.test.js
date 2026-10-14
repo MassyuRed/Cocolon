@@ -643,6 +643,40 @@ test('line geometry alone stays hidden until the actual native inspection finish
   assert.equal(h.card.state.measurement.phase, 'native_checked'); assert.equal(h.nativeCalls.length, 3);
   assert.equal(h.card.state.measurement.canSave, false); assert.equal(h.card.state.measurement.canExport, false);
 });
+test('all mounted rows are inspected without waiting for earlier bridge results, retaining row order', async () => {
+  const pending = [];
+  const h = await harness(sample(), (result, call) => new Promise(resolve => {
+    pending.push({ result: { ...result, ink: [0, call, result.width - call, result.height] }, resolve });
+  }));
+  await finish(h);
+  assert.equal(pending.length, h.drawing().blocks.length + 1, 'all body rows and branding must be dispatched before any result');
+  assert.equal(h.card.state.measurement.phase, 'geometry_checked');
+  assert.equal(h.find('piece-logical-canvas').props.style.opacity, 0);
+  for (let i = pending.length - 1; i > 0; i--) pending[i].resolve(pending[i].result);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(h.card.state.measurement.phase, 'geometry_checked');
+  pending[0].resolve(pending[0].result);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(h.card.state.measurement.phase, 'native_checked');
+  assert.deepEqual(copy(h.card.state.measurement.inspection.map(value => value.ink)), pending.map(value => value.result.ink));
+  assert.equal(h.card.state.measurement.canSave, false); assert.equal(h.card.state.measurement.canExport, false);
+});
+test('a later row failure rejects the whole image even while an earlier inspection is pending', async () => {
+  const pending = [];
+  const h = await harness(sample(), result => new Promise((resolve, reject) => pending.push({ result, resolve, reject })));
+  await finish(h);
+  assert.equal(pending.length, h.drawing().blocks.length + 1);
+  pending[pending.length - 1].reject(new Error('PRIVATE NATIVE BODY'));
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(h.card.state.measurement.phase, 'unavailable');
+  assert.equal(h.card.state.measurement.reason, 'native_measurement_unavailable');
+  const stopped = h.card.state.measurement;
+  for (const item of pending) item.resolve(item.result);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(h.card.state.measurement, stopped);
+  assert.equal(h.find('piece-logical-canvas'), undefined);
+  assert.equal(JSON.stringify(h.card.state).includes('PRIVATE'), false);
+});
 test('unsupported native module, failed glyph checks and malformed responses remove the image without exposing native error text', async () => {
   for (const native of [() => { throw new Error('PRIVATE NATIVE BODY'); }, r => ({ ...r, glyph_check: 'unknown' }),
     r => ({ ...r, version: 'other' }), r => ({ ...r, platform: 'android' }), r => ({ ...r, text: 'PRIVATE' }),

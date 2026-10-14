@@ -133,18 +133,23 @@ export default class PieceVisualCard extends React.Component {
     const current = () => this.active && this.inspection === operation && this.state.measurement === snapshot &&
       preparePieceNativeCard(this.props)?.key === input.key && this.deadline && Date.now() < this.deadline.expiresAt;
     try {
-      const evidence = [];
       const count = input.blocks.length + (input.brandingMode === 'off' ? 0 : 1);
-      for (let index = 0; index < count; index++) {
-        if (!current()) return;
+      // Freeze every target before dispatch. These are read-only UI-queue
+      // inspections of one generation; awaiting each row separately forces
+      // another native bridge round trip before the next row can even start.
+      const targets = Array.from({ length: count }, (_, index) => {
         const node = this.textNodes.get(index);
         if (node?.generation !== snapshot.generation) throw new Error('PIECE_NATIVE_MEASUREMENT_UNAVAILABLE');
-        evidence.push(await inspectPieceText(node.value, {
+        return { node: node.value, expected: {
           text: index < input.blocks.length ? input.blocks[index] : 'Cocolon',
           fontSize: index < input.blocks.length ? input.sizes[snapshot.sizeIndex] : 28,
           box: snapshot.blocks[index].box, lineEnds: snapshot.blocks[index].lines.map(line => line.end),
-        }));
-      }
+        } };
+      });
+      if (!current()) return;
+      // Promise.all retains row order and observes every rejection. A single
+      // missing/invalid result still rejects the entire image, never a subset.
+      const evidence = await Promise.all(targets.map(target => inspectPieceText(target.node, target.expected)));
       if (!current()) return;
       const { lineHeight } = pieceNativeTypography(input, snapshot.sizeIndex);
       const rowOffsets = evidence.slice(0, input.blocks.length).map((result, index) => {
