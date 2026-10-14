@@ -40478,3 +40478,9 @@ API作業候補は [44269290](https://github.com/MassyuRed/mashos-api/commit/442
 評価166／application54／identity1検査PASS、合成7保存本文のNoAuthor GET/startとRN履歴・再openを確認（native実機ではない）。診断7例ではNORMAL4本文が変わり、LIMITED2本文と停止1件は不変。詳細は06／API handoff u260、weekly20261010 §5.6.10、構造は全体01/01A・current01/04。STRUCTURE_MAP_DELTA_PRESENT、新production file・公開API/DB/RN/依存変更0。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 定義展開／関係反復を越える受け取り内容の形成は未達。目的・未完了等を活かせない例と焦点移動、2 received＋2評価の初回gap、既存共有17失敗・same100・本人実機・正式Product Readは残る。0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmerged。新CIの結果は同headのPR current本文へ記録し、過去成功を流用しない。
+
+## u261 — 評価とつながる未成立事実の限定変更案（2026-10-14 JST）
+
+製品sourceはAPI44269290のu260のまま。今回の製品コード/本文改善0、BLOCKER_NARROWED / PRODUCT_NOT_CLEAR。三命題のsource認識不足と、現component許可・relation qualifierの不足を分離した。元sourceに結び付く仮Planでも既存条件では候補0/LIMITEDだった。実測はAPI既存handoff u261、限定提案は8/28設計末尾u261、進行は06 u261、最新weekly20261010 §5.6.11。
+
+明示対比で評価につながる未成立事実exact1を追加する案はPROPOSED_NOT_APPROVED。既存u253承認は継続し、今回の範囲追加だけをRule18 §11.3に従って判断対象にする。満足/納得の定義を再確認しない。前回API CI run38575084729は同head44269290でsuccess。STRUCTURE_MAP_DELTA_NONE・新production file/API/DB/RN/依存変更0、初回単位未完了・0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。

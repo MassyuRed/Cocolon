@@ -2872,3 +2872,17 @@ appraisal内容型v1・whole meaningの契約は不変。満足から経験全�
 u253の「本文inverseは作者を呼び直さず」は独立した節readerの責務を指す。whole `evaluate_grounded_surface_body_inverse` は§24のplan-only replayを別途保持し、同一作者を通す。この区別をu260検査で明示した。作者を失敗させる検査は実節の `read_source_owned_discourse` へ限定し、whole inverseのreplayチェックは除去していない。保存済み本文のGET/start非再生成とは別の責務である。
 
 実装・実測・残件は06／API handoff u260。初回一体修正未完了・PRODUCT_NOT_CLEARを継続する。
+
+### u261 提案 — 評価と明示的につながる未成立事実（2026-10-14 JST）
+
+`EMLIS_APPRAISAL_CONNECTED_UNFINISHED_CONTEXT_20261014 = PROPOSED_NOT_APPROVED`。u253の既存承認を取り消さず、その初回範囲を未承認のまま広げない。Rule18 §11.3の契約/範囲追加に当たるため、Mashへ今回の追加だけを提示する。実測・変更owner・検証/停止条件の詳細はAPI handoff u261。製品コード変更・本文改善0、STRUCTURE_MAP_DELTA_NONE。
+
+合成例「結論は出ていないが、考えを言葉にできて満足した」では、認識器が満足を独立評価にできず、未成立事実をuncertaintyへ変える。正確なsource範囲で三点とCONTRAST/ABOUT_TARGETを仮に与えても、現行component条件と評価qualifierの脱落により、行動欄なしは構造不足、独立行動ありは競合scopeでともに候補0/LIMITEDだった。source parserの採用修正や全connected経路の不能を証明した診断ではない。
+
+限定案は、原入力の肯定・無程度の満足とその対象に、同一文の明示対比が結ぶ完全な未成立事実exact1を追加する。本人に関するsourceであること、三点の原文範囲、内側の対象→評価、外側の未成立→評価を選択前に立証する。別の必須内容は従来の本人実行行動だけとし、任意のstateや非接続感情を許可しない。未成立factを構文未完・知識不足・本人の不能へ変えず、満足を完了/成功/進歩へ昇格させない。
+
+内側の評価pairと `EmlisEvaluatedExperienceAppraisalContent v1` のexact2/protected0は不変。三点を既存の接続configurationと一つのwhole readingへ渡し、relation-role qualifierの種別/程度/時点/依存を保持する。通常の `EmlisAppraisalContent` の非集約責務・三点のbasis・焦点対比・既存qualifierから受け取りを導く。ReadingConsequenceへReception文言を入れず、作者だけが未選択の第三命題を追加しない。既存型へのlossless投影が成立しなければ、新schema/registryへ自動拡張せず停止する。
+
+内容の目標は、結論の未成立を保ち、言葉にできた対象へ限った充足として経験を受け取ること。結論/言語化の達成目標や同時性を発明しない。第三命題削除・評価対象変更・肯否/種別変更で意味と本文への寄与を検証する。肯定満足用の読みを否定・未納得へ流用しない。旧checkpoint、保存本文非再生成、必要なSQL/RN互換も同じ単位で確認する。§9.2/9.4、単一作者/独立reader、公開API/DB/RN、外部AI禁止、品質/受入条件は不変。
+
+追加費用/外部service/本人操作は0を予定。実装工数・完成日は未確定。最初の実生成でも定義展開/関係反復に留まる場合は完成扱いせず、同じ修辞調整を反復しない。PRODUCT_NOT_CLEAR・初回単位未完了を維持する。

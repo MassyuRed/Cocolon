@@ -1,6 +1,6 @@
 # CMEE V1 — Implementation Order / Migration / Verification 詳細設計
 
-> 最新Emlis限定実装は末尾u253。承認済みWIP、商品品質未完了。直近Analysisはu250。
+> 最新Emlisは末尾u261の未成立事実を含む限定変更案（未承認・未実装）。製品sourceはu260、u253の既存承認は継続。商品品質未完了。直近Analysisはu250。
 
 > 最新の内容修正は末尾 **u250（2026-10-13 JST・未配置）**。既知修飾が重なる話者の引用と本人の独立内容を区別する不整合を修正。生成全文・検証・残件は同節とAnalysis current03を参照。
 
@@ -17759,3 +17759,13 @@ Mashはu259の「満足＝本人にとって何かが満たされた感覚」「
 
 
 API実装：[44269290](https://github.com/MassyuRed/mashos-api/commit/44269290ff919c21364fd145429de09dea2e9fd6). 既存Draft PR #3へ反映。最終照合とCIの状態はPR current本文を参照する。
+
+## u261 — 未成立の事実を含む評価の限定変更案（2026-10-14 JST）
+
+**BLOCKER_NARROWED / PRODUCT_NOT_CLEAR、今回の製品コード変更・本文改善0。** 満足/納得の定義確認は完了済み。次の主課題は引き続き§9.2/9.4の内容形成であり、語尾修正や検査追加だけへ置き換えない。
+
+「結論は出ていないが、考えを言葉にできて満足した」の診断で、満足が後半のactionへ吸収されるsource認識不足と、完全な未成立factをuncertaintyにする誤認を分離した。正確な元source範囲で三点と既存CONTRAST/ABOUT_TARGETを与えた仮Planでも、checkpoint/guard/選択条件を変えずに実行すると、行動欄なしは構造不足、独立行動ありは競合scopeで、どちらも候補0/LIMITED。未成立stateが本人実行行動限定のcomponent条件を満たさず、contrast側では評価qualifierも落ちる。source compiler成功や実本文改善の証明ではない。
+
+`EMLIS_APPRAISAL_CONNECTED_UNFINISHED_CONTEXT_20261014` は未承認の限定案。肯定・無程度の満足と対象へ同一文の明示対比でつながる未成立fact exact1だけを追加し、独立した他requiredは本人実行行動限定のままにする。既存通常appraisal・接続configuration・relation qualifier・単一作者/独立readerを用い、exact2評価型や公開契約を広げない。具体的なowner、三点保持と片側削除/対象/肯否/時点対照、旧checkpointと保存/RN互換、停止条件は8/28設計末尾u261提案とAPI handoff u261。Rule18 §11.3とu253の範囲を越える追加だけをMashの判断へ提示し、既存承認は取り直さない。
+
+前回u260 API run38575084729は同head44269290でsuccessを確認。今回の検査へ加算しない。STRUCTURE_MAP_DELTA_NONE、製品/test/fixture/API/DB/RN/依存変更0、未配置/Draft/open/unmerged。既存共有17失敗・2 received＋2評価の初回gap・same100・本人実機・正式Product Readは残る。0/3・candidate_ready=false・automatic_progression=false、10/17・10/31・12/18とPiece/Analysis主枠を維持する。
