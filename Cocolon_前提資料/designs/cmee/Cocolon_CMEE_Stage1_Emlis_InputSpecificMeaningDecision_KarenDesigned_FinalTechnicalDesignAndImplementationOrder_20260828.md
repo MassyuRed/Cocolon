@@ -2898,3 +2898,16 @@ u261案どおり、既存通常`EmlisAppraisalContent`で三binding・protected0
 入力に明示された未成立の点と対象へ向く充足を区別することが内容目標である。現在の未成立を過去の満足時点へ移し、同時性を足す表現は採らない。達成目標・成功・進歩・将来解決を発明しない。source/body両側の片側削除・対象/肯否/種別/時点対照、旧checkpointと保存後非再生成・必要なSQL/RN確認を同じ単位で扱う。新engine/checker・公開API/DB/RN・外部AI・製品依存・deploy/mergeなし。
 
 既存7ownerの限定実装後、評価187 PASS・application54 PASS・identity1 PASS、合成4本文のSQL保存／NoAuthor restart GET/start／RN再表示、旧checkpoint2件の厳密保持を確認した。途中のapplication回帰とqualifier不一致も修正し、実測と未達は06／API handoff u262へ記録する。第三命題が充足の範囲を限定する内容差はあるが、説明的な語義展開が残る。実装反映版はAPI `da6ee56beba26bbf0d89c734230f363ba794a9b8`（PR3）。対応する設計・地図・weekly差分は本commit（PR30）に収録する。両PRはDraft、未配置。今回CI成功は未確認で、local検査と区別する。**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了・0/3・candidate_ready=false・automatic_progression=false・未配置**を維持し、§9.2/9.4と商品受入れの条件を弱めない。
+
+
+### u263 提案 — 同一文に明示された満足理由exact1（2026-10-15 JST）
+
+**PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR。製品変更・本文改善0。** u253/u262の承認は継続する。実測7合成入力の全本文と詳細案はAPI既存handoff u263、進行記録は06 u263、weekly§5.6.13。同一文の理由＋対象＋満足がgeneric changeへ縮退し、行動欄ありは候補0/LIMITED、なしは候補1/NORMALでも『その変化を感じています。』だけだった。内部NORMALを内容成立へ変換しない。
+
+推奨追加は、本人の同一文・明示理由exact1・肯定無程度満足・既存実行済み対象pairへ限定する。例は `必要な資料を探しやすくなったので、資料を分類したことに満足した。`。二文目『からだ』の照応、目的→達成、二つの理由、他者/引用/推量、否定/程度付き満足・納得、未成立factと併せた四点は対象外。本人が記した理由を使い、分類→探しやすさの客観因果や唯一の基準を加えない。
+
+既存source-explicit cause候補と文法は再利用候補だが、現行scopeはcauseを運べない。Foreground exact4/ABOUT_TARGETを変更せず、評価理由に限るversioned private scope分岐を加え、対象→評価ABOUT_TARGETと理由→評価SOURCE_EXPLICIT_CAUSEの二項configurationを一つのwhole readingへ保持する。private schema/validator変更の必要性を隠さず、公開API/DB/RN schemaは変更しない。既存型に原因を別関係として偽装しない。旧意味/checkpoint・保存非再生成・単一作者/独立readerを保持する。
+
+可視内容の目標は、今回の満足が本人の述べた具体的変化を拠り所にしていることを受け取れるようにすること。理由削除・差替えで内容が変わり、目的・別評価・他者・推量を誤接続しないことを実生成で確認する。理由の引用＋固定句に留まる場合は完成とせず、同じ修辞の反復を打ち切る。新engine/checker/service・外部AI・依存・配置・DB変更は追加しない。実装工数/完成日は未確定。Rule18 §11.3に基づき、この追加のみ承認対象とする。新registry等が必要と判明した場合は追加前に止める。STRUCTURE_MAP_DELTA_NONE、初回単位未完了・0/3。
+
+初回理由scopeの補足: 理由自体も本人が現実の状態/変化として明示した肯定fact（過去又は現在）exact1へ限定する。条件・予定・願望・理由関係の否定は除外する。既存の対象/評価pairとは意味型を再利用する意味であり、理由を含む文全体を現在のparserが認識済みという主張ではない。理由込みのsource認識修正をこの提案へ含める。

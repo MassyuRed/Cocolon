@@ -17789,3 +17789,18 @@ source範囲のある未成立fact（present/negative）、本人の対象event�
 実装反映版はAPI `da6ee56beba26bbf0d89c734230f363ba794a9b8`（PR3）。対応する設計・地図・weekly差分は本commit（PR30）に収録する。両PRはDraft、未配置。今回CI成功は未確認で、local検査と区別する。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** §9.2/9.4の受け取り内容形成が主課題。対象外の目的を活かせない例、同memo receivedの焦点移動、2 received＋2評価の初回gap、既存共有17失敗、same100・本人実機・正式Product Readは残る。0/3・candidate_ready=false・automatic_progression=false・未配置、10/17・10/31・12/18とPiece/Analysis主枠を維持する。
+
+
+## u263 — 明示された満足理由の読落としと限定追加案（2026-10-15 JST）
+
+API `da6ee56beba26bbf0d89c734230f363ba794a9b8` を未変更で実行し、7合成入力の生成全文を確認した。u262基準の三点は保持されるが説明的表現が残る。同一文の明示理由＋対象＋満足はgeneric changeとなり、別欄行動ありは候補0/LIMITED、なしは候補1/NORMALでも『その変化を感じています。』だけ。NORMAL・生成成立を内容完成としない。今回はtest/保存/RNを再実行せず、前回の検査成功は加算しない。
+
+原因は評価理由のsource認識と、原因関係をselected configurationへ運べないscope境界に分かれる。既存SOURCE_EXPLICIT_CAUSEは存在するが、thread投影と許可型/validatorは原因をscope証明へ通さない。u262の『切り分ける』を『一括否定しない』へ言い直すだけの案は不採用。本人が理由を書いている例の不足を、入力情報不足へ帰属しない。
+
+次の推奨は、同一文・本人・肯定無程度満足へ明示理由exact1を結ぶ限定追加。旧exact4/ABOUT_TARGETを保ち、versioned private scopeで二項configuration二つを全体readingへ保持する。private schema/validatorの変更は必要であり、schema変更なしとはしない。目的・推量・他者・複数理由・二文照応・未成立との四点併合は対象外。詳細なscope/owner/成功/停止条件は8/28設計u263とAPI handoff u263。Rule18 §11.3により追加のみ未承認、u253/u262は継続。外部AI/新service/公開API/DB/RN変更なしを提案する。
+
+**BLOCKER_NARROWED / PRODUCT_NOT_CLEAR、今回製品変更・本文改善0。** STRUCTURE_MAP_DELTA_NONE、初回単位未完了・0/3・candidate_ready=false・automatic_progression=false・未配置。System Context prepareはmaterial refの祖先条件不一致で失敗し、原典直接fallbackを使用。今回のread-only subagent確認は同環境補助で、別model Pro/Ultra審査ではない。既存共有17失敗等は未解消。10/17・10/31・12/18とPiece/Analysis主枠を維持する。
+
+前回u262のCI run38641247452は、同head `da6ee56beba26bbf0d89c734230f363ba794a9b8` でcompleted/successをfresh確認した。これは前回実装のCI結果であり、今回の本文改善・新規test成功ではない。
+
+初回理由scopeの補足: 理由自体も本人が現実の状態/変化として明示した肯定fact（過去又は現在）exact1へ限定する。条件・予定・願望・理由関係の否定は除外する。既存の対象/評価pairとは意味型を再利用する意味であり、理由を含む文全体を現在のparserが認識済みという主張ではない。理由込みのsource認識修正をこの提案へ含める。
