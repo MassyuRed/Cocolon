@@ -1224,3 +1224,21 @@ STRUCTURE_MAP_DELTA_PRESENT。既存production 4fileの責務変更のみ。新f
 ABOUT_TARGET等の既存意味契約は不変。新たなNORMAL枠や理由とreceivedの併合を追加しない。旧source復元とQ1のprepared経路を保ち、完全checkpointのみを受理する。旧Q1 Observationの表現差は06／API handoff u265へ明記。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 今回は評価脱落の回復であり、LIMITED本文の関係反復・固定的な受け取りを§9.2/9.4の完成に換算しない。独立行動もReceptionに残るため「独立行動非混入」とはしない。理由＋receivedを別欄に置いた初回は両配置ともMEANING_REALIZATION_CAUSAL_TRACE_GAPで本文停止、2 received＋2評価もLIMITED_RECEPTION_CAPABILITY_GAP_STOPを今回実測した。次の第一候補は前者をsource→選択内容→作者/独立readerの単位で直すこと。新しい意味契約が必要と判明すれば、その具体差分にだけRule18 §11.3を適用する。旧received文法全般のgiver誤帰属、複数先行文への評価継続も今回の修正範囲には含めない。既存共有17失敗・same100・本人実機・正式Product Readは未解消／未実施。正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmerged、10/17確認点・10/31/12/18とPiece/Analysis主枠を維持する。
+
+
+### u266 — 理由付き満足とreceived経験が別欄にある初回本文の停止を修正（2026-10-15 JST）
+
+| 既存API owner（ai/services/ai_inference/） | u266の責務差分 |
+|---|---|
+| emlis_ai_grounded_human_reception.py | validate_selected_subjective_reception_inputで既存LIMITEDのATTENTION/ATTEND_TO、全体binding、focalなしと、分割されたcontributionが理由・対象・満足の三端点を過不足なく所有することを確認。_source_owned_relational_focus_sentenceで本人の理由・対象・時点を限定的に受け取る。NORMALと未成立contextの条件は維持。 |
+| emlis_ai_grounded_observation_gate.py | _read_relational_focus_discourseでLIMITEDの選択所有と三役割・時点・肯否を作者から独立して再照合。NORMALのexact3/focal検査も維持。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py（repo相対） | 両欄配置・過去/現在・理由差替え、独立reader、誤った役割/時点/理由、contribution借用/欠落/過剰を拒否する19検査を追加。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json（repo相対） | 実sourceから現行shared-owner identityを再計算。歴史fixture/IM03 proofは不変。 |
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production 2file・3関数の責務修正。source認識・投影・意味契約・checkpoint生成・公開API/DTO/DB/SQL/RN・依存は変更0。新file/engine/author/checker/registry/serviceは追加しない。
+
+既存LIMITEDの全体binding・ATTENTION/ATTEND_TO・focalなしと、Move別contributionの三端点所有を同時に検証する。NORMAL exact3/focal・未成立contextの境界は不変。独立readerは作者を呼ばず理由・対象・時点を読む。意味/checkpoint生成は変えず、旧版との12例比較で一致した。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+実本文・検証・残件は06／API handoff u266。

@@ -40522,3 +40522,12 @@ STRUCTURE_MAP_DELTA_PRESENT。既存production 4fileの責務変更のみ。新f
 API反映commitは `30366a7247ce424017eefdef8235d7ee0018ce06`（PR3）。資料PR30の本差分は設計図・01/01A・current01/04・weekly§5.6.15を同期する。PR3/30はDraft、未配置。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 今回は評価脱落の回復であり、LIMITED本文の関係反復・固定的な受け取りを§9.2/9.4の完成に換算しない。独立行動もReceptionに残るため「独立行動非混入」とはしない。理由＋receivedを別欄に置いた初回は両配置ともMEANING_REALIZATION_CAUSAL_TRACE_GAPで本文停止、2 received＋2評価もLIMITED_RECEPTION_CAPABILITY_GAP_STOPを今回実測した。次の第一候補は前者をsource→選択内容→作者/独立readerの単位で直すこと。新しい意味契約が必要と判明すれば、その具体差分にだけRule18 §11.3を適用する。旧received文法全般のgiver誤帰属、複数先行文への評価継続も今回の修正範囲には含めない。既存共有17失敗・same100・本人実機・正式Product Readは未解消／未実施。正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmerged、10/17確認点・10/31/12/18とPiece/Analysis主枠を維持する。
+
+
+### u266 — 理由付き満足とreceived経験のLIMITED本文停止を修正（2026-10-15 JST）
+
+API反映commitは `26d8ccc7a277664f1cec8e67a749d32fd90bb74a`（PR3）。資料PR30は本節を含むrevisionが対応候補。今回のsourceは既存2file/3関数の選択内容検証・作者・独立readerに限定し、理由/対象/満足の時点とreceived経験を両欄配置で本文へ保持する。意味/checkpoint生成・契約・公開API/DB/RNは不変。STRUCTURE_MAP_DELTA_PRESENT。
+
+評価294＋application54＋現行identity1、計349 PASS。保存4本文のNoAuthor GET/startとRN履歴/再open、回答2件のidempotency再試行を確認。旧30366a7との12例で完全checkpoint/意味一致。設計・全体01/01A・current01/04・06・weekly20261010 §5.6.16・API handoff u266へ実本文/検証/残件を同期した。反映後の対象blobとchanged-path setをfresh確認し、今回headのCIはPR本文へ記録する。
+
+BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/未配置。理由付き全文撤回の未解決と有限対象撤回後の不自然な本文は旧版と一致する既存残件。2 received＋2評価の初回gap・共有17失敗・same100・本人実機・正式Product Readも残る。10/17/10/31/12/18とPiece/Analysis主枠を維持する。

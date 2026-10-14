@@ -6872,3 +6872,12 @@ u253の既存評価の承認範囲で、同一欄の先頭にある本人のrece
 STRUCTURE_MAP_DELTA_PRESENT。既存production 4fileの責務変更のみ。新file/engine/author/checker/registry/service、内部意味schema・公開API/DTO/DB/SQL/RN、製品依存、Piece/Analysisの変更0。検査は既存test_cmee_emlis_result_appraisal.pyと現行shared-owner identity fixtureへ追加／更新し、歴史fixture/IM03 proofは変更しない。
 
 同一欄の本人received一文に続く明示評価を既存source→meaning→本文へ保持した。全file責務差分は01A u265の4owner。旧checkpointを完全再導出し、保存済み本文のreadには作者を呼ばない。実測と残件は最新weekly§5.6.15、実全文と検証は06／API handoff u265。初回単位未完了・0/3・未配置を維持。
+
+
+### u266 — 理由付き満足とreceived経験が別欄にある初回本文の停止を修正（2026-10-15 JST）
+
+理由付き満足とreceived経験が別欄にある入力のLIMITED本文停止を、既存の選択内容検証→唯一のHuman Reception作者→独立readerで修正した。理由・対象・時点とreceived経験を保持し、通常の解釈へ昇格させない。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production 2file・3関数の責務修正。source認識・投影・意味契約・checkpoint生成・公開API/DTO/DB/SQL/RN・依存は変更0。新file/engine/author/checker/registry/serviceは追加しない。
+
+全file責務は01A u266の2production owner、現行意味境界はcurrent01/04、検証・残件は06／API handoff u266・weekly§5.6.16。**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。

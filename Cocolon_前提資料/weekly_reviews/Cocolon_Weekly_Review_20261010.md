@@ -789,3 +789,20 @@ STRUCTURE_MAP_DELTA_PRESENT。既存production 4fileの責務変更のみ。新f
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 今回は評価脱落の回復であり、LIMITED本文の関係反復・固定的な受け取りを§9.2/9.4の完成に換算しない。独立行動もReceptionに残るため「独立行動非混入」とはしない。理由＋receivedを別欄に置いた初回は両配置ともMEANING_REALIZATION_CAUSAL_TRACE_GAPで本文停止、2 received＋2評価もLIMITED_RECEPTION_CAPABILITY_GAP_STOPを今回実測した。次の第一候補は前者をsource→選択内容→作者/独立readerの単位で直すこと。新しい意味契約が必要と判明すれば、その具体差分にだけRule18 §11.3を適用する。旧received文法全般のgiver誤帰属、複数先行文への評価継続も今回の修正範囲には含めない。既存共有17失敗・same100・本人実機・正式Product Readは未解消／未実施。正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmerged、10/17確認点・10/31/12/18とPiece/Analysis主枠を維持する。
 
 責務地図は01A、実本文・途中失敗は06／API handoff u265。
+
+
+### 5.6.16 u266 — 理由付き満足とreceived経験が別欄にある初回本文の停止を修正（2026-10-15 JST）
+
+理由付き満足とreceived経験を別欄に置くと初回本文が停止していた問題を、既存LIMITEDの選択内容・作者・独立readerを整合させて修正した。両欄配置と回答後で、理由・対象・満足の時点とreceived経験を保持した本文が戻る。u253/u264の既存承認内で、新しい意味契約はない。
+
+評価294＋Q2/Q3 application54=348 PASS。保存4本文のNoAuthor再読・RN履歴/再open、回答2件のidempotency再試行を確認。未変更30366a7との12例比較で完全checkpoint/意味が一致し、評価訂正本文も一致。現行shared-owner identityも1 PASS、総計349 PASS。git diff --check成功。検査成功を製品完成へ換算しない。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production 2file・3関数の責務修正。source認識・投影・意味契約・checkpoint生成・公開API/DTO/DB/SQL/RN・依存は変更0。新file/engine/author/checker/registry/serviceは追加しない。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+理由を含む全文「『探しやすくなったので、資料を分類したことに満足した』は誤りです。」と「『資料を分類したことに』は誤りです。」の撤回は、両版ともcorrection_target_unresolved／本文なし。実入力の引用符は「」を使用した。有限対象「『資料を分類した』は誤りです。」は両版で同一本文となるが、Receptionは「探しやすくなったことによって満足したという気持ちが生じることをどちらの側も残したまま、感じています。」という既存の不自然な表現が残る。これらを今回解消したとはしない。
+
+次は今回回復した初回一体単位の内容・関係反復と、理由付き評価の撤回対象を既存訂正契約で正確に扱えるかを確認する。2 received＋2評価の初回gap、旧received全般のgiver誤帰属、複数先行文の評価継続、既存共有17失敗・same100・本人実機・正式Product Readも残る。今回はこれらの全再検査を追加せず、成功件数へ混ぜない。10/17確認点へ停止回復と残件を反映し、10/31・12/18とPiece/Analysis主枠を維持する。
+
+全体01/01A・current01/04・8/28設計・06／API handoffを同単位で同期。

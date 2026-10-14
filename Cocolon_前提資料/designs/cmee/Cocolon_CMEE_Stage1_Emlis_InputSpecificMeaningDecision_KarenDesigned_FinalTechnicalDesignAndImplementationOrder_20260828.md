@@ -2950,3 +2950,18 @@ STRUCTURE_MAP_DELTA_PRESENT。既存production 4fileの責務変更のみ。新f
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 今回は評価脱落の回復であり、LIMITED本文の関係反復・固定的な受け取りを§9.2/9.4の完成に換算しない。独立行動もReceptionに残るため「独立行動非混入」とはしない。理由＋receivedを別欄に置いた初回は両配置ともMEANING_REALIZATION_CAUSAL_TRACE_GAPで本文停止、2 received＋2評価もLIMITED_RECEPTION_CAPABILITY_GAP_STOPを今回実測した。次の第一候補は前者をsource→選択内容→作者/独立readerの単位で直すこと。新しい意味契約が必要と判明すれば、その具体差分にだけRule18 §11.3を適用する。旧received文法全般のgiver誤帰属、複数先行文への評価継続も今回の修正範囲には含めない。既存共有17失敗・same100・本人実機・正式Product Readは未解消／未実施。正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmerged、10/17確認点・10/31/12/18とPiece/Analysis主枠を維持する。
 
 実本文・途中失敗・最終検証は06／API handoff u265。
+
+
+### u266 — 理由付き満足とreceived経験が別欄にある初回本文の停止を修正（2026-10-15 JST）
+
+memo「探しやすくなったので、資料を分類したことに満足した。」、memo_action「褒められたのに、嬉しくなかった。」と両欄交換で、旧版はMEANING_REALIZATION_CAUSAL_TRACE_GAP／公開emlis_q3_initial_body_unavailableとなった。sourceは理由→満足・対象→満足・received対比を既に保持していたが、複数経験の既存LIMITED選択へ、理由付き満足の検査/作者/readerだけがNORMAL専用条件を要求していた。
+
+既存LIMITEDの全体ATTENTION/ATTEND_TO・MATERIAL_WEIGHT/RECEIVE_AS_MATERIAL・focalなしを保持し、各Moveへ既に分配されたcontributionが理由/対象/評価の三端点をちょうど所有することを検証する。NORMALへ昇格させず、理由付き満足とreceivedをそれぞれ本人が記した範囲で本文へ返す。NORMALの「満足の拠り所」文章をそのままLIMITEDの選択内容へ載せない。u253/u264の承認済み範囲の欠陥修正であり、新しい意味契約・理由語形は追加しない。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production 2file・3関数の責務修正。source認識・投影・意味契約・checkpoint生成・公開API/DTO/DB/SQL/RN・依存は変更0。新file/engine/author/checker/registry/serviceは追加しない。
+
+これはu264の理由契約と既存LIMITED経路の整合修正。本人の明示理由・対象・時点の限定的な受け取りを回復するが、選択された全体の読みから本質的内容差を生む§9.2/9.4の全条件が完成したとはしない。理由引用と関係反復が残る。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+実本文・互換・検証・撤回残件は06／API handoff u266、全file配置は01A、進行はweekly§5.6.16。
