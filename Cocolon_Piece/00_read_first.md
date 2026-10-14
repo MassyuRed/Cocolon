@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新作業は§68／current map §65.16です。source `015dda53` で候補ごとのCoreText初期化をbounded batchへ変更し、旧独立計測との全候補bit一致と実RN5ケースを検証中です。JS763件は成功。420文字の解消は未確認です。**
+**最新作業は入口§70〜71／current map §65.18〜65.19です。書き出し初期整理の失敗後に復帰できない不具合を修正しました。source `562e6a38` は従来の独立計測へ復元し、通常UIKit起動でnative69件・JS766件が成功。CoreText再利用2案は数値不一致で撤回しました。420文字は未解消です。**
 
 **現在は入口§66／current map §65.14を優先します。source `ec5db637` はnative63件・JS758件を通過し、実RN4ケースと4枚PNGを確認しました。420文字は48→44→40→36ptの全候補計測・復号が返りましたが、36ptのB9開始前に全体8,118.417msでtimeoutとなり、未解消です。共有CF版のcrashは専用workerデータへ修正し、最新native/実RNでは再発しませんでした。次は候補の反復と最終復号を短縮し、36ptのB9・最終inspectionまで同じ8秒内へ収めることです。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
 
@@ -1308,3 +1308,85 @@ local既存13suiteは763 PASS／FAIL0／SKIP0。GitHub [run38485611654](https://
 native job115598400327は最初のCASE japaneseのSTAGE view_initで停止し、90秒alarm／signal14／exit142で終了しました。STAGE view_ready・candidate_call・最初のassertionへ到達しておらず、今回の計測変更の同値／性能は未検証です。同じsourceの単体jobだけを再実行する要求は、並行する実RN job115598400455が実行中のためGitHubに拒否されました（workflow already running）。実RN完了後に単体jobを一度再実行して確認します。実RN job115598400455は検証中です。全候補bit一致、5ケースの本文・最終inspection・PNG・8秒を実結果で判断します。候補の高速化や420文字の解消はまだ未確認です。正式renderer供給→保存直前fit→同じpreview/tokenの初回保存→実機受入れは未完了です。
 
 STRUCTURE_MAP_DELTA_NONE（既存native内部実装と対応検査のみ）。全体設計・全file地図・最新weekly10/10 §5.5・12/18目標を確認済み。default OFF、canSave/canExport=false、Draft/open/unmerged、DB/env/deploy/署名/配布/main merge効果0を保持します。
+
+### 68.1 完了結果 — batch方式は不採用
+
+source `015dda53` の[run38485611654](https://github.com/MassyuRed/Cocolon/actions/runs/38485611654)は完了しました。最初のnative job115598400327はUIView初期化で90秒alarmとなったため、実RN完了後に同じsourceのnativeだけを一度再実行しました。再実行job115604411027は74判定中72 PASS／2 FAIL／SKIP0です。元63判定を含む全行oracleは削除・許容誤差化していません。
+
+- max420_uncached_equivalence：UTF16 [0,8) の「あ」8文字でadvanceが1 ULP不一致（actual `407699e7cc4e7ae3`／expected `407699e7cc4e7ae2`）。
+- batch_positions_unmatched_bidi：position1／neighbor_order0／final_separator0のinkLeftが不一致（actual `4009800000000000`／expected `3ffaa00000000000`）。
+- mixed420の全88,410行はbit一致しましたが、これだけでは方式全体を採用しません。計測profileはtypesetter144個／入力2,331,376 UTF16単位、行11,381個。worker実時間5,345.412ms、typesetter作成累積8,294.104ms、行作成累積607.526msでした。並列累積を実時間へ加算しません。
+
+実RN job115598400455は4成功・420文字timeoutです。essay1,050.932ms／quote434.540ms／declaration599.866ms／saved5,227.107msはnative_checked、body_preserved／native_canvas_valid=true。華恋が4枚PNGの本文・改行・余白・brandingを確認しました。420文字は8,098.169ms、size2、plan／inspection／PNGなし。48／44ptは各88,410行・11,381代表値を返し、native2,781.681／6,118.381ms、adapter2,925.391／6,257.927ms、B9は122.856／105.117msで不成立。40／36ptは保存traceでpending。呼出時間にはqueue待ちを含み、加算しません。
+
+artifact11859539554（56,522,478 bytes、期限2026-10-20）のZIP SHA256 `9dc660ddd32f2220ac3aa5c604bebed176dd234716ad3f9933c8a44cbf601bf6` とresults.json SHA256 `ec17157767e46ab55b0fe0f162cff9d2051065a9b2b5910d579ca601456be530` を照合しました。JS763成功、Android source compile成功。再実行attempt2に他jobの新IDが並ぶことを、他jobの再検証とは扱いません。batchは数値一致条件と実RN期限条件を満たさず不採用です。
+
+## 69. 2026-10-14 JST — 開始位置ごとのCoreText準備の再利用を検証
+
+source `69f9f2cd069ff229fa940e3f3f5302a878f27efd` は既存native製品＋testの2pathです。batchを取り除き、各workerで開始位置が同じ候補だけ、同じ開始位置からのsuffixを使うtypesetterを再利用します。CTLineのrangeは常にoffset0から候補末尾までです。完全属性・worker専有storage・全候補表・v3・B9・4worker・font順・8秒・最終inspectionを維持します。後続文字の影響がないと未検証で決めず、旧独立substringとの全行bit一致を採用条件にします。
+
+既存63＋追加6の全行比較を維持し、直接比較5件を候補offset0＋空／LTR／RTL／U+2029+LTR／U+2029+RTLの後続文脈へ置き換えました。候補文字・属性・5double比較式・alarm90秒は不変、期待74判定です。同環境の補助review後、華恋が差分・remote全文・親284db3f6・変更2pathを照合しました。
+
+[run38488415449](https://github.com/MassyuRed/Cocolon/actions/runs/38488415449)のJS job115607570592は763 PASS／FAIL0／SKIP0。最初のnative job115607570600と、同じnative blobを含むf782ac64のjob115609133528はview_initで90秒alarmでした。同sourceの単体jobを一度再実行した結果を§69.1、実RN5ケースを§69.2へ記録します。この案は不採用です。
+
+### 69.1 同じnative blobの再実行結果 — suffix方式も撤回
+
+sourcef782ac64（native製品・testは69f9f2cdと同一）／run38488895460のnative再実行job115610828443は74判定中66 PASS／8 FAIL／SKIP0でした。最初の2実行はview_initで90秒alarmでしたが、今回は候補計測と全判定へ到達しました。失敗は次の通りです。
+
+| 判定 | UTF16範囲／直接比較条件 | metric | actual bits | expected bits |
+|---|---|---|---|---|
+| spaces_uncached_equivalence | [0,3) | advance | 40456f0000000000 | 4046050000000000 |
+| max420_uncached_equivalence | [0,8) | advance | 407699e7cc4e7ae3 | 407699e7cc4e7ae2 |
+| latin_ligature_context_uncached_equivalence | [0,17) | advance | 4072db0000000000 | 4073170000000000 |
+| hebrew_context_uncached_equivalence | [0,8) | advance | 40662fc000000000 | 40666bc000000000 |
+| arabic_context_uncached_equivalence | [0,1) | advance | 40379474d0000000 | 403898c430000000 |
+| mixed_bidi_context_uncached_equivalence | [3,4) | inkLeft | c024640000000000 | 0000000000000000 |
+| paragraph_direction_attributes_uncached_equivalence | [0,4) | advance | 4050dd8000000000 | 4051cd8000000000 |
+| suffix_contexts_whitespace | neighbor_case2 | advance | 403c000000000000 | 4043190000000000 |
+
+mixed420の全88,410行はbit一致しました。typesetter入力は45,528 UTF16単位／112個、line11,381個、worker実時間886.411ms、typesetter作成累積59.788ms、line作成累積447.418ms、ink累積1,147.681msでした。mixed420計測1,187.071msは検査decoder185.350msを含み、実RN全体時間ではありません。速度短縮があっても上記不一致を許容しません。特定の検体だけに合わせた文字種分岐や許容誤差の追加も行いません。
+
+製品nativeを検証済みbaseline071f3d8のblob `4dbe6cb1c50f216acad2a2d3f091ca5c0a1bddf8` と完全一致へ戻しました。原63判定と追加6件の全行oracleを残し、撤回した方式だけの直接比較5件と専用profileは取り除きます。元の失敗する全行判定を削除してgreenにする変更ではありません。§68のbatch・§69のsuffixはいずれも不採用です。
+
+### 69.2 不採用sourceの実RN画像 — 420文字は5.81秒、製品解消には数えない
+
+source69f9f2cd／[run38488415449](https://github.com/MassyuRed/Cocolon/actions/runs/38488415449)／実RN job115607570509は5ケースともnative_checkedでした。essay920.549ms／quote481.021ms／declaration680.611ms／420文字5,806.998ms／saved319.225ms。5件のbody_preserved／native_canvas_valid=true、native_textsと選択行＋brandingの一致、画像寸法を確認し、華恋が5枚PNGの本文・段落・欠け・余白・brandingを読みました。420文字は1080×1350、36pt・18行で最終inspectionまで完了しました。
+
+420文字の48／44／40／36ptは各88,410行・11,381代表値を返し、native呼出886.560／1,778.954／1,335.137／1,410.657ms、adapter1,092.060／1,938.064／1,507.562／1,600.211ms。queue待ち込みの呼出時間を加算しません。B9は123.323／117.308／116.834msで不成立、36pt237.322msでfit成立。stateはmeasuring4,227.509ms→geometry_checked5,556.216ms→native_checked5,755.432msでした。
+
+artifact11860684136（2,002,440 bytes、期限2026-10-21）のZIP SHA256 `3e7baeeabb108d0f8fa36eddc4aab3be79737707c72c0bd67b77905f215bb102` とresults.json SHA256 `afc5fcde7ae415bf6a87028215a7a9e510ae6ba6a0b60ca433a24433633a170e` を照合しました。全ケースcanSave/canExport=false。これは不採用のsuffix sourceの検証記録であり、§69.1の8件不一致を打ち消しません。現行製品の420文字解消・正式renderer・保存・実機受入れの証拠には使いません。
+
+## 70. 2026-10-14 JST — 書き出し初期整理失敗後の明示再試行
+
+source `f782ac64513a449fe4b18db86b9b49be9b0c9674` は `features/piece/pieceExport.js` と `tests/piece-v2-export.test.js` の2pathです。prepareRawCacheが一度失敗すると、rejected Promiseをprocess内に残し続け、その後にfilesystemが回復しても全prepareが失敗する不具合を再現しました。最初のls失敗後の再試行でもlsCount=1、captureCount=0でした。
+
+失敗した同じPromiseだけをidentity確認後に破棄し、次の明示prepareから初期整理を再試行します。成功Promiseは保持し、並行prepareは同じpendingを共有します。自動再試行は追加せず、整理完了前のcapture・owner/current境界・許可されたraw名だけの削除・外部エラーの匿名化を維持します。成功後のcaptureを次のstartup cleanupで消す経路は作りません。
+
+追加3件はls失敗／unlink失敗からの復帰と、並行prepareの共通失敗・回復を検査します。修正前は28 PASS／3 FAIL、修正後は31 PASS／FAIL0／SKIP0。local既存14ファイルもexit0で成功しました（dot出力、総件数は取得していません）。workflowの13ファイルとの差はinitial-save-host検査です。GitHub [run38488895460](https://github.com/MassyuRed/Cocolon/actions/runs/38488895460)／JS job115609133612は766 PASS／FAIL0／SKIP0です。OS・filesystemを代替したJS検査であり、実機の写真保存完了ではありません。
+
+同環境の別担当がPromiseの並行共有・旧rejectと新pendingのidentity・成功後one-time・owner/current維持をread-only確認し、華恋が製品原典と差分を確認しました。remote2path全文・親69f9f2cd・変更path集合を照合済み。native／renderer／workflow／依存への変更はありません。実RN job115609133524のsuccessは描画変更なしによるscope skipで、新しい描画検証ではありません。420文字の再利用案は§69.1の結果により撤回しました。
+
+STRUCTURE_MAP_DELTA_NONE（既存export準備内部の再試行のみ）。全体設計・全file地図・最新weekly10/10 §5.5と12/18目標を確認済み。default OFF、canSave/canExport=false、Draft/open/unmergedを保持。DB/env/deploy/署名/配布/main merge効果0です。
+
+## 71. 2026-10-14 JST — 独立計測の復元とUIKit単体検査の通常起動
+
+source `562e6a38a7ff1f75a557b464cd5badfcf55bb113` は既存3pathです。
+
+- `ios/tempCocolon/PieceTextMetrics.mm` をbaseline071f3d8のblob `4dbe6cb1c50f216acad2a2d3f091ca5c0a1bddf8` と全文一致へ復元しました。独立substring＋CTLineCreateWithAttributedString、完全属性dedup、4worker、全候補、v3、B9、font順、8秒、最終inspectionを保持します。batch／suffixの再利用は残しません。
+- `tests/native/piece-text-metrics-ios.mm` は原63判定へ追加6件の全行oracleを残し、実験専用5件とprofileだけを撤去。追加6とhost起動部分を逆変換して原071f3d8とbyte一致することを確認しました。UIKit専用hostをUIApplicationMainで起動し、active後一度だけmain queueから同じ検査本体を実行します。mainで開始する90秒alarmは延長・再設定しません。
+- `.github/workflows/piece-rn-contracts.yml` のnative単体stepだけを、裸のbinaryのspawnから小さな.appのinstall／launch --consoleへ変更。pipeline終了codeと、完走summary `NATIVE_CHECKS=69 PASS=69 FAIL=0 SKIP=0` の完全一致1行・FAIL行なしを両方要求します。起動失敗やsummary欠落／重複を成功にしません。
+
+初回UIViewでの停止は計測methodへ到達する前でした。標準UIKit起動を通らないharness構造は確認できましたが、内部の停止stackがないため、それが直接原因だと断定しません。timeout延長・assertion省略・追加自動retryは行いません。実RN hostへshimを混ぜず、依存追加・署名・配布もありません。他job本文は同一です。
+
+localでYAML／shell／埋込Python／plistと完走guardを確認。別担当の同環境read-only reviewと華恋の差分確認後、remote3path全文・親f782ac64・変更path集合を照合しました。別modelのreview実績ではありません。最新[run38490317258](https://github.com/MassyuRed/Cocolon/actions/runs/38490317258)の完了結果は§71.1です。
+
+採用済み成果は§70の書き出し再試行修正と追加回帰検査です。420文字は現行の厳密計測では未解消です。2つのCoreText再利用案は実測で不採用とし、同じ案を繰り返しません。次は全候補を先に独立計測する方式の処理量を設計段階から検討します。全候補契約や測定の意味を変更する場合は、owner／native-JS境界／比較基準を先に明記し、実装だけで黙って変更しません。本文・段落保持、離散font順、8秒、実Text最終inspectionを成功条件のまま扱います。
+
+正式renderer供給→保存直前fit→同じpreview/tokenの通常初回保存→実機受入れは未完了です。全体設計・全file地図・weekly10/10 §5.5／12/18目標を確認済み。STRUCTURE_MAP_DELTA_NONE（既存owner内の処理・検査起動のみ）、default OFF、canSave/canExport=false、Draft/open/unmerged、DB/env/deploy/署名/配布/main merge効果0を保持します。
+### 71.1 通常起動で69判定を完走
+
+source562e6a38／run38490317258／native job115613701492は69 PASS／FAIL0／SKIP0です。main_entered 00:32:07.791 UTC→application_launch 00:32:08.071→application_active 00:32:08.879→69件完了00:32:37.645で、同じ90秒alarm内に通常起動と検査を完走しました。今回のview_init停止は再発していませんが、将来の全環境で停止しない保証にはしません。
+
+原63件と追加6件の全行bit比較が成功し、撤回案で失敗したspaces／「あ」420／Latin／Hebrew／Arabic／bidi混在／段落属性も成功しました。mixed420は2,248.797ms（検査decoder131.934ms含む）、worker実時間2,008.329ms。CoreText作成累積3,171.967ms、ink累積780.871ms、CF substring累積452.669ms。これは復元処理の単体観測で、実RN全体8秒の成功ではありません。別runnerや新hostとの差を性能改善と断定しません。
+
+同じsourceのGitHub JS job115613701632は766 PASS／FAIL0／SKIP0、Android source job115613701644も成功。実RN job115613701309、既存export native build2jobは進行中です。workflow変更により既存scope判定がこれらも起動しましたが、各検証結果は完了後に読むこととし、成功へ先取りしません。

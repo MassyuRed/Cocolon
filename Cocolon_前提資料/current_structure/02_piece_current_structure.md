@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新作業は入口§68／本map §65.16です。source `015dda53` で候補ごとのCoreText初期化をbounded batchへ変更し、旧独立計測との全候補bit一致と実RN5ケースを検証中です。JS763件は成功。420文字の解消は未確認です。**
+**最新作業は入口§70〜71／current map §65.18〜65.19です。書き出し初期整理の失敗後に復帰できない不具合を修正しました。source `562e6a38` は従来の独立計測へ復元し、通常UIKit起動でnative69件・JS766件が成功。CoreText再利用2案は数値不一致で撤回しました。420文字は未解消です。**
 
 **現在は入口§66／current map §65.14を優先します。source `ec5db637` はnative63件・JS758件を通過し、実RN4ケースと4枚PNGを確認しました。420文字は48→44→40→36ptの全候補計測・復号が返りましたが、36ptのB9開始前に全体8,118.417msでtimeoutとなり、未解消です。共有CF版のcrashは専用workerデータへ修正し、最新native/実RNでは再発しませんでした。次は候補の反復と最終復号を短縮し、36ptのB9・最終inspectionまで同じ8秒内へ収めることです。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
 
@@ -2634,3 +2634,29 @@ local既存13suiteは763 PASS／FAIL0／SKIP0。GitHub [run38485611654](https://
 native job115598400327は最初のCASE japaneseのSTAGE view_initで停止し、90秒alarm／signal14／exit142で終了しました。STAGE view_ready・candidate_call・最初のassertionへ到達しておらず、今回の計測変更の同値／性能は未検証です。同じsourceの単体jobだけを再実行する要求は、並行する実RN job115598400455が実行中のためGitHubに拒否されました（workflow already running）。実RN完了後に単体jobを一度再実行して確認します。実RN job115598400455は検証中です。全候補bit一致、5ケースの本文・最終inspection・PNG・8秒を実結果で判断します。候補の高速化や420文字の解消はまだ未確認です。正式renderer供給→保存直前fit→同じpreview/tokenの初回保存→実機受入れは未完了です。
 
 STRUCTURE_MAP_DELTA_NONE（既存native内部実装と対応検査のみ）。全体設計・全file地図・最新weekly10/10 §5.5・12/18目標を確認済み。default OFF、canSave/canExport=false、Draft/open/unmerged、DB/env/deploy/署名/配布/main merge効果0を保持します。
+
+### 65.16.1 batch方式の完了結果 — 不採用
+
+source015dda53／run38485611654のnative再実行job115604411027は74判定中72 PASS／2 FAIL／SKIP0。「あ」8文字のadvanceで1 ULP、未閉鎖bidiのbatch中間位置でinkLeft不一致があり、方式は不採用です。mixed420だけの全行一致を採用へ換算しません。実RN job115598400455は4成功・420文字8,098.169msのtimeout（size2、plan／PNGなし）。artifact11859539554のdigest、5件JSONと4枚PNGを確認しました。JS763成功。全数値bits・profile・artifact identity・時間の内訳は入口§68.1です。
+
+### 65.17 開始位置ごとの再利用案も不採用
+
+source69f9f2cdのsuffix方式は、同native blobのf782ac64／run38488895460／native再実行job115610828443で74判定中66 PASS／8 FAIL／SKIP0でした。元からのspaces・「あ」420と、今回追加のLatin／Hebrew／Arabic／bidi混在／段落属性で全行bit不一致があり、直接suffix whitespace比較も失敗しました。初回2jobのview_init停止と、この実際の不一致を区別します。全bitsとprofileは入口§69.1です。
+
+不採用source69f9f2cdの実RN run38488415449／job115607570509は5ケース成功。420文字5,806.998ms、36pt・18行、最終inspectionとPNGまで完了しました。他4件は920.549／481.021／680.611／319.225ms。artifact11860684136のdigest、5件JSON・native text・寸法と5枚PNGを華恋が確認しました（詳細・identityは入口§69.2）。数値一致条件を満たさないため、この描画成功を現行製品の420文字解消へ換算しません。製品処理は§65.19で復元しました。
+
+### 65.18 書き出し初期整理失敗後の明示再試行
+
+sourcef782ac64の変更はpieceExport.js＋export testの2path。失敗したrawCleanup Promiseを永久保持して再試行できない不具合を修正しました。同一Promiseのreject時だけ破棄し、次の明示prepareで再試行します。成功後one-time、同時pending共有、cleanup完了前capture禁止、owner/current確認、owned raw名の範囲を保持します。
+
+追加3件は修正前FAILを確認し、修正後対象31 PASS。local14ファイル成功、GitHub run38488895460／job115609133612の既存13suiteは766 PASS／FAIL0／SKIP0。remote全文・親・変更2path一致と同環境read-only reviewを確認済み。実OS保存の受入れではありません。同runのRN jobはscope skipであり新描画証拠にはしません。詳細は入口§70。
+
+420文字描画→正式renderer供給→保存直前fit→同じpreview/tokenの初回保存→実機受入れは未完了です。STRUCTURE_MAP_DELTA_NONE、default OFF、canSave/canExport=false、Draft/open/unmerged、DB/env/deploy/署名/配布/main merge効果0を保持します。
+
+### 65.19 独立計測の復元とUIKit単体検査の通常起動
+
+source562e6a38は既存native製品／native検査／workflowの3pathです。製品nativeをbaseline071f3d8のblob `4dbe6cb1c50f216acad2a2d3f091ca5c0a1bddf8` と完全一致へ復元。原63＋追加6の全行oracleを保持し、撤回方式だけの直接5件とprofileを削除しました。追加6とhostを除く逆変換で原63 sourceのbyte一致を確認しています。
+
+検査をUIKit専用.appのUIApplicationMain→active後one-shot main queue実行へ変更。mainから90秒alarmを保持し、延長・assertion省略・自動retryなし。workflowはnative単体stepだけを変更し、launch終了codeと69件全成功のsummary完全一致1行を必須化しました。依存・署名追加なし。同環境read-only review、local構文／plist／完走guard、remote3path全文・親・path集合を確認済みです。
+
+最新run38490317258／native job115613701492は通常UIKit起動で69 PASS／FAIL0／SKIP0、JS job115613701632は766 PASS／FAIL0／SKIP0。mainから29.854秒で全検査が完了し、今回のview_init停止は再発しませんでした。mixed420単体2,248.797msは検査decode込みであり実RN全体の成功ではありません。実RN job115613701309とexport native build2jobは進行中です。詳細は入口§71.1。書き出し再試行修正は§65.18のJS766成功を維持します。420文字は未解消で、次は全候補先行計測の処理量とnative-JS境界を設計段階から検討します。候補契約・比較基準を実装だけで黙って変えず、本文・段落保持、離散font順、8秒、実Text最終inspectionを維持します。正式renderer供給・保存直前fit・通常初回保存・実機受入れは未完了です。STRUCTURE_MAP_DELTA_NONE、default OFF、canSave/canExport=false、Draft/open/unmerged、DB/env/deploy/署名/配布/main merge効果0を保持します。
