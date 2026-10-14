@@ -2911,3 +2911,22 @@ u261案どおり、既存通常`EmlisAppraisalContent`で三binding・protected0
 可視内容の目標は、今回の満足が本人の述べた具体的変化を拠り所にしていることを受け取れるようにすること。理由削除・差替えで内容が変わり、目的・別評価・他者・推量を誤接続しないことを実生成で確認する。理由の引用＋固定句に留まる場合は完成とせず、同じ修辞の反復を打ち切る。新engine/checker/service・外部AI・依存・配置・DB変更は追加しない。実装工数/完成日は未確定。Rule18 §11.3に基づき、この追加のみ承認対象とする。新registry等が必要と判明した場合は追加前に止める。STRUCTURE_MAP_DELTA_NONE、初回単位未完了・0/3。
 
 初回理由scopeの補足: 理由自体も本人が現実の状態/変化として明示した肯定fact（過去又は現在）exact1へ限定する。条件・予定・願望・理由関係の否定は除外する。既存の対象/評価pairとは意味型を再利用する意味であり、理由を含む文全体を現在のparserが認識済みという主張ではない。理由込みのsource認識修正をこの提案へ含める。
+
+
+## u264 — 本人の明示理由を満足の対象へ結ぶ限定実装（2026-10-15 JST）
+
+Mashがu263のRule18 §11.3確認へ「進めていいよ」と承認した。`EMLIS_APPRAISAL_EXPLICIT_REASON_20261015 = APPROVED_FOR_BOUNDED_IMPLEMENTATION`。同一文に本人が肯定factとして明示した理由exact1、実行済み対象、肯定・無程度の満足（過去又は現在）を結ぶ限定追加を実装した。u253/u262承認も継続する。
+
+理由の接続は同一文の「ので／から」。初期語形は「[目的語を]探し／使い等＋やすくなった／やすくなっている／やすかった／やすい」と、見た目・気持ち・頭の中・内容・配置・机の上の「すっきり／はっきり＋した／している」。目的語省略は探し・使い・読み・見つけ・取り出しの有限形に限定する。明示SELFの接頭を扱い、先行他者topicからの本人への切替は理由節の始点で必要。全ての日本語理由文を認識する実装ではない。否定・条件・予定・願望の理由、他者・引用・推量、否定／程度付き満足、納得、理由複数、二文目「からだ」の照応、未成立factとの四点併合は今回の理由scopeへ入れない。
+
+理由→満足は既存source-explicit `user_stated_cause`、対象→満足は既存 `evaluation_about_event` で保持する。private `EmlisThreadScopeRelationKind.SATISFACTION_REASON` を追加し、該当する `SourceConnectedScopeRelation` と `RelationDirectionRow` だけをschema1.1で識別する。既存ABOUT_TARGETは1.0、`ForegroundScopeRelationKind` exact4は不変。三端点のSELF・肯否・時点・modality・kind・同一証拠、二関係の証拠と方向、exact3／incident exact2をsource/carried両境界で検証する。一般causeをscopeへ昇格せず、ABOUTやcontrastへ偽装しない。
+
+選択されたwhole readingの二関係・三bindingから、通常 `EmlisAppraisalContent` の `MATERIAL_WEIGHT / RECEIVE_AS_MATERIAL`、appraised exact3／protected0を導出する。既存exact2評価内容型は不変。唯一のHuman Reception作者が本人の満足の拠り所を対象とともに文章化し、独立readerが三役割・本文・時点・選択binding・focal relationを再照合する。「分類が探しやすさを生んだ」という客観因果、唯一／最重要の理由、目的達成、成功・成長は補わない。別欄の独立行動はObservationに保持し、今回のReceptionへ混ぜない。
+
+新規prepareでは新しい意味からcheckpointを作る。既存checkpoint又は既発行質問の厳密再検証時だけ、今回の理由分解を無効にした旧投影を先に試し、全checkpoint同一を要求する。旧appraisal全体の抑制へ直行せず、同じ入力にある従来の評価を保持する。Q1の原本文経路もこの準備済み旧planを使う。未変更u263のQ3四件・別欄の既存評価併存一件・Q1一件で完全checkpoint同一を確認し、そのうち五件の旧本文／旧停止も一致した。既存historical fixtureを改変せず、外国checkpointは拒否する。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 正式商品受入れ0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。今回の理由欠落改善を§9.2/9.4全体の完成へ換算しない。
+
+実測・途中失敗・旧保存互換は06／API handoff u264、actual owner配置は01A末尾u264。u263の未承認案を今回の限定承認へ進めたが、今回除外した意味は引き続き未実装。
+
+Observationに「満足した」が二度現れる説明的反復、現在形の「入力した時点での」という重い表現は残る。有限語形以外の理由や今回除外した意味契約は未実装。2 received＋2評価の初回gap、既存共有17失敗、same100、本人実機、正式Product Readも残る。新しい意味契約へ黙って広げず、次は今回の限定改善を10/17確認点へ反映し、既存の初回一体単位・受け取り内容の残件へ戻る。10/31・12/18とPiece/Analysis主枠は維持する。

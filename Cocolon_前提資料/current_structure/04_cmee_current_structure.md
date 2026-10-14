@@ -1191,3 +1191,20 @@ Mashが2026-10-15 06:17 JSTにu261の追加を承認したため、`EMLIS_APPRAI
 既存relation-role qualifierを落とさず、選択済み三点・二関係を一つのwhole readingから通常`EmlisAppraisalContent`の`RELATIONAL_NONCOLLAPSE / PRESERVE_BOTH_ENDPOINTS`、appraised binding exact3/protected0へ渡す。`EmlisEvaluatedExperienceAppraisalContent v1`のexact2は不変。ReadingConsequenceは意味差分の担い手のまま、Reception文言や作者による第三命題の補充先にしない。未成立と過去評価の同時性を発明しない。新schema/registry/engine/checkerなし。
 
 relation qualifierはtransportとsource admissionを分け、raw/direct再構成の同値と実TENSION validatorを確認した。compositionの新armは両評価端点の明示appraisal qualifierをentry条件とし、既存received/reasonを先取りして起きたapplication回帰を修正。owner配置は全体01A末尾u262、商品経路はcurrent01末尾u262、途中失敗と最終実測は06／API handoff u262。最終評価187 PASS・application54 PASS・identity1 PASS、4保存/RNケースと旧checkpoint2件を確認し、historical fixture4組10rowは不変。STRUCTURE_MAP_DELTA_PRESENT、公開API/DB/RN・製品依存・他中核は不変、実装反映版はAPI `da6ee56beba26bbf0d89c734230f363ba794a9b8`（PR3）。対応する設計・地図・weekly差分は本commit（PR30）に収録する。両PRはDraft、未配置。今回CI成功は未確認で、local検査と区別する。**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了・0/3・candidate_ready=false・automatic_progression=false・未配置**を維持する。
+
+
+### u264 — 本人の明示理由を満足の対象へ結ぶ限定実装（2026-10-15 JST）
+
+Mashがu263のRule18 §11.3確認へ「進めていいよ」と承認した。`EMLIS_APPRAISAL_EXPLICIT_REASON_20261015 = APPROVED_FOR_BOUNDED_IMPLEMENTATION`。同一文に本人が肯定factとして明示した理由exact1、実行済み対象、肯定・無程度の満足（過去又は現在）を結ぶ限定追加を実装した。u253/u262承認も継続する。
+
+理由→満足は既存source-explicit `user_stated_cause`、対象→満足は既存 `evaluation_about_event` で保持する。private `EmlisThreadScopeRelationKind.SATISFACTION_REASON` を追加し、該当する `SourceConnectedScopeRelation` と `RelationDirectionRow` だけをschema1.1で識別する。既存ABOUT_TARGETは1.0、`ForegroundScopeRelationKind` exact4は不変。三端点のSELF・肯否・時点・modality・kind・同一証拠、二関係の証拠と方向、exact3／incident exact2をsource/carried両境界で検証する。一般causeをscopeへ昇格せず、ABOUTやcontrastへ偽装しない。
+
+選択されたwhole readingの二関係・三bindingから、通常 `EmlisAppraisalContent` の `MATERIAL_WEIGHT / RECEIVE_AS_MATERIAL`、appraised exact3／protected0を導出する。既存exact2評価内容型は不変。唯一のHuman Reception作者が本人の満足の拠り所を対象とともに文章化し、独立readerが三役割・本文・時点・選択binding・focal relationを再照合する。「分類が探しやすさを生んだ」という客観因果、唯一／最重要の理由、目的達成、成功・成長は補わない。別欄の独立行動はObservationに保持し、今回のReceptionへ混ぜない。
+
+新規prepareでは新しい意味からcheckpointを作る。既存checkpoint又は既発行質問の厳密再検証時だけ、今回の理由分解を無効にした旧投影を先に試し、全checkpoint同一を要求する。旧appraisal全体の抑制へ直行せず、同じ入力にある従来の評価を保持する。Q1の原本文経路もこの準備済み旧planを使う。未変更u263のQ3四件・別欄の既存評価併存一件・Q1一件で完全checkpoint同一を確認し、そのうち五件の旧本文／旧停止も一致した。既存historical fixtureを改変せず、外国checkpointは拒否する。
+
+STRUCTURE_MAP_DELTA_PRESENT。新production file・engine・checker・registry・serviceは追加しない。公開API/DTO/DB/SQL/RN・製品依存・Piece/Analysisは変更0。内部の理由relation契約には上記versioned分岐を追加したため「内部schema変更なし」とは記録しない。検査配置は既存 `ai/tests/test_cmee_emlis_result_appraisal.py` と現行 `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json`。歴史IM03 proofは不変。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 正式商品受入れ0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。今回の理由欠落改善を§9.2/9.4全体の完成へ換算しない。
+
+詳細は8/28設計・06／API handoff u264、全11ownerの位置は01A末尾u264。

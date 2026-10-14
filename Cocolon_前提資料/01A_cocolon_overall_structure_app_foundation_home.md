@@ -3093,3 +3093,29 @@ Mashは2026-10-15 06:17 JSTにu261限定提案を承認した。`EMLIS_APPRAISAL
 検査配置は既存`ai/tests/test_cmee_emlis_result_appraisal.py`（最終187 PASS、既存166＋新21）と`ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json`（現行identity1 PASS）。Q2/Q3 application54 PASS、合成4本文の実service＋隔離PGlite保存とNoAuthor restart GET/start・RN hook/modal履歴/再open一致を確認した。旧checkpoint2件は完全一致で旧意味・旧停止を保持し、既存historical fixture4組10rowは不変。新しいfresh prepareだけが新三点本文を作る。途中のapplication20 FAILとqualifier投影不一致は06／API handoff u262に記録した。新production file・公開API/DTO/DB/SQL/RN・意味schema・製品依存・Piece/Analysis変更なし。実装反映版はAPI `da6ee56beba26bbf0d89c734230f363ba794a9b8`（PR3）。対応する設計・地図・weekly差分は本commit（PR30）に収録する。両PRはDraft、未配置。今回CI成功は未確認で、local検査と区別する。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 0/3・candidate_ready=false・automatic_progression=false・未配置を維持し、構造成立を§9.2/9.4の商品完成へ換算しない。
+
+
+### u264 — 本人の明示理由を満足の対象へ結ぶ限定実装（2026-10-15 JST）
+
+Mashがu263のRule18 §11.3確認へ「進めていいよ」と承認した。`EMLIS_APPRAISAL_EXPLICIT_REASON_20261015 = APPROVED_FOR_BOUNDED_IMPLEMENTATION`。同一文に本人が肯定factとして明示した理由exact1、実行済み対象、肯定・無程度の満足（過去又は現在）を結ぶ限定追加を実装した。u253/u262承認も継続する。
+
+| 既存API owner（`ai/services/ai_inference/` 配下） | u264の責務差分 |
+|---|---|
+| `emlis_ai_grounded_observation_plan.py` | 同一文の理由・対象・満足を原文三範囲として認識し、理由→満足と対象→満足を証明。一つのReception dutyへ渡し、理由なしの旧投影も維持する。 |
+| `cocolon_meaning_experience_engine/contracts.py` | 私有SATISFACTION_REASONと該当direction row1.1、原因／結果role qualifierの運搬。ABOUT専用の例外を理由へ適用しない。 |
+| `cocolon_meaning_experience_engine/emlis_input_specific_meaning.py` | source/carried両境界で三端点・二関係・SELF・単一軸・同一証拠を検証し、理由row1.1をconfigurationへ保持する。 |
+| `cocolon_meaning_experience_engine/emlis_thread_projection.py` | sourceで証明済みの理由関係のみprivate scopeへ投影し、理由を独立requiredの行動と取り違えない。 |
+| `cocolon_meaning_experience_engine/emlis_stage1_composition.py` | 選択された二関係と三bindingからMATERIAL_WEIGHT／RECEIVE_AS_MATERIALの内容を導出する。 |
+| `emlis_ai_grounded_human_reception.py` | 選択binding／focalとsourceを照合し、満足の拠り所と対象を一つの受け取りへ文章化する。 |
+| `emlis_ai_grounded_observation_gate.py` | 作者を呼ばず本文の三役割・時点・選択binding・focalを読む。欠落、交換、否定、発明した因果を拒否する。 |
+| `emlis_ai_grounded_sentence_surface.py` | 既存本文inverseに今回の受容述語を保持する。新作者や新受理権限は持たない。 |
+| `cocolon_meaning_experience_engine/emlis_question.py` | 旧意味復元時だけ理由分解を無効にした原planを渡す。 |
+| `cocolon_meaning_experience_engine/emlis_answer_update.py` | 旧checkpoint／既発行質問を理由追加前の意味で厳密再検証し、その他の従来評価を維持する。 |
+| `cocolon_meaning_experience_engine/emlis_thread_engine.py` | Q1でも理由追加前の準備済みplanを使い、旧checkpointを現行意味で再生成しない。 |
+
+
+STRUCTURE_MAP_DELTA_PRESENT。新production file・engine・checker・registry・serviceは追加しない。公開API/DTO/DB/SQL/RN・製品依存・Piece/Analysisは変更0。内部の理由relation契約には上記versioned分岐を追加したため「内部schema変更なし」とは記録しない。検査配置は既存 `ai/tests/test_cmee_emlis_result_appraisal.py` と現行 `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json`。歴史IM03 proofは不変。
+
+最終の既存評価file **236 PASS（既存187＋新49）** とQ2/Q3 application **54 PASS**、計 **290 PASS・109.87秒・既存依存warning2**。現行shared-owner identity **1 PASS・22.98秒**。language `5226a02541b35153ffb5be8c70a8611545d483381f27a19898938be3310541b2`、runtime `9360829fb81c0b5615152b9b1b6f9274209545eba4ee0e8a12de396d65b352b5`。理由削除／差替え・独立行動非混入・対象外21例・三役割／時点／binding／focalの改変拒否・旧完全checkpoint6件を確認。実sourceのSOURCE_STATED_CAUSE候補と通常direct endpoint supportから既存final relation validatorもPASS。合成4本文を実service＋隔離PGliteへ保存し、event payload一致・NoAuthor restart GET/startのDTO完全一致、実RN hook/modalで履歴展開とclose/reopenの本文/event一致を各4件確認した。git diff --check成功。runtimeは既存Python3.12.14/PGlite0.5.8/React18.3.1を使用。外部AI呼出・新有料service・製品依存追加0。これらは本人実機／正式Product Readではない。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 正式商品受入れ0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。今回の理由欠落改善を§9.2/9.4全体の完成へ換算しない。

@@ -1154,3 +1154,20 @@ Mashの意味確認は思想資料§12.10へ保存。同じ限定承認内、STR
 既存Plan→thread投影→composition→通常appraisal exact3→Human Reception→独立readerの責務を更新する。全file配置は01A末尾u262、意味契約はcurrent04末尾u262。exact2評価型・単一作者・whole inverse replay・公開API/DB/RN・保存済み本文を読む経路は保持する。新しいengine/checker/schema/registryは作らない。STRUCTURE_MAP_DELTA_PRESENT。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 実Receptionは「結論は出ていないという点と切り分けて、当時の満足を、考えを言葉にできたことに向けられた充足として受け取りました。」となる。第三命題が充足の範囲を限定する一方、「満足を…充足として」という説明的な語義展開は残る。最終評価187 PASS・application54 PASS・identity1 PASS、合成4本文のSQL保存/NoAuthor restart GET/start/RN履歴・再openと旧checkpoint2件の旧意味保持を確認した。途中回帰と修正・実全文は06／API handoff u262、実装反映版はAPI `da6ee56beba26bbf0d89c734230f363ba794a9b8`（PR3）。対応する設計・地図・weekly差分は本commit（PR30）に収録する。両PRはDraft、未配置。今回CI成功は未確認で、local検査と区別する。0/3・candidate_ready=false・automatic_progression=false・未配置、既存共有17失敗・2 received＋2評価の初回gap・same100・本人実機・正式Product Readは残る。
+
+
+### u264 — 本人の明示理由を満足の対象へ結ぶ限定実装（2026-10-15 JST）
+
+Mashがu263のRule18 §11.3確認へ「進めていいよ」と承認した。`EMLIS_APPRAISAL_EXPLICIT_REASON_20261015 = APPROVED_FOR_BOUNDED_IMPLEMENTATION`。同一文に本人が肯定factとして明示した理由exact1、実行済み対象、肯定・無程度の満足（過去又は現在）を結ぶ限定追加を実装した。u253/u262承認も継続する。
+
+選択されたwhole readingの二関係・三bindingから、通常 `EmlisAppraisalContent` の `MATERIAL_WEIGHT / RECEIVE_AS_MATERIAL`、appraised exact3／protected0を導出する。既存exact2評価内容型は不変。唯一のHuman Reception作者が本人の満足の拠り所を対象とともに文章化し、独立readerが三役割・本文・時点・選択binding・focal relationを再照合する。「分類が探しやすさを生んだ」という客観因果、唯一／最重要の理由、目的達成、成功・成長は補わない。別欄の独立行動はObservationに保持し、今回のReceptionへ混ぜない。
+
+新規prepareでは新しい意味からcheckpointを作る。既存checkpoint又は既発行質問の厳密再検証時だけ、今回の理由分解を無効にした旧投影を先に試し、全checkpoint同一を要求する。旧appraisal全体の抑制へ直行せず、同じ入力にある従来の評価を保持する。Q1の原本文経路もこの準備済み旧planを使う。未変更u263のQ3四件・別欄の既存評価併存一件・Q1一件で完全checkpoint同一を確認し、そのうち五件の旧本文／旧停止も一致した。既存historical fixtureを改変せず、外国checkpointは拒否する。
+
+実Reception例：「必要な資料を探しやすくなった点に、資料を分類したことへの当時の満足の拠り所が見えます。」保存SQL→NoAuthor再読→既存RN hook/modal履歴・再openを通して本文/event一致を確認。本人実機ではない。
+
+STRUCTURE_MAP_DELTA_PRESENT。新production file・engine・checker・registry・serviceは追加しない。公開API/DTO/DB/SQL/RN・製品依存・Piece/Analysisは変更0。内部の理由relation契約には上記versioned分岐を追加したため「内部schema変更なし」とは記録しない。検査配置は既存 `ai/tests/test_cmee_emlis_result_appraisal.py` と現行 `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json`。歴史IM03 proofは不変。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 正式商品受入れ0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。今回の理由欠落改善を§9.2/9.4全体の完成へ換算しない。
+
+Observationに「満足した」が二度現れる説明的反復、現在形の「入力した時点での」という重い表現は残る。有限語形以外の理由や今回除外した意味契約は未実装。2 received＋2評価の初回gap、既存共有17失敗、same100、本人実機、正式Product Readも残る。新しい意味契約へ黙って広げず、次は今回の限定改善を10/17確認点へ反映し、既存の初回一体単位・受け取り内容の残件へ戻る。10/31・12/18とPiece/Analysis主枠は維持する。

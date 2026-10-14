@@ -6848,3 +6848,18 @@ Mashの意味確認は思想資料§12.10へ保存。同じ限定承認内、STR
 STRUCTURE_MAP_DELTA_PRESENT。既存7production ownerの責務差分と検査配置は01A末尾u262、意味の責務はcurrent04、商品経路はcurrent01、実測と残件は06／API handoff u262を参照する。新schema・registry・engine・checker・production file・公開API/DB/RN・製品依存・他中核の変更はない。exact2の評価内容型は不変で、三点は通常`EmlisAppraisalContent`のexact3/protected0を使う。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 最終評価187 PASS、Q2/Q3 application54 PASS、現行identity1 PASS。合成4本文のSQL保存・作者非依存のrestart GET/start・RN履歴/再open、捕獲した旧checkpoint2件の旧意味保持を確認した。説明的な語義展開は残り、§9.2/9.4全体の完成ではない。途中のapplication回帰と修正は06／API handoff u262へ記録。実装反映版はAPI `da6ee56beba26bbf0d89c734230f363ba794a9b8`（PR3）。対応する設計・地図・weekly差分は本commit（PR30）に収録する。両PRはDraft、未配置。今回CI成功は未確認で、local検査と区別する。0/3・candidate_ready=false・automatic_progression=false・未配置を維持する。
+
+
+### u264 — 本人の明示理由を満足の対象へ結ぶ限定実装（2026-10-15 JST）
+
+Mashがu263のRule18 §11.3確認へ「進めていいよ」と承認した。`EMLIS_APPRAISAL_EXPLICIT_REASON_20261015 = APPROVED_FOR_BOUNDED_IMPLEMENTATION`。同一文に本人が肯定factとして明示した理由exact1、実行済み対象、肯定・無程度の満足（過去又は現在）を結ぶ限定追加を実装した。u253/u262承認も継続する。
+
+理由→満足は既存source-explicit `user_stated_cause`、対象→満足は既存 `evaluation_about_event` で保持する。private `EmlisThreadScopeRelationKind.SATISFACTION_REASON` を追加し、該当する `SourceConnectedScopeRelation` と `RelationDirectionRow` だけをschema1.1で識別する。既存ABOUT_TARGETは1.0、`ForegroundScopeRelationKind` exact4は不変。三端点のSELF・肯否・時点・modality・kind・同一証拠、二関係の証拠と方向、exact3／incident exact2をsource/carried両境界で検証する。一般causeをscopeへ昇格せず、ABOUTやcontrastへ偽装しない。
+
+既存11production ownerの役割差分は01A末尾u264、商品経路はcurrent01、内部意味契約はcurrent04、実測と残件は06／API handoff u264。
+
+STRUCTURE_MAP_DELTA_PRESENT。新production file・engine・checker・registry・serviceは追加しない。公開API/DTO/DB/SQL/RN・製品依存・Piece/Analysisは変更0。内部の理由relation契約には上記versioned分岐を追加したため「内部schema変更なし」とは記録しない。検査配置は既存 `ai/tests/test_cmee_emlis_result_appraisal.py` と現行 `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json`。歴史IM03 proofは不変。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 正式商品受入れ0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。今回の理由欠落改善を§9.2/9.4全体の完成へ換算しない。
+
+Observationに「満足した」が二度現れる説明的反復、現在形の「入力した時点での」という重い表現は残る。有限語形以外の理由や今回除外した意味契約は未実装。2 received＋2評価の初回gap、既存共有17失敗、same100、本人実機、正式Product Readも残る。新しい意味契約へ黙って広げず、次は今回の限定改善を10/17確認点へ反映し、既存の初回一体単位・受け取り内容の残件へ戻る。10/31・12/18とPiece/Analysis主枠は維持する。

@@ -755,3 +755,20 @@ API `da6ee56beba26bbf0d89c734230f363ba794a9b8` を未変更で実行し、7合�
 前回u262のCI run38641247452は、同head `da6ee56beba26bbf0d89c734230f363ba794a9b8` でcompleted/successをfresh確認した。これは前回実装のCI結果であり、今回の本文改善・新規test成功ではない。
 
 初回理由scopeの補足: 理由自体も本人が現実の状態/変化として明示した肯定fact（過去又は現在）exact1へ限定する。条件・予定・願望・理由関係の否定は除外する。既存の対象/評価pairとは意味型を再利用する意味であり、理由を含む文全体を現在のparserが認識済みという主張ではない。理由込みのsource認識修正をこの提案へ含める。
+
+
+### 5.6.14 u264 — 本人が明示した満足理由の限定接続（2026-10-15追記）
+
+Mashがu263のRule18 §11.3確認へ「進めていいよ」と承認した。`EMLIS_APPRAISAL_EXPLICIT_REASON_20261015 = APPROVED_FOR_BOUNDED_IMPLEMENTATION`。同一文に本人が肯定factとして明示した理由exact1、実行済み対象、肯定・無程度の満足（過去又は現在）を結ぶ限定追加を実装した。u253/u262承認も継続する。
+
+理由と別欄行動がある旧本文のReceptionは「必要な資料を探しやすくなったので、資料を分類したことに満足したという変化を見過ごさず、受け止めています。植木に水をやったことを大切に思っています。」、行動を除くと「その変化を感じています。」だった。今回の実生成では理由が満足の具体的な拠り所となり、理由差替えで受け取る点が変わり、理由削除でその受け取りが消える。これはsourceに明示された意味の回復であり、理由引用＋固定文末の表現だけから商品完成とはしない。
+
+最終の既存評価file **236 PASS（既存187＋新49）** とQ2/Q3 application **54 PASS**、計 **290 PASS・109.87秒・既存依存warning2**。現行shared-owner identity **1 PASS・22.98秒**。language `5226a02541b35153ffb5be8c70a8611545d483381f27a19898938be3310541b2`、runtime `9360829fb81c0b5615152b9b1b6f9274209545eba4ee0e8a12de396d65b352b5`。理由削除／差替え・独立行動非混入・対象外21例・三役割／時点／binding／focalの改変拒否・旧完全checkpoint6件を確認。実sourceのSOURCE_STATED_CAUSE候補と通常direct endpoint supportから既存final relation validatorもPASS。合成4本文を実service＋隔離PGliteへ保存し、event payload一致・NoAuthor restart GET/startのDTO完全一致、実RN hook/modalで履歴展開とclose/reopenの本文/event一致を各4件確認した。git diff --check成功。runtimeは既存Python3.12.14/PGlite0.5.8/React18.3.1を使用。外部AI呼出・新有料service・製品依存追加0。これらは本人実機／正式Product Readではない。
+
+STRUCTURE_MAP_DELTA_PRESENT。新production file・engine・checker・registry・serviceは追加しない。公開API/DTO/DB/SQL/RN・製品依存・Piece/Analysisは変更0。内部の理由relation契約には上記versioned分岐を追加したため「内部schema変更なし」とは記録しない。検査配置は既存 `ai/tests/test_cmee_emlis_result_appraisal.py` と現行 `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json`。歴史IM03 proofは不変。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 正式商品受入れ0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。今回の理由欠落改善を§9.2/9.4全体の完成へ換算しない。
+
+Observationに「満足した」が二度現れる説明的反復、現在形の「入力した時点での」という重い表現は残る。有限語形以外の理由や今回除外した意味契約は未実装。2 received＋2評価の初回gap、既存共有17失敗、same100、本人実機、正式Product Readも残る。新しい意味契約へ黙って広げず、次は今回の限定改善を10/17確認点へ反映し、既存の初回一体単位・受け取り内容の残件へ戻る。10/31・12/18とPiece/Analysis主枠は維持する。
+
+承認・契約詳細は8/28設計u264、途中失敗と実本文は06／API handoff u264。構造は全体01/01A・current01/04、反映位置は07。
