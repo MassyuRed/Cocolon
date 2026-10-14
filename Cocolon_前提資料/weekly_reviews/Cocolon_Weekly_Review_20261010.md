@@ -648,3 +648,12 @@ Mashが「記録した限定変更で実装を進めてよろしいですか」�
 次は同じ承認内で対象＋評価から経験としての受け取り命題を具体化し、実本文と新評価を含む訂正撤回まで閉じる。same100全件、本人実機の保存往復、正式Product Readは未実施。未納得を解決待ちや将来の成長へ変えない。旧不採用試作は不変、今回の途中実装も商品候補の採用・公開可能とはしない。配置・稼働DB・本人データ・native build・merge・PR ready化0。
 
 10/17の本文差と残差、10/31の公開必須残差管理、12/18目標、Piece／Analysis主枠を維持する。終了日や工数は未実証であり、今回の検査成功で公開見通しを上積みしない。
+
+
+## 5.6.4 撤回の誤表示と旧途中保存の再開を修正 — 2026-10-14 JST
+
+GitHub指定の継続指示によりu253から再開し、同じ限定承認内でu254を実装。評価だけを撤回した際の残存行動が「現在の感覚」になる誤りと、原文全文の撤回で両端を特定できない問題を修正した。旧版のMEANING_UPDATE保存後の本文retryは、元sourceから旧意味を厳密再導出して同じcheckpointで再開する。旧Q2の真正な発行済み質問への新規回答も、新prefix/newcheckpointで進める。現行Q2のappraisal初回もPrepared Planと既存本文作者を一致させた。旧payloadの上書きやidentity検査の緩和は行わない。
+
+最終限定検査84PASS/193deselected。共有4fileは196PASS/3FAILで、3件はbaselineでも同じ失敗を再現。Q2/Q3旧pending初回/回答後4件、旧完成read2件、非appraisal pending2件を実service＋隔離DBで確認。旧Q2質問→新回答も保存/再read成功。撤回後4合成DTOは実RN hook/modalで現在本文・履歴・再open一致。前回64458e5のAPI CI成功も確認した。本人DB/native実機の実績へは換算しない。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、最初の一体修正は未完了。** 本人の満足を行為全体のよさへ広げる受け取り候補と、未納得を時間のずれとする候補は不採用。復唱を越える受け取り内容、評価の肯否訂正、対象だけ撤回して評価を残す経路、same100全件・本人実機・正式Product Readは残る。今回の修正を商品品質や公開見通しの上積みにしない。設計・全体地図01/01A・current01/04・06/API handoff u254へ責務と実測を同期。STRUCTURE_MAP_DELTA_PRESENT。10/17/10/31/12/18、Piece/Analysis主枠、未配置・merge/PR ready化0を維持する。

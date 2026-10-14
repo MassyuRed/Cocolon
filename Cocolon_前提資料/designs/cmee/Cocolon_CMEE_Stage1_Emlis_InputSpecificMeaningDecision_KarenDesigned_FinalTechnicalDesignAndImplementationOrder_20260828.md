@@ -2854,3 +2854,12 @@ Mashが「記録した限定変更で実装を進めてよろしいですか」�
 状態は BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。対象・本人評価・肯否・時点・継続・程度を意味から本文へ保持できたが、現在のReceptionは評価命題の再表現に留まり、§9.2の「別の単純化されたobjectと区別して何として受け取ったか」を閉じていない。分類名と「受け取りました」を加えたことを商品品質の完成へ換算しない。
 
 検証・未完了・再開位置は正本06／[API handoff u253](https://github.com/MassyuRed/mashos-api/blob/agent/cmee-v1a-i1sx-source-explicit-20260815/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)、latest weekly20261010 §5.6.3に同期する。
+
+
+### u254補足 — 評価の撤回と保存済み意味の再開（2026-10-14 JST）
+
+承認済み明示評価の限定変更に伴う整合修正。唯一の原文全文に一致する撤回は対象＋評価の両端へ適用し、部分引用や重複原文は保留する。評価のみを撤回した対象はfact/pastのままObservationへ残し、独立inverseでも現在感覚化を拒否する。
+
+保存済み意味はIDの比較を緩めず、既知のpre-appraisal投影を同じsourceから再導出し、旧checkpoint又は真正な旧質問のcanonical照合が成立する場合だけ再開する。旧Q2質問への新しい回答は新source prefixの意味checkpointを作る。本文と保存effective_plan_refは同じ選択済みPlanを使う。Q2の現行appraisalも既存thread realizerへ同じPrepared Planを渡す。private互換flagは公開DTO/意味checkpoint schemaへ追加しない。作者の追加や新エンジンではない。
+
+appraisal内容型v1・whole meaningの契約は不変。満足から経験全体のよさ、まだ未納得から時間のずれを導く候補は不採用。§9.2/9.4の経験としての受け取り内容は未完成。評価の肯否訂正と対象のみ撤回した評価の保持も残る。検証の実範囲と全file責務差分はcurrent01/04・06・API u254参照。PRODUCT_NOT_CLEARを維持する。
