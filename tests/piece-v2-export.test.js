@@ -28,8 +28,11 @@ function harness({os='ios', version=35, record=fixture()} = {}) {
   const FileSystem = {
     exists: async p => files.has(p),
     mkdir: async p => {calls.push(['mkdir',p]); if(files.has(p)) throw Error('EEXIST'); files.set(p,'directory');},
-    ls: async p => {calls.push(['ls',p]); return ['piece-old.png','foreign.png'];},
-    unlink: async p => { calls.push(['unlink',p]); if(state.cleanupError && p.startsWith('/cache/piece-export/')) throw Error('PRIVATE '+p); files.delete(p); },
+    ls: async p => {calls.push(['ls',p]); if(state.rawListWait) await state.rawListWait.promise;
+      if(state.rawListError) throw Error('PRIVATE '+p); return ['piece-old.png','foreign.png'];},
+    unlink: async p => { calls.push(['unlink',p]);
+      if(state.cleanupError && p.startsWith('/cache/piece-export/') || state.rawUnlinkError && p.startsWith('/cache/piece-capture/')) throw Error('PRIVATE '+p);
+      files.delete(p); },
     cp: async (a,b) => {calls.push(['cp',a,b]);files.set(b,'file');},
     stat: async p => ({type:files.get(p),size:100}),
     readFileChunk: async () => state.validPng ? header.toString('base64') : 'bad',
@@ -103,6 +106,38 @@ test('a file occupying the raw directory cannot be enumerated or deleted as a di
   const h=harness({os:'android'}); h.files.set('/cache/piece-capture','file');
   await failure(h.prepare());
   assert.equal(count(h,'ls'),0); assert.equal(count(h,'unlink'),0); assert.equal(count(h,'capture'),0);
+});
+for (const stage of ['rawListError','rawUnlinkError']) test(`failed raw cleanup at ${stage} recovers only on the next explicit preparation`,async()=>{
+  const h=harness(); h.state[stage]=true;
+  await assert.rejects(h.prepare(),e=>e.code==='PIECE_TEMPORARILY_UNAVAILABLE'&&!/PRIVATE|cache/.test(e.message));
+  assert.equal(count(h,'ls'),1); assert.equal(count(h,'capture'),0);
+  h.state[stage]=false;
+  await new Promise(r=>setImmediate(r));
+  assert.equal(count(h,'ls'),1); assert.equal(count(h,'capture'),0);
+  const job=await h.prepare();
+  assert.equal(count(h,'ls'),2); assert.equal(count(h,'capture'),0);
+  const asset=await job.capture(h.target()); await asset.dispose();
+  await h.prepare();
+  assert.equal(count(h,'ls'),2); assert.equal(count(h,'capture'),1);
+  assert.equal(h.calls.some(c=>c[0]==='unlink'&&c[1].endsWith('foreign.png')),false);
+});
+test('concurrent preparations share a failed cleanup and its later pending recovery before capture',async()=>{
+  const h=harness(); h.state.rawListWait=deferred(); h.state.rawListError=true;
+  const initial=Promise.all([failure(h.prepare()),failure(h.prepare())]);
+  await new Promise(r=>setImmediate(r));
+  assert.equal(count(h,'ls'),1); assert.equal(count(h,'capture'),0);
+  h.state.rawListWait.resolve(); await initial;
+  h.state.rawListWait=deferred(); h.state.rawListError=false;
+  let ready=0;
+  const retries=Promise.all([h.prepare(),h.prepare()].map(p=>p.then(job=>{ready++;return job;})));
+  await new Promise(r=>setImmediate(r));
+  assert.equal(count(h,'ls'),2); assert.equal(ready,0); assert.equal(count(h,'capture'),0);
+  h.state.rawListWait.resolve();
+  const [job]=await retries;
+  assert.equal(ready,2);
+  const asset=await job.capture(h.target()); await asset.dispose();
+  await h.prepare();
+  assert.equal(count(h,'ls'),2); assert.equal(count(h,'capture'),1);
 });
 test('bad saved hashes, unsupported platform and stale runtime never capture',async()=>{
   for(const mutate of [h=>h.record.piece_text_hash='0'.repeat(64), h=>h.state.current=false]) {

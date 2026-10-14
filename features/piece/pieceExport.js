@@ -41,7 +41,14 @@ async function prepareRawCache(root) {
       if (/^piece-[A-Za-z0-9-]+\.png$/.test(name)) await FileSystem.unlink(`${root}/${name}`);
     }
   })();
-  await rawCleanup;
+  const pending = rawCleanup;
+  try { await pending; }
+  catch (error) {
+    // Keep successful cleanup one-time and concurrent callers on one promise.
+    // A failed attempt may be retried only by a later explicit preparation.
+    if (rawCleanup === pending) rawCleanup = undefined;
+    throw error;
+  }
 }
 
 function sessionId() {
