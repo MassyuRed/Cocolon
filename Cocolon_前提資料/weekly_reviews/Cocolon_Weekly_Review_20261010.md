@@ -672,3 +672,12 @@ MashのGitHub指定による継続指示と添付の前回作業記録からu254
 既存5production ownerの限定変更。全体地図01/01A・current01/04を同期しSTRUCTURE_MAP_DELTA_PRESENT。same100・本人実機・正式Product Read、0/3・NOT_CLEAR・candidate_ready=falseを維持。10/17/10/31/12/18とPiece/Analysis主枠、未配置・本番DB/本人データ変更0・main merge/PR ready化0を維持する。
 
 API実装commit：`442c00630f23a0200679e15043788bdd1fc43550`（PR3）。
+
+
+## 5.6.6 複数評価の初回本文・撤回を修正 — 2026-10-14 JST
+
+同じ限定承認内のu256。1 received＋2評価で、同じ観測構文の反復と評価dutyの片方落ちによる初回停止を修正した。対象・肯否・元時点を各評価に保持し、片方/両対象の撤回、同回答内での評価訂正＋対象撤回、同値2評価にも対応。経験の受け取り内容形成は依然未成立で、最初の一体修正は未完了。
+
+評価131 PASS（既存107＋新24）、Q2/Q3 application54 PASS、保存4ケースのNoAuthor再read/replayとRN hook/modal再openを確認。native実機ではない。既存共有17失敗は今回未修正・未再実行、全回帰成功とはしない。前回u255 CI38560272380はsuccess。本変更後CIとは分ける。詳細は06／API handoff u256。
+
+次は明示「今は」の評価訂正を、既存時点contract内で原入力時点と回答時点に分け、保存済みPARTIALの互換も揃える。2 received＋2評価は初回LIMITED capability gapが残る。本文の深さ、same100・本人実機・正式Product Readも残件。0/3・PRODUCT_NOT_CLEAR・Draft/open/unmerged・automatic_progression=falseを維持。10/17・10/31・12/18、Piece/Analysis主枠の管理点は変えない。
