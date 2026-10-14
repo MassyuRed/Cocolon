@@ -1,5 +1,7 @@
 # CMEE V1-A — EmlisAI Observation Vertical 詳細設計
 
+> 2026-10-14 u253：明示評価と独立行動の限定変更を承認に基づき実装中。内部契約差分と品質未達は末尾、検証は06／API handoff u253。
+
 > 2026-09-11 最新Q4残件：複数回答をそれぞれの出来事・時点へ結び付け、既存の受け止めへ保持する実装を検証。最新結果は06/API handoff末尾「複数回答」節。商品NOT_CLEAR、既定OFF。
 
 > 2026-09-11 Q4前段階の記録：修正版v1.2のQ4コード実装・統合・公開接続準備と今回の検証を完了。公開用mode・単一作者・旧client/保存版互換・停止復旧・bootstrap/RNを接続し、初回/肯定的回答/当時訂正と回答名詞化・時点の不具合を修正した。API179 PASS、RNは保存済み56 PASS。新しい保存22ケースを全文確認し、既存100件は全読済みの前版と全record一致。長い再掲・定型性など商品品質はNOT_CLEARとして保持する。現行結果は正本06とAPI既存handoffの末尾Q4 continuation節。実DB・端末・実課金・Mash正式判断・公開操作は別作業、既定OFF。
@@ -3342,3 +3344,21 @@ weekly20260912 Rev2の9/16共通修正・9/18比較・9/19判断と2027年1月�
 完全な二節と原文全域、本人、節境界、閉じた名詞・活用形の証明が成立する場合だけ既存選択へ渡す。元のsource-order関係は証拠と端点を保持してbounded/shouldへ整合し、明示された独立性から因果を追加しない。二対象のどちらへ明示focusが向いても両方を保ち、独立行動は別責務にする。引用・他者・伝聞・条件・過去host・実施時期だけの表現・未完や追加節は、この二節組の採用範囲外である。
 
 観測と受け止めの両方で各hostを完全に保ち、丁寧形は述語の時制・相・否定を保つ連体形へ活用する。集合全体の自然さはNOT_CLEARで、長い復唱・名詞列・定型末尾は引き続き残る。
+
+## 2026-10-14 u253 — 明示評価と独立行動の限定的な意味集約
+
+Mashが「記録した限定変更で実装を進めてよろしいですか」に「進めていいよ」と明示承認したため、`EMLIS_APPRAISAL_COMPONENT_MEANING_20261014` は APPROVED_FOR_BOUNDED_IMPLEMENTATION。u252／weekly §5.6.2のNOT_APPROVEDは承認前の履歴であり、同じ実装を再承認待ちへ戻さない。承認は商品合格、配置、公開境界変更の承認ではない。
+
+初回範囲は原入力の明示満足／納得とその対象、および同時入力された本人の明示実行行動。既存の主体scope・行為statusを再利用し、他者、引用、予定、推量、条件、非実行、受益／使役受身、未完節をこの新経路へ採らない。評価を行為完了・良い変化・努力・成長へ昇格させない。
+
+### 限定的に更新する内部契約
+
+1. **§5.2.1：独立と同一対象の競合。** 原入力のsource-owned `ABOUT_TARGET` が立証され、他の必須内容も許可された本人の実行行動である場合だけ、根拠関係でつながる組ごとに既存比較を行う。異なる非接続対象のqualifierを入力全体の不一致へ変換しない。同じ対象／scopeの異なるqualifier、組内の不足・真の競合は従来どおり保持する。組間の因果・対比・同時性・「無関係と確定」を生成しない。
+2. **§8.2〜§8.4：全requiredを所有する全体exact1。** 組内のsource-connected configuration条件は保持する。各組の既存seedを一つのwhole candidateへ集約し、全bundleを欠落なく所有する。複数組のprivate selection／structureは`1.2`で、primary refはwhole candidate、supporting facetは空。単独primaryにするため感情・行動・欄名・入力順を優先しない。selected readingとsealed ReadingConsequenceは全体で各exact1、既存の組数上限とhard validityは維持する。
+3. **IM03差分証明。** 複数組では必須差分がexact1の所有bundleとそのconfigurationに属することを照合し、同じ組のsignatureでmutationの影響を証明する。別組のfactが残るだけで元対象のfact削除をnoopへ隠さない。foreign／重複owner／所有外configurationを拒否し、全体readingを増やさずnoop検査も弱めない。
+4. **§9.3：private versioned content arm。** `EmlisEvaluatedExperienceAppraisalContent`（`cocolon.cmee.emlis.evaluated_experience_appraisal.v1`）を追加する。旧`EmlisAppraisalContent`の6field・canonical bytesを変えず、対象／評価のexact2 bindingと焦点relation、target kind、満足／納得、肯否、評価時点、継続、明示できた形、程度を保持する。protected bindingsはexact0。manifestはv2／logical70。新型を根拠対を失う旧coalescenceへ混ぜない。
+5. **sourceから作者までの所有。** opt-inのsituation viewは`1.1`で、許可relation refsをPlanと独立照合する。source codeは既存qualifier経路で運び、compositionで選択済みconfiguration・endpointを結びつける。Human Receptionが唯一の作者で、本文inverseは作者を呼び直さず対象・評価・時点等を照合する。再ID付与で内容を書き換えてもsourceと不一致なら拒否する。これらの技術成立は§9.2の完成を意味しない。
+
+公開API／DTO／DB／RN、source許可、課金、privacy、外部AI禁止は不変。新service・新production file・新製品依存・migration・deploy・mergeはない。保存済みOBSERVATIONの本文は再生成せず読む。旧版で途中まで保存されたMEANING_UPDATE checkpointを新版で再試行する互換は未保証であり、保存済み本文read成功と混同しない。
+
+状態は BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。対象・本人評価・肯否・時点・継続・程度を意味から本文へ保持できたが、現在のReceptionは評価命題の再表現に留まり、§9.2の「別の単純化されたobjectと区別して何として受け取ったか」を閉じていない。分類名と「受け取りました」を加えたことを商品品質の完成へ換算しない。

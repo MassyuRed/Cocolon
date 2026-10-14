@@ -22,6 +22,8 @@ production_runtime_effect: 0
 automatic_progression: false
 ---
 
+> 2026-10-14 u253：既存CMEE内の明示評価＋独立行動のcomponent集約を限定承認に基づき追加。全体reading exact1・source制約を保持し、Reception品質は未完了。
+
 
 ## 2026-10-03 — Analysis V1-D offline consumer
 
@@ -1094,3 +1096,15 @@ Q1・Q2・Q3のコード実装を完了として記録し、次はQ4の実装統
 ## 2026-09-11 Q4 — 現在の接続
 
 Q4の変更file・直接変更しない影響ownerは[01 EmlisAI地図のQ4節](01_emlis_ai_current_structure.md)に集約。bootstrapでreader、server modeでwriterを選び、共有作者へ明示EMLIS_APPLICATIONを渡す。停止は保存済み本文と本人の訂正を保持するread_only。旧I5への単純切戻しを回復としない。原入力保存・国家dispatchと他中核の責務は分離したまま、実装/本文検証を既存PR3/30で継続する。
+
+## 2026-10-14 u253 — 原入力の明示評価を保持する限定契約
+
+Mashが「記録した限定変更で実装を進めてよろしいですか」に「進めていいよ」と明示承認したため、`EMLIS_APPRAISAL_COMPONENT_MEANING_20261014` は APPROVED_FOR_BOUNDED_IMPLEMENTATION。u252／weekly §5.6.2のNOT_APPROVEDは承認前の履歴であり、同じ実装を再承認待ちへ戻さない。承認は商品合格、配置、公開境界変更の承認ではない。
+
+初回範囲は原入力の明示満足／納得とその対象、および同時入力された本人の明示実行行動。既存の主体scope・行為statusを再利用し、他者、引用、予定、推量、条件、非実行、受益／使役受身、未完節をこの新経路へ採らない。評価を行為完了・良い変化・努力・成長へ昇格させない。
+
+source-connectedな組内の意味形成を保ち、独立組を消さない全体readingを各exact1のselected reading／sealed consequenceで扱う。view1.1／複数組selection1.2とversioned appraisal armはprivate限定。全required、同一対象の競合、source照合、唯一のHuman Reception作者、Route Aを保持する。責務と全変更fileは[current01のu253節](01_emlis_ai_current_structure.md)、規範は8/28設計末尾と詳細02。
+
+状態は BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。対象・本人評価・肯否・時点・継続・程度を意味から本文へ保持できたが、現在のReceptionは評価命題の再表現に留まり、§9.2の「別の単純化されたobjectと区別して何として受け取ったか」を閉じていない。分類名と「受け取りました」を加えたことを商品品質の完成へ換算しない。
+
+STRUCTURE_MAP_DELTA_PRESENT（既存owner内のcontract責務差分、runtime配置不変）。Piece／Analysisの入力許可・保存契約を変えず、共有回帰の既知失敗と新差分を区別する。旧保存済み本文readは不変、旧未完checkpointの新版再試行は未保証。公開・配置・商品合格へ自動進行しない。

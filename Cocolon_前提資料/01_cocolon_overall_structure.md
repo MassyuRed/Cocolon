@@ -6739,3 +6739,27 @@ Q1・Q2・Q3のコード実装を完了として記録し、次はQ4の実装統
 /app/bootstrap → AppRuntimeContext → Input/Historyのthread readerを接続。serverのlegacy/development/active/read_onlyで生成経路を一つ選び、旧clientへは保存済みcurrent本文だけを旧comment_textへ返す。停止中も本人の回答・意味訂正・履歴を保持する。RootNavigatorはuser IDでprivate tabを再作成し、InputScreenの送信/preview/publish/cancelは開始ownerと認証tokenのsessionを照合する。late responseは旧画面へ反映しない。
 
 元emotions保存 → 国家fanout → Emlis観測の順と、件数・花・通知・Astor・Piece/Analysis/TodayQuestionの責務は保持する。回答・続行・frameは新規感情入力ではない。変更fileと本文確認した影響先の正確な役割表は[current_structure/01 のQ4節](current_structure/01_emlis_ai_current_structure.md)。Q4のAPI/RN実装とローカル検証を、稼働DB・端末・課金・商品合格・公開へ換算しない。
+
+## 2026-10-14 u253 — Emlis承認済み限定変更の地図差分
+
+Mashが「記録した限定変更で実装を進めてよろしいですか」に「進めていいよ」と明示承認したため、`EMLIS_APPRAISAL_COMPONENT_MEANING_20261014` は APPROVED_FOR_BOUNDED_IMPLEMENTATION。u252／weekly §5.6.2のNOT_APPROVEDは承認前の履歴であり、同じ実装を再承認待ちへ戻さない。承認は商品合格、配置、公開境界変更の承認ではない。
+
+既存の ObservationPlan → thread projection → input-specific meaning → Stage1内容投影 → 唯一のHuman Reception作者 → Sentence Surface／独立inverse → 保存済み本文read の配置を維持し、明示評価と独立行動を保持する内部contractを限定更新した。STRUCTURE_MAP_DELTA_PRESENT。新production file／service／公開routeは0。
+
+| 既存owner（API `ai/services/ai_inference/`以下） | 今回の限定責務差分 |
+|---|---|
+| `emlis_ai_grounded_observation_plan.py` | 原入力の明示評価と対象のsource-owned関係、既存主体／行為statusによる非実行等の除外、独立行動の保持。 |
+| `cocolon_meaning_experience_engine/emlis_thread_projection.py` | 許可された対象付き評価＋本人実行行動だけcomponent契約へ入り、canonical Planとの照合を行う。 |
+| `cocolon_meaning_experience_engine/emlis_input_specific_meaning.py` | 同一対象の競合を保ち、独立組を全requiredの一つのwhole readingへ集約する。 |
+| `cocolon_meaning_experience_engine/contracts.py` | 私有versioned appraisal、全bundle所有、bundle-local difference witnessと独立検証。 |
+| `cocolon_meaning_experience_engine/emlis_stage1_composition.py` | 選択済み対象と評価をtyped Reception内容へ投影し、現行manifestを更新する。 |
+| `cocolon_meaning_experience_engine/emlis_stage1_response.py` | 同じ選択済みconfigurationと候補からReception内容を再導出して照合する。 |
+| `emlis_ai_grounded_human_reception.py` | typed評価の対象・肯否・時点・程度を唯一の作者で文章化する。経験の受け取り内容は未完成。 |
+| `emlis_ai_grounded_sentence_surface.py` | 元評価関係を回答時点の評価へ変換せずObservationへ残す。 |
+| `emlis_ai_grounded_observation_gate.py` | 対象・主体・肯否・時点・程度を本文から読み、sourceと選択済み内容へ独立照合する。 |
+
+検査配置：新規`ai/tests/test_cmee_emlis_result_appraisal.py`、既存`ai/tests/test_cmee_v1a_i1sx_contracts.py`、現行snapshot`ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json`。歴史的IM03 proofは変更しない。保存／DTO／RN表示のownerは既存`emlis_thread_service.py`・`emlis_thread_store.py`・`screens/input/useEmlisThread.js`・`screens/input/EmlisThreadModal.js`のままでsource変更なし。
+
+状態は BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。対象・本人評価・肯否・時点・継続・程度を意味から本文へ保持できたが、現在のReceptionは評価命題の再表現に留まり、§9.2の「別の単純化されたobjectと区別して何として受け取ったか」を閉じていない。分類名と「受け取りました」を加えたことを商品品質の完成へ換算しない。
+
+設計の規範は8/28文書末尾と詳細02、詳細地図はcurrent_structure/01・04、検証と残件は06／API handoff u253。原入力保存・国家fanout・件数・花・通知・Astor・Piece／Analysis／TodayQuestionの責務は不変。

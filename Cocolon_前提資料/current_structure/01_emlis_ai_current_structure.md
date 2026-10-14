@@ -19,6 +19,8 @@ current_product_read_state: "EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFI
 candidate_ready: false
 ---
 
+> 2026-10-14 u253：明示評価＋独立行動の承認済み限定実装WIP。最新責務差分は末尾。未配置・商品NOT_CLEAR、保存済み本文readと合成RN表示のみ確認。
+
 
 ## 2026-10-10 — 本人実機の本文表示を確認、内容品質は不合格
 
@@ -1044,3 +1046,28 @@ Human Reception作者、thread store/API、Q2/Q3 SQL、RN current readerは既�
 
 STRUCTURE_MAP_DELTA_NONE。owner/file graph、新production file、renderer、source grammar、公開wire、質問／回答の採用条件、RN、保存、他中核・国家システムへのsource許可は同じ。2,573件の必須検査とsame100、保存329ケース616状態の最終結果、旧文面検査の失敗、未解消品質は[API既存引継ぎ](https://github.com/MassyuRed/mashos-api/blob/d3f67852e5f29a5713a507eece67d4dd6291eb1e/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)および正本06の同日節に保持する。変更した保存4件は問いのない初回FINALであり、回答後理解の改善とは呼ばない。商品NOT_CLEAR、Draft／既定OFF。
 
+## 2026-10-14 u253 — 承認済み限定実装の現在地
+
+Mashが「記録した限定変更で実装を進めてよろしいですか」に「進めていいよ」と明示承認したため、`EMLIS_APPRAISAL_COMPONENT_MEANING_20261014` は APPROVED_FOR_BOUNDED_IMPLEMENTATION。u252／weekly §5.6.2のNOT_APPROVEDは承認前の履歴であり、同じ実装を再承認待ちへ戻さない。承認は商品合格、配置、公開境界変更の承認ではない。
+
+初回範囲は原入力の明示満足／納得とその対象、および同時入力された本人の明示実行行動。既存の主体scope・行為statusを再利用し、他者、引用、予定、推量、条件、非実行、受益／使役受身、未完節をこの新経路へ採らない。評価を行為完了・良い変化・努力・成長へ昇格させない。
+
+| 既存owner（API `ai/services/ai_inference/`以下） | 今回の限定責務差分 |
+|---|---|
+| `emlis_ai_grounded_observation_plan.py` | 原入力の明示評価と対象のsource-owned関係、既存主体／行為statusによる非実行等の除外、独立行動の保持。 |
+| `cocolon_meaning_experience_engine/emlis_thread_projection.py` | 許可された対象付き評価＋本人実行行動だけcomponent契約へ入り、canonical Planとの照合を行う。 |
+| `cocolon_meaning_experience_engine/emlis_input_specific_meaning.py` | 同一対象の競合を保ち、独立組を全requiredの一つのwhole readingへ集約する。 |
+| `cocolon_meaning_experience_engine/contracts.py` | 私有versioned appraisal、全bundle所有、bundle-local difference witnessと独立検証。 |
+| `cocolon_meaning_experience_engine/emlis_stage1_composition.py` | 選択済み対象と評価をtyped Reception内容へ投影し、現行manifestを更新する。 |
+| `cocolon_meaning_experience_engine/emlis_stage1_response.py` | 同じ選択済みconfigurationと候補からReception内容を再導出して照合する。 |
+| `emlis_ai_grounded_human_reception.py` | typed評価の対象・肯否・時点・程度を唯一の作者で文章化する。経験の受け取り内容は未完成。 |
+| `emlis_ai_grounded_sentence_surface.py` | 元評価関係を回答時点の評価へ変換せずObservationへ残す。 |
+| `emlis_ai_grounded_observation_gate.py` | 対象・主体・肯否・時点・程度を本文から読み、sourceと選択済み内容へ独立照合する。 |
+
+検査配置：新規`ai/tests/test_cmee_emlis_result_appraisal.py`、既存`ai/tests/test_cmee_v1a_i1sx_contracts.py`、現行snapshot`ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json`。歴史的IM03 proofは変更しない。保存／DTO／RN表示のownerは既存`emlis_thread_service.py`・`emlis_thread_store.py`・`screens/input/useEmlisThread.js`・`screens/input/EmlisThreadModal.js`のままでsource変更なし。
+
+内部contract／既存ownerの責務差分を明示するため STRUCTURE_MAP_DELTA_PRESENT。新しい実行service・作者・経路・production fileはない。全体地図01／01AとCMEE current04へ同じ差分を同期。
+
+状態は BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。対象・本人評価・肯否・時点・継続・程度を意味から本文へ保持できたが、現在のReceptionは評価命題の再表現に留まり、§9.2の「別の単純化されたobjectと区別して何として受け取ったか」を閉じていない。分類名と「受け取りました」を加えたことを商品品質の完成へ換算しない。
+
+旧未完checkpointの新版再試行・same100全件・本人実機の保存往復・正式商品受入れは未確認。詳細検証と次の作業は06／API handoff u253。
