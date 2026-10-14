@@ -40484,3 +40484,11 @@ API作業候補は [44269290](https://github.com/MassyuRed/mashos-api/commit/442
 製品sourceはAPI44269290のu260のまま。今回の製品コード/本文改善0、BLOCKER_NARROWED / PRODUCT_NOT_CLEAR。三命題のsource認識不足と、現component許可・relation qualifierの不足を分離した。元sourceに結び付く仮Planでも既存条件では候補0/LIMITEDだった。実測はAPI既存handoff u261、限定提案は8/28設計末尾u261、進行は06 u261、最新weekly20261010 §5.6.11。
 
 明示対比で評価につながる未成立事実exact1を追加する案はPROPOSED_NOT_APPROVED。既存u253承認は継続し、今回の範囲追加だけをRule18 §11.3に従って判断対象にする。満足/納得の定義を再確認しない。前回API CI run38575084729は同head44269290でsuccess。STRUCTURE_MAP_DELTA_NONE・新production file/API/DB/RN/依存変更0、初回単位未完了・0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+## u262 — 未成立factを含む限定変更の承認と実装（2026-10-15 JST）
+
+2026-10-15 06:17 JST、Mashがu261提案に「うん、進めて」と承認。`EMLIS_APPRAISAL_CONNECTED_UNFINISHED_CONTEXT_20261014 = APPROVED_FOR_BOUNDED_IMPLEMENTATION`。同一文の未成立fact・対象・肯定無程度満足を三点で保持し、ABOUT_TARGET＋CONTRASTから通常appraisal exact3/protected0へ渡す。exact2評価型・公開契約は不変。未成立の現在と満足の過去／現在を区別し、入力外の同時性・成功・進歩を足さない。
+
+構造差分は全体01/01A・current01/04、承認は8/28設計末尾u262、進行と実測は06／API handoff u262、最新weekly20261010 §5.6.12。STRUCTURE_MAP_DELTA_PRESENT。最終評価187 PASS・application54 PASS・identity1 PASS、合成4保存本文のNoAuthor restart GET/startとRN履歴/再open、旧checkpoint2件の旧意味保持を確認した。途中application20 FAILはu261 baselineとの比較で今回回帰と確定し、新composition entryを明示評価へ限定して修正した。実装反映版はAPI `da6ee56beba26bbf0d89c734230f363ba794a9b8`（PR3）。対応する設計・地図・weekly差分は本commit（PR30）に収録する。両PRはDraft、未配置。今回CI成功は未確認で、local検査と区別する。System ContextのPUBLICATION_RECOVERY_AMBIGUOUSを原典直接確認で補い、刷新成功とは扱わない。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了・0/3・candidate_ready=false・automatic_progression=false・未配置**。第三命題が充足の範囲を限定する一方、説明的な語義展開は残る。新schema/registry/engine/checker・公開API/DB/RN・製品依存・他中核の変更はなく、既存品質残件と10/17・10/31・12/18、Piece/Analysis主枠を維持する。

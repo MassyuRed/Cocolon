@@ -1183,3 +1183,11 @@ Mashの意味確認は思想資料§12.10へ保存。同じ限定承認内、STR
 検査配置は既存 `ai/tests/test_cmee_emlis_result_appraisal.py` と現行shared owner identity fixture。新production file/service、公開API/DTO/DB/SQL/RN、意味checkpoint schema、依存、他中核は不変。技術検証の詳細は06／API handoff u260。166評価検査・54 application検査、合成7保存本文とRN hook/modal再openを確認した（native実機ではない）。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 今回は評価語を本人内の状態へ展開したNORMAL限定候補であり、四区分propertyだけでevent内容やReadingConsequenceを新たに解釈したとはしない。肯定の経験化・否定の併記には定義展開／関係反復が残る。§9.2/9.4の主観差分の完成ではない。目的・未完了の明示入力を活かせない例、同memo receivedで別行動へ焦点が移る例、2 received＋2評価の初回gap、既存共有17失敗・same100・本人実機・正式Product Readは残る。0/3・candidate_ready=false・automatic_progression=false・未配置を維持。
+
+### u262 — 明示対比を持つ評価componentの限定追加（2026-10-15 JST）
+
+Mashが2026-10-15 06:17 JSTにu261の追加を承認したため、`EMLIS_APPRAISAL_CONNECTED_UNFINISHED_CONTEXT_20261014 = APPROVED_FOR_BOUNDED_IMPLEMENTATION`。原入力の未成立fact（present/negative）、対象event（past/fact）、満足（positive/unmarked、past又はpresent）をsource範囲とABOUT_TARGET＋CONTRASTで結ぶ。未成立fact exact1以外の独立requiredは本人実行行動だけとする。
+
+既存relation-role qualifierを落とさず、選択済み三点・二関係を一つのwhole readingから通常`EmlisAppraisalContent`の`RELATIONAL_NONCOLLAPSE / PRESERVE_BOTH_ENDPOINTS`、appraised binding exact3/protected0へ渡す。`EmlisEvaluatedExperienceAppraisalContent v1`のexact2は不変。ReadingConsequenceは意味差分の担い手のまま、Reception文言や作者による第三命題の補充先にしない。未成立と過去評価の同時性を発明しない。新schema/registry/engine/checkerなし。
+
+relation qualifierはtransportとsource admissionを分け、raw/direct再構成の同値と実TENSION validatorを確認した。compositionの新armは両評価端点の明示appraisal qualifierをentry条件とし、既存received/reasonを先取りして起きたapplication回帰を修正。owner配置は全体01A末尾u262、商品経路はcurrent01末尾u262、途中失敗と最終実測は06／API handoff u262。最終評価187 PASS・application54 PASS・identity1 PASS、4保存/RNケースと旧checkpoint2件を確認し、historical fixture4組10rowは不変。STRUCTURE_MAP_DELTA_PRESENT、公開API/DB/RN・製品依存・他中核は不変、実装反映版はAPI `da6ee56beba26bbf0d89c734230f363ba794a9b8`（PR3）。対応する設計・地図・weekly差分は本commit（PR30）に収録する。両PRはDraft、未配置。今回CI成功は未確認で、local検査と区別する。**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了・0/3・candidate_ready=false・automatic_progression=false・未配置**を維持する。

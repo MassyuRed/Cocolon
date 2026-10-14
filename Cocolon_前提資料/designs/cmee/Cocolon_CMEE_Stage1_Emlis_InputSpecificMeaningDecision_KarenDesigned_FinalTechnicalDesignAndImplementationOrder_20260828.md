@@ -2886,3 +2886,15 @@ u253の「本文inverseは作者を呼び直さず」は独立した節readerの
 内容の目標は、結論の未成立を保ち、言葉にできた対象へ限った充足として経験を受け取ること。結論/言語化の達成目標や同時性を発明しない。第三命題削除・評価対象変更・肯否/種別変更で意味と本文への寄与を検証する。肯定満足用の読みを否定・未納得へ流用しない。旧checkpoint、保存本文非再生成、必要なSQL/RN互換も同じ単位で確認する。§9.2/9.4、単一作者/独立reader、公開API/DB/RN、外部AI禁止、品質/受入条件は不変。
 
 追加費用/外部service/本人操作は0を予定。実装工数・完成日は未確定。最初の実生成でも定義展開/関係反復に留まる場合は完成扱いせず、同じ修辞調整を反復しない。PRODUCT_NOT_CLEAR・初回単位未完了を維持する。
+
+### u262 承認 — 評価と明示的につながる未成立事実（2026-10-15 JST）
+
+2026-10-15 06:17 JST、Mashがu261の「評価と明示的につながる未成立の事実一つまで読み取る範囲を広げる」限定変更に「うん、進めて」と回答した。`EMLIS_APPRAISAL_CONNECTED_UNFINISHED_CONTEXT_20261014 = APPROVED_FOR_BOUNDED_IMPLEMENTATION`。u261のPROPOSED_NOT_APPROVEDは承認前の履歴となる。u253承認・満足/納得の意味確認も継続し、承認を取り直さない。
+
+初回実装は、同一文の明示対比により結ばれた未成立fact exact1（present、negative）、本人の実行済み対象event（past、fact）、肯定・無程度の満足（past又はpresent）のexact3に限定する。三つのsource範囲とABOUT_TARGET＋CONTRASTを選択前に所有し、別の独立requiredは本人実行行動だけとする。否定満足・納得・程度付き評価・任意の隣接stateへ今回の三点読みを広げない。
+
+u261案どおり、既存通常`EmlisAppraisalContent`で三binding・protected0・焦点対比を保持する。exact2の評価内容型・schema・registryを変更しない。選択済みconfigurationと既存role qualifierから内容を導き、Human Receptionを唯一の作者とする。独立readerは三点・対象・肯否・時点・対比を照合し、whole inverseのplan-only replayも保持する。ReadingConsequenceへReception文言を入れない。
+
+入力に明示された未成立の点と対象へ向く充足を区別することが内容目標である。現在の未成立を過去の満足時点へ移し、同時性を足す表現は採らない。達成目標・成功・進歩・将来解決を発明しない。source/body両側の片側削除・対象/肯否/種別/時点対照、旧checkpointと保存後非再生成・必要なSQL/RN確認を同じ単位で扱う。新engine/checker・公開API/DB/RN・外部AI・製品依存・deploy/mergeなし。
+
+既存7ownerの限定実装後、評価187 PASS・application54 PASS・identity1 PASS、合成4本文のSQL保存／NoAuthor restart GET/start／RN再表示、旧checkpoint2件の厳密保持を確認した。途中のapplication回帰とqualifier不一致も修正し、実測と未達は06／API handoff u262へ記録する。第三命題が充足の範囲を限定する内容差はあるが、説明的な語義展開が残る。実装反映版はAPI `da6ee56beba26bbf0d89c734230f363ba794a9b8`（PR3）。対応する設計・地図・weekly差分は本commit（PR30）に収録する。両PRはDraft、未配置。今回CI成功は未確認で、local検査と区別する。**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了・0/3・candidate_ready=false・automatic_progression=false・未配置**を維持し、§9.2/9.4と商品受入れの条件を弱めない。

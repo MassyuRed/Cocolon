@@ -1,6 +1,6 @@
 # CMEE V1 — Implementation Order / Migration / Verification 詳細設計
 
-> 最新Emlisは末尾u261の未成立事実を含む限定変更案（未承認・未実装）。製品sourceはu260、u253の既存承認は継続。商品品質未完了。直近Analysisはu250。
+> 最新Emlisは末尾u262の未成立事実を含む限定変更（Mash承認済み・限定実装と検証済み、GitHub反映pending）。u253の既存承認は継続。商品品質未完了。直近Analysisはu250。
 
 > 最新の内容修正は末尾 **u250（2026-10-13 JST・未配置）**。既知修飾が重なる話者の引用と本人の独立内容を区別する不整合を修正。生成全文・検証・残件は同節とAnalysis current03を参照。
 
@@ -17769,3 +17769,23 @@ API実装：[44269290](https://github.com/MassyuRed/mashos-api/commit/44269290ff
 `EMLIS_APPRAISAL_CONNECTED_UNFINISHED_CONTEXT_20261014` は未承認の限定案。肯定・無程度の満足と対象へ同一文の明示対比でつながる未成立fact exact1だけを追加し、独立した他requiredは本人実行行動限定のままにする。既存通常appraisal・接続configuration・relation qualifier・単一作者/独立readerを用い、exact2評価型や公開契約を広げない。具体的なowner、三点保持と片側削除/対象/肯否/時点対照、旧checkpointと保存/RN互換、停止条件は8/28設計末尾u261提案とAPI handoff u261。Rule18 §11.3とu253の範囲を越える追加だけをMashの判断へ提示し、既存承認は取り直さない。
 
 前回u260 API run38575084729は同head44269290でsuccessを確認。今回の検査へ加算しない。STRUCTURE_MAP_DELTA_NONE、製品/test/fixture/API/DB/RN/依存変更0、未配置/Draft/open/unmerged。既存共有17失敗・2 received＋2評価の初回gap・same100・本人実機・正式Product Readは残る。0/3・candidate_ready=false・automatic_progression=false、10/17・10/31・12/18とPiece/Analysis主枠を維持する。
+
+## u262 — 承認済みの未成立fact＋対象＋満足を実装（2026-10-15 JST）
+
+2026-10-15 06:17 JST、Mashがu261の限定変更へ「うん、進めて」と承認した。`EMLIS_APPRAISAL_CONNECTED_UNFINISHED_CONTEXT_20261014 = APPROVED_FOR_BOUNDED_IMPLEMENTATION`。u261の未承認記録は提案当時の履歴。既存u253承認と満足／納得の意味確認も継続し、再承認待ちへ戻さない。
+
+source範囲のある未成立fact（present/negative）、本人の対象event（past/fact）、肯定無程度の満足（past/present）を同一文のABOUT_TARGET＋明示CONTRASTから三点として保持する。別の独立requiredは本人実行行動限定。選択済みconfigurationとrelation-role qualifierを通常appraisal exact3/protected0へ通し、未成立の点と満足対象を区別した受け取りを単一作者・独立readerへ接続する。exact2評価内容型・意味schema・registry・公開API/DB/RNは不変。内容や同時性をsource外から加えず、未成立を知識不足／本人の不能、満足を成功／進歩へ変えない。
+
+既存7production ownerの責務差分は全体01/01A・current01/04に同期（STRUCTURE_MAP_DELTA_PRESENT）。新engine/checker/production file・製品依存・外部service・稼働DB/本人データ・配置/merge変更なし。System Context prepareは`PUBLICATION_RECOVERY_AMBIGUOUS`（markerのない残余publication状態）で失敗し、原典の直接確認へfallbackした。refresh成功とは扱わない。
+
+最終評価suiteは **187 PASS（既存166＋新21、39.71秒）**、Q2/Q3 applicationは **54 PASS（70.33秒、warnings2）**、現行shared owner identityは **1 PASS（20.63秒）**。source7owner・既存評価test・現行identity fixtureを更新した。新しいregistry/schema/製品依存はない。実TENSION validatorとraw/direct qualifier再構成の同値も確認した。過去u260/261の成功を今回の新検証へ加算しない。
+
+実service＋隔離PGliteで四例（独立行動あり/なし、満足の現在形、対象差替）を保存し、event payloadの本文一致、作者を禁止したrestart GET/startのDTO完全一致を確認した。保存DTOを既存RN hook/modalで読み、履歴展開・close/reopen後の本文/event id一致を4件確認。native実機・正式Product Readではない。未変更u261から捕獲した旧checkpoint2件は完全一致で旧意味・旧停止を維持し、新三点本文へ密かに更新しない。fresh prepareだけが新base/新checkpointで新意味を作る。foreign checkpointを拒否し、既存historical fixture4組10rowは変更しない。
+
+途中のapplication検査は20 FAIL/34 PASSだった。同一runtimeの未変更u261 baselineは54 PASS（72.28秒）で、u262の回帰と確定した。新composition armが既存received/reasonのABOUT_TARGETを先取りしたため、両端の明示appraisal qualifierをentry条件へ限定して修正。代表4件を再確認後、上記54件全体を再実行した。contractsのqualifierもraw/direct再構成で消える属性へtransport条件が依存していた不一致を、運搬とsource admissionの分離で修正した。最初の正例testにあった全unknown境界0の過剰条件は、epistemic unknown不付与の検査へ訂正し、未成立factの保持検証は維持した。これらを既存失敗やruntime差へ転嫁しない。
+
+保存された実Receptionは「結論は出ていないという点と切り分けて、当時の満足を、考えを言葉にできたことに向けられた充足として受け取りました。」。独立行動なしでも同じ受け取りを保ち、現在形評価は「入力した時点での満足」、対象変更は「資料を分類できたことに向けられた充足」へ変わる。Observationは三命題と独立行動を保ち、時点の異なる命題を「同時にあります」で結ばない。本文全体と境界対照はAPI handoff u262に記録した。第三命題が充足の範囲を結論成立へ広げない内容差はあるが、「満足を…充足として」という説明的な語義展開は残る。限定生成成立を§9.2/9.4全体の完成にせず、同じ修辞調整だけを反復しない。
+
+実装反映版はAPI `da6ee56beba26bbf0d89c734230f363ba794a9b8`（PR3）。対応する設計・地図・weekly差分は本commit（PR30）に収録する。両PRはDraft、未配置。今回CI成功は未確認で、local検査と区別する。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** §9.2/9.4の受け取り内容形成が主課題。対象外の目的を活かせない例、同memo receivedの焦点移動、2 received＋2評価の初回gap、既存共有17失敗、same100・本人実機・正式Product Readは残る。0/3・candidate_ready=false・automatic_progression=false・未配置、10/17・10/31・12/18とPiece/Analysis主枠を維持する。

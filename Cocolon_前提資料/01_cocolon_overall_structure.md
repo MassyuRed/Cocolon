@@ -6838,3 +6838,13 @@ Mashの意味確認は思想資料§12.10へ保存。同じ限定承認内、STR
 検査配置は既存 `ai/tests/test_cmee_emlis_result_appraisal.py` と現行shared owner identity fixture。新production file/service、公開API/DTO/DB/SQL/RN、意味checkpoint schema、依存、他中核は不変。技術検証の詳細は06／API handoff u260。166評価検査・54 application検査、合成7保存本文とRN hook/modal再openを確認した（native実機ではない）。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 今回は評価語を本人内の状態へ展開したNORMAL限定候補であり、四区分propertyだけでevent内容やReadingConsequenceを新たに解釈したとはしない。肯定の経験化・否定の併記には定義展開／関係反復が残る。§9.2/9.4の主観差分の完成ではない。目的・未完了の明示入力を活かせない例、同memo receivedで別行動へ焦点が移る例、2 received＋2評価の初回gap、既存共有17失敗・same100・本人実機・正式Product Readは残る。0/3・candidate_ready=false・automatic_progression=false・未配置を維持。
+
+### u262 — 評価とつながる未成立事実の限定実装（2026-10-15 JST）
+
+2026-10-15 06:17 JST、Mashがu261の限定変更に「うん、進めて」と承認した。`EMLIS_APPRAISAL_CONNECTED_UNFINISHED_CONTEXT_20261014 = APPROVED_FOR_BOUNDED_IMPLEMENTATION`。以前の未承認記録は提案時点の履歴であり、再承認待ちへ戻さない。
+
+既存source→thread投影→選択済みconfiguration→通常appraisal内容→唯一のHuman Reception作者→独立本文readerを通じ、肯定・無程度の満足と実行済み対象に、同一文で明示対比された未成立fact exact1を保持する。三点は一つのwhole readingに属し、別の必須内容は本人実行行動に限定したまま。対象への充足を結論成立へ広げず、未成立の現在と評価の過去／現在を分け、根拠のない同時性・成功・進歩を足さない。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存7production ownerの責務差分と検査配置は01A末尾u262、意味の責務はcurrent04、商品経路はcurrent01、実測と残件は06／API handoff u262を参照する。新schema・registry・engine・checker・production file・公開API/DB/RN・製品依存・他中核の変更はない。exact2の評価内容型は不変で、三点は通常`EmlisAppraisalContent`のexact3/protected0を使う。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 最終評価187 PASS、Q2/Q3 application54 PASS、現行identity1 PASS。合成4本文のSQL保存・作者非依存のrestart GET/start・RN履歴/再open、捕獲した旧checkpoint2件の旧意味保持を確認した。説明的な語義展開は残り、§9.2/9.4全体の完成ではない。途中のapplication回帰と修正は06／API handoff u262へ記録。実装反映版はAPI `da6ee56beba26bbf0d89c734230f363ba794a9b8`（PR3）。対応する設計・地図・weekly差分は本commit（PR30）に収録する。両PRはDraft、未配置。今回CI成功は未確認で、local検査と区別する。0/3・candidate_ready=false・automatic_progression=false・未配置を維持する。

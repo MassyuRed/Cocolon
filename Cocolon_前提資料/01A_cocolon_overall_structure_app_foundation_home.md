@@ -3075,3 +3075,21 @@ Mashの意味確認は思想資料§12.10へ保存。同じ限定承認内、STR
 検査配置は既存 `ai/tests/test_cmee_emlis_result_appraisal.py` と現行shared owner identity fixture。新production file/service、公開API/DTO/DB/SQL/RN、意味checkpoint schema、依存、他中核は不変。技術検証の詳細は06／API handoff u260。166評価検査・54 application検査、合成7保存本文とRN hook/modal再openを確認した（native実機ではない）。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 今回は評価語を本人内の状態へ展開したNORMAL限定候補であり、四区分propertyだけでevent内容やReadingConsequenceを新たに解釈したとはしない。肯定の経験化・否定の併記には定義展開／関係反復が残る。§9.2/9.4の主観差分の完成ではない。目的・未完了の明示入力を活かせない例、同memo receivedで別行動へ焦点が移る例、2 received＋2評価の初回gap、既存共有17失敗・same100・本人実機・正式Product Readは残る。0/3・candidate_ready=false・automatic_progression=false・未配置を維持。
+
+### u262 — 未成立fact・対象・満足の三点を保持する責務（2026-10-15 JST）
+
+Mashは2026-10-15 06:17 JSTにu261限定提案を承認した。`EMLIS_APPRAISAL_CONNECTED_UNFINISHED_CONTEXT_20261014 = APPROVED_FOR_BOUNDED_IMPLEMENTATION`。STRUCTURE_MAP_DELTA_PRESENT。既存API `ai/services/ai_inference/` 内の責務を次のように接続する。
+
+| 既存owner | 今回の責務差分 |
+|---|---|
+| `emlis_ai_grounded_observation_plan.py` | 有限な未成立fact・実行済み対象・肯定無程度の満足を原文の三範囲から認識し、ABOUT_TARGETと明示CONTRASTを保持。結果を表す「を…にした／できた」を他者主語と取り違えず、三点を一つのReception dutyへ渡す。 |
+| `cocolon_meaning_experience_engine/emlis_thread_projection.py` | 評価と明示接続した未成立fact exact1だけをcomponentへ含め、他の独立requiredは本人の実行行動へ限定する。 |
+| `cocolon_meaning_experience_engine/contracts.py` | 対比側に包まれた評価の既存role qualifier（種別・程度・時点・依存）を保持。transportとsource admissionを分離し、raw/direct再構成で失われるmarkerへ運搬条件を依存させない。schema／registryとexact2評価内容型は不変。 |
+| `cocolon_meaning_experience_engine/emlis_stage1_composition.py` | 両評価端点の明示appraisal qualifierをentry条件とし、既存received/reasonを先取りしない。選択済み三点・二関係・qualifierを通常`EmlisAppraisalContent`のexact3/protected0へ投影。ReadingConsequenceへReception文言を加えない。 |
+| `emlis_ai_grounded_human_reception.py` | sourceと選択済み三bindingを照合し、未成立の点と評価対象を区別した充足として唯一の作者が文章化する。各時点を保持し、未成立を本人の不能・知識不足へ変えない。 |
+| `emlis_ai_grounded_observation_gate.py` | 作者から独立して三命題・対象・肯否・時点・対比を読む。whole inverseのplan-only replayは保持し、片側欠落・対象交換・未成立の誤同時化を受理しない。 |
+| `emlis_ai_grounded_sentence_surface.py` | 同じ三点に対する既存Observation構文とReception markerを扱う。独立した作者や受理権限は追加しない。 |
+
+検査配置は既存`ai/tests/test_cmee_emlis_result_appraisal.py`（最終187 PASS、既存166＋新21）と`ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json`（現行identity1 PASS）。Q2/Q3 application54 PASS、合成4本文の実service＋隔離PGlite保存とNoAuthor restart GET/start・RN hook/modal履歴/再open一致を確認した。旧checkpoint2件は完全一致で旧意味・旧停止を保持し、既存historical fixture4組10rowは不変。新しいfresh prepareだけが新三点本文を作る。途中のapplication20 FAILとqualifier投影不一致は06／API handoff u262に記録した。新production file・公開API/DTO/DB/SQL/RN・意味schema・製品依存・Piece/Analysis変更なし。実装反映版はAPI `da6ee56beba26bbf0d89c734230f363ba794a9b8`（PR3）。対応する設計・地図・weekly差分は本commit（PR30）に収録する。両PRはDraft、未配置。今回CI成功は未確認で、local検査と区別する。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 0/3・candidate_ready=false・automatic_progression=false・未配置を維持し、構造成立を§9.2/9.4の商品完成へ換算しない。
