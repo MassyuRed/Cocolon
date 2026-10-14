@@ -2863,3 +2863,12 @@ Mashが「記録した限定変更で実装を進めてよろしいですか」�
 保存済み意味はIDの比較を緩めず、既知のpre-appraisal投影を同じsourceから再導出し、旧checkpoint又は真正な旧質問のcanonical照合が成立する場合だけ再開する。旧Q2質問への新しい回答は新source prefixの意味checkpointを作る。本文と保存effective_plan_refは同じ選択済みPlanを使う。Q2の現行appraisalも既存thread realizerへ同じPrepared Planを渡す。private互換flagは公開DTO/意味checkpoint schemaへ追加しない。作者の追加や新エンジンではない。
 
 appraisal内容型v1・whole meaningの契約は不変。満足から経験全体のよさ、まだ未納得から時間のずれを導く候補は不採用。§9.2/9.4の経験としての受け取り内容は未完成。評価の肯否訂正と対象のみ撤回した評価の保持も残る。検証の実範囲と全file責務差分はcurrent01/04・06・API u254参照。PRODUCT_NOT_CLEARを維持する。
+
+
+### u260補足 — 確認された評価語の意味と検証責務
+
+2026-10-14、Mashは「満足＝本人にとって何かが満たされた感覚」「納得＝理由や意味が本人の理解の中で筋の通るものになった状態」の区別を確認した。思想資料§12.10がその記録。既存承認内でNORMAL評価の本文へ反映するが、§9.2/9.4の完成承認ではない。対象・本人・肯否・時点・継続・程度を保持し、程度付き納得を「少し／とても筋が通る」へ置き換えない。今回の内容型propertyは既存評価種別と肯否の四区分を導く範囲であり、新しいReadingConsequenceや意味schemaではない。
+
+u253の「本文inverseは作者を呼び直さず」は独立した節readerの責務を指す。whole `evaluate_grounded_surface_body_inverse` は§24のplan-only replayを別途保持し、同一作者を通す。この区別をu260検査で明示した。作者を失敗させる検査は実節の `read_source_owned_discourse` へ限定し、whole inverseのreplayチェックは除去していない。保存済み本文のGET/start非再生成とは別の責務である。
+
+実装・実測・残件は06／API handoff u260。初回一体修正未完了・PRODUCT_NOT_CLEARを継続する。

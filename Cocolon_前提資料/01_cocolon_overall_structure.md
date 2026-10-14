@@ -6822,3 +6822,19 @@ u253の限定承認を継続。STRUCTURE_MAP_DELTA_PRESENT。新production file/
 新fixture `ai/tests/fixtures/cmee_emlis_pre_appraisal_original_time_checkpoint_v1.json`は未変更11720b6の2round実checkpoint・本文2件。既存評価testへ新解釈2件＋旧互換2件を追加し156 PASS、既存Q2/Q3 application54 PASS、現行shared identity1 PASS。新しい保存2本文の実service＋隔離PGliteとRN hook/modal再open、旧PARTIALの本文保存503→retryを確認（native実機ではない）。新production file・意味schema・公開API/DB/SQL/RN・依存・他中核の変更なし。STRUCTURE_MAP_DELTA_PRESENT。詳細・反映版は設計06／API handoff u258。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR。** 次の主課題は先行u257のとおり§9.2/9.4の経験の受け取り内容形成。追加の組合せ検査を完成の代用にしない。2 received＋2評価の初回停止・既存共有17失敗・same100・本人実機・正式Product Readは別の残件として維持。0/3・candidate_ready=false・automatic_progression=false、10/17・10/31・12/18とPiece/Analysis主枠は不変。
+
+
+### u260 — 確認済みの満足／納得をNORMALの本文へ反映（2026-10-14 JST）
+
+Mashの意味確認は思想資料§12.10へ保存。同じ限定承認内、STRUCTURE_MAP_DELTA_PRESENT。既存API `ai/services/ai_inference/` 内の責務差分は次の4file。
+
+| 既存owner | 今回の責務差分 |
+|---|---|
+| `cocolon_meaning_experience_engine/contracts.py` | 既存の評価内容から充足／本人内の理解と肯否の四区分を導出するproperty。永続化fieldやschemaを追加しない。 |
+| `emlis_ai_grounded_human_reception.py` | NORMALの対象を本人内の充足／理解とともに文章化。否定評価も同じ対象へ限定し、程度付き納得は元の評価語を保持する。LIMITED作者は不変。 |
+| `emlis_ai_grounded_observation_gate.py` | 実節から対象・本人内の状態・肯否・時点・程度・継続を作者なしで照合。whole inverseの既存plan-only replayは保持する。 |
+| `emlis_ai_grounded_sentence_surface.py` | 上記の受容述語を既存receive markerとして認識。内容の作者・受理権限は追加しない。 |
+
+検査配置は既存 `ai/tests/test_cmee_emlis_result_appraisal.py` と現行shared owner identity fixture。新production file/service、公開API/DTO/DB/SQL/RN、意味checkpoint schema、依存、他中核は不変。技術検証の詳細は06／API handoff u260。166評価検査・54 application検査、合成7保存本文とRN hook/modal再openを確認した（native実機ではない）。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 今回は評価語を本人内の状態へ展開したNORMAL限定候補であり、四区分propertyだけでevent内容やReadingConsequenceを新たに解釈したとはしない。肯定の経験化・否定の併記には定義展開／関係反復が残る。§9.2/9.4の主観差分の完成ではない。目的・未完了の明示入力を活かせない例、同memo receivedで別行動へ焦点が移る例、2 received＋2評価の初回gap、既存共有17失敗・same100・本人実機・正式Product Readは残る。0/3・candidate_ready=false・automatic_progression=false・未配置を維持。
