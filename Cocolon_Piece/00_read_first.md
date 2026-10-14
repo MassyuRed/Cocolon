@@ -10,7 +10,9 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新作業は入口§70〜71／current map §65.18〜65.19です。書き出し初期整理の失敗後に復帰できない不具合を修正しました。source `562e6a38` は従来の独立計測へ復元し、通常UIKit起動でnative69件・JS766件が成功。CoreText再利用2案は数値不一致で撤回しました。420文字は未解消です。**
+**最新作業は入口§70〜71／current map §65.18〜65.19です。書き出し初期整理の失敗後に復帰できない不具合を修正しました。source `562e6a38` は従来の独立計測へ復元し、通常UIKit起動でnative69件・JS766件が成功。CoreText再利用2案は数値不一致で撤回しました。復元後の実RNは4ケース成功・420文字timeout（§71.2）で、420文字は未解消です。**
+
+### §66／map §65.14時点の先頭要約（履歴）
 
 **現在は入口§66／current map §65.14を優先します。source `ec5db637` はnative63件・JS758件を通過し、実RN4ケースと4枚PNGを確認しました。420文字は48→44→40→36ptの全候補計測・復号が返りましたが、36ptのB9開始前に全体8,118.417msでtimeoutとなり、未解消です。共有CF版のcrashは専用workerデータへ修正し、最新native/実RNでは再発しませんでした。次は候補の反復と最終復号を短縮し、36ptのB9・最終inspectionまで同じ8秒内へ収めることです。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
 
@@ -1378,7 +1380,7 @@ source `562e6a38a7ff1f75a557b464cd5badfcf55bb113` は既存3pathです。
 
 初回UIViewでの停止は計測methodへ到達する前でした。標準UIKit起動を通らないharness構造は確認できましたが、内部の停止stackがないため、それが直接原因だと断定しません。timeout延長・assertion省略・追加自動retryは行いません。実RN hostへshimを混ぜず、依存追加・署名・配布もありません。他job本文は同一です。
 
-localでYAML／shell／埋込Python／plistと完走guardを確認。別担当の同環境read-only reviewと華恋の差分確認後、remote3path全文・親f782ac64・変更path集合を照合しました。別modelのreview実績ではありません。最新[run38490317258](https://github.com/MassyuRed/Cocolon/actions/runs/38490317258)の完了結果は§71.1です。
+localでYAML／shell／埋込Python／plistと完走guardを確認。別担当の同環境read-only reviewと華恋の差分確認後、remote3path全文・親f782ac64・変更path集合を照合しました。別modelのreview実績ではありません。最新[run38490317258](https://github.com/MassyuRed/Cocolon/actions/runs/38490317258)の完了結果は§71.1〜71.2です。
 
 採用済み成果は§70の書き出し再試行修正と追加回帰検査です。420文字は現行の厳密計測では未解消です。2つのCoreText再利用案は実測で不採用とし、同じ案を繰り返しません。次は全候補を先に独立計測する方式の処理量を設計段階から検討します。全候補契約や測定の意味を変更する場合は、owner／native-JS境界／比較基準を先に明記し、実装だけで黙って変更しません。本文・段落保持、離散font順、8秒、実Text最終inspectionを成功条件のまま扱います。
 
@@ -1387,6 +1389,18 @@ localでYAML／shell／埋込Python／plistと完走guardを確認。別担当�
 
 source562e6a38／run38490317258／native job115613701492は69 PASS／FAIL0／SKIP0です。main_entered 00:32:07.791 UTC→application_launch 00:32:08.071→application_active 00:32:08.879→69件完了00:32:37.645で、同じ90秒alarm内に通常起動と検査を完走しました。今回のview_init停止は再発していませんが、将来の全環境で停止しない保証にはしません。
 
-原63件と追加6件の全行bit比較が成功し、撤回案で失敗したspaces／「あ」420／Latin／Hebrew／Arabic／bidi混在／段落属性も成功しました。mixed420は2,248.797ms（検査decoder131.934ms含む）、worker実時間2,008.329ms。CoreText作成累積3,171.967ms、ink累積780.871ms、CF substring累積452.669ms。これは復元処理の単体観測で、実RN全体8秒の成功ではありません。別runnerや新hostとの差を性能改善と断定しません。
+原63判定＋追加6判定が成功し、全行bit比較も通過しました。撤回案で失敗したspaces／「あ」420／Latin／Hebrew／Arabic／bidi混在／段落属性も成功しました。mixed420は2,248.797ms（検査decoder131.934ms含む）、worker実時間2,008.329ms。CoreText作成累積3,171.967ms、ink累積780.871ms、CF substring累積452.669ms。これは復元処理の単体観測で、実RN全体8秒の成功ではありません。別runnerや新hostとの差を性能改善と断定しません。
 
-同じsourceのGitHub JS job115613701632は766 PASS／FAIL0／SKIP0、Android source job115613701644も成功。実RN job115613701309、既存export native build2jobは進行中です。workflow変更により既存scope判定がこれらも起動しましたが、各検証結果は完了後に読むこととし、成功へ先取りしません。
+同じsourceのGitHub JS job115613701632は766 PASS／FAIL0／SKIP0、Android source job115613701644も成功。export Pods job115613701452とAndroid job115613701590は、4部品それぞれのcompile stepを実行して成功しました。実RN job115613701309も完了し、4成功・420文字timeoutでfailureでした。完了結果・画像・traceは§71.2です。workflow変更で起動した各jobは、scope skipと実compile／実行結果を区別して確認しました。
+
+### 71.2 復元後の実RNは4ケース成功・420文字は未解消
+
+source562e6a38／[run38490317258](https://github.com/MassyuRed/Cocolon/actions/runs/38490317258)／実RN job115613701309はfailureで完了しました。essay_paragraphs 650.189ms、quote_unicode 545.958ms、declaration_no_brand 1,135.125ms、saved_essay_canvas 408.752msの4ケースはnative_checkedです。4件ともbody_preserved／native_canvas_valid=true、native_textsが選択行＋任意brandingと一致し、PNGはessay／savedが1080×1350、quote／declarationが1080×1920です。華恋が4枚を開き、本文・段落・欠け・余白・brandingを確認しました。全5件canSave/canExport=falseを維持しています。
+
+420文字は9,227.129msでmeasurement_timeout、size3、body_preserved=trueですが、native_canvas_valid=null、最終inspectionの配列は空、PNGなし、capture_error=trueです。48／44／40／36ptの全候補は各88,410行・11,381代表値が返り、native呼出1,791.996／3,870.271／3,593.161／3,328.496ms、adapter1,990.864／4,014.835／3,730.178／3,460.558msでした。queue待ちを含む呼出時間を合算しません。
+
+B9は48／44／40ptでfit=false（133.912／98.720／95.513ms）、36ptでfit=true（174.146ms）です。stateはplanning1 2,244.403ms→planning2 4,238.594ms→planning3 6,185.723ms→measuring3 7,984.063ms→unavailable3 9,202.122ms。reportのplan欄はnullですが、traceでは36ptのfit成立と実Text計測開始まで進んでおり、「plan未成立」とは扱いません。trace上では7,984.063msにmeasuringを観測し、8秒付近まで候補処理を要しました。traceは別起点のperformance.nowと20ms間隔の観測、実deadlineはCard mount時のDate.nowに基づくため、差を厳密な残り時間とは扱いません。geometry_checked／native_checkedへは到達していません。timeout通知までの遅れの内部原因は未確定です。deadlineの延長や遅延結果の採用は行っていません。
+
+artifact11862032995（56,533,434 bytes、期限2026-10-21T00:47:28Z）のZIP SHA256 `a2692cf793bbf088b25eb36ff9e6c3e1e4614f46d4696781f598b07d6e0d1e6d` とresults.json SHA256 `9143012b454509ee0973fac0fe5c8d7365ef5d4ff5c00dee3c1795cc5b5a256b` を照合しました。§71.1のnative69・JS766・Android source・export Pods／Androidは成功ですが、workflow全体はこのRN jobの失敗により成功ではありません。これはiOS simulator上の実RN検証であり、物理実機の受入れや正式保存の完了ではありません。
+
+次の設計では、計測対象の文字列と前後文脈を実際に描画する行と一致させることを明記します。全候補先行計測の処理量を見直す際も、owner／native-JS境界／全候補契約／5doubleのbit比較基準を先に整理し、既存の比較を緩めて速度だけを採用しません。本文・段落保持、離散font順、4worker上限、8秒、最終inspectionを維持します。正式renderer供給→保存直前fit→同じpreview/tokenの通常初回保存→実機受入れは未完了です。失敗した2案は撤回済みで、現行nativeはbaseline071f3d8と同一です。

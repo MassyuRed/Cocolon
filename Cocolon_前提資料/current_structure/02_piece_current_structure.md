@@ -16,7 +16,9 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新作業は入口§70〜71／current map §65.18〜65.19です。書き出し初期整理の失敗後に復帰できない不具合を修正しました。source `562e6a38` は従来の独立計測へ復元し、通常UIKit起動でnative69件・JS766件が成功。CoreText再利用2案は数値不一致で撤回しました。420文字は未解消です。**
+**最新作業は入口§70〜71／current map §65.18〜65.19です。書き出し初期整理の失敗後に復帰できない不具合を修正しました。source `562e6a38` は従来の独立計測へ復元し、通常UIKit起動でnative69件・JS766件が成功。CoreText再利用2案は数値不一致で撤回しました。復元後の実RNは4ケース成功・420文字timeout（§71.2）で、420文字は未解消です。**
+
+### §66／map §65.14時点の先頭要約（履歴）
 
 **現在は入口§66／current map §65.14を優先します。source `ec5db637` はnative63件・JS758件を通過し、実RN4ケースと4枚PNGを確認しました。420文字は48→44→40→36ptの全候補計測・復号が返りましたが、36ptのB9開始前に全体8,118.417msでtimeoutとなり、未解消です。共有CF版のcrashは専用workerデータへ修正し、最新native/実RNでは再発しませんでした。次は候補の反復と最終復号を短縮し、36ptのB9・最終inspectionまで同じ8秒内へ収めることです。正式renderer admission・保存直前fit・通常初回保存・実機受入れは未完了です。**
 
@@ -2655,8 +2657,12 @@ sourcef782ac64の変更はpieceExport.js＋export testの2path。失敗したraw
 
 ### 65.19 独立計測の復元とUIKit単体検査の通常起動
 
-source562e6a38は既存native製品／native検査／workflowの3pathです。製品nativeをbaseline071f3d8のblob `4dbe6cb1c50f216acad2a2d3f091ca5c0a1bddf8` と完全一致へ復元。原63＋追加6の全行oracleを保持し、撤回方式だけの直接5件とprofileを削除しました。追加6とhostを除く逆変換で原63 sourceのbyte一致を確認しています。
+source562e6a38は既存native製品／native検査／workflowの3pathです。製品nativeをbaseline071f3d8のblob `4dbe6cb1c50f216acad2a2d3f091ca5c0a1bddf8` と完全一致へ復元。原63判定と追加6件の全行oracleを保持し、撤回方式だけの直接5件とprofileを削除しました。追加6とhostを除く逆変換で原63 sourceのbyte一致を確認しています。
 
 検査をUIKit専用.appのUIApplicationMain→active後one-shot main queue実行へ変更。mainから90秒alarmを保持し、延長・assertion省略・自動retryなし。workflowはnative単体stepだけを変更し、launch終了codeと69件全成功のsummary完全一致1行を必須化しました。依存・署名追加なし。同環境read-only review、local構文／plist／完走guard、remote3path全文・親・path集合を確認済みです。
 
-最新run38490317258／native job115613701492は通常UIKit起動で69 PASS／FAIL0／SKIP0、JS job115613701632は766 PASS／FAIL0／SKIP0。mainから29.854秒で全検査が完了し、今回のview_init停止は再発しませんでした。mixed420単体2,248.797msは検査decode込みであり実RN全体の成功ではありません。実RN job115613701309とexport native build2jobは進行中です。詳細は入口§71.1。書き出し再試行修正は§65.18のJS766成功を維持します。420文字は未解消で、次は全候補先行計測の処理量とnative-JS境界を設計段階から検討します。候補契約・比較基準を実装だけで黙って変えず、本文・段落保持、離散font順、8秒、実Text最終inspectionを維持します。正式renderer供給・保存直前fit・通常初回保存・実機受入れは未完了です。STRUCTURE_MAP_DELTA_NONE、default OFF、canSave/canExport=false、Draft/open/unmerged、DB/env/deploy/署名/配布/main merge効果0を保持します。
+最新run38490317258／native job115613701492は通常UIKit起動で69 PASS／FAIL0／SKIP0、JS job115613701632は766 PASS／FAIL0／SKIP0。ログ上はmainから29.854秒で全検査が完了し、今回のview_init停止は再発しませんでした。mixed420単体2,248.797msは検査decode込みであり実RN全体の成功ではありません。export Pods job115613701452／Android job115613701590は4部品の実compileに成功。実RN job115613701309も完了し、4成功・420文字timeoutでfailureでした。詳細は入口§71.1〜71.2と本節末尾。書き出し再試行修正は§65.18のJS766成功を維持します。420文字は未解消で、次は全候補先行計測の処理量とnative-JS境界を設計段階から検討します。候補契約・比較基準を実装だけで黙って変えず、本文・段落保持、離散font順、8秒、実Text最終inspectionを維持します。正式renderer供給・保存直前fit・通常初回保存・実機受入れは未完了です。STRUCTURE_MAP_DELTA_NONE、default OFF、canSave/canExport=false、Draft/open/unmerged、DB/env/deploy/署名/配布/main merge効果0を保持します。
+
+最新の実RN job115613701309は4ケースnative_checked・420文字measurement_timeoutでfailureになりました。essay650.189／quote545.958／declaration1,135.125／saved408.752ms。4件の本文・native text・画像寸法とPNGを確認済みです。420文字は全4fontの候補が返り、36ptのB9 fit=true、trace上で7,984.063msにmeasuringを観測しましたが、最終inspection・PNGへ到達せず9,227.129msでtimeoutです。reportのplan=nullだけを根拠に「plan未成立」とはしません。8秒deadlineは変更していません。artifact11862032995のZIP／JSON digest照合・5件JSON・4枚PNG確認済み。詳細とidentityは入口§71.2です。native69／JS766／Android source／export Pods／export Androidは成功、workflow全体はRN failureです。
+
+次の設計要件は、計測対象の文字列と前後文脈を実際に描画する行と一致させ、全候補先行計測の処理量を見直す際にowner／native-JS境界／候補契約／5doubleのbit比較基準を先に整理することです。独立計測との差を許容して速度だけを採用しません。本文・段落保持、離散font順、4worker上限、8秒、最終inspectionを維持します。現行nativeはbaseline071f3d8と同一であり、420文字・正式renderer供給・保存直前fit・通常初回保存・物理実機受入れは未完了です。
