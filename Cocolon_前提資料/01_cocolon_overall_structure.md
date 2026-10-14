@@ -6805,3 +6805,11 @@ u253の限定承認を継続。STRUCTURE_MAP_DELTA_PRESENT。新production file/
 同じ`EMLIS_APPRAISAL_COMPONENT_MEANING_20261014`内、STRUCTURE_MAP_DELTA_PRESENT。既存API ownerだけを更新：`emlis_ai_grounded_observation_plan.py`は独立した評価pairと残余dutyを3 Move内で保持、`emlis_ai_grounded_sentence_surface.py`は各対象/時点を持つ並列文、`emlis_ai_grounded_human_reception.py`はLIMITEDの有限評価・同値2評価の共有文、`emlis_ai_grounded_observation_gate.py`は全文と両sourceの独立検証、`cocolon_meaning_experience_engine/emlis_answer_update.py`は同回答内の対象撤回と評価訂正を合成する。旧辞書・作者配置、公開API/DB/SQL/RN、意味contract、依存は不変。新production fileなし。検査は既存`ai/tests/test_cmee_emlis_result_appraisal.py`（131 PASS）と現行shared identity snapshot。保存4ケースは実service＋隔離SQL、RN hook/modalの再openまで確認（native実機ではない）。Q2/Q3 application54 PASS。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR。** 1 received＋2評価の初回停止、片方/両対象撤回、同回答内訂正/撤回を修正。経験の内容形成、明示「今は」の訂正時点と保存互換、2 received＋2評価の初回停止、same100・実機・正式Product Readは残る。正本06／API handoff u256に実測・範囲・次の作業を記録した。0/3・candidate_ready=false・automatic_progression=falseを維持。
+
+### u257 — 評価訂正の回答時点・旧意味再開（2026-10-14 JST）
+
+同じ限定承認内、STRUCTURE_MAP_DELTA_PRESENT。既存API5ownerの責務を更新：`cocolon_meaning_experience_engine/emlis_answer_update.py`は新しい引用評価の「今は」を今回回答sourceへ結び、時点指定のない再訂正は先の回答anchorを保持する。対象撤回後の評価時点も保持し、保存済みu256 PARTIALは既知の旧解析で全checkpointを厳密再導出する。`emlis_ai_grounded_observation_plan.py`はsource/時点codeの整合と表示用時点、`emlis_ai_grounded_sentence_surface.py`と`emlis_ai_grounded_human_reception.py`は対象付き/撤回後/複数評価の時点表現、`emlis_ai_grounded_observation_gate.py`は作者から独立した時点照合を担う。新production file/service、公開API/DTO/DB/SQL/RN、意味schema、依存は不変。
+
+検査は既存`ai/tests/test_cmee_emlis_result_appraisal.py`（152 PASS）、現行shared owner identity snapshot（実検査1 PASS）、未変更458a1fccから実生成した新規`ai/tests/fixtures/cmee_emlis_pre_appraisal_answer_time_checkpoint_v1.json`（旧PARTIAL2件）。Q2/Q3 application54 PASS、実service＋隔離SQL保存4本文のRN hook/modal表示・履歴・再open一致。native実機ではない。既存共有17失敗は未修正・未再実行。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR。** 元入力と回答の評価時点を分けたが、経験の内容形成は未達。次の主課題は§9.2/9.4の受け取り内容であり、時点修正完了を初回単位の完成にしない。2 received＋2評価の初回capability gap、same100・本人実機・正式Product Readも残る。詳細は正本06／API handoff u257。0/3・candidate_ready=false・automatic_progression=falseを維持。

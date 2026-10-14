@@ -40457,3 +40457,9 @@ Q1 pure一往復53件を再確認し、Q2の専用永続化/認証API/RN入力�
 ## 2026-10-06 checkpoint — Emlis実機無応答
 
 現行詳細はdesigns/cmee/v1/06末尾「Emlis実機無応答の原因切分けと履歴の未作成表示」、接続地図はcurrent_structure/01の同日節。原入力保存／thread未作成／replyの3秒timeoutを確認。最新コードの隔離SQL再現で3秒中断・10秒生成保存を切り分け、履歴NOT_CREATEDを黙って閉じるRNを修正した。関連30検査PASS、Metro1件・native・実機復旧は未確認。稼働API1a42b9eb、調査時開発API468663c8、現mode未取得。次は実設定の読取りと指定版／生成設定を揃えた本人実機確認。DB/env/deploy変更0、private本文公開0、Draft/open/unmerged、商品NOT_CLEARを維持。
+
+## 2026-10-14 checkpoint — u257 評価訂正の回答時点
+
+本作業候補の現在地はAPI PR3 `11720b60765471b7fc15ec2ba29280a71e8fc204`、資料はPR30の本節を含むrevision。稼働版/mainのauthorityとは区別する。API変更9pathの内容をfresh fetchし、検証した成果物との全byte一致を確認。詳細ownerはdesigns/cmee/v1/06末尾u257とAPI既存handoff u257、構造ownerは全体01/01A・current01/04、最新weeklyは20261010 §5.6.7。明示「今は」の評価を回答時点へ結び、旧u256 PARTIAL再開と保存後RN再表示を確認した。新API CIは反映直後に実行中。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存5production ownerの時点・旧意味再開責務だけを更新し、新production file・公開API/DB/RN/依存は不変。商品NOT_CLEAR・初回単位未完了。次の主課題は§9.2/9.4の経験としての受け取り内容形成。既存共有17失敗・2 received＋2評価の初回capability gap・same100・本人実機・正式Product Readは残る。Draft/open/unmerged・未配置・automatic_progression=false。

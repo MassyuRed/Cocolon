@@ -681,3 +681,11 @@ API実装commit：`442c00630f23a0200679e15043788bdd1fc43550`（PR3）。
 評価131 PASS（既存107＋新24）、Q2/Q3 application54 PASS、保存4ケースのNoAuthor再read/replayとRN hook/modal再openを確認。native実機ではない。既存共有17失敗は今回未修正・未再実行、全回帰成功とはしない。前回u255 CI38560272380はsuccess。本変更後CIとは分ける。詳細は06／API handoff u256。
 
 次は明示「今は」の評価訂正を、既存時点contract内で原入力時点と回答時点に分け、保存済みPARTIALの互換も揃える。2 received＋2評価は初回LIMITED capability gapが残る。本文の深さ、same100・本人実機・正式Product Readも残件。0/3・PRODUCT_NOT_CLEAR・Draft/open/unmerged・automatic_progression=falseを維持。10/17・10/31・12/18、Piece/Analysis主枠の管理点は変えない。
+
+## 5.6.7 明示「今は」の訂正時点と旧途中保存の互換 — 2026-10-14 JST
+
+同じ限定承認内のu257。全体設計01・全file地図01A/B/Cの該当/隣接責務、current00/01/04、最新weekly§5.6.6/6.5と作業規則・恒久incidentを確認して着手した。開始headはAPI458a1fcc／Cocolon11f8a383。評価の新しい引用にある「今は」を今回回答へ結び、時点指定なしの再訂正は先の回答時点を保つ。対象撤回後も元入力時点へ戻さず、本文作者と独立readerまで同じ時点を保つ。旧u256 PARTIALは元sourceから旧意味全体を厳密再導出し、保存checkpointと完全一致した時だけ再開する。
+
+評価152 PASS、Q2/Q3 application54 PASS、現行identity1 PASS。新fixture対照の初回2失敗は検査側の必須checkpoint参照漏れを修正して解消。保存4本文の実RN hook/modal表示・履歴・再openも一致した。native実機ではない。開始headのAPI CI38563812728とCocolon5workflowはsuccess。本変更後CIとは区別する。既存共有17失敗は未修正・未再実行で、全回帰成功とはしない。詳細は正本06／API handoff u257。新production file/API/DB/RN/依存変更はなく、既存5ownerの時点・再開責務を全体地図01/01Aとcurrent01/04へ同期した（STRUCTURE_MAP_DELTA_PRESENT）。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、最初の一体修正は未完了。** 実本文「資料を分類できたことについて、回答した時点では満足していないのですね。」まで時点を保持したが、評価命題の言い換えを越える内容形成は未達。次の主課題は同じ承認内の§9.2/9.4の経験としての受け取り内容であり、追加の組合せ検査だけを次の主課題にし続けない。2 received＋2評価の初回capability gap、same100・本人実機・正式Product Readは残件。0/3・candidate_ready=false・automatic_progression=false、10/17・10/31・12/18とPiece/Analysis主枠、未配置・main merge/PR ready化0を維持する。
