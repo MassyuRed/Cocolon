@@ -18105,3 +18105,20 @@ u273で残した「単独理由付きの満足＋別経験の反応訂正」の�
 次は、回復した初回／訂正後の実本文を使い、既存§9.2/9.4の内容形成として、評価の言い換えに寄ったReceptionを改善する。今回閉じた別成分identityの停止を第一候補へ戻さず、上限拡張を自動的な次工程にしない。10/17確認点・10/31残件線・12/18公開目標とPiece/Analysis主枠を維持する。
 
 実本文・途中結果・runtime／identityはAPI handoff u274、全file責務は01A。反映commit・最終head・remote照合・同head CIは既存Draft PR3／30本文に記録する。
+
+
+## u275 — 理由付き満足のLIMITED受け取りへ、選択済みの注意対象を明示（2026-10-15 JST）
+
+理由付き満足のLIMITED Receptionが「その理由で満足したのですね」という評価の再表現で終わっていたため、既に選択済みのATTENTION / ATTEND_TOを本文に接続した。本人の明示理由・実行済み対象・肯定無程度の満足と時点を保ち、理由に注意を向ける主観述語で返す。NORMALの読み、source認識、意味schema、checkpoint、各上限は変更しない。
+
+作者と独立readerは同欄・同文の原文出現を各自確認し、一出現または既存の完全二組証明がある場合に新表現を使う。旧u267で二出現の片方だけ残るcheckpointは旧本文を維持する。旧fixtureを変更しない。readerは三役割、時点、本人の理由をsourceと照合し、原文改変・理由の唯一化・成長の捏造・旧確認文への逆戻りを拒否する。
+
+最終sourceで評価512＋Q2/Q3 application54＋現行identity1＝**567 PASS**（単一run、195.39秒、skip/xfailなし）。対象3語尾×両欄×過去現在、理由の差替え／削除、作者を禁止した独立reader、15種の意味・主観改変拒否、重複と旧checkpointの回帰を確認。実service＋隔離PGliteの既存migration/RPCで初回6＋訂正後6を保存し、NoAuthor GET/start・回答再送event無増加を検証。実保存DTO12件を既存RN hook/modalへ渡し、本文・履歴・close/reopen完全一致。native部品はstubで、本人実機・正式Product Readではない。既存Pydantic／Starletteの非推奨警告2件を保持する。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。これは選択済み注意の可視化であり、§9.2/9.4全体の経験としての受け取り完成ではない。説明的な硬さ・反復、Q1の4経験上限、近似文／別欄二組、有限対象撤回後の不自然さ、旧receivedのgiver帰属、共有17失敗・same100・本人実機・正式Product Readは残る。
+
+次は初回／訂正後を一体の本文として読み、既存の選択内容にある経験の違いがReceptionへ十分届いているかを改善する。単に文末へ注意表現を足したことで品質完成にせず、追加の解釈が必要なら不足する意味と既承認範囲との差を具体化する。新schema／意味範囲／上限の拡張や配置は自動実行しない。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠を維持する。
+
+全file責務は01A u275、実本文と途中検査はAPI handoff u275。
+
+実装commit：[u275 f23a971](https://github.com/MassyuRed/mashos-api/commit/f23a971a5d237ade4609b521fe42dec020fc975f)。

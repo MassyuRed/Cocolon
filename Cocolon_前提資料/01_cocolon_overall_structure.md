@@ -6977,3 +6977,12 @@ u273で残した「単独理由付きの満足＋別経験の反応訂正」の�
 全file責務差分は01A u274、実本文と検証はAPI handoff／06、次作業はweekly§5.6.24。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+
+## u275 — 理由付き満足のLIMITED受け取りへ、選択済みの注意対象を明示（2026-10-15 JST）
+
+理由付き満足のLIMITED Receptionが「その理由で満足したのですね」という評価の再表現で終わっていたため、既に選択済みのATTENTION / ATTEND_TOを本文に接続した。本人の明示理由・実行済み対象・肯定無程度の満足と時点を保ち、理由に注意を向ける主観述語で返す。NORMALの読み、source認識、意味schema、checkpoint、各上限は変更しない。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。これは選択済み注意の可視化であり、§9.2/9.4全体の経験としての受け取り完成ではない。説明的な硬さ・反復、Q1の4経験上限、近似文／別欄二組、有限対象撤回後の不自然さ、旧receivedのgiver帰属、共有17失敗・same100・本人実機・正式Product Readは残る。
+
+全file責務は01A u275、実本文・検証はAPI handoff／06、次作業はweekly§5.6.25。

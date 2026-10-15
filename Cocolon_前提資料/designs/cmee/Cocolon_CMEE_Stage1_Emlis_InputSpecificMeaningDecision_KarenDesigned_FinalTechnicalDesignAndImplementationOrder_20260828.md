@@ -3089,3 +3089,14 @@ u273で残した「単独理由付きの満足＋別経験の反応訂正」の�
 受け取りの反復と言い換え中心の内容、引用と説明的な文章、Q1の2 received＋2評価の既存上限、近似文／別欄二組、有限対象撤回後の不自然さ、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。今回の修復をPREMIUM複数round全般や§9.2/9.4の商品品質完成へ換算しない。
 
 実本文・検証はAPI handoff／06 u274、次はweekly§5.6.24に従い§9.2/9.4の受け取り内容を改善する。
+
+
+## u275 — 理由付き満足のLIMITED受け取りへ、選択済みの注意対象を明示（2026-10-15 JST）
+
+理由付き満足のLIMITED Receptionが「その理由で満足したのですね」という評価の再表現で終わっていたため、既に選択済みのATTENTION / ATTEND_TOを本文に接続した。本人の明示理由・実行済み対象・肯定無程度の満足と時点を保ち、理由に注意を向ける主観述語で返す。NORMALの読み、source認識、意味schema、checkpoint、各上限は変更しない。
+
+u264の本人明示理由exact1とu266のLIMITED exact3所有を維持する。既存のattentionを可視化する実装整合であり、新たな意味獲得やNORMAL selected readingへの昇格ではない。客観因果、唯一／最重要理由、成功・成長を追加しない。
+
+作者と独立readerは同欄・同文の原文出現を各自確認し、一出現または既存の完全二組証明がある場合に新表現を使う。旧u267で二出現の片方だけ残るcheckpointは旧本文を維持する。旧fixtureを変更しない。readerは三役割、時点、本人の理由をsourceと照合し、原文改変・理由の唯一化・成長の捏造・旧確認文への逆戻りを拒否する。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。これは選択済み注意の可視化であり、§9.2/9.4全体の経験としての受け取り完成ではない。説明的な硬さ・反復、Q1の4経験上限、近似文／別欄二組、有限対象撤回後の不自然さ、旧receivedのgiver帰属、共有17失敗・same100・本人実機・正式Product Readは残る。

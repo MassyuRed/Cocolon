@@ -40596,3 +40596,16 @@ u273で残した「単独理由付きの満足＋別経験の反応訂正」の�
 詳細はAPI handoff／06 u274、全file地図01A、current01/04、8/28設計追記、weekly§5.6.24。反映commit・remote内容照合・同head CIは既存PR3／30本文に記す。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+
+## u275 — 理由付き満足のLIMITED受け取りへ、選択済みの注意対象を明示（2026-10-15 JST）
+
+理由付き満足のLIMITED Receptionが「その理由で満足したのですね」という評価の再表現で終わっていたため、既に選択済みのATTENTION / ATTEND_TOを本文に接続した。本人の明示理由・実行済み対象・肯定無程度の満足と時点を保ち、理由に注意を向ける主観述語で返す。NORMALの読み、source認識、意味schema、checkpoint、各上限は変更しない。
+
+最終sourceで評価512＋Q2/Q3 application54＋現行identity1＝**567 PASS**（単一run、195.39秒、skip/xfailなし）。対象3語尾×両欄×過去現在、理由の差替え／削除、作者を禁止した独立reader、15種の意味・主観改変拒否、重複と旧checkpointの回帰を確認。実service＋隔離PGliteの既存migration/RPCで初回6＋訂正後6を保存し、NoAuthor GET/start・回答再送event無増加を検証。実保存DTO12件を既存RN hook/modalへ渡し、本文・履歴・close/reopen完全一致。native部品はstubで、本人実機・正式Product Readではない。既存Pydantic／Starletteの非推奨警告2件を保持する。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。これは選択済み注意の可視化であり、§9.2/9.4全体の経験としての受け取り完成ではない。説明的な硬さ・反復、Q1の4経験上限、近似文／別欄二組、有限対象撤回後の不自然さ、旧receivedのgiver帰属、共有17失敗・same100・本人実機・正式Product Readは残る。
+
+実本文・差分はAPI handoff／06 u275。再開はweekly§5.6.25と現行原典へ戻る。
+
+実装commit：[u275 f23a971](https://github.com/MassyuRed/mashos-api/commit/f23a971a5d237ade4609b521fe42dec020fc975f)。
