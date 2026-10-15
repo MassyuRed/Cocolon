@@ -1,6 +1,6 @@
 # CMEE V1 — Implementation Order / Migration / Verification 詳細設計
 
-> 最新Emlisは末尾u278の評価訂正／撤回後の残存理由の状態・時点保持。631検査と保存DTO32件の表示・履歴・再表示を確認。意味・checkpoint・選択・Receptionは不変。次は否定訂正後の別received選択と§9.2/9.4の受け取り内容。商品NOT_CLEAR・初回単位未完了・未配置。
+> 最新Emlisは末尾u279の否定訂正後の別received経験の受け取り欠落修復。647検査と保存DTO32件の表示・履歴・再表示を確認。意味・checkpoint・Observationを保持し、既存2 Moveへ二経験を戻す。次は§9.2/9.4の受け取り内容。商品NOT_CLEAR・初回単位未完了・未配置。
 
 > 最新のAnalysis内容修正は末尾 **u250（2026-10-13 JST・未配置）**。既知修飾が重なる話者の引用と本人の独立内容を区別する不整合を修正。生成全文・検証・残件は同節とAnalysis current03を参照。
 
