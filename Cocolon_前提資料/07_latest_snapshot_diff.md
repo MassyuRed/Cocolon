@@ -40716,3 +40716,14 @@ emlis_answer_update._active_planで成立する一時的な選択証明を、既
 詳細・実検証は正本06／API handoff u286、全変更file責務は01A u286、再開順序はweekly§5.6.36。LIMITED Receptionの既存本文inverseは作者replayを含む。今回その経路を変更せず、Reception全体の作者非依存検証が新しく成立したとは報告しない。初回の説明・受容述語の反復、訂正後の一般的な受け取り、理由の有無による受け取り方の差は未解消。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。
+
+
+## u287 — 直前文を検証した共有対象評価参照で二重説明を削減（2026-10-16 JST）
+
+u284初回の第2文で行為・評価時点・満足をもう一度全文説明していた箇所を、検証済みの直前文への「その満足」という参照に変更した。理由0/1の既存共有対象だけを扱い、2 Move／2文と内外の対比を保持する。改善は冗長性・読みやすさの限定差分であり、受け取り内容形成全体の完成ではない。
+
+既存human_reception作者へ参照可否を渡し、observation_gateの既存preceding_contextを共有対象readerまで接続した。source認識、核／関係、checkpoint、意味schema、NORMAL資格、Projection、2 Moveの選択、公開API/DTO/DB/RN、依存と各上限は変更しない。訂正で初回共同読みが失効する条件とu285/u286の残存経験保持も維持する。
+
+詳細と検証は正本06／API handoff u287、変更file責務は01A u287、再開順序はweekly§5.6.37。独立性は今回の有限文readerと前文のsource-owned読みの範囲。既存の全文inverseには作者replayがあり、Reception全体が作者非依存になったとはしない。「受け取りました」の反復、初回の説明性と肯定的な受け取り内容、訂正後の一般的な受け取り、理由有無による差は残る。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
