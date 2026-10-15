@@ -1,6 +1,6 @@
 # Cocolon 第6回週末報告会 — 2026-10-10
 
-> **2026-10-15更新：EmlisAIの残件・再開順は§3.5・§5.6・§6.5、初回不採用試作は§5.6.1、原因の分離は§5.6.2、限定承認は§5.6.3、直近診断と限定変更案は§5.6.11、その追加承認は§5.6.12、最新の限定実装・検証結果と残件は末尾§5.6.20を参照する。** CMEE実機接続は確認済みだが本文品質は未解消。最初の修正単位は未完了。Piece・分析の主枠と§5.5の配分、12/18公開目標は維持する。
+> **2026-10-15更新：EmlisAIの残件・再開順は§3.5・§5.6・§6.5、初回不採用試作は§5.6.1、原因の分離は§5.6.2、限定承認は§5.6.3、直近診断と限定変更案は§5.6.11、その追加承認は§5.6.12、最新の限定実装・検証結果と残件は末尾§5.6.22を参照する。** CMEE実機接続は確認済みだが本文品質は未解消。最初の修正単位は未完了。Piece・分析の主枠と§5.5の配分、12/18公開目標は維持する。
 
 > **最新の実行順序は末尾「5.5 実機確認対象と、その後の作業順序の更新」を優先する。** 10/10〜12に先行して実機稼働を確認する対象はEmlisAIと分析構造。二つの稼働確認後はPieceと分析構造の内容修正を進め、Pieceは利用経路の準備ができた時点で実機確認する。分析を任意の追加確認へ下げず、Pieceを三連休中の全操作確認の必達対象に戻さない。公開目標2026-12-18は§4.7のまま維持する。
 
@@ -893,3 +893,22 @@ u269では重複二文の初回本文は復帰したが、Receptionは選択済�
 次の第一候補は、独立訂正併記後に必要Observation contributionがstage1_required_observation_unrealizableで止まる箇所を、選択内容から実本文まで通すこと。現在もPARTIALの意味は保存するがMEANING_UPDATED_BODY_UNAVAILABLE、単独曖昧撤回はUNRESOLVED／ANSWER_UNREFLECTEDで新本文なし。古い初回本文を現在本文へ戻さない。関係の説明反復と固定的な受け取り、Q1の2 received＋2評価におけるObservation上限、有限対象撤回後の不自然さ、旧receivedのgiver帰属、共有17失敗・same100・本人実機・正式Product Readも残る。10/17確認点・10/31残件線・12/18目標とPiece/Analysis主枠を維持する。
 
 全体01／01A・current01/04・8/28設計・06・07・API handoffを同期。
+
+
+### 5.6.22 u272 — 訂正後のQ3本文停止を既存の意味・上限を保って修復（2026-10-15 JST）
+
+同一欄の理由付き満足二文＋別欄のreceived経験について、曖昧な全文撤回に独立した反応訂正を併記したQ3_FREE回答後は、両欄配置でMEANING_UPDATED_BODY_UNAVAILABLEからPARTIALLY_REFINEDへ回復。曖昧撤回は未反映と明示し、受理済み訂正と両出現の受け取りを保持する。2 received＋2 plain評価の訂正も両配置でREFINEDの新本文を返す。単独の曖昧撤回はUNRESOLVED／ANSWER_UNREFLECTEDを維持する。
+
+u269〜271に記録した対象Q3の上限診断を訂正する。今回の再現では必要Observation contributionは6、既存capは8で、投影・生成・独立逆読解を通過していた。停止原因は、独立したsource groupを同じgeneric grammar role由来のsemantic arcと扱う最終検査での誤認、訂正後の重複理由二組に同じ受容predicate familyを割り当てる不整合、欄を入れ替えた訂正評価でinventoryとselectorのretained group順が異なる不整合の三点。過去の停止事実は保持するが、そのQ3原因記述を現在の判断に再利用しない。Q1の既存上限残件は別である。
+
+評価460件（既存438＋新22）・Q2/Q3 application54件・現行shared-owner identity1件、重複なし計 **515 PASS**、skip／xfailなし。新22件は重複理由の訂正16変種、plain評価の両欄／訂正時点4件、同じsource arcの分割拒否2件。理由脱落・対象混同・時点改変・旧反応への逆戻りを独立逆読解で拒否し、歴史checkpoint fixtureは変更せず完全復元検査を通した。Pydantic／Starletteの既存deprecation warning2件を保持。
+
+実service＋隔離PGliteの実migration/RPCで2系列×両欄の初回／訂正後を保存し、NoAuthorによるGET/start、同じkeyの回答再送、event無増加を確認。実保存DTO8件を既存RN hook/modalへ渡し、現在本文の完全一致、履歴展開時だけの旧本文表示、close/reopenを確認した。native部品はstubであり、本人端末・正式Product Readの証拠ではない。
+
+既存production2file内の整合修正で各上限・意味契約・作者・reader・gateを維持。全体01/01A・current01/04・8/28設計・06・07／API handoffへ同期した。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+残件はQ1の2 received＋2評価における既存Observation上限、近似文／別欄二組、関係の説明反復と固定的な受け取り、有限対象撤回後の不自然さ、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Read。今回はQ3_FREEの対象訂正系列を閉じた範囲であり、PREMIUM複数round全般や§9.2/9.4の商品品質の完成へ換算しない。RN全suiteは今回再実行せず、以前の26 PASS/5 FAILを解消したとはしない。
+
+次は回復した実本文を使い、§9.2/9.4の内容形成として関係説明の反復と評価の言い換えだけに寄ったReceptionを改善する。今回解消したQ3停止を再び第一候補へ戻さず、上限引上げを自動的な次工程にしない。10/17確認点・10/31残件線・12/18公開目標とPiece/Analysis主枠を維持する。

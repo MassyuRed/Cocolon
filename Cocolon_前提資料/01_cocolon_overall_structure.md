@@ -6944,3 +6944,14 @@ u269では重複二文の初回本文は復帰したが、Receptionは選択済�
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
 
 次の第一候補は、独立訂正併記後に必要Observation contributionがstage1_required_observation_unrealizableで止まる箇所を、選択内容から実本文まで通すこと。現在もPARTIALの意味は保存するがMEANING_UPDATED_BODY_UNAVAILABLE、単独曖昧撤回はUNRESOLVED／ANSWER_UNREFLECTEDで新本文なし。古い初回本文を現在本文へ戻さない。関係の説明反復と固定的な受け取り、Q1の2 received＋2評価におけるObservation上限、有限対象撤回後の不自然さ、旧receivedのgiver帰属、共有17失敗・same100・本人実機・正式Product Readも残る。10/17確認点・10/31残件線・12/18目標とPiece/Analysis主枠を維持する。
+
+
+### u272 — 訂正後のQ3本文停止を既存の意味・上限を保って修復（2026-10-15 JST）
+
+同一欄の理由付き満足二文＋別欄のreceived経験について、曖昧な全文撤回に独立した反応訂正を併記したQ3_FREE回答後は、両欄配置でMEANING_UPDATED_BODY_UNAVAILABLEからPARTIALLY_REFINEDへ回復。曖昧撤回は未反映と明示し、受理済み訂正と両出現の受け取りを保持する。2 received＋2 plain評価の訂正も両配置でREFINEDの新本文を返す。単独の曖昧撤回はUNRESOLVED／ANSWER_UNREFLECTEDを維持する。
+
+u269〜271に記録した対象Q3の上限診断を訂正する。今回の再現では必要Observation contributionは6、既存capは8で、投影・生成・独立逆読解を通過していた。停止原因は、独立したsource groupを同じgeneric grammar role由来のsemantic arcと扱う最終検査での誤認、訂正後の重複理由二組に同じ受容predicate familyを割り当てる不整合、欄を入れ替えた訂正評価でinventoryとselectorのretained group順が異なる不整合の三点。過去の停止事実は保持するが、そのQ3原因記述を現在の判断に再利用しない。Q1の既存上限残件は別である。
+
+全file責務差分は01A u272、実本文・検証はAPI handoff／06、優先順はweekly§5.6.22。**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+次は回復した実本文を使い、§9.2/9.4の内容形成として関係説明の反復と評価の言い換えだけに寄ったReceptionを改善する。今回解消したQ3停止を再び第一候補へ戻さず、上限引上げを自動的な次工程にしない。10/17確認点・10/31残件線・12/18公開目標とPiece/Analysis主枠を維持する。

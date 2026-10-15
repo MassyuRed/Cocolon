@@ -3231,3 +3231,23 @@ STRUCTURE_MAP_DELTA_PRESENT。既存production 6file、既存testと現行identi
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
 
 実本文・検証と残件はAPI handoff／06 u271。01B/Cの隣接責務は不変。
+
+
+### u272 — 訂正後のQ3本文停止を既存の意味・上限を保って修復（2026-10-15 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production2file／3関数、既存test1file、現行identity fixture1fileを更新。新規製品file・helper・engine・author・checker・service・registryは0。
+
+| mashos-api相対path | u272の責務差分 |
+|---|---|
+| ai/services/ai_inference/emlis_ai_grounded_observation_plan.py | build_grounded_reception_opportunitiesで訂正評価のretained group順をsource順へ統一。_build_reception_depth_policy_and_movesで証明済み理由二組の役割と既存配置順を整合。 |
+| ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py | _observation_surface_atomsで限定訂正経路のsource連結成分をarc identityへ接続。文法roleと経験identityを区別し、同一arc分割検出を保持。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 訂正後の実本文・両欄／理由／時点変種・独立逆読解・同一arc分割拒否・保存と再読を検証。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有ownerの正規identityを再採録。旧checkpointと歴史proofは変更しない。 |
+
+u269〜271に記録した対象Q3の上限診断を訂正する。今回の再現では必要Observation contributionは6、既存capは8で、投影・生成・独立逆読解を通過していた。停止原因は、独立したsource groupを同じgeneric grammar role由来のsemantic arcと扱う最終検査での誤認、訂正後の重複理由二組に同じ受容predicate familyを割り当てる不整合、欄を入れ替えた訂正評価でinventoryとselectorのretained group順が異なる不整合の三点。過去の停止事実は保持するが、そのQ3原因記述を現在の判断に再利用しない。Q1の既存上限残件は別である。
+
+RN→API→service/store→保存read→RNの既存経路、01B/Cの隣接責務は不変。u253/u264/u271の既存意味と§9.4の多対一可視unitを接続する整合修正。source認識・意味schema・checkpoint生成／旧再導出・NORMAL資格・Move数・Observation contribution上限・作者・独立reader・最終gateは変更しない。公開API/DTO/DB/SQL/RN・製品依存も不変。
+
+実本文・検証・残件はAPI handoff／06 u272、優先順はweekly§5.6.22。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
