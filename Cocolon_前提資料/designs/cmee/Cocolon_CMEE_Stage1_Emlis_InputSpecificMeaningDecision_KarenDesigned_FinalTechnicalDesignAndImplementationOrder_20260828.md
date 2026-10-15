@@ -2991,3 +2991,20 @@ u254の「唯一の原文全文」条件を既存sourceの異なる表現間で�
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
 
 全file責務は01A、実検証・互換範囲は06／API handoff u268、進行はweekly§5.6.18。
+
+
+### u269 — 隣接する同一理由文の初回本文を回復（2026-10-15 JST）
+
+同じ欄の先頭に理由付き満足の完全文が直ちに同文で重なる場合、先行文の既存SELF証明をそのscalar位置で再実行し、二つ目も独立した理由・対象・評価の三ownerとして保持する。二出現の6nucleus・4relation・各source位置を残し、完全文・役割・時点・肯否が一致すると証明できた場合だけ、Observationの既存理由文＋対象評価文を一度にまとめる。重複から二度の経験・強さ・重要性は推測しない。
+
+既存follow_idsが一意に選んだ評価は、他の評価がある場合も同じspanの証明済み理由／対象をsupportへ戻す。この支持修復の適用範囲はexact duplicateだけではなく、他rowがconcrete_effortまたは同一targetに限られる既存選択条件内。意味選択・rank・Move数・selected contributionを増やさず、今回はLIMITEDの選ばれた一組だけをReceptionにする。全三組のReception受入れ完了とはしない。
+
+新規の重複全文撤回は引き続きUNRESOLVEDで、両方の三ownerを残す。別反応の独立REVISE併記はPARTIALで意味保存する。旧source形は既存のcheckpoint不一致／旧canonical質問の入口だけで再導出し、完全identity照合を維持する。旧IDへ新しい意味を貼らない。
+
+u264の理由exact1は各評価についての境界を維持する。二つの異なる理由を一評価へ束ねること、他者topic後の暗黙SELF、近似文・別欄の意味同一視は追加しない。6owner/4relationの独立出典は保持したまま、既存§9.4のmany-to-oneを既存Observation文法で使う。新意味schema・新しい本文作者・品質gate例外を作らない。選択済み支持修復の条件と全file責務は01A u269。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+残件：同じ回答に独立訂正を併記した後は、意味はPARTIALで保存できるが、必要Observation contribution選択がstage1_required_observation_unrealizableとなりMEANING_UPDATED_BODY_UNAVAILABLEを維持する。単独曖昧撤回もANSWER_UNREFLECTEDで新本文なし。初回の完全一致二文は回復したが、「私は」を付けた近似文・別欄に分かれた二組の初回は反復／関係分断の既存gateで停止する。全三組Receptionのpair-only閉包、関係の説明反復と固定的な受け取り、2 received＋2評価、有限対象撤回後の不自然さ、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readも残る。
+
+次は初回一体単位の選択内容と受け取りを、出典ごとの意味を保った構成として改善する。今回の限定回復を商品完成へ換算しない。10/17確認点、10/31残件線・12/18リリース目標とPiece/Analysis主枠を維持する。

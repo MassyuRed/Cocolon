@@ -6903,3 +6903,16 @@ STRUCTURE_MAP_DELTA_PRESENT。既存production 1file・3関数の変更。source
 全file責務は01A u268、現行境界はcurrent01/04、検証と残件は06／API handoff u268・weekly§5.6.18。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+
+### u269 — 隣接する同一理由文の初回本文を回復（2026-10-15 JST）
+
+同じ欄の先頭に理由付き満足の完全文が直ちに同文で重なる場合、先行文の既存SELF証明をそのscalar位置で再実行し、二つ目も独立した理由・対象・評価の三ownerとして保持する。二出現の6nucleus・4relation・各source位置を残し、完全文・役割・時点・肯否が一致すると証明できた場合だけ、Observationの既存理由文＋対象評価文を一度にまとめる。重複から二度の経験・強さ・重要性は推測しない。
+
+既存follow_idsが一意に選んだ評価は、他の評価がある場合も同じspanの証明済み理由／対象をsupportへ戻す。この支持修復の適用範囲はexact duplicateだけではなく、他rowがconcrete_effortまたは同一targetに限られる既存選択条件内。意味選択・rank・Move数・selected contributionを増やさず、今回はLIMITEDの選ばれた一組だけをReceptionにする。全三組のReception受入れ完了とはしない。
+
+新規の重複全文撤回は引き続きUNRESOLVEDで、両方の三ownerを残す。別反応の独立REVISE併記はPARTIALで意味保存する。旧source形は既存のcheckpoint不一致／旧canonical質問の入口だけで再導出し、完全identity照合を維持する。旧IDへ新しい意味を貼らない。
+
+既存source→meaning→同一本文作者→保存event→RNの経路で初回停止を回復。全file責務差分は01A u269、現在地はcurrent01/04、実本文・検証・残件は06／API handoff u269・weekly§5.6.19。STRUCTURE_MAP_DELTA_PRESENT、production既存5file、私有helper1追加、新file／公開契約／稼働構成変更0。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。

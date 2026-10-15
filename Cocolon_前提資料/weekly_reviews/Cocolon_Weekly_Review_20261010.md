@@ -838,3 +838,24 @@ APIの意味・保存回帰とidentityは384 PASS。旧合成checkpoint8件は�
 重複理由文のsource所有が非対称なことと、同入力の初回本文がemlis_q3_initial_body_unavailableで止まる問題は残る。新しい撤回回答も本文なし／ANSWER_UNREFLECTEDであり、独立訂正を受理できることを本文生成成功に換算しない。次はこの初回source→選択内容→本文の欠落と§9.2/9.4の受け取り内容を一体で確認する。訂正周辺の小修正だけで初回単位の完成を置き換えない。2 received＋2評価の初回gap、有限対象撤回後の不自然なReception、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは今回解消していない。10/17確認点、10/31残件線・12/18リリース目標とPiece/Analysis主枠を維持する。
 
 全体01/01A・current01/04・8/28設計・06／API handoffを同単位で同期。
+
+
+### 5.6.19 u269 — 隣接する同一理由文の初回本文を回復（2026-10-15 JST）
+
+同じ欄の先頭に理由付き満足の完全文が直ちに同文で重なる場合、先行文の既存SELF証明をそのscalar位置で再実行し、二つ目も独立した理由・対象・評価の三ownerとして保持する。二出現の6nucleus・4relation・各source位置を残し、完全文・役割・時点・肯否が一致すると証明できた場合だけ、Observationの既存理由文＋対象評価文を一度にまとめる。重複から二度の経験・強さ・重要性は推測しない。
+
+既存follow_idsが一意に選んだ評価は、他の評価がある場合も同じspanの証明済み理由／対象をsupportへ戻す。この支持修復の適用範囲はexact duplicateだけではなく、他rowがconcrete_effortまたは同一targetに限られる既存選択条件内。意味選択・rank・Move数・selected contributionを増やさず、今回はLIMITEDの選ばれた一組だけをReceptionにする。全三組のReception受入れ完了とはしない。
+
+新規の重複全文撤回は引き続きUNRESOLVEDで、両方の三ownerを残す。別反応の独立REVISE併記はPARTIALで意味保存する。旧source形は既存のcheckpoint不一致／旧canonical質問の入口だけで再導出し、完全identity照合を維持する。旧IDへ新しい意味を貼らない。
+
+対象の初回停止を既存作者経路で解消。ソース読み取りだけで終えず、同一単位で選択済み理由supportと本文構成まで接続した。実本文はAPI handoff u269、全体／全file責務は01・01A、current01/04、8/28設計と06へ同期。
+
+評価suite **373 PASS**（u268の329＋新44）、Q2/Q3 application **54 PASS**、現行shared-owner identity **1 PASS**、計 **428 PASS**。skipなし、既存依存deprecation warning2。完全旧checkpointは未変更u268から実取得したQ1/Q3_FREEの初回4件＋回答8件を追加し、既存u267の8件を含む歴史検査も保持。本文・state・reason_codes・偽checkpoint拒否を照合した。
+
+実service＋隔離PGliteの実migration/RPCで重複入力の初回生成→本文event/DTO保存、回答の曖昧性／独立REVISE保存、NoAuthor restart GET/start、同じkeyの再送とevent無増加を確認した。実保存DTOの初回／回答後計8ケースを既存RN hook/modalへ渡し、本文の完全一致、履歴展開・close/reopenを確認。回答後の古い初回本文は「以前の観測」であり、現在本文へ戻さない。native部品はtest stub、端末実機・正式Product Readではない。RN全suiteは今回未再実行、u268の既知26 PASS/5 FAILを解消したとはしない。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+残件：同じ回答に独立訂正を併記した後は、意味はPARTIALで保存できるが、必要Observation contribution選択がstage1_required_observation_unrealizableとなりMEANING_UPDATED_BODY_UNAVAILABLEを維持する。単独曖昧撤回もANSWER_UNREFLECTEDで新本文なし。初回の完全一致二文は回復したが、「私は」を付けた近似文・別欄に分かれた二組の初回は反復／関係分断の既存gateで停止する。全三組Receptionのpair-only閉包、関係の説明反復と固定的な受け取り、2 received＋2評価、有限対象撤回後の不自然さ、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readも残る。
+
+次は初回一体単位の選択内容と受け取りを、出典ごとの意味を保った構成として改善する。今回の限定回復を商品完成へ換算しない。10/17確認点、10/31残件線・12/18リリース目標とPiece/Analysis主枠を維持する。
