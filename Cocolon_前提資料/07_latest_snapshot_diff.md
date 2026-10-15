@@ -40644,3 +40644,16 @@ u273で残した「単独理由付きの満足＋別経験の反応訂正」の�
 **TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。固定的な注意／説明文の内容形成、§9.2/9.4、対象撤回後の複数receivedや追加action、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。631件PASSを既存共有17失敗の解消とはしない。
 
 全体01・01A・current01/04・8/28設計・06・weekly§5.6.28・API既存handoffを同期。実装commit：[d983445daf1901d129ce347739ff5821a15cfb30](https://github.com/MassyuRed/mashos-api/commit/d983445daf1901d129ce347739ff5821a15cfb30)。
+
+
+## u279 — 否定訂正後も別received経験を受け取りに残す（2026-10-15 JST）
+
+理由付き満足を否定へ訂正した後、別のreceived経験がObservationには残るのにReceptionから落ちる欠陥を修復した。訂正評価と別経験が同じcurrent_burden候補になり、既存の代表選択で一方が落ちていた。既存plan ownerの_thread_retained_reaction_groupsで、証明済みの二経験を別々の既存2 Moveへ保持し、既存作者・独立readerから本文へ戻す。
+
+最終単一runは647 PASS（評価592＋Q2/Q3 application54＋現行identity1、194 deselected、既存警告2件、209.40秒）。追加16検査で実本文12条件、作者呼出し禁止の独立reader両欄、source所有の不正差替え両欄を確認。欠落、旧肯定復活、別経験借用、否定反転、新因果を拒否する。未変更u278との24組比較で初回全体・更新後完全checkpoint・Observation・status/reason_codesが一致。評価撤回12組はplan/選択/Receptionも完全一致、否定訂正12組だけが二経験へ回復した。同環境read-only reviewで初回12・訂正12・撤回12と、追加action／2 received／理由なし／明示今／別回答の両欄10条件を旧関数と独立比較し、対象外は不変。
+
+実service＋隔離PGliteで理由時点2×評価時点2×両欄×訂正／評価撤回の16組を初回／更新後まで保存。保存DTO32件の生成本文一致、NoAuthor GET/start、同一回答再送のtimeline/current本文一致・event無増加を確認。現行RN hook/modalで全32件の本文・履歴・close/reopen一致。rootが32全文を確認した。native部品stubであり、本人実機・正式Product Readではない。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持。今回の欠落回復を§9.2/9.4の受け取り内容形成全体の完成へ換算しない。固定的な説明／反復、対象外の複数経験や回答時点変更、Q1上限、近似文／別欄二組、giver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
+
+実装commit：[14a3c78](https://github.com/MassyuRed/mashos-api/commit/14a3c786b69e6c57c741244dc2edfdff46525c65)。全体01/01A・current01/04・8/28設計・06・weekly§5.6.29同期。

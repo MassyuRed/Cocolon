@@ -7013,3 +7013,12 @@ u273で残した「単独理由付きの満足＋別経験の反応訂正」の�
 既存本文2owner内の修正。RN/API/DBと三中核責務は不変。全file責務は01A u278、実本文・検証はAPI handoff／06、次はweekly§5.6.28。
 
 **TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。固定的な注意／説明文の内容形成、§9.2/9.4、対象撤回後の複数receivedや追加action、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。631件PASSを既存共有17失敗の解消とはしない。
+
+
+## u279 — 否定訂正後も別received経験を受け取りに残す（2026-10-15 JST）
+
+理由付き満足を否定へ訂正した後、別のreceived経験がObservationには残るのにReceptionから落ちる欠陥を修復した。訂正評価と別経験が同じcurrent_burden候補になり、既存の代表選択で一方が落ちていた。既存plan ownerの_thread_retained_reaction_groupsで、証明済みの二経験を別々の既存2 Moveへ保持し、既存作者・独立readerから本文へ戻す。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持。今回の欠落回復を§9.2/9.4の受け取り内容形成全体の完成へ換算しない。固定的な説明／反復、対象外の複数経験や回答時点変更、Q1上限、近似文／別欄二組、giver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
+
+全file責務は01A u279、実装・検証は06／API handoff u279、次作業はweekly§5.6.29。

@@ -3368,3 +3368,18 @@ RN→API→service/store→保存read→RN、01B/C隣接責務、公開API/DTO/D
 既存sentence surfaceのthread用単独Observationで、original memo/memo_action・required/explicit・本人・肯定fact/state・過去現在・appraisal_explicit_reason／reasoned_result_appraisal・relationなしを限定して実現する。既存gateの_body_inverse_intervening_eventsは、source spanと欄、全体で未接続の理由、型・時点・本人・極性を照合し、本文の状態文と引用内容を作者非依存に読む。source認識、checkpoint、plan、selected reception、Reception作者、schema、NORMAL資格、各上限は変更しない。
 
 **TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。固定的な注意／説明文の内容形成、§9.2/9.4、対象撤回後の複数receivedや追加action、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。631件PASSを既存共有17失敗の解消とはしない。
+
+
+## u279 — 否定訂正後も別received経験を受け取りに残す（2026-10-15 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。既存選択owner内の責務補修、新規production file／subsystemなし。
+
+| mashos-api相対path | 今回の変更 |
+|---|---|
+| ai/services/ai_inference/emlis_ai_grounded_observation_plan.py | 否定訂正後の評価と別receivedを、所有が閉じた既存2 Moveへ保持。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 実本文・独立reader・source所有の回帰16検査を追加。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有owner identityのみ再計算。歴史fixture不変。 |
+
+RN→API→service/store→保存read→RNと01B/Cの隣接責務は不変。
+
+適用は、source-ownedな評価関係exact1、回答核exact1（本人・否定・無程度の満足・original_occasion・過去／現在）、同一原文の理由／対象exact2、孤立した肯定fact/stateの理由、残余required textがoriginal received exact1の場合。理由と対象の原文range・field/span・所有、関係閉包を確認する。理由はObservationだけへ残し、否定評価へ因果を付け直さない。追加action・複数received・理由なし評価・明示的な回答時点への訂正・別回答併記をこの修正へ含めない。source認識、意味checkpoint、schema、NORMAL資格、各上限、作者／独立reader、公開API/DTO/DB/RNと製品依存は不変。
