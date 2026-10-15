@@ -1087,3 +1087,18 @@ TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受�
 全体設計・全file地図・current01/04・8/28設計・正本05/06・07・API handoffへ同期。u283の未承認／未実装は当時の履歴として保存する。
 
 実装commit：[81f52ef](https://github.com/MassyuRed/mashos-api/commit/81f52ef02cc74cd889904ff80d0185bd0a7d3fee)。API16pathのremote全文・blob SHA・変更集合・親commitを照合済み。
+
+
+### 5.6.35 u285 — 訂正後に残るreceived対比へ同時性を加えない（2026-10-16 JST）
+
+u284の同一行為・二段対比の初回から満足を否定訂正／撤回した後、残るreceived対比が「異なる向きのまま同時にあります」となっていた。原文は同時性を述べていないため、未改変の原文二端点を「の一方で…とあります」という既存の時間中立な対比文法へ接続した。
+
+原文の共同読みをresolver付きで再検証でき、更新後はその共同読みが失効し、received関係が完全一致で残り、両端nodeが既存失効属性の除去以外に変わっていない場合だけ適用する。原文の対比・肯否・各端点の時制を引用から保持する。新しい共同読みを更新後へ存続させず、意味選択・checkpoint・Reception・source認識・schema・上限・公開API/DTO/DB/RN・製品依存を変えない。
+
+関連単一runは773 PASS（評価719＋Q2/Q3 application54、243.65秒、skip/xfailなし、既存警告2件）。現行共有owner identityは別runで1 PASS／194 deselected（21.44秒）。重複なし774検査であり、単一run774件とはしない。追加19件で理由0/1×反応2×両欄×訂正/撤回の16条件、作者呼出し禁止reader2条件、元node/関係改変の不採用を確認した。readerは完全な一文から端点・肯否・時点・対比を読み、原因化・時点変更・同時性追記・左右交換・根拠なしの付加を拒否する。旧保存文法の完全一致は互換用に保持し、旧「同時に」を全面拒否したとは報告しない。歴史fixtureは変更せず、現行共有owner identityだけ再計算した。
+
+実service＋隔離PGliteで初回8／更新8の16 DTOを保存し、NoAuthor GET/startの完全一致、同一回答再送の本文・timeline一致とevent無増加を確認。現行RN hook/modalで16件の全文・全Observation履歴・close/reopen一致を確認した。u284実保存16本文との比較で初回8全文と全16 Receptionは一致し、更新8は対象の対比文だけが変更。rootが全16本文（重複をまとめて12種類）を読解した。native部品はstubであり、本人実機・正式Product Readではない。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。
+
+初回の説明・受容述語反復、理由なし否定訂正後のReceptionからreceivedが落ちる問題、更新後の一般的な受け取りは残る。一般receivedの旧「同時に」は対象外であり今回全面解消していない。訂正後の共同読みを一般化せず、次は残る二経験をそれぞれ選ぶ既存経路と、既承認意味の範囲を照合してReception欠落を扱う。新しい意味契約が必要なら不足と最小案を具体化する。既存共有17失敗・same100・Q1上限・giver帰属・本人実機・正式Product Readも未解消。Mashへ未合格本文の確認を求めない。10/17確認点・10/31残件線・12/18公開目標とPiece/Analysis主枠、管理評価53.25％を維持する。

@@ -3443,3 +3443,21 @@ STRUCTURE_MAP_DELTA_PRESENT。新production file／subsystemなし。新規は�
 RN→API→service/store→保存read→RNの隣接責務と01B/Cは不変。公開契約・製品依存は変更しない。設計は8/28 u284、versionは05、実検証は06／API handoff、最新順序はweekly §5.6.34。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・未配置。
 
 実装commit：[81f52ef](https://github.com/MassyuRed/mashos-api/commit/81f52ef02cc74cd889904ff80d0185bd0a7d3fee)。API16pathのremote全文・blob SHA・変更集合・親commitを照合済み。
+
+
+## u285 — 訂正後に残るreceived対比へ同時性を加えない（2026-10-16 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。既存本文owner内の補修。新production file／型／subsystemなし。
+
+| mashos-api相対path | 今回の責務差分 |
+|---|---|
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_surface.py | 原文共同読みの失効後、未改変のreceived関係・両端を確認し、既存作者へ対比IDを渡す。 |
+| ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py | 対象対比だけを時間中立に実現。既定の旧経路と初回nested作者を保持。 |
+| ai/services/ai_inference/emlis_ai_grounded_observation_gate.py | 新完全文法を既存の端点／source照合へ接続し、旧文法の互換を保持。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 追加19検査。実本文16条件、独立reader、元関係／node変化の除外。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有owner identityのみ更新。歴史fixture不変。 |
+| ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md | 現在入口と結果・残件・再現範囲。 |
+
+RN→API→service/store→保存read→RNと01B/Cの責務は不変。原文の共同読みをresolver付きで再検証でき、更新後はその共同読みが失効し、received関係が完全一致で残り、両端nodeが既存失効属性の除去以外に変わっていない場合だけ適用する。原文の対比・肯否・各端点の時制を引用から保持する。新しい共同読みを更新後へ存続させず、意味選択・checkpoint・Reception・source認識・schema・上限・公開API/DTO/DB/RN・製品依存を変えない。
+
+検証は06／API handoff u285、最新順序はweekly§5.6.35。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。
