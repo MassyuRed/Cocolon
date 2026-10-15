@@ -18235,3 +18235,10 @@ TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受�
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false。既存Draft/open/unmerged・未配置を維持する。
 
 選択内容が共通の「のですね」へ落ちる問題は当該成分で修正した。一方、二経験を並べた本文は「経験として受け取りました」「両方を受け取りました」が反復し、初回理由側も関係説明に寄っている。今回の正の受け取り対象と対比の明示を、§9.2／9.4・自然さ・入力固有の内容形成の完成に換算しない。次は、初回の理由側とreceived側を合わせた受け取りに、その入力固有の一つの意味が形成されているかを扱う。既存selected contentと実本文の不足を分離し、根拠のない原因等や同義語追加で埋めない。評価撤回後のLIMITED一般態度、既存共有17失敗、same100、Q1上限、giver帰属、本人実機・正式受入は未解消。Mashへ未合格本文のProduct Readは求めない。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠を維持する。
+
+
+## u283 — 対象付きreceivedの欠落と限定追加案（2026-10-16）
+
+u282の本文と選択内容を対照し、語尾共有では二経験を通した意味が生まれないこと、および「その分類を褒められた」という明示対象付き入力が現行source文法から落ちることを実生成で確認した。具体的再現と旧範囲の境界はAPI既存handoff末尾u283、追加案のexact scope・owner・反例・保存表示の完成条件は8/28設計末尾u283、進め方はweekly§5.6.33。
+
+BLOCKER_NARROWED／PROPOSED_NOT_APPROVED／PRODUCT_NOT_CLEAR。source範囲と組間意味の追加にはRule18 §11.3のMash承認が必要で、製品source／test／fixtureはu282から変更0。文数制限も変更しない。STRUCTURE_MAP_DELTA_NONE、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。今回の診断を本文改善・既存回帰成功・保存表示成功として数えない。次は限定案へのMash判断。

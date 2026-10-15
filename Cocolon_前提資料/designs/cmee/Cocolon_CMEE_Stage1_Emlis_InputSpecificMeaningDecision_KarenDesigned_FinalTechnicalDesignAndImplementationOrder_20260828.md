@@ -3226,3 +3226,55 @@ Human Receptionの既存received作者へ選択済みdecisionを渡す。出来�
 検証は正本06とAPI handoffのu282、全変更fileは01A u282。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false。既存Draft/open/unmerged・未配置を維持する。
 
 選択内容が共通の「のですね」へ落ちる問題は当該成分で修正した。一方、二経験を並べた本文は「経験として受け取りました」「両方を受け取りました」が反復し、初回理由側も関係説明に寄っている。今回の正の受け取り対象と対比の明示を、§9.2／9.4・自然さ・入力固有の内容形成の完成に換算しない。次は、初回の理由側とreceived側を合わせた受け取りに、その入力固有の一つの意味が形成されているかを扱う。既存selected contentと実本文の不足を分離し、根拠のない原因等や同義語追加で埋めない。評価撤回後のLIMITED一般態度、既存共有17失敗、same100、Q1上限、giver帰属、本人実機・正式受入は未解消。Mashへ未合格本文のProduct Readは求めない。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠を維持する。
+
+
+## 2026-10-16 u283 — 二経験の内容不足の診断と、明示された同一対象・対比を読む限定案（未承認・未実装）
+
+基準はAPI `51f0913d4943f5e5f48c4104bc2c5e5260052103`／Cocolon `457dc7ff849bff5d1173580a08d560d2e5af328d`。u282の残件を継続調査した。以下は提案であり、既存設計・上限・許可範囲を変更する規範ではない。
+
+### 確認結果と、行わない修正
+
+- 理由付き満足＋receivedの初回は既に「受け取りました」が一回だけである。主因は文末の重複ではなく、理由関係の説明と別経験の説明が並ぶだけで、両者を通した読みを選んでいないこと。理由なし初回と否定訂正後には受容述語の重複もあるが、それだけの短文化を§9.2／9.4の完成としない。
+- `emlis_thread_projection._appraisal_received_components` は組をまたぐ関係を認めず、`_component_reception_rows` と `_selected_reception` は組別の命題へ接続する。これはu280／u281の範囲どおりであり、豊かな共通解釈が作者の直前で落ちている故障ではない。
+- 現行2 Moveの実測は最低2文／最大2文／一文1 Move。`_build_reception_depth_policy_and_moves`、layered validator、clause planner、独立pair readerがこれを支える。共通述語による一文化にはこの境界と旧checkpoint再導出も関わり、文字列置換だけの作業ではない。今回この制限を緩めない。
+- 元の二欄「理由付き満足」「褒められたのに嬉しくなかった」だけから、褒められた対象を資料分類と断定しない。「他者評価より実用性を大切にする人」等の価値観・人物像・原因も作らない。
+
+### 今回新たに実測した明示情報の欠落
+
+合成入力（実ユーザー本文ではない）：
+
+> 資料を分類したことには満足した。でも、その分類を褒められたのに、嬉しくなかった。
+
+実生成は `GENERATED / no_bound_personal_meaning_target`。planの関係は `evaluation_about_event` だけで、後半は「今は、…という感覚や状態が前に出ています」へ流れ、Receptionは「資料を分類したことについて、当時は満足したのですね。」だけだった。したがって、明示された対象付きreceivedの認識、後半の過去時点、二経験の対比が実本文へ届いていない。
+
+`_received_event_reaction_text_projections` のevent文法は任意の本人主語／giver＋受動述語を認める一方、この「その分類を」という対象を認めない。同一対象の参照を落として既知の単純receivedに縮める補修はしない。「その分類」を除いた対照ではreceivedのcontrastが現れ、二経験は個別に生成された。同じ対象語を含んでも「その分類の後で誘われた」なら、分類が誘いの対象とは限らない。
+
+### 提案するexact scope
+
+**追加候補：原文に一意な同一対象と対比が明示された場合だけ、行為への本人評価と、その行為を褒められた場面での本人感情を区別して読む。** 初回の明示意味→選択→実本文→保存再表示を同一単位で扱う。新しいエンジン・外部AI・専用checkerは作らない。
+
+1. 入力の同一欄に、本人の行為と肯定の満足exact1組、同じ行為を明示的に指す受動経験exact1組、両記述を結ぶ明示対比がある。理由は既承認の0/1だけ。対象参照は直前のexact1出来事へ一意に解決できるものに限定し、同じ語・同じカテゴリ・隣接だけで同じ出来事とは判定しない。理由句の行為を含め複数の参照候補、引用、他者主体、条件・仮定、未確定な照応では採用しない。
+2. source ownerで対象参照・出来事・反応・対比の各原文rangeと役割を保持する。意味ownerは「その行為への満足」と「その行為を褒められた場面での嬉しさ不在／悲しさ」を区別する。この二つの評価対象の違いを読むのであって、満足と嬉しさを同じ尺度の反対値として比較しない。経験間の原因、同時発生、価値の優劣、他者意図、恒常傾向を追加しない。外側の「でも」は〈行為への満足〉と〈その行為を褒められたのに嬉しくなかった経験〉、内側の「のに」は〈褒められた〉と〈嬉しくなかった〉の対比として別々に保つ。褒められた出来事を落として満足と感情だけを直結しない。理由は元の満足組だけに所有させ、received感情の原因に移さない。
+3. 既存のmeaning configuration／ReadingConsequence／Reception投影でこの組を所有する。新しいprivate armが必要なら新versionでdispatchし、旧型・旧保存bytesは不変。既存のHuman Reception作者と作者非依存readerが全役割・対象・肯否・各時点と選択内容を照合する。文数の一文化は完成条件にせず、既存の文数・Move・contribution・質問上限を保持する。
+4. 原入力に同一対象の明示または組間対比がない場合は、この読みを追加しない。u282の元の二欄入力へ対象関係を補完しない。評価否定・撤回・対象変更・反応変更後は新しい組の資格を再確認し、根拠が失われた共通読みを残さない。今回、訂正一般の資格拡張は行わず、既存の更新・停止・旧保存再読を維持する。共同の読みを失効させても、撤回されていない他方の有効な経験は既存経路へ保持する。
+5. source根拠と対比が揃って初めて、例の行為評価と受動場面の感情を区別した本文を返す。「外からの評価より自分の実感が大切」「褒められたせいで悲しい」「満足できたから嬉しい」へ変換しない。本文の固定正解をこの提案で先取りしない。
+
+### 実装候補ownerと検証
+
+| 既存owner（mashos-api / ai/services/ai_inference） | 予定する限定責務 |
+|---|---|
+| `emlis_ai_grounded_observation_plan.py` | 対象を持つreceivedと一意な参照・明示対比を、元のrange／本人／時点を保って認識する。 |
+| `cocolon_meaning_experience_engine/contracts.py`／`emlis_input_specific_meaning.py` | 同一対象の評価と受動場面の感情を区別する限定configuration／consequence、必要なversioned private arm。 |
+| `.../emlis_thread_projection.py`／`emlis_stage1_response.py`／`emlis_stage1_composition.py` | 既存全体候補への接続、所有対応、旧版dispatchを保持して限定選択を届ける。 |
+| `emlis_ai_grounded_human_reception.py`／`emlis_ai_grounded_observation_gate.py` | 既存作者と独立readerで対象差・全端点・肯否・時点を可視化・照合する。 |
+| 既存 `test_cmee_emlis_result_appraisal.py`、Q2/Q3 application、現行identity | 新しい対照・更新・保存互換を追加。歴史fixture、protected受入母集団は変更しない。 |
+
+完成条件は、明示同一対象＋対比の初回が語義説明の併記を越えて両評価対象を読み分け、後半を現在の一般状態へ誤変換せず、全意味と所有が保存・再生成なしread・RN表示へ残ること。対象参照削除／別対象／候補複数／対比削除／満足否定／反応肯否・種類変更／時点差／訂正撤回を対照にする。作者を呼ばないreaderで対象交換・原因追加・時点や否定改変を拒否し、旧checkpoint・既存u282の対象外出力を保持する。実本文の自然さ・入力固有性の事前読解が不成立なら商品完成としない。
+
+公開API/DTO/DB/RN、依存、外部AI禁止、稼働環境、質問・contribution・Move・文数の制限は維持する。追加サービス・金銭費用・Mashの実環境操作は0。認識から保存表示までの一実装単位が増え、正確な所要と完成日は現時点で未実証。10/17確認点・10/31管理線・12/18公開目標、Piece／Analysis主枠を変更しない。
+
+### 判断と再開位置
+
+u280が除外したsource範囲・組間関係の意味契約への追加に当たるため、**Rule18 §11.3に基づくMashの追加承認が必要**。本提案の記録はその承認ではない。今回は製品source／test／fixtureを変更していない。`BLOCKER_NARROWED / PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR`、初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。
+
+同一Work環境のread-only補助review二件を参照し、rootが原典・実出力を確認した。別model Pro／Ultraの相互審査成立とは報告しない。次はこの限定案へのMash判断。承認を得ても、元の関係未明示の二欄入力から共通の価値基準を導く許可へ拡張しない。
