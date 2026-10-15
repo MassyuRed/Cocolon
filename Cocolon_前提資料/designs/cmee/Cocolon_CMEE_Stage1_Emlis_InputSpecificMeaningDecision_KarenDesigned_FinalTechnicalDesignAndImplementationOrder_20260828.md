@@ -3278,3 +3278,38 @@ Human Receptionの既存received作者へ選択済みdecisionを渡す。出来�
 u280が除外したsource範囲・組間関係の意味契約への追加に当たるため、**Rule18 §11.3に基づくMashの追加承認が必要**。本提案の記録はその承認ではない。今回は製品source／test／fixtureを変更していない。`BLOCKER_NARROWED / PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR`、初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。
 
 同一Work環境のread-only補助review二件を参照し、rootが原典・実出力を確認した。別model Pro／Ultraの相互審査成立とは報告しない。次はこの限定案へのMash判断。承認を得ても、元の関係未明示の二欄入力から共通の価値基準を導く許可へ拡張しない。
+
+## 2026-10-16 u284 — 明示同一対象と二段対比の限定実装
+
+前回u283限定案を提示した後のMashの「EmlisAIの残件作業を進めて」を、その限定案の実装指示として引き継いだ。u283の未承認・未実装は当時の履歴として保持する。公開契約一般、deploy、main mergeへの包括承認とはしない。
+
+同じ原入力欄に、本人の行為exact1と無程度・肯定の満足、外側の「でも」、その行為を一意に指す「その〈行為名〉を褒められたのに」、嬉しさ不在／悲しさexact1がある場合に限定する。理由は元の満足組に0/1。同じ語や隣接だけでは同じ対象にしない。有限のサ変行為名との明示一致を必要とし、別欄・対象違い・複数候補・他者・引用・仮定・単なる時間順・対比欠落は採用しない。継続付き満足など新ownerの資格外は旧source planを保持する。
+
+外側は〈行為への満足〉と〈その行為を褒められたのに嬉しくなかった／悲しかった経験〉、内側は〈褒められた〉と〈感情〉の対比として所有する。満足と感情を同じ尺度の反対値へ直結せず、原因・同時発生・価値順位・恒常的性格・他者意図を足さない。理由は満足の所有から移さない。既存2 Move・各上限を保ち、新production file／新engine／外部AIを追加しない。
+
+source ownerが原文range、役割、raw nucleus所有、対象参照先と参照range、外側markerを保持する。resolverで全評価役割・任意理由を既存parserから再照合し、received側も対象・感情・時制を原文から再照合する。意味ownerはexact4/5 node・3/4 edgeの新private `GroupedAppraisalReceivedConfigurationV1`（schema 1.1）へ結び、旧configuration/schemaをそのまま残す。typed-axis反事実は、その観測された端点ペアにだけ作用する。
+
+第二Moveの新private `EmlisSharedTargetExperienceAppraisalContent`（cocolon.cmee.emlis.shared_target_experience_appraisal.v1）が4役割・3関係・参照qualifier2件を持つ。第一Moveは元の評価／理由、第二Moveは同じ行為の受動場面と満足の区別を受け取る。理由ありの第一Moveへ評価の直接facetを二重に付けず、whole meaningには保持する。content所有順を命題と独立投影の双方で照合する。manifestは73型、旧型のfield／versionは不変。
+
+既存Observation作者が二段対比を一つの観測文で表し、Human Reception作者が選択内容を既存2文へ接続する。作者非依存readerは全役割・原文・関係・対象・否定・各時点・任意理由・選択されたbindingを確認し、平坦化した外側対比を旧文法へfallbackしない。訂正・撤回で適格性を失った共同読みは全役割の証明と外側関係を解除し、残る経験を既存更新経路へ渡す。
+
+新source認識前の完全checkpointは、旧source plan・質問を厳密に再導出する分岐で保持する。旧checkpointのIDだけを新解釈へ貼り直さない。公開API／DTO／DB／RN、製品依存、質問・Move・contribution上限、既存の歴史fixtureは不変。
+実保存した合成例（実ユーザー本文ではない）：
+
+```text
+見えたこと：
+「探しやすくなった」を理由に、「資料を分類した」という行為への評価は「満足した」とあり、その評価と対比して、同じ行為について「その分類を褒められた」のに「嬉しくなかった」と書かれています。
+
+Emlisから：
+探しやすくなった点に、資料を分類したことへの当時の満足の拠り所が見えます。その分類を褒められたのに嬉しさが伴わなかったことは、資料を分類したことへの当時の満足とは切り分けて受け取りました。
+```
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。
+
+今回、明示された同一行為について評価対象の違いが本文へ届いた。ただし初回の理由なしでは「受け取りました」が反復し、理由ありでも第一文は理由説明に寄る。更新後は共同読みを失効させて既存経路へ戻すため、理由なし否定訂正でreceivedがObservationだけに残ること、旧received観測文の「同時に」、評価撤回後の一般態度が実保存本文に残る。保存成功・NORMAL・REFINEDを自然さや§9.2/9.4の商品完成へ換算しない。
+
+次は、訂正後にも残る有効な経験の受け取りと、初回の説明・受容述語の反復を、原文の意味と選択内容の不足に分けて扱う。対象関係のない元の二欄入力に共通の価値基準を作らない。今回の初回限定scopeを訂正一般へ無断で拡張しない。既存共有17失敗、same100、Q1上限、giver帰属、本人実機・正式Product Readは未解消。Mashへ未合格本文のProduct Readは求めない。10/17確認点・10/31残件線・12/18公開目標、Piece／Analysis主枠、管理評価53.25％を変更しない。
+
+検証実績は正本06／API handoff u284、file地図は01A、private契約は正本05。
+
+実装commit：[81f52ef](https://github.com/MassyuRed/mashos-api/commit/81f52ef02cc74cd889904ff80d0185bd0a7d3fee)。API16pathのremote全文・blob SHA・変更集合・親commitを照合済み。

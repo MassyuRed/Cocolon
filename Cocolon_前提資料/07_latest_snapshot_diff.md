@@ -40686,3 +40686,11 @@ u281で選択済みの、本人の明示評価exact1組＋本人received対比ex
 STRUCTURE_MAP_DELTA_PRESENT、全変更fileは01A u282。関連681 PASS＋別run現行identity1 PASS、実service保存34 DTOと現行RNの本文／履歴／再表示を確認。旧本文2件もu281保存sampleとの一致を確認。実本文と再現限界は06／API handoff u282。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false。既存Draft/open/unmerged・未配置を維持する。
 
 選択内容が共通の「のですね」へ落ちる問題は当該成分で修正した。一方、二経験を並べた本文は「経験として受け取りました」「両方を受け取りました」が反復し、初回理由側も関係説明に寄っている。今回の正の受け取り対象と対比の明示を、§9.2／9.4・自然さ・入力固有の内容形成の完成に換算しない。次は、初回の理由側とreceived側を合わせた受け取りに、その入力固有の一つの意味が形成されているかを扱う。既存selected contentと実本文の不足を分離し、根拠のない原因等や同義語追加で埋めない。評価撤回後のLIMITED一般態度、既存共有17失敗、same100、Q1上限、giver帰属、本人実機・正式受入は未解消。Mashへ未合格本文のProduct Readは求めない。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠を維持する。
+
+## u284 — 明示同一対象と二段対比の本文接続（2026-10-16）
+
+u283の後続実装指示により、同じ行為への満足と、その行為を褒められたのに嬉しくなかった／悲しかった経験を、原文証拠・新private意味型・既存2 Move・作者非依存readerで接続。旧保存8件の再導出、関連754 PASS＋現行identity別run1 PASS、実保存16 DTOの再読／再送／RN全文表示を確認。native stubで本人実機ではない。
+
+STRUCTURE_MAP_DELTA_PRESENT、API16pathの責務は01A、設計8/28、schema05、検証06/API handoff、最新順序はweekly §5.6.34。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。初回の説明／受容述語の反復と訂正後の既存受け取りは残件。10/17・10/31・12/18、Piece/Analysis主枠は不変。
+
+実装commit：[81f52ef](https://github.com/MassyuRed/mashos-api/commit/81f52ef02cc74cd889904ff80d0185bd0a7d3fee)。API16pathのremote全文・blob SHA・変更集合・親commitを照合済み。

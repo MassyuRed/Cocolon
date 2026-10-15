@@ -3416,3 +3416,30 @@ STRUCTURE_MAP_DELTA_PRESENT。既存作者／readerの受け取り内容と局�
 u281で選択済みの、本人の明示評価exact1組＋本人received対比exact1組のうち、NORMAL / ATTENTION / ATTEND_TO / RELATIONAL_NONCOLLAPSE / PRESERVE_BOTH_ENDPOINTSを持つreceived成分だけを扱う。selected contribution exact1、basis exact2（RELATION_LEFT／RELATION_RIGHT）、source-owned単一contrast、追加回答なし、裸の過去形感情形容詞、full finite文を条件にする。理由0/1と当時の満足を否定へ訂正する既存範囲を維持する。
 
 RN→API→service/store→保存read→RNの隣接責務、01B/C、公開契約は不変。8/28意味設計・正本06・API handoff末尾u282を参照。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false。既存Draft/open/unmerged・未配置を維持する。
+
+## u284 — 同一対象と二段対比のsource・意味・本文接続（2026-10-16）
+
+STRUCTURE_MAP_DELTA_PRESENT。新production file／subsystemなし。新規は合成旧checkpoint fixture。
+
+| mashos-api相対path | u284の責務差分 |
+|---|---|
+| ai/services/ai_inference/emlis_ai_grounded_observation_plan.py | 一意な対象参照、原文range、二段対比、役割と失格条件。既存sourceへの版別分岐。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py | 新group／content契約、厳密な型dispatch、source qualifierと独立所有検証。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_input_specific_meaning.py | 4/5役割の一つの意味構造、閉じた関係所有、観測ペアに束縛した反事実。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py | 第一Moveの評価根拠を保持し、wholeの共同読みと2 Moveを接続。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py | Move別根拠所有、理由付き評価の重複facet除外、独立命題投影。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py | 選択済みgroupを4役割contentと所有順へ結ぶ。新型manifest登録。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py | 旧source認識への明示分岐。旧質問の再導出を保持。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py | 旧checkpointの全体再導出、更新時のgroup証明／外側関係の失効。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py | 旧source planに束縛した本文経路の識別。 |
+| ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py | 原文の内外対比を平坦化せず、同時性を足さない初回Observation。 |
+| ai/services/ai_inference/emlis_ai_grounded_human_reception.py | 評価対象の違いを2 Moveで受け取り、選択所有・IRを照合。 |
+| ai/services/ai_inference/emlis_ai_grounded_observation_gate.py | 作者を呼ばず実本文とsource／selected内容の全役割・対象・時点・否定を検査。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 新適格／不適格、訂正失効、本文改変拒否、旧保存再導出。700条件。 |
+| ai/tests/fixtures/cmee_emlis_pre_shared_target_checkpoint_v1.json | 新規。変更前de95074から取得した合成旧完全checkpoint8件。新実装で再生成しない。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有ownerの再導出。歴史fixtureを更新しない。 |
+| ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md | 実結果、再現条件、実本文、残件のAPI側記録。 |
+
+RN→API→service/store→保存read→RNの隣接責務と01B/Cは不変。公開契約・製品依存は変更しない。設計は8/28 u284、versionは05、実検証は06／API handoff、最新順序はweekly §5.6.34。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・未配置。
+
+実装commit：[81f52ef](https://github.com/MassyuRed/mashos-api/commit/81f52ef02cc74cd889904ff80d0185bd0a7d3fee)。API16pathのremote全文・blob SHA・変更集合・親commitを照合済み。

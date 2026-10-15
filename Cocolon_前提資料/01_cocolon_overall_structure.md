@@ -7036,3 +7036,11 @@ STRUCTURE_MAP_DELTA_PRESENT。本人の明示評価（満足／納得）exact1�
 ## u282 — 選択済みreceived対比の本文接続（2026-10-15）
 
 STRUCTURE_MAP_DELTA_PRESENT。既存Human Reception作者に組別selected decisionを渡し、出来事だけでは表せない本人の経験として対比を受け取る。独立readerも同じsource所有と内容を実本文から読む。private/public型・source認識・意味選択・DB/RN不変。全変更fileは01A u282、資格と残件は8/28意味設計u282、実検証は06／API handoff u282。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false。既存Draft/open/unmerged・未配置を維持する。
+
+## u284 — 同じ行為への評価とreceived経験の区別（2026-10-16）
+
+STRUCTURE_MAP_DELTA_PRESENT。原入力の同一欄で一意な対象参照と内外の対比が明示された場合だけ、source→grouped意味→既存2 Move→Observation／Reception→保存read→RNへ接続する。理由は満足の所有に限定。外側は〈満足〉対〈褒められたのに嬉しくなかった／悲しかった経験〉として保持し、原因・同時性・価値順位を追加しない。
+
+新しいprivate型だけ版別dispatchし、旧checkpointは旧source全体から再導出。公開API/DTO/DB/RN・依存・各上限と01B/C責務は不変。全変更16pathは01A u284、検証は06/API handoff u284。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・未配置。
+
+実装commit：[81f52ef](https://github.com/MassyuRed/mashos-api/commit/81f52ef02cc74cd889904ff80d0185bd0a7d3fee)。API16pathのremote全文・blob SHA・変更集合・親commitを照合済み。

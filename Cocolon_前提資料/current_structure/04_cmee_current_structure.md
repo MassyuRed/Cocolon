@@ -1444,3 +1444,19 @@ STRUCTURE_MAP_DELTA_PRESENT。本人の明示評価（満足／納得）exact1�
 ## u282 — 選択済みreceived対比の本文接続（2026-10-15）
 
 STRUCTURE_MAP_DELTA_PRESENT。既存Human Reception作者に組別selected decisionを渡し、出来事だけでは表せない本人の経験として対比を受け取る。独立readerも同じsource所有と内容を実本文から読む。private/public型・source認識・意味選択・DB/RN不変。全変更fileは01A u282、資格と残件は8/28意味設計u282、実検証は06／API handoff u282。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false。既存Draft/open/unmerged・未配置を維持する。
+
+## u284 — sourceに閉じた同一対象のgrouped意味（2026-10-16）
+
+source ownerが原文range、役割、raw nucleus所有、対象参照先と参照range、外側markerを保持する。resolverで全評価役割・任意理由を既存parserから再照合し、received側も対象・感情・時制を原文から再照合する。意味ownerはexact4/5 node・3/4 edgeの新private `GroupedAppraisalReceivedConfigurationV1`（schema 1.1）へ結び、旧configuration/schemaをそのまま残す。typed-axis反事実は、その観測された端点ペアにだけ作用する。
+
+第二Moveの新private `EmlisSharedTargetExperienceAppraisalContent`（cocolon.cmee.emlis.shared_target_experience_appraisal.v1）が4役割・3関係・参照qualifier2件を持つ。第一Moveは元の評価／理由、第二Moveは同じ行為の受動場面と満足の区別を受け取る。理由ありの第一Moveへ評価の直接facetを二重に付けず、whole meaningには保持する。content所有順を命題と独立投影の双方で照合する。manifestは73型、旧型のfield／versionは不変。
+
+既存Observation作者が二段対比を一つの観測文で表し、Human Reception作者が選択内容を既存2文へ接続する。作者非依存readerは全役割・原文・関係・対象・否定・各時点・任意理由・選択されたbindingを確認し、平坦化した外側対比を旧文法へfallbackしない。訂正・撤回で適格性を失った共同読みは全役割の証明と外側関係を解除し、残る経験を既存更新経路へ渡す。
+
+新source認識前の完全checkpointは、旧source plan・質問を厳密に再導出する分岐で保持する。旧checkpointのIDだけを新解釈へ貼り直さない。公開API／DTO／DB／RN、製品依存、質問・Move・contribution上限、既存の歴史fixtureは不変。
+
+STRUCTURE_MAP_DELTA_PRESENT。意味の4/5役割・3/4関係を、新しい一候補と既存2 Moveへ接続する。u281の関係未明示の別組を統合する許可ではない。source対象外は旧経路保持。独立readerは役割交換・参照差替え・否定／時制・因果追加・外側平坦化を拒否する。
+
+関連754 PASS＋現行identity別run1 PASS、保存16 DTO／RN16件を確認。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・未配置。全fileは01A、設計8/28、契約05、実検証06/API handoff u284。
+
+実装commit：[81f52ef](https://github.com/MassyuRed/mashos-api/commit/81f52ef02cc74cd889904ff80d0185bd0a7d3fee)。API16pathのremote全文・blob SHA・変更集合・親commitを照合済み。

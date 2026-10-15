@@ -1408,3 +1408,19 @@ STRUCTURE_MAP_DELTA_PRESENT。本人の明示評価（満足／納得）exact1�
 ## u282 — 選択済みreceived対比の本文接続（2026-10-15）
 
 STRUCTURE_MAP_DELTA_PRESENT。既存Human Reception作者に組別selected decisionを渡し、出来事だけでは表せない本人の経験として対比を受け取る。独立readerも同じsource所有と内容を実本文から読む。private/public型・source認識・意味選択・DB/RN不変。全変更fileは01A u282、資格と残件は8/28意味設計u282、実検証は06／API handoff u282。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false。既存Draft/open/unmerged・未配置を維持する。
+
+## u284 — 明示された同一行為の二経験を保存表示まで接続（2026-10-16）
+
+u283限定案を後続実装指示で実施。対象付きreceivedを今の一般状態／実行した行動へ誤変換する初回欠落を修正し、満足と受動場面の感情を区別する。既存2 Moveを保持。更新で原文資格を失えば共同読みを解除し、旧保存checkpointは旧意味で読む。
+
+関連754 PASS＋現行identity別run1 PASS。実service／隔離PGliteで8組・初回更新16 DTO、NoAuthor保存再読・同回答再送無増加、現行RN hook/modalで全文・履歴・close/reopen一致。native stubで本人実機ではない。rootが12種類の全文を確認。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。
+
+今回、明示された同一行為について評価対象の違いが本文へ届いた。ただし初回の理由なしでは「受け取りました」が反復し、理由ありでも第一文は理由説明に寄る。更新後は共同読みを失効させて既存経路へ戻すため、理由なし否定訂正でreceivedがObservationだけに残ること、旧received観測文の「同時に」、評価撤回後の一般態度が実保存本文に残る。保存成功・NORMAL・REFINEDを自然さや§9.2/9.4の商品完成へ換算しない。
+
+次は、訂正後にも残る有効な経験の受け取りと、初回の説明・受容述語の反復を、原文の意味と選択内容の不足に分けて扱う。対象関係のない元の二欄入力に共通の価値基準を作らない。今回の初回限定scopeを訂正一般へ無断で拡張しない。既存共有17失敗、same100、Q1上限、giver帰属、本人実機・正式Product Readは未解消。Mashへ未合格本文のProduct Readは求めない。10/17確認点・10/31残件線・12/18公開目標、Piece／Analysis主枠、管理評価53.25％を変更しない。
+
+責務は01A、設計8/28、version05、実検証06/API handoff各u284。
+
+実装commit：[81f52ef](https://github.com/MassyuRed/mashos-api/commit/81f52ef02cc74cd889904ff80d0185bd0a7d3fee)。API16pathのremote全文・blob SHA・変更集合・親commitを照合済み。

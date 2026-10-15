@@ -2694,3 +2694,15 @@ Observationの敬体活用も独立inverseで照合し、全文一致を証明�
 新しいprivate `ComponentReceptionOpportunityV1` exact7（schema_version、opportunity_ref、move_ref、reception_act、component_ref、basis_contribution_refs、bound_relation_refs）を、選択済みwhole・component・既存Move・全所有根拠へbindする。同じact分類でも別opportunity／claim／traceを持つ。旧RetainedReceptionActRow exact3と旧validatorを保持し、新versionだけdispatchする。独立closureはsource Move、target/support、組、relation、basisとparent/envelopeの分類を照合する。訂正後の3成分のうちReception対象は2成分で、第三Moveは追加しない。既存意味型／内容型・Human Reception作者・独立gateを使い、公開API/DTO/DB/RN、source認識、各上限は変更しない。
 
 適用資格・本文限界は8/28意味設計末尾u281、file責務は01A末尾u281。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+## u284 — 同一対象の評価とreceived組を結ぶprivate契約（2026-10-16）
+
+`GroupedAppraisalReceivedConfigurationV1`はschema_version 1.1。既存7fieldに、appraisal_event_ref／appraisal_ref／received_event_ref／reaction_ref、appraisal_relation_ref／received_relation_ref／outer_contrast_relation_ref、target_reference_qualifier_refs、reason_ref／reason_relation_refを追加した閉じた別型。4役割はdistinct、任意理由を含め端点4/5・関係3/4。外側関係はreceived eventをgroup anchorとし、内側event→reactionを必須にする。参照先とrangeのqualifierはexact2、raw node ownerとの対応を独立に照合する。
+
+`EmlisSharedTargetExperienceAppraisalContent`はcocolon.cmee.emlis.shared_target_experience_appraisal.v1。既存appraisal6fieldにschema、4役割binding、3関係、参照qualifier2件を持つ。RELATIONAL_NONCOLLAPSE／PRESERVE_BOTH_ENDPOINTS、appraised exact4、protected exact0、focalは外側関係。通常の二項contentを四項へ緩めず、正確な型でdispatchする。logical manifestは73。
+
+source_shared_target_slot／node_owner／reference_event／reference_range／outer_markerは新source証明に限る。全原文役割と意味方向の所有が合わなければ選択しない。古い型・field・schema・公開wire・checkpoint保存形式は不変。旧sourceを厳密再導出する互換分岐を用い、旧IDを新意味に流用しない。訂正で失格になればgroup全体の証明と外側関係を解除する。
+
+適格範囲は8/28設計u284、実検証は06/API handoff u284。PRODUCT_NOT_CLEAR、正式0/3、未配置。
+
+実装commit：[81f52ef](https://github.com/MassyuRed/mashos-api/commit/81f52ef02cc74cd889904ff80d0185bd0a7d3fee)。API16pathのremote全文・blob SHA・変更集合・親commitを照合済み。
