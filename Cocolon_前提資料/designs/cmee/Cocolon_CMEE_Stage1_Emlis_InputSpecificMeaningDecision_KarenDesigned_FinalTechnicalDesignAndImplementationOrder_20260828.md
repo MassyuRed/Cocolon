@@ -3322,3 +3322,16 @@ u284の同一行為・二段対比の初回から満足を否定訂正／撤回�
 原文の共同読みをresolver付きで再検証でき、更新後はその共同読みが失効し、received関係が完全一致で残り、両端nodeが既存失効属性の除去以外に変わっていない場合だけ適用する。原文の対比・肯否・各端点の時制を引用から保持する。新しい共同読みを更新後へ存続させず、意味選択・checkpoint・Reception・source認識・schema・上限・公開API/DTO/DB/RN・製品依存を変えない。
 
 本差分はu284の未改変の内側対比を時点中立に実現する実装補修であり、§9.2/9.4の商品品質規範・初回限定の意味契約は変更しない。旧文reader互換・初回全文・歴史checkpointを保持。責務は01A、検証は06／API handoff u285。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。
+
+
+## u286 — 理由なし否定訂正でも残った経験を受け取りへ保持（2026-10-16 JST）
+
+u284の理由なし共有対象入力から満足だけを否定訂正した後、未撤回のreceived経験がReceptionから落ちる欠陥を修正した。同じcurrent_burden分類の代表選択で一方を捨てず、訂正評価とreceived対比を既存2 Moveへ別々に保持する。
+
+原初u284 groupをresolver付きで再証明し、理由なし・回答exact1・原時点の無程度満足を過去否定へREVISEするexact1操作に限定。対象とreceived両端は共同読みの失効属性除去以外に完全一致、received関係も完全一致、required4核／全2関係で閉じることを要求する。部分回答、時点変更、納得／程度付き評価、撤回、反応訂正、追加経験・追加回答へ適用しない。
+
+emlis_answer_update._active_planで成立する一時的な選択証明を、既存response→human_reception_plan→opportunitiesとdepthへ引数で渡す。source認識・核／関係・checkpoint・schema・NORMAL資格・Projection・作者／reader文法・公開API/DTO/DB/RN・依存・各上限は不変。原初共同groupと外側対比は失効したまま、更新後はLIMITEDを保持する。一般の理由なし訂正を一括で拡張しない。
+
+既承認の残存経験保持を既存LIMITEDへ接続する修復。u279の当時の範囲記録、u281のNORMAL条件、u284初回限定と§9.2/9.4の品質規範は変更しない。LIMITED Receptionの既存本文inverseは作者replayを含む。今回その経路を変更せず、Reception全体の作者非依存検証が新しく成立したとは報告しない。初回の説明・受容述語の反復、訂正後の一般的な受け取り、理由の有無による受け取り方の差は未解消。
+
+実本文と検証は正本06／API handoff u286。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。

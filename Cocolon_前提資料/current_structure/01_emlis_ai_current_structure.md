@@ -1435,3 +1435,14 @@ u284の同一行為・二段対比の初回から満足を否定訂正／撤回�
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。
 
 検証・実本文は正本06／API handoff u285、再開位置はweekly§5.6.35。初回の説明・受容述語反復、理由なし否定訂正後のReceptionからreceivedが落ちる問題、更新後の一般的な受け取りは残る。一般receivedの旧「同時に」は対象外であり今回全面解消していない。訂正後の共同読みを一般化せず、次は残る二経験をそれぞれ選ぶ既存経路と、既承認意味の範囲を照合してReception欠落を扱う。新しい意味契約が必要なら不足と最小案を具体化する。既存共有17失敗・same100・Q1上限・giver帰属・本人実機・正式Product Readも未解消。Mashへ未合格本文の確認を求めない。10/17確認点・10/31残件線・12/18公開目標とPiece/Analysis主枠、管理評価53.25％を維持する。
+
+
+## u286 — 理由なし否定訂正でも残った経験を受け取りへ保持（2026-10-16 JST）
+
+u284の理由なし共有対象入力から満足だけを否定訂正した後、未撤回のreceived経験がReceptionから落ちる欠陥を修正した。同じcurrent_burden分類の代表選択で一方を捨てず、訂正評価とreceived対比を既存2 Moveへ別々に保持する。
+
+emlis_answer_update._active_planで成立する一時的な選択証明を、既存response→human_reception_plan→opportunitiesとdepthへ引数で渡す。source認識・核／関係・checkpoint・schema・NORMAL資格・Projection・作者／reader文法・公開API/DTO/DB/RN・依存・各上限は不変。原初共同groupと外側対比は失効したまま、更新後はLIMITEDを保持する。一般の理由なし訂正を一括で拡張しない。
+
+詳細・実検証は正本06／API handoff u286、全変更file責務は01A u286、再開順序はweekly§5.6.36。LIMITED Receptionの既存本文inverseは作者replayを含む。今回その経路を変更せず、Reception全体の作者非依存検証が新しく成立したとは報告しない。初回の説明・受容述語の反復、訂正後の一般的な受け取り、理由の有無による受け取り方の差は未解消。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。

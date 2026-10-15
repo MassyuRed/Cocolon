@@ -3461,3 +3461,20 @@ STRUCTURE_MAP_DELTA_PRESENT。既存本文owner内の補修。新production file
 RN→API→service/store→保存read→RNと01B/Cの責務は不変。原文の共同読みをresolver付きで再検証でき、更新後はその共同読みが失効し、received関係が完全一致で残り、両端nodeが既存失効属性の除去以外に変わっていない場合だけ適用する。原文の対比・肯否・各端点の時制を引用から保持する。新しい共同読みを更新後へ存続させず、意味選択・checkpoint・Reception・source認識・schema・上限・公開API/DTO/DB/RN・製品依存を変えない。
 
 検証は06／API handoff u285、最新順序はweekly§5.6.35。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。
+
+
+## u286 — 理由なし否定訂正でも残った経験を受け取りへ保持（2026-10-16 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。新production file／永続型／subsystemなし。
+
+| mashos-api相対path | 今回の責務差分 |
+|---|---|
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py | 原初共有対象と唯一の理由なし満足否定訂正を再証明し、未改変の2経験の選択証明をresponseへ渡す。 |
+| ai/services/ai_inference/emlis_ai_grounded_observation_plan.py | 非保存の2group引数を既存opportunity／depthへ通し、同family代表の脱落を対象限定で防ぐ。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 追加14検査。両欄・反応2・本文保持／改変拒否・所有改変／対象外訂正／PARTIAL非適用。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行identity更新。歴史fixture不変。 |
+| ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md | 現在入口・実結果・検証限界・残件。 |
+
+emlis_answer_update._active_planで成立する一時的な選択証明を、既存response→human_reception_plan→opportunitiesとdepthへ引数で渡す。source認識・核／関係・checkpoint・schema・NORMAL資格・Projection・作者／reader文法・公開API/DTO/DB/RN・依存・各上限は不変。原初共同groupと外側対比は失効したまま、更新後はLIMITEDを保持する。一般の理由なし訂正を一括で拡張しない。
+
+RN→API→service/store→保存read→RNと01B/Cの責務は不変。検証は正本06／API handoff u286、順序はweekly§5.6.36。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。

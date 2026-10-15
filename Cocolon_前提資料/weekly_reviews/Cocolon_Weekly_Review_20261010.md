@@ -1102,3 +1102,22 @@ u284の同一行為・二段対比の初回から満足を否定訂正／撤回�
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。
 
 初回の説明・受容述語反復、理由なし否定訂正後のReceptionからreceivedが落ちる問題、更新後の一般的な受け取りは残る。一般receivedの旧「同時に」は対象外であり今回全面解消していない。訂正後の共同読みを一般化せず、次は残る二経験をそれぞれ選ぶ既存経路と、既承認意味の範囲を照合してReception欠落を扱う。新しい意味契約が必要なら不足と最小案を具体化する。既存共有17失敗・same100・Q1上限・giver帰属・本人実機・正式Product Readも未解消。Mashへ未合格本文の確認を求めない。10/17確認点・10/31残件線・12/18公開目標とPiece/Analysis主枠、管理評価53.25％を維持する。
+
+
+### 5.6.36 u286 — 理由なし否定訂正でも残った経験を受け取りへ保持（2026-10-16 JST）
+
+u284の理由なし共有対象入力から満足だけを否定訂正した後、未撤回のreceived経験がReceptionから落ちる欠陥を修正した。同じcurrent_burden分類の代表選択で一方を捨てず、訂正評価とreceived対比を既存2 Moveへ別々に保持する。
+
+原初u284 groupをresolver付きで再証明し、理由なし・回答exact1・原時点の無程度満足を過去否定へREVISEするexact1操作に限定。対象とreceived両端は共同読みの失効属性除去以外に完全一致、received関係も完全一致、required4核／全2関係で閉じることを要求する。部分回答、時点変更、納得／程度付き評価、撤回、反応訂正、追加経験・追加回答へ適用しない。
+
+最終関連単一run：`787 passed, 2 warnings in 250.02s (0:04:10)`。内訳は評価733＋Q2/Q3 application54、skip/xfailなし。現行共有owner identityは別run：`1 passed, 194 deselected, 1 warning in 22.36s`。追加14件は両欄×反応2の保持、本文削除／対象・肯否・時点・原因・同時性改変の拒否、原文／更新所有の改変拒否、対象外訂正6種、PARTIAL非適用。歴史fixtureは変更せず、現行identityだけ再計算した。
+
+変更前後の合成32応答（共有対象／別欄×理由0/1×反応2×欄配置2×初回/訂正）を比較。対象4更新だけのReceptionが変わり、初回16と対象外12の全文は一致。全32のcheckpoint・核・関係・projection branch・reason codes、全Observationは一致した。
+
+実EmlisThreadService＋隔離PGliteで初回8／更新8の16 DTO（PRE_QUESTION8／REFINED8）を保存し、NoAuthor GET/start完全一致・同回答再送一致・event無増加を確認。理由なしは両欄とも否定訂正、理由ありはmemo否定訂正／memo_action評価撤回。現行RN hook/modalで16件の全文・全Observation履歴・close/reopen一致を確認。rootが16本文（同一全文をまとめた10種類）を全文読解。native部品はstubで本人実機ではない。
+
+LIMITED Receptionの既存本文inverseは作者replayを含む。今回その経路を変更せず、Reception全体の作者非依存検証が新しく成立したとは報告しない。初回の説明・受容述語の反復、訂正後の一般的な受け取り、理由の有無による受け取り方の差は未解消。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。
+
+次は初回の説明と受容述語の反復、訂正後の一般的な受け取りを、選択された意味と可視本文の差として扱う。今回保持できた経験を再び落とさず、単なる短文化を§9.2/9.4の完成にしない。理由なしをNORMALへ入れることや初回共同読みの訂正一般への拡張は今回の承認としない。新意味契約が必要なら具体差分を先に示す。既存共有17失敗・same100・Q1上限・giver帰属・本人実機・正式Product Readは残件。Mashへ未合格本文の確認を求めない。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠、管理評価53.25％は不変。
