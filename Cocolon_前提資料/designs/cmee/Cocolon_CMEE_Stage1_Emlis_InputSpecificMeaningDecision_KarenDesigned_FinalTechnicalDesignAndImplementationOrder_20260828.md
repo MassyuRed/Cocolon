@@ -3111,3 +3111,16 @@ source_owned_relational_focusはplanありの本文経路だけで、同一sourc
 u253/u254の対象撤回とu264の理由所有を維持した本文の実装整合。既存の注意を新しい経験理解へ読み替えない。u275の「拠り所」への言い換えだけで内容形成が進んだとは扱わない。
 
 **TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。今回の有限文修正を経験理解・§9.2/9.4全体の完成へ換算しない。固定的で説明的な表現、撤回後に別received経験がReceptionへ選ばれない状態、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
+
+
+## u277 — 満足対象の撤回後も別received経験をReceptionへ残す（2026-10-15 JST）
+
+満足の対象だけを撤回した後、理由→満足と別received経験が意味・Observationに残るのに、別経験だけがReceptionから落ちる不具合を修正した。理由関係が残るため既存の孤立撤回判定へ入らず、lived_changeの優先でcurrent_burdenが候補除外されていた。source所有が確認できる理由／満足と一つのoriginal received組を、既存2 Moveへ分けて保持する。撤回対象の復活、二経験間の因果や本人が述べていない価値判断は加えない。
+
+u276の同一source内の理由／満足exact2・withdrawn_source_event・単独user_stated_cause・本人・肯定無程度・過去現在という証明を既存plan owner内のhelperへ抽出した。これに加え、回答由来nucleusなし・残りが一つのreceived組という条件で_thread_retained_reaction_groupsから二つのdutyを返す。選択は既存LIMITED ATTENTION/ATTEND_TOの全source MATERIAL_WEIGHT/RECEIVE_AS_MATERIALを保ち、Moveごとのcontributionを理由／満足と別経験へ分離する。validatorと作者非依存readerはexact2 Move、required、reception_act順、sourceから再導出したduty tuple一致、理由側のselected contribution exact2、focalなしを確認する。従来のRELATIONAL_NONCOLLAPSE/PRESERVE_BOTH_ENDPOINTS分岐も維持する。schema・source認識文法・NORMAL資格・各上限を拡張せず、既承認の選択内の欠落を直した。
+
+u276の有限文とsource所有を維持し、既に認識された別経験の選択欠落を修復した。§9.2/9.4の内容形成を固定文の追加件数で合格にしない。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。今回の欠落回復を§9.2/9.4の経験理解・受け取り全体の完成へ換算しない。固定的な説明／言い換え、対象撤回後の複数receivedや追加actionを含む範囲、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
+
+次は§9.2/9.4に戻り、初回と訂正後の実本文で、既に保持している意味がEmlisの受け取り内容へ届くかを確認する。特に理由への注意とreceivedの言い換えが固定的説明に留まる点を、意味の欠落・所有・接続と実本文の差として診断する。別の注意表現へ替えただけで内容形成が進んだとはしない。複数経験や追加actionの既存停止を一括解除せず、必要な意味/schema/上限拡張があれば不足を具体化して別判断へ戻す。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠を維持する。

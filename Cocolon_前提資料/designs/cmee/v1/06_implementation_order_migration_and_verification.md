@@ -1,6 +1,6 @@
 # CMEE V1 — Implementation Order / Migration / Verification 詳細設計
 
-> 最新Emlisは末尾u276の満足対象撤回後の理由・評価の有限文修正。585検査と保存DTO24件の表示・履歴・再表示を確認。既承認の意味・選択・checkpointを保持。次は残存経験の選択内容と受け取り。商品NOT_CLEAR・初回単位未完了・未配置。
+> 最新Emlisは末尾u277の満足対象撤回後の別received経験保持。599 PASSの関連検査と保存DTO24件の表示・履歴・再表示を確認。既承認の意味・checkpoint・上限を維持し、選択欠落を修復。次は§9.2/9.4の受け取り内容。商品NOT_CLEAR・初回単位未完了・未配置。
 
 > 最新のAnalysis内容修正は末尾 **u250（2026-10-13 JST・未配置）**。既知修飾が重なる話者の引用と本人の独立内容を区別する不整合を修正。生成全文・検証・残件は同節とAnalysis current03を参照。
 
@@ -18137,3 +18137,18 @@ source_owned_relational_focusはplanありの本文経路だけで、同一sourc
 次は、初回／訂正後の残存経験が選択内容とReceptionにどう届くかを確認し、特に今回Observationに残る別received経験が撤回後Receptionへ含まれない既存状態を、既承認の選択・上限内で扱えるか調べる。新しい意味がないのに注意表現を言い換えただけで内容形成が進んだとはしない。意味範囲・schema・上限を広げる必要がある場合だけ不足を具体化して別判断へ戻す。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠を維持する。
 
 実装commit：[u276 89207ef](https://github.com/MassyuRed/mashos-api/commit/89207ef3c2d535e2d79ac423e1d083d9540e4482)。全file責務は01A u276、詳細実本文はAPI既存handoff u276。
+
+
+## u277 — 満足対象の撤回後も別received経験をReceptionへ残す（2026-10-15 JST）
+
+満足の対象だけを撤回した後、理由→満足と別received経験が意味・Observationに残るのに、別経験だけがReceptionから落ちる不具合を修正した。理由関係が残るため既存の孤立撤回判定へ入らず、lived_changeの優先でcurrent_burdenが候補除外されていた。source所有が確認できる理由／満足と一つのoriginal received組を、既存2 Moveへ分けて保持する。撤回対象の復活、二経験間の因果や本人が述べていない価値判断は加えない。
+
+u276の同一source内の理由／満足exact2・withdrawn_source_event・単独user_stated_cause・本人・肯定無程度・過去現在という証明を既存plan owner内のhelperへ抽出した。これに加え、回答由来nucleusなし・残りが一つのreceived組という条件で_thread_retained_reaction_groupsから二つのdutyを返す。選択は既存LIMITED ATTENTION/ATTEND_TOの全source MATERIAL_WEIGHT/RECEIVE_AS_MATERIALを保ち、Moveごとのcontributionを理由／満足と別経験へ分離する。validatorと作者非依存readerはexact2 Move、required、reception_act順、sourceから再導出したduty tuple一致、理由側のselected contribution exact2、focalなしを確認する。従来のRELATIONAL_NONCOLLAPSE/PRESERVE_BOTH_ENDPOINTS分岐も維持する。schema・source認識文法・NORMAL資格・各上限を拡張せず、既承認の選択内の欠落を直した。
+
+最終単一run 599 PASS（評価544・Q2/Q3 application54・現行identity1、193.09秒）。三理由×評価時点2×欄2の12組で、初回全文・初回plan/選択・完全checkpoint・撤回後Observation・status/reason_codesは前後一致。撤回後だけplan/選択が二経験へ変わり、実Receptionに別received句が残る。実service＋隔離PGliteへ初回12＋撤回後12を保存し、NoAuthor GET/start・同一回答再送のevent無増加を確認。実保存DTO24件を既存RN hook/modalへ渡し、本文・履歴・close/reopen一致。root華恋が24本文を全文確認した。native部品はstubで、実機・正式Product Readではない。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。今回の欠落回復を§9.2/9.4の経験理解・受け取り全体の完成へ換算しない。固定的な説明／言い換え、対象撤回後の複数receivedや追加actionを含む範囲、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
+
+次は§9.2/9.4に戻り、初回と訂正後の実本文で、既に保持している意味がEmlisの受け取り内容へ届くかを確認する。特に理由への注意とreceivedの言い換えが固定的説明に留まる点を、意味の欠落・所有・接続と実本文の差として診断する。別の注意表現へ替えただけで内容形成が進んだとはしない。複数経験や追加actionの既存停止を一括解除せず、必要な意味/schema/上限拡張があれば不足を具体化して別判断へ戻す。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠を維持する。
+
+実装commit：[b7106f8](https://github.com/MassyuRed/mashos-api/commit/b7106f8dbaf5a41c84b5a94d37dc80bb81289e2d)。全file責務は01A u277、詳細実本文はAPI既存handoff u277。

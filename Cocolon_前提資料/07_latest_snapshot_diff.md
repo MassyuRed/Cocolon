@@ -40620,3 +40620,14 @@ u273で残した「単独理由付きの満足＋別経験の反応訂正」の�
 **TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。今回の有限文修正を経験理解・§9.2/9.4全体の完成へ換算しない。固定的で説明的な表現、撤回後に別received経験がReceptionへ選ばれない状態、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
 
 全体01・01A・current01/04・8/28設計・06・weekly§5.6.26・API既存handoffを同期。実装commit：[u276 89207ef](https://github.com/MassyuRed/mashos-api/commit/89207ef3c2d535e2d79ac423e1d083d9540e4482)。
+
+
+## u277 — 満足対象の撤回後も別received経験をReceptionへ残す（2026-10-15 JST）
+
+満足の対象だけを撤回した後、理由→満足と別received経験が意味・Observationに残るのに、別経験だけがReceptionから落ちる不具合を修正した。理由関係が残るため既存の孤立撤回判定へ入らず、lived_changeの優先でcurrent_burdenが候補除外されていた。source所有が確認できる理由／満足と一つのoriginal received組を、既存2 Moveへ分けて保持する。撤回対象の復活、二経験間の因果や本人が述べていない価値判断は加えない。
+
+最終単一run 599 PASS（評価544・Q2/Q3 application54・現行identity1、193.09秒）。三理由×評価時点2×欄2の12組で、初回全文・初回plan/選択・完全checkpoint・撤回後Observation・status/reason_codesは前後一致。撤回後だけplan/選択が二経験へ変わり、実Receptionに別received句が残る。実service＋隔離PGliteへ初回12＋撤回後12を保存し、NoAuthor GET/start・同一回答再送のevent無増加を確認。実保存DTO24件を既存RN hook/modalへ渡し、本文・履歴・close/reopen一致。root華恋が24本文を全文確認した。native部品はstubで、実機・正式Product Readではない。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。今回の欠落回復を§9.2/9.4の経験理解・受け取り全体の完成へ換算しない。固定的な説明／言い換え、対象撤回後の複数receivedや追加actionを含む範囲、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
+
+全体01・01A・current01/04・8/28設計・06・weekly§5.6.27・API既存handoffを同期。実装commit：[b7106f8](https://github.com/MassyuRed/mashos-api/commit/b7106f8dbaf5a41c84b5a94d37dc80bb81289e2d)。
