@@ -3190,3 +3190,21 @@ STRUCTURE_MAP_DELTA_PRESENT。既存production 5fileと既存test／現行identi
 全体のRN→API→service/store→read→RN経路は維持。分析・Piece・国家・TodayQuestionの責務は不変。01B/01Cのcore間経路追加はない。詳細はAPI handoff u269／06／weekly§5.6.19。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+
+### u270 — 2 received＋2評価のsource保持漏れを修復（2026-10-15 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production3file・既存test・現行identity fixtureと新規の合成旧checkpoint fixture1fileを変更。新helper/engine/author/checker/service/registry、公開API/DTO/DB/SQL/RN、製品依存の追加・変更は0。
+
+| API repo相対path | u270の責務差分 |
+|---|---|
+| ai/services/ai_inference/emlis_ai_grounded_observation_plan.py | 既存final projection内でplain評価exact2とreceivedの全owner閉包を証明してretentionを修復。直接生成の既定は従来のまま。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py | threadのoriginal_meaning_planから昇格を明示有効化し、旧投影指定を渡す。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py | 限定旧retention planを完全checkpointとして再導出。既存の旧世代fallbackも旧retentionを維持。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 両欄・対象・肯否・時点、全8owner、逆読解、余分な材料、Q1上限残差、旧checkpoint、実保存／NoAuthor再開を検証。 |
+| ai/tests/fixtures/cmee_emlis_plain_appraisal_retention_u268.json | 新規。未変更u268から実取得した合成旧checkpoint12例と旧本文状態。個人実入力ではない。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有ownerの正規identityを再採録。歴史receiptは不変。 |
+
+RN→API→service/store→保存read→RNの経路と、分析・Piece・国家・TodayQuestionの責務は不変。01B/01Cの経路追加なし。本文・実測・限界はAPI handoff／06 u270、優先順はweekly§5.6.20。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。

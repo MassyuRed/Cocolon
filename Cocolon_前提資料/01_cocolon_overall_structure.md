@@ -6916,3 +6916,16 @@ STRUCTURE_MAP_DELTA_PRESENT。既存production 1file・3関数の変更。source
 既存source→meaning→同一本文作者→保存event→RNの経路で初回停止を回復。全file責務差分は01A u269、現在地はcurrent01/04、実本文・検証・残件は06／API handoff u269・weekly§5.6.19。STRUCTURE_MAP_DELTA_PRESENT、production既存5file、私有helper1追加、新file／公開契約／稼働構成変更0。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+
+### u270 — 2 received＋2評価のsource保持漏れを修復（2026-10-15 JST）
+
+4文以上の入力で既存span順位が後半の明示評価pairとreceived pairをshouldへ下げ、sourceとして認識済みの経験が選択から欠けていた。threadの既存final projection内で、理由・未成立contextのない明示評価pairがexact2あり、既存の最大3 dutyが全required/should本文ownerを保持できる場合だけ、各pairをrequiredへ戻す。2 received＋2評価の合成Q3_FREE入力は、両欄配置で8ownerを保持し、既存LIMITEDの3 Moveから初回本文を返す。対象・肯否・評価時点を変えた対照でも各経験の帰属を保持する。
+
+u253/u256の既存保持責務の欠陥修正であり、source文法・意味schema・NORMAL資格・Move上限・Observation contribution上限・作者・独立reader・品質gateは変更しない。新しい昇格はthread source ownerが明示的に有効化し、直接生成経路は従来の既定投影を維持する。追加の独立材料を黙って落として枠内に収めず、理由付き／未成立context付きの二組をこの修正へ含めない。
+
+全file責務は01A u270、本文と検証はAPI handoff／06、進行はweekly§5.6.20。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+残件：Q1の同じ4経験は既存Observation contribution上限で本文が出ない。Q3でも「納得した」から「満足している」への訂正はRESOLVEDで保存されるが、更新後のObservation選択が上限を超え、MEANING_UPDATED_BODY_UNAVAILABLEとなる。旧初回本文を現在本文へ戻さない。u269の重複理由文の全経験Reception、近似文／別欄二組、関係の説明反復と固定的な受け取り、§9.2/9.4の商品品質、有限対象撤回後の不自然さ・giver帰属・既存共有17失敗・same100・本人実機・正式Product Readは未解消。

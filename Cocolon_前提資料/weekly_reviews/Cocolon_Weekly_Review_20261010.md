@@ -1,6 +1,6 @@
 # Cocolon 第6回週末報告会 — 2026-10-10
 
-> **2026-10-15更新：EmlisAIの残件・再開順は§3.5・§5.6・§6.5、初回不採用試作は§5.6.1、原因の分離は§5.6.2、限定承認は§5.6.3、直近診断と限定変更案は§5.6.11、その追加承認・限定実装・検証結果は末尾§5.6.12を参照する。** CMEE実機接続は確認済みだが本文品質は未解消。最初の修正単位は未完了。Piece・分析の主枠と§5.5の配分、12/18公開目標は維持する。
+> **2026-10-15更新：EmlisAIの残件・再開順は§3.5・§5.6・§6.5、初回不採用試作は§5.6.1、原因の分離は§5.6.2、限定承認は§5.6.3、直近診断と限定変更案は§5.6.11、その追加承認は§5.6.12、最新の限定実装・検証結果と残件は末尾§5.6.20を参照する。** CMEE実機接続は確認済みだが本文品質は未解消。最初の修正単位は未完了。Piece・分析の主枠と§5.5の配分、12/18公開目標は維持する。
 
 > **最新の実行順序は末尾「5.5 実機確認対象と、その後の作業順序の更新」を優先する。** 10/10〜12に先行して実機稼働を確認する対象はEmlisAIと分析構造。二つの稼働確認後はPieceと分析構造の内容修正を進め、Pieceは利用経路の準備ができた時点で実機確認する。分析を任意の追加確認へ下げず、Pieceを三連休中の全操作確認の必達対象に戻さない。公開目標2026-12-18は§4.7のまま維持する。
 
@@ -859,3 +859,18 @@ APIの意味・保存回帰とidentityは384 PASS。旧合成checkpoint8件は�
 残件：同じ回答に独立訂正を併記した後は、意味はPARTIALで保存できるが、必要Observation contribution選択がstage1_required_observation_unrealizableとなりMEANING_UPDATED_BODY_UNAVAILABLEを維持する。単独曖昧撤回もANSWER_UNREFLECTEDで新本文なし。初回の完全一致二文は回復したが、「私は」を付けた近似文・別欄に分かれた二組の初回は反復／関係分断の既存gateで停止する。全三組Receptionのpair-only閉包、関係の説明反復と固定的な受け取り、2 received＋2評価、有限対象撤回後の不自然さ、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readも残る。
 
 次は初回一体単位の選択内容と受け取りを、出典ごとの意味を保った構成として改善する。今回の限定回復を商品完成へ換算しない。10/17確認点、10/31残件線・12/18リリース目標とPiece/Analysis主枠を維持する。
+
+
+### 5.6.20 u270 — 2 received＋2評価のsource保持漏れを修復（2026-10-15 JST）
+
+4文以上の入力で既存span順位が後半の明示評価pairとreceived pairをshouldへ下げ、sourceとして認識済みの経験が選択から欠けていた。threadの既存final projection内で、理由・未成立contextのない明示評価pairがexact2あり、既存の最大3 dutyが全required/should本文ownerを保持できる場合だけ、各pairをrequiredへ戻す。2 received＋2評価の合成Q3_FREE入力は、両欄配置で8ownerを保持し、既存LIMITEDの3 Moveから初回本文を返す。対象・肯否・評価時点を変えた対照でも各経験の帰属を保持する。
+
+評価suite403 PASS（u269の373＋新30）、Q2/Q3 application54 PASS、計457 PASS・skipなし。現行shared-owner identityは正規計算値と一致。実service＋隔離PGliteの実migration/RPCで初回本文保存、訂正意味保存、NoAuthorによるGET/start、同じkeyの再送とevent無増加を確認。実保存DTOの初回／回答後4ケースを既存RN hook/modalへ渡し、本文完全一致、履歴展開、close/reopenを確認した。native部品はtest stubで、端末実機・正式Product Readではない。RN全suiteの既知失敗を解消したとはしない。
+
+Q1および訂正後の本文まで回復したとはしない。u269の並行反映を取得後、その上へ既存契約内のretention修正だけを追加。全体01/01A・current01/04・8/28設計・06／API handoffを同期した。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+残件：Q1の同じ4経験は既存Observation contribution上限で本文が出ない。Q3でも「納得した」から「満足している」への訂正はRESOLVEDで保存されるが、更新後のObservation選択が上限を超え、MEANING_UPDATED_BODY_UNAVAILABLEとなる。旧初回本文を現在本文へ戻さない。u269の重複理由文の全経験Reception、近似文／別欄二組、関係の説明反復と固定的な受け取り、§9.2/9.4の商品品質、有限対象撤回後の不自然さ・giver帰属・既存共有17失敗・same100・本人実機・正式Product Readは未解消。
+
+次は、上限を広げる前に、既存Observation候補で同じ対象・評価を重ねて要求していないかを調べ、訂正後も出典の各経験を残す構成と§9.2/9.4の受け取りを一体で改善する。10/17確認点、10/31残件線・12/18リリース目標とPiece/Analysis主枠を維持する。

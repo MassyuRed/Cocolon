@@ -3008,3 +3008,18 @@ u264の理由exact1は各評価についての境界を維持する。二つの�
 残件：同じ回答に独立訂正を併記した後は、意味はPARTIALで保存できるが、必要Observation contribution選択がstage1_required_observation_unrealizableとなりMEANING_UPDATED_BODY_UNAVAILABLEを維持する。単独曖昧撤回もANSWER_UNREFLECTEDで新本文なし。初回の完全一致二文は回復したが、「私は」を付けた近似文・別欄に分かれた二組の初回は反復／関係分断の既存gateで停止する。全三組Receptionのpair-only閉包、関係の説明反復と固定的な受け取り、2 received＋2評価、有限対象撤回後の不自然さ、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readも残る。
 
 次は初回一体単位の選択内容と受け取りを、出典ごとの意味を保った構成として改善する。今回の限定回復を商品完成へ換算しない。10/17確認点、10/31残件線・12/18リリース目標とPiece/Analysis主枠を維持する。
+
+
+## u270 — 2 received＋2評価のsource保持漏れを修復（2026-10-15 JST）
+
+4文以上の入力で既存span順位が後半の明示評価pairとreceived pairをshouldへ下げ、sourceとして認識済みの経験が選択から欠けていた。threadの既存final projection内で、理由・未成立contextのない明示評価pairがexact2あり、既存の最大3 dutyが全required/should本文ownerを保持できる場合だけ、各pairをrequiredへ戻す。2 received＋2評価の合成Q3_FREE入力は、両欄配置で8ownerを保持し、既存LIMITEDの3 Moveから初回本文を返す。対象・肯否・評価時点を変えた対照でも各経験の帰属を保持する。
+
+u253/u256の既存保持責務の欠陥修正であり、source文法・意味schema・NORMAL資格・Move上限・Observation contribution上限・作者・独立reader・品質gateは変更しない。新しい昇格はthread source ownerが明示的に有効化し、直接生成経路は従来の既定投影を維持する。追加の独立材料を黙って落として枠内に収めず、理由付き／未成立context付きの二組をこの修正へ含めない。
+
+旧checkpointはretention昇格だけを無効にした旧source planから完全再導出し、既存のID・canonical質問照合を通す。未変更u268（05d3040）の合成Q1/Q3_FREE初回・回答計12例はu269でも同一であり、完全checkpoint・本文有無・state・reason_codes・偽checkpoint拒否を照合した。旧質問が現行planでも完全canonicalなら、未保存の新回答は新しい完全checkpointを作れる。旧IDへ新しい意味を貼らない。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+残件：Q1の同じ4経験は既存Observation contribution上限で本文が出ない。Q3でも「納得した」から「満足している」への訂正はRESOLVEDで保存されるが、更新後のObservation選択が上限を超え、MEANING_UPDATED_BODY_UNAVAILABLEとなる。旧初回本文を現在本文へ戻さない。u269の重複理由文の全経験Reception、近似文／別欄二組、関係の説明反復と固定的な受け取り、§9.2/9.4の商品品質、有限対象撤回後の不自然さ・giver帰属・既存共有17失敗・same100・本人実機・正式Product Readは未解消。
+
+本差分はu253/u256の既存保持責務の実装修正。§9.2/9.4の新規達成・正式Product Readではない。実本文と検証はAPI handoff／06 u270。
