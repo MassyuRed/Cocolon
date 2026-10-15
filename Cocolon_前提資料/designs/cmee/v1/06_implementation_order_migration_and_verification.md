@@ -18061,3 +18061,26 @@ STRUCTURE_MAP_DELTA_PRESENT。既存production2file／3関数、既存test1file�
 残件はQ1の2 received＋2評価における既存Observation上限、近似文／別欄二組、関係の説明反復と固定的な受け取り、有限対象撤回後の不自然さ、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Read。今回はQ3_FREEの対象訂正系列を閉じた範囲であり、PREMIUM複数round全般や§9.2/9.4の商品品質の完成へ換算しない。RN全suiteは今回再実行せず、以前の26 PASS/5 FAILを解消したとはしない。
 
 次は回復した実本文を使い、§9.2/9.4の内容形成として関係説明の反復と評価の言い換えだけに寄ったReceptionを改善する。今回解消したQ3停止を再び第一候補へ戻さず、上限引上げを自動的な次工程にしない。10/17確認点・10/31残件線・12/18公開目標とPiece/Analysis主枠を維持する。
+
+
+## u273 — 理由・対象・評価を一文で保持し、同じ評価の説明反復を減らす（2026-10-15 JST）
+
+本人が明示した一つの理由と評価対象が同じ肯定・程度なしの満足へつながる場合、二関係を別文にして評価を二度出すObservationを一文へまとめた。sourceで証明済みの完全一致二出現も、六核・四関係・出現別根拠を保持して一文を共有する。原文同一性の証明がない近似文・別欄の別経験を統合しない。
+
+既存Sentence Surfaceの_render_relationで、source_owned_result_appraisal_reasonが証明する閉じた理由・対象・評価だけを実現する。既存Observation Gateの_body_inverse_reason_appraisalは作者を呼ばず、可視一文全体から三役割を読み、bound全核・全required関係と一致した場合にだけ二本（重複は四本）の関係を証明する。その関係に限って、共有評価では成立しない隣接引用条件を全体構文の照合へ置き換える。無関係な関係・coverage・反復・最終品質検査は維持する。
+
+意味選択・source認識・checkpoint・旧再導出・Reception・各上限は変更しない。旧二出現planに同一性証明がない場合、または旧撤回後に同じ原文二出現の片方だけ残る場合は従来の表現を保持する。歴史checkpoint fixture／IM03 proofは変更しない。API/DTO/DB/SQL/RN・製品依存・Piece/Analysisへの変更なし。
+
+最終productionに対する既存＋追加検査は、評価472・Q2/Q3 application54・現行identity1の異なる527条件を確認。全体実行は521 PASS／追加6件FAIL（単独理由文の訂正後がREFINEDになるとの未確認期待）。未変更u272でも同じ停止を確認し、当該新規6件を「訂正の保存・旧本文の履歴限定・再生成なしの再読」の検査へ修正して6 PASS。既存期待の削除、skip/xfail、productionやgateの緩和は行っていない。527を単一runの合格数や商品合格数とは表さない。追加12件は独立三役割読解6条件（各10改変拒否）と保存6条件。通常・完全一致重複、両欄、肯否・時点・対象・理由の帰属、旧checkpoint、u272訂正経路を含む既存回帰は通過した。
+
+実service＋隔離PGliteの既存migration/RPCで6入力の初回と回答後を保存し、実保存DTO12件を既存RN hook/modalへ渡した。初回本文完全一致、履歴展開、close/reopen、訂正後に旧初回本文を現在本文へ戻さない表示を確認。NoAuthor restart GET/start、回答再送のevent無増加も確認した。native部品はstub、本人端末・正式Product Readではない。RN全suiteは未再実行で、既知26 PASS/5 FAILを解消したとはしない。
+
+保存確認で、単独理由付き満足＋別欄receivedの反応訂正はRESOLVEDの意味を保存してもMEANING_UPDATED_BODY_UNAVAILABLEになる既存残件を再現した。未変更u272の二つの作者／検証fileと現行を、3対象形×両欄の6条件で比較し、同じ停止を確認した。別source成分の二行がsemantic_arc:bounded_relationを共有するため、最終検査がrequired_arc_fragmented_without_reasonで拒否する。投影・生成・独立逆読解と必要5核／3関係の保持は通過する。u272のsource成分identity適用条件が重複理由または評価自体の訂正に限られているためで、上限や今回の一文作者が原因ではない。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+受け取りの反復と言い換え中心の内容、引用と説明的な文章、Q1の2 received＋2評価の既存上限、近似文／別欄二組、有限対象撤回後の不自然さ、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは未解消。今回の短文化を§9.2/9.4の商品品質完成へ換算しない。
+
+次は、既存_observation_surface_atomsで単独理由付き評価と別経験訂正のsource成分を識別し、旧checkpointの完全再導出・同じ経験の不当分割拒否を保って保存後本文へ通す。その後も初回一体単位の受け取り内容を既存§9.2/9.4へ戻して改善する。10/17確認点・10/31残件線・12/18目標、Piece/Analysis主枠を維持する。
+
+実本文、途中結果、runtime／identityはAPI handoff u273、全file責務は01A。反映したcommit・最終head・remote照合・同head CIの状態は既存Draft PR3／30に記録する。

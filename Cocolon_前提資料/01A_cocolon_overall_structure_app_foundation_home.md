@@ -3251,3 +3251,24 @@ RN→API→service/store→保存read→RNの既存経路、01B/Cの隣接責務
 実本文・検証・残件はAPI handoff／06 u272、優先順はweekly§5.6.22。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+
+## u273 — 理由・対象・評価を一文で保持し、同じ評価の説明反復を減らす（2026-10-15 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。新規production file／subsystemは追加せず、既存ownerの可視unit実現と独立読解責務を更新する。
+
+| 既存owner（mashos-api相対） | u273の責務差分 |
+|---|---|
+| ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py | 閉じた理由・対象・評価を一文で実現。出現別bindingと旧plan表現を保持。 |
+| ai/services/ai_inference/emlis_ai_grounded_observation_gate.py | 可視一文全体とsourceの三役割・全関係を作者非依存で照合。証明した関係だけに共有評価の構文を認める。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 既存反復期待の更新、te/deを含む三役割・意味改変拒否、保存再読と既存訂正停止の履歴境界。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行正規identityだけを再計算。歴史proofは不変。 |
+| ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md | 実本文、検証分母、残件と次ownerを保存。 |
+
+本人が明示した一つの理由と評価対象が同じ肯定・程度なしの満足へつながる場合、二関係を別文にして評価を二度出すObservationを一文へまとめた。sourceで証明済みの完全一致二出現も、六核・四関係・出現別根拠を保持して一文を共有する。原文同一性の証明がない近似文・別欄の別経験を統合しない。
+
+意味選択・source認識・checkpoint・旧再導出・Reception・各上限は変更しない。旧二出現planに同一性証明がない場合、または旧撤回後に同じ原文二出現の片方だけ残る場合は従来の表現を保持する。歴史checkpoint fixture／IM03 proofは変更しない。API/DTO/DB/SQL/RN・製品依存・Piece/Analysisへの変更なし。
+
+実本文・検証分母・既存訂正停止はAPI handoff／06 u273。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。

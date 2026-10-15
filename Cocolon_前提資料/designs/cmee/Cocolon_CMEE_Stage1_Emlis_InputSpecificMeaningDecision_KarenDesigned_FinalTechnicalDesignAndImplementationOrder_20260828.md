@@ -3055,3 +3055,20 @@ u253/u264/u271の既存意味と§9.4の多対一可視unitを接続する整合
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
 
 §9.2/9.4の内容形成・正式Product Readは未完了。実本文と検証はAPI handoff／06 u272、全file責務は01A、残件と順序はweekly§5.6.22。
+
+
+## u273 — 理由・対象・評価を一文で保持し、同じ評価の説明反復を減らす（2026-10-15 JST）
+
+§9.4の多対一可視unitを、既存sourceが証明する理由・対象・評価の閉じた構成へ接続する限定実装。新しい意味・関係・NORMAL資格は作らない。
+
+本人が明示した一つの理由と評価対象が同じ肯定・程度なしの満足へつながる場合、二関係を別文にして評価を二度出すObservationを一文へまとめた。sourceで証明済みの完全一致二出現も、六核・四関係・出現別根拠を保持して一文を共有する。原文同一性の証明がない近似文・別欄の別経験を統合しない。
+
+既存Sentence Surfaceの_render_relationで、source_owned_result_appraisal_reasonが証明する閉じた理由・対象・評価だけを実現する。既存Observation Gateの_body_inverse_reason_appraisalは作者を呼ばず、可視一文全体から三役割を読み、bound全核・全required関係と一致した場合にだけ二本（重複は四本）の関係を証明する。その関係に限って、共有評価では成立しない隣接引用条件を全体構文の照合へ置き換える。無関係な関係・coverage・反復・最終品質検査は維持する。
+
+意味選択・source認識・checkpoint・旧再導出・Reception・各上限は変更しない。旧二出現planに同一性証明がない場合、または旧撤回後に同じ原文二出現の片方だけ残る場合は従来の表現を保持する。歴史checkpoint fixture／IM03 proofは変更しない。API/DTO/DB/SQL/RN・製品依存・Piece/Analysisへの変更なし。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+受け取りの反復と言い換え中心の内容、引用と説明的な文章、Q1の2 received＋2評価の既存上限、近似文／別欄二組、有限対象撤回後の不自然さ、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは未解消。今回の短文化を§9.2/9.4の商品品質完成へ換算しない。
+
+実本文と検証はAPI handoff／06 u273。単独理由文＋別経験訂正の既存停止はweekly§5.6.23で別残件として管理する。

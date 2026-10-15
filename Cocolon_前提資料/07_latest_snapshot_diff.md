@@ -40574,3 +40574,14 @@ STRUCTURE_MAP_DELTA_PRESENT。既存production2fileの3関数でarc identity・�
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
 
 次は回復した実本文を使い、§9.2/9.4の内容形成として関係説明の反復と評価の言い換えだけに寄ったReceptionを改善する。今回解消したQ3停止を再び第一候補へ戻さず、上限引上げを自動的な次工程にしない。10/17確認点・10/31残件線・12/18公開目標とPiece/Analysis主枠を維持する。
+
+
+### u273 — 理由・対象・評価を一文で保持し、同じ評価の説明反復を減らす（2026-10-15 JST）
+
+既存作者で二度述べていた一つの評価を、理由・対象・評価の三役割と各関係を保った一文へ変更。完全一致二出現は出現別根拠を保持し、旧保存planとReceptionは維持。独立readerは全体構文をsourceと照合する。
+
+検証は全体521 PASS＋限定再実行6 PASS（異なる527条件）。保存DTO12件のRN本文／履歴／再openを確認。単独理由文＋別経験の反応訂正では、u272からの本文停止を6条件で再確認し、未解消として保存した。実機・正式Product Readとは区別する。
+
+詳細はAPI handoff／06 u273、全file地図01A、current01/04、8/28設計追記、weekly§5.6.23。反映commit・remote内容照合は既存PR3／30本文に記す。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。

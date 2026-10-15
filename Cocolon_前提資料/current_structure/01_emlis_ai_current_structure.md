@@ -1301,3 +1301,22 @@ u253/u264/u271の既存意味と§9.4の多対一可視unitを接続する整合
 残件はQ1の2 received＋2評価における既存Observation上限、近似文／別欄二組、関係の説明反復と固定的な受け取り、有限対象撤回後の不自然さ、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Read。今回はQ3_FREEの対象訂正系列を閉じた範囲であり、PREMIUM複数round全般や§9.2/9.4の商品品質の完成へ換算しない。RN全suiteは今回再実行せず、以前の26 PASS/5 FAILを解消したとはしない。
 
 全file責務は01A u272、実本文・515検査と保存／RN確認はAPI handoff／06、次作業はweekly§5.6.22。
+
+
+## u273 — 理由・対象・評価を一文で保持し、同じ評価の説明反復を減らす（2026-10-15 JST）
+
+本人が明示した一つの理由と評価対象が同じ肯定・程度なしの満足へつながる場合、二関係を別文にして評価を二度出すObservationを一文へまとめた。sourceで証明済みの完全一致二出現も、六核・四関係・出現別根拠を保持して一文を共有する。原文同一性の証明がない近似文・別欄の別経験を統合しない。
+
+既存Sentence Surfaceの_render_relationで、source_owned_result_appraisal_reasonが証明する閉じた理由・対象・評価だけを実現する。既存Observation Gateの_body_inverse_reason_appraisalは作者を呼ばず、可視一文全体から三役割を読み、bound全核・全required関係と一致した場合にだけ二本（重複は四本）の関係を証明する。その関係に限って、共有評価では成立しない隣接引用条件を全体構文の照合へ置き換える。無関係な関係・coverage・反復・最終品質検査は維持する。
+
+意味選択・source認識・checkpoint・旧再導出・Reception・各上限は変更しない。旧二出現planに同一性証明がない場合、または旧撤回後に同じ原文二出現の片方だけ残る場合は従来の表現を保持する。歴史checkpoint fixture／IM03 proofは変更しない。API/DTO/DB/SQL/RN・製品依存・Piece/Analysisへの変更なし。
+
+保存確認で、単独理由付き満足＋別欄receivedの反応訂正はRESOLVEDの意味を保存してもMEANING_UPDATED_BODY_UNAVAILABLEになる既存残件を再現した。未変更u272の二つの作者／検証fileと現行を、3対象形×両欄の6条件で比較し、同じ停止を確認した。別source成分の二行がsemantic_arc:bounded_relationを共有するため、最終検査がrequired_arc_fragmented_without_reasonで拒否する。投影・生成・独立逆読解と必要5核／3関係の保持は通過する。u272のsource成分identity適用条件が重複理由または評価自体の訂正に限られているためで、上限や今回の一文作者が原因ではない。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+受け取りの反復と言い換え中心の内容、引用と説明的な文章、Q1の2 received＋2評価の既存上限、近似文／別欄二組、有限対象撤回後の不自然さ、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは未解消。今回の短文化を§9.2/9.4の商品品質完成へ換算しない。
+
+次は、既存_observation_surface_atomsで単独理由付き評価と別経験訂正のsource成分を識別し、旧checkpointの完全再導出・同じ経験の不当分割拒否を保って保存後本文へ通す。その後も初回一体単位の受け取り内容を既存§9.2/9.4へ戻して改善する。10/17確認点・10/31残件線・12/18目標、Piece/Analysis主枠を維持する。
+
+全file責務は01A u273、実本文・検証はAPI handoff／06、優先順はweekly§5.6.23。
