@@ -3124,3 +3124,16 @@ u276の有限文とsource所有を維持し、既に認識された別経験の�
 **TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。今回の欠落回復を§9.2/9.4の経験理解・受け取り全体の完成へ換算しない。固定的な説明／言い換え、対象撤回後の複数receivedや追加actionを含む範囲、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
 
 次は§9.2/9.4に戻り、初回と訂正後の実本文で、既に保持している意味がEmlisの受け取り内容へ届くかを確認する。特に理由への注意とreceivedの言い換えが固定的説明に留まる点を、意味の欠落・所有・接続と実本文の差として診断する。別の注意表現へ替えただけで内容形成が進んだとはしない。複数経験や追加actionの既存停止を一括解除せず、必要な意味/schema/上限拡張があれば不足を具体化して別判断へ戻す。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠を維持する。
+
+
+## u278 — 評価の訂正・撤回後も残存理由の状態と元の時点を保つ（2026-10-15 JST）
+
+満足の評価を否定へ訂正、または評価だけを撤回した後、独立して残る理由の状態を「今は…感覚が前に出ています」と誤って実現する不具合を修正した。意味側は本人が述べた肯定のfact/stateと過去／現在を既に保持しており、本文作者が孤立理由を汎用の現在感覚へ流していた。元が過去なら「当時の状態として」、現在なら「入力した時点の状態として」と実現し、理由を訂正後の否定評価へ結び直さない。
+
+既存sentence surfaceのthread用単独Observationで、original memo/memo_action・required/explicit・本人・肯定fact/state・過去現在・appraisal_explicit_reason／reasoned_result_appraisal・relationなしを限定して実現する。既存gateの_body_inverse_intervening_eventsは、source spanと欄、全体で未接続の理由、型・時点・本人・極性を照合し、本文の状態文と引用内容を作者非依存に読む。source認識、checkpoint、plan、selected reception、Reception作者、schema、NORMAL資格、各上限は変更しない。
+
+§9.2/9.4の受け取り内容を再診断した。対象LIMITEDはATTENTION/ATTEND_TOとMATERIAL_WEIGHT/RECEIVE_AS_MATERIALを選び、focal_relation_refはない。既に豊かな解釈が選択されていて文面だけに届かない状態ではない。NORMALの別経路にある満たされた感覚をLIMITEDへ移植すると、選択された意味を越える。したがって今回の状態／時点修復を、固定的な注意・説明文から入力固有の受け取り内容が形成できたという合格へ換算しない。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。固定的な注意／説明文の内容形成、§9.2/9.4、対象撤回後の複数receivedや追加action、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。631件PASSを既存共有17失敗の解消とはしない。
+
+次は、今回の実保存本文で確認した「評価を否定へ訂正すると別received経験がObservationには残るのにReceptionから落ちる」選択差を診断する。u277の対象撤回とは別の更新経路であり、今回の状態／時点修復には混ぜていない。既承認の二経験・所有条件内で直せるかをcheckpoint→plan→選択→実本文で照合する。同時に§9.2/9.4の受け取り内容の不足を保持し、注意表現の言い換えやNORMALの意味の借用で埋めない。新しい意味契約・source範囲・schema・上限が必要なら不足を具体化して別判断へ戻す。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠は維持する。

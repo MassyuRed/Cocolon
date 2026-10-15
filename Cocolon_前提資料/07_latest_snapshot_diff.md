@@ -40631,3 +40631,16 @@ u273で残した「単独理由付きの満足＋別経験の反応訂正」の�
 **TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。今回の欠落回復を§9.2/9.4の経験理解・受け取り全体の完成へ換算しない。固定的な説明／言い換え、対象撤回後の複数receivedや追加actionを含む範囲、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
 
 全体01・01A・current01/04・8/28設計・06・weekly§5.6.27・API既存handoffを同期。実装commit：[b7106f8](https://github.com/MassyuRed/mashos-api/commit/b7106f8dbaf5a41c84b5a94d37dc80bb81289e2d)。
+
+
+## u278 — 評価の訂正・撤回後も残存理由の状態と元の時点を保つ（2026-10-15 JST）
+
+満足の評価を否定へ訂正、または評価だけを撤回した後、独立して残る理由の状態を「今は…感覚が前に出ています」と誤って実現する不具合を修正した。意味側は本人が述べた肯定のfact/stateと過去／現在を既に保持しており、本文作者が孤立理由を汎用の現在感覚へ流していた。元が過去なら「当時の状態として」、現在なら「入力した時点の状態として」と実現し、理由を訂正後の否定評価へ結び直さない。
+
+最終回帰631 passed（result appraisal576＋Q2/Q3 application54＋active shared owner identity1、210.46秒）。三理由×評価時点2×欄2×訂正／撤回の24組をu277と比較し、初回全体・更新後完全checkpoint・plan・選択・Reception・status/reason_codesは一致。更新後Observationの孤立理由行だけが変わった。作者呼出しを禁止した独立readerで、本人明示の理由時点2×欄2×操作2の8条件ごとに、現在感覚化・feeling化・event化・回答時点化・過去現在入替・別経験借用・他者化・否定評価への新因果・否定fact化の9改変を拒否した。
+
+実service＋隔離PGliteで、理由時点2×評価時点2×欄2×訂正／撤回の16組を初回／更新後まで実行し、保存DTO32件の本文と生成実本文を一致確認した。NoAuthor GET/start、同一回答再送のcurrent_observation／timeline一致とevent無増加を確認。実保存DTO32件を現行RN hook/modalへ渡し、本文・全Observation履歴・close/reopen一致を確認した。root華恋が32保存本文を全文確認した。native部品はstubで、本人実機・正式Product Readではない。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。固定的な注意／説明文の内容形成、§9.2/9.4、対象撤回後の複数receivedや追加action、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。631件PASSを既存共有17失敗の解消とはしない。
+
+全体01・01A・current01/04・8/28設計・06・weekly§5.6.28・API既存handoffを同期。実装commit：[d983445daf1901d129ce347739ff5821a15cfb30](https://github.com/MassyuRed/mashos-api/commit/d983445daf1901d129ce347739ff5821a15cfb30)。

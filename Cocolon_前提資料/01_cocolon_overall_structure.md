@@ -7004,3 +7004,12 @@ u273で残した「単独理由付きの満足＋別経験の反応訂正」の�
 既存選択・本文3owner内の修正。RN/API/DBと三中核責務は不変。全file責務は01A u277、実本文・検証はAPI handoff／06、次はweekly§5.6.27。
 
 **TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。今回の欠落回復を§9.2/9.4の経験理解・受け取り全体の完成へ換算しない。固定的な説明／言い換え、対象撤回後の複数receivedや追加actionを含む範囲、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
+
+
+## u278 — 評価の訂正・撤回後も残存理由の状態と元の時点を保つ（2026-10-15 JST）
+
+満足の評価を否定へ訂正、または評価だけを撤回した後、独立して残る理由の状態を「今は…感覚が前に出ています」と誤って実現する不具合を修正した。意味側は本人が述べた肯定のfact/stateと過去／現在を既に保持しており、本文作者が孤立理由を汎用の現在感覚へ流していた。元が過去なら「当時の状態として」、現在なら「入力した時点の状態として」と実現し、理由を訂正後の否定評価へ結び直さない。
+
+既存本文2owner内の修正。RN/API/DBと三中核責務は不変。全file責務は01A u278、実本文・検証はAPI handoff／06、次はweekly§5.6.28。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。固定的な注意／説明文の内容形成、§9.2/9.4、対象撤回後の複数receivedや追加action、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。631件PASSを既存共有17失敗の解消とはしない。
