@@ -3208,3 +3208,26 @@ STRUCTURE_MAP_DELTA_PRESENT。既存production3file・既存test・現行identit
 RN→API→service/store→保存read→RNの経路と、分析・Piece・国家・TodayQuestionの責務は不変。01B/01Cの経路追加なし。本文・実測・限界はAPI handoff／06 u270、優先順はweekly§5.6.20。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+
+## u271 — 重複理由文の各出現と別のreceived経験を初回Receptionへ保持（2026-10-15 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production 6file、既存testと現行identity fixtureを更新し、旧u269の合成checkpoint fixtureを1file追加。新しいengine・author・checker subsystem・service・registryは作らない。内部意味schemaの形、公開API/DTO/DB/SQL/RN、製品依存、Piece/Analysisは変更しない。歴史fixture／IM03 proofは保持。
+
+| 既存owner（mashos-api相対） | u271の責務差分 |
+|---|---|
+| ai/services/ai_inference/emlis_ai_grounded_observation_plan.py | sourceに完全一致二文の証明属性。source_owned_duplicate_reason_appraisalsで別々の閉じた三owner群を検証し、既存duty／retained-group選択へ接続。resolverがある段階では実原文と別scalar位置も再確認。 |
+| ai/services/ai_inference/emlis_ai_grounded_human_reception.py | _duplicate_reason_pairで既存二Move一文への適格性を判定。各exact3とcontributionを検証後に等価な有限文を一度描画し、両expression／Moveの可視bindingを保持。 |
+| ai/services/ai_inference/emlis_ai_grounded_observation_gate.py | 既存pair readerで双方のLIMITED三役割を実本文から独立に照合。Observationは二文全体と全六核／四関係を照合。作者replay自体は既存full inverse内に残り、独立readerと混同しない。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py | original_meaning_planでu269の属性なしsourceを再導出する内部指定を伝搬。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py | 完全u269 checkpointを先に再導出し、既存u268以前の互換鎖を保持。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py | 旧u269 sourceの初回本文もprepared planから描画。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 新三Move期待・両欄の初回／境界／改変拒否／保存再試行／歴史互換。 |
+| ai/tests/fixtures/cmee_emlis_u269_duplicate_source_checkpoints.json | 未変更u269から採録した合成12件。現行挙動への期待ではなく旧保存結果の互換証拠。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行正規計算値を更新。歴史proofや商品判定は変更しない。 |
+
+適用境界は、原文同一fieldの完全一致二文・独立した第三の受け取りがある三Move・full／standard／LIMITED。重複二文だけの入力、両field各二文の十二核、別の理由、近似文、他者／引用、否定・程度付き満足・納得、PREMIUM複数round全般の完成は含まない。u269の認識文法は広げず、今回の証明属性は選択上の限定条件である。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+実本文・検証と残件はAPI handoff／06 u271。01B/Cの隣接責務は不変。

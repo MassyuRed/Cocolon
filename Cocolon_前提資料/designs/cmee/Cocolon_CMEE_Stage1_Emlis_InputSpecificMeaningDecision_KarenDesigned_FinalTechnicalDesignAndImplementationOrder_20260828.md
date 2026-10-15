@@ -3023,3 +3023,20 @@ u253/u256の既存保持責務の欠陥修正であり、source文法・意味sc
 残件：Q1の同じ4経験は既存Observation contribution上限で本文が出ない。Q3でも「納得した」から「満足している」への訂正はRESOLVEDで保存されるが、更新後のObservation選択が上限を超え、MEANING_UPDATED_BODY_UNAVAILABLEとなる。旧初回本文を現在本文へ戻さない。u269の重複理由文の全経験Reception、近似文／別欄二組、関係の説明反復と固定的な受け取り、§9.2/9.4の商品品質、有限対象撤回後の不自然さ・giver帰属・既存共有17失敗・same100・本人実機・正式Product Readは未解消。
 
 本差分はu253/u256の既存保持責務の実装修正。§9.2/9.4の新規達成・正式Product Readではない。実本文と検証はAPI handoff／06 u270。
+
+
+## u271 — 重複理由文の各出現と別のreceived経験を初回Receptionへ保持（2026-10-15 JST）
+
+u269では重複二文の初回本文は復帰したが、Receptionは選択済みの一組に限られていた。今回、同じ欄全体が隣接する完全一致の理由付き満足二文である場合にだけsourceへ同一性の証明属性を付け、二つの閉じた理由・対象・評価の三owner群を別々のrequired dutyとして保持する。独立したreceived経験が一組ある合計三Moveでは、等価な二つの理由付き受け取りを既存の二Move一文へ結び付け、received経験も別文に残す。六核・四関係・二つのMove／expression・出現別の根拠は統合しない。重複から二度の経験や強さを推測しない。
+
+既存のLIMITED exact3検証とsource照合を各Moveで行い、独立readerが実本文から双方の理由・対象・評価・時点を読めた場合だけ一文を共有する。任意の文字列重複除去ではない。既存pair readerの分岐とObservationの二文全体照合を追加し、反復検査・coverage・gateは緩和しない。u269のObservation作者と選択済みsupport修復はそのまま保持する。
+
+適用境界は、原文同一fieldの完全一致二文・独立した第三の受け取りがある三Move・full／standard／LIMITED。重複二文だけの入力、両field各二文の十二核、別の理由、近似文、他者／引用、否定・程度付き満足・納得、PREMIUM複数round全般の完成は含まない。u269の認識文法は広げず、今回の証明属性は選択上の限定条件である。
+
+§9.4の等価な可視表現共有として、二つのexact3選択内容とexpressionを残す。原文出現の同一性証明と本文の独立読取りを混同しない。§9.2/9.4全体の完成や商品合格には換算しない。
+
+旧u269のcheckpointは新しい証明属性を付けないsource全体から再導出し、旧本文まで維持する。u268以前は既存の別legacy分岐を保持。入口は既存のcheckpoint不一致／既発行canonical質問に限り、完全checkpoint・ID一致を必須とする。偽ID／質問拒否やunresolved_predecessorの境界は広げない。未変更bd31cd4から取得した合成Q1／Q3_FREE各6件、計12件で初回・曖昧撤回・独立訂正併記の完全checkpoint／body_state／本文／reason_codes一致を検証した。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+次の第一候補は、独立訂正併記後に必要Observation contributionがstage1_required_observation_unrealizableで止まる箇所を、選択内容から実本文まで通すこと。現在もPARTIALの意味は保存するがMEANING_UPDATED_BODY_UNAVAILABLE、単独曖昧撤回はUNRESOLVED／ANSWER_UNREFLECTEDで新本文なし。古い初回本文を現在本文へ戻さない。関係の説明反復と固定的な受け取り、Q1の2 received＋2評価におけるObservation上限、有限対象撤回後の不自然さ、旧receivedのgiver帰属、共有17失敗・same100・本人実機・正式Product Readも残る。10/17確認点・10/31残件線・12/18目標とPiece/Analysis主枠を維持する。

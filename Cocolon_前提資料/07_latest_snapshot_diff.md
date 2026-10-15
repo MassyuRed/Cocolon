@@ -40540,3 +40540,22 @@ API反映commitは `66613bc5a6020507c796469aafa403d39827e02e`（PR3）。資料P
 評価318＋application54＋現行identity1、計373 PASS。旧完全checkpoint4件の意味/state/reason、実保存4本文のNoAuthor GET/start・idempotency再試行・RN履歴/再openを確認。全体01/01A・current01/04・8/28設計・06・weekly20261010 §5.6.17・API handoff u267へ実本文/途中失敗/残件を同期。反映後の対象blobとchanged-path setをfresh確認し、今回headのCIはPR本文へ記録する。
 
 BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/未配置。同一理由文の重複は先頭のみ3owner、次はgenericとなる既存認識残件を確認し、一括撤回へ拡張しない。部分引用と有限対象撤回後のReception、2 received＋2評価の初回gap・共有17失敗・same100・本人実機・正式Product Readも残る。次は重複理由文の所有/訂正の曖昧さを確認。10/17/10/31/12/18とPiece/Analysis主枠を維持する。
+
+
+### u271 — 重複理由文の各出現と別のreceived経験を初回Receptionへ保持（2026-10-15 JST）
+
+API反映commitは `a5179102209ec3a957b2cf58dc6d15297adbedae`（Draft PR3）。資料PR30は本節を含むrevision。開始後に追加されたu269とu270を取り込み、その初回復帰の上で受け取り選択の欠落を改善。
+
+u269では重複二文の初回本文は復帰したが、Receptionは選択済みの一組に限られていた。今回、同じ欄全体が隣接する完全一致の理由付き満足二文である場合にだけsourceへ同一性の証明属性を付け、二つの閉じた理由・対象・評価の三owner群を別々のrequired dutyとして保持する。独立したreceived経験が一組ある合計三Moveでは、等価な二つの理由付き受け取りを既存の二Move一文へ結び付け、received経験も別文に残す。六核・四関係・二つのMove／expression・出現別の根拠は統合しない。重複から二度の経験や強さを推測しない。
+
+既存のLIMITED exact3検証とsource照合を各Moveで行い、独立readerが実本文から双方の理由・対象・評価・時点を読めた場合だけ一文を共有する。任意の文字列重複除去ではない。既存pair readerの分岐とObservationの二文全体照合を追加し、反復検査・coverage・gateは緩和しない。u269のObservation作者と選択済みsupport修復はそのまま保持する。
+
+検証は評価438件＋Q2/Q3 application54件＋現行shared-owner identity1件、異なる検査合計 **493 PASS**。上流u270との統合後に本体suite492 PASSを再実行し、identity1件も別途成功。skip／xfailなし、既存依存deprecation warningのみ。新しい検査35件は旧checkpoint12・初回両欄／理由／時点12・範囲外7・作者非依存の共有reader／改変拒否2・保存失敗再試行2。
+
+実service＋隔離PGliteのmigration/RPCで両欄×回答種別4件の初回／回答後を保存し、NoAuthor restart GET/start、同一回答再送の本文／event無増加、503後の意味checkpoint再利用を確認。実保存DTO8件を既存RN hook/modalへ渡し、本文完全一致・履歴展開・close/reopenを確認した。native部品はstub、端末実機・正式Product Readではない。RN全suite未再実行、u268の既知26 PASS/5 FAILを解消したとはしない。
+
+STRUCTURE_MAP_DELTA_PRESENT。全体01／01A・current01/04・8/28設計・06・weekly§5.6.21・API handoffへ同期。01B/Cの隣接責務は不変。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+次の第一候補は、独立訂正併記後に必要Observation contributionがstage1_required_observation_unrealizableで止まる箇所を、選択内容から実本文まで通すこと。現在もPARTIALの意味は保存するがMEANING_UPDATED_BODY_UNAVAILABLE、単独曖昧撤回はUNRESOLVED／ANSWER_UNREFLECTEDで新本文なし。古い初回本文を現在本文へ戻さない。関係の説明反復と固定的な受け取り、Q1の2 received＋2評価におけるObservation上限、有限対象撤回後の不自然さ、旧receivedのgiver帰属、共有17失敗・same100・本人実機・正式Product Readも残る。10/17確認点・10/31残件線・12/18目標とPiece/Analysis主枠を維持する。
