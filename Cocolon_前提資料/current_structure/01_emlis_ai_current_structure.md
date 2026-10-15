@@ -1394,3 +1394,13 @@ u276の同一source内の理由／満足exact2・withdrawn_source_event・単独
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持。今回の欠落回復を§9.2/9.4の受け取り内容形成全体の完成へ換算しない。固定的な説明／反復、対象外の複数経験や回答時点変更、Q1上限、近似文／別欄二組、giver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
 
 全file責務は01A u279、本文・検証は06／API handoff u279、次作業はweekly§5.6.29。
+
+## u281 — 二経験の組別意味／受け取り対応（2026-10-15）
+
+STRUCTURE_MAP_DELTA_PRESENT。本人の明示評価（満足／納得）exact1組と本人received対比exact1組を、既存source認識と全required所有の範囲で別成分として比較し、whole候補／ReadingConsequence各exact1へ結ぶ。理由は既存の0/1。u279の当時の満足を否定へ訂正する範囲では、孤立理由をObservationだけに残し、対象／否定評価とreceivedの既存2 Moveへ別々の主観内容を結ぶ。追加action・複数received・曖昧／重複owner・明示回答時点変更等へ広げない。
+
+新しいprivate `ComponentReceptionOpportunityV1` exact7（schema_version、opportunity_ref、move_ref、reception_act、component_ref、basis_contribution_refs、bound_relation_refs）を、選択済みwhole・component・既存Move・全所有根拠へbindする。同じact分類でも別opportunity／claim／traceを持つ。旧RetainedReceptionActRow exact3と旧validatorを保持し、新versionだけdispatchする。独立closureはsource Move、target/support、組、relation、basisとparent/envelopeの分類を照合する。訂正後の3成分のうちReception対象は2成分で、第三Moveは追加しない。既存意味型／内容型・Human Reception作者・独立gateを使い、公開API/DTO/DB/RN、source認識、各上限は変更しない。
+
+全変更fileの地図は01A末尾u281、実結果は06／API handoff末尾u281。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+初回は「理由への注意」から理由関係focalを持つ「満足の拠り所」へ、否定訂正後は評価の復唱から「出来事と満たされた感覚がないことの両方」の受け取りへ変わった。一方、receivedは「嬉しさにはつながらなかったのですね」という言換えのままで、初回の理由側も関係説明に寄っている。NORMAL分類・carrier追加・検査成功を§9.2/9.4の商品完成に換算しない。次は、選択済みRELATIONAL_NONCOLLAPSE／PRESERVE_BOTH_ENDPOINTSとreceived本文の接続を、作者・作者非依存reader・実保存本文の同一単位で改善する。新しい価値観・原因・目標・相手意図を補完せず、意味契約の追加が必要なら不足を具体化する。Mashへ未合格本文のProduct Readを求めない。既存共有17失敗、same100、Q1上限、giver帰属、本人実機・正式受入は今回解消していない。10/17確認点・10/31残件線・12/18公開目標とPiece/Analysis主枠を維持する。

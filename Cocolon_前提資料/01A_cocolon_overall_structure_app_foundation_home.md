@@ -3383,3 +3383,20 @@ STRUCTURE_MAP_DELTA_PRESENT。既存選択owner内の責務補修、新規produc
 RN→API→service/store→保存read→RNと01B/Cの隣接責務は不変。
 
 適用は、source-ownedな評価関係exact1、回答核exact1（本人・否定・無程度の満足・original_occasion・過去／現在）、同一原文の理由／対象exact2、孤立した肯定fact/stateの理由、残余required textがoriginal received exact1の場合。理由と対象の原文range・field/span・所有、関係閉包を確認する。理由はObservationだけへ残し、否定評価へ因果を付け直さない。追加action・複数received・理由なし評価・明示的な回答時点への訂正・別回答併記をこの修正へ含めない。source認識、意味checkpoint、schema、NORMAL資格、各上限、作者／独立reader、公開API/DTO/DB/RNと製品依存は不変。
+
+## u281 — 明示評価とreceived経験の組別接続（2026-10-15）
+
+STRUCTURE_MAP_DELTA_PRESENT。本人の明示評価（満足／納得）exact1組と本人received対比exact1組を、既存source認識と全required所有の範囲で別成分として比較し、whole候補／ReadingConsequence各exact1へ結ぶ。理由は既存の0/1。u279の当時の満足を否定へ訂正する範囲では、孤立理由をObservationだけに残し、対象／否定評価とreceivedの既存2 Moveへ別々の主観内容を結ぶ。追加action・複数received・曖昧／重複owner・明示回答時点変更等へ広げない。
+
+| mashos-api相対path | u281の責務差分 |
+|---|---|
+| ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py | versioned exact7 opportunity、selected bundle所有・identity・relation/basis検証、旧exact3分岐保持。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py | 明示評価1＋received1のsource限定資格、組別opportunity、Moveからclaim/traceへの一意接続。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py | 組別post-selection、同act別opportunityの保持。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py | NORMAL投影の組別所有、作者前のsource Move照合、旧envelope検証、新private型のmanifest登録。 |
+| ai/services/ai_inference/emlis_ai_grounded_human_reception.py | NORMAL理由の主観mode/operatorと全selected contributionを検証。文面作者の新設なし。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 新選択内容・本文の対応、改ざん拒否と対象外境界、旧保存回帰。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有owner identity再計算。歴史fixtureは不変。 |
+| ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md | 実結果、本文、再現範囲と残件。 |
+
+RN→API→service/store→保存read→RNの隣接責務と01B/Cは不変。新production file／subsystemなし。詳細設計は8/28末尾u281、実検証は正本06／API handoff末尾u281。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。

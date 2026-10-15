@@ -18203,3 +18203,21 @@ rootは理由付き評価＋received、同評価＋本人実行行動、理由�
 提案だけを既存8/28設計・本06・07・weekly§5.6.30へ同期する。実構造差分は`STRUCTURE_MAP_DELTA_NONE`、現在の01/01A/current01/04はu279の実装地図として有効。提案の型や条件を実装済み地図へ載せない。
 
 **BLOCKER_NARROWED / PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR。** 商品credit・新technical completionは0。正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。次はMashによるu280追加範囲の判断。承認された場合のみ、8/28 u280のsource所有・同act別経験・否定訂正後の孤立理由・旧保存互換を守って、実本文まで同一単位で実装する。既存u279を未承認扱いに戻さない。
+
+## u281 — 二経験の選択内容を別々の受け取りへ接続（2026-10-15）
+
+u280提案を含む前回作業内容を添えた今回の「EmlisAIの残件作業を進めて」という指示を、当該限定案を引き継ぐ実装指示として実行した。u280が前回時点では未承認・未実装だった履歴は保持する。新しい契約変更一般やdeploy／mergeへの包括承認とはしない。
+
+本人の明示評価（満足／納得）exact1組と本人received対比exact1組を、既存source認識と全required所有の範囲で別成分として比較し、whole候補／ReadingConsequence各exact1へ結ぶ。理由は既存の0/1。u279の当時の満足を否定へ訂正する範囲では、孤立理由をObservationだけに残し、対象／否定評価とreceivedの既存2 Moveへ別々の主観内容を結ぶ。追加action・複数received・曖昧／重複owner・明示回答時点変更等へ広げない。
+
+新しいprivate `ComponentReceptionOpportunityV1` exact7（schema_version、opportunity_ref、move_ref、reception_act、component_ref、basis_contribution_refs、bound_relation_refs）を、選択済みwhole・component・既存Move・全所有根拠へbindする。同じact分類でも別opportunity／claim／traceを持つ。旧RetainedReceptionActRow exact3と旧validatorを保持し、新versionだけdispatchする。独立closureはsource Move、target/support、組、relation、basisとparent/envelopeの分類を照合する。訂正後の3成分のうちReception対象は2成分で、第三Moveは追加しない。既存意味型／内容型・Human Reception作者・独立gateを使い、公開API/DTO/DB/RN、source認識、各上限は変更しない。
+
+評価601＋Q2/Q3 application54の655 PASS（228.80秒、skip/xfailなし、既存警告2件）。理由差替え／削除、評価肯否、反応差替え／削除、両欄、同actの別claim、ID再計算後のMove交換／foreign owner／component／basis／relation差替え拒否、旧完全checkpointと保存再試行を確認。現行共有owner identityも別runで1 PASS（23.97秒、194 deselected）。重複なし合計656 PASSであり、単一runの656件とはしない。歴史fixtureは変更しない。実service＋隔離PGliteで理由時点2×評価時点2×両欄×訂正／評価撤回の16組、初回／更新後の保存DTO32件を取得。NoAuthor GET/start、同一回答再送の本文／timeline一致・event無増加を確認。現行RN hook/modalへ全32件を渡し、本文・全Observation履歴・close/reopen一致。root華恋が32本文（全文一致でまとめると20種類）を全文確認した。native部品はstubであり、本人実機・正式Product Readではない。
+
+必須原典・全体設計・対象と隣接を含む全file地図・最新weeklyを確認した。System Context prepareは3823427がa77b79c5のdescendantでないため停止し、原典直接読取りを採用。生成成功とはしない。既存runtimeを使用し、新依存・外部AI呼出し・稼働環境操作なし。source/testの旧LIMITED期待は新内容と独立readerの検査へ更新した。途中のidentity単独検査はPYTHONPATHのai不足でcollection停止し、正しい既存import pathで再実行し1 PASSを確認した。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+初回は「理由への注意」から理由関係focalを持つ「満足の拠り所」へ、否定訂正後は評価の復唱から「出来事と満たされた感覚がないことの両方」の受け取りへ変わった。一方、receivedは「嬉しさにはつながらなかったのですね」という言換えのままで、初回の理由側も関係説明に寄っている。NORMAL分類・carrier追加・検査成功を§9.2/9.4の商品完成に換算しない。次は、選択済みRELATIONAL_NONCOLLAPSE／PRESERVE_BOTH_ENDPOINTSとreceived本文の接続を、作者・作者非依存reader・実保存本文の同一単位で改善する。新しい価値観・原因・目標・相手意図を補完せず、意味契約の追加が必要なら不足を具体化する。Mashへ未合格本文のProduct Readを求めない。既存共有17失敗、same100、Q1上限、giver帰属、本人実機・正式受入は今回解消していない。10/17確認点・10/31残件線・12/18公開目標とPiece/Analysis主枠を維持する。
+
+実装commit：[09f30e4](https://github.com/MassyuRed/mashos-api/commit/09f30e438b0155beeddbd7b56dc65dfdcf2e3e60)。API変更8pathのremote全文・blob SHA・changed-path集合を照合済み。

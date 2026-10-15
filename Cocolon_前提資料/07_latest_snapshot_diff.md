@@ -40668,3 +40668,13 @@ TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式受�
 追加案は「明示評価exact1＋本人received対比exact1、既承認理由0/1、既存の否定訂正」に限定し、既存組比較とwhole exact1、経験/Moveごとのversioned private対応を接続する。否定訂正で孤立した理由はObservationのみ。旧carrier/canonical・保存本文非再生成・意味checkpoint完全照合・単一作者/独立reader・公開境界は維持する。詳細正本は8/28設計末尾u280、検証事実と再開条件は06 u280、Mash判断事項はweekly§5.6.30。
 
 BLOCKER_NARROWED / PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR。追加範囲の実装前にRule18 §11.3のMash判断が必要。商品credit／新technical completion0、正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。既承認u279を再承認待ちへ戻さない。10/17・10/31・12/18とPiece/Analysis主枠は不変。
+
+## u281 — 二経験の組別選択と受け取り接続（2026-10-15）
+
+本人の明示評価（満足／納得）exact1組と本人received対比exact1組を、既存source認識と全required所有の範囲で別成分として比較し、whole候補／ReadingConsequence各exact1へ結ぶ。理由は既存の0/1。u279の当時の満足を否定へ訂正する範囲では、孤立理由をObservationだけに残し、対象／否定評価とreceivedの既存2 Moveへ別々の主観内容を結ぶ。追加action・複数received・曖昧／重複owner・明示回答時点変更等へ広げない。
+
+versioned private opportunityにより同actでも別claimを持つ。STRUCTURE_MAP_DELTA_PRESENT、exact path地図は01A u281、検査と実本文は06／API handoff u281。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+初回は「理由への注意」から理由関係focalを持つ「満足の拠り所」へ、否定訂正後は評価の復唱から「出来事と満たされた感覚がないことの両方」の受け取りへ変わった。一方、receivedは「嬉しさにはつながらなかったのですね」という言換えのままで、初回の理由側も関係説明に寄っている。NORMAL分類・carrier追加・検査成功を§9.2/9.4の商品完成に換算しない。次は、選択済みRELATIONAL_NONCOLLAPSE／PRESERVE_BOTH_ENDPOINTSとreceived本文の接続を、作者・作者非依存reader・実保存本文の同一単位で改善する。新しい価値観・原因・目標・相手意図を補完せず、意味契約の追加が必要なら不足を具体化する。Mashへ未合格本文のProduct Readを求めない。既存共有17失敗、same100、Q1上限、giver帰属、本人実機・正式受入は今回解消していない。10/17確認点・10/31残件線・12/18公開目標とPiece/Analysis主枠を維持する。
+
+実装commit：[09f30e4](https://github.com/MassyuRed/mashos-api/commit/09f30e438b0155beeddbd7b56dc65dfdcf2e3e60)。API変更8pathのremote全文・blob SHA・changed-path集合を照合済み。

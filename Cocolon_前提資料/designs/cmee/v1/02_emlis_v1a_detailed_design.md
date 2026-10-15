@@ -3371,3 +3371,9 @@ Mashが「記録した限定変更で実装を進めてよろしいですか」�
 保存済み意味はIDの比較を緩めず、既知のpre-appraisal投影を同じsourceから再導出し、旧checkpoint又は真正な旧質問のcanonical照合が成立する場合だけ再開する。旧Q2質問への新しい回答は新source prefixの意味checkpointを作る。本文と保存effective_plan_refは同じ選択済みPlanを使う。Q2の現行appraisalも既存thread realizerへ同じPrepared Planを渡す。private互換flagは公開DTO/意味checkpoint schemaへ追加しない。作者の追加や新エンジンではない。
 
 appraisal内容型v1・whole meaningの契約は不変。満足から経験全体のよさ、まだ未納得から時間のずれを導く候補は不採用。§9.2/9.4の経験としての受け取り内容は未完成。評価の肯否訂正と対象のみ撤回した評価の保持も残る。検証の実範囲と全file責務差分はcurrent01/04・06・API u254参照。PRODUCT_NOT_CLEARを維持する。
+
+## u281 — 組別private Reception対応（2026-10-15）
+
+新しいprivate `ComponentReceptionOpportunityV1` exact7（schema_version、opportunity_ref、move_ref、reception_act、component_ref、basis_contribution_refs、bound_relation_refs）を、選択済みwhole・component・既存Move・全所有根拠へbindする。同じact分類でも別opportunity／claim／traceを持つ。旧RetainedReceptionActRow exact3と旧validatorを保持し、新versionだけdispatchする。独立closureはsource Move、target/support、組、relation、basisとparent/envelopeの分類を照合する。訂正後の3成分のうちReception対象は2成分で、第三Moveは追加しない。既存意味型／内容型・Human Reception作者・独立gateを使い、公開API/DTO/DB/RN、source認識、各上限は変更しない。
+
+適用資格・本文限界は8/28意味設計末尾u281、file責務は01A末尾u281。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。

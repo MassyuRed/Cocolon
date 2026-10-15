@@ -1,6 +1,6 @@
 # Cocolon 第6回週末報告会 — 2026-10-10
 
-> **2026-10-15更新：EmlisAIの残件・再開順は§3.5・§5.6・§6.5、初回不採用試作は§5.6.1、原因の分離は§5.6.2、限定承認は§5.6.3、直近診断と限定変更案は§5.6.11、その追加承認は§5.6.12、最新実装は§5.6.29、最新診断と未承認の限定変更案・判断事項は末尾§5.6.30を参照する。** CMEE実機接続は確認済みだが本文品質は未解消。最初の修正単位は未完了。Piece・分析の主枠と§5.5の配分、12/18公開目標は維持する。
+> **2026-10-15更新：EmlisAIの残件・再開順は§3.5・§5.6・§6.5、初回不採用試作は§5.6.1、原因の分離は§5.6.2、限定承認は§5.6.3、直近診断と限定変更案は§5.6.11、その追加承認は§5.6.12、u280の限定案は§5.6.30、今回指示に基づく最新実装と残件は末尾§5.6.31を参照する。** CMEE実機接続は確認済みだが本文品質は未解消。最初の修正単位は未完了。Piece・分析の主枠と§5.5の配分、12/18公開目標は維持する。
 
 > **最新の実行順序は末尾「5.5 実機確認対象と、その後の作業順序の更新」を優先する。** 10/10〜12に先行して実機稼働を確認する対象はEmlisAIと分析構造。二つの稼働確認後はPieceと分析構造の内容修正を進め、Pieceは利用経路の準備ができた時点で実機確認する。分析を任意の追加確認へ下げず、Pieceを三連休中の全操作確認の必達対象に戻さない。公開目標2026-12-18は§4.7のまま維持する。
 
@@ -1032,3 +1032,17 @@ TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式受�
 u253の既承認範囲とprivate契約への追加に当たるため、Rule18 §11.3に基づくMash判断を実装前に求める。追加費用・外部サービス・実環境操作はない。既存承認を取り直す依頼ではない。
 
 今回は診断と提案の記録であり、実装はu279/API14a3c78のまま、製品source/test/fixture変更0。本文品質の改善、正式受入、実機成功を新たに認定しない。**BLOCKER_NARROWED / PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR、初回一体単位未完了、0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。** 承認後は、この意味と受け取りの対応を実本文・保存再表示まで一つの単位で実装する。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠を維持する。
+
+### 5.6.31 u281 — 二経験を各組の根拠から受け取りへ結ぶ（2026-10-15）
+
+u280提案を含む前回作業内容を添えた今回の「EmlisAIの残件作業を進めて」という指示を、当該限定案を引き継ぐ実装指示として実行した。u280が前回時点では未承認・未実装だった履歴は保持する。新しい契約変更一般やdeploy／mergeへの包括承認とはしない。
+
+本人の明示評価（満足／納得）exact1組と本人received対比exact1組を、既存source認識と全required所有の範囲で別成分として比較し、whole候補／ReadingConsequence各exact1へ結ぶ。理由は既存の0/1。u279の当時の満足を否定へ訂正する範囲では、孤立理由をObservationだけに残し、対象／否定評価とreceivedの既存2 Moveへ別々の主観内容を結ぶ。追加action・複数received・曖昧／重複owner・明示回答時点変更等へ広げない。
+
+評価601＋Q2/Q3 application54の655 PASS（228.80秒、skip/xfailなし、既存警告2件）。理由差替え／削除、評価肯否、反応差替え／削除、両欄、同actの別claim、ID再計算後のMove交換／foreign owner／component／basis／relation差替え拒否、旧完全checkpointと保存再試行を確認。現行共有owner identityも別runで1 PASS（23.97秒、194 deselected）。重複なし合計656 PASSであり、単一runの656件とはしない。歴史fixtureは変更しない。実service＋隔離PGliteで理由時点2×評価時点2×両欄×訂正／評価撤回の16組、初回／更新後の保存DTO32件を取得。NoAuthor GET/start、同一回答再送の本文／timeline一致・event無増加を確認。現行RN hook/modalへ全32件を渡し、本文・全Observation履歴・close/reopen一致。root華恋が32本文（全文一致でまとめると20種類）を全文確認した。native部品はstubであり、本人実機・正式Product Readではない。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+初回は「理由への注意」から理由関係focalを持つ「満足の拠り所」へ、否定訂正後は評価の復唱から「出来事と満たされた感覚がないことの両方」の受け取りへ変わった。一方、receivedは「嬉しさにはつながらなかったのですね」という言換えのままで、初回の理由側も関係説明に寄っている。NORMAL分類・carrier追加・検査成功を§9.2/9.4の商品完成に換算しない。次は、選択済みRELATIONAL_NONCOLLAPSE／PRESERVE_BOTH_ENDPOINTSとreceived本文の接続を、作者・作者非依存reader・実保存本文の同一単位で改善する。新しい価値観・原因・目標・相手意図を補完せず、意味契約の追加が必要なら不足を具体化する。Mashへ未合格本文のProduct Readを求めない。既存共有17失敗、same100、Q1上限、giver帰属、本人実機・正式受入は今回解消していない。10/17確認点・10/31残件線・12/18公開目標とPiece/Analysis主枠を維持する。
+
+実装commit：[09f30e4](https://github.com/MassyuRed/mashos-api/commit/09f30e438b0155beeddbd7b56dc65dfdcf2e3e60)。API変更8pathのremote全文・blob SHA・changed-path集合を照合済み。

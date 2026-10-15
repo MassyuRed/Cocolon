@@ -2688,3 +2688,9 @@ Observationの敬体活用も独立inverseで照合し、全文一致を証明�
 二つの既存source_explicit_epistemic_limitは、各一核・同じ証拠span・hedge_onlyを保持する。neutralのUNKNOWN carrier追加条件は完全なchoice hostと既存の一意owner・qualifier・寄与・証拠を必要とし、neutralラベルだけでは結べない。完成本文の有限hostを完全一致で証明した場合だけ、一般的な未知語markerに依存せず未決の保持を認める。深さの閾値を変えない。
 
 現行shared-owner snapshotのみを変更した5ownerから再導出し、過去の期待値・閾値・receiptを保持する。検証は正本06/API既存handoffに集約する。
+
+## u281 — 組別private Reception対応（2026-10-15）
+
+新しいprivate `ComponentReceptionOpportunityV1` exact7（schema_version、opportunity_ref、move_ref、reception_act、component_ref、basis_contribution_refs、bound_relation_refs）を、選択済みwhole・component・既存Move・全所有根拠へbindする。同じact分類でも別opportunity／claim／traceを持つ。旧RetainedReceptionActRow exact3と旧validatorを保持し、新versionだけdispatchする。独立closureはsource Move、target/support、組、relation、basisとparent/envelopeの分類を照合する。訂正後の3成分のうちReception対象は2成分で、第三Moveは追加しない。既存意味型／内容型・Human Reception作者・独立gateを使い、公開API/DTO/DB/RN、source認識、各上限は変更しない。
+
+適用資格・本文限界は8/28意味設計末尾u281、file責務は01A末尾u281。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
