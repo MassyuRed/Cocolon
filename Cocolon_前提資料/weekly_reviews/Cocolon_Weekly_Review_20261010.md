@@ -961,3 +961,16 @@ u273で残した「単独理由付きの満足＋別経験の反応訂正」の�
 次は初回／訂正後を一体の本文として読み、既存の選択内容にある経験の違いがReceptionへ十分届いているかを改善する。単に文末へ注意表現を足したことで品質完成にせず、追加の解釈が必要なら不足する意味と既承認範囲との差を具体化する。新schema／意味範囲／上限の拡張や配置は自動実行しない。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠を維持する。
 
 実装commit：[u275 f23a971](https://github.com/MassyuRed/mashos-api/commit/f23a971a5d237ade4609b521fe42dec020fc975f)。
+
+
+### 5.6.26 u276 — 満足の対象だけを撤回した後の理由・評価を有限文へ戻す（2026-10-15 JST）
+
+満足の対象だけを本人が撤回した後、残存する理由→満足を「によって気持ちが生じることをどちらの側も残したまま、感じています」と返す不自然なReceptionを修正した。撤回した対象を復活させず、本人の理由・肯定無程度の満足・評価時点・選択済みATTENTIONを文章化する。初回三役割、source認識、意味選択、checkpoint、NORMAL資格、各上限は変更しない。
+
+最終単一runは評価530＋Q2/Q3 application54＋現行identity1＝**585 PASS**（204.24秒、skip/xfailなし、既存deprecation warning2件）。修正前後12組で初回本文、完全checkpoint、plan、選択内容、Observation、status/reason_codesが一致し、撤回後Receptionだけが変化。実service＋隔離PGliteで初回12＋撤回後12を保存し、NoAuthor GET/start・同一回答再送event無増加を確認。実保存DTO24件を既存RN hook/modalへ渡し、本文・履歴・close/reopen一致。rootが24本文を全文確認した。native部品はstubで、実機・正式Product Readではない。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。今回の有限文修正を経験理解・§9.2/9.4全体の完成へ換算しない。固定的で説明的な表現、撤回後に別received経験がReceptionへ選ばれない状態、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
+
+次は、初回／訂正後の残存経験が選択内容とReceptionにどう届くかを確認し、特に今回Observationに残る別received経験が撤回後Receptionへ含まれない既存状態を、既承認の選択・上限内で扱えるか調べる。新しい意味がないのに注意表現を言い換えただけで内容形成が進んだとはしない。意味範囲・schema・上限を広げる必要がある場合だけ不足を具体化して別判断へ戻す。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠を維持する。
+
+実装commit：[u276 89207ef](https://github.com/MassyuRed/mashos-api/commit/89207ef3c2d535e2d79ac423e1d083d9540e4482)。

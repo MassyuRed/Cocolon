@@ -1,6 +1,6 @@
 # CMEE V1 — Implementation Order / Migration / Verification 詳細設計
 
-> 最新Emlisは末尾u275のLIMITED理由付き満足の注意述語接続。567検査と保存DTO12件の表示・履歴・再表示を確認。u253/u264の既存承認を継続。次は初回／訂正後一体の受け取り内容。商品NOT_CLEAR・初回単位未完了・未配置。
+> 最新Emlisは末尾u276の満足対象撤回後の理由・評価の有限文修正。585検査と保存DTO24件の表示・履歴・再表示を確認。既承認の意味・選択・checkpointを保持。次は残存経験の選択内容と受け取り。商品NOT_CLEAR・初回単位未完了・未配置。
 
 > 最新のAnalysis内容修正は末尾 **u250（2026-10-13 JST・未配置）**。既知修飾が重なる話者の引用と本人の独立内容を区別する不整合を修正。生成全文・検証・残件は同節とAnalysis current03を参照。
 
@@ -18122,3 +18122,18 @@ u273で残した「単独理由付きの満足＋別経験の反応訂正」の�
 全file責務は01A u275、実本文と途中検査はAPI handoff u275。
 
 実装commit：[u275 f23a971](https://github.com/MassyuRed/mashos-api/commit/f23a971a5d237ade4609b521fe42dec020fc975f)。
+
+
+## u276 — 満足の対象だけを撤回した後の理由・評価を有限文へ戻す（2026-10-15 JST）
+
+満足の対象だけを本人が撤回した後、残存する理由→満足を「によって気持ちが生じることをどちらの側も残したまま、感じています」と返す不自然なReceptionを修正した。撤回した対象を復活させず、本人の理由・肯定無程度の満足・評価時点・選択済みATTENTIONを文章化する。初回三役割、source認識、意味選択、checkpoint、NORMAL資格、各上限は変更しない。
+
+source_owned_relational_focusはplanありの本文経路だけで、同一sourceに残る理由／満足exact2・withdrawn_source_event・単独user_stated_cause・本人・肯定無程度・過去現在を確認する。planなしの選択／reference-mode導出は不変。既存作者と独立readerはLIMITEDのATTENTION/ATTEND_TO、RELATIONAL_NONCOLLAPSE/PRESERVE_BOTH_ENDPOINTS、二bindingと理由関係focalを照合する。理由削除・別理由・他者・否定・時点変更・因果逆転・唯一化・撤回対象の復活を拒否し、有限文reader失敗をnominal fallbackで救済しない。
+
+最終単一runは評価530＋Q2/Q3 application54＋現行identity1＝**585 PASS**（204.24秒、skip/xfailなし、既存deprecation warning2件）。修正前後12組で初回本文、完全checkpoint、plan、選択内容、Observation、status/reason_codesが一致し、撤回後Receptionだけが変化。実service＋隔離PGliteで初回12＋撤回後12を保存し、NoAuthor GET/start・同一回答再送event無増加を確認。実保存DTO24件を既存RN hook/modalへ渡し、本文・履歴・close/reopen一致。rootが24本文を全文確認した。native部品はstubで、実機・正式Product Readではない。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。今回の有限文修正を経験理解・§9.2/9.4全体の完成へ換算しない。固定的で説明的な表現、撤回後に別received経験がReceptionへ選ばれない状態、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
+
+次は、初回／訂正後の残存経験が選択内容とReceptionにどう届くかを確認し、特に今回Observationに残る別received経験が撤回後Receptionへ含まれない既存状態を、既承認の選択・上限内で扱えるか調べる。新しい意味がないのに注意表現を言い換えただけで内容形成が進んだとはしない。意味範囲・schema・上限を広げる必要がある場合だけ不足を具体化して別判断へ戻す。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠を維持する。
+
+実装commit：[u276 89207ef](https://github.com/MassyuRed/mashos-api/commit/89207ef3c2d535e2d79ac423e1d083d9540e4482)。全file責務は01A u276、詳細実本文はAPI既存handoff u276。
