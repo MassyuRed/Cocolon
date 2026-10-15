@@ -17913,3 +17913,22 @@ REDでは原文全文撤回1件が期待RESOLVEDに対して旧UNRESOLVEDとな�
 次はsourceの重複理由文に対する所有と訂正対象の曖昧さを、既存意味契約内で整合できるか確認する。初回一体単位の関係反復・固定的受け取り、2 received＋2評価の初回gap、旧received全般のgiver誤帰属、複数先行文の評価継続、既存共有17失敗・same100・本人実機・正式Product Readも残る。今回未再検査の残件を成功件数へ混ぜない。10/17確認点、10/31・12/18とPiece/Analysis主枠を維持する。
 
 実保存本文とowner表はAPI handoff u267、責務配置は01A u267。
+
+
+### u268 — 重複原文の全文撤回を誤確定しない（2026-10-15 JST）
+
+同じ理由付き評価文が重なると、既存sourceは一つを理由・対象・評価の三owner、もう一つをgeneric ownerとして保持する。従来はgenericの直接一致を優先して全文groupを調べなかったため、どちらを指すか不明でも単独撤回をRESOLVEDとしていた。新規回答は直接一致と所有証明済み全文groupの両方を数え、候補が複数ならcorrection_target_unresolvedとして全原文を保持する。同じ回答内の独立した反応訂正は受理し、PARTIALとする。入力順による選択・一括撤回・source認識の拡張は行わない。
+
+旧checkpoint明示時の不一致に限り旧precedenceを再導出し、完全checkpoint・ID一致で復元する。旧世代のfallbackにも当時のprecedenceを組み合わせ、旧IDへ新しい意味を貼らない。互換の今回の実測範囲は未変更u267から得た合成Q1／Q3_FREE各4件、計8件。Q3_PREMIUM複数round全般を保証したとはしない。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production 1file・3関数の変更。source認識・意味schema・公開API/DTO/DB/SQL/RN・製品依存は不変。新file/helper/engine/author/checker/registry/service追加0。歴史fixture/IM03 proof・現行shared-owner identity fixtureは変更しない。
+
+評価suite **329 PASS**（u267の318件に対し、旧重複期待1件を4ケースへ変更＋旧完全checkpoint8ケース、差分11件）、Q2/Q3 application **54 PASS**、現行shared-owner identity **1 PASS**、API計 **384 PASS**。既存依存deprecation warning2。完全checkpoint8件の本文・body_state・reason_codes一致、偽checkpoint／質問改変拒否を確認。applicationと既存全文撤回の実SQL保存／NoAuthor再読検査は隔離PGliteで実行した。重複例の初回から保存・RNまでが通ったという意味ではない。
+
+追加の既存RN suiteは **26 PASS / 5 FAIL**。react-native不足3件、metro不足1件、未変更InputScreenの文字列検査1件。RN test／screenとも開始headから変更していない。依存の追加や無関係な画面修正はせず、RN全成功・実機確認とは報告しない。git diff --check成功。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+重複理由文のsource所有が非対称なことと、同入力の初回本文がemlis_q3_initial_body_unavailableで止まる問題は残る。新しい撤回回答も本文なし／ANSWER_UNREFLECTEDであり、独立訂正を受理できることを本文生成成功に換算しない。次はこの初回source→選択内容→本文の欠落と§9.2/9.4の受け取り内容を一体で確認する。訂正周辺の小修正だけで初回単位の完成を置き換えない。2 received＋2評価の初回gap、有限対象撤回後の不自然なReception、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは今回解消していない。10/17確認点、10/31残件線・12/18リリース目標とPiece/Analysis主枠を維持する。
+
+開始head・RED・途中失敗・runtimeとowner表はAPI handoff u268。

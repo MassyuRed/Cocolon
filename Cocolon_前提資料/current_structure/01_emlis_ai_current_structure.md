@@ -1222,3 +1222,16 @@ STRUCTURE_MAP_DELTA_PRESENT。既存production 1file・3関数の責務変更。
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
 
 全文撤回の停止は今回の限定例で解消。部分引用・有限対象撤回後のReception・重複理由文の既存認識問題は残る。実本文と旧意味互換は06／API handoff u267。
+
+
+### u268 — 重複原文の全文撤回を誤確定しない（2026-10-15 JST）
+
+同じ理由付き評価文が重なると、既存sourceは一つを理由・対象・評価の三owner、もう一つをgeneric ownerとして保持する。従来はgenericの直接一致を優先して全文groupを調べなかったため、どちらを指すか不明でも単独撤回をRESOLVEDとしていた。新規回答は直接一致と所有証明済み全文groupの両方を数え、候補が複数ならcorrection_target_unresolvedとして全原文を保持する。同じ回答内の独立した反応訂正は受理し、PARTIALとする。入力順による選択・一括撤回・source認識の拡張は行わない。
+
+旧checkpoint明示時の不一致に限り旧precedenceを再導出し、完全checkpoint・ID一致で復元する。旧世代のfallbackにも当時のprecedenceを組み合わせ、旧IDへ新しい意味を貼らない。互換の今回の実測範囲は未変更u267から得た合成Q1／Q3_FREE各4件、計8件。Q3_PREMIUM複数round全般を保証したとはしない。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production 1file・3関数の変更。source認識・意味schema・公開API/DTO/DB/SQL/RN・製品依存は不変。新file/helper/engine/author/checker/registry/service追加0。歴史fixture/IM03 proof・現行shared-owner identity fixtureは変更しない。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+重複入力の初回本文停止と訂正後の本文なしは未解消。実測・残件は06／API handoff u268。

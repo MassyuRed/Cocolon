@@ -2980,3 +2980,14 @@ u254全文訂正・u264理由所有の接続修正であり、§9.2/9.4の読み
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
 
 実本文と検証は06／API handoff u267、全file配置は01A、進行はweekly§5.6.17。
+
+
+### u268 — 重複原文の全文撤回を誤確定しない（2026-10-15 JST）
+
+同じ理由付き評価文が重なると、既存sourceは一つを理由・対象・評価の三owner、もう一つをgeneric ownerとして保持する。従来はgenericの直接一致を優先して全文groupを調べなかったため、どちらを指すか不明でも単独撤回をRESOLVEDとしていた。新規回答は直接一致と所有証明済み全文groupの両方を数え、候補が複数ならcorrection_target_unresolvedとして全原文を保持する。同じ回答内の独立した反応訂正は受理し、PARTIALとする。入力順による選択・一括撤回・source認識の拡張は行わない。
+
+u254の「唯一の原文全文」条件を既存sourceの異なる表現間でも守る整合修正。u264の理由所有や§9.2/9.4の意味契約は広げない。重複入力のsource所有と初回本文停止、受け取り内容の完成は別の残件として維持する。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+全file責務は01A、実検証・互換範囲は06／API handoff u268、進行はweekly§5.6.18。
