@@ -40531,3 +40531,12 @@ API反映commitは `26d8ccc7a277664f1cec8e67a749d32fd90bb74a`（PR3）。資料P
 評価294＋application54＋現行identity1、計349 PASS。保存4本文のNoAuthor GET/startとRN履歴/再open、回答2件のidempotency再試行を確認。旧30366a7との12例で完全checkpoint/意味一致。設計・全体01/01A・current01/04・06・weekly20261010 §5.6.16・API handoff u266へ実本文/検証/残件を同期した。反映後の対象blobとchanged-path setをfresh確認し、今回headのCIはPR本文へ記録する。
 
 BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/未配置。理由付き全文撤回の未解決と有限対象撤回後の不自然な本文は旧版と一致する既存残件。2 received＋2評価の初回gap・共有17失敗・same100・本人実機・正式Product Readも残る。10/17/10/31/12/18とPiece/Analysis主枠を維持する。
+
+
+### u267 — 理由付き満足の原文全文撤回を既存訂正契約へ接続（2026-10-15 JST）
+
+API反映commitは `66613bc5a6020507c796469aafa403d39827e02e`（PR3）。資料PR30は本節を含むrevisionが対応候補。既存emlis_answer_update.pyの3関数で、source所有が証明された理由/対象/評価の三ownerを唯一の原文全文撤回へ接続した。新しい回答は新checkpoint、旧checkpoint明示時は旧未解決/PARTIAL全体を厳密再導出する。source認識・schema・公開API/DB/RN・本文作者は不変。STRUCTURE_MAP_DELTA_PRESENT。
+
+評価318＋application54＋現行identity1、計373 PASS。旧完全checkpoint4件の意味/state/reason、実保存4本文のNoAuthor GET/start・idempotency再試行・RN履歴/再openを確認。全体01/01A・current01/04・8/28設計・06・weekly20261010 §5.6.17・API handoff u267へ実本文/途中失敗/残件を同期。反映後の対象blobとchanged-path setをfresh確認し、今回headのCIはPR本文へ記録する。
+
+BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/未配置。同一理由文の重複は先頭のみ3owner、次はgenericとなる既存認識残件を確認し、一括撤回へ拡張しない。部分引用と有限対象撤回後のReception、2 received＋2評価の初回gap・共有17失敗・same100・本人実機・正式Product Readも残る。次は重複理由文の所有/訂正の曖昧さを確認。10/17/10/31/12/18とPiece/Analysis主枠を維持する。

@@ -6881,3 +6881,14 @@ STRUCTURE_MAP_DELTA_PRESENT。既存production 4fileの責務変更のみ。新f
 STRUCTURE_MAP_DELTA_PRESENT。既存production 2file・3関数の責務修正。source認識・投影・意味契約・checkpoint生成・公開API/DTO/DB/SQL/RN・依存は変更0。新file/engine/author/checker/registry/serviceは追加しない。
 
 全file責務は01A u266の2production owner、現行意味境界はcurrent01/04、検証・残件は06／API handoff u266・weekly§5.6.16。**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+
+### u267 — 理由付き満足の原文全文撤回を既存訂正契約へ接続（2026-10-15 JST）
+
+理由付き満足の原文全文を本人が明示撤回した場合、既存sourceが証明した理由・対象・評価の三ownerとそれらに依存する関係を取り消し、別のreceived経験・行動・同じ回答内の訂正を残す。全文exact一致、同一field/spanの全nucleus集合が三ownerと一致、候補一意を必須にする。既存の対象＋評価二owner撤回も維持。u254の唯一の全文撤回とu264の承認済み理由所有を接続する欠陥修正であり、新しい意味契約・理由認識・本文作者の追加はない。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production 1file・3関数の責務変更。新file/helper/engine/author/checker/registry/serviceは追加0。source認識・意味schema・公開API/DTO/DB/SQL/RN・製品依存は変更0。検査は既存test_cmee_emlis_result_appraisal.pyへ24件と未変更26d8ccc7で実取得した旧完全checkpoint4件を追加し、歴史fixture/IM03 proof・現行shared-owner identity fixtureは不変。
+
+全file責務は01A u267、現行境界はcurrent01/04、検証と残件は06／API handoff u267・weekly§5.6.17。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。

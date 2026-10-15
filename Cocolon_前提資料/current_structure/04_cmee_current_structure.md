@@ -1242,3 +1242,19 @@ STRUCTURE_MAP_DELTA_PRESENT。既存production 2file・3関数の責務修正。
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
 
 実本文・検証・残件は06／API handoff u266。
+
+
+### u267 — 理由付き満足の原文全文撤回を既存訂正契約へ接続（2026-10-15 JST）
+
+| 既存owner（API repo相対） | u267の責務差分 |
+|---|---|
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py | _prepare_answerで既存source_owned_result_appraisal_reasonの証明を使い、原文全文の3owner撤回を許可。全span所有集合と候補一意を維持。prepare_emlis_meaningで旧checkpoint完全再導出modeを追加し、_prepare_emlis_meaning_from_planで各Q3 prefixへ引き渡す。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 両欄・理由差替え・評価時点、部分/他文引用、単独owner撤回、旧全checkpointと質問改変、実保存/NoAuthor再読を確認。重複理由文の既存認識残件も固定し、一括撤回へ拡張しない。 |
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production 1file・3関数の責務変更。新file/helper/engine/author/checker/registry/serviceは追加0。source認識・意味schema・公開API/DTO/DB/SQL/RN・製品依存は変更0。検査は既存test_cmee_emlis_result_appraisal.pyへ24件と未変更26d8ccc7で実取得した旧完全checkpoint4件を追加し、歴史fixture/IM03 proof・現行shared-owner identity fixtureは不変。
+
+新規回答は新しい完全checkpointを生成する。旧checkpoint明示時だけ現行source＋旧撤回判定を再導出し、旧UNRESOLVED/PARTIALを回答内の受理済み訂正ごと完全一致で復元する。Q3各prefixも同じ旧判定を使い、旧IDへ新しい撤回意味を付けない。保存済み本文のread/reopenは作者を呼ばず保存本文を返す。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+source所有の意味追加はせず、既存三ownerを全文訂正対象へ接続。対象範囲と重複認識の限界は06／API handoff u267。

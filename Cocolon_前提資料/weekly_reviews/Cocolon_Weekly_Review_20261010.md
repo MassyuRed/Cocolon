@@ -806,3 +806,22 @@ STRUCTURE_MAP_DELTA_PRESENT。既存production 2file・3関数の責務修正。
 次は今回回復した初回一体単位の内容・関係反復と、理由付き評価の撤回対象を既存訂正契約で正確に扱えるかを確認する。2 received＋2評価の初回gap、旧received全般のgiver誤帰属、複数先行文の評価継続、既存共有17失敗・same100・本人実機・正式Product Readも残る。今回はこれらの全再検査を追加せず、成功件数へ混ぜない。10/17確認点へ停止回復と残件を反映し、10/31・12/18とPiece/Analysis主枠を維持する。
 
 全体01/01A・current01/04・8/28設計・06／API handoffを同単位で同期。
+
+
+### 5.6.17 u267 — 理由付き満足の原文全文撤回を既存訂正契約へ接続（2026-10-15 JST）
+
+理由付き満足の原文全文を本人が明示撤回した場合、既存sourceが証明した理由・対象・評価の三ownerとそれらに依存する関係を取り消し、別のreceived経験・行動・同じ回答内の訂正を残す。全文exact一致、同一field/spanの全nucleus集合が三ownerと一致、候補一意を必須にする。既存の対象＋評価二owner撤回も維持。u254の唯一の全文撤回とu264の承認済み理由所有を接続する欠陥修正であり、新しい意味契約・理由認識・本文作者の追加はない。
+
+新規回答は新しい完全checkpointを生成する。旧checkpoint明示時だけ現行source＋旧撤回判定を再導出し、旧UNRESOLVED/PARTIALを回答内の受理済み訂正ごと完全一致で復元する。Q3各prefixも同じ旧判定を使い、旧IDへ新しい撤回意味を付けない。保存済み本文のread/reopenは作者を呼ばず保存本文を返す。
+
+最終評価suite **318 PASS（既存294＋新24）**、Q2/Q3 application **54 PASS**、計 **372 PASS**。現行shared-owner identity **1 PASS**、総計 **373 PASS**。既存依存deprecation warning2。未変更26d8ccc7の旧完全checkpoint4件（両配置×単独撤回/同答内別訂正）を本文state・reason_codesごと復元し、偽checkpoint・改変質問は拒否。実service＋隔離PGliteで新しい撤回後本文4件のevent payloadとDTO完全一致、NoAuthor restart GET/start、同じidempotency key再試行の本文/timeline一致を確認。実RN hook/modalの履歴展開・close/reopenでも4件のcurrent本文/event完全一致を確認した。native実機・正式Product Readではない。git diff --check成功。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production 1file・3関数の責務変更。新file/helper/engine/author/checker/registry/serviceは追加0。source認識・意味schema・公開API/DTO/DB/SQL/RN・製品依存は変更0。検査は既存test_cmee_emlis_result_appraisal.pyへ24件と未変更26d8ccc7で実取得した旧完全checkpoint4件を追加し、歴史fixture/IM03 proof・現行shared-owner identity fixtureは不変。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+「資料を分類したことに」の部分引用は従来どおり未解決。有限対象だけの撤回後に理由/評価が残る意味と不自然なReceptionも継続する。同じ理由文を重ねると先頭だけが3ownerとなり、二つ目はgeneric ownerのため、その単独ownerへの全文一致撤回がRESOLVEDとなる既存問題を確認した。未変更26d8ccc7でも同じcheckpoint（emlis-checkpoint-b8653afdfb74088180b49a20f23ff0e1b5f0e5e363c423e124c4d0306f1b0fd4）であり、今回これを重複全文の安全な解決へ昇格しない。
+
+次はsourceの重複理由文に対する所有と訂正対象の曖昧さを、既存意味契約内で整合できるか確認する。初回一体単位の関係反復・固定的受け取り、2 received＋2評価の初回gap、旧received全般のgiver誤帰属、複数先行文の評価継続、既存共有17失敗・same100・本人実機・正式Product Readも残る。今回未再検査の残件を成功件数へ混ぜない。10/17確認点、10/31・12/18とPiece/Analysis主枠を維持する。
+
+責務地図は01A、実本文と途中失敗は06／API handoff u267。
