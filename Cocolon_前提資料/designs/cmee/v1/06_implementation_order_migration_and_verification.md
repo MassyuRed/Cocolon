@@ -1,6 +1,6 @@
 # CMEE V1 — Implementation Order / Migration / Verification 詳細設計
 
-> 最新Emlisは末尾u279の否定訂正後の別received経験の受け取り欠落修復。647検査と保存DTO32件の表示・履歴・再表示を確認。意味・checkpoint・Observationを保持し、既存2 Moveへ二経験を戻す。次は§9.2/9.4の受け取り内容。商品NOT_CLEAR・初回単位未完了・未配置。
+> 最新実装はu279。最新診断・未承認の追加案は末尾u280：評価＋receivedの組単位の意味比較と、同actでも経験ごとに受け取りを結ぶprivate対応。製品変更0。次はMash判断。商品NOT_CLEAR・初回単位未完了・未配置。
 
 > 最新のAnalysis内容修正は末尾 **u250（2026-10-13 JST・未配置）**。既知修飾が重なる話者の引用と本人の独立内容を区別する不整合を修正。生成全文・検証・残件は同節とAnalysis current03を参照。
 
@@ -18188,3 +18188,18 @@ TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式受�
 次は§9.2/9.4の受け取り内容へ戻る。二経験が揃った現在の初回／訂正後本文で、選択済みの意味から何を受け取るべきかと実際の主観述語との差を確認する。別の注意表現への言換え、NORMALの読みの借用だけで解消扱いにしない。今回対象外の明示的な回答時点変更等を一括解除しない。新しい意味契約・source範囲・schema・上限が必要なら、不足と最小案を具体化してMash判断へ戻す。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠を維持。
 
 実装commit：[14a3c78](https://github.com/MassyuRed/mashos-api/commit/14a3c786b69e6c57c741244dc2edfdff46525c65)。全file責務は01A u279、詳細は既存API handoff。
+
+
+## u280 — 内容形成の停止原因と、経験単位の意味／受け取り対応案（2026-10-15 JST）
+
+最新実装はAPI `14a3c786b69e6c57c741244dc2edfdff46525c65`のu279のまま。今回source/test/fixtureの変更は0、回帰suiteの再実行は0。u279の647 PASSを今回の新実行へ計上しない。
+
+必須前提・作業ルール・恒久incident全文・全体01・全file地図01A/B/Cの対象／隣接責務・current01/04・8/28§9.1〜9.4・最新weekly§5.6.29を確認。System Context prepareは残留workspaceの`PUBLICATION_RECOVERY_AMBIGUOUS: residual without marker`で停止し、正本が許可する原典直接読取りを使った。生成成功とはしない。旧local docsの差分は前回のcommit参照／入口更新でremote19ddca5と全文一致していたが、checkout切替はlocal差分保護で拒否されたため、同remoteから別worktreeを作って提案を準備した。runtime・製品sourceを変更していない。
+
+rootは理由付き評価＋received、同評価＋本人実行行動、理由なし評価＋receivedを実生成して比較し、さらに理由付き評価の初回／否定訂正後×両欄配置4本文を全文確認した。前者のcandidate0／LIMITEDと、行動対照のNORMAL・理由焦点を確認。scopeと内容の不足は8/28設計末尾u280が詳細ownerである。同環境read-only担当が独立診断し、ABOUT_TARGET refsを診断用に与えた既存導出では、初回2 bundle・訂正後3 bundleがwhole候補1へ入ることを確認した。この仮opt-inは現行の許可動作・実装・商品成果ではなく、本文の生成成立も主張しない。最初のroot診断commandは存在しないtest helperのimportで停止し、製品生成前だった。実在するadvanceを用いた次のread-only診断を採用した。
+
+不足は二つある。u253の組外条件が本人実行行動に限られreceived反応を許容しないこと、否定訂正後の同じact名が別経験の内容を区別できないこと。注意語尾や「拠り所」への言い換えを次の成果とせず、既存組比較＋whole exact1とversioned private opportunity対応を一つの限定案にした。
+
+提案だけを既存8/28設計・本06・07・weekly§5.6.30へ同期する。実構造差分は`STRUCTURE_MAP_DELTA_NONE`、現在の01/01A/current01/04はu279の実装地図として有効。提案の型や条件を実装済み地図へ載せない。
+
+**BLOCKER_NARROWED / PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR。** 商品credit・新technical completionは0。正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。次はMashによるu280追加範囲の判断。承認された場合のみ、8/28 u280のsource所有・同act別経験・否定訂正後の孤立理由・旧保存互換を守って、実本文まで同一単位で実装する。既存u279を未承認扱いに戻さない。

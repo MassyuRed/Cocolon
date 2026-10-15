@@ -3148,3 +3148,40 @@ u276の有限文とsource所有を維持し、既に認識された別経験の�
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持。今回の欠落回復を§9.2/9.4の受け取り内容形成全体の完成へ換算しない。固定的な説明／反復、対象外の複数経験や回答時点変更、Q1上限、近似文／別欄二組、giver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
 
 次は§9.2/9.4の受け取り内容へ戻る。二経験が揃った現在の初回／訂正後本文で、選択済みの意味から何を受け取るべきかと実際の主観述語との差を確認する。別の注意表現への言換え、NORMALの読みの借用だけで解消扱いにしない。今回対象外の明示的な回答時点変更等を一括解除しない。新しい意味契約・source範囲・schema・上限が必要なら、不足と最小案を具体化してMash判断へ戻す。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠を維持。
+
+
+## 2026-10-15 u280 — 明示評価とreceived経験を組ごとに扱う限定変更案（未承認・未実装）
+
+**PROPOSED_NOT_APPROVED / BLOCKER_NARROWED / PRODUCT_NOT_CLEAR。** 基準実装はAPI `14a3c786b69e6c57c741244dc2edfdff46525c65`、資料は`19ddca5a4b40842ae8255975274d67bec2197227`。u279は最後の実装修正であり、本節はその続きの診断とMash判断用の差分案である。u253/u264の既承認実装を再承認待ちへ戻さず、ここに記した追加だけを未承認とする。
+
+### 確認した不足と、変更が必要な理由
+
+現行の「探しやすくなったので、資料を分類したことに満足した。」＋別欄「褒められたのに、嬉しくなかった。」は、二経験を本文へ残せるが、初回のReceptionは理由への注意とreceivedの言い換えである。満足を否定へ訂正した後も、評価とreceivedの二つの言い換えが中心になる。初回・否定訂正後の両欄配置でwhole candidateは0、scopeは`COMPETING_MATERIAL_SCOPES`、意味結果はLIMITED。選択内容は`ATTENTION/ATTEND_TO`・`MATERIAL_WEIGHT/RECEIVE_AS_MATERIAL`・focalなしである。
+
+同じ理由付き評価に「植木に水をやった。」を添えた対照はNORMALとなり、評価組の理由関係を焦点に持つ。原因は`emlis_thread_projection.py`のcomponent許可条件が、u253の承認どおり評価組外を本人の明示実行action/eventへ限定していること。別receivedのreactionはこの条件を満たさず、`emlis_input_specific_meaning.derive_foreground_scope_closed`の全体比較で異なる組のmodality/polarity/qualifierが競合に載る。豊かな読みが選択後に文章から落ちた状態ではない。
+
+さらに否定訂正後は既存2 Moveがともに`stay_with_current_burden`になる。現行投影はact名で寄せ、claimもact名で一つを選ぶ。既存の分配はLIMITEDの同一MATERIAL_WEIGHT命題専用で、評価組とreceived組に異なるNORMAL内容を結ぶ処理ではない。旧`RetainedReceptionActRow`はfrozen exact3で、`act_ref == reception_act`を要求する。前景scopeだけ緩めて本文をNORMALへ流す案では足りない。
+
+§9.2/9.4を満たすため、既存の意味比較と受け取りの対応を経験の組単位で保つ案を推奨する。NORMAL昇格、注意語尾追加、「理由」を「拠り所」へ替えたこと自体を成功にしない。
+
+### Mashへ求める追加範囲
+
+1. **対象は明示評価exact1組＋本人received対比exact1組。** 原入力memo/memo_actionの既存source-ownedな満足／納得と対象、既存のreceived出来事／本人反応を扱う。理由は既承認のsource-ownedな理由0/1だけ。既存source認識を広げず、明示程度・肯否・時点等は既存資格の範囲を維持する。欄の前後で意味優先を作らない。
+2. **組ごとの比較を既存whole候補exact1へ接続する。** sourceで閉じた関係成分内では従来の比較・hard validity・差分証明を維持する。全requiredをexact1の所有組へ割り当て、whole readingとReadingConsequenceは全体各exact1のまま。組間の因果・対比・同時性や「無関係と確定」は作らない。競合や不足が実在すればLIMITED／停止を保つ。
+3. **既存の否定訂正を同じ単位で扱う。** u279の当時の満足を否定へ訂正する範囲を継承する。初回の理由付き評価組＋received組は2成分だが、否定訂正後は孤立理由状態・対象／否定評価・receivedの3成分となる。孤立理由はObservationだけへ残し、否定評価の原因へ再接続しない。Receptionは既存2 Moveを保つ。評価／対象撤回は旧経路の回帰対象であり、本変更で資格を一括拡張しない。
+4. **同じact分類でも経験を混同しないprivate対応を追加する。** 意味を選んだ後に、選択済み組・既存Move・source所有からversioned private opportunityを導出する。提案型`ComponentReceptionOpportunityV1`は`schema_version / opportunity_ref / move_ref / reception_act / component_ref / basis_contribution_refs / bound_relation_refs`を持つ。opportunity_refは選択済みwhole・組・Move・所有内容へbindする。旧exact3 carrierと旧validator/canonical bytesを変更せず、新versionだけでdispatchする。分類名は既存taxonomyを使い、同分類の2 Moveも別opportunityで識別する。claim／visible traceはact文字列だけで選ばず、opportunity・Move・所有の一意一致から結ぶ。wholeの全成分とopportunityを1対1にはしない。否定訂正後は3成分のうちReception対象の2成分だけをopportunityが完全所有し、残余の孤立理由は既存Observationのrequired coverageで保全する。第三Moveを増やさない。
+5. **新しい意味解釈や本文生成方式は追加しない。** 既存のwhole意味型、評価内容型、関係内容型を使う。満足／納得の既確認の区別、本人明示理由、receivedの出来事と反応の差を、選択された意味どおりに受け取る。価値観・原因・目標・相手意図を補完しない。Human Receptionを唯一の作者、既存gateを作者非依存の読取りownerとして維持する。新しい意味型・関係型・受入条件や上限変更が必要なら、その不足を具体化して止める。
+
+対象外は追加action、複数received、重複／近似／曖昧なsource所有、他者・引用・非実行・予定等の既存不適格入力、明示的な回答時点変更、別回答併記である。原入力の新認識、旧giver帰属の拡張修正、任意の複数経験対応へ広げない。
+
+### 実装ownerと同一単位の完成条件
+
+既存ownerの候補は`emlis_thread_projection.py`（source資格とMove接続）、`emlis_input_specific_meaning.py`（既存組比較／全体所有）、`contracts.py`・`emlis_stage1_composition.py`・`emlis_stage1_response.py`（versioned private対応、内容投影、独立検証）、`emlis_ai_grounded_human_reception.py`／`emlis_ai_grounded_observation_gate.py`（実本文と作者非依存読取り）、既存評価test／現行identity fixtureである。新production file／subsystemは作らない。実装前に実変更pathをこの因果範囲内で固定する。
+
+- source→組→whole選択→主観命題→実本文を一つの単位で検証する。候補生成数やNORMALという分類だけで完成にしない。
+- 理由の差替え／削除、評価の肯否、received反応の差替え／削除、両欄配置で、対応する組の受け取り内容が変わり、別組の意味を借りないことを確認する。同actの二組、foreign/重複owner、relation差替え、ID再作成による偽造も独立に拒否する。
+- 本文で「何を何として受け取ったか」の差が選択されたconfigurationに対応すること。関係反復・語義説明・同じ注意文のvariationに留まればNOT_CLEARで継続し、MashへProduct Readを求めない。
+- 意味checkpointの完全再導出・旧質問の照合を維持する。保存済み本文は非再生成で同じbytesを読む。途中保存checkpointの再試行は独立に確認し、既存bodyを新規生成結果と混同しない。
+- 実service＋隔離SQL保存、作者を禁止した再読、同一回答再送、現行RNの本文／履歴／再表示まで確認し、rootが全対象本文を読む。実機・正式Product Readは別である。
+
+これはRule18 §11.3の既承認組外条件とprivate対応契約を広げるLEVEL_3案。追加外部AI・service・依存・課金・API/DTO/DB/RN変更・migration・配置・mergeは0。追加費用とMashの操作は承認判断以外0を予定する。作業量は本文だけの修正より大きいが、これら二つの原因に限定し、補助checker等を新設しない。期間保証や品質合格は約束しない。承認後は本単位の実装・保存表示検証を優先し、10/17確認点・10/31残件線・12/18公開目標とPiece/Analysis主枠を維持する。今回の診断／提案だけでは商品品質は変わっていない。

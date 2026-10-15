@@ -40657,3 +40657,14 @@ u273で残した「単独理由付きの満足＋別経験の反応訂正」の�
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持。今回の欠落回復を§9.2/9.4の受け取り内容形成全体の完成へ換算しない。固定的な説明／反復、対象外の複数経験や回答時点変更、Q1上限、近似文／別欄二組、giver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
 
 実装commit：[14a3c78](https://github.com/MassyuRed/mashos-api/commit/14a3c786b69e6c57c741244dc2edfdff46525c65)。全体01/01A・current01/04・8/28設計・06・weekly§5.6.29同期。
+
+
+# CURRENT 2026-10-15 u280 — Emlisの経験単位の意味／受け取り対応案（未承認）
+
+基準API14a3c786b69e6c57c741244dc2edfdff46525c65／資料19ddca5a4b40842ae8255975274d67bec2197227。最後の製品修正はu279。今回のsource/test/fixture効果0、STRUCTURE_MAP_DELTA_NONE。
+
+理由付き評価＋receivedは初回／否定訂正後ともcandidate0・COMPETING_MATERIAL_SCOPES・LIMITED。本人実行行動の対照はNORMAL。u253の組外条件がreceived反応を含まないことと、同actの二経験が一つのclaimへ寄ることを原因として特定した。注意語尾付加やNORMAL文の借用は行わない。
+
+追加案は「明示評価exact1＋本人received対比exact1、既承認理由0/1、既存の否定訂正」に限定し、既存組比較とwhole exact1、経験/Moveごとのversioned private対応を接続する。否定訂正で孤立した理由はObservationのみ。旧carrier/canonical・保存本文非再生成・意味checkpoint完全照合・単一作者/独立reader・公開境界は維持する。詳細正本は8/28設計末尾u280、検証事実と再開条件は06 u280、Mash判断事項はweekly§5.6.30。
+
+BLOCKER_NARROWED / PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR。追加範囲の実装前にRule18 §11.3のMash判断が必要。商品credit／新technical completion0、正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。既承認u279を再承認待ちへ戻さない。10/17・10/31・12/18とPiece/Analysis主枠は不変。
