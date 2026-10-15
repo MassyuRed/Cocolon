@@ -40585,3 +40585,14 @@ STRUCTURE_MAP_DELTA_PRESENT。既存production2fileの3関数でarc identity・�
 詳細はAPI handoff／06 u273、全file地図01A、current01/04、8/28設計追記、weekly§5.6.23。反映commit・remote内容照合は既存PR3／30本文に記す。
 
 **BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+
+### u274 — 単独理由付き評価と別経験の訂正後本文を保存・再表示へ戻す（2026-10-15 JST）
+
+u273で残した「単独理由付きの満足＋別経験の反応訂正」の本文停止を修正した。理由・対象・評価の一文と、訂正されたreceivedの一文に、元のsourceの連結成分に対応する別々のarc identityを与える。必要5核／3関係を保持したまま、対象Q3_FREE系列の回答後はMEANING_UPDATED_BODY_UNAVAILABLEからREFINEDへ進み、訂正後本文を保存・再表示できる。
+
+最終単一run535 PASS、保存DTO12件のRN本文／履歴／再openを確認。旧checkpointの完全再導出と不当分割拒否を維持。実機・正式Product Readとは区別する。
+
+詳細はAPI handoff／06 u274、全file地図01A、current01/04、8/28設計追記、weekly§5.6.24。反映commit・remote内容照合・同head CIは既存PR3／30本文に記す。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。

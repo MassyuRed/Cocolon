@@ -1320,3 +1320,20 @@ u253/u264/u271の既存意味と§9.4の多対一可視unitを接続する整合
 次は、既存_observation_surface_atomsで単独理由付き評価と別経験訂正のsource成分を識別し、旧checkpointの完全再導出・同じ経験の不当分割拒否を保って保存後本文へ通す。その後も初回一体単位の受け取り内容を既存§9.2/9.4へ戻して改善する。10/17確認点・10/31残件線・12/18目標、Piece/Analysis主枠を維持する。
 
 全file責務は01A u273、実本文・検証はAPI handoff／06、優先順はweekly§5.6.23。
+
+
+## u274 — 単独理由付き評価と別経験の訂正後本文を保存・再表示へ戻す（2026-10-15 JST）
+
+u273で残した「単独理由付きの満足＋別経験の反応訂正」の本文停止を修正した。理由・対象・評価の一文と、訂正されたreceivedの一文に、元のsourceの連結成分に対応する別々のarc identityを与える。必要5核／3関係を保持したまま、対象Q3_FREE系列の回答後はMEANING_UPDATED_BODY_UNAVAILABLEからREFINEDへ進み、訂正後本文を保存・再表示できる。
+
+既存_observation_surface_atomsへ既存plan/resolverを渡し、source_owned_result_appraisal_reasonが一組で、元の同欄・同文出現が一回、answer_interpretation_unresolved境界がない場合に、既存u272のsource成分identityを適用する。受理済み回答・thread source契約・既存関係型の条件も保つ。撤回後の一組だけを原文一出現と誤認せず、未解釈撤回の旧checkpointも新分岐から除外する。重複理由／訂正評価の既存u272分岐は変更しない。
+
+同じsource成分を二行へ不当に分割した場合は引き続きrequired_arc_fragmented_without_reasonで拒否する。正当化atomの追加、gate緩和、意味選択・source認識・checkpoint schema・旧fixture／IM03 proof・本文作者・独立reader・Reception・各上限の変更はない。API/DTO/DB/SQL/RN・製品依存・Piece/Analysisも変更しない。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+受け取りの反復と言い換え中心の内容、引用と説明的な文章、Q1の2 received＋2評価の既存上限、近似文／別欄二組、有限対象撤回後の不自然さ、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。今回の修復をPREMIUM複数round全般や§9.2/9.4の商品品質完成へ換算しない。
+
+次は、回復した初回／訂正後の実本文を使い、既存§9.2/9.4の内容形成として、評価の言い換えに寄ったReceptionを改善する。今回閉じた別成分identityの停止を第一候補へ戻さず、上限拡張を自動的な次工程にしない。10/17確認点・10/31残件線・12/18公開目標とPiece/Analysis主枠を維持する。
+
+全file責務は01A u274、実本文・検証はAPI handoff／06、優先順はweekly§5.6.24。
