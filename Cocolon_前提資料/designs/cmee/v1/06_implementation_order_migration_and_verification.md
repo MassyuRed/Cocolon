@@ -18221,3 +18221,17 @@ TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受�
 初回は「理由への注意」から理由関係focalを持つ「満足の拠り所」へ、否定訂正後は評価の復唱から「出来事と満たされた感覚がないことの両方」の受け取りへ変わった。一方、receivedは「嬉しさにはつながらなかったのですね」という言換えのままで、初回の理由側も関係説明に寄っている。NORMAL分類・carrier追加・検査成功を§9.2/9.4の商品完成に換算しない。次は、選択済みRELATIONAL_NONCOLLAPSE／PRESERVE_BOTH_ENDPOINTSとreceived本文の接続を、作者・作者非依存reader・実保存本文の同一単位で改善する。新しい価値観・原因・目標・相手意図を補完せず、意味契約の追加が必要なら不足を具体化する。Mashへ未合格本文のProduct Readを求めない。既存共有17失敗、same100、Q1上限、giver帰属、本人実機・正式受入は今回解消していない。10/17確認点・10/31残件線・12/18公開目標とPiece/Analysis主枠を維持する。
 
 実装commit：[09f30e4](https://github.com/MassyuRed/mashos-api/commit/09f30e438b0155beeddbd7b56dc65dfdcf2e3e60)。API変更8pathのremote全文・blob SHA・changed-path集合を照合済み。
+
+## u282 — received内容／独立読取り／保存再表示（2026-10-15）
+
+アプリ全体設計、全file地図、対象と隣接、最新weekly、READ FIRSTと恒久incident全文、8/28設計§1.2／§9.2／§9.4を確認した。u281末尾の残件を既存の限定範囲で実装。新しい意味契約や認識範囲を加えていない。
+
+最終の評価627＋Q2/Q3 application54は681 PASS（243.06s (0:04:03)、skip/xfailなし）。現行共有owner identityは別runで1 PASS／194 deselected（25.48s）。合計682の異なる検査だが単一runではない。初回／否定訂正後、両欄、褒められた／誘われた、嬉しさ不在／悲しさ、片方削除・対比削除、SELF／修飾境界、作者を禁止した独立reader、端点・肯否・時点・focal／basis・contribution同時空化の拒否と旧checkpointを確認した。歴史fixtureは変更せず、現行共有owner identityだけ再計算した。
+
+実service＋隔離PGliteで、反応2×評価時点2×両欄2×訂正／撤回2の16組を初回／更新後まで保存し、32 DTOを取得。加えて旧作者分岐で保存した2 DTOの本文がu281保存サンプルと一致することを確認し、現行NoAuthor GET/startで読み戻した。新32件もNoAuthor GET/start、同一回答再送で本文／timeline一致・event無増加。現行RN hook/modalへ計34件を渡し、本文・全Observation履歴・close/reopen一致を確認した。root華恋が34本文を読み、全文一致で22種類として確認。最終適用条件修正後も全34本文が読取済み集合と一致した。native部品はstubで、本人実機・正式Product Readではない。
+
+初回関連runは44 failed／637 passed。作者の新分岐が旧whole NORMALの複数contributionにも入り、独立readerの組別所有条件に合わず本文生成が止まった。作者／readerを両方とも既存組別exact1 contribution／exact2 basisへ限定し、同一関連suiteを再実行して解消した。レビューで見つかった明示SELF主題による受け取り主体の曖昧化と、contribution集合の同時空化も修正した。途中の失敗は最終成功へ混ぜない。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false。既存Draft/open/unmerged・未配置を維持する。
+
+選択内容が共通の「のですね」へ落ちる問題は当該成分で修正した。一方、二経験を並べた本文は「経験として受け取りました」「両方を受け取りました」が反復し、初回理由側も関係説明に寄っている。今回の正の受け取り対象と対比の明示を、§9.2／9.4・自然さ・入力固有の内容形成の完成に換算しない。次は、初回の理由側とreceived側を合わせた受け取りに、その入力固有の一つの意味が形成されているかを扱う。既存selected contentと実本文の不足を分離し、根拠のない原因等や同義語追加で埋めない。評価撤回後のLIMITED一般態度、既存共有17失敗、same100、Q1上限、giver帰属、本人実機・正式受入は未解消。Mashへ未合格本文のProduct Readは求めない。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠を維持する。

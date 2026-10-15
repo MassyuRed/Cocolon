@@ -40678,3 +40678,11 @@ versioned private opportunityにより同actでも別claimを持つ。STRUCTURE_
 初回は「理由への注意」から理由関係focalを持つ「満足の拠り所」へ、否定訂正後は評価の復唱から「出来事と満たされた感覚がないことの両方」の受け取りへ変わった。一方、receivedは「嬉しさにはつながらなかったのですね」という言換えのままで、初回の理由側も関係説明に寄っている。NORMAL分類・carrier追加・検査成功を§9.2/9.4の商品完成に換算しない。次は、選択済みRELATIONAL_NONCOLLAPSE／PRESERVE_BOTH_ENDPOINTSとreceived本文の接続を、作者・作者非依存reader・実保存本文の同一単位で改善する。新しい価値観・原因・目標・相手意図を補完せず、意味契約の追加が必要なら不足を具体化する。Mashへ未合格本文のProduct Readを求めない。既存共有17失敗、same100、Q1上限、giver帰属、本人実機・正式受入は今回解消していない。10/17確認点・10/31残件線・12/18公開目標とPiece/Analysis主枠を維持する。
 
 実装commit：[09f30e4](https://github.com/MassyuRed/mashos-api/commit/09f30e438b0155beeddbd7b56dc65dfdcf2e3e60)。API変更8pathのremote全文・blob SHA・changed-path集合を照合済み。
+
+## u282 — received対比の本人経験としての受け取り（2026-10-15）
+
+u281で選択済みの、本人の明示評価exact1組＋本人received対比exact1組のうち、NORMAL / ATTENTION / ATTEND_TO / RELATIONAL_NONCOLLAPSE / PRESERVE_BOTH_ENDPOINTSを持つreceived成分だけを扱う。selected contribution exact1、basis exact2（RELATION_LEFT／RELATION_RIGHT）、source-owned単一contrast、追加回答なし、裸の過去形感情形容詞、full finite文を条件にする。理由0/1と当時の満足を否定へ訂正する既存範囲を維持する。
+
+STRUCTURE_MAP_DELTA_PRESENT、全変更fileは01A u282。関連681 PASS＋別run現行identity1 PASS、実service保存34 DTOと現行RNの本文／履歴／再表示を確認。旧本文2件もu281保存sampleとの一致を確認。実本文と再現限界は06／API handoff u282。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false。既存Draft/open/unmerged・未配置を維持する。
+
+選択内容が共通の「のですね」へ落ちる問題は当該成分で修正した。一方、二経験を並べた本文は「経験として受け取りました」「両方を受け取りました」が反復し、初回理由側も関係説明に寄っている。今回の正の受け取り対象と対比の明示を、§9.2／9.4・自然さ・入力固有の内容形成の完成に換算しない。次は、初回の理由側とreceived側を合わせた受け取りに、その入力固有の一つの意味が形成されているかを扱う。既存selected contentと実本文の不足を分離し、根拠のない原因等や同義語追加で埋めない。評価撤回後のLIMITED一般態度、既存共有17失敗、same100、Q1上限、giver帰属、本人実機・正式受入は未解消。Mashへ未合格本文のProduct Readは求めない。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠を維持する。

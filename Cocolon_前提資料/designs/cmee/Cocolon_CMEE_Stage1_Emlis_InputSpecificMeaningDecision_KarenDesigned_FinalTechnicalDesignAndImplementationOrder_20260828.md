@@ -3201,3 +3201,28 @@ TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受�
 初回は「理由への注意」から理由関係focalを持つ「満足の拠り所」へ、否定訂正後は評価の復唱から「出来事と満たされた感覚がないことの両方」の受け取りへ変わった。一方、receivedは「嬉しさにはつながらなかったのですね」という言換えのままで、初回の理由側も関係説明に寄っている。NORMAL分類・carrier追加・検査成功を§9.2/9.4の商品完成に換算しない。次は、選択済みRELATIONAL_NONCOLLAPSE／PRESERVE_BOTH_ENDPOINTSとreceived本文の接続を、作者・作者非依存reader・実保存本文の同一単位で改善する。新しい価値観・原因・目標・相手意図を補完せず、意味契約の追加が必要なら不足を具体化する。Mashへ未合格本文のProduct Readを求めない。既存共有17失敗、same100、Q1上限、giver帰属、本人実機・正式受入は今回解消していない。10/17確認点・10/31残件線・12/18公開目標とPiece/Analysis主枠を維持する。
 
 実装commit：[09f30e4](https://github.com/MassyuRed/mashos-api/commit/09f30e438b0155beeddbd7b56dc65dfdcf2e3e60)。API変更8pathのremote全文・blob SHA・changed-path集合を照合済み。
+
+## 2026-10-15 u282 — 選択済みreceived対比から肯定的受け取り対象への接続
+
+u281で選択済みの、本人の明示評価exact1組＋本人received対比exact1組のうち、NORMAL / ATTENTION / ATTEND_TO / RELATIONAL_NONCOLLAPSE / PRESERVE_BOTH_ENDPOINTSを持つreceived成分だけを扱う。selected contribution exact1、basis exact2（RELATION_LEFT／RELATION_RIGHT）、source-owned単一contrast、追加回答なし、裸の過去形感情形容詞、full finite文を条件にする。理由0/1と当時の満足を否定へ訂正する既存範囲を維持する。
+
+Human Receptionの既存received作者へ選択済みdecisionを渡す。出来事だけでは本人の経験を言い表せないという対比を含め、嬉しさの不在／悲しさの存在を、その本人の経験を受け取る対象として実現する。入力の対比を単なる随伴へ弱めないため「出来事だけでは言い表せない」を文の限定へ置く。原因・相手意図・期待・価値観は補完しない。作者非依存readerは実本文のevent・感情・肯否・過去時点・本人、focal contrast、左右のnode所有、basis、非空のselected contribution一致を照合する。
+
+旧whole NORMALの複数contribution、LIMITED、複数received、ABOUT回答、detached/replacement、SELF主題付きevent、修飾付き感情は既存文法を維持する。旧本文の独立読取りも保持。意味選択・checkpoint・source認識・private/public型・API/DTO/DB/RN・質問上限を変更しない。新production file、型、inventory、checkerは追加していない。
+
+実保存された合成例（実ユーザー本文ではない）：
+
+```text
+初回 Reception：
+探しやすくなった点に、資料を分類したことへの当時の満足の拠り所が見えます。褒められたことだけでは言い表せない、嬉しさが伴わなかったあなたの経験として受け取りました。
+
+反応を「悲しかった」へ変えたreceived文：
+褒められたことだけでは言い表せない、悲しさが伴ったあなたの経験として受け取りました。
+
+否定訂正後 Reception：
+資料を分類したことと、それについて当時はご自身の中に満たされた感覚がなかったことの両方を受け取りました。褒められたことだけでは言い表せない、嬉しさが伴わなかったあなたの経験として受け取りました。
+```
+
+検証は正本06とAPI handoffのu282、全変更fileは01A u282。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false。既存Draft/open/unmerged・未配置を維持する。
+
+選択内容が共通の「のですね」へ落ちる問題は当該成分で修正した。一方、二経験を並べた本文は「経験として受け取りました」「両方を受け取りました」が反復し、初回理由側も関係説明に寄っている。今回の正の受け取り対象と対比の明示を、§9.2／9.4・自然さ・入力固有の内容形成の完成に換算しない。次は、初回の理由側とreceived側を合わせた受け取りに、その入力固有の一つの意味が形成されているかを扱う。既存selected contentと実本文の不足を分離し、根拠のない原因等や同義語追加で埋めない。評価撤回後のLIMITED一般態度、既存共有17失敗、same100、Q1上限、giver帰属、本人実機・正式受入は未解消。Mashへ未合格本文のProduct Readは求めない。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠を維持する。
