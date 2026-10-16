@@ -18858,3 +18858,22 @@ u298で残した逆順同欄の過去3停止は対象範囲で解消した。一
 System Contextはu297のmaterial祖先条件停止から許可された原典直接参照fallbackを継続し、今回再prepareや新Context生成済みとはしない。周辺既存4失敗は再実行せず未解消、過去共有17失敗との集合一致を再主張しない。合成probe／保存／RNの一回限りの検査を新runnerや正式証跡契約にはしない。再現matrix・原因・実本文・結果は本節、恒常的な回帰は既存testsと合成fixtureに保持する。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。same100、Q1上限、giver帰属、本人実機・正式Product Readも残る。10/17確認点・10/31管理線・12/18公開目標、Piece/Analysis主枠、管理評価53.25％を維持する。
+
+
+## u300 — 初回の未成立事項付き満足＋別receivedの選択資格不足を具体化（2026-10-17 JST）
+
+**PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR。今回の製品変更・本文改善0。** 基準API5791a2a／資料02f5c2f、両PR Draft/open/unmerged。前回API CI38912873573はcompleted/success。全体01、全file地図01A/B/C、current_structure、最新weekly20261010、作業rule／Rule18 §11.3、8/16商品軽視incident全文、8/28設計§9.2/9.4とu262/u281/u289/u294を確認した。System Contextは既存の原典直接参照fallbackで、新Context生成や再prepare済みではない。
+
+rootは現行実装を変更せず合成18例を生成し、全Observation／Receptionを読解した。未成立「結論は出ていないが、考えを言葉にできて満足した／満足している。」とreceived「褒められたのに、嬉しくなかった。」の6配置×時点2＝12は、本文あり・LIMITED、全5bindingのMATERIAL_WEIGHT／focalなし。未成立単独、＋本人実行行動、理由＋receivedの各時点2＝6は本文あり・NORMAL。対象三点を認識できていても、その三点に限った内容を二成分比較へ渡せていない。18件を新規回帰PASSや修正後結果に換算しない。Python3.12.14／Pydantic2.13.5で実行、pytest／SQL／RNは今回未実行。
+
+対象の実Receptionは「結論は出ていないという点と、考えを言葉にできたことへの当時の満足との対比に目を向けています。褒められたことは、嬉しさにはつながらなかったのですね。」。対照単独入力では既存作者が「…当時の満足を、考えを言葉にできたことに向けられた充足として受け取りました。」と生成する。対照の文を対象への修正後本文とは扱わない。全文と配置・時点差はAPI既存handoff u300に収録した。
+
+不足はthread_projectionの未成立context一律除外と、composition独立所有検査が未成立を評価組へ含めていないこと。u262は別requiredを本人実行行動へ限定し、u281の二経験資格も未成立を含まない。作者だけで充足表現へ替える修復では閉じない。
+
+推奨は初回・回答なし・round0・legacyなし、未成立fact（現在否定）／実行済み対象／肯定無程度満足（過去又は入力時点）の三点＋既存received二点に限る成分資格追加。全required五点・三辺・既存2 Moveの一意な所有を証明し、組間関係／追加材料／意味不明点／理由／共有対象／重複曖昧ownerを除く。既存source認識で証明済みの別欄両順・同欄両順（memo／memo_action）を扱う。既存ComponentReceptionOpportunityV1、通常三点EmlisAppraisalContentとreceived二点内容、作者・独立readerを再利用し、候補／ReadingConsequence各exact1を保つ。新schema・型・上限・registryは予定しない。静的に適合候補を確認した段階で、実装成立は未証明。
+
+承認後の必須owner候補はthread_projection資格とcomposition独立closure。source→成分→whole選択→主観命題→実本文→実service／隔離SQL／現行RNまで同じ単位で検証する。対象削除・差替え／肯否／時点／程度、別receivedの変化、成分・Move・relation交換を独立に照合する。旧保存非再生成とcheckpoint保存後・本文保存前の再試行／旧質問回答を区別する。checkpoint一致だけで旧本文同一を主張せず、旧sourceの完全再導出と既存retry境界を保持する。別型・retry契約の追加が必要なら自動拡張しない。初回Observation一節化・満足一回・同時性を補わないことも維持する。
+
+Rule18 §11.3 LEVEL_3の追加承認対象はこの資格だけ。過去承認を取り直さない。外部AI／service／依存／費用／公開API／DTO／DB／RN schema／配置／merge追加0予定。必要作業は資格・独立所有修正と既存回帰・保存表示確認で、工数・完了日は未確定。同Workのread-only補助とrootの因果照合であり、正式Pro/Ultra二重検証ではない。新しい恒久runner／checker／証跡契約は作らない。未保存本文の再試行は既存どおり保存MEANING_UPDATEと完全checkpointを保ち、現在のengineで生成する。旧renderer固定flagを新設しない。
+
+STRUCTURE_MAP_DELTA_NONE、今回は既存文書への提案・記録のみ。8/28意味設計u300とschema05へ未承認案、07／weekly§5.6.50へ現在地を同期した。対比反復／語義説明やNORMAL分類だけを内容形成完了としない。初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・未配置／未マージ。訂正後反復／注意のみ、共有対象／対象外更新、既存周辺4失敗・same100・Q1上限・giver帰属・本人実機／正式Product Readは未解消。10/17確認点・10/31管理線・12/18公開目標、Piece/Analysis主枠、53.25％は維持する。

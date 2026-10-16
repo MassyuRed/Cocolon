@@ -1316,3 +1316,14 @@ System Contextはu297のmaterial祖先条件停止から原典直接参照fallba
 対象の逆順同欄過去3停止は解消。次は同じ全文に残る初回の説明性・受容反復を、選択内容と実現内容の差から扱う。System Contextは原典直接参照fallback継続。同Work補助を別Pro/Ultraの正式二重検証とはしない。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。共有対象／対象外更新・周辺既存失敗・same100・Q1上限・giver帰属・本人実機／正式Product Readは残る。10/17・10/31・12/18、Piece/Analysis主枠、管理評価53.25％を維持。
+
+
+### 5.6.50 u300 — 未成立事項付き満足と別経験の初回選択を具体化（2026-10-17 JST）
+
+10/17確認点の現在地は**PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR**。u299の停止／認識修復とAPI CI成功を確認したが、今回の製品変更・本文改善は0。現行18合成本文をrootが読み、対象12（別欄両順、memo／memo_action各同欄両順×評価時点2）は全てLIMITEDの「対比に目を向けています」、単独／本人実行行動／理由＋receivedの対照6はNORMALだった。本文あり18/18は回帰PASSや商品受入れではない。
+
+原因は、認識済み未成立三点を別receivedとの成分比較へ参加させる資格がなく、独立所有検査も三点を評価組へ結べないこと。作者だけの語尾変更を繰り返さず、**初回の未成立三点＋received二点を既存二成分経路へ接続する最小資格追加**を推奨する。既存whole／ComponentReceptionOpportunityV1／通常三点内容を再利用し、新schema・内容型・上限は予定しない。対象・除外・source一意所有・互換・完成条件は8/28意味設計u300、実本文と詳細は06／API handoff u300、契約案は05。
+
+Rule18 §11.3により新資格だけMash承認待ち。過去の承認範囲は継続。承認後は意味→本文→保存／現行RNを一単位で扱い、未成立と対象へ向く充足、別received経験の内容差を確認する。旧保存本文の非再生成と、checkpoint保存後・本文保存前の再試行・旧質問回答の互換を分け、NORMAL化だけを品質改善としない。実装のlossless成立は未確認。外部service・依存・費用・公開wire・DB・配置追加0予定、工数／完了日は未確定。
+
+STRUCTURE_MAP_DELTA_NONE、実装・地図責務は不変。初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。訂正後の反復／注意のみ、共有対象・対象外更新、既存失敗、same100、Q1上限、giver帰属、本人実機／正式Product Readは残る。10/31管理線・12/18公開目標、Piece/Analysis主枠、管理評価53.25％を維持し、診断・提案だけを進捗率へ加算しない。

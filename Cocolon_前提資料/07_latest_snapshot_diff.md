@@ -40814,3 +40814,12 @@ TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式0/3�
 u298で残した逆順同欄過去3例の停止を、source本人継続証明の接続漏れとして修復した。入力時点3例の一般化も三点の保持へ戻した。比較36中他30は全record一致。fresh対象の意味plan・checkpoint・selectedは変わるため、旧版は完全再導出して区別する。訂正後の単独ATTENTION文を既存markerへ接続し本文停止も修復した。新しい意味型／資格／契約は追加せず既存LIMITEDを維持。STRUCTURE_MAP_DELTA_PRESENT、地図01A／current01/04へ反映。
 
 最終sourceのappraisal全958件は現行173 test関数を重複なしの4群に分け、278＋253＋224＋203 PASS（全体133.56秒）、失敗0／skip0。Q2/Q3 application54件は別runで54 PASS／既存非推奨warning2／91.28秒。現owner identity1件は別runでPASS／31.56秒。主回帰計1,012件とidentity1件であり、一括runや対象22件との重複加算とはしない。 保存・現行RN再表示の初回6＋訂正後6の計12 DTO一致・同回答再送確認（native stub、本人実機ではない）。途中結果・旧Q1互換・実本文と詳細は06／API handoff u299、再開weekly§5.6.49。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・未配置／未マージ。初回説明性・受容反復と他の残件は継続する。
+
+
+## 2026-10-17 u300 — 初回二経験の選択資格不足と最小追加案
+
+**PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR、製品変更・本文改善0。** u299 API CI成功を確認。現行18合成本文を診断し、未成立事項付き満足＋別receivedの12例は、三点を認識後もLIMITEDの注意内容に留まる。対照6はNORMAL。作者の取り落としではなく、二成分資格と独立所有closureの未成立除外だった。
+
+初回・回答なし・legacyなしの三点＋二点だけを、既存whole／ComponentReceptionOpportunityV1／通常三点内容へ接続する資格追加案を具体化した。新schema・内容型・上限は予定しない。Rule18 §11.3により追加資格のみ承認待ち。意味設計u300／05、詳細と実本文は06／API handoff u300、再開はweekly§5.6.50。STRUCTURE_MAP_DELTA_NONE、全体・地図・current_structureの実装責務は不変。
+
+初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・未配置／未マージ。対比説明のままの本文を商品完成とせず、承認後は意味選択から実本文・保存表示まで同じ単位で確認する。訂正後等の別残件、10/31・12/18、Piece/Analysis主枠と53.25％は維持。

@@ -2725,3 +2725,12 @@ source_shared_target_slot／node_owner／reference_event／reference_range／out
 公開wire・API/DTO/DB/RN・意味checkpoint保存形式・source属性・global plan markerは変更しない。旧型／旧aggregateと保存済み本文の読取を維持する。適用資格・除外は8/28設計u293/u294、実装file責務は01A u294、実結果は06／API handoff u294。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。限定箇所の保持確認を§9.2/9.4全体、本人実機または正式Product Readの合格へ換算しない。
+
+
+## u300 — 未成立三点＋received二点の既存型再利用案（2026-10-17 JST、未承認）
+
+**PROPOSED_NOT_APPROVED、schema／製品変更0。** 初回の未成立fact＋実行対象＋肯定無程度満足と、別の本人received対比を二成分で比較する資格追加案。対象・除外・承認境界は8/28意味設計u300、実本文と診断はAPI handoff／06 u300。
+
+既存`ComponentReceptionOpportunityV1` exact7／二機会と、通常`EmlisAppraisalContent`の三binding・protected0・focal対比を再利用する。receivedは別の二bindingと焦点対比を所有する。exact2の評価内容型を三点へ緩めない。whole候補／ReadingConsequence各exact1と既存独立closureを維持する。新schema／内容型／registry／上限は提案しない。u294の更新後LIMITED専用carrierを初回三点へ転用しない。
+
+型追加がなくてもu262/u281の選択資格変更であり、source不変／checkpoint一致からselectedや本文不変を主張しない。保存済み本文の非再生成と、checkpoint保存後・本文保存前の再試行・旧質問回答・legacyの互換を分けて検証する。既存型でlosslessに結べない場合や新しいretry／保存契約を要する場合は、この案の外として具体化する。公開API／DTO／DB／RN wireは不変予定。実装済み契約として扱わず、承認までは現行資格を維持する。

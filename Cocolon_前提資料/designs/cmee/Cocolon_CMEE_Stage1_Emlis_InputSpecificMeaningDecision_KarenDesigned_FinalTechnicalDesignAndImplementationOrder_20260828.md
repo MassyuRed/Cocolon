@@ -3461,3 +3461,32 @@ u282の裸形限定とu294の敬体fallbackは過去の実装状態として保�
 新しい意味・資格・private内容契約・選択内容は追加しない。SELF topic・程度・現在形・引用等の除外、u294の別欄・未変更received資格と全体LIMITED、本人・肯否・時点・対比・原因等の境界は維持する。同じ60合成応答でselected全体を含む意味とObservationは一致し、敬体24 Receptionだけが変わった。STRUCTURE_MAP_DELTA_NONE。実本文・最終sourceの901検査・保存/RN24 DTOと限界は06／API handoff u295、最新再開順はweekly§5.6.45。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、未配置・未マージ。限定した本文接続の修復を§9.2/9.4全体の合格へ換算しない。
+
+
+## u300 — 初回の未成立三点＋別received二点への成分資格追加案（2026-10-17 JST）
+
+**PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR。未実装、今回の製品変更・本文改善0。** u299のsource修復後も、未成立事項付き満足に別receivedが加わると内容は「対比への注意」へ留まる。u299基準API5791a2aで18合成入力を実生成し、対象12（別欄両順・同欄両順×memo/memo_actionの計6配置×過去／現在2）は全てLIMITED、単独／本人実行行動併記／理由＋receivedの対照6はNORMALだった。全18本文をrootが読解。本文と数値の詳細はAPI既存handoff u300、検証位置は06 u300、再開はweekly§5.6.50。
+
+選択済み内容の取り落としではない。thread_projectionの`_appraisal_received_components`は未成立contextを明示除外し、compositionの独立所有closureも未成立を評価組に含めていない。LIMITEDの2 Moveは全5点のMATERIAL_WEIGHT／focalなしを分配し、作者が実現できるのは既存の注意内容である。u262の組外本人実行行動限定、u281の未成立なし二経験資格を広げる追加が必要になる。
+
+### 限定案
+
+- 回答なし・round0・legacy復元でない初回だけ。本人の完全な未成立fact（現在・否定）exact1、実行済み対象（過去）、肯定無程度満足（過去／入力時点）の三点と、既存ABOUT_TARGET＋CONTRASTの二辺を一成分にする。新しいsource文法は加えない。
+- もう一成分は既存資格でsource所有が確定する本人received出来事／過去反応の二点と明示contrast一辺。receivedの肯否・程度・本人帰属等は現行資格を広げない。本文の全required五点・三辺が二成分へ一意に属し、既存required Move exact2が各成分を完全所有する。組間関係、追加材料、意味不明点、共有対象、理由、否定／程度付き満足・納得、他者／引用／推量、重複／曖昧な所有は対象外。
+- u299までに認識済みの別欄両順・同欄両順（memo／memo_action）を、欄順の優先ではなく原文範囲・本人継続・一意な出現・非重複所有で扱う。
+- 既存の成分内比較・全required所有からwhole候補とReadingConsequence各exact1へ結ぶ。NORMALを直接指定しない。既存`ComponentReceptionOpportunityV1` exact7を二機会、通常`EmlisAppraisalContent`を三点／二点それぞれに用いる。三点側はRELATIONAL_NONCOLLAPSE／PRESERVE_BOTH_ENDPOINTS、appraised exact3、protected0、未成立→評価の焦点対比を保持する。received側は別basisと別焦点を持ち、他組の意味を借りない。
+- 未成立を理由／不能／達成目標へ変えず、満足を成功・進歩へ格上げしない。現在の未成立を過去の満足時点へ移さず、両組間の因果・同時性・優先度・相手意図を足さない。内容目標は未成立の点を保ちつつ、対象へ限った本人の充足と、別のreceived経験の両方を受け取ること。§9.2/9.4は不変。NORMAL化・関係反復・語義説明だけを完成としない。
+
+静的確認では新schema／内容型／上限／registryは不要。必須実装候補は既存thread_projectionの資格判定とcompositionの独立所有closure。既存作者・独立readerは未成立三点とreceived二点に対応しているが、この組合せの実行成立は未検証。既存型でlosslessに保持できない場合、別の局所carrier等を自動追加せず不足を具体化する。
+
+### 互換と受入れ
+
+source checkpointが同じでも、選択whole／branch／主観内容／識別hash／本文は変わり得る。checkpoint一致を旧生成本文の同一へ換算しない。旧保存DTOのNoAuthor GET/start／同回答再送、checkpoint保存後・本文保存前の再試行、旧質問への回答とlegacy復元を分けて確認し、既存retry境界と旧sourceの完全再導出を保つ。新保存versionやretry契約が必要なら本案外として停止する。対象外の訂正・撤回をこの初回資格へ自動拡張しない。
+
+既存serviceの未保存本文再試行は、保存MEANING_UPDATEを再利用して現在のengineで生成し、完全checkpoint一致を要求する。今回もその契約を維持し、新しい旧renderer固定flagは作らない。全checkpoint・意味event・operationの保持と、完成済み本文の非再生成を別々に確認する。
+
+source→成分→whole→主観命題→実本文を同じ単位で比較する。三点削除／対象変更／肯否・程度・時点、received反応変更、追加材料／foreign owner、ID再計算後の成分・Move・relation交換により、正しい組だけが変わることと不適格候補の拒否を検証する。独立reader、実service＋隔離SQL保存、非再生成、現行RN本文／全履歴／再表示、rootの全保存本文読解まで同じ単位で行う。既存Observationの満足一回・一節化・未明示同時性なしを維持する。実機・正式Product Readとは区別し、説明性が残れば未完了とする。
+
+Rule18 §11.3 LEVEL_3として**この成分資格追加だけ**承認を求める。既承認範囲は継続する。外部AI・service・依存・費用・公開API／DTO／DB／RN schema・配置／mergeは追加0を予定。資格／独立所有の修正と既存回帰・保存表示確認が必要で、正確な工数と完成日は未確定。承認前に作者の表現緩和で代用しない。同Workの補助read-only reviewを用い、別Pro/Ultra正式二重検証を済ませたとはしない。
+
+STRUCTURE_MAP_DELTA_NONE。製品実装・地図責務は不変。初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・未配置／未マージ。10/17確認点に選択資格不足と最小差分を記録し、10/31・12/18、Piece/Analysis主枠、53.25％を維持する。
