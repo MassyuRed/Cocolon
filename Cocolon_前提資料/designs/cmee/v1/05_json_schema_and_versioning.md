@@ -2706,3 +2706,22 @@ source_shared_target_slot／node_owner／reference_event／reference_range／out
 適格範囲は8/28設計u284、実検証は06/API handoff u284。PRODUCT_NOT_CLEAR、正式0/3、未配置。
 
 実装commit：[81f52ef](https://github.com/MassyuRed/mashos-api/commit/81f52ef02cc74cd889904ff80d0185bd0a7d3fee)。API16pathのremote全文・blob SHA・変更集合・親commitを照合済み。
+
+
+## u294 — 承認済みの未変更received経験を更新後LIMITEDへ保持（2026-10-16 JST）
+
+2026-10-16 11:26 JST、Mashがu293の限定案の実装を明示承認した。u293の未承認記載は提案時の履歴として保持し、現在の承認状態は本節を優先する。承認対象は、別欄の理由なし満足を当時の否定へ訂正する場合、または理由0/1の評価だけを撤回する場合に、未変更receivedの経験内容を更新後LIMITEDへ結ぶ資格とprivate内容対応の追加である。満足やreceivedの意味を再承認へ戻していない。
+
+新private型を旧型から分離して追加した。
+
+| 型／schema | 境界 |
+|---|---|
+| `RetainedReceivedExperienceEligibilityV1`／`cocolon.cmee.retained_received_experience_eligibility.v1` | source prefix・checkpoint・原入力／回答source・canonical原核／原関係・accepted更新・Move・thread controlを持つ。別欄exact1の完全更新とreceived未変更を現在sourceから再証明する。 |
+| `RetainedReceivedExperienceContentV1`／`cocolon.cmee.retained_received_experience_content.v1` | eligibility、current preimage／aggregate seal・claim／命題参照、meaning outcome／reception binding／grounding、局所命題・basis・qualifier・局所sealを持つ。wholeのbasisと局所exact2を区別する。 |
+| `SelectedRetainedReceivedExperienceDecisionV1` | 旧 `SelectedSubjectiveReceptionDecisionV1` のschema fieldを変更せず、別型へ `retained_received_experience` を追加する。識別hashを除く既存decision内容fieldは保持し、対象12の `decision_ref`／`input_ref` は新局所内容を含むhashへ変わる。旧decisionへ一括で新資格を与えない。 |
+
+局所はATTENTION／ATTEND_TO、RELATIONAL_NONCOLLAPSE／PRESERVE_BOTH_ENDPOINTS、両端exact2／contrast exact1／当該contributionとqualifierへ閉じる。global LIMITED、単一aggregate命題、既存claim／trace／projection sealを上書きしない。局所sealは現在のaggregate・projection・Moveとの結合を含み、ref／seal再計算だけでは改変が通らないよう、原sourceの再admit・既存更新処理と現在planを再照合する。source candidate／contribution ID、qualifier三軸、roleとbinding refsも現sourceから再導出し、全hashを再計算した改変を拒否する。
+
+公開wire・API/DTO/DB/RN・意味checkpoint保存形式・source属性・global plan markerは変更しない。旧型／旧aggregateと保存済み本文の読取を維持する。適用資格・除外は8/28設計u293/u294、実装file責務は01A u294、実結果は06／API handoff u294。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。限定箇所の保持確認を§9.2/9.4全体、本人実機または正式Product Readの合格へ換算しない。

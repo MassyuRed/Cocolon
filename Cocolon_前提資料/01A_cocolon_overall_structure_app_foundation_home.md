@@ -3519,3 +3519,26 @@ source認識・意味候補の採用資格・質問／Move／文数上限、公�
 RN→API→service/store→保存read→RNと01B/Cの責務は不変。検証は正本06／API handoff u289、進行はweekly§5.6.39。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+
+## u294 — 承認済みの未変更received経験を更新後LIMITEDへ保持（2026-10-16 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。既存6 production ownerへ更新後LIMITEDのprivate局所資格／内容対応を追加。新production file・engine・checker・serviceなし。
+
+| mashos-api相対path | 今回の責務差分 |
+|---|---|
+| ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py | versioned private Eligibility／Content、current aggregateへの結合と局所seal、旧型と別の内容検証。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py | 別欄・完全更新exact1・received未変更を原source／accepted更新から再証明し、source candidate／contribution IDも再導出。現在のMoveへ局所内容を結ぶ。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py | post-selectionでreceived二端点・一対比の局所経験命題を導出。全体aggregateの既存義務は保持。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py | 局所内容を現在のaggregate claim／trace／preimage／sealへ結んで専用sealを生成。 |
+| ai/services/ai_inference/emlis_ai_grounded_human_reception.py | 識別hashを除く既存decision内容fieldを保持した別decision型で局所内容を受け、source資格を再検証して既存exact2経験文法へ渡す。裸形経験文法の対象外となる敬体／SELF topicは従来fallbackを保持。 |
+| ai/services/ai_inference/emlis_ai_grounded_observation_gate.py | 局所資格と実本文の本人・役割・肯否・時点・対比を作者なしで照合。旧完全本文も保持。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 新規37検査。先行33（対象12／reader6／改変2／対象外12／legacy等1）＋fallback4。既存2関数の本文期待4条件／inverse変異2条件を新経験句へ更新。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行shared-owner identityを実sourceから再導出。歴史fixture不変。 |
+| ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md | 承認・実本文・検証結果と限界・次の残件。 |
+
+2026-10-16 11:26 JST、Mashがu293の限定案の実装を明示承認した。u293の未承認記載は提案時の履歴として保持し、現在の承認状態は本節を優先する。承認対象は、別欄の理由なし満足を当時の否定へ訂正する場合、または理由0/1の評価だけを撤回する場合に、未変更receivedの経験内容を更新後LIMITEDへ結ぶ資格とprivate内容対応の追加である。満足やreceivedの意味を再承認へ戻していない。
+
+予定ownerのemlis_thread_surface.pyは変更不要。全体LIMITED・旧aggregate・意味checkpoint・核／関係・Observation・Move数を保持。RN→API→service/store→保存read→RNと01B/C、公開契約・DB・依存・他中核は不変。新source markerやglobal plan加工は行わない。詳細は05／8/28意味設計／06／API handoff u294、再開順はweekly§5.6.44。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。限定箇所の保持確認を§9.2/9.4全体、本人実機または正式Product Readの合格へ換算しない。

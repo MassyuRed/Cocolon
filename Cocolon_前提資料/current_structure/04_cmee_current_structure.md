@@ -1510,3 +1510,16 @@ source認識・意味候補の採用資格・質問／Move／文数上限、公�
 詳細・実本文・検証は正本06／API handoff u289。全file地図の責務差分は01A u289、再開順はweekly§5.6.39。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+
+## u294 — 承認済みの未変更received経験を更新後LIMITEDへ保持（2026-10-16 JST）
+
+2026-10-16 11:26 JST、Mashがu293の限定案の実装を明示承認した。u293の未承認記載は提案時の履歴として保持し、現在の承認状態は本節を優先する。承認対象は、別欄の理由なし満足を当時の否定へ訂正する場合、または理由0/1の評価だけを撤回する場合に、未変更receivedの経験内容を更新後LIMITEDへ結ぶ資格とprivate内容対応の追加である。満足やreceivedの意味を再承認へ戻していない。
+
+CMEEの全体LIMITEDと既存aggregateを保ったまま、received exact1の局所経験内容を現在のsource・accepted更新・意味・Moveへ一意に結ぶprivate Eligibility／Contentを追加した。局所二端点とwhole basisを区別し、現在のaggregate claim／trace／projectionへの結合と局所sealを検証する。既存wholeの意味を別解釈へ書き換えず、Selected whole用のComponentReceptionOpportunityV1も流用しない。
+
+source replayは原sourceの再admitと既存_prepare_answerによる意味更新再導出であり、本文作者replayとは別である。唯一のHuman Reception作者は選択済み局所内容を実現し、有限readerがsource qualifier三軸・左右role・ref再計算と実本文を照合する。source candidate／contribution IDも現sourceから再導出し、全hashを再計算した改変を拒否する。source marker・global plan・公開metadataは追加しない。
+
+STRUCTURE_MAP_DELTA_PRESENT。private型の正本は05 u294、意味境界は8/28設計u293/u294、既存6 production fileの責務は01A u294、実本文・検証・保存表示・次工程は06／API handoff u294。公開API/DTO/DB/RN・Piece/Analysis・依存・上限は不変。共有対象・同欄・混合更新・後続回答等は今回対象外。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。限定箇所の保持確認を§9.2/9.4全体、本人実機または正式Product Readの合格へ換算しない。

@@ -3437,3 +3437,18 @@ u282の「出来事だけでは言い表せない、本人の反応を伴う経�
 同じ54合成応答の対象12／対照42は改善範囲の診断であり、新型・新本文を実装または検証した証拠ではない。承認後、局所資格の因果対照、本人／肯否／時点／関係・片端欠落・根拠のない追加の本文拒否、旧本文互換、現行回帰、保存・NoAuthor再読・再送・RN再表示まで検証する。rootの本文事前読解を機械PASSで代用しない。正式Product Readや商品合格は別で、今回成立しない。
 
 意味内容は既承認でも、更新後LIMITEDへの資格とprivate契約の追加はRule18 §11.3 LEVEL_3に該当する。承認前の製品変更0、automatic_progression=false、candidate_ready=false。原典の意味再質問ではなく、この限定適用の追加についてMash判断を受ける。
+
+
+## u294 — 承認済みの未変更received経験を更新後LIMITEDへ保持（2026-10-16 JST）
+
+2026-10-16 11:26 JST、Mashがu293の限定案の実装を明示承認した。u293の未承認記載は提案時の履歴として保持し、現在の承認状態は本節を優先する。承認対象は、別欄の理由なし満足を当時の否定へ訂正する場合、または理由0/1の評価だけを撤回する場合に、未変更receivedの経験内容を更新後LIMITEDへ結ぶ資格とprivate内容対応の追加である。満足やreceivedの意味を再承認へ戻していない。
+
+u293で定義した別欄限定資格を実装した。新しいprivate Eligibilityは現在の原source・一回の完全更新・received Moveの所属を持ち、Contentはその資格と局所二端点・一対比・basis／qualifier、現在のaggregate claim／projection／meaning／reception bindingへ結ぶ。旧whole命題と識別hashを除く既存decision内容fieldを維持した別decision型で局所内容をcarryし、全体LIMITEDをNORMALへ読み替えない。
+
+原sourceを再admitして既存の更新処理から再導出し、accepted更新・原核／原関係・現在planを照合する。局所命題はpost-selectionで選ばれ、current aggregateとの対応を封印する。唯一のHuman Reception作者は検証済み局所内容だけを既存経験文法へ実現し、有限readerは実本文と現在sourceの本人・役割・肯否・時点・modality・対比を独立照合する。旧本文を新しい意味根拠にせず、保存readへ再生成を加えない。
+
+全体のLIMITED、既存aggregate命題、意味checkpoint・核・関係・Observation、未知・表示義務・Move数を保持する。同欄・共有対象・複数／曖昧received、received自体の訂正／撤回／時点変更、ADD・混合更新・後続回答、legacy／PARTIALは除外。初回と理由付き否定訂正の既存NORMALを変更しない。新しい原因・意図・期待・価値、理由付き満足の充足、失効した共有対象の外側対比を付加せず、満足側Moveへ局所内容を流用しない。
+
+source ID再導出等の最終補強前に比較した同じ54合成応答の対象12だけが変化し、対照42全文・全54の意味checkpoint／核／関係／Observationと旧aggregateと識別hashを除く既存decision内容fieldは保持された。対象12のdecision_ref／input_refは新局所内容を含むhashへ変わる。target12更新の局所経験内容を確認したが、初回一体単位と全体の§9.2/9.4は未完了。実装file責務は01A u294、schemaは05 u294、実本文・検証と次工程は06／API handoff u294、週次再開順は§5.6.44を参照する。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。限定箇所の保持確認を§9.2/9.4全体、本人実機または正式Product Readの合格へ換算しない。

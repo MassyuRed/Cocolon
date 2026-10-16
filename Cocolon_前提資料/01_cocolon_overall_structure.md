@@ -7094,3 +7094,14 @@ source認識・意味候補の採用資格・質問／Move／文数上限、公�
 詳細・実本文・検証は正本06／API handoff u289。全file地図の責務差分は01A u289、再開順はweekly§5.6.39。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+
+## u294 — 承認済みの未変更received経験を更新後LIMITEDへ保持（2026-10-16 JST）
+
+2026-10-16 11:26 JST、Mashがu293の限定案の実装を明示承認した。u293の未承認記載は提案時の履歴として保持し、現在の承認状態は本節を優先する。承認対象は、別欄の理由なし満足を当時の否定へ訂正する場合、または理由0/1の評価だけを撤回する場合に、未変更receivedの経験内容を更新後LIMITEDへ結ぶ資格とprivate内容対応の追加である。満足やreceivedの意味を再承認へ戻していない。
+
+別欄の満足だけを訂正・撤回した後、未変更receivedの局所経験内容を選択・封印し、既存Human Reception作者と有限readerへ渡すprivate対応を追加した。全体LIMITED・旧aggregate・意味checkpoint・観測本文・Move数を維持し、共有対象や後続回答へ広げない。新production fileはなく、既存6 ownerの責務差分である。
+
+STRUCTURE_MAP_DELTA_PRESENT。全file責務は01A u294、Emlis経路はcurrent01 u294、共有内容契約はcurrent04／05 u294、意味資格は8/28設計u293/u294、実本文・検証・残件は06／API handoff u294、再開順はweekly§5.6.44。RN→API→service/store→保存read→RN、他中核と01B/Cの責務は不変。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。限定箇所の保持確認を§9.2/9.4全体、本人実機または正式Product Readの合格へ換算しない。

@@ -1483,3 +1483,16 @@ source認識・意味候補の採用資格・質問／Move／文数上限、公�
 詳細・実本文・検証は正本06／API handoff u289。全file地図の責務差分は01A u289、再開順はweekly§5.6.39。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+
+## u294 — 承認済みの未変更received経験を更新後LIMITEDへ保持（2026-10-16 JST）
+
+2026-10-16 11:26 JST、Mashがu293の限定案の実装を明示承認した。u293の未承認記載は提案時の履歴として保持し、現在の承認状態は本節を優先する。承認対象は、別欄の理由なし満足を当時の否定へ訂正する場合、または理由0/1の評価だけを撤回する場合に、未変更receivedの経験内容を更新後LIMITEDへ結ぶ資格とprivate内容対応の追加である。満足やreceivedの意味を再承認へ戻していない。
+
+別欄の満足の限定更新後も、未変更receivedを本人の感情を伴う経験として受け取るprivate内容を接続した。thread projectionが現在source／accepted更新／planを再証明し、response→compositionで局所内容を選択・封印、識別hashを除く既存decision内容fieldを保持した別decision型から既存Human Reception作者と有限readerへ渡す。thread_surfaceは変更しない。
+
+全体のLIMITED、既存aggregate命題、意味checkpoint・核・関係・Observation、未知・表示義務・Move数を保持する。同欄・共有対象・複数／曖昧received、received自体の訂正／撤回／時点変更、ADD・混合更新・後続回答、legacy／PARTIALは除外。初回と理由付き否定訂正の既存NORMALを変更しない。新しい原因・意図・期待・価値、理由付き満足の充足、失効した共有対象の外側対比を付加せず、満足側Moveへ局所内容を流用しない。
+
+STRUCTURE_MAP_DELTA_PRESENT。変更ownerの正確なfile表は01A u294、private schemaは05 u294、実本文・54比較・24 DTO保存表示と検証限界は06／API handoff u294へ集約する。Reception有限readerの作者非依存を、既存全文inverse全体の作者非依存へ換算しない。RN／API／DBの利用導線と他中核の責務は不変。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。限定箇所の保持確認を§9.2/9.4全体、本人実機または正式Product Readの合格へ換算しない。
