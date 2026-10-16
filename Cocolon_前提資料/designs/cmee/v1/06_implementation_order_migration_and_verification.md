@@ -18441,3 +18441,24 @@ TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受�
 次は現在の実本文を起点に、同じ受け取り内容を保持した読みやすさ・文章間の流れと受容述語の反復を扱い、訂正後に一般的な受け取りへ戻る残件を追う。新しい意味・原因・価値・帰属や内部契約の追加が必要な場合は、未承認範囲を自動的に拡張しない。共有17失敗・same100・Q1上限・giver帰属・本人実機・正式Product Readは残件。10/17確認点・10/31管理線・12/18公開目標、Piece/Analysis主枠と管理評価53.25％は不変。
 
 実保存28本文のうち20種類の全文はAPI handoff u289。
+
+
+## u290 — 理由付きの受け取りで対象を先に示し、同じ結びの連続を解消（2026-10-16 JST）
+
+u289で承認・接続済みの理由付き本人充足を、同じ内容のまま話題・焦点構文へ実現した。対象を「ことについて受け取ったのは」と先に示し、その後に明示理由と本人の内的経験を置く。理由付き初回と別／共有receivedが並ぶ本文で、二文続く「受け取りました」の結びを一回に減らした。語義を「充足」「実感」等へ置換せず、既存の「ご自身の中に満たされた感覚」と理由・評価の別時点を保持する。文字数短縮や§9.2/9.4全体の完成とは扱わない。
+
+適用はu289のreasoned-experience-appraisal-v1が既に選択された初回NORMALだけ。source認識、selected content、3 binding／2 relation、資格、意味schema、Move数・文数上限は不変。理由なし、LIMITED、回答後、否定／撤回後、第二Moveの内容・語形、公開API/DTO/DB/RNと依存は変更しない。既存Rule18 §11.3の承認範囲内の本文実現修正として扱い、新しい意味・原因・価値・帰属を追加しない。
+
+Human Reception作者と独立有限readerを同じ内容へ揃えた。readerは新旧各完全文型を別々にparseし、同じsource所有・理由／対象／評価・肯否・時点を照合する。新旧prefix/suffixの混在を受理しない。u287の「その満足」は新しい完全前文の検証後だけ認める。Sentence Surfaceの既存receive markerに文頭の受容表現を追加し、未検証の新有限形がnominal処理へ落ちない既存gateも整合した。marker単独は意味採用の根拠にならない。既存全文inverseには作者replayがあり、全経路の作者非依存を主張しない。
+
+STRUCTURE_MAP_DELTA_NONE：既存作者・本文reader・字句witness内の文法修正であり、owner責務、引数接続、意味契約、利用導線、公開境界は不変。全体設計01・全file地図01A/B/C・current00/01/04を確認済み。地図への重複追記は行わない。
+
+関連評価755＋Q2/Q3 application54：`809 passed, 2 warnings in 274.12s (0:04:34)`。現行owner identity：`1 passed, 194 deselected in 22.24s`。新規6条件（単独／別received／共有対象×過去／現在）で、新旧全文形の作者禁止reader、mixed形・理由／対象／本人／時点／肯否／原因追加の改変拒否を確認。全文inverseでもmixed形とsource改変を拒否。歴史fixtureは不変、現行共有owner identityだけを実sourceから更新した。
+
+変更前5f9c7f2と修正後で同じ合成32応答を実生成した。全32件で本文が成立し、理由付き初回8件のReceptionだけ変更。対象外24本文と全checkpoint／核／関係／Move数／projection branch／reason codes／Observationは完全一致した。
+
+実EmlisThreadService＋隔離PGliteで28 DTO（初回FINAL4／PRE_QUESTION12、訂正・撤回後REFINED12）を保存。NoAuthorによるGET/startの完全一致、同回答再送・event不増加、保存本文と全Observation履歴の一致を確認。現行RN hook/modalへ同28 DTOを渡し、全文・履歴・close/reopenを確認した。nativeはstubであり本人実機・正式Product Readではない。rootは28本文のうち重複をまとめた20種類を全文読解した。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。第一文の説明性・長さ、第二Moveの内容、理由なし本文の受容反復、訂正後の一般性は残る。今回の構文整理を意味理解の拡張や商品品質合格へ換算しない。
+
+次は、今ある選択内容と実本文を照合し、第二Moveが単なる関係説明になっている残件、訂正後に一般的な受け取りへ戻る残件の共通原因を扱う。同じ末尾置換だけを次の主課題にしない。既承認の意味を本文が落としている場合は同じowner内で修正し、新しい意味・原因・価値・帰属や内部契約が必要なら、その不足と最小差分を先に具体化する。共有17失敗・same100・Q1上限・giver帰属・本人実機・正式Product Readは未解消／未実施。10/17確認点・10/31管理線・12/18公開目標、Piece/Analysis主枠と管理評価53.25％は維持する。
