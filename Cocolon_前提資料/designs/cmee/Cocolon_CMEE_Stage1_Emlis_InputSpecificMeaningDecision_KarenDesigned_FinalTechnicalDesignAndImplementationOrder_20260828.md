@@ -3452,3 +3452,12 @@ u293で定義した別欄限定資格を実装した。新しいprivate Eligibil
 source ID再導出等の最終補強前に比較した同じ54合成応答の対象12だけが変化し、対照42全文・全54の意味checkpoint／核／関係／Observationと旧aggregateと識別hashを除く既存decision内容fieldは保持された。対象12のdecision_ref／input_refは新局所内容を含むhashへ変わる。target12更新の局所経験内容を確認したが、初回一体単位と全体の§9.2/9.4は未完了。実装file責務は01A u294、schemaは05 u294、実本文・検証と次工程は06／API handoff u294、週次再開順は§5.6.44を参照する。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。限定箇所の保持確認を§9.2/9.4全体、本人実機または正式Product Readの合格へ換算しない。
+
+
+## u295 — 既選択received経験の丁寧な過去形を同じ経験句へ実現（2026-10-16 JST）
+
+u282の裸形限定とu294の敬体fallbackは過去の実装状態として保持し、現在はこの修復を優先する。「嬉しくなかったです」「悲しかったです」のように、同じ過去述語へ末尾「です」だけが付く場合も、既に選択された本人のreceived経験を既存経験句へ実現する。作者の当該分岐だけで末尾を除いて従来の裸形検査・肯否判定を使い、有限readerは裸形／敬体の同一過去述語を原sourceと照合し、原敬体bytesを復元する。
+
+新しい意味・資格・private内容契約・選択内容は追加しない。SELF topic・程度・現在形・引用等の除外、u294の別欄・未変更received資格と全体LIMITED、本人・肯否・時点・対比・原因等の境界は維持する。同じ60合成応答でselected全体を含む意味とObservationは一致し、敬体24 Receptionだけが変わった。STRUCTURE_MAP_DELTA_NONE。実本文・最終sourceの901検査・保存/RN24 DTOと限界は06／API handoff u295、最新再開順はweekly§5.6.45。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、未配置・未マージ。限定した本文接続の修復を§9.2/9.4全体の合格へ換算しない。

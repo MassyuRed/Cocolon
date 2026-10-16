@@ -1251,3 +1251,16 @@ source ID再導出等の最終補強前の合成54応答では対象12（理由�
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。限定箇所の保持確認を§9.2/9.4全体、本人実機または正式Product Readの合格へ換算しない。
 
 次は、初回の説明性・受容反復と、共有対象／対象外更新に残る一般的な受け取りを、現在の選択内容と実本文の差として扱う。今回の別欄限定資格を共有対象や後続回答へ自動的に広げず、必要な新しい意味・資格・内部契約は不足と最小差分を具体化する。既存失敗、same100、Q1上限、giver帰属、本人実機・正式Product Readは残る。10/17確認点・10/31管理線・12/18公開目標、Piece/Analysis主枠と管理評価53.25％は維持する。
+
+
+### 5.6.45 u295 — 丁寧な過去形でも選択済みreceived経験を本文へ保持（2026-10-16 JST）
+
+基準API0dd8dbc6／資料806dce4e、u294 CI38843592713 completed/successを確認。u294までに選択済みのreceived経験が、原文末尾の「です」だけを理由に初回では原文反復、更新後LIMITEDでは一般的な両端保持へ落ちる接続漏れを修復した。既存作者の経験句分岐で末尾「です」を除いた過去形を従来検査へ渡し、独立有限readerは同じ裸形／敬体を原sourceと照合して原敬体bytesを保つ。新しい意味・資格・内容契約は追加していない。
+
+既存作者／gateの2file、既存testと現行identity fixtureを更新。SELF topic・程度・現在形等、更新後の同欄・共有対象・received更新・混合更新・後続回答・legacy／PARTIALの除外を維持。全体設計・全file地図・currentを確認し、STRUCTURE_MAP_DELTA_NONEと判定した。
+
+最終sourceの対象59 PASS（788 deselected）後、appraisal全847＋Q2/Q3 application54をPGlite有効で一括実行し901 PASS／skip0／既存非推奨warning2／356.84秒。現owner identity1は別runでPASS。同じ60合成応答では対象24 Receptionだけが変化し、対照36全文と全60のcheckpoint・核・関係・plan・selected全体（hash含む）・branch・codes・Observationは一致。実service＋隔離PGliteで24 DTO保存・NoAuthor再読・再送・event無増加、現行RN hook/modalで全文／履歴／close/reopen一致。rootが保存24本文を全件読解した。nativeはstubであり本人実機ではない。修正前の失敗・実本文比較・詳細は06／API handoff u295。
+
+原典は直接確認済み。System Context prepareはmaterial commit祖先条件で停止したため、許可された原典直接参照fallbackを使用し、新Context生成済みとはしていない。read-only補助は同じWork環境であり、別Pro/Ultraの正式二重検証ではない。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。第一文の説明性・受容反復、共有対象／対象外更新、周辺既存4失敗・過去共有17失敗、same100、Q1上限、giver帰属、本人実機・正式Product Readは未解消／未実施。次は現在の選択内容と実本文の差を扱い、既承認内容の欠落修復と新意味・資格・内部契約の不足を区別する。10/17確認点・10/31管理線・12/18公開目標、Piece/Analysis主枠と管理評価53.25％は維持する。

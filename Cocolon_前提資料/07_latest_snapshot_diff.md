@@ -40789,3 +40789,12 @@ TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受�
 ## 2026-10-16 u293 — 別欄・更新後received経験の限定案を具体化（未承認）
 
 基準API0cdfdac4／資料75f22dac、u292 CI38837204963 completed/success。理由なし否定訂正と評価のみ撤回で、未変更receivedがLIMITEDの一般的な保持へ変わる原因を選択内容とsourceから特定。対象12／対照42（既存54合成応答）を確認した。全体LIMITED・既存aggregateを保持し、別欄の未変更received一組だけにprivate局所経験内容を選択・封印する限定案を06/API handoffと8/28意味設計へ記録。Rule18 §11.3の資格・内部契約追加としてMASH_APPROVAL_PENDING。製品code/test/fixture変更0、新案の実生成・PASSなし。STRUCTURE_MAP_DELTA_NONE、PRODUCT_NOT_CLEAR、正式0/3、candidate_ready=false、automatic_progression=false、未配置・未マージ。最新再開位置はweekly§5.6.43。
+
+
+## 2026-10-16 u295 — 丁寧な過去形でも選択済みreceived経験を本文へ保持
+
+u294の承認済み実装（06／API handoff u294・weekly§5.6.44）を基準とし、未確定だったAPI CI38843592713のcompleted/successを確認。選択済みreceived経験が原文末尾「です」で一般的な受け取りへ落ちる作者／readerの接続漏れを修復した。意味・資格・selected全体・Observation・公開契約は不変。STRUCTURE_MAP_DELTA_NONE、地図責務の変更なし。
+
+最終sourceのappraisal847＋application54は一括901 PASS、現owner identity1は別runでPASS。合成60応答で対象24 Receptionのみ変更・対照36全文不変。実service/PGliteと現行RN hook/modalの24 DTO保存再表示を確認し、rootが24本文を読解（native stub、本人実機ではない）。詳細・実本文・限界は06／API handoff u295、再開順はweekly§5.6.45、意味境界は8/28設計末尾u295。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。第一文の説明性・受容反復、共有対象と対象外更新、既存失敗、same100、Q1上限、giver帰属、本人実機・正式Product Readは残る。
