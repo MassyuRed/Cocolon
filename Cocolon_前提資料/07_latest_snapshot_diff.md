@@ -40784,3 +40784,8 @@ TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受�
 ## 2026-10-16 u292 — 単一received対比の未明示同時性を除去
 
 基準API659f9a2／資料a26d089。現行threadの原文contrast exact1、既存本人・過去received対比、未改変関係／両端に限り既存中立文法へ接続。legacy／PARTIALは対象外。54合成応答で25 Observation修正・29全文不変、全意味／Reception不変。実service/PGlite保存・NoAuthor再読・RN再表示16 DTO一致（native stub）。関連842のうち旧PARTIAL互換2失敗を対象除外で修正し該当17再検査PASS、identity1PASS。周辺4既存失敗は基準版でも再現、未解消。詳細・検証経過は06/API handoff u292、最新再開順はweekly§5.6.42。STRUCTURE_MAP_DELTA_NONE、TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、正式0/3、candidate_ready=false、automatic_progression=false、未配置・未マージ。
+
+
+## 2026-10-16 u293 — 別欄・更新後received経験の限定案を具体化（未承認）
+
+基準API0cdfdac4／資料75f22dac、u292 CI38837204963 completed/success。理由なし否定訂正と評価のみ撤回で、未変更receivedがLIMITEDの一般的な保持へ変わる原因を選択内容とsourceから特定。対象12／対照42（既存54合成応答）を確認した。全体LIMITED・既存aggregateを保持し、別欄の未変更received一組だけにprivate局所経験内容を選択・封印する限定案を06/API handoffと8/28意味設計へ記録。Rule18 §11.3の資格・内部契約追加としてMASH_APPROVAL_PENDING。製品code/test/fixture変更0、新案の実生成・PASSなし。STRUCTURE_MAP_DELTA_NONE、PRODUCT_NOT_CLEAR、正式0/3、candidate_ready=false、automatic_progression=false、未配置・未マージ。最新再開位置はweekly§5.6.43。

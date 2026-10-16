@@ -3420,3 +3420,20 @@ source認識・意味候補の採用資格・質問／Move／文数上限、公�
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
 
 次は現在の実本文を起点に、同じ受け取り内容を保持した読みやすさ・文章間の流れと受容述語の反復を扱い、訂正後に一般的な受け取りへ戻る残件を追う。新しい意味・原因・価値・帰属や内部契約の追加が必要な場合は、未承認範囲を自動的に拡張しない。共有17失敗・same100・Q1上限・giver帰属・本人実機・正式Product Readは残件。10/17確認点・10/31管理線・12/18公開目標、Piece/Analysis主枠と管理評価53.25％は不変。
+
+
+## u293 — 更新後LIMITEDにおける未変更receivedの局所経験内容（限定提案・未承認、2026-10-16）
+
+本節はDESIGN_PROPOSAL_ONLY / MASH_APPROVAL_PENDING。current実装・既承認契約を変更しない。詳しい対象、予定owner、検証、停止条件は正本06とAPI handoff u293。
+
+u282の「出来事だけでは言い表せない、本人の反応を伴う経験」という内容は既承認だが、現行資格はNORMAL／basis2／contribution1等に限定される。理由なし否定訂正のLIMITED aggregateはMATERIAL_WEIGHT／basis4を持つため、本文段階で二端点だけを拾ってNORMALの経験文を使うことは意味の保持修復ではない。評価撤回後のLIMITED両端保持も、NORMAL資格の代理にはならない。
+
+提案対象は、元入力の別欄の満足1組＋received対比1組、完全な一回の当時の否定訂正（理由なし）または評価のみ撤回（理由0/1）。原received exact1の両端exact2・明示対比exact1・本人・肯否・過去時点・modality・source欄/spanが未変更で、現在の意味・根拠・Moveへ一意に対応するときだけ、局所の経験内容を選択する。
+
+全体のLimitedMeaningOutcome、LIMITED branch、単一aggregate命題、全required根拠・未知・表示義務は維持する。旧ComponentReceptionOpportunityV1はSelected whole/exact2 component用でありLIMITEDへ直接流用しない。新しいversioned private内容対応で、wholeのbasisとその局所subset、局所の両端／関係／contribution／qualifier、現在source・accepted update・projection所属を区別する。既存post-selectionから封印・claim／traceへ含め、作者はその選択済み局所内容を唯一の既存文法へ実現する。独立readerは同じ局所資格と実本文を照合し、作者を呼んで意味を選び直さない。旧型と旧aggregateの受理範囲を一括で緩めない。
+
+局所内容が認めるのはu282の経験読みだけである。原因、期待、意図、価値、理由付き満足の充足、失効した共有対象の外側対比を追加しない。満足側Moveへの流用、旧decision IDの持越し、全体NORMALへの昇格、本文後処理は不可。同欄・共有対象・複数／曖昧received・received更新・PARTIAL・legacy・ADD／混合更新・後続roundは対象外。理由付き否定訂正の既存NORMALと初回本文は不変。
+
+同じ54合成応答の対象12／対照42は改善範囲の診断であり、新型・新本文を実装または検証した証拠ではない。承認後、局所資格の因果対照、本人／肯否／時点／関係・片端欠落・根拠のない追加の本文拒否、旧本文互換、現行回帰、保存・NoAuthor再読・再送・RN再表示まで検証する。rootの本文事前読解を機械PASSで代用しない。正式Product Readや商品合格は別で、今回成立しない。
+
+意味内容は既承認でも、更新後LIMITEDへの資格とprivate契約の追加はRule18 §11.3 LEVEL_3に該当する。承認前の製品変更0、automatic_progression=false、candidate_ready=false。原典の意味再質問ではなく、この限定適用の追加についてMash判断を受ける。
