@@ -1288,3 +1288,16 @@ TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式0/3�
 復旧した本文には、Observationの満足二重説明と未明示の同時性が残る。thread_surfaceの原入力contrast総数exact1条件から外れ、sentence_surfaceの旧単独fallbackへ入るためである。次は同じ入力と通常満足の対照で、対比・対象・時点を保持する初回一体単位を扱う。逆順同欄過去3のprojection前停止は別欠陥。新しい資格が必要なら最小差分を具体化し、本文の救済で代用しない。
 
 System Contextはmaterial祖先条件で停止したため原典直接参照fallbackを使用。同Work read-only補助を別Pro/Ultraの正式二重検証とはしない。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。初回説明性・受容反復、対象外更新、既存失敗・same100・Q1上限・giver帰属・本人実機／正式Product Readは残る。10/17・10/31・12/18、Piece/Analysis主枠、管理評価53.25％を維持する。
+
+
+### 5.6.48 u298 — 初回の満足二重説明と未明示の同時性を修復（2026-10-16 JST）
+
+基準API `d1215f609a1ecef7624c92fd4ad0a1ab12d81b0f`／資料 `c5e4d3441e52a9de9dfc6511c7d65793f4d208fe`。u297 API CI38901592955と資料5 runは成功。全体設計・全file地図・current_structure・最新weekly・作業rule・意味設計の原典を確認し、恒久incident全文を再読した。
+
+u297の同じ初回18例で、未成立組の2関係を別々に文章化する満足の二重説明と、対比総数exact1条件から外れて別receivedへ「同時」を付ける接続漏れを修復。既存thread_surface／sentence_surface／gateで初回・非legacy・非PARTIAL・原plan不変・本文5点／3関係に限定し、未成立事項と満足対象・評価を一節へ結び、別receivedを中立対比文法へ接続した。独立readerは実本文から証明した2辺だけを消費し、receivedの検査義務を残す。意味・選択・資格・private契約・Receptionは不変。Rule18 §11.3の実現修復、STRUCTURE_MAP_DELTA_NONE。
+
+既存18検査を強化し新3検査を追加、対象21 PASS。主回帰appraisal911＋application54は 965 passed, 2 warnings in 440.85s (0:07:20)、skip0。現owner identity1は別runでPASS。合成36比較で意味・selected全体・trace等を保持、対象18のObservationとartifact IDだけが変わり、対照18は全record一致。実service/PGliteの初回18 DTOでNoAuthor GET/start・保存全文／履歴・event無増加、現行RN hook/modalで本文／履歴／close/reopen一致。rootが保存全18本文（12種類）を読解。native stubで本人実機ではなく、回答再送の新規検証なし。途中のlabel3点を含む全8点と本文5点の誤比較は修復・再検証済み。詳細matrix・実本文・identity・結果はAPI既存handoff u298。
+
+対象内の二重説明・同時性は解消したが、引用を説明する観測文と「対比に目を向けています」という受け取りはなお説明的。次はこの全文を入口に初回一体単位の説明性・受容反復、共有対象／対象外更新を扱う。逆順同欄過去3のprojection前停止は未解消。意味・資格の不足は作者の緩和で補わず具体化する。
+
+System Contextはu297のmaterial祖先条件停止から原典直接参照fallbackを継続し、今回は再prepareしていない。同Work read-only補助は別Pro/Ultraの正式二重検証ではない。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。既存失敗・same100・Q1上限・giver帰属・本人実機／正式Product Readは残る。10/17・10/31・12/18、Piece/Analysis主枠、管理評価53.25％を維持。
