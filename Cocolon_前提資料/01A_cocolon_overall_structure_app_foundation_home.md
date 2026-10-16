@@ -3542,3 +3542,20 @@ STRUCTURE_MAP_DELTA_PRESENT。既存6 production ownerへ更新後LIMITEDのpriv
 予定ownerのemlis_thread_surface.pyは変更不要。全体LIMITED・旧aggregate・意味checkpoint・核／関係・Observation・Move数を保持。RN→API→service/store→保存read→RNと01B/C、公開契約・DB・依存・他中核は不変。新source markerやglobal plan加工は行わない。詳細は05／8/28意味設計／06／API handoff u294、再開順はweekly§5.6.44。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。限定箇所の保持確認を§9.2/9.4全体、本人実機または正式Product Readの合格へ換算しない。
+
+
+## u299 — received先行の未成立事項付き満足と旧source互換（2026-10-16 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。単一の本人received先行証明を既承認の未成立事項付き満足へ接続する。新production file・service・engine・依存なし。fresh sourceの認識は変わるが、意味schema／資格／内容型は追加しない。
+
+| 実file（mashos-api） | 現在の責務差分 |
+| --- | --- |
+| ai/services/ai_inference/emlis_ai_grounded_observation_plan.py | exact1未成立contextへ既存SELF received先行証明を接続。private旧指定をtyped projectionへ伝搬し、直接final builderの既定は旧認識を維持。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py | original_meaning_planでfresh threadの新認識を明示。旧source世代は未成立継続も旧指定に固定。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py | 完全旧checkpoint／実発行旧質問を既存の全体再導出検証で復元する独立指定。既存互換鎖と別欄の能力を保持。 |
+| ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py | 既存attention markerへ有限終端「対比に目を向けています」を接続。単独Moveでも受容文と認識し、既存source-owned全文readerを必須のまま保持。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 逆順同欄12・旧checkpoint11・旧質問3・所有境界・fresh Q1と直接builderの比較を既存回帰へ追加。訂正後の単独ATTENTION6件と意味改変拒否も追加。旧除外期待1件は現在の正例へ移動。 |
+| ai/tests/fixtures/cmee_emlis_pre_unfinished_received_context_v1.json | 新規の合成互換fixture。変更前u298の完全checkpoint・本文・状態・理由・実質問／回答を固定。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行sourceから共有owner identityを再導出。既存歴史fixtureは変更しない。 |
+
+原planを受け取る既存projector・thread_surface・本文作者・source-owned有限readerは変更なし。RN→API→service/store→保存read→RN、Piece/Analysisと01B/Cの責務は不変。全体01／current01/04、実装検証06／API handoff u299、再開weekly§5.6.49を参照。PRODUCT_NOT_CLEAR・正式0/3・未配置／未マージ。

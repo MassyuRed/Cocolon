@@ -7105,3 +7105,10 @@ TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受�
 STRUCTURE_MAP_DELTA_PRESENT。全file責務は01A u294、Emlis経路はcurrent01 u294、共有内容契約はcurrent04／05 u294、意味資格は8/28設計u293/u294、実本文・検証・残件は06／API handoff u294、再開順はweekly§5.6.44。RN→API→service/store→保存read→RN、他中核と01B/Cの責務は不変。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。限定箇所の保持確認を§9.2/9.4全体、本人実機または正式Product Readの合格へ換算しない。
+
+
+## u299 — received先行の未成立事項付き満足と旧source互換（2026-10-16 JST）
+
+単一の本人received先行証明が未成立事項付き満足へ接続されず、同欄の順序で初回本文が停止／一般化する欠陥を修復した。source認識の欠落を既承認の三点へ戻し、既存LIMITEDを保持する。fresh対象のcheckpoint・核・関係・selectedは変わる。直接builderは旧既定、thread準備がfresh時の新認識を明示し、完全旧checkpoint／旧質問は独立private指定で全体を再導出する。旧Q1本文経路とAnalysisの直接利用を維持する。訂正後の単独ATTENTION文は既存本文markerへ接続し、意味・時点の有限reader義務を保ったまま停止を修復する。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存4 production ownerと新合成fixtureの正確な地図は01A u299。意味schema／資格／内容型・公開API／DB／RN／依存とアプリ全体の導線は不変。実本文・検証・限定範囲は06／API handoff u299、再開はweekly§5.6.49。初回の説明性・反復、共有対象／対象外更新は残る。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・未配置／未マージ。

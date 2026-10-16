@@ -40807,3 +40807,10 @@ u295 CIはAPI・資料とも成功。更新後LIMITEDの検証済み局所receiv
 対象40 PASS、主回帰887＋54件は06／API handoff u296へ記録。合成60応答で対象4 Receptionだけ変更・対照56全文不変。保存/RN24 DTO一致とroot本文読解を確認（native stub）。詳細・限界・再開位置は06／API handoff u296、weekly§5.6.46。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、未配置・未マージ。一般受容の定型性、初回説明性・反復、対象外更新と既存失敗等は残る。
+
+
+## 2026-10-16 u299 — 同欄でreceivedが先行する初回停止を修復
+
+u298で残した逆順同欄過去3例の停止を、source本人継続証明の接続漏れとして修復した。入力時点3例の一般化も三点の保持へ戻した。比較36中他30は全record一致。fresh対象の意味plan・checkpoint・selectedは変わるため、旧版は完全再導出して区別する。訂正後の単独ATTENTION文を既存markerへ接続し本文停止も修復した。新しい意味型／資格／契約は追加せず既存LIMITEDを維持。STRUCTURE_MAP_DELTA_PRESENT、地図01A／current01/04へ反映。
+
+最終sourceのappraisal全958件は現行173 test関数を重複なしの4群に分け、278＋253＋224＋203 PASS（全体133.56秒）、失敗0／skip0。Q2/Q3 application54件は別runで54 PASS／既存非推奨warning2／91.28秒。現owner identity1件は別runでPASS／31.56秒。主回帰計1,012件とidentity1件であり、一括runや対象22件との重複加算とはしない。 保存・現行RN再表示の初回6＋訂正後6の計12 DTO一致・同回答再送確認（native stub、本人実機ではない）。途中結果・旧Q1互換・実本文と詳細は06／API handoff u299、再開weekly§5.6.49。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・未配置／未マージ。初回説明性・受容反復と他の残件は継続する。

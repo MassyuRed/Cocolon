@@ -1301,3 +1301,18 @@ u297の同じ初回18例で、未成立組の2関係を別々に文章化する�
 対象内の二重説明・同時性は解消したが、引用を説明する観測文と「対比に目を向けています」という受け取りはなお説明的。次はこの全文を入口に初回一体単位の説明性・受容反復、共有対象／対象外更新を扱う。逆順同欄過去3のprojection前停止は未解消。意味・資格の不足は作者の緩和で補わず具体化する。
 
 System Contextはu297のmaterial祖先条件停止から原典直接参照fallbackを継続し、今回は再prepareしていない。同Work read-only補助は別Pro/Ultraの正式二重検証ではない。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。既存失敗・same100・Q1上限・giver帰属・本人実機／正式Product Readは残る。10/17・10/31・12/18、Piece/Analysis主枠、管理評価53.25％を維持。
+
+
+### 5.6.49 u299 — received先行の同欄入力で未成立事項付き満足を読み落とす欠陥を修復（2026-10-16 JST）
+
+基準API b84cf1cf／資料 cdb1c6d4、u298 API CI38907157714は成功。全体設計・全file地図・current_structure・最新weeklyと作業rule・恒久incident・意味設計を原典確認した。
+
+前の一文が単一SELF received経験だと証明する既存処理から、未成立事項付き満足が漏れていた。同じ内容でも書く順序により過去形は初回本文が停止、入力時点形は三点を区別しない一般本文になっていた。u262の未成立exact1＋対象＋満足にu265の既存本人継続証明を接続し、他者／giver／複数文／引用／推量と理由付きcontextの除外を保持した。Rule18 §11.3の既承認設計修復。新しい意味型・資格・契約を追加せず、既存LIMITED／ATTENTIONを使う。fresh対象のsource plan・checkpoint・selectedは変わり、u298の意味不変主張は今回に適用しない。
+
+既存4 production fileと既存test／現identity、新しい合成互換fixtureを更新。完全旧checkpointの全体再導出を独立private指定で追加し、旧Q1本文経路と直接builder・Analysisの既定を保つ。STRUCTURE_MAP_DELTA_PRESENT、01／01A／current01/04へ責務差分を記録。公開API・DB・RN・依存・本番は不変。
+
+最終sourceのappraisal全958件は現行173 test関数を重複なしの4群に分け、278＋253＋224＋203 PASS（全体133.56秒）、失敗0／skip0。Q2/Q3 application54件は別runで54 PASS／既存非推奨warning2／91.28秒。現owner identity1件は別runでPASS／31.56秒。主回帰計1,012件とidentity1件であり、一括runや対象22件との重複加算とはしない。 合成36比較では逆順同欄6だけが変化し、他30は全record一致、本文33→36。実service/PGliteの初回6 DTO保存とNoAuthor再読・event無増加、現行RN hook/modalの本文／履歴／close/reopen一致を確認し、rootが全6本文を読解（native stub）。途中の旧Q1本文差2件と旧u265除外期待1件は修正・再検証。訂正後の単独ATTENTION文に対する既存markerの接続漏れも修復し、最終sourceでは初回6＋訂正後6の計12 DTOで保存／NoAuthor再読・同回答再送／全履歴・RN再表示一致を確認、rootが12本文を読解した。新規回帰は47。詳細matrix・旧checkpoint11・旧質問3・実本文・identityと検査内訳は06／API handoff u299。
+
+対象の逆順同欄過去3停止は解消。次は同じ全文に残る初回の説明性・受容反復を、選択内容と実現内容の差から扱う。System Contextは原典直接参照fallback継続。同Work補助を別Pro/Ultraの正式二重検証とはしない。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。共有対象／対象外更新・周辺既存失敗・same100・Q1上限・giver帰属・本人実機／正式Product Readは残る。10/17・10/31・12/18、Piece/Analysis主枠、管理評価53.25％を維持。
