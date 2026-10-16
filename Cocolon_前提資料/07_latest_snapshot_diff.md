@@ -40798,3 +40798,12 @@ u294の承認済み実装（06／API handoff u294・weekly§5.6.44）を基準�
 最終sourceのappraisal847＋application54は一括901 PASS、現owner identity1は別runでPASS。合成60応答で対象24 Receptionのみ変更・対照36全文不変。実service/PGliteと現行RN hook/modalの24 DTO保存再表示を確認し、rootが24本文を読解（native stub、本人実機ではない）。詳細・実本文・限界は06／API handoff u295、再開順はweekly§5.6.45、意味境界は8/28設計末尾u295。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。第一文の説明性・受容反復、共有対象と対象外更新、既存失敗、same100、Q1上限、giver帰属、本人実機・正式Product Readは残る。
+
+
+## 2026-10-16 u296 — 更新後の受け取りで本人の一人称を各対象へ保持
+
+u295 CIはAPI・資料とも成功。更新後LIMITEDの検証済み局所receivedで、本人の「私は／私も」がEmlisの非引用発言へ残る名詞化を修復した。本人を従属する名詞節の中に置き、「違い／両方」・助詞・程度・肯否・時点と既存一般受容を保持。source認識・意味・資格・selected・Observationは不変、SELF主題を経験句へ広げない。STRUCTURE_MAP_DELTA_NONE。
+
+対象40 PASS、主回帰887＋54件は06／API handoff u296へ記録。合成60応答で対象4 Receptionだけ変更・対照56全文不変。保存/RN24 DTO一致とroot本文読解を確認（native stub）。詳細・限界・再開位置は06／API handoff u296、weekly§5.6.46。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、未配置・未マージ。一般受容の定型性、初回説明性・反復、対象外更新と既存失敗等は残る。

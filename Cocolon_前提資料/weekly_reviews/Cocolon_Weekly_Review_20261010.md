@@ -1264,3 +1264,14 @@ TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受�
 原典は直接確認済み。System Context prepareはmaterial commit祖先条件で停止したため、許可された原典直接参照fallbackを使用し、新Context生成済みとはしていない。read-only補助は同じWork環境であり、別Pro/Ultraの正式二重検証ではない。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。第一文の説明性・受容反復、共有対象／対象外更新、周辺既存4失敗・過去共有17失敗、same100、Q1上限、giver帰属、本人実機・正式Product Readは未解消／未実施。次は現在の選択内容と実本文の差を扱い、既承認内容の欠落修復と新意味・資格・内部契約の不足を区別する。10/17確認点・10/31管理線・12/18公開目標、Piece/Analysis主枠と管理評価53.25％は維持する。
+
+
+### 5.6.46 u296 — 更新後の受け取りに混入する本人一人称を修復（2026-10-16 JST）
+
+基準API76fe053a／資料6db7c820、u295 API CI38845823901と資料5 runは成功。別欄の評価だけを否定訂正／撤回した後、未変更receivedの本人所有が選択済みなのに、一般名詞句の「私は／私も」がEmlisの非引用発言へ残る欠陥を確認した。単に「あなたは」へ変えると受容主体まで利用者へ掛かるため、既存作者の局所pair限定で「あなたが褒められたこと」「あなたも嬉しくなかったということ」等の各対象内に本人視点を閉じた。「も／には／にも」・程度・肯否・時点、既存「違い／両方」の受容を維持する。
+
+SELF主題を経験句へ広げず、意味・資格・selected・Observation・全体LIMITEDは不変。作者と独立readerの既存2file、既存test、現identity fixtureだけを更新。STRUCTURE_MAP_DELTA_NONE。最終新40検査PASS、作者禁止readerと人称／助詞／肯否／時点／程度等の改変拒否を確認。主回帰は887＋54件。941 passed / 0 failed / 0 skipped、既存 deprecation warning 2件、394.43秒 現identity1は別runでPASS。合成60応答で対象4 Receptionだけ変更、対照56全文と全60の意味・selected全体・Observationは一致。実service/PGliteと現行RN hook/modalの保存・再送・履歴・再表示24 DTO一致。rootが全24本文を読解、native stubで本人実機ではない。途中の関係名詞接続漏れとone-shot RNの旧期待は修復・再検証済み。詳細と実本文は06／API handoff u296。
+
+System Contextは最新prepareがresidual without markerで停止し、規定の原典直接参照fallbackを使用。同Work read-only補助を別Pro/Ultraの正式二重検証とはしない。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。今回の人称修復を全体の自然さ・内容形成の合格へ換算しない。次は現在の選択内容と実本文から初回説明性・反復と共有対象／対象外更新を扱う。既存4失敗・共有17失敗、same100、Q1上限、giver帰属、本人実機・正式Product Readは残る。10/17・10/31・12/18、Piece/Analysis主枠、管理評価53.25％を維持。
