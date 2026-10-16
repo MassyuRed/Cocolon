@@ -40727,3 +40727,12 @@ u284初回の第2文で行為・評価時点・満足をもう一度全文説明
 詳細と検証は正本06／API handoff u287、変更file責務は01A u287、再開順序はweekly§5.6.37。独立性は今回の有限文readerと前文のsource-owned読みの範囲。既存の全文inverseには作者replayがあり、Reception全体が作者非依存になったとはしない。「受け取りました」の反復、初回の説明性と肯定的な受け取り内容、訂正後の一般的な受け取り、理由有無による差は残る。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+
+## u288 — 理由付き満足の内容型の非対称を特定し、限定修正を提案（2026-10-16 JST・未承認／未実装）
+
+初回の定型感を追い、理由がない満足では本人の充足を伴う経験が選ばれる一方、同じ入力に明示理由を一つ加えると汎用の材料受容へ戻る非対称を確認した。理由・対象・肯定満足は認識済みであり、sourceを広く読み直せない問題とは区別する。理由と満足の関係説明だけでなく、明示理由に根差す対象限定の本人の充足を内容型として渡す限定案を提案する。
+
+原因・提案・承認境界は8/28設計／06／API handoff末尾u288、進行はweekly§5.6.38。新private内容契約の追加は未承認・未実装。STRUCTURE_MAP_DELTA_NONE、現行ownerと構造はu287から不変。
+
+BLOCKER_NARROWED / PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR。今回の製品source・test・fixture変更0、本文改善0。初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。

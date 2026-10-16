@@ -18393,3 +18393,20 @@ Emlisから：
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
 
 次は§9.2の選択済み内容が「何をどう受け取ったか」として可視化される差分を扱い、受容述語の反復と訂正後の一般性を追う。短文化や語尾置換だけで§9.2/9.4を完成にしない。新しい意味・帰属・原因・価値判断を足す必要がある場合は具体差分を先に示す。既存共有17失敗・same100・Q1上限・giver帰属・本人実機・正式Product Readは残件。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠と管理評価53.25％は不変。
+
+
+## u288 — 理由付き満足の内容型の非対称を特定し、限定修正を提案（2026-10-16 JST・未承認／未実装）
+
+初回の定型感を追い、理由がない満足では本人の充足を伴う経験が選ばれる一方、同じ入力に明示理由を一つ加えると汎用の材料受容へ戻る非対称を確認した。理由・対象・肯定満足は認識済みであり、sourceを広く読み直せない問題とは区別する。理由と満足の関係説明だけでなく、明示理由に根差す対象限定の本人の充足を内容型として渡す限定案を提案する。
+
+### 確認済みの原因
+
+- API `c6def6613a2147cac157331f545e7dd9db61de5e`／資料 `db95c8c976defb496851f4a9d370c297a5ef1a06`をfresh照合。u287 CI38826067228のobserved-content jobは全step completed/success。
+- rootが合成6入力（理由なし／探しやすくなった／使いやすくなった × 単独評価／u284共有対象対比）を同じ未変更sourceで実生成し、全6本文とselected contentを読んだ。理由なし2件の第一MoveはNORMALの`EmlisEvaluatedExperienceAppraisalContent`、`FULFILMENT_ACCOMPANIES_EXPERIENCE`、basis2。理由あり4件はNORMALのbase `EmlisAppraisalContent`、`MATERIAL_WEIGHT / RECEIVE_AS_MATERIAL`、basis3、理由relation focalである。全6件で本文は生成された。これはregression PASS件数ではない。
+- `emlis_stage1_composition.py`の既存内容projectorでは、`len(own_basis)==3`かつ`SATISFACTION_REASON`がある分岐がbase内容型を返し、2役割の評価分岐だけが具体的な評価経験型へ進む。`emlis_ai_grounded_human_reception.py::_source_owned_relational_focus_sentence`も、理由付きNORMALを「〈理由〉点に、〈対象〉ことへの〈時点〉満足の拠り所が見えます」へ実現する。作者直前に選択済みの充足内容が落ちているのではなく、理由付き内容の投影段階に不足がある。
+- 第二Moveのshared-target contentは4役割3関係を保持するが、`RELATIONAL_NONCOLLAPSE / PRESERVE_BOTH_ENDPOINTS`である。「同じ行為の両面／異なる経験」と付けるだけの案は関係反復とlabel追加になるため採用しなかった。期待、葛藤、自己基準、他者評価より重要、褒められた後も満足が続く、などの新解釈をsourceから導けたとはしない。
+- 訂正後8保存本文は前回取得済みu287資料を再読し、選択内容はread-only補助が合成4パターンで再現。共有対象からの満足否定訂正は理由0/1ともLIMITEDの材料受容、評価撤回後はLIMITEDの対比保持であり、NORMALの経験解釈が既に選ばれているのに本文だけが落とす故障とは確認できなかった。今回は訂正後の資格を広げない。
+
+具体案・境界・完成条件は8/28設計末尾u288、6実生成全文はAPI handoff u288。新private契約の追加だけをRule18 §11.3の判断対象とし、既承認の満足理解／理由認識を取り直さない。今回は製品変更がないためregression再実行や保存表示検証を追加していない。前回796件・保存16件を今回の実績へ加算しない。
+
+BLOCKER_NARROWED / PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR。今回の製品source・test・fixture変更0、本文改善0。初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。

@@ -3348,3 +3348,50 @@ u284初回の第2文で行為・評価時点・満足をもう一度全文説明
 §9.4の文章間参照による限定改善であり、§9.2の内容形成・§9.4全体の完了とはしない。独立性は今回の有限文readerと前文のsource-owned読みの範囲。既存の全文inverseには作者replayがあり、Reception全体が作者非依存になったとはしない。「受け取りました」の反復、初回の説明性と肯定的な受け取り内容、訂正後の一般的な受け取り、理由有無による差は残る。
 
 実本文と検証は正本06／API handoff u287。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+
+## u288 — 理由付き満足の内容型の非対称を特定し、限定修正を提案（2026-10-16 JST・未承認／未実装）
+
+初回の定型感を追い、理由がない満足では本人の充足を伴う経験が選ばれる一方、同じ入力に明示理由を一つ加えると汎用の材料受容へ戻る非対称を確認した。理由・対象・肯定満足は認識済みであり、sourceを広く読み直せない問題とは区別する。理由と満足の関係説明だけでなく、明示理由に根差す対象限定の本人の充足を内容型として渡す限定案を提案する。
+
+### 確認済みの原因
+
+- API `c6def6613a2147cac157331f545e7dd9db61de5e`／資料 `db95c8c976defb496851f4a9d370c297a5ef1a06`をfresh照合。u287 CI38826067228のobserved-content jobは全step completed/success。
+- rootが合成6入力（理由なし／探しやすくなった／使いやすくなった × 単独評価／u284共有対象対比）を同じ未変更sourceで実生成し、全6本文とselected contentを読んだ。理由なし2件の第一MoveはNORMALの`EmlisEvaluatedExperienceAppraisalContent`、`FULFILMENT_ACCOMPANIES_EXPERIENCE`、basis2。理由あり4件はNORMALのbase `EmlisAppraisalContent`、`MATERIAL_WEIGHT / RECEIVE_AS_MATERIAL`、basis3、理由relation focalである。全6件で本文は生成された。これはregression PASS件数ではない。
+- `emlis_stage1_composition.py`の既存内容projectorでは、`len(own_basis)==3`かつ`SATISFACTION_REASON`がある分岐がbase内容型を返し、2役割の評価分岐だけが具体的な評価経験型へ進む。`emlis_ai_grounded_human_reception.py::_source_owned_relational_focus_sentence`も、理由付きNORMALを「〈理由〉点に、〈対象〉ことへの〈時点〉満足の拠り所が見えます」へ実現する。作者直前に選択済みの充足内容が落ちているのではなく、理由付き内容の投影段階に不足がある。
+- 第二Moveのshared-target contentは4役割3関係を保持するが、`RELATIONAL_NONCOLLAPSE / PRESERVE_BOTH_ENDPOINTS`である。「同じ行為の両面／異なる経験」と付けるだけの案は関係反復とlabel追加になるため採用しなかった。期待、葛藤、自己基準、他者評価より重要、褒められた後も満足が続く、などの新解釈をsourceから導けたとはしない。
+- 訂正後8保存本文は前回取得済みu287資料を再読し、選択内容はread-only補助が合成4パターンで再現。共有対象からの満足否定訂正は理由0/1ともLIMITEDの材料受容、評価撤回後はLIMITEDの対比保持であり、NORMALの経験解釈が既に選ばれているのに本文だけが落とす故障とは確認できなかった。今回は訂正後の資格を広げない。
+
+### 提案する一つの限定変更
+
+**既存sourceで一意に認識済みの理由付き肯定満足について、理由・対象・本人の充足を一つのprivate受け取り内容として投影する。** 満足の意味はMashが確認済みの「本人にとって何かが満たされた感覚」を使い、再質問しない。新しい意味辞書・エンジン・外部AI・checkerは作らない。
+
+1. 対象は初回・既存NORMALの単一理由付き満足成分。本人の実行済み対象、無程度の肯定満足、既存parserで認識済みの明示理由exact1、`ABOUT_TARGET`／`SATISFACTION_REASON`各exact1とsource所有が一致する場合に限定する。単独成分と、既承認の別received／共有対象receivedを伴う場合にも、他成分の資格・内容・Move数は変えない。未認識の理由構文、複数／曖昧な理由、他者、引用、仮定、継続付き、否定、程度付き、納得は追加しない。
+2. 受け取る内容は〈その行為について、本人が明示した理由に根差して、本人の中に満たされた感覚があった／ある経験〉までとする。理由の時点と評価の時点を各sourceのまま保持し、理由→本人評価と対象→評価の向きを保持する。行為が客観的に理由の事実を生んだという因果、価値基準の達成、他者との優劣、received感情の原因、同時性、恒常傾向を追加しない。
+3. 既存base型や`EmlisEvaluatedExperienceAppraisalContent.v1`のfield・validatorを無version変更で拡張しない。新しいprivate内容arm／versionで、reason・event・evaluationの3 binding、reason relation・appraisal relation、評価の肯否／時点／満足種別を既存source qualifierと照合してcarryする。旧型は旧dispatchを維持する。具体名と重複fieldの最小化は実装時に確定するが、3役割2関係とsource資格を増減しない。
+4. 既存内容projector→独立した期待命題の再構成→唯一のHuman Reception作者→有限文readerの一単位で接続する。作者が理由文を見て独自に充足を補う経路にしない。本文では理由を充足の内容に結び付ける。完成文を固定fixtureとして先取りせず、原文の三役割と本人内の状態が同じ受け取りに現れることを要求する。語義説明や受容述語の反復が残る場合、全体品質の完成としない。
+5. 回答後・否定訂正・評価／対象／理由撤回・LIMITEDにはこの初回資格を持ち越さず、既存更新処理へ戻す。保存済み本文の再生成を加えない。旧checkpoint再導出と旧質問照合を保ち、歴史fixtureを新しい解釈へ書き換えない。
+
+### 実装候補ownerと完成条件
+
+| 既存owner（mashos-api / ai/services/ai_inference） | 限定責務 |
+|---|---|
+| `cocolon_meaning_experience_engine/contracts.py` | 新private内容arm／versionと3役割2関係の不変条件。旧型は保持。 |
+| `.../emlis_stage1_composition.py` | 既存sourceで成立した理由付きNORMAL成分に限り、理由に根差す充足内容を投影。 |
+| `.../emlis_stage1_response.py` | 作者と独立に同じsource／選択根拠から期待命題を再構成し、役割交換やforeign ownerを拒否。 |
+| `emlis_ai_grounded_human_reception.py`／`emlis_ai_grounded_observation_gate.py` | 選択済みの内容を本文へ実現し、理由・対象・評価の役割／時点と原因の向きを検証。u287の前文参照証明も対応。 |
+| 既存評価test・Q2/Q3 application・現行identity | 内容差と旧保存互換、実service→保存→NoAuthor read→RN表示まで確認。 |
+
+- 理由なし／理由1、理由差替え・削除、対象差替え、評価の時点、両欄、単独／別received／共有対象を対照に、理由が増えても確認済みの本人内の充足内容が消えず、他成分へ理由を移さないことを確認する。
+- 否定／撤回・LIMITED・複数／foreign owner・relationやbinding交換を拒否し、旧型／旧checkpoint／保存済み本文／質問を保持する。独立有限readerと既存全文inverseの能力を混同しない。
+- 変更前後の実本文をrootが全文読解し、理由と本人内の状態が同じ経験に結び付くことを確認する。単に「満足」を「充足」へ置換しただけなら未達とする。実service＋隔離SQL保存・作者禁止read・再送・現行RN表示までを同じ実装単位で確認する。本人実機・正式Product Readは別。
+
+### 承認境界と影響
+
+既承認の満足理解・明示理由認識を取り直す提案ではない。**private主観内容契約を新versionへ追加するため、作業ルール18 §11.3のstanding delegation外として、この追加範囲だけMashの承認を求める。** 今回の診断記録を実装承認にしない。新private armの実装は承認前に行っていない。
+
+追加外部service・依存・課金・API/DTO/DB/RN契約変更・稼働DB変更・deploy・mergeは0。source認識、意味候補の採用資格、質問／Move／文数の上限を変更しない。作業は既存owner内の内容投影・本文・検証の一単位が増える。正確な所要時間と品質合格日は未実証で、完成保証は置かない。既存u287の継続作業内で扱い、独立した準備systemを増やさない。
+
+この一変更で、第二Moveの境界説明、語尾反復、訂正後の一般性、§9.2/9.4全体まで閉じたとはしない。sourceから定義できない内容を追加する必要が出た場合、または表面の語彙置換にしかならない場合はそこで止め、具体差分を示す。10/17確認点・10/31管理線・12/18公開目標、Piece／Analysis主枠、管理評価53.25％を変更しない。
+
+BLOCKER_NARROWED / PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR。今回の製品source・test・fixture変更0、本文改善0。初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。
