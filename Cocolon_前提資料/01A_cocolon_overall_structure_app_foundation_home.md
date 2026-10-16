@@ -3495,3 +3495,27 @@ STRUCTURE_MAP_DELTA_PRESENT。新production file／永続型／subsystemなし�
 既存human_reception作者へ参照可否を渡し、observation_gateの既存preceding_contextを共有対象readerまで接続した。source認識、核／関係、checkpoint、意味schema、NORMAL資格、Projection、2 Moveの選択、公開API/DTO/DB/RN、依存と各上限は変更しない。訂正で初回共同読みが失効する条件とu285/u286の残存経験保持も維持する。
 
 RN→API→service/store→保存read→RNと01B/Cの責務は不変。検証は正本06／API handoff u287、再開順序はweekly§5.6.37。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+
+## u289 — 承認済みの理由・対象・本人の充足を一つの内容型から本文へ接続（2026-10-16 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。新production fileなし。既存private主観内容契約へ独立したversion armを追加した。旧base／evaluated-experience-v1のfield不変。
+
+| mashos-api相対path | 今回の責務差分 |
+|---|---|
+| ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py | 新reasoned-experience-appraisal-v1。3 binding／2 relation、kind・polarity・理由／評価時点の専用検証とexact-type分岐。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py | admitted initial threadだけへ新内容を投影。旧非thread／回答後は旧base。論理契約manifest 73→74。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py | 元のphase_A.admitted_sourceから期待内容を再構成するための引渡し。 |
+| ai/services/ai_inference/emlis_ai_grounded_human_reception.py | 選択内容とsourceの一致を確認し、明示理由に根差した対象についての本人の充足を一文へ実現。 |
+| ai/services/ai_inference/emlis_ai_grounded_observation_gate.py | 3役割／2関係と別時点のsource照合、専用有限文法。旧文法とu287前文参照の証明を維持。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 新規7検査、対象となる初回期待内容／本文の更新。歴史fixture・対象外assertion不変。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行owner identityだけを再計算。 |
+| ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md | 承認・実装境界、実本文20種類、検証と限界・次の残件。 |
+
+Mashは2026-10-16 09:21:56 JST、u288の「明示された理由・対象・本人の充足を、一つの受け取り内容として保持する限定案」とRule18 §11.3の個別承認対象である旨を引用し、「うん、進めていいよ。」と明示承認した。新private内容契約の限定追加をこの承認で実装した。満足の意味／明示理由認識の既承認は取り直していない。u288の未承認表記は提案時の履歴であり、現行状態は本節を優先する。
+
+source認識・意味候補の採用資格・質問／Move／文数上限、公開API/DTO/DB/RN契約、依存は変更なし。新production file／engine／checker／serviceなし。稼働DB操作・deploy・mergeは0。
+
+RN→API→service/store→保存read→RNと01B/Cの責務は不変。検証は正本06／API handoff u289、進行はweekly§5.6.39。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。

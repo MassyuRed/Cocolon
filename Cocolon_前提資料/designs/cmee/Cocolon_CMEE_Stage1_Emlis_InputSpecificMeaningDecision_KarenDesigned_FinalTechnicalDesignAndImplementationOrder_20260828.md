@@ -3395,3 +3395,28 @@ u284初回の第2文で行為・評価時点・満足をもう一度全文説明
 この一変更で、第二Moveの境界説明、語尾反復、訂正後の一般性、§9.2/9.4全体まで閉じたとはしない。sourceから定義できない内容を追加する必要が出た場合、または表面の語彙置換にしかならない場合はそこで止め、具体差分を示す。10/17確認点・10/31管理線・12/18公開目標、Piece／Analysis主枠、管理評価53.25％を変更しない。
 
 BLOCKER_NARROWED / PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR。今回の製品source・test・fixture変更0、本文改善0。初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。
+
+
+## u289 — 承認済みの理由・対象・本人の充足を一つの内容型から本文へ接続（2026-10-16 JST）
+
+Mashは2026-10-16 09:21:56 JST、u288の「明示された理由・対象・本人の充足を、一つの受け取り内容として保持する限定案」とRule18 §11.3の個別承認対象である旨を引用し、「うん、進めていいよ。」と明示承認した。新private内容契約の限定追加をこの承認で実装した。満足の意味／明示理由認識の既承認は取り直していない。u288の未承認表記は提案時の履歴であり、現行状態は本節を優先する。
+
+理由付き初回のNORMALで、理由・行為・本人の充足を同じ受け取り内容として保持するEmlisReasonedExperienceAppraisalContent（cocolon.cmee.emlis.reasoned_experience_appraisal.v1）を追加した。理由を独立した「満足の拠り所」の説明で終わらせず、実行した対象について、明示理由に根差した本人内の充足の経験として本文へ実現する。理由なしの既存内容型は維持した。
+
+適用は既に認識・選択済みの本人の理由exact1／実行済み対象／無程度の肯定満足だけ。exact AdmittedEmlisThread、frozen/control両回答tupleが空、current_round=0を要求し、単独・別received・共有対象の既存構成で同じ投影を使う。回答後に元の3役割が残っても初回と見なさない。非thread offline経路、LIMITED、否定／撤回後、複数・不明確理由、他者・引用・仮定・継続・程度・納得へ資格を広げていない。
+
+新armは理由／対象／評価の3 binding、理由→評価と対象→評価の2 relation、満足のkind/polarity、理由時点と評価時点を保持する。旧EmlisAppraisalContent／evaluated-experience-v1のfieldとexact validatorは不変。型分岐・immutable tuple・canonical binding・既存論理契約manifestに追加（73→74）し、既存投影とphase_Aの期待再構成へadmitted_sourceを直接渡す。期待再構成は共通の純粋導出関数を使う検査であり、作者非依存の有限本文readerとは別である。
+
+Human Receptionは選択済みの新内容を使う。原文の理由時制を保持し、評価だけを「当時…あった／入力した時点で…ある」へ結ぶ。独立有限readerは3役割・2関係の方向・source qualifier・本文の全形を照合する。u287の「その満足」はこの新しい完全前文を読解した後にだけ使える。旧base理由文／LIMITED文法も保持し、新旧内容と本文の取り違えを拒否する。対象行為が客観的に理由を生んだこと、未明示の基準／価値／優劣／恒常的性質、received感情の原因、時点の同一化は追加しない。
+
+関連803件（評価749＋Q2/Q3 application54）の全runは`4 failed, 799 passed, 2 warnings in 267.80s (0:04:27)`。4失敗はいずれもu287の前文改変testが旧単語「満足」を置換していたため、新文に対して無改変となったtest側の不足。実際の新しい充足述語を否定する改変へ更新し、同testの全8条件を再実行：`8 passed, 741 deselected, 1 warning in 15.57s`。最終的に対象803件の各検査は通過、skip/xfailなし。製品sourceは全run後に変えていない。新規7件は単独／別received／共有対象の3役割・関係交換、理由／評価の別時点、schema／kind／polarityの改変、選択内容不在のreader拒否、旧base dispatch、未解釈回答・否定訂正・撤回後の非昇格を検査。既存の作者禁止有限reader、改変拒否、前文参照、source除外、旧checkpoint／質問fixtureを維持し、初回の期待内容・文面だけを更新した。現行owner identity：`1 passed, 194 deselected, 1 warning in 21.24s`。歴史fixtureは未変更、現行identityのみ再計算。
+
+実EmlisThreadService＋隔離PGliteで28 DTO（初回FINAL4／PRE_QUESTION12、訂正または撤回後REFINED12）を保存。単独・別received・共有対象、両欄、過去／現在の評価を含む。作者を禁止したGET/startのDTO完全一致、同回答再送一致・event無増加、現行RN hook/modalの全文・全Observation履歴・close/reopen一致を確認。rootが28本文（同一全文をまとめた20種類）を全文読解した。native部品はstubで、本人実機・正式Product Readではない。保存済み本文の再生成を加えていない。
+
+限定内容の接続は確認したが、「受け取りました」の反復、第一文の長さ／説明性、第二Moveの受け取り内容、訂正後の一般性は残る。全体の文章品質や§9.2/9.4の完成ではない。既存全文inverseには作者replayがあり、Reception全体を作者非依存とはしない。
+
+source認識・意味候補の採用資格・質問／Move／文数上限、公開API/DTO/DB/RN契約、依存は変更なし。新production file／engine／checker／serviceなし。稼働DB操作・deploy・mergeは0。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+次は現在の実本文を起点に、同じ受け取り内容を保持した読みやすさ・文章間の流れと受容述語の反復を扱い、訂正後に一般的な受け取りへ戻る残件を追う。新しい意味・原因・価値・帰属や内部契約の追加が必要な場合は、未承認範囲を自動的に拡張しない。共有17失敗・same100・Q1上限・giver帰属・本人実機・正式Product Readは残件。10/17確認点・10/31管理線・12/18公開目標、Piece/Analysis主枠と管理評価53.25％は不変。

@@ -1466,3 +1466,20 @@ TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受�
 原因・提案・承認境界は8/28設計／06／API handoff末尾u288、進行はweekly§5.6.38。新private内容契約の追加は未承認・未実装。STRUCTURE_MAP_DELTA_NONE、現行ownerと構造はu287から不変。
 
 BLOCKER_NARROWED / PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR。今回の製品source・test・fixture変更0、本文改善0。初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。
+
+
+## u289 — 承認済みの理由・対象・本人の充足を一つの内容型から本文へ接続（2026-10-16 JST）
+
+Mashは2026-10-16 09:21:56 JST、u288の「明示された理由・対象・本人の充足を、一つの受け取り内容として保持する限定案」とRule18 §11.3の個別承認対象である旨を引用し、「うん、進めていいよ。」と明示承認した。新private内容契約の限定追加をこの承認で実装した。満足の意味／明示理由認識の既承認は取り直していない。u288の未承認表記は提案時の履歴であり、現行状態は本節を優先する。
+
+理由付き初回のNORMALで、理由・行為・本人の充足を同じ受け取り内容として保持するEmlisReasonedExperienceAppraisalContent（cocolon.cmee.emlis.reasoned_experience_appraisal.v1）を追加した。理由を独立した「満足の拠り所」の説明で終わらせず、実行した対象について、明示理由に根差した本人内の充足の経験として本文へ実現する。理由なしの既存内容型は維持した。
+
+新armは理由／対象／評価の3 binding、理由→評価と対象→評価の2 relation、満足のkind/polarity、理由時点と評価時点を保持する。旧EmlisAppraisalContent／evaluated-experience-v1のfieldとexact validatorは不変。型分岐・immutable tuple・canonical binding・既存論理契約manifestに追加（73→74）し、既存投影とphase_Aの期待再構成へadmitted_sourceを直接渡す。期待再構成は共通の純粋導出関数を使う検査であり、作者非依存の有限本文readerとは別である。
+
+source認識・意味候補の採用資格・質問／Move／文数上限、公開API/DTO/DB/RN契約、依存は変更なし。新production file／engine／checker／serviceなし。稼働DB操作・deploy・mergeは0。
+
+限定内容の接続は確認したが、「受け取りました」の反復、第一文の長さ／説明性、第二Moveの受け取り内容、訂正後の一般性は残る。全体の文章品質や§9.2/9.4の完成ではない。既存全文inverseには作者replayがあり、Reception全体を作者非依存とはしない。
+
+詳細・実本文・検証は正本06／API handoff u289。全file地図の責務差分は01A u289、再開順はweekly§5.6.39。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
