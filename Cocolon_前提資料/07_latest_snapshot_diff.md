@@ -40766,3 +40766,16 @@ STRUCTURE_MAP_DELTA_NONE：既存作者・本文reader・字句witness内の文�
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。第一文の説明性・長さ、第二Moveの内容、理由なし本文の受容反復、訂正後の一般性は残る。今回の構文整理を意味理解の拡張や商品品質合格へ換算しない。
 
 次は、今ある選択内容と実本文を照合し、第二Moveが単なる関係説明になっている残件、訂正後に一般的な受け取りへ戻る残件の共通原因を扱う。同じ末尾置換だけを次の主課題にしない。既承認の意味を本文が落としている場合は同じowner内で修正し、新しい意味・原因・価値・帰属や内部契約が必要なら、その不足と最小差分を先に具体化する。共有17失敗・same100・Q1上限・giver帰属・本人実機・正式Product Readは未解消／未実施。10/17確認点・10/31管理線・12/18公開目標、Piece/Analysis主枠と管理評価53.25％は維持する。
+
+
+## u291 — 別欄の理由なし否定訂正で、未撤回の経験を受け取りへ残す（2026-10-16 JST）
+
+別欄にある理由なしの満足とreceived対比について、満足だけを否定訂正すると、未撤回のreceivedがObservationには残る一方でReceptionから落ちる欠陥を修復した。同じcurrent_burden分類の代表選択で一方を捨てず、既存LIMITEDの2 Moveへ両方を保持する。新しい経験解釈やNORMAL資格を加える変更ではない。
+
+STRUCTURE_MAP_DELTA_NONE。既存answer_update所有内のsource再証明条件追加のみで、owner・call chain・引数接続・contract・lifecycleに構造差分なし。current_structure/00 §6に従い01A/current01/04への重複追記は行わない。
+
+詳細・実本文比較は正本06／API handoff u291、再開順序はweekly§5.6.41。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。未撤回経験の欠落はこの限定条件で修復したが、訂正後の一般的な受け取りと旧received観測文の「同時に」、第一文の説明性、初回第二Moveの内容形成は残る。保存成功や回帰成功を商品合格に換算しない。
+
+次は本来残るべき内容の保持を崩さず、初回／訂正後／撤回後で選択される受け取り内容の違いを扱う。語尾や型名の追加だけを内容形成改善とせず、sourceから導ける既承認意味と不足を区別する。新しい読み・資格・内部契約が必要な箇所は具体化してからMash判断へ戻し、未合格本文のProduct ReadをMashへ要求しない。共有17失敗・same100・Q1上限・giver帰属・本人実機・正式Product Readは未解消／未実施。10/17確認点・10/31管理線・12/18公開目標、Piece/Analysis主枠と管理評価53.25％は維持。
