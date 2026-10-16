@@ -18775,3 +18775,16 @@ Emlisから：
 ```
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。次は既選択の内容と実本文を照合し、初回の説明性・受容反復、共有対象／対象外更新の一般的な受け取りを扱う。人称修復を内容形成全体の完成へ置き換えず、新しい意味・資格・private契約が必要なら不足と最小差分を具体化する。既存失敗、same100、Q1上限、giver帰属、本人実機・正式Product Readは残る。10/17確認点・10/31管理線・12/18公開目標、Piece/Analysis主枠と管理評価53.25％は維持する。
+
+
+## u297 — 未成立事項付き満足＋別の経験で初回本文が停止する欠落を修復（2026-10-16 JST）
+
+基準API `d9bee03669e3ad8bf5d8c501491f9265ec1eb8da`／資料 `34660dfa74204eee41fc8c767c11470ab00c9eaf`。u296 API CI38860148883／資料CI38860151682はcompleted/success。全体設計01、全file地図01A/B/C、current_structure 00/01/04、最新weekly20261010と作業rule・恒久incident、意味設計§9.2/9.4を確認した。
+
+未成立・対象・満足の3点と別received2点が既存LIMITED選択に残るのに、HR validatorのNORMAL限定で初回本文が停止していた。既存作者／独立readerで、全5点aggregate、当該Move exact3、ATTENTION/ATTEND_TO、MATERIAL_WEIGHT/RECEIVE_AS_MATERIAL、focalなしを保持して明示対比への注意を実現。NORMALの充足読みへ昇格せず、新意味・資格・private契約を追加しない。Rule18 §11.3の既承認内容実現修復、STRUCTURE_MAP_DELTA_NONE。source／projector／公開契約／DB／RN／依存は不変。
+
+別欄両順・同欄unfinished先行×動作3×時点2の18例が本文なし→本文あり。全24比較でcheckpoint・plan・selected全体は完全一致、逆順同欄6対照は不変（過去3停止は残る）。新21検査PASS。主回帰appraisal908＋application54は 962 passed, 2 warnings in 400.06s (0:06:40)、現owner identity1は別runでPASS。実service/PGliteの初回18 DTOでNoAuthor GET/start・履歴・event無増加、現行RN hook/modalの全文／履歴／close/reopen一致。rootが全18本文（12種類）を読解。native stubで本人実機ではなく、今回は回答再送の新規検証なし。途中失敗・identity・実本文・再現matrixと因果はAPI既存handoff u297に保持した。
+
+復旧した本文には、Observationの満足二重説明と未明示の同時性が残る。thread_surfaceの原入力contrast総数exact1条件から外れ、sentence_surfaceの旧単独fallbackへ入るためである。次は同じ入力と通常満足の対照で、対比・対象・時点を保持する初回一体単位を扱う。逆順同欄過去3のprojection前停止は別欠陥。新しい資格が必要なら最小差分を具体化し、本文の救済で代用しない。
+
+System Contextはmaterial祖先条件で停止したため原典直接参照fallbackを使用。同Work read-only補助を別Pro/Ultraの正式二重検証とはしない。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。初回説明性・受容反復、対象外更新、既存失敗・same100・Q1上限・giver帰属・本人実機／正式Product Readは残る。10/17・10/31・12/18、Piece/Analysis主枠、管理評価53.25％を維持する。
