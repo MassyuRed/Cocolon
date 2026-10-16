@@ -2734,3 +2734,16 @@ TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受�
 既存`ComponentReceptionOpportunityV1` exact7／二機会と、通常`EmlisAppraisalContent`の三binding・protected0・focal対比を再利用する。receivedは別の二bindingと焦点対比を所有する。exact2の評価内容型を三点へ緩めない。whole候補／ReadingConsequence各exact1と既存独立closureを維持する。新schema／内容型／registry／上限は提案しない。u294の更新後LIMITED専用carrierを初回三点へ転用しない。
 
 型追加がなくてもu262/u281の選択資格変更であり、source不変／checkpoint一致からselectedや本文不変を主張しない。保存済み本文の非再生成と、checkpoint保存後・本文保存前の再試行・旧質問回答・legacyの互換を分けて検証する。既存型でlosslessに結べない場合や新しいretry／保存契約を要する場合は、この案の外として具体化する。公開API／DTO／DB／RN wireは不変予定。実装済み契約として扱わず、承認までは現行資格を維持する。
+
+
+## u301 — 初回三点＋二点の既存契約接続（2026-10-17 JST）
+
+2026-10-17 08:16:47 JST、Mashがu300の初回限定案に「うん、進めていいよ。」と明示承認した。Rule18 §11.3の追加資格承認は成立済み。u300の未承認表記は提案時の履歴であり、現在は本節を優先する。同じ承認を再要求しない。
+
+新schema／内容型／registry／上限は0。既存ComponentReceptionOpportunityV1二機会と通常EmlisAppraisalContentを再利用し、未成立三点とreceived二点に別binding／焦点対比を持たせる。全required五点・三辺・二Move・二spanを閉じ、既存whole／ReadingConsequence各exact1を維持する。u294の更新後LIMITED専用内容は流用しない。
+
+既存GroundedSemanticComponentProjection.scope_key（GroundedInterpretationProjection.component_rows内）は、承認済み未成立appraisal成分をsourceから証明できる場合に限りscope:source_bounded_result_appraisalとなる。未成立／対象／満足の全facetへ一貫して持たせ、receivedは従来値。ID・原文・順番の区別子でなく固定の意味領域である。独立validatorはsourceから再導出し、消去・借用を拒否する。schema field追加、signature tuple変更、ENDPOINT_COLLAPSE／mutation義務緩和は行わない。資格／所有closureだけでは二つのRIGHT反応が衝突したため必要になった既存source leafの保持であり、追加の対象範囲ではない。
+
+現source plan／checkpointは不変だがselected・branch・内容hash・本文は変わる。旧保存DTOは非再生成、旧checkpointからのretryは同一sourceの完全checkpointを保って現行本文を生成することを実serviceで確認。公開API／DTO／DB／RN wire、保存version・retry契約は不変。identity fixtureは現行shared ownerだけ更新し、歴史fixture不変。詳細は8/28設計／06／API handoff u301、地図01A、weekly§5.6.51。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。NORMALや回帰成功を商品合格へ換算しない。

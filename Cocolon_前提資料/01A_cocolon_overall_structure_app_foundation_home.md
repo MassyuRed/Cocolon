@@ -3559,3 +3559,24 @@ STRUCTURE_MAP_DELTA_PRESENT。単一の本人received先行証明を既承認の
 | ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行sourceから共有owner identityを再導出。既存歴史fixtureは変更しない。 |
 
 原planを受け取る既存projector・thread_surface・本文作者・source-owned有限readerは変更なし。RN→API→service/store→保存read→RN、Piece/Analysisと01B/Cの責務は不変。全体01／current01/04、実装検証06／API handoff u299、再開weekly§5.6.49を参照。PRODUCT_NOT_CLEAR・正式0/3・未配置／未マージ。
+
+
+## u301 — 初回二経験の意味選択owner（2026-10-17 JST）
+
+2026-10-17 08:16:47 JST、Mashがu300の初回限定案に「うん、進めていいよ。」と明示承認した。Rule18 §11.3の追加資格承認は成立済み。u300の未承認表記は提案時の履歴であり、現在は本節を優先する。同じ承認を再要求しない。
+
+STRUCTURE_MAP_DELTA_PRESENT。新production fileはなく、既存3 ownerの責務差分。
+
+| mashos-api相対path | u301の責務差分 |
+| --- | --- |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py | 既存の成分資格へ初回未成立三点＋received二点を限定接続。Preparedのlegacy/checkpoint、source／Move所有を検査。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py | admitted sourceから初回三点＋二点、五点三辺二Moveと原文範囲を独立に再確認。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_input_specific_meaning.py | 既存scope_keyへ未成立appraisal成分のsource由来の意味領域を保持し、独立projection検査でも再導出。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 既存検査を対象36生成、二成分所有、作者禁止reader、改変・対象外・legacy境界へ更新。収集件数958→980。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行shared-owner identityだけを実sourceから更新。歴史fixtureは不変。 |
+| ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md | 承認、三ownerとなった理由、実本文、検証結果／限界と次工程。 |
+
+
+資格／closureの二ownerだけでは二つの反応がgeneric scopeで衝突したため、既存source projectionの意味領域保持も必要になった。新source文法・作者分岐・schema／型／registry／上限は追加しない。意味境界は8/28設計u301／05、全18本文比較と29保存DTO・失敗履歴は06／API handoff u301、次はweekly§5.6.51。全体01・current01/04へ同期し、RN→API→service/store→保存read→RN、01B/C・Piece/Analysis・依存の責務は不変。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。NORMALや回帰成功を商品合格へ換算しない。

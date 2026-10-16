@@ -1503,3 +1503,14 @@ TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受�
 単一の本人received先行証明が未成立事項付き満足へ接続されず、同欄の順序で初回本文が停止／一般化する欠陥を修復した。source認識の欠落を既承認の三点へ戻し、既存LIMITEDを保持する。fresh対象のcheckpoint・核・関係・selectedは変わる。直接builderは旧既定、thread準備がfresh時の新認識を明示し、完全旧checkpoint／旧質問は独立private指定で全体を再導出する。旧Q1本文経路とAnalysisの直接利用を維持する。訂正後の単独ATTENTION文は既存本文markerへ接続し、意味・時点の有限reader義務を保ったまま停止を修復する。
 
 STRUCTURE_MAP_DELTA_PRESENT。既存4 production ownerと新合成fixtureの正確な地図は01A u299。意味schema／資格／内容型・公開API／DB／RN／依存とアプリ全体の導線は不変。実本文・検証・限定範囲は06／API handoff u299、再開はweekly§5.6.49。初回の説明性・反復、共有対象／対象外更新は残る。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・未配置／未マージ。
+
+
+## u301 — 初回の未成立三点と別received二点を個別選択（2026-10-17 JST）
+
+2026-10-17 08:16:47 JST、Mashがu300の初回限定案に「うん、進めていいよ。」と明示承認した。Rule18 §11.3の追加資格承認は成立済み。u300の未承認表記は提案時の履歴であり、現在は本節を優先する。同じ承認を再要求しない。
+
+既存の二成分比較へ初回だけを接続し、未成立・対象・満足の三点と、別received・反応の二点へ個別の主観内容を持たせる。thread projectionの限定資格、compositionの独立source／Move所有検査、input_specific_meaningのsource由来appraisal scope保持が変更owner。既存作者と独立readerを再利用し、collision・mutation検査を維持する。
+
+STRUCTURE_MAP_DELTA_PRESENT。正確な実file責務は01A u301、意味境界は8/28設計u301／05、実本文・回帰・旧保存互換・29 DTO保存再表示は06／API handoff u301、再開はweekly§5.6.51。新file／型／schema／registry／上限は0。RN→API→service/store→保存read→RN、01B/CとPiece/Analysisの責務は不変。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。NORMALや回帰成功を商品合格へ換算しない。

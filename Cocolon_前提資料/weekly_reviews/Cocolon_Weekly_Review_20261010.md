@@ -1327,3 +1327,16 @@ TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式0/3�
 Rule18 §11.3により新資格だけMash承認待ち。過去の承認範囲は継続。承認後は意味→本文→保存／現行RNを一単位で扱い、未成立と対象へ向く充足、別received経験の内容差を確認する。旧保存本文の非再生成と、checkpoint保存後・本文保存前の再試行・旧質問回答の互換を分け、NORMAL化だけを品質改善としない。実装のlossless成立は未確認。外部service・依存・費用・公開wire・DB・配置追加0予定、工数／完了日は未確定。
 
 STRUCTURE_MAP_DELTA_NONE、実装・地図責務は不変。初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。訂正後の反復／注意のみ、共有対象・対象外更新、既存失敗、same100、Q1上限、giver帰属、本人実機／正式Product Readは残る。10/31管理線・12/18公開目標、Piece/Analysis主枠、管理評価53.25％を維持し、診断・提案だけを進捗率へ加算しない。
+
+
+### 5.6.51 u301 — 承認済み初回二経験を個別選択へ接続（2026-10-17 JST）
+
+2026-10-17 08:16:47 JST、Mashがu300の初回限定案に「うん、進めていいよ。」と明示承認した。Rule18 §11.3の追加資格承認は成立済み。u300の未承認表記は提案時の履歴であり、現在は本節を優先する。同じ承認を再要求しない。
+
+初回の完全な未成立三点＋別received二点だけを既存成分比較へ接続した。資格・独立source所有closureに加え、二つの対比の反応が衝突しないよう既存scope_keyへappraisal意味領域をsourceから保持する3 ownerの最小差分。作者だけの言い換えではなく、三binding／二bindingの内容を別々に選択する。新schema・型・上限・外部依存・公開API/DB/RN変更0。
+
+対象6配置×時点2＝12は、結論未確定を保った対象への充足と、別の嬉しさが伴わなかった経験を個別に返す。plan・checkpoint ref・Observationは全18比較で一致、対照6は全record不変。旧保存非再生成・旧質問回答・旧checkpoint retryを実service／隔離SQLで確認、実保存29 DTOのRN本文／履歴／再表示も確認。全検査数と失敗・実行限界は06／API handoff u301。RN native stubであり、本人実機や正式Product Readではない。
+
+STRUCTURE_MAP_DELTA_PRESENT。全体01・全file地図01A・current01/04と意味設計／05を更新、01B/Cは責務不変。u300承認待ちを次工程へ戻さない。説明調・関係の説明は残り、充足の語義を述べただけで§9.2/9.4全体を満たしたとは判定しない。今回の旧質問への肯定訂正でも、Observationは更新される一方、Receptionは既存の対比への注意に留まった。次はこの初回の内容形成と訂正後の二重説明／ATTENTION、共有対象／対象外更新を既存承認範囲で進める。既存周辺4失敗（過去共有17との集合一致未確認）、same100、Q1上限、giver帰属、本人実機・正式Product Readは未解消。10/31管理線・12/18公開目標、Piece/Analysis主枠、管理評価53.25％を維持する。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。NORMALや回帰成功を商品合格へ換算しない。

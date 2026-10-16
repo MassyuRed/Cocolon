@@ -3490,3 +3490,37 @@ source→成分→whole→主観命題→実本文を同じ単位で比較する
 Rule18 §11.3 LEVEL_3として**この成分資格追加だけ**承認を求める。既承認範囲は継続する。外部AI・service・依存・費用・公開API／DTO／DB／RN schema・配置／mergeは追加0を予定。資格／独立所有の修正と既存回帰・保存表示確認が必要で、正確な工数と完成日は未確定。承認前に作者の表現緩和で代用しない。同Workの補助read-only reviewを用い、別Pro/Ultra正式二重検証を済ませたとはしない。
 
 STRUCTURE_MAP_DELTA_NONE。製品実装・地図責務は不変。初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・未配置／未マージ。10/17確認点に選択資格不足と最小差分を記録し、10/31・12/18、Piece/Analysis主枠、53.25％を維持する。
+
+
+## u301 — 初回未成立三点＋別received二点の承認済み実装（2026-10-17 JST）
+
+2026-10-17 08:16:47 JST、Mashがu300の初回限定案に「うん、進めていいよ。」と明示承認した。Rule18 §11.3の追加資格承認は成立済み。u300の未承認表記は提案時の履歴であり、現在は本節を優先する。同じ承認を再要求しない。
+
+初回・回答なし・round0・legacyなし・RESOLVEDだけを追加資格とする。本人の現在否定の未成立fact、過去の実行対象、過去又は入力時点の肯定無程度満足の三点と、別のsource-owned received出来事／過去反応二点を分ける。全required五点・三辺・required Move二つ・source span二つの一意所有を確認し、同欄でも非重複を証明する。理由・共有対象・追加材料・明示未知・重複・foreign owner・giverへのSELF混入・回答後・PARTIAL／legacyは既存経路へ残す。既存の一般的なevidenceなしdo_not_claim境界は拒否理由にしない。
+
+既存の成分内比較からwholeを選択し、その成分所有をComponentReceptionOpportunityV1の二機会へ結び、ReadingConsequence exact1を保つ。未成立側は通常EmlisAppraisalContentの三binding・RELATIONAL_NONCOLLAPSE／PRESERVE_BOTH_ENDPOINTS・protected0・未成立→満足の焦点対比、received側は別二binding・別焦点を持つ。mode/operatorは既存ATTENTION／ATTEND_TOのままで、従来の全五点MATERIAL_WEIGHT／focalなしから内容が分離された。NORMALを直接強制せず、作者は選ばれた内容を実現する。
+
+u300で見込んだ資格／所有closure二ownerだけでは、二つの対比のRIGHT反応がgeneric scopeで衝突し、ALL_DRAFTS_SOURCE_GROUNDED_HARD_INVALID／ENDPOINT_COLLAPSEとなった。そこで既存emlis_input_specific_meaningのsource projectionへ、承認対象の三点を再証明した場合だけ固定意味値scope:source_bounded_result_appraisalを保持する最小差分を加えた。三点の全facetで一貫し、receivedは既存scope。ID・語句・配置順をsignatureへ混入しない。独立validatorも同じsourceから再導出し、carried scopeの消去／借用を拒否する。collision／mutation義務を緩めず、新schema・型・registry・上限・作者分岐を追加しない。独立closureが再検証するのはsource・成分・Move所有と初回thread状態であり、Preparedのlegacy／checkpoint flagsは入口guardが担当する。
+
+### 対象の実保存本文全文
+
+入力：memo「結論は出ていないが、考えを言葉にできて満足した。」、memo_action「褒められたのに、嬉しくなかった。」
+
+```text
+見えたこと：
+「結論は出ていない」の一方で、「考えを言葉にできて」という出来事への評価は「満足した」とあります。 「褒められた」の一方で「嬉しくなかった」とあります。
+
+Emlisから：
+結論は出ていないという点と切り分けて、当時の満足を、考えを言葉にできたことに向けられた充足として受け取りました。褒められたことだけでは言い表せない、嬉しさが伴わなかったあなたの経験として受け取りました。
+```
+
+変更前は「結論は出ていないという点と、考えを言葉にできたことへの当時の満足との対比に目を向けています。褒められたことは、嬉しさにはつながらなかったのですね。」。新しい本文は結論未確定を保ち、言葉にできた対象へ向けられた充足と、別の嬉しさが伴わない経験を個別に受け取る。入力時点形ではObservationが「満足している」、Receptionが「入力した時点での満足」になる。逆順ではObservationの二節順だけが逆になり、Reception順は同じ。未明示の因果・同時性・目標達成・相手意図を加えない。
+
+旧質問への「『嬉しくなかった』ではなく『嬉しかった』です。」相当の明示訂正後は、Observationに現在の三点とreceivedの「嬉しかった」が出るが、Receptionは既存の未成立対比への注意一文。新しい初回資格を回答後へ自動拡張していない。この既存残件は互換一致と商品品質を区別して保持する。
+
+
+source→二成分比較→whole→主観命題→本文→実service保存→現行RN再表示を同じ単位で確認した。18比較は対象12のReception／selectedだけが変化し、plan・checkpoint ref・Observationは18一致、対照6は全record一致。完全checkpointの旧／新一致、実旧保存本文の非再生成、旧質問回答と旧checkpoint retry、29実保存DTOのRN確認を実施。数値・失敗履歴・実行限界は06／API handoff u301に集約する。
+
+STRUCTURE_MAP_DELTA_PRESENT。3 production ownerの地図は01A u301。既存型の意味scope保持は05 u301、再開はweekly§5.6.51。説明調・関係の説明は残り、充足の語義を述べただけで§9.2/9.4全体を満たしたとは判定しない。今回の旧質問への肯定訂正でも、Observationは更新される一方、Receptionは既存の対比への注意に留まった。次はこの初回の内容形成と訂正後の二重説明／ATTENTION、共有対象／対象外更新を既存承認範囲で進める。既存周辺4失敗（過去共有17との集合一致未確認）、same100、Q1上限、giver帰属、本人実機・正式Product Readは未解消。10/31管理線・12/18公開目標、Piece/Analysis主枠、管理評価53.25％を維持する。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。NORMALや回帰成功を商品合格へ換算しない。

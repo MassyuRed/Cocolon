@@ -40823,3 +40823,14 @@ u298で残した逆順同欄過去3例の停止を、source本人継続証明の
 初回・回答なし・legacyなしの三点＋二点だけを、既存whole／ComponentReceptionOpportunityV1／通常三点内容へ接続する資格追加案を具体化した。新schema・内容型・上限は予定しない。Rule18 §11.3により追加資格のみ承認待ち。意味設計u300／05、詳細と実本文は06／API handoff u300、再開はweekly§5.6.50。STRUCTURE_MAP_DELTA_NONE、全体・地図・current_structureの実装責務は不変。
 
 初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・未配置／未マージ。対比説明のままの本文を商品完成とせず、承認後は意味選択から実本文・保存表示まで同じ単位で確認する。訂正後等の別残件、10/31・12/18、Piece/Analysis主枠と53.25％は維持。
+
+
+## 2026-10-17 u301 — 初回二経験の個別選択を承認範囲で実装
+
+2026-10-17 08:16:47 JST、Mashがu300の初回限定案に「うん、進めていいよ。」と明示承認した。Rule18 §11.3の追加資格承認は成立済み。u300の未承認表記は提案時の履歴であり、現在は本節を優先する。同じ承認を再要求しない。
+
+source資格／独立所有closure／既存意味scopeの3 production ownerを修正。未成立三点と別received二点へ別の内容を選び、対象12のReceptionを改善した。18比較のplan・checkpoint ref・Observationと対照6は不変。実旧保存非再生成・旧質問回答・旧checkpoint retry、29実保存DTOのRN再表示を確認。検査と失敗・限界の詳細は06／API handoff u301。
+
+STRUCTURE_MAP_DELTA_PRESENT。全体01・01A・current01/04へ責務、意味設計／05へ契約境界、weekly§5.6.51へ次を同期。新schema・型・上限・公開API/DB/RN・依存変更0。説明調・関係の説明は残り、充足の語義を述べただけで§9.2/9.4全体を満たしたとは判定しない。今回の旧質問への肯定訂正でも、Observationは更新される一方、Receptionは既存の対比への注意に留まった。次はこの初回の内容形成と訂正後の二重説明／ATTENTION、共有対象／対象外更新を既存承認範囲で進める。既存周辺4失敗（過去共有17との集合一致未確認）、same100、Q1上限、giver帰属、本人実機・正式Product Readは未解消。10/31管理線・12/18公開目標、Piece/Analysis主枠、管理評価53.25％を維持する。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。NORMALや回帰成功を商品合格へ換算しない。

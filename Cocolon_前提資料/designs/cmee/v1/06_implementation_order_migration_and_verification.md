@@ -18877,3 +18877,57 @@ rootは現行実装を変更せず合成18例を生成し、全Observation／Rec
 Rule18 §11.3 LEVEL_3の追加承認対象はこの資格だけ。過去承認を取り直さない。外部AI／service／依存／費用／公開API／DTO／DB／RN schema／配置／merge追加0予定。必要作業は資格・独立所有修正と既存回帰・保存表示確認で、工数・完了日は未確定。同Workのread-only補助とrootの因果照合であり、正式Pro/Ultra二重検証ではない。新しい恒久runner／checker／証跡契約は作らない。未保存本文の再試行は既存どおり保存MEANING_UPDATEと完全checkpointを保ち、現在のengineで生成する。旧renderer固定flagを新設しない。
 
 STRUCTURE_MAP_DELTA_NONE、今回は既存文書への提案・記録のみ。8/28意味設計u300とschema05へ未承認案、07／weekly§5.6.50へ現在地を同期した。対比反復／語義説明やNORMAL分類だけを内容形成完了としない。初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・未配置／未マージ。訂正後反復／注意のみ、共有対象／対象外更新、既存周辺4失敗・same100・Q1上限・giver帰属・本人実機／正式Product Readは未解消。10/17確認点・10/31管理線・12/18公開目標、Piece/Analysis主枠、53.25％は維持する。
+
+
+## u301 — 初回二経験の選択・実本文・保存再表示（2026-10-17 JST）
+
+2026-10-17 08:16:47 JST、Mashがu300の初回限定案に「うん、進めていいよ。」と明示承認した。Rule18 §11.3の追加資格承認は成立済み。u300の未承認表記は提案時の履歴であり、現在は本節を優先する。同じ承認を再要求しない。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。NORMALや回帰成功を商品合格へ換算しない。
+
+初回・回答なし・round0・legacyなし・RESOLVEDだけを追加資格とする。本人の現在否定の未成立fact、過去の実行対象、過去又は入力時点の肯定無程度満足の三点と、別のsource-owned received出来事／過去反応二点を分ける。全required五点・三辺・required Move二つ・source span二つの一意所有を確認し、同欄でも非重複を証明する。理由・共有対象・追加材料・明示未知・重複・foreign owner・giverへのSELF混入・回答後・PARTIAL／legacyは既存経路へ残す。既存の一般的なevidenceなしdo_not_claim境界は拒否理由にしない。
+
+既存の成分内比較からwholeを選択し、その成分所有をComponentReceptionOpportunityV1の二機会へ結び、ReadingConsequence exact1を保つ。未成立側は通常EmlisAppraisalContentの三binding・RELATIONAL_NONCOLLAPSE／PRESERVE_BOTH_ENDPOINTS・protected0・未成立→満足の焦点対比、received側は別二binding・別焦点を持つ。mode/operatorは既存ATTENTION／ATTEND_TOのままで、従来の全五点MATERIAL_WEIGHT／focalなしから内容が分離された。NORMALを直接強制せず、作者は選ばれた内容を実現する。
+
+u300で見込んだ資格／所有closure二ownerだけでは、二つの対比のRIGHT反応がgeneric scopeで衝突し、ALL_DRAFTS_SOURCE_GROUNDED_HARD_INVALID／ENDPOINT_COLLAPSEとなった。そこで既存emlis_input_specific_meaningのsource projectionへ、承認対象の三点を再証明した場合だけ固定意味値scope:source_bounded_result_appraisalを保持する最小差分を加えた。三点の全facetで一貫し、receivedは既存scope。ID・語句・配置順をsignatureへ混入しない。独立validatorも同じsourceから再導出し、carried scopeの消去／借用を拒否する。collision／mutation義務を緩めず、新schema・型・registry・上限・作者分岐を追加しない。独立closureが再検証するのはsource・成分・Move所有と初回thread状態であり、Preparedのlegacy／checkpoint flagsは入口guardが担当する。
+
+### 対象の実保存本文全文
+
+入力：memo「結論は出ていないが、考えを言葉にできて満足した。」、memo_action「褒められたのに、嬉しくなかった。」
+
+```text
+見えたこと：
+「結論は出ていない」の一方で、「考えを言葉にできて」という出来事への評価は「満足した」とあります。 「褒められた」の一方で「嬉しくなかった」とあります。
+
+Emlisから：
+結論は出ていないという点と切り分けて、当時の満足を、考えを言葉にできたことに向けられた充足として受け取りました。褒められたことだけでは言い表せない、嬉しさが伴わなかったあなたの経験として受け取りました。
+```
+
+変更前は「結論は出ていないという点と、考えを言葉にできたことへの当時の満足との対比に目を向けています。褒められたことは、嬉しさにはつながらなかったのですね。」。新しい本文は結論未確定を保ち、言葉にできた対象へ向けられた充足と、別の嬉しさが伴わない経験を個別に受け取る。入力時点形ではObservationが「満足している」、Receptionが「入力した時点での満足」になる。逆順ではObservationの二節順だけが逆になり、Reception順は同じ。未明示の因果・同時性・目標達成・相手意図を加えない。
+
+旧質問への「『嬉しくなかった』ではなく『嬉しかった』です。」相当の明示訂正後は、Observationに現在の三点とreceivedの「嬉しかった」が出るが、Receptionは既存の未成立対比への注意一文。新しい初回資格を回答後へ自動拡張していない。この既存残件は互換一致と商品品質を区別して保持する。
+
+### 検証と互換
+
+| 対象 | 実行結果と限界 |
+| --- | --- |
+| appraisal980＋Q2/Q3 application54、計1,034 | 最終production sourceで1,032 pass／旧初回文の期待2 fail。Q1初回にも二経験内容が選ばれるため、その既存期待のみ更新し該当2を再実行して2 pass。全1,034を更新後一括再実行したとはしない。製品codeはその後不変。 |
+| 現行shared-owner identity | sourceから再導出後、既存owner-chain検査1 pass（194 deselected）。language 2d61dab66244093928cf227290e84b348bf924c1bb201c1a3b89c588239d9b07、runtime 92f592f238d7cb124c3fa9e8c1e604e3b5c08187f36a2f98f7364736a0bb09c3。 |
+| 実本文の変更前／後 | 18比較、全本文あり。対象12の意味選択とReceptionのみ変化、対照6の全record一致。 |
+| 実service／隔離SQL | 対象12、実旧保存本文1、実旧質問への新回答1、実旧checkpoint retry1の15 caseを確認。 |
+| 現行RN表示 | 実保存29 DTOで現在本文／全履歴／閉じて再表示29 pass。native stub。 |
+| 補助RN既存suite | 31中26 pass／5 fail。内訳は下記、全PASSとはしない。 |
+
+変更前u300の18例と最終sourceを同じ入力で比較した。対象は6配置（別欄両順、memo内両順、memo_action内両順）×満足の過去／入力時点2＝12、対照は単独・本人実行行動併記・理由付き満足＋receivedの各時点2＝6。全18でplan・意味checkpoint ref・Observationは一致。対象12はLIMITEDからNORMALとなり、組ごとの三binding／二bindingの内容とReceptionが変わった。対照6は保存した全比較recordが一致。テストでは対象動作3も加えた36配置を検査する。主観内容や本文の不変をcheckpoint一致から推論していない。
+
+実service＋隔離PGliteのQ2/Q3 migration/RPCで、対象12の初回と「分からない。」後の保存、NoAuthor GET/start／同一回答再送とthread/event不変を確認した。u300 commit d078079の実engineを隔離checkoutの別processで実行し、旧本文保存1・旧質問への明示received肯定訂正1・旧checkpoint保存後のworker中断と新engine再試行1も確認。対象12の完全checkpointは旧／新engineで一致。旧保存本文は再生成せず旧文のまま、旧質問への回答は旧／新engineの実artifactとcheckpointが一致、checkpoint保存後・本文保存前の再試行はMEANING_UPDATE eventとoperationを保持して新本文を生成した。旧source復元経路の回帰も維持した。
+
+実保存DTO29（対象12×初回／unchanged＝24、旧本文2、旧質問の初回／更新2、旧checkpoint retry1）を現行RN hook／Modalへ渡し、現在本文・全履歴・原入力・閉じて再表示を29/29確認した。rootは18生成本文と29保存本文を、同一本文の対応表も含めて読解した。RN native部品はstubであり、本人実機・配布build・正式Product Readではない。
+
+補助的に現行RN既存suite全31も実行したが26 pass／5 fail。1件は変更していないInputScreenへの静的文字列assertion、4件はこの一時環境のreact-native／Metro未導入であり、今回の29 DTO検査と混ぜない。Cocolon製品codeは変更していない。このsuiteを全PASSとはしない。pytestの最初の収集時はFastAPI／anyio不足で停止し、一時環境へ既存検証依存を揃えて再実行した。最初の局所検査は58 pass／選択改変期待1 failで、既存NORMALが許すmodeやcontribution subsetを新たに禁止しないよう、空選択・内容binding欠落・他経験借用という契約上の変異へ修正した。service確認用の一時scriptもproperty参照・read時刻比較・実生成request採取を直して最終確認した。これらを製品修正や別の合格数へ数えない。
+
+実行環境はPython3.12.14／Pydantic2.13.5／pytest8.4.1、PGlite0.5.8、React／react-test-renderer18.3.1。外部DB・配置・費用・製品依存変更なし。新しい恒久runner／checker／証跡契約は追加していない。同Workのread-only補助reviewはblocking指摘なしだが、別Pro/Ultraモデルによる正式二重検証ではない。
+
+STRUCTURE_MAP_DELTA_PRESENT。全体01・01A・current01/04、意味設計／05、07／weekly§5.6.51へ同期。3 production ownerと既存tests／現行identity、API handoffの計6 API file。新production file・service・外部依存・公開契約・DB/RN変更なし。
+
+説明調・関係の説明は残り、充足の語義を述べただけで§9.2/9.4全体を満たしたとは判定しない。今回の旧質問への肯定訂正でも、Observationは更新される一方、Receptionは既存の対比への注意に留まった。次はこの初回の内容形成と訂正後の二重説明／ATTENTION、共有対象／対象外更新を既存承認範囲で進める。既存周辺4失敗（過去共有17との集合一致未確認）、same100、Q1上限、giver帰属、本人実機・正式Product Readは未解消。10/31管理線・12/18公開目標、Piece/Analysis主枠、管理評価53.25％を維持する。
