@@ -640,3 +640,13 @@ Mashは商品品質・観測・問いの定義を既に提示している。華�
 `STRUCTURE_MAP_DELTA_NONE`（製品owner/file/経路・契約の追加なし、既存source/binding内部修復）。新回帰testだけ01Aへ追跡を追加。今回の正本詳細・全未加工本文・最終source SHA・再開課題は [u318実装監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u318_SourceScope_and_LimitedBinding_20261017.md) を参照。
 
 次は原03を、原文範囲と有限述語の証明を持つ共通source ownerで、安堵・将来の可能性・現在の寂しさへ読み分ける。既知動詞の列挙や任意文字列受理に縮めず、条件関係を因果へ読み替えない。必要なら最小契約差分を具体化してから扱う。E04汎用受容、E05質問、u317同欄REVISE4/WITHDRAW6、旧失敗checkpoint、本人実機を残件として維持する。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/20方式判断、10/31管理線・12/18公開目標、Piece/Analysis主枠・管理評価53.25%は不変。
+
+## u319 — 原03の感情作用域・対比本文と旧checkpoint（2026-10-17）
+
+原03の「休めたことにほっとした」と「かもしれないと思うと寂しい」を、過去の安堵/内側可能性/現在の感情として原文全体から証明した。実markerによるcontrast、異なる時点に「同時」を加えないObservation、両感情を保持する既存Receptionの独立全文検査まで修復。NORMALと独立unknownを残すLIMITEDの両方を確認。意味型・unknown契約・Move/aggregate・公開API/DB/RN・問い上限は不変。
+
+元10例初回9→10、固定100例71のまま全結果record一致。途中0062/0066の受容脱落は本文比較で発見・修正、最終で保持を確認。最終scope/本文/legacy回帰145 passed、現行identity1 passed。共有広域回帰は下記監査の実行版別記録を参照し、重複合算しない。実migration/RPC＋PGlite/service20ケース24 DTO、RN24 DTOの全文/履歴/close/reopenを確認。旧完成07の作者禁止readと旧pending07更新を保持。旧03通常失敗はretry不可、旧03中断は旧checkpoint完全一致で再開しても旧意味のため未提供を維持する。
+
+原03の本文提供復旧はE04受容品質・E05問い・E06訂正撤回の完了ではない。次は原03のsourceを保持した入力固有の受容、別の主体/時点/願い誤認と同欄REVISE4/WITHDRAW6を一体単位で進める。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmerged。本人実機/本番DB/deploy/mergeは0。10/20判断・10/31管理線・12/18目標・Piece/Analysis主枠・53.25%は不変。
+
+`STRUCTURE_MAP_DELTA_NONE`。実装詳細・最終source・未加工全文・検証の版区分は [u319監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u319_CognitiveFeelingScope_and_ContrastBody_20261017.md) を正とする。

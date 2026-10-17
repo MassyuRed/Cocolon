@@ -3657,3 +3657,11 @@ Mashが2026-10-17 16:46:17 JSTにu314限定案を承認した。別received経�
 | mashos-api/ai/tests/test_cmee_emlis_source_scope_regressions.py | 推量の制約誤認、明示SELFの未確定認知と報告／他者topic拒否、LIMITED basis必須coverage、短いcontrastと一意marker原文証明を検証 |
 
 実装・未加工全文・保存検証・未完了は [u318監査](audits/emlis_ai/Cocolon_EmlisAI_u318_SourceScope_and_LimitedBinding_20261017.md)。原03の作用域、汎用受容、旧失敗checkpoint等を残し、商品完了へ読み替えない。
+
+## u319追跡 — 既存source・本文検査・checkpoint責務（2026-10-17）
+
+`STRUCTURE_MAP_DELTA_NONE`。新production owner/公開経路はない。grounded observation planは有限経験/外側感情と内側推量、実contrast markerを証明。sentence surfaceは時点を加えない既存対比形、observation gateは両端原文と選択済みappraisalの独立文法、emlis_question/answer_updateは旧source checkpointの完全再導出を担当する。
+
+既存 `mashos-api/ai/tests/test_cmee_emlis_source_scope_regressions.py` に、主体/推量/時制、NORMAL/LIMITED本文、44本文変異、旧checkpoint全payload・意味digest、既存nominal受容保持を追加。145件。現行identity fixtureのみ更新し、歴史的proofは変更しない。
+
+最新実装・本文・検証は [u319監査](audits/emlis_ai/Cocolon_EmlisAI_u319_CognitiveFeelingScope_and_ContrastBody_20261017.md)。元10例9→10、固定100は71で全record一致。次は入力固有受容と他の主体/時点誤認、E05/E06。PRODUCT_NOT_CLEAR・初回一体単位未完了・未配置。

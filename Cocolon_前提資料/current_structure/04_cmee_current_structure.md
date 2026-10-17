@@ -22,7 +22,7 @@ production_runtime_effect: 0
 automatic_progression: false
 ---
 
-> 2026-10-17 u317：丁寧形received先行のsource認識と旧保存復元を修復。最新責務差分は末尾u317、実装・本文・検証は06／API handoff u317、次作業はweekly §5.6.67。未配置・商品NOT_CLEAR。
+> 2026-10-17 u319：原03の感情作用域・対比本文・旧checkpointを修復。最新実装/本文/検証と次作業は末尾u319、06/API handoff、weekly追記u319。未配置・商品NOT_CLEAR。
 
 
 ## 2026-10-03 — Analysis V1-D offline consumer
@@ -1579,3 +1579,11 @@ Mashが2026-10-17 16:46:17 JSTにu314限定案を承認した。別received経�
 正確なpath別責務差分は01A末尾u317を参照。
 
 主回帰1,584 pass、104比較36変更68同一、service52case／RN78 DTO、旧checkpoint14を確認。実本文・互換・失敗を含む検証は06／API handoff u317、最新再開順はweekly §5.6.67。次は同一欄の評価訂正／撤回後の受容保持10例を既存条件と比較する。現在形／名詞形／肯定反応、本文自然さ・周辺既存失敗も未解消。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。
+
+## u319追跡 — 既存source・本文検査・checkpoint責務（2026-10-17）
+
+`STRUCTURE_MAP_DELTA_NONE`。新production owner/公開経路はない。grounded observation planは有限経験/外側感情と内側推量、実contrast markerを証明。sentence surfaceは時点を加えない既存対比形、observation gateは両端原文と選択済みappraisalの独立文法、emlis_question/answer_updateは旧source checkpointの完全再導出を担当する。
+
+既存 `mashos-api/ai/tests/test_cmee_emlis_source_scope_regressions.py` に、主体/推量/時制、NORMAL/LIMITED本文、44本文変異、旧checkpoint全payload・意味digest、既存nominal受容保持を追加。145件。現行identity fixtureのみ更新し、歴史的proofは変更しない。
+
+最新実装・本文・検証は [u319監査](../audits/emlis_ai/Cocolon_EmlisAI_u319_CognitiveFeelingScope_and_ContrastBody_20261017.md)。元10例9→10、固定100は71で全record一致。次は入力固有受容と他の主体/時点誤認、E05/E06。PRODUCT_NOT_CLEAR・初回一体単位未完了・未配置。
