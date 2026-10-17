@@ -41066,3 +41066,14 @@ E04の受容は依然として原文両節＋汎用の対比保持であり、�
 次は入力固有の受容を、語尾変更やsource分類の表示だけで済ませず、自然変種・訂正／撤回・保存表示まで一体で成立させる。E01の他の主体／時点／願い誤認、E05の問い、E06の上記10欠落、E07 history、E08本人実機、E09既存失敗は未解消。新意味契約が必要な場合は可視内容の差まで具体化して扱い、型追加そのものを次作業にしない。10/20方式判断、10/31管理線・12/18公開目標、Piece／Analysis主枠・管理評価53.25％は不変。
 
 本文提供の修復はtechnical resultであり、PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。同Work補助を正式な別model評価へ換算しない。
+
+
+## u321 — 同欄の評価訂正後も未変更received経験を残す（2026-10-17）
+
+latest weekly §3.7／u320の同欄欠落10件のうち、理由なしREVISE2件を修復。既存answer_updateのsource証明に同一欄の完全2文・非重複範囲・欄全体の閉包・全span順序・既存projection再導出を追加し、既存LIMITEDの2 dutyへ渡す。初回本文・元と現在の核辺・完全checkpointは不変。別欄限定private内容資格・意味型・作者／reader・公開API／DB／RN・問い上限は変更しない。
+
+最終関連回帰302 passed／1,254 deselected（297.18秒）、Q2/Q3 application54 passed／既存warning1（76.05秒）。別file集合で計356 passed、failed/skip 0。新規27件を含み、旧同欄拒否1件は同一入力の保持検査へ移動。途中14件を合算しない。実service＋隔離PGlite8ケース／18 DTO、現行RN hook／Modalのnative stub18 DTOで本文・元入力・全履歴・close/reopenを確認した。旧完成2件は作者禁止のGET/start／同回答再送で元の本文を維持。旧pending2件と旧中断更新2件は同じ保存意味から現本文を生成し、中断再開ではprepareを禁止してcheckpoint・意味/回答event・旧履歴・operationを保持した。
+
+元10＋07回答／固定100はelapsed以外の全record不変。3形×2欄の6件のbaseline比較でも初回public結果・訂正後完全checkpoint／意味が一致し、未変更経験がReceptionへ戻った。u291の同欄拒否1ケースは当時の実装範囲と確認し、同じ入力を両順序の保持検査へ移した。他の拒否条件・歴史記録は維持する。現行identityを再導出して変更なし。STRUCTURE_MAP_DELTA_NONE。
+
+未成立事項付きREVISE2／WITHDRAW6、E04の汎用受容、E01の別の誤認、E05の問い、E07〜E09は残る。旧保存本文の再生成や商品品質完成とはしない。本人実機／本番DB／deploy／mergeは0、PRODUCT_NOT_CLEAR・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。管理日付・配分・53.25%は不変。詳細・未加工実本文は [u321監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u321_SameFieldRevisionRetention_20261017.md) を参照。
