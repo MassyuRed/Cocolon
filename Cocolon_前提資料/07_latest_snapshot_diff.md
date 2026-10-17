@@ -40907,3 +40907,14 @@ u307からの残件として、理由・対象・本人内の充足を保持す�
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％は維持。全体設計01・全file地図01A/B/C・current01/04・最新weekly・Rule18／CURRENT_RULES・恒久incident全文と8/28意味設計§9.2/9.4／u289／u307を照合。System Contextの新freshnessは認定せず、許可済み原典直接参照を継続。
 
 実本文・検査内訳は正本06／API handoff u308、再開はweekly§5.6.58。
+
+
+## 2026-10-17 u309 — 現在回答のReception欠落を修復
+
+理由付き満足と別received経験に「今は嬉しい」と答えた際、意味・Observationに残る現在回答がReceptionから消える不整合を、既存Planのretention選択36行で修復。理由三点・元received・現在回答を既存3 Moveで保持する。現在回答を元反応の訂正や未明示の変化へ変えない。source stateの閉包が条件で、mixed PARTIALも受理済み現在回答を保持しPARTIALのまま。u307の当時REVISE専用資格、基本LIMITED、核辺／checkpoint／Observationは不変。Move／aggregateは保持義務の復旧に伴い変化する。
+
+同入力31比較は対象16でReceptionを復旧、対照15の取得全record一致。主回帰 1,246 passed／1 warning（533.21秒）。最終版の全件一括実行：appraisal1,192＋application54。既存retention25・identity1は別にpass、新規16は主回帰内の重複。新reader試験配線の先行失敗2回と中断runは正本u309へ記録し、最終版の全対象再実行と混同しない。実service／隔離SQL23 case・46 DTOと現行RN全文／履歴／再open46件を確認。旧完成本文は非再生成、旧pending／中断checkpointは意味と既存回答・履歴を保持して現行本文へ進む。rootは15種全文と46対応を読解。native stubで実機ではなく、同Work読み取り補助は正式別モデル検証ではない。
+
+STRUCTURE_MAP_DELTA_NONE、既存06／API handoff／07へ同期。理由なし評価＋received＋現在回答は実対照でも欠落が残り、次はこの既存選択を照合する。未成立context・独立行動追加・当時ADD・「安心した」の分類、共有対象／対象外更新、本文説明性・語尾反復、周辺既存4失敗（過去17との対応未確認）・same100・Q1上限・giver帰属・本人実機／正式Product Readも残る。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％を維持。
+
+実本文・閉包・検査内訳は正本06／API handoff u309、再開はweekly§5.6.59。
