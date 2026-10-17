@@ -3669,3 +3669,11 @@ Mashが2026-10-17 16:46:17 JSTにu314限定案を承認した。別received経�
 ### u320 file追跡 — 内側時間主題と旧u319 checkpoint（2026-10-17）
 
 既存source plan／question original plan入口／answer updateの旧意味再導出を修復。製品owner・契約・公開経路の追加はなくSTRUCTURE_MAP_DELTA_NONE。既存`ai/tests/test_cmee_emlis_source_scope_regressions.py`が時間主題・動詞活用／人topic境界・作者禁止reader・旧意味復元を確認する。新規`mashos-api/ai/tests/fixtures/cmee_emlis_u319_temporal_topic_checkpoint_v1.json`はd780c315から取得した4件の完全checkpoint／意味hash／public結果を保持し、旧意味への正確な再導出を検査するfixtureである。現行identity fixtureだけ再導出、歴史fixtureは不変。実測・本文と残件はu320監査と正本06 u320を参照。
+
+
+### u324 file追跡 — 現在感情と本人の理由不明・旧u323 checkpoint（2026-10-18）
+
+- `mashos-api/ai/tests/fixtures/cmee_emlis_u323_feeling_reason_checkpoint_v1.json`：新規。API `a1925d5d761b397aee9f939fc42a1d9305c4a19f` から修正前に取得した4件。原memo、完全checkpoint、public結果、元の核／関係SHA-256を保持。旧UNAVAILABLE2件／LIMITED2件。旧IDへ新しい意味を付け替えない互換検証に使用する。
+- `mashos-api/ai/tests/test_cmee_emlis_source_scope_regressions.py` と `test_cmee_emlis_q3_thread.py`：既存fileの回帰・保存再表示を拡張。
+- 製品変更は既存Plan／HR／surface／Gate／emlis_question／emlis_answer_updateの6owner内。新しい意味型・公開経路・保存schemaは追加しない。STRUCTURE_MAP_DELTA_NONE。
+- 結果・未加工本文・限定範囲：[u324監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u324_FeelingReasonSelfScope_20261018.md)。
