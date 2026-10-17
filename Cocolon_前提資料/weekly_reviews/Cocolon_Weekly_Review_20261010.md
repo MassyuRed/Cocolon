@@ -1428,3 +1428,12 @@ TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3�
 同入力31比較は対象16でReceptionを復旧、対照15の取得全record一致。主回帰 1,246 passed／1 warning（533.21秒）。最終版の全件一括実行：appraisal1,192＋application54。既存retention25・identity1は別にpass、新規16は主回帰内の重複。新reader試験配線の先行失敗2回と中断runは正本u309へ記録し、最終版の全対象再実行と混同しない。実service／隔離SQL23 case・46 DTOと現行RN全文／履歴／再open46件を確認。旧完成本文は非再生成、旧pending／中断checkpointは意味と既存回答・履歴を保持して現行本文へ進む。rootは15種全文と46対応を読解。native stubで実機ではなく、同Work読み取り補助は正式別モデル検証ではない。
 
 STRUCTURE_MAP_DELTA_NONE、既存06／API handoff／07へ同期。理由なし評価＋received＋現在回答は実対照でも欠落が残り、次はこの既存選択を照合する。未成立context・独立行動追加・当時ADD・「安心した」の分類、共有対象／対象外更新、本文説明性・語尾反復、周辺既存4失敗（過去17との対応未確認）・same100・Q1上限・giver帰属・本人実機／正式Product Readも残る。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％を維持。
+
+
+### 5.6.60 u310 — 理由なし評価と現在回答の原反応を保持
+
+u309で残した理由なし評価＋別received＋現在positive回答の欠落を修復。肯定評価では元receivedと現在回答、否定評価では元receivedが落ちる共通原因を、既存Planの選択一箇所（15行追加・7行削除）で修正した。閉じた対象／評価2核1辺と残る3核2辺を証明し、満足／納得・正負・時点・程度・継続を保つ。reasoned／unfinished markerを持つ三点をplain二点へ縮めない。既存LIMITED・基本内容型・核辺／checkpoint／Observationは維持、Move／aggregateは保持義務の復旧に伴い変化する。PARTIALは未解釈部分を残して同状態を維持。
+
+主回帰 1,271 passed／1 warning（527.94秒）。最終版の全件一括実行：appraisal1,217＋application54。別途retention25・identity1 pass、新規25は主回帰と重複。旧新39例は22変更17同一、checkpoint取得37例の意味・状態・Observationは不変。共有対象例は質問なし、二評価例は旧新ともcapacity例外であり成功へ数えない。実service29 case／58 DTOと現行RN全文・全履歴・再open58件を確認。旧完成非再生成、旧pending／中断checkpointは旧本文・意味・回答・operation・既存履歴を保って現行本文へ進む。rootは27種全文と58対応を読解。native stubで実機ではなく、同Work読み取り補助は正式別モデル検証ではない。
+
+STRUCTURE_MAP_DELTA_NONE、06／API handoff／07へ同期。今回のplain欠落は修復済みだが、更新後の評価復唱・語尾反復、初回説明性は残る。次は未成立context＋満足＋別received＋現在回答の三点を保持する既存選択を照合する。独立行動追加・当時ADD・安心した分類・共有対象／複数評価容量・その他対象外更新、既存周辺4失敗（過去17との対応未確認）・same100・Q1上限・giver帰属・実機／正式Product Readも残る。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％を維持。
