@@ -40979,3 +40979,21 @@ STRUCTURE_MAP_DELTA_NONE。正本06／API handoff／07へ同期。次は実対�
 保持修復は実装済み。次は追加回答後の未変更理由付き満足が「理由への注意」に戻る課題。既存u307はREVISE限定のため、現在／当時×肯定／否定の一回答ADDへ局所経験資格を追加する未承認案を06／API handoff u314・weekly§5.6.64へ記録。原5核3辺・round1完全RESOLVED・原claim失効0とsource再導出を要求し、全体LIMITED／意味／Observation・元反応／回答・u307は維持。新資格は未実装、次の一作業はRule18§11.3の限定追加承認の確認。
 
 TECHNICAL_CREDIT／PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false、Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠・管理評価53.25％を維持。本文自然さ・反復と既存周辺失敗等は残る。
+
+## u315 — 追加回答後も理由付き満足を経験として保持（2026-10-17 JST）
+
+Mashが2026-10-17 16:46:17 JSTにu314限定案を承認した。別received経験への一度の追加回答（現在／当時×肯定／否定）後も、未変更の理由・対象・満足を満足Moveの局所経験内容として保持する。全体LIMITED・aggregate・意味核辺・checkpoint・Observation・元反応／回答本文は不変。旧u307の当時肯定REVISE資格を維持する。
+
+原required5核3辺・一意な原source2出現、独立した理由三点／received二点、round1・各回答1・RESOLVED・ADD exact1、原失効0・原核辺不変、追加回答核1／ABOUT1辺を出典から検証する。accepted／changed／evidence・subject・時点bindingと全required被覆、肯定3／否定2 Movesのtarget／support／evidenceを照合。現在のanchorも原本envelopeとし、時点証拠を回答へ結ぶ。PARTIAL・unknown・history/frame／legacy・複数／後続回答・共有対象・余剰材料・plain／unfinished・他更新は新資格外。
+
+`STRUCTURE_MAP_DELTA_PRESENT`。既存private V1三型を再利用し、field／schema／manifest／validatorは変更しない。`emlis_answer_update.py`のREVISE証明、作者／有限reader、公開API／DTO／DB／RN、各上限、新file／依存、01B/C・Piece/Analysisの責務は不変。完成済み保存本文は非再生成、未完成current checkpointは同じ受理意味・operation・既存履歴を保って現行本文へ再開する。
+
+主回帰 1,497 passed／1 warning（855.50秒）。最終sourceの全件一括実行：appraisal 1,443＋application 54。追加92検査を含み、個別検査の成功数は重複加算しない。
+
+101比較は対象60（必須48＋語／時点変種8＋程度4）だけの局所内容／selected型／Reception／text変更、非対象41は取得全record一致。checkpoint95例の意味・核辺・Move・Observation等は全一致。実service73ケース／RN146 DTO、保存38種全文をrootが読解した。主回帰と境界拒否の詳細は06／API handoff u315を参照。native stubによる合成RNで本人実機の追加確認ではない。
+
+Q3 retainedは12 pass／既存16 failでu314と失敗trace全文がprocess address以外一致。identity1 pass。旧完成4の非再生成、旧pending4／中断checkpoint4の意味・履歴保持を確認。rootは対象28種／保存38種全文と146対応を読解した。同Work補助は正式別model検証へ換算しない。
+
+最新結果は06／API handoff u315、再開順はweekly §5.6.65。今回の追加承認を待ち直さない。説明の長さ・対象／語尾の反復など本文品質は残件。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。
+
+TECHNICAL_CREDIT。10/31管理線・12/18公開目標、Piece/Analysis主枠・管理評価53.25％は維持。

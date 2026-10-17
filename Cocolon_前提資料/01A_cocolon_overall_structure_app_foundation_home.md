@@ -3616,3 +3616,18 @@ u306限定案はMash承認済み。STRUCTURE_MAP_DELTA_PRESENT。新fileなし�
 | ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有ownerのidentityのみ再導出。歴史fixture不変 |
 
 既存emlis_answer_updateの義務証明は読取再利用・未変更。公開API／DB／RN、各上限、01B/C・Piece/Analysis責務、新依存は不変。実本文・保存40 DTO・互換・検証は06／API handoff u307、意味契約は05／8/28設計u307、次作業はweekly§5.6.57。PRODUCT_NOT_CLEAR・正式0/3・candidate_ready=false・automatic_progression=false・未配置。
+
+## u315 — 追加回答後も理由付き満足を経験として保持（2026-10-17 JST）
+
+Mashが2026-10-17 16:46:17 JSTにu314限定案を承認した。別received経験への一度の追加回答（現在／当時×肯定／否定）後も、未変更の理由・対象・満足を満足Moveの局所経験内容として保持する。全体LIMITED・aggregate・意味核辺・checkpoint・Observation・元反応／回答本文は不変。旧u307の当時肯定REVISE資格を維持する。
+
+| 既存path（mashos-api） | 今回の責務差分 |
+| --- | --- |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py | `_retained_reasoned_add_duties`で限定ADDを実sourceから証明。旧REVISE資格と併存させ、既存局所content／carrierへ接続。全source／selected再導出を維持 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py | Eligibilityの説明docstringのみ訂正後から限定別更新へ整合。型／field／validatorは不変 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | ADD48、独立時点／程度、原意味不変、除外、再封印／source改変拒否、作者禁止finite reader |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行runtime owner identityのみ再導出。language identityと歴史fixtureは不変 |
+
+`STRUCTURE_MAP_DELTA_PRESENT`。既存private V1三型を再利用し、field／schema／manifest／validatorは変更しない。`emlis_answer_update.py`のREVISE証明、作者／有限reader、公開API／DTO／DB／RN、各上限、新file／依存、01B/C・Piece/Analysisの責務は不変。完成済み保存本文は非再生成、未完成current checkpointは同じ受理意味・operation・既存履歴を保って現行本文へ再開する。
+
+最新結果は06／API handoff u315、再開順はweekly §5.6.65。今回の追加承認を待ち直さない。説明の長さ・対象／語尾の反復など本文品質は残件。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。

@@ -19,7 +19,7 @@ current_product_read_state: "EVALUATED_NON_PASS_VISIBLE_RESPONSE_QUALITY_INSUFFI
 candidate_ready: false
 ---
 
-> 2026-10-14 u253：明示評価＋独立行動の承認済み限定実装WIP。最新責務差分は末尾。未配置・商品NOT_CLEAR、保存済み本文readと合成RN表示のみ確認。
+> 2026-10-17 u315：追加回答後の未変更理由付き満足を保持する限定資格はMash承認済み。最新責務差分は末尾u315、実装・検証結果は正本06／API handoff u315を参照。未配置・商品NOT_CLEAR。
 
 
 ## 2026-10-10 — 本人実機の本文表示を確認、内容品質は不合格
@@ -1530,3 +1530,15 @@ STRUCTURE_MAP_DELTA_PRESENT。既存3 production ownerと互換fixtureの地図�
 Mash承認済みu306を既存6 ownerへ実装。理由・対象・満足の未変更三点を、別received反応の一度の当時肯定訂正後も局所経験内容として満足Moveへ結ぶ。全体LIMITED／aggregate／核辺／checkpoint・二Move・Observationは維持。新private Eligibility／Content／selected carrierを加え、sourceと全aggregateを再導出して付替えを拒否。作者・有限readerは既存経験文法を共用する。
 
 STRUCTURE_MAP_DELTA_PRESENT。正確なpath別責務は01A u307、意味／private契約は05と8/28設計u307、実本文・保存／再表示40 DTOと回帰は06／API handoff u307。完成済み本文は非再生成、未完成current checkpointは同じ意味・受理操作・event／旧履歴を保って現行本文へ再開する。新file／依存／公開API／DB／RNの変更なし。01B/CとPiece/Analysisの責務は不変。次はweekly§5.6.57を参照し、承認済み限定変更を再承認へ戻さない。PRODUCT_NOT_CLEAR・正式0/3・candidate_ready=false・automatic_progression=false・未配置。
+
+## u315 — 追加回答後も理由付き満足を経験として保持（2026-10-17 JST）
+
+Mashが2026-10-17 16:46:17 JSTにu314限定案を承認した。別received経験への一度の追加回答（現在／当時×肯定／否定）後も、未変更の理由・対象・満足を満足Moveの局所経験内容として保持する。全体LIMITED・aggregate・意味核辺・checkpoint・Observation・元反応／回答本文は不変。旧u307の当時肯定REVISE資格を維持する。
+
+原required5核3辺・一意な原source2出現、独立した理由三点／received二点、round1・各回答1・RESOLVED・ADD exact1、原失効0・原核辺不変、追加回答核1／ABOUT1辺を出典から検証する。accepted／changed／evidence・subject・時点bindingと全required被覆、肯定3／否定2 Movesのtarget／support／evidenceを照合。現在のanchorも原本envelopeとし、時点証拠を回答へ結ぶ。PARTIAL・unknown・history/frame／legacy・複数／後続回答・共有対象・余剰材料・plain／unfinished・他更新は新資格外。
+
+`STRUCTURE_MAP_DELTA_PRESENT`。既存private V1三型を再利用し、field／schema／manifest／validatorは変更しない。`emlis_answer_update.py`のREVISE証明、作者／有限reader、公開API／DTO／DB／RN、各上限、新file／依存、01B/C・Piece/Analysisの責務は不変。完成済み保存本文は非再生成、未完成current checkpointは同じ受理意味・operation・既存履歴を保って現行本文へ再開する。
+
+101比較は対象60（必須48＋語／時点変種8＋程度4）だけの局所内容／selected型／Reception／text変更、非対象41は取得全record一致。checkpoint95例の意味・核辺・Move・Observation等は全一致。実service73ケース／RN146 DTO、保存38種全文をrootが読解した。主回帰と境界拒否の詳細は06／API handoff u315を参照。native stubによる合成RNで本人実機の追加確認ではない。
+
+最新結果は06／API handoff u315、再開順はweekly §5.6.65。今回の追加承認を待ち直さない。説明の長さ・対象／語尾の反復など本文品質は残件。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。

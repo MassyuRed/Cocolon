@@ -1,5 +1,7 @@
 # Cocolon / CMEE Stage1
 
+> 2026-10-17 u315：追加回答後の未変更理由付き満足を保持する限定資格はMash承認済み。最新責務差分は末尾u315、実装・検証結果は正本06／API handoff u315を参照。未配置・商品NOT_CLEAR。
+
 > 2026-10-14 u253：末尾「承認済み限定変更」が§5.2.1／§8.2〜8.4／§9.3の初回範囲だけを更新する。§9.2の品質条件は緩和しない。実装WIP、商品NOT_CLEAR。
 ## Emlis入力差分保持型意味決定 — 華恋最終技術設計・実装順
 
@@ -3552,3 +3554,17 @@ Mashの2026-10-17 11:25:59 JST承認でu306を実装。原5required核／3辺・
 局所内容は初回NORMAL型やu294exact2型を継承・流用しない。既存content／decision検査は保持、現行論理契約manifestへ二型を追加し74→76。新型は非公開で保存せず、公開API／DTO／DB／RN／意味checkpoint schemaは不変。唯一の既存作者・独立有限readerが選択された三点内容にだけ既承認の経験文法を使う。received訂正文、全required義務、未知、Observationは不変。
 
 完成済み保存本文はGET/start／再送時に非再生成。本文未完成current checkpointは意味を保持して現行本文へ再開し、既存意味／ANSWER events・operation／旧OBSERVATIONを保持する。旧文面の世代固定を意味checkpointに持たせない。詳細と実測は06／API handoff u307。PRODUCT_NOT_CLEAR、正式0/3・candidate_ready=false・automatic_progression=false。
+
+## u315 — 追加回答後も理由付き満足を経験として保持（2026-10-17 JST）
+
+Mashが2026-10-17 16:46:17 JSTにu314限定案を承認した。別received経験への一度の追加回答（現在／当時×肯定／否定）後も、未変更の理由・対象・満足を満足Moveの局所経験内容として保持する。全体LIMITED・aggregate・意味核辺・checkpoint・Observation・元反応／回答本文は不変。旧u307の当時肯定REVISE資格を維持する。
+
+原required5核3辺・一意な原source2出現、独立した理由三点／received二点、round1・各回答1・RESOLVED・ADD exact1、原失効0・原核辺不変、追加回答核1／ABOUT1辺を出典から検証する。accepted／changed／evidence・subject・時点bindingと全required被覆、肯定3／否定2 Movesのtarget／support／evidenceを照合。現在のanchorも原本envelopeとし、時点証拠を回答へ結ぶ。PARTIAL・unknown・history/frame／legacy・複数／後続回答・共有対象・余剰材料・plain／unfinished・他更新は新資格外。
+
+`RetainedReasonedExperienceEligibilityV1`／`RetainedReasonedExperienceContentV1`／`SelectedRetainedReasonedExperienceDecisionV1`の既存fieldsをそのまま用い、局所三basis／三qualifier／二contributionと二方向関係を結ぶ。基底EmlisAppraisalContent、全体LIMITED／ATTENTION／ATTEND_TO／focalなしは維持。source replayでprepared／Plan全体を照合し、旧aggregateから全selectedを再導出して再封印されたforeign Move／checkpoint／aggregateも拒否する。新型・新schema・論理契約manifestの増分は0、契約validatorの弱化は0。
+
+`STRUCTURE_MAP_DELTA_PRESENT`。既存private V1三型を再利用し、field／schema／manifest／validatorは変更しない。`emlis_answer_update.py`のREVISE証明、作者／有限reader、公開API／DTO／DB／RN、各上限、新file／依存、01B/C・Piece/Analysisの責務は不変。完成済み保存本文は非再生成、未完成current checkpointは同じ受理意味・operation・既存履歴を保って現行本文へ再開する。
+
+101比較は対象60（必須48＋語／時点変種8＋程度4）だけの局所内容／selected型／Reception／text変更、非対象41は取得全record一致。checkpoint95例の意味・核辺・Move・Observation等は全一致。実service73ケース／RN146 DTO、保存38種全文をrootが読解した。主回帰と境界拒否の詳細は06／API handoff u315を参照。native stubによる合成RNで本人実機の追加確認ではない。
+
+最新結果は06／API handoff u315、再開順はweekly §5.6.65。今回の追加承認を待ち直さない。説明の長さ・対象／語尾の反復など本文品質は残件。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。
