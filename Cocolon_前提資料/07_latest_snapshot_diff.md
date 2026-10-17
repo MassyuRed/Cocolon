@@ -40997,3 +40997,18 @@ Q3 retainedは12 pass／既存16 failでu314と失敗trace全文がprocess addre
 最新結果は06／API handoff u315、再開順はweekly §5.6.65。今回の追加承認を待ち直さない。説明の長さ・対象／語尾の反復など本文品質は残件。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。
 
 TECHNICAL_CREDIT。10/31管理線・12/18公開目標、Piece/Analysis主枠・管理評価53.25％は維持。
+
+
+## u316 — 選択済みreceived経験を本人の経験として直接述べる（2026-10-17 JST）
+
+既存NORMAL component／承認済みretained LIMITED local pairのreceived文を、作者の受容説明から本人の過去経験を直接述べる文へ修復。「褒められたことだけでは言い表せない、嬉しさが伴わなかったあなたの経験として受け取りました。」を「褒められたことは、あなたにとって嬉しさを伴わない経験だったのですね。」へ変更した。10〜11字短くし、受容説明を一つ減らす。作者と有限readerの2owner内だけの変更で、新旧完全文法を同じ元sourceへ逆読取する。SELF・past・対比、資格／意味選択・Plan／Move／aggregate／checkpoint・Observation、u315 ADD保持、型／schema／API／DB／RN・上限・依存は不変。
+
+主対象1,497固有test node（appraisal1,443＋application54）の成功を最終製品source上で確認。一括全件passのrunではなく、3分割初回1,371 pass／35 fail／91 skip後、旧文面期待値と作者禁止配置等の検査修正36件、環境設定済みapplication54件・appraisal保存38件を再実行して全pass。collectionとの被覆を照合し重複は加算しない。詳細は正本06／API handoff u316。Q3 retainedは12 pass／既存16 fail、u315と失敗trace全文がprocess address以外一致。現行identity1 pass。
+
+旧新68例は初回30＋保持後16の46例でReception／textだけ変更、22例は取得全record一致。checkpoint66例の意味・選択・状態等は不変。polite received先頭・同一欄の6例は既存の一般化／欠落／停止が残り、unfinished2例は本文なしのSTOPで成功に数えない。実service／ローカルPGlite59case・現行RN86DTO、旧完成非再生成と旧pending／中断checkpointの意味・operation・履歴保持を確認。rootは旧新28種／保存37種全文と全対応を読解。native stubで本人実機ではなく、同Work補助は正式別model検証ではない。
+
+STRUCTURE_MAP_DELTA_NONE。既存owner内の文面変更で全体図・全file地図／current_structureの責務差分なし。全体設計・01A/B/C・current・最新weeklyを確認済み、System Context prepareは設定先repo不在のため原資料直接確認へ切替えた。06／API handoff／07・weekly§5.6.66へ同期。
+
+次は同一欄で「誘われたのに、悲しかったです。」が先頭になる6例について、後続plain／reasoned／unfinished評価のsource所有と既存選択を照合し、内容欠落の原因を優先する。bare形・別欄・逆順と比較し、既存契約の修復範囲を確定する。新意味資格は無断拡張しない。満足側の長さ・「経験」／「のですね」反復、Observation重複、当時肯定ADDの対象反復、対象外更新・既存周辺失敗・same100・Q1上限・giver帰属・本人実機／正式Product Readは未解消。
+
+TECHNICAL_CREDIT／PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false、Draft/open/unmerged・未配置。10/31管理線・12/18公開目標、Piece/Analysis主枠・管理評価53.25％を維持。
