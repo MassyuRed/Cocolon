@@ -18960,3 +18960,16 @@ Emlisから：
 詳細な変更path・対象除外・実旧本文・identity・環境・途中失敗はAPI既存handoff u302。APIは既存3 production owner・test・現行identity・handoffの6 file、資料側は本06・07・weeklyの3 fileのみ。新schema・service・依存・DB／RN変更なし。STRUCTURE_MAP_DELTA_NONE：既存adapter／作者／独立reader責務の内側で、全体01・01A/B/C・current_structureの配置・所有責務を変えない。同Work read-only補助reviewはblockingなしだが、別Pro/Ultraの正式二重検証ではない。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。次は訂正後Receptionの選択内容とreceived経験の欠落を意味側から照合する。初回限定承認を回答後へ流用しない。初回の内容／反復、共有対象／対象外更新、既存周辺4失敗（過去共有17と集合一致未確認）、same100、Q1上限、giver帰属、本人実機・正式Product Readは残る。前回補助RN suiteと周辺4は今回再実行していない。10/31・12/18、Piece/Analysis主枠、管理評価53.25％は維持する。
+
+
+## u303 — 肯定訂正後のreceived応答義務欠落を既存LIMITEDで修復（2026-10-17 JST）
+
+u302の対象入力で別received反応を「嬉しかった」に訂正すると、同じlived_change familyの代表選択で未成立三点だけが残り、received経験がReceptionから消えていた。u291同様、Rule18 §11.3 LEVEL2の既存応答義務保持として、answer_update一つのownerに限定して修復。単一明示訂正・原時点・非legacy・RESOLVED、元required五点／三辺・二つの独立原文span・giver所有・更新refs・現形の一意性を証明し、未成立三点→肯定回答の2 dutiesを既存overrideへ渡す。既存generic partition／作者／独立readerを使い、u300/u301初回限定NORMAL資格・schema・公開契約は拡張しない。
+
+意味checkpoint・核・関係・Observationは不変。response_plan／selectedとReception／trace／IDは変わる。既存LIMITEDのまま、実保存Receptionは「結論は出ていないという点と、考えを言葉にできたことへの当時の満足との対比に目を向けています。褒められたことについて、その時は嬉しかったのですね。」となった。元received eventはABOUTの文脈として回収し、旧negative contrastを復活させない。初回の二つの独立NORMAL内容を回答後へ移したとは扱わない。
+
+主回帰1,082件：1,082 passed, 1 warning in 411.08s (0:06:51)、失敗0／skip0。identity1 pass・fixture不変。6配置×2時点×初回／訂正／未知の36旧新比較で、対象12の上記変更と対照24完全不変を確認。周辺6対照も全record不変。実service／隔離SQLで旧保存非再生成・旧更新checkpoint retryを含む14 case／28 DTO、現行RNの全文／履歴／再表示28件を確認（native stub）。rootは全保存本文9種類と28 DTOの対応を読解。最初の局所3失敗は既存分類・初回質問資格を誤認したテスト前提を修正し、実装scopeを広げず、新15件pass後の最終主回帰は上記。詳細・全文・独立reader試験条件はAPI handoff u303。
+
+STRUCTURE_MAP_DELTA_NONE：answer-update内の既存response selection責務の修復。新file／schema／公開API／DB／RN／依存変更0。既存一時runtimeを再利用し、同Work補助を正式な別モデル検証としない。System Context binding不足に対する許可済み原典直接参照を継続。
+
+欠落解消は技術的前進だが、対比説明と明示回答の受け止めに留まり、初回の内容形成・受容反復・引用説明調は未解消。次は「未成立なし満足＋肯定訂正」の本文停止と「理由付き満足＋肯定訂正」のreceived欠落を実全文から照合する。`安心した`は既存value/fact分類で本修復対象外。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。既存周辺失敗・same100・Q1上限・giver帰属・本人実機／正式Product Read、10/31・12/18、Piece/Analysis主枠、管理評価53.25％は維持。
