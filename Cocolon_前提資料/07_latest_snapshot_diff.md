@@ -40892,3 +40892,18 @@ u306限定案は2026-10-17 11:25:59 JSTのMash明示承認により実装済み�
 同入力32比較は対象13の満足文だけ改善、非対象19の取得全recordと全32の核辺／checkpoint／aggregate／Observationは不変。主回帰 1,229 passed／1 failed／1 warning（546.37秒）。失敗は現行manifest件数の旧期待値74で、76と新二型登録の検査へ更新後、当該1項目は1 passed（8.40秒）。同一製品sourceで異なる1,230項目を確認（appraisal1,176＋application54）。全件一括再実行はせず、期待値修正箇所だけ再検査。identity1 pass。実service20 case／40 DTO・RN本文／全履歴／close-reopen40件、旧完成非再生成・未完成current checkpointから意味と回答を増やさず新本文へ再開を確認。互換6case再確認は重複加算しない。rootは保存11種全文と全40対応を読解。native stubで本人実機ではなく、同Work補助を別モデル正式検証としない。
 
 STRUCTURE_MAP_DELTA_PRESENT、全体01／01A／current01/04・schema05・8/28設計・06／API handoff同期。u306の承認待ちは履歴となる。次は理由三点と別経験を保つ初回／訂正後本文の説明性・反復の共通原因。現在回答・安心した分類・共有対象／対象外更新、既存周辺4失敗・same100・Q1上限・giver帰属・本人実機／正式Product Readは残る。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％は維持。
+
+
+## 2026-10-17 u308 — 理由付き満足の直接的な受容
+
+u307からの残件として、理由・対象・本人内の充足を保持する文が「受け取ったのは……経験です」という長い説明構文になる箇所を修復。既存作者と有限readerの2 ownerだけで、対象に結びついた本人内の感覚を主節へ直接置いた。初回の単独／別received／共有対象と、u307限定資格の肯定訂正後で共用する。意味資格・private契約・全体LIMITED／aggregate・二Move・核辺・checkpoint・Observationは不変。理由→満足を行動→客観的結果の因果へ変えない。旧完全2文法の独立読解も維持した。Rule18の既存契約内修復、STRUCTURE_MAP_DELTA_NONE。
+
+同じ32入力は対象25（初回12＋肯定訂正12＋程度付き1）の満足文だけ変化、対象外7は取得全record不変。全32の核辺／checkpoint／Move／aggregate／Observation／statusは一致。主回帰は **1 failed, 1229 passed, 1 warning in 558.44s (0:09:18)**。残った1失敗は旧表面句「満たされた感覚があった経験」の期待値で、対象・理由・時点・感覚を保つ新主節への期待へ直し、当該1項目は **1 passed, 1175 deselected, 1 warning in 11.77s**。製品sourceは全run開始後に変えていない。異なる1,230項目を確認（appraisal1,176＋application54）、全件一括の再実行はしていない。先行target20 passは主回帰との重複、identity1 passは別。既存Pydantic非推奨警告1を保持。
+
+実service／隔離SQL20 case・40 DTO、現行RNの本文／全履歴／close-reopen40件を確認。完成済み旧本文は非再生成。旧質問への回答では元の保存本文を残して現行本文を生成し、未完成checkpoint retryでは意味・ANSWER／MEANING_UPDATE・operation・旧OBSERVATIONを保って再開する。rootは保存13種類の全文と全40対応を読解した。native部品stubで本人実機・正式Product Readではなく、同Work補助を正式Pro／Ultra二重検証としない。
+
+説明構文は除いたが、本人内の充足の説明自体や、肯定訂正後の二文で「のですね」が続く反復は残る。文型の交換を§9.2/9.4全体の完成や商品合格へ換算しない。次は、既に実測済みの「今は嬉しい」という現在回答がObservationには残りReceptionから消える欠落を、現在時点と元received反応の独立性を保つ既存意味・選択から照合する。単なる語尾の再交換を次作業にしない。安心した分類・共有対象／対象外更新、周辺既存4失敗（過去共有17との集合一致未確認）・same100・Q1上限・giver帰属・本人実機／正式Product Readも残る。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％は維持。全体設計01・全file地図01A/B/C・current01/04・最新weekly・Rule18／CURRENT_RULES・恒久incident全文と8/28意味設計§9.2/9.4／u289／u307を照合。System Contextの新freshnessは認定せず、許可済み原典直接参照を継続。
+
+実本文・検査内訳は正本06／API handoff u308、再開はweekly§5.6.58。
