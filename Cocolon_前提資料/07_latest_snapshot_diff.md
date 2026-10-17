@@ -40955,3 +40955,16 @@ u311で残した現在negative回答と評価併存による原反応欠落を�
 STRUCTURE_MAP_DELTA_NONE、06／API handoff／07へ同期。次は当時ADD「その時は嬉しかった」で元反応と回答がReceptionから消える欠落を、現在／訂正と区別した既存保持義務から照合する。長い説明・満足重複・語尾反復・初回内容形成、独立行動追加・安心した分類・共有対象／複数評価容量、既存周辺4／過去17とQ3既存16失敗の対応、same100・Q1上限・giver帰属・本人実機／正式Product Readは残件。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％を維持。
 
 実本文・境界・検証内訳は正本06／API handoff u312、再開はweekly§5.6.62。
+
+
+## 2026-10-17 u313 — 当時positive ADDと評価併存の原反応・追加回答を保持
+
+u312の次作業として、評価併存時に当時positive ADD「その時は嬉しかった」で落ちる元反応・追加回答を修復。既存Plan一箇所（10行追加・4行削除）で現在条件を同値保持し、positive・past・exact original_occasionだけを既存received／ABOUT保持へ接続。評価閉包と残余3核2辺・再帰exact2・全被覆を保ち、評価／元反応／追加回答を既存3 Moveへ残す。ADDをREVISEや現在変化に変えず、当時negativeは対象外。意味・核辺・checkpoint・Observation・LIMITEDと基本内容型、作者／reader・schema・上限・公開API／DB／RN・依存は不変。
+
+主回帰 1,366 passed／1 warning（577.91秒）。最終sourceの全件一括実行：appraisal 1,312＋application 54。追加39検査は主回帰と重複、現行identity1 pass。Q3 retainedは12 pass／16 failで、u312と失敗assertion／trace全文がpath・process addressを除いて一致。57比較は対象31で欠落復旧、対照26は取得全record一致、checkpoint54件不変。content型は基本型を維持しdecision数は増える。共有対象の質問なし、独立行動／二評価の初回unavailableを成功へ数えない。
+
+実service44case／88DTOと現行RN全文・元入力・全履歴・再open88件を確認。旧完成は欠落も含め非再生成、旧pending／中断checkpointは意味・回答・operation・既存履歴を保持。rootは保存31種類の全文と88対応を読解。native stubで本人実機ではなく、同Work読取り補助は正式別model検証ではない。有限answer readerの作者禁止と全文inverseの検証範囲を分ける。保存timeline追加照合の誤キーidはevent_idへ直して同44caseの一致を確認。
+
+STRUCTURE_MAP_DELTA_NONE。正本06／API handoff／07へ同期。次は実対照で欠落した当時negative ADD「その時は悲しかった」の原反応保持を、既存の同対象・同時点保持義務から照合する。説明性・満足重複・語尾反復・初回内容形成、対象外更新、既存周辺失敗、same100・Q1上限・giver帰属・本人実機／正式Product Readは残件。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false、Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％を維持。
+
+実本文・検証内訳は正本06／API handoff u313、再開はweekly§5.6.63。
