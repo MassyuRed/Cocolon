@@ -3580,3 +3580,21 @@ STRUCTURE_MAP_DELTA_PRESENT。新production fileはなく、既存3 ownerの責�
 資格／closureの二ownerだけでは二つの反応がgeneric scopeで衝突したため、既存source projectionの意味領域保持も必要になった。新source文法・作者分岐・schema／型／registry／上限は追加しない。意味境界は8/28設計u301／05、全18本文比較と29保存DTO・失敗履歴は06／API handoff u301、次はweekly§5.6.51。全体01・current01/04へ同期し、RN→API→service/store→保存read→RN、01B/C・Piece/Analysis・依存の責務は不変。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。NORMALや回帰成功を商品合格へ換算しない。
+
+
+## u305 — received先行の理由三点認識と限定旧source復元owner（2026-10-17 JST）
+
+STRUCTURE_MAP_DELTA_PRESENT。既存SELF received先行証明を、同一文に閉じた承認済み理由・対象・満足の三点へ接続する。新production fileはなく、既存3 ownerの責務差分である。
+
+| mashos-api相対path | u305の責務差分 |
+| --- | --- |
+| ai/services/ai_inference/emlis_ai_grounded_observation_plan.py | 単一の本人received先行文によるSELF継続を既存理由三点へ接続。private `legacy_received_reason_context` 指定をtyped projectionへ伝搬し、直接final builderの既定は旧認識（true）を維持する。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py | fresh threadでは新認識（旧指定false）を明示。旧source世代の再導出では旧指定trueを選び、旧Q1で使うsource認識を保持する。 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py | 完全旧checkpointの限定旧source再導出を追加し、他欄の現行認識能力を保持する。旧IDへ新意味を貼らず、既存の全体一致検証を通す。 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 理由付きの同欄received先行、SELF／三点所有、旧source復元と質問／保存境界を既存回帰へ追加する。 |
+| ai/tests/fixtures/cmee_emlis_pre_reason_received_context_v1.json | 未変更API `5f710c21c065db373ede844106670f7fb41b365d` から取得した合成互換証拠。有効13 rowと、質問未発行で回答を作成できなかった1 attemptを分離して保持する。 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行sourceの共有owner identityを再導出する。歴史fixtureは変更しない。 |
+
+旧checkpoint保存済みの再試行は完全旧解釈、完成済み保存本文は非再生成とする。旧質問と現行質問が全体一致し回答checkpointが未保存の場合は旧版を識別できないため、現行source全体を再検証して新checkpointを作る既存動作を維持する。
+
+意味schema・Move資格・NORMAL資格・作者／reader・公開API／DB／RN・依存とRN→API→service/store→保存read→RNの責務は不変。全体01／current01/04、実本文と検証は06／API handoff u305、次作業はweekly§5.6.55を参照。次は訂正後に未変更の理由付き満足が「理由への注意」へ弱まる内容欠落を意味選択から照合する。PRODUCT_NOT_CLEAR、初回一体単位未完了・正式受入0/3・candidate_ready=false・automatic_progression=false・未配置／未マージを維持する。

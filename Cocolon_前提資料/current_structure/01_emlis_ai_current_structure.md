@@ -1514,3 +1514,12 @@ STRUCTURE_MAP_DELTA_PRESENT。既存4 production ownerと新合成fixtureの正�
 STRUCTURE_MAP_DELTA_PRESENT。正確な実file責務は01A u301、意味境界は8/28設計u301／05、実本文・回帰・旧保存互換・29 DTO保存再表示は06／API handoff u301、再開はweekly§5.6.51。新file／型／schema／registry／上限は0。RN→API→service/store→保存read→RN、01B/CとPiece/Analysisの責務は不変。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。NORMALや回帰成功を商品合格へ換算しない。
+
+
+## u305 — 同欄received先行の理由付き満足を既存三点へ保持（2026-10-17 JST）
+
+単一の本人received文に続く理由付き満足へ、既存のSELF継続証明を接続する。理由・対象・肯定無程度の満足と各時点を、承認済みの三点／二関係として保持する。理由は満足にだけ結び、先行receivedの理由や二経験間の因果に読み替えない。fresh threadは新sourceを使い、直接builderの旧既定と旧Q1本文経路を維持する。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存3 production ownerと互換fixtureの地図は01A u305。旧checkpoint保存済みの再試行は他欄の能力を保った完全旧sourceから復元し、完成済み保存本文は再生成しない。旧質問と現行質問が全体一致し回答checkpointが未保存なら旧版を識別できないため、既存どおり現行source全体を再検証して新checkpointを作る。意味schema・Move資格・NORMAL資格・作者／reader・公開API／DB／RN・依存・Piece/Analysisの責務は不変。
+
+実本文・検証・互換の詳細は06／API handoff u305、再開順はweekly§5.6.55。次は訂正後に未変更の理由付き満足が「理由への注意」へ弱まる内容欠落を意味選択から照合する。PRODUCT_NOT_CLEAR、初回一体単位未完了・正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持し、認識欠落の修復を§9.2/9.4全体の完成へ換算しない。

@@ -1541,3 +1541,12 @@ STRUCTURE_MAP_DELTA_PRESENT。既存4 production ownerと新合成fixtureの正�
 STRUCTURE_MAP_DELTA_PRESENT。正確な実file責務は01A u301、意味境界は8/28設計u301／05、実本文・回帰・旧保存互換・29 DTO保存再表示は06／API handoff u301、再開はweekly§5.6.51。新file／型／schema／registry／上限は0。RN→API→service/store→保存read→RN、01B/CとPiece/Analysisの責務は不変。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。NORMALや回帰成功を商品合格へ換算しない。
+
+
+## u305 — 理由三点への既存SELF継続接続とsource世代の分離（2026-10-17 JST）
+
+既存source認識のSELF received先行証明を、承認済み理由・対象・満足の三点へ接続した。理由の有限語形・三点所有・二関係・意味schema・Move資格・NORMAL資格を追加変更せず、同欄順序で落ちていた理由三点をfresh threadへ保持する。`legacy_received_reason_context` はsource再導出を選ぶprivate指定であり、新しい意味内容型や公開契約ではない。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存grounded plan／question／answer updateの3 ownerと検査の配置は01A u305。直接builderは旧認識を既定に保ち、fresh threadだけ新認識を明示する。完全旧checkpointを再導出する際はこの接続だけを旧指定に戻して他欄の現行能力を保持し、旧Q1本文経路を維持する。旧checkpoint保存済みretryは完全旧解釈、完成済み保存本文は非再生成。旧質問と現行質問が全体一致し回答checkpointが未保存なら旧版を識別できないため、現行source全体の再検証から新checkpointを作る既存動作を保持する。
+
+作者／reader・公開API／DB／RN・依存と01B/C・Piece/Analysisの責務は不変。実本文・検証・互換証拠は06／API handoff u305、次作業はweekly§5.6.55。次は訂正後に未変更の理由付き満足が「理由への注意」へ弱まる内容欠落を意味選択から照合する。PRODUCT_NOT_CLEAR、初回一体単位未完了・正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。

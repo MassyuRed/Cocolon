@@ -40861,3 +40861,18 @@ u303末尾に従い、通常満足＋received肯定訂正後の本文停止と�
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％は維持。
 
 詳細・再開位置：正本06／API handoff u304、weekly §5.6.54。
+
+
+## 2026-10-17 u305 — 同欄received先行の理由付き満足を既存SELF証明へ接続（2026-10-17 JST）
+
+u304次作業を実施。source parserが `reason is None` で前文SELF継続を遮断し、理由三点を一般的な変化／行動へ落としていた。既存の単一received・本人所有証明を既承認の理由三点へ接続し、初回と肯定訂正後の実本文に理由・対象・満足と別経験を保持した。新意味資格／NORMAL資格／作者文法・schema／公開API／DB／RN・依存変更なし。Rule18既存契約内修復。source認識・互換責務と新合成fixtureを全体01／01A／current01/04へ同期、STRUCTURE_MAP_DELTA_PRESENT。
+
+主回帰：**1,209 passed、1 warning、465.77 秒**（appraisal1,155＋application54）。警告は既存Pydantic非推奨警告。identity1 pass。同じ72旧新比較で対象12 record（本文変化8＋不明4の意味変化）のみ変わり、対照60全record一致。未変更u304の旧結果13件を核辺hash・完全checkpoint・全文・questionまで復元。質問未発行で回答を作れない旧試行1は別記し成功へ数えない。実service14 case／28 DTOとRN本文／全履歴／close/reopen28件を確認、rootは8種の全文と全28対応を読解（native stub・本人実機ではない）。途中8失敗の原因と修復／前提訂正は06／API handoff u305へ記録。
+
+保存済み本文は非再生成、旧回答checkpoint retryは旧意味を厳密再導出。一方、旧質問と現行質問が全体一致し回答checkpoint未保存なら旧版識別情報がないため、現行sourceを再検証して新checkpointを作る既存動作となる。両者を混同しない。直接builderと旧Q1の従来経路は保持。
+
+全体設計・全file地図・作業rule・恒久incident・最新weekly確認、System Contextはbinding不存在につき許可済み原典直接参照。次は肯定訂正後に未変更の理由付き満足が「理由への注意」へ弱まる内容欠落を、既存LIMITED・選択済み意味から照合する。初回／訂正後の説明性・受容反復、現在回答・安心した分類・共有対象／対象外更新、既存周辺4失敗・same100・Q1上限・giver帰属・本人実機／正式Product Readは残る。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。同Work補助を別モデル正式二重検証としない。10/31・12/18、Piece/Analysis主枠、管理評価53.25％は維持。
+
+詳細・再開位置：正本06／API handoff u305、weekly§5.6.55。
