@@ -40929,3 +40929,16 @@ u309で残した理由なし評価＋別received＋現在positive回答の欠落
 STRUCTURE_MAP_DELTA_NONE、06／API handoff／07へ同期。今回のplain欠落は修復済みだが、更新後の評価復唱・語尾反復、初回説明性は残る。次は未成立context＋満足＋別received＋現在回答の三点を保持する既存選択を照合する。独立行動追加・当時ADD・安心した分類・共有対象／複数評価容量・その他対象外更新、既存周辺4失敗（過去17との対応未確認）・same100・Q1上限・giver帰属・実機／正式Product Readも残る。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％を維持。
 
 実本文・境界・検証内訳は正本06／API handoff u310、再開はweekly§5.6.60。
+
+
+## 2026-10-17 u311 — 未成立文脈と現在回答の三点保持を修復
+
+u310で残した未成立文脈付き満足＋別received＋現在positive回答の欠落を、既存Plan一箇所（6行追加・2行削除）で修復。既存の厳密三点証明を使い、未成立を理由へ変えず、対象・満足と一つの保持義務にする。残る元反応と現在回答を既存3 Moveへ残す。核辺・checkpoint・Observation・LIMITEDと基本内容型は維持し、選択Move／aggregateだけ復旧に伴い変化する。初回u301・訂正後u307の資格、作者／reader、schema・上限・公開API／DB／RN・依存は不変。
+
+主回帰 1,288 passed／1 warning（547.37秒）。最終sourceの全件一括実行：appraisal1,234＋application54。追加17は主回帰と重複、現行identity1 pass。周辺Q3 retained28件は12 pass／16 failで、変更前も同じ12 pass／16 fail。path・process addressを除く失敗assertion／trace全文が一致し、旧文面等の未解消として保持する。先行25成功集合とは異なるため合算しない。32旧新比較は15変更・17全record同一、checkpoint29件の意味・状態・Observationは不変。独立行動／二評価は初回本文unavailable、共有対象は質問なしで成功へ数えない。
+
+実service22case／44DTOと現行RN全文・元入力・全履歴・再open44件を確認。旧完成本文は非再生成、旧pending／中断checkpointは元入力・旧本文・意味・回答・operation・既存履歴を保持。rootは13種全文と44対応を読解。native stubで本人実機ではない。同Work補助reviewを正式別モデル検証へ数えない。全文inverseと作者禁止の有限unfinished readerの検証範囲を分けた。
+
+STRUCTURE_MAP_DELTA_NONE、06／API handoff／07へ同期。次は比較で欠落した現在negative「今は嬉しくない」の原反応保持を、plain／reasoned／unfinishedと既存negative保持義務から照合する。長い説明・満足重複・語尾反復、独立行動追加・当時ADD・安心した分類・共有対象／複数評価容量、既存周辺4／過去17と今回Q3既存16失敗の対応、same100・Q1上限・giver帰属・実機／正式Product Readは残件。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％を維持。
+
+実本文・境界・検証内訳は正本06／API handoff u311、再開はweekly§5.6.61。
