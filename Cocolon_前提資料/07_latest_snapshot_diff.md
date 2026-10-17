@@ -41048,3 +41048,21 @@ TECHNICAL_CREDIT／PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3�
 原03の本文提供復旧はE04受容品質・E05問い・E06訂正撤回の完了ではない。次は原03のsourceを保持した入力固有の受容、別の主体/時点/願い誤認と同欄REVISE4/WITHDRAW6を一体単位で進める。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmerged。本人実機/本番DB/deploy/mergeは0。10/20判断・10/31管理線・12/18目標・Piece/Analysis主枠・53.25%は不変。
 
 `STRUCTURE_MAP_DELTA_NONE`。実装詳細・最終source・未加工全文・検証の版区分は [u319監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u319_CognitiveFeelingScope_and_ContrastBody_20261017.md) を正とする。
+
+## u320 — 認知内の時間主題で止まる本文を修復（2026-10-17）
+
+最新weekly20261017のE04を追う中で、原03の自然変種「今後は誘ってもらえないかもしれないと考えると寂しい」が本文未提供になることを実測し、既存source契約内で修復した。新規自然変種3件（今後は・そのLIMITED・これからは）は未提供から本文ありへ復帰し、原03は不変。時間主題を内側の可能性の原文範囲へ残し、現在の感情の時点へ漏らさない。「今後も」の「今」だけを外側時点が消費する誤りと、「誘って」の動詞活用を人のtopic「って」とみなす誤りも同じsource ownerで修正した。後者は既存received動詞の受身語彙との活用対応で限定し、任意の漢字名詞を許可しない。
+
+意味型・受容内容契約・作者／reader・Move／aggregate・公開API／DB／RN・質問上限は不変。旧u319 checkpointは今回修復だけを無効にした元意味を完全再導出し、旧IDへの新意味付替えを拒否する。製品変更はsource plan・questionのoriginal plan入口・answer updateの旧意味復元の既存3file。新しい意味型、外部AI、依存、補助systemは追加しない。
+
+最終sourceの一括284件は **264 passed／20 failed／1 warning**（97.07秒）。内訳はscope／本文／旧checkpoint180、Q2/Q3 application54、周辺2file30 pass／20 fail。変更前d780c315で同じ周辺2fileを実行して30 pass／20 fail、20 failed node・102行の例外内容・retained assertion内訳が一致した（checkout path／process addressのみ正規化、trace表示はlong／short差あり）。この20件を成功へ換算せず、従来4／17／16との集合合算もしない。現行identityは別途1 passed／194 deselected。元10初回＋07回答後、固定100の全取得recordはelapsedを除きu319最終と一致し、元10本文10・固定100本文71／未提供29は不変。途中runは最終件数へ足していない。
+
+実EmlisThreadService＋隔離PGliteで7ケース／8 DTO、現行RN hook／Modalのnative stubで8 DTOの全文・元入力・全履歴・close/reopenを確認。新規4件と旧完成原03のGET/startは作者禁止で同一、元入力DB行も不変。旧natural通常失敗はretryを409で拒否し、旧checkpoint中断retryは完全な旧意味・既存events・operationを保った上で旧意味による未提供を維持する。既存失敗の再実行許可へ変えていない。本人実機／本番DB／deploy／mergeは0。
+
+E04の受容は依然として原文両節＋汎用の対比保持であり、今回を受容品質完成としない。scope情報がprivate内容投影で両端保持まで縮まる原因は確認したが、新しい内容armを足すだけで§9.2／§9.4の主観的な受容差分が成立するとは確認できなかった。新armは未実装・未推奨であり、承認待ちの次工程にはしない。同欄更新12件の再現ではREVISE4はreceived経験を落とし、WITHDRAW6は未撤回の行為／理由／未成立contextを受容から落とす。理由付きREVISE2は両経験を保持した。既存18検査の成功はObservation中心で、この10欠落の解消を証明しない。
+
+`STRUCTURE_MAP_DELTA_NONE`（既存owner内の作用域と旧意味再導出。製品経路・意味契約の追加なし）。新しい旧u319 fixtureのみ01Aのfile追跡へ記録した。詳細・実測全文・途中版との区別は [u320監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u320_CognitiveTemporalTopic_20261017.md) を参照。
+
+次は入力固有の受容を、語尾変更やsource分類の表示だけで済ませず、自然変種・訂正／撤回・保存表示まで一体で成立させる。E01の他の主体／時点／願い誤認、E05の問い、E06の上記10欠落、E07 history、E08本人実機、E09既存失敗は未解消。新意味契約が必要な場合は可視内容の差まで具体化して扱い、型追加そのものを次作業にしない。10/20方式判断、10/31管理線・12/18公開目標、Piece／Analysis主枠・管理評価53.25％は不変。
+
+本文提供の修復はtechnical resultであり、PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。同Work補助を正式な別model評価へ換算しない。

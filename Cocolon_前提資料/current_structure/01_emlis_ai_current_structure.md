@@ -1560,3 +1560,7 @@ Mashが2026-10-17 16:46:17 JSTにu314限定案を承認した。別received経�
 既存 `mashos-api/ai/tests/test_cmee_emlis_source_scope_regressions.py` に、主体/推量/時制、NORMAL/LIMITED本文、44本文変異、旧checkpoint全payload・意味digest、既存nominal受容保持を追加。145件。現行identity fixtureのみ更新し、歴史的proofは変更しない。
 
 最新実装・本文・検証は [u319監査](../audits/emlis_ai/Cocolon_EmlisAI_u319_CognitiveFeelingScope_and_ContrastBody_20261017.md)。元10例9→10、固定100は71で全record一致。次は入力固有受容と他の主体/時点誤認、E05/E06。PRODUCT_NOT_CLEAR・初回一体単位未完了・未配置。
+
+### u320 — 認知内時間主題の本文復旧（2026-10-17）
+
+既存source作用域で今後／これからのtopicを内側可能性へ保持し、外側現在感情・人topicとの混同を修復。自然変種3件は本文へ復帰し、元10／固定100の全recordはu319と不変。旧u319 checkpointは今回修復のみ無効にして完全再導出する。STRUCTURE_MAP_DELTA_NONE。意味型／受容内容契約・公開API／DB／RNは不変。受容の汎用性・問い・同欄REVISE4／WITHDRAW6は未解消。新appraisal armは未実装・未推奨で承認待ち工程にしない。本文・検査の版・保存互換は正本06／API handoff u320およびu320監査を参照。
