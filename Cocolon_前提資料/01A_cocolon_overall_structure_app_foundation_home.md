@@ -3677,3 +3677,10 @@ Mashが2026-10-17 16:46:17 JSTにu314限定案を承認した。別received経�
 - `mashos-api/ai/tests/test_cmee_emlis_source_scope_regressions.py` と `test_cmee_emlis_q3_thread.py`：既存fileの回帰・保存再表示を拡張。
 - 製品変更は既存Plan／HR／surface／Gate／emlis_question／emlis_answer_updateの6owner内。新しい意味型・公開経路・保存schemaは追加しない。STRUCTURE_MAP_DELTA_NONE。
 - 結果・未加工本文・限定範囲：[u324監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u324_FeelingReasonSelfScope_20261018.md)。
+
+
+### u325 file追跡 — 選択済み不明対象の受け取り（2026-10-18）
+
+- `mashos-api/ai/tests/fixtures/cmee_emlis_u324_unknown_object_checkpoint_v1.json`：新規。修正前API `0f78a0e25dd74a40aaedb28327658799ee1aa43b` の10件、完全checkpoint・核辺hash・選択内容hash・公開本文・question decisionを凍結。意味不変と参照方式のidentity更新を区別する。
+- 既存Plan／HR／Gate／emlis_answer_update／emlis_thread_source内の修復。ThreadEvidenceSpanResolverは既存qualified evidenceの全fieldを読むread-only methodを追加。意味型・公開API・保存schema・経路は不変、STRUCTURE_MAP_DELTA_NONE。
+- 検査は既存 `test_cmee_emlis_source_scope_regressions.py` に追加。[u325監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u325_UnknownObjectReception_20261018.md)に全文・残件・検証限界を記録。
