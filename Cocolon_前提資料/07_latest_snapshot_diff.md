@@ -40876,3 +40876,10 @@ u304次作業を実施。source parserが `reason is None` で前文SELF継続�
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。同Work補助を別モデル正式二重検証としない。10/31・12/18、Piece/Analysis主枠、管理評価53.25％は維持。
 
 詳細・再開位置：正本06／API handoff u305、weekly§5.6.55。
+
+
+## u306 — 更新後の未変更理由付き満足：限定案まで具体化（2026-10-17 JST）
+
+基準API85bece8／資料8389dc6。u305次作業の修正前32応答を実生成し、満足の経験内容が更新後に注意へ戻る原因を初回限定資格と特定した。新しい更新後局所資格／private内容対応を8/28設計、06、weekly§5.6.56、API handoffへ提案として記録。Rule18 §11.3の追加承認前で製品code/test/fixture変更0、本文改善0。STRUCTURE_MAP_DELTA_NONE。既存承認済みの意味は再確認せず、限定適用の増分だけを判断対象とする。
+
+BLOCKER_NARROWED / DESIGN_PROPOSAL_ONLY / MASH_APPROVAL_PENDING / PRODUCT_NOT_CLEAR。正式0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。前回回帰／保存結果は履歴として保持し、今回の診断件数へ加算しない。

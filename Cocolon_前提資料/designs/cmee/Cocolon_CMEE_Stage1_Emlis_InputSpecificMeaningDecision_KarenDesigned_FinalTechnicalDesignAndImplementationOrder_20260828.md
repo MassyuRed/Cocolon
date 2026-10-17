@@ -3524,3 +3524,16 @@ source→二成分比較→whole→主観命題→本文→実service保存→�
 STRUCTURE_MAP_DELTA_PRESENT。3 production ownerの地図は01A u301。既存型の意味scope保持は05 u301、再開はweekly§5.6.51。説明調・関係の説明は残り、充足の語義を述べただけで§9.2/9.4全体を満たしたとは判定しない。今回の旧質問への肯定訂正でも、Observationは更新される一方、Receptionは既存の対比への注意に留まった。次はこの初回の内容形成と訂正後の二重説明／ATTENTION、共有対象／対象外更新を既存承認範囲で進める。既存周辺4失敗（過去共有17との集合一致未確認）、same100、Q1上限、giver帰属、本人実機・正式Product Readは未解消。10/31管理線・12/18公開目標、Piece/Analysis主枠、管理評価53.25％を維持する。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。NORMALや回帰成功を商品合格へ換算しない。
+
+
+## u306 — 未変更の理由付き満足を肯定訂正後へ局所保持する限定案（2026-10-17 JST・未承認）
+
+DESIGN_PROPOSAL_ONLY / MASH_APPROVAL_PENDING。u289の初回NORMAL資格とu294のreceived二点専用資格は変更しない。今回未変更コード32応答で、理由付き満足の三点が残っても別received反応の当時肯定訂正後にはLIMITEDの「理由への注意」へ戻ることを確認した。内容型・作者・独立readerが現行限定に一致しており、文面だけの修復ではない。
+
+新たに提案するのは、既存認識の本人理由exact1＋実行済み対象＋肯定無程度満足が未変更のとき、一回のreceived反応だけの完全な当時肯定訂正後にも、既承認の本人内充足内容を局所保持する資格である。別欄両順と同欄両順×2欄の6配置、満足過去／入力時点を同じ資格に含める。訂正反応は既存positive-feeling範囲（「少し嬉しかった」も含む）を使い、安心した等の分類は変えない。
+
+全体LIMITEDと既存aggregate・核辺・checkpoint・二Move・Observationを保持したまま、sourceから未変更三点／二辺と受理更新・Move所有を再証明し、別のversioned private資格／内容を満足Moveだけへ結ぶ。u294の二点型、初回NORMAL型、Selected whole用の成分資格を回答後へ直接流用しない。既存post-selection／単一作者／有限readerを用い、新engine・後処理・外部AIを作らない。
+
+具体的な対象、除外、6既存production owner、13対象／19非対象の修正前診断、必要回帰・保存／RN、旧checkpoint互換と停止条件は正本06／API handoff u306を参照。初回・PARTIAL／不明・legacy・履歴frame・ADD／撤回／混合・満足側更新・後続round・共有対象・追加材料は範囲外。完成済み保存本文は非再生成、未完成current checkpointの再試行は意味を保って新本文を作り得るので旧文面一致を約束しない。
+
+Rule18 §11.3 LEVEL_3の追加判断対象はこの更新後資格／private内容対応だけで、満足の意味の再質問ではない。承認前の製品code/test/fixture変更0・本文改善0・STRUCTURE_MAP_DELTA_NONE。BLOCKER_NARROWED / PRODUCT_NOT_CLEAR、正式0/3・candidate_ready=false・automatic_progression=false・未配置／未マージ。
