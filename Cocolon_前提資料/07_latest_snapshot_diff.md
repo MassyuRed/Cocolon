@@ -40883,3 +40883,12 @@ TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3�
 基準API85bece8／資料8389dc6。u305次作業の修正前32応答を実生成し、満足の経験内容が更新後に注意へ戻る原因を初回限定資格と特定した。新しい更新後局所資格／private内容対応を8/28設計、06、weekly§5.6.56、API handoffへ提案として記録。Rule18 §11.3の追加承認前で製品code/test/fixture変更0、本文改善0。STRUCTURE_MAP_DELTA_NONE。既存承認済みの意味は再確認せず、限定適用の増分だけを判断対象とする。
 
 BLOCKER_NARROWED / DESIGN_PROPOSAL_ONLY / MASH_APPROVAL_PENDING / PRODUCT_NOT_CLEAR。正式0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。前回回帰／保存結果は履歴として保持し、今回の診断件数へ加算しない。
+
+
+## 2026-10-17 u307 — 承認済み限定変更の実装・保存再表示
+
+u306限定案は2026-10-17 11:25:59 JSTのMash明示承認により実装済み。別received反応だけを当時の肯定へ一度完全訂正した後、未変更の理由・対象・満足を一つの経験として保持する。private Eligibility／Content／selected carrierを既存6 ownerへ追加し、既存aggregate projectorを再導出してsource/update/Move/checkpointとの一致を検証。u289初回型とu294received専用型の範囲は維持、source認識・公開API／DB／RN・依存変更なし。
+
+同入力32比較は対象13の満足文だけ改善、非対象19の取得全recordと全32の核辺／checkpoint／aggregate／Observationは不変。主回帰 1,229 passed／1 failed／1 warning（546.37秒）。失敗は現行manifest件数の旧期待値74で、76と新二型登録の検査へ更新後、当該1項目は1 passed（8.40秒）。同一製品sourceで異なる1,230項目を確認（appraisal1,176＋application54）。全件一括再実行はせず、期待値修正箇所だけ再検査。identity1 pass。実service20 case／40 DTO・RN本文／全履歴／close-reopen40件、旧完成非再生成・未完成current checkpointから意味と回答を増やさず新本文へ再開を確認。互換6case再確認は重複加算しない。rootは保存11種全文と全40対応を読解。native stubで本人実機ではなく、同Work補助を別モデル正式検証としない。
+
+STRUCTURE_MAP_DELTA_PRESENT、全体01／01A／current01/04・schema05・8/28設計・06／API handoff同期。u306の承認待ちは履歴となる。次は理由三点と別経験を保つ初回／訂正後本文の説明性・反復の共通原因。現在回答・安心した分類・共有対象／対象外更新、既存周辺4失敗・same100・Q1上限・giver帰属・本人実機／正式Product Readは残る。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％は維持。

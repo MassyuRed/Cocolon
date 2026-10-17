@@ -3537,3 +3537,18 @@ DESIGN_PROPOSAL_ONLY / MASH_APPROVAL_PENDING。u289の初回NORMAL資格とu294�
 具体的な対象、除外、6既存production owner、13対象／19非対象の修正前診断、必要回帰・保存／RN、旧checkpoint互換と停止条件は正本06／API handoff u306を参照。初回・PARTIAL／不明・legacy・履歴frame・ADD／撤回／混合・満足側更新・後続round・共有対象・追加材料は範囲外。完成済み保存本文は非再生成、未完成current checkpointの再試行は意味を保って新本文を作り得るので旧文面一致を約束しない。
 
 Rule18 §11.3 LEVEL_3の追加判断対象はこの更新後資格／private内容対応だけで、満足の意味の再質問ではない。承認前の製品code/test/fixture変更0・本文改善0・STRUCTURE_MAP_DELTA_NONE。BLOCKER_NARROWED / PRODUCT_NOT_CLEAR、正式0/3・candidate_ready=false・automatic_progression=false・未配置／未マージ。
+
+
+## u307 — 更新後LIMITEDに保持する理由三点のprivate内容（2026-10-17 JST・承認済み）
+
+Mashの2026-10-17 11:25:59 JST承認でu306を実装。原5required核／3辺・別二経験、当時のreceived反応だけのpositive REVISE exact1・round1・完全RESOLVEDを必要条件とする。u304の既存義務証明を変更せず使い、実envelopeから元source／更新とaggregateを独立再導出する。初回・legacy・履歴/frame・後続round・他更新・共有対象／追加材料は資格外。
+
+| private型／内容 | 契約 |
+| --- | --- |
+| RetainedReasonedExperienceEligibilityV1 | schema_version、source_prefix_ref、checkpoint_ref、original_source_ref、answer_source_ref、original_nuclei（required exact5のcanonical JSON）、original_relations（exact3）、受理update、move_ref、thread_control |
+| RetainedReasonedExperienceContentV1 | schema_version、上記資格、projection_preimage_ref、aggregate_projection_seal_ref、aggregate_claim_ref、aggregate_proposition_ref、meaning_outcome_ref、reception_binding_ref、grounding_ref、basis_rows／qualifier_rows各exact3、reason/event/evaluation_binding_ref、reason/appraisal_relation_ref、evaluation_kind=satisfaction、polarity=positive、reason_time／evaluation_time各pastまたはpresent、reception_configuration=EXPLICIT_REASON_GROUNDS_EXPERIENCED_FULFILMENT、seal_ref |
+| SelectedRetainedReasonedExperienceDecisionV1 | 既存decision全field＋retained_reasoned_experience。既存aggregateはLIMITED／ATTENTION／ATTEND_TO／focalなし／whole basisのまま。全selectedを現在sourceから再導出して照合 |
+
+局所内容は初回NORMAL型やu294exact2型を継承・流用しない。既存content／decision検査は保持、現行論理契約manifestへ二型を追加し74→76。新型は非公開で保存せず、公開API／DTO／DB／RN／意味checkpoint schemaは不変。唯一の既存作者・独立有限readerが選択された三点内容にだけ既承認の経験文法を使う。received訂正文、全required義務、未知、Observationは不変。
+
+完成済み保存本文はGET/start／再送時に非再生成。本文未完成current checkpointは意味を保持して現行本文へ再開し、既存意味／ANSWER events・operation／旧OBSERVATIONを保持する。旧文面の世代固定を意味checkpointに持たせない。詳細と実測は06／API handoff u307。PRODUCT_NOT_CLEAR、正式0/3・candidate_ready=false・automatic_progression=false。

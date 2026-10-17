@@ -3598,3 +3598,21 @@ STRUCTURE_MAP_DELTA_PRESENT。既存SELF received先行証明を、同一文に�
 旧checkpoint保存済みの再試行は完全旧解釈、完成済み保存本文は非再生成とする。旧質問と現行質問が全体一致し回答checkpointが未保存の場合は旧版を識別できないため、現行source全体を再検証して新checkpointを作る既存動作を維持する。
 
 意味schema・Move資格・NORMAL資格・作者／reader・公開API／DB／RN・依存とRN→API→service/store→保存read→RNの責務は不変。全体01／current01/04、実本文と検証は06／API handoff u305、次作業はweekly§5.6.55を参照。次は訂正後に未変更の理由付き満足が「理由への注意」へ弱まる内容欠落を意味選択から照合する。PRODUCT_NOT_CLEAR、初回一体単位未完了・正式受入0/3・candidate_ready=false・automatic_progression=false・未配置／未マージを維持する。
+
+
+## u307 — 未変更理由三点の更新後局所内容（2026-10-17 JST）
+
+u306限定案はMash承認済み。STRUCTURE_MAP_DELTA_PRESENT。新fileなし。既存6 ownerの責務を次のとおり追加する。
+
+| mashos-api相対path | 更新後の責務 |
+| --- | --- |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py | 理由三点用private Eligibility／Content、全体aggregateとの厳密結合とseal。旧初回型／received型は維持 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py | 元source／単一received反応訂正から資格を再導出。private aggregate projectorとpublic carrier接続を分離し、全selectedを再導出照合 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py | 選択済み三binding／source qualifier／候補・contribution／二方向関係から局所内容を導出 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py | 旧LIMITED投影・claim／traceへの結合、private内容封印、論理契約二型追加（74→76） |
+| ai/services/ai_inference/emlis_ai_grounded_human_reception.py | 別selected carrierのsource再検証と、未変更の理由・対象・本人内の充足を既存経験文法へ接続 |
+| ai/services/ai_inference/emlis_ai_grounded_observation_gate.py | 新局所型の有限reader分岐、三点・時点・実本文を独立逆検証 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 6配置／二時点・他理由対象・程度・資格除外・改変／再封印拒否・作者禁止readerの回帰 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有ownerのidentityのみ再導出。歴史fixture不変 |
+
+既存emlis_answer_updateの義務証明は読取再利用・未変更。公開API／DB／RN、各上限、01B/C・Piece/Analysis責務、新依存は不変。実本文・保存40 DTO・互換・検証は06／API handoff u307、意味契約は05／8/28設計u307、次作業はweekly§5.6.57。PRODUCT_NOT_CLEAR・正式0/3・candidate_ready=false・automatic_progression=false・未配置。

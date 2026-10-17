@@ -1397,3 +1397,12 @@ u305の次作業を調査。別receivedの反応だけを当時の肯定へ訂�
 最小案は、received反応だけの一回の完全な当時肯定訂正後、未変更の理由三点／二関係を既存source証明から確認し、全体LIMITED／aggregate／二Moveを保った局所経験内容として満足Moveへ結ぶもの。既存6production ownerで実装し、初回型やu294専用型を緩めず、作者・有限readerまで同一単位で接続する。具体案・対象／除外・保存互換・検証・停止条件は8/28設計と06／API handoff u306へ記録した。新たな資格とprivate内容契約はRule18 §11.3 LEVEL_3のため、増分だけMash承認待ち。既承認の満足理解は再質問しない。
 
 今回code/test/fixture変更0・本文改善0・保存/RN/実機の新検証0。STRUCTURE_MAP_DELTA_NONE。承認後は同じ限定案の実装→回帰→実本文→保存再表示へ進み、再度同じ承認を求めない。BLOCKER_NARROWED / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％とu305の他残件は維持。
+
+
+### 5.6.57 u307 — 未変更の理由付き満足を訂正後も経験として保持
+
+u306限定案は2026-10-17 11:25:59 JSTのMash明示承認により実装済み。別received反応だけを当時の肯定へ一度完全訂正した後、未変更の理由・対象・満足を一つの経験として保持する。private Eligibility／Content／selected carrierを既存6 ownerへ追加し、既存aggregate projectorを再導出してsource/update/Move/checkpointとの一致を検証。u289初回型とu294received専用型の範囲は維持、source認識・公開API／DB／RN・依存変更なし。
+
+同入力32比較は対象13の満足文だけ改善、非対象19の取得全recordと全32の核辺／checkpoint／aggregate／Observationは不変。主回帰 1,229 passed／1 failed／1 warning（546.37秒）。失敗は現行manifest件数の旧期待値74で、76と新二型登録の検査へ更新後、当該1項目は1 passed（8.40秒）。同一製品sourceで異なる1,230項目を確認（appraisal1,176＋application54）。全件一括再実行はせず、期待値修正箇所だけ再検査。identity1 pass。実service20 case／40 DTO・RN本文／全履歴／close-reopen40件、旧完成非再生成・未完成current checkpointから意味と回答を増やさず新本文へ再開を確認。互換6case再確認は重複加算しない。rootは保存11種全文と全40対応を読解。native stubで本人実機ではなく、同Work補助を別モデル正式検証としない。
+
+STRUCTURE_MAP_DELTA_PRESENT、全体01／01A／current01/04・schema05・8/28設計・06／API handoff同期。u306の承認待ちは履歴となる。次は理由三点と別経験を保つ初回／訂正後本文の説明性・反復の共通原因。現在回答・安心した分類・共有対象／対象外更新、既存周辺4失敗・same100・Q1上限・giver帰属・本人実機／正式Product Readは残る。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％は維持。

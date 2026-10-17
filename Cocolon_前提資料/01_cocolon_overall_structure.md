@@ -7132,3 +7132,10 @@ TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受�
 STRUCTURE_MAP_DELTA_PRESENT。既存production 3 ownerと互換fixtureの正確な地図は01A u305。直接builderの既定と旧Q1本文経路、他欄の既存能力、作者／reader、公開API／DB／RN／依存、01B/CとPiece/Analysisの責務は不変。旧checkpoint保存済みの再試行は完全旧解釈を復元し、完成済み保存本文は再生成しない。旧質問と現行質問が全体一致し回答checkpointが未保存の場合は旧版を識別できないため、既存どおり現行source全体を再検証して新checkpointを作る。
 
 実本文・検証・互換の詳細は06／API handoff u305、再開順はweekly§5.6.55。次は訂正後に未変更の理由付き満足が「理由への注意」へ弱まる内容欠落を意味選択から照合する。PRODUCT_NOT_CLEAR、初回一体単位未完了・正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。
+
+
+## u307 — 訂正していない理由付き満足を経験として保持（2026-10-17 JST）
+
+Mash承認済みu306を既存6 ownerへ実装。理由・対象・満足の未変更三点を、別received反応の一度の当時肯定訂正後も局所経験内容として満足Moveへ結ぶ。全体LIMITED／aggregate／核辺／checkpoint・二Move・Observationは維持。新private Eligibility／Content／selected carrierを加え、sourceと全aggregateを再導出して付替えを拒否。作者・有限readerは既存経験文法を共用する。
+
+STRUCTURE_MAP_DELTA_PRESENT。正確なpath別責務は01A u307、意味／private契約は05と8/28設計u307、実本文・保存／再表示40 DTOと回帰は06／API handoff u307。完成済み本文は非再生成、未完成current checkpointは同じ意味・受理操作・event／旧履歴を保って現行本文へ再開する。新file／依存／公開API／DB／RNの変更なし。01B/CとPiece/Analysisの責務は不変。次はweekly§5.6.57を参照し、承認済み限定変更を再承認へ戻さない。PRODUCT_NOT_CLEAR・正式0/3・candidate_ready=false・automatic_progression=false・未配置。
