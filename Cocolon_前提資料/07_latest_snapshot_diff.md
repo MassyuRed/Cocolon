@@ -40968,3 +40968,14 @@ u312の次作業として、評価併存時に当時positive ADD「その時は�
 STRUCTURE_MAP_DELTA_NONE。正本06／API handoff／07へ同期。次は実対照で欠落した当時negative ADD「その時は悲しかった」の原反応保持を、既存の同対象・同時点保持義務から照合する。説明性・満足重複・語尾反復・初回内容形成、対象外更新、既存周辺失敗、same100・Q1上限・giver帰属・本人実機／正式Product Readは残件。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false、Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％を維持。
 
 実本文・検証内訳は正本06／API handoff u313、再開はweekly§5.6.63。
+
+
+## u314 — 当時negative ADDの原反応保持と次の限定案（2026-10-17 JST）
+
+基準API665efc37／Cocolon8c0346a8から、評価併存＋「その時は悲しかった」で消える元反応を既存Plan4行追加・4行削除で復旧。評価閉包・残余3核2辺・既存negative保持を使い2 Moveへ残す。現在±・当時positive、意味・checkpoint・Observation・内容型、作者／reader・資格・schema・公開API／DB／RNは不変。STRUCTURE_MAP_DELTA_NONE。
+
+主回帰 1,405 passed／1 warning（587.22秒）。最終sourceの全件一括実行：appraisal 1,351＋application 54。追加39は重複、identity1 pass。Q3 retained12 pass／既存16 fail、u313と失敗trace全文がprocess addressを除き一致。57比較31変更／26取得全record一致、checkpoint54不変。実service44case／RN88DTO、旧完成非再生成・旧pending／中断checkpointの履歴保持を確認。rootは対象15種／保存31種全文と88対応を読解。native stubで本人実機ではなく、同Work補助は正式別model検証ではない。
+
+保持修復は実装済み。次は追加回答後の未変更理由付き満足が「理由への注意」に戻る課題。既存u307はREVISE限定のため、現在／当時×肯定／否定の一回答ADDへ局所経験資格を追加する未承認案を06／API handoff u314・weekly§5.6.64へ記録。原5核3辺・round1完全RESOLVED・原claim失効0とsource再導出を要求し、全体LIMITED／意味／Observation・元反応／回答・u307は維持。新資格は未実装、次の一作業はRule18§11.3の限定追加承認の確認。
+
+TECHNICAL_CREDIT／PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false、Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠・管理評価53.25％を維持。本文自然さ・反復と既存周辺失敗等は残る。

@@ -1,6 +1,6 @@
 # Cocolon 第6回週末報告会 — 2026-10-10
 
-> **2026-10-17更新：EmlisAIの残件・再開順は§3.5・§5.6・§6.5、初回不採用試作は§5.6.1、原因の分離は§5.6.2、限定承認は§5.6.3、直近診断と限定変更案は§5.6.11、その追加承認は§5.6.12、u280の限定案は§5.6.30、u281の組別接続は§5.6.31、u282のreceived本文は§5.6.32、u283限定案は§5.6.33、u284の同一対象・二段対比は§5.6.34、理由・対象・本人の充足の限定承認と実装は§5.6.39、本文構文整理は§5.6.40、訂正後保持修復は§5.6.41、時間中立修復は§5.6.42、更新後経験保持の限定案は§5.6.43、その承認と実装・検証は§5.6.44、通常／理由付き満足の肯定訂正修復は§5.6.54、同欄received先行の理由認識修復は§5.6.55、訂正後の未変更理由付き満足の限定案は§5.6.56、承認済み実装は§5.6.57、直接的な受容への構文修復は§5.6.58、現在positive回答の保持修復は§5.6.59〜61、現在negative回答の保持修復は§5.6.62、当時positive ADDの保持修復と最新残件は§5.6.63を参照する。** CMEE実機接続は確認済みだが本文品質は未解消。最初の修正単位は未完了。Piece・分析の主枠と§5.5の配分、12/18公開目標は維持する。
+> **2026-10-17更新：EmlisAIの残件・再開順は§3.5・§5.6・§6.5、初回不採用試作は§5.6.1、原因の分離は§5.6.2、限定承認は§5.6.3、直近診断と限定変更案は§5.6.11、その追加承認は§5.6.12、u280の限定案は§5.6.30、u281の組別接続は§5.6.31、u282のreceived本文は§5.6.32、u283限定案は§5.6.33、u284の同一対象・二段対比は§5.6.34、理由・対象・本人の充足の限定承認と実装は§5.6.39、本文構文整理は§5.6.40、訂正後保持修復は§5.6.41、時間中立修復は§5.6.42、更新後経験保持の限定案は§5.6.43、その承認と実装・検証は§5.6.44、通常／理由付き満足の肯定訂正修復は§5.6.54、同欄received先行の理由認識修復は§5.6.55、訂正後の未変更理由付き満足の限定案は§5.6.56、承認済み実装は§5.6.57、直接的な受容への構文修復は§5.6.58、現在positive回答の保持修復は§5.6.59〜61、現在negative回答の保持修復は§5.6.62、当時positive ADDの保持修復は§5.6.63、当時negative ADDの保持修復と追加回答後の理由付き満足の限定案は§5.6.64を参照する。** CMEE実機接続は確認済みだが本文品質は未解消。最初の修正単位は未完了。Piece・分析の主枠と§5.5の配分、12/18公開目標は維持する。
 
 > **最新の実行順序は末尾「5.5 実機確認対象と、その後の作業順序の更新」を優先する。** 10/10〜12に先行して実機稼働を確認する対象はEmlisAIと分析構造。二つの稼働確認後はPieceと分析構造の内容修正を進め、Pieceは利用経路の準備ができた時点で実機確認する。分析を任意の追加確認へ下げず、Pieceを三連休中の全操作確認の必達対象に戻さない。公開目標2026-12-18は§4.7のまま維持する。
 
@@ -1470,3 +1470,14 @@ u312の次作業として、評価併存時に当時positive ADD「その時は�
 実service44case／88DTOと現行RN全文・元入力・全履歴・再open88件を確認。旧完成は欠落も含め非再生成、旧pending／中断checkpointは意味・回答・operation・既存履歴を保持。rootは保存31種類の全文と88対応を読解。native stubで本人実機ではなく、同Work読取り補助は正式別model検証ではない。有限answer readerの作者禁止と全文inverseの検証範囲を分ける。保存timeline追加照合の誤キーidはevent_idへ直して同44caseの一致を確認。
 
 STRUCTURE_MAP_DELTA_NONE。正本06／API handoff／07へ同期。次は実対照で欠落した当時negative ADD「その時は悲しかった」の原反応保持を、既存の同対象・同時点保持義務から照合する。説明性・満足重複・語尾反復・初回内容形成、対象外更新、既存周辺失敗、same100・Q1上限・giver帰属・本人実機／正式Product Readは残件。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false、Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％を維持。
+
+
+### 5.6.64 u314 — 当時negative ADDの原反応保持と次の限定案
+
+u313の次作業として、評価併存時の「その時は悲しかった」で元反応「嬉しくなかった」がReceptionから落ちる欠落を修復。既存Plan一箇所（4行追加・4行削除）で当時negativeを既存再帰へ接続し、評価1＋received対象／原反応／追加回答1の2 Moveを保つ。reaction／feeling／feeling／negative・非unknown・past／exact original_occasion、評価閉包、残余3核2辺、negative exact1／全被覆を維持。現在±・当時positive、意味・核辺・checkpoint・Observation・内容型・u301/u307資格・作者／reader・schema・上限・公開API／DB／RNは不変。
+
+主回帰 1,405 passed／1 warning（587.22秒）。最終sourceの全件一括実行：appraisal 1,351＋application 54。追加39は重複、現行identity1 pass。Q3 retained12 pass／16 fail（24.44秒）でu313と失敗assertion／trace全文がprocess addressを除いて一致。57比較31対象で原反応を復旧、対照26は取得全record一致。checkpoint54例の意味・状態・Observation・content_typesは不変。実service44case／88DTO、現行RN全文・元入力・全履歴・再open88件を確認。旧完成非再生成、旧pending／中断checkpointは意味・回答・operation・既存履歴を保持。rootは対象15種／保存31種全文と88対応を読解。native stubで本人実機ではなく、同Work補助は正式別model検証ではない。
+
+STRUCTURE_MAP_DELTA_NONE。06／API handoff／07へ同期。次は別receivedへの追加回答後、未変更の理由付き満足が「理由への注意」へ戻る内容課題。u307は当時positive REVISE専用でADDを除外するため、新資格は実装せずRule18§11.3の追加承認案を正本末尾へ記録。原5核3辺・別二経験、round1完全RESOLVED／ADD exact1の現在・当時×肯定・否定4種で、未変更の理由・対象・本人の充足を満足Moveへ局所保持する。原claim失効0、追加核／ABOUT／evidence・更新bindingを実sourceから再導出し、全体LIMITED・意味・Observation・元反応／回答本文・既存REVISE資格を維持する案。6配置×満足時点2×回答4＝48対象と境界対照・保存／再表示を承認後の完成条件とする。PARTIAL・複数回答・履歴・共有対象・他更新・plain／unfinished等は新資格外。既存型／validatorを弱めず成立しなければ拡張せず停止。
+
+次の一作業はこの限定案の適用範囲追加をMashへ確認すること。修復のprimaryはTECHNICAL_CREDIT、次案は未承認。説明性・満足重複・語尾反復・初回内容形成、対象外更新・既存周辺失敗・same100・Q1上限・giver帰属・本人実機／正式Product Readは残件。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％を維持。
