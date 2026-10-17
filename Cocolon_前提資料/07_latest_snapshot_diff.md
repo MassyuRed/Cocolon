@@ -40848,3 +40848,16 @@ STRUCTURE_MAP_DELTA_NONE、既存責務内の実現修復。初回限定の選�
 u302で残った同family代表選択による欠落をanswer_update一つのownerで修復。未成立三点→元時点の肯定回答を既存LIMITEDの2 dutiesとして保持し、初回NORMAL資格は拡張しない。checkpoint／核／関係／Observation不変、response_plan／selectedとReception／trace／IDは変化。対象12・対照24の36比較と周辺6対照を確認。主回帰1,082件：1,082 passed, 1 warning in 411.08s (0:06:51)、失敗0／skip0。identity1、実service／隔離SQL14 case／28 DTO、旧保存／旧checkpoint retryとRN再表示28件を確認。native stubで実機ではない。途中テスト前提誤り3件・修正と全文は06／API handoff u303、再開点はweekly §5.6.53。
 
 STRUCTURE_MAP_DELTA_NONE、新file／schema／公開API／DB／RN／依存変更0。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・未配置／未マージ。説明性／内容形成・初回反復は残る。次は未成立なし／理由付き満足の肯定訂正を実全文から照合。10/31・12/18、Piece/Analysis主枠、管理評価53.25％は維持。
+
+
+## 2026-10-17 u304 — 通常／理由付き満足の肯定訂正後本文停止・受け取り欠落を修復（2026-10-17 JST）
+
+u303末尾に従い、通常満足＋received肯定訂正後の本文停止と、通常／理由付き満足で訂正receivedがReceptionから落ちる欠落を修復。別経験に同じ文法arcを与えていた箇所を既存source_componentへ接続し、同lived_change代表選択で失われる義務を既存LIMITED二Moveへ保持した。意味核・辺・checkpoint不変、新意味／NORMAL資格・初回限定資格の回答後拡張なし。Rule18既存契約内修復、STRUCTURE_MAP_DELTA_NONE。
+
+主回帰appraisal1,110＋application54：**1,164 passed、1 warning、443.16 秒**。警告は既存 Pydantic `root_validator` の非推奨警告であり、今回の回帰失敗ではない。identity1 pass。72旧新比較は通常訂正12の本文復旧、理由付き訂正8の受け取り復元、対象外52全record不変。実service／隔離SQL23 case／46 DTOと旧完成本文非再生成・旧checkpoint retry2種類、現行RN本文／全履歴／再表示46件を確認。rootは17種類の保存全文と全46対応を読解。native部品stubで本人実機ではない。途中のテスト前提／plan未指定／identity実行中source変更の失敗と再検証は06／API handoff u304に記録。同Work補助を別モデル正式検証とはしない。
+
+全体設計・全file地図・作業rule・恒久incident・意味設計を確認し、System Contextはworkspace binding不存在から許可済み原典直接参照を使用。次は理由付き同欄received先行の認識差を既存本人継続・三点所有から照合する。初回の「受け取りました」や訂正後「のですね」の反復、理由への注意に留まる本文内容は未完成。現在回答・安心した分類・共有対象／対象外更新、周辺既存4失敗・same100・Q1上限・giver帰属・本人実機／正式Product Readも残る。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31・12/18、Piece/Analysis主枠、管理評価53.25％は維持。
+
+詳細・再開位置：正本06／API handoff u304、weekly §5.6.54。
