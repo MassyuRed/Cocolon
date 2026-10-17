@@ -3631,3 +3631,19 @@ Mashが2026-10-17 16:46:17 JSTにu314限定案を承認した。別received経�
 `STRUCTURE_MAP_DELTA_PRESENT`。既存private V1三型を再利用し、field／schema／manifest／validatorは変更しない。`emlis_answer_update.py`のREVISE証明、作者／有限reader、公開API／DTO／DB／RN、各上限、新file／依存、01B/C・Piece/Analysisの責務は不変。完成済み保存本文は非再生成、未完成current checkpointは同じ受理意味・operation・既存履歴を保って現行本文へ再開する。
 
 最新結果は06／API handoff u315、再開順はweekly §5.6.65。今回の追加承認を待ち直さない。説明の長さ・対象／語尾の反復など本文品質は残件。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。
+
+## u317 — 丁寧形received先行の同一欄で後続評価を保持（2026-10-17 JST）
+
+同じmemo／memo_actionの先頭にある単一SELF received経験のnegative過去丁寧反応を伝聞導入へ誤分類するsource認識を修復。既存本人受け手証明と実source「かったです」を条件に後続評価を保持する。共有report helper、作者／reader・意味資格／内容型・公開API／DB／RNは不変。currentの核辺・checkpoint・選択／Observationは修復に伴い変化する。
+
+`_legacy_received_report_context` により旧sourceを完全再導出し、保存checkpoint／canonical questionと完全一致した場合だけ復元する。旧IDへcurrent意味を付け替えず、direct builderと以前のsourceモードを維持する。既存3owner内、production file／依存追加なし。STRUCTURE_MAP_DELTA_PRESENT。01B/CとPiece/Analysisの責務差分なし。
+
+| 既存path（mashos-api） | 今回の責務差分 |
+| --- | --- |
+| ai/services/ai_inference/emlis_ai_grounded_observation_plan.py | 後続評価のreport拒否を既存SELF received証明の後へ配置。negative過去丁寧反応の誤拒否だけを閉じ、旧sourceモードを導出経路へ通す |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py | current source導出へフラグを渡し、以前のsourceモードは旧report拒否を維持 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py | u316の完全な旧sourceを再導出し、旧checkpoint／canonical questionの完全照合時だけ復元 |
+| ai/tests/test_cmee_emlis_result_appraisal.py | 原文slice／所有／時点・更新・非対象・旧checkpoint14・保存非再生成を検証。受容保持10例は未解消 |
+| ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有owner identityを再導出。歴史fixture不変 |
+
+主回帰1,584 pass、104比較36変更68同一、service52case／RN78 DTO、旧checkpoint14を確認。実本文・互換・失敗を含む検証は06／API handoff u317、最新再開順はweekly §5.6.67。次は同一欄の評価訂正／撤回後の受容保持10例を既存条件と比較する。現在形／名詞形／肯定反応、本文自然さ・周辺既存失敗も未解消。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。
