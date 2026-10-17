@@ -40834,3 +40834,10 @@ source資格／独立所有closure／既存意味scopeの3 production ownerを�
 STRUCTURE_MAP_DELTA_PRESENT。全体01・01A・current01/04へ責務、意味設計／05へ契約境界、weekly§5.6.51へ次を同期。新schema・型・上限・公開API/DB/RN・依存変更0。説明調・関係の説明は残り、充足の語義を述べただけで§9.2/9.4全体を満たしたとは判定しない。今回の旧質問への肯定訂正でも、Observationは更新される一方、Receptionは既存の対比への注意に留まった。次はこの初回の内容形成と訂正後の二重説明／ATTENTION、共有対象／対象外更新を既存承認範囲で進める。既存周辺4失敗（過去共有17との集合一致未確認）、same100、Q1上限、giver帰属、本人実機・正式Product Readは未解消。10/31管理線・12/18公開目標、Piece/Analysis主枠、管理評価53.25％を維持する。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。NORMALや回帰成功を商品合格へ換算しない。
+
+
+## 2026-10-17 u302 — received訂正後も未成立三点を一節化
+
+別receivedの反応を明示訂正した後、未変更の未成立事項・対象・満足を二辺ごとに説明していた欠陥を既存3 ownerで修復した。意味／選択／checkpoint／Receptionは不変。36比較で対象12のObservationとartifact IDのみ変化、対照24全record一致。最終主回帰1,067件：1,067 passed, 1 warning in 409.97s (0:06:49)、失敗0／skip0。identity1、実service／隔離SQL14 case／28 DTOと旧保存／旧checkpoint retry、現行RN28再表示を確認。実機ではない。詳しい範囲・途中失敗・実本文は06／API handoff u302、再開点はweekly§5.6.52。
+
+STRUCTURE_MAP_DELTA_NONE、既存責務内の実現修復。初回限定の選択資格を回答後へ拡張せず、新schema・公開API／DB／RN・依存変更0。訂正後Receptionは単独ATTENTIONのままでreceived経験を受け取れておらず、初回の内容／説明性／反復などの残件も残る。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・未配置／未マージ。10/31・12/18、Piece/Analysis主枠、管理評価53.25％は維持。

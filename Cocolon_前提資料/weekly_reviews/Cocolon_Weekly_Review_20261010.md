@@ -1340,3 +1340,14 @@ STRUCTURE_MAP_DELTA_NONE、実装・地図責務は不変。初回一体単位�
 STRUCTURE_MAP_DELTA_PRESENT。全体01・全file地図01A・current01/04と意味設計／05を更新、01B/Cは責務不変。u300承認待ちを次工程へ戻さない。説明調・関係の説明は残り、充足の語義を述べただけで§9.2/9.4全体を満たしたとは判定しない。今回の旧質問への肯定訂正でも、Observationは更新される一方、Receptionは既存の対比への注意に留まった。次はこの初回の内容形成と訂正後の二重説明／ATTENTION、共有対象／対象外更新を既存承認範囲で進める。既存周辺4失敗（過去共有17との集合一致未確認）、same100、Q1上限、giver帰属、本人実機・正式Product Readは未解消。10/31管理線・12/18公開目標、Piece/Analysis主枠、管理評価53.25％を維持する。
 
 TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。NORMALや回帰成功を商品合格へ換算しない。
+
+
+### 5.6.52 u302 — received訂正後の満足二重説明を解消（2026-10-17 JST）
+
+u301後の残件のうち、別received反応を訂正した際に未変更の未成立三点を二辺ごとに説明して満足が二度出る欠陥を修復。既存thread adapter／Observation作者／独立readerの3 ownerだけで三点の一節化を継続し、received訂正の独立照合義務を保持した。意味・選択・checkpoint・Receptionは不変。Rule18の既存実現修復で、初回限定資格の回答後への拡張はない。
+
+最終主回帰appraisal1,013＋application54：1,067 passed, 1 warning in 409.97s (0:06:49)、失敗0／skip0。identity1は別runでpass。36旧新比較で対象訂正12のObservationとartifact IDだけが変化、対照24は全record一致。実service／隔離SQLで旧保存非再生成・旧更新checkpoint retryを含む14 case／28 DTO、現行RN本文／全履歴／再表示28件を確認。rootは保存全文を読解した。native stubで本人実機・正式Product Readではない。途中guard不足1 failの補修と検査内訳は06／API handoff u302。
+
+全体設計・全file地図・最新weekly・恒久incident・意味設計を確認。System Context prepareはworkspaceのAPI binding不存在で停止し、許可済み原典直接参照を使用。STRUCTURE_MAP_DELTA_NONE：既存責務の内側で、新file／schema／公開API／DB／RN変更なし。同Work補助reviewを別Pro/Ultraの正式二重検証とはしない。
+
+次は訂正後Receptionが単独ATTENTIONに留まり、訂正されたreceived経験を受け取れていない点を意味側から照合する。初回の説明性／受容反復、共有対象／対象外更新、既存周辺4失敗（過去共有17との集合一致未確認）、same100、Q1上限、giver帰属、本人実機／正式Product Readは残る。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/31管理線・12/18公開目標、Piece/Analysis主枠、管理評価53.25％は維持。
