@@ -41024,3 +41024,17 @@ TECHNICAL_CREDIT／PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3�
 新設testの途中10失敗は、既存bareでも同じ受容欠落を確認したため今回の保証をsource／operation／Observationへ合わせ、未解消として明記した。plain／unfinishedのnegative評価訂正4例でreceived経験、満足撤回6例で対象出来事が受容から落ちる。次はこの10例を別欄／bare／既存保持証明と比較して、修復範囲と必要資格を具体化する。新意味資格を無断拡張しない。現在形／名詞形／肯定反応、満足側の長さ・語尾／対象反復、giver丁寧動詞の連体化、その他の既存残件も維持。実装・本文・検証の詳細は06／API handoff u317。
 
 TECHNICAL_CREDIT／PRODUCT_NOT_CLEAR、初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false、Draft/open/unmerged・未配置。10/31管理線・12/18公開目標、Piece/Analysis主枠・管理評価53.25％を維持。
+
+## u318 — 10/17監査に基づくsource作用域とLIMITED参照修復（2026-10-17）
+
+最新weekly20261017のE01〜E04を起点に、既存契約内のbug修復を実施した。LIMITEDのReception basisを選択済みLayer1集合内へ限定し、3final callerの再導出を一致させた。推量「かもしれない」の末尾を制約「ないと」と誤認しない。完全なwh-object＋明示SELFの現在否定認知を既存uncertaintyへ補正し、報告・前文の他者topic・時点／源範囲の拒否を維持した。短い節で落ちるcontrast markerは、既存両端間の一意な実接続語だけをsource照合で回復する。meaning/unknown契約・surface/inverse/gate・公開API/DB/RN・質問上限・依存は不変。
+
+元10例は初回本文8→9、固定100は70→71（0090だけ変更、99結果record同一）。別の短い対比4例も復旧。原03の「休めたことにほっとした／かもしれないと思うと寂しい」は内外述語の作用域・unknown witnessが未解決で未提供を継続する。受容の汎用性は改善完了ではない。
+
+最終sourceで対象回帰 **2,278 passed、skip/failed 0**（appraisal1,530＋Q2/Q3 application54＋既存contrast135＋今回41＋Analysis484＋Piece34）。固有nodeを760/759/759へ分割して全件成功、既存Pydantic非推奨warning2件。現行owner identity検査は別途1 passed／194 deselected。重複する最終対象230件と途中版の結果を合算していない。language identity `e2d1b249e25bdbfff7d90368c542d26dcfce84049ecfbdc2196dc02290622930`、runtime identity `513a79550ca33f39c904c8a0d4b49edc637411e08bc451d6cc2e1ea9a74bb92d`。
+
+同一最終sourceの実migration/RPC＋PGlite＋service20ケース／24 DTO、RN hook/modal24 DTOの本文・質問・原入力・全履歴・close/reopenを確認した。旧完成07の非再生成と旧pending07の回答は保持。旧04通常失敗はretry不可、旧04中断checkpointの再開も未提供であり、復旧成功には数えない。rootは元10／固定100／保存16種全文と24対応を読解。本人実機・本番DB・deploy・main merge・正式別model検証は今回0。
+
+`STRUCTURE_MAP_DELTA_NONE`（製品owner/file/経路・契約の追加なし、既存source/binding内部修復）。新回帰testだけ01Aへ追跡を追加。今回の正本詳細・全未加工本文・最終source SHA・再開課題は [u318実装監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u318_SourceScope_and_LimitedBinding_20261017.md) を参照。
+
+次は原03を、原文範囲と有限述語の証明を持つ共通source ownerで、安堵・将来の可能性・現在の寂しさへ読み分ける。既知動詞の列挙や任意文字列受理に縮めず、条件関係を因果へ読み替えない。必要なら最小契約差分を具体化してから扱う。E04汎用受容、E05質問、u317同欄REVISE4/WITHDRAW6、旧失敗checkpoint、本人実機を残件として維持する。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。10/20方式判断、10/31管理線・12/18公開目標、Piece/Analysis主枠・管理評価53.25%は不変。

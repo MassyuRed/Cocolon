@@ -3647,3 +3647,13 @@ Mashが2026-10-17 16:46:17 JSTにu314限定案を承認した。別received経�
 | ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | 現行共有owner identityを再導出。歴史fixture不変 |
 
 主回帰1,584 pass、104比較36変更68同一、service52case／RN78 DTO、旧checkpoint14を確認。実本文・互換・失敗を含む検証は06／API handoff u317、最新再開順はweekly §5.6.67。次は同一欄の評価訂正／撤回後の受容保持10例を既存条件と比較する。現在形／名詞形／肯定反応、本文自然さ・周辺既存失敗も未解消。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。
+
+## u318追跡 — source作用域とLIMITED参照（2026-10-17）
+
+製品構造は `STRUCTURE_MAP_DELTA_NONE`。既存grounded planの有限認知・contrast原文照合と選択後Reception binder内部を修復した。新production file/owner/経路はない。
+
+| 追加ファイル | 責務 |
+|---|---|
+| mashos-api/ai/tests/test_cmee_emlis_source_scope_regressions.py | 推量の制約誤認、明示SELFの未確定認知と報告／他者topic拒否、LIMITED basis必須coverage、短いcontrastと一意marker原文証明を検証 |
+
+実装・未加工全文・保存検証・未完了は [u318監査](audits/emlis_ai/Cocolon_EmlisAI_u318_SourceScope_and_LimitedBinding_20261017.md)。原03の作用域、汎用受容、旧失敗checkpoint等を残し、商品完了へ読み替えない。
