@@ -1,3 +1,5 @@
+> 2026-10-19最新差分：u355。安堵・寂しさと併記された元の経験に未明示の「同時」を足す表現を、原文の接続詞を保つ既存経験文へ修復。意味・選択・Reception不変。対象技術検証321件、保存DTO18件再表示。PRODUCT_NOT_CLEAR／正式Product Read0/3は維持。詳細は[u355監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u355_MixedReceivedTimeNeutral_20261019.md)。
+
 > 2026-10-19最新差分：u354。本人の不明を「今は／現在は嬉しくない」へ訂正した後の本文停止を、既存意味・全plan・selectedを変えずに修復。対象技術検証188件・保存DTO16件再表示。PRODUCT_NOT_CLEAR／正式Product Read0/3は維持。詳細は[u354監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u354_NegativeRevisionSurface_20261019.md)。
 
 > 2026-10-19最新差分：u353（10/18明示承認）。初回の元経験・本人説明・独立不明を、実回答／訂正・撤回／旧再開／保存再表示と一体で修復。新private3型・logical90。限定単位の技術検証まで完了、PRODUCT_NOT_CLEAR・正式Product Read0/3・candidate_ready=false・automatic_progression=falseは維持。詳細は[u353実装監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u353_InitialPersonalMeaning_20261018.md)。
@@ -4377,3 +4379,38 @@ STRUCTURE_MAP_DELTA_NONE。既存production3owner内、公開API／DTO／DB／RN
 | Cocolon | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` | E05/E06/E08残件の限定更新 |
 | Cocolon | `Cocolon_前提資料/07_latest_snapshot_diff.md` | milestone差分 |
 | Cocolon | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u354_NegativeRevisionSurface_20261019.md` | 開始根拠・実測・限界・全差分 |
+
+
+## 2026-10-19 u355 — 混在入力のreceivedに同時性を補わない
+
+u354実本文の残件をLEVEL_2で修復。安堵・寂しさのpair＋received一組（任意の不明）の完全原sourceを既存ownerで証明し、原relation・両核が現行にも同一で残る場合だけ対象にする。初回と別対象への訂正後に、Rを「異なる向きのまま同時にあります」から、元の「のに／けど」等を保つ既存の経験文へ変更。独立readerは完全な主体・程度・肯否・時点・接続詞と一文の範囲を照合する。意味・checkpoint・全plan・selected・Reception・問い／ENDは変えず、撤回したRは復活させない。anti-template検査は維持。
+
+対象321件の最終結果passed、未解消fail／skip0。未変更u354の60recordで全意味・選択・Reception・本文のその他fieldが一致し、Observation一文と本文由来IDだけ24recordで変わる。残り36は本文／停止も同一。旧u350未完成checkpointは旧時点解釈を保持して現行表面へ進むため、この一文だけ変わり得る。完成済み旧DTO・確定旧失敗は非再生成。実SQL14件で初回・実pendingへのADD／現在否定REVISE・旧保存・意味前後中断再開を通し、同じ18DTOを現行apiClient→API→hook→Modalで各2回close/reopenした。HTTP/Auth/nativeはstub、実端末・本番・全suiteの成功ではない。
+
+STRUCTURE_MAP_DELTA_NONE。既存production3file内、新production／型／意味版／依存／API／DTO／DB／RN／Safety変更0、logical90を維持。正式別model評価ではなく主担当実行と補助読取レビュー。限定TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／正式0/3／candidate_ready=false／automatic_progression=false。長い原文反復、深い受容、一般入力、PARTIAL、説明Mを含む別sourceの更新、任意多段・本人実機は残る。範囲外の元reaction訂正では「その時は今は嬉しい」等の時点衝突が比較本文に残り、次の具体的な診断対象とする。次はE05/E06/E08の実本文品質と既存方式判断へ戻る。10/20方式判断・10/31管理線・12/18公開目標、Piece/Analysis主枠53.25％は再評価しない。Draft PR3／30、merge・deployなし。詳細・全変更file・本文は[u355監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u355_MixedReceivedTimeNeutral_20261019.md)。
+
+
+### u355 全変更file地図（20 path）
+
+| repository | path | 責務 |
+| --- | --- | --- |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_surface.py` | 完全原sourceと現行の原核・関係から中立表示対象を指定 |
+| mashos-api | `ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | 指定済みmixed Rに原接続詞の既存経験文を再利用 |
+| mashos-api | `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 既存経験文のsource読解と一文の完全消費、anti-templateは不変 |
+| mashos-api | `ai/tests/test_cmee_emlis_mixed_received_surface.py` | u354全意味比較、原接続詞・主体・程度・時点・余剰文の独立読解 |
+| mashos-api | `ai/tests/test_cmee_emlis_mixed_received_delivery.py` | 初回／ADD保存と旧完成DTO非再生成 |
+| mashos-api | `ai/tests/test_cmee_emlis_unknown_revision_time.py` | 旧全artifact比較で意図した一文と本文IDだけを分離 |
+| mashos-api | `ai/tests/test_cmee_emlis_negative_revision_surface.py` | u353全比較の初回／更新の限定表面差へ追従 |
+| mashos-api | `ai/tests/test_cmee_emlis_negative_revision_delivery.py` | 現在否定と中断再開の新経験文を確認 |
+| mashos-api | `ai/tests/test_cmee_emlis_relief_received.py` | 自然変種の原接続詞を保つ初回期待を確認 |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_u354_mixed_received_surface_v1.json` | 変更前u354の60record比較原本 |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 現行ownerのidentity同期、歴史的proofは維持 |
+| mashos-api | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 今回の限定修復・境界・次の本文品質残件 |
+| Cocolon | `Cocolon_前提資料/01_cocolon_overall_structure.md` | 全体設計の最新参照。構造差分なし |
+| Cocolon | `Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md` | 全変更fileの地図と責務 |
+| Cocolon | `Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md` | Emlis現行routeの限定修復 |
+| Cocolon | `Cocolon_前提資料/current_structure/04_cmee_current_structure.md` | 意味・selected不変、logical90の継承 |
+| Cocolon | `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` | 意味・旧保存・未完成再開の検証境界 |
+| Cocolon | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` | E05/E06/E08の限定更新と残件 |
+| Cocolon | `Cocolon_前提資料/07_latest_snapshot_diff.md` | milestone差分 |
+| Cocolon | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u355_MixedReceivedTimeNeutral_20261019.md` | 開始根拠・実本文・全差分・残件 |
