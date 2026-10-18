@@ -1,3 +1,5 @@
+> 2026-10-18最新：u350。Mash承認済みの「安堵・寂しさ＋別経験」を不明なし／ありの両方で初回・既受理一更新・旧保存互換・再表示へ保持する限定契約。private logical83→87、既存production10owner・新production0、STRUCTURE_MAP_DELTA_PRESENT。構造差分は末尾、実本文・検証結果・残件は[u350監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u350_ReliefReceivedRetention_20261018.md)を参照。PRODUCT_NOT_CLEARを維持。
+
 > 2026-10-18最新：u348。Mash承認済みの「安堵・寂しさ＋別経験＋現在の不明」を初回・既受理1更新・旧互換・保存再表示まで実装。初回3対象／2責務、更新後4対象／3責務。private V2二型追加、STRUCTURE_MAP_DELTA_PRESENT。実測・残件は末尾と[u348監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u348_MixedUnknownRetention_20261018.md)を参照。
 
 > 2026-10-18最新：u347。混在初回の原文反復を既承認内で修復。独立不明へのReceptionは初回〜1更新・保存を一体とする限定案まで具体化し、意味保持契約の判断待ち・未実装。末尾と[u347監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u347_InitialReliefLayout_and_UnknownDecision_20261018.md)を参照。
@@ -4208,3 +4210,53 @@ STRUCTURE_MAP_DELTA_PRESENT。既存production10file、新production0、private 
 | `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 作者から独立したunknown意味・本文検査 |
 | `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 完全混在source資格・既存reflexive2field補正・初回不明責務 |
 | `ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | 2／3責務でも完全Observationと一意な短いpair表現を保持 |
+
+## u350 — 二つの経験と任意の現在不明を一体で保持する承認済み限定契約（2026-10-18）
+
+Mashがu349の限定案に「進めていいよ」と回答したため、作業規則18 §11.3の個別承認として実装する範囲を更新した。u348の「別received経験自体の初回Receptionは追加しない」は当時の境界であり、この承認範囲では初回から選ぶ。対象は既存SELFの安堵・不確かな予想と現在の寂しさのpair、その後の独立した既存received一経験、任意の末尾current SELF wh不明一つ。全原文・全span・順序・主体・時点・肯否・独立性が証明できる構成だけである。
+
+| 操作 | 有効な応答対象数（不明なし／あり） | 二つの経験の責務 |
+| --- | --- | --- |
+| `INITIAL` | 4／5 | pair二反応とreceivedの出来事・元反応 |
+| `ADD` | 5／6 | 上記に回答を加え、元経験と回答の各時点を保持 |
+| `REVISE` | 4／5 | 元反応を失効し、出来事と受理済み訂正反応を保持 |
+| `WITHDRAW_EVENT` | 3／4 | 出来事と依存関係を失効し、残存する元反応を保持 |
+| `WITHDRAW_REACTION` | 3／4 | 元反応と依存関係を失効し、出来事の事実だけを保持 |
+
+責務は常にpair＋receivedの2 Move、不明がある場合だけ独立不明を加えて3 Moveとする。一般の最大3 Move・Reception最大3文を維持し、肯定ADDを4番目のMoveへ分離しない。receivedは`attention`、独立不明は`felt_response`として区別する。反応撤回後は残る事実だけを受け取り、感情・評価・個人的意味を補わない。出来事撤回後も撤回済み出来事を復活させない。
+
+全体はLIMITED・一claimのまま、同じaggregateを分担するpair／receivedの局所contentと任意不明を保持する。新しいprivate資格2型・局所content2型を既存ownerへ追加し、logical countは83→87。pairとreceivedは新`SelectedRetainedReliefReceivedDecisionV1`でcarryし、不明は既存selected decisionを使う。このHR carrierはlogical4型とは別である。field・有限値・seal・identityの正本は`designs/cmee/v1/05_json_schema_and_versioning.md`末尾u350。
+
+完全source資格が成立した原安堵核に`source_relief_received_retention:v1`を付け、意味checkpointを旧選択と区別する。markerだけでは資格を与えず、原入力と受理一更新を再受理し、envelope・qualified span・全plan・全aggregate・全selectedを比較する。pair／不明自身の更新、未解釈、複数回答、history／frameは新保持資格外。`NO_MATERIAL_UPDATE`は新しい更新contentを作らず、既存`UNCHANGED`経路で保存本文を再使用する。
+
+旧u348は`_legacy_relief_received_retention=True`の原source再構築から旧checkpoint identityと旧質問を照合し、u348の混在不明保持を残す。Prepared全体へ新legacy flagを追加して旧保持まで失効させない。旧u347以前の復元経路も維持し、完成済み本文は保存DTOのまま返す。新しい選択を旧checkpointへ付け替えない。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production10owner内の変更で、新production file・独立補助subsystemは追加しない。公開API／DTO／DB／RN／Safety／依存／外部AI／配置への責務差分はない。01B/C・Piece/Analysisの地図は変更しない。保存・再試行・再表示は既存serviceからAPI client→hook→Modalへの経路を確認対象とし、この構造記録だけを検証成功や本人実機確認とは扱わない。
+
+実本文、独立旧比較原本、逆検査、保存・再表示の実行結果と限界は[u350監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u350_ReliefReceivedRetention_20261018.md)・正本06・API handoffに集約する。PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=falseを維持する。一般入力・任意多段・定型性と深い理解・E04〜E09・本人実機をこの限定契約だけで完了としない。
+
+### u350 実owner対応
+
+| 既存path（mashos-api） | 今回の責務差分 |
+| --- | --- |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py` | 初回／一更新資格・pair／received局所内容の4型。有限操作ごとの有効対象、同じclaimの非重複寄与、全bindingとsealを検査 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 既受理一更新と原sourceを照合。ADDの元反応保持、訂正／両側撤回の残存責務、新資格失効、u348旧checkpoint復元 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 原sourceの新witness版と旧版を切り替え、旧質問の再受理へ同じ版を渡す。新質問・回答文法は追加しない |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py` | pair／receivedの局所contentを共通aggregateと因果traceへ結びseal。private logical87へ4型を登録 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py` | 新資格の不明なしQ1も意味非更新時は既存保存本文再使用へ接続 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py` | 原source／受理更新資格、全claimの責務partition、両contentの一体carry、envelopeから全plan・全selectedの再導出 |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 新selected carrier、初回receivedと追加回答の有限本文、反応撤回後のsource-owned事実受け取り、独立不明 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 作者から独立した全source検査と有限本文読解。3端点の時点・ABOUT、残存事実、各責務の欠落／撤回復活を検査 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 完全原文資格・witness、2経験＋任意不明の選択、received attentionとunknown felt_response、既存source再受理 |
+| `ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | 2／3責務の完全Observationと一意なpair照応を共同保持 |
+
+### u350 検証fileの地図
+
+| path（mashos-api） | 役割 |
+| --- | --- |
+| `ai/tests/test_cmee_emlis_relief_received.py` | 新構成の初回／一更新、責務失効、旧checkpointとの全record比較 |
+| `ai/tests/test_cmee_emlis_relief_received_source.py` | 完全source・seal・全selectedと独立readerの変異検査 |
+| `ai/tests/test_cmee_emlis_relief_received_delivery.py` | 既存serviceと隔離SQLの保存・完成済み本文非再生成・中断再試行、同じUI確認用DTOの取得 |
+| `ai/tests/fixtures/cmee_emlis_u349_relief_received_v1.json` | production変更前u349先端（productionはu348と同じ）の独立比較原本。現行出力から旧期待値を作らない |
+
+現行manifest／owner identityを照合する既存検証の同期箇所、全変更path、実行件数と結果はu350監査を正本とする。上表はfile責務の地図であり、未実行検査を成功扱いする記録ではない。

@@ -1,3 +1,5 @@
+> 2026-10-18最新：u350。Mash承認済みの「安堵・寂しさ＋別経験」を不明なし／ありの両方で初回・既受理一更新・旧保存互換・再表示へ保持する限定契約。private logical83→87、既存production10owner・新production0、STRUCTURE_MAP_DELTA_PRESENT。構造差分は末尾、実本文・検証結果・残件は[u350監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u350_ReliefReceivedRetention_20261018.md)を参照。PRODUCT_NOT_CLEARを維持。
+
 > 2026-10-18 u348：u347の混在current SELF wh不明の限定案はMash個別承認済み。初回の既存V1三対象／二責務を保ち、別received経験への受理一更新後は新private V2二型で四対象／三責務を拘束する。型・field・版・旧checkpoint保持は末尾u348、検証結果は同監査を参照。公開wire・DB・商品合格・配置は変更しない。
 
 > 2026-10-18 u339：初回の本人・過去不明への限定拡張はMash個別承認済み。末尾u339に現行条件。一般化・商品合格・配置は含まない。
@@ -2837,3 +2839,70 @@ Mashがu347監査の限定案を承認した。既存本人の安堵・不確か
 `STRUCTURE_MAP_DELTA_PRESENT`。既存production owner内のprivate契約追加であり、新production file・依存・外部AI・公開wire／DTO／DB／RNのfield・意味checkpoint保存schema・配置は変更しない。検証結果・実本文・限界は[u348監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u348_MixedUnknownRetention_20261018.md)と正本06／API handoffに記録する。PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=falseを維持する。
 
 補足：current SELF whの「自分でも」はu335既存のkind／predicate二field補正をnewmixed完全原文資格の成立時だけ適用する。relation・属性・時点の修正はしない。legacy modeでは補正を抑止。NO_MATERIAL_UPDATEはV2資格外であり、保存済み初回V1本文を既存UNCHANGED経路で再使用する。新mixed Q1だけにも既存reuse outcomeを適用し、旧checkpointの挙動は維持する。
+
+## u350 — 安堵pair・received一経験・任意現在不明の私有保持契約（2026-10-18）
+
+u349監査の限定案はMashが本会話で「進めていいよ」と承認済み。既存SELFの安堵・不確かな予想と現在の寂しさ、その後の独立received一経験、任意の末尾current SELF wh不明一つを、初回から既受理一更新・旧保存互換・再表示まで同じ単位で保持する。新しい質問・回答文法・任意多段・追加経験・前置／複数／第三者／過去不明は含まない。以下は既存owner内のrequest-local private型で、公開schema登録・DB保存fieldの変更ではない。
+
+### Canonical fields / finite values
+
+全fieldはconstructor上requiredで省略しない。表のnullable fieldだけ`None`を許し、値がないこととfield省略を同一視しない。既存V1/V2の型・schema・seal・対象数条件は変更しない。
+
+| 新logical型 | Required fields（継承を含む定義順） |
+| --- | --- |
+| `RetainedReliefReceivedEligibilityV1` | `schema_version`, `source_prefix_ref`, `checkpoint_ref`, `original_source_ref`, `relief_nucleus_ref`, `loneliness_nucleus_ref`, `received_event_ref`, `received_reaction_ref`, `unknown_nucleus_ref`, `contrast_relation_ref`, `received_relation_ref`, `answer_nucleus_ref`, `answer_relation_ref`, `operation`, `move_ref`, `received_move_ref`, `unknown_move_ref`, `thread_control`, `update`, `answer_source_ref` |
+| `RetainedUpdatedReliefReceivedEligibilityV1` | `schema_version`, `source_prefix_ref`, `checkpoint_ref`, `original_source_ref`, `relief_nucleus_ref`, `loneliness_nucleus_ref`, `received_event_ref`, `received_reaction_ref`, `unknown_nucleus_ref`, `contrast_relation_ref`, `received_relation_ref`, `answer_nucleus_ref`, `answer_relation_ref`, `operation`, `move_ref`, `received_move_ref`, `unknown_move_ref`, `thread_control`, `update`, `answer_source_ref` |
+| `RetainedReliefReceivedPairContentV1` | `schema_version`, `eligibility`, `projection_preimage_ref`, `aggregate_projection_seal_ref`, `aggregate_claim_ref`, `aggregate_proposition_ref`, `meaning_outcome_ref`, `reception_binding_ref`, `grounding_ref`, `proposition`, `basis_rows`, `qualifier_rows`, `seal_ref` |
+| `RetainedReliefReceivedExperienceContentV1` | `schema_version`, `eligibility`, `projection_preimage_ref`, `aggregate_projection_seal_ref`, `aggregate_claim_ref`, `aggregate_proposition_ref`, `meaning_outcome_ref`, `reception_binding_ref`, `grounding_ref`, `proposition`, `basis_rows`, `qualifier_rows`, `seal_ref`, `reception_configuration`, `event_ref`, `reaction_ref`, `answer_ref`, `relation_refs`, `original_proposition` |
+
+| Field group | 型・値・identity上の意味 |
+| --- | --- |
+| 各`schema_version` | exact string `1.0`。初回と更新はschema文字列でなくexact class identityでも区別 |
+| Eligibilityのsource／checkpoint／原核／原関係／Move参照 | string。`received_event_ref`／`received_reaction_ref`／`received_relation_ref`は原経験の核／関係IDであり、撤回後も原source資格の識別として保持する。active roleの有無はcontent側と操作で区別 |
+| Eligibilityのnullable refs | `unknown_nucleus_ref`, `answer_nucleus_ref`, `answer_relation_ref`, `unknown_move_ref`, `answer_source_ref`は`Optional[str]`。unknown核とMoveは同時に存在／不在 |
+| `thread_control` | 宣言型`Any`、実source再受理では既存`EmlisThreadInputV1`と照合。`prepared_meaning_checkpoint_ref`を当該checkpointへ固定 |
+| `update` | 宣言型`Any`、初回は`None`。更新時は既存answer ownerが受理したexact1 itemをそのまま照合し、新しい回答解釈を作らない |
+| `operation`／`reception_configuration` | stringの有限値`INITIAL`, `ADD`, `REVISE`, `WITHDRAW_EVENT`, `WITHDRAW_REACTION`。新enum classは追加しない。contentのconfigurationはeligibility.operationと一致 |
+| Contentの`eligibility` | exact `RetainedReliefReceivedEligibilityV1`またはexact `RetainedUpdatedReliefReceivedEligibilityV1`。旧資格型や任意subclassは通さない |
+| Contentのbinding refs | string。全体projection preimage／seal、claim／proposition、meaning outcome、reception binding、groundingを同じselected aggregateへ結ぶ |
+| `proposition`／`basis_rows`／`qualifier_rows` | 既存`SubjectivePropositionV2`と既存basis／qualifier型のtuple。pairはexact2 basis・exact2 qualifier・exact1 contribution。receivedは選択寄与に所属する全row（manifest上1..4）を保持し、semanticな有効端点数を操作別に別途拘束 |
+| `event_ref`, `reaction_ref`, `answer_ref` | `Optional[str]`のsemantic node ref。active roleだけを指し、撤回／訂正済みの旧roleは`None`。Eligibilityの原核IDとは参照空間が異なる |
+| `relation_refs` | semantic relation refのtuple。INITIAL=原contrast一つ、ADD=原contrast＋既受理ABOUT、REVISE=既受理ABOUT一つ、片側撤回=空tuple。順序・全source再導出も照合 |
+| `original_proposition` | `Optional[SubjectivePropositionV2]`。INITIALはreceived局所propositionと一致。ADDは原event／reactionの一contributionから再導出した旧二端点経験。REVISEと両WITHDRAWは`None` |
+
+初回資格は`operation=INITIAL`かつ回答核・ABOUT・update・回答sourceがすべて`None`。更新資格は既存の回答exact1・round1・完全RESOLVED・MATERIAL_UPDATE・受理item exact1であり、updateと回答sourceが必要。ADD／REVISEは回答核と実在するABOUT参照を必要とし、WITHDRAWは両参照を持たない。元pairと任意不明は完全一致で残ることを要求する。
+
+| 操作 | 全体response objects（不明なし／あり） | received active roles | received relations |
+| --- | --- | --- | --- |
+| INITIAL | 4／5 | event＋原reaction | 原contrast |
+| ADD | 5／6 | event＋原reaction＋answer | 原contrast＋既受理ABOUT |
+| REVISE | 4／5 | event＋answer | 既受理ABOUT |
+| WITHDRAW_EVENT | 3／4 | 原reactionのみ | なし |
+| WITHDRAW_REACTION | 3／4 | eventのみ | なし |
+
+ADDの肯定／否定、回答時点／元出来事時点は既存受理itemのtemporal bindingからそのまま保持する。3端点を旧received localの2 basis／2 qualifiersへ偽装しない。INITIALは既存received二端点localを使う。更新後のreceivedは選択された全roleの`MATERIAL_WEIGHT`／`RECEIVE_AS_MATERIAL`局所propositionを持ち、ADDだけ原二端点propositionを別途保持する。REVISEは既存update ownerが実際に作ったABOUTだけを使い、本文のためのcontrastを作らない。
+
+### Selected carrier / aggregate / seals
+
+新HR carrier `SelectedRetainedReliefReceivedDecisionV1`は、既存`SelectedSubjectiveReceptionDecisionV1`の14 fieldに`retained_relief_received`一つを追加する。全required fieldの定義順は`decision_ref`, `branch`, `meaning_outcome_ref`, `reception_binding_ref`, `projected_claim_ref`, `selected_opportunity_ref`, `move_id`, `reception_act`, `target_nucleus_ids`, `support_nucleus_ids`, `selected_contribution_refs`, `subjective_proposition`, `basis_rows`, `qualifier_rows`, `retained_relief_received`。追加fieldの宣言型は`Any`だが、検証時は上記pairまたはexperience contentのexact型・完全sourceを要求する。pairとreceivedの二decisionを同じ資格から一体でcarryし、独立不明は既存decisionを使う。
+
+全体はLIMITED・一claim、`ATTENTION`／`ATTEND_TO`、aggregate appraisalは`MATERIAL_WEIGHT`／`RECEIVE_AS_MATERIAL`、focal relationなし。全decisionは同じaggregate／claim／meaning outcome／reception binding／basis／qualifierを共有する。各Moveのselected contributionsをpair・received・任意不明へ重複なしで分割し、その和がaggregateの全target contributionに一致する。各局所semantic roleとMove target／supportの集合も一致させる。pair局所appraisalだけは既存`EmlisReliefCognitionAppraisalContent`を使い、独立不明やreceivedへ混同しない。
+
+- pair local sealは`retained-relief-received-pair:`、experience local sealは`retained-relief-received-experience:`に、`seal_ref=''`としたcontent全体の`stage1_canonical_json_bytes`のSHA-256を連結する。`schema_version`と資格・全binding・local内容もhash材料である。
+- `aggregate_proposition_ref`は既存`retained_relief_cognition_aggregate_ref`を使い、local化前の全aggregateに結ぶ。projectionのpreimage／sealとmeaning causal traceもcompositionで照合する。
+- carrierの`decision_ref`は既存`selected-reception-decision:`規則で自身だけ空にした全fieldをhashする。追加contentも材料になる。全selectedの`input_ref`も既存`selected-reception-input:`規則で再計算する。sealを作り直しただけの内容改変はsource replayを通らない。
+- logical manifestには上記4型を`relief-received-retention-v1` family／`POST_SELECTION_LOCAL_CONTENT`として登録し、private logical83→87。HR carrierはこの4型とは別の既存HR owner内型であり、logical countへ重複加算しない。shared catalog・公開API・Piece／Analysis契約へ昇格しない。
+
+### Complete source / checkpoint / reader responsibility
+
+`_source_relief_received_group`は既存本人pairとreceived原文全体、任意末尾current SELF wh不明を再証明する。原文順序・全span集合・source field・明示主体・時点・肯否・関係・scalar range・received linkを照合し、別材料や余分な接続を認めない。完全資格の成立した原安堵核だけへ`source_relief_received_retention:v1`を付ける。これはcheckpoint identityの区別であり、marker単独で選択・本文を許可する仕組みではない。
+
+`_retained_relief_received_update_source`／`_retained_relief_received_duties`は既存受理一更新と、その有効／失効核・関係・固有時点を照合する。pair／unknown自身の変更、未解釈、複数回答、history／frameでは新資格を失効する。`NO_MATERIAL_UPDATE`は更新型の対象外であり、Q1/Q3の既存`UNCHANGED`経路で保存済み本文を再使用する。
+
+`validate_retained_relief_received_source`は`ThreadEvidenceSpanResolver`のactual original／answer envelopeを再受理し、保存checkpointを尊重する`prepare_emlis_meaning`へ戻す。全envelope・span・qualified ref・全plan・資格を比較し、全aggregateとpair／receivedの両carrierを再導出した全selectedとの一致を必要とする。一つのlocal contentを別のlocal contentのsource証明に流用しない。source構造の検査と作者の有限本文生成、作者を呼ばない独立readerは別の責務である。
+
+旧u348は`_legacy_relief_received_retention=True`で新witnessと新選択だけを無効にした原planから再構築し、旧checkpoint／旧質問の全identityが一致する場合に復元する。Preparedへ新しい汎用legacy flagを増やしてu348 mixed unknownや既存u344/u346保持まで失効させない。旧u347以前のlegacy分岐も維持する。完成済み本文を再生成して旧DTOを書き換える契約ではない。
+
+receivedは`attention`、独立unknownは`felt_response`を持つ別Moveである。最大3 Move／Reception最大3文を維持する。追加回答の3端点は同一received責務で表現し、反応撤回後のevent単独はこの資格内でのみsource-ownedな事実として受け取る。独立readerは元sourceへ戻して主体・時点・肯否・関係・欠落・撤回済み素材の復活を検査し、感情や原因の補完を許可しない。
+
+`STRUCTURE_MAP_DELTA_PRESENT`。既存production10owner、新production0。公開wire／DTO／DB／RN／Safety／依存／外部AI／配置の変更はない。01／01AとEmlis／CMEE current map、8/28意味設計を同期する。実本文・旧比較原本・検証結果・限界は[u350監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u350_ReliefReceivedRetention_20261018.md)と正本06／API handoffのownerとし、ここに未確認の合格数を置かない。PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=falseを維持する。
