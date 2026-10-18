@@ -1,3 +1,5 @@
+> 2026-10-18 u348：u347の混在current SELF wh不明の限定案はMash個別承認済み。初回の既存V1三対象／二責務を保ち、別received経験への受理一更新後は新private V2二型で四対象／三責務を拘束する。型・field・版・旧checkpoint保持は末尾u348、検証結果は同監査を参照。公開wire・DB・商品合格・配置は変更しない。
+
 > 2026-10-18 u339：初回の本人・過去不明への限定拡張はMash個別承認済み。末尾u339に現行条件。一般化・商品合格・配置は含まない。
 
 # CMEE V1 — JSON Schema / Identity / Versioning 詳細設計
@@ -2798,3 +2800,40 @@ Mashの「進めていいよ」というu338限定案への個別承認を、wee
 既存production9owner内の実装。source adapter本体は変更せずprojectionで境界を再証明し、Q1入口を同じprepared planへ接続した。公開wire／DB／RN／依存／外部AI／費用／配置は不変。商品合格・次Gate・merge／deployの承認を兼ねない。実装・検証と現在位置は正本06末尾u339、以下監査を参照。
 
 [Cocolon_EmlisAI_u339_PastSelfUnknown_Implementation_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u339_PastSelfUnknown_Implementation_20261018.md)。
+
+
+## u348 — 混在する独立現在不明を初回と一更新後へ保持するprivate V2（2026-10-18）
+
+Mashがu347監査の限定案を承認した。既存本人の安堵・不確かな予想と現在の寂しさのpair、独立した既存received一経験、末尾の独立current SELF wh不明一つ、という順序の完全原文を再証明できる場合に限る。初回の不明責務選択から、別received経験への既受理ADD／反応REVISE／event WITHDRAW一更新、実本文、旧checkpoint互換、保存再表示までが同じ承認範囲である。新しい問い・質問数・回答grammar・任意多段・前置／複数／第三者／原因／過去不明への拡張は含まない。
+
+初回の原文にはrequired核が五つあるが、応答対象はpair二点と不明一点の三対象／二責務だけである。received二核はObservationで必須のままReceptionには未選択とする。初回は既存`RetainedReliefCognitionEligibilityV1`／`RetainedReliefCognitionContentV1`を用い、全体LIMITED・一claim・三対象、pair局所二basis／二qualifierを維持する。
+
+更新後はpair二点、受理回答またはevent撤回後の残存反応一点、不変の不明一点の四対象／三責務とする。全体LIMITED／ATTENTION／ATTEND_TO／MATERIAL_WEIGHT／RECEIVE_AS_MATERIALの一claimは維持し、pair局所二対象と独立不明を混同しない。旧`RetainedUpdatedReliefCognitionEligibilityV1`／`RetainedUpdatedReliefCognitionContentV1`の三対象／二責務を緩めず、新しいexact型へ分ける。
+
+### Canonical fields / version / identity
+
+以下はEmlis専用のrequest-local private型である。列挙fieldはすべてrequiredであり、optional追加はない。EligibilityV2は旧EligibilityV1の十三fieldを同じ順序で持ち、末尾に不明核／不明Moveの二参照を追加する。ContentV2は既存local内容の十三fieldを同じ順序で持ち、eligibilityのexact型をV2にする。
+
+| 型 | Required fields（定義順） |
+| --- | --- |
+| `RetainedUpdatedReliefCognitionEligibilityV2` | `schema_version`, `source_prefix_ref`, `checkpoint_ref`, `original_source_ref`, `answer_source_ref`, `relief_nucleus_ref`, `loneliness_nucleus_ref`, `contrast_relation_ref`, `received_event_ref`, `received_reaction_ref`, `answer_update`, `move_ref`, `thread_control`, `unknown_nucleus_ref`, `unknown_move_ref` |
+| `RetainedUpdatedReliefCognitionContentV2` | `schema_version`, `eligibility`, `projection_preimage_ref`, `aggregate_projection_seal_ref`, `aggregate_claim_ref`, `aggregate_proposition_ref`, `meaning_outcome_ref`, `reception_binding_ref`, `grounding_ref`, `proposition`, `basis_rows`, `qualifier_rows`, `seal_ref` |
+
+- 両型の`schema_version`はexact string `2.0`。class identityと合わせてV2を選び、旧V1のschema文字列やfieldを上書きしない。ref／schema／seal fieldsはstring、`answer_update`／`thread_control`は既存ownerから再導出する受理更新／thread control、`proposition`は`SubjectivePropositionV2`、`basis_rows`／`qualifier_rows`は既存型のtuple各exact2である。ContentV2の`eligibility`はexact `RetainedUpdatedReliefCognitionEligibilityV2`を必要とする。
+- `unknown_nucleus_ref`はpair・receivedの各核とは異なる不変の原不明核、`unknown_move_ref`はpair Moveとは異なる独立`stay_with_current_burden` Moveを指す。全selectedは異なる三Moveを持つ。不明Moveは当該核だけをtargetとしsupportなし、独立contribution exact1を所有する。pairと不明の局所寄与を重複させず、全体claim／meaning outcome／reception binding／basis／qualifierとの一致を保つ。
+- V2 local sealは`retained-updated-relief-cognition-v2:`に、`seal_ref`だけを空文字へ置換した内容の`stage1_canonical_json_bytes`のSHA-256を付ける。V1 seal prefixは不変。refやsealを再計算しただけの改変を認めず、全source／更新／plan／selectedの再導出結果との一致を必要とする。
+- 既存`SelectedRetainedReliefCognitionDecisionV1`のcarrierを再利用し、新decision型は追加しない。logical contract manifestへ上記二型を`retained-updated-relief-cognition-v2` family／`POST_SELECTION_LOCAL_CONTENT`として追加し、private logical countは81から83になる。§1 shared catalog、公開API schema、Piece／Analysis契約へ昇格しない。
+
+### Source proof / checkpoint compatibility
+
+初回の完全source資格は、pair・received・不明の原文／span／順番／主体／時点／肯否／独立性を結ぶ。receivedは既存有限projectionの全原文から型・scalar range・linkまで再導出する。不明はcurrent SELF wh一核・required／explicitで、optionalを含む関係接続を持たない。`source_mixed_relief_unknown_retention:v1`はこの証明を通過した原不明核だけへ付ける。marker単独では資格を与えない。
+
+更新資格は回答exact1・round1・完全RESOLVED・MATERIAL_UPDATE・受理更新exact1を要求し、既存receivedだけへの上記更新と、原pair／不明の不変を確認する。不明やpair自身の訂正／撤回、未解釈回答、意味変更なし、複数回答・履歴／frameは新資格外である。旧不明を新しい現在として復活させない。作者用の不明原文証明も実original envelopeを再受理して元planと不明・pairを比較し、回答source exact1に限定する。selected内容の検査はそれとは別に原入力と受理更新を再受理し、全plan・全selectedを再導出して照合する。
+
+新原plan witnessと`source_mixed_relief_unknown_update_retention:v1`によって新意味identityを区別する。旧u347 checkpointは`_legacy_mixed_relief_unknown=True`で新witnessだけを無効にした原planから再導出し、旧checkpointの全identityが一致する場合だけ復元する。Prepared全体に新legacy flagを加えて既存u344/u346保持まで失効させない。独立source replayも`prepare_emlis_meaning`を経由し、保存checkpointの版を尊重したうえでactual envelope・全span／qualified refsとplan／selectedを照合する。
+
+比較原本はu347完了版であり、同じ旧checkpointの全意味・plan・selectedとu347の生成本文／停止を保持する。u346／u347の完成済み本文は保存DTOのまま非再生成で返す。同一意味checkpointから、行構成だけ異なるu346とu347両世代の未完成本文を区別して復元するとは主張しない。意味保存前／後の確定中断と再試行は別に検証する。
+
+`STRUCTURE_MAP_DELTA_PRESENT`。既存production owner内のprivate契約追加であり、新production file・依存・外部AI・公開wire／DTO／DB／RNのfield・意味checkpoint保存schema・配置は変更しない。検証結果・実本文・限界は[u348監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u348_MixedUnknownRetention_20261018.md)と正本06／API handoffに記録する。PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=falseを維持する。
+
+補足：current SELF whの「自分でも」はu335既存のkind／predicate二field補正をnewmixed完全原文資格の成立時だけ適用する。relation・属性・時点の修正はしない。legacy modeでは補正を抑止。NO_MATERIAL_UPDATEはV2資格外であり、保存済み初回V1本文を既存UNCHANGED経路で再使用する。新mixed Q1だけにも既存reuse outcomeを適用し、旧checkpointの挙動は維持する。
