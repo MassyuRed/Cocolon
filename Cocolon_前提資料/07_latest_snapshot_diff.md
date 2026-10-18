@@ -1336,6 +1336,8 @@ coverage:
 ---
 # 1. 今回の基準面
 
+> 最新EmlisAI残件：末尾u327（2026-10-18）の不明対象と別欄の独立行動の二責務修復を参照。u326までの記録は各時点の履歴として保持する。PRODUCT_NOT_CLEAR・初回一体単位未完了・未配置。
+
 この版は、次のzipを最新基準にします。
 
 | source | count | 差分 |
@@ -41139,3 +41141,15 @@ source_scope最終341 passed（既存292＋追加49）。旧u325の完全checkpo
 独立行動を併記すると不明対象の受け取りが落ちる選択問題は別残件。対象欠落の限定修復をE04の深い受容・E05の問い完成としない。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持。同Work補助は正式別model評価ではない。期限・主枠配分・53.25％は再評価しない。
 
 全文・source・検証条件：[u326監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u326_SingleUnknownObjectReception_20261018.md)。
+
+## u327 — 対象を持つ不明と独立した行動を両方受け取る（2026-10-18 JST）
+
+別欄memoの完全な本人・現在のwh不明節と、memo_action全体の独立実行済み行動を、既存の二責務へ保持した。source証明が成立する場合だけ既存3属性へ接続し、optional bounded cross-fieldのwish／attempt誤関係だけを除く。既存selectorのMATERIAL_WEIGHT／RECEIVE_AS_MATERIALを使い、単独u326のUNFINISHED受容は強制しない。本人・対象・程度・否定を保ち、原文にない「まだ」を加えない。既存6owner内、STRUCTURE_MAP_DELTA_NONE。
+
+Q1公開経路でも準備済みplanを捨てず、Q3と同じ意味から本文へ接続する。直接builderはlegacy既定を維持し、他coreへ広げない。今回のsource属性・関係・選択変更は新しいmeaning identityへ反映する。旧u326 checkpointは全意味の再導出と完全一致で復元し、旧完成と旧checkpoint後retryは旧action-only本文を保持。checkpoint前retryは現行の二責務本文となる。公開API／DB／RN／schema／問い上限は不変。
+
+source_scopeは435 passed（追加94：20入力×Q1／Q3、旧checkpoint20、本文改変18、対象外16）。Q3理由不明／既存scalar＋別行動対照は54 passed／既知3 failed／899 deselectedで、旧名詞化文のexact期待を変更していない。Q2／Q3 applicationは54 passed、現行identityは1 passed／194 deselected。別file集合の合計544 passed／既知3 failed、skip 0であり、全件成功ではない。実SQL／RPC service6ケースと、同じ実DTOによるAPI client／hook／Modal native stub6件で全文・close/reopen一致を確認。実機／本番DB／deploy／mergeは未実施。途中runや内包するケースを重複合算しない。
+
+主担当が20全文を読んだ。二内容の保持は修復したが、Observationの引用／感覚分類、Receptionの近い反復と行動への定型は残る。同欄行動の誤分類、scalar不明＋別欄行動のaction-onlyも別残件。E04／E05の完成とはせず、PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。同Work補助は正式別model評価ではない。期限・主枠配分・53.25％は再評価しない。
+
+全文・実装境界・保存互換：[u327監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u327_IndependentUnknownActionReception_20261018.md)。

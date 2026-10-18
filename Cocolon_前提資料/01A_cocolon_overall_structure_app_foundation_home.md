@@ -7,6 +7,8 @@ revision_date: "2026-06-05"
 
 この章では App root / provider / Home screen / notice / today-question / reflection preview / frontend Home API boundary / backend Home API / home_gateway / startup / EmlisAI immediate reply をまとめて扱う。
 
+> 最新EmlisAI file追跡は末尾u327（2026-10-18）。既存6owner内の限定修復と追加検査・凍結fixtureを記録する。STRUCTURE_MAP_DELTA_NONE。
+
 ## A1. App root / provider / build boundary
 
 ### `Cocolon/.env.subscription.public.example`
@@ -3700,3 +3702,22 @@ Mashが2026-10-17 16:46:17 JSTにu314限定案を承認した。別received経�
 | `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 既存の現行共有owner identityを実sourceから再導出。歴史fixtureは変更しない |
 
 source_scope最終341 passed。実SQL／RPC serviceとAPI client／hook／Modal native stubは同じ6 DTOで保存本文・close/reopenを確認。別集合のQ3対照48 passed／既知3 failed、application54 passed、現行identity1 passedを含め、計444 passed／既知3 failed。全件成功ではない。最終source identityとGitHub反映commitは [u326監査](audits/emlis_ai/Cocolon_EmlisAI_u326_SingleUnknownObjectReception_20261018.md) を参照する。独立行動併記時の選択欠落は未修正。商品NOT_CLEAR・正式0/3・未配置を維持する。
+
+
+### u327 file追跡 — 不明対象と別欄の独立行動を保持（2026-10-18）
+
+`STRUCTURE_MAP_DELTA_NONE`。既存6製品owner内で、原source証明・既存選択・本文・旧意味再導出を接続する修復。新しい製品file／schema／公開経路はなく、01B／01C・Piece／Analysisの責務差分もない。
+
+| path（mashos-api） | 今回の責務差分 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | whole SELF current wh不明と別欄の独立実行済み行動を証明し、既存3属性と二責務選択へ接続。optional bounded cross-field wish／attempt誤関係だけを除去 |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 選択済みMATERIAL_WEIGHT／RECEIVE_AS_MATERIALのまま不明対象を有限文へ保持。u326の一核限定UNFINISHED文法は維持 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 本人・対象・程度・否定と実本文を作者非依存で照合し、片方欠落や別内容への変更を拒否 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 現行thread原意味準備へ今回修復を接続し、旧source再導出と分離 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 旧u326 checkpointを完全な旧意味の再導出とidentity一致で復元 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py` | Q1公開経路で準備済みplanを本文生成へ維持。Q3と同じ原意味を使用 |
+| `ai/tests/test_cmee_emlis_source_scope_regressions.py` | 既存fileへ94件追加。20入力×2公開経路、旧checkpoint20、本文改変18、対象外16 |
+| `ai/tests/fixtures/cmee_emlis_u326_unknown_action_checkpoint_v1.json` | 新規。API `56fcaaec23a516de70fcc86f8f0caca94b86bc50` の合成20件を凍結し、旧意味・旧本文の保持と現行生成差分を比較 |
+| `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 既存の現行source identityを再導出。凍結済み歴史fixtureは不変 |
+
+source_scope435 passed、Q3対照54 passed／既知3 failed。別集合のapplication54 passed・identity1 passedを含め、計544 passed／既知3 failed、skip 0。実SQL／RPC serviceと実DTOを渡すAPI client／hook／Modal native stub各6件の全文・close/reopenを確認。全件成功や商品品質合格とはしない。最終結果・未加工20全文・意味世代の境界は [u327監査](audits/emlis_ai/Cocolon_EmlisAI_u327_IndependentUnknownActionReception_20261018.md) を参照する。
