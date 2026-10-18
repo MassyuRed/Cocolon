@@ -1,3 +1,5 @@
+> 2026-10-18最新：u345。別経験への1回答後の原文反復を、完全な観測の別行化で修復。意味・問い・完成済み保存本文は保持。末尾と[u345監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u345_ReliefObservationLayout_20261018.md)を参照。
+
 > 最新EmlisAI file追跡：末尾u342。既存production3fileの逆順関係修復と旧checkpoint互換。STRUCTURE_MAP_DELTA_NONE。
 
 > 最新EmlisAI file追跡：末尾u341。既存production1fileの程度参照修復。STRUCTURE_MAP_DELTA_NONE。
@@ -4089,3 +4091,34 @@ STRUCTURE_MAP_DELTA_NONE。既存4production file内で修復し、公開wire／
 | Cocolon | `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` | 今回差分・参照／本監査 |
 | Cocolon | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` | 今回差分・参照／本監査 |
 | Cocolon | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u344_ReliefContinuity_20261018.md` | 今回差分・参照／本監査 |
+
+
+## u345 — 別経験への1回答後も、完全な観測と短い二反応を両立（2026-10-18）
+
+u344に残った原文反復を、既承認のu336共同保持とu331/u332更新責務の範囲で修復した。未変更の安堵・寂しさpairと独立した別経験を既存行構成ownerで別行へ分け、pairの完全な原文をObservationへ残す。実Observationの完全一行・一意照応を要求するreaderは変更しない。意味checkpoint・全plan・selected・問い・decisionは不変で、新しい内容選択や反応は追加しない。
+
+開始原本21入力の比較で、10入力×Q1/Q3の1回答後Receptionを短縮。初回42結果は不変。別の寂しさもある曖昧例は全文参照を保持。「かもしれなかった」はQ3で実問いを出せず、改善成功に数えない。対象集合の最終結果は重複除外323 passed／0 failed／skip 0（新規108、既存関連215）。全suite成功を意味しない。。保存23DTOの現行API client→hook→Modalでclose/reopen各2回も確認。HTTP／Auth／nativeはstubで、実機・本番DBではない。
+
+旧u343 checkpointは旧意味・全出力／停止を保持。u344と同じ意味checkpointから未完成本文を生成する場合は今回の行構成を使うが、既に完成・保存した本文は再生成せずそのまま返す。STRUCTURE_MAP_DELTA_NONE、既存production1file・新production0、logical81不変。公開wire／DB／RN／Safety／依存の変更なし。
+
+必要性=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、primary outcome=TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式Product Read0/3／candidate_ready=false／automatic_progression=falseを維持。初回の長い混在Reception、extra_unknownの回答後のpair欠落、否定訂正、一般入力・任意多段、E04深さ／E05問い／E06〜E09・本人実機は残る。次は未変更の不明と二反応が追加回答後に同居するextra_unknownの責務脱落を原文・実問い・選択から診断し、既承認保持の修復と新しい内容判断を区別する。10/20方式判断、10/31管理線、12/18目標、Piece/Analysis主枠53.25％は維持。既存Draft PR3／PR30で継続、merge／配置なし。
+
+全13file、未加工本文、検証・互換境界は[u345監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u345_ReliefObservationLayout_20261018.md)。
+
+### u345変更file地図
+
+| repository | path | 役割 |
+|---|---|---|
+| mashos-api | `ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | 既存の行構成owner。保持pairと独立した別経験を別行にし、既存source-component arcを使用 |
+| mashos-api | `ai/tests/test_cmee_emlis_relief_layout.py` | 新規。無変更u344比較、全意味・問い保持、独立本文読解、同一経験の分割拒否、旧保存準備の原本一致 |
+| mashos-api | `ai/tests/test_cmee_emlis_relief_layout_delivery.py` | 新規。現行／u344完成本文の保存、生成なし再表示、保存済み意味からの中断再試行7件 |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_u344_relief_layout_v1.json` | 新規。開始原本fc3bc928の21入力×Q1/Q3×初回／1回答の83結果と実問いなし1件 |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 現在owner identityのみ再導出。歴史fixture・scopeは保持 |
+| mashos-api | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 今回結果・保存境界・残件・次の再開先 |
+| Cocolon | `Cocolon_前提資料/01_cocolon_overall_structure.md` | 設計全体の最新差分と監査への入口 |
+| Cocolon | `Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md` | 今回13fileの全変更地図。01B/Cの既存担当範囲は変更なし |
+| Cocolon | `Cocolon_前提資料/07_latest_snapshot_diff.md` | 今回のスナップショット差分 |
+| Cocolon | `Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md` | EmlisAI現状・保持範囲・未完 |
+| Cocolon | `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` | 実装順序・検証・進捗の正本追記 |
+| Cocolon | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` | 最新週次への実績・残件追記 |
+| Cocolon | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u345_ReliefObservationLayout_20261018.md` | 新規。本監査、判断根拠・実本文・検証境界・全変更file |
