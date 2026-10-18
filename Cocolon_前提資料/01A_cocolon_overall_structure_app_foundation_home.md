@@ -3879,3 +3879,23 @@ STRUCTURE_MAP_DELTA_PRESENT。新production file0。01B／01C、Piece／Analysis
 | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 承認範囲・実本文・検査・残件・PR反映への引継ぎ |
 
 詳細：[Cocolon_EmlisAI_u336_ActualObservation_Anaphoric_Reception_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u336_ActualObservation_Anaphoric_Reception_20261018.md)。
+
+
+## u337 — 残存安堵の本人の人称修復のfile地図
+
+新production file0、既存production6file。01B／01C、Piece／Analysis、公開API／DB責務の差分なし。STRUCTURE_MAP_DELTA_NONE。
+
+| mashos-api exact path | u337の差分 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 元の適格pairで明示SELF安堵へ表現資格版を付ける。新意味型なし |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 現行と全歴史source modeへ旧表現flagを伝播 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | u336の旧checkpoint全体を先に再導出して復元 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py` | 表現だけのlegacy flagで旧u336独立不明carrierを失効させない |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 原文の明示SELFを再証明し、単独残存安堵の先頭人称だけ「あなた」に変換 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 共通appraisalの選択basis・live核・全原文から独立に人称を検証。汎用fallbackによる迂回禁止 |
+| `ai/tests/test_cmee_emlis_relief_self_recipient.py` | 現行初回40／更新21、旧61完全復元、二作者禁止変異、偽根拠、資格対照、SQL保存再表示 |
+| `ai/tests/fixtures/cmee_emlis_u336_self_recipient_v1.json` | 無変更u336 commit 703991eの実engineから取得した合成61完全record |
+| `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 最終source ASTからcurrent identityを再導出。過去の凍結fixture不変更 |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 実装・検証・残件の再開先 |
+
+詳細：[Cocolon_EmlisAI_u337_SelfRecipient_AfterPairRevision_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u337_SelfRecipient_AfterPairRevision_20261018.md)。

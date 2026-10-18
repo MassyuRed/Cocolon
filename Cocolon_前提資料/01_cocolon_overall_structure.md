@@ -1,3 +1,5 @@
+> 最新差分：u337。既存6owner内で訂正・撤回後の本人の人称を修復。STRUCTURE_MAP_DELTA_NONE。詳細は01A末尾と [Cocolon_EmlisAI_u337_SelfRecipient_AfterPairRevision_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u337_SelfRecipient_AfterPairRevision_20261018.md)。
+
 > 最新差分：末尾u336。既存ownerで実Observationを先行生成して共同保持。STRUCTURE_MAP_DELTA_NONE。
 
 > 最新差分：末尾u335。既存source認識・旧modeの局所修復、STRUCTURE_MAP_DELTA_NONE。
