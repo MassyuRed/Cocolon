@@ -1,3 +1,5 @@
+> 最新構造差分：末尾u333。既存source owner内の主体継続修復。STRUCTURE_MAP_DELTA_NONE。
+
 > 最新構造差分：末尾u332。EmlisAI内部の根拠付き反応契約、公開経路は不変。
 
 ---
@@ -7167,3 +7169,7 @@ Mashが2026-10-17 16:46:17 JSTにu314限定案を承認した。別received経�
 
 Mash個別承認の二反応を既存8ownerへ実装。STRUCTURE_MAP_DELTA_PRESENT。新production file0、公開API／DB／RN・他中核は不変。全file地図01A、current01／04、8/28設計末尾u332へ契約と版互換を同期した。検証・残件は06／weekly／API handoff末尾u332。
 詳細・未加工本文・検証境界：[Cocolon_EmlisAI_u332_SourceBoundRelief_and_Listening_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u332_SourceBoundRelief_and_Listening_20261018.md)。
+
+## u333 — 既存source責務内の本人主語継続修復（2026-10-18）
+
+RN→API→thread source／plan→既存主観選択・作者／独立reader→保存→再表示の構造は不変。意味型・公開契約・DB・RN・依存は追加しない。変更は既存source proof、source mode伝播、旧checkpoint完全復元の3owner。新しい独立不明の保持契約は未採用で、個別承認案として分離した。STRUCTURE_MAP_DELTA_NONE。実pathは01A末尾u333、詳細は[Cocolon_EmlisAI_u333_SelfContinuation_and_IndependentUnknown_Boundary_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u333_SelfContinuation_and_IndependentUnknown_Boundary_20261018.md)。

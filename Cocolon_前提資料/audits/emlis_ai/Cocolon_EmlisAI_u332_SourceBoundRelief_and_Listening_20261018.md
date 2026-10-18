@@ -1,3 +1,5 @@
+> 後続u333：明示SELF継続の停止修復と、独立不明の保持契約境界は[Cocolon_EmlisAI_u333_SelfContinuation_and_IndependentUnknown_Boundary_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u333_SelfContinuation_and_IndependentUnknown_Boundary_20261018.md)。本u332記録は当時の実績として保持。
+
 # EmlisAI u332 — 安堵と不確かな寂しさに根拠を持つ反応
 
 API baseline `661fbe951edee16be93e9a94d5aac50ba10deb57`。資料baseline `7b01b4c5b79369361ca3028c45d69b3a18e8f951`、承認先行commit `3449f723735f974ccb1577656344301b4e90df56`。合成入力のみ。

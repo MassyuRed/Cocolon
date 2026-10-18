@@ -1,3 +1,5 @@
+> 最新EmlisAI file追跡：末尾u333。既存3owner、test／fixture追加。STRUCTURE_MAP_DELTA_NONE。
+
 > 最新EmlisAI file追跡：末尾u332。STRUCTURE_MAP_DELTA_PRESENT（承認済み内部内容契約）。
 
 > 最新EmlisAI file追跡は末尾u331（2026-10-18）。具体的対比の参照と独立関係読解。STRUCTURE_MAP_DELTA_NONE。
@@ -3788,3 +3790,19 @@ source_scope608、Q3対照54＋既知3失敗、application54、identity1。計71
 | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 最新契約・実装・検証・残件引継ぎ |
 
 詳細・未加工本文・検証境界：[Cocolon_EmlisAI_u332_SourceBoundRelief_and_Listening_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u332_SourceBoundRelief_and_Listening_20261018.md)。
+
+## u333 — 明示SELF継続修復のfile地図（2026-10-18）
+
+STRUCTURE_MAP_DELTA_NONE。production owner・意味型・公開経路の追加なし。
+
+| 実path | 変更責務 |
+|---|---|
+| `mashos-api/ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 局所SELF継続証明・旧source mode。既存作者／readerは変更なし |
+| `mashos-api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 現行／全旧source modeの明示伝播 |
+| `mashos-api/ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 旧u332 checkpoint完全復元の優先経路 |
+| `mashos-api/ai/tests/test_cmee_emlis_self_continuation.py` | 新規95検査。source・Q1/Q3・NORMAL/LIMITEDの独立変異・5更新・8SQL保存・帰属 |
+| `mashos-api/ai/tests/fixtures/cmee_emlis_u332_self_continuation_v1.json` | 凍結u332実engineで取得した26例のcheckpoint／plan／selected・停止／本文・問い |
+| `mashos-api/ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 現行source ASTからlanguage/runtime identityを再導出。歴史fixtureは不変 |
+| `mashos-api/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 修復・限界・具体的な次の承認案の所在 |
+
+詳細：[Cocolon_EmlisAI_u333_SelfContinuation_and_IndependentUnknown_Boundary_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u333_SelfContinuation_and_IndependentUnknown_Boundary_20261018.md)。独立不明の保持契約試作は撤回済みで、上表の採用差分に含めない。
