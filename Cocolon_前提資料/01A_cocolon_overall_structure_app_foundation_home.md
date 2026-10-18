@@ -7,7 +7,7 @@ revision_date: "2026-06-05"
 
 この章では App root / provider / Home screen / notice / today-question / reflection preview / frontend Home API boundary / backend Home API / home_gateway / startup / EmlisAI immediate reply をまとめて扱う。
 
-> 最新EmlisAI file追跡は末尾u327（2026-10-18）。既存6owner内の限定修復と追加検査・凍結fixtureを記録する。STRUCTURE_MAP_DELTA_NONE。
+> 最新EmlisAI file追跡は末尾u328（2026-10-18）。既存4owner内の同欄本文停止修復と追加検査・凍結fixtureを記録する。STRUCTURE_MAP_DELTA_NONE。
 
 ## A1. App root / provider / build boundary
 
@@ -3721,3 +3721,14 @@ source_scope最終341 passed。実SQL／RPC serviceとAPI client／hook／Modal 
 | `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 既存の現行source identityを再導出。凍結済み歴史fixtureは不変 |
 
 source_scope435 passed、Q3対照54 passed／既知3 failed。別集合のapplication54 passed・identity1 passedを含め、計544 passed／既知3 failed、skip 0。実SQL／RPC serviceと実DTOを渡すAPI client／hook／Modal native stub各6件の全文・close/reopenを確認。全件成功や商品品質合格とはしない。最終結果・未加工20全文・意味世代の境界は [u327監査](audits/emlis_ai/Cocolon_EmlisAI_u327_IndependentUnknownActionReception_20261018.md) を参照する。
+
+
+### u328 file追跡 — 同欄の本人不明と証明済み行動の本文停止修復（2026-10-18）
+
+STRUCTURE_MAP_DELTA_NONE。製品4fileは既存のobservation_plan／human_reception／observation_gate／emlis_thread_engine。source証明・二責務選択・有限本文／独立reader・Q1接続を修復し、元のmemo欄と全sourceを保持する。新製品owner、契約、経路はない。01B／01C、Piece／Analysisに責務差分なし。
+
+既存 `ai/tests/test_cmee_emlis_source_scope_regressions.py` に61件を追加。新規 `ai/tests/fixtures/cmee_emlis_u327_same_field_unknown_action_checkpoint_v1.json` は修正前API d2cdc5d…の合成16例のcheckpoint／核辺／選択／本文・問いを凍結。既存 `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` は現行sourceから再導出。歴史fixtureは不変。
+
+source_scope496、Q3対照54＋既知3失敗、application54、identity1。合計605成功／既知3失敗、skip0。実service/PGlite7ケース、現行API client／hook／Modal native stub7ケースで保存・GET・元入力・履歴・再表示を確認。本人実機ではない。8本文停止を修復したが、机の8例は誤認・未提供を含め不変。深い受容・問い・商品品質は未完。
+
+詳細・未加工16例・実装境界：[Cocolon_EmlisAI_u328_SameFieldUnknownActionReception_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u328_SameFieldUnknownActionReception_20261018.md)。
