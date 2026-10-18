@@ -3684,3 +3684,19 @@ Mashが2026-10-17 16:46:17 JSTにu314限定案を承認した。別received経�
 - `mashos-api/ai/tests/fixtures/cmee_emlis_u324_unknown_object_checkpoint_v1.json`：新規。修正前API `0f78a0e25dd74a40aaedb28327658799ee1aa43b` の10件、完全checkpoint・核辺hash・選択内容hash・公開本文・question decisionを凍結。意味不変と参照方式のidentity更新を区別する。
 - 既存Plan／HR／Gate／emlis_answer_update／emlis_thread_source内の修復。ThreadEvidenceSpanResolverは既存qualified evidenceの全fieldを読むread-only methodを追加。意味型・公開API・保存schema・経路は不変、STRUCTURE_MAP_DELTA_NONE。
 - 検査は既存 `test_cmee_emlis_source_scope_regressions.py` に追加。[u325監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u325_UnknownObjectReception_20261018.md)に全文・残件・検証限界を記録。
+
+
+### u326 file追跡 — 単独不明対象の受け取り（2026-10-18）
+
+`STRUCTURE_MAP_DELTA_NONE`。単独memoの現在SELF・negative・uncertainを対象とする既存3製品owner内の修復であり、新製品file・公開経路・意味型・保存契約は追加しない。01B／01C、Piece／Analysisの責務差分はない。
+
+| path（mashos-api） | 今回の責務差分 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 単独不明の全文source・一核一span・現在SELF・関係なしを証明し、既存選択Moveの参照方式だけを明示へ変更。二核resolverの既定動作は維持 |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 一核専用の内部文法とslot／profileを照合し、既存UNFINISHED_OPENNESS／LEAVE_UNFINISHEDの内容を本人・対象・程度・否定付き有限文へ実現 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 本人表現を原文へ逆復元し、対象節全体を作者非依存で照合。単独処理はsource証明済みの一核だけに限定 |
+| `ai/tests/test_cmee_emlis_source_scope_regressions.py` | 既存fileへ49件追加。凍結意味・本人／対象／程度／否定・source対象外・空白・IR偽装を確認 |
+| `ai/tests/fixtures/cmee_emlis_u325_single_unknown_checkpoint_v1.json` | 新規。修正前API `8df8bdb1d0076fe6c7895b7c423aa144182af4e6` の合成10件を凍結し、完全checkpoint・核辺・選択内容の同一性と、Reception差分／Observation・問いの保持を比較 |
+| `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 既存の現行共有owner identityを実sourceから再導出。歴史fixtureは変更しない |
+
+source_scope最終341 passed。実SQL／RPC serviceとAPI client／hook／Modal native stubは同じ6 DTOで保存本文・close/reopenを確認。別集合のQ3対照48 passed／既知3 failed、application54 passed、現行identity1 passedを含め、計444 passed／既知3 failed。全件成功ではない。最終source identityとGitHub反映commitは [u326監査](audits/emlis_ai/Cocolon_EmlisAI_u326_SingleUnknownObjectReception_20261018.md) を参照する。独立行動併記時の選択欠落は未修正。商品NOT_CLEAR・正式0/3・未配置を維持する。

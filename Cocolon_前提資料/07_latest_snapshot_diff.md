@@ -41127,3 +41127,15 @@ PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=fa
 主担当が未加工10全文を読んだ。対象欠落は修復したが、引用中心のObservationと原文に近いReceptionは残り、E04の深い受容・E05の問いの完成ではない。原04はENDのため架空の質問を使って回答更新成功とは扱わない。単独不明の汎用化、別行動併記時の受け取り対象選択などが次の具体的残件。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持。既存の期限・配分・53.25%は再評価しない。
 
 全文・source・検証条件：[u325監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u325_UnknownObjectReception_20261018.md)。
+
+## u326 — 単独の不明対象を本人・程度ごと受け取りへ保持（2026-10-18 JST）
+
+単独memo「何が嫌なのか、自分でもよくわからない。」が「まだ分からないこと」へ縮約される不具合を、既存Plan／HR／Gateの3owner内で修復した。全文sourceで現在SELF・negative・uncertainの単独節を証明し、本人・対象・程度・否定を有限文へ残す。原文にない「まだ」は追加しない。選択済みのUNFINISHED_OPENNESS／LEAVE_UNFINISHEDを維持し、意味・核辺・完全checkpoint・selected内容は不変。参照方式由来のgrounding_ref／input_refだけの更新は区別する。STRUCTURE_MAP_DELTA_NONE。
+
+source_scope最終341 passed（既存292＋追加49）。旧u325の完全checkpoint10件で意味同一性、作者禁止readerで対象・本人・程度・否定・時点の保持を確認した。途中340 passed／新規1 failedは合算しない。新規の同義語尾が既存marker契約外であることを受け、readerを現行の「受け止めています」へ限定して拒否検査へ修正した。既存検査を緩和・削除していない。Q3理由不明対照は48 passed／既知3 failed／905 deselected・skip 0、Q2／Q3 applicationは54 passed、現行owner identityは1 passed／194 deselected。別集合の計444 passed／既知3 failedであり、全件成功ではない。各runに既存warning1件。既知3失敗は未修正。
+
+実service／隔離PGliteのSQL・RPC6ケースと、同じ実DTOを渡す現行API client／hook／Modal native stub6件で保存本文・close/reopenの完全一致を確認。現行3プラン、旧完成、旧checkpoint前／後中断を区別する。本人実機・本番DB・deploy・mergeは未実施。対象はENDであり、架空の問いによる更新成功を作らない。
+
+独立行動を併記すると不明対象の受け取りが落ちる選択問題は別残件。対象欠落の限定修復をE04の深い受容・E05の問い完成としない。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持。同Work補助は正式別model評価ではない。期限・主枠配分・53.25％は再評価しない。
+
+全文・source・検証条件：[u326監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u326_SingleUnknownObjectReception_20261018.md)。
