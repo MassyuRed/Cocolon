@@ -1,3 +1,5 @@
+> 最新EmlisAI file追跡は末尾u330（2026-10-18）。既存OP／thread_engine内のscalar不明と別欄行動の受け取り修復。STRUCTURE_MAP_DELTA_NONE。
+
 ---
 title: "01A_Cocolon_全体構造資料_アプリ基盤とHome系"
 revision_date: "2026-06-05"
@@ -3743,3 +3745,12 @@ STRUCTURE_MAP_DELTA_NONE。既存 `ai/services/ai_inference/emlis_ai_grounded_ob
 source_scope608、Q3対照54＋既知3失敗、application54、identity1。計717成功／既知3失敗、skip0。実service/PGlite7件と同じDTOのAPI client/hook/Modal7件で保存・再表示を確認。24例の本文・行動意味を修復したが、反復・定型・深さ・問いは未完。
 
 詳細・未加工24例・検証境界：[Cocolon_EmlisAI_u329_SameFieldFiniteActionRecognition_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u329_SameFieldFiniteActionRecognition_20261018.md)。
+
+
+### u330 file追跡 — scalar不明と別欄行動の受け取り欠落（2026-10-18）
+
+既存 `emlis_ai_grounded_observation_plan.py` の完全source証明・optional関係処理と、`cocolon_meaning_experience_engine/emlis_thread_engine.py` のQ1準備済み意味接続を修復。HR／Gateのwh専用表面は維持し、対象なし不明へ対象・理由を補わない。新しいarchitecture ownerはなくSTRUCTURE_MAP_DELTA_NONE。
+
+`test_cmee_emlis_source_scope_regressions.py`へ90検査追加、新規 `fixtures/cmee_emlis_u329_scalar_action_checkpoint_v1.json`に変更前合成20例、現行 `fixtures/cmee_emlis_q1_shared_owner_identity_v1.json`を再導出。歴史fixture・既存assertionは未変更。本文8修復・12完全record一致、旧20checkpoint・保存6／RN6確認。既存handoff・正本06・07・weeklyへ同期。
+
+詳細・未加工本文・検証境界：[Cocolon_EmlisAI_u330_ScalarUnknownActionRetention_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u330_ScalarUnknownActionRetention_20261018.md)。
