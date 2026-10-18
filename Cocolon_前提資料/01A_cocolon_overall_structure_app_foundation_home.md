@@ -1,3 +1,5 @@
+> 最新EmlisAI file追跡：末尾u340。既存3production ownerの別時点contrast表示修復。STRUCTURE_MAP_DELTA_NONE。
+
 > 最新EmlisAI file追跡：末尾u336。既存8production file内の実Observation共同保持。STRUCTURE_MAP_DELTA_NONE。
 
 > 最新EmlisAI file追跡：末尾u335。source認識・旧modeの既存3owner、STRUCTURE_MAP_DELTA_NONE。
@@ -3926,3 +3928,20 @@ STRUCTURE_MAP_DELTA_NONE。既存production9file、新production file0。01B／0
 | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 今回の承認・結果・残件・再開先 |
 
 詳細：[Cocolon_EmlisAI_u339_PastSelfUnknown_Implementation_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u339_PastSelfUnknown_Implementation_20261018.md)。
+
+
+## u340 — 別時点contrastの表示修復
+
+STRUCTURE_MAP_DELTA_NONE。新production owner／公開経路なし。01B／01Cの責務追加なし。Analysisの既存OP依存は維持し、既存builderは変更しない。
+
+| mashos-api exact path | 今回の責務 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 既存u331二対象のsource証明を再利用し、原文prefixと既存past／presentが一致するrequired contrastのみ表示義務に指定。認識・選択・builder不変 |
+| `ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | 適格な単一対比行を完全原文2対象＋既存「一方で」文法で表示 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 同じ対象の最終本文を作者なしで読む。原文両端・順序・一文全体を照合し同時性／因果／追加主張を拒否 |
+| `ai/tests/test_cmee_emlis_separate_time_contrast.py` | 新72検査。12原本比較・Q1／Q3・checkpoint・作者禁止変異・資格偽装・同endpoint余剰辺・SQL保存 |
+| `ai/tests/fixtures/cmee_emlis_u339_separate_time_contrast_v1.json` | 無変更d28e7bcから実行取得した12合成record。旧意味・旧本文の変更しない比較資料 |
+| `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 最終sourceからcurrent identityのみ再導出。歴史identityは変更しない |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 今回結果と資格外残件の再開位置 |
+
+詳細：[u340監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u340_SeparateTimeContrast_20261018.md)。

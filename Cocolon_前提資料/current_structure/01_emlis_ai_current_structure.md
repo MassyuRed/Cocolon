@@ -1,3 +1,5 @@
+> 最新差分：u340。別時点contrastの表示修復。意味認識・選択・問いは不変。詳細は末尾。
+
 > 2026-10-18最新：u336。承認済みの実Observation共同保持による返答短縮。末尾u336を参照。
 
 > 2026-10-18最新：u335。安堵＋独立不明のsource誤認識修復、旧checkpoint保持、短文化の未実装限定案。末尾u335を参照。
@@ -1660,3 +1662,8 @@ STRUCTURE_MAP_DELTA_NONE。既存production8file、新production file0、論理c
 primary outcome=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。Draft/open/unmerged・未配置。E04の深さ／E05問い／E06〜E09、一般入力・本人実機・正式受入れは未完。10/20方式判断、10/31管理線、12/18目標、Piece/Analysis主枠53.25％を維持。
 
 実本文・検査・未解決：[Cocolon_EmlisAI_u336_ActualObservation_Anaphoric_Reception_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u336_ActualObservation_Anaphoric_Reception_20261018.md)。
+
+
+## u340 — 別時点contrastの既存表示を修復（2026-10-18）
+
+既存u331のSELF二対象source証明＋past／present＋原文prefixが一致するrequired contrastだけを「一方で」で表す。新資格は表示義務でありsource認識・checkpoint・選択・Reception・問いは変えない。作者・本文readerは既存3owner内。全pathは01A末尾、本文・検証・資格外残件は [u340監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u340_SeparateTimeContrast_20261018.md)。STRUCTURE_MAP_DELTA_NONE、PRODUCT_NOT_CLEAR、正式0/3、未配置を維持。

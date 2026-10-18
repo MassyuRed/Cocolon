@@ -1,3 +1,5 @@
+> 最新差分：u340。認識済みの昨日／今日を「同時」にする表示を既存3owner内で修復。全file地図01A末尾と [u340監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u340_SeparateTimeContrast_20261018.md) を参照。STRUCTURE_MAP_DELTA_NONE。
+
 > 最新差分：u339。承認済み過去SELF不明を既存9owner内で修復。新production fileなし。01A末尾と [Cocolon_EmlisAI_u339_PastSelfUnknown_Implementation_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u339_PastSelfUnknown_Implementation_20261018.md) を参照。
 
 > 最新差分：u337。既存6owner内で訂正・撤回後の本人の人称を修復。STRUCTURE_MAP_DELTA_NONE。詳細は01A末尾と [Cocolon_EmlisAI_u337_SelfRecipient_AfterPairRevision_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u337_SelfRecipient_AfterPairRevision_20261018.md)。
