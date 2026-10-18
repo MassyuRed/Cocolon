@@ -867,3 +867,13 @@ E01の他の主体／時点、Observationの時点差に対する「同時」表
 primary outcome=TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。Draft/open/unmerged・未配置。実機・本番DB・deploy・merge未実施。
 
 詳細・全20例・次の未採用案：[Cocolon_EmlisAI_u331_ConcreteContrastReception_and_NextDecision_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u331_ConcreteContrastReception_and_NextDecision_20261018.md)。
+
+## 2026-10-18 JST — u332 Mash個別承認：根拠付きの反応・応答姿勢を一体実装
+
+Mashはu331監査の「休めた安堵へのEmlis自身の反応」「不確かな予想から生じる寂しさへの応答」を引用し、「この変更を、初回生成・訂正／撤回・保存までまとめて進めてよいでしょうか」に対し「うん、進めていいよ」と明示承認した。u331の未採用提案について、作業規則18 §11.3の個別承認が今回成立した。旧記録の未承認状態は当時の履歴として残す。
+
+今回の単位はDIRECT_PRODUCT_OR_ACCEPTANCE_WORK。E04の対象保持だけに縮んでいた主観を、本人の過去の安堵に対するEmlisの限定的反応と、不確かな考えを抱いた時の現在の寂しさを聴く姿勢へ接続する。対比の両端責務、sourceの主体・時点・確実性、根拠の撤回を維持する。既存の選択・内容形成・作者・独立読解・更新・保存経路を使い、原文にない願望・必要性・他人意図・行動評価を補わない。旧完成は非再生成、新主観を旧checkpointの意味へ付け替えない。質問選択／上限、公開API／DB／RN、外部AI・依存・課金・本番操作は変更対象外。
+
+主担当が製品編集・GitHub反映・本文再読を担い、同Work補助はread-only調査を担当する。正式な別modelの共同評価には数えない。対象sourceから実本文、自然変種、実在する質問での回答・訂正・撤回、保存GET・再表示まで続け、時間や小修正の件数を終了理由にしない。具体的な実装差分と結果を本weekly・設計/地図・監査・API handoffへ反映する。
+
+この記録時点は製品未変更。承認は上記の意味内容と必要な内部実装に限定され、商品合格・正式Product Read・公開の承認ではない。PRODUCT_NOT_CLEAR、正式0/3、candidate_ready=false、automatic_progression=false、10/20方式判断・10/31管理線・12/18目標を維持する。
