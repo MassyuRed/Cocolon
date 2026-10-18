@@ -1,3 +1,5 @@
+> 2026-10-18 u339：初回の本人・過去不明への限定拡張はMash個別承認済み。末尾u339に現行条件。一般化・商品合格・配置は含まない。
+
 # CMEE V1 — JSON Schema / Identity / Versioning 詳細設計
 
 > 2026-10-17 u315：追加回答後の未変更理由付き満足を保持する限定資格はMash承認済み。最新責務差分は末尾u315、実装・検証結果は正本06／API handoff u315を参照。未配置・商品NOT_CLEAR。
@@ -2778,3 +2780,21 @@ Mashが2026-10-17 16:46:17 JSTにu314限定案を承認した。別received経�
 101比較は対象60（必須48＋語／時点変種8＋程度4）だけの局所内容／selected型／Reception／text変更、非対象41は取得全record一致。checkpoint95例の意味・核辺・Move・Observation等は全一致。実service73ケース／RN146 DTO、保存38種全文をrootが読解した。主回帰と境界拒否の詳細は06／API handoff u315を参照。native stubによる合成RNで本人実機の追加確認ではない。
 
 最新結果は06／API handoff u315、再開順はweekly §5.6.65。今回の追加承認を待ち直さない。説明の長さ・対象／語尾の反復など本文品質は残件。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。
+
+
+## 2026-10-18 u339 — 承認済み初回の本人過去不明への限定拡張
+
+Mashの「進めていいよ」というu338限定案への個別承認を、weekly20261017のu339承認節に製品変更前に保存した（27ae3b8）。従来の本人・現在のepistemic unknown契約を、以下の完全sourceを証明した本人・過去認識だけに加算拡張する。既存現在経路は不変。
+
+- 初回memo全体が、既存wh対象＋後置の明示SELF＋任意の既存程度語＋「わからなかった／分からなかった」の独立完全節だけ、または適格な既存u332 pairの後ろにその一節を置いたもの。完全field／span／source owner／required・explicit／current original envelopeと一意性を再証明する。
+- 核はuncertainty／current_user／negative／uncertain／past。`source_past_self_unknown:v1` と対応するsource qualifier版が必要。版だけでは資格としない。唯一のsource_explicit_epistemic_limit境界のaffected nucleus・evidence span・hedge_onlyと同じ対象を結ぶ。UNKNOWNを残す。
+- 既存UNFINISHED／PRESENT_UNFINISHED／NO_RELATION_CLAIMを維持し、時制はpast qualifierで分離する。単独は既存UNFINISHED_OPENNESS／LEAVE_UNFINISHED、pair三対象は既存MATERIAL_WEIGHT／RECEIVE_AS_MATERIALとu334のlocal保持を当該完全sourceへ限定拡張する。現在も未完という事実を付加しない。新enum・型・DIRECT_STATE写像なし、論理contract79不変。
+- 原文の内側の対象「何が嫌なのか」を「何が嫌だったのか」に書き換えない。外側の「わからなかった」と所有者・肯否・程度を作者と独立readerの両方で保持し、今も不明／解決済み／原因を推測しない。聞き手へのSELF人称変換だけを許す。
+- source→checkpoint→plan→selected／aggregate→実本文まで照合する。past readerはselected必須・move decision一意・全appraisal basis／contributionの既知根拠内包含・対象のresponse／primary所属とpast軸を照合し、作者を呼ばず原文全体を復元する。専用reader失敗時に汎用経路へ落とさない。
+- 旧checkpointは過去資格を無効にした旧modeで全体一致する場合のみ復元し、旧plan／selected／artifactまたは旧停止を保つ。旧IDへ新意味を付け替えない。旧完成は保存DTOを非再生成で読む。
+- 初回・回答なし・round0・更新／失効／未解決partsなしに限定する。対象入力はEND。回答・訂正・撤回の新資格は作らない。既存実在質問を持つ更新は回帰対照。
+- 丁寧過去、時間prefix、先頭／暗黙SELF、他者、引用／報告／疑問／条件、追加material、不明先行・不完全pair、一般AFFECT／STANCE／原因補完は対象外。別の拡張へ本承認を流用しない。
+
+既存production9owner内の実装。source adapter本体は変更せずprojectionで境界を再証明し、Q1入口を同じprepared planへ接続した。公開wire／DB／RN／依存／外部AI／費用／配置は不変。商品合格・次Gate・merge／deployの承認を兼ねない。実装・検証と現在位置は正本06末尾u339、以下監査を参照。
+
+[Cocolon_EmlisAI_u339_PastSelfUnknown_Implementation_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u339_PastSelfUnknown_Implementation_20261018.md)。

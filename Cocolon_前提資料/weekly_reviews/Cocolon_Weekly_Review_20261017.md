@@ -1032,3 +1032,20 @@ Mashはu338の限定案と「この限定範囲で、認識・返答・旧デー
 実装・検証の対象pathと成功／停止条件はe604b45のu338監査の限定案に固定する。必要な内部owner9・新test／凍結fixture／現行identity、正本05／06・全体設計01／地図01A・weekly・API handoff・今回監査の記録をroot華恋が編集・反映する。同Work補助はread-only調査・監査で、正式な別model Pro／Ultra評価へ数えない。公開API／DB／RN／依存／外部AI／費用／本番配置・mergeは対象外。
 
 開始原本はAPI `e9dde192d1b4de8a52d7ecc79c5f30ccc9e93d04`（製品sourceはc26ece4と同一）、Cocolon `e604b45ce9b5e258a6c5b3134d1ea600f4729d9c`。この承認記録時点では製品source未変更。初回一体単位未完了／PRODUCT_NOT_CLEAR／正式0/3／candidate_ready=false／automatic_progression=false、10/20方式判断・10/31管理線・12/18目標を維持する。
+
+
+## u339 — Mash承認済みの過去SELF不明を認識・受容・旧互換・保存まで修復（2026-10-18）
+
+Mashはu338の限定案を引用して「進めていいよ」と個別承認した。承認は本weeklyの先掲u339節（commit 27ae3b8）へ製品変更前に記録済み。初回memoの既存wh対象＋後置明示SELF＋「わからなかった／分からなかった」の完全有限節、単独または既存安堵／寂しさpair末尾だけを実装した。本人・対象・程度・過去の不明を保持し、現在も不明か解決したかを補わない。
+
+実Receptionは「何が嫌なのか、ご自身でもよくわからなかったのですね。」。Observationは「その時の認識として、『完全原文』とあります」に相当する過去認識を示す。実本文・独立readerを一致させ、既存echo gateは弱化しない。sourceの新資格版・UNKNOWN・同一spanを再証明し、既存UNFINISHED／PRESENT_UNFINISHED／NO_RELATION_CLAIMとpast qualifier、単独UNFINISHED_OPENNESS、pair三対象MATERIAL_WEIGHTを用いる。新enum／DIRECT_STATEは追加しない。対象はENDで、問いや回答sourceの資格を広げない。
+
+無変更u337の44recordを凍結し、承認内14入力で過去認識と具体的受容を確認。現在・資格外30入力はcheckpoint／plan／selectedまたは同じ停止／全artifact／問い／reasonが完全不変。旧44checkpointは旧意味・旧出力／停止へ完全復元した。不変の資格外には既存誤読が残り、品質合格と扱わない。
+
+最終検証：再実行結果を反映した重複除外1,439 passed／既知1 failed／skip0（新186＋関連1,252成功・既知1失敗＋current identity1）。実service＋隔離PGlite SQL/RPC14ケース：現行単独／pair×3tierの6、旧成功／旧未提供×2形の完成4、旧checkpoint前後の初回中断→現行retry4。同じ14DTOを現行API client／hook／Modalへ通し、GETのみでclose/reopen各2回、全DTO・本文・original・timeline、現行対象のENDと旧未提供の維持を確認。native／HTTP／Authはstubで本人実機・本番ではない。旧完成は非再生成、旧checkpoint後retryはevent／payload／source prefixが同一、checkpoint前retryは現在の意味を初めて作る。
+
+STRUCTURE_MAP_DELTA_NONE。既存production9file・新production file0、論理contract79、公開wire／DB／RN／product依存／外部AI／費用は不変。候補のemlis_thread_source.pyは変更不要で、Q1接続の既存emlis_thread_engine.pyへ2行追加した。目的・資格を広げず、実行入口を既存prepared planへ接続する内部配線の確定である。全pathは01A末尾と今回監査へ記録した。
+
+必要性=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、primary outcome=TECHNICAL_CREDIT。今回の限定修復を終了。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=falseは維持。一般入力、丁寧過去・明示時間・先頭／暗黙SELF・他者、独立不明の一般保持、「どうしたいのか」、E04深さ／E05問い／E06〜E09・本人実機は残件。次の意味資格拡張へ承認を流用しない。10/20方式判断、10/31管理線、12/18目標、Piece/Analysis主枠53.25％は不変。
+
+実本文・境界・再開先：[Cocolon_EmlisAI_u339_PastSelfUnknown_Implementation_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u339_PastSelfUnknown_Implementation_20261018.md)。

@@ -3899,3 +3899,30 @@ STRUCTURE_MAP_DELTA_PRESENT。新production file0。01B／01C、Piece／Analysis
 | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 実装・検証・残件の再開先 |
 
 詳細：[Cocolon_EmlisAI_u337_SelfRecipient_AfterPairRevision_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u337_SelfRecipient_AfterPairRevision_20261018.md)。
+
+
+## u339 — 過去SELF不明の限定修復のfile地図
+
+STRUCTURE_MAP_DELTA_NONE。既存production9file、新production file0。01B／01C・Piece／Analysis・公開API／DBの責務差分なし。新test1・凍結fixture1と既存test4／current identityを以下に記録する。
+
+| mashos-api exact path | u339の差分 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 完全memo・一意の後置SELF・過去陰性wh節を再証明しsource_past_self_unknown:v1を付す。単独または完全pair末尾のみ |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py` | 新資格・同一sourceに限るpast unknown binding。UNFINISHEDと既存enumを維持 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py` | 初回限定・完全source・唯一のUNKNOWN境界とspanを再証明。既存三対象保持を限定拡張 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 新source modeと全歴史modeを分離。問いの範囲追加なし |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 旧checkpoint全体の一致から旧意味・旧本文／停止を復元 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py` | 新資格付き初回はQ1入口もprepared planへ接続 |
+| `ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | その時の認識として完全原文を示すObservation |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 過去の具体対象・程度・肯否を保持しSELFだけ聞き手の人称へ変換 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 作者を呼ばない原文復元、selected内容／past軸の照合、専用reader失敗時のfallback拒否 |
+| `ai/tests/test_cmee_emlis_past_unknown.py` | 新14／不変30、旧44完全復元、本文・選択・境界改変、SQL保存を検証 |
+| `ai/tests/fixtures/cmee_emlis_u337_past_unknown_v1.json` | 無変更c26ece4から実行取得した合成44record。歴史原本 |
+| `ai/tests/test_cmee_emlis_source_scope_regressions.py` | 単独過去1行の旧admission境界をu337凍結checkpointへ固定。現在の適格性は新testで確認 |
+| `ai/tests/test_cmee_emlis_relief_anaphora.py` | 過去3歴史対照だけ旧checkpointを明示。既存assertion維持 |
+| `ai/tests/test_cmee_emlis_relief_self_recipient.py` | 過去3初回歴史対照だけ旧checkpointを明示。更新の現在対照維持 |
+| `ai/tests/test_cmee_emlis_relief_unknown.py` | 当時除外していた過去1行を歴史checkpointへ固定。既存assertion維持 |
+| `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 最終sourceからcurrent identityを再導出。歴史fixtureは書き換えない |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 今回の承認・結果・残件・再開先 |
+
+詳細：[Cocolon_EmlisAI_u339_PastSelfUnknown_Implementation_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u339_PastSelfUnknown_Implementation_20261018.md)。
