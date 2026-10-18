@@ -1,3 +1,5 @@
+> 最新差分：u341。「とても」の助詞誤判定を既存OP内で修復。全file地図01A末尾と [u341監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u341_ContrastDegree_20261018.md) を参照。STRUCTURE_MAP_DELTA_NONE。
+
 > 最新差分：u340。認識済みの昨日／今日を「同時」にする表示を既存3owner内で修復。全file地図01A末尾と [u340監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u340_SeparateTimeContrast_20261018.md) を参照。STRUCTURE_MAP_DELTA_NONE。
 
 > 最新差分：u339。承認済み過去SELF不明を既存9owner内で修復。新production fileなし。01A末尾と [Cocolon_EmlisAI_u339_PastSelfUnknown_Implementation_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u339_PastSelfUnknown_Implementation_20261018.md) を参照。
@@ -7197,3 +7199,8 @@ RN→API→thread source／plan→全体LIMITED一claim→二moveの既存作者
 ## u336 — 実Observationに基づく短いReception
 
 既存RN→API→source／plan→選択→SentenceSurfaceのObservation→既存唯一HumanReception作者→独立body reader→保存→再表示を維持。本文の生成順序をObservation先行へ整え、最終bytesで共同保持を証明。新production file／meaning型／carrier／Moveなし。公開API／DB／RN不変、STRUCTURE_MAP_DELTA_NONE。file地図は01A末尾u336。詳細：[Cocolon_EmlisAI_u336_ActualObservation_Anaphoric_Reception_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u336_ActualObservation_Anaphoric_Reception_20261018.md)。
+
+
+## u341 — 「とても」をtopicの「も」と誤判定する参照を修復（2026-10-18）
+
+既存OP参照証明1fileのみを修復した。新production file0、STRUCTURE_MAP_DELTA_NONE。全変更pathと結果は01A末尾／[u341監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u341_ContrastDegree_20261018.md)を参照。意味checkpoint・核辺・主観決定は不変、reference_modeだけを変更。PRODUCT_NOT_CLEAR、Draft/open/unmerged・未配置。
