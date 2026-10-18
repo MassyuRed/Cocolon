@@ -1717,3 +1717,12 @@ STRUCTURE_MAP_DELTA_NONE。既存production3file、新production0、新test1・�
 必要性=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、primary outcome=TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。E04深さ／E05問い／E06〜E09は未完。10/20方式判断・10/31管理線・12/18目標、Piece/Analysis主枠53.25％は不変。既存Draft PR継続、merge／配置なし。
 
 実本文・全path・検証境界：[u342監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u342_ReverseContrast_20261018.md)。
+
+
+## u343 — 「その時」「しかし」の明示対比を本文・旧互換・保存まで修復（2026-10-18）
+
+完全な本人二文・原field・有限述語・明示異時点を証明し、「その時」の過去落ちとspan内「しかし」のsource-order誤分類を既存契約内で修復した。共有ledger／原文span／source prefixは保持し、既存fragment参照を使用する。新checkpointを発行し、u342旧IDは全旧意味・旧出力／停止へ復元する。
+
+54凍結record中17record（原文16種類）でQ1/Q3本文を修復、37対照は全意味・出力不変。旧54×2経路の完全復元も確認。最終690 passed／7 failed／skip0（新318成功、関連372成功・7失敗）。7件は修復前の核・意味・本文との比較不一致で、既存期待値は変更していない。実service＋隔離SQL17ケースと同17DTOの現行API client／hook／Modal close/reopenを確認した。HTTP／Auth／nativeはstub。
+
+STRUCTURE_MAP_DELTA_NONE。既存production4file、新production0。TECHNICAL_CREDIT／PRODUCT_NOT_CLEAR／正式0/3／candidate_ready=false／automatic_progression=false。定型ReceptionとE04深さ・E05問い・E06〜E09は残る。既存Draft PRで継続し、merge／配置なし。実本文16例・全path・7失敗の内訳・再開先は[u343監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u343_PastThenContrast_20261018.md)。

@@ -7211,3 +7211,8 @@ RN→API→thread source／plan→全体LIMITED一claim→二moveの既存作者
 ## u342 — 今日→昨日の完全対比に加わる誤関係と本文停止を修復（2026-10-18）
 
 既存3owner内で誤派生関係を修復し、現行本文と旧checkpoint互換を検証した。new production0、STRUCTURE_MAP_DELTA_NONE。全path・結果は01A末尾／[u342監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u342_ReverseContrast_20261018.md)を参照。PRODUCT_NOT_CLEAR、Draft/open/unmerged・未配置。
+
+
+## u343差分 — 2026-10-18
+
+「その時」「しかし」の完全二文対比を、原文spanを保持した既存source修復で本文・旧記録復元・保存再開まで接続。構造owner追加なし、STRUCTURE_MAP_DELTA_NONE。原文16種類を修復し、690 pass／7 fail（旧比較不一致）、隔離SQL／画面17ケース。PRODUCT_NOT_CLEARを維持。全file地図01Aと[u343監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u343_PastThenContrast_20261018.md)を再開先とする。

@@ -4029,3 +4029,29 @@ STRUCTURE_MAP_DELTA_NONE。既存production3file、新production0、新test1・�
 | Cocolon | `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` | 今回の設計・構造・週次差分 |
 | Cocolon | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` | 今回の設計・構造・週次差分 |
 | Cocolon | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u342_ReverseContrast_20261018.md` | 新規。着手・実本文・検証・残件 |
+
+
+## u343差分 — source時点・接続詞修復（2026-10-18）
+
+STRUCTURE_MAP_DELTA_NONE。既存4production file内で修復し、公開wire／DB／RNの変更なし。本文・旧checkpoint全体・保存再開まで確認。[u343監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u343_PastThenContrast_20261018.md)に全16fileの地図と検証境界を記載する。
+
+## u343変更file地図（16file）
+
+| repository | path | 役割 |
+|---|---|---|
+| mashos-api | `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 時点・接続詞の原field証明、既存fragment参照、限定関係修復、direct旧mode |
+| mashos-api | `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 独立typed fragment読取と生の二対象照合 |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 現行／歴史source modeの伝播 |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | u342全旧意味を再導出してcheckpoint照合 |
+| mashos-api | `ai/tests/test_cmee_emlis_time_contrast_source.py` | 新規。現行・旧復元・独立本文・SQL保存／中断 |
+| mashos-api | `ai/tests/test_cmee_emlis_time_contrast_proof.py` | 新規。原文・provenance・時点・fragment変異 |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_u342_past_then_v1.json` | 新規。無変更u342の36record・両route |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_u342_inline_contrast_v1.json` | 新規。無変更u342の18record・両route |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 現行owner証跡のみ更新 |
+| mashos-api | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 短い結果と正本への再開参照 |
+| Cocolon | `Cocolon_前提資料/01_cocolon_overall_structure.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u343_PastThenContrast_20261018.md` | 今回差分・参照／本監査 |
