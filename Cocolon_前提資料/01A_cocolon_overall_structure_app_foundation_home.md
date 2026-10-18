@@ -1,3 +1,5 @@
+> 2026-10-18最新診断：u352。初回に既述の「期待されているように感じて、重かった」が返答から欠落することを、初回7件と実pending回答4件で比較。初回説明を元経験とともに保持する一体案を具体化し、Rule18 §11.3 LEVEL3の意味・選択差分は判断待ち・未実装。否定訂正は具体的対象の照応化と独立readerの不整合まで切り分け、修復候補を記録。今回production／test／fixture変更0、文書6fileのみ。詳細は[u352診断・判断案](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u352_InitialPersonalMeaning_Decision_20261018.md)。
+
 > 2026-10-18最新：u350。Mash承認済みの「安堵・寂しさ＋別経験」を不明なし／ありの両方で初回・既受理一更新・旧保存互換・再表示へ保持する限定契約。private logical83→87、既存production10owner・新production0、STRUCTURE_MAP_DELTA_PRESENT。構造差分は末尾、実本文・検証結果・残件は[u350監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u350_ReliefReceivedRetention_20261018.md)を参照。PRODUCT_NOT_CLEARを維持。
 
 > 2026-10-18最新：u348。Mash承認済みの「安堵・寂しさ＋別経験＋現在の不明」を初回・既受理1更新・旧互換・保存再表示まで実装。初回3対象／2責務、更新後4対象／3責務。private V2二型追加、STRUCTURE_MAP_DELTA_PRESENT。実測・残件は末尾と[u348監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u348_MixedUnknownRetention_20261018.md)を参照。
@@ -4275,3 +4277,19 @@ STRUCTURE_MAP_DELTA_NONE。構造上の経路・公開契約・型は不変。�
 | `ai/tests/test_cmee_emlis_relief_received.py` | 現行unknown_revise二例の意図した本文差分のみ同期。歴史比較は不変 |
 
 記録ownerは本01A・正本06・latest07・最新weekly・API handoff・[u351監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u351_UnknownRevisionTime_20261018.md)。全11変更path、原文と未加工本文、最終77検査と8保存DTOの再表示、失敗修復と検証境界は監査を参照。否定本文・初回の受け取り方保持・一般入力・深い理解・E04〜E09・本人実機は未完。PRODUCT_NOT_CLEAR／正式0/3／candidate_ready=false／automatic_progression=false。
+
+
+## 2026-10-18 u352 — 初回本人説明の診断・一体案の文書地図
+
+STRUCTURE_MAP_DELTA_NONE。初回sourceに既述の本人知覚／過去感情が本文から落ちることを実診断し、意味・選択の限定差分を判断案として具体化した。実装・型・公開wire・DB・RNの変更はまだない。private logical87を維持し、01／01B/C／current map／正本05を実装済みとして変更しない。今回の全変更は次の6fileだけ。
+
+| repository | path | 責務 |
+| --- | --- | --- |
+| mashos-api | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 現在地と次の一体単位 |
+| Cocolon | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u352_InitialPersonalMeaning_Decision_20261018.md` | 初回7・実pending4・否定診断、実本文と未実装案、承認差分・完了／停止 |
+| Cocolon | `Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md` | 本file地図 |
+| Cocolon | `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` | 実装順序・次判断 |
+| Cocolon | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` | 最新週報への継続差分 |
+| Cocolon | `Cocolon_前提資料/07_latest_snapshot_diff.md` | 最新差分 |
+
+詳細は[u352診断・判断案](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u352_InitialPersonalMeaning_Decision_20261018.md)。production／test／fixture変更0。初回説明の新内容・選択はRule18 §11.3 LEVEL3で判断待ち。既存否定訂正のgeneric参照／独立読解の整合修復はLEVEL2候補として分けて記録し、未修復。PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=falseを維持する。
