@@ -1,5 +1,5 @@
 chat_work_environment_selection_rule
-revision_date: 2026-08-12
+revision_date: 2026-09-24
 normative_status: CURRENT
 decision_owner: Mash
 operational_owner: Karen
@@ -19,6 +19,19 @@ operational_owner: Karen
 7. execution ownerを一人へ固定し、duplicate execution、parallel write、silent scope expansion、approval前execution、counter resetおよびterminal後のautomatic progressionを防ぐ。
 
 この資料は、§11.3の限定standing delegationだけをLEVEL_1 / LEVEL_2のpermission basisとして与えます。それ以外のtechnical authority、implementation / GitHub write / network / runtime permission、課金承認または自動進行を与えず、scope classificationだけではいずれも生成しません。
+
+# 0. 2026-09-24 Mash決定 — PieceはPro主体
+
+Mash様は、PieceをGPT-6 Astra Proで既存の作業範囲・品質条件・禁止事項を変えずに続行することと、PieceをPro主体とするためのルール修正を明示承認しました。EmlisAIはUltra主体、分析構造は検討中のため変更しない、という領域別の決定です。
+
+1. **PieceはPro主体**です。実行modelがProであることを確認し、実際の名称を記録します。GPT-6 Astra Proを含む確認済みProで、承認済みPiece範囲の技術設計、原因特定、実装、検証、GitHub反映、再取得確認、結果説明をPro華恋が一人のexecution ownerとして担えます。Pro以外・model不明は引き続きSTOPです。
+2. Pieceに限り、下記のGPT-5.6 Pro固定指定と、一般のLEVEL_2 / LEVEL_3におけるUltra専属の技術判断・実行役割より本節を優先します。`CURRENT_RULES.md` R4 / R9、入口・チェックリストの同じ一般指定も、このPiece限定決定を適用して読みます。GPT-5.6 Proと名称が異なることだけでは、確認済みProによるPiece作業を止めません。
+3. Pieceの環境表示は`CHAT_PRO_OK`を使用し、§3.1の品質・証拠・網羅性・完了条件をそのまま満たします。旧recordの`CHAT_5_6_PRO_OK`は書き換えません。単に一般roleがUltra担当だったという理由で、Pieceの通常実装へUltra reviewを追加しません。一方、個別authorityが実際の独立reviewを要求する場合、Work固有runtimeが不可欠な場合、または§3.2の技術条件に該当する場合は、その必要性と境界を保持します。Proによる再読をUltraの独立reviewと報告しません。
+4. 三段階のscope判定、§11.3のallowed / prohibited境界、Mash様のnormative decision / approvalは維持します。既存承認範囲内のPiece技術判断はLEVEL_2相当としてProが完結でき、機械的作業だと偽ってLEVEL_1へ下げません。新しい商品・契約・品質・公開・課金・依存・実DB・有効化の変更は本決定に含めず、必要な別承認を省略しません。
+5. **EmlisAIはUltra主体のまま**です。**分析構造のmodel・役割分担・未activated状態は変更しません。** Pieceの作業がEmlisAI、分析構造、共有契約または非Pieceの実装変更を必要とする場合、本節だけで範囲を広げません。
+6. 本決定は過去の未検証成果物、失敗、credit、authority消費、未承認のeffectを遡及承認しません。原典・実ファイル・既存検査・実本文の確認、非公開情報の保護、GitHub反映後の確認、単一execution owner、`automatic_progression: false`を維持します。今回承認されたルール修正も、このmodel・役割分担の限定変更としてPro華恋が実施します。
+
+以下の一般規定は、このPiece限定決定と矛盾するmodel固定・担当役割の部分だけを除き、そのまま適用します。
 
 # 1. Model eligibility gate
 

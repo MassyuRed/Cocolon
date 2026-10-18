@@ -23,6 +23,7 @@ import TutorialOverlay, {
 } from "../components/TutorialOverlay";
 import { useTutorial } from "../TutorialContext";
 import { useAuth } from "../AuthContext";
+import { useAppRuntime } from "../AppRuntimeContext";
 import { useUnread } from "../UnreadContext";
 import { useTheme } from "../theme/ThemeContext";
 import { makeUiTokens } from "../ui/uiTokens";
@@ -82,6 +83,7 @@ export default function NexusScreen({ navigation }) {
   const { colors, themeName } = useTheme();
   const { getFeatureUnread, setUnread } = useUnread();
   const { user, initializing: authInitializing } = useAuth();
+  const { isFeatureEnabled } = useAppRuntime();
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const isDark = themeName === "dark";
@@ -99,6 +101,25 @@ export default function NexusScreen({ navigation }) {
     () => String(user?.id || "").trim() || null,
     [user?.id]
   );
+  const canReadOwnPieces = !authInitializing && !!viewerUserId && !isTutorialMode &&
+    isFeatureEnabled("piece_v2_owner_read_enabled", false) === true;
+  const ownerHistoryEntry = useRef(null);
+  if (!ownerHistoryEntry.current || ownerHistoryEntry.current.owner !== viewerUserId ||
+      ownerHistoryEntry.current.enabled !== canReadOwnPieces) {
+    ownerHistoryEntry.current = { owner: viewerUserId, enabled: canReadOwnPieces };
+  }
+  const renderedOwnerHistoryEntry = ownerHistoryEntry.current;
+  const ownerHistoryMounted = useRef(false);
+  useEffect(() => {
+    ownerHistoryMounted.current = true;
+    return () => { ownerHistoryMounted.current = false; };
+  }, []);
+  const handleOpenOwnerHistory = useCallback(() => {
+    if (!ownerHistoryMounted.current || navigation?.isFocused?.() === false ||
+        ownerHistoryEntry.current !== renderedOwnerHistoryEntry ||
+        !renderedOwnerHistoryEntry.enabled) return;
+    navigation.navigate("PieceOwnerHistory", { savedPiece: null });
+  }, [navigation, renderedOwnerHistoryEntry]);
   const viewerDisplayName = useMemo(() => {
     const metadata = user?.user_metadata || {};
     return (
@@ -1278,6 +1299,8 @@ export default function NexusScreen({ navigation }) {
           colors={colors}
           isTutorialMode={isTutorialMode}
           viewerUserId={viewerUserId}
+          canReadOwnPieces={canReadOwnPieces}
+          handleOpenOwnerHistory={handleOpenOwnerHistory}
           handleOpenFollowList={handleOpenFollowList}
           handlePressGuide={handlePressGuide}
           onRefresh={() => {
@@ -1409,6 +1432,22 @@ function createStyles(COLORS, ui) {
         },
         headerButtonDisabled: {
           opacity: 0.52,
+        },
+        ownerHistoryButton: {
+          minHeight: 44,
+          paddingHorizontal: 14,
+          paddingVertical: 12,
+          marginBottom: 14,
+          borderRadius: 12,
+          borderWidth: 1,
+          borderColor: COLORS.CARD_BORDER,
+          backgroundColor: COLORS.FIELD_BG,
+        },
+        ownerHistoryButtonText: {
+          fontSize: 14,
+          lineHeight: 20,
+          fontWeight: "700",
+          color: COLORS.TEXT_ON_LIGHT,
         },
         todayOverallEmotionSummary: {
           paddingVertical: 8,

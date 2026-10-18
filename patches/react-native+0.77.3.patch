@@ -1,0 +1,22 @@
+diff --git a/node_modules/react-native/Libraries/Text/Text/RCTTextView.mm b/node_modules/react-native/Libraries/Text/Text/RCTTextView.mm
+--- a/node_modules/react-native/Libraries/Text/Text/RCTTextView.mm
++++ b/node_modules/react-native/Libraries/Text/Text/RCTTextView.mm
+@@ -96,6 +96,18 @@
+   }
+ 
+   [self setNeedsDisplay];
++}
++
++// Piece reads the exact mounted TextKit layout without KVC or a second renderer.
++// Read-only: normal Text measurement and drawing are unchanged.
++- (NSTextStorage *)cocolonPieceTextStorage
++{
++  return _textStorage;
++}
++
++- (CGRect)cocolonPieceContentFrame
++{
++  return _contentFrame;
+ }
+ 
+ - (void)drawRect:(CGRect)rect

@@ -1,0 +1,3570 @@
+# Cocolon / CMEE Stage1
+
+> 2026-10-17 u315：追加回答後の未変更理由付き満足を保持する限定資格はMash承認済み。最新責務差分は末尾u315、実装・検証結果は正本06／API handoff u315を参照。未配置・商品NOT_CLEAR。
+
+> 2026-10-14 u253：末尾「承認済み限定変更」が§5.2.1／§8.2〜8.4／§9.3の初回範囲だけを更新する。§9.2の品質条件は緩和しない。実装WIP、商品NOT_CLEAR。
+## Emlis入力差分保持型意味決定 — 華恋最終技術設計・実装順
+
+| 項目 | 値 |
+|---|---|
+| Document ID | `Cocolon_CMEE_Stage1_Emlis_InputSpecificMeaningDecision_KarenDesigned_FinalTechnicalDesignAndImplementationOrder_20260828` |
+| Date | `2026-09-04` |
+| Status | `CURRENT_PRODUCT_OWNER_NON_PASS / REALIZABLE_RECEPTION_EXPRESSION_WORK_STAGE1_ACTIVE` |
+| Design owner | `Karen` |
+| 対象 | CMEE Stage1 Layer 2 / Emlisの入力固有意味決定 |
+| Pro review chain | initial exact8 + intermediate exact7 + latest exact13（単一添付内の遅延出力を時系列分離） |
+| Latest Pro review source | `Pro華恋レビュー2.txt` SHA-256 `c1101d6ad20c7d9fc3ea6d2e03900667f457e842806348db33b7ae968665e53e` |
+| Latest Pro review result | `PASS_WITH_REQUIRED_CORRECTIONS` |
+| Required corrections resolution | latest exact13 + earlier non-conflicting unique corrections = `REFLECTED`; stale-preimage RC13は§19.3の同一意図充足で閉包 |
+| Canonical adoption | `ADOPTED_BY_MASH_CURRENT_REQUEST` |
+| Revision state | `IM00_IM09_IMPLEMENTED / IM10_NON_PASS / §24_CURRENT_CORRECTION` |
+| Historical IM00–IM10 technical handoff remaining | `EXACT0` |
+| Historical implementation order | `IM00_IM10_EXACT11`; current owner=`§24 / canonical 06 §87` |
+| Implementation execution | `REALIZABLE_RECEPTION_EXPRESSION_PHASE1_DESIGN_CHECKPOINT_ACTIVE` |
+| 実装・Product Read・activation・I09 | `CURRENT_CORRECTION_NOT_YET_IMPLEMENTED / 0 / 0 / HISTORICAL_COMPLETE` |
+| GitHub reflection authority / scope | `FRESH_MASH_LEVEL3_CMEE_WORK_STAGE1_REALIZABLE_RECEPTION_EXPRESSION_CANONICAL_INTEGRATION_AND_HUMAN_RECEPTION_BODY_CLOSURE_20260904` |
+| 外部AI・provider・network inference | `EXACT0` |
+| Product / technical credit | `0 / 0` |
+| Automatic progression | `false` |
+| Mashへの追加質問 | `CURRENT_MASH_QUESTION_REQUIRED = FALSE` |
+| System Context v1 | `FRESH_OWNER_RESOLVED` — PR #37 start head `20bb1cbbda430205943ea2226e8a0ef331cc9c7b` |
+| System Context use | `DIRECT_CANONICAL_ORIGINAL_READ_USED` |
+| System Context generated-output dependency | `STALE_FAIL_CLOSED / UNAVAILABLE / EXACT0` |
+| Superseded proposal disposition | canonical統合後にcurrent treeから削除。Git履歴だけに保持 |
+
+---
+
+## 0. 結論
+
+必要なのは、まさに **「入力から安全に得られた構造のうち、今回Emlisが何を入力固有の意味として前景化するか」を決めるsole owner** である。
+
+ただし、華恋の構造をそのまま複製するべきではない。華恋が行っている機能上の原則――複数の読みをすぐ一つへ潰さないこと、事実・解釈・不明を分けること、全体の関係を見て重要差分を選ぶこと、その選択に応じて応答姿勢を決めること――を、Emlis向けに **providerless・source-grounded・deterministic・監査可能** な構造へ明示化するのがより理想的である。
+
+本書は、その構造を **Emlis入力差分保持型意味決定**（Difference-Preserving Input Meaning Decision）として設計する。
+
+中心定義は次のとおり。
+
+> 入力固有の意味とは、source-groundedなcomponent・endpoint・relation・direction・predicate・owner・modality・time・aspect・scope・qualifierのうち、識別性、入力全体の読みへの影響、Emlisの応答への影響をすべて持つ、最小十分なsemantic / pragmatic configurationである。
+
+成立条件はexact3である。ただし循環を避けるため、1–2をpre-selection hard validity、3をselected reading後のpost-binding semantic acceptance＋post-realizer visible acceptanceとして段階化する。3が不成立でも別readingを選び直さず、named capability gapへ閉じる。
+
+1. **Discriminative necessity**  
+   必要なcomponent・relation・direction・qualifier等を失うと、materialに対照的な入力と区別できなくなる。
+2. **Whole-reading consequence**  
+   その差分が入力全体の読み方を実際に変える。付随情報だけを拾ったものではない。
+3. **Emlis-response consequence**  
+   そのreadingのsemantic consequenceが、Emlisが正直に述べられる注意、感情、考え、評価、距離または関係姿勢の少なくとも一つへ入力固有の差分を生む。
+
+materialなrelationがある入力ではrelation propositionを使う。binary relationがなくても、`predicate + owner + modality / time / aspect / scope / qualifier` により対照差分が成立するqualified event / state propositionをprimary reading focusにできる。
+
+意味的に同等な言い換えや、同じ関係構造を同じ限定で述べた入力は、同じoperationや正規化signatureになってよい。「入力固有」とは語句ごとに一意という意味ではなく、sourceが拘束するsemantic / pragmatic conditionを変える対照差分を潰さず、その差分がwhole readingとvisible Receptionを実際に変えるという意味である。
+
+このreading focusを先に選び、その後にだけEmlisのReception、主観命題、日本語表現を導出する。`MATERIAL_WEIGHT`、`PROTECT_USER_AGENCY`、`CONCERN`、`RESPECT`などの一般的な態度を先に選び、そこから意味を逆算してはならない。
+
+current design revisionに必要なMashの追加構造知識はexact0である。既存知識で、理解と事実、意図と出力、履歴・パターン・可能性、連続する変化、自己世界・現実世界・関係世界の必要区別は足りている。現在の残件はMashの思想不足ではなく、華恋側のEmlis technical mappingである。将来、actual product caseで具体的な未解決競合が初めて観測された場合だけ、別のMash判断候補にする。
+
+### 0.1 Proレビュー exact10対応表
+
+| # | Pro必須修正 | 本書の対応 |
+|---|---|---|
+| 1 | LIMITED通常観測でもLayer 2 exact1 | §4、§8.4、§9.1、§12、§13で`BoundedLimitedReception` exact1を必須化 |
+| 2 | source provenanceとEmlis provisional readingの分離 | §2、§6.4、§8.4、§9.1で別field・別lineage化 |
+| 3 | selected focus exact1とReception set 1..4の分離 | §2、§8.4、§9.1でprimary focus / supporting facets / Reception setを分離 |
+| 4 | qualified event / stateの許容 | §0、§5、§6、§7、§12、§13へrelation以外の成立経路を追加 |
+| 5 | compatible connected facetsの統合 | §5.5、§6.3、§8.3でprimary focus＋supporting facetsへ統合 |
+| 6 | 入力固有意味の成立条件exact3 | §0、§6.4、§7、§12に識別性・whole-reading・Emlis-responseを固定 |
+| 7 | positive subjective contribution exact1以上 | §7、§9.1–§9.2、§12で`AFFIRMATIVE_RECEPTION_CONTRIBUTION` exact1以上を必須化 |
+| 8 | `NO_ABSTENTION_SUBSTITUTION` | §7、§12、§13でacceptance invariant化 |
+| 9 | System Context表記の補正 | 冒頭metadataと参照節でfresh owner resolution＋canonical original direct readを記録 |
+| 10 | Mash知識gap exact0のscope限定 | §0、§14、§18をcurrent design revision限定へ補正 |
+
+### 0.2 Proレビュー列とtechnical closure
+
+前回までのPro商品レビューexact10は反映済みである。その後、同一レビュー処理から遅延して出た複数結果を、単一結果として混ぜずに **initial exact8 → intermediate exact7 → latest exact13** の順で分離した。latest verdictは`PASS_WITH_REQUIRED_CORRECTIONS`である。本書はlatest exact13に加え、earlier outputだけに存在する非競合のmaterial correctionを§19–§22へ統合する。したがって「前回PASSだけを根拠に未修正で進む」状態ではない。
+
+| 閉包項目 | 最終版の処理 | owner |
+|---|---|---|
+| Foreground Scope derivation | §5.2.1で許可basis exact5、禁止入力、compatible union、material competing、zero-object STOPをclosed contract化 | A. Source-grounded meaning field |
+| whole-reading consequence | §6.4–§6.5でclosed code exact7、source＋Foreground Scope＋Required Difference binding、counterfactual発行条件を固定 | candidate evidence / B. ReadingConsequence |
+| 型名・status・実装順 | `SubjectiveDepthClass`へ統一し、Pro PASS／Mash判断待ち／IM00–IM10 exact11へ更新 | 本書metadata・§9・§17 |
+
+```text
+LATEST_PRO_REVIEW = PASS_WITH_REQUIRED_CORRECTIONS
+PREVIOUS_REQUIRED_CORRECTIONS = 10_OF_10_REFLECTED
+DELAYED_REVIEW_EFFECTIVE_CORRECTIONS = REFLECTED_IN_SECTIONS_19_THROUGH_22
+PRODUCT_PRINCIPLES_CHANGE = 0
+CANONICAL_ADOPTION = ADOPTED_BY_MASH_CURRENT_REQUEST
+REVISION_STATE = FINALIZED_FOR_IMPLEMENTATION
+TECHNICAL_HANDOFF_REMAINING = EXACT0
+IMPLEMENTATION_ORDER = IM00_IM10_EXACT11
+IMPLEMENTATION_EXECUTION = NOT_STARTED
+PRODUCT_READ / ACTIVATION / I09 = 0 / 0 / 0
+AUTOMATIC_PROGRESSION = false
+```
+
+保持する原則は、Required Difference、A / B / C分離、meaning-before-Reception、hard validity、source-grounded selection、generic fallback禁止、visible causal trace、Route A providerless-onlyである。今回のGitHub effectは本最終設計書＋正典routing exact3の更新と、統合済み修正案exact1の削除からなるchanged path exact5である。runtime source、test、API、DB、RN、private generation、Product Read、activation、I09 effectはすべて0である。
+
+---
+
+## 1. この設計が必要になった確定事実
+
+### 1.1 最新terminal
+
+直近のRoute A v2検証は次で終端している。
+
+| 判定主体 | 結果 |
+|---|---|
+| machine | `CLEAR` |
+| Ultra technical review | `CLEAR` |
+| Pro combined early language viability read | `COMMON_DEFECT` |
+| Formal Mash Product Read | `NOT_RUN` / `PRODUCT_READ_EVALUATED=false` |
+| defect class | `GENERIC_SUBJECTIVE_CONTENT` |
+| cause component | `SUBJECTIVE_MEANING_PLANNER` |
+| candidate acceptance | `false` |
+| I09 | 未実行。次工程ではない |
+
+したがって、今回の問題は日本語の格・活用・接続の失敗ではない。入力のどの意味をEmlisの主観として述べるかを決める上流層の不足である。
+
+### 1.2 現行plannerの実態
+
+現行 `project_subjective_meaning_plan()` は、利用可能なgrounded contributionから概ね次の固定順でfocusを取る。
+
+`generic non-collapse → explicit cause → unfinished → action/change → non-collapse → residue → direction → change → burden → center`
+
+そのfocusを、主として次の一般的なappraisalへ写像する。
+
+- `RELATIONAL_NONCOLLAPSE / PRESERVE_BOTH_ENDPOINTS`
+- `UNFINISHED_OPENNESS / LEAVE_UNFINISHED`
+- `BOUNDED_CHANGE / RECOGNIZE_AS_BOUNDED`
+- `AGENCY_BOUNDARY / RESPECT_CHOICE`
+- `MATERIAL_WEIGHT / RECEIVE_AS_MATERIAL`
+
+ここには「この入力の複数要素が、なぜこの組合せで一つの意味になるのか」を作る責務がない。source trace、owner、binding、日本語文法が正しくても、結果は「小さく扱わない」「一つにしない」「急いで決めない」「選択を守る」に寄りやすい。
+
+また、既存 `SubjectiveSpecificity` の `RELATION_BOUND_MULTI_ROLE / MULTI_ROLE / SINGLE_ROLE` はbinding構造のspecificityであり、内容が別入力へ流用できないというsemantic specificityではない。
+
+### 1.3 case-frame v2の責務
+
+Typed Japanese Case-Frame Realizer v2は、既に決定されたtyped meaningを自然な日本語へ実現する下流consumerである。設計上もupstream meaning extractionを変更せず、新しい意味を所有しない。
+
+よって、v2の **下流sole-owner境界とtyped case-frame方式** は保持する。今回の修正をcase frame、predicate key、surface templateだけへ押し込めてはならない。
+
+ただし、現行registry bytesやsense inventoryが新しいreading focusをlosslessに可視化できるとは事前保証しない。既存inventoryへ投影すると `MATERIAL_WEIGHT` 等へ縮退する場合は `MEANING_REALIZATION_CAPABILITY_GAP` とし、fresh authorityなしにsurface inventoryを拡張せず、generic appraisalにもfallbackしない。
+
+---
+
+## 2. 「意味を決める」の境界
+
+ここでEmlisが決めるのは、ユーザーの内面の真実ではない。入力に対する **Emlisの暫定的で訂正可能なreading** である。
+
+責務をexact3へ分ける。
+
+| 層 | 所有するもの | 所有しないもの |
+|---|---|---|
+| A. Source-grounded meaning field | Foreground Scope、Difference Configuration Set、入力から安全に保持できるnode、relation、qualified event/state、qualifier、unknown、複数候補 | Emlisの最終的なreading選択 |
+| B. Selected Emlis Provisional Reading | primary reading focus exact1、supporting facets 0..4、semantic `ReadingConsequence` exact1 | ユーザーの真意、感情・stance、一般的人格推定、助言方針 |
+| C. Meaning-bound Emlis Reception Set | BがEmlisの受け取り方へ生むrequest-localな主観命題1..4 | 入力から独立した一般的態度による意味の代用 |
+
+**「決定」と呼ぶのはBのprimary reading focus exact1だけ** とする。Aは暫定構造であり、Bのsupporting facetsはprimaryとsource-connectedで競合しない補助差分、CはBから派生するReception setである。primaryとsupportingの合計は現行Observation上限に合わせて1..5に閉じ、無制限のfacet列挙を禁止する。
+
+provenanceとreading statusは別の軸である。
+
+```text
+basis / relation provenance
+  = SOURCE_EXPLICIT | RULE_ADMITTED_PROVISIONAL
+
+selected Emlis reading status
+  = EMLIS_PROVISIONAL_READING
+```
+
+source-explicitなのはbasisまたはrelationであり、Emlisが選ぶ中心readingそのものを `SOURCE_STATED` と呼んではならない。将来の `USER_CONFIRMED` は、ユーザーが明示確認した場合にだけ作る別lineageとし、本contractのstatusへ混ぜない。Bの `ReadingConsequence` はmeaning-sideのsemantic / pragmatic consequenceだけを持ち、affect、stance、allowed envelopeを持たない。
+
+この分離により、次を同時に守る。
+
+- user meaning sovereignty
+- source/fact/inference/unknown partition
+- Emlisの独立した話者性
+- request-locality
+- 訂正可能性
+- no mind-reading
+- no policy-only subjectivity
+
+---
+
+## 3. 華恋の構造から採るもの／採らないもの
+
+### 3.1 採る機能原理
+
+華恋の機能上の構造は、今回の用途では次のように要約できる。
+
+1. 入力を一つの解釈へ直結させず、複数の暫定候補を保つ。
+2. 誰の事実か、何が実際に起きたか、何が推測か、何がまだ不明かを分ける。
+3. 単語や一文だけでなく、入力全体の対立、継続、変化、制約、未完了を見る。
+4. 候補同士を比較し、入力中の差分を最も失わない読みを前景化する。
+5. 前景化した意味に応じて、受け取り方と表現を決める。
+6. 根拠が薄いときは深さを作らず、限定する。
+7. 後続情報により訂正できる形で保持する。
+
+これは華恋の非公開な思考過程や内部重みを複製するものではない。Emlisで必要な機能境界だけを、検証可能なcontractへ変換する。
+
+### 3.2 そのまま複製しない理由
+
+華恋は広い会話文脈、自然言語生成、暗黙の比較能力を持つ。一方、Emlis Stage1には次の制約がある。
+
+- 入力sourceへ完全に辿れること
+- request-localであること
+- providerlessであること
+- deterministicであること
+- trace可能であること
+- promotionとmind-readingを機械的に抑止できること
+- disabled candidate検証とproduction activationを分離すること
+
+したがって、華恋を模倣する曖昧な「考察器」を置くのではなく、華恋の判断原理を **差分、relation path、validity、abstention** として明示する方が理想的である。
+
+---
+
+## 4. 提案アーキテクチャ
+
+```mermaid
+flowchart TD
+    A["Grounded graph・Meaning field・Layer 1"] --> B["Foreground Scope・Difference Configuration Set"]
+    B --> C["Candidates・pre-selection validity"]
+    C --> D["Selected Provisional Reading or LIMITED"]
+    D -->|selected| E["Semantic Reading Consequence"]
+    E --> F["Reception Set 1..4"]
+    D -->|LIMITED| L["Bounded LIMITED Reception exact1"]
+    H["Allowed Reception envelope"] --> F
+    H --> L
+    F --> G["Projection・realizer candidate"]
+    L --> G
+    G --> V["Post-realizer visible acceptance"]
+    V --> S["Validated delivery seal"]
+```
+
+現行 `build_subjective_planning_inputs` は、pre-meaningとpost-meaningへ分割する。現状のまま後ろへmeaning decisionを足すだけでは、既に選ばれたReception act、style、temperatureが意味選択へ逆流するためである。parallelな第二meaning ownerは作らない。
+
+概念上の接続は次とする。
+
+```python
+semantic_inputs = build_premeaning_grounded_inputs(
+    meaning_graph,
+    meaning_field,
+    layer1_contributions,
+    admitted_relations,
+    source_qualifiers,
+    material_unknowns,
+)
+
+allowed_envelope = build_allowed_reception_opportunity_envelope(
+    parent_allowed_acts,
+    safety_boundaries,
+)
+
+grounded_view = derive_grounded_situation_view(semantic_inputs)
+scope_derivation = derive_foreground_scope_closed(grounded_view)
+outcome = None
+
+if scope_derivation.state == "NO_SAFE_FOREGROUND_OBJECT":
+    return STRUCTURE_INSUFFICIENT_STOP
+elif scope_derivation.state == "COMPETING_MATERIAL_SCOPES":
+    outcome = make_limited_competing_material_readings_outcome(
+        scope_derivation.retained_foreground_source_object_refs,
+        semantic_inputs.layer1_contributions,
+        scope_derivation.unresolved_scope_refs,
+    )
+elif scope_derivation.state == "FOREGROUND_SCOPE_STRUCTURE_INSUFFICIENT":
+    outcome = make_limited_structure_insufficient_outcome(
+        semantic_inputs.layer1_contributions,
+        scope_derivation.retained_foreground_source_object_refs,
+        scope_derivation.missing_structure_refs,
+    )
+else:
+    foreground_scope = scope_derivation.foreground_scope
+    configuration_derivation = derive_difference_configuration(
+        grounded_view,
+        foreground_scope,
+    )
+
+    if configuration_derivation.state == "NO_FOREGROUND_OBJECT":
+        return STRUCTURE_INSUFFICIENT_STOP
+    elif configuration_derivation.state == "UPSTREAM_STRUCTURE_INSUFFICIENT":
+        outcome = make_limited_structure_insufficient_outcome(
+            foreground_scope,
+            semantic_inputs.layer1_contributions,
+            configuration_derivation.foreground_source_object_refs,
+            configuration_derivation.missing_structure_refs,
+        )
+    elif configuration_derivation.state == "THIN_NO_SAFE_CONFIGURATION":
+        outcome = make_limited_no_safe_configuration_outcome(
+            foreground_scope,
+            semantic_inputs.layer1_contributions,
+            configuration_derivation.foreground_source_object_refs,
+        )
+    else:
+        difference_configuration_set = (
+            configuration_derivation.configuration_set
+        )
+        bundle_derivation = derive_requirement_bundle_set(
+            difference_configuration_set,
+        )
+        if bundle_derivation.state == "UPSTREAM_STRUCTURE_INSUFFICIENT":
+            outcome = make_limited_structure_insufficient_outcome(
+                foreground_scope,
+                semantic_inputs.layer1_contributions,
+                configuration_derivation.foreground_source_object_refs,
+                bundle_derivation.missing_structure_refs,
+            )
+        elif bundle_derivation.state == "NO_REQUIRED_DIFFERENCE":
+            outcome = make_limited_no_safe_configuration_outcome(
+                foreground_scope,
+                semantic_inputs.layer1_contributions,
+                configuration_derivation.foreground_source_object_refs,
+            )
+        else:
+            requirement_bundle_set = bundle_derivation.bundle_set
+            candidate_set = build_input_specific_meaning_candidates(
+                difference_configuration_set,
+                requirement_bundle_set,
+            )
+            outcome = select_input_specific_meaning(
+                validate_preselection_candidates(candidate_set),
+                difference_configuration_set,
+                requirement_bundle_set,
+            )
+
+if outcome.is_limited:
+    limited_reception = derive_bounded_limited_reception(
+        outcome,
+        semantic_inputs.layer1_contributions,
+        allowed_envelope,
+    )
+    unsealed_inputs = build_unsealed_limited_projection_inputs(
+        outcome,
+        limited_reception,
+    )
+    projection_candidate = project_limited_subjective_plan_candidate(
+        unsealed_inputs,
+    )
+    semantic_consequence_contract = None
+    reception_contract = limited_reception
+else:
+    reading_consequence = derive_semantic_reading_consequence(
+        outcome.selected_reading,
+    )
+    reception_set = derive_meaning_bound_reception_set(
+        outcome.selected_reading,
+        reading_consequence,
+        allowed_envelope,
+    )
+    post_binding_acceptance = validate_response_consequence_binding(
+        outcome.selected_reading,
+        reading_consequence,
+        reception_set,
+    )
+    if not post_binding_acceptance.accepted:
+        return MEANING_RESPONSE_CONSEQUENCE_GAP
+    unsealed_inputs = build_unsealed_subjective_projection_inputs(
+        semantic_inputs,
+        outcome.selected_reading,
+        reading_consequence,
+        reception_set,
+    )
+    projection_candidate = project_selected_reading_plan_candidate(
+        unsealed_inputs,
+    )
+    semantic_consequence_contract = reading_consequence
+    reception_contract = reception_set
+
+surface_candidate = realize_subjective_surface_candidate(
+    projection_candidate,
+)
+visible_acceptance = validate_postrealizer_visible_acceptance(
+    outcome,
+    semantic_consequence_contract,
+    reception_contract,
+    surface_candidate.surface_derivations,
+    surface_candidate.visible_units,
+)
+if not visible_acceptance.accepted:
+    return visible_acceptance.named_stop
+
+subjective_plan = seal_validated_delivery_plan(
+    projection_candidate,
+    surface_candidate,
+    visible_acceptance,
+)
+product_acceptance = derive_product_acceptance_disposition(
+    outcome,
+    visible_acceptance,
+)  # UPSTREAM_STRUCTURE_CAPABILITY_GAP preserves product_acceptance=false
+```
+
+`GroundedHumanReceptionPlan`またはparent allowed actsは、最終Receptionではなくallowed opportunity envelopeとしてのみ保持する。このenvelopeは `GroundedSituationView`、Difference Configuration Set、Requirement Bundle Set、candidate builder、selectorの引数型から到達不能にし、selection outcome確定後のbindingへだけ渡す。selected readingへbindしたact subset、style、temperatureを確定した後に `projection_preimage_ref` を作る。
+
+`PreMeaningGroundedInputs` はsemantic source、relation、qualifier、unknownだけを持ち、allowed act、style、temperature、affect、stanceを持たない。`AllowedReceptionOpportunityEnvelope` は逆にmeaning componentを選ぶmethodを持たない。この型分離をReception逆流のmachine invariantとする。
+
+exact3のうちDiscriminative necessityとWhole-reading consequenceはpre-selectionで検証する。Emlis-response consequenceは、post-bindingでsemantic bindingを検証し、post-realizerでvisible差分を最終検証して閉じる。どちらのfailureでも別candidateへreselectしてはならない。`ReadingConsequence` はB側のsemantic / pragmatic consequenceだけを所有し、主観mode、affect、stanceはCまで導入しない。
+
+LIMITED routeはderivation / selection outcomeを先に確定し、その後にだけ `BoundedLimitedReception` exact1をLayer 1 contributionとforeground source objectへbindする。これは深いselected readingの偽装ではなく、薄い入力を薄いまま受け取るfirst-class bounded laneである。正常なLIMITEDと `LIMITED_RECEPTION_CAPABILITY_GAP_STOP` を分け、Layer 2 exact0を正常成果として許容しない。
+
+projection inputは `SelectedReadingProjectionInputs | LimitedProjectionInputs` のtagged unionとし、exhaustive dispatchする。selected laneは `project_selected_reading_plan_candidate`、LIMITED laneは `project_limited_subjective_plan_candidate` だけを呼ぶ。後者はselected reading fieldを受け取らない。既存 `project_subjective_meaning_plan` をorchestrator名として残す場合も、このdispatchだけを所有し、意味を固定優先順で発見しない。
+
+---
+
+## 5. Grounded Situation View
+
+### 5.1 役割
+
+既存の `GroundedMeaningGraph`、`InterpretationCandidatePool`、`EmlisMeaningField`、Layer 1 contributionを、意味候補生成が利用できる一つのrequest-local viewへ正規化する。
+
+新しい事実や心理を追加する層ではない。既存source evidenceへ到達できない内容は一切入れない。
+
+### 5.2 必須partition
+
+| 軸 | 例 | 必須保持条件 |
+|---|---|---|
+| source world | self/internal、actual output/external、relationship/shared、unknown | world間を暗黙に同一化しない |
+| epistemic | source-stated fact、source-stated interpretation、Emlis provisional reading、unknown | provisionalをfactへ昇格しない |
+| temporal | before、current、after、continuing、unknown | before/afterと継続方向を反転しない |
+| role | wish、intention、action、effort、constraint、change、residue、evaluation | 意図と実行、変化と評価を潰さない |
+| relational | contrast、coexistence、cause/result、attempt/block、wish/constraint、action/change、preservation | endpointと方向を保持する |
+| modality/polarity | actual、possible、uncertain、negated、not-generalized | 可能性をactualへ、限定を一般化へ変えない |
+
+### 5.2.1 Foreground Scope closed derivation contract
+
+Foreground Scopeは、入力固有meaningの候補を選ぶ第二selectorではない。後段が落としてはならないsource-connected objectのrequest-local unionを所有するだけであり、reading operation、Reception、主観mode、表現を順位付けしない。
+
+scope basisは次のclosed exact5からだけ発行できる。
+
+```python
+ForegroundScopeBasisKind = Literal[
+    "SOURCE_EXPLICIT_TARGET_TOPIC_OR_SCOPE",
+    "LAYER1_REQUIRED_OBSERVATION_OBJECT",
+    "EXISTING_REQUIRED_RETENTION_DUTY",
+    "SOURCE_CONNECTED_RELATION",
+    "MATERIAL_UNKNOWN_OR_REQUIRED_QUALIFIER",
+]
+
+class ForegroundScopeBasisRow:
+    schema_version: Literal["1.0"]
+    basis_kind: ForegroundScopeBasisKind
+    scope_object_refs: tuple[str, ...]  # exact1+
+    source_object_refs: tuple[str, ...]  # exact1+
+    source_evidence_refs: tuple[str, ...]  # exact1+
+    layer1_required_object_refs: tuple[str, ...]
+    required_retention_duty_refs: tuple[str, ...]
+    source_connected_relation_refs: tuple[str, ...]
+    material_unknown_refs: tuple[str, ...]
+    required_qualifier_refs: tuple[str, ...]
+    owner_refs: tuple[str, ...]
+    world_refs: tuple[str, ...]
+    epistemic_state_refs: tuple[str, ...]
+    time_refs: tuple[str, ...]
+    aspect_refs: tuple[str, ...]
+    modality_refs: tuple[str, ...]
+    polarity_refs: tuple[str, ...]
+    scope_refs: tuple[str, ...]
+
+class ForegroundScope:
+    schema_version: Literal["1.0"]
+    scope_id: str
+    integrated_scope_object_refs: tuple[str, ...]  # exact1+
+    basis_row_refs: tuple[str, ...]  # exact1+
+    source_connected_relation_refs: tuple[str, ...]
+    required_retention_duty_refs: tuple[str, ...]
+    material_unknown_refs: tuple[str, ...]
+    required_qualifier_refs: tuple[str, ...]
+    source_evidence_refs: tuple[str, ...]  # exact1+
+
+class ForegroundScopeDerivation:
+    schema_version: Literal["1.0"]
+    state: Literal[
+        "FOREGROUND_SCOPE_AVAILABLE",
+        "COMPETING_MATERIAL_SCOPES",
+        "FOREGROUND_SCOPE_STRUCTURE_INSUFFICIENT",
+        "NO_SAFE_FOREGROUND_OBJECT",
+    ]
+    foreground_scope: ForegroundScope | None
+    retained_foreground_source_object_refs: tuple[str, ...]
+    unresolved_scope_refs: tuple[str, ...]
+    missing_structure_refs: tuple[str, ...]
+    derivation_evidence_refs: tuple[str, ...]
+```
+
+`SOURCE_CONNECTED_RELATION`に許可するrelation kindは、sourceへ到達するcontrast、coexistence、continuation、correctionのexact4だけである。各basis rowはsource evidence exact1以上へ到達し、許可kindに対応するfieldをexact1以上持つ。optional fieldの多さは順位にならない。
+
+aggregationは自由な`material`判定を置かず、次へ閉じる。scope objectが同一でもこの判定を省略しない。
+
+1. 全admitted basis rowを、owner、world、epistemic、time、aspect、modality、polarity、scope、required qualifier、unknownのtyped compatibility exact10でpairwise比較する。
+2. 各axisは、同一typed value、またはcontrast／coexistence／continuation／correction exact4のsource-connected relationが両valueを別値のまま保持する場合だけcompatibleとする。unknownはunknownのまま保持し、knownへpromotionして両立させない。correctionは方向とbefore／afterを保持し、旧値を現値へ上書きして両立させない。
+3. distinct objectのrowは、exact10 compatibilityに加えてexact4のsource-connected relationが必要である。同一objectのrowもexact10をすべて満たす必要がある。
+4. 全admitted rowがpairwise compatibleなら、全rowを一つの`ForegroundScope`へcanonical set unionする。first-match、score、任意truncate、固定category優先を持たない。
+5. owner、world、epistemic、time、aspect、modality、polarity、scope、required qualifier、unknownのexact10いずれかのtyped slotに異なる値があり、exact4 relationで別値の保持を証明できない場合はtyped conflictとする。admitted basisはすべてsource-explicit、Layer 1 `REQUIRED`、既存`REQUIRED` dutyまたは保持必須unknown／qualifierなので、追加scoreなしにmaterial conflictとなり、`COMPETING_MATERIAL_SCOPES`から`LIMITED_COMPETING_MATERIAL_READINGS`へ送る。
+6. 安全なsource objectがexact1以上あるが、exact10判定に必要なtyped field、またはdistinct object間のrequired relationが欠ける場合は`FOREGROUND_SCOPE_STRUCTURE_INSUFFICIENT`とし、`LIMITED_STRUCTURE_INSUFFICIENT`へ送る。欠落を競合やthin inputへ変換しない。
+7. `NO_SAFE_FOREGROUND_OBJECT`とSTOPは、安全に保持できるforeground source objectがexact0の場合だけ許す。
+
+次はbasis、aggregation、競合解消のいずれにも使用禁止であり、型から到達不能にする。
+
+- Reception act、allowed Reception envelope
+- affect、stance、style、temperature、subjective mode
+- `unfinished / direction / burden / agency / material`等の固定category priority
+- 日本語surface、surface token、raw token position
+- fixture ID、case ID、hash、列挙順、request-local/internal ID
+
+IDは参照整合性とtraceにだけ使い、scopeの採否・中心・順序には使わない。Foreground Scopeは`SelectedEmlisProvisionalReading`ではなく、後段のDifference Configurationが必ず保持する対象集合である。
+
+### 5.3 Difference ConfigurationとRequired Difference Row
+
+まずclosed sourceから観測差分を機械的に作り、そのうちclosed invariantを壊すものだけをrequiredへ昇格する。`material`を自由判断するselectorは置かない。binary relationのない入力を一律に捨てないため、configurationはclosed unionにする。
+
+```python
+class RelationalConfiguration:
+    configuration_id: str
+    endpoint_component_refs: tuple[str, ...]  # 2..5
+    relation_path_refs: tuple[str, ...]
+    direction_rows: tuple[RelationDirectionRow, ...]
+    source_qualifier_refs: tuple[str, ...]
+    source_evidence_refs: tuple[str, ...]
+
+class QualifiedEventStateConfiguration:
+    configuration_id: str
+    predicate_ref: str
+    owner_ref: str
+    modality_refs: tuple[str, ...]
+    time_refs: tuple[str, ...]
+    aspect_refs: tuple[str, ...]
+    scope_refs: tuple[str, ...]
+    qualifier_refs: tuple[str, ...]
+    source_evidence_refs: tuple[str, ...]
+
+DifferenceConfiguration = (
+    RelationalConfiguration | QualifiedEventStateConfiguration
+)
+
+class DifferenceConfigurationSet:
+    foreground_scope_ref: str
+    configuration_refs: tuple[str, ...]  # 1..5
+    source_evidence_refs: tuple[str, ...]
+
+class DifferenceConfigurationDerivation:
+    state: Literal[
+        "CONFIGURATION_SET_AVAILABLE",
+        "THIN_NO_SAFE_CONFIGURATION",
+        "UPSTREAM_STRUCTURE_INSUFFICIENT",
+        "NO_FOREGROUND_OBJECT",
+    ]
+    configuration_set: DifferenceConfigurationSet | None
+    foreground_source_object_refs: tuple[str, ...]
+    missing_structure_refs: tuple[str, ...]
+    derivation_evidence_refs: tuple[str, ...]
+
+class ObservedDistinctionRow:
+    distinction_id: str
+    configuration_ref: str
+    axis: DifferenceAxis
+    contrasted_component_refs: tuple[str, ...]
+    source_qualifier_refs: tuple[str, ...]
+    source_evidence_refs: tuple[str, ...]
+
+class RequiredDifferenceRow:
+    difference_id: str
+    observed_distinction_ref: str
+    invariant_codes: tuple[DifferenceInvariantCode, ...]
+    retention_duty_refs: tuple[str, ...]
+    counterfactual_mutation_ref: str  # exact1
+```
+
+主なaxisは次とする。
+
+- `INTENTION_VS_OUTPUT`
+- `INTERNAL_VS_EXTERNAL`
+- `BEFORE_VS_AFTER`
+- `HISTORY_VS_PATTERN_VS_POSSIBILITY`
+- `WISH_VS_CONSTRAINT`
+- `ACTION_VS_RESIDUE`
+- `CHANGE_VS_GENERALIZATION`
+- `FACT_VS_INTERPRETATION`
+- `RESOLVED_VS_UNRESOLVED`
+- `ENDPOINT_A_VS_ENDPOINT_B`
+
+このrowが、後段の「何を保持しなければgenericになるか」を入力ごとに定義する。
+
+### 5.4 required rowの導出規則
+
+Observed rowの導出元はexact5に閉じる。
+
+1. admitted binary relationのendpoint＋direction
+2. source-boundな `predicate + owner` と、modality／time／aspect／scope／qualifierのexact1以上からなるqualified event / state
+3. 同一relation pathまたは同一qualified event / state上で異なるworld／role／temporal／epistemic axis
+4. component、relationまたはpredicateへbindしたpolarity／modality／time／scope／non-generalization qualifier
+5. component、relationまたはpredicateへbind済みのmaterial unknown
+
+Observed rowを一つずつcounterfactual mutationし、次のclosed invariantのexact1以上を壊す場合だけ `RequiredDifferenceRow` にする。
+
+```text
+ENDPOINT_COLLAPSE
+DIRECTION_REVERSAL
+WORLD_COLLAPSE
+ROLE_COLLAPSE
+TEMPORAL_COLLAPSE
+POLARITY_REVERSAL
+MODALITY_PROMOTION
+UNKNOWN_ERASURE
+EXPLICIT_LIMIT_ERASURE
+REQUIRED_RETENTION_ERASURE
+```
+
+counterfactual mutationはendpoint削除、左右交換、predicateまたはowner削除、world／role／time置換、modality／aspect／scope／qualifier削除、unknown promotionのclosed setとする。各`RequiredDifferenceRow`は、そのrowをrequiredにしたmutation exact1を`counterfactual_mutation_ref`として所有する。どのinvariantも壊さない差分はrequired rowにしない。source-explicit correction、conclusion、contrast、refusal等の既存retention dutyが`REQUIRED`なら `REQUIRED_RETENTION_ERASURE` で残す。
+
+`REQUIRED_RETENTION_ERASURE` のownerはsource／observation／MeaningField retention dutyのallowlistに限定する。Reception act、style、temperature、affect、value policy由来のretentionはmeaning-side required rowへ入れない。
+
+語の珍しさ、文の長さ、感情強度、Reception opportunity、surface form、自由記述のloss effectは導出根拠にできない。
+
+### 5.5 過剰summaryの防止
+
+全required rowを一つの巨大なmeaningへ詰め込まない。`RequirementBundle` のanchorは、`RelationalConfiguration | QualifiedEventStateConfiguration` exact1である。anchor、そのendpointまたはpredicate＋owner、scoped qualifier、およびclosed invariantを保つために必要なsource-connected pathだけから機械的に作る。
+
+```python
+class RequirementBundle:
+    bundle_id: str
+    foreground_scope_ref: str
+    anchor_configuration_ref: str  # exact1
+    adjacent_configuration_refs: tuple[str, ...]  # 0..4
+    required_difference_refs: tuple[str, ...]  # exact1+
+    retention_duty_refs: tuple[str, ...]
+
+class RequirementBundleSet:
+    foreground_scope_ref: str
+    bundle_refs: tuple[str, ...]  # 1..5
+
+class RequirementBundleDerivation:
+    state: Literal[
+        "BUNDLE_SET_AVAILABLE",
+        "NO_REQUIRED_DIFFERENCE",
+        "UPSTREAM_STRUCTURE_INSUFFICIENT",
+    ]
+    bundle_set: RequirementBundleSet | None
+    missing_structure_refs: tuple[str, ...]
+    derivation_evidence_refs: tuple[str, ...]
+```
+
+`DifferenceConfigurationDerivation` と `RequirementBundleDerivation` はempty setの有無ではなく、closed stateで欠如理由を所有する。
+
+- `*_AVAILABLE`: 対応setは1..5、`missing_structure_refs` はexact0。
+- `THIN_NO_SAFE_CONFIGURATION`: configuration setはnone、foreground source object exact1以上、missing structure exact0、relation-rich／qualified／connected retention evidence exact0。
+- `NO_REQUIRED_DIFFERENCE`: configuration setは存在するがrequired difference exact0、missing structure exact0。
+- `UPSTREAM_STRUCTURE_INSUFFICIENT`: foreground source object exact1以上かつmissing endpoint／relation／predicate／owner／qualifier ref exact1以上。thin inputとして扱わない。
+- `NO_FOREGROUND_OBJECT`: foreground source object exact0。accepted LIMITEDへ進めない。
+
+availableな `DifferenceConfigurationSet` からavailableな `RequirementBundleSet` を作り、candidate builderとselectorはこのbounded setをend-to-endで消費する。単数unionは各configurationのvariantを表し、setはcompatible aggregationとactual conflict判定の単位を表す。candidateが成立するlaneではbasis configurationとrequirement bundleを各1..5要求する。unknown state、stateとcardinalityの不一致、欠如理由の自由記述fallbackはvalidator rejectとする。
+
+- candidateのcoverageは全入力のrow総数ではなく、一つのbundle内で比較する。
+- source graph上で接続されないbundleを、新しい因果や心理で結合しない。
+- optional contributionを加えてもcandidateは優位にならない。
+- 同じsource-constrained semantic / pragmatic conditionを保つなら、node・relation・仮定が少ないcandidateを残す。
+- compatibleなbundleは、次のexact4をすべて満たす場合だけaggregate exact1へまとめる: 同じforeground scope / center、owner assignmentが一致またはtypedに両立、source-connectedなrelation / temporal path、source-explicitなcontrast・coexistence・continuation・correctionのallowlist関係。
+- aggregateはprimary focus exact1＋supporting facets 0..4とし、primaryとsupportingの合計を1..5へ閉じる。power set、任意長path、ID／hash／列挙順によるprimary選択は禁止する。
+- pairwise conflictがexact1でもあればaggregateせず、actual competing alternativesとして `LIMITED_COMPETING_MATERIAL_READINGS` とする。
+
+これにより、現行fixed focusを曖昧な`material`判断へ移し替えるだけの再設計を禁止する。
+
+---
+
+## 6. Input-Specific Meaning Candidate
+
+### 6.1 候補はcategoryではなくconfiguration命題
+
+候補は `BURDEN`、`AGENCY`、`UNFINISHED` のような一語categoryでは成立しない。relational configurationまたはqualified event / state configurationとして、少なくとも次を保持する。
+
+- relational laneでは、何と何の関係か、向きは何か。
+- qualified event / state laneでは、predicateとownerは何か、どのmodality／time／aspect／scope／qualifierが入力固有差分を作るか。
+- どの変化、制約、継続、未完了が重要か。
+- どの限定とunknownを残すか。
+- どのcomponent・relation・predicate・qualifierを失うとsource-constrained semantic / pragmatic conditionが変わるか。
+
+### 6.2 Reading operation
+
+meaning candidateは、少数の一般operationと入力固有argumentの組合せで構成する。operation単独は意味として認めない。
+
+| operation | 機能 | 成立に必要なもの |
+|---|---|---|
+| `KEEP_DISTINCT` | 異なるworld、role、epistemic stateを同一化しない | materialな差分exact1以上 |
+| `HOLD_RELATION` | 複数endpointとその有向relationを一つの意味単位として保持 | endpoint exact2以上＋admitted relation |
+| `TRACK_TRANSITION` | before/current/afterの変化を方向付きで読む | temporal endpoint＋transition |
+| `NOTICE_PERSISTENCE` | actionやchange後にも残る意図・感情・constraintを読む | earlier event＋continuing residue |
+| `RECOGNIZE_BOUNDED_ACTUALITY` | actualな変化を認めつつ範囲・非一般化を保持 | actual change＋limiting qualifier |
+| `HOLD_UNRESOLVED` | 既実行と未解決、複数可能性、unknownを同時保持 | actual component＋material unresolved component |
+| `HOLD_QUALIFIED_EVENT_STATE` | binary relationなしでも限定されたevent / stateを入力固有のreading focusとして保持 | source-bound predicate＋owner＋modality／time／aspect／scope／qualifier exact1以上 |
+
+たとえば `HOLD_RELATION` だけならgenericである。`HOLD_RELATION(continuation_intention_ref, uncertain_self_reported_overextension_ref, contrast_ref, current_ref)` のように、必要なendpoint・方向・限定が揃って初めて候補になる。
+
+qualified event / stateも安全に成立せず、単一の無限定nodeしか得られない場合は、`CONTACT`を仮の深い意味にせず、後述の `LIMITED_NO_SAFE_INPUT_SPECIFIC_CONFIGURATION` へ送る。
+
+### 6.3 候補生成
+
+候補は次の順で、providerlessに列挙する。
+
+1. `RequirementBundle`ごと、適用可能operationごと、basis epistemic tierごとにcanonical candidate exact1を作る。
+2. relational laneではbefore/after、action/change、wish/constraint、actual/residueなどの既存typed relation pathを保持する。
+3. qualified event / state laneではpredicate＋ownerを必須とし、modality／time／aspect／scope／qualifierの入力固有差分を保持する。
+4. §5.5のclosed exact4を満たすcompatible connected bundleだけをaggregate exact1へ統合し、primary focus exact1＋supporting facets 0..4にする。
+5. source qualifier、negation、modality、unknownを候補へbindingする。
+6. nodeとedgeはcandidate内で各exact1回まで使い、同じedgeを再走査しない。
+7. canonical semantic signatureでdedupeし、列挙順をselection根拠にしない。
+8. disconnected component同士を新しい因果や心理で接続しない。
+9. competing alternativesを一つのsummaryへ統合せず `LIMITED` とする。
+
+Reading operationはexact7、basis epistemic tierはexact2なので、candidate cardinality上限は `RequirementBundle count × 7 × 2` とする。bundle当たり最大exact14を超えた場合は `CANDIDATE_CARDINALITY_OVERFLOW` へ閉じる。power setや任意長pathの列挙は禁止する。
+
+同じbundle・operation・tierにmaterialに異なるargument bindingが複数ある場合、列挙順やIDでcanonical exact1を作らない。§5.5のclosed aggregation条件を満たせばprimary＋supportingへ統合し、満たさない場合は `LIMITED_COMPETING_MATERIAL_READINGS` とする。
+
+raw text、fixture ID、case mode、surface token、hash、provider出力をcandidate selectorへ使ってはならない。
+
+### 6.4 契約案
+
+```python
+class InputSpecificMeaningCandidate:
+    schema_version: Literal["1.0"]
+    candidate_id: str
+    reading_operation: MeaningReadingOperation
+    basis_contribution_refs: tuple[str, ...]
+    basis_configuration_refs: tuple[str, ...]  # 1..5
+    requirement_bundle_refs: tuple[str, ...]  # 1..5
+    primary_component_refs: tuple[str, ...]
+    relation_path_refs: tuple[str, ...]
+    qualified_event_state_refs: tuple[str, ...]
+    basis_provenance_rows: tuple[BasisProvenanceRow, ...]
+    basis_epistemic_tier: Literal[
+        "SOURCE_EXPLICIT",
+        "RULE_ADMITTED_PROVISIONAL",
+    ]
+    basis_derivation_refs: tuple[str, ...]
+    source_qualifier_refs: tuple[str, ...]
+    preserved_difference_refs: tuple[str, ...]
+    material_unknown_refs: tuple[str, ...]
+    forbidden_promotion_codes: tuple[str, ...]
+    forbidden_semantic_collapse_refs: tuple[str, ...]
+    semantic_loss_codes: tuple[DifferenceInvariantCode, ...]
+    input_specificity_evidence_ref: str  # exact1
+    emlis_reading_status: Literal["EMLIS_PROVISIONAL_READING"]
+    semantic_signature: MeaningSemanticSignature
+
+class InputSpecificityEvidence:
+    candidate_ref: str  # exact1
+    foreground_scope_ref: str  # exact1
+    required_difference_refs: tuple[str, ...]  # exact1+
+    discriminative_necessity_refs: tuple[str, ...]  # exact1+
+    whole_reading_consequence_refs: tuple[str, ...]  # WholeReadingConsequenceRow refs, exact1+
+
+class ReadingConsequence:
+    selected_reading_ref: str
+    input_specificity_evidence_ref: str  # exact1
+    whole_reading_consequence_refs: tuple[str, ...]  # exact1+
+    changed_whole_reading_codes: tuple[WholeReadingConsequenceCode, ...]  # exact1+
+    response_consequence_requirement_codes: tuple[str, ...]  # exact1+
+    source_constraint_refs: tuple[str, ...]  # exact1+
+```
+
+`semantic_signature` は表層文ではなく、operation、component role、relation direction、epistemic state、temporal state、qualifier、および `component_semantic_keys` を正規化した構造値とする。
+
+各 `component_semantic_key` はtyped predicate、semantic kind、owner、scope、roleを保持する。request-local IDやraw textだけには依存しない。content-bearing keyを安全に作れないcomponent同士はsemantic-equivalentとしてdedupeせず、material tieならLIMITEDへ閉じる。
+
+candidateの `requirement_bundle_refs` は、selectorへ渡された同一 `RequirementBundleSet.bundle_refs` のsubsetでなければならない。各 `basis_configuration_ref` は、参照bundleの `anchor_configuration_ref | adjacent_configuration_refs` から到達でき、各参照bundleの全 `required_difference_refs` をcandidateの `preserved_difference_refs` が覆わなければならない。configurationの重なりからbundle IDを後算出してはならない。
+
+candidate contractはReception、affect、stanceを一切持たない。`forbidden_semantic_collapse_refs` は「このendpoint、predicateまたは限定を落とすと別のsource-constrained semantic / pragmatic conditionになる」というmeaning側の制約であり、応答方針ではない。Receptionはexact1 selectionの後にだけ生成する。
+
+`basis_provenance_rows` はcomponentのsource reachabilityとは別に、relation bridgeまたはqualified event / state basisの根拠を一件ずつ持つ。全basisが `SOURCE_EXPLICIT` の場合だけcandidate tierを `SOURCE_EXPLICIT` とし、provisional basisがexact1以上あればcandidate全体を `RULE_ADMITTED_PROVISIONAL` とする。どちらの場合もselected readingはEmlisによる選択なので、`emlis_reading_status=EMLIS_PROVISIONAL_READING` に固定する。source-explicit basisの強さとreading ownershipを一つのfieldに潰さない。
+
+`InputSpecificMeaningCandidate.input_specificity_evidence_ref`はcandidate exact1へback-bindする`InputSpecificityEvidence` exact1だけを参照する。evidenceの`foreground_scope_ref`はcandidateのRequirement Bundle Setと同じscope、`required_difference_refs`はcandidateの`preserved_difference_refs`のsubsetでなければならない。`InputSpecificityEvidence` のexact2はpre-selection hard validityである。
+
+`ReadingConsequence` はselection後にBが作るsemantic / pragmatic consequenceであり、affect、stance、主観modeを持たない。`input_specificity_evidence_ref`はselected candidateの同fieldと完全一致し、`whole_reading_consequence_refs`もそのevidenceの参照setと完全一致する。post-binding validatorはこのconsequenceとCのReception propositionのsemantic bindingを検証し、post-realizer validatorは `SurfaceDerivation` とvisible unitへのmaterialな差分を検証する。この二段で成立条件exact3を閉じ、どちらのFAIL時も別candidateへreselectしない。
+
+### 6.5 Whole-reading consequence closed derivation
+
+`whole_reading_consequence_refs`と`changed_whole_reading_codes`は自由記述や期待Receptionへの参照ではなく、次のclosed exact7だけを使う。
+
+```python
+WholeReadingConsequenceCode = Literal[
+    "INPUT_CENTER_CHANGED",
+    "RELATION_STRUCTURE_CHANGED",
+    "TEMPORAL_FLOW_CHANGED",
+    "RESOLUTION_TREATMENT_CHANGED",
+    "WORLD_OR_OWNER_DISTINCTION_CHANGED",
+    "MODALITY_POLARITY_OR_LIMITATION_CHANGED",
+    "EPISODICITY_BOUNDARY_CHANGED",
+]
+
+class WholeReadingConsequenceRow:
+    schema_version: Literal["1.0"]
+    consequence_id: str
+    consequence_code: WholeReadingConsequenceCode
+    foreground_scope_ref: str
+    required_difference_ref: str  # exact1
+    source_evidence_refs: tuple[str, ...]  # exact1+
+    counterfactual_mutation_ref: str  # exact1
+    baseline_semantic_signature: MeaningSemanticSignature
+    mutated_semantic_signature: MeaningSemanticSignature
+```
+
+codeの意味は次へ閉じる。
+
+| code | closed consequence |
+|---|---|
+| `INPUT_CENTER_CHANGED` | 入力の中心となる対象・命題が別になる |
+| `RELATION_STRUCTURE_CHANGED` | endpoint、relation kindまたはdirectionが変わる |
+| `TEMPORAL_FLOW_CHANGED` | before／current／after、継続または遷移の読みが変わる |
+| `RESOLUTION_TREATMENT_CHANGED` | resolved／unresolvedの扱いが変わる |
+| `WORLD_OR_OWNER_DISTINCTION_CHANGED` | internal／external／relationship worldまたはowner区別が変わる |
+| `MODALITY_POLARITY_OR_LIMITATION_CHANGED` | possibility、negation、scope、限定または非一般化が変わる |
+| `EPISODICITY_BOUNDARY_CHANGED` | one-off eventとgeneral patternの境界が変わる |
+
+発行手順はclosed exact6である。
+
+1. 同じ`ForegroundScope`内で、`RequiredDifferenceRow.counterfactual_mutation_ref` exact1を適用する。
+2. `baseline_semantic_signature`は当該candidateの`semantic_signature`と完全一致させる。`mutated_semantic_signature`は、そのbaselineへ参照differenceが所有するmutation exact1だけを適用した結果とし、別mutation、Receptionまたは表現差分を混ぜない。
+3. exact7の構造差分がexact1以上ある場合だけ`WholeReadingConsequenceRow`を発行する。
+4. 各rowは`ForegroundScope` exact1、`RequiredDifferenceRow` exact1、source evidence exact1以上へbindし、rowの`counterfactual_mutation_ref`は参照differenceのowned refと完全一致する。
+5. candidateが参照する`InputSpecificityEvidence.whole_reading_consequence_refs`は、そのcandidateが保持するrequired differenceへbindしたrowだけを参照し、exact1以上を要求する。
+6. selected `ReadingConsequence.input_specificity_evidence_ref`はselected candidateのevidence exact1と一致し、`whole_reading_consequence_refs`はそのevidenceの参照setと完全一致する。`changed_whole_reading_codes`は参照rowの`consequence_code`をcanonical dedupeしたsetと完全一致させ、ref／codeの追加・欠落・任意順依存を許さない。
+
+発行根拠として禁止するのは、自由記述、期待Reception、Reception act、allowed envelope、affect、stance、style、temperature、日本語surface／token、fixture／case ID、hash、列挙順、内部IDである。`response_consequence_requirement_codes`はselected reading後のReception binding要求であり、whole-reading rowを逆向きに生成できない。
+
+required differenceのmutationを行ってもclosed codeがexact0の場合、そのdifferenceはwhole-reading consequenceを持たない。候補はpre-selection hard validityでrejectし、一般的な態度や表現差分を後付けして合格させない。
+
+---
+
+## 7. Hard validity
+
+### 7.1 pre-selection hard validity
+
+候補はscore以前に、次をすべて満たさなければならない。
+
+1. **Component reachability**: 全component、predicate、qualifier、unknownが既存evidenceへ到達する。
+2. **Basis provenance**: bridgeまたはqualified event / state basis exact1ごとに `SOURCE_EXPLICIT` または許可済みrule derivation refがある。
+3. **Owner correctness**: actor、experiencer、speaker、evaluation ownerを入れ替えない。
+4. **Configuration completeness**: relational laneは必要endpoint＋directionを、qualified event / state laneはpredicate＋owner＋差分を作るmodality／time／aspect／scope／qualifier exact1以上を保持する。
+5. **Direction correctness**: cause/result、attempt/block、wish/constraint、before/afterを反転しない。
+6. **Polarity/modality/time correctness**: 否定、可能性、限定、時制を昇格させない。
+7. **Bundle satisfaction**: target `RequirementBundle` の全 `RequiredDifferenceRow` を覆う。部分coverageはranking対象にせずrejectする。
+8. **No invented bridge**: disconnected component間へ未根拠の因果、人格、動機を作らない。
+9. **No policy-only meaning**: agency保護、安全、丁寧さ、結論を急がない等の方針だけで意味成立としない。
+10. **No generic affect substitution**: `CONCERN / RESPECT / RELIEF`だけで入力固有性を代用しない。
+11. **Discriminative necessity**: required counterfactual mutationで完全semantic signatureがmaterialに変わる。
+12. **Whole-reading consequence**: §6.5の`WholeReadingConsequenceRow` exact1以上が、同じForeground Scope、candidateが保持するRequired Difference、source evidenceへbindし、closed counterfactualで入力全体の読みを変える。付随情報の抜き出しや期待Receptionだけではない。
+
+### 7.2 post-binding acceptance
+
+normal selected reading確定後にだけ、次を検証する。
+
+1. **Emlis-response semantic consequence**: `ReadingConsequence` とReception propositionの間にsource-constrainedでmaterialなsemantic bindingがある。
+2. **Reception cardinality**: SubjectiveDepthClassに従う1..4である。
+3. **AFFIRMATIVE_RECEPTION_CONTRIBUTION exact1+**: attention、feeling、thought、appraisal、distanceまたはrelational stanceとして「Emlisが何として受け取ったか」を述べる主観寄与がexact1以上ある。
+4. **Counterposition non-substitution**: `BOUNDED_COUNTERPOSITION` はoptionalであり、単独ではReceptionを完成させない。
+5. **No response-to-meaning backflow**: acceptance failureで別readingへreselectしない。
+
+`AFFIRMATIVE` は肯定的な感情価を意味しない。source自体が否定、拒否、迷いを含む場合も、その否定等をEmlisが何として受け取ったかを正に記述するという構造上の名称である。
+
+LIMITEDはselected-laneの `validate_response_consequence_binding` へ入らない。derivation / selection outcome確定後の `BoundedLimitedReception` constructor invariantとしてFOCUSED exact1、affirmative exact1、Layer 1 / foreground source object binding exact1以上を検証し、その後はnormal laneと共通のpost-realizer visible gateへ進む。
+
+### 7.3 post-realizer visible acceptance
+
+projectionとrealizerがcandidate artifactを作った後、seal前に次をすべて検証する。
+
+1. **Surface evidence availability**: `SurfaceDerivation` とvisible unitがvalidatorへ渡されている。
+2. **Meaning-side visible contribution**: 全required differenceがreading／Layer 1側のvisible traceへ到達する。
+3. **Reception-side visible contribution**: 各Reception propositionが入力固有のLayer 2 visible unitへ到達する。
+4. **No trace-only specificity**: private refだけが固有でsurfaceがgeneric appraisalへcollapseしていない。
+5. **Many-to-one natural density**: artifact-level coverageを守り、rowごとの過密文を強制しない。
+
+post-realizer failureでも別readingへreselectせず、`MEANING_REALIZATION_CAUSAL_TRACE_GAP`または該当するnamed capability STOPへ閉じる。visible acceptanceを通る前にvalidated delivery sealを作ってはならない。delivery sealとProduct acceptance dispositionは別fieldとし、`UPSTREAM_STRUCTURE_CAPABILITY_GAP`はbounded deliveryが成立してもProduct acceptance falseを保持する。
+
+全laneに `NO_ABSTENTION_SUBSTITUTION` をhard invariantとして課す。relation-rich入力、qualified event / state、compatible connected multi-facet入力を、選択が難しいという理由だけで薄いLIMITED laneへ落としてはならない。thin-input LIMITEDのsource-bound response-object keyを、rich inputの `literal + generic appraisal` 合格へ再利用することも禁止する。
+
+pre-selection hard validityを満たすcandidateがなければ、汎用appraisalへfallbackしない。closed stateがgenuine thinを示す場合だけfirst-class LIMITEDへ進む。upstream構造不足はbounded deliveryを許してもProduct acceptance falseのnamed capability gap、Reception／visible realization不足はnamed STOPへ閉じる。
+
+---
+
+## 8. Deterministic source-grounded selection
+
+### 8.1 固定kind優先を廃止する
+
+`unfinished`が常に`change`より上、`direction`が常に`burden`より上、というglobal priorityは持たない。優先されるのはcategoryではなく、今回の入力で必要な差分を最も失わない候補である。
+
+### 8.2 選択順
+
+hard-valid候補に対し、次を辞書式に適用する。加重scoreは使わない。
+
+まずbasis provenance tierをpartitionする。同じbundleを必要十分に覆う `SOURCE_EXPLICIT` candidateがexact1以上あれば、その集合内だけで選ぶ。`RULE_ADMITTED_PROVISIONAL` は、source-explicit candidateではbundleを成立させられず、全derivation ruleが許可済みの場合だけ候補集合へ入れる。coverage量の多いprovisional candidateが、狭いsource-explicit candidateを追い越してはならない。どちらのtierを選んでも、selected reading statusは `EMLIS_PROVISIONAL_READING` である。
+
+1. **bundle satisfaction**: 全required rowを覆う候補だけを残す。coverage量による加点はしない。
+2. **required retention preservation**: source-explicit scopeと既存`REQUIRED` retention dutyを保つ。
+3. **bundle connectivity**: required componentを、発明なしで一つのconfigurationへ結ぶ。
+4. **epistemic conservatism**: fact、interpretation、unknownを最少promotionで保持する。
+5. **contrastive semantic necessity**: required counterfactual mutationにより、candidateの完全なsemantic signatureが変わる。
+6. **minimal sufficiency**: 上記が同じなら、provisional edge、不要component、仮定が最少の候補を取る。
+
+### 8.3 tie
+
+- semantic signatureが同値でもfull coreが異なるcandidateは保持し、§20.5のcomponentwise dominanceだけを適用する。canonical stable key、ID、hashで代表exact1を選ばない。
+- 同じforeground scope / center、両立するowner、source-connected path、source-explicitなallowlist関係をすべて持つbundleは競合ではない。primary focus exact1＋supporting facets 0..4としてaggregateする。
+- primaryはsource-explicit foreground scopeまたは既存`REQUIRED` retention dutyで決める。個別facetに優先根拠がなくてもclosed exact4で結ばれる場合は、source-connected path全体のcanonical aggregate configurationをprimaryとし、個別facetをsupportingにする。actual centerが複数競合する場合はLIMITEDとする。ID、hash、列挙順、facet数で決めない。
+- materialに異なるactual competing alternativesが残る場合、巨大summaryへ統合せず `LIMITED_COMPETING_MATERIAL_READINGS` とする。
+- 将来、質問能力が正典化された場合だけclarification候補にできる。本Stage1設計では質問を新設しない。
+
+### 8.4 selection contract
+
+```python
+class SelectedEmlisProvisionalReading:
+    schema_version: Literal["1.1"]
+    reading_id: str
+    selected_candidate_ref: str
+    primary_reading_focus_ref: str  # exact1
+    supporting_facet_refs: tuple[str, ...]  # 0..4
+    reading_component_refs: tuple[str, ...]
+    reading_relation_refs: tuple[str, ...]
+    qualified_event_state_refs: tuple[str, ...]
+    basis_provenance_rows: tuple[BasisProvenanceRow, ...]
+    basis_epistemic_tier: Literal[
+        "SOURCE_EXPLICIT",
+        "RULE_ADMITTED_PROVISIONAL",
+    ]
+    reading_status: Literal["EMLIS_PROVISIONAL_READING"]
+    unresolved_alternative_refs: tuple[str, ...]
+    selection_reason_codes: tuple[str, ...]
+    decision_trace: MeaningDecisionTrace
+
+class SealedEmlisProvisionalReading:
+    selected_reading_ref: str
+    reading_consequence_ref: str  # exact1
+
+class LimitedMeaningOutcome:
+    schema_version: Literal["1.1"]
+    outcome_state: Literal[
+        "LIMITED_NO_SAFE_INPUT_SPECIFIC_CONFIGURATION",
+        "LIMITED_STRUCTURE_INSUFFICIENT",
+        "LIMITED_COMPETING_MATERIAL_READINGS",
+    ]
+    retained_layer1_refs: tuple[str, ...]
+    foreground_source_object_refs: tuple[str, ...]  # exact1+
+    retained_qualifier_refs: tuple[str, ...]
+    unresolved_alternative_refs: tuple[str, ...]
+    derivation_state_ref: str
+    product_acceptance_eligible: bool
+    outcome_reason_codes: tuple[str, ...]
+    decision_trace: MeaningDecisionTrace
+
+MeaningDecisionOutcome = (
+    SelectedEmlisProvisionalReading | LimitedMeaningOutcome
+)
+```
+
+decision traceには、採用理由だけでなく、近接候補がどのhard validityまたはsource-grounded selection条件で落ちたかを残す。自由記述のhidden reasoningは不要で、body-free reason codeとsource refで十分である。
+
+`SelectedEmlisProvisionalReading` と `SealedEmlisProvisionalReading` はB側のreading componentとsemantic `ReadingConsequence`だけを所有する。visible response objectのsole ownerは後段 `MeaningBoundReceptionProposition.response_object_refs` とする。
+
+`LimitedMeaningOutcome` はselected readingではないが、derivation / selection outcome確定後に専用の `BoundedLimitedReception` exact1を必ず作る。retained Layer 1 contribution、foreground source object、保持可能なqualifierへbindし、深い意味、原因、心理、人格を追加しない。現行projection sealのsubjective claim exact1..4へversioned private dispatchで接続し、正常LIMITEDをLayer 2 exact0にしない。専用Reception exact1を安全に作れなければ `LIMITED_RECEPTION_CAPABILITY_GAP_STOP` であり、accepted LIMITEDではない。public schema effectはexact0とする。
+
+`outcome_state=LIMITED_STRUCTURE_INSUFFICIENT` では `derivation_state_ref=UPSTREAM_STRUCTURE_INSUFFICIENT` と `product_acceptance_eligible=false` を必須にする。`LIMITED_NO_SAFE_INPUT_SPECIFIC_CONFIGURATION` は `THIN_NO_SAFE_CONFIGURATION | NO_REQUIRED_DIFFERENCE` のclosed stateだけから作り、upstream gapをこのlaneへ変換しない。
+
+---
+
+## 9. Meaning-bound Emlis Reception Set
+
+### 9.1 意味を選んだ後にReceptionを決める
+
+Reception actは意味selectorから降格し、選択済みreadingに対するEmlis側の帰結を1..4個の主観命題として表す。selected primary focus exact1とReception exact1を同一視しない。
+
+```python
+class MeaningBoundReceptionProposition:
+    schema_version: Literal["1.1"]
+    reception_id: str
+    selected_reading_ref: str
+    reception_function: ReceptionFunction
+    responsibility_kind: SubjectiveResponsibilityKind
+    subjective_mode: SubjectiveMode
+    contribution_kind: Literal[
+        "AFFIRMATIVE_RECEPTION_CONTRIBUTION",
+        "BOUNDED_COUNTERPOSITION",
+    ]
+    response_object_refs: tuple[str, ...]  # exact1+
+    preserved_difference_refs: tuple[str, ...]
+    optional_affect: AffectContent | None
+    optional_stance: RelationalStance | None
+    reading_status: Literal["EMLIS_PROVISIONAL_READING"]
+    subjective_assertion_modality: SubjectiveAssertionModality
+
+class MeaningBoundReceptionSet:
+    schema_version: Literal["1.1"]
+    selected_reading_ref: str
+    reading_consequence_ref: str
+    subjective_depth: SubjectiveDepthClass
+    proposition_refs: tuple[str, ...]  # 1..4
+    affirmative_contribution_refs: tuple[str, ...]  # subset, 1..4
+    optional_counterposition_refs: tuple[str, ...]  # disjoint subset, 0..3
+
+class BoundedLimitedReception:
+    schema_version: Literal["1.1"]
+    limited_outcome_ref: str
+    bound_layer1_contribution_refs: tuple[str, ...]  # exact1+
+    foreground_source_object_refs: tuple[str, ...]  # exact1+
+    retained_qualifier_refs: tuple[str, ...]
+    subjective_depth: Literal["FOCUSED"]
+    proposition_ref: str  # exact1
+    contribution_kind: Literal["AFFIRMATIVE_RECEPTION_CONTRIBUTION"]
+```
+
+`MeaningBoundReceptionSet` は次のpartition invariantをすべて満たす。
+
+```text
+set(affirmative_contribution_refs)
+  ∩ set(optional_counterposition_refs) = EMPTY
+
+set(affirmative_contribution_refs)
+  ∪ set(optional_counterposition_refs)
+  = set(proposition_refs)
+
+len(affirmative_contribution_refs)
+  + len(optional_counterposition_refs)
+  = len(proposition_refs)
+  = SubjectiveDepthClass cardinality
+```
+
+したがって、各subsetが独立に上限まで増えて総数4を超えることはない。
+
+`reading_status` はEmlis readingの訂正可能性を所有し、常に `EMLIS_PROVISIONAL_READING` である。basisの強さはBからcarryした別のprovenance fieldで確認する。`subjective_assertion_modality` は `EMLIS_FEELING` 等、Emlisが何として主観命題を述べるかを所有する。これらを一つのenumへ混ぜない。
+
+normal selected laneのReception cardinalityは、現行SubjectiveDepthClass contractに合わせて次へ閉じる。
+
+| SubjectiveDepthClass | Reception proposition数 |
+|---|---:|
+| `FOCUSED` | exact1 |
+| `LAYERED` | 2..3 |
+| `DENSE` | 3..4 |
+
+ObservationDepthとSubjectiveDepthClassは独立である。primary／supporting facet数とReception proposition数を1:1対応させず、一つのReceptionが複数facetを受け取っても、一つのfacetから相補的な複数Receptionが生じてもよい。
+
+- semantic-equivalentなReceptionはcanonical dedupeする。
+- 異なる責務を担い、互いに矛盾しないReceptionはcomplementaryとして1..4内に共存できる。
+- 同じresponsibility roleとresponse objectを奪い合う、またはtyped mutexに抵触するReceptionだけをcompetingとし、`RECEPTION_BINDING_CONFLICT_STOP`へ閉じる。
+- allowed envelope内に `AFFIRMATIVE_RECEPTION_CONTRIBUTION` exact1以上を作れなければ `MEANING_RECEPTION_CAPABILITY_GAP` とする。
+
+allowed envelopeとの不一致やpost-binding不合格を理由に、別のmeaning candidateを選び直してはならない。各normal propositionは既存 `SubjectiveResponsibilityKind` / `SubjectivePropositionV2`へversioned private projectionで写す。LIMITEDは別型であり、selected readingを捏造せず、Layer 1 contributionとtyped response objectへbindしたFOCUSED exact1だけを作る。
+
+`MeaningBoundReceptionProposition` では、`subjective_mode=BOUNDED_COUNTERPOSITION` と `contribution_kind=BOUNDED_COUNTERPOSITION` を一致させ、それ以外のhonest reception modeを `AFFIRMATIVE_RECEPTION_CONTRIBUTION` とする。`BoundedLimitedReception.proposition_ref` はsource-permittedなATTENTION等のaffirmative proposition exact1を指し、counterpositionだけにはできない。
+
+### 9.2 Receptionの成立条件
+
+normal Reception setには、`AFFIRMATIVE_RECEPTION_CONTRIBUTION` がexact1以上なければならない。これはpositiveな感情を必須にする規則ではなく、反対命題だけで済ませず、Emlisが対象を何として受け取ったかを主観命題として正に記述する規則である。
+
+Receptionは次の形でなければならない。
+
+> source-groundedなconfigurationがあるため、Emlisは今回のresponse objectを、別の単純化されたobjectとは異なるものとして受け取る。
+
+例:
+
+- 継続意図と不確実な自己評価の併存に対し、**両方が同時に残る緊張として注意を向ける**。optional counterpositionとして「継続意図だけには縮めない」を加えてよいが、それ単独では完成しない。
+- 外的な会話行為の完了と内的な残りに対し、**外側の完了後も内側で続く未解決さとして考える**。「解決完了とは受け取らない」だけへ縮めない。
+- 散歩後の局所的actual changeと非一般化限定に対し、**限定された変化として評価する**。恒常patternではないというcounterpositionはoptionalである。
+- LIMITEDの「朝から雨」では、**朝からの天候というsource-bound objectへ注意が向いたこと**だけをFOCUSED exact1として述べ、感情、原因、人生傾向、関係姿勢を足さない。
+
+太字部分は固定surface fixtureではなく、`AFFIRMATIVE_RECEPTION_CONTRIBUTION` の構造例である。structured configurationとsemantic `ReadingConsequence` はB、Reception propositionはCが所有する。
+
+### 9.3 現行subjective classificationの扱い
+
+現行runtimeの `SubjectiveContentKind` exact4は `AFFECT / APPRAISAL / MATERIAL_VALUE / RELATIONAL_POSITION`、`SubjectiveMode` exact6は `ATTENTION / AFFECTIVE_RESPONSE / PERSONAL_APPRAISAL / VALUE_POSITION / RELATIONAL_STANCE / BOUNDED_COUNTERPOSITION` である。これらは最終投影分類として保持するが、意味選択の起点にはしない。
+
+- まず `SelectedEmlisProvisionalReading` とsemantic `ReadingConsequence` を決める。
+- 次に、そのreadingに本当に必要なcontent kind／modeのpropositionを1..4で投影する。
+- affectはoptionalとし、既定の`CONCERN / RESPECT / RELIEF`を自動付与しない。
+- stanceは意味への応答であり、意味そのものではない。
+- `PROTECT_USER_AGENCY`はdownstream stanceとしてのみ許容し、selected readingとしては不成立とする。
+
+`selected_reading_ref`はまずprivate meaning plan、projection trace、sealでcarryする。`SubjectivePropositionV2`へ必須fieldとして追加する必要が生じた場合、V2を無version変更で拡張せず、fresh private schema versionとvalidator dispatchを設ける。public schema effectはexact0である。
+
+### 9.4 visible realization causal trace
+
+trace上だけ入力固有で、visible文が従来と同じgeneric appraisalになることを禁止する。meaning-sideとReception-sideのcausal traceを分離する。
+
+```text
+(a) RequiredDifferenceRow
+      -> SelectedEmlisProvisionalReading
+      -> Layer 1 / meaning visible unit
+
+(b) SelectedEmlisProvisionalReading + ReadingConsequence
+      -> MeaningBoundReceptionProposition
+      -> private subjective projection field
+      -> Layer 2 visible unit
+
+(c) LimitedMeaningOutcome + Layer 1 / source object
+      -> BoundedLimitedReception
+      -> Layer 2 visible unit exact1
+```
+
+normal artifactでは全required differenceが(a)へ、各Reception propositionが(b)へexact1以上到達しなければならない。accepted LIMITED artifactでは(c)を要求し、normalのselected readingを捏造しない。ただしvisible unit exact1が複数differenceをmany-to-oneでcoverしてよく、required rowごとの文生成を要求しない。Reception proposition数と文数も1:1に固定せず、意味を落とさない自然な統合を許す。各Layer 2 `SurfaceDerivation.antecedent_unit_ref` は対応するLayer 1 unitを参照できる。
+
+machine validatorは、required differenceがvisible unitのpredicate argument、relation complement、qualified event/state qualifier、modalityのいずれかへ到達し、各Receptionがattention、feeling、thought、appraisal、distanceまたはstanceの主観差分を加えることを確認する。relation repeatだけをLayer 2 incrementと数えない。source refやsemantic signatureだけが固有で、visible wordingがmaterialに対照的な入力間で同じresponse objectへcollapseする場合は不合格とする。
+
+raw/source literal内にendpointやqualifierが存在するだけではvisible causal coverageと数えない。各required configurationは、matrix predicate sense、typed argument role、relation topology、scoped qualifier／epistemic modalityのいずれかを変えなければならない。`single whole-span quote + generic appraisal` は `MEANING_REALIZATION_CAUSAL_TRACE_GAP` とする。
+
+既存v2 inventoryへlossless projectionできない場合は、`MEANING_REALIZATION_CAPABILITY_GAP` へ閉じる。fresh authorityなしにregistryを拡張せず、genericな既存senseへ縮退しない。
+
+---
+
+## 10. 現行資産の保持・降格・置換
+
+| 対象 | disposition |
+|---|---|
+| source kernel、evidence、owner denominator | 保持 |
+| GroundedMeaningGraph、typed nucleus、admitted relation | 保持 |
+| InterpretationCandidatePool | 保持。早期collapse禁止を継続 |
+| EmlisMeaningField | 保持。ただし入力viewであり最終meaning ownerではない |
+| Layer 1 contribution | 保持 |
+| `ReadingConsequence` | 新設。B側のsemantic / pragmatic consequenceのみを所有 |
+| `MeaningBoundReceptionSet` | 新設。normal laneの主観命題1..4を所有 |
+| `BoundedLimitedReception` | 新設。LIMITED専用FOCUSED exact1。Layer 1/source objectへbind |
+| source qualifier、unknown、promotion prevention | 保持 |
+| `SubjectivePropositionV2` | 既存V2を無version変更しない。まずprivate plan/traceでcarryし、必要時はfresh private schema version |
+| `SubjectiveContentKind` exact4 / `SubjectiveMode` exact6 | 出力分類として保持。意味選択起点から外す |
+| Reception act / style / temperature | pre-meaningではallowed envelopeのみ。selected reading後にfinal bind |
+| V1–V9 | suppression・promotion防止へ限定 |
+| fixed focus priority | 置換 |
+| category → generic appraisal写像 | sole reading decisionから除去 |
+| default affect / generic stance | 除去またはoptional化 |
+| responsibility coverage＋最小claim数だけのselection | 最終意味選択ownerから除去 |
+| Typed Japanese case-frame realizer v2 | 下流sole-owner境界とcase-frame方式を保持。inventory無変更は保証しない |
+| discourse planner | 選択済み意味を配置する。意味を再選択しない |
+
+---
+
+## 11. 実装境界案
+
+本書は実装承認ではないが、後続設計で責務が再混線しないよう接続点を固定する。
+
+### 11.1 推奨module boundary
+
+`emlis_stage1_composition.py` にさらに判断を積み増さず、同package内に意味決定専用のcore-private moduleを置く。
+
+概念名:
+
+```text
+cocolon_meaning_experience_engine/
+  emlis_input_specific_meaning.py
+```
+
+公開API、DB、RN、persistence、provider interfaceは増やさない。
+
+### 11.2 主な変更候補
+
+| 領域 | 将来の変更内容 |
+|---|---|
+| `contracts.py` | candidate、selection、ReadingConsequence、Reception set、LIMITED Receptionのcore-private contract |
+| 新meaning module | situation view、Difference Configuration Set、Requirement Bundle Set、candidate生成、hard validity、selection |
+| `emlis_stage1_composition.py` | fixed focus selectionを外し、selected provisional reading / LIMITEDのtagged inputを専用projectorへdispatch |
+| `emlis_stage1_response.py` | **必須**。現行subjective inputsをpre/post meaningへ分割し、Phase Aとdecision seamを接続 |
+| reception owner functions | final act／style／temperatureの上流確定をallowed envelope化 |
+| private response/discourse contract | `selected_reading_ref`とvisible causal traceの一貫したcarry |
+| case-frame inventory | lossless projection gapが実証された場合だけfresh scope候補 |
+| tests | property、contrastive pair、visible trace、synthetic Product oracle |
+
+`emlis_ai_grounded_observation_plan.py` を含むupstreamは、必要endpoint／relation／predicate／owner／qualifierの不足、またはfinal Reception actをmeaning前に確定するownerがそこに存在するとfresh inspectionで確認された場合、scope判定対象にする。先に無条件のupstream拡張を正当化してはならないが、「endpoint不足時だけ」とも限定しない。
+
+### 11.3 activation境界
+
+新構造もdisabled candidate chainで先に検証し、production activationとは分離する。現行public facadeや既存production出力を、設計unit内で切り替えない。
+
+---
+
+## 12. Genericityを検出するacceptance properties
+
+### 12.1 必須property
+
+1. **Configuration necessity**  
+   relational laneでは必要endpoint／direction、qualified event / state laneではpredicate／owner／差分qualifierを除くと、同じselected readingは成立しない。
+
+2. **Direction necessity**  
+   relationを反転すると、selectionまたはReceptionが変わる。
+
+3. **Contrastive substitution**  
+   material componentを反対内容へ置換した入力では、同じsemantic signatureを返さない。
+
+4. **INPUT_SPECIFICITY_EXACT3_STAGED**  
+   discriminative necessity＋whole-reading consequenceをpre-selection、Emlis-response consequenceのsemantic bindingをpost-binding、visible差分をpost-realizer／pre-sealで満たす。後二者からselectorへの逆流はexact0。
+
+5. **Semantic and subjective increment**  
+   meaning unitはconfiguration差分を、Layer 2はattention／feeling／thought／appraisal／distance／stanceの入力固有主観差分を追加する。relation repeatだけではLayer 2 incrementにならない。
+
+6. **Relation preservation**  
+   relation入力をsingle whole-span targetへcollapseしない。
+
+7. **PROVENANCE_READING_STATUS_SEPARATION**  
+   basis provenanceと `EMLIS_PROVISIONAL_READING` を別fieldでcarryし、selected readingへ `SOURCE_STATED` を設定しない。
+
+8. **QUALIFIED_EVENT_ADMISSION**  
+   binary relationがなくても、source-bound predicate＋owner＋限定差分があればcandidateを生成できる。
+
+9. **CONNECTED_FACET_INTEGRATION**  
+   §5.5のclosed exact4を満たすbundleはprimary exact1＋supporting 0..4へ統合し、power setや列挙順で選ばない。
+
+10. **COMPLEMENTARY_RECEPTION_1_TO_4**  
+    FOCUSED=1、LAYERED=2..3、DENSE=3..4を守り、相補的Receptionを単一化しない。facet数との1:1対応は要求しない。
+
+11. **AFFIRMATIVE_RECEPTION_REQUIRED**  
+    normal Reception setに `AFFIRMATIVE_RECEPTION_CONTRIBUTION` exact1以上を要求し、optional counterpositionだけで完成させない。
+
+12. **LIMITED_RECEPTION_EXACT1**  
+    accepted LIMITEDはLayer 1/source objectへbindしたFOCUSED Layer 2 exact1を持ち、深い意味は作らない。生成不能はcapability STOPとする。
+
+13. **NO_ABSTENTION_SUBSTITUTION**  
+    relation-rich、qualified、connected multi-facet入力を、選択困難だけを理由にthin LIMITEDへ落とさない。`THIN_NO_SAFE_CONFIGURATION` と `UPSTREAM_STRUCTURE_INSUFFICIENT` をclosed derivation stateで分け、後者をProduct合格へ数えない。
+
+14. **Policy-only / generic affect rejection**  
+    agency、安全、丁寧さ、未完了尊重、`CONCERN / RESPECT / RELIEF`だけのclaimは入力固有意味の代用としてexact0。
+
+15. **Unknown preservation**  
+    material unknownを結論、傾向、人格へpromotionしない。
+
+16. **Set-level non-collapse**  
+    materialに対照的な入力が、同じ完全semantic signatureと同じresponse objectへcollapseしない。同じ一般operationが多く使われること自体は不合格にしない。
+
+17. **Semantic-equivalent paraphrase invariance**  
+    source-constrained semantic / pragmatic condition、relation direction、qualifierが同じ言い換えでは、同じ正規化semantic signatureを返す。
+
+18. **Non-material adjunct invariance**  
+    required rowを増やさないadjunctの追加だけでは、selected reading focusを変更しない。
+
+19. **Basis provenance preservation**  
+    componentがsource-boundでも、bridgeまたはqualified basisにsource／admitted rule provenanceがなければcandidateをrejectする。
+
+20. **No trace-only specificity**  
+    private traceだけが入力固有で、visible realized unitが同じgeneric appraisalなら不合格とする。
+
+21. **MANY_TO_ONE_VISIBLE_TRACE**  
+    artifact-level全required differenceと各Receptionのvisible coverageを守りつつ、一つの自然なvisible unitによる複数differenceのcoverageを許し、rowごとの過密文を作らない。
+
+22. **FOREGROUND_SCOPE_CLOSED_NONSELECTOR**  
+    scope basisは§5.2.1のexact5だけで、compatible source-connected scopeをunionし、material competingをLIMITEDへ送る。Reception、affect、style、固定category、surface、fixture、ID／hash／列挙順によるscope選択はexact0で、zero-objectの場合だけSTOPする。
+
+23. **WHOLE_READING_CONSEQUENCE_CLOSED_EXACT7**  
+    全`whole_reading_consequence_refs`は§6.5のtyped rowを指し、`changed_whole_reading_codes`は参照rowのclosed code setと完全一致する。各rowはsource＋Foreground Scope＋Required Difference＋counterfactual mutationへbindし、自由記述と期待Receptionからの発行はexact0である。
+
+### 12.2 synthetic Product oracle
+
+以下は設計検証用の合成例であり、production文言の固定fixtureではない。
+
+| 入力 | decision / 必要なreading | 必須Reception | 禁止されるgeneric代用 |
+|---|---|---|---|
+| 「続けたい気持ちはある。でも、もうかなり無理をしている気もする」 | connected multi-facet。二つのclauseを結ぶcontrast / coexistence aggregate configurationをprimaryとし、継続意図と不確実な自己評価をsupporting facetsとして統合 | 併存する緊張へのattention/thought等の相補的Reception 1..4 | 「二つの気持ちを大切にしたい」「選択を守りたい」だけ |
+| 「散歩に出たら少し落ち着いた。ただ、いつもそうなるとは思っていない」 | 散歩後の局所的actual change＋恒常patternへの非一般化限定 | 限定された変化としてのappraisal等 | 「変化を見届けたい」だけ |
+| 「相談したい。でも、迷惑かもしれないと思うと切り出せない」 | 可能性評価が相談を切り出せないこととsource-explicitに結び付く | 相談意図とblockの関係へのattention/thought等 | 「agencyを尊重したい」「心配だ」だけ |
+| 「仕事の話はした。でも、まだ気持ちが残っていて、どうしたいかは分からない」 | external outputは完了、internal residueとdirection unknownは未完了 | 外側の完了後も内側で続く未解決さへのReception | 「結論づけたくない」だけ |
+| 「提出するかは、まだ決めきれていない」 | `HOLD_QUALIFIED_EVENT_STATE`。predicate＋speaker owner＋current／incomplete／unresolved限定 | 現在も未決定である状態へのFOCUSED contribution exact1以上 | relationがないことだけを理由にLIMITED、または一般的「急がない」 |
+| 「朝から雨」 | `LIMITED_NO_SAFE_INPUT_SPECIFIC_CONFIGURATION`。Layer 1の朝からの天候だけを保持 | source-boundな天候objectへの `BoundedLimitedReception` FOCUSED exact1 | Layer 2 exact0、深い心情、人生傾向、関係姿勢 |
+| 「A案をB案の前に確認して、それを残す」かつ「それ」のantecedentがsource上未解決 | `LIMITED_COMPETING_MATERIAL_READINGS`。A/B両alternativeをLayer 1へ保持 | 未解決のresponse objectを未解決のまま受け取るLIMITED exact1 | ID／文中順でAかBを選択、両方を巨大summaryへ統合 |
+
+Product判定質問は成立条件exact3に対応させる。
+
+1. どのcomponent、relation、predicate、owner、direction、qualifierを失うとmaterialな対照入力と区別できなくなるか。
+2. その差分は入力全体の読みを具体的にどう変えるか。
+3. そのsemantic consequenceにより、どのaffirmative Receptionとvisible Layer 2 unitがmaterialに変わるか。
+
+`agency / unfinished / material`という一般語しか答えられない、または3の答えがcounterpositionだけなら不合格である。
+
+machine testはsource、contract、determinism、propertyを検証する。Pro early language viability readはformal gate前のprescreen、Mash Product Readはformal gate到達後のProduct評価として分ける。人間のreadでは、内容が本当に入力固有に読めるかを検証する。machine CLEARやPro prescreen CLEARだけでMash Product CLEARを代用しない。
+
+---
+
+## 13. STOP / abstention
+
+次の場合、generic fallbackせずnamed stateへ閉じる。
+
+| 条件 | 結果 |
+|---|---|
+| `COMPETING_MATERIAL_SCOPES`。materialに異なるforeground scopeをsource-groundedにexact1へ統合不能 | `LIMITED_COMPETING_MATERIAL_READINGS`＋全unresolved scopeをLayer 1へ保持＋LIMITED Reception exact1 |
+| `FOREGROUND_SCOPE_STRUCTURE_INSUFFICIENT`。安全なsource object exact1以上、必要owner／relation／qualifier不足 | `LIMITED_STRUCTURE_INSUFFICIENT`＋Reception exact1、Product acceptance false |
+| `THIN_NO_SAFE_CONFIGURATION`。missing structure exact0、rich／qualified／connected evidence exact0、foreground source object exact1以上 | `LIMITED_NO_SAFE_INPUT_SPECIFIC_CONFIGURATION`＋`BoundedLimitedReception` exact1 |
+| `UPSTREAM_STRUCTURE_INSUFFICIENT`。必要endpoint／predicate／owner／qualifierがないが、foreground source object exact1以上 | bounded deliveryは`LIMITED_STRUCTURE_INSUFFICIENT`＋Reception exact1、評価は`UPSTREAM_STRUCTURE_CAPABILITY_GAP`／Product acceptance false |
+| actual competing alternativesが残る | `LIMITED_COMPETING_MATERIAL_READINGS`＋unresolved objectへbindしたLIMITED exact1 |
+| `NO_SAFE_FOREGROUND_OBJECT`またはdefensive `NO_FOREGROUND_OBJECT`。foreground source objectを安全にexact1も保持できない | `STRUCTURE_INSUFFICIENT_STOP`。Foreground Scope起因のSTOPはこのzero-object条件だけ |
+| configurationを成立させるには未根拠の因果・心理が必要 | candidate reject。安全なthin objectがあればLIMITED exact1、なければSTOP |
+| compatible connected bundleを選択困難だけでLIMITEDへ落とす | `NO_ABSTENTION_SUBSTITUTION_VIOLATION` |
+| candidateがbundle当たりexact14を超える | `CANDIDATE_CARDINALITY_OVERFLOW` |
+| selected readingにaffirmative Reception contributionがexact0 | `MEANING_RECEPTION_CAPABILITY_GAP` |
+| Reception同士が同じrole／response objectを奪い合う、またはtyped mutex | `RECEPTION_BINDING_CONFLICT_STOP` |
+| accepted LIMITED用Reception exact1を作れない | `LIMITED_RECEPTION_CAPABILITY_GAP_STOP` |
+| post-binding Emlis-response consequenceが不成立 | `MEANING_RESPONSE_CONSEQUENCE_GAP`。reselection禁止 |
+| selected readingをvisible unitへlossless projectionできない | `MEANING_REALIZATION_CAPABILITY_GAP` |
+| whole-span quote＋generic predicateでtraceだけ通る | `MEANING_REALIZATION_CAUSAL_TRACE_GAP` |
+| surface token、fixture、case modeでしか選べない | `SELECTOR_CONTAMINATION_STOP` |
+| provider・外部AIが必要 | `EXTERNAL_AI_DEPENDENCY_STOP` |
+| Layer 2がpolicy-onlyになる | `POLICY_ONLY_MEANING_STOP` |
+| 入力固有性をaffectだけで作っている | `GENERIC_AFFECT_SUBSTITUTION_STOP` |
+
+これらは本書が提案する `PROPOSED_PRIVATE_OUTCOME_CODE` であり、現行canonical terminal、exception名、runner resultを変更済みという意味ではない。fresh implementation authorityでprivate result型とrunner translationをversionedに定義する。
+
+`LIMITED_STRUCTURE_INSUFFICIENT` は、foreground source objectとLIMITED Reception exact1だけを安全に返すbounded delivery laneであり、Product acceptanceはfalseのまま `UPSTREAM_STRUCTURE_CAPABILITY_GAP` を返す。rich inputの構造欠落を成功したthin LIMITATIONとしてcreditしない。`STRUCTURE_INSUFFICIENT_STOP` はその最低delivery条件さえないcapability failureである。どちらも失敗を正常なLayer 2 exact0へ偽装せず、実装traceでupstream extraction側へ不足を返す。
+
+low-information LIMITED Receptionはgeneric fallbackではなくfirst-class bounded laneである。thin laneではtyped response-object semantic keyとsource qualifierに基づくATTENTION等を可視固有性として認めるが、その緩和をrich／qualified／connected inputの `literal + generic appraisal` へ再利用しない。
+
+---
+
+## 14. Mash知識のdisposition
+
+今回利用した構造知識と、その扱いを混ぜない。
+
+| 区分 | 内容 | disposition |
+|---|---|---|
+| Mash explicit knowledge | 理解と事実、意図と出力、履歴・パターン・可能性、連続変化、自己／現実／関係worldの区別 | 既存知識で十分 |
+| Karen functional restatement | 複数暫定候補、whole-input relation、差分保持、訂正可能性 | 原則として採用 |
+| adopted Cocolon primitive | MeaningGraph、MeaningField、contribution、qualifier、unknown、Layer 1/2 | 再利用 |
+| new Karen-designed Emlis mapping | Required Difference、candidate、hard validity、source-grounded selection、bound Reception | 本書で新規設計 |
+| System Context v1 | PR #37 fresh ownerをresolveし、generated Contextへ依存せずcanonical originalを直接読んだ | navigation境界のみ利用。generated-output dependency exact0 |
+
+追加質問が必要になるのは、将来の実装で **同じsource evidenceから、同程度に根拠が強く、意味もReceptionもmaterialに異なる候補が複数生じ、product ruleやsafety ruleでも解けない具体例** が初めて見つかった場合だけである。
+
+現時点の判定:
+
+```text
+RESIDUAL_MASH_KNOWLEDGE_GAP_FOR_CURRENT_DESIGN_REVISION = EXACT0
+CURRENT_MASH_QUESTION_REQUIRED = FALSE
+FUTURE_ACTUAL_PRODUCT_DECISION =
+  ONLY_IF_CONCRETE_UNRESOLVED_CASE_OBSERVED
+CURRENT_FINAL_DESIGN_REVISION = FINALIZED_FOR_IMPLEMENTATION
+PREVIOUS_REQUIRED_CORRECTIONS = 10_OF_10_REFLECTED
+DELAYED_REVIEW_EFFECTIVE_CORRECTIONS = REFLECTED_IN_SECTIONS_19_THROUGH_22
+TECHNICAL_HANDOFF_REMAINING = EXACT0
+CANONICAL_ADOPTION = ADOPTED_BY_MASH_CURRENT_REQUEST
+ADDITIONAL_PRO_PRODUCT_REVIEW_REQUIRED_FOR_THIS_DOC_FINALIZATION = FALSE
+IMPLEMENTATION_EXECUTION = NOT_STARTED
+NEXT = PACKET_A_FRESH_PREIMAGE_FREEZE_THEN_IM03_AFTER_EXPLICIT_START
+AUTOMATIC_PROGRESSION = false
+```
+
+---
+
+## 15. 非対象
+
+本書では次を変更・承認しない。
+
+- external AI / LLM provider / network fallback
+- API / DB / RN / persistence
+- premium delivery
+- Layer 3、Piece、Analysis
+- clarification questionの新設
+- production activation
+- runtime repositoryのsource／test write、merge、branch作成・変更
+- current terminalのacceptance書換え
+- I09開始
+
+今回の直接effectは、本書＋既存owner routing exact3の更新と統合済み修正案exact1の削除を、Cocolon PR #30のcurrent branchへchanged path exact5で反映することだけである。これは最終正典設計の永続配置であり、runtime source、test、Product acceptance、activation、I09へ効果を持たない。
+
+---
+
+## 16. 次の実装unitに必要なfresh authority
+
+本最終設計の次に実装へ進む場合は、既存I09ではなく、`SUBJECTIVE_MEANING_PLANNER`を対象にしたfresh Level 3 Route A providerless-only implementation authorityが必要である。実装境界、exact paths、effect count、dependency、selector、順序は§21–§22が所有する。
+
+そのunitは少なくとも次を明示する必要がある。
+
+- sole meaning ownerの置換範囲
+- touched path exact list
+- before/afterの同一入力集合
+- machine property suite
+- Ultra technical review
+- Pro early language viability read / prescreen
+- Mash Product Read（formal gate到達時）
+- common-defect set-level判定
+- failure時はdisabled candidateを非activationのまま保持し、最後にremote postverify済みのproduction preimageを保持／必要時復元するrollback。cleanup対象は明示allowlistのtemporary／private artifactだけとし、body-free evidenceを残してhistory rewriteしない
+- repositoryごとのremote postverify
+- production activation exact0
+
+ただし、本書と今回のGitHub reflectionはruntime writeの実行ではない。`IMPLEMENTATION_EXECUTION=NOT_STARTED`を保持し、次のimplementation startで§21 Packet Aをfresh preimageへfreezeした後、actual IM03へ入る。
+
+---
+
+## 17. 遅延レビュー前の実装順記録 — §19–§22で置換
+
+この節は、遅延して到着したProレビュー列を統合する前の設計履歴である。商品原則とIM番号の由来を残すため本文を保持するが、実装contract、STOP境界、authority、effect count、選択・identity順には使用しない。矛盾時は§19–§22が必ず優先する。
+
+### 17.1 authorityと単一unit境界
+
+IM00–IM10は、将来Mashがfresh Level 3 Route A providerless-only authorityを与えた場合に使う依存順である。本書の作成・GitHub反映だけでは一つも開始しない。
+
+既存Route A v2 fresh siblingのcommon-defect return counter 2/2とterminalはimmutableである。将来別途承認され得るIM00–IM10は、同じStep 3の第三generic correction、rerun、retry、counter resetではなく、`SUBJECTIVE_MEANING_PLANNER`のowner architectureを置換するfresh Route A product-correction routeである。旧counterまたは旧evidenceを新routeのcredit／run allowanceへ変換しない。
+
+このexact11は、`SUBJECTIVE_MEANING_PLANNER`の入力固有meaningを実際のvisible Emlis出力まで改善し、人間の読感で判定する一つのordered product-correction／acceptance routeである。IM00–IM09は一つのnonseparable bounded implementation unit、IM10はその出力に対するseparate formal human Product Read gateとする。初回Level 3 authorityがIM10までを条件付きで明示的に含めない限り、IM09 CLEARからIM10へ進むにはfresh gate authorityが必要である。各IMはsession復元用checkpointにはできるが、独立した商品成果、別承認済みstage、Product／technical creditまたはterminal completionにはしない。preflight、schema、validator、test、receiptだけをproduct progressとして終端させず、machine GREENを人間の商品判定へ変換しない。
+
+```text
+CURRENT_IMPLEMENTATION_AUTHORITY = EXACT0
+IMPLEMENTATION_EXECUTION = NOT_STARTED
+CURRENT_AUTHORIZED_NEXT_STEP = NONE
+ONLY_POSSIBLE_FIRST_STEP_AFTER_FRESH_MASH_LEVEL3_AUTHORITY = IM00
+SOLE_ROUTE = ROUTE_A_PROVIDERLESS_ONLY
+EXTERNAL_AI / PROVIDER / NETWORK_INFERENCE / FALLBACK / COST = 0 / 0 / 0 / 0 / 0
+PUBLIC_API / DB / RN / PERSISTENCE / PRODUCTION_ACTIVATION = 0 / 0 / 0 / 0 / 0
+AUTOMATIC_RETRY / AUTOMATIC_PROGRESSION = 0 / 0
+```
+
+### 17.2 ordered implementation checkpoints
+
+| IM | 依存 | 同じbounded unitで行うactual delta | checkpoint完了条件 |
+|---|---|---|---|
+| `IM00` | fresh Mash Level 3 authority exact1 | current heads、actual source／test preimage、変更path allowlist、同一入力BEFORE baselineを固定し、同じcheckpointで`SubjectiveDepthClass`、Foreground Scope basis exact5、WholeReadingConsequence code exact7とrow validatorをcore-private contractへ実装する | permission外path 0、Reception系からscope／whole-reading発行への型到達0、contract focused testがactual sourceへbind。確認だけで終わらない |
+| `IM01` | `IM00` | response pipelineをpre-meaning inputsとallowed Reception envelopeへ分離し、Grounded View→`derive_foreground_scope_closed()`を実接続する | compatible source-connected scopeはcanonical union、material competingは`LIMITED_COMPETING_MATERIAL_READINGS`、zero-objectだけSTOP。Reception／affect／style／ID順位の逆流0 |
+| `IM02` | `IM01` | Difference Configuration、Observed／Required Difference、Requirement Bundle、counterfactual mutation、WholeReadingConsequence row発行を実装する | closed invariantとclosed consequence exact7がsource＋Foreground Scope＋Required Differenceへbindし、自由記述／期待Reception発行0 |
+| `IM03` | `IM02` | candidate exact7 operation、basis tier exact2、pre-selection hard validity、compatible facet aggregation、deterministic selection、qualified event/state、competing LIMITEDを実装する | fixed category priority、ID／hash／列挙順、power set、invented bridge、policy-only meaning 0。selected primary exact1＋supporting 0..4 |
+| `IM04` | `IM03` | selected reading後のsemantic `ReadingConsequence`、normal `MeaningBoundReceptionSet` 1..4、`BoundedLimitedReception` FOCUSED exact1、post-binding acceptanceを実装する | normal affirmative exact1+、LIMITED Layer 2 exact1、Reception backflow／abstention substitution／reselection 0 |
+| `IM05` | `IM04` | selected／LIMITED tagged projection、case-frame v2 downstream接続、meaning-side／Reception-side visible causal trace、post-realizer acceptance、validated sealを実装する | generic appraisal fallback 0。lossless不可はnamed capability gap。public API／DB／RN／production activation 0 |
+| `IM06` | `IM05` | contract、unit、property、contrastive pair、paraphrase、non-material adjunct、synthetic oracleをactual implementationへ対して実行し、defectのclosed cause ownerを特定する | §12の全propertyと§13のnamed STOPを網羅。test-only GREENをcompletionにせず、failureはnamed STOP。補正・再実行はfresh Mash authorityがexact scope＋exact countを明示した場合だけ |
+| `IM07` | `IM06` | disabled chainでBEFOREと同一のexact input setを生成し、focused machine suiteとfull public regressionを実行する | focused suite CLEAR＋full public regression CLEAR。既存baseline failureがある場合はfresh same-baseline non-regressionのexact denominator／criteriaを満たす。AFTER artifacts、source／decision／visible traceを固定し、machine結果とProduct qualityを別claimで保持。private bodyはpublic GitHubへ出さない |
+| `IM08` | `IM07` focused＋full regression CLEAR | Ultraがactual output全体をtechnical＋body readし、入力固有meaning、Reception、日本語、generic共通欠陥を一体でprescreenする | `CLEAR`またはnamed material defect exact1。defect時は自動修正・自動再実行せず、確認済みcause ownerと必要authorityを固定してSTOP |
+| `IM09` | `IM08=CLEAR` | Proがactual same-input outputをearly language viabilityとして全文readし、set-level共通欠陥を判定する | `CLEAR`またはnamed material defect exact1。machine／Ultra CLEARだけで代用せず、defect時はMash Product Readへ進まない |
+| `IM10` | `IM09=CLEAR`かつfresh formal gate authority | Mashがformal Product Readを行い、その実結果をbody-free current ownerへ記録し、current structure／implementation ownerを最小同期してremote postverifyする | Mash Product Readの実結果exact1、changed paths allowlist内、remote bytes一致。PASSでもdisabled candidate acceptanceまでで、activation／I09／productionは別のfresh判断 |
+
+### 17.3 transitionと停止
+
+順序を飛ばさない。前IMのconfirmed outputだけを次IMのpreimageにし、同じ証拠を別のfresh runへ暗黙再利用しない。material artifact、review judgment、authority lifecycleまたはnext-actionが変わるたび、new subsystemを増やさず最小の既存current ownerを更新する。checkpointはauthority lifecycle／STOP-PASS、last safe commit、performed／zero effects、reusable／non-reusable evidence、private evidence owner、次のexact IM、changed paths／head、fresh remote bytesをbindする。
+
+各IMをauthority terminalにはしない。実際のauthority terminalではbody-free Receipt exact1とprimary outcome exact1を作る。ResultはReceiptだけでcause／restart条件を復元できない場合、Handoffはactor／environment／session変更時にcurrent owner＋Receiptだけでは安全に再開できない場合だけ作る。sessionが変わる場合は、上記checkpointを最小ownerへremote postverifyしてから再開する。
+
+`IM06`／`IM07`のmachine failure、`IM08`／`IM09`のmaterial defect、`IM10`の非PASS、source／authority／private evidence identity不明、Route A providerless-only違反、permission外path必要のいずれかでnamed STOPする。別candidate選択、generic fallback、counter reset、automatic correction、retry、activationへの進行は行わない。補正・再実行が必要なら、fresh Mash authorityが明示するexact scopeとexact countだけに従う。
+
+STOP時はdisabled candidateを非activationのまま保持し、最後にremote postverify済みのproduction preimageを保持する。今回のfresh authorityが明示的に一時切替を許可していた場合だけ、そのallowlist内でpreimageへ復元する。cleanupは明示allowlistのtemporary／private artifactに限定し、body-free evidence、STOP cause、performed／zero effectsを残す。history rewrite、非allowlist削除、secure erasure claimを行わず、current ownerとremote bytesをpostverifyして終端する。
+
+### 17.4 本docs reflectionの完了記録（historical wording置換）
+
+今回実行するのは上記implementationではなく、遅延Proレビューの必須修正を閉じた最終設計正本とrouting exact3の更新、および統合済み修正案exact1の削除を同一GitHub commitへ反映することだけである。
+
+```text
+PRIMARY_OUTCOME = CANONICAL_DESIGN_FINALIZATION
+FINAL_DESIGN_ARTIFACT = UPDATED_IN_PLACE
+TECHNICAL_HANDOFF_EXACT1 = CLOSED_IN_DESIGN
+LATEST_PRO_REVIEW = PASS_WITH_REQUIRED_CORRECTIONS
+DELAYED_REVIEW_EFFECTIVE_CORRECTIONS = REFLECTED_IN_SECTIONS_19_THROUGH_22
+CANONICAL_ADOPTION = ADOPTED_BY_MASH_CURRENT_REQUEST
+IMPLEMENTATION_EXECUTION = NOT_STARTED
+PRODUCT_CREDIT / TECHNICAL_CREDIT = 0 / 0
+PRODUCT_READ / ACTIVATION / I09 = 0 / 0 / 0
+AUTOMATIC_PROGRESSION = false
+```
+
+---
+
+## 18. 商品原則の保持判断 — 実装contractは§19–§22が優先
+
+1. 「Emlisから述べる入力固有の意味を決める部分」は、新たに設計する必要がある。
+2. 欠けているのは日本語realizerではなく、`SUBJECTIVE_MEANING_PLANNER`内の入力固有meaning ownerである。
+3. 華恋の構造をそのままコピーするより、華恋の原則をEmlis向けに明示した本案の方が理想的である。
+4. 新構造は **source-grounded meaning field → Foreground Scope / Difference Configuration Set → pre-selection validity → Selected Emlis Provisional Reading → semantic ReadingConsequence → Meaning-bound Reception Set 1..4 → post-binding semantic acceptance → projection / realizer candidate → post-realizer visible acceptance → validated delivery seal＋separate Product disposition** とする。
+5. Reception、appraisal、affect、stanceを意味の代用にせず、allowed envelopeからselectorへの逆流を型で禁止する。
+6. normal laneではaffirmative Reception exact1以上を必須とし、complementaryなReception 1..4を許容する。selected focus exact1とReception exact1を同一視しない。
+7. 意味を安全に作れない入力は、Layer 1/source objectへbindしたLIMITED FOCUSED Layer 2 exact1で薄いまま扱う。正常成果のLayer 2 exact0とgenericな深さへのfallbackを禁止する。
+8. basis provenanceと `EMLIS_PROVISIONAL_READING` を分離し、qualified event/stateとcompatible connected facetsを正規経路へ含める。
+9. current design revisionについてMashへの追加質問は不要である。将来の具体的unresolved product caseは別判断とする。
+10. 本書はProレビュー列のeffective correctionを統合した最終正典設計である。設計採用判断はMashの本requestで完了した。次turnの実装開始は§21のPacket Aをactual headへfreezeする別effectであり、本docs finalizationから自動実行しない。Product Read、activation、I09への自動進行もしない。
+
+---
+
+## 19. 最終規範統合とレビュー閉包
+
+### 19.1 規範優先順位
+
+本書§0–§16の商品設計を保持し、実装・identity・validation・STOP・authorityの閉包は本§19–§22で置換する。§17は遅延レビュー前の履歴であり実装入力にしない。別ファイルの修正案は本書への統合完了後にcurrent treeから削除する。Git履歴は削除しない。
+
+```text
+NORMATIVE_PRODUCT_PRINCIPLES = SECTIONS_0_THROUGH_16
+NORMATIVE_IMPLEMENTATION_CONTRACT = SECTIONS_19_THROUGH_22
+HISTORICAL_IMPLEMENTATION_TEXT = SECTION_17
+CONFLICT_PRECEDENCE = 19_THROUGH_22 > 17 > earlier implementation prose
+PARALLEL_CANONICAL_ADDENDUM = 0
+```
+
+### 19.2 遅延レビュー列の分離
+
+添付`Pro華恋レビュー2.txt`は一つのレビューではなく、処理途中に遅延出力された複数の判定を連結した内容だった。確認順と扱いは次で固定する。
+
+| 順 | 観測された判定 | material correction | 本書での扱い |
+|---:|---|---:|---|
+| 1 | `PASS_WITH_REQUIRED_CORRECTIONS` | exact8 | 後続と競合しない内容を保持 |
+| 2 | `PASS_WITH_REQUIRED_CORRECTIONS` | exact7 | 後続にないmutation closure、material provenance、dominance、合法的all-invalidを保持 |
+| 3 | `PASS_WITH_REQUIRED_CORRECTIONS` | latest exact13 | 最終preimageへの主判定として優先 |
+
+物理的な到着順を一つのexact28 unionとして機械適用しない。後のレビューが前のpreimageを前提にした記述と、すでに修正済みpreimageを区別し、同じ意図を二重field・二重ownerへしない。
+
+### 19.3 latest exact13 closure
+
+| RC | 必須意図 | 最終contract |
+|---|---|---|
+| RC01 | second failureを限定 | 指定修復後の**同一normalized mechanical defect**再発だけがsame-defect terminal。別defect／strictly downstream defectは新obligationとして同じdevelopment unitで継続 |
+| RC02 | effect authority明示 | §21 Packet Aにbranch、exact paths、checkpoint write／push上限、runtime materialization、dependency／network、development／pre-admission、formal/private exact0を固定 |
+| RC03 | historical counter scope | `HISTORICAL_COMMON_DEFECT_RETURN_COUNT=2/2`は旧routeだけ。revised routeはinherit/reset/reuseすべてfalse |
+| RC04 | terminal分離 | 文書分類exact3 `CURRENT_AUTHORITY_TERMINAL_CORRECTABLE` / `DESIGN_OR_SCOPE_TERMINAL` / `PROJECT_CANCELLED` |
+| RC05 | physical read count廃止 | review attempt exact1、intra-attempt reread／case compare無制限、verdict seal exact1、post-seal retry 0 |
+| RC06 | control identity削減 | `DEVELOPMENT_EXECUTION_ID`、progress lattice、ADMINISTRATIVE_ONLY countをexecution Gateにしない。既存checkpointへ因果差分だけを記録 |
+| RC07 | forward carrier単純化 | current runtimeはroot v1.1 required exact12だけ。v1.0 live decode／admit、Optional／default、parallel carrier 0 |
+| RC08 | sealed trace完全性 | sealed trace kind exact3。`HARD_INVALID`／HV codeはdevelopment-onlyでidentity-bearing artifactへ入れない |
+| RC09 | dedupe full core | recomputed exact19 core完全一致だけdedupe。同じsignatureでprovenance等が異なる候補を保持 |
+| RC10 | defect owner別変更範囲 | §21.6のclosed matrix。product assertion failure後のtest-only state change 0 |
+| RC11 | GitHub/runtime effect count | Packet Aでstable checkpoint exact4までのwriteと取得・実行ruleを一括承認対象にする。failureごとのpush 0 |
+| RC12 | approval burden | Packet B exact1にGate A→必要時Gate B exact1→readiness→zero drift→ID freeze→formal launch exact1を条件付き包含 |
+| RC13 | field名と意味の一致 | review対象preimageではfieldがprotected axisを持っていたが、current corrected contractでは`semantic_loss_codes`は**actual lost/collapsed codesだけ**。hard-valid sealed candidateはempty。protected axesはpreserved refsから導出し保存しないため、stale-preimage renameを機械適用せず、名称どおりの意味へ閉じる |
+
+RC13の意図は「field名と値の意味を一致させる」ことである。`protected_difference_invariant_codes`へ改名してactual lossを入れる、またはprotected axesを重複保存すると逆に不一致を作る。本書では次を唯一のcontractとする。
+
+```text
+semantic_loss_codes = actual lost/collapsed DifferenceInvariantCode only
+hard_valid_sealed_candidate.semantic_loss_codes = ()
+protected invariant codes = derive from preserved_difference_refs
+stored protected-invariant duplicate field = 0
+```
+
+### 19.4 earlier outputだけにあるeffective closure
+
+latest exact13と競合しない次の項目も落とさない。
+
+1. closed exact12 mutationごとに`MUTATION_APPLICATION_SPEC`を持ち、target owner、cardinality、direct delta、derived recomputation、unchanged fields、replacement/deletion rule、consequence codeを§20.6で固定する。
+2. `BasisProvenanceRow`は全ref台帳ではなくcandidate成立にmaterialなbasisだけへexact1対応する。非material carried refはrow exact0を許す。
+3. same-signature候補はcomponentwise dominanceだけで処理し、incomparableをID／hash／列挙順で一つへ潰さない。
+4. 全draft hard-invalidでも、全rejectがsource-groundedかつvalidator-completeでimplementation capability defect exact0の場合だけ、既存LIMITED family内のclosed derivation literalへ到達できる。producer／mutation／evidence／validator欠落が一つでもあればimplementation REDである。
+5. dependency projectionをruntime materializationより先に閉じる。`pytest`単体をtarget dependencyとみなさない。
+6. pre-admission stateはexclusive classifier exact1であり、同じ事象を複数failure／attemptへ数えない。
+
+### 19.5 final status
+
+```text
+PRODUCT_PRINCIPLES_CHANGE = 0
+LATEST_PRO_REQUIRED_CORRECTIONS = RESOLVED
+EARLIER_NONCONFLICTING_MATERIAL_CORRECTIONS = RESOLVED
+TECHNICAL_HANDOFF_REMAINING = EXACT0
+CANONICAL_DESIGN = FINAL_CANONICAL_IMPLEMENTATION_READY
+IMPLEMENTATION_EXECUTION_THIS_DOC_FINALIZATION = NOT_STARTED
+NEXT_IMPLEMENTATION_ENTRY = SECTION_21_PACKET_A_FREEZE
+AUTOMATIC_PROGRESSION = false
+```
+
+## 20. Final technical contract
+
+### 20.1 sole ownerとsingle derivation
+
+意味決定のsole ownerは既存`emlis_input_specific_meaning.py` exact1である。`emlis_stage1_response.py::build_subjective_planning_inputs()`がそのownerをexact1回呼び、sealed artifactを同一object/refでcarryする。`emlis_stage1_composition.py`はschema、binding、identity、non-mutation、tag dispatchだけを検証し、Grounded View、Foreground Scope、disposition、candidate、winnerを再導出しない。
+
+```text
+PreMeaningGroundedInputs
+  -> GroundedSituationView
+  -> ForegroundScopeDerivation
+  -> InputSpecificMeaningStructure v1.1 exact12 sealed once
+  -> response carry same object/ref
+  -> composition validation only
+
+candidate derive/enumerate/select/reselect in composition = 0/0/0/0
+```
+
+### 20.2 current-forward carrier v1.1 exact12
+
+既存root exact9のfield名・宣言順を保持し、additive exact3をrequiredにする。
+
+```text
+InputSpecificMeaningStructure v1.1 exact12 = (
+  schema_version = "1.1",
+  difference_configuration_derivation,
+  configurations,
+  observed_distinction_rows,
+  counterfactual_mutation_rows,
+  required_difference_rows,
+  requirement_bundle_derivation,
+  requirement_bundles,
+  whole_reading_consequence_rows,
+  candidate_records: tuple[InputSpecificMeaningCandidate, ...],
+  input_specificity_evidence_records: tuple[InputSpecificityEvidence, ...],
+  meaning_decision_outcome: MeaningDecisionOutcome,
+)
+```
+
+- root current admissionは`1.1` exact12だけである。additive exact3の`Optional`、default、null、omit branchは0。
+- historical root v1.0 exact9はGit履歴・historical receiptで保持し、current runtimeでdecode／validate／admit／serializeしない。
+- nested existing contractのschema versionは現行`1.0`を保持し、shared constantをglobalに1.1へ上げない。
+- parallel carrier、compatibility registry、別trace root fieldは作らない。
+- candidate/evidence/rowのorphan、duplicate、foreign refは0。candidate exact1 ↔ evidence exact1をreverse bindする。
+- `WholeReadingConsequenceRow`はclosed exact8 payloadのsemantic fact ownerであり、candidate ownerではない。同一`ForegroundScope`、`RequiredDifferenceRow`、source evidence、mutation、baseline／mutated signatureから同一exact8 payload／IDへ到達した場合、carrierにはrow exact1だけを置き、該当する複数candidateのevidenceから同じrow refを共有参照してよい。この共有は同一exact8 payload／IDの場合だけで、payloadが異なるrowの共有、同一IDのduplicate格納、candidate ID／provenance／hash saltのrow preimageへの追加は0とする。
+
+### 20.3 candidate、evidence、reading identityの非循環順
+
+`InputSpecificMeaningCandidate`は§6.4のexact21、`InputSpecificityEvidence`はexact5を保持する。実装順は一意に次である。
+
+```text
+1  draft source refs + material BasisProvenanceRowを列挙
+2  candidate preloss source projection exact17
+3  actual typed sourceからMeaningSemanticSignature exact13を再構築
+4  preserved differencesのtarget cardinalityを解決し、mutation exact12とrow delta/codeを構築
+5  protected graphからactual semantic lossを再導出しfull hard validity
+6  hard-validだけsemantic_loss_codes=()を確定しfinal source projection exact18
+7  final exact18 + recomputed signature exact13 = core preimage exact19 -> CANDIDATE_CORE_ID
+8  WholeReadingConsequenceRow preimage exact8 -> row ID
+9  evidence declared exact5（candidate_ref = CANDIDATE_CORE_ID）+ resolved full rows -> EVIDENCE_ID
+10 same-core groupのderived row/evidence payloadをexact比較し、同一だけdedupe、差があればimplementation RED
+11 sealed candidate/evidence back-bind + canonical order
+12 selection -> canonical trace -> selected projection -> SELECTED_READING_ID
+```
+
+`candidate_id`はevidence refをhashしない。`EVIDENCE_ID`はcore IDへbindし、sealed candidateの`input_specificity_evidence_ref`がそのIDを参照する。mutual hash、stored signatureによる自己正当化、raw text／fixture ID／enumeration order／hash順によるselectionは0。
+
+candidate core preimageは、`candidate_id`、`input_specificity_evidence_ref`、stored `semantic_signature`を除くdeclared source projection exact18と、actual sourceから再構築したsignature exact13のexact19である。`semantic_loss_codes`はactual lossだけを`DifferenceInvariantCode`宣言順で持つ。loss exact1+ draftはseal前にhard-invalid、hard-valid sealed recordはempty exact0である。
+
+identity-bearing tupleのcanonical orderは次だけで閉じる。これらのorderをselection優先度へ使わない。
+
+```text
+candidate_records order = stable order by (
+  recomputed MeaningSemanticSignature canonical bytes,
+  recomputed exact19 core-preimage canonical bytes,
+)
+
+input_specificity_evidence_records order =
+  candidate_records orderへexact1で追従。独立sort 0
+
+candidate-owned required-difference order = stable union of (
+  candidate.requirement_bundle_refs in carrier RequirementBundle order,
+  each bundle.required_difference_refs in declared order,
+)
+
+whole_reading_consequence_rows order =
+  candidate_records order、次にcandidate-owned required-difference order
+  （各candidate/differenceのmatching row exact1を解決し、同一exact8
+   payload／IDはfirst occurrenceを保持するstable dedupe exact1）
+
+BasisProvenanceRow order =
+  material relation_path_refs in candidate declaration order、次に
+  material qualified_event_state_refs in candidate declaration order
+```
+
+same exact19 coreなのにrow／evidence payloadが異なる場合はsortや代表選択をせずimplementation REDである。row ref tuple、evidence tuple、provenance tupleをID／hash／enumeration orderで並べ替えない。
+
+selection後はsole owner内のpure `project_selected_reading(selected_candidate, canonical_trace)` exact1だけでselected readingを作る。compositionは同じpure projectionのexact equalityを検証するだけで再選択しない。
+
+```text
+selected_candidate_ref == selected_candidate.candidate_id
+selected_candidate.primary_component_refs cardinality = 1..5
+primary_reading_focus_ref == selected_candidate.primary_component_refs[0]
+supporting_facet_refs == selected_candidate.primary_component_refs[1:]  # 0..4
+reading_component_refs == selected_candidate.primary_component_refs
+reading_relation_refs == selected_candidate.relation_path_refs
+qualified_event_state_refs == selected_candidate.qualified_event_state_refs
+basis_provenance_rows == selected_candidate.basis_provenance_rows
+basis_epistemic_tier == selected_candidate.basis_epistemic_tier
+reading_status == selected_candidate.emlis_reading_status
+unresolved_alternative_refs == selected_candidate.material_unknown_refs
+selection_reason_codes == canonical SELECTED trace row reason_codes
+decision_trace == canonical_trace
+reading_id == SELECTED_READING_ID(recomputed selected-reading payload)
+```
+
+### 20.4 material provenanceとsealed trace
+
+```text
+BasisProvenanceRow exact6 = (
+  schema_version = "1.0",
+  basis_kind: RELATION_BRIDGE | QUALIFIED_EVENT_STATE,
+  basis_ref,
+  basis_epistemic_tier: SOURCE_EXPLICIT | RULE_ADMITTED_PROVISIONAL,
+  source_evidence_refs: tuple[str, ...],
+  approved_derivation_refs: tuple[str, ...],
+)
+```
+
+- candidate成立にmaterialな`relation_path_ref`または`qualified_event_state_ref`へrow exact1。materialでないcarried refはrow exact0であり、全ref台帳にしない。
+- `basis_ref`はsame Phase-A ownerへexact1解決し、`source_evidence_refs`はexact1+でownerのevidenceとexact一致する。orphan／duplicate／empty evidenceは0。
+- `SOURCE_EXPLICIT`はapproved derivation ref 0、`RULE_ADMITTED_PROVISIONAL`はexact1+。
+- candidate tierは全material rowの最弱tierであり、strongest rowだけで昇格しない。
+
+```text
+MeaningDecisionTrace exact2 = (schema_version = "1.0", rows)
+MeaningDecisionTraceRow exact4 = (trace_kind, subject_ref, reason_codes, source_refs)
+SEALED_TRACE_KIND = SELECTED | NONSELECTED_VALID | LIMITED_BASIS
+```
+
+`SELECTED`／`NONSELECTED_VALID`の`subject_ref`はcarrier candidate IDへexact1解決する。`LIMITED_BASIS`の`subject_ref`はcandidate absent／nullにせず、outcomeが保持する既存`derivation_state_ref`とexact一致させる。これによりtrace exact4を保ち、fake candidate、outcome ID cycle、optional unresolved refを作らない。
+
+sealed traceのcodeは`SEL00..SEL06 + LIM01..LIM03` exact10だけである。`HARD_INVALID`、`HV01..HV12`、free textはdevelopment evidenceに限定し、carrier、selected reading identity、review object identity、formal result identityへ入れない。NORMALはSELECTED exact1、carrier内の各nonselected hard-valid candidateへNONSELECTED_VALID exact1。LIMITEDはbranch summaryのLIMITED_BASIS exact1を必須とする。
+
+traceのcardinalityとcanonical orderは次で閉じる。
+
+```text
+TRACE_KIND_ORDER = (SELECTED, NONSELECTED_VALID, LIMITED_BASIS)
+MEANING_DECISION_REASON_CODE_ORDER = (SEL00..SEL06, LIM01..LIM03)
+
+SELECTED.reason_codes = nonempty canonical subset of SEL00..SEL06
+NONSELECTED_VALID.reason_codes = nonempty canonical subset of SEL00..SEL06
+LIMITED_BASIS.reason_codes = exact1 of LIM01 | LIM02 | LIM03
+
+TRACE_SOURCE_OWNER_PRECEDENCE = (
+  observation contribution,
+  source relation,
+  interpretation candidate,
+  source qualifier,
+  material unknown,
+  approved derivation rule,
+  grounded graph object/edge,
+  foreground derivation/scope source,
+  carrier configuration,
+  carrier requirement bundle,
+  carrier required difference,
+  carrier counterfactual mutation,
+  carrier whole-reading consequence,
+)
+
+canonical source_refs = stable order by (
+  TRACE_SOURCE_OWNER_PRECEDENCE index,
+  resolved owner's semantic declaration position,
+)
+
+TRACE_SUBJECT_RANK =
+  carrier candidate order index for SELECTED/NONSELECTED_VALID
+  or after-candidate sentinel + closed derivation-state declaration index
+     for LIMITED_BASIS
+
+TRACE_ROW_CANONICAL_KEY = (
+  TRACE_KIND_ORDER index,
+  TRACE_SUBJECT_RANK,
+  canonical source_refs rank tuple,
+  MEANING_DECISION_REASON_CODE_ORDER tuple,
+)
+
+decision_trace.rows == stable_sort(rows, TRACE_ROW_CANONICAL_KEY)
+duplicate full row/key = 0
+reason_codes/source_refs = exact1+ and canonical order
+```
+
+NORMALは`SELECTED` exact1、carrier内のselected以外の各hard-valid candidateへ`NONSELECTED_VALID` exact1、`LIMITED_BASIS` 0であり、`selection_reason_codes`はSELECTED rowとexact一致する。各LIMITED outcomeは対応する`LIM01 | LIM02 | LIM03`の`LIMITED_BASIS` exact1を持ち、`outcome_reason_codes`はそのsummary rowとexact一致する。downstream `LIMITED_COMPETING_MATERIAL_READINGS`だけは、これに加えてcarrier内hard-valid competing candidate exact2+の各々へ`NONSELECTED_VALID` exact1、`SELECTED` 0を要求する。compositionはsealed setとbranch summaryのexact completeness、source resolution、canonical order、identityだけを検証し、hard-invalid draftの列挙／validityを再実行しない。
+
+### 20.5 enumeration、dedupe、dominance、tie
+
+候補生成は各Requirement BundleについてReading operation exact7 × epistemic tier exact2のexact14 laneを持つ。各lane内では、material basisをsource connectivity／compatibilityでoverlapなしのcanonical binding seedへpartitionし、各seedからprimary exact1＋compatible supporting facets 0..4のcandidate最大exact1を作る。各material basisはseed exact1にだけ属し、power set、任意subset、ID代表選択を作らない。
+
+binding seedは「実装者が自然に見えるgroup」を選ぶ処理ではなく、次のclosed graph partitionである。
+
+```text
+vertex = each material (basis_kind, basis_ref) exact1 that is reachable from
+  the bundle anchor/adjacent configurations
+
+undirected edge(A, B) = true iff §5.5 compatibility exact4 is all true:
+  same foreground scope/center
+  same or typed-compatible owner assignment
+  source-connected relation/temporal path
+  source-explicit allowlist relation of contrast/coexistence/continuation/correction
+and A/B resolve in the same typed source-owner domain or through that exact
+  source-connected typed path
+
+nonempty vertex set:
+  seed partition = connected components of this graph in source declaration order
+  every vertex belongs to exact1 component
+  every distinct pair inside each component must also satisfy edge(A, B)
+
+empty vertex set after a valid nonempty bundle:
+  request-local EMPTY_MATERIAL_BASIS_SEED exact1, provenance rows exact0
+  serialized field/ref/ID = 0
+```
+
+seed partitionはbundleごとにexact1回計算し、Reading operation exact7 × epistemic tier exact2の全laneで同一partitionを使う。§5.5のpairwise contract上、connected component内にedgeでないpairがある非推移的compatibilityは合法なproduct ambiguityではなくpartition invariant違反のimplementation REDである。任意のclique coverへの分割やLIMITEDへの変換は0。component membership、seed order、primary/supportingをID、hash、enumeration timingで決めない。このpartitionが同じなのにproducerが異なるseed集合を返す場合もimplementation REDである。
+
+```text
+MATERIAL_BINDING_SEED_COUNT(bundle) = actual finite canonical partition cardinality
+CANDIDATE_MAX = sum_over_bundle(7 * 2 * max(1, MATERIAL_BINDING_SEED_COUNT(bundle)))
+```
+
+この式を超えた場合だけ`CANDIDATE_CARDINALITY_OVERFLOW`である。§6.3／§13の旧`bundle当たりexact14`固定上限はこの式で置換する。同一bundle/laneでもdistinct source-bound seedから生じたfull coreは保持する。同一seed/laneからdistinct coreが複数出る、またはbasisが複数seedへ重複する場合はproducer非一意性としてimplementation RED。異なるbundle/lane/seedから同じsignatureへ到達したcandidateはfull coreが違う限り保持する。
+
+dedupeはrecomputed exact19完全一致だけである。同じcore groupでrow/evidence payloadまで同一ならexact1へdedupeし、違えば一方を任意に残さずimplementation REDとする。
+
+same semantic signature候補のdominanceは、次のcomponentwise partial orderだけで判定する。
+
+| axis | `A`が`B`以上の条件 |
+|---|---|
+| epistemic tier | AがSOURCE_EXPLICIT、または同tier |
+| required-difference coverage | Aのsource-bound full coverageがBのsupersetで、foreign／unowned ref 0 |
+| material unknown | Aがsource unknownを消さず、unresolved material unknown setがBのsubset |
+| promotion/collapse | Aのforbidden promotion／collapse violation setがBのsubset |
+| material provenance/evidence | 下記`MATERIAL_PROVENANCE_NO_WORSE`がtrue |
+
+全axisでno-worseかつexact1 axis以上でstrictly betterのときだけA dominates Bとする。incomparable candidateは両方を残し、§8.2 selectionで解けなければ`LIMITED_COMPETING_MATERIAL_READINGS`へ送る。hash、ID、tuple order、facet数をtie breakerにしない。§8.3の「semantic signature同値ならstable key exact1」はこのparagraphで置換する。
+
+```text
+B_KEYS = tuple[(basis_kind, basis_ref)] from B.material BasisProvenanceRow
+A_KEYS = tuple[(basis_kind, basis_ref)] from A.material BasisProvenanceRow
+
+MATERIAL_PROVENANCE_NO_WORSE(A, B) iff:
+  A/B foreign/orphan/duplicate row = 0
+  for every key in B_KEYS:
+    exact1 A row has the same key
+    A.source_evidence_refs is a canonical superset of B.source_evidence_refs
+    A.approved_derivation_refs is a canonical superset of
+      B.approved_derivation_refs
+  every key in A_KEYS - B_KEYS is material to an A required-difference ref
+    that is not covered by B
+
+MATERIAL_PROVENANCE_STRICTLY_BETTER(A, B) iff:
+  MATERIAL_PROVENANCE_NO_WORSE(A, B)
+  and at least one same-key evidence/approved-derivation superset is strict
+
+extra material basis alone = not a strict-better provenance axis
+unrequired/optional extra basis, missing same-key row, or noncanonical mapping
+  = provenance axis incomparable
+```
+
+### 20.6 `MUTATION_APPLICATION_SPEC` exact12
+
+各specは次のclosed fieldを持つ。
+
+```text
+(mutation_kind, target_owner_domain, target_cardinality,
+ directly_changed_signature_fields, derived_recomputed_signature_fields,
+ required_unchanged_signature_fields, replacement_or_deletion_rule,
+ whole_reading_consequence_code)
+
+required_unchanged_signature_fields =
+  MeaningSemanticSignature exact13 fields
+  - {schema_version}
+  - directly_changed_signature_fields
+  - derived_recomputed_signature_fields
+```
+
+各`target_component_ref`はownerへexact1解決しなければならない。tuple cardinalityは`SWAP_ENDPOINTS`だけordered target exact2＋ordered replacement exact2、その他exact11はtarget exact1である。DELETE系のreplacement tupleは0、REPLACE／PROMOTE系はreplacement exact1。`directly_changed`はsemantic mutation axis exact1を意味し、同じaxisから複数signature fieldを再構築することを禁止しない。
+
+| kind | target owner / cardinality | direct change | derived recomputation | rule | consequence |
+|---|---|---|---|---|---|
+| `DELETE_ENDPOINT` | bound endpoint component exact1 | `component_semantic_keys` | `input_center_keys`, `component_role_keys`, `relation_direction_keys`, `epistemic_state_keys`, `temporal_state_keys`, `resolution_treatment_keys`, `world_or_owner_distinction_keys`, `modality_polarity_or_limitation_keys`, `episodicity_boundary_keys`, `qualifier_keys` | target endpointとtarget依存leafをdeleteし全summaryをowner sourceから再構築 | `RELATION_STRUCTURE_CHANGED` |
+| `SWAP_ENDPOINTS` | bound endpoint pair exact2 | `component_semantic_keys` | `component_role_keys`, `relation_direction_keys`, `qualifier_keys` | exact2のroleとrole-bound qualifierをatomic swap | `RELATION_STRUCTURE_CHANGED` |
+| `DELETE_PREDICATE` | typed predicate-bearing component exact1 | `component_semantic_keys` | `input_center_keys`, `component_role_keys`, `relation_direction_keys`, `epistemic_state_keys`, `temporal_state_keys`, `resolution_treatment_keys`, `world_or_owner_distinction_keys`, `modality_polarity_or_limitation_keys`, `episodicity_boundary_keys`, `qualifier_keys` | target predicate componentをdeleteし全summaryをowner sourceから再構築。sole componentのcounterfactual mutated sideは全content tuple exact0を許可 | `INPUT_CENTER_CHANGED` |
+| `DELETE_OWNER` | owner-bearing component exact1 | `component_semantic_keys` | `input_center_keys`, `world_or_owner_distinction_keys`, `qualifier_keys` | ownerをliteral `owner:unknown`へexact1置換 | `WORLD_OR_OWNER_DISTINCTION_CHANGED` |
+| `REPLACE_WORLD` | bound world key exact1 | `world_or_owner_distinction_keys` | `component_semantic_keys`, `qualifier_keys` | source rowのclosed replacementへexact1置換 | `WORLD_OR_OWNER_DISTINCTION_CHANGED` |
+| `REPLACE_ROLE` | bound role component/binding exact1 | `component_semantic_keys` | `component_role_keys`, `relation_direction_keys`, `temporal_state_keys`, `modality_polarity_or_limitation_keys`, `qualifier_keys` | closed replacement roleへexact1置換 | `RELATION_STRUCTURE_CHANGED` |
+| `REPLACE_TIME` | bound time key exact1 | `temporal_state_keys` | `qualifier_keys`, `episodicity_boundary_keys` | closed replacement timeへexact1置換 | `TEMPORAL_FLOW_CHANGED` |
+| `DELETE_MODALITY` | bound modality qualifier exact1 | `modality_polarity_or_limitation_keys` | `epistemic_state_keys`, `qualifier_keys` | target modalityと同一owner summaryをdelete | `MODALITY_POLARITY_OR_LIMITATION_CHANGED` |
+| `DELETE_ASPECT` | bound aspect qualifier exact1 | `episodicity_boundary_keys` | `temporal_state_keys`, `qualifier_keys` | target aspectと同一owner summaryをdelete | `EPISODICITY_BOUNDARY_CHANGED` |
+| `DELETE_SCOPE` | bound scope/limit leaf exact1 | `component_semantic_keys` | `modality_polarity_or_limitation_keys`, `qualifier_keys` | target scope/explicit limitだけをdeleteし、同じcomponentのcounterfactual scope slotをclosed sentinel `scope:absent` exact1へ置換 | `MODALITY_POLARITY_OR_LIMITATION_CHANGED` |
+| `DELETE_QUALIFIER` | bound qualifier exact1 | `qualifier_keys` | qualifier axisが所有するtyped summary exact1 set | target exact1をdelete。`qualifier:not_generalized`だけepisodicity lane、その他はtyped namespace lane | typed laneに対応するexact1 code |
+| `PROMOTE_UNKNOWN` | `resolution:unresolved` exact1 | `resolution_treatment_keys` | none | `resolution:resolved`へexact1置換 | `RESOLUTION_TREATMENT_CHANGED` |
+
+`DELETE_QUALIFIER`のtarget grammarとaxisは次のexact7 rowだけで閉じる。`role`は`left | right | subject | object | target` exact5、`value`はsource ownerが保持するnonempty normalized valueである。
+
+| target literal grammar | owned axis | direct + derived affected closure | consequence |
+|---|---|---|---|
+| `polarity:<value>` | POLARITY | `modality_polarity_or_limitation_keys`, `qualifier_keys` | `MODALITY_POLARITY_OR_LIMITATION_CHANGED` |
+| `epistemic:<value>` | EPISTEMIC | `epistemic_state_keys`, `qualifier_keys` | `RESOLUTION_TREATMENT_CHANGED` |
+| `epistemic-state:<value>` | EPISTEMIC | `epistemic_state_keys`, `qualifier_keys` | `RESOLUTION_TREATMENT_CHANGED` |
+| `qualifier:not_generalized` | ASPECT | `episodicity_boundary_keys`, `qualifier_keys` | `EPISODICITY_BOUNDARY_CHANGED` |
+| `qualifier:<role>_time_scope=<value>` | TIME | `temporal_state_keys`, `episodicity_boundary_keys`, `qualifier_keys` | `TEMPORAL_FLOW_CHANGED` |
+| `qualifier:<role>_modality=<value>` | MODALITY | `epistemic_state_keys`, `modality_polarity_or_limitation_keys`, `qualifier_keys` | `MODALITY_POLARITY_OR_LIMITATION_CHANGED` |
+| `qualifier:<role>_polarity=<value>` | POLARITY | `modality_polarity_or_limitation_keys`, `qualifier_keys` | `MODALITY_POLARITY_OR_LIMITATION_CHANGED` |
+
+各rowで`qualifier_keys`がdirect field、同cellの残りがderived recomputed setであり、両setを重複させない。
+
+`actor:`／`world:`はowner/world mutation、`time:`／`time_scope:`はtime mutation、`aspect:`はaspect mutation、`modality:`はmodality mutation、`scope:`はscope mutationが所有し、`DELETE_QUALIFIER`へ混ぜない。上表以外の`qualifier:` target、namespace不明、複数row一致、unlisted field deltaはimplementation REDである。
+
+全mutation後のtuple fieldは、actual source ownerのsemantic declaration positionを唯一のorderとしてstable再構築する。lexical sort、ID、hash、enumeration orderは0。replacement／swap後に同じtyped keyが複数生じた場合はfirst owner positionを保持したstable canonical dedupe exact1を行い、materialに異なるsource leafがcollapseした場合は対応するactual `semantic_loss_codes`を発行してhard-invalidにする。duplicateを残す、last-write-wins、arbitrary representativeは0。
+
+全kind共通で、target exact0はそのcandidate draftのhard-invalid、expected cardinality超過はimplementation RED、target presentなのにsignature delta exact0またはconsequence code exact0もimplementation REDである。direct＋derived以外のfieldが変わればimplementation RED。producerとvalidatorは同じspec exact12を使い、positive exact12、target-absent exact12、ambiguous、no-op、副作用のtestを持つ。現行no-op exact5（`DELETE_PREDICATE`、`DELETE_MODALITY`、`DELETE_ASPECT`、`DELETE_SCOPE`、`DELETE_QUALIFIER`）を閉じる前にfull-coverage validityを有効化しない。
+
+`scope:absent`は`DELETE_SCOPE`後の`mutated_semantic_signature.component_semantic_keys[*].scope_key`だけに許可するcounterfactual closed sentinelである。baseline、candidate stored signature、selected reading、actual source projectionへの出現は0とする。これはscope leaf exact1の不在表現であり、predicate、semantic kind、owner、roleを消さない。`DELETE_PREDICATE`でsole predicate-bearing componentを削除した場合だけ、`mutated_semantic_signature`の`input_center_keys`、`component_role_keys`、`relation_direction_keys`、`epistemic_state_keys`、`temporal_state_keys`、`resolution_treatment_keys`、`world_or_owner_distinction_keys`、`modality_polarity_or_limitation_keys`、`episodicity_boundary_keys`、`qualifier_keys`、`component_semantic_keys`をexact0とする。baseline／candidate stored signatureのcontent-bearing exact1+は維持し、このcounterfactual empty exceptionを他kindへ流用しない。
+
+### 20.7 all-invalidとLIMITEDのclosed boundary
+
+次のexact2を分ける。
+
+```text
+ALL_DRAFTS_SOURCE_GROUNDED_HARD_INVALID:
+  pool generation complete
+  every rejection source-grounded
+  every target/row/evidence/validator check complete
+  implementation capability defect = 0
+  -> LimitedMeaningOutcome.outcome_state
+       = LIMITED_NO_SAFE_INPUT_SPECIFIC_CONFIGURATION
+  -> derivation_state_ref
+       = ALL_DRAFTS_SOURCE_GROUNDED_HARD_INVALID
+  -> BoundedLimitedReception exact1
+  -> product_acceptance_eligible = true
+
+IMPLEMENTATION_INCOMPLETE_ALL_INVALID:
+  producer/mutation/evidence/validator capability defect exact1+
+  -> IM03_THROUGH_IM06_IMPLEMENTATION_RED
+  -> carrier seal / Reception / visible artifact = 0 / 0 / 0
+```
+
+`ALL_DRAFTS_SOURCE_GROUNDED_HARD_INVALID`は既存`LimitedMeaningOutcome.derivation_state_ref` closed tableへ加えるliteral exact1であり、新outcome、field、carrier、serviceを作らない。`LIMITED_NO_SAFE_INPUT_SPECIFIC_CONFIGURATION`の許可derivationは`THIN_NO_SAFE_CONFIGURATION | NO_REQUIRED_DIFFERENCE | ALL_DRAFTS_SOURCE_GROUNDED_HARD_INVALID` exact3となる。upstream構造欠落、capability defect、generic fallbackをこのlaneへ変換しない。
+
+outcome tagだけでcarrier cardinalityを推測せず、`derivation_state_ref`と組で次へexact dispatchする。
+
+| outcome / derivation state | candidate / evidence / consequence rows | trace completeness |
+|---|---|---|
+| NORMAL selected | candidate/evidence exact1+、各candidateのmatching row ref exact1+。同一exact8 rowは複数evidenceから共有可、carrier格納exact1 | SELECTED exact1、remaining candidateごとNONSELECTED_VALID exact1 |
+| `LIMITED_COMPETING_MATERIAL_READINGS` / `COMPETING_MATERIAL_SCOPES` | `0 / 0 / 0`。unresolved refsはscope derivationとexact一致 | `LIMITED_BASIS(LIM03)` exact1、candidate trace 0 |
+| `LIMITED_COMPETING_MATERIAL_READINGS` / `LIMITED_COMPETING_MATERIAL_READINGS` | hard-valid candidate/evidence exact2+、各candidateのmatching row ref exact1+、同一exact8 rowの共有可、carrier duplicate 0、winner 0 | `LIMITED_BASIS(LIM03)` exact1＋candidateごとNONSELECTED_VALID exact1、SELECTED 0 |
+| `LIMITED_NO_SAFE_INPUT_SPECIFIC_CONFIGURATION` / 許可exact3 | `0 / 0 / 0` | `LIMITED_BASIS(LIM01)` exact1 |
+| `LIMITED_STRUCTURE_INSUFFICIENT` / `UPSTREAM_STRUCTURE_INSUFFICIENT` | `0 / 0 / 0` | `LIMITED_BASIS(LIM02)` exact1 |
+
+upstream scope競合へfake candidateを作らず、downstream candidate競合からcandidate／evidence／row／NONSELECTED_VALID traceを落とさない。branch外record、foreign ref、winner捏造はimplementation REDである。
+
+### 20.8 composition validation-only exact set
+
+`emlis_stage1_composition.py::_validate_phase_A`から次のcall/importとfresh-equality assertionを除く。
+
+| remove exact4 | removeする比較 |
+|---|---|
+| `derive_grounded_situation_view` | carried view vs freshly derived view |
+| `derive_foreground_scope_closed` | carried derivation vs freshly derived derivation |
+| `foreground_scope_disposition` | carried disposition vs freshly decided disposition |
+| `derive_input_specific_meaning_structure` | carried sealed structure vs freshly derived structure |
+
+保持・追加するvalidation-only setは、`_validate_registry_snapshots`、type/schema/version、`validate_premeaning_grounded_inputs`、`validate_allowed_reception_opportunity_envelope`、carried view／scope／disposition／v1.1 carrierのvalidator、ref-resolution、candidate/evidence/outcome cardinality/back-bind、identity/projection recomputation、non-mutation、`_validate_phase_lineage`、contribution closure、`_validate_frozen_semantic_maps`、final tag dispatchである。未定義のvalidation-only boundaryを実装者判断へ残さず、同じ既存module familyへ次のsignatureで閉じる。
+
+```text
+validate_grounded_situation_view(
+  view, premeaning_inputs, grounded_graph
+) -> None
+
+validate_foreground_scope_disposition(
+  disposition, foreground_scope_derivation
+) -> None
+
+validate_input_specific_meaning_structure(
+  structure, grounded_view, foreground_scope_derivation
+) -> None
+```
+
+最後のvalidatorはcarrierとsealed Phase-A ownersからrequest-local lookupを内部構築するが、derive／enumerate／selectしない。view／scope／disposition invalidは既存`STAGE1_PREMEANING_RECEPTION_SPLIT_STOP`、v1.1 carrier invalidは既存`STAGE1_INPUT_SPECIFIC_MEANING_STRUCTURE_STOP`へtranslateする。`project_subjective_meaning_plan`はNORMAL／LIMITED tagged outcomeをexhaustive dispatchするだけで、legacy meaning再構築、candidate比較、reselection、LIMITED再判断を行わない。
+
+testはresponse builder内sole owner call exact1、same sealed object/ref carry、composition derive call exact0、schema/ref/identity/tamper rejectを要求する。現在の「composition rederive call exact1」assertionは削除ではなく上記4 assertionへ置換する。
+
+### 20.9 IM04 type reuseとderived identity closure
+
+§6.4／§9.1で参照した未定義aliasは新型へ増やさず、現行contractへexactにbindする。
+
+```text
+ReceptionFunction = Literal[
+  "stay_with_current_burden",
+  "honor_concrete_effort",
+  "protect_retained_intention",
+  "recognize_lived_change",
+  "hold_help_seeking",
+  "bounded_counter_self_denial",
+  "respect_words_placed",
+]
+# exact CMEE_STAGE1_RECEPTION_ACT_MAPPING_EXACT7.reception_act domain
+
+AffectContent = EmlisAffectContent
+RelationalStance = EmlisRelationalPosition
+
+ResponseConsequenceRequirementCode = Literal[
+  "AFFIRMATIVE_RECEPTION_REQUIRED",
+  "READING_BINDING_REQUIRED",
+  "PRESERVED_DIFFERENCE_REQUIRED",
+  "VISIBLE_CAUSAL_TRACE_REQUIRED",
+]
+```
+
+`MeaningDecisionReasonCode`はfree stringではなく次のliteral-valued Enum exact10、`MeaningDecisionTraceKind`はEnum exact3とする。
+
+```text
+SEL00 = "SEL00_BASIS_PROVENANCE_TIER"
+SEL01 = "SEL01_BUNDLE_SATISFACTION"
+SEL02 = "SEL02_REQUIRED_RETENTION_PRESERVATION"
+SEL03 = "SEL03_BUNDLE_CONNECTIVITY"
+SEL04 = "SEL04_EPISTEMIC_CONSERVATISM"
+SEL05 = "SEL05_CONTRASTIVE_SEMANTIC_NECESSITY"
+SEL06 = "SEL06_MINIMAL_SUFFICIENCY"
+LIM01 = "LIM01_NO_SAFE_INPUT_SPECIFIC_CONFIGURATION"
+LIM02 = "LIM02_STRUCTURE_INSUFFICIENT"
+LIM03 = "LIM03_COMPETING_MATERIAL_READINGS"
+
+TRACE_KIND = "SELECTED" | "NONSELECTED_VALID" | "LIMITED_BASIS"
+```
+
+すべてのderived IDは`stage1_canonical_json_bytes`、lowercase SHA-256 exact64、次のliteral prefix／suffixを使う。stored ID、raw string concatenation、implementation-default serializerをpreimageにしない。
+
+| derived ID | canonical payload | literal domain |
+|---|---|---|
+| `CANDIDATE_CORE_ID` | §20.3 exact19 | `input-specific-meaning-candidate:{digest}@cocolon.cmee.emlis.input_specific_meaning_candidate.v1` |
+| `EVIDENCE_ID` | evidence declared exact5（`candidate_ref == CANDIDATE_CORE_ID`）＋resolved full consequence rows。core IDを別leafとして二重追加しない | `input-specificity-evidence:{digest}@cocolon.cmee.emlis.input_specificity_evidence.v1` |
+| `SELECTED_READING_ID` | `reading_id`を除くSelected reading全declared fields。`decision_trace`はcanonical validated formでexact1含む | `selected-emlis-provisional-reading:{digest}@cocolon.cmee.emlis.selected_emlis_provisional_reading.v1` |
+| `READING_CONSEQUENCE_ID` | ReadingConsequence declared exact6＋参照するfull rowsをcarrier semantic orderで解決 | `reading-consequence:{digest}@cocolon.cmee.emlis.reading_consequence.v1` |
+| `MEANING_BOUND_RECEPTION_ID` | `reception_id`を除くMeaningBoundReceptionProposition全declared fields | `meaning-bound-reception:{digest}@cocolon.cmee.emlis.meaning_bound_reception.v1` |
+| `LIMITED_OUTCOME_ID` | LimitedMeaningOutcome全declared fields。traceはcanonical validated formで一度だけ含む | `limited-meaning-outcome:{digest}@cocolon.cmee.emlis.limited_meaning_outcome.v1` |
+| `SUBJECTIVE_PROPOSITION_V2_ID` | existing SubjectivePropositionV2全declared fields | `subjective-proposition-v2:{digest}@cocolon.emlis.stage1.subjective_proposition.v2` |
+
+`SealedEmlisProvisionalReading.reading_consequence_ref`と`MeaningBoundReceptionSet.reading_consequence_ref`はderived `READING_CONSEQUENCE_ID` exact1へ解決する。normal proposition `reception_id`は`MEANING_BOUND_RECEPTION_ID`である。`BoundedLimitedReception.limited_outcome_ref`は`LIMITED_OUTCOME_ID`、その`proposition_ref`はsource-boundなexisting `SubjectivePropositionV2` projectionのderived `SUBJECTIVE_PROPOSITION_V2_ID`へ解決する。LIMITEDのためにfake selected readingを作らない。
+
+normal Reception proposition 1..4の各IDはuniqueで、`MeaningBoundReceptionSet.proposition_refs`はcanonical declaration orderの全IDとexact一致する。affirmative／counterposition subsetはdisjoint unionで全setへ一致する。ReadingConsequence、Reception、visible projectionのどこでもcandidateを再選択しない。
+
+### 20.10 post-selection record carrier exact38
+
+root `InputSpecificMeaningStructure v1.1 exact12`はpre-Reception meaning ownerのまま維持する。selection後に作るB／C成果物は、既存private `Stage1SubjectivePlanningInputs`をcurrent exact31からrequired exact38へ一括migrationし、responseからcompositionへ同じrecord objectをcarryする。parallel carrier／registry／composition reconstructionを作らない。
+
+existing `projection_preimage_ref`はfield名とpayloadを保持し、post-selection recordより先に構築する**base binding preimage**へ役割を限定する。existing `projection_preimage_ref`の直後へ次のrequired tuple field exact6、続けてrequired `projection_seal_ref: str` exact1を宣言順どおり加える。tuple field自体はrequired/non-nullで、branch非該当時だけempty tupleを持つ。default、omit branchは0。
+
+```text
+reading_consequence_records: tuple[ReadingConsequence, ...]
+sealed_emlis_provisional_reading_records:
+  tuple[SealedEmlisProvisionalReading, ...]
+meaning_bound_reception_proposition_records:
+  tuple[MeaningBoundReceptionProposition, ...]
+meaning_bound_reception_set_records:
+  tuple[MeaningBoundReceptionSet, ...]
+bounded_limited_reception_records:
+  tuple[BoundedLimitedReception, ...]
+bounded_limited_subjective_proposition_records:
+  tuple[SubjectivePropositionV2, ...]
+projection_seal_ref: str
+```
+
+| outcome branch | consequence | sealed reading | normal propositions | normal set | bounded LIMITED | LIMITED SubjectivePropositionV2 |
+|---|---:|---:|---:|---:|---:|---:|
+| NORMAL selected | exact1 | exact1 | 1..4 | exact1 | 0 | 0 |
+| any accepted LIMITED | 0 | 0 | 0 | 0 | exact1 | exact1 |
+
+NORMALでは`ReadingConsequence.selected_reading_ref`、sealed readingのselected／consequence ref、各propositionのselected ref、Reception setのselected／consequence／proposition refsがcarried recordsへexact1で相互解決する。LIMITEDでは`BoundedLimitedReception.limited_outcome_ref`がroot outcomeのderived `LIMITED_OUTCOME_ID`、`proposition_ref`がcarried `SubjectivePropositionV2`のderived IDへexact1解決する。branch外record、orphan、duplicate、foreign refは0。
+
+§20.9のderived identity表へ次を加える。
+
+| derived ID | canonical payload | literal domain |
+|---|---|---|
+| `SEALED_READING_ID` | SealedEmlisProvisionalReading全declared fields＋resolved selected reading／consequence full records | `sealed-emlis-provisional-reading:{digest}@cocolon.cmee.emlis.sealed_reading.v1` |
+| `MEANING_BOUND_RECEPTION_SET_ID` | MeaningBoundReceptionSet全declared fields＋resolved proposition full records | `meaning-bound-reception-set:{digest}@cocolon.cmee.emlis.meaning_bound_reception_set.v1` |
+| `BOUNDED_LIMITED_RECEPTION_ID` | BoundedLimitedReception全declared fields＋resolved limited outcome／SubjectivePropositionV2 full records | `bounded-limited-reception:{digest}@cocolon.cmee.emlis.bounded_limited_reception.v1` |
+| `PROJECTION_SEAL_ID` | base `projection_preimage_ref`＋branch extension＋resolved full records | `stage1-subjective-projection-seal:{digest}@cocolon.emlis.stage1.subjective_projection_seal.v1` |
+
+identityはbaseとfinalの二段へ分ける。existing `projection_preimage_ref`はcurrent legacy inputsだけから先に導出し、current `project_stage1_subjective_basis_binding_ref`／`project_stage1_source_qualifier_binding_ref`の唯一のbaseにする。post-selection branch identityは、新field `projection_seal_ref = PROJECTION_SEAL_ID`へ次の宣言順で入れる。
+
+```text
+NORMAL branch projection identity extension = (
+  "NORMAL",
+  SELECTED_READING_ID,
+  SEALED_READING_ID,
+  READING_CONSEQUENCE_ID,
+  tuple[MEANING_BOUND_RECEPTION_ID, ...],
+  MEANING_BOUND_RECEPTION_SET_ID,
+)
+
+LIMITED branch projection identity extension = (
+  "LIMITED",
+  LIMITED_OUTCOME_ID,
+  SUBJECTIVE_PROPOSITION_V2_ID,
+  BOUNDED_LIMITED_RECEPTION_ID,
+)
+```
+
+construction orderは、base `projection_preimage_ref` → existing basis／source-qualifier binding refs → `SubjectivePropositionV2`／normal proposition records → branch record IDs → final `projection_seal_ref`である。`SUBJECTIVE_PROPOSITION_V2_ID`はbase-derived binding refsを含められるがfinal sealを含めず、cycleを作らない。downstream final projection／visible sealは`projection_seal_ref`を使い、base refだけをfinal integrityとして扱わない。
+
+existing retained Reception act、style、temperature、policy fieldsはpost-selection projection inputとして残せるが、carried new Reception recordsとのexact bindingを要求し、meaning／candidate／branch selectorへ逆流させない。どのnew record leafを改変してもrecord IDとfinal `projection_seal_ref`が変わり、base `projection_preimage_ref`は不変である。compositionはexact38のbranch cardinality、base binding、full-record lookup、derived IDs、final seal、non-mutationを検証するだけで、ReadingConsequence／Reception／LIMITED propositionを再構築しない。
+
+## 21. Bounded implementation authority and executable order
+
+### 21.1 actual implementation preimage
+
+本最終設計が確認したmashos-apiのcurrent preimageは次である。実装開始時は同じbranchのfresh head／tree／blobを再取得し、差があればPacket Aをactual preimageへ更新してからwriteする。stale blobへのblind writeは0。
+
+```text
+repository = MassyuRed/mashos-api
+branch = agent/cmee-v1a-i1sx-source-explicit-20260815
+HEAD = 540ed76d9ae39b9fa6eafc4dbc028e50f52dc3df
+tree = dd6ad00e6c7d1d575e71ee7f14f5c9264215ea97
+production activation = 0
+public API / DB / RN / persistence = 0 / 0 / 0 / 0
+```
+
+### 21.2 required write allowlist exact6
+
+| owner | exact path | confirmed preimage blob |
+|---|---|---|
+| contract | `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py` | `e7d774f01110c4cd4b8bf8b001af476a57182111` |
+| sole meaning owner | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_input_specific_meaning.py` | `09da39b1c40b678b1be04c9c68a000e8f11cd5d1` |
+| carry / Reception | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py` | `444420361de1dca0272e7d0cbefcd7aff3ec9d95` |
+| validation / projection | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py` | `fc328a0f53c2c4fcb630abe6ef70e05f9a631a2a` |
+| focused contract test | `ai/tests/test_cmee_v1a_i1sx_contracts.py` | `88d550bded03530dcaad34af0db1c14d4b2cb598` |
+| same-family runner identity | `ai/tools/cmee_v1a_i1sx_candidate_run.py` | `4aeedb530898f2e98fcf6dd5d0dbf29d1b6d0e03` |
+
+write exact0として固定するのは、package `__init__.py`、`emlis_v1a.py`、`engine.py`、`ai/tests/test_cmee_v1a_i1sx_vertical.py`、`ai/tests/test_cocolon_text_generation_core_boundary.py`、`ai/tests/conftest.py`、`ai/tests/helpers/emlis_ai_fb172_migration.py`、requirements、runtime lock／admission fileである。新型はcore-privateで各ownerが`.contracts`から直接importし、package-root public exportを増やさない。既存package-root consumerなしをstatic scanで確認する。allowlist外writeが必要になれば暗黙拡張せず`DESIGN_OR_SCOPE_TERMINAL`である。
+
+### 21.3 Packet A — single IM03–IM06 atomic development authority
+
+実装開始時に次を一つのPacket Aへactual headとともにfreezeする。本書は値と上限を設計済みであり、実装者が途中で新しいpermission keyを作らない。
+
+```text
+PACKET_A = IM03_THROUGH_IM06_ATOMIC_DEVELOPMENT_AUTHORITY
+BRANCH = exact1 from 21.1, fresh-verified
+WRITE_PATHS = exact6 from 21.2
+STABLE_CHECKPOINTS = IM03 / IM04 / IM05 / IM06 exact4
+GITHUB_COMMIT_MAX = exact4
+GITHUB_PUSH_MAX = exact4
+FAILURE_ONLY_COMMIT_OR_PUSH = 0
+RUNTIME_MATERIALIZATION_MAX = exact1
+DEPENDENCY_ACQUISITION_ROUTE = CMEE_LOCKED_WHEELHOUSE_ACQUISITION_COMMAND_V1
+DEPENDENCY_NETWORK_ACQUISITION_PLANNED / MAX = exact1 / exact1
+EXTERNAL_AI / PROVIDER / NETWORK_INFERENCE = 0 / 0 / 0
+DEVELOPMENT_TEST_RULE = exact1 per approved changed state; same-state rerun 0
+PRE_ADMISSION_INVOCATION_MAX = exact1 after IM06 GREEN
+FORMAL_INVOCATION = 0
+PRIVATE_GENERATION = 0
+PRODUCTION_ACTIVATION = 0
+REMOTE_POSTVERIFY = exact1 after each actual push
+```
+
+commit／pushは各stable checkpointがsource＋test＋identityでGREENになった場合だけ行う。中間failureごとの証拠pushを作らず、既存checkpointにprior failure、normalized signature、causal owner、approved paths、actual causal delta、protected criteria、resultだけを記録する。`DEVELOPMENT_EXECUTION_ID`、earliest-invariant lattice、ADMINISTRATIVE_ONLY連続countをpermission Gateにしない。
+
+### 21.4 dependency projectionとruntime exact closure
+
+selectorから先にstatic import chainを投影し、lock mappingを証明してからruntimeを一度だけmaterializeする。
+
+```text
+selector roots:
+  ai/tests/test_cmee_v1a_i1sx_contracts.py
+  ai/tests/test_cmee_v1a_i1sx_vertical.py
+  ai/tests/test_cocolon_text_generation_core_boundary.py
+
+collection chain:
+  ai/tests/conftest.py
+  -> helpers.emlis_ai_fb172_migration
+  -> emlis_ai_* / emotion_submit_service imports
+
+root distributions exact5:
+  pytest==8.4.1
+  fastapi==0.140.0
+  firebase-admin==7.5.0
+  httpx==0.28.1
+  pydantic==2.13.4
+
+root import probes exact6:
+  pytest / fastapi / firebase_admin / google / httpx / pydantic
+```
+
+target-capable tracked lockは次のfull exact46 closureである。
+
+```text
+lock path = ai/configs/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_lock_v1.json
+Git blob = 0822fcb010985cd0d384f250a9e8a1fe16dc8fd4
+raw SHA-256 = 9bb2875541a6d959c1dca47cb5b96de5b0041ccf5288e849c469c15a8b310787
+logical SHA-256 = 801ba54efc0f6655238d14e7c153fb70b555801489aa8ba028515fc64d9c05f4
+wheel bundle manifest SHA-256 = 63f3915ccf57845dc0c4b5d14762207d23d1cb7a435a9de8411add8491ba6fc8
+installed distributions SHA-256 = 0e2e4b5ec3f3b1aef7fad4474af28d8eeea8fa7bec1a57a9cb7180fc81b80e42
+runtime = Python 3.12.13 / linux x86_64 / wheel-only
+reachable distribution closure = exact46
+```
+
+repo内wheelはexact0であり、materializerはcaller-supplied wheel directoryから`--no-index` installするだけなので、acquisitionを暗黙前提にしない。Packet Aは一時workspace内の`CMEE_LOCKED_WHEELHOUSE_ACQUISITION_COMMAND_V1`を次へ固定する。
+
+```text
+owner = Packet A dependency acquisition substep
+workspace = fresh mktemp directory outside repository
+lock input = verified full46 lock path/raw/logical hashes above
+requirements output = <workspace>/locked-requirements.txt
+wheelhouse output = <workspace>/wheelhouse
+network process count = exact1
+index = https://pypi.org/simple exact1
+extra index / credential / source distribution = 0 / 0 / 0
+
+requirements construction:
+  load_recovery_epoch002_dependency_lock_with_raw_sha256(lock_path)
+  validate raw hash + logical lock hash
+  write lock.pip_require_hashes_lines in stored order, LF terminated,
+    to the fresh temporary requirements path exact1
+
+acquisition OS command exact1:
+  python3.12 -I -B -m pip --isolated --disable-pip-version-check download
+    --no-deps
+    --only-binary=:all:
+    --require-hashes
+    --index-url=https://pypi.org/simple
+    --dest=<workspace>/wheelhouse
+    --requirement=<workspace>/locked-requirements.txt
+```
+
+download後、wheelhouse filename setがlock exact46と完全一致することを確認し、existing `validate_recovery_epoch002_dependency_lock(lock, wheel_directory=...)`でwheel SHA-256、RECORD、metadata、tagを全件検証し、wheel bundle manifest SHA-256 `63f3915ccf57845dc0c4b5d14762207d23d1cb7a435a9de8411add8491ba6fc8`を再計算する。extra／missing／sdist／hash mismatchは0。ここまでGREENの同じdirectoryだけを、既存`ai/tools/emlis_nls_v3_recovery_epoch002_formal_worker_bootstrap_preflight.py`の`materialize_recovery_epoch002_locked_runtime`へexact1渡す。install時networkは0、`--no-index --require-hashes --only-binary=:all:`を保持する。
+
+G4-B exact5 lock、unpinned `requirements.txt`、ad-hoc pip install、system interpreter fallbackを使わない。acquisitionまたはvalidationがnonclearなら別index／version／sdistへfallbackせず§22.1へ送る。一時requirements／wheelhouse／runtimeだけがPacket A cleanup allowlistであり、repo fileへcopy／commitしない。
+
+順序は、static selector/import projection → CMEE root exact5とtransitive exact46の一致 → lock hashes → locked requirements exact1 → wheel acquisition exact1 → wheelhouse exact46 validation → materialize exact1 → import exact6 smoke → conftest/plugin smoke → collect-only denominator freeze → focused development suiteである。既存G4-B admission metadataはlock/hash ownerとして再利用できるが、そのNLS-specific projectionをCMEE target projection evidenceとして流用しない。
+
+### 21.5 closed focused selectorsとdenominator
+
+current headにはIM03–IM06 focused nodeid exact0であるため、本書で既存contract test file内のclass exact1／method exact15を先に閉じる。
+
+```text
+ai/tests/test_cmee_v1a_i1sx_contracts.py::
+CMEESubjectiveMeaningPlannerIM03ThroughIM06ContractsTest::
+  test_im03_forward_carrier_v1_1_required_exact12_and_v1_0_runtime_rejected
+  test_im03_candidate_evidence_outcome_closed_types_and_full_core_identity
+  test_im03_exact12_mutations_bind_exact_one_target_delta_and_consequence
+  test_im03_mutation_target_absent_is_candidate_invalid_and_ambiguous_or_noop_is_implementation_red
+  test_im03_material_basis_provenance_exact_cover_and_weakest_tier
+  test_im03_full_required_difference_row_coverage_and_evidence_back_binding
+  test_im03_full_core_dedupe_preserves_distinct_provenance_tier_unknown_and_qualifier
+  test_im03_hard_valid_selection_and_all_invalid_closed_disposition
+  test_im03_sealed_trace_exact3_excludes_hard_invalid_and_recomputes_identity
+  test_im04_normal_reading_consequence_and_reception_partition_are_post_selection
+  test_im04_limited_outcome_builds_focused_affirmative_reception_without_reselection
+  test_im05_response_calls_sole_meaning_owner_once_and_carries_same_sealed_artifact
+  test_im05_composition_rederives_zero_and_rejects_schema_ref_identity_and_nonmutation_tamper
+  test_im05_tagged_projection_preserves_meaning_and_reception_visible_causal_trace
+  test_im06_contrastive_paraphrase_adjunct_synthetic_oracle_and_positive_exact_once_order
+```
+
+新規focused exact15、historical reconstructed focused exact32、cumulative development denominator expected exact47である。historical exact32は過去receiptを捏造せず、current nodeidから再構築したbaselineと分類する。full regression selectorは上記contract test、unchanged vertical test、unchanged core-boundary testのexact3 files。current static method count exact226へnew exact15を加えたexpected exact241とする。
+
+actual denominatorはfull46 runtime materialization後のcollect-only出力からfreezeし、expected exact47／exact241と一致させる。差があればformal attemptではなくpre-admission REDとして原因を直す。case削除、skip追加、denominator縮小、selectorの失敗case除外で一致させない。
+
+runnerは既存N3 exact16 identityを変更せず、same-family successor working identity exact17として`emlis_input_specific_meaning.py`だけをsource preimageへ追加する。approved exact6のbytes、test nodeids exact47、runtime lock identity、commandをIM06 GREEN時にfreezeする。
+
+### 21.6 defect owner change matrix
+
+| defect owner | required/allowed change | protected exact0 change |
+|---|---|---|
+| `PRODUCT_SOURCE_DEFECT` | product source exact1+を修正 | expected outcome、assertion、oracle、axes、denominator |
+| `TEST_IMPLEMENTATION_DEFECT` | test codeのmechanical defectだけ修正 | oracle、expected semantics、axes、denominator、product source |
+| `FIXTURE_COMPATIBILITY_DEFECT` | constructor／shape migrationだけ | semantic input projection、oracle、denominator |
+| `RUNTIME_READINESS_DEFECT` | approved full46 runtime closureだけ | source、test、fixture、oracle、selector |
+| `SELECTOR_OR_DENOMINATOR_DEFECT` | 本§21.5 approved selectorとのrunner実装不一致だけ | failing case removal、skip、denominator reduction、semantic axes |
+
+product assertion failure後にtest bytesだけを変えてnew working stateとすることは0。新test追加はIM06 freeze前かつ§21.5 exact15内だけ。追加contractが必要ならdesign/scope terminalへ戻し、暗黙にnodeidを増やさない。
+
+same source/test/runtime/command stateかつcause change 0ならrerun 0。approved causal ownerへsubstantive delta exact1+、protected criteria不変ならchanged-state verification exact1を行う。そのdesignated repair後に**同じnormalized mechanical defect**が再発した場合だけcurrent authorityをterminal closeする。異なるdefectまたはstrictly downstream defectはnew obligationとしてIM03–IM06内で継続する。通常development全体へR10.3のnumeric retry capを適用しない。
+
+### 21.7 revised executable order
+
+IM00–IM02はcurrent preimageに存在するhistorical implementationであり、新しいcompletion creditやrun allowanceへ変換しない。actual next implementation checkpointはIM03である。
+
+| IM | actual delta | completion |
+|---|---|---|
+| `IM03` | v1.1 exact12、candidate/evidence/outcome型、reason/trace、material provenance、mutation exact12、signature/loss/core/row/evidence identity、full coverage、selection/dominance/all-invalidをsole ownerへ実装 | §20 contract＋IM03 focused exact9 GREEN、source/test/runner identity同期 |
+| `IM04` | ReadingConsequence、derived IDs、normal Meaning-bound Reception 1..4、LIMITED FOCUSED exact1、private Stage1 additive record exact6＋`projection_seal_ref` exact1を実装 | IM04 focused exact2 GREEN。exact38 branch cardinality、ref closure、Reception backflow／reselection 0 |
+| `IM05` | response exact1 derivationとexact38 same-record carry、composition derive exact0、tagged projection identity、meaning／Reception visible traceを実接続 | IM05 focused exact3 GREEN。same records、projection tamper reject、public effect 0 |
+| `IM06` | contrastive/paraphrase/adjunct/synthetic oracle、positive exact-once order、runner exact17、cumulative exact47とfull exact241をdevelopment実行 | focused＋full GREEN、actual denominator／working identity／preimage freeze |
+| `IM07` | Packet Bのpre-admissionとformal machine evaluation | formal bundle exact1 result |
+| `IM08` | Ultra technical＋body prescreen | verdict seal exact1 |
+| `IM09` | Pro early language viability review | verdict seal exact1 |
+| `IM10` | Mash formal Product Read | verdict seal exact1、activationは別判断 |
+
+### 21.8 Packet B — single conditional IM07 authority
+
+Packet AのIM06 GREEN後、Mashのsingle Level 3 Packet B exact1に次のconditional sequenceを含められる。Gate stateとformal counterは内部で分けるが、承認操作を二重に要求しない。
+
+```text
+SINGLE_IM07_CONDITIONAL_AUTHORITY:
+  1 Rule 16 Gate A discovery
+  2 frozen範囲内で必要な場合だけGate B readiness recovery exact1
+  3 readiness PASS
+  4 IM06 baseline zero-drift
+  5 PRODUCT_IMPLEMENTATION_ID freeze
+  6 FORMAL_EVALUATION_BUNDLE_ID freeze
+  7 formal OS launch exact1
+
+admission failure:
+  formal attempt = 0
+  formal substate = not consumed
+
+formal OS launch atomic event:
+  launch request
+  + formal attempt 0 -> 1
+  + bundle FROZEN -> CONSUMED
+```
+
+Packet B外のnetwork/dependency、source/test/selector changeが必要ならGate Bでscope STOPする。formal failure後にrunnerだけ、visible bodyだけ、reviewだけを再実行しない。fresh correction authorityはcausal ownerのIM03–IM06 atomic unitから新bundleを作り直す。
+
+### 21.9 IM07 formal identity preimage and visible record
+
+本節は§21.8で未定義だった`PRODUCT_IMPLEMENTATION_ID`、`FORMAL_EVALUATION_BUNDLE_ID`とformal visible recordを閉じる。product source exact4、selector、denominator 47／241、oracle、Product Read axes exact12、meaning／Reception contractは変更しない。
+
+#### 21.9.1 canonical encodingとdomain-separated ID
+
+canonical encodingは既存`contracts.stage1_canonical_json_bytes()` exact1だけを使う。すなわちEnumは`.value`、dataclassは宣言field順のfield map、tuple／listはJSON array、mapping keyはstring、scalarは`None | str | int | bool`とし、`ensure_ascii=false`、key sort、compact separator、`allow_nan=false`、UTF-8、末尾LFなしである。formal record内のactual bytes fieldだけは`{"encoding":"base64","data":<RFC 4648 canonical base64>}`へlossless projectionしてから同じencoderへ渡す。別canonicalizer、Unicode正規化、platform newline変換、default stringificationは0。
+
+```text
+DOMAIN_HASH(domain, preimage) =
+  lowercase_hex(SHA256(UTF8(domain) + 0x00 + canonical_json(preimage)))
+
+PRODUCT_IMPLEMENTATION_DOMAIN =
+  "cocolon.cmee.stage1.product_implementation_id.v1"
+
+FORMAL_EVALUATION_BUNDLE_DOMAIN =
+  "cocolon.cmee.stage1.formal_evaluation_bundle_id.v1"
+
+PRODUCT_IMPLEMENTATION_ID =
+  "cmee-product-implementation-v1:"
+  + DOMAIN_HASH(PRODUCT_IMPLEMENTATION_DOMAIN, PRODUCT_IMPLEMENTATION_PREIMAGE)
+
+FORMAL_EVALUATION_BUNDLE_ID =
+  "cmee-formal-evaluation-bundle-v1:"
+  + DOMAIN_HASH(FORMAL_EVALUATION_BUNDLE_DOMAIN,
+                FORMAL_EVALUATION_BUNDLE_PREIMAGE)
+```
+
+arrayは本節のdeclared orderを保持し、path／hash／IDによる再sortは0。timestamp、session／workflow／job ID、一時absolute path、materialized runtime absolute path、branch display nameは両preimageへ入れない。
+
+#### 21.9.2 Product Implementation preimage
+
+```text
+PRODUCT_IMPLEMENTATION_PREIMAGE = {
+  "schema_version": PRODUCT_IMPLEMENTATION_DOMAIN,
+  "repository": "MassyuRed/mashos-api",
+  "ordered_product_source_bytes": [
+    {"path", "raw_sha256", "byte_count"}
+    exact4 in §21.2 order:
+      contracts.py
+      emlis_input_specific_meaning.py
+      emlis_stage1_response.py
+      emlis_stage1_composition.py
+  ]
+}
+```
+
+`raw_sha256`と`byte_count`はformal対象checkoutのactual raw bytesから再計算する。product source exact4の一byte変更はnew Product IDである。contract test、runner、design、ops workflowだけの変更はProduct IDを変えず、Formal Bundle IDを変える。
+
+#### 21.9.3 Formal Evaluation Bundle preimage
+
+```text
+FORMAL_EVALUATION_BUNDLE_PREIMAGE = {
+  "schema_version": FORMAL_EVALUATION_BUNDLE_DOMAIN,
+  "product_implementation_id": PRODUCT_IMPLEMENTATION_ID,
+
+  "authority_heads": {
+    "mashos_api": <formal target head exact40>,
+    "cocolon": <canonical design head exact40>
+  },
+
+  "canonical_design": {
+    "repository": "MassyuRed/Cocolon",
+    "path": <this exact final-design path>,
+    "raw_sha256": <actual design raw SHA-256>,
+    "byte_count": <actual design byte count>
+  },
+
+  "ordered_approved_source_bytes_exact6": [
+    {"path", "raw_sha256", "byte_count"} exact6 in §21.2 order
+  ],
+
+  "runner_successor_identity_exact17": {
+    "language_core_identity": <actual IM03 working identity>,
+    "runtime_integration_identity": <actual IM03 working identity>,
+    "language_payload_name_sha256_byte_count_exact17": <actual exact17>,
+    "runtime_payload_name_sha256_byte_count_exact17": <actual exact17>,
+    "runner_raw_sha256": <actual runner SHA-256>,
+    "runner_byte_count": <actual runner byte count>
+  },
+
+  "focused_selector": {
+    "ordered_nodeids_exact47": <unchanged exact47>,
+    "expected_denominator": 47,
+    "actual_collected_denominator": 47
+  },
+
+  "full_regression_selector": {
+    "ordered_paths_exact3": <unchanged exact3>,
+    "expected_denominator": 241,
+    "actual_collected_denominator": 241
+  },
+
+  "input_set": {
+    "ordered_exact8": <EXACT8 full fields and values in declared order>,
+    "case_order": ["SX-01", "SX-02", "SX-03", "SX-04",
+                   "SX-05", "SX-06", "SX-07", "SX-08"]
+  },
+
+  "runtime_lock_exact46": {
+    "path", "git_blob", "raw_sha256", "logical_sha256",
+    "wheel_bundle_manifest_sha256", "installed_distributions_sha256",
+    "runtime": "Python 3.12.13 / linux x86_64 / wheel-only",
+    "distribution_count": 46,
+    "ordered_distributions_exact46": <tracked lock array without reorder>
+  },
+
+  "formal_command": {
+    "working_directory": "ai",
+    "runtime_executable": "<CMEE_LOCKED_RUNTIME>/bin/python",
+    "environment_exact2": [
+      ["PYTHONDONTWRITEBYTECODE", "1"],
+      ["PYTEST_DISABLE_PLUGIN_AUTOLOAD", "1"]
+    ],
+    "argv_template": [
+      "tools/cmee_v1a_i1sx_candidate_run.py",
+      "--formal-im07",
+      "--expected-product-implementation-id", "<PRODUCT_IMPLEMENTATION_ID>",
+      "--expected-formal-evaluation-bundle-id",
+        "<FORMAL_EVALUATION_BUNDLE_ID>",
+      "--design-document-raw-sha256", "<CANONICAL_DESIGN_RAW_SHA256>",
+      "--design-document-byte-count", "<CANONICAL_DESIGN_BYTE_COUNT>",
+      "--body-full-output",
+        "<CMEE_PRIVATE_OUTPUT_ROOT>/IM07_FORMAL_ATTEMPT_01.json",
+      "--runtime-repo-head", "<MASHOS_API_AUTHORITY_HEAD>",
+      "--design-repo-head", "<COCOLON_AUTHORITY_HEAD>"
+    ]
+  },
+
+  "product_read_axes_exact12": <unchanged PRODUCT_READ_AXES>,
+  "machine_comparator": {
+    "schema_version": "cocolon.cmee.stage1.im07_machine_comparator.v1",
+    "product_predicate":
+      "formal v2 call graph identity and visible trace closure",
+    "required_case_count": 8,
+    "required_formal_trace_valid_count": 8,
+    "semantic_oracle_change": 0
+  },
+  "visible_record_schema": {
+    "private": "cocolon.cmee.stage1.im07_formal_private_record.v1",
+    "body_free": "cocolon.cmee.stage1.im07_formal_body_free_receipt.v1",
+    "trace": "cocolon.cmee.stage1.im07_visible_trace.v1"
+  }
+}
+```
+
+Bundle ID自身はpreimageへ含めない。actual launchのangle-bracket tokenは同bundleから得たactual IDs、heads、design identity、admitted private pathへexact substitutionするだけで、argument追加／削除／並替え、別executable、別environmentは0。`--im07-pre-admission`は同じactual bytesから両preimageとIDを再導出し、body-free `PASS / formal attempt 0 / bundle FROZEN`だけを返す。
+
+#### 21.9.4 direct-v2 formal executionとprivate visible record
+
+formal exact8は既存runnerのearly materializerと同じcurrent direct-v2 call graphだけを使う。各caseは次をdeclared orderでexact1回ずつ実行する。
+
+```text
+raw input -> GenerationRequest -> freeze_text_source
+-> build_final_stage1_grounded_observation_plan
+-> _planned_visible_source_ids -> _build_graph -> _build_experience_plan
+-> build_subjective_planning_inputs = phase_A
+-> project_subjective_meaning_plan = subjective_plan
+-> seal_stage1_projection = projection
+-> build_surface_composition_inputs = phase_B
+-> compose_stage1_from_projection = Stage1CompositionResult
+-> _adapt_v2_composed_units_to_realized_units
+```
+
+`MeaningExperienceEngine.generate()`、legacy `GenerationArtifactBundle`、second generation、meaning／Reception／composition再呼出し、monkeypatch、stored bodyからの再構築は0。formal captureはこのsame executionで得たactual structure／outcome、subjective plan、projection、composition result、selected normalized artifact、realized unitsのsame object／refだけをserializeする。
+
+```text
+FORMAL_PRIVATE_RECORD = {
+  schema_version = "cocolon.cmee.stage1.im07_formal_private_record.v1",
+  product_implementation_id,
+  formal_evaluation_bundle_id,
+  identity_preimages,
+  formal_attempt_count = 1,
+  bundle_state = "CONSUMED",
+  case_count = 8,
+  ordered_case_ids = SX-01..SX-08,
+  cases = FORMAL_PRIVATE_CASE exact8 in input order,
+  formal_output_set_sha256,
+  formal_result_id,
+  machine_invariant_clear_count,
+  machine_result = CLEAR | NONCLEAR,
+  product_read_axes = unchanged exact12,
+  product_read_evaluated = false,
+  private_body_full = true,
+  private_text_published = false,
+  production_effect = 0,
+  automatic_progression = false
+}
+
+FORMAL_PRIVATE_CASE = {
+  case_id,
+  input_private,
+  input_sha256,
+  outcome_type = SelectedEmlisProvisionalReading | LimitedMeaningOutcome,
+  outcome_identity = current branch-specific derived identity,
+
+  decision = {
+    input_specific_meaning_structure_body,
+    body_sha256
+  },
+
+  projection = {
+    subjective_plan_body,
+    stage1_projection_body,
+    projection_artifact_ref,
+    body_sha256
+  },
+
+  artifact = {
+    selected_rank,
+    internal_candidate_count,
+    ranked_candidate_count,
+    language_core_identity,
+    normalized_artifact,
+    realized_units,
+    candidate_text,
+    body_sha256
+  },
+
+  visible_trace = {
+    schema_version = "cocolon.cmee.stage1.im07_visible_trace.v1",
+    projection_id,
+    projection_artifact_ref,
+    projection_preimage_ref,
+    projection_seal_ref,
+    projection_branch,
+    tagged_projection_ref,
+    meaning_visible_causal_trace_rows,
+    reception_visible_causal_trace_rows,
+    realized_visible_units,
+    ordered_visible_unit_ids,
+    ordered_visible_text_sha256,
+    validated_visible_causal_trace_seal_ref
+  },
+
+  visible_trace_body_sha256,
+  actual_output_sha256,
+  formal_trace_valid,
+  machine_invariant,
+  case_record_sha256,
+  review_axes = unchanged exact12,
+  human_product_read = not evaluated
+}
+```
+
+decision、projection、artifact、visible trace、case、actual output、ordered output set、formal resultはそれぞれ`cocolon.cmee.stage1.im07.formal_*.v1`のclosed domainで§21.9.1の`DOMAIN_HASH`を使う。row／candidate／unitのsort、omit、補完は0。private fileはfresh staging regular file mode `0600`へcomplete bytesを書き、fsync、same-directory no-replace atomic publish、readback一致後だけbody-free receiptをstdoutへ出す。partial file、既存target overwrite、checkout内出力は0。
+
+#### 21.9.5 current-v2 comparatorとbody-free receipt
+
+各caseのmachine CLEARは、actual Japanese reached、Phase-A/B validated、subjective claim exact1+、`internal_candidate_count >= ranked_count`、ranked count 1..2、rank tuple `1..n`、selected rank 1、normal-form phase exact6、correctable defect exact0、normalization idempotent、required-duty exact coverage、current IM03 language/runtime identity一致、formal record identity closureがすべてtrueの場合だけである。旧N3 identity、legacy `_structural_trace_valid(EngineOutcome)`、new semantic oracleをformal comparatorへ使わない。
+
+public durable ownerへ保存できるbody-free receiptは、schema、両ID、attempt `1`、bundle `CONSUMED`、case order／count、各caseのoutcome／projection identity、component digest、trace／unit count、case digest、machine boolean／failure class、output set digest、formal result ID、aggregate resultとzero-effect fieldsだけである。private input、Japanese body、decision／projection／artifact／trace bodyはcommit、PR body、workflow logへ出さない。
+
+`machine_result=CLEAR`はProduct／Bundle ID再導出、private/body-free cross-digest、case exact8 order／cardinality、component／case／set／result digest、case machine invariant exact8の全成立時だけである。pre-launch identity／schema／zero-drift不一致はformal attempt 0。launch後の欠落、identity不一致、partial write、UNKNOWNはattempt 1のformal nonclearであり、same bundleの再launch、bodyだけの再生成、traceだけの補完は0。
+
+## 22. Verification, STOP, review, and final handoff
+
+### 22.1 pre-admission exclusive classifier exact1
+
+IM03–IM06のdevelopment／pre-admission eventは、formal attempt 0のまま次のexactly oneへ分類する。同じeventを二つのfailure、retry、counterへ重複計上しない。
+
+| class | 条件 | disposition |
+|---|---|---|
+| `DEVELOPMENT_RETURN` | causal ownerがPacket A内、effect known、protected contract／input／oracle／axes／denominator不変 | approved causal ownerを修正しchanged-state verification。numeric attempt cap 0 |
+| `DESIGN_OR_SCOPE_TERMINAL` | ownerがallowlist／projection外、新dependency／route／helper family、contract／meaning／oracle／denominator変更、approved effect上限増加が必要 | current workを閉じ、fresh design/scope authority待ち |
+| `EFFECT_STATE_TERMINAL` | launch／write／acquisition／irreversible effectがUNKNOWN、duplicate effectを排除不能 | effect再送0、current authority close |
+
+classifier不能または複数一致は`DEVELOPMENT_RETURN`へdefaultせず`DESIGN_OR_SCOPE_TERMINAL`とする。interpreter、import、conftest/plugin、collection 0、selector、denominator、command construction failureはformal attemptを消費しないが、自動的にdevelopmentへ戻すのではなくこのclassifierを通す。
+
+### 22.2 STOPの文書分類exact3
+
+新runtime enumを増やさず、authority terminalを文書上のexact3へ分ける。
+
+```text
+CURRENT_AUTHORITY_TERMINAL_CORRECTABLE
+  該当するcurrent development/formal/review/Product Read/effect authorityをclose
+  corrected implementationにはfresh Mash Level 3 authorityが必要
+
+DESIGN_OR_SCOPE_TERMINAL
+  current design/allowlist/effect envelopeでは進行不能
+  explicit design or scope changeが必要
+
+PROJECT_CANCELLED
+  Mashの明示cancelだけ
+```
+
+| event | classification |
+|---|---|
+| request-local accepted `LIMITED_*` | authority terminalではない。設計済みbounded product outcome |
+| hard-invalid candidate | authority terminalではない。§20.7のclosed boundaryで処理 |
+| allowlist内development RED | authority terminalではない。causal repairで継続 |
+| designated repair後のsame normalized mechanical defect再発 | `CURRENT_AUTHORITY_TERMINAL_CORRECTABLE` |
+| different／strictly downstream defect | new obligationとしてdevelopment継続 |
+| effect state UNKNOWN／duplicate effect riskを排除不能 | `CURRENT_AUTHORITY_TERMINAL_CORRECTABLE`。effect再送0、current authority close |
+| IM07 formal nonclear | `CURRENT_AUTHORITY_TERMINAL_CORRECTABLE` |
+| IM08／IM09 material defect | `CURRENT_AUTHORITY_TERMINAL_CORRECTABLE` |
+| IM10 non-PASS | `CURRENT_AUTHORITY_TERMINAL_CORRECTABLE` |
+| external AI、permission外path、新contract、effect上限超過 | `DESIGN_OR_SCOPE_TERMINAL` |
+| Mash explicit cancel | `PROJECT_CANCELLED` |
+
+formal／human defect後はcurrent authorityとresultをimmutable closeし、fresh correction authority → causal ownerのIM03–IM06 atomic unit → full development GREEN → new pre-admission → new IM07 bundle → new IM08／IM09 objectの順へ戻る。IM07だけ、runnerだけ、visible bodyだけ、reviewだけをやり直さない。
+
+```text
+HISTORICAL_COMMON_DEFECT_RETURN_COUNT = 2/2
+HISTORICAL_COUNTER_SCOPE = PRE_REVISION_STAGE1_COMMON_DEFECT_RETURN_ROUTE
+REVISED_IM03_THROUGH_IM10_ROUTE_INHERITS_OLD_COUNTER = false
+OLD_COUNTER_RESET = false
+OLD_COUNTER_REUSE = false
+```
+
+これは旧counterを消す／resetする処理ではなく、materially revised routeへ流用しないscope separationである。revised routeへautomatic correction countを新設しない。
+
+### 22.3 formal attemptとreview one-shot
+
+formal machine attempt消費は、pre-admission PASS後のOS launch request、attempt `0→1`、bundle `FROZEN→CONSUMED`のatomic eventだけである。launch前のNOT READY、collection 0、selector mismatch、runtime failureはattempt 0。launch済み結果がnonclearならattempt 1のままauthorityをcloseし、同じbundleを再送しない。
+
+IM08、IM09、IM10のone-shotはphysical read回数ではなくjudgment lifecycleへ適用する。
+
+```text
+REVIEW_ATTEMPT_PER_REVIEWER_PER_REVIEW_OBJECT = exact1
+INTRA_ATTEMPT_BODY_ACCESS_COUNT = uncounted
+INTRA_ATTEMPT_REREAD = allowed
+INTRA_ATTEMPT_CASE_COMPARISON = allowed
+INTRA_ATTEMPT_TRACE_RECHECK = allowed
+VERDICT_SEAL_COUNT = exact1
+POST_SEAL_VERDICT_REOPEN = 0
+POST_SEAL_BODY_CHANGE = 0
+POST_SEAL_REVIEW_RETRY = 0
+```
+
+`REVIEW_OBJECT_ID`はformal bundle ID、actual output set canonical bytes、visible trace、source/test/runtime identity、reviewer roleをdomain-separated hashしたderived identityである。同じbodyでもimplementation／bundleが変わればnew object、bodyやidentityが同じままlabel／sessionだけ変えてnew objectにすることは0。
+
+### 22.4 verification gates
+
+| gate | 必須入力 | PASS/CLEAR条件 | 代用禁止 |
+|---|---|---|---|
+| Development IM03–IM06 | Packet A、full46 runtime、focused exact47、full expected exact241、visible artifacts | actual collected denominator一致、全GREEN、identity zero drift | import-only、collection-only、test-only denominator shrink |
+| IM07 formal machine | Packet B frozen bundle | one OS launchのcomplete result exact1 | development GREENの流用 |
+| IM08 Ultra | same output set全文＋trace＋machine result | technical contractとbody viabilityのsealed CLEAR | machine CLEARだけ |
+| IM09 Pro | same output set全文 | early language viabilityのsealed CLEAR | Ultra CLEARだけ |
+| IM10 Mash | same output set全文 | formal Product Read verdict exact1 | machine／Ultra／Proだけ |
+
+machine testはsource、contract、identity、determinism、property、contrastive pair、paraphrase、non-material adjunct、synthetic oracle、visible causal traceを検証する。human reviewは同一input setの出力全体を読み、「actual specific object」「その差がwhole readingへ与える影響」「visible Emlis Reception」を入力ごとに回答できるかを判定する。`agency / unfinished / material`だけの共通語、quote＋generic predicate、counterpositionだけは不合格である。
+
+formal bundleはsource exact6 bytes、runner successor identity exact17、nodeids／denominator、input set、runtime lock exact46、command、expected axes、comparator、visible artifact schemaをfreezeする。formal後のtest、fixture、selector、denominator、oracle、body変更はsame objectの修正ではなく新correction routeである。
+
+### 22.5 durable checkpointとGitHub verification
+
+各stable checkpointは、authority lifecycle、performed／zero／unknown effects、last safe commit、changed paths、source/test/runtime identity、test denominator/result、remaining exact IM、non-reusable evidenceを既存ownerへbody-freeで記録する。新ledger familyを作らない。sessionが変わってもremote postverify済みcheckpointから再開し、同じeffectを再送しない。
+
+各GitHub writeは直前にbranch HEAD、target blob preimage、allowlistをfresh verifyし、fast-forward commit後にbranch HEAD、remote bytes、changed paths、PR headを再取得する。remote bytesがlocal intended bytesと一致しない、proposal deletionが未反映、permission外pathがある場合は成功と報告しない。history rewrite、force push、counter reset、secure-erasure claimは0。
+
+### 22.6 canonical finalization disposition
+
+本docs unitのcurrent-tree effectは次のexact5だけである。
+
+```text
+MODIFY exact4:
+  Cocolon_前提資料/designs/cmee/
+    Cocolon_CMEE_Stage1_Emlis_InputSpecificMeaningDecision_
+    KarenDesigned_FinalTechnicalDesignAndImplementationOrder_20260828.md
+  Cocolon_前提資料/designs/cmee/v1/00_read_first.md
+  Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md
+  Cocolon_前提資料/current_structure/04_cmee_current_structure.md
+
+DELETE current-tree exact1 after canonical equality verification:
+  Cocolon_前提資料/designs/cmee/
+    Cocolon_CMEE_Stage1_Emlis_InputSpecificMeaningDecision_
+    ImplementationVerificationBoundaryRevision_
+    UltraRequiredCorrectionsApplied_20260829.md
+
+STRUCTURE_MAP_DELTA = CMEE_AUTHORITY_ROUTING_ONLY
+RUNTIME_SOURCE_TEST_EFFECT = 0
+```
+
+proposalは正規設計書への統合後にcurrent treeから削除するが、Git commit historyで過去提案として復元可能である。parallel proposal、parallel final design、修正案ownerは0。本書のhashとroutingを同期した時点でtechnical handoffはexact0となる。
+
+```text
+FINAL_CANONICAL_STATUS = IMPLEMENTATION_READY
+CANONICAL_ADOPTION = ADOPTED_BY_MASH_CURRENT_REQUEST
+PROPOSAL_CURRENT_TREE = ABSENT_AFTER_COMMIT
+IMPLEMENTATION_EXECUTION = NOT_STARTED_IN_THIS_DOCS_UNIT
+NEXT_ACTUAL_CHECKPOINT = PACKET_A_FRESH_PREIMAGE_FREEZE_THEN_IM03
+PRODUCT_READ / ACTIVATION / I09 = 0 / 0 / 0
+AUTOMATIC_PROGRESSION = false
+```
+
+## 23. 参照した正典・現行資料
+
+- `Cocolon_前提資料/current_structure/00_three_core_and_cmee_read_first.md`
+- `Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md`
+- `Cocolon_前提資料/current_structure/04_cmee_current_structure.md`
+- `Cocolon_前提資料/designs/cmee/v1/karen_derived/00_read_first.md`
+- `Cocolon_前提資料/designs/cmee/v1/karen_derived/01_emlis_observation_and_reception.md`
+- `Cocolon_前提資料/designs/cmee/v1/00_read_first.md`
+- `Cocolon_前提資料/designs/cmee/v1/02_emlis_v1a_detailed_design.md`
+- `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md`
+- `Cocolon_前提資料/designs/cmee/Cocolon_CMEE_Stage1_RouteA_TypedJapaneseCaseFrameRealizerV2_UltraFinalTechnicalDesignAndImplementationOrder_20260827.md`
+- `Cocolon_前提資料/work_attitude_rules_for_karen/00_read_first.txt`および同entryが指定するcurrent rules・incident・output gate
+- `Cocolon_前提資料/system_context/00_read_first.md`（System Context v1 current owner PR #37から直接参照）
+- intermediate Pro-review-applied revision SHA-256 `0bc64a78c2ce092dec1ca86fb91050402745c00ffaf1c2b198d2b83f5f0e1a51`
+- earlier formal Pro product review source SHA-256 `7dbaf221244c840f376d49b978df4fdab375f1c4f7f7ff4cbcfc25be712d0cec`
+- delayed concatenated Pro review source `Pro華恋レビュー2.txt` SHA-256 `c1101d6ad20c7d9fc3ea6d2e03900667f457e842806348db33b7ae968665e53e`
+- Karen-Diary private structural knowledge（機能原理のみ参照。非公開内部過程の複製なし）
+
+Historical repository facts used for the preceding finalization:
+
+```text
+Cocolon PR #30 pre-write head = 307eb26c223a90b49b09a561cbd2cd393c680248
+mashos-api PR #3 head = 540ed76d9ae39b9fa6eafc4dbc028e50f52dc3df
+System Context then-current owner PR #37 head = d5de2bd8945544a44b4ef3d10136010f88ce23ad
+System Context canonical original direct read = USED
+System Context generated-output dependency = EXACT0
+```
+
+## 24. IM10後のsource-grounded realizable Reception expression補正（2026-09-04）
+
+本節はcurrent Work Stage 1のroot cause、contract、owner、実装順について§§19–§22よりfreshである。優先順位は次へ固定する。
+
+```text
+CURRENT_REALIZABLE_EXPRESSION_CONTRACT = §24
+PREVIOUS_IMPLEMENTATION_CONTRACT = §§19-§22
+HISTORICAL_PRE_IM10_DIAGNOSIS = §§1.1-§1.3
+HISTORICAL_IM_ROUTE = §21
+CONFLICT_PRECEDENCE = §24 > §§19-§22 > §17
+```
+
+### 24.1 current evidenceによる診断補正
+
+§§1.1–§1.3が退けたのは、meaning decisionを欠いたまま日本語realizerだけを主因とする設計である。この判断は履歴として保持する。IM00–IM09でmeaning decisionを実装した後、IM10 Product Readおよびrequired Human Reception Move 124件の追跡により、別のdownstream gapが確定した。
+
+```text
+CURRENT_COMMON_CAUSE = FINAL_STAGE1_HUMAN_RECEPTION_MOVE_PLAN_CONTENT_FLOW_COLLAPSE
+ROOT_CAPABILITY_GAP = SELECTED_MEANING_TO_GRAMMATICALLY_REALIZABLE_HUMAN_RECEPTION_EXPRESSION_CONTRACT_ABSENT
+```
+
+selected meaning、MeaningBoundReception、semantic projection、Move dutyは存在する。しかし、それらをactor／predicate／ordered arguments／case／polarity／modality／time／degree／scope／reference／morphologyを持つ発話可能expressionへ閉じ、actual Layer 2 segmentへbindするactive carrierが無い。このため、meaning選択後にもSentence Surfaceのgeneric followへcollapseする。本補正はmeaning ownerを置換せず、その下流を閉じる。
+
+### 24.2 current one-way contract
+
+```text
+selected input-specific meaning -> existing MeaningBoundReception
+or bounded LIMITED outcome -> existing BoundedLimitedReception
+  -> SourceGroundedRealizableReceptionExpressionV1 exact1 per selected plan Move
+  -> existing Human Reception Move consumes expression
+  -> Human Reception-authored visible Layer 2 segment
+  -> Sentence Surface arrangement only
+  -> independent Gate / final-body-only inverse / public mapping
+```
+
+expressionはrequest-local、Emlis-private、providerless、deterministicである。意味を再選択せず、Move act／style／temperatureからmeaningへ逆流せず、normal／LIMITED、Move family、ontologyを増やさない。第2 actual consumerが実証されるまでshared CMEE schemaへ昇格させない。
+
+### 24.3 expression and visible-binding fields
+
+`SourceGroundedRealizableReceptionExpressionV1`は最低限次をrequiredにする。
+
+- meaning outcome ref exact1、branch-specific reception binding ref exact1（NORMALはMove-function-matched MeaningBoundReceptionProposition exact1でSet refはprovenance only、LIMITEDはBoundedLimitedReception exact1でfake selected reading 0）、final Move ref。
+- source evidence refs、actor／subject／experiencer。
+- predicate／state／event／wish／relation、lexical head。
+- ordered arguments、semantic roles、required／optional、case／direction／relation endpoint、explicit／zero／omitted。
+- polarity／negation、modality／wish、time／aspect、degree／quantity、scope／qualifier。
+- EXPLICIT／COMPOSITE／ANAPHORIC、antecedent refと成立条件。
+- particles、inflection、nominalization、clause links、provenance。
+
+selected final plan Move集合とexpression集合はexact-coverし、その中のrequired Move全数を覆う。plan-owned optional Moveが存在する間はexpression exact1を持ち、許可済みrecoveryでMove自体が除外されるときだけ同時に除外する。missing、duplicate、foreign／unused、argument／morphology／reference／trace gapはnamed failureへfail closedする。成功recordへnullable failureを混ぜない。
+
+Human Receptionは同一realization passでcomplete private binding payloadから導出したbinding ref exact1、Human Reception-local scalar range、segment hash、expression refs、Move refs、ClauseFrame、SurfaceDerivationを持つ`ReceptionVisibleSegmentBindingV1`を発行する。各argumentはrequired／optionalと別にomission permission、zero realization condition refs、omission condition refsをidentity-bearing payloadへ保持し、選択されたrealizationが`EXPLICIT`であっても許可された代替条件を失わず、条件不成立の`ZERO`／`OMITTED`を拒否する。Sentence Surfaceはそれと別のnonserialized request-local placement tupleにbinding ref、line-local／body-global rangeを記録し、placementからHuman Reception bindingへexact1でjoinする。各expressionはsegmentへexact1以上到達する。一つの自然なsegmentが複数expression／Moveを担うmany-to-oneは許可する。
+
+### 24.4 current asset disposition
+
+| asset | disposition |
+|---|---|
+| input-specific meaning、MeaningBoundReception、BoundedLimitedReception | `ACTIVE_AND_RETAIN` |
+| semantic projection、visible trace、Grounded Situation View | `ACTIVE_AND_RETAIN` |
+| existing Opportunity／Depth／Move | `ACTIVE_AND_RETAIN` |
+| Human Reception clause realization | `ADAPT_AND_INHERIT_AS_SOLE_LAYER2_AUTHOR` |
+| Sentence Surface multi-Move layout | `ADAPT_AND_INHERIT_AS_ARRANGEMENT_ONLY` |
+| disabled case／argument／morphology／IRのpure field knowledge | `ADAPT_AND_INHERIT_INSIDE_HUMAN_RECEPTION` |
+| historical ResponseObjectExpressionのsource／reference field knowledge | `ADAPT_AND_INHERIT_WITHOUT_TYPE_OR_STORAGE_REVIVAL` |
+| Gate、body-only inverse、source／unknown／safety、composition validation-only | `ACTIVE_AND_RETAIN` |
+| old composer／selector／rank／linearizer、large NLS route、`compose_stage1_from_projection()` | `NOT_ADOPTED_DO_NOT_REVIVE` |
+| previous bounded focus selector method | `CONSUMED_TERMINAL_STOP_DO_NOT_RETRY_RENAME_OR_RECREATE` |
+| previous failures | `RETAIN_AS_TEST_OR_FAILURE_KNOWLEDGE` |
+
+### 24.5 source clause and privacy
+
+source clauseがpredicate、arguments、degree、relationを欠けなく保持する最小完全単位である場合、expression builderはprivate internal evidenceとして保持できる。ただしfinal本文へraw replay、quote、label replacement、fixed complete sentenceとして出力しない。body-full input、source span、lexical material、actual outputはGitHub、handoff、checkpoint、diagnostic、public metadataへ出さない。
+
+既存response schema、public API、DB、Supabase、RN、persistenceは変更しない。expressionはfinal Move identity／duty key読み取り後からHuman Reception realizationまでdeterministically再構築可能なprivate v1とする。request-local function argument／return valueでHuman ReceptionからSentence Surfaceの配置結果、compiler／adapterまでだけ運び、`GroundedSentencePlan`を含む既存schemaをbumpしない。Gate／body-only inverse／public mappingへexpression、binding、preauthored surfaceを渡さない。body-free metadataへlexical materialや本文を出さない。identity linkageはexisting identity-bearing ClauseFrame／semantic bindingへ置き、identity preimage外のsealだけで封印を主張しない。
+
+### 24.6 exclusive owners and active-path boundary
+
+Human ReceptionだけがLayer 2 semantic clauseとvisible segmentをauthorする。Sentence Surfaceはpreauthored surfaceの配置、結合、句読点、文境界、body parserだけを行い、generic follow、generic empathy、fixed close、Move actからのsemantic content、second Layer 2 bodyを作らない。Human Reception-local rangeはHuman Reception-authored source surfaceの検証に使う。Sentence Surfaceは別のrequest-local placement tupleでbinding ref、line-local／body-global rangeを分離し、actual prefix／separator／line startのscalar数だけ加えてremapし、Human Reception-local／final line-local／body-globalの三coordinateのslice hashを検証する。adapterはplacementのfinal line-local rangeをunit bindingへ使い、Human Reception-local rangeはsource surface、body-global rangeは完成bodyとの一致検証にのみ用い、whole-line bindingを作らない。final pathでpreauthored Human Reception surfaceが無ければfallbackせず停止する。
+
+各recovery candidateはactive Move集合、effective reference mode、argument realizationをexpression発行前に確定し、candidate固有のcomplete payloadからexpression identityをderiveする。同一candidateのsecond compiler validationは同じfinal Move keyとexpression identityを再現し、Human Receptionのplan-only replayは同じsurfaceを再現する。optional Move除外またはEXPLICIT／ZERO／OMITTED変更時はcandidate単位でMove集合とidentityを再deriveし、発行済みexpressionへのlate mutationと別candidate sidecarの混在を禁止する。Human Reception forward入口は`realize_source_grounded_human_reception(...) -> GroundedHumanReceptionSurface`、Sentence Surface入口は`realize_grounded_sentence_plan_with_human_reception(..., human_reception_surface=...) -> (GroundedSurfaceResult, tuple[SentenceSurfacePlacement, ...])`とし、compiler candidate tupleがadapterへsurface／binding／placementを同時に渡す。adapter検証後にそのcarrierを破棄し、Gateとbody-only inverseへ渡さない。Gateの現行`realize_grounded_human_follow_text(...)`はHuman Receptionの`replay_source_grounded_human_reception_from_plan(...)`と同一final authorを通じてactual completed-body lineを独立再現／exact比較する。projection-only値を可視化しplan-only replayで再現できない場合はnamed failureで停止する。forward metadataを正解またはverification oracleにせず、現行Gate／body-only inverseの責任／判定項目／閾値を変更しない。
+
+shared Human Reception／Sentence Surfaceのpublic base routeは不変とし、新挙動をcurrent final Stage 1 grounded projection versionへ限定する。disabled CMEE candidateを`emlis_ai_reply_service.py`、core registry、APIまたはproductionへ接続しない。
+
+### 24.7 execution, success, and STOP
+
+実装順はcanonical 02 §36および06 §87をsole detail ownerとする。Phase 1 designだけでは完了せず、同じunitでactive candidateのactual Layer 2、tests、canonical100、body-full pre-screen、GitHub checkpoint、handoff、System Context final refsまで閉じる。
+
+```text
+CANONICAL100_DIRECT = 100/100_REQUIRED
+REQUIRED_MOVES = 124/124_REQUIRED
+OUTER = GENERATED_68 / UNAVAILABLE_32_REQUIRED_UNCHANGED
+HUMAN_RECEPTION_FINAL_LAYER2_AUTHOR = exact1
+SENTENCE_SURFACE_LAYER2_CONTENT_AUTHOR = exact0
+EXTERNAL_GENERATIVE_AI / PROVIDER / NETWORK_INFERENCE / FALLBACK = 0 / 0 / 0 / 0
+```
+
+華恋はMash提示前にcanonical100 actual body全文をprivate boundary内で読む。machine GREEN、schema、trace、test、designはProduct Readを代替しない。成功時も`IMPLEMENTED_NOT_ACCEPTED`、`candidate_ready=false`、product／technical credit 0であり、`MASH_ROUND0_PRODUCT_READ_READY=true`のみを次境界とする。問い、Layer 3、Piece、Analysis、production、merge、cutoverへ自動進行しない。
+
+providerless current routeでlossless realization不能、permission外effect、新public contract、外部AIが必要と確定した場合は、last safe checkpointと残存gapをbody-freeで固定してscope terminal STOPする。同じfocus／template／helper方針をrenameして再試行しない。
+
+### 24.8 Phase 1 checkpoint
+
+```text
+CHECKPOINT_ID = CMEE_REALIZABLE_RECEPTION_EXPRESSION_PHASE1_CANONICAL_20260904_V1
+AUTHORITY = FRESH_MASH_LEVEL3_CMEE_WORK_STAGE1_REALIZABLE_RECEPTION_EXPRESSION_CANONICAL_INTEGRATION_AND_HUMAN_RECEPTION_BODY_CLOSURE_20260904
+PARENT_COCOLON_HEAD = 97b25c146ad41f87d5859e450e48face9de65ea0
+PHASE = 1_CANONICAL_INTEGRATION
+STATE = DESIGNED_NOT_IMPLEMENTED
+COMPLETED = RULES_READ_FRESH_ADMISSION_FIT_GAP_OWNER_CONTRACT
+NOT_COMPLETED = RUNTIME_SOURCE_TEST_BODY_PRESCREEN_SYSTEM_CONTEXT_FINAL_REFS
+CHANGED_PATHS = EXISTING_CANONICAL_EXACT4
+TESTS_RUN = GIT_DIFF_CHECK_AND_AGGREGATE_DESIGN_REVIEW
+TESTS_NOT_RUN = RUNTIME_SOURCE_TESTS_CANONICAL100_BODY_PRESCREEN
+PRIVATE_BODY_PUBLICATION = 0
+PRODUCT / TECHNICAL CREDIT = 0 / 0
+NEXT_EXACT_ACTION = FINAL_MOVE_TO_EXPRESSION_EXACT_JOIN_THEN_HUMAN_RECEPTION_SOLE_BODY_AUTHORING
+AUTOMATIC_PROGRESSION = false
+```
+
+## 25. Work Stage 1 terminal disposition and fresh Mash owner decision（2026-09-04）
+
+本節はcurrent lifecycle、feasibility、product readinessについて§24よりfreshである。§24は採択済みdesign historyとして保持するが、§24.7のsuccess routeおよび§24.8のimplementation next actionはcurrentではない。
+
+canonical100 full-body確認で、Layer 1のprospective actionとLayer 2のperformed／nonfutureが同じaction nucleusを所有し、relation、supportまたはdownstream scopeへ分離できないことが確定した。evidence aggregateはcanonical 02 §37、constraint triangleとruntime restoration receiptはcanonical 06 §88をsole detail ownerとする。
+
+```text
+CONFLICT_PRECEDENCE = §25 > §24
+CURRENT_ROUTE = SCOPE_TERMINAL_STOP
+CURRENT_PRODUCT_OWNER_ADOPTION_STATE = IMPLEMENTED_NOT_ACCEPTED
+CANDIDATE_RETAINED = false
+CANDIDATE_READY = false
+MASH_ROUND0_PRODUCT_READ_READY = false
+PRODUCT / TECHNICAL CREDIT = 0 / 0
+PUBLIC PRODUCT ROUTE / API / DB / SUPABASE / RN / PERSISTENCE / PRODUCTION / CUTOVER / MERGE EFFECT = 0
+NEXT_REQUIRED_ACTION = FRESH_MASH_DECISION_EXACT1
+AUTOMATIC_PROGRESSION = false
+```
+
+fresh Mash decisionは次のexact2からexact1を選ぶ。
+
+- `RELAX_LAYER1_BYTE_PARITY_AND_ALIGN_SAME_NUCLEUS_STATUS`
+- `PRESERVE_LAYER1_BYTE_PARITY_AND_AUTHORIZE_UPSTREAM_SPLIT_OWNER`
+
+前者はLayer 1 visible product conditionの変更を、後者はprospective contentとperformed actionを別nucleusへbindするupstream meaning／plan owner contractの変更を要する。fresh decisionがowner／product conditionを再承認するまで、runtime再実装、Human Reception／Gate局所修正、別method、問い、Layer 3、productionまたはmergeへ進まない。
+
+
+## 26. Approved same-nucleus status alignment（2026-09-04）
+
+Mash selected option 1 under `FRESH_MASH_LEVEL3_CMEE_STAGE1_SAME_NUCLEUS_STATUS_ALIGNMENT_WITH_LAYER1_PARITY_RELAXATION_20260904`. §25 remains predecessor terminal history. Current details are canonical v1/02 §38, v1/06 §89 and v1/05; no duplicate contract is introduced here. The upstream existing owner may correct source-grounded status/time/modality before meaning sealing and downstream expression construction. The original Layer1 byte freeze and meaning non-change clause are superseded only for that correction. No separate owner split, new meaning categories or arbitrary reselection is allowed. The rollback means §24 reception-expression implementation must be rebuilt and verified in the same unit; it is not already complete.
+
+Current execution is `BLOCKED_AVAILABILITY_CONSTRAINT_UNFINISHED`: source-faithful removal of unsupported sensation changes the unchanged outer body verdict, conflicting with required per-input 68/32 parity. See canonical 06 §89 and the existing runtime handoff. The reliable all100 probe was read in full and was NOT_CLEAR; latest source verification and quality repair remain incomplete. No acceptance, Product Read readiness or production effect follows.
+
+Current state superseding the preceding boundary checkpoint: `IN_PROGRESS_APPROVED_SOURCE_FIDELITY_EXCEPTION`. Mash approved only UNAVAILABLE→GENERATED caused by removal of unsupported meaning under unchanged strict checks. Canonical 02 §38 / 06 §89 own the exception and continued same-unit correction; all100 CLEAR and product readiness remain pending.
+
+
+Latest checkpoint is unfinished: direct100, required Move/expression/binding124, outer73/27, with root all100 full reading NOT_CLEAR. The approved source-fidelity availability exception remains active. Canonical 02 §38 / 06 §89 and the existing runtime handoff record the selected subjective-content/replay contract gap and the minimal proposed adjustment that has not been implemented. Source status/uncertainty and bounded grammar corrections are retained; final product-quality closure remains incomplete. Public reply/national-system storage and dispatch, common persisted schemas, Piece/Analysis, production and merge are unchanged; no readiness/adoption credit is awarded.
+
+## 2026-10-14 u253 — 承認済み限定変更
+
+Mashが「記録した限定変更で実装を進めてよろしいですか」に「進めていいよ」と明示承認したため、`EMLIS_APPRAISAL_COMPONENT_MEANING_20261014` は APPROVED_FOR_BOUNDED_IMPLEMENTATION。u252／weekly §5.6.2のNOT_APPROVEDは承認前の履歴であり、同じ実装を再承認待ちへ戻さない。承認は商品合格、配置、公開境界変更の承認ではない。
+
+初回範囲は原入力の明示満足／納得とその対象、および同時入力された本人の明示実行行動。既存の主体scope・行為statusを再利用し、他者、引用、予定、推量、条件、非実行、受益／使役受身、未完節をこの新経路へ採らない。評価を行為完了・良い変化・努力・成長へ昇格させない。
+
+### 限定的に更新する内部契約
+
+1. **§5.2.1：独立と同一対象の競合。** 原入力のsource-owned `ABOUT_TARGET` が立証され、他の必須内容も許可された本人の実行行動である場合だけ、根拠関係でつながる組ごとに既存比較を行う。異なる非接続対象のqualifierを入力全体の不一致へ変換しない。同じ対象／scopeの異なるqualifier、組内の不足・真の競合は従来どおり保持する。組間の因果・対比・同時性・「無関係と確定」を生成しない。
+2. **§8.2〜§8.4：全requiredを所有する全体exact1。** 組内のsource-connected configuration条件は保持する。各組の既存seedを一つのwhole candidateへ集約し、全bundleを欠落なく所有する。複数組のprivate selection／structureは`1.2`で、primary refはwhole candidate、supporting facetは空。単独primaryにするため感情・行動・欄名・入力順を優先しない。selected readingとsealed ReadingConsequenceは全体で各exact1、既存の組数上限とhard validityは維持する。
+3. **IM03差分証明。** 複数組では必須差分がexact1の所有bundleとそのconfigurationに属することを照合し、同じ組のsignatureでmutationの影響を証明する。別組のfactが残るだけで元対象のfact削除をnoopへ隠さない。foreign／重複owner／所有外configurationを拒否し、全体readingを増やさずnoop検査も弱めない。
+4. **§9.3：private versioned content arm。** `EmlisEvaluatedExperienceAppraisalContent`（`cocolon.cmee.emlis.evaluated_experience_appraisal.v1`）を追加する。旧`EmlisAppraisalContent`の6field・canonical bytesを変えず、対象／評価のexact2 bindingと焦点relation、target kind、満足／納得、肯否、評価時点、継続、明示できた形、程度を保持する。protected bindingsはexact0。manifestはv2／logical70。新型を根拠対を失う旧coalescenceへ混ぜない。
+5. **sourceから作者までの所有。** opt-inのsituation viewは`1.1`で、許可relation refsをPlanと独立照合する。source codeは既存qualifier経路で運び、compositionで選択済みconfiguration・endpointを結びつける。Human Receptionが唯一の作者で、本文inverseは作者を呼び直さず対象・評価・時点等を照合する。再ID付与で内容を書き換えてもsourceと不一致なら拒否する。これらの技術成立は§9.2の完成を意味しない。
+
+公開API／DTO／DB／RN、source許可、課金、privacy、外部AI禁止は不変。新service・新production file・新製品依存・migration・deploy・mergeはない。保存済みOBSERVATIONの本文は再生成せず読む。旧版で途中まで保存されたMEANING_UPDATE checkpointを新版で再試行する互換は未保証であり、保存済み本文read成功と混同しない。
+
+状態は BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。対象・本人評価・肯否・時点・継続・程度を意味から本文へ保持できたが、現在のReceptionは評価命題の再表現に留まり、§9.2の「別の単純化されたobjectと区別して何として受け取ったか」を閉じていない。分類名と「受け取りました」を加えたことを商品品質の完成へ換算しない。
+
+検証・未完了・再開位置は正本06／[API handoff u253](https://github.com/MassyuRed/mashos-api/blob/agent/cmee-v1a-i1sx-source-explicit-20260815/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md)、latest weekly20261010 §5.6.3に同期する。
+
+
+### u254補足 — 評価の撤回と保存済み意味の再開（2026-10-14 JST）
+
+承認済み明示評価の限定変更に伴う整合修正。唯一の原文全文に一致する撤回は対象＋評価の両端へ適用し、部分引用や重複原文は保留する。評価のみを撤回した対象はfact/pastのままObservationへ残し、独立inverseでも現在感覚化を拒否する。
+
+保存済み意味はIDの比較を緩めず、既知のpre-appraisal投影を同じsourceから再導出し、旧checkpoint又は真正な旧質問のcanonical照合が成立する場合だけ再開する。旧Q2質問への新しい回答は新source prefixの意味checkpointを作る。本文と保存effective_plan_refは同じ選択済みPlanを使う。Q2の現行appraisalも既存thread realizerへ同じPrepared Planを渡す。private互換flagは公開DTO/意味checkpoint schemaへ追加しない。作者の追加や新エンジンではない。
+
+appraisal内容型v1・whole meaningの契約は不変。満足から経験全体のよさ、まだ未納得から時間のずれを導く候補は不採用。§9.2/9.4の経験としての受け取り内容は未完成。評価の肯否訂正と対象のみ撤回した評価の保持も残る。検証の実範囲と全file責務差分はcurrent01/04・06・API u254参照。PRODUCT_NOT_CLEARを維持する。
+
+
+### u260補足 — 確認された評価語の意味と検証責務
+
+2026-10-14、Mashは「満足＝本人にとって何かが満たされた感覚」「納得＝理由や意味が本人の理解の中で筋の通るものになった状態」の区別を確認した。思想資料§12.10がその記録。既存承認内でNORMAL評価の本文へ反映するが、§9.2/9.4の完成承認ではない。対象・本人・肯否・時点・継続・程度を保持し、程度付き納得を「少し／とても筋が通る」へ置き換えない。今回の内容型propertyは既存評価種別と肯否の四区分を導く範囲であり、新しいReadingConsequenceや意味schemaではない。
+
+u253の「本文inverseは作者を呼び直さず」は独立した節readerの責務を指す。whole `evaluate_grounded_surface_body_inverse` は§24のplan-only replayを別途保持し、同一作者を通す。この区別をu260検査で明示した。作者を失敗させる検査は実節の `read_source_owned_discourse` へ限定し、whole inverseのreplayチェックは除去していない。保存済み本文のGET/start非再生成とは別の責務である。
+
+実装・実測・残件は06／API handoff u260。初回一体修正未完了・PRODUCT_NOT_CLEARを継続する。
+
+### u261 提案 — 評価と明示的につながる未成立事実（2026-10-14 JST）
+
+`EMLIS_APPRAISAL_CONNECTED_UNFINISHED_CONTEXT_20261014 = PROPOSED_NOT_APPROVED`。u253の既存承認を取り消さず、その初回範囲を未承認のまま広げない。Rule18 §11.3の契約/範囲追加に当たるため、Mashへ今回の追加だけを提示する。実測・変更owner・検証/停止条件の詳細はAPI handoff u261。製品コード変更・本文改善0、STRUCTURE_MAP_DELTA_NONE。
+
+合成例「結論は出ていないが、考えを言葉にできて満足した」では、認識器が満足を独立評価にできず、未成立事実をuncertaintyへ変える。正確なsource範囲で三点とCONTRAST/ABOUT_TARGETを仮に与えても、現行component条件と評価qualifierの脱落により、行動欄なしは構造不足、独立行動ありは競合scopeでともに候補0/LIMITEDだった。source parserの採用修正や全connected経路の不能を証明した診断ではない。
+
+限定案は、原入力の肯定・無程度の満足とその対象に、同一文の明示対比が結ぶ完全な未成立事実exact1を追加する。本人に関するsourceであること、三点の原文範囲、内側の対象→評価、外側の未成立→評価を選択前に立証する。別の必須内容は従来の本人実行行動だけとし、任意のstateや非接続感情を許可しない。未成立factを構文未完・知識不足・本人の不能へ変えず、満足を完了/成功/進歩へ昇格させない。
+
+内側の評価pairと `EmlisEvaluatedExperienceAppraisalContent v1` のexact2/protected0は不変。三点を既存の接続configurationと一つのwhole readingへ渡し、relation-role qualifierの種別/程度/時点/依存を保持する。通常の `EmlisAppraisalContent` の非集約責務・三点のbasis・焦点対比・既存qualifierから受け取りを導く。ReadingConsequenceへReception文言を入れず、作者だけが未選択の第三命題を追加しない。既存型へのlossless投影が成立しなければ、新schema/registryへ自動拡張せず停止する。
+
+内容の目標は、結論の未成立を保ち、言葉にできた対象へ限った充足として経験を受け取ること。結論/言語化の達成目標や同時性を発明しない。第三命題削除・評価対象変更・肯否/種別変更で意味と本文への寄与を検証する。肯定満足用の読みを否定・未納得へ流用しない。旧checkpoint、保存本文非再生成、必要なSQL/RN互換も同じ単位で確認する。§9.2/9.4、単一作者/独立reader、公開API/DB/RN、外部AI禁止、品質/受入条件は不変。
+
+追加費用/外部service/本人操作は0を予定。実装工数・完成日は未確定。最初の実生成でも定義展開/関係反復に留まる場合は完成扱いせず、同じ修辞調整を反復しない。PRODUCT_NOT_CLEAR・初回単位未完了を維持する。
+
+### u262 承認 — 評価と明示的につながる未成立事実（2026-10-15 JST）
+
+2026-10-15 06:17 JST、Mashがu261の「評価と明示的につながる未成立の事実一つまで読み取る範囲を広げる」限定変更に「うん、進めて」と回答した。`EMLIS_APPRAISAL_CONNECTED_UNFINISHED_CONTEXT_20261014 = APPROVED_FOR_BOUNDED_IMPLEMENTATION`。u261のPROPOSED_NOT_APPROVEDは承認前の履歴となる。u253承認・満足/納得の意味確認も継続し、承認を取り直さない。
+
+初回実装は、同一文の明示対比により結ばれた未成立fact exact1（present、negative）、本人の実行済み対象event（past、fact）、肯定・無程度の満足（past又はpresent）のexact3に限定する。三つのsource範囲とABOUT_TARGET＋CONTRASTを選択前に所有し、別の独立requiredは本人実行行動だけとする。否定満足・納得・程度付き評価・任意の隣接stateへ今回の三点読みを広げない。
+
+u261案どおり、既存通常`EmlisAppraisalContent`で三binding・protected0・焦点対比を保持する。exact2の評価内容型・schema・registryを変更しない。選択済みconfigurationと既存role qualifierから内容を導き、Human Receptionを唯一の作者とする。独立readerは三点・対象・肯否・時点・対比を照合し、whole inverseのplan-only replayも保持する。ReadingConsequenceへReception文言を入れない。
+
+入力に明示された未成立の点と対象へ向く充足を区別することが内容目標である。現在の未成立を過去の満足時点へ移し、同時性を足す表現は採らない。達成目標・成功・進歩・将来解決を発明しない。source/body両側の片側削除・対象/肯否/種別/時点対照、旧checkpointと保存後非再生成・必要なSQL/RN確認を同じ単位で扱う。新engine/checker・公開API/DB/RN・外部AI・製品依存・deploy/mergeなし。
+
+既存7ownerの限定実装後、評価187 PASS・application54 PASS・identity1 PASS、合成4本文のSQL保存／NoAuthor restart GET/start／RN再表示、旧checkpoint2件の厳密保持を確認した。途中のapplication回帰とqualifier不一致も修正し、実測と未達は06／API handoff u262へ記録する。第三命題が充足の範囲を限定する内容差はあるが、説明的な語義展開が残る。実装反映版はAPI `da6ee56beba26bbf0d89c734230f363ba794a9b8`（PR3）。対応する設計・地図・weekly差分は本commit（PR30）に収録する。両PRはDraft、未配置。今回CI成功は未確認で、local検査と区別する。**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了・0/3・candidate_ready=false・automatic_progression=false・未配置**を維持し、§9.2/9.4と商品受入れの条件を弱めない。
+
+
+### u263 提案 — 同一文に明示された満足理由exact1（2026-10-15 JST）
+
+**PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR。製品変更・本文改善0。** u253/u262の承認は継続する。実測7合成入力の全本文と詳細案はAPI既存handoff u263、進行記録は06 u263、weekly§5.6.13。同一文の理由＋対象＋満足がgeneric changeへ縮退し、行動欄ありは候補0/LIMITED、なしは候補1/NORMALでも『その変化を感じています。』だけだった。内部NORMALを内容成立へ変換しない。
+
+推奨追加は、本人の同一文・明示理由exact1・肯定無程度満足・既存実行済み対象pairへ限定する。例は `必要な資料を探しやすくなったので、資料を分類したことに満足した。`。二文目『からだ』の照応、目的→達成、二つの理由、他者/引用/推量、否定/程度付き満足・納得、未成立factと併せた四点は対象外。本人が記した理由を使い、分類→探しやすさの客観因果や唯一の基準を加えない。
+
+既存source-explicit cause候補と文法は再利用候補だが、現行scopeはcauseを運べない。Foreground exact4/ABOUT_TARGETを変更せず、評価理由に限るversioned private scope分岐を加え、対象→評価ABOUT_TARGETと理由→評価SOURCE_EXPLICIT_CAUSEの二項configurationを一つのwhole readingへ保持する。private schema/validator変更の必要性を隠さず、公開API/DB/RN schemaは変更しない。既存型に原因を別関係として偽装しない。旧意味/checkpoint・保存非再生成・単一作者/独立readerを保持する。
+
+可視内容の目標は、今回の満足が本人の述べた具体的変化を拠り所にしていることを受け取れるようにすること。理由削除・差替えで内容が変わり、目的・別評価・他者・推量を誤接続しないことを実生成で確認する。理由の引用＋固定句に留まる場合は完成とせず、同じ修辞の反復を打ち切る。新engine/checker/service・外部AI・依存・配置・DB変更は追加しない。実装工数/完成日は未確定。Rule18 §11.3に基づき、この追加のみ承認対象とする。新registry等が必要と判明した場合は追加前に止める。STRUCTURE_MAP_DELTA_NONE、初回単位未完了・0/3。
+
+初回理由scopeの補足: 理由自体も本人が現実の状態/変化として明示した肯定fact（過去又は現在）exact1へ限定する。条件・予定・願望・理由関係の否定は除外する。既存の対象/評価pairとは意味型を再利用する意味であり、理由を含む文全体を現在のparserが認識済みという主張ではない。理由込みのsource認識修正をこの提案へ含める。
+
+
+## u264 — 本人の明示理由を満足の対象へ結ぶ限定実装（2026-10-15 JST）
+
+Mashがu263のRule18 §11.3確認へ「進めていいよ」と承認した。`EMLIS_APPRAISAL_EXPLICIT_REASON_20261015 = APPROVED_FOR_BOUNDED_IMPLEMENTATION`。同一文に本人が肯定factとして明示した理由exact1、実行済み対象、肯定・無程度の満足（過去又は現在）を結ぶ限定追加を実装した。u253/u262承認も継続する。
+
+理由の接続は同一文の「ので／から」。初期語形は「[目的語を]探し／使い等＋やすくなった／やすくなっている／やすかった／やすい」と、見た目・気持ち・頭の中・内容・配置・机の上の「すっきり／はっきり＋した／している」。目的語省略は探し・使い・読み・見つけ・取り出しの有限形に限定する。明示SELFの接頭を扱い、先行他者topicからの本人への切替は理由節の始点で必要。全ての日本語理由文を認識する実装ではない。否定・条件・予定・願望の理由、他者・引用・推量、否定／程度付き満足、納得、理由複数、二文目「からだ」の照応、未成立factとの四点併合は今回の理由scopeへ入れない。
+
+理由→満足は既存source-explicit `user_stated_cause`、対象→満足は既存 `evaluation_about_event` で保持する。private `EmlisThreadScopeRelationKind.SATISFACTION_REASON` を追加し、該当する `SourceConnectedScopeRelation` と `RelationDirectionRow` だけをschema1.1で識別する。既存ABOUT_TARGETは1.0、`ForegroundScopeRelationKind` exact4は不変。三端点のSELF・肯否・時点・modality・kind・同一証拠、二関係の証拠と方向、exact3／incident exact2をsource/carried両境界で検証する。一般causeをscopeへ昇格せず、ABOUTやcontrastへ偽装しない。
+
+選択されたwhole readingの二関係・三bindingから、通常 `EmlisAppraisalContent` の `MATERIAL_WEIGHT / RECEIVE_AS_MATERIAL`、appraised exact3／protected0を導出する。既存exact2評価内容型は不変。唯一のHuman Reception作者が本人の満足の拠り所を対象とともに文章化し、独立readerが三役割・本文・時点・選択binding・focal relationを再照合する。「分類が探しやすさを生んだ」という客観因果、唯一／最重要の理由、目的達成、成功・成長は補わない。別欄の独立行動はObservationに保持し、今回のReceptionへ混ぜない。
+
+新規prepareでは新しい意味からcheckpointを作る。既存checkpoint又は既発行質問の厳密再検証時だけ、今回の理由分解を無効にした旧投影を先に試し、全checkpoint同一を要求する。旧appraisal全体の抑制へ直行せず、同じ入力にある従来の評価を保持する。Q1の原本文経路もこの準備済み旧planを使う。未変更u263のQ3四件・別欄の既存評価併存一件・Q1一件で完全checkpoint同一を確認し、そのうち五件の旧本文／旧停止も一致した。既存historical fixtureを改変せず、外国checkpointは拒否する。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回単位未完了。** 正式商品受入れ0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。今回の理由欠落改善を§9.2/9.4全体の完成へ換算しない。
+
+実測・途中失敗・旧保存互換は06／API handoff u264、actual owner配置は01A末尾u264。u263の未承認案を今回の限定承認へ進めたが、今回除外した意味は引き続き未実装。
+
+Observationに「満足した」が二度現れる説明的反復、現在形の「入力した時点での」という重い表現は残る。有限語形以外の理由や今回除外した意味契約は未実装。2 received＋2評価の初回gap、既存共有17失敗、same100、本人実機、正式Product Readも残る。新しい意味契約へ黙って広げず、次は今回の限定改善を10/17確認点へ反映し、既存の初回一体単位・受け取り内容の残件へ戻る。10/31・12/18とPiece/Analysis主枠は維持する。
+
+
+### u265 — 同一欄の本人received文に続く評価の読み落としを修正（2026-10-15 JST）
+
+u253の既存評価の承認範囲で、同一欄の先頭にある本人のreceived event＋reaction一文に続く、理由／未成立contextを伴わない明示評価の欠落を修正した。u264の理由契約を広げる変更ではない。全体01・全file地図01A/B/C・current01/04・8/28設計§9.2/9.4・最新weekly20261010・Rule18 §11.3・8/16商品軽視incidentを確認した。前回API ba6a7adのCI38646841959は同headでcompleted/successだった。
+
+| 既存API owner（ai/services/ai_inference/） | u265の責務差分 |
+|---|---|
+| emlis_ai_grounded_observation_plan.py | received文法をraw-text helperへ抽出して共有。前文全体が単一received exact2、理由/未成立contextなしの評価に限り、受け手のSELF継続を許可。giver内の別主体やSELF giverを追加判定し、広い旧giver文法だけで本人扱いしない。旧意味復元時だけ新entryを無効化。 |
+| cocolon_meaning_experience_engine/emlis_question.py | 新entryを無効化した原planを既存の厳密復元へ渡す。 |
+| cocolon_meaning_experience_engine/emlis_answer_update.py | current→新entry無効→理由追加も無効→pre-appraisalの順で完全checkpointを照合。新しい意味へ旧IDを貼らない。 |
+| cocolon_meaning_experience_engine/emlis_thread_engine.py | Q1の旧checkpointも旧prepared planから本文化し、現行sourceへの再解釈を避ける。 |
+
+未変更ba6a7adで取得した初回／実回答の旧完全checkpoint6件を再導出した。Q3の5件は本文・質問も完全一致。Q1の1件はcheckpoint・Reception・質問が一致するが、Observationは旧generic形式から既存Stage1 surfaceへ変わる。「異なる向きが確認できます」から「異なる向きのまま同時にあります」等の差を単なる整形差とは扱わず、旧本文完全一致6件とは報告しない。保存済み本文のread/reopenは作者を呼ばず保存bytesを返す。既発行質問のうち今回の2件は現行planでも完全canonicalであり、未保存の新回答は現行意味で新checkpointを作る。旧完全checkpointを明示した再試行だけ旧意味へ戻す。質問文改変／foreign checkpointは拒否。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production 4fileの責務変更のみ。新file/engine/author/checker/registry/service、内部意味schema・公開API/DTO/DB/SQL/RN、製品依存、Piece/Analysisの変更0。検査は既存test_cmee_emlis_result_appraisal.pyと現行shared-owner identity fixtureへ追加／更新し、歴史fixture/IM03 proofは変更しない。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 今回は評価脱落の回復であり、LIMITED本文の関係反復・固定的な受け取りを§9.2/9.4の完成に換算しない。独立行動もReceptionに残るため「独立行動非混入」とはしない。理由＋receivedを別欄に置いた初回は両配置ともMEANING_REALIZATION_CAUSAL_TRACE_GAPで本文停止、2 received＋2評価もLIMITED_RECEPTION_CAPABILITY_GAP_STOPを今回実測した。次の第一候補は前者をsource→選択内容→作者/独立readerの単位で直すこと。新しい意味契約が必要と判明すれば、その具体差分にだけRule18 §11.3を適用する。旧received文法全般のgiver誤帰属、複数先行文への評価継続も今回の修正範囲には含めない。既存共有17失敗・same100・本人実機・正式Product Readは未解消／未実施。正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmerged、10/17確認点・10/31/12/18とPiece/Analysis主枠を維持する。
+
+実本文・途中失敗・最終検証は06／API handoff u265。
+
+
+### u266 — 理由付き満足とreceived経験が別欄にある初回本文の停止を修正（2026-10-15 JST）
+
+memo「探しやすくなったので、資料を分類したことに満足した。」、memo_action「褒められたのに、嬉しくなかった。」と両欄交換で、旧版はMEANING_REALIZATION_CAUSAL_TRACE_GAP／公開emlis_q3_initial_body_unavailableとなった。sourceは理由→満足・対象→満足・received対比を既に保持していたが、複数経験の既存LIMITED選択へ、理由付き満足の検査/作者/readerだけがNORMAL専用条件を要求していた。
+
+既存LIMITEDの全体ATTENTION/ATTEND_TO・MATERIAL_WEIGHT/RECEIVE_AS_MATERIAL・focalなしを保持し、各Moveへ既に分配されたcontributionが理由/対象/評価の三端点をちょうど所有することを検証する。NORMALへ昇格させず、理由付き満足とreceivedをそれぞれ本人が記した範囲で本文へ返す。NORMALの「満足の拠り所」文章をそのままLIMITEDの選択内容へ載せない。u253/u264の承認済み範囲の欠陥修正であり、新しい意味契約・理由語形は追加しない。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production 2file・3関数の責務修正。source認識・投影・意味契約・checkpoint生成・公開API/DTO/DB/SQL/RN・依存は変更0。新file/engine/author/checker/registry/serviceは追加しない。
+
+これはu264の理由契約と既存LIMITED経路の整合修正。本人の明示理由・対象・時点の限定的な受け取りを回復するが、選択された全体の読みから本質的内容差を生む§9.2/9.4の全条件が完成したとはしない。理由引用と関係反復が残る。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+実本文・互換・検証・撤回残件は06／API handoff u266、全file配置は01A、進行はweekly§5.6.16。
+
+
+### u267 — 理由付き満足の原文全文撤回を既存訂正契約へ接続（2026-10-15 JST）
+
+理由付き満足の原文全文を本人が明示撤回した場合、既存sourceが証明した理由・対象・評価の三ownerとそれらに依存する関係を取り消し、別のreceived経験・行動・同じ回答内の訂正を残す。全文exact一致、同一field/spanの全nucleus集合が三ownerと一致、候補一意を必須にする。既存の対象＋評価二owner撤回も維持。u254の唯一の全文撤回とu264の承認済み理由所有を接続する欠陥修正であり、新しい意味契約・理由認識・本文作者の追加はない。
+
+新規回答は新しい完全checkpointを生成する。旧checkpoint明示時だけ現行source＋旧撤回判定を再導出し、旧UNRESOLVED/PARTIALを回答内の受理済み訂正ごと完全一致で復元する。Q3各prefixも同じ旧判定を使い、旧IDへ新しい撤回意味を付けない。保存済み本文のread/reopenは作者を呼ばず保存本文を返す。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production 1file・3関数の責務変更。新file/helper/engine/author/checker/registry/serviceは追加0。source認識・意味schema・公開API/DTO/DB/SQL/RN・製品依存は変更0。検査は既存test_cmee_emlis_result_appraisal.pyへ24件と未変更26d8ccc7で実取得した旧完全checkpoint4件を追加し、歴史fixture/IM03 proof・現行shared-owner identity fixtureは不変。
+
+u254全文訂正・u264理由所有の接続修正であり、§9.2/9.4の読みの完成を意味しない。残る経験の保存本文を返せることと、その受け取りの製品品質を区別する。重複理由文では既存source認識が非対称になる限界が残る。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+実本文と検証は06／API handoff u267、全file配置は01A、進行はweekly§5.6.17。
+
+
+### u268 — 重複原文の全文撤回を誤確定しない（2026-10-15 JST）
+
+同じ理由付き評価文が重なると、既存sourceは一つを理由・対象・評価の三owner、もう一つをgeneric ownerとして保持する。従来はgenericの直接一致を優先して全文groupを調べなかったため、どちらを指すか不明でも単独撤回をRESOLVEDとしていた。新規回答は直接一致と所有証明済み全文groupの両方を数え、候補が複数ならcorrection_target_unresolvedとして全原文を保持する。同じ回答内の独立した反応訂正は受理し、PARTIALとする。入力順による選択・一括撤回・source認識の拡張は行わない。
+
+u254の「唯一の原文全文」条件を既存sourceの異なる表現間でも守る整合修正。u264の理由所有や§9.2/9.4の意味契約は広げない。重複入力のsource所有と初回本文停止、受け取り内容の完成は別の残件として維持する。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+全file責務は01A、実検証・互換範囲は06／API handoff u268、進行はweekly§5.6.18。
+
+
+### u269 — 隣接する同一理由文の初回本文を回復（2026-10-15 JST）
+
+同じ欄の先頭に理由付き満足の完全文が直ちに同文で重なる場合、先行文の既存SELF証明をそのscalar位置で再実行し、二つ目も独立した理由・対象・評価の三ownerとして保持する。二出現の6nucleus・4relation・各source位置を残し、完全文・役割・時点・肯否が一致すると証明できた場合だけ、Observationの既存理由文＋対象評価文を一度にまとめる。重複から二度の経験・強さ・重要性は推測しない。
+
+既存follow_idsが一意に選んだ評価は、他の評価がある場合も同じspanの証明済み理由／対象をsupportへ戻す。この支持修復の適用範囲はexact duplicateだけではなく、他rowがconcrete_effortまたは同一targetに限られる既存選択条件内。意味選択・rank・Move数・selected contributionを増やさず、今回はLIMITEDの選ばれた一組だけをReceptionにする。全三組のReception受入れ完了とはしない。
+
+新規の重複全文撤回は引き続きUNRESOLVEDで、両方の三ownerを残す。別反応の独立REVISE併記はPARTIALで意味保存する。旧source形は既存のcheckpoint不一致／旧canonical質問の入口だけで再導出し、完全identity照合を維持する。旧IDへ新しい意味を貼らない。
+
+u264の理由exact1は各評価についての境界を維持する。二つの異なる理由を一評価へ束ねること、他者topic後の暗黙SELF、近似文・別欄の意味同一視は追加しない。6owner/4relationの独立出典は保持したまま、既存§9.4のmany-to-oneを既存Observation文法で使う。新意味schema・新しい本文作者・品質gate例外を作らない。選択済み支持修復の条件と全file責務は01A u269。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+残件：同じ回答に独立訂正を併記した後は、意味はPARTIALで保存できるが、必要Observation contribution選択がstage1_required_observation_unrealizableとなりMEANING_UPDATED_BODY_UNAVAILABLEを維持する。単独曖昧撤回もANSWER_UNREFLECTEDで新本文なし。初回の完全一致二文は回復したが、「私は」を付けた近似文・別欄に分かれた二組の初回は反復／関係分断の既存gateで停止する。全三組Receptionのpair-only閉包、関係の説明反復と固定的な受け取り、2 received＋2評価、有限対象撤回後の不自然さ、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readも残る。
+
+次は初回一体単位の選択内容と受け取りを、出典ごとの意味を保った構成として改善する。今回の限定回復を商品完成へ換算しない。10/17確認点、10/31残件線・12/18リリース目標とPiece/Analysis主枠を維持する。
+
+
+## u270 — 2 received＋2評価のsource保持漏れを修復（2026-10-15 JST）
+
+4文以上の入力で既存span順位が後半の明示評価pairとreceived pairをshouldへ下げ、sourceとして認識済みの経験が選択から欠けていた。threadの既存final projection内で、理由・未成立contextのない明示評価pairがexact2あり、既存の最大3 dutyが全required/should本文ownerを保持できる場合だけ、各pairをrequiredへ戻す。2 received＋2評価の合成Q3_FREE入力は、両欄配置で8ownerを保持し、既存LIMITEDの3 Moveから初回本文を返す。対象・肯否・評価時点を変えた対照でも各経験の帰属を保持する。
+
+u253/u256の既存保持責務の欠陥修正であり、source文法・意味schema・NORMAL資格・Move上限・Observation contribution上限・作者・独立reader・品質gateは変更しない。新しい昇格はthread source ownerが明示的に有効化し、直接生成経路は従来の既定投影を維持する。追加の独立材料を黙って落として枠内に収めず、理由付き／未成立context付きの二組をこの修正へ含めない。
+
+旧checkpointはretention昇格だけを無効にした旧source planから完全再導出し、既存のID・canonical質問照合を通す。未変更u268（05d3040）の合成Q1/Q3_FREE初回・回答計12例はu269でも同一であり、完全checkpoint・本文有無・state・reason_codes・偽checkpoint拒否を照合した。旧質問が現行planでも完全canonicalなら、未保存の新回答は新しい完全checkpointを作れる。旧IDへ新しい意味を貼らない。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+残件：Q1の同じ4経験は既存Observation contribution上限で本文が出ない。Q3でも「納得した」から「満足している」への訂正はRESOLVEDで保存されるが、更新後のObservation選択が上限を超え、MEANING_UPDATED_BODY_UNAVAILABLEとなる。旧初回本文を現在本文へ戻さない。u269の重複理由文の全経験Reception、近似文／別欄二組、関係の説明反復と固定的な受け取り、§9.2/9.4の商品品質、有限対象撤回後の不自然さ・giver帰属・既存共有17失敗・same100・本人実機・正式Product Readは未解消。
+
+本差分はu253/u256の既存保持責務の実装修正。§9.2/9.4の新規達成・正式Product Readではない。実本文と検証はAPI handoff／06 u270。
+
+
+## u271 — 重複理由文の各出現と別のreceived経験を初回Receptionへ保持（2026-10-15 JST）
+
+u269では重複二文の初回本文は復帰したが、Receptionは選択済みの一組に限られていた。今回、同じ欄全体が隣接する完全一致の理由付き満足二文である場合にだけsourceへ同一性の証明属性を付け、二つの閉じた理由・対象・評価の三owner群を別々のrequired dutyとして保持する。独立したreceived経験が一組ある合計三Moveでは、等価な二つの理由付き受け取りを既存の二Move一文へ結び付け、received経験も別文に残す。六核・四関係・二つのMove／expression・出現別の根拠は統合しない。重複から二度の経験や強さを推測しない。
+
+既存のLIMITED exact3検証とsource照合を各Moveで行い、独立readerが実本文から双方の理由・対象・評価・時点を読めた場合だけ一文を共有する。任意の文字列重複除去ではない。既存pair readerの分岐とObservationの二文全体照合を追加し、反復検査・coverage・gateは緩和しない。u269のObservation作者と選択済みsupport修復はそのまま保持する。
+
+適用境界は、原文同一fieldの完全一致二文・独立した第三の受け取りがある三Move・full／standard／LIMITED。重複二文だけの入力、両field各二文の十二核、別の理由、近似文、他者／引用、否定・程度付き満足・納得、PREMIUM複数round全般の完成は含まない。u269の認識文法は広げず、今回の証明属性は選択上の限定条件である。
+
+§9.4の等価な可視表現共有として、二つのexact3選択内容とexpressionを残す。原文出現の同一性証明と本文の独立読取りを混同しない。§9.2/9.4全体の完成や商品合格には換算しない。
+
+旧u269のcheckpointは新しい証明属性を付けないsource全体から再導出し、旧本文まで維持する。u268以前は既存の別legacy分岐を保持。入口は既存のcheckpoint不一致／既発行canonical質問に限り、完全checkpoint・ID一致を必須とする。偽ID／質問拒否やunresolved_predecessorの境界は広げない。未変更bd31cd4から取得した合成Q1／Q3_FREE各6件、計12件で初回・曖昧撤回・独立訂正併記の完全checkpoint／body_state／本文／reason_codes一致を検証した。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+次の第一候補は、独立訂正併記後に必要Observation contributionがstage1_required_observation_unrealizableで止まる箇所を、選択内容から実本文まで通すこと。現在もPARTIALの意味は保存するがMEANING_UPDATED_BODY_UNAVAILABLE、単独曖昧撤回はUNRESOLVED／ANSWER_UNREFLECTEDで新本文なし。古い初回本文を現在本文へ戻さない。関係の説明反復と固定的な受け取り、Q1の2 received＋2評価におけるObservation上限、有限対象撤回後の不自然さ、旧receivedのgiver帰属、共有17失敗・same100・本人実機・正式Product Readも残る。10/17確認点・10/31残件線・12/18目標とPiece/Analysis主枠を維持する。
+
+
+## u272 — 訂正後のQ3本文停止を既存の意味・上限を保って修復（2026-10-15 JST）
+
+u269〜271に記録した対象Q3の上限診断を訂正する。今回の再現では必要Observation contributionは6、既存capは8で、投影・生成・独立逆読解を通過していた。停止原因は、独立したsource groupを同じgeneric grammar role由来のsemantic arcと扱う最終検査での誤認、訂正後の重複理由二組に同じ受容predicate familyを割り当てる不整合、欄を入れ替えた訂正評価でinventoryとselectorのretained group順が異なる不整合の三点。過去の停止事実は保持するが、そのQ3原因記述を現在の判断に再利用しない。Q1の既存上限残件は別である。
+
+既存Plan内で証明済みの重複理由二組へattention／felt_responseを割り当て、既存primary_burden_first順により二組を隣接させる。訂正評価のretained groupはowned集合を変えずsource順で導出する。既存Sentence Surface内では、受理済み回答と評価があり、重複理由の証明または訂正評価の属性がある限定経路に限り、required relationの連結成分をsemantic arcのidentityに使う。grammar roleは保持し、同じ成分の分割は引き続き拒否する。新しいfragment正当化atomは足さない。
+
+u253/u264/u271の既存意味と§9.4の多対一可視unitを接続する整合修正。source認識・意味schema・checkpoint生成／旧再導出・NORMAL資格・Move数・Observation contribution上限・作者・独立reader・最終gateは変更しない。公開API/DTO/DB/SQL/RN・製品依存も不変。
+
+同一欄の理由付き満足二文＋別欄のreceived経験について、曖昧な全文撤回に独立した反応訂正を併記したQ3_FREE回答後は、両欄配置でMEANING_UPDATED_BODY_UNAVAILABLEからPARTIALLY_REFINEDへ回復。曖昧撤回は未反映と明示し、受理済み訂正と両出現の受け取りを保持する。2 received＋2 plain評価の訂正も両配置でREFINEDの新本文を返す。単独の曖昧撤回はUNRESOLVED／ANSWER_UNREFLECTEDを維持する。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+§9.2/9.4の内容形成・正式Product Readは未完了。実本文と検証はAPI handoff／06 u272、全file責務は01A、残件と順序はweekly§5.6.22。
+
+
+## u273 — 理由・対象・評価を一文で保持し、同じ評価の説明反復を減らす（2026-10-15 JST）
+
+§9.4の多対一可視unitを、既存sourceが証明する理由・対象・評価の閉じた構成へ接続する限定実装。新しい意味・関係・NORMAL資格は作らない。
+
+本人が明示した一つの理由と評価対象が同じ肯定・程度なしの満足へつながる場合、二関係を別文にして評価を二度出すObservationを一文へまとめた。sourceで証明済みの完全一致二出現も、六核・四関係・出現別根拠を保持して一文を共有する。原文同一性の証明がない近似文・別欄の別経験を統合しない。
+
+既存Sentence Surfaceの_render_relationで、source_owned_result_appraisal_reasonが証明する閉じた理由・対象・評価だけを実現する。既存Observation Gateの_body_inverse_reason_appraisalは作者を呼ばず、可視一文全体から三役割を読み、bound全核・全required関係と一致した場合にだけ二本（重複は四本）の関係を証明する。その関係に限って、共有評価では成立しない隣接引用条件を全体構文の照合へ置き換える。無関係な関係・coverage・反復・最終品質検査は維持する。
+
+意味選択・source認識・checkpoint・旧再導出・Reception・各上限は変更しない。旧二出現planに同一性証明がない場合、または旧撤回後に同じ原文二出現の片方だけ残る場合は従来の表現を保持する。歴史checkpoint fixture／IM03 proofは変更しない。API/DTO/DB/SQL/RN・製品依存・Piece/Analysisへの変更なし。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+受け取りの反復と言い換え中心の内容、引用と説明的な文章、Q1の2 received＋2評価の既存上限、近似文／別欄二組、有限対象撤回後の不自然さ、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは未解消。今回の短文化を§9.2/9.4の商品品質完成へ換算しない。
+
+実本文と検証はAPI handoff／06 u273。単独理由文＋別経験訂正の既存停止はweekly§5.6.23で別残件として管理する。
+
+
+## u274 — 単独理由付き評価と別経験の訂正後本文を保存・再表示へ戻す（2026-10-15 JST）
+
+§9.4のsource成分と可視unitの対応を、単独理由付き評価と独立receivedの訂正後本文へ接続する限定修復。新しい意味・関係・NORMAL資格は作らない。
+
+u273で残した「単独理由付きの満足＋別経験の反応訂正」の本文停止を修正した。理由・対象・評価の一文と、訂正されたreceivedの一文に、元のsourceの連結成分に対応する別々のarc identityを与える。必要5核／3関係を保持したまま、対象Q3_FREE系列の回答後はMEANING_UPDATED_BODY_UNAVAILABLEからREFINEDへ進み、訂正後本文を保存・再表示できる。
+
+既存_observation_surface_atomsへ既存plan/resolverを渡し、source_owned_result_appraisal_reasonが一組で、元の同欄・同文出現が一回、answer_interpretation_unresolved境界がない場合に、既存u272のsource成分identityを適用する。受理済み回答・thread source契約・既存関係型の条件も保つ。撤回後の一組だけを原文一出現と誤認せず、未解釈撤回の旧checkpointも新分岐から除外する。重複理由／訂正評価の既存u272分岐は変更しない。
+
+同じsource成分を二行へ不当に分割した場合は引き続きrequired_arc_fragmented_without_reasonで拒否する。正当化atomの追加、gate緩和、意味選択・source認識・checkpoint schema・旧fixture／IM03 proof・本文作者・独立reader・Reception・各上限の変更はない。API/DTO/DB/SQL/RN・製品依存・Piece/Analysisも変更しない。
+
+**BOUNDED_IMPLEMENTATION_WIP / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・未配置・Draft/open/unmergedを維持する。
+
+受け取りの反復と言い換え中心の内容、引用と説明的な文章、Q1の2 received＋2評価の既存上限、近似文／別欄二組、有限対象撤回後の不自然さ、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。今回の修復をPREMIUM複数round全般や§9.2/9.4の商品品質完成へ換算しない。
+
+実本文・検証はAPI handoff／06 u274、次はweekly§5.6.24に従い§9.2/9.4の受け取り内容を改善する。
+
+
+## u275 — 理由付き満足のLIMITED受け取りへ、選択済みの注意対象を明示（2026-10-15 JST）
+
+理由付き満足のLIMITED Receptionが「その理由で満足したのですね」という評価の再表現で終わっていたため、既に選択済みのATTENTION / ATTEND_TOを本文に接続した。本人の明示理由・実行済み対象・肯定無程度の満足と時点を保ち、理由に注意を向ける主観述語で返す。NORMALの読み、source認識、意味schema、checkpoint、各上限は変更しない。
+
+u264の本人明示理由exact1とu266のLIMITED exact3所有を維持する。既存のattentionを可視化する実装整合であり、新たな意味獲得やNORMAL selected readingへの昇格ではない。客観因果、唯一／最重要理由、成功・成長を追加しない。
+
+作者と独立readerは同欄・同文の原文出現を各自確認し、一出現または既存の完全二組証明がある場合に新表現を使う。旧u267で二出現の片方だけ残るcheckpointは旧本文を維持する。旧fixtureを変更しない。readerは三役割、時点、本人の理由をsourceと照合し、原文改変・理由の唯一化・成長の捏造・旧確認文への逆戻りを拒否する。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。これは選択済み注意の可視化であり、§9.2/9.4全体の経験としての受け取り完成ではない。説明的な硬さ・反復、Q1の4経験上限、近似文／別欄二組、有限対象撤回後の不自然さ、旧receivedのgiver帰属、共有17失敗・same100・本人実機・正式Product Readは残る。
+
+
+## u276 — 満足の対象だけを撤回した後の理由・評価を有限文へ戻す（2026-10-15 JST）
+
+満足の対象だけを本人が撤回した後、残存する理由→満足を「によって気持ちが生じることをどちらの側も残したまま、感じています」と返す不自然なReceptionを修正した。撤回した対象を復活させず、本人の理由・肯定無程度の満足・評価時点・選択済みATTENTIONを文章化する。初回三役割、source認識、意味選択、checkpoint、NORMAL資格、各上限は変更しない。
+
+source_owned_relational_focusはplanありの本文経路だけで、同一sourceに残る理由／満足exact2・withdrawn_source_event・単独user_stated_cause・本人・肯定無程度・過去現在を確認する。planなしの選択／reference-mode導出は不変。既存作者と独立readerはLIMITEDのATTENTION/ATTEND_TO、RELATIONAL_NONCOLLAPSE/PRESERVE_BOTH_ENDPOINTS、二bindingと理由関係focalを照合する。理由削除・別理由・他者・否定・時点変更・因果逆転・唯一化・撤回対象の復活を拒否し、有限文reader失敗をnominal fallbackで救済しない。
+
+u253/u254の対象撤回とu264の理由所有を維持した本文の実装整合。既存の注意を新しい経験理解へ読み替えない。u275の「拠り所」への言い換えだけで内容形成が進んだとは扱わない。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。今回の有限文修正を経験理解・§9.2/9.4全体の完成へ換算しない。固定的で説明的な表現、撤回後に別received経験がReceptionへ選ばれない状態、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
+
+
+## u277 — 満足対象の撤回後も別received経験をReceptionへ残す（2026-10-15 JST）
+
+満足の対象だけを撤回した後、理由→満足と別received経験が意味・Observationに残るのに、別経験だけがReceptionから落ちる不具合を修正した。理由関係が残るため既存の孤立撤回判定へ入らず、lived_changeの優先でcurrent_burdenが候補除外されていた。source所有が確認できる理由／満足と一つのoriginal received組を、既存2 Moveへ分けて保持する。撤回対象の復活、二経験間の因果や本人が述べていない価値判断は加えない。
+
+u276の同一source内の理由／満足exact2・withdrawn_source_event・単独user_stated_cause・本人・肯定無程度・過去現在という証明を既存plan owner内のhelperへ抽出した。これに加え、回答由来nucleusなし・残りが一つのreceived組という条件で_thread_retained_reaction_groupsから二つのdutyを返す。選択は既存LIMITED ATTENTION/ATTEND_TOの全source MATERIAL_WEIGHT/RECEIVE_AS_MATERIALを保ち、Moveごとのcontributionを理由／満足と別経験へ分離する。validatorと作者非依存readerはexact2 Move、required、reception_act順、sourceから再導出したduty tuple一致、理由側のselected contribution exact2、focalなしを確認する。従来のRELATIONAL_NONCOLLAPSE/PRESERVE_BOTH_ENDPOINTS分岐も維持する。schema・source認識文法・NORMAL資格・各上限を拡張せず、既承認の選択内の欠落を直した。
+
+u276の有限文とsource所有を維持し、既に認識された別経験の選択欠落を修復した。§9.2/9.4の内容形成を固定文の追加件数で合格にしない。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。今回の欠落回復を§9.2/9.4の経験理解・受け取り全体の完成へ換算しない。固定的な説明／言い換え、対象撤回後の複数receivedや追加actionを含む範囲、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
+
+次は§9.2/9.4に戻り、初回と訂正後の実本文で、既に保持している意味がEmlisの受け取り内容へ届くかを確認する。特に理由への注意とreceivedの言い換えが固定的説明に留まる点を、意味の欠落・所有・接続と実本文の差として診断する。別の注意表現へ替えただけで内容形成が進んだとはしない。複数経験や追加actionの既存停止を一括解除せず、必要な意味/schema/上限拡張があれば不足を具体化して別判断へ戻す。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠を維持する。
+
+
+## u278 — 評価の訂正・撤回後も残存理由の状態と元の時点を保つ（2026-10-15 JST）
+
+満足の評価を否定へ訂正、または評価だけを撤回した後、独立して残る理由の状態を「今は…感覚が前に出ています」と誤って実現する不具合を修正した。意味側は本人が述べた肯定のfact/stateと過去／現在を既に保持しており、本文作者が孤立理由を汎用の現在感覚へ流していた。元が過去なら「当時の状態として」、現在なら「入力した時点の状態として」と実現し、理由を訂正後の否定評価へ結び直さない。
+
+既存sentence surfaceのthread用単独Observationで、original memo/memo_action・required/explicit・本人・肯定fact/state・過去現在・appraisal_explicit_reason／reasoned_result_appraisal・relationなしを限定して実現する。既存gateの_body_inverse_intervening_eventsは、source spanと欄、全体で未接続の理由、型・時点・本人・極性を照合し、本文の状態文と引用内容を作者非依存に読む。source認識、checkpoint、plan、selected reception、Reception作者、schema、NORMAL資格、各上限は変更しない。
+
+§9.2/9.4の受け取り内容を再診断した。対象LIMITEDはATTENTION/ATTEND_TOとMATERIAL_WEIGHT/RECEIVE_AS_MATERIALを選び、focal_relation_refはない。既に豊かな解釈が選択されていて文面だけに届かない状態ではない。NORMALの別経路にある満たされた感覚をLIMITEDへ移植すると、選択された意味を越える。したがって今回の状態／時点修復を、固定的な注意・説明文から入力固有の受け取り内容が形成できたという合格へ換算しない。
+
+**TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了。** 正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。固定的な注意／説明文の内容形成、§9.2/9.4、対象撤回後の複数receivedや追加action、Q1の4経験上限、近似文／別欄二組、旧receivedのgiver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。631件PASSを既存共有17失敗の解消とはしない。
+
+次は、今回の実保存本文で確認した「評価を否定へ訂正すると別received経験がObservationには残るのにReceptionから落ちる」選択差を診断する。u277の対象撤回とは別の更新経路であり、今回の状態／時点修復には混ぜていない。既承認の二経験・所有条件内で直せるかをcheckpoint→plan→選択→実本文で照合する。同時に§9.2/9.4の受け取り内容の不足を保持し、注意表現の言い換えやNORMALの意味の借用で埋めない。新しい意味契約・source範囲・schema・上限が必要なら不足を具体化して別判断へ戻す。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠は維持する。
+
+
+## u279 — 否定訂正後も別received経験を受け取りに残す（2026-10-15 JST）
+
+理由付き満足を否定へ訂正した後、別のreceived経験がObservationには残るのにReceptionから落ちる欠陥を修復した。訂正評価と別経験が同じcurrent_burden候補になり、既存の代表選択で一方が落ちていた。既存plan ownerの_thread_retained_reaction_groupsで、証明済みの二経験を別々の既存2 Moveへ保持し、既存作者・独立readerから本文へ戻す。
+
+適用は、source-ownedな評価関係exact1、回答核exact1（本人・否定・無程度の満足・original_occasion・過去／現在）、同一原文の理由／対象exact2、孤立した肯定fact/stateの理由、残余required textがoriginal received exact1の場合。理由と対象の原文range・field/span・所有、関係閉包を確認する。理由はObservationだけへ残し、否定評価へ因果を付け直さない。追加action・複数received・理由なし評価・明示的な回答時点への訂正・別回答併記をこの修正へ含めない。source認識、意味checkpoint、schema、NORMAL資格、各上限、作者／独立reader、公開API/DTO/DB/RNと製品依存は不変。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR、初回一体単位未完了・正式受入0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持。今回の欠落回復を§9.2/9.4の受け取り内容形成全体の完成へ換算しない。固定的な説明／反復、対象外の複数経験や回答時点変更、Q1上限、近似文／別欄二組、giver帰属、既存共有17失敗・same100・本人実機・正式Product Readは残る。
+
+次は§9.2/9.4の受け取り内容へ戻る。二経験が揃った現在の初回／訂正後本文で、選択済みの意味から何を受け取るべきかと実際の主観述語との差を確認する。別の注意表現への言換え、NORMALの読みの借用だけで解消扱いにしない。今回対象外の明示的な回答時点変更等を一括解除しない。新しい意味契約・source範囲・schema・上限が必要なら、不足と最小案を具体化してMash判断へ戻す。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠を維持。
+
+
+## 2026-10-15 u280 — 明示評価とreceived経験を組ごとに扱う限定変更案（未承認・未実装）
+
+**PROPOSED_NOT_APPROVED / BLOCKER_NARROWED / PRODUCT_NOT_CLEAR。** 基準実装はAPI `14a3c786b69e6c57c741244dc2edfdff46525c65`、資料は`19ddca5a4b40842ae8255975274d67bec2197227`。u279は最後の実装修正であり、本節はその続きの診断とMash判断用の差分案である。u253/u264の既承認実装を再承認待ちへ戻さず、ここに記した追加だけを未承認とする。
+
+### 確認した不足と、変更が必要な理由
+
+現行の「探しやすくなったので、資料を分類したことに満足した。」＋別欄「褒められたのに、嬉しくなかった。」は、二経験を本文へ残せるが、初回のReceptionは理由への注意とreceivedの言い換えである。満足を否定へ訂正した後も、評価とreceivedの二つの言い換えが中心になる。初回・否定訂正後の両欄配置でwhole candidateは0、scopeは`COMPETING_MATERIAL_SCOPES`、意味結果はLIMITED。選択内容は`ATTENTION/ATTEND_TO`・`MATERIAL_WEIGHT/RECEIVE_AS_MATERIAL`・focalなしである。
+
+同じ理由付き評価に「植木に水をやった。」を添えた対照はNORMALとなり、評価組の理由関係を焦点に持つ。原因は`emlis_thread_projection.py`のcomponent許可条件が、u253の承認どおり評価組外を本人の明示実行action/eventへ限定していること。別receivedのreactionはこの条件を満たさず、`emlis_input_specific_meaning.derive_foreground_scope_closed`の全体比較で異なる組のmodality/polarity/qualifierが競合に載る。豊かな読みが選択後に文章から落ちた状態ではない。
+
+さらに否定訂正後は既存2 Moveがともに`stay_with_current_burden`になる。現行投影はact名で寄せ、claimもact名で一つを選ぶ。既存の分配はLIMITEDの同一MATERIAL_WEIGHT命題専用で、評価組とreceived組に異なるNORMAL内容を結ぶ処理ではない。旧`RetainedReceptionActRow`はfrozen exact3で、`act_ref == reception_act`を要求する。前景scopeだけ緩めて本文をNORMALへ流す案では足りない。
+
+§9.2/9.4を満たすため、既存の意味比較と受け取りの対応を経験の組単位で保つ案を推奨する。NORMAL昇格、注意語尾追加、「理由」を「拠り所」へ替えたこと自体を成功にしない。
+
+### Mashへ求める追加範囲
+
+1. **対象は明示評価exact1組＋本人received対比exact1組。** 原入力memo/memo_actionの既存source-ownedな満足／納得と対象、既存のreceived出来事／本人反応を扱う。理由は既承認のsource-ownedな理由0/1だけ。既存source認識を広げず、明示程度・肯否・時点等は既存資格の範囲を維持する。欄の前後で意味優先を作らない。
+2. **組ごとの比較を既存whole候補exact1へ接続する。** sourceで閉じた関係成分内では従来の比較・hard validity・差分証明を維持する。全requiredをexact1の所有組へ割り当て、whole readingとReadingConsequenceは全体各exact1のまま。組間の因果・対比・同時性や「無関係と確定」は作らない。競合や不足が実在すればLIMITED／停止を保つ。
+3. **既存の否定訂正を同じ単位で扱う。** u279の当時の満足を否定へ訂正する範囲を継承する。初回の理由付き評価組＋received組は2成分だが、否定訂正後は孤立理由状態・対象／否定評価・receivedの3成分となる。孤立理由はObservationだけへ残し、否定評価の原因へ再接続しない。Receptionは既存2 Moveを保つ。評価／対象撤回は旧経路の回帰対象であり、本変更で資格を一括拡張しない。
+4. **同じact分類でも経験を混同しないprivate対応を追加する。** 意味を選んだ後に、選択済み組・既存Move・source所有からversioned private opportunityを導出する。提案型`ComponentReceptionOpportunityV1`は`schema_version / opportunity_ref / move_ref / reception_act / component_ref / basis_contribution_refs / bound_relation_refs`を持つ。opportunity_refは選択済みwhole・組・Move・所有内容へbindする。旧exact3 carrierと旧validator/canonical bytesを変更せず、新versionだけでdispatchする。分類名は既存taxonomyを使い、同分類の2 Moveも別opportunityで識別する。claim／visible traceはact文字列だけで選ばず、opportunity・Move・所有の一意一致から結ぶ。wholeの全成分とopportunityを1対1にはしない。否定訂正後は3成分のうちReception対象の2成分だけをopportunityが完全所有し、残余の孤立理由は既存Observationのrequired coverageで保全する。第三Moveを増やさない。
+5. **新しい意味解釈や本文生成方式は追加しない。** 既存のwhole意味型、評価内容型、関係内容型を使う。満足／納得の既確認の区別、本人明示理由、receivedの出来事と反応の差を、選択された意味どおりに受け取る。価値観・原因・目標・相手意図を補完しない。Human Receptionを唯一の作者、既存gateを作者非依存の読取りownerとして維持する。新しい意味型・関係型・受入条件や上限変更が必要なら、その不足を具体化して止める。
+
+対象外は追加action、複数received、重複／近似／曖昧なsource所有、他者・引用・非実行・予定等の既存不適格入力、明示的な回答時点変更、別回答併記である。原入力の新認識、旧giver帰属の拡張修正、任意の複数経験対応へ広げない。
+
+### 実装ownerと同一単位の完成条件
+
+既存ownerの候補は`emlis_thread_projection.py`（source資格とMove接続）、`emlis_input_specific_meaning.py`（既存組比較／全体所有）、`contracts.py`・`emlis_stage1_composition.py`・`emlis_stage1_response.py`（versioned private対応、内容投影、独立検証）、`emlis_ai_grounded_human_reception.py`／`emlis_ai_grounded_observation_gate.py`（実本文と作者非依存読取り）、既存評価test／現行identity fixtureである。新production file／subsystemは作らない。実装前に実変更pathをこの因果範囲内で固定する。
+
+- source→組→whole選択→主観命題→実本文を一つの単位で検証する。候補生成数やNORMALという分類だけで完成にしない。
+- 理由の差替え／削除、評価の肯否、received反応の差替え／削除、両欄配置で、対応する組の受け取り内容が変わり、別組の意味を借りないことを確認する。同actの二組、foreign/重複owner、relation差替え、ID再作成による偽造も独立に拒否する。
+- 本文で「何を何として受け取ったか」の差が選択されたconfigurationに対応すること。関係反復・語義説明・同じ注意文のvariationに留まればNOT_CLEARで継続し、MashへProduct Readを求めない。
+- 意味checkpointの完全再導出・旧質問の照合を維持する。保存済み本文は非再生成で同じbytesを読む。途中保存checkpointの再試行は独立に確認し、既存bodyを新規生成結果と混同しない。
+- 実service＋隔離SQL保存、作者を禁止した再読、同一回答再送、現行RNの本文／履歴／再表示まで確認し、rootが全対象本文を読む。実機・正式Product Readは別である。
+
+これはRule18 §11.3の既承認組外条件とprivate対応契約を広げるLEVEL_3案。追加外部AI・service・依存・課金・API/DTO/DB/RN変更・migration・配置・mergeは0。追加費用とMashの操作は承認判断以外0を予定する。作業量は本文だけの修正より大きいが、これら二つの原因に限定し、補助checker等を新設しない。期間保証や品質合格は約束しない。承認後は本単位の実装・保存表示検証を優先し、10/17確認点・10/31残件線・12/18公開目標とPiece/Analysis主枠を維持する。今回の診断／提案だけでは商品品質は変わっていない。
+
+## 2026-10-15 u281 — 二経験の意味と受け取りを組ごとの所有で接続
+
+u280提案を含む前回作業内容を添えた今回の「EmlisAIの残件作業を進めて」という指示を、当該限定案を引き継ぐ実装指示として実行した。u280が前回時点では未承認・未実装だった履歴は保持する。新しい契約変更一般やdeploy／mergeへの包括承認とはしない。
+
+本人の明示評価（満足／納得）exact1組と本人received対比exact1組を、既存source認識と全required所有の範囲で別成分として比較し、whole候補／ReadingConsequence各exact1へ結ぶ。理由は既存の0/1。u279の当時の満足を否定へ訂正する範囲では、孤立理由をObservationだけに残し、対象／否定評価とreceivedの既存2 Moveへ別々の主観内容を結ぶ。追加action・複数received・曖昧／重複owner・明示回答時点変更等へ広げない。
+
+新しいprivate `ComponentReceptionOpportunityV1` exact7（schema_version、opportunity_ref、move_ref、reception_act、component_ref、basis_contribution_refs、bound_relation_refs）を、選択済みwhole・component・既存Move・全所有根拠へbindする。同じact分類でも別opportunity／claim／traceを持つ。旧RetainedReceptionActRow exact3と旧validatorを保持し、新versionだけdispatchする。独立closureはsource Move、target/support、組、relation、basisとparent/envelopeの分類を照合する。訂正後の3成分のうちReception対象は2成分で、第三Moveは追加しない。既存意味型／内容型・Human Reception作者・独立gateを使い、公開API/DTO/DB/RN、source認識、各上限は変更しない。
+
+評価601＋Q2/Q3 application54の655 PASS（228.80秒、skip/xfailなし、既存警告2件）。理由差替え／削除、評価肯否、反応差替え／削除、両欄、同actの別claim、ID再計算後のMove交換／foreign owner／component／basis／relation差替え拒否、旧完全checkpointと保存再試行を確認。現行共有owner identityも別runで1 PASS（23.97秒、194 deselected）。重複なし合計656 PASSであり、単一runの656件とはしない。歴史fixtureは変更しない。実service＋隔離PGliteで理由時点2×評価時点2×両欄×訂正／評価撤回の16組、初回／更新後の保存DTO32件を取得。NoAuthor GET/start、同一回答再送の本文／timeline一致・event無増加を確認。現行RN hook/modalへ全32件を渡し、本文・全Observation履歴・close/reopen一致。root華恋が32本文（全文一致でまとめると20種類）を全文確認した。native部品はstubであり、本人実機・正式Product Readではない。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+初回は「理由への注意」から理由関係focalを持つ「満足の拠り所」へ、否定訂正後は評価の復唱から「出来事と満たされた感覚がないことの両方」の受け取りへ変わった。一方、receivedは「嬉しさにはつながらなかったのですね」という言換えのままで、初回の理由側も関係説明に寄っている。NORMAL分類・carrier追加・検査成功を§9.2/9.4の商品完成に換算しない。次は、選択済みRELATIONAL_NONCOLLAPSE／PRESERVE_BOTH_ENDPOINTSとreceived本文の接続を、作者・作者非依存reader・実保存本文の同一単位で改善する。新しい価値観・原因・目標・相手意図を補完せず、意味契約の追加が必要なら不足を具体化する。Mashへ未合格本文のProduct Readを求めない。既存共有17失敗、same100、Q1上限、giver帰属、本人実機・正式受入は今回解消していない。10/17確認点・10/31残件線・12/18公開目標とPiece/Analysis主枠を維持する。
+
+実装commit：[09f30e4](https://github.com/MassyuRed/mashos-api/commit/09f30e438b0155beeddbd7b56dc65dfdcf2e3e60)。API変更8pathのremote全文・blob SHA・changed-path集合を照合済み。
+
+## 2026-10-15 u282 — 選択済みreceived対比から肯定的受け取り対象への接続
+
+u281で選択済みの、本人の明示評価exact1組＋本人received対比exact1組のうち、NORMAL / ATTENTION / ATTEND_TO / RELATIONAL_NONCOLLAPSE / PRESERVE_BOTH_ENDPOINTSを持つreceived成分だけを扱う。selected contribution exact1、basis exact2（RELATION_LEFT／RELATION_RIGHT）、source-owned単一contrast、追加回答なし、裸の過去形感情形容詞、full finite文を条件にする。理由0/1と当時の満足を否定へ訂正する既存範囲を維持する。
+
+Human Receptionの既存received作者へ選択済みdecisionを渡す。出来事だけでは本人の経験を言い表せないという対比を含め、嬉しさの不在／悲しさの存在を、その本人の経験を受け取る対象として実現する。入力の対比を単なる随伴へ弱めないため「出来事だけでは言い表せない」を文の限定へ置く。原因・相手意図・期待・価値観は補完しない。作者非依存readerは実本文のevent・感情・肯否・過去時点・本人、focal contrast、左右のnode所有、basis、非空のselected contribution一致を照合する。
+
+旧whole NORMALの複数contribution、LIMITED、複数received、ABOUT回答、detached/replacement、SELF主題付きevent、修飾付き感情は既存文法を維持する。旧本文の独立読取りも保持。意味選択・checkpoint・source認識・private/public型・API/DTO/DB/RN・質問上限を変更しない。新production file、型、inventory、checkerは追加していない。
+
+実保存された合成例（実ユーザー本文ではない）：
+
+```text
+初回 Reception：
+探しやすくなった点に、資料を分類したことへの当時の満足の拠り所が見えます。褒められたことだけでは言い表せない、嬉しさが伴わなかったあなたの経験として受け取りました。
+
+反応を「悲しかった」へ変えたreceived文：
+褒められたことだけでは言い表せない、悲しさが伴ったあなたの経験として受け取りました。
+
+否定訂正後 Reception：
+資料を分類したことと、それについて当時はご自身の中に満たされた感覚がなかったことの両方を受け取りました。褒められたことだけでは言い表せない、嬉しさが伴わなかったあなたの経験として受け取りました。
+```
+
+検証は正本06とAPI handoffのu282、全変更fileは01A u282。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false。既存Draft/open/unmerged・未配置を維持する。
+
+選択内容が共通の「のですね」へ落ちる問題は当該成分で修正した。一方、二経験を並べた本文は「経験として受け取りました」「両方を受け取りました」が反復し、初回理由側も関係説明に寄っている。今回の正の受け取り対象と対比の明示を、§9.2／9.4・自然さ・入力固有の内容形成の完成に換算しない。次は、初回の理由側とreceived側を合わせた受け取りに、その入力固有の一つの意味が形成されているかを扱う。既存selected contentと実本文の不足を分離し、根拠のない原因等や同義語追加で埋めない。評価撤回後のLIMITED一般態度、既存共有17失敗、same100、Q1上限、giver帰属、本人実機・正式受入は未解消。Mashへ未合格本文のProduct Readは求めない。10/17確認点・10/31残件線・12/18公開目標、Piece/Analysis主枠を維持する。
+
+
+## 2026-10-16 u283 — 二経験の内容不足の診断と、明示された同一対象・対比を読む限定案（未承認・未実装）
+
+基準はAPI `51f0913d4943f5e5f48c4104bc2c5e5260052103`／Cocolon `457dc7ff849bff5d1173580a08d560d2e5af328d`。u282の残件を継続調査した。以下は提案であり、既存設計・上限・許可範囲を変更する規範ではない。
+
+### 確認結果と、行わない修正
+
+- 理由付き満足＋receivedの初回は既に「受け取りました」が一回だけである。主因は文末の重複ではなく、理由関係の説明と別経験の説明が並ぶだけで、両者を通した読みを選んでいないこと。理由なし初回と否定訂正後には受容述語の重複もあるが、それだけの短文化を§9.2／9.4の完成としない。
+- `emlis_thread_projection._appraisal_received_components` は組をまたぐ関係を認めず、`_component_reception_rows` と `_selected_reception` は組別の命題へ接続する。これはu280／u281の範囲どおりであり、豊かな共通解釈が作者の直前で落ちている故障ではない。
+- 現行2 Moveの実測は最低2文／最大2文／一文1 Move。`_build_reception_depth_policy_and_moves`、layered validator、clause planner、独立pair readerがこれを支える。共通述語による一文化にはこの境界と旧checkpoint再導出も関わり、文字列置換だけの作業ではない。今回この制限を緩めない。
+- 元の二欄「理由付き満足」「褒められたのに嬉しくなかった」だけから、褒められた対象を資料分類と断定しない。「他者評価より実用性を大切にする人」等の価値観・人物像・原因も作らない。
+
+### 今回新たに実測した明示情報の欠落
+
+合成入力（実ユーザー本文ではない）：
+
+> 資料を分類したことには満足した。でも、その分類を褒められたのに、嬉しくなかった。
+
+実生成は `GENERATED / no_bound_personal_meaning_target`。planの関係は `evaluation_about_event` だけで、後半は「今は、…という感覚や状態が前に出ています」へ流れ、Receptionは「資料を分類したことについて、当時は満足したのですね。」だけだった。したがって、明示された対象付きreceivedの認識、後半の過去時点、二経験の対比が実本文へ届いていない。
+
+`_received_event_reaction_text_projections` のevent文法は任意の本人主語／giver＋受動述語を認める一方、この「その分類を」という対象を認めない。同一対象の参照を落として既知の単純receivedに縮める補修はしない。「その分類」を除いた対照ではreceivedのcontrastが現れ、二経験は個別に生成された。同じ対象語を含んでも「その分類の後で誘われた」なら、分類が誘いの対象とは限らない。
+
+### 提案するexact scope
+
+**追加候補：原文に一意な同一対象と対比が明示された場合だけ、行為への本人評価と、その行為を褒められた場面での本人感情を区別して読む。** 初回の明示意味→選択→実本文→保存再表示を同一単位で扱う。新しいエンジン・外部AI・専用checkerは作らない。
+
+1. 入力の同一欄に、本人の行為と肯定の満足exact1組、同じ行為を明示的に指す受動経験exact1組、両記述を結ぶ明示対比がある。理由は既承認の0/1だけ。対象参照は直前のexact1出来事へ一意に解決できるものに限定し、同じ語・同じカテゴリ・隣接だけで同じ出来事とは判定しない。理由句の行為を含め複数の参照候補、引用、他者主体、条件・仮定、未確定な照応では採用しない。
+2. source ownerで対象参照・出来事・反応・対比の各原文rangeと役割を保持する。意味ownerは「その行為への満足」と「その行為を褒められた場面での嬉しさ不在／悲しさ」を区別する。この二つの評価対象の違いを読むのであって、満足と嬉しさを同じ尺度の反対値として比較しない。経験間の原因、同時発生、価値の優劣、他者意図、恒常傾向を追加しない。外側の「でも」は〈行為への満足〉と〈その行為を褒められたのに嬉しくなかった経験〉、内側の「のに」は〈褒められた〉と〈嬉しくなかった〉の対比として別々に保つ。褒められた出来事を落として満足と感情だけを直結しない。理由は元の満足組だけに所有させ、received感情の原因に移さない。
+3. 既存のmeaning configuration／ReadingConsequence／Reception投影でこの組を所有する。新しいprivate armが必要なら新versionでdispatchし、旧型・旧保存bytesは不変。既存のHuman Reception作者と作者非依存readerが全役割・対象・肯否・各時点と選択内容を照合する。文数の一文化は完成条件にせず、既存の文数・Move・contribution・質問上限を保持する。
+4. 原入力に同一対象の明示または組間対比がない場合は、この読みを追加しない。u282の元の二欄入力へ対象関係を補完しない。評価否定・撤回・対象変更・反応変更後は新しい組の資格を再確認し、根拠が失われた共通読みを残さない。今回、訂正一般の資格拡張は行わず、既存の更新・停止・旧保存再読を維持する。共同の読みを失効させても、撤回されていない他方の有効な経験は既存経路へ保持する。
+5. source根拠と対比が揃って初めて、例の行為評価と受動場面の感情を区別した本文を返す。「外からの評価より自分の実感が大切」「褒められたせいで悲しい」「満足できたから嬉しい」へ変換しない。本文の固定正解をこの提案で先取りしない。
+
+### 実装候補ownerと検証
+
+| 既存owner（mashos-api / ai/services/ai_inference） | 予定する限定責務 |
+|---|---|
+| `emlis_ai_grounded_observation_plan.py` | 対象を持つreceivedと一意な参照・明示対比を、元のrange／本人／時点を保って認識する。 |
+| `cocolon_meaning_experience_engine/contracts.py`／`emlis_input_specific_meaning.py` | 同一対象の評価と受動場面の感情を区別する限定configuration／consequence、必要なversioned private arm。 |
+| `.../emlis_thread_projection.py`／`emlis_stage1_response.py`／`emlis_stage1_composition.py` | 既存全体候補への接続、所有対応、旧版dispatchを保持して限定選択を届ける。 |
+| `emlis_ai_grounded_human_reception.py`／`emlis_ai_grounded_observation_gate.py` | 既存作者と独立readerで対象差・全端点・肯否・時点を可視化・照合する。 |
+| 既存 `test_cmee_emlis_result_appraisal.py`、Q2/Q3 application、現行identity | 新しい対照・更新・保存互換を追加。歴史fixture、protected受入母集団は変更しない。 |
+
+完成条件は、明示同一対象＋対比の初回が語義説明の併記を越えて両評価対象を読み分け、後半を現在の一般状態へ誤変換せず、全意味と所有が保存・再生成なしread・RN表示へ残ること。対象参照削除／別対象／候補複数／対比削除／満足否定／反応肯否・種類変更／時点差／訂正撤回を対照にする。作者を呼ばないreaderで対象交換・原因追加・時点や否定改変を拒否し、旧checkpoint・既存u282の対象外出力を保持する。実本文の自然さ・入力固有性の事前読解が不成立なら商品完成としない。
+
+公開API/DTO/DB/RN、依存、外部AI禁止、稼働環境、質問・contribution・Move・文数の制限は維持する。追加サービス・金銭費用・Mashの実環境操作は0。認識から保存表示までの一実装単位が増え、正確な所要と完成日は現時点で未実証。10/17確認点・10/31管理線・12/18公開目標、Piece／Analysis主枠を変更しない。
+
+### 判断と再開位置
+
+u280が除外したsource範囲・組間関係の意味契約への追加に当たるため、**Rule18 §11.3に基づくMashの追加承認が必要**。本提案の記録はその承認ではない。今回は製品source／test／fixtureを変更していない。`BLOCKER_NARROWED / PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR`、初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。
+
+同一Work環境のread-only補助review二件を参照し、rootが原典・実出力を確認した。別model Pro／Ultraの相互審査成立とは報告しない。次はこの限定案へのMash判断。承認を得ても、元の関係未明示の二欄入力から共通の価値基準を導く許可へ拡張しない。
+
+## 2026-10-16 u284 — 明示同一対象と二段対比の限定実装
+
+前回u283限定案を提示した後のMashの「EmlisAIの残件作業を進めて」を、その限定案の実装指示として引き継いだ。u283の未承認・未実装は当時の履歴として保持する。公開契約一般、deploy、main mergeへの包括承認とはしない。
+
+同じ原入力欄に、本人の行為exact1と無程度・肯定の満足、外側の「でも」、その行為を一意に指す「その〈行為名〉を褒められたのに」、嬉しさ不在／悲しさexact1がある場合に限定する。理由は元の満足組に0/1。同じ語や隣接だけでは同じ対象にしない。有限のサ変行為名との明示一致を必要とし、別欄・対象違い・複数候補・他者・引用・仮定・単なる時間順・対比欠落は採用しない。継続付き満足など新ownerの資格外は旧source planを保持する。
+
+外側は〈行為への満足〉と〈その行為を褒められたのに嬉しくなかった／悲しかった経験〉、内側は〈褒められた〉と〈感情〉の対比として所有する。満足と感情を同じ尺度の反対値へ直結せず、原因・同時発生・価値順位・恒常的性格・他者意図を足さない。理由は満足の所有から移さない。既存2 Move・各上限を保ち、新production file／新engine／外部AIを追加しない。
+
+source ownerが原文range、役割、raw nucleus所有、対象参照先と参照range、外側markerを保持する。resolverで全評価役割・任意理由を既存parserから再照合し、received側も対象・感情・時制を原文から再照合する。意味ownerはexact4/5 node・3/4 edgeの新private `GroupedAppraisalReceivedConfigurationV1`（schema 1.1）へ結び、旧configuration/schemaをそのまま残す。typed-axis反事実は、その観測された端点ペアにだけ作用する。
+
+第二Moveの新private `EmlisSharedTargetExperienceAppraisalContent`（cocolon.cmee.emlis.shared_target_experience_appraisal.v1）が4役割・3関係・参照qualifier2件を持つ。第一Moveは元の評価／理由、第二Moveは同じ行為の受動場面と満足の区別を受け取る。理由ありの第一Moveへ評価の直接facetを二重に付けず、whole meaningには保持する。content所有順を命題と独立投影の双方で照合する。manifestは73型、旧型のfield／versionは不変。
+
+既存Observation作者が二段対比を一つの観測文で表し、Human Reception作者が選択内容を既存2文へ接続する。作者非依存readerは全役割・原文・関係・対象・否定・各時点・任意理由・選択されたbindingを確認し、平坦化した外側対比を旧文法へfallbackしない。訂正・撤回で適格性を失った共同読みは全役割の証明と外側関係を解除し、残る経験を既存更新経路へ渡す。
+
+新source認識前の完全checkpointは、旧source plan・質問を厳密に再導出する分岐で保持する。旧checkpointのIDだけを新解釈へ貼り直さない。公開API／DTO／DB／RN、製品依存、質問・Move・contribution上限、既存の歴史fixtureは不変。
+実保存した合成例（実ユーザー本文ではない）：
+
+```text
+見えたこと：
+「探しやすくなった」を理由に、「資料を分類した」という行為への評価は「満足した」とあり、その評価と対比して、同じ行為について「その分類を褒められた」のに「嬉しくなかった」と書かれています。
+
+Emlisから：
+探しやすくなった点に、資料を分類したことへの当時の満足の拠り所が見えます。その分類を褒められたのに嬉しさが伴わなかったことは、資料を分類したことへの当時の満足とは切り分けて受け取りました。
+```
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。
+
+今回、明示された同一行為について評価対象の違いが本文へ届いた。ただし初回の理由なしでは「受け取りました」が反復し、理由ありでも第一文は理由説明に寄る。更新後は共同読みを失効させて既存経路へ戻すため、理由なし否定訂正でreceivedがObservationだけに残ること、旧received観測文の「同時に」、評価撤回後の一般態度が実保存本文に残る。保存成功・NORMAL・REFINEDを自然さや§9.2/9.4の商品完成へ換算しない。
+
+次は、訂正後にも残る有効な経験の受け取りと、初回の説明・受容述語の反復を、原文の意味と選択内容の不足に分けて扱う。対象関係のない元の二欄入力に共通の価値基準を作らない。今回の初回限定scopeを訂正一般へ無断で拡張しない。既存共有17失敗、same100、Q1上限、giver帰属、本人実機・正式Product Readは未解消。Mashへ未合格本文のProduct Readは求めない。10/17確認点・10/31残件線・12/18公開目標、Piece／Analysis主枠、管理評価53.25％を変更しない。
+
+検証実績は正本06／API handoff u284、file地図は01A、private契約は正本05。
+
+実装commit：[81f52ef](https://github.com/MassyuRed/mashos-api/commit/81f52ef02cc74cd889904ff80d0185bd0a7d3fee)。API16pathのremote全文・blob SHA・変更集合・親commitを照合済み。
+
+
+## u285 — 訂正後に残るreceived対比へ同時性を加えない（2026-10-16 JST）
+
+u284の同一行為・二段対比の初回から満足を否定訂正／撤回した後、残るreceived対比が「異なる向きのまま同時にあります」となっていた。原文は同時性を述べていないため、未改変の原文二端点を「の一方で…とあります」という既存の時間中立な対比文法へ接続した。
+
+原文の共同読みをresolver付きで再検証でき、更新後はその共同読みが失効し、received関係が完全一致で残り、両端nodeが既存失効属性の除去以外に変わっていない場合だけ適用する。原文の対比・肯否・各端点の時制を引用から保持する。新しい共同読みを更新後へ存続させず、意味選択・checkpoint・Reception・source認識・schema・上限・公開API/DTO/DB/RN・製品依存を変えない。
+
+本差分はu284の未改変の内側対比を時点中立に実現する実装補修であり、§9.2/9.4の商品品質規範・初回限定の意味契約は変更しない。旧文reader互換・初回全文・歴史checkpointを保持。責務は01A、検証は06／API handoff u285。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。
+
+
+## u286 — 理由なし否定訂正でも残った経験を受け取りへ保持（2026-10-16 JST）
+
+u284の理由なし共有対象入力から満足だけを否定訂正した後、未撤回のreceived経験がReceptionから落ちる欠陥を修正した。同じcurrent_burden分類の代表選択で一方を捨てず、訂正評価とreceived対比を既存2 Moveへ別々に保持する。
+
+原初u284 groupをresolver付きで再証明し、理由なし・回答exact1・原時点の無程度満足を過去否定へREVISEするexact1操作に限定。対象とreceived両端は共同読みの失効属性除去以外に完全一致、received関係も完全一致、required4核／全2関係で閉じることを要求する。部分回答、時点変更、納得／程度付き評価、撤回、反応訂正、追加経験・追加回答へ適用しない。
+
+emlis_answer_update._active_planで成立する一時的な選択証明を、既存response→human_reception_plan→opportunitiesとdepthへ引数で渡す。source認識・核／関係・checkpoint・schema・NORMAL資格・Projection・作者／reader文法・公開API/DTO/DB/RN・依存・各上限は不変。原初共同groupと外側対比は失効したまま、更新後はLIMITEDを保持する。一般の理由なし訂正を一括で拡張しない。
+
+既承認の残存経験保持を既存LIMITEDへ接続する修復。u279の当時の範囲記録、u281のNORMAL条件、u284初回限定と§9.2/9.4の品質規範は変更しない。LIMITED Receptionの既存本文inverseは作者replayを含む。今回その経路を変更せず、Reception全体の作者非依存検証が新しく成立したとは報告しない。初回の説明・受容述語の反復、訂正後の一般的な受け取り、理由の有無による受け取り方の差は未解消。
+
+実本文と検証は正本06／API handoff u286。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。
+
+
+## u287 — 直前文を検証した共有対象評価参照で二重説明を削減（2026-10-16 JST）
+
+u284初回の第2文で行為・評価時点・満足をもう一度全文説明していた箇所を、検証済みの直前文への「その満足」という参照に変更した。理由0/1の既存共有対象だけを扱い、2 Move／2文と内外の対比を保持する。改善は冗長性・読みやすさの限定差分であり、受け取り内容形成全体の完成ではない。
+
+原source付き共有対象groupと第2 MoveのNORMAL内容・4役割3関係を再確認し、全Moveがexact2かつ直前Moveとの順序一致、第1 Moveの対象行為・評価・任意理由のsource focus完全一致とNORMALを要求する。その実際の前文全文を独立readerで確認した場合だけ参照を許可する。単語「満足」の一致では許可しない。前文なし／別Move／逆順／対象・時点・肯否・理由の改変は拒否する。証明できない作者は従来の完全表現を維持し、readerも旧完全文法を受理する。
+
+既存human_reception作者へ参照可否を渡し、observation_gateの既存preceding_contextを共有対象readerまで接続した。source認識、核／関係、checkpoint、意味schema、NORMAL資格、Projection、2 Moveの選択、公開API/DTO/DB/RN、依存と各上限は変更しない。訂正で初回共同読みが失効する条件とu285/u286の残存経験保持も維持する。
+
+§9.4の文章間参照による限定改善であり、§9.2の内容形成・§9.4全体の完了とはしない。独立性は今回の有限文readerと前文のsource-owned読みの範囲。既存の全文inverseには作者replayがあり、Reception全体が作者非依存になったとはしない。「受け取りました」の反復、初回の説明性と肯定的な受け取り内容、訂正後の一般的な受け取り、理由有無による差は残る。
+
+実本文と検証は正本06／API handoff u287。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+
+## u288 — 理由付き満足の内容型の非対称を特定し、限定修正を提案（2026-10-16 JST・未承認／未実装）
+
+初回の定型感を追い、理由がない満足では本人の充足を伴う経験が選ばれる一方、同じ入力に明示理由を一つ加えると汎用の材料受容へ戻る非対称を確認した。理由・対象・肯定満足は認識済みであり、sourceを広く読み直せない問題とは区別する。理由と満足の関係説明だけでなく、明示理由に根差す対象限定の本人の充足を内容型として渡す限定案を提案する。
+
+### 確認済みの原因
+
+- API `c6def6613a2147cac157331f545e7dd9db61de5e`／資料 `db95c8c976defb496851f4a9d370c297a5ef1a06`をfresh照合。u287 CI38826067228のobserved-content jobは全step completed/success。
+- rootが合成6入力（理由なし／探しやすくなった／使いやすくなった × 単独評価／u284共有対象対比）を同じ未変更sourceで実生成し、全6本文とselected contentを読んだ。理由なし2件の第一MoveはNORMALの`EmlisEvaluatedExperienceAppraisalContent`、`FULFILMENT_ACCOMPANIES_EXPERIENCE`、basis2。理由あり4件はNORMALのbase `EmlisAppraisalContent`、`MATERIAL_WEIGHT / RECEIVE_AS_MATERIAL`、basis3、理由relation focalである。全6件で本文は生成された。これはregression PASS件数ではない。
+- `emlis_stage1_composition.py`の既存内容projectorでは、`len(own_basis)==3`かつ`SATISFACTION_REASON`がある分岐がbase内容型を返し、2役割の評価分岐だけが具体的な評価経験型へ進む。`emlis_ai_grounded_human_reception.py::_source_owned_relational_focus_sentence`も、理由付きNORMALを「〈理由〉点に、〈対象〉ことへの〈時点〉満足の拠り所が見えます」へ実現する。作者直前に選択済みの充足内容が落ちているのではなく、理由付き内容の投影段階に不足がある。
+- 第二Moveのshared-target contentは4役割3関係を保持するが、`RELATIONAL_NONCOLLAPSE / PRESERVE_BOTH_ENDPOINTS`である。「同じ行為の両面／異なる経験」と付けるだけの案は関係反復とlabel追加になるため採用しなかった。期待、葛藤、自己基準、他者評価より重要、褒められた後も満足が続く、などの新解釈をsourceから導けたとはしない。
+- 訂正後8保存本文は前回取得済みu287資料を再読し、選択内容はread-only補助が合成4パターンで再現。共有対象からの満足否定訂正は理由0/1ともLIMITEDの材料受容、評価撤回後はLIMITEDの対比保持であり、NORMALの経験解釈が既に選ばれているのに本文だけが落とす故障とは確認できなかった。今回は訂正後の資格を広げない。
+
+### 提案する一つの限定変更
+
+**既存sourceで一意に認識済みの理由付き肯定満足について、理由・対象・本人の充足を一つのprivate受け取り内容として投影する。** 満足の意味はMashが確認済みの「本人にとって何かが満たされた感覚」を使い、再質問しない。新しい意味辞書・エンジン・外部AI・checkerは作らない。
+
+1. 対象は初回・既存NORMALの単一理由付き満足成分。本人の実行済み対象、無程度の肯定満足、既存parserで認識済みの明示理由exact1、`ABOUT_TARGET`／`SATISFACTION_REASON`各exact1とsource所有が一致する場合に限定する。単独成分と、既承認の別received／共有対象receivedを伴う場合にも、他成分の資格・内容・Move数は変えない。未認識の理由構文、複数／曖昧な理由、他者、引用、仮定、継続付き、否定、程度付き、納得は追加しない。
+2. 受け取る内容は〈その行為について、本人が明示した理由に根差して、本人の中に満たされた感覚があった／ある経験〉までとする。理由の時点と評価の時点を各sourceのまま保持し、理由→本人評価と対象→評価の向きを保持する。行為が客観的に理由の事実を生んだという因果、価値基準の達成、他者との優劣、received感情の原因、同時性、恒常傾向を追加しない。
+3. 既存base型や`EmlisEvaluatedExperienceAppraisalContent.v1`のfield・validatorを無version変更で拡張しない。新しいprivate内容arm／versionで、reason・event・evaluationの3 binding、reason relation・appraisal relation、評価の肯否／時点／満足種別を既存source qualifierと照合してcarryする。旧型は旧dispatchを維持する。具体名と重複fieldの最小化は実装時に確定するが、3役割2関係とsource資格を増減しない。
+4. 既存内容projector→独立した期待命題の再構成→唯一のHuman Reception作者→有限文readerの一単位で接続する。作者が理由文を見て独自に充足を補う経路にしない。本文では理由を充足の内容に結び付ける。完成文を固定fixtureとして先取りせず、原文の三役割と本人内の状態が同じ受け取りに現れることを要求する。語義説明や受容述語の反復が残る場合、全体品質の完成としない。
+5. 回答後・否定訂正・評価／対象／理由撤回・LIMITEDにはこの初回資格を持ち越さず、既存更新処理へ戻す。保存済み本文の再生成を加えない。旧checkpoint再導出と旧質問照合を保ち、歴史fixtureを新しい解釈へ書き換えない。
+
+### 実装候補ownerと完成条件
+
+| 既存owner（mashos-api / ai/services/ai_inference） | 限定責務 |
+|---|---|
+| `cocolon_meaning_experience_engine/contracts.py` | 新private内容arm／versionと3役割2関係の不変条件。旧型は保持。 |
+| `.../emlis_stage1_composition.py` | 既存sourceで成立した理由付きNORMAL成分に限り、理由に根差す充足内容を投影。 |
+| `.../emlis_stage1_response.py` | 作者と独立に同じsource／選択根拠から期待命題を再構成し、役割交換やforeign ownerを拒否。 |
+| `emlis_ai_grounded_human_reception.py`／`emlis_ai_grounded_observation_gate.py` | 選択済みの内容を本文へ実現し、理由・対象・評価の役割／時点と原因の向きを検証。u287の前文参照証明も対応。 |
+| 既存評価test・Q2/Q3 application・現行identity | 内容差と旧保存互換、実service→保存→NoAuthor read→RN表示まで確認。 |
+
+- 理由なし／理由1、理由差替え・削除、対象差替え、評価の時点、両欄、単独／別received／共有対象を対照に、理由が増えても確認済みの本人内の充足内容が消えず、他成分へ理由を移さないことを確認する。
+- 否定／撤回・LIMITED・複数／foreign owner・relationやbinding交換を拒否し、旧型／旧checkpoint／保存済み本文／質問を保持する。独立有限readerと既存全文inverseの能力を混同しない。
+- 変更前後の実本文をrootが全文読解し、理由と本人内の状態が同じ経験に結び付くことを確認する。単に「満足」を「充足」へ置換しただけなら未達とする。実service＋隔離SQL保存・作者禁止read・再送・現行RN表示までを同じ実装単位で確認する。本人実機・正式Product Readは別。
+
+### 承認境界と影響
+
+既承認の満足理解・明示理由認識を取り直す提案ではない。**private主観内容契約を新versionへ追加するため、作業ルール18 §11.3のstanding delegation外として、この追加範囲だけMashの承認を求める。** 今回の診断記録を実装承認にしない。新private armの実装は承認前に行っていない。
+
+追加外部service・依存・課金・API/DTO/DB/RN契約変更・稼働DB変更・deploy・mergeは0。source認識、意味候補の採用資格、質問／Move／文数の上限を変更しない。作業は既存owner内の内容投影・本文・検証の一単位が増える。正確な所要時間と品質合格日は未実証で、完成保証は置かない。既存u287の継続作業内で扱い、独立した準備systemを増やさない。
+
+この一変更で、第二Moveの境界説明、語尾反復、訂正後の一般性、§9.2/9.4全体まで閉じたとはしない。sourceから定義できない内容を追加する必要が出た場合、または表面の語彙置換にしかならない場合はそこで止め、具体差分を示す。10/17確認点・10/31管理線・12/18公開目標、Piece／Analysis主枠、管理評価53.25％を変更しない。
+
+BLOCKER_NARROWED / PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR。今回の製品source・test・fixture変更0、本文改善0。初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置を維持する。
+
+
+## u289 — 承認済みの理由・対象・本人の充足を一つの内容型から本文へ接続（2026-10-16 JST）
+
+Mashは2026-10-16 09:21:56 JST、u288の「明示された理由・対象・本人の充足を、一つの受け取り内容として保持する限定案」とRule18 §11.3の個別承認対象である旨を引用し、「うん、進めていいよ。」と明示承認した。新private内容契約の限定追加をこの承認で実装した。満足の意味／明示理由認識の既承認は取り直していない。u288の未承認表記は提案時の履歴であり、現行状態は本節を優先する。
+
+理由付き初回のNORMALで、理由・行為・本人の充足を同じ受け取り内容として保持するEmlisReasonedExperienceAppraisalContent（cocolon.cmee.emlis.reasoned_experience_appraisal.v1）を追加した。理由を独立した「満足の拠り所」の説明で終わらせず、実行した対象について、明示理由に根差した本人内の充足の経験として本文へ実現する。理由なしの既存内容型は維持した。
+
+適用は既に認識・選択済みの本人の理由exact1／実行済み対象／無程度の肯定満足だけ。exact AdmittedEmlisThread、frozen/control両回答tupleが空、current_round=0を要求し、単独・別received・共有対象の既存構成で同じ投影を使う。回答後に元の3役割が残っても初回と見なさない。非thread offline経路、LIMITED、否定／撤回後、複数・不明確理由、他者・引用・仮定・継続・程度・納得へ資格を広げていない。
+
+新armは理由／対象／評価の3 binding、理由→評価と対象→評価の2 relation、満足のkind/polarity、理由時点と評価時点を保持する。旧EmlisAppraisalContent／evaluated-experience-v1のfieldとexact validatorは不変。型分岐・immutable tuple・canonical binding・既存論理契約manifestに追加（73→74）し、既存投影とphase_Aの期待再構成へadmitted_sourceを直接渡す。期待再構成は共通の純粋導出関数を使う検査であり、作者非依存の有限本文readerとは別である。
+
+Human Receptionは選択済みの新内容を使う。原文の理由時制を保持し、評価だけを「当時…あった／入力した時点で…ある」へ結ぶ。独立有限readerは3役割・2関係の方向・source qualifier・本文の全形を照合する。u287の「その満足」はこの新しい完全前文を読解した後にだけ使える。旧base理由文／LIMITED文法も保持し、新旧内容と本文の取り違えを拒否する。対象行為が客観的に理由を生んだこと、未明示の基準／価値／優劣／恒常的性質、received感情の原因、時点の同一化は追加しない。
+
+関連803件（評価749＋Q2/Q3 application54）の全runは`4 failed, 799 passed, 2 warnings in 267.80s (0:04:27)`。4失敗はいずれもu287の前文改変testが旧単語「満足」を置換していたため、新文に対して無改変となったtest側の不足。実際の新しい充足述語を否定する改変へ更新し、同testの全8条件を再実行：`8 passed, 741 deselected, 1 warning in 15.57s`。最終的に対象803件の各検査は通過、skip/xfailなし。製品sourceは全run後に変えていない。新規7件は単独／別received／共有対象の3役割・関係交換、理由／評価の別時点、schema／kind／polarityの改変、選択内容不在のreader拒否、旧base dispatch、未解釈回答・否定訂正・撤回後の非昇格を検査。既存の作者禁止有限reader、改変拒否、前文参照、source除外、旧checkpoint／質問fixtureを維持し、初回の期待内容・文面だけを更新した。現行owner identity：`1 passed, 194 deselected, 1 warning in 21.24s`。歴史fixtureは未変更、現行identityのみ再計算。
+
+実EmlisThreadService＋隔離PGliteで28 DTO（初回FINAL4／PRE_QUESTION12、訂正または撤回後REFINED12）を保存。単独・別received・共有対象、両欄、過去／現在の評価を含む。作者を禁止したGET/startのDTO完全一致、同回答再送一致・event無増加、現行RN hook/modalの全文・全Observation履歴・close/reopen一致を確認。rootが28本文（同一全文をまとめた20種類）を全文読解した。native部品はstubで、本人実機・正式Product Readではない。保存済み本文の再生成を加えていない。
+
+限定内容の接続は確認したが、「受け取りました」の反復、第一文の長さ／説明性、第二Moveの受け取り内容、訂正後の一般性は残る。全体の文章品質や§9.2/9.4の完成ではない。既存全文inverseには作者replayがあり、Reception全体を作者非依存とはしない。
+
+source認識・意味候補の採用資格・質問／Move／文数上限、公開API/DTO/DB/RN契約、依存は変更なし。新production file／engine／checker／serviceなし。稼働DB操作・deploy・mergeは0。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+次は現在の実本文を起点に、同じ受け取り内容を保持した読みやすさ・文章間の流れと受容述語の反復を扱い、訂正後に一般的な受け取りへ戻る残件を追う。新しい意味・原因・価値・帰属や内部契約の追加が必要な場合は、未承認範囲を自動的に拡張しない。共有17失敗・same100・Q1上限・giver帰属・本人実機・正式Product Readは残件。10/17確認点・10/31管理線・12/18公開目標、Piece/Analysis主枠と管理評価53.25％は不変。
+
+
+## u293 — 更新後LIMITEDにおける未変更receivedの局所経験内容（限定提案・未承認、2026-10-16）
+
+本節はDESIGN_PROPOSAL_ONLY / MASH_APPROVAL_PENDING。current実装・既承認契約を変更しない。詳しい対象、予定owner、検証、停止条件は正本06とAPI handoff u293。
+
+u282の「出来事だけでは言い表せない、本人の反応を伴う経験」という内容は既承認だが、現行資格はNORMAL／basis2／contribution1等に限定される。理由なし否定訂正のLIMITED aggregateはMATERIAL_WEIGHT／basis4を持つため、本文段階で二端点だけを拾ってNORMALの経験文を使うことは意味の保持修復ではない。評価撤回後のLIMITED両端保持も、NORMAL資格の代理にはならない。
+
+提案対象は、元入力の別欄の満足1組＋received対比1組、完全な一回の当時の否定訂正（理由なし）または評価のみ撤回（理由0/1）。原received exact1の両端exact2・明示対比exact1・本人・肯否・過去時点・modality・source欄/spanが未変更で、現在の意味・根拠・Moveへ一意に対応するときだけ、局所の経験内容を選択する。
+
+全体のLimitedMeaningOutcome、LIMITED branch、単一aggregate命題、全required根拠・未知・表示義務は維持する。旧ComponentReceptionOpportunityV1はSelected whole/exact2 component用でありLIMITEDへ直接流用しない。新しいversioned private内容対応で、wholeのbasisとその局所subset、局所の両端／関係／contribution／qualifier、現在source・accepted update・projection所属を区別する。既存post-selectionから封印・claim／traceへ含め、作者はその選択済み局所内容を唯一の既存文法へ実現する。独立readerは同じ局所資格と実本文を照合し、作者を呼んで意味を選び直さない。旧型と旧aggregateの受理範囲を一括で緩めない。
+
+局所内容が認めるのはu282の経験読みだけである。原因、期待、意図、価値、理由付き満足の充足、失効した共有対象の外側対比を追加しない。満足側Moveへの流用、旧decision IDの持越し、全体NORMALへの昇格、本文後処理は不可。同欄・共有対象・複数／曖昧received・received更新・PARTIAL・legacy・ADD／混合更新・後続roundは対象外。理由付き否定訂正の既存NORMALと初回本文は不変。
+
+同じ54合成応答の対象12／対照42は改善範囲の診断であり、新型・新本文を実装または検証した証拠ではない。承認後、局所資格の因果対照、本人／肯否／時点／関係・片端欠落・根拠のない追加の本文拒否、旧本文互換、現行回帰、保存・NoAuthor再読・再送・RN再表示まで検証する。rootの本文事前読解を機械PASSで代用しない。正式Product Readや商品合格は別で、今回成立しない。
+
+意味内容は既承認でも、更新後LIMITEDへの資格とprivate契約の追加はRule18 §11.3 LEVEL_3に該当する。承認前の製品変更0、automatic_progression=false、candidate_ready=false。原典の意味再質問ではなく、この限定適用の追加についてMash判断を受ける。
+
+
+## u294 — 承認済みの未変更received経験を更新後LIMITEDへ保持（2026-10-16 JST）
+
+2026-10-16 11:26 JST、Mashがu293の限定案の実装を明示承認した。u293の未承認記載は提案時の履歴として保持し、現在の承認状態は本節を優先する。承認対象は、別欄の理由なし満足を当時の否定へ訂正する場合、または理由0/1の評価だけを撤回する場合に、未変更receivedの経験内容を更新後LIMITEDへ結ぶ資格とprivate内容対応の追加である。満足やreceivedの意味を再承認へ戻していない。
+
+u293で定義した別欄限定資格を実装した。新しいprivate Eligibilityは現在の原source・一回の完全更新・received Moveの所属を持ち、Contentはその資格と局所二端点・一対比・basis／qualifier、現在のaggregate claim／projection／meaning／reception bindingへ結ぶ。旧whole命題と識別hashを除く既存decision内容fieldを維持した別decision型で局所内容をcarryし、全体LIMITEDをNORMALへ読み替えない。
+
+原sourceを再admitして既存の更新処理から再導出し、accepted更新・原核／原関係・現在planを照合する。局所命題はpost-selectionで選ばれ、current aggregateとの対応を封印する。唯一のHuman Reception作者は検証済み局所内容だけを既存経験文法へ実現し、有限readerは実本文と現在sourceの本人・役割・肯否・時点・modality・対比を独立照合する。旧本文を新しい意味根拠にせず、保存readへ再生成を加えない。
+
+全体のLIMITED、既存aggregate命題、意味checkpoint・核・関係・Observation、未知・表示義務・Move数を保持する。同欄・共有対象・複数／曖昧received、received自体の訂正／撤回／時点変更、ADD・混合更新・後続回答、legacy／PARTIALは除外。初回と理由付き否定訂正の既存NORMALを変更しない。新しい原因・意図・期待・価値、理由付き満足の充足、失効した共有対象の外側対比を付加せず、満足側Moveへ局所内容を流用しない。
+
+source ID再導出等の最終補強前に比較した同じ54合成応答の対象12だけが変化し、対照42全文・全54の意味checkpoint／核／関係／Observationと旧aggregateと識別hashを除く既存decision内容fieldは保持された。対象12のdecision_ref／input_refは新局所内容を含むhashへ変わる。target12更新の局所経験内容を確認したが、初回一体単位と全体の§9.2/9.4は未完了。実装file責務は01A u294、schemaは05 u294、実本文・検証と次工程は06／API handoff u294、週次再開順は§5.6.44を参照する。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置を維持する。限定箇所の保持確認を§9.2/9.4全体、本人実機または正式Product Readの合格へ換算しない。
+
+
+## u295 — 既選択received経験の丁寧な過去形を同じ経験句へ実現（2026-10-16 JST）
+
+u282の裸形限定とu294の敬体fallbackは過去の実装状態として保持し、現在はこの修復を優先する。「嬉しくなかったです」「悲しかったです」のように、同じ過去述語へ末尾「です」だけが付く場合も、既に選択された本人のreceived経験を既存経験句へ実現する。作者の当該分岐だけで末尾を除いて従来の裸形検査・肯否判定を使い、有限readerは裸形／敬体の同一過去述語を原sourceと照合し、原敬体bytesを復元する。
+
+新しい意味・資格・private内容契約・選択内容は追加しない。SELF topic・程度・現在形・引用等の除外、u294の別欄・未変更received資格と全体LIMITED、本人・肯否・時点・対比・原因等の境界は維持する。同じ60合成応答でselected全体を含む意味とObservationは一致し、敬体24 Receptionだけが変わった。STRUCTURE_MAP_DELTA_NONE。実本文・最終sourceの901検査・保存/RN24 DTOと限界は06／API handoff u295、最新再開順はweekly§5.6.45。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式0/3、candidate_ready=false、automatic_progression=false、未配置・未マージ。限定した本文接続の修復を§9.2/9.4全体の合格へ換算しない。
+
+
+## u300 — 初回の未成立三点＋別received二点への成分資格追加案（2026-10-17 JST）
+
+**PROPOSED_NOT_APPROVED / PRODUCT_NOT_CLEAR。未実装、今回の製品変更・本文改善0。** u299のsource修復後も、未成立事項付き満足に別receivedが加わると内容は「対比への注意」へ留まる。u299基準API5791a2aで18合成入力を実生成し、対象12（別欄両順・同欄両順×memo/memo_actionの計6配置×過去／現在2）は全てLIMITED、単独／本人実行行動併記／理由＋receivedの対照6はNORMALだった。全18本文をrootが読解。本文と数値の詳細はAPI既存handoff u300、検証位置は06 u300、再開はweekly§5.6.50。
+
+選択済み内容の取り落としではない。thread_projectionの`_appraisal_received_components`は未成立contextを明示除外し、compositionの独立所有closureも未成立を評価組に含めていない。LIMITEDの2 Moveは全5点のMATERIAL_WEIGHT／focalなしを分配し、作者が実現できるのは既存の注意内容である。u262の組外本人実行行動限定、u281の未成立なし二経験資格を広げる追加が必要になる。
+
+### 限定案
+
+- 回答なし・round0・legacy復元でない初回だけ。本人の完全な未成立fact（現在・否定）exact1、実行済み対象（過去）、肯定無程度満足（過去／入力時点）の三点と、既存ABOUT_TARGET＋CONTRASTの二辺を一成分にする。新しいsource文法は加えない。
+- もう一成分は既存資格でsource所有が確定する本人received出来事／過去反応の二点と明示contrast一辺。receivedの肯否・程度・本人帰属等は現行資格を広げない。本文の全required五点・三辺が二成分へ一意に属し、既存required Move exact2が各成分を完全所有する。組間関係、追加材料、意味不明点、共有対象、理由、否定／程度付き満足・納得、他者／引用／推量、重複／曖昧な所有は対象外。
+- u299までに認識済みの別欄両順・同欄両順（memo／memo_action）を、欄順の優先ではなく原文範囲・本人継続・一意な出現・非重複所有で扱う。
+- 既存の成分内比較・全required所有からwhole候補とReadingConsequence各exact1へ結ぶ。NORMALを直接指定しない。既存`ComponentReceptionOpportunityV1` exact7を二機会、通常`EmlisAppraisalContent`を三点／二点それぞれに用いる。三点側はRELATIONAL_NONCOLLAPSE／PRESERVE_BOTH_ENDPOINTS、appraised exact3、protected0、未成立→評価の焦点対比を保持する。received側は別basisと別焦点を持ち、他組の意味を借りない。
+- 未成立を理由／不能／達成目標へ変えず、満足を成功・進歩へ格上げしない。現在の未成立を過去の満足時点へ移さず、両組間の因果・同時性・優先度・相手意図を足さない。内容目標は未成立の点を保ちつつ、対象へ限った本人の充足と、別のreceived経験の両方を受け取ること。§9.2/9.4は不変。NORMAL化・関係反復・語義説明だけを完成としない。
+
+静的確認では新schema／内容型／上限／registryは不要。必須実装候補は既存thread_projectionの資格判定とcompositionの独立所有closure。既存作者・独立readerは未成立三点とreceived二点に対応しているが、この組合せの実行成立は未検証。既存型でlosslessに保持できない場合、別の局所carrier等を自動追加せず不足を具体化する。
+
+### 互換と受入れ
+
+source checkpointが同じでも、選択whole／branch／主観内容／識別hash／本文は変わり得る。checkpoint一致を旧生成本文の同一へ換算しない。旧保存DTOのNoAuthor GET/start／同回答再送、checkpoint保存後・本文保存前の再試行、旧質問への回答とlegacy復元を分けて確認し、既存retry境界と旧sourceの完全再導出を保つ。新保存versionやretry契約が必要なら本案外として停止する。対象外の訂正・撤回をこの初回資格へ自動拡張しない。
+
+既存serviceの未保存本文再試行は、保存MEANING_UPDATEを再利用して現在のengineで生成し、完全checkpoint一致を要求する。今回もその契約を維持し、新しい旧renderer固定flagは作らない。全checkpoint・意味event・operationの保持と、完成済み本文の非再生成を別々に確認する。
+
+source→成分→whole→主観命題→実本文を同じ単位で比較する。三点削除／対象変更／肯否・程度・時点、received反応変更、追加材料／foreign owner、ID再計算後の成分・Move・relation交換により、正しい組だけが変わることと不適格候補の拒否を検証する。独立reader、実service＋隔離SQL保存、非再生成、現行RN本文／全履歴／再表示、rootの全保存本文読解まで同じ単位で行う。既存Observationの満足一回・一節化・未明示同時性なしを維持する。実機・正式Product Readとは区別し、説明性が残れば未完了とする。
+
+Rule18 §11.3 LEVEL_3として**この成分資格追加だけ**承認を求める。既承認範囲は継続する。外部AI・service・依存・費用・公開API／DTO／DB／RN schema・配置／mergeは追加0を予定。資格／独立所有の修正と既存回帰・保存表示確認が必要で、正確な工数と完成日は未確定。承認前に作者の表現緩和で代用しない。同Workの補助read-only reviewを用い、別Pro/Ultra正式二重検証を済ませたとはしない。
+
+STRUCTURE_MAP_DELTA_NONE。製品実装・地図責務は不変。初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・未配置／未マージ。10/17確認点に選択資格不足と最小差分を記録し、10/31・12/18、Piece/Analysis主枠、53.25％を維持する。
+
+
+## u301 — 初回未成立三点＋別received二点の承認済み実装（2026-10-17 JST）
+
+2026-10-17 08:16:47 JST、Mashがu300の初回限定案に「うん、進めていいよ。」と明示承認した。Rule18 §11.3の追加資格承認は成立済み。u300の未承認表記は提案時の履歴であり、現在は本節を優先する。同じ承認を再要求しない。
+
+初回・回答なし・round0・legacyなし・RESOLVEDだけを追加資格とする。本人の現在否定の未成立fact、過去の実行対象、過去又は入力時点の肯定無程度満足の三点と、別のsource-owned received出来事／過去反応二点を分ける。全required五点・三辺・required Move二つ・source span二つの一意所有を確認し、同欄でも非重複を証明する。理由・共有対象・追加材料・明示未知・重複・foreign owner・giverへのSELF混入・回答後・PARTIAL／legacyは既存経路へ残す。既存の一般的なevidenceなしdo_not_claim境界は拒否理由にしない。
+
+既存の成分内比較からwholeを選択し、その成分所有をComponentReceptionOpportunityV1の二機会へ結び、ReadingConsequence exact1を保つ。未成立側は通常EmlisAppraisalContentの三binding・RELATIONAL_NONCOLLAPSE／PRESERVE_BOTH_ENDPOINTS・protected0・未成立→満足の焦点対比、received側は別二binding・別焦点を持つ。mode/operatorは既存ATTENTION／ATTEND_TOのままで、従来の全五点MATERIAL_WEIGHT／focalなしから内容が分離された。NORMALを直接強制せず、作者は選ばれた内容を実現する。
+
+u300で見込んだ資格／所有closure二ownerだけでは、二つの対比のRIGHT反応がgeneric scopeで衝突し、ALL_DRAFTS_SOURCE_GROUNDED_HARD_INVALID／ENDPOINT_COLLAPSEとなった。そこで既存emlis_input_specific_meaningのsource projectionへ、承認対象の三点を再証明した場合だけ固定意味値scope:source_bounded_result_appraisalを保持する最小差分を加えた。三点の全facetで一貫し、receivedは既存scope。ID・語句・配置順をsignatureへ混入しない。独立validatorも同じsourceから再導出し、carried scopeの消去／借用を拒否する。collision／mutation義務を緩めず、新schema・型・registry・上限・作者分岐を追加しない。独立closureが再検証するのはsource・成分・Move所有と初回thread状態であり、Preparedのlegacy／checkpoint flagsは入口guardが担当する。
+
+### 対象の実保存本文全文
+
+入力：memo「結論は出ていないが、考えを言葉にできて満足した。」、memo_action「褒められたのに、嬉しくなかった。」
+
+```text
+見えたこと：
+「結論は出ていない」の一方で、「考えを言葉にできて」という出来事への評価は「満足した」とあります。 「褒められた」の一方で「嬉しくなかった」とあります。
+
+Emlisから：
+結論は出ていないという点と切り分けて、当時の満足を、考えを言葉にできたことに向けられた充足として受け取りました。褒められたことだけでは言い表せない、嬉しさが伴わなかったあなたの経験として受け取りました。
+```
+
+変更前は「結論は出ていないという点と、考えを言葉にできたことへの当時の満足との対比に目を向けています。褒められたことは、嬉しさにはつながらなかったのですね。」。新しい本文は結論未確定を保ち、言葉にできた対象へ向けられた充足と、別の嬉しさが伴わない経験を個別に受け取る。入力時点形ではObservationが「満足している」、Receptionが「入力した時点での満足」になる。逆順ではObservationの二節順だけが逆になり、Reception順は同じ。未明示の因果・同時性・目標達成・相手意図を加えない。
+
+旧質問への「『嬉しくなかった』ではなく『嬉しかった』です。」相当の明示訂正後は、Observationに現在の三点とreceivedの「嬉しかった」が出るが、Receptionは既存の未成立対比への注意一文。新しい初回資格を回答後へ自動拡張していない。この既存残件は互換一致と商品品質を区別して保持する。
+
+
+source→二成分比較→whole→主観命題→本文→実service保存→現行RN再表示を同じ単位で確認した。18比較は対象12のReception／selectedだけが変化し、plan・checkpoint ref・Observationは18一致、対照6は全record一致。完全checkpointの旧／新一致、実旧保存本文の非再生成、旧質問回答と旧checkpoint retry、29実保存DTOのRN確認を実施。数値・失敗履歴・実行限界は06／API handoff u301に集約する。
+
+STRUCTURE_MAP_DELTA_PRESENT。3 production ownerの地図は01A u301。既存型の意味scope保持は05 u301、再開はweekly§5.6.51。説明調・関係の説明は残り、充足の語義を述べただけで§9.2/9.4全体を満たしたとは判定しない。今回の旧質問への肯定訂正でも、Observationは更新される一方、Receptionは既存の対比への注意に留まった。次はこの初回の内容形成と訂正後の二重説明／ATTENTION、共有対象／対象外更新を既存承認範囲で進める。既存周辺4失敗（過去共有17との集合一致未確認）、same100、Q1上限、giver帰属、本人実機・正式Product Readは未解消。10/31管理線・12/18公開目標、Piece/Analysis主枠、管理評価53.25％を維持する。
+
+TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。NORMALや回帰成功を商品合格へ換算しない。
+
+
+## u306 — 未変更の理由付き満足を肯定訂正後へ局所保持する限定案（2026-10-17 JST・未承認）
+
+DESIGN_PROPOSAL_ONLY / MASH_APPROVAL_PENDING。u289の初回NORMAL資格とu294のreceived二点専用資格は変更しない。今回未変更コード32応答で、理由付き満足の三点が残っても別received反応の当時肯定訂正後にはLIMITEDの「理由への注意」へ戻ることを確認した。内容型・作者・独立readerが現行限定に一致しており、文面だけの修復ではない。
+
+新たに提案するのは、既存認識の本人理由exact1＋実行済み対象＋肯定無程度満足が未変更のとき、一回のreceived反応だけの完全な当時肯定訂正後にも、既承認の本人内充足内容を局所保持する資格である。別欄両順と同欄両順×2欄の6配置、満足過去／入力時点を同じ資格に含める。訂正反応は既存positive-feeling範囲（「少し嬉しかった」も含む）を使い、安心した等の分類は変えない。
+
+全体LIMITEDと既存aggregate・核辺・checkpoint・二Move・Observationを保持したまま、sourceから未変更三点／二辺と受理更新・Move所有を再証明し、別のversioned private資格／内容を満足Moveだけへ結ぶ。u294の二点型、初回NORMAL型、Selected whole用の成分資格を回答後へ直接流用しない。既存post-selection／単一作者／有限readerを用い、新engine・後処理・外部AIを作らない。
+
+具体的な対象、除外、6既存production owner、13対象／19非対象の修正前診断、必要回帰・保存／RN、旧checkpoint互換と停止条件は正本06／API handoff u306を参照。初回・PARTIAL／不明・legacy・履歴frame・ADD／撤回／混合・満足側更新・後続round・共有対象・追加材料は範囲外。完成済み保存本文は非再生成、未完成current checkpointの再試行は意味を保って新本文を作り得るので旧文面一致を約束しない。
+
+Rule18 §11.3 LEVEL_3の追加判断対象はこの更新後資格／private内容対応だけで、満足の意味の再質問ではない。承認前の製品code/test/fixture変更0・本文改善0・STRUCTURE_MAP_DELTA_NONE。BLOCKER_NARROWED / PRODUCT_NOT_CLEAR、正式0/3・candidate_ready=false・automatic_progression=false・未配置／未マージ。
+
+
+## u307 — 更新後LIMITEDに保持する理由三点のprivate内容（2026-10-17 JST・承認済み）
+
+Mashの2026-10-17 11:25:59 JST承認でu306を実装。原5required核／3辺・別二経験、当時のreceived反応だけのpositive REVISE exact1・round1・完全RESOLVEDを必要条件とする。u304の既存義務証明を変更せず使い、実envelopeから元source／更新とaggregateを独立再導出する。初回・legacy・履歴/frame・後続round・他更新・共有対象／追加材料は資格外。
+
+| private型／内容 | 契約 |
+| --- | --- |
+| RetainedReasonedExperienceEligibilityV1 | schema_version、source_prefix_ref、checkpoint_ref、original_source_ref、answer_source_ref、original_nuclei（required exact5のcanonical JSON）、original_relations（exact3）、受理update、move_ref、thread_control |
+| RetainedReasonedExperienceContentV1 | schema_version、上記資格、projection_preimage_ref、aggregate_projection_seal_ref、aggregate_claim_ref、aggregate_proposition_ref、meaning_outcome_ref、reception_binding_ref、grounding_ref、basis_rows／qualifier_rows各exact3、reason/event/evaluation_binding_ref、reason/appraisal_relation_ref、evaluation_kind=satisfaction、polarity=positive、reason_time／evaluation_time各pastまたはpresent、reception_configuration=EXPLICIT_REASON_GROUNDS_EXPERIENCED_FULFILMENT、seal_ref |
+| SelectedRetainedReasonedExperienceDecisionV1 | 既存decision全field＋retained_reasoned_experience。既存aggregateはLIMITED／ATTENTION／ATTEND_TO／focalなし／whole basisのまま。全selectedを現在sourceから再導出して照合 |
+
+局所内容は初回NORMAL型やu294exact2型を継承・流用しない。既存content／decision検査は保持、現行論理契約manifestへ二型を追加し74→76。新型は非公開で保存せず、公開API／DTO／DB／RN／意味checkpoint schemaは不変。唯一の既存作者・独立有限readerが選択された三点内容にだけ既承認の経験文法を使う。received訂正文、全required義務、未知、Observationは不変。
+
+完成済み保存本文はGET/start／再送時に非再生成。本文未完成current checkpointは意味を保持して現行本文へ再開し、既存意味／ANSWER events・operation／旧OBSERVATIONを保持する。旧文面の世代固定を意味checkpointに持たせない。詳細と実測は06／API handoff u307。PRODUCT_NOT_CLEAR、正式0/3・candidate_ready=false・automatic_progression=false。
+
+## u315 — 追加回答後も理由付き満足を経験として保持（2026-10-17 JST）
+
+Mashが2026-10-17 16:46:17 JSTにu314限定案を承認した。別received経験への一度の追加回答（現在／当時×肯定／否定）後も、未変更の理由・対象・満足を満足Moveの局所経験内容として保持する。全体LIMITED・aggregate・意味核辺・checkpoint・Observation・元反応／回答本文は不変。旧u307の当時肯定REVISE資格を維持する。
+
+原required5核3辺・一意な原source2出現、独立した理由三点／received二点、round1・各回答1・RESOLVED・ADD exact1、原失効0・原核辺不変、追加回答核1／ABOUT1辺を出典から検証する。accepted／changed／evidence・subject・時点bindingと全required被覆、肯定3／否定2 Movesのtarget／support／evidenceを照合。現在のanchorも原本envelopeとし、時点証拠を回答へ結ぶ。PARTIAL・unknown・history/frame／legacy・複数／後続回答・共有対象・余剰材料・plain／unfinished・他更新は新資格外。
+
+`RetainedReasonedExperienceEligibilityV1`／`RetainedReasonedExperienceContentV1`／`SelectedRetainedReasonedExperienceDecisionV1`の既存fieldsをそのまま用い、局所三basis／三qualifier／二contributionと二方向関係を結ぶ。基底EmlisAppraisalContent、全体LIMITED／ATTENTION／ATTEND_TO／focalなしは維持。source replayでprepared／Plan全体を照合し、旧aggregateから全selectedを再導出して再封印されたforeign Move／checkpoint／aggregateも拒否する。新型・新schema・論理契約manifestの増分は0、契約validatorの弱化は0。
+
+`STRUCTURE_MAP_DELTA_PRESENT`。既存private V1三型を再利用し、field／schema／manifest／validatorは変更しない。`emlis_answer_update.py`のREVISE証明、作者／有限reader、公開API／DTO／DB／RN、各上限、新file／依存、01B/C・Piece/Analysisの責務は不変。完成済み保存本文は非再生成、未完成current checkpointは同じ受理意味・operation・既存履歴を保って現行本文へ再開する。
+
+101比較は対象60（必須48＋語／時点変種8＋程度4）だけの局所内容／selected型／Reception／text変更、非対象41は取得全record一致。checkpoint95例の意味・核辺・Move・Observation等は全一致。実service73ケース／RN146 DTO、保存38種全文をrootが読解した。主回帰と境界拒否の詳細は06／API handoff u315を参照。native stubによる合成RNで本人実機の追加確認ではない。
+
+最新結果は06／API handoff u315、再開順はweekly §5.6.65。今回の追加承認を待ち直さない。説明の長さ・対象／語尾の反復など本文品質は残件。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。
