@@ -1,3 +1,5 @@
+> 最新契約差分：末尾u332。安堵／不確かな寂しさの承認済み主観内容。
+
 ---
 doc_id: cocolon_meaning_experience_engine_current_structure
 title: "CMEE — Current Structure"
@@ -1591,3 +1593,19 @@ Mashが2026-10-17 16:46:17 JSTにu314限定案を承認した。別received経�
 ### u320 — 認知内時間主題の本文復旧（2026-10-17）
 
 既存source作用域で今後／これからのtopicを内側可能性へ保持し、外側現在感情・人topicとの混同を修復。自然変種3件は本文へ復帰し、元10／固定100の全recordはu319と不変。旧u319 checkpointは今回修復のみ無効にして完全再導出する。STRUCTURE_MAP_DELTA_NONE。意味型／受容内容契約・公開API／DB／RNは不変。受容の汎用性・問い・同欄REVISE4／WITHDRAW6は未解消。新appraisal armは未実装・未推奨で承認待ち工程にしない。本文・検査の版・保存互換は正本06／API handoff u320およびu320監査を参照。
+
+
+### u332 承認済みの内部内容・source契約
+
+u331案は2026-10-18にMashが個別承認した。本節が以後の差分正本であり、旧「未採用」記述は当時の履歴として残す。
+
+- `EmlisReliefCognitionAppraisalContent`、schema `cocolon.cmee.emlis.relief_cognition_appraisal.v1`。既存appraisalの6fieldを保ち、schema_version／relief_binding_refs／loneliness_binding_refs／reaction／responseの5fieldを追加。role集合は非空・互いに素・appraised basis全体に閉じる。原03は2意味・3bindingであり2bindingへ潰さない。
+- reaction=`BOUNDED_RELIEF_AT_REPORTED_RELIEF`、response=`LISTEN_TO_PRESENT_LONELINESS_UNDER_UNCERTAINTY`。RELATIONAL_NONCOLLAPSE／PRESERVE_BOTH_ENDPOINTSとATTENTION／ATTEND_TOを保つ。optional affect／stanceはNoneのまま。LIMITEDも元の対象選択を保ち、該当対比だけ同じ版付き内容を導出する。
+- 受け付け済みの本人reaction・explicit current input・memo内別span・positive/pastの安堵・negative/currentの寂しさ・実contrast markerが必要。認知内の可能性は原文どおりで、過去の可能性も未来へ変えない。原文にない願望／必要性／他人意図／正否評価は選ばない。後置帰属はmemoとmemo_actionの両方で確認し、私有物をEmlisの所有へ移す内側一人称も資格外にする。
+- joint slotは二対象が有効な間だけ存在する。originは訂正対象の由来として保持し、主観内容の再資格には使わない。実質問への完全引用訂正でのみ、安堵の否定・実際の被誘い等＋現在／過去の寂しさの完全節を新sourceから読む。引用された旧文は対象locatorに限定し、新本文の主体・否定・時点をそこから借りない。裸の回答へこのgrammarを広げない。
+- 片側のREVISE／WITHDRAWで二つの共同facetを失効。対象の旧意味・辺をinactiveにし、実在する別経験の問いを用いた今回のexact残存形では、訂正内容と残る元感情・別対比を各既存責務で実現する。任意の多段会話・全残存組合せが完成したとはしない。
+- independent readerはsourceと選択済みfacet、対象role、focal relationを再証明し、限定的安心／現在の傾聴を本文から読む。作者の再実行だけをoracleにせず、旧generic対比文へのfallbackで新facet欠落を隠さない。限定同義は通す。新content・proof helperはlanguage identityのAST閉包に含む。
+- 新しいslot/originでcurrent checkpointは変わる。新モード不一致時だけu331意味を完全再導出し、canonical questionとcheckpoint全体が一致するとき復元する。以前のlegacy modeはu332資格も無効化する。旧checkpointの意味ラベルの付替えはしない。
+
+全file責務は01A末尾u332。公開経路・他中核への変更なし。STRUCTURE_MAP_DELTA_PRESENT。
+詳細・未加工本文・検証境界：[Cocolon_EmlisAI_u332_SourceBoundRelief_and_Listening_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u332_SourceBoundRelief_and_Listening_20261018.md)。

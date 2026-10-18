@@ -496,3 +496,9 @@ BODY_UNAVAILABLE: ['emlis_q3_initial_body_unavailable']
 ```text
 BODY_UNAVAILABLE: ['emlis_q3_initial_body_unavailable']
 ```
+
+
+## 後続記録（2026-10-18）
+
+u331時点の未採用提案はMashが個別承認し、u332で初回・訂正／撤回・保存再表示まで実装した。本書の未採用記述は当時の履歴として保持する。
+詳細・未加工本文・検証境界：[Cocolon_EmlisAI_u332_SourceBoundRelief_and_Listening_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u332_SourceBoundRelief_and_Listening_20261018.md)。

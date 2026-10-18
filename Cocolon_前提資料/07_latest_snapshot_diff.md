@@ -41282,3 +41282,42 @@ E01の他の主体／時点、Observationの時点差に対する「同時」表
 primary outcome=TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。Draft/open/unmerged・未配置。実機・本番DB・deploy・merge未実施。
 
 詳細・全20例・次の未採用案：[Cocolon_EmlisAI_u331_ConcreteContrastReception_and_NextDecision_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u331_ConcreteContrastReception_and_NextDecision_20261018.md)。
+
+
+## u332 — 入力に根拠を持つEmlisの反応・傾聴を実装（2026-10-18）
+
+Mashの「うん、進めていいよ」により、u331の具体案に対するRule18 §11.3個別承認が成立。承認記録をweeklyへ先行反映し、commit `3449f723735f974ccb1577656344301b4e90df56` を読戻し確認した。初回・自然変種・実在する問いでの訂正／撤回・保存再表示を一体で扱った。
+
+本人の過去の安堵と、不確かな考えから生じる現在の寂しさをsource全体・span・明示対比で証明し、Emlisの限定的安心と今その寂しさを聴く姿勢を新しい内部内容契約へ選択する。作者での語尾付加ではない。NORMALおよび既存LIMITEDの該当二対象に限定し、一般AFFECT／STANCE解禁や本人の願望・他人意図・行動評価を行わない。
+
+合成20例中10例で新しい反応を実現。残10例は本文／projection停止が不変（生成15・projection停止5）。旧u331初回15checkpointは完全意味・plan・selected・本文・問いを一致確認し、u319原03も復元確認。旧完成は非再生成、checkpoint後のretryへ新意味を付け替えない。実際の問いを持つ原03＋別経験で、安堵否定・予想から実際の出来事への現在／過去の訂正・左右撤回の5例を確認し、両端の共同反応を失効させ、残る意味を保持した。
+
+検証は別集合934 passed／10 failed／skip0。10件は既知の旧本文3件、今回変更した語句への旧replaceが無変化になる6件、原03の新規checkpointも旧IDと同じという旧期待1件。既存assertion／歴史fixtureは保持し、新本文への実変異検証と旧checkpoint復元を別途通した。現行manifest件数のみ承認された新型に合わせ76→77へ更新。全体suite合格を意味しない。
+
+実service＋隔離PGlite SQL/RPC12ケース、同じDTOの現行API client／hook／Modal native stub12ケースで、3tier・旧完成・checkpoint前後中断・5更新・旧回答checkpoint・GET／start非再生成／元入力／全履歴／close-reopenを確認。本人実機・本番DB・deploy・mergeは未実施。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存製品8owner、内部content型1追加、新production file0。設計／全file地図／current01・04／正本06／差分07／handoffを更新。公開API・DB・RN・依存・外部AI・費用は変更なし。同Work補助はread-onlyで、正式な別model評価ではない。
+
+原文の反復と一文の長さ、一般入力への適用範囲、主体・時点の未解決、E04深さ、E05問い、E06〜E09は残る。深い受容全体の完成とはしない。次は承認済み二反応を保った短い自然な表現と、未対応sourceの意味保持を実本文で比較する。10/20方式判断を延期しない。10/31管理線・12/18目標・Piece/Analysis主枠53.25％は不変。
+
+primary outcome=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。Draft/open/unmerged・未配置。
+
+
+| mashos-api exact path | u332の責務差分 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 二source役割・全field帰属・joint資格／origin・限定訂正grammar |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 選択済み二facetと訂正内容の有限本文 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | source役割と二facetの独立読解、旧generic救済の禁止 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py` | 内部新content、閉じた検証、source qualifier搬送、LIMITED導出 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py` | NORMAL導出、manifest77・current identity |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | current意味と旧source modeの版分離 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 旧checkpoint全体復元、訂正／撤回と残存責務 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py` | Q1のcurrent／legacy準備済み意味経路 |
+| `ai/tests/test_cmee_emlis_relief_cognition.py` | 新規82検査：source、本文、作者禁止変異、更新、旧意味互換 |
+| `ai/tests/fixtures/cmee_emlis_u331_relief_cognition_v1.json` | 新規：変更前u331合成20入力の記録 |
+| `ai/tests/test_cmee_emlis_result_appraisal.py` | 現行manifest件数76→77のみ |
+| `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 現行18payload／9ownerを再導出 |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 最新契約・実装・検証・残件引継ぎ |
+
+資料変更：01／01A全体・全file地図、current01／04、8/28設計、正本06、差分07、最新weekly、u331監査への後続案内、新規u332監査。
+詳細・未加工本文・検証境界：[Cocolon_EmlisAI_u332_SourceBoundRelief_and_Listening_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u332_SourceBoundRelief_and_Listening_20261018.md)。

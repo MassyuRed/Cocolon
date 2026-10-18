@@ -3568,3 +3568,18 @@ Mashが2026-10-17 16:46:17 JSTにu314限定案を承認した。別received経�
 101比較は対象60（必須48＋語／時点変種8＋程度4）だけの局所内容／selected型／Reception／text変更、非対象41は取得全record一致。checkpoint95例の意味・核辺・Move・Observation等は全一致。実service73ケース／RN146 DTO、保存38種全文をrootが読解した。主回帰と境界拒否の詳細は06／API handoff u315を参照。native stubによる合成RNで本人実機の追加確認ではない。
 
 最新結果は06／API handoff u315、再開順はweekly §5.6.65。今回の追加承認を待ち直さない。説明の長さ・対象／語尾の反復など本文品質は残件。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。
+
+
+### u332 承認済みの内部内容・source契約
+
+u331案は2026-10-18にMashが個別承認した。本節が以後の差分正本であり、旧「未採用」記述は当時の履歴として残す。
+
+- `EmlisReliefCognitionAppraisalContent`、schema `cocolon.cmee.emlis.relief_cognition_appraisal.v1`。既存appraisalの6fieldを保ち、schema_version／relief_binding_refs／loneliness_binding_refs／reaction／responseの5fieldを追加。role集合は非空・互いに素・appraised basis全体に閉じる。原03は2意味・3bindingであり2bindingへ潰さない。
+- reaction=`BOUNDED_RELIEF_AT_REPORTED_RELIEF`、response=`LISTEN_TO_PRESENT_LONELINESS_UNDER_UNCERTAINTY`。RELATIONAL_NONCOLLAPSE／PRESERVE_BOTH_ENDPOINTSとATTENTION／ATTEND_TOを保つ。optional affect／stanceはNoneのまま。LIMITEDも元の対象選択を保ち、該当対比だけ同じ版付き内容を導出する。
+- 受け付け済みの本人reaction・explicit current input・memo内別span・positive/pastの安堵・negative/currentの寂しさ・実contrast markerが必要。認知内の可能性は原文どおりで、過去の可能性も未来へ変えない。原文にない願望／必要性／他人意図／正否評価は選ばない。後置帰属はmemoとmemo_actionの両方で確認し、私有物をEmlisの所有へ移す内側一人称も資格外にする。
+- joint slotは二対象が有効な間だけ存在する。originは訂正対象の由来として保持し、主観内容の再資格には使わない。実質問への完全引用訂正でのみ、安堵の否定・実際の被誘い等＋現在／過去の寂しさの完全節を新sourceから読む。引用された旧文は対象locatorに限定し、新本文の主体・否定・時点をそこから借りない。裸の回答へこのgrammarを広げない。
+- 片側のREVISE／WITHDRAWで二つの共同facetを失効。対象の旧意味・辺をinactiveにし、実在する別経験の問いを用いた今回のexact残存形では、訂正内容と残る元感情・別対比を各既存責務で実現する。任意の多段会話・全残存組合せが完成したとはしない。
+- independent readerはsourceと選択済みfacet、対象role、focal relationを再証明し、限定的安心／現在の傾聴を本文から読む。作者の再実行だけをoracleにせず、旧generic対比文へのfallbackで新facet欠落を隠さない。限定同義は通す。新content・proof helperはlanguage identityのAST閉包に含む。
+- 新しいslot/originでcurrent checkpointは変わる。新モード不一致時だけu331意味を完全再導出し、canonical questionとcheckpoint全体が一致するとき復元する。以前のlegacy modeはu332資格も無効化する。旧checkpointの意味ラベルの付替えはしない。
+
+詳細・未加工本文・検証境界：[Cocolon_EmlisAI_u332_SourceBoundRelief_and_Listening_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u332_SourceBoundRelief_and_Listening_20261018.md)。

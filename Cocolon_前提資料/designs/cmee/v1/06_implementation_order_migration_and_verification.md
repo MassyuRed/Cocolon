@@ -1,3 +1,5 @@
+> 2026-10-18最新：u332。承認済み二反応を実装し、訂正／撤回・保存12ケースまで確認。最新結果と限界は末尾u332。
+
 > 2026-10-18最新：u331。承認された作業単位を記録し、具体的対比の参照と因果化の検証漏れを修復。858成功／既知3失敗。深い受容の次判断は末尾u331と監査の可視案。
 
 > 2026-10-18最新：u330でscalar不明＋別欄行動の受け取り欠落8例を修復。20例の旧保存互換、807成功／既知3失敗。定型受容・問いは未完。詳細は末尾u330。
@@ -20015,3 +20017,24 @@ E01の他の主体／時点、Observationの時点差に対する「同時」表
 primary outcome=TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。Draft/open/unmerged・未配置。実機・本番DB・deploy・merge未実施。
 
 詳細・全20例・次の未採用案：[Cocolon_EmlisAI_u331_ConcreteContrastReception_and_NextDecision_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u331_ConcreteContrastReception_and_NextDecision_20261018.md)。
+
+
+## u332 — 入力に根拠を持つEmlisの反応・傾聴を実装（2026-10-18）
+
+Mashの「うん、進めていいよ」により、u331の具体案に対するRule18 §11.3個別承認が成立。承認記録をweeklyへ先行反映し、commit `3449f723735f974ccb1577656344301b4e90df56` を読戻し確認した。初回・自然変種・実在する問いでの訂正／撤回・保存再表示を一体で扱った。
+
+本人の過去の安堵と、不確かな考えから生じる現在の寂しさをsource全体・span・明示対比で証明し、Emlisの限定的安心と今その寂しさを聴く姿勢を新しい内部内容契約へ選択する。作者での語尾付加ではない。NORMALおよび既存LIMITEDの該当二対象に限定し、一般AFFECT／STANCE解禁や本人の願望・他人意図・行動評価を行わない。
+
+合成20例中10例で新しい反応を実現。残10例は本文／projection停止が不変（生成15・projection停止5）。旧u331初回15checkpointは完全意味・plan・selected・本文・問いを一致確認し、u319原03も復元確認。旧完成は非再生成、checkpoint後のretryへ新意味を付け替えない。実際の問いを持つ原03＋別経験で、安堵否定・予想から実際の出来事への現在／過去の訂正・左右撤回の5例を確認し、両端の共同反応を失効させ、残る意味を保持した。
+
+検証は別集合934 passed／10 failed／skip0。10件は既知の旧本文3件、今回変更した語句への旧replaceが無変化になる6件、原03の新規checkpointも旧IDと同じという旧期待1件。既存assertion／歴史fixtureは保持し、新本文への実変異検証と旧checkpoint復元を別途通した。現行manifest件数のみ承認された新型に合わせ76→77へ更新。全体suite合格を意味しない。
+
+実service＋隔離PGlite SQL/RPC12ケース、同じDTOの現行API client／hook／Modal native stub12ケースで、3tier・旧完成・checkpoint前後中断・5更新・旧回答checkpoint・GET／start非再生成／元入力／全履歴／close-reopenを確認。本人実機・本番DB・deploy・mergeは未実施。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存製品8owner、内部content型1追加、新production file0。設計／全file地図／current01・04／正本06／差分07／handoffを更新。公開API・DB・RN・依存・外部AI・費用は変更なし。同Work補助はread-onlyで、正式な別model評価ではない。
+
+原文の反復と一文の長さ、一般入力への適用範囲、主体・時点の未解決、E04深さ、E05問い、E06〜E09は残る。深い受容全体の完成とはしない。次は承認済み二反応を保った短い自然な表現と、未対応sourceの意味保持を実本文で比較する。10/20方式判断を延期しない。10/31管理線・12/18目標・Piece/Analysis主枠53.25％は不変。
+
+primary outcome=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。Draft/open/unmerged・未配置。
+
+詳細・未加工本文・検証境界：[Cocolon_EmlisAI_u332_SourceBoundRelief_and_Listening_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u332_SourceBoundRelief_and_Listening_20261018.md)。

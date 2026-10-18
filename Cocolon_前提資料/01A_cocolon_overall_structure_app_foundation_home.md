@@ -1,3 +1,5 @@
+> 最新EmlisAI file追跡：末尾u332。STRUCTURE_MAP_DELTA_PRESENT（承認済み内部内容契約）。
+
 > 最新EmlisAI file追跡は末尾u331（2026-10-18）。具体的対比の参照と独立関係読解。STRUCTURE_MAP_DELTA_NONE。
 
 > 最新EmlisAI file追跡は末尾u330（2026-10-18）。既存OP／thread_engine内のscalar不明と別欄行動の受け取り修復。STRUCTURE_MAP_DELTA_NONE。
@@ -3763,3 +3765,26 @@ source_scope608、Q3対照54＋既知3失敗、application54、identity1。計71
 既存OPで原文fieldと2span・required関係を証明してreferenceを明示化、HRで有限節を名詞化、Gateで両端と対比構造を本文から独立読解、thread_engineでQ1も準備済みplanへ接続。新規architecture ownerはなくSTRUCTURE_MAP_DELTA_NONE。新規test `ai/tests/test_cmee_emlis_contrast_reference.py` と変更前20例 `ai/tests/fixtures/cmee_emlis_u330_contrast_reference_v1.json` を追加。現行shared-owner identityを再導出。既存handoff／06／07／weeklyに結果、監査に全本文と新主観選択の未採用案を記載。意味型・選択契約・公開API／DB／RNは不変。
 
 詳細・全20例・次の未採用案：[Cocolon_EmlisAI_u331_ConcreteContrastReception_and_NextDecision_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u331_ConcreteContrastReception_and_NextDecision_20261018.md)。
+
+
+### u332 file追跡 — source根拠付き二反応
+
+既存製品8ownerに内部内容契約を追加。RN→API→service/store→保存read→RNは不変。新production file0。01B／01C、Piece／Analysis、公開API／DBの責務差分なし。
+
+| mashos-api exact path | u332の責務差分 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 二source役割・全field帰属・joint資格／origin・限定訂正grammar |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 選択済み二facetと訂正内容の有限本文 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | source役割と二facetの独立読解、旧generic救済の禁止 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py` | 内部新content、閉じた検証、source qualifier搬送、LIMITED導出 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py` | NORMAL導出、manifest77・current identity |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | current意味と旧source modeの版分離 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 旧checkpoint全体復元、訂正／撤回と残存責務 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py` | Q1のcurrent／legacy準備済み意味経路 |
+| `ai/tests/test_cmee_emlis_relief_cognition.py` | 新規82検査：source、本文、作者禁止変異、更新、旧意味互換 |
+| `ai/tests/fixtures/cmee_emlis_u331_relief_cognition_v1.json` | 新規：変更前u331合成20入力の記録 |
+| `ai/tests/test_cmee_emlis_result_appraisal.py` | 現行manifest件数76→77のみ |
+| `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 現行18payload／9ownerを再導出 |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 最新契約・実装・検証・残件引継ぎ |
+
+詳細・未加工本文・検証境界：[Cocolon_EmlisAI_u332_SourceBoundRelief_and_Listening_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u332_SourceBoundRelief_and_Listening_20261018.md)。

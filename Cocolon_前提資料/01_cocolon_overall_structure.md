@@ -1,3 +1,5 @@
+> 最新構造差分：末尾u332。EmlisAI内部の根拠付き反応契約、公開経路は不変。
+
 ---
 doc_id: cocolon_overall_structure_full_coverage
 title: "Cocolon 全体構造資料"
@@ -7159,3 +7161,9 @@ Mashが2026-10-17 16:46:17 JSTにu314限定案を承認した。別received経�
 正確なpath別責務差分は01A末尾u317を参照。
 
 主回帰1,584 pass、104比較36変更68同一、service52case／RN78 DTO、旧checkpoint14を確認。実本文・互換・失敗を含む検証は06／API handoff u317、最新再開順はweekly §5.6.67。次は同一欄の評価訂正／撤回後の受容保持10例を既存条件と比較する。現在形／名詞形／肯定反応、本文自然さ・周辺既存失敗も未解消。PRODUCT_NOT_CLEAR・初回一体単位未完了・正式0/3・candidate_ready=false・automatic_progression=false・Draft/open/unmerged・未配置。
+
+
+### u332 — EmlisAI内部内容契約（2026-10-18）
+
+Mash個別承認の二反応を既存8ownerへ実装。STRUCTURE_MAP_DELTA_PRESENT。新production file0、公開API／DB／RN・他中核は不変。全file地図01A、current01／04、8/28設計末尾u332へ契約と版互換を同期した。検証・残件は06／weekly／API handoff末尾u332。
+詳細・未加工本文・検証境界：[Cocolon_EmlisAI_u332_SourceBoundRelief_and_Listening_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u332_SourceBoundRelief_and_Listening_20261018.md)。
