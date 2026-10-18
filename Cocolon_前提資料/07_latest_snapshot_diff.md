@@ -41174,3 +41174,25 @@ STRUCTURE_MAP_DELTA_NONE（既存owner内のsource証明・選択・本文接続
 次は同欄の机／資料整理の実source分類と、その分類から生じる誤関係を既存ownerで確認し、正しい意味と受け取りを一体で修復する。一般にrequired関係を削除してはならない。10/20には、局所的な保持・停止修復が深い受容と問いへどこまで届いたかで方式継続を判断する。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false／Draft/open/unmerged・未配置。10/31管理線・12/18目標・Piece/Analysis主枠・53.25％は再評価しない。
 
 詳細・未加工16例・実装境界：[Cocolon_EmlisAI_u328_SameFieldUnknownActionReception_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u328_SameFieldUnknownActionReception_20261018.md)。
+
+### u328 GitHub反映後のcurrent authorityとexact path
+
+実装write commit／確認済みHEAD：`MassyuRed/mashos-api:agent/cmee-v1a-i1sx-source-explicit-20260815@f58e6ba96fded4befcec2df5cfd2f284e88705ea`。資料の初回write commit／確認済みHEAD：`MassyuRed/Cocolon:agent/three-core-cmee-current-structure-20260815@97f3d4a04fe9cd74a96450931d756dab9d1c348c`。本小差分はその読戻し後の記録であり、資料authority commitは本節を含むGitHub revisionから解決する。最終HEADはPR30と作業報告で確認する。両PRはDraft/open/unmerged。
+
+反映後、下記8＋5の各blob全文とSHA、baselineからのchanged-path集合一致を確認した。製品・fixtureの修正後bytesはテスト時と同一。newは各repo1件、それ以外はmodify。削除なし。
+
+| Repository | 種別 | Exact path |
+|---|---|---|
+| mashos-api | modify | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` |
+| mashos-api | modify | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py` |
+| mashos-api | modify | `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` |
+| mashos-api | modify | `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` |
+| mashos-api | modify | `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` |
+| mashos-api | modify | `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` |
+| mashos-api | new | `ai/tests/fixtures/cmee_emlis_u327_same_field_unknown_action_checkpoint_v1.json` |
+| mashos-api | modify | `ai/tests/test_cmee_emlis_source_scope_regressions.py` |
+| Cocolon | modify | `Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md` |
+| Cocolon | modify | `Cocolon_前提資料/07_latest_snapshot_diff.md` |
+| Cocolon | new | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u328_SameFieldUnknownActionReception_20261018.md` |
+| Cocolon | modify | `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` |
+| Cocolon | modify | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` |
