@@ -4260,3 +4260,18 @@ STRUCTURE_MAP_DELTA_PRESENT。既存production10owner内の変更で、新produc
 | `ai/tests/fixtures/cmee_emlis_u349_relief_received_v1.json` | production変更前u349先端（productionはu348と同じ）の独立比較原本。現行出力から旧期待値を作らない |
 
 現行manifest／owner identityを照合する既存検証の同期箇所、全変更path、実行件数と結果はu350監査を正本とする。上表はfile責務の地図であり、未実行検査を成功扱いする記録ではない。
+
+
+## u351 — 本人不明の明示現在訂正（2026-10-18）
+
+STRUCTURE_MAP_DELTA_NONE。構造上の経路・公開契約・型は不変。既存回答更新owner内部で、SELF uncertaintyの既受理「今は／現在は」訂正を回答時点へ束縛し、旧checkpointの旧時点解釈を厳密再導出する。01B/C・Piece/Analysisの責務は変更しない。
+
+| path（mashos-api） | 今回の責務 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 現在時点と引用内source範囲の修復、旧版の完全再導出 |
+| `ai/tests/test_cmee_emlis_unknown_revision_time.py` | 新65検査。旧28record、非対象20、現在時点・極性、独立逆検査と助詞保持 |
+| `ai/tests/test_cmee_emlis_unknown_revision_delivery.py` | 新旧完成本文の実SQL保存、非再生成GET/start、同一UI確認用DTO |
+| `ai/tests/fixtures/cmee_emlis_u350_unknown_revision_time_v1.json` | 独立未変更u350から採取した28record |
+| `ai/tests/test_cmee_emlis_relief_received.py` | 現行unknown_revise二例の意図した本文差分のみ同期。歴史比較は不変 |
+
+記録ownerは本01A・正本06・latest07・最新weekly・API handoff・[u351監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u351_UnknownRevisionTime_20261018.md)。全11変更path、原文と未加工本文、最終77検査と8保存DTOの再表示、失敗修復と検証境界は監査を参照。否定本文・初回の受け取り方保持・一般入力・深い理解・E04〜E09・本人実機は未完。PRODUCT_NOT_CLEAR／正式0/3／candidate_ready=false／automatic_progression=false。
