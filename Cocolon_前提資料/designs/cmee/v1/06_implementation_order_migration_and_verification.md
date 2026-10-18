@@ -1,3 +1,5 @@
+> 2026-10-18最新：u331。承認された作業単位を記録し、具体的対比の参照と因果化の検証漏れを修復。858成功／既知3失敗。深い受容の次判断は末尾u331と監査の可視案。
+
 > 2026-10-18最新：u330でscalar不明＋別欄行動の受け取り欠落8例を修復。20例の旧保存互換、807成功／既知3失敗。定型受容・問いは未完。詳細は末尾u330。
 
 > 2026-10-18最新：u329で同欄の行動誤分類を修復。原文・時点・関係根拠から二内容を本文へ保持し、旧保存24例を完全再導出。詳細は末尾u329。
@@ -19990,3 +19992,26 @@ STRUCTURE_MAP_DELTA_NONE（既存owner内のsource証明・関係authority・Q1�
 primary outcome=TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。Draft/open/unmerged・未配置。実機・本番DB・deploy・merge未実施。10/31管理線・12/18目標・Piece/Analysis主枠・53.25％は再評価しない。
 
 詳細・未加工本文・検証境界：[Cocolon_EmlisAI_u330_ScalarUnknownActionRetention_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u330_ScalarUnknownActionRetention_20261018.md)。
+
+
+## u331 — 対比の具体的な対象を返答へ戻し、独立検証・保存まで継続（2026-10-18 JST）
+
+Mash様が承認した「保存・commit単位は小さく、作業終了単位は一つの目的と関連修復・実本文・更新・保存確認まで」を最新weeklyへ先に記録した。方法記録commitは `6d11f3013731e3d81f020ac7e36c6957b6a27297`。15〜25分等の時間を終了条件にせず、今回は同じ目的の参照欠落と関係検証漏れを続けて修復した。
+
+「友達と話せて嬉しかった。でも、疲れた。」の2対象が解析・選択には残るのに、Receptionで「今ここに置かれた言葉／もう一方の向き」へ消える不具合を修復。既存referenceの明示化前に原文field全文・2span・順序・接続・本人の有限節・required contrast根拠を照合し、両対象を名詞節へ実現する。Q1も同じ準備済みplanへ接続。疑問／引用／別主体／報告／丁寧形等を無理に具体化しない。初期試作の主体・疑問・丁寧形への過大適用は未公開のまま修正した。
+
+- 合成20例：Reception6例を修復、14例の本文・未提供状態は不変。生成13／未提供7は前後同じ。全20のcheckpoint・核・辺が完全一致、selectedの主観内容も不変（対象の参照方式に由来するinput_ref／grounding_refは変化）。意味型・主観選択の追加ではない。
+- 新規41検査の初回40成功／1失敗で、両端を残して関係だけ「因果関係」に変えた本文が作者禁止の逆検証を通る実欠陥を発見。Gateで選択済みNONCOLLAPSEのfocal関係・両端・名詞節の並列・違いの付加句・肯定受容を独立に読み、因果化や無根拠挿入を拒否した。語句の禁止リストではなく、対象の外側の関係文法を検査する。
+- 最終：source_scope698＋新規41＝739 passed、Q3対照64 passed／既知3 failed、application54 passed、現行identity1 passed。別集合 **858 passed／既知3 failed／skip0**。途中run・同Work補助probeは加算しない。全project suite／商品合格ではない。
+- 既知3失敗は、9/20のMash指示で保持した旧名詞化本文の期待との不一致。1件の7 failed assertionsは旧語句replaceによる無変化、2件は旧全文exact不一致。現在の有限文に対する既存26検査は通過。今回、既存assertion／歴史fixtureを弱化・削除していない。
+- 実service＋隔離PGlite SQL/RPC9ケース、同じDTOの現行API client／hook／Modal native stub9ケースで、3tier・旧完成非再生成・checkpoint前後中断・実際の回答／訂正／撤回・保存GET／元入力／全履歴／close-reopenを確認。今回のcheckpoint内容は不変なので、checkpoint後中断も同じ意味eventから修復本文へ進む。保存済み旧本文は非再生成で不変。対象6例自体はENDであり、架空の問いを作らない。
+
+全体設計図・全file地図・前提資料・作業規則・恒久incident・最新weekly・正本06・既存handoffを確認。製品は既存OP／HR／Gate／thread_engineの4owner。新test／変更前fixtureを地図へ追記し、STRUCTURE_MAP_DELTA_NONE。新依存・外部AI・新schema・公開API／DB／RN変更なし。同Workのread-only補助は正式な別model評価ではない。
+
+主担当が未加工20例、rich対照6例と更新本文を読んだ。具体対象は戻ったが、「両方を小さくせずに受け止めています」の定型は残る。原03の実際の過去の安堵／認知内の不確かな予想／現在の寂しさから、Emlisが何を感じどう応じるかを選ぶ部分は未完成。新型を増やせば改善すると結論しない。次の設計判断は下記監査の未採用案で、可視本文・各主張の根拠・変更範囲・検証と停止条件を具体化した。Rule18 §11.3の新しい主観選択／内容契約の境界なので、実装へ自動進行しない。
+
+E01の他の主体／時点、Observationの時点差に対する「同時」表現、今回非対象の丁寧形・同span・逆順等、原03＋独立不明の受容欠落、E04深さ、E05問い、残るE06〜E09は未解消。本文修復件数で10/20方式継続判断を延期しない。10/31管理線・12/18目標・Piece/Analysis主枠・53.25％は不変。
+
+primary outcome=TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。Draft/open/unmerged・未配置。実機・本番DB・deploy・merge未実施。
+
+詳細・全20例・次の未採用案：[Cocolon_EmlisAI_u331_ConcreteContrastReception_and_NextDecision_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u331_ConcreteContrastReception_and_NextDecision_20261018.md)。

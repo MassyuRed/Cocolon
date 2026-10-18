@@ -1,3 +1,5 @@
+> 最新EmlisAI file追跡は末尾u331（2026-10-18）。具体的対比の参照と独立関係読解。STRUCTURE_MAP_DELTA_NONE。
+
 > 最新EmlisAI file追跡は末尾u330（2026-10-18）。既存OP／thread_engine内のscalar不明と別欄行動の受け取り修復。STRUCTURE_MAP_DELTA_NONE。
 
 ---
@@ -3754,3 +3756,10 @@ source_scope608、Q3対照54＋既知3失敗、application54、identity1。計71
 `test_cmee_emlis_source_scope_regressions.py`へ90検査追加、新規 `fixtures/cmee_emlis_u329_scalar_action_checkpoint_v1.json`に変更前合成20例、現行 `fixtures/cmee_emlis_q1_shared_owner_identity_v1.json`を再導出。歴史fixture・既存assertionは未変更。本文8修復・12完全record一致、旧20checkpoint・保存6／RN6確認。既存handoff・正本06・07・weeklyへ同期。
 
 詳細・未加工本文・検証境界：[Cocolon_EmlisAI_u330_ScalarUnknownActionRetention_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u330_ScalarUnknownActionRetention_20261018.md)。
+
+
+### u331 file追跡 — 明示対比の2対象を保持（2026-10-18）
+
+既存OPで原文fieldと2span・required関係を証明してreferenceを明示化、HRで有限節を名詞化、Gateで両端と対比構造を本文から独立読解、thread_engineでQ1も準備済みplanへ接続。新規architecture ownerはなくSTRUCTURE_MAP_DELTA_NONE。新規test `ai/tests/test_cmee_emlis_contrast_reference.py` と変更前20例 `ai/tests/fixtures/cmee_emlis_u330_contrast_reference_v1.json` を追加。現行shared-owner identityを再導出。既存handoff／06／07／weeklyに結果、監査に全本文と新主観選択の未採用案を記載。意味型・選択契約・公開API／DB／RNは不変。
+
+詳細・全20例・次の未採用案：[Cocolon_EmlisAI_u331_ConcreteContrastReception_and_NextDecision_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u331_ConcreteContrastReception_and_NextDecision_20261018.md)。
