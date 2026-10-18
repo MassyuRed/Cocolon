@@ -1438,3 +1438,32 @@ sourcef49238ac／[run38495258157](https://github.com/MassyuRed/Cocolon/actions/r
 今回の420文字は最終inspectionへ到達していないため、検査依頼の一括化だけでこの残件が解消したとは扱いません。前回§71.2は36ptのfitまで到達しましたが、今回との別runner・別実行の時間差を改善／悪化の因果と断定しません。8秒を延ばさず、次は最終検査前の候補計測量・返却／復号を減らす設計を優先します。§72のv4案は契約変更を伴う未採用案で、現行5double／全行比較を黙って変更しません。
 
 artifact11864476166（55,431,860 bytes、期限2026-10-21T01:40:49Z）のZIP SHA256 `a607ee49316877c4879950aa23d0aa6a5789832d86c594312eba0d91339d110e` とresults.json SHA256 `3a6e91aa60def5411c355da05fe82c2c1b18e4f2286cc3f808f78ed3a7b414b7` を照合しました。native69／JS768／Android source／phase6 guardsは成功、export Pods／Androidはscope skip、workflow全体はRN failureです。物理実機受入れ・正式renderer供給・保存直前fit・通常初回保存は未完了です。
+
+## 73. 2026-10-19 JST — P-W1通常保存へ向けた候補文字列の重複構築削減（検証中）
+
+最新weekly20261017の§1.5／§5.6とREADMEの10/19追記を本線にします。添付の旧checkpoint06935d2にあるiOS44停止は現行の未完了箇所ではなく、§71–72でnative69完走を確認済みです。現在の未完了条件は混在420文字の全体8秒・最終inspectionと、正式renderer供給→同じpreview/tokenの保存前fit→通常初回保存・同owner再表示です。性能修正と保存接続をP-W1の内部工程として扱い、小さな検査成功だけを通常保存の完成へ数えません。
+
+| start field | current actual |
+|---|---|
+| product_destination | 保存済み入力からPieceを全文のまま描画し、同じ候補を明示保存して同owner履歴・詳細へ戻す |
+| current_gate_or_subgate | weekly20261017 §5.6 P-W1（10/19–22、10/20方式判断） |
+| exact_work | 全候補契約内の420文字処理短縮と、既存Card→Modal→hostの保存前fit接続 |
+| scope_classification | LEVEL_2 |
+| approval_or_delegation_basis | 今回のPiece継続指示＋rule18 §11.3 standing delegation。§0のPiece Pro例外適用 |
+| execution_owner | 華恋（system明示GPT-6 Astra Pro）。同環境補助担当はread-only、統合・編集・GitHub反映はroot |
+| success_credit | TECHNICAL_CREDIT。正式採用・稼働・物理実機の商品受入れは別結果 |
+| completion_condition | 既存全行5double bit比較69件と同じDebug実RN5件の本文／inspection／PNG／8秒を確認し、同一候補の現在性を保存直前まで接続。未供給の正式admissionはtrueへ代入しない |
+| stop_condition | 数値不一致なら方式撤回。本文・候補契約・品質・公開効果の変更が必要なら既存委任を超えて実行しない。同じ失敗案の再実行や補助台帳の増殖は行わない |
+| prohibited_scope | 全行・5double・不正ink拒否・48→44→40→36pt・4worker・8秒の緩和、batch/suffix typesetter再利用、prototype版文字列だけの正式昇格、DB/env/deploy/署名/配布/main merge |
+| next_product_read_or_mash_decision_point | 同じ5画像の実描画確認。正式supplierは実装/version/platform/asset・catalog互換と既存設定経路を具体化して採用判断を分離する |
+| current_source_test_receipt | source76afe964内のnative baseline blob4dbe6cb1c50f216acad2a2d3f091ca5c0a1bddf8、既存native69 oracle／JS renderer・wrap、§72.1 run38495258157 |
+| current_docs_and_heads | 全体設計01／全file地図01A–C、Piece map／manifest／PCE5、最新weekly20261017。Cocolon PR30 head76afe96481b2b78ec21b8f899c9b7a5be956a19d、API PR3 heada536e50ee284785f585ac73329ef2947dca8bba9 |
+| affected_current_structure_maps | current_structure/02_piece_current_structure.md。今回native内部修正はSTRUCTURE_MAP_DELTA_NONE。後続のcomponent責任接続は同じwrite unitでmapへ反映 |
+
+必要性はOBSERVED_BLOCKER_MINIMAL_FIXです。現行実RNでは420文字が36pt候補待ちでtimeoutするため、既にprofileで観測した全文substring作成の反復を直接減らします。既存69／実RN workflowを使い、新helperや新workflowは作りません。見込む検証は既存CI一回（ビルドを含め約20分）、新しい有料サービス・Mash操作は追加しません。既存GitHub Actionsの課金有無・金額は未確認です。
+
+今回のnative差分は各worker専用のmutable attributed candidateを持ち、同じ開始位置から末尾だけ伸びるときに完全属性の追加区間をappendするものです。開始位置変更時は候補全文から作り直します。各候補のCTLineCreateWithAttributedStringは毎回新規、両bounds取得後に解放し、その後だけbufferを更新します。worker間でmutable storageを共有しません。全候補表・属性dedup・v3・5double・B9・元deadlineは不変です。CoreText行作成自体を減らす方式ではなく、8秒解消はまだ未確認です。
+
+華恋と同環境read-only担当が元blobとの差分・所有期間・属性保持を確認。localのrenderer／measured-wrap 2suiteは終了code0です。iOS bit同値・実RN性能の代用にはしません。native sourceとこのcheckpointを既存PR30へ反映し、既存CIで検証します。正式renderer supplierと通常初回保存は現時点で未完了です。
+
+必須前提・作業rule・Karen-Diary・恒久incidentを確認。System Context prepareは今回のsparse materializationにtools.cocolon_contextがなくModuleNotFoundErrorで未成立、管理入口が許す原典直接読取りで継続しました。生成context成功や全repo本文監査は主張しません。default OFF、Draft/open/unmerged、DB/env/deploy/署名/配布/main merge効果0を維持します。

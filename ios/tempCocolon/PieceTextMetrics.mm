@@ -140,7 +140,7 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
               }
             }
           }
-          // Each worker owns its substring and CTLine. Only immutable font and
+          // Each worker owns its candidate buffer and CTLine. Only immutable font and
           // attributed-string snapshots are shared; UIKit stays on its UI queue.
           // Fixed workers avoid one dispatch block per candidate and write only
           // disjoint metrics. dispatch_apply joins before any buffer is released.
@@ -178,16 +178,36 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
           dispatch_apply(workers, dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^(size_t worker) {
             @try {
               NSAttributedString *nativeSnapshot = uniformAttributes ? nil : nativeSnapshots[worker];
+              NSMutableAttributedString *part = nil;
+              NSRange previous = NSMakeRange(NSNotFound, 0);
               for (NSUInteger index = worker; index < jobCount; index += workers) {
                 @autoreleasepool {
                   if (failure->load(std::memory_order_relaxed)) return;
                   if (NSProcessInfo.processInfo.systemUptime >= deadline) { failure->store(true, std::memory_order_relaxed); return; }
                   NSRange range = jobData[index].range;
-                  NSAttributedString *part = uniformAttributes
-                    ? [[NSAttributedString alloc] initWithString:[snapshotText substringWithRange:range] attributes:uniformAttributes]
+                  // Jobs with the same start grow in first-occurrence order.
+                  // Append only their new attributed suffix, retaining exactly
+                  // the same full candidate text and pointwise attributes.
+                  // Never share this mutable buffer between workers or mutate
+                  // it until the preceding independent CTLine is released.
+                  BOOL append = part && previous.location == range.location && previous.length < range.length;
+                  NSRange added = append
+                    ? NSMakeRange(NSMaxRange(previous), range.length - previous.length) : range;
+                  NSAttributedString *addition = uniformAttributes
+                    ? [[NSAttributedString alloc] initWithString:[snapshotText substringWithRange:added] attributes:uniformAttributes]
                     : CFBridgingRelease(CFAttributedStringCreateWithSubstring(NULL,
-                        (__bridge CFAttributedStringRef)nativeSnapshot, CFRangeMake(range.location, range.length)));
-                  if (!part) { failure->store(true, std::memory_order_relaxed); return; }
+                        (__bridge CFAttributedStringRef)nativeSnapshot, CFRangeMake(added.location, added.length)));
+                  if (!addition) { failure->store(true, std::memory_order_relaxed); return; }
+                  if (append) {
+                    CFAttributedStringReplaceAttributedString((__bridge CFMutableAttributedStringRef)part,
+                      CFRangeMake(part.length, 0), (__bridge CFAttributedStringRef)addition);
+                  } else {
+                    part = CFBridgingRelease(CFAttributedStringCreateMutableCopy(NULL, 0,
+                      (__bridge CFAttributedStringRef)addition));
+                  }
+                  if (!part || part.length != range.length) { failure->store(true, std::memory_order_relaxed); return; }
+                  previous = range;
+                  // Shaping still starts from the complete standalone candidate.
                   CTLineRef line = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)part);
                   if (!line) { failure->store(true, std::memory_order_relaxed); return; }
                   double advance = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
