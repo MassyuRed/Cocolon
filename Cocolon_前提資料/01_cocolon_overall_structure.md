@@ -1,3 +1,5 @@
+> 最新構造差分：末尾u334。私有の保持資格・contentとdecision版、STRUCTURE_MAP_DELTA_PRESENT。
+
 > 最新構造差分：末尾u333。既存source owner内の主体継続修復。STRUCTURE_MAP_DELTA_NONE。
 
 > 最新構造差分：末尾u332。EmlisAI内部の根拠付き反応契約、公開経路は不変。
@@ -7173,3 +7175,7 @@ Mash個別承認の二反応を既存8ownerへ実装。STRUCTURE_MAP_DELTA_PRESE
 ## u333 — 既存source責務内の本人主語継続修復（2026-10-18）
 
 RN→API→thread source／plan→既存主観選択・作者／独立reader→保存→再表示の構造は不変。意味型・公開契約・DB・RN・依存は追加しない。変更は既存source proof、source mode伝播、旧checkpoint完全復元の3owner。新しい独立不明の保持契約は未採用で、個別承認案として分離した。STRUCTURE_MAP_DELTA_NONE。実pathは01A末尾u333、詳細は[Cocolon_EmlisAI_u333_SelfContinuation_and_IndependentUnknown_Boundary_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u333_SelfContinuation_and_IndependentUnknown_Boundary_20261018.md)。
+
+## u334 — 二反応と独立不明の限定保持
+
+RN→API→thread source／plan→全体LIMITED一claim→二moveの既存作者／独立reader→保存→再表示の公開経路を維持。新しい私有eligibility／contentとdecision版は全体三対象claimを変更せず、局所二反応を保持する。source資格の版をcheckpointに区別し旧意味・本文を完全復元する。既存9production owner、新production file0、公開API／DB／RN不変。STRUCTURE_MAP_DELTA_PRESENT。実pathは01A末尾u334、詳細は[Cocolon_EmlisAI_u334_ReliefCognition_and_IndependentUnknown_Retention_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u334_ReliefCognition_and_IndependentUnknown_Retention_20261018.md)。

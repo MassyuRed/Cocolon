@@ -1,3 +1,5 @@
+> 最新EmlisAI file追跡：末尾u334。既存9owner、私有保持contract2＋decision版。STRUCTURE_MAP_DELTA_PRESENT。
+
 > 最新EmlisAI file追跡：末尾u333。既存3owner、test／fixture追加。STRUCTURE_MAP_DELTA_NONE。
 
 > 最新EmlisAI file追跡：末尾u332。STRUCTURE_MAP_DELTA_PRESENT（承認済み内部内容契約）。
@@ -3806,3 +3808,27 @@ STRUCTURE_MAP_DELTA_NONE。production owner・意味型・公開経路の追加�
 | `mashos-api/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 修復・限界・具体的な次の承認案の所在 |
 
 詳細：[Cocolon_EmlisAI_u333_SelfContinuation_and_IndependentUnknown_Boundary_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u333_SelfContinuation_and_IndependentUnknown_Boundary_20261018.md)。独立不明の保持契約試作は撤回済みで、上表の採用差分に含めない。
+
+## u334 — 二反応と独立不明のfile地図
+
+STRUCTURE_MAP_DELTA_PRESENT。新production file0。01B／01C、Piece／Analysis、公開API／DB責務の差分なし。
+
+| mashos-api exact path | 責務差分 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 全field・全spanの3対象証明、独立不明の版付き資格、二move、旧mode |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py` | 新RetainedReliefCognitionEligibilityV1／ContentV1、全体claimとlocal既存contentの閉じた検証・seal |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_response.py` | 既存候補から局所二basisの承認済みcontentを導出 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py` | 一claim／trace／projectionを検証してlocal contentを封印、manifest79 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py` | 全寄与を二moveへ分配、現行初回資格、全source／aggregate再導出でcarrier全体を照合 |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 新decision版を私有入力として検証、既存unknown／二反応作者へ接続 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | local二反応＋独立不明の独立読解、facet欠落のgeneric救済を禁止 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | currentと全歴史source modeを分離・伝播 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | u333 checkpoint完全復元。既存Premium focus再構成でも証明済み二moveを維持 |
+| `ai/tests/test_cmee_emlis_relief_unknown.py` | 新86検査、本文・source反例・作者禁止変異・再seal攻撃・旧18復元・manifest・3tier保存 |
+| `ai/tests/fixtures/cmee_emlis_u333_relief_unknown_v1.json` | u333実engineから取得した合成18例の完全checkpoint／plan・selected hash／本文・問い・停止 |
+| `ai/tests/test_cmee_emlis_relief_cognition.py` | 同じ二facetの検査helperを明示した新sidecarにも対応、現行manifest件数79 |
+| `ai/tests/test_cmee_emlis_result_appraisal.py` | 現行manifest件数77→79のみ |
+| `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 現行9ownerのASTからidentityを再導出。歴史証拠は変更しない |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 承認・実装・実本文・互換・残件の引継ぎ |
+
+詳細：[Cocolon_EmlisAI_u334_ReliefCognition_and_IndependentUnknown_Retention_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u334_ReliefCognition_and_IndependentUnknown_Retention_20261018.md)。

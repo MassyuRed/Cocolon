@@ -1,3 +1,5 @@
+> 後続u334：本監査の限定併存案はMashが明示承認し、実装・旧checkpoint保持・保存再表示まで確認した。[Cocolon_EmlisAI_u334_ReliefCognition_and_IndependentUnknown_Retention_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u334_ReliefCognition_and_IndependentUnknown_Retention_20261018.md)を参照。本u333本文は提案当時の記録として保持。
+
 # EmlisAI u333 — 本人主語継続の修復と独立不明の保持境界
 
 作業日：2026-10-18。基準：Cocolon `430197f945d44ca1663264b8be1185509a3a87cf`、mashos-api `2af661109e81456bce0da03b7d2df34cf3c93129`。両既存PRの同一作業branchで実施。
