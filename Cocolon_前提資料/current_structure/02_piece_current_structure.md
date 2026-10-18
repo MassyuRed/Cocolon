@@ -2682,3 +2682,25 @@ local対象55件、既存14ファイル806件が成功。CIの13ファイルと�
 #### 65.20.1 実RNの完了結果
 
 sourcef49238ac／run38495258157／job115629460856は4ケースnative_checked、420文字measurement_timeoutでfailure。essay1,902.520／quote631.281／declaration345.065／saved1,205.142msの本文一致・native text・全inspection・画像寸法と4枚PNGを確認しました。420文字は8,100.109ms、36ptのnative／adapterがreport時pending、B9・最終inspection・PNGなし。今回は最終検査の前で期限へ到達しています。前回36pt fit成立との実行環境差を今回変更の改善／悪化と断定せず、候補計測量と返却／復号を次の優先課題とします。全5件canSave/canExport=false。artifact11864476166のZIP／JSON digestを照合済みです。各font時間・state・失敗範囲・identityは入口§72.1を参照。正式renderer・保存前fit・初回保存・物理実機受入れは未完了です。
+
+### 65.21 保存前fitのローカル証拠を既存初回保存hostへ接続
+
+P-W1（weekly20261017 §5.6）の通常preview→明示保存→同owner履歴／詳細が製品の到達先です。今回の責任追加は、`components/piece/PieceVisualCard.js` → `components/piece/PiecePreviewModal.js` → `screens/input/InputPieceActionArea.js` の既存3owner間です。新owner／API／workflowはありません。
+
+| owner | 今回の責任と境界 |
+|---|---|
+| PieceVisualCard | 現在のmount・token・binding・generation・plan・全最終inspection・Text node・canvasを束ねるローカルhandleを供給。公開は同期isCurrentだけ。tokenだけの変更もcanvasをremountし旧証拠を永久失効。正式renderer許可は供給しない |
+| PiecePreviewModal | stable onSaveFitChangeをCardへ渡す。fitからcanSaveを作らない |
+| InputPieceActionArea | 現在preview/tokenに対するlocal fitと外部正式supplierの両方を保存境界で厳密照合。render時のprovider／handleを押下へ束縛。旧取消通知・旧button・entropy中の差替えで新候補を保存しない |
+| piecePreviewModel | 同一SHA-256計算の内部確保・呼出しを削減。UTF-8／canonicalization／hash検証／expiryは維持。cacheや検証省略なし |
+
+handleは本文・行文字列・native node・metricsを公開せず、controllerの意図・保存HTTP・永続receiptに追加しません。listener取消時の親の再変更を再照合。未知の保存結果の再試行は、既存の同一要求・同一keyを保持し、新しいfitを要求して回復を閉ざしません。Cardの説明は画像レイアウト、保存利用可否の説明は親が担当します。
+
+source検査はlocal14ファイル833 PASS／FAIL0／SKIP0。modalに含まれるhost43件の別起動を除くCI13ファイルは790件に対応します。既存実RN5件へ固定token／実handle現在性／別token拒否／saved時handle不在のstrict assertionを追加し、元の本文・inspection・PNG・8秒・canSave/canExport=falseを維持して検証します。source検査の成功を実端末通常保存の成功へ換算しません。
+
+直前native source b3fdafaf／run39171059794は69 PASS／FAIL0／SKIP0。実RNは通常4件の本文・inspection・PNGを確認した一方、420文字は8,332.374msでtimeout、B9は48／44ptのみ完了、40ptはadapter完了でもB9未完了、36pt候補pending、最終inspection／PNGなしです。華恋が4枚を開いて確認し、ZIP／JSON digestも照合済み。workerごとのattributed buffer構築削減は全行5double bit条件を維持し、batch／suffix typesetter再利用は復活させません。詳細とartifact identityは入口§73.1です。
+
+正式InputScreen supplierは未接続、prototype/native_checkedは正式admissionではありません。APIのdefault appはlegacy、明示candidate compositionの稼働は未確認。DB metadata照合でpiece_read_quota_v2とpiece_mutate_preview_visual_v2は同名overloadも含め不在でした。前者は新規preview生成前のquota読取りに必要、後者はvisual PATCH用。通常保存POSTは既存M4 piece_save_v2でquota再照合します。未適用SQL2本と具体的な残件は入口§73.3へ集約します。
+
+このwrite unitで構造mapを更新。全体設計01・全file地図01A–Cと最新weekly10/17を確認済みです。通常初回保存・同owner再表示・P-W2画像保存／共有・P-W3物理実機受入れは未完了。default OFF、Draft/open/unmerged、DB/env/deploy/署名/配布/main merge効果0。再開は入口§73と本節、manifest next_groupを使います。
+

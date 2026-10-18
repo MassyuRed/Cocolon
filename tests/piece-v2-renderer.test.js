@@ -28,7 +28,7 @@ function sample(format = 'short_essay', ratio = '4:5', theme = 'soft_paper', bra
 const display = p => ({ phase: 'received', preview: p, hashVerified: true });
 function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates, initialNow = NOW, exportCanvas = false) {
   let now = initialNow, serial = 0;
-  const timers = new Map(), nativeCalls = [], candidateCalls = [];
+  const timers = new Map(), nativeCalls = [], candidateCalls = [], mountedNodes = new Map();
   let card;
   const React = { Component: class {
     constructor(props) { this.props = props; this.state = {}; this.updates = 0; }
@@ -56,7 +56,7 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
     ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'readPieceOwnerSnapshot']],
     ['features/piece/piecePreviewModel.js', ['readPiecePreviewDisplay', 'verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay']],
-    ['features/piece/pieceLayout.js', ['preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
+    ['features/piece/pieceLayout.js', ['PIECE_NATIVE_PREVIEW_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
     ['features/piece/pieceRenderer.js', ['inspectPieceText', 'readPieceTextInspection', 'measurePieceCandidates']],
     ['features/piece/pieceMeasuredWrap.js', ['planPieceMeasuredRows']],
     ['components/piece/PieceVisualCard.js', ['PieceVisualCard']],
@@ -70,7 +70,11 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
   const render = () => {
     const tree = card.render();
     for (const node of nodes(tree)) if (typeof node.props.ref === 'function') {
-      node.props.ref({ tag: Number(node.props.testID.split('-').pop()) + 1 });
+      // React retains a mounted native node when only the callback identity
+      // changes; a replacement canvas binding remounts all descendants.
+      const key = card.state.bindingSerial + ':' + node.props.testID + ':' + (node.props.key ?? '');
+      if (!mountedNodes.has(key)) mountedNodes.set(key, { tag: Number(node.props.testID.split('-').pop()) + 1 });
+      node.props.ref(mountedNodes.get(key));
     }
     return tree;
   };
@@ -268,6 +272,120 @@ async function prepare(h) {
   return h;
 }
 async function harness(...args) { return prepare(rawHarness(...args)); }
+function fitHarness({ inspect, candidates, onFit, version = 'piece.rn_native_preview.prototype.v3' } = {}) {
+  const packet = sample(); packet.renderer_version = version;
+  const h = rawHarness(packet, inspect, false, candidates), notifications = [];
+  const listener = (next, previous) => { notifications.push([next, previous]); onFit?.(next, previous); };
+  const bind = token => {
+    h.card.props = { ...h.card.props, display: { ...h.card.props.display, visualToken: token }, onSaveFitChange: listener };
+    h.card.setState(h.PieceVisualCard.getDerivedStateFromProps(h.card.props, h.card.state));
+  };
+  const token = Object.freeze({}); bind(token);
+  return { ...h, token, bind, notifications, fit: () => h.card.saveFit?.handle };
+}
+
+test('local save fit appears only after every final native inspection and has a read-only body-free interface', async () => {
+  const pending = [];
+  const h = fitHarness({ inspect: result => new Promise(resolve => pending.push({ result, resolve })) });
+  assert.equal(h.fit(), undefined); await prepare(h);
+  assert.equal(h.card.state.measurement.phase, 'measuring'); assert.equal(h.fit(), undefined);
+  await finish(h); assert.equal(h.card.state.measurement.phase, 'geometry_checked');
+  assert.equal(h.fit(), undefined); assert.equal(h.notifications.length, 0);
+  for (let i = pending.length - 1; i > 0; i--) pending[i].resolve(pending[i].result);
+  await new Promise(resolve => setImmediate(resolve)); assert.equal(h.fit(), undefined);
+  pending[0].resolve(pending[0].result); await new Promise(resolve => setImmediate(resolve));
+  const handle = h.fit(), preview = h.card.props.display.preview;
+  assert.ok(Object.isFrozen(handle)); assert.deepEqual(Object.keys(handle), ['isCurrent']);
+  assert.equal(h.timers.size, 0); assert.equal(h.notifications.length, 1);
+  const before = [h.nativeCalls.length, h.candidateCalls.length, h.card.updates, h.notifications.length];
+  for (let i = 0; i < 3; i++) assert.equal(handle.isCurrent(copy(preview), h.token), true);
+  assert.deepEqual([h.nativeCalls.length, h.candidateCalls.length, h.card.updates, h.notifications.length], before);
+  assert.equal(h.card.state.measurement.canSave, false); assert.equal(h.card.state.measurement.canExport, false);
+});
+test('local save fit never revives across token A to B to A and remounts the logical canvas', async () => {
+  const h = fitHarness(); await finish(h);
+  const old = h.fit(), key = h.card.state.measurement.key, canvasKey = h.find('piece-logical-canvas').props.key;
+  h.bind(Object.freeze({}));
+  assert.equal(h.card.state.measurement.key, key);
+  assert.notEqual(h.find('piece-logical-canvas').props.key, canvasKey);
+  const batch = h.card.candidates, deadline = h.card.deadline;
+  h.bind(h.token);
+  assert.notEqual(h.card.candidates, batch); assert.notEqual(h.card.deadline, deadline);
+  assert.equal(old.isCurrent(h.card.props.display.preview, h.token), false);
+  await finish(h);
+  assert.equal(h.card.state.measurement.phase, 'native_checked'); assert.notEqual(h.fit(), old);
+  assert.equal(h.fit().isCurrent(h.card.props.display.preview, h.token), true);
+  assert.equal(old.isCurrent(h.card.props.display.preview, h.token), false);
+});
+test('token replacement during planning remounts probes and ignores the previous native promises', async () => {
+  const pending = [];
+  const h = fitHarness({ candidates: result => new Promise(resolve => pending.push({ result, resolve })) });
+  await prepare(h); const oldPending = pending.slice(), oldCanvas = h.find('piece-logical-canvas').props.key;
+  const nextToken = Object.freeze({}); h.bind(nextToken);
+  assert.notEqual(h.find('piece-logical-canvas').props.key, oldCanvas, 'unchanged geometry must still emit fresh native layouts');
+  const replacement = h.card.state.measurement;
+  for (const item of oldPending) item.resolve(item.result);
+  await new Promise(resolve => setImmediate(resolve)); assert.equal(h.card.state.measurement, replacement);
+  await prepare(h); assert.ok(pending.length > oldPending.length);
+  for (const item of pending.slice(oldPending.length)) item.resolve(item.result);
+  await new Promise(resolve => setImmediate(resolve)); await finish(h);
+  assert.equal(h.card.state.measurement.phase, 'native_checked');
+  assert.equal(h.fit().isCurrent(h.card.props.display.preview, nextToken), true);
+});
+test('a diagnostic renderer version can be drawn without receiving prototype save-fit evidence', async () => {
+  const h = fitHarness({ version: 'rn_renderer.v1' }); await finish(h);
+  assert.equal(h.card.state.measurement.phase, 'native_checked');
+  assert.equal(h.fit(), undefined); assert.equal(h.notifications.length, 0);
+});
+for (const change of ['expiry', 'body', 'generation', 'plan', 'inspection', 'rowNode', 'canvasNode', 'listener', 'unmount']) {
+  test(`local save fit rejects changed ${change} without additional native work`, async () => {
+    const h = fitHarness(); await finish(h);
+    const handle = h.fit(), preview = copy(h.card.props.display.preview), before = h.nativeCalls.length;
+    assert.equal(handle.isCurrent(preview, h.token), true);
+    if (change === 'expiry') h.now(NOW + 1123);
+    if (change === 'body') preview.piece_text += '変更';
+    if (change === 'generation') h.card.state.measurement.generation = Object.freeze({});
+    if (change === 'plan') h.card.state.measurement.plan = { ...h.card.state.measurement.plan };
+    if (change === 'inspection') h.card.state.measurement.inspection = [...h.card.state.measurement.inspection];
+    if (change === 'rowNode') h.card.textNodes.set(0, { ...h.card.textNodes.get(0), value: {} });
+    if (change === 'canvasNode') h.card.canvasNode = {};
+    if (change === 'listener') h.card.props = { ...h.card.props, onSaveFitChange() {} };
+    if (change === 'unmount') h.card.componentWillUnmount();
+    assert.equal(handle.isCurrent(preview, h.token), false); assert.equal(h.nativeCalls.length, before);
+    if (change === 'unmount') assert.deepEqual(h.notifications.at(-1), [null, handle]);
+  });
+}
+test('fit revocation cannot publish to a listener superseded by a reentrant parent callback', async () => {
+  let h; const callsB = [], callsC = [], listenerC = (...args) => callsC.push(args);
+  h = fitHarness({ onFit: (next, previous) => {
+    if (next === null && previous) h.card.props = { ...h.card.props, onSaveFitChange: listenerC };
+  } });
+  await finish(h); const old = h.fit();
+  h.card.props = { ...h.card.props, onSaveFitChange: (...args) => callsB.push(args) };
+  assert.equal(old.isCurrent(h.card.props.display.preview, h.token), false);
+  h.card.componentDidUpdate(); assert.equal(callsB.length, 0); assert.equal(h.fit(), undefined);
+  h.card.componentDidUpdate(); assert.equal(callsC.length, 1); assert.notEqual(h.fit(), old);
+  assert.equal(h.fit().isCurrent(h.card.props.display.preview, h.token), true);
+});
+test('remeasured mounted rows revoke the previous fit and publish a new handle only after reinspection', async () => {
+  const h = fitHarness(); await finish(h); const old = h.fit();
+  sendBlock(h, 0, { lines: [{ text: h.drawing().blocks[0], x: 0, y: 0, width: 200, height: 75 }] });
+  assert.equal(old.isCurrent(h.card.props.display.preview, h.token), false);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(h.card.state.measurement.phase, 'native_checked'); assert.notEqual(h.fit(), old);
+  assert.equal(h.fit().isCurrent(h.card.props.display.preview, h.token), true);
+  assert.equal(old.isCurrent(h.card.props.display.preview, h.token), false);
+});
+test('failed final native inspection cannot publish fit after other late successes', async () => {
+  const pending = [];
+  const h = fitHarness({ inspect: result => new Promise((resolve, reject) => pending.push({ result, resolve, reject })) });
+  await finish(h); pending[0].reject(Error('PRIVATE'));
+  await new Promise(resolve => setImmediate(resolve));
+  for (const item of pending.slice(1)) item.resolve(item.result);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(h.card.state.measurement.phase, 'unavailable');
+  assert.equal(h.fit(), undefined); assert.equal(h.notifications.length, 0);
+});
 function primeNextFont(h) {
   const size = h.card.state.measurement.sizeIndex + 1;
   for (let i = 0; i < h.input().blocks.length; i++) {
@@ -432,7 +550,7 @@ test('immutable v1 geometry, colors and discrete type scales cover all formats/r
 });
 test('actual modal integration passes the checked display and retains selectable canonical text', async () => {
   const source = fs.readFileSync(path.join(ROOT, 'components/piece/PiecePreviewModal.js'), 'utf8');
-  assert.match(source, /element\(PieceVisualCard, \{ display \}\)/);
+  assert.match(source, /element\(PieceVisualCard, \{ display, onSaveFitChange \}\)/);
   assert.match(source, /testID: 'piece-canonical-text', selectable: true/);
 });
 test('same native Text instances stay hidden until every paragraph and branding supplies both events', async () => {

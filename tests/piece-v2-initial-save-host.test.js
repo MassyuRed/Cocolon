@@ -20,7 +20,17 @@ const preview = () => Object.freeze({ preview_id: '30000000-0000-4000-8000-00000
   preview_revision: 1, piece_text_hash: 'a'.repeat(64), content_payload_hash: 'b'.repeat(64),
   visual_recipe_hash: 'c'.repeat(64), renderer_version: 'synthetic-unadmitted.v1',
   piece_text: '本文を保存keyや通知へコピーしません。' });
-function unit({ provider = () => true, entropy, saveEnabled = true, mode = 'context' } = {}) {
+// Synthetic native-fit boundary is independent of the external admission
+// supplier. Actual mounted-card invalidation is covered by renderer tests.
+function syntheticFit(view) {
+  const token = view.visualToken;
+  const fields = ['preview_id', 'preview_revision', 'row_version', 'piece_text_hash',
+    'content_payload_hash', 'visual_recipe_hash', 'renderer_version', 'expires_at'];
+  const expected = Object.fromEntries(fields.map(key => [key, view.preview[key]]));
+  return Object.freeze({ isCurrent: (preview, value) => value === token && !!preview &&
+    fields.every(key => preview[key] === expected[key]) });
+}
+function unit({ provider = () => true, entropy, saveEnabled = true, mode = 'context', fit = true } = {}) {
   const calls = [], alerts = [], admissions = [], keys = [];
   let view = { phase: 'idle' }, config, subscriber, appListener;
   const read = v => ({ ...v, hashVerified: v.phase === 'received' && v.verified !== false,
@@ -74,6 +84,7 @@ function unit({ provider = () => true, entropy, saveEnabled = true, mode = 'cont
   let enabled = true, saving = saveEnabled;
   host.context = { runtime: {}, isFeatureEnabled: name => name === 'piece_v2_preview_enabled' ? enabled : saving };
   host.componentDidMount(); host.sourcePhase = mode === 'saved' ? 'ready' : 'idle'; host.start();
+  if (fit) host.receiveSaveFit(syntheticFit(view), null);
   const nodes = tree => !tree || typeof tree !== 'object' ? [] :
     [tree, ...(tree.children || []).flat(Infinity).flatMap(nodes)];
   const modal = () => nodes(host.render()).find(node => node.type === 'PiecePreviewModal');
@@ -84,6 +95,55 @@ function unit({ provider = () => true, entropy, saveEnabled = true, mode = 'cont
     view: () => view, replace: v => { view = v; }, background: appListener,
     flags: (a, b) => { enabled = a; saving = b; }, config: () => config };
 }
+
+test('initial-save host unit: external admission alone cannot replace a current native-fit handle', () => {
+  const u = unit({ fit: false });
+  assert.equal(u.modal().props.display.canSave, false); assert.equal(u.modal().props.onSave, null);
+  for (const isCurrent of [() => false, () => 'true', () => 1, () => ({}),
+    () => Promise.resolve(true), () => { throw Error('PRIVATE'); }]) {
+    u.host.receiveSaveFit(Object.freeze({ isCurrent }), null);
+    assert.equal(u.host.saveFitHandle, null); assert.equal(u.modal().props.display.canSave, false);
+  }
+  assert.equal(u.calls.length, 0); assert.equal(u.keys.length, 0); assert.equal(u.alerts.length, 0);
+});
+test('initial-save host unit: the stable modal fit callback rejects a previous display token', () => {
+  const u = unit({ fit: false }), before = u.view(), callback = u.modal().props.onSaveFitChange;
+  assert.equal(callback, u.modal().props.onSaveFitChange);
+  const oldFit = syntheticFit(before);
+  u.replace({ ...before, visualToken: Object.freeze({}) });
+  callback(oldFit, null); assert.equal(u.host.saveFitHandle, null);
+  const current = syntheticFit(u.view()); callback(current, null);
+  assert.equal(u.host.saveFitHandle, current); assert.equal(u.modal().props.display.canSave, true);
+});
+test('initial-save host unit: stale cancellation and an old button cannot borrow a replacement fit', () => {
+  const u = unit(), before = u.view(), old = u.host.saveFitHandle, button = u.modal();
+  const replacement = syntheticFit(before); u.host.receiveSaveFit(replacement, old);
+  u.host.receiveSaveFit(null, old); assert.equal(u.host.saveFitHandle, replacement);
+  button.props.onSave(identity(before.preview), before.visualToken);
+  assert.equal(u.calls.length, 0); assert.equal(u.keys.length, 0);
+  u.press(); assert.equal(u.calls.length, 1); assert.equal(u.keys.length, 1);
+});
+test('initial-save host unit: revoking the current fit hides save and fences its rendered callback before entropy', () => {
+  const u = unit(), before = u.view(), button = u.modal();
+  u.host.receiveSaveFit(null, u.host.saveFitHandle);
+  assert.equal(u.modal().props.display.canSave, false); assert.equal(u.modal().props.onSave, null);
+  button.props.onSave(identity(before.preview), before.visualToken);
+  assert.equal(u.calls.length, 0); assert.equal(u.keys.length, 0);
+});
+test('initial-save host unit: admission and entropy callbacks cannot replace the captured fit before HTTP', () => {
+  for (const stage of ['admission', 'entropy']) {
+    let u, replace = false;
+    const change = () => { if (replace) {
+      replace = false; u.host.receiveSaveFit(syntheticFit(u.view()), u.host.saveFitHandle);
+    } };
+    u = unit({ provider: () => { if (stage === 'admission') change(); return true; },
+      entropy: bytes => { if (stage === 'entropy') change(); return bytes.fill(1); } });
+    const button = u.modal(), before = u.view(); replace = true;
+    button.props.onSave(identity(before.preview), before.visualToken);
+    assert.equal(u.calls.length, 0); assert.equal(u.alerts.length, 0);
+    assert.equal(u.keys.length, stage === 'entropy' ? 1 : 0);
+  }
+});
 
 for (const mode of ['context', 'saved']) test(`initial-save host unit: ${mode} initial button forwards one exact private intent`, () => {
   const u = unit({ mode }), before = u.view(), node = u.modal();
@@ -219,7 +279,8 @@ function integrated({ outcome, admission = () => true } = {}) {
     initial: () => u.nodes(u.tree()).find(node => node.props.testID === 'piece-initial-save'),
     publish: value => { enabled = value; u.host.context = runtime(); u.host.componentDidUpdate(); },
     saveFlag: value => { saveEnabled = value; },
-    ready: async () => { u.mount(); await u.host.resolveSavedInput(); u.host.start(); await tick(); },
+    ready: async () => { u.mount(); await u.host.resolveSavedInput(); u.host.start(); await tick();
+      u.host.receiveSaveFit(syntheticFit(u.host.controller.getView()), null); },
   };
 }
 test('initial-save integration: actual saved source -> modal press -> private save -> saved result', async () => {
@@ -243,6 +304,7 @@ test('initial-save integration: unknown save outcome retries identical request/k
   await u.ready(); const button = u.initial(); assert.ok(button, 'HOST_INITIAL_SAVE_NOT_CONNECTED');
   button.props.onPress(); await tick();
   assert.equal(u.host.controller.getView().retryKind, 'save');
+  u.host.receiveSaveFit(null, u.host.saveFitHandle);
   u.host.close(); u.publish(false); u.publish(true);
   assert.deepEqual(u.counts(), { keyCalls: 1, saveCalls: 1 });
   u.host.retry(); await tick();

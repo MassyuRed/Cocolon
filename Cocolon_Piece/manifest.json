@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v73",
-  "generated_at": "2026-10-14 JST",
+  "schema_version": "cocolon.piece.workstream_manifest.v74",
+  "generated_at": "2026-10-19 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v70",
-    "predecessor_blob": "d81a41866b3e6844333200d2c4886e8440cde71b",
-    "predecessor_head": "537431d2e8618f1f07a4e7c700b58ce991653192",
-    "carry_forward": "Ordered lookahead retained exact metrics but RN mixed420 timed out at 8089.435ms. Test-only stage timing identified worker cost. Uniform complete-attribute substring construction is under native63 and RN5 verification; no timeout resolution or admission claimed."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v73",
+    "predecessor_blob": "cec7305f6ddb70b701c740e26334a09fed580e9a",
+    "predecessor_head": "b3fdafaf465b0fc298bcf0f230f844db5f375bc5",
+    "carry_forward": "Native buffer source b3fdafaf passed all69 exact-metric checks; actual RN39171059794 passed4 cases, mixed420 timed out at8332.374ms without final inspection/PNG. This write unit connects current mounted-fit evidence to the existing initial-save host and preserves formal supplier/default-OFF boundaries; real RN revalidation is pending."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "ae6bc7868df38fb8ec8ac94fe55e17aa852e6ad6",
-    "raw_sha256": "8b453ba5ebb83ec90fb47a540fb219ba166d4c48e8dcf3fa4be8a7db0e046b56",
-    "utf8_bytes": 181360
+    "git_blob_sha1": "a724e4959b8ecdcf49fa922713e37ec6fd5ed984",
+    "raw_sha256": "f37ece8ed407ceebb53d907ca0390113ad6efb7c13163c40d6fb1d1f08501d90",
+    "utf8_bytes": 194484
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -174,8 +174,8 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "b46f4537582a047d25339abcf005ca9d85a7f1d0",
-    "mashos_api_head": "804beca66f9f02e18dc4522232478466f4d52b13",
+    "cocolon_pre_sync_head": "b3fdafaf465b0fc298bcf0f230f844db5f375bc5",
+    "mashos_api_head": "a536e50ee284785f585ac73329ef2947dca8bba9",
     "current_user_visible_piece_shape": "CANDIDATE_NORMAL_INPUT_V2_SAVED_SOURCE_ONLY__TUTORIAL_NEXUS_LEGACY_REMAIN__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
     "piece_v2_api_registration_present": true,
@@ -190,12 +190,12 @@
     "input_screen_source_connected": true,
     "live_auth_input_to_preview_to_device_verified": false,
     "database_evidence_owner": "live_db_apply_20261010",
-    "remaining_work_owner": "real_rn_canvas_execution_20261013",
+    "remaining_work_owner": "save_fit_connection_20261019",
     "product_acceptance": false,
     "piece_v2_default_application_registered": false,
     "piece_v2_quota_http_present": true,
     "piece_v2_quota_http_scope": "Explicit preview/shared candidates use existing saved-use GET and preview flag. Legacy reflection quota alias omitted only there; default app remains publish quota.",
-    "piece_v2_quota_read_sql_scope": "New005 source-only; existing live001-004 preserved; live quota function presence not claimed.",
+    "piece_v2_quota_read_sql_scope": "005 source present. On2026-10-19JST public pg_proc metadata showed no piece_read_quota_v2 overload; initial preview candidate composition requires this RPC. Existing live001-004 retained.",
     "piece_v2_quota_read_live_applied": false,
     "piece_v2_preview_plan_display_present": true,
     "piece_v2_preview_plan_display_scope": "Strict capability/quota display and visual-only settings with original POST/key recovery connected in source. Save/export and runtime admission remain unavailable.",
@@ -234,18 +234,20 @@
     "shared_candidate_legacy_publish_cancel_writes_present": false,
     "default_legacy_publish_cancel_writes_preserved": true,
     "piece_v2_initial_save_host_conditional_connected": true,
-    "piece_v2_formal_renderer_admission_supplied": false
+    "piece_v2_formal_renderer_admission_supplied": false,
+    "piece_v2_current_native_fit_handle_connected": true,
+    "piece_v2_native_save_fit_scope": "Local mounted-fit handle is connected Card->Modal->host in source; formal renderer supplier and normal runtime initial-save acceptance remain absent. Local fit alone does not grant admission."
   },
   "next_group": {
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "NATIVE_DEVICE_RENDERER_ADMISSION_THEN_SAVE_FIT_AND_BOUND_SAVE",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "NATIVE59_EXACT_METRICS_PASSED__FOUR_RN_CASES_PASSED__MIXED420_THIRD_FONT_TIMEOUT",
-    "current_map_section": "65.11",
-    "current_entry_section": "63",
-    "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261010.md",
-    "weekly_review_section": "5.5",
-    "first_unfinished_work": "Reduce repeated per-font native candidate work within the unchanged eight-second total. R12 actual RN38441898578 is fully read: mixed420 reaches font40 after font48/44 no-fit, then times out at 8113.899ms. Native retry115462431082 passed all59 including fourteen bit-equivalence fixtures. Formal renderer/save fit/normal initial save/device remain unfinished.",
+    "state": "LOCAL_SAVE_FIT_CONNECTED__NATIVE69_PASSED__RN_REVALIDATION_PENDING",
+    "current_map_section": "65.21",
+    "current_entry_section": "73",
+    "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
+    "weekly_review_section": "5.6",
+    "first_unfinished_work": "Verify current fit connection and unchanged full-body/final-inspection/PNG/eight-second conditions in the existing5-case RN harness. Last native-buffer run39171059794 passed69 bit-exact checks but mixed420 timed out at8332.374ms. Formal InputScreen supplier, required quota RPC and explicit candidate runtime composition, normal initial save and same-owner reopen remain unfinished. Do not restart old iOS44 or unchanged batch/suffix proposals.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 4,
@@ -284,7 +286,9 @@
     "repeat_normal_owner_history_entry": false,
     "repeat_initial_save_modal": false,
     "repeat_shared_legacy_write_retirement": false,
-    "repeat_initial_save_host_connection": false
+    "repeat_initial_save_host_connection": false,
+    "weekly_work_unit": "P-W1_20261019_20261022",
+    "repeat_local_save_fit_connection": false
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -338,9 +342,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "da69b2a31f5657f2c64486220a2a73576e1fa344",
-    "raw_sha256": "b0dd3e7d16fb6a6a4f4b3c2155715c1c403b3ff056e20fe23d271966396a903b",
-    "utf8_bytes": 389455
+    "git_blob_sha1": "e08a1adb9059b2dc8dd3e40d8122005a6025d2a4",
+    "raw_sha256": "33976431087eabb7c785ac2c9ceaa4c8dce94fae9fa95c48da06d6eebc09bad2",
+    "utf8_bytes": 423510
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -513,34 +517,23 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "NATIVE59_EXACT_METRICS_PASSED__FOUR_RN_CASES_PASSED__MIXED420_THIRD_FONT_TIMEOUT",
-    "source_commits": [
-      "2c7c554cf51cff38efc84a99df80565f736fe9d9",
-      "5c501d9eaed60257b202de418c936a1f7acb3bf6",
-      "5c685b4b658f5e08ed78039ea3ecd68761582e79",
-      "1667ecd64a10345987b5fcb7be307f9ee315a0a1",
-      "545c7cc3476bdcd84e88624d29137e51089169d6",
-      "6d20e1c10c427850cec5c2b8567e74507dbad631",
-      "f7a4c61d4d30c8e7ab360f59f508d20e5d4692c8",
-      "ff386719fcd6bddb4809d6557901c148d61298b4",
-      "70a597384009c26ccd9c0826422b0ee8058edc58",
-      "b6a135613c7f443e61740c02873d26424208d8ac",
-      "6be0bed18fa33d5414d4834bf29ecc8b6d25c6d5",
-      "b46f4537582a047d25339abcf005ca9d85a7f1d0"
-    ],
-    "product_source_changes": 3,
-    "test_source_paths": 3,
+    "classification": "LOCAL_SAVE_FIT_CONNECTED__NATIVE69_PASSED__RN_REVALIDATION_PENDING",
+    "source_parent": "b3fdafaf465b0fc298bcf0f230f844db5f375bc5",
+    "source_scope": "Containing write unit: four existing product paths, six existing test paths and three existing documentation paths.",
+    "product_source_changes": 4,
+    "test_source_paths": 6,
     "workflow_paths": 0,
     "piece_documentation_paths": 3,
-    "structure_map": "STRUCTURE_MAP_DELTA_NONE",
+    "structure_map": "UPDATED_SECTION_65_21_SAME_WRITE_UNIT",
     "signing": 0,
     "distribution": 0,
     "live_database_apply": 0,
+    "environment_changes": 0,
+    "deploy": 0,
+    "main_merge": 0,
     "release_effect": 0,
     "product_acceptance": false,
-    "automatic_progression": false,
-    "simulator_execution_attempts": 12,
-    "native_only_reruns": 3
+    "automatic_progression": false
   },
   "b06_q3_context_fence": {
     "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
@@ -4893,5 +4886,87 @@
       "png": false
     },
     "next_work": "Prioritize exact candidate workload and adapter costs before final inspection; proposed v4 overflow classification remains unadopted because it changes the full-five-metric contract. Formal renderer supplier, current snapshot fit gate, initial save and physical device acceptance remain incomplete."
+  },
+  "save_fit_connection_20261019": {
+    "entry_section": "73",
+    "structure_map_section": "65.21",
+    "source_parent": "b3fdafaf465b0fc298bcf0f230f844db5f375bc5",
+    "product_paths": [
+      "components/piece/PieceVisualCard.js",
+      "components/piece/PiecePreviewModal.js",
+      "screens/input/InputPieceActionArea.js",
+      "features/piece/piecePreviewModel.js"
+    ],
+    "local_fit_interface": [
+      "isCurrent"
+    ],
+    "same_mount_token_binding_generation_plan_inspection_nodes_required": true,
+    "formal_supplier_independently_required": true,
+    "token_only_changes_remount_canvas": true,
+    "stale_handle_and_button_cannot_borrow_replacement": true,
+    "unknown_save_outcome_retry_preserves_request_and_key": true,
+    "hash_and_expiry_verification_retained": true,
+    "local_tests": {
+      "runtime": "Node24.19.0 / TypeScript5.2.2",
+      "files": 14,
+      "pass": 833,
+      "fail": 0,
+      "skip": 0,
+      "duplicate_host_cases": 43,
+      "ci13_corresponding_cases": 790,
+      "renderer": 71,
+      "host": 43,
+      "modal_including_host": 86,
+      "sha256_valid_vectors": 164,
+      "rejected_surrogates": 5
+    },
+    "real_rn_revalidation": "PENDING_CONTAINING_SOURCE_COMMIT__SAME_5_FIXTURES_8_SECONDS_PLUS_ACTUAL_FIT_HANDLE_ASSERTIONS",
+    "native_buffer_baseline": {
+      "source_commit": "b3fdafaf465b0fc298bcf0f230f844db5f375bc5",
+      "run": 39171059794,
+      "native_job": 117804017059,
+      "native_pass": 69,
+      "native_fail": 0,
+      "native_skip": 0,
+      "rn_job": 117804017087,
+      "rn_state": "failure",
+      "rn_success_cases": 4,
+      "pngs_visually_reviewed": 4,
+      "export_native_compiles": "scope_skipped",
+      "artifact_id": 12153037478,
+      "artifact_expires_at": "2026-10-25T22:30:21Z",
+      "artifact_zip_sha256": "3317dd1e3d56a1552b11a70c271acdfaca26f32806e79a7c783265bcced72a9b",
+      "results_json_sha256": "076b8e7feeb059b1e2500eb238145189a245b54c5c35042d6ed77f3157f23599",
+      "max420": {
+        "elapsed_ms": 8332.374208999798,
+        "phase": "unavailable",
+        "reason": "measurement_timeout",
+        "size_index": 2,
+        "completed_b9_font_sizes": [
+          48,
+          44
+        ],
+        "font40_adapter": "resolved",
+        "font40_b9_completed": false,
+        "font36_native_and_adapter": "pending",
+        "final_inspection_completed": false,
+        "png": false
+      }
+    },
+    "database_metadata_read": {
+      "project_ref": "oeahmpmigszggnkyiivq",
+      "date": "2026-10-19 JST",
+      "public_same_name_overloads_found": 0,
+      "names": [
+        "piece_read_quota_v2",
+        "piece_mutate_preview_visual_v2"
+      ],
+      "private_rows_read": false,
+      "live_apply": 0
+    },
+    "normal_initial_save_and_same_owner_reopen": false,
+    "formal_renderer_admission_supplied": false,
+    "physical_device_acceptance": false,
+    "next_work": "Read revalidation results and images. Close mixed420 performance within current exact contract, then provide an adopted renderer supplier and the authorized runtime/DB prerequisites for ordinary explicit save and same-owner reopen; do not infer acceptance from source tests."
   }
 }

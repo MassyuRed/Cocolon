@@ -164,7 +164,7 @@ for (const field of ['piece_text_hash', 'content_payload_hash', 'visual_recipe_h
 test('UTF-8 SHA-256 matches independent Node crypto at padding and unicode boundaries', () => {
   const u = previewUiHarness();
   const values = ['', 'abc', 'a'.repeat(55), 'a'.repeat(56), 'a'.repeat(63), 'a'.repeat(64),
-    'a'.repeat(65), 'a'.repeat(1000), '日本語', '😀𠮷', '\u0000\u001f\t\n\\"',
+    'a'.repeat(65), ...[119, 120, 127, 128, 129, 1000].map(n => 'a'.repeat(n)), '日本語', '😀𠮷', '\u0000\u001f\t\n\\"',
     'e\u0301', 'é', '\u2028\u2029', '  本文\n\n末尾  '];
   for (let length = 1; length < 145; length++) values.push('aあ😀'.repeat(length));
   for (const value of values) assert.equal(u.digest(value), hash(value), JSON.stringify(value.slice(0, 20)));
@@ -172,7 +172,7 @@ test('UTF-8 SHA-256 matches independent Node crypto at padding and unicode bound
 });
 test('lone surrogates are not replaced while hashing', () => {
   const u = previewUiHarness();
-  for (const value of ['\ud800', '\udfff', 'x\ud800z']) assert.throws(() => u.digest(value));
+  for (const value of ['\ud800', '\udfff', 'x\ud800z', '\ud800\ud800', '\udfff\ud800']) assert.throws(() => u.digest(value));
 });
 test('canonical payload key order is irrelevant but spaces and newlines remain significant', () => {
   const u = previewUiHarness(), raw = response();

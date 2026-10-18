@@ -15,7 +15,7 @@ const plans = { free: 'Free', plus: 'Plus', premium: 'Premium' };
 const branding = { required_small: '小さく表示', required_subtle: '控えめに表示', off: '表示なし' };
 const themes = { soft_paper: 'ソフトペーパー', quiet_night: '静かな夜' };
 
-export default function PiecePreviewModal({ visible = false, display, onClose, onRetry, onVisualChange, onCancel, onOpenSaved, onSave }) {
+export default function PiecePreviewModal({ visible = false, display, onClose, onRetry, onVisualChange, onCancel, onOpenSaved, onSave, onSaveFitChange }) {
   if (visible !== true || !display || display.phase === 'hidden') return null;
   const received = display.phase === 'received' && display.hashVerified === true && display.preview;
   const preview = received ? display.preview : null;
@@ -83,7 +83,7 @@ export default function PiecePreviewModal({ visible = false, display, onClose, o
         ) : null,
         preview?.content_status === 'adjusted' ? element(Text, { style: { color: '#202020', fontSize: 16, marginBottom: 16 } },
           '伝えたい内容を保ちながら、共有に向けた調整がされています。') : null,
-        preview ? element(PieceVisualCard, { display }) : null,
+        preview ? element(PieceVisualCard, { display, onSaveFitChange }) : null,
         preview ? element(Text, { testID: 'piece-canonical-text', selectable: true,
           style: { fontSize: 18, lineHeight: 29, color: '#202020' } }, preview.piece_text) : null,
         display.phase === 'saved' ? element(Text, { accessibilityLiveRegion: 'polite',

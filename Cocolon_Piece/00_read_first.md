@@ -1467,3 +1467,43 @@ artifact11864476166（55,431,860 bytes、期限2026-10-21T01:40:49Z）のZIP SHA
 華恋と同環境read-only担当が元blobとの差分・所有期間・属性保持を確認。localのrenderer／measured-wrap 2suiteは終了code0です。iOS bit同値・実RN性能の代用にはしません。native sourceとこのcheckpointを既存PR30へ反映し、既存CIで検証します。正式renderer supplierと通常初回保存は現時点で未完了です。
 
 必須前提・作業rule・Karen-Diary・恒久incidentを確認。System Context prepareは今回のsparse materializationにtools.cocolon_contextがなくModuleNotFoundErrorで未成立、管理入口が許す原典直接読取りで継続しました。生成context成功や全repo本文監査は主張しません。default OFF、Draft/open/unmerged、DB/env/deploy/署名/配布/main merge効果0を維持します。
+
+### 73.1 候補buffer版の実測結果 — native69成功、混在420文字は未解消
+
+native source `b3fdafaf465b0fc298bcf0f230f844db5f375bc5`／[run39171059794](https://github.com/MassyuRed/Cocolon/actions/runs/39171059794) は、native job117804017059で69 PASS／FAIL0／SKIP0（全行5double bit比較を含む）、JS job117804016923とAndroid source job117804017072も成功しました。export Pods／Androidのjobは成功表示ですがcompile stepはscope skipで、新しい実compile証拠にはしません。
+
+mixed420単体は1,682.738ms、worker実時間1,434.249ms、検査decode155.906ms。CoreText作成累積2,138.849ms、ink累積508.629msでした。CF substring counter16.571msにはappend／mutable copyの全費用が含まれないため、文字列構築全体の費用とは扱いません。別runnerの時間差を今回差分の改善量へ換算しません。
+
+実RN job117804017087はfailure／exit65で完了。essay_paragraphs 1,159.016ms、quote_unicode 1,617.194ms、declaration_no_brand 379.459ms、saved_essay_canvas 2,368.189msの4件はnative_checked、body_preserved／native_canvas_valid=trueです。inspectionは6／4／5／6件、行本文＋任意brandingとnative textが一致。PNGはessay／savedが1080×1350、quote／declarationが1080×1920。華恋が4枚を開いて本文・段落・欠け・余白・brandingを確認しました。成功4件のcapture_errorはfalse値ではなくキー欠落です。
+
+420文字は8,332.374msでmeasurement_timeout、size2。48／44／40ptの候補は各88,410行・11,381代表値を返し、native2,593.324／5,088.231／4,912.878ms、adapter2,763.396／5,289.584／5,144.215msでした。待ち時間を含む呼出しを合算しません。B9は48／44ptのみ完了し、107.031／138.359ms、両方fit=false。40ptはadapter完了記録があってもB9完了なし、36ptはnative／adapterともreport時pendingです。stateはplanning1 3,052.320ms→planning2 5,653.468ms→unavailable2 8,058.122ms。最終inspection／選択行／PNGなし、native_canvas_validはキー欠落、capture_error=trueです。body_preserved=falseは完成planがないためのharness判定であり、本文を変更・削除した記録ではありません。
+
+artifact12153037478（56,908,730 bytes、期限2026-10-25T22:30:21Z）のZIP SHA256 `3317dd1e3d56a1552b11a70c271acdfaca26f32806e79a7c783265bcced72a9b` とresults.json SHA256 `076b8e7feeb059b1e2500eb238145189a245b54c5c35042d6ed77f3157f23599` を照合。ログの5reportとartifact JSONは完全一致しました。全5件canSave/canExport=false。単体69成功を実RN全体8秒・通常保存の完成へ換算しません。
+
+### 73.2 同じ描画の保存前fitを既存hostへ接続
+
+このwrite unitは既存製品4path、JS検査4path、既存実RN検査2pathと入口／current map／manifestの3pathです。新しいhelper・workflow・保存APIは作りません。
+
+- `PieceVisualCard` が同一mount・preview token・binding・generation・B9 plan・最終inspection・全Text node・canvasを照合するローカルhandleを供給します。公開fieldは同期の`isCurrent(preview, token)`だけ。本文・行・node・計測値を外部へ渡しません。native_checkedの完了前／期限切れ／変更後は不成立で、getterからnative処理や通知を起動しません。ハッシュ・expiry・完全artifact keyの検査を保持します。
+- tokenだけの変更でもmeasurementを作り直し、論理canvasのkeyを替えてprobeをremountします。同じgeometryでonLayoutが再通知されない問題、token A→B→Aで旧Promiseや証拠が復活する問題を防ぎます。listener変更時の取消通知が親を再変更する場合も、新listenerとdisplayを照合し直してから供給します。
+- `PiecePreviewModal` はstable callbackをCardへ渡します。`InputPieceActionArea` がローカルfitと外部の正式supplierを両方確認し、render・押下・entropy生成後・既存controllerの保存意図確定前で現在性を再照合。旧handleの取消通知は新handleを消さず、旧buttonは新handleを借りません。保存HTTP body・同一idempotency key・owner境界・結果不明時の同一要求再試行・同owner詳細経路は既存処理を維持します。
+- `piecePreviewModel.js` のSHA-256内部だけを、blockごとの配列確保と小関数呼出しの反復を減らす形へ変更。全64wordをblockごとに上書きし、digest間に共有しません。UTF-8 bytes／canonicalization／署名対象／検証回数／expiryは変更せず、ハッシュcacheや検証省略を入れません。Node crypto独立比較164入力と不正surrogate5入力を既存検査内で確認しました。
+
+復元後のlocal14ファイルは833 PASS／FAIL0／SKIP0（Node24.19.0／TypeScript5.2.2）。initial-save-modal内でも実行するhost43件を別起動した重複があるため、既存CI13ファイルとの対応件数は790です。対象renderer71、host43、modal86（host43を含む）が成功。これはnativeをsyntheticにしたsource検査であり、通常保存の実端末操作の証拠ではありません。
+
+既存実RNの同じ5fixtureへ、previewごとに固定したtokenとstable callbackを渡し、実handleの現在性・別token拒否・公開keyをreportへ追加しました。savedにも同じcallbackを渡し、handleが実際に無いことを負例として確認します。元の2frame安定確認・本文／inspection／PNG／全5件・8秒・canSave/canExport=falseを保持し、handleの照合時間もelapsed_msへ含めます。今回のsourceで実RNとnative69を再検証します。まだ結果を先取りしません。
+
+同環境read-only担当による原典・実差分reviewと華恋の確認を実施。別model reviewや物理実機受入れとは扱いません。構造責任の追加をcurrent map§65.21とmanifestへ同時反映します。
+
+### 73.3 通常初回保存の残件と稼働境界
+
+保存前fitのローカル接続は上記sourceに実装しましたが、`InputScreen` からの正式`isSaveAdmitted` supplierは未供給です。prototype version一致はこのhandleが検証したprofileとの対応であり、正式renderer採用ではありません。Cardは画像レイアウトの確認表示を担当し、利用可否の説明はModal／hostに置きます。
+
+API PR3 heada536e50ee284785f585ac73329ef2947dca8bba9の既存candidate compositionを確認しました。通常の新規preview発行は`piece_read_quota_v2(uuid)`が必要です。2026-10-19 JSTにSupabaseのmigration履歴とpg_proc／pg_namespaceだけをread-only照合したところ、この関数と`piece_mutate_preview_visual_v2`はpublic schemaに同名overloadも含め存在しませんでした。個人のPiece本文・保存行は読みませんでした。
+
+未適用sourceはAPIの`supabase/migrations/20261010_005_piece_v2_quota_read.sql`と`supabase/migrations/20261010050940_piece_v2_preview_visual_change.sql`です。後者は見た目変更PATCH用で、初期recipeのまま保存する経路の必須関数ではありません。保存POST自体は既存M4の`piece_save_v2`でquota再照合・消費を行います。quota読取り成功だけを保存許可へ置換しません。
+
+P-W1の未完了は、420文字の全体8秒と最終描画、正式renderer supplier、必要DB関数・明示candidate compositionの稼働、同じ候補の明示初回保存→同owner履歴／詳細再表示です。default applicationはlegacy、bootstrapの8flagは正式renderer供給ではなく、versionやready fieldを追加する変更は行っていません。P-W2の画像保存／共有3形式とP-W3の物理実機・実画像受入れも未完了です。weekly10/17§5.6を本線とし、過去の全device準備をsource作業の前提へ戻しません。
+
+今回の委任で進めるsource／検査／既存PR反映と、DB適用・env・deploy・署名・配布・main mergeの稼働効果を区別します。後者の実行は0。Draft/open/unmerged・default OFFを保持し、未供給の正式admissionをtrueに代入しません。
+

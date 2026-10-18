@@ -3,28 +3,88 @@
  */
 import React from 'react';
 import { View, Text } from 'react-native';
-import { preparePieceNativeCard, createPieceNativeMeasurement, pieceNativeTypography, recordPieceNativeMeasurement } from '../../features/piece/pieceLayout';
+import { PIECE_NATIVE_PREVIEW_VERSION, preparePieceNativeCard, createPieceNativeMeasurement, pieceNativeTypography, recordPieceNativeMeasurement } from '../../features/piece/pieceLayout';
 import { inspectPieceText, measurePieceCandidates } from '../../features/piece/pieceRenderer';
 import { planPieceMeasuredRows } from '../../features/piece/pieceMeasuredWrap';
 
 export default class PieceVisualCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { measurement: createPieceNativeMeasurement(preparePieceNativeCard(props)), width: props.exportCanvas === true ? 1080 : 0 };
+    this.state = { measurement: createPieceNativeMeasurement(preparePieceNativeCard(props)),
+      width: props.exportCanvas === true ? 1080 : 0, visualToken: props.display?.visualToken,
+      binding: Object.freeze({}), bindingSerial: 0 };
     this.active = true;
     this.textNodes = new Map();
     this.probeReady = new Map();
-    this.candidates = { key: this.state.measurement.key, entries: new Map() };
+    this.candidates = { key: this.state.measurement.key, binding: this.state.binding, entries: new Map() };
+    this.saveFit = null;
   }
 
   static getDerivedStateFromProps(props, state) {
     const input = preparePieceNativeCard(props);
-    return state.measurement.key === (input?.key ?? null) ? null : { measurement: createPieceNativeMeasurement(input) };
+    return state.measurement.key === (input?.key ?? null) && state.visualToken === props.display?.visualToken
+      ? null : { measurement: createPieceNativeMeasurement(input), visualToken: props.display?.visualToken,
+        binding: Object.freeze({}), bindingSerial: state.bindingSerial + 1 };
   }
 
-  componentDidMount() { this.active = true; this.syncDeadline(); }
-  componentDidUpdate() { this.syncDeadline(); this.inspectDrawing(); }
-  componentWillUnmount() { this.active = false; this.clearDeadline(); this.inspection = null; this.planning = null; this.textNodes.clear(); this.probeReady.clear(); }
+  componentDidMount() { this.active = true; this.syncDeadline(); this.syncSaveFit(); }
+  componentDidUpdate() { this.syncDeadline(); this.syncSaveFit(); this.inspectDrawing(); }
+  componentWillUnmount() { this.active = false; this.clearSaveFit(); this.clearDeadline(); this.inspection = null; this.planning = null; this.textNodes.clear(); this.probeReady.clear(); }
+
+  bindingCurrent = binding => this.active && this.state.binding === binding &&
+    this.state.visualToken === this.props.display?.visualToken;
+
+  clearSaveFit = () => {
+    const previous = this.saveFit;
+    this.saveFit = null;
+    if (!previous) return;
+    previous.valid = false;
+    try { previous.listener(null, previous.handle); } catch { /* Notification cannot restore a revoked handle. */ }
+  };
+
+  // Local evidence of this exact mounted drawing, never renderer admission.
+  // Only lifecycle methods publish it; reading it performs no native work or
+  // notification and adds nothing to a save request or a persistent record.
+  syncSaveFit = () => {
+    const listener = this.props.onSaveFitChange, display = this.props.display;
+    if (this.saveFit && (listener !== this.saveFit.listener ||
+        !this.saveFit.handle.isCurrent(display?.preview, display?.visualToken))) this.clearSaveFit();
+    // Revocation can synchronously update the parent. Do not publish to the
+    // listener or display captured before that notification changed props.
+    if (this.saveFit || typeof listener !== 'function' || listener !== this.props.onSaveFitChange ||
+        display !== this.props.display) return;
+    const snapshot = this.state.measurement, binding = this.state.binding, operation = this.inspection;
+    const node = this.canvasNode, token = display?.visualToken;
+    if (!this.bindingCurrent(binding) || !token || !node || this.props.exportCanvas === true ||
+        Object.prototype.hasOwnProperty.call(this.props, 'savedRecord') || snapshot.phase !== 'native_checked' ||
+        !snapshot.plan || !operation?.nodes || operation.evidence !== snapshot.inspection ||
+        operation.snapshot.plan !== snapshot.plan || operation.snapshot.generation !== snapshot.generation ||
+        operation.snapshot.blocks !== snapshot.blocks ||
+        display?.preview?.renderer_version !== PIECE_NATIVE_PREVIEW_VERSION) return;
+    const input = preparePieceNativeCard(this.props);
+    if (!input || input.key !== snapshot.key) return;
+    const plan = snapshot.plan, inspection = snapshot.inspection, generation = snapshot.generation;
+    const record = { valid: true, listener, handle: null };
+    record.handle = Object.freeze({ isCurrent: (preview, displayToken) => {
+      try {
+        if (!record.valid || this.props.onSaveFitChange !== listener || !this.bindingCurrent(binding) || this.state.measurement !== snapshot ||
+            this.inspection !== operation || snapshot.plan !== plan || snapshot.inspection !== inspection ||
+            snapshot.generation !== generation || operation.evidence !== inspection || this.canvasNode !== node ||
+            this.props.exportCanvas === true || Object.prototype.hasOwnProperty.call(this.props, 'savedRecord') ||
+            this.props.display?.visualToken !== token || displayToken !== token ||
+            preview?.renderer_version !== PIECE_NATIVE_PREVIEW_VERSION ||
+            operation.nodes.some((value, index) => this.textNodes.get(index)?.value !== value ||
+              this.textNodes.get(index)?.generation !== snapshot.generation)) return false;
+        const current = preparePieceNativeCard(this.props);
+        const requested = preparePieceNativeCard({ display: { phase: 'received', preview, visualToken: displayToken } });
+        return current?.key === input.key && requested?.key === input.key;
+      } catch { return false; }
+    } });
+    if (!record.handle.isCurrent(display.preview, token)) return;
+    this.saveFit = record;
+    try { listener(record.handle, null); }
+    catch { if (this.saveFit === record) this.saveFit = null; record.valid = false; }
+  };
 
   clearDeadline = () => {
     if (this.deadline) clearTimeout(this.deadline.handle);
@@ -34,25 +94,25 @@ export default class PieceVisualCard extends React.Component {
 
   syncDeadline = () => {
     const input = preparePieceNativeCard(this.props);
-    if (!this.active || !input || input.key !== this.state.measurement.key ||
+    if (!this.bindingCurrent(this.state.binding) || !input || input.key !== this.state.measurement.key ||
         !['planning', 'measuring', 'geometry_checked'].includes(this.state.measurement.phase)) {
       this.clearDeadline(); return;
     }
-    if (this.deadline?.key === input.key) return;
+    if (this.deadline?.key === input.key && this.deadline.binding === this.state.binding) return;
     const batch = this.candidates;
     this.clearDeadline();
-    const key = input.key;
-    const deadline = { key, handle: null, expiresAt: Date.now() + 8000 };
+    const key = input.key, binding = this.state.binding;
+    const deadline = { key, binding, handle: null, expiresAt: Date.now() + 8000 };
     this.deadline = deadline;
     // Separate from the per-font/drawing generation. A -> B -> A must create
     // a new batch even when the artifact key eventually returns to A.
-    this.candidates = batch?.key === key ? batch : { key, entries: new Map() };
+    this.candidates = batch?.key === key && batch.binding === binding ? batch : { key, binding, entries: new Map() };
     deadline.handle = setTimeout(() => {
       if (this.deadline !== deadline) return;
       this.deadline = null;
-      if (!this.active || preparePieceNativeCard(this.props)?.key !== key) return;
+      if (!this.bindingCurrent(binding) || preparePieceNativeCard(this.props)?.key !== key) return;
       const generation = this.state.measurement.generation;
-      this.setState(previous => this.active && preparePieceNativeCard(this.props)?.key === key &&
+      this.setState(previous => this.bindingCurrent(binding) && preparePieceNativeCard(this.props)?.key === key &&
         previous.measurement.key === key && previous.measurement.generation === generation &&
         ['planning', 'measuring', 'geometry_checked'].includes(previous.measurement.phase)
         ? { measurement: { ...previous.measurement, phase: 'unavailable', blocks: {}, compositionHeight: null, reason: 'measurement_timeout' } }
@@ -70,7 +130,7 @@ export default class PieceVisualCard extends React.Component {
     return { ...input, blocks, rowGaps, plannedRows: true };
   };
 
-  candidatesCurrent = batch => this.active && batch && this.candidates === batch &&
+  candidatesCurrent = batch => batch && this.bindingCurrent(batch.binding) && this.candidates === batch &&
     preparePieceNativeCard(this.props)?.key === batch.key && this.deadline &&
     Date.now() < this.deadline.expiresAt && this.state.measurement.phase !== 'unavailable';
 
@@ -94,8 +154,8 @@ export default class PieceVisualCard extends React.Component {
     const snapshot = this.state.measurement, input = preparePieceNativeCard(this.props);
     if (!this.active || !input || input.key !== snapshot.key || snapshot.phase !== 'planning' ||
         this.planning?.snapshot === snapshot || input.blocks.some((_, i) => this.probeReady.get(i) !== snapshot.generation)) return;
-    const operation = { snapshot }; this.planning = operation;
-    const current = () => this.active && this.planning === operation && this.state.measurement === snapshot &&
+    const operation = { snapshot }, binding = this.state.binding; this.planning = operation;
+    const current = () => this.bindingCurrent(binding) && this.planning === operation && this.state.measurement === snapshot &&
       preparePieceNativeCard(this.props)?.key === input.key && this.deadline && Date.now() < this.deadline.expiresAt;
     try {
       const batch = this.candidates;
@@ -129,8 +189,8 @@ export default class PieceVisualCard extends React.Component {
   inspectDrawing = async () => {
     const snapshot = this.state.measurement, raw = preparePieceNativeCard(this.props), input = raw && this.drawingInput(raw, snapshot);
     if (!this.active || !input || input.key !== snapshot.key || snapshot.phase !== 'geometry_checked' || this.inspection?.snapshot === snapshot) return;
-    const operation = { snapshot }; this.inspection = operation;
-    const current = () => this.active && this.inspection === operation && this.state.measurement === snapshot &&
+    const operation = { snapshot }, binding = this.state.binding; this.inspection = operation;
+    const current = () => this.bindingCurrent(binding) && this.inspection === operation && this.state.measurement === snapshot &&
       preparePieceNativeCard(this.props)?.key === input.key && this.deadline && Date.now() < this.deadline.expiresAt;
     try {
       const count = input.blocks.length + (input.brandingMode === 'off' ? 0 : 1);
@@ -147,10 +207,12 @@ export default class PieceVisualCard extends React.Component {
         } };
       });
       if (!current()) return;
+      operation.nodes = Object.freeze(targets.map(target => target.node));
       // Promise.all retains row order and observes every rejection. A single
       // missing/invalid result still rejects the entire image, never a subset.
       const evidence = await Promise.all(targets.map(target => inspectPieceText(target.node, target.expected)));
       if (!current()) return;
+      operation.evidence = evidence;
       const { lineHeight } = pieceNativeTypography(input, snapshot.sizeIndex);
       const rowOffsets = evidence.slice(0, input.blocks.length).map((result, index) => {
         const [left, top, right, bottom] = result.ink;
@@ -175,7 +237,7 @@ export default class PieceVisualCard extends React.Component {
   };
 
   measure = (ticket, index, kind, value) => {
-    if (!this.active) return;
+    if (!this.bindingCurrent(this.state.binding)) return;
     const raw = preparePieceNativeCard(this.props), input = raw && this.drawingInput(raw);
     if (this.state.measurement.phase === 'planning') return;
     this.setState(previous => {
@@ -199,7 +261,7 @@ export default class PieceVisualCard extends React.Component {
   render() {
     const raw = preparePieceNativeCard(this.props), measurement = this.state.measurement;
     const input = raw && this.drawingInput(raw, measurement);
-    if (!input || input.key !== measurement.key) return Object.prototype.hasOwnProperty.call(this.props, 'savedRecord')
+    if (!input || input.key !== measurement.key || this.state.visualToken !== this.props.display?.visualToken) return Object.prototype.hasOwnProperty.call(this.props, 'savedRecord')
       ? React.createElement(Text, { testID: 'piece-visual-unavailable', style: { color: '#494949', fontSize: 14, lineHeight: 22, marginBottom: 12 } },
         'このPieceの画像レイアウトは現在確認できません。本文は下で確認できます。') : null;
     const element = React.createElement, ready = measurement.phase === 'native_checked', planning = measurement.phase === 'planning';
@@ -209,7 +271,9 @@ export default class PieceVisualCard extends React.Component {
     const positioned = !!measurement.rowOffsets;
     const ticket = { key: input.key, sizeIndex: measurement.sizeIndex, generation: measurement.generation };
     const scale = this.state.width / input.width;
-    if (planning && this.candidates?.key !== input.key) this.candidates = { key: input.key, entries: new Map() };
+    if (planning && (this.candidates?.key !== input.key || this.candidates.binding !== this.state.binding)) {
+      this.candidates = { key: input.key, binding: this.state.binding, entries: new Map() };
+    }
     const batch = this.candidates, nextSize = measurement.sizeIndex + 1;
     const nextTypography = nextSize < raw.sizes.length ? pieceNativeTypography(raw, nextSize) : null;
     let nextEntry;
@@ -250,6 +314,9 @@ export default class PieceVisualCard extends React.Component {
       element(View, { style: { width: this.state.width, height: measurement.phase === 'unavailable' ? 0 : input.height * scale },
         accessible: false, accessibilityElementsHidden: true, importantForAccessibility: 'no-hide-descendants' },
         measurement.phase !== 'unavailable' && this.state.width > 0 ? element(View, {
+          // A token-only replacement also needs new native layout callbacks.
+          // Remount the measurement subtree once per binding, not per font.
+          key: this.state.bindingSerial,
           testID: 'piece-logical-canvas', pointerEvents: 'none', collapsable: false,
           ref: node => { this.canvasNode = node; },
           style: { position: 'absolute', width: input.width, height: input.height,
@@ -297,8 +364,8 @@ export default class PieceVisualCard extends React.Component {
         style: { fontSize: 14, lineHeight: 22, color: '#494949', marginTop: 8 } },
         measurement.phase === 'unavailable' ? '画像レイアウトを確認できませんでした。本文は下で確認できます。' :
           ready ? Object.prototype.hasOwnProperty.call(this.props, 'savedRecord')
-            ? '保存済みPieceの画像レイアウトの確認用表示です。画像の保存・共有はまだ利用できません。'
-            : '画像レイアウトの確認用表示です。保存・書き出しはまだ利用できません。'
+            ? '保存済みPieceの画像レイアウトの確認用表示です。'
+            : '画像レイアウトの確認用表示です。'
           : '画像レイアウトを確認しています。'),
     );
   }

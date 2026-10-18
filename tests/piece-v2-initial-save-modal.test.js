@@ -173,6 +173,16 @@ test('canonical text and the existing visual-card input remain unchanged', async
   assert.equal(canonical.props.selectable, true);
   assert.equal(card.props.display, display);
 });
+test('the modal forwards local fit evidence without turning it into save admission', async () => {
+  const calls = [], onSaveFitChange = (...args) => calls.push(args);
+  const tree = await render(fixture({ canSave: false }), { onSaveFitChange });
+  const card = nodes(tree).find(node => node.type?.component === 'PieceVisualCard');
+  assert.equal(card.props.onSaveFitChange, onSaveFitChange);
+  assert.equal(calls.length, 0); assert.equal(initial(tree).length, 0);
+  const handle = Object.freeze({ isCurrent: () => true });
+  card.props.onSaveFitChange(handle, null);
+  assert.deepEqual(calls, [[handle, null]]); assert.equal(initial(tree).length, 0);
+});
 test('cancel uses the existing identity/token callback without saving', async () => {
   const display = fixture(), calls = [];
   let saves = 0;

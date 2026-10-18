@@ -63,6 +63,7 @@ export default class InputPieceActionArea extends React.Component {
     this.boundSavedInputStamp = null;
     this.savedMode = false;
     this.saveDispatching = false;
+    this.saveFitHandle = null;
     this.sourceAttempt = null;
     this.sourcePhase = 'idle';
     this.sourceCode = null;
@@ -77,11 +78,13 @@ export default class InputPieceActionArea extends React.Component {
     this.close = this.close.bind(this);
     this.changed = this.changed.bind(this);
     this.resolveSavedInput = this.resolveSavedInput.bind(this);
+    this.receiveSaveFit = this.receiveSaveFit.bind(this);
   }
 
   componentDidMount() {
     // Create anew on every mount, including development StrictMode remounts.
     this.mounted = true;
+    this.saveFitHandle = null;
     this.foreground = AppState.currentState === 'active';
     this.boundStamp = null;
     this.boundRuntime = null;
@@ -124,6 +127,7 @@ export default class InputPieceActionArea extends React.Component {
 
   componentWillUnmount() {
     this.mounted = false;
+    this.saveFitHandle = null;
     this.clearSource();
     clearTimeout(this.expiryTimer);
     this.expiryTimer = null;
@@ -329,12 +333,25 @@ export default class InputPieceActionArea extends React.Component {
     void this.controller.cancelPreview(identity, displayToken);
   }
 
+  receiveSaveFit(next, previous) {
+    if (!this.mounted) return;
+    if (next !== null) {
+      if (!this.isCurrent() || !this.state.open || typeof next?.isCurrent !== 'function') return;
+      const display = readPiecePreviewDisplay(this.controller.getView());
+      try { if (next.isCurrent(display.preview, display.visualToken) !== true) return; }
+      catch { return; }
+    } else if (this.saveFitHandle !== previous) return;
+    if (this.saveFitHandle === next) return;
+    this.saveFitHandle = next;
+    this.changed();
+  }
+
   // The predicate belongs to the future admitted renderer owner. Neither this
   // host nor the display reader turns a flag/quota/native_checked into admission.
   // Recheck the live selection and exact candidate on both sides of the call.
   isSaveAdmitted(preview, displayToken) {
-    const provider = this.props.isSaveAdmitted;
-    if (typeof provider !== 'function' || !preview || !displayToken) return false;
+    const provider = this.props.isSaveAdmitted, handle = this.saveFitHandle;
+    if (typeof provider !== 'function' || typeof handle?.isCurrent !== 'function' || !preview || !displayToken) return false;
     const current = () => {
       if (!this.isCurrent() || !this.state.open || !this.saveEnabled() ||
           this.savedMode && this.sourcePhase !== 'ready') return false;
@@ -345,14 +362,15 @@ export default class InputPieceActionArea extends React.Component {
           'visual_recipe_hash', 'renderer_version', 'expires_at'].every(key => display.preview[key] === preview[key]);
     };
     try {
-      return current() && provider(preview, displayToken) === true &&
-        this.props.isSaveAdmitted === provider && current();
+      return current() && handle.isCurrent(preview, displayToken) === true && provider(preview, displayToken) === true &&
+        this.props.isSaveAdmitted === provider && this.saveFitHandle === handle &&
+        handle.isCurrent(preview, displayToken) === true && current();
     } catch { return false; }
   }
 
-  savePreview(identity, displayToken, provider) {
+  savePreview(identity, displayToken, provider, handle) {
     if (this.saveDispatching || !this.isCurrent() || !this.state.open ||
-        provider !== this.props.isSaveAdmitted) return;
+        provider !== this.props.isSaveAdmitted || handle !== this.saveFitHandle) return;
     this.saveDispatching = true;
     try {
       const display = readPiecePreviewDisplay(this.controller.getView()), preview = display.preview;
@@ -375,7 +393,7 @@ export default class InputPieceActionArea extends React.Component {
       // Entropy/admission implementations must not move this press onto a new
       // selection. The controller independently rechecks admission immediately
       // before retaining the body-free request and issuing the private save.
-      if (provider !== this.props.isSaveAdmitted || !this.isSaveAdmitted(preview, displayToken)) return;
+      if (provider !== this.props.isSaveAdmitted || handle !== this.saveFitHandle || !this.isSaveAdmitted(preview, displayToken)) return;
       void this.controller.savePreview(identity, displayToken, key);
     } finally { this.saveDispatching = false; }
   }
@@ -416,13 +434,13 @@ export default class InputPieceActionArea extends React.Component {
     if (!this.isCurrent()) return null;
     const view = this.controller.getView();
     const checked = readPiecePreviewDisplay(view);
-    const provider = this.props.isSaveAdmitted;
+    const provider = this.props.isSaveAdmitted, handle = this.saveFitHandle;
     const canSave = this.isSaveAdmitted(checked.preview, checked.visualToken);
     // Only this host projection can expose initial-save controls. The shared
     // display reader and native card retain their independent canSave:false.
     const display = canSave ? Object.freeze({ ...checked, canSave: true }) : checked;
     if (!this.isCurrent() || view.visualToken !== this.controller.getView().visualToken) return null;
-    const onSave = canSave ? (identity, token) => this.savePreview(identity, token, provider) : null;
+    const onSave = canSave ? (identity, token) => this.savePreview(identity, token, provider, handle) : null;
     const onOpenSaved = display.phase === 'saved' && this.canOpenSavedPiece()
       ? () => this.openSavedPiece(view.savedReceipt) : null;
     if (this.savedMode && this.sourcePhase !== 'ready' && !['cancel', 'save'].includes(display.retryKind)) {
@@ -452,7 +470,8 @@ export default class InputPieceActionArea extends React.Component {
       !this.state.open && onOpenSaved ? element(Button, { title: '保存したPieceを確認',
         accessibilityLabel: '保存したPieceを確認', onPress: onOpenSaved }) : null,
       element(PiecePreviewModal, { visible: this.state.open, display, onClose: this.close, onOpenSaved,
-        onRetry: this.retry, onVisualChange: this.changeVisual, onCancel: this.cancelPreview, onSave }),
+        onRetry: this.retry, onVisualChange: this.changeVisual, onCancel: this.cancelPreview, onSave,
+        onSaveFitChange: this.receiveSaveFit }),
     );
   }
 }

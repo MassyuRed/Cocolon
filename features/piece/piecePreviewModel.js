@@ -139,21 +139,25 @@ function pieceUtf8Digest(value) {
   const high = Math.floor(bits / 0x100000000), low = bits >>> 0;
   for (const word of [high, low]) for (let shift = 24; shift >= 0; shift -= 8) bytes.push(word >>> shift & 255);
   const h = [0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19];
-  const r = (x, n) => x >>> n | x << (32 - n);
+  // Each block overwrites all 64 words. Keep this scratch space local to one
+  // digest; every caller still revalidates the complete current artifact.
+  const w = new Array(64);
   for (let offset = 0; offset < bytes.length; offset += 64) {
-    const w = new Array(64);
     for (let i = 0; i < 16; i++) {
       const j = offset + i * 4;
       w[i] = bytes[j] << 24 | bytes[j + 1] << 16 | bytes[j + 2] << 8 | bytes[j + 3];
     }
     for (let i = 16; i < 64; i++) {
       const a = w[i - 15], b = w[i - 2];
-      w[i] = (w[i - 16] + (r(a,7) ^ r(a,18) ^ a >>> 3) + w[i - 7] + (r(b,17) ^ r(b,19) ^ b >>> 10)) | 0;
+      w[i] = (w[i - 16] + (((a >>> 7) | (a << 25)) ^ ((a >>> 18) | (a << 14)) ^ a >>> 3) +
+        w[i - 7] + (((b >>> 17) | (b << 15)) ^ ((b >>> 19) | (b << 13)) ^ b >>> 10)) | 0;
     }
     let [a,b,c,d,e,f,g,z] = h;
     for (let i = 0; i < 64; i++) {
-      const t1 = (z + (r(e,6) ^ r(e,11) ^ r(e,25)) + (e & f ^ ~e & g) + pieceSha256K[i] + w[i]) | 0;
-      const t2 = ((r(a,2) ^ r(a,13) ^ r(a,22)) + (a & b ^ a & c ^ b & c)) | 0;
+      const t1 = (z + (((e >>> 6) | (e << 26)) ^ ((e >>> 11) | (e << 21)) ^ ((e >>> 25) | (e << 7))) +
+        (e & f ^ ~e & g) + pieceSha256K[i] + w[i]) | 0;
+      const t2 = ((((a >>> 2) | (a << 30)) ^ ((a >>> 13) | (a << 19)) ^ ((a >>> 22) | (a << 10))) +
+        (a & b ^ a & c ^ b & c)) | 0;
       z=g; g=f; f=e; e=(d+t1)|0; d=c; c=b; b=a; a=(t1+t2)|0;
     }
     [a,b,c,d,e,f,g,z].forEach((word, i) => { h[i] = (h[i] + word) | 0; });

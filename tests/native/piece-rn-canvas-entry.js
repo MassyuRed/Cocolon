@@ -55,7 +55,12 @@ NativeModules.PieceTextMetrics.measureCandidates = (...args) => {
 };
 
 class CanvasCases extends React.Component {
+  caseFixtures = fixtures.map(fixture => fixture.props.display ? { ...fixture,
+    props: { ...fixture.props, display: { ...fixture.props.display, visualToken: Object.freeze({}) } } } : fixture);
   state = { index: 0 };
+  saveFitChanged = (next, previous) => {
+    if (next || this.saveFitHandle === previous) this.saveFitHandle = next;
+  };
   componentDidMount() { this.startCase(); }
   componentWillUnmount() { clearTimeout(this.timer); }
   startCase = () => {
@@ -84,8 +89,13 @@ class CanvasCases extends React.Component {
     this.timer = setTimeout(this.poll, 20);
   };
   finishCase = async () => {
-    const fixture = fixtures[this.state.index], card = this.card, m = card?.state.measurement;
+    const fixture = this.caseFixtures[this.state.index], card = this.card, m = card?.state.measurement;
     const input = preparePieceNativeCard(fixture.props);
+    const display = fixture.props.display, fit = this.saveFitHandle;
+    // Read the actual mounted handle before elapsed_ms so its integrity checks
+    // remain inside the same eight-second budget. Saved cards must publish none.
+    const saveFitCurrent = !!fit && fit.isCurrent(display?.preview, display?.visualToken) === true;
+    const saveFitWrongTokenCurrent = !!fit && fit.isCurrent(display?.preview, Object.freeze({})) === true;
     const report = { name: fixture.name, phase: m?.phase ?? 'missing', reason: m?.reason ?? null,
       elapsed_ms: performance.now() - this.started, size_index: m?.sizeIndex,
       trace: this.trace,
@@ -94,6 +104,8 @@ class CanvasCases extends React.Component {
       composition_height: m?.compositionHeight, blocks: input?.blocks,
       rows: m?.plan?.groups.flat() ?? [], row_offsets: m?.rowOffsets ?? [], inspection: m?.inspection ?? [],
       branding: input?.brandingMode !== 'off', state_can_save: m?.canSave, state_can_export: m?.canExport,
+      save_fit_current: saveFitCurrent, save_fit_wrong_token_current: saveFitWrongTokenCurrent,
+      save_fit_handle_keys: fit ? Object.keys(fit) : [],
       body_preserved: !!m?.plan && m.plan.groups.every((rows, index) => rows.join('') === input.blocks[index]),
     };
     try {
@@ -108,8 +120,9 @@ class CanvasCases extends React.Component {
     this.setState(({ index }) => ({ index: index + 1 }), this.startCase);
   };
   render() {
-    const fixture = fixtures[this.state.index];
-    return <View style={{ width: 360 }}><PieceVisualCard key={fixture.name} ref={node => { this.card = node; }} {...fixture.props} /></View>;
+    const fixture = this.caseFixtures[this.state.index];
+    return <View style={{ width: 360 }}><PieceVisualCard key={fixture.name} ref={node => { this.card = node; }}
+      {...fixture.props} onSaveFitChange={this.saveFitChanged} /></View>;
   }
 }
 AppRegistry.registerComponent('PieceCanvasCases', () => CanvasCases);

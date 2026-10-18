@@ -116,6 +116,10 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     XCTAssertLessThan([report[@"elapsed_ms"] doubleValue], 8000, @"%@", report[@"name"]);
     XCTAssertEqualObjects(report[@"state_can_save"], @NO);
     XCTAssertEqualObjects(report[@"state_can_export"], @NO);
+    BOOL preview = ![report[@"name"] isEqualToString:@"saved_essay_canvas"];
+    XCTAssertEqualObjects(report[@"save_fit_current"], @(preview), @"%@", report[@"name"]);
+    XCTAssertEqualObjects(report[@"save_fit_wrong_token_current"], @NO, @"%@", report[@"name"]);
+    XCTAssertEqualObjects(report[@"save_fit_handle_keys"], preview ? @[@"isCurrent"] : @[], @"%@", report[@"name"]);
     if (report[@"png"]) {
       UIImage *image = [UIImage imageWithContentsOfFile:[PieceEvidenceDirectory() stringByAppendingPathComponent:report[@"png"]]];
       XCTAssertNotNil(image);
