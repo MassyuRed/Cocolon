@@ -7216,3 +7216,8 @@ RN→API→thread source／plan→全体LIMITED一claim→二moveの既存作者
 ## u343差分 — 2026-10-18
 
 「その時」「しかし」の完全二文対比を、原文spanを保持した既存source修復で本文・旧記録復元・保存再開まで接続。構造owner追加なし、STRUCTURE_MAP_DELTA_NONE。原文16種類を修復し、690 pass／7 fail（旧比較不一致）、隔離SQL／画面17ケース。PRODUCT_NOT_CLEARを維持。全file地図01Aと[u343監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u343_PastThenContrast_20261018.md)を再開先とする。
+
+
+## u344差分 — 2026-10-18
+
+既承認二反応の表記／別経験1更新後の保持を修復。STRUCTURE_MAP_DELTA_PRESENT（私有保持2型、logical81）、新production file0、既存6file。683 passed／1 failed／skip 0、隔離SQL／画面16例。PRODUCT_NOT_CLEARを維持。原承認u332の更新責務を回復し、u334独立不明の初回資格は不変。全file地図01Aと[u344監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u344_ReliefContinuity_20261018.md)を参照。

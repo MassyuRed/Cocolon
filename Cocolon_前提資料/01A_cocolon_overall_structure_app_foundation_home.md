@@ -4055,3 +4055,37 @@ STRUCTURE_MAP_DELTA_NONE。既存4production file内で修復し、公開wire／
 | Cocolon | `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` | 今回差分・参照／本監査 |
 | Cocolon | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` | 今回差分・参照／本監査 |
 | Cocolon | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u343_PastThenContrast_20261018.md` | 今回差分・参照／本監査 |
+
+
+## u344差分 — 二反応の到達と更新保持（2026-10-18）
+
+[u344監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u344_ReliefContinuity_20261018.md)に実本文・互換・保存の検証境界。公開wire／DB／RN不変、私有保持型2追加・logical81。
+
+## u344変更file地図（24file）
+
+| repository | path | 役割 |
+|---|---|---|
+| mashos-api | `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 既存pair証明に限定した表記認識、正規化済み関係の参照、撤回後の残存感情の共通選択 |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 現行／全歴史source modeへの表記互換の伝播 |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 不変pairと既受理1更新の出自証明、2責務保持、版付きcheckpointと旧完全復元 |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py` | 既存LIMITED集約を保った局所二反応、元入力／回答／plan／selectedの完全再証明 |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py` | 更新専用eligibility/contentの私有2型。既存二反応内容と全体claimの結合検証 |
+| mashos-api | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_stage1_composition.py` | 同じ二反応内容の封印と私有2型manifest、logical79→81 |
+| mashos-api | `ai/tests/test_cmee_emlis_loneliness_orthography.py` | 新規。現行30例×Q1/Q3、旧復元、作者禁止読解、原文資格変異 |
+| mashos-api | `ai/tests/test_cmee_emlis_loneliness_delivery.py` | 新規。pair自体の5訂正／撤回、隔離SQLの保存／再開7例 |
+| mashos-api | `ai/tests/test_cmee_emlis_relief_update_retention.py` | 新規。17実質問例×Q1/Q3、初回不変・1回答保持・旧復元・独立読解／出自変異 |
+| mashos-api | `ai/tests/test_cmee_emlis_relief_update_delivery.py` | 新規。隔離SQLの回答保存・旧完成／未提供・確定中断再開9例 |
+| mashos-api | `ai/tests/test_cmee_emlis_relief_cognition.py` | 現在manifest件数のみ81へ同期。歴史fixture・本文期待は保持 |
+| mashos-api | `ai/tests/test_cmee_emlis_relief_unknown.py` | 現在manifest件数のみ81へ同期。unknown保持資格・既存本文期待は保持 |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_u343_loneliness_orthography_v1.json` | 新規。無変更u343の30入力×Q1/Q3の全record |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_u343_relief_update_v1.json` | 新規。無変更u343の17入力×Q1/Q3×初回／回答後の68全record |
+| mashos-api | `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 現行ownerから再導出したidentity。scope・歴史proof保持 |
+| mashos-api | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 検証済み範囲・未完・次の実本文確認位置 |
+| Cocolon | `Cocolon_前提資料/01_cocolon_overall_structure.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/07_latest_snapshot_diff.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/current_structure/01_emlis_ai_current_structure.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/current_structure/04_cmee_current_structure.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/designs/cmee/v1/06_implementation_order_migration_and_verification.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` | 今回差分・参照／本監査 |
+| Cocolon | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u344_ReliefContinuity_20261018.md` | 今回差分・参照／本監査 |

@@ -41401,3 +41401,8 @@ STRUCTURE_MAP_DELTA_NONE。既存production8file、新production file0、論理c
 primary outcome=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。Draft/open/unmerged・未配置。E04の深さ／E05問い／E06〜E09、一般入力・本人実機・正式受入れは未完。10/20方式判断、10/31管理線、12/18目標、Piece/Analysis主枠53.25％を維持。
 
 実本文・検査・未解決：[Cocolon_EmlisAI_u336_ActualObservation_Anaphoric_Reception_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u336_ActualObservation_Anaphoric_Reception_20261018.md)。
+
+
+## u344差分 — 2026-10-18
+
+既承認二反応の表記／別経験1更新後の保持を修復。STRUCTURE_MAP_DELTA_PRESENT（私有保持2型、logical81）、新production file0、既存6file。683 passed／1 failed／skip 0、隔離SQL／画面16例。PRODUCT_NOT_CLEARを維持。原承認u332の更新責務を回復し、u334独立不明の初回資格は不変。全file地図01Aと[u344監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u344_ReliefContinuity_20261018.md)を参照。
