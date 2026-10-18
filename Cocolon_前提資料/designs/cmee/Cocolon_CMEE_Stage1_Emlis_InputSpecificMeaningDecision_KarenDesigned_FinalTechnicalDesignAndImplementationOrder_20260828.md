@@ -1,3 +1,5 @@
+> 2026-10-19最新差分：u353（10/18明示承認）。初回の元経験・本人説明・独立不明を、実回答／訂正・撤回／旧再開／保存再表示と一体で修復。新private3型・logical90。限定単位の技術検証まで完了、PRODUCT_NOT_CLEAR・正式Product Read0/3・candidate_ready=false・automatic_progression=falseは維持。詳細は[u353実装監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u353_InitialPersonalMeaning_20261018.md)。
+
 > 2026-10-18最新：u350。Mash承認済みの「安堵・寂しさ＋別経験」を不明なし／ありの両方で初回・既受理一更新・旧保存互換・再表示へ保持する限定契約。private logical83→87、既存production10owner・新production0、STRUCTURE_MAP_DELTA_PRESENT。構造差分は末尾、実本文・検証結果・残件は[u350監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u350_ReliefReceivedRetention_20261018.md)を参照。PRODUCT_NOT_CLEARを維持。
 
 > 2026-10-18最新：u348。Mash承認済みの「安堵・寂しさ＋別経験＋現在の不明」を初回・既受理1更新・旧互換・保存再表示まで実装。初回3対象／2責務、更新後4対象／3責務。private V2二型追加、STRUCTURE_MAP_DELTA_PRESENT。実測・残件は末尾と[u348監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u348_MixedUnknownRetention_20261018.md)を参照。
@@ -3630,3 +3632,16 @@ Mashがu349の限定案に「進めていいよ」と回答したため、作業
 STRUCTURE_MAP_DELTA_PRESENT。既存production10owner内の変更で、新production file・独立補助subsystemは追加しない。公開API／DTO／DB／RN／Safety／依存／外部AI／配置への責務差分はない。01B/C・Piece/Analysisの地図は変更しない。保存・再試行・再表示は既存serviceからAPI client→hook→Modalへの経路を確認対象とし、この構造記録だけを検証成功や本人実機確認とは扱わない。
 
 実本文、独立旧比較原本、逆検査、保存・再表示の実行結果と限界は[u350監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u350_ReliefReceivedRetention_20261018.md)・正本06・API handoffに集約する。PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=falseを維持する。一般入力・任意多段・定型性と深い理解・E04〜E09・本人実機をこの限定契約だけで完了としない。
+
+
+## 2026-10-19 u353 — 承認済み初回本人説明を保存再表示まで保持
+
+Mashの「進めていいよ」により、u352固定案（Cocolon `80dc32c48d9fcfa821f6da0fae822b2ce4d0cb55`）を実装。新規初回のR＋Mに、前置P0/1・末尾独立U0/1を認め、元出来事・元反応・本人知覚＋有限過去感情を元memoの三roleとして保持する。初回を回答核・回答ABOUTへ変換せず、received→任意P→任意Uの最大3責務とする。完全な原文・主体・時点・肯否・全span順序を確認した場合だけ選択し、初回END・既述説明の非再質問を維持する。
+
+Observationも修復し、本人説明と不明を原文順だけで「一つの流れ」にせず、過去の説明を「今は」の状態へ移さない。元received contrastから同時性を加えない。Receptionは原文の知覚を残し、他者の意図を事実化しない。新局所内容は既存LIMITED一aggregateを置き換えず、全3+2P+U対象とdisjointな2+P+U contributionを保持する。独立readerは作者を呼ばず、実本文の三role・原文・主体・時点・知覚・独立不明を照合する。
+
+実pending一回答の明示時点語がない過去Mは、回答envelope・全scalar範囲・既存PERCEIVED文法・受理核の再導出が一致する場合に限り混在保持する。新しい回答文法は追加しない。混在3moveでcheckpoint生成と本文の資格入口がずれていた箇所も揃え、新Mを既存retention版へ結び付けた。旧u352 IDは旧source／plan／selected／本文または停止の全体を復元し、新意味を旧IDへ貼り替えない。完全引用訂正・撤回と実Q3の次質問での後続訂正を確認し、END後の架空回答は作っていない。
+
+技術検証：分割実行・重複除外で対象140件通過（旧全比較50を含むcore90、source31、SQL15、既存manifest3、現行owner identity1）。独立した未変更u352原本50件と、checkpoint・original plan・accepted核・更新plan・関係・selected・本文・質問・停止が一致。保存済み完成DTOは再生成せず、未完成は保存checkpointの再利用／意味前再開を分けて検証した。同一の保存DTO 15件を実apiClient→API→hook→Modalで閉じて再表示2回まで確認。HTTP/Auth/nativeはstub、本人実機ではない。pytestは専用`--noconftest`の対象検証で、全suite成功とは呼ばない。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production10owner内の変更、新private logical3型で87→90。公開API／DTO／DB migration／RN製品code／Safety仕様／依存は変更していない。Work補助担当は読取レビュー、編集・実行・統合・GitHub反映は主担当。別modelの正式二重評価やProduct Read成功へ転用しない。PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=falseを維持。初回一体単位の限定技術修復を閉じるが、E04〜E09・深い理解・一般入力・否定unknown訂正の別generic整合・本人実機は残件。Piece/Analysis主枠53.25％、10/20方式判断・10/31管理線・12/18公開目標は再評価していない。Draft PR3／PR30継続、merge／deployなし。詳細・実本文・全変更地図は[u353監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u353_InitialPersonalMeaning_20261018.md)。

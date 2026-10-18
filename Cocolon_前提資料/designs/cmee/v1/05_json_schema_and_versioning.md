@@ -1,3 +1,5 @@
+> 2026-10-19最新差分：u353（10/18明示承認）。初回の元経験・本人説明・独立不明を、実回答／訂正・撤回／旧再開／保存再表示と一体で修復。新private3型・logical90。限定単位の技術検証まで完了、PRODUCT_NOT_CLEAR・正式Product Read0/3・candidate_ready=false・automatic_progression=falseは維持。詳細は[u353実装監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u353_InitialPersonalMeaning_20261018.md)。
+
 > 2026-10-18最新：u350。Mash承認済みの「安堵・寂しさ＋別経験」を不明なし／ありの両方で初回・既受理一更新・旧保存互換・再表示へ保持する限定契約。private logical83→87、既存production10owner・新production0、STRUCTURE_MAP_DELTA_PRESENT。構造差分は末尾、実本文・検証結果・残件は[u350監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u350_ReliefReceivedRetention_20261018.md)を参照。PRODUCT_NOT_CLEARを維持。
 
 > 2026-10-18 u348：u347の混在current SELF wh不明の限定案はMash個別承認済み。初回の既存V1三対象／二責務を保ち、別received経験への受理一更新後は新private V2二型で四対象／三責務を拘束する。型・field・版・旧checkpoint保持は末尾u348、検証結果は同監査を参照。公開wire・DB・商品合格・配置は変更しない。
@@ -2906,3 +2908,30 @@ ADDの肯定／否定、回答時点／元出来事時点は既存受理itemのt
 receivedは`attention`、独立unknownは`felt_response`を持つ別Moveである。最大3 Move／Reception最大3文を維持する。追加回答の3端点は同一received責務で表現し、反応撤回後のevent単独はこの資格内でのみsource-ownedな事実として受け取る。独立readerは元sourceへ戻して主体・時点・肯否・関係・欠落・撤回済み素材の復活を検査し、感情や原因の補完を許可しない。
 
 `STRUCTURE_MAP_DELTA_PRESENT`。既存production10owner、新production0。公開wire／DTO／DB／RN／Safety／依存／外部AI／配置の変更はない。01／01AとEmlis／CMEE current map、8/28意味設計を同期する。実本文・旧比較原本・検証結果・限界は[u350監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u350_ReliefReceivedRetention_20261018.md)と正本06／API handoffのownerとし、ここに未確認の合格数を置かない。PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=falseを維持する。
+
+
+## u353 — 初回の本人説明と元経験を一体保持する私有契約（2026-10-19）
+
+u352の個別承認に基づく実装。旧u350の二端点INITIALと旧validator/sealのexact型集合を変更せず、新family `initial-personal-meaning-v1`／derivation `POST_SELECTION_LOCAL_CONTENT` の3logical型を追加する。logical count87→90。公開schemaではない。
+
+### Canonical fields / finite values
+
+`InitialReceivedPersonalMeaningEligibilityV1`（schema1.0）のfield順：`schema_version, source_prefix_ref, checkpoint_ref, original_source_ref, received_event_ref, received_reaction_ref, initial_meaning_ref, received_relation_ref, received_move_ref, relief_nucleus_ref, loneliness_nucleus_ref, contrast_relation_ref, relief_move_ref, unknown_nucleus_ref, unknown_move_ref, thread_control`。Pの4Optional refはall-or-none、Uの2Optional refもall-or-none。核・関係refはgrounded planのID、move refは同planのReception moveを参照する。元source・checkpoint・controlを完全再導出する。
+
+`InitialReceivedPersonalMeaningContentV1` は既存の局所封印基底13field `schema_version, eligibility, projection_preimage_ref, aggregate_projection_seal_ref, aggregate_claim_ref, aggregate_proposition_ref, meaning_outcome_ref, reception_binding_ref, grounding_ref, proposition, basis_rows, qualifier_rows, seal_ref` に、`event_ref, reaction_ref, initial_meaning_ref, received_relation_ref, original_proposition` を追加。ここでevent/reaction/Mはsemantic node ref、received relationはsemantic edge refであり、eligibility側の核IDとはselected mappingで対応付ける。basis3／qualifier3／selected contribution2。元R一contributionの二role propositionは既存candidateから再導出し、M singletonと混同しない。
+
+`InitialReceivedPersonalMeaningPairContentV1` は同じ13fieldと新eligibilityを持ち、既存Pのbasis2／qualifier2／contribution1を維持する。新eligibilityにanswer・update・ABOUT・回答時点は存在しない。
+
+### Selected carrier / aggregate / seals
+
+HRの`SelectedInitialReceivedPersonalMeaningDecisionV1`は既存decision14field＋`initial_received_personal_meaning`を保持し、logical数に重複計上しない。全体はLIMITED一claim、ATTENTION／ATTEND_TO、MATERIAL_WEIGHT／RECEIVE_AS_MATERIAL。対象3+2P+U、責務1+P+U、contribution2+P+U、順序received→P→U。各責務は共通aggregateを参照し、contributionは完全・互いに重複なし。全体propositionを新局所propositionへ置換しない。
+
+sealはcanonical JSONのseal_ref空版に対するSHA256。received prefix `initial-personal-meaning:`、pair prefix `initial-personal-meaning-pair:`。compositionは元claim・causal trace・preimage・projection sealを照合してから新型を構成。旧型の型許可集合・sealは変更しない。
+
+### Complete source / checkpoint / reader responsibility
+
+初回round0、answer／accepted update／失効／history／frameなし。元memo全体からR一経験＋直後M、P0/1、current SELF wh不明0/1を証明。Mは知覚内側と外側の過去感情の別scalar範囲を保持し、外側から肯否を再導出する。別主体・引用報告・仮定・追加received・複数説明・自由順序・余分なfieldを新資格へ昇格しない。
+
+原envelopeを再admitし、original・更新plan・resolver全span/qualified refs・資格・aggregate・selected全体を比較する。局所sealだけを原文の代用にしない。専用IRはevent/reaction/M三slotと元contrastのみで、回答grammarへ変換しない。実本文の独立readerは作者なしで意味保持と欠落／事実化／現在化／原因化を検査する。
+
+旧u352初回は新source資格を無効にした全旧sourceから復元。実pendingの新implicit過去ADDは既存retention版へ入り、旧IDは既存legacy経路で旧plan・selected・本文／停止を復元する。旧完成DTO非再生成と、旧未完成checkpoint再開を別々に検証する。
