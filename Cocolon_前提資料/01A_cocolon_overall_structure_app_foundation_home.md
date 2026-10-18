@@ -7,7 +7,7 @@ revision_date: "2026-06-05"
 
 この章では App root / provider / Home screen / notice / today-question / reflection preview / frontend Home API boundary / backend Home API / home_gateway / startup / EmlisAI immediate reply をまとめて扱う。
 
-> 最新EmlisAI file追跡は末尾u328（2026-10-18）。既存4owner内の同欄本文停止修復と追加検査・凍結fixtureを記録する。STRUCTURE_MAP_DELTA_NONE。
+> 最新EmlisAI file追跡は末尾u329（2026-10-18）。既存observation_plan内の行動誤分類・派生関係修復と追加検査・凍結fixtureを記録する。STRUCTURE_MAP_DELTA_NONE。
 
 ## A1. App root / provider / build boundary
 
@@ -3732,3 +3732,14 @@ STRUCTURE_MAP_DELTA_NONE。製品4fileは既存のobservation_plan／human_recep
 source_scope496、Q3対照54＋既知3失敗、application54、identity1。合計605成功／既知3失敗、skip0。実service/PGlite7ケース、現行API client／hook／Modal native stub7ケースで保存・GET・元入力・履歴・再表示を確認。本人実機ではない。8本文停止を修復したが、机の8例は誤認・未提供を含め不変。深い受容・問い・商品品質は未完。
 
 詳細・未加工16例・実装境界：[Cocolon_EmlisAI_u328_SameFieldUnknownActionReception_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u328_SameFieldUnknownActionReception_20261018.md)。
+
+
+### u329 file追跡 — 同欄の行動誤分類と派生関係修復（2026-10-18）
+
+STRUCTURE_MAP_DELTA_NONE。既存 `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` 一つのowner内で、原文の二完全文と単一目的語＋既存過去述語を証明し、value/eventの誤分類をaction/fact/pastへ修復。誤派生関係はID・端点・根拠を保持してoptional uncertaintyへ戻す。作者・reader・Q1/Q3はu328接続を継承し、新製品owner・schema・API/DB/RN変更なし。01B/01Cと他中核は構造差分なし。
+
+既存 `ai/tests/test_cmee_emlis_source_scope_regressions.py` へ112検査を追加。旧拒否2例はlegacy planと明示し、17例の現行拒否は維持。新規 `ai/tests/fixtures/cmee_emlis_u328_same_field_action_checkpoint_v1.json` はAPI f58e6ba…の合成24例を凍結。既存 `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` は現行identity再導出。既存歴史fixtureは未変更。
+
+source_scope608、Q3対照54＋既知3失敗、application54、identity1。計717成功／既知3失敗、skip0。実service/PGlite7件と同じDTOのAPI client/hook/Modal7件で保存・再表示を確認。24例の本文・行動意味を修復したが、反復・定型・深さ・問いは未完。
+
+詳細・未加工24例・検証境界：[Cocolon_EmlisAI_u329_SameFieldFiniteActionRecognition_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u329_SameFieldFiniteActionRecognition_20261018.md)。
