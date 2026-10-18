@@ -1,3 +1,5 @@
+> 最新EmlisAI file追跡：末尾u335。source認識・旧modeの既存3owner、STRUCTURE_MAP_DELTA_NONE。
+
 > 最新EmlisAI file追跡：末尾u334。既存9owner、私有保持contract2＋decision版。STRUCTURE_MAP_DELTA_PRESENT。
 
 > 最新EmlisAI file追跡：末尾u333。既存3owner、test／fixture追加。STRUCTURE_MAP_DELTA_NONE。
@@ -3832,3 +3834,20 @@ STRUCTURE_MAP_DELTA_PRESENT。新production file0。01B／01C、Piece／Analysis
 | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 承認・実装・実本文・互換・残件の引継ぎ |
 
 詳細：[Cocolon_EmlisAI_u334_ReliefCognition_and_IndependentUnknown_Retention_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u334_ReliefCognition_and_IndependentUnknown_Retention_20261018.md)。
+
+## u335 — 独立不明source修復のfile地図
+
+新production file0。既存3owner。01B／01C、Piece／Analysis、公開API／DB責務の差分なし。STRUCTURE_MAP_DELTA_NONE。
+
+| mashos-api exact path | 差分 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 全三対象を再証明した場合だけreflexive核とlexical conflict辺を補正。旧source modeを保持 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 現行と全歴史source modeの伝播 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | u334 checkpoint完全復元をu333以前より先に試行 |
+| `ai/tests/test_cmee_emlis_relief_unknown_source.py` | 現行40・旧40完全record、Q1/Q3・作者禁止本文変異・偽provenance境界 |
+| `ai/tests/fixtures/cmee_emlis_u334_relief_unknown_source_v1.json` | 凍結u334実engineの合成40例、checkpoint／plan・selected hash／本文・問い・停止 |
+| `ai/tests/test_cmee_emlis_relief_unknown.py` | u334対照2例を旧checkpoint指定で検証。同じ期待値・全assertionを維持 |
+| `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 最終source ASTからcurrent identityを再導出 |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | source修復・互換・保存・未解決と短文化限定案への引継ぎ |
+
+詳細：[Cocolon_EmlisAI_u335_ReliefUnknown_SourceRepair_and_Anaphoric_Proposal_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u335_ReliefUnknown_SourceRepair_and_Anaphoric_Proposal_20261018.md)。

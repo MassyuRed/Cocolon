@@ -1,3 +1,5 @@
+> 最新差分：末尾u335。既存source認識・旧modeの局所修復、STRUCTURE_MAP_DELTA_NONE。
+
 > 最新構造差分：末尾u334。私有の保持資格・contentとdecision版、STRUCTURE_MAP_DELTA_PRESENT。
 
 > 最新構造差分：末尾u333。既存source owner内の主体継続修復。STRUCTURE_MAP_DELTA_NONE。
@@ -7179,3 +7181,7 @@ RN→API→thread source／plan→既存主観選択・作者／独立reader→�
 ## u334 — 二反応と独立不明の限定保持
 
 RN→API→thread source／plan→全体LIMITED一claim→二moveの既存作者／独立reader→保存→再表示の公開経路を維持。新しい私有eligibility／contentとdecision版は全体三対象claimを変更せず、局所二反応を保持する。source資格の版をcheckpointに区別し旧意味・本文を完全復元する。既存9production owner、新production file0、公開API／DB／RN不変。STRUCTURE_MAP_DELTA_PRESENT。実pathは01A末尾u334、詳細は[Cocolon_EmlisAI_u334_ReliefCognition_and_IndependentUnknown_Retention_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u334_ReliefCognition_and_IndependentUnknown_Retention_20261018.md)。
+
+## u335 — 独立不明のsource修復
+
+既存RN→API→source／plan→全体LIMITED一claim→二move作者／独立reader→保存→再表示を維持。既存production3ownerの局所認識とu334復元だけを修正。意味型・論理contract79・公開API／DB／RN不変、STRUCTURE_MAP_DELTA_NONE。file地図は01A末尾u335、実本文と保持条件の次案は[Cocolon_EmlisAI_u335_ReliefUnknown_SourceRepair_and_Anaphoric_Proposal_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u335_ReliefUnknown_SourceRepair_and_Anaphoric_Proposal_20261018.md)。

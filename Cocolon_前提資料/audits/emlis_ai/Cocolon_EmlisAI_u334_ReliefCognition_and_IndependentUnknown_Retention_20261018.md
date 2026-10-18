@@ -1,3 +1,5 @@
+> 後続u335：安心した／自分でもの上流原因を特定し、既存三対象契約内で局所修復。短文化は別の保持条件具体案として未実装。[Cocolon_EmlisAI_u335_ReliefUnknown_SourceRepair_and_Anaphoric_Proposal_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u335_ReliefUnknown_SourceRepair_and_Anaphoric_Proposal_20261018.md)を参照。以下u334当時の記録は保持。
+
 # EmlisAI u334 — 二反応と独立不明の限定保持
 
 作業日：2026-10-18。基準：Cocolon `70c65b122222e18b28e39766de85a11eb5abad5b`、mashos-api `92cc0832998e488ac352b6c9504beaacb9be79cd`。検証用local分岐を両fresh remote HEADから作成し、既存PRへ反映する。
