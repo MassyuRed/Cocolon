@@ -1021,3 +1021,14 @@ Mashの残件継続指示によりu337の次の残件を調査。開始原本API
 STRUCTURE_MAP_DELTA_NONE。必要性=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、primary outcome=BLOCKER_NARROWED。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。Draft/open/unmerged・未配置。一般入力・E04深さ／E05問い／E06〜E09は未完。10/20方式判断、10/31管理線、12/18目標、Piece/Analysis主枠53.25％は不変。
 
 24実本文・原因・未採用案・成功／停止条件：[Cocolon_EmlisAI_u338_PastUnknown_Diagnosis_and_Proposal_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u338_PastUnknown_Diagnosis_and_Proposal_20261018.md)。
+
+
+## 2026-10-18 — u339 Mash個別承認：本人の過去不明を認識・返答・旧データ互換・保存まで修復
+
+Mashはu338の限定案と「この限定範囲で、認識・返答・旧データ互換・保存確認までまとめて進めてよいでしょうか」を引用し、「進めていいよ」と明示承認した。本人・対象・過去の時点を保ち、「何が嫌なのか、ご自身でもよくわからなかったのですね」と受け止める契約拡張についてRule18 §11.3の個別承認が成立した。
+
+初回memoの既存wh対象＋後置の明示SELF＋過去陰性「わからなかった／分からなかった」に限定し、単独または既存安堵／寂しさpairの末尾独立一節を扱う。新enumを加えず、過去qualifier・UNKNOWNを保持する。現在も不明か解決済みかを推測しない。旧完成は非再生成、旧checkpointは旧意味・本文／停止を完全復元し、保存再表示まで検証する。対象はENDであり回答sourceへの新資格や問いを追加しない。既存の実在する問いによる訂正・撤回は回帰対照として維持する。
+
+実装・検証の対象pathと成功／停止条件はe604b45のu338監査の限定案に固定する。必要な内部owner9・新test／凍結fixture／現行identity、正本05／06・全体設計01／地図01A・weekly・API handoff・今回監査の記録をroot華恋が編集・反映する。同Work補助はread-only調査・監査で、正式な別model Pro／Ultra評価へ数えない。公開API／DB／RN／依存／外部AI／費用／本番配置・mergeは対象外。
+
+開始原本はAPI `e9dde192d1b4de8a52d7ecc79c5f30ccc9e93d04`（製品sourceはc26ece4と同一）、Cocolon `e604b45ce9b5e258a6c5b3134d1ea600f4729d9c`。この承認記録時点では製品source未変更。初回一体単位未完了／PRODUCT_NOT_CLEAR／正式0/3／candidate_ready=false／automatic_progression=false、10/20方式判断・10/31管理線・12/18目標を維持する。
