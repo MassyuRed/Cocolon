@@ -1,3 +1,5 @@
+> 最新EmlisAI file追跡：末尾u336。既存8production file内の実Observation共同保持。STRUCTURE_MAP_DELTA_NONE。
+
 > 最新EmlisAI file追跡：末尾u335。source認識・旧modeの既存3owner、STRUCTURE_MAP_DELTA_NONE。
 
 > 最新EmlisAI file追跡：末尾u334。既存9owner、私有保持contract2＋decision版。STRUCTURE_MAP_DELTA_PRESENT。
@@ -3851,3 +3853,29 @@ STRUCTURE_MAP_DELTA_PRESENT。新production file0。01B／01C、Piece／Analysis
 | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | source修復・互換・保存・未解決と短文化限定案への引継ぎ |
 
 詳細：[Cocolon_EmlisAI_u335_ReliefUnknown_SourceRepair_and_Anaphoric_Proposal_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u335_ReliefUnknown_SourceRepair_and_Anaphoric_Proposal_20261018.md)。
+
+## u336 — 実Observation共同保持のfile地図
+
+新production file0、既存8file。01B／01C、Piece／Analysis、API／DB責務の差分なし。STRUCTURE_MAP_DELTA_NONE。
+
+| mashos-api exact path | u336の差分 |
+|---|---|
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 既存pairの照応候補資格版、既存reference policyのANAPHORIC化、歴史source mode |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_question.py` | 現行と全歴史flagの伝播 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | u335完全復元を先に試行、pair失効時に照応資格も消去 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py` | u335復元時は既存u334三対象carrier資格を維持 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_surface.py` | 既存行ownerで実Observationを先行生成、同じ文を作者へ渡す |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 既存唯一作者／replay／検証へ実Observationを渡し、適格時のみ短形 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | live selected pair→実Observation exact／一意証明→二facet短参照の独立読取 |
+| `ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | 既存行生成の先行呼出し、最終bytes一致、実本文由来の検証、傾聴終止の検出 |
+| `ai/tests/test_cmee_emlis_relief_anaphora.py` | 現行40、旧u33540、自然変種・二作者禁止変異・契約改変・全文fallback |
+| `ai/tests/fixtures/cmee_emlis_u335_relief_anaphora_v1.json` | 凍結0717bd4dの全40record |
+| `ai/tests/test_cmee_emlis_relief_cognition.py` | 承認済み共同保持と実本文変異へ期待を移す |
+| `ai/tests/test_cmee_emlis_self_continuation.py` | SELF原文は実Observation、本文全体で主体／scope変異を拒否 |
+| `ai/tests/test_cmee_emlis_relief_unknown.py` | 共同保持、独立不明、歴史controlの明示復元 |
+| `ai/tests/test_cmee_emlis_relief_unknown_source.py` | u334 historical control保持と現行共同保持変異 |
+| `ai/tests/test_cmee_emlis_source_scope_regressions.py` | pairのみ共同保持へ変更、古いno-op変異を実際の短形変異へ置換 |
+| `ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json` | 最終sourceからcurrent identity再導出 |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 承認範囲・実本文・検査・残件・PR反映への引継ぎ |
+
+詳細：[Cocolon_EmlisAI_u336_ActualObservation_Anaphoric_Reception_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u336_ActualObservation_Anaphoric_Reception_20261018.md)。

@@ -1,3 +1,5 @@
+> 後続u336：末尾の短文化具体案は2026-10-18にMashが明示承認し、実Observation共同保持として実装・検証した。[Cocolon_EmlisAI_u336_ActualObservation_Anaphoric_Reception_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u336_ActualObservation_Anaphoric_Reception_20261018.md)を参照。以下の「未実装」はu335当時の記録として保持。
+
 # EmlisAI u335 — 独立不明の認識修復と短文化の限定案
 
 作業日：2026-10-18。開始基準：mashos-api `d5d47b81ed95cf081224cf5918627073ace18673`、Cocolon `a3c02c0aded6aafbcd9ee5a9add293c6fe4de4f5`。両PRのfresh remote HEADからlocal作業branchを作成した。u334を無変更baseline worktreeに固定。

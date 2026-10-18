@@ -1,3 +1,5 @@
+> 最新差分：末尾u336。既存ownerで実Observationを先行生成して共同保持。STRUCTURE_MAP_DELTA_NONE。
+
 > 最新差分：末尾u335。既存source認識・旧modeの局所修復、STRUCTURE_MAP_DELTA_NONE。
 
 > 最新構造差分：末尾u334。私有の保持資格・contentとdecision版、STRUCTURE_MAP_DELTA_PRESENT。
@@ -7185,3 +7187,7 @@ RN→API→thread source／plan→全体LIMITED一claim→二moveの既存作者
 ## u335 — 独立不明のsource修復
 
 既存RN→API→source／plan→全体LIMITED一claim→二move作者／独立reader→保存→再表示を維持。既存production3ownerの局所認識とu334復元だけを修正。意味型・論理contract79・公開API／DB／RN不変、STRUCTURE_MAP_DELTA_NONE。file地図は01A末尾u335、実本文と保持条件の次案は[Cocolon_EmlisAI_u335_ReliefUnknown_SourceRepair_and_Anaphoric_Proposal_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u335_ReliefUnknown_SourceRepair_and_Anaphoric_Proposal_20261018.md)。
+
+## u336 — 実Observationに基づく短いReception
+
+既存RN→API→source／plan→選択→SentenceSurfaceのObservation→既存唯一HumanReception作者→独立body reader→保存→再表示を維持。本文の生成順序をObservation先行へ整え、最終bytesで共同保持を証明。新production file／meaning型／carrier／Moveなし。公開API／DB／RN不変、STRUCTURE_MAP_DELTA_NONE。file地図は01A末尾u336。詳細：[Cocolon_EmlisAI_u336_ActualObservation_Anaphoric_Reception_20261018.md](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u336_ActualObservation_Anaphoric_Reception_20261018.md)。
