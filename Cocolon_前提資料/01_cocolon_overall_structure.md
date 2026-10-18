@@ -1,3 +1,5 @@
+> 最新差分：u342。今日→昨日の完全対比で本文が停止する誤派生関係を修復。01A末尾と [u342監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u342_ReverseContrast_20261018.md) を参照。STRUCTURE_MAP_DELTA_NONE。
+
 > 最新差分：u341。「とても」の助詞誤判定を既存OP内で修復。全file地図01A末尾と [u341監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u341_ContrastDegree_20261018.md) を参照。STRUCTURE_MAP_DELTA_NONE。
 
 > 最新差分：u340。認識済みの昨日／今日を「同時」にする表示を既存3owner内で修復。全file地図01A末尾と [u340監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u340_SeparateTimeContrast_20261018.md) を参照。STRUCTURE_MAP_DELTA_NONE。
@@ -7204,3 +7206,8 @@ RN→API→thread source／plan→全体LIMITED一claim→二moveの既存作者
 ## u341 — 「とても」をtopicの「も」と誤判定する参照を修復（2026-10-18）
 
 既存OP参照証明1fileのみを修復した。新production file0、STRUCTURE_MAP_DELTA_NONE。全変更pathと結果は01A末尾／[u341監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u341_ContrastDegree_20261018.md)を参照。意味checkpoint・核辺・主観決定は不変、reference_modeだけを変更。PRODUCT_NOT_CLEAR、Draft/open/unmerged・未配置。
+
+
+## u342 — 今日→昨日の完全対比に加わる誤関係と本文停止を修復（2026-10-18）
+
+既存3owner内で誤派生関係を修復し、現行本文と旧checkpoint互換を検証した。new production0、STRUCTURE_MAP_DELTA_NONE。全path・結果は01A末尾／[u342監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u342_ReverseContrast_20261018.md)を参照。PRODUCT_NOT_CLEAR、Draft/open/unmerged・未配置。

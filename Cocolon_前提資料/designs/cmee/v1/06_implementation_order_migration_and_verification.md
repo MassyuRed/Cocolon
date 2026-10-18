@@ -20201,3 +20201,28 @@ STRUCTURE_MAP_DELTA_NONE。既存production1file内の参照証明だけを変�
 必要性=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、primary outcome=TECHNICAL_CREDIT。rootが実本文を読み、同Work補助がsourceを読取確認したが、正式な別model Pro／Ultra審査・正式Product Readとは数えない。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。E04の受け止めの深さ、E05問い、E06〜E09、逆順・他者・時点未指定・敬体等は残る。10/20方式判断、10/31管理線、12/18目標、Piece/Analysis主枠53.25％は不変。既存Draft PRで継続、merge／配置なし。
 
 実本文・全path・検証境界：[u341監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u341_ContrastDegree_20261018.md)。
+
+
+## u342 — 今日→昨日の完全対比に加わる誤関係と本文停止を修復（2026-10-18）
+
+Mashの残件継続指示に基づき、全体設計01・全file地図01A・current_structure・正本06・最新weekly・API handoffと作業規則、恒久incident全文を確認した。開始HEADはAPI `d663ce22836fd32604788605001d71e8561f7ba2`、Cocolon `1c3dcac03420bd8f37e0d6a0a325a1bb7cf9ce25`。u341で特定した逆順停止に対する、既存設計内のsource誤派生修復である。Rule18 LEVEL_2 standing delegation／current依頼の範囲で、rootが実装・検証・反映し、同Work補助はread-only調査を担当した。正式な別モデルPro／Ultra審査とは数えない。
+
+完全原fieldで本人二文・既存有限述語・明示対比を証明し、原文prefixと既存semantic timeがpresent→pastで一致する場合に限定した。同じ両端の逆向き `attempt_and_block` が単一 `conflict.eN`／meaning arc空／endpoint span完全一致である場合だけ、既存 `uncertain_connection`／bounded_structural_inference／shouldへ戻す。元のcontrast、全核、誤辺を含むID・両端・根拠・certaintyは保持する。実markerの位置・原文切片・対比性も確認する。参照helperから完全二文のsource証明を既存OP内へ抽出し、選択と独立して使用した。u341の参照資格は拡張しない。
+
+開始原本の合成22入力を凍結し、7入力で新しい意味checkpointと本文が成立した。対象は、通常／ひらがな／程度両端／程度過去側／「今日も・昨日も」／句読点違い／過去否定。現行のQ1/Q3本文が一致し、新checkpointで再開しても同じ本文となる。15対照はcheckpoint・plan・Q3 selectedまたは同じ停止・全artifact・問い・reasonが不変。全22入力の核は不変で、対象7入力の関係差分は逆向き誤辺のtype／grounding／retentionだけである。新しい主観内容・選択契約・質問資格を足していない。
+
+今回の修復は意味関係を変えるため、u341の参照だけの修復と異なり、旧IDへ新しい意味を付けない。既存3ownerにlegacy modeを接続し、旧ID指定時にu341の全核辺を再導出して既存checkpoint照合を通す。22入力×Q1/Q3の44復元で、各経路の旧checkpoint・plan・全artifact・問い・reasonを保持した。Q3 selected全体または同じ投影停止も比較した。Q1 selected全体のu341 hashは凍結しておらず、Q3のsource refを含むhashと同一とは主張しない。さらに旧u337の44recordと旧u334の40recordの復元検査が通った。新flag単独で過去の別修復まで無効化せず、より古いsource modeからは今回修復も無効化する。新schemaは不要、Q1 engine／serviceの変更も不要だった。
+
+最終検証は **374 passed／5 failed／skip0**（新119成功、関連255成功・5失敗。current identity1は関連集合に含む）。5失敗はu341の旧不変対照 `reverse`／`reverse_degree`、u340の旧意味・plan比較 `degree`／`reverse`、u331の旧「同時」表示比較 `distinct_times`。歴史fixture・旧assertionは変更・xfail・skipしていない。新119は原本比較22、旧復元44、作者を禁止した本文変異20、source関係変異16、foreign checkpoint拒否1、SQL保存・再開16である。最初の新規検査で検出した対象誤仮定3件とQ1/Q3 selected hash混同4件は、新規test側の仮定を修正した。開始原本fixtureは変更せず、途中実行を成功数へ加算しない。全suite GREEN・製品完成ではない。
+
+実service＋隔離PGlite SQL/RPC16ケース：2原文×3tier×現行完成／旧未提供の12と、2原文×旧checkpoint保存前／後の確定中断4。現行完成と旧未提供は生成禁止engineによるGET／startで全DTO一致。確定中断は既存CancelledError経路を使い、checkpoint前はretryで現行意味を初めて作り、checkpoint後はprepareを呼ばず旧meaning event／payloadと旧未提供を保持した。意味eventは各1件、operationも維持する。旧未提供はRESPONSE_FAILED／body_not_validated／can_retry=falseであり、成功表示へ変えない。lost ACKや失効attempt、本番旧DBを検証したとはしない。
+
+同じ16DTOを現行API client→hook→Modalへ渡し、GETのみでclose/reopen各2回、全DTO・本文または未提供表示・original・timeline・質問／回答欄なしを確認。HTTP／Auth／nativeはstubであり、本人実機・本番配置ではない。全7現行本文をrootが読み、時点・程度・肯否・原文順を維持し、因果や「同時」を足していないことを確認した。定型的な「小さくせずに受け止めています」は残り、E04の深さや正式Product Read完了に換算しない。
+
+STRUCTURE_MAP_DELTA_NONE。既存production3file、新production0、新test1・原本fixture1・current identity。OP direct builderの新legacy引数の既定はTrueで、Analysis等の直接呼出しは従来経路を保持し、現行Emlis original_meaning_planだけFalseを明示する。Analysis全suiteは未実行。公開API／DB／RN／Safety／依存／releaseは不変。
+
+残件：`past_then`「今は疲れている。ただ、その時は友達と話せて嬉しかった。」は後半がcurrent_inputで、ただもother_explicitに残り、今回の時点資格を満たさない。`now`「今は疲れている。しかし、昨日は友達と話せて嬉しかった。」は「しかし」が後半spanへ入り、明示contrastがなくattempt_and_block＋shift_from_toのまま停止する。他者・明示SELF・条件・敬体・時点未指定等の対照は従来の誤読／停止を含み、不変を品質合格と扱わない。次の読取位置は、これら未証明例の時間・接続詞のsource帰属と、既存契約内で修復できる共通原因である。語順一般への対応完了とは報告しない。
+
+必要性=DIRECT_PRODUCT_OR_ACCEPTANCE_WORK、primary outcome=TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／初回一体単位未完了／正式0/3／candidate_ready=false／automatic_progression=false。E04深さ／E05問い／E06〜E09は未完。10/20方式判断・10/31管理線・12/18目標、Piece/Analysis主枠53.25％は不変。既存Draft PR継続、merge／配置なし。
+
+実本文・全path・検証境界：[u342監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u342_ReverseContrast_20261018.md)。
