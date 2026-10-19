@@ -6,8 +6,10 @@
  */
 import { readPiecePreviewDisplay } from './piecePreviewModel';
 import { readPieceOwnerDisplay } from './pieceOwnerModel';
+import { Platform } from 'react-native';
 
 export const PIECE_NATIVE_PREVIEW_VERSION = 'piece.rn_native_preview.prototype.v3';
+export const PIECE_NATIVE_PREVIEW_V4_VERSION = 'piece.rn_native_preview.prototype.v4';
 const nativeThemes = {
   soft_paper: { canvas: '#F6F1E8', surface: '#FFFDF8', text: '#111827', secondary: '#4B5563',
     accent: '#800020', border: '#D7D2C9', branding: '#800020', vector_end: '#FFFFFF' },
@@ -31,9 +33,12 @@ export function preparePieceNativePreview(display, nowMs = Date.now()) {
   const checked = readPiecePreviewDisplay(display, nowMs);
   if (!checked.hashVerified || !checked.preview) return null;
   const p = checked.preview;
-  const key = JSON.stringify([PIECE_NATIVE_PREVIEW_VERSION, 'preview', p.preview_id, p.preview_revision,
+  const candidateProfile = p.renderer_version === PIECE_NATIVE_PREVIEW_V4_VERSION
+    ? PIECE_NATIVE_PREVIEW_V4_VERSION : PIECE_NATIVE_PREVIEW_VERSION;
+  if (candidateProfile === PIECE_NATIVE_PREVIEW_V4_VERSION && Platform.OS !== 'ios') return null;
+  const key = JSON.stringify([candidateProfile, 'preview', p.preview_id, p.preview_revision,
     p.row_version, p.expires_at, p.piece_text_hash, p.content_payload_hash, p.visual_recipe_hash, p.renderer_version]);
-  return preparePieceNativeArtifact(p, key);
+  return preparePieceNativeArtifact(p, key, candidateProfile);
 }
 
 // A saved record is not a preview. Recheck the closed saved contract and all
@@ -53,15 +58,17 @@ export function preparePieceNativeSavedDisplay(raw) {
 export function preparePieceNativeCard(props) {
   const saved = Object.prototype.hasOwnProperty.call(props, 'savedRecord');
   if (saved && Object.prototype.hasOwnProperty.call(props, 'display')) return null;
-  return saved ? preparePieceNativeSavedDisplay(props.savedRecord) : preparePieceNativePreview(props.display);
+  if (saved) return preparePieceNativeSavedDisplay(props.savedRecord);
+  const input = preparePieceNativePreview(props.display);
+  return props.exportCanvas === true && input?.candidateProfile === PIECE_NATIVE_PREVIEW_V4_VERSION ? null : input;
 }
 
 // One catalog/layout owner for both paths; neither grants save/export or
 // claims native-device acceptance. The host owns access and unmounting.
-function preparePieceNativeArtifact(p, key) {
+function preparePieceNativeArtifact(p, key, candidateProfile = PIECE_NATIVE_PREVIEW_VERSION) {
   const recipe = p.visual_recipe, ratio = recipe.aspect_ratio;
   const tall = ratio === '9:16', margin = tall ? 108 : 96, brandingZone = tall ? 84 : 72;
-  return frozenNative({ key, width: 1080, height: tall ? 1920 : 1350, margin, brandingZone,
+  return frozenNative({ key, candidateProfile, width: 1080, height: tall ? 1920 : 1350, margin, brandingZone,
     contentWidth: 1080 - 2 * margin, contentHeight: (tall ? 1920 : 1350) - 2 * margin - brandingZone,
     blocks: [...p.content_payload.body_blocks], sizes: [...nativeScales[p.format_type][ratio]],
     lineRatio: nativeLineRatios[p.format_type], paragraphRatio: p.format_type === 'short_essay' ? 0.65 : 0,

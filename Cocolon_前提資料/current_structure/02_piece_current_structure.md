@@ -16,7 +16,11 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§74／本map §65.22です。保存commit後のFEATURE停止から、同じ要求/keyで保存結果を回収するcontroller／hostの不具合を修復しました。source `5c44b252` のlocal／CI JS802件・native69件・Android source compile成功。通常保存の正式supplier・稼働・実機受入れと420文字最終描画は未完了です。**
+**最新は入口§75／本map §65.23です。Mash様の§74.4限定承認により、iOS preview専用v4を実装。全候補の独立組版とadvanceを維持し、幅超過行だけinkを省略する明示経路を追加しました。local既存13file839件成功、native97判定・実RN5fixtureの限定検証は結果確認待ちです。旧v3・saved/export・元8秒を維持し、正式採用と通常初回保存は未完了です。**
+
+### §74時点の要約（履歴）
+
+保存commit後のFEATURE停止から元body/keyで回収できないcontroller／hostの不具合はsource `5c44b252` で修復。local／CI JS802件・native69件・Android source compile成功の結果は§65.22.1に保持します。
 
 ### §72時点の要約（履歴）
 
@@ -2748,4 +2752,22 @@ source修正前の追加4原因検査は意図どおりFAIL。修復後は追加
 source [5c44b252f049a973de29b37f2fb8dba93548cca0](https://github.com/MassyuRed/Cocolon/commit/5c44b252f049a973de29b37f2fb8dba93548cca0)の既存7pathを全件読戻し、内容／blob／変更集合／headを確認しました。[run39197238380](https://github.com/MassyuRed/Cocolon/actions/runs/39197238380)はCI JS802 PASS、実TextKit／CoreText69 PASS、iOS source／Android source compile成功で完了。既存guard5runもsuccessです。native69は従来の全候補・5doubleのuncached一致を含みます。
 
 今回の差分は保存controller／hostなので、実RN canvasとexport Pod／Android依存compile stepはscope skipです。job successをその実行成功へ換算しません。420文字の最終描画は未解消、正式supplier・candidate runtime・通常初回保存の実機受入れ・P-W2／P-W3も未完了です。詳細なjob identityと検査範囲は入口§74.3.1、未承認v4候補は§74.4、manifest v78を参照します。この追加checkpointは既存記録3pathのみでsource／test／live追加効果0です。
+
+### 65.23 承認済みiOS preview専用v4の幅付き計測経路
+
+入口§75の明示承認により、既存5製品owner内でpreview専用v4を実装しました。開始headはfab912241599d42a6c1706ab8cd29342666be990。全体設計01・全file地図01A〜C・最新weekly10/17・rules・対象原文の最新blob一致を確認し、このwrite unitで版の分岐と幅付きwireを地図へ反映します。
+
+| owner path | 現在の責任と境界 |
+|---|---|
+| features/piece/pieceLayout.js | v3定数を維持し、明示v4定数と内部candidateProfileを追加。iOS previewだけv4。saved v4／Android v4／preview v4 export canvasを拒否。keyも版へ束縛 |
+| components/piece/PieceVisualCard.js | 現在fontと次fontを共通measureCandidateBlocksでprofile／contentWidthへ束縛。版変更で旧binding・batch・fitを失効。全体8秒、最終Text inspection、local handleの同一preview/token判定を維持 |
+| ios/tempCocolon/PieceTextMetrics.mm | 新measureCandidatesForWidthと旧measureCandidatesが既存候補本体を共有。全独立CTLine・全advance・全range・完全属性dedup・最大4workerを維持。v4だけstrict advance>Wのink取得を省略 |
+| features/piece/pieceRenderer.js | v4の厳密11field、同じ幅、tag0/full5・tag1/advanceの可変長LE record、全u32参照・全代表使用を検査。v4 version／contentWidthをB9へ保持し、fallbackなし |
+| features/piece/pieceMeasuredWrap.js | input profile＝v4 tableと幅の完全一致を要求。fits／protectViewpoint／wrapSolutions／minimumMeasuredLineCountでoverflowを明示除外。fullだけを従来score／高さ計算へ渡す |
+
+v4の省略行は[start,end,advance,width_overflow]でink slotを持ちません。全行のadvanceとfull行の5doubleはbit比較の対象です。旧v3では未選択の幅超過行でも不正inkを拒否しますが、v4はそのinkを取得せず異常を検出しません。これは承認された契約差で、旧版と同じ受入れと表現しません。advance==Wはfullを維持します。
+
+localは既存13file839 PASS／FAIL0／SKIP0、追加37件。元B9 oracle25件のexpectedは無変更で、v4の全plan同値を確認。元native69と独立oracleを保持し、追加28を含む97判定を既存workflowへ接続しました。既存実RN5fixtureはpreview4件だけ明示v4、saved v3、全文420文字・recipe・hash・最終inspection・PNG・8秒・canSave／canExport=falseを維持。CI／実RN結果と採否は入口§75へ追記します。
+
+420文字が限定実RNで依然8秒を超えればv4未採用として記録し、同source再実行や期限延長・worker増加・追加省略・batch／suffix再利用へ拡張しません。正式supplier・candidate API稼働・通常初回保存→同owner履歴／詳細・P-W2／P-W3は未完了。API／DB書込／flag／env／deploy／署名／配布／main merge効果0、default OFFとDraft/open/unmergedを維持します。
 

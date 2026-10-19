@@ -2,6 +2,7 @@
  * Results are local drawing evidence, never server fit/save/export authority.
  */
 import { NativeModules, Platform, findNodeHandle } from 'react-native';
+import { PIECE_NATIVE_PREVIEW_V4_VERSION } from './pieceLayout';
 
 const pieceNoStart = new Set(Array.from('、。，．,？！!?：；:;)]）］｝】〉》」』〕〗〙〛ー々ぁぃぅぇぉっゃゅょァィゥェォッャュョ'));
 const pieceNoEnd = new Set(Array.from('([（［｛【〈《「『〔〖〘〚'));
@@ -120,21 +121,69 @@ function unpackIndexedCandidateRows(value) {
   return rows;
 }
 
-export async function measurePieceCandidates(node, text, fontSize) {
+function unpackWidthCandidateRows(value, width) {
+  const count = candidateRowCount(value.boundaries), unique = value.metric_count, full = value.full_metric_count;
+  if (!Number.isInteger(unique) || unique < 1 || unique > count ||
+      !Number.isInteger(full) || full < 0 || full > unique) throw measurementError();
+  const records = unpackBytes(value.metric_records_le, unique * 9 + full * 32);
+  const indices = unpackBytes(value.row_indices_u32le, count * 4), decoded = new Array(unique);
+  let offset = 0, fullSeen = 0;
+  for (let index = 0; index < unique; index++) {
+    if (offset + 9 > records.byteLength) throw measurementError();
+    const tag = records.getUint8(offset++), advance = records.getFloat64(offset, true); offset += 8;
+    if (!finite(advance) || advance < 0 || tag !== 0 && tag !== 1) throw measurementError();
+    if (tag === 1) {
+      if (advance <= width) throw measurementError();
+      decoded[index] = [advance, 'width_overflow'];
+    } else {
+      if (advance > width || offset + 32 > records.byteLength) throw measurementError();
+      const metric = [advance];
+      for (let j = 0; j < 4; j++, offset += 8) metric.push(records.getFloat64(offset, true));
+      if (!metric.every(finite) || metric[3] < metric[1] || metric[4] < metric[2]) throw measurementError();
+      decoded[index] = metric; fullSeen++;
+    }
+  }
+  if (offset !== records.byteLength || fullSeen !== full) throw measurementError();
+  const used = new Uint8Array(unique), rows = new Array(count), n = value.boundaries.length - 1;
+  let i = 0, seen = 0;
+  for (let start = 0; start < n; start++) for (let end = start + 1; end <= n; end++) {
+    const index = indices.getUint32(i * 4, true);
+    if (index >= unique) throw measurementError();
+    if (!used[index]) { used[index] = 1; seen++; }
+    const metric = decoded[index];
+    rows[i++] = metric.length === 2 ? [start, end, metric[0], 'width_overflow']
+      : [start, end, metric[0], metric[1], metric[2], metric[3], metric[4]];
+  }
+  if (seen !== unique) throw measurementError();
+  return rows;
+}
+
+export async function measurePieceCandidates(node, text, fontSize, options) {
   const tag = findNodeHandle(node), module = NativeModules.PieceTextMetrics;
-  if (!Number.isInteger(tag) || tag <= 0 || typeof module?.measureCandidates !== 'function') throw measurementError();
+  const bounded = options !== undefined, width = options?.contentWidth;
+  if (bounded && (!options || Object.keys(options).sort().join() !== 'candidateProfile,contentWidth' ||
+      options.candidateProfile !== PIECE_NATIVE_PREVIEW_V4_VERSION || Platform.OS !== 'ios' ||
+      !finite(width) || width <= 0)) throw measurementError();
+  const method = bounded ? 'measureCandidatesForWidth' : 'measureCandidates';
+  if (!Number.isInteger(tag) || tag <= 0 || typeof module?.[method] !== 'function') throw measurementError();
   let value;
-  try { value = await module.measureCandidates(tag, text, fontSize); }
+  try { value = bounded ? await module[method](tag, text, fontSize, width) : await module[method](tag, text, fontSize); }
   catch { throw measurementError(); }
   const packed = value?.version === 'piece.native_candidates.v2';
   const indexed = value?.version === 'piece.native_candidates.v3';
   const fields = ['version', 'platform', 'font_size', 'utf16_length', 'boundaries', 'glyph_check',
-    ...(indexed ? ['metric_count', 'metrics_f64le', 'row_indices_u32le'] : [packed ? 'rows_f64le' : 'rows'])];
+    ...(bounded ? ['content_width', 'metric_count', 'full_metric_count', 'metric_records_le', 'row_indices_u32le']
+      : indexed ? ['metric_count', 'metrics_f64le', 'row_indices_u32le'] : [packed ? 'rows_f64le' : 'rows'])];
   if (!value || Object.keys(value).sort().join() !== fields.sort().join() ||
-      !['piece.native_candidates.v1', 'piece.native_candidates.v2', 'piece.native_candidates.v3'].includes(value.version) ||
+      (bounded ? value.version !== 'piece.native_candidates.v4' || value.content_width !== width
+        : !['piece.native_candidates.v1', 'piece.native_candidates.v2', 'piece.native_candidates.v3'].includes(value.version)) ||
       value.platform !== Platform.OS || !['ios', 'android'].includes(Platform.OS) ||
       value.glyph_check !== 'no_missing_observed' || value.utf16_length !== text.length ||
       !finite(value.font_size) || Math.abs(value.font_size - fontSize) > 0.5) throw measurementError();
+  // v4 carries its exact width and version through the planner boundary.
+  // An overflow row has no ink slots and can never become a drawable row.
+  if (bounded) return { version: value.version, contentWidth: width, boundaries: value.boundaries,
+    rows: unpackWidthCandidateRows(value, width) };
   // The planner validates exact boundary/row coverage and every metric.
   return { boundaries: value.boundaries, rows: indexed ? unpackIndexedCandidateRows(value)
     : packed ? unpackCandidateRows(value.rows_f64le, value.boundaries) : value.rows };

@@ -59,10 +59,9 @@ export default class PieceVisualCard extends React.Component {
         Object.prototype.hasOwnProperty.call(this.props, 'savedRecord') || snapshot.phase !== 'native_checked' ||
         !snapshot.plan || !operation?.nodes || operation.evidence !== snapshot.inspection ||
         operation.snapshot.plan !== snapshot.plan || operation.snapshot.generation !== snapshot.generation ||
-        operation.snapshot.blocks !== snapshot.blocks ||
-        display?.preview?.renderer_version !== PIECE_NATIVE_PREVIEW_VERSION) return;
+        operation.snapshot.blocks !== snapshot.blocks) return;
     const input = preparePieceNativeCard(this.props);
-    if (!input || input.key !== snapshot.key) return;
+    if (!input || input.key !== snapshot.key || display?.preview?.renderer_version !== input.candidateProfile) return;
     const plan = snapshot.plan, inspection = snapshot.inspection, generation = snapshot.generation;
     const record = { valid: true, listener, handle: null };
     record.handle = Object.freeze({ isCurrent: (preview, displayToken) => {
@@ -72,7 +71,7 @@ export default class PieceVisualCard extends React.Component {
             snapshot.generation !== generation || operation.evidence !== inspection || this.canvasNode !== node ||
             this.props.exportCanvas === true || Object.prototype.hasOwnProperty.call(this.props, 'savedRecord') ||
             this.props.display?.visualToken !== token || displayToken !== token ||
-            preview?.renderer_version !== PIECE_NATIVE_PREVIEW_VERSION ||
+            preview?.renderer_version !== input.candidateProfile ||
             operation.nodes.some((value, index) => this.textNodes.get(index)?.value !== value ||
               this.textNodes.get(index)?.generation !== snapshot.generation)) return false;
         const current = preparePieceNativeCard(this.props);
@@ -135,7 +134,10 @@ export default class PieceVisualCard extends React.Component {
     Date.now() < this.deadline.expiresAt && this.state.measurement.phase !== 'unavailable';
 
   measureCandidateBlocks = (input, sizeIndex, nodes) => Promise.all(input.blocks.map((text, index) =>
-    measurePieceCandidates(nodes[index], text, input.sizes[sizeIndex])))
+    input.candidateProfile === PIECE_NATIVE_PREVIEW_VERSION
+      ? measurePieceCandidates(nodes[index], text, input.sizes[sizeIndex])
+      : measurePieceCandidates(nodes[index], text, input.sizes[sizeIndex],
+        { candidateProfile: input.candidateProfile, contentWidth: input.contentWidth })))
     // Speculation may fail after a larger font has already succeeded. Handle
     // it immediately; only adoption of this font may make the card unavailable.
     .then(measurements => ({ measurements }), () => ({ failed: true }));

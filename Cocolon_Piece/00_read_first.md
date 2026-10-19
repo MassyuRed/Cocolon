@@ -10,7 +10,11 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は§74／current map §65.22です。サーバー保存確定後の機能停止で、結果回収用の保存キーを失う不具合を修復しました。source `5c44b252` の同一要求での明示回収→同owner詳細GETを含むlocal／CI JS802件、CI native69件、Android source compileが成功。通常初回保存の正式admission・稼働・実機受入れと、420文字の最終描画は未完了です。**
+**最新は§75／current map §65.23です。Mash様の§74.4限定承認により、iOS preview専用v4を実装しました。全候補の独立組版・advanceを残し、要求幅を厳密に超えた候補のinkだけ省略します。local既存13file839件が成功。native97判定と既存実RN5fixtureの限定実行はこれから確認します。旧v3・saved/export・元8秒を維持し、正式採用・通常初回保存の受入れは未完了です。**
+
+### §74時点の要約（履歴）
+
+サーバー保存確定後のFEATURE停止で保存キーを失う不具合はsource `5c44b252` で修復済み。同一要求での明示回収→同owner詳細GETを含むlocal／CI JS802件・native69件・Android source compile成功を§74.3.1に保持します。
 
 ### §72時点の要約（履歴）
 
@@ -1654,7 +1658,7 @@ Supabaseのmigration一覧で§73.6の2本を含む全10件・Piece6件を再確
 
 単体69件の成功は全体8秒の描画受入れではありません。420文字の最新実RN結果は引き続き§73.4のtimeoutで、画像や最終inspectionは追加されていません。今回の最後の記録更新は入口／current map／manifestの既存3pathだけです。製品source／testは5c44b252のまま、DB／env／deploy／署名／配布／main merge／v4実装の追加効果は0です。
 
-### 74.4 次の判断候補 — iOS preview専用v4の限定検証（未承認・未実装）
+### 74.4 次の判断候補 — iOS preview専用v4の限定検証（承認前の候補記録。今回の承認と実行は§75）
 
 現行の全候補・独立CoreText・5double・最大4worker・元8秒を維持した追加修正について、今回のread-only監査でも420文字を解消できる確かな案は特定できませんでした。既に完全属性dedup、v3 binary転送、worker専用buffer append、次font先読みを実装済みです。§72の幅超過行ink省略案を、次の限定候補として具体化します。これは現行契約への採用記録ではありません。
 
@@ -1677,4 +1681,39 @@ Supabaseのmigration一覧で§73.6の2本を含む全10件・Piece6件を再確
 PCE5 Render Reproducibility §7〜8は計測方式の版識別と旧版互換を要求します。`pieceExport.js`は現在v3定数へ出力識別子を束縛するため、v4をsaved/exportまで広げる場合は別の変更scopeが必要です。今回の候補はpreview限定です。
 
 Rule18 §0(4)／§11.3は新しい契約・品質条件の変更をsource修復のstanding delegationに含めません。幅超過行の不正ink検出を省く差はここに該当するため、v4の実装・限定実行はMash様の別承認を得てからです。ここまでのsource変更は§74.2の保存結果回収だけで、v4効果0・正式採用0です。
+
+## 75. 2026-10-19 JST — 承認されたiOS preview専用v4を実装し、限定検証
+
+Mash様がこの会話で「入口§74.4の範囲で、v4の実装と限定検証」を「進めていいよ」と明示承認しました。以下は最初のsource変更前に固定した作業範囲です。承認済みの同じ範囲を再承認待ちへ戻しません。開始時Cocolon headは`fab912241599d42a6c1706ab8cd29342666be990`、APIは`a536e50ee284785f585ac73329ef2947dca8bba9`で、両PRはDraft/open/unmerged。全体設計01、全file地図01A〜C、最新weekly20261017、rules、対象14pathを含む22fileのlocal原文と最新treeのblob一致を確認しました。
+
+| start field | fixed scope |
+|---|---|
+| product_destination / current gate | weekly20261017 §5.6 P-W1。420文字を含む全文のpreview画像を元8秒内に最終検査まで成立させられるか、明示v4だけで検証 |
+| exact_work / classification | LEVEL_3。全独立CTLine・全advance・全rangeを残し、有限非負advanceが要求幅Wを厳密に超えた候補のinkだけ省略するpreview専用v4 |
+| approval / owner | この会話の§74.4限定明示承認。華恋 / GPT-6 Astra Pro / CHAT_PRO_OKが唯一の書込・test実行担当。補助担当は原典・設計・差分のread-only監査 |
+| product exact paths | ios/tempCocolon/PieceTextMetrics.mm、features/piece/pieceRenderer.js、features/piece/pieceMeasuredWrap.js、components/piece/PieceVisualCard.js、features/piece/pieceLayout.js |
+| verification exact paths | tests/piece-v2-renderer.test.js、tests/piece-v2-measured-wrap.test.js、tests/native/piece-text-metrics-ios.mm、tests/native/piece-rn-canvas-entry.js、tests/native/piece-rn-canvas-fixtures.cjs。native追加判定の期待件数同期だけ.github/workflows/piece-rn-contracts.yml |
+| durable owners / affected map | この入口、Cocolon_Piece/manifest.json、Cocolon_前提資料/current_structure/02_piece_current_structure.md。版の明示分岐と幅付きwireを同write unitで地図へ反映 |
+| version / width binding | piece.rn_native_preview.prototype.v4はiOS previewだけ。旧v3定数・saved/export・Android既存経路を維持。Card→adapter→native要求／返却→B9で有限正値Wを完全一致照合。fallback／二重実行なし |
+| wire / consumers | 新measureCandidatesForWidth。代表recordはtag0＋advance／ink4double、tag1＋advanceだけ。全range u32参照を維持。fits／protectViewpoint／wrapSolutions／minimumMeasuredLineCountがoverflowを明示拒否 |
+| accepted contract difference | v4では選択されない幅超過行のinkを取得せず、そのinkだけのnull／非有限／逆転異常を検出しない。旧v3の全ink拒否契約と同一とは扱わない。advance==Wはfull ink必須 |
+| completion / verification | 元native69とuncached oracleを保持し、全range／advance bit一致・full5double bit一致・wire異常拒否・B9同値・版境界を追加確認。既存13JS suiteと実RN5fixtureの全文／inspection／PNG／8秒／canSave=false／canExport=false。GitHub反映・対象全内容・CI結果を読戻し |
+| STOP / prohibited | 限定実RNで420文字が依然8秒を超えればv4未採用と記録し停止。期限延長・worker増加・追加省略・batch／suffix復活・同source再実行へ拡張しない。API／DB書込／flag／env／deploy／署名／配布／main merge／正式supplier／v4 saved・export対応は範囲外 |
+| credit / next product decision | 検査通過だけはTECHNICAL_CREDIT。正式採用と通常初回保存の受入れへ換算しない。実測結果で採否を記録し、正式supplier・candidate runtime・通常保存→同owner再表示・P-W2／P-W3へ残件を接続 |
+
+Supabaseのmigration一覧を再確認し、§73.6の2本を含む全10件・Piece6件を維持。今回のDB書込・再適用・業務RPCは0です。ここからの実装・検証結果は同節に追記します。
+
+### 75.1 実装した境界とlocal検証
+
+Layoutは旧`PIECE_NATIVE_PREVIEW_VERSION`をv3のまま保持し、別の明示v4定数と内部candidateProfileを追加しました。iOSのpreviewだけがv4を選び、saved v4・Android v4・preview v4のexport canvasは拒否します。既存v3／diagnostic previewのkeyと計測経路は維持。Cardの現在fontと次font先読みは同じ共通関数から幅付きmethodを呼び、版変更は既存binding／generationを更新して旧結果・fit handleを失効させます。ローカルhandleは最終検査済みの同じpreview/tokenだけを確認し、正式admissionを供給しません。
+
+nativeの新measureCandidatesForWidthは、旧methodと同じ候補生成本体へ明示幅を渡します。各public入口で元8秒のdeadlineを一度だけ作り、queue待ちで更新しません。完全UTF-16＋全属性の同値判定、全grapheme range、独立CTLine、最大4workerを保持。v4では全advanceを有限・非負と確認し、advance>Wだけink取得前に分岐します。返却recordはtag0＋5double／tag1＋advanceの連結で、`9×metric_count＋32×full_metric_count` bytesと全rangeのu32参照を持ちます。
+
+adapterはv4の11fieldを厳密に検査し、要求幅＝返却幅、tagとstrict幅分類、全metricの有限値／full inkの順序、byte終端・full件数・全参照・全代表使用を確認します。B9はinput profileとtable versionも双方向に一致させ、同じ幅を再照合します。overflowは4slotの明示状態で、偽inkを補いません。4消費箇所では数値の幅／高さ計算より前に除外し、従来のscore・探索順・font順・gap・最終Text inspectionを保持しました。
+
+localはNode24.19.0／TypeScript5.2.2、既存13fileを`node --test --test-isolation=none`で実行し839 PASS／FAIL0／SKIP0。追加は既存renderer8件とmeasured-wrap29件の計37件です。対象2fileだけでも150 PASS。元Python B9の25case／expectedを変更せず、v4のfit/null・本文行・段落・lineHeight・gap・totalHeight・同点選択が一致。幅同値／1ulp超過／ink張出し／非単調候補／viewpoint／版と幅の不一致／wire異常／旧v1〜3の未選択不正ink拒否を確認しました。新timeout検査の最初のfixtureは1.123秒でpreviewが失効したため、この検査のexpiryだけ60秒へ直し、元8秒のtimeoutを独立に確認しました。製品expiryやdeadlineは変更していません。
+
+nativeの旧decoder／call／validCandidates／独立uncached oracleは原文一致で保持しています。元69判定に、既存21入力のv4全range／advance bit一致・full5double bit一致、strict幅境界、無効幅、glyph拒否、queued2font、全独立line／全advance／fullだけink取得の回数、承認済み不正ink検出差、異常advance拒否の28判定を追加し、既存workflowの期待件数だけ97へ同期しました。native97件はCI未実行の時点では合格扱いにしません。
+
+既存実RN5fixtureの名前・順序・全本文・recipe・hash・propsは、preview4件のrenderer_versionだけをv4にしたことを比較確認しました。savedはv3のまま、mixed本文は420文字です。観測wrapperは旧／幅付きmethodを別に記録し、要求と返却の版・幅・代表数をtraceへ残します。既存の全文・最終inspection・PNG・8秒・save/export=false・ローカルfitの実検査を維持。source reviewで重大指摘なし、CIと実RNの採否は結果取得後に同節へ追加します。
 

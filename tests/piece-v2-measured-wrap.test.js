@@ -16,6 +16,9 @@ vm.runInContext(source.replace(/^export /gm, '') + '\nglobalThis.plan = planPiec
 const plan = context.plan;
 const copy = value => JSON.parse(JSON.stringify(value));
 const unavailable = error => error?.message === 'PIECE_NATIVE_MEASUREMENT_UNAVAILABLE';
+const v4Profile = 'piece.rn_native_preview.prototype.v4';
+const widthTable = (table, width) => ({ ...table, version: 'piece.native_candidates.v4', contentWidth: width,
+  rows: table.rows.map(row => row[2] > width ? [row[0], row[1], row[2], 'width_overflow'] : [...row]) });
 
 test('oracle identifies exact Python owner and separates synthetic metrics from native acceptance', () => {
   assert.equal(fixture.fixture_version, 'piece.synthetic_b9_wrap_oracle.v1');
@@ -47,6 +50,76 @@ for (const c of fixture.cases) test('Python B9 measured-row parity: ' + c.id, ()
       assert.ok(boundaries.has(end), 'chosen row must end at a supplied grapheme boundary');
     }
     assert.equal(end, input.blocks[b].length);
+  }
+});
+
+for (const c of fixture.cases) test('explicit v4 retains the unchanged Python B9 result: ' + c.id, () => {
+  const input = { ...copy(c.input), candidateProfile: v4Profile };
+  const measurements = c.measurements.map(table => widthTable(table, input.contentWidth));
+  const before = JSON.stringify({ input, measurements });
+  assert.deepEqual(copy(plan(input, c.sizeIndex, measurements)), c.expected);
+  assert.equal(JSON.stringify({ input, measurements }), before);
+  measurements.forEach(table => table.rows.reverse());
+  assert.deepEqual(copy(plan(input, c.sizeIndex, measurements)), c.expected);
+});
+
+test('v4 overflow cannot reach viewpoint protection or become a selected row', () => {
+  const text = '私にとってその日。', input = { blocks: [text], contentWidth: 192, contentHeight: 1000,
+    sizes: [48], lineRatio: 1.55, paragraphRatio: 0.65, alignment: 'left' };
+  const boundaries = Array.from({ length: text.length + 1 }, (_, i) => i), rows = [];
+  for (let start = 0; start < text.length; start++) for (let end = start + 1; end <= text.length; end++) {
+    rows.push([start, end, 48 * (end - start), 0, -36, 48 * (end - start), 12]);
+  }
+  const table = { boundaries, rows }, original = plan(input, 0, [table]);
+  assert.ok(original);
+  const bounded = widthTable(table, input.contentWidth);
+  assert.equal(bounded.rows.find(row => row[0] === 0 && row[1] === 5)[3], 'width_overflow');
+  assert.deepEqual(copy(plan({ ...input, candidateProfile: v4Profile }, 0, [bounded])), copy(original));
+});
+
+test('v4 does not assume monotonic width across independently shaped ranges', () => {
+  const input = { blocks: ['あい'], contentWidth: 20, contentHeight: 20, sizes: [10], lineRatio: 1, paragraphRatio: 0 };
+  const table = { boundaries: [0, 1, 2], rows: [[0, 1, 30, 0, -8, 30, 2], [0, 2, 10, 0, -8, 10, 2], [1, 2, 30, 0, -8, 30, 2]] };
+  const actual = plan({ ...input, candidateProfile: v4Profile }, 0, [widthTable(table, 20)]);
+  assert.deepEqual(copy(actual), copy(plan(input, 0, [table])));
+  assert.deepEqual(copy(actual.groups), [['あい']]);
+});
+
+test('v4 keeps exact-width ink, rejects overhang and enforces both sides of the strict width tag', () => {
+  const width = 16, bytes = Buffer.alloc(8); bytes.writeDoubleLE(width);
+  bytes.writeBigUInt64LE(bytes.readBigUInt64LE() + 1n); const above = bytes.readDoubleLE();
+  const input = { candidateProfile: v4Profile, blocks: ['a'], contentWidth: width, contentHeight: 20,
+    sizes: [10], lineRatio: 1, paragraphRatio: 0 };
+  const valid = { version: 'piece.native_candidates.v4', contentWidth: width, boundaries: [0, 1],
+    rows: [[0, 1, width, -0, -8, width, 2]] };
+  assert.deepEqual(copy(plan(input, 0, [valid])).groups, [['a']]);
+  for (const row of [[0, 1, width, 0, -8, above, 2], [0, 1, width, -1, -8, width, 2],
+    [0, 1, above, 'width_overflow']]) assert.equal(plan(input, 0, [{ ...valid, rows: [row] }]), null);
+  for (const row of [[0, 1, width, 'width_overflow'], [0, 1, above, 0, -8, above, 2],
+    [0, 1, width, 'width_overflow', 0, 0, 0], [0, 1, width, null], [0, 1, NaN, 'width_overflow'],
+    [0, 1, Infinity, 'width_overflow'], [0, 1, -1, 'width_overflow']]) {
+    assert.throws(() => plan(input, 0, [{ ...valid, rows: [row] }]), unavailable);
+  }
+  for (let position = 2; position < 7; position++) for (const value of [NaN, Infinity, -Infinity, null, '1', undefined]) {
+    const row = [...valid.rows[0]]; row[position] = value;
+    assert.throws(() => plan(input, 0, [{ ...valid, rows: [row] }]), unavailable);
+  }
+});
+
+test('v4 tables bind both the exact width and explicit input profile', () => {
+  const c = copy(fixture.cases.find(c => c.id === 'short_bridge'));
+  const input = { ...c.input, candidateProfile: v4Profile };
+  const measurements = c.measurements.map(table => widthTable(table, input.contentWidth));
+  for (const width of [input.contentWidth + 0.000001, 0, NaN, Infinity, String(input.contentWidth), undefined]) {
+    const changed = measurements.map(table => ({ ...table, contentWidth: width }));
+    assert.throws(() => plan(input, c.sizeIndex, changed), unavailable);
+  }
+  assert.throws(() => plan(c.input, c.sizeIndex, measurements), unavailable);
+  assert.throws(() => plan({ ...input, candidateProfile: 'piece.rn_native_preview.prototype.v3' }, c.sizeIndex, measurements), unavailable);
+  assert.throws(() => plan(input, c.sizeIndex, c.measurements), unavailable);
+  for (const version of [undefined, 'piece.native_candidates.v1', 'piece.native_candidates.v2', 'piece.native_candidates.v3']) {
+    const old = { boundaries: [0, 1], version, rows: [[0, 1, 9999, 'width_overflow']] };
+    assert.throws(() => plan({ ...c.input, blocks: ['a'] }, c.sizeIndex, [old]), unavailable);
   }
 });
 

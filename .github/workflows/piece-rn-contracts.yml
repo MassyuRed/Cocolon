@@ -207,9 +207,9 @@ jobs:
           import pathlib, sys
           lines = pathlib.Path(sys.argv[1]).read_text(errors='replace').splitlines()
           summaries = [line for line in lines if line.startswith('NATIVE_CHECKS=')]
-          expected = 'NATIVE_CHECKS=69 PASS=69 FAIL=0 SKIP=0'
+          expected = 'NATIVE_CHECKS=97 PASS=97 FAIL=0 SKIP=0'
           if int(sys.argv[2]) != 0 or summaries != [expected] or any(line.startswith('FAIL ') for line in lines):
-              raise SystemExit('Native metrics did not finish all 69 checks successfully')
+              raise SystemExit('Native metrics did not finish all 97 checks successfully')
           PY_RESULT
 
   piece-ios-rn-canvas:

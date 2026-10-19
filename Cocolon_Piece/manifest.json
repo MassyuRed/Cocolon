@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v78",
+  "schema_version": "cocolon.piece.workstream_manifest.v79",
   "generated_at": "2026-10-19 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v77",
-    "predecessor_blob": "f2b4ae6d2b6c343cbc2a96c46a1195db81ef0704",
-    "predecessor_head": "5c44b252f049a973de29b37f2fb8dba93548cca0",
-    "carry_forward": "Documentation-only completion record for source5c44b252. All seven source checkpoint paths reread exactly; CI standard JS802/native69/source compilation and five guard runs succeeded. Full RN canvas/export compilation were scope-skipped. Mixed420 remains the earlier failure. No additional source, DB, runtime, adoption or v4 implementation effect."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v78",
+    "predecessor_blob": "073a01dbc4669b1df38eb68595bf48468715f239",
+    "predecessor_head": "fab912241599d42a6c1706ab8cd29342666be990",
+    "carry_forward": "Mash explicitly approved entry74.4. Implement explicit iOS preview v4 with exact width-bound overflow tags, preserve legacy v3/saved/export/Android and original8seconds. Local13 JS suites839 pass; native97 and original5 real RN fixtures await the bounded CI execution. Source5c44b252 save recovery and six live Piece migrations are retained. No formal adoption or live activation."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "291a5ecf4e78800253e75a7440c13092d0b85bad",
-    "raw_sha256": "089a65a184233d9c7f7b613009fec288cbbb541e07dc2b2ac8eb6cea6e9bf991",
-    "utf8_bytes": 221766
+    "git_blob_sha1": "d60afee0d36981c96a69e95ca818d819ae4975a3",
+    "raw_sha256": "d548dd2bde972cd793d4bfe1e05ca77221aeaeb4c1ab7782aadb59cbfa2b882a",
+    "utf8_bytes": 229754
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -92,7 +92,8 @@
     "pce9c_owner_history_entry": "REMOTE_D866DC0__NORMAL_NEXUS_OWNER_ENTRY__CI667_PASS__DEVICE_PENDING",
     "pce9f_shared_legacy_write_retirement": "REMOTE_804BECA__EXPLICIT_SHARED_CANDIDATE_ONLY__NOT_LIVE_M5",
     "pce9c_initial_save_modal": "REMOTE_90CBD705__FIT_CALLBACK_FORWARDED__CI790_PASS__FORMAL_ADMISSION_NORMAL_SAVE_PENDING",
-    "pce9c_initial_save_host": "REMOTE_90CBD705__CONDITIONAL_HOST_LOCAL_FIT_CONNECTED__CI790_PASS__FORMAL_PROVIDER_NORMAL_SAVE_DEVICE_PENDING"
+    "pce9c_initial_save_host": "REMOTE_90CBD705__CONDITIONAL_HOST_LOCAL_FIT_CONNECTED__CI790_PASS__FORMAL_PROVIDER_NORMAL_SAVE_DEVICE_PENDING",
+    "pce9c_ios_preview_v4": "APPROVED_BOUNDED_IMPLEMENTATION__LOCAL839_PASS__NATIVE97_AND_REAL_RN5_PENDING"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -174,7 +175,7 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "5c44b252f049a973de29b37f2fb8dba93548cca0",
+    "cocolon_pre_sync_head": "fab912241599d42a6c1706ab8cd29342666be990",
     "mashos_api_head": "a536e50ee284785f585ac73329ef2947dca8bba9",
     "current_user_visible_piece_shape": "CANDIDATE_NORMAL_INPUT_V2_SAVED_SOURCE_ONLY__TUTORIAL_NEXUS_LEGACY_REMAIN__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
@@ -190,7 +191,7 @@
     "input_screen_source_connected": true,
     "live_auth_input_to_preview_to_device_verified": false,
     "database_evidence_owner": "live_db_apply_20261019",
-    "remaining_work_owner": "save_fit_connection_20261019",
+    "remaining_work_owner": "ios_preview_v4_20261019",
     "product_acceptance": false,
     "piece_v2_default_application_registered": false,
     "piece_v2_quota_http_present": true,
@@ -242,18 +243,21 @@
     "piece_v2_database_migrations_applied": 6,
     "piece_v2_db_runtime_scope": "The four prior Piece migrations and two approved function additions exist live. Explicit candidate API runtime and real-owner business RPC execution remain unverified; DB definitions alone do not establish ordinary app save.",
     "piece_v2_server_disabled_save_recovery_connected": true,
-    "piece_v2_server_disabled_save_recovery_scope": "Same saved owner/input/original key only; a fresh strict runtime publication reopens explicit replay with the original save body/key. Foreground and same-runtime flags cannot clear the stop. Source-harness verified; real initial-save acceptance remains false."
+    "piece_v2_server_disabled_save_recovery_scope": "Same saved owner/input/original key only; a fresh strict runtime publication reopens explicit replay with the original save body/key. Foreground and same-runtime flags cannot clear the stop. Source-harness verified; real initial-save acceptance remains false.",
+    "piece_v2_ios_preview_v4_source_present": true,
+    "piece_v2_ios_preview_v4_formally_adopted": false,
+    "piece_v2_ios_preview_v4_scope": "Explicit iOS preview only. All independent lines/advance/ranges retained; strict advance>W skips ink under a new tagged width-bound contract. Saved/export and Android existing v3 routes retained; native and full RN outcome pending."
   },
   "next_group": {
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "SAVE_STOP_RECOVERY_SOURCE_AND_CI_VERIFIED__MAX420_FORMAL_ADMISSION_AND_NORMAL_SAVE_PENDING",
-    "current_map_section": "65.22.1",
-    "current_entry_section": "74.3.1 / proposal74.4",
+    "state": "APPROVED_IOS_PREVIEW_V4_LOCAL839_PASS__BOUNDED_NATIVE_AND_REAL_RN_PENDING",
+    "current_map_section": "65.23",
+    "current_entry_section": "75",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
     "weekly_review_section": "5.6",
-    "first_unfinished_work": "Six Piece migrations are applied; do not reapply them. Same-request recovery after server FEATURE_DISABLED is repaired and source/CI verified (JS802 and unchanged native69; actual RN canvas skipped). P-W1 still needs mixed420 final rendering, formal renderer admission, explicit candidate runtime and real-owner ordinary initial save/reopen. Source90cbd705 run39177257042 remains mixed420 timeout8284.257ms without final inspection/PNG. Entry74.4 specifies an unapproved preview-only v4 proposal with explicit loss of invalid-ink detection for unselected width-overflow rows; obtain Mash approval before changing that contract or executing v4.",
+    "first_unfinished_work": "Complete the explicitly approved entry74.4 bounded iOS preview v4 verification. Local839 JS tests pass; preserve original69 native checks and add28, then inspect the same5 real RN fixtures with4 explicit previewv4 and savedv3. If mixed420 still exceeds original8seconds, record v4 unadopted and do not repeat the same-source run or expand the omission/timeout/workers. Formal supplier, explicit candidate runtime, ordinary initial save/reopen and P-W2/P-W3 remain. Do not reapply the six existing Piece migrations.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 6,
@@ -293,7 +297,9 @@
     "weekly_work_unit": "P-W1_20261019_20261022",
     "repeat_local_save_fit_connection": false,
     "database_result_owner": "live_db_apply_20261019",
-    "save_stop_recovery_owner": "save_stop_recovery_20261019"
+    "save_stop_recovery_owner": "save_stop_recovery_20261019",
+    "ios_preview_v4_owner": "ios_preview_v4_20261019",
+    "v4_scope_approved": true
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -347,9 +353,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "9ab714f4b2c20dd2134052acb38a45ddedba3519",
-    "raw_sha256": "e7ab64055911c87abb1c07beef43301e865926f604bc4280e057733e88cc2b33",
-    "utf8_bytes": 431392
+    "git_blob_sha1": "b5dac2fd86b0335d709c018e378dff4bbed74b33",
+    "raw_sha256": "20e585a0bb1fa07a074d26502589a261a9a02dbf5161fcb16cf7190507f0d369",
+    "utf8_bytes": 434726
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -522,16 +528,16 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "SAVE_RECOVERY_SOURCE_AND_CI_POSTVERIFIED__DOCUMENTATION_ONLY_CHECKPOINT",
-    "source_parent": "5c44b252f049a973de29b37f2fb8dba93548cca0",
+    "classification": "APPROVED_IOS_PREVIEW_V4_SOURCE_TEST_MAP_UPDATE__NATIVE_AND_REAL_RN_PENDING",
+    "source_parent": "fab912241599d42a6c1706ab8cd29342666be990",
     "api_reference_commit": "a536e50ee284785f585ac73329ef2947dca8bba9",
-    "source_scope": "Only the three existing documentation owners update after exact source readback and completed CI. Controller, host, tests and all native sources remain source5c44b252. Proposal74.4 remains unapproved and unimplemented.",
-    "product_source_changes": 0,
-    "test_source_paths": 0,
-    "workflow_paths": 0,
+    "source_scope": "The approved5 existing product paths,5 existing test paths, native expected-count-only workflow synchronization and3 documentation owners. Explicit previewv4 alone may omit ink after strict advance>W.",
+    "product_source_changes": 5,
+    "test_source_paths": 5,
+    "workflow_paths": 1,
     "sql_source_changes": 0,
     "piece_documentation_paths": 3,
-    "structure_map": "STRUCTURE_MAP_DELTA_NONE__RESULT_SECTION_65_22_1",
+    "structure_map": "VERSION_ROUTE_AND_WIDTH_BOUND_NATIVE_WIRE__SECTION_65_23",
     "live_database_apply": 0,
     "business_rpc": 0,
     "private_piece_row_reads": 0,
@@ -544,8 +550,7 @@
     "main_merge": 0,
     "release_effect": 0,
     "product_acceptance": false,
-    "automatic_progression": false,
-    "verified_product_source_commit": "5c44b252f049a973de29b37f2fb8dba93548cca0"
+    "automatic_progression": false
   },
   "b06_q3_context_fence": {
     "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
@@ -5498,7 +5503,9 @@
       "approval": false,
       "scope": "Explicit iOS preview prototype.v4 only; existing saved/export v3 retained. Independent advance for all rows, omit ink only for strict advance>contentWidth. Width-bound tagged wire; original69 native checks and5 RN fixtures retained.",
       "material_contract_difference": "No detection of invalid ink in unselected width-overflow candidates; not an unchanged-acceptance optimization.",
-      "eight_second_success_guaranteed": false
+      "eight_second_success_guaranteed": false,
+      "state": "HISTORICAL_PROPOSAL_BEFORE_EXPLICIT_APPROVAL",
+      "superseded_by": "ios_preview_v4_20261019"
     },
     "remaining": [
       "mixed420 final rendering within original8seconds",
@@ -5573,5 +5580,180 @@
       ],
       "manual_reruns": 0
     }
+  },
+  "ios_preview_v4_20261019": {
+    "entry_section": "75",
+    "structure_map_section": "65.23",
+    "source_parent": "fab912241599d42a6c1706ab8cd29342666be990",
+    "scope_classification": "LEVEL_3",
+    "approval_basis": "Mash explicitly approved entry74.4 implementation and bounded verification in this conversation.",
+    "execution_owner": "Karen / GPT-6 Astra Pro / CHAT_PRO_OK; sole writer/test executor; three read-only reviewers.",
+    "state": "IMPLEMENTED_LOCAL_JS_VERIFIED__CI_AND_REAL_RN_PENDING",
+    "profile": "piece.rn_native_preview.prototype.v4",
+    "native_wire": "piece.native_candidates.v4",
+    "native_method": "measureCandidatesForWidth",
+    "applicable_to": "Explicit iOS preview only",
+    "old_profile": "piece.rn_native_preview.prototype.v3",
+    "old_profile_constant_unchanged": true,
+    "saved_export_v4_supported": false,
+    "android_v4_supported": false,
+    "fallback_or_double_execution": false,
+    "width_binding": "Exact finite positive contentWidth from Layout/Card through adapter request/native response to B9. Input profile and table version must agree in both directions.",
+    "records": {
+      "tag0": "full5: advance and four ink Float64LE values",
+      "tag1": "width_overflow: advance Float64LE only, no ink slots",
+      "bytes": "9*metric_count+32*full_metric_count",
+      "range_references": "All ordered contiguous grapheme ranges, u32LE indices, all representatives used"
+    },
+    "material_contract_difference": "For strict advance>W, v4 does not acquire ink and therefore cannot detect invalid/null/nonfinite/reversed ink that v3 would reject even in an unselected range. This is not unchanged acceptance, and final selected-row inspection cannot recover the omitted observation.",
+    "preserved": [
+      "complete text/paragraph/grapheme order",
+      "all independent substring CTLines",
+      "all finite nonnegative advances",
+      "complete attribute deduplication",
+      "all range references",
+      "advance==W full ink",
+      "all selected full ink and final Text inspection",
+      "same B9 scores/ties/font order/floor/gaps",
+      "original8000ms whole-card deadline",
+      "maximum4workers",
+      "state canSave=false and canExport=false",
+      "old v1-v3 strict metric rejection",
+      "saved/export v3"
+    ],
+    "overflow_consumers": [
+      "fits",
+      "protectViewpoint",
+      "wrapSolutions",
+      "minimumMeasuredLineCount"
+    ],
+    "source_files": [
+      {
+        "path": "ios/tempCocolon/PieceTextMetrics.mm",
+        "git_blob_sha1": "1ca4182553db0f3d0a153ee2468e134e41dc8bb2",
+        "raw_sha256": "3ba9da212d00c8cbe18e97133293894d583e6007d9dbc597f372e0a610bcad27",
+        "utf8_bytes": 25815
+      },
+      {
+        "path": "features/piece/pieceRenderer.js",
+        "git_blob_sha1": "c5a9e6a5b33fc8dc5008ba4cf87c1f9e998daff5",
+        "raw_sha256": "31a5a597d98342c3f8f433b12d6bda45714292af89aa07d2633740fc02ade6c5",
+        "utf8_bytes": 11749
+      },
+      {
+        "path": "features/piece/pieceMeasuredWrap.js",
+        "git_blob_sha1": "a9fbc995335059835e33a12faf1155536bbccaf2",
+        "raw_sha256": "5e9db314112f4eb99bf1ff55362ea69d4a60d9d67631c40295cccb8ae90e3a7a",
+        "utf8_bytes": 28295
+      },
+      {
+        "path": "components/piece/PieceVisualCard.js",
+        "git_blob_sha1": "77717bc1d68dde8625f4e3bdb1d37c08ac62bd59",
+        "raw_sha256": "b92b6ba2386703340359540a7d2262d131e6e44ac827c8f658ff27559f9f6a39",
+        "utf8_bytes": 24855
+      },
+      {
+        "path": "features/piece/pieceLayout.js",
+        "git_blob_sha1": "b3d35e4d7a39ddd642dcc7000df9608de7df4bf5",
+        "raw_sha256": "a7695f27ac83ad901a3cdb14f425377bd5fb7fba9e0cd70d22152344a9dec420",
+        "utf8_bytes": 9085
+      }
+    ],
+    "test_files": [
+      {
+        "path": "tests/piece-v2-renderer.test.js",
+        "git_blob_sha1": "51ea9bf3ce5f908a784d9902017e934bdb3af797",
+        "raw_sha256": "f8de232b5d4812fe69aa219826a61f98971f0764c58da1575aec41f9cdcf2069",
+        "utf8_bytes": 79503
+      },
+      {
+        "path": "tests/piece-v2-measured-wrap.test.js",
+        "git_blob_sha1": "85a9a5dbcd50e623a51e4ec5c7abf72d7caa4023",
+        "raw_sha256": "fb97dc2ce45283a328b5288dbb99757fc5624812d54d61cf149805aedf3cc9af",
+        "utf8_bytes": 11054
+      },
+      {
+        "path": "tests/native/piece-text-metrics-ios.mm",
+        "git_blob_sha1": "48dd874f67ba6fd1520aa86c31bb99b6c633a38d",
+        "raw_sha256": "ae8b6cfbfd57d1583452f88acf2603ab7cd46b685dd9415631a6557aa750e4a9",
+        "utf8_bytes": 43965
+      },
+      {
+        "path": "tests/native/piece-rn-canvas-entry.js",
+        "git_blob_sha1": "a4dcb4bcfecdb371e5037aa07ee4aae80ed22dac",
+        "raw_sha256": "719d58a1609ef56699c26578bfff2891a1b0ab85d4a68847fa4a53be9a46d427",
+        "utf8_bytes": 7945
+      },
+      {
+        "path": "tests/native/piece-rn-canvas-fixtures.cjs",
+        "git_blob_sha1": "eb483968235512bc40ff8a996837df9242779a55",
+        "raw_sha256": "d13babfa450fafc24105603dd158abaf9458e438ae9fae65ad90bc6b49dc8889",
+        "utf8_bytes": 4062
+      }
+    ],
+    "workflow_file": {
+      "path": ".github/workflows/piece-rn-contracts.yml",
+      "git_blob_sha1": "63c9ba3d06ef9ba7b58db9b57191cc7a0865fa2d",
+      "raw_sha256": "f0bba1e018d06a52d9f84618fd7989f8b31e79f6ad112f9e81a4e1c6b2e04104",
+      "utf8_bytes": 18000
+    },
+    "local_tests": {
+      "node": "24.19.0",
+      "typescript": "5.2.2",
+      "runner": "node --test --test-isolation=none",
+      "files": 13,
+      "tests": 839,
+      "pass": 839,
+      "fail": 0,
+      "skip": 0,
+      "targeted_files": 2,
+      "targeted_pass": 150,
+      "added_renderer_tests": 8,
+      "added_b9_tests": 29,
+      "unchanged_python_oracle_cases": 25,
+      "timeout_fixture_correction": "New case alone received60second expiry after its original1.123second expiry prevented isolation of8000ms timeout; product expiry/deadline unchanged."
+    },
+    "native_verification": {
+      "state": "AWAITING_CI",
+      "original_checks": 69,
+      "added_checks": 28,
+      "expected_checks": 97,
+      "old_decoder_call_validation_and_uncached_oracle_exactly_preserved": true,
+      "all_range_and_advance_bit_comparison": true,
+      "full5double_bit_comparison": true,
+      "actual_ink_call_count_and_approved_rejection_difference_checks_added": true
+    },
+    "real_rn_verification": {
+      "state": "AWAITING_BOUNDED_RUN",
+      "fixtures": 5,
+      "explicit_preview_v4": 4,
+      "saved_v3": 1,
+      "original_names_order_full_text_recipe_hashes_props_preserved_except_preview_version": true,
+      "mixed_text_characters": 420,
+      "original_final_inspection_png_and8000ms_assertions_preserved": true
+    },
+    "read_only_review": "Native implementation and added28 checks, JS decoder/B9 and added37 tests, version routing/Card and5 RN fixtures were reviewed without material findings. Extra planning-phase hash verification was removed before final local validation.",
+    "formal_renderer_adoption": false,
+    "ordinary_initial_save_and_same_owner_reopen_accepted": false,
+    "physical_device_acceptance": false,
+    "stop_condition": "If mixed420 still exceeds original8seconds in this bounded RN verification, record v4 unadopted. No same-source rerun, deadline/worker increases, other omissions or revived batch/suffix shaping.",
+    "excluded_effects": [
+      "API changes",
+      "DB writes or migration replay",
+      "flags/env",
+      "deploy/activation",
+      "signing/distribution",
+      "main merge",
+      "formal renderer supplier",
+      "saved/export v4"
+    ],
+    "remaining": [
+      "mixed420 final rendering within original8seconds",
+      "formal renderer admission supplier",
+      "explicit candidate API runtime",
+      "ordinary initial save and same-owner reopen",
+      "P-W2 export/Photos/share",
+      "P-W3 product read"
+    ]
   }
 }

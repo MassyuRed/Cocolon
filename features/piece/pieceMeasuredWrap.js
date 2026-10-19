@@ -49,10 +49,14 @@ const less = (left, right) => {
   return false;
 };
 const measuredWidth = row => Math.max(row[2], row[5]) - Math.min(0, row[3]);
+const widthOverflow = row => row[3] === 'width_overflow';
 
-function blockContext(text, table, width) {
+function blockContext(text, table, width, candidateProfile) {
   if (typeof text !== 'string' || !text.length || !table || !Array.isArray(table.boundaries) ||
       !Array.isArray(table.rows)) unavailable();
+  const bounded = table.version === 'piece.native_candidates.v4';
+  if (bounded !== (candidateProfile === 'piece.rn_native_preview.prototype.v4') ||
+      bounded && (!finite(table.contentWidth) || table.contentWidth !== width)) unavailable();
   const boundaries = table.boundaries, n = boundaries.length - 1;
   if (n < 1 || n > 420 || boundaries[0] !== 0 || boundaries[n] !== text.length ||
       boundaries.some((v, i) => !Number.isInteger(v) || v < 0 || v > text.length || i > 0 && v <= boundaries[i - 1]) ||
@@ -66,10 +70,13 @@ function blockContext(text, table, width) {
   }
   const rows = Array.from({ length: n }, () => new Array(n + 1));
   for (const row of table.rows) {
-    if (!Array.isArray(row) || row.length !== 7 ||
+    if (!Array.isArray(row) ||
         !Number.isInteger(row[0]) || !Number.isInteger(row[1]) || row[0] < 0 || row[1] > n || row[0] >= row[1] ||
-        !finite(row[2]) || !finite(row[3]) || !finite(row[4]) || !finite(row[5]) || !finite(row[6]) ||
-        row[2] < 0 || row[5] < row[3] || row[6] < row[4] || rows[row[0]][row[1]]) unavailable();
+        !finite(row[2]) || row[2] < 0 || rows[row[0]][row[1]]) unavailable();
+    if (widthOverflow(row)) {
+      if (!bounded || row.length !== 4 || row[2] <= width) unavailable();
+    } else if (row.length !== 7 || !finite(row[3]) || !finite(row[4]) || !finite(row[5]) || !finite(row[6]) ||
+        row[5] < row[3] || row[6] < row[4] || bounded && row[2] > width) unavailable();
     rows[row[0]][row[1]] = row;
   }
   // Break legality depends only on this paragraph's boundary, not the start
@@ -83,7 +90,8 @@ function blockContext(text, table, width) {
   const fits = (start, end) => {
     while (start && noEnd.has(last(clusters[start - 1]))) start--;
     while (end < n && noStart.has(first(clusters[end]))) end++;
-    return measuredWidth(metric(start, end)) <= width;
+    const row = metric(start, end);
+    return !widthOverflow(row) && measuredWidth(row) <= width;
   };
   return { text, clusters, boundaries, n, metric, part, fits, width, forbiddenBreak, scripts: clusters.map(scriptKind) };
 }
@@ -141,7 +149,8 @@ function fittingDeterminers(ctx) {
     // B9 extends only the opening marks here. The following determiner is
     // a separate measured run; do not attach its closing marks/viewpoint.
     while (left && noEnd.has(last(clusters[left - 1]))) left--;
-    if (measuredWidth(ctx.metric(left, start)) <= ctx.width) mark(result, viewpointStart, start);
+    const row = ctx.metric(left, start);
+    if (!widthOverflow(row) && measuredWidth(row) <= ctx.width) mark(result, viewpointStart, start);
   };
   let expandedTail = false;
   for (let start = 0; start < n - 2; start++) {
@@ -261,7 +270,9 @@ function wrapSolutions(ctx, maxLines = null, lineHeight = null) {
     let best = new Map();
     for (let end = start + 1; end <= n; end++) {
       if (!costs.has(end) || ctx.forbiddenBreak[end]) continue;
-      const m = ctx.metric(start, end), measured = measuredWidth(m);
+      const m = ctx.metric(start, end);
+      if (widthOverflow(m)) continue;
+      const measured = measuredWidth(m);
       if (measured > width || lineHeight !== null && m[6] - m[4] > lineHeight) continue;
       const split = Number(end < n && (h.words[end - 1] && h.words[end] ||
         h.spaces[end] && (h.spaces[end - 1] || end + 1 < n && h.spaces[end + 1])));
@@ -312,7 +323,7 @@ function minimumMeasuredLineCount(ctx, lineHeight) {
     for (let end = start + 1; end <= n; end++) {
       if (counts[end] === n + 1 || ctx.forbiddenBreak[end]) continue;
       const metric = ctx.metric(start, end);
-      if (measuredWidth(metric) <= width && metric[6] - metric[4] <= lineHeight) {
+      if (!widthOverflow(metric) && measuredWidth(metric) <= width && metric[6] - metric[4] <= lineHeight) {
         counts[start] = Math.min(counts[start], counts[end] + 1);
       }
     }
@@ -357,6 +368,8 @@ function fitGroups(contexts, lineHeight, gap, availableHeight) {
  * {boundaries:[UTF16 offsets including 0/end], rows:[[startIndex,endIndex,
  * advance,left,top,right,bottom],...]}. Missing/duplicate/nonfinite metrics
  * throw; a measured font that cannot fit returns null for the next size.
+ * Explicit v4 tables additionally bind contentWidth and may have tagged
+ * [start,end,advance,'width_overflow'] rows; those contain no measured ink.
  */
 export function planPieceMeasuredRows(input, sizeIndex, measurements) {
   if (!input || !Array.isArray(input.blocks) || !input.blocks.length || !Array.isArray(input.sizes) ||
@@ -367,7 +380,7 @@ export function planPieceMeasuredRows(input, sizeIndex, measurements) {
       !Array.isArray(measurements) || measurements.length !== input.blocks.length) unavailable();
   const lineHeight = Math.ceil(input.sizes[sizeIndex] * input.lineRatio), gap = lineHeight * input.paragraphRatio;
   if (!finite(lineHeight) || lineHeight <= 0 || !finite(gap)) unavailable();
-  const contexts = input.blocks.map((text, index) => blockContext(text, measurements[index], input.contentWidth));
+  const contexts = input.blocks.map((text, index) => blockContext(text, measurements[index], input.contentWidth, input.candidateProfile));
   const minimumLines = contexts.reduce((sum, context) => sum + minimumMeasuredLineCount(context, lineHeight), 0);
   if (minimumLines * lineHeight + (contexts.length - 1) * gap > input.contentHeight) return null;
   for (const context of contexts) context.hints = prepareHints(context);

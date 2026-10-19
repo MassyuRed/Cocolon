@@ -14,11 +14,13 @@ const renderer = require('../../features/piece/pieceRenderer');
 const measuredWrap = require('../../features/piece/pieceMeasuredWrap');
 const measureCandidates = renderer.measurePieceCandidates;
 renderer.measurePieceCandidates = async (...args) => {
-  const started = performance.now(), sample = { font_size: args[2], status: 'pending' };
+  const started = performance.now(), sample = { font_size: args[2], status: 'pending',
+    candidate_profile: args[3]?.candidateProfile ?? null, content_width: args[3]?.contentWidth ?? null };
   activeTrace?.adapters.push(sample);
   try {
     const value = await measureCandidates(...args);
-    Object.assign(sample, { status: 'resolved', elapsed_ms: performance.now() - started });
+    Object.assign(sample, { status: 'resolved', elapsed_ms: performance.now() - started,
+      version: value.version ?? null, returned_content_width: value.contentWidth ?? null });
     return value;
   } catch (error) {
     Object.assign(sample, { status: 'rejected', elapsed_ms: performance.now() - started });
@@ -33,26 +35,30 @@ measuredWrap.planPieceMeasuredRows = (...args) => {
   Object.assign(sample, { elapsed_ms: performance.now() - started, fit: !!plan });
   return plan;
 };
-const nativeCandidates = NativeModules.PieceTextMetrics.measureCandidates;
-NativeModules.PieceTextMetrics.measureCandidates = (...args) => {
-  const started = performance.now();
-  const sample = { font_size: args[2], utf16_length: args[1].length, status: 'pending' };
-  activeTrace?.candidates.push(sample);
-  return nativeCandidates(...args).then(value => {
-    const packedBytes = typeof value.rows_f64le === 'string'
-      ? value.rows_f64le.length / 4 * 3 - (value.rows_f64le.endsWith('==') ? 2 : value.rows_f64le.endsWith('=') ? 1 : 0) : null;
-    Object.assign(sample, { status: 'resolved', elapsed_ms: performance.now() - started,
-      rows: value.rows?.length ?? (value.version === 'piece.native_candidates.v3'
-        ? value.boundaries.length * (value.boundaries.length - 1) / 2 : packedBytes === null ? null : packedBytes / 56),
-      metric_count: value.metric_count ?? null, version: value.version });
-    console.log('PIECE_RN_CANDIDATES', JSON.stringify(sample));
-    return value;
-  }, error => {
-    Object.assign(sample, { status: 'rejected', elapsed_ms: performance.now() - started });
-    console.log('PIECE_RN_CANDIDATES', JSON.stringify(sample));
-    throw error;
-  });
-};
+for (const method of ['measureCandidates', 'measureCandidatesForWidth']) {
+  const nativeCandidates = NativeModules.PieceTextMetrics[method];
+  if (typeof nativeCandidates !== 'function') continue;
+  NativeModules.PieceTextMetrics[method] = (...args) => {
+    const started = performance.now();
+    const sample = { method, font_size: args[2], utf16_length: args[1].length, content_width: args[3] ?? null, status: 'pending' };
+    activeTrace?.candidates.push(sample);
+    return nativeCandidates(...args).then(value => {
+      const packedBytes = typeof value.rows_f64le === 'string'
+        ? value.rows_f64le.length / 4 * 3 - (value.rows_f64le.endsWith('==') ? 2 : value.rows_f64le.endsWith('=') ? 1 : 0) : null;
+      Object.assign(sample, { status: 'resolved', elapsed_ms: performance.now() - started,
+        rows: value.rows?.length ?? (['piece.native_candidates.v3', 'piece.native_candidates.v4'].includes(value.version)
+          ? value.boundaries.length * (value.boundaries.length - 1) / 2 : packedBytes === null ? null : packedBytes / 56),
+        metric_count: value.metric_count ?? null, full_metric_count: value.full_metric_count ?? null,
+        returned_content_width: value.content_width ?? null, version: value.version });
+      console.log('PIECE_RN_CANDIDATES', JSON.stringify(sample));
+      return value;
+    }, error => {
+      Object.assign(sample, { status: 'rejected', elapsed_ms: performance.now() - started });
+      console.log('PIECE_RN_CANDIDATES', JSON.stringify(sample));
+      throw error;
+    });
+  };
+}
 
 class CanvasCases extends React.Component {
   caseFixtures = fixtures.map(fixture => fixture.props.display ? { ...fixture,
@@ -97,6 +103,8 @@ class CanvasCases extends React.Component {
     const saveFitCurrent = !!fit && fit.isCurrent(display?.preview, display?.visualToken) === true;
     const saveFitWrongTokenCurrent = !!fit && fit.isCurrent(display?.preview, Object.freeze({})) === true;
     const report = { name: fixture.name, phase: m?.phase ?? 'missing', reason: m?.reason ?? null,
+      renderer_version: display?.preview?.renderer_version ?? fixture.props.savedRecord?.renderer_version,
+      candidate_profile: input?.candidateProfile,
       elapsed_ms: performance.now() - this.started, size_index: m?.sizeIndex,
       trace: this.trace,
       width: input?.width, height: input?.height, content_width: input?.contentWidth,

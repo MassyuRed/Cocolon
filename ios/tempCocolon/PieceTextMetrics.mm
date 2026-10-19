@@ -18,6 +18,9 @@
 
 @interface PieceTextMetrics : NSObject <RCTBridgeModule>
 @property(nonatomic, weak) RCTBridge *bridge;
+- (void)measureCandidateSnapshot:(NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize
+                   boundedWidth:(BOOL)boundedWidth contentWidth:(double)contentWidth deadline:(NSTimeInterval)deadline
+                       resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject;
 @end
 
 // One candidate call at a time across every module/card. Its joined workers
@@ -41,9 +44,27 @@ RCT_EXPORT_MODULE();
 RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize
                   resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
-  void (^unavailable)(void) = ^{ reject(@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE", @"Text measurement unavailable", nil); };
   const NSTimeInterval deadline = NSProcessInfo.processInfo.systemUptime + 8;
+  [self measureCandidateSnapshot:tag text:expected fontSize:fontSize boundedWidth:NO contentWidth:0
+    deadline:deadline resolver:resolve rejecter:reject];
+}
+
+// Explicit iOS preview v4 only. The legacy entry keeps all five metrics.
+RCT_EXPORT_METHOD(measureCandidatesForWidth:(nonnull NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize
+                  contentWidth:(double)contentWidth resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+{
+  const NSTimeInterval deadline = NSProcessInfo.processInfo.systemUptime + 8;
+  [self measureCandidateSnapshot:tag text:expected fontSize:fontSize boundedWidth:YES contentWidth:contentWidth
+    deadline:deadline resolver:resolve rejecter:reject];
+}
+
+- (void)measureCandidateSnapshot:(NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize
+                   boundedWidth:(BOOL)boundedWidth contentWidth:(double)contentWidth deadline:(NSTimeInterval)deadline
+                       resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject
+{
+  void (^unavailable)(void) = ^{ reject(@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE", @"Text measurement unavailable", nil); };
   if (!isfinite(tag.doubleValue) || tag.doubleValue <= 0 || tag.doubleValue != floor(tag.doubleValue) ||
+      (boundedWidth && (!isfinite(contentWidth) || contentWidth <= 0)) ||
       expected.length == 0 || expected.length > 4096 || !isfinite(fontSize) || fontSize < 1 || fontSize > 100 || !_bridge.uiManager) {
     unavailable(); return;
   }
@@ -107,7 +128,7 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
           }
           // Group only exact text/attribute matches before any parallel work.
           // Keep the existing retained-key budget; uncached ranges remain jobs.
-          struct MetricJob { NSRange range; double values[5]; };
+          struct MetricJob { NSRange range; double values[5]; bool widthOverflow; };
           std::vector<MetricJob> jobs;
           std::vector<NSUInteger> rowJobs;
           rowJobs.reserve(count * (count + 1) / 2);
@@ -131,7 +152,7 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
                   }
                 }
                 if (index == jobs.size()) {
-                  jobs.push_back({range, {0, 0, 0, 0, 0}});
+                  jobs.push_back({range, {0, 0, 0, 0, 0}, false});
                   if (cachedKeys < 16384 && cachedUnits + range.length <= 4 * 1024 * 1024) {
                     cache[key].push_back(index); cachedUnits += range.length; cachedKeys++;
                   }
@@ -211,6 +232,20 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
                   CTLineRef line = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)part);
                   if (!line) { failure->store(true, std::memory_order_relaxed); return; }
                   double advance = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
+                  if (boundedWidth) {
+                    if (!isfinite(advance) || advance < 0) {
+                      CFRelease(line); failure->store(true, std::memory_order_relaxed); return;
+                    }
+                    // Width is always at least advance. Keep independent shaping
+                    // and this exact advance for EVERY range; omit only ink that
+                    // cannot be selected at this exact width. Equality is full5.
+                    if (advance > contentWidth) {
+                      CFRelease(line);
+                      jobData[index].values[0] = advance;
+                      jobData[index].widthOverflow = true;
+                      continue;
+                    }
+                  }
                   CGRect ink = CTLineGetImageBounds(line, NULL);
                   CFRelease(line);
                   if (CGRectIsNull(ink)) {
@@ -231,6 +266,37 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
             } @catch (__unused NSException *exception) { failure->store(true, std::memory_order_relaxed); }
           });
           if (failed.load(std::memory_order_relaxed)) { unavailable(); return; }
+          std::vector<uint32_t> references;
+          references.reserve(rowJobs.size());
+          for (NSUInteger index : rowJobs) {
+            if (NSProcessInfo.processInfo.systemUptime >= deadline) { unavailable(); return; }
+            references.push_back(CFSwapInt32HostToLittle((uint32_t)index));
+          }
+          NSData *referenceBytes = [NSData dataWithBytes:references.data() length:references.size() * sizeof(uint32_t)];
+          if (boundedWidth) {
+            std::vector<uint8_t> records;
+            records.reserve(jobCount * 41);
+            NSUInteger fullCount = 0;
+            for (NSUInteger index = 0; index < jobCount; index++) {
+              if (NSProcessInfo.processInfo.systemUptime >= deadline) { unavailable(); return; }
+              const bool overflow = jobData[index].widthOverflow;
+              records.push_back(overflow ? 1 : 0);
+              if (!overflow) fullCount++;
+              for (NSUInteger j = 0; j < (overflow ? 1 : 5); j++) {
+                uint64_t bits; memcpy(&bits, &jobData[index].values[j], sizeof(bits));
+                bits = CFSwapInt64HostToLittle(bits);
+                const uint8_t *bytes = (const uint8_t *)&bits;
+                records.insert(records.end(), bytes, bytes + sizeof(bits));
+              }
+            }
+            NSData *recordBytes = [NSData dataWithBytes:records.data() length:records.size()];
+            resolve(@{ @"version": @"piece.native_candidates.v4", @"platform": @"ios", @"font_size": @(fontSize),
+              @"utf16_length": @(expected.length), @"boundaries": boundaries, @"content_width": @(contentWidth),
+              @"metric_count": @(jobCount), @"full_metric_count": @(fullCount),
+              @"metric_records_le": [recordBytes base64EncodedStringWithOptions:0],
+              @"row_indices_u32le": [referenceBytes base64EncodedStringWithOptions:0], @"glyph_check": @"no_missing_observed" });
+            return;
+          }
           // Send each exact job once plus one reference for EVERY ordered range.
           // The adapter restores the complete seven-value rows before B9.
           std::vector<uint64_t> metrics;
@@ -242,14 +308,7 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
               metrics.push_back(CFSwapInt64HostToLittle(bits));
             }
           }
-          std::vector<uint32_t> references;
-          references.reserve(rowJobs.size());
-          for (NSUInteger index : rowJobs) {
-            if (NSProcessInfo.processInfo.systemUptime >= deadline) { unavailable(); return; }
-            references.push_back(CFSwapInt32HostToLittle((uint32_t)index));
-          }
           NSData *metricBytes = [NSData dataWithBytes:metrics.data() length:metrics.size() * sizeof(uint64_t)];
-          NSData *referenceBytes = [NSData dataWithBytes:references.data() length:references.size() * sizeof(uint32_t)];
           resolve(@{ @"version": @"piece.native_candidates.v3", @"platform": @"ios", @"font_size": @(fontSize),
             @"utf16_length": @(expected.length), @"boundaries": boundaries,
             @"metric_count": @(jobCount), @"metrics_f64le": [metricBytes base64EncodedStringWithOptions:0],

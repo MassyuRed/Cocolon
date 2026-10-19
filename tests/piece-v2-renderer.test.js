@@ -40,6 +40,10 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
     NativeModules: { PieceTextMetrics: { measureCandidates: async (tag, text, fontSize) => {
       const result = candidateTable(text, fontSize); candidateCalls.push({ tag, text, fontSize });
       return nativeCandidates ? nativeCandidates(result, candidateCalls.length) : result;
+    }, measureCandidatesForWidth: async (tag, text, fontSize, contentWidth) => {
+      const result = widthCandidates(candidateTable(text, fontSize), contentWidth);
+      candidateCalls.push({ tag, text, fontSize, contentWidth, method: 'measureCandidatesForWidth' });
+      return nativeCandidates ? nativeCandidates(result, candidateCalls.length) : result;
     }, inspect: async (tag, text, fontSize) => {
       nativeCalls.push({ tag, text, fontSize });
       const block = card.state.measurement.blocks[tag - 1];
@@ -56,7 +60,7 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
     ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'readPieceOwnerSnapshot']],
     ['features/piece/piecePreviewModel.js', ['readPiecePreviewDisplay', 'verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay']],
-    ['features/piece/pieceLayout.js', ['PIECE_NATIVE_PREVIEW_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
+    ['features/piece/pieceLayout.js', ['PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
     ['features/piece/pieceRenderer.js', ['inspectPieceText', 'readPieceTextInspection', 'measurePieceCandidates']],
     ['features/piece/pieceMeasuredWrap.js', ['planPieceMeasuredRows']],
     ['components/piece/PieceVisualCard.js', ['PieceVisualCard']],
@@ -124,6 +128,199 @@ function indexedCandidates(table) {
   return { ...metadata, version: 'piece.native_candidates.v3', metric_count: unique.length,
     metrics_f64le: Buffer.concat(unique).toString('base64'), row_indices_u32le: indices.toString('base64') };
 }
+function widthCandidates(table, width) {
+  const { rows, ...metadata } = table, unique = [], keys = new Map(), indices = Buffer.alloc(rows.length * 4);
+  let full = 0;
+  rows.forEach((row, i) => {
+    const overflow = row[2] > width, bytes = Buffer.alloc(overflow ? 9 : 41);
+    bytes[0] = overflow ? 1 : 0;
+    row.slice(2, overflow ? 3 : 7).forEach((number, j) => bytes.writeDoubleLE(number, 1 + j * 8));
+    const key = bytes.toString('hex');
+    if (!keys.has(key)) { keys.set(key, unique.length); unique.push(bytes); if (!overflow) full++; }
+    indices.writeUInt32LE(keys.get(key), i * 4);
+  });
+  return { ...metadata, version: 'piece.native_candidates.v4', content_width: width,
+    metric_count: unique.length, full_metric_count: full, metric_records_le: Buffer.concat(unique).toString('base64'),
+    row_indices_u32le: indices.toString('base64') };
+}
+const v4Profile = 'piece.rn_native_preview.prototype.v4';
+const v4Options = width => ({ candidateProfile: v4Profile, contentWidth: width });
+const v4Sample = () => ({ ...sample(), renderer_version: v4Profile });
+
+test('v4 tagged representatives retain all ranges and exact advance/full bits without fabricated ink', async () => {
+  const h = rawHarness();
+  let expected, wire;
+  h.NativeModules.PieceTextMetrics.measureCandidatesForWidth = async (tag, text, font, width) => {
+    expected = candidateTable(text, font);
+    expected.rows.forEach(row => {
+      const advance = Math.PI * (row[1] - row[0]);
+      row.splice(2, 5, advance, -0, -Number.MIN_VALUE, advance, Number.MIN_VALUE);
+    });
+    return wire = widthCandidates(expected, width);
+  };
+  for (const text of ['a', 'ab', 'abc', 'abcd']) for (const width of [Number.MIN_VALUE, Math.PI, 100]) {
+    const actual = await h.measurePieceCandidates({ tag: 1 }, text, 48, v4Options(width));
+    assert.equal(actual.version, 'piece.native_candidates.v4'); assert.equal(actual.contentWidth, width);
+    assert.deepEqual(copy(actual.boundaries), expected.boundaries); assert.equal(actual.rows.length, expected.rows.length);
+    actual.rows.forEach((row, i) => {
+      const original = expected.rows[i], overflow = original[2] > width;
+      assert.equal(row.length, overflow ? 4 : 7);
+      for (let j = 0; j < (overflow ? 3 : 7); j++) assert.ok(Object.is(row[j], original[j]));
+      if (overflow) assert.equal(row[3], 'width_overflow');
+    });
+    assert.equal(Buffer.from(wire.metric_records_le, 'base64').length, 9 * wire.metric_count + 32 * wire.full_metric_count);
+    if (text.length > 1) assert.ok(wire.metric_count < expected.rows.length);
+  }
+});
+
+test('v4 wire rejects malformed tags, counts, bytes, references, metrics and width binding', async () => {
+  const change = (r, field, edit) => { const bytes = Buffer.from(r[field], 'base64'); edit(bytes);
+    return { ...r, [field]: bytes.toString('base64') }; };
+  for (const mutate of [
+    r => ({ ...r, content_width: 4 + Number.EPSILON * 4 }), r => ({ ...r, content_width: '4' }),
+    r => ({ ...r, version: 'piece.native_candidates.v3' }), r => ({ ...r, platform: 'android' }),
+    r => ({ ...r, rows: [] }), r => ({ ...r, metric_count: 0 }), r => ({ ...r, metric_count: 4 }),
+    r => ({ ...r, metric_count: 0.5 }), r => ({ ...r, full_metric_count: -1 }),
+    r => ({ ...r, full_metric_count: 0.5 }), r => ({ ...r, full_metric_count: 3 }),
+    r => ({ ...r, full_metric_count: 0 }), r => ({ ...r, full_metric_count: 2 }),
+    r => ({ ...r, metric_records_le: null }), r => ({ ...r, metric_records_le: r.metric_records_le.slice(4) }),
+    r => ({ ...r, metric_records_le: r.metric_records_le + 'AAAA' }),
+    r => ({ ...r, row_indices_u32le: r.row_indices_u32le.slice(4) }),
+    r => change(r, 'metric_records_le', b => { b[0] = 2; }),
+    r => change(r, 'metric_records_le', b => { b[41] = 0; }),
+    r => change(r, 'metric_records_le', b => b.writeDoubleLE(8, 1)),
+    r => change(r, 'metric_records_le', b => b.writeDoubleLE(4, 42)),
+    ...[NaN, Infinity, -Infinity, -1].map(value => r => change(r, 'metric_records_le', b => b.writeDoubleLE(value, 42))),
+    ...[NaN, Infinity, -Infinity].map(value => r => change(r, 'metric_records_le', b => b.writeDoubleLE(value, 9))),
+    r => change(r, 'metric_records_le', b => b.writeDoubleLE(-1, 25)),
+    r => change(r, 'metric_records_le', b => b.writeDoubleLE(-100, 33)),
+    r => change(r, 'row_indices_u32le', b => b.writeUInt32LE(r.metric_count, 0)),
+    r => change(r, 'row_indices_u32le', b => b.fill(0)),
+    r => ({ ...r, boundaries: new Array(422).fill(0) }),
+  ]) {
+    const h = rawHarness(undefined, undefined, false, mutate);
+    await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'ab', 48, v4Options(4)), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+  }
+  for (const field of ['metric_records_le', 'row_indices_u32le']) for (const invalid of ['=', '!', '\u0080', '\ud800']) {
+    const h = rawHarness(undefined, undefined, false, r => ({ ...r, [field]: invalid + r[field].slice(1) }));
+    await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'ab', 48, v4Options(4)), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+  }
+  for (const [field, text] of [['metric_records_le', 'ab'], ['row_indices_u32le', 'a']]) {
+    const h = rawHarness(undefined, undefined, false, r => ({ ...r, [field]: r[field].slice(0, -3) + 'B==' }));
+    await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, text, 48, v4Options(4)), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+  }
+});
+
+test('v4 requires explicit iOS profile and width method without fallback or double execution', async () => {
+  const h = rawHarness();
+  for (const options of [null, {}, v4Options(0), v4Options(-1), v4Options(NaN), v4Options(Infinity),
+    v4Options('888'), { ...v4Options(888), extra: true }, { ...v4Options(888), candidateProfile: h.PIECE_NATIVE_PREVIEW_VERSION }]) {
+    await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'a', 48, options), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+  }
+  h.Platform.OS = 'android';
+  await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'a', 48, v4Options(888)), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+  h.Platform.OS = 'ios'; delete h.NativeModules.PieceTextMetrics.measureCandidatesForWidth;
+  await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'a', 48, v4Options(888)), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+  assert.equal(h.candidateCalls.length, 0);
+  await h.measurePieceCandidates({ tag: 1 }, 'a', 48); assert.equal(h.candidateCalls.length, 1);
+  h.NativeModules.PieceTextMetrics.measureCandidatesForWidth = async () => indexedCandidates(candidateTable('a', 48));
+  await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'a', 48, v4Options(888)), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+  h.NativeModules.PieceTextMetrics.measureCandidates = async () => widthCandidates(candidateTable('a', 48), 888);
+  await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'a', 48), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+});
+
+test('old v1 v2 v3 still reject invalid ink in an unselected width-overflow range', async () => {
+  for (const encode of [x => x, packedCandidates, indexedCandidates]) for (const invalid of [NaN, Infinity, -1]) {
+    const h = await harness(sample(), undefined, false, table => {
+      const row = table.rows.find(r => r[0] === 0 && r[1] === table.boundaries.length - 1);
+      row[2] = 9999; row[3] = 0; row[5] = invalid;
+      return encode(table);
+    });
+    assert.equal(h.card.state.measurement.phase, 'unavailable');
+    assert.equal(h.card.state.measurement.reason, 'native_candidates_unavailable');
+    assert.equal(h.nativeCalls.length, 0);
+  }
+});
+
+test('v4 routing preserves old constants, saved export and Android while rejecting v4 outside iOS preview', async () => {
+  const h = rawHarness(), v4 = v4Sample();
+  assert.equal(h.PIECE_NATIVE_PREVIEW_VERSION, 'piece.rn_native_preview.prototype.v3');
+  const oldInput = h.preparePieceNativePreview(display(sample())), newInput = h.preparePieceNativePreview(display(v4));
+  assert.equal(newInput.candidateProfile, v4Profile); assert.notEqual(oldInput.key, newInput.key);
+  assert.equal(newInput.renderer_version, undefined);
+  assert.equal(h.preparePieceNativeCard({ display: display(v4), exportCanvas: true }), null);
+  assert.equal(h.preparePieceNativeSavedDisplay({ ...savedSample(), renderer_version: v4Profile }), null);
+  assert.equal(h.preparePieceNativeCard({ savedRecord: savedSample(), exportCanvas: true }).candidateProfile, h.PIECE_NATIVE_PREVIEW_VERSION);
+  h.Platform.OS = 'android';
+  assert.equal(h.preparePieceNativePreview(display(v4)), null);
+  assert.equal(h.preparePieceNativePreview(display(sample())).key, oldInput.key);
+  h.NativeModules.PieceTextMetrics.measureCandidates = async () => ({ ...candidateTable('a', 48), platform: 'android' });
+  const android = await h.measurePieceCandidates({ tag: 1 }, 'a', 48);
+  assert.equal(android.rows.length, 1); assert.equal(android.version, undefined);
+});
+
+test('v4 local fit requires final inspection and is revoked across v3 v4 replacements', async () => {
+  const h = fitHarness({ version: v4Profile });
+  await prepare(h); assert.equal(h.fit(), undefined);
+  await finish(h);
+  assert.equal(h.card.state.measurement.phase, 'native_checked');
+  assert.equal(h.card.state.measurement.canSave, false); assert.equal(h.card.state.measurement.canExport, false);
+  assert.ok(h.candidateCalls.every(c => c.method === 'measureCandidatesForWidth' && c.contentWidth === h.input().contentWidth));
+  const first = h.fit(), packet = h.card.props.display.preview;
+  assert.deepEqual(Object.keys(first), ['isCurrent']); assert.equal(first.isCurrent(packet, h.token), true);
+  assert.equal(first.isCurrent(packet, {}), false);
+  const changeVersion = version => {
+    h.card.props = { ...h.card.props, display: { ...h.card.props.display, preview: { ...packet, renderer_version: version } } };
+    h.card.setState(h.PieceVisualCard.getDerivedStateFromProps(h.card.props, h.card.state));
+  };
+  changeVersion(h.PIECE_NATIVE_PREVIEW_VERSION); assert.equal(first.isCurrent(packet, h.token), false);
+  assert.equal(h.fit(), undefined); await finish(h); const old = h.fit();
+  assert.equal(old.isCurrent(h.card.props.display.preview, h.token), true);
+  assert.ok(h.candidateCalls.some(c => c.method === undefined));
+  changeVersion(v4Profile); assert.equal(old.isCurrent(h.card.props.display.preview, h.token), false);
+  assert.equal(first.isCurrent(packet, h.token), false); await finish(h);
+  assert.equal(h.fit().isCurrent(packet, h.token), true);
+});
+
+test('v4 current and prefetched fonts keep exact width, font order and the original deadline', async () => {
+  const pending = [], packet = v4Sample();
+  const h = rawHarness(packet, undefined, false, r => new Promise(resolve => pending.push({ r, resolve })));
+  primeNextFont(h); await prepare(h);
+  const deadline = h.card.deadline;
+  assert.equal(deadline.expiresAt, NOW + 8000);
+  assert.deepEqual(h.candidateCalls.map(c => c.fontSize), [48, 48, 44, 44]);
+  assert.deepEqual(h.candidateCalls.map(c => c.text), [...h.input().blocks, ...h.input().blocks]);
+  assert.ok(h.candidateCalls.every(c => c.method === 'measureCandidatesForWidth' && c.contentWidth === h.input().contentWidth));
+  for (const p of pending.filter(p => p.r.font_size === 44)) p.resolve(p.r);
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(h.card.state.measurement.sizeIndex, 0);
+  for (const p of pending.filter(p => p.r.font_size === 48)) {
+    const table = candidateTable(packet.content_payload.body_blocks[pending.indexOf(p)], 48);
+    table.rows.forEach(row => { row[2] = 9999; row[5] = 9999; });
+    p.resolve(widthCandidates(table, h.input().contentWidth));
+  }
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(h.card.state.measurement.sizeIndex, 1); assert.equal(h.card.deadline, deadline);
+  await finish(h); assert.equal(h.card.state.measurement.phase, 'native_checked');
+  assert.equal(h.candidateCalls.length, 4);
+  assert.deepEqual(copy(h.card.state.measurement.plan.groups.map(rows => rows.join(''))), packet.content_payload.body_blocks);
+});
+
+test('v4 pending results cannot survive timeout or a v4 v3 v4 binding replacement', async () => {
+  for (const expire of [false, true]) {
+    const packet = { ...v4Sample(), expires_at: '2026-10-08T10:01:00Z' };
+    const pending = [], h = rawHarness(packet, undefined, false, r => new Promise(resolve => pending.push({ r, resolve })));
+    primeNextFont(h); await prepare(h); const original = h.card.candidates;
+    if (expire) { h.now(NOW + 8001); [...h.timers.values()][0](); }
+    else { h.replace({ ...packet, renderer_version: h.PIECE_NATIVE_PREVIEW_VERSION }); h.replace(packet); }
+    const state = h.card.state.measurement;
+    for (const p of pending) p.resolve(p.r);
+    await new Promise(resolve => setImmediate(resolve));
+    assert.equal(h.card.state.measurement, state); assert.equal(h.card.saveFit, null);
+    if (!expire) assert.notEqual(h.card.candidates, original);
+    else assert.equal(state.reason, 'measurement_timeout');
+  }
+});
 test('indexed native rows preserve every range and exact double bits with shared metrics', async () => {
   let expected, wire;
   const h = rawHarness(sample(), undefined, false, value => {

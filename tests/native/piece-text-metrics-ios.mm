@@ -27,6 +27,18 @@
 // Atomic counters sum per-operation time across workers, not wall-clock time.
 // Undefine these wrappers before the independent uncached reference below.
 static std::atomic_bool profileCandidates{false};
+// Only the included production calls see these scoped v4 observations/faults.
+// The independent uncached oracle below remains outside all wrappers.
+static std::atomic_bool widthProbeActive{false}, widthFaultInkNull{false};
+static std::atomic<int> widthFaultAdvance{0};
+static std::atomic<uint64_t> widthCreates{0}, widthAdvances{0}, widthImages{0};
+static void beginWidthProbe(int advanceFault = 0, BOOL inkFault = NO) {
+  widthCreates = 0; widthAdvances = 0; widthImages = 0;
+  widthFaultAdvance = advanceFault; widthFaultInkNull = inkFault; widthProbeActive = true;
+}
+static void endWidthProbe(void) {
+  widthProbeActive = false; widthFaultAdvance = 0; widthFaultInkNull = false;
+}
 static struct {
   std::atomic<uint64_t> creates{0}, units{0}, createTicks{0}, typographicTicks{0}, imageTicks{0};
   std::atomic<uint64_t> queuedAt{0}, queueStarted{0}, workersStarted{0}, workersJoined{0}, resolvedAt{0}, decodeTicks{0};
@@ -90,6 +102,7 @@ static CFAttributedStringRef profiledCFSubstring(CFAllocatorRef allocator, CFAtt
   return result;
 }
 static CTLineRef profiledCreateLine(CFAttributedStringRef text) {
+  if (widthProbeActive) widthCreates++;
   if (!profileCandidates) return CTLineCreateWithAttributedString(text);
   uint64_t start = mach_absolute_time();
   CTLineRef result = CTLineCreateWithAttributedString(text);
@@ -98,6 +111,11 @@ static CTLineRef profiledCreateLine(CFAttributedStringRef text) {
   return result;
 }
 static double profiledTypographicBounds(CTLineRef line, CGFloat *ascent, CGFloat *descent, CGFloat *leading) {
+  if (widthProbeActive) {
+    widthAdvances++;
+    const int fault = widthFaultAdvance;
+    if (fault) return fault == 1 ? NAN : fault == 2 ? INFINITY : fault == 3 ? -1 : -INFINITY;
+  }
   if (!profileCandidates) return CTLineGetTypographicBounds(line, ascent, descent, leading);
   uint64_t start = mach_absolute_time();
   double result = CTLineGetTypographicBounds(line, ascent, descent, leading);
@@ -105,6 +123,7 @@ static double profiledTypographicBounds(CTLineRef line, CGFloat *ascent, CGFloat
   return result;
 }
 static CGRect profiledImageBounds(CTLineRef line, CGContextRef context) {
+  if (widthProbeActive) { widthImages++; if (widthFaultInkNull) return CGRectNull; }
   if (!profileCandidates) return CTLineGetImageBounds(line, context);
   uint64_t start = mach_absolute_time();
   CGRect result = CTLineGetImageBounds(line, context);
@@ -271,6 +290,87 @@ static BOOL matchesUncachedCandidates(NSDictionary *result, RCTTextView *view) {
   }
   return YES;
 }
+// Keep the old v3 decoder/call/oracle untouched. v4 stays a tagged union and
+// compares with those already oracle-checked v3 rows, never fabricated ink.
+static NSDictionary *callWidth(PieceTextMetrics *module, NSString *text, double size, double width, NSString **code) {
+  __block NSDictionary *result = nil; __block NSString *error = nil;
+  dispatch_semaphore_t done = dispatch_semaphore_create(0);
+  [module measureCandidatesForWidth:@1 text:text fontSize:size contentWidth:width resolver:^(id value) {
+    if ([value isKindOfClass:NSDictionary.class]) result = value; else error = @"INVALID_RESULT";
+    dispatch_semaphore_signal(done);
+  } rejecter:^(NSString *value, __unused NSString *message, __unused NSError *cause) {
+    error = value; dispatch_semaphore_signal(done);
+  }];
+  if (dispatch_semaphore_wait(done, dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC)) != 0) {
+    *code = @"TEST_CALLBACK_TIMEOUT"; return nil;
+  }
+  *code = error; return result;
+}
+static BOOL matchesWidthCandidates(NSDictionary *result, NSDictionary *legacy, NSString *text, double width) {
+  NSSet *fields = [NSSet setWithArray:@[@"version", @"platform", @"font_size", @"utf16_length", @"boundaries", @"glyph_check",
+    @"content_width", @"metric_count", @"full_metric_count", @"metric_records_le", @"row_indices_u32le"]];
+  if (!result || !validCandidates(legacy, text) || ![[NSSet setWithArray:result.allKeys] isEqual:fields] ||
+      ![result[@"version"] isEqual:@"piece.native_candidates.v4"] || !isfinite(width) || width <= 0 ||
+      ![result[@"content_width"] isKindOfClass:NSNumber.class] || [result[@"content_width"] doubleValue] != width ||
+      ![result[@"metric_records_le"] isKindOfClass:NSString.class] || ![result[@"row_indices_u32le"] isKindOfClass:NSString.class]) return NO;
+  for (NSString *key in @[@"platform", @"font_size", @"utf16_length", @"boundaries", @"glyph_check"])
+    if (![result[key] isEqual:legacy[key]]) return NO;
+  const NSUInteger count = [legacy[@"rows"] count];
+  const double uniqueNumber = [result[@"metric_count"] doubleValue], fullNumber = [result[@"full_metric_count"] doubleValue];
+  if (!isfinite(uniqueNumber) || uniqueNumber < 1 || uniqueNumber > count || uniqueNumber != floor(uniqueNumber) ||
+      !isfinite(fullNumber) || fullNumber < 0 || fullNumber > uniqueNumber || fullNumber != floor(fullNumber)) return NO;
+  const NSUInteger unique = (NSUInteger)uniqueNumber, full = (NSUInteger)fullNumber;
+  NSData *data = [[NSData alloc] initWithBase64EncodedString:result[@"metric_records_le"] options:0];
+  NSData *indices = [[NSData alloc] initWithBase64EncodedString:result[@"row_indices_u32le"] options:0];
+  if (data.length != unique * 9 + full * 32 || indices.length != count * 4) return NO;
+  NSMutableArray<NSArray *> *metrics = [NSMutableArray new];
+  NSUInteger offset = 0, fullSeen = 0;
+  for (NSUInteger i = 0; i < unique; i++) {
+    if (offset + 9 > data.length) return NO;
+    uint8_t tag = ((const uint8_t *)data.bytes)[offset++];
+    if (tag != 0 && tag != 1) return NO;
+    const NSUInteger values = tag == 1 ? 1 : 5;
+    if (offset + values * 8 > data.length) return NO;
+    NSMutableArray *record = [NSMutableArray arrayWithObject:@(tag)];
+    for (NSUInteger j = 0; j < values; j++, offset += 8) {
+      uint64_t bits; memcpy(&bits, (const uint8_t *)data.bytes + offset, sizeof(bits));
+      bits = CFSwapInt64LittleToHost(bits);
+      double value; memcpy(&value, &bits, sizeof(value));
+      if (!isfinite(value)) return NO;
+      [record addObject:@(value)];
+    }
+    const double advance = [record[1] doubleValue];
+    if (advance < 0 || (tag == 1) != (advance > width)) return NO;
+    if (tag == 0) {
+      if ([record[4] doubleValue] < [record[2] doubleValue] || [record[5] doubleValue] < [record[3] doubleValue]) return NO;
+      fullSeen++;
+    }
+    [metrics addObject:record];
+  }
+  if (offset != data.length || fullSeen != full) return NO;
+  NSMutableIndexSet *used = [NSMutableIndexSet new];
+  NSArray *rows = legacy[@"rows"];
+  for (NSUInteger i = 0; i < count; i++) {
+    uint32_t index; memcpy(&index, (const uint8_t *)indices.bytes + i * 4, sizeof(index));
+    index = CFSwapInt32LittleToHost(index);
+    if (index >= unique) return NO;
+    [used addIndex:index];
+    NSArray *record = metrics[index], *row = rows[i];
+    const BOOL overflow = [row[2] doubleValue] > width;
+    if ([record[0] boolValue] != overflow || record.count != (overflow ? 2 : 6)) return NO;
+    for (NSUInteger j = 0; j < (overflow ? 1 : 5); j++) {
+      double actual = [record[j + 1] doubleValue], expected = [row[j + 2] doubleValue];
+      if (memcmp(&actual, &expected, sizeof(double)) != 0) return NO;
+    }
+  }
+  return used.count == unique;
+}
+static BOOL widthParity(PieceTextMetrics *module, NSDictionary *legacy, RCTTextView *view, double size, double width) {
+  NSString *code = nil;
+  NSDictionary *result = callWidth(module, view.fixtureStorage.string, size, width, &code);
+  if (code) printf("v4 rejection %s\n", code.UTF8String);
+  return code == nil && matchesWidthCandidates(result, legacy, view.fixtureStorage.string, width);
+}
 // Independent paint observation of the same TextKit layout, at logical scale.
 // Check outward-rounded reported bounds: fractional antialiasing may occupy
 // the edge pixel. No extra content-pixel or clipping tolerance is introduced.
@@ -343,6 +443,7 @@ static int runNativeMetricsChecks(void) {
         [inspection[@"line_ends"] isEqual:@[@(text.length)]]);
       printf("STAGE paint\n");
       check([name stringByAppendingString:@"_paint_bounds"], inspection && inkEnclosesPaint(view, inspection));
+      check([name stringByAppendingString:@"_v4_all_range_bit_parity"], widthParity(module, candidates, view, font, 120));
     }
     for (NSString *name in @[@"wrong_text", @"wrong_font", @"detached", @"limited_lines", @"oversized_view"]) {
       RCTTextView *view = makeView(@"Cocolon", 48); bridge.uiManager.registry = @{@1:view};
@@ -358,6 +459,7 @@ static int runNativeMetricsChecks(void) {
     bridge.uiManager.registry = @{@1:makeView(unsupported, 48)};
     check(@"unsupported_candidates", call(module, YES, unsupported, 48, &code) == nil && [code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"]);
     check(@"unsupported_inspection", call(module, NO, unsupported, 48, &code) == nil && [code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"]);
+    check(@"unsupported_v4_candidates", callWidth(module, unsupported, 48, 1, &code) == nil && [code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"]);
     NSString *longText = [@"あ" stringByPaddingToLength:420 withString:@"あ" startingAtIndex:0];
     bridge.uiManager.registry = @{@1:makeView(longText, 48)};
     NSTimeInterval started = NSProcessInfo.processInfo.systemUptime;
@@ -365,6 +467,7 @@ static int runNativeMetricsChecks(void) {
     printf("max420_candidate_elapsed_ms=%.3f\n", (NSProcessInfo.processInfo.systemUptime-started)*1000);
     check(@"max420_complete_metrics", code == nil && validCandidates(longResult, longText));
     check(@"max420_uncached_equivalence", matchesUncachedCandidates(longResult, (RCTTextView *)bridge.uiManager.registry[@1]));
+    check(@"max420_v4_all_range_bit_parity", widthParity(module, longResult, (RCTTextView *)bridge.uiManager.registry[@1], 48, 888));
     // Same mixed Japanese input as the full RN case, so a homogeneous glyph
     // benchmark cannot hide native shaping cost. Existing 420 test stays intact.
     NSString *mixedText = [[[@"考える時間と対話を大切にしながら、自分の言葉で伝えたい。"
@@ -396,6 +499,12 @@ static int runNativeMetricsChecks(void) {
       (unsigned long long)candidateProfile.uptimeCalls.load());
     check(@"mixed420_complete_metrics", code == nil && validCandidates(mixedResult, mixedText));
     check(@"mixed420_uncached_equivalence", matchesUncachedCandidates(mixedResult, (RCTTextView *)bridge.uiManager.registry[@1]));
+    started = NSProcessInfo.processInfo.systemUptime;
+    NSDictionary *mixedWidthResult = callWidth(module, mixedText, 48, 888, &code);
+    printf("mixed420_v4_candidate_elapsed_ms=%.3f metric_count=%lu full_metric_count=%lu\n",
+      (NSProcessInfo.processInfo.systemUptime - started) * 1000,
+      (unsigned long)[mixedWidthResult[@"metric_count"] unsignedIntegerValue], (unsigned long)[mixedWidthResult[@"full_metric_count"] unsignedIntegerValue]);
+    check(@"mixed420_v4_all_range_bit_parity", code == nil && matchesWidthCandidates(mixedWidthResult, mixedResult, mixedText, 888));
     RCTTextView *uniform = makeView(@"AaAaAaAa", 48);
     [uniform.fixtureStorage addAttributes:@{ NSKernAttributeName:@4, NSBaselineOffsetAttributeName:@3,
       NSFontAttributeName:[UIFont monospacedSystemFontOfSize:48 weight:UIFontWeightRegular] }
@@ -403,6 +512,7 @@ static int runNativeMetricsChecks(void) {
     bridge.uiManager.registry = @{@1:uniform};
     NSDictionary *uniformResult = call(module, YES, uniform.fixtureStorage.string, 48, &code);
     check(@"uniform_complete_attributes_uncached_equivalence", code == nil && matchesUncachedCandidates(uniformResult, uniform));
+    check(@"uniform_complete_attributes_v4_parity", widthParity(module, uniformResult, uniform, 48, 120));
     RCTTextView *variants = makeView(@"AaAaAaAa", 48);
     [variants.fixtureStorage addAttribute:NSKernAttributeName value:@4 range:NSMakeRange(2, 2)];
     [variants.fixtureStorage addAttribute:NSBaselineOffsetAttributeName value:@3 range:NSMakeRange(4, 2)];
@@ -410,6 +520,7 @@ static int runNativeMetricsChecks(void) {
     bridge.uiManager.registry = @{@1:variants};
     NSDictionary *variantResult = call(module, YES, variants.fixtureStorage.string, 48, &code);
     check(@"same_text_different_attributes_uncached_equivalence", code == nil && matchesUncachedCandidates(variantResult, variants));
+    check(@"same_text_different_attributes_v4_parity", widthParity(module, variantResult, variants, 48, 120));
     NSMutableAttributedString *repeatedAttributes = [variants.fixtureStorage mutableCopy];
     [repeatedAttributes appendAttributedString:[variants.fixtureStorage copy]];
     RCTTextView *repeatedView = makeView(repeatedAttributes.string, 48);
@@ -417,6 +528,7 @@ static int runNativeMetricsChecks(void) {
     bridge.uiManager.registry = @{@1:repeatedView};
     NSDictionary *repeatedResult = call(module, YES, repeatedView.fixtureStorage.string, 48, &code);
     check(@"repeated_mixed_attributes_uncached_equivalence", code == nil && matchesUncachedCandidates(repeatedResult, repeatedView));
+    check(@"repeated_mixed_attributes_v4_parity", widthParity(module, repeatedResult, repeatedView, 48, 120));
     NSArray *contextFixtures = @[
       @[@"latin_ligature_context", @"office affinity AV To"],
       @[@"hebrew_context", @"שלום עולם"], @[@"arabic_context", @"مرحبا بالعالم"],
@@ -426,6 +538,7 @@ static int runNativeMetricsChecks(void) {
       RCTTextView *contextView = makeView(fixture[1], 48); bridge.uiManager.registry = @{@1:contextView};
       NSDictionary *contextResult = call(module, YES, fixture[1], 48, &code);
       check([fixture[0] stringByAppendingString:@"_uncached_equivalence"], code == nil && matchesUncachedCandidates(contextResult, contextView));
+      check([fixture[0] stringByAppendingString:@"_v4_all_range_bit_parity"], widthParity(module, contextResult, contextView, 48, 120));
     }
     RCTTextView *paragraphView = makeView(@"fi AV 12 שלום", 48);
     NSMutableParagraphStyle *paragraph = [[paragraphView.fixtureStorage attribute:NSParagraphStyleAttributeName atIndex:0 effectiveRange:NULL] mutableCopy];
@@ -439,6 +552,7 @@ static int runNativeMetricsChecks(void) {
     bridge.uiManager.registry = @{@1:paragraphView};
     NSDictionary *paragraphResult = call(module, YES, paragraphView.fixtureStorage.string, 48, &code);
     check(@"paragraph_direction_attributes_uncached_equivalence", code == nil && matchesUncachedCandidates(paragraphResult, paragraphView));
+    check(@"paragraph_direction_attributes_v4_parity", widthParity(module, paragraphResult, paragraphView, 48, 120));
     // Issue two fonts before either resolves, as the mounted RN lookahead does.
     // Compare each result independently with the original uncached calculation.
     NSString *overlapText = @"考える時間と対話を大切にしながら、自分の言葉で伝えたい。";
@@ -466,6 +580,79 @@ static int runNativeMetricsChecks(void) {
     check(@"queued_two_fonts_complete", bothCompleted && overlapErrors == 0 && firstCode == nil && nextCode == nil);
     check(@"queued_current_font_uncached_equivalence", matchesUncachedCandidates(firstResult, firstView));
     check(@"queued_next_font_uncached_equivalence", matchesUncachedCandidates(nextResult, nextView));
+    // The same overlapping font requests use the explicit width entry, with
+    // independent widths/results and unchanged legacy oracle comparisons.
+    dispatch_semaphore_t widthDone = dispatch_semaphore_create(0);
+    __block NSDictionary *widthFirst = nil, *widthNext = nil;
+    __block NSUInteger widthErrors = 0;
+    RCTPromiseRejectBlock widthReject = ^(__unused NSString *value, __unused NSString *message, __unused NSError *cause) {
+      widthErrors++; dispatch_semaphore_signal(widthDone);
+    };
+    [module measureCandidatesForWidth:@1 text:overlapText fontSize:48 contentWidth:888 resolver:^(id value) {
+      widthFirst = value; dispatch_semaphore_signal(widthDone);
+    } rejecter:widthReject];
+    [nextModule measureCandidatesForWidth:@1 text:overlapText fontSize:44 contentWidth:864 resolver:^(id value) {
+      widthNext = value; dispatch_semaphore_signal(widthDone);
+    } rejecter:widthReject];
+    BOOL widthCompleted = dispatch_semaphore_wait(widthDone, dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC)) == 0;
+    widthCompleted = (dispatch_semaphore_wait(widthDone, dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC)) == 0) && widthCompleted;
+    check(@"queued_v4_fonts_all_range_bit_parity", widthCompleted && widthErrors == 0 &&
+      matchesWidthCandidates(widthFirst, firstResult, overlapText, 888) && matchesWidthCandidates(widthNext, nextResult, overlapText, 864));
+
+    RCTTextView *singleView = makeView(@"A", 48); bridge.uiManager.registry = @{@1:singleView};
+    NSDictionary *singleResult = call(module, YES, @"A", 48, &code);
+    const double advance = [singleResult[@"rows"][0][2] doubleValue];
+    BOOL exactWidths = code == nil && isfinite(advance) && advance > 0 && matchesUncachedCandidates(singleResult, singleView);
+    for (NSNumber *widthValue in @[@(advance), @(nextafter(advance, 0)), @(nextafter(advance, INFINITY))]) {
+      const double width = widthValue.doubleValue;
+      NSDictionary *result = callWidth(module, @"A", 48, width, &code);
+      BOOL current = code == nil && matchesWidthCandidates(result, singleResult, @"A", width) &&
+        [result[@"full_metric_count"] unsignedIntegerValue] == (advance <= width ? 1 : 0);
+      exactWidths = current && exactWidths;
+    }
+    check(@"v4_exact_and_adjacent_double_width_boundaries", exactWidths);
+    BOOL invalidWidths = YES;
+    for (NSNumber *width in @[@0, @(-1), @(NAN), @(INFINITY), @(-INFINITY)]) {
+      NSDictionary *result = callWidth(module, @"A", 48, width.doubleValue, &code);
+      invalidWidths = (result == nil && [code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"]) && invalidWidths;
+    }
+    check(@"v4_invalid_widths_rejected", invalidWidths);
+
+    RCTTextView *pairView = makeView(@"AA", 48); bridge.uiManager.registry = @{@1:pairView};
+    NSDictionary *pairResult = call(module, YES, @"AA", 48, &code);
+    beginWidthProbe();
+    NSDictionary *pairWidthResult = callWidth(module, @"AA", 48, advance, &code);
+    endWidthProbe();
+    const NSUInteger pairUnique = [pairWidthResult[@"metric_count"] unsignedIntegerValue];
+    const NSUInteger pairFull = [pairWidthResult[@"full_metric_count"] unsignedIntegerValue];
+    check(@"v4_all_independent_lines_all_advances_only_full_ink_calls", code == nil &&
+      matchesWidthCandidates(pairWidthResult, pairResult, @"AA", advance) && pairFull > 0 && pairFull < pairUnique &&
+      widthCreates.load() == pairUnique + 1 && widthAdvances.load() == pairUnique && widthImages.load() == pairFull);
+
+    bridge.uiManager.registry = @{@1:singleView};
+    beginWidthProbe(0, YES);
+    NSDictionary *invalidLegacy = call(module, YES, @"A", 48, &code);
+    endWidthProbe();
+    BOOL inkDifference = invalidLegacy == nil && [code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"] && widthImages.load() == 1;
+    beginWidthProbe(0, YES);
+    NSDictionary *invalidFull = callWidth(module, @"A", 48, advance, &code);
+    endWidthProbe();
+    inkDifference = (invalidFull == nil && [code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"] && widthImages.load() == 1) && inkDifference;
+    beginWidthProbe(0, YES);
+    NSDictionary *omittedInk = callWidth(module, @"A", 48, nextafter(advance, 0), &code);
+    endWidthProbe();
+    inkDifference = (code == nil && widthImages.load() == 0 &&
+      matchesWidthCandidates(omittedInk, singleResult, @"A", nextafter(advance, 0))) && inkDifference;
+    check(@"v4_approved_overflow_ink_rejection_difference", inkDifference);
+    BOOL invalidAdvances = YES;
+    for (int fault = 1; fault <= 4; fault++) {
+      beginWidthProbe(fault);
+      NSDictionary *result = callWidth(module, @"A", 48, 1, &code);
+      endWidthProbe();
+      invalidAdvances = (result == nil && [code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"] &&
+        widthAdvances.load() == 1 && widthImages.load() == 0) && invalidAdvances;
+    }
+    check(@"v4_nonfinite_negative_advances_cannot_be_overflow", invalidAdvances);
     printf("NATIVE_CHECKS=%lu PASS=%lu FAIL=%lu SKIP=0\n", (unsigned long)checks,
       (unsigned long)(checks-failures), (unsigned long)failures);
     return failures ? 1 : 0;
