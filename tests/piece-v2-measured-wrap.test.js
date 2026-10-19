@@ -182,3 +182,39 @@ test('evident split combining, ZWJ and surrogate boundaries cannot become accept
     assert.throws(() => plan(input, 0, [{ boundaries, rows }]), unavailable);
   }
 });
+
+
+const v5Profile = 'piece.rn_native_preview.prototype.v5';
+for (const c of fixture.cases) test('explicit v5 keeps the unchanged B9 algorithm for the same synthetic metrics: ' + c.id, () => {
+  const input = { ...copy(c.input), candidateProfile: v5Profile };
+  const measurements = c.measurements.map(table => ({ ...copy(table), version: 'piece.native_candidates.v5' }));
+  const before = JSON.stringify({ input, measurements });
+  assert.deepEqual(copy(plan(input, c.sizeIndex, measurements)), c.expected);
+  assert.equal(JSON.stringify({ input, measurements }), before);
+});
+
+test('v5 binds the new table on both sides and forbids v4 omitted ink', () => {
+  const c = validCase(), input = { ...c.input, candidateProfile: v5Profile };
+  const tables = c.measurements.map(table => ({ ...table, version: 'piece.native_candidates.v5' }));
+  for (const profile of [undefined, 'piece.rn_native_preview.prototype.v3', v4Profile]) {
+    assert.throws(() => plan({ ...input, candidateProfile: profile }, c.sizeIndex, tables), unavailable);
+  }
+  for (const version of [undefined, 'piece.native_candidates.v3', 'piece.native_candidates.v4']) {
+    assert.throws(() => plan(input, c.sizeIndex, tables.map(table => ({ ...table, version }))), unavailable);
+  }
+  const tiny = { candidateProfile: v5Profile, blocks: ['a'], contentWidth: 20, contentHeight: 20,
+    sizes: [10], lineRatio: 1, paragraphRatio: 0 };
+  assert.throws(() => plan(tiny, 0, [{ version: 'piece.native_candidates.v5', boundaries: [0, 1],
+    rows: [[0, 1, 9999, 'width_overflow']] }]), unavailable);
+});
+
+test('v5 search fit and search null are metric-table results, not claims about independent selected lines', () => {
+  const input = { candidateProfile: v5Profile, blocks: ['ab'], contentWidth: 20, contentHeight: 10,
+    sizes: [10], lineRatio: 1, paragraphRatio: 0 };
+  const table = { version: 'piece.native_candidates.v5', boundaries: [0, 1, 2],
+    rows: [[0, 1, 10, 0, -8, 10, 2], [0, 2, 20, 0, -8, 20, 2], [1, 2, 10, 0, -8, 10, 2]] };
+  assert.deepEqual(copy(plan(input, 0, [table])).groups, [['ab']]);
+  const otherContext = { ...table, rows: table.rows.map(row => [row[0], row[1], 21, 0, -8, 21, 2]) };
+  assert.equal(plan(input, 0, [otherContext]), null);
+  assert.deepEqual(copy(plan({ ...input, candidateProfile: undefined }, 0, [{ ...table, version: undefined }])).groups, [['ab']]);
+});

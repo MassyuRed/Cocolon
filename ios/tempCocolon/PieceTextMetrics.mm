@@ -19,8 +19,11 @@
 @interface PieceTextMetrics : NSObject <RCTBridgeModule>
 @property(nonatomic, weak) RCTBridge *bridge;
 - (void)measureCandidateSnapshot:(NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize
-                   boundedWidth:(BOOL)boundedWidth contentWidth:(double)contentWidth deadline:(NSTimeInterval)deadline
+                   boundedWidth:(BOOL)boundedWidth contentWidth:(double)contentWidth exploration:(BOOL)exploration
+                       deadline:(NSTimeInterval)deadline
                        resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject;
+- (void)inspectSnapshot:(NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize
+          selectedLine:(BOOL)selectedLine resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject;
 @end
 
 // One candidate call at a time across every module/card. Its joined workers
@@ -45,7 +48,7 @@ RCT_EXPORT_METHOD(measureCandidates:(nonnull NSNumber *)tag text:(NSString *)exp
                   resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
   const NSTimeInterval deadline = NSProcessInfo.processInfo.systemUptime + 8;
-  [self measureCandidateSnapshot:tag text:expected fontSize:fontSize boundedWidth:NO contentWidth:0
+  [self measureCandidateSnapshot:tag text:expected fontSize:fontSize boundedWidth:NO contentWidth:0 exploration:NO
     deadline:deadline resolver:resolve rejecter:reject];
 }
 
@@ -54,12 +57,23 @@ RCT_EXPORT_METHOD(measureCandidatesForWidth:(nonnull NSNumber *)tag text:(NSStri
                   contentWidth:(double)contentWidth resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
   const NSTimeInterval deadline = NSProcessInfo.processInfo.systemUptime + 8;
-  [self measureCandidateSnapshot:tag text:expected fontSize:fontSize boundedWidth:YES contentWidth:contentWidth
+  [self measureCandidateSnapshot:tag text:expected fontSize:fontSize boundedWidth:YES contentWidth:contentWidth exploration:NO
+    deadline:deadline resolver:resolve rejecter:reject];
+}
+
+// Explicit v5 exploration only. These suffix-context representatives are not
+// independent metrics of every range; selected mounted lines are checked below.
+RCT_EXPORT_METHOD(measureExplorationCandidates:(nonnull NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize
+                  resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+{
+  const NSTimeInterval deadline = NSProcessInfo.processInfo.systemUptime + 8;
+  [self measureCandidateSnapshot:tag text:expected fontSize:fontSize boundedWidth:NO contentWidth:0 exploration:YES
     deadline:deadline resolver:resolve rejecter:reject];
 }
 
 - (void)measureCandidateSnapshot:(NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize
-                   boundedWidth:(BOOL)boundedWidth contentWidth:(double)contentWidth deadline:(NSTimeInterval)deadline
+                   boundedWidth:(BOOL)boundedWidth contentWidth:(double)contentWidth exploration:(BOOL)exploration
+                       deadline:(NSTimeInterval)deadline
                        resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject
 {
   void (^unavailable)(void) = ^{ reject(@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE", @"Text measurement unavailable", nil); };
@@ -128,6 +142,8 @@ RCT_EXPORT_METHOD(measureCandidatesForWidth:(nonnull NSNumber *)tag text:(NSStri
           }
           // Group only exact text/attribute matches before any parallel work.
           // Keep the existing retained-key budget; uncached ranges remain jobs.
+          // In v5, this fixed order/budget also selects the exploration context:
+          // cache hits use the retained first representative; misses use this range.
           struct MetricJob { NSRange range; double values[5]; bool widthOverflow; };
           std::vector<MetricJob> jobs;
           std::vector<NSUInteger> rowJobs;
@@ -197,6 +213,9 @@ RCT_EXPORT_METHOD(measureCandidatesForWidth:(nonnull NSNumber *)tag text:(NSStri
           std::atomic_bool failed(false);
           std::atomic_bool *failure = &failed;
           dispatch_apply(workers, dispatch_get_global_queue(QOS_CLASS_USER_INITIATED, 0), ^(size_t worker) {
+            CTTypesetterRef suffixTypesetter = NULL;
+            CTLineRef explorationLine = NULL;
+            NSUInteger suffixStart = NSNotFound;
             @try {
               NSAttributedString *nativeSnapshot = uniformAttributes ? nil : nativeSnapshots[worker];
               NSMutableAttributedString *part = nil;
@@ -206,30 +225,48 @@ RCT_EXPORT_METHOD(measureCandidatesForWidth:(nonnull NSNumber *)tag text:(NSStri
                   if (failure->load(std::memory_order_relaxed)) return;
                   if (NSProcessInfo.processInfo.systemUptime >= deadline) { failure->store(true, std::memory_order_relaxed); return; }
                   NSRange range = jobData[index].range;
-                  // Jobs with the same start grow in first-occurrence order.
-                  // Append only their new attributed suffix, retaining exactly
-                  // the same full candidate text and pointwise attributes.
-                  // Never share this mutable buffer between workers or mutate
-                  // it until the preceding independent CTLine is released.
-                  BOOL append = part && previous.location == range.location && previous.length < range.length;
-                  NSRange added = append
-                    ? NSMakeRange(NSMaxRange(previous), range.length - previous.length) : range;
-                  NSAttributedString *addition = uniformAttributes
-                    ? [[NSAttributedString alloc] initWithString:[snapshotText substringWithRange:added] attributes:uniformAttributes]
-                    : CFBridgingRelease(CFAttributedStringCreateWithSubstring(NULL,
-                        (__bridge CFAttributedStringRef)nativeSnapshot, CFRangeMake(added.location, added.length)));
-                  if (!addition) { failure->store(true, std::memory_order_relaxed); return; }
-                  if (append) {
-                    CFAttributedStringReplaceAttributedString((__bridge CFMutableAttributedStringRef)part,
-                      CFRangeMake(part.length, 0), (__bridge CFAttributedStringRef)addition);
+                  CTLineRef line = NULL;
+                  if (exploration) {
+                    if (!suffixTypesetter || suffixStart != range.location) {
+                      if (suffixTypesetter) { CFRelease(suffixTypesetter); suffixTypesetter = NULL; }
+                      NSRange suffixRange = NSMakeRange(range.location, snapshot.length - range.location);
+                      NSAttributedString *suffix = uniformAttributes
+                        ? [[NSAttributedString alloc] initWithString:[snapshotText substringWithRange:suffixRange] attributes:uniformAttributes]
+                        : CFBridgingRelease(CFAttributedStringCreateWithSubstring(NULL,
+                            (__bridge CFAttributedStringRef)nativeSnapshot, CFRangeMake(suffixRange.location, suffixRange.length)));
+                      if (!suffix) { failure->store(true, std::memory_order_relaxed); return; }
+                      suffixTypesetter = CTTypesetterCreateWithAttributedString((__bridge CFAttributedStringRef)suffix);
+                      if (!suffixTypesetter) { failure->store(true, std::memory_order_relaxed); return; }
+                      suffixStart = range.location;
+                    }
+                    line = CTTypesetterCreateLine(suffixTypesetter, CFRangeMake(0, range.length));
+                    explorationLine = line;
                   } else {
-                    part = CFBridgingRelease(CFAttributedStringCreateMutableCopy(NULL, 0,
-                      (__bridge CFAttributedStringRef)addition));
+                    // Jobs with the same start grow in first-occurrence order.
+                    // Append only their new attributed suffix, retaining exactly
+                    // the same full candidate text and pointwise attributes.
+                    // Never share this mutable buffer between workers or mutate
+                    // it until the preceding independent CTLine is released.
+                    BOOL append = part && previous.location == range.location && previous.length < range.length;
+                    NSRange added = append
+                      ? NSMakeRange(NSMaxRange(previous), range.length - previous.length) : range;
+                    NSAttributedString *addition = uniformAttributes
+                      ? [[NSAttributedString alloc] initWithString:[snapshotText substringWithRange:added] attributes:uniformAttributes]
+                      : CFBridgingRelease(CFAttributedStringCreateWithSubstring(NULL,
+                          (__bridge CFAttributedStringRef)nativeSnapshot, CFRangeMake(added.location, added.length)));
+                    if (!addition) { failure->store(true, std::memory_order_relaxed); return; }
+                    if (append) {
+                      CFAttributedStringReplaceAttributedString((__bridge CFMutableAttributedStringRef)part,
+                        CFRangeMake(part.length, 0), (__bridge CFAttributedStringRef)addition);
+                    } else {
+                      part = CFBridgingRelease(CFAttributedStringCreateMutableCopy(NULL, 0,
+                        (__bridge CFAttributedStringRef)addition));
+                    }
+                    if (!part || part.length != range.length) { failure->store(true, std::memory_order_relaxed); return; }
+                    previous = range;
+                    // Shaping still starts from the complete standalone candidate.
+                    line = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)part);
                   }
-                  if (!part || part.length != range.length) { failure->store(true, std::memory_order_relaxed); return; }
-                  previous = range;
-                  // Shaping still starts from the complete standalone candidate.
-                  CTLineRef line = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)part);
                   if (!line) { failure->store(true, std::memory_order_relaxed); return; }
                   double advance = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
                   if (boundedWidth) {
@@ -248,8 +285,10 @@ RCT_EXPORT_METHOD(measureCandidatesForWidth:(nonnull NSNumber *)tag text:(NSStri
                   }
                   CGRect ink = CTLineGetImageBounds(line, NULL);
                   CFRelease(line);
+                  explorationLine = NULL;
                   if (CGRectIsNull(ink)) {
-                    if ([part.string rangeOfCharacterFromSet:NSCharacterSet.whitespaceAndNewlineCharacterSet.invertedSet].location != NSNotFound) {
+                    NSString *candidateText = exploration ? [snapshotText substringWithRange:range] : part.string;
+                    if ([candidateText rangeOfCharacterFromSet:NSCharacterSet.whitespaceAndNewlineCharacterSet.invertedSet].location != NSNotFound) {
                       failure->store(true, std::memory_order_relaxed); return;
                     }
                     ink = CGRectZero;
@@ -258,12 +297,23 @@ RCT_EXPORT_METHOD(measureCandidatesForWidth:(nonnull NSNumber *)tag text:(NSStri
                       !isfinite(ink.size.width) || !isfinite(ink.size.height)) {
                     failure->store(true, std::memory_order_relaxed); return;
                   }
+                  if (exploration && advance < 0) {
+                    failure->store(true, std::memory_order_relaxed); return;
+                  }
                   const double metrics[] = {advance, CGRectGetMinX(ink), -CGRectGetMaxY(ink),
                     CGRectGetMaxX(ink), -CGRectGetMinY(ink)};
+                  if (exploration && (!isfinite(metrics[1]) || !isfinite(metrics[2]) || !isfinite(metrics[3]) ||
+                      !isfinite(metrics[4]) || metrics[3] < metrics[1] || metrics[4] < metrics[2])) {
+                    failure->store(true, std::memory_order_relaxed); return;
+                  }
                   memcpy(jobData[index].values, metrics, sizeof(metrics));
                 }
               }
             } @catch (__unused NSException *exception) { failure->store(true, std::memory_order_relaxed); }
+            @finally {
+              if (explorationLine) CFRelease(explorationLine);
+              if (suffixTypesetter) CFRelease(suffixTypesetter);
+            }
           });
           if (failed.load(std::memory_order_relaxed)) { unavailable(); return; }
           std::vector<uint32_t> references;
@@ -309,7 +359,7 @@ RCT_EXPORT_METHOD(measureCandidatesForWidth:(nonnull NSNumber *)tag text:(NSStri
             }
           }
           NSData *metricBytes = [NSData dataWithBytes:metrics.data() length:metrics.size() * sizeof(uint64_t)];
-          resolve(@{ @"version": @"piece.native_candidates.v3", @"platform": @"ios", @"font_size": @(fontSize),
+          resolve(@{ @"version": exploration ? @"piece.native_candidates.v5" : @"piece.native_candidates.v3", @"platform": @"ios", @"font_size": @(fontSize),
             @"utf16_length": @(expected.length), @"boundaries": boundaries,
             @"metric_count": @(jobCount), @"metrics_f64le": [metricBytes base64EncodedStringWithOptions:0],
             @"row_indices_u32le": [referenceBytes base64EncodedStringWithOptions:0], @"glyph_check": @"no_missing_observed" });
@@ -321,6 +371,18 @@ RCT_EXPORT_METHOD(measureCandidatesForWidth:(nonnull NSNumber *)tag text:(NSStri
 
 RCT_EXPORT_METHOD(inspect:(nonnull NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize
                   resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+{
+  [self inspectSnapshot:tag text:expected fontSize:fontSize selectedLine:NO resolver:resolve rejecter:reject];
+}
+
+RCT_EXPORT_METHOD(inspectSelectedLine:(nonnull NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize
+                  resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+{
+  [self inspectSnapshot:tag text:expected fontSize:fontSize selectedLine:YES resolver:resolve rejecter:reject];
+}
+
+- (void)inspectSnapshot:(NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize
+          selectedLine:(BOOL)selectedLine resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject
 {
   void (^unavailable)(void) = ^{ reject(@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE", @"Text measurement unavailable", nil); };
   if (!isfinite(tag.doubleValue) || tag.doubleValue <= 0 || tag.doubleValue != floor(tag.doubleValue) ||
@@ -356,17 +418,20 @@ RCT_EXPORT_METHOD(inspect:(nonnull NSNumber *)tag text:(NSString *)expected font
         if ([layout CGGlyphAtIndex:i] == 0 && !(property & (NSGlyphPropertyNull | NSGlyphPropertyControlCharacter))) valid = NO;
       }
       NSMutableArray *ends = [NSMutableArray new];
+      __block NSData *independentBytes = nil;
       __block NSUInteger previous = 0;
       [layout enumerateLineFragmentsForGlyphRange:all usingBlock:^(CGRect rect, CGRect used, NSTextContainer *c, NSRange glyphs, BOOL *stop) {
         NSRange line = [layout characterRangeForGlyphRange:glyphs actualGlyphRange:NULL];
         if (line.location != previous || line.length == 0 || NSMaxRange(line) > expected.length ||
             [layout truncatedGlyphRangeInLineFragmentForGlyphAtIndex:glyphs.location].location != NSNotFound) { valid = NO; *stop = YES; return; }
+        if (selectedLine && (line.location != 0 || line.length != expected.length)) { valid = NO; *stop = YES; return; }
         previous = NSMaxRange(line); [ends addObject:@(previous)];
         // Inspect the fallback fonts for this exact attributed line as well.
         // This is an absence-of-observed-missing-glyph check, not device acceptance.
         NSAttributedString *attributed = [storage attributedSubstringFromRange:line];
         CTLineRef shaped = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)attributed);
         if (!shaped) { valid = NO; *stop = YES; return; }
+        @try {
         for (id object in (__bridge NSArray *)CTLineGetGlyphRuns(shaped)) {
           CTRunRef run = (__bridge CTRunRef)object;
           CTFontRef font = (CTFontRef)CFDictionaryGetValue(CTRunGetAttributes(run), kCTFontAttributeName);
@@ -375,19 +440,45 @@ RCT_EXPORT_METHOD(inspect:(nonnull NSNumber *)tag text:(NSString *)expected font
           CFIndex count = CTRunGetGlyphCount(run);
           for (CFIndex i = 0; i < count; i++) { CGGlyph glyph; CTRunGetGlyphs(run, CFRangeMake(i, 1), &glyph); if (glyph == 0) valid = NO; }
         }
-        CFRelease(shaped);
+        if (selectedLine && valid) {
+          double advance = CTLineGetTypographicBounds(shaped, NULL, NULL, NULL);
+          CGRect independentInk = CTLineGetImageBounds(shaped, NULL);
+          if (CGRectIsNull(independentInk)) {
+            if ([attributed.string rangeOfCharacterFromSet:NSCharacterSet.whitespaceAndNewlineCharacterSet.invertedSet].location != NSNotFound) valid = NO;
+            independentInk = CGRectZero;
+          }
+          if (!isfinite(advance) || advance < 0 || !isfinite(independentInk.origin.x) || !isfinite(independentInk.origin.y) ||
+              !isfinite(independentInk.size.width) || !isfinite(independentInk.size.height)) valid = NO;
+          if (valid) {
+            const double values[] = {advance, CGRectGetMinX(independentInk), -CGRectGetMaxY(independentInk),
+              CGRectGetMaxX(independentInk), -CGRectGetMinY(independentInk)};
+            for (NSUInteger i = 0; i < 5; i++) if (!isfinite(values[i])) valid = NO;
+            if (values[3] < values[1] || values[4] < values[2]) valid = NO;
+            uint64_t packed[5];
+            for (NSUInteger i = 0; i < 5; i++) {
+              uint64_t bits; memcpy(&bits, &values[i], sizeof(bits)); packed[i] = CFSwapInt64HostToLittle(bits);
+            }
+            if (valid) independentBytes = [NSData dataWithBytes:packed length:sizeof(packed)];
+          }
+        }
+        } @finally { CFRelease(shaped); }
       }];
-      if (!valid || previous != expected.length) { unavailable(); return; }
+      if (!valid || previous != expected.length || (selectedLine && (ends.count != 1 || independentBytes.length != 40))) { unavailable(); return; }
       NSMutableArray *boundaries = [NSMutableArray arrayWithObject:@0];
       [expected enumerateSubstringsInRange:NSMakeRange(0, expected.length) options:NSStringEnumerationByComposedCharacterSequences
         usingBlock:^(NSString *substring, NSRange range, NSRange enclosing, BOOL *stop) { [boundaries addObject:@(NSMaxRange(range))]; }];
       CGRect ink = CGRectOffset([layout boundingRectForGlyphRange:all inTextContainer:container], frame.origin.x, frame.origin.y);
       if (CGRectIsNull(ink) || CGRectIsEmpty(ink) || !isfinite(ink.origin.x) || !isfinite(ink.origin.y) ||
           !isfinite(ink.size.width) || !isfinite(ink.size.height)) { unavailable(); return; }
-      resolve(@{ @"version": @"piece.native_text.v1", @"platform": @"ios", @"font_size": @(fontSize),
+      NSDictionary *result = @{ @"version": selectedLine ? @"piece.native_selected_line.v1" : @"piece.native_text.v1", @"platform": @"ios", @"font_size": @(fontSize),
         @"width": @(view.bounds.size.width), @"height": @(view.bounds.size.height), @"utf16_length": @(expected.length),
         @"boundaries": boundaries, @"line_ends": ends, @"ink": @[@(CGRectGetMinX(ink)), @(CGRectGetMinY(ink)), @(CGRectGetMaxX(ink)), @(CGRectGetMaxY(ink))],
-        @"glyph_check": @"no_missing_observed" });
+        @"glyph_check": @"no_missing_observed" };
+      if (selectedLine) {
+        NSMutableDictionary *selected = [result mutableCopy];
+        selected[@"independent_metrics_f64le"] = [independentBytes base64EncodedStringWithOptions:0];
+        resolve(selected);
+      } else resolve(result);
     } @catch (__unused NSException *exception) { unavailable(); }
   }];
 }

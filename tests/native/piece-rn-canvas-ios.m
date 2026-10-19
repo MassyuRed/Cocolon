@@ -97,6 +97,39 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
   return [[NSBundle mainBundle] URLForResource:@"piece-canvas" withExtension:@"jsbundle"];
 }
 - (NSArray<id<RCTBridgeModule>> *)extraModulesForBridge:(RCTBridge *)bridge { return @[self.resultModule]; }
+- (void)assertV5Report:(NSDictionary *)report {
+  XCTAssertEqualObjects(report[@"candidate_profile"], @"piece.rn_native_preview.prototype.v5");
+  NSArray *rows = report[@"rows"], *inspection = report[@"inspection"];
+  BOOL branding = [report[@"branding"] boolValue];
+  XCTAssertEqual(inspection.count, rows.count + (branding ? 1 : 0), @"%@", report[@"name"]);
+  XCTAssertGreaterThan([report[@"plan_line_height"] doubleValue], 0);
+  for (NSUInteger index = 0; index < inspection.count; index++) {
+    NSDictionary *item = inspection[index]; NSArray *metric = item[@"independentMetrics"];
+    XCTAssertEqualObjects(item[@"version"], @"piece.native_selected_line.v1");
+    XCTAssertEqualObjects(item[@"platform"], @"ios");
+    XCTAssertEqualObjects(item[@"glyphCheck"], @"no_missing_observed");
+    XCTAssertEqualObjects(item[@"fontSize"], index < rows.count ? report[@"font_size"] : @28);
+    XCTAssertFalse([item[@"overflow"] boolValue]); XCTAssertFalse([item[@"wrapViolation"] boolValue]);
+    XCTAssertEqual(metric.count, 5);
+    BOOL finiteMetrics = metric.count == 5;
+    for (id value in metric) finiteMetrics = [value isKindOfClass:NSNumber.class] && isfinite([value doubleValue]) && finiteMetrics;
+    XCTAssertTrue(finiteMetrics, @"%@", report[@"name"]);
+    if (!finiteMetrics) continue;
+    double advance = [metric[0] doubleValue], left = [metric[1] doubleValue], top = [metric[2] doubleValue],
+      right = [metric[3] doubleValue], bottom = [metric[4] doubleValue];
+    XCTAssertGreaterThanOrEqual(advance, 0); XCTAssertGreaterThanOrEqual(right, left); XCTAssertGreaterThanOrEqual(bottom, top);
+    XCTAssertLessThanOrEqual(fmax(advance, right) - fmin(0, left), [report[@"content_width"] doubleValue]);
+    XCTAssertLessThanOrEqual(bottom - top, index < rows.count ? [report[@"plan_line_height"] doubleValue] : 40);
+  }
+  BOOL observedCandidate = NO;
+  for (NSDictionary *adapter in report[@"trace"][@"adapters"]) {
+    if ([adapter[@"status"] isEqual:@"resolved"] && [adapter[@"font_size"] isEqual:report[@"font_size"]] &&
+        [adapter[@"candidate_profile"] isEqual:@"piece.rn_native_preview.prototype.v5"] &&
+        [adapter[@"version"] isEqual:@"piece.native_candidates.v5"]) observedCandidate = YES;
+  }
+  XCTAssertTrue(observedCandidate, @"%@", report[@"name"]);
+  XCTAssertNotNil(report[@"png"], @"%@", report[@"name"]);
+}
 - (void)testWholeCanvasWithRealReactNative {
   self.resultModule = [PieceCanvasTest new]; self.resultModule.reports = [NSMutableArray new];
   XCTestExpectation *done = [self expectationWithDescription:@"Piece React Native canvas cases"];
@@ -107,8 +140,19 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
   window.rootViewController.view = root;
   [window makeKeyAndVisible];
   [self waitForExpectations:@[done] timeout:90];
-  XCTAssertEqual(self.resultModule.reports.count, 5);
-  for (NSDictionary *report in self.resultModule.reports) {
+  NSArray *baselineNames = @[@"essay_paragraphs", @"quote_unicode", @"declaration_no_brand", @"essay_max420", @"saved_essay_canvas"];
+  NSArray *supplementalNames = @[@"suffix_latin_ligature", @"suffix_arabic", @"suffix_max420_a"];
+  NSArray *rawNames = @[@"suffix_spaces_raw", @"suffix_hebrew_raw", @"suffix_mixed_bidi_raw"];
+  NSArray *baseline = [self.resultModule.reports filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"evidence_set == %@", @"baseline_card"]];
+  NSArray *supplemental = [self.resultModule.reports filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"evidence_set == %@", @"supplemental_card"]];
+  NSArray *raw = [self.resultModule.reports filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"evidence_set == %@", @"raw_text_diagnostic"]];
+  XCTAssertEqual(self.resultModule.reports.count, 11);
+  XCTAssertEqualObjects([self.resultModule.reports valueForKey:@"name"], [[baselineNames arrayByAddingObjectsFromArray:supplementalNames] arrayByAddingObjectsFromArray:rawNames]);
+  XCTAssertEqual(baseline.count, 5); XCTAssertEqualObjects([baseline valueForKey:@"name"], baselineNames);
+  XCTAssertEqual(supplemental.count, 3); XCTAssertEqualObjects([supplemental valueForKey:@"name"], supplementalNames);
+  XCTAssertEqual(raw.count, 3); XCTAssertEqualObjects([raw valueForKey:@"name"], rawNames);
+  // Preserve every original acceptance assertion for the original five.
+  for (NSDictionary *report in baseline) {
     XCTAssertEqualObjects(report[@"phase"], @"native_checked", @"%@", report);
     XCTAssertTrue([report[@"body_preserved"] boolValue], @"%@", report[@"name"]);
     XCTAssertTrue([report[@"native_canvas_valid"] boolValue], @"%@", report);
@@ -120,12 +164,46 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     XCTAssertEqualObjects(report[@"save_fit_current"], @(preview), @"%@", report[@"name"]);
     XCTAssertEqualObjects(report[@"save_fit_wrong_token_current"], @NO, @"%@", report[@"name"]);
     XCTAssertEqualObjects(report[@"save_fit_handle_keys"], preview ? @[@"isCurrent"] : @[], @"%@", report[@"name"]);
+    if (preview) [self assertV5Report:report];
+    XCTAssertNotNil(report[@"png"]);
     if (report[@"png"]) {
       UIImage *image = [UIImage imageWithContentsOfFile:[PieceEvidenceDirectory() stringByAppendingPathComponent:report[@"png"]]];
       XCTAssertNotNil(image);
       XCTAttachment *attachment = [XCTAttachment attachmentWithImage:image];
       attachment.name = report[@"name"]; attachment.lifetime = XCTAttachmentLifetimeKeepAlways;
       [self addAttachment:attachment];
+    }
+  }
+  for (NSDictionary *report in supplemental) {
+    XCTAssertEqualObjects(report[@"phase"], @"native_checked", @"%@", report);
+    XCTAssertTrue([report[@"body_preserved"] boolValue], @"%@", report[@"name"]);
+    XCTAssertTrue([report[@"native_canvas_valid"] boolValue], @"%@", report);
+    XCTAssertFalse([report[@"capture_error"] boolValue]);
+    XCTAssertLessThan([report[@"elapsed_ms"] doubleValue], 8000, @"%@", report[@"name"]);
+    XCTAssertEqualObjects(report[@"state_can_save"], @NO); XCTAssertEqualObjects(report[@"state_can_export"], @NO);
+    XCTAssertEqualObjects(report[@"save_fit_current"], @YES);
+    XCTAssertEqualObjects(report[@"save_fit_wrong_token_current"], @NO);
+    XCTAssertEqualObjects(report[@"save_fit_handle_keys"], @[@"isCurrent"]);
+    [self assertV5Report:report];
+  }
+  for (NSDictionary *report in raw) {
+    XCTAssertEqualObjects(report[@"phase"], @"measurement_checked", @"%@", report);
+    XCTAssertEqualObjects(report[@"diagnostic_only"], @YES); XCTAssertEqualObjects(report[@"diagnostic_valid"], @YES);
+    XCTAssertEqualObjects(report[@"same_selected_text_node"], @YES);
+    XCTAssertTrue([report[@"body_preserved"] boolValue]); XCTAssertTrue([report[@"native_canvas_valid"] boolValue]);
+    XCTAssertFalse([report[@"capture_error"] boolValue]);
+    XCTAssertLessThan([report[@"elapsed_ms"] doubleValue], 8000, @"%@", report[@"name"]);
+    XCTAssertEqualObjects(report[@"plan_groups"], @[report[@"rows"]]);
+    XCTAssertEqual([report[@"on_text_layout"] count], 1);
+    XCTAssertNil(report[@"save_fit_current"]); XCTAssertNil(report[@"state_can_save"]); XCTAssertNil(report[@"state_can_export"]);
+    [self assertV5Report:report];
+  }
+  for (NSDictionary *report in [supplemental arrayByAddingObjectsFromArray:raw]) {
+    if (report[@"png"]) {
+      UIImage *image = [UIImage imageWithContentsOfFile:[PieceEvidenceDirectory() stringByAppendingPathComponent:report[@"png"]]];
+      XCTAssertNotNil(image);
+      if (image) { XCTAttachment *attachment = [XCTAttachment attachmentWithImage:image];
+        attachment.name = report[@"name"]; attachment.lifetime = XCTAttachmentLifetimeKeepAlways; [self addAttachment:attachment]; }
     }
   }
   [bridge invalidate];

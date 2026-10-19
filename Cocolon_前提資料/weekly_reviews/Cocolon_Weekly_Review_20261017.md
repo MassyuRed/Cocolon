@@ -632,6 +632,14 @@ P-W1の計測・provider・検査は、利用者が保存して開き直せる�
 
 今回の成果はBLOCKER_NARROWEDで、P-W1／P-W2／P-W3の完成数・全体評価を増やしません。既存入口・manifest・Piece map・本週次記録の4文書に調査と候補を反映し、製品／test／workflow・DB／配置／配布は変更していません。方式は未決定なので10/22保存・10/23共有は引き続き条件付きの目標です。10/20に方式判断が閉じなければ、§5.6.2に従い同時に見通しを更新します。次の判断はv5の限定実装・一度の新source検証の可否で、終了済みv4の再承認ではありません。
 
+#### 5.6.5 10/19の承認済みv5実装 — 一度の実RN結果待ち
+
+Mashは入口§76.3〜76.5の差と停止条件を含むiOS preview v5の実装・限定検証を明示承認しました。華恋／GPT-6 Astra Proが唯一の編集・実行・GitHub反映担当として、既存native／renderer／B9／Card／layoutの5ownerへ実装。旧版を保持し、v5の探索用suffix代表値と、実mountした選択行の独立寸法＋TextKit検査を別版で接続しました。改行／font／fitが旧版と変わり得る差を記録し、正式採用・保存許可とは分けます。
+
+local既存13 JS suiteは880 passed、fail／skip0。旧839と固定B9期待値を保持した新41判定を含む同じ集合で、CIとの加算はしません。元RN5入力はpreview版以外の本文／recipe／順序／saved v3が完全一致。native旧97に新32を追加した期待129と、実RNの元Card5＋追加Card3＋本文下限未満のraw診断3を既存harnessで別集計します。rawはPiece response／Card local fitの証拠へ数えず、旧混font属性も原条件での製品拒否を維持します。
+
+ここまでのcreditはSOURCE_IMPLEMENTED／LOCAL_JS_VERIFIEDで、実RN・完成PNGは未確認です。新sourceの既存CI1runで元420入力が8秒内にnative_checked／全inspection／同token fitへ到達し、その同状態のPNGを確認できるかを判断します。未達・明白な崩れ・現在mountへの束縛不成立ならv5未採用で終了し、期限延長・同source再実行・候補削減・本文変更へ進めません。詳細ownerは入口§77／current map §65.25。変更は製品5＋検査6＋workflow1＋文書4の16path、API／DB／flags／env／deploy／署名／配布／main merge効果0。P-W1の正式supplier・同採用版saved再表示・candidate稼働・通常保存→同owner再表示は未完了で、P-W2／P-W3と10/20方式判断・10/31管理線・12/18目標の再評価は今回行いません。
+
 ## 6. 議題6 — 今回の指摘に対する判断と、記録の責任
 
 ### 6.1 問題は反省文の不足ではない

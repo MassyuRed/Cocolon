@@ -16,6 +16,10 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**最新は入口§77／本map §65.25／weekly20261017 §5.6.5です。Mash承認に基づくiOS preview v5を既存5ownerへ実装し、local JS880 passed。新sourceの既存CI・一度の実RNと完成PNGはこれから確認します。正式採用・通常保存は未成立です。**
+
+### §76時点の要約（履歴）
+
 **最新の調査・未承認候補は入口§76／本map §65.24です。現source b4467a77のv4は420文字timeoutで未採用のまま。候補探索だけをsuffix文脈の代表値とし、採用行は実際にmountしたTextの独立寸法とTextKitで確認する明示iOS preview v5を具体化しました。改行・font・fitの選択が変わり得る契約差を含むため、実装・限定検証はMash判断前で未実行です。正式isSaveAdmittedのInputScreen供給、採用版のsaved再表示、candidate稼働、通常保存→同owner再表示がP-W1に残ります。今回の製品構造変更0、既存4文書の調査・候補記録です。**
 
 ### §75時点の要約（履歴）
@@ -2806,3 +2810,19 @@ v5候補はpiece.rn_native_preview.prototype.v5／piece.native_candidates.v5／p
 
 今回source変更・test実行・DB書込・業務RPC・flag／env／deploy／署名・配布・main merge効果0。Supabase確認はmigration履歴の全10件・Piece6件までで、再適用・実稼働確認ではありません。正式supplier、同採用版saved再表示、candidate稼働、通常保存、P-W2／P-W3の残件を保持します。Rule18 §0(4)／§11.3に従い、新契約の実装前で判断を求め、v4承認の再取得やSTOP解除へ置き換えません。
 
+
+### 65.25 承認されたiOS preview v5の探索と選択行検査 — source実装
+
+STRUCTURE_MAP_DELTA_PRESENT。新しい製品file／公開HTTP DTO／DBは追加せず、既存5owner内のpreview版・native method・検査責任を更新しました。開始head9d9f0b7d17b988bd5f1c64431edf88681df917f7、API a536e50ee284785f585ac73329ef2947dca8bba9。承認・境界・全検査集合・停止条件のownerは入口§77、P-W1記録はweekly §5.6.5です。
+
+| 現owner | 今回追加した責任 |
+|---|---|
+| ios/tempCocolon/PieceTextMetrics.mm | measureExplorationCandidatesは完全text／点属性・列挙・保持予算を固定したsuffix代表全5値をv5 exact9で返す。inspectSelectedLineは実Textの既存独立CTLineから5値を再利用取得し、TextKitと合わせたexact11を返す |
+| features/piece/pieceRenderer.js | v5候補、新選択行inspection exact40byteの厳密decoder。旧版との相互混入・無効値・複数lineを拒否。独立寸法とTextKit座標を区別 |
+| features/piece/pieceMeasuredWrap.js | 新tableとpreview v5を双方向に一致させる。既存B9の式・順序・25case期待値を保持。v5の探索nullはこの文脈tableの結果であり独立行の不可能性ではない |
+| components/piece/PieceVisualCard.js | v5だけ新methodを使い、全採用行のstrict幅／高さ・branding40・同mount束縛を検査。位置は従来TextKit値。geometry超過のみ次の既定font、無効値は全画像不可。元8秒・同font再planなし |
+| features/piece/pieceLayout.js | preview v5をiOSだけに分離。保存済みv5／export v5／Android v5を拒否。旧v3／v4経路を保持 |
+
+検査は既存6fileと既存workflowに追加。local JS880 passed、旧test本文・独立oracle・元RN5入力の保護を原文比較しました。nativeは旧97＋新32の期待129、実RNは元Card5＋追加Card3＋raw3を別分母とし、CI実行・PNGは未確認です。rawの下限未満入力を保存可能なPieceへ装わず、nativeの混font旧属性も原条件では拒否を維持します。予算検査の2件は短い実CTLineによる参照検査で、描画・速度の成功に数えません。
+
+v5は改行・font・fitが変わり得る承認済み候補であり、正式採用は未成立です。§76.5の元8秒・同状態PNG・既存成功入力／旧差分入力の品質・現在mountへの束縛で一度だけ判断します。P-W1の正式supplier、同採用版saved再表示、candidate稼働、通常初回保存→同owner再表示、P-W2／P-W3は残件。既存保存回収・Piece6migrationの再実装／再適用は行いません。

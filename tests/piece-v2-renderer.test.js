@@ -44,6 +44,19 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
       const result = widthCandidates(candidateTable(text, fontSize), contentWidth);
       candidateCalls.push({ tag, text, fontSize, contentWidth, method: 'measureCandidatesForWidth' });
       return nativeCandidates ? nativeCandidates(result, candidateCalls.length) : result;
+    }, measureExplorationCandidates: async (tag, text, fontSize) => {
+      const result = explorationCandidates(candidateTable(text, fontSize));
+      candidateCalls.push({ tag, text, fontSize, method: 'measureExplorationCandidates' });
+      return nativeCandidates ? nativeCandidates(result, candidateCalls.length) : result;
+    }, inspectSelectedLine: async (tag, text, fontSize) => {
+      nativeCalls.push({ tag, text, fontSize, method: 'inspectSelectedLine' });
+      const block = card.state.measurement.blocks[tag - 1];
+      const result = { version: 'piece.native_selected_line.v1', platform: 'ios', font_size: fontSize,
+        width: block.box.width, height: block.box.height, utf16_length: text.length,
+        boundaries: [0, ...[...new Intl.Segmenter('ja', { granularity: 'grapheme' }).segment(text)].map(s => s.index + s.segment.length)],
+        line_ends: block.lines.map(l => l.end), ink: [0, 0, block.box.width - 1, block.box.height], glyph_check: 'no_missing_observed',
+        independent_metrics_f64le: selectedBytes([block.lines[0].width, 0, -fontSize * .8, block.lines[0].width, fontSize * .2]) };
+      return nativeInspect ? nativeInspect(result, nativeCalls.length) : result;
     }, inspect: async (tag, text, fontSize) => {
       nativeCalls.push({ tag, text, fontSize });
       const block = card.state.measurement.blocks[tag - 1];
@@ -60,8 +73,8 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
     ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'readPieceOwnerSnapshot']],
     ['features/piece/piecePreviewModel.js', ['readPiecePreviewDisplay', 'verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay']],
-    ['features/piece/pieceLayout.js', ['PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
-    ['features/piece/pieceRenderer.js', ['inspectPieceText', 'readPieceTextInspection', 'measurePieceCandidates']],
+    ['features/piece/pieceLayout.js', ['PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
+    ['features/piece/pieceRenderer.js', ['inspectPieceText', 'readPieceTextInspection', 'inspectPieceSelectedLine', 'readPieceSelectedLineInspection', 'measurePieceCandidates']],
     ['features/piece/pieceMeasuredWrap.js', ['planPieceMeasuredRows']],
     ['components/piece/PieceVisualCard.js', ['PieceVisualCard']],
   ];
@@ -1210,4 +1223,232 @@ test('export canvas measures at fixed size and exposes only a current saved inne
   assert.equal(h.card.getCaptureTarget(), null);
   const preview = await harness(); await finish(preview);
   assert.equal(preview.card.getCaptureTarget(), null);
+});
+
+
+// v5 keeps the old cases above unchanged. Synthetic bridge data only; the
+// native/UIKit and actual React Native cases establish separate evidence.
+const v5Profile = 'piece.rn_native_preview.prototype.v5';
+const v5Options = () => ({ candidateProfile: v5Profile });
+const v5Sample = () => ({ ...sample(), renderer_version: v5Profile });
+function explorationCandidates(table) { return { ...indexedCandidates(table), version: 'piece.native_candidates.v5' }; }
+function selectedBytes(values) {
+  const bytes = Buffer.alloc(values.length * 8);
+  values.forEach((value, index) => bytes.writeDoubleLE(value, index * 8));
+  return bytes.toString('base64');
+}
+const selectedExpected = () => ({ text: 'ab', fontSize: 48, box: { width: 888, height: 75 }, lineEnds: [2], platform: 'ios' });
+const selectedWire = () => ({ version: 'piece.native_selected_line.v1', platform: 'ios', font_size: 48,
+  width: 888, height: 75, utf16_length: 2, boundaries: [0, 1, 2], line_ends: [2], ink: [0, 0, 20, 40],
+  glyph_check: 'no_missing_observed', independent_metrics_f64le: selectedBytes([20, -0, -40, 20, 10]) });
+const nextDouble = value => { const bytes = Buffer.alloc(8); bytes.writeDoubleLE(value);
+  bytes.writeBigUInt64LE(bytes.readBigUInt64LE() + 1n); return bytes.readDoubleLE(); };
+
+test('v5 full indexed transport preserves all ranges and all five double bits with an explicit version', async () => {
+  const h = rawHarness(); let expected;
+  h.NativeModules.PieceTextMetrics.measureExplorationCandidates = async (tag, text, font) => {
+    expected = candidateTable(text, font);
+    expected.rows.forEach(row => row.splice(2, 5, Math.PI * (row[1] - row[0]), -0, -Number.MIN_VALUE,
+      Math.PI * (row[1] - row[0]), Number.MIN_VALUE));
+    return explorationCandidates(expected);
+  };
+  for (const text of ['a', 'ab', 'abc', 'abcd', 'が👩‍👩‍👧‍👦']) {
+    const actual = await h.measurePieceCandidates({ tag: 1 }, text, 48, v5Options());
+    assert.equal(actual.version, 'piece.native_candidates.v5'); assert.equal(actual.contentWidth, undefined);
+    assert.deepEqual(copy(actual.boundaries), expected.boundaries); assert.equal(actual.rows.length, expected.rows.length);
+    actual.rows.forEach((row, i) => row.forEach((value, j) => assert.ok(Object.is(value, expected.rows[i][j]))));
+  }
+});
+
+test('v5 requires its exact iOS options and separate method, with no legacy or width fallback', async () => {
+  const h = rawHarness();
+  for (const options of [{ ...v5Options(), contentWidth: 888 }, { ...v5Options(), extra: true }]) {
+    await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'a', 48, options), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+  }
+  h.Platform.OS = 'android';
+  await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'a', 48, v5Options()), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+  h.Platform.OS = 'ios'; delete h.NativeModules.PieceTextMetrics.measureExplorationCandidates;
+  await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'a', 48, v5Options()), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+  assert.equal(h.candidateCalls.length, 0);
+  for (const old of [candidateTable('a', 48), packedCandidates(candidateTable('a', 48)), indexedCandidates(candidateTable('a', 48)), widthCandidates(candidateTable('a', 48), 888)]) {
+    h.NativeModules.PieceTextMetrics.measureExplorationCandidates = async () => old;
+    await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'a', 48, v5Options()), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+  }
+  const wire = explorationCandidates(candidateTable('a', 48));
+  h.NativeModules.PieceTextMetrics.measureCandidates = async () => wire;
+  h.NativeModules.PieceTextMetrics.measureCandidatesForWidth = async () => wire;
+  await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'a', 48), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+  await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'a', 48, v4Options(888)), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+});
+
+test('v5 rejects broken exact9 records and references before B9', async () => {
+  for (const mutate of [r => ({ ...r, content_width: 888 }), r => ({ ...r, platform: 'android' }),
+    r => ({ ...r, metric_count: 0 }), r => ({ ...r, metric_count: 1.5 }), r => ({ ...r, metric_count: 4 }),
+    r => ({ ...r, metrics_f64le: r.metrics_f64le.slice(4) }), r => ({ ...r, metrics_f64le: r.metrics_f64le + 'AAAA' }),
+    r => ({ ...r, metrics_f64le: '!' + r.metrics_f64le.slice(1) }),
+    r => ({ ...r, row_indices_u32le: Buffer.alloc(12).toString('base64') }),
+    r => ({ ...r, row_indices_u32le: Buffer.alloc(12, 255).toString('base64') }),
+    r => ({ ...r, row_indices_u32le: r.row_indices_u32le.slice(4) }),
+    r => { delete r.metrics_f64le; return r; }]) {
+    const h = rawHarness(undefined, undefined, false, mutate);
+    await assert.rejects(() => h.measurePieceCandidates({ tag: 1 }, 'ab', 48, v5Options()), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+  }
+});
+
+test('v5 rejects nonfinite or reversed metrics even in an unselected range; search failure is not impossibility', async () => {
+  for (const [slot, value] of [[0, -1], [1, NaN], [2, Infinity], [3, -1], [4, -100]]) {
+    const h = await harness(v5Sample(), undefined, false, wire => {
+      const bytes = Buffer.from(wire.metrics_f64le, 'base64'); bytes.writeDoubleLE(value, slot * 8);
+      return { ...wire, metrics_f64le: bytes.toString('base64') };
+    });
+    assert.equal(h.card.state.measurement.reason, 'native_candidates_unavailable'); assert.equal(h.nativeCalls.length, 0);
+  }
+  const h = rawHarness(v5Sample(), undefined, false, wire => {
+    const table = candidateTable('x'.repeat(wire.utf16_length), wire.font_size);
+    table.rows.forEach(row => { row[2] = row[5] = 9999; }); return explorationCandidates(table);
+  });
+  for (let i = 0; i < 4; i++) await prepare(h);
+  assert.equal(h.card.state.measurement.reason, 'layout_search_unavailable'); assert.equal(h.nativeCalls.length, 0);
+  assert.deepEqual([...new Set(h.candidateCalls.map(call => call.fontSize))], [48, 44, 40, 36]);
+});
+
+test('v5 selected-line reader preserves independent bits and TextKit coordinates separately', () => {
+  const h = rawHarness(), expected = selectedExpected();
+  const metrics = [Math.PI, -0, -Number.MIN_VALUE, Math.PI, Number.MIN_VALUE];
+  const actual = h.readPieceSelectedLineInspection({ ...selectedWire(), independent_metrics_f64le: selectedBytes(metrics) }, expected);
+  assert.deepEqual(copy(actual.ink), [0, 0, 20, 40]); assert.equal(actual.version, 'piece.native_selected_line.v1');
+  actual.independentMetrics.forEach((value, index) => assert.ok(Object.is(value, metrics[index])));
+  assert.ok(Object.isFrozen(actual) && Object.isFrozen(actual.independentMetrics));
+});
+
+test('v5 selected-line reader rejects wrong versions, fields, line identity, byte length and noncanonical base64', () => {
+  const h = rawHarness(), expected = selectedExpected();
+  for (const mutate of [r => ({ ...r, version: 'piece.native_text.v1' }), r => ({ ...r, extra: true }),
+    r => ({ ...r, platform: 'android' }), r => ({ ...r, line_ends: [1, 2] }), r => ({ ...r, line_ends: [1] }),
+    r => ({ ...r, glyph_check: 'unknown' }), r => ({ ...r, utf16_length: 3 }),
+    r => ({ ...r, boundaries: [0, 0, 2] }), r => { delete r.independent_metrics_f64le; return r; },
+    ...[39, 41, 80].map(length => r => ({ ...r, independent_metrics_f64le: Buffer.alloc(length).toString('base64') })),
+    r => ({ ...r, independent_metrics_f64le: r.independent_metrics_f64le.slice(0, -3) + 'B==' }),
+    ...['=', '!', '\u0080', '\ud800'].map(char => r => ({ ...r, independent_metrics_f64le: char + r.independent_metrics_f64le.slice(1) }))]) {
+    assert.throws(() => h.readPieceSelectedLineInspection(mutate(selectedWire()), expected), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+  }
+  for (const changed of [{ ...expected, platform: 'android' }, { ...expected, lineEnds: [1, 2] }]) {
+    assert.throws(() => h.readPieceSelectedLineInspection(selectedWire(), changed), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+  }
+  assert.throws(() => h.readPieceTextInspection(selectedWire(), expected), /PIECE_NATIVE_MEASUREMENT_UNAVAILABLE/);
+});
+
+test('v5 invalid independent metrics or bridge failure makes the whole image unavailable without trying a smaller font', async () => {
+  const invalid = [];
+  for (let index = 0; index < 5; index++) for (const value of [NaN, Infinity, -Infinity]) {
+    const values = [20, 0, -40, 20, 10]; values[index] = value; invalid.push(values);
+  }
+  invalid.push([-1, 0, -40, 20, 10], [20, 21, -40, 20, 10], [20, 0, 11, 20, 10]);
+  for (const values of invalid) {
+    const h = await harness(v5Sample(), result => ({ ...result, independent_metrics_f64le: selectedBytes(values) }));
+    await finish(h);
+    assert.equal(h.card.state.measurement.reason, 'native_measurement_unavailable');
+    assert.equal(h.card.state.measurement.sizeIndex, 0); assert.equal(h.card.saveFit, null);
+  }
+  const h = await harness(v5Sample()); delete h.NativeModules.PieceTextMetrics.inspectSelectedLine;
+  await finish(h); assert.equal(h.card.state.measurement.reason, 'native_measurement_unavailable');
+  assert.equal(h.nativeCalls.length, 0);
+});
+
+test('v5 exploration fit followed by valid independent overflow advances once to the next catalog font', async () => {
+  for (const values of [[nextDouble(888), 0, -40, 888, 10], [888, -Number.EPSILON * 888, -40, 888, 10],
+    [20, 0, 0, 20, nextDouble(75)]]) {
+    const h = fitHarness({ version: v5Profile, inspect: result => result.font_size === 48
+      ? { ...result, independent_metrics_f64le: selectedBytes(values) } : result });
+    await finish(h); const deadline = h.card.deadline;
+    assert.equal(h.card.state.measurement.sizeIndex, 1); assert.equal(h.card.state.measurement.phase, 'planning');
+    assert.equal(h.fit(), undefined);
+    assert.equal(h.candidateCalls.filter(call => call.fontSize === 48).length, h.input().blocks.length);
+    assert.equal(h.card.deadline, deadline);
+    await finish(h); assert.equal(h.card.state.measurement.phase, 'native_checked'); assert.equal(h.card.deadline, null);
+    assert.equal(h.fit().isCurrent(h.card.props.display.preview, h.token), true);
+    assert.equal(h.card.state.measurement.canSave, false); assert.equal(h.card.state.measurement.canExport, false);
+    assert.ok(h.candidateCalls.every(call => call.method === 'measureExplorationCandidates' && call.contentWidth === undefined));
+  }
+});
+
+test('v5 permits exact independent width and height but keeps branding at its own 40 point limit', async () => {
+  const exact = await harness(v5Sample(), result => ({ ...result, independent_metrics_f64le: selectedBytes(
+    [888, 0, 0, 888, result.font_size === 28 ? 40 : 75]) }));
+  await finish(exact); assert.equal(exact.card.state.measurement.phase, 'native_checked');
+  const brand = await harness(v5Sample(), result => result.font_size === 28
+    ? { ...result, independent_metrics_f64le: selectedBytes([100, 0, 0, 100, nextDouble(40)]) } : result);
+  await finish(brand); assert.equal(brand.card.state.measurement.sizeIndex, 1);
+  assert.equal(brand.card.state.measurement.phase, 'planning');
+});
+
+test('v5 positions with TextKit ink and onTextLayout width, never independent baseline coordinates', async () => {
+  const h = await harness(v5Sample(), result => result.font_size === 28 ? result : ({ ...result,
+    ink: [5, 12, 500, 52], independent_metrics_f64le: selectedBytes([500, -7, -40, 490, 10]) }));
+  for (let i = 0; i < h.drawing().blocks.length; i++) sendBlock(h, i, { lines: [{ text: h.drawing().blocks[i], x: 0, y: 0, width: 500, height: 75 }] });
+  sendBlock(h, h.drawing().blocks.length, { height: 40 }); await new Promise(resolve => setImmediate(resolve));
+  assert.equal(h.card.state.measurement.phase, 'native_checked');
+  assert.deepEqual(copy(h.card.state.measurement.rowOffsets[0]), { x: 0, y: 5.5, width: 500, height: 40 });
+  const clipped = await harness(v5Sample(), result => ({ ...result, ink: [-1, 0, 100, 30] }));
+  await finish(clipped); assert.equal(clipped.card.state.measurement.sizeIndex, 1);
+});
+
+test('v5 stays iOS preview only and local fit is bound to the same version, token and mounted nodes', async () => {
+  const h = fitHarness({ version: v5Profile }); await finish(h);
+  assert.equal(h.card.state.measurement.phase, 'native_checked');
+  assert.ok(h.nativeCalls.every(call => call.method === 'inspectSelectedLine'));
+  const packet = h.card.props.display.preview, handle = h.fit();
+  assert.equal(handle.isCurrent(packet, h.token), true); assert.equal(handle.isCurrent(packet, {}), false);
+  assert.equal(h.preparePieceNativeCard({ display: display(packet), exportCanvas: true }), null);
+  assert.equal(h.preparePieceNativeSavedDisplay({ ...savedSample(), renderer_version: v5Profile }), null);
+  h.Platform.OS = 'android'; assert.equal(h.preparePieceNativePreview(display(packet)), null); h.Platform.OS = 'ios';
+  h.card.props = { ...h.card.props, display: { ...h.card.props.display, preview: { ...packet, renderer_version: v4Profile } } };
+  h.card.setState(h.PieceVisualCard.getDerivedStateFromProps(h.card.props, h.card.state));
+  assert.equal(handle.isCurrent(packet, h.token), false); assert.equal(h.fit(), undefined);
+  await finish(h); assert.equal(h.card.state.measurement.phase, 'native_checked');
+  assert.ok(h.nativeCalls.some(call => call.method === undefined));
+});
+
+test('v5 stale selected-line results cannot survive timeout, version return, token change, unmount or node replacement', async () => {
+  for (const change of ['timeout', 'version', 'token', 'unmount', 'node']) {
+    const pending = [], h = fitHarness({ version: v5Profile, inspect: result => new Promise(resolve => pending.push({ result, resolve })) });
+    await finish(h); assert.equal(h.card.state.measurement.phase, 'geometry_checked');
+    if (change === 'timeout') { h.now(NOW + 8001); [...h.timers.values()][0](); }
+    if (change === 'version') {
+      const packet = h.card.props.display.preview;
+      for (const renderer_version of [v4Profile, v5Profile]) {
+        h.card.props = { ...h.card.props, display: { ...h.card.props.display, preview: { ...packet, renderer_version } } };
+        h.card.setState(h.PieceVisualCard.getDerivedStateFromProps(h.card.props, h.card.state));
+      }
+    }
+    if (change === 'token') h.bind(Object.freeze({}));
+    if (change === 'unmount') h.card.componentWillUnmount();
+    if (change === 'node') { const node = h.card.textNodes.get(0); h.card.textNodes.set(0, { ...node, value: { tag: 99 } }); }
+    const state = h.card.state.measurement;
+    pending.forEach(item => item.resolve(item.result)); await new Promise(resolve => setImmediate(resolve));
+    assert.equal(h.card.state.measurement, state); assert.equal(h.fit(), undefined);
+    assert.notEqual(h.card.state.measurement.phase, 'native_checked');
+  }
+});
+
+test('v5 queued selected-line state adoption rechecks the exact mounted nodes', async () => {
+  const pending = [], h = fitHarness({ version: v5Profile, inspect: result => new Promise(resolve => pending.push({ result, resolve })) });
+  await finish(h); const queue = [], apply = h.card.setState.bind(h.card);
+  h.card.setState = update => queue.push(update);
+  pending.forEach(item => item.resolve(item.result)); await new Promise(resolve => setImmediate(resolve));
+  assert.equal(queue.length, 1);
+  const node = h.card.textNodes.get(0); h.card.textNodes.set(0, { ...node, value: { tag: 99 } });
+  queue.forEach(update => apply(update)); h.card.setState = apply;
+  assert.equal(h.card.state.measurement.phase, 'geometry_checked'); assert.equal(h.fit(), undefined);
+});
+
+test('v5 retains the original deadline and ignores pending candidate tables after replacement', async () => {
+  const pending = [], packet = v5Sample(), h = rawHarness(packet, undefined, false, result => new Promise(resolve => pending.push({ result, resolve })));
+  primeNextFont(h); await prepare(h);
+  assert.equal(h.card.deadline.expiresAt, NOW + 8000);
+  assert.deepEqual(h.candidateCalls.map(call => call.fontSize), [48, 48, 44, 44]);
+  h.replace({ ...packet, renderer_version: v4Profile }); h.replace(packet);
+  const state = h.card.state.measurement;
+  pending.forEach(item => item.resolve(item.result)); await new Promise(resolve => setImmediate(resolve));
+  assert.equal(h.card.state.measurement, state); assert.equal(h.card.saveFit, null);
 });

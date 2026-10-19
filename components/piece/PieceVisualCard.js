@@ -3,8 +3,8 @@
  */
 import React from 'react';
 import { View, Text } from 'react-native';
-import { PIECE_NATIVE_PREVIEW_VERSION, preparePieceNativeCard, createPieceNativeMeasurement, pieceNativeTypography, recordPieceNativeMeasurement } from '../../features/piece/pieceLayout';
-import { inspectPieceText, measurePieceCandidates } from '../../features/piece/pieceRenderer';
+import { PIECE_NATIVE_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, preparePieceNativeCard, createPieceNativeMeasurement, pieceNativeTypography, recordPieceNativeMeasurement } from '../../features/piece/pieceLayout';
+import { inspectPieceText, inspectPieceSelectedLine, measurePieceCandidates } from '../../features/piece/pieceRenderer';
 import { planPieceMeasuredRows } from '../../features/piece/pieceMeasuredWrap';
 
 export default class PieceVisualCard extends React.Component {
@@ -137,7 +137,8 @@ export default class PieceVisualCard extends React.Component {
     input.candidateProfile === PIECE_NATIVE_PREVIEW_VERSION
       ? measurePieceCandidates(nodes[index], text, input.sizes[sizeIndex])
       : measurePieceCandidates(nodes[index], text, input.sizes[sizeIndex],
-        { candidateProfile: input.candidateProfile, contentWidth: input.contentWidth })))
+        input.candidateProfile === PIECE_NATIVE_PREVIEW_V5_VERSION ? { candidateProfile: input.candidateProfile }
+          : { candidateProfile: input.candidateProfile, contentWidth: input.contentWidth })))
     // Speculation may fail after a larger font has already succeeded. Handle
     // it immediately; only adoption of this font may make the card unavailable.
     .then(measurements => ({ measurements }), () => ({ failed: true }));
@@ -180,7 +181,8 @@ export default class PieceVisualCard extends React.Component {
       this.setState(previous => current() && previous.measurement === snapshot ? {
         measurement: plan ? { ...snapshot, phase: 'measuring', plan, generation: Object.freeze({}), blocks: {} }
           : snapshot.sizeIndex + 1 < input.sizes.length ? { ...createPieceNativeMeasurement(input), sizeIndex: snapshot.sizeIndex + 1 }
-          : { ...snapshot, phase: 'unavailable', reason: 'font_floor_overflow' },
+          : { ...snapshot, phase: 'unavailable', reason: input.candidateProfile === PIECE_NATIVE_PREVIEW_V5_VERSION
+            ? 'layout_search_unavailable' : 'font_floor_overflow' },
       } : null);
     } catch {
       if (current()) this.setState(previous => current() && previous.measurement === snapshot
@@ -192,8 +194,11 @@ export default class PieceVisualCard extends React.Component {
     const snapshot = this.state.measurement, raw = preparePieceNativeCard(this.props), input = raw && this.drawingInput(raw, snapshot);
     if (!this.active || !input || input.key !== snapshot.key || snapshot.phase !== 'geometry_checked' || this.inspection?.snapshot === snapshot) return;
     const operation = { snapshot }, binding = this.state.binding; this.inspection = operation;
+    const exploration = input.candidateProfile === PIECE_NATIVE_PREVIEW_V5_VERSION;
     const current = () => this.bindingCurrent(binding) && this.inspection === operation && this.state.measurement === snapshot &&
-      preparePieceNativeCard(this.props)?.key === input.key && this.deadline && Date.now() < this.deadline.expiresAt;
+      preparePieceNativeCard(this.props)?.key === input.key && this.deadline && Date.now() < this.deadline.expiresAt &&
+      (!exploration || !operation.nodes || operation.nodes.every((node, index) =>
+        this.textNodes.get(index)?.value === node && this.textNodes.get(index)?.generation === snapshot.generation));
     try {
       const count = input.blocks.length + (input.brandingMode === 'off' ? 0 : 1);
       // Freeze every target before dispatch. These are read-only UI-queue
@@ -212,7 +217,8 @@ export default class PieceVisualCard extends React.Component {
       operation.nodes = Object.freeze(targets.map(target => target.node));
       // Promise.all retains row order and observes every rejection. A single
       // missing/invalid result still rejects the entire image, never a subset.
-      const evidence = await Promise.all(targets.map(target => inspectPieceText(target.node, target.expected)));
+      const inspector = exploration ? inspectPieceSelectedLine : inspectPieceText;
+      const evidence = await Promise.all(targets.map(target => inspector(target.node, target.expected)));
       if (!current()) return;
       operation.evidence = evidence;
       const { lineHeight } = pieceNativeTypography(input, snapshot.sizeIndex);
@@ -225,7 +231,12 @@ export default class PieceVisualCard extends React.Component {
       // Moving a Text view cannot recover ink clipped by its own bounds.
       // Only already-contained ink may be repositioned within its row.
       const overflow = evidence.some(result => result.overflow) ||
-        rowOffsets.some(row => row.width > input.contentWidth || row.height > lineHeight);
+        rowOffsets.some(row => row.width > input.contentWidth || row.height > lineHeight) ||
+        exploration && evidence.some((result, index) => {
+          const [advance, left, top, right, bottom] = result.independentMetrics;
+          return Math.max(advance, right) - Math.min(0, left) > input.contentWidth ||
+            bottom - top > (index < input.blocks.length ? lineHeight : 40);
+        });
       const wrapViolation = evidence.some(result => result.wrapViolation);
       this.setState(previous => current() && previous.measurement === snapshot ? { measurement: overflow || wrapViolation ? snapshot.sizeIndex + 1 < input.sizes.length
         ? { ...createPieceNativeMeasurement(input), sizeIndex: snapshot.sizeIndex + 1 }

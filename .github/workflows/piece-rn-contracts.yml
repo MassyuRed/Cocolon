@@ -207,9 +207,11 @@ jobs:
           import pathlib, sys
           lines = pathlib.Path(sys.argv[1]).read_text(errors='replace').splitlines()
           summaries = [line for line in lines if line.startswith('NATIVE_CHECKS=')]
-          expected = 'NATIVE_CHECKS=97 PASS=97 FAIL=0 SKIP=0'
-          if int(sys.argv[2]) != 0 or summaries != [expected] or any(line.startswith('FAIL ') for line in lines):
-              raise SystemExit('Native metrics did not finish all 97 checks successfully')
+          expected = 'NATIVE_CHECKS=129 PASS=129 FAIL=0 SKIP=0'
+          legacy = 'LEGACY_NATIVE_CHECKS=97 PASS=97 FAIL=0 SKIP=0'
+          legacy_summaries = [line for line in lines if line.startswith('LEGACY_NATIVE_CHECKS=')]
+          if int(sys.argv[2]) != 0 or summaries != [expected] or legacy_summaries != [legacy] or any(line.startswith('FAIL ') for line in lines):
+              raise SystemExit('Native metrics did not finish the unchanged 97 checks and all 32 v5 additions successfully')
           PY_RESULT
 
   piece-ios-rn-canvas:

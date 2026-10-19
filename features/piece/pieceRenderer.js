@@ -2,7 +2,7 @@
  * Results are local drawing evidence, never server fit/save/export authority.
  */
 import { NativeModules, Platform, findNodeHandle } from 'react-native';
-import { PIECE_NATIVE_PREVIEW_V4_VERSION } from './pieceLayout';
+import { PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION } from './pieceLayout';
 
 const pieceNoStart = new Set(Array.from('、。，．,？！!?：；:;)]）］｝】〉》」』〕〗〙〛ー々ぁぃぅぇぉっゃゅょァィゥェォッャュョ'));
 const pieceNoEnd = new Set(Array.from('([（［｛【〈《「『〔〖〘〚'));
@@ -47,6 +47,34 @@ export async function inspectPieceText(node, expected) {
   try { result = await module.inspect(tag, expected.text, expected.fontSize); }
   catch { throw measurementError(); }
   return readPieceTextInspection(result, { ...expected, platform: Platform.OS });
+}
+
+// v5 inspects one mounted selected line. Independent CoreText coordinates
+// guard its dimensions; TextKit ink remains the placement coordinate source.
+export function readPieceSelectedLineInspection(value, expected) {
+  const fields = ['version', 'platform', 'font_size', 'width', 'height', 'utf16_length', 'boundaries',
+    'line_ends', 'ink', 'glyph_check', 'independent_metrics_f64le'];
+  if (!value || Object.keys(value).sort().join() !== fields.sort().join() ||
+      value.version !== 'piece.native_selected_line.v1' || expected.platform !== 'ios' ||
+      JSON.stringify(expected.lineEnds) !== JSON.stringify([expected.text.length]) ||
+      JSON.stringify(value.line_ends) !== JSON.stringify([expected.text.length])) throw measurementError();
+  const { independent_metrics_f64le: encoded, ...textEvidence } = value;
+  const inspected = readPieceTextInspection({ ...textEvidence, version: 'piece.native_text.v1' }, expected);
+  const bytes = unpackBytes(encoded, 40), independentMetrics = Array.from({ length: 5 }, (_, i) => bytes.getFloat64(i * 8, true));
+  if (!independentMetrics.every(finite) || independentMetrics[0] < 0 ||
+      independentMetrics[3] < independentMetrics[1] || independentMetrics[4] < independentMetrics[2]) throw measurementError();
+  return Object.freeze({ ...inspected, version: value.version, fontSize: value.font_size,
+    independentMetrics: Object.freeze(independentMetrics) });
+}
+
+export async function inspectPieceSelectedLine(node, expected) {
+  const tag = findNodeHandle(node), module = NativeModules.PieceTextMetrics;
+  if (Platform.OS !== 'ios' || !Number.isInteger(tag) || tag <= 0 ||
+      typeof module?.inspectSelectedLine !== 'function') throw measurementError();
+  let result;
+  try { result = await module.inspectSelectedLine(tag, expected.text, expected.fontSize); }
+  catch { throw measurementError(); }
+  return readPieceSelectedLineInspection(result, { ...expected, platform: Platform.OS });
 }
 
 // Candidates are shaped with an immutable snapshot of the mounted Text's
@@ -160,22 +188,25 @@ function unpackWidthCandidateRows(value, width) {
 
 export async function measurePieceCandidates(node, text, fontSize, options) {
   const tag = findNodeHandle(node), module = NativeModules.PieceTextMetrics;
-  const bounded = options !== undefined, width = options?.contentWidth;
-  if (bounded && (!options || Object.keys(options).sort().join() !== 'candidateProfile,contentWidth' ||
-      options.candidateProfile !== PIECE_NATIVE_PREVIEW_V4_VERSION || Platform.OS !== 'ios' ||
-      !finite(width) || width <= 0)) throw measurementError();
-  const method = bounded ? 'measureCandidatesForWidth' : 'measureCandidates';
+  const exploration = options?.candidateProfile === PIECE_NATIVE_PREVIEW_V5_VERSION;
+  const bounded = options !== undefined && !exploration, width = options?.contentWidth;
+  if (options !== undefined && (Platform.OS !== 'ios' || (exploration
+    ? Object.keys(options).join() !== 'candidateProfile'
+    : !options || Object.keys(options).sort().join() !== 'candidateProfile,contentWidth' ||
+      options.candidateProfile !== PIECE_NATIVE_PREVIEW_V4_VERSION || !finite(width) || width <= 0))) throw measurementError();
+  const method = exploration ? 'measureExplorationCandidates' : bounded ? 'measureCandidatesForWidth' : 'measureCandidates';
   if (!Number.isInteger(tag) || tag <= 0 || typeof module?.[method] !== 'function') throw measurementError();
   let value;
   try { value = bounded ? await module[method](tag, text, fontSize, width) : await module[method](tag, text, fontSize); }
   catch { throw measurementError(); }
   const packed = value?.version === 'piece.native_candidates.v2';
-  const indexed = value?.version === 'piece.native_candidates.v3';
+  const indexed = value?.version === 'piece.native_candidates.v3' || exploration;
   const fields = ['version', 'platform', 'font_size', 'utf16_length', 'boundaries', 'glyph_check',
     ...(bounded ? ['content_width', 'metric_count', 'full_metric_count', 'metric_records_le', 'row_indices_u32le']
       : indexed ? ['metric_count', 'metrics_f64le', 'row_indices_u32le'] : [packed ? 'rows_f64le' : 'rows'])];
   if (!value || Object.keys(value).sort().join() !== fields.sort().join() ||
-      (bounded ? value.version !== 'piece.native_candidates.v4' || value.content_width !== width
+      (exploration ? value.version !== 'piece.native_candidates.v5'
+        : bounded ? value.version !== 'piece.native_candidates.v4' || value.content_width !== width
         : !['piece.native_candidates.v1', 'piece.native_candidates.v2', 'piece.native_candidates.v3'].includes(value.version)) ||
       value.platform !== Platform.OS || !['ios', 'android'].includes(Platform.OS) ||
       value.glyph_check !== 'no_missing_observed' || value.utf16_length !== text.length ||
@@ -184,6 +215,7 @@ export async function measurePieceCandidates(node, text, fontSize, options) {
   // An overflow row has no ink slots and can never become a drawable row.
   if (bounded) return { version: value.version, contentWidth: width, boundaries: value.boundaries,
     rows: unpackWidthCandidateRows(value, width) };
+  if (exploration) return { version: value.version, boundaries: value.boundaries, rows: unpackIndexedCandidateRows(value) };
   // The planner validates exact boundary/row coverage and every metric.
   return { boundaries: value.boundaries, rows: indexed ? unpackIndexedCandidateRows(value)
     : packed ? unpackCandidateRows(value.rows_f64le, value.boundaries) : value.rows };

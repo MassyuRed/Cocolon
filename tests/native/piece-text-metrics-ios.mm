@@ -10,6 +10,7 @@
 #include <string.h>
 #include <unistd.h>
 #include <atomic>
+#include <float.h>
 @implementation RCTBridge
 @end
 @implementation RCTUIManager
@@ -39,6 +40,47 @@ static void beginWidthProbe(int advanceFault = 0, BOOL inkFault = NO) {
 static void endWidthProbe(void) {
   widthProbeActive = false; widthFaultAdvance = 0; widthFaultInkNull = false;
 }
+// Additional v5-only probes. The original 97 checks run with these disabled.
+static std::atomic_bool v5Probe{false}, v5BudgetStub{false}, v5OwnershipFault{false}, v5ThrowImage{false}, v5ExpireQueue{false};
+static std::atomic<int> v5InkFault{0};
+static std::atomic<uint64_t> v5TypesetterCreates{0}, v5TypesetterReleases{0}, v5LineCreates{0}, v5LineReleases{0},
+  v5IndependentCreates{0}, v5ClockReads{0}, v5Workers{0};
+static thread_local CTTypesetterRef v5OwnedTypesetter = NULL;
+static thread_local CTLineRef v5OwnedLine = NULL;
+static void beginV5Probe(BOOL budget = NO) {
+  v5TypesetterCreates = 0; v5TypesetterReleases = 0; v5LineCreates = 0; v5LineReleases = 0;
+  v5IndependentCreates = 0; v5ClockReads = 0; v5Workers = 0; v5OwnershipFault = false;
+  v5BudgetStub = budget; v5InkFault = 0; v5ThrowImage = false; v5ExpireQueue = false; v5Probe = true;
+}
+static BOOL balancedV5Probe(void) {
+  return !v5OwnershipFault.load() && v5TypesetterCreates.load() == v5TypesetterReleases.load() &&
+    v5LineCreates.load() + v5IndependentCreates.load() == v5LineReleases.load();
+}
+static void endV5Probe(void) { v5Probe = false; v5BudgetStub = false; v5InkFault = 0; v5ThrowImage = false; v5ExpireQueue = false; }
+static CTTypesetterRef profiledTypesetter(CFAttributedStringRef text) {
+  CTTypesetterRef result = CTTypesetterCreateWithAttributedString(text);
+  if (v5Probe && result) {
+    if (v5OwnedTypesetter) v5OwnershipFault = true;
+    v5OwnedTypesetter = result; v5TypesetterCreates++;
+  }
+  return result;
+}
+static CTLineRef profiledTypesetterLine(CTTypesetterRef typesetter, CFRange range) {
+  if (v5Probe && typesetter != v5OwnedTypesetter) v5OwnershipFault = true;
+  CTLineRef line;
+  if (v5BudgetStub) {
+    // Only the two real-budget enumeration/reference checks use this short
+    // real line. These checks are neither numeric parity nor speed evidence.
+    NSAttributedString *shortText = [[NSAttributedString alloc] initWithString:@"A"
+      attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:48]}];
+    line = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)shortText);
+  } else line = CTTypesetterCreateLine(typesetter, range);
+  if (v5Probe && line) {
+    if (v5OwnedLine) v5OwnershipFault = true;
+    v5OwnedLine = line; v5LineCreates++;
+  }
+  return line;
+}
 static struct {
   std::atomic<uint64_t> creates{0}, units{0}, createTicks{0}, typographicTicks{0}, imageTicks{0};
   std::atomic<uint64_t> queuedAt{0}, queueStarted{0}, workersStarted{0}, workersJoined{0}, resolvedAt{0}, decodeTicks{0};
@@ -58,6 +100,7 @@ static void profiledAsync(dispatch_queue_t queue, dispatch_block_t block) {
   });
 }
 static void profiledApply(size_t count, dispatch_queue_t queue, void (^block)(size_t)) {
+  if (v5Probe) v5Workers = count;
   if (!profileCandidates) { dispatch_apply(count, queue, block); return; }
   candidateProfile.workersStarted = mach_absolute_time();
   dispatch_apply(count, queue, block);
@@ -80,6 +123,7 @@ static void profiledApply(size_t count, dispatch_queue_t queue, void (^block)(si
 @end
 @implementation NSProcessInfo (PieceCandidateProfile)
 - (NSTimeInterval)pieceProfiledSystemUptime {
+  if (v5ExpireQueue && v5ClockReads.fetch_add(1) > 0) return self.systemUptime + 9;
   if (!profileCandidates) return self.systemUptime;
   uint64_t start = mach_absolute_time();
   NSTimeInterval result = self.systemUptime;
@@ -89,6 +133,10 @@ static void profiledApply(size_t count, dispatch_queue_t queue, void (^block)(si
 }
 @end
 static void profiledRelease(CFTypeRef value) {
+  if (v5Probe) {
+    if (value == v5OwnedTypesetter) { v5OwnedTypesetter = NULL; v5TypesetterReleases++; }
+    if (value == v5OwnedLine) { v5OwnedLine = NULL; v5LineReleases++; }
+  }
   if (!profileCandidates) { CFRelease(value); return; }
   uint64_t start = mach_absolute_time();
   CFRelease(value);
@@ -101,14 +149,21 @@ static CFAttributedStringRef profiledCFSubstring(CFAllocatorRef allocator, CFAtt
   candidateProfile.cfSubstringTicks += mach_absolute_time() - start;
   return result;
 }
+static CTLineRef v5TrackIndependentLine(CTLineRef line) {
+  if (v5Probe && line) {
+    if (v5OwnedLine) v5OwnershipFault = true;
+    v5OwnedLine = line; v5IndependentCreates++;
+  }
+  return line;
+}
 static CTLineRef profiledCreateLine(CFAttributedStringRef text) {
   if (widthProbeActive) widthCreates++;
-  if (!profileCandidates) return CTLineCreateWithAttributedString(text);
+  if (!profileCandidates) return v5TrackIndependentLine(CTLineCreateWithAttributedString(text));
   uint64_t start = mach_absolute_time();
   CTLineRef result = CTLineCreateWithAttributedString(text);
   candidateProfile.createTicks += mach_absolute_time() - start;
   candidateProfile.creates++; candidateProfile.units += CFAttributedStringGetLength(text);
-  return result;
+  return v5TrackIndependentLine(result);
 }
 static double profiledTypographicBounds(CTLineRef line, CGFloat *ascent, CGFloat *descent, CGFloat *leading) {
   if (widthProbeActive) {
@@ -123,6 +178,9 @@ static double profiledTypographicBounds(CTLineRef line, CGFloat *ascent, CGFloat
   return result;
 }
 static CGRect profiledImageBounds(CTLineRef line, CGContextRef context) {
+  if (v5InkFault == 1) return CGRectMake(NAN, 0, 1, 1);
+  if (v5InkFault == 2) return CGRectMake(DBL_MAX, 0, DBL_MAX, 1);
+  if (v5ThrowImage.exchange(false)) @throw [NSException exceptionWithName:@"PieceV5InjectedImageFailure" reason:@"test-only" userInfo:nil];
   if (widthProbeActive) { widthImages++; if (widthFaultInkNull) return CGRectNull; }
   if (!profileCandidates) return CTLineGetImageBounds(line, context);
   uint64_t start = mach_absolute_time();
@@ -131,6 +189,8 @@ static CGRect profiledImageBounds(CTLineRef line, CGContextRef context) {
   return result;
 }
 #define CTLineCreateWithAttributedString profiledCreateLine
+#define CTTypesetterCreateWithAttributedString profiledTypesetter
+#define CTTypesetterCreateLine profiledTypesetterLine
 #define CTLineGetTypographicBounds profiledTypographicBounds
 #define CTLineGetImageBounds profiledImageBounds
 #define dispatch_async profiledAsync
@@ -141,6 +201,8 @@ static CGRect profiledImageBounds(CTLineRef line, CGContextRef context) {
 #define CFAttributedStringCreateWithSubstring profiledCFSubstring
 #include "../../ios/tempCocolon/PieceTextMetrics.mm"
 #undef CTLineCreateWithAttributedString
+#undef CTTypesetterCreateWithAttributedString
+#undef CTTypesetterCreateLine
 #undef CTLineGetTypographicBounds
 #undef CTLineGetImageBounds
 #undef dispatch_async
@@ -413,6 +475,294 @@ static BOOL inkEnclosesPaint(RCTTextView *view, NSDictionary *inspection) {
     (long)(left-pad), (long)(top-pad), (long)(right+1-pad), (long)(bottom+1-pad));
   return enclosed;
 }
+// v5 additions do not change the old independent oracle or its 97 checks.
+static NSDictionary *callV5(PieceTextMetrics *module, BOOL candidates, NSString *text, double font, NSString **code) {
+  __block NSDictionary *result = nil; __block NSString *error = nil;
+  dispatch_semaphore_t done = dispatch_semaphore_create(0);
+  RCTPromiseResolveBlock resolve = ^(id value) { if ([value isKindOfClass:NSDictionary.class]) result = value;
+    else error = @"INVALID_RESULT"; dispatch_semaphore_signal(done); };
+  RCTPromiseRejectBlock reject = ^(NSString *value, __unused NSString *message, __unused NSError *cause) {
+    error = value; dispatch_semaphore_signal(done); };
+  if (candidates) [module measureExplorationCandidates:@1 text:text fontSize:font resolver:resolve rejecter:reject];
+  else [module inspectSelectedLine:@1 text:text fontSize:font resolver:resolve rejecter:reject];
+  if (dispatch_semaphore_wait(done, dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC)) != 0) {
+    *code = @"TEST_CALLBACK_TIMEOUT"; return nil;
+  }
+  *code = error; return result;
+}
+static NSDictionary *decodeV5(NSDictionary *wire, NSString **code) {
+  NSArray *keys = @[@"version", @"platform", @"font_size", @"utf16_length", @"boundaries", @"glyph_check",
+    @"metric_count", @"metrics_f64le", @"row_indices_u32le"];
+  if (![wire isKindOfClass:NSDictionary.class] || ![wire[@"version"] isEqual:@"piece.native_candidates.v5"] ||
+      ![[NSSet setWithArray:wire.allKeys] isEqual:[NSSet setWithArray:keys]]) { *code = @"INVALID_V5_WIRE"; return nil; }
+  NSMutableDictionary *oldWire = [wire mutableCopy]; oldWire[@"version"] = @"piece.native_candidates.v3";
+  return decodeCandidates(oldWire, code);
+}
+static BOOL contextMetrics(CTLineRef line, NSString *text, double values[5]) {
+  if (!line) return NO;
+  double advance = CTLineGetTypographicBounds(line, NULL, NULL, NULL);
+  CGRect ink = CTLineGetImageBounds(line, NULL);
+  if (CGRectIsNull(ink)) {
+    if ([text rangeOfCharacterFromSet:NSCharacterSet.whitespaceAndNewlineCharacterSet.invertedSet].location != NSNotFound) return NO;
+    ink = CGRectZero;
+  }
+  const double expected[] = {advance, CGRectGetMinX(ink), -CGRectGetMaxY(ink), CGRectGetMaxX(ink), -CGRectGetMinY(ink)};
+  for (double value : expected) if (!isfinite(value)) return NO;
+  if (advance < 0 || expected[3] < expected[1] || expected[4] < expected[2]) return NO;
+  memcpy(values, expected, sizeof(expected)); return YES;
+}
+static uint32_t v5Reference(NSDictionary *wire, NSUInteger start, NSUInteger end) {
+  NSUInteger n = [wire[@"boundaries"] count] - 1;
+  NSUInteger offset = start * n - start * (start - 1) / 2 + end - start - 1;
+  NSData *bytes = [[NSData alloc] initWithBase64EncodedString:wire[@"row_indices_u32le"] options:0];
+  if (offset >= bytes.length / 4) return UINT32_MAX;
+  uint32_t reference; memcpy(&reference, (const uint8_t *)bytes.bytes + offset * 4, 4);
+  return CFSwapInt32LittleToHost(reference);
+}
+// A straightforward attributed-string dictionary oracle, independent of the
+// implementation's rolling hashes, attribute IDs and worker reuse. Each miss
+// builds a fresh suffix typesetter; each retained hit reuses its first value.
+static BOOL matchesExploration(NSDictionary *wire, RCTTextView *view) {
+  NSString *code = nil; NSDictionary *decoded = decodeV5(wire, &code);
+  if (code || !validCandidates(decoded, view.fixtureStorage.string)) return NO;
+  NSAttributedString *snapshot = [view.fixtureStorage copy];
+  NSMutableDictionary<NSAttributedString *, NSDictionary *> *cache = [NSMutableDictionary new];
+  NSUInteger retainedUnits = 0, jobs = 0, rowIndex = 0;
+  NSArray *boundaries = decoded[@"boundaries"];
+  NSData *references = [[NSData alloc] initWithBase64EncodedString:wire[@"row_indices_u32le"] options:0];
+  for (NSArray *row in decoded[@"rows"]) {
+    @autoreleasepool {
+      NSUInteger start = [boundaries[[row[0] unsignedIntegerValue]] unsignedIntegerValue];
+      NSUInteger end = [boundaries[[row[1] unsignedIntegerValue]] unsignedIntegerValue];
+      NSAttributedString *part = [snapshot attributedSubstringFromRange:NSMakeRange(start, end - start)];
+      NSDictionary *record = cache[part];
+      if (!record) {
+        NSAttributedString *suffix = [snapshot attributedSubstringFromRange:NSMakeRange(start, snapshot.length - start)];
+        CTTypesetterRef typesetter = CTTypesetterCreateWithAttributedString((__bridge CFAttributedStringRef)suffix);
+        if (!typesetter) return NO;
+        CTLineRef line = CTTypesetterCreateLine(typesetter, CFRangeMake(0, part.length));
+        double values[5]; BOOL valid = contextMetrics(line, part.string, values);
+        if (line) CFRelease(line); CFRelease(typesetter);
+        if (!valid) return NO;
+        record = @{@"index":@(jobs++), @"metrics":[NSData dataWithBytes:values length:sizeof(values)]};
+        if (cache.count < 16384 && retainedUnits + part.length <= 4194304) { cache[part] = record; retainedUnits += part.length; }
+      }
+      uint32_t reference; memcpy(&reference, (const uint8_t *)references.bytes + rowIndex * 4, 4);
+      if (CFSwapInt32LittleToHost(reference) != [record[@"index"] unsignedIntegerValue]) return NO;
+      double expected[5]; [record[@"metrics"] getBytes:expected length:sizeof(expected)];
+      for (NSUInteger i = 0; i < 5; i++) {
+        double actual = [row[i + 2] doubleValue];
+        if (memcmp(&actual, &expected[i], sizeof(actual)) != 0) return NO;
+      }
+      rowIndex++;
+    }
+  }
+  return rowIndex == [decoded[@"rows"] count] && jobs == [wire[@"metric_count"] unsignedIntegerValue];
+}
+static BOOL selectedMatchesOriginalOracle(PieceTextMetrics *module, RCTBridge *bridge, RCTTextView *view, double font, NSString *name) {
+  bridge.uiManager.registry = @{@1:view}; NSString *code = nil;
+  NSDictionary *legacy = call(module, YES, view.fixtureStorage.string, font, &code);
+  if (code || !matchesUncachedCandidates(legacy, view)) return NO;
+  NSDictionary *oldInspection = call(module, NO, view.fixtureStorage.string, font, &code);
+  if (code || oldInspection.count != 10) return NO;
+  beginV5Probe(); beginWidthProbe();
+  NSDictionary *selected = callV5(module, NO, view.fixtureStorage.string, font, &code);
+  BOOL reused = v5IndependentCreates.load() == 1 && v5LineCreates.load() == 0 && balancedV5Probe() &&
+    widthCreates.load() == 1 && widthAdvances.load() == 1 && widthImages.load() == 1;
+  endWidthProbe(); endV5Probe();
+  if (code || !reused || selected.count != 11 || ![selected[@"version"] isEqual:@"piece.native_selected_line.v1"] ||
+      ![selected[@"independent_metrics_f64le"] isKindOfClass:NSString.class] ||
+      ![selected[@"line_ends"] isEqual:@[@(view.fixtureStorage.length)]] ||
+      ![selected[@"boundaries"] isEqual:legacy[@"boundaries"]]) return NO;
+  NSData *bytes = [[NSData alloc] initWithBase64EncodedString:selected[@"independent_metrics_f64le"] options:0];
+  if (bytes.length != 40) return NO;
+  NSMutableDictionary *common = [selected mutableCopy]; [common removeObjectForKey:@"independent_metrics_f64le"];
+  common[@"version"] = @"piece.native_text.v1";
+  if (![common isEqual:oldInspection] || !inkEnclosesPaint(view, selected)) return NO;
+  NSArray *fullRow = legacy[@"rows"][[legacy[@"boundaries"] count] - 2];
+  printf("V5_SELECTED_BITS %s", name.UTF8String);
+  for (NSUInteger i = 0; i < 5; i++) {
+    uint64_t actual; memcpy(&actual, (const uint8_t *)bytes.bytes + i * 8, 8); actual = CFSwapInt64LittleToHost(actual);
+    double expectedValue = [fullRow[i + 2] doubleValue]; uint64_t expected; memcpy(&expected, &expectedValue, 8);
+    printf(" %016llx", (unsigned long long)actual);
+    if (actual != expected) { printf(" mismatch\n"); return NO; }
+  }
+  printf("\n"); return YES;
+}
+static void runV5Checks(PieceTextMetrics *module, RCTBridge *bridge) {
+  NSArray *cases = @[@[@"spaces", @"  keep spaces  "], @[@"max420_prefix8", [@"あ" stringByPaddingToLength:420 withString:@"あ" startingAtIndex:0]],
+    @[@"latin_ligature", @"office affinity AV To"], @[@"hebrew", @"שלום עולם"], @[@"arabic", @"مرحبا بالعالم"],
+    @[@"mixed_bidi", @"abc (אבג) 12"], @[@"paragraph_direction", @"fi AV 12 שלום"]];
+  for (NSArray *fixture in cases) {
+    NSString *name = fixture[0], *text = fixture[1], *code = nil;
+    RCTTextView *view = makeView(text, 48);
+    if ([name isEqual:@"paragraph_direction"]) {
+      NSMutableParagraphStyle *paragraph = [[view.fixtureStorage attribute:NSParagraphStyleAttributeName atIndex:0 effectiveRange:NULL] mutableCopy];
+      paragraph.baseWritingDirection = NSWritingDirectionRightToLeft; paragraph.firstLineHeadIndent = 12;
+      paragraph.headIndent = 6; paragraph.tailIndent = -8; paragraph.defaultTabInterval = 42;
+      paragraph.tabStops = @[[[NSTextTab alloc] initWithTextAlignment:NSTextAlignmentRight location:96 options:@{}]];
+      [view.fixtureStorage addAttributes:@{NSParagraphStyleAttributeName:paragraph, NSLigatureAttributeName:@2,
+        NSKernAttributeName:@1.25, NSBaselineOffsetAttributeName:@3} range:NSMakeRange(0, text.length)];
+    }
+    bridge.uiManager.registry = @{@1:view};
+    NSDictionary *wire = callV5(module, YES, text, 48, &code);
+    check([@"v5_" stringByAppendingFormat:@"%@_all_range_suffix_representatives", name], code == nil && matchesExploration(wire, view));
+    NSUInteger selectedLength = [name isEqual:@"max420_prefix8"] ? 8 : text.length;
+    NSAttributedString *attributes = [view.fixtureStorage attributedSubstringFromRange:NSMakeRange(0, selectedLength)];
+    RCTTextView *selected = makeView(attributes.string, 48); [selected.fixtureStorage setAttributedString:attributes];
+    check([@"v5_" stringByAppendingFormat:@"%@_selected_original_bits_and_paint", name],
+      selectedMatchesOriginalOracle(module, bridge, selected, 48, name));
+    // Observe exploration vs independently shaped selected prefix without
+    // asserting the old OS-specific mismatch count or blessing equivalence.
+    NSDictionary *decoded = decodeV5(wire, &code);
+    if (decoded) {
+      NSArray *bounds = decoded[@"boundaries"];
+      NSUInteger end = [bounds indexOfObject:@(selectedLength)];
+      NSArray *row = end != NSNotFound && end ? decoded[@"rows"][end - 1] : nil;
+      printf("V5_EXPLORATION_BITS %s", name.UTF8String);
+      for (NSUInteger i = 2; i < row.count; i++) { double value = [row[i] doubleValue]; uint64_t bits; memcpy(&bits, &value, 8); printf(" %016llx", (unsigned long long)bits); }
+      printf("\n");
+      // Record the historically different range itself as numeric context
+      // evidence. A whitespace-only range is not made into a paint fixture.
+      NSDictionary *historicalRanges = @{@"spaces":@[@0,@3], @"max420_prefix8":@[@0,@8], @"latin_ligature":@[@0,@17],
+        @"hebrew":@[@0,@8], @"arabic":@[@0,@1], @"mixed_bidi":@[@3,@4], @"paragraph_direction":@[@0,@4]};
+      NSArray *range = historicalRanges[name]; NSUInteger start = [range[0] unsignedIntegerValue], finish = [range[1] unsignedIntegerValue];
+      NSUInteger startIndex = [bounds indexOfObject:@(start)], endIndex = [bounds indexOfObject:@(finish)], n = bounds.count - 1;
+      if (startIndex != NSNotFound && endIndex != NSNotFound && startIndex < endIndex) {
+        NSArray *explored = decoded[@"rows"][startIndex * n - startIndex * (startIndex - 1) / 2 + endIndex - startIndex - 1];
+        NSAttributedString *part = [view.fixtureStorage attributedSubstringFromRange:NSMakeRange(start, finish - start)];
+        CTLineRef independent = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)part); double independentMetrics[5];
+        BOOL valid = contextMetrics(independent, part.string, independentMetrics); if (independent) CFRelease(independent);
+        if (valid) {
+          printf("V5_HISTORICAL_RANGE_BITS %s utf16_start=%lu utf16_end=%lu", name.UTF8String, (unsigned long)start, (unsigned long)finish);
+          for (NSUInteger i = 0; i < 5; i++) { double actual = [explored[i + 2] doubleValue]; uint64_t a, b;
+            memcpy(&a, &actual, 8); memcpy(&b, &independentMetrics[i], 8); printf(" %016llx/%016llx", (unsigned long long)a, (unsigned long long)b); }
+          printf("\n");
+        }
+      }
+    }
+  }
+  for (NSUInteger variant = 0; variant < 2; variant++) {
+    RCTTextView *view = makeView(@"ABCDEFGHIJKLMNOPQRSTUVWX", 48);
+    if (variant) [view.fixtureStorage addAttributes:@{NSBaselineOffsetAttributeName:@3, NSKernAttributeName:@1.25}
+      range:NSMakeRange(8, 8)];
+    bridge.uiManager.registry = @{@1:view}; NSString *code = nil;
+    beginV5Probe(); NSDictionary *wire = callV5(module, YES, view.fixtureStorage.string, 48, &code);
+    BOOL owned = balancedV5Probe() && v5Workers.load() == 4 && v5LineCreates.load() == 300;
+    endV5Probe();
+    check(variant ? @"v5_nonuniform_worker_ownership_and_oracle" : @"v5_uniform_worker_ownership_and_oracle",
+      code == nil && owned && matchesExploration(wire, view));
+  }
+  RCTTextView *attributes = makeView(@"AaAaAaAaAaAa", 48);
+  [attributes.fixtureStorage addAttribute:NSKernAttributeName value:@4 range:NSMakeRange(2, 2)];
+  [attributes.fixtureStorage addAttribute:NSBaselineOffsetAttributeName value:@3 range:NSMakeRange(4, 2)];
+  [attributes.fixtureStorage addAttribute:NSFontAttributeName value:[UIFont monospacedSystemFontOfSize:48 weight:UIFontWeightRegular] range:NSMakeRange(6, 2)];
+  bridge.uiManager.registry = @{@1:attributes}; NSString *code = nil;
+  NSDictionary *attrWire = callV5(module, YES, attributes.fixtureStorage.string, 48, &code);
+  check(@"v5_cache_full_pointwise_attributes", code == nil && matchesExploration(attrWire, attributes) &&
+    v5Reference(attrWire, 0, 2) == v5Reference(attrWire, 8, 10) && v5Reference(attrWire, 0, 2) != v5Reference(attrWire, 2, 4));
+  for (NSUInteger units = 0; units < 2; units++) {
+    NSString *cluster = units ? @"A\u0301" : @"A";
+    NSString *text = [@"" stringByPaddingToLength:420 * cluster.length withString:cluster startingAtIndex:0];
+    RCTTextView *view = makeView(text, 48);
+    for (NSUInteger i = 0; i < 420; i++) {
+      NSUInteger attribute = units ? (i <= 25 ? i : (i == 400 || i == 410 ? 27 : 26)) : MIN(i, 40);
+      [view.fixtureStorage addAttribute:NSBaselineOffsetAttributeName value:@((double)attribute / 1000)
+        range:NSMakeRange(i * cluster.length, cluster.length)];
+    }
+    bridge.uiManager.registry = @{@1:view}; beginV5Probe(YES);
+    NSDictionary *wire = callV5(module, YES, text, 48, &code);
+    BOOL balanced = balancedV5Probe(); endV5Probe();
+    NSDictionary *decoded = decodeV5(wire, &code);
+    BOOL valid = code == nil && balanced && validCandidates(decoded, text) && [decoded[@"rows"] count] == 88410;
+    if (!units) valid = valid && [wire[@"metric_count"] unsignedIntegerValue] == 16520 &&
+      v5Reference(wire, 40, 404) == 16383 && v5Reference(wire, 41, 405) == 16383 &&
+      v5Reference(wire, 40, 405) == 16384 && v5Reference(wire, 41, 406) != 16384;
+    else valid = valid && [wire[@"metric_count"] unsignedIntegerValue] == 86484 &&
+      v5Reference(wire, 25, 170) == 10344 && v5Reference(wire, 25, 171) == 10345 &&
+      v5Reference(wire, 26, 31) == 10599 && v5Reference(wire, 27, 32) == 10599 &&
+      v5Reference(wire, 26, 32) == 10600 && v5Reference(wire, 27, 33) == 10989 &&
+      v5Reference(wire, 399, 401) == 86325 && v5Reference(wire, 409, 411) == 86325 &&
+      v5Reference(wire, 400, 401) == 86345 && v5Reference(wire, 410, 411) == 86464;
+    check(units ? @"v5_real_utf16_budget_later_short_key_and_uncached_references_synthetic_metrics"
+      : @"v5_real_key_budget_retained_hit_uncached_miss_synthetic_metrics", valid);
+  }
+  // The historical eighth mismatch has mixed 48/37pt attributes. Preserve
+  // those exact attributes for direct observation and keep product rejection.
+  NSMutableParagraphStyle *rtl = [NSMutableParagraphStyle new]; rtl.baseWritingDirection = NSWritingDirectionRightToLeft;
+  NSAttributedString *candidate = [[NSAttributedString alloc] initWithString:@" \t " attributes:@{
+    NSFontAttributeName:[UIFont systemFontOfSize:48], NSLigatureAttributeName:@2}];
+  NSMutableAttributedString *suffix = [candidate mutableCopy];
+  [suffix appendAttributedString:[[NSAttributedString alloc] initWithString:@"שלום (مرحبا)" attributes:@{
+    NSFontAttributeName:[UIFont systemFontOfSize:37], NSParagraphStyleAttributeName:rtl, NSBaselineOffsetAttributeName:@4}]];
+  CTTypesetterRef typesetter = CTTypesetterCreateWithAttributedString((__bridge CFAttributedStringRef)suffix);
+  CTLineRef contextual = typesetter ? CTTypesetterCreateLine(typesetter, CFRangeMake(0, candidate.length)) : NULL;
+  CTLineRef independent = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)candidate);
+  double contextValues[5], independentValues[5];
+  BOOL observed = contextMetrics(contextual, candidate.string, contextValues) && contextMetrics(independent, candidate.string, independentValues);
+  if (contextual) CFRelease(contextual); if (typesetter) CFRelease(typesetter); if (independent) CFRelease(independent);
+  if (observed) {
+    printf("V5_HISTORICAL_WHITESPACE_NEIGHBOR2_BITS");
+    for (NSUInteger i = 0; i < 5; i++) { uint64_t a, b; memcpy(&a, &contextValues[i], 8); memcpy(&b, &independentValues[i], 8);
+      printf(" %016llx/%016llx", (unsigned long long)a, (unsigned long long)b); } printf("\n");
+  }
+  check(@"v5_historical_whitespace_neighbor2_original_attributes_observed", observed);
+  RCTTextView *mixed = makeView(suffix.string, 48); [mixed.fixtureStorage setAttributedString:suffix]; bridge.uiManager.registry = @{@1:mixed};
+  BOOL rejectedMixed = callV5(module, YES, suffix.string, 48, &code) == nil && [code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"];
+  check(@"v5_historical_mixed_font_input_remains_rejected", rejectedMixed);
+  for (NSString *kind in @[@"wrong_text", @"wrong_font", @"detached", @"unsupported"]) {
+    NSString *text = [kind isEqual:@"unsupported"] ? @"\u0378" : @"Cocolon";
+    RCTTextView *view = makeView(text, 48); if ([kind isEqual:@"detached"]) view.fixtureAttached = NO;
+    bridge.uiManager.registry = @{@1:view};
+    NSString *expected = [kind isEqual:@"wrong_text"] ? @"other" : text;
+    double font = [kind isEqual:@"wrong_font"] ? 49 : 48;
+    BOOL rejected = YES;
+    for (NSUInteger method = 0; method < 2; method++) rejected = (callV5(module, method == 0, expected, font, &code) == nil &&
+      [code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"]) && rejected;
+    check([@"v5_" stringByAppendingFormat:@"%@_both_methods_reject", kind], rejected);
+  }
+  RCTTextView *wrapped = makeView(@"Cocolon Cocolon Cocolon", 48);
+  wrapped.bounds = CGRectMake(0, 0, 100, 800); wrapped.fixtureContentFrame = wrapped.bounds;
+  wrapped.fixtureStorage.layoutManagers.firstObject.textContainers.firstObject.size = CGSizeMake(100, 800);
+  bridge.uiManager.registry = @{@1:wrapped};
+  NSDictionary *oldWrapped = call(module, NO, wrapped.fixtureStorage.string, 48, &code);
+  BOOL oldAllowsMultiple = code == nil && [oldWrapped[@"line_ends"] count] > 1;
+  check(@"v5_selected_actual_rewrap_rejected", oldAllowsMultiple && callV5(module, NO, wrapped.fixtureStorage.string, 48, &code) == nil &&
+    [code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"]);
+  bridge.uiManager.registry = @{@1:makeView(@"A", 48)};
+  BOOL badAdvance = YES;
+  for (NSUInteger method = 0; method < 2; method++) for (int fault = 1; fault <= 4; fault++) {
+    beginWidthProbe(fault); NSDictionary *value = callV5(module, method == 0, @"A", 48, &code); endWidthProbe();
+    badAdvance = (value == nil && [code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"]) && badAdvance;
+  }
+  check(@"v5_nonfinite_negative_advance_both_methods_rejected", badAdvance);
+  BOOL nullInk = YES;
+  for (NSUInteger method = 0; method < 2; method++) {
+    beginWidthProbe(0, YES); NSDictionary *value = callV5(module, method == 0, @"A", 48, &code); endWidthProbe();
+    nullInk = (value == nil && [code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"]) && nullInk;
+  }
+  check(@"v5_nonwhitespace_null_ink_both_methods_rejected", nullInk);
+  for (NSUInteger method = 0; method < 2; method++) {
+    beginV5Probe(); v5ThrowImage = true;
+    NSDictionary *value = callV5(module, method == 0, @"A", 48, &code);
+    BOOL released = balancedV5Probe(); endV5Probe();
+    check(method ? @"v5_selected_exception_releases_existing_line" : @"v5_candidate_exception_releases_line_and_typesetter",
+      value == nil && [code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"] && released);
+  }
+  BOOL invalidInk = YES;
+  for (NSUInteger method = 0; method < 2; method++) for (int fault = 1; fault <= 2; fault++) {
+    beginV5Probe(); v5InkFault = fault;
+    NSDictionary *value = callV5(module, method == 0, @"A", 48, &code);
+    BOOL released = balancedV5Probe(); endV5Probe();
+    invalidInk = (value == nil && [code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"] && released) && invalidInk;
+  }
+  check(@"v5_nonfinite_ink_and_computed_overflow_both_methods_rejected", invalidInk);
+  beginV5Probe(); v5ExpireQueue = true;
+  NSDictionary *expired = callV5(module, YES, @"A", 48, &code);
+  BOOL noWork = v5LineCreates.load() == 0 && v5IndependentCreates.load() == 0; endV5Probe();
+  check(@"v5_original_native_deadline_includes_queue", expired == nil && [code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"] && noWork);
+}
+
 static int runNativeMetricsChecks(void) {
   @autoreleasepool {
     printf("iOS native metrics source test; synthetic RN boundary; real UIKit/TextKit/CoreText\n");
@@ -653,6 +1003,9 @@ static int runNativeMetricsChecks(void) {
         widthAdvances.load() == 1 && widthImages.load() == 0) && invalidAdvances;
     }
     check(@"v4_nonfinite_negative_advances_cannot_be_overflow", invalidAdvances);
+    printf("LEGACY_NATIVE_CHECKS=%lu PASS=%lu FAIL=%lu SKIP=0\n", (unsigned long)checks,
+      (unsigned long)(checks-failures), (unsigned long)failures);
+    runV5Checks(module, bridge);
     printf("NATIVE_CHECKS=%lu PASS=%lu FAIL=%lu SKIP=0\n", (unsigned long)checks,
       (unsigned long)(checks-failures), (unsigned long)failures);
     return failures ? 1 : 0;

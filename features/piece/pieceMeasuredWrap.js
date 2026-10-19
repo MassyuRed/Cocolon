@@ -55,7 +55,9 @@ function blockContext(text, table, width, candidateProfile) {
   if (typeof text !== 'string' || !text.length || !table || !Array.isArray(table.boundaries) ||
       !Array.isArray(table.rows)) unavailable();
   const bounded = table.version === 'piece.native_candidates.v4';
+  const exploration = table.version === 'piece.native_candidates.v5';
   if (bounded !== (candidateProfile === 'piece.rn_native_preview.prototype.v4') ||
+      exploration !== (candidateProfile === 'piece.rn_native_preview.prototype.v5') ||
       bounded && (!finite(table.contentWidth) || table.contentWidth !== width)) unavailable();
   const boundaries = table.boundaries, n = boundaries.length - 1;
   if (n < 1 || n > 420 || boundaries[0] !== 0 || boundaries[n] !== text.length ||
@@ -314,8 +316,9 @@ function wrapSolutions(ctx, maxLines = null, lineHeight = null) {
   return solutions;
 }
 
-// A shortest path over exact measured ranges proves impossibility only.
-// It never supplies rows or changes the ordered B9 scoring for feasible input.
+// A shortest path only rejects layouts within this supplied metric table.
+// For v5, suffix-context exploration does not prove independent-line
+// impossibility. It never supplies rows or changes the ordered B9 scoring.
 function minimumMeasuredLineCount(ctx, lineHeight) {
   const { n, width } = ctx, counts = new Uint16Array(n + 1).fill(n + 1);
   counts[n] = 0;

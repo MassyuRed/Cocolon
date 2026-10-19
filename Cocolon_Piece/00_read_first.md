@@ -10,6 +10,10 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
+**最新の実行範囲は§77です。Mash様が§76.3〜76.5の差と停止条件を含むiOS preview v5の実装・一度の限定検証を明示承認しました。同じ範囲を再承認待ちへ戻さず、GPT-6 Astra Proの華恋を唯一の書込・test実行担当として進めます。§76の未承認記録は提案時点の履歴で、正式採用・保存許可を意味する承認ではありません。**
+
+### §76時点の要約（履歴）
+
 **最新の調査・判断候補は§76／current map §65.24、週次P-W1の進捗はweekly20261017 §5.6.4です。現source b4467a77のv4は420文字timeoutで未採用のまま。全候補の独立計測を保つ確かな追加修復は今回特定できず、「候補探索はsuffix文脈の代表値、採用行は実際のTextの独立寸法とTextKitで検査する」明示iOS preview v5を具体化しました。改行・font・fitの選択が旧版と変わり得るため、v5の実装・限定検証は新しい契約差へのMash判断前で、未実行です。通常保存には正式admissionのInputScreen供給と採用版のsaved再表示対応も必要です。今回の反映は既存4文書だけで、420・正式採用・保存受入れを完了にしません。**
 
 ### §75時点の要約（履歴）
@@ -1843,4 +1847,46 @@ API原文は[API a536e50のapp.py](https://github.com/MassyuRed/mashos-api/blob/
 candidate API構成・実効flag・TTL／renderer・RN版の実稼働確認もP-W1の依存として保持します。設定／deploy／実DB／署名・配布に新しいeffectが必要な部分は、具体的な対象を準備して既存承認範囲と照合します。P-W2は採用版の同一savedRecordから既存exportを通常詳細へ接続し、3形式・両OSのPhotos／shareへ進めます。新しい保存controller、DTO、schemaをこのために作り直す案ではありません。
 
 **今回の結論：BLOCKER_NARROWED。** 新しい画像成立・速度改善・正式admission・通常保存・実機受入れは未成立です。実装へ進む判断は、Rule18 §0(4)／§11.3が新しい契約・品質条件を既存source修復の委任から分けているため必要です。確認対象は§76.3〜76.5の新しい差を含むiOS preview v5の限定実装・検証であり、終了したv4範囲の再承認ではありません。反映後のremote照合結果と最終headは同manifest・作業報告から辿り、automatic_progression=falseを維持します。
+
+## 77. 2026-10-19 JST — 承認されたiOS preview v5の実装・限定検証
+
+Mash様はこの会話で、§76.3〜76.5の差と停止条件を含むv5の実装と一度の限定検証について「進めていいよ、お願い」と明示承認しました。以下は最初のsource変更前に固定した開始範囲です。
+
+| start field | 固定内容 |
+|---|---|
+| product_destination / current_gate_or_subgate | weekly20261017 §5.6 P-W1の420文字描画方式判断。全文画像を確認し同じ候補を保存・再表示する完成単位へ接続 |
+| exact_work / scope_classification | LEVEL_3。§76.3の明示v5探索用suffix代表値と実Textの独立選択行検査を実装し、§76.4〜76.5の限定検証・採否を完遂 |
+| approval_or_delegation_basis / execution_owner | 上記のMash明示承認。華恋／GPT-6 Astra Pro／CHAT_PRO_OKが唯一のsource・test・GitHub書込担当。補助担当は読取・差分レビューで、正式な別model審査とは扱わない |
+| success_credit / completion_condition | 新sourceの結果を実画像まで確認し採否を記録。技術検証の成功だけを正式admission・通常保存・商品受入れへ換算しない。対象全内容・差分path・最終headのremote照合まで実施 |
+| stop_condition | §76.5をそのまま適用。既存reportの元8秒内の420文字native_checked／全inspection／同token fit、同状態のPNG確認が成立しなければ未採用で終了。明白な崩れ・current mountへの束縛不成立もSTOP。補助機構だけを増やす場合はDETOUR_RISK_STOP |
+| prohibited_scope | 同source再実RN、期限延長、worker増加、本文削除、候補縮小、同font再plan、旧版silent置換、正式supplier／saved・export v5、API／DB／flag／env／deploy／署名・配布／main merge |
+| next_product_read_or_mash_decision_point | 新sourceの完成画像を華恋が読み、限定方式の採否を記録。正式admission・同採用版saved再表示・通常保存の実装と稼働は引き続きP-W1の残件 |
+| current_source_test_receipt | source b4467a77877dd936c29845f2977a06bd61df84c1、旧JS839／native97と独立oracle、元B9純粋25case、実RN run39205556730の5fixture。旧期待値を保持し新検査を追加 |
+| current_docs_and_heads | Cocolon開始head9d9f0b7d17b988bd5f1c64431edf88681df917f7／tree861fac4762c5b1d065744867834d39039bb4324b、API a536e50ee284785f585ac73329ef2947dca8bba9。前段で読んだ全体設計01・全file地図01A〜C・最新weekly・rulesと§76を継承し、最新tree／対象原文を再照合。local70fileの全blob一致 |
+| affected_current_structure_maps | Piece current map §65.25へ新version・owner責任と結果を同write unitで反映。入口・manifest・map・weeklyの既存4文書へ記録 |
+
+製品pathは§76.4の既存5つ、検査は既存renderer／measured-wrap／native metrics／RN entry／fixtures、既存workflowです。追加検査の収集に必要な既存tests/native/piece-rn-canvas-ios.mも対象に固定します。同fileがreport数5を直接検査しているため、元5fixtureの本文・順序・assert・分母を維持しつつ過去不一致入力の補足確認を収集するための同期です。追加の製品機能・受入条件変更・新harnessは作りません。対象は製品5＋検査6＋既存workflow1＋文書4の計16pathです。
+
+必要性はDIRECT_PRODUCT_OR_ACCEPTANCE_WORK。現未完了の420方式に直接作用する実装1単位と既存CI／実RN1回で、元のSTOPを保持します。localは既存のNode24／TypeScript5.2.2 suiteを使用し、iOS実UIKit／TextKit／CoreTextと実RNは既存CIで確認します。新規依存・課金設定・Mash端末操作は追加しません。保存回収source5c44b252と適用済みPiece6migrationは保持し、再実装・再適用を行いません。
+
+### 77.1 実装差とlocal検査 — 新sourceの一度のCI実行前
+
+§76.3の3版を明示的に実装しました。iOS preview v5だけが新measureExplorationCandidatesとinspectSelectedLineを呼び、候補wire exact9／選択行wire exact11・40byte／B9までの版を双方向に照合します。saved／export v5とAndroid v5は拒否し、旧v3／v4は元の候補・inspectionを使います。選択行では実mountの全文属性を持つ既存CTLineを再利用し、独立5値は寸法のstrict確認だけに使用、配置は元のTextKit ink／onTextLayoutのままです。本文lineHeightとbranding28pt／40を分け、geometryの有効な超過だけ次のcatalog fontへ進みます。無効値・glyph・bridge・全文・再wrap違反は画像全体を利用不可とし、await後とstate反映時にも同node／generation／binding／token／key／元期限を照合します。v5で全fontの探索がnullの場合はlayout_search_unavailableと記録し、独立行の不可能性証明にはしません。
+
+全grapheme範囲、start昇順／end昇順、完全substringと全点属性の照合、16,384保持key／4,194,304 UTF16 unitsを保持します。hitは最初の保持代表のsuffix、missは当該rangeのsuffixです。ある長いkeyがunits不足で保持できなくても、後から短いkeyが残容量に入れば保持します。workerは専有snapshot／typesetterと上限4、元8秒はqueue待ちを含みます。全代表の5doubleを返し、v4のink省略や候補削減を混ぜません。列挙・予算・文脈が見た目へ影響し得る新契約で、旧版の改行／font／fit同値は主張しません。
+
+| 検査 | source実行前に確認した状態／次の証拠 |
+|---|---|
+| 既存13 JS suite | Node24.19.0／TypeScript5.2.2、test-isolation=noneで880 passed、fail／skip0。旧839を含む同じ集合で、新41判定を追加。local／将来CIを加算しない |
+| 保護した旧期待値 | rendererの旧test本文、measured-wrap旧全本文と固定B9 oracle、native旧97実行部分・独立uncached oracleが原文一致。元RN5入力はpreview版だけv4→v5、本文／recipe／順序／saved v3は完全一致 |
+| local準備差 | sparse環境に不足した既存Nexus／InputActionArea等6原文を同9d9f0b7から取得。変更対象へ含めず、検査の読取依存だけを充足。最終未解消failなし |
+| nativeの限定検査 | 旧97を独立summaryで必須にし、新32を追加して期待129。旧7入力の全探索代表と属性付き独立選択行5値／paint、旧8件目の原属性観測と拒否、4worker所有、実key／units予算境界、無効値・例外解放・再wrap・queue期限を検査。iOS実行結果は未取得 |
+| 予算境界2件の限界 | 実16,384／4,194,304の列挙・refを検査するため、その2件だけtest wrapper内で短い実CTLineを使用。数値同値・品質・性能の証拠に数えない |
+| 実RNの元集合 | essay_paragraphs／quote_unicode／declaration_no_brand／essay_max420／saved_essay_canvasの5件を独立分母で維持。最後だけsaved v3。420の既存文反復stress入力を生成policyの適合証拠へ換算しない |
+| 実RNの補足集合 | Latin ligature／Arabic／あ420の原文字列をCard3件、spaces／Hebrew／mixed bidiの本文下限未満3件をraw RN Text診断として別集計。rawは同Textの候補→B9一行→独立検査→PNGまでで、Piece response／Card fit／保存証拠にはしない |
+| 旧属性条件の区別 | paragraph directionは原属性のnative検査。8件目は48ptの「space-tab-space」＋37pt RTL後続・baseline4で、原文の直接CoreText観測と製品のfont不一致拒否を維持。属性を緩めて受理しない |
+
+旧5のassert・元8秒・同token local fit・完成PNGの検査は維持し、追加Card3とraw3は別の件数・名前・条件で収集します。B9のgroups／font／選択した探索5値と最終独立5値を同じreportへ記録します。report.elapsed_msはlocal fit照合後、PNG生成前に確定する従来の境界を保ちます。native単体・raw診断・PNG encoding時間をCardの8秒成立へ読み替えません。
+
+現時点はSOURCE_IMPLEMENTED／LOCAL_JS_VERIFIED、正式採用false・実画像未確認です。この新sourceのpushで起動する既存CIの1runだけを待ち、全結果・artifactを回収して§76.5の採否を記録します。同sourceの実RN再実行は行いません。今回の変更は§77の16pathに限定し、API／DB／flags／env／deploy／署名／配布／main mergeの効果0です。
 
