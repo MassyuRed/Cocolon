@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§74／本map §65.22です。保存commit後のFEATURE停止から、同じ要求/keyで保存結果を回収するcontroller／hostの不具合を修復しました。local13file802件成功。通常保存の正式supplier・稼働・実機受入れと420文字最終描画は未完了です。**
+**最新は入口§74／本map §65.22です。保存commit後のFEATURE停止から、同じ要求/keyで保存結果を回収するcontroller／hostの不具合を修復しました。source `5c44b252` のlocal／CI JS802件・native69件・Android source compile成功。通常保存の正式supplier・稼働・実機受入れと420文字最終描画は未完了です。**
 
 ### §72時点の要約（履歴）
 
@@ -2742,4 +2742,10 @@ essay／quote／declarationの3preview fixtureはnative_checkedとなり、実mo
 source修正前の追加4原因検査は意図どおりFAIL。修復後は追加3 controller＋9 hostを含む既存13file802 PASS／FAIL0／SKIP0。localはNode24.19.0・TypeScript5.2.2・test-isolation=noneです。hostの3復帰分岐で元body/keyの保存回収→同owner詳細GET→本文／recipe／hash一致を確認しました。React／HTTP／Auth／admissionは代替境界のため、実端末・実DBの通常保存合格とは扱いません。GitHub読戻しとCIは入口§74.3に追記します。
 
 §65.21.2のDB2関数は適用済みのままで再適用0。420文字は入口§73.4の8,284.257ms timeout・最終inspection／PNGなしを維持します。幅超過行だけink取得を省くiOS preview専用v4の限定候補は入口§74.4に未承認・未実装として具体化しました。計測契約の変更を含むため、正式採用や実行へ自動進行しません。正式renderer supplier・candidate runtime・通常初回保存→同owner再表示・P-W2／P-W3は未完了です。
+
+#### 65.22.1 修復sourceと標準CIの確認を完了
+
+source [5c44b252f049a973de29b37f2fb8dba93548cca0](https://github.com/MassyuRed/Cocolon/commit/5c44b252f049a973de29b37f2fb8dba93548cca0)の既存7pathを全件読戻し、内容／blob／変更集合／headを確認しました。[run39197238380](https://github.com/MassyuRed/Cocolon/actions/runs/39197238380)はCI JS802 PASS、実TextKit／CoreText69 PASS、iOS source／Android source compile成功で完了。既存guard5runもsuccessです。native69は従来の全候補・5doubleのuncached一致を含みます。
+
+今回の差分は保存controller／hostなので、実RN canvasとexport Pod／Android依存compile stepはscope skipです。job successをその実行成功へ換算しません。420文字の最終描画は未解消、正式supplier・candidate runtime・通常初回保存の実機受入れ・P-W2／P-W3も未完了です。詳細なjob identityと検査範囲は入口§74.3.1、未承認v4候補は§74.4、manifest v78を参照します。この追加checkpointは既存記録3pathのみでsource／test／live追加効果0です。
 

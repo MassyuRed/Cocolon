@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は§74／current map §65.22です。サーバー保存確定後の機能停止で、結果回収用の保存キーを失う不具合を修復しました。同一要求での明示回収→同owner詳細GETを含むlocal13ファイル802件成功。通常初回保存の正式admission・稼働・実機受入れと、420文字の最終描画は未完了です。**
+**最新は§74／current map §65.22です。サーバー保存確定後の機能停止で、結果回収用の保存キーを失う不具合を修復しました。source `5c44b252` の同一要求での明示回収→同owner詳細GETを含むlocal／CI JS802件、CI native69件、Android source compileが成功。通常初回保存の正式admission・稼働・実機受入れと、420文字の最終描画は未完了です。**
 
 ### §72時点の要約（履歴）
 
@@ -1635,6 +1635,24 @@ local実行はNode24.19.0・TypeScript5.2.2。既定の子process方式は検査
 host3分岐では、source GET→preview POST→503保存→新runtime→明示同body/key保存→receipt→同owner詳細GETを通し、詳細のpiece_text・text hash・visual_recipe・recipe hash一致を確認しました。追加source／preview要求や新保存keyは0です。React/RN/AppState/HTTP/Authと初回保存admissionは既存harnessの代替境界であり、画像・実機・実DBの保存成功ではありません。CIとGitHub読戻しは反映後に同節へ結果を追加します。
 
 Supabaseのmigration一覧で§73.6の2本を含む全10件・Piece6件を再確認しました。今回は再適用・新migration・個人のPiece行読取り・業務RPC・設定変更は0です。420文字は§73.4の実RN8,284.257ms timeout・最終inspection／PNGなしを維持し、同sourceの再実行をしていません。通常初回保存の正式renderer supplier、明示candidate APIの稼働、実ownerの保存→再表示、P-W2／P-W3は残件です。
+
+#### 74.3.1 GitHub反映・標準CIの完了結果
+
+実装修復はCocolon Draft PR #30の[5c44b252f049a973de29b37f2fb8dba93548cca0](https://github.com/MassyuRed/Cocolon/commit/5c44b252f049a973de29b37f2fb8dba93548cca0)へ反映しました。親は開始head3e65a639、変更集合は§74の既存7pathだけで、新規file0。全7fileをGitHubから再取得し、準備した内容とblobの完全一致を確認しました。反映時headも5c44b252、Draft/open/unmergedです。
+
+[Piece workflow run39197238380](https://github.com/MassyuRed/Cocolon/actions/runs/39197238380)はsuccessで完了しました。
+
+| job / scope | 確認した結果 |
+|---|---|
+| piece-rn-contracts / 117882535797 | 標準`node --test`で802 PASS／FAIL0／SKIP0。Node24.21.0・TypeScript5.2.2。localのno-isolation実行と区別し、CIログ末尾の件数を確認 |
+| piece-ios-source / 117882535723 | Objective-C++ source compileと実TextKit／CoreText単体検査成功。NATIVE_CHECKS=69 PASS=69 FAIL=0 SKIP=0。mixed420・複合属性・各script・queued fontを含む既存uncached5double一致を保持 |
+| piece-android-source / 117882535888 | 既存Piece bridgeのcompile成功 |
+| piece-ios-rn-canvas / 117882535818 | 描画source差分なしのscope判定で、実RN実行stepをskip。job successを実RNの描画成功とは扱わない |
+| piece-export-pods / 117882535875、piece-export-android / 117882535778 | 依存／build差分なしのscope判定で、依存解決・実compile stepはskip |
+
+既存guardはpush phase6 run39197238429、PR phase6 run39197249281、pytest run39197249264、read-only policy run39197249236、terminal Step7 run39197249245の5runすべてsuccessで完了しました。新workflow・手動再試行は0です。
+
+単体69件の成功は全体8秒の描画受入れではありません。420文字の最新実RN結果は引き続き§73.4のtimeoutで、画像や最終inspectionは追加されていません。今回の最後の記録更新は入口／current map／manifestの既存3pathだけです。製品source／testは5c44b252のまま、DB／env／deploy／署名／配布／main merge／v4実装の追加効果は0です。
 
 ### 74.4 次の判断候補 — iOS preview専用v4の限定検証（未承認・未実装）
 

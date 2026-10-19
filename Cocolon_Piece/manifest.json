@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v77",
+  "schema_version": "cocolon.piece.workstream_manifest.v78",
   "generated_at": "2026-10-19 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v76",
-    "predecessor_blob": "4f57050c56e45d7ef1fd0ac9e9797cbe736d7143",
-    "predecessor_head": "3e65a639df1388b771aa528a33e26022917e6757",
-    "carry_forward": "Retain the six applied Piece migrations and source90cbd705 canvas evidence. Repair same-request save-result recovery after server FEATURE_DISABLED within the existing contract. Formal admission, candidate runtime, ordinary initial-save device acceptance and mixed420 final rendering remain pending. Preview-only v4 is a concrete unapproved proposal, not an implementation."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v77",
+    "predecessor_blob": "f2b4ae6d2b6c343cbc2a96c46a1195db81ef0704",
+    "predecessor_head": "5c44b252f049a973de29b37f2fb8dba93548cca0",
+    "carry_forward": "Documentation-only completion record for source5c44b252. All seven source checkpoint paths reread exactly; CI standard JS802/native69/source compilation and five guard runs succeeded. Full RN canvas/export compilation were scope-skipped. Mixed420 remains the earlier failure. No additional source, DB, runtime, adoption or v4 implementation effect."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "7118b309052b7661f463371699f7bcdfb9fc2780",
-    "raw_sha256": "a1e490f71c1472cdb27e00e58478aaa8d556f2167f7ed0c3df5dd0896527164a",
-    "utf8_bytes": 219527
+    "git_blob_sha1": "291a5ecf4e78800253e75a7440c13092d0b85bad",
+    "raw_sha256": "089a65a184233d9c7f7b613009fec288cbbb541e07dc2b2ac8eb6cea6e9bf991",
+    "utf8_bytes": 221766
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -174,7 +174,7 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "3e65a639df1388b771aa528a33e26022917e6757",
+    "cocolon_pre_sync_head": "5c44b252f049a973de29b37f2fb8dba93548cca0",
     "mashos_api_head": "a536e50ee284785f585ac73329ef2947dca8bba9",
     "current_user_visible_piece_shape": "CANDIDATE_NORMAL_INPUT_V2_SAVED_SOURCE_ONLY__TUTORIAL_NEXUS_LEGACY_REMAIN__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
@@ -248,12 +248,12 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "SAVE_STOP_RECOVERY_SOURCE_VERIFIED__MAX420_FORMAL_ADMISSION_AND_NORMAL_SAVE_PENDING",
-    "current_map_section": "65.22",
-    "current_entry_section": "74",
+    "state": "SAVE_STOP_RECOVERY_SOURCE_AND_CI_VERIFIED__MAX420_FORMAL_ADMISSION_AND_NORMAL_SAVE_PENDING",
+    "current_map_section": "65.22.1",
+    "current_entry_section": "74.3.1 / proposal74.4",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
     "weekly_review_section": "5.6",
-    "first_unfinished_work": "Six Piece migrations are applied; do not reapply them. Same-request recovery after server FEATURE_DISABLED is repaired and locally verified (802). P-W1 still needs mixed420 final rendering, formal renderer admission, explicit candidate runtime and real-owner ordinary initial save/reopen. Source90cbd705 run39177257042 remains mixed420 timeout8284.257ms without final inspection/PNG. Entry74.4 specifies an unapproved preview-only v4 proposal with explicit loss of invalid-ink detection for unselected width-overflow rows; obtain Mash approval before changing that contract or executing v4.",
+    "first_unfinished_work": "Six Piece migrations are applied; do not reapply them. Same-request recovery after server FEATURE_DISABLED is repaired and source/CI verified (JS802 and unchanged native69; actual RN canvas skipped). P-W1 still needs mixed420 final rendering, formal renderer admission, explicit candidate runtime and real-owner ordinary initial save/reopen. Source90cbd705 run39177257042 remains mixed420 timeout8284.257ms without final inspection/PNG. Entry74.4 specifies an unapproved preview-only v4 proposal with explicit loss of invalid-ink detection for unselected width-overflow rows; obtain Mash approval before changing that contract or executing v4.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 6,
@@ -347,9 +347,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "799da7fdfe1899d27bdbb0006d78b6e5dd722b69",
-    "raw_sha256": "79d924f93829c479a45812842c6696962eb8ef048beba0956f50e13fe5d94266",
-    "utf8_bytes": 430209
+    "git_blob_sha1": "9ab714f4b2c20dd2134052acb38a45ddedba3519",
+    "raw_sha256": "e7ab64055911c87abb1c07beef43301e865926f604bc4280e057733e88cc2b33",
+    "utf8_bytes": 431392
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -522,16 +522,16 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "EXISTING_SAVE_RESULT_RECOVERY_REPAIRED__SOURCE_VERIFIED__PRODUCT_ACCEPTANCE_PENDING",
-    "source_parent": "3e65a639df1388b771aa528a33e26022917e6757",
+    "classification": "SAVE_RECOVERY_SOURCE_AND_CI_POSTVERIFIED__DOCUMENTATION_ONLY_CHECKPOINT",
+    "source_parent": "5c44b252f049a973de29b37f2fb8dba93548cca0",
     "api_reference_commit": "a536e50ee284785f585ac73329ef2947dca8bba9",
-    "source_scope": "Existing Piece controller/host internal lifecycle repair; two existing test files and three existing documentation files. No public contract change. Entry74.4 v4 proposal is unapproved and unimplemented.",
-    "product_source_changes": 2,
-    "test_source_paths": 2,
+    "source_scope": "Only the three existing documentation owners update after exact source readback and completed CI. Controller, host, tests and all native sources remain source5c44b252. Proposal74.4 remains unapproved and unimplemented.",
+    "product_source_changes": 0,
+    "test_source_paths": 0,
     "workflow_paths": 0,
     "sql_source_changes": 0,
     "piece_documentation_paths": 3,
-    "structure_map": "STRUCTURE_MAP_DELTA_NONE__RESULT_SECTION_65_22",
+    "structure_map": "STRUCTURE_MAP_DELTA_NONE__RESULT_SECTION_65_22_1",
     "live_database_apply": 0,
     "business_rpc": 0,
     "private_piece_row_reads": 0,
@@ -544,7 +544,8 @@
     "main_merge": 0,
     "release_effect": 0,
     "product_acceptance": false,
-    "automatic_progression": false
+    "automatic_progression": false,
+    "verified_product_source_commit": "5c44b252f049a973de29b37f2fb8dba93548cca0"
   },
   "b06_q3_context_fence": {
     "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
@@ -5475,7 +5476,18 @@
       "formal admission and current native fit checks"
     ],
     "normal_flow_evidence": "Source GET -> preview -> synthetic-admission save503 -> runtime -> explicit same-body/key receipt recovery -> body-free navigation -> actual owner detail controller GET, exact text/recipe/hashes. React/RN/HTTP/Auth/admission are test doubles.",
-    "github_verification": "Pending publication and fresh readback; append exact results after write.",
+    "github_verification": {
+      "write_commit": "5c44b252f049a973de29b37f2fb8dba93548cca0",
+      "parent_commit": "3e65a639df1388b771aa528a33e26022917e6757",
+      "changed_paths": 7,
+      "new_paths": 0,
+      "every_path_content_and_blob_match": true,
+      "changed_path_set_match": true,
+      "head_at_source_verification": "5c44b252f049a973de29b37f2fb8dba93548cca0",
+      "draft": true,
+      "state": "open",
+      "merged": false
+    },
     "real_device_acceptance": false,
     "live_database_effect": 0,
     "api_changes": 0,
@@ -5495,6 +5507,71 @@
       "normal initial save and same-owner reopen on actual app/device",
       "P-W2 export/Photos/share",
       "P-W3 product read"
-    ]
+    ],
+    "source_commit": "5c44b252f049a973de29b37f2fb8dba93548cca0",
+    "ci_after": {
+      "run_id": 39197238380,
+      "conclusion": "success",
+      "source_commit": "5c44b252f049a973de29b37f2fb8dba93548cca0",
+      "node": "24.21.0",
+      "typescript": "5.2.2",
+      "standard_js": {
+        "job_id": 117882535797,
+        "runner": "node --test",
+        "tests": 802,
+        "pass": 802,
+        "fail": 0,
+        "skip": 0
+      },
+      "native_ios": {
+        "job_id": 117882535723,
+        "checks": 69,
+        "pass": 69,
+        "fail": 0,
+        "skip": 0,
+        "uncached_all_five_doubles_exact": true,
+        "source_compile": "success"
+      },
+      "android_source": {
+        "job_id": 117882535888,
+        "compile": "success"
+      },
+      "rn_canvas": {
+        "job_id": 117882535818,
+        "execution": "scope_skipped",
+        "render_acceptance_credit": false
+      },
+      "export_pods": {
+        "job_id": 117882535875,
+        "compile": "scope_skipped"
+      },
+      "export_android": {
+        "job_id": 117882535778,
+        "compile": "scope_skipped"
+      },
+      "guard_runs": [
+        {
+          "id": 39197238429,
+          "conclusion": "success"
+        },
+        {
+          "id": 39197249281,
+          "conclusion": "success"
+        },
+        {
+          "id": 39197249264,
+          "conclusion": "success"
+        },
+        {
+          "id": 39197249236,
+          "conclusion": "success"
+        },
+        {
+          "id": 39197249245,
+          "conclusion": "success"
+        }
+      ],
+      "manual_reruns": 0
+    }
   }
 }
