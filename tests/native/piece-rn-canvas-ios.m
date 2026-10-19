@@ -50,7 +50,7 @@ RCT_EXPORT_METHOD(capture:(nonnull NSNumber *)tag report:(NSDictionary *)raw res
     BOOL valid = canvas && canvas.window && !canvas.hidden && canvas.alpha == 1 &&
       fabs(canvas.bounds.size.width - [raw[@"width"] doubleValue]) < 0.01 &&
       fabs(canvas.bounds.size.height - [raw[@"height"] doubleValue]) < 0.01;
-    NSMutableArray *texts = [NSMutableArray new], *actual = [NSMutableArray new], *frames = [NSMutableArray new];
+    NSMutableArray *texts = [NSMutableArray new], *actual = [NSMutableArray new], *frames = [NSMutableArray new], *geometry = [NSMutableArray new];
     if (canvas) [self collectText:canvas into:texts];
     NSArray *rows = raw[@"rows"];
     valid = valid && texts.count == rows.count + ([raw[@"branding"] boolValue] ? 1 : 0);
@@ -62,6 +62,17 @@ RCT_EXPORT_METHOD(capture:(nonnull NSNumber *)tag report:(NSDictionary *)raw res
       valid = valid && [storage.string isEqualToString:expected] && view.window && !view.hidden && view.alpha > 0;
       NSLayoutManager *layout = storage.layoutManagers.firstObject;
       NSTextContainer *container = layout.textContainers.firstObject;
+      CGRect contentFrame = view.cocolonPieceContentFrame;
+      [geometry addObject:@{ @"view_size": @[@(view.bounds.size.width), @(view.bounds.size.height)],
+        @"content_frame": @[@(contentFrame.origin.x), @(contentFrame.origin.y), @(contentFrame.size.width), @(contentFrame.size.height)],
+        @"container_size": @[@(container.size.width), @(container.size.height)] }];
+      if (i < rows.count && [raw[@"candidate_profile"] isEqual:@"piece.rn_native_preview.prototype.v6"]) {
+        valid = valid && fabs(view.bounds.size.width - [raw[@"width"] doubleValue]) < 0.01 &&
+          fabs(contentFrame.origin.x - [raw[@"margin"] doubleValue]) < 0.01 && fabs(contentFrame.origin.y) < 0.01 &&
+          fabs(contentFrame.size.width - [raw[@"content_width"] doubleValue]) < 0.01 &&
+          fabs(contentFrame.size.height - [raw[@"plan_line_height"] doubleValue]) < 0.01 &&
+          fabs(container.size.width - contentFrame.size.width) < 0.01 && fabs(container.size.height - contentFrame.size.height) < 0.01;
+      }
       [layout ensureLayoutForTextContainer:container];
       NSRange glyphs = [layout glyphRangeForTextContainer:container];
       CGRect localInk = CGRectOffset([layout boundingRectForGlyphRange:glyphs inTextContainer:container],
@@ -74,6 +85,7 @@ RCT_EXPORT_METHOD(capture:(nonnull NSNumber *)tag report:(NSDictionary *)raw res
         CGRectGetMaxX(ink) <= canvas.bounds.size.width - margin + 0.5 && CGRectGetMinY(ink) >= margin - 0.5 && CGRectGetMaxY(ink) <= bottom + 0.5;
     }
     report[@"native_texts"] = actual; report[@"native_ink_frames"] = frames; report[@"native_canvas_valid"] = @(valid);
+    report[@"native_text_geometry"] = geometry;
     if (canvas && canvas.bounds.size.width > 0 && canvas.bounds.size.height > 0) {
       UIGraphicsImageRendererFormat *format = [UIGraphicsImageRendererFormat defaultFormat];
       format.scale = 1; format.opaque = YES;
@@ -97,8 +109,8 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
   return [[NSBundle mainBundle] URLForResource:@"piece-canvas" withExtension:@"jsbundle"];
 }
 - (NSArray<id<RCTBridgeModule>> *)extraModulesForBridge:(RCTBridge *)bridge { return @[self.resultModule]; }
-- (void)assertV5Report:(NSDictionary *)report {
-  XCTAssertEqualObjects(report[@"candidate_profile"], @"piece.rn_native_preview.prototype.v5");
+- (void)assertV6Report:(NSDictionary *)report {
+  XCTAssertEqualObjects(report[@"candidate_profile"], @"piece.rn_native_preview.prototype.v6");
   NSArray *rows = report[@"rows"], *inspection = report[@"inspection"];
   BOOL branding = [report[@"branding"] boolValue];
   XCTAssertEqual(inspection.count, rows.count + (branding ? 1 : 0), @"%@", report[@"name"]);
@@ -164,7 +176,7 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     XCTAssertEqualObjects(report[@"save_fit_current"], @(preview), @"%@", report[@"name"]);
     XCTAssertEqualObjects(report[@"save_fit_wrong_token_current"], @NO, @"%@", report[@"name"]);
     XCTAssertEqualObjects(report[@"save_fit_handle_keys"], preview ? @[@"isCurrent"] : @[], @"%@", report[@"name"]);
-    if (preview) [self assertV5Report:report];
+    if (preview) [self assertV6Report:report];
     XCTAssertNotNil(report[@"png"]);
     if (report[@"png"]) {
       UIImage *image = [UIImage imageWithContentsOfFile:[PieceEvidenceDirectory() stringByAppendingPathComponent:report[@"png"]]];
@@ -184,7 +196,7 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     XCTAssertEqualObjects(report[@"save_fit_current"], @YES);
     XCTAssertEqualObjects(report[@"save_fit_wrong_token_current"], @NO);
     XCTAssertEqualObjects(report[@"save_fit_handle_keys"], @[@"isCurrent"]);
-    [self assertV5Report:report];
+    [self assertV6Report:report];
   }
   for (NSDictionary *report in raw) {
     XCTAssertEqualObjects(report[@"phase"], @"measurement_checked", @"%@", report);
@@ -196,7 +208,7 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     XCTAssertEqualObjects(report[@"plan_groups"], @[report[@"rows"]]);
     XCTAssertEqual([report[@"on_text_layout"] count], 1);
     XCTAssertNil(report[@"save_fit_current"]); XCTAssertNil(report[@"state_can_save"]); XCTAssertNil(report[@"state_can_export"]);
-    [self assertV5Report:report];
+    [self assertV6Report:report];
   }
   for (NSDictionary *report in [supplemental arrayByAddingObjectsFromArray:raw]) {
     if (report[@"png"]) {

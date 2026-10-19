@@ -16,6 +16,10 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**最新は入口§78／本map §65.26／weekly §5.6.6です。RTLの負のinkを実Text内へ収めるv6横padding修復を既存3製品fileへ実装しました。組版幅888/864・本文幅・余白・旧native v5計測は保持。local JS888成功、新sourceの一度の実RN・完成PNGは未確認です。旧v5の未採用STOPは履歴として保持し、正式admission・通常保存は未完了です。**
+
+### §77時点の結論（履歴）
+
 **最新は入口§77.2〜77.4／本map §65.25.1／weekly20261017 §5.6.5です。承認されたv5実装と一度の検証を完了。source b983da2dはlocal／CI JS880・native129・iOS／Android compile成功、元実RN5ケースは全成功です。420文字は6,763.778ms・36pt18行・全inspection・同token fit・PNGまで成立しました。ただし追加ArabicのCardとraw RTL2件が描画条件を満たさず、v5は未採用で停止。結果後の製品／test／workflow追加変更・同source再実行0。正式admission・通常保存は未完了です。**
 
 ### §76時点の要約（履歴）
@@ -2842,3 +2846,17 @@ source `b983da2d3ba5ffd7d9f78a2b9e8d2b0574b5b5b1`／tree `5efe974d8c39cdac75cf23
 Arabicは新inspectionが返った後のoverflow分岐で拒否されています。失敗時の値が残らないため、TextKit own-view、既存配置幅／高さ、新独立幅／高さのうちどれが直接原因か、本文／brandingのどちらかは未特定です。inspection=[]を未検査とせず、探索値を最終値の代用にしません。raw失敗2件もnative_textsは原文と一致し、body_preserved=falseはcatchの失敗flagです。旧sourceで同じ追加入力・実RN条件が成功していた証拠はなく、新規回帰の原因をv5だけへ帰属させません。
 
 **V5_UNADOPTED_STOP。** mixed420の条件は達成しましたが、追加RTLまで含む承認済み描画検証は揃わず、正式採用へ進めません。元の契約差を保った技術的な成果を残し、結果後の製品／test／workflow追加変更0・同source再実RN0で限定作業を閉じます。次の製品読取はRTLの実Text属性・TextKit境界と既存配置条件。P-W1の正式supplier→InputScreen、同採用版saved再表示、candidate runtime／flag／TTL／rendererとRN版、通常保存→同owner再表示は依然未完了です。API／DB／設定／deploy／署名・配布／main merge効果0、物理実機・商品受入れfalse、automatic_progression=false。
+
+### 65.26 明示iOS preview v6 — RTLの実Text描画領域修復
+
+STRUCTURE_MAP_DELTA_PRESENT。開始head b91cf471、実行owner華恋、現指示とRule18 LEVEL_2に基づく既存契約内の横方向修復。入口§78がscope/STOP/result owner、weekly §5.6.6がP-W1記録、manifestのios_preview_v6_20261019が機械読取ownerです。
+
+| 既存file | 今回の責任差 |
+|---|---|
+| components/piece/PieceVisualCard.js | v6選択済み本文だけに横padding=margin/外幅1080を設定。raw inkを配置時だけ内側座標へ戻し、外側leftを同量補正。v6の候補呼出しは既存v5 option、選択行検査は既存v1 |
+| features/piece/pieceLayout.js | 明示iOS preview v6の版/bindingを追加。実測outer box幅1080と既存inner幅888/864を区別。saved/export v6は不許可 |
+| features/piece/pieceMeasuredWrap.js | v6 profileから既存native_candidates.v5 tableを受ける対応だけ追加。全range、B9選択、探索方式、独立値の意味を維持 |
+| tests/piece-v2-renderer.test.js | 旧880を保持する全suiteにv6回帰8を追加、local888成功 |
+| tests/native/piece-rn-canvas-entry.js・fixtures.cjs・ios.m | 同11fixtureのpreview版と横配置を更新。実native内幅、元余白、旧assertionを保持し、既存拒否inspectionの観測を追加 |
+
+native製品source/decoder/workflow/DB/APIは変更なし。probe/prefetch/branding、縦方向、全文/glyph/一行、own-view raw ink、元本文幅、独立5値、同node/token/generation、元8秒を維持。新source一度の実RNとPNGは未確認であり、修復成立/正式admission/通常保存のcreditはまだない。旧65.25/65.25.1はv5の履歴結果です。

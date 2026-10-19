@@ -10,6 +10,10 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
+**最新は§78／current map §65.26／weekly20261017 §5.6.6です。新しいPiece残件指示に基づくLEVEL_2のRTL描画領域修復を明示iOS preview v6として実装しました。実Textの左右paddingと位置補正により元の組版幅・本文幅・余白を維持します。local JS888（既存880＋v6回帰8）は成功。新sourceの一度の実RN・全11report・完成PNGはこれから確認するため、修復成立・正式admission・通常保存の完了はまだ未確認です。旧v5の結果・未採用STOPは§77の履歴として保持します。**
+
+### §77時点の要約（履歴）
+
 **最新結果は§77.2〜77.4です。Mash承認に基づくiOS preview v5の実装と一度の限定検証を完了しました。source b983da2dはlocal／CI JS880・native129・iOS／Android compile成功。実RNの元5ケースは全成功し、420文字は6,763.778ms・36pt18行・同token fit・完成PNGまで確認しました。ただし追加ArabicのCardとraw RTL2件に描画条件の未達が残ったため、§76.5に従いv5は未採用で停止します。同source再実行・結果後の製品／test／workflow追加変更0。正式admission・通常保存は未完了です。§76の未承認記録と§77.1の結果待ちは提案／実行前の履歴です。**
 
 ### §76時点の要約（履歴）
@@ -1962,4 +1966,40 @@ artifact `piece-rn-canvas-ios`（ID12176407319、61,628,295bytes、SHA256 `3bf63
 source b983da2dを既存Draft PR #30の未採用候補として保持し、結果確認後は既存4文書だけを更新します。製品／test／workflowの追加変更0、同source実RN再実行0、期限延長0、worker増加0、候補削減0、同font再plan0です。承認を未承認へ戻す状態ではなく、§76.5の停止条件に従って今回の完成単位を閉じた状態です。
 
 次の製品読取対象はRTLの実Text属性・TextKit境界と既存配置条件です。Arabicの直接の超過項目は今回未確定であり、探索値から補いません。確かな修復根拠がないまま新しい記録機構だけを増やしたり、同じsourceを再試行したりしません。P-W1には正式renderer admissionのInputScreen供給、同採用版のsaved再表示、candidate APIの実効flag／TTL／renderer・RN版の稼働確認、通常初回保存→同owner詳細／履歴での再表示が残ります。今回API／DB／flags／env／deploy／署名／配布／main merge効果0、正式採用false、商品／物理実機受入れfalse、automatic_progression=falseです。全体設計・全file地図・最新weeklyで確認したP-W2／P-W3、10/20方式判断・10/31管理線・12/18目標を、この技術検証だけで完了・達成保証に変更しません。
+
+## 78. 2026-10-19 JST — Piece残件のRTL描画領域修復・明示iOS preview v6
+
+### 78.1 開始時の限定範囲
+
+Mash様の新しい「Pieceの残件作業を進めて」に接続し、P-W1の最初の未達であるRTLの実Text描画領域を修復する。開始headはb91cf47132ef3d6f025188ddac52f6982483c28b、実行ownerは華恋。全体設計01/01A/01B/01C、全国民制、全file indexとrecursive tree1901件、Piece入口・manifest・current map、最新weekly20261017とmandatory incidentを確認した。旧v5の限定検証と未採用STOPは§77の履歴として保持する。
+
+permission basisは現指示とRule18 §11.3 LEVEL_2、weekly §5.6.2〜5.6.3。本文・catalog・組版幅・safe margin・方法族・受入れ条件を保つ内部描画修復であり、PCE5 Render Reproducibility §7に従う新preview版を用いる。v6→既存native_candidates.v5／native_selected_line.v1の対応を明示し、旧v3/v4/v5を変更しない。
+
+対象repositoryはMassyuRed/Cocolon、既存Draft PR30の同branch。exact pathsは次の11件だけとする。
+
+- components/piece/PieceVisualCard.js
+- features/piece/pieceLayout.js
+- features/piece/pieceMeasuredWrap.js
+- tests/piece-v2-renderer.test.js
+- tests/native/piece-rn-canvas-entry.js
+- tests/native/piece-rn-canvas-fixtures.cjs
+- tests/native/piece-rn-canvas-ios.m
+- Cocolon_Piece/00_read_first.md
+- Cocolon_Piece/manifest.json
+- Cocolon_前提資料/current_structure/02_piece_current_structure.md
+- Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md
+
+選択済みv6本文行だけにpaddingHorizontal=既存margin96/108を設け、外側Text幅1080、実TextContainer内幅888/864を維持する。配置計算時だけraw ink左右からpaddingを引き、従来の幅・位置式を使って外側leftを同量戻す。onTextLayoutは内側座標のまま。own-view判定には実外側boxとraw ink、本文配置幅には元contentWidthを使用する。縦方向、probe/prefetch、branding、native製品source・wire・全range探索・独立5値・全文/glyph/禁則/rewrap・現在node/token/generation・元8秒は保持する。
+
+検証は既存13 JS suite（importされるhost検査含む）＋必要なv6回帰、既存workflowのcompile/native129、同じ本文/recipe/順序の実RN基準Card5・補足Card3・raw診断3、同状態PNGとnative contentFrame実測。Arabic拒否時は既存operation内の同plan/generation/sizeIndex evidenceを既存harnessに記録し、追加native passや製品記録機構を設けない。raw診断の表示配置をv6に合わせるが、診断をPiece保存成功へ転用しない。
+
+新sourceの限定実RNは一度。失敗時は該当値と完成条件を記録して未採用で止め、同source再試行・期限延長・判定緩和・成功分だけによる全体合格を行わない。API/DB/flags/env/deploy/署名/配布/main merge効果は本範囲に含まれない。canSave/canExportはfalse、正式admission・saved/export v6・通常初回保存→同owner詳細/履歴・物理実機受入れは別の未完了条件として保持する。current map §65.26・weekly §5.6.6・manifest v6 ownerを同じ変更単位で同期する。
+
+### 78.2 source修復とlocal検査
+
+製品差分はCard/layout/B9の既存3fileです。明示v6はiOS previewだけで、selected body Textに幅1080・paddingHorizontal96/108・height=lineHeightを設定し、leftをpadding分戻します。内側幅・onTextLayout・元の本文占有幅を保持します。candidate adapterは既存v5 optionを明示指定し、B9はv6とv5 wireの対応だけ追加しました。native候補/inspection source、pinned RN patch、旧versionの分岐はbyte未変更です。
+
+既存renderer suiteへ8回帰を追加し、両ratio/両alignment、raw own-view/元本文幅/独立5値/branding40の厳密な拒否、旧wire拒否、同node/token/generation/期限を検査しました。全13 suiteはNode24.19.0・TypeScript5.2.2で既存880＋新8=888成功、失敗/skip0。通常process isolationではfile単位13成功のreportになったため、同13 suiteのtest-isolation=noneで全888の登録と個別結果を確認しました。これは合成計測によるsource検査で、実RNの成立証拠ではありません。
+
+既存実RN harnessは全文/recipe/順序/5+3+3分母・旧assertionを保持し、preview版だけv6、savedはv3のままです。captureで実view bounds/contentFrame/TextContainer寸法を確認します。raw成功reportは配置setStateのcommit確認後に公開し、拒否値は既存operationからのみ保持します。追加native pass・新製品記録owner・workflow変更はありません。実RN結果とPNGの確認前であり、この時点の状態はV6_SOURCE_READY__ONE_RUN_PENDING__NOT_ADOPTEDです。
 

@@ -57,7 +57,7 @@ function blockContext(text, table, width, candidateProfile) {
   const bounded = table.version === 'piece.native_candidates.v4';
   const exploration = table.version === 'piece.native_candidates.v5';
   if (bounded !== (candidateProfile === 'piece.rn_native_preview.prototype.v4') ||
-      exploration !== (candidateProfile === 'piece.rn_native_preview.prototype.v5') ||
+      exploration !== (candidateProfile === 'piece.rn_native_preview.prototype.v5' || candidateProfile === 'piece.rn_native_preview.prototype.v6') ||
       bounded && (!finite(table.contentWidth) || table.contentWidth !== width)) unavailable();
   const boundaries = table.boundaries, n = boundaries.length - 1;
   if (n < 1 || n > 420 || boundaries[0] !== 0 || boundaries[n] !== text.length ||

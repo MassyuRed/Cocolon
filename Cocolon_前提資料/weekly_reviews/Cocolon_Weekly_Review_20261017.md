@@ -648,6 +648,12 @@ source `b983da2d3ba5ffd7d9f78a2b9e8d2b0574b5b5b1` のlocal／CI既存13 JS suite
 
 実装は製品5＋検査6＋workflow1＋文書4の16path、結果反映は既存4文書だけ。API／DB／flags／env／deploy／署名／配布／main merge効果0。P-W1の正式supplier・同採用版saved再表示・candidate稼働・通常保存→同owner再表示は未完了で、P-W2／P-W3と10/20方式判断・10/31管理線・12/18目標の再評価は今回行いません。正式admission・商品／物理実機受入れfalse、automatic_progression=falseを維持します。
 
+#### 5.6.6 10/19の新しいPiece残件指示 — RTL横描画領域のv6修復
+
+P-W1の最初の未達に接続し、現指示とRule18 LEVEL_2により既存契約内の修復を進めます。実Textの負の左inkは外側移動だけではown-view内へ戻らないため、選択済み本文の横padding=既存marginと逆方向位置補正で、元の組版幅888/864・本文幅・余白を保持する明示iOS preview v6を実装しました。native v5候補/選択行v1・全range・独立5値・元8秒・旧版は維持します。
+
+local13 suiteは既存880＋v6回帰8=888成功。現段階では新source一度の実RN基準Card5/補足Card3/raw3と同状態PNGが未確認です。入口§78・current map §65.26・manifest v6 ownerへscopeと実装差を同期しました。失敗時は該当値を記録し未採用で停止し、同source再試行/期限延長/判定緩和で通しません。旧v5 §5.6.5の未採用STOPを保持し、正式admission/採用版saved再表示/実candidate API/通常初回保存→同owner詳細・履歴は未完了です。既適用DB6件の再適用や無関係な準備作業は行いません。
+
 ## 6. 議題6 — 今回の指摘に対する判断と、記録の責任
 
 ### 6.1 問題は反省文の不足ではない
