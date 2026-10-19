@@ -1439,7 +1439,7 @@ sourcef49238ac／[run38495258157](https://github.com/MassyuRed/Cocolon/actions/r
 
 artifact11864476166（55,431,860 bytes、期限2026-10-21T01:40:49Z）のZIP SHA256 `a607ee49316877c4879950aa23d0aa6a5789832d86c594312eba0d91339d110e` とresults.json SHA256 `3a6e91aa60def5411c355da05fe82c2c1b18e4f2286cc3f808f78ed3a7b414b7` を照合しました。native69／JS768／Android source／phase6 guardsは成功、export Pods／Androidはscope skip、workflow全体はRN failureです。物理実機受入れ・正式renderer供給・保存直前fit・通常初回保存は未完了です。
 
-## 73. 2026-10-19 JST — P-W1通常保存へ向けた候補文字列の重複構築削減（検証中）
+## 73. 2026-10-19 JST — P-W1保存前fit接続の実測確定（通常保存は未完了）
 
 最新weekly20261017の§1.5／§5.6とREADMEの10/19追記を本線にします。添付の旧checkpoint06935d2にあるiOS44停止は現行の未完了箇所ではなく、§71–72でnative69完走を確認済みです。現在の未完了条件は混在420文字の全体8秒・最終inspectionと、正式renderer供給→同じpreview/tokenの保存前fit→通常初回保存・同owner再表示です。性能修正と保存接続をP-W1の内部工程として扱い、小さな検査成功だけを通常保存の完成へ数えません。
 
@@ -1491,7 +1491,7 @@ artifact12153037478（56,908,730 bytes、期限2026-10-25T22:30:21Z）のZIP SHA
 
 復元後のlocal14ファイルは833 PASS／FAIL0／SKIP0（Node24.19.0／TypeScript5.2.2）。initial-save-modal内でも実行するhost43件を別起動した重複があるため、既存CI13ファイルとの対応件数は790です。対象renderer71、host43、modal86（host43を含む）が成功。これはnativeをsyntheticにしたsource検査であり、通常保存の実端末操作の証拠ではありません。
 
-既存実RNの同じ5fixtureへ、previewごとに固定したtokenとstable callbackを渡し、実handleの現在性・別token拒否・公開keyをreportへ追加しました。savedにも同じcallbackを渡し、handleが実際に無いことを負例として確認します。元の2frame安定確認・本文／inspection／PNG／全5件・8秒・canSave/canExport=falseを保持し、handleの照合時間もelapsed_msへ含めます。今回のsourceで実RNとnative69を再検証します。まだ結果を先取りしません。
+既存実RNの同じ5fixtureへ、previewごとに固定したtokenとstable callbackを渡し、実handleの現在性・別token拒否・公開keyをreportへ追加しました。savedにも同じcallbackを渡し、handleが実際に無いことを負例として確認します。元の2frame安定確認・本文／inspection／PNG／全5件・8秒・canSave/canExport=falseを保持し、handleの照合時間もelapsed_msへ含めます。このsourceの実RNとnative69の再検証は完了し、結果を§73.4に確定しました。
 
 同環境read-only担当による原典・実差分reviewと華恋の確認を実施。別model reviewや物理実機受入れとは扱いません。構造責任の追加をcurrent map§65.21とmanifestへ同時反映します。
 
@@ -1506,4 +1506,43 @@ API PR3 heada536e50ee284785f585ac73329ef2947dca8bba9の既存candidate compositi
 P-W1の未完了は、420文字の全体8秒と最終描画、正式renderer supplier、必要DB関数・明示candidate compositionの稼働、同じ候補の明示初回保存→同owner履歴／詳細再表示です。default applicationはlegacy、bootstrapの8flagは正式renderer供給ではなく、versionやready fieldを追加する変更は行っていません。P-W2の画像保存／共有3形式とP-W3の物理実機・実画像受入れも未完了です。weekly10/17§5.6を本線とし、過去の全device準備をsource作業の前提へ戻しません。
 
 今回の委任で進めるsource／検査／既存PR反映と、DB適用・env・deploy・署名・配布・main mergeの稼働効果を区別します。後者の実行は0。Draft/open/unmerged・default OFFを保持し、未供給の正式admissionをtrueに代入しません。
+
+### 73.4 source90cbd705の実測確定 — Cardの保存fitを3fixtureで確認、420文字はtimeout
+
+source [90cbd705f2d344906eac7959c63e2fa1b2b06253](https://github.com/MassyuRed/Cocolon/commit/90cbd705f2d344906eac7959c63e2fa1b2b06253)／[run39177257042](https://github.com/MassyuRed/Cocolon/actions/runs/39177257042) を確認しました。JS job117822371689は790 PASS／FAIL0／SKIP0。native job117822371774の実出力は69 PASS／FAIL0／SKIP0で、mixed420全行とuncached oracleの5double bit比較も通過。Android source job117822371720はcompile成功、同headの既存guard workflow5本も成功しました。export Pods／Androidのjobは成功表示ですが、依存変更がなくcompile stepはscope skipです。実RN job117822371654は下表の420文字失敗によりexit65、workflow全体もfailureです。
+
+native mixed420単体2,486.745ms、worker実時間2,261.017ms、CoreText作成11,382回／累積4,262.470ms、ink累積790.779ms、検査decode134.437msでした。全候補88,410行から完全UTF-16＋属性が同じ11,381代表値を処理し、各独立行のCoreText作成と5doubleを維持しています。累積時間とworker実時間を合算せず、別runnerの時間差をbuffer変更やSHA変更の効果量と断定しません。
+
+| 実RN fixture | phase | elapsed_ms | inspection件数 | 現在tokenのfit | 別tokenのfit |
+|---|---|---:|---:|---|---|
+| essay_paragraphs | native_checked | 944.133 | 6 | true | false |
+| quote_unicode | native_checked | 725.929 | 4 | true | false |
+| declaration_no_brand | native_checked | 308.555 | 5 | true | false |
+| essay_max420 | unavailable / measurement_timeout | 8284.257 | 0 | false | false |
+| saved_essay_canvas | native_checked | 4087.257 | 6 | false | false |
+
+成功したpreview3fixtureでは、実際にmountしたCardが公開したhandleのkeyはisCurrentだけで、同じpreview/tokenを受理し別tokenを拒否しました。savedカードには同じcallbackを渡してもhandleはありません。この実RN harnessはCardを直接mountするため、Modal／host／InputScreenを通る実RNの通常保存導線の証拠ではありません。Card→Modal→hostの接続と保存境界の失効条件は§73.2のJS source検査で確認しています。3形式の全入力・全端末の合格へ一般化しません。全5件state_can_save／state_can_export=falseです。
+
+成功4件はbody_preserved／native_canvas_valid=true、全inspectionでwrapViolation=false、overflow=false、glyphCheck=no_missing_observed。華恋が4枚を開き、本文・段落・文字欠け・余白・brandingを確認しました。essay／savedは1080×1350、quote／declarationは1080×1920です。4 PNGのSHA256は§73.1の対応画像と同一でした。成功4件のcapture_errorはキー不在です。
+
+420文字はsize_index1でtimeout、完成したB9は48ptの1回（132.438ms、fit=false）だけでした。48ptはnative4,215.968ms／adapter4,378.582ms。44ptはnative7,952.272ms／adapter8,186.087msでreport時には解決済みですが、B9完了記録はありません。40ptはnative／adapterともpending、36ptはtraceに要求記録がありません。48／44ptは各88,410行・11,381代表値・UTF-16長420・v3です。stateはplanning1 4,623.575ms→unavailable1 8,034.571ms。queue待ちを含む呼出時間を合算しません。rows／inspectionは空、PNGなし、capture_error=true、native_canvas_validキーなし。body_preserved=falseは完成した選択planがないharness判定で、本文を削除した記録ではありません。8,284.257msを描画成功時間や改善証拠にはしません。
+
+artifact12155650678（60,195,947 bytes、期限2026-10-25T23:59:13Z）のZIP SHA256は `44de1b7fb340d17951a526fcd4907823a66b8ffe97f05e50fc3845d92ab295a3`、results.json SHA256は `a4dcfb2545237d767e0194305eb4a5d9b4bab45f280c41fc47734a7cb0821c6d`。ZIPをGitHub digestと、JSONを実行ログ5reportと照合しました。420文字PNGはartifactにありません。
+
+現在のprofileと実装から、現行の全候補・全行5double契約を維持したまま8秒を解消できる追加案は確定していません。既に代表値の重複除去・v3転送・worker内文字列appendを実装済みで、失敗したbatch／suffix再利用や同じsourceの再実行へ戻しません。§72の幅超過行ink省略は契約変更を伴う未採用案のままです。P-W1の通常初回保存・同owner再表示、正式renderer供給と稼働、420文字の最終描画、P-W2／P-W3は未完了です。
+
+### 73.5 次のDB適用候補を2本に限定して具体化（未適用）
+
+対象はSupabase `cocolon-project`（project ref `oeahmpmigszggnkyiivq`）。API sourceは `a536e50ee284785f585ac73329ef2947dca8bba9` に固定し、既存SQL全文と依存条件を確認しました。
+
+| 既存SQL / blob | 適用内容と必要な経路 |
+|---|---|
+| [20261010_005_piece_v2_quota_read.sql](https://github.com/MassyuRed/mashos-api/blob/a536e50ee284785f585ac73329ef2947dca8bba9/supabase/migrations/20261010_005_piece_v2_quota_read.sql) / 3db5ed79c2ebca7e3c2b83825de13a98be7ff0df | public.piece_read_quota_v2(uuid)を追加。新規preview発行前にownerのtierと当月保存消費数を読む。保存の許可・消費処理の代替ではない |
+| [20261010050940_piece_v2_preview_visual_change.sql](https://github.com/MassyuRed/mashos-api/blob/a536e50ee284785f585ac73329ef2947dca8bba9/supabase/migrations/20261010050940_piece_v2_preview_visual_change.sql) / 585e4e386e7afb2b06b363f8c2e0108699796582 | public.piece_mutate_preview_visual_v2(uuid,uuid,bigint,jsonb,jsonb,text,text,jsonb)を追加。後のvisual PATCH呼出しで未保存private previewのrecipe／hash／revisionを更新。初期recipeのままの保存に必須ではない |
+
+両関数はSECURITY DEFINER／固定search_pathで、EXECUTEはservice_roleだけです。同名関数が一つでも既存ならSQLのguardで停止し、CREATE OR REPLACEは行いません。SQL適用自体は既存Piece本文や保存行を書き換えず、table／RLSを変更しません。visual関数の後の呼出しではowner・元データ・revisionを照合し、未保存previewの見た目を更新しますが、本文・expiry・quota・保存済みrecordを変更しません。
+
+read-onlyのmetadata照合で、適用role条件とservice_role、依存する通常table6個、piece_records／piece_quota_consumptionsのRLS有効・強制、必要な既存関数5個のsignatureを確認しました。既存M4 migration4本を維持し、再適用しません。これは適用前提の確認で、稼働中candidate compositionや通常保存の受入れではありません。個人のPiece本文・行の読取りとlive applyは0です。
+
+rule18 §0(4)／§11.3は新規DB migrationを今回のsource／test／docs委任に含めないため、次の個別承認候補は「この2本を対象projectへ適用し、migration履歴・関数signature・EXECUTE権限・既存M4の維持をmetadataで確認する」までです。正式renderer採用、flag／env、deploy／activation、署名／配布／main mergeはこの承認候補に含めません。2本の適用だけで通常保存が完成するとは扱いません。
 

@@ -2696,11 +2696,23 @@ P-W1（weekly20261017 §5.6）の通常preview→明示保存→同owner履歴�
 
 handleは本文・行文字列・native node・metricsを公開せず、controllerの意図・保存HTTP・永続receiptに追加しません。listener取消時の親の再変更を再照合。未知の保存結果の再試行は、既存の同一要求・同一keyを保持し、新しいfitを要求して回復を閉ざしません。Cardの説明は画像レイアウト、保存利用可否の説明は親が担当します。
 
-source検査はlocal14ファイル833 PASS／FAIL0／SKIP0。modalに含まれるhost43件の別起動を除くCI13ファイルは790件に対応します。既存実RN5件へ固定token／実handle現在性／別token拒否／saved時handle不在のstrict assertionを追加し、元の本文・inspection・PNG・8秒・canSave/canExport=falseを維持して検証します。source検査の成功を実端末通常保存の成功へ換算しません。
+source検査はlocal14ファイル833 PASS／FAIL0／SKIP0。modalに含まれるhost43件の別起動を除くCI13ファイルは790件に対応します。既存実RN5件へ固定token／実handle現在性／別token拒否／saved時handle不在のstrict assertionを追加し、元の本文・inspection・PNG・8秒・canSave/canExport=falseを維持して検証しました。結果は§65.21.1です。source検査の成功を実端末通常保存の成功へ換算しません。
 
 直前native source b3fdafaf／run39171059794は69 PASS／FAIL0／SKIP0。実RNは通常4件の本文・inspection・PNGを確認した一方、420文字は8,332.374msでtimeout、B9は48／44ptのみ完了、40ptはadapter完了でもB9未完了、36pt候補pending、最終inspection／PNGなしです。華恋が4枚を開いて確認し、ZIP／JSON digestも照合済み。workerごとのattributed buffer構築削減は全行5double bit条件を維持し、batch／suffix typesetter再利用は復活させません。詳細とartifact identityは入口§73.1です。
 
 正式InputScreen supplierは未接続、prototype/native_checkedは正式admissionではありません。APIのdefault appはlegacy、明示candidate compositionの稼働は未確認。DB metadata照合でpiece_read_quota_v2とpiece_mutate_preview_visual_v2は同名overloadも含め不在でした。前者は新規preview生成前のquota読取りに必要、後者はvisual PATCH用。通常保存POSTは既存M4 piece_save_v2でquota再照合します。未適用SQL2本と具体的な残件は入口§73.3へ集約します。
 
 このwrite unitで構造mapを更新。全体設計01・全file地図01A–Cと最新weekly10/17を確認済みです。通常初回保存・同owner再表示・P-W2画像保存／共有・P-W3物理実機受入れは未完了。default OFF、Draft/open/unmerged、DB/env/deploy/署名/配布/main merge効果0。再開は入口§73と本節、manifest next_groupを使います。
+
+### 65.21.1 source90cbd705の実測確定と次の境界
+
+source90cbd705／[run39177257042](https://github.com/MassyuRed/Cocolon/actions/runs/39177257042) はJS790 PASS、native69 PASS（全行5double bit比較を含む）、Android source compileと既存guard5workflow成功。export Pods／Android compileはscope skipです。実RNは420文字timeoutでfailure／exit65でした。
+
+essay／quote／declarationの3preview fixtureはnative_checkedとなり、実mountしたCardのhandleが現在preview/tokenを受理し別tokenを拒否。saved essayもnative_checkedですがhandleは不在です。Card単体を直接mountする実RN harnessの証拠であり、Modal／host／InputScreen経由の通常保存操作は未確認です。Card→Modal→hostの接続は既存JS source検査で確認。全5件canSave／canExport=falseを保持します。
+
+華恋が成功4 PNGを開き、本文・段落・文字欠け・余白・brandingを確認しました。420文字は8,284.257msでmeasurement_timeout、size1、48ptのB9だけ完了してfit=false。44pt候補は解決済みでもB9未完了、40ptは候補pending、36ptは要求traceなし、最終inspection／PNGなしです。artifact12155650678のZIP／JSON照合を含む正確な結果と検証範囲は入口§73.4です。別runnerの時間差を速度改善へ換算しません。
+
+正式supplier・必要なDB関数と明示candidate compositionの稼働・通常初回保存→同owner履歴／詳細・P-W2／P-W3は未完了。現行全候補／5double契約内で8秒を解消する追加案は未確定です。幅超過行ink省略は未採用の契約変更案で、失敗したbatch／suffix方式は復活させません。
+
+既存API SQL2本の対象project・pinned source／blob・signature・効果・依存metadataを入口§73.5へ具体化しました。quota読取りは初回previewに必要、visual変更はPATCH用。新規DB適用はrule18 §0(4)／§11.3のsource委任外で未実施。2本の限定適用候補には正式採用・env／deployを含めません。この最終write unitは入口／本map／manifestの3文書だけで、source／test／workflow変更0、live効果0です。
 

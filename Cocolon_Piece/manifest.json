@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v74",
+  "schema_version": "cocolon.piece.workstream_manifest.v75",
   "generated_at": "2026-10-19 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v73",
-    "predecessor_blob": "cec7305f6ddb70b701c740e26334a09fed580e9a",
-    "predecessor_head": "b3fdafaf465b0fc298bcf0f230f844db5f375bc5",
-    "carry_forward": "Native buffer source b3fdafaf passed all69 exact-metric checks; actual RN39171059794 passed4 cases, mixed420 timed out at8332.374ms without final inspection/PNG. This write unit connects current mounted-fit evidence to the existing initial-save host and preserves formal supplier/default-OFF boundaries; real RN revalidation is pending."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v74",
+    "predecessor_blob": "469c9bc43e8961dbca98ef6650ca2bf1464c181d",
+    "predecessor_head": "90cbd705f2d344906eac7959c63e2fa1b2b06253",
+    "carry_forward": "Source90cbd705 passed JS790 and native69. Actual RN run39177257042 verified current Card fit handles in three preview fixtures and no handle in the saved-card fixture; mixed420 timed out at8284.257ms. Card->Modal->host remains source-JS-verified, not an actual normal InputScreen save. This write unit records completed evidence and the two unapplied SQL candidates in three existing docs; formal admission and normal save/reopen remain unfinished."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "a724e4959b8ecdcf49fa922713e37ec6fd5ed984",
-    "raw_sha256": "f37ece8ed407ceebb53d907ca0390113ad6efb7c13163c40d6fb1d1f08501d90",
-    "utf8_bytes": 194484
+    "git_blob_sha1": "d194ca69f9a0c809aa3d2c3f15bf77b64b8db055",
+    "raw_sha256": "df71e1b20851c38ae477f0fcceaa8c290d6018f7939277a52d64f189a797cc10",
+    "utf8_bytes": 201765
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -55,7 +55,7 @@
     "pce9a_b01": "COMPLETE",
     "pce9a_b02a": "NATIVE_ACCEPTANCE_RETAINED__LIVE_BRIDGE_APPLIED_20261010",
     "analysis_roadmap": "REFER_TO_ANALYSIS_CURRENT_STRUCTURE__HISTORICAL_NOT_ACTIVATED_STATE_NOT_CURRENT",
-    "next_piece_group": "FORMAL_RENDERER_ADMISSION_AND_SAVE_FIT__ORDINARY_APP_SAVE_DEVICE_PENDING",
+    "next_piece_group": "P_W1_MAX420_FINAL_RENDERING_AND_FORMAL_ADMISSION__NORMAL_SAVE_REOPEN_PENDING",
     "automatic_packet_progression": false,
     "pce9a_b02a_red": "FROZEN_UNCHANGED__NATIVE_POSTGRESQL_1_PASS",
     "pce9a_b02a_implementation": "EXACT5_PRESERVED__EXACT6_SELECTORS_PUBLISHED",
@@ -80,7 +80,7 @@
     "pce9a_owner_delete_composition": "REMOTE_CANDIDATE_REGISTERED__ISOLATED_CI1759_PASS__NOT_LIVE",
     "pce9a_quota_composition": "REMOTE_CANDIDATE_REGISTERED__ISOLATED_CI1774_PASS__NOT_LIVE",
     "pce9a_private_save_composition": "REMOTE_CANDIDATE_REGISTERED__ISOLATED_CI1789_PASS__NOT_LIVE",
-    "pce9c_save_transport": "REMOTE_CI557_PASS__SAVE_ACTION_NATIVE_FIT_DEVICE_PENDING",
+    "pce9c_save_transport": "SOURCE_SAVE_TRANSPORT_PRESERVED__LOCAL_FIT_CONNECTED__FORMAL_PROVIDER_NORMAL_SAVE_DEVICE_PENDING",
     "pce9e_export_preflight": "HISTORICAL_SOURCE_REVIEWED_PINNED_PROPOSAL__CURRENT_IMPLEMENTATION_IN_EXPORT_NATIVE_COMPILE_20261011",
     "pce9e_export_native_compile": "REMOTE_E4F4984__IOS_ANDROID_LIBRARY_COMPILE_PASS__JS572_PASS__DEVICE_ADMISSION_PENDING",
     "pce9e_export_share_completion": "REMOTE_1C6FBD3__IOS_NORMAL_COMPLETION_COPY_CLEANUP__CI577_PASS__DEVICE_PENDING",
@@ -91,8 +91,8 @@
     "pce9f_b12c_input_screen": "REMOTE_E9045AA__NORMAL_INPUT_V2_ONLY__CI654_PASS__M5_DEVICE_PENDING",
     "pce9c_owner_history_entry": "REMOTE_D866DC0__NORMAL_NEXUS_OWNER_ENTRY__CI667_PASS__DEVICE_PENDING",
     "pce9f_shared_legacy_write_retirement": "REMOTE_804BECA__EXPLICIT_SHARED_CANDIDATE_ONLY__NOT_LIVE_M5",
-    "pce9c_initial_save_modal": "REMOTE_D9CCBC1__MODAL_PREPARATION_CI709_PASS__HOST_ADMISSION_FIT_PENDING",
-    "pce9c_initial_save_host": "REMOTE_F026ADB__CONDITIONAL_HOST_CONNECTED__CI747_PASS__FORMAL_PROVIDER_FIT_DEVICE_PENDING"
+    "pce9c_initial_save_modal": "REMOTE_90CBD705__FIT_CALLBACK_FORWARDED__CI790_PASS__FORMAL_ADMISSION_NORMAL_SAVE_PENDING",
+    "pce9c_initial_save_host": "REMOTE_90CBD705__CONDITIONAL_HOST_LOCAL_FIT_CONNECTED__CI790_PASS__FORMAL_PROVIDER_NORMAL_SAVE_DEVICE_PENDING"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -174,7 +174,7 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "b3fdafaf465b0fc298bcf0f230f844db5f375bc5",
+    "cocolon_pre_sync_head": "90cbd705f2d344906eac7959c63e2fa1b2b06253",
     "mashos_api_head": "a536e50ee284785f585ac73329ef2947dca8bba9",
     "current_user_visible_piece_shape": "CANDIDATE_NORMAL_INPUT_V2_SAVED_SOURCE_ONLY__TUTORIAL_NEXUS_LEGACY_REMAIN__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
@@ -236,18 +236,20 @@
     "piece_v2_initial_save_host_conditional_connected": true,
     "piece_v2_formal_renderer_admission_supplied": false,
     "piece_v2_current_native_fit_handle_connected": true,
-    "piece_v2_native_save_fit_scope": "Local mounted-fit handle is connected Card->Modal->host in source; formal renderer supplier and normal runtime initial-save acceptance remain absent. Local fit alone does not grant admission."
+    "piece_v2_native_save_fit_scope": "Current mounted-fit handle is connected Card->Modal->host and tested in source JS. Actual RN mounts Card directly: three preview fixtures accept the same token and reject a wrong token; saved-card fixture publishes no handle. Formal renderer supplier and normal InputScreen initial-save/reopen acceptance remain absent. Local fit alone does not grant admission.",
+    "piece_v2_current_native_fit_handle_real_rn_verified": true,
+    "piece_v2_current_native_fit_handle_real_rn_scope": "Three specific preview fixtures in the direct-Card iOS simulator harness only; not all inputs/formats/devices or the Modal/host/InputScreen save flow."
   },
   "next_group": {
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
-    "name": "NATIVE_DEVICE_RENDERER_ADMISSION_THEN_SAVE_FIT_AND_BOUND_SAVE",
+    "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "LOCAL_SAVE_FIT_CONNECTED__NATIVE69_PASSED__RN_REVALIDATION_PENDING",
-    "current_map_section": "65.21",
-    "current_entry_section": "73",
+    "state": "CARD_FIT_VERIFIED_3_RN_FIXTURES__MAX420_TIMEOUT__NORMAL_SAVE_UNFINISHED",
+    "current_map_section": "65.21.1",
+    "current_entry_section": "73.4",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
     "weekly_review_section": "5.6",
-    "first_unfinished_work": "Verify current fit connection and unchanged full-body/final-inspection/PNG/eight-second conditions in the existing5-case RN harness. Last native-buffer run39171059794 passed69 bit-exact checks but mixed420 timed out at8332.374ms. Formal InputScreen supplier, required quota RPC and explicit candidate runtime composition, normal initial save and same-owner reopen remain unfinished. Do not restart old iOS44 or unchanged batch/suffix proposals.",
+    "first_unfinished_work": "Resolve mixed420 final rendering within the unchanged8-second condition: source90cbd705 run39177257042 timed out at8284.257ms with only48pt B9 complete,44pt candidates resolved without a completed B9,40pt candidates pending,36pt not requested in the trace, and no final inspection/PNG. No additional optimization sufficient to close this blocker is yet supported within the current full-candidate/five-double contract. Formal renderer supplier, required quota RPC and explicit candidate runtime composition, normal initial save and same-owner reopen remain unfinished. The reviewed two-function DB application is a separate limited approval candidate in entry73.5. Do not repeat completed local-fit source work or failed batch/suffix proposals.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 4,
@@ -342,9 +344,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "e08a1adb9059b2dc8dd3e40d8122005a6025d2a4",
-    "raw_sha256": "33976431087eabb7c785ac2c9ceaa4c8dce94fae9fa95c48da06d6eebc09bad2",
-    "utf8_bytes": 423510
+    "git_blob_sha1": "22c1edba91802601707133f19d60182a6b5186ca",
+    "raw_sha256": "6316c9d60ff16e4a6da4a1b9519edd2841f593f3c9148577e9d3800294aff5b9",
+    "utf8_bytes": 425734
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -517,14 +519,15 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "LOCAL_SAVE_FIT_CONNECTED__NATIVE69_PASSED__RN_REVALIDATION_PENDING",
-    "source_parent": "b3fdafaf465b0fc298bcf0f230f844db5f375bc5",
-    "source_scope": "Containing write unit: four existing product paths, six existing test paths and three existing documentation paths.",
-    "product_source_changes": 4,
-    "test_source_paths": 6,
+    "classification": "DOCUMENT_COMPLETED_RN_FIT_EVIDENCE__MAX420_AND_NORMAL_SAVE_UNFINISHED",
+    "source_parent": "90cbd705f2d344906eac7959c63e2fa1b2b06253",
+    "verified_product_source_commit": "90cbd705f2d344906eac7959c63e2fa1b2b06253",
+    "source_scope": "This write unit changes only three existing documentation paths after source90cbd705 CI completed.",
+    "product_source_changes": 0,
+    "test_source_paths": 0,
     "workflow_paths": 0,
     "piece_documentation_paths": 3,
-    "structure_map": "UPDATED_SECTION_65_21_SAME_WRITE_UNIT",
+    "structure_map": "UPDATED_RESULT_SECTION_65_21_1",
     "signing": 0,
     "distribution": 0,
     "live_database_apply": 0,
@@ -4920,7 +4923,144 @@
       "sha256_valid_vectors": 164,
       "rejected_surrogates": 5
     },
-    "real_rn_revalidation": "PENDING_CONTAINING_SOURCE_COMMIT__SAME_5_FIXTURES_8_SECONDS_PLUS_ACTUAL_FIT_HANDLE_ASSERTIONS",
+    "real_rn_revalidation": {
+      "source_commit": "90cbd705f2d344906eac7959c63e2fa1b2b06253",
+      "run": 39177257042,
+      "job": 117822371654,
+      "status": "completed",
+      "conclusion": "failure",
+      "exit_code": 65,
+      "harness_scope": "Direct PieceVisualCard mount in an iOS simulator. Card->Modal->host connection is verified by source JS tests, not by this actual RN harness.",
+      "cases": [
+        {
+          "name": "essay_paragraphs",
+          "phase": "native_checked",
+          "elapsed_ms": 944.1327499998733,
+          "inspection_count": 6,
+          "body_preserved": true,
+          "native_canvas_valid_present": true,
+          "native_canvas_valid": true,
+          "capture_error_present": false,
+          "save_fit_current": true,
+          "save_fit_wrong_token_current": false,
+          "save_fit_handle_keys": [
+            "isCurrent"
+          ],
+          "state_can_save": false,
+          "state_can_export": false,
+          "png_present": true
+        },
+        {
+          "name": "quote_unicode",
+          "phase": "native_checked",
+          "elapsed_ms": 725.9287910000421,
+          "inspection_count": 4,
+          "body_preserved": true,
+          "native_canvas_valid_present": true,
+          "native_canvas_valid": true,
+          "capture_error_present": false,
+          "save_fit_current": true,
+          "save_fit_wrong_token_current": false,
+          "save_fit_handle_keys": [
+            "isCurrent"
+          ],
+          "state_can_save": false,
+          "state_can_export": false,
+          "png_present": true
+        },
+        {
+          "name": "declaration_no_brand",
+          "phase": "native_checked",
+          "elapsed_ms": 308.55508300010115,
+          "inspection_count": 5,
+          "body_preserved": true,
+          "native_canvas_valid_present": true,
+          "native_canvas_valid": true,
+          "capture_error_present": false,
+          "save_fit_current": true,
+          "save_fit_wrong_token_current": false,
+          "save_fit_handle_keys": [
+            "isCurrent"
+          ],
+          "state_can_save": false,
+          "state_can_export": false,
+          "png_present": true
+        },
+        {
+          "name": "essay_max420",
+          "phase": "unavailable",
+          "elapsed_ms": 8284.257417000132,
+          "inspection_count": 0,
+          "body_preserved": false,
+          "native_canvas_valid_present": false,
+          "capture_error_present": true,
+          "capture_error": true,
+          "save_fit_current": false,
+          "save_fit_wrong_token_current": false,
+          "save_fit_handle_keys": [],
+          "state_can_save": false,
+          "state_can_export": false,
+          "png_present": false
+        },
+        {
+          "name": "saved_essay_canvas",
+          "phase": "native_checked",
+          "elapsed_ms": 4087.256582999835,
+          "inspection_count": 6,
+          "body_preserved": true,
+          "native_canvas_valid_present": true,
+          "native_canvas_valid": true,
+          "capture_error_present": false,
+          "save_fit_current": false,
+          "save_fit_wrong_token_current": false,
+          "save_fit_handle_keys": [],
+          "state_can_save": false,
+          "state_can_export": false,
+          "png_present": true
+        }
+      ],
+      "preview_fixtures_with_current_fit": 3,
+      "saved_fixture_publishes_no_handle": true,
+      "pngs_visually_reviewed": 4,
+      "png_hashes_equal_previous_buffer_run": true,
+      "visual_review_scope": "Full body, paragraph breaks, missing glyphs, margins and branding in the four actual artifact PNGs; no420 PNG exists.",
+      "artifact_id": 12155650678,
+      "artifact_size_bytes": 60195947,
+      "artifact_expires_at": "2026-10-25T23:59:13Z",
+      "artifact_zip_sha256": "44de1b7fb340d17951a526fcd4907823a66b8ffe97f05e50fc3845d92ab295a3",
+      "results_json_sha256": "a4dcfb2545237d767e0194305eb4a5d9b4bab45f280c41fc47734a7cb0821c6d",
+      "artifact_digest_verified": true,
+      "artifact_json_equals_five_log_reports": true,
+      "max420": {
+        "elapsed_ms": 8284.257417000132,
+        "phase": "unavailable",
+        "reason": "measurement_timeout",
+        "size_index": 1,
+        "completed_b9_font_sizes": [
+          48
+        ],
+        "completed_b9_fit": [
+          false
+        ],
+        "font48_native_ms": 4215.968208000064,
+        "font48_adapter_ms": 4378.581540999934,
+        "font48_b9_ms": 132.43783400021493,
+        "font44_native": "resolved",
+        "font44_native_ms": 7952.272333000088,
+        "font44_adapter": "resolved",
+        "font44_adapter_ms": 8186.086874999804,
+        "font44_b9_completed": false,
+        "font40_native_and_adapter": "pending",
+        "font36_requested_in_trace": false,
+        "planning1_observed_ms": 4623.57491700002,
+        "unavailable1_observed_ms": 8034.570667000022,
+        "completed_candidate_rows_per_font": 88410,
+        "completed_metric_count_per_font": 11381,
+        "final_inspection_completed": false,
+        "png": false,
+        "elapsed_difference_is_not_causal_speed_evidence": true
+      }
+    },
     "native_buffer_baseline": {
       "source_commit": "b3fdafaf465b0fc298bcf0f230f844db5f375bc5",
       "run": 39171059794,
@@ -4962,11 +5102,106 @@
         "piece_mutate_preview_visual_v2"
       ],
       "private_rows_read": false,
-      "live_apply": 0
+      "live_apply": 0,
+      "prerequisites_confirmed": {
+        "migration_role_condition": true,
+        "service_role_present": true,
+        "ordinary_tables": [
+          "piece_records",
+          "piece_quota_consumptions",
+          "profiles",
+          "emotions",
+          "emlis_input_threads",
+          "emlis_frame_feedback"
+        ],
+        "piece_tables_rls_enabled_and_forced": true,
+        "existing_dependency_signatures": [
+          "emlis_parent_source(emotions)",
+          "emlis_parent_visible(timestamp without time zone,text,timestamp with time zone)",
+          "emlis_thread_context(uuid,uuid)",
+          "piece_cancel_preview_v2(uuid,uuid,bigint)",
+          "piece_save_v2(uuid,uuid,bigint,text,text,text,text,text,text,jsonb,boolean)"
+        ]
+      },
+      "prerequisite_check_is_not_runtime_acceptance": true,
+      "api_source_commit": "a536e50ee284785f585ac73329ef2947dca8bba9",
+      "limited_live_apply_approval_candidate": [
+        {
+          "path": "supabase/migrations/20261010_005_piece_v2_quota_read.sql",
+          "blob": "3db5ed79c2ebca7e3c2b83825de13a98be7ff0df",
+          "signature": "public.piece_read_quota_v2(uuid)",
+          "required_for": "New preview issuance quota read"
+        },
+        {
+          "path": "supabase/migrations/20261010050940_piece_v2_preview_visual_change.sql",
+          "blob": "585e4e386e7afb2b06b363f8c2e0108699796582",
+          "signature": "public.piece_mutate_preview_visual_v2(uuid,uuid,bigint,jsonb,jsonb,text,text,jsonb)",
+          "required_for": "Visual PATCH of an unsaved private preview; not necessary for saving the unchanged initial recipe"
+        }
+      ],
+      "apply_effect": "Function definitions and service_role-only EXECUTE permissions; no existing Piece body/row or table/RLS rewrite during SQL application. Later visual-function invocation changes the unsaved preview recipe/hash/revisions under existing owner/source guards.",
+      "same_name_overload_guard": true,
+      "already_applied_piece_migrations_to_preserve": 4,
+      "approval_boundary": "Rule18 sections0(4) and11.3 exclude new DB migration from source/test/docs delegation. Candidate approval covers only these two existing SQL files and metadata verification; no renderer adoption, flag/env, deploy/activation, signing, distribution or main merge."
     },
     "normal_initial_save_and_same_owner_reopen": false,
     "formal_renderer_admission_supplied": false,
     "physical_device_acceptance": false,
-    "next_work": "Read revalidation results and images. Close mixed420 performance within current exact contract, then provide an adopted renderer supplier and the authorized runtime/DB prerequisites for ordinary explicit save and same-owner reopen; do not infer acceptance from source tests."
+    "next_work": "P-W1 remains unfinished: mixed420 final rendering within8 seconds, formally adopted renderer supplier, required DB functions and explicit candidate runtime composition, then ordinary explicit save and same-owner history/detail reopen. The current direct-Card RN fit result and source-JS connection do not prove the normal save flow. Two reviewed SQL function additions are prepared as a limited approval candidate; do not infer runtime activation from their application.",
+    "source_commit": "90cbd705f2d344906eac7959c63e2fa1b2b06253",
+    "source_write_unit": {
+      "product_source_paths": 4,
+      "test_paths": 6,
+      "documentation_paths": 3
+    },
+    "native_revalidation": {
+      "source_commit": "90cbd705f2d344906eac7959c63e2fa1b2b06253",
+      "run": 39177257042,
+      "job": 117822371774,
+      "pass": 69,
+      "fail": 0,
+      "skip": 0,
+      "actual_summary_timestamp_utc": "2026-10-18T23:40:30.150591Z",
+      "full_candidate_five_double_bit_comparison": true,
+      "mixed420_candidate_elapsed_ms": 2486.745,
+      "workers_wall_ms": 2261.017,
+      "coretext_creates": 11382,
+      "coretext_create_sum_ms": 4262.47,
+      "image_bounds_sum_ms": 790.779,
+      "cf_substring_sum_ms": 27.613,
+      "test_decode_ms": 134.437,
+      "profile_limits": "Parallel cumulative times are not additive with wall time. CF substring counter excludes some append/copy cost. Different runners are not a causal speed comparison."
+    },
+    "ci_revalidation": {
+      "source_commit": "90cbd705f2d344906eac7959c63e2fa1b2b06253",
+      "run": 39177257042,
+      "workflow_conclusion": "failure",
+      "js": {
+        "job": 117822371689,
+        "pass": 790,
+        "fail": 0,
+        "skip": 0
+      },
+      "android_source": {
+        "job": 117822371720,
+        "compile": "success"
+      },
+      "export_pods": {
+        "job": 117822371514,
+        "compile": "scope_skipped"
+      },
+      "export_android": {
+        "job": 117822371656,
+        "compile": "scope_skipped"
+      },
+      "guard_workflow_runs": [
+        39177267612,
+        39177267598,
+        39177267604,
+        39177267673,
+        39177257050
+      ],
+      "guard_workflows_conclusion": "success"
+    }
   }
 }
