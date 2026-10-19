@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
-revision_date: "2026-10-14 JST"
+revision_date: "2026-10-19 JST"
 latest_api_implementation: "804beca66f9f02e18dc4522232478466f4d52b13"
 latest_storage_candidate: "4fcb140b778850a1b7a5a65d8e0a26005b3a24c4"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
@@ -15,6 +15,10 @@ automatic_progression: false
 # Piece構造 — Current Structure
 
 ## 0. Current conclusion
+
+**最新は入口§74／本map §65.22です。保存commit後のFEATURE停止から、同じ要求/keyで保存結果を回収するcontroller／hostの不具合を修復しました。local13file802件成功。通常保存の正式supplier・稼働・実機受入れと420文字最終描画は未完了です。**
+
+### §72時点の要約（履歴）
 
 **最新は入口§72／本map §65.20です。source `f49238ac` で最終描画検査を同じ画面の全Textへまとめて依頼します。local14ファイル806件、CI JS768件・native69件成功。実RN run38495258157は4成功・420文字8,100.109msでtimeout（入口§72.1）。420文字・正式renderer・保存は未完了です。**
 
@@ -2728,4 +2732,14 @@ essay／quote／declarationの3preview fixtureはnative_checkedとなり、実mo
 両方とも所有者を除くEXECUTEはservice_roleのみで、anon／authenticatedは実効権限もfalse。既存9 function overload、6依存tableの列構成・ACL・RLS・policy、24 default ACLは適用前と一致。migrationは既存8件＋今回2件＝10件、うちPiece分は6件です。既存M4の4本を再適用せず、個人のPiece行の読書きや新関数の業務呼出しも行っていません。
 
 これにより前節までの2 RPC未作成は解消しました。正式InputScreen supplier・明示candidate APIの稼働・通常初回保存→同owner再表示、420文字の最終描画、P-W2／P-W3は未完了です。DB適用をrenderer採用・通常保存の製品受入れへ換算しません。source／test／workflow／SQL原文変更0、DB関数追加2、env／deploy／署名／配布／main merge効果0。再開時はこの適用済み2本を繰り返さず、入口§73.6とmanifest next_groupを使います。
+
+### 65.22 保存確定後のFEATURE停止から同じ要求で結果を回収
+
+入口§74はweekly20261017 §5.6 P-W1の既存保存回収契約を修復します。既存`features/piece/PieceCreateController.js`は、保存がcommitしていても返り得るFEATURE_DISABLEDの後にbody-free保存要求／元keyを保持し、save種別を維持してsource GETへ戻る表示を防ぎます。既存`screens/input/InputPieceActionArea.js`は同owner・保存入力ID・元keyの新runtime publicationだけを伝え、preview/saveがstrict trueに復帰したとき、元要求の明示確認を可能にします。背景復帰や同runtimeのsave-only flag変更ではserver停止を解除しません。
+
+選択変更・一般disable・unmountによる破棄、Authの前後照合、初回保存の正式supplier＋local fitは維持します。API、bootstrap wire、DB永続fieldの変更はありません。STRUCTURE_MAP_DELTA_NONE。owner配置は既存のままで、ここには内部lifecycle修復と実結果だけを追加します。
+
+source修正前の追加4原因検査は意図どおりFAIL。修復後は追加3 controller＋9 hostを含む既存13file802 PASS／FAIL0／SKIP0。localはNode24.19.0・TypeScript5.2.2・test-isolation=noneです。hostの3復帰分岐で元body/keyの保存回収→同owner詳細GET→本文／recipe／hash一致を確認しました。React／HTTP／Auth／admissionは代替境界のため、実端末・実DBの通常保存合格とは扱いません。GitHub読戻しとCIは入口§74.3に追記します。
+
+§65.21.2のDB2関数は適用済みのままで再適用0。420文字は入口§73.4の8,284.257ms timeout・最終inspection／PNGなしを維持します。幅超過行だけink取得を省くiOS preview専用v4の限定候補は入口§74.4に未承認・未実装として具体化しました。計測契約の変更を含むため、正式採用や実行へ自動進行しません。正式renderer supplier・candidate runtime・通常初回保存→同owner再表示・P-W2／P-W3は未完了です。
 

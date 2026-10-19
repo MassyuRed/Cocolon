@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v76",
+  "schema_version": "cocolon.piece.workstream_manifest.v77",
   "generated_at": "2026-10-19 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v75",
-    "predecessor_blob": "98eec33633a3addae5a3926c61e1366881e32f53",
-    "predecessor_head": "e90360d94bd22a3062005b5e6b5c06498c2ea3ad",
-    "carry_forward": "Mash explicitly approved the two SQL files proposed in entry73.5. Applied each exactly once to cocolon-project, verified exact stored SQL/function bodies and metadata, and retained existing objects. Product source90cbd705 and its mixed420 timeout are unchanged. Formal renderer admission, candidate API runtime, normal save/reopen and P-W2/P-W3 remain unfinished."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v76",
+    "predecessor_blob": "4f57050c56e45d7ef1fd0ac9e9797cbe736d7143",
+    "predecessor_head": "3e65a639df1388b771aa528a33e26022917e6757",
+    "carry_forward": "Retain the six applied Piece migrations and source90cbd705 canvas evidence. Repair same-request save-result recovery after server FEATURE_DISABLED within the existing contract. Formal admission, candidate runtime, ordinary initial-save device acceptance and mixed420 final rendering remain pending. Preview-only v4 is a concrete unapproved proposal, not an implementation."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "c7576de76fea3474c13518e2ef6914b6f40870f9",
-    "raw_sha256": "e2e6a0f1530b7dcd4c9f98c1bad974c4579f105871a46fa6753027d8d4ed5070",
-    "utf8_bytes": 207187
+    "git_blob_sha1": "7118b309052b7661f463371699f7bcdfb9fc2780",
+    "raw_sha256": "a1e490f71c1472cdb27e00e58478aaa8d556f2167f7ed0c3df5dd0896527164a",
+    "utf8_bytes": 219527
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -174,7 +174,7 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "e90360d94bd22a3062005b5e6b5c06498c2ea3ad",
+    "cocolon_pre_sync_head": "3e65a639df1388b771aa528a33e26022917e6757",
     "mashos_api_head": "a536e50ee284785f585ac73329ef2947dca8bba9",
     "current_user_visible_piece_shape": "CANDIDATE_NORMAL_INPUT_V2_SAVED_SOURCE_ONLY__TUTORIAL_NEXUS_LEGACY_REMAIN__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
@@ -240,22 +240,24 @@
     "piece_v2_current_native_fit_handle_real_rn_verified": true,
     "piece_v2_current_native_fit_handle_real_rn_scope": "Three specific preview fixtures in the direct-Card iOS simulator harness only; not all inputs/formats/devices or the Modal/host/InputScreen save flow.",
     "piece_v2_database_migrations_applied": 6,
-    "piece_v2_db_runtime_scope": "The four prior Piece migrations and two approved function additions exist live. Explicit candidate API runtime and real-owner business RPC execution remain unverified; DB definitions alone do not establish ordinary app save."
+    "piece_v2_db_runtime_scope": "The four prior Piece migrations and two approved function additions exist live. Explicit candidate API runtime and real-owner business RPC execution remain unverified; DB definitions alone do not establish ordinary app save.",
+    "piece_v2_server_disabled_save_recovery_connected": true,
+    "piece_v2_server_disabled_save_recovery_scope": "Same saved owner/input/original key only; a fresh strict runtime publication reopens explicit replay with the original save body/key. Foreground and same-runtime flags cannot clear the stop. Source-harness verified; real initial-save acceptance remains false."
   },
   "next_group": {
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "DB_RPC_APPLIED__CARD_FIT_VERIFIED_3_RN_FIXTURES__MAX420_AND_NORMAL_SAVE_PENDING",
-    "current_map_section": "65.21.2",
-    "current_entry_section": "73.6",
+    "state": "SAVE_STOP_RECOVERY_SOURCE_VERIFIED__MAX420_FORMAL_ADMISSION_AND_NORMAL_SAVE_PENDING",
+    "current_map_section": "65.22",
+    "current_entry_section": "74",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
     "weekly_review_section": "5.6",
-    "first_unfinished_work": "The two approved DB functions are applied and metadata-verified; do not reapply them. P-W1 still requires mixed420 final rendering within8 seconds, formal renderer admission, explicit candidate API runtime, ordinary explicit initial save and same-owner history/detail reopen. Source90cbd705 run39177257042 still has mixed420 timeout8284.257ms and no final inspection/PNG; this DB-only operation did not rerun or alter that evidence. No sufficient additional optimization is yet established within the full-candidate/five-double contract. Current fit in three direct-Card fixtures and source-JS Modal/host connection do not prove the normal save flow.",
+    "first_unfinished_work": "Six Piece migrations are applied; do not reapply them. Same-request recovery after server FEATURE_DISABLED is repaired and locally verified (802). P-W1 still needs mixed420 final rendering, formal renderer admission, explicit candidate runtime and real-owner ordinary initial save/reopen. Source90cbd705 run39177257042 remains mixed420 timeout8284.257ms without final inspection/PNG. Entry74.4 specifies an unapproved preview-only v4 proposal with explicit loss of invalid-ink detection for unselected width-overflow rows; obtain Mash approval before changing that contract or executing v4.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 6,
-    "production_migration_apply_effect": 2,
+    "production_migration_apply_effect": 0,
     "automatic_progression": false,
     "repeat_shared_preparation": false,
     "repeat_saved_operation_control": false,
@@ -290,7 +292,8 @@
     "repeat_initial_save_host_connection": false,
     "weekly_work_unit": "P-W1_20261019_20261022",
     "repeat_local_save_fit_connection": false,
-    "database_result_owner": "live_db_apply_20261019"
+    "database_result_owner": "live_db_apply_20261019",
+    "save_stop_recovery_owner": "save_stop_recovery_20261019"
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -344,9 +347,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "5bee41a7cd76af29b127ee99126fc59d739b9ac9",
-    "raw_sha256": "fdc981b090e7eb3a21345e36763927ac5c38463e8d245bb2f70a40a86b1737ae",
-    "utf8_bytes": 427769
+    "git_blob_sha1": "799da7fdfe1899d27bdbb0006d78b6e5dd722b69",
+    "raw_sha256": "79d924f93829c479a45812842c6696962eb8ef048beba0956f50e13fe5d94266",
+    "utf8_bytes": 430209
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -519,20 +522,21 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "APPROVED_TWO_SQL_APPLIED_AND_METADATA_VERIFIED__NORMAL_SAVE_UNFINISHED",
-    "source_parent": "e90360d94bd22a3062005b5e6b5c06498c2ea3ad",
-    "verified_product_source_commit": "90cbd705f2d344906eac7959c63e2fa1b2b06253",
-    "api_sql_source_commit": "a536e50ee284785f585ac73329ef2947dca8bba9",
-    "source_scope": "Only three existing Cocolon documentation paths change in GitHub. Two previously approved existing API SQL files were applied unchanged to the target live DB and verified by metadata.",
-    "product_source_changes": 0,
-    "test_source_paths": 0,
+    "classification": "EXISTING_SAVE_RESULT_RECOVERY_REPAIRED__SOURCE_VERIFIED__PRODUCT_ACCEPTANCE_PENDING",
+    "source_parent": "3e65a639df1388b771aa528a33e26022917e6757",
+    "api_reference_commit": "a536e50ee284785f585ac73329ef2947dca8bba9",
+    "source_scope": "Existing Piece controller/host internal lifecycle repair; two existing test files and three existing documentation files. No public contract change. Entry74.4 v4 proposal is unapproved and unimplemented.",
+    "product_source_changes": 2,
+    "test_source_paths": 2,
     "workflow_paths": 0,
     "sql_source_changes": 0,
     "piece_documentation_paths": 3,
-    "structure_map": "UPDATED_RESULT_SECTION_65_21_2",
-    "live_database_apply": 2,
-    "new_database_functions": 2,
-    "migration_history_additions": 2,
+    "structure_map": "STRUCTURE_MAP_DELTA_NONE__RESULT_SECTION_65_22",
+    "live_database_apply": 0,
+    "business_rpc": 0,
+    "private_piece_row_reads": 0,
+    "new_database_functions": 0,
+    "migration_history_additions": 0,
     "signing": 0,
     "distribution": 0,
     "environment_changes": 0,
@@ -5404,5 +5408,93 @@
     },
     "product_acceptance": false,
     "remaining_work": "Mixed420 final rendering, formal renderer admission, explicit candidate API runtime, real-owner normal initial save and same-owner reopen, then P-W2/P-W3. Do not reapply these two functions or infer runtime activation from the metadata result."
+  },
+  "save_stop_recovery_20261019": {
+    "entry_section": "74",
+    "map_section": "65.22",
+    "source_parent": "3e65a639df1388b771aa528a33e26022917e6757",
+    "permission": "Rule18 section0 Piece Pro exception and section11.3 LEVEL_2 standing delegation; current Piece residual-work request.",
+    "execution_owner": "Karen / GPT-6 Astra Pro / CHAT_PRO_OK",
+    "review": "Read-only same-environment review; no material finding; reviewers ran no tests and made no writes.",
+    "source_files": [
+      {
+        "path": "features/piece/PieceCreateController.js",
+        "git_blob_sha1": "56ac6e8ac507f5185b6770ef6ce9cc8e1e49c69e",
+        "raw_sha256": "19941e516d5e0361ea46e796a89c61ff4bffe79dbd898473a0b280e74377ed0e",
+        "utf8_bytes": 26083
+      },
+      {
+        "path": "screens/input/InputPieceActionArea.js",
+        "git_blob_sha1": "293a4d25543641ff3e8852f0072d999e8a753750",
+        "raw_sha256": "f24ee9de8e74df57ba4e444386a7fa99b960b6b932d52acb00d1049d7fcb4c65",
+        "utf8_bytes": 23841
+      }
+    ],
+    "test_files": [
+      {
+        "path": "tests/piece-v2-state-models.test.js",
+        "git_blob_sha1": "88b1872546d54070dc52816bcb9578a8d52b346b",
+        "raw_sha256": "324f37153fbe7ffce944e42bd0b794c371766a038cedb556bc986d4b7173bc0b",
+        "utf8_bytes": 44936
+      },
+      {
+        "path": "tests/piece-v2-preview-display.test.js",
+        "git_blob_sha1": "de95f59bd127152b1321c0161cf5acaba5bc5d18",
+        "raw_sha256": "dd3bb15ebd7f5e7e5fd1513e085558a786059812e05148e7ea3bbf9be748b6bd",
+        "utf8_bytes": 62595
+      }
+    ],
+    "causal_before": {
+      "source_commit": "3e65a639df1388b771aa528a33e26022917e6757",
+      "tests": 4,
+      "passed": 0,
+      "failed": 4,
+      "cause": "Missing save retryKind and missing same-save recovery UI after preview-off/save-off/batched fresh runtime."
+    },
+    "local_after": {
+      "node": "24.19.0",
+      "typescript": "5.2.2",
+      "runner": "node --test --test-isolation=none",
+      "files": 13,
+      "tests": 802,
+      "passed": 802,
+      "failed": 0,
+      "skipped": 0,
+      "new_controller_tests": 3,
+      "new_host_tests": 9
+    },
+    "preserved": [
+      "exact original save body/key",
+      "fresh owner-bound Auth",
+      "no automatic retry",
+      "no source/preview regeneration",
+      "strict fresh runtime after FEATURE_DISABLED",
+      "stale runtime/foreground rejection",
+      "owner/input/key/general-disable/unmount invalidation",
+      "known auth/conflict rejection",
+      "formal admission and current native fit checks"
+    ],
+    "normal_flow_evidence": "Source GET -> preview -> synthetic-admission save503 -> runtime -> explicit same-body/key receipt recovery -> body-free navigation -> actual owner detail controller GET, exact text/recipe/hashes. React/RN/HTTP/Auth/admission are test doubles.",
+    "github_verification": "Pending publication and fresh readback; append exact results after write.",
+    "real_device_acceptance": false,
+    "live_database_effect": 0,
+    "api_changes": 0,
+    "native_changes": 0,
+    "unapproved_v4_proposal": {
+      "owner": "Cocolon_Piece/00_read_first.md section74.4",
+      "implementation_effect": 0,
+      "approval": false,
+      "scope": "Explicit iOS preview prototype.v4 only; existing saved/export v3 retained. Independent advance for all rows, omit ink only for strict advance>contentWidth. Width-bound tagged wire; original69 native checks and5 RN fixtures retained.",
+      "material_contract_difference": "No detection of invalid ink in unselected width-overflow candidates; not an unchanged-acceptance optimization.",
+      "eight_second_success_guaranteed": false
+    },
+    "remaining": [
+      "mixed420 final rendering within original8seconds",
+      "formal renderer admission supplier",
+      "explicit candidate runtime",
+      "normal initial save and same-owner reopen on actual app/device",
+      "P-W2 export/Photos/share",
+      "P-W3 product read"
+    ]
   }
 }

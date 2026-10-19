@@ -817,3 +817,113 @@ test('actual saved-input binding reaches saved navigation after separate source,
     '/emotion/piece/preview', '/emotion/piece/save']);
   assert.equal(u.host.controller.getView().phase, 'saved'); u.host.componentWillUnmount();
 });
+
+async function serverDisabledSavedInputFixture() {
+  const navigations = [], source = request().source_ref;
+  let saves = 0, refreshes = 0;
+  const u = previewUiHarness({ admitSave: true, send: async (url, init) => {
+    if (init.method === 'GET') return pieceHttp(source);
+    if (!url.endsWith('/save')) return pieceHttp(response());
+    return ++saves === 1 ? { status: 503, json: async () => ({ code: 'PIECE_FEATURE_DISABLED' }) }
+      : pieceHttp(uiSaveReceipt({ idempotency_replayed: true }));
+  } });
+  u.host.props = { savedInput: { savedInputId: source.source_input_id, expectedUserId: OWNER,
+    idempotencyKey: 'synthetic-stopped-save-source-key' },
+    navigation: { getParent: () => ({ navigate: (...args) => navigations.push(args) }) } };
+  const publish = ({ preview = true, save = true, fresh = true } = {}) => {
+    u.host.context = { runtime: fresh ? {} : u.host.context.runtime,
+      isFeatureEnabled: name => ({ piece_v2_preview_enabled: preview,
+        piece_v2_save_enabled: save, piece_v2_owner_read_enabled: true })[name] === true,
+      refreshAppRuntime: async () => { refreshes++; } };
+    if (u.host.mounted) u.host.componentDidUpdate();
+  };
+  publish(); u.mount();
+  await u.host.resolveSavedInput(); u.host.start(); await pieceTick();
+  await startSyntheticSave(u);
+  assert.equal(refreshes, 1); assert.equal(u.calls.length, 3);
+  return { ...u, publish, navigations, source };
+}
+
+for (const refresh of ['preview-off', 'save-off', 'batched-on']) {
+  test(`server-disabled saved-input save recovers the same receipt and owner detail after ${refresh}`, async () => {
+    const u = await serverDisabledSavedInputFixture();
+    if (refresh !== 'batched-on') {
+      u.publish(refresh === 'preview-off' ? { preview: false, save: false } : { save: false });
+      assert.equal(u.host.controller.getView().canRetry, false);
+      assert.equal(u.host.controller.getView().preview, null);
+    }
+    u.publish();
+    assert.equal(u.calls.length, 3, 'runtime refresh must not retry or regenerate');
+    const retry = uiButton(u, '同じ保存要求で結果を確認');
+    assert.ok(retry, 're-enabled UI must retain the original save recovery instead of asking for the source again');
+    assert.equal(uiButton(u, '保存入力を確認'), undefined);
+    retry.props.onPress(); await pieceTick();
+    assert.equal(u.calls.length, 4);
+    assert.equal(u.calls[2][1].body, u.calls[3][1].body);
+    assert.equal(u.calls[3][1].headers['Idempotency-Key'], 'synthetic-explicit-save-key');
+    uiButton(u, '保存したPieceを確認').props.onPress();
+    const target = u.navigations[0][1].params.savedPiece;
+    assert.deepEqual(clone(target), { pieceId: response().preview_id, expectedUserId: OWNER });
+
+    const source = fs.readFileSync(path.join(__dirname, 'piece-v2-owner-history.test.js'), 'utf8').split('const detailInput =')[0];
+    const context = vm.createContext({ require, __dirname, AbortController, setImmediate });
+    vm.runInContext(source + '\nglobalThis.ownerHarness = harness;', context);
+    const saved = clone(response());
+    for (const key of ['preview_id', 'preview_revision', 'expires_at', 'eligible_formats', 'quota', 'plan_capabilities']) delete saved[key];
+    Object.assign(saved, { piece_id: target.pieceId, public_id: 'piece:' + target.pieceId,
+      lifecycle_status: 'saved', saved_at: '2026-10-08T10:00:00Z', row_version: 2,
+      export_contract_version: 'piece.export_contract.v1', render_interface_version: 'piece.render_interface.v1',
+      render_reproducibility_version: 'piece.render_reproducibility.v1' });
+    const dest = context.ownerHarness({ send: async () => pieceHttp(saved) });
+    const host = new dest.PieceOwnerHistoryHost({ owner: OWNER, flags: { piece_v2_owner_read_enabled: true },
+      enabled: true, savedPiece: target });
+    host.componentDidMount(); await pieceTick();
+    assert.equal(dest.calls.length, 1);
+    assert.equal(dest.calls[0][0], '/emotion/piece/' + target.pieceId);
+    assert.equal(host.controller.getView().record?.piece_text, response().piece_text);
+    assert.deepEqual(clone(host.controller.getView().record?.visual_recipe), response().visual_recipe);
+    assert.equal(host.controller.getView().record?.piece_text_hash, response().piece_text_hash);
+    assert.equal(host.controller.getView().record?.visual_recipe_hash, response().visual_recipe_hash);
+    assert.deepEqual(u.calls.map(([url]) => url), ['/emotion/piece/source-ref/' + u.source.source_input_id,
+      '/emotion/piece/preview', '/emotion/piece/save', '/emotion/piece/save']);
+    host.componentWillUnmount(); u.host.componentWillUnmount();
+  });
+}
+
+test('background and same-runtime save flags cannot reopen a server-disabled saved-input save', async () => {
+  const u = await serverDisabledSavedInputFixture();
+  u.background('background'); u.background('active');
+  assert.equal(u.host.controller.getView().canRetry, false);
+  assert.equal(uiButton(u, '保存入力を確認'), undefined);
+  u.publish({ save: false, fresh: false }); u.publish({ fresh: false });
+  assert.equal(u.host.controller.getView().canRetry, false);
+  await u.host.resolveSavedInput(); await u.host.retry();
+  assert.equal(u.calls.length, 3);
+  u.publish();
+  assert.ok(uiButton(u, '同じ保存要求で結果を確認'));
+  u.host.componentWillUnmount();
+});
+
+for (const boundary of ['owner', 'input', 'key', 'disable', 'unmount']) {
+  test(`server-disabled save intent cannot survive ${boundary} invalidation`, async () => {
+    const u = await serverDisabledSavedInputFixture(), oldProps = u.host.props;
+    u.publish({ preview: false, save: false });
+    if (boundary === 'unmount') {
+      u.host.componentWillUnmount(); u.mount();
+    } else if (boundary === 'disable') {
+      u.host.controller.setContext({ enabled: false });
+    } else {
+      const savedInput = { ...oldProps.savedInput };
+      if (boundary === 'owner') savedInput.expectedUserId = 'another-owner';
+      if (boundary === 'input') savedInput.savedInputId = '20000000-0000-4000-8000-000000000099';
+      if (boundary === 'key') savedInput.idempotencyKey = 'another-source-key';
+      u.host.props = { ...oldProps, savedInput }; u.host.componentDidUpdate();
+      u.host.props = oldProps; u.host.componentDidUpdate();
+    }
+    u.publish();
+    assert.equal(uiButton(u, '同じ保存要求で結果を確認'), undefined);
+    await u.host.retry();
+    assert.equal(u.calls.length, 3, 'invalidated save identity never returns after runtime recovery');
+    u.host.componentWillUnmount();
+  });
+}

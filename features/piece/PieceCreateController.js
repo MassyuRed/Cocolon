@@ -119,6 +119,7 @@ export function createPieceCreateController(configuration = {}) {
     });
     if (!disposed && enabled && boundaryCode) {
       return Object.freeze({ ...view, phase: 'unavailable', preview: null,
+        ...(saveIntent ? { loadingKind: 'save', retryKind: 'save' } : {}),
         message: new PieceApiError(boundaryCode).message, canRetry: false });
     }
     if (!disposed && enabled && saveIntent) {
@@ -483,8 +484,11 @@ export function createPieceCreateController(configuration = {}) {
   // existing save intent across the same saved-input host's
   // runtime/foreground suspension. The host must clear on owner/input/key
   // changes. Neither resuming flags nor a saved receipt grants fresh admission.
+  // A server stop may arrive after commit: retain its request/key, but only a
+  // fresh runtime publication can reopen explicit same-request confirmation.
   function setSaveAvailability(value = {}) {
-    if (disposed || !operation || boundaryCode || cancelIntent) return false;
+    if (disposed || !operation || cancelIntent ||
+        boundaryCode && !(saveIntent && boundaryCode === 'PIECE_FEATURE_DISABLED')) return false;
     const nextEnabled = value?.enabled === true;
     const nextSaveEnabled = nextEnabled && value?.saveEnabled === true;
     if (!saveIntent) {
@@ -493,6 +497,10 @@ export function createPieceCreateController(configuration = {}) {
       saveEnabled = nextSaveEnabled;
       notify();
       return true;
+    }
+    if (boundaryCode === 'PIECE_FEATURE_DISABLED' && value?.runtimeRefresh === true && nextSaveEnabled) {
+      boundaryCode = null;
+      saveCode = 'PIECE_TEMPORARILY_UNAVAILABLE';
     }
     enabled = nextEnabled;
     saveEnabled = nextSaveEnabled;

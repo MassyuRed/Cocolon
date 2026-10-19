@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_piece_read_first
 title: "Cocolon Piece — Read First"
-revision_date: "2026-10-14 JST"
+revision_date: "2026-10-19 JST"
 decision_owner: "Mash"
 workstream: "Cocolon / Piece"
 document_status: "CURRENT_PIECE_WORKSTREAM_ENTRY"
@@ -9,6 +9,10 @@ automatic_progression: false
 ---
 
 # Cocolon Piece — Read First
+
+**最新は§74／current map §65.22です。サーバー保存確定後の機能停止で、結果回収用の保存キーを失う不具合を修復しました。同一要求での明示回収→同owner詳細GETを含むlocal13ファイル802件成功。通常初回保存の正式admission・稼働・実機受入れと、420文字の最終描画は未完了です。**
+
+### §72時点の要約（履歴）
 
 **最新は§72／current map §65.20です。最終描画検査を同じ画面の全Textへまとめて依頼する変更をsource `f49238acc8a94f4560af4918effa31b428919c9f`へ反映しました。local14ファイル806件、CI JS768件・native69件成功。実RN run38495258157は4ケース成功・420文字8,100.109msでtimeout（§72.1）。420文字・正式保存は未成立です。**
 
@@ -1585,4 +1589,74 @@ security advisorsは観測時刻を除く指摘内容が適用前後で同一で
 この適用で§73.3／§73.5の「quota／visual RPC未作成」は解消しました。新規preview発行前のquota読取りとvisual PATCHのDB定義が揃いましたが、明示candidate APIの稼働、実ownerによるRPC呼出し、正式renderer supplier、通常InputScreenからの保存→同owner履歴／詳細は未確認です。420文字は§73.4の8,284.257ms timeoutのままで、今回再実行していません。P-W2／P-W3の未完了も保持します。
 
 今回の効果は新関数2個・migration履歴追加2件と既存3文書の記録更新です。製品source／test／workflow／SQL原文、env／deploy／署名／配布／main mergeは変更0。default OFF、Draft/open/unmerged、automatic_progression=falseを維持します。次はDB2本を再適用せず、P-W1の残る描画・正式供給・稼働・通常保存の条件へ戻ります。
+
+## 74. 2026-10-19 JST — 保存確定後の機能停止から、同じ要求で結果を回収
+
+P-W1の到達先は、通常の保存済み入力→本文・画像preview→明示保存→同じ本人の履歴／詳細です。全体設計01、全file地図01A〜C、current map、作業rulesと最新weekly20261017 §1.5／§5.6を再読し、前回添付記録と§73.6のDB適用を確認して再開しました。Cocolon開始headは`3e65a639df1388b771aa528a33e26022917e6757`、APIは`a536e50ee284785f585ac73329ef2947dca8bba9`。localで使用した既存fileはGitHub treeのblobと一致を確認しています。System Contextのprepareはrepository unavailableで未成立のため、同入口で許されたGitHub正本の直接読みに戻し、prepare成功とは扱いません。
+
+| start field | fixed scope / actual result |
+|---|---|
+| product_destination / current work | weekly20261017 §5.6 P-W1。保存結果が不明でも別Pieceを作り直さず、同じ保存要求で結果を確認する |
+| exact_work | server FEATURE_DISABLED後も同一owner・保存入力ID・元keyのbody-free save intentを保持し、fresh runtime復帰後の明示回収を修復 |
+| scope / permission | LEVEL_2。Mash様の今回のPiece残件指示、Rule18 §0のPiece Pro例外と§11.3 standing delegation。既存§53・weekly §5.6.3・API既存回収契約内 |
+| execution_owner | 華恋 / GPT-6 Astra Pro / CHAT_PRO_OK。補助担当はsource・設計・差分のread-only確認。書込／test／DB実行は主担当だけ |
+| exact paths | 製品2: features/piece/PieceCreateController.js、screens/input/InputPieceActionArea.js。検査2: tests/piece-v2-state-models.test.js、tests/piece-v2-preview-display.test.js。既存記録3: この入口、current map、manifest |
+| verification / completion | 修正前の原因再現、既存13file検査、同body/key回収と同owner詳細GET、旧flag・背景・選択変更・認証拒否の維持。GitHub反映後の変更集合／全対象内容照合とCIを確認 |
+| STOP / prohibited | public contract／protected owner／新依存／稼働設定／新DB変更が必要ならその拡張を止める。renderer正式採用、全候補計測契約、API、env／flag／deploy／署名／配布／mergeを変更しない |
+| credit | TECHNICAL_CREDIT。既存source内の保存回収欠陥を修復。実端末での通常初回保存やP-W1製品受入れへの換算なし |
+| affected map | STRUCTURE_MAP_DELTA_NONE。既存controller／hostの内部lifecycle修復。新owner・wire・永続fieldなし。map §65.22に実結果だけを併記 |
+
+### 74.1 原因と既存契約
+
+API `ai/services/ai_inference/api_piece_v2.py`の`_OperationFeatures.wrap`はIOの前後に実効flagを検査します。保存commitの直後に停止すると、DB保存済みでも503 `PIECE_FEATURE_DISABLED`が返り得ます。既存の`ai/tests/piece_v2/db/test_b12_shared_preview_native.py::test_composed_save_recovers_committed_receipt_without_second_consumption`は、この場合も復帰後に同じbody/keyで同じpiece_id／consumption_idを回収し、追加消費をしない契約を持ちます。このAPI検査は今回は原文確認のみで、API testや業務RPCを実行していません。
+
+RNの`runSave`はFEATURE停止をboundaryに保持しますが、従来の`setSaveAvailability`はboundaryがあると同一保存の保持を拒否していました。hostはbootstrapの新runtimeへ切り替わると一般disableへ落ち、save intent／keyを消していました。再開画面が保存入力の再確認へ戻るため、既に成立した保存の結果回収が途切れます。
+
+### 74.2 修復した動作
+
+| 状態 | 現在のsourceの動作 |
+|---|---|
+| 保存要求がFEATURE停止 | 元のbody-free要求／保存keyを保持。本文・画像を再表示せず、saveの操作種別を維持し、source GETやpreview POSTへ戻さない |
+| 同じ選択でpreviewまたはsave flagがOFF | 停止を維持し、追加送信0。背景でもintentを保持 |
+| 背景から戻るだけ／同runtimeのsave-only flag差分／stale true setContext | server停止は解除せず、追加送信0 |
+| 同一owner・入力ID・元keyの新runtimeがpreview/saveともstrict true | 結果不明状態へ戻し、同じ保存要求での明示確認だけを可能にする。自動送信0 |
+| 明示確認 | 元body・元保存keyを再送し、その都度既存Auth照合を通す。同じreceiptを受けたら既存navigationから同owner詳細GETへ進む |
+| owner／保存入力ID／元key変更、一般disable、unmount | 元intentを破棄し、元の選択やflagへ戻しても復活させない |
+| AUTH／CONFLICT等の既知拒否、再度のFEATURE停止 | 既知拒否を回収可能に格上げしない。再度のFEATUREは新たなruntime publicationを待つ |
+
+hostは`boundRuntime`更新前のidentity差を、同saved selectionの`syncContext`枝だけから既存setterへ渡します。AppStateと同runtimeのflag変更はこのsignalを供給しません。AppRuntimeの既存strict readは最新bootstrap成功・loaded・非loading・errorなし・trueを要求します。サーバーのFEATURE応答を既知停止として使い、中間OFFがReactにまとめられたfresh ONでも回収できるようにしました。AppRuntimeContext自体やbootstrap wireの変更はありません。初回保存の正式supplierとlocal fitの二重確認も変更していません。
+
+### 74.3 検証結果と残る製品条件
+
+修正前sourceで追加の原因検査4件を実行し、controllerのsave種別保持1件と、preview OFF→ON／save OFF→ON／中間OFFなしの新runtimeというhost3件が意図したassertionでFAILしました。source修復後、追加3 controller／9 hostを含む既存13file合計802 PASS／FAIL0／SKIP0です。既存のstale true setContext検査は無変更で成功しました。同環境read-only差分reviewに重大指摘はありません。
+
+local実行はNode24.19.0・TypeScript5.2.2。既定の子process方式は検査本文まで到達せずfile-level ERR_TEST_FAILUREとなったため、localは`node --test --test-isolation=none`で実行しました。これはCIの標準process実行結果とは区別します。途中の新testでAuth取得回数を各要求1回と予想したassertionは、既存APIの前後照合に合わず失敗したため、「回収時に新たな取得があり、全取得が同owner」を確認する形へ修正しました。製品Authの変更はありません。
+
+host3分岐では、source GET→preview POST→503保存→新runtime→明示同body/key保存→receipt→同owner詳細GETを通し、詳細のpiece_text・text hash・visual_recipe・recipe hash一致を確認しました。追加source／preview要求や新保存keyは0です。React/RN/AppState/HTTP/Authと初回保存admissionは既存harnessの代替境界であり、画像・実機・実DBの保存成功ではありません。CIとGitHub読戻しは反映後に同節へ結果を追加します。
+
+Supabaseのmigration一覧で§73.6の2本を含む全10件・Piece6件を再確認しました。今回は再適用・新migration・個人のPiece行読取り・業務RPC・設定変更は0です。420文字は§73.4の実RN8,284.257ms timeout・最終inspection／PNGなしを維持し、同sourceの再実行をしていません。通常初回保存の正式renderer supplier、明示candidate APIの稼働、実ownerの保存→再表示、P-W2／P-W3は残件です。
+
+### 74.4 次の判断候補 — iOS preview専用v4の限定検証（未承認・未実装）
+
+現行の全候補・独立CoreText・5double・最大4worker・元8秒を維持した追加修正について、今回のread-only監査でも420文字を解消できる確かな案は特定できませんでした。既に完全属性dedup、v3 binary転送、worker専用buffer append、次font先読みを実装済みです。§72の幅超過行ink省略案を、次の限定候補として具体化します。これは現行契約への採用記録ではありません。
+
+全候補の独立CTLineとadvanceの実測を残し、有限・非負のadvanceが要求幅Wを厳密に超える候補だけ、文字の描画範囲（ink）の取得を省く案です。現行B9の幅は`max(advance,right)-min(0,left)`でadvance以上のため、その候補は幅判定を通りません。advance==Wは従来どおりinkを取得します。幅単調性・font比例・文脈再利用は仮定しません。
+
+| 限定項目 | 承認候補の内容 |
+|---|---|
+| 適用profile | 新しい明示`piece.rn_native_preview.prototype.v4`のiOS previewだけ。既存v3定数・保存済みv3・saved/export経路を維持。自動fallbackや版のsilent置換なし |
+| native / wire | 同classに幅付きmethodを追加。全rangeのu32参照を保持し、代表値はtag0=advance+ink4double、tag1=width_overflow+advance。偽0／Infinity／null inkで穴埋めしない |
+| 幅の束縛 | Card→adapter→native要求／返却→B9の有限正値Wを完全一致で照合。別幅の結果を再使用しない |
+| B9 | fits、protectViewpoint、wrapSolutions、minimumMeasuredLineCountの4消費箇所でoverflowを明示的に幅不成立とし、full値だけを従来計算へ渡す |
+| 維持する品質条件 | 全文・段落・grapheme順、font採用順／下限、全range、完全属性dedup、独立substring、全advance検査、選択行のink／最終Text inspection、元8秒、最大4worker、正式保存／export不可 |
+| 承認対象となる差 | 旧v3は選択されない幅超過行でも不正inkがあれば全体拒否。v4はそのinkを取得せず、そこだけのnull／非有限／逆転異常を検出しない。最終選択行のinspectionではこの差は回復しない |
+| 製品path候補 | ios/tempCocolon/PieceTextMetrics.mm、features/piece/pieceRenderer.js、features/piece/pieceMeasuredWrap.js、components/piece/PieceVisualCard.js、features/piece/pieceLayout.jsの既存5path |
+| 検査path候補 | 既存tests/piece-v2-renderer.test.js、tests/piece-v2-measured-wrap.test.js、tests/native/piece-text-metrics-ios.mm、tests/native/piece-rn-canvas-entry.js、tests/native/piece-rn-canvas-fixtures.cjs。native判定追加が必要なときだけ既存.github/workflows/piece-rn-contracts.ymlの期待件数を同期。新workflow／checkerなし |
+| 検証 | 元native69判定とuncached oracleを保持。全range／advanceのbit一致、full5doubleのbit一致、strict overflow分類、wire異常拒否、旧版の不正metric拒否を検査。有効v3が期限内に完了する入力に限りB9のfit／行／font／gap等の同値を比較。既存実RN5fixtureの全文・inspection・PNG・8秒を維持 |
+| 採否 | source検証後の実RN限定確認で420文字が依然8秒を超えれば未採用として結果を記録。期限延長・worker増加・他の省略条件・batch／suffix復活へ広げない。速度改善や8秒達成を事前保証しない |
+| 含めないもの | v4 saved/export対応、正式renderer supplier採用、API／DB／flag／env／deploy／署名／配布／main merge |
+
+PCE5 Render Reproducibility §7〜8は計測方式の版識別と旧版互換を要求します。`pieceExport.js`は現在v3定数へ出力識別子を束縛するため、v4をsaved/exportまで広げる場合は別の変更scopeが必要です。今回の候補はpreview限定です。
+
+Rule18 §0(4)／§11.3は新しい契約・品質条件の変更をsource修復のstanding delegationに含めません。幅超過行の不正ink検出を省く差はここに該当するため、v4の実装・限定実行はMash様の別承認を得てからです。ここまでのsource変更は§74.2の保存結果回収だけで、v4効果0・正式採用0です。
 

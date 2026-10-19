@@ -158,8 +158,8 @@ export default class InputPieceActionArea extends React.Component {
     } catch { return false; }
   }
 
-  syncSavedOperation(enabled) {
-    return this.controller.setSaveAvailability({ enabled, saveEnabled: this.saveEnabled() }) ||
+  syncSavedOperation(enabled, runtimeRefresh = false) {
+    return this.controller.setSaveAvailability({ enabled, saveEnabled: this.saveEnabled(), runtimeRefresh }) ||
       this.controller.setCancellationEnabled(enabled);
   }
 
@@ -180,6 +180,7 @@ export default class InputPieceActionArea extends React.Component {
       ? this.savedEnabled() && sourceStamp !== null ? 'saved:' + sourceStamp : 'saved-disabled'
       : contextStamp(this.props.context);
     const runtime = savedMode ? this.context?.runtime : null;
+    const runtimeRefresh = runtime !== this.boundRuntime;
     const saveEnabled = this.saveEnabled();
     if (stamp === this.boundStamp && runtime === this.boundRuntime && savedMode === this.savedMode &&
         sourceStamp === this.boundSavedInputStamp) {
@@ -218,8 +219,10 @@ export default class InputPieceActionArea extends React.Component {
     // save/cancellation needs no fresh source/author. Retain its body-free identity
     // until flags return, then require an explicit retry and fresh Auth.
     // A different saved ID, account or original key uses the normal clear.
-    if (sameSavedSelection && this.syncSavedOperation(this.savedEnabled() && this.foreground)) {
+    if (sameSavedSelection && this.syncSavedOperation(this.savedEnabled() && this.foreground, runtimeRefresh)) {
       // No source fetch, preview revival or automatic save/cancellation retry.
+      // Only a new runtime publication can reopen a server-disabled save.
+      // AppState and same-runtime flag changes cannot supply that signal.
     } else if (retainBinding && this.controller.getView().phase !== 'hidden' &&
         !['cancel', 'save'].includes(this.controller.getView().retryKind)) this.controller.close();
     // A hidden operation may retain a save/cancel intent. A different selection

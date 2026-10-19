@@ -407,6 +407,74 @@ test('server-disabled save triggers the existing runtime refresh once and stays 
   await u.controller.retry(); await u.controller.start(); assert.equal(u.calls.length, 2);
 });
 
+test('server-disabled save retains the same request through suspension and requires fresh runtime before replay', async () => {
+  let saves = 0;
+  const u = await saveHarness({ send: async url => {
+    if (!url.endsWith('/save')) return pieceHttp(response());
+    return ++saves === 1 ? { status: 503, json: async () => ({ code: 'PIECE_FEATURE_DISABLED' }) }
+      : pieceHttp(saveReceipt({ idempotency_replayed: true }));
+  } });
+  await u.save();
+  assert.equal(u.controller.getView().retryKind, 'save', 'a stopped save must not become a source/preview action');
+  assert.equal(u.controller.setSaveAvailability({ enabled: false, saveEnabled: false, runtimeRefresh: true }), true);
+  assert.equal(u.controller.getView().phase, 'hidden');
+  u.controller.close();
+  u.controller.setSaveAvailability({ enabled: true, saveEnabled: true });
+  await u.controller.retry();
+  assert.equal(u.controller.getView().canRetry, false, 'foreground or stale flags do not reopen a server stop');
+  u.controller.setSaveAvailability({ enabled: true, saveEnabled: false, runtimeRefresh: true });
+  await u.controller.retry(); assert.equal(u.calls.length, 2);
+  u.controller.setSaveAvailability({ enabled: true, saveEnabled: true, runtimeRefresh: true });
+  assert.equal(u.controller.getView().canRetry, true);
+  assert.equal(u.controller.getView().preview, null);
+  assert.doesNotMatch(JSON.stringify(u.controller.getView()), /静か|explicit-save-key/);
+  assert.equal(u.calls.length, 2, 'fresh runtime alone sends nothing');
+  const sessionsBeforeReplay = u.sessions.length;
+  await u.controller.retry();
+  assert.equal(u.controller.getView().phase, 'saved');
+  assert.equal(u.calls[1][1].body, u.calls[2][1].body);
+  assert.equal(u.calls[2][1].headers['Idempotency-Key'], 'explicit-save-key');
+  assert.ok(u.sessions.length > sessionsBeforeReplay, 'replay obtains a fresh session');
+  assert.ok(u.sessions.every(owner => owner === OWNER), 'every session read remains bound to the same owner');
+});
+
+test('a repeated server-disabled save requires another fresh runtime and never replaces its key', async () => {
+  let saves = 0;
+  const u = await saveHarness({ send: async url => {
+    if (!url.endsWith('/save')) return pieceHttp(response());
+    return ++saves < 3 ? { status: 503, json: async () => ({ code: 'PIECE_FEATURE_DISABLED' }) }
+      : pieceHttp(saveReceipt({ idempotency_replayed: true }));
+  } });
+  await u.save();
+  u.controller.setSaveAvailability({ enabled: true, saveEnabled: true, runtimeRefresh: true });
+  await u.controller.retry(); assert.equal(saves, 2);
+  u.controller.setSaveAvailability({ enabled: true, saveEnabled: true });
+  await u.controller.retry(); assert.equal(saves, 2);
+  assert.equal(u.controller.getView().canRetry, false);
+  u.controller.setSaveAvailability({ enabled: true, saveEnabled: true, runtimeRefresh: true });
+  await u.controller.retry();
+  assert.equal(u.controller.getView().phase, 'saved');
+  assert.equal(saves, 3);
+  for (const [, init] of u.calls.slice(1)) {
+    assert.equal(init.body, u.calls[1][1].body);
+    assert.equal(init.headers['Idempotency-Key'], 'explicit-save-key');
+  }
+});
+
+test('fresh runtime cannot turn auth or conflict save rejection into a recoverable request', async () => {
+  for (const [status, code] of [[401, 'PIECE_AUTH_REQUIRED'], [409, 'PIECE_CONFLICT']]) {
+    const u = await saveHarness({ send: async url => url.endsWith('/save')
+      ? { status, json: async () => ({ code }) } : pieceHttp(response()) });
+    await u.save();
+    u.controller.setSaveAvailability({ enabled: false, saveEnabled: false, runtimeRefresh: true });
+    u.controller.setSaveAvailability({ enabled: true, saveEnabled: true, runtimeRefresh: true });
+    await u.controller.retry(); await u.controller.start(); await u.save('replacement-key');
+    assert.equal(u.calls.length, 2, code);
+    assert.equal(u.controller.getView().canRetry, false);
+    assert.notEqual(u.controller.getView().phase, 'saved');
+  }
+});
+
 test('save flag revocation is visible to synchronous abort listeners before they can retry', async () => {
   const pending = deferredPieceResponse(); let c, abortRetries = 0;
   const u = await saveHarness({ send: async (url, opts) => {
