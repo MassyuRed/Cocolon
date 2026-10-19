@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { View, Text } from 'react-native';
-import { PIECE_NATIVE_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, preparePieceNativeCard, createPieceNativeMeasurement, pieceNativeTypography, recordPieceNativeMeasurement } from '../../features/piece/pieceLayout';
+import { PIECE_NATIVE_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, preparePieceNativeCard, createPieceNativeMeasurement, pieceNativeTypography, recordPieceNativeMeasurement } from '../../features/piece/pieceLayout';
 import { inspectPieceText, inspectPieceSelectedLine, measurePieceCandidates } from '../../features/piece/pieceRenderer';
 import { planPieceMeasuredRows } from '../../features/piece/pieceMeasuredWrap';
 
@@ -137,7 +137,7 @@ export default class PieceVisualCard extends React.Component {
     input.candidateProfile === PIECE_NATIVE_PREVIEW_VERSION
       ? measurePieceCandidates(nodes[index], text, input.sizes[sizeIndex])
       : measurePieceCandidates(nodes[index], text, input.sizes[sizeIndex],
-        [PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION].includes(input.candidateProfile)
+        [PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION].includes(input.candidateProfile)
           ? { candidateProfile: PIECE_NATIVE_PREVIEW_V5_VERSION }
           : { candidateProfile: input.candidateProfile, contentWidth: input.contentWidth })))
     // Speculation may fail after a larger font has already succeeded. Handle
@@ -182,7 +182,7 @@ export default class PieceVisualCard extends React.Component {
       this.setState(previous => current() && previous.measurement === snapshot ? {
         measurement: plan ? { ...snapshot, phase: 'measuring', plan, generation: Object.freeze({}), blocks: {} }
           : snapshot.sizeIndex + 1 < input.sizes.length ? { ...createPieceNativeMeasurement(input), sizeIndex: snapshot.sizeIndex + 1 }
-          : { ...snapshot, phase: 'unavailable', reason: [PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION].includes(input.candidateProfile)
+          : { ...snapshot, phase: 'unavailable', reason: [PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION].includes(input.candidateProfile)
             ? 'layout_search_unavailable' : 'font_floor_overflow' },
       } : null);
     } catch {
@@ -195,7 +195,7 @@ export default class PieceVisualCard extends React.Component {
     const snapshot = this.state.measurement, raw = preparePieceNativeCard(this.props), input = raw && this.drawingInput(raw, snapshot);
     if (!this.active || !input || input.key !== snapshot.key || snapshot.phase !== 'geometry_checked' || this.inspection?.snapshot === snapshot) return;
     const operation = { snapshot }, binding = this.state.binding; this.inspection = operation;
-    const exploration = [PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION].includes(input.candidateProfile);
+    const exploration = [PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION].includes(input.candidateProfile);
     const current = () => this.bindingCurrent(binding) && this.inspection === operation && this.state.measurement === snapshot &&
       preparePieceNativeCard(this.props)?.key === input.key && this.deadline && Date.now() < this.deadline.expiresAt &&
       (!exploration || !operation.nodes || operation.nodes.every((node, index) =>
@@ -227,7 +227,7 @@ export default class PieceVisualCard extends React.Component {
         const [rawLeft, top, rawRight, bottom] = result.ink;
         // Only placement uses content coordinates. Keep raw ink and the actual
         // outer view bounds intact for strict own-view overflow rejection.
-        const inset = input.candidateProfile === PIECE_NATIVE_PREVIEW_V6_VERSION ? input.margin : 0;
+        const inset = [PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION].includes(input.candidateProfile) ? input.margin : 0;
         const left = rawLeft - inset, right = rawRight - inset;
         const width = Math.max(snapshot.blocks[index].lines[0].width, right) - Math.min(0, left);
         return { x: -Math.min(0, left) + (input.alignment === 'center' ? (input.contentWidth - width) / 2 : 0),
@@ -287,7 +287,7 @@ export default class PieceVisualCard extends React.Component {
     // Reinspection revokes visibility, not this generation's existing placement.
     // Moving the rows back to zero would trigger another layout/inspection cycle.
     const positioned = !!measurement.rowOffsets;
-    const drawingInset = !planning && input.candidateProfile === PIECE_NATIVE_PREVIEW_V6_VERSION ? input.margin : 0;
+    const drawingInset = !planning && [PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION].includes(input.candidateProfile) ? input.margin : 0;
     const ticket = { key: input.key, sizeIndex: measurement.sizeIndex, generation: measurement.generation };
     const scale = this.state.width / input.width;
     if (planning && (this.candidates?.key !== input.key || this.candidates.binding !== this.state.binding)) {
@@ -369,7 +369,10 @@ export default class PieceVisualCard extends React.Component {
             key: `row:${index}`, style: { height: planning ? undefined : lineHeight, marginBottom: input.rowGaps?.[index] ?? (index < input.blocks.length - 1 ? gap : 0) },
           }, element(Text, { ...textProps(index), style: {
             width: input.contentWidth + 2 * drawingInset,
-            ...(drawingInset ? { paddingHorizontal: drawingInset, height: lineHeight } : {}),
+            ...(drawingInset ? { paddingHorizontal: drawingInset } : {}),
+            // v7 retains RN's natural Text measurement and pixel-grid sizing.
+            // Logical row height and strict ink-height checks remain unchanged.
+            ...(drawingInset && input.candidateProfile === PIECE_NATIVE_PREVIEW_V6_VERSION ? { height: lineHeight } : {}),
             fontSize, lineHeight, fontWeight: '400', fontStyle: 'normal',
             letterSpacing: 0, includeFontPadding: false, textAlign: 'left', color: input.colors.text,
             position: planning ? 'relative' : 'absolute', left: (positioned ? measurement.rowOffsets[index].x : 0) - drawingInset,

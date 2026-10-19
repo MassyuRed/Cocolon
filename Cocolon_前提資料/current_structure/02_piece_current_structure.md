@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
-revision_date: "2026-10-19 JST"
+revision_date: "2026-10-20 JST"
 latest_api_implementation: "804beca66f9f02e18dc4522232478466f4d52b13"
 latest_storage_candidate: "4fcb140b778850a1b7a5a65d8e0a26005b3a24c4"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
@@ -15,6 +15,10 @@ automatic_progression: false
 # Piece構造 — Current Structure
 
 ## 0. Current conclusion
+
+**現在は入口§79／本map §65.27／weekly §5.6.7のv7自然Text高さ修復です。selected bodyの固定heightだけをv7で解除し、横幅・padding・logical行高・strict描画条件を保持しました。local JS896成功。新source一度の実RN／画像とArabicの直接原因は結果待ちです。正式admission・通常保存は未成立、旧v6結果は§65.26.1に保持します。**
+
+### §78時点の結論（履歴）
 
 **最新結果は入口§78.3〜78.4／本map §65.26.1／weekly §5.6.6です。source0033ee36のv6はlocal／CI JS888・native129・source compile成功。一度の実RNは元Card3/5・補足Card0/3・raw3/3でfailure。raw Hebrew／mixed bidiの横包含は改善しましたが、quote／Latin／両420は実測boxの高さ境界で拒否、ArabicはTextKit高が行高を8.51171875超過しました。完成6枚だけを目視確認。v6は未採用STOP、RTL修復全体・420・正式admission・通常保存は未成立です。結果後の製品／test／workflow追加変更・同source再実行0。**
 
@@ -2877,3 +2881,17 @@ native製品source/decoder/workflow/DB/APIは変更なし。probe/prefetch/brand
 V6_UNADOPTED_STOP。raw RTLの改善は診断の部分成果です。成功preview2件の同token fitとsaved v3は、通常InputScreen保存・saved v6・正式admissionの証拠ではありません。全CardのcanSave/canExport=false。次の最初の作業は上記縦描画／実測boxの修復で、その後に既存renderer ownerの採用版・saved再表示・InputScreen→host正式admission・既存controller/API→同owner詳細/履歴を接続します。source準備に物理実機を前置する追加gateは設けず、商品採用・稼働切替は未完了のままです。
 
 結果同期は既存4文書だけ。製品／test／workflow追加変更、同source再実行、DB/API/flag/env/deploy/署名/配布/main merge効果0。STRUCTURE_MAP_DELTA_PRESENTのownerは本節、詳細とSTOPは入口78.3〜78.4、P-W1はweekly5.6.6、機械読取はmanifest v85のios_preview_v6_20261019です。
+### 65.27 明示iOS preview v7 — 固定height解除とArabicの元描画operation観測
+
+STRUCTURE_MAP_DELTA_PRESENT。開始head c0576dbd、10/20の新指示とRule18 LEVEL_2に基づく既存契約内修復です。scopeは入口§79、P-W1はweekly §5.6.7、機械読取ownerはmanifest v86のios_preview_v7_20261020です。
+
+| 既存file | 今回の責任差 |
+|---|---|
+| components/piece/PieceVisualCard.js | v7本文Textのheightを省略してRN自然計測へ戻す。v6は固定高を維持。横padding/外幅1080/内幅888・864/parent行高/位置計算は保持 |
+| features/piece/pieceLayout.js | 明示v7のiOS preview/bindingとouter box対応。自然box高とlogical行高の既存0.5整合条件を維持。saved/export/Android v7は拒否 |
+| features/piece/pieceMeasuredWrap.js | v7→既存v5候補tableの対応のみ。全range/B9/独立値契約は保持 |
+| tests/piece-v2-renderer.test.js | 旧888＋v7回帰8でlocal896成功。自然view内でもlogical行高超過を拒否し、旧版・current node/token/generation・元期限を確認 |
+| tests/native/piece-rn-canvas-entry.js・fixtures.cjs | 同11caseのpreview版をv7へ変更し、rawの自然高さを製品へ揃える。本文/recipe/分母・元8秒・保存fit条件は保持 |
+| tests/native/piece-rn-canvas-ios.m | v7の実view/contentFrame/container高を照合し、logical ink高とown-viewをstrict確認。Arabicのみ元selected resolver内で同viewの属性/baseline/glyph geometryを既存reportへ記録 |
+
+native製品source/decoder/pinned RN/workflow/DB/APIは未変更。元inspect/resolveは各一度でwire無変更、追加CTLine/別UIBlock/再layoutなし。Arabicの直接原因や自然高さによる修復成立は未確認です。新source一度の実RNで基準Card5・補足Card3・raw3・同状態PNGを照合します。raw診断や合成検査を通常保存へ換算せず、正式renderer/saved版/既存InputScreen-host/API保存再表示の残件を保持します。

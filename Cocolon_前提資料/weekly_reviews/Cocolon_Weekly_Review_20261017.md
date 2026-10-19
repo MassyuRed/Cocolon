@@ -662,6 +662,17 @@ Arabicは最小56ptでTextKit高84.51171875がlogical行高76を8.51171875超え
 
 入口§78.3〜78.4・current map §65.26.1・manifest v85へ全11report、失敗値、画像確認範囲と次の再開位置を同期しました。旧v5 §5.6.5の成功／未採用STOPは履歴として保持します。結果後の製品／test／workflow追加変更・同source再試行・期限延長・包含/行高緩和0。API／DB／flags／env／deploy／署名／配布／main mergeの効果0。既適用DB6件の再適用や無関係な準備の反復は行いません。
 
+#### 5.6.7 10/20のPiece残件 — v7自然高さ修復を実装、方式判断は実RN結果待ち
+
+現指示に基づき、v6のsnapshot高さ不足を修復する明示iOS preview v7を実装しました。本文の固定heightだけを外してRN0.77.3の自然計測へ戻し、外幅1080/内幅888・864/横padding/parent行高/元8秒/独立5値とstrict描画条件を保持します。旧v6/v5/v4/v3とsavedは変更しません。製品3file、既存test4file、既存文書4fileの範囲です。
+
+local JSは既存888＋回帰8＝896成功、FAIL/SKIP0。TypeScriptが失われていた一時環境を既存CIと同じ5.2.2へ復元して確認しました。実RNは新sourceの一度を待ち、基準Card5/補足Card3/raw3の分母と同状態PNGを保持します。ArabicはTextKit高84.51171875対logical76の別問題で、元selected operation内の同viewから文字属性/baseline/glyph geometryを既存reportに取得します。推測によるfont/行高変更や追加のnative検査は行いません。
+
+**10/20のrenderer方式採否は、まだ完了していません。** 描画未達が残れば、10/22の通常入力→preview→保存→同owner詳細/履歴と、10/23の共有確認の前提にも未達が残ります。新しい結果を得て影響と次の製品修復箇所を更新し、local検査や8秒内の拒否だけで日程達成にしません。その後に必要な正式renderer版/saved再表示/既存hostへのadmission供給/既存controller・API接続は、物理端末の事前gateを増やさず既存ownerで準備します。
+
+入口§79・current map §65.27・manifest v86を同期します。source段階では修復成立/420/正式admission/通常保存は未確認、旧v6未採用STOPは履歴です。同source再実行/期限延長/判定緩和0、API/DB/flags/env/deploy/署名/配布/main merge効果0、既適用DB6件の再適用0です。
+
+
 ## 6. 議題6 — 今回の指摘に対する判断と、記録の責任
 
 ### 6.1 問題は反省文の不足ではない

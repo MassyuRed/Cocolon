@@ -73,7 +73,7 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
     ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'readPieceOwnerSnapshot']],
     ['features/piece/piecePreviewModel.js', ['readPiecePreviewDisplay', 'verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay']],
-    ['features/piece/pieceLayout.js', ['PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
+    ['features/piece/pieceLayout.js', ['PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'PIECE_NATIVE_PREVIEW_V7_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
     ['features/piece/pieceRenderer.js', ['inspectPieceText', 'readPieceTextInspection', 'inspectPieceSelectedLine', 'readPieceSelectedLineInspection', 'measurePieceCandidates']],
     ['features/piece/pieceMeasuredWrap.js', ['planPieceMeasuredRows']],
     ['components/piece/PieceVisualCard.js', ['PieceVisualCard']],
@@ -1576,6 +1576,145 @@ test('v6 padded inspections remain bound to the current node, token, generation 
     if (change === 'token') h.bind(Object.freeze({}));
     if (change === 'unmount') h.card.componentWillUnmount();
     if (change === 'node') { const node = h.card.textNodes.get(0); h.card.textNodes.set(0, { ...node, value: { tag: 99 } }); }
+    const state = h.card.state.measurement;
+    pending.forEach(item => item.resolve(item.result)); await new Promise(resolve => setImmediate(resolve));
+    assert.equal(h.card.state.measurement, state); assert.equal(h.fit(), undefined);
+    assert.notEqual(h.card.state.measurement.phase, 'native_checked');
+  }
+});
+
+const v7Profile = 'piece.rn_native_preview.prototype.v7';
+const v7Sample = (...args) => ({ ...sample(...args), renderer_version: v7Profile });
+const v7Ink = (result, margin = 96, lineRatio = 1.55) => result.font_size === 28 ? result : { ...result,
+  ink: [margin, 0, margin + 500, Math.ceil(result.font_size * lineRatio)] };
+async function finishV7(h, { boxDelta = 1 / 3, lineWidth = 500, boxWidth } = {}) {
+  await prepare(h);
+  const height = h.pieceNativeTypography(h.input(), h.card.state.measurement.sizeIndex).lineHeight;
+  for (let i = 0; i < h.drawing().blocks.length; i++) sendBlock(h, i, {
+    width: boxWidth ?? h.input().width, height: height + boxDelta,
+    lines: [{ text: h.drawing().blocks[i], x: 0, y: 0, width: lineWidth, height }] });
+  if (h.input().brandingMode !== 'off') sendBlock(h, h.drawing().blocks.length, { height: 40 });
+  await new Promise(resolve => setImmediate(resolve));
+}
+
+test('v7 has a distinct iOS preview binding and cannot silently become saved, export or Android rendering', () => {
+  const h = rawHarness(v7Sample());
+  assert.equal(h.input().candidateProfile, v7Profile);
+  assert.equal(h.preparePieceNativeCard({ display: display(v7Sample()), exportCanvas: true }), null);
+  assert.equal(h.preparePieceNativeSavedDisplay({ ...savedSample(), renderer_version: v7Profile }), null);
+  for (const version of [h.PIECE_NATIVE_PREVIEW_VERSION, v4Profile, v5Profile, v6Profile]) {
+    const input = h.preparePieceNativePreview(display({ ...sample(), renderer_version: version }));
+    assert.equal(input.candidateProfile, version); assert.notEqual(input.key, h.input().key);
+  }
+  h.Platform.OS = 'android'; assert.equal(h.preparePieceNativePreview(display(v7Sample())), null);
+});
+
+test('v7 restores natural selected Text height while retaining v6 fixed height, parent rows, probes and candidate calls', async () => {
+  for (const ratio of ['4:5', '9:16']) {
+    const previous = rawHarness(v6Sample('short_essay', ratio)), h = rawHarness(v7Sample('short_essay', ratio));
+    primeNextFont(previous); primeNextFont(h);
+    const probes = h.nodes(h.render()).filter(node => /^piece-(probe-block-|prefetch-\d+-block-)/.test(node.props.testID));
+    assert.ok(probes.some(node => node.props.testID.startsWith('piece-prefetch-')));
+    for (const probe of probes) {
+      assert.equal(probe.props.style.width, h.input().contentWidth);
+      assert.equal(probe.props.style.height, undefined); assert.equal(probe.props.style.paddingHorizontal, undefined);
+    }
+    await prepare(previous); await prepare(h);
+    assert.deepEqual(copy(h.card.state.measurement.plan), copy(previous.card.state.measurement.plan));
+    assert.deepEqual(h.candidateCalls, previous.candidateCalls);
+    const height = h.card.state.measurement.plan.lineHeight, body = h.find('piece-visual-block-0').props.style;
+    assert.equal(body.height, undefined); assert.equal(body.lineHeight, height);
+    assert.equal(previous.find('piece-visual-block-0').props.style.height, height);
+    assert.equal(body.width, 1080); assert.equal(body.paddingHorizontal, h.input().margin);
+    assert.equal(body.width - 2 * body.paddingHorizontal, h.input().contentWidth);
+    assert.equal(h.nodes(h.render()).find(node => node.props.key === 'row:0').props.style.height, height);
+    assert.deepEqual(copy(h.find(`piece-visual-block-${h.drawing().blocks.length}`).props.style),
+      copy(previous.find(`piece-visual-block-${previous.drawing().blocks.length}`).props.style));
+  }
+});
+
+test('v7 distinguishes natural box height from logical ink height and preserves RTL content placement in both ratios', async () => {
+  for (const format of ['short_essay', 'quote', 'declaration']) for (const ratio of ['4:5', '9:16']) {
+    const p = ratio === '4:5' ? 96 : 108, lineRatio = { short_essay: 1.55, quote: 1.35, declaration: 1.42 }[format];
+    const h = await harness(v7Sample(format, ratio), result => result.font_size === 28 ? result : {
+      ...v7Ink(result, p, lineRatio), ink: [p - 22.4765625, 0, p + 345.6796875, Math.ceil(result.font_size * lineRatio)] });
+    await finishV7(h, { lineWidth: 300 });
+    const m = h.card.state.measurement, logical = m.plan.lineHeight;
+    assert.equal(m.phase, 'native_checked'); assert.equal(m.blocks[0].box.height, logical + 1 / 3);
+    assert.equal(m.blocks[0].lines[0].height, logical); assert.equal(m.inspection[0].ink[3], logical);
+    assert.equal(m.rowOffsets[0].height, logical); assert.equal(m.rowOffsets[0].y, 0);
+    const style = h.find('piece-visual-block-0').props.style;
+    assert.equal(style.height, undefined); assert.equal(style.left, m.rowOffsets[0].x - p);
+    assert.ok(p + style.left + m.inspection[0].ink[0] >= p);
+    assert.ok(p + style.left + m.inspection[0].ink[2] <= 1080 - p);
+    assert.equal(m.canSave, false); assert.equal(m.canExport, false);
+  }
+  const fit = fitHarness({ version: v7Profile, inspect: result => v7Ink(result) }); await finishV7(fit);
+  assert.equal(fit.fit().isCurrent(fit.card.props.display.preview, fit.token), true);
+  assert.equal(fit.fit().isCurrent(fit.card.props.display.preview, Object.freeze({})), false);
+});
+
+test('v7 retains strict own-view rejection for the recorded tiny height deficits without rounding the snapshot', () => {
+  const h = rawHarness(v7Sample());
+  for (const [height, bottom] of [[55.99998474121094, 56], [55.999996185302734, 56],
+    [55.99999237060547, 56], [55.999969482421875, 56], [86.99998474121094, 87], [75.99998474121094, 76]]) {
+    const expected = { ...selectedExpected(), box: { width: 1080, height } };
+    const value = { ...selectedWire(), width: 1080, height, ink: [96, 0, 596, bottom] };
+    const read = h.readPieceSelectedLineInspection(value, expected);
+    assert.equal(read.overflow, true); assert.equal(read.ink[3], bottom); assert.equal(expected.box.height, height);
+    assert.throws(() => h.readPieceSelectedLineInspection({ ...value, height: height + 0.501 }, expected));
+  }
+});
+
+test('v7 rejects logical TextKit row overflow even when it lies inside the natural Text view', async () => {
+  const h = fitHarness({ version: v7Profile, inspect: result => result.font_size === 28 ? result : {
+    ...v7Ink(result), ink: [96, 0, 596, nextDouble(75)] } });
+  const deadline = h.card.deadline; await finishV7(h);
+  assert.equal(h.card.inspection.evidence[0].overflow, false, 'the larger view does contain this ink');
+  assert.equal(h.card.state.measurement.phase, 'planning'); assert.equal(h.card.state.measurement.sizeIndex, 1);
+  assert.equal(h.card.deadline, deadline); assert.equal(h.fit(), undefined);
+  const arabic = await harness(v7Sample('quote'), result => result.font_size === 28 ? result : {
+    ...v7Ink(result, 96, 1.35), ink: [83.12109375, 0, 421.5358552932739, 84.51171875] });
+  arabic.card.state.measurement = { ...arabic.createPieceNativeMeasurement(arabic.input()), sizeIndex: 2 };
+  await finishV7(arabic);
+  assert.equal(arabic.card.state.measurement.reason, 'native_ink_overflow');
+  assert.equal(arabic.card.state.measurement.plan.lineHeight, 76);
+});
+
+test('v7 retains independent dimensions, glyph and original content-width rejection', async () => {
+  for (const change of [result => ({ ...result, independent_metrics_f64le: selectedBytes([nextDouble(888), 0, -40, 888, 10]) }),
+    result => ({ ...result, independent_metrics_f64le: selectedBytes([500, 0, 0, 500, nextDouble(75)]) }),
+    result => ({ ...result, ink: [95, 0, 984, 75] }), result => ({ ...result, glyph_check: 'missing' })]) {
+    const h = fitHarness({ version: v7Profile, inspect: result => result.font_size === 28 ? result : change(v7Ink(result)) });
+    await finishV7(h); assert.notEqual(h.card.state.measurement.phase, 'native_checked'); assert.equal(h.fit(), undefined);
+  }
+});
+
+test('v7 natural sizing still rejects a different container width or more than the existing half-point box discrepancy', async () => {
+  for (const measured of [{ boxWidth: 888 }, { boxDelta: 0.501 }, { boxDelta: -0.501 }]) {
+    const h = await harness(v7Sample(), result => v7Ink(result)); await finishV7(h, measured);
+    assert.equal(h.card.state.measurement.phase, 'planning'); assert.equal(h.card.state.measurement.sizeIndex, 1);
+    assert.equal(h.nativeCalls.length, 0);
+  }
+});
+
+test('v7 selected results cannot outlive a version, token, node, generation or original deadline change', async () => {
+  for (const change of ['version', 'token', 'node', 'generation', 'timeout', 'unmount']) {
+    const pending = [], h = fitHarness({ version: v7Profile, inspect: result => new Promise(resolve => pending.push({ result: v7Ink(result), resolve })) });
+    await finishV7(h); assert.equal(h.card.state.measurement.phase, 'geometry_checked');
+    assert.equal(h.card.deadline.expiresAt, NOW + 8000);
+    if (change === 'version') {
+      const packet = h.card.props.display.preview;
+      for (const renderer_version of [v6Profile, v7Profile]) {
+        h.card.props = { ...h.card.props, display: { ...h.card.props.display, preview: { ...packet, renderer_version } } };
+        h.card.setState(h.PieceVisualCard.getDerivedStateFromProps(h.card.props, h.card.state));
+      }
+    }
+    if (change === 'token') h.bind(Object.freeze({}));
+    if (change === 'node') { const node = h.card.textNodes.get(0); h.card.textNodes.set(0, { ...node, value: { tag: 99 } }); }
+    if (change === 'generation') h.card.state.measurement = { ...h.card.state.measurement, generation: Object.freeze({}) };
+    if (change === 'timeout') { h.now(NOW + 8001); [...h.timers.values()][0](); }
+    if (change === 'unmount') h.card.componentWillUnmount();
     const state = h.card.state.measurement;
     pending.forEach(item => item.resolve(item.result)); await new Promise(resolve => setImmediate(resolve));
     assert.equal(h.card.state.measurement, state); assert.equal(h.fit(), undefined);

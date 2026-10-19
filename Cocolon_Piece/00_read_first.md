@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_piece_read_first
 title: "Cocolon Piece — Read First"
-revision_date: "2026-10-19 JST"
+revision_date: "2026-10-20 JST"
 decision_owner: "Mash"
 workstream: "Cocolon / Piece"
 document_status: "CURRENT_PIECE_WORKSTREAM_ENTRY"
@@ -9,6 +9,10 @@ automatic_progression: false
 ---
 
 # Cocolon Piece — Read First
+
+**現在の作業は§79／current map §65.27／weekly20261017 §5.6.7です。10/20の新指示により、v6で加えた本文Textの固定高さを明示iOS preview v7だけで解除し、RN本来の自然計測へ戻しました。横padding・内幅・logical行高・厳密な描画条件は維持。local JSは既存888＋新8＝896成功です。新source一度の実RNと画像は結果待ちで、Arabicの直接原因・修復成立・正式admission・通常保存は未確認です。旧v6の失敗と未採用STOPは§78の履歴として保持します。**
+
+### §78時点の要約（履歴）
 
 **最新結果は§78.3〜78.4／current map §65.26.1／weekly20261017 §5.6.6です。明示iOS preview v6の横描画領域修復をsource 0033ee36へ反映し、一度の実RNと全11report・完成6枚PNGの確認を終えました。local／CI JS888・native129・iOS／Android source compileは成功。raw Hebrew／mixed bidiは余白内へ改善しましたが、元Card3/5・補足Card0/3で、quote／Latin／両420の高さ境界拒否とArabicのTextKit行高超過が残りました。v6は未採用STOP、RTL修復全体・420条件・正式admission・通常保存は未成立です。同source再実行・結果後の製品／test／workflow追加変更0。§78.1〜78.2の結果待ちは実行前の履歴です。**
 
@@ -2054,3 +2058,40 @@ artifact12187029713は94,755,619 bytes、SHA256 3ebd2177400a715c811e42f5f2ce77c6
 描画の未達解消後に残る本線は、既存renderer ownerで版／platform／layout-measurement／catalogを固定し、採用版のsaved再表示を揃え、InputScreenから既存hostの正式isSaveAdmitted供給と同mount/token fitを接続することです。既存controller／APIによる通常初回保存→同owner詳細GET・履歴再表示は未完了です。flags／TTL／renderer値だけでnative admissionを代用せず、saved v3の成功をsaved v6の証拠へ換算しません。新controller／DTO／schemaの再作成や既適用DB6件の再適用は不要です。物理端末受入れを接続source準備の事前条件に増やしませんが、正式商品採用・稼働切替・署名配布・main mergeとは区別します。
 
 この結果反映でAPI／DB／実flag／env／deploy／署名／配布／main mergeの効果0、正式admission／通常保存／physical acceptance=false、automatic progression=falseを保持します。current map §65.26.1・weekly §5.6.6・manifest v85を同じ結果単位で同期します。
+## 79. 2026-10-20 JST — v7の自然Text高さ修復と同operationのArabic原因確認
+
+### 79.1 開始時の判断・変更範囲
+
+Mash様の新しい「Pieceの残件作業を進めて」に基づき、華恋がhead c0576dbd0cea68028175ff9f83bbc5fbe07c9adeから再開しました。全体設計01/01A/01B/01C・全国民制・全file indexとrecursive tree1901件・Piece入口/manifest/current map・最新weekly20261017・mandatory incidentを確認しています。Rule18の2026-09-24追補と§11.3 LEVEL_2、weekly §5.6.1〜5.6.3に基づく既存契約内の修復です。旧v6の一度の検証を再試行する作業ではありません。PCE5 Render Reproducibility §7に従い、視覚的修復を新しいpreview版へ固定します。
+
+原因候補は二つに分けます。quote/Latin/両420はsnapshot高の微小不足によるown-view拒否で、v6のheight指定がpinned RN0.77.3の自然計測を省く構造を確認済みです。ArabicはTextKit高84.51171875がlogical行高76を超え、同じheight解除だけで治ると断定できません。属性font/baseline/glyph位置の未観測値を推測で埋めません。
+
+対象は既存Draft PR30・同branch、次の11pathです。
+
+- components/piece/PieceVisualCard.js
+- features/piece/pieceLayout.js
+- features/piece/pieceMeasuredWrap.js
+- tests/piece-v2-renderer.test.js
+- tests/native/piece-rn-canvas-entry.js
+- tests/native/piece-rn-canvas-fixtures.cjs
+- tests/native/piece-rn-canvas-ios.m
+- Cocolon_Piece/00_read_first.md
+- Cocolon_Piece/manifest.json
+- Cocolon_前提資料/current_structure/02_piece_current_structure.md
+- Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md
+
+製品は既存Card/layout/B9の3fileだけです。明示v7のselected body Textからheight指定だけを外し、外幅1080・横padding96/108・実内幅888/864・parentのlogical行高・元位置計算を保持します。旧v6の固定高さ、旧v3/v4/v5、probe/prefetch/brandingは保持します。v7はiOS preview限定で、既存native_candidates.v5／native_selected_line.v1へ明示対応させ、saved/export/Android v7は拒否します。catalog/font/本文/段落/禁則/全range探索/独立5値/元8秒・同node/token/generationを変えません。
+
+native製品sourceとdecoderは未変更です。Textの自然box高とlogical描画行高を分離し、既存のbox整合許容差0.5を保ったまま、raw inkのown-view包含、元本文幅、TextKit行高、独立寸法をstrictに検査します。自然viewが少し高くなっても、logical行高を超えるinkを受理しません。
+
+### 79.2 実装・local検査と一度の実RNで確かめる条件
+
+既存13 JS suiteはNode24.19.0／TypeScript5.2.2、test-isolation=noneで896 PASS、FAIL/SKIP0です。既存888を保持し、8回帰で旧v6との差、自然box高とlogical ink高、両ratio/全format、記録済み微小不足のstrict拒否、Arabicの行高超過、独立値、現在node/token/generationと元期限を確認しました。最初の全suite実行は一時環境のTypeScript不在で完了できず、CIと同じ5.2.2を復元して全件を確認した結果です。合成計測の成功を実RNの描画成立へ読み替えません。
+
+既存RN harnessの本文/recipe/順序・基準Card5/補足Card3/raw3の分母を維持し、previewだけv7へ更新します。raw Textもheight指定を外して製品の自然高さへ揃えます。native captureでは実view/contentFrame/containerの高さ同士を0.01で照合し、logical高との差は既存0.5以内、実TextKit ink高はlogical高以下をstrict確認します。旧v6の固定高さ用capture条件は保持します。
+
+Arabicの観測は既存native harness内のtest-only wrapperです。元inspectSelectedLineを一度呼び、元main UIBlockのresolve内で同じtag/view/storage/layoutの文字属性・baseline・glyph位置とbounds・元wireを読み、同じwire objectを無変更で一度返します。追加bridge呼出し/別UIBlock/再inspect/CTLine/ensureLayout/製品wire fieldは追加しません。対象は既存「مرحبا بالعالم」と72/64/56ptだけで、既存reportへ添付します。観測時間も元8秒内に含み、例外は診断内で処理し、元methodをfinallyで復帰します。属性のstorage_fontを未観測のactual fallback fontと呼びません。
+
+新sourceのpushで動く既存CIを一度確認します。JS/native129/source compileと、実RNの基準5・補足3・raw3、同状態PNG、同mount/token fitをそれぞれ照合し、失敗を除外した全体合格にしません。同source再実行・元8秒延長・行高/包含/独立値の緩和は行いません。現在はSOURCE_READY／LOCAL_JS_VERIFIEDで、実RN修復・420・Arabic・正式admission・通常保存・物理端末受入れは未確認です。
+
+10/20の方式判断、10/22の通常保存、10/23の共有確認への影響はweekly §5.6.7に集約します。描画成立後も既存renderer ownerの採用版固定・同版saved再表示・InputScreen→既存hostの正式admission供給・既存controller/APIによる通常保存→同owner詳細/履歴が残ります。接続source準備へ物理端末の事前gateは追加しません。今回のAPI/DB/flags/env/deploy/署名/配布/main merge効果0、canSave/canExport=falseを保持します。

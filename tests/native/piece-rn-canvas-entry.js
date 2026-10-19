@@ -168,10 +168,10 @@ class CanvasCases extends React.Component {
       this.rawTextNode === node && performance.now() - this.started < 8000;
     try {
       const text = fixture.raw_text, box = this.rawBox.value, lines = this.rawLines.value;
-      if (lines.length !== 1 || lines[0].text !== text || box.width !== 1080 || box.height !== 75 ||
+      if (lines.length !== 1 || lines[0].text !== text || box.width !== 1080 || !Number.isFinite(box.height) || Math.abs(box.height - 75) > 0.5 ||
           !['x', 'y', 'width', 'height'].every(key => Number.isFinite(lines[0][key])) ||
           lines[0].width < 0 || lines[0].height <= 0 || lines[0].width > 888 || lines[0].height > 75) throw Error('raw_geometry');
-      const input = { candidateProfile: 'piece.rn_native_preview.prototype.v6', blocks: [text], contentWidth: 888,
+      const input = { candidateProfile: 'piece.rn_native_preview.prototype.v7', blocks: [text], contentWidth: 888,
         contentHeight: 75, sizes: [48], lineRatio: 75 / 48, paragraphRatio: 0, alignment: 'left' };
       const table = await renderer.measurePieceCandidates(node, text, 48, { candidateProfile: 'piece.rn_native_preview.prototype.v5' });
       if (!current()) return;
@@ -184,7 +184,7 @@ class CanvasCases extends React.Component {
       if (result.overflow || result.wrapViolation || Math.max(advance, right) - Math.min(0, left) > 888 || bottom - top > 75) throw Error('raw_independent_overflow');
       const contentLeft = result.ink[0] - 96, contentRight = result.ink[2] - 96;
       if (Math.max(lines[0].width, contentRight) - Math.min(0, contentLeft) > 888 || result.ink[3] - result.ink[1] > 75) throw Error('raw_placement_overflow');
-      // Match v6: preserve the 888-point TextContainer and normalize only ink.
+      // Match v7: preserve the 888-point TextContainer and normalize only ink.
       // The transparent outer view starts at zero; the visible ink starts at96.
       const rawLeft = -Math.min(0, contentLeft);
       this.setState({ rawLeft }, () => {
@@ -201,7 +201,7 @@ class CanvasCases extends React.Component {
   finishRawText = async () => {
     const fixture = this.caseFixtures[this.state.index];
     const report = { name: fixture.name, evidence_set: fixture.evidence_set, diagnostic_only: true,
-      candidate_profile: 'piece.rn_native_preview.prototype.v6', font_size: 48, elapsed_ms: performance.now() - this.started,
+      candidate_profile: 'piece.rn_native_preview.prototype.v7', font_size: 48, elapsed_ms: performance.now() - this.started,
       width: 1080, height: 320, content_width: 888, content_height: 75, margin: 96, branding_zone: 0, branding: false,
       rows: [fixture.raw_text], blocks: [fixture.raw_text], trace: this.trace,
       ...(this.rawReport || { phase: 'measurement_unavailable', diagnostic_valid: false, body_preserved: false }) };
@@ -216,7 +216,7 @@ class CanvasCases extends React.Component {
           accessible={false} android_hyphenationFrequency="none" textBreakStrategy="highQuality" lineBreakStrategyIOS="standard"
           onLayout={event => { if (this.caseFixtures[this.state.index].name === fixture.name) this.rawBox = { name: fixture.name, value: event.nativeEvent.layout }; }}
           onTextLayout={event => { if (this.caseFixtures[this.state.index].name === fixture.name) this.rawLines = { name: fixture.name, value: event.nativeEvent.lines }; }}
-          style={{ position: 'absolute', left: this.state.rawLeft, top: 96, width: 1080, paddingHorizontal: 96, height: 75, fontSize: 48, lineHeight: 75,
+          style={{ position: 'absolute', left: this.state.rawLeft, top: 96, width: 1080, paddingHorizontal: 96, fontSize: 48, lineHeight: 75,
             fontWeight: '400', fontStyle: 'normal', letterSpacing: 0, includeFontPadding: false, textAlign: 'left', color: '#111827' }}>
           {fixture.raw_text}
         </Text>
