@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§75／本map §65.23です。Mash様の§74.4限定承認により、iOS preview専用v4を実装。全候補の独立組版とadvanceを維持し、幅超過行だけinkを省略する明示経路を追加しました。local既存13file839件成功、native97判定・実RN5fixtureの限定検証は結果確認待ちです。旧v3・saved/export・元8秒を維持し、正式採用と通常初回保存は未完了です。**
+**最新は入口§75.2〜75.3／本map §65.23.1です。iOS preview専用v4の承認済み実装・限定検証を完了。source b4467a77はlocal／CI JS839件・native97件・iOS／Android compile成功、実RNは4ケース成功・4枚PNG確認済みです。420文字は8,069.796msでtimeoutし、36ptの計測が未完了でした。§74.4に従いv4は未採用として停止。同source再実行や追加変更を行わず、旧v3・saved/export・元8秒を維持。正式admission・通常初回保存は未完了です。**
 
 ### §74時点の要約（履歴）
 
@@ -2767,7 +2767,17 @@ source [5c44b252f049a973de29b37f2fb8dba93548cca0](https://github.com/MassyuRed/C
 
 v4の省略行は[start,end,advance,width_overflow]でink slotを持ちません。全行のadvanceとfull行の5doubleはbit比較の対象です。旧v3では未選択の幅超過行でも不正inkを拒否しますが、v4はそのinkを取得せず異常を検出しません。これは承認された契約差で、旧版と同じ受入れと表現しません。advance==Wはfullを維持します。
 
-localは既存13file839 PASS／FAIL0／SKIP0、追加37件。元B9 oracle25件のexpectedは無変更で、v4の全plan同値を確認。元native69と独立oracleを保持し、追加28を含む97判定を既存workflowへ接続しました。既存実RN5fixtureはpreview4件だけ明示v4、saved v3、全文420文字・recipe・hash・最終inspection・PNG・8秒・canSave／canExport=falseを維持。CI／実RN結果と採否は入口§75へ追記します。
+localは既存13file839 PASS／FAIL0／SKIP0、追加37件。元B9 oracle25件のexpectedは無変更で、v4の全plan同値を確認。元native69と独立oracleを保持し、追加28を含む97判定を既存workflowへ接続しました。既存実RN5fixtureはpreview4件だけ明示v4、saved v3、全文420文字・recipe・hash・最終inspection・PNG・8秒・canSave／canExport=falseを維持。source公開後のCI／実RN結果と採否は次節および入口§75.2〜75.3に保持します。
 
-420文字が限定実RNで依然8秒を超えればv4未採用として記録し、同source再実行や期限延長・worker増加・追加省略・batch／suffix再利用へ拡張しません。正式supplier・candidate API稼働・通常初回保存→同owner履歴／詳細・P-W2／P-W3は未完了。API／DB書込／flag／env／deploy／署名／配布／main merge効果0、default OFFとDraft/open/unmergedを維持します。
+限定実RNの420文字は元8秒内に成立せず、v4未採用として記録しました。同source再実行や期限延長・worker増加・追加省略・batch／suffix再利用へ拡張しません。正式supplier・candidate API稼働・通常初回保存→同owner履歴／詳細・P-W2／P-W3は未完了。API／DB書込／flag／env／deploy／署名／配布／main merge効果0、default OFFとDraft/open/unmergedを維持します。
+
+### 65.23.1 v4の限定検証完了・420文字未成立による未採用
+
+source `b4467a77877dd936c29845f2977a06bd61df84c1`の変更14pathをGitHub全内容・blob・差分path集合で照合しました。[run39205556730](https://github.com/MassyuRed/Cocolon/actions/runs/39205556730)はJS839／native97・iOS製品source／Android source・iOS4Pod／Android4libraryの実compileが成功。実RN job117907499684は420文字timeoutによりexit65、run全体はfailureです。nativeは元69判定・独立uncached oracleを保持した97判定で、全range／advanceおよびfull5doubleのbit一致とv4固有境界を確認しました。
+
+実RNのessay_paragraphs・quote_unicode・declaration_no_brandは明示preview v4、saved_essay_canvasは従来saved v3で成功。4枚PNGを目視し、前回run39177257042の対応画像とbytesが一致しました。本文・段落・最終inspectionも成立し、preview成功3件のlocal fitは同tokenだけtrue、savedはhandleなし、全5件canSave／canExport=falseです。direct-Card simulatorの確認を通常InputScreen保存や実機受入れへ換算しません。
+
+essay_max420はreport elapsed8,069.796msでmeasurement_timeout。48／44／40ptのv4・W888応答とB9 fit=falseを確認し、36ptはnative／adapter待ちでB9・最終inspection・完成PNGへ未到達でした。8,069.796msはtimeout観測であり描画完了時間ではありません。全420文字blocksは保持。native単体の計時や前回runとの違いを実RNの因果的改善へ換算しません。詳細の5case結果・trace・artifact digestは入口§75.2とmanifestのios_preview_v4_20261019がownerです。
+
+承認された限定作業は終了し、v4 sourceは未採用候補としてDraftに残ります。停止後は既存資料3点の更新だけで、source追加変更・同source再実行0です。P-W1の未完了は420文字を元8秒で成立させる方式の判断、正式supplier、candidate API稼働、通常初回保存→同owner再表示です。P-W2／P-W3、保存回収source5c44b252、適用済みPiece6migrationを保持し、自動進行・基盤再実装・migration再適用へ進めません。
 

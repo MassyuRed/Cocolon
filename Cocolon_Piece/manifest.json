@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v79",
+  "schema_version": "cocolon.piece.workstream_manifest.v80",
   "generated_at": "2026-10-19 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v78",
-    "predecessor_blob": "073a01dbc4669b1df38eb68595bf48468715f239",
-    "predecessor_head": "fab912241599d42a6c1706ab8cd29342666be990",
-    "carry_forward": "Mash explicitly approved entry74.4. Implement explicit iOS preview v4 with exact width-bound overflow tags, preserve legacy v3/saved/export/Android and original8seconds. Local13 JS suites839 pass; native97 and original5 real RN fixtures await the bounded CI execution. Source5c44b252 save recovery and six live Piece migrations are retained. No formal adoption or live activation."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v79",
+    "predecessor_blob": "7dfce7eab7a129ca824c8be10982721062ecdf57",
+    "predecessor_head": "b4467a77877dd936c29845f2977a06bd61df84c1",
+    "carry_forward": "Docs-only final result for the approved entry74.4 bounded v4 work. Source b4467a77 verified across all14 changed paths; local/CI JS839 and native97 pass, actual iOS/Android source and export-library compile pass. Real RN run39205556730 completes4 fixtures but mixed420 times out at8069.796ms with36pt native/adapter pending. V4 is unadopted and the bounded work is complete; no source changes or same-source reruns after the stop. Saved/exportv3, source5c44b252 save recovery and six live Piece migrations are retained. Formal admission, runtime and normal save/reopen remain incomplete."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "d60afee0d36981c96a69e95ca818d819ae4975a3",
-    "raw_sha256": "d548dd2bde972cd793d4bfe1e05ca77221aeaeb4c1ab7782aadb59cbfa2b882a",
-    "utf8_bytes": 229754
+    "git_blob_sha1": "21556f9119bd4d5323dd043a77308e071143de9c",
+    "raw_sha256": "c9e114321b0c3b6da94e1fa99f23ad8443b3591f1d21da0cbc35792858704657",
+    "utf8_bytes": 235910
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -93,7 +93,7 @@
     "pce9f_shared_legacy_write_retirement": "REMOTE_804BECA__EXPLICIT_SHARED_CANDIDATE_ONLY__NOT_LIVE_M5",
     "pce9c_initial_save_modal": "REMOTE_90CBD705__FIT_CALLBACK_FORWARDED__CI790_PASS__FORMAL_ADMISSION_NORMAL_SAVE_PENDING",
     "pce9c_initial_save_host": "REMOTE_90CBD705__CONDITIONAL_HOST_LOCAL_FIT_CONNECTED__CI790_PASS__FORMAL_PROVIDER_NORMAL_SAVE_DEVICE_PENDING",
-    "pce9c_ios_preview_v4": "APPROVED_BOUNDED_IMPLEMENTATION__LOCAL839_PASS__NATIVE97_AND_REAL_RN5_PENDING"
+    "pce9c_ios_preview_v4": "BOUNDED_VERIFICATION_COMPLETE__JS839_NATIVE97_PASS__REAL_RN4_PASS_MAX420_TIMEOUT__V4_UNADOPTED"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -175,7 +175,7 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "fab912241599d42a6c1706ab8cd29342666be990",
+    "cocolon_pre_sync_head": "b4467a77877dd936c29845f2977a06bd61df84c1",
     "mashos_api_head": "a536e50ee284785f585ac73329ef2947dca8bba9",
     "current_user_visible_piece_shape": "CANDIDATE_NORMAL_INPUT_V2_SAVED_SOURCE_ONLY__TUTORIAL_NEXUS_LEGACY_REMAIN__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
@@ -246,18 +246,18 @@
     "piece_v2_server_disabled_save_recovery_scope": "Same saved owner/input/original key only; a fresh strict runtime publication reopens explicit replay with the original save body/key. Foreground and same-runtime flags cannot clear the stop. Source-harness verified; real initial-save acceptance remains false.",
     "piece_v2_ios_preview_v4_source_present": true,
     "piece_v2_ios_preview_v4_formally_adopted": false,
-    "piece_v2_ios_preview_v4_scope": "Explicit iOS preview only. All independent lines/advance/ranges retained; strict advance>W skips ink under a new tagged width-bound contract. Saved/export and Android existing v3 routes retained; native and full RN outcome pending."
+    "piece_v2_ios_preview_v4_scope": "Explicit iOS preview only; source b4467a77 retained as an unadopted Draft candidate. All independent lines/advance/ranges retained, strict advance>W omits ink under an exact width-bound tagged contract. JS839/native97 pass; real RN3 previewv4 fixtures and savedv3 succeed, mixed420 times out before36pt B9/final inspection. Original8seconds, saved/exportv3 and Android existing routes retained. No source expansion or same-source rerun after the bounded stop."
   },
   "next_group": {
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "APPROVED_IOS_PREVIEW_V4_LOCAL839_PASS__BOUNDED_NATIVE_AND_REAL_RN_PENDING",
-    "current_map_section": "65.23",
-    "current_entry_section": "75",
+    "state": "IOS_PREVIEW_V4_BOUNDED_VERIFICATION_COMPLETE__UNADOPTED_MAX420_TIMEOUT__P_W1_PENDING",
+    "current_map_section": "65.23.1",
+    "current_entry_section": "75.2-75.3",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
     "weekly_review_section": "5.6",
-    "first_unfinished_work": "Complete the explicitly approved entry74.4 bounded iOS preview v4 verification. Local839 JS tests pass; preserve original69 native checks and add28, then inspect the same5 real RN fixtures with4 explicit previewv4 and savedv3. If mixed420 still exceeds original8seconds, record v4 unadopted and do not repeat the same-source run or expand the omission/timeout/workers. Formal supplier, explicit candidate runtime, ordinary initial save/reopen and P-W2/P-W3 remain. Do not reapply the six existing Piece migrations.",
+    "first_unfinished_work": "Determine a way to complete all420 characters within the original8seconds, including the unresolved36pt native/adapter work, B9, final Text inspection and PNG. The approved v4 bounded implementation/verification is complete and unadopted after run39205556730; do not repeat the same-source run or expand timeout/workers/omission conditions. Formal renderer supplier, explicit candidate API runtime, ordinary initial save and same-owner history/detail reopen, P-W2/P-W3 remain incomplete. Do not reapply the six existing Piece migrations or repeat the completed save recovery.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 6,
@@ -299,7 +299,10 @@
     "database_result_owner": "live_db_apply_20261019",
     "save_stop_recovery_owner": "save_stop_recovery_20261019",
     "ios_preview_v4_owner": "ios_preview_v4_20261019",
-    "v4_scope_approved": true
+    "v4_scope_approved": true,
+    "v4_bounded_work_complete": true,
+    "v4_unadopted": true,
+    "v4_same_source_rerun_allowed": false
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -353,9 +356,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "b5dac2fd86b0335d709c018e378dff4bbed74b33",
-    "raw_sha256": "20e585a0bb1fa07a074d26502589a261a9a02dbf5161fcb16cf7190507f0d369",
-    "utf8_bytes": 434726
+    "git_blob_sha1": "1960e11f37823756270b40a2d7db49bdc4908d15",
+    "raw_sha256": "ea956a7fc3239eaca45c653be459c7b4cc9d1ad8dc104f72cf247247a057456f",
+    "utf8_bytes": 437056
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -528,16 +531,16 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "APPROVED_IOS_PREVIEW_V4_SOURCE_TEST_MAP_UPDATE__NATIVE_AND_REAL_RN_PENDING",
-    "source_parent": "fab912241599d42a6c1706ab8cd29342666be990",
+    "classification": "DOCS_ONLY_BOUNDED_V4_FINAL_RESULT__UNADOPTED_MAX420_TIMEOUT",
+    "source_parent": "b4467a77877dd936c29845f2977a06bd61df84c1",
     "api_reference_commit": "a536e50ee284785f585ac73329ef2947dca8bba9",
-    "source_scope": "The approved5 existing product paths,5 existing test paths, native expected-count-only workflow synchronization and3 documentation owners. Explicit previewv4 alone may omit ink after strict advance>W.",
-    "product_source_changes": 5,
-    "test_source_paths": 5,
-    "workflow_paths": 1,
+    "source_scope": "Only the existing entry, manifest and Piece current map are updated with the completed bounded result. The5 product,5 test and1 workflow paths remain exactly at verified source b4467a77; no further source changes or reruns.",
+    "product_source_changes": 0,
+    "test_source_paths": 0,
+    "workflow_paths": 0,
     "sql_source_changes": 0,
     "piece_documentation_paths": 3,
-    "structure_map": "VERSION_ROUTE_AND_WIDTH_BOUND_NATIVE_WIRE__SECTION_65_23",
+    "structure_map": "BOUNDED_V4_RESULT_AND_UNADOPTED_STOP__SECTION_65_23_1",
     "live_database_apply": 0,
     "business_rpc": 0,
     "private_piece_row_reads": 0,
@@ -550,7 +553,8 @@
     "main_merge": 0,
     "release_effect": 0,
     "product_acceptance": false,
-    "automatic_progression": false
+    "automatic_progression": false,
+    "verified_product_source_commit": "b4467a77877dd936c29845f2977a06bd61df84c1"
   },
   "b06_q3_context_fence": {
     "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
@@ -5582,13 +5586,13 @@
     }
   },
   "ios_preview_v4_20261019": {
-    "entry_section": "75",
-    "structure_map_section": "65.23",
+    "entry_section": "75.2",
+    "structure_map_section": "65.23.1",
     "source_parent": "fab912241599d42a6c1706ab8cd29342666be990",
     "scope_classification": "LEVEL_3",
     "approval_basis": "Mash explicitly approved entry74.4 implementation and bounded verification in this conversation.",
     "execution_owner": "Karen / GPT-6 Astra Pro / CHAT_PRO_OK; sole writer/test executor; three read-only reviewers.",
-    "state": "IMPLEMENTED_LOCAL_JS_VERIFIED__CI_AND_REAL_RN_PENDING",
+    "state": "VERIFIED_UNADOPTED_MIXED420_TIMEOUT",
     "profile": "piece.rn_native_preview.prototype.v4",
     "native_wire": "piece.native_candidates.v4",
     "native_method": "measureCandidatesForWidth",
@@ -5714,29 +5718,369 @@
       "timeout_fixture_correction": "New case alone received60second expiry after its original1.123second expiry prevented isolation of8000ms timeout; product expiry/deadline unchanged."
     },
     "native_verification": {
-      "state": "AWAITING_CI",
+      "state": "COMPLETED_PASS",
       "original_checks": 69,
       "added_checks": 28,
       "expected_checks": 97,
       "old_decoder_call_validation_and_uncached_oracle_exactly_preserved": true,
       "all_range_and_advance_bit_comparison": true,
       "full5double_bit_comparison": true,
-      "actual_ink_call_count_and_approved_rejection_difference_checks_added": true
+      "actual_ink_call_count_and_approved_rejection_difference_checks_added": true,
+      "run_id": 39205556730,
+      "job_id": 117907499621,
+      "checks": 97,
+      "pass_count": 97,
+      "fail": 0,
+      "skip": 0,
+      "summary": "NATIVE_CHECKS=97 PASS=97 FAIL=0 SKIP=0",
+      "actual_pass_lines": 97,
+      "production_source_compile": true,
+      "environment": {
+        "clang": "17.0.0 (clang-1700.0.13.5)",
+        "xcode": "16.4",
+        "xcode_build": "16F6",
+        "ios_simulator": "26.2",
+        "ios_build": "23C54"
+      },
+      "mixed420": {
+        "rows": 88410,
+        "metric_count": 11381,
+        "full_metric_count": 531,
+        "overflow_metric_count": 10850,
+        "raw_v4_native_call_elapsed_ms": 2085.487,
+        "v3_call_including_test_decode_ms": 2482.976,
+        "v3_test_decode_ms": 155.649
+      },
+      "timing_scope": "v3 call includes its old test decoder; raw v4 call excludes parity decode. They are not a controlled like-for-like full rendering comparison."
     },
     "real_rn_verification": {
-      "state": "AWAITING_BOUNDED_RUN",
+      "state": "COMPLETED_4_PASS_1_TIMEOUT__V4_UNADOPTED",
       "fixtures": 5,
       "explicit_preview_v4": 4,
       "saved_v3": 1,
       "original_names_order_full_text_recipe_hashes_props_preserved_except_preview_version": true,
       "mixed_text_characters": 420,
-      "original_final_inspection_png_and8000ms_assertions_preserved": true
+      "original_final_inspection_png_and8000ms_assertions_preserved": true,
+      "run_id": 39205556730,
+      "job_id": 117907499684,
+      "run_attempt": 1,
+      "job_conclusion": "failure",
+      "exit_code": 65,
+      "successful_preview_v4": 3,
+      "successful_saved_v3": 1,
+      "timeout_preview_v4": 1,
+      "all5_can_save_and_export_false": true,
+      "cases": [
+        {
+          "name": "essay_paragraphs",
+          "renderer_version": "piece.rn_native_preview.prototype.v4",
+          "candidate_profile": "piece.rn_native_preview.prototype.v4",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 2438.2029999999795,
+          "size_index": 0,
+          "body_preserved": true,
+          "native_canvas_valid": true,
+          "capture_error": null,
+          "rows": 5,
+          "final_inspection_count": 6,
+          "final_inspection_clear": true,
+          "save_fit_current": true,
+          "save_fit_wrong_token_current": false,
+          "save_fit_handle_keys": [
+            "isCurrent"
+          ],
+          "can_save": false,
+          "can_export": false,
+          "png": "essay_paragraphs.png"
+        },
+        {
+          "name": "quote_unicode",
+          "renderer_version": "piece.rn_native_preview.prototype.v4",
+          "candidate_profile": "piece.rn_native_preview.prototype.v4",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 704.1514169999864,
+          "size_index": 0,
+          "body_preserved": true,
+          "native_canvas_valid": true,
+          "capture_error": null,
+          "rows": 3,
+          "final_inspection_count": 4,
+          "final_inspection_clear": true,
+          "save_fit_current": true,
+          "save_fit_wrong_token_current": false,
+          "save_fit_handle_keys": [
+            "isCurrent"
+          ],
+          "can_save": false,
+          "can_export": false,
+          "png": "quote_unicode.png"
+        },
+        {
+          "name": "declaration_no_brand",
+          "renderer_version": "piece.rn_native_preview.prototype.v4",
+          "candidate_profile": "piece.rn_native_preview.prototype.v4",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 369.8392089998815,
+          "size_index": 0,
+          "body_preserved": true,
+          "native_canvas_valid": true,
+          "capture_error": null,
+          "rows": 5,
+          "final_inspection_count": 5,
+          "final_inspection_clear": true,
+          "save_fit_current": true,
+          "save_fit_wrong_token_current": false,
+          "save_fit_handle_keys": [
+            "isCurrent"
+          ],
+          "can_save": false,
+          "can_export": false,
+          "png": "declaration_no_brand.png"
+        },
+        {
+          "name": "essay_max420",
+          "renderer_version": "piece.rn_native_preview.prototype.v4",
+          "candidate_profile": "piece.rn_native_preview.prototype.v4",
+          "phase": "unavailable",
+          "reason": "measurement_timeout",
+          "elapsed_ms": 8069.796000000089,
+          "size_index": 3,
+          "body_preserved": false,
+          "native_canvas_valid": null,
+          "capture_error": true,
+          "rows": 0,
+          "final_inspection_count": 0,
+          "final_inspection_clear": false,
+          "save_fit_current": false,
+          "save_fit_wrong_token_current": false,
+          "save_fit_handle_keys": [],
+          "can_save": false,
+          "can_export": false,
+          "png": null
+        },
+        {
+          "name": "saved_essay_canvas",
+          "renderer_version": "piece.rn_native_preview.prototype.v3",
+          "candidate_profile": "piece.rn_native_preview.prototype.v3",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 1420.9679590000305,
+          "size_index": 0,
+          "body_preserved": true,
+          "native_canvas_valid": true,
+          "capture_error": null,
+          "rows": 5,
+          "final_inspection_count": 6,
+          "final_inspection_clear": true,
+          "save_fit_current": false,
+          "save_fit_wrong_token_current": false,
+          "save_fit_handle_keys": [],
+          "can_save": false,
+          "can_export": false,
+          "png": "saved_essay_canvas.png"
+        }
+      ],
+      "max420_trace": {
+        "candidates": [
+          {
+            "status": "resolved",
+            "returned_content_width": 888,
+            "method": "measureCandidatesForWidth",
+            "full_metric_count": 531,
+            "utf16_length": 420,
+            "rows": 88410,
+            "content_width": 888,
+            "version": "piece.native_candidates.v4",
+            "elapsed_ms": 2196.867290999973,
+            "metric_count": 11381,
+            "font_size": 48
+          },
+          {
+            "status": "resolved",
+            "returned_content_width": 888,
+            "method": "measureCandidatesForWidth",
+            "full_metric_count": 587,
+            "utf16_length": 420,
+            "rows": 88410,
+            "content_width": 888,
+            "version": "piece.native_candidates.v4",
+            "elapsed_ms": 4398.300416000187,
+            "metric_count": 11381,
+            "font_size": 44
+          },
+          {
+            "status": "resolved",
+            "returned_content_width": 888,
+            "method": "measureCandidatesForWidth",
+            "full_metric_count": 643,
+            "utf16_length": 420,
+            "rows": 88410,
+            "content_width": 888,
+            "version": "piece.native_candidates.v4",
+            "elapsed_ms": 4223.6912909999955,
+            "metric_count": 11381,
+            "font_size": 40
+          },
+          {
+            "status": "pending",
+            "utf16_length": 420,
+            "font_size": 36,
+            "method": "measureCandidatesForWidth",
+            "content_width": 888
+          }
+        ],
+        "states": [
+          {
+            "state": "planning:0",
+            "elapsed_ms": 0.008249999955296516
+          },
+          {
+            "state": "planning:1",
+            "elapsed_ms": 2559.2775830000173
+          },
+          {
+            "state": "planning:2",
+            "elapsed_ms": 4769.982041000156
+          },
+          {
+            "state": "planning:3",
+            "elapsed_ms": 7117.998291000025
+          },
+          {
+            "state": "unavailable:3",
+            "elapsed_ms": 8035.288416000083
+          }
+        ],
+        "plans": [
+          {
+            "fit": false,
+            "elapsed_ms": 119.92691699997522,
+            "size_index": 0
+          },
+          {
+            "fit": false,
+            "elapsed_ms": 82.49883300019428,
+            "size_index": 1
+          },
+          {
+            "fit": false,
+            "elapsed_ms": 102.81312500010245,
+            "size_index": 2
+          }
+        ],
+        "adapters": [
+          {
+            "status": "resolved",
+            "returned_content_width": 888,
+            "content_width": 888,
+            "elapsed_ms": 2292.9131249999627,
+            "version": "piece.native_candidates.v4",
+            "candidate_profile": "piece.rn_native_preview.prototype.v4",
+            "font_size": 48
+          },
+          {
+            "status": "resolved",
+            "returned_content_width": 888,
+            "content_width": 888,
+            "elapsed_ms": 4522.145709000062,
+            "version": "piece.native_candidates.v4",
+            "candidate_profile": "piece.rn_native_preview.prototype.v4",
+            "font_size": 44
+          },
+          {
+            "status": "resolved",
+            "returned_content_width": 888,
+            "content_width": 888,
+            "elapsed_ms": 4360.813500000164,
+            "version": "piece.native_candidates.v4",
+            "candidate_profile": "piece.rn_native_preview.prototype.v4",
+            "font_size": 40
+          },
+          {
+            "status": "pending",
+            "font_size": 36,
+            "candidate_profile": "piece.rn_native_preview.prototype.v4",
+            "content_width": 888
+          }
+        ]
+      },
+      "max420_interpretation": "Whole-card measurement_timeout. 48/44/40pt native/adapter resolved and B9 fit=false. At timeout 36pt native/adapter remained pending; 36pt B9 and final Text inspection/PNG were not reached. 8069.796ms is the report observation, not completed rendering time or time needed to finish. Queue-inclusive durations must not be summed.",
+      "artifact": {
+        "id": 12166475887,
+        "name": "piece-rn-canvas-ios",
+        "zip_bytes": 63767854,
+        "zip_sha256": "3e5064d7e207c481897f1ee683673b83407550ef62053ee1475dfb28a1cda34f",
+        "expires_at": "2026-10-26T05:59:40Z",
+        "results_json_bytes": 33697,
+        "results_json_sha256": "932003158c34b7715a08ffd0073bf64aaa942db871339b7124462350b2092c38",
+        "matches_collected_job_log": true,
+        "pngs": [
+          {
+            "name": "essay_paragraphs.png",
+            "dimensions": [
+              1080,
+              1350
+            ],
+            "sha256": "a86a89e627b1448229716b65b574da509663fa8e57b2d48210809823079fc754",
+            "byte_identical_to_previous": true
+          },
+          {
+            "name": "quote_unicode.png",
+            "dimensions": [
+              1080,
+              1920
+            ],
+            "sha256": "2010b836aa1e9d7bbe81c6bb46dd35601711512b849bf5590f6c9813237b8907",
+            "byte_identical_to_previous": true
+          },
+          {
+            "name": "declaration_no_brand.png",
+            "dimensions": [
+              1080,
+              1920
+            ],
+            "sha256": "8f777f41bd02b546223f93cb4f1a0abb548a2824a0e2d02ad012d3121035f000",
+            "byte_identical_to_previous": true
+          },
+          {
+            "name": "saved_essay_canvas.png",
+            "dimensions": [
+              1080,
+              1350
+            ],
+            "sha256": "e839bc72060aac3be5a0992925882d5c93b557711846ca01c67d685e4e6b8be0",
+            "byte_identical_to_previous": true
+          }
+        ],
+        "completed_max420_png": false
+      },
+      "previous_run_comparison": {
+        "run_id": 39177257042,
+        "all5_input_blocks_and_geometry_equal": true,
+        "successful4_rows_offsets_inspection_equal": true,
+        "successful4_png_bytes_equal": true,
+        "causal_performance_improvement_inferred": false
+      },
+      "visual_review": {
+        "reviewed": true,
+        "files": [
+          "declaration_no_brand.png",
+          "essay_paragraphs.png",
+          "quote_unicode.png",
+          "saved_essay_canvas.png"
+        ],
+        "observed": "All four actual RN PNGs visually inspected: text and paragraph order retained, no visible clipping or overlap, expected light/dark themes and branding presence/absence. Each PNG byte-identical to its prior v3 fixture image.",
+        "physicalDeviceAcceptance": false
+      }
     },
     "read_only_review": "Native implementation and added28 checks, JS decoder/B9 and added37 tests, version routing/Card and5 RN fixtures were reviewed without material findings. Extra planning-phase hash verification was removed before final local validation.",
     "formal_renderer_adoption": false,
     "ordinary_initial_save_and_same_owner_reopen_accepted": false,
     "physical_device_acceptance": false,
-    "stop_condition": "If mixed420 still exceeds original8seconds in this bounded RN verification, record v4 unadopted. No same-source rerun, deadline/worker increases, other omissions or revived batch/suffix shaping.",
+    "stop_condition": "MET: mixed420 report8069.796ms measurement_timeout, with36pt native/adapter pending and B9/final inspection/PNG incomplete. V4 remains an unadopted Draft source candidate. No same-source rerun, deadline/worker increase, additional omission or revived batch/suffix shaping.",
     "excluded_effects": [
       "API changes",
       "DB writes or migration replay",
@@ -5748,12 +6092,123 @@
       "saved/export v4"
     ],
     "remaining": [
-      "mixed420 final rendering within original8seconds",
+      "A way to finish mixed420 native/adapter, B9, final inspection and PNG within original8seconds; v4 bounded work is complete and unadopted",
       "formal renderer admission supplier",
       "explicit candidate API runtime",
-      "ordinary initial save and same-owner reopen",
-      "P-W2 export/Photos/share",
-      "P-W3 product read"
-    ]
+      "ordinary initial save and same-owner history/detail reopen",
+      "P-W2 three-format export/Photos/share",
+      "P-W3 product read and physical-device acceptance"
+    ],
+    "adoption_section": "75.3",
+    "source_commit": "b4467a77877dd936c29845f2977a06bd61df84c1",
+    "source_tree": "baa4153f82f38b05de0dd1c8eef59bdb42bca13f",
+    "github_verification": {
+      "source_readback": {
+        "sha": "b4467a77877dd936c29845f2977a06bd61df84c1",
+        "verifiedFiles": 14,
+        "allContents": true,
+        "exactPathSet": true,
+        "parent": "fab912241599d42a6c1706ab8cd29342666be990",
+        "draft": true,
+        "state": "open",
+        "merged": false
+      },
+      "final_checkpoint_scope": "Existing docs3 only; source11 paths unchanged from b4467a77. Final checkpoint commit and guard status are reported after remote readback, without a self-referential manifest commit hash."
+    },
+    "ci_verification": {
+      "run_id": 39205556730,
+      "run_url": "https://github.com/MassyuRed/Cocolon/actions/runs/39205556730",
+      "run_attempt": 1,
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "name": "piece-rn-contracts",
+          "job_id": 117907499629,
+          "conclusion": "success",
+          "tests": 839,
+          "pass": 839,
+          "fail": 0,
+          "skip": 0,
+          "node": "24.21.0",
+          "typescript": "5.2.2",
+          "runner": "node --test"
+        },
+        {
+          "name": "piece-ios-source",
+          "job_id": 117907499621,
+          "conclusion": "success",
+          "production_source_compile": true,
+          "checks": 97,
+          "pass": 97,
+          "fail": 0,
+          "skip": 0
+        },
+        {
+          "name": "piece-android-source",
+          "job_id": 117907499301,
+          "conclusion": "success"
+        },
+        {
+          "name": "piece-export-pods",
+          "job_id": 117907499728,
+          "conclusion": "success",
+          "actual_library_compile_count": 4,
+          "scope_skipped": false
+        },
+        {
+          "name": "piece-export-android",
+          "job_id": 117907499609,
+          "conclusion": "success",
+          "actual_library_compile_count": 4,
+          "scope_skipped": false
+        },
+        {
+          "name": "piece-ios-rn-canvas",
+          "job_id": 117907499684,
+          "conclusion": "failure",
+          "exit_code": 65,
+          "successful_fixtures": 4,
+          "timeout_fixtures": 1
+        }
+      ],
+      "guard_runs": [
+        {
+          "id": 39205569647,
+          "name": "Verify terminal Step 7 candidate @ b4467a77877dd936c29845f2977a06bd61df84c1",
+          "conclusion": "success",
+          "run_attempt": 1
+        },
+        {
+          "id": 39205569527,
+          "name": "Verify read-only workflow policy @ b4467a77877dd936c29845f2977a06bd61df84c1",
+          "conclusion": "success",
+          "run_attempt": 1
+        },
+        {
+          "id": 39205569443,
+          "name": "phase6-contract-guards",
+          "conclusion": "success",
+          "run_attempt": 1
+        },
+        {
+          "id": 39205569489,
+          "name": "Verify pytest at exact Draft head @ b4467a77877dd936c29845f2977a06bd61df84c1",
+          "conclusion": "success",
+          "run_attempt": 1
+        },
+        {
+          "id": 39205556795,
+          "name": "phase6-contract-guards",
+          "conclusion": "success",
+          "run_attempt": 1
+        }
+      ]
+    },
+    "read_only_result_review": "Two read-only reviews checked the approved stop, source/run binding, actual5case artifact, version/width routes and prior fixture/recipe-source comparison. No material mismatch. Root independently matched collected log JSON and artifact, checked ZIP/JSON/PNG digests and visually inspected all4 successful PNGs. No agent edits or test runs.",
+    "bounded_work_complete": true,
+    "stop_condition_met": true,
+    "additional_source_changes_after_stop": 0,
+    "same_source_reruns": 0,
+    "manual_reruns": 0
   }
 }

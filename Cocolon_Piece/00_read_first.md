@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は§75／current map §65.23です。Mash様の§74.4限定承認により、iOS preview専用v4を実装しました。全候補の独立組版・advanceを残し、要求幅を厳密に超えた候補のinkだけ省略します。local既存13file839件が成功。native97判定と既存実RN5fixtureの限定実行はこれから確認します。旧v3・saved/export・元8秒を維持し、正式採用・通常初回保存の受入れは未完了です。**
+**最新は§75.2〜75.3／current map §65.23.1です。承認されたiOS preview専用v4の実装と限定検証を完了しました。source b4467a77はlocal／CI JS839件・native97件・iOS／Android compile成功。実RNは4ケース成功・4枚PNG確認済みですが、420文字は8,069.796msでtimeoutし、36ptの計測が未完了でした。§74.4の停止条件に従いv4は未採用です。同source再実行や追加変更へ進まず、旧v3・saved/export・元8秒を維持。正式採用・通常初回保存の受入れは未完了です。**
 
 ### §74時点の要約（履歴）
 
@@ -1701,7 +1701,7 @@ Mash様がこの会話で「入口§74.4の範囲で、v4の実装と限定検�
 | STOP / prohibited | 限定実RNで420文字が依然8秒を超えればv4未採用と記録し停止。期限延長・worker増加・追加省略・batch／suffix復活・同source再実行へ拡張しない。API／DB書込／flag／env／deploy／署名／配布／main merge／正式supplier／v4 saved・export対応は範囲外 |
 | credit / next product decision | 検査通過だけはTECHNICAL_CREDIT。正式採用と通常初回保存の受入れへ換算しない。実測結果で採否を記録し、正式supplier・candidate runtime・通常保存→同owner再表示・P-W2／P-W3へ残件を接続 |
 
-Supabaseのmigration一覧を再確認し、§73.6の2本を含む全10件・Piece6件を維持。今回のDB書込・再適用・業務RPCは0です。ここからの実装・検証結果は同節に追記します。
+Supabaseのmigration一覧を再確認し、§73.6の2本を含む全10件・Piece6件を維持。今回のDB書込・再適用・業務RPCは0です。実装は§75.1、限定検証の確定結果と停止判断は§75.2〜75.3に保持します。
 
 ### 75.1 実装した境界とlocal検証
 
@@ -1713,7 +1713,44 @@ adapterはv4の11fieldを厳密に検査し、要求幅＝返却幅、tagとstri
 
 localはNode24.19.0／TypeScript5.2.2、既存13fileを`node --test --test-isolation=none`で実行し839 PASS／FAIL0／SKIP0。追加は既存renderer8件とmeasured-wrap29件の計37件です。対象2fileだけでも150 PASS。元Python B9の25case／expectedを変更せず、v4のfit/null・本文行・段落・lineHeight・gap・totalHeight・同点選択が一致。幅同値／1ulp超過／ink張出し／非単調候補／viewpoint／版と幅の不一致／wire異常／旧v1〜3の未選択不正ink拒否を確認しました。新timeout検査の最初のfixtureは1.123秒でpreviewが失効したため、この検査のexpiryだけ60秒へ直し、元8秒のtimeoutを独立に確認しました。製品expiryやdeadlineは変更していません。
 
-nativeの旧decoder／call／validCandidates／独立uncached oracleは原文一致で保持しています。元69判定に、既存21入力のv4全range／advance bit一致・full5double bit一致、strict幅境界、無効幅、glyph拒否、queued2font、全独立line／全advance／fullだけink取得の回数、承認済み不正ink検出差、異常advance拒否の28判定を追加し、既存workflowの期待件数だけ97へ同期しました。native97件はCI未実行の時点では合格扱いにしません。
+nativeの旧decoder／call／validCandidates／独立uncached oracleは原文一致で保持しています。元69判定に、既存21入力のv4全range／advance bit一致・full5double bit一致、strict幅境界、無効幅、glyph拒否、queued2font、全独立line／全advance／fullだけink取得の回数、承認済み不正ink検出差、異常advance拒否の28判定を追加し、既存workflowの期待件数だけ97へ同期しました。source公開前のlocal段階ではnative97件を合格扱いにせず、その後の実CI結果を§75.2に保持します。
 
-既存実RN5fixtureの名前・順序・全本文・recipe・hash・propsは、preview4件のrenderer_versionだけをv4にしたことを比較確認しました。savedはv3のまま、mixed本文は420文字です。観測wrapperは旧／幅付きmethodを別に記録し、要求と返却の版・幅・代表数をtraceへ残します。既存の全文・最終inspection・PNG・8秒・save/export=false・ローカルfitの実検査を維持。source reviewで重大指摘なし、CIと実RNの採否は結果取得後に同節へ追加します。
+既存実RN5fixtureの名前・順序・全本文・recipe・hash・propsは、preview4件のrenderer_versionだけをv4にしたことを比較確認しました。savedはv3のまま、mixed本文は420文字です。観測wrapperは旧／幅付きmethodを別に記録し、要求と返却の版・幅・代表数をtraceへ残します。既存の全文・最終inspection・PNG・8秒・save/export=false・ローカルfitの実検査を維持。source reviewで重大指摘なし。CIと実RNの確定結果は次節です。
+
+### 75.2 限定検証の結果 — JS839／native97成功、実RN420文字timeout
+
+実装sourceは`b4467a77877dd936c29845f2977a06bd61df84c1`、treeは`baa4153f82f38b05de0dd1c8eef59bdb42bca13f`です。既存Draft PR #30に反映後、変更14pathの全内容・blobと親`fab912241599d42a6c1706ab8cd29342666be990`からの差分path集合を読戻し照合しました。限定CIは[run39205556730](https://github.com/MassyuRed/Cocolon/actions/runs/39205556730)、attempt1です。
+
+| 検証 | 実結果 |
+|---|---|
+| local既存13 JS suite | 839 PASS／FAIL0／SKIP0。対象2suiteの150件はこの部分集合で、合算しない |
+| CI piece-rn-contracts | job117907499629、Node24.21.0／TypeScript5.2.2、標準node --testで839 PASS／FAIL0／SKIP0 |
+| iOS source／native | job117907499621、製品source compile成功。実UIKit／TextKit／CoreTextで元69＋追加28＝97 PASS／FAIL0／SKIP0 |
+| Android source | job117907499301、compile成功 |
+| iOS export依存 | job117907499728、既存4Podを実compileして成功。scope skipではない |
+| Android export依存 | job117907499609、既存4libraryを実compileして成功。scope skipではない |
+| 実RN canvas | job117907499684、4ケース成功・420文字timeout、exit65。workflow全体はfailure |
+| 既存guard | 同sourceの5runすべてsuccess。これは失敗した420文字の代替合格ではない |
+
+nativeはApple clang17.0.0／Xcode16.4（16F6）、iOS26.2（23C54）のsimulatorです。実出力`NATIVE_CHECKS=97 PASS=97 FAIL=0 SKIP=0`と97本のPASSを確認しました。既存21入力の全range／advance bit一致とfull5double bit一致、strict幅境界、旧版拒否、承認済みの省略行ink検出差も成功。mixed420の48pt・W888では全88,410rangeと11,381代表を残し、full531・overflow10,850でした。native v4 raw callは2,085.487msですが、旧v3計測はtest decoderを含むため同じ計時境界ではありません。これを実RN全体の改善量や8秒達成へ換算しません。
+
+| 既存実RN fixture | 使用版 | elapsed_ms | 結果 |
+|---|---|---:|---|
+| essay_paragraphs | preview v4 | 2,438.203 | native_checked、本文・最終inspection・PNG成立 |
+| quote_unicode | preview v4 | 704.151 | native_checked、本文・最終inspection・PNG成立 |
+| declaration_no_brand | preview v4 | 369.839 | native_checked、本文・最終inspection・PNG成立 |
+| essay_max420 | preview v4 | 8,069.796 | unavailable／measurement_timeout、size_index3、完成PNGなし |
+| saved_essay_canvas | saved v3 | 1,420.968 | native_checked、本文・最終inspection・PNG成立 |
+
+成功4件はbody_preserved／native_canvas_valid=true、全Textのoverflow／wrapViolation=false、glyphCheck=no_missing_observedです。preview成功3件は同tokenのlocal fitだけtrue、wrong tokenはfalse。saved v3はfit handleを出さない従来結果を維持。全5件のstate canSave／canExportはfalseです。実RNはCardを直接mountする既存simulator harnessであり、InputScreen→Modal→hostの通常初回保存や実機受入れではありません。
+
+artifact `piece-rn-canvas-ios`（ID12166475887、63,767,854bytes、SHA256 `3e5064d7e207c481897f1ee683673b83407550ef62053ee1475dfb28a1cda34f`）を取得し、GitHub metadataと一致を確認しました。results.jsonは33,697bytes、SHA256 `932003158c34b7715a08ffd0073bf64aaa942db871339b7124462350b2092c38`で、収集済みjob logの5件JSONと完全一致。4枚PNGを目視し、本文順・段落・branding有無・明暗themeを確認しました。前回run39177257042の対応4枚とPNG bytesが同一で、全5件の入力blocks／描画寸法、成功4件のrows／offsets／inspectionも一致。PNGごとの寸法・digestはmanifestの同v4 ownerに保持します。420文字の完成PNGはありません。artifactのGitHub保管期限は2026-10-26T05:59:40Zです。
+
+420文字のtraceは48→44→40ptのnative／adapterがv4・W888で返り、B9は各fit=falseでした。planning:3は7,117.998msで始まりましたが、timeout時点では36ptのnative／adapterがpendingで、そのfontのB9・最終Text inspectionへ未到達です。unavailable:3の観測は8,035.288ms、report elapsedは8,069.796ms。後者は全体timeoutの観測値で、36pt単体時間・描画完了時間・「あと69.796msで完成」の意味ではありません。先読みのqueue待ちを含む各methodの時間は合算しません。本文420文字のblocksは保持され、body_preserved=falseは最終plan未成立の結果であり、本文を短縮した結果ではありません。
+
+### 75.3 採否と停止後の残件
+
+§74.4の停止条件が成立したため、**v4は未採用**です。承認された実装と限定検証は完了し、sourceは既存Draft PR #30に未採用候補として残します。承認を未承認へ戻したり、source撤去を意味したりする状態ではありません。結果確認後の更新は既存入口・manifest・current mapの3点だけで、製品／test／workflowへの追加変更0、同source再実行0、期限延長0、worker増加0、追加省略0です。旧v3とsaved/exportの経路を維持します。
+
+現在のP-W1残件は、420文字について未完了の36pt候補計測→B9→最終inspection→画像成立を元8秒内へ収める方式の判断です。この結果だけで420文字が原理的に不可能とは結論しません。正式renderer admission supplier、explicit candidate APIの稼働確認、通常初回保存→同owner履歴／詳細の再表示、P-W2の3format export／Photos／share、P-W3の商品読取り・実機受入れも未完了です。適用済みPiece6migrationと保存停止回収source5c44b252を保持し、同じ基盤作業をやり直しません。API変更・DB書込／再適用・業務RPC・flag／env・deploy・署名／配布・main merge効果0、default OFF・Draft/open/unmerged・automatic_progression=falseを維持します。
 
