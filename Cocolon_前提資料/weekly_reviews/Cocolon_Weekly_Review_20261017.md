@@ -632,13 +632,21 @@ P-W1の計測・provider・検査は、利用者が保存して開き直せる�
 
 今回の成果はBLOCKER_NARROWEDで、P-W1／P-W2／P-W3の完成数・全体評価を増やしません。既存入口・manifest・Piece map・本週次記録の4文書に調査と候補を反映し、製品／test／workflow・DB／配置／配布は変更していません。方式は未決定なので10/22保存・10/23共有は引き続き条件付きの目標です。10/20に方式判断が閉じなければ、§5.6.2に従い同時に見通しを更新します。次の判断はv5の限定実装・一度の新source検証の可否で、終了済みv4の再承認ではありません。
 
-#### 5.6.5 10/19の承認済みv5実装 — 一度の実RN結果待ち
+#### 5.6.5 10/19の承認済みv5限定検証完了 — 420達成、RTL未達で未採用STOP
 
 Mashは入口§76.3〜76.5の差と停止条件を含むiOS preview v5の実装・限定検証を明示承認しました。華恋／GPT-6 Astra Proが唯一の編集・実行・GitHub反映担当として、既存native／renderer／B9／Card／layoutの5ownerへ実装。旧版を保持し、v5の探索用suffix代表値と、実mountした選択行の独立寸法＋TextKit検査を別版で接続しました。改行／font／fitが旧版と変わり得る差を記録し、正式採用・保存許可とは分けます。
 
-local既存13 JS suiteは880 passed、fail／skip0。旧839と固定B9期待値を保持した新41判定を含む同じ集合で、CIとの加算はしません。元RN5入力はpreview版以外の本文／recipe／順序／saved v3が完全一致。native旧97に新32を追加した期待129と、実RNの元Card5＋追加Card3＋本文下限未満のraw診断3を既存harnessで別集計します。rawはPiece response／Card local fitの証拠へ数えず、旧混font属性も原条件での製品拒否を維持します。
+source `b983da2d3ba5ffd7d9f78a2b9e8d2b0574b5b5b1` のlocal／CI既存13 JS suiteは880 passed、fail／skip0。旧839と固定B9期待値を保持した新41判定を含む同じ集合で、localとCIを加算しません。元RN5入力はpreview版以外の本文／recipe／順序／saved v3が完全一致。native旧97＋新32=129 PASS、iOS／Androidと既存export依存compileも成功しました。既存[run39227065284](https://github.com/MassyuRed/Cocolon/actions/runs/39227065284) attempt1の実RN結果を、元Card5＋追加Card3＋本文下限未満のraw診断3で別集計しています。
 
-ここまでのcreditはSOURCE_IMPLEMENTED／LOCAL_JS_VERIFIEDで、実RN・完成PNGは未確認です。新sourceの既存CI1runで元420入力が8秒内にnative_checked／全inspection／同token fitへ到達し、その同状態のPNGを確認できるかを判断します。未達・明白な崩れ・現在mountへの束縛不成立ならv5未採用で終了し、期限延長・同source再実行・候補削減・本文変更へ進めません。詳細ownerは入口§77／current map §65.25。変更は製品5＋検査6＋workflow1＋文書4の16path、API／DB／flags／env／deploy／署名／配布／main merge効果0。P-W1の正式supplier・同採用版saved再表示・candidate稼働・通常保存→同owner再表示は未完了で、P-W2／P-W3と10/20方式判断・10/31管理線・12/18目標の再評価は今回行いません。
+元Card5は全成功です。特にmixed420は**6,763.778ms・36pt18行**でnative_checked、本文18＋branding1の独立／TextKit inspection、同token fit、完成1080×1350 PNGを確認しました。最初の3fontのB9不成立から既定36ptへ進み、全文・元8秒・全候補を保持しています。既存計時はlocal fit確認後・PNG capture前なので、PNG生成自体まで8秒という結果ではありません。元420入力は15文反復の描画stressで、生成文数方針のAPI受入れとは分けます。
+
+追加Card3はLatinとあ420が成功（あ420は2,693.200ms・36pt17行）、Arabicが336.643ms・最小56ptでnative_ink_overflow／PNGなし。raw3は空白1成功、Hebrewとmixed bidi2不成立で、TextKitのlocal左端−11.0390625／−22.4765625が既存own-view／margin条件に反しました。raw失敗でもnative_textsは原文と一致し、body_preserved=falseを本文削除と解釈しません。Arabicのどの最終寸法が超過したかは失敗値がreportへ残らず未特定です。rawの結果をPiece response／Card fitへ数えず、native旧混font属性の製品拒否も維持しています。
+
+実RN job117975813409は全11reportを収集してfailure／exit65。artifact12176407319のdigestと、results.jsonの全11reportがjob logと一致することを確認し、10 PNG（成功Card7＋成功raw1＋失敗raw2）を目視しました。元の成功4 PNGは前回記録のSHA256とも一致します。全8CardでcanSave／canExport=false、成功preview6件は同token fit=true／wrong-token=falseで、saved v3はhandleなしです。
+
+**今回のcreditは承認済み限定作業完了・mixed420条件達成、v5全体は未採用STOPです。** 追加RTLまで含む描画条件が揃わないため入口§76.5で終了し、420成功だけを正式採用・通常保存へ換算しません。結果後の製品／test／workflow追加変更0・同source実RN再実行0。成果・失敗・原因の確定範囲を入口§77.2〜77.4／current map §65.25.1／manifest v5 ownerへ同期します。次の製品読取対象はRTLの実Text属性・TextKit境界と既存配置条件で、今回の出力にない最終値を探索値で補いません。
+
+実装は製品5＋検査6＋workflow1＋文書4の16path、結果反映は既存4文書だけ。API／DB／flags／env／deploy／署名／配布／main merge効果0。P-W1の正式supplier・同採用版saved再表示・candidate稼働・通常保存→同owner再表示は未完了で、P-W2／P-W3と10/20方式判断・10/31管理線・12/18目標の再評価は今回行いません。正式admission・商品／物理実機受入れfalse、automatic_progression=falseを維持します。
 
 ## 6. 議題6 — 今回の指摘に対する判断と、記録の責任
 

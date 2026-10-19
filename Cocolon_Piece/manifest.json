@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v82",
+  "schema_version": "cocolon.piece.workstream_manifest.v83",
   "generated_at": "2026-10-19 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v81",
-    "predecessor_blob": "5bf02316acf06b52c6c703c759d88d2a91161ef1",
-    "predecessor_head": "9d9f0b7d17b988bd5f1c64431edf88681df917f7",
-    "carry_forward": "Mash approved entry76.3-76.5. Implement explicit iOS preview v5 in five existing product owners; retain old v3/v4, saved/export v3, native97 independent checks, fixed B9 expectations and original RN5. Local JS880 pass; one source-bound native129 and real RN5+3+3 run remains pending. No formal adoption/save/runtime/DB/deploy effects."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v82",
+    "predecessor_blob": "f6dfaa73a417b1c6a7e1f90aed202f127e8dc6e4",
+    "predecessor_head": "b983da2d3ba5ffd7d9f78a2b9e8d2b0574b5b5b1",
+    "carry_forward": "Approved v5 implementation and one source-bound verification complete. Local/CI JS880 and native129 pass. Baseline Card5 including mixed420 at6763.77775ms with same-token fit and PNG pass; supplemental Card2/3 and raw1/3 pass. Arabic and raw RTL2 leave quality incomplete, so v5 remains unadopted STOP. Only four existing result documents change after the source. No rerun/formal admission/save/runtime/DB/deploy effects."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "02f6f1e156fc6de2569e71072170484da627f6c1",
-    "raw_sha256": "f615f51556fc47b37bd20f07ca6be3a0d445a729fc077557bd52011c57cef1e3",
-    "utf8_bytes": 264857
+    "git_blob_sha1": "74e9f355b87cf9c1e7935cbbc468d784d07e68cc",
+    "raw_sha256": "67d18bad0e79cb8ebbf5a99fb5a970894c1ace5d38876c677c4999cf937977c8",
+    "utf8_bytes": 275952
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -55,7 +55,7 @@
     "pce9a_b01": "COMPLETE",
     "pce9a_b02a": "NATIVE_ACCEPTANCE_RETAINED__LIVE_BRIDGE_APPLIED_20261010",
     "analysis_roadmap": "REFER_TO_ANALYSIS_CURRENT_STRUCTURE__HISTORICAL_NOT_ACTIVATED_STATE_NOT_CURRENT",
-    "next_piece_group": "P_W1_MAX420_FINAL_RENDERING_AND_FORMAL_ADMISSION__NORMAL_SAVE_REOPEN_PENDING",
+    "next_piece_group": "P_W1_RTL_RENDERING_REJECTION_AND_FORMAL_ADMISSION__NORMAL_SAVE_REOPEN_PENDING",
     "automatic_packet_progression": false,
     "pce9a_b02a_red": "FROZEN_UNCHANGED__NATIVE_POSTGRESQL_1_PASS",
     "pce9a_b02a_implementation": "EXACT5_PRESERVED__EXACT6_SELECTORS_PUBLISHED",
@@ -94,7 +94,7 @@
     "pce9c_initial_save_modal": "REMOTE_90CBD705__FIT_CALLBACK_FORWARDED__CI790_PASS__FORMAL_ADMISSION_NORMAL_SAVE_PENDING",
     "pce9c_initial_save_host": "REMOTE_90CBD705__CONDITIONAL_HOST_LOCAL_FIT_CONNECTED__CI790_PASS__FORMAL_PROVIDER_NORMAL_SAVE_DEVICE_PENDING",
     "pce9c_ios_preview_v4": "BOUNDED_VERIFICATION_COMPLETE__JS839_NATIVE97_PASS__REAL_RN4_PASS_MAX420_TIMEOUT__V4_UNADOPTED",
-    "pce9c_ios_preview_v5": "SOURCE_IMPLEMENTED__LOCAL_JS880_PASS__NATIVE_AND_REAL_RN_PENDING__NOT_FORMALLY_ADOPTED"
+    "pce9c_ios_preview_v5": "BOUNDED_COMPLETE__JS880_NATIVE129_PASS__BASELINE5_MAX420_PASS__RTL_UNRESOLVED__V5_UNADOPTED"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -176,7 +176,7 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "9d9f0b7d17b988bd5f1c64431edf88681df917f7",
+    "cocolon_pre_sync_head": "b983da2d3ba5ffd7d9f78a2b9e8d2b0574b5b5b1",
     "mashos_api_head": "a536e50ee284785f585ac73329ef2947dca8bba9",
     "current_user_visible_piece_shape": "CANDIDATE_NORMAL_INPUT_V2_SAVED_SOURCE_ONLY__TUTORIAL_NEXUS_LEGACY_REMAIN__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
@@ -238,9 +238,9 @@
     "piece_v2_initial_save_host_conditional_connected": true,
     "piece_v2_formal_renderer_admission_supplied": false,
     "piece_v2_current_native_fit_handle_connected": true,
-    "piece_v2_native_save_fit_scope": "Current mounted-fit handle is connected Card->Modal->host and tested in source JS. Actual RN mounts Card directly: three preview fixtures accept the same token and reject a wrong token; saved-card fixture publishes no handle. Formal renderer supplier and normal InputScreen initial-save/reopen acceptance remain absent. Local fit alone does not grant admission.",
+    "piece_v2_native_save_fit_scope": "Current mounted-fit handle remains connected Card->Modal->host in source. This single actual RN run mounts Card directly and verifies six successful preview v5 same-token handles; saved v3 and failed Arabic have none. Formal renderer supplier and normal InputScreen initial-save/reopen acceptance remain absent.",
     "piece_v2_current_native_fit_handle_real_rn_verified": true,
-    "piece_v2_current_native_fit_handle_real_rn_scope": "Three specific preview fixtures in the direct-Card iOS simulator harness only; not all inputs/formats/devices or the Modal/host/InputScreen save flow.",
+    "piece_v2_current_native_fit_handle_real_rn_scope": "Six successful preview v5 fixtures in the direct-Card iOS simulator harness only, including both420 inputs; same-token true and wrong-token false. Arabic has no accepted fit; saved v3 publishes no handle. Not Modal/host/InputScreen initial save, all inputs/formats/devices or formal admission.",
     "piece_v2_database_migrations_applied": 6,
     "piece_v2_db_runtime_scope": "The four prior Piece migrations and two approved function additions exist live. Explicit candidate API runtime and real-owner business RPC execution remain unverified; DB definitions alone do not establish ordinary app save.",
     "piece_v2_server_disabled_save_recovery_connected": true,
@@ -250,18 +250,18 @@
     "piece_v2_ios_preview_v4_scope": "Explicit iOS preview only; source b4467a77 retained as an unadopted Draft candidate. All independent lines/advance/ranges retained, strict advance>W omits ink under an exact width-bound tagged contract. JS839/native97 pass; real RN3 previewv4 fixtures and savedv3 succeed, mixed420 times out before36pt B9/final inspection. Original8seconds, saved/exportv3 and Android existing routes retained. No source expansion or same-source rerun after the bounded stop.",
     "piece_v2_ios_preview_v5_source_present": true,
     "piece_v2_ios_preview_v5_formally_adopted": false,
-    "piece_v2_ios_preview_v5_scope": "Explicit iOS preview only. Suffix-context representative all-five metrics for exploration; independently inspect every selected actual Text with strict dimensions and unchanged TextKit placement. Local JS880 pass; native and real RN/image evidence pending. No saved/export v5, Android v5 or formal admission."
+    "piece_v2_ios_preview_v5_scope": "Explicit iOS preview v5 source b983 retained unadopted after one bounded run. JS880/native129 and baseline Card5 incl mixed420 at6763.77775ms/36pt18rows/same-token fit/PNG pass. Supplemental Arabic and raw RTL2 fail final geometry/containment conditions. No formal admission, saved/export v5, Android v5 or runtime acceptance."
   },
   "next_group": {
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "CHAT_PRO_OK",
-    "state": "APPROVED_V5_SOURCE_IMPLEMENTED__LOCAL_JS880_PASS__SINGLE_REAL_RN_PENDING__P_W1_PENDING",
-    "current_map_section": "65.25",
-    "current_entry_section": "77",
+    "state": "V5_BOUNDED_COMPLETE__MAX420_PASS__RTL_UNRESOLVED__V5_UNADOPTED__P_W1_PENDING",
+    "current_map_section": "65.25.1",
+    "current_entry_section": "77.4",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
     "weekly_review_section": "5.6.5",
-    "first_unfinished_work": "Complete the already-approved v5 single-source native/real-RN run, collect every result and matching PNG, then apply entry76.5 stop/adoption criteria. Do not ask for the same approval or rerun the same source. Formal supplier, matching saved reopen, explicit candidate runtime and ordinary initial-save/same-owner return remain pending.",
+    "first_unfinished_work": "Approved v5 bounded implementation/one-run verification is complete. Read the unresolved actual RTL TextKit/placement conditions and identify a concrete repair before another source effect; no same-source rerun or automatic scope expansion. Formal supplier, matching saved reopen, explicit candidate runtime and ordinary initial-save/same-owner return remain pending.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 6,
@@ -311,7 +311,11 @@
     "v5_scope_approved": true,
     "v5_implementation_started": true,
     "ios_preview_v5_owner": "ios_preview_v5_20261019",
-    "v5_same_source_rerun_allowed": false
+    "v5_same_source_rerun_allowed": false,
+    "v5_bounded_work_complete": true,
+    "v5_max420_condition_met": true,
+    "v5_unadopted": true,
+    "v5_remaining_quality_owner": "Arabic final overflow item unknown; raw Hebrew/mixed bidi TextKit own-view and margin violations observed"
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -365,9 +369,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "76b1e1b7715a8872f4422997ba5c24346a1c6c65",
-    "raw_sha256": "c4fd1058fdd3ce4cb0e1aff7b12e26d705dfededfca04936ce1e83d134acdf14",
-    "utf8_bytes": 445128
+    "git_blob_sha1": "d86555c9814cb218cdd122827d25071377ee6d8c",
+    "raw_sha256": "eb3342ff8204398194a77f721093b11b4cc9f8215109393fea47ed7992877271",
+    "utf8_bytes": 448686
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -540,32 +544,20 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "APPROVED_IOS_PREVIEW_V5_SOURCE_IMPLEMENTATION__SINGLE_BOUNDED_VERIFICATION_PENDING",
-    "source_parent": "9d9f0b7d17b988bd5f1c64431edf88681df917f7",
+    "classification": "APPROVED_V5_BOUNDED_RESULT_DOCUMENTATION__MAX420_PASS__RTL_STOP_UNADOPTED",
+    "source_parent": "b983da2d3ba5ffd7d9f78a2b9e8d2b0574b5b5b1",
     "api_reference_commit": "a536e50ee284785f585ac73329ef2947dca8bba9",
-    "product_source_changes": 5,
-    "test_source_paths": 6,
-    "workflow_paths": 1,
+    "product_source_changes": 0,
+    "test_source_paths": 0,
+    "workflow_paths": 0,
     "piece_documentation_paths": 4,
     "changed_paths": [
-      "ios/tempCocolon/PieceTextMetrics.mm",
-      "features/piece/pieceRenderer.js",
-      "features/piece/pieceMeasuredWrap.js",
-      "components/piece/PieceVisualCard.js",
-      "features/piece/pieceLayout.js",
-      "tests/piece-v2-renderer.test.js",
-      "tests/piece-v2-measured-wrap.test.js",
-      "tests/native/piece-text-metrics-ios.mm",
-      "tests/native/piece-rn-canvas-entry.js",
-      "tests/native/piece-rn-canvas-fixtures.cjs",
-      "tests/native/piece-rn-canvas-ios.m",
-      ".github/workflows/piece-rn-contracts.yml",
       "Cocolon_Piece/00_read_first.md",
       "Cocolon_Piece/manifest.json",
       "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
       "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md"
     ],
-    "structure_map": "STRUCTURE_MAP_DELTA_PRESENT__EXISTING5_OWNERS__SECTION_65_25",
+    "structure_map": "STRUCTURE_MAP_DELTA_NONE__RESULTS_OF_SOURCE_65_25_RECORDED_IN_65_25_1",
     "sql_source_changes": 0,
     "live_database_apply": 0,
     "business_rpc": 0,
@@ -6559,7 +6551,7 @@
     "verified_product_source_commit": "b4467a77877dd936c29845f2977a06bd61df84c1"
   },
   "ios_preview_v5_20261019": {
-    "state": "SOURCE_IMPLEMENTED__LOCAL_JS_VERIFIED__SINGLE_NATIVE_AND_REAL_RN_PENDING",
+    "state": "BOUNDED_VERIFICATION_COMPLETE__MAX420_PASS__RTL_UNRESOLVED__V5_UNADOPTED_STOP",
     "entry_section": "77",
     "map_section": "65.25",
     "weekly_section": "5.6.5",
@@ -6571,7 +6563,7 @@
     "implementation_started": true,
     "formal_adoption": false,
     "source_parent": "9d9f0b7d17b988bd5f1c64431edf88681df917f7",
-    "source_commit": null,
+    "source_commit": "b983da2d3ba5ffd7d9f78a2b9e8d2b0574b5b5b1",
     "changed_paths": [
       "ios/tempCocolon/PieceTextMetrics.mm",
       "features/piece/pieceRenderer.js",
@@ -6715,7 +6707,7 @@
       "sparse_original_dependencies_materialized": 6
     },
     "native_verification": {
-      "status": "PENDING",
+      "status": "COMPLETED_PASS",
       "baseline_expected": 97,
       "additional_expected": 32,
       "total_expected": 129,
@@ -6723,12 +6715,341 @@
       "real_budget_tests_use_short_line_stub_count": 2,
       "budget_tests_are_numeric_or_speed_evidence": false,
       "historical_mismatch_cases": 8,
-      "mixed_font_historical_input_remains_rejected": true
+      "mixed_font_historical_input_remains_rejected": true,
+      "run_id": 39227065284,
+      "run_attempt": 1,
+      "job_id": 117975812954,
+      "baseline_passed": 97,
+      "additional_passed": 32,
+      "total_passed": 129,
+      "failed": 0,
+      "skipped": 0,
+      "actual_summaries": [
+        "LEGACY_NATIVE_CHECKS=97 PASS=97 FAIL=0 SKIP=0",
+        "NATIVE_CHECKS=129 PASS=129 FAIL=0 SKIP=0"
+      ],
+      "individual_pass_lines": 129,
+      "individual_v5_pass_lines": 32,
+      "fail_lines": 0,
+      "native_source_blob": "030e527024433494c2a4b985164220d980a2d7ba",
+      "environment": {
+        "runner": "macos-15-arm64",
+        "image": "20260907.0337.1",
+        "macos": "15.7.9",
+        "macos_build": "24G830",
+        "xcode": "16.4",
+        "xcode_build": "16F6",
+        "apple_clang": "17.0.0",
+        "compile_target": "arm64 iOS15.1 simulator Objective-C++ C++20",
+        "simulator": "iPhone17 Pro",
+        "ios": "26.2",
+        "ios_build": "23C54"
+      },
+      "historical_8_current_differences": [
+        {
+          "name": "spaces",
+          "utf16_start": 0,
+          "utf16_end": 3,
+          "bit_pairs": [
+            {
+              "field": "advance",
+              "exploration_or_suffix": "40456f0000000000",
+              "independent": "4046050000000000",
+              "equal": false
+            },
+            {
+              "field": "left",
+              "exploration_or_suffix": "40375e0000000000",
+              "independent": "40375e0000000000",
+              "equal": true
+            },
+            {
+              "field": "top",
+              "exploration_or_suffix": "c040e90000000000",
+              "independent": "c040e90000000000",
+              "equal": true
+            },
+            {
+              "field": "right",
+              "exploration_or_suffix": "4045c00000000000",
+              "independent": "4045c00000000000",
+              "equal": true
+            },
+            {
+              "field": "bottom",
+              "exploration_or_suffix": "8000000000000000",
+              "independent": "8000000000000000",
+              "equal": true
+            }
+          ]
+        },
+        {
+          "name": "max420_prefix8",
+          "utf16_start": 0,
+          "utf16_end": 8,
+          "bit_pairs": [
+            {
+              "field": "advance",
+              "exploration_or_suffix": "407699e7cc4e7ae3",
+              "independent": "407699e7cc4e7ae2",
+              "equal": false
+            },
+            {
+              "field": "left",
+              "exploration_or_suffix": "40133574a9a601a5",
+              "independent": "40133574a9a601a5",
+              "equal": true
+            },
+            {
+              "field": "top",
+              "exploration_or_suffix": "c041f6d60ecd9951",
+              "independent": "c041f6d60ecd9951",
+              "equal": true
+            },
+            {
+              "field": "right",
+              "exploration_or_suffix": "4076563beada498b",
+              "independent": "4076563beada498b",
+              "equal": true
+            },
+            {
+              "field": "bottom",
+              "exploration_or_suffix": "4002db3a27b5bfda",
+              "independent": "4002db3a27b5bfda",
+              "equal": true
+            }
+          ]
+        },
+        {
+          "name": "latin_ligature",
+          "utf16_start": 0,
+          "utf16_end": 17,
+          "bit_pairs": [
+            {
+              "field": "advance",
+              "exploration_or_suffix": "4072db0000000000",
+              "independent": "4073170000000000",
+              "equal": false
+            },
+            {
+              "field": "left",
+              "exploration_or_suffix": "3ff7400000000000",
+              "independent": "3ff7400000000000",
+              "equal": true
+            },
+            {
+              "field": "top",
+              "exploration_or_suffix": "c041250000000000",
+              "independent": "c041250000000000",
+              "equal": true
+            },
+            {
+              "field": "right",
+              "exploration_or_suffix": "4073080000000000",
+              "independent": "4073080000000000",
+              "equal": true
+            },
+            {
+              "field": "bottom",
+              "exploration_or_suffix": "4020680000000000",
+              "independent": "4020680000000000",
+              "equal": true
+            }
+          ]
+        },
+        {
+          "name": "hebrew",
+          "utf16_start": 0,
+          "utf16_end": 8,
+          "bit_pairs": [
+            {
+              "field": "advance",
+              "exploration_or_suffix": "40662fc000000000",
+              "independent": "40666bc000000000",
+              "equal": false
+            },
+            {
+              "field": "left",
+              "exploration_or_suffix": "3fc2000000000000",
+              "independent": "4000200000000000",
+              "equal": false
+            },
+            {
+              "field": "top",
+              "exploration_or_suffix": "c042c00000000000",
+              "independent": "c042c00000000000",
+              "equal": true
+            },
+            {
+              "field": "right",
+              "exploration_or_suffix": "4065c78000000000",
+              "independent": "4066038000000000",
+              "equal": false
+            },
+            {
+              "field": "bottom",
+              "exploration_or_suffix": "3fce000000000000",
+              "independent": "3fce000000000000",
+              "equal": true
+            }
+          ]
+        },
+        {
+          "name": "arabic",
+          "utf16_start": 0,
+          "utf16_end": 1,
+          "bit_pairs": [
+            {
+              "field": "advance",
+              "exploration_or_suffix": "40379474d0000000",
+              "independent": "403898c430000000",
+              "equal": false
+            },
+            {
+              "field": "left",
+              "exploration_or_suffix": "bff3200000000000",
+              "independent": "4002900000000000",
+              "equal": false
+            },
+            {
+              "field": "top",
+              "exploration_or_suffix": "c033800000000000",
+              "independent": "c034d60000000000",
+              "equal": false
+            },
+            {
+              "field": "right",
+              "exploration_or_suffix": "40358a0000000000",
+              "independent": "40368c0000000000",
+              "equal": false
+            },
+            {
+              "field": "bottom",
+              "exploration_or_suffix": "bfffe00000000000",
+              "independent": "402ae80000000000",
+              "equal": false
+            }
+          ]
+        },
+        {
+          "name": "mixed_bidi",
+          "utf16_start": 3,
+          "utf16_end": 4,
+          "bit_pairs": [
+            {
+              "field": "advance",
+              "exploration_or_suffix": "4024640000000000",
+              "independent": "4024640000000000",
+              "equal": true
+            },
+            {
+              "field": "left",
+              "exploration_or_suffix": "c024640000000000",
+              "independent": "0000000000000000",
+              "equal": false
+            },
+            {
+              "field": "top",
+              "exploration_or_suffix": "8000000000000000",
+              "independent": "8000000000000000",
+              "equal": true
+            },
+            {
+              "field": "right",
+              "exploration_or_suffix": "c024640000000000",
+              "independent": "0000000000000000",
+              "equal": false
+            },
+            {
+              "field": "bottom",
+              "exploration_or_suffix": "8000000000000000",
+              "independent": "8000000000000000",
+              "equal": true
+            }
+          ]
+        },
+        {
+          "name": "paragraph_direction",
+          "utf16_start": 0,
+          "utf16_end": 4,
+          "bit_pairs": [
+            {
+              "field": "advance",
+              "exploration_or_suffix": "4050dd8000000000",
+              "independent": "4051cd8000000000",
+              "equal": false
+            },
+            {
+              "field": "left",
+              "exploration_or_suffix": "3fe2000000000000",
+              "independent": "3fe2000000000000",
+              "equal": true
+            },
+            {
+              "field": "top",
+              "exploration_or_suffix": "c042a50000000000",
+              "independent": "c042a50000000000",
+              "equal": true
+            },
+            {
+              "field": "right",
+              "exploration_or_suffix": "4051418000000000",
+              "independent": "4051418000000000",
+              "equal": true
+            },
+            {
+              "field": "bottom",
+              "exploration_or_suffix": "c008000000000000",
+              "independent": "c008000000000000",
+              "equal": true
+            }
+          ]
+        },
+        {
+          "name": "whitespace_neighbor2_original_attributes",
+          "bit_pairs": [
+            {
+              "field": "advance",
+              "exploration_or_suffix": "403c000000000000",
+              "independent": "4043190000000000",
+              "equal": false
+            },
+            {
+              "field": "left",
+              "exploration_or_suffix": "401e700000000000",
+              "independent": "403c000000000000",
+              "equal": false
+            },
+            {
+              "field": "top",
+              "exploration_or_suffix": "8000000000000000",
+              "independent": "8000000000000000",
+              "equal": true
+            },
+            {
+              "field": "right",
+              "exploration_or_suffix": "401e700000000000",
+              "independent": "403c000000000000",
+              "equal": false
+            },
+            {
+              "field": "bottom",
+              "exploration_or_suffix": "8000000000000000",
+              "independent": "8000000000000000",
+              "equal": true
+            }
+          ]
+        }
+      ],
+      "historical_8_have_current_differences": true,
+      "selected7_independent_old_oracle_bit_and_paint_pass": true,
+      "historical_mixed_font_original_attributes_observed_and_product_rejected": true,
+      "native_timing_is_real_rn_performance_evidence": false
     },
     "real_rn_verification": {
-      "status": "PENDING",
-      "run_id": null,
-      "executions": 0,
+      "status": "COMPLETED_BASELINE5_PASS__SUPPLEMENTAL2_PASS1_FAIL__RAW1_PASS2_FAIL__V5_UNADOPTED",
+      "run_id": 39227065284,
+      "executions": 1,
       "baseline_names": [
         "essay_paragraphs",
         "quote_unicode",
@@ -6749,7 +7070,1132 @@
       "original_baseline_denominator": 5,
       "report_deadline_ms": 8000,
       "png_capture_after_report": true,
-      "raw_is_card_or_save_admission": false
+      "raw_is_card_or_save_admission": false,
+      "run_attempt": 1,
+      "job_id": 117975813409,
+      "job_conclusion": "failure",
+      "exit_code": 65,
+      "reports": 11,
+      "baseline_passed": 5,
+      "baseline_failed": 0,
+      "supplemental_card_passed": 2,
+      "supplemental_card_failed": 1,
+      "raw_diagnostic_passed": 1,
+      "raw_diagnostic_failed": 2,
+      "all8_card_can_save_and_export_false": true,
+      "successful_preview_same_token_fit_true": 6,
+      "successful_preview_wrong_token_fit_false": 6,
+      "saved_v3_publishes_no_fit_handle": true,
+      "raw_admission_fields_absent": true,
+      "original5_body_recipe_order_saved_version_preserved": true,
+      "case_denominators_are_separate": true,
+      "physical_device_acceptance": false,
+      "cases": [
+        {
+          "name": "essay_paragraphs",
+          "evidence_set": "baseline_card",
+          "renderer_version": "piece.rn_native_preview.prototype.v5",
+          "candidate_profile": "piece.rn_native_preview.prototype.v5",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 661.2488329999615,
+          "size_index": 0,
+          "font_size": 48,
+          "body_preserved": true,
+          "native_canvas_valid": true,
+          "save_fit_current": true,
+          "save_fit_wrong_token_current": false,
+          "save_fit_handle_keys": [
+            "isCurrent"
+          ],
+          "state_can_save": false,
+          "state_can_export": false,
+          "png": "essay_paragraphs.png",
+          "rows": 5,
+          "recorded_inspection_count": 6,
+          "recorded_inspection_clear": true,
+          "strict_independent_and_textkit_checks_passed": true
+        },
+        {
+          "name": "quote_unicode",
+          "evidence_set": "baseline_card",
+          "renderer_version": "piece.rn_native_preview.prototype.v5",
+          "candidate_profile": "piece.rn_native_preview.prototype.v5",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 387.41862499993294,
+          "size_index": 0,
+          "font_size": 80,
+          "body_preserved": true,
+          "native_canvas_valid": true,
+          "save_fit_current": true,
+          "save_fit_wrong_token_current": false,
+          "save_fit_handle_keys": [
+            "isCurrent"
+          ],
+          "state_can_save": false,
+          "state_can_export": false,
+          "png": "quote_unicode.png",
+          "rows": 3,
+          "recorded_inspection_count": 4,
+          "recorded_inspection_clear": true,
+          "strict_independent_and_textkit_checks_passed": true
+        },
+        {
+          "name": "declaration_no_brand",
+          "evidence_set": "baseline_card",
+          "renderer_version": "piece.rn_native_preview.prototype.v5",
+          "candidate_profile": "piece.rn_native_preview.prototype.v5",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 326.13483299990185,
+          "size_index": 0,
+          "font_size": 72,
+          "body_preserved": true,
+          "native_canvas_valid": true,
+          "save_fit_current": true,
+          "save_fit_wrong_token_current": false,
+          "save_fit_handle_keys": [
+            "isCurrent"
+          ],
+          "state_can_save": false,
+          "state_can_export": false,
+          "png": "declaration_no_brand.png",
+          "rows": 5,
+          "recorded_inspection_count": 5,
+          "recorded_inspection_clear": true,
+          "strict_independent_and_textkit_checks_passed": true
+        },
+        {
+          "name": "essay_max420",
+          "evidence_set": "baseline_card",
+          "renderer_version": "piece.rn_native_preview.prototype.v5",
+          "candidate_profile": "piece.rn_native_preview.prototype.v5",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 6763.777750000125,
+          "size_index": 3,
+          "font_size": 36,
+          "body_preserved": true,
+          "native_canvas_valid": true,
+          "save_fit_current": true,
+          "save_fit_wrong_token_current": false,
+          "save_fit_handle_keys": [
+            "isCurrent"
+          ],
+          "state_can_save": false,
+          "state_can_export": false,
+          "png": "essay_max420.png",
+          "rows": 18,
+          "recorded_inspection_count": 19,
+          "recorded_inspection_clear": true,
+          "strict_independent_and_textkit_checks_passed": true
+        },
+        {
+          "name": "saved_essay_canvas",
+          "evidence_set": "baseline_card",
+          "renderer_version": "piece.rn_native_preview.prototype.v3",
+          "candidate_profile": "piece.rn_native_preview.prototype.v3",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 653.1692500000354,
+          "size_index": 0,
+          "font_size": 48,
+          "body_preserved": true,
+          "native_canvas_valid": true,
+          "save_fit_current": false,
+          "save_fit_wrong_token_current": false,
+          "save_fit_handle_keys": [],
+          "state_can_save": false,
+          "state_can_export": false,
+          "png": "saved_essay_canvas.png",
+          "rows": 5,
+          "recorded_inspection_count": 6,
+          "recorded_inspection_clear": true
+        },
+        {
+          "name": "suffix_latin_ligature",
+          "evidence_set": "supplemental_card",
+          "renderer_version": "piece.rn_native_preview.prototype.v5",
+          "candidate_profile": "piece.rn_native_preview.prototype.v5",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 177.42841699998826,
+          "size_index": 0,
+          "font_size": 72,
+          "body_preserved": true,
+          "native_canvas_valid": true,
+          "save_fit_current": true,
+          "save_fit_wrong_token_current": false,
+          "save_fit_handle_keys": [
+            "isCurrent"
+          ],
+          "state_can_save": false,
+          "state_can_export": false,
+          "png": "suffix_latin_ligature.png",
+          "rows": 1,
+          "recorded_inspection_count": 2,
+          "recorded_inspection_clear": true,
+          "strict_independent_and_textkit_checks_passed": true
+        },
+        {
+          "name": "suffix_arabic",
+          "evidence_set": "supplemental_card",
+          "renderer_version": "piece.rn_native_preview.prototype.v5",
+          "candidate_profile": "piece.rn_native_preview.prototype.v5",
+          "phase": "unavailable",
+          "reason": "native_ink_overflow",
+          "elapsed_ms": 336.642583000008,
+          "size_index": 2,
+          "font_size": 56,
+          "body_preserved": true,
+          "capture_error": true,
+          "save_fit_current": false,
+          "save_fit_wrong_token_current": false,
+          "save_fit_handle_keys": [],
+          "state_can_save": false,
+          "state_can_export": false,
+          "rows": 1,
+          "recorded_inspection_count": 0,
+          "recorded_inspection_clear": false
+        },
+        {
+          "name": "suffix_max420_a",
+          "evidence_set": "supplemental_card",
+          "renderer_version": "piece.rn_native_preview.prototype.v5",
+          "candidate_profile": "piece.rn_native_preview.prototype.v5",
+          "phase": "native_checked",
+          "reason": null,
+          "elapsed_ms": 2693.1997500001453,
+          "size_index": 3,
+          "font_size": 36,
+          "body_preserved": true,
+          "native_canvas_valid": true,
+          "save_fit_current": true,
+          "save_fit_wrong_token_current": false,
+          "save_fit_handle_keys": [
+            "isCurrent"
+          ],
+          "state_can_save": false,
+          "state_can_export": false,
+          "png": "suffix_max420_a.png",
+          "rows": 17,
+          "recorded_inspection_count": 18,
+          "recorded_inspection_clear": true,
+          "strict_independent_and_textkit_checks_passed": true
+        },
+        {
+          "name": "suffix_spaces_raw",
+          "evidence_set": "raw_text_diagnostic",
+          "candidate_profile": "piece.rn_native_preview.prototype.v5",
+          "phase": "measurement_checked",
+          "elapsed_ms": 104.67933299997821,
+          "font_size": 48,
+          "body_preserved": true,
+          "native_canvas_valid": true,
+          "diagnostic_only": true,
+          "diagnostic_valid": true,
+          "same_selected_text_node": true,
+          "png": "suffix_spaces_raw.png",
+          "rows": 1,
+          "recorded_inspection_count": 1,
+          "recorded_inspection_clear": true
+        },
+        {
+          "name": "suffix_hebrew_raw",
+          "evidence_set": "raw_text_diagnostic",
+          "candidate_profile": "piece.rn_native_preview.prototype.v5",
+          "phase": "measurement_unavailable",
+          "elapsed_ms": 100.857582999859,
+          "font_size": 48,
+          "body_preserved": false,
+          "native_canvas_valid": false,
+          "diagnostic_only": true,
+          "diagnostic_valid": false,
+          "png": "suffix_hebrew_raw.png",
+          "rows": 1,
+          "recorded_inspection_count": 0,
+          "recorded_inspection_clear": false
+        },
+        {
+          "name": "suffix_mixed_bidi_raw",
+          "evidence_set": "raw_text_diagnostic",
+          "candidate_profile": "piece.rn_native_preview.prototype.v5",
+          "phase": "measurement_unavailable",
+          "elapsed_ms": 97.36979199992493,
+          "font_size": 48,
+          "body_preserved": false,
+          "native_canvas_valid": false,
+          "diagnostic_only": true,
+          "diagnostic_valid": false,
+          "png": "suffix_mixed_bidi_raw.png",
+          "rows": 1,
+          "recorded_inspection_count": 0,
+          "recorded_inspection_clear": false
+        }
+      ],
+      "max420_trace": {
+        "candidates": [
+          {
+            "status": "resolved",
+            "returned_content_width": null,
+            "method": "measureExplorationCandidates",
+            "full_metric_count": null,
+            "utf16_length": 420,
+            "rows": 88410,
+            "content_width": null,
+            "version": "piece.native_candidates.v5",
+            "elapsed_ms": 1068.629958000034,
+            "metric_count": 11381,
+            "font_size": 48
+          },
+          {
+            "status": "resolved",
+            "returned_content_width": null,
+            "method": "measureExplorationCandidates",
+            "full_metric_count": null,
+            "utf16_length": 420,
+            "rows": 88410,
+            "content_width": null,
+            "version": "piece.native_candidates.v5",
+            "elapsed_ms": 3208.91620899993,
+            "metric_count": 11381,
+            "font_size": 44
+          },
+          {
+            "status": "resolved",
+            "returned_content_width": null,
+            "method": "measureExplorationCandidates",
+            "full_metric_count": null,
+            "utf16_length": 420,
+            "rows": 88410,
+            "content_width": null,
+            "version": "piece.native_candidates.v5",
+            "elapsed_ms": 2151.219792000018,
+            "metric_count": 11381,
+            "font_size": 40
+          },
+          {
+            "status": "resolved",
+            "returned_content_width": null,
+            "method": "measureExplorationCandidates",
+            "full_metric_count": null,
+            "utf16_length": 420,
+            "rows": 88410,
+            "content_width": null,
+            "version": "piece.native_candidates.v5",
+            "elapsed_ms": 1075.105666999938,
+            "metric_count": 11381,
+            "font_size": 36
+          }
+        ],
+        "states": [
+          {
+            "state": "planning:0",
+            "elapsed_ms": 0.00712500000372529
+          },
+          {
+            "state": "planning:1",
+            "elapsed_ms": 1528.1980420001782
+          },
+          {
+            "state": "planning:2",
+            "elapsed_ms": 3990.5084170000628
+          },
+          {
+            "state": "planning:3",
+            "elapsed_ms": 4272.58658400015
+          },
+          {
+            "state": "measuring:3",
+            "elapsed_ms": 5662.219584000064
+          },
+          {
+            "state": "geometry_checked:3",
+            "elapsed_ms": 6646.962709000101
+          },
+          {
+            "state": "native_checked:3",
+            "elapsed_ms": 6701.836750000017
+          }
+        ],
+        "plans": [
+          {
+            "fit": false,
+            "elapsed_ms": 166.7369999999646,
+            "size_index": 0
+          },
+          {
+            "fit": false,
+            "elapsed_ms": 179.72833299986087,
+            "size_index": 1
+          },
+          {
+            "fit": false,
+            "elapsed_ms": 166.84095800016075,
+            "size_index": 2
+          },
+          {
+            "line_height": 56,
+            "groups": [
+              [
+                "考える時間と対話を大切にしながら、自分の言葉で",
+                "伝えたい。考える時間と対話を大切にしながら、自分の",
+                "言葉で伝えたい。考える時間と対話を大切にしながら、",
+                "自分の言葉で伝えたい。考える時間と対話を",
+                "大切にしながら、自分の言葉で伝えたい。考える時間と",
+                "対話を大切にしながら、自分の言葉で伝えたい。",
+                "考える時間と対話を大切にしながら、自分の言葉で",
+                "伝えたい。考える時間と対話を大切にしながら、自分の",
+                "言葉で伝えたい。考える時間と対話を大切にしながら、",
+                "自分の言葉で伝えたい。考える時間と対話を",
+                "大切にしながら、自分の言葉で伝えたい。考える時間と",
+                "対話を大切にしながら、自分の言葉で伝えたい。",
+                "考える時間と対話を大切にしながら、自分の言葉で",
+                "伝えたい。考える時間と対話を大切にしながら、自分の",
+                "言葉で伝えたい。考える時間と対話を大切にしながら、",
+                "自分の言葉で伝えたい。考える時間と対話を",
+                "大切にしながら、自分の言葉で伝えたい。考える時間と",
+                "対話を大切にしながら、自分の言葉で伝えたい。"
+              ]
+            ],
+            "total_height": 1008,
+            "selected_exploration_metrics": [
+              [
+                [
+                  782.909784787807,
+                  1.2518796992481203,
+                  -35.2666629617944,
+                  780.3654984179124,
+                  -2.7977267387218046
+                ],
+                [
+                  850.8455351320016,
+                  1.218045112781955,
+                  -35.2666629617944,
+                  847.7064805197939,
+                  -2.730057565789474
+                ],
+                [
+                  850.8455351320016,
+                  1.725563909774436,
+                  -35.2666629617944,
+                  829.5297456583171,
+                  -2.730057565789474
+                ],
+                [
+                  680.8687712857177,
+                  5.481203007518797,
+                  -34.46689967105263,
+                  676.8375643100406,
+                  -2.730057565789474
+                ],
+                [
+                  850.8455351320017,
+                  1.2857142857142856,
+                  -35.2666629617944,
+                  845.3934929107988,
+                  -2.730057565789474
+                ],
+                [
+                  748.8045216299121,
+                  1.488721804511278,
+                  -35.2666629617944,
+                  727.6240705020926,
+                  -2.730057565789474
+                ],
+                [
+                  782.909784787807,
+                  1.2518796992481203,
+                  -35.2666629617944,
+                  780.3654984179124,
+                  -2.7977267387218046
+                ],
+                [
+                  850.8455351320016,
+                  1.218045112781955,
+                  -35.2666629617944,
+                  847.7064805197939,
+                  -2.730057565789474
+                ],
+                [
+                  850.8455351320016,
+                  1.725563909774436,
+                  -35.2666629617944,
+                  829.5297456583171,
+                  -2.730057565789474
+                ],
+                [
+                  680.8687712857177,
+                  5.481203007518797,
+                  -34.46689967105263,
+                  676.8375643100406,
+                  -2.730057565789474
+                ],
+                [
+                  850.8455351320017,
+                  1.2857142857142856,
+                  -35.2666629617944,
+                  845.3934929107988,
+                  -2.730057565789474
+                ],
+                [
+                  748.8045216299121,
+                  1.488721804511278,
+                  -35.2666629617944,
+                  727.6240705020926,
+                  -2.730057565789474
+                ],
+                [
+                  782.909784787807,
+                  1.2518796992481203,
+                  -35.2666629617944,
+                  780.3654984179124,
+                  -2.7977267387218046
+                ],
+                [
+                  850.8455351320016,
+                  1.218045112781955,
+                  -35.2666629617944,
+                  847.7064805197939,
+                  -2.730057565789474
+                ],
+                [
+                  850.8455351320016,
+                  1.725563909774436,
+                  -35.2666629617944,
+                  829.5297456583171,
+                  -2.730057565789474
+                ],
+                [
+                  680.8687712857177,
+                  5.481203007518797,
+                  -34.46689967105263,
+                  676.8375643100406,
+                  -2.730057565789474
+                ],
+                [
+                  850.8455351320017,
+                  1.2857142857142856,
+                  -35.2666629617944,
+                  845.3934929107988,
+                  -2.730057565789474
+                ],
+                [
+                  748.8045216299121,
+                  1.488721804511278,
+                  -35.2666629617944,
+                  727.6240705020926,
+                  -2.730057565789474
+                ]
+              ]
+            ],
+            "elapsed_ms": 278.6255840000231,
+            "fit": true,
+            "gap": 36.4,
+            "size_index": 3
+          }
+        ],
+        "adapters": [
+          {
+            "status": "resolved",
+            "returned_content_width": null,
+            "content_width": null,
+            "elapsed_ms": 1253.6318749999627,
+            "version": "piece.native_candidates.v5",
+            "candidate_profile": "piece.rn_native_preview.prototype.v5",
+            "font_size": 48
+          },
+          {
+            "status": "resolved",
+            "returned_content_width": null,
+            "content_width": null,
+            "elapsed_ms": 3439.802541999845,
+            "version": "piece.native_candidates.v5",
+            "candidate_profile": "piece.rn_native_preview.prototype.v5",
+            "font_size": 44
+          },
+          {
+            "status": "resolved",
+            "returned_content_width": null,
+            "content_width": null,
+            "elapsed_ms": 2398.8037920000497,
+            "version": "piece.native_candidates.v5",
+            "candidate_profile": "piece.rn_native_preview.prototype.v5",
+            "font_size": 40
+          },
+          {
+            "status": "resolved",
+            "returned_content_width": null,
+            "content_width": null,
+            "elapsed_ms": 1280.2425420000218,
+            "version": "piece.native_candidates.v5",
+            "candidate_profile": "piece.rn_native_preview.prototype.v5",
+            "font_size": 36
+          }
+        ]
+      },
+      "max420_condition": {
+        "met": true,
+        "report_elapsed_ms": 6763.777750000125,
+        "font_size": 36,
+        "rows": 18,
+        "line_height": 56,
+        "body_composition_height": 1008,
+        "recorded_inspection_count": 19,
+        "same_token_fit": true,
+        "wrong_token_fit": false,
+        "matching_png": "essay_max420.png",
+        "input_characters": 420,
+        "all4_font_ranges": 88410,
+        "all4_font_representatives": 11381,
+        "font_order": [
+          48,
+          44,
+          40,
+          36
+        ],
+        "all_candidate_calls_resolved": true,
+        "candidate_durations_include_queue_and_must_not_be_summed": true,
+        "png_capture_after_report": true,
+        "png_encoding_within8seconds_measured": false,
+        "baseline_15_sentence_stress_is_api_generation_policy_acceptance": false
+      },
+      "arabic_failure": {
+        "name": "suffix_arabic",
+        "elapsed_ms": 336.642583000008,
+        "reason": "native_ink_overflow",
+        "trace": {
+          "candidates": [
+            {
+              "status": "resolved",
+              "returned_content_width": null,
+              "method": "measureExplorationCandidates",
+              "full_metric_count": null,
+              "utf16_length": 13,
+              "rows": 91,
+              "content_width": null,
+              "version": "piece.native_candidates.v5",
+              "elapsed_ms": 7.113499999977648,
+              "metric_count": 84,
+              "font_size": 72
+            },
+            {
+              "status": "resolved",
+              "returned_content_width": null,
+              "method": "measureExplorationCandidates",
+              "full_metric_count": null,
+              "utf16_length": 13,
+              "rows": 91,
+              "content_width": null,
+              "version": "piece.native_candidates.v5",
+              "elapsed_ms": 23.259374999906868,
+              "metric_count": 84,
+              "font_size": 64
+            },
+            {
+              "status": "resolved",
+              "returned_content_width": null,
+              "method": "measureExplorationCandidates",
+              "full_metric_count": null,
+              "utf16_length": 13,
+              "rows": 91,
+              "content_width": null,
+              "version": "piece.native_candidates.v5",
+              "elapsed_ms": 35.05325000011362,
+              "metric_count": 84,
+              "font_size": 56
+            }
+          ],
+          "states": [
+            {
+              "state": "planning:0",
+              "elapsed_ms": 0.010625000111758709
+            },
+            {
+              "state": "measuring:0",
+              "elapsed_ms": 66.53270800015889
+            },
+            {
+              "state": "geometry_checked:0",
+              "elapsed_ms": 95.23416600003839
+            },
+            {
+              "state": "planning:1",
+              "elapsed_ms": 116.20041600009426
+            },
+            {
+              "state": "measuring:1",
+              "elapsed_ms": 163.5346660001669
+            },
+            {
+              "state": "geometry_checked:1",
+              "elapsed_ms": 202.5926660001278
+            },
+            {
+              "state": "measuring:2",
+              "elapsed_ms": 245.64899999997579
+            },
+            {
+              "state": "geometry_checked:2",
+              "elapsed_ms": 281.29979100008495
+            },
+            {
+              "state": "unavailable:2",
+              "elapsed_ms": 301.79504100000486
+            }
+          ],
+          "plans": [
+            {
+              "line_height": 98,
+              "groups": [
+                [
+                  "مرحبا بالعالم"
+                ]
+              ],
+              "total_height": 98,
+              "selected_exploration_metrics": [
+                [
+                  [
+                    336.7809898853302,
+                    3.375,
+                    -58.17578125,
+                    333.8711085319519,
+                    15.8984375
+                  ]
+                ]
+              ],
+              "elapsed_ms": 0.8598749998491257,
+              "fit": true,
+              "gap": 0,
+              "size_index": 0
+            },
+            {
+              "line_height": 87,
+              "groups": [
+                [
+                  "مرحبا بالعالم"
+                ]
+              ],
+              "total_height": 87,
+              "selected_exploration_metrics": [
+                [
+                  [
+                    301.4709720611572,
+                    3.03125,
+                    -51.65625,
+                    298.829158782959,
+                    14.1875
+                  ]
+                ]
+              ],
+              "elapsed_ms": 2.6072080000303686,
+              "fit": true,
+              "gap": 0,
+              "size_index": 1
+            },
+            {
+              "line_height": 76,
+              "groups": [
+                [
+                  "مرحبا بالعالم"
+                ]
+              ],
+              "total_height": 76,
+              "selected_exploration_metrics": [
+                [
+                  [
+                    265.63412046432495,
+                    2.6796875,
+                    -45.13671875,
+                    263.3014802932739,
+                    12.4765625
+                  ]
+                ]
+              ],
+              "elapsed_ms": 2.1384580000303686,
+              "fit": true,
+              "gap": 0,
+              "size_index": 2
+            }
+          ],
+          "adapters": [
+            {
+              "status": "resolved",
+              "returned_content_width": null,
+              "content_width": null,
+              "elapsed_ms": 9.096458999905735,
+              "version": "piece.native_candidates.v5",
+              "candidate_profile": "piece.rn_native_preview.prototype.v5",
+              "font_size": 72
+            },
+            {
+              "status": "resolved",
+              "returned_content_width": null,
+              "content_width": null,
+              "elapsed_ms": 24.258667000103742,
+              "version": "piece.native_candidates.v5",
+              "candidate_profile": "piece.rn_native_preview.prototype.v5",
+              "font_size": 64
+            },
+            {
+              "status": "resolved",
+              "returned_content_width": null,
+              "content_width": null,
+              "elapsed_ms": 35.833666999824345,
+              "version": "piece.native_candidates.v5",
+              "candidate_profile": "piece.rn_native_preview.prototype.v5",
+              "font_size": 56
+            }
+          ]
+        },
+        "font_order": [
+          72,
+          64,
+          56
+        ],
+        "original_text_selected_as_one_line_at_all_fonts": true,
+        "final_new_inspection_promise_and_decoder_returned": true,
+        "possible_overflow_owners": [
+          "TextKit own-view containment",
+          "TextKit/onTextLayout placement width or height",
+          "new independent width or height, body or branding"
+        ],
+        "direct_overflow_item_known": false,
+        "body_or_branding_known": false,
+        "failed_inspection_values_recorded": false,
+        "empty_inspection_means_no_inspection": false,
+        "invalid_wire_nonfinite_negative_advance_or_glyph_failure_inferred": false,
+        "png": null,
+        "is_timeout": false
+      },
+      "raw_failure_evidence": [
+        {
+          "name": "suffix_hebrew_raw",
+          "elapsed_ms": 100.857582999859,
+          "trace": {
+            "candidates": [
+              {
+                "status": "resolved",
+                "returned_content_width": null,
+                "method": "measureExplorationCandidates",
+                "full_metric_count": null,
+                "utf16_length": 9,
+                "rows": 45,
+                "content_width": null,
+                "version": "piece.native_candidates.v5",
+                "elapsed_ms": 1.7382910000160336,
+                "metric_count": 42,
+                "font_size": 48
+              }
+            ],
+            "states": [],
+            "plans": [
+              {
+                "line_height": 75,
+                "groups": [
+                  [
+                    "שלום עולם"
+                  ]
+                ],
+                "total_height": 75,
+                "selected_exploration_metrics": [
+                  [
+                    [
+                      210.890625,
+                      3.1875,
+                      -46.359375,
+                      207.6328125,
+                      -8.625
+                    ]
+                  ]
+                ],
+                "elapsed_ms": 1.3479999999981374,
+                "fit": true,
+                "gap": 0,
+                "size_index": 0
+              }
+            ],
+            "adapters": [
+              {
+                "status": "resolved",
+                "returned_content_width": null,
+                "content_width": null,
+                "elapsed_ms": 2.8629159999545664,
+                "version": "piece.native_candidates.v5",
+                "candidate_profile": "piece.rn_native_preview.prototype.v5",
+                "font_size": 48
+              }
+            ]
+          },
+          "native_texts": [
+            "שלום עולם"
+          ],
+          "native_texts_equal_original": true,
+          "text_left": 96,
+          "native_ink_frame": [
+            84.9609375,
+            96,
+            316.96875,
+            171
+          ],
+          "local_ink_left": -11.0390625,
+          "canvas_margin_min": 95.5,
+          "textkit_own_view_and_margin_violation_observed": true,
+          "direct_inspection_catch_reason_recorded": false,
+          "final_independent_values_recorded": false,
+          "body_preserved_false_is_catch_flag_not_observed_text_deletion": true,
+          "png": "suffix_hebrew_raw.png",
+          "accepted_card_evidence": false
+        },
+        {
+          "name": "suffix_mixed_bidi_raw",
+          "elapsed_ms": 97.36979199992493,
+          "trace": {
+            "candidates": [
+              {
+                "status": "resolved",
+                "returned_content_width": null,
+                "method": "measureExplorationCandidates",
+                "full_metric_count": null,
+                "utf16_length": 12,
+                "rows": 78,
+                "content_width": null,
+                "version": "piece.native_candidates.v5",
+                "elapsed_ms": 1.5194159999955446,
+                "metric_count": 77,
+                "font_size": 48
+              }
+            ],
+            "states": [],
+            "plans": [
+              {
+                "line_height": 75,
+                "groups": [
+                  [
+                    "abc (אבג) 12"
+                  ]
+                ],
+                "total_height": 75,
+                "selected_exploration_metrics": [
+                  [
+                    [
+                      254.8359375,
+                      1.6640625,
+                      -43.2421875,
+                      252.375,
+                      -0.65625
+                    ]
+                  ]
+                ],
+                "elapsed_ms": 0.7411670000292361,
+                "fit": true,
+                "gap": 0,
+                "size_index": 0
+              }
+            ],
+            "adapters": [
+              {
+                "status": "resolved",
+                "returned_content_width": null,
+                "content_width": null,
+                "elapsed_ms": 2.206167000113055,
+                "version": "piece.native_candidates.v5",
+                "candidate_profile": "piece.rn_native_preview.prototype.v5",
+                "font_size": 48
+              }
+            ]
+          },
+          "native_texts": [
+            "abc (אבג) 12"
+          ],
+          "native_texts_equal_original": true,
+          "text_left": 96,
+          "native_ink_frame": [
+            73.5234375,
+            96,
+            441.6796875,
+            171
+          ],
+          "local_ink_left": -22.4765625,
+          "canvas_margin_min": 95.5,
+          "textkit_own_view_and_margin_violation_observed": true,
+          "direct_inspection_catch_reason_recorded": false,
+          "final_independent_values_recorded": false,
+          "body_preserved_false_is_catch_flag_not_observed_text_deletion": true,
+          "png": "suffix_mixed_bidi_raw.png",
+          "accepted_card_evidence": false
+        }
+      ],
+      "artifact": {
+        "id": 12176407319,
+        "name": "piece-rn-canvas-ios",
+        "zip_bytes": 61628295,
+        "zip_sha256": "3bf6346a0984baeacec610da152cd8b93bdeeb26c8df0e35cd7b5193e36fe36e",
+        "github_digest_matched": true,
+        "expires_at": "2026-10-26T09:22:39Z",
+        "results_json_bytes": 117389,
+        "results_json_sha256": "ad07db9c6349e1d5042f3a505529b54ab7d2962f1a6f6804fb5a65f79e47831c",
+        "all11_reports_match_collected_job_log": true,
+        "png_count": 10,
+        "completed_max420_png": true,
+        "arabic_png_present": false,
+        "pngs": [
+          {
+            "name": "declaration_no_brand.png",
+            "bytes": 169618,
+            "dimensions": [
+              1080,
+              1920
+            ],
+            "sha256": "8f777f41bd02b546223f93cb4f1a0abb548a2824a0e2d02ad012d3121035f000",
+            "evidence_set": "baseline_card",
+            "case_phase": "native_checked",
+            "visually_reviewed": true,
+            "matches_previous_v4_recorded_sha256": true
+          },
+          {
+            "name": "essay_max420.png",
+            "bytes": 502443,
+            "dimensions": [
+              1080,
+              1350
+            ],
+            "sha256": "3ce53b55b2599426a221bfc948dc6eeeb7ac425652e31ea081d864af1ac85e9b",
+            "evidence_set": "baseline_card",
+            "case_phase": "native_checked",
+            "visually_reviewed": true
+          },
+          {
+            "name": "essay_paragraphs.png",
+            "bytes": 152739,
+            "dimensions": [
+              1080,
+              1350
+            ],
+            "sha256": "a86a89e627b1448229716b65b574da509663fa8e57b2d48210809823079fc754",
+            "evidence_set": "baseline_card",
+            "case_phase": "native_checked",
+            "visually_reviewed": true,
+            "matches_previous_v4_recorded_sha256": true
+          },
+          {
+            "name": "quote_unicode.png",
+            "bytes": 166199,
+            "dimensions": [
+              1080,
+              1920
+            ],
+            "sha256": "2010b836aa1e9d7bbe81c6bb46dd35601711512b849bf5590f6c9813237b8907",
+            "evidence_set": "baseline_card",
+            "case_phase": "native_checked",
+            "visually_reviewed": true,
+            "matches_previous_v4_recorded_sha256": true
+          },
+          {
+            "name": "saved_essay_canvas.png",
+            "bytes": 152705,
+            "dimensions": [
+              1080,
+              1350
+            ],
+            "sha256": "e839bc72060aac3be5a0992925882d5c93b557711846ca01c67d685e4e6b8be0",
+            "evidence_set": "baseline_card",
+            "case_phase": "native_checked",
+            "visually_reviewed": true,
+            "matches_previous_v4_recorded_sha256": true
+          },
+          {
+            "name": "suffix_hebrew_raw.png",
+            "bytes": 12901,
+            "dimensions": [
+              1080,
+              320
+            ],
+            "sha256": "25c8484c239d52f1f947d5248ed98ef171e64855af3248c23c906e681a7a04f1",
+            "evidence_set": "raw_text_diagnostic",
+            "case_phase": "measurement_unavailable",
+            "visually_reviewed": true
+          },
+          {
+            "name": "suffix_latin_ligature.png",
+            "bytes": 73885,
+            "dimensions": [
+              1080,
+              1350
+            ],
+            "sha256": "85322e8050ee8e45270a9317a0df1c50d9d8878b44baed334b233ebbf9500ab9",
+            "evidence_set": "supplemental_card",
+            "case_phase": "native_checked",
+            "visually_reviewed": true
+          },
+          {
+            "name": "suffix_max420_a.png",
+            "bytes": 550882,
+            "dimensions": [
+              1080,
+              1350
+            ],
+            "sha256": "1f331d5e7508e601e38c3c01bd3ac323f28134e90441544ed2482362ee509349",
+            "evidence_set": "supplemental_card",
+            "case_phase": "native_checked",
+            "visually_reviewed": true
+          },
+          {
+            "name": "suffix_mixed_bidi_raw.png",
+            "bytes": 16075,
+            "dimensions": [
+              1080,
+              320
+            ],
+            "sha256": "2dce7ee3cde23c676cedba270e817b6566c462256b781f14f8498add5867cc38",
+            "evidence_set": "raw_text_diagnostic",
+            "case_phase": "measurement_unavailable",
+            "visually_reviewed": true
+          },
+          {
+            "name": "suffix_spaces_raw.png",
+            "bytes": 16435,
+            "dimensions": [
+              1080,
+              320
+            ],
+            "sha256": "21189a3941f27c1ec7fcfee106d0ae8083e9954c2d17e32bd6e72d0f82382675",
+            "evidence_set": "raw_text_diagnostic",
+            "case_phase": "measurement_checked",
+            "visually_reviewed": true
+          }
+        ]
+      },
+      "visual_review": {
+        "reviewed": true,
+        "files": [
+          "essay_paragraphs.png",
+          "quote_unicode.png",
+          "declaration_no_brand.png",
+          "essay_max420.png",
+          "saved_essay_canvas.png",
+          "suffix_latin_ligature.png",
+          "suffix_max420_a.png",
+          "suffix_spaces_raw.png",
+          "suffix_hebrew_raw.png",
+          "suffix_mixed_bidi_raw.png"
+        ],
+        "successful_card_pngs": 7,
+        "successful_raw_pngs": 1,
+        "failed_diagnostic_pngs": 2,
+        "arabic_png": false,
+        "observed": "All 10 actual PNGs inspected. Seven successful Card images preserve readable text, paragraph/row order and expected branding without visible clipping or overlap; mixed420 is36pt/18rows and あ420 is36pt/17rows. Prior four successful PNG hashes match the recorded v4 hashes. Raw Hebrew/mixed-bidi images contain their text, but their measured ink crosses own-view/margin bounds and they are failed diagnostics, not accepted Card images.",
+        "physical_device_acceptance": false
+      },
+      "previous_run_comparison": {
+        "run_id": 39205556730,
+        "successful4_png_recorded_sha256_match": true,
+        "old420_was_timeout_without_png": true,
+        "current420_meets_bounded_condition": true,
+        "causal_speedup_or_general_performance_inferred": false,
+        "old_same_supplemental_rtl_success_evidence_present": false
+      }
     },
     "stop_condition": "entry76.5 unchanged; max420 must satisfy original report8s native_checked/inspection/same-token local fit plus matching PNG, no evident regressions or stale mount acceptance",
     "formal_supplier_saved_reopen_runtime_and_normal_save": "PENDING_OUTSIDE_THIS_BOUNDED_SCOPE",
@@ -6763,6 +8209,163 @@
       "silent legacy substitution",
       "saved/export or Android v5",
       "API/DB/flags/env/deploy/signing/distribution/main merge"
-    ]
+    ],
+    "implementation_sync_effects": {
+      "classification": "APPROVED_IOS_PREVIEW_V5_SOURCE_IMPLEMENTATION__SINGLE_BOUNDED_VERIFICATION_PENDING",
+      "source_parent": "9d9f0b7d17b988bd5f1c64431edf88681df917f7",
+      "api_reference_commit": "a536e50ee284785f585ac73329ef2947dca8bba9",
+      "product_source_changes": 5,
+      "test_source_paths": 6,
+      "workflow_paths": 1,
+      "piece_documentation_paths": 4,
+      "changed_paths": [
+        "ios/tempCocolon/PieceTextMetrics.mm",
+        "features/piece/pieceRenderer.js",
+        "features/piece/pieceMeasuredWrap.js",
+        "components/piece/PieceVisualCard.js",
+        "features/piece/pieceLayout.js",
+        "tests/piece-v2-renderer.test.js",
+        "tests/piece-v2-measured-wrap.test.js",
+        "tests/native/piece-text-metrics-ios.mm",
+        "tests/native/piece-rn-canvas-entry.js",
+        "tests/native/piece-rn-canvas-fixtures.cjs",
+        "tests/native/piece-rn-canvas-ios.m",
+        ".github/workflows/piece-rn-contracts.yml",
+        "Cocolon_Piece/00_read_first.md",
+        "Cocolon_Piece/manifest.json",
+        "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+        "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md"
+      ],
+      "structure_map": "STRUCTURE_MAP_DELTA_PRESENT__EXISTING5_OWNERS__SECTION_65_25",
+      "sql_source_changes": 0,
+      "live_database_apply": 0,
+      "business_rpc": 0,
+      "private_piece_row_reads": 0,
+      "migration_history_additions": 0,
+      "signing": 0,
+      "distribution": 0,
+      "environment_changes": 0,
+      "deploy": 0,
+      "main_merge": 0,
+      "release_effect": 0,
+      "same_source_reruns": 0,
+      "product_acceptance": false,
+      "automatic_progression": false
+    },
+    "source_tree": "5efe974d8c39cdac75cf23fe6fb67d2986407ae8",
+    "source_remote_all16_content_and_exact_path_diff_verified": true,
+    "bounded_work_complete": true,
+    "stop_condition_met": true,
+    "max420_condition_met": true,
+    "unadopted": true,
+    "same_source_reruns": 0,
+    "manual_reruns": 0,
+    "additional_product_test_workflow_changes_after_result": 0,
+    "adoption_section": "77.4",
+    "map_result_section": "65.25.1",
+    "ci_verification": {
+      "run_id": 39227065284,
+      "run_attempt": 1,
+      "source_commit": "b983da2d3ba5ffd7d9f78a2b9e8d2b0574b5b5b1",
+      "conclusion": "failure",
+      "jobs": [
+        {
+          "id": 117975812954,
+          "name": "piece-ios-source",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 117975813346,
+          "name": "piece-rn-contracts",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 117975813356,
+          "name": "piece-android-source",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 117975813358,
+          "name": "piece-export-pods",
+          "status": "completed",
+          "conclusion": "success"
+        },
+        {
+          "id": 117975813409,
+          "name": "piece-ios-rn-canvas",
+          "status": "completed",
+          "conclusion": "failure"
+        },
+        {
+          "id": 117975813415,
+          "name": "piece-export-android",
+          "status": "completed",
+          "conclusion": "success"
+        }
+      ],
+      "javascript": {
+        "passed": 880,
+        "failed": 0,
+        "cancelled": 0,
+        "skipped": 0,
+        "todo": 0,
+        "baseline": 839,
+        "additional": 41,
+        "not_added_to_local": true
+      },
+      "compile_jobs_success": true,
+      "failure_owner": "piece-ios-rn-canvas"
+    },
+    "decision": {
+      "result": "V5_UNADOPTED_STOP",
+      "approved_bounded_work_complete": true,
+      "max420_condition_met": true,
+      "reason": "Supplemental Arabic Card and raw RTL2 do not meet the approved final drawing/containment conditions. Keep the measured420 success, but do not adopt the whole v5 candidate.",
+      "next_product_read": "Actual RTL Text attributes, TextKit bounds and existing placement conditions; Arabic direct overflow owner remains unrecorded. No unsupported final values or automatic same-source retry.",
+      "formal_supplier_saved_reopen_runtime_and_normal_save": "PENDING_OUTSIDE_THIS_BOUNDED_SCOPE",
+      "source_retained_in_draft_pr": 30,
+      "product_acceptance": false,
+      "physical_device_acceptance": false,
+      "automatic_progression": false
+    },
+    "read_only_result_review": {
+      "mode": "Same-model read-only source/evidence helpers; not a formal separate-model admission review",
+      "native_counts_and_historical_differences_reviewed": true,
+      "rn_failure_branch_and_missing_evidence_limits_reviewed": true,
+      "root_collected_artifact_and_reviewed_all10_pngs": true,
+      "final_entry_map_weekly_semantics_reviewed": true
+    },
+    "result_documentation": {
+      "paths": [
+        "Cocolon_Piece/00_read_first.md",
+        "Cocolon_Piece/manifest.json",
+        "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+        "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md"
+      ],
+      "parent_source_commit": "b983da2d3ba5ffd7d9f78a2b9e8d2b0574b5b5b1",
+      "entry": {
+        "path": "Cocolon_Piece/00_read_first.md",
+        "git_blob_sha1": "74e9f355b87cf9c1e7935cbbc468d784d07e68cc",
+        "raw_sha256": "67d18bad0e79cb8ebbf5a99fb5a970894c1ace5d38876c677c4999cf937977c8",
+        "utf8_bytes": 275952
+      },
+      "structure_map": {
+        "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+        "git_blob_sha1": "d86555c9814cb218cdd122827d25071377ee6d8c",
+        "raw_sha256": "eb3342ff8204398194a77f721093b11b4cc9f8215109393fea47ed7992877271",
+        "utf8_bytes": 448686
+      },
+      "weekly": {
+        "path": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
+        "git_blob_sha1": "f09b7ee1d5f6d3712863c372405d36fd2229b485",
+        "raw_sha256": "5bf8eac5e536022b6985adfb93ea15aaa801fdf1655565f17779e7eb1f376886",
+        "utf8_bytes": 264936
+      },
+      "source_product_test_workflow_blobs_unchanged": true,
+      "final_remote_full_content_path_set_and_head_verification": "Required after this documentation write; completed head is reported in the final task receipt to avoid a self-referential commit hash."
+    }
   }
 }

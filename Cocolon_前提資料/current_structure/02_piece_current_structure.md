@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§77／本map §65.25／weekly20261017 §5.6.5です。Mash承認に基づくiOS preview v5を既存5ownerへ実装し、local JS880 passed。新sourceの既存CI・一度の実RNと完成PNGはこれから確認します。正式採用・通常保存は未成立です。**
+**最新は入口§77.2〜77.4／本map §65.25.1／weekly20261017 §5.6.5です。承認されたv5実装と一度の検証を完了。source b983da2dはlocal／CI JS880・native129・iOS／Android compile成功、元実RN5ケースは全成功です。420文字は6,763.778ms・36pt18行・全inspection・同token fit・PNGまで成立しました。ただし追加ArabicのCardとraw RTL2件が描画条件を満たさず、v5は未採用で停止。結果後の製品／test／workflow追加変更・同source再実行0。正式admission・通常保存は未完了です。**
 
 ### §76時点の要約（履歴）
 
@@ -2823,6 +2823,22 @@ STRUCTURE_MAP_DELTA_PRESENT。新しい製品file／公開HTTP DTO／DBは追加
 | components/piece/PieceVisualCard.js | v5だけ新methodを使い、全採用行のstrict幅／高さ・branding40・同mount束縛を検査。位置は従来TextKit値。geometry超過のみ次の既定font、無効値は全画像不可。元8秒・同font再planなし |
 | features/piece/pieceLayout.js | preview v5をiOSだけに分離。保存済みv5／export v5／Android v5を拒否。旧v3／v4経路を保持 |
 
-検査は既存6fileと既存workflowに追加。local JS880 passed、旧test本文・独立oracle・元RN5入力の保護を原文比較しました。nativeは旧97＋新32の期待129、実RNは元Card5＋追加Card3＋raw3を別分母とし、CI実行・PNGは未確認です。rawの下限未満入力を保存可能なPieceへ装わず、nativeの混font旧属性も原条件では拒否を維持します。予算検査の2件は短い実CTLineによる参照検査で、描画・速度の成功に数えません。
+検査は既存6fileと既存workflowに追加。local／CI JS880 passed、旧test本文・独立oracle・元RN5入力の保護を原文比較しました。nativeは旧97＋新32の計129 PASS。実RNは元Card5＋追加Card3＋raw3を別分母として次節に記録します。rawの下限未満入力を保存可能なPieceへ装わず、nativeの混font旧属性も原条件では拒否を維持します。予算検査の2件は短い実CTLineによる参照検査で、描画・速度の成功に数えません。
 
-v5は改行・font・fitが変わり得る承認済み候補であり、正式採用は未成立です。§76.5の元8秒・同状態PNG・既存成功入力／旧差分入力の品質・現在mountへの束縛で一度だけ判断します。P-W1の正式supplier、同採用版saved再表示、candidate稼働、通常初回保存→同owner再表示、P-W2／P-W3は残件。既存保存回収・Piece6migrationの再実装／再適用は行いません。
+v5は改行・font・fitが変わり得る承認済み候補であり、正式採用は未成立です。§76.5の元8秒・同状態PNG・既存成功入力／旧差分入力の品質・現在mountへの束縛での一度の判断は次節で完了しました。P-W1の正式supplier、同採用版saved再表示、candidate稼働、通常初回保存→同owner再表示、P-W2／P-W3は残件。既存保存回収・Piece6migrationの再実装／再適用は行いません。
+
+### 65.25.1 v5の一度の実結果 — mixed420達成、RTL未達により未採用STOP
+
+source `b983da2d3ba5ffd7d9f78a2b9e8d2b0574b5b5b1`／tree `5efe974d8c39cdac75cf23fe6fb67d2986407ae8` の[run39227065284](https://github.com/MassyuRed/Cocolon/actions/runs/39227065284)、attempt1を全件回収しました。local／CI JS880、native旧97＋新32=129、iOS／Android／既存export依存compileは成功です。実RN job117975813409は全11reportを収集してexit65／failure。sourceの16pathのremote全内容・差分集合を照合済みで、以後の変更は入口・manifest・本map・最新weeklyの結果記録だけです。
+
+| 元の分母 | 実結果と責任境界 |
+|---|---|
+| 元Card5 | 5成功。420文字も6,763.778ms・36pt18行・本文18＋branding1の新inspection・同token fit・1080×1350 PNGを確認。preview4はfit=true／wrong-token=false、saved v3はhandleなし |
+| 追加Card3 | Latinとあ420が成功、あ420は2,693.200ms・36pt17行。Arabicは72→64→56ptのB9一行・geometry_checked後、336.643msでnative_ink_overflow、PNGなし |
+| raw診断3 | 空白入力1成功、Hebrew／mixed bidi2不成立。後者2 PNGはあるがTextKit local左端−11.0390625／−22.4765625でown-view／margin境界に反し、Card・保存fitへ数えない |
+
+取得artifact12176407319の61,628,295bytes／SHA256 `3bf6346a0984baeacec610da152cd8b93bdeeb26c8df0e35cd7b5193e36fe36e`、results.json117,389bytes／SHA256 `ad07db9c6349e1d5042f3a505529b54ab7d2962f1a6f6804fb5a65f79e47831c` を照合し、全11reportがjob logと一致。10 PNG（成功Card7・成功raw1・失敗raw2）を目視し、旧成功4枚は前回記録のdigestとも一致しました。画像・全計時・native旧8入力の差は入口§77.2〜77.3とmanifest v5 ownerを参照します。reportはlocal fit確認後・PNG capture前の時刻で、PNG生成自体の8秒達成を主張しません。
+
+Arabicは新inspectionが返った後のoverflow分岐で拒否されています。失敗時の値が残らないため、TextKit own-view、既存配置幅／高さ、新独立幅／高さのうちどれが直接原因か、本文／brandingのどちらかは未特定です。inspection=[]を未検査とせず、探索値を最終値の代用にしません。raw失敗2件もnative_textsは原文と一致し、body_preserved=falseはcatchの失敗flagです。旧sourceで同じ追加入力・実RN条件が成功していた証拠はなく、新規回帰の原因をv5だけへ帰属させません。
+
+**V5_UNADOPTED_STOP。** mixed420の条件は達成しましたが、追加RTLまで含む承認済み描画検証は揃わず、正式採用へ進めません。元の契約差を保った技術的な成果を残し、結果後の製品／test／workflow追加変更0・同source再実RN0で限定作業を閉じます。次の製品読取はRTLの実Text属性・TextKit境界と既存配置条件。P-W1の正式supplier→InputScreen、同採用版saved再表示、candidate runtime／flag／TTL／rendererとRN版、通常保存→同owner再表示は依然未完了です。API／DB／設定／deploy／署名・配布／main merge効果0、物理実機・商品受入れfalse、automatic_progression=false。

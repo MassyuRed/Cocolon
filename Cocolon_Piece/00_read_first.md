@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新の実行範囲は§77です。Mash様が§76.3〜76.5の差と停止条件を含むiOS preview v5の実装・一度の限定検証を明示承認しました。同じ範囲を再承認待ちへ戻さず、GPT-6 Astra Proの華恋を唯一の書込・test実行担当として進めます。§76の未承認記録は提案時点の履歴で、正式採用・保存許可を意味する承認ではありません。**
+**最新結果は§77.2〜77.4です。Mash承認に基づくiOS preview v5の実装と一度の限定検証を完了しました。source b983da2dはlocal／CI JS880・native129・iOS／Android compile成功。実RNの元5ケースは全成功し、420文字は6,763.778ms・36pt18行・同token fit・完成PNGまで確認しました。ただし追加ArabicのCardとraw RTL2件に描画条件の未達が残ったため、§76.5に従いv5は未採用で停止します。同source再実行・結果後の製品／test／workflow追加変更0。正式admission・通常保存は未完了です。§76の未承認記録と§77.1の結果待ちは提案／実行前の履歴です。**
 
 ### §76時点の要約（履歴）
 
@@ -1889,4 +1889,77 @@ Mash様はこの会話で、§76.3〜76.5の差と停止条件を含むv5の実�
 旧5のassert・元8秒・同token local fit・完成PNGの検査は維持し、追加Card3とraw3は別の件数・名前・条件で収集します。B9のgroups／font／選択した探索5値と最終独立5値を同じreportへ記録します。report.elapsed_msはlocal fit照合後、PNG生成前に確定する従来の境界を保ちます。native単体・raw診断・PNG encoding時間をCardの8秒成立へ読み替えません。
 
 現時点はSOURCE_IMPLEMENTED／LOCAL_JS_VERIFIED、正式採用false・実画像未確認です。この新sourceのpushで起動する既存CIの1runだけを待ち、全結果・artifactを回収して§76.5の採否を記録します。同sourceの実RN再実行は行いません。今回の変更は§77の16pathに限定し、API／DB／flags／env／deploy／署名／配布／main mergeの効果0です。
+
+### 77.2 source固定・CIの契約／native検査結果
+
+実装sourceは [`b983da2d3ba5ffd7d9f78a2b9e8d2b0574b5b5b1`](https://github.com/MassyuRed/Cocolon/commit/b983da2d3ba5ffd7d9f78a2b9e8d2b0574b5b5b1)、tree `5efe974d8c39cdac75cf23fe6fb67d2986407ae8`です。親9d9f0b7dからの変更集合が§77の16pathだけであること、16fileのremote全内容がlocalと一致することを確認しました。このpushで起動した既存[run39227065284](https://github.com/MassyuRed/Cocolon/actions/runs/39227065284)、attempt1の結果だけを使用します。§77.1の「未確認」はこの実行前の履歴です。
+
+| 検査owner | 同じsourceの実結果 |
+|---|---|
+| piece-rn-contracts／job117975813346 | CI既存13 suiteは880 PASS、FAIL／cancel／SKIP／TODO 0。旧839＋新41で、local880との加算なし |
+| piece-ios-source／job117975812954 | 製品Objective-C++ compileとproject lint成功。実TextKit／CoreTextで旧97 PASS、新32 PASS、計129 PASS、FAIL／SKIP 0 |
+| piece-android-source／job117975813356 | 既存Android bridge compile成功 |
+| piece-export-pods／job117975813358 | 既存export用4 Podsのcompile成功 |
+| piece-export-android／job117975813415 | 既存Android export依存compile成功 |
+
+native原ログは `LEGACY_NATIVE_CHECKS=97 PASS=97 FAIL=0 SKIP=0` と `NATIVE_CHECKS=129 PASS=129 FAIL=0 SKIP=0` を各1回出力。個別PASS行も旧97＋新v5 32と一致し、FAIL行0です。source SHAとnative blob `030e527024433494c2a4b985164220d980a2d7ba` を同じjobのcheckout／hash出力で照合しました。macOS15.7.9・Xcode16.4、iPhone17 Pro／iOS26.2 simulatorの結果で、物理端末の受入れではありません。
+
+過去8入力のsuffix側と独立側の差は今回も観測されています。許容誤差で旧契約の合格へ変換していません。
+
+| 歴史入力・UTF-16 range | 今回も異なった値の観測 |
+|---|---|
+| spaces [0,3) | advance 42.8671875／44.0390625 |
+| あ420 prefix [0,8) | advance bit `407699e7cc4e7ae3`／`407699e7cc4e7ae2`、1ULP |
+| Latin ligature [0,17) | advance 301.6875／305.4375 |
+| Hebrew [0,8) | advance／left／rightに各−1.875の差 |
+| Arabic [0,1) | 5値すべてが異なる。bottom差−15.4453125を含む |
+| mixed bidi [3,4) | left／rightが探索−10.1953125、独立0 |
+| paragraph direction [0,4) | advance 67.4609375／71.2109375 |
+| 旧whitespace neighbor2の原属性 | advance 28／38.1953125、left／right 7.609375／28 |
+
+表の順は探索／suffix側、独立側で、差は前者−後者です。7つのselected fixtureでは、実Textの独立5値が旧uncached oracleとbit一致し、既存UIKit paint bounds検査も成功しました。旧8件目は48ptの空白・tab＋37ptの後続RTL・baseline4という原条件を直接CoreTextで観測し、製品methodによる混font拒否も確認しています。完全属性cache、4worker所有、実保持予算、再wrap・異常値・例外解放・元queue deadlineの追加検査も成功。予算2件は短い実CTLineによる参照検査であり、数値同値・実RN速度の根拠にはしません。
+
+以上は探索代表契約と実Textの独立選択行検査の技術検証です。実RNのB9選択・現在mount／tokenのlocal fit・元8秒・同状態PNGの判定は次節で独立に記録します。
+
+### 77.3 一度の実RN・完成PNG — 元420条件は達成、追加RTLに未達
+
+同じrun39227065284／attempt1の[実RN job117975813409](https://github.com/MassyuRed/Cocolon/actions/runs/39227065284/job/117975813409)は、実RNの全11reportを収集してexit65／failureで終了しました。元Card5、追加Card3、raw診断3の名前・順序・分母を別々に確認しています。build／testを含む1jobであり、同sourceの再実行は0です。
+
+| 元Card5（本文・recipe・順序を保持） | 結果 | report時刻 | 最終font／行 | 完成PNG |
+|---|---|---:|---|---|
+| essay_paragraphs | native_checked | 661.249ms | 48pt／5行 | あり |
+| quote_unicode | native_checked | 387.419ms | 80pt／3行 | あり |
+| declaration_no_brand | native_checked | 326.135ms | 72pt／5行 | あり |
+| essay_max420 | native_checked | **6,763.778ms** | **36pt／18行** | **あり** |
+| saved_essay_canvas（v3） | native_checked | 653.169ms | 48pt／5行 | あり |
+
+**元5ケースは5成功です。** preview4件は全て現在の同token fit=true、wrong-token=false、公開handleはisCurrentだけ。saved v3は想定どおりhandleを出さずfit=falseです。成功したv5の本文とbrandingは全て新inspection版の独立5値・strict幅／高さ・TextKit overflow／wrap拒否・glyph条件を満たし、本文・段落／行順・native canvasも確認できています。全8Card reportでcanSave／canExport=falseを維持しました。
+
+mixed420は48→44→40→36ptの順で、各fontの88,410全range／11,381代表が返りました。B9は最初の3fontでfit=false、36ptで18行・lineHeight56・本文高1008のplanを選択。planning:3 4,272.587ms→measuring 5,662.220ms→geometry_checked 6,646.963ms→native_checked 6,701.837ms、同token fit確認後のreportが6,763.778msです。本文18＋branding1の19inspectionと同状態の1080×1350 PNGを確認しました。queueを含む重なった候補呼出し時間を加算しません。PNGはreport後にcaptureする既存手順で、PNGエンコードまで8秒以内だったという計測ではありません。また元420fixtureは15文反復の描画stressで、short_essayの生成文数方針を満たすAPI受入れへは換算しません。
+
+| 追加Card3 | 結果 | report時刻 | 選択font／行 | PNG |
+|---|---|---:|---|---|
+| suffix_latin_ligature | native_checked | 177.428ms | 72pt／1行 | あり |
+| suffix_arabic | unavailable／native_ink_overflow | 336.643ms | 最小56pt／B9は原文1行 | なし |
+| suffix_max420_a | native_checked | 2,693.200ms | 36pt／17行 | あり |
+
+**追加Cardは2成功・1不成立です。** Latinとあ420は同token fitと全inspection・native canvasが成立。Arabicは72→64→56ptの各B9が原文1行を選び、geometry_checkedまで進んだ後、最小56ptで寸法拒否になりました。reasonを生成するCardの分岐から、新inspectionのPromise.allとdecoderが返った後、①TextKit own-view overflow、②TextKit／onTextLayoutによる配置幅・高さ、③新独立5値の幅・高さ、の少なくとも一つが超過したことは確認できます。失敗時はinspection値をstateへ保存しないため、reportのinspection=[]を「未検査」とは扱いません。どの条件・本文とbrandingのどちらが超過したかは、この1runの値では特定できません。NaN／負advance／wire／bridge／glyph拒否のreasonとは区別します。
+
+| raw診断3（Card・保存fitの分母外） | 結果 | report時刻 | PNGと範囲 |
+|---|---|---:|---|
+| suffix_spaces_raw | measurement_checked | 104.679ms | PNGあり、同Text node・独立寸法・native canvas成立 |
+| suffix_hebrew_raw | measurement_unavailable | 100.858ms | PNGあり、TextKit左端84.9609375、local左端−11.0390625 |
+| suffix_mixed_bidi_raw | measurement_unavailable | 97.370ms | PNGあり、TextKit左端73.5234375、local左端−22.4765625 |
+
+**rawは1成功・2不成立です。** 失敗2件でも候補は返り、B9は原文全体の一行を選択し、captureのnative_textsは原文と一致しています。body_preserved=falseはcatchの総合失敗flagで、本文削除の観測ではありません。実PNGにも文字列は見えますが、Textのleft=96に対する負のlocal左端と、canvas margin判定95.5を下回る範囲が記録され、own-view／margin条件は不成立です。直接のcatch理由と最終独立値は残っていないため、独立5値自体の異常／成功、実画素の欠け、v5による新規回帰とは断定しません。raw3件は保存・export許可fieldを持たず、Piece responseの成功へ格上げしません。
+
+artifact `piece-rn-canvas-ios`（ID12176407319、61,628,295bytes、SHA256 `3bf6346a0984baeacec610da152cd8b93bdeeb26c8df0e35cd7b5193e36fe36e`）を取得し、GitHub metadataのdigestと照合しました。results.jsonは117,389bytes、SHA256 `ad07db9c6349e1d5042f3a505529b54ab7d2962f1a6f6804fb5a65f79e47831c`で、job logの全11reportと完全一致。取得10 PNG（成功Card7＋成功raw1＋失敗raw2）を全て目視しました。成功Cardの本文／行順／余白／brandingに明白な欠け・重なりは見られず、旧成功4枚は§75.2の記録SHA256とも一致します。ArabicのPNGはありません。各PNGの寸法・digest・判定はmanifestのv5 ownerへ保持。GitHub artifactの期限は2026-10-26T09:22:39Zです。
+
+### 77.4 採否・STOPと次の未完了条件
+
+**V5_UNADOPTED_STOP。承認された実装・一度の限定検証は完了し、420文字の元8秒／全inspection／同token fit／同状態PNG条件は今回のsourceで達成しました。** しかし追加ArabicのCardとraw RTL2件が承認範囲の描画・境界条件を満たさず、旧差分入力まで含む品質確認が揃わないため、v5全体は採用しません。native129や元Card5成功を、追加の失敗を除外した全体合格へ変換しません。旧sourceで同じ追加入力・RN条件が成功していた証拠はなく、回帰の原因をv5だけに断定する結論でもありません。
+
+source b983da2dを既存Draft PR #30の未採用候補として保持し、結果確認後は既存4文書だけを更新します。製品／test／workflowの追加変更0、同source実RN再実行0、期限延長0、worker増加0、候補削減0、同font再plan0です。承認を未承認へ戻す状態ではなく、§76.5の停止条件に従って今回の完成単位を閉じた状態です。
+
+次の製品読取対象はRTLの実Text属性・TextKit境界と既存配置条件です。Arabicの直接の超過項目は今回未確定であり、探索値から補いません。確かな修復根拠がないまま新しい記録機構だけを増やしたり、同じsourceを再試行したりしません。P-W1には正式renderer admissionのInputScreen供給、同採用版のsaved再表示、candidate APIの実効flag／TTL／renderer・RN版の稼働確認、通常初回保存→同owner詳細／履歴での再表示が残ります。今回API／DB／flags／env／deploy／署名／配布／main merge効果0、正式採用false、商品／物理実機受入れfalse、automatic_progression=falseです。全体設計・全file地図・最新weeklyで確認したP-W2／P-W3、10/20方式判断・10/31管理線・12/18目標を、この技術検証だけで完了・達成保証に変更しません。
 
