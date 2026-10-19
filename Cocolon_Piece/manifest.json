@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v75",
+  "schema_version": "cocolon.piece.workstream_manifest.v76",
   "generated_at": "2026-10-19 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v74",
-    "predecessor_blob": "469c9bc43e8961dbca98ef6650ca2bf1464c181d",
-    "predecessor_head": "90cbd705f2d344906eac7959c63e2fa1b2b06253",
-    "carry_forward": "Source90cbd705 passed JS790 and native69. Actual RN run39177257042 verified current Card fit handles in three preview fixtures and no handle in the saved-card fixture; mixed420 timed out at8284.257ms. Card->Modal->host remains source-JS-verified, not an actual normal InputScreen save. This write unit records completed evidence and the two unapplied SQL candidates in three existing docs; formal admission and normal save/reopen remain unfinished."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v75",
+    "predecessor_blob": "98eec33633a3addae5a3926c61e1366881e32f53",
+    "predecessor_head": "e90360d94bd22a3062005b5e6b5c06498c2ea3ad",
+    "carry_forward": "Mash explicitly approved the two SQL files proposed in entry73.5. Applied each exactly once to cocolon-project, verified exact stored SQL/function bodies and metadata, and retained existing objects. Product source90cbd705 and its mixed420 timeout are unchanged. Formal renderer admission, candidate API runtime, normal save/reopen and P-W2/P-W3 remain unfinished."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "d194ca69f9a0c809aa3d2c3f15bf77b64b8db055",
-    "raw_sha256": "df71e1b20851c38ae477f0fcceaa8c290d6018f7939277a52d64f189a797cc10",
-    "utf8_bytes": 201765
+    "git_blob_sha1": "c7576de76fea3474c13518e2ef6914b6f40870f9",
+    "raw_sha256": "e2e6a0f1530b7dcd4c9f98c1bad974c4579f105871a46fa6753027d8d4ed5070",
+    "utf8_bytes": 207187
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -69,10 +69,10 @@
     "pce9d_runtime_projection": "INPUTSCREEN_LAST_CONFIRMED_SAVE_TO_EXISTING_HOST_CONNECTED_CODE_DISABLED__LIVE_RUNTIME_PENDING",
     "pce9a_runtime_preview_control": "SHARED_CANDIDATE_REUSES_EXISTING_FACTORY__PRODUCTION_VALUES_AND_M5_PENDING",
     "pce9a_saved_operation_control": "REMOTE_DRAFT_227BACF__CI_1489_PASS__UNREGISTERED__NOT_LIVE_ACCEPTANCE",
-    "pce9a_quota_read": "REMOTE_DRAFT_D390488__QUOTA_39_PASS__TOTAL_1528_PASS__NEW005_UNAPPLIED_LIVE",
+    "pce9a_quota_read": "EXISTING005_APPLIED_20261019__EXACT_SQL_AND_METADATA_VERIFIED__NORMAL_PREVIEW_RUNTIME_PENDING",
     "pce9c_preview_plan_display": "API_1537_PASS__RN_365_PASS__NONLIVE_PREVIEW_DISPLAY_ONLY",
     "pce9c_owner_rn": "REMOTE_11B6157__CI_397_PASS__NONLIVE_TEXT_HISTORY_DETAIL_VISIBILITY_DELETE",
-    "pce9a_persisted_visual_mutation": "HISTORICAL_4FCB140_SERVICE_HTTP74_NATIVE47_TOTAL1658__CURRENT_COMPOSITION_BELOW__LIVE_SQL_UNAPPLIED",
+    "pce9a_persisted_visual_mutation": "EXISTING_SQL_APPLIED_20261019__EXACT_SQL_AND_METADATA_VERIFIED__LIVE_VISUAL_PATCH_REQUEST_UNVERIFIED",
     "pce9c_visual_settings_rn": "SOURCE_REMOTE_CI520_PASS__RUNTIME_DEVICE_PENDING",
     "pce9a_visual_mutation_composition": "EXPLICIT_PREVIEW_SHARED_REGISTERED_REMOTE_CI1675_PASS__LIVE_DEVICE_PENDING",
     "pce9c_preview_cancellation": "RN_REMOTE_CI545_PASS__API_REMOTE_CI1682_PASS__NOT_LIVE",
@@ -174,7 +174,7 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "90cbd705f2d344906eac7959c63e2fa1b2b06253",
+    "cocolon_pre_sync_head": "e90360d94bd22a3062005b5e6b5c06498c2ea3ad",
     "mashos_api_head": "a536e50ee284785f585ac73329ef2947dca8bba9",
     "current_user_visible_piece_shape": "CANDIDATE_NORMAL_INPUT_V2_SAVED_SOURCE_ONLY__TUTORIAL_NEXUS_LEGACY_REMAIN__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
@@ -189,14 +189,14 @@
     "piece_v2_feature_flags_scope": "Independent strict save requested/ready pair with effective preview dependency; strict owner-read/delete pairs retained. Default OFF, public/visibility/export unavailable, no native admission or production supplier.",
     "input_screen_source_connected": true,
     "live_auth_input_to_preview_to_device_verified": false,
-    "database_evidence_owner": "live_db_apply_20261010",
+    "database_evidence_owner": "live_db_apply_20261019",
     "remaining_work_owner": "save_fit_connection_20261019",
     "product_acceptance": false,
     "piece_v2_default_application_registered": false,
     "piece_v2_quota_http_present": true,
     "piece_v2_quota_http_scope": "Explicit preview/shared candidates use existing saved-use GET and preview flag. Legacy reflection quota alias omitted only there; default app remains publish quota.",
-    "piece_v2_quota_read_sql_scope": "005 source present. On2026-10-19JST public pg_proc metadata showed no piece_read_quota_v2 overload; initial preview candidate composition requires this RPC. Existing live001-004 retained.",
-    "piece_v2_quota_read_live_applied": false,
+    "piece_v2_quota_read_sql_scope": "Existing005 SQL at API a536e50ee284785f585ac73329ef2947dca8bba9 applied unchanged as migration20261019021118 after Mash approval. Function body/arguments/settings/ACL and full migration SQL verified by metadata; no business RPC or normal runtime acceptance.",
+    "piece_v2_quota_read_live_applied": true,
     "piece_v2_preview_plan_display_present": true,
     "piece_v2_preview_plan_display_scope": "Strict capability/quota display and visual-only settings with original POST/key recovery connected in source. Save/export and runtime admission remain unavailable.",
     "piece_v2_native_inspection_source_present": true,
@@ -206,7 +206,7 @@
     "piece_v2_persisted_visual_mutation_source_present": true,
     "piece_v2_visual_mutation_runtime_registered": false,
     "piece_v2_visual_mutation_rn_connected": true,
-    "piece_v2_visual_mutation_live_applied": false,
+    "piece_v2_visual_mutation_live_applied": true,
     "piece_v2_visual_mutation_candidate_registered": true,
     "piece_v2_preview_cancellation_rn_connected": true,
     "piece_v2_preview_cancellation_candidate_registered": true,
@@ -238,30 +238,29 @@
     "piece_v2_current_native_fit_handle_connected": true,
     "piece_v2_native_save_fit_scope": "Current mounted-fit handle is connected Card->Modal->host and tested in source JS. Actual RN mounts Card directly: three preview fixtures accept the same token and reject a wrong token; saved-card fixture publishes no handle. Formal renderer supplier and normal InputScreen initial-save/reopen acceptance remain absent. Local fit alone does not grant admission.",
     "piece_v2_current_native_fit_handle_real_rn_verified": true,
-    "piece_v2_current_native_fit_handle_real_rn_scope": "Three specific preview fixtures in the direct-Card iOS simulator harness only; not all inputs/formats/devices or the Modal/host/InputScreen save flow."
+    "piece_v2_current_native_fit_handle_real_rn_scope": "Three specific preview fixtures in the direct-Card iOS simulator harness only; not all inputs/formats/devices or the Modal/host/InputScreen save flow.",
+    "piece_v2_database_migrations_applied": 6,
+    "piece_v2_db_runtime_scope": "The four prior Piece migrations and two approved function additions exist live. Explicit candidate API runtime and real-owner business RPC execution remain unverified; DB definitions alone do not establish ordinary app save."
   },
   "next_group": {
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "WORK_SELECTED_BY_MASH",
-    "state": "CARD_FIT_VERIFIED_3_RN_FIXTURES__MAX420_TIMEOUT__NORMAL_SAVE_UNFINISHED",
-    "current_map_section": "65.21.1",
-    "current_entry_section": "73.4",
+    "state": "DB_RPC_APPLIED__CARD_FIT_VERIFIED_3_RN_FIXTURES__MAX420_AND_NORMAL_SAVE_PENDING",
+    "current_map_section": "65.21.2",
+    "current_entry_section": "73.6",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
     "weekly_review_section": "5.6",
-    "first_unfinished_work": "Resolve mixed420 final rendering within the unchanged8-second condition: source90cbd705 run39177257042 timed out at8284.257ms with only48pt B9 complete,44pt candidates resolved without a completed B9,40pt candidates pending,36pt not requested in the trace, and no final inspection/PNG. No additional optimization sufficient to close this blocker is yet supported within the current full-candidate/five-double contract. Formal renderer supplier, required quota RPC and explicit candidate runtime composition, normal initial save and same-owner reopen remain unfinished. The reviewed two-function DB application is a separate limited approval candidate in entry73.5. Do not repeat completed local-fit source work or failed batch/suffix proposals.",
+    "first_unfinished_work": "The two approved DB functions are applied and metadata-verified; do not reapply them. P-W1 still requires mixed420 final rendering within8 seconds, formal renderer admission, explicit candidate API runtime, ordinary explicit initial save and same-owner history/detail reopen. Source90cbd705 run39177257042 still has mixed420 timeout8284.257ms and no final inspection/PNG; this DB-only operation did not rerun or alter that evidence. No sufficient additional optimization is yet established within the full-candidate/five-double contract. Current fit in three direct-Card fixtures and source-JS Modal/host connection do not prove the normal save flow.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
-    "piece_migrations_already_applied": 4,
-    "production_migration_apply_effect": 0,
+    "piece_migrations_already_applied": 6,
+    "production_migration_apply_effect": 2,
     "automatic_progression": false,
     "repeat_shared_preparation": false,
     "repeat_saved_operation_control": false,
-    "piece_migrations_pending_live": 2,
-    "piece_migrations_pending_live_paths": [
-      "supabase/migrations/20261010_005_piece_v2_quota_read.sql",
-      "supabase/migrations/20261010050940_piece_v2_preview_visual_change.sql"
-    ],
+    "piece_migrations_pending_live": 0,
+    "piece_migrations_pending_live_paths": [],
     "repeat_quota_http_rpc_implementation": false,
     "repeat_preview_plan_quota_display": false,
     "repeat_measured_b9_selector": false,
@@ -290,7 +289,8 @@
     "repeat_shared_legacy_write_retirement": false,
     "repeat_initial_save_host_connection": false,
     "weekly_work_unit": "P-W1_20261019_20261022",
-    "repeat_local_save_fit_connection": false
+    "repeat_local_save_fit_connection": false,
+    "database_result_owner": "live_db_apply_20261019"
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -344,9 +344,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "22c1edba91802601707133f19d60182a6b5186ca",
-    "raw_sha256": "6316c9d60ff16e4a6da4a1b9519edd2841f593f3c9148577e9d3800294aff5b9",
-    "utf8_bytes": 425734
+    "git_blob_sha1": "5bee41a7cd76af29b127ee99126fc59d739b9ac9",
+    "raw_sha256": "fdc981b090e7eb3a21345e36763927ac5c38463e8d245bb2f70a40a86b1737ae",
+    "utf8_bytes": 427769
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -519,18 +519,22 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "DOCUMENT_COMPLETED_RN_FIT_EVIDENCE__MAX420_AND_NORMAL_SAVE_UNFINISHED",
-    "source_parent": "90cbd705f2d344906eac7959c63e2fa1b2b06253",
+    "classification": "APPROVED_TWO_SQL_APPLIED_AND_METADATA_VERIFIED__NORMAL_SAVE_UNFINISHED",
+    "source_parent": "e90360d94bd22a3062005b5e6b5c06498c2ea3ad",
     "verified_product_source_commit": "90cbd705f2d344906eac7959c63e2fa1b2b06253",
-    "source_scope": "This write unit changes only three existing documentation paths after source90cbd705 CI completed.",
+    "api_sql_source_commit": "a536e50ee284785f585ac73329ef2947dca8bba9",
+    "source_scope": "Only three existing Cocolon documentation paths change in GitHub. Two previously approved existing API SQL files were applied unchanged to the target live DB and verified by metadata.",
     "product_source_changes": 0,
     "test_source_paths": 0,
     "workflow_paths": 0,
+    "sql_source_changes": 0,
     "piece_documentation_paths": 3,
-    "structure_map": "UPDATED_RESULT_SECTION_65_21_1",
+    "structure_map": "UPDATED_RESULT_SECTION_65_21_2",
+    "live_database_apply": 2,
+    "new_database_functions": 2,
+    "migration_history_additions": 2,
     "signing": 0,
     "distribution": 0,
-    "live_database_apply": 0,
     "environment_changes": 0,
     "deploy": 0,
     "main_merge": 0,
@@ -5142,12 +5146,14 @@
       "apply_effect": "Function definitions and service_role-only EXECUTE permissions; no existing Piece body/row or table/RLS rewrite during SQL application. Later visual-function invocation changes the unsaved preview recipe/hash/revisions under existing owner/source guards.",
       "same_name_overload_guard": true,
       "already_applied_piece_migrations_to_preserve": 4,
-      "approval_boundary": "Rule18 sections0(4) and11.3 exclude new DB migration from source/test/docs delegation. Candidate approval covers only these two existing SQL files and metadata verification; no renderer adoption, flag/env, deploy/activation, signing, distribution or main merge."
+      "approval_boundary": "Rule18 sections0(4) and11.3 exclude new DB migration from source/test/docs delegation. Candidate approval covers only these two existing SQL files and metadata verification; no renderer adoption, flag/env, deploy/activation, signing, distribution or main merge.",
+      "state": "HISTORICAL_PRE_APPLY_METADATA",
+      "superseded_by": "live_db_apply_20261019"
     },
     "normal_initial_save_and_same_owner_reopen": false,
     "formal_renderer_admission_supplied": false,
     "physical_device_acceptance": false,
-    "next_work": "P-W1 remains unfinished: mixed420 final rendering within8 seconds, formally adopted renderer supplier, required DB functions and explicit candidate runtime composition, then ordinary explicit save and same-owner history/detail reopen. The current direct-Card RN fit result and source-JS connection do not prove the normal save flow. Two reviewed SQL function additions are prepared as a limited approval candidate; do not infer runtime activation from their application.",
+    "next_work": "P-W1 still requires mixed420 final rendering within8 seconds, formal renderer admission, explicit candidate API runtime, then ordinary explicit save and same-owner history/detail reopen. Quota-read and preview-visual SQL functions have now been applied with metadata verification under separate Mash approval; do not ask for or repeat that same application. Direct-Card RN fit and source-JS connection do not prove the normal save flow.",
     "source_commit": "90cbd705f2d344906eac7959c63e2fa1b2b06253",
     "source_write_unit": {
       "product_source_paths": 4,
@@ -5202,6 +5208,201 @@
         39177257050
       ],
       "guard_workflows_conclusion": "success"
-    }
+    },
+    "database_application_result_owner": "live_db_apply_20261019"
+  },
+  "live_db_apply_20261019": {
+    "entry_section": "73.6",
+    "structure_map_section": "65.21.2",
+    "state": "APPLIED_AND_METADATA_VERIFIED",
+    "scope_classification": "LEVEL_3",
+    "approval_basis": "Mash's explicit approval in this conversation to apply the two pinned existing SQL files to cocolon-project and verify metadata afterwards.",
+    "execution_owner": "Karen / GPT-6 Astra Pro",
+    "environment": "CHAT_PRO_OK",
+    "primary_outcome": "TECHNICAL_CREDIT",
+    "necessity": "OBSERVED_BLOCKER_MINIMAL_FIX__MISSING_QUOTA_READ_AND_UNSAVED_PREVIEW_VISUAL_RPC",
+    "project_ref": "oeahmpmigszggnkyiivq",
+    "project_name": "cocolon-project",
+    "project_status_before": "ACTIVE_HEALTHY",
+    "postgres_version_before": "17.4.1.074",
+    "api_source_commit": "a536e50ee284785f585ac73329ef2947dca8bba9",
+    "previous_piece_database_evidence": "live_db_apply_20261010",
+    "observed_before_utc": "2026-10-19T02:07:40.474164+00:00",
+    "observed_after_utc": "2026-10-19T02:13:41.72847+00:00",
+    "applied_migrations": [
+      {
+        "version": "20261019021118",
+        "name": "piece_v2_quota_read",
+        "source_path": "supabase/migrations/20261010_005_piece_v2_quota_read.sql",
+        "source_blob": "3db5ed79c2ebca7e3c2b83825de13a98be7ff0df",
+        "apply_calls": 1,
+        "apply_returned_success": true,
+        "stored_statement_count": 1,
+        "full_stored_sql_equals_approved_source": true
+      },
+      {
+        "version": "20261019021121",
+        "name": "piece_v2_preview_visual_change",
+        "source_path": "supabase/migrations/20261010050940_piece_v2_preview_visual_change.sql",
+        "source_blob": "585e4e386e7afb2b06b363f8c2e0108699796582",
+        "apply_calls": 1,
+        "apply_returned_success": true,
+        "stored_statement_count": 1,
+        "full_stored_sql_equals_approved_source": true
+      }
+    ],
+    "new_functions": [
+      {
+        "name": "piece_mutate_preview_visual_v2",
+        "identity_arguments": "p_owner_user_id uuid, p_preview_id uuid, p_expected_preview_revision bigint, p_expected_record jsonb, p_visual_recipe jsonb, p_visual_recipe_hash text, p_expected_subscription_tier text, p_expected_source_state jsonb",
+        "arguments": "p_owner_user_id uuid, p_preview_id uuid, p_expected_preview_revision bigint, p_expected_record jsonb, p_visual_recipe jsonb, p_visual_recipe_hash text, p_expected_subscription_tier text, p_expected_source_state jsonb",
+        "result": "jsonb",
+        "language": "plpgsql",
+        "volatility": "v",
+        "security_definer": true,
+        "owner": "postgres",
+        "settings": [
+          "search_path=pg_catalog"
+        ],
+        "body_md5": "f8ad2674d98e91f9eff0e1243ef6745a",
+        "definition_md5": "7a0aa4034d540973cdcde3a6f2601439",
+        "approved_body_exact_match": true,
+        "matching_name_overloads": 1,
+        "non_owner_grants": [
+          {
+            "grantee": "service_role",
+            "is_owner": false,
+            "grantable": false,
+            "privilege": "EXECUTE"
+          }
+        ],
+        "anon_execute": false,
+        "authenticated_execute": false,
+        "service_role_execute": true
+      },
+      {
+        "name": "piece_read_quota_v2",
+        "identity_arguments": "p_owner_user_id uuid",
+        "arguments": "p_owner_user_id uuid",
+        "result": "jsonb",
+        "language": "plpgsql",
+        "volatility": "s",
+        "security_definer": true,
+        "owner": "postgres",
+        "settings": [
+          "search_path=pg_catalog",
+          "row_security=off"
+        ],
+        "body_md5": "41e8fd31e08740435e91d77bb3dd6fa4",
+        "definition_md5": "fd3fbed64d0afa5cc53a059acb2ca25f",
+        "approved_body_exact_match": true,
+        "matching_name_overloads": 1,
+        "non_owner_grants": [
+          {
+            "grantee": "service_role",
+            "is_owner": false,
+            "grantable": false,
+            "privilege": "EXECUTE"
+          }
+        ],
+        "anon_execute": false,
+        "authenticated_execute": false,
+        "service_role_execute": true
+      }
+    ],
+    "preserved_metadata": {
+      "existing_function_overloads": 9,
+      "existing_function_definition_signature_settings_and_acl_unchanged": true,
+      "ordinary_tables": [
+        "emlis_frame_feedback",
+        "emlis_input_threads",
+        "emotions",
+        "piece_quota_consumptions",
+        "piece_records",
+        "profiles"
+      ],
+      "table_column_metadata_acl_rls_and_policies_unchanged": true,
+      "piece_tables_rls_enabled_and_forced": true,
+      "default_acl_records": 24,
+      "default_acls_unchanged": true,
+      "prior_migration_records": 8,
+      "prior_migration_records_unchanged": true,
+      "prior_piece_migrations": 4,
+      "total_migration_records": 10,
+      "total_piece_migrations": 6,
+      "pending_piece_migrations_from_this_approved_scope": 0
+    },
+    "security_advisors": {
+      "comparison": "Same complete findings before and after, excluding observed_at timestamps.",
+      "unchanged": true,
+      "new_findings_from_this_change": 0,
+      "existing_info_count": 59,
+      "existing_warn_count": 44,
+      "existing_categories": [
+        {
+          "name": "rls_enabled_no_policy",
+          "level": "INFO",
+          "count": 59,
+          "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0008_rls_enabled_no_policy"
+        },
+        {
+          "name": "function_search_path_mutable",
+          "level": "WARN",
+          "count": 31,
+          "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0011_function_search_path_mutable"
+        },
+        {
+          "name": "extension_in_public",
+          "level": "WARN",
+          "count": 1,
+          "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0014_extension_in_public"
+        },
+        {
+          "name": "anon_security_definer_function_executable",
+          "level": "WARN",
+          "count": 5,
+          "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0028_anon_security_definer_function_executable"
+        },
+        {
+          "name": "authenticated_security_definer_function_executable",
+          "level": "WARN",
+          "count": 5,
+          "remediation": "https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable"
+        },
+        {
+          "name": "auth_leaked_password_protection",
+          "level": "WARN",
+          "count": 1,
+          "remediation": "https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection"
+        },
+        {
+          "name": "vulnerable_postgres_version",
+          "level": "WARN",
+          "count": 1,
+          "remediation": "https://supabase.com/docs/guides/platform/upgrading"
+        }
+      ],
+      "unrelated_existing_findings_resolved": false
+    },
+    "effect_scope": {
+      "new_database_functions": 2,
+      "migration_history_additions": 2,
+      "original_sql_source_changes": 0,
+      "product_source_changes": 0,
+      "test_source_changes": 0,
+      "workflow_changes": 0,
+      "private_piece_rows_read": 0,
+      "private_piece_rows_written_by_this_operation": 0,
+      "business_calls_to_new_functions": 0,
+      "table_or_policy_or_default_acl_changes": 0,
+      "environment_changes": 0,
+      "deploy": 0,
+      "signing": 0,
+      "distribution": 0,
+      "main_merge": 0,
+      "automatic_progression": false
+    },
+    "product_acceptance": false,
+    "remaining_work": "Mixed420 final rendering, formal renderer admission, explicit candidate API runtime, real-owner normal initial save and same-owner reopen, then P-W2/P-W3. Do not reapply these two functions or infer runtime activation from the metadata result."
   }
 }

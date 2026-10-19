@@ -2716,3 +2716,16 @@ essay／quote／declarationの3preview fixtureはnative_checkedとなり、実mo
 
 既存API SQL2本の対象project・pinned source／blob・signature・効果・依存metadataを入口§73.5へ具体化しました。quota読取りは初回previewに必要、visual変更はPATCH用。新規DB適用はrule18 §0(4)／§11.3のsource委任外で未実施。2本の限定適用候補には正式採用・env／deployを含めません。この最終write unitは入口／本map／manifestの3文書だけで、source／test／workflow変更0、live効果0です。
 
+### 65.21.2 承認済SQL2本の稼働DB適用とmetadata確認を完了
+
+2026-10-19 JST、Mash様の§73.5の2本限定承認により、cocolon-project（oeahmpmigszggnkyiivq）へAPI source a536e50ee284785f585ac73329ef2947dca8bba9の既存SQLを改変せず各1回適用しました。migrationは20261019021118 piece_v2_quota_read、20261019021121 piece_v2_preview_visual_change。関数本文・引数・設定・新規履歴のSQL全文が原文に一致しました。適用scopeと実結果の正本は入口§73.6、machine-readableな現在値はmanifest v76です。
+
+| live DB owner | 現在の責任と境界 |
+|---|---|
+| public.piece_read_quota_v2(uuid) | 初回preview発行前にownerのtierとJST当月保存消費数を読む。STABLE／SECURITY DEFINER／search_path=pg_catalog／row_security=off |
+| public.piece_mutate_preview_visual_v2(uuid,uuid,bigint,jsonb,jsonb,text,text,jsonb) | 未保存private previewのvisual PATCH用。VOLATILE／SECURITY DEFINER／search_path=pg_catalog。本文・期限・quota・保存済みrecordの変更はしない |
+
+両方とも所有者を除くEXECUTEはservice_roleのみで、anon／authenticatedは実効権限もfalse。既存9 function overload、6依存tableの列構成・ACL・RLS・policy、24 default ACLは適用前と一致。migrationは既存8件＋今回2件＝10件、うちPiece分は6件です。既存M4の4本を再適用せず、個人のPiece行の読書きや新関数の業務呼出しも行っていません。
+
+これにより前節までの2 RPC未作成は解消しました。正式InputScreen supplier・明示candidate APIの稼働・通常初回保存→同owner再表示、420文字の最終描画、P-W2／P-W3は未完了です。DB適用をrenderer採用・通常保存の製品受入れへ換算しません。source／test／workflow／SQL原文変更0、DB関数追加2、env／deploy／署名／配布／main merge効果0。再開時はこの適用済み2本を繰り返さず、入口§73.6とmanifest next_groupを使います。
+

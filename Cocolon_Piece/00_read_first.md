@@ -1531,7 +1531,7 @@ artifact12155650678（60,195,947 bytes、期限2026-10-25T23:59:13Z）のZIP SHA
 
 現在のprofileと実装から、現行の全候補・全行5double契約を維持したまま8秒を解消できる追加案は確定していません。既に代表値の重複除去・v3転送・worker内文字列appendを実装済みで、失敗したbatch／suffix再利用や同じsourceの再実行へ戻しません。§72の幅超過行ink省略は契約変更を伴う未採用案のままです。P-W1の通常初回保存・同owner再表示、正式renderer供給と稼働、420文字の最終描画、P-W2／P-W3は未完了です。
 
-### 73.5 次のDB適用候補を2本に限定して具体化（未適用）
+### 73.5 次のDB適用候補を2本に限定して具体化（承認前記録。適用結果は§73.6）
 
 対象はSupabase `cocolon-project`（project ref `oeahmpmigszggnkyiivq`）。API sourceは `a536e50ee284785f585ac73329ef2947dca8bba9` に固定し、既存SQL全文と依存条件を確認しました。
 
@@ -1545,4 +1545,44 @@ artifact12155650678（60,195,947 bytes、期限2026-10-25T23:59:13Z）のZIP SHA
 read-onlyのmetadata照合で、適用role条件とservice_role、依存する通常table6個、piece_records／piece_quota_consumptionsのRLS有効・強制、必要な既存関数5個のsignatureを確認しました。既存M4 migration4本を維持し、再適用しません。これは適用前提の確認で、稼働中candidate compositionや通常保存の受入れではありません。個人のPiece本文・行の読取りとlive applyは0です。
 
 rule18 §0(4)／§11.3は新規DB migrationを今回のsource／test／docs委任に含めないため、次の個別承認候補は「この2本を対象projectへ適用し、migration履歴・関数signature・EXECUTE権限・既存M4の維持をmetadataで確認する」までです。正式renderer採用、flag／env、deploy／activation、署名／配布／main mergeはこの承認候補に含めません。2本の適用だけで通常保存が完成するとは扱いません。
+
+### 73.6 2026-10-19 JST — 承認済SQL2本を稼働DBへ適用し、metadata確認を完了
+
+Mash様がこの会話で§73.5の既存SQL2本と適用後metadata確認を「進めていいよ」と明示承認しました。対象・原文・現行DBを再照合し、華恋が1本ずつ各1回適用しました。両apply_migrationはsuccess、適用後照合も成功です。新しい承認を重ねて求めず、承認範囲を実行しました。
+
+| start field | fixed scope / actual result |
+|---|---|
+| product_destination | P-W1の通常preview発行と未保存previewの見た目変更に必要なDB関数を成立させる |
+| current_gate_or_subgate | weekly20261017 §5.6 P-W1。§73.5の未適用2関数 |
+| exact_work | pinned SQL2本をcocolon-projectへ適用し、定義・ACL・履歴・既存metadataを照合 |
+| scope_classification | LEVEL_3 |
+| approval_or_delegation_basis | この会話でのMash様の2本限定明示承認。rule18 §0のPiece Pro例外 |
+| execution_owner | 華恋 / GPT-6 Astra Pro / CHAT_PRO_OK。同環境補助担当はSQLのread-only確認のみ |
+| success_credit | TECHNICAL_CREDIT。未適用DB関数2件を解消。通常保存の製品受入れは未完了 |
+| completion_condition | 原文との関数本文・設定一致、client EXECUTE拒否、追加履歴2件、既存metadata不変、GitHub記録の読戻し |
+| stop_condition | apply失敗・応答不明・既存同名関数・metadata不一致なら現状を確認。原文変更・盲目的再適用をしない |
+| prohibited_scope | 他migration、private Piece行の操作、table/RLS/default ACL変更、renderer採用、env/flag/deploy/署名/配布/main merge |
+| next_product_read_or_mash_decision_point | 420文字の最終描画、正式renderer供給、明示candidate runtime、通常保存→同owner再表示が残る |
+| current_source_test_receipt | API a536e50ee284785f585ac73329ef2947dca8bba9の§73.5の2blob。今回は製品code/test/SQL原文変更0 |
+| current_docs_and_heads | 適用前Cocolon head e90360d94bd22a3062005b5e6b5c06498c2ea3ad。全体設計・全file地図・rules・weekly・現行文書11件のlocal全文が同headのblobと一致 |
+| affected_current_structure_maps | current_structure/02_piece_current_structure.md §65.21.2、manifest v76 |
+
+対象projectは `cocolon-project` / `oeahmpmigszggnkyiivq`、適用前statusはACTIVE_HEALTHY、Postgres 17.4.1.074、適用ownerはpostgresです。SQL原文は§73.5のpinned sourceと同一で、過去のSOURCE-ONLY commentも含め改変しませんでした。今回の明示承認がこの2本の適用許可です。
+
+| migration version | name | 追加関数 |
+|---|---|---|
+| 20261019021118 | piece_v2_quota_read | public.piece_read_quota_v2(uuid) |
+| 20261019021121 | piece_v2_preview_visual_change | public.piece_mutate_preview_visual_v2(uuid,uuid,bigint,jsonb,jsonb,text,text,jsonb) |
+
+適用後観測は2026-10-19T02:13:41.72847Z。両関数はそれぞれ1 signatureのみで、引数名・型・順序、plpgsql、RETURNS jsonb、SECURITY DEFINER、owner=postgres、関数本文が原文に一致しました。quotaはSTABLE、search_path=pg_catalog、row_security=off。visualはVOLATILE、search_path=pg_catalogで、row_securityの個別指定はありません。
+
+両関数とも所有者の固有権限を除くACLはservice_roleのEXECUTEだけで、grant optionはありません。PUBLICの余分なACLなし、anon／authenticatedの実効EXECUTE=false、service_role=trueを確認。新しい2件のmigration履歴は各statements1件で、コメント・改行も含め承認SQL全文と一致しました。
+
+既存の8件のmigration履歴は維持され、全体10件・Piece分6件になりました。既存Piece4本の再適用はありません。適用前後の既存9 function overloadの定義・signature・設定・ACL、依存6tableの列構成・ACL・RLS有効／強制・policy、24件のdefault ACLは一致しています。個人のPiece本文・行は読まず、新関数も業務入力で呼び出していません。今回のDDL自体は既存Piece行を書き換えません。
+
+security advisorsは観測時刻を除く指摘内容が適用前後で同一で、今回の2関数による新規指摘はありません。既存のINFO59件／WARN44件は残存し、解消したとは扱いません。分類・参照URLはmanifestのlive_db_apply_20261019に記録します。今回の2本以外へ修正範囲を広げませんでした。
+
+この適用で§73.3／§73.5の「quota／visual RPC未作成」は解消しました。新規preview発行前のquota読取りとvisual PATCHのDB定義が揃いましたが、明示candidate APIの稼働、実ownerによるRPC呼出し、正式renderer supplier、通常InputScreenからの保存→同owner履歴／詳細は未確認です。420文字は§73.4の8,284.257ms timeoutのままで、今回再実行していません。P-W2／P-W3の未完了も保持します。
+
+今回の効果は新関数2個・migration履歴追加2件と既存3文書の記録更新です。製品source／test／workflow／SQL原文、env／deploy／署名／配布／main mergeは変更0。default OFF、Draft/open/unmerged、automatic_progression=falseを維持します。次はDB2本を再適用せず、P-W1の残る描画・正式供給・稼働・通常保存の条件へ戻ります。
 
