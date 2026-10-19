@@ -662,16 +662,21 @@ Arabicは最小56ptでTextKit高84.51171875がlogical行高76を8.51171875超え
 
 入口§78.3〜78.4・current map §65.26.1・manifest v85へ全11report、失敗値、画像確認範囲と次の再開位置を同期しました。旧v5 §5.6.5の成功／未採用STOPは履歴として保持します。結果後の製品／test／workflow追加変更・同source再試行・期限延長・包含/行高緩和0。API／DB／flags／env／deploy／署名／配布／main mergeの効果0。既適用DB6件の再適用や無関係な準備の反復は行いません。
 
-#### 5.6.7 10/20のPiece残件 — v7自然高さ修復を実装、方式判断は実RN結果待ち
+#### 5.6.7 10/20のPiece残件 — v7の高さ回復を実証、Arabicと8秒未達で不採用
 
-現指示に基づき、v6のsnapshot高さ不足を修復する明示iOS preview v7を実装しました。本文の固定heightだけを外してRN0.77.3の自然計測へ戻し、外幅1080/内幅888・864/横padding/parent行高/元8秒/独立5値とstrict描画条件を保持します。旧v6/v5/v4/v3とsavedは変更しません。製品3file、既存test4file、既存文書4fileの範囲です。
+新指示とRule18 LEVEL_2に基づき、本文の固定heightを外す明示iOS preview v7を実装しました。[source0b24ce7d](https://github.com/MassyuRed/Cocolon/commit/0b24ce7dc44cafa72666b266325c20dedab5e097)は製品3／test4／既存文書4file。外幅1080・内幅888/864・横padding・logical行高・独立5値・同node/token/generation・元8秒・旧版を保持しています。
 
-local JSは既存888＋回帰8＝896成功、FAIL/SKIP0。TypeScriptが失われていた一時環境を既存CIと同じ5.2.2へ復元して確認しました。実RNは新sourceの一度を待ち、基準Card5/補足Card3/raw3の分母と同状態PNGを保持します。ArabicはTextKit高84.51171875対logical76の別問題で、元selected operation内の同viewから文字属性/baseline/glyph geometryを既存reportに取得します。推測によるfont/行高変更や追加のnative検査は行いません。
+local／CI JS896、native129（旧97含む）、iOS／Android source compileは成功。export依存compileは変更なしでSKIPです。一度の[実RN run39333428161 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39333428161)はfailure。全11reportをartifactとlogで照合し、完成PNG10枚を原寸目視しました。時間を含む合格はbaseline4/5・補足2/3・raw3/3です。baselineのgeometry5/5と混同しません。
 
-**10/20のrenderer方式採否は、まだ完了していません。** 描画未達が残れば、10/22の通常入力→preview→保存→同owner詳細/履歴と、10/23の共有確認の前提にも未達が残ります。新しい結果を得て影響と次の製品修復箇所を更新し、local検査や8秒内の拒否だけで日程達成にしません。その後に必要な正式renderer版/saved再表示/既存hostへのadmission供給/既存controller・API接続は、物理端末の事前gateを増やさず既存ownerで準備します。
+quote／Latin／両420の高さ境界拒否は回復しました。両420の原文・全rows・独立5値・TextKit inkを保ち、自然view約56.333が同じink高56を含みます。essay48pt／5行、quote80pt／3行、declaration72pt／5行、Latin72pt／1行へ戻りました。PNGでは段落・unicode／絵文字・両420全行・raw bidiの描画を確認しました。v5記録hashとexact同一なのはsaved v3だけで、他9枚の画素同一性は主張しません。
 
-入口§79・current map §65.27・manifest v86を同期します。source段階では修復成立/420/正式admission/通常保存は未確認、旧v6未採用STOPは履歴です。同source再実行/期限延長/判定緩和0、API/DB/flags/env/deploy/署名/配布/main merge効果0、既適用DB6件の再適用0です。
+混在文420の最終reportは**8018.126875ms**で8秒未達です。native_checkedの最初のpoll観測7948.190166msから、従来の2RAF安定確認・prepare・同token／誤token fit照合を経ています。約69.94msの処理別costは未観測で、特定一処理へ原因を断定せず、測定点を早い方へ付け替えません。画像成立とcurrent_fit=trueを時間内成功に数えません。
 
+Arabicは自然view高76.33332824707031に戻しても、TextKit bbox高84.51171875がlogical76を超過します。元selected operationから得た属性ではArabic fontが正しく入り、baselineもそのUIFont行高とexact整合しました。14 Arabic glyphが同じ大きな個別bboxを持ち、spaceだけ高76です。共通font範囲を返す可能性まで絞りましたが、実画素のはみ出し／成立は未確定でPNGもありません。独立CTLine高で置き換えたり、行高／包含を緩めたりして通しません。
+
+**10/20の方式判断はv7不採用です。自然高さ修復は部分成果で、全RTL・420条件・正式admission・通常保存は未成立です。** 次は既存RN／TextKit／PieceTextMetricsで共通glyph bboxと実描画範囲の関係を解決し、mixed420の全range／全font／最終fit照合を保って元8秒に収める実処理を改善します。採用renderer版・同版saved reader・InputScreen→既存hostの正式admission供給・既存controller/APIでの初回保存→同owner詳細/履歴が続く本線です。新controller／DTO／schemaは不要、物理端末の追加事前gateも設けません。
+
+10/22の通常保存・10/23の共有確認の前提は未達で、日程達成や延期承認には換算しません。入口79.3〜79.4／current map65.27.1／manifest v87に同じ全11結果・未加工観測・hash・次のownerを同期しました。結果後の製品／test／workflow追加変更・同source再実行・条件緩和0。API／DB／flags／env／deploy／署名／配布／main merge効果0、既適用DB6件の再適用0です。今回の結果記録を正式保存・共有の完成に加点しません。
 
 ## 6. 議題6 — 今回の指摘に対する判断と、記録の責任
 

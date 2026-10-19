@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**現在の作業は§79／current map §65.27／weekly20261017 §5.6.7です。10/20の新指示により、v6で加えた本文Textの固定高さを明示iOS preview v7だけで解除し、RN本来の自然計測へ戻しました。横padding・内幅・logical行高・厳密な描画条件は維持。local JSは既存888＋新8＝896成功です。新source一度の実RNと画像は結果待ちで、Arabicの直接原因・修復成立・正式admission・通常保存は未確認です。旧v6の失敗と未採用STOPは§78の履歴として保持します。**
+**最新結果は§79.3〜79.4／current map §65.27.1／weekly20261017 §5.6.7です。v7の本文Text自然高さ修復をsource0b24ce7dへ反映し、一度の実RN・全11report・PNG10枚の照合と原寸目視を完了しました。local／CI JS896・native129・iOS／Android source compileは成功。quote／Latin／両420の高さ境界拒否とessay／declarationの不要な縮小は回復しました。ただし元8秒を含む合格はbaseline4/5・補足2/3・raw3/3で、mixed420は8018.126875ms、ArabicはTextKit行高超過のためv7未採用です。Arabicは元operationの属性・glyph boundsまで原因を絞りましたが、実画素の超過は未確認です。正式admission・通常保存は未完了。§79.1〜79.2の結果待ちはsource時点の履歴です。**
 
 ### §78時点の要約（履歴）
 
@@ -2095,3 +2095,70 @@ Arabicの観測は既存native harness内のtest-only wrapperです。元inspect
 新sourceのpushで動く既存CIを一度確認します。JS/native129/source compileと、実RNの基準5・補足3・raw3、同状態PNG、同mount/token fitをそれぞれ照合し、失敗を除外した全体合格にしません。同source再実行・元8秒延長・行高/包含/独立値の緩和は行いません。現在はSOURCE_READY／LOCAL_JS_VERIFIEDで、実RN修復・420・Arabic・正式admission・通常保存・物理端末受入れは未確認です。
 
 10/20の方式判断、10/22の通常保存、10/23の共有確認への影響はweekly §5.6.7に集約します。描画成立後も既存renderer ownerの採用版固定・同版saved再表示・InputScreen→既存hostの正式admission供給・既存controller/APIによる通常保存→同owner詳細/履歴が残ります。接続source準備へ物理端末の事前gateは追加しません。今回のAPI/DB/flags/env/deploy/署名/配布/main merge効果0、canSave/canExport=falseを保持します。
+### 79.3 一度の実RN結果 — 自然高さの回復、Arabicと8秒は未達
+
+実装sourceは [`0b24ce7dc44cafa72666b266325c20dedab5e097`](https://github.com/MassyuRed/Cocolon/commit/0b24ce7dc44cafa72666b266325c20dedab5e097)、tree 0cdc3238c52d02d6ceedd2f80f49532bbbeb301dです。§79.1の製品3／test4／既存文書4、計11pathだけを変更し、remote全内容を準備原文と照合済みです。このpushによる既存[run39333428161 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39333428161)を一度確認しました。
+
+| 検査owner | 同sourceの実結果 |
+|---|---|
+| piece-rn-contracts／job118336948193 | CI JS896 PASS、FAIL／cancel／SKIP／TODO 0。local896と同じ集合で加算しない |
+| piece-ios-source／job118336947872 | 製品Objective-C++ compile・project lint成功。旧97＋v5追加32＝native129 PASS、FAIL／SKIP 0。native製品blob030e527024433494c2a4b985164220d980a2d7baを保持 |
+| piece-android-source／job118336948188 | 既存Android bridge source compile成功。Android v7描画の証拠ではない |
+| export-pods／118336948207、export-android／118336948195 | job成功、依存変更なしのためcompile工程はSKIP。今回の依存compile再実行とは数えない |
+| piece-ios-rn-canvas／job118336948201 | 全11reportとPNG10枚を回収。exit65／failure。元8秒を含む合格baseline4/5・supplemental2/3・raw3/3 |
+
+実RNはRN0.77.3、Xcode16.4、iPhone 17 Pro／iOS26.2 Simulatorです。物理端末の受入れではありません。元Card5・補足Card3・raw診断3の名前／順序／本文／recipeを維持し、全11でbody_preserved=true。baselineのnative geometryは5/5ですが、mixed420の時間超過を含めると合格4/5です。rawは下限未満文字列の診断であり、Cardへ合算しません。
+
+| 集合／case | 元のphase・全条件判定 | elapsed_ms | font／本文行数 | accepted検査／PNG |
+|---|---|---:|---|---|
+| baseline essay_paragraphs | native_checked | 2135.776209 | 48pt／5行 | 6／あり |
+| baseline quote_unicode | native_checked | 436.830750 | 80pt／3行 | 4／あり |
+| baseline declaration_no_brand | native_checked | 332.983667 | 72pt／5行 | 5／あり |
+| baseline essay_max420 | native_checked／8秒超過 | 8018.126875 | 36pt／18行 | 19／あり |
+| baseline saved_essay_canvas | native_checked | 423.746000 | 48pt／5行 | 6／あり |
+| supplemental suffix_latin_ligature | native_checked | 197.312625 | 72pt／1行 | 2／あり |
+| supplemental suffix_arabic | unavailable／native_ink_overflow | 455.343334 | 56pt／1行 | 0／なし |
+| supplemental suffix_max420_a | native_checked | 3904.686458 | 36pt／17行 | 18／あり |
+| raw suffix_spaces_raw | measurement_checked | 102.944500 | 48pt／1行 | 1／あり |
+| raw suffix_hebrew_raw | measurement_checked | 121.847416 | 48pt／1行 | 1／あり |
+| raw suffix_mixed_bidi_raw | measurement_checked | 232.663208 | 48pt／1行 | 1／あり |
+
+**高さ境界修復の実証。** quote／Latin／mixed420／あ420は、v6で失敗したstrictなown-view包含を通り、実native captureまで成立しました。両420では本文・全rows・選択行独立5値・raw TextKit ink全4値がv6と一致しています。旧失敗行index1／4／8／14の実view高は56.33332824707031／56.33333206176758／56.333335876464844／56.333343505859375で、同じink下端56を含みます。各行のview／contentFrame／TextContainer高は一致し、外幅1080、内側原点96、内幅888、logical行高56、ink高56を維持しました。inkの丸めや判定緩和ではなく、RN自然計測へ戻した実高さの回復です。
+
+essayは48pt／5行、quoteは80pt／3行、declarationは72pt／5行、Latinは72pt／1行へ戻りました。v6でのessay44pt／3行、declaration56pt／3行と、quote64pt／Latin56ptでの拒否から回復しています。v5とfont／rowsが一致してもPNGの画素同一性は主張しません。v5記録hashと今回のPNG10枚を比較するとsaved v3だけが同一で、残り9枚は異なります。
+
+**mixed420の8秒未達。** final reportは8018.1268750000745msで、既存8000未満の条件を18.126875000074506ms超えました。native_checked:3をpollが最初に観測した時刻は7948.190166000044msで、その後、2回のrequestAnimationFrameによる同snapshotの安定確認、preparePieceNativeCard、同token／誤tokenのisCurrent照合を経てreportを記録します。差69.93670900003053msの処理別時刻はなく、2RAFまたはfit照合だけを原因とは断定できません。受入時刻は従来どおりfit照合後・PNG生成前で、7948msへ付け替えません。
+
+Cardはnative_checked到達後に描画deadline timerを解除し、現在性handleのisCurrentは描画開始から8秒経過したこと自体を失効条件にしません。harnessのperformance.now起点とCardのDate.nowによる開始差も未記録です。従ってcurrent_fit=trueとreportの8秒超過はsource上両立しますが、時間内完了には数えません。420の探索rangeは各font88410、metric11381で維持され、全4fontを実行しました。候補計測／adapter／planは重なりや待ち時間を含むため、単純合計をcritical pathやnative CPU時間とは呼びません。
+
+同tokenのfit handleはnative_checkedとなったpreview6件でisCurrent=true、wrong-token=false、keys=[isCurrent]です。そのうち全条件合格は5件、mixed420の1件は時間未達です。Arabicとsaved v3にはhandleがなく、全Card8件のcanSave／canExportはfalse。raw3件には保存／export／fit fieldsがありません。この結果はdirect Cardの局所fit確認であり、正式admission・InputScreen初回保存の成立ではありません。
+
+**Arabicの同operation実測。** 72／64／56ptで、それぞれ元inspectSelectedLineのresolve内・同main UIBlock・同tag／view／storage／layoutから観測できました。各operationの元wireを無変更で返し、そのink／view高と観測値の一致、独立5値のdecode、最終56ptとrejected inspectionの一致を確認しています。
+
+| font | logical行高 | 実view高 | TextKit bbox高 | logical超過 | baseline offset | Arabic storage font高 |
+|---:|---:|---:|---:|---:|---:|---:|
+| 72 | 98 | 98.33332824707031 | 108.80078125 | 10.80078125 | 4.28125 | 89.4375 |
+| 64 | 87 | 87.33332824707031 | 96.65625 | 9.65625 | 3.75 | 79.5 |
+| 56 | 76 | 76.33332824707031 | 84.51171875 | 8.51171875 | 3.21875 | 69.5625 |
+
+56ptのraw inkは[83.12109375,0,421.5358552932739,84.51171875]、contentFrame=[96,0,888,76.33332824707031]、usedRect=[0,0,265.63412046432495,76]です。独立CTLine高57.61328125はlogical76以内ですが、TextKit bbox高84.51171875は自然view高をも8.178390502929688超えます。自然計測だけでArabicは回復しません。
+
+storageの文字range[0,5]／[6,7]は.SFArabic-Regular、空白[5,1]は.SFUI-Regularです。baseline offsetは全fontで(logical行高−Arabic UIFont.lineHeight)/2とexact一致し、56ptのglyph baselineもascender56.0546875＋offset3.21875＝59.2734375です。「Arabic fontを見落としてLatin高でbaselineを決めた」という説明は今回の観測には支持されません。
+
+14個のArabic glyphはdrawsOutsideLineFragment=trueで、56ptではすべて相対x−12.87890625・width100.16015625・y0・height84.51171875という共通の個別bboxを持ちます。空白glyphだけは高76です。空白も含む全15glyphで上記flagはtrueのため、flag単独を縦方向の実画素超過の証拠にはしません。これはglyphごとの輪郭を超えるfont共通の範囲を返している可能性を示しますが、実描画画素が同じ量だけはみ出した証明ではありません。storage fontを未観測の実fallback draw fontと同一視せず、独立CTLineでTextKit判定を置き換えません。Arabic PNGはなく、実画素の成立も未確認です。
+
+**artifactと画像。** artifact12226916713は64,036,082bytes、SHA256 ae9d4996d7f3ef2e9117d0e37b17881a9a25cddea0e53f58ca64b7abcb808d9f。ZIP実取得後にdigestを照合し、results.json（186,022bytes、SHA256 12eaf6364d055cfa435325dc31eeba4bf824ad17c87453a6b108eaa6803d814e）の全11objectがジョブログ全文配列と一致しました。manifest v87へ未加工report・元wire／全glyph属性・trace・log/result/PNG hashを保持します。artifactの期限は2026-10-26T22:36:10Zで、PNG binaryをmanifestへ複製したものではありません。
+
+Card7枚とraw3枚の計10枚を原寸で目視しました。essay／saved v3の段落、quoteの日本語／結合文字／絵文字、declarationのbrandingなし、Latin、両420の全行、rawのspace／Hebrew／mixed bidiを確認し、明白な文字切れやbrandingとの重なりは見られませんでした。Cardは1080×1350または1080×1920、rawは1080×320です。mixed420の画像成立と時間不合格を併記し、未生成Arabic・物理端末matrixを目視合格へ数えません。
+
+### 79.4 10/20の採否と次の製品作業
+
+**V7_UNADOPTED_STOP。自然高さ修復と一度の結果確認は完了しましたが、v7は正式採用できません。** 高さ回帰の回復は部分成果です。ArabicのTextKit範囲問題とmixed420の元8秒未達が残り、全RTL・420条件・正式admission・通常保存は未成立です。旧版とv7sourceをDraft候補として保持し、結果後は既存4文書のみを同期しました。同sourceの再実行、製品／test／workflow追加変更、期限・行高・包含条件の緩和は0です。
+
+次の最初の製品上の未完了は、既存RN／TextKit／PieceTextMetricsのArabic glyph描画範囲と、返される共通bboxの関係を解決することです。新証拠によりbaselineのfallback見落としを前提にした修正は選びません。実layoutとglyph位置を維持して実描画を過小評価しない根拠を持つ修復が必要で、使用API・計測契約の置換が必要なら既存契約との差を具体化して方式判断します。現Cardはready前のcanvasをopacity=0とし、unavailableでsubtreeを外すため、受動的なdraw hookを足すだけで拒否Arabicの描画証拠が得られる保証はありません。同mounted Textのdraw機会・追加描画の作用を踏まえて次の検証範囲を具体化し、未観測の画素成立や理論上の代替だけで採用しません。
+
+mixed420は最終安定確認／fit照合まで含む現8秒に余裕がなく、既存候補生成・decoder・B9・再検証の実処理を同一本文／全range／全font条件で改善する必要があります。時刻の付替え、選択候補削減、probe／prefetchやquality gateの省略では解決扱いにしません。今回のtraceだけから特定一処理を唯一原因とは断定しません。
+
+通常保存の残件は既存ownerへ接続します。InputScreenは既存InputPieceActionAreaへ正式isSaveAdmitted供給をまだ渡しておらず、局所fitのCard→Modal→host経路だけが存在します。採用版のsaved readerは許可version・saved key・描画profileの3箇所を揃える必要があり、許可listだけをv7へ増やして旧v3描画へ流す実装は不可です。既存PieceCreateController→POST /emotion/piece/save、owner履歴→GET /emotion/piece/{id}→saved Cardはsourceにあります。新controller／DTO／schemaの再作成ではなく、採用版・正式admission・稼働値との整合を保って通常初回保存→同owner再表示の実動作を閉じます。source接続準備へ物理端末の事前gateを追加しませんが、実稼働のflag／TTL／renderer／認証round-trip・物理端末の受入れは未検証です。
+
+10/20の判断はv7不採用です。10/22の通常保存・10/23の共有確認は未達前提を抱えるため、実施済みや延期承認へ読み替えません。API／DB／実flag／env／deploy／署名／配布／main merge効果0、既適用DB6件の再適用0。current map §65.27.1・weekly §5.6.7・manifest v87を同じ結果へ同期します。

@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**現在は入口§79／本map §65.27／weekly §5.6.7のv7自然Text高さ修復です。selected bodyの固定heightだけをv7で解除し、横幅・padding・logical行高・strict描画条件を保持しました。local JS896成功。新source一度の実RN／画像とArabicの直接原因は結果待ちです。正式admission・通常保存は未成立、旧v6結果は§65.26.1に保持します。**
+**最新結果は入口§79.3〜79.4／本map §65.27.1／weekly §5.6.7です。source0b24ce7dのv7はlocal／CI JS896・native129・source compile成功。一度の実RNでquote／Latin／両420の高さ境界拒否を回復し、PNG10枚を確認しました。元8秒を含む合格はbaseline4/5・補足2/3・raw3/3。mixed420は8018.126875ms、Arabicは共通glyph bboxの行高超過が残り、v7未採用です。正式admission・通常保存は未完了。旧v6結果とv7実行前の記録を履歴として保持します。**
 
 ### §78時点の結論（履歴）
 
@@ -2895,3 +2895,24 @@ STRUCTURE_MAP_DELTA_PRESENT。開始head c0576dbd、10/20の新指示とRule18 L
 | tests/native/piece-rn-canvas-ios.m | v7の実view/contentFrame/container高を照合し、logical ink高とown-viewをstrict確認。Arabicのみ元selected resolver内で同viewの属性/baseline/glyph geometryを既存reportへ記録 |
 
 native製品source/decoder/pinned RN/workflow/DB/APIは未変更。元inspect/resolveは各一度でwire無変更、追加CTLine/別UIBlock/再layoutなし。Arabicの直接原因や自然高さによる修復成立は未確認です。新source一度の実RNで基準Card5・補足Card3・raw3・同状態PNGを照合します。raw診断や合成検査を通常保存へ換算せず、正式renderer/saved版/既存InputScreen-host/API保存再表示の残件を保持します。
+### 65.27.1 v7結果 — 自然高さ回復と残る二つの未達
+
+[source0b24ce7d](https://github.com/MassyuRed/Cocolon/commit/0b24ce7dc44cafa72666b266325c20dedab5e097)／[run39333428161 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39333428161)の実装11pathをremote全内容照合済み。local／CI JS896、旧97を含むnative129、iOS／Android source compileは成功し、export依存compileは変更なしでSKIPです。実RN job118336948201はfailure。全11reportがartifactとlogで一致し、PNG10枚を原寸目視しました。§65.27の結果待ちは実装時点の記録です。
+
+| 既存の責任箇所 | 実結果・残る作業 |
+|---|---|
+| PieceVisualCard.jsの明示v7 selected Text | 自然高さが回復。quote／Latin／両420のown-view拒否を解消。両420の旧失敗行で実view約56.333に同じink高56が収まり、logical行高・独立値・全本文を保持 |
+| 既存layout/B9／native decoder | essay48pt5行／quote80pt3行／declaration72pt5行／Latin72pt1行へ回復。判定を緩和していない。元の全range／全font／選択行検査は維持 |
+| 既存RN／TextKit／PieceTextMetrics | Arabicは自然view高76.33332824707031でもbbox高84.51171875が超過。14 Arabic glyphが共通の個別bbox、spaceは高76。baselineはArabic属性fontの行高とexact整合。実画素の超過／共通bboxの意味は未確定で、ここが次の描画修復owner |
+| 既存CardとRN harnessの時間条件 | mixed420はnative_checked初観測7948.190166ms、同snapshot安定確認＋fit照合後report8018.126875ms。後者が従来の受入境界で不合格。処理別cost未観測で、2RAF／fitだけの責任とは断定不可 |
+| 既存InputScreen→InputPieceActionArea | 局所fit経路は既存Card→Modal→hostに存在。正式isSaveAdmitted供給がまだないため、採用renderer版を既存ownerで確定して接続する |
+| 既存saved reader／layout owner | v3だけ。採用版の許可version・saved key・実描画profileを揃える必要がある。allowlistだけを変更し旧版で描く接続は不可 |
+| 既存PieceCreateController／pieceApi／owner画面 | 初回POST saveと同owner詳細GET／履歴sourceは実在。新controller／DTOを増設せず、採用版・formal admission・既存稼働設定を整合させ、通常保存→再表示を実証する |
+
+元Card5はgeometry5/5でも、時間超過1件を含む全条件4/5。補足Card2/3、raw診断3/3で、Card7PNG＋raw3PNGです。native_checked preview6件のlocal fitのうち全条件合格は5件、mixed420は時間未達、Arabicとsaved v3はhandleなし。全CardのcanSave／canExportはfalseで、rawに保存／fit欄はありません。10枚生成や局所fitをformal admissionへ換算しません。
+
+Arabicの同operation観測は72／64／56ptで保持し、元wireのbox／ink／独立5値を照合しました。56ptのbaseline3.21875は(76−Arabic font行高69.5625)/2に一致します。14 glyphの個別bboxが全て同じ大きな高さを持つため、実描画範囲との関係を確認する必要があります。CTLineの独立高57.61328125への置換や、logical行高／own-view許容差の変更で通しません。
+
+V7_UNADOPTED_STOP。10/20方式判断は不採用であり、10/22通常保存・10/23共有確認の達成は未成立です。次は既存native描画範囲の修復とmixed420の最終照合込み8秒を同条件で満たす実処理改善。正式renderer・saved版・admission・通常保存再表示のsource準備へ物理端末の追加事前gateは設けません。実稼働のflags／TTL／renderer／認証round-tripと商品受入れは別途未検証です。
+
+STRUCTURE_MAP_DELTA_PRESENTの結果ownerは本節、詳細・未加工reportとhashは入口79.3〜79.4／manifest v87、日程影響はweekly5.6.7です。結果同期は既存4文書だけで、製品／test／workflow追加変更・同source再実行・期限／条件緩和・API／DB／flag／env／deploy／署名／配布／main merge効果0です。
