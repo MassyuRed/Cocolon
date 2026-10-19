@@ -16,6 +16,10 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**最新の調査・未承認候補は入口§76／本map §65.24です。現source b4467a77のv4は420文字timeoutで未採用のまま。候補探索だけをsuffix文脈の代表値とし、採用行は実際にmountしたTextの独立寸法とTextKitで確認する明示iOS preview v5を具体化しました。改行・font・fitの選択が変わり得る契約差を含むため、実装・限定検証はMash判断前で未実行です。正式isSaveAdmittedのInputScreen供給、採用版のsaved再表示、candidate稼働、通常保存→同owner再表示がP-W1に残ります。今回の製品構造変更0、既存4文書の調査・候補記録です。**
+
+### §75時点の要約（履歴）
+
 **最新は入口§75.2〜75.3／本map §65.23.1です。iOS preview専用v4の承認済み実装・限定検証を完了。source b4467a77はlocal／CI JS839件・native97件・iOS／Android compile成功、実RNは4ケース成功・4枚PNG確認済みです。420文字は8,069.796msでtimeoutし、36ptの計測が未完了でした。§74.4に従いv4は未採用として停止。同source再実行や追加変更を行わず、旧v3・saved/export・元8秒を維持。正式admission・通常初回保存は未完了です。**
 
 ### §74時点の要約（履歴）
@@ -2780,4 +2784,25 @@ source `b4467a77877dd936c29845f2977a06bd61df84c1`の変更14pathをGitHub全内�
 essay_max420はreport elapsed8,069.796msでmeasurement_timeout。48／44／40ptのv4・W888応答とB9 fit=falseを確認し、36ptはnative／adapter待ちでB9・最終inspection・完成PNGへ未到達でした。8,069.796msはtimeout観測であり描画完了時間ではありません。全420文字blocksは保持。native単体の計時や前回runとの違いを実RNの因果的改善へ換算しません。詳細の5case結果・trace・artifact digestは入口§75.2とmanifestのios_preview_v4_20261019がownerです。
 
 承認された限定作業は終了し、v4 sourceは未採用候補としてDraftに残ります。停止後は既存資料3点の更新だけで、source追加変更・同source再実行0です。P-W1の未完了は420文字を元8秒で成立させる方式の判断、正式supplier、candidate API稼働、通常初回保存→同owner再表示です。P-W2／P-W3、保存回収source5c44b252、適用済みPiece6migrationを保持し、自動進行・基盤再実装・migration再適用へ進めません。
+
+### 65.24 420文字の新方式候補と通常保存への未接続箇所 — 実装前
+
+入口§76が今回の具体案ownerです。開始・反映前Cocolon head321ef6f64fe837019c7e6989c89e5d634ef2a224、API head a536e50ee284785f585ac73329ef2947dca8bba9。全体設計01・全file地図01A〜C・最新weekly20261017と原文を照合しました。v4の§65.23.1の停止・未採用は維持し、製品／test／workflowはsource b4467a77から変更していません。今回のcreditはBLOCKER_NARROWEDです。
+
+| owner path | 確認した残件と、未承認候補の責任 |
+|---|---|
+| ios/tempCocolon/PieceTextMetrics.mm | 現v4は代表ごとの独立CTLine作成が残る。v5候補はworker専有suffixで探索用5値を得て、既存final inspectionで作成する独立CTLineから選択行の5値も取得する |
+| features/piece/pieceRenderer.js／pieceMeasuredWrap.js | v5の探索tableと選択行inspectionを別versionで厳密に受理する候補。B9の式・順序を保っても、入力寸法の変更で語群分割保護・改行・font・fitが旧版と変わり得る |
+| components/piece/PieceVisualCard.js | 選択済みgroupsの実Textを独立寸法とTextKitの両方で検査する候補。位置は既存TextKit値を使い、同font再planは加えない。binding／node／generation／token／元8秒を維持 |
+| features/piece/pieceLayout.js | 新preview v5をiOSだけへ明示分岐する候補。現在savedはv3だけで、正式保存へ進むには採用版のsaved再表示も必要 |
+| screens/InputScreen.js → screens/input/InputPieceActionArea.js | 通常mountへ正式isSaveAdmittedが未供給。既存local fitと採用renderer supplierの両方を同じpreviewへ結ぶ必要がある |
+| features/piece/PieceCreateController.js／pieceApi.js → screens/PieceOwnerHistoryScreen.js | 既存保存・同一key回収・同owner detail GETを活かす。新controller／DTO／schemaの再作成は不要 |
+| features/piece/pieceExport.js／通常本人詳細 | 現exportの版はv3で、通常詳細へ呼出し未接続。P-W2で採用版の同一savedRecordから既存exportへ接続 |
+| API app.py／piece_v2_runtime_control.py | candidate factoryと明示TTL／renderer構成は実装済み。default appの生成だけでcandidate稼働を証明できず、実配置・実効flag・対象RN版の確認が残る |
+
+v5候補はpiece.rn_native_preview.prototype.v5／piece.native_candidates.v5／piece.native_selected_line.v1を別版とし、全range・完全substring／全属性・列挙順・cache予算を固定します。hitは保持済み最初の代表suffix、missは当該rangeのsuffixという探索値であり、各rangeの独立値ではありません。cache予算も見た目に影響し得る仕様です。全代表5doubleを返し、v4のink省略を混ぜません。実際に表示する行はstrict幅／高さ、全文・段落・glyph・禁則・own viewのink・再wrap拒否を確認します。詳細のwire、属性、座標、検証path、負例、STOPは入口§76.3〜76.5に集約します。
+
+この案は未選択候補の独立異常全数検出と旧B9の最適選択同値を維持しません。旧suffixの5,806.998msは検討根拠だけで、新sourceの速度・受入れ結果ではありません。旧97判定と25caseの期待値を維持した新検査、旧不一致入力の描画確認、既存実RN5fixture一度の限定確認を行うかがMash判断点です。420のnative_checked・全inspection・同token local fitが既存report.elapsed_msの8秒以内に成立しない、同状態のPNGを取得・確認できない、明白な崩れ、現在mountへの束縛不成立なら未採用で終了します。現harnessはreportの後でcaptureするため、PNGファイル生成時間を8秒以内と実測したことにはしません。
+
+今回source変更・test実行・DB書込・業務RPC・flag／env／deploy／署名・配布・main merge効果0。Supabase確認はmigration履歴の全10件・Piece6件までで、再適用・実稼働確認ではありません。正式supplier、同採用版saved再表示、candidate稼働、通常保存、P-W2／P-W3の残件を保持します。Rule18 §0(4)／§11.3に従い、新契約の実装前で判断を求め、v4承認の再取得やSTOP解除へ置き換えません。
 

@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v80",
+  "schema_version": "cocolon.piece.workstream_manifest.v81",
   "generated_at": "2026-10-19 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v79",
-    "predecessor_blob": "7dfce7eab7a129ca824c8be10982721062ecdf57",
-    "predecessor_head": "b4467a77877dd936c29845f2977a06bd61df84c1",
-    "carry_forward": "Docs-only final result for the approved entry74.4 bounded v4 work. Source b4467a77 verified across all14 changed paths; local/CI JS839 and native97 pass, actual iOS/Android source and export-library compile pass. Real RN run39205556730 completes4 fixtures but mixed420 times out at8069.796ms with36pt native/adapter pending. V4 is unadopted and the bounded work is complete; no source changes or same-source reruns after the stop. Saved/exportv3, source5c44b252 save recovery and six live Piece migrations are retained. Formal admission, runtime and normal save/reopen remain incomplete."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v80",
+    "predecessor_blob": "eddaea0375d40f4791abc7bc0d1baebf8c4af87d",
+    "predecessor_head": "321ef6f64fe837019c7e6989c89e5d634ef2a224",
+    "carry_forward": "Read-only source investigation and an explicit, unapproved iOS preview v5 proposal in existing entry76/map65.24/weekly5.6.4. The completed and unadopted v4 source/result, original tests and STOP remain intact. V5 separates suffix-context exploration metrics from independent inspection of mounted selected lines; changes to B9 selection and unselected independent rejection require a new Mash decision before source effects. No implementation or test runs in this work."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "21556f9119bd4d5323dd043a77308e071143de9c",
-    "raw_sha256": "c9e114321b0c3b6da94e1fa99f23ad8443b3591f1d21da0cbc35792858704657",
-    "utf8_bytes": 235910
+    "git_blob_sha1": "111a620785279a92cab2e0bc5c5badc622cd5809",
+    "raw_sha256": "cfb569b3bead994b53e9f213f07b6f53c8286205d249302e5a6f61621229fa79",
+    "utf8_bytes": 255822
   },
   "current_premise": {
     "path": "Cocolon_前提資料/15L_cocolon_piece_workstream_pce9a_b01_closure_20260808.md",
@@ -93,7 +93,8 @@
     "pce9f_shared_legacy_write_retirement": "REMOTE_804BECA__EXPLICIT_SHARED_CANDIDATE_ONLY__NOT_LIVE_M5",
     "pce9c_initial_save_modal": "REMOTE_90CBD705__FIT_CALLBACK_FORWARDED__CI790_PASS__FORMAL_ADMISSION_NORMAL_SAVE_PENDING",
     "pce9c_initial_save_host": "REMOTE_90CBD705__CONDITIONAL_HOST_LOCAL_FIT_CONNECTED__CI790_PASS__FORMAL_PROVIDER_NORMAL_SAVE_DEVICE_PENDING",
-    "pce9c_ios_preview_v4": "BOUNDED_VERIFICATION_COMPLETE__JS839_NATIVE97_PASS__REAL_RN4_PASS_MAX420_TIMEOUT__V4_UNADOPTED"
+    "pce9c_ios_preview_v4": "BOUNDED_VERIFICATION_COMPLETE__JS839_NATIVE97_PASS__REAL_RN4_PASS_MAX420_TIMEOUT__V4_UNADOPTED",
+    "pce9c_ios_preview_v5": "PROPOSAL_ONLY__CONTRACT_DECISION_PENDING__NO_SOURCE_OR_VERIFICATION"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -175,7 +176,7 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "b4467a77877dd936c29845f2977a06bd61df84c1",
+    "cocolon_pre_sync_head": "321ef6f64fe837019c7e6989c89e5d634ef2a224",
     "mashos_api_head": "a536e50ee284785f585ac73329ef2947dca8bba9",
     "current_user_visible_piece_shape": "CANDIDATE_NORMAL_INPUT_V2_SAVED_SOURCE_ONLY__TUTORIAL_NEXUS_LEGACY_REMAIN__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
@@ -191,7 +192,7 @@
     "input_screen_source_connected": true,
     "live_auth_input_to_preview_to_device_verified": false,
     "database_evidence_owner": "live_db_apply_20261019",
-    "remaining_work_owner": "ios_preview_v4_20261019",
+    "remaining_work_owner": "ios_preview_v5_proposal_20261019",
     "product_acceptance": false,
     "piece_v2_default_application_registered": false,
     "piece_v2_quota_http_present": true,
@@ -246,18 +247,20 @@
     "piece_v2_server_disabled_save_recovery_scope": "Same saved owner/input/original key only; a fresh strict runtime publication reopens explicit replay with the original save body/key. Foreground and same-runtime flags cannot clear the stop. Source-harness verified; real initial-save acceptance remains false.",
     "piece_v2_ios_preview_v4_source_present": true,
     "piece_v2_ios_preview_v4_formally_adopted": false,
-    "piece_v2_ios_preview_v4_scope": "Explicit iOS preview only; source b4467a77 retained as an unadopted Draft candidate. All independent lines/advance/ranges retained, strict advance>W omits ink under an exact width-bound tagged contract. JS839/native97 pass; real RN3 previewv4 fixtures and savedv3 succeed, mixed420 times out before36pt B9/final inspection. Original8seconds, saved/exportv3 and Android existing routes retained. No source expansion or same-source rerun after the bounded stop."
+    "piece_v2_ios_preview_v4_scope": "Explicit iOS preview only; source b4467a77 retained as an unadopted Draft candidate. All independent lines/advance/ranges retained, strict advance>W omits ink under an exact width-bound tagged contract. JS839/native97 pass; real RN3 previewv4 fixtures and savedv3 succeed, mixed420 times out before36pt B9/final inspection. Original8seconds, saved/exportv3 and Android existing routes retained. No source expansion or same-source rerun after the bounded stop.",
+    "piece_v2_ios_preview_v5_source_present": false,
+    "piece_v2_ios_preview_v5_formally_adopted": false
   },
   "next_group": {
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
-    "environment": "WORK_SELECTED_BY_MASH",
-    "state": "IOS_PREVIEW_V4_BOUNDED_VERIFICATION_COMPLETE__UNADOPTED_MAX420_TIMEOUT__P_W1_PENDING",
-    "current_map_section": "65.23.1",
-    "current_entry_section": "75.2-75.3",
+    "environment": "CHAT_PRO_OK",
+    "state": "V4_UNADOPTED__V5_EXPLORATION_AND_SELECTED_LINE_INSPECTION_PROPOSAL_AWAITS_MASH_DECISION__P_W1_PENDING",
+    "current_map_section": "65.24",
+    "current_entry_section": "76",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
-    "weekly_review_section": "5.6",
-    "first_unfinished_work": "Determine a way to complete all420 characters within the original8seconds, including the unresolved36pt native/adapter work, B9, final Text inspection and PNG. The approved v4 bounded implementation/verification is complete and unadopted after run39205556730; do not repeat the same-source run or expand timeout/workers/omission conditions. Formal renderer supplier, explicit candidate API runtime, ordinary initial save and same-owner history/detail reopen, P-W2/P-W3 remain incomplete. Do not reapply the six existing Piece migrations or repeat the completed save recovery.",
+    "weekly_review_section": "5.6.4",
+    "first_unfinished_work": "Decide the explicit v5 contract difference in entry76.3-76.5 before any v5 source effects. No definite repair preserving all independent candidate metrics was identified. V5 proposes suffix-context representative metrics only for B9 exploration and independent5double plus TextKit inspection of every mounted selected line. The original8second report deadline, all text and font floors remain. Breaks/font/fit and detection of unselected independent anomalies may differ. The v4 bounded work remains complete and unadopted; no same-source rerun. Formal supplier into InputScreen, the accepted renderer on savedRecord reopen, explicit candidate API runtime and ordinary save/same-owner history-detail remain in P-W1. Retain six existing migrations and completed save recovery.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 6,
@@ -302,7 +305,10 @@
     "v4_scope_approved": true,
     "v4_bounded_work_complete": true,
     "v4_unadopted": true,
-    "v4_same_source_rerun_allowed": false
+    "v4_same_source_rerun_allowed": false,
+    "ios_preview_v5_proposal_owner": "ios_preview_v5_proposal_20261019",
+    "v5_scope_approved": false,
+    "v5_implementation_started": false
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -356,9 +362,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "1960e11f37823756270b40a2d7db49bdc4908d15",
-    "raw_sha256": "ea956a7fc3239eaca45c653be459c7b4cc9d1ad8dc104f72cf247247a057456f",
-    "utf8_bytes": 437056
+    "git_blob_sha1": "a2fca70a6863791e96cec20af5343ae123244306",
+    "raw_sha256": "010289a94fdd4044feab7d2415de837e30565aa6c3f702df897a0a8143a1218a",
+    "utf8_bytes": 442133
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -531,20 +537,25 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "DOCS_ONLY_BOUNDED_V4_FINAL_RESULT__UNADOPTED_MAX420_TIMEOUT",
-    "source_parent": "b4467a77877dd936c29845f2977a06bd61df84c1",
+    "classification": "DOCS_ONLY_MAX420_METHOD_AND_SAVE_CONNECTION_INVESTIGATION__V5_UNAPPROVED_PROPOSAL",
+    "source_parent": "321ef6f64fe837019c7e6989c89e5d634ef2a224",
     "api_reference_commit": "a536e50ee284785f585ac73329ef2947dca8bba9",
-    "source_scope": "Only the existing entry, manifest and Piece current map are updated with the completed bounded result. The5 product,5 test and1 workflow paths remain exactly at verified source b4467a77; no further source changes or reruns.",
+    "source_scope": "Existing entry, manifest, Piece current map and weekly review only. Product/test/workflow source remains at b4467a77; proposal effects are not implementation, approval, adoption or execution.",
     "product_source_changes": 0,
     "test_source_paths": 0,
     "workflow_paths": 0,
     "sql_source_changes": 0,
-    "piece_documentation_paths": 3,
-    "structure_map": "BOUNDED_V4_RESULT_AND_UNADOPTED_STOP__SECTION_65_23_1",
+    "piece_documentation_paths": 4,
+    "changed_paths": [
+      "Cocolon_Piece/00_read_first.md",
+      "Cocolon_Piece/manifest.json",
+      "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+      "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md"
+    ],
+    "structure_map": "OBSERVED_SAVE_CONNECTION_GAPS_AND_UNAPPROVED_V5_PROPOSAL__SECTION_65_24",
     "live_database_apply": 0,
     "business_rpc": 0,
     "private_piece_row_reads": 0,
-    "new_database_functions": 0,
     "migration_history_additions": 0,
     "signing": 0,
     "distribution": 0,
@@ -552,6 +563,8 @@
     "deploy": 0,
     "main_merge": 0,
     "release_effect": 0,
+    "test_runs": 0,
+    "same_source_reruns": 0,
     "product_acceptance": false,
     "automatic_progression": false,
     "verified_product_source_commit": "b4467a77877dd936c29845f2977a06bd61df84c1"
@@ -6210,5 +6223,158 @@
     "additional_source_changes_after_stop": 0,
     "same_source_reruns": 0,
     "manual_reruns": 0
+  },
+  "ios_preview_v5_proposal_20261019": {
+    "state": "PROPOSED_AWAITING_MASH_CONTRACT_DECISION__NOT_IMPLEMENTED_TESTED_OR_ADOPTED",
+    "entry_section": "76",
+    "map_section": "65.24",
+    "weekly_section": "5.6.4",
+    "execution_owner": "Karen / GPT-6 Astra Pro / CHAT_PRO_OK; root is the only writer",
+    "current_work_classification": "LEVEL_2 read-only technical investigation and documentation of an inactive proposal",
+    "proposed_implementation_classification": "LEVEL_3; Rule18 section0(4) and11.3 require a new decision for the contract difference",
+    "primary_outcome": "BLOCKER_NARROWED",
+    "scope_approved": false,
+    "implementation_started": false,
+    "source_commit": null,
+    "formal_adoption": false,
+    "basis": {
+      "cocolon_head": "321ef6f64fe837019c7e6989c89e5d634ef2a224",
+      "api_head": "a536e50ee284785f585ac73329ef2947dca8bba9",
+      "unchanged_product_source": "b4467a77877dd936c29845f2977a06bd61df84c1",
+      "previous_v4_owner": "ios_preview_v4_20261019",
+      "previous_v4_run": 39205556730,
+      "historical_suffix_entry": "69.1-69.2",
+      "historical_suffix_run": 38488415449,
+      "historical_suffix_report_ms": 5806.998,
+      "historical_suffix_native_mismatches": 8,
+      "historical_result_is_new_version_evidence": false,
+      "old_artifacts_retrieved_this_work": false
+    },
+    "observed_blockers": [
+      "Independent CTLine creation per representative remains the main unremoved repeated work; no definite large improvement preserving the complete independent metric contract was identified.",
+      "InputScreen supplies no formal isSaveAdmitted; the host requires both that supplier and the exact current preview/token local fit handle.",
+      "Saved rendering and export currently accept v3, so any new renderer admitted for saving also needs the same-version saved reopen path.",
+      "Candidate API construction code exists but actual deployment, effective flags, TTL/renderer and matching RN build remain unverified; migration existence is not runtime evidence."
+    ],
+    "proposed_versions": {
+      "preview": "piece.rn_native_preview.prototype.v5",
+      "candidates": "piece.native_candidates.v5",
+      "selected_line_inspection": "piece.native_selected_line.v1"
+    },
+    "proposal_scope": {
+      "platform": "ios",
+      "surface": "preview prototype only",
+      "product_paths": [
+        "ios/tempCocolon/PieceTextMetrics.mm",
+        "features/piece/pieceRenderer.js",
+        "features/piece/pieceMeasuredWrap.js",
+        "components/piece/PieceVisualCard.js",
+        "features/piece/pieceLayout.js"
+      ],
+      "test_paths": [
+        "tests/piece-v2-renderer.test.js",
+        "tests/piece-v2-measured-wrap.test.js",
+        "tests/native/piece-text-metrics-ios.mm",
+        "tests/native/piece-rn-canvas-entry.js",
+        "tests/native/piece-rn-canvas-fixtures.cjs"
+      ],
+      "workflow_path": ".github/workflows/piece-rn-contracts.yml",
+      "workflow_change_limit": "Only necessary existing native assertion-count/result collection synchronization; no new workflow",
+      "documentation_paths": [
+        "Cocolon_Piece/00_read_first.md",
+        "Cocolon_Piece/manifest.json",
+        "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+        "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md"
+      ]
+    },
+    "exploration_contract": {
+      "all_grapheme_ranges": true,
+      "enumeration_order": "start ascending, then end ascending",
+      "cache_key": "exact UTF16 substring and every pointwise attribute; hash is lookup only",
+      "retained_key_limit": 16384,
+      "retained_utf16_unit_limit": 4194304,
+      "cache_hit": "metrics from the retained first matching representative range suffix context",
+      "cache_miss": "metrics from this range suffix context; budget-exhausted new keys are not retained",
+      "semantics": "Exploration representatives, neither independent metrics of each range nor suffix metrics of every original occurrence. Enumeration order and cache budgets are appearance-relevant versioned semantics.",
+      "method": "measureExplorationCandidates(tag,text,fontSize)",
+      "wire_fields": [
+        "version",
+        "platform",
+        "font_size",
+        "utf16_length",
+        "boundaries",
+        "glyph_check",
+        "metric_count",
+        "metrics_f64le",
+        "row_indices_u32le"
+      ],
+      "metrics": "All representatives carry full advance,left,top,right,bottom f64le; all range references retained",
+      "v4_ink_omission_combined": false,
+      "max_workers": 4,
+      "typesetter_ownership": "worker-exclusive; original call deadline includes queue wait"
+    },
+    "selected_line_contract": {
+      "method": "inspectSelectedLine(tag,text,fontSize)",
+      "wire": "Existing10 inspection fields with explicit new version plus independent_metrics_f64le, exact11 fields; independent payload is40bytes for5doubles",
+      "line_ends": "exactly [expected.length]",
+      "attributes": "Complete attributes of the actual mounted selected Text, not an unverified claim of equality with the probe paragraph substring",
+      "independent_line_reuse": "Read5values before releasing the independent CTLine already created by final glyph inspection; no extra bridge call or measurement pass",
+      "strict_width": "max(advance,right)-min(0,left) <= contentWidth",
+      "strict_height": "bottom-top <= lineHeight; branding uses its own28pt/40lineHeight",
+      "validation": "finite values, advance>=0, ordered ink, unchanged whitespace/null oracle rules plus every existing TextKit, glyph, text, paragraph, grapheme, rewrap and own-view containment check",
+      "positioning": "Keep TextKit ink and onTextLayout placement; do not use baseline-relative CTLine coordinates as view coordinates",
+      "identity": "Same current key,binding,plan,token,generation,node set before and after awaits and state publication",
+      "same_font_replan": false,
+      "geometry_failure": "Only the existing next catalog font for valid geometric overflow; existing invalid glyph/value/identity/bridge/rewrap/deadline refusal remains"
+    },
+    "accepted_difference_requested": [
+      "Independent invalid advance/ink of unselected candidates is no longer exhaustively detected.",
+      "B9 metrics affect not only width and scoring but bridge/determiner/viewpoint/kana/duration grouping hints; selected-line inspection cannot restore old optimal selection.",
+      "Breaks, selected font and fit/unavailable may differ; an input drawable by the old independent search may be rejected or use a smaller font.",
+      "A null exploration result is not proof that no independently measured layout fits."
+    ],
+    "verification_proposal": {
+      "old_js_and_native_baseline_retained": true,
+      "old_native_checks": 97,
+      "old_pure_b9_oracle_cases": 25,
+      "old_expected_values_unchanged": true,
+      "new_contract_checks": "Complete range/attribute/reference coverage, deterministic representative/cache budget semantics, strict version/field/finite checks, actual selected-line5doubles bit-equal to the uncached independent oracle, exploration-fit/independent-overflow negative cases, glyph and lifecycle failures",
+      "old_suffix_mismatch_inputs": "Preserve original8 failures and attributes; compare new exploration/B9 choice and selected-line dimensions/drawing. Native-only attributes are tested in native/UIKit, RN-representable inputs on the real RN path.",
+      "real_rn_existing_fixtures": 5,
+      "real_rn_execution_limit": 1,
+      "original_text_recipe_order_and_assertions_retained": true,
+      "timing": "Original card deadline plus existing report.elapsed_ms <=8000 including native_checked, all inspection and local fit checks. Capture occurs after this report; successful matching PNG is separately required. Do not claim PNG file generation completed within8seconds.",
+      "actual_images_must_be_read": true,
+      "can_save": false,
+      "can_export": false,
+      "current_work_test_runs": 0
+    },
+    "stop_condition": "V5 remains unadopted if420 does not reach native_checked, all inspection and same-token local fit within the existing8000ms report budget, matching PNG cannot be obtained/reviewed, visible regressions occur, or current-mounted selected-line binding fails. No automatic same-source rerun, deadline/worker increase, character deletion, candidate pruning, same-font replan or silent version substitution.",
+    "save_followthrough": "Within the same P-W1 completion unit, fix accepted renderer identity/platform/layout/measurement/catalog, supply formal isSaveAdmitted into InputScreen, require its matching local fit, support the accepted renderer on savedRecord reopen, and reuse existing controller/API and same-owner detail/history GET. Explicit runtime configuration remains a dependency. P-W2 then connects existing export in normal detail to that same savedRecord.",
+    "excluded_effects": [
+      "formal renderer adoption/supplier activation",
+      "saved/export v5 implementation",
+      "API changes",
+      "DB write or migration replay",
+      "business RPC/private rows",
+      "flags/env/deploy",
+      "new service/dependency/payment configuration",
+      "signing/distribution/main merge"
+    ],
+    "supabase_read_only_check": {
+      "scope": "migration history only",
+      "total_migrations": 10,
+      "piece_migrations": 6,
+      "newest_piece_versions": [
+        "20261019021118",
+        "20261019021121"
+      ],
+      "reapply": 0,
+      "schema_or_function_reverification": false,
+      "runtime_acceptance": false
+    },
+    "read_only_review": "Rendering and save-path reviewers checked the proposal against existing source. Root verified the source points and corrected the timing boundary: report is fixed before capture. No source/test/DB effects or formal independent-model review credit.",
+    "remote_verification_scope": "Compare all4 document contents, exact commit path set and final branch head after reflection. Entry and map digests above bind this proposed text; report final commit externally to avoid a self-reference.",
+    "automatic_progression": false
   }
 }
