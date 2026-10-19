@@ -648,11 +648,19 @@ source `b983da2d3ba5ffd7d9f78a2b9e8d2b0574b5b5b1` のlocal／CI既存13 JS suite
 
 実装は製品5＋検査6＋workflow1＋文書4の16path、結果反映は既存4文書だけ。API／DB／flags／env／deploy／署名／配布／main merge効果0。P-W1の正式supplier・同採用版saved再表示・candidate稼働・通常保存→同owner再表示は未完了で、P-W2／P-W3と10/20方式判断・10/31管理線・12/18目標の再評価は今回行いません。正式admission・商品／物理実機受入れfalse、automatic_progression=falseを維持します。
 
-#### 5.6.6 10/19の新しいPiece残件指示 — RTL横描画領域のv6修復
+#### 5.6.6 10/19のPiece残件 — v6の横描画は部分改善、縦方向未達で未採用
 
-P-W1の最初の未達に接続し、現指示とRule18 LEVEL_2により既存契約内の修復を進めます。実Textの負の左inkは外側移動だけではown-view内へ戻らないため、選択済み本文の横padding=既存marginと逆方向位置補正で、元の組版幅888/864・本文幅・余白を保持する明示iOS preview v6を実装しました。native v5候補/選択行v1・全range・独立5値・元8秒・旧版は維持します。
+P-W1の最初の未達に接続し、現指示とRule18 LEVEL_2により、実Textの横padding=既存marginと逆方向位置補正を明示iOS preview v6で実装しました。[source0033ee36](https://github.com/MassyuRed/Cocolon/commit/0033ee3662b7ae76db8efa0c2cadf177be7776ca)は製品3file／test4file／既存文書4fileのみ。native v5候補・選択行v1・全range・独立5値・元8秒・旧版を保持し、新sourceの[実RN run39254155962 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39254155962)を一度確認しました。
 
-local13 suiteは既存880＋v6回帰8=888成功。現段階では新source一度の実RN基準Card5/補足Card3/raw3と同状態PNGが未確認です。入口§78・current map §65.26・manifest v6 ownerへscopeと実装差を同期しました。失敗時は該当値を記録し未採用で停止し、同source再試行/期限延長/判定緩和で通しません。旧v5 §5.6.5の未採用STOPを保持し、正式admission/採用版saved再表示/実candidate API/通常初回保存→同owner詳細・履歴は未完了です。既適用DB6件の再適用や無関係な準備作業は行いません。
+local／CI JSは既存880＋回帰8＝888成功、native129（旧97含む）とiOS／Android source compile成功。export依存compileは変更なしでSKIPです。一方、実RNは元Card3/5、補足Card0/3、raw3/3でfailure。全11reportと同状態PNG6枚を実取得・照合・目視しました。元5のうちessay／declaration／saved v3は成功しましたが、preview2件は44／56ptへfallbackし、旧版のfont／行数維持とは言えません。
+
+raw Hebrew／mixed bidiは実view1080×75・内幅888の中へ収まり、位置反映後も既存の余白条件を満たしました。ただし本文下限未満の診断であり、Piece保存の成果には数えません。quote／Latin／両420はonLayout snapshotのbox高がink下端87／76／56を微小に下回り、既存のstrict own-view判定で拒否されました。両420の本文・groups・独立値・正規化TextKit inkはv5最終値と一致しても、今回のaccepted inspection／current fit／PNGはありません。追加fixed heightがRN自然計測経路を外す構造を確認しましたが、単独解除の効果は未検証です。
+
+Arabicは最小56ptでTextKit高84.51171875がlogical行高76を8.51171875超えています。独立CTLine高57.61328125は収まるため、両者を置換せず、微小なbox誤差とは別の未達として扱います。Arabicも画像未生成です。失敗5 Cardが8秒内に終了したことは、8秒内に描画できたことを意味しません。
+
+**v6は未採用STOP。限定実装・一度の検証・結果記録は完了しましたが、RTL修復全体・v6の420条件・正式admission・通常保存は未成立です。** 次の製品上の最初の作業は、既存RN／TextKitの縦描画とbox実測の修復です。特にArabicのusedRect／glyph bounding rect／baseline／fallbackのどこが差を作るかは未確定です。その後も、既存renderer ownerの版固定・採用版saved再表示・InputScreenから既存hostへの正式admission供給・既存controller/APIによる通常保存→同owner詳細/履歴が残ります。接続source準備に物理実機の事前gateを追加しません。
+
+入口§78.3〜78.4・current map §65.26.1・manifest v85へ全11report、失敗値、画像確認範囲と次の再開位置を同期しました。旧v5 §5.6.5の成功／未採用STOPは履歴として保持します。結果後の製品／test／workflow追加変更・同source再試行・期限延長・包含/行高緩和0。API／DB／flags／env／deploy／署名／配布／main mergeの効果0。既適用DB6件の再適用や無関係な準備の反復は行いません。
 
 ## 6. 議題6 — 今回の指摘に対する判断と、記録の責任
 

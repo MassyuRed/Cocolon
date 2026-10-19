@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は§78／current map §65.26／weekly20261017 §5.6.6です。新しいPiece残件指示に基づくLEVEL_2のRTL描画領域修復を明示iOS preview v6として実装しました。実Textの左右paddingと位置補正により元の組版幅・本文幅・余白を維持します。local JS888（既存880＋v6回帰8）は成功。新sourceの一度の実RN・全11report・完成PNGはこれから確認するため、修復成立・正式admission・通常保存の完了はまだ未確認です。旧v5の結果・未採用STOPは§77の履歴として保持します。**
+**最新結果は§78.3〜78.4／current map §65.26.1／weekly20261017 §5.6.6です。明示iOS preview v6の横描画領域修復をsource 0033ee36へ反映し、一度の実RNと全11report・完成6枚PNGの確認を終えました。local／CI JS888・native129・iOS／Android source compileは成功。raw Hebrew／mixed bidiは余白内へ改善しましたが、元Card3/5・補足Card0/3で、quote／Latin／両420の高さ境界拒否とArabicのTextKit行高超過が残りました。v6は未採用STOP、RTL修復全体・420条件・正式admission・通常保存は未成立です。同source再実行・結果後の製品／test／workflow追加変更0。§78.1〜78.2の結果待ちは実行前の履歴です。**
 
 ### §77時点の要約（履歴）
 
@@ -2003,3 +2003,54 @@ permission basisは現指示とRule18 §11.3 LEVEL_2、weekly §5.6.2〜5.6.3。
 
 既存実RN harnessは全文/recipe/順序/5+3+3分母・旧assertionを保持し、preview版だけv6、savedはv3のままです。captureで実view bounds/contentFrame/TextContainer寸法を確認します。raw成功reportは配置setStateのcommit確認後に公開し、拒否値は既存operationからのみ保持します。追加native pass・新製品記録owner・workflow変更はありません。実RN結果とPNGの確認前であり、この時点の状態はV6_SOURCE_READY__ONE_RUN_PENDING__NOT_ADOPTEDです。
 
+### 78.3 一度の実RN・実画像の結果 — v6は未採用
+
+sourceは [`0033ee3662b7ae76db8efa0c2cadf177be7776ca`](https://github.com/MassyuRed/Cocolon/commit/0033ee3662b7ae76db8efa0c2cadf177be7776ca)、tree f576f10bb75ec8003b7ae51ed388e93409c98163です。変更集合は§78.1の11pathだけで、remote全内容を準備原文と照合済みです。このpushから起動した既存[run39254155962](https://github.com/MassyuRed/Cocolon/actions/runs/39254155962)、attempt1だけを使用しました。
+
+| 検査owner | 同sourceの実結果 |
+|---|---|
+| piece-rn-contracts／job118065114470 | CI JS888 PASS、FAIL／cancel／SKIP／TODO 0。既存880＋回帰8。local888と加算しない |
+| piece-ios-source／job118065114582 | 製品Objective-C++ compile・project lint成功。旧97＋新v5 32＝native129 PASS、FAIL／SKIP 0。製品native blobは旧030e527024433494c2a4b985164220d980a2d7baを保持 |
+| piece-android-source／job118065114545 | 既存Android bridge source compile成功。Android v6描画の証拠ではない |
+| piece-export-pods／118065114125、piece-export-android／118065114465 | job成功。ただし依存変更なしのため依存compileのstepはSKIP。export compileを今回再実行したとは扱わない |
+| piece-ios-rn-canvas／job118065114426 | 全11reportを回収し、exit65／failure。baseline3/5・supplemental0/3・raw3/3。完成PNG6枚 |
+
+[実RN job118065114426](https://github.com/MassyuRed/Cocolon/actions/runs/39254155962/job/118065114426)のcheckoutは上記sourceと一致します。元Card5・補足Card3・raw診断3の名前／順序／本文／recipe／分母を維持しました。全11でbody_preserved=true、elapsed_msは8000未満ですが、拒否して8秒内に終了した5件は8秒内描画成功ではありません。時刻は従来どおりfit照合後・PNG生成前です。
+
+| 集合／case | 判定 | elapsed_ms | 最終font／本文行数 | accepted検査／PNG |
+|---|---|---:|---|---|
+| baseline essay_paragraphs | native_checked | 5786.850791 | 44pt／3行 | 4／あり |
+| baseline quote_unicode | native_ink_overflow | 1167.024541 | 64pt／3行 | 0／なし |
+| baseline declaration_no_brand | native_checked | 872.482834 | 56pt／3行 | 3／あり |
+| baseline essay_max420 | native_ink_overflow | 4987.793458 | 36pt／18行 | 0／なし |
+| baseline saved_essay_canvas（v3） | native_checked | 349.904333 | 48pt／5行 | 6／あり |
+| supplemental suffix_latin_ligature | native_ink_overflow | 287.480333 | 56pt／1行 | 0／なし |
+| supplemental suffix_arabic | native_ink_overflow | 356.839667 | 56pt／1行 | 0／なし |
+| supplemental suffix_max420_a | native_ink_overflow | 2178.468042 | 36pt／17行 | 0／なし |
+| raw suffix_spaces_raw | measurement_checked | 98.538000 | 48pt／1行 | 1／あり |
+| raw suffix_hebrew_raw | measurement_checked | 90.377375 | 48pt／1行 | 1／あり |
+| raw suffix_mixed_bidi_raw | measurement_checked | 103.214875 | 48pt／1行 | 1／あり |
+
+成功previewはessay／declarationの2件だけで、同tokenのsave_fit_current=true、wrong-token=false、handle keys=[isCurrent]を確認しました。失敗preview5件とsaved v3はhandleなしです。全Card8件のstate_can_save／state_can_exportはfalse。rawには保存／export状態やfit handleがなく、診断を正式admissionやPiece保存へ換算しません。essayは旧48pt／5行から44pt／3行、declarationは旧72pt／5行から56pt／3行へfallbackしたため、成功2件でも旧表示を維持したという結論は出せません。
+
+**高さ境界での拒否。** quoteの最終body index2ではonLayout box高86.99998474121094に対してink下端87、Latin index0は75.99998474121094に対して76です。両420のbody index1／4／8／14も、box高55.99998474121094／55.999996185302734／55.99999237060547／55.999969482421875に対し、ink下端は56です。記録値でのown-view超過は下端だけで、独立5値・元本文幅・glyph・wrapの条件は通っています。両420のgroups・選択行独立5値・paddingを引いたTextKit inkはv5最終値と同じです。mixed420はrejected inspection19件、あ420は18件を同じ最終operationから記録しましたが、accepted inspection／current fit／完成PNGはありません。
+
+このboxはonLayoutで得たsnapshotの値です。既存decoderはnative wireのboxとの±0.5の整合確認後、このsnapshot高でink包含をstrict判定します。失敗時のnative wire高さそのものは残らないため、失敗した全UIView.boundsも同じ小数高だったとは断定しません。§78.1の「縦方向保持」は実装時の意図であり、実際の高さを維持したという証拠ではありません。新しいheight=lineHeightはRN/Yogaの自然Text計測を外す構造です。pinned RNの自然計測にはusedRectのpixel切上げ＋0.001、Yogaには絶対上下端を個別に丸めてから差を取る処理があります。固定高によって小さな不足が露出した説明はsourceに支持されますが、heightだけを解除した比較実行はなく、唯一原因・解除だけでの治癒は未確認です。
+
+**Arabicの別の縦方向超過。** 最小56pt／lineHeight76で、本文raw TextKit inkは[83.12109375,0,421.5358552932739,84.51171875]です。paddingを引くと[-12.87890625,0,325.5358552932739,84.51171875]となり、元の式による横幅338.4147615432739は888以内、raw左端もown-view内へ戻りました。一方、TextKit高84.51171875はlogical lineHeight76を**8.51171875**超えます。独立CTLine高57.61328125は76以内ですが、TextKitを置き換える根拠にはしません。記録box高75.99998474121094を正確な76へ直しただけでも行高／own-view両条件は失敗します。brandingはoverflow=falseで、今回の最終拒否は本文です。Arabicには完成PNGとnative capture geometryがなく、実画素の見た目は未確認です。
+
+**raw RTLの改善。** spaces／Hebrew／mixed bidiの3件すべてで、原文とnative_textsの一致、same_selected_text_node、1行の独立検査、diagnostic_valid／native_canvas_validを確認しました。実native viewは1080×75、contentFrame=[96,0,888,75]、TextContainer=888×75です。Hebrewのlocal inkは[84.9609375,0,316.96875,75]、位置反映後canvas inkは[95.9609375,96,327.96875,171]。mixedは[73.5234375,0,441.6796875,75]／[95.85677146911621,96,464.0130214691162,171]。rawLeftのstate commit後の描画で、own-viewと既存canvas余白許容差0.5の両方を満たします。本文下限未満の診断文字列であり、Arabic Cardや全RTLの成立を代用しません。
+
+artifact12187029713は94,755,619 bytes、SHA256 3ebd2177400a715c811e42f5f2ce77c6be94aafd351c6836d5a7692021b60890です。ZIPを実取得してdigest一致を確認し、results.jsonの全11objectがジョブログ全文配列と一致しました。今回のジョブログにPIECE_RN_CASE markerはなく、results.jsonの配列から抽出した記録です。manifestに11report全値・log/result/PNG hashを保持します。元artifactの期限は2026-10-26T13:07:08Zで、PNG binaryを文書へ複製したものではありません。
+
+完成6枚を原寸で目視しました。essay／saved v3は1080×1350、declarationは1080×1920で、本文・段落・余白・branding有無を確認し、明白な文字切れは見られませんでした。raw3枚は1080×320で、Hebrew／mixed／spaceを含む元文字列の描画と余白を確認しました。失敗Card5件のPNGは存在しません。目視は上記画像に限定し、端末matrixや未生成のArabic／420画像を合格にしません。
+
+### 78.4 採否・次の製品上の未完了
+
+**V6_UNADOPTED_STOP。** 限定した実装・一度の実RN・結果確認は完了しましたが、横paddingの部分改善だけでRTL修復を完成扱いにしません。v6の420条件は不成立で、v5の過去成功は§77に残す履歴です。sourceは未採用のDraft候補として保持します。結果後はこの入口／manifest／current map／weeklyの既存4文書だけを更新し、製品・test・workflowの追加変更、同source再実行、8秒／包含／行高の緩和は0です。
+
+次の最初の製品作業は、既存Card／RN／TextKitで縦方向の描画と実測boxが食い違う原因の確認・修復です。固定heightによる自然計測回避の影響と、ArabicのusedRect高76に対するboundingRectForGlyphRange高84.51171875を別々に追います。baseline offset、原fontとfallback glyph、行fragmentと実描画範囲のどれがArabicの直接原因かは未確定です。自然計測へ戻す案は横の内幅を保てる構造ですが、contentFrame高がlogical lineHeightと±0.01で一致するというv6 harnessの前提まで維持できるとは限りません。TextKitを独立CTLine値へ置換したり、欠けを許容して通す方針にはしません。
+
+描画の未達解消後に残る本線は、既存renderer ownerで版／platform／layout-measurement／catalogを固定し、採用版のsaved再表示を揃え、InputScreenから既存hostの正式isSaveAdmitted供給と同mount/token fitを接続することです。既存controller／APIによる通常初回保存→同owner詳細GET・履歴再表示は未完了です。flags／TTL／renderer値だけでnative admissionを代用せず、saved v3の成功をsaved v6の証拠へ換算しません。新controller／DTO／schemaの再作成や既適用DB6件の再適用は不要です。物理端末受入れを接続source準備の事前条件に増やしませんが、正式商品採用・稼働切替・署名配布・main mergeとは区別します。
+
+この結果反映でAPI／DB／実flag／env／deploy／署名／配布／main mergeの効果0、正式admission／通常保存／physical acceptance=false、automatic progression=falseを保持します。current map §65.26.1・weekly §5.6.6・manifest v85を同じ結果単位で同期します。

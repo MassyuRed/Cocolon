@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§78／本map §65.26／weekly §5.6.6です。RTLの負のinkを実Text内へ収めるv6横padding修復を既存3製品fileへ実装しました。組版幅888/864・本文幅・余白・旧native v5計測は保持。local JS888成功、新sourceの一度の実RN・完成PNGは未確認です。旧v5の未採用STOPは履歴として保持し、正式admission・通常保存は未完了です。**
+**最新結果は入口§78.3〜78.4／本map §65.26.1／weekly §5.6.6です。source0033ee36のv6はlocal／CI JS888・native129・source compile成功。一度の実RNは元Card3/5・補足Card0/3・raw3/3でfailure。raw Hebrew／mixed bidiの横包含は改善しましたが、quote／Latin／両420は実測boxの高さ境界で拒否、ArabicはTextKit高が行高を8.51171875超過しました。完成6枚だけを目視確認。v6は未採用STOP、RTL修復全体・420・正式admission・通常保存は未成立です。結果後の製品／test／workflow追加変更・同source再実行0。**
 
 ### §77時点の結論（履歴）
 
@@ -2860,3 +2860,20 @@ STRUCTURE_MAP_DELTA_PRESENT。開始head b91cf471、実行owner華恋、現指�
 | tests/native/piece-rn-canvas-entry.js・fixtures.cjs・ios.m | 同11fixtureのpreview版と横配置を更新。実native内幅、元余白、旧assertionを保持し、既存拒否inspectionの観測を追加 |
 
 native製品source/decoder/workflow/DB/APIは変更なし。probe/prefetch/branding、縦方向、全文/glyph/一行、own-view raw ink、元本文幅、独立5値、同node/token/generation、元8秒を維持。新source一度の実RNとPNGは未確認であり、修復成立/正式admission/通常保存のcreditはまだない。旧65.25/65.25.1はv5の履歴結果です。
+### 65.26.1 v6の一度の結果・縦方向の未達を次の再開位置へ固定
+
+[source0033ee36](https://github.com/MassyuRed/Cocolon/commit/0033ee3662b7ae76db8efa0c2cadf177be7776ca)／[run39254155962 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39254155962)で、local／CI JS888、native129（旧97含む）、iOS／Android source compileが成功。export依存compileは変更なしでSKIPです。実RN job118065114426は11件回収してfailure、元Card3/5・補足Card0/3・raw3/3。sourceと11pathをremote全内容照合済みです。§65.26の未確認はsource時点の記録で、ここを現在の採否に使います。
+
+| 現在の責任箇所 | 結果と次の扱い |
+|---|---|
+| PieceVisualCard.jsのv6 selected body Text | 外幅1080・横paddingでraw Hebrew／mixedのown-view左負値を解消。実raw view1080×75／内幅888を確認。追加height=lineHeightは自然Text計測経路も変えるため、従前と同じ実高さを保つという説明は撤回 |
+| features/piece/pieceRenderer.jsの既存decoder（今回未変更） | native wireとの整合後、onLayout snapshot boxでstrictなink包含を判定。quote／Latin／両420は下端だけ超過。失敗時wire高さは未記録なので、実UIView.boundsも同じ微小値だったとは断定しない |
+| 既存pinned RN／Yoga | 固定幅・固定高では自然measureを省く。自然measureのpixel切上げ＋0.001と、絶対上下端の丸め差を確認。固定heightが微小不足を露出した説明はsource支持の原因候補で、単独解除による治癒は未実証 |
+| 既存RN TextKit／PieceTextMetrics | Arabicは最小56ptでlogical行高76に対しTextKit高84.51171875。独立CTLine高57.61328125は収まるが代用不可。次はusedRect／glyph bounding rect／baseline／fallbackの実描画因果を確認 |
+| 既存RN harness | 同operationの最終拒否値を保持し、成功3 Card＋raw3のみ6 PNGを生成。失敗5 Cardに画像なし。全report／hash／画像目視範囲は入口78.3とmanifestに集約 |
+
+両420は36pt18行／17行まで進み、本文・groups・独立5値・正規化TextKit inkはv5最終値と同じですが、行index1/4/8/14のsnapshot高が56を微小に下回り、ink下端56をstrict比較で拒否しました。quoteは86.99998474121094<87、Latinは75.99998474121094<76です。Arabicは微小差とは別に8.51171875の行高超過があり、正確なbox高76だけでは解消しません。essay／declarationの成功時fontも44／56ptへfallbackしたため、旧表示維持の成立ではありません。元8秒未満の失敗を時間内描画成功へ換算しません。
+
+V6_UNADOPTED_STOP。raw RTLの改善は診断の部分成果です。成功preview2件の同token fitとsaved v3は、通常InputScreen保存・saved v6・正式admissionの証拠ではありません。全CardのcanSave/canExport=false。次の最初の作業は上記縦描画／実測boxの修復で、その後に既存renderer ownerの採用版・saved再表示・InputScreen→host正式admission・既存controller/API→同owner詳細/履歴を接続します。source準備に物理実機を前置する追加gateは設けず、商品採用・稼働切替は未完了のままです。
+
+結果同期は既存4文書だけ。製品／test／workflow追加変更、同source再実行、DB/API/flag/env/deploy/署名/配布/main merge効果0。STRUCTURE_MAP_DELTA_PRESENTのownerは本節、詳細とSTOPは入口78.3〜78.4、P-W1はweekly5.6.6、機械読取はmanifest v85のios_preview_v6_20261019です。
