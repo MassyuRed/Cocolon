@@ -10,6 +10,10 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
+**現在の作業は入口§83／current map §65.31／weekly §5.6.11／manifest v94です。18:22:22 JSTの再開指示を受け、前回結果commit21ad068を新鮮照合しました。リンク修復済み・native175未検証・v9未採用を引き継ぎ、既存workflowへinstall／launch到達点のHOST_STAGE3行だけを加えた新sourceを一度確認します。製品・test・判定・時間上限は不変で、正式admission・通常保存は未完了です。**
+
+### §82時点の結果（履歴）
+
 **最新結果は入口§82.3〜82.6／current map §65.30.1／weekly §5.6.10.1／manifest v93です。source972205c8の6path全文読戻しと一度のCIを確認しました。前回のリンクエラーは解消し、JS915・実RN11条件が成功、元PNG11枚は前回v9とバイト同一です。ただしnative175件はsimctl起動境界の取消で全件未検証。Arabicの1px差は独立Text layerのlocal／placed描画でも再現し、placed layer境界は完成PNGと一致しました。差の発生段階は絞れましたが、実描画の包含保証・正式admission・通常保存は未完了です。v9未採用を維持します。**
 
 ### §81時点の結果（履歴）
@@ -2463,3 +2467,32 @@ PCE-5の一般契約を「全PNGのpixel完全一致必須」へ変更しませ�
 結果反映は既存4資料だけです。manifest v93の`ios_preview_v9_link_repair_20261020`へ全11report、各PNG/hash、native到達点、Arabic比較、元CI metadataを集約します。Rule14／17に従い、今回の元PNG11枚・raw results.json・必要ログとledgerをlossless tar.gz/base64 bundleとして同recordに保存します。新file／helper／ownerは0です。元Actions ZIPはartifact12250972261、3,206,417 bytes、SHA256 `880ae6746b62deac71f85577feffc8cb9d50cb081c7d002702291e3f87eaa875`、期限は10/27ですが、採用判断に使う最小証拠bytesを期限付きURLだけに依存させません。
 
 Supabaseは開始時のread-only migration履歴（全10／Piece6）の照合だけで、DB apply／業務RPC／本人行読取0。今回の結果後は製品／test／workflowの追加変更0、再CI0、API／runtime／環境／署名／配布／deploy／main merge 0です。source時点の§82.1〜82.2と旧v9結果ownerは履歴として保持します。構造はSTRUCTURE_MAP_DELTA_NONEです。
+
+## 83. 2026-10-20 再開：native install／launch境界の最小診断（source時点）
+
+### 83.1 再開地点と今回の限定範囲
+
+Mash様の18:22:22 JST「処理落ちしているから、続きから再開して」を受け、前回結果commit **21ad068cb9605d1e4945b3dbe38259690fabe924**／tree **16bf672fed83f2fef3481b93407fd38702efeb47**がPR30の最新であることをfresh確認しました。前回のsource972205c8・run39392217445・30件lossless証拠は保存済みで、旧単位のSTOP・回数・v9未採用を保持します。全体設計01・全ファイル地図01A〜C・最新weekly20261017・現行Piece ownerから、最初の未完了はnative175件の観測と実layer包含保証であることを再確認しました。
+
+実行modelはGPT-6 Astra Pro、環境はCHAT_PRO_OK、分類はLEVEL_2です。現在の再開指示、Rule18 §0／§11.3のstanding delegation、weekly §5.6.2、入口§82.5の未適用案を根拠に、華恋rootを単一writerとして同じ検証目的内の診断を実施します。一般の次Gateや保存開放へ進む承認には扱いません。
+
+| 項目 | 今回固定する内容 |
+|---|---|
+| 対象／保存先 | MassyuRed/Cocolon、既存branch agent/three-core-cmee-current-structure-20260815、Draft PR30 |
+| 変更path | .github/workflows/piece-rn-contracts.yml と本入口・manifest・Piece current map・weekly20261017の既存5path。新file0 |
+| 実行差分 | bootstatus帰還後、install帰還後、launch終了status採取とset -eの後へHOST_STAGE各1行。終了status直前には追加しない |
+| 条件保全 | pipeline／pipefail、summary parser、job10分、main後alarm90秒、旧97＋v5追加32＋v9追加46、fixture・元8秒・厳密包含を保持 |
+| CI | 変更した新sourceの既存push CIを一度。workflow自身がscope判定対象のため、JS／native／RN canvasに加え、前回skipだったexport Pods／Android依存compileも実行対象 |
+| 完了条件 | 5path remote全文読戻し、marker・main／budget到達点と元job全体ログを保存。3summary・175件の実測または停止境界を確定し、既存job・RN report／元PNGの結果と残件を既存4資料へ保存・再取得 |
+| STOP | 同source再実行・旧run再開・上限変更・fixture削減・比較緩和・追加修復へ自動進行しない。未達は未検証として残し、正式admission／save／exportを開放しない |
+| 費用・時間 | 新規購入・依存・外部service・Mash操作0。既存CI使用量は増加、請求額未確認。前回18分31秒は参考値で、今回は既存export依存検証も実行対象のため所要時間の保証にしない |
+
+3つのmarkerはlaunchのteeの外にあります。native-metrics.logだけでなく元job全体ログを保存します。install_beginはbootstatus正常帰還、launch_beginはinstall正常帰還、launch_endはpipeline帰還と取得済みstatusを示します。launch_end status=0だけで合格にせず、LEGACY_NATIVE_CHECKS=97、NATIVE_CHECKS=129、V9_NATIVE_CHECKS=46／EXPECTED=46、FAIL／SKIP0を全て観測します。bootstatusのFinished出力と正常帰還も区別します。
+
+STRUCTURE_MAP_DELTA_NONE。製品・native test・RN test・依存・API・DB・runtime・環境値・署名・配布・deploy・main mergeの変更0です。Supabaseは前回確認のPiece6migrationを参照し、今回のDB metadata再取得・適用・業務RPC・本人行読取は0です。旧§82の結果とmanifest ownerは上書きしません。
+
+### 83.2 source時点の確認と未実施事項
+
+実行差分はprintf3行だけで、それらを除くworkflow全文は開始時と同一です。既存native stepのbash構文と、status採取・pipefail・main後alarm・175件の既存判定を確認しました。nativeのNATIVE_CHECKS=129を175へ書き換えず、v9独立summaryと合わせて評価します。sourceの公開、新CI、実ログ・全画像の確認はこのsource時点で未実施です。
+
+Arabicの1px差、opacity0時点のbacking、全入力に対する実Text layer包含は未解決です。正式renderer採用、採用版saved、InputScreenのisSaveAdmitted供給、通常保存→本人GET／履歴、実機受入れはこの単位の完了へ含めません。

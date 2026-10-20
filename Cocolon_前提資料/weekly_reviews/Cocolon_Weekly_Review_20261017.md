@@ -746,6 +746,14 @@ source972205c8をPR30へ反映し6path全文を照合、一度のCI39392217445 a
 
 入口§82.3〜82.6／current map§65.30.1／manifest v93を同時更新し、元PNG・raw report・必要ログは既存manifest内のlossless bundleへ保存します。旧run未採用STOP・旧証拠は上書きせず、今回もv9未採用。追加製品/test/workflow変更・再CI・DB apply・runtime変更・配布・deploy・main mergeは0です。
 
+### 5.6.11 10/20 18:22再開 — native検証の停止境界を識別する
+
+18:22:22 JSTの「続きから再開して」を受け、GitHub最新head21ad068と保存済み前回結果を照合しました。前回作業は失われておらず、リンク修復済み・native175未検証・Arabic実layer包含未解決・v9未採用を引き継ぎます。今回の一単位は、入口§82.5で未適用だった既存workflowのHOST_STAGE3行を追加し、新sourceでinstall／launch境界を一度観測することです。
+
+Rule18 §0／§11.3 LEVEL_2と§5.6.2の既存委任内で、華恋root／GPT-6 Astra Proが実行します。既存workflow1＋資料4、製品／test変更0、新file0。job10分・alarm90秒・175条件・元8秒を保持します。workflow変更は既存のRN canvasとexport Pods／Android依存compileも起動するため、前回skipを引き継がず、実際の結果とCI使用量を記録します。
+
+5path全文読戻し、元job全体ログ・marker・3summary・RN report／画像と既存job結果を確認して閉じます。旧source／同source再実行、保存開放、DB操作、配置・配布は含めません。10/22通常保存・10/23共有は未達の目標のままで、native成功だけをP-W1完了にしません。入口§83／map§65.31／manifest v94のios_preview_v9_native_stage_20261020が今回のownerです。
+
 ## 6. 議題6 — 今回の指摘に対する判断と、記録の責任
 
 ### 6.1 問題は反省文の不足ではない

@@ -16,6 +16,10 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**現在の作業は入口§83／current map §65.31／weekly §5.6.11／manifest v94です。18:22:22 JSTの再開指示を受け、前回結果commit21ad068を新鮮照合しました。リンク修復済み・native175未検証・v9未採用を引き継ぎ、既存workflowへinstall／launch到達点のHOST_STAGE3行だけを加えた新sourceを一度確認します。製品・test・判定・時間上限は不変で、正式admission・通常保存は未完了です。**
+
+### §82時点の結果（履歴）
+
 **最新結果は入口§82.3〜82.6／current map §65.30.1／weekly §5.6.10.1／manifest v93です。source972205c8の6path全文読戻しと一度のCIを確認しました。前回のリンクエラーは解消し、JS915・実RN11条件が成功、元PNG11枚は前回v9とバイト同一です。ただしnative175件はsimctl起動境界の取消で全件未検証。Arabicの1px差は独立Text layerのlocal／placed描画でも再現し、placed layer境界は完成PNGと一致しました。差の発生段階は絞れましたが、実描画の包含保証・正式admission・通常保存は未完了です。v9未採用を維持します。**
 
 ### §81時点の結果（履歴）
@@ -3013,3 +3017,11 @@ source972205c858ecfd3ab36f83e078c4d6c2c6a13ee7の6path全文読戻しとrun39392
 Arabicではdirect placed[374,601,705,676]に対し、同Text layer単独placedと完成PNGは[374,600,706,676]です。zero-phase localでも同方向の差が再現し、差がText layer描画経路ですでに発生することを確認しました。scale3／linearを観測しても個別因果は未分離で、opacity0の製品placed時点のbacking有効性も未確認です。このfixtureは実view／論理行／本文余白内ですが、全入力のstrict包含保証や正式採用は未成立です。
 
 現在の最初の未完了は、既存native workflowのinstall／launch到達点の区別と175件完走、および既存placed ownerでの実layer包含保証です。具体的な未適用案は入口§82.5、lossless証拠はmanifest v93のios_preview_v9_link_repair_20261020へ固定しました。InputScreenのisSaveAdmitted供給、採用版saved再表示、通常初回保存→同owner GET／履歴は引き続き残っています。新route／DTO／admission／設定／DB apply／main mergeは0、結果反映は既存4資料のみ、STRUCTURE_MAP_DELTA_NONEです。
+
+### 65.31 native install／launch境界の診断を再開（source時点）
+
+10/20 18:22:22 JSTの再開指示と前回結果head21ad068／tree16bf672をfresh照合し、入口§82.5の3marker案を新しい限定単位として進めます。既存workflowのbootstatus正常帰還後／install正常帰還後／launch status採取後へHOST_STAGEだけを追加し、installとlaunchの未識別を解消します。前回run39392217445のcancel・全175未検証・STOPは履歴として保持します。
+
+変更は既存workflow1＋既存資料4の5path、新file0、製品／test差分0、STRUCTURE_MAP_DELTA_NONEです。job10分・main後alarm90秒・旧97＋追加32＋v9追加46・比較式・元8秒を維持し、新sourceの既存push CIは一度のみ。workflow自身の変更によりRN canvasと両export依存compileも既存scopeで起動予定です。filter変更で回避しません。現在ownerはmanifest ios_preview_v9_native_stage_20261020、入口§83、weekly §5.6.11です。
+
+華恋root／GPT-6 Astra Pro／CHAT_PRO_OKが単一writer。新CIはsource時点で未実施で、native175成功・v9採用には未換算。実layer包含・正式admission・採用版saved・InputScreen供給・通常保存→本人履歴は未完了です。DB／runtime／署名／配布／deploy／main merge変更0を保持します。

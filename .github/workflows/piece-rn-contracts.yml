@@ -198,11 +198,14 @@ jobs:
             trap 'xcrun simctl shutdown "$DEVICE" >/dev/null 2>&1 || true' EXIT
           fi
           xcrun simctl bootstatus "$DEVICE" -b
+          printf 'HOST_STAGE simctl_install_begin\n'
           xcrun simctl install "$DEVICE" "$APP_DIR"
+          printf 'HOST_STAGE simctl_launch_begin\n'
           set +e
           xcrun simctl launch --console "$DEVICE" com.cocolon.piece-native-metrics 2>&1 | tee "$TEST_DIR/native-metrics.log"
           PIECE_NATIVE_LAUNCH_STATUS=$?
           set -e
+          printf 'HOST_STAGE simctl_launch_end status=%s\n' "$PIECE_NATIVE_LAUNCH_STATUS"
           python3 - "$TEST_DIR/native-metrics.log" "$PIECE_NATIVE_LAUNCH_STATUS" <<'PY_RESULT'
           import pathlib, sys
           lines = pathlib.Path(sys.argv[1]).read_text(errors='replace').splitlines()
