@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新作業は§81／current map §65.29／weekly §5.6.9です。Mashの10/20 14:31:53 JSTの明示承認に基づき、同じ選択行のalpha画素を使うselected_line.v2／iOS preview v9を既存15path内へ実装しました。局所計測→既存親Viewの移動→配置後の同node・同layout・小数位置再検査→fitを元8秒へ含めます。local既存900件＋追加15件の915件は全成功。iOS旧129件＋追加46件、実RN11report・完成画像は一度のCI確認待ちです。旧v8の未承認提案は履歴で、現在は承認済み実装の検証段階です。正式admission・通常保存は未完了です。**
+**最新結果は§81.4〜81.6／current map §65.29.1／weekly §5.6.9／manifest v91です。承認済みv9をsource bac29a1dへ反映し、15path全文を読み戻しました。一度のCIではJS915件成功、実RNはbaseline5・補足3・raw3の全11report／11PNGを確認。Arabicは72pt・200.256ms、両420は5533.207／3399.714msで元8秒以内です。ただしnative単体は追加したQuartzCore関数2個のリンク失敗で旧129＋新46が全件未実行。Arabic完成PNGの端はoffscreen判定値と1px異なり、完全一致は未証明です。v9は未採用として限定単位を終了し、正式admission・通常保存は未完了です。**
 
 ### §80時点の結果（履歴）
 
@@ -2317,7 +2317,7 @@ Mashは10/20 14:31:53 JST、「この判定方式の変更を含むv9の実装�
 
 fixed1080 logical canvas・scale1での定義です。小数位相は実canvas相対原点から保持し、canvas内ancestorはtranslationだけを許します。外側の表示縮尺を含む全physical raster条件・物理端末受入れをこの単体計測で成立させません。alphaが変わる新定義のため、配置や選択fontがv8と変わる可能性は§80.7の承認差に含まれ、実結果で明示します。
 
-### 81.3 反映前検査と一度のCIで確かめる範囲
+### 81.3 反映前検査と一度のCIで確かめる範囲（source時点の履歴）
 
 local Node24.19.0／既存TypeScript5.2.2で、既存13 test fileを `node --test --test-isolation=none` により915 PASS、FAIL／SKIP／CANCEL0、63,446.835935msで完了しました。既存900のcoverageを保持し、renderer14件とmeasured-wrap1件を追加しています。最初の通し実行は849 PASS／66 FAILで、全失敗は未展開の既存AppRuntimeContext.jsのENOENTでした。remote blob `be875054b73593b2a62be6a6dd95110ce176e21d` と同一の元fileを復元し、最終915件を確認しました。このfileにremote差分はありません。途中の追加検査で見つけたstub callback引数の誤りは検査側を修正し、独立したrender styleから配置を計算する検査にしています。
 
@@ -2328,3 +2328,56 @@ nativeは旧129件を削らず、6 fixture×4判定＋22拒否ケースの46件�
 このsource時点ではGitHub反映後の全文照合・一度のCI・全11reportと完成画像の確認は未完了です。iOS旧129＋新46、Arabic完成Card、両420、全時間・包含・現在性の実結果を同じ既存4文書へ追記します。元条件の一つでも未達ならv9未採用としてその結果を記録し、この限定単位を終了します。同source再実行や合格条件緩和へ進みません。
 
 追加購入・新service・dependency・helper・controller・DTO・workflowは0。API／DB／migration再適用／runtime flag／env／deploy／署名／配布／main merge変更も0。既存CI使用量は増えますが、実行所要時間と元8秒達成はまだ未確定です。正式renderer admission・同採用版saved再表示・InputScreenへの正式供給・通常初回保存→本人GET／履歴は後続の未完了作業として保持します。
+
+### 81.4 GitHub反映と一度のCI — RN全11成立、native単体はリンク失敗
+
+実装は[source `bac29a1d9bf9879cb7d12de79d7d124c892257fb`](https://github.com/MassyuRed/Cocolon/commit/bac29a1d9bf9879cb7d12de79d7d124c892257fb)、tree `3c18da98792c5ffeed78a28c4a4258457acd4593`です。親076c0edef425e071c297da2b366776d3e0cf6cd5から既存15pathだけを変更し、全15blobの全内容をlocalと一致照合しました。branch／Draft PR30のheadも同sourceです。source段階のmanifest v90 blobは`aac1e52504e45af794bd3109987cb0e0e915ef96`。本結果更新は同sourceを親に、既存資料4pathだけを変更します。
+
+限定CIは[run39381252246](https://github.com/MassyuRed/Cocolon/actions/runs/39381252246)、attempt1、2026-10-20 15:35:21〜15:58:27 JST（23分06秒）です。pushによる既存workflowを一度確認し、manual dispatch・再実行は0です。workflow全体はfailureです。
+
+| 検証 | 実結果 |
+|---|---|
+| local／CI JavaScript | 既存13file、915 PASS／FAIL0／SKIP0／CANCEL0。local63,446.835935ms、CI8,197.716023ms。CI Node24.21.0／TypeScript5.2.2。別実行の件数を合算しません |
+| piece-ios-source／job118490626661 | 製品Objective-C++ syntax check成功、pbxproj lint OK。standaloneは実行前のlinkで失敗し、旧129＋追加46＝175件は全件未実行 |
+| piece-android-source／job118490626319 | 既存source compile成功。v9 Android採用ではありません |
+| piece-ios-rn-canvas／job118490626609 | success。1 XCTest内の既定11reportがすべて成功し、完成PNG11枚を取得。11 XCTestという意味ではありません |
+| piece-export-pods／piece-export-android | jobはsuccessですが、依存compileは既存scope判定によるskip。今回の新しいexport実検証へ数えません |
+| 同pushの既存phase6-contract-guards | run39381252256、119 passed／warnings5（5.95秒）。自動起動した既存guardで、native175件の代わりにはしません |
+
+standaloneの失敗は、今回PiecePixelCanvasFrameへ追加した`CATransform3DGetAffineTransform`と`CATransform3DIsAffine`の未解決symbolです。既存link commandはUIKit／Foundation／CoreText／CoreGraphicsを指定し、QuartzCoreを直接linkしていません。新しい外部関数の導入と既存link条件の整合を落とした実装側の不備です。GitHub書込障害・旧v8の115 PASS後の未完走と同一原因にはしません。175件のPASS／FAIL集計は生成されておらず、0 FAILを合格とは表現しません。Xcode16.4（16F6）／clang17.0.0／iPhoneSimulator18.5 SDKを使用しました。実RNのテスト先はiOS26.2／iPhone17 Pro simulatorです。
+
+### 81.5 全11report・画像・Arabic・420文字の実結果
+
+| 既存fixture | 経路 | elapsed_ms | font | 本文行数 | 結果 |
+|---|---|---:|---:|---:|---|
+| essay_paragraphs | preview v9 | 1539.596458 | 48 | 5 | native_checked |
+| quote_unicode | preview v9 | 1474.850125 | 80 | 3 | native_checked |
+| declaration_no_brand | preview v9 | 449.918375 | 72 | 5 | native_checked |
+| essay_max420 | preview v9 | 5533.207459 | 36 | 18 | native_checked |
+| saved_essay_canvas | saved v3 | 255.548750 | 48 | 5 | native_checked |
+| suffix_latin_ligature | preview v9 | 210.303667 | 72 | 1 | native_checked |
+| suffix_arabic | preview v9 | 200.255958 | 72 | 1 | native_checked |
+| suffix_max420_a | preview v9 | 3399.713625 | 36 | 17 | native_checked |
+| suffix_spaces_raw | v9 raw diagnostic | 126.882083 | 48 | 1 | measurement_checked |
+| suffix_hebrew_raw | v9 raw diagnostic | 135.772875 | 48 | 1 | measurement_checked |
+| suffix_mixed_bidi_raw | v9 raw diagnostic | 137.347792 | 48 | 1 | measurement_checked |
+
+baseline5/5・補足3/3・raw3/3、全11件でbody_preserved／native_canvas_valid=true、capture errorなし、元8000ms未満です。elapsed_msはfit確認後・capture呼出前の値で、PNG生成完了までの時間ではありません。preview7件はsame-token fit=true／wrong-token=false／handle keys=[isCurrent]、saved v3は従来どおりfitなし。Card8件のcanSave／canExportはすべてfalseです。raw3件はdiagnostic-only／valid／same-selected-nodeで、正式fit/save/exportの権限を持ちません。
+
+v9対象10reportの計59行（preview56＋raw3）はlocal／placedのtoken・tag・canvasTag・contentFrame・独立5値が一致し、placedのoverflow／wrapはfalseでした。今回のwire／独立raw oracle上でstrict own-view・論理行高・元余白を満たしています。全11件の本文blocks・plan groups・行数はv8と一致。v8で成功した10件は時間を除くcandidate trace／B9 plan／選択独立5値も一致し、Arabicの初回72pt B9 planも同じです。全候補とfont順・B9 score/tieを変えた成功ではありません。
+
+Arabicは旧v8の72→64→56pt拒否から、同じ最初の72ptでnative_checkedへ進みました。TextKit bbox高108.80078125、自然Text view高98.33332824707031、論理行高98、baseline offset4.28125はそのままです。local ink[99,23,429,98]、placed ink[98.3905029296875,22.5,429.3905029296875,97.5]、実canvas原点[275.6094970703125,578.5]で、判定用のcanvas inkは[374,601,705,676]です。同じview／TextStorage／layout manager／text containerと15glyph、属性、独立5値を両段階で維持しています。小数位置によりink幅は330→331pixelとなり、localの寸法を最終結果へ転用したものではありません。
+
+**最終PNGとの境界の完全一致は未証明です。** 実際のArabic完成PNGを読み取り、背景RGBA(255,253,248,255)が一様な本文ROI[200,500,880,800]内の異なる全画素を調べると、本文境界は[374,600,706,676]（右・下端はexclusive）でした。offscreen alpha境界[374,601,705,676]より上／右が1pixel大きく、上辺の追加36画素・右辺12画素があります。右辺にはRGBA(140,142,146,255)もあり、背景の僅差だけとは扱いません。両境界は実view・論理行高・本文領域に収まっていますが、原因は未特定です。現harnessはplaced wireと独立raw offscreen oracleを比較し、その後canvas.layerのPNGを保存するため、CI成功から最終layer PNGとのexact一致を主張できません。全physical scale・実機受入れの証明にもなりません。
+
+両420はfont36／size_index3／lineHeight56、混在文18行・あ420は17行です。v8からのelapsed差は混在文+360.355417ms、あ420+947.590375msで、速度改善は主張しません。選択font・本文・行分割・独立5値は維持し、混在文の各row yは0から−0.5／−1へ、あ420は各行−0.5へ変わりました。Latinのyは−6.5、Arabicは−11.5です。今回の判定方式変更に伴う配置差として記録します。
+
+artifact `piece-rn-canvas-ios` ID12246326787、3,222,364bytes、SHA256 `442b7b71bda87c029279e66ae786ed477e1dd6941b359749c622c650ebe0b21f`を取得してmetadataと照合しました。results.jsonは296,758bytes、SHA256 `6b15ef53255fa7096c74b87fb11f9964559028fe82b7900fc0ffd5f1913bb809`。元11report全文とPNG11枚の寸法・bytes・SHA256をmanifestへ保持します。GitHub artifact保管期限は2026-10-27T06:58:13Zです。華恋が11枚すべてを元解像度で開き、本文・段落・欠け・余白・brandingを確認しました。v8共通10枚のうちsaved_essay_canvas／suffix_spaces_rawの2枚だけがbyte-identicalで、残り8枚は変わり、Arabicの完成1枚が加わっています。
+
+### 81.6 未採用で限定単位を終了し、次の修復箇所を固定
+
+**v9は未採用です。** 明示承認された実装・GitHub15path全文照合・一度のCI・全11report／11PNGの確認と既存4文書への結果記録まで完了しました。全native検査の条件を満たしていないため、§80.7／§81.1のSTOPを適用します。承認を未承認へ戻すことやsourceを撤去することは意味しません。結果確定後のproduct／test／workflow変更0、再実行0、期限延長・分母削減・判定緩和0です。
+
+次の最小修復箇所は既存PieceTextMetrics.mm内のPiecePixelCanvasFrameです。2つの外部CATransform3D関数を、translationだけを許す16成分の直接比較へ置き換える案を特定しました。m11/m22/m33/m44=1、m12/m13/m14/m21/m23/m24/m31/m32/m34/m43=0、m41/m42有限を要求します。canvas内ancestorのsublayerTransformとcanvas自身を除くlayer.transformへ適用し、既存UIView affine条件・convertPointの座標照合を維持します。新framework／helper／workflowを足す案ではなく、まだ未適用・未検証です。これだけで最終PNGの1px差や旧v8の未完走が解消するとは主張しません。次のsourceでは旧129＋新46の完走が必要で、最終layer PNGと判定用alphaの境界差も品質残件として明示します。
+
+正式renderer admission、採用版とsaved再表示の整合、InputScreen→既存hostへの正式供給、通常初回保存→同owner GET／履歴、共有／実機受入れは未完了です。今回のsourceは既存Draft PR30に残し、API／DB／runtime／deploy／署名／配布／main mergeの効果は0、automatic_progression=falseを維持します。既存CI使用量は増えましたが、請求額は確認していません。10/22通常保存・10/23共有の達成や延期承認へ今回結果を読み替えません。

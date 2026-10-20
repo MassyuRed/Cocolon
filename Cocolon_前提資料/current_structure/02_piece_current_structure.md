@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新作業は入口§81／本map §65.29／weekly §5.6.9です。10/20 14:31:53 JSTに承認されたselected_line.v2／明示iOS preview v9を既存ownerへ実装しました。元Textを同layoutでlocal／最終小数位置の2段階検査し、親Viewのtranslationだけで配置してからfitへ渡します。local全13file915件成功。旧native129＋追加46、実RN11report・画像は一度のCI待ちです。v8結果と未承認提案は履歴。正式admission・通常保存は未完了です。**
+**最新結果は入口§81.4〜81.6／本map §65.29.1／weekly §5.6.9／manifest v91です。v9 source bac29a1dの15path全文照合と一度のCIを完了。JS915成功、実RN全11report／11PNG成立、Arabic72pt・200.256ms、両420は5533.207／3399.714ms。ただしnative単体175件は追加したQuartzCore関数のリンク失敗で未実行です。Arabicの最終PNGとoffscreen alphaに1px差があり、exact一致は未証明。v9未採用で限定単位終了、正式admission・通常保存は未完了です。**
 
 ### §80時点の結果（履歴）
 
@@ -2963,7 +2963,7 @@ STRUCTURE_MAP_DELTA_PRESENTの結果ownerは本節、詳細・未加工reportと
 **V8_UNADOPTED_STOP。** 今回の限定実装・反映・結果確認は完了し、mixed420の元8秒条件は達成しました。Arabic拒否とnative14件未確認を残すため正式採用はしません。結果同期は既存4文書、source後の製品／test／workflow追加変更・同source再実行・DB再適用・API／flag／env／deploy／署名／配布／main merge効果0。詳細は入口80.4〜80.7、未加工report・PNG hash・画素解析はmanifest v89、日程はweekly5.6.8です。STRUCTURE_MAP_DELTA_PRESENTを維持します。
 
 
-### 65.29 v9 — 承認された同layout alpha計測と最終位置の再検査
+### 65.29 v9 — 承認された同layout alpha計測と最終位置の再検査（source時点、結果は65.29.1）
 
 Mashの10/20 14:31:53 JSTの明示承認と14:55:34 JSTの継続指示を受け、入口§80.7のLEVEL_3契約差を既存15pathへ実装しました。source基点は076c0edef425e071c297da2b366776d3e0cf6cd5、writerは華恋／GPT-6 Astra Pro／CHAT_PRO_OKのrootだけです。旧§65.28.1の未承認状態は履歴で、現在の再開点は本節／入口§81です。
 
@@ -2981,3 +2981,13 @@ Mashの10/20 14:31:53 JSTの明示承認と14:55:34 JSTの継続指示を受け�
 旧native115 PASSの未完走原因は未確定のまま、該当budget検査に段階出力を加えました。旧129の分母・90秒alarmを維持します。新旧native、Arabic完成Card、両420、同mount/token fit、全11report・画像・元8秒のいずれか未達なら未採用の結果を記録して停止し、同source再実行はしません。反映／CIの未実行項目は結果節で更新します。
 
 STRUCTURE_MAP_DELTA_PRESENT。製品5／検査6／資料4、workflow・新helper/service/dependency・API/DB/runtime/deploy/署名/配布/main merge変更0。全path/hashはmanifest ios_preview_v9_20261020、承認・具体実装・最終local結果は入口81、予定はweekly5.6.9を参照します。
+
+#### 65.29.1 一度の検証結果と未採用の停止点
+
+source `bac29a1d9bf9879cb7d12de79d7d124c892257fb`／tree `3c18da98792c5ffeed78a28c4a4258457acd4593`を既存branchへ反映し、15path全文を照合済みです。[CI run39381252246](https://github.com/MassyuRed/Cocolon/actions/runs/39381252246) attempt1はfailure、実行15:35:21〜15:58:27 JST。JS915件とAndroid source、iOS syntax／pbxproj lintは成功。iOS standaloneはPiecePixelCanvasFrameが新たに使うCATransform3DGetAffineTransform／CATransform3DIsAffineを既存link commandで解決できず、旧129＋新46が全件未実行です。旧v8の115 PASS停止とは別の実装不備で、原因解消とは扱いません。export依存compileはscope skipです。
+
+実RN job118490626609はsuccess、baseline5／補足3／raw3の全11report・11PNGを取得しました。Arabicは72pt・200.255958ms、混在420は36pt18行・5533.207459ms、あ420は36pt17行・3399.713625ms。全11本文・報告値の包含・元8秒、preview7の同token fit／wrong-token拒否は成立。saved v3・rawの権限境界と全CardのcanSave／canExport=falseを維持します。全本文・行数・B9探索を保持した一方、v9のrow縦配置は変わり、v8とPNG byte同一はsaved／raw spacesの2枚だけです。両420を速度改善とは表現しません。
+
+Arabicのplaced offscreen alphaはcanvas[374,601,705,676]、最終layer PNG本文は[374,600,706,676]です。後者もstrict view／logical rowに入りますが、端の1pixel差の原因は未特定。現oracleのexact一致対象はwire対raw offscreenで、最終PNGとのexact一致は検証していません。fixed scale1の限定結果であり、全physical条件・通常保存の受入れではありません。
+
+全native検査未達のSTOPにより、v9未採用・承認済み限定単位終了です。結果更新は既存資料4pathだけ、source/test/workflowの追加変更・再実行0。次の最小修復案は同関数内で16成分を直接比較してtranslationだけを許し、外部2関数への依存を除くこと（未適用）。これと旧129＋新46の計175件完走、PNG境界差の品質確認は残件です。正式admission／同採用版saved再表示／InputScreen正式supplier／通常保存→同owner再表示も未完了。完全report・hash・各時刻・停止判断は入口81.4〜81.6とmanifest v91のios_preview_v9_20261020へ同期します。

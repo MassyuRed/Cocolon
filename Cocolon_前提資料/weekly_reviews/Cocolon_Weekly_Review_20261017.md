@@ -708,17 +708,24 @@ SupabaseではPiece用6 migrationの適用履歴を確認し、再適用・本�
 
 
 
-#### 5.6.9 10/20のPiece継続 — 承認済みv9を実装、一度のCIへ
+#### 5.6.9 10/20のPiece継続 — v9実装と一度のCIを完了、native未達で未採用
 
 Mashは14:31:53 JSTに、入口80.7の判定方式変更を含むv9実装と一度の検証を「進めていいよ」と承認し、14:55:34 JSTに中断位置からの再開を指示しました。5.6.8の未承認提案はその時点の履歴です。華恋／GPT-6 Astra Pro／CHAT_PRO_OKがrootだけで書き込み、読み取りagentのレビューを併用して、既存15path内を実装しました。
 
 新selected_line.v2／iOS preview v9は元TextStorage/layout/container/glyphのalpha>0全画素をinkにします。local計測後、既存親Viewのtranslationで配置し、同Text・同token・実canvas相対の小数位置を2RAF後に再検査してからfitを出します。元8秒にはdraw/scan/bridge/UIBlock/最終isCurrentまで含め、deadline再開や早期解除をしません。有限bitmap、空・外縁・allocation・stale拒否、独立5値、全range/font/B9 score/tie、本文/recipe、strictな包含は保持します。
 
-localの既存13fileは915 PASS、FAIL/SKIP/CANCEL0です。内訳は旧900＋追加15で、最初の66失敗は未展開AppRuntimeContext.jsのENOENTだけでした。GitHub同一blobを復元した最終通し結果であり、この元fileにsource差分はありません。native旧129は残し、独立raw RGBA oracle・fractional位置・同一性・空/外縁/上限/期限等の46検査を追加しました。旧115で止まった原因は未確定で、段階ログを加えただけです。iOS compile、旧129＋新46、実RN元11fixture・Arabic完成Card・両420・画像は一度のCI結果待ちで、成功とは記しません。
+localの既存13fileは915 PASS、FAIL/SKIP/CANCEL0です。内訳は旧900＋追加15で、最初の66失敗は未展開AppRuntimeContext.jsのENOENTだけでした。GitHub同一blobを復元した最終通し結果であり、この元fileにsource差分はありません。native旧129は残し、独立raw RGBA oracle・fractional位置・同一性・空/外縁/上限/期限等の46検査を追加しました。旧115で止まった原因は未確定で、段階ログを加えただけです。source反映前の時点では、iOS compile、旧129＋新46、実RN元11fixture・Arabic完成Card・両420・画像は一度のCI結果待ちでした。確定結果は以下に記録します。
 
-この単位は既存branchへのsource反映・全文読み戻し・既存CI1回・全結果と画像を既存4文書へ保存するところまでです。元8秒・全包含・現在性・全検査のいずれか未達ならv9未採用として終了し、同source再実行や分母削減をしません。製品5／検査6／資料4以外、新workflow/helper/controller/DTO/dependency・API/DB/runtime/deploy/署名/配布/main merge変更0。既存CI費用だけが増えます。
+この単位は既存branchへのsource反映・全文読み戻し・既存CI1回・全結果と画像を既存4文書へ保存するところまでです。元8秒・全包含・現在性・全検査のいずれか未達ならv9未採用として終了し、同source再実行や分母削減をしません。製品5／検査6／資料4以外、新workflow/helper/controller/DTO/dependency・API/DB/runtime/deploy/署名/配布/main merge変更0。既存CIの使用量が増えます。請求額は未確認です。
 
-正式admission、採用版とsaved再表示の整合、InputScreenの既存hostへの正式供給、通常初回保存→同owner GET/履歴は未完了です。10/22通常保存・10/23共有確認の前提を達成済みや延期承認へ読み替えません。現在地は入口81／current map65.29／manifest v90へ同期します。
+正式admission、採用版とsaved再表示の整合、InputScreenの既存hostへの正式供給、通常初回保存→同owner GET/履歴は未完了です。10/22通常保存・10/23共有確認の前提を達成済みや延期承認へ読み替えません。source時点は入口81／current map65.29／manifest v90へ同期しました。現在の結果は以下と入口81.4〜81.6／map65.29.1／manifest v91です。
+
+
+**15:58:27 JST確定結果：** source [bac29a1d](https://github.com/MassyuRed/Cocolon/commit/bac29a1d9bf9879cb7d12de79d7d124c892257fb)の既存15pathをGitHubへ反映し、全文照合しました。[run39381252246](https://github.com/MassyuRed/Cocolon/actions/runs/39381252246) attempt1は23分06秒で終了、全体failureです。CI JS915件は全成功。実RNは1 XCTest内のbaseline5／補足3／raw3＝全11report成功、11PNGを取得・全画像目視。Arabic72pt・200.255958ms、混在420は5533.207459ms、あ420は3399.713625msで元8秒内でした。両420はv8よりそれぞれ360.355417／947.590375ms長く、速度改善とはしません。
+
+native standaloneは今回追加したCATransform3DGetAffineTransform／CATransform3DIsAffineのlink不整合により実行前失敗、旧129＋新46は未実行です。製品syntax check／pbxproj lint／Android sourceは成功、export依存compileはscope skip。Arabic最終PNGの本文境界[374,600,706,676]は判定用offscreen[374,601,705,676]と端が1pixel異なります。両方包含内ですが、現検査は最終PNGとのexact一致を証明せず、原因は未特定です。
+
+**v9未採用として承認済み限定単位を終了。** 結果更新は既存4文書のみ、product/test/workflow修正・再実行0です。次の修復箇所はPiecePixelCanvasFrameの外部2関数をtranslation-onlyの16成分直接比較へ置換すること（未適用）で、175件完走とPNG境界差の品質確認が残ります。通常保存・本人GET／履歴・共有・実機受入れは未完了。元11report全文と全PNG identity、source15pathとCIの証拠はmanifest v91へ保持します。GitHub反映済みをアプリ完成へ読み替えません。
 
 
 ## 6. 議題6 — 今回の指摘に対する判断と、記録の責任
