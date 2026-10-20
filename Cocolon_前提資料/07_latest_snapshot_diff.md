@@ -1,3 +1,5 @@
+> **2026-10-20 最新方針：学習済み言語能力＋Mashの観測技術の学習へ。応答と問いを一体に、CMEE資産を継承する。具体モデル・費用・配置・学習は未決／未着手。[会話と決定](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261020-observation-learning)を参照。**
+
 > 2026-10-19最新差分：u353（10/18明示承認）。初回の元経験・本人説明・独立不明を、実回答／訂正・撤回／旧再開／保存再表示と一体で修復。新private3型・logical90。限定単位の技術検証まで完了、PRODUCT_NOT_CLEAR・正式Product Read0/3・candidate_ready=false・automatic_progression=falseは維持。詳細は[u353実装監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u353_InitialPersonalMeaning_20261018.md)。
 
 > 2026-10-18最新診断：u352。初回に既述の「期待されているように感じて、重かった」が返答から欠落することを、初回7件と実pending回答4件で比較。初回説明を元経験とともに保持する一体案を具体化し、Rule18 §11.3 LEVEL3の意味・選択差分は判断待ち・未実装。否定訂正は具体的対象の照応化と独立readerの不整合まで切り分け、修復候補を記録。今回production／test／fixture変更0、文書6fileのみ。詳細は[u352診断・判断案](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u352_InitialPersonalMeaning_Decision_20261018.md)。
@@ -41570,3 +41572,10 @@ u354実本文の残件をLEVEL_2で修復。安堵・寂しさのpair＋received
 対象321件の最終結果passed、未解消fail／skip0。未変更u354の60recordで全意味・選択・Reception・本文のその他fieldが一致し、Observation一文と本文由来IDだけ24recordで変わる。残り36は本文／停止も同一。旧u350未完成checkpointは旧時点解釈を保持して現行表面へ進むため、この一文だけ変わり得る。完成済み旧DTO・確定旧失敗は非再生成。実SQL14件で初回・実pendingへのADD／現在否定REVISE・旧保存・意味前後中断再開を通し、同じ18DTOを現行apiClient→API→hook→Modalで各2回close/reopenした。HTTP/Auth/nativeはstub、実端末・本番・全suiteの成功ではない。
 
 STRUCTURE_MAP_DELTA_NONE。既存production3file内、新production／型／意味版／依存／API／DTO／DB／RN／Safety変更0、logical90を維持。正式別model評価ではなく主担当実行と補助読取レビュー。限定TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／正式0/3／candidate_ready=false／automatic_progression=false。長い原文反復、深い受容、一般入力、PARTIAL、説明Mを含む別sourceの更新、任意多段・本人実機は残る。範囲外の元reaction訂正では「その時は今は嬉しい」等の時点衝突が比較本文に残り、次の具体的な診断対象とする。次はE05/E06/E08の実本文品質と既存方式判断へ戻る。10/20方式判断・10/31管理線・12/18公開目標、Piece/Analysis主枠53.25％は再評価しない。Draft PR3／30、merge・deployなし。詳細・全変更file・本文は[u355監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u355_MixedReceivedTimeNeutral_20261019.md)。
+
+
+## 2026-10-20 方針milestone 観測技術の継承と学習型EmlisAI
+
+Mashの今回の対話に基づき、学習済みの言語能力を土台に、Mashの観測の進め方（着目、暫定構造、問い、整合確認、修正・棄却・更新）を教材から育てる方針を記録した。言葉の模倣が目的ではなく、応答と問いを一体で扱い、既存CMEEの資産を継承する。決定・対話の要旨・従来の費用／観測に関する懸念・旧Route A方針との関係・未決・次作業の参照先は[最新週次10/20追補](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261020-observation-learning)。
+
+具体model、配置、費用上限、学習方式、教示会日時、採用条件と公開工程は未決。次は最初の観測会一組と小さな比較案の具体化。今回は記録3文書のみでADMINISTRATIVE_ONLY、actual構造・runtime・DB・依存・学習・model取得・実データ・費用・配置・build・公開・自動化effect0。STRUCTURE_MAP_DELTA_NONE。旧Route A限定の履歴を消さず、今回の設計検討方針の更新と未選定の稼働方式を区別する。12/18目標の変更・完成保証・商品合格は設定しない。
