@@ -10,6 +10,10 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
+**最新は入口§87／current map§65.35／weekly§5.6.15／manifest v104です。実layer包含修復の具体仕様を確定しGitHubへ記録。旧v2を保持する別preview候補で、native非clip参照・自然layer・配置/余白判定を一体化する案です。新ink/wire/profileの実装と一度の検証は判断待ち・未実行。前回JS915/native175/RN11成功は保持し、正式採用・通常保存は未完了です。**
+
+### §86.2〜86.3の結果（履歴）
+
 **最新は入口§86.2〜86.3／current map§65.34.2／weekly§5.6.14.2／manifest v103です。source1f168d19は全6job/CI success、JS915/native175/RN11成立。配置直後のlayer合成と完成PNGの範囲が一致し、directだけtop/right各1px過小と確認。包含修復・正式admission・通常保存は未完了です。**
 
 ### §85.2〜85.3の結果（履歴）
@@ -2759,3 +2763,60 @@ primary outcomeは**BLOCKER_NARROWED**。配置直後と完成後の差を切り
 比較検討した案は、元v2を保持し、別候補のselected_line.v3でdirect alphaと自然layer alphaのunionをinkとして返す方法です。local unionで配置、placed unionで厳密包含と既存次font処理へ接続するため、閉じたwire/profileとink定義の変更を含むLEVEL_3未承認案です。現行v2のinkへ黙ってunionを代入しません。従来比較案の「bitmap表示v10」とは別の未採用案であり、版名や契約を確定していません。
 
 **unionだけでは、既にbackingでclipされたnative-scaleの意図した画素を回復できない可能性が残ります。** direct側がscale1なので、native-scaleの非clip参照または保守的な境界が一致する根拠も必要です。一律1px追加、固定padding、bboxの単純な倍率変換を解決としません。localの2RAFも自然contents readinessの証明ではなく、nonnull/clean/同一性/期限の実確認が必要です。現行brandingのopacity0.8をArabic診断のopacity1条件で全拒否せず、既存表示のまま扱います。これらを含む具体的な最小修復・可視差・検証/STOPを定めてから、契約差がある部分だけRule18 §11.3の判断へ戻します。未確認の案を採用・実装したとは扱いません。
+
+
+## 87. 2026-10-21 — 実layer包含修復の具体仕様（実装判断待ち）
+
+今回の継続指示から§86.3を完了する設計単位です。基点はPR30 head `763ab03b5fd0cb545a0da606c5a7fafd87726d70`／tree `a273e853b46af6465448c6f6b64d8e04fdb08315`、APIはPR3 head `a536e50ee284785f585ac73329ef2947dca8bba9`。全体設計01/01A/01B/01C、全国民制、全file index・非打切りrecursive tree1909件、Piece/current map・最新weekly§5.6・作業規則入口/Rule18§0A/§11.3・mandatory incident全文を確認し、現materialized38fileをtree blobと照合しました。System Context prepareはtools module未提供のため失敗し、既存入口で許された原典直接読取を使っています。Supabaseは対象projectのACTIVE_HEALTHY確認だけで、SQL/本人行/業務RPC/変更0です。
+
+### 87.1 単なる補足検査では直らない理由と判断点
+
+v2成功wireの18fieldとscale1 inkを保持する内部補足検査は、Rule18§11.3 LEVEL_2になり得ます。native-scaleを内部で使うこと自体やモデル名を新たな承認事項にはしません。しかし現Cardは返却inkでlocal配置、本文論理行高、branding高40、canvas余白±0.5、次fontを一体判断します。nativeでlayer不適合をrejectするだけではcatchがunavailableへ落ち、縮小へ進みません。own-view内にあるlayerでも論理行高/余白を越す場合があり、1px差に応じた配置も補正できません。nativeへCardのlayout budget推測を新設する案より、測定した範囲を既存Cardへ渡す方を推奨します。
+
+そのため、別iOS preview `piece.rn_native_preview.containment.prototype.v1`＋`piece.native_selected_line.v3`を提案します。通常のRN Text表示と既存候補v5/B9を維持し、比較履歴のbitmap表示v10を採りません。旧v2/旧v9の定義を上書きしません。**新ink定義・閉じたwire・profileの変更部分はLEVEL_3未承認**です。Rule18§11.3の「商品目的、商品体験、method family、contract、acceptanceまたは品質条件を追加、変更、置換または弱化する。」に該当する場合の明示判断が必要です。モデル制限解除、既存GitHub許可、旧v9承認の取り直しではありません。
+
+### 87.2 native→Cardの最小仕様
+
+| 項目 | 限定実装で固定する内容 |
+|---|---|
+| 同じpaint | 既存RN0.77.3 patchに、現在のdrawRectの背景/glyph描画2呼出しだけを共有するread-only paint methodを加える。通常drawRectも同methodを使い、元super/highlight/Catalyst処理順は維持。現在のplain Piece Text以外のattachment/highlight/background/shadow/mask/子layer/非translation等は対応を捏造せず拒否。新Text描画器を表示しない |
+| A: direct | 旧v2と同じscale1 draw/scan結果。draw/scanだけをpure内部関数へ切り出し、旧snapshot key/副作用/返却を維持。v3からsnapshotを持つ旧method全体を呼んでtokenを二重生成/消費しない |
+| B: native | 同じmounted storage/layout/container/全glyphrange/content frameを共有paintへ渡し、S=view.contentScaleFactor=layer.contentsScaleの有限正値で非clip描画する。native raster gridはText-local原点0へ固定。実alpha>0を全走査したnative pixel cellを、local phase0／placed実canvas原点のlogical scale1 cellへfloor/ceilで外向き射影する。TextKit bboxの単純倍率値はinkにしない |
+| filter込み参照 | Bの非clip画像を、実layerと同じ対応可能なpublic contentsRect/Center/gravity/filter/geometryでlogical1へ合成したalpha範囲もBへunionする。native cell射影だけでfilterの外側画素を切らない。外部参照layerは一時memoryだけで、表示treeへ挿入・実layer再parent・画像file/bridge転送をしない |
+| 参照の忠実性 | 各成功要求で、非clip参照を元viewでclipしたnative-scale合成と、同じ自然layerのnative-scale合成を、同grid/geometry/stateで全alpha occupancy比較する。fixtureだけの一致でlive入力を保証せず、実行時不一致はunavailable。actualRN testは自然drawRect直前のCTM/clip/frame/Sを一回観測し、参照/自然paintの対応も確認。shared method＋3倍だけを忠実性の証明にしない |
+| C: layer | 同一Textの自然nonnull/clean layerを、localはphase0、placedは実小数canvas位相で既存renderInContextへ合成し、alpha>0を全走査。Canvas祖先opacity0を変更しない。body1/branding0.8を自然状態で束縛し、root opacityが減衰しない合成なら保守的な非減衰footprintと明記する。勝手なalpha1化/二重alpha乗算はしない |
+| ink/wire | v3は旧18field＋native_raster_scale＋component_inksの20fieldを閉じて受理。component_inksはdirect/native/layerの3rectだけ、inkは3rectの厳密unionでJSも再計算する。raster_scale=1は出力logical cellのgrid、native_raster_scale=Sは元backing gridを示す。native成分はrawcell射影とfilter込み参照のunion。requestは元4fieldのまま、native entry名だけinspectSelectedLineV3で分離 |
+| local/placed | 新profileだけ各stageで2RAFを一度awaitし、残余元8秒で自然contentsを確認。2RAFはreadinessの証明ではなく、nil/dirtyなら失敗。localで3成分と最終同一性が全成立した時だけv3専用keyへ一つのtokenを保存。placedは開始時一回消費し、同contents identity/scale/geometry/attrs/全layout/opacity/filter/deadlineを前後照合。旧v2とのtoken流用、poll/強制display/layout、同font再計測/再配置loop0 |
+| Card配置/拒否 | local unionで既存rowOffsetsを一度決め、placed unionでstrict own-view・本文lineHeight・branding40・width・元余白±0.5を判定。検証済み幾何学overflow/既存禁則違反だけ次の既存fontへ進み、floorでunavailable。未準備/参照不一致/stale/資源/期限は縮小retryせずunavailable |
+| branding | 現行font28/lineHeight40/required_subtle opacity0.8を維持。branding超過も既存次候補分岐へ入るが、branding font自体は縮まない。全候補で不適合ならunavailableであり、branding縮小済みとは報告しない |
+
+共有paintの上流原典は[公式RN0.77.3 RCTTextView.mm](https://github.com/react/react-native/blob/v0.77.3/packages/react-native/Libraries/Text/Text/RCTTextView.mm)、blob `47632aa885cdb314fbcb2dfe94137d5101cee34d`です。全文を読み、iOSでは当該2呼出し以外の明示text context設定がないこと、highlight生成は別処理であることを確認しました。UIKitが用意する全graphics stateの同値性を、このsource確認だけでは断定しません。
+
+### 87.3 原予算内の資源・期限
+
+native参照extentはTextKit ink±2fontのscratch範囲をnative gridでfloor/ceilします。viewBoundsとのunionまで3倍するとArabic72で(1080+288)×3=4104pxとなり、元4096上限を越すため使いません。2fontは返却inkへ足すpaddingではなく測定領域です。空/外縁alpha/unsupported状態/参照対応不成立は拒否し、領域拡大の再描画・tile・固定1px補正へ逃げません。有限extentの外に未知fontの離れた画素が絶対に無いという一般保証は未成立で、同paint/全glyphrange/対象font/layout/明示clip trapの根拠を確認できなければ未採用STOPです。
+
+1辺4096 actual pixel以下、各context総4,194,304pixel以下、provider32MiB以下を保持し、native非clip画像・参照/実layer比較buffer・logical合成・provider copyの**同時保有合計も32MiB以下**へchecked arithmeticでpreflightします。一成分ずつ解放し、snapshotへ画像を残さず、上限不足なら確保前に拒否します。元wall-clock/monotonic deadlineを全draw/scan/比較/2RAF/bridge/最終fitへ通し、8秒の起点やnative90秒alarm/job上限を変えません。速度/資源成立は未実証です。
+
+### 87.4 exact pathと一度の検証
+
+実装判断の対象は既存19pathだけです。
+
+| 区分 | path |
+|---|---|
+| 製品6 | ios/tempCocolon/PieceTextMetrics.mm、patches/react-native+0.77.3.patch、features/piece/pieceRenderer.js、components/piece/PieceVisualCard.js、features/piece/pieceLayout.js、features/piece/pieceMeasuredWrap.js |
+| 検査7 | tests/piece-v2-renderer.test.js、tests/piece-v2-measured-wrap.test.js、tests/native/piece-text-metrics-ios.mm、tests/native/piece-ios-react-shim.h、tests/native/piece-rn-canvas-entry.js、tests/native/piece-rn-canvas-fixtures.cjs、tests/native/piece-rn-canvas-ios.m |
+| workflow1 | .github/workflows/piece-rn-contracts.yml。既存97/129とv9 46、新v3 20のsummaryおよびunique PASS195を厳密に確認するだけ。時間・job/fixture分母は変えない |
+| 資料5 | 本入口、manifest、current_structure/02_piece_current_structure.md、weekly_reviews/Cocolon_Weekly_Review_20261017.md、07_latest_snapshot_diff.md |
+
+nativeは旧175uniqueを保持し、新v3の20unique判定を別counter/summaryへ加え195uniqueを予定します。closure/正確union/direct-v2不変/S2/S3/正負小数位相/同snapshot/branding0.8/native clip trap/nil/dirty-display/dirty-layout/scale不一致/snapshot変更・版間token拒否/unsupported描画状態/資源上限・整数overflow/外縁/空/期限・one-useを含めます。20の内部matrixを成功行の重複加算にせず、旧NATIVE_CHECKS=129とV9_NATIVE_CHECKS=46を保持してV3_NATIVE_CHECKS=20を追加します。native wrapper doubleを実RN paintの代用にしません。
+
+JSは元915を保持し、新閉schema/全成分偽造/union/同一性/期限/本文とbranding overflow→次候補/floor/不成立→unavailable/旧版互換を追加。新sourceをPR30へ反映・全19path読戻し後、既存push CIを一度だけ確認します。実RNは既存baseline5＋補足3＋raw3の11条件を新profileで省かず、旧saved v3/保存export拒否も保持。自然native backingでclipされdirect1ではfitするtrapとbranding0.8を同harness内の追加2条件として確認します。row/font変化があれば全rendered rowの独立5値・token/fit対を再導出し、旧59へ分母を合わせません。
+
+完成PNGは全体の本文・改行・配置・元余白・brandingと旧版との差を記録します。新inkによる位置/選択font/改行の可視差はあり得ます。全PNG完全一致を一般品質条件へ追加せず、旧v2/v9とsaved v3のsource/互換は保持します。同mount/token current・誤token拒否、全Card保存/export false、元8秒/90秒、native全分母、runtime参照対応が揃わなければ未採用で結果記録しSTOP。同source再実行、判定緩和、未確認項目をgreen扱いすることはありません。
+
+### 87.5 完了範囲・必要な明示判断
+
+今回完了したのは具体仕様と原典照合の既存5資料への記録です。製品/test/workflow変更、CI実行、DB/API/runtime/flag/env/依存追加/署名/配布/deploy/main mergeは0。STRUCTURE_MAP_DELTA_NONE。モデル条件はPIECE_WORK_ALLOWED、華恋rootが単一writer、補助agent3名は独立read-only検討です。正式admission/product acceptance/通常保存・本人再表示はfalse、automatic_progression=falseを維持します。
+
+必要な判断は、**§87.2〜87.4の新ink/wire/profileを含む限定実装・GitHub19path反映・新source一度のCIと全結果記録まで進めること**です。追加購入/依存/定常費用0、実装工数と既存CI一回の使用量が増えます。前回CI20分59秒は参考実績で、今回の所要時間/8秒成立を約束しません。承認がない場合は設計記録で止まり、現在のv9や通常保存を開放しません。成立後も正式renderer採用→同版saved reader→InputScreen正式isSaveAdmitted供給→既存controller/API通常初回保存→本人GET/履歴は別の未完了作業です。

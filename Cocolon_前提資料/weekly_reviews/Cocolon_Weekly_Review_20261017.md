@@ -1681,3 +1681,12 @@ source1f168d19の一度のrun39509902845 attempt1は全6job/CI success（20分59
 Arabic72pt一件の同placed callbackでraw3145728bytesを保存、独立alpha走査で実layer合成と完成後layer/元Card PNGの境界が一致。direct wireだけtop/right各1px狭いことを切り分けました。前後state/identity/clean/deadlineは成立、観測10.113ms。入口§86.2〜86.3/map§65.34.2/manifest v103に原artifact65memberの復元、全6job元ログ、解析/元rawを保存しました。
 
 primary=BLOCKER_NARROWED。非clip意図描画と実layerを扱う最小修復の設計確定が次です。単純union案にもnative-scaleでclipされた画素を扱う残差があり、閉じたwire/profile変更は未承認です。現行測定修復・本文/branding縮小・正式renderer・通常保存/本人履歴/実機は未完了、10/22保存・10/23共有の達成へ換算しません。結果5資料だけ、追加source/同source再実行/API/DB/deploy/main0、STRUCTURE_MAP_DELTA_NONE。モデル制限解除を維持します。
+
+
+#### 5.6.15 P-W1継続：実描画包含の具体的な修復仕様（2026-10-21）
+
+入口§87／map§65.35／manifest v104。前回Arabic72のtop/right各1px過小測定から、Cardの配置/論理高/余白/次fontまでを一体に直す具体案を完成。新しい別preview containment.prototype.v1＋selected_line.v3でdirect1・native-scale非clip参照・自然layerのunionを返し、旧v2を保持します。shared paintだけを忠実性の証明にせず、clip参照と自然layerのnative-grid全alpha occupancy一致を実行時に要求し、filter由来の範囲も保持。branding28/40/opacity0.8は固定です。
+
+19既存path・一度のCI・元915/native175を保持して新native20追加予定、RN既存11＋cliptrap/branding追加2条件、元8秒/native90秒/各資源上限・未達STOPを入口§87へ固定。新ink/wire/profileの実装と限定検証はRule18§11.3の明示判断待ちで未実行、資料5fileだけ反映。全体設計/全file map/tree1909、現38file・上流RN原典を照合し、DBはproject status確認以外0。診断反復や設計記録を製品修復の実績へ加算しません。
+
+10/22通常初回保存・10/23共有は引き続き前提未達。修復候補成立後も正式renderer/saved reader/InputScreen正式供給/既存API本人保存→本人詳細・履歴を閉じる必要があります。formal_admission/product_acceptance/normal_save_reopen_complete=false、automatic_progression=false、STRUCTURE_MAP_DELTA_NONE。

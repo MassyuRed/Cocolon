@@ -16,6 +16,10 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**最新は入口§87／current map§65.35／weekly§5.6.15／manifest v104です。実layer包含修復の具体仕様を確定しGitHubへ記録。旧v2を保持する別preview候補で、native非clip参照・自然layer・配置/余白判定を一体化する案です。新ink/wire/profileの実装と一度の検証は判断待ち・未実行。前回JS915/native175/RN11成功は保持し、正式採用・通常保存は未完了です。**
+
+### §86.2〜86.3の結果（履歴）
+
 **最新は入口§86.2〜86.3／current map§65.34.2／weekly§5.6.14.2／manifest v103です。source1f168d19は全6job/CI success、JS915/native175/RN11成立。配置直後のlayer合成と完成PNGの範囲が一致し、directだけtop/right各1px過小と確認。包含修復・正式admission・通常保存は未完了です。**
 
 ### §85.2〜85.3の結果（履歴）
@@ -3106,3 +3110,10 @@ root単一writer/PIECE_WORK_ALLOWED、harness＋既存5資料の6path、製品/A
 Arabic72pt一件の配置直後raw RGBAを保存・独立走査。valid/前後同一・clean・残期限内、観測10.113ms。外部layer範囲[98.3905029296875,21.5,430.3905029296875,97.5]は完成後layerと元PNGのRGB差分に一致し、direct wireだけtop/right各1px狭いことを確認しました。物理画面/全画素/一般入力の保証へ拡張しません。原artifact65memberは同manifest final bundle54member＋immutable旧PNG11参照、全6jobログ等で復元できます。
 
 BLOCKER_NARROWED、包含判定の修復・正式採用・通常保存は未完了。次は既存inspector/Cardで非clip意図描画と実layerを扱う修復設計を確定。union v3案は契約差があり未承認、native-scaleのclip残差も未解決のため正式採用へ使いません。metadata/raw採取は繰り返さず、詳細は入口§86.3。結果5資料のみ、追加source/再CI/API/DB/deploy/main0、STRUCTURE_MAP_DELTA_NONE。
+
+
+#### 65.35 2026-10-21 — 実layer包含の修復仕様を確定（実装判断待ち）
+
+入口§87／weekly§5.6.15／manifest v104。v2成功inkを変えない追加rejectだけではCardの配置・本文/branding論理高/余白・次fontを一体修復できないため、旧v2を保持する別preview containment.prototype.v1＋selected_line.v3を具体化。direct1、同paint native-scale非clip参照（実行時にclip参照と自然layerのalpha occupancy対応を検証、nativecell射影＋filter込みlogical合成）、自然layerの3成分unionを20fieldで渡す案です。nativegridはview0、local phase0→placed実小数位相、検証済みoverflowだけ既存次font、未準備/不一致/期限はunavailable。branding28/40/opacity0.8固定、branding自体の縮小は追加しません。
+
+既存19path・元8秒/native90秒/4096・4Mpixel/provider32MiBを保持し同時保有32MiBをpreflight、新native20を旧175に追加予定。一度の既存CI、既存RN11＋cliptrap/opacity追加2条件と画像の可視差、旧版保存/export拒否を確認する具体条件は入口§87.2〜87.4。上流RN全文blob47632aa確認、全体地図/tree1909/materialized38原典照合。新ink/wire/profileだけRule18§11.3 LEVEL_3未承認、製品/test/workflow/CI効果0、資料5fileのみ。現v9未採用・正式renderer/通常保存/本人履歴未完了、STRUCTURE_MAP_DELTA_NONE・automatic_progression=false。旧metadata/raw診断の再実行は次作業にしません。

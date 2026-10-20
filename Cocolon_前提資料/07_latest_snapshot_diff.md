@@ -41619,3 +41619,8 @@ source623662bの一度のrun39502473690は全6job/CI success。JS915/native175 u
 ### 2026-10-21 Piece結果：配置直後layer/完成PNGの一致とdirect測定の1px過小を確認
 
 source1f168d19の一度のrun39509902845は全6job/CI success、JS915/native175 unique PASS/FAIL0/RN11条件/元PNG11byte一致。Arabic72ptの同placed callbackでrawRGBAを保存・独立走査し、layer/完成後layer/元PNGは同境界、directだけtop/right各1px狭いことを確認。前後state/identity/期限は成立。入口§86.2〜86.3/map§65.34.2/weekly§5.6.14.2/manifest v103へ原物復元・全6jobログ・解析を保存。BLOCKER_NARROWED、包含修復/正式採用/通常保存は未完了。次は非clip意図描画と実layerを扱う最小修復の設計確定。単純union v3案は残差と契約差を持つ未採用案で、採用せず、既済のmetadata/raw診断を繰り返しません。結果5資料のみ、追加source/再CI/DB/deploy/main0、STRUCTURE_MAP_DELTA_NONE。
+
+
+### 2026-10-21 — Piece実layer包含修復の具体仕様（実装判断待ち）
+
+入口§87/map§65.35/weekly§5.6.15/manifest v104。旧v2を保持する別preview containment.prototype.v1＋selected_line.v3で、direct1・忠実性を実行時照合するnative-scale非clip参照・自然layerのunionを既存Card配置/本文・branding高/余白/次fontへ渡す最小案を具体化。nativegrid0→stage位相、filter範囲、opacity0.8、同時memory/元8秒・90秒、19pathと一度のCI・旧915/native175＋新20/RN11＋追加2条件・未達STOPを固定。新ink/wire/profileのみRule18§11.3の判断待ち。今回は資料5file、製品/test/workflow/CI/DB/API/deploy/main0。正式採用/通常保存/本人再表示未完了、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。前回JS915/native175/RN11の成立を新修復の実績へ加算しない。
