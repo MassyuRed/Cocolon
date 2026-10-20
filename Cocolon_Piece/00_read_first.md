@@ -2381,3 +2381,32 @@ artifact `piece-rn-canvas-ios` ID12246326787、3,222,364bytes、SHA256 `442b7b71
 次の最小修復箇所は既存PieceTextMetrics.mm内のPiecePixelCanvasFrameです。2つの外部CATransform3D関数を、translationだけを許す16成分の直接比較へ置き換える案を特定しました。m11/m22/m33/m44=1、m12/m13/m14/m21/m23/m24/m31/m32/m34/m43=0、m41/m42有限を要求します。canvas内ancestorのsublayerTransformとcanvas自身を除くlayer.transformへ適用し、既存UIView affine条件・convertPointの座標照合を維持します。新framework／helper／workflowを足す案ではなく、まだ未適用・未検証です。これだけで最終PNGの1px差や旧v8の未完走が解消するとは主張しません。次のsourceでは旧129＋新46の完走が必要で、最終layer PNGと判定用alphaの境界差も品質残件として明示します。
 
 正式renderer admission、採用版とsaved再表示の整合、InputScreen→既存hostへの正式供給、通常初回保存→同owner GET／履歴、共有／実機受入れは未完了です。今回のsourceは既存Draft PR30に残し、API／DB／runtime／deploy／署名／配布／main mergeの効果は0、automatic_progression=falseを維持します。既存CI使用量は増えましたが、請求額は確認していません。10/22通常保存・10/23共有の達成や延期承認へ今回結果を読み替えません。
+
+## 82. 2026-10-20 — v9のリンク修復と、完成PNGとの差を同じ検証で確認
+
+### 82.1 新しい継続指示と修復範囲
+
+Mashの16:54:36 JSTの「Pieceの残件作業を進めて」と添付の前回結果を受け、§81.6に固定済みの未適用修復から再開します。旧source bac29a1d／run39381252246 attempt1の未採用STOPは完了済み履歴として保持し、旧runを再実行しません。今回の新sourceを既存push CIで一度確認します。新ink定義を再承認事項に戻さず、Rule18 §0／§11.3 LEVEL_2とweekly §5.6.2の既存契約内の修復として扱います。
+
+実行ownerは華恋／GPT-6 Astra Pro／CHAT_PRO_OK、rootのみが編集・GitHub反映・実行判断を行います。開始headは73f600db74c5221984e90bbe3e34e052ce644860、API参照headはa536e50ee284785f585ac73329ef2947dca8bba9です。前提資料、作業rule、恒久incident全文、全体設計01／全file地図01A〜C、Piece current map、最新weeklyを確認しました。GitHub treeの全pathを取得し、使用するlocal実ファイルはremote blobへ照合しました。System Contextの保存結果は旧refのためcurrent根拠に使わず、正本・現物を直接確認しています。
+
+| 作業境界 | 今回固定する内容 |
+|---|---|
+| 商品接続／未完了条件 | P-W1通常preview→明示保存→本人再表示の前提である、v9の全native検査と完成画像品質の確認 |
+| 必要性／scope | OBSERVED_BLOCKER_MINIMAL_FIX。既に観測済みのlink不整合を既存関数内で直し、同じ一度の描画検証で既知1px差の発生段階を調べる |
+| source変更 | PieceTextMetrics.mmの外部2関数を16成分直接比較へ置換。m11/m22/m33/m44=1、他10成分=0、m41/m42有限。canvas内sublayerとcanvas自身以外のlayerへ適用。UIView affineとconvertPoint条件は保持 |
+| 既存検証file変更 | piece-rn-canvas-ios.m内のArabic診断だけ。元完成PNG保存後、同じText layerを透明sRGB・scale1 bitmapへ局所phase0／最終小数phaseで各1回描画し、全alpha境界・scale・CTMを記録する。元PNG、oracle、native_canvas_valid、elapsed、fixture、assertionは不変 |
+| 変更path／保存先 | 製品1・検証1・既存資料4の計6path。資料は本入口、manifest、Piece map、weekly20261017。新file／helper family／workflowなし |
+| 完了条件 | sourceのGitHub全文読戻し、新source CI1回のnative旧129＋v9追加46、既存JS915、実RN11reportと元PNG11枚を回収。成功・失敗・境界差を既存4文書へ記録する |
+| STOP／非対象 | 元8秒・strict包含・分母・本文・全range/font/B9・独立5値・旧版を変更しない。未達時は未採用を維持し、同source再試行・許容値追加・正式admission／save開放・DB／配置／配布へ広げない |
+| 時間／費用 | 前回CI23分06秒を目安とし保証しない。新規購入・依存・外部service・Mash操作0、既存CI使用量は増える。請求額は未確認 |
+
+旧v8は97＋18の115 PASS後、UTF16 budget検査中に終わっています。保存ログのmain_enteredからjob終了までは約54.7秒で、90秒alarm、例外、OOM、signalの原因記録はありません。同じ旧製品sourceのv7は129完走しており、入力は840 UTF16／420 graphemeで既存上限内です。メモリ・main占有を候補に留め、fixture縮小や時間変更はせず、既にv9にある段階ログで今回の到達点を確認します。
+
+Arabicでは直接glyph描画とlayer合成の経路が異なることを確認しました。今回の診断は元PNGの後に行い、layerのplaced境界が元PNGに一致するか、directと一致するかを比較します。画素差を許す新しいマージンやoffscreen画像への完成PNG置換は行いません。具体的なAA/filter原因は観測できた範囲だけで判断します。
+
+Supabase cocolon-projectのmigration履歴をread-only照合し、全10件・Piece6件（005 quota_read、006 preview_visual_changeを含む）を再確認しました。再適用、業務RPC、本人行読取、設定変更は0です。STRUCTURE_MAP_DELTA_NONE：既存owner・契約内のリンク修復と検証時診断であり、新route・保存権限・公開DTOは増やしません。
+
+### 82.2 source時点の未実施事項
+
+差分の読み取りレビューでは、16成分、canvas境界、既存判定不変、診断bufferの解放と元PNG後の実行を確認しました。Linuxのsource reviewをiOS compile／175件成功へ換算しません。新CI・全画像・結果記録はこのsource時点で未実施です。正式renderer採用、同版saved、InputScreenへのisSaveAdmitted、通常初回保存→本人GET／履歴は引き続き未完了です。

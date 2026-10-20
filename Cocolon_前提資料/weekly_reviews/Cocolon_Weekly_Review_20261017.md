@@ -728,6 +728,14 @@ native standaloneは今回追加したCATransform3DGetAffineTransform／CATransf
 **v9未採用として承認済み限定単位を終了。** 結果更新は既存4文書のみ、product/test/workflow修正・再実行0です。次の修復箇所はPiecePixelCanvasFrameの外部2関数をtranslation-onlyの16成分直接比較へ置換すること（未適用）で、175件完走とPNG境界差の品質確認が残ります。通常保存・本人GET／履歴・共有・実機受入れは未完了。元11report全文と全PNG identity、source15pathとCIの証拠はmanifest v91へ保持します。GitHub反映済みをアプリ完成へ読み替えません。
 
 
+#### 5.6.10 10/20のPiece継続 — v9のリンク修復と完成画像の原因確認
+
+16:54:36 JSTの新しい「Pieceの残件作業を進めて」を受け、P-W1の最初の未完了箇所である入口§81.6のリンク修復を実施しました。既存native関数内で2つの外部CATransform3D関数を16成分の直接比較へ置換し、同じtranslation-only条件を維持します。新framework/workflowを足しません。旧run39381252246の未採用STOPは保持し、新sourceの既存push CIを一度確認する単位です。
+
+同じ検証で、Arabicの元完成PNGの後に同Text layerをphase0／最終小数phaseへ描き、alpha境界・scale・CTMを診断として記録します。製品の判定用alpha、独立oracle、元PNG、元8秒、fixture、assertionは変えません。1px差の新許容や保存開放は含めず、旧129＋追加46、既存JS915、元11report／11PNGの結果は未確認です。製品1・検証1・既存資料4の計6path、root華恋／GPT-6 Astra Proが単一writerです。
+
+Supabaseの全10件・Piece6件の適用履歴をread-only再確認しました。DB再適用・本人行読取・業務RPC・設定変更0。P-W1の正式renderer・同版saved・InputScreenへの正式供給・通常保存→本人GET／履歴、P-W2共有、P-W3実機は未完了です。今回の確認後に10/22保存・10/23共有の前提と見通しを更新します。詳細は入口§82／map§65.30／manifestのv9_link_repairです。
+
 ## 6. 議題6 — 今回の指摘に対する判断と、記録の責任
 
 ### 6.1 問題は反省文の不足ではない

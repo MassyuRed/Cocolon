@@ -397,6 +397,70 @@ RCT_EXPORT_METHOD(capture:(nonnull NSNumber *)tag report:(NSDictionary *)raw res
       [UIImagePNGRepresentation(image) writeToFile:[PieceEvidenceDirectory() stringByAppendingPathComponent:name] atomically:YES];
       report[@"png"] = name;
     }
+    // Observe the unresolved Arabic layer/direct-glyph boundary difference
+    // only after the original canvas PNG. Never change its image, elapsed
+    // time, oracle, validity, mounted views or acceptance assertions.
+    if ([raw[@"name"] isEqual:@"suffix_arabic"] && report[@"png"] && texts.count > 0) {
+      RCTTextView *view = texts.firstObject;
+      CGPoint origin = [view convertPoint:CGPointZero toView:canvas];
+      CGAffineTransform canvasTransform = canvas.transform;
+      NSMutableDictionary *diagnostic = [@{
+        @"diagnostic_only": @YES, @"observed_after_original_png": @YES,
+        @"view_content_scale_factor": PieceFinite(view.contentScaleFactor),
+        @"layer_contents_scale": PieceFinite(view.layer.contentsScale),
+        @"screen_scale": PieceFinite(view.window.screen.scale),
+        @"masks_to_bounds": @(view.layer.masksToBounds), @"layer_opaque": @(view.layer.opaque),
+        @"layer_opacity": PieceFinite(view.layer.opacity), @"should_rasterize": @(view.layer.shouldRasterize),
+        @"rasterization_scale": PieceFinite(view.layer.rasterizationScale),
+        @"contents_gravity": view.layer.contentsGravity ?: @"",
+        @"minification_filter": view.layer.minificationFilter ?: @"",
+        @"magnification_filter": view.layer.magnificationFilter ?: @"",
+        @"canvas_transform": @[PieceFinite(canvasTransform.a), PieceFinite(canvasTransform.b),
+          PieceFinite(canvasTransform.c), PieceFinite(canvasTransform.d), PieceFinite(canvasTransform.tx), PieceFinite(canvasTransform.ty)],
+        @"canvas_origin": @[PieceFinite(origin.x), PieceFinite(origin.y)]
+      } mutableCopy];
+      NSMutableArray *samples = [NSMutableArray new];
+      for (NSNumber *placed in @[@NO, @YES]) {
+        @autoreleasepool {
+          const size_t width = 1536, height = 512, stride = width * 4;
+          const CGFloat pad = 160;
+          CGFloat px = placed.boolValue ? origin.x - floor(origin.x) : 0;
+          CGFloat py = placed.boolValue ? origin.y - floor(origin.y) : 0;
+          NSMutableDictionary *sample = [@{ @"stage": placed.boolValue ? @"placed" : @"local",
+            @"phase": @[PieceFinite(px), PieceFinite(py)], @"raster_scale": @1 } mutableCopy];
+          UInt8 *bytes = calloc(height, stride);
+          CGColorSpaceRef space = CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
+          CGContextRef context = bytes && space ? CGBitmapContextCreate(bytes, width, height, 8, stride, space,
+            kCGBitmapByteOrder32Big | kCGImageAlphaPremultipliedLast) : NULL;
+          if (space) CGColorSpaceRelease(space);
+          if (!context) {
+            sample[@"diagnostic_error"] = @"allocation";
+          } else {
+            @try {
+              CGContextTranslateCTM(context, 0, height); CGContextScaleCTM(context, 1, -1);
+              CGContextTranslateCTM(context, pad + px, pad + py);
+              CGAffineTransform ctm = CGContextGetCTM(context);
+              sample[@"ctm"] = @[PieceFinite(ctm.a), PieceFinite(ctm.b), PieceFinite(ctm.c),
+                PieceFinite(ctm.d), PieceFinite(ctm.tx), PieceFinite(ctm.ty)];
+              [view.layer renderInContext:context];
+              size_t l = width, t = height, r = 0, b = 0; BOOL seen = NO, edge = NO;
+              for (size_t y = 0; y < height; y++) for (size_t x = 0; x < width; x++) if (bytes[y * stride + x * 4 + 3]) {
+                seen = YES; l = MIN(l, x); t = MIN(t, y); r = MAX(r, x); b = MAX(b, y);
+                edge = edge || x == 0 || y == 0 || x + 1 == width || y + 1 == height;
+              }
+              sample[@"empty"] = @(!seen); sample[@"edge_reached"] = @(edge);
+              if (seen && !edge) sample[@"ink_local"] = @[@(l - pad - px), @(t - pad - py), @(r + 1 - pad - px), @(b + 1 - pad - py)];
+              else sample[@"diagnostic_error"] = seen ? @"edge" : @"empty";
+            } @catch (NSException *exception) {
+              sample[@"diagnostic_error"] = exception.name ?: @"render_exception";
+            } @finally { CGContextRelease(context); }
+          }
+          free(bytes); [samples addObject:sample];
+        }
+      }
+      diagnostic[@"samples"] = samples;
+      report[@"arabic_layer_raster_diagnostic"] = diagnostic;
+    }
     [self saveReport:report]; resolve(@YES);
   }];
 }

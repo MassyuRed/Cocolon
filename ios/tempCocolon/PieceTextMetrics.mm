@@ -59,13 +59,19 @@ static BOOL PiecePixelCanvasFrame(RCTTextView *view, UIView *canvas, CGRect *res
       canvas.bounds.size.height > 1920) return NO;
   // Only translation is supported inside the logical canvas. The small
   // convertPoint tolerance below handles arithmetic, not a scale allowance.
+  const auto isTranslation = [](CATransform3D value) {
+    // Compare every component directly so this guard has no additional
+    // QuartzCore function-link dependency in the standalone metrics target.
+    return value.m11 == 1 && value.m22 == 1 && value.m33 == 1 && value.m44 == 1 &&
+      value.m12 == 0 && value.m13 == 0 && value.m14 == 0 &&
+      value.m21 == 0 && value.m23 == 0 && value.m24 == 0 &&
+      value.m31 == 0 && value.m32 == 0 && value.m34 == 0 && value.m43 == 0 &&
+      isfinite(value.m41) && isfinite(value.m42);
+  };
   for (UIView *ancestor = view; ancestor; ancestor = ancestor.superview) {
-    CATransform3D childTransform = ancestor.layer.sublayerTransform;
-    if (!CATransform3DIsAffine(childTransform)) return NO;
-    CGAffineTransform child = CATransform3DGetAffineTransform(childTransform);
-    if (child.a != 1 || child.b != 0 || child.c != 0 || child.d != 1) return NO;
+    if (!isTranslation(ancestor.layer.sublayerTransform)) return NO;
     if (ancestor == canvas) break;
-    if (!CATransform3DIsAffine(ancestor.layer.transform)) return NO;
+    if (!isTranslation(ancestor.layer.transform)) return NO;
     CGAffineTransform transform = ancestor.transform;
     if (transform.a != 1 || transform.b != 0 || transform.c != 0 || transform.d != 1) return NO;
   }

@@ -2991,3 +2991,11 @@ source `bac29a1d9bf9879cb7d12de79d7d124c892257fb`／tree `3c18da98792c5ffeed78a2
 Arabicのplaced offscreen alphaはcanvas[374,601,705,676]、最終layer PNG本文は[374,600,706,676]です。後者もstrict view／logical rowに入りますが、端の1pixel差の原因は未特定。現oracleのexact一致対象はwire対raw offscreenで、最終PNGとのexact一致は検証していません。fixed scale1の限定結果であり、全physical条件・通常保存の受入れではありません。
 
 全native検査未達のSTOPにより、v9未採用・承認済み限定単位終了です。結果更新は既存資料4pathだけ、source/test/workflowの追加変更・再実行0。次の最小修復案は同関数内で16成分を直接比較してtranslationだけを許し、外部2関数への依存を除くこと（未適用）。これと旧129＋新46の計175件完走、PNG境界差の品質確認は残件です。正式admission／同採用版saved再表示／InputScreen正式supplier／通常保存→同owner再表示も未完了。完全report・hash・各時刻・停止判断は入口81.4〜81.6とmanifest v91のios_preview_v9_20261020へ同期します。
+
+### 65.30 v9の同契約リンク修復と完成layer診断（source時点）
+
+10/20 16:54:36 JSTの新継続指示で、入口§81.6の未適用修復を既存PieceTextMetrics.mmへ適用しました。外部CATransform3D関数を同関数内の16成分比較へ替え、translationだけを許す条件、canvas内sublayer／canvas自身以外のlayer、既存UIView affine／convertPointを保持します。新framework・workflowを追加しません。
+
+既存piece-rn-canvas-ios.mは、元Arabic完成PNGの保存後に同じText layerのphase0／最終小数phaseを透明scale1で観測します。既存direct-glyph oracle・元PNG・元8秒・valid・11fixture・assertionは変更せず、判定とlayer合成の1px差を原因のある段階へ切り分ける診断だけを追加します。旧129＋新46と全11描画の新source CI1回は未実施です。旧run39381252246は再試行しません。
+
+STRUCTURE_MAP_DELTA_NONE。製品1・検証1・既存資料4、計6path。開始73f600db、API a536e50e、writerは華恋／GPT-6 Astra Pro／CHAT_PRO_OK。Supabase履歴は全10・Piece6適用済みをread-only再確認し、DB/API/runtime/deploy/署名/配布/main merge変更0です。正式renderer、同版saved、InputScreenの正式provider、通常保存→同owner GET／履歴は未完了。境界・検証結果のownerは入口§82、manifest ios_preview_v9_link_repair_20261020、weekly §5.6.10です。
