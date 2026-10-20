@@ -736,6 +736,16 @@ native standaloneは今回追加したCATransform3DGetAffineTransform／CATransf
 
 Supabaseの全10件・Piece6件の適用履歴をread-only再確認しました。DB再適用・本人行読取・業務RPC・設定変更0。P-W1の正式renderer・同版saved・InputScreenへの正式供給・通常保存→本人GET／履歴、P-W2共有、P-W3実機は未完了です。今回の確認後に10/22保存・10/23共有の前提と見通しを更新します。詳細は入口§82／map§65.30／manifestのv9_link_repairです。
 
+#### 5.6.10.1 17:35 JST時点の結果とP-W1の現在地
+
+source972205c8をPR30へ反映し6path全文を照合、一度のCI39392217445 attempt1（18分31秒）を回収しました。前回のリンク不整合は解消、JS915・Android source compile・実RN11条件が成功。11PNGは旧v9とバイト同一で、mixed420／あ420は4916.762／2591.970ms、Arabic72ptは192.153msと元8秒以内です。
+
+ただしCI全体はcancelledで、native175件はsimctl bootstatus Finished後のinstall／launch境界で検査開始の証拠が得られず、全件未検証です。10分取消境界付近の-308 server diedと取消の因果は未確定。Arabicの1px差は同Text layer単独のlocal／placedでも再現し、placed境界は完成PNGに一致しました。直接描画proxyの過小評価が実際の包含保証へ及ぼす影響は残ります。
+
+今回のprimary outcomeはBLOCKER_NARROWEDです。次の最小着手点はnative起動境界の3marker案と、製品placed時点の実layer包含保証の成立条件で、どちらも入口§82.5へ具体化済み・未適用。正式admission、採用版saved再表示、InputScreenのisSaveAdmitted供給、通常保存→本人再表示は未完了です。10/22のP-W1、10/23のP-W2共有は目標であり、今回の限定描画成功だけで達成済み／達成確約にしません。新scopeを追加せず、この順で残件を閉じます。
+
+入口§82.3〜82.6／current map§65.30.1／manifest v93を同時更新し、元PNG・raw report・必要ログは既存manifest内のlossless bundleへ保存します。旧run未採用STOP・旧証拠は上書きせず、今回もv9未採用。追加製品/test/workflow変更・再CI・DB apply・runtime変更・配布・deploy・main mergeは0です。
+
 ## 6. 議題6 — 今回の指摘に対する判断と、記録の責任
 
 ### 6.1 問題は反省文の不足ではない

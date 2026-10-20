@@ -10,6 +10,10 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
+**最新結果は入口§82.3〜82.6／current map §65.30.1／weekly §5.6.10.1／manifest v93です。source972205c8の6path全文読戻しと一度のCIを確認しました。前回のリンクエラーは解消し、JS915・実RN11条件が成功、元PNG11枚は前回v9とバイト同一です。ただしnative175件はsimctl起動境界の取消で全件未検証。Arabicの1px差は独立Text layerのlocal／placed描画でも再現し、placed layer境界は完成PNGと一致しました。差の発生段階は絞れましたが、実描画の包含保証・正式admission・通常保存は未完了です。v9未採用を維持します。**
+
+### §81時点の結果（履歴）
+
 **最新結果は§81.4〜81.6／current map §65.29.1／weekly §5.6.9／manifest v91です。承認済みv9をsource bac29a1dへ反映し、15path全文を読み戻しました。一度のCIではJS915件成功、実RNはbaseline5・補足3・raw3の全11report／11PNGを確認。Arabicは72pt・200.256ms、両420は5533.207／3399.714msで元8秒以内です。ただしnative単体は追加したQuartzCore関数2個のリンク失敗で旧129＋新46が全件未実行。Arabic完成PNGの端はoffscreen判定値と1px異なり、完全一致は未証明です。v9は未採用として限定単位を終了し、正式admission・通常保存は未完了です。**
 
 ### §80時点の結果（履歴）
@@ -2410,3 +2414,52 @@ Supabase cocolon-projectのmigration履歴をread-only照合し、全10件・Pie
 ### 82.2 source時点の未実施事項
 
 差分の読み取りレビューでは、16成分、canvas境界、既存判定不変、診断bufferの解放と元PNG後の実行を確認しました。Linuxのsource reviewをiOS compile／175件成功へ換算しません。新CI・全画像・結果記録はこのsource時点で未実施です。正式renderer採用、同版saved、InputScreenへのisSaveAdmitted、通常初回保存→本人GET／履歴は引き続き未完了です。
+
+### 82.3 一度の実行結果：リンク修復を確認、native175件は未検証
+
+source **972205c858ecfd3ab36f83e078c4d6c2c6a13ee7**／tree **75b5e5f5c3421347cadc18794ffeef06f906d626**をPR30へ反映し、source6pathのremote全文とGit blobを照合しました。新sourceの既存push CIは[run39392217445 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39392217445)の一度だけで、17:16:31〜17:35:02 JST、18分31秒です。全体結論はcancelledであり、GREENではありません。旧runの再実行、今回の同source再実行、追加dispatchは0です。
+
+| 検証 | 観測結果と限界 |
+|---|---|
+| JavaScript | 915 PASS、FAIL／skip 0。今回sourceの既存CI結果 |
+| iOS syntax／project／standalone link | 成功。元の2つの未解決QuartzCore symbolは再発せず、compile/link後のsimulator bootstatusまで進行 |
+| native旧97＋v5追加32＋v9追加46 | 合計175件は全件未検証。main_entered／budget stage／PASS／FAIL／3種summaryの観測0。0/0を成功や全件非実行の証明にはしない |
+| 実React Native | XCTest1成功。baseline5/5、補足3/3、raw診断3/3の全11reportと元PNG11枚を回収 |
+| 同token・本文・保存境界 | v9のlocal/placed59組（preview56＋raw3）、本文・順序、7previewの同token fit、wrong-token拒否を確認。8CardのcanSave/canExportはfalse、savedv3にはfit handleなし、rawに保存権限なし |
+| 元8秒 | 最終reportまで全11件が8秒以内。mixed420は4916.761542ms／36pt18行、あ420は2591.970250ms／36pt17行、Arabicは192.152958ms／72pt。PNG capture前までの既存計測境界であり、capture完了時間へ読み替えない |
+| 画像 | 全11枚を原寸目視し、このfixtureでは欠け／重なりを観測せず。全11PNGは旧v9とバイト同一。処理時間の差を製品性能改善とは主張しない |
+| Android／共通guard | Android native source compile成功。既存phase6 guardは別run39392217376で119 PASS。export Pods／Android依存compileは変更対象外でskipのため、新しいcompile成功へ換算しない |
+
+native job118526218778は、08:22:10.368080Zにbootstatus Finished、その後08:26:59.042112ZにNSMachErrorDomain -308、同59.448462Zに`(ipc/mig) server died`、08:27:00.736644Zにcancelを記録しました。既存10分上限の取消境界に近く、-308が根因か終了処理の結果かは未確定です。bootstatus後のinstall／launchには境界markerがなく、どちらの完了も確定できません。元10分・native90秒alarm・検査分母は不変です。
+
+以前native129が完走したv7と、macOS15.7.9／Xcode16.4／clang17／runner image20260907.0337.1／選択iPhone17 Proが一致しました。workerは別で、今回の実runtimeはアプリのOS出力がなく不明です。環境の版差を原因とする証拠はありません。旧v8の115 PASS後のbudget未完走も、今回その段階が観測されないため未解明のままです。
+
+### 82.4 Arabicの境界差をText layer単独で再現
+
+元PNG保存後の追加診断は、allocation／exception／empty／edge到達なしで成立しました。境界は右・下を排他的端点とする`[左,上,右,下]`です。
+
+| 描画経路 | local境界 | 最終canvas座標のplaced境界 |
+|---|---|---|
+| 同layoutのdirect glyph、scale1 | [99,23,429,98] | [374,601,705,676] |
+| 同Text layerを独立描画、scale1 | [99,22,430,98] | [374,600,706,676] |
+| 元完成PNGの本文実画素 | — | [374,600,706,676] |
+
+placed layerはcanvas原点[275.6094970703125,578.5]を加えると完成PNGの本文境界と一致します。zero-phaseのlocalでも上・右へ1px広いため、小数配置や祖先canvas合成がなくても差は発生します。直接glyphをscale1へ描く判定値が、実Text layerの描画に対して小さいことを確認しました。view contentScaleFactor／layer contentsScale／screen scaleは3、min/magnification filterはlinear、shouldRasterizeはfalseです。ただし、scale・filter・backingの個別寄与は操作しておらず、単独原因は未分離です。
+
+Arabic PNGは前回と全RGBA画素・bytesが同一で、SHA256は`118d4e4060aee2d05fa1287a2629fcfecd126e94ab6db774e5fd46d6fcd30350`です。実ink高76は論理98以内、本文領域内で、view下端まで約0.833328ptの余裕があります。上辺追加36画素／右辺追加12画素があり、右辺RGBA(140,142,146,255)を背景の微差として無視しません。
+
+PCE-5の一般契約を「全PNGのpixel完全一致必須」へ変更しません。今回の未解決点は、strict包含を判断するproxyが実描画を過小評価する場合の保証です。元PNG後の診断は、実製品のplaced時点（canvas opacity0）でbackingが有効な証明ではありません。差の切分けを修復完了や正式renderer採用へ換算しません。
+
+### 82.5 現在の未完了と、次の最小着手点（未適用）
+
+1. **native175件の実行証拠。** 既存workflowのbootstatus帰還後／install帰還後／launch pipeline帰還後へ3つのHOST_STAGEを置けば、installとlaunchのどちらで止まるかを切り分けられます。最後のmarkerは`PIECE_NATIVE_LAUNCH_STATUS=$?`と`set -e`の後に置き、status採取を壊しません。これは未適用案であり、時間延長・fixture削減・同source再試行は行っていません。
+2. **実Text layerのstrict包含保証。** 既承認direct ink／wireを変えず、既存placed内で実layerにも同じ包含条件を当てる候補はあります。ただしopacity0時点のbacking有効性・元8秒・独立性の成立が未確認です。1px許容追加、scale変更、displayIfNeededによる強制成立、完成PNGの差し替えは実装していません。まずこの成立条件を既存owner内で明らかにします。
+3. **P-W1の商品接続。** 正式renderer admission、採用版のsaved再表示、InputScreenからのisSaveAdmitted供給、通常初回保存→本人GET／履歴、実機受入れが残っています。既存create controller／private-save API／owner reads／6本のDB定義を作り直しません。native_checkedだけで保存を開放しません。
+
+今回の限定単位は、source反映・一度の観測・結果保存として終了します。primary outcomeはBLOCKER_NARROWED、リンク修復は確認済みですがnative175完走とP-W1完成は未成立です。v9は未採用、formal_admission／product_acceptance／normal_save_reopen_completeはfalseです。新しいink定義の承認を再度求める扱いにも戻しません。
+
+### 82.6 復元可能な証拠と反映範囲
+
+結果反映は既存4資料だけです。manifest v93の`ios_preview_v9_link_repair_20261020`へ全11report、各PNG/hash、native到達点、Arabic比較、元CI metadataを集約します。Rule14／17に従い、今回の元PNG11枚・raw results.json・必要ログとledgerをlossless tar.gz/base64 bundleとして同recordに保存します。新file／helper／ownerは0です。元Actions ZIPはartifact12250972261、3,206,417 bytes、SHA256 `880ae6746b62deac71f85577feffc8cb9d50cb081c7d002702291e3f87eaa875`、期限は10/27ですが、採用判断に使う最小証拠bytesを期限付きURLだけに依存させません。
+
+Supabaseは開始時のread-only migration履歴（全10／Piece6）の照合だけで、DB apply／業務RPC／本人行読取0。今回の結果後は製品／test／workflowの追加変更0、再CI0、API／runtime／環境／署名／配布／deploy／main merge 0です。source時点の§82.1〜82.2と旧v9結果ownerは履歴として保持します。構造はSTRUCTURE_MAP_DELTA_NONEです。

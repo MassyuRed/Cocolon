@@ -16,6 +16,10 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**最新結果は入口§82.3〜82.6／current map §65.30.1／weekly §5.6.10.1／manifest v93です。source972205c8の6path全文読戻しと一度のCIを確認しました。前回のリンクエラーは解消し、JS915・実RN11条件が成功、元PNG11枚は前回v9とバイト同一です。ただしnative175件はsimctl起動境界の取消で全件未検証。Arabicの1px差は独立Text layerのlocal／placed描画でも再現し、placed layer境界は完成PNGと一致しました。差の発生段階は絞れましたが、実描画の包含保証・正式admission・通常保存は未完了です。v9未採用を維持します。**
+
+### §81時点の結果（履歴）
+
 **最新結果は入口§81.4〜81.6／本map §65.29.1／weekly §5.6.9／manifest v91です。v9 source bac29a1dの15path全文照合と一度のCIを完了。JS915成功、実RN全11report／11PNG成立、Arabic72pt・200.256ms、両420は5533.207／3399.714ms。ただしnative単体175件は追加したQuartzCore関数のリンク失敗で未実行です。Arabicの最終PNGとoffscreen alphaに1px差があり、exact一致は未証明。v9未採用で限定単位終了、正式admission・通常保存は未完了です。**
 
 ### §80時点の結果（履歴）
@@ -2999,3 +3003,13 @@ Arabicのplaced offscreen alphaはcanvas[374,601,705,676]、最終layer PNG本�
 既存piece-rn-canvas-ios.mは、元Arabic完成PNGの保存後に同じText layerのphase0／最終小数phaseを透明scale1で観測します。既存direct-glyph oracle・元PNG・元8秒・valid・11fixture・assertionは変更せず、判定とlayer合成の1px差を原因のある段階へ切り分ける診断だけを追加します。旧129＋新46と全11描画の新source CI1回は未実施です。旧run39381252246は再試行しません。
 
 STRUCTURE_MAP_DELTA_NONE。製品1・検証1・既存資料4、計6path。開始73f600db、API a536e50e、writerは華恋／GPT-6 Astra Pro／CHAT_PRO_OK。Supabase履歴は全10・Piece6適用済みをread-only再確認し、DB/API/runtime/deploy/署名/配布/main merge変更0です。正式renderer、同版saved、InputScreenの正式provider、通常保存→同owner GET／履歴は未完了。境界・検証結果のownerは入口§82、manifest ios_preview_v9_link_repair_20261020、weekly §5.6.10です。
+
+#### 65.30.1 結果：リンク修復済み、native起動境界と実layer包含が残る
+
+source972205c858ecfd3ab36f83e078c4d6c2c6a13ee7の6path全文読戻しとrun39392217445 attempt1の一度の観測を完了しました。iOS syntax/project/standalone linkとAndroid source compileは成功、JS915・実RN baseline5/5／補足3/3／raw3/3が成功。元11PNGは旧v9とバイト同一で、mixed420は4916.761542ms、あ420は2591.970250ms、Arabic72ptは192.152958msです。元8秒はcapture前までの既存report条件として維持します。
+
+全体CIはcancelledです。native175件はmain／PASS／summaryの観測0で全件未検証。bootstatus Finished後、10分取消境界付近にsimctl -308 server diedがあり、installとlaunchのどちらで止まったか、エラーが原因か終了の結果かは未確定です。旧リンク不整合は解消しましたが、旧v8のbudget原因まで解明したことにはしません。
+
+Arabicではdirect placed[374,601,705,676]に対し、同Text layer単独placedと完成PNGは[374,600,706,676]です。zero-phase localでも同方向の差が再現し、差がText layer描画経路ですでに発生することを確認しました。scale3／linearを観測しても個別因果は未分離で、opacity0の製品placed時点のbacking有効性も未確認です。このfixtureは実view／論理行／本文余白内ですが、全入力のstrict包含保証や正式採用は未成立です。
+
+現在の最初の未完了は、既存native workflowのinstall／launch到達点の区別と175件完走、および既存placed ownerでの実layer包含保証です。具体的な未適用案は入口§82.5、lossless証拠はmanifest v93のios_preview_v9_link_repair_20261020へ固定しました。InputScreenのisSaveAdmitted供給、採用版saved再表示、通常初回保存→同owner GET／履歴は引き続き残っています。新route／DTO／admission／設定／DB apply／main mergeは0、結果反映は既存4資料のみ、STRUCTURE_MAP_DELTA_NONEです。
