@@ -41579,3 +41579,8 @@ STRUCTURE_MAP_DELTA_NONE。既存production3file内、新production／型／意�
 Mashの今回の対話に基づき、学習済みの言語能力を土台に、Mashの観測の進め方（着目、暫定構造、問い、整合確認、修正・棄却・更新）を教材から育てる方針を記録した。言葉の模倣が目的ではなく、応答と問いを一体で扱い、既存CMEEの資産を継承する。決定・対話の要旨・従来の費用／観測に関する懸念・旧Route A方針との関係・未決・次作業の参照先は[最新週次10/20追補](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261020-observation-learning)。
 
 具体model、配置、費用上限、学習方式、教示会日時、採用条件と公開工程は未決。次は最初の観測会一組と小さな比較案の具体化。今回は記録3文書のみでADMINISTRATIVE_ONLY、actual構造・runtime・DB・依存・学習・model取得・実データ・費用・配置・build・公開・自動化effect0。STRUCTURE_MAP_DELTA_NONE。旧Route A限定の履歴を消さず、今回の設計検討方針の更新と未選定の稼働方式を区別する。12/18目標の変更・完成保証・商品合格は設定しない。
+
+
+## 2026-10-20 観測学習記録 第1回と継続保存先
+
+Mashの依頼により、[観測技術の蓄積先](observation_learning/README.md)と継続用ひな形を作り、写真展示会の架空事例を用いた第1回を保存した。対話原文、Mashの明示教示、華恋の整理、未確認の仮説を区別する。経験は探る場所と観測者自身の価値観の持ち込みに気づくために使い、人物タイプの統計分類を学ぶことを目的にしない。詳細は[週次追補](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261020-observation-session-001)。素材・教示の保存までで、モデル学習・能力評価・製品構造の変更は未実施。STRUCTURE_MAP_DELTA_NONE／ADMINISTRATIVE_ONLY。
