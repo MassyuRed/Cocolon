@@ -41592,3 +41592,7 @@ Mashの明示決定をRule18 §0Aと既存入口/Gate/索引へ反映。Piece残
 ### 2026-10-20 Piece途中checkpoint：native175 unique PASS、実RN継続中
 
 source9de5a87の13path全文・changed setをfresh確認。run39430845624で旧129＋v9追加46の175個別PASS／FAIL0と3summaryが揃い、Window例外を解消。native step successとjob cancelledを区別し、取消理由は未確定。実RNは同run継続中。currentは入口§84.2/map§65.32.1/weekly§5.6.12.1/manifest v97。元ログ5jobとmetadataを同manifestにlossless保存し、正式採用・通常保存は未完了のまま。追加source変更・再実行0。
+
+### 2026-10-20 Piece結果：Window例外解消・native175完走・実RN11条件
+
+source9de5a87を一度確認したrun39430845624の最終結果を保存。native175 unique PASS/FAIL0と検査step success、JS915、実RN11条件/11PNGを確認しました。native job/CI全体cancelled（理由未確定）は成功へ変換しません。元6jobログ・raw report・metadataは同manifest内のinterim/final bundleと旧PNG11のbyte一致参照で可逆保存。currentは入口§84.2〜84.4/map§65.32.2/weekly§5.6.12.2/manifest v98。次はopacity0のplaced callbackで実Text layerを直接観測する一作業。v9正式採用・通常保存は未完了、追加source/再実行/DB/deploy/main0。

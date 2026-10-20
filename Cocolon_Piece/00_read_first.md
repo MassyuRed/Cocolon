@@ -10,6 +10,8 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
+**最新結果は入口§84.2〜84.4／current map§65.32.2／weekly§5.6.12.2／manifest v98です。Window修復source9de5a87でnative175件unique PASS・FAIL0、JS915、実RN11条件・元PNG11枚を確認し、結果原物を保存しました。native検査stepはsuccessですがjob/CI全体cancelled、取消理由は未確定です。モデルのPro限定はRule18§0Aで解除済み。v9正式採用・実layer包含・通常保存は未完了です。**
+
 **最新確認は入口§84.2／current map§65.32.1／weekly§5.6.12.1／manifest v97です。Window修復source9de5a87の13pathを全文読戻し、native175件の重複なし個別PASS・FAIL0と3summary、mainから39.800秒、検査step成功を確認。ただしjob全体はcancelled、理由未確定です。実RN検査は同じrun39430845624で継続中。v9採用・実layer厳密包含・通常保存は未完了です。**
 
 **現在は入口§84／current map §65.32／weekly §5.6.12／manifest v96です。Mashの2026-10-20明示決定でPiece残件のPro限定を解除し、v9テスト専用Window修復を実装しました。旧129件・v9追加46件の判定と製品sourceは維持。新sourceの一度のCIはこれから確認し、175件成功・v9採用・通常保存の完成は未確認です。**
@@ -2603,3 +2605,29 @@ native job118655208907の元ログは**175個別PASS／unique175／FAIL0**です
 JS915 PASS／FAIL・skip・cancelled0、Android source compile success。export2jobはsuccessですが依存compileはscope skipです。sourceに対する別自動check5件はsuccess。実RN canvas job118655208930は途中保存時点でin_progressのため、11条件やPNG成功を今回分として主張しません。今回のnative元ログ・終了済み5job元ログ・jobs metadataをmanifestの同じ新owner内へlossless保存します。実RN終了後に同unitへ結果を追記します。
 
 Window修復・実native175の証拠は限定TECHNICAL_CREDITです。bounded work全体は実RN採取と最終記録まで継続中。次の商品上の作業は、既存RN harness PieceObservedSelectedV2Callのplaced成功callbackで、wireをresolveする直前の同Text/tag/token/配置の自然なlayer状態を読むことです。現行製品・独立oracleはdrawGlyphsを測り、完成PNG後のlayer診断はopacity0のplaced時点を証明しません。単にlayer測定を足すだけでは本文/branding境界・縮小経路・正式admissionは完成しません。v9未採用、通常保存・本人再読・実機は未完了です。
+
+### 84.3 同じ一度の実RN結果と画像確認
+
+run39430845624 attempt1は13:29:37〜13:51:50Z（22分13秒）で終了し、全体結論は**cancelled**です。piece-ios-rn-canvas／piece-rn-contracts／piece-android-source／export2jobはsuccess、piece-ios-sourceは§84.2のとおりjob cancelledです。export2jobの依存compileはscope skipで、再compile成功へ換算しません。再実行・追加dispatch・結果後のtest/製品/workflow変更は0です。
+
+実RNはbaseline5/5、supplemental3/3、raw3/3、全native_canvas_valid/body_preserved=true、元PNG11/11。preview7の同token fitはtrue、旧saved v3はfitなし、Card8のcanSave/canExportはfalse、raw3は保存権限なしを維持しました。v9のlocal→placed59組で同token・同Text/canvas node・独立5値とoverflow/wrapなしを確認しました。local保存照合の初回は旧saved v3（local0）にもv9の同数条件を誤要求し、検査側assertionで停止しました。v9の59組へ対象を正して再照合し、source/fixture/CIは変更・再実行していません。
+
+| 例 | 最終reportまでの時間 | font | 現行条件 |
+|---|---:|---:|---|
+| essay_max420 | 5053.087665999774ms | 36pt | 成立 |
+| suffix_max420_a | 2370.564250000054ms | 36pt | 成立 |
+| suffix_arabic | 179.20866600004956ms | 72pt | 成立 |
+
+元8秒の境界は最終fit確認を含むreportまでであり、後のPNG capture時間を含むと主張しません。前回より短い観測値ですが製品sourceは不変なので、今回の修復による性能改善とは判定しません。
+
+artifact12268708757の元ZIP SHA256は **4f5cf92c198ac7915e455da6f2c623ffbb216bdc2a48e0d01f7b1247a74f8b12**。元PNG11枚は既存link-repair ownerの11memberとbytes完全一致です。今回のreport/time/tokenは新しく採取し、旧結果を成功判定へ流用していません。全11の一覧を目視、Arabic/essay_max420を原寸で確認し、確認範囲で明らかな切れは見ませんでした。1px厳密同値や他の未検証入力は目視で証明しません。画像は旧owner/bundle/member/hashから可逆復元し、重複byteを追加しません。
+
+今回もArabicの完成後layer診断はlocal=[99,22,430,98]、placed=[98.3905029296875,21.5,430.3905029296875,97.5]です。opacity0時点の自然なText backing、全入力のlayer包含は未観測のままです。既存のdrawGlyphs oracleをlayerの証明へ読み替えません。
+
+### 84.4 保存と次の一作業
+
+今回のprimaryは**TECHNICAL_CREDIT**、範囲はWindow不整合修復・native175件完走と同sourceの実RN条件確認です。商品合格・正式admission・通常保存完成には加点しません。元native/終了済み5jobログは途中checkpoint e186e9d4f2815c8f519167efdbc44c2ef1662f7bと同ownerのinterim bundleに保存・5path読戻し確認済み。最終RN元ログ・新raw report・最終6job/run metadata・解析・元xcodebuild logを8memberのfinal bundleへlossless保存します。旧ownerを改変せず、同manifestの旧bundleから画像11枚も復元・照合できます。期間付きActions artifactだけへ保存を依存させません。
+
+次は、既存実RN harnessのplaced成功callbackで、元wireを返す前の同Text/tag/token/配置の自然なlayer backingを直接観測し、既存の本文/branding境界・縮小経路へ必要な差分を具体化する一作業です。native175は検証済みとして維持し、CI cancelledを理由に同sourceを再実行したり、job上限を延ばす補助作業へ逸れません。判定方式・品質・公開契約の変更が必要なら、具体差分を先に用意して既承認範囲と区別します。
+
+bounded unitを最終結果保存で終了し、実layer修復・正式renderer admission・採用版saved・InputScreen供給・通常明示保存→本人GET/履歴・実機は残件です。今回Pro限定を解除した決定は恒常運用へ接続しましたが、EmlisAI/分析のmodel条件や他承認を変更しません。root単一writer、STRUCTURE_MAP_DELTA_NONE、v9未採用、DB/apply/本人行/RPC/依存/runtime/deploy/配布/main merge変更0、automatic_progression=falseです。
