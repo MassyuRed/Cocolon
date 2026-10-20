@@ -41609,3 +41609,8 @@ source623662bの一度のrun39502473690は全6job/CI success。JS915/native175 u
 ## 2026-10-21 Piece残件：配置直後layerの外部RGBA合成診断
 
 前回入口§85.3を継続。Arabic72ptの同placed callbackで同Text layerを固定1536×512 RGBAへ一回合成し、raw原物・alpha境界・前後state/identity/期限を採るharness差分。元wire/oracle/assertions/175分母/8秒/native90秒を保持し、強制更新・別renderer・fallback・再試行0。入口§86/map§65.34/weekly§5.6.14/manifest v101。root単一writer/PIECE_WORK_ALLOWED、6既存path、製品/API/DB/workflow/依存/deploy/main0、STRUCTURE_MAP_DELTA_NONE。新sourceの一度の既存CIは未実行、実画素包含・v9正式採用・通常保存は未完了です。
+
+
+### 2026-10-21 Piece途中保存：source1f168d19、native175成功
+
+全6pathのremote全文一致。同run39509902845 attempt1でnative175 unique PASS/FAIL0/3summary/launch0・main約58.300秒、JS915成功。5job元ログ＋metadataをmanifest v102へlossless保存。入口§86.1/map§65.34.1/weekly§5.6.14.1。実RN/配置直後画素・CI全体は進行中のため未確認。追加source・再実行・DB/deploy/main0、正式採用・通常保存は未完了です。

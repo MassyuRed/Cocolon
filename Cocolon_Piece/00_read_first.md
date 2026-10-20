@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§86／current map§65.34／weekly§5.6.14／manifest v101です。配置直後の同Text layerを外部RGBAへ一回合成する限定診断を追加しました。新source CIは未実行。実画素包含・v9正式採用・通常保存は未完了です。**
+**最新は入口§86.1／current map§65.34.1／weekly§5.6.14.1／manifest v102です。source1f168d19のnative175・JS915が成功、実RN/配置直後raw画素とCI全体は進行中です。正式admission・通常保存は未完了です。**
 
 ### §85.2〜85.3の結果（履歴）
 
@@ -2718,3 +2718,10 @@ setNeedsDisplay/displayIfNeeded/layoutIfNeeded/flush/opacity変更/新待機/再
 全体設計01・全file地図01A/01B/02・current map・最新weekly・mandatory incident全文・Karen-Diary入口3file・規則current/18/09/08/11/17/99と技術正本11/14、実harness・native inspector/Card・既存workflowを確認しました。System Context prepareはmaterialized環境でtools module不在のため失敗し、同入口が許可する原典直接読取へ移行しました。生成context検証成功とは扱いません。Supabase一覧ではcocolon-project ACTIVE_HEALTHYを確認し、DB query/apply/本人行/業務RPC0です。
 
 完了条件は新sourceの既存push CI一度の結果とraw/reportを保存し、元wire・完成後layer・元PNGとの差を比較できること。予想CI30〜40分、Mash操作追加0、追加service/依存0。未成立でも強制描画・同source再実行はしません。契約・表示/判定方式/版変更が必要ならこの単位の外として具体化します。source時点の新CIは未実行、前回JS915/native175/RN11成功は履歴です。formal_admission/product_acceptance/normal_save_reopen_complete=false、v9未採用、canSave/canExport=false、automatic_progression=false。STRUCTURE_MAP_DELTA_NONE（既存harness内の観測のみ、製品owner/route/型/公開contractは不変）。
+
+
+### 86.1 途中checkpoint：native175・JS915成功、実RNの採取は進行中
+
+source1f168d19ebfbe05d80d14e0e33f41c1dbb057419／tree332c600552c5ed83d6b338abe41f28aae5e27362の全6path・blob全文を読み戻し一致確認。run39509902845 attempt1のJS915、native175 unique PASS/FAIL0、3summaryとlaunch0を確認しました。native main22:49:30.586〜最終summary22:50:28.886 UTCの約58.300秒は元90秒内です。Android source・export2jobもsuccess、export依存compileはscope skipです。実RN canvas jobは同じ一度のrunで進行中のため、raw画素・今回RN11条件・CI全体は未確認とします。
+
+取得済み5job元ログとmetadataをmanifest v102の同owner.interim_evidence_bundleへlossless保存。追加source修復・再CI・DB/deploy/main0。既存5資料の途中保存のみで、formal_admission/product_acceptance/normal_save_reopen_complete=false、v9未採用を維持します。

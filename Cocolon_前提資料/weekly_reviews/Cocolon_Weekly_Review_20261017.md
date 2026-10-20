@@ -1667,3 +1667,8 @@ BLOCKER_NARROWED、v9未採用、正式admission/通常保存/本人再読/実�
 入口§85.3の次作業を入口§86/map§65.34/manifest v101へ具体化。Arabic72pt・同placed成功callbackで自然な同Text layerを固定RGBAへ一度合成し、raw原物・alpha境界・前後identity/state/期限を保存します。完成後layer対wireのtop/right各1px差が配置直後からあるかを比較する限定診断です。元wire/oracle/assertions/175分母/8秒/native90秒は維持し、失敗時の強制表示・別renderer・追加CI再実行はしません。
 
 新sourceの既存CIはsource時点未実行。6既存pathのみ、製品/API/DB/workflow/依存/deploy/main0、STRUCTURE_MAP_DELTA_NONE、モデル制限解除を適用。前回のJS915/native175/RN11は前回の技術実績。正式renderer・通常保存/本人再読・10/22保存/10/23共有目標の達成には数えません。
+
+
+##### 5.6.14.1 途中checkpoint：native175成功、実RN継続中
+
+source1f168d19の全6path読戻し一致。run39509902845 attempt1でnative175 unique PASS/FAIL0/3summary/launch0（main約58.300秒）、JS915成功。5job元ログとmetadataをmanifest v102へ保存しました。実RNと配置直後raw画素、CI全体は未確認のまま。入口§86.1/map§65.34.1、追加source修復・再実行0。保存/共有の目標達成へ換算しません。
