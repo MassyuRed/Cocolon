@@ -41584,3 +41584,7 @@ Mashの今回の対話に基づき、学習済みの言語能力を土台に、M
 ## 2026-10-20 観測学習記録 第1回と継続保存先
 
 Mashの依頼により、[観測技術の蓄積先](observation_learning/README.md)と継続用ひな形を作り、写真展示会の架空事例を用いた第1回を保存した。対話原文、Mashの明示教示、華恋の整理、未確認の仮説を区別する。経験は探る場所と観測者自身の価値観の持ち込みに気づくために使い、人物タイプの統計分類を学ぶことを目的にしない。詳細は[週次追補](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261020-observation-session-001)。素材・教示の保存までで、モデル学習・能力評価・製品構造の変更は未実施。STRUCTURE_MAP_DELTA_NONE／ADMINISTRATIVE_ONLY。
+
+## 2026-10-20 Piece残件：モデル制限解除とv9 fixture修復の新source
+
+Mashの明示決定をRule18 §0Aと既存入口/Gate/索引へ反映。Piece残件はPro以外でも実施し、品質・承認・実検証は維持します。v9 test-only Windowを§83.4の3箇所に限定して修復し、新sourceの既存push CIを一度確認する段階です。currentはPiece入口§84/current map§65.32/weekly§5.6.12/manifest v96。native175成功、実layer厳密包含、正式renderer採用、通常保存の完成は未確認。製品/API/DB/依存/deploy/main変更0、STRUCTURE_MAP_DELTA_NONE。

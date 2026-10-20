@@ -1,5 +1,5 @@
 work_attitude_rules_for_karen
-revision_date: 2026-09-24
+revision_date: 2026-10-20
 created_at: 2026-05-17 18:58:26 JST
 format: UTF-8 text / Notepad向け
 normative_status: CURRENT_ENTRY
@@ -23,9 +23,9 @@ normative_status: CURRENT_ENTRY
 
 # 0. Model Gate — 最初に必ず確認
 
-**2026-09-24 Mash決定：PieceはPro主体、EmlisAIはUltra主体、分析構造は変更なし。**
+**2026-10-20 Mash決定：Piece残件作業のPro限定を解除。**
 
-Pieceは `18_chat_work_environment_selection_rule_2026_08_06.txt` §0を先に適用します。確認済みPro（GPT-6 Astra Proを含む）が既存承認範囲の技術設計・実装・検証・GitHub反映を担います。以下と `CURRENT_RULES.md` R4 / R9のGPT-5.6 Pro固定・Ultra専属役割の一般指定は、Pieceに限り同§0の限定決定を優先します。品質・禁止事項・個別承認・実際の独立review要件は変えません。
+Piece残件はPro以外でも進めます。モデル名不明またはPro確認不能だけでは停止せず、実際に確認できる環境だけを記録します。`18_chat_work_environment_selection_rule_2026_08_06.txt` §0Aが下記とCURRENT_RULES R9・開始/出力Gate・manifestの同じモデル条件に優先します。品質基準、承認範囲、実際の独立review・runtime条件は維持します。EmlisAI・分析構造の条件へ拡張しません。
 
 CocolonのChat作業は、実際のモデルが`GPT-5.6 Pro`であることを確認できる場合だけ開始します。
 

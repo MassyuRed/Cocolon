@@ -1,5 +1,5 @@
 chat_work_environment_selection_rule
-revision_date: 2026-09-24
+revision_date: 2026-10-20
 normative_status: CURRENT
 decision_owner: Mash
 operational_owner: Karen
@@ -19,6 +19,16 @@ operational_owner: Karen
 7. execution ownerを一人へ固定し、duplicate execution、parallel write、silent scope expansion、approval前execution、counter resetおよびterminal後のautomatic progressionを防ぐ。
 
 この資料は、§11.3の限定standing delegationだけをLEVEL_1 / LEVEL_2のpermission basisとして与えます。それ以外のtechnical authority、implementation / GitHub write / network / runtime permission、課金承認または自動進行を与えず、scope classificationだけではいずれも生成しません。
+
+# 0A. 2026-10-20 Mash決定 — Piece残件作業のPro限定を解除
+
+Mash様は「Pro以外でもPieceの残件作業をやることはあるから、その制限は外して大丈夫！」と明示しました。
+
+Pieceの残件作業はPro以外でも実施できます。Proであることの確認、Proという名称の表示、モデル名の不明だけを開始・続行・成果物採用の停止理由にしません。実際に確認できるモデル・環境情報だけを記録し、ProまたはUltraと偽って申告しません。環境表示は`PIECE_WORK_ALLOWED`を使用できます。
+
+この決定は、下記§0のPro限定・Pro再監査条件と、一般条項・CURRENT_RULES R9・入口・開始/出力checklist・manifestにある同じモデル条件に、Piece残件作業の範囲だけで優先します。既承認範囲の技術判断・実装・検証・GitHub反映は、現在の実行担当が単一ownerとして行えます。実際の独立reviewや特定runtimeが成立条件である作業は、その条件を維持します。
+
+品質基準、原典確認、既存の承認範囲、§11.3 allowed/prohibited、privacy、DB・本番操作、検証・GitHub読み戻し、停止・再試行境界、automatic_progression=falseは変更しません。EmlisAI・分析構造・共有契約の担当条件へ拡張せず、過去の未検証成果物や失敗を遡及採用・成功扱いしません。
 
 # 0. 2026-09-24 Mash決定 — PieceはPro主体
 

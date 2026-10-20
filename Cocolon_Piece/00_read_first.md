@@ -10,6 +10,8 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
+**現在は入口§84／current map §65.32／weekly §5.6.12／manifest v96です。Mashの2026-10-20明示決定でPiece残件のPro限定を解除し、v9テスト専用Window修復を実装しました。旧129件・v9追加46件の判定と製品sourceは維持。新sourceの一度のCIはこれから確認し、175件成功・v9採用・通常保存の完成は未確認です。**
+
 **最新結果は入口§83.3〜83.6／current map §65.31.1／weekly §5.6.11.1／manifest v95です。source5fa54927の5path全文読戻しと一度のCIを確認しました。install／launch／mainに到達し、旧129件の個別PASSと両budget完了を観測。v9最初のfixture追加時に、テスト用Textが自身をWindowとして返すことに整合するUIKit例外が発生し、追加46件は未検証です。実RN11/11条件・元PNG11枚の結果を保存しました。v9未採用、実layer包含・正式admission・通常保存は未完了です。**
 
 ### §83 source時点の記録（履歴）
@@ -2561,3 +2563,29 @@ primary outcomeは**BLOCKER_NARROWED**です。source反映・一度の実行・
 結果反映は既存4資料のみです。今回固有のraw report・全6job元ログ・metadata・解析を、同じmanifest内の新recordにlossless tar.gz/base64で保存します。新bundleは21 member、その内PNG実体0枚。今回取得の元PNG 11枚のうち11枚は前回の保存済みmemberとbytes完全同一であるため、旧owner ios_preview_v9_link_repair_20261020／bundle SHA256 94aaba66d3863b4635a122ee949dfba85caf5c1d939c6d6c966ea776e1247e76／immutable commit21ad068／member pathへ一意に参照します。旧report・時間・token・成功判定を今回へ流用せず、同じ画像bytesだけを重複保存しません。新旧bundleから今回の全画像を合成復元して現物と照合する構成です。
 
 旧v9／link-repair ownerとその証拠はdeep同一で保持します。今回の結果後に製品・test・workflow追加変更0、再CI0、DB metadata再取得／apply／業務RPC／本人行読取0、runtime／環境値／署名／配布／deploy／main merge0です。STRUCTURE_MAP_DELTA_NONEです。
+
+## 84. 2026-10-20 — Pieceモデル制限解除とv9テスト用Windowの最小修復
+
+### 84.1 今回の判断・実装・固定範囲
+
+Mashの22:15:45 JST「Pieceの残件作業を進めて」と22:20:04 JST「Pro以外でもPieceの残件作業をやることはあるから、その制限は外して大丈夫！」を根拠とします。モデル条件の解除はRule18 §0Aへ反映し、入口・一般rule・開始/出力Gate・rule manifest・環境索引を同じ決定へ接続しました。EmlisAI/分析の条件、品質、既存の承認範囲・実DB/本番操作・再試行境界は維持します。
+
+| 開始項目 | 今回固定する内容 |
+|---|---|
+| product_destination / current_gate | P-W1、B10_WITH_B12C_ADOPTION_BOUNDARY。通常保存へ進む前のnative175件未完走を直接解消する |
+| exact_work / necessity | §83.4のテスト用Window不整合だけを修復し、新sourceの既存push CIを一度確認。OBSERVED_BLOCKER_MINIMAL_FIX |
+| scope / basis | モデル条件はMash明示変更。test修復と記録は既存v9契約内のLEVEL_2、現行残件指示とRule18 §11.3。旧単位のretryではない |
+| execution_owner / environment | 華恋root、Codex（GPT-6系、正確なモデル/Pro名称は未確認）、PIECE_WORK_ALLOWED。agentは読取reviewのみ |
+| source / heads | Cocolon07f08f000ee751d717a383b7c494bb6b0cbe60a6、API a536e50ee284785f585ac73329ef2947dca8bba9（API変更0）、前回run39402186101 |
+| docs / map | 全体設計01と全file地図01A〜C、fresh recursive tree1909件、Piece入口/manifest/current map、最新weekly20261017 §5.6と直近結果を確認 |
+| context | prepareはmaterial commit ancestryを解決できず失敗。保存済みContextは旧refのためcurrent根拠に採用せず、System Context入口が認める正本の直接読取へ戻した。Context製品codeの修復・生成結果の公開0 |
+| changed paths | test .mm1、モデル条件の既存7資料、Piece入口/manifest/current map/weekly4資料、既存07差分記録1。計13、全て既存path |
+| allowed / protected | class extensionのBOOL、window getterのv9分岐、v9Viewのflag設定の3箇所のみ。元getterへ戻すとtest全文が開始時と完全一致することをlocal確認 |
+| completion / success | remote全13path一致、新CIの元ログで旧97/合計129/v9=46の各summary・個別PASS/FAILを直接確認、RN実report/PNGを同じ版で確認。成功は限定TECHNICAL_CREDIT、商品採用には換算しない |
+| stop / prohibited | 新sourceの一度のCI後に失敗を隠して再実行・追加修復しない。fixture/oracle/assertion/175分母/8秒/native90秒/job10分/製品/API/DB/依存/署名/配布/deploy/main merge変更0 |
+| next product / Mash point | native完走後も実Text layer厳密包含・正式admission・採用版saved・InputScreen供給・通常保存→本人GET/履歴を残す。契約変更が必要なら具体差分でMash判断へ戻す |
+| cost / time | 新規購入・外部service・依存・Mash操作0。既存CI使用量は増加し請求額未確認。前回17分53秒は参考、見積りは10〜30分で保証しない |
+
+v9だけfixtureRequiresRealWindow=YESとし、未mount/remove後はnil、mount後はsuper.windowを参照します。旧129は既定NOで従来式を保持します。比較・oracle・46件の中身は変更しません。workflowは変更せず、native stepのV9 summaryは元ログから別途照合します。test .mm変更は既存RN canvas scopeに含まれます。exportの依存compileはscope条件に従い、skipを実compile成功へ置き換えません。
+
+STRUCTURE_MAP_DELTA_NONE。単独test実装とモデル運用条件の変更で、製品のowner/route/contractは不変です。今回Supabaseはcocolon-project ACTIVE_HEALTHYという一覧だけ確認し、DB query/apply・本人行読取・業務RPCは0です。新CIはsource時点で未実行、v9未採用・formal_admission=false・normal_save_reopen_complete=falseを維持します。

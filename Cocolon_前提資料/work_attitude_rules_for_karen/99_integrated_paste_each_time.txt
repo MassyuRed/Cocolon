@@ -11,6 +11,8 @@ general_rule_owner: CURRENT_RULES.md
 
 ## 1. Model
 
+Piece残件では、2026-10-20 Mash決定のRule18 §0Aを優先し、以下のPro限定・モデル不明停止・Pro再監査条件を適用しません。品質・承認・実検証条件は維持します。
+
 - [ ] このCocolon作業は`GPT-5.6 Pro`またはrule 18で成立したWork Ultraで行った。
 - [ ] non-Pro成果物を無監査で採用していない。
 

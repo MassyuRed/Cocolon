@@ -1,6 +1,6 @@
 {
   "schema_version": "cocolon.work_attitude_rules.current.v3",
-  "revision_date": "2026-08-15",
+  "revision_date": "2026-10-20",
   "normative_status": "CURRENT",
   "status": "CURRENT_EFFECTIVE",
   "effective_when": "NECESSITY_PRODUCT_DIRECTNESS_AND_MINIMUM_SAFETY_BOUNDARY_REMOTE_POSTVERIFIED",
@@ -11,7 +11,16 @@
     "non_pro_or_unknown": "MODEL_OR_ENVIRONMENT_NOT_ELIGIBLE_STOP",
     "non_pro_artifact_state": "UNTRUSTED_NOT_ADOPTED_UNTIL_PRO_REAUDIT",
     "work_ultra_rule": "18_chat_work_environment_selection_rule_2026_08_06.txt",
-    "three_tier_workflow_rule": "18_chat_work_environment_selection_rule_2026_08_06.txt"
+    "three_tier_workflow_rule": "18_chat_work_environment_selection_rule_2026_08_06.txt",
+    "piece_remaining_work_override": {
+      "decision_date": "2026-10-20 JST",
+      "owner": "18_chat_work_environment_selection_rule_2026_08_06.txt#0A",
+      "pro_only": false,
+      "unknown_model_alone_stops_work": false,
+      "environment_label": "PIECE_WORK_ALLOWED",
+      "quality_approval_and_verification_unchanged": true,
+      "other_domains_unchanged": true
+    }
   },
   "current_entry": "00_read_first.txt",
   "current_general_rule_owner": "CURRENT_RULES.md",

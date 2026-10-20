@@ -16,6 +16,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**現在は入口§84／current map §65.32／weekly §5.6.12／manifest v96です。Mashの2026-10-20明示決定でPiece残件のPro限定を解除し、v9テスト専用Window修復を実装しました。旧129件・v9追加46件の判定と製品sourceは維持。新sourceの一度のCIはこれから確認し、175件成功・v9採用・通常保存の完成は未確認です。**
+
 **最新結果は入口§83.3〜83.6／current map §65.31.1／weekly §5.6.11.1／manifest v95です。source5fa54927の5path全文読戻しと一度のCIを確認しました。install／launch／mainに到達し、旧129件の個別PASSと両budget完了を観測。v9最初のfixture追加時に、テスト用Textが自身をWindowとして返すことに整合するUIKit例外が発生し、追加46件は未検証です。実RN11/11条件・元PNG11枚の結果を保存しました。v9未採用、実layer包含・正式admission・通常保存は未完了です。**
 
 ### §83 source時点の記録（履歴）
@@ -3037,3 +3039,9 @@ source5fa54927477364af61dab989021d0f511d8c9994の5path全文読戻しと一度�
 JS915／Android sourceは成功。実RN11/11条件・元PNG11枚、元PNGの前回bytes一致11/11を記録しました。export Pods=success、Android=successで、今回は依存compileも実行対象です。物理端末の保存／共有や正式renderer採用へは換算しません。
 
 現在の最小修復候補はtest .mm内でv9だけ実Windowを要求し、旧129のsynthetic windowとdetached rejectionを保つことです（入口§83.4、未適用）。次にopacity0時点の実layer包含、正式admission・採用版saved・InputScreen供給・通常保存→本人履歴が残ります。今回のprimaryはBLOCKER_NARROWED、v9未採用を維持します。現在ownerは入口§83.3〜83.6／本map§65.31.1／weekly§5.6.11.1／manifest v95です。新旧bundleで今回の元PNGを復元できる証拠参照を保存し、旧ownerは変更しません。結果4資料、追加source／test／workflow／CI／DB／runtime／deploy0、STRUCTURE_MAP_DELTA_NONEです。
+
+### 65.32 Pieceモデル制限解除とv9テスト用Window修復（source時点）
+
+Mashの2026-10-20明示決定でPiece残件のPro限定を解除し、Rule18 §0Aへ集約しました。品質・承認範囲・他中核の条件は維持します。入口§83.4の未適用案を、test .mmのclass extension/getter/v9Viewだけへ実装しました。旧129件は既定NOの旧式、v9追加46件だけ実UIWindowへ限定し、fixture・assertion・oracle・分母・期限・製品sourceは不変です。
+
+現在ownerは入口§84、weekly §5.6.12、manifest v96。新sourceの一度の既存push CIはsource時点で未実行です。実layer包含・正式admission・通常保存は未完了、STRUCTURE_MAP_DELTA_NONE。root単一writer、PIECE_WORK_ALLOWED、API/DB/依存/deploy/main merge変更0。

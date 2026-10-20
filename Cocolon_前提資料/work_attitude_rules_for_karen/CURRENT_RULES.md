@@ -11,6 +11,8 @@ model_requirement: GPT-5.6 Pro for Chat work
 
 # Cocolon CURRENT RULES
 
+> Piece残件のモデル条件は、Mashの2026-10-20明示決定によりRule18 §0Aを優先します。Pro以外・モデル不明だけでは停止せず、品質・承認・検証条件は維持します。以下の一般モデル条件は、このPiece例外を除いて適用します。
+
 ## 0. 役割
 
 このfileは、Cocolon作業全般へ常時適用する一般行動ruleのcurrent正本です。

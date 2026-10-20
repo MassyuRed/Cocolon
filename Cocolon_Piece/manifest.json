@@ -1,28 +1,26 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v95",
+  "schema_version": "cocolon.piece.workstream_manifest.v96",
   "generated_at": "2026-10-20 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v94",
-    "predecessor_blob": "0d6aa553975e6865b23599f13604fb421136b586",
-    "predecessor_head": "5fa54927477364af61dab989021d0f511d8c9994",
-    "carry_forward": "All previous v9/link-repair result owners and lossless evidence retained unchanged. Close the one new-source native-stage diagnostic run with current results and fully recoverable evidence; fixture/layer repair proposals remain unapplied."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v95",
+    "predecessor_head": "07f08f000ee751d717a383b7c494bb6b0cbe60a6",
+    "carry_forward": "All existing result and lossless evidence owners unchanged; new test-only Window repair and explicit Piece model decision."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "50229eab5d4e9553f00bdeba0a5179f98b1413ce",
-    "raw_sha256": "28d24c045f854d8f084be5641a6e36c8a8afab676036a9ae7e6f5bb5d086a8f8",
-    "utf8_bytes": 377856,
-    "chars": 223652
+    "git_blob_sha1": "bc5f67c41326f0426d169e27454d033ac7568ac4",
+    "raw_sha256": "b6a708db251d54f7ba2a6185ccba7ba473293cb27535c2c40a6066f440aa49fb",
+    "utf8_bytes": 382305
   },
   "current_premise": {
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
-    "git_blob_sha1": "abb88253af4cf3aa26f446acde613260b39c7058",
-    "raw_sha256": "400f5d7131ccff39540119b94391dd34d06a4ab57446c5a8a3e392767777a520",
-    "utf8_bytes": 475695
+    "git_blob_sha1": "35ed532bae07bde7520e7ed8522d70380e4defd4",
+    "raw_sha256": "78e4a80eb8c36f7d2fdaec906d45e721a826acd1bf4a6372d1ba7338aca8e674",
+    "utf8_bytes": 483815
   },
   "product_definition": {
     "user_facing_name": "Piece",
@@ -58,7 +56,7 @@
     "pce9a_b01": "COMPLETE",
     "pce9a_b02a": "NATIVE_ACCEPTANCE_RETAINED__LIVE_BRIDGE_APPLIED_20261010",
     "analysis_roadmap": "REFER_TO_ANALYSIS_CURRENT_STRUCTURE__HISTORICAL_NOT_ACTIVATED_STATE_NOT_CURRENT",
-    "next_piece_group": "P_W1_NATIVE_V9_FIXTURE_WINDOW_REPAIR_PENDING__129_PASS46_UNVERIFIED__V9_UNADOPTED__REAL_LAYER_AND_FORMAL_SAVE_PENDING",
+    "next_piece_group": "P_W1_V9_FIXTURE_WINDOW_REPAIR_SOURCE__ONE_CI_PENDING__V9_UNADOPTED__REAL_LAYER_AND_FORMAL_SAVE_PENDING",
     "automatic_packet_progression": false,
     "pce9a_b02a_red": "FROZEN_UNCHANGED__NATIVE_POSTGRESQL_1_PASS",
     "pce9a_b02a_implementation": "EXACT5_PRESERVED__EXACT6_SELECTORS_PUBLISHED",
@@ -67322,5 +67320,39 @@
     "predecessor_blob": "43b818aab67924966b086706662ea21efb8d3308",
     "predecessor_head": "21ad068cb9605d1e4945b3dbe38259690fabe924",
     "carry_forward": "All previous v9/link-repair result owners and lossless evidence retained unchanged. New resumption request activates a new three-marker diagnostic source unit; previous runs are not retried."
+  },
+  "ios_preview_v9_window_repair_20261020": {
+    "state": "SOURCE_READY_CI_NOT_YET_RUN",
+    "entry_section": "84",
+    "map_section": "65.32",
+    "weekly_section": "5.6.12",
+    "source_parent": "07f08f000ee751d717a383b7c494bb6b0cbe60a6",
+    "api_ref": "a536e50ee284785f585ac73329ef2947dca8bba9",
+    "model_decision": "2026-10-20 22:20:04 JST / Rule18 §0A",
+    "environment": "PIECE_WORK_ALLOWED",
+    "execution_owner": "Karen root; Codex GPT-6 based, exact model and Pro label unconfirmed",
+    "classification": "LEVEL_2 test repair; explicit Mash model-rule change",
+    "test_path": "tests/native/piece-text-metrics-ios.mm",
+    "mechanism": "v9-only fixtureRequiresRealWindow; legacy default NO; real super.window without self-cast for v9",
+    "local_verification": "Remove exactly the three changes and the full original test bytes are identical",
+    "checks_expected": {
+      "legacy": 97,
+      "including_v5": 129,
+      "v9": 46,
+      "total": 175
+    },
+    "new_source_ci_limit": 1,
+    "same_source_rerun_allowed": false,
+    "same_source_rerun_performed": 0,
+    "production_changes": 0,
+    "workflow_changes": 0,
+    "db_changes": 0,
+    "formal_admission": false,
+    "product_acceptance": false,
+    "normal_save_reopen_complete": false,
+    "can_save": false,
+    "can_export": false,
+    "structure_map_delta": "STRUCTURE_MAP_DELTA_NONE",
+    "automatic_progression": false
   }
 }

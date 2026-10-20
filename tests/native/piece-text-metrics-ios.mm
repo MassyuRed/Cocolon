@@ -19,8 +19,16 @@
   block(self, self.registry);
 }
 @end
+@interface RCTTextView ()
+@property(nonatomic) BOOL fixtureRequiresRealWindow;
+@end
 @implementation RCTTextView
-- (UIWindow *)window { return self.fixtureAttached ? ([super window] ?: (UIWindow *)self) : nil; }
+- (UIWindow *)window {
+  if (self.fixtureRequiresRealWindow) {
+    return self.fixtureAttached ? [super window] : nil;
+  }
+  return self.fixtureAttached ? ([super window] ?: (UIWindow *)self) : nil;
+}
 - (NSTextStorage *)cocolonPieceTextStorage { return self.fixtureStorage; }
 - (CGRect)cocolonPieceContentFrame { return self.fixtureContentFrame; }
 @end
@@ -824,6 +832,7 @@ static NSArray *v9OracleInk(RCTTextView *view, CGPoint phase) {
 }
 static RCTTextView *v9View(NSString *text, CGFloat font, CGFloat logicalHeight, CGFloat baseline) {
   RCTTextView *view = makeView(text, font);
+  view.fixtureRequiresRealWindow = YES;
   view.frame = CGRectMake(0, 0, 1080, logicalHeight + 1.0 / 3.0);
   view.fixtureContentFrame = CGRectMake(96, 0, 888, view.bounds.size.height);
   NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
