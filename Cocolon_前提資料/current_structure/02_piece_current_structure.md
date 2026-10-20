@@ -16,6 +16,10 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**現在は入口§85／本map§65.33／weekly§5.6.13／manifest v99です。同じplaced成功callbackで自然なText model-layer metadataを読む限定診断を追加しました。新source CIは未実行、pixel_observationはNOT_PERFORMEDです。実layer包含・正式admission・通常保存は未完了です。**
+
+### §84結果の記録（履歴）
+
 **最新結果は入口§84.2〜84.4／current map§65.32.2／weekly§5.6.12.2／manifest v98です。Window修復source9de5a87でnative175件unique PASS・FAIL0、JS915、実RN11条件・元PNG11枚を確認し、結果原物を保存しました。native検査stepはsuccessですがjob/CI全体cancelled、取消理由は未確定です。モデルのPro限定はRule18§0Aで解除済み。v9正式採用・実layer包含・通常保存は未完了です。**
 
 **最新確認は入口§84.2／current map§65.32.1／weekly§5.6.12.1／manifest v97です。Window修復source9de5a87の13pathを全文読戻し、native175件の重複なし個別PASS・FAIL0と3summary、mainから39.800秒、検査step成功を確認。ただしjob全体はcancelled、理由未確定です。実RN検査は同じrun39430845624で継続中。v9採用・実layer厳密包含・通常保存は未完了です。**
@@ -3059,3 +3063,9 @@ source9de5a87の13pathをGitHub全文照合。run39430845624でnative175 unique 
 同run39430845624 attempt1の実RN canvasはsuccess、11report/11PNGが揃い全既存条件成立。59local/placed組・preview7同token fit・Card8保存/export falseを確認。両420は最終reportまで5053.088/2370.564ms、Arabic179.209ms。PNG11枚は保存済み旧link-repair原物とbyte一致、今回のreportは新規です。全11一覧とArabic/420原寸を目視し、原物をmanifest v98へ可逆保存しました。
 
 native175 unique PASS／FAIL0・検査step successとjob/CI全体cancelled（理由未確定）を区別。Window例外解消は限定TECHNICAL_CREDIT、正式採用/通常保存ではありません。次は既存実RN placed成功callbackのresolve直前に、opacity0の同Text/tag/token/配置の自然なlayer状態を読むことです。drawGlyphsと完成後layer診断の差、本文/branding境界・縮小経路・正式admissionが残ります。再CI/追加source変更0、currentは入口§84.2〜84.4／weekly§5.6.12.2／manifest v98、STRUCTURE_MAP_DELTA_NONE。
+
+### 65.33 配置後の自然なText model-layer状態の観測（source時点）
+
+前回§65.32.2/入口§84.4の次作業として、既存RN harnessのArabic placed成功callbackの先頭へmetadata-only観測を追加しました。geometry reader/resolveより前に公開contents・同じText/canvas/tag/token/配置・ancestor opacity・期限・読取前後identityを記録し、自然な状態を強制更新しません。nil/opaqueのどちらも画素は未観測です。既存wire/oracle/11fixture/assertion/175分母/元8秒/native90秒/job10分は維持します。
+
+source時点の一度のCIは未実行。製品source・route・型・依存・API/DB/runtime/deploy/main merge変更0、STRUCTURE_MAP_DELTA_NONE。6既存path、root単一writer/PIECE_WORK_ALLOWED。current ownerはmanifest ios_preview_v9_placed_layer_20261021、入口§85、weekly§5.6.13。前回175/RN11結果は履歴として継承し、新成功へ流用しません。実画素包含・body/branding縮小・正式admission・採用版saved/InputScreen供給・通常保存→本人履歴は未完了です。

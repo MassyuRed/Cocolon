@@ -273,6 +273,96 @@ static NSArray *PieceCanvasPixelOracle(RCTTextView *view, UIView *canvas) {
 typedef void (*PieceSelectedV2Call)(id, SEL, NSNumber *, NSString *, double, NSDictionary *,
                                   RCTPromiseResolveBlock, RCTPromiseRejectBlock);
 static PieceSelectedV2Call PieceOriginalSelectedV2Call;
+// Read the model-layer state at the original placed callback. In particular,
+// nil public contents is NOT evidence that Core Animation has no backing.
+// Never force layout/display/drawing, decode a private backing, or change wire.
+static NSDictionary *PiecePlacedLayerState(RCTTextView *view, UIView *canvas) {
+  CALayer *layer = view.layer;
+  id contents = layer.contents;
+  CGPoint origin = [view convertPoint:CGPointZero toView:canvas];
+  NSMutableArray *ancestors = [NSMutableArray new];
+  for (UIView *ancestor = view; ancestor; ancestor = ancestor.superview) {
+    [ancestors addObject:@{
+      @"view_identity": [NSString stringWithFormat:@"%p", (__bridge void *)ancestor],
+      @"class": NSStringFromClass(ancestor.class), @"hidden": @(ancestor.hidden),
+      @"alpha": PieceFinite(ancestor.alpha), @"layer_opacity": PieceFinite(ancestor.layer.opacity),
+      @"bounds": PieceRect(ancestor.bounds), @"frame": PieceRect(ancestor.frame),
+      @"is_canvas": @(ancestor == canvas)
+    }];
+  }
+  return @{
+    @"view_identity": [NSString stringWithFormat:@"%p", (__bridge void *)view],
+    @"canvas_identity": [NSString stringWithFormat:@"%p", (__bridge void *)canvas],
+    @"window_identity": [NSString stringWithFormat:@"%p", (__bridge void *)view.window],
+    @"same_window": @(view.window != nil && view.window == canvas.window),
+    @"descendant_of_canvas": @([view isDescendantOfView:canvas]),
+    @"view_bounds": PieceRect(view.bounds), @"view_frame": PieceRect(view.frame),
+    @"content_frame": PieceRect(view.cocolonPieceContentFrame),
+    @"canvas_frame": @[PieceFinite(origin.x), PieceFinite(origin.y),
+      PieceFinite(view.bounds.size.width), PieceFinite(view.bounds.size.height)],
+    @"view_content_scale_factor": PieceFinite(view.contentScaleFactor),
+    @"layer_identity": [NSString stringWithFormat:@"%p", (__bridge void *)layer],
+    @"layer_bounds": PieceRect(layer.bounds),
+    @"layer_position": @[PieceFinite(layer.position.x), PieceFinite(layer.position.y)],
+    @"layer_anchor_point": @[PieceFinite(layer.anchorPoint.x), PieceFinite(layer.anchorPoint.y)],
+    @"layer_contents_scale": PieceFinite(layer.contentsScale),
+    @"layer_contents_rect": PieceRect(layer.contentsRect),
+    @"layer_contents_center": PieceRect(layer.contentsCenter),
+    @"layer_contents_gravity": layer.contentsGravity ?: @"",
+    @"layer_opacity": PieceFinite(layer.opacity), @"layer_hidden": @(layer.hidden),
+    @"layer_needs_display": @(layer.needsDisplay), @"layer_needs_layout": @(layer.needsLayout),
+    @"public_contents_state": contents ? @"nonnull_opaque_pixel_unobserved" : @"nil_pixel_unobserved",
+    @"public_contents_identity": contents ? [NSString stringWithFormat:@"%p", (__bridge void *)contents] : (id)NSNull.null,
+    @"public_contents_class": contents ? NSStringFromClass(object_getClass(contents)) : (id)NSNull.null,
+    @"ancestors": ancestors
+  };
+}
+static NSDictionary *PieceReadPlacedLayer(id module, NSNumber *tag, NSString *text,
+                                         NSDictionary *request, id wire) {
+  const CFTimeInterval began = CACurrentMediaTime();
+  NSMutableDictionary *sample = [@{
+    @"diagnostic_only": @YES, @"phase": @"placed_callback_pre_geometry_pre_resolve",
+    @"callback_unix_ms": PieceFinite(NSDate.date.timeIntervalSince1970 * 1000),
+    @"callback_monotonic_seconds": PieceFinite(began), @"main_thread": @(NSThread.isMainThread),
+    @"request": request ?: @{}, @"pixel_observation": @"NOT_PERFORMED"
+  } mutableCopy];
+  if (!NSThread.isMainThread || ![wire isKindOfClass:NSDictionary.class]) {
+    sample[@"observation_error"] = @"invalid_callback_context"; return sample;
+  }
+  RCTBridge *bridge = [(id<RCTBridgeModule>)module bridge];
+  UIView *rawView = [bridge.uiManager viewForReactTag:tag];
+  NSNumber *canvasTag = request[@"canvas_tag"];
+  UIView *canvas = [canvasTag isKindOfClass:NSNumber.class] ? [bridge.uiManager viewForReactTag:canvasTag] : nil;
+  if (![rawView isKindOfClass:RCTTextView.class] || !canvas) {
+    sample[@"observation_error"] = @"original_node_unavailable"; return sample;
+  }
+  RCTTextView *view = (RCTTextView *)rawView;
+  // The first contents read precedes the existing geometry/glyph observer.
+  NSDictionary *before = PiecePlacedLayerState(view, canvas);
+  NSTextStorage *storage = view.cocolonPieceTextStorage;
+  NSLayoutManager *layout = storage.layoutManagers.firstObject;
+  NSTextContainer *container = layout.textContainers.firstObject;
+  sample[@"state_before"] = before;
+  sample[@"storage_identity"] = [NSString stringWithFormat:@"%p", (__bridge void *)storage];
+  sample[@"layout_identity"] = [NSString stringWithFormat:@"%p", (__bridge void *)layout];
+  sample[@"container_identity"] = [NSString stringWithFormat:@"%p", (__bridge void *)container];
+  sample[@"text_matches"] = @([storage.string isEqualToString:text]);
+  sample[@"request_wire_identity_matches"] = @([wire[@"tag"] isEqual:tag] &&
+    [wire[@"canvas_tag"] isEqual:canvasTag] &&
+    [wire[@"snapshot_token"] isEqual:request[@"snapshot_token"]] &&
+    [wire[@"stage"] isEqual:@"placed"] && [request[@"stage"] isEqual:@"placed"]);
+  sample[@"wire_canvas_frame_matches"] = @([wire[@"canvas_frame"] isEqual:before[@"canvas_frame"]]);
+  sample[@"remaining_deadline_ms"] = PieceFinite([request[@"expires_at_ms"] doubleValue] -
+    NSDate.date.timeIntervalSince1970 * 1000);
+  NSDictionary *after = PiecePlacedLayerState(view, canvas);
+  sample[@"state_after"] = after;
+  sample[@"state_unchanged"] = @([before isEqualToDictionary:after] &&
+    view == [bridge.uiManager viewForReactTag:tag] && canvas == [bridge.uiManager viewForReactTag:canvasTag] &&
+    storage == view.cocolonPieceTextStorage && layout == storage.layoutManagers.firstObject &&
+    container == layout.textContainers.firstObject);
+  sample[@"observation_ms"] = PieceFinite((CACurrentMediaTime() - began) * 1000);
+  return sample;
+}
 static void PieceObservedSelectedV2Call(id module, SEL selector, NSNumber *tag, NSString *text,
                                       double fontSize, NSDictionary *request,
                                       RCTPromiseResolveBlock resolve, RCTPromiseRejectBlock reject) {
@@ -281,7 +371,16 @@ static void PieceObservedSelectedV2Call(id module, SEL selector, NSNumber *tag, 
   }
   NSUInteger ordinal = ++PieceArabicOperationOrdinal;
   PieceOriginalSelectedV2Call(module, selector, tag, text, fontSize, request, ^(id wire) {
+    NSDictionary *placedLayer = nil;
+    if ([request[@"stage"] isEqual:@"placed"]) {
+      @try { placedLayer = PieceReadPlacedLayer(module, tag, text, request, wire); }
+      @catch (NSException *exception) {
+        placedLayer = @{ @"diagnostic_only": @YES, @"pixel_observation": @"NOT_PERFORMED",
+          @"observation_error": exception.name ?: @"unknown_exception" };
+      }
+    }
     NSMutableDictionary *sample = [PieceReadArabicGeometry(module, tag, text, fontSize, ordinal, wire) mutableCopy];
+    if (placedLayer) sample[@"placed_layer_observation"] = placedLayer;
     sample[@"stage"] = request[@"stage"] ?: NSNull.null;
     sample[@"observation_only"] = @YES;
     [PieceArabicObservations addObject:sample];

@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_piece_read_first
 title: "Cocolon Piece — Read First"
-revision_date: "2026-10-20 JST"
+revision_date: "2026-10-21 JST"
 decision_owner: "Mash"
 workstream: "Cocolon / Piece"
 document_status: "CURRENT_PIECE_WORKSTREAM_ENTRY"
@@ -9,6 +9,10 @@ automatic_progression: false
 ---
 
 # Cocolon Piece — Read First
+
+**現在は入口§85／current map§65.33／weekly§5.6.13／manifest v99です。前回native175完走と実RN11条件を継承し、既存placed成功callbackの先頭で自然なmodel-layer状態だけを読む診断を追加しました。新sourceの一度の既存CIは未実行。画素観測・実layer包含・v9正式採用・通常保存は未完了です。**
+
+### §84結果の記録（履歴）
 
 **最新結果は入口§84.2〜84.4／current map§65.32.2／weekly§5.6.12.2／manifest v98です。Window修復source9de5a87でnative175件unique PASS・FAIL0、JS915、実RN11条件・元PNG11枚を確認し、結果原物を保存しました。native検査stepはsuccessですがjob/CI全体cancelled、取消理由は未確定です。モデルのPro限定はRule18§0Aで解除済み。v9正式採用・実layer包含・通常保存は未完了です。**
 
@@ -2631,3 +2635,28 @@ artifact12268708757の元ZIP SHA256は **4f5cf92c198ac7915e455da6f2c623ffbb216bd
 次は、既存実RN harnessのplaced成功callbackで、元wireを返す前の同Text/tag/token/配置の自然なlayer backingを直接観測し、既存の本文/branding境界・縮小経路へ必要な差分を具体化する一作業です。native175は検証済みとして維持し、CI cancelledを理由に同sourceを再実行したり、job上限を延ばす補助作業へ逸れません。判定方式・品質・公開契約の変更が必要なら、具体差分を先に用意して既承認範囲と区別します。
 
 bounded unitを最終結果保存で終了し、実layer修復・正式renderer admission・採用版saved・InputScreen供給・通常明示保存→本人GET/履歴・実機は残件です。今回Pro限定を解除した決定は恒常運用へ接続しましたが、EmlisAI/分析のmodel条件や他承認を変更しません。root単一writer、STRUCTURE_MAP_DELTA_NONE、v9未採用、DB/apply/本人行/RPC/依存/runtime/deploy/配布/main merge変更0、automatic_progression=falseです。
+
+## 85. 2026-10-21 — 配置後の自然なText layer状態を同じcallbackで観測
+
+### 85.1 開始記録・限定実装（source時点）
+
+最新の残件継続指示に基づき、§84.4の一作業を進めます。モデルのPro限定はMashの明示決定とRule18 §0Aで解除済みです。
+
+| 開始項目 | 固定する内容 |
+|---|---|
+| product_destination / current_gate | P-W1 / B10_WITH_B12C_ADOPTION_BOUNDARY。通常保存の前に残る、drawGlyphs判定と実Text layerの差を絞る |
+| exact_work / necessity | OBSERVED_BLOCKER_MINIMAL_FIX。既存Arabic v9 wrapperのplaced成功callbackで、既存geometry readerとresolveより前に同じTextの自然なmodel-layer metadataを読む。画素判定・新計測契約を追加しない |
+| authority / environment / owner | 既存v9診断範囲のLEVEL_2、Rule18 §11.3と最新継続指示。PIECE_WORK_ALLOWED、華恋rootが編集・実行・GitHub反映、補助agentは読取reviewのみ。Codex GPT-6系、正確なmodel/Pro名称は未確認 |
+| heads / maps | Cocolon e470c8948ec1f75435a1857ab9a40855da9bdec4、API a536e50ee284785f585ac73329ef2947dca8bba9。fresh全tree1909件/non-truncated、全体設計01・全file地図01A〜C・Piece入口/manifest/map・最新weekly20261017 §5.6と直近結果を確認 |
+| context / current evidence | prepareはmaterial ancestry解決で失敗。System Context入口の正本直接読取へ戻り、生成tempは公開しない。前回source9de5a87のnative175/RN11結果を継承。前回doc commit e470の自動run39435122125は今回fresh確認でcompleted/cancelled、再実行しない |
+| changed paths / structure | test harness .m1＋既存入口/manifest/current map/weekly/07の5資料＝6既存path。新file・製品/route/型/依存/契約変更0、STRUCTURE_MAP_DELTA_NONE |
+| protected | 元wireを一度そのままresolve。既存geometry reader/oracle/fixtures/assertions/175分母/元8秒/native90秒/job10分を保持。render/layout/display/flush/wait/opacity変更・private backing解読・未知contentsのCGImage cast・新hookは追加しない |
+| success / stop | remote6path一致、新sourceの既存CI1回、元report内のcallback記録・前後同一性・本文/元11条件/PNGを確認。metadataがnil/opaqueでも画素なし・透明・包含成功に変換しない。失敗/取消/未観測をそのまま保存し、同source再実行や追加修復を行わない |
+| next product / Mash point | 実layerの画素包含とbody/branding縮小は未成立。結果から最小修復を具体化し、描画定義・選択契約・saved版等を変えるなら具体差分を示して判断へ戻す。新方式の採用や保存解禁はしない |
+| cost / time | 追加依存・購入・外部service・Mash操作0。既存CI使用量増、請求額未確認。前回22分13秒を参考に10〜30分程度を見込むが保証しない |
+
+`tests/native/piece-rn-canvas-ios.m`だけへ99行を追加しました。元Arabic（72/64/56pt）の成功wrapperでplacedだけを対象に、callback時刻/残期限、requestとwireのtag/canvas/token/stage、registryのText/canvasとstorage/layout/container identity、実配置、layerのbounds/position/anchor/scale/contents設定/needsDisplay、ancestorのhidden/alpha/opacity、公開contentsのnil/non-nullとidentity/class、読取前後の同一性を記録します。classはloggingのみで内容型の推定に使いません。既存geometry/glyph診断より先に最初のcontentsを読み、その後に従来診断を続け、wireは変更しません。
+
+`pixel_observation=NOT_PERFORMED`を必ず明示します。nilはその時点の公開contentsがnilという観測だけで、Core Animation内部backingの不存在や透明を意味しません。nonnullでも不透明なobjectとして記録するだけで、画素を読めたことにはしません。読取で例外があれば診断errorとして残し、製品の成功/拒否を置き換えません。Appleの[CALayer.contents](https://developer.apple.com/documentation/quartzcore/calayer/contents?language=objc)と[displayIfNeeded](https://developer.apple.com/documentation/quartzcore/calayer/displayifneeded())を照合し、強制更新を避ける範囲としました。
+
+新CIはsource時点で未実行です。前回の175成功を今回の再実行成功へ転記しません。formal_admission/product_acceptance/normal_save_reopen_complete=false、v9未採用を維持します。Supabaseは一覧のACTIVE_HEALTHYのみ確認し、DB query/apply/本人行/業務RPC0。API/runtime/環境値/署名/配布/deploy/main merge0です。

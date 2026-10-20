@@ -41596,3 +41596,7 @@ source9de5a87の13path全文・changed setをfresh確認。run39430845624で旧1
 ### 2026-10-20 Piece結果：Window例外解消・native175完走・実RN11条件
 
 source9de5a87を一度確認したrun39430845624の最終結果を保存。native175 unique PASS/FAIL0と検査step success、JS915、実RN11条件/11PNGを確認しました。native job/CI全体cancelled（理由未確定）は成功へ変換しません。元6jobログ・raw report・metadataは同manifest内のinterim/final bundleと旧PNG11のbyte一致参照で可逆保存。currentは入口§84.2〜84.4/map§65.32.2/weekly§5.6.12.2/manifest v98。次はopacity0のplaced callbackで実Text layerを直接観測する一作業。v9正式採用・通常保存は未完了、追加source/再実行/DB/deploy/main0。
+
+## 2026-10-21 Piece残件：配置後の自然なText layer状態の観測
+
+前回native175/RN11結果を継承し、既存Arabic placed成功callbackで、geometry reader/resolve前の自然なmodel-layer metadataを読む99行だけをharnessへ追加。pixel_observation=NOT_PERFORMEDでnil/opaqueを包含成功に変換しません。6既存path、製品/API/DB/workflow/依存/deploy/main変更0、STRUCTURE_MAP_DELTA_NONE。入口§85/map§65.33/weekly§5.6.13/manifest v99。新sourceの一度の既存CIは未実行、実layer包含・正式admission・通常保存は未完了です。

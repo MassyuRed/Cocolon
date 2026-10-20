@@ -1646,3 +1646,9 @@ run39430845624は22分13秒で終了。native175 unique PASS／FAIL0、JS915、A
 実RN59組・preview7同token fit・Card8保存/export falseを保持。両420は最終reportまで5053.088/2370.564ms、Arabic179.209msで元8秒内です。PNG11枚は旧保存原物とbyte一致、新reportと全6job元ログはmanifest v98の新旧bundleから復元できます。source/判定不変なので性能改善や商品完成を主張しません。全11一覧とArabic/420原寸を華恋が目視しました。
 
 Window例外という残差は閉じました。次の一作業は実RNのplaced成功callbackで、opacity0時点の同Text/tag/token/配置の自然なlayerを直接読むことです。実layer包含・正式renderer採用・採用版saved/InputScreen供給・通常保存→本人履歴・実機は未完了で、10/22保存・10/23共有の目標達成には数えません。追加source変更/同source再実行/DB/deploy/main merge0、STRUCTURE_MAP_DELTA_NONE。モデル制限解除は恒常的なPiece運用へ反映済みです。
+
+### 5.6.13 2026-10-21 — Piece配置後の自然なText layer状態を観測（source時点）
+
+P-W1の前回残件（入口§84.4）を継続。同じArabic Text/tag/token/配置のplaced成功callbackで、既存geometry readerとresolveの前へ自然なmodel-layer metadataの読取だけを追加しました。強制render/layout/display/opacity変更はなく、元wire/fixtures/oracle/期限/175分母は維持します。nilもopaque contentsも画素は未観測として扱います。新sourceの既存CIは一度だけ、source時点では未実行です。
+
+入口§85/map§65.33/manifest v99。製品/API/DB/依存/deploy/main変更0、6既存path、STRUCTURE_MAP_DELTA_NONE。Pro限定解除を継承。前回native175/RN11は前回の技術実績であり、実layer包含・正式採用・通常保存・10/22保存/10/23共有目標の達成へ換算しません。結果から残差の最小修復を具体化し、契約差があればMash判断へ戻します。
