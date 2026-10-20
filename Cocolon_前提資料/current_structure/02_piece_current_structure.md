@@ -16,6 +16,10 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**最新結果は入口§83.3〜83.6／current map §65.31.1／weekly §5.6.11.1／manifest v95です。source5fa54927の5path全文読戻しと一度のCIを確認しました。install／launch／mainに到達し、旧129件の個別PASSと両budget完了を観測。v9最初のfixture追加時に、テスト用Textが自身をWindowとして返すことに整合するUIKit例外が発生し、追加46件は未検証です。実RN11/11条件・元PNG11枚の結果を保存しました。v9未採用、実layer包含・正式admission・通常保存は未完了です。**
+
+### §83 source時点の記録（履歴）
+
 **現在の作業は入口§83／current map §65.31／weekly §5.6.11／manifest v94です。18:22:22 JSTの再開指示を受け、前回結果commit21ad068を新鮮照合しました。リンク修復済み・native175未検証・v9未採用を引き継ぎ、既存workflowへinstall／launch到達点のHOST_STAGE3行だけを加えた新sourceを一度確認します。製品・test・判定・時間上限は不変で、正式admission・通常保存は未完了です。**
 
 ### §82時点の結果（履歴）
@@ -3025,3 +3029,11 @@ Arabicではdirect placed[374,601,705,676]に対し、同Text layer単独placed�
 変更は既存workflow1＋既存資料4の5path、新file0、製品／test差分0、STRUCTURE_MAP_DELTA_NONEです。job10分・main後alarm90秒・旧97＋追加32＋v9追加46・比較式・元8秒を維持し、新sourceの既存push CIは一度のみ。workflow自身の変更によりRN canvasと両export依存compileも既存scopeで起動予定です。filter変更で回避しません。現在ownerはmanifest ios_preview_v9_native_stage_20261020、入口§83、weekly §5.6.11です。
 
 華恋root／GPT-6 Astra Pro／CHAT_PRO_OKが単一writer。新CIはsource時点で未実施で、native175成功・v9採用には未換算。実layer包含・正式admission・採用版saved・InputScreen供給・通常保存→本人履歴は未完了です。DB／runtime／署名／配布／deploy／main merge変更0を保持します。
+
+#### 65.31.1 結果：起動境界を通過、v9 testのWindow不整合を特定
+
+source5fa54927477364af61dab989021d0f511d8c9994の5path全文読戻しと一度のCI39402186101 attempt1を確認しました。全体はfailure。install／launch／mainは到達し、旧97＋v5追加32の129個別PASSと両budget完了を観測しました。v9最初のfixtureのaddSubviewで、RCTTextView.windowが未mount時に(UIWindow *)selfを返すことに整合するisTrackingKeyboard未定義例外が発生。追加46件とV9／最終native summaryは未検証・欠落で、175完走は未成立です。元job10分・main後90秒・175条件は不変です。
+
+JS915／Android sourceは成功。実RN11/11条件・元PNG11枚、元PNGの前回bytes一致11/11を記録しました。export Pods=success、Android=successで、今回は依存compileも実行対象です。物理端末の保存／共有や正式renderer採用へは換算しません。
+
+現在の最小修復候補はtest .mm内でv9だけ実Windowを要求し、旧129のsynthetic windowとdetached rejectionを保つことです（入口§83.4、未適用）。次にopacity0時点の実layer包含、正式admission・採用版saved・InputScreen供給・通常保存→本人履歴が残ります。今回のprimaryはBLOCKER_NARROWED、v9未採用を維持します。現在ownerは入口§83.3〜83.6／本map§65.31.1／weekly§5.6.11.1／manifest v95です。新旧bundleで今回の元PNGを復元できる証拠参照を保存し、旧ownerは変更しません。結果4資料、追加source／test／workflow／CI／DB／runtime／deploy0、STRUCTURE_MAP_DELTA_NONEです。

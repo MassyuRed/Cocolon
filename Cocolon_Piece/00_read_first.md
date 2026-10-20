@@ -10,6 +10,10 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
+**最新結果は入口§83.3〜83.6／current map §65.31.1／weekly §5.6.11.1／manifest v95です。source5fa54927の5path全文読戻しと一度のCIを確認しました。install／launch／mainに到達し、旧129件の個別PASSと両budget完了を観測。v9最初のfixture追加時に、テスト用Textが自身をWindowとして返すことに整合するUIKit例外が発生し、追加46件は未検証です。実RN11/11条件・元PNG11枚の結果を保存しました。v9未採用、実layer包含・正式admission・通常保存は未完了です。**
+
+### §83 source時点の記録（履歴）
+
 **現在の作業は入口§83／current map §65.31／weekly §5.6.11／manifest v94です。18:22:22 JSTの再開指示を受け、前回結果commit21ad068を新鮮照合しました。リンク修復済み・native175未検証・v9未採用を引き継ぎ、既存workflowへinstall／launch到達点のHOST_STAGE3行だけを加えた新sourceを一度確認します。製品・test・判定・時間上限は不変で、正式admission・通常保存は未完了です。**
 
 ### §82時点の結果（履歴）
@@ -2496,3 +2500,64 @@ STRUCTURE_MAP_DELTA_NONE。製品・native test・RN test・依存・API・DB・
 実行差分はprintf3行だけで、それらを除くworkflow全文は開始時と同一です。既存native stepのbash構文と、status採取・pipefail・main後alarm・175件の既存判定を確認しました。nativeのNATIVE_CHECKS=129を175へ書き換えず、v9独立summaryと合わせて評価します。sourceの公開、新CI、実ログ・全画像の確認はこのsource時点で未実施です。
 
 Arabicの1px差、opacity0時点のbacking、全入力に対する実Text layer包含は未解決です。正式renderer採用、採用版saved、InputScreenのisSaveAdmitted供給、通常保存→本人GET／履歴、実機受入れはこの単位の完了へ含めません。
+
+### 83.3 一度の実行結果：native旧129件PASS、v9のfixture組立で例外
+
+source **5fa54927477364af61dab989021d0f511d8c9994**／tree **d15b9591543f2067ed96219dc2c75325470f5205**をPR30へ反映し、既存5pathの全文・Git blob・差分をGitHubから読み戻しました。実行差分はHOST_STAGEのprintf3行だけです。[run39402186101 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39402186101)は18:38:42〜18:56:35 JST、17分53秒、全体結論は**failure**です。今回も同source再実行・旧run再開・追加dispatchは0です。
+
+| job | 最終結論 |
+|---|---|
+| piece-ios-rn-canvas | success |
+| piece-ios-source | failure |
+| piece-rn-contracts | success |
+| piece-android-source | success |
+| piece-export-android | success |
+| piece-export-pods | success |
+
+native job118559340319の追加markerは、09:41:07.413230Z install_begin、09:41:44.572895Z launch_begin、09:43:10.946589Z launch_end status=0です。bootstatusとinstallは正常帰還し、main_enteredは09:42:38.007737Z、application_launch／activeも観測しました。今回の失敗はinstall／launch未識別や10分取消ではありません。
+
+旧97件は個別PASSとLEGACY_NATIVE_CHECKS=97 PASS=97 FAIL=0 SKIP=0を観測、v5追加32件も全て個別PASS、合計129 PASS／FAIL行0です。キー数・UTF16の両budgetはoracle_completeとPASSまで進みました。v9_beginの後、最初のlatin fixtureを[row addSubview:view]で実Window階層へ追加する段階で、**NSInvalidArgumentException: -[RCTTextView isTrackingKeyboard]: unrecognized selector**が発生しました。stackはUIKitの_willMoveToWindow→_addSubview→runV9Checksです。追加46件の個別PASS／FAILは0、V9 summaryと最後のNATIVE_CHECKS=129 summaryは欠落し、175件完走は未成立です。
+
+mainから例外まで約32.265秒で、main後90秒alarmより前です。simctl pipelineはアプリ例外後もstatus0を返しましたが、既存summary検査が不足を検知してjobをfailureにしました。status0だけを成功にしません。旧v8のbudget停止原因や前回run39392217445の取消原因を、この新しい観測だけで遡及確定しません。
+
+### 83.4 原因に対応する最小修復案（未適用）
+
+既存testのRCTTextView.windowは、fixtureAttachedがYESでsuper.windowがnilのとき、**(UIWindow *)self**を返します。v9ViewはmakeView経由でattached=YESとなり、実mount前のText自身をWindowとして返したままaddSubviewへ進みます。例外stackとこの自己castの不整合が一致しています。製品のglyph判定や独立oracleに到達して失敗したものではありません。
+
+次の最小案はtests/native/piece-text-metrics-ios.mm内のtest-only propertyで、v9だけ実windowを要求することです。以下はclass extension追加・既存implementation内のgetter置換・v9View内への1行追加の抜粋です。未適用で、今回のsourceや検証済み成果には含めません。
+
+```objc
+@interface RCTTextView ()
+@property(nonatomic) BOOL fixtureRequiresRealWindow;
+@end
+
+- (UIWindow *)window {
+  if (self.fixtureRequiresRealWindow) {
+    return self.fixtureAttached ? [super window] : nil;
+  }
+  return self.fixtureAttached ? ([super window] ?: (UIWindow *)self) : nil;
+}
+
+// Only in v9View, immediately after makeView:
+view.fixtureRequiresRealWindow = YES;
+```
+
+旧129件はflag既定NOで元のgetter式を保持します。v9はmount前／remove後がnil、mount後は実UIWindow、既存detached試験のfixtureAttached=NOもnilです。私有selectorのstubを足して型不整合を残す案、mount時だけflagを切り替えてremove後のfallbackを残す案は採りません。fixture数・assertion・oracle・175分母・各期限・製品sourceを維持した次の限定修復として扱い、成功は次の実測まで未確認です。
+
+### 83.5 RN・exportの結果と商品側の残件
+
+既存JSは915 PASS／FAIL・skip0、Android source compileは成功しました。RNはbaseline 5/5、補足 3/3、raw診断 3/3、取得report 11/11、元PNG 11/11です。全reportの元条件成立はtrue。local／placedはpreview56＋raw3の59組で、同token・同Text／canvas node・独立5値を確認。preview7件の同token fitはtrue、card8件のsave／exportはfalse、saved v3はfitなし、raw3件は権限なしを維持しました。元8秒の計測境界はPNG capture前の最終reportまでで、essay_max420=6337.859333000146ms、suffix_max420_a=3358.7697920000646ms、suffix_arabic=212.6296250000596msです。前回link-repairの元PNGとbytes同一は11/11枚で、今回原寸目視した範囲と限界はmanifestのvisual_reviewへ保存します。主要例の時間は前回より長く、性能改善は主張しません。
+
+export Pods／Androidは今回は既存scopeにより実行対象となりました。各jobの最終結論は上表と元ログに従い、skipと実compileを区別します。これらは既存ライブラリの検証であり、写真保存／共有の実機操作や正式admissionの完了にはしません。
+
+実Text layer包含では、製品placedは2 rAF後もcanvas opacity0であり、現在のnativeはTextKit layoutとdirect glyphを測っています。次の読取候補は既存RN testのplaced成功callbackで、同Text・同token・同配置の自然描画とlayer内容を、resolve前に観測することです。既存18項目wire／4項目requestには本文とbrandingの意味境界がなく、native rejectionだけでは既存の文字サイズ縮小分岐へ進まないため、実layerを追加測定するだけでは修復完了になりません。standaloneのText shimには実RNのdrawRectもありません。これらはread-onlyで整理した成立条件で、今回実装・追加実行していません。
+
+現在の順序は、v9 fixtureのWindow扱い修復→175件完走、実layer厳密包含の成立、正式renderer admission・採用版saved・InputScreen供給、通常明示保存→本人GET／履歴・実機受入れです。既存API/controller/owner reads/DB6定義の再実装は不要です。10/20の採用方針は未完了で、10/22通常保存・10/23共有は未達目標です。v9採用や通常保存の完成を確約しません。
+
+### 83.6 今回の終了記録と復元可能な証拠
+
+primary outcomeは**BLOCKER_NARROWED**です。source反映・一度の実行・原因切分け・結果保存として今回単位を終了し、v9は未採用、formal_admission／product_acceptance／normal_save_reopen_completeはfalseを維持します。新しいfixture修復や実layer診断をこの単位へ追加しません。
+
+結果反映は既存4資料のみです。今回固有のraw report・全6job元ログ・metadata・解析を、同じmanifest内の新recordにlossless tar.gz/base64で保存します。新bundleは21 member、その内PNG実体0枚。今回取得の元PNG 11枚のうち11枚は前回の保存済みmemberとbytes完全同一であるため、旧owner ios_preview_v9_link_repair_20261020／bundle SHA256 94aaba66d3863b4635a122ee949dfba85caf5c1d939c6d6c966ea776e1247e76／immutable commit21ad068／member pathへ一意に参照します。旧report・時間・token・成功判定を今回へ流用せず、同じ画像bytesだけを重複保存しません。新旧bundleから今回の全画像を合成復元して現物と照合する構成です。
+
+旧v9／link-repair ownerとその証拠はdeep同一で保持します。今回の結果後に製品・test・workflow追加変更0、再CI0、DB metadata再取得／apply／業務RPC／本人行読取0、runtime／環境値／署名／配布／deploy／main merge0です。STRUCTURE_MAP_DELTA_NONEです。

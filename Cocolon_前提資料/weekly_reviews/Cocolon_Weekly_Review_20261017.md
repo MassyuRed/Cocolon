@@ -754,6 +754,14 @@ Rule18 §0／§11.3 LEVEL_2と§5.6.2の既存委任内で、華恋root／GPT-6 
 
 5path全文読戻し、元job全体ログ・marker・3summary・RN report／画像と既存job結果を確認して閉じます。旧source／同source再実行、保存開放、DB操作、配置・配布は含めません。10/22通常保存・10/23共有は未達の目標のままで、native成功だけをP-W1完了にしません。入口§83／map§65.31／manifest v94のios_preview_v9_native_stage_20261020が今回のownerです。
 
+#### 5.6.11.1 再開単位の結果とP-W1の見通し
+
+新source5fa54927の5path全文照合とrun39402186101 attempt1（17分53秒）を完了しました。全体failure。今回install／launch／mainに到達し、旧129件は個別PASS、キー数・UTF16の両budgetもPASSです。v9の最初のfixture追加時、TextをWindowとして自己castするtest doubleの不整合に整合するUIKit例外が出て、追加46件は未検証です。元上限や分母は不変、simctl status0だけでは成功にせずsummary不足で失敗を保持しました。
+
+JS915とAndroid source成功、実RN11/11条件・元PNG11枚、前回PNG bytes一致11/11。export Pods=success／Android=successも今回の実行結果として保存しました。primaryはBLOCKER_NARROWEDで、次の具体案はv9だけ実Windowを使うtest境界修復（入口§83.4、未適用）です。続く実layer包含はopacity0・描画鮮度・既存縮小分岐への接続が未成立で、10/20の採用方針は未完了。10/22通常保存／10/23共有を達成済み・確約へ変更しません。
+
+入口§83.3〜83.6／map§65.31.1／manifest v95を更新し、今回raw report・元ログ・metadataと元PNGの復元参照を保存します。同一PNG bytesだけを旧保存bundleへ参照し、今回の時間・token・成否は今回原物を保存。旧STOP・owner・証拠は保持、同source再実行・追加修復・DB操作・runtime変更・保存開放は0です。
+
 ## 6. 議題6 — 今回の指摘に対する判断と、記録の責任
 
 ### 6.1 問題は反省文の不足ではない
