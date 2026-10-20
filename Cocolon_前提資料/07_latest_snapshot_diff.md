@@ -41588,3 +41588,7 @@ Mashの依頼により、[観測技術の蓄積先](observation_learning/README.
 ## 2026-10-20 Piece残件：モデル制限解除とv9 fixture修復の新source
 
 Mashの明示決定をRule18 §0Aと既存入口/Gate/索引へ反映。Piece残件はPro以外でも実施し、品質・承認・実検証は維持します。v9 test-only Windowを§83.4の3箇所に限定して修復し、新sourceの既存push CIを一度確認する段階です。currentはPiece入口§84/current map§65.32/weekly§5.6.12/manifest v96。native175成功、実layer厳密包含、正式renderer採用、通常保存の完成は未確認。製品/API/DB/依存/deploy/main変更0、STRUCTURE_MAP_DELTA_NONE。
+
+### 2026-10-20 Piece途中checkpoint：native175 unique PASS、実RN継続中
+
+source9de5a87の13path全文・changed setをfresh確認。run39430845624で旧129＋v9追加46の175個別PASS／FAIL0と3summaryが揃い、Window例外を解消。native step successとjob cancelledを区別し、取消理由は未確定。実RNは同run継続中。currentは入口§84.2/map§65.32.1/weekly§5.6.12.1/manifest v97。元ログ5jobとmetadataを同manifestにlossless保存し、正式採用・通常保存は未完了のまま。追加source変更・再実行0。

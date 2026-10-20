@@ -1634,3 +1634,7 @@ Mashの依頼を受け、観測学習の継続保存先を `Cocolon_前提資料
 Mashは22:20:04 JST、Pieceの残件はPro以外でも実施するためPro限定を外すと明示しました。現在の担当方針はRule18 §0Aを優先し、既存の「Pro主体」をPro専用・モデル不明時の停止条件にしません。品質・承認範囲・検証・他中核の担当条件は維持します。
 
 P-W1の次は入口§83.4のtest-only Window修復です。v9だけ実Windowへ限定し、旧129と追加46の判定・期限・製品sourceを維持します。新sourceの一度の既存push CIと元結果の保存を入口§84/manifest v96へ記録します。source時点ではnative175未完走、v9未採用、実layer包含・正式admission・通常保存未完了です。10/22通常保存・10/23共有は依然未達目標であり、今回のモデル条件更新を商品完成に数えません。STRUCTURE_MAP_DELTA_NONE。
+
+#### 5.6.12.1 途中保存：Window例外解消とnative175件の実測
+
+source9de5a87の13path remote一致。native175件が重複なしPASS／FAIL0、旧97/合計129/v9追加46の各summaryとlaunch0が揃い、mainから39.800秒で完走しました。検査stepはsuccessですが、job全体はcancelled（10分4秒、理由未確定）のためCI全体成功にはしません。JS915・Android source success、exportの実compileはscope skip。実RNは同じrun39430845624で継続し、途中の元ログをmanifest v97へ保存します。P-W1の実layer包含・正式admission・通常保存は未完了、v9未採用。結果後のsource変更・再実行は0です。

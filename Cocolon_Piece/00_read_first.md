@@ -10,6 +10,8 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
+**最新確認は入口§84.2／current map§65.32.1／weekly§5.6.12.1／manifest v97です。Window修復source9de5a87の13pathを全文読戻し、native175件の重複なし個別PASS・FAIL0と3summary、mainから39.800秒、検査step成功を確認。ただしjob全体はcancelled、理由未確定です。実RN検査は同じrun39430845624で継続中。v9採用・実layer厳密包含・通常保存は未完了です。**
+
 **現在は入口§84／current map §65.32／weekly §5.6.12／manifest v96です。Mashの2026-10-20明示決定でPiece残件のPro限定を解除し、v9テスト専用Window修復を実装しました。旧129件・v9追加46件の判定と製品sourceは維持。新sourceの一度のCIはこれから確認し、175件成功・v9採用・通常保存の完成は未確認です。**
 
 **最新結果は入口§83.3〜83.6／current map §65.31.1／weekly §5.6.11.1／manifest v95です。source5fa54927の5path全文読戻しと一度のCIを確認しました。install／launch／mainに到達し、旧129件の個別PASSと両budget完了を観測。v9最初のfixture追加時に、テスト用Textが自身をWindowとして返すことに整合するUIKit例外が発生し、追加46件は未検証です。実RN11/11条件・元PNG11枚の結果を保存しました。v9未採用、実layer包含・正式admission・通常保存は未完了です。**
@@ -2589,3 +2591,15 @@ Mashの22:15:45 JST「Pieceの残件作業を進めて」と22:20:04 JST「Pro�
 v9だけfixtureRequiresRealWindow=YESとし、未mount/remove後はnil、mount後はsuper.windowを参照します。旧129は既定NOで従来式を保持します。比較・oracle・46件の中身は変更しません。workflowは変更せず、native stepのV9 summaryは元ログから別途照合します。test .mm変更は既存RN canvas scopeに含まれます。exportの依存compileはscope条件に従い、skipを実compile成功へ置き換えません。
 
 STRUCTURE_MAP_DELTA_NONE。単独test実装とモデル運用条件の変更で、製品のowner/route/contractは不変です。今回Supabaseはcocolon-project ACTIVE_HEALTHYという一覧だけ確認し、DB query/apply・本人行読取・業務RPCは0です。新CIはsource時点で未実行、v9未採用・formal_admission=false・normal_save_reopen_complete=falseを維持します。
+
+### 84.2 途中保存：native175件完走、job取消と実RN継続を区別
+
+source **9de5a87dd2287228e9fe8217f1657aacc239abaf**／tree **9bce1edf61264a996782c9e751cba7b2aa29497c**を既存PR30へ反映し、13pathのremote全文・変更集合・旧v9 evidence不変・入口/map hash一致を確認しました。[run39430845624 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39430845624)は同sourceで一度だけ実行しています。
+
+native job118655208907の元ログは**175個別PASS／unique175／FAIL0**です。旧97＋v5追加32＝129と、v9追加46を分け、LEGACY97を129へ重複加算しません。LEGACY_NATIVE_CHECKS=97 PASS=97 FAIL=0 SKIP=0、V9_NATIVE_CHECKS=46 PASS=46 FAIL=0 SKIP=0 EXPECTED=46、最終NATIVE_CHECKS=129 PASS=129 FAIL=0 SKIP=0、launch_end status=0が全て揃いました。両budgetも完了しています。main13:38:59.370662Z→最終summary13:39:39.170470Zは約39.800秒で元90秒内です。前回の最初のaddSubview例外を越え、全46件の正常・拒否比較が成立しました。rootと独立読取agentで一致しています。
+
+一方、GitHub metadataはjob全体を**cancelled**とし、開始13:29:50Z→終了13:39:54Z、10分4秒です。Execute、post、Completeの全stepはsuccessです。元ログに取消理由の明示行はなく、既存10分境界との関係は推定に留めます。検査合格をjob/CI全体GREENへ変換しません。job上限・parser・test・sourceの追加変更や再実行は0です。
+
+JS915 PASS／FAIL・skip・cancelled0、Android source compile success。export2jobはsuccessですが依存compileはscope skipです。sourceに対する別自動check5件はsuccess。実RN canvas job118655208930は途中保存時点でin_progressのため、11条件やPNG成功を今回分として主張しません。今回のnative元ログ・終了済み5job元ログ・jobs metadataをmanifestの同じ新owner内へlossless保存します。実RN終了後に同unitへ結果を追記します。
+
+Window修復・実native175の証拠は限定TECHNICAL_CREDITです。bounded work全体は実RN採取と最終記録まで継続中。次の商品上の作業は、既存RN harness PieceObservedSelectedV2Callのplaced成功callbackで、wireをresolveする直前の同Text/tag/token/配置の自然なlayer状態を読むことです。現行製品・独立oracleはdrawGlyphsを測り、完成PNG後のlayer診断はopacity0のplaced時点を証明しません。単にlayer測定を足すだけでは本文/branding境界・縮小経路・正式admissionは完成しません。v9未採用、通常保存・本人再読・実機は未完了です。

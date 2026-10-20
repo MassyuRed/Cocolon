@@ -16,6 +16,8 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**最新確認は入口§84.2／current map§65.32.1／weekly§5.6.12.1／manifest v97です。Window修復source9de5a87の13pathを全文読戻し、native175件の重複なし個別PASS・FAIL0と3summary、mainから39.800秒、検査step成功を確認。ただしjob全体はcancelled、理由未確定です。実RN検査は同じrun39430845624で継続中。v9採用・実layer厳密包含・通常保存は未完了です。**
+
 **現在は入口§84／current map §65.32／weekly §5.6.12／manifest v96です。Mashの2026-10-20明示決定でPiece残件のPro限定を解除し、v9テスト専用Window修復を実装しました。旧129件・v9追加46件の判定と製品sourceは維持。新sourceの一度のCIはこれから確認し、175件成功・v9採用・通常保存の完成は未確認です。**
 
 **最新結果は入口§83.3〜83.6／current map §65.31.1／weekly §5.6.11.1／manifest v95です。source5fa54927の5path全文読戻しと一度のCIを確認しました。install／launch／mainに到達し、旧129件の個別PASSと両budget完了を観測。v9最初のfixture追加時に、テスト用Textが自身をWindowとして返すことに整合するUIKit例外が発生し、追加46件は未検証です。実RN11/11条件・元PNG11枚の結果を保存しました。v9未採用、実layer包含・正式admission・通常保存は未完了です。**
@@ -3045,3 +3047,7 @@ JS915／Android sourceは成功。実RN11/11条件・元PNG11枚、元PNGの前�
 Mashの2026-10-20明示決定でPiece残件のPro限定を解除し、Rule18 §0Aへ集約しました。品質・承認範囲・他中核の条件は維持します。入口§83.4の未適用案を、test .mmのclass extension/getter/v9Viewだけへ実装しました。旧129件は既定NOの旧式、v9追加46件だけ実UIWindowへ限定し、fixture・assertion・oracle・分母・期限・製品sourceは不変です。
 
 現在ownerは入口§84、weekly §5.6.12、manifest v96。新sourceの一度の既存push CIはsource時点で未実行です。実layer包含・正式admission・通常保存は未完了、STRUCTURE_MAP_DELTA_NONE。root単一writer、PIECE_WORK_ALLOWED、API/DB/依存/deploy/main merge変更0。
+
+#### 65.32.1 途中保存：v9全46を含むnative175件完走、CIは非成功
+
+source9de5a87の13pathをGitHub全文照合。run39430845624でnative175 unique PASS／FAIL0、3summary、mainから39.800秒、launch0、検査step successを確認しました。前回のWindow例外は解消しています。一方job全体cancelled（10分4秒、理由未確定）を維持し、CI全体GREENへ変換しません。JS915・Android source success、export依存compileはscope skip。実RNは同じrunで継続中、途中のnative原物はmanifest v97へ保存しました。入口§84.2、weekly§5.6.12.1。実layer包含・正式admission・通常保存は未完了です。
