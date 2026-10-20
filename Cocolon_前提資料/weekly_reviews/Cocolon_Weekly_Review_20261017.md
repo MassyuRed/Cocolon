@@ -1652,3 +1652,11 @@ Window例外という残差は閉じました。次の一作業は実RNのplaced
 P-W1の前回残件（入口§84.4）を継続。同じArabic Text/tag/token/配置のplaced成功callbackで、既存geometry readerとresolveの前へ自然なmodel-layer metadataの読取だけを追加しました。強制render/layout/display/opacity変更はなく、元wire/fixtures/oracle/期限/175分母は維持します。nilもopaque contentsも画素は未観測として扱います。新sourceの既存CIは一度だけ、source時点では未実行です。
 
 入口§85/map§65.33/manifest v99。製品/API/DB/依存/deploy/main変更0、6既存path、STRUCTURE_MAP_DELTA_NONE。Pro限定解除を継承。前回native175/RN11は前回の技術実績であり、実layer包含・正式採用・通常保存・10/22保存/10/23共有目標の達成へ換算しません。結果から残差の最小修復を具体化し、契約差があればMash判断へ戻します。
+
+#### 5.6.13.1 最終結果：CI全6job成功、配置直後の自然contentsを確認
+
+source623662bの6path全文一致、一度のrun39502473690 attempt1は27分59秒で全6job/CI success。JS915/native175 unique PASS・FAIL0/Android source/実RN11条件/PNG11成立。export依存compileはscope skipです。両420は最終reportまで5356.544/2790.863ms、Arabic181.273ms。PNG11は旧原物とbyte一致、今回report・全6jobログ・xcodebuild/xcresult原物を入口§85.2/manifest v100へ保存しました。
+
+新観測はArabic72ptの1件。canvas透明度0のまま、同Text/tag/token/配置・前後state・期限を確認し、公開contentsはnonnull/class __NSCFTypeでした。CGImage型・画素未確認/NOT_PERFORMEDを維持。次の未実施案は同callbackのlayer合成を外部contextへ写す限定診断（入口§85.3/map§65.33.1）です。別bitmap表示v10は新契約なので保留し、未観測を保存解禁に使いません。
+
+BLOCKER_NARROWED、v9未採用、正式admission/通常保存/本人再読/実機未完了。10/22保存・10/23共有の目標達成へ数えません。結果5資料のみ、追加source/同source再実行/API/DB/deploy/main0、STRUCTURE_MAP_DELTA_NONE。Pro限定解除を継承します。

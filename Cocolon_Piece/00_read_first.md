@@ -10,6 +10,10 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
+**最新結果は入口§85.2〜85.3／current map§65.33.1／weekly§5.6.13.1／manifest v100です。source623662bの一度のCIは全6job success、JS915/native175/実RN11条件・PNG11を確認しました。配置直後の自然contentsはnonnull（型・画素未確認）、canvas透明度0のまま同一性・前後状態・期限を確認。次は同時点のlayer合成を外部contextへ写す限定診断です（未実施）。実画素包含・v9採用・通常保存は未完了です。**
+
+### §85 source時点の記録（履歴）
+
 **現在は入口§85／current map§65.33／weekly§5.6.13／manifest v99です。前回native175完走と実RN11条件を継承し、既存placed成功callbackの先頭で自然なmodel-layer状態だけを読む診断を追加しました。新sourceの一度の既存CIは未実行。画素観測・実layer包含・v9正式採用・通常保存は未完了です。**
 
 ### §84結果の記録（履歴）
@@ -2660,3 +2664,40 @@ bounded unitを最終結果保存で終了し、実layer修復・正式renderer 
 `pixel_observation=NOT_PERFORMED`を必ず明示します。nilはその時点の公開contentsがnilという観測だけで、Core Animation内部backingの不存在や透明を意味しません。nonnullでも不透明なobjectとして記録するだけで、画素を読めたことにはしません。読取で例外があれば診断errorとして残し、製品の成功/拒否を置き換えません。Appleの[CALayer.contents](https://developer.apple.com/documentation/quartzcore/calayer/contents?language=objc)と[displayIfNeeded](https://developer.apple.com/documentation/quartzcore/calayer/displayifneeded())を照合し、強制更新を避ける範囲としました。
 
 新CIはsource時点で未実行です。前回の175成功を今回の再実行成功へ転記しません。formal_admission/product_acceptance/normal_save_reopen_complete=false、v9未採用を維持します。Supabaseは一覧のACTIVE_HEALTHYのみ確認し、DB query/apply/本人行/業務RPC0。API/runtime/環境値/署名/配布/deploy/main merge0です。
+
+### 85.2 一度の結果：自然contentsはnonnull、画素は未観測
+
+source **623662b693cc829a6877e042e46ffdaf0702c72c**／tree **4b07a293b7f1a990a38eec1dd59d28c73ecfecd0**の6path全文と変更集合をremote照合しました。[run39502473690 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39502473690)は21:42:06〜22:10:05 UTC（27分59秒）、**全6job success・CI全体success**です。前回の取消理由の解明や修復を意味せず、今回のmetadata観測がjob成功の原因とも主張しません。source追加修復・同source再実行0です。
+
+JS915 PASS、fail/skip/cancelled0。native175個別PASS/unique175/FAIL0（旧97＋v5追加32＝129、v9追加46）、LEGACY97/V9=46/最終129の3summary、launch0が揃いました。mainから最終summaryまで34,488.192msで元90秒内、native jobは5分21秒でsuccess。Android source compileもsuccess。export2jobはsuccessですが、依存compile/Pod解決はscope skipで再compile成功ではありません。他の自動check5件もsourceに対してsuccessです。
+
+実RNはbaseline5/5・supplemental3/3・raw3/3、全11でnative_canvas_valid/body_preserved=true。v9 local/placed59組で同token/Text/canvas/独立5値、preview7の同token fit=true/wrong-token=false、Card8のcanSave/canExport=false、旧saved v3のfitなしとraw3の権限なしを維持しました。
+
+| 例 | 最終reportまで | font |
+|---|---:|---:|
+| essay_paragraphs | 5422.762ms | 48pt |
+| mixed420 | 5356.544ms | 36pt |
+| あ420 | 2790.863ms | 36pt |
+| Arabic | 181.273ms | 72pt |
+
+全11が元8秒内ですが、これは既存report時点までで、後続PNG capture完了までの時間ではありません。計測方式や選択を変えていないため、前回との時間差を性能改善・悪化の原因証明へ転用しません。
+
+新しいplaced観測は**Arabic72ptの1件**です。既存geometry reader/resolve前、main thread、同じText/storage/layout/container、同じtag/canvas/token/stage、wireと同じcanvas frame、同window/descendant、前後の観測state同一を確認しました。callbackの残期限は7864.397ms、読取所要0.265ms。canvasのalpha/layer opacityは0、Textはalpha/opacity1、hidden=falseです。TextのcontentsScale/viewContentScaleは3、needsDisplay/needsLayout=falseでした。
+
+**公開contentsはnonnullで、記録classは`__NSCFType`です。nilではありません。** private class名からCGImage型を推定せず、CFGetTypeIDやCGImage castは実行していません。`pixel_observation=NOT_PERFORMED`のままです。観測したmodel-state/identity一致は、内部backingの画素内容やphysical表示の一致を証明しません。他font・他Text・全入力へ一般化しません。
+
+元PNG11枚は、旧link-repair保存bundleの各memberとbytes完全一致。全11一覧とArabic/420原寸を目視しました。完成PNG後の既存layer診断はlocal[99,22,430,98]、placed[98.3905029296875,21.5,430.3905029296875,97.5]で、direct wireのplaced[98.3905029296875,22.5,429.3905029296875,97.5]と依然1px差があります。今回のcallback metadataは、この差の実画素比較そのものではありません。
+
+artifact12303830546（ZIP SHA256 c6787efdd5572cfc20a52ad4f74b401dda91252e6b8ca1b7b959699e78e14a6c、期限2026-10-27T22:09:49Z）の64原fileは、新bundleの53 artifact memberと、旧保存先へbyte一致で結び付けたPNG11から復元できます。新bundleには全6job元ログ、raw report、xcodebuild.log、xcresult原file群、metadata、解析と解析scriptもlossless保存しました。ZIP容器そのものの再生成一致を主張せず、各原fileのbytes/hashを照合しています。今回のreport/token/timeは今回固有で、旧PNG参照を成功記録の流用に使いません。
+
+primary outcomeは**BLOCKER_NARROWED**。自然contentsが配置直後にnonnullという限定観測と、同sourceの回帰結果です。実画素包含・body/branding縮小・正式renderer採用・採用版saved/InputScreen供給・通常保存→本人履歴/実機は未完了で、formal_admission/product_acceptance/normal_save_reopen_complete=false、v9未採用を維持します。結果反映は既存5資料だけ、製品/test/workflow追加変更・再実行・DB query/apply/本人行/業務RPC・API/runtime/環境値/署名/配布/deploy/main merge0、STRUCTURE_MAP_DELTA_NONEです。
+
+### 85.3 次の最小観測案（未実施、製品契約を変更しない）
+
+今回のmetadata-only単位は終了します。fresh nonnull/needsDisplay=falseの結果を根拠に、次は既存test harnessの同placed callbackで、自然に存在する同Textのlayerを公開`renderInContext:`で外部の固定RGBA contextへ合成する**placed-only診断**を候補とします。既存の完成PNG後の診断と同じAPI/bitmap形式を使い、unknown contentsの型を推定・解読しません。
+
+対象は`tests/native/piece-rn-canvas-ios.m`と同じ5資料だけです。 Arabic72ptのplaced成功1件に限定し、既存post-PNGと同じ1536×512/RGBA8/stride6144/pad160/scale1（約3MiB）のcontextを使います。実配置の小数位相を保ち、取得像をraw RGBAまたは可逆PNGとして保存してから即時解放します。同じregistry node/storage/layout/container/tag/canvas/token/配置/期限を確認し、最初のmetadataを読み、同layerを一度外部contextへ写し、alphaをscanして元wire/完成後layer/元PNGの境界と比較します。前後metadataとcontents identity、dirty flags、残期限も記録します。元wire・resolve・oracle・fixtures/assertions・175分母・元8秒/native90秒/job上限・製品sourceは変更しません。
+
+setNeedsDisplay/displayIfNeeded/layoutIfNeeded/flush/opacity変更/新待機/再試行・private class解析・未知idのCFGetTypeID/CGImage castを追加しません。nil、dirty、未知背景/子layer等、empty/edge、資源/期限超過、identity/state変化は診断未成立として残します。外部contextでのlayer合成という測定であり、内部backingのbytes直接取得・private paint非発生・physical画面同一を保証する測定とは呼びません。元wireへ結果を採用せず、contains/fit成功へ加算しません。[Apple CALayer](https://developer.apple.com/documentation/quartzcore/calayer?language=objc)のrenderInContext/needsDisplayと、既存完成後診断を根拠に、既存v9のLEVEL_2限定診断として具体化した未実施案です。次sourceの一度の既存CIで結果を原物保存し、不成立でも強制表示・追加描画へfallbackしません。
+
+計測bitmapそのものを表示する別preview v10案も比較検討しましたが、fresh nonnullを受け**次の推奨routeにはしません**。それはRGBA8/sRGBの新描画、PNG/bridge/Image decodeと資源barrier、見え方・版・wireの変更を伴うLEVEL_3の未承認案です。現在の次診断の失敗時に自動採用しません。まず今のText表示を維持したまま、同配置時点のlayer合成結果を直接比較します。

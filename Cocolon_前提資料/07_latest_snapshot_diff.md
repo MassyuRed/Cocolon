@@ -41600,3 +41600,7 @@ source9de5a87を一度確認したrun39430845624の最終結果を保存。nativ
 ## 2026-10-21 Piece残件：配置後の自然なText layer状態の観測
 
 前回native175/RN11結果を継承し、既存Arabic placed成功callbackで、geometry reader/resolve前の自然なmodel-layer metadataを読む99行だけをharnessへ追加。pixel_observation=NOT_PERFORMEDでnil/opaqueを包含成功に変換しません。6既存path、製品/API/DB/workflow/依存/deploy/main変更0、STRUCTURE_MAP_DELTA_NONE。入口§85/map§65.33/weekly§5.6.13/manifest v99。新sourceの一度の既存CIは未実行、実layer包含・正式admission・通常保存は未完了です。
+
+### 2026-10-21 Piece結果：全6job成功、自然contentsはnonnull
+
+source623662bの一度のrun39502473690は全6job/CI success。JS915/native175 unique PASS・FAIL0/実RN11条件・PNG11を確認。配置直後Arabic72ptでは透明canvasのまま同一性・前後state・期限が成立し、公開contentsはnonnull/class __NSCFType。型・画素は未確認です。原report/全6jobログ/xcresult等と旧PNG11の一致参照をmanifest v100へ保存。入口§85.2〜85.3/map§65.33.1/weekly§5.6.13.1。次は同callbackのlayer合成を外部contextへ写す未実施案、別bitmap表示v10は保留。BLOCKER_NARROWED、v9正式採用・実画素包含・通常保存未完了、結果5資料のみ、追加source/再CI/DB/deploy/main0、STRUCTURE_MAP_DELTA_NONEです。

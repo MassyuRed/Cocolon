@@ -16,6 +16,10 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**最新は入口§85.2〜85.3／本map§65.33.1／weekly§5.6.13.1／manifest v100です。一度のsource623662b CIは全6job success、JS915/native175/RN11/PNG11成立。配置直後の自然contentsはnonnull、型・画素未確認です。実画素包含・v9正式採用・通常保存は未完了です。**
+
+### §85 source時点の記録（履歴）
+
 **現在は入口§85／本map§65.33／weekly§5.6.13／manifest v99です。同じplaced成功callbackで自然なText model-layer metadataを読む限定診断を追加しました。新source CIは未実行、pixel_observationはNOT_PERFORMEDです。実layer包含・正式admission・通常保存は未完了です。**
 
 ### §84結果の記録（履歴）
@@ -3069,3 +3073,11 @@ native175 unique PASS／FAIL0・検査step successとjob/CI全体cancelled（理
 前回§65.32.2/入口§84.4の次作業として、既存RN harnessのArabic placed成功callbackの先頭へmetadata-only観測を追加しました。geometry reader/resolveより前に公開contents・同じText/canvas/tag/token/配置・ancestor opacity・期限・読取前後identityを記録し、自然な状態を強制更新しません。nil/opaqueのどちらも画素は未観測です。既存wire/oracle/11fixture/assertion/175分母/元8秒/native90秒/job10分は維持します。
 
 source時点の一度のCIは未実行。製品source・route・型・依存・API/DB/runtime/deploy/main merge変更0、STRUCTURE_MAP_DELTA_NONE。6既存path、root単一writer/PIECE_WORK_ALLOWED。current ownerはmanifest ios_preview_v9_placed_layer_20261021、入口§85、weekly§5.6.13。前回175/RN11結果は履歴として継承し、新成功へ流用しません。実画素包含・body/branding縮小・正式admission・採用版saved/InputScreen供給・通常保存→本人履歴は未完了です。
+
+#### 65.33.1 結果：自然contentsはnonnull、元画素は未観測
+
+source623662bの6path全文と変更集合を照合し、run39502473690 attempt1は27分59秒、全6job/CI success。JS915/native175 unique PASS・FAIL0/Android source/実RN11条件・PNG11が成立しました。export依存compileはscope skip。59組・preview7同token fit・Card8保存/export false・旧saved v3境界を維持。mixed420/あ420は5356.544/2790.863ms、Arabic181.273ms、capture前の元8秒内です。PNG11は旧原物とbyte一致、今回固有reportと全6jobログ・xcodebuild/xcresult原物をmanifest v100へ可逆保存しました。
+
+Arabic72ptのplaced callbackでcanvas alpha/opacity0、Text opacity1、same Text/storage/layout/container/tag/canvas/token/frame、前後state一致、残期限7864.397ms、観測0.265ms。公開contentsはnonnull/class __NSCFType、scale3、needsDisplay/layout=falseです。CGImage型・画素は未確認、NOT_PERFORMEDを維持します。完成後layerとdirect wireの1px差は未解消です。
+
+primary=BLOCKER_NARROWED、v9未採用・通常保存未完了。次の未実施案は同callbackで同layerを公開renderInContextにより外部RGBA contextへ写す診断（入口§85.3）。型推定・強制更新・wire採用・表示変更はせず、前後state/期限を照合し、未成立はそのまま保存します。別bitmap表示v10は新契約の比較案として保留し、自動採用しません。結果は既存5資料のみ、追加source/CI/DB/API/runtime/deploy/main0、STRUCTURE_MAP_DELTA_NONEです。
