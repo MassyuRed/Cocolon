@@ -1,27 +1,27 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v87",
+  "schema_version": "cocolon.piece.workstream_manifest.v88",
   "generated_at": "2026-10-20 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v86",
-    "predecessor_blob": "fb6f1605799168717a0cf13919d3cade98e352ac",
-    "predecessor_head": "0b24ce7dc44cafa72666b266325c20dedab5e097",
-    "carry_forward": "One v7 run completed. Natural-height containment recovery verified; JS896/native129/source compiles pass. Full-condition baseline4/5 supplemental2/3 raw3/3, PNG10. Arabic common glyph bounds and mixed420 report8018.126875ms remain failures; v7 unadopted. Records-only result sync, no rerun, condition relaxation, formal admission or runtime effects."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v87",
+    "predecessor_blob": "04d177b6d358e54b6ffa9ba9d44fac7b1ec0263a",
+    "predecessor_head": "6c2da880868b3044b104198d68b652c8ef277a18",
+    "carry_forward": "Keep all v7 evidence and unadopted result. v8 removes redundant Card preparation and repeated rejected B9 edges with unchanged full metrics, scoring, geometry and 8s. Same-layout transparent Arabic diagnostics only. Prior local11 suites797 plus resumed2 suites103 cover all13 suites900; existing CI13 suites and one real RN run pending."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "4f5f8231e24fa6328dd34be9ee3b36e8ceb23175",
-    "raw_sha256": "f9c2eed7842917adbb2cc4033ac77b71714696045e20f207b2c7e791b826b046",
-    "utf8_bytes": 310147
+    "git_blob_sha1": "a44872d39bb057596ead8969b8335ce7e2f10cad",
+    "raw_sha256": "25c481b1cfbb820a458fd266419619f1b94f63d3bd9d2019a6b8d5153ffea7b8",
+    "utf8_bytes": 317868
   },
   "current_premise": {
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
-    "git_blob_sha1": "be9ea27778ba46f1da856c2cedfe77585b5c32f4",
-    "raw_sha256": "b7a98d07947d1cb3937fa4d9413141e235a06c60d198914dd316579c687cc6d5",
-    "utf8_bytes": 461322
+    "git_blob_sha1": "cbe262e800638d1a927c7b8cb8ef9db8d5b7ea07",
+    "raw_sha256": "3edc3707798f3a4bf26b0f370a59032126386891f54d2a55de9e3aa2ec992984",
+    "utf8_bytes": 463994
   },
   "product_definition": {
     "user_facing_name": "Piece",
@@ -98,7 +98,8 @@
     "pce9c_ios_preview_v4": "BOUNDED_VERIFICATION_COMPLETE__JS839_NATIVE97_PASS__REAL_RN4_PASS_MAX420_TIMEOUT__V4_UNADOPTED",
     "pce9c_ios_preview_v5": "BOUNDED_COMPLETE__JS880_NATIVE129_PASS__BASELINE5_MAX420_PASS__RTL_UNRESOLVED__V5_UNADOPTED",
     "pce9c_ios_preview_v6": "BOUNDED_COMPLETE__JS888_NATIVE129_PASS__BASELINE3_OF5_SUPPLEMENTAL0_OF3_RAW3_OF3__VERTICAL_GEOMETRY_FAIL__V6_UNADOPTED",
-    "pce9c_ios_preview_v7": "BOUNDED_COMPLETE__JS896_NATIVE129_PASS__BASELINE4_OF5_SUPPLEMENTAL2_OF3_RAW3_OF3__HEIGHT_RECOVERED__ARABIC_AND_TIME_FAIL__V7_UNADOPTED"
+    "pce9c_ios_preview_v7": "BOUNDED_COMPLETE__JS896_NATIVE129_PASS__BASELINE4_OF5_SUPPLEMENTAL2_OF3_RAW3_OF3__HEIGHT_RECOVERED__ARABIC_AND_TIME_FAIL__V7_UNADOPTED",
+    "pce9c_ios_preview_v8": "SOURCE_READY__LOCAL13_SUITES900_PASS__REAL_RN_PENDING__UNADOPTED"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -265,18 +266,23 @@
     "piece_v2_ios_preview_v7_scope": "Source0b24ce7d, one actual RN run. Natural selected Text height restores quote/Latin/both420 strict containment and former essay/declaration fonts. Geometry baseline5/5 but all-condition baseline4/5, supplemental2/3, raw3/3. Mixed420 report8018.126875ms and Arabic TextKit84.51171875>logical76 keep v7 unadopted. Ten PNGs verified; no saved/export/Androidv7 or formal/ordinary save acceptance.",
     "piece_v2_ios_preview_v7_rtl_rendering_repair_complete": false,
     "piece_v2_ios_preview_v7_max420_condition_met": false,
-    "piece_v2_ios_preview_v7_natural_height_regression_repaired": true
+    "piece_v2_ios_preview_v7_natural_height_regression_repaired": true,
+    "piece_v2_ios_preview_v8_source_present": true,
+    "piece_v2_ios_preview_v8_formally_adopted": false,
+    "piece_v2_ios_preview_v8_scope": "iOS preview only; v7 visual/measurement contracts; redundant internal work removed; Arabic offscreen diagnostics test-only.",
+    "piece_v2_ios_preview_v8_rtl_rendering_repair_complete": false,
+    "piece_v2_ios_preview_v8_max420_condition_met": false
   },
   "next_group": {
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "CHAT_PRO_OK",
-    "state": "V7_UNADOPTED_STOP__NATURAL_HEIGHT_RECOVERED__ARABIC_BOUNDS_AND_420_TIME_UNRESOLVED__P_W1_PENDING",
-    "current_map_section": "65.27.1",
-    "current_entry_section": "79.3-79.4",
+    "state": "V8_SOURCE_READY__REAL_RN_PENDING__P_W1_FORMAL_ADMISSION_AND_NORMAL_SAVE_PENDING",
+    "current_map_section": "65.28",
+    "current_entry_section": "80",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
-    "weekly_review_section": "5.6.7",
-    "first_unfinished_work": "Resolve existing RN/TextKit/PieceTextMetrics common Arabic glyph bbox vs actual drawing without replacing proof with independent CTLine or assuming a baseline/fallback mismatch. Improve existing full-range/all-font candidate, decoder, B9 and final verification work to meet the unchanged8s report boundary. Then align adopted renderer/saved version, InputScreen->existing host formal admission/current fit, existing controller/API normal initial save->same-owner detail/history. No same-source v7 rerun or tolerance/measurement-point change.",
+    "weekly_review_section": "5.6.8",
+    "first_unfinished_work": "Publish the reviewed v8 source and records to PR30, verify remote contents, and inspect one existing CI run: all13 JS suites, native129, source compiles, all11 RN reports and same-layout Arabic diagnostic PNGs. Preserve original8s/all-range/all-font/final-fit and measured-ink contract. Adopted renderer/saved version, InputScreen existing-host formal admission, normal initial save and same-owner reopen remain subsequent product work.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 6,
@@ -348,7 +354,11 @@
     "v7_raw_rtl_diagnostic_condition_met": true,
     "v7_rtl_rendering_repair_complete": false,
     "v7_max420_condition_met": false,
-    "v7_remaining_quality_owner": "Arabic14 glyphs share oversized TextKit bounds despite baseline consistent with Arabic UIFont; actual pixel overflow not proven. Mixed420 native_checked observed7948.190166ms but final report8018.126875ms fails unchanged8s. Formal admission and normal save/reopen remain pending."
+    "v7_remaining_quality_owner": "Arabic14 glyphs share oversized TextKit bounds despite baseline consistent with Arabic UIFont; actual pixel overflow not proven. Mixed420 native_checked observed7948.190166ms but final report8018.126875ms fails unchanged8s. Formal admission and normal save/reopen remain pending.",
+    "ios_preview_v8_owner": "ios_preview_v8_20261020",
+    "v8_same_source_rerun_allowed": false,
+    "v8_bounded_work_complete": false,
+    "v8_unadopted": true
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -402,9 +412,9 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "be9ea27778ba46f1da856c2cedfe77585b5c32f4",
-    "raw_sha256": "b7a98d07947d1cb3937fa4d9413141e235a06c60d198914dd316579c687cc6d5",
-    "utf8_bytes": 461322
+    "git_blob_sha1": "cbe262e800638d1a927c7b8cb8ef9db8d5b7ea07",
+    "raw_sha256": "3edc3707798f3a4bf26b0f370a59032126386891f54d2a55de9e3aa2ec992984",
+    "utf8_bytes": 463994
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -577,20 +587,28 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "LEVEL_2_V7_BOUNDED_RESULT_RECORDS_ONLY",
-    "source_parent": "0b24ce7dc44cafa72666b266325c20dedab5e097",
+    "classification": "LEVEL_2_V8_INTERNAL_PERFORMANCE_REPAIR_AND_SAME_LAYOUT_DIAGNOSTIC",
+    "source_parent": "6c2da880868b3044b104198d68b652c8ef277a18",
     "api_reference_commit": "a536e50ee284785f585ac73329ef2947dca8bba9",
-    "product_source_changes": 0,
-    "test_source_paths": 0,
+    "product_source_changes": 3,
+    "test_source_paths": 5,
     "workflow_paths": 0,
     "piece_documentation_paths": 4,
     "changed_paths": [
+      "components/piece/PieceVisualCard.js",
+      "features/piece/pieceLayout.js",
+      "features/piece/pieceMeasuredWrap.js",
+      "tests/piece-v2-renderer.test.js",
+      "tests/piece-v2-measured-wrap.test.js",
+      "tests/native/piece-rn-canvas-entry.js",
+      "tests/native/piece-rn-canvas-fixtures.cjs",
+      "tests/native/piece-rn-canvas-ios.m",
       "Cocolon_Piece/00_read_first.md",
-      "Cocolon_Piece/manifest.json",
       "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
-      "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md"
+      "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
+      "Cocolon_Piece/manifest.json"
     ],
-    "structure_map": "STRUCTURE_MAP_DELTA_PRESENT__65_27_1_RESULT_AND_RESUME_OWNER",
+    "structure_map": "STRUCTURE_MAP_DELTA_PRESENT__65_28",
     "sql_source_changes": 0,
     "live_database_apply": 0,
     "business_rpc": 0,
@@ -604,8 +622,7 @@
     "release_effect": 0,
     "same_source_reruns": 0,
     "product_acceptance": false,
-    "automatic_progression": false,
-    "evaluated_source": "0b24ce7dc44cafa72666b266325c20dedab5e097"
+    "automatic_progression": false
   },
   "b06_q3_context_fence": {
     "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
@@ -23615,5 +23632,279 @@
     "v7_same_source_rerun_allowed": false,
     "v7_bounded_work_complete": false,
     "v7_unadopted": true
+  },
+  "historical_current_sync_effects_v7_results_20261020": {
+    "classification": "LEVEL_2_V7_BOUNDED_RESULT_RECORDS_ONLY",
+    "source_parent": "0b24ce7dc44cafa72666b266325c20dedab5e097",
+    "api_reference_commit": "a536e50ee284785f585ac73329ef2947dca8bba9",
+    "product_source_changes": 0,
+    "test_source_paths": 0,
+    "workflow_paths": 0,
+    "piece_documentation_paths": 4,
+    "changed_paths": [
+      "Cocolon_Piece/00_read_first.md",
+      "Cocolon_Piece/manifest.json",
+      "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+      "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md"
+    ],
+    "structure_map": "STRUCTURE_MAP_DELTA_PRESENT__65_27_1_RESULT_AND_RESUME_OWNER",
+    "sql_source_changes": 0,
+    "live_database_apply": 0,
+    "business_rpc": 0,
+    "private_piece_row_reads": 0,
+    "migration_history_additions": 0,
+    "signing": 0,
+    "distribution": 0,
+    "environment_changes": 0,
+    "deploy": 0,
+    "main_merge": 0,
+    "release_effect": 0,
+    "same_source_reruns": 0,
+    "product_acceptance": false,
+    "automatic_progression": false,
+    "evaluated_source": "0b24ce7dc44cafa72666b266325c20dedab5e097"
+  },
+  "ios_preview_v8_20261020": {
+    "state": "SOURCE_READY__LOCAL13_SUITES900_PASS__REAL_RN_PENDING__UNADOPTED",
+    "entry_section": "80",
+    "map_section": "65.28",
+    "weekly_section": "5.6.8",
+    "execution_owner": "GPT-6 Astra Pro Karen; root sole GitHub writer; read-only delegated reviews",
+    "permission_basis": "Mash20261020 explicit continuation + existing GitHub/Supabase permission + Rule18 section0 GPT-6 Astra Pro Piece override and section11.3 LEVEL2 same method family implementation.",
+    "source_parent": "6c2da880868b3044b104198d68b652c8ef277a18",
+    "repository": "MassyuRed/Cocolon",
+    "branch": "agent/three-core-cmee-current-structure-20260815",
+    "pull_request": 30,
+    "changed_paths": [
+      "components/piece/PieceVisualCard.js",
+      "features/piece/pieceLayout.js",
+      "features/piece/pieceMeasuredWrap.js",
+      "tests/piece-v2-renderer.test.js",
+      "tests/piece-v2-measured-wrap.test.js",
+      "tests/native/piece-rn-canvas-entry.js",
+      "tests/native/piece-rn-canvas-fixtures.cjs",
+      "tests/native/piece-rn-canvas-ios.m",
+      "Cocolon_Piece/00_read_first.md",
+      "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+      "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
+      "Cocolon_Piece/manifest.json"
+    ],
+    "versions": {
+      "preview": "piece.rn_native_preview.prototype.v8",
+      "candidates": "piece.native_candidates.v5",
+      "selected_line": "piece.native_selected_line.v1"
+    },
+    "performance_change": [
+      "Card skips preparation only for inactive, irrelevant phase or same inspection; actual adoption/render/fit checks retained.",
+      "All n*(n+1)/2 ranges validated; ascending legal-width end index only removes repeated DP rejection. Nonmonotonic widths, heights, all8 scores and ties preserved."
+    ],
+    "visual_change": "None relative to v7: natural Text height, original1080 canvas, padding96/108, inner888/864, logical row height, fonts, body, recipe and independent5 unchanged.",
+    "source_artifacts": [
+      {
+        "path": "components/piece/PieceVisualCard.js",
+        "git_blob_sha1": "4d03f981bb6737f6ac7b6c0d411c422462555bc9",
+        "raw_sha256": "7fba10090e641580fc1a762b0c673191b00cd7e63f09dcb612977b0c52b02455",
+        "utf8_bytes": 27308
+      },
+      {
+        "path": "features/piece/pieceLayout.js",
+        "git_blob_sha1": "2d17b29476725b3b552b87b6da0fc1ef0f6c3164",
+        "raw_sha256": "23a46fbb25f2ce2bd450c472002e9f2174ef6ba0d9290f809ceed998835314be",
+        "utf8_bytes": 10532
+      },
+      {
+        "path": "features/piece/pieceMeasuredWrap.js",
+        "git_blob_sha1": "d09b5a578a1796ee7ce9e25a55281bd6f909428d",
+        "raw_sha256": "9951dfc1b5e84627a1379352f8f99af6ae7df68e43c6c2a799fc467cfcbbe07f",
+        "utf8_bytes": 29027
+      },
+      {
+        "path": "tests/piece-v2-renderer.test.js",
+        "git_blob_sha1": "389d9f96c04160966d7a897e07720153da031a63",
+        "raw_sha256": "140ab31e596a8610d9752cbccf667696971921ef51d9881ea841286181c4a3b9",
+        "utf8_bytes": 120261
+      },
+      {
+        "path": "tests/piece-v2-measured-wrap.test.js",
+        "git_blob_sha1": "524ef38ff4641cab35db20b1e6ab84b8f9aacbab",
+        "raw_sha256": "9c52befb07b6c62c68fecd06fd5612cfb289282cc337dcd107aa10eca19b4b2b",
+        "utf8_bytes": 13978
+      },
+      {
+        "path": "tests/native/piece-rn-canvas-entry.js",
+        "git_blob_sha1": "31bad0edcf4217d2153b913056210a2ed9aed006",
+        "raw_sha256": "d2f2c3790ddec9d1bb584305c00babf283d7e47071b293867664b0ec8b31cceb",
+        "utf8_bytes": 15166
+      },
+      {
+        "path": "tests/native/piece-rn-canvas-fixtures.cjs",
+        "git_blob_sha1": "459d59f809eb6c04fcb55cb2988aba278f1171d6",
+        "raw_sha256": "caad3eb1ca4a89260fcdba4bc7b983c174c0603b9c662538ba22a0ac004c63e5",
+        "utf8_bytes": 5308
+      },
+      {
+        "path": "tests/native/piece-rn-canvas-ios.m",
+        "git_blob_sha1": "ba75326ba1b0ce6c47c65cc02d3493af49c6bffd",
+        "raw_sha256": "3354f4e2234d7405a9c1001ada223c4c112ca9cc641b1cb64ebae33edf090974",
+        "utf8_bytes": 30558
+      }
+    ],
+    "source_record_artifacts": [
+      {
+        "path": "Cocolon_Piece/00_read_first.md",
+        "git_blob_sha1": "a44872d39bb057596ead8969b8335ce7e2f10cad",
+        "raw_sha256": "25c481b1cfbb820a458fd266419619f1b94f63d3bd9d2019a6b8d5153ffea7b8",
+        "utf8_bytes": 317868
+      },
+      {
+        "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+        "git_blob_sha1": "cbe262e800638d1a927c7b8cb8ef9db8d5b7ea07",
+        "raw_sha256": "3edc3707798f3a4bf26b0f370a59032126386891f54d2a55de9e3aa2ec992984",
+        "utf8_bytes": 463994
+      },
+      {
+        "path": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
+        "git_blob_sha1": "e581ba4e414773a125972966410640c6c0f8e252",
+        "raw_sha256": "a73e9799cbf26b872ee7549fbb60d7995f8a4be1dd4a38ccf7bcab1ac74e7e8a",
+        "utf8_bytes": 274073
+      }
+    ],
+    "local_javascript": {
+      "runtime": "Node24.19.0",
+      "test_isolation": "none",
+      "baseline_renderer_wrap": {
+        "passed": 207,
+        "failed": 0
+      },
+      "post_change": {
+        "suite_files": 11,
+        "passed": 797,
+        "failed": 0,
+        "skipped": 0,
+        "duration_ms": 38338.840158
+      },
+      "not_run_locally": [],
+      "missing_local_dependency": null,
+      "full_ci_uses_existing_version": "5.2.2",
+      "new_tests": 4,
+      "native_acceptance": false,
+      "resumed_remaining_suites": {
+        "runtime": "Node24.19.0",
+        "typescript": "5.2.2",
+        "test_isolation": "none",
+        "suite_files": [
+          "tests/piece-v2-input-screen.test.js",
+          "tests/piece-v2-owner-history.test.js"
+        ],
+        "passed": 103,
+        "failed": 0,
+        "skipped": 0,
+        "cancelled": 0,
+        "duration_ms": 8576.381702,
+        "source_changed_for_recovery": false,
+        "initial_attempt": {
+          "file_level_failed": 2,
+          "test_cases_completed": 0,
+          "diagnostic_reason": "Not provided by initial test runner; missing7 source files independently found and exact-head materialized before next launch. Do not assert a unique cause."
+        },
+        "exact_head_dependency_files_added_locally": 7
+      },
+      "combined_same_v8_source_coverage": {
+        "suite_files": 13,
+        "passed": 900,
+        "failed": 0,
+        "skipped": 0,
+        "basis": "Prior unchanged-source11 suites797 plus resumed2 suites103; not one invocation and not a sum with v7."
+      }
+    },
+    "arabic_observation": {
+      "owner": "tests/native/piece-rn-canvas-ios.m",
+      "same_original_operation": true,
+      "original_wire_unchanged": true,
+      "additional_bridge_calls": 0,
+      "additional_ui_blocks": 0,
+      "additional_ctline_measurements": 0,
+      "additional_ensure_layout_calls": 0,
+      "draw_method": "original NSLayoutManager.drawGlyphsForGlyphRange at original contentFrame.origin",
+      "font_sizes": [
+        72,
+        64,
+        56
+      ],
+      "variants": [
+        "expanded",
+        "view_clipped"
+      ],
+      "transparent": true,
+      "scale": 1,
+      "extent_margin_font_sizes": 2,
+      "extent_max_dimension": 4096,
+      "before_after_geometry_and_attributed_storage_comparison": true,
+      "diagnostic_only": true,
+      "bypasses_view_visibility": true,
+      "pixel_checks_pending": true,
+      "observation_and_png_time_in_original_deadline": true
+    },
+    "real_rn": {
+      "status": "PENDING_NEW_SOURCE_ONE_RUN",
+      "baseline_cases": 5,
+      "supplemental_cases": 3,
+      "raw_diagnostic_cases": 3,
+      "original_deadline_ms": 8000,
+      "final_report_timing_unchanged": true
+    },
+    "supabase_migration_history_read": {
+      "project": "cocolon-project",
+      "project_ref": "oeahmpmigszggnkyiivq",
+      "piece_migrations": [
+        [
+          "20261010014326",
+          "piece_v2_legacy_read_bridge"
+        ],
+        [
+          "20261010014413",
+          "piece_v2_foundation"
+        ],
+        [
+          "20261010014441",
+          "piece_v2_rls_and_staging"
+        ],
+        [
+          "20261010014516",
+          "piece_v2_atomic_functions"
+        ],
+        [
+          "20261019021118",
+          "piece_v2_quota_read"
+        ],
+        [
+          "20261019021121",
+          "piece_v2_preview_visual_change"
+        ]
+      ],
+      "applied_count": 6,
+      "reapplied": 0,
+      "private_piece_rows_read": 0,
+      "business_rpc": 0,
+      "runtime_flags_verified": false
+    },
+    "system_context": {
+      "prepare_attempts": 1,
+      "status": "PARTIAL_MATERIALIZATION_MISSING_MODULE",
+      "error": "cannot import name cocolon_context_prepare from tools",
+      "fallback": "Exact-head originals per system_context/00_read_first.md; no System Context product change"
+    },
+    "formal_admission": false,
+    "product_acceptance": false,
+    "physical_device_acceptance": false,
+    "can_save": false,
+    "can_export": false,
+    "rtl_rendering_repair_complete": false,
+    "max420_condition_met": false,
+    "normal_save_reopen_complete": false,
+    "physical_acceptance_is_precondition_for_connection_source_preparation": false,
+    "same_source_rerun_allowed": false,
+    "automatic_progression": false,
+    "stop": "Do not rerun unchanged source or relax original8s/width/height/independent/currentness contracts. If measured ink contract replacement is required, show same-layout pixel result, exact delta and concrete proposal before adoption."
   }
 }

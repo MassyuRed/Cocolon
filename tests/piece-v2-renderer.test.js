@@ -73,7 +73,7 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
     ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'readPieceOwnerSnapshot']],
     ['features/piece/piecePreviewModel.js', ['readPiecePreviewDisplay', 'verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay']],
-    ['features/piece/pieceLayout.js', ['PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'PIECE_NATIVE_PREVIEW_V7_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
+    ['features/piece/pieceLayout.js', ['PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'PIECE_NATIVE_PREVIEW_V7_VERSION', 'PIECE_NATIVE_PREVIEW_V8_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
     ['features/piece/pieceRenderer.js', ['inspectPieceText', 'readPieceTextInspection', 'inspectPieceSelectedLine', 'readPieceSelectedLineInspection', 'measurePieceCandidates']],
     ['features/piece/pieceMeasuredWrap.js', ['planPieceMeasuredRows']],
     ['components/piece/PieceVisualCard.js', ['PieceVisualCard']],
@@ -1584,6 +1584,7 @@ test('v6 padded inspections remain bound to the current node, token, generation 
 });
 
 const v7Profile = 'piece.rn_native_preview.prototype.v7';
+const v8Profile = 'piece.rn_native_preview.prototype.v8';
 const v7Sample = (...args) => ({ ...sample(...args), renderer_version: v7Profile });
 const v7Ink = (result, margin = 96, lineRatio = 1.55) => result.font_size === 28 ? result : { ...result,
   ink: [margin, 0, margin + 500, Math.ceil(result.font_size * lineRatio)] };
@@ -1715,6 +1716,68 @@ test('v7 selected results cannot outlive a version, token, node, generation or o
     if (change === 'generation') h.card.state.measurement = { ...h.card.state.measurement, generation: Object.freeze({}) };
     if (change === 'timeout') { h.now(NOW + 8001); [...h.timers.values()][0](); }
     if (change === 'unmount') h.card.componentWillUnmount();
+    const state = h.card.state.measurement;
+    pending.forEach(item => item.resolve(item.result)); await new Promise(resolve => setImmediate(resolve));
+    assert.equal(h.card.state.measurement, state); assert.equal(h.fit(), undefined);
+    assert.notEqual(h.card.state.measurement.phase, 'native_checked');
+  }
+});
+
+test('v8 has its own iOS preview identity while keeping saved, export and Android unavailable', () => {
+  const packet = { ...sample(), renderer_version: v8Profile }, h = rawHarness(packet);
+  assert.equal(h.input().candidateProfile, v8Profile);
+  assert.equal(h.preparePieceNativeCard({ display: display(packet), exportCanvas: true }), null);
+  assert.equal(h.preparePieceNativeSavedDisplay({ ...savedSample(), renderer_version: v8Profile }), null);
+  for (const version of [h.PIECE_NATIVE_PREVIEW_VERSION, v4Profile, v5Profile, v6Profile, v7Profile]) {
+    const old = h.preparePieceNativePreview(display({ ...packet, renderer_version: version }));
+    assert.equal(old.candidateProfile, version); assert.notEqual(old.key, h.input().key);
+  }
+  h.Platform.OS = 'android'; assert.equal(h.preparePieceNativePreview(display(packet)), null);
+});
+
+test('v8 preserves v7 plans, candidate order, natural geometry and final local fit without admission', async () => {
+  for (const ratio of ['4:5', '9:16']) {
+    const margin = ratio === '4:5' ? 96 : 108, inspect = result => v7Ink(result, margin);
+    const previous = rawHarness(v7Sample('short_essay', ratio), inspect);
+    const h = rawHarness({ ...sample('short_essay', ratio), renderer_version: v8Profile }, inspect);
+    primeNextFont(previous); primeNextFont(h);
+    await finishV7(previous); await finishV7(h);
+    assert.equal(h.card.state.measurement.phase, 'native_checked');
+    assert.deepEqual(copy(h.card.state.measurement.plan), copy(previous.card.state.measurement.plan));
+    assert.deepEqual(copy(h.card.state.measurement.rowOffsets), copy(previous.card.state.measurement.rowOffsets));
+    assert.deepEqual(h.candidateCalls, previous.candidateCalls); assert.deepEqual(h.nativeCalls, previous.nativeCalls);
+    const body = h.find('piece-visual-block-0').props.style;
+    assert.deepEqual(copy(body), copy(previous.find('piece-visual-block-0').props.style));
+    assert.equal(body.height, undefined); assert.equal(body.width, 1080);
+    assert.equal(body.paddingHorizontal, margin); assert.equal(body.width - 2 * margin, h.input().contentWidth);
+    assert.equal(h.card.state.measurement.canSave, false); assert.equal(h.card.state.measurement.canExport, false);
+  }
+  const pending = [], h = fitHarness({ version: v8Profile,
+    inspect: result => new Promise(resolve => pending.push({ result: v7Ink(result), resolve })) });
+  await finishV7(h); assert.equal(h.fit(), undefined);
+  assert.equal(h.card.state.measurement.phase, 'geometry_checked');
+  assert.equal(h.card.deadline.expiresAt, NOW + 8000);
+  for (let i = pending.length - 1; i > 0; i--) pending[i].resolve(pending[i].result);
+  await new Promise(resolve => setImmediate(resolve)); assert.equal(h.fit(), undefined);
+  pending[0].resolve(pending[0].result); await new Promise(resolve => setImmediate(resolve));
+  assert.equal(h.fit().isCurrent(h.card.props.display.preview, h.token), true);
+  assert.equal(h.card.state.measurement.canSave, false); assert.equal(h.card.state.measurement.canExport, false);
+});
+
+test('v8 pending selected results cannot revive after v8-v7-v8, token replacement or the original deadline', async () => {
+  for (const change of ['version', 'token', 'timeout']) {
+    const pending = [], h = fitHarness({ version: v8Profile,
+      inspect: result => new Promise(resolve => pending.push({ result: v7Ink(result), resolve })) });
+    await finishV7(h); assert.equal(h.card.state.measurement.phase, 'geometry_checked');
+    if (change === 'version') {
+      for (const renderer_version of [v7Profile, v8Profile]) {
+        h.card.props = { ...h.card.props, display: { ...h.card.props.display,
+          preview: { ...h.card.props.display.preview, renderer_version } } };
+        h.card.setState(h.PieceVisualCard.getDerivedStateFromProps(h.card.props, h.card.state));
+      }
+    }
+    if (change === 'token') h.bind(Object.freeze({}));
+    if (change === 'timeout') { h.now(NOW + 8001); [...h.timers.values()][0](); }
     const state = h.card.state.measurement;
     pending.forEach(item => item.resolve(item.result)); await new Promise(resolve => setImmediate(resolve));
     assert.equal(h.card.state.measurement, state); assert.equal(h.fit(), undefined);

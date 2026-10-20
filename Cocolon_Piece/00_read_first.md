@@ -10,6 +10,10 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
+**最新作業は§80／current map §65.28／weekly §5.6.8です。v7と同じ表示・計測条件を保つ未採用v8で、Card再検証とB9の重複処理を短縮しました。local11 suite797件が成功し、同じArabic layoutの透明描画と実RNでの最終照合込み420時間を確認する新sourceの結果待ちです。正式admission・通常保存は未完了です。**
+
+### §79時点の結果（履歴）
+
 **最新結果は§79.3〜79.4／current map §65.27.1／weekly20261017 §5.6.7です。v7の本文Text自然高さ修復をsource0b24ce7dへ反映し、一度の実RN・全11report・PNG10枚の照合と原寸目視を完了しました。local／CI JS896・native129・iOS／Android source compileは成功。quote／Latin／両420の高さ境界拒否とessay／declarationの不要な縮小は回復しました。ただし元8秒を含む合格はbaseline4/5・補足2/3・raw3/3で、mixed420は8018.126875ms、ArabicはTextKit行高超過のためv7未採用です。Arabicは元operationの属性・glyph boundsまで原因を絞りましたが、実画素の超過は未確認です。正式admission・通常保存は未完了。§79.1〜79.2の結果待ちはsource時点の履歴です。**
 
 ### §78時点の要約（履歴）
@@ -2162,3 +2166,48 @@ mixed420は最終安定確認／fit照合まで含む現8秒に余裕がなく�
 通常保存の残件は既存ownerへ接続します。InputScreenは既存InputPieceActionAreaへ正式isSaveAdmitted供給をまだ渡しておらず、局所fitのCard→Modal→host経路だけが存在します。採用版のsaved readerは許可version・saved key・描画profileの3箇所を揃える必要があり、許可listだけをv7へ増やして旧v3描画へ流す実装は不可です。既存PieceCreateController→POST /emotion/piece/save、owner履歴→GET /emotion/piece/{id}→saved Cardはsourceにあります。新controller／DTO／schemaの再作成ではなく、採用版・正式admission・稼働値との整合を保って通常初回保存→同owner再表示の実動作を閉じます。source接続準備へ物理端末の事前gateを追加しませんが、実稼働のflag／TTL／renderer／認証round-trip・物理端末の受入れは未検証です。
 
 10/20の判断はv7不採用です。10/22の通常保存・10/23の共有確認は未達前提を抱えるため、実施済みや延期承認へ読み替えません。API／DB／実flag／env／deploy／署名／配布／main merge効果0、既適用DB6件の再適用0。current map §65.27.1・weekly §5.6.7・manifest v87を同じ結果へ同期します。
+
+## 80. 2026-10-20 — v8の内部処理短縮と同一Arabic描画の直接観測
+
+### 80.1 今回の実行範囲
+
+Mashの10/20「Pieceの残件作業を進めろ」と既存GitHub／Supabase許可、Rule18 §0のGPT-6 Astra Pro主体および§11.3の委任内修復を継承します。v7を採用済みにせず、§79.4の二つの未達を既存ownerで進めます。
+
+| start record | 今回の具体値 |
+|---|---|
+| product_destination | 本人の同一Pieceを通常画面で描画・明示保存し、同じ本文を開き直せるP-W1へつなぐ |
+| current_gate_or_subgate | P-W1 / B10_WITH_B12C_ADOPTION_BOUNDARY |
+| exact_work | 同契約の内部重複処理を減らす明示iOS preview v8と、拒否Arabicの同layout描画2画像を既存harnessで取得 |
+| scope_classification | LEVEL_2 / OBSERVED_BLOCKER_MINIMAL_FIX |
+| approval_or_delegation_basis | 10/20の直接再開指示、Rule18 §0・§11.3、weekly §5.6.1〜5.6.3。既承認の操作を再確認しない |
+| execution_owner | GPT-6 Astra Pro 華恋。GitHub書込はroot一人、分担は原因調査・差分reviewのみ |
+| success_credit | 最終照合込み420時間の改善とArabicの描画原因の確定。診断画像や検査数を正式保存完成へ換算しない |
+| completion_condition | 新sourceをGitHubへ反映・全変更path内容照合し、既存CI一度の全11reportと画像を確認して同4文書へ結果保存 |
+| stop_condition | 同source再実行や条件緩和で通さない。新計測契約が必要なら実画素・元wire・具体差分で方式判断。補助経路の増設はDETOUR_RISK_STOP |
+| prohibited_scope | 全range／font順／B9 score／本文／recipe／独立5値／元8秒／same node・token・generationの弱化、未採用版のadmission、DB再適用、無関係なAPI・runtime・署名・配布変更 |
+| next_product_read_or_mash_decision_point | 実RN画像を華恋が読み、実処理改善の結果とArabicの描画範囲を確認。計測契約の置換が必要な場合だけ差と案を具体化 |
+| current_source_test_receipt | PR30 head6c2da880、製品source0b24ce7d、v7 run39333428161、入口79.3〜79.4の全結果、既存13 JS suiteとnative129 |
+| current_docs_and_heads | Piece入口／manifest v87、overall structure 01・01A〜C、national system 02・02A〜B、全file地図とhead tree1901件、最新weekly20261017 §5.6.7を関係ownerと照合 |
+| affected_current_structure_maps | current_structure/02_piece_current_structure.md §65.28、STRUCTURE_MAP_DELTA_PRESENT |
+
+追加購入・新しいMash操作は0です。実装・検査・既存CI一度・結果保存を一作業単位とし、CI待ちを含む実行時間は結果に記します。System Context prepareは、この環境の部分取得sourceではcocolon_context_prepare module不在により一度失敗しました。System Context自体の故障とは扱わず、同read_firstで許可されたexact head原本の直接読取へ移りました。新しいhelperの復元を製品修復の前提にしません。
+
+### 80.2 製品差分と保持する判定
+
+PieceVisualCardのinspectDrawingは、inactive／検査対象外phase／同snapshot検査済みを先に返し、実行しない操作での正文・payload・recipeの再検証を省きます。measureも既存planning除外をprepareの前へ移し、syncDeadlineはbindingと対象phaseを先に確認します。実際のrender、候補採用、非同期完了、最終fitでのhash・expiry・現在性の再検証は残します。可変propsを参照同一性だけでmemoizeしません。
+
+B9は全n(n+1)/2 rangeを従来どおり受領・検証し、同じ禁則と厳密な幅条件を満たすendをstartごとに記録します。元から不採用となるedgeへの重複判定だけをDP内から除き、endの昇順、tie、8項目score、非単調幅、独立した高さ条件と制約付きallocatorを保ちます。入力tableが逆順でも同じ結果となり、不正な未選択rangeも拒否します。nativeの候補生成／転送／decoderは変更していません。
+
+新しい未採用版をpiece.rn_native_preview.prototype.v8で識別します。v7と同じ自然Text高、外幅1080、横padding96/108、内幅888/864、logical行高、既存v5候補とselected_line.v1検査を使います。旧v6固定高と旧版を保持し、v8のsaved／export／Androidは拒否します。元8秒、最終2RAF安定確認、同token／誤token fit照合と受入時刻を変えません。
+
+### 80.3 Arabicの診断と検証状況
+
+既存native harnessのArabic同operation観測へ、同じTextStorage／NSLayoutManager／TextContainer・glyph範囲・contentFrameから透明画像を2枚描く処理を追加します。同じ拡張整数extentで、全glyphを描く画像と元view.boundsでclipした画像を作り、72／64／56ptを既存evidence directoryへ保存します。有限座標・正の寸法・4096上限を確認し、描画前後のattributed stringとgeometryを比較します。画像取得後はalpha>0の全画素で空画像・外縁到達・元view内外の差を調べます。
+
+これは追加のoffscreen描画を伴う診断です。受動的読取だけとは呼びません。元inspectSelectedLineは一度、元wire objectとresolveは無変更、別bridge／UIBlock／再inspect／ensureLayout／CTLine計測は追加しません。画像作成・保存時間も元observation_msと8秒に含まれます。透明診断PNGを完成Arabic Cardや正式rendererの証拠へ置き換えません。
+
+修正前の描画・B9 207件はPASS。修正後はNode24.19.0で、既存13 suiteのうちTypeScript依存2 suiteを除く11 suite **797 PASS／FAIL・SKIP0**です。今回追加した4検査はv8の版境界、v7と同じplan／描画／最終fit、古い結果の失効、全Python B9 oracleの正逆row順です。InputScreenとowner-historyの2 suiteはローカルTypeScript不在のため未実行であり、既存CIのTypeScript5.2.2で全13 suiteを実行します。797を過去896へ加算しません。
+
+10/20 13:05 JST以降の継続で、既存TypeScript5.2.2を再発見しました。最初の通常isolation起動は詳細理由を伴わないfile単位2失敗で終了し、その後、部分取得から欠けていた既存screen依存7fileを現在のGitHub head6c2da880のblobと照合して補完しました。製品sourceを変更せず、前回と同じisolation noneで未実行2 suiteを実行し、103 PASS／FAIL・SKIP0、8576.381702msを確認しました。先行11 suite797と合わせ、同じv8 sourceのlocal coverageは全13 suite900件です。最初の起動失敗を隠さず、単一原因に断定しません。GitHubでは全13 suiteを既存CIの起動条件で確認します。
+
+この保存時点はSOURCE_READY／LOCAL_13_SUITES_VERIFIED、実RN結果待ちです。Arabic修復・420時間合格・正式admission・通常保存再表示はまだ未成立です。Supabase cocolon-projectではPiece用6 migrationの既適用を履歴から再確認し、再適用・business RPC・本人Piece行取得・設定変更は0。既存API保存controller、同owner詳細GET、InputScreenの正式供給と同版saved再表示が続く本線です。

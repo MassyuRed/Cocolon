@@ -57,7 +57,7 @@ function blockContext(text, table, width, candidateProfile) {
   const bounded = table.version === 'piece.native_candidates.v4';
   const exploration = table.version === 'piece.native_candidates.v5';
   if (bounded !== (candidateProfile === 'piece.rn_native_preview.prototype.v4') ||
-      exploration !== (candidateProfile === 'piece.rn_native_preview.prototype.v5' || candidateProfile === 'piece.rn_native_preview.prototype.v6' || candidateProfile === 'piece.rn_native_preview.prototype.v7') ||
+      exploration !== (candidateProfile === 'piece.rn_native_preview.prototype.v5' || candidateProfile === 'piece.rn_native_preview.prototype.v6' || candidateProfile === 'piece.rn_native_preview.prototype.v7' || candidateProfile === 'piece.rn_native_preview.prototype.v8') ||
       bounded && (!finite(table.contentWidth) || table.contentWidth !== width)) unavailable();
   const boundaries = table.boundaries, n = boundaries.length - 1;
   if (n < 1 || n > 420 || boundaries[0] !== 0 || boundaries[n] !== text.length ||
@@ -70,7 +70,14 @@ function blockContext(text, table, width, candidateProfile) {
         i > 0 && (inRange(first(clusters[i]), unicode.combining) || cp === 0x200d ||
           cp >= 0xfe00 && cp <= 0xfe0f || clusters[i - 1].endsWith('\u200d'))) unavailable();
   }
+  // Break legality depends only on this paragraph's boundary, not the start
+  // of each of its n*(n+1)/2 ranges. Keep the terminal boundary admissible.
+  const forbiddenBreak = flags(n);
+  for (let end = 1; end < n; end++) {
+    forbiddenBreak[end] = noStart.has(first(clusters[end])) || noEnd.has(last(clusters[end - 1]));
+  }
   const rows = Array.from({ length: n }, () => new Array(n + 1));
+  const legalWidthEnds = Array.from({ length: n }, () => []);
   for (const row of table.rows) {
     if (!Array.isArray(row) ||
         !Number.isInteger(row[0]) || !Number.isInteger(row[1]) || row[0] < 0 || row[1] > n || row[0] >= row[1] ||
@@ -80,13 +87,14 @@ function blockContext(text, table, width, candidateProfile) {
     } else if (row.length !== 7 || !finite(row[3]) || !finite(row[4]) || !finite(row[5]) || !finite(row[6]) ||
         row[5] < row[3] || row[6] < row[4] || bounded && row[2] > width) unavailable();
     rows[row[0]][row[1]] = row;
+    if (!forbiddenBreak[row[1]] && !widthOverflow(row) && measuredWidth(row) <= width) {
+      legalWidthEnds[row[0]].push(row[1]);
+    }
   }
-  // Break legality depends only on this paragraph's boundary, not the start
-  // of each of its n*(n+1)/2 ranges. Keep the terminal boundary admissible.
-  const forbiddenBreak = flags(n);
-  for (let end = 1; end < n; end++) {
-    forbiddenBreak[end] = noStart.has(first(clusters[end])) || noEnd.has(last(clusters[end - 1]));
-  }
+  // Every supplied range above is still validated, including ranges the DP
+  // cannot use. Preserve ascending boundary order even for reordered tables;
+  // height remains a separate condition for the constrained search only.
+  for (const ends of legalWidthEnds) ends.sort((a, b) => a - b);
   const metric = (start, end) => rows[start]?.[end] || unavailable();
   const part = (start, end) => text.slice(boundaries[start], boundaries[end]);
   const fits = (start, end) => {
@@ -95,7 +103,7 @@ function blockContext(text, table, width, candidateProfile) {
     const row = metric(start, end);
     return !widthOverflow(row) && measuredWidth(row) <= width;
   };
-  return { text, clusters, boundaries, n, metric, part, fits, width, forbiddenBreak, scripts: clusters.map(scriptKind) };
+  return { text, clusters, boundaries, n, metric, part, fits, width, legalWidthEnds, scripts: clusters.map(scriptKind) };
 }
 
 function attachmentHints(ctx) {
@@ -270,12 +278,11 @@ function wrapSolutions(ctx, maxLines = null, lineHeight = null) {
   const costs = new Map([[n, new Map([[0, [0, 0, 0, 0, 0, 0, 0, 0]]])]]), choices = new Map();
   for (let start = n - 1; start >= 0; start--) {
     let best = new Map();
-    for (let end = start + 1; end <= n; end++) {
-      if (!costs.has(end) || ctx.forbiddenBreak[end]) continue;
+    for (const end of ctx.legalWidthEnds[start]) {
+      if (!costs.has(end)) continue;
       const m = ctx.metric(start, end);
-      if (widthOverflow(m)) continue;
       const measured = measuredWidth(m);
-      if (measured > width || lineHeight !== null && m[6] - m[4] > lineHeight) continue;
+      if (lineHeight !== null && m[6] - m[4] > lineHeight) continue;
       const split = Number(end < n && (h.words[end - 1] && h.words[end] ||
         h.spaces[end] && (h.spaces[end - 1] || end + 1 < n && h.spaces[end + 1])));
       const scriptSplit = Number(end < n && (!!scripts[end - 1] && scripts[end - 1] === scripts[end] ||
@@ -320,13 +327,13 @@ function wrapSolutions(ctx, maxLines = null, lineHeight = null) {
 // For v5, suffix-context exploration does not prove independent-line
 // impossibility. It never supplies rows or changes the ordered B9 scoring.
 function minimumMeasuredLineCount(ctx, lineHeight) {
-  const { n, width } = ctx, counts = new Uint16Array(n + 1).fill(n + 1);
+  const { n } = ctx, counts = new Uint16Array(n + 1).fill(n + 1);
   counts[n] = 0;
   for (let start = n - 1; start >= 0; start--) {
-    for (let end = start + 1; end <= n; end++) {
-      if (counts[end] === n + 1 || ctx.forbiddenBreak[end]) continue;
+    for (const end of ctx.legalWidthEnds[start]) {
+      if (counts[end] === n + 1) continue;
       const metric = ctx.metric(start, end);
-      if (!widthOverflow(metric) && measuredWidth(metric) <= width && metric[6] - metric[4] <= lineHeight) {
+      if (metric[6] - metric[4] <= lineHeight) {
         counts[start] = Math.min(counts[start], counts[end] + 1);
       }
     }

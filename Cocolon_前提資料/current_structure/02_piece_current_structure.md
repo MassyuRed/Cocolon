@@ -16,6 +16,10 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**最新は入口§80／本map §65.28／weekly §5.6.8です。未採用v8の内部処理短縮とArabic同layout透明描画診断を準備し、local11 suite797件が成功しました。元条件を保つ新sourceの実RN結果待ちで、420・Arabic・正式admission・通常保存は未成立です。**
+
+### §79時点の結果（履歴）
+
 **最新結果は入口§79.3〜79.4／本map §65.27.1／weekly §5.6.7です。source0b24ce7dのv7はlocal／CI JS896・native129・source compile成功。一度の実RNでquote／Latin／両420の高さ境界拒否を回復し、PNG10枚を確認しました。元8秒を含む合格はbaseline4/5・補足2/3・raw3/3。mixed420は8018.126875ms、Arabicは共通glyph bboxの行高超過が残り、v7未採用です。正式admission・通常保存は未完了。旧v6結果とv7実行前の記録を履歴として保持します。**
 
 ### §78時点の結論（履歴）
@@ -2916,3 +2920,20 @@ Arabicの同operation観測は72／64／56ptで保持し、元wireのbox／ink�
 V7_UNADOPTED_STOP。10/20方式判断は不採用であり、10/22通常保存・10/23共有確認の達成は未成立です。次は既存native描画範囲の修復とmixed420の最終照合込み8秒を同条件で満たす実処理改善。正式renderer・saved版・admission・通常保存再表示のsource準備へ物理端末の追加事前gateは設けません。実稼働のflags／TTL／renderer／認証round-tripと商品受入れは別途未検証です。
 
 STRUCTURE_MAP_DELTA_PRESENTの結果ownerは本節、詳細・未加工reportとhashは入口79.3〜79.4／manifest v87、日程影響はweekly5.6.7です。結果同期は既存4文書だけで、製品／test／workflow追加変更・同source再実行・期限／条件緩和・API／DB／flag／env／deploy／署名／配布／main merge効果0です。
+
+### 65.28 v8 — 表示を保つ内部処理短縮とArabic同layout描画の診断
+
+入口§80／weekly§5.6.8／manifest v88が今回の再開ownerです。旧v7不採用の二つの未達に対し、LEVEL_2の既存owner修復を実施します。
+
+| owner | source差分と責任 |
+|---|---|
+| components/piece/PieceVisualCard.js | inactive／対象外phase／同snapshot検査済みの早期return、planning時measure除外をprepareの前へ移す。実採用・render・fitのhash／expiry／binding再検証は保持 |
+| features/piece/pieceMeasuredWrap.js | 全range検証時に禁則と幅が適合するendを記録し、DPの重複除外判定を短縮。昇順tie・B9 score・高さ制約・全range検証を保持 |
+| features/piece/pieceLayout.js | 明示v8をv7同等の自然高・横padding・iOS previewへ対応。keyはv8固有、native候補v5／selected-line v1を維持。saved／export／Android v8は未提供 |
+| tests/native/piece-rn-canvas-ios.m | 元Arabic selected operation内で同TextStorage／layoutの透明expanded／view-clipped PNGを描画。前後属性・geometry一致を記録し、元wireと判定は変更しない |
+| tests/native/piece-rn-canvas-entry.js・fixtures.cjs | 同11caseのpreview識別をv8へ。本文／recipe／分母／最終照合込み8秒は保持 |
+| tests/piece-v2-renderer.test.js・piece-v2-measured-wrap.test.js | v8の版境界、同描画・最終fit、旧結果失効、Python B9全caseと逆順rowを確認。前回local11 suite797＋再開後2 suite103で全13 suite900 PASS |
+
+新native計測契約やfont／catalog変更はありません。透明PNGは診断であり、完成Cardではありません。新source一度の既存CIで全13 JS suite／native129／source compile／全11reportとPNGを照合します。この段階は実RN結果待ちで、420時間合格・Arabic修復・正式renderer・通常保存は未成立です。既適用DB6 migrationをSupabaseの履歴から確認し、再適用していません。
+
+通常InputScreenの正式isSaveAdmitted供給と採用版のsaved key／profile整合、既存controller・owner GETでの保存再表示がP-W1に残ります。物理端末の新しい事前gateは設けません。API／DB／flags／env／deploy／署名／配布／main mergeへの今回効果0です。

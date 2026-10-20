@@ -23,6 +23,7 @@ typedef void (*PieceSelectedCall)(id, SEL, NSNumber *, NSString *, double,
 static PieceSelectedCall PieceOriginalSelectedCall;
 static NSMutableArray *PieceArabicObservations;
 static NSUInteger PieceArabicOperationOrdinal;
+static NSString *PieceEvidenceDirectory(void);
 
 static id PieceFinite(double value) { return isfinite(value) ? @(value) : (id)NSNull.null; }
 static NSArray *PieceRect(CGRect rect) {
@@ -61,6 +62,10 @@ static NSDictionary *PieceReadArabicGeometry(id module, NSNumber *tag, NSString 
   sample[@"view_identity"] = [NSString stringWithFormat:@"%p", (__bridge void *)view];
   sample[@"storage_identity"] = [NSString stringWithFormat:@"%p", (__bridge void *)storage];
   sample[@"layout_identity"] = [NSString stringWithFormat:@"%p", (__bridge void *)layout];
+  sample[@"container_identity"] = [NSString stringWithFormat:@"%p", (__bridge void *)container];
+  sample[@"view_alpha"] = PieceFinite(view.alpha);
+  sample[@"view_hidden"] = @(view.hidden);
+  sample[@"view_clips_to_bounds"] = @(view.clipsToBounds);
   sample[@"view_bounds"] = PieceRect(view.bounds); sample[@"content_frame"] = PieceRect(view.cocolonPieceContentFrame);
   sample[@"container_size"] = @[PieceFinite(container.size.width), PieceFinite(container.size.height)];
   sample[@"container_padding"] = PieceFinite(container.lineFragmentPadding);
@@ -103,6 +108,85 @@ static NSDictionary *PieceReadArabicGeometry(id module, NSNumber *tag, NSString 
   sample[@"attribute_runs"] = runs; sample[@"glyphs"] = glyphFacts;
   return sample;
 }
+static BOOL PiecePositiveFiniteRect(CGRect rect) {
+  return isfinite(rect.origin.x) && isfinite(rect.origin.y) &&
+    isfinite(rect.size.width) && isfinite(rect.size.height) &&
+    rect.size.width > 0 && rect.size.height > 0;
+}
+static NSDictionary *PieceDrawArabicDiagnostic(RCTTextView *view, double fontSize, NSUInteger ordinal) {
+  NSMutableDictionary *result = [@{
+    @"diagnostic_only": @YES,
+    @"method": @"original_layout_drawGlyphs",
+    @"bypasses_view_visibility": @YES,
+    @"pixel_checks_pending": @YES,
+    @"png_write_complete": @NO,
+    @"scale": @1
+  } mutableCopy];
+  NSTextStorage *storage = view.cocolonPieceTextStorage;
+  NSLayoutManager *layout = storage.layoutManagers.firstObject;
+  NSTextContainer *container = layout.textContainers.firstObject;
+  if (!layout || !container || !isfinite(fontSize) || fontSize <= 0) {
+    result[@"error"] = @"missing_original_layout"; return result;
+  }
+  NSRange glyphs = [layout glyphRangeForTextContainer:container];
+  if (glyphs.location == NSNotFound || glyphs.length == 0) {
+    result[@"error"] = @"empty_original_glyph_range"; return result;
+  }
+  CGRect bounds = view.bounds, frame = view.cocolonPieceContentFrame;
+  CGRect ink = CGRectOffset([layout boundingRectForGlyphRange:glyphs inTextContainer:container],
+                            frame.origin.x, frame.origin.y);
+  if (!PiecePositiveFiniteRect(bounds) || !PiecePositiveFiniteRect(frame) || !PiecePositiveFiniteRect(ink)) {
+    result[@"error"] = @"invalid_original_geometry"; return result;
+  }
+  // Diagnostic margin only. It does not change the mounted Text or its layout.
+  CGRect extent = CGRectIntegral(CGRectInset(CGRectUnion(bounds, ink), -2 * fontSize, -2 * fontSize));
+  result[@"extent_in_view_coordinates"] = PieceRect(extent);
+  result[@"view_bounds"] = PieceRect(bounds);
+  result[@"content_frame"] = PieceRect(frame);
+  result[@"glyph_range"] = @[@(glyphs.location), @(glyphs.length)];
+  if (!PiecePositiveFiniteRect(extent) || extent.size.width > 4096 || extent.size.height > 4096) {
+    result[@"error"] = @"diagnostic_extent_out_of_range"; return result;
+  }
+  UIGraphicsImageRendererFormat *format = [UIGraphicsImageRendererFormat defaultFormat];
+  format.scale = 1;
+  format.opaque = NO;
+  format.preferredRange = UIGraphicsImageRendererFormatRangeStandard;
+  UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:extent.size format:format];
+  NSMutableArray *images = [NSMutableArray new];
+  BOOL complete = YES;
+  for (NSString *variant in @[@"expanded", @"view_clipped"]) {
+    NSString *filename = [NSString stringWithFormat:@"arabic-diagnostic-%lu-%.0f-%@.png",
+                          (unsigned long)ordinal, fontSize, variant];
+    NSMutableDictionary *record = [@{ @"variant": variant, @"filename": filename, @"png_written": @NO } mutableCopy];
+    @try {
+      UIImage *image = [renderer imageWithActions:^(UIGraphicsImageRendererContext *context) {
+        CGContextRef cg = context.CGContext;
+        CGContextSaveGState(cg);
+        @try {
+          CGContextTranslateCTM(cg, -extent.origin.x, -extent.origin.y);
+          if ([variant isEqualToString:@"view_clipped"]) CGContextClipToRect(cg, bounds);
+          [layout drawGlyphsForGlyphRange:glyphs atPoint:frame.origin];
+        } @finally {
+          CGContextRestoreGState(cg);
+        }
+      }];
+      NSData *png = UIImagePNGRepresentation(image);
+      NSError *error = nil;
+      BOOL written = png.length > 0 && [png writeToFile:[PieceEvidenceDirectory() stringByAppendingPathComponent:filename]
+                                               options:NSDataWritingAtomic error:&error];
+      record[@"png_bytes"] = @(png.length);
+      record[@"png_written"] = @(written);
+      if (!written) record[@"error"] = error.localizedDescription ?: @"png_encoding_or_write_failed";
+    } @catch (NSException *exception) {
+      record[@"error"] = exception.name ?: @"unknown_render_exception";
+    }
+    complete = complete && [record[@"png_written"] boolValue];
+    [images addObject:record];
+  }
+  result[@"pngs"] = images;
+  result[@"png_write_complete"] = @(complete);
+  return result;
+}
 static void PieceObservedSelectedCall(id module, SEL command, NSNumber *tag, NSString *text, double fontSize,
                                      RCTPromiseResolveBlock resolve, RCTPromiseRejectBlock reject) {
   PieceSelectedCall original = PieceOriginalSelectedCall;
@@ -113,7 +197,27 @@ static void PieceObservedSelectedCall(id module, SEL command, NSNumber *tag, NSS
   RCTPromiseResolveBlock observedResolve = ^(id wire) {
     @try {
       CFTimeInterval start = CACurrentMediaTime();
-      NSMutableDictionary *sample = [PieceReadArabicGeometry(module, tag, text, fontSize, ordinal, wire) mutableCopy];
+      NSDictionary *before = PieceReadArabicGeometry(module, tag, text, fontSize, ordinal, wire);
+      NSMutableDictionary *sample = [before mutableCopy];
+      if (!before[@"observation_error"]) {
+        RCTBridge *bridge = [(id<RCTBridgeModule>)module bridge];
+        UIView *rawView = [bridge.uiManager viewForReactTag:tag];
+        if ([rawView isKindOfClass:RCTTextView.class]) {
+          RCTTextView *view = (RCTTextView *)rawView;
+          NSTextStorage *storage = view.cocolonPieceTextStorage;
+          NSAttributedString *attributesBefore = [storage copy];
+          NSDictionary *drawing = PieceDrawArabicDiagnostic(view, fontSize, ordinal);
+          NSDictionary *after = PieceReadArabicGeometry(module, tag, text, fontSize, ordinal, wire);
+          sample[@"offscreen_diagnostic"] = drawing;
+          sample[@"state_after"] = after;
+          sample[@"geometry_unchanged"] = @([before isEqualToDictionary:after]);
+          sample[@"attributed_storage_unchanged"] = @(attributesBefore != nil && storage == view.cocolonPieceTextStorage &&
+            [attributesBefore isEqualToAttributedString:storage]);
+        } else {
+          sample[@"offscreen_diagnostic"] = @{ @"diagnostic_only": @YES, @"error": @"original_text_view_disappeared",
+                                              @"png_write_complete": @NO };
+        }
+      }
       sample[@"observation_ms"] = PieceFinite((CACurrentMediaTime() - start) * 1000);
       if ([NSJSONSerialization isValidJSONObject:sample]) [sink addObject:sample];
     } @catch (NSException *exception) {
@@ -189,7 +293,7 @@ RCT_EXPORT_METHOD(capture:(nonnull NSNumber *)tag report:(NSDictionary *)raw res
           fabs(contentFrame.size.height - [raw[@"plan_line_height"] doubleValue]) < 0.01 &&
           fabs(container.size.width - contentFrame.size.width) < 0.01 && fabs(container.size.height - contentFrame.size.height) < 0.01;
       }
-      if (i < rows.count && [raw[@"candidate_profile"] isEqual:@"piece.rn_native_preview.prototype.v7"]) {
+      if (i < rows.count && [@[@"piece.rn_native_preview.prototype.v7", @"piece.rn_native_preview.prototype.v8"] containsObject:raw[@"candidate_profile"]]) {
         valid = valid && fabs(view.bounds.size.width - [raw[@"width"] doubleValue]) < 0.01 &&
           fabs(contentFrame.origin.x - [raw[@"margin"] doubleValue]) < 0.01 && fabs(contentFrame.origin.y) < 0.01 &&
           fabs(contentFrame.size.width - [raw[@"content_width"] doubleValue]) < 0.01 &&
@@ -201,7 +305,7 @@ RCT_EXPORT_METHOD(capture:(nonnull NSNumber *)tag report:(NSDictionary *)raw res
       NSRange glyphs = [layout glyphRangeForTextContainer:container];
       CGRect localInk = CGRectOffset([layout boundingRectForGlyphRange:glyphs inTextContainer:container],
         view.cocolonPieceContentFrame.origin.x, view.cocolonPieceContentFrame.origin.y);
-      if (i < rows.count && [raw[@"candidate_profile"] isEqual:@"piece.rn_native_preview.prototype.v7"])
+      if (i < rows.count && [@[@"piece.rn_native_preview.prototype.v7", @"piece.rn_native_preview.prototype.v8"] containsObject:raw[@"candidate_profile"]])
         valid = valid && CGRectGetHeight(localInk) <= [raw[@"plan_line_height"] doubleValue];
       CGRect ink = [view convertRect:localInk toView:canvas];
       [frames addObject:@[@(ink.origin.x), @(ink.origin.y), @(CGRectGetMaxX(ink)), @(CGRectGetMaxY(ink))]];
@@ -235,8 +339,8 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
   return [[NSBundle mainBundle] URLForResource:@"piece-canvas" withExtension:@"jsbundle"];
 }
 - (NSArray<id<RCTBridgeModule>> *)extraModulesForBridge:(RCTBridge *)bridge { return @[self.resultModule]; }
-- (void)assertV7Report:(NSDictionary *)report {
-  XCTAssertEqualObjects(report[@"candidate_profile"], @"piece.rn_native_preview.prototype.v7");
+- (void)assertV8Report:(NSDictionary *)report {
+  XCTAssertEqualObjects(report[@"candidate_profile"], @"piece.rn_native_preview.prototype.v8");
   NSArray *rows = report[@"rows"], *inspection = report[@"inspection"];
   BOOL branding = [report[@"branding"] boolValue];
   XCTAssertEqual(inspection.count, rows.count + (branding ? 1 : 0), @"%@", report[@"name"]);
@@ -314,7 +418,7 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     XCTAssertEqualObjects(report[@"save_fit_current"], @(preview), @"%@", report[@"name"]);
     XCTAssertEqualObjects(report[@"save_fit_wrong_token_current"], @NO, @"%@", report[@"name"]);
     XCTAssertEqualObjects(report[@"save_fit_handle_keys"], preview ? @[@"isCurrent"] : @[], @"%@", report[@"name"]);
-    if (preview) [self assertV7Report:report];
+    if (preview) [self assertV8Report:report];
     XCTAssertNotNil(report[@"png"]);
     if (report[@"png"]) {
       UIImage *image = [UIImage imageWithContentsOfFile:[PieceEvidenceDirectory() stringByAppendingPathComponent:report[@"png"]]];
@@ -334,7 +438,7 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     XCTAssertEqualObjects(report[@"save_fit_current"], @YES);
     XCTAssertEqualObjects(report[@"save_fit_wrong_token_current"], @NO);
     XCTAssertEqualObjects(report[@"save_fit_handle_keys"], @[@"isCurrent"]);
-    [self assertV7Report:report];
+    [self assertV8Report:report];
   }
   for (NSDictionary *report in raw) {
     XCTAssertEqualObjects(report[@"phase"], @"measurement_checked", @"%@", report);
@@ -346,7 +450,7 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     XCTAssertEqualObjects(report[@"plan_groups"], @[report[@"rows"]]);
     XCTAssertEqual([report[@"on_text_layout"] count], 1);
     XCTAssertNil(report[@"save_fit_current"]); XCTAssertNil(report[@"state_can_save"]); XCTAssertNil(report[@"state_can_export"]);
-    [self assertV7Report:report];
+    [self assertV8Report:report];
   }
   for (NSDictionary *report in [supplemental arrayByAddingObjectsFromArray:raw]) {
     if (report[@"png"]) {

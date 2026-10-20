@@ -678,6 +678,19 @@ Arabicは自然view高76.33332824707031に戻しても、TextKit bbox高84.51171
 
 10/22の通常保存・10/23の共有確認の前提は未達で、日程達成や延期承認には換算しません。入口79.3〜79.4／current map65.27.1／manifest v87に同じ全11結果・未加工観測・hash・次のownerを同期しました。結果後の製品／test／workflow追加変更・同source再実行・条件緩和0。API／DB／flags／env／deploy／署名／配布／main merge効果0、既適用DB6件の再適用0です。今回の結果記録を正式保存・共有の完成に加点しません。
 
+#### 5.6.8 10/20のPiece継続 — v8の内部処理短縮とArabic実描画の確認
+
+Mashの継続指示と既存許可を引き継ぎ、v7で残ったmixed420の最終8018.126875msとArabic共通bbox問題へ直接修復を進めています。既承認のGitHub／Supabase操作を再承認の理由にしません。
+
+新しい未採用iOS preview v8は、Cardの実行しないphaseでの再検証と、B9で幅・禁則不適合と分かっているedgeへの重複判定を短縮します。全候補range、font順、正文、recipe、B9のscore／tie、高さ条件、独立5値、自然Text高、同mount/token、最終2RAF・fit照合込み元8秒を保持します。
+
+Arabicは元selected operation内で同じTextStorage／layoutを拡張透明画像と元viewでclipした画像へ描き、共通bboxと実画素の関係を確認します。元wire・正式判定は変更せず、描画・保存時間も元8秒に含めます。診断画像を完成Cardへ数えません。
+
+修正前の描画／B9 207件が成功、修正後localは既存11 suite797件がPASS、FAIL／SKIP0です。再開後は既存TypeScript5.2.2と不足していたGitHub同版screen依存7fileを揃え、残る2 suite103件もPASS／FAIL・SKIP0でした。最初のfile単位2失敗は記録し、製品sourceを変更せず既存isolation noneで確認しています。local全13 suiteのcoverageは900件で、既存CIでも全13 suiteを確認します。この記録時点はsource準備済み・実RN結果待ちで、420・Arabic・正式admission・P-W1完了はまだ主張しません。入口§80／current map§65.28／manifest v88へ同じ状態を保存し、新source一度の結果を追記します。
+
+SupabaseではPiece用6 migrationの適用履歴を確認し、再適用・本人行読取・設定変更は行っていません。10/22の通常保存と10/23の共有確認に向け、採用renderer・同版saved再表示・InputScreenの既存hostへの正式供給・既存保存controllerと本人GETが残ります。新しいcontroller／DTOや物理端末の事前gateは追加しません。API／DB／flags／env／deploy／署名／配布／main merge効果0です。
+
+
 ## 6. 議題6 — 今回の指摘に対する判断と、記録の責任
 
 ### 6.1 問題は反省文の不足ではない

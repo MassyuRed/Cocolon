@@ -42,7 +42,7 @@ module.exports = cases.map((c, index) => {
   p.visual_recipe.aspect_ratio = c.ratio;
   p.visual_recipe.theme.theme_id = c.theme;
   p.visual_recipe.branding.branding_mode = c.brand;
-  p.renderer_version = c.saved ? 'piece.rn_native_preview.prototype.v3' : 'piece.rn_native_preview.prototype.v7';
+  p.renderer_version = c.saved ? 'piece.rn_native_preview.prototype.v3' : 'piece.rn_native_preview.prototype.v8';
   p.piece_text_hash = digest(p.piece_text);
   p.content_payload_hash = digest(JSON.stringify(canonical(p.content_payload)));
   p.visual_recipe_hash = digest(JSON.stringify(canonical(p.visual_recipe)));

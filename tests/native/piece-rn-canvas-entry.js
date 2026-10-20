@@ -171,7 +171,7 @@ class CanvasCases extends React.Component {
       if (lines.length !== 1 || lines[0].text !== text || box.width !== 1080 || !Number.isFinite(box.height) || Math.abs(box.height - 75) > 0.5 ||
           !['x', 'y', 'width', 'height'].every(key => Number.isFinite(lines[0][key])) ||
           lines[0].width < 0 || lines[0].height <= 0 || lines[0].width > 888 || lines[0].height > 75) throw Error('raw_geometry');
-      const input = { candidateProfile: 'piece.rn_native_preview.prototype.v7', blocks: [text], contentWidth: 888,
+      const input = { candidateProfile: 'piece.rn_native_preview.prototype.v8', blocks: [text], contentWidth: 888,
         contentHeight: 75, sizes: [48], lineRatio: 75 / 48, paragraphRatio: 0, alignment: 'left' };
       const table = await renderer.measurePieceCandidates(node, text, 48, { candidateProfile: 'piece.rn_native_preview.prototype.v5' });
       if (!current()) return;
@@ -201,7 +201,7 @@ class CanvasCases extends React.Component {
   finishRawText = async () => {
     const fixture = this.caseFixtures[this.state.index];
     const report = { name: fixture.name, evidence_set: fixture.evidence_set, diagnostic_only: true,
-      candidate_profile: 'piece.rn_native_preview.prototype.v7', font_size: 48, elapsed_ms: performance.now() - this.started,
+      candidate_profile: 'piece.rn_native_preview.prototype.v8', font_size: 48, elapsed_ms: performance.now() - this.started,
       width: 1080, height: 320, content_width: 888, content_height: 75, margin: 96, branding_zone: 0, branding: false,
       rows: [fixture.raw_text], blocks: [fixture.raw_text], trace: this.trace,
       ...(this.rawReport || { phase: 'measurement_unavailable', diagnostic_valid: false, body_preserved: false }) };
