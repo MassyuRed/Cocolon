@@ -678,7 +678,7 @@ Arabicは自然view高76.33332824707031に戻しても、TextKit bbox高84.51171
 
 10/22の通常保存・10/23の共有確認の前提は未達で、日程達成や延期承認には換算しません。入口79.3〜79.4／current map65.27.1／manifest v87に同じ全11結果・未加工観測・hash・次のownerを同期しました。結果後の製品／test／workflow追加変更・同source再実行・条件緩和0。API／DB／flags／env／deploy／署名／配布／main merge効果0、既適用DB6件の再適用0です。今回の結果記録を正式保存・共有の完成に加点しません。
 
-#### 5.6.8 10/20のPiece継続 — v8の内部処理短縮とArabic実描画の確認
+#### 5.6.8 10/20のPiece継続 — v8反映完了、420時間改善とArabicの実画素確認
 
 Mashの継続指示と既存許可を引き継ぎ、v7で残ったmixed420の最終8018.126875msとArabic共通bbox問題へ直接修復を進めています。既承認のGitHub／Supabase操作を再承認の理由にしません。
 
@@ -686,7 +686,23 @@ Mashの継続指示と既存許可を引き継ぎ、v7で残ったmixed420の最
 
 Arabicは元selected operation内で同じTextStorage／layoutを拡張透明画像と元viewでclipした画像へ描き、共通bboxと実画素の関係を確認します。元wire・正式判定は変更せず、描画・保存時間も元8秒に含めます。診断画像を完成Cardへ数えません。
 
-修正前の描画／B9 207件が成功、修正後localは既存11 suite797件がPASS、FAIL／SKIP0です。再開後は既存TypeScript5.2.2と不足していたGitHub同版screen依存7fileを揃え、残る2 suite103件もPASS／FAIL・SKIP0でした。最初のfile単位2失敗は記録し、製品sourceを変更せず既存isolation noneで確認しています。local全13 suiteのcoverageは900件で、既存CIでも全13 suiteを確認します。この記録時点はsource準備済み・実RN結果待ちで、420・Arabic・正式admission・P-W1完了はまだ主張しません。入口§80／current map§65.28／manifest v88へ同じ状態を保存し、新source一度の結果を追記します。
+修正前の描画／B9 207件が成功、修正後localは既存11 suite797件がPASS、FAIL／SKIP0です。再開後は既存TypeScript5.2.2と不足していたGitHub同版screen依存7fileを揃え、残る2 suite103件もPASS／FAIL・SKIP0でした。最初のfile単位2失敗は記録し、製品sourceを変更せず既存isolation noneで確認しています。local全13 suiteのcoverageは900件です。以下をsource準備時点の記録へ追記する今回の実結果とします。
+
+[source ef96dc5](https://github.com/MassyuRed/Cocolon/commit/ef96dc5b152d0ad2cc5bb8dd8a83ed988ba259f0)を既存PR30のbranchへ反映し、変更12pathだけのtree差分・branch ref・全12fileの全文読み戻しを確認しました。[run39368845949 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39368845949)は10/20 13:18:06〜13:46:52 JST、28分46秒の一度の実行です。CI JSは全13 suite900 PASS、iOS／Android source compileは成功しました。native単体は115 PASS行でexit1、残る14件と129最終summaryがなく、具体原因も未確定です。過去129の成功を今回へ代入しません。export依存compileは変更なしでSKIPです。
+
+| 製品上の確認点 | 今回の結果 |
+|---|---|
+| mixed420の元8秒 | 最終2RAF・同token／誤token fit確認後で8018.126875→5172.852042ms、約35.5%短縮。一度の同条件観測で達成 |
+| あ420 | 3904.686458→2452.123250ms、約37.2%短縮。全本文／候補／font／配置／独立値を保持 |
+| 実RN／画像 | baseline5/5・補足2/3・raw3/3。通常PNG10枚はv7とbyte同一。11report＋16PNGを実取得し、hash・本文・元assert・画像を確認 |
+| Arabicの原因確認 | 3サイズの同layout alpha全画素は元view内、view clip前後のPNGもbyte同一。ただしTextKit bbox高はlogical／view高超過のままで、現契約は拒否。完成Card・fitなし |
+| 正式採用と通常保存 | v8未採用。正式admission・同採用版saved再表示・通常初回保存→本人再表示は未完了 |
+
+Canvasのexit65は1 XCTestのArabicに関する7 assertion失敗で、実テスト24.085秒／0 unexpectedです。Xcode action601秒には長い起動待ちと終了処理が含まれ、Cardの5.173秒と混同しません。追加の起動／再実行はなく、同source再実行0です。診断PNGは非表示状態を迂回したscale1局所描画で、配置後canvas・全端末の成立を主張しません。
+
+次の具体案は、既存native／renderer／Cardで新selected_line.v2と明示preview v9を設け、同layoutの実alphaをinkに使い、最終配置後も同node/token/generation・canvas相対位置で再検査するものです。元8秒、全range／font、B9 score、独立5値、strictな包含を保ちます。これでも従来のTextKit bboxによる拒否／配置条件は置き換わるため、Rule18 §0(4)・§11.3と入口§76.3(6)／§77に基づくMash判断1件が必要です。GitHub／Supabaseの既承認を再確認しません。変更する既存15path、bitmap上限／空画素／外縁／staleの失敗条件、一度の新source検証とSTOP、費用を入口§80.7へ具体化済みで、v9実装は未着手です。
+
+今回の限定実装・GitHub反映・一度の結果確認は完了し、結果は入口§80.4〜80.7／current map§65.28.1／manifest v89へ保存します。10/22通常保存・10/23共有確認にはまだ上記の前提未達があり、実施済みや延期承認へ読み替えません。
 
 SupabaseではPiece用6 migrationの適用履歴を確認し、再適用・本人行読取・設定変更は行っていません。10/22の通常保存と10/23の共有確認に向け、採用renderer・同版saved再表示・InputScreenの既存hostへの正式供給・既存保存controllerと本人GETが残ります。新しいcontroller／DTOや物理端末の事前gateは追加しません。API／DB／flags／env／deploy／署名／配布／main merge効果0です。
 

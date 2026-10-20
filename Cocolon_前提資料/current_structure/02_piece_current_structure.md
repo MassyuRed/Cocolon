@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§80／本map §65.28／weekly §5.6.8です。未採用v8の内部処理短縮とArabic同layout透明描画診断を準備し、local11 suite797件が成功しました。元条件を保つ新sourceの実RN結果待ちで、420・Arabic・正式admission・通常保存は未成立です。**
+**最新結果は入口§80.4〜80.7／本map §65.28.1／weekly §5.6.8です。v8 source ef96dc5をGitHubへ反映して12file全文を読み戻し、一度のCIと11report／16PNGを確認しました。JS900成功、mixed420は最終照合込み5172.852msへ改善し、従来10PNGは全てv7とバイト同一。Arabicは同layoutの実画素が枠内でも現TextKit bbox条件で拒否が続き、native単体は115 PASS行で未完走です。v8未採用、正式admission・通常保存は未完了。次の新しいink定義・配置後再検査案は入口§80.7の具体判断へ固定します。**
 
 ### §79時点の結果（履歴）
 
@@ -2937,3 +2937,23 @@ STRUCTURE_MAP_DELTA_PRESENTの結果ownerは本節、詳細・未加工reportと
 新native計測契約やfont／catalog変更はありません。透明PNGは診断であり、完成Cardではありません。新source一度の既存CIで全13 JS suite／native129／source compile／全11reportとPNGを照合します。この段階は実RN結果待ちで、420時間合格・Arabic修復・正式renderer・通常保存は未成立です。既適用DB6 migrationをSupabaseの履歴から確認し、再適用していません。
 
 通常InputScreenの正式isSaveAdmitted供給と採用版のsaved key／profile整合、既存controller・owner GETでの保存再表示がP-W1に残ります。物理端末の新しい事前gateは設けません。API／DB／flags／env／deploy／署名／配布／main mergeへの今回効果0です。
+
+### 65.28.1 v8結果 — 420の時間条件達成とArabic計測契約の判断点
+
+[source ef96dc5b](https://github.com/MassyuRed/Cocolon/commit/ef96dc5b152d0ad2cc5bb8dd8a83ed988ba259f0)／[run39368845949 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39368845949)を一度確認しました。branch ref・製品3／test5／資料4の計12pathだけの差分と全12fileのremote全文一致を確認済みです。§65.28の結果待ちはsource時点の履歴で、現在の採否は本節です。
+
+| 現在の責任owner | 実結果と次の扱い |
+|---|---|
+| PieceVisualCard／pieceMeasuredWrapの同契約短縮 | mixed420は8018.126875→5172.852042ms、あ420は3904.686458→2452.123250ms。本文／全range／font順／B9選択／独立5値／全geometry／最終2RAF・fit時刻は維持。通常PNG10枚はv7とバイト同一 |
+| JavaScript／source compile | CI全13 suite900 PASS、FAIL／SKIP／CANCEL0。iOS Objective-C++構文・project lint、Android source compile成功。export依存compileは変更なしでSKIP |
+| native単体harness | legacy97 summary＋追加18 PASS行の115まで。14件と最終129 summaryなし、exit1。具体終了原因未確定。製品native／test／shim／workflowは同版であり、過去129を今回へ流用しない |
+| 実RN harness／画像 | baseline5/5・補足2/3・raw3/3。1 XCTestにArabicの7 assertion失敗、exit65、0 unexpected。Card7＋raw3＋Arabic診断6の16PNGと全11reportを取得・hash照合 |
+| RN／TextKitのArabic描画 | 72／64／56ptの同layout・scale1 alpha全画素はown-view内、expanded／view-clippedはbyte同一。TextKit bbox高108.80078125／96.65625／84.51171875はlogical98／87／76を超過。現v1拒否は保持し、完成Arabic Cardとfitはない |
+| 新しい計測契約の候補owner | 既存PieceTextMetrics／renderer／Card／layoutに限定したselected_line.v2／preview v9案。局所alphaで配置案を作り、同node/token/generationと最終canvas相対位置で再検査してからnative_checked／fitへ渡す。未実装・未承認 |
+| 既存通常保存owner | 採用renderer、同版saved version/key/profile、InputScreen→既存hostの正式isSaveAdmitted、既存controller/APIでの通常保存→同owner GET／履歴が未完了 |
+
+成功preview6件は同token fit=true／wrong-token=false／keys=[isCurrent]で全て8秒内。saved v3にfitはなく、全Card8件のcanSave／canExportはfalse、rawに保存／fit欄はありません。Arabic診断は非表示状態を迂回した局所描画で、完成Card・最終配置・全倍率・物理端末受入れの証拠にはしません。既存Cardはnative_checked遷移でrowOffsetsを反映し、onLayoutがx/yを保持しないため、新契約では位置変更後の実画素位相を見逃さない設計が必要です。
+
+新案はTextKit bboxによる明文の拒否／配置条件を置き換えます。Rule18 §0(4)・§11.3 LEVEL_3と入口§76.3(6)／§77の承認範囲に基づき、この差だけをMashの具体判断とします。GitHub書込や結果保存を再承認事項にしません。入口§80.7に既存15path、元8秒内の追加draw／scan／位置検査、有限bitmap・外縁・allocation・空画素・stale拒否、旧版／候補全range／独立5値保持、一度の新source検証、完了／STOP／費用を具体化しました。新helper／controller／DTO／workflowは増設しません。
+
+**V8_UNADOPTED_STOP。** 今回の限定実装・反映・結果確認は完了し、mixed420の元8秒条件は達成しました。Arabic拒否とnative14件未確認を残すため正式採用はしません。結果同期は既存4文書、source後の製品／test／workflow追加変更・同source再実行・DB再適用・API／flag／env／deploy／署名／配布／main merge効果0。詳細は入口80.4〜80.7、未加工report・PNG hash・画素解析はmanifest v89、日程はweekly5.6.8です。STRUCTURE_MAP_DELTA_PRESENTを維持します。

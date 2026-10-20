@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新作業は§80／current map §65.28／weekly §5.6.8です。v7と同じ表示・計測条件を保つ未採用v8で、Card再検証とB9の重複処理を短縮しました。local11 suite797件が成功し、同じArabic layoutの透明描画と実RNでの最終照合込み420時間を確認する新sourceの結果待ちです。正式admission・通常保存は未完了です。**
+**最新結果は§80.4〜80.7／current map §65.28.1／weekly §5.6.8です。v8 source ef96dc5をGitHubへ反映し、全12fileの全文読み戻しと一度のCI結果確認を完了しました。JS900件成功、mixed420は最終照合込み8018.127→5172.852msとなり、従来のPNG10枚は全てv7とバイト同一です。Arabicは同layout診断の全3サイズで実画素が元view内でしたが、現TextKit bbox条件では拒否が続きます。native単体は115 PASS行で未完走、残る14件は未確認です。v8未採用、正式admission・通常保存は未完了。実画素を新しい計測契約に使うv9案と、既承認条件からの差を§80.7に具体化しました。**
 
 ### §79時点の結果（履歴）
 
@@ -2211,3 +2211,79 @@ B9は全n(n+1)/2 rangeを従来どおり受領・検証し、同じ禁則と厳�
 10/20 13:05 JST以降の継続で、既存TypeScript5.2.2を再発見しました。最初の通常isolation起動は詳細理由を伴わないfile単位2失敗で終了し、その後、部分取得から欠けていた既存screen依存7fileを現在のGitHub head6c2da880のblobと照合して補完しました。製品sourceを変更せず、前回と同じisolation noneで未実行2 suiteを実行し、103 PASS／FAIL・SKIP0、8576.381702msを確認しました。先行11 suite797と合わせ、同じv8 sourceのlocal coverageは全13 suite900件です。最初の起動失敗を隠さず、単一原因に断定しません。GitHubでは全13 suiteを既存CIの起動条件で確認します。
 
 この保存時点はSOURCE_READY／LOCAL_13_SUITES_VERIFIED、実RN結果待ちです。Arabic修復・420時間合格・正式admission・通常保存再表示はまだ未成立です。Supabase cocolon-projectではPiece用6 migrationの既適用を履歴から再確認し、再適用・business RPC・本人Piece行取得・設定変更は0。既存API保存controller、同owner詳細GET、InputScreenの正式供給と同版saved再表示が続く本線です。
+
+### 80.4 GitHub反映と一度のCI実行
+
+上記のsource準備状態を完了し、10/20 13:18 JSTに[ef96dc5b152d0ad2cc5bb8dd8a83ed988ba259f0](https://github.com/MassyuRed/Cocolon/commit/ef96dc5b152d0ad2cc5bb8dd8a83ed988ba259f0)をPR30の既存branchへ反映しました。parentは6c2da880868b3044b104198d68b652c8ef277a18、treeは31d3fa4bfa11f2e4777e71cae5ebb9ce74ba80d6です。製品3・検査5・既存資料4の計12pathだけが変わったこと、更新後のbranch ref、全12fileのGitHubからの全文読み戻し一致を確認しました。ローカル変更や接続確認だけを反映済みと呼んでいません。
+
+同sourceの[既存CI run39368845949 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39368845949)はpushから一度だけ起動しました。全13 JavaScript suiteはCIでも900 PASS／FAIL・SKIP・CANCEL0、11156.222292msです。これはlocalの900件へ加算する件数ではありません。Androidの既存native source compile、iOSのObjective-C++構文検査とproject lintは通過しました。export用Pods／Android libraryのjobはsuccessですが、依存変更がないため当該compile stepはSKIPであり、今回の再compile成功に数えません。
+
+iOS native単体job118451844863はexit1で未完走でした。legacy97の正式summaryと追加18件のPASS行、計115 PASS行／個別FAIL行0までは取得しましたが、残る14件と最終129件summaryはありません。最後はkey予算の検査がPASSした後、A＋結合アクセントを420回繰り返すUTF-16予算caseのlayout_readyまでです。終了確認はsummary不足を報告しましたが、nativeの具体的終了原因を示すstacktrace／signal／OOM情報はありません。製品native・単体test・shim・workflowは取得元6c2da880と同一で、v8の別canvas診断はこのbinaryへ入りません。したがって原因をv8回帰・環境故障のいずれにも断定せず、過去の129 PASSを今回の合格へ流用しません。同sourceの再実行は0です。
+
+### 80.5 実RN結果 — 元8秒内へ改善し、既存10画像を保持
+
+run39368845949は2026-10-20T04:18:06Z開始、04:46:52Zにfailureで完了し、経過28分46秒でした。実RN job118451844935のexit65は、xcresult上の1 XCTestに記録されたArabicの7 assertion失敗に対応します。phase、canvas、capture、fit、handle keys、inspection件数、通常PNGの各条件です。7回の再実行ではなく、実テスト本体は24.08535099029541秒、0 unexpected failureです。元11reportを全て回収し、分母・順序・本文・recipeを保持しました。
+
+| 集合／case | 最終phase／判定 | elapsed_ms | font／本文行数 | 通常PNG |
+|---|---|---:|---|---|
+| baseline essay_paragraphs | native_checked／成功 | 1815.069333 | 48pt／5行 | あり |
+| baseline quote_unicode | native_checked／成功 | 500.642333 | 80pt／3行 | あり |
+| baseline declaration_no_brand | native_checked／成功 | 328.239709 | 72pt／5行 | あり |
+| baseline essay_max420 | native_checked／成功 | 5172.852042 | 36pt／18行 | あり |
+| baseline saved_essay_canvas | native_checked／旧saved v3成功 | 251.435166 | 48pt／5行 | あり |
+| supplemental suffix_latin_ligature | native_checked／成功 | 147.033333 | 72pt／1行 | あり |
+| supplemental suffix_arabic | unavailable／native_ink_overflow | 352.844083 | 56pt／1行 | なし |
+| supplemental suffix_max420_a | native_checked／成功 | 2452.123250 | 36pt／17行 | あり |
+| raw suffix_spaces_raw | measurement_checked／診断成功 | 100.556458 | 48pt／1行 | あり |
+| raw suffix_hebrew_raw | measurement_checked／診断成功 | 101.027375 | 48pt／1行 | あり |
+| raw suffix_mixed_bidi_raw | measurement_checked／診断成功 | 109.450125 | 48pt／1行 | あり |
+
+元8秒を含むbaselineは5/5、補足は2/3、raw診断は3/3です。成功preview6件は同token fit=true、誤token=false、handle keys=[isCurrent]で、独立5値・一行・font・glyph・幅・高さ・own-viewを元assertのまま満たしました。saved v3には従来どおりfitがなく、rawにも保存／export／fit fieldを付与していません。全Card8件のcanSave／canExportはfalseです。Arabicの8秒内拒否を描画成功へ数えません。
+
+mixed420の最終reportはv7の8018.1268750000745msから5172.852042000042msへ、2845.274833ms／35.4855%短縮しました。あ420は3904.6864580002148msから2452.123249999946msへ、1452.563208ms／37.2005%短縮しました。どちらも元の2RAF安定確認・prepare・同token／誤token fit照合後、PNG生成前の受入時刻です。本文blocks・全rows・plan_groups・font36・sizeIndex3・logical行高56・row_offsets・inspection全値・native_texts・ink frames・native geometry・canvas／余白寸法がv7と完全一致しています。font順48→44→40→36、全88410 range／font、B9合否false→false→false→trueを保持しました。一度の実RNで観測した短縮であり、全量をB9単独の効果や将来の全端末性能へ帰属しません。
+
+artifact12241825184は95,549,205bytes、SHA256 369c72b6fd7e2c9d19919876657526051af91ed43852706d5648567803c6ed03。ZIP実取得後にdigestを照合しました。results.jsonは240,229bytes、SHA256 8cc332f5491dd888fe5115b30299debeb59f519d59a4e87bd153935e06bbf1a6で、全11objectがGitHub job log中の結果配列と一致しています。manifest v89に未加工全report、各PNGのhash、画素解析を保持します。artifactの期限は2026-10-27T04:46:31Zであり、PNG binary自体をmanifestへ複製したものではありません。
+
+完成Card7枚・raw3枚の計10PNGは、全てv7記録のSHA256と一致し、バイト単位で同じ画像でした。今回も10枚を原寸目視し、段落、Unicode／結合文字／絵文字、両420の全行、branding有無、rawの空白／Hebrew／mixed bidiに明白な欠けや重なりがないことを確認しました。これとは別にArabic診断6PNGがあります。後者の各同一pairはバイト一致を確認し、3サイズのexpanded画像を原寸目視しました。完成Arabic Cardの画像は存在しません。
+
+実行環境はRN0.77.3、Xcode16.4（16F6）、build SDK iPhoneSimulator18.5、実行iPhone 17 Pro／iOS26.2（23C54）です。Xcodeの601.194秒は起動待ち・終了処理を含むaction時間で、Cardのelapsedや24.085秒のXCTest本体時間ではありません。launch要求04:36:44.590→起動通知04:44:05.969に約441.379秒を要しましたが、その原因は未確定です。localhost:8081の接続拒否や終了後の接続消失は記録されていますが、同runnerはbundle内JSで11reportと終了summaryまで完了しています。追加のtest起動／再実行や発火したtimeoutを示す記録はなく、設定上のtimeout値を発生事実へ読み替えません。
+
+### 80.6 Arabicの実画素 — 同じ描画は枠内、TextKit bboxは枠外
+
+72／64／56ptの元selected operationで、描画前後のattributed storageとgeometryは全て一致し、元selected_line.v1 wireを変更していません。同じlayout・glyph・contentFrame・fontから得た透明PNGを、scale1の全alpha>0画素について調べました。閾値による薄い画素の除外はなく、画素cell全体の外縁をview座標へ戻した結果です。
+
+| font | logical行高 | 実view高 | 元TextKit bbox高 | 実alpha外縁 [左,上,右,下] | alpha高 | view外画素／extent外縁画素 |
+|---:|---:|---:|---:|---|---:|---|
+| 72 | 98 | 98.33332824707031 | 108.80078125 | [99,23,429,98] | 75 | 0／0 |
+| 64 | 87 | 87.33332824707031 | 96.65625 | [99,20,395,86] | 66 | 0／0 |
+| 56 | 76 | 76.33332824707031 | 84.51171875 | [98,18,360,76] | 58 | 0／0 |
+
+各サイズのexpanded／view-clipped pairはRGBA差分0画素、PNG byte列も完全一致です。非透明画素数は5516／4438／3502で、空画像ではありません。診断範囲はviewと元bboxを含む2font分の余白付きextentで、その外縁に画素はありません。診断所要時間19.134083／15.956500／9.411417msは元observationとCardの8秒内に含まれます。
+
+これにより、今回の同layout・scale1局所描画では、TextKitの共通glyph bboxの超過量が実際の画素超過を表していないと確認しました。baseline属性供給の誤りや二重offsetの証拠はなく、行高・view高の微小不足とも別の問題です。元bbox高84.51171875を保ったまま位置を平行移動したりviewだけを広げても、logical行高76以下という条件は満たせません。
+
+ただし診断はready前の非表示状態を迂回してoffscreen描画したものです。現Cardはbbox条件で拒否され、accepted inspection、fit、完成PNGがありません。局所原点でのscale1画素確認を、配置後canvasや全表示倍率、物理端末の成立へ広げません。現実装はnative_checkedへの遷移で初めてrowOffsetsを反映し、既存onLayout snapshotはx/yを保持しないため、実画素を判定に使うなら最終位置での検査も設計対象になります。
+
+### 80.7 採否と、次に必要な計測契約の具体判断
+
+**V8_UNADOPTED_STOP。** source反映・全12file読戻し・一度のCI・全11report／16PNGの取得照合・画素確認という今回の限定作業は完了しました。mixed420の元8秒未達は今回の同条件実行で解消しましたが、Arabicの現契約下の拒否とnative単体14件未確認が残るため、正式採用はしません。結果反映は入口／manifest／本map／weeklyの既存4文書だけで、製品／test／workflow追加変更・同source再実行・条件緩和・DB再適用は0です。
+
+次の提案は、明示iOS preview v9と新しいpiece.native_selected_line.v2に限り、実際の選択行を描く同TextStorage／layout／container／glyphから得たalpha画素範囲をinkとして使うものです。候補探索v5・独立CTLineの5値はそのまま保持し、独立値で描画範囲を代用しません。旧v1と既存版は保持します。bboxで拒否していたArabicを受理し得るほか、ink原点が変わることで配置や選択fontも変わり得ます。したがって単なる診断追加や同じ条件の高速化ではありません。
+
+**個別判断が必要な根拠。** Rule18 §0(4)はPro主体の役割許可を新しい契約・品質条件の許可に広げず、§11.3 LEVEL_3は計測契約／受入条件の置換をMash判断としています。加えて§76.3(6)は「既存TextKit側の拒否条件は緩めません」「位置は既存TextKit ink＋onTextLayout幅から決め」と明記し、§77でその差と停止条件を含めてv5の個別承認を受けています。10/20の継続指示と既存GitHub許可を、当該条件の解除へ暗黙に読み替えません。GitHub反映や今回の結果記録に再承認を求めるものではなく、ここに示す新しいink定義への変更が判断点です。
+
+| 具体案の項目 | 実装・限定検証の範囲 |
+|---|---|
+| product_destination | 同じ本文と元8秒を保ち、Arabicを含む通常Pieceの採用rendererへ進める。正式保存の無条件開放は含めない |
+| native owner | 既存PieceTextMetrics.mm内で選択済み行だけを同layoutでdraw／scan。view boundsとTextKit bboxのunion＋明示guardを含む有限bitmapを1行ずつ解放。全88410候補のraster化、製品でのPNG保存、新serviceは追加しない |
+| scale／座標 | 現在の固定1080 logical canvas・scale1を明示。canvas相対の整数bitmap原点で最終位置の小数位相を保つ。UIScreen.scaleだけを採用して親transformを無視しない。responsive表示や全physical scaleの受入れは別途検証が必要 |
+| 最終位置の束縛 | 先に局所alphaで配置案を作り、その配置後の同node／token／generation・実canvas相対位置で再検査し、安定した結果だけをnative_checked／fitへ渡す。位置変化を既存width/heightだけのonLayoutで見逃さない。無限の再配置loopは作らない |
+| 厳密な失敗条件 | 全alpha>0を対象とし、extent上限・総pixel数・stride・allocation・外縁到達を検査。空画素を正のbboxへ捏造せず、未定義な空白だけの意味はunavailable。staleなnode／位置、geometry変化、期限超過も拒否。own-view・logical行高・元canvas余白を緩めない |
+| 時間と品質 | 追加draw／scan／必要なbridge・UIBlock／最終fitを全て元8秒へ含め、起点を戻さず早期解除もしない。本文・recipe・全range・font順・B9 score/tie・独立5値を保持。改行／font／配置の実差は同11fixtureとPNGで明示する |
+| 検査 | JS900の既存coverage、native旧129全件と追加する位置／空／外縁／上限／現在性の検査を保持。新source一度の実RNでbaseline5・補足3・raw3、Arabic完成Card、両420、同mount/token fit、配置後画素を確認。今回のnative115を129合格の代用にしない |
+| 完了／STOP | 新契約source反映と全文照合、一度の全結果・画像の記録までを一単位にする。8秒・包含・全検査が揃わなければ未採用のまま記録して停止し、同source再試行や基準緩和で通さない |
+| 費用・効果 | 追加購入・依存・helper・DB・API・flag・env・deploy・署名・配布・main merge変更0。既存CI使用量と実行時間は増える。今回のCIは28分46秒、既存canvas job timeout45分であり、新実装の8秒達成や作業時間は未実証 |
+
+候補変更先は既存15pathです。製品5件はios/tempCocolon/PieceTextMetrics.mm、features/piece/pieceRenderer.js、components/piece/PieceVisualCard.js、features/piece/pieceLayout.js、features/piece/pieceMeasuredWrap.js。検査6件はtests/piece-v2-renderer.test.js、tests/piece-v2-measured-wrap.test.js、tests/native/piece-text-metrics-ios.mm、tests/native/piece-rn-canvas-entry.js、tests/native/piece-rn-canvas-fixtures.cjs、tests/native/piece-rn-canvas-ios.m。資料は今回と同じ4件です。新しいhelper、controller、DTO、workflowは作りません。v9製品sourceは未実装・未反映で、提案の承認はまだありません。
+
+描画の未達を解消した後のP-W1は、既存renderer ownerの採用版固定、同版saved readerのversion／key／profile整合、InputScreenから既存InputPieceActionAreaへの正式isSaveAdmitted供給と同mount/token fit接続、既存PieceCreateController／APIでの通常初回保存→同owner詳細GET・履歴再表示です。これらは未完了です。既存6migrationや保存APIを作り直さず、接続source準備へ物理端末の追加事前gateを設けません。実稼働・商品受入れ・署名配布は完了にしません。10/22通常保存・10/23共有確認の予定は未達前提を残し、実施済みや延期承認へ読み替えません。
