@@ -77,6 +77,53 @@ export async function inspectPieceSelectedLine(node, expected) {
   return readPieceSelectedLineInspection(result, { ...expected, platform: Platform.OS });
 }
 
+// v9 is a separate, closed contract. Local alpha chooses placement; only the
+// placed response can establish drawing evidence. Coordinates use the fixed
+// logical canvas at scale 1, including its fractional translation phase.
+export function readPieceSelectedLineV2Inspection(value, expected) {
+  const extra = ['stage', 'tag', 'canvas_tag', 'canvas_frame', 'content_frame', 'raster_scale', 'snapshot_token'];
+  const fields = ['version', 'platform', 'font_size', 'width', 'height', 'utf16_length', 'boundaries',
+    'line_ends', 'ink', 'glyph_check', 'independent_metrics_f64le', ...extra];
+  const rect = v => Array.isArray(v) && v.length === 4 && v.every(finite) && v[2] > 0 && v[3] > 0;
+  if (!value || Object.keys(value).sort().join() !== fields.sort().join() ||
+      value.version !== 'piece.native_selected_line.v2' || expected.platform !== 'ios' ||
+      !['local', 'placed'].includes(expected.stage) || value.stage !== expected.stage ||
+      !Number.isInteger(expected.tag) || expected.tag <= 0 || value.tag !== expected.tag ||
+      !Number.isInteger(expected.canvasTag) || expected.canvasTag <= 0 || value.canvas_tag !== expected.canvasTag ||
+      expected.tag === expected.canvasTag || value.raster_scale !== 1 ||
+      typeof value.snapshot_token !== 'string' || !value.snapshot_token.length || value.snapshot_token.length > 128 ||
+      !rect(value.canvas_frame) || !rect(value.content_frame) ||
+      value.canvas_frame[2] !== value.width || value.canvas_frame[3] !== value.height) throw measurementError();
+  if (expected.stage === 'placed' && (!expected.local ||
+      value.snapshot_token !== expected.local.snapshotToken || !rect(expected.canvasFrame) ||
+      value.canvas_frame.some((n, i) => Math.abs(n - expected.canvasFrame[i]) > 0.5) ||
+      value.content_frame.some((n, i) => n !== expected.local.contentFrame[i]) ||
+      value.width !== expected.local.canvasFrame[2] || value.height !== expected.local.canvasFrame[3])) throw measurementError();
+  const legacy = { ...value, version: 'piece.native_selected_line.v1' };
+  extra.forEach(key => delete legacy[key]);
+  const inspected = readPieceSelectedLineInspection(legacy, expected);
+  if (expected.stage === 'placed' && inspected.independentMetrics.some((n, i) =>
+      !Object.is(n, expected.local.independentMetrics[i]))) throw measurementError();
+  return Object.freeze({ ...inspected, version: value.version, stage: value.stage, tag: value.tag,
+    canvasTag: value.canvas_tag, canvasFrame: Object.freeze([...value.canvas_frame]),
+    contentFrame: Object.freeze([...value.content_frame]), rasterScale: value.raster_scale,
+    snapshotToken: value.snapshot_token });
+}
+
+export async function inspectPieceSelectedLineV2(node, expected) {
+  const tag = findNodeHandle(node), canvasTag = findNodeHandle(expected.canvasNode), module = NativeModules.PieceTextMetrics;
+  if (Platform.OS !== 'ios' || !Number.isInteger(tag) || tag <= 0 || !Number.isInteger(canvasTag) ||
+      canvasTag <= 0 || tag === canvasTag || !finite(expected.expiresAt) || Date.now() >= expected.expiresAt ||
+      !['local', 'placed'].includes(expected.stage) || typeof module?.inspectSelectedLineV2 !== 'function') throw measurementError();
+  let value;
+  try { value = await module.inspectSelectedLineV2(tag, expected.text, expected.fontSize, {
+    stage: expected.stage, canvas_tag: canvasTag, expires_at_ms: expected.expiresAt,
+    snapshot_token: expected.stage === 'placed' ? expected.local?.snapshotToken : null,
+  }); } catch { throw measurementError(); }
+  if (Date.now() >= expected.expiresAt) throw measurementError();
+  return readPieceSelectedLineV2Inspection(value, { ...expected, tag, canvasTag, platform: Platform.OS });
+}
+
 // Candidates are shaped with an immutable snapshot of the mounted Text's
 // font. They guide B9 selection; each selected Text is inspected again.
 function candidateRowCount(boundaries) {

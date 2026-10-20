@@ -140,6 +140,15 @@ test('v8 preserves every Python B9 result with the complete v5 table in either r
     assert.deepEqual(copy(plan(input, c.sizeIndex, tables)), c.expected, c.id);
   }
 });
+test('v9 preserves every Python B9 result with complete v5 metrics in both row orders', () => {
+  for (const c of fixture.cases) {
+    const input = { ...copy(c.input), candidateProfile: 'piece.rn_native_preview.prototype.v9' };
+    const tables = copy(c.measurements).map(table => ({ ...table, version: 'piece.native_candidates.v5' }));
+    assert.deepEqual(copy(plan(input, c.sizeIndex, tables)), c.expected, c.id);
+    tables.forEach(table => table.rows.reverse());
+    assert.deepEqual(copy(plan(input, c.sizeIndex, tables)), c.expected, c.id);
+  }
+});
 test('every metric position rejects nonfinite, nonnumeric and missing values', () => {
   for (let field = 2; field < 7; field++) for (const invalid of [NaN, Infinity, -Infinity, '1', null, undefined]) {
     const c = validCase(); c.measurements[0].rows[0][field] = invalid;

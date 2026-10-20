@@ -10,6 +10,10 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
+**最新作業は§81／current map §65.29／weekly §5.6.9です。Mashの10/20 14:31:53 JSTの明示承認に基づき、同じ選択行のalpha画素を使うselected_line.v2／iOS preview v9を既存15path内へ実装しました。局所計測→既存親Viewの移動→配置後の同node・同layout・小数位置再検査→fitを元8秒へ含めます。local既存900件＋追加15件の915件は全成功。iOS旧129件＋追加46件、実RN11report・完成画像は一度のCI確認待ちです。旧v8の未承認提案は履歴で、現在は承認済み実装の検証段階です。正式admission・通常保存は未完了です。**
+
+### §80時点の結果（履歴）
+
 **最新結果は§80.4〜80.7／current map §65.28.1／weekly §5.6.8です。v8 source ef96dc5をGitHubへ反映し、全12fileの全文読み戻しと一度のCI結果確認を完了しました。JS900件成功、mixed420は最終照合込み8018.127→5172.852msとなり、従来のPNG10枚は全てv7とバイト同一です。Arabicは同layout診断の全3サイズで実画素が元view内でしたが、現TextKit bbox条件では拒否が続きます。native単体は115 PASS行で未完走、残る14件は未確認です。v8未採用、正式admission・通常保存は未完了。実画素を新しい計測契約に使うv9案と、既承認条件からの差を§80.7に具体化しました。**
 
 ### §79時点の結果（履歴）
@@ -2287,3 +2291,40 @@ artifact12241825184は95,549,205bytes、SHA256 369c72b6fd7e2c9d19919876657526051
 候補変更先は既存15pathです。製品5件はios/tempCocolon/PieceTextMetrics.mm、features/piece/pieceRenderer.js、components/piece/PieceVisualCard.js、features/piece/pieceLayout.js、features/piece/pieceMeasuredWrap.js。検査6件はtests/piece-v2-renderer.test.js、tests/piece-v2-measured-wrap.test.js、tests/native/piece-text-metrics-ios.mm、tests/native/piece-rn-canvas-entry.js、tests/native/piece-rn-canvas-fixtures.cjs、tests/native/piece-rn-canvas-ios.m。資料は今回と同じ4件です。新しいhelper、controller、DTO、workflowは作りません。v9製品sourceは未実装・未反映で、提案の承認はまだありません。
 
 描画の未達を解消した後のP-W1は、既存renderer ownerの採用版固定、同版saved readerのversion／key／profile整合、InputScreenから既存InputPieceActionAreaへの正式isSaveAdmitted供給と同mount/token fit接続、既存PieceCreateController／APIでの通常初回保存→同owner詳細GET・履歴再表示です。これらは未完了です。既存6migrationや保存APIを作り直さず、接続source準備へ物理端末の追加事前gateを設けません。実稼働・商品受入れ・署名配布は完了にしません。10/22通常保存・10/23共有確認の予定は未達前提を残し、実施済みや延期承認へ読み替えません。
+
+
+## 81. 2026-10-20 — 承認済みv9の同layout画素計測と配置後検査
+
+### 81.1 承認と今回の完成単位
+
+Mashは10/20 14:31:53 JST、「この判定方式の変更を含むv9の実装と、一度の検証まで進めてよいですか」に「進めていいよ」と明示承認しました。14:55:34 JSTの「処理落ちしているから、続きから再開して」は同じ作業の継続です。§80.7の新ink定義・配置後再検査・既存15path・元8秒・一度のCI・未達時STOPまでが現在の承認範囲です。Rule18 §0(4)／§11.3 LEVEL_3の具体判断はこの承認で成立し、GitHub書込の再承認は求めません。§80.7／map65.28.1／weekly5.6.8の「未承認・未実装」は承認前の履歴です。
+
+実行ownerは華恋／GPT-6 Astra Pro／CHAT_PRO_OK、rootが唯一の書込主体です。並列agentはJS・native・再開範囲の読み取りレビューだけを担当しました。基点は既存PR30のbranch `agent/three-core-cmee-current-structure-20260815`、head `076c0edef425e071c297da2b366776d3e0cf6cd5`／tree `ed0debd98ea5303a8da5899ce17584caf4f859fb`です。
+
+変更は製品5・検査6・既存資料4の計15pathです。製品ownerはPieceTextMetrics.mm／pieceRenderer.js／PieceVisualCard.js／pieceLayout.js／pieceMeasuredWrap.js。検査ownerはpiece-v2-renderer.test.js／piece-v2-measured-wrap.test.js／nativeのpiece-text-metrics-ios.mm・piece-rn-canvas-entry.js・piece-rn-canvas-fixtures.cjs・piece-rn-canvas-ios.m。資料は本入口／manifest／current map／weeklyです。全pathとblob／SHA-256はmanifestのios_preview_v9_20261020へ記録します。
+
+### 81.2 実装した計測・配置の責任境界
+
+| owner | v9で実装した動作 |
+|---|---|
+| PieceTextMetrics.mm | 新selected_line.v2だけが同じTextStorage／NSLayoutManager／NSTextContainer／glyphをscale1で描き、alpha>0の全pixel cellをinkにします。旧selected_line.v1と旧版のTextKit判定は維持します。独立CTLineの5値を描画inkへ代用しません |
+| native request／wire | requestはstage・canvas_tag・expires_at_ms・snapshot_tokenの4field、wireは既存11fieldとstage・tag・canvas_tag・canvas_frame・content_frame・raster_scale・snapshot_tokenの計18fieldです。local tokenを同viewへ短く保持し、placedは成功／失敗とも消費。元storage／layout／container、属性、bounds、content frame、canvas、独立5値、元deadlineが一致しなければ拒否します |
+| bitmap／期限 | view boundsとTextKit bboxのunionをfont×2でguardし、canvas相対の整数原点へ拡張。1辺4096以下・総4,194,304pixel以下、provider32MiB以下、8bit alphaのみ、stride／data長／allocation／空／外縁／描画中の変化を検査します。各行で解放し、製品PNG保存・全候補raster化はありません。元wall-clock期限とlocal残余時間からのmonotonic期限を両方確認します |
+| pieceRenderer.js | 閉じたv2 schema・実tag・canvas・local/placed段階・小数canvas frame・同token・独立5値の不変を復号時にも照合します。bridge前後の元期限、元own-view・logical行高・glyph・禁則の拒否条件を保持します |
+| PieceVisualCard.js | geometry_checked→local計測→positioning→2RAF→placed計測→native_checkedの順です。既存composition／row Viewのtranslationだけで位置を変え、Textのleft／top・Yoga boundsを変えて元TextStorageを作り直しません。localで配置を一度決め、placed中の位置／node／generation変化を拒否します。無限再配置loopはありません |
+| 現在性とfit | 同mount／token／generation・canvas・各Text node・placement epochをbridge／await／state更新／最終fitで照合します。onLayoutのx/yも保持。配置後inkを元余白±0.5とbody branding zoneで再照合し、own-viewとlogical高はstrictのままです。元8秒の起点を再開せず、native_checked後もexpiryを保持。最終isCurrent照合を含めて期限内でなければfitを出しません |
+| layout／B9 | 明示iOS preview v9だけを既存profile一覧へ追加。候補計測v5・全range・font catalog/順・score/tie・独立5値・本文／recipe・自然Text高は保持します。配置後のstrict境界不適合では元catalogの次fontへ進みます。saved/export/Androidのv9は許可しません |
+
+fixed1080 logical canvas・scale1での定義です。小数位相は実canvas相対原点から保持し、canvas内ancestorはtranslationだけを許します。外側の表示縮尺を含む全physical raster条件・物理端末受入れをこの単体計測で成立させません。alphaが変わる新定義のため、配置や選択fontがv8と変わる可能性は§80.7の承認差に含まれ、実結果で明示します。
+
+### 81.3 反映前検査と一度のCIで確かめる範囲
+
+local Node24.19.0／既存TypeScript5.2.2で、既存13 test fileを `node --test --test-isolation=none` により915 PASS、FAIL／SKIP／CANCEL0、63,446.835935msで完了しました。既存900のcoverageを保持し、renderer14件とmeasured-wrap1件を追加しています。最初の通し実行は849 PASS／66 FAILで、全失敗は未展開の既存AppRuntimeContext.jsのENOENTでした。remote blob `be875054b73593b2a62be6a6dd95110ce176e21d` と同一の元fileを復元し、最終915件を確認しました。このfileにremote差分はありません。途中の追加検査で見つけたstub callback引数の誤りは検査側を修正し、独立したrender styleから配置を計算する検査にしています。
+
+nativeは旧129件を削らず、6 fixture×4判定＋22拒否ケースの46件を追加しました。独立raw RGBA bitmapによるlocal／fractional placedのalpha oracle、旧v1／独立5値、token再利用、空／透明／extent／detached／微小scale／canvas／期限／schema／storage／layout／container／属性／bounds／content frame／allocation／外縁／途中変化を含みます。旧115 PASSの未完走原因は未確定で、元UTF16 budget testへ段階出力を追加しただけです。90秒alarm・既存期待件数・callback時間は維持し、未確認14件を成功にしません。
+
+実RN harnessは元baseline5・補足3・raw3の11fixture・正文・順序・元8秒を維持。preview7件だけをv9へ替え、saved v3は保持します。local/placed証跡、同Textオブジェクト、最終小数frame、独立raw bitmapの全4端点、全canvas marginとlogical高、元same/wrong-token fit、完成PNGを同じ一度の実行で確認します。Linuxでのsource reviewやJS成功をiOS compile／native175件成功へ換算しません。
+
+このsource時点ではGitHub反映後の全文照合・一度のCI・全11reportと完成画像の確認は未完了です。iOS旧129＋新46、Arabic完成Card、両420、全時間・包含・現在性の実結果を同じ既存4文書へ追記します。元条件の一つでも未達ならv9未採用としてその結果を記録し、この限定単位を終了します。同source再実行や合格条件緩和へ進みません。
+
+追加購入・新service・dependency・helper・controller・DTO・workflowは0。API／DB／migration再適用／runtime flag／env／deploy／署名／配布／main merge変更も0。既存CI使用量は増えますが、実行所要時間と元8秒達成はまだ未確定です。正式renderer admission・同採用版saved再表示・InputScreenへの正式供給・通常初回保存→本人GET／履歴は後続の未完了作業として保持します。

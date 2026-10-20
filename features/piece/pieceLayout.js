@@ -14,6 +14,7 @@ export const PIECE_NATIVE_PREVIEW_V5_VERSION = 'piece.rn_native_preview.prototyp
 export const PIECE_NATIVE_PREVIEW_V6_VERSION = 'piece.rn_native_preview.prototype.v6';
 export const PIECE_NATIVE_PREVIEW_V7_VERSION = 'piece.rn_native_preview.prototype.v7';
 export const PIECE_NATIVE_PREVIEW_V8_VERSION = 'piece.rn_native_preview.prototype.v8';
+export const PIECE_NATIVE_PREVIEW_V9_VERSION = 'piece.rn_native_preview.prototype.v9';
 const nativeThemes = {
   soft_paper: { canvas: '#F6F1E8', surface: '#FFFDF8', text: '#111827', secondary: '#4B5563',
     accent: '#800020', border: '#D7D2C9', branding: '#800020', vector_end: '#FFFFFF' },
@@ -37,12 +38,13 @@ export function preparePieceNativePreview(display, nowMs = Date.now()) {
   const checked = readPiecePreviewDisplay(display, nowMs);
   if (!checked.hashVerified || !checked.preview) return null;
   const p = checked.preview;
-  const candidateProfile = p.renderer_version === PIECE_NATIVE_PREVIEW_V8_VERSION ? PIECE_NATIVE_PREVIEW_V8_VERSION
+  const candidateProfile = p.renderer_version === PIECE_NATIVE_PREVIEW_V9_VERSION ? PIECE_NATIVE_PREVIEW_V9_VERSION
+    : p.renderer_version === PIECE_NATIVE_PREVIEW_V8_VERSION ? PIECE_NATIVE_PREVIEW_V8_VERSION
     : p.renderer_version === PIECE_NATIVE_PREVIEW_V7_VERSION ? PIECE_NATIVE_PREVIEW_V7_VERSION
     : p.renderer_version === PIECE_NATIVE_PREVIEW_V6_VERSION ? PIECE_NATIVE_PREVIEW_V6_VERSION
     : p.renderer_version === PIECE_NATIVE_PREVIEW_V5_VERSION ? PIECE_NATIVE_PREVIEW_V5_VERSION
     : p.renderer_version === PIECE_NATIVE_PREVIEW_V4_VERSION ? PIECE_NATIVE_PREVIEW_V4_VERSION : PIECE_NATIVE_PREVIEW_VERSION;
-  if ([PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION].includes(candidateProfile) && Platform.OS !== 'ios') return null;
+  if ([PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION].includes(candidateProfile) && Platform.OS !== 'ios') return null;
   const key = JSON.stringify([candidateProfile, 'preview', p.preview_id, p.preview_revision,
     p.row_version, p.expires_at, p.piece_text_hash, p.content_payload_hash, p.visual_recipe_hash, p.renderer_version]);
   return preparePieceNativeArtifact(p, key, candidateProfile);
@@ -67,7 +69,7 @@ export function preparePieceNativeCard(props) {
   if (saved && Object.prototype.hasOwnProperty.call(props, 'display')) return null;
   if (saved) return preparePieceNativeSavedDisplay(props.savedRecord);
   const input = preparePieceNativePreview(props.display);
-  return props.exportCanvas === true && [PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION]
+  return props.exportCanvas === true && [PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION]
     .includes(input?.candidateProfile) ? null : input;
 }
 
@@ -112,6 +114,10 @@ export function recordPieceNativeMeasurement(input, state, ticket, blockIndex, k
       return nativeReject(state, 'invalid_measurement');
     }
     measurement = { width: value.width, height: value.height };
+    if (input.candidateProfile === PIECE_NATIVE_PREVIEW_V9_VERSION) {
+      if (!nativeFinite(value.x) || !nativeFinite(value.y)) return nativeReject(state, 'invalid_measurement');
+      measurement = { x: value.x, y: value.y, ...measurement };
+    }
   } else if (kind === 'lines') {
     if (!Array.isArray(value) || !value.length || value.length > 512 || value.some(line => !line ||
         typeof line.text !== 'string' || !line.text.length ||
@@ -141,7 +147,7 @@ export function recordPieceNativeMeasurement(input, state, ticket, blockIndex, k
     // v6+ body rows retain the original TextContainer width inside a wider
     // transparent drawing view. onTextLayout still uses container coordinates.
     const insetRow = input.plannedRows && index < input.blocks.length &&
-      [PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION].includes(input.candidateProfile);
+      [PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION].includes(input.candidateProfile);
     const viewWidth = input.contentWidth + (insetRow ? 2 * input.margin : 0);
     if (Math.abs(box.width - viewWidth) > tolerance ||
         input.plannedRows && index < input.blocks.length && Math.abs(box.height - lineHeight) > 0.5 ||
@@ -156,5 +162,6 @@ export function recordPieceNativeMeasurement(input, state, ticket, blockIndex, k
   if (overflow) return state.sizeIndex + 1 < input.sizes.length
     ? { ...createPieceNativeMeasurement(input), sizeIndex: state.sizeIndex + 1 }
     : nativeReject(next, 'font_floor_overflow');
-  return { ...next, phase: 'geometry_checked', compositionHeight };
+  return { ...next, phase: input.candidateProfile === PIECE_NATIVE_PREVIEW_V9_VERSION && state.rowOffsets
+    ? 'positioning' : 'geometry_checked', compositionHeight };
 }

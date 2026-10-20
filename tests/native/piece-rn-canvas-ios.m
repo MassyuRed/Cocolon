@@ -1,4 +1,4 @@
-// Hosted XCTest: real Paper bridge, real mounted Text, unchanged PieceTextMetrics.
+// Hosted XCTest: real Paper bridge, real mounted Text, actual PieceTextMetrics v9.
 #import <XCTest/XCTest.h>
 #import <React/RCTBridge.h>
 #import <React/RCTBridgeDelegate.h>
@@ -7,6 +7,7 @@
 #import <React/RCTUIManager.h>
 #import <React/RCTUIManagerUtils.h>
 #import <React/RCTTextView.h>
+#import <React/UIView+React.h>
 #import <QuartzCore/QuartzCore.h>
 #import <objc/runtime.h>
 #import <math.h>
@@ -235,6 +236,63 @@ static NSString *PieceEvidenceDirectory(void) {
   return dir;
 }
 
+
+// Independent oracle for final canvas-phase alpha. Fixed raw RGBA storage;
+// it does not call the product rasterizer or use the product's extent/ink.
+static NSArray *PieceCanvasPixelOracle(RCTTextView *view, UIView *canvas) {
+  const size_t width = 1536, height = 512, stride = width * 4;
+  const CGFloat pad = 160;
+  CGPoint origin = [view convertPoint:CGPointZero toView:canvas];
+  CGFloat px = origin.x - floor(origin.x), py = origin.y - floor(origin.y);
+  UInt8 *bytes = calloc(height, stride);
+  CGColorSpaceRef space = CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
+  CGContextRef context = bytes && space ? CGBitmapContextCreate(bytes, width, height, 8, stride, space,
+    kCGBitmapByteOrder32Big | kCGImageAlphaPremultipliedLast) : NULL;
+  if (space) CGColorSpaceRelease(space);
+  if (!context) { free(bytes); return nil; }
+  NSArray *result = nil;
+  @try {
+    CGContextTranslateCTM(context, 0, height); CGContextScaleCTM(context, 1, -1);
+    CGContextTranslateCTM(context, pad + px, pad + py);
+    UIGraphicsPushContext(context);
+    @try {
+      NSLayoutManager *layout = view.cocolonPieceTextStorage.layoutManagers.firstObject;
+      [layout drawGlyphsForGlyphRange:[layout glyphRangeForTextContainer:layout.textContainers.firstObject]
+        atPoint:view.cocolonPieceContentFrame.origin];
+    } @finally { UIGraphicsPopContext(); }
+    size_t l = width, t = height, r = 0, b = 0; BOOL seen = NO, edge = NO;
+    for (size_t y = 0; y < height; y++) for (size_t x = 0; x < width; x++) if (bytes[y * stride + x * 4 + 3]) {
+      seen = YES; l = MIN(l, x); t = MIN(t, y); r = MAX(r, x); b = MAX(b, y);
+      edge = edge || x == 0 || y == 0 || x + 1 == width || y + 1 == height;
+    }
+    if (seen && !edge) result = @[@(l + floor(origin.x) - pad - origin.x), @(t + floor(origin.y) - pad - origin.y),
+      @(r + 1 + floor(origin.x) - pad - origin.x), @(b + 1 + floor(origin.y) - pad - origin.y)];
+  } @finally { CGContextRelease(context); free(bytes); }
+  return result;
+}
+typedef void (*PieceSelectedV2Call)(id, SEL, NSNumber *, NSString *, double, NSDictionary *,
+                                  RCTPromiseResolveBlock, RCTPromiseRejectBlock);
+static PieceSelectedV2Call PieceOriginalSelectedV2Call;
+static void PieceObservedSelectedV2Call(id module, SEL selector, NSNumber *tag, NSString *text,
+                                      double fontSize, NSDictionary *request,
+                                      RCTPromiseResolveBlock resolve, RCTPromiseRejectBlock reject) {
+  if (![text isEqual:@"مرحبا بالعالم"] || (fontSize != 72 && fontSize != 64 && fontSize != 56)) {
+    PieceOriginalSelectedV2Call(module, selector, tag, text, fontSize, request, resolve, reject); return;
+  }
+  NSUInteger ordinal = ++PieceArabicOperationOrdinal;
+  PieceOriginalSelectedV2Call(module, selector, tag, text, fontSize, request, ^(id wire) {
+    NSMutableDictionary *sample = [PieceReadArabicGeometry(module, tag, text, fontSize, ordinal, wire) mutableCopy];
+    sample[@"stage"] = request[@"stage"] ?: NSNull.null;
+    sample[@"observation_only"] = @YES;
+    [PieceArabicObservations addObject:sample];
+    resolve(wire);
+  }, ^(NSString *code, NSString *message, NSError *error) {
+    [PieceArabicObservations addObject:@{@"operation":@(ordinal), @"stage":request[@"stage"] ?: NSNull.null,
+      @"font_size":@(fontSize), @"rejection":code ?: @"missing_code"}];
+    reject(code, message, error);
+  });
+}
+
 @interface PieceCanvasTest : NSObject <RCTBridgeModule>
 @property(nonatomic, weak) RCTBridge *bridge;
 @property(nonatomic, strong) NSMutableArray *reports;
@@ -293,7 +351,7 @@ RCT_EXPORT_METHOD(capture:(nonnull NSNumber *)tag report:(NSDictionary *)raw res
           fabs(contentFrame.size.height - [raw[@"plan_line_height"] doubleValue]) < 0.01 &&
           fabs(container.size.width - contentFrame.size.width) < 0.01 && fabs(container.size.height - contentFrame.size.height) < 0.01;
       }
-      if (i < rows.count && [@[@"piece.rn_native_preview.prototype.v7", @"piece.rn_native_preview.prototype.v8"] containsObject:raw[@"candidate_profile"]]) {
+      if (i < rows.count && [@[@"piece.rn_native_preview.prototype.v7", @"piece.rn_native_preview.prototype.v8", @"piece.rn_native_preview.prototype.v9"] containsObject:raw[@"candidate_profile"]]) {
         valid = valid && fabs(view.bounds.size.width - [raw[@"width"] doubleValue]) < 0.01 &&
           fabs(contentFrame.origin.x - [raw[@"margin"] doubleValue]) < 0.01 && fabs(contentFrame.origin.y) < 0.01 &&
           fabs(contentFrame.size.width - [raw[@"content_width"] doubleValue]) < 0.01 &&
@@ -305,7 +363,21 @@ RCT_EXPORT_METHOD(capture:(nonnull NSNumber *)tag report:(NSDictionary *)raw res
       NSRange glyphs = [layout glyphRangeForTextContainer:container];
       CGRect localInk = CGRectOffset([layout boundingRectForGlyphRange:glyphs inTextContainer:container],
         view.cocolonPieceContentFrame.origin.x, view.cocolonPieceContentFrame.origin.y);
-      if (i < rows.count && [@[@"piece.rn_native_preview.prototype.v7", @"piece.rn_native_preview.prototype.v8"] containsObject:raw[@"candidate_profile"]])
+      if ([raw[@"candidate_profile"] isEqual:@"piece.rn_native_preview.prototype.v9"]) {
+        NSArray *oracle = PieceCanvasPixelOracle(view, canvas);
+        localInk = oracle.count == 4 ? CGRectMake([oracle[0] doubleValue], [oracle[1] doubleValue],
+          [oracle[2] doubleValue] - [oracle[0] doubleValue], [oracle[3] doubleValue] - [oracle[1] doubleValue]) : CGRectNull;
+        NSDictionary *evidence = i < [raw[@"inspection"] count] ? raw[@"inspection"][i] : nil;
+        NSArray *observed = evidence[@"ink"], *observedFrame = evidence[@"canvasFrame"];
+        CGRect actualFrame = (CGRect){[view convertPoint:CGPointZero toView:canvas], view.bounds.size};
+        valid = valid && PiecePositiveFiniteRect(localInk) && observed.count == 4 && observedFrame.count == 4 &&
+          [evidence[@"stage"] isEqual:@"placed"] && [evidence[@"tag"] isEqual:view.reactTag] && [evidence[@"canvasTag"] isEqual:tag];
+        if (observed.count == 4 && observedFrame.count == 4) {
+          valid = valid && [observed isEqual:oracle] &&
+            [observedFrame isEqual:PieceRect(actualFrame)] && CGRectGetHeight(localInk) <= (i < rows.count ? [raw[@"plan_line_height"] doubleValue] : 40);
+        }
+      }
+      if (i < rows.count && [@[@"piece.rn_native_preview.prototype.v7", @"piece.rn_native_preview.prototype.v8", @"piece.rn_native_preview.prototype.v9"] containsObject:raw[@"candidate_profile"]])
         valid = valid && CGRectGetHeight(localInk) <= [raw[@"plan_line_height"] doubleValue];
       CGRect ink = [view convertRect:localInk toView:canvas];
       [frames addObject:@[@(ink.origin.x), @(ink.origin.y), @(CGRectGetMaxX(ink)), @(CGRectGetMaxY(ink))]];
@@ -372,6 +444,41 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
   XCTAssertTrue(observedCandidate, @"%@", report[@"name"]);
   XCTAssertNotNil(report[@"png"], @"%@", report[@"name"]);
 }
+- (void)assertV9Report:(NSDictionary *)report {
+  XCTAssertEqualObjects(report[@"candidate_profile"], @"piece.rn_native_preview.prototype.v9");
+  NSArray *rows = report[@"rows"], *inspection = report[@"inspection"], *local = report[@"local_inspection"];
+  XCTAssertEqual(inspection.count, rows.count + ([report[@"branding"] boolValue] ? 1 : 0));
+  XCTAssertEqual(local.count, inspection.count);
+  XCTAssertGreaterThan([report[@"plan_line_height"] doubleValue], 0);
+  for (NSUInteger i = 0; i < inspection.count; i++) {
+    NSDictionary *item = inspection[i], *before = i < local.count ? local[i] : nil;
+    NSArray *metric = item[@"independentMetrics"];
+    XCTAssertEqualObjects(item[@"version"], @"piece.native_selected_line.v2");
+    XCTAssertEqualObjects(item[@"stage"], @"placed"); XCTAssertEqualObjects(before[@"stage"], @"local");
+    XCTAssertEqualObjects(item[@"platform"], @"ios"); XCTAssertEqualObjects(item[@"rasterScale"], @1);
+    XCTAssertEqualObjects(item[@"glyphCheck"], @"no_missing_observed");
+    XCTAssertEqualObjects(item[@"fontSize"], i < rows.count ? report[@"font_size"] : @28);
+    XCTAssertEqualObjects(item[@"snapshotToken"], before[@"snapshotToken"]);
+    XCTAssertEqualObjects(item[@"tag"], before[@"tag"]); XCTAssertEqualObjects(item[@"canvasTag"], before[@"canvasTag"]);
+    XCTAssertEqualObjects(item[@"contentFrame"], before[@"contentFrame"]);
+    XCTAssertEqualObjects(metric, before[@"independentMetrics"]);
+    XCTAssertFalse([item[@"overflow"] boolValue]); XCTAssertFalse([item[@"wrapViolation"] boolValue]);
+    XCTAssertEqual(metric.count, 5);
+    BOOL finite = metric.count == 5;
+    for (id value in metric) finite = [value isKindOfClass:NSNumber.class] && isfinite([value doubleValue]) && finite;
+    XCTAssertTrue(finite); if (!finite) continue;
+    double advance = [metric[0] doubleValue], left = [metric[1] doubleValue], top = [metric[2] doubleValue],
+      right = [metric[3] doubleValue], bottom = [metric[4] doubleValue];
+    XCTAssertGreaterThanOrEqual(advance, 0); XCTAssertGreaterThanOrEqual(right, left); XCTAssertGreaterThanOrEqual(bottom, top);
+    XCTAssertLessThanOrEqual(fmax(advance, right) - fmin(0, left), [report[@"content_width"] doubleValue]);
+    XCTAssertLessThanOrEqual(bottom - top, i < rows.count ? [report[@"plan_line_height"] doubleValue] : 40);
+  }
+  BOOL observed = NO;
+  for (NSDictionary *adapter in report[@"trace"][@"adapters"]) if ([adapter[@"status"] isEqual:@"resolved"] &&
+      [adapter[@"font_size"] isEqual:report[@"font_size"]] && [adapter[@"candidate_profile"] isEqual:@"piece.rn_native_preview.prototype.v5"] &&
+      [adapter[@"version"] isEqual:@"piece.native_candidates.v5"]) observed = YES;
+  XCTAssertTrue(observed); XCTAssertNotNil(report[@"png"]);
+}
 - (void)testWholeCanvasWithRealReactNative {
   SEL selectedSelector = NSSelectorFromString(@"inspectSelectedLine:text:fontSize:resolver:rejecter:");
   Method selectedMethod = class_getInstanceMethod(NSClassFromString(@"PieceTextMetrics"), selectedSelector);
@@ -379,6 +486,13 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
   if (!selectedMethod) return;
   XCTAssertEqual(method_getNumberOfArguments(selectedMethod), 7u);
   if (method_getNumberOfArguments(selectedMethod) != 7u) return;
+  SEL pixelSelector = NSSelectorFromString(@"inspectSelectedLineV2:text:fontSize:request:resolver:rejecter:");
+  Method pixelMethod = class_getInstanceMethod(NSClassFromString(@"PieceTextMetrics"), pixelSelector);
+  XCTAssertNotEqual(pixelMethod, NULL); if (!pixelMethod) return;
+  XCTAssertEqual(method_getNumberOfArguments(pixelMethod), 8u); if (method_getNumberOfArguments(pixelMethod) != 8u) return;
+  IMP pixelIMP = method_getImplementation(pixelMethod);
+  PieceOriginalSelectedV2Call = (PieceSelectedV2Call)pixelIMP;
+  method_setImplementation(pixelMethod, (IMP)PieceObservedSelectedV2Call);
   IMP priorIMP = method_getImplementation(selectedMethod);
   PieceOriginalSelectedCall = (PieceSelectedCall)priorIMP;
   PieceArabicObservations = [NSMutableArray new]; PieceArabicOperationOrdinal = 0;
@@ -418,7 +532,7 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     XCTAssertEqualObjects(report[@"save_fit_current"], @(preview), @"%@", report[@"name"]);
     XCTAssertEqualObjects(report[@"save_fit_wrong_token_current"], @NO, @"%@", report[@"name"]);
     XCTAssertEqualObjects(report[@"save_fit_handle_keys"], preview ? @[@"isCurrent"] : @[], @"%@", report[@"name"]);
-    if (preview) [self assertV8Report:report];
+    if (preview) [self assertV9Report:report];
     XCTAssertNotNil(report[@"png"]);
     if (report[@"png"]) {
       UIImage *image = [UIImage imageWithContentsOfFile:[PieceEvidenceDirectory() stringByAppendingPathComponent:report[@"png"]]];
@@ -438,7 +552,7 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     XCTAssertEqualObjects(report[@"save_fit_current"], @YES);
     XCTAssertEqualObjects(report[@"save_fit_wrong_token_current"], @NO);
     XCTAssertEqualObjects(report[@"save_fit_handle_keys"], @[@"isCurrent"]);
-    [self assertV8Report:report];
+    [self assertV9Report:report];
   }
   for (NSDictionary *report in raw) {
     XCTAssertEqualObjects(report[@"phase"], @"measurement_checked", @"%@", report);
@@ -450,7 +564,7 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     XCTAssertEqualObjects(report[@"plan_groups"], @[report[@"rows"]]);
     XCTAssertEqual([report[@"on_text_layout"] count], 1);
     XCTAssertNil(report[@"save_fit_current"]); XCTAssertNil(report[@"state_can_save"]); XCTAssertNil(report[@"state_can_export"]);
-    [self assertV8Report:report];
+    [self assertV9Report:report];
   }
   for (NSDictionary *report in [supplemental arrayByAddingObjectsFromArray:raw]) {
     if (report[@"png"]) {
@@ -462,6 +576,7 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
   }
   } @finally {
     method_setImplementation(selectedMethod, priorIMP);
+    method_setImplementation(pixelMethod, pixelIMP);
     [bridge invalidate];
   }
 }

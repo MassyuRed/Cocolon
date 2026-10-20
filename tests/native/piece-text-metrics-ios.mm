@@ -20,7 +20,7 @@
 }
 @end
 @implementation RCTTextView
-- (UIWindow *)window { return self.fixtureAttached ? (UIWindow *)self : nil; }
+- (UIWindow *)window { return self.fixtureAttached ? ([super window] ?: (UIWindow *)self) : nil; }
 - (NSTextStorage *)cocolonPieceTextStorage { return self.fixtureStorage; }
 - (CGRect)cocolonPieceContentFrame { return self.fixtureContentFrame; }
 @end
@@ -188,6 +188,25 @@ static CGRect profiledImageBounds(CTLineRef line, CGContextRef context) {
   candidateProfile.imageTicks += mach_absolute_time() - start;
   return result;
 }
+// v9 faults affect only the included product's provider copy, never its oracle.
+static std::atomic<int> v9PixelFault{0};
+static __weak RCTTextView *v9FaultView;
+static CFDataRef v9ProviderData(CGDataProviderRef provider) {
+  int fault = v9PixelFault.load();
+  if (fault == 1) return NULL;
+  if (fault == 3) { UInt8 byte = 0; return CFDataCreate(kCFAllocatorDefault, &byte, 1); }
+  CFDataRef original = CGDataProviderCopyData(provider);
+  if (fault == 2 && original) {
+    CFMutableDataRef changed = CFDataCreateMutableCopy(kCFAllocatorDefault, 0, original);
+    CFRelease(original);
+    if (changed) memset(CFDataGetMutableBytePtr(changed), 255, (size_t)CFDataGetLength(changed));
+    return changed;
+  }
+  if (fault == 4 && v9FaultView) v9FaultView.fixtureContentFrame = CGRectOffset(v9FaultView.fixtureContentFrame, 0, 1);
+  if (fault == 5 && v9FaultView) v9FaultView.superview.transform = CGAffineTransformMakeTranslation(1, 0);
+  return original;
+}
+#define CGDataProviderCopyData v9ProviderData
 #define CTLineCreateWithAttributedString profiledCreateLine
 #define CTTypesetterCreateWithAttributedString profiledTypesetter
 #define CTTypesetterCreateLine profiledTypesetterLine
@@ -211,6 +230,7 @@ static CGRect profiledImageBounds(CTLineRef line, CGContextRef context) {
 #undef systemUptime
 #undef CFRelease
 #undef CFAttributedStringCreateWithSubstring
+#undef CGDataProviderCopyData
 
 static NSUInteger checks = 0, failures = 0;
 static void check(NSString *name, BOOL passed) {
@@ -665,16 +685,23 @@ static void runV5Checks(PieceTextMetrics *module, RCTBridge *bridge) {
     NSString *cluster = units ? @"A\u0301" : @"A";
     NSString *text = [@"" stringByPaddingToLength:420 * cluster.length withString:cluster startingAtIndex:0];
     RCTTextView *view = makeView(text, 48);
+    printf("STAGE v5_budget_%lu_attributes_begin\n", (unsigned long)units);
     for (NSUInteger i = 0; i < 420; i++) {
       NSUInteger attribute = units ? (i <= 25 ? i : (i == 400 || i == 410 ? 27 : 26)) : MIN(i, 40);
       [view.fixtureStorage addAttribute:NSBaselineOffsetAttributeName value:@((double)attribute / 1000)
         range:NSMakeRange(i * cluster.length, cluster.length)];
     }
+    printf("STAGE v5_budget_%lu_attributes_complete\n", (unsigned long)units);
     bridge.uiManager.registry = @{@1:view}; beginV5Probe(YES);
+    printf("STAGE v5_budget_%lu_call_begin\n", (unsigned long)units);
     NSDictionary *wire = callV5(module, YES, text, 48, &code);
+    printf("STAGE v5_budget_%lu_call_complete\n", (unsigned long)units);
     BOOL balanced = balancedV5Probe(); endV5Probe();
+    printf("STAGE v5_budget_%lu_decode_begin\n", (unsigned long)units);
     NSDictionary *decoded = decodeV5(wire, &code);
+    printf("STAGE v5_budget_%lu_decode_complete\n", (unsigned long)units);
     BOOL valid = code == nil && balanced && validCandidates(decoded, text) && [decoded[@"rows"] count] == 88410;
+    printf("STAGE v5_budget_%lu_oracle_begin\n", (unsigned long)units);
     if (!units) valid = valid && [wire[@"metric_count"] unsignedIntegerValue] == 16520 &&
       v5Reference(wire, 40, 404) == 16383 && v5Reference(wire, 41, 405) == 16383 &&
       v5Reference(wire, 40, 405) == 16384 && v5Reference(wire, 41, 406) != 16384;
@@ -684,6 +711,7 @@ static void runV5Checks(PieceTextMetrics *module, RCTBridge *bridge) {
       v5Reference(wire, 26, 32) == 10600 && v5Reference(wire, 27, 33) == 10989 &&
       v5Reference(wire, 399, 401) == 86325 && v5Reference(wire, 409, 411) == 86325 &&
       v5Reference(wire, 400, 401) == 86345 && v5Reference(wire, 410, 411) == 86464;
+    printf("STAGE v5_budget_%lu_oracle_complete\n", (unsigned long)units);
     check(units ? @"v5_real_utf16_budget_later_short_key_and_uncached_references_synthetic_metrics"
       : @"v5_real_key_budget_retained_hit_uncached_miss_synthetic_metrics", valid);
   }
@@ -761,6 +789,178 @@ static void runV5Checks(PieceTextMetrics *module, RCTBridge *bridge) {
   NSDictionary *expired = callV5(module, YES, @"A", 48, &code);
   BOOL noWork = v5LineCreates.load() == 0 && v5IndependentCreates.load() == 0; endV5Probe();
   check(@"v5_original_native_deadline_includes_queue", expired == nil && [code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"] && noWork);
+}
+
+// Independent v9 oracle: fixed raw RGBA bitmap, no product extent, renderer,
+// provider-copy reader, or returned ink used to produce the expected bounds.
+static NSArray *v9OracleInk(RCTTextView *view, CGPoint phase) {
+  const size_t width = 1536, height = 512, stride = width * 4;
+  const CGFloat pad = 160, px = phase.x - floor(phase.x), py = phase.y - floor(phase.y);
+  UInt8 *bytes = (UInt8 *)calloc(height, stride);
+  CGColorSpaceRef space = CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
+  CGContextRef context = bytes && space ? CGBitmapContextCreate(bytes, width, height, 8, stride, space,
+    kCGBitmapByteOrder32Big | kCGImageAlphaPremultipliedLast) : NULL;
+  if (space) CGColorSpaceRelease(space);
+  if (!context) { free(bytes); return nil; }
+  NSArray *answer = nil;
+  @try {
+    CGContextTranslateCTM(context, 0, height); CGContextScaleCTM(context, 1, -1);
+    CGContextTranslateCTM(context, pad + px, pad + py);
+    UIGraphicsPushContext(context);
+    @try {
+      NSLayoutManager *layout = view.fixtureStorage.layoutManagers.firstObject;
+      [layout drawGlyphsForGlyphRange:[layout glyphRangeForTextContainer:layout.textContainers.firstObject]
+        atPoint:view.fixtureContentFrame.origin];
+    } @finally { UIGraphicsPopContext(); }
+    size_t l = width, t = height, r = 0, b = 0; BOOL seen = NO, edge = NO;
+    for (size_t y = 0; y < height; y++) for (size_t x = 0; x < width; x++) if (bytes[y * stride + x * 4 + 3]) {
+      seen = YES; l = MIN(l, x); t = MIN(t, y); r = MAX(r, x); b = MAX(b, y);
+      edge = edge || x == 0 || y == 0 || x + 1 == width || y + 1 == height;
+    }
+    if (seen && !edge) answer = @[@(l + floor(phase.x) - pad - phase.x), @(t + floor(phase.y) - pad - phase.y),
+      @(r + 1 + floor(phase.x) - pad - phase.x), @(b + 1 + floor(phase.y) - pad - phase.y)];
+  } @finally { CGContextRelease(context); free(bytes); }
+  return answer;
+}
+static RCTTextView *v9View(NSString *text, CGFloat font, CGFloat logicalHeight, CGFloat baseline) {
+  RCTTextView *view = makeView(text, font);
+  view.frame = CGRectMake(0, 0, 1080, logicalHeight + 1.0 / 3.0);
+  view.fixtureContentFrame = CGRectMake(96, 0, 888, view.bounds.size.height);
+  NSMutableParagraphStyle *paragraph = [NSMutableParagraphStyle new];
+  paragraph.minimumLineHeight = logicalHeight; paragraph.maximumLineHeight = logicalHeight;
+  paragraph.lineBreakMode = NSLineBreakByWordWrapping;
+  [view.fixtureStorage addAttributes:@{NSParagraphStyleAttributeName:paragraph, NSBaselineOffsetAttributeName:@(baseline)}
+    range:NSMakeRange(0, text.length)];
+  NSLayoutManager *layout = view.fixtureStorage.layoutManagers.firstObject;
+  layout.textContainers.firstObject.size = view.fixtureContentFrame.size;
+  [layout ensureLayoutForTextContainer:layout.textContainers.firstObject];
+  return view;
+}
+static NSDictionary *v9Call(PieceTextMetrics *module, NSString *text, CGFloat font, NSDictionary *request, NSString **code) {
+  __block NSDictionary *result = nil; __block NSString *error = nil;
+  dispatch_semaphore_t done = dispatch_semaphore_create(0);
+  [module inspectSelectedLineV2:@1 text:text fontSize:font request:request resolver:^(id value) {
+    if ([value isKindOfClass:NSDictionary.class]) result = value; else error = @"INVALID_RESULT";
+    dispatch_semaphore_signal(done);
+  } rejecter:^(NSString *value, __unused NSString *message, __unused NSError *cause) {
+    error = value; dispatch_semaphore_signal(done);
+  }];
+  if (dispatch_semaphore_wait(done, dispatch_time(DISPATCH_TIME_NOW, 10 * NSEC_PER_SEC)) != 0) error = @"TEST_CALLBACK_TIMEOUT";
+  *code = error; return result;
+}
+static NSUInteger v9Checks = 0, v9Failures = 0;
+static void v9Check(NSString *name, BOOL passed) {
+  v9Checks++; if (!passed) v9Failures++;
+  printf("%s v9_%s\n", passed ? "PASS" : "FAIL", name.UTF8String);
+}
+static BOOL runV9Checks(PieceTextMetrics *module, RCTBridge *bridge) {
+  printf("STAGE v9_begin\n");
+  UIWindow *window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+  window.rootViewController = [UIViewController new]; [window makeKeyAndVisible];
+  UIView *canvas = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1080, 1350)];
+  [window.rootViewController.view addSubview:canvas];
+  // A preview's outer scale is deliberately not the logical raster scale.
+  canvas.transform = CGAffineTransformMakeScale(1.0 / 3.0, 1.0 / 3.0);
+  NSArray *cases = @[@[@"latin", @"fi AV 12", @48, @75, @0], @[@"combining", @"e\u0301", @48, @75, @0],
+    @[@"bidi", @"שלום ABC 12", @48, @75, @0], @[@"arabic72", @"مرحبا بالعالم", @72, @98, @4.28125],
+    @[@"arabic64", @"مرحبا بالعالم", @64, @87, @3.75], @[@"arabic56", @"مرحبا بالعالم", @56, @76, @3.21875]];
+  NSUInteger ordinal = 0;
+  for (NSArray *fixture in cases) { @autoreleasepool {
+    NSString *name = fixture[0], *text = fixture[1], *code = nil;
+    CGFloat font = [fixture[2] doubleValue];
+    UIView *row = [[UIView alloc] initWithFrame:CGRectMake(0, 96, 1080, 140)]; [canvas addSubview:row];
+    RCTTextView *view = v9View(text, font, [fixture[3] doubleValue], [fixture[4] doubleValue]); [row addSubview:view];
+    bridge.uiManager.registry = @{@1:view, @2:canvas};
+    NSDictionary *legacy = callV5(module, NO, text, font, &code);
+    NSNumber *deadline = @(NSDate.date.timeIntervalSince1970 * 1000 + 8000);
+    NSDictionary *request = @{@"stage":@"local", @"canvas_tag":@2, @"expires_at_ms":deadline, @"snapshot_token":NSNull.null};
+    NSDictionary *local = v9Call(module, text, font, request, &code);
+    v9Check([name stringByAppendingString:@"_local_independent_alpha"], code == nil && local.count == 18 &&
+      [local[@"version"] isEqual:@"piece.native_selected_line.v2"] && [local[@"stage"] isEqual:@"local"] &&
+      [local[@"raster_scale"] isEqual:@1] && [local[@"ink"] isEqual:v9OracleInk(view, CGPointZero)]);
+    row.transform = CGAffineTransformMakeTranslation(ordinal++ % 2 ? 0.5 : 0.25, 300.5);
+    CGPoint origin = [view convertPoint:CGPointZero toView:canvas];
+    NSDictionary *placedRequest = @{@"stage":@"placed", @"canvas_tag":@2, @"expires_at_ms":deadline,
+      @"snapshot_token":local[@"snapshot_token"] ?: NSNull.null};
+    NSDictionary *placed = v9Call(module, text, font, placedRequest, &code);
+    v9Check([name stringByAppendingString:@"_placed_fractional_alpha"], code == nil && placed.count == 18 &&
+      [placed[@"ink"] isEqual:v9OracleInk(view, origin)] &&
+      [placed[@"canvas_frame"] isEqual:@[@(origin.x), @(origin.y), @(view.bounds.size.width), @(view.bounds.size.height)]] &&
+      [placed[@"snapshot_token"] isEqual:local[@"snapshot_token"]] &&
+      [placed[@"independent_metrics_f64le"] isEqual:local[@"independent_metrics_f64le"]]);
+    NSDictionary *after = callV5(module, NO, text, font, &code);
+    v9Check([name stringByAppendingString:@"_legacy_wire_and_five_values_unchanged"], code == nil && [legacy isEqual:after] &&
+      [local[@"independent_metrics_f64le"] isEqual:legacy[@"independent_metrics_f64le"]]);
+    NSDictionary *replay = v9Call(module, text, font, placedRequest, &code);
+    v9Check([name stringByAppendingString:@"_placed_token_consumed"], replay == nil && [code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"]);
+    [row removeFromSuperview];
+  } }
+  NSArray *failuresToTry = @[@"empty", @"transparent", @"extent_limit", @"detached", @"scale", @"wrong_canvas",
+    @"expired", @"schema", @"storage_replaced", @"layout_replaced", @"container_replaced", @"attributes_changed",
+    @"bounds_changed", @"content_frame_changed", @"token_replaced", @"invalid_font_consumes", @"provider_allocation",
+    @"extent_edge", @"draw_geometry_changed", @"draw_position_changed", @"short_data", @"nonfinite_deadline"];
+  NSSet *placedFailures = [NSSet setWithArray:@[@"storage_replaced", @"layout_replaced", @"container_replaced",
+    @"attributes_changed", @"bounds_changed", @"content_frame_changed", @"token_replaced", @"invalid_font_consumes"]];
+  for (NSString *name in failuresToTry) { @autoreleasepool {
+    NSString *text = [name isEqual:@"empty"] ? @"   " : @"Cocolon", *code = nil;
+    UIView *row = [[UIView alloc] initWithFrame:CGRectMake(0, 96, 1080, 140)]; [canvas addSubview:row];
+    RCTTextView *view = v9View(text, 48, 75, 0); [row addSubview:view];
+    bridge.uiManager.registry = @{@1:view, @2:canvas};
+    NSMutableDictionary *request = [@{@"stage":@"local", @"canvas_tag":@2,
+      @"expires_at_ms":@(NSDate.date.timeIntervalSince1970 * 1000 + 8000), @"snapshot_token":NSNull.null} mutableCopy];
+    BOOL preparation = YES;
+    if ([placedFailures containsObject:name]) {
+      NSDictionary *local = v9Call(module, text, 48, request, &code); preparation = local != nil && code == nil;
+      request[@"stage"] = @"placed"; request[@"snapshot_token"] = local[@"snapshot_token"] ?: NSNull.null;
+    }
+    NSLayoutManager *layout = view.fixtureStorage.layoutManagers.firstObject;
+    NSTextContainer *container = layout.textContainers.firstObject;
+    if ([name isEqual:@"transparent"]) [view.fixtureStorage addAttribute:NSForegroundColorAttributeName value:UIColor.clearColor range:NSMakeRange(0, text.length)];
+    if ([name isEqual:@"extent_limit"]) view.fixtureContentFrame = CGRectOffset(view.fixtureContentFrame, 5000, 0);
+    if ([name isEqual:@"detached"]) view.fixtureAttached = NO;
+    if ([name isEqual:@"scale"]) row.transform = CGAffineTransformMakeScale(1.0000004, 1);
+    if ([name isEqual:@"wrong_canvas"]) request[@"canvas_tag"] = @99;
+    if ([name isEqual:@"expired"]) request[@"expires_at_ms"] = @(NSDate.date.timeIntervalSince1970 * 1000 - 1);
+    if ([name isEqual:@"schema"]) request[@"extra"] = @1;
+    if ([name isEqual:@"nonfinite_deadline"]) request[@"expires_at_ms"] = @(NAN);
+    if ([name isEqual:@"storage_replaced"] || [name isEqual:@"layout_replaced"]) {
+      NSTextStorage *storage = [name isEqual:@"storage_replaced"] ? [[NSTextStorage alloc] initWithAttributedString:view.fixtureStorage] : view.fixtureStorage;
+      if (storage == view.fixtureStorage) [storage removeLayoutManager:layout];
+      NSLayoutManager *replacement = [NSLayoutManager new];
+      NSTextContainer *newContainer = [[NSTextContainer alloc] initWithSize:container.size];
+      newContainer.lineFragmentPadding = 0; newContainer.maximumNumberOfLines = 0;
+      [replacement addTextContainer:newContainer]; [storage addLayoutManager:replacement]; view.fixtureStorage = storage;
+    }
+    if ([name isEqual:@"container_replaced"]) {
+      NSTextContainer *replacement = [[NSTextContainer alloc] initWithSize:container.size]; replacement.lineFragmentPadding = 0;
+      [layout removeTextContainerAtIndex:0]; [layout addTextContainer:replacement];
+    }
+    if ([name isEqual:@"attributes_changed"]) [view.fixtureStorage addAttribute:NSForegroundColorAttributeName value:UIColor.redColor range:NSMakeRange(0, text.length)];
+    if ([name isEqual:@"bounds_changed"]) view.bounds = CGRectMake(0, 0, 1080, view.bounds.size.height + 1);
+    if ([name isEqual:@"content_frame_changed"]) view.fixtureContentFrame = CGRectOffset(view.fixtureContentFrame, 0, 1);
+    if ([name isEqual:@"token_replaced"]) request[@"snapshot_token"] = @"other-token";
+    v9FaultView = view;
+    if ([name isEqual:@"provider_allocation"]) v9PixelFault = 1;
+    if ([name isEqual:@"extent_edge"]) v9PixelFault = 2;
+    if ([name isEqual:@"short_data"]) v9PixelFault = 3;
+    if ([name isEqual:@"draw_geometry_changed"]) v9PixelFault = 4;
+    if ([name isEqual:@"draw_position_changed"]) v9PixelFault = 5;
+    NSDictionary *result = v9Call(module, text, [name isEqual:@"invalid_font_consumes"] ? 0 : 48, request, &code);
+    v9PixelFault = 0; v9FaultView = nil;
+    BOOL rejected = result == nil && [code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"];
+    if ([name isEqual:@"invalid_font_consumes"]) {
+      result = v9Call(module, text, 48, request, &code);
+      rejected = rejected && result == nil && [code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"];
+    }
+    v9Check([name stringByAppendingString:@"_rejected"], preparation && rejected);
+    [row removeFromSuperview];
+  } }
+  const NSUInteger expected = 46;
+  printf("V9_NATIVE_CHECKS=%lu PASS=%lu FAIL=%lu SKIP=0 EXPECTED=%lu\n", (unsigned long)v9Checks,
+    (unsigned long)(v9Checks - v9Failures), (unsigned long)v9Failures, (unsigned long)expected);
+  if (v9Checks != expected) printf("FAIL v9_expected_check_count\n");
+  window.hidden = YES;
+  return v9Checks == expected && v9Failures == 0;
 }
 
 static int runNativeMetricsChecks(void) {
@@ -1006,9 +1206,12 @@ static int runNativeMetricsChecks(void) {
     printf("LEGACY_NATIVE_CHECKS=%lu PASS=%lu FAIL=%lu SKIP=0\n", (unsigned long)checks,
       (unsigned long)(checks-failures), (unsigned long)failures);
     runV5Checks(module, bridge);
+    BOOL v9Passed = runV9Checks(module, bridge);
+    // The workflow's unchanged 129 summary is emitted only after v9 has
+    // completed too. A crash/timeout in either suite cannot masquerade as pass.
     printf("NATIVE_CHECKS=%lu PASS=%lu FAIL=%lu SKIP=0\n", (unsigned long)checks,
       (unsigned long)(checks-failures), (unsigned long)failures);
-    return failures ? 1 : 0;
+    return failures || !v9Passed ? 1 : 0;
   }
 }
 

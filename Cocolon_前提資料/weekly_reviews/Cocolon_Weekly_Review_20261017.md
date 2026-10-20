@@ -707,6 +707,20 @@ Canvasのexit65は1 XCTestのArabicに関する7 assertion失敗で、実テス�
 SupabaseではPiece用6 migrationの適用履歴を確認し、再適用・本人行読取・設定変更は行っていません。10/22の通常保存と10/23の共有確認に向け、採用renderer・同版saved再表示・InputScreenの既存hostへの正式供給・既存保存controllerと本人GETが残ります。新しいcontroller／DTOや物理端末の事前gateは追加しません。API／DB／flags／env／deploy／署名／配布／main merge効果0です。
 
 
+
+#### 5.6.9 10/20のPiece継続 — 承認済みv9を実装、一度のCIへ
+
+Mashは14:31:53 JSTに、入口80.7の判定方式変更を含むv9実装と一度の検証を「進めていいよ」と承認し、14:55:34 JSTに中断位置からの再開を指示しました。5.6.8の未承認提案はその時点の履歴です。華恋／GPT-6 Astra Pro／CHAT_PRO_OKがrootだけで書き込み、読み取りagentのレビューを併用して、既存15path内を実装しました。
+
+新selected_line.v2／iOS preview v9は元TextStorage/layout/container/glyphのalpha>0全画素をinkにします。local計測後、既存親Viewのtranslationで配置し、同Text・同token・実canvas相対の小数位置を2RAF後に再検査してからfitを出します。元8秒にはdraw/scan/bridge/UIBlock/最終isCurrentまで含め、deadline再開や早期解除をしません。有限bitmap、空・外縁・allocation・stale拒否、独立5値、全range/font/B9 score/tie、本文/recipe、strictな包含は保持します。
+
+localの既存13fileは915 PASS、FAIL/SKIP/CANCEL0です。内訳は旧900＋追加15で、最初の66失敗は未展開AppRuntimeContext.jsのENOENTだけでした。GitHub同一blobを復元した最終通し結果であり、この元fileにsource差分はありません。native旧129は残し、独立raw RGBA oracle・fractional位置・同一性・空/外縁/上限/期限等の46検査を追加しました。旧115で止まった原因は未確定で、段階ログを加えただけです。iOS compile、旧129＋新46、実RN元11fixture・Arabic完成Card・両420・画像は一度のCI結果待ちで、成功とは記しません。
+
+この単位は既存branchへのsource反映・全文読み戻し・既存CI1回・全結果と画像を既存4文書へ保存するところまでです。元8秒・全包含・現在性・全検査のいずれか未達ならv9未採用として終了し、同source再実行や分母削減をしません。製品5／検査6／資料4以外、新workflow/helper/controller/DTO/dependency・API/DB/runtime/deploy/署名/配布/main merge変更0。既存CI費用だけが増えます。
+
+正式admission、採用版とsaved再表示の整合、InputScreenの既存hostへの正式供給、通常初回保存→同owner GET/履歴は未完了です。10/22通常保存・10/23共有確認の前提を達成済みや延期承認へ読み替えません。現在地は入口81／current map65.29／manifest v90へ同期します。
+
+
 ## 6. 議題6 — 今回の指摘に対する判断と、記録の責任
 
 ### 6.1 問題は反省文の不足ではない

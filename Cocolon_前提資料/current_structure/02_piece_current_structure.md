@@ -16,6 +16,10 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**最新作業は入口§81／本map §65.29／weekly §5.6.9です。10/20 14:31:53 JSTに承認されたselected_line.v2／明示iOS preview v9を既存ownerへ実装しました。元Textを同layoutでlocal／最終小数位置の2段階検査し、親Viewのtranslationだけで配置してからfitへ渡します。local全13file915件成功。旧native129＋追加46、実RN11report・画像は一度のCI待ちです。v8結果と未承認提案は履歴。正式admission・通常保存は未完了です。**
+
+### §80時点の結果（履歴）
+
 **最新結果は入口§80.4〜80.7／本map §65.28.1／weekly §5.6.8です。v8 source ef96dc5をGitHubへ反映して12file全文を読み戻し、一度のCIと11report／16PNGを確認しました。JS900成功、mixed420は最終照合込み5172.852msへ改善し、従来10PNGは全てv7とバイト同一。Arabicは同layoutの実画素が枠内でも現TextKit bbox条件で拒否が続き、native単体は115 PASS行で未完走です。v8未採用、正式admission・通常保存は未完了。次の新しいink定義・配置後再検査案は入口§80.7の具体判断へ固定します。**
 
 ### §79時点の結果（履歴）
@@ -2957,3 +2961,23 @@ STRUCTURE_MAP_DELTA_PRESENTの結果ownerは本節、詳細・未加工reportと
 新案はTextKit bboxによる明文の拒否／配置条件を置き換えます。Rule18 §0(4)・§11.3 LEVEL_3と入口§76.3(6)／§77の承認範囲に基づき、この差だけをMashの具体判断とします。GitHub書込や結果保存を再承認事項にしません。入口§80.7に既存15path、元8秒内の追加draw／scan／位置検査、有限bitmap・外縁・allocation・空画素・stale拒否、旧版／候補全range／独立5値保持、一度の新source検証、完了／STOP／費用を具体化しました。新helper／controller／DTO／workflowは増設しません。
 
 **V8_UNADOPTED_STOP。** 今回の限定実装・反映・結果確認は完了し、mixed420の元8秒条件は達成しました。Arabic拒否とnative14件未確認を残すため正式採用はしません。結果同期は既存4文書、source後の製品／test／workflow追加変更・同source再実行・DB再適用・API／flag／env／deploy／署名／配布／main merge効果0。詳細は入口80.4〜80.7、未加工report・PNG hash・画素解析はmanifest v89、日程はweekly5.6.8です。STRUCTURE_MAP_DELTA_PRESENTを維持します。
+
+
+### 65.29 v9 — 承認された同layout alpha計測と最終位置の再検査
+
+Mashの10/20 14:31:53 JSTの明示承認と14:55:34 JSTの継続指示を受け、入口§80.7のLEVEL_3契約差を既存15pathへ実装しました。source基点は076c0edef425e071c297da2b366776d3e0cf6cd5、writerは華恋／GPT-6 Astra Pro／CHAT_PRO_OKのrootだけです。旧§65.28.1の未承認状態は履歴で、現在の再開点は本節／入口§81です。
+
+| 現在のowner | 実装と未確認範囲 |
+|---|---|
+| PieceTextMetrics | 明示selected_line.v2に同TextStorage/layout/container/glyphのscale1 alpha>0 inkを追加。18field wire、local tokenのplaced時消費、厳密な同一性・4Mpixel/4096辺/32MiB provider上限、空・外縁・変化・元wall/monotonic期限を検査。旧v1は保持 |
+| pieceRenderer | v2を閉じたschemaで復号し、stage・tag・canvas・frame・token・独立5値・元deadlineを照合 |
+| PieceVisualCard | local→既存composition/rowのtranslation→2RAF→placed→native_checked／fit。同Textのprops・boundsを配置で変更せず、epoch・onLayout x/y・同mount/tokenを同期検査。元8秒を終端のisCurrentまで維持 |
+| pieceLayout／pieceMeasuredWrap | iOS preview v9を明示追加。候補v5・B9全range/font/score/tie・本文・独立5値・strict own-view/logical高・元余白は保持。v9 saved/export/Androidは拒否 |
+| 既存検査owner | local13file915 PASS／0 FAIL。旧900＋JS15。native旧129＋追加46、11実RN reportと画像は未実行で、この後の既存CI1回で確認 |
+| 正式保存owner | renderer採用・同版saved version/key/profile・InputScreen→既存hostの正式isSaveAdmitted・通常保存→同owner GET/履歴は未完了 |
+
+局所画素から配置を一度決め、実配置後のfractional phaseで同じ行を再描画します。own-viewとlogical高はstrict、canvas余白だけ元±0.5を維持し、bodyはbranding zoneを侵しません。配置後不適合では元font catalogへ戻り、位置変化を繰り返すloopを作りません。全physical scaleの受入れとは区別します。
+
+旧native115 PASSの未完走原因は未確定のまま、該当budget検査に段階出力を加えました。旧129の分母・90秒alarmを維持します。新旧native、Arabic完成Card、両420、同mount/token fit、全11report・画像・元8秒のいずれか未達なら未採用の結果を記録して停止し、同source再実行はしません。反映／CIの未実行項目は結果節で更新します。
+
+STRUCTURE_MAP_DELTA_PRESENT。製品5／検査6／資料4、workflow・新helper/service/dependency・API/DB/runtime/deploy/署名/配布/main merge変更0。全path/hashはmanifest ios_preview_v9_20261020、承認・具体実装・最終local結果は入口81、予定はweekly5.6.9を参照します。

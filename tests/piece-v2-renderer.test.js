@@ -28,12 +28,12 @@ function sample(format = 'short_essay', ratio = '4:5', theme = 'soft_paper', bra
 const display = p => ({ phase: 'received', preview: p, hashVerified: true });
 function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates, initialNow = NOW, exportCanvas = false) {
   let now = initialNow, serial = 0;
-  const timers = new Map(), nativeCalls = [], candidateCalls = [], mountedNodes = new Map();
+  const frames = new Map(), timers = new Map(), nativeCalls = [], candidateCalls = [], mountedNodes = new Map();
   let card;
   const React = { Component: class {
     constructor(props) { this.props = props; this.state = {}; this.updates = 0; }
-    setState(v) { const change = typeof v === 'function' ? v(this.state) : v;
-      if (change) { this.state = { ...this.state, ...change }; this.updates++; this.componentDidUpdate?.(); } }
+    setState(v, callback) { const change = typeof v === 'function' ? v(this.state) : v;
+      if (change) { this.state = { ...this.state, ...change }; this.updates++; this.componentDidUpdate?.(); } callback?.(); }
   }, createElement: (type, props, ...children) => ({ type, props: props || {}, children }) };
   const context = vm.createContext({ React, View: 'View', Text: 'Text',
     Platform: { OS: 'ios' }, findNodeHandle: node => node?.tag,
@@ -57,6 +57,33 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
         line_ends: block.lines.map(l => l.end), ink: [0, 0, block.box.width - 1, block.box.height], glyph_check: 'no_missing_observed',
         independent_metrics_f64le: selectedBytes([block.lines[0].width, 0, -fontSize * .8, block.lines[0].width, fontSize * .2]) };
       return nativeInspect ? nativeInspect(result, nativeCalls.length) : result;
+    }, inspectSelectedLineV2: async (tag, text, fontSize, request) => {
+      nativeCalls.push({ tag, text, fontSize, method: 'inspectSelectedLineV2', request });
+      const block = card.state.measurement.blocks[tag - 1], input = card.drawingInput(context.preparePieceNativeCard(card.props));
+      const body = tag - 1 < input.blocks.length, margin = body ? input.margin : 0;
+      // Derive the observed frame from rendered ancestor styles, independently
+      // of the product's expected-frame helper.
+      const rendered = card.render(), flatten = node => !node || typeof node !== 'object' ? []
+        : [node, ...node.children.flat(Infinity).flatMap(flatten)];
+      const all = flatten(rendered), style = id => all.find(n => n.props.testID === id).props.style;
+      const translation = (value, axis) => (value.transform ?? []).reduce((sum, transform) => sum + (transform[axis] ?? 0), 0);
+      const textStyle = style(`piece-visual-block-${tag - 1}`), composition = style('piece-body-composition');
+      let rowY = 0;
+      for (let i = 0; i < tag - 1 && body; i++) { const row = style(`piece-logical-row-${i}`); rowY += row.height + row.marginBottom; }
+      const row = body ? style(`piece-logical-row-${tag - 1}`) : {};
+      const canvasFrame = [body ? composition.left + translation(composition, 'translateX') + translation(row, 'translateX') + textStyle.left : textStyle.left,
+        body ? composition.top + translation(composition, 'translateY') + rowY + translation(row, 'translateY') + textStyle.top : textStyle.top,
+        block.box.width, block.box.height];
+      const inkWidth = body ? 500 : 100;
+      const result = { version: 'piece.native_selected_line.v2', platform: 'ios', font_size: fontSize,
+        width: block.box.width, height: block.box.height, utf16_length: text.length,
+        boundaries: [0, ...[...new Intl.Segmenter('ja', { granularity: 'grapheme' }).segment(text)].map(s => s.index + s.segment.length)],
+        line_ends: block.lines.map(l => l.end), ink: [margin, 10, margin + inkWidth, body ? 60 : 30], glyph_check: 'no_missing_observed',
+        independent_metrics_f64le: selectedBytes([inkWidth, 0, -fontSize * .8, inkWidth, fontSize * .2]),
+        stage: request.stage, tag, canvas_tag: request.canvas_tag, canvas_frame: canvasFrame,
+        content_frame: [margin, 0, body ? input.contentWidth : block.box.width, block.box.height], raster_scale: 1,
+        snapshot_token: request.snapshot_token ?? `snapshot-${tag}` };
+      return nativeInspect ? nativeInspect(result, nativeCalls.length) : result;
     }, inspect: async (tag, text, fontSize) => {
       nativeCalls.push({ tag, text, fontSize });
       const block = card.state.measurement.blocks[tag - 1];
@@ -68,13 +95,15 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
     } } },
     setTimeout: callback => { const id = ++serial; timers.set(id, callback); return id; },
     clearTimeout: id => timers.delete(id),
+    requestAnimationFrame: callback => { const id = ++serial; frames.set(id, callback); return id; },
+    cancelAnimationFrame: id => frames.delete(id),
     Date: class extends Date { static now() { return now; } } });
   const modules = [
     ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'readPieceOwnerSnapshot']],
     ['features/piece/piecePreviewModel.js', ['readPiecePreviewDisplay', 'verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay']],
-    ['features/piece/pieceLayout.js', ['PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'PIECE_NATIVE_PREVIEW_V7_VERSION', 'PIECE_NATIVE_PREVIEW_V8_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
-    ['features/piece/pieceRenderer.js', ['inspectPieceText', 'readPieceTextInspection', 'inspectPieceSelectedLine', 'readPieceSelectedLineInspection', 'measurePieceCandidates']],
+    ['features/piece/pieceLayout.js', ['PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'PIECE_NATIVE_PREVIEW_V7_VERSION', 'PIECE_NATIVE_PREVIEW_V8_VERSION', 'PIECE_NATIVE_PREVIEW_V9_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
+    ['features/piece/pieceRenderer.js', ['inspectPieceText', 'readPieceTextInspection', 'inspectPieceSelectedLine', 'readPieceSelectedLineInspection', 'readPieceSelectedLineV2Inspection', 'inspectPieceSelectedLineV2', 'measurePieceCandidates']],
     ['features/piece/pieceMeasuredWrap.js', ['planPieceMeasuredRows']],
     ['components/piece/PieceVisualCard.js', ['PieceVisualCard']],
   ];
@@ -90,7 +119,7 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
       // React retains a mounted native node when only the callback identity
       // changes; a replacement canvas binding remounts all descendants.
       const key = card.state.bindingSerial + ':' + node.props.testID + ':' + (node.props.key ?? '');
-      if (!mountedNodes.has(key)) mountedNodes.set(key, { tag: Number(node.props.testID.split('-').pop()) + 1 });
+      if (!mountedNodes.has(key)) mountedNodes.set(key, { tag: node.props.testID === 'piece-logical-canvas' ? 10001 : Number(node.props.testID.split('-').pop()) + 1 });
       node.props.ref(mountedNodes.get(key));
     }
     return tree;
@@ -99,18 +128,19 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
   const find = id => nodes(render()).find(n => n.props.testID === id);
   const resize = width => find('piece-visual-preview').props.onLayout({ nativeEvent: { layout: { width } } });
   resize(324);
-  return { ...context, card, nodes, find, resize, render, timers, nativeCalls, candidateCalls, now: value => { now = value; },
+  return { ...context, context, card, nodes, find, resize, render, timers, frames,
+    flushFrame: () => { const next = [...frames.values()]; frames.clear(); next.forEach(callback => callback()); }, nativeCalls, candidateCalls, now: value => { now = value; },
     input: () => context.preparePieceNativeCard(card.props),
     drawing: () => card.drawingInput(context.preparePieceNativeCard(card.props)),
     replace: packet => { card.props = saved ? { savedRecord: packet, exportCanvas } : { display: display(packet) };
       card.setState(context.PieceVisualCard.getDerivedStateFromProps(card.props, card.state)); },
   };
 }
-function sendBlock(h, index, { height, width, lines } = {}) {
+function sendBlock(h, index, { height, width, lines, x, y } = {}) {
   height ??= index === h.drawing().blocks.length ? 40 : h.pieceNativeTypography(h.input(), h.card.state.measurement.sizeIndex).lineHeight;
   const node = h.find(`piece-visual-block-${index}`), expected = node.children.join('');
   const w = width ?? h.input().contentWidth;
-  node.props.onLayout({ nativeEvent: { layout: { width: w, height } } });
+  node.props.onLayout({ nativeEvent: { layout: { width: w, height, ...(x === undefined ? {} : { x }), ...(y === undefined ? {} : { y }) } } });
   node.props.onTextLayout({ nativeEvent: { lines: lines || [{ text: expected, x: 0, y: 0, width: w - 1, height }] } });
   return node;
 }
@@ -482,8 +512,8 @@ async function prepare(h) {
   return h;
 }
 async function harness(...args) { return prepare(rawHarness(...args)); }
-function fitHarness({ inspect, candidates, onFit, version = 'piece.rn_native_preview.prototype.v3' } = {}) {
-  const packet = sample(); packet.renderer_version = version;
+function fitHarness({ inspect, candidates, onFit, packet: suppliedPacket, version = 'piece.rn_native_preview.prototype.v3' } = {}) {
+  const packet = suppliedPacket ?? sample(); packet.renderer_version = version;
   const h = rawHarness(packet, inspect, false, candidates), notifications = [];
   const listener = (next, previous) => { notifications.push([next, previous]); onFit?.(next, previous); };
   const bind = token => {
@@ -1783,4 +1813,256 @@ test('v8 pending selected results cannot revive after v8-v7-v8, token replacemen
     assert.equal(h.card.state.measurement, state); assert.equal(h.fit(), undefined);
     assert.notEqual(h.card.state.measurement.phase, 'native_checked');
   }
+});
+
+// v9 uses synthetic alpha evidence here. Pixel equality and storage identity
+// are separately exercised by the native and real RN suites.
+const v9Profile = 'piece.rn_native_preview.prototype.v9';
+const v9Sample = (...args) => ({ ...sample(...args), renderer_version: v9Profile,
+  expires_at: new Date(NOW + 60000).toISOString() });
+const v9Harness = options => fitHarness({ ...options, version: v9Profile, packet: options?.packet ?? v9Sample() });
+const tickV9 = () => new Promise(resolve => setImmediate(resolve));
+function layoutV9(h) {
+  const input = h.drawing(), m = h.card.state.measurement;
+  const emit = (id, layout) => h.find(id).props.onLayout({ nativeEvent: { layout } });
+  const canvas = h.find('piece-logical-canvas').props.style;
+  emit('piece-logical-canvas', { x: canvas.left, y: canvas.top, width: input.width, height: input.height });
+  const composition = h.find('piece-body-composition').props.style;
+  emit('piece-body-composition', { x: composition.left, y: composition.top, width: input.contentWidth, height: m.plan.totalHeight });
+  let rowY = 0;
+  for (let i = 0; i < input.blocks.length; i++) {
+    emit(`piece-logical-row-${i}`, { x: 0, y: rowY, width: input.contentWidth, height: m.plan.lineHeight });
+    const style = h.find(`piece-visual-block-${i}`).props.style;
+    sendBlock(h, i, { x: style.left, y: style.top, width: input.width, height: m.plan.lineHeight + 1 / 3,
+      lines: [{ text: input.blocks[i], x: 0, y: 0, width: 500, height: m.plan.lineHeight }] });
+    rowY += m.plan.lineHeight + input.rowGaps[i];
+  }
+  if (input.brandingMode !== 'off') sendBlock(h, input.blocks.length, { x: input.margin,
+    y: input.height - input.margin - input.brandingZone, width: input.contentWidth, height: 40,
+    lines: [{ text: 'Cocolon', x: 0, y: 0, width: 100, height: 40 }] });
+}
+async function localV9(h) { await prepare(h); layoutV9(h); await tickV9(); }
+async function placedV9(h) {
+  h.render(); layoutV9(h); h.flushFrame(); h.flushFrame(); await tickV9();
+}
+const v9Expected = () => ({ ...selectedExpected(), box: { width: 1080, height: 75 + 1 / 3 },
+  stage: 'local', tag: 1, canvasTag: 10001 });
+const v9Wire = () => ({ ...selectedWire(), version: 'piece.native_selected_line.v2', width: 1080, height: 75 + 1 / 3,
+  ink: [96, 10, 596, 60], stage: 'local', tag: 1, canvas_tag: 10001, canvas_frame: [0, 96, 1080, 75 + 1 / 3],
+  content_frame: [96, 0, 888, 75 + 1 / 3], raster_scale: 1, snapshot_token: 'local-snapshot' });
+
+test('v9 has its own iOS preview binding and preserves candidate v5 with saved/export/Android closed', async () => {
+  const h = v9Harness(), old = rawHarness({ ...v9Sample(), renderer_version: v8Profile });
+  primeNextFont(h); primeNextFont(old); await prepare(h); await prepare(old);
+  assert.equal(h.input().candidateProfile, v9Profile);
+  assert.deepEqual(copy(h.card.state.measurement.plan), copy(old.card.state.measurement.plan));
+  assert.deepEqual(h.candidateCalls, old.candidateCalls);
+  assert.equal(h.preparePieceNativeCard({ display: display(v9Sample()), exportCanvas: true }), null);
+  assert.equal(h.preparePieceNativeSavedDisplay({ ...savedSample(), renderer_version: v9Profile }), null);
+  assert.notEqual(h.preparePieceNativePreview(display({ ...v9Sample(), renderer_version: v8Profile })).key, h.input().key);
+  h.Platform.OS = 'android'; assert.equal(h.preparePieceNativePreview(display(v9Sample())), null);
+});
+
+test('v9 closed decoder rejects mixed versions, malformed fields, coordinates, stage and identity', () => {
+  const h = rawHarness(), expected = v9Expected();
+  assert.equal(h.readPieceSelectedLineV2Inspection(v9Wire(), expected).stage, 'local');
+  const mutations = [r => ({ ...r, version: 'piece.native_selected_line.v1' }), r => ({ ...r, extra: 0 }),
+    r => ({ ...r, stage: 'placed' }), r => ({ ...r, tag: 2 }), r => ({ ...r, canvas_tag: 10002 }),
+    r => ({ ...r, raster_scale: 3 }), r => ({ ...r, snapshot_token: '' }), r => ({ ...r, content_frame: [0, 0, 0, 75] }),
+    r => ({ ...r, canvas_frame: [0, NaN, 1080, 75 + 1 / 3] }), r => ({ ...r, canvas_frame: [0, 96, 1079, 75 + 1 / 3] }),
+    r => ({ ...r, ink: [0, 0, 0, 0] }), r => ({ ...r, independent_metrics_f64le: selectedBytes([500, 0, 0, 500, Infinity]) })];
+  for (const mutate of mutations) assert.throws(() => h.readPieceSelectedLineV2Inspection(mutate(v9Wire()), expected), /UNAVAILABLE/);
+  for (const field of Object.keys(v9Wire())) {
+    const missing = v9Wire(); delete missing[field];
+    assert.throws(() => h.readPieceSelectedLineV2Inspection(missing, expected), /UNAVAILABLE/, field);
+  }
+  assert.throws(() => h.readPieceSelectedLineInspection(v9Wire(), expected), /UNAVAILABLE/);
+  assert.throws(() => h.readPieceSelectedLineV2Inspection(selectedWire(), expected), /UNAVAILABLE/);
+});
+
+test('v9 placed decoder accepts fractional alpha changes but binds actual frame, token, bounds and independent five values', () => {
+  const h = rawHarness(), local = h.readPieceSelectedLineV2Inspection(v9Wire(), v9Expected());
+  const frame = [0.25, 500.5, 1080, 75 + 1 / 3];
+  const expected = { ...v9Expected(), stage: 'placed', local, canvasFrame: frame };
+  const wire = { ...v9Wire(), stage: 'placed', canvas_frame: frame, ink: [95.75, 9.5, 596.75, 60.5] };
+  assert.equal(h.readPieceSelectedLineV2Inspection(wire, expected).stage, 'placed');
+  for (const mutate of [r => ({ ...r, snapshot_token: 'other' }), r => ({ ...r, canvas_frame: [1, 500.5, 1080, 75 + 1 / 3] }),
+    r => ({ ...r, content_frame: [95, 0, 888, 75 + 1 / 3] }),
+    r => ({ ...r, height: 75, canvas_frame: [0.25, 500.5, 1080, 75] }),
+    r => ({ ...r, independent_metrics_f64le: selectedBytes([21, 0, -40, 20, 10]) })]) {
+    assert.throws(() => h.readPieceSelectedLineV2Inspection(mutate(wire), expected), /UNAVAILABLE/);
+  }
+  assert.equal(h.readPieceSelectedLineV2Inspection({ ...wire, ink: [-Number.MIN_VALUE, 0, 50, 50] }, expected).overflow, true);
+});
+
+test('v9 local alpha remains hidden and fit-free; only all placed results authorize this mounted drawing', async () => {
+  const pending = [], h = v9Harness({ inspect: result => result.stage === 'placed'
+    ? new Promise(resolve => pending.push({ result, resolve })) : result });
+  const deadline = h.card.deadline;
+  await prepare(h);
+  const textBefore = copy(h.find('piece-visual-block-0').props.style);
+  layoutV9(h); await tickV9();
+  assert.equal(h.card.state.measurement.phase, 'positioning'); assert.equal(h.fit(), undefined);
+  assert.equal(h.find('piece-logical-canvas').props.style.opacity, 0);
+  await placedV9(h);
+  assert.equal(h.card.state.measurement.phase, 'positioning'); assert.equal(h.fit(), undefined);
+  for (const item of pending.slice(1).reverse()) item.resolve(item.result);
+  await tickV9(); assert.equal(h.fit(), undefined);
+  pending[0].resolve(pending[0].result); await tickV9();
+  assert.equal(h.card.state.measurement.phase, 'native_checked');
+  assert.equal(h.fit().isCurrent(h.card.props.display.preview, h.token), true);
+  assert.equal(h.fit().isCurrent(h.card.props.display.preview, {}), false);
+  assert.equal(h.card.deadline, deadline); assert.equal(deadline.expiresAt, NOW + 8000);
+  assert.deepEqual(copy(h.find('piece-visual-block-0').props.style), textBefore);
+  assert.equal(textBefore.left, -96); assert.equal(textBefore.top, 0);
+  assert.equal(h.card.state.measurement.canSave, false); assert.equal(h.card.state.measurement.canExport, false);
+  assert.ok(h.nativeCalls.every(call => call.method === 'inspectSelectedLineV2'));
+  const calls = h.nativeCalls.length; layoutV9(h); h.card.componentDidUpdate(); await tickV9();
+  assert.equal(h.nativeCalls.length, calls); assert.equal(h.fit().isCurrent(h.card.props.display.preview, h.token), true);
+});
+
+test('v9 zero offsets still reach placed inspection without requiring a second layout event', async () => {
+  const h = v9Harness({ inspect: r => r.font_size === 28 ? r : { ...r, ink: [96, 0, 596, 75] } });
+  await localV9(h);
+  assert.deepEqual(copy(h.card.state.measurement.rowOffsets[0]), { x: 0, y: 0, width: 500, height: 75 });
+  h.render(); h.flushFrame(); h.flushFrame(); await tickV9();
+  assert.equal(h.card.state.measurement.phase, 'native_checked'); assert.ok(h.fit());
+  const n = h.drawing().blocks.length + 1;
+  assert.equal(h.nativeCalls.filter(call => call.request.stage === 'local').length, n);
+  assert.equal(h.nativeCalls.filter(call => call.request.stage === 'placed').length, n);
+});
+
+test('v9 refuses a missing pixel inspector without falling back to legacy measurement', async () => {
+  const h = v9Harness(); delete h.NativeModules.PieceTextMetrics.inspectSelectedLineV2;
+  await localV9(h);
+  assert.equal(h.card.state.measurement.reason, 'native_measurement_unavailable');
+  assert.equal(h.nativeCalls.length, 0); assert.equal(h.fit(), undefined);
+});
+
+test('v9 rejects local and placed strict own-view, line-height, independent width and canvas-margin overflow', async () => {
+  for (const stage of ['local', 'placed']) for (const change of ['own', 'height', 'independent', 'canvas']) {
+    if (stage === 'local' && change === 'canvas') continue;
+    const h = v9Harness({ inspect: r => r.stage !== stage || r.font_size === 28 ? r : change === 'own'
+      ? { ...r, ink: [-Number.MIN_VALUE, 10, 500, 60] } : change === 'height'
+      ? { ...r, ink: [96, 0, 596, nextDouble(75)] } : change === 'independent'
+      ? { ...r, independent_metrics_f64le: selectedBytes([889, 0, -40, 889, 10]) }
+      : { ...r, ink: [95.49, 10, 595.49, 60] } });
+    const deadline = h.card.deadline;
+    await localV9(h); if (h.card.state.measurement.phase === 'positioning') await placedV9(h);
+    assert.notEqual(h.card.state.measurement.phase, 'native_checked', `${stage}/${change}`);
+    assert.equal(h.fit(), undefined); assert.equal(h.card.deadline, deadline);
+    if (h.card.state.measurement.phase === 'planning') {
+      assert.equal(h.card.state.measurement.sizeIndex, 1);
+      await prepare(h); layoutV9(h); await tickV9();
+      assert.notEqual(h.card.state.measurement.reason, 'native_placement_unstable');
+    }
+  }
+});
+
+test('v9 post-dispatch geometry changes revoke pending responses immediately without repositioning', async () => {
+  for (const kind of ['text', 'lines', 'row', 'composition', 'canvas', 'width']) {
+    const pending = [], h = v9Harness({ inspect: r => r.stage === 'placed' ? new Promise(resolve => pending.push({ r, resolve })) : r });
+    await localV9(h); await placedV9(h);
+    const m = h.card.state.measurement, ticket = { key: m.key, sizeIndex: m.sizeIndex, generation: m.generation };
+    if (kind === 'text') h.card.measure(ticket, 0, 'box', { ...m.blocks[0].box, x: m.blocks[0].box.x + 1 });
+    if (kind === 'lines') h.card.measure(ticket, 0, 'lines', [{ text: h.drawing().blocks[0], x: 1, y: 0, width: 500, height: m.plan.lineHeight }]);
+    if (['row', 'composition', 'canvas'].includes(kind)) {
+      const key = kind === 'row' ? 'row:0' : kind, value = h.card.placementLayouts.get(key).rect;
+      h.card.notePlacement(ticket, key, { x: value[0] + 1, y: value[1], width: value[2], height: value[3] });
+    }
+    if (kind === 'width') h.resize(360);
+    assert.equal(h.card.state.measurement.reason, 'native_placement_unstable', kind);
+    pending.forEach(p => p.resolve(p.r)); await tickV9();
+    assert.equal(h.card.state.measurement.phase, 'unavailable'); assert.equal(h.fit(), undefined);
+  }
+});
+
+test('v9 existing fit is synchronously revoked even when geometry state updates are batched', async () => {
+  for (const kind of ['box', 'lines', 'parent']) {
+    const h = v9Harness(); await localV9(h); await placedV9(h); const fit = h.fit(); assert.ok(fit);
+    const m = h.card.state.measurement, ticket = { key: m.key, sizeIndex: m.sizeIndex, generation: m.generation };
+    const updates = [], apply = h.card.setState.bind(h.card); h.card.setState = v => updates.push(v);
+    if (kind === 'box') h.card.measure(ticket, 0, 'box', { ...m.blocks[0].box, y: 1 });
+    if (kind === 'lines') h.card.measure(ticket, 0, 'lines', [{ text: h.drawing().blocks[0], x: 0, y: 1, width: 500, height: 74 }]);
+    if (kind === 'parent') h.card.notePlacement(ticket, 'composition', { x: 96, y: 97, width: 888, height: m.plan.totalHeight });
+    assert.equal(fit.isCurrent(h.card.props.display.preview, h.token), false, kind);
+    h.card.setState = apply; updates.forEach(update => apply(update)); assert.equal(h.card.state.measurement.phase, 'unavailable');
+  }
+});
+
+test('v9 both stages reject stale binding, token, node, generation, canvas and unmount responses', async () => {
+  for (const stage of ['local', 'placed']) for (const change of ['version', 'token', 'node', 'generation', 'canvas', 'unmount']) {
+    const pending = [], h = v9Harness({ inspect: r => r.stage === stage ? new Promise(resolve => pending.push({ r, resolve })) : r });
+    await localV9(h); if (stage === 'placed') await placedV9(h);
+    assert.ok(pending.length);
+    if (change === 'version') {
+      for (const renderer_version of [v8Profile, v9Profile]) {
+        h.card.props = { ...h.card.props, display: { ...h.card.props.display, preview: { ...h.card.props.display.preview, renderer_version } } };
+        h.card.setState(h.PieceVisualCard.getDerivedStateFromProps(h.card.props, h.card.state));
+      }
+    }
+    if (change === 'token') { h.bind({}); h.bind(h.token); }
+    if (change === 'node') { const value = h.card.textNodes.get(0); h.card.textNodes.set(0, { ...value, value: { tag: 99 } }); }
+    if (change === 'generation') h.card.state.measurement = { ...h.card.state.measurement, generation: Object.freeze({}) };
+    if (change === 'canvas') h.card.canvasNode = { tag: 90002 };
+    if (change === 'unmount') h.card.componentWillUnmount();
+    const state = h.card.state.measurement;
+    pending.forEach(p => p.resolve(p.r)); await tickV9();
+    assert.equal(h.card.state.measurement, state, `${stage}/${change}`); assert.equal(h.fit(), undefined);
+    assert.notEqual(h.card.state.measurement.phase, 'native_checked');
+  }
+});
+
+test('v9 local, frame-wait, placed and queued adoption all use the original eight-second deadline', async () => {
+  for (const boundary of ['local', 'frames', 'placed', 'queued']) {
+    const pending = [], stage = boundary === 'local' ? 'local' : 'placed';
+    const h = v9Harness({ inspect: r => r.stage === stage && boundary !== 'frames'
+      ? new Promise(resolve => pending.push({ r, resolve })) : r });
+    await localV9(h);
+    if (boundary !== 'local' && boundary !== 'frames') await placedV9(h);
+    let apply, updates;
+    if (boundary === 'queued') {
+      updates = []; apply = h.card.setState.bind(h.card); h.card.setState = v => updates.push(v);
+      pending.forEach(p => p.resolve(p.r)); await tickV9(); assert.equal(updates.length, 1);
+    }
+    h.now(NOW + 8000);
+    if (boundary === 'frames') { h.flushFrame(); h.flushFrame(); }
+    else if (boundary !== 'queued') pending.forEach(p => p.resolve(p.r));
+    else { h.card.setState = apply; updates.forEach(update => apply(update)); }
+    await tickV9();
+    for (const timer of [...h.timers.values()]) timer();
+    assert.equal(h.fit(), undefined); assert.notEqual(h.card.state.measurement.phase, 'native_checked');
+    assert.equal(h.card.deadline.expiresAt, NOW + 8000);
+  }
+});
+
+test('v9 completed fit retains the deadline and a later layout cannot acquire another budget', async () => {
+  const h = v9Harness(); await localV9(h); await placedV9(h);
+  const fit = h.fit(), deadline = h.card.deadline; h.now(NOW + 9000);
+  assert.equal(fit.isCurrent(h.card.props.display.preview, h.token), true);
+  h.resize(360); assert.equal(fit.isCurrent(h.card.props.display.preview, h.token), false);
+  assert.equal(h.card.deadline, deadline); assert.equal(deadline.expiresAt, NOW + 8000);
+  assert.equal(h.card.state.measurement.phase, 'unavailable');
+});
+
+test('v9 reentrant fit revocation cannot invalidate the replacement preview', async () => {
+  let h, replace = false;
+  h = v9Harness({ onFit: (next, previous) => { if (!next && previous && replace) h.bind({}); } });
+  await localV9(h); await placedV9(h); assert.ok(h.fit()); replace = true;
+  h.card.invalidatePlacement();
+  assert.equal(h.card.state.measurement.phase, 'planning'); assert.equal(h.fit(), undefined);
+});
+
+
+test('v9 refuses fit publication when final preview integrity checks cross the original deadline', async () => {
+  const h = v9Harness(); await localV9(h);
+  const prepareCard = h.context.preparePieceNativeCard;
+  h.context.preparePieceNativeCard = props => {
+    const value = prepareCard(props);
+    if (h.card.state.measurement.phase === 'native_checked' && props.display && props.display !== h.card.props.display) h.now(NOW + 8000);
+    return value;
+  };
+  await placedV9(h);
+  assert.equal(h.fit(), undefined); assert.equal(h.card.state.measurement.reason, 'measurement_timeout');
+  assert.equal(h.card.deadline.expiresAt, NOW + 8000);
 });
