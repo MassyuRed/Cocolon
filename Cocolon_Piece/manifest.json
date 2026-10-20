@@ -1,21 +1,21 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v100",
+  "schema_version": "cocolon.piece.workstream_manifest.v101",
   "generated_at": "2026-10-21 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v99",
-    "predecessor_head": "623662b693cc829a6877e042e46ffdaf0702c72c",
-    "carry_forward": "Prior owners and evidence unchanged; placed metadata result and all original artifact files recoverable; pixels remain NOT_PERFORMED."
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v100",
+    "predecessor_head": "4c711ab5b0f759dedf2f21d1a9893668fd4a16e3",
+    "carry_forward": "Keep previous raw evidence and protected contracts. One placed external layer composition diagnostic; new CI unexecuted at source."
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "5675037897551142d21ecb323b9000377c0589f8",
-    "raw_sha256": "99096c1d4ca8b527db69397b0e467ea751ce39394fc8b83330e46a9ef3f29fd6",
-    "utf8_bytes": 402914,
-    "chars": 238710
+    "git_blob_sha1": "47086e286837cc61ddab4bcfedb2fc38a52c84ea",
+    "raw_sha256": "e2350c63c15fc47bb2ecc1d7b7d5687b73ca660bc5c5ed17fdda8f652eb267b5",
+    "utf8_bytes": 406519,
+    "chars": 240857
   },
   "current_premise": {
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
@@ -104,7 +104,8 @@
     "pce9c_ios_preview_v9": "BOUNDED_WORK_COMPLETE__SOURCE15_READBACK_JS915_RN11_PNG11__NATIVE175_UNEXECUTED_LINK_FAILURE__V9_UNADOPTED",
     "pce9c_ios_preview_v9_link_repair": "BOUNDED_RESULTS_COMPLETE__LINK_REPAIRED_RN11_PNG11_PASS__NATIVE175_UNVERIFIED_SIMCTL_CANCEL__ARABIC_LAYER_BOUNDARY_REPRODUCED__V9_UNADOPTED",
     "pce9c_ios_preview_v9_native_stage": "BOUNDED_RESULTS_COMPLETE__NATIVE129_PASS_V9_46_UNVERIFIED_FIXTURE_WINDOW_EXCEPTION__V9_UNADOPTED",
-    "pce9c_ios_preview_v9_placed_layer": "BOUNDED_RESULT_COMPLETE__NATURAL_NONNULL_CONTENTS__PIXELS_UNOBSERVED__CI_SUCCESS__V9_UNADOPTED"
+    "pce9c_ios_preview_v9_placed_layer": "BOUNDED_RESULT_COMPLETE__NATURAL_NONNULL_CONTENTS__PIXELS_UNOBSERVED__CI_SUCCESS__V9_UNADOPTED",
+    "pce9c_ios_preview_v9_placed_composite": "SOURCE_IMPLEMENTED__ONE_EXISTING_CI_PENDING"
   },
   "analysis_role_alignment": {
     "path": "Cocolon_Piece/handoff/Cocolon_Piece_Analysis_RoleAlignment_Overlay_20260812.md",
@@ -186,7 +187,7 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "623662b693cc829a6877e042e46ffdaf0702c72c",
+    "cocolon_pre_sync_head": "4c711ab5b0f759dedf2f21d1a9893668fd4a16e3",
     "mashos_api_head": "a536e50ee284785f585ac73329ef2947dca8bba9",
     "current_user_visible_piece_shape": "CANDIDATE_NORMAL_INPUT_V2_SAVED_SOURCE_ONLY__TUTORIAL_NEXUS_LEGACY_REMAIN__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
@@ -202,7 +203,7 @@
     "input_screen_source_connected": true,
     "live_auth_input_to_preview_to_device_verified": false,
     "database_evidence_owner": "live_db_apply_20261019",
-    "remaining_work_owner": "ios_preview_v9_placed_layer_20261021",
+    "remaining_work_owner": "ios_preview_v9_placed_composite_20261021",
     "product_acceptance": false,
     "piece_v2_default_application_registered": false,
     "piece_v2_quota_http_present": true,
@@ -289,18 +290,19 @@
     "piece_v2_ios_preview_v9_native_stage_source_commit": "5fa54927477364af61dab989021d0f511d8c9994",
     "piece_v2_ios_preview_v9_standalone_native_suite_complete": true,
     "piece_v2_ios_preview_v9_placed_layer_source_commit": "623662b693cc829a6877e042e46ffdaf0702c72c",
-    "piece_v2_ios_preview_v9_placed_layer_owner": "ios_preview_v9_placed_layer_20261021"
+    "piece_v2_ios_preview_v9_placed_layer_owner": "ios_preview_v9_placed_layer_20261021",
+    "piece_v2_ios_preview_v9_placed_composite_owner": "ios_preview_v9_placed_composite_20261021"
   },
   "next_group": {
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "PIECE_WORK_ALLOWED",
-    "state": "BOUNDED_RESULT_COMPLETE__NATURAL_NONNULL_CONTENTS__PIXELS_UNOBSERVED__CI_SUCCESS__V9_UNADOPTED",
-    "current_map_section": "65.33.1",
-    "current_entry_section": "85.2-85.3",
+    "state": "PLACED_EXTERNAL_COMPOSITE_SOURCE__ONE_CI_PENDING__V9_UNADOPTED",
+    "current_map_section": "65.34",
+    "current_entry_section": "86",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
-    "weekly_review_section": "5.6.13.1",
-    "first_unfinished_work": "At original placed callback, composite the same naturally nonnull clean Text layer once into an external fixed RGBA context via renderInContext; record alpha and pre/post metadata without forced update, type inference or production/wire adoption. Proposal unexecuted.",
+    "weekly_review_section": "5.6.14",
+    "first_unfinished_work": "Run existing push CI once for this source; preserve raw RGBA/report and compare placed callback alpha with original wire and completed layer/PNG. No forced update or retry.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 6,
@@ -400,7 +402,8 @@
     "v9_link_repair_native_tests_complete": false,
     "ios_preview_v9_native_stage_owner": "ios_preview_v9_native_stage_20261020",
     "v9_native_stage_bounded_work_complete": true,
-    "v9_native_stage_same_source_rerun_allowed": false
+    "v9_native_stage_same_source_rerun_allowed": false,
+    "ios_preview_v9_placed_composite_owner": "ios_preview_v9_placed_composite_20261021"
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -454,10 +457,10 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "2ddbc66bdcece25571ebd555434ce6cf426e43c4",
-    "raw_sha256": "3483da73e2a3f8b5b2f92c015ab390f4280bbfdfffcdff449f5a5c3d8f668903",
-    "utf8_bytes": 489923,
-    "chars": 285703
+    "git_blob_sha1": "5ed2145db4edd6008ce0e335021f946d09508414",
+    "raw_sha256": "0f4abcc2ca77a44388ebcc5296b1872882d41fcd23050257373cb98f917da9fb",
+    "utf8_bytes": 491258,
+    "chars": 286478
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -630,8 +633,8 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "V9_NATURAL_PLACED_CONTENTS_RESULT_AND_RECOVERABLE_EVIDENCE",
-    "source_parent": "e470c8948ec1f75435a1857ab9a40855da9bdec4",
+    "classification": "V9_PLACED_EXTERNAL_LAYER_COMPOSITE_DIAGNOSTIC",
+    "source_parent": "4c711ab5b0f759dedf2f21d1a9893668fd4a16e3",
     "paths": [
       "tests/native/piece-rn-canvas-ios.m",
       "Cocolon_Piece/00_read_first.md",
@@ -651,23 +654,7 @@
     "main_merge": 0,
     "same_source_reruns": 0,
     "product_acceptance": false,
-    "automatic_progression": false,
-    "source_commit": "623662b693cc829a6877e042e46ffdaf0702c72c",
-    "result_documentation_paths": [
-      "Cocolon_Piece/00_read_first.md",
-      "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
-      "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
-      "Cocolon_Piece/manifest.json",
-      "Cocolon_前提資料/07_latest_snapshot_diff.md"
-    ],
-    "result_only_product_source_changes": 0,
-    "result_only_test_changes": 0,
-    "ci_conclusion": "success",
-    "native_checks_pass": 175,
-    "rn_conditions_pass": 11,
-    "original_pngs": 11,
-    "natural_public_contents": "nonnull opaque; type/pixels unobserved",
-    "primary_outcome": "BLOCKER_NARROWED"
+    "automatic_progression": false
   },
   "b06_q3_context_fence": {
     "api_commit": "d71fdb40238f2c99751f0c20e578ab654f72308e",
@@ -69305,6 +69292,64 @@
     "main_merge": 0,
     "same_source_reruns": 0,
     "product_acceptance": false,
+    "automatic_progression": false
+  },
+  "ios_preview_v9_placed_composite_20261021": {
+    "state": "SOURCE_IMPLEMENTED__CI_NOT_RUN",
+    "source_parent": "4c711ab5b0f759dedf2f21d1a9893668fd4a16e3",
+    "api_ref": "a536e50ee284785f585ac73329ef2947dca8bba9",
+    "environment": "PIECE_WORK_ALLOWED",
+    "execution_owner": "Karen root; Codex GPT-6 based; read-only agent technical and architecture reviews",
+    "classification": "LEVEL_2; OBSERVED_BLOCKER_MINIMAL_FIX",
+    "entry_section": "86",
+    "map_section": "65.34",
+    "weekly_section": "5.6.14",
+    "test_path": "tests/native/piece-rn-canvas-ios.m",
+    "source_metadata": {
+      "git_blob_sha1": "e3170e50b769b17ee165e2e617e0a72c7c98ffc8",
+      "raw_sha256": "bbbe30d031244922ae9a0caed5b70b7e45fcced0abb6ddff7fcfe26da97118c7",
+      "utf8_bytes": 54836,
+      "chars": 54812
+    },
+    "mechanism": "At same Arabic72 placed success callback, after first metadata and before existing geometry/resolve, composite same naturally nonnull clean Text layer once into external RGBA; preserve fractional placement; raw evidence and alpha scan; pre/post identity/state/deadline.",
+    "context": {
+      "width": 1536,
+      "height": 512,
+      "stride": 6144,
+      "format": "RGBA8_sRGB_premultiplied_last_big_endian",
+      "pad": 160,
+      "scale": 1,
+      "max_context_bytes": 3145728,
+      "max_owned_copy_bytes": 3145728
+    },
+    "prerequisites": "same original registry/Text/storage/layout/container/tag/canvas/token/frame; clean nonnull contents; no children/mask/background/transform; live deadline",
+    "limits": {
+      "render_attempts": 1,
+      "new_source_ci": 1,
+      "same_source_rerun_allowed": false,
+      "original_seconds": 8,
+      "native_seconds": 90,
+      "job_limits_changed": false
+    },
+    "protected": [
+      "original wire resolved once",
+      "oracle/fixtures/assertions/175 denominator",
+      "no forced layout/display/opacity/wait/retry",
+      "no unknown contents type inference or private decoding",
+      "external composition only, no direct backing or physical-screen equivalence"
+    ],
+    "start_checks": {
+      "originals_read": true,
+      "system_context_prepare": "FAILED_TOOLS_MODULE_UNAVAILABLE; direct original read fallback per entry",
+      "supabase": "list_projects ACTIVE_HEALTHY; no query/apply/user row/RPC",
+      "root_single_writer": true
+    },
+    "ci_status": "NOT_RUN",
+    "formal_admission": false,
+    "product_acceptance": false,
+    "normal_save_reopen_complete": false,
+    "can_save": false,
+    "can_export": false,
     "automatic_progression": false
   }
 }

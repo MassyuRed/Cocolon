@@ -10,6 +10,10 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
+**最新は入口§86／current map§65.34／weekly§5.6.14／manifest v101です。配置直後の同Text layerを外部RGBAへ一回合成する限定診断を追加しました。新source CIは未実行。実画素包含・v9正式採用・通常保存は未完了です。**
+
+### §85.2〜85.3の結果（履歴）
+
 **最新結果は入口§85.2〜85.3／current map§65.33.1／weekly§5.6.13.1／manifest v100です。source623662bの一度のCIは全6job success、JS915/native175/実RN11条件・PNG11を確認しました。配置直後の自然contentsはnonnull（型・画素未確認）、canvas透明度0のまま同一性・前後状態・期限を確認。次は同時点のlayer合成を外部contextへ写す限定診断です（未実施）。実画素包含・v9採用・通常保存は未完了です。**
 
 ### §85 source時点の記録（履歴）
@@ -2701,3 +2705,16 @@ primary outcomeは**BLOCKER_NARROWED**。自然contentsが配置直後にnonnull
 setNeedsDisplay/displayIfNeeded/layoutIfNeeded/flush/opacity変更/新待機/再試行・private class解析・未知idのCFGetTypeID/CGImage castを追加しません。nil、dirty、未知背景/子layer等、empty/edge、資源/期限超過、identity/state変化は診断未成立として残します。外部contextでのlayer合成という測定であり、内部backingのbytes直接取得・private paint非発生・physical画面同一を保証する測定とは呼びません。元wireへ結果を採用せず、contains/fit成功へ加算しません。[Apple CALayer](https://developer.apple.com/documentation/quartzcore/calayer?language=objc)のrenderInContext/needsDisplayと、既存完成後診断を根拠に、既存v9のLEVEL_2限定診断として具体化した未実施案です。次sourceの一度の既存CIで結果を原物保存し、不成立でも強制表示・追加描画へfallbackしません。
 
 計測bitmapそのものを表示する別preview v10案も比較検討しましたが、fresh nonnullを受け**次の推奨routeにはしません**。それはRGBA8/sRGBの新描画、PNG/bridge/Image decodeと資源barrier、見え方・版・wireの変更を伴うLEVEL_3の未承認案です。現在の次診断の失敗時に自動採用しません。まず今のText表示を維持したまま、同配置時点のlayer合成結果を直接比較します。
+
+
+## 86. 2026-10-21 — 配置直後の同Text layerを外部RGBAへ一回合成する診断
+
+入口§85.3の既存案を実装します。current source parentは4c711ab5b0f759dedf2f21d1a9893668fd4a16e3、APIはa536e50ee284785f585ac73329ef2947dca8bba9。前回の自然contents nonnullと、完成後layer対direct wireのtop/right各1px差が未解決のため、同じ配置時点で差があるかを直接比較します。P-W1の実描画包含→正式renderer→通常保存への残差を限定するOBSERVED_BLOCKER_MINIMAL_FIX／LEVEL_2です。root単一writer、PIECE_WORK_ALLOWED。Mashのモデル制限解除を適用し、補助担当は読取レビューだけです。
+
+対象exact6はtests/native/piece-rn-canvas-ios.m、入口、本map、最新weekly、07_latest_snapshot_diff、既存manifest。Arabic72ptのplaced成功callbackで、最初のmetadata読取後・既存geometry/resolve前に、同Text layerを1536×512／RGBA8／sRGB／stride6144／pad160／scale1へ一回だけrenderInContextで合成します。実配置の小数位相と既存完成後診断のCTMを維持し、raw .rgba原物を保存してalpha境界を走査します。buffer3MiB＋所有copy3MiBを固定上限とし、即時解放します。公開contentsの型推定・直接backing解読はしません。外部合成であり、private paint非発生やphysical画面同一は保証しません。
+
+同registry Text/storage/layout/container/tag/canvas/token/frame、contents identity、dirty flags、前後metadata、残期限を照合します。nil/dirty、非透明背景・子layer・mask/transform等、空/edge、資源/保存失敗、identity/state変化・期限超過は診断不成立として保存します。元wire、resolve、oracle、fixtures/assertions、175分母、8秒/native90秒/job上限を変更しません。setNeedsDisplay/displayIfNeeded/layoutIfNeeded/flush/opacity変更/新待機/再試行は0。取得のための別renderer・v10へfallbackしません。
+
+全体設計01・全file地図01A/01B/02・current map・最新weekly・mandatory incident全文・Karen-Diary入口3file・規則current/18/09/08/11/17/99と技術正本11/14、実harness・native inspector/Card・既存workflowを確認しました。System Context prepareはmaterialized環境でtools module不在のため失敗し、同入口が許可する原典直接読取へ移行しました。生成context検証成功とは扱いません。Supabase一覧ではcocolon-project ACTIVE_HEALTHYを確認し、DB query/apply/本人行/業務RPC0です。
+
+完了条件は新sourceの既存push CI一度の結果とraw/reportを保存し、元wire・完成後layer・元PNGとの差を比較できること。予想CI30〜40分、Mash操作追加0、追加service/依存0。未成立でも強制描画・同source再実行はしません。契約・表示/判定方式/版変更が必要ならこの単位の外として具体化します。source時点の新CIは未実行、前回JS915/native175/RN11成功は履歴です。formal_admission/product_acceptance/normal_save_reopen_complete=false、v9未採用、canSave/canExport=false、automatic_progression=false。STRUCTURE_MAP_DELTA_NONE（既存harness内の観測のみ、製品owner/route/型/公開contractは不変）。

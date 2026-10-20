@@ -24,6 +24,7 @@ typedef void (*PieceSelectedCall)(id, SEL, NSNumber *, NSString *, double,
 static PieceSelectedCall PieceOriginalSelectedCall;
 static NSMutableArray *PieceArabicObservations;
 static NSUInteger PieceArabicOperationOrdinal;
+static BOOL PiecePlacedCompositeAttempted;
 static NSString *PieceEvidenceDirectory(void);
 
 static id PieceFinite(double value) { return isfinite(value) ? @(value) : (id)NSNull.null; }
@@ -317,8 +318,77 @@ static NSDictionary *PiecePlacedLayerState(RCTTextView *view, UIView *canvas) {
     @"ancestors": ancestors
   };
 }
+// External composition of the existing Text layer, not a backing-store read or
+// physical-screen capture. Never force display/layout or alter ancestor alpha.
+static NSDictionary *PieceCompositePlacedLayer(RCTTextView *view, UIView *canvas,
+                                               NSUInteger ordinal, double expiresAt) {
+  const size_t width = 1536, height = 512, stride = 6144;
+  const CGFloat pad = 160;
+  CALayer *layer = view.layer;
+  CGPoint origin = [view convertPoint:CGPointZero toView:canvas];
+  CGFloat px = origin.x - floor(origin.x), py = origin.y - floor(origin.y);
+  NSMutableDictionary *sample = [@{
+    @"diagnostic_only": @YES, @"method": @"same_text_layer_renderInContext",
+    @"bypasses_ancestor_visibility": @YES, @"physical_screen_equivalence": @NO,
+    @"backing_bytes_directly_read": @NO, @"composite_performed": @NO,
+    @"raw_written": @NO, @"width": @(width), @"height": @(height),
+    @"stride": @(stride), @"format": @"RGBA8_sRGB_premultiplied_last_big_endian",
+    @"raster_scale": @1, @"pad": @(pad),
+    @"phase": @[PieceFinite(px), PieceFinite(py)]
+  } mutableCopy];
+  BOOL plain = layer.sublayers.count == 0 && layer.mask == nil &&
+    layer.borderWidth == 0 && layer.shadowOpacity == 0 &&
+    (!layer.backgroundColor || CGColorGetAlpha(layer.backgroundColor) == 0) &&
+    CATransform3DIsIdentity(layer.transform) && CATransform3DIsIdentity(layer.sublayerTransform) &&
+    CGPointEqualToPoint(view.bounds.origin, CGPointZero) && view.alpha == 1 && !view.hidden &&
+    layer.opacity == 1 && !layer.hidden;
+  sample[@"plain_layer"] = @(plain);
+  if (!plain || !layer.contents || layer.needsDisplay || layer.needsLayout ||
+      !PiecePositiveFiniteRect(view.bounds) || !isfinite(px) || !isfinite(py) ||
+      !isfinite(expiresAt) || expiresAt <= NSDate.date.timeIntervalSince1970 * 1000) {
+    sample[@"diagnostic_error"] = @"layer_or_deadline_prerequisite_not_met"; return sample;
+  }
+  UInt8 *bytes = calloc(height, stride);
+  CGColorSpaceRef space = CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
+  CGContextRef context = bytes && space ? CGBitmapContextCreate(bytes, width, height, 8, stride, space,
+    kCGBitmapByteOrder32Big | kCGImageAlphaPremultipliedLast) : NULL;
+  if (space) CGColorSpaceRelease(space);
+  if (!context) { free(bytes); sample[@"diagnostic_error"] = @"allocation"; return sample; }
+  @try {
+    CGContextTranslateCTM(context, 0, height); CGContextScaleCTM(context, 1, -1);
+    CGContextTranslateCTM(context, pad + px, pad + py);
+    CGAffineTransform ctm = CGContextGetCTM(context);
+    sample[@"ctm"] = @[PieceFinite(ctm.a), PieceFinite(ctm.b), PieceFinite(ctm.c),
+      PieceFinite(ctm.d), PieceFinite(ctm.tx), PieceFinite(ctm.ty)];
+    [layer renderInContext:context];
+    sample[@"composite_performed"] = @YES;
+    // A bounded copy owns its bytes independently of the context's allocation.
+    @autoreleasepool {
+      NSData *raw = [[NSData alloc] initWithBytes:bytes length:height * stride];
+      NSString *filename = [NSString stringWithFormat:@"arabic-placed-layer-%lu-72.rgba", (unsigned long)ordinal];
+      NSError *error = nil;
+      BOOL written = [raw writeToFile:[PieceEvidenceDirectory() stringByAppendingPathComponent:filename]
+                             options:NSDataWritingAtomic error:&error];
+      sample[@"raw_filename"] = filename; sample[@"raw_bytes"] = @(raw.length);
+      sample[@"raw_written"] = @(written);
+      if (!written) sample[@"diagnostic_error"] = @"raw_write_failed";
+    }
+    size_t l = width, t = height, r = 0, b = 0; BOOL seen = NO, edge = NO;
+    for (size_t y = 0; y < height; y++) for (size_t x = 0; x < width; x++) if (bytes[y * stride + x * 4 + 3]) {
+      seen = YES; l = MIN(l, x); t = MIN(t, y); r = MAX(r, x); b = MAX(b, y);
+      edge = edge || x == 0 || y == 0 || x + 1 == width || y + 1 == height;
+    }
+    sample[@"empty"] = @(!seen); sample[@"edge_reached"] = @(edge);
+    if (seen && !edge) sample[@"ink_local"] = @[@(l - pad - px), @(t - pad - py),
+      @(r + 1 - pad - px), @(b + 1 - pad - py)];
+    else sample[@"diagnostic_error"] = seen ? @"edge" : @"empty";
+  } @catch (NSException *exception) {
+    sample[@"diagnostic_error"] = exception.name ?: @"render_exception";
+  } @finally { CGContextRelease(context); free(bytes); }
+  return sample;
+}
 static NSDictionary *PieceReadPlacedLayer(id module, NSNumber *tag, NSString *text,
-                                         NSDictionary *request, id wire) {
+                                         double fontSize, NSUInteger ordinal, NSDictionary *request, id wire) {
   const CFTimeInterval began = CACurrentMediaTime();
   NSMutableDictionary *sample = [@{
     @"diagnostic_only": @YES, @"phase": @"placed_callback_pre_geometry_pre_resolve",
@@ -354,12 +424,27 @@ static NSDictionary *PieceReadPlacedLayer(id module, NSNumber *tag, NSString *te
   sample[@"wire_canvas_frame_matches"] = @([wire[@"canvas_frame"] isEqual:before[@"canvas_frame"]]);
   sample[@"remaining_deadline_ms"] = PieceFinite([request[@"expires_at_ms"] doubleValue] -
     NSDate.date.timeIntervalSince1970 * 1000);
+  id originalContents = view.layer.contents;
+  NSDictionary *composite = nil;
+  if (!PiecePlacedCompositeAttempted && fontSize == 72 && layout && container && [sample[@"text_matches"] boolValue] &&
+      [sample[@"request_wire_identity_matches"] boolValue] && [sample[@"wire_canvas_frame_matches"] boolValue] &&
+      [before[@"same_window"] boolValue] && [before[@"descendant_of_canvas"] boolValue]) {
+    PiecePlacedCompositeAttempted = YES;
+    composite = PieceCompositePlacedLayer(view, canvas, ordinal, [request[@"expires_at_ms"] doubleValue]);
+    sample[@"layer_composite"] = composite;
+    if ([composite[@"composite_performed"] boolValue]) sample[@"pixel_observation"] = @"EXTERNAL_LAYER_COMPOSITE_ONLY";
+  }
   NSDictionary *after = PiecePlacedLayerState(view, canvas);
   sample[@"state_after"] = after;
   sample[@"state_unchanged"] = @([before isEqualToDictionary:after] &&
     view == [bridge.uiManager viewForReactTag:tag] && canvas == [bridge.uiManager viewForReactTag:canvasTag] &&
     storage == view.cocolonPieceTextStorage && layout == storage.layoutManagers.firstObject &&
-    container == layout.textContainers.firstObject);
+    container == layout.textContainers.firstObject && originalContents == view.layer.contents);
+  double remainingAfter = [request[@"expires_at_ms"] doubleValue] - NSDate.date.timeIntervalSince1970 * 1000;
+  sample[@"remaining_deadline_after_ms"] = PieceFinite(remainingAfter);
+  if (composite) sample[@"external_composite_valid"] = @([sample[@"state_unchanged"] boolValue] &&
+    isfinite(remainingAfter) && remainingAfter > 0 && [composite[@"composite_performed"] boolValue] &&
+    [composite[@"raw_written"] boolValue] && !composite[@"diagnostic_error"]);
   sample[@"observation_ms"] = PieceFinite((CACurrentMediaTime() - began) * 1000);
   return sample;
 }
@@ -373,7 +458,7 @@ static void PieceObservedSelectedV2Call(id module, SEL selector, NSNumber *tag, 
   PieceOriginalSelectedV2Call(module, selector, tag, text, fontSize, request, ^(id wire) {
     NSDictionary *placedLayer = nil;
     if ([request[@"stage"] isEqual:@"placed"]) {
-      @try { placedLayer = PieceReadPlacedLayer(module, tag, text, request, wire); }
+      @try { placedLayer = PieceReadPlacedLayer(module, tag, text, fontSize, ordinal, request, wire); }
       @catch (NSException *exception) {
         placedLayer = @{ @"diagnostic_only": @YES, @"pixel_observation": @"NOT_PERFORMED",
           @"observation_error": exception.name ?: @"unknown_exception" };

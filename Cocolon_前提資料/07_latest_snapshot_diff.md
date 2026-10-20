@@ -41604,3 +41604,8 @@ source9de5a87を一度確認したrun39430845624の最終結果を保存。nativ
 ### 2026-10-21 Piece結果：全6job成功、自然contentsはnonnull
 
 source623662bの一度のrun39502473690は全6job/CI success。JS915/native175 unique PASS・FAIL0/実RN11条件・PNG11を確認。配置直後Arabic72ptでは透明canvasのまま同一性・前後state・期限が成立し、公開contentsはnonnull/class __NSCFType。型・画素は未確認です。原report/全6jobログ/xcresult等と旧PNG11の一致参照をmanifest v100へ保存。入口§85.2〜85.3/map§65.33.1/weekly§5.6.13.1。次は同callbackのlayer合成を外部contextへ写す未実施案、別bitmap表示v10は保留。BLOCKER_NARROWED、v9正式採用・実画素包含・通常保存未完了、結果5資料のみ、追加source/再CI/DB/deploy/main0、STRUCTURE_MAP_DELTA_NONEです。
+
+
+## 2026-10-21 Piece残件：配置直後layerの外部RGBA合成診断
+
+前回入口§85.3を継続。Arabic72ptの同placed callbackで同Text layerを固定1536×512 RGBAへ一回合成し、raw原物・alpha境界・前後state/identity/期限を採るharness差分。元wire/oracle/assertions/175分母/8秒/native90秒を保持し、強制更新・別renderer・fallback・再試行0。入口§86/map§65.34/weekly§5.6.14/manifest v101。root単一writer/PIECE_WORK_ALLOWED、6既存path、製品/API/DB/workflow/依存/deploy/main0、STRUCTURE_MAP_DELTA_NONE。新sourceの一度の既存CIは未実行、実画素包含・v9正式採用・通常保存は未完了です。

@@ -1660,3 +1660,10 @@ source623662bの6path全文一致、一度のrun39502473690 attempt1は27分59�
 新観測はArabic72ptの1件。canvas透明度0のまま、同Text/tag/token/配置・前後state・期限を確認し、公開contentsはnonnull/class __NSCFTypeでした。CGImage型・画素未確認/NOT_PERFORMEDを維持。次の未実施案は同callbackのlayer合成を外部contextへ写す限定診断（入口§85.3/map§65.33.1）です。別bitmap表示v10は新契約なので保留し、未観測を保存解禁に使いません。
 
 BLOCKER_NARROWED、v9未採用、正式admission/通常保存/本人再読/実機未完了。10/22保存・10/23共有の目標達成へ数えません。結果5資料のみ、追加source/同source再実行/API/DB/deploy/main0、STRUCTURE_MAP_DELTA_NONE。Pro限定解除を継承します。
+
+
+#### 5.6.14 P-W1継続：配置直後のlayer合成を一回比較（2026-10-21）
+
+入口§85.3の次作業を入口§86/map§65.34/manifest v101へ具体化。Arabic72pt・同placed成功callbackで自然な同Text layerを固定RGBAへ一度合成し、raw原物・alpha境界・前後identity/state/期限を保存します。完成後layer対wireのtop/right各1px差が配置直後からあるかを比較する限定診断です。元wire/oracle/assertions/175分母/8秒/native90秒は維持し、失敗時の強制表示・別renderer・追加CI再実行はしません。
+
+新sourceの既存CIはsource時点未実行。6既存pathのみ、製品/API/DB/workflow/依存/deploy/main0、STRUCTURE_MAP_DELTA_NONE、モデル制限解除を適用。前回のJS915/native175/RN11は前回の技術実績。正式renderer・通常保存/本人再読・10/22保存/10/23共有目標の達成には数えません。

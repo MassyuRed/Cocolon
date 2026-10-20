@@ -16,6 +16,10 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**最新は入口§86／本map§65.34／weekly§5.6.14／manifest v101です。配置直後のlayer外部合成を診断だけに追加。新source CIは未実行、正式admission・通常保存は未完了です。**
+
+### §85.2〜85.3の結果（履歴）
+
 **最新は入口§85.2〜85.3／本map§65.33.1／weekly§5.6.13.1／manifest v100です。一度のsource623662b CIは全6job success、JS915/native175/RN11/PNG11成立。配置直後の自然contentsはnonnull、型・画素未確認です。実画素包含・v9正式採用・通常保存は未完了です。**
 
 ### §85 source時点の記録（履歴）
@@ -3081,3 +3085,10 @@ source623662bの6path全文と変更集合を照合し、run39502473690 attempt1
 Arabic72ptのplaced callbackでcanvas alpha/opacity0、Text opacity1、same Text/storage/layout/container/tag/canvas/token/frame、前後state一致、残期限7864.397ms、観測0.265ms。公開contentsはnonnull/class __NSCFType、scale3、needsDisplay/layout=falseです。CGImage型・画素は未確認、NOT_PERFORMEDを維持します。完成後layerとdirect wireの1px差は未解消です。
 
 primary=BLOCKER_NARROWED、v9未採用・通常保存未完了。次の未実施案は同callbackで同layerを公開renderInContextにより外部RGBA contextへ写す診断（入口§85.3）。型推定・強制更新・wire採用・表示変更はせず、前後state/期限を照合し、未成立はそのまま保存します。別bitmap表示v10は新契約の比較案として保留し、自動採用しません。結果は既存5資料のみ、追加source/CI/DB/API/runtime/deploy/main0、STRUCTURE_MAP_DELTA_NONEです。
+
+
+#### 65.34 配置直後layerの外部RGBA合成（2026-10-21、結果未実行）
+
+入口§86／weekly§5.6.14／manifest v101。source parent 4c711ab5b0f759dedf2f21d1a9893668fd4a16e3の次として、既存harnessのArabic72pt・同placed callbackへ一回の外部renderInContext合成を追加。1536×512/RGBA8/sRGB/stride6144/pad160/scale1、同じ小数位相でraw原物とalpha境界、前後state/identity/期限を採取します。元wire・oracle・175分母・8秒/native90秒/job上限は保持。不成立はそのまま記録し、強制更新・別描画・再試行・正式admissionへ変換しません。
+
+root単一writer/PIECE_WORK_ALLOWED、harness＋既存5資料の6path、製品/API/DB/依存/workflow/表示契約0、STRUCTURE_MAP_DELTA_NONE。新source CIは一度だけ、現時点未実行。前回結果の再利用を新成功へ数えず、実layer包含・v9正式採用・採用版saved/InputScreen供給・通常保存→本人履歴は未完了。原典直接読取によるContext fallbackと詳細scope/STOPは入口§86へ記録。
