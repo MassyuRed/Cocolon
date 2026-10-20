@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§86.1／current map§65.34.1／weekly§5.6.14.1／manifest v102です。source1f168d19のnative175・JS915が成功、実RN/配置直後raw画素とCI全体は進行中です。正式admission・通常保存は未完了です。**
+**最新は入口§86.2〜86.3／current map§65.34.2／weekly§5.6.14.2／manifest v103です。source1f168d19は全6job/CI success、JS915/native175/RN11成立。配置直後のlayer合成と完成PNGの範囲が一致し、directだけtop/right各1px過小と確認。包含修復・正式admission・通常保存は未完了です。**
 
 ### §85.2〜85.3の結果（履歴）
 
@@ -3097,3 +3097,12 @@ root単一writer/PIECE_WORK_ALLOWED、harness＋既存5資料の6path、製品/A
 ##### 65.34.1 途中保存：source1f168d19、native175・JS915成功
 
 全6path読戻し一致。同じrun39509902845 attempt1でnative175 unique PASS/FAIL0・3summary/launch0・main約58.300秒、JS915成功。取得済み5job元ログはmanifest v102のinterim bundleに保存。実RN/配置直後raw画素・CI全体は進行中で未確認。入口§86.1/weekly§5.6.14.1、追加source・再CI・DB/deploy/main0。STRUCTURE_MAP_DELTA_NONE、正式採用・通常保存は未完了です。
+
+
+##### 65.34.2 最終結果：同callback layer/完成PNGの境界一致、directだけ各1px過小
+
+入口§86.2〜86.3/weekly§5.6.14.2/manifest v103。source1f168d19の一度のrun39509902845は20分59秒、全6job/CI success。JS915/native175 unique PASS/FAIL0/RN11条件成立、元PNG11は旧原物とbyte一致。mixed420/あ420は4437.769/2376.193ms、Arabic204.392ms。59組、preview7 same-token fit/全Card8保存export false・旧saved v3境界を保持しました。
+
+Arabic72pt一件の配置直後raw RGBAを保存・独立走査。valid/前後同一・clean・残期限内、観測10.113ms。外部layer範囲[98.3905029296875,21.5,430.3905029296875,97.5]は完成後layerと元PNGのRGB差分に一致し、direct wireだけtop/right各1px狭いことを確認しました。物理画面/全画素/一般入力の保証へ拡張しません。原artifact65memberは同manifest final bundle54member＋immutable旧PNG11参照、全6jobログ等で復元できます。
+
+BLOCKER_NARROWED、包含判定の修復・正式採用・通常保存は未完了。次は既存inspector/Cardで非clip意図描画と実layerを扱う修復設計を確定。union v3案は契約差があり未承認、native-scaleのclip残差も未解決のため正式採用へ使いません。metadata/raw採取は繰り返さず、詳細は入口§86.3。結果5資料のみ、追加source/再CI/API/DB/deploy/main0、STRUCTURE_MAP_DELTA_NONE。

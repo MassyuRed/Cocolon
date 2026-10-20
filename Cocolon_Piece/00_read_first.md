@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§86.1／current map§65.34.1／weekly§5.6.14.1／manifest v102です。source1f168d19のnative175・JS915が成功、実RN/配置直後raw画素とCI全体は進行中です。正式admission・通常保存は未完了です。**
+**最新は入口§86.2〜86.3／current map§65.34.2／weekly§5.6.14.2／manifest v103です。source1f168d19は全6job/CI success、JS915/native175/RN11成立。配置直後のlayer合成と完成PNGの範囲が一致し、directだけtop/right各1px過小と確認。包含修復・正式admission・通常保存は未完了です。**
 
 ### §85.2〜85.3の結果（履歴）
 
@@ -2725,3 +2725,37 @@ setNeedsDisplay/displayIfNeeded/layoutIfNeeded/flush/opacity変更/新待機/再
 source1f168d19ebfbe05d80d14e0e33f41c1dbb057419／tree332c600552c5ed83d6b338abe41f28aae5e27362の全6path・blob全文を読み戻し一致確認。run39509902845 attempt1のJS915、native175 unique PASS/FAIL0、3summaryとlaunch0を確認しました。native main22:49:30.586〜最終summary22:50:28.886 UTCの約58.300秒は元90秒内です。Android source・export2jobもsuccess、export依存compileはscope skipです。実RN canvas jobは同じ一度のrunで進行中のため、raw画素・今回RN11条件・CI全体は未確認とします。
 
 取得済み5job元ログとmetadataをmanifest v102の同owner.interim_evidence_bundleへlossless保存。追加source修復・再CI・DB/deploy/main0。既存5資料の途中保存のみで、formal_admission/product_acceptance/normal_save_reopen_complete=false、v9未採用を維持します。
+
+
+### 86.2 最終結果：配置直後のlayer合成と完成PNGの範囲が一致、direct測定だけtop/right各1px過小
+
+source **1f168d19ebfbe05d80d14e0e33f41c1dbb057419**の一度の[run39509902845 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39509902845)は22:41:13〜23:02:12 UTC（20分59秒）で全6job/CI success。JS915/native175 unique PASS/FAIL0、3native summary/launch0、Android sourceが成立しました。export2jobはsuccessですが依存compileはscope skipです。追加source修復・同source再実行0。
+
+実RNはbaseline5/5・supplemental3/3・raw3/3で全11 native_canvas_valid/body_preserved=true。mixed420は4437.769ms、あ420は2376.193ms、Arabic72ptは204.392ms（最終reportまで、後続capture完了時間ではない）。全11が元8秒内です。v9 local/placed59組のtoken/Text/canvas/独立5値一致、preview7のsame-token fit=true/wrong-token=false、Card8のcanSave/canExport=false、旧saved v3のfitなし、raw3の保存権限なしを確認しました。これらを前回件数へ加算しません。
+
+新観測はArabic72pt・placed成功callbackの**一件だけ**。同Text/storage/layout/container/tag/canvas/token/frame、前後metadataとcontents identity、clean flags、残期限7876.398→7866.681msが成立。観測全体10.113ms、canvas alpha/opacity0・Text opacity1のまま、外部合成はvalidでした。固定3,145,728 bytesのraw SHA-256は `cc5e1e4c73b37e657430f31c8ef5147bd24b2175ab8c9ddc63728420e6ccbbf2`。独立Python/Pillowでalpha>0の6,285画素を走査し、native記録と同じraw境界[259,182,591,258]を得ました。
+
+| 同じTextの範囲（local座標、left/top/right/bottom） | 結果 |
+|---|---|
+| 元v2 direct wire | [98.3905029296875,22.5,429.3905029296875,97.5] |
+| 配置直後の外部layer合成 | [98.3905029296875,21.5,430.3905029296875,97.5] |
+| 同run・完成PNG後のlayer合成 | [98.3905029296875,21.5,430.3905029296875,97.5] |
+| 同run・元Card PNGのRGB差分 | [98.3905029296875,21.5,430.3905029296875,97.5] |
+
+PNG比較はこのfixtureの固定領域[350,570,750,700]の全borderがRGB[255,253,248]であることを確認した上での背景との差分です。canvas上の境界[374,600,706,676]を同じframe原点へ戻しました。raw alpha像と元Arabic Cardを目視し、元PNG11枚は以前の原物とbytes完全一致です。
+
+**この一件ではdirect測定が上端・右端を各1px狭く返し、配置直後の外部layer合成は完成後layer/元PNGの境界と一致しました。** 完成PNG後の観測だけに由来する差ではないと限定できます。directはscale1へTextKit glyphを直接描き、layerはcontentsScale3の既存内容を合成しています。backing scale/縮小補間/context設定等は候補ですが、単独原因の確定ではありません。外部合成時にprivate paintがなかったこと、内部backing bytesの直接取得、全画素一致、physical画面や全入力の保証とは扱いません。
+
+artifact12305059324のZIP SHA-256は54ec831e253b12630445ae468f5f6e116297769e51d9370114f9ef32368384aa、元65member（raw/report/xcodebuild/xcresultを含む）を確認しました。同owner.final_evidence_bundleには原artifact54member、全6job元ログ、metadata、独立解析/解析scriptをlossless保存し、元PNG11memberはimmutable旧commitの同一bytesへ明示参照で結び付けています。ZIP容器そのものの再生成一致は主張しません。
+
+途中manifestの巨大本文読戻しは2回Transport closed、contents部分読取は空でした。書込結果不明として再書込せず、既に全読できたimmutable commit4c711abの旧bundleをJSON pointerで参照する形へ縮小し、現在manifestの全文読戻し一致を回復しました。旧原物はGit履歴に保持し、削除・置換していません。今回の最終bundleを含めても全文取得できるサイズへ保ちます。
+
+primary outcomeは**BLOCKER_NARROWED**。配置直後と完成後の差を切り分ける単位は終了し、包含判定の過小評価は未修復です。実layerの非欠落保証、本文/brandingの縮小、正式renderer採用、同版saved/InputScreen供給、通常保存→本人履歴/実機は未完了。formal_admission/product_acceptance/normal_save_reopen_complete=false、v9未採用、automatic_progression=falseを維持します。結果は既存5資料だけ、製品/test/workflow追加変更・再CI・DB query/apply/本人行/業務RPC・API/runtime/env/署名/配布/deploy/main merge0、STRUCTURE_MAP_DELTA_NONEです。
+
+### 86.3 次の一作業：実描画包含の修復設計を確定する
+
+今回のnonnull/metadata/同callback raw採取は再実装・再実行しません。次は既存native inspector→Cardの修復として、**意図した非clip描画と実layerの範囲を保持し、本文/brandingの論理高さ・余白・次fontへ一体で反映する最小差分**を具体化します。画像保存やAPIを先に解禁せず、完成PNGとの完全画素一致を新しい一般受入条件へ追加しません。
+
+比較検討した案は、元v2を保持し、別候補のselected_line.v3でdirect alphaと自然layer alphaのunionをinkとして返す方法です。local unionで配置、placed unionで厳密包含と既存次font処理へ接続するため、閉じたwire/profileとink定義の変更を含むLEVEL_3未承認案です。現行v2のinkへ黙ってunionを代入しません。従来比較案の「bitmap表示v10」とは別の未採用案であり、版名や契約を確定していません。
+
+**unionだけでは、既にbackingでclipされたnative-scaleの意図した画素を回復できない可能性が残ります。** direct側がscale1なので、native-scaleの非clip参照または保守的な境界が一致する根拠も必要です。一律1px追加、固定padding、bboxの単純な倍率変換を解決としません。localの2RAFも自然contents readinessの証明ではなく、nonnull/clean/同一性/期限の実確認が必要です。現行brandingのopacity0.8をArabic診断のopacity1条件で全拒否せず、既存表示のまま扱います。これらを含む具体的な最小修復・可視差・検証/STOPを定めてから、契約差がある部分だけRule18 §11.3の判断へ戻します。未確認の案を採用・実装したとは扱いません。

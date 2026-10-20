@@ -1672,3 +1672,12 @@ BLOCKER_NARROWED、v9未採用、正式admission/通常保存/本人再読/実�
 ##### 5.6.14.1 途中checkpoint：native175成功、実RN継続中
 
 source1f168d19の全6path読戻し一致。run39509902845 attempt1でnative175 unique PASS/FAIL0/3summary/launch0（main約58.300秒）、JS915成功。5job元ログとmetadataをmanifest v102へ保存しました。実RNと配置直後raw画素、CI全体は未確認のまま。入口§86.1/map§65.34.1、追加source修復・再実行0。保存/共有の目標達成へ換算しません。
+
+
+##### 5.6.14.2 最終結果：配置直後のlayerと完成PNGが一致、測定側の過小評価を確認
+
+source1f168d19の一度のrun39509902845 attempt1は全6job/CI success（20分59秒）。JS915/native175 unique PASS/FAIL0、実RN11条件・元PNG11枚の以前原物とのbyte一致を確認。mixed420/あ420は4437.769/2376.193msで元8秒内。前回の件数と合算しません。
+
+Arabic72pt一件の同placed callbackでraw3145728bytesを保存、独立alpha走査で実layer合成と完成後layer/元Card PNGの境界が一致。direct wireだけtop/right各1px狭いことを切り分けました。前後state/identity/clean/deadlineは成立、観測10.113ms。入口§86.2〜86.3/map§65.34.2/manifest v103に原artifact65memberの復元、全6job元ログ、解析/元rawを保存しました。
+
+primary=BLOCKER_NARROWED。非clip意図描画と実layerを扱う最小修復の設計確定が次です。単純union案にもnative-scaleでclipされた画素を扱う残差があり、閉じたwire/profile変更は未承認です。現行測定修復・本文/branding縮小・正式renderer・通常保存/本人履歴/実機は未完了、10/22保存・10/23共有の達成へ換算しません。結果5資料だけ、追加source/同source再実行/API/DB/deploy/main0、STRUCTURE_MAP_DELTA_NONE。モデル制限解除を維持します。
