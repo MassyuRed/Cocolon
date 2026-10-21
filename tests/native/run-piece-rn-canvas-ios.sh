@@ -29,7 +29,17 @@ struct CocolonPieceDiagnosticTLSState {
   bool enabled;
   double rasterWidth, rasterHeight, rasterScale, rasterColumns, rasterRows;
   unsigned int rasterFailures;
+  bool comparisonAvailable, comparisonMismatch;
+  size_t comparisonX, comparisonY, comparisonColumns, comparisonRows;
+  unsigned int actualAlpha;
+  bool referenceOccupied, naturalContentsFlipped, referenceContentsFlipped;
+  bool naturalGeometryFlipped, referenceGeometryFlipped, referenceInterpolate;
+  CGRect referenceCells, actualCells, nativeExtent, logicalExtent, sourceClip;
+  CGAffineTransform observedCTM, paintCTM;
+  CGPoint phase;
+  double naturalScale, referenceScale, naturalOpacity, referenceOpacity;
 };
+static_assert(sizeof(CocolonPieceDiagnosticTLSState) <= 1024, "Bound test-only scalar observation");
 static thread_local CocolonPieceDiagnosticTLSState CocolonPieceDiagnosticTLS = {};
 static inline void CocolonPieceDiagnosticBegin(long long tag, double fontSize, NSInteger stage, BOOL enabled) {
   CocolonPieceDiagnosticTLS = {};
@@ -45,6 +55,29 @@ static inline void CocolonPieceDiagnosticRaster(CGSize size, CGFloat scale, doub
   d.rasterWidth=size.width; d.rasterHeight=size.height; d.rasterScale=scale;
   d.rasterColumns=w; d.rasterRows=h; d.rasterFailures=failures;
 }
+static inline void CocolonPieceDiagnosticReference(CGRect cells, CGRect nativeExtent, CGRect logicalExtent,
+    CGRect sourceClip, CGAffineTransform observedCTM, CGAffineTransform paintCTM, CGPoint phase,
+    CALayer *natural, CALayer *reference, CGImageRef image) {
+  auto &d=CocolonPieceDiagnosticTLS;
+  if (!d.enabled || d.comparisonAvailable) return;
+  d.comparisonAvailable=true; d.referenceCells=cells;
+  d.nativeExtent=nativeExtent; d.logicalExtent=logicalExtent; d.sourceClip=sourceClip;
+  d.observedCTM=observedCTM; d.paintCTM=paintCTM; d.phase=phase;
+  d.naturalContentsFlipped=[natural contentsAreFlipped];
+  d.referenceContentsFlipped=[reference contentsAreFlipped];
+  d.naturalGeometryFlipped=natural.geometryFlipped; d.referenceGeometryFlipped=reference.geometryFlipped;
+  d.referenceInterpolate=CGImageGetShouldInterpolate(image);
+  d.naturalScale=natural.contentsScale; d.referenceScale=reference.contentsScale;
+  d.naturalOpacity=natural.opacity; d.referenceOpacity=reference.opacity;
+}
+static inline void CocolonPieceDiagnosticDifference(size_t x, size_t y, size_t columns, size_t rows,
+    unsigned int actualAlpha, bool referenceOccupied, CGRect actualCells) {
+  auto &d=CocolonPieceDiagnosticTLS;
+  if (!d.enabled || d.comparisonMismatch) return;
+  d.comparisonMismatch=true; d.comparisonX=x; d.comparisonY=y;
+  d.comparisonColumns=columns; d.comparisonRows=rows;
+  d.actualAlpha=actualAlpha; d.referenceOccupied=referenceOccupied; d.actualCells=actualCells;
+}
 static inline void CocolonPieceDiagnosticMark(NSInteger stage) {
   if (CocolonPieceDiagnosticTLS.enabled && CocolonPieceDiagnosticTLS.firstFailureStage == 0)
     CocolonPieceDiagnosticTLS.firstFailureStage = stage;
@@ -53,6 +86,7 @@ static inline void CocolonPieceDiagnosticMark(NSInteger stage) {
 GETTER = '''
 // Present only in the disposable hosted-test app, never an RN export.
 - (NSDictionary *)cocolonPieceDiagnosticState {
+  const auto &d=CocolonPieceDiagnosticTLS;
   return @{@"tag":@(CocolonPieceDiagnosticTLS.tag),
     @"font_size":@(CocolonPieceDiagnosticTLS.fontSize),
     @"request_stage":@(CocolonPieceDiagnosticTLS.requestStage),
@@ -62,7 +96,23 @@ GETTER = '''
     @"raster_plan_failure":@{@"input_width":(isfinite(CocolonPieceDiagnosticTLS.rasterWidth) ? @(CocolonPieceDiagnosticTLS.rasterWidth) : (id)NSNull.null),
       @"input_height":(isfinite(CocolonPieceDiagnosticTLS.rasterHeight) ? @(CocolonPieceDiagnosticTLS.rasterHeight) : (id)NSNull.null), @"scale":(isfinite(CocolonPieceDiagnosticTLS.rasterScale) ? @(CocolonPieceDiagnosticTLS.rasterScale) : (id)NSNull.null),
       @"columns":(isfinite(CocolonPieceDiagnosticTLS.rasterColumns) ? @(CocolonPieceDiagnosticTLS.rasterColumns) : (id)NSNull.null), @"rows":(isfinite(CocolonPieceDiagnosticTLS.rasterRows) ? @(CocolonPieceDiagnosticTLS.rasterRows) : (id)NSNull.null),
-      @"failure_mask":@(CocolonPieceDiagnosticTLS.rasterFailures)}};
+      @"failure_mask":@(CocolonPieceDiagnosticTLS.rasterFailures)},
+    @"output_grid_comparison":!d.comparisonAvailable ? @{} : @{
+      @"available":@YES, @"first_mismatch_present":@(d.comparisonMismatch),
+      @"cell_x":@(d.comparisonX), @"cell_y":@(d.comparisonY),
+      @"columns":@(d.comparisonColumns), @"rows":@(d.comparisonRows),
+      @"actual_alpha_u8":@(d.actualAlpha), @"reference_occupied":@(d.referenceOccupied),
+      @"reference_cells":@[@(d.referenceCells.origin.x), @(d.referenceCells.origin.y), @(d.referenceCells.size.width), @(d.referenceCells.size.height)], @"actual_cells":@[@(d.actualCells.origin.x), @(d.actualCells.origin.y), @(d.actualCells.size.width), @(d.actualCells.size.height)],
+      @"native_extent":@[@(d.nativeExtent.origin.x), @(d.nativeExtent.origin.y), @(d.nativeExtent.size.width), @(d.nativeExtent.size.height)], @"logical_extent":@[@(d.logicalExtent.origin.x), @(d.logicalExtent.origin.y), @(d.logicalExtent.size.width), @(d.logicalExtent.size.height)],
+      @"source_clip":@[@(d.sourceClip.origin.x), @(d.sourceClip.origin.y), @(d.sourceClip.size.width), @(d.sourceClip.size.height)], @"phase":@[@(d.phase.x), @(d.phase.y)],
+      @"observed_ctm":@[@(d.observedCTM.a), @(d.observedCTM.b), @(d.observedCTM.c), @(d.observedCTM.d), @(d.observedCTM.tx), @(d.observedCTM.ty)], @"paint_ctm":@[@(d.paintCTM.a), @(d.paintCTM.b), @(d.paintCTM.c), @(d.paintCTM.d), @(d.paintCTM.tx), @(d.paintCTM.ty)],
+      @"natural_contents_are_flipped":@(d.naturalContentsFlipped),
+      @"reference_contents_are_flipped":@(d.referenceContentsFlipped),
+      @"natural_geometry_flipped":@(d.naturalGeometryFlipped),
+      @"reference_geometry_flipped":@(d.referenceGeometryFlipped),
+      @"reference_image_should_interpolate":@(d.referenceInterpolate),
+      @"natural_contents_scale":@(d.naturalScale), @"reference_contents_scale":@(d.referenceScale),
+      @"natural_opacity":@(d.naturalOpacity), @"reference_opacity":@(d.referenceOpacity)}};
 }
 '''
 
@@ -103,21 +153,33 @@ def build(original):
         stage['stage']=number
         value=stage['kind'].removeprefix('return_')
         replacement = f'return (CocolonPieceDiagnosticMark({number}), {value});' if stage['kind'].startswith('return_') else f'(CocolonPieceDiagnosticMark({number}), unavailable());'
+        if stage['offset'] == original.index('return NO;', original.index('if ((actual.data[y * actual.stride + x * 4 + 3] > 0)', original.index('static BOOL PieceNativeAndLayerV4Ink('))):
+            assert number == 83 and value == 'NO', 'Unexpected V4 comparator guard identity'
+            difference_plain = replacement
+            difference_observed = replacement.replace('CocolonPieceDiagnosticMark(83),', 'CocolonPieceDiagnosticDifference(x, y, lw, lh, actual.data[y * actual.stride + x * 4 + 3], (bits[index / 8] & (1 << (index % 8))) != 0, cells), CocolonPieceDiagnosticMark(83),', 1)
+            replacement = difference_observed
         edits.append((stage['offset'],stage['offset']+len(stage['original_expression']),replacement))
     assert stages and len(stages) < 512, ('Missing or unbounded guarded-return map',len(stages))
     assert len({stage['offset'] for stage in stages})==len(stages)
+    reference_anchor='      if (!PieceScanPixels(compared, withinDeadline, YES, &comparedCells)) return NO;\n'
+    assert original.count(reference_anchor)==1, 'Unexpected V4 reference scan identity'
+    reference_position=original.index(reference_anchor)+len(reference_anchor)
+    reference_observer='      CocolonPieceDiagnosticReference(comparedCells, nativeExtent, logicalExtent, sourceClip, observed, paintCTM, phase, view.layer, reference, clippedImage);\n'
+    edits.append((reference_position,reference_position,reference_observer))
     instrumented=original
     for start,end,replacement in sorted(edits,reverse=True):
         instrumented=instrumented[:start]+replacement+instrumented[end:]
     # Restore every modified return/reject expression to prove exact lexical
     # preservation before introducing declarations and reset-only statements.
-    restored=re.sub(r'return \(CocolonPieceDiagnosticMark\(\d+\), (NO|nil)\);',r'return \1;',instrumented)
+    projection=instrumented.replace(difference_observed,difference_plain,1).replace(reference_observer,'',1)
+    restored=re.sub(r'return \(CocolonPieceDiagnosticMark\(\d+\), (NO|nil)\);',r'return \1;',projection)
     restored=re.sub(r'\(CocolonPieceDiagnosticMark\(\d+\), unavailable\(\)\);','unavailable();',restored)
     raster_anchor='  double w = ceil(size.width * scale), h = ceil(size.height * scale);\n'
     raster_observer='  CocolonPieceDiagnosticRaster(size, scale, w, h);\n'
     assert instrumented.count(raster_anchor)==1
     instrumented=instrumented.replace(raster_anchor,raster_anchor+raster_observer,1)
-    restored=re.sub(r'return \(CocolonPieceDiagnosticMark\(\d+\), (NO|nil)\);',r'return \1;',instrumented)
+    projection=instrumented.replace(difference_observed,difference_plain,1).replace(reference_observer,'',1)
+    restored=re.sub(r'return \(CocolonPieceDiagnosticMark\(\d+\), (NO|nil)\);',r'return \1;',projection)
     restored=re.sub(r'\(CocolonPieceDiagnosticMark\(\d+\), unavailable\(\)\);','unavailable();',restored)
     assert restored.count(raster_observer)==1
     restored=restored.replace(raster_observer,'',1)
@@ -141,7 +203,7 @@ def build(original):
     declaration='// Read-only accessors added by the pinned RN patch; no KVC/private-ivar read.\n'
     assert instrumented.count(declaration)==1
     instrumented=instrumented.replace(declaration,PREFIX+'\n'+declaration,1)
-    return instrumented, {'preimage_sha256':EXPECTED_SHA256,'instrumented_sha256':hashlib.sha256(instrumented.encode()).hexdigest(),'markers':stages,'marker_count':len(stages),'tls_resets':3,'same_call_raster_observers':1,'inspection_versions':[3,4],'postimage_is_test_instrumentation_only':True,'unchanged_original_lexical_projection':True}
+    return instrumented, {'preimage_sha256':EXPECTED_SHA256,'instrumented_sha256':hashlib.sha256(instrumented.encode()).hexdigest(),'markers':stages,'marker_count':len(stages),'tls_resets':3,'same_call_raster_observers':1,'same_call_v4_reference_observers':1,'first_v4_mismatch_observers':1,'scalar_tls_max_bytes':1024,'inspection_versions':[3,4],'postimage_is_test_instrumentation_only':True,'unchanged_original_lexical_projection':True}
 
 
 source=Path('ios/tempCocolon/PieceTextMetrics.mm')

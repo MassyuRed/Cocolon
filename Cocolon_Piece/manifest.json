@@ -1,14 +1,14 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v124",
+  "schema_version": "cocolon.piece.workstream_manifest.v125",
   "generated_at": "2026-10-22 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v123",
-    "predecessor_head": "e4107a28e584a47288102a2cd7c8e0a6ce7659f5",
-    "carry_forward": "Preserve prior completed failure and all evidence. Direct repair remains unproven; record exact unapplied scalar-observation proposal and explicit one-time diagnostic exception boundary.",
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v124",
+    "predecessor_head": "2a0584613c3ea19df83e61c2e5fd932bf829fffd",
+    "carry_forward": "Mash explicitly approved exact prepared scalar-observation runner plus one diagnostic CI exception. Apply exact bytes only; preserve previous failure and counter; no product correction or rerun.",
     "immutable_prior_evidence_references": [
       {
         "format": "git-commit-json-pointer",
@@ -74,17 +74,17 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "8d71f8d044c75db74c1d55b2ebc90fcafd73447d",
-    "raw_sha256": "e5009677566c457882604487793af4177c0e7706d6836b7c2065c726c9826fac",
-    "utf8_bytes": 529664,
-    "chars": 314771
+    "git_blob_sha1": "9cfd1f65a1231e556f9adfa0c01d27c61799a351",
+    "raw_sha256": "879270df36b31867cf98bc06f8578d1ea4c54bbecc664908cb6a9026acc329cf",
+    "utf8_bytes": 533595,
+    "chars": 317118
   },
   "current_premise": {
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
-    "git_blob_sha1": "b5f990230bbe4c03b977cce80ee658cfdfbcc14a",
-    "raw_sha256": "ae56cf9665a17eef8ac5c504aba651e06308e435e497e1dba35d2d5cf2673cd9",
-    "utf8_bytes": 518202,
-    "chars": 302790
+    "git_blob_sha1": "db5f1547f6273066519836054aaa6cf805920fab",
+    "raw_sha256": "31ccbaec00270193d9b77be8c519b478c6190658f653252a9880d545ac75461e",
+    "utf8_bytes": 519382,
+    "chars": 303478
   },
   "product_definition": {
     "user_facing_name": "Piece",
@@ -379,12 +379,12 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "PIECE_WORK_ALLOWED",
-    "state": "OUTPUT_GRID_OCCUPANCY_CAUSE_UNRESOLVED__SCALAR_DIAGNOSTIC_EXCEPTION_DECISION_REQUIRED",
-    "current_map_section": "65.43",
-    "current_entry_section": "95",
+    "state": "OPERAND_OBSERVATION_APPROVED_SOURCE_PREPARED__ONE_CI_PENDING",
+    "current_map_section": "65.44",
+    "current_entry_section": "96",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
-    "weekly_review_section": "5.6.23",
-    "first_unfinished_work": "根拠ある直接修復は未特定。§95の既存runner scalar補足＋新test commitでCI一回について、診断専用CI追加禁止/R1.5単独診断禁止への今回限り例外をMashが判断するまで未実行。旧failure/counter1を保持し、通常保存・本人再表示未完了。",
+    "weekly_review_section": "5.6.24",
+    "first_unfinished_work": "Mash承認済み§95 runnerを新test sourceへ反映し既存CI一回だけ実行、同callのfirst mismatch/双方占有/geometryと全原物を保存して停止する。結果後の製品修復/再CI0。",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 6,
@@ -518,8 +518,9 @@
     "output_grid_unadopted": true,
     "output_grid_same_source_rerun_allowed": false,
     "operand_observation_proposal_owner": "ios_preview_output_grid_operand_observation_proposal_20261022",
-    "operand_observation_approved": false,
-    "operand_observation_ci_executions": 0
+    "operand_observation_approved": true,
+    "operand_observation_ci_executions": 0,
+    "operand_observation_owner": "ios_preview_output_grid_operand_observation_20261022"
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -573,10 +574,10 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "b5f990230bbe4c03b977cce80ee658cfdfbcc14a",
-    "raw_sha256": "ae56cf9665a17eef8ac5c504aba651e06308e435e497e1dba35d2d5cf2673cd9",
-    "utf8_bytes": 518202,
-    "chars": 302790
+    "git_blob_sha1": "db5f1547f6273066519836054aaa6cf805920fab",
+    "raw_sha256": "31ccbaec00270193d9b77be8c519b478c6190658f653252a9880d545ac75461e",
+    "utf8_bytes": 519382,
+    "chars": 303478
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -749,17 +750,18 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "OUTPUT_GRID_SCALAR_OBSERVATION_UNAPPLIED_EXCEPTION_PROPOSAL_DOCS_ONLY",
+    "classification": "APPROVED_OPERAND_OBSERVATION_RUNNER_APPLIED_SOURCE_PREPARED",
     "paths": [
+      "tests/native/run-piece-rn-canvas-ios.sh",
       "Cocolon_Piece/00_read_first.md",
       "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
       "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
       "Cocolon_Piece/manifest.json"
     ],
-    "source_commit": "87335f4ff489389a75857f90e7fb3f93367ce153",
+    "source_commit": "not yet created",
     "ci_run": 39683393855,
     "product_source_changes": 0,
-    "test_source_changes": 0,
+    "test_source_changes": 1,
     "workflow_changes": 0,
     "new_files": 0,
     "new_ci_executions": 0,
@@ -85352,7 +85354,7 @@
     }
   },
   "ios_preview_output_grid_operand_observation_proposal_20261022": {
-    "state": "PROPOSED_AWAITING_EXPLICIT_SINGLE_USE_DIAGNOSTIC_EXCEPTION",
+    "state": "APPROVED_EXACT_BYTES_APPLIED_PENDING_ONE_CI",
     "environment": "PIECE_WORK_ALLOWED",
     "model": "Codex based on GPT-6; no Pro/Ultra identity claim",
     "scope_classification": "LEVEL_3",
@@ -85485,11 +85487,11 @@
         "proposed": "This exact one-time diagnostic unit may end with observed operands only; product credit0; no permanent rule change, no automatic repair or further CI."
       }
     ],
-    "exceptions_approved": false,
+    "exceptions_approved": true,
     "future_estimated_ci_time_basis": "Previous six-job run approximately22minutes, not a guarantee.",
     "future_actions_usage": true,
     "future_new_service_purchase_recurring_fee_user_device_operations": 0,
-    "source_or_test_applied": false,
+    "source_or_test_applied": true,
     "ci_executed": false,
     "actual_product_quality_improved": false,
     "formal_admission": false,
@@ -85504,6 +85506,89 @@
       "docs_modified": 4,
       "database_or_api_effects": 0
     },
-    "current_stage": "Read-only direct-repair analysis and unapplied proposal; future diagnostic effect requires explicit exception."
+    "current_stage": "Read-only direct-repair analysis and unapplied proposal; future diagnostic effect requires explicit exception.",
+    "approval_text": "原因調査に限定し、この記録追加とCI一回を進めてよいでしょうか。→進めていいよ。",
+    "approval_owner": "Mash",
+    "approval_scope": "Exact section95 proposal at2a058461 including both one-time exceptions; no permanent rule change."
+  },
+  "ios_preview_output_grid_operand_observation_20261022": {
+    "state": "SOURCE_PREPARED_CI_NOT_YET_EXECUTED",
+    "base_head": "2a0584613c3ea19df83e61c2e5fd932bf829fffd",
+    "base_tree": "c517843c92a8bda35641da0698713b3876b9a062",
+    "api_head": "a536e50ee284785f585ac73329ef2947dca8bba9",
+    "approval_owner": "Mash",
+    "approval_text": "原因調査に限定し、この記録追加とCI一回を進めてよいでしょうか。→進めていいよ。",
+    "proposal_owner": "ios_preview_output_grid_operand_observation_proposal_20261022",
+    "proposal_commit": "2a0584613c3ea19df83e61c2e5fd932bf829fffd",
+    "environment": "PIECE_WORK_ALLOWED",
+    "classification": "LEVEL_3_EXPLICITLY_APPROVED_SINGLE_USE_EXCEPTION",
+    "execution_owner": "Karen root only",
+    "entry_section": "96",
+    "map_section": "65.44",
+    "weekly_section": "5.6.24",
+    "paths": [
+      "tests/native/run-piece-rn-canvas-ios.sh",
+      "Cocolon_Piece/00_read_first.md",
+      "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+      "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
+      "Cocolon_Piece/manifest.json"
+    ],
+    "new_tracked_files": 0,
+    "runner": {
+      "path": "tests/native/run-piece-rn-canvas-ios.sh",
+      "git_blob_sha1": "2e2f952addd57c818cf7570e29ae5b5e9fc3c9a3",
+      "raw_sha256": "07700096663e332d4c9dcec5fa09c87d0d3f8686911ea10f7bb4c720ce9d0b1a",
+      "utf8_bytes": 19974,
+      "chars": 19974
+    },
+    "native_preimage_sha256": "6250785b9d9d09e9fdf293ff78b48134995c5210ab5c37e73551027753902111",
+    "previous_source_metadata_unchanged_except_runner": true,
+    "old_run_id": 39683393855,
+    "old_run_attempt": 1,
+    "old_ci_counter_preserved": 1,
+    "ci_execution_limit": 1,
+    "ci_executions": 0,
+    "ci_slot_reserved": 1,
+    "action_reruns": 0,
+    "new_reference_observers": 1,
+    "new_first_mismatch_observers": 1,
+    "new_paint_scan_buffer_wait_retry": 0,
+    "tls_max_bytes": 1024,
+    "guard_markers": 104,
+    "tls_resets": 3,
+    "expected_native_unique": 195,
+    "old_native_expected": 175,
+    "new_v4_expected": 20,
+    "old_v3_20": "explicitly unexecuted in this profile; old failure unchanged",
+    "expected_report_names": 13,
+    "original_deadline_ms": 8000,
+    "native_alarm_seconds": 90,
+    "raster_edge_limit": 4096,
+    "raster_pixel_limit": 4194304,
+    "live_owned_raster_bytes": 33554432,
+    "source_changes_after_ci": 0,
+    "product_changes": 0,
+    "patch_changes": 0,
+    "workflow_changes": 0,
+    "test_changes": 1,
+    "local_preflight": {
+      "candidate_bytes_equal_approved_bundle": true,
+      "bundle_roundtrip_verified": true,
+      "same_native_preimage": true,
+      "whole_product_projection_equal_previously_verified_same_bytes": true,
+      "runner_tail_equal_previously_verified_same_bytes": true,
+      "bash_syntax": "passed for approved exact bytes; post-apply shell check required before push",
+      "uikit_compile_executed": false
+    },
+    "observation_success": null,
+    "bounded_work_complete": false,
+    "product_quality_credit": 0,
+    "formal_admission": false,
+    "product_acceptance": false,
+    "normal_save_reopen_complete": false,
+    "can_save": false,
+    "can_export": false,
+    "automatic_progression": false,
+    "structure_map": "STRUCTURE_MAP_DELTA_NONE"
   }
 }

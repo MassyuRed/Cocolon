@@ -3409,3 +3409,26 @@ Rule18 §11.3 LEVEL3のprior prohibition例外/新approval envelope、§11.5.6�
 今回は原典解析と具体案まで。current source/test/workflowへの反映0、CI0、製品修復0、DB/SQL/user rows/API/本番/配布/main操作0。旧§94.6の結果と原物は保持し、未採用STOPを撤回しない。PRIMARY_OUTCOME=ADMINISTRATIVE_ONLY、商品品質credit0。比較の根因を一意に狭めたとは主張せず、新たに準備した未実行案と観測不足を記録する。
 
 更新は既存資料4fileだけ。mapは構造変更ではなくpending判断への案内を同ownerへ追記したためSTRUCTURE_MAP_DELTA_NONE。07はmilestone-only正本に従い、この未実行診断案だけでは更新しない。提案の作成・記録は現在指示とRule18の既存範囲で行い、診断の適用/push/CIは上記例外の明示判断まで未実行とする。
+
+
+## 96. 2026-10-22 — Mash承認済み比較operand観測を適用（新test source準備）
+
+Mashは§95の「原因調査に限定し、この記録追加とCI一回を進めてよいでしょうか。」へ「進めていいよ。」と明示承認した。§95.3の診断専用CI禁止/R1.5単独診断禁止への今回限りの例外であり、§95の未承認表記は設計時の履歴である。同じ例外やGitHub接続許可を再質問しない。旧§93のsource87335f4f/run39683393855 attempt1・counter1・failure・未採用は保持し、新§95の一回だけを別counterで記録する。
+
+開始Cocolon PR30 head2a0584613c3ea19df83e61c2e5fd932bf829fffd/treec517843c92a8bda35641da0698713b3876b9a062、API PR3 a536e50ee284785f585ac73329ef2947dca8bba9。最新入口§95、Piece map§65.43、weekly§5.6.23とP-W1〜3、全体設計/全file地図の既確認責務・実sourceを継承し、恒久incident全文を今回も読んだ。model/environmentはPIECE_WORK_ALLOWED、別モデルPro/Ultraの成立を主張せずroot華恋を唯一のexecution/GitHub writerに固定する。
+
+### 96.1 適用した範囲と、CI前確認
+
+既存runnerのbytesは、GitHub manifestに保存・Mash承認された19,974byte/SHA256 07700096663e332d4c9dcec5fa09c87d0d3f8686911ea10f7bb4c720ce9d0b1a/blob2e2f952addd57c818cf7570e29ae5b5e9fc3c9a3と完全一致する。bundle全memberのbytes/圧縮hashを復号照合し、元runner preimageと、製品/patch/test/workflowの前回source metadataも一致確認してから適用した。元nativeはSHA256 6250785b9d9d09e9fdf293ff78b48134995c5210ab5c37e73551027753902111のままである。
+
+追加は既存test-only TLSのreference観測1と最初のstage83不一致観測1だけ。元104guard/3reset/比較if/return NO・deadline・paint/scan/pixel bufferは維持。最初のx/y・actual alpha/参照占有bitと、両scan範囲/extent/clip/CTM/内容方向等を元native callbackへ残す。first_mismatch_present=falseの0は未設定であり、差なしや透明画素を測定したとはしない。参照の生alpha・全maskやopaque自然backingの実寸は取得しない。
+
+局所bash/Python構文・元製品全文の逆射影とrunner後半一致は同一承認bytesで確認済み。適用後もhashとbash -nを確認する。UIKit compile/新operandの取得/画像/13report成立は未確認であり、新test sourceを反映した既存CI一度で実測する。JS949・旧native175・旧/新20の前回結果は履歴として維持し、今回へ成功を転用しない。前回の62call/61stage83を今回の固定分母にしない。
+
+### 96.2 一回の実行と終了
+
+今回exact pathsはrunner1＋結果資料4の計5、new tracked0。workflow/fixture/195期待値/元13names・順序・入力/saved DTO/製品/patch/20field wire/version/token/8秒/90秒/4096辺/4Mpixel/32MiBを変更しない。新source pushで既存CIを一回だけ実行し、Actions rerun0。compile・infra・記録不足でも一回で終了し、source追加修正→再CIへ進まない。
+
+診断の取得と元CIの合否を分ける。有効な同call identityのstage83 recordでavailable/first_mismatch_present、整数indices/寸法、alpha0〜255と参照boolの占有不一致、有限geometryを確認する。取得できた範囲を実数で記録し、値の相違だけで根因を断定しない。全6job元ログ・元report/取得PNG・診断map・取得可能原物を既存manifestへ保存したところで停止する。製品修復、次CI、admission、通常保存/本人再表示へ自動進行しない。
+
+現時点はtest source準備でCI未実行。STRUCTURE_MAP_DELTA_NONE（既存診断内のscalar補足だけ、製品構造不変）。DB/SQL/user rows/API/本番/配布/main操作0、商品品質credit0、formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。

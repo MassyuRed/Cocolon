@@ -3242,3 +3242,10 @@ native原境界62local拒否の61件はstage83の全logical1占有不一致、qu
 既存runner1だけにtest-only scalar観測を補う未適用案を準備。新描画/scan/pixel buffer/wait0、TLS≤1KiB、元guard104/reset3/比較式/NOと製品全文逆射影・runner後半一致を局所確認、ObjC++/CIは未実行。提案bytes/patch/レビューを既存manifestへ可逆保存。旧§93の診断専用CI追加禁止とR1.5の単独診断unit禁止に対する今回限り例外がMash判断であり、既存LEVEL2として自律実行しない。承認後は新test commitの既存CI一回のみ、元13入力/195期待/全上限を維持し、原物保存後停止。原因特定/修復/採用の保証なし。旧counter1と新counter0を分け、同SHA再実行違反が起きたとは扱わない。
 
 今回は資料4fileのみ、source/test/workflow/CI0、STRUCTURE_MAP_DELTA_NONE（実構造不変、pending判断案内のみ）。PRIMARY_OUTCOME=ADMINISTRATIVE_ONLY・商品品質credit0。P-W1通常保存/本人再表示、P-W2保存共有、P-W3実機と10/22保存目標は未完了、automatic_progression=false。
+
+
+##### 65.44 Mash承認済みoperand観測を適用、新test source準備
+
+入口§96／manifest v125。Mashが§95の原因調査限定・記録追加＋CI一回と、診断専用CI/R1.5単独診断の今回限り例外を明示承認。旧counter1/failureを保持し、新counterは別管理する。承認runner19,974byte/SHA07700096…/blob2e2f952…を保存bundleから一致確認して適用、元nativeSHA6250785…/製品/patch/fixture/workflow/期待195/元13入力/全上限は不変更。test-only参照観測1＋first mismatch観測1、104guard/3resetと元比較/NO/paint/scan/buffer維持。
+
+新sourceの既存push CI一回だけ、compile/infra/記録不足でも再実行0。旧62call/61stage83を分母へ固定せず、同call identity/整数indices/alpha-bit不一致/有限geometryを実数で判定する。全job元ログ・元report/画像/map/原物保存後停止し、製品修復・次CIへ自動進行しない。現在CI未実行、観測取得・UIKit成功は未確認。runner1＋資料4の計5path、新tracked0、STRUCTURE_MAP_DELTA_NONE。商品品質credit0、P-W1通常保存/本人再表示は未完了、automatic_progression=false。
