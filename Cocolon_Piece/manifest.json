@@ -1,14 +1,14 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v118",
-  "generated_at": "2026-10-21 JST",
+  "schema_version": "cocolon.piece.workstream_manifest.v119",
+  "generated_at": "2026-10-22 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v117",
-    "predecessor_head": "ce05a4f590e9018010916af8dc2ba3a59cc4e8d5",
-    "carry_forward": "Preserve diagnostic13 recovery separately from failed renderer; non-CGImage contents and unresolved snapshot6 recorded without source edits or rerun.",
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v118",
+    "predecessor_head": "b38989ff50070ca6d72682d353385cb2dfb5503e",
+    "carry_forward": "Preserve failed V3 and every evidence bundle. Record proposed output-grid contract V4 without implementation, adoption or CI.",
     "immutable_prior_evidence_references": [
       {
         "format": "git-commit-json-pointer",
@@ -50,17 +50,17 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "e664a3c6431a18029e08ac1019bab1bdfc4844b0",
-    "raw_sha256": "fc6d504c136da136a1218dec333c31b69731f83ba37572bd6aaa576e833fe9a2",
-    "utf8_bytes": 488441,
-    "chars": 290746
+    "git_blob_sha1": "763b01bfa9eeb9c97733370c6e43be6cf3344490",
+    "raw_sha256": "b009daf0307bad03a52d184cf099f00a74a6f9cbb262eb39f52e6e8c69494bb2",
+    "utf8_bytes": 501805,
+    "chars": 298361
   },
   "current_premise": {
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
-    "git_blob_sha1": "0b3cc819cd7c9945698056776d922d49b7b6a409",
-    "raw_sha256": "07645aa711ea3b672a2a2b1d7d2fd7c5185f372d935e10e3cd600092286b7c05",
-    "utf8_bytes": 509821,
-    "chars": 297799
+    "git_blob_sha1": "17fda9cf1ec3553731ce4d089d5ce9a28414c3f1",
+    "raw_sha256": "008c94d2a904374219424b2034c9bc3147e35d72cb10a914e77a5c15430e27a9",
+    "utf8_bytes": 511754,
+    "chars": 298884
   },
   "product_definition": {
     "user_facing_name": "Piece",
@@ -355,12 +355,12 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "PIECE_WORK_ALLOWED",
-    "state": "DETOUR_RISK_STOP__DIAGNOSTIC_PERSISTENCE_FIXED__NON_CGIMAGE_CONTENTS__RENDERER_UNADOPTED",
-    "current_map_section": "65.40.2",
-    "current_entry_section": "92.2",
+    "state": "DETOUR_RISK_STOP__OUTPUT_GRID_V4_CONTRACT_PROPOSED__MASH_DECISION_REQUIRED",
+    "current_map_section": "65.41",
+    "current_entry_section": "93",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
-    "weekly_review_section": "5.6.20.2",
-    "first_unfinished_work": "元13条件の本文画像を成立させるため、contentsをCGImageと読む前提を外した実grid/忠実性比較の直接修復を設計する。自然CTM/clip/sourceと既存layer合成・元全alpha比較を維持し、clip bboxを実backing寸法と偽装しない。先頭6Textのsnapshot不一致も同じ描画lifecycle内で扱う。追加helper/診断family/guard緩和/失敗source再実行なし。契約変更が不可避なら変更前に明示判断へ戻す。",
+    "weekly_review_section": "5.6.21",
+    "first_unfinished_work": "Mashが入口§93のB意味・nativeS→logical1比較・旧V3を保持した新候補profile195・既存20path限定実装と一度CIを明示承認した後だけ、新V4を実装する。未承認の現在は製品/検査/workflow未変更。通常保存・正式admissionへ自動進行しない。",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 6,
@@ -541,10 +541,10 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "0b3cc819cd7c9945698056776d922d49b7b6a409",
-    "raw_sha256": "07645aa711ea3b672a2a2b1d7d2fd7c5185f372d935e10e3cd600092286b7c05",
-    "utf8_bytes": 509821,
-    "chars": 297799
+    "git_blob_sha1": "17fda9cf1ec3553731ce4d089d5ce9a28414c3f1",
+    "raw_sha256": "008c94d2a904374219424b2034c9bc3147e35d72cb10a914e77a5c15430e27a9",
+    "utf8_bytes": 511754,
+    "chars": 298884
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -717,7 +717,7 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "CONTENTS_GRID_FINAL_FAILURE_AND_DIAGNOSTIC_PERSISTENCE_RESULTS_DOCS_ONLY",
+    "classification": "OUTPUT_GRID_V4_CONTRACT_PROPOSAL_DOCS_ONLY",
     "paths": [
       "Cocolon_Piece/00_read_first.md",
       "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
@@ -725,8 +725,7 @@
       "Cocolon_前提資料/07_latest_snapshot_diff.md",
       "Cocolon_Piece/manifest.json"
     ],
-    "source_commit": "14a1286e6265a1194ad83873693afd9cf6680e24",
-    "ci_run": 39565918631,
+    "base_head": "b38989ff50070ca6d72682d353385cb2dfb5503e",
     "product_source_changes": 0,
     "test_source_changes": 0,
     "workflow_changes": 0,
@@ -736,6 +735,7 @@
     "api_changes": 0,
     "live_database_query": 0,
     "live_database_apply": 0,
+    "supabase_project_list_reads": 1,
     "business_rpc": 0,
     "deploy": 0,
     "main_merge": 0,
@@ -84176,5 +84176,111 @@
       "member_ledger": "archive-member-ledger.json"
     },
     "next_unexecuted_work": "元13条件の本文画像を成立させるため、contentsをCGImageと読む前提を外した実grid/忠実性比較の直接修復を設計する。自然CTM/clip/sourceと既存layer合成・元全alpha比較を維持し、clip bboxを実backing寸法と偽装しない。先頭6Textのsnapshot不一致も同じ描画lifecycle内で扱う。追加helper/診断family/guard緩和/失敗source再実行なし。契約変更が不可避なら変更前に明示判断へ戻す。"
+  },
+  "ios_preview_output_grid_contract_proposal_20261022": {
+    "state": "PROPOSED_NOT_APPROVED_NOT_IMPLEMENTED",
+    "base_head": "b38989ff50070ca6d72682d353385cb2dfb5503e",
+    "api_head": "a536e50ee284785f585ac73329ef2947dca8bba9",
+    "entry_section": "93",
+    "map_section": "65.41",
+    "weekly_section": "5.6.21",
+    "scope_classification_for_proposed_implementation": "LEVEL_3",
+    "execution_owner": "Karen root only",
+    "environment": "PIECE_WORK_ALLOWED",
+    "profile": "piece.rn_native_preview.containment.prototype.v2",
+    "wire_version": "piece.native_selected_line.v4",
+    "wire_field_count": 20,
+    "explicit_contract_deltas": [
+      "B means independent observed-CTM-lattice intended S-scale reference plus public filter footprint, not recovered natural backing",
+      "fidelity all-cell alpha occupancy comparison grid changes from native S to output logical1",
+      "candidate execution profile changes from old175+V3_20 to old175+V4_20; V3_20 source and failures retained, not run in new profile"
+    ],
+    "not_guaranteed": [
+      "natural backing pixel dimensions or resize mapping",
+      "unclipped natural backing filter equivalence",
+      "native-S comparator detection sensitivity",
+      "success on snapshot6, quote, old alpha discrepancies, original deadlines or resources",
+      "final monotonic guarantee including wall-clock rollback"
+    ],
+    "lattice": {
+      "qx": "S*x+tx",
+      "qy": "S*y-ty",
+      "bitmap_ctm": [
+        "S",
+        0,
+        0,
+        "-S",
+        "tx-x0",
+        "H+y0+ty"
+      ],
+      "bitmap_size": [
+        "x1-x0",
+        "y1-y0"
+      ],
+      "logical_extent": [
+        "(x0-tx)/S",
+        "(y0+ty)/S",
+        "W/S",
+        "H/S"
+      ]
+    },
+    "source_paths_after_approval": [
+      "ios/tempCocolon/PieceTextMetrics.mm",
+      "patches/react-native+0.77.3.patch",
+      "features/piece/pieceRenderer.js",
+      "components/piece/PieceVisualCard.js",
+      "features/piece/pieceLayout.js",
+      "features/piece/pieceMeasuredWrap.js"
+    ],
+    "test_paths_after_approval": [
+      "tests/piece-v2-renderer.test.js",
+      "tests/piece-v2-measured-wrap.test.js",
+      "tests/native/piece-text-metrics-ios.mm",
+      "tests/native/piece-ios-react-shim.h",
+      "tests/native/piece-rn-canvas-entry.js",
+      "tests/native/piece-rn-canvas-fixtures.cjs",
+      "tests/native/piece-rn-canvas-ios.m",
+      "tests/native/run-piece-rn-canvas-ios.sh"
+    ],
+    "workflow_path_after_approval": ".github/workflows/piece-rn-contracts.yml",
+    "documentation_paths": [
+      "Cocolon_Piece/00_read_first.md",
+      "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+      "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
+      "Cocolon_Piece/manifest.json"
+    ],
+    "total_paths_after_approval": 20,
+    "new_tracked_files": 0,
+    "native_candidate_checks": {
+      "legacy_unchanged": 175,
+      "new_v4": 20,
+      "total": 195,
+      "old_v3_20": "retained unchanged, not executed in proposed new profile, previous 10 failures preserved"
+    },
+    "real_rn_conditions": 13,
+    "original_case_deadline_ms": 8000,
+    "original_native_deadline_seconds": 90,
+    "max_raster_edge_pixels": 4096,
+    "max_raster_pixels": 4194304,
+    "max_concurrently_owned_raster_bytes": 33554432,
+    "implementation_started": false,
+    "ci_executions": 0,
+    "same_source_reruns": 0,
+    "independent_read_only_reviews": 2,
+    "technical_verdict": "LEVEL3_CONTRACT_DECISION_REQUIRED_BEFORE_IMPLEMENTATION",
+    "prior_source": "14a1286e6265a1194ad83873693afd9cf6680e24",
+    "prior_run": 39565918631,
+    "prior_conclusion": "failure",
+    "prior_v3_failed": 10,
+    "formal_admission": false,
+    "product_acceptance": false,
+    "normal_save_reopen_complete": false,
+    "can_save": false,
+    "can_export": false,
+    "automatic_progression": false,
+    "primary_outcome": "BLOCKER_NARROWED",
+    "product_credit": 0,
+    "originals_verified_materialized_files": 75
   }
 }

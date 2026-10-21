@@ -3196,3 +3196,12 @@ CURRENT_RULES R10.2の「同じblocker familyで2回連続STOP」に従い、DET
 #### 65.40.2 最終結果：記録欠落修復、CGImage前提は実RN不成立
 
 入口§92.2／manifest v118。source14a1286e、一度CI39565918631 attempt1はfailure（21分31秒）。JS933/旧native175/実compile成功、新v3 10PASS/10FAIL、native計185unique PASS/10FAIL・43.604826秒。診断は元13names同順/重複0/strict JSON保存へ修復、null4値＋invalidを記録、保存エラー/90秒expectation timeout失敗なし。新preview8 unavailable、保存済み1のみnative_checked、raw3＋trap measurement_unavailableで製品未合格。62native拒否＝snapshot複合guard6件(stage20、項目未識別)＋非CGImage contents56件(stage23、実型未記録)。寸法/raster/alphaへ未到達、quote4件もstage23、旧alpha7/quote制約は未解決。5PNGは前回byte/全RGBA一致。保存済みは本文5行＋branding1Text＝6Text（旧91.4本文6行の誤記訂正）。全6job原ログ/元JSON/xcresult/5PNG等17memberと元ZIP1010memberを保全。候補未採用DETOUR_RISK_STOP、次はCGImage前提を除く実grid/忠実性比較の直接設計（未実施、元guard/資源/分母/期限維持）。source追加変更/同source再実行0、正式admission/通常保存未完了、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+
+#### 65.41 2026-10-22 — backing実寸依存を除く別候補の比較契約案（未実装）
+
+入口§93／manifest v119。§92.2の次作業である直接修復設計を進め、opaque自然contentsの実寸取得を前提にしない別preview containment.prototype.v2／selected_line.v4案を具体化した。自然RN Textは維持し、Bを観測CTM由来の独立S倍意図描画＋公開filter参照、Cを自然layer実合成と分離。A/B/C厳密unionを維持する一方、忠実性比較をnativeSから出力logical1の全alpha占有一致へ変える。自然backingの非clip写像同値性・nativeSと同じ検出感度は保証しない。旧v3/containment.v1は保持し、新しい品質／comparator差分としてRule18§11.3 LEVEL3の判断前に実装しない。
+
+新候補profileは旧175＋別V4 20＝195。旧V3 20本体/期待値/10FAIL原物を保存し、このprofileでは旧V3 20未実行と明記する。分母不変・旧失敗修復済みとは呼ばず、workflow/test選択変更も承認差分。元13条件、8秒/90秒、4096/4Mpixel/同時保有32MiB、source/token、本文/段落/font順は維持。snapshot6は原因未確定のまま同じ自然draw前後の対応を確認し、不一致は拒否。新source一度CI/未達STOP、追加診断CI/同source再実行0。既存20path（製品6/検査8/workflow1/資料5）、新tracked file0、通常保存/正式admissionへの自動進行0。詳細な式・境界・未保証・検証計画は入口§93。
+
+今回実施は資料5fileのみ、製品/test/workflow変更・新CI・DB書込み0。Supabase project一覧readでACTIVE_HEALTHY。旧run39565918631のfailure/旧v3 10FAIL/未採用DETOUR_RISK_STOPを維持。候補未承認、STRUCTURE_MAP_DELTA_NONE、formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。通常保存→本人履歴/詳細は未完了。

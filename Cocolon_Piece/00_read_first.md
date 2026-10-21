@@ -3173,3 +3173,77 @@ PNGは保存済み1＋raw3＋trapの5枚で、すべて前回原物とbyte/全RG
 PRIMARY_OUTCOME=BLOCKER_NARROWED、bounded_work_complete=true、validation_success=false、renderer_unadopted=true、DETOUR_RISK_STOP。追加開発・再試行を停止し、今回の失敗を新authority/helper familyへ連鎖させません。次の未実施exact1は、contentsをCGImageとして読める前提を外した実grid/忠実性比較の直接修復を設計すること。自然CTM/clip/sourceと既存layer合成・元全alpha比較を維持し、clip bboxを実backing寸法と偽装しません。先頭6Textのsnapshot整合も同じ描画lifecycle内で扱い、契約/comparator変更が不可避なら変更前に明示判断へ戻します。今回この追加設計/実装/CIは未実施です。
 
 正式renderer admission、containment版saved reader、InputScreen正式isSaveAdmitted供給、実Auth/端末の通常保存→同owner再表示は未完了。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。API/DB/RPC/flags/env/依存/workflow/deploy/main変更0、STRUCTURE_MAP_DELTA_NONE。
+
+
+## 93. 2026-10-22 — opaque backingに依存しない出力座標の比較案（設計済み・実装前）
+
+### 93.1 今回の結果と、承認を要する差分
+
+§92.2の次作業を進め、自然contentsがCGImageであることを前提としない比較案を具体化した。現在の製品は変えていない。旧source14a1286e／run39565918631 attempt1のfailure、185unique PASS／10FAIL、13report保存修復、候補未採用／DETOUR_RISK_STOPを維持する。今回新たな描画・CI・pytest／JS検査・DB書込みは実行していない。
+
+公開APIと実sourceの照合では、opaqueなUIView backingの実寸を必ず得られる根拠を確認できなかった。自然contextのbitmap照会、contentsのCGImage cast、clip/boundsを実backing寸法へ読み替える三つの前提を次候補には使わない。これは公開API全般の不可能性証明ではなく、今回確認した範囲でLEVEL2修復の根拠を示せないという判断である。計測用画像の実寸が取得できても、自然backingの実寸とは限らない。
+
+推奨exact1は、自然なRN Text表示を維持した別preview `piece.rn_native_preview.containment.prototype.v2`／別inspection `piece.native_selected_line.v4`。比較の座標を出力画像と同じlogical1へ変更する。既存v2/v9と未採用containment.prototype.v1／selected_line.v3は上書きしない。bitmapを製品表示へ置換しない。
+
+| 判断項目 | 旧v3で要求していたもの | 新v4候補で要求するもの |
+|---|---|---|
+| B成分 | 自然backingの格子・backing→bounds写像を非clip側へ延長した参照 | 観測CTMのpixel latticeで作る独立S倍意図描画と、その公開filter参照範囲 |
+| C成分 | 自然Text layerの実合成範囲 | 同じ自然Text layerの実合成範囲を維持 |
+| A成分とunion | 旧scale1 direct＋B＋Cの4edge min/max | 同じ3成分の厳密unionを維持 |
+| 忠実性比較 | 元nativeS比較canvasで全画素alpha>0の占有一致 | 同phaseの出力logical1比較canvasで全画素alpha>0の占有一致 |
+| 一致が示す範囲 | 自然格子を再現したという前提を含む | 観測したclipped出力の占有対応。非clip外側や元backingのfilter写像の同値性は保証しない |
+| 検査profile | 旧175＋旧v3の20を成功要求 | 新候補専用profileで旧175＋新v4の20を成功要求。旧v3の20は今回未実行と明記 |
+
+**比較解像度とBの意味は品質／比較契約の変更である。logical1一致をnativeS一致と同等とは扱わない。** nativeSにだけ残る差がlogical1で区別できなくなる可能性がある一方、Bの全native cellの外向き射影とCの実像包含は両方保持する。Rule18 §11.3 LEVEL3および§11.5.6により、製品・検査・workflow実装はMashの明示判断前には行わない。既存の「残件を進めて」、モデル制限解除、旧§87/88承認をこの差分への承認へ読み替えない。
+
+### 93.2 寸法推定を使わない具体的な描画・比較
+
+1. 同じ自然drawRect内で得たCTM／clip／storage／全文属性／bounds／content frame／scaleを使う。許容するCTMは `(S,0,0,-S,tx,ty)`、有限S>0。opaque contentsは読取同一性の参照としてだけ保持し、CFGetTypeID／CGImage寸法照会をしない。nil、dirty、plain不成立、未知の変換・filter・背景等は既存と同じく拒否する。
+2. 背面画像の高さHnaturalを使わず、top-downの独立格子 `qx=S*x+tx, qy=S*y-ty` を定義する。TextKit ink±2fontをこの格子へ写してfloor/ceilした `(x0,y0,x1,y1)` の差だけをapp所有bitmapのW/Hとする。W/Hは独立参照の実寸であり、自然backingの実寸ではない。
+3. app所有contextのCTMは `(S,0,0,-S,tx-x0,H+y0+ty)`。同じshared paintの全glyph rangeを描き、全alpha>0を走査する。pixel cellを逆写像して出力logical1へ外向き射影する。参照画像は `(x0-tx)/S,(y0+ty)/S,W/S,H/S` の宣言したlogical extentへpublic CALayerで合成し、元の公開filter／opacity条件を反映した範囲もBへunionする。未知の自然backing→bounds縮尺を復元したとは呼ばない。
+4. 忠実性用のclipped参照は同じ独立格子／shared paintに観測clipとview.boundsのintersectionを適用する。同じphase・透明背景・logical1 canvasへ、この参照と自然view.layerをそれぞれ合成し、比較領域の**全cell**でalpha>0の真偽が一致することを要求する。差分率、alpha許容幅、固定1pxの追加、差分の無視は導入しない。自然layer自体の全alpha範囲は独立にCとして走査する。
+5. 比較／C用extentはview.boundsと宣言した参照extentのunionを含み、元のfilter-support scratchを保持する。空・外縁alpha・非有限値・資源不足は拒否し、領域を拡大して再描画しない。A/B/Cの4edgeを厳密min/maxで計算し、JS側でも再計算する。20fieldは維持するがversionをv4に分け、v3 tokenや旧local結果を受理しない。
+6. §92.2の先頭6Textのsnapshot複合不一致は原因未確定のまま扱う。自然drawの前後に同じsource／glyph range／属性／geometryが対応することを既存patchとinspectorで確認し、独立CTLine計測は保存したimmutable属性snapshotを使う。paint後snapshotへ無条件に移して正当化せず、自然paintがどのsnapshotに対応したか確認できなければunavailable。項目別の不一致は同じ一回のharness結果へ残し、診断専用CIは追加しない。
+
+CGContextのCTMから独立座標へ写せることと、自然backingの実寸／resamplingが同じことは別である。上記の式は独立参照の定義であり、Appleがこの方法の自然RN忠実性を保証しているという主張ではない。logical1で不一致が残る可能性、新候補でもquote／snapshot／時間／資源が未達になる可能性を保持する。
+
+### 93.3 元の上限・同一性・試験選択
+
+- 本文・空白・段落・離散font順・B9選択・branding28/40/opacity0.8を維持する。新しい背景・入力例の削除・本文短縮・成功するサイズへの固定はしない。
+- 元8秒の起点とdeadline object、native90秒、1辺4096・4,194,304pixel・code-owned同時保有32MiBを維持する。新v4のprovider予約はinspectionをまたいで実際の最終解放まで共有し、per-callの新budgetだけで合算を保証したとはしない。direct成分の同時保有も確認する。CA内部cacheは計測したと主張しない。
+- 既知のwall-clock巻戻りを含む最終monotonic保証は未証明のまま残す。最終fitまで元の経過時間を照合し、単なるwall expiry内や早いunavailableを8秒内成功としない。実装前にこの上限を保つ根拠が閉じなければ、緩和せず未実装STOPとする。
+- 同mount／本人／source／recipe／測定世代／自然contents同一性／local→placed token／一度消費を維持する。新v4は旧v3結果と混在させず、保存済み旧版を新表示に読み替えない。強制layout/display/flush、追加wait、同source再実行、追加helper/診断familyは行わない。
+- JS既存933件を保持し、新v4 schema／version分離／union／source／token／期限／全pixel比較の条件を追加する。旧175のnative期待値と旧runV3Checks本体・20期待値は保存する。**新候補profileの195＝旧175＋新v4の20**であり、旧v3の20を新成功へ再ラベルしない。旧v3の20はこのprofileでは未実行、旧10FAILと原物はそのまま残す。workflowのV3→V4対象選択とsummary変更も今回の明示判断範囲とする。
+- 新v4の20項目は旧候補の目的に対応する独立した検査とし、S2/S3・正負小数phase・Arabic/ligature/emoji・opacity0.8・clip trap・snapshot/版間token・nil/dirty/unsupported・資源/整数overflow・外縁/空・期限/一度消費を含める。拒否想定は当該fault経路へ到達した証拠を要求し、前段の別拒否を成功へ付け替えない。
+- 実RNは元13namesを同順で保持する。旧savedは元版のまま、対象preview/raw/trapは新候補へ明示分岐する。全reportのstrict JSON、本文保持、全row/brandingのlocal/placed・独立5値・token/fit・PNG・時間を確認する。controlled clip trapはdirectだけならfitでもBがoverflowを捉えることを要求する。新previewのunavailableを成功へ加算しない。
+
+### 93.4 対象path・実施上限・完了条件
+
+承認を求める実装範囲は**既存20path（製品6・検査8・workflow1・資料5）**だけ、新tracked file0。§87の19pathに既存runner `tests/native/run-piece-rn-canvas-ios.sh` を加える差分も明示する。runnerは既存test-only観測を新v4分岐へ対応させるためであり、製品へ診断機構を追加しない。
+
+| 区分 | exact paths |
+|---|---|
+| 製品6 | ios/tempCocolon/PieceTextMetrics.mm、patches/react-native+0.77.3.patch、features/piece/pieceRenderer.js、components/piece/PieceVisualCard.js、features/piece/pieceLayout.js、features/piece/pieceMeasuredWrap.js |
+| 検査8 | tests/piece-v2-renderer.test.js、tests/piece-v2-measured-wrap.test.js、tests/native/piece-text-metrics-ios.mm、tests/native/piece-ios-react-shim.h、tests/native/piece-rn-canvas-entry.js、tests/native/piece-rn-canvas-fixtures.cjs、tests/native/piece-rn-canvas-ios.m、tests/native/run-piece-rn-canvas-ios.sh |
+| workflow1 | .github/workflows/piece-rn-contracts.yml |
+| 資料5 | Cocolon_Piece/00_read_first.md、Cocolon_Piece/manifest.json、Cocolon_前提資料/current_structure/02_piece_current_structure.md、Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md、Cocolon_前提資料/07_latest_snapshot_diff.md |
+
+承認後に根拠・実装・local検証が成立した新sourceだけをGitHubへ反映し、既存CIを一度だけ実行する。全結果・原report・PNG・元ログを既存manifestへ保存して終了する。nativeの新profile195、実RN13の対応条件、全alpha比較、同一性、元上限のどれかが未達なら候補未採用STOP、same-source rerun0。追加購入・dependency・service・定常費用・Mash端末操作0。既存Actions一回の実使用量は発生し、前回21分31秒は参考であって所要保証ではない。
+
+新候補が成立しても正式renderer admission、containment版saved reader、InputScreen正式isSaveAdmitted供給、実Auth/APIの通常保存→同owner再表示、写真保存/共有、物理実機の受入れへ自動進行しない。これらは未完了のまま保持する。今回の提案をP-W1完成や10/22保存目標の達成に数えない。
+
+### 93.5 今回実施した確認と保存
+
+開始Cocolon PR30 head b38989ff50070ca6d72682d353385cb2dfb5503e、API PR3 head a536e50ee284785f585ac73329ef2947dca8bba9を確認。添付の前回作業内容、Karen-Diary指定入口と2memory、作業規則、恒久incident全文、全体設計01と全file地図01A/B/Cの全体flow・責務・Piece接続、共通current map／Piece map、最新weekly20261017のP-W1〜P-W3と最新結果、該当source/testを確認した。巨大資料全体や全repo実ファイルの逐語読了は主張しない。GitHub由来の対象75ファイルはmaterialized bytesとblob SHAを照合した。
+
+System Context prepareはtask_profiles.json未取得で失敗し、technical entryの原典直接read fallbackを使用した。生成contextは更新・採用していない。Supabaseはproject一覧readのみでcocolon-projectのACTIVE_HEALTHYを確認。user rows／業務RPC／SQL／migration／本番設定操作0。
+
+独立read-only review2担当が、比較gridとB意味の変更がLEVEL3であること、旧v3の検査を新v4成功と混同しないprofileの必要性を指摘し、最終案へ反映した。同一環境の補助reviewであり、別モデルPro/Ultraの審査を捏造しない。root華恋が最終判断・唯一のGitHub writer。モデル制限解除を適用する。
+
+今回の変更は既存資料5fileのみ。提案は未承認・製品/test/workflow実装0・CI0、STRUCTURE_MAP_DELTA_NONE（現行構造を変えず、別候補はproposedに分離）。PRIMARY_OUTCOME=BLOCKER_NARROWEDは『既存契約内で直るという未立証前提を外し、必要な比較契約差を特定した』範囲だけで、商品品質credit0。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。
+
+公開仕様の原典（2026-10-22確認、設計根拠と推論の区別を上記に明示）：
+- Apple CALayer contents: https://developer.apple.com/documentation/quartzcore/calayer/contents
+- Apple CALayer render(in:): https://developer.apple.com/documentation/quartzcore/calayer/render(in:)
+- Apple Graphics Contexts: https://developer.apple.com/library/archive/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_context/dq_context.html
+- Apple Quartz 2D Coordinate Systems: https://developer.apple.com/library/archive/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_overview/dq_overview.html
