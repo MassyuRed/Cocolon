@@ -17,7 +17,7 @@ import json
 from pathlib import Path
 import re
 
-EXPECTED_SHA256 = "f74791da358e1c8f2f2ba6db1ec9aeaccc33d79ae84ee3abb57d506981d3ba23"
+EXPECTED_SHA256 = "6250785b9d9d09e9fdf293ff78b48134995c5210ab5c37e73551027753902111"
 PREFIX = '''
 // Hosted-test-only scalar diagnostic, injected in this disposable checkout.
 // No wire field, guard expression, return value, clock or paint is changed.
@@ -70,12 +70,17 @@ GETTER = '''
 def build(original):
     assert hashlib.sha256(original.encode()).hexdigest() == EXPECTED_SHA256, 'Unexpected product preimage'
     assert 'CocolonPieceDiagnosticTLS' not in original
-    method_marker = '- (void)inspectSnapshot:(NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize\n          selectedLine:(BOOL)selectedLine pixelRequest:(NSDictionary *)pixelRequest containment:(BOOL)containment\n          resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject\n'
-    method_start = original.index(method_marker)
+    # Locate the deepest versioned method, not a stale source line number.
+    # The BOOL compatibility wrapper remains uninstrumented and unchanged.
+    method_match = re.search(r'(?m)^- \(void\)inspectSnapshot:\(NSNumber \*\)tag[^;{}]*containmentVersion:\(NSUInteger\)containmentVersion[^;{}]*\n\{', original)
+    assert method_match, 'Missing explicit V3/V4 snapshot implementation'
+    method_marker = method_match.group(0)[:-1]
+    method_start = method_match.start()
+
     spans = [
       ('shared_canvas_frame', original.index('static BOOL PiecePixelCanvasFrame('), original.index('// Pure v2 raster primitive.')),
       ('shared_direct_paint', original.index('static NSArray *PieceDirectPixelInk('), original.index('static NSDictionary *PieceSelectedPixels(')),
-      ('v3_helpers', original.index('struct PieceRasterBudget {'), original.index('@implementation PieceTextMetrics')),
+      ('v3_v4_helpers', original.index('struct PieceRasterBudget {'), original.index('@implementation PieceTextMetrics')),
     ]
     edits = []
     stages = []
@@ -90,7 +95,7 @@ def build(original):
     method = original[method_start:]
     for match in re.finditer(r'\bunavailable\(\);', method):
         position = method_start + match.start()
-        stages.append({'offset':position,'span':'v3_snapshot_method','kind':'unavailable',
+        stages.append({'offset':position,'span':'versioned_snapshot_method','kind':'unavailable',
           'original_line':original.count('\n',0,position)+1,
           'original_expression':match.group(0)})
     stages.sort(key=lambda entry:entry['offset'])
@@ -99,7 +104,8 @@ def build(original):
         value=stage['kind'].removeprefix('return_')
         replacement = f'return (CocolonPieceDiagnosticMark({number}), {value});' if stage['kind'].startswith('return_') else f'(CocolonPieceDiagnosticMark({number}), unavailable());'
         edits.append((stage['offset'],stage['offset']+len(stage['original_expression']),replacement))
-    assert len(stages)==65, ('Expected exact65 guarded-return/rejection locations',len(stages))
+    assert stages and len(stages) < 512, ('Missing or unbounded guarded-return map',len(stages))
+    assert len({stage['offset'] for stage in stages})==len(stages)
     instrumented=original
     for start,end,replacement in sorted(edits,reverse=True):
         instrumented=instrumented[:start]+replacement+instrumented[end:]
@@ -116,7 +122,7 @@ def build(original):
     assert restored.count(raster_observer)==1
     restored=restored.replace(raster_observer,'',1)
     assert restored==original, 'Instrumentation changed original tokens'
-    begin='  CocolonPieceDiagnosticBegin(tag.longLongValue, fontSize, [pixelRequest[@"stage"] isEqual:@"local"] ? 1 : ([pixelRequest[@"stage"] isEqual:@"placed"] ? 2 : 0), containment);\n'
+    begin='  CocolonPieceDiagnosticBegin(tag.longLongValue, fontSize, [pixelRequest[@"stage"] isEqual:@"local"] ? 1 : ([pixelRequest[@"stage"] isEqual:@"placed"] ? 2 : 0), containmentVersion == 3 || containmentVersion == 4);\n'
     # All block callbacks observe TLS on the actual executing thread. Reset in
     # the original method covers immediate input rejection; reset in each of
     # its two UIBlocks covers the async UIManager-queue -> main-thread hop.
@@ -135,16 +141,16 @@ def build(original):
     declaration='// Read-only accessors added by the pinned RN patch; no KVC/private-ivar read.\n'
     assert instrumented.count(declaration)==1
     instrumented=instrumented.replace(declaration,PREFIX+'\n'+declaration,1)
-    return instrumented, {'preimage_sha256':EXPECTED_SHA256,'instrumented_sha256':hashlib.sha256(instrumented.encode()).hexdigest(),'markers':stages,'marker_count':len(stages),'tls_resets':3,'same_call_raster_observers':1,'postimage_is_test_instrumentation_only':True,'unchanged_original_lexical_projection':True}
+    return instrumented, {'preimage_sha256':EXPECTED_SHA256,'instrumented_sha256':hashlib.sha256(instrumented.encode()).hexdigest(),'markers':stages,'marker_count':len(stages),'tls_resets':3,'same_call_raster_observers':1,'inspection_versions':[3,4],'postimage_is_test_instrumentation_only':True,'unchanged_original_lexical_projection':True}
 
 
 source=Path('ios/tempCocolon/PieceTextMetrics.mm')
 instrumented, metadata=build(source.read_text())
 source.write_text(instrumented)
 Path(sys.argv[1]).write_text(json.dumps(metadata,indent=2)+'\n')
-print('PIECE_V3_DIAGNOSTIC_MAP '+json.dumps(metadata,separators=(',',':')))
+print('PIECE_V4_DIAGNOSTIC_MAP '+json.dumps(metadata,separators=(',',':')))
 PIECE_DIAGNOSTIC_PY
-node tests/native/piece-rn-canvas-fixtures.cjs > tests/native/piece-rn-canvas-fixtures.json
+PIECE_RN_CANVAS_PROFILE=output-grid-v4 node tests/native/piece-rn-canvas-fixtures.cjs > tests/native/piece-rn-canvas-fixtures.json
 cat > tests/native/piece-rn-no-transport.js <<'JS'
 export const apiFetch = () => { throw new Error('TRANSPORT_FORBIDDEN_IN_RENDER_TEST'); };
 export const getAccessToken = () => { throw new Error('AUTH_FORBIDDEN_IN_RENDER_TEST'); };
@@ -196,6 +202,7 @@ tests = p.targets.find { |t| t.name == 'tempCocolonTests' }
 # in the test binary (including RCTBridge/RCTTextView/RCTUIManager).
 tests.build_configurations.each do |config|
   config.build_settings['OTHER_LDFLAGS'] = ['-lc++']
+  config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] = ['$(inherited)', 'PIECE_OUTPUT_GRID_V4=1']
 end
 ref = p.main_group.new_file('../tests/native/piece-rn-canvas-ios.m')
 tests.source_build_phase.add_file_reference(ref)

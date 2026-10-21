@@ -2,7 +2,7 @@
  * Results are local drawing evidence, never server fit/save/export authority.
  */
 import { NativeModules, Platform, findNodeHandle } from 'react-native';
-import { PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION } from './pieceLayout';
+import { PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION } from './pieceLayout';
 
 const pieceNoStart = new Set(Array.from('、。，．,？！!?：；:;)]）］｝】〉》」』〕〗〙〛ー々ぁぃぅぇぉっゃゅょァィゥェォッャュョ'));
 const pieceNoEnd = new Set(Array.from('([（［｛【〈《「『〔〖〘〚'));
@@ -169,6 +169,70 @@ export async function inspectPieceSelectedLineV3(node, expected) {
   }); } catch { throw measurementError(); }
   if (Date.now() >= expected.expiresAt) throw measurementError();
   return readPieceSelectedLineV3Inspection(value, { ...expected, tag, canvasTag, platform: Platform.OS });
+}
+
+// Only containment v2 uses this original wall/monotonic deadline. The
+// native wire remains four fields; a wall-clock rollback cannot extend JS
+// adoption or final fit beyond the same eight-second performance interval.
+export function pieceContainmentV2DeadlineCurrent(deadline) {
+  try {
+    const wall = Date.now(), monotonic = globalThis.performance?.now();
+    return deadline?.profile === PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION &&
+      finite(deadline.startedAt) && finite(deadline.expiresAt) &&
+      deadline.expiresAt - deadline.startedAt === 8000 &&
+      finite(deadline.monotonicStartedAt) && deadline.monotonicStartedAt >= 0 &&
+      finite(wall) && wall < deadline.expiresAt && finite(monotonic) &&
+      monotonic >= deadline.monotonicStartedAt && monotonic - deadline.monotonicStartedAt < 8000;
+  } catch { return false; }
+}
+
+// Containment v2 has a distinct decoder, bridge entry and local token domain.
+// Its native component is the independent S-scale intent defined in section93;
+// logical1 fidelity is not promoted to the old nativeS fidelity requirement.
+export function readPieceSelectedLineV4Inspection(value, expected) {
+  const fields = ['version', 'platform', 'font_size', 'width', 'height', 'utf16_length', 'boundaries',
+    'line_ends', 'ink', 'glyph_check', 'independent_metrics_f64le', 'stage', 'tag', 'canvas_tag',
+    'canvas_frame', 'content_frame', 'raster_scale', 'snapshot_token', 'native_raster_scale', 'component_inks'];
+  const inkRect = rect => Array.isArray(rect) && rect.length === 4 && rect.every(finite) &&
+    rect[2] > rect[0] && rect[3] > rect[1];
+  if (!value || Object.keys(value).sort().join() !== fields.sort().join() ||
+      value.version !== 'piece.native_selected_line.v4' || !finite(value.native_raster_scale) ||
+      value.native_raster_scale <= 0 || !value.component_inks || Array.isArray(value.component_inks) ||
+      Object.keys(value.component_inks).sort().join() !== 'direct,layer,native' ||
+      !['direct', 'native', 'layer'].every(key => inkRect(value.component_inks[key])) ||
+      !inkRect(value.ink)) throw measurementError();
+  const components = ['direct', 'native', 'layer'].map(key => value.component_inks[key]);
+  const union = [Math.min(...components.map(rect => rect[0])), Math.min(...components.map(rect => rect[1])),
+    Math.max(...components.map(rect => rect[2])), Math.max(...components.map(rect => rect[3]))];
+  if (union.some((n, i) => !Object.is(n, value.ink[i])) ||
+      expected.stage === 'placed' && (expected.local?.version !== 'piece.native_selected_line.v4' ||
+        expected.local.stage !== 'local' || value.native_raster_scale !== expected.local.nativeRasterScale)) throw measurementError();
+  const { native_raster_scale: nativeRasterScale, component_inks: componentInks, ...v2Evidence } = value;
+  // V2's closed geometry, identity, independent metrics and one-line checks
+  // apply unchanged. The bridge entry and retained result version stay V4.
+  const inspected = readPieceSelectedLineV2Inspection({ ...v2Evidence, version: 'piece.native_selected_line.v2' }, expected);
+  return Object.freeze({ ...inspected, version: value.version, nativeRasterScale,
+    componentInks: Object.freeze(Object.fromEntries(['direct', 'native', 'layer'].map(key =>
+      [key, Object.freeze([...componentInks[key]])]))) });
+}
+
+export async function inspectPieceSelectedLineV4(node, expected) {
+  const tag = findNodeHandle(node), canvasTag = findNodeHandle(expected.canvasNode), module = NativeModules.PieceTextMetrics;
+  if (Platform.OS !== 'ios' || !Number.isInteger(tag) || tag <= 0 || !Number.isInteger(canvasTag) ||
+      canvasTag <= 0 || tag === canvasTag || !finite(expected.expiresAt) || expected.deadline?.expiresAt !== expected.expiresAt ||
+      !pieceContainmentV2DeadlineCurrent(expected.deadline) ||
+      !['local', 'placed'].includes(expected.stage) || typeof module?.inspectSelectedLineV4 !== 'function' ||
+      expected.stage === 'placed' && (expected.local?.version !== 'piece.native_selected_line.v4' ||
+        expected.local.stage !== 'local')) throw measurementError();
+  let value;
+  try { value = await module.inspectSelectedLineV4(tag, expected.text, expected.fontSize, {
+    stage: expected.stage, canvas_tag: canvasTag, expires_at_ms: expected.expiresAt,
+    snapshot_token: expected.stage === 'placed' ? expected.local.snapshotToken : null,
+  }); } catch { throw measurementError(); }
+  if (!pieceContainmentV2DeadlineCurrent(expected.deadline)) throw measurementError();
+  const inspected = readPieceSelectedLineV4Inspection(value, { ...expected, tag, canvasTag, platform: Platform.OS });
+  if (!pieceContainmentV2DeadlineCurrent(expected.deadline)) throw measurementError();
+  return inspected;
 }
 
 // Candidates are shaped with an immutable snapshot of the mounted Text's

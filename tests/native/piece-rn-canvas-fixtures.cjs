@@ -11,6 +11,9 @@ vm.runInContext(existing.split('function deferredPieceResponse')[0] + '\nglobalT
 const canonical = x => Array.isArray(x) ? x.map(canonical) : x && typeof x === 'object'
   ? Object.fromEntries(Object.keys(x).sort().map(k => [k, canonical(x[k])])) : x;
 const digest = x => crypto.createHash('sha256').update(x).digest('hex');
+// An explicit candidate profile selects V4; the default retains old V3 fixtures.
+const outputGridV4 = process.env.PIECE_RN_CANVAS_PROFILE === 'output-grid-v4';
+const containmentProfile = outputGridV4 ? 'piece.rn_native_preview.containment.prototype.v2' : 'piece.rn_native_preview.containment.prototype.v1';
 const cases = [
   { name: 'essay_paragraphs', format: 'short_essay', ratio: '4:5', theme: 'soft_paper', brand: 'required_small',
     blocks: ['私は、静かに考える時間を大切にしています。', 'ただし、一人で決めたいわけではありません。相手の考えにも耳を傾けたいです。'] },
@@ -42,7 +45,7 @@ module.exports = cases.map((c, index) => {
   p.visual_recipe.aspect_ratio = c.ratio;
   p.visual_recipe.theme.theme_id = c.theme;
   p.visual_recipe.branding.branding_mode = c.brand;
-  p.renderer_version = c.saved ? 'piece.rn_native_preview.prototype.v3' : 'piece.rn_native_preview.containment.prototype.v1';
+  p.renderer_version = c.saved ? 'piece.rn_native_preview.prototype.v3' : containmentProfile;
   p.piece_text_hash = digest(p.piece_text);
   p.content_payload_hash = digest(JSON.stringify(canonical(p.content_payload)));
   p.visual_recipe_hash = digest(JSON.stringify(canonical(p.visual_recipe)));
@@ -76,5 +79,12 @@ const brandingOpacityCase = JSON.parse(JSON.stringify(module.exports.find(c => c
 brandingOpacityCase.name = 'containment_branding_opacity08';
 brandingOpacityCase.evidence_set = 'containment_addition';
 module.exports.push(brandingOpacityCase);
+
+// Keep the former 13 names, order and input bytes. Raw measurements have no
+// preview DTO, so record their selected test profile explicitly.
+if (outputGridV4) for (const fixture of module.exports) {
+  fixture.test_profile = 'output-grid-v4';
+  if (typeof fixture.raw_text === 'string') fixture.candidate_profile = containmentProfile;
+}
 
 if (require.main === module) process.stdout.write(JSON.stringify(module.exports, null, 2) + '\n');

@@ -7,6 +7,7 @@ import fixtures from './piece-rn-canvas-fixtures.json';
 
 // Test-only timing around the unchanged native bridge call. In particular,
 // distinguish a pending candidate table from planner/render/inspection work.
+const OUTPUT_GRID_PROFILE = 'piece.rn_native_preview.containment.prototype.v2';
 let activeTrace;
 // Keep adapter decoding and B9 time separate from the raw native call. These
 // wrappers observe the real functions; no candidate, plan or deadline changes.
@@ -140,6 +141,70 @@ renderer.inspectPieceSelectedLineV3 = async (...args) => {
   }
 };
 
+// Observe V4 separately; the original V3 wrappers above remain intact.
+let selectedV4Ordinal = 0, nativeV4Ordinal = 0, dispatchingSelectedV4 = null;
+const nativeSelectedV4 = NativeModules.PieceTextMetrics.inspectSelectedLineV4;
+if (typeof nativeSelectedV4 === 'function') {
+  NativeModules.PieceTextMetrics.inspectSelectedLineV4 = function (...args) {
+    const dispatch = dispatchingSelectedV4, trace = dispatch?.trace ?? activeTrace;
+    const started = performance.now(), request = args[3];
+    const sample = { ordinal: ++nativeV4Ordinal, adapter_ordinal: dispatch?.ordinal ?? null,
+      tag: args[0], canvas_tag: request?.canvas_tag ?? null, stage: request?.stage ?? null,
+      font_size: args[2], expires_at_ms: request?.expires_at_ms ?? null,
+      inspection_version: 'piece.native_selected_line.v4', candidate_profile: OUTPUT_GRID_PROFILE,
+      dispatched_at_ms: Date.now(), status: 'pending' };
+    trace?.native_selected_v4.push(sample);
+    try {
+      // Exactly one original native call; neither request nor reply is changed.
+      const pending = nativeSelectedV4.apply(this, args);
+      return pending.then(value => {
+        Object.assign(sample, { status: 'resolved', received_at_ms: Date.now(),
+          elapsed_ms: performance.now() - started, raw_wire: value });
+        return value;
+      }, error => {
+        Object.assign(sample, { status: 'rejected', rejected_at_ms: Date.now(),
+          elapsed_ms: performance.now() - started,
+          reject_code: error?.code ?? null, reject_message: error?.message ?? null });
+        throw error;
+      });
+    } catch (error) {
+      Object.assign(sample, { status: 'threw', rejected_at_ms: Date.now(),
+        elapsed_ms: performance.now() - started,
+        reject_code: error?.code ?? null, reject_message: error?.message ?? null });
+      throw error;
+    }
+  };
+}
+const selectedV4 = renderer.inspectPieceSelectedLineV4;
+renderer.inspectPieceSelectedLineV4 = async (...args) => {
+  const trace = activeTrace, start = performance.now(), expected = args[1];
+  const ordinal = ++selectedV4Ordinal;
+  const sample = { adapter_ordinal: ordinal, stage: expected.stage, font_size: expected.fontSize, status: 'pending',
+    expected: { text: expected.text, box: expected.box ? { ...expected.box } : null,
+      line_ends: Array.isArray(expected.lineEnds) ? [...expected.lineEnds] : null,
+      tag: diagnosticNodeTag(args[0]), canvas_tag: diagnosticNodeTag(expected.canvasNode),
+      stage: expected.stage, font_size: expected.fontSize, expires_at_ms: expected.expiresAt ?? null } };
+  trace?.selected.push(sample);
+  try {
+    let pending;
+    const previous = dispatchingSelectedV4;
+    dispatchingSelectedV4 = { trace, ordinal };
+    try { pending = selectedV4(...args); }
+    finally { dispatchingSelectedV4 = previous; }
+    const result = await pending;
+    Object.assign(sample, { status: 'resolved', adapter_completed_at_ms: Date.now(),
+      elapsed_ms: performance.now() - start, tag: result.tag,
+      canvas_tag: result.canvasTag, canvas_frame: result.canvasFrame, ink: result.ink,
+      native_raster_scale: result.nativeRasterScale, component_inks: result.componentInks });
+    return result;
+  } catch (error) {
+    Object.assign(sample, { status: 'rejected', adapter_rejected_at_ms: Date.now(),
+      elapsed_ms: performance.now() - start,
+      reject_code: error?.code ?? null, reject_message: error?.message ?? null });
+    throw error;
+  }
+};
+
 class CanvasCases extends React.Component {
   caseFixtures = fixtures.map(fixture => fixture.props?.display ? { ...fixture,
     props: { ...fixture.props, display: { ...fixture.props.display, visualToken: Object.freeze({}) } } } : fixture);
@@ -150,8 +215,10 @@ class CanvasCases extends React.Component {
   componentDidMount() { this.startCase(); }
   componentWillUnmount() { clearTimeout(this.timer); }
   startCase = () => {
-    this.started = performance.now(); this.originalExpiresAt = Date.now() + 8000;
-    this.trace = { candidates: [], adapters: [], plans: [], states: [], selected: [], native_selected_v3: [] };
+    this.started = performance.now(); this.originalStartedAt = Date.now(); this.originalExpiresAt = this.originalStartedAt + 8000;
+    this.outputGridDeadline = Object.freeze({ profile: OUTPUT_GRID_PROFILE, startedAt: this.originalStartedAt,
+      expiresAt: this.originalExpiresAt, monotonicStartedAt: this.started });
+    this.trace = { candidates: [], adapters: [], plans: [], states: [], selected: [], native_selected_v3: [], native_selected_v4: [] };
     activeTrace = this.trace;
     this.finishing = false; this.rawOperation = null; this.rawReport = null;
     this.poll();
@@ -198,6 +265,8 @@ class CanvasCases extends React.Component {
     const report = { name: fixture.name, evidence_set: fixture.evidence_set, phase: m?.phase ?? 'missing', reason: m?.reason ?? null,
       renderer_version: display?.preview?.renderer_version ?? fixture.props.savedRecord?.renderer_version,
       candidate_profile: input?.candidateProfile,
+      test_profile: fixture.test_profile ?? null,
+      comparison_grid: input?.candidateProfile === OUTPUT_GRID_PROFILE ? 'output_logical1' : null,
       elapsed_ms: performance.now() - this.started, size_index: m?.sizeIndex, font_size: input?.sizes[m?.sizeIndex],
       plan_line_height: m?.plan?.lineHeight, plan_groups: m?.plan?.groups,
       trace: this.trace,
@@ -240,16 +309,20 @@ class CanvasCases extends React.Component {
       if (lines.length !== 1 || lines[0].text !== text || box.width !== 1080 || !Number.isFinite(box.height) || Math.abs(box.height - 75) > 0.5 ||
           !['x', 'y', 'width', 'height'].every(key => Number.isFinite(lines[0][key])) ||
           lines[0].width < 0 || lines[0].height <= 0 || lines[0].width > 888 || lines[0].height > 75) throw Error('raw_geometry');
-      const input = { candidateProfile: 'piece.rn_native_preview.containment.prototype.v1', blocks: [text], contentWidth: 888,
+      const candidateProfile = fixture.candidate_profile ?? 'piece.rn_native_preview.containment.prototype.v1';
+      const inspectSelected = candidateProfile === OUTPUT_GRID_PROFILE
+        ? renderer.inspectPieceSelectedLineV4 : renderer.inspectPieceSelectedLineV3;
+      const input = { candidateProfile, blocks: [text], contentWidth: 888,
         contentHeight: 75, sizes: [48], lineRatio: 75 / 48, paragraphRatio: 0, alignment: 'left' };
       const table = await renderer.measurePieceCandidates(node, text, 48, { candidateProfile: 'piece.rn_native_preview.prototype.v5' });
       if (!current()) return;
       const plan = measuredWrap.planPieceMeasuredRows(input, 0, [table]);
       if (JSON.stringify(plan?.groups) !== JSON.stringify([[text]])) throw Error('raw_b9_selection');
-      const expected = { text, fontSize: 48, box, lineEnds: [text.length], canvasNode: operation.canvas, expiresAt: this.originalExpiresAt };
+      const expected = { text, fontSize: 48, box, lineEnds: [text.length], canvasNode: operation.canvas, expiresAt: this.originalExpiresAt,
+        ...(candidateProfile === OUTPUT_GRID_PROFILE ? { deadline: this.outputGridDeadline } : {}) };
       await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
       if (!current()) return;
-      const result = await renderer.inspectPieceSelectedLineV3(node, { ...expected, stage: 'local' });
+      const result = await inspectSelected(node, { ...expected, stage: 'local' });
       if (!current()) return;
       operation.inspection = result;
       if (fixture.controlled_native_clip_trap) {
@@ -272,7 +345,7 @@ class CanvasCases extends React.Component {
       await new Promise(resolve => this.setState({ rawLeft }, resolve));
       await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
       if (!current() || this.state.rawLeft !== rawLeft) return;
-      const placed = await renderer.inspectPieceSelectedLineV3(node, { ...expected, stage: 'placed', local: result,
+      const placed = await inspectSelected(node, { ...expected, stage: 'placed', local: result,
         canvasFrame: [rawLeft, 96, box.width, box.height] });
       if (!current() || this.state.rawLeft !== rawLeft) return;
       const [x, y] = placed.canvasFrame, [l, t, r, b] = placed.ink;
@@ -290,7 +363,9 @@ class CanvasCases extends React.Component {
   finishRawText = async () => {
     const fixture = this.caseFixtures[this.state.index];
     const report = { name: fixture.name, evidence_set: fixture.evidence_set, diagnostic_only: true,
-      candidate_profile: 'piece.rn_native_preview.containment.prototype.v1', font_size: 48, elapsed_ms: performance.now() - this.started,
+      candidate_profile: fixture.candidate_profile ?? 'piece.rn_native_preview.containment.prototype.v1',
+      test_profile: fixture.test_profile ?? null, comparison_grid: fixture.candidate_profile === OUTPUT_GRID_PROFILE ? 'output_logical1' : null,
+      font_size: 48, elapsed_ms: performance.now() - this.started,
       width: 1080, height: 320, content_width: 888, content_height: 75, margin: 96, branding_zone: 0, branding: false,
       rows: [fixture.raw_text], blocks: [fixture.raw_text], trace: this.trace,
       ...(this.rawReport || { phase: 'measurement_unavailable', diagnostic_valid: false, body_preserved: false }) };

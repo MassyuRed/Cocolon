@@ -24,7 +24,11 @@ static inline dispatch_queue_t RCTGetUIManagerQueue(void) { return dispatch_get_
 @property(nonatomic) CGRect fixtureContentFrame;
 @property(nonatomic) BOOL fixtureAttached;
 @property(nonatomic, strong) NSDictionary *fixturePaintGrid;
+@property(nonatomic, strong) NSDictionary *fixturePaintObservation;
 - (NSDictionary *)cocolonPiecePaintGrid;
+- (NSDictionary *)cocolonPiecePaintObservation;
+- (NSDictionary *)cocolonPieceBeginPaintObservation:(NSRange)glyphs;
+- (void)cocolonPieceFinishPaintObservation:(NSDictionary *)before glyphRange:(NSRange)glyphs;
 - (void)cocolonPieceRecordPaintGrid;
 - (void)cocolonPiecePaintGlyphRange:(NSRange)glyphs;
 - (BOOL)cocolonPieceIsPlainText;

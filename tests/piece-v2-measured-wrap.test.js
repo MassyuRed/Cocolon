@@ -263,3 +263,30 @@ test('containment planner accepts only complete v5 candidate tables and preserve
   assert.equal(plan(tiny, 0, [table]), null);
   assert.throws(() => plan(tiny, 0, [{ ...table, rows: [[0, 1, 9999, 'width_overflow']] }]), unavailable);
 });
+
+
+const outputContainmentProfile = 'piece.rn_native_preview.containment.prototype.v2';
+test('containment v2 retains every B9 oracle, source and complete metric value in either order', () => {
+  for (const c of fixture.cases) {
+    const input = { ...copy(c.input), candidateProfile: outputContainmentProfile };
+    const tables = c.measurements.map(table => ({ ...copy(table), version: 'piece.native_candidates.v5' }));
+    const before = JSON.stringify({ input, tables });
+    assert.deepEqual(copy(plan(input, c.sizeIndex, tables)), c.expected, c.id);
+    assert.equal(JSON.stringify({ input, tables }), before);
+    tables.forEach(table => table.rows.reverse());
+    assert.deepEqual(copy(plan(input, c.sizeIndex, tables)), c.expected, c.id + '/reverse');
+  }
+});
+test('containment v2 refuses old, incomplete and omitted-ink candidate tables', () => {
+  const c = validCase(), input = { ...c.input, candidateProfile: outputContainmentProfile };
+  const tables = c.measurements.map(table => ({ ...table, version: 'piece.native_candidates.v5' }));
+  for (const version of [undefined, 'piece.native_candidates.v1', 'piece.native_candidates.v3', 'piece.native_candidates.v4'])
+    assert.throws(() => plan(input, c.sizeIndex, tables.map(table => ({ ...table, version }))), unavailable);
+  assert.throws(() => plan(input, c.sizeIndex, tables.map(table => ({ ...table, rows: table.rows.slice(1) }))), unavailable);
+  const tiny = { candidateProfile: outputContainmentProfile, blocks: ['ab'], contentWidth: 20, contentHeight: 10,
+    sizes: [10], lineRatio: 1, paragraphRatio: 0 };
+  const table = { version: 'piece.native_candidates.v5', boundaries: [0, 1, 2],
+    rows: [[0, 1, 21, 0, -8, 21, 2], [0, 2, 42, 0, -8, 42, 2], [1, 2, 21, 0, -8, 21, 2]] };
+  assert.equal(plan(tiny, 0, [table]), null);
+  assert.throws(() => plan(tiny, 0, [{ ...table, rows: [[0, 1, 9999, 'width_overflow']] }]), unavailable);
+});

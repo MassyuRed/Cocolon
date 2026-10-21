@@ -1,15 +1,16 @@
 diff --git a/node_modules/react-native/Libraries/Text/Text/RCTTextView.mm b/node_modules/react-native/Libraries/Text/Text/RCTTextView.mm
 --- a/node_modules/react-native/Libraries/Text/Text/RCTTextView.mm
 +++ b/node_modules/react-native/Libraries/Text/Text/RCTTextView.mm
-@@ -29,6 +29,7 @@
+@@ -29,6 +29,8 @@
    NSArray<UIView *> *_Nullable _descendantViews;
    NSTextStorage *_Nullable _textStorage;
    CGRect _contentFrame;
 +  NSDictionary *_cocolonPiecePaintGrid;
++  NSDictionary *_cocolonPiecePaintObservation;
  }
  
  - (instancetype)initWithFrame:(CGRect)frame
-@@ -96,6 +97,53 @@
+@@ -96,6 +98,101 @@
    }
  
    [self setNeedsDisplay];
@@ -46,6 +47,54 @@ diff --git a/node_modules/react-native/Libraries/Text/Text/RCTTextView.mm b/node
 +  [layoutManager drawGlyphsForGlyphRange:glyphRange atPoint:_contentFrame.origin];
 +}
 +
++// V4 keeps a separate complete pre/post natural-paint observation. The legacy
++// v3 grid remains unchanged. A mismatch is recorded, never repaired by copying
++// only the post-paint attributes or by running a second draw.
++- (NSDictionary *)cocolonPiecePaintObservation { return _cocolonPiecePaintObservation; }
++- (NSDictionary *)cocolonPieceBeginPaintObservation:(NSRange)glyphs
++{
++  _cocolonPiecePaintObservation = nil;
++  CGContextRef context = UIGraphicsGetCurrentContext();
++  NSLayoutManager *layout = _textStorage.layoutManagers.firstObject;
++  NSTextContainer *container = layout.textContainers.firstObject;
++  if (!context || !layout || !container || ![self cocolonPieceIsPlainText]) return nil;
++  return @{
++    @"ctm":[NSValue valueWithCGAffineTransform:CGContextGetCTM(context)],
++    @"clip":[NSValue valueWithCGRect:CGContextGetClipBoundingBox(context)],
++    @"bounds":[NSValue valueWithCGRect:self.bounds], @"frame":[NSValue valueWithCGRect:_contentFrame],
++    @"scale":@(self.contentScaleFactor), @"storage":_textStorage,
++    @"attributes":[[NSAttributedString alloc] initWithAttributedString:_textStorage],
++    @"layout":layout, @"container":container, @"glyph_range":[NSValue valueWithRange:glyphs],
++    @"container_size":[NSValue valueWithCGSize:container.size], @"padding":@(container.lineFragmentPadding),
++    @"line_break":@(container.lineBreakMode), @"leading":@(layout.usesFontLeading) };
++}
++- (void)cocolonPieceFinishPaintObservation:(NSDictionary *)before glyphRange:(NSRange)glyphs
++{
++  if (!before) { _cocolonPiecePaintObservation = nil; return; }
++  NSLayoutManager *layout = _textStorage.layoutManagers.firstObject;
++  NSTextContainer *container = layout.textContainers.firstObject;
++  // Bits are stable across product and harness: source/attributes/layout/
++  // container/glyphs/bounds/frame/scale/container-size/padding/line-break/leading.
++  NSUInteger mismatch = 0;
++  if (before[@"storage"] != _textStorage) mismatch |= 1u << 0;
++  if (![before[@"attributes"] isEqualToAttributedString:_textStorage]) mismatch |= 1u << 1;
++  if (before[@"layout"] != layout) mismatch |= 1u << 2;
++  if (before[@"container"] != container) mismatch |= 1u << 3;
++  if (!layout || !container || !NSEqualRanges([before[@"glyph_range"] rangeValue], glyphs) ||
++      !NSEqualRanges([layout glyphRangeForTextContainer:container], glyphs)) mismatch |= 1u << 4;
++  if (!CGRectEqualToRect([before[@"bounds"] CGRectValue], self.bounds)) mismatch |= 1u << 5;
++  if (!CGRectEqualToRect([before[@"frame"] CGRectValue], _contentFrame)) mismatch |= 1u << 6;
++  if ([before[@"scale"] doubleValue] != self.contentScaleFactor) mismatch |= 1u << 7;
++  if (!container || !CGSizeEqualToSize([before[@"container_size"] CGSizeValue], container.size)) mismatch |= 1u << 8;
++  if (!container || [before[@"padding"] doubleValue] != container.lineFragmentPadding) mismatch |= 1u << 9;
++  if (!container || [before[@"line_break"] integerValue] != container.lineBreakMode) mismatch |= 1u << 10;
++  if (!layout || [before[@"leading"] boolValue] != layout.usesFontLeading) mismatch |= 1u << 11;
++  NSMutableDictionary *observation = [before mutableCopy];
++  observation[@"paint_complete"] = @YES;
++  observation[@"stable_mask"] = @(mismatch);
++  _cocolonPiecePaintObservation = [observation copy];
++}
++
 +// Record private geometry/source snapshots in natural drawRect, never in reference
 +// paint. UIKit owns this context; no context or pixel data outlives the draw.
 +- (NSDictionary *)cocolonPiecePaintGrid { return _cocolonPiecePaintGrid; }
@@ -63,14 +112,16 @@ diff --git a/node_modules/react-native/Libraries/Text/Text/RCTTextView.mm b/node
  }
  
  - (void)drawRect:(CGRect)rect
-@@ -118,8 +166,8 @@
+@@ -118,8 +215,10 @@
  #endif
  
    NSRange glyphRange = [layoutManager glyphRangeForTextContainer:textContainer];
 -  [layoutManager drawBackgroundForGlyphRange:glyphRange atPoint:_contentFrame.origin];
 -  [layoutManager drawGlyphsForGlyphRange:glyphRange atPoint:_contentFrame.origin];
 +  [self cocolonPieceRecordPaintGrid];
++  NSDictionary *piecePaintBefore = [self cocolonPieceBeginPaintObservation:glyphRange];
 +  [self cocolonPiecePaintGlyphRange:glyphRange];
++  [self cocolonPieceFinishPaintObservation:piecePaintBefore glyphRange:glyphRange];
  
    __block UIBezierPath *highlightPath = nil;
    NSRange characterRange = [layoutManager characterRangeForGlyphRange:glyphRange actualGlyphRange:NULL];

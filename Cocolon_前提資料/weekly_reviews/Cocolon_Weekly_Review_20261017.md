@@ -1776,3 +1776,12 @@ CURRENT_RULES R10.2の「同じblocker familyで2回連続STOP」に従い、DET
 今回実施は資料5fileのみ、製品/test/workflow変更・新CI・DB書込み0。Supabase project一覧readでACTIVE_HEALTHY。旧run39565918631のfailure/旧v3 10FAIL/未採用DETOUR_RISK_STOPを維持。候補未承認、STRUCTURE_MAP_DELTA_NONE、formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。通常保存→本人履歴/詳細は未完了。
 
 10/22の通常保存・再表示と10/23の共有は未達目標のまま。描画候補の契約案作成を週次完成単位P-W1/P-W2/P-W3の達成へ数えない。
+
+
+#### 5.6.22 2026-10-22 — 承認済みlogical1比較v4を実装（CI前）
+
+入口§94／map§65.42／manifest v120。Mash「進めていいよ。」により§93の比較grid/B意味/新profile195/20pathと一度CIを実装。新preview containment.prototype.v2→JS V4閉schema/原8秒wall+performance→native inspectSelectedLineV4→観測CTM q格子の独立B/自然layer C/所有A→logical1全alpha占有比較→厳密union→同token最終fitという別候補の責務を既存owner内に追加した。旧v2/v9/saved/V3 helpers/decoder/bridge/20期待は保持。bitmap表示への置換なし。snapshotは別before/after観測と12bit stable mask、V4全live providerは共有32MiBへ予約する。Aの所有context化は旧Aとのlocal/placed全positive同値をCIで確認する。
+
+新profileは旧175＋新V4 20、旧V3 20は明示未実行。元13入力/names/旧savedを保持。local JS949（旧933+新16）全成功、RN patch exact dry-run/bash/YAML/Python構文・104markerの全文復元成功。UIKit compile/画像/13条件/8秒実成立は未確認。一度CIのsourceを反映して全20fileを読戻した後、その一回の結果だけを記録する。未達は候補未採用STOP、結果後source追加修正/同source再実行なし。
+
+STRUCTURE_MAP_DELTA_PRESENT（既存owner内の別候補/独立比較座標/source観測/期限責務を反映）。API/DB/依存/本番/署名/配布/deploy/main0。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。P-W1通常保存→本人詳細/履歴、P-W2画像保存/共有、P-W3実機受入れは未完了。

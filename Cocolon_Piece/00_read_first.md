@@ -3247,3 +3247,41 @@ System Context prepareはtask_profiles.json未取得で失敗し、technical ent
 - Apple CALayer render(in:): https://developer.apple.com/documentation/quartzcore/calayer/render(in:)
 - Apple Graphics Contexts: https://developer.apple.com/library/archive/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_context/dq_context.html
 - Apple Quartz 2D Coordinate Systems: https://developer.apple.com/library/archive/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_overview/dq_overview.html
+
+
+## 94. 2026-10-22 — Mash承認済み出力座標v4を実装（source準備、CI前）
+
+Mashは直前の「旧候補を保持し、出力画像の座標で全画素比較する別候補の実装と、一度のCI検証まで」へ「進めていいよ。」と明示承認した。§93のB意味・比較grid・新profile195・既存20pathと一度CIが今回の範囲で、§93の未承認記載は設計時の履歴である。同じ承認やGitHub許可を再質問しない。
+
+開始Cocolon PR30は7ce4426b552d5ffe2276c70b30489db01df6344c、API PR3はa536e50ee284785f585ac73329ef2947dca8bba9。前提資料・作業規則・全体設計/全file地図・最新weeklyと§93の決定を継承し、恒久incident全文を今回も読んだ。root華恋だけがrepo編集/実行/GitHub writerを担い、補助3担当のscratch draftを原典再確認して統合した。別モデル審査が成立したとは主張しない。必要性はOBSERVED_BLOCKER_MINIMAL_FIX、scopeはMash明示承認済みLEVEL3。商品接続は、現在停止する本文画像からP-W1の通常保存へ進む前の描画候補成立を確認すること。
+
+### 94.1 実装と保持した境界
+
+- 別preview containment.prototype.v2と別wire selected_line.v4/inspectSelectedLineV4を追加。旧v3 helper/decoder/bridge・runV3Checks本体/20期待値を保持し、旧v2/v9/savedの版を置換しない。新wireも閉じた20field/4field requestで、3成分unionをJSで厳密再計算する。
+- 自然contentsはstrong identityだけに使う。新V4 helper内のCFGetTypeID/CGImage実寸/自然context bitmap寸法照会は0。観測CTMのq格子、宣言した独立参照extent、同phaseのlogical1全alpha>0比較を実装した。比較は全cell一致で、許容差/固定1px/差分率は加えていない。Bが自然backingを復元したとは呼ばず、旧nativeSの検出感度と同じとは主張しない。
+- 新V4のAは旧scale1 glyphs-onlyの意味を保ち、所有を追えるRGBA contextで実装した。旧UIRenderer A helperは不変更。新nativeのpositive全件でlocal/placed両方のAのedgeと独立5値を旧v2へ照合する。所有実装変更後の同値性はCI前には未実証である。
+- 新V4専用process共有32MiB ownerを使い、A/B/比較/Cとprovider最終解放まで予約を保持する。CA内部cacheは計測したとしない。native grid±2font、4096辺/4Mpixel/8秒/90秒は不変。全資源不足・外縁・空・unsupportedは拒否し、再描画して領域を広げない。
+- 自然drawのbefore/after観測を旧gridとは別に保持し、storage/全文属性/layout/container/glyph range/bounds/frame/scale等の12bit stable_maskとcurrent一致を検査する。CTLineの独立計測はimmutable属性copyを使う。snapshot6の具体原因を解決済みとはせず、新条件で失敗すればunavailableにする。
+- 新profileだけ同じdeadline objectのwall開始/expiryとperformance.now開始を保持し、候補探索・local・placed・queued state採用・最終hash後・fit同期再読の全てで元8秒を確認する。wall巻戻りや最後のhash処理が期限を跨いでもfitを成立させない。nativeは元dual guardとlocal monotonic期限を保持する。これは最終adoption/fitの上限であり、native処理の絶対終了時刻やCA内部処理の一般保証まで立証したとはしない。
+
+### 94.2 検証profileとCI前の実結果
+
+新candidate profileを明示して、旧native129（内包97）＋v9 46＋新V4 20＝195uniqueを検査する。旧V3 20は不変更で残し、このprofileでは未実行という独立markerを要求する。旧run39565918631の10FAILを消去/成功化/skip加算しない。新20内部ではnormal controlを先に成功要求し、allocation/edge faultの到達、stable_mask/属性/glyph_range個別破壊、contents/token/版、資源算術/空alphaを検査する。複数assertionを別testへ重複加算しない。
+
+| CI前確認 | 実結果と限界 |
+|---|---|
+| 変更前JS | 933 PASS/FAIL0/SKIP0、10,466.889485ms。最初のpartial materializationではnexusRouteModel未取得のsetup failureがあり、必要原典を取得して解消。製品修正ではない |
+| 統合後JS | 949 PASS/FAIL0/SKIP0/CANCEL0、12,619.480735ms。既存933＋新16。local結果をCI件数へ重複加算しない |
+| RN patch | 公式0.77.3 package原本へ --dry-run/--fuzz=0 成功。新snapshot観測を追加しても元shared paint二呼出しとhighlight経路は保持 |
+| shell/workflow | bash -n、YAML全6job parse、workflow内Python heredoc5本の構文確認成功 |
+| test-only診断 | 新native SHA256へ束縛。104箇所/3TLS reset/同呼出しraster observer1の注釈を除去すると製品source全文一致。注釈はCI隔離copyのみ |
+| 旧候補保持 | 旧V3 helper spanとrunV3Checks本体、旧decoder/bridgeの関数全文を照合。不変更。旧失敗原物も保持 |
+| 実iOS | LinuxではUIKit compile/実RN13条件/全PNG/A同値は未実行。新source一度のCIで確認する |
+
+本変更は承認済み既存20path（製品6/検査8/workflow1/資料5）、新tracked file0。CI発火前のlocal結果と、旧資料5fileは同一write unitで同期する。current mapに新候補の分岐責務を反映しSTRUCTURE_MAP_DELTA_PRESENT。Supabase/SQL/user rows/業務RPC/API/依存/flags/env/署名/配布/deploy/main mergeへの変更0。
+
+### 94.3 一度のCIと終了条件
+
+sourceをGitHubへ反映・全20file読戻し確認後、同sourceの既存push CI一回の完了を待つ。元13names/入力/saved DTOを保持し、新候補のrow/branding/source/token/fit/画像/実経過とraw/trap/opacity0.8を確認する。native新profile195、実RNの各対応条件、full alpha比較、資源/期限/原文保持のどれかが未達なら未採用STOP。同source再実行・結果後source/test/workflow追加修正・追加診断CIは0。
+
+CIの全job原ログ・元report・PNG・xcresultの取得可能な原物を既存manifestへ保存し、結果を同じownerへ追記して終了する。現時点CI未実行、画像成立/正式admission/商品合格/通常保存・再表示の成功は主張しない。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=falseを維持する。10/22保存・10/23共有の目標も達成扱いしない。
