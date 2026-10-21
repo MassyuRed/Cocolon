@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§91／current map§65.39／weekly§5.6.19／manifest v113です。自然drawRectの実bitmap寸法・CTM・clipへ参照を束縛する内部修復を実装。元全alpha一致guard・wire20・8秒/90秒・資源上限・195検査/13条件は維持。quoteは同じ失敗呼出しの拒否寸法を記録します。JS933成功、iOS/実RNは新source一度CIでこれから検証し、正式採用・通常保存は未完了です。**
+**最新は入口§91.3／current map§65.39.1／weekly§5.6.19.1／manifest v114です。source dfd656c7の11pathを全文読戻し。一度CI39555207737でJS933・旧native175は成功、新v3は10PASS/10FAILとなり候補未採用。iOS/Android sourceとexport compileは成功、実RN13/画像は同runで継続中・未確認。追加source変更/同source再実行0、通常保存は未完了です。**
 
 ### §87の設計時点（履歴）
 
@@ -3168,3 +3168,8 @@ JS元915＋18=933 PASS/FAIL0、14.436秒。旧native175＋新20=195、実RN元11
 ### 65.39 自然drawRectの実gridに参照を合わせる修復
 
 入口§91／manifest v113。自然drawRectの実bitmap/CTM6値/clip/source snapshotへ既存v3参照を束縛。自然格子位相と元bitmap→bounds写像を再現、clipped実寸と元全alpha一致guardを維持。旧grid0仮定の内部修復。quoteは同呼出しの拒否operandをtest-onlyで記録。既存製品2/検査4/資料5の11path、全13fixture/XCTest判定/195分母/元8秒/90秒/4096/4M/32MiBは不変。JS933成功、実iOSは新source一度CIで未確認。root単一writer、3独立read-only review。正式renderer/通常保存/本人履歴・実機未完了、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+
+#### 65.39.1 途中checkpoint：新v3 native正常local未成立
+
+入口§91.3／manifest v114。source dfd656c7、11path読戻し一致。一度CI39555207737 attempt1、JS933/旧native175/iOS・Android source/両export compile成功。新v3は10PASS/10FAIL、成功local共通経路が未成立で原因未確定。拒否10成功を個別fault到達へ換算しない。native main→summary29.414833秒/launch0。実RN13/PNG/8秒/quote operandは継続中・未確認、元5job原ログを可逆保存。source追加変更/同source再実行0、新候補未採用、正式admission/通常保存未完了、automatic_progression=false。

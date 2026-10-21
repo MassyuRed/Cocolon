@@ -1737,3 +1737,8 @@ local JS933全成功（元915＋新18、14.436秒）。native195/実RN13・PNG/�
 #### 5.6.19 P-W1：自然描画gridを使う内部修復
 
 入口§91／manifest v113。自然drawRectの実bitmap/CTM6値/clip/source snapshotへ既存v3参照を束縛。自然格子位相と元bitmap→bounds写像を再現、clipped実寸と元全alpha一致guardを維持。旧grid0仮定の内部修復。quoteは同呼出しの拒否operandをtest-onlyで記録。既存製品2/検査4/資料5の11path、全13fixture/XCTest判定/195分母/元8秒/90秒/4096/4M/32MiBは不変。JS933成功、実iOSは新source一度CIで未確認。root単一writer、3独立read-only review。正式renderer/通常保存/本人履歴・実機未完了、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。 10/22通常保存・10/23共有の目標達成には数えません。
+
+
+##### 5.6.19.1 途中checkpoint：native旧175成功、新v3 10FAIL
+
+入口§91.3／map§65.39.1／manifest v114。source dfd656c7、11path読戻し一致。一度CI39555207737 attempt1、JS933/旧native175/iOS・Android source/両export compile成功。新v3は10PASS/10FAIL、成功local共通経路が未成立で原因未確定。拒否10成功を個別fault到達へ換算しない。native main→summary29.414833秒/launch0。実RN13/PNG/8秒/quote operandは継続中・未確認、元5job原ログを可逆保存。source追加変更/同source再実行0、新候補未採用、正式admission/通常保存未完了、automatic_progression=false。

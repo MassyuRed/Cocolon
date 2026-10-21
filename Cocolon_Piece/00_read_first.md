@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§91／current map§65.39／weekly§5.6.19／manifest v113です。自然drawRectの実bitmap寸法・CTM・clipへ参照を束縛する内部修復を実装。元全alpha一致guard・wire20・8秒/90秒・資源上限・195検査/13条件は維持。quoteは同じ失敗呼出しの拒否寸法を記録します。JS933成功、iOS/実RNは新source一度CIでこれから検証し、正式採用・通常保存は未完了です。**
+**最新は入口§91.3／current map§65.39.1／weekly§5.6.19.1／manifest v114です。source dfd656c7の11pathを全文読戻し。一度CI39555207737でJS933・旧native175は成功、新v3は10PASS/10FAILとなり候補未採用。iOS/Android sourceとexport compileは成功、実RN13/画像は同runで継続中・未確認。追加source変更/同source再実行0、通常保存は未完了です。**
 
 ### §87の設計時点（履歴）
 
@@ -3097,3 +3097,14 @@ quoteの具体operandはまだ未確定です。test-only runnerの同じPieceRa
 local JS933 PASS/FAIL0/SKIP0（9,725.963454ms）、RN patch dry-run成功、runner bash構文と診断lexical復元成功。旧native195とXCTest assertion列の不変を確認。iOS/native195/実RN13/完成画像/元時間内の結果は未確認で、新sourceの既存push CIを一度だけ実行します。原13条件・画像とrow/font・fitを全件確認し、自然/clipped実gridを独立照合します。失敗・未達なら未採用STOP、同source再実行0。quoteが資源制約なら上限や±2fontをその場で変えません。
 
 正式renderer採用・containment版saved reader・InputScreen正式isSaveAdmitted供給・実Auth/API通常初回保存→本人詳細/履歴・物理実機は今回も未完了。新snapshot全否定境界の検査成功はclaimせず、JS/195だけで商品合格へ換算しません。追加購入/新service/定常費用/Mash操作0、既存Actions一回の実使用量は発生します。構造責務・公開経路は不変のためSTRUCTURE_MAP_DELTA_NONE、formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。
+
+
+### 91.3 途中checkpoint：旧175成功、新v3の正常local経路が未成立
+
+source dfd656c737778a5f7f1c2982debe99369fff0b41/tree dfb53d0b11303d0b594eb46762f6f978cfd711a2、全11変更pathのremote全文一致と親/変更集合を確認。一度CI39555207737 attempt1でJS933 PASS/FAIL0/SKIP0（14,421.74829ms）、Android source/iOS source/RN patchと両exportの実compileが成功しました。実RNは同runでまだ進行中、13report/完成PNG/元8秒/quote operandは未確認です。
+
+native195到達、185unique PASS/10FAIL。旧129（内包97）＋v9 46は全成功、新v3は20中10PASS/10FAIL。失敗は成功想定8条件と、成功localを前提とするcontents変更/版間tokenの2条件。拒否想定10件のPASSは、早い共通gateで拒否されても通るため、本来のfault箇所到達の証明にはしません。main06:29:16.382443Z→最終summary06:29:45.797276Z、29.414833秒で元90秒内、launch0です。
+
+standaloneにはgridの実寸/CTM/attrs/具体拒否位置がないため原因は未確定。自然CGContextが非bitmapで幅高0、snapshot属性fixup、CTM/clip等の新gate、alpha比較のどれかとは断定しません。fixtureではglyphRange計算前に記録し実RN patchは計算後という差も未確定候補です。現在の元5job decodedログ/metadataをmanifestのinterim bundleへ可逆保存しました。
+
+新候補は未採用のまま。実RN原物の確定までsource/test/workflow追加編集・同source再実行0。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。通常保存・本人履歴・実機は未完了、STRUCTURE_MAP_DELTA_NONE。
