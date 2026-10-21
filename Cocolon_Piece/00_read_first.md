@@ -3439,3 +3439,12 @@ Mashは§95の「原因調査に限定し、この記録追加とCI一回を進�
 新test source a79773bdfa1ea0bd8b929c2a7ceb5ab9a470cfa9/tree0b6d7aca004fd85967e71ad3bad1385ac3bafa95を反映し、変更集合が承認5pathだけであることと全5fileのremote全文一致を確認した。[CI39692007906 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39692007906)は同sourceのpushで2026-10-21T23:13:35Z（10/22 08:13:35 JST）に開始した。新診断counter1/上限1、Actions rerun0。旧§93/run39683393855のcounter1/failureを保持する。
 
 同pushの既存phase6_contract_guards run39692007783も起動し、contract-guards 1jobだけである。追加したworkflow/jobではなく、Pieceの診断結果へ合算しない。今回source pushを再送せず、以後runner/製品/patch/test/workflowを固定する。全6jobの元結果とoperandの取得・13report/画像はまだ未確定であり、元の合否と診断成立を分けて回収・保存だけを続ける。今回checkpointは結果資料4fileのみ、STRUCTURE_MAP_DELTA_NONE、商品品質credit0、通常保存/本人再表示は未完了、automatic_progression=false。
+
+
+### 96.4 途中checkpoint：5job終了、単体native新候補19FAILを保持
+
+同source/唯一CI39692007906 attempt1の5jobが終了した。JS949PASS/0FAIL/0SKIP/0cancel、Android source compile成功。iOS source compile成功後、元175PASSを保ち、新V4は1PASS（output_v4_empty_alpha）/19FAIL、計195unique＝176PASS/19FAIL。旧V3 20は明示未実行、main→summary37.68472秒で元90秒内。元の失敗を診断の成功や時間条件の達成へ読み替えない。この単体実行は今回runnerのoperand補足対象ではなく、19FAILすべての原因を実RNへ流用しない。
+
+export-android/export-podsはjob successだが、今回差分がrunnerだけのため、既存path条件で依存install/4library実compile/Pod解決/Podlock artifactをskipした。今回は新しいexport compile成功証拠がない。既存phase6 run39692007783のcontract-guards 1jobはsuccess。完了5jobとguardの元decoded logsはBOM/CR/LFを含め無変換bytesで回収し、job metadata/単体native集計とともにmanifestへ可逆保存・全member hash照合した。
+
+実RN canvas jobはまだ実行中で、13report/5PNG/今回operandの取得と有効性は未確定。新counter1/上限1、rerun0、source追加修正0を維持して結果回収だけを続ける。資料4fileのみ、STRUCTURE_MAP_DELTA_NONE、商品品質credit0、通常保存/本人再表示未完了、automatic_progression=false。

@@ -3254,3 +3254,8 @@ native原境界62local拒否の61件はstage83の全logical1占有不一致、qu
 ##### 65.44.1 承認source全文照合、一度CI開始
 
 入口§96.3／manifest v126。source a79773bd/tree0b6d7acaの承認5path全remote全文一致。診断CI39692007906 attempt1は10/22 08:13:35 JST開始、新counter1/上限1、rerun0。旧run39683393855 counter1/failureは保持。全6jobと同call operand/元13report/画像は実行中・未確定。既存phase6 guard run39692007783は別のcontract-guards 1job。以後コード固定、結果回収・原物保存だけを続け、製品修復/再CI/採用へ自動進行しない。checkpoint資料4のみSTRUCTURE_MAP_DELTA_NONE、商品品質credit0、P-W1通常保存/本人再表示未完了。
+
+
+##### 65.44.2 途中：5job完了、単体新V4は1PASS/19FAIL
+
+入口§96.4／manifest v127。同CI39692007906 attempt1、JS949PASS/Android source成功。iOS compile成功、旧native175PASS＋新V4 1PASS/19FAIL＝195unique、旧V3 20明示未実行、37.68472秒/90秒内。単体19FAIL原因は今回operand未取得のため未確定。export2job successはpath条件skipであり、4library実compile/Pod解決を今回成功扱いしない。既存guard1job success。元5job＋guardログ/metadata/native集計を可逆保存。実RN canvas/元13report/画像/operandは実行中。source固定、新counter1/上限1・rerun0、資料4fileだけSTRUCTURE_MAP_DELTA_NONE、商品品質credit0、通常保存/本人再表示未完了。
