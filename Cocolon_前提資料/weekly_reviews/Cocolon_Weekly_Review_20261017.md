@@ -1804,3 +1804,12 @@ STRUCTURE_MAP_DELTA_PRESENT（既存owner内の別候補/独立比較座標/sour
 native原境界62local拒否の61件はstage83の全logical1占有不一致、quote80ptの1件は3481×1285＝4,473,085画素/元4M超過（stage15/mask256、辺4096/32MiB超過ではない）。全62snapshot記録は一致。比較の差座標/alpha/geometry operand未記録で根因は未確定、standalone19FAILへ同原因を一括流用しない。早い拒否を8秒/420/最終fit成功へ換算しない。原PNG5は前回とbytes/全RGBA一致しroot目視済み、旧saved/raw表示を新候補成功に加算しない。全6元ログ・元13report/PNG5・stage map・xcresult root・独立レビュー・全archive member台帳をmanifestへ可逆保存、完全xcresultを含む原ZIP59,523,256byte/1020member/SHA256一致も保存済み。
 
 承認された実装/一度CIの単位は完了、validation_success=false/unadopted=true/DETOUR_RISK_STOPを維持。source/test/workflow固定、追加修正/同source再実行/追加CI0。次の未完exact1は既存logical1参照合成と自然layerの対応を直接修復する具体案の設計（案未成立、未実装・未実行）。正式admission/通常保存→同owner再表示/写真保存共有/実機受入れと10/22保存目標は未完了。今回結果5資料のみSTRUCTURE_MAP_DELTA_NONE、商品品質credit0、automatic_progression=false。
+
+
+##### 5.6.23 出力logical1比較の直接修復を再解析、限定診断案は未承認
+
+入口§95／manifest v124。current head e4107a28・source87335f4fの旧failure/未採用/DETOUR_RISK_STOPは維持。q/CTM式は整合し、Y符号/反転の確定修復は見つからない。自然/参照contents方向・CGImage補間の対応と、first mismatch cell/双方占有/両scan範囲/geometryが未照合。これらを原因と断定せず、製品修復0。
+
+既存runner1だけにtest-only scalar観測を補う未適用案を準備。新描画/scan/pixel buffer/wait0、TLS≤1KiB、元guard104/reset3/比較式/NOと製品全文逆射影・runner後半一致を局所確認、ObjC++/CIは未実行。提案bytes/patch/レビューを既存manifestへ可逆保存。旧§93の診断専用CI追加禁止とR1.5の単独診断unit禁止に対する今回限り例外がMash判断であり、既存LEVEL2として自律実行しない。承認後は新test commitの既存CI一回のみ、元13入力/195期待/全上限を維持し、原物保存後停止。原因特定/修復/採用の保証なし。旧counter1と新counter0を分け、同SHA再実行違反が起きたとは扱わない。
+
+今回は資料4fileのみ、source/test/workflow/CI0、STRUCTURE_MAP_DELTA_NONE（実構造不変、pending判断案内のみ）。PRIMARY_OUTCOME=ADMINISTRATIVE_ONLY・商品品質credit0。P-W1通常保存/本人再表示、P-W2保存共有、P-W3実機と10/22保存目標は未完了、automatic_progression=false。

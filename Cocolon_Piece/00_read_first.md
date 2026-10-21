@@ -3350,3 +3350,62 @@ PRIMARY_OUTCOME=BLOCKER_NARROWEDは「画像占有不一致61件と画素数上�
 
 
 結果保存時の補足：9,828,497byte版manifestの全文取得はTransport closedで失敗し、branchへは反映しなかった。過去診断と前回contents-gridの二つの原物bundleだけを、全文照合済みv122固定commit0ef6a57e11c1c020421995ddcf846d16eab09a94／blob e0295a73124b009f5555bf79c7d15585088c6e3cのJSON pointerへ置き換えた。圧縮bytes/SHA256/member数と原bytesはGit履歴に保持し、今回のfinal原物bundleは不変更。製品・検査・workflowやCIには影響しない。
+
+
+## 95. 2026-10-22 — 比較不一致の直接修復を再解析、追加診断一回の具体案（未承認・未実行）
+
+### 95.1 現在の不足と、今回確認できた範囲
+
+Mashの新しい「Pieceの残件作業を進めて。」により、§94.6の次exact1である既存logical1参照合成と自然Text layerの対応を再解析した。前回の終了を設計・原典読取まで永久に禁止するものとは読まない。一方、旧§93の承認済み一回CIは消費済みで、旧source87335f4f/run39683393855 attempt1のfailure・新候補未採用・DETOUR_RISK_STOP・counter1を保持する。
+
+開始はCocolon PR30 head e4107a28e584a47288102a2cd7c8e0a6ce7659f5、API PR3 head a536e50ee284785f585ac73329ef2947dca8bba9。fresh recursive treeは1917entry/truncated=false、materialized98 tracked fileのblob一致・差分0を確認した。全体設計01、全file地図01A/B/Cの責務・Piece接続、共通current入口、Piece map、最新weekly20261017のP-W1〜3と最終§5.6.22.3、§93〜94と現source/patch/test/logを照合した。巨大資料全体・1917entry全実ファイルの逐語読了は主張しない。Karen-Diary指定3fileと作業規則、恒久incidentは先頭からEOFまで今回も確認。System Context prepareはtask_profiles.json未materializedで失敗し、技術入口が認める原典直接read fallbackを使った。生成contextの採用/更新は0。
+
+P-W1の完成条件は通常入力→本文/画像preview→明示保存→同じ本人の履歴/詳細であり、現在は最初の新previewが成立しない。前回13reportの62local拒否の61件はstage83のlogical1全cell占有不一致、quote80ptの1件は4,473,085pixel/元4M超過。旧native175成功・新V4 1PASS/19FAILと旧savedだけの表示成功を維持し、新preview8未成立/PNG0/fit0、通常保存・本人再表示未完了を変えない。
+
+独立原典解析2担当とrootでq格子を再計算した。top-down row rを置けば、現CTMはr=S*y-ty-y0、逆写像y=(r+y0+ty)/S、宣言extent原点+(r/S)も同じになる。単純なty符号誤り、contentFrame二重加算、無条件Y反転を確定した修復とはできない。raw spacesの記録済み自然/参照CTMの差288native pixelは96logicalの整数原点移動と整合し、clip高さの微小差だけを全61件の原因と断定しない。
+
+現sourceで未照合なのは、自然UIView layerとplain参照layerの内容方向、参照CGImageの補間設定と自然出力の対応である。geometryFlippedの検査だけでは内容描画の方向を保証せず、公開contentsAreFlippedは別の照会である。ただしその値は自然draw時のcontext反転に関係し、CTMへ既に表れている可能性もあるため、値の差だけで画像上下反転の原因とはしない。PiecePixelsImageはshouldInterpolate=false、参照layerはlinearだが、この二つの指定の優先関係やopaque自然backingの設定を原物から確定できない。これらを理由に反転・補間を決め打ちで製品へ入れない。
+
+最初の不一致x/y、actual alpha、参照占有bit、両scan範囲と合成geometryが原物にない。現証拠では具体修正箇所を閉じられず、製品修復済みとはしない。旧snapshot/CGImage問題やRN stage83をstandalone19FAIL原因へ一括流用しない。引用元はApple公開APIの原典であり、この方法のUIKit忠実性の保証や今回causeの証明ではない。
+
+- https://developer.apple.com/documentation/quartzcore/calayer/contentsareflipped()
+- https://developer.apple.com/documentation/quartzcore/calayer/isgeometryflipped
+- https://developer.apple.com/documentation/coregraphics/cgimage/shouldinterpolate
+
+### 95.2 推奨exact1：既存比較の最初の差を残す一回限りの観測
+
+新しい描画候補・helper familyを作らず、既存tests/native/run-piece-rn-canvas-ios.sh内のtest-only TLSだけを補足する。承認前のtracked runner・製品・patch・test期待値は不変更。提案runner全bytes/patch/identity/局所検証/独立レビューをmanifestのlossless bundleに保存した。提案runnerは19,974byte、SHA256 07700096663e332d4c9dcec5fa09c87d0d3f8686911ea10f7bb4c720ce9d0b1a、git blob2e2f952addd57c818cf7570e29ae5b5e9fc3c9a3。native preimage SHA256は6250785b9d9d09e9fdf293ff78b48134995c5210ab5c37e73551027753902111に固定し、想定外preimageでは実行しない。
+
+1. 既存V4 clipped参照のscan成功直後に、既に得たreferenceCells、native/logicalExtent、sourceClip、観測CTM/paintCTM/phase、自然/参照layerの公開contentsAreFlipped/geometryFlipped/scale/opacityと、自分が作ったCGImageのshouldInterpolateをscalarへコピーする。opaque自然contentsをCGImageへcastしたり寸法を照会したりしない。
+2. 元のstage83比較ifに入った最初の不一致時だけ、x/y・columns/rows・actual alpha uint8・参照占有bool・actualCellsを保存し、元と同じNOを返す。比較式は変更しない。参照側は占有bitであり、生の参照alpha値や全maskを採ったとは呼ばない。
+3. 既存のtest-only diagnostic getterへoutput_grid_comparisonを追加し、同callのtag/font/stage/identityを持つ元native境界recordへ残す。製品の20field wire/RN exportは増やさない。first_mismatch_present=falseの座標/寸法0は未設定で、0位置の差や透明画素を観測したという意味ではない。
+4. TLSはstatic_assertで1KiB以下に限定し、image/layer/context/providerを保持しない。新しい描画/走査/画像/bitmap buffer/wait/retry0。観測実行時間は増えるため、前回と同じ失敗件数・所要を保証しない。8秒/90秒/4096辺/4Mpixel/32MiBと元の期限式は維持する。
+
+scratchでbash -n、埋込Python構文とbuild関数の隔離実行、104guard/3reset/既存raster観測1＋新reference観測1＋first-mismatch観測1、注釈を除去した製品全文の逆射影一致、診断injector後のrunner全文一致を確認した。最初の準備用AST選択がfooterのpath読取まで含んだためscratchで失敗し、footer前で止める選択へ訂正した。repo/source write・UIKit/CI実行効果は0。ObjC++compileと実iOS実行は未確認であり、局所構文・逆射影をcompile成功へ換算しない。
+
+product/route reviewは例外を明示したこの一回案を推奨、technical reviewは変数寿命・有限JSON・元比較/NOの保持に重大なblockerなしと判断した。同じWork環境の実補助reviewであり、別モデルPro/Ultraの成立は捏造しない。root華恋が唯一のexecution/GitHub writerである。
+
+### 95.3 今回必要なMash判断、実行上限と終了条件
+
+今回求める差分は、旧§93.2.6の「項目別の不一致は同じ一回のharness結果へ残し、診断専用CIは追加しない。」への、既存runner scalar補足＋新test commitでCI一度の**今回限りの例外**である。旧source SHAのActions rerunではなく、旧counter/旧失敗/旧終端を保持した別の未実行案であり、same-source違反が既に起きたとは記録しない。
+
+Rule18 §11.3 LEVEL3のprior prohibition例外/新approval envelope、§11.5.6のeffect/STOP境界変更に該当する。またCURRENT_RULES R1.5は商品delta0の単独test/runner/blocker narrowing unitを禁じる。今回は根拠ある製品修復がまだ未特定のため、同一unitの付随検証だと読み替えず、**原因確認だけで閉じる単独診断を一回だけ認める例外**も同時に判断対象とする。一般rule本文を変更・恒久解除せず、この限定例外以外は維持する。新しい一般継続指示だけで禁止の解除を明示承認済みとは扱わない。同じ比較契約への再承認やGitHub接続許可を求めるものでもない。
+
+| 境界 | 具体的な範囲 |
+|---|---|
+| 承認後に反映するexact paths | 既存runner1：tests/native/run-piece-rn-canvas-ios.sh。結果資料4：Cocolon_Piece/00_read_first.md、Cocolon_Piece/manifest.json、Cocolon_前提資料/current_structure/02_piece_current_structure.md、Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md。計5、new tracked0 |
+| 実行 | 提案runnerを新test commitへ反映し、既存push CIを一度だけ実行。workflow/job追加0、Actions rerun0。新counter0→1で終了 |
+| 保持 | 製品/patch、logical1全cell alpha>0完全一致、A/B/C厳密union、20field/version/token、元13names/順序/本文/saved DTO、旧175＋新20の195期待と旧V3明示未実行、全元上限 |
+| 新しい証拠 | 同じcallのfirst mismatchと双方占有/両scan範囲/合成geometry。値を得ても、原因確定・新preview成功・商品品質改善とは別 |
+| 時間・費用 | 前回は全6job約22分、今回の所要保証なし。既存Actions一回の使用量あり。新規依存/service/購入/定常費用/端末操作0 |
+| 診断成立 | 元13strict JSONとnative identityを保持し、取得したstage83 recordでfirst mismatch/寸法/indices/alphaと参照bit/両scan範囲/geometryが有効。同じ比較ifで双方の占有が異なることを確認する。無観測0を実測にしない |
+| 打切り | compile/infrastructure/record不足やstage83へ未到達でも一回で終了。追加修正→再CI、条件緩和、別観測family、bitmap置換0。CIの元合否を成功へ書換えない |
+| 終了 | 全job元ログ/元report/取得PNG/診断map/取得可能原物を既存manifestへ保存し停止。結果後の製品修復や次CIは自動開始しない。原因・修復が特定できなければ未特定のまま保持 |
+
+本候補が将来観測を返してもproduct credit0、formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。quote4M超過1件は別残差として保持し、tile/領域縮小/上限増/資源拒否からのfont縮小へ拡大しない。10/22通常保存・10/23共有の未成立を解消したとはしない。
+
+### 95.4 今回の実効果と保存
+
+今回は原典解析と具体案まで。current source/test/workflowへの反映0、CI0、製品修復0、DB/SQL/user rows/API/本番/配布/main操作0。旧§94.6の結果と原物は保持し、未採用STOPを撤回しない。PRIMARY_OUTCOME=ADMINISTRATIVE_ONLY、商品品質credit0。比較の根因を一意に狭めたとは主張せず、新たに準備した未実行案と観測不足を記録する。
+
+更新は既存資料4fileだけ。mapは構造変更ではなくpending判断への案内を同ownerへ追記したためSTRUCTURE_MAP_DELTA_NONE。07はmilestone-only正本に従い、この未実行診断案だけでは更新しない。提案の作成・記録は現在指示とRule18の既存範囲で行い、診断の適用/push/CIは上記例外の明示判断まで未実行とする。
