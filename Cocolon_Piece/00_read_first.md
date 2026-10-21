@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§92.1／current map§65.40.1／weekly§5.6.20.1／manifest v117です。source14a1286eの10path全文読戻し一致、一度CI39565918631は継続中。JS933・旧native175と各source compileは成功、新v3は10PASS/10FAILで今回も未採用。standaloneの具体拒否位置・contents型は未確定、実RN13/画像・元画素比較/quote制約は未確認。source追加編集/同source再実行0、正式admission/通常保存は未完了です。**
+**最新は入口§92.2／current map§65.40.2／weekly§5.6.20.2／manifest v118です。一度CI39565918631はfailure。JS933/旧native175は成功、新v3 10FAIL。診断保存は13件・重複0へ修復できましたが、新プレビュー8件は未成立。実RN62拒否の56件はcontentsがCGImageでないこと、残6件はsnapshot整合guard停止を確認。元alpha7不一致/quote制約は未再検証。候補未採用DETOUR_RISK_STOP、正式admission/通常保存は未完了です。**
 
 ### §87の設計時点（履歴）
 
@@ -3152,3 +3152,24 @@ fixtureは実RNと同じglyphRange計算→snapshot→共有paintへ揃え、初
 ### 92.1 途中結果：今回も新v3正常local未成立、実RN継続中
 
 source14a1286e6265a1194ad83873693afd9cf6680e24/tree9edc6fc27e56e1a5e06f04064263ad98153de0ec、全10path remote全文一致。一度CI39565918631 attempt1でJS933と旧native175成功、新v3 20は10PASS/10FAIL、計185unique PASS/10FAIL。成功想定8＋成功localを前提とする2が未成立。拒否想定10成功を各fault到達証明へ換算しない。iOSsource/RNpatch/Androidsource/Androidexport実compile成功。standaloneは具体拒否位置/contents型未記録で、非CGImageが原因とはまだ確定しない。実RN13/元PNG/画素比較/quote旧制約は同run継続中・未確認。完了4jobのdecoded原ログ/metadata/集計をmanifestへ可逆保存。今回も候補未採用、source/test/workflow追加変更・同source再実行0、正式admission/通常保存/実機は未完了、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+
+### 92.2 最終結果：診断13件保存は修復、CGImage寸法取得は実RNで不成立
+
+source14a1286e6265a1194ad83873693afd9cf6680e24/tree9edc6fc27e56e1a5e06f04064263ad98153de0ecの一度CI39565918631 attempt1はfailure。2026-10-21 16:59:33→17:21:04 JST、21分31秒。source10pathと途中資料ce05a4f5の5pathをremote全文照合し、CI開始後のsource/test/workflow追加変更・同source再実行0を維持しました。JS933 PASS/0FAIL/0SKIP（8,772.908047ms）、旧native129（内包97）＋v9 46＝175全成功、新v3 20＝10PASS/10FAIL、計185unique PASS/10FAIL。拒否想定10成功は各fault経路到達の証明ではありません。native main→最終summary43.604826秒、元90秒内。iOS/Android source・RN patch・両export libraryの実compileは成功ですが、製品成立へ換算しません。
+
+実RNの元13namesが同順序・重複0でresults.jsonへ保存され、NaN/Infinityを拒否するstrict JSON読取りも成功。前回欠落した9件目rawspacesと後続4件をすべて記録できました。raw3＋controlled trapのnative_ink_framesはnull4値/native_canvas_valid=falseです。保存error/nil/write/exception marker0、保存エラーnil assertionの失敗0、元90秒expectation timeoutの失敗記述0。末尾branding opacityの元assertionまで到達しています。xcresultはtest1件中1件失敗、root failure summaries60件（action側との重複走査120を試験件数としない）。全13reportのelapsed_msは元8秒未満ですが、unavailableを画像成立/420合格へ繰り上げません。
+
+実際の製品条件は保存済み1件だけnative_checked/native_canvas_valid=true、新プレビュー8件はすべてunavailable/capture_errorでlocal/placed0、raw3＋trapはmeasurement_unavailable/native_canvas_valid=falseです。raw4件のbody_preserved=falseは計測拒否catchの既存flagであり、実本文改変の証拠ではありません。同4件のnative_textsは元raw入力と一致し、画像も前回と一致します。診断保存の修復をプレビュー修復・商品品質成功へ換算しません。
+
+native境界62件/62unique tupleは全rejected、同呼出しdiagnostic identity62/62一致。essay_paragraphsの6Textはstage20＝元source362のsnapshot/storage/attributes/bounds/frame/scale複合guardで停止し、どの項目かは未識別です。残56件はstage23＝source390の単独CFGetTypeID(contents)!=CGImageGetTypeID()で停止。前段のgeometry/clean/plain条件を通過した同contentsがCGImage確認を通らなかった、と確定できます。IOSurface等の正体や型ID値は記録していません。私が選んだCGImage寸法取得も、この実行で成立しませんでした。
+
+56件はCGImageGetWidth/Height・raster計画・元全alpha比較へ未到達。quote4件も全stage23で、前回のquote旧stage15資源制約と旧7条件のalpha不一致は未再検証・未解決です。raster mask/operandの0は未到達TLS初期値であり、実寸0や予算内の証明ではありません。stage20の6件を、今回除去した前回bitmap照会0の因果へ戻して説明しません。standalone新10FAILの具体拒否stageも未記録のままです。
+
+PNGは保存済み1＋raw3＋trapの5枚で、すべて前回原物とbyte/全RGBA一致。保存済み本文5行とbranding1Text、rawの空白・Hebrew/mixed bidi・controlled trapを目視しました。新プレビュー8条件の完成PNGはありません。旧§91.4の「保存済み本文6行」は誤記で、正しくは本文5行＋branding1＝6Textです。画像自体の一致事実は不変です。補助解析202PASS/58FAIL/66UNVERIFIEDは商品試験件数ではなく、JS/native/実RNの分母へ加算しません。
+
+全6jobの元decodedログ、元13report、xcodebuild/xcresult、root失敗記述、65stage写像、5PNG、画像比較、全1010ZIP memberのSHA256台帳、最終要約等17memberをmanifest final_evidence_bundleへ可逆保存。GitHub artifact12329849185のZIP原物58,747,479bytes/SHA25615725088149a4a9369017ce3b1f04a449d4467e95b0ff29fef6e8f1241c46a98も照合・保全済みです。途中4job bundleはce05a4f5のimmutable Git pointerで保持します。
+
+PRIMARY_OUTCOME=BLOCKER_NARROWED、bounded_work_complete=true、validation_success=false、renderer_unadopted=true、DETOUR_RISK_STOP。追加開発・再試行を停止し、今回の失敗を新authority/helper familyへ連鎖させません。次の未実施exact1は、contentsをCGImageとして読める前提を外した実grid/忠実性比較の直接修復を設計すること。自然CTM/clip/sourceと既存layer合成・元全alpha比較を維持し、clip bboxを実backing寸法と偽装しません。先頭6Textのsnapshot整合も同じ描画lifecycle内で扱い、契約/comparator変更が不可避なら変更前に明示判断へ戻します。今回この追加設計/実装/CIは未実施です。
+
+正式renderer admission、containment版saved reader、InputScreen正式isSaveAdmitted供給、実Auth/端末の通常保存→同owner再表示は未完了。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。API/DB/RPC/flags/env/依存/workflow/deploy/main変更0、STRUCTURE_MAP_DELTA_NONE。

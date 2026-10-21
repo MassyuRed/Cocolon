@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§92.1／current map§65.40.1／weekly§5.6.20.1／manifest v117です。source14a1286eの10path全文読戻し一致、一度CI39565918631は継続中。JS933・旧native175と各source compileは成功、新v3は10PASS/10FAILで今回も未採用。standaloneの具体拒否位置・contents型は未確定、実RN13/画像・元画素比較/quote制約は未確認。source追加編集/同source再実行0、正式admission/通常保存は未完了です。**
+**最新は入口§92.2／current map§65.40.2／weekly§5.6.20.2／manifest v118です。一度CI39565918631はfailure。JS933/旧native175は成功、新v3 10FAIL。診断保存は13件・重複0へ修復できましたが、新プレビュー8件は未成立。実RN62拒否の56件はcontentsがCGImageでないこと、残6件はsnapshot整合guard停止を確認。元alpha7不一致/quote制約は未再検証。候補未採用DETOUR_RISK_STOP、正式admission/通常保存は未完了です。**
 
 ### §87の設計時点（履歴）
 
@@ -3191,3 +3191,8 @@ CURRENT_RULES R10.2の「同じblocker familyで2回連続STOP」に従い、DET
 #### 65.40.1 途中結果：新v3 10FAIL、原物確認継続
 
 入口§92.1／manifest v117。source14a1286e6265a1194ad83873693afd9cf6680e24/tree9edc6fc27e56e1a5e06f04064263ad98153de0ec、全10path remote全文一致。一度CI39565918631 attempt1でJS933と旧native175成功、新v3 20は10PASS/10FAIL、計185unique PASS/10FAIL。成功想定8＋成功localを前提とする2が未成立。拒否想定10成功を各fault到達証明へ換算しない。iOSsource/RNpatch/Androidsource/Androidexport実compile成功。standaloneは具体拒否位置/contents型未記録で、非CGImageが原因とはまだ確定しない。実RN13/元PNG/画素比較/quote旧制約は同run継続中・未確認。完了4jobのdecoded原ログ/metadata/集計をmanifestへ可逆保存。今回も候補未採用、source/test/workflow追加変更・同source再実行0、正式admission/通常保存/実機は未完了、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+
+#### 65.40.2 最終結果：記録欠落修復、CGImage前提は実RN不成立
+
+入口§92.2／manifest v118。source14a1286e、一度CI39565918631 attempt1はfailure（21分31秒）。JS933/旧native175/実compile成功、新v3 10PASS/10FAIL、native計185unique PASS/10FAIL・43.604826秒。診断は元13names同順/重複0/strict JSON保存へ修復、null4値＋invalidを記録、保存エラー/90秒expectation timeout失敗なし。新preview8 unavailable、保存済み1のみnative_checked、raw3＋trap measurement_unavailableで製品未合格。62native拒否＝snapshot複合guard6件(stage20、項目未識別)＋非CGImage contents56件(stage23、実型未記録)。寸法/raster/alphaへ未到達、quote4件もstage23、旧alpha7/quote制約は未解決。5PNGは前回byte/全RGBA一致。保存済みは本文5行＋branding1Text＝6Text（旧91.4本文6行の誤記訂正）。全6job原ログ/元JSON/xcresult/5PNG等17memberと元ZIP1010memberを保全。候補未採用DETOUR_RISK_STOP、次はCGImage前提を除く実grid/忠実性比較の直接設計（未実施、元guard/資源/分母/期限維持）。source追加変更/同source再実行0、正式admission/通常保存未完了、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
