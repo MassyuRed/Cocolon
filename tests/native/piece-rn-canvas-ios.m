@@ -899,7 +899,7 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
   NSArray *supplemental = [self.resultModule.reports filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"evidence_set == %@", @"supplemental_card"]];
   NSArray *raw = [self.resultModule.reports filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"evidence_set == %@", @"raw_text_diagnostic"]];
   XCTAssertEqual(self.resultModule.reports.count, 13);
-  XCTAssertEqualObjects([self.resultModule.reports valueForKey:@"name"], [[[baselineNames arrayByAddingObjectsFromArray:supplementalNames] arrayByAddingObjectsFromArray:rawNames] arrayByAddingObjectsFromArray:@[@"containment_native_clip_trap",@"containment_branding_opacity08"]]);
+  XCTAssertEqualObjects([self.resultModule.reports valueForKey:@"name"], ([[[baselineNames arrayByAddingObjectsFromArray:supplementalNames] arrayByAddingObjectsFromArray:rawNames] arrayByAddingObjectsFromArray:@[@"containment_native_clip_trap",@"containment_branding_opacity08"]]));
   XCTAssertEqual(baseline.count, 5); XCTAssertEqualObjects([baseline valueForKey:@"name"], baselineNames);
   XCTAssertEqual(supplemental.count, 3); XCTAssertEqualObjects([supplemental valueForKey:@"name"], supplementalNames);
   XCTAssertEqual(raw.count, 3); XCTAssertEqualObjects([raw valueForKey:@"name"], rawNames);

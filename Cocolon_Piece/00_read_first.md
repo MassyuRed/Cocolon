@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§88.5／current map§65.36.2／weekly§5.6.16.2／manifest v107です。承認済み新候補の実装と一度CI39523761970の結果記録を完了。CI全体failure：JS933/native195と他3jobは成功、実RNはtest902行のXCTest macro構文エラーでbuild停止。今回の実RN13条件・PNGは0件/全未検証です。旧v2/v9・元8秒/90秒を保持し、新候補は未採用STOP。原因と未適用の最小1行修復案を記録しました。正式採用・通常保存は未完了です。**
+**最新は入口§89／current map§65.37／weekly§5.6.17／manifest v108です。今回のMashのPiece残件続行指示で、前回CI停止のtest902行だけを括弧修正する新しい限定単位を開始。旧失敗は不変、新sourceの一度CIと実RN13条件・全PNG・元8秒を確認します。source時点ではCI未実行、新候補の正式採用・通常保存は未完了です。**
 
 ### §87の設計時点（履歴）
 
@@ -2922,3 +2922,37 @@ XCTAssertEqualObjects([self.resultModule.reports valueForKey:@"name"], ([[[basel
 primary outcomeは **BLOCKER_NARROWED**。native新20を含む195成功とJS933は部分的な技術証拠ですが、実RN包含/画素/元8秒成立は未確認、新候補未採用STOPです。今回の一度CIは14分05秒で終了。新購入/third-party依存/定常service追加0、既存Actions一回の実使用量は発生し、請求額は今回取得していません。Mash様への追加操作依頼0です。
 
 source19pathのうち製品6/test7/workflow1は9b0abdedのbytesを固定。最終記録は同じ資料5pathだけ、STRUCTURE_MAP_DELTA_NONE（実装時の限定測定/paint責務は§65.36に保持）。DB/query/business RPC/API/runtime/flag/env/署名/配布/deploy/main merge0。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。今回の有限作業は結果保存まで完了、商品完成ではありません。
+
+
+## 89. 2026-10-21 — 実RN検証を止めたtest macroの最小修復、新source一度のCI
+
+今回のMash明示指示「Pieceの残件作業を進めて。モデル制限は無しでいい。」を、current manifestのfirst_unfinished_work／入口§88.5.1に既記録の1行修復と新source一度CI・結果保存を行う再開指示として受け取り、新しい限定単位exact1を開始します。前回§88／CI39523761970の失敗・閉鎖は保持し、再実行・遡及修正しません。追加承認を求めるための設計変更はなく、規則や既存の停止境界を変更しません。
+
+### 89.1 開始記録
+
+| start field | current actual |
+|---|---|
+| product_destination | Piece画像プレビューの実描画包含を検証し、正式採用と通常保存へ進める根拠を得る |
+| current_gate_or_subgate | weekly P-W1、包含候補の実RN13条件がtest buildで未実行 |
+| exact_work | test902第2引数の括弧追加1行、新source一度の既存push CIと全結果保存 |
+| scope_classification | LEVEL_3相当の別限定単位。閉鎖済み単位のretry権限は継承しない |
+| approval_or_delegation_basis | 今回のMash明示続行指示＋current ownerの既記録exact repair。一般standing delegationだけを閉鎖単位repairの根拠にしない |
+| execution_owner | 華恋root、Codex GPT-6系、PIECE_WORK_ALLOWED。root唯一writer、補助2agentはread-only review |
+| success_credit | 実RN13条件・全PNG・期限/参照対応まで成立すれば限定TECHNICAL_CREDIT。正式admission/商品合格には変換しない |
+| completion_condition | 既存6path全文readback、新source CI一度の全6job・JS933/native195・実RN13/画像/元8秒と失敗を記録 |
+| stop_condition | 一度CIで未達なら新候補未採用STOP。source確定後は追加source/test/workflow変更・同source再実行0 |
+| prohibited_scope | 製品source/fixture/workflow/判定/分母/元8秒・90秒・旧v2/v9/saved/exportの変更0、DB/API/依存/runtime/flag/env/deploy/配布/main merge0 |
+| next_product_read_or_mash_decision_point | 有限検証後の正式採用、同版saved reader、InputScreen正式供給、通常保存→本人GET/履歴は別の未完了作業 |
+| current_source_test_receipt | Cocolon5c3bb726、前回source9b0abded/CI39523761970/入口§88.5。testは同blobから括弧2文字だけ追加 |
+| current_docs_and_heads | Cocolon PR30 head5c3bb726f8124ff91d1d0b465491e31ce1fd33ce、API PR3 a536e50ee284785f585ac73329ef2947dca8bba9。全体設計01/01A/01B/01C、全file map/tree RN1747/API2444、最新weekly・前提/規則・incident全文・Karen-Diary指定3fileを確認 |
+| affected_current_structure_maps | Piece map§65.37、STRUCTURE_MAP_DELTA_NONE。既存testの構文修復だけで製品/測定/paint/owner責務の差分なし |
+
+必要性はOBSERVED_BLOCKER_MINIMAL_FIX。前回build errorの因果箇所だけを直し、未実行だった実RNによる元の直接検証へ戻します。追加購入・third-party依存・定常費用とMash追加操作は0。既存Actions一回の使用量は発生、前回14分05秒は参考実績です。時間/品質条件を弱めません。R10.3のhelper限定repairへtest変更を偽装せず、今回の明示続行指示とcurrent next workに基づく別のtest構文修正単位として記録します。
+
+System Context prepareを実行したところ、保存lockが要求する祖先a77b79cとlocal material commit450735bのlineage不一致で拒否されました。生成contextをcurrent根拠に使わず、technical ownerのdirect original read fallbackで全1747remote blobとlocal原典の一致を確認しました。今回refreshやcontext機構自体を変更しません。Supabase cocolon-projectはread-onlyでmigration最新8件を確認し、Piece6本（追加quota/visual各1を含む）が適用済み。本人行・業務RPC・DB変更0。
+
+### 89.2 source時点の修復・確認
+
+第2引数全体を丸括弧で囲むだけで、配列の要素・順序・13分母・全assertionを保持します。Cプリプロセッサで同じ行を二引数macroへ渡し、修正前は内部commaにより3引数エラー、修正後は2引数として展開成功を確認しました。独立read-only reviewでも同じ原因と修復を確認しました。LinuxでUIKit/XCTestの実コンパイルを行ったとは扱いません。
+
+対象はtest1＋既存資料5の計6path。製品6/test他6/workflow/fixtureは前回sourceのbytesを保持します。全6pathをGitHubへ反映・全文読戻し後、新sourceの既存push CIを一度確認し、原ログ・実RN report/PNG・全rendered row/local/placed/fit/8秒を保存します。CI未実行・成功未確認のsource時点です。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。

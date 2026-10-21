@@ -1707,3 +1707,8 @@ local JS933全成功（元915＋新18、14.436秒）。native195/実RN13・PNG/�
 #### 5.6.16.2 最終結果：一度CI失敗、最小test修復点を特定
 
 入口§88.5／manifest v107。source9b0abded、一度CI39523761970 attempt1はfailure。JS933・native195unique/FAIL0・旧90秒内41.425065秒と他3compile job成功。実RN test902行のXCTAssertEqualObjects内inline配列commaがmacro引数を分割しbuild exit65、13条件は全未検証、report/PNG0。元8秒/画素/fit成立は今回未確認。第2引数を丸括弧で囲む同一1行の最小修復案を入口へ記録したが未適用。source凍結/再実行0、未採用STOP、primary BLOCKER_NARROWED。全6job原ログ/唯一のRN xcodebuild.log/ZIP/metadataを可逆保存。正式renderer/採用saved/InputScreen正式供給/通常保存→本人履歴は未完了、automatic_progression=false。
+
+
+#### 5.6.17 2026-10-21 — 未実行の実RN13条件へ戻す最小test修復
+
+入口§89／map§65.37／weekly§5.6.17／manifest v108。前回test902の第2引数全体を括弧で囲む1行だけ修復。今回のMash明示続行指示＋current next workを根拠とする新しい限定単位で、旧失敗/閉鎖は不変。cppの修正前3引数エラー→修正後2引数展開と独立read-only reviewを確認。新source一度CIはsource時点で未実行。JS933/native195/実RN13/全画像・元8秒/90秒の実結果を確認し、未達なら未採用STOP。正式採用/通常保存・本人再表示は未完了。STRUCTURE_MAP_DELTA_NONE、製品/fixture/workflow/API/DB/runtime/依存/deploy/main変更0、automatic_progression=false。

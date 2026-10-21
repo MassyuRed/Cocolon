@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§88.5／current map§65.36.2／weekly§5.6.16.2／manifest v107です。承認済み新候補の実装と一度CI39523761970の結果記録を完了。CI全体failure：JS933/native195と他3jobは成功、実RNはtest902行のXCTest macro構文エラーでbuild停止。今回の実RN13条件・PNGは0件/全未検証です。旧v2/v9・元8秒/90秒を保持し、新候補は未採用STOP。原因と未適用の最小1行修復案を記録しました。正式採用・通常保存は未完了です。**
+**最新は入口§89／current map§65.37／weekly§5.6.17／manifest v108です。今回のMashのPiece残件続行指示で、前回CI停止のtest902行だけを括弧修正する新しい限定単位を開始。旧失敗は不変、新sourceの一度CIと実RN13条件・全PNG・元8秒を確認します。source時点ではCI未実行、新候補の正式採用・通常保存は未完了です。**
 
 ### §87の設計時点（履歴）
 
@@ -3138,3 +3138,8 @@ JS元915＋18=933 PASS/FAIL0、14.436秒。旧native175＋新20=195、実RN元11
 #### 65.36.2 最終結果：RN test build失敗、13条件未検証
 
 入口§88.5／manifest v107。source9b0abded、一度CI39523761970 attempt1はfailure。JS933・native195unique/FAIL0・旧90秒内41.425065秒と他3compile job成功。実RN test902行のXCTAssertEqualObjects内inline配列commaがmacro引数を分割しbuild exit65、13条件は全未検証、report/PNG0。元8秒/画素/fit成立は今回未確認。第2引数を丸括弧で囲む同一1行の最小修復案を入口へ記録したが未適用。source凍結/再実行0、未採用STOP、primary BLOCKER_NARROWED。全6job原ログ/唯一のRN xcodebuild.log/ZIP/metadataを可逆保存。正式renderer/採用saved/InputScreen正式供給/通常保存→本人履歴は未完了、automatic_progression=false。
+
+
+### 65.37 2026-10-21 — 実RN test構文の最小修復、新source検証
+
+入口§89／map§65.37／weekly§5.6.17／manifest v108。前回test902の第2引数全体を括弧で囲む1行だけ修復。今回のMash明示続行指示＋current next workを根拠とする新しい限定単位で、旧失敗/閉鎖は不変。cppの修正前3引数エラー→修正後2引数展開と独立read-only reviewを確認。新source一度CIはsource時点で未実行。JS933/native195/実RN13/全画像・元8秒/90秒の実結果を確認し、未達なら未採用STOP。正式採用/通常保存・本人再表示は未完了。STRUCTURE_MAP_DELTA_NONE、製品/fixture/workflow/API/DB/runtime/依存/deploy/main変更0、automatic_progression=false。

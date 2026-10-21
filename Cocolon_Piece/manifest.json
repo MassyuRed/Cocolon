@@ -1,14 +1,14 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v107",
+  "schema_version": "cocolon.piece.workstream_manifest.v108",
   "generated_at": "2026-10-21 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v106",
-    "predecessor_head": "b2eafc22ae376530d072363714af133ea6d42869",
-    "carry_forward": "Approved implementation/one CI/result record complete. JS933/native195 and fivejobs pass; RN test macro build fails before13conditions, zero PNG/report. Preserve all original logs; unadopted STOP.",
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v107",
+    "predecessor_head": "5c3bb726f8124ff91d1d0b465491e31ce1fd33ce",
+    "carry_forward": "Preserve prior one-CI failure; separate current-request test syntax repair and one new-source CI.",
     "immutable_prior_evidence_references": [
       {
         "format": "git-commit-json-pointer",
@@ -50,17 +50,17 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "43df672ebfac6a1184164139dbb009fd9580da43",
-    "raw_sha256": "0fbb545d52e4b62da128e7831ca92eb3a8bac9249dc0e3153976d887df42faf5",
-    "utf8_bytes": 441923,
-    "chars": 262300
+    "git_blob_sha1": "f34523a63dd8beec22abf49e5c25dfd8ccf1712b",
+    "raw_sha256": "3af5b1efbe27de7fbd104b2255b72254d73ccd1418010277d1e3e9d3e5aa19b2",
+    "utf8_bytes": 446714,
+    "chars": 265169
   },
   "current_premise": {
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
-    "git_blob_sha1": "dab2a5c0dcbc4dcef4bddecda9e874488fdc99cf",
-    "raw_sha256": "040ebbd7badc9fed2387b0ff6ee135461cca4024abb29166306c6865cede2e61",
-    "utf8_bytes": 498521,
-    "chars": 290895
+    "git_blob_sha1": "51352306ba4a6ac007bb12b444453cbe27c02e15",
+    "raw_sha256": "fc38ec7832aa478e95d1f0bcfd3e2a1830ed8ebce799462d5309d5262061141b",
+    "utf8_bytes": 499158,
+    "chars": 291251
   },
   "product_definition": {
     "user_facing_name": "Piece",
@@ -346,12 +346,12 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "PIECE_WORK_ALLOWED",
-    "state": "BOUNDED_WORK_COMPLETE__RN_TEST_BUILD_FAILED__UNADOPTED_STOP",
-    "current_map_section": "65.36.2",
-    "current_entry_section": "88.5",
+    "state": "SOURCE_READY__ONE_CI_PENDING",
+    "current_map_section": "65.37",
+    "current_entry_section": "89",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
-    "weekly_review_section": "5.6.16.2",
-    "first_unfinished_work": "Separate bounded unit: apply only parentheses around XCTAssertEqualObjects expected-array expression at existing RN test902, preserve all names/assertions/denominators/8s/90s, then new-source single CI and full realRN/PNG result. Not applied or executed in this one-CI unit. Formal admission and ordinary save/reopen remain incomplete.",
+    "weekly_review_section": "5.6.17",
+    "first_unfinished_work": "Verify new-source one CI after exact test macro parentheses repair. No adoption or normal save yet.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 6,
@@ -461,7 +461,8 @@
     "containment_repair_validation_success": false,
     "containment_repair_same_source_rerun_allowed": false,
     "containment_repair_unadopted": true,
-    "containment_repair_blocker": "Existing RN test902 XCTAssertEqualObjects inline-array comma breaks macro argument parsing; no actualRN13/PNG/8s results this run."
+    "containment_repair_blocker": "Existing RN test902 XCTAssertEqualObjects inline-array comma breaks macro argument parsing; no actualRN13/PNG/8s results this run.",
+    "containment_macro_repair_owner": "ios_preview_containment_macro_repair_20261021"
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -515,10 +516,10 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "dab2a5c0dcbc4dcef4bddecda9e874488fdc99cf",
-    "raw_sha256": "040ebbd7badc9fed2387b0ff6ee135461cca4024abb29166306c6865cede2e61",
-    "utf8_bytes": 498521,
-    "chars": 290895
+    "git_blob_sha1": "51352306ba4a6ac007bb12b444453cbe27c02e15",
+    "raw_sha256": "fc38ec7832aa478e95d1f0bcfd3e2a1830ed8ebce799462d5309d5262061141b",
+    "utf8_bytes": 499158,
+    "chars": 291251
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -691,12 +692,9 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "CONTAINMENT_FINAL_FAILURE_RESULT_DOCUMENTS_ONLY",
-    "primary_outcome": "BLOCKER_NARROWED",
-    "source_commit": "9b0abdeda1e417f475a212a269021374f72e1553",
-    "ci_run": 39523761970,
-    "ci_conclusion": "failure",
+    "classification": "RN_TEST_MACRO_ONE_LINE_REPAIR_AND_SOURCE_RECORD",
     "paths": [
+      "tests/native/piece-rn-canvas-ios.m",
       "Cocolon_Piece/00_read_first.md",
       "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
       "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
@@ -705,18 +703,15 @@
     ],
     "documentation_paths": 5,
     "product_source_changes": 0,
-    "test_source_changes": 0,
+    "test_source_changes": 1,
     "workflow_changes": 0,
     "new_files": 0,
-    "new_ci_execution": 0,
+    "ci_executions": 0,
     "same_source_reruns": 0,
-    "live_database_query": 0,
+    "live_database_query": 1,
     "live_database_apply": 0,
     "business_rpc": 0,
     "api_changes": 0,
-    "runtime_changes": 0,
-    "flag_changes": 0,
-    "env_changes": 0,
     "deploy": 0,
     "main_merge": 0,
     "structure_map": "STRUCTURE_MAP_DELTA_NONE",
@@ -71694,5 +71689,77 @@
       "meaning": "Parenthesize the whole expected-array expression only; preserve all13names/order/assertion/denominators/8s/90s. Requires a separate bounded new-source verification unit, no same-source rerun."
     },
     "next_product_work": "Separate bounded unit: apply only parentheses around XCTAssertEqualObjects expected-array expression at existing RN test902, preserve all names/assertions/denominators/8s/90s, then new-source single CI and full realRN/PNG result. Not applied or executed in this one-CI unit. Formal admission and ordinary save/reopen remain incomplete."
+  },
+  "ios_preview_containment_macro_repair_20261021": {
+    "state": "SOURCE_READY__ONE_CI_PENDING",
+    "source_parent": "5c3bb726f8124ff91d1d0b465491e31ce1fd33ce",
+    "api_head": "a536e50ee284785f585ac73329ef2947dca8bba9",
+    "environment": "PIECE_WORK_ALLOWED",
+    "approval_basis": "Current Mash explicit Piece continuation plus existing §88.5.1/manifest exact next repair; new bounded unit, prior single-use remains closed",
+    "classification": "LEVEL_3_SEPARATE_EXPLICIT_CONTINUATION_UNIT",
+    "necessity_classification": "OBSERVED_BLOCKER_MINIMAL_FIX",
+    "execution_owner": "Karen root; two read-only reviewers",
+    "entry_section": "89",
+    "map_section": "65.37",
+    "weekly_section": "5.6.17",
+    "paths": [
+      "tests/native/piece-rn-canvas-ios.m",
+      "Cocolon_Piece/00_read_first.md",
+      "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+      "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
+      "Cocolon_Piece/manifest.json"
+    ],
+    "source_change_count": 0,
+    "test_change_count": 1,
+    "workflow_change_count": 0,
+    "preprocessor": [
+      {
+        "label": "before",
+        "returncode": 1,
+        "stdout": "  XCTAssertEqualObjects;\n",
+        "stderr": "<stdin>:2:279: error: macro \"XCTAssertEqualObjects\" passed 3 arguments, but takes just 2\n<stdin>:1: note: macro \"XCTAssertEqualObjects\" defined here\n"
+      },
+      {
+        "label": "after",
+        "returncode": 0,
+        "stdout": "  MACRO_TWO_ARGUMENTS_OK;\n",
+        "stderr": ""
+      }
+    ],
+    "preimages": {
+      "tests/native/piece-rn-canvas-ios.m": {
+        "git_blob_sha1": "62b4e685e9b73dd4b8ac7fc7220f85e7634dd323"
+      },
+      "Cocolon_Piece/00_read_first.md": {
+        "git_blob_sha1": "43df672ebfac6a1184164139dbb009fd9580da43"
+      },
+      "Cocolon_前提資料/current_structure/02_piece_current_structure.md": {
+        "git_blob_sha1": "dab2a5c0dcbc4dcef4bddecda9e874488fdc99cf"
+      },
+      "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md": {
+        "git_blob_sha1": "0fda3684ff6ee2166b4d9d1ba6a236ab2736c8c1"
+      },
+      "Cocolon_前提資料/07_latest_snapshot_diff.md": {
+        "git_blob_sha1": "06fcbbe6e85e1462d13195b3b7182007269365e2"
+      },
+      "Cocolon_Piece/manifest.json": {
+        "git_blob_sha1": "8a6f24e37392b77a75f789d243b10852b3dacf4f"
+      }
+    },
+    "ci_executions": 0,
+    "same_source_reruns": 0,
+    "expected_js": 933,
+    "expected_native_unique": 195,
+    "expected_rn_conditions": 13,
+    "original_case_deadline_ms": 8000,
+    "original_native_alarm_seconds": 90,
+    "formal_admission": false,
+    "product_acceptance": false,
+    "normal_save_reopen_complete": false,
+    "automatic_progression": false,
+    "bounded_work_complete": false,
+    "structure_map": "STRUCTURE_MAP_DELTA_NONE",
+    "stop": "One new-source CI; no further source/test/workflow edits or same-source retry; unmet criteria => unadopted STOP"
   }
 }
