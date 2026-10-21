@@ -41687,3 +41687,8 @@ CURRENT_RULES R10.2の「同じblocker familyで2回連続STOP」に従い、DET
 ## 2026-10-21 — Piece本文画像の最小直接修復を実装
 
 入口§92／map§65.40／weekly§5.6.20／manifest v116。今回のMash継続指示＋Rule18 LEVEL2で、§91.4の製品grid直接修復と既存harness記録修復を同一単位で実装。自然contextのbitmap仮定を除き、CTM/clip/source保持＋同じclean contentsのCFtype確認後CGImage実寸を使用、grid/contents/寸法を同一性へ束縛。未知type拒否、元全alpha比較/wire20/13条件/native195/8秒90秒/資源不変。非有限frameは既存PieceFiniteでnull/invalid、JSON/atomic保存失敗・例外記録とcallback完了を維持し二重reportを防ぐ。元assertion111行順序不変＋保存確認1件。5source＋5docs、新file/依存/workflow/API/DB/deploy/main0。JS933成功11,918.940381ms、最初のcompiler参照不足は既存5.2.2のNODE_PATH設定へ修復。patch/observer65字句復元/独立review2成功は実RN成功ではない。新source一度CIは未実行、旧7alpha不一致/quote制約・正式admission/通常保存は未解決。失敗sourceの再実行0、追加helper/診断family0、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+
+## 2026-10-21 — Piece公開contents寸法修復の途中結果
+
+入口§92.1／map§65.40.1／weekly§5.6.20.1／manifest v117。source14a1286e6265a1194ad83873693afd9cf6680e24/tree9edc6fc27e56e1a5e06f04064263ad98153de0ec、全10path remote全文一致。一度CI39565918631 attempt1でJS933と旧native175成功、新v3 20は10PASS/10FAIL、計185unique PASS/10FAIL。成功想定8＋成功localを前提とする2が未成立。拒否想定10成功を各fault到達証明へ換算しない。iOSsource/RNpatch/Androidsource/Androidexport実compile成功。standaloneは具体拒否位置/contents型未記録で、非CGImageが原因とはまだ確定しない。実RN13/元PNG/画素比較/quote旧制約は同run継続中・未確認。完了4jobのdecoded原ログ/metadata/集計をmanifestへ可逆保存。今回も候補未採用、source/test/workflow追加変更・同source再実行0、正式admission/通常保存/実機は未完了、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。

@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§92／current map§65.40／weekly§5.6.20／manifest v116です。今回の継続指示を受け、前回のbitmap前提を除く最小製品修復と既存harnessの記録欠落修復を実装。自然CTM/clip/sourceを保持し、clean contentsを公開CF型でCGImage確認後だけ実寸取得。JS933成功、独立read-only review2件。新source一度CIは未実行、実RN13条件・旧7alpha不一致/quote制約の解消・正式admission/通常保存は未確認です。**
+**最新は入口§92.1／current map§65.40.1／weekly§5.6.20.1／manifest v117です。source14a1286eの10path全文読戻し一致、一度CI39565918631は継続中。JS933・旧native175と各source compileは成功、新v3は10PASS/10FAILで今回も未採用。standaloneの具体拒否位置・contents型は未確定、実RN13/画像・元画素比較/quote制約は未確認。source追加編集/同source再実行0、正式admission/通常保存は未完了です。**
 
 ### §87の設計時点（履歴）
 
@@ -3147,3 +3147,8 @@ fixtureは実RNと同じglyphRange計算→snapshot→共有paintへ揃え、初
 既存preflight bundleに開始範囲・pre/post source・review・両local JS原ログ・65markerを可逆保存。System Context prepareはresidual without markerで失敗し、同ownerが許すdirect original読取りへ戻りました。Context修復を挟まず、全体設計/全file地図/current map/最新weeklyとactual1747blobをfresh head9f0709dfへ一致確認、mashos-api a536e50e、Supabase ACTIVE_HEALTHYを確認しました。API/DB query/apply/RPC/flags/env/依存/workflow/deploy/main merge変更0、STRUCTURE_MAP_DELTA_NONE（既存optional metrics/共有paintとharness内部のみ）。
 
 今回のsource反映・全文読戻し後は追加source/test/workflow編集をせず、既存CI一度のJS933/native195/実RN13条件と元PNG・時間・画素を回収して判定します。旧7alpha不一致とquote制約は現段階未解決。正式renderer、containment版saved reader、InputScreen正式isSaveAdmitted供給、実Auth/端末の通常保存→同owner再表示は未完了。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。
+
+
+### 92.1 途中結果：今回も新v3正常local未成立、実RN継続中
+
+source14a1286e6265a1194ad83873693afd9cf6680e24/tree9edc6fc27e56e1a5e06f04064263ad98153de0ec、全10path remote全文一致。一度CI39565918631 attempt1でJS933と旧native175成功、新v3 20は10PASS/10FAIL、計185unique PASS/10FAIL。成功想定8＋成功localを前提とする2が未成立。拒否想定10成功を各fault到達証明へ換算しない。iOSsource/RNpatch/Androidsource/Androidexport実compile成功。standaloneは具体拒否位置/contents型未記録で、非CGImageが原因とはまだ確定しない。実RN13/元PNG/画素比較/quote旧制約は同run継続中・未確認。完了4jobのdecoded原ログ/metadata/集計をmanifestへ可逆保存。今回も候補未採用、source/test/workflow追加変更・同source再実行0、正式admission/通常保存/実機は未完了、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
