@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§91.3／current map§65.39.1／weekly§5.6.19.1／manifest v114です。source dfd656c7の11pathを全文読戻し。一度CI39555207737でJS933・旧native175は成功、新v3は10PASS/10FAILとなり候補未採用。iOS/Android sourceとexport compileは成功、実RN13/画像は同runで継続中・未確認。追加source変更/同source再実行0、通常保存は未完了です。**
+**最新は入口§91.4／current map§65.39.2／weekly§5.6.19.2／manifest v115です。一度CI39555207737はfailure。JS933・旧native175は成功、新v3は10PASS/10FAIL。実RNは保存済み1条件のみnative_checked、新プレビュー7条件はunavailable、9件目はlog/PNGのみでJSON欠落、後続4条件未到達。自然UIKit contextをCGBitmapとした前提不成立を確認し、候補は未採用STOP。旧7画素不一致とquote制約は未解決、正式admission/通常保存は未完了です。**
 
 ### §87の設計時点（履歴）
 
@@ -3108,3 +3108,27 @@ native195到達、185unique PASS/10FAIL。旧129（内包97）＋v9 46は全成�
 standaloneにはgridの実寸/CTM/attrs/具体拒否位置がないため原因は未確定。自然CGContextが非bitmapで幅高0、snapshot属性fixup、CTM/clip等の新gate、alpha比較のどれかとは断定しません。fixtureではglyphRange計算前に記録し実RN patchは計算後という差も未確定候補です。現在の元5job decodedログ/metadataをmanifestのinterim bundleへ可逆保存しました。
 
 新候補は未採用のまま。実RN原物の確定までsource/test/workflow追加編集・同source再実行0。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。通常保存・本人履歴・実機は未完了、STRUCTURE_MAP_DELTA_NONE。
+
+
+### 91.4 最終結果：自然UIKit contextのbitmap前提不成立、未採用STOP
+
+source dfd656c737778a5f7f1c2982debe99369fff0b41の一度CI39555207737 attempt1は2026-10-21 06:24:29Z→06:54:13Z、failure。途中記録b34955063ef966d10bf4b18f109bb2f03992e9a0の後もsource/test/workflowを変更せず、同source再実行0です。JS933 PASS/0FAIL/0SKIP、旧native129（内包97）＋v9 46＝175全成功、新v3 20＝10PASS/10FAIL、合計185unique PASS/10FAIL。新v3の拒否想定10件成功を各fault経路到達の証明へ換算しません。iOS/Android source・RN patch・両exportの実compileは成功していますが、製品条件の成功を意味しません。standalone nativeの具体的な拒否位置は未記録です。
+
+実RNの保存されたresults.jsonは8件。essay_paragraphs、quote_unicode、declaration_no_brand、essay_max420、suffix_latin_ligature、suffix_arabic、suffix_max420_aの新プレビュー7件はすべてunavailable/capture_error、local/placedとも0です。saved_essay_canvasだけnative_checked/native_canvas_valid=true、6Textの画像を取得しました。8件ともbody_preserved=trueです。13条件完遂でも、新プレビュー8条件の実施完了でもありません。
+
+machine-readable native境界56件（重複tuple0）は全件stage20、raster_failure_mask=0。stage20は今回追加した自然grid snapshot検証（元source line362）です。保存済み6Textの自然drawRect/prepaint＋sharedpaint計12contextでCGBitmapContextGetWidth/Heightの照会値はすべて[0,0]でした。これは自然backingが0pxという証明ではありません。9件目suffix_spaces_rawのtag827では、自然contextのbitmap照会0/0→RecordPaintGridがsnapshotをnilのままにする→stage20拒否、という同一tagの因果が原物でつながっています。自然UIKit contextをCGBitmapとして扱えるという私の修正前提が成立しません。他56件それぞれの自然contextは未保存のため、全56件の原因を個別確定したとはしません。
+
+quoteも新stage20で止まり、元stage15のraster計画複合制約に未到達。operandの0は未記録TLS初期値であり、実際のsize/scale/ceil寸法0や予算内の証拠ではありません。前回の7条件のalpha占有不一致とquote1条件の制約は未再検証・未解決です。raw20 wire成功0、新プレビューlocal/placed成功0。元guard、font、8秒/90秒、±2font/4096/4M/32MiB、fixture13・native195・assertion順序は緩めていません。
+
+9件目suffix_spaces_rawはXCTest失敗記述にメモリ上のreportとPNGがありますが、results.jsonにはありません。native_ink_framesは(inf,inf,inf,inf)で、sourceはその非有限値をNSJSONSerialization(error:nil)へ渡し、nil結果/書込結果を確認していません。保存停止と整合しますが、NSError/例外/書込結果の直接記録がないため、90秒expectation timeoutの単一原因とは断定しません。suffix_hebrew_raw、suffix_mixed_bidi_raw、containment_native_clip_trap、containment_branding_opacity08の後続4条件は未到達。raw spacesのPNG取得を条件合格へ繰り上げません。
+
+PNGはsaved_essay_canvas（1080×1350）とsuffix_spaces_raw（1080×320）の2件のみ。両方とも前回原物とbyte/全RGBA一致し、保存済み本文6行・余白・brandingを目視確認しました。失敗した新プレビューの完成画像品質は未確認です。解析補助check129PASS/36FAIL/28UNVERIFIEDは製品試験件数ではなく、JS/nativeの分母へ加算しません。
+
+全6jobの元decodedログ、results.json、xcodebuild/xcresult失敗記述、63stage写像、2PNG、画像比較、archive全971memberのSHA256台帳、最終要約をmanifest final_evidence_bundleへ可逆保存しました（13member、gzip767074bytes、SHA256 b00385df74da84e80aaac3cd5017df2c56a6d0278345e0808df81b7675fe186f）。GitHub artifact12326203610のZIP原物81189167bytes/SHA256 0a8b92847de94f05368fbf1005c53e885f3a21c8c20c3315c891f80bab9294c6も照合・別保全済み。途中bundleはb3495506のimmutable Git pointerで保持します。
+
+PRIMARY_OUTCOME=BLOCKER_NARROWED、bounded_work_complete=true、validation_success=false、unadopted=true、STOP。次の最小未実施作業は、自然CTM/clip/source snapshotをbitmap照会0でも保持できる設計と、同じclean layer.contentsが公式typeIDでCGImageと確認できる場合だけ実寸を読む候補の成立確認です。contents型は未観測で、成立を約束しません。未知型をceil/round/clip推定の実backing寸法へ置き換えません。同時に既存harnessで非有限frameを既存PieceFiniteによりnullとして残し、JSON error/nil/書込失敗を欠落なく記録する最小修復が必要です。追加実装・追加CIは行っていません。
+
+今回の候補は正式renderer/admissionへ採用せず、containment保存reader・InputScreenのisSaveAdmitted供給・実Auth/端末の通常保存と同一owner再表示も未完了。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。API/DB/RPC/依存/flags/env/merge/deployの変更0、STRUCTURE_MAP_DELTA_NONE。
+
+
+CURRENT_RULES R10.2の「同じblocker familyで2回連続STOP」に従い、DETOUR_RISK_STOPとして追加開発・再試行を停止します。本来の完了条件は元13条件の本文画像を成立させることです。今回増えた証拠はbitmap前提不成立と記録欠落の範囲だけで、商品品質creditは増えていません。次の推奨経路exact1は、元の全画素guardを維持した製品grid直接修復と既存harnessの欠落修復を一体の最小作業へ戻すこと（未実施）。追加helper/診断family/恒久checkerを挟まず、同じ失敗sourceを再実行しません。
