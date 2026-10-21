@@ -3290,3 +3290,12 @@ CIの全job原ログ・元report・PNG・xcresultの取得可能な原物を既�
 ### 94.4 途中checkpoint：source全20file読戻しと一度CI開始
 
 source87335f4ff489389a75857f90e7fb3f93367ce153／tree8846d921d8174bb9f9a3332380df349f74314215をPR30へ反映し、全20fileをGitHubから全文取得してlocal bytes/blob SHAと一致確認した。一度の[CI39683393855 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39683393855)は同sourceで実行中。以後製品/test/workflowを固定し、source追加修正・同source再実行0を維持する。local949 PASSはCIの結果や実RN13条件へ換算しない。全6jobと実PNG/fit/期限はこのcheckpoint時点で未確定。今回のreadbackと実run identityを継続記録し、完了後に同じ単位へ結果を追記する。候補未採用、正式admission/通常保存・本人再表示は未完了、automatic_progression=false。
+
+
+### 94.5 途中結果：旧175成功、新V4は1PASS/19FAIL、実RN継続中
+
+同じsource87335f4f、一度CI39683393855 attempt1。JS949 PASS/FAIL0/SKIP0（9,990.680848ms）、Android sourceと四つのAndroid export library実compileも成功。iOS source syntax compileとpatch適用は成功したが、standaloneの新V4は20件中1成功/19失敗、旧175は全成功。計176unique PASS/19FAIL、重複0、旧V3 20未実行markerと旧97/129/V9 46 summaryを確認した。main→最終summaryは42.039325秒で元90秒内、launch status0でも検査失敗でjobはfailureである。
+
+新V4の唯一の成功はempty_alphaの合成検査。正常想定8件と、正常controlを前提にする拒否・snapshot・token等11件は失敗した。各拒否faultへ到達した合格とは扱わない。standaloneには具体的な拒否stage/code比較詳細がなく、snapshot/alpha/A同値/資源のどれが直接原因かはこの集計から確定しない。旧A同値・新V4 pixel忠実性を証明したとは扱わない。
+
+実RN13条件とPNG、iOS export library compileは同runで継続中。今回checkpointへ完了4jobの元decodedログ、jobs metadata、独立native集計を可逆保存した。新候補は未採用STOPとし、source/test/workflow追加修正・同source再実行0。残る同run原物の回収と最終結果記録だけを続ける。通常保存/本人再表示・正式admissionは未完了、automatic_progression=false。

@@ -3219,3 +3219,8 @@ STRUCTURE_MAP_DELTA_PRESENT（既存owner内の別候補/独立比較座標/sour
 ##### 65.42.1 source照合と一度CI開始（2026-10-22）
 
 入口§94.4／manifest v121。source87335f4f/tree8846d921の全20path全文一致を確認、一度CI39683393855 attempt1実行中。source/test/workflow固定・追加変更/同source再実行0。JS949はlocalのみ、native新195/実RN13/画像/期限の結果は未確定。候補未採用、通常保存/正式admissionは未完了、automatic_progression=false。STRUCTURE_MAP_DELTA_NONE（今回checkpointは結果資料5fileだけ）。
+
+
+##### 65.42.2 途中：新V4 1PASS/19FAIL、実RN継続
+
+入口§94.5／manifest v122。同source87335f4f、一度CI39683393855 attempt1でJS949/Android source/Android export実compile成功。iOS syntax/patch成功、旧native175成功、新V4 1PASS/19FAIL（正常controlを含む）、計176unique PASS/19FAIL・重複0・旧V3 20未実行。main→summary42.039325秒/元90秒内。standalone拒否stageは未記録で原因を推定しない。実RN13/PNGとiOS exportは継続中、完了4job原ログを保存。新候補未採用、source/test/workflow固定/追加変更/同source再実行0、通常保存/正式admission未完了、automatic_progression=false。今回結果5資料のみ、STRUCTURE_MAP_DELTA_NONE。
