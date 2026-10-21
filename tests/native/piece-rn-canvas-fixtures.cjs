@@ -42,7 +42,7 @@ module.exports = cases.map((c, index) => {
   p.visual_recipe.aspect_ratio = c.ratio;
   p.visual_recipe.theme.theme_id = c.theme;
   p.visual_recipe.branding.branding_mode = c.brand;
-  p.renderer_version = c.saved ? 'piece.rn_native_preview.prototype.v3' : 'piece.rn_native_preview.prototype.v9';
+  p.renderer_version = c.saved ? 'piece.rn_native_preview.prototype.v3' : 'piece.rn_native_preview.containment.prototype.v1';
   p.piece_text_hash = digest(p.piece_text);
   p.content_payload_hash = digest(JSON.stringify(canonical(p.content_payload)));
   p.visual_recipe_hash = digest(JSON.stringify(canonical(p.visual_recipe)));
@@ -67,4 +67,14 @@ module.exports = cases.map((c, index) => {
   { name: 'suffix_hebrew_raw', evidence_set: 'raw_text_diagnostic', raw_text: 'שלום עולם' },
   { name: 'suffix_mixed_bidi_raw', evidence_set: 'raw_text_diagnostic', raw_text: 'abc (אבג) 12' },
 ]);
+
+// Two explicit containment additions. The clip trap is a controlled test-only
+// shared-paint fault in the real RN view, never a naturally observed font bug.
+module.exports.push({ name: 'containment_native_clip_trap', evidence_set: 'containment_addition',
+  raw_text: 'Controlled native clip trap', controlled_native_clip_trap: true });
+const brandingOpacityCase = JSON.parse(JSON.stringify(module.exports.find(c => c.name === 'suffix_latin_ligature')));
+brandingOpacityCase.name = 'containment_branding_opacity08';
+brandingOpacityCase.evidence_set = 'containment_addition';
+module.exports.push(brandingOpacityCase);
+
 if (require.main === module) process.stdout.write(JSON.stringify(module.exports, null, 2) + '\n');

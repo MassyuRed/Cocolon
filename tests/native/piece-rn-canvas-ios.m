@@ -477,6 +477,73 @@ static void PieceObservedSelectedV2Call(id module, SEL selector, NSNumber *tag, 
   });
 }
 
+
+static NSString *const PieceContainmentProfile = @"piece.rn_native_preview.containment.prototype.v1";
+static NSString *PieceClipTrapText = @"Controlled native clip trap";
+typedef void (*PiecePaintCall)(RCTTextView *, SEL, NSRange);
+typedef void (*PieceDrawRectCall)(RCTTextView *, SEL, CGRect);
+static PiecePaintCall PieceOriginalPaint;
+static PieceDrawRectCall PieceOriginalDrawRect;
+static BOOL PieceInsideNaturalDraw;
+static NSMutableArray *PiecePaintContexts;
+static NSMutableSet *PiecePaintContextKeys;
+static void PieceObservePaintContext(RCTTextView *view, NSString *kind) {
+  CGContextRef cg=UIGraphicsGetCurrentContext(); if (!cg) return;
+  NSString *identity=[NSString stringWithFormat:@"%p",(__bridge void *)view];
+  NSString *storageIdentity=[NSString stringWithFormat:@"%p",(__bridge void*)view.cocolonPieceTextStorage];
+  NSString *key=[NSString stringWithFormat:@"%@|%@|%@|%@|%@|%@",identity,kind,view.reactTag,storageIdentity,PieceRect(view.bounds),PieceRect(view.cocolonPieceContentFrame)];
+  if ([PiecePaintContextKeys containsObject:key]) return;
+  [PiecePaintContextKeys addObject:key];
+  CGAffineTransform ctm=CGContextGetCTM(cg);
+  [PiecePaintContexts addObject:@{@"view_identity":identity,@"kind":kind,@"tag":view.reactTag?:NSNull.null,@"storage_identity":storageIdentity,
+    @"text":view.cocolonPieceTextStorage.string?:@"",@"bounds":PieceRect(view.bounds),
+    @"content_frame":PieceRect(view.cocolonPieceContentFrame),@"view_scale":PieceFinite(view.contentScaleFactor),
+    @"layer_scale":PieceFinite(view.layer.contentsScale),@"ctm":@[PieceFinite(ctm.a),PieceFinite(ctm.b),PieceFinite(ctm.c),PieceFinite(ctm.d),PieceFinite(ctm.tx),PieceFinite(ctm.ty)],
+    @"clip":PieceRect(CGContextGetClipBoundingBox(cg)),@"view_alpha":PieceFinite(view.alpha),@"layer_opacity":PieceFinite(view.layer.opacity)}];
+}
+static void PieceObservedNaturalDraw(RCTTextView *view, SEL cmd, CGRect rect) {
+  BOOL before=PieceInsideNaturalDraw; PieceInsideNaturalDraw=YES;
+  @try { PieceObservePaintContext(view,@"natural_drawRect_pre_paint"); PieceOriginalDrawRect(view,cmd,rect); }
+  @finally { PieceInsideNaturalDraw=before; }
+}
+static void PieceObservedSharedPaint(RCTTextView *view, SEL cmd, NSRange glyphs) {
+  PieceObservePaintContext(view,PieceInsideNaturalDraw?@"natural_shared_paint":@"reference_shared_paint");
+  PieceOriginalPaint(view,cmd,glyphs);
+  CGContextRef cg=UIGraphicsGetCurrentContext();
+  CGAffineTransform ctm=cg?CGContextGetCTM(cg):CGAffineTransformIdentity;
+  if ([view.cocolonPieceTextStorage.string isEqual:PieceClipTrapText] && cg && fabs(ctm.a)>1) {
+    CGFloat scale=fabs(ctm.a);
+    CGContextSaveGState(cg); CGContextSetRGBFillColor(cg,0,0,0,1);
+    CGContextFillRect(cg,CGRectMake(view.cocolonPieceContentFrame.origin.x+4,-1/scale,1/scale,1/scale));
+    CGContextRestoreGState(cg);
+  }
+}
+// Independent layer alpha uses the historical fixed raw oracle geometry. No
+// product extent/union is reused, and the actual Text is never modified.
+static NSArray *PieceCanvasLayerOracle(RCTTextView *view, UIView *canvas) {
+  const size_t width=1536,height=512,stride=6144; const CGFloat pad=160;
+  CGPoint origin=[view convertPoint:CGPointZero toView:canvas];
+  CGFloat px=origin.x-floor(origin.x),py=origin.y-floor(origin.y);
+  UInt8 *bytes=calloc(height,stride); CGColorSpaceRef space=CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
+  CGContextRef cg=bytes&&space?CGBitmapContextCreate(bytes,width,height,8,stride,space,kCGBitmapByteOrder32Big|kCGImageAlphaPremultipliedLast):NULL;
+  if(space)CGColorSpaceRelease(space); if(!cg){free(bytes);return nil;}
+  NSArray *answer=nil;
+  @try{
+    CGContextTranslateCTM(cg,0,height);CGContextScaleCTM(cg,1,-1);CGContextTranslateCTM(cg,pad+px,pad+py);
+    [view.layer renderInContext:cg];
+    size_t l=width,t=height,r=0,b=0;BOOL seen=NO,edge=NO;
+    for(size_t y=0;y<height;y++)for(size_t x=0;x<width;x++)if(bytes[y*stride+x*4+3]){
+      seen=YES;l=MIN(l,x);t=MIN(t,y);r=MAX(r,x);b=MAX(b,y);edge=edge||x==0||y==0||x+1==width||y+1==height;
+    }
+    if(seen&&!edge)answer=@[@(l-pad-px),@(t-pad-py),@(r+1-pad-px),@(b+1-pad-py)];
+  }@finally{CGContextRelease(cg);free(bytes);}return answer;
+}
+static NSArray *PieceComponentUnion(NSDictionary *parts) {
+  NSArray*a=parts[@"direct"],*b=parts[@"native"],*c=parts[@"layer"];if(parts.count!=3||a.count!=4||b.count!=4||c.count!=4)return nil;
+  return @[@(fmin([a[0]doubleValue],fmin([b[0]doubleValue],[c[0]doubleValue]))),@(fmin([a[1]doubleValue],fmin([b[1]doubleValue],[c[1]doubleValue]))),
+    @(fmax([a[2]doubleValue],fmax([b[2]doubleValue],[c[2]doubleValue]))),@(fmax([a[3]doubleValue],fmax([b[3]doubleValue],[c[3]doubleValue])))];
+}
+
 @interface PieceCanvasTest : NSObject <RCTBridgeModule>
 @property(nonatomic, weak) RCTBridge *bridge;
 @property(nonatomic, strong) NSMutableArray *reports;
@@ -535,7 +602,7 @@ RCT_EXPORT_METHOD(capture:(nonnull NSNumber *)tag report:(NSDictionary *)raw res
           fabs(contentFrame.size.height - [raw[@"plan_line_height"] doubleValue]) < 0.01 &&
           fabs(container.size.width - contentFrame.size.width) < 0.01 && fabs(container.size.height - contentFrame.size.height) < 0.01;
       }
-      if (i < rows.count && [@[@"piece.rn_native_preview.prototype.v7", @"piece.rn_native_preview.prototype.v8", @"piece.rn_native_preview.prototype.v9"] containsObject:raw[@"candidate_profile"]]) {
+      if (i < rows.count && [@[@"piece.rn_native_preview.prototype.v7", @"piece.rn_native_preview.prototype.v8", @"piece.rn_native_preview.prototype.v9", PieceContainmentProfile] containsObject:raw[@"candidate_profile"]]) {
         valid = valid && fabs(view.bounds.size.width - [raw[@"width"] doubleValue]) < 0.01 &&
           fabs(contentFrame.origin.x - [raw[@"margin"] doubleValue]) < 0.01 && fabs(contentFrame.origin.y) < 0.01 &&
           fabs(contentFrame.size.width - [raw[@"content_width"] doubleValue]) < 0.01 &&
@@ -561,7 +628,24 @@ RCT_EXPORT_METHOD(capture:(nonnull NSNumber *)tag report:(NSDictionary *)raw res
             [observedFrame isEqual:PieceRect(actualFrame)] && CGRectGetHeight(localInk) <= (i < rows.count ? [raw[@"plan_line_height"] doubleValue] : 40);
         }
       }
-      if (i < rows.count && [@[@"piece.rn_native_preview.prototype.v7", @"piece.rn_native_preview.prototype.v8", @"piece.rn_native_preview.prototype.v9"] containsObject:raw[@"candidate_profile"]])
+      if ([raw[@"candidate_profile"] isEqual:PieceContainmentProfile]) {
+        NSDictionary *evidence=i<[raw[@"inspection"] count]?raw[@"inspection"][i]:nil;
+        NSDictionary *parts=evidence[@"componentInks"];
+        NSArray *ink=evidence[@"ink"],*direct=PieceCanvasPixelOracle(view,canvas),*layer=PieceCanvasLayerOracle(view,canvas);
+        BOOL trap=[raw[@"native_clip_trap_synthetic"] boolValue];
+        CGRect actualFrame=(CGRect){[view convertPoint:CGPointZero toView:canvas],view.bounds.size};
+        BOOL componentValid=[evidence[@"version"] isEqual:@"piece.native_selected_line.v3"]&&
+          [ink isEqual:PieceComponentUnion(parts)]&&[parts[@"direct"] isEqual:direct]&&[parts[@"layer"] isEqual:layer]&&
+          [evidence[@"nativeRasterScale"] doubleValue]==view.contentScaleFactor&&view.contentScaleFactor==view.layer.contentsScale&&
+          [evidence[@"tag"]isEqual:view.reactTag]&&[evidence[@"canvasTag"]isEqual:tag]&&
+          [evidence[@"canvasFrame"]isEqual:PieceRect(actualFrame)]&&[evidence[@"stage"]isEqual:trap?@"local":@"placed"];
+        valid=valid&&componentValid;
+        if(trap){
+          report[@"native_clip_trap_capture_verified"]=@(componentValid&&[parts[@"direct"][1]doubleValue]>=0&&[parts[@"layer"][1]doubleValue]>=0&&[parts[@"native"][1]doubleValue]<0&&[evidence[@"overflow"]boolValue]);
+        }
+        localInk=ink.count==4?CGRectMake([ink[0]doubleValue],[ink[1]doubleValue],[ink[2]doubleValue]-[ink[0]doubleValue],[ink[3]doubleValue]-[ink[1]doubleValue]):CGRectNull;
+      }
+      if (i < rows.count && [@[@"piece.rn_native_preview.prototype.v7", @"piece.rn_native_preview.prototype.v8", @"piece.rn_native_preview.prototype.v9", PieceContainmentProfile] containsObject:raw[@"candidate_profile"]])
         valid = valid && CGRectGetHeight(localInk) <= [raw[@"plan_line_height"] doubleValue];
       CGRect ink = [view convertRect:localInk toView:canvas];
       [frames addObject:@[@(ink.origin.x), @(ink.origin.y), @(CGRectGetMaxX(ink)), @(CGRectGetMaxY(ink))]];
@@ -572,6 +656,14 @@ RCT_EXPORT_METHOD(capture:(nonnull NSNumber *)tag report:(NSDictionary *)raw res
     }
     report[@"native_texts"] = actual; report[@"native_ink_frames"] = frames; report[@"native_canvas_valid"] = @(valid);
     report[@"native_text_geometry"] = geometry;
+    NSMutableArray *paintContexts=[NSMutableArray new],*opacityFacts=[NSMutableArray new];
+    for(RCTTextView *view in texts){
+      NSString *identity=[NSString stringWithFormat:@"%p",(__bridge void*)view];
+      NSString *storageIdentity=[NSString stringWithFormat:@"%p",(__bridge void*)view.cocolonPieceTextStorage];
+      for(NSDictionary *p in PiecePaintContexts)if([p[@"view_identity"] isEqual:identity]&&[p[@"storage_identity"] isEqual:storageIdentity]&&[p[@"tag"] isEqual:view.reactTag]&&[p[@"bounds"] isEqual:PieceRect(view.bounds)]&&[p[@"content_frame"] isEqual:PieceRect(view.cocolonPieceContentFrame)])[paintContexts addObject:p];
+      [opacityFacts addObject:@{@"text":view.cocolonPieceTextStorage.string?:@"",@"view_alpha":PieceFinite(view.alpha),@"layer_opacity":PieceFinite(view.layer.opacity)}];
+    }
+    report[@"natural_and_reference_paint_contexts"]=paintContexts;report[@"native_opacity_facts"]=opacityFacts;
     if (canvas && canvas.bounds.size.width > 0 && canvas.bounds.size.height > 0) {
       UIGraphicsImageRendererFormat *format = [UIGraphicsImageRendererFormat defaultFormat];
       format.scale = 1; format.opaque = YES;
@@ -727,6 +819,43 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
       [adapter[@"version"] isEqual:@"piece.native_candidates.v5"]) observed = YES;
   XCTAssertTrue(observed); XCTAssertNotNil(report[@"png"]);
 }
+
+- (void)assertContainmentReport:(NSDictionary *)report {
+  XCTAssertEqualObjects(report[@"candidate_profile"],PieceContainmentProfile);
+  NSArray *rows=report[@"rows"],*all=report[@"inspection"],*locals=report[@"local_inspection"];
+  XCTAssertEqual(all.count,rows.count+([report[@"branding"]boolValue]?1:0));XCTAssertEqual(locals.count,all.count);
+  for(NSUInteger i=0;i<all.count;i++){
+    NSDictionary*e=all[i],*l=locals[i];
+    XCTAssertEqualObjects(e[@"version"],@"piece.native_selected_line.v3");XCTAssertEqualObjects(e[@"platform"],@"ios");XCTAssertEqualObjects(e[@"rasterScale"],@1);
+    XCTAssertEqualObjects(e[@"glyphCheck"],@"no_missing_observed");XCTAssertEqualObjects(e[@"fontSize"],i<rows.count?report[@"font_size"]:@28);
+    XCTAssertEqualObjects(e[@"stage"],@"placed");XCTAssertEqualObjects(l[@"stage"],@"local");
+    XCTAssertEqualObjects(e[@"ink"],PieceComponentUnion(e[@"componentInks"]));XCTAssertEqualObjects(l[@"ink"],PieceComponentUnion(l[@"componentInks"]));
+    XCTAssertEqualObjects(e[@"nativeRasterScale"],l[@"nativeRasterScale"]);
+    XCTAssertEqualObjects(e[@"snapshotToken"],l[@"snapshotToken"]);XCTAssertEqualObjects(e[@"tag"],l[@"tag"]);XCTAssertEqualObjects(e[@"canvasTag"],l[@"canvasTag"]);
+    XCTAssertEqualObjects(e[@"contentFrame"],l[@"contentFrame"]);XCTAssertEqualObjects(e[@"independentMetrics"],l[@"independentMetrics"]);
+    XCTAssertFalse([e[@"overflow"]boolValue]);XCTAssertFalse([e[@"wrapViolation"]boolValue]);
+    NSArray*m=e[@"independentMetrics"];XCTAssertEqual(m.count,5);if(m.count!=5)continue;
+    for(id v in m)XCTAssertTrue([v isKindOfClass:NSNumber.class]&&isfinite([v doubleValue]));
+    XCTAssertGreaterThanOrEqual([m[0]doubleValue],0);XCTAssertGreaterThanOrEqual([m[3]doubleValue],[m[1]doubleValue]);XCTAssertGreaterThanOrEqual([m[4]doubleValue],[m[2]doubleValue]);
+    XCTAssertLessThanOrEqual(fmax([m[0]doubleValue],[m[3]doubleValue])-fmin(0,[m[1]doubleValue]),[report[@"content_width"]doubleValue]);
+    XCTAssertLessThanOrEqual([m[4]doubleValue]-[m[2]doubleValue],i<rows.count?[report[@"plan_line_height"]doubleValue]:40);
+  }
+  BOOL observed=NO;
+  for(NSDictionary *a in report[@"trace"][@"adapters"])if([a[@"status"]isEqual:@"resolved"]&&[a[@"font_size"]isEqual:report[@"font_size"]]&&[a[@"candidate_profile"]isEqual:@"piece.rn_native_preview.prototype.v5"]&&[a[@"version"]isEqual:@"piece.native_candidates.v5"])observed=YES;
+  XCTAssertTrue(observed);XCTAssertGreaterThan([report[@"plan_line_height"]doubleValue],0);
+  NSArray *contexts=report[@"natural_and_reference_paint_contexts"];
+  XCTAssertGreaterThan(contexts.count,0u);
+  NSMutableDictionary *byView=[NSMutableDictionary new];
+  for(NSDictionary*p in contexts){NSMutableDictionary *v=byView[p[@"view_identity"]];if(!v){v=[NSMutableDictionary new];byView[p[@"view_identity"]]=v;}v[p[@"kind"]]=p;}
+  for(NSDictionary*v in byView.allValues){
+    NSDictionary*a=v[@"natural_drawRect_pre_paint"],*b=v[@"reference_shared_paint"];XCTAssertNotNil(a);XCTAssertNotNil(b);if(!a||!b)continue;
+    XCTAssertEqualObjects(a[@"bounds"],b[@"bounds"]);XCTAssertEqualObjects(a[@"content_frame"],b[@"content_frame"]);
+    XCTAssertEqualObjects(a[@"view_scale"],b[@"view_scale"]);XCTAssertEqualObjects(a[@"layer_scale"],b[@"layer_scale"]);
+    NSArray*ac=a[@"ctm"],*bc=b[@"ctm"];for(NSUInteger j=0;j<4;j++)XCTAssertEqualWithAccuracy([ac[j]doubleValue],[bc[j]doubleValue],1e-6);
+  }
+  XCTAssertNotNil(report[@"png"]);
+}
+
 - (void)testWholeCanvasWithRealReactNative {
   SEL selectedSelector = NSSelectorFromString(@"inspectSelectedLine:text:fontSize:resolver:rejecter:");
   Method selectedMethod = class_getInstanceMethod(NSClassFromString(@"PieceTextMetrics"), selectedSelector);
@@ -734,7 +863,7 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
   if (!selectedMethod) return;
   XCTAssertEqual(method_getNumberOfArguments(selectedMethod), 7u);
   if (method_getNumberOfArguments(selectedMethod) != 7u) return;
-  SEL pixelSelector = NSSelectorFromString(@"inspectSelectedLineV2:text:fontSize:request:resolver:rejecter:");
+  SEL pixelSelector = NSSelectorFromString(@"inspectSelectedLineV3:text:fontSize:request:resolver:rejecter:");
   Method pixelMethod = class_getInstanceMethod(NSClassFromString(@"PieceTextMetrics"), pixelSelector);
   XCTAssertNotEqual(pixelMethod, NULL); if (!pixelMethod) return;
   XCTAssertEqual(method_getNumberOfArguments(pixelMethod), 8u); if (method_getNumberOfArguments(pixelMethod) != 8u) return;
@@ -745,6 +874,13 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
   PieceOriginalSelectedCall = (PieceSelectedCall)priorIMP;
   PieceArabicObservations = [NSMutableArray new]; PieceArabicOperationOrdinal = 0;
   method_setImplementation(selectedMethod, (IMP)PieceObservedSelectedCall);
+  Method paintMethod=class_getInstanceMethod(RCTTextView.class,NSSelectorFromString(@"cocolonPiecePaintGlyphRange:"));
+  Method drawMethod=class_getInstanceMethod(RCTTextView.class,@selector(drawRect:));
+  XCTAssertNotEqual(paintMethod,NULL);XCTAssertNotEqual(drawMethod,NULL);if(!paintMethod||!drawMethod){method_setImplementation(selectedMethod,priorIMP);method_setImplementation(pixelMethod,pixelIMP);return;}
+  IMP paintIMP=method_getImplementation(paintMethod),drawIMP=method_getImplementation(drawMethod);
+  PieceOriginalPaint=(PiecePaintCall)paintIMP;PieceOriginalDrawRect=(PieceDrawRectCall)drawIMP;
+  PiecePaintContexts=[NSMutableArray new];PiecePaintContextKeys=[NSMutableSet new];
+  method_setImplementation(paintMethod,(IMP)PieceObservedSharedPaint);method_setImplementation(drawMethod,(IMP)PieceObservedNaturalDraw);
   RCTBridge *bridge = nil;
   @try {
   self.resultModule = [PieceCanvasTest new]; self.resultModule.reports = [NSMutableArray new];
@@ -762,8 +898,8 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
   NSArray *baseline = [self.resultModule.reports filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"evidence_set == %@", @"baseline_card"]];
   NSArray *supplemental = [self.resultModule.reports filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"evidence_set == %@", @"supplemental_card"]];
   NSArray *raw = [self.resultModule.reports filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"evidence_set == %@", @"raw_text_diagnostic"]];
-  XCTAssertEqual(self.resultModule.reports.count, 11);
-  XCTAssertEqualObjects([self.resultModule.reports valueForKey:@"name"], [[baselineNames arrayByAddingObjectsFromArray:supplementalNames] arrayByAddingObjectsFromArray:rawNames]);
+  XCTAssertEqual(self.resultModule.reports.count, 13);
+  XCTAssertEqualObjects([self.resultModule.reports valueForKey:@"name"], [[[baselineNames arrayByAddingObjectsFromArray:supplementalNames] arrayByAddingObjectsFromArray:rawNames] arrayByAddingObjectsFromArray:@[@"containment_native_clip_trap",@"containment_branding_opacity08"]]);
   XCTAssertEqual(baseline.count, 5); XCTAssertEqualObjects([baseline valueForKey:@"name"], baselineNames);
   XCTAssertEqual(supplemental.count, 3); XCTAssertEqualObjects([supplemental valueForKey:@"name"], supplementalNames);
   XCTAssertEqual(raw.count, 3); XCTAssertEqualObjects([raw valueForKey:@"name"], rawNames);
@@ -780,7 +916,7 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     XCTAssertEqualObjects(report[@"save_fit_current"], @(preview), @"%@", report[@"name"]);
     XCTAssertEqualObjects(report[@"save_fit_wrong_token_current"], @NO, @"%@", report[@"name"]);
     XCTAssertEqualObjects(report[@"save_fit_handle_keys"], preview ? @[@"isCurrent"] : @[], @"%@", report[@"name"]);
-    if (preview) [self assertV9Report:report];
+    if (preview) [self assertContainmentReport:report];
     XCTAssertNotNil(report[@"png"]);
     if (report[@"png"]) {
       UIImage *image = [UIImage imageWithContentsOfFile:[PieceEvidenceDirectory() stringByAppendingPathComponent:report[@"png"]]];
@@ -800,7 +936,7 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     XCTAssertEqualObjects(report[@"save_fit_current"], @YES);
     XCTAssertEqualObjects(report[@"save_fit_wrong_token_current"], @NO);
     XCTAssertEqualObjects(report[@"save_fit_handle_keys"], @[@"isCurrent"]);
-    [self assertV9Report:report];
+    [self assertContainmentReport:report];
   }
   for (NSDictionary *report in raw) {
     XCTAssertEqualObjects(report[@"phase"], @"measurement_checked", @"%@", report);
@@ -812,9 +948,25 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     XCTAssertEqualObjects(report[@"plan_groups"], @[report[@"rows"]]);
     XCTAssertEqual([report[@"on_text_layout"] count], 1);
     XCTAssertNil(report[@"save_fit_current"]); XCTAssertNil(report[@"state_can_save"]); XCTAssertNil(report[@"state_can_export"]);
-    [self assertV9Report:report];
+    [self assertContainmentReport:report];
   }
-  for (NSDictionary *report in [supplemental arrayByAddingObjectsFromArray:raw]) {
+  NSArray *extra=[self.resultModule.reports filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"evidence_set == %@",@"containment_addition"]];
+  XCTAssertEqual(extra.count,2u);
+  NSDictionary *trap=extra.count>0?extra[0]:nil,*branding=extra.count>1?extra[1]:nil;
+  XCTAssertEqualObjects(trap[@"name"],@"containment_native_clip_trap");
+  XCTAssertEqualObjects(trap[@"native_clip_trap_synthetic"],@YES);XCTAssertEqualObjects(trap[@"native_clip_trap_detected"],@YES);
+  XCTAssertEqualObjects(trap[@"diagnostic_valid"],@YES);XCTAssertEqualObjects(trap[@"native_clip_trap_capture_verified"],@YES);
+  XCTAssertEqualObjects(trap[@"expected_overflow"],@YES);XCTAssertEqualObjects(trap[@"native_canvas_valid"],@NO);
+  XCTAssertLessThan([trap[@"elapsed_ms"]doubleValue],8000);XCTAssertNil(trap[@"save_fit_current"]);XCTAssertNil(trap[@"state_can_save"]);
+  XCTAssertEqualObjects(branding[@"name"],@"containment_branding_opacity08");XCTAssertEqualObjects(branding[@"phase"],@"native_checked");
+  XCTAssertEqualObjects(branding[@"native_canvas_valid"],@YES);XCTAssertEqualObjects(branding[@"body_preserved"],@YES);
+  XCTAssertEqualObjects(branding[@"state_can_save"],@NO);XCTAssertEqualObjects(branding[@"state_can_export"],@NO);
+  XCTAssertEqualObjects(branding[@"save_fit_current"],@YES);XCTAssertEqualObjects(branding[@"save_fit_wrong_token_current"],@NO);
+  XCTAssertLessThan([branding[@"elapsed_ms"]doubleValue],8000);[self assertContainmentReport:branding];
+  NSDictionary *opacity=[branding[@"native_opacity_facts"] lastObject];XCTAssertEqualObjects(opacity[@"text"],@"Cocolon");
+  XCTAssertEqualWithAccuracy([opacity[@"view_alpha"]doubleValue],0.8,1e-6);XCTAssertEqualWithAccuracy([opacity[@"layer_opacity"]doubleValue],0.8,1e-6);
+
+  for (NSDictionary *report in [[supplemental arrayByAddingObjectsFromArray:raw] arrayByAddingObjectsFromArray:extra]) {
     if (report[@"png"]) {
       UIImage *image = [UIImage imageWithContentsOfFile:[PieceEvidenceDirectory() stringByAppendingPathComponent:report[@"png"]]];
       XCTAssertNotNil(image);
@@ -825,6 +977,7 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
   } @finally {
     method_setImplementation(selectedMethod, priorIMP);
     method_setImplementation(pixelMethod, pixelIMP);
+    method_setImplementation(paintMethod,paintIMP);method_setImplementation(drawMethod,drawIMP);
     [bridge invalidate];
   }
 }

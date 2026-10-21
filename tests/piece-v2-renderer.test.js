@@ -84,6 +84,35 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
         content_frame: [margin, 0, body ? input.contentWidth : block.box.width, block.box.height], raster_scale: 1,
         snapshot_token: request.snapshot_token ?? `snapshot-${tag}` };
       return nativeInspect ? nativeInspect(result, nativeCalls.length) : result;
+    }, inspectSelectedLineV3: async (tag, text, fontSize, request) => {
+      nativeCalls.push({ tag, text, fontSize, method: 'inspectSelectedLineV3', request });
+      const block = card.state.measurement.blocks[tag - 1], input = card.drawingInput(context.preparePieceNativeCard(card.props));
+      const body = tag - 1 < input.blocks.length, margin = body ? input.margin : 0;
+      // Derive the observed frame from rendered ancestor styles, independently
+      // of the product's expected-frame helper.
+      const rendered = card.render(), flatten = node => !node || typeof node !== 'object' ? []
+        : [node, ...node.children.flat(Infinity).flatMap(flatten)];
+      const all = flatten(rendered), style = id => all.find(n => n.props.testID === id).props.style;
+      const translation = (value, axis) => (value.transform ?? []).reduce((sum, transform) => sum + (transform[axis] ?? 0), 0);
+      const textStyle = style(`piece-visual-block-${tag - 1}`), composition = style('piece-body-composition');
+      let rowY = 0;
+      for (let i = 0; i < tag - 1 && body; i++) { const row = style(`piece-logical-row-${i}`); rowY += row.height + row.marginBottom; }
+      const row = body ? style(`piece-logical-row-${tag - 1}`) : {};
+      const canvasFrame = [body ? composition.left + translation(composition, 'translateX') + translation(row, 'translateX') + textStyle.left : textStyle.left,
+        body ? composition.top + translation(composition, 'translateY') + rowY + translation(row, 'translateY') + textStyle.top : textStyle.top,
+        block.box.width, block.box.height];
+      const inkWidth = body ? 500 : 100;
+      const result = { version: 'piece.native_selected_line.v3', platform: 'ios', font_size: fontSize,
+        width: block.box.width, height: block.box.height, utf16_length: text.length,
+        boundaries: [0, ...[...new Intl.Segmenter('ja', { granularity: 'grapheme' }).segment(text)].map(s => s.index + s.segment.length)],
+        line_ends: block.lines.map(l => l.end), ink: [margin, 10, margin + inkWidth, body ? 60 : 30], glyph_check: 'no_missing_observed',
+        independent_metrics_f64le: selectedBytes([inkWidth, 0, -fontSize * .8, inkWidth, fontSize * .2]),
+        stage: request.stage, tag, canvas_tag: request.canvas_tag, canvas_frame: canvasFrame,
+        content_frame: [margin, 0, body ? input.contentWidth : block.box.width, block.box.height], raster_scale: 1,
+        snapshot_token: request.snapshot_token ?? `snapshot-${tag}` };
+      result.native_raster_scale = 3;
+      result.component_inks = Object.fromEntries(['direct', 'native', 'layer'].map(key => [key, [...result.ink]]));
+      return nativeInspect ? nativeInspect(result, nativeCalls.length) : result;
     }, inspect: async (tag, text, fontSize) => {
       nativeCalls.push({ tag, text, fontSize });
       const block = card.state.measurement.blocks[tag - 1];
@@ -102,8 +131,8 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
     ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'readPieceOwnerSnapshot']],
     ['features/piece/piecePreviewModel.js', ['readPiecePreviewDisplay', 'verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay']],
-    ['features/piece/pieceLayout.js', ['PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'PIECE_NATIVE_PREVIEW_V7_VERSION', 'PIECE_NATIVE_PREVIEW_V8_VERSION', 'PIECE_NATIVE_PREVIEW_V9_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
-    ['features/piece/pieceRenderer.js', ['inspectPieceText', 'readPieceTextInspection', 'inspectPieceSelectedLine', 'readPieceSelectedLineInspection', 'readPieceSelectedLineV2Inspection', 'inspectPieceSelectedLineV2', 'measurePieceCandidates']],
+    ['features/piece/pieceLayout.js', ['PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'PIECE_NATIVE_PREVIEW_V7_VERSION', 'PIECE_NATIVE_PREVIEW_V8_VERSION', 'PIECE_NATIVE_PREVIEW_V9_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
+    ['features/piece/pieceRenderer.js', ['inspectPieceText', 'readPieceTextInspection', 'inspectPieceSelectedLine', 'readPieceSelectedLineInspection', 'readPieceSelectedLineV2Inspection', 'inspectPieceSelectedLineV2', 'readPieceSelectedLineV3Inspection', 'inspectPieceSelectedLineV3', 'measurePieceCandidates']],
     ['features/piece/pieceMeasuredWrap.js', ['planPieceMeasuredRows']],
     ['components/piece/PieceVisualCard.js', ['PieceVisualCard']],
   ];
@@ -2065,4 +2094,296 @@ test('v9 refuses fit publication when final preview integrity checks cross the o
   await placedV9(h);
   assert.equal(h.fit(), undefined); assert.equal(h.card.state.measurement.reason, 'measurement_timeout');
   assert.equal(h.card.deadline.expiresAt, NOW + 8000);
+});
+
+// The containment contract carries three independently named footprints.
+// These bridge doubles test selection/lifecycle; native/RN suites test paint fidelity.
+const containmentProfile = 'piece.rn_native_preview.containment.prototype.v1';
+const containmentSample = (...args) => ({ ...v9Sample(...args), renderer_version: containmentProfile });
+const containmentHarness = options => fitHarness({ ...options, version: containmentProfile,
+  packet: options?.packet ?? containmentSample() });
+const unionComponents = components => [Math.min(...Object.values(components).map(rect => rect[0])),
+  Math.min(...Object.values(components).map(rect => rect[1])), Math.max(...Object.values(components).map(rect => rect[2])),
+  Math.max(...Object.values(components).map(rect => rect[3]))];
+const withComponent = (wire, component, rect) => {
+  const component_inks = { ...wire.component_inks, [component]: rect };
+  return { ...wire, component_inks, ink: unionComponents(component_inks) };
+};
+const containmentWire = () => {
+  const component_inks = { direct: [96, 10, 596, 60], native: [95, 9, 597, 61], layer: [96, 8, 598, 62] };
+  return { ...v9Wire(), version: 'piece.native_selected_line.v3', native_raster_scale: 3,
+    component_inks, ink: unionComponents(component_inks) };
+};
+async function localContainment(h) {
+  await prepare(h); layoutV9(h); await tickV9(); h.flushFrame(); h.flushFrame(); await tickV9();
+}
+async function placedContainment(h) { await placedV9(h); }
+
+test('containment profile preserves B9 v5 and closes saved, export and Android without replacing v9', async () => {
+  const h = containmentHarness(), old = v9Harness();
+  primeNextFont(h); primeNextFont(old); await prepare(h); await prepare(old);
+  assert.equal(h.PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, containmentProfile);
+  assert.equal(h.input().candidateProfile, containmentProfile);
+  assert.deepEqual(copy(h.card.state.measurement.plan), copy(old.card.state.measurement.plan));
+  assert.deepEqual(h.candidateCalls, old.candidateCalls);
+  assert.notEqual(h.input().key, old.input().key);
+  assert.equal(h.preparePieceNativeCard({ display: display(containmentSample()), exportCanvas: true }), null);
+  assert.equal(h.preparePieceNativeSavedDisplay({ ...savedSample(), renderer_version: containmentProfile }), null);
+  assert.equal(h.readPieceSelectedLineV2Inspection(v9Wire(), v9Expected()).version, 'piece.native_selected_line.v2');
+  assert.throws(() => h.readPieceSelectedLineV2Inspection(containmentWire(), v9Expected()), /UNAVAILABLE/);
+  assert.throws(() => h.readPieceSelectedLineV3Inspection(v9Wire(), v9Expected()), /UNAVAILABLE/);
+  h.Platform.OS = 'android'; assert.equal(h.preparePieceNativePreview(display(containmentSample())), null);
+});
+
+test('containment decoder requires all twenty closed fields and the original identity and geometry checks', () => {
+  const h = rawHarness(), expected = v9Expected(), wire = containmentWire();
+  assert.equal(Object.keys(wire).length, 20);
+  assert.equal(h.readPieceSelectedLineV3Inspection(wire, expected).version, 'piece.native_selected_line.v3');
+  for (const key of Object.keys(wire)) {
+    const missing = containmentWire(); delete missing[key];
+    assert.throws(() => h.readPieceSelectedLineV3Inspection(missing, expected), /UNAVAILABLE/, key);
+  }
+  for (const mutate of [r => ({ ...r, extra: true }), r => ({ ...r, version: 'piece.native_selected_line.v2' }),
+    r => ({ ...r, platform: 'android' }), r => ({ ...r, stage: 'placed' }), r => ({ ...r, tag: 99 }),
+    r => ({ ...r, canvas_tag: 999 }), r => ({ ...r, raster_scale: 3 }), r => ({ ...r, snapshot_token: '' }),
+    r => ({ ...r, canvas_frame: [0, 96, 1079, r.height] }), r => ({ ...r, content_frame: [0, 0, 0, 75] }),
+    r => ({ ...r, independent_metrics_f64le: selectedBytes([500, 0, 0, 500, Infinity]) })]) {
+    assert.throws(() => h.readPieceSelectedLineV3Inspection(mutate(containmentWire()), expected), /UNAVAILABLE/);
+  }
+});
+
+test('containment decoder validates each component and finite positive native scale without treating it as logical scale', () => {
+  const h = rawHarness(), expected = v9Expected();
+  for (const scale of [1, 2, 3]) assert.equal(h.readPieceSelectedLineV3Inspection(
+    { ...containmentWire(), native_raster_scale: scale }, expected).nativeRasterScale, scale);
+  for (const scale of [0, -1, NaN, Infinity, -Infinity, null, '3']) assert.throws(() =>
+    h.readPieceSelectedLineV3Inspection({ ...containmentWire(), native_raster_scale: scale }, expected), /UNAVAILABLE/);
+  for (const component of ['direct', 'native', 'layer']) {
+    const missing = containmentWire(); delete missing.component_inks[component];
+    assert.throws(() => h.readPieceSelectedLineV3Inspection(missing, expected), /UNAVAILABLE/);
+    for (const rect of [null, [], [0, 0, 1], [0, 0, 1, 1, 2], [0, 0, 0, 1], [1, 0, 0, 1],
+      [0, 0, 1, 0], [0, NaN, 1, 1], [0, 0, Infinity, 1], [0, 0, '1', 1]]) {
+      const wire = containmentWire(); wire.component_inks[component] = rect;
+      assert.throws(() => h.readPieceSelectedLineV3Inspection(wire, expected), /UNAVAILABLE/, component);
+    }
+  }
+  for (const components of [null, [], { ...containmentWire().component_inks, extra: [0, 0, 1, 1] }]) {
+    assert.throws(() => h.readPieceSelectedLineV3Inspection({ ...containmentWire(), component_inks: components }, expected), /UNAVAILABLE/);
+  }
+});
+
+test('containment union rejects omitted overhang and even a one-ULP forged edge in either direction', () => {
+  const h = rawHarness(), expected = v9Expected(), wire = containmentWire();
+  assert.deepEqual(copy(h.readPieceSelectedLineV3Inspection(wire, expected).ink), [95, 8, 598, 62]);
+  for (let edge = 0; edge < 4; edge++) for (const delta of [-1, 1]) {
+    const forged = containmentWire(), bits = Buffer.alloc(8); bits.writeDoubleLE(forged.ink[edge]);
+    bits.writeBigUInt64LE(bits.readBigUInt64LE() + BigInt(delta)); forged.ink[edge] = bits.readDoubleLE();
+    assert.throws(() => h.readPieceSelectedLineV3Inspection(forged, expected), /UNAVAILABLE/, `${edge}/${delta}`);
+  }
+  for (const component of ['direct', 'native', 'layer']) {
+    const forged = containmentWire(); forged.component_inks[component][2] = 599;
+    assert.throws(() => h.readPieceSelectedLineV3Inspection(forged, expected), /UNAVAILABLE/, component);
+  }
+});
+
+test('containment evidence owns frozen component copies instead of retaining mutable bridge arrays', () => {
+  const h = rawHarness(), wire = containmentWire(), result = h.readPieceSelectedLineV3Inspection(wire, v9Expected());
+  assert.ok(Object.isFrozen(result)); assert.ok(Object.isFrozen(result.componentInks)); assert.ok(Object.isFrozen(result.ink));
+  for (const key of ['direct', 'native', 'layer']) {
+    assert.ok(Object.isFrozen(result.componentInks[key]));
+    const before = [...result.componentInks[key]]; wire.component_inks[key][0] = 999;
+    assert.deepEqual(copy(result.componentInks[key]), before);
+  }
+});
+
+test('containment placed evidence binds native scale, v3 local snapshot, node, canvas, token and independent values', () => {
+  const h = rawHarness(), local = h.readPieceSelectedLineV3Inspection(containmentWire(), v9Expected());
+  const frame = [-0.25, 500.5, 1080, 75 + 1 / 3], expected = { ...v9Expected(), stage: 'placed', local, canvasFrame: frame };
+  const wire = { ...containmentWire(), stage: 'placed', canvas_frame: frame };
+  assert.equal(h.readPieceSelectedLineV3Inspection(wire, expected).stage, 'placed');
+  // A final subpixel-phase footprint may change; the local component values are not a stale raster proxy.
+  assert.equal(h.readPieceSelectedLineV3Inspection(withComponent(wire, 'layer', [94.25, 7.5, 598.25, 62.5]), expected).stage, 'placed');
+  for (const mutate of [r => ({ ...r, native_raster_scale: 2 }), r => ({ ...r, snapshot_token: 'other' }),
+    r => ({ ...r, tag: 2 }), r => ({ ...r, canvas_tag: 10002 }),
+    r => ({ ...r, canvas_frame: [0.5, 500.5, 1080, 75 + 1 / 3] }), r => ({ ...r, content_frame: [95, 0, 888, 75 + 1 / 3] }),
+    r => ({ ...r, independent_metrics_f64le: selectedBytes([21, 0, -40, 20, 10]) })]) {
+    assert.throws(() => h.readPieceSelectedLineV3Inspection(mutate(wire), expected), /UNAVAILABLE/);
+  }
+  for (const localChange of [{ ...local, version: 'piece.native_selected_line.v2' }, { ...local, stage: 'placed' },
+    h.readPieceSelectedLineV2Inspection(v9Wire(), v9Expected()), undefined]) {
+    assert.throws(() => h.readPieceSelectedLineV3Inspection(wire, { ...expected, local: localChange }), /UNAVAILABLE/);
+  }
+});
+
+test('containment bridge sends exactly four fields and refuses expiry before dispatch or after a native reply', async () => {
+  const h = rawHarness(), calls = [], expected = { ...v9Expected(), canvasNode: { tag: 10001 }, expiresAt: NOW + 8000 };
+  h.NativeModules.PieceTextMetrics.inspectSelectedLineV3 = async (tag, text, size, request) => {
+    calls.push({ tag, text, size, request }); return containmentWire();
+  };
+  const local = await h.inspectPieceSelectedLineV3({ tag: 1 }, expected);
+  assert.deepEqual(Object.keys(calls[0].request).sort(), ['canvas_tag', 'expires_at_ms', 'snapshot_token', 'stage']);
+  assert.equal(calls[0].request.snapshot_token, null); assert.equal(calls[0].request.expires_at_ms, NOW + 8000);
+  const frame = [0.25, 500.5, 1080, 75 + 1 / 3];
+  h.NativeModules.PieceTextMetrics.inspectSelectedLineV3 = async (tag, text, size, request) => {
+    calls.push({ tag, text, size, request }); return { ...containmentWire(), stage: 'placed', canvas_frame: frame };
+  };
+  await h.inspectPieceSelectedLineV3({ tag: 1 }, { ...expected, stage: 'placed', local, canvasFrame: frame });
+  assert.equal(calls[1].request.snapshot_token, local.snapshotToken);
+  h.now(NOW + 8000); const count = calls.length;
+  await assert.rejects(() => h.inspectPieceSelectedLineV3({ tag: 1 }, expected), /UNAVAILABLE/);
+  assert.equal(calls.length, count);
+  h.now(NOW); h.NativeModules.PieceTextMetrics.inspectSelectedLineV3 = async () => { h.now(NOW + 8000); return containmentWire(); };
+  await assert.rejects(() => h.inspectPieceSelectedLineV3({ tag: 1 }, expected), /UNAVAILABLE/);
+});
+
+test('containment waits two frames at each stage and publishes fit only after every placed result', async () => {
+  const pending = [], h = containmentHarness({ inspect: r => r.stage === 'placed'
+    ? new Promise(resolve => pending.push({ r, resolve })) : r });
+  const deadline = h.card.deadline; await prepare(h); layoutV9(h); await tickV9();
+  assert.equal(h.nativeCalls.length, 0); assert.equal(h.fit(), undefined);
+  h.flushFrame(); await tickV9(); assert.equal(h.nativeCalls.length, 0);
+  h.flushFrame(); await tickV9(); assert.equal(h.card.state.measurement.phase, 'positioning');
+  assert.equal(h.find('piece-logical-canvas').props.style.opacity, 0); assert.equal(h.fit(), undefined);
+  const localCalls = h.nativeCalls.length; h.render(); layoutV9(h);
+  h.flushFrame(); await tickV9(); assert.equal(h.nativeCalls.length, localCalls);
+  h.flushFrame(); await tickV9(); assert.equal(pending.length, h.drawing().blocks.length + 1);
+  pending.slice(1).reverse().forEach(p => p.resolve(p.r)); await tickV9(); assert.equal(h.fit(), undefined);
+  pending[0].resolve(pending[0].r); await tickV9();
+  assert.equal(h.card.state.measurement.phase, 'native_checked'); assert.ok(h.fit());
+  assert.equal(h.fit().isCurrent(h.card.props.display.preview, h.token), true);
+  assert.equal(h.fit().isCurrent(h.card.props.display.preview, {}), false);
+  assert.ok(h.nativeCalls.every(call => call.method === 'inspectSelectedLineV3'));
+  assert.equal(h.card.deadline, deadline); assert.equal(deadline.expiresAt, NOW + 8000);
+  assert.equal(h.card.state.measurement.canSave, false); assert.equal(h.card.state.measurement.canExport, false);
+});
+
+test('containment local placement uses native/layer overhang while retaining unchanged Text and branding styles', async () => {
+  const h = containmentHarness({ packet: containmentSample('quote'), inspect: r => r.font_size === 28 ? r
+    : withComponent(withComponent(r, 'native', [96, 9, 597, 60]), 'layer', [96, 9, 597, 60]) });
+  await prepare(h); const before = copy(h.find('piece-visual-block-0').props.style);
+  await localContainment(h);
+  const offset = h.card.state.measurement.rowOffsets[0], lineHeight = h.card.state.measurement.plan.lineHeight;
+  assert.deepEqual(copy(offset), { x: (h.input().contentWidth - 501) / 2, y: (lineHeight - 51) / 2 - 9, width: 501, height: 51 });
+  await placedContainment(h); assert.equal(h.card.state.measurement.phase, 'native_checked'); assert.ok(h.fit());
+  assert.deepEqual(copy(h.find('piece-visual-block-0').props.style), before);
+  const branding = h.find(`piece-visual-block-${h.drawing().blocks.length}`).props.style;
+  assert.equal(branding.fontSize, 28); assert.equal(branding.lineHeight, 40); assert.equal(branding.opacity, 0.8);
+});
+
+test('verified containment body overflow advances the original catalog and the next font can fit without a new deadline', async () => {
+  for (const failure of ['own-view', 'line-height', 'placed-margin']) {
+    const h = containmentHarness({ inspect: r => r.font_size !== 48 ? r : failure === 'own-view'
+      ? withComponent(r, 'native', [-Number.MIN_VALUE, 10, 596, 60]) : failure === 'line-height'
+      ? withComponent(r, 'native', [96, 0, 596, nextDouble(75)]) : r.stage === 'placed'
+      ? withComponent(r, 'layer', [95.49, 10, 596, 60]) : r });
+    const deadline = h.card.deadline; await localContainment(h);
+    if (h.card.state.measurement.phase === 'positioning') await placedContainment(h);
+    assert.equal(h.card.state.measurement.phase, 'planning', failure); assert.equal(h.card.state.measurement.sizeIndex, 1);
+    assert.equal(h.card.deadline, deadline); assert.equal(h.fit(), undefined);
+    await localContainment(h); await placedContainment(h);
+    assert.equal(h.card.state.measurement.phase, 'native_checked', failure); assert.equal(h.card.state.measurement.sizeIndex, 1);
+    assert.equal(h.candidateCalls.at(-1).fontSize, 44); assert.ok(h.fit()); assert.equal(h.card.deadline, deadline);
+    assert.deepEqual(h.card.props.display.preview.content_payload.body_blocks, containmentSample().content_payload.body_blocks);
+  }
+});
+
+test('branding containment overflow exhausts body candidates without shrinking branding or renewing the budget', async () => {
+  const h = containmentHarness({ inspect: r => r.font_size === 28 ? withComponent(r, 'layer', [0, 0, 100, nextDouble(40)]) : r });
+  const deadline = h.card.deadline, sizes = [...h.input().sizes];
+  for (let i = 0; i < sizes.length; i++) {
+    assert.equal(h.card.state.measurement.sizeIndex, i); await localContainment(h);
+    assert.equal(h.card.deadline, deadline); assert.equal(h.fit(), undefined);
+    assert.notEqual(h.card.state.measurement.phase, 'native_checked');
+    assert.ok(h.nativeCalls.filter(call => call.text === 'Cocolon').every(call => call.fontSize === 28));
+  }
+  assert.equal(h.card.state.measurement.phase, 'unavailable'); assert.equal(h.card.state.measurement.reason, 'native_ink_overflow');
+  assert.deepEqual([...new Set(h.candidateCalls.map(call => call.fontSize))], sizes);
+  assert.equal(deadline.expiresAt, NOW + 8000);
+});
+
+test('containment missing inspector, native rejection and malformed component never fall back or request a smaller font', async () => {
+  for (const failure of ['missing', 'rejected', 'malformed']) {
+    const h = containmentHarness({ inspect: r => failure === 'rejected' ? Promise.reject(new Error('PRIVATE_NATIVE_FAILURE'))
+      : failure === 'malformed' ? { ...r, component_inks: { ...r.component_inks, layer: [0, 0, 0, 0] } } : r });
+    if (failure === 'missing') delete h.NativeModules.PieceTextMetrics.inspectSelectedLineV3;
+    await localContainment(h);
+    assert.equal(h.card.state.measurement.phase, 'unavailable', failure);
+    assert.equal(h.card.state.measurement.reason, 'native_measurement_unavailable'); assert.equal(h.card.state.measurement.sizeIndex, 0);
+    assert.equal(h.fit(), undefined); assert.equal(JSON.stringify(h.card.state).includes('PRIVATE'), false);
+    assert.ok(h.nativeCalls.every(call => call.method === 'inspectSelectedLineV3'));
+    assert.ok(h.candidateCalls.every(call => call.fontSize === 48));
+  }
+});
+
+test('containment pending evidence cannot survive token, node, generation, canvas, version or unmount replacement', async () => {
+  for (const stage of ['local', 'placed']) for (const change of ['token', 'node', 'generation', 'canvas', 'version', 'unmount']) {
+    const pending = [], h = containmentHarness({ inspect: r => r.stage === stage
+      ? new Promise(resolve => pending.push({ r, resolve })) : r });
+    await localContainment(h); if (stage === 'placed') await placedContainment(h); assert.ok(pending.length);
+    if (change === 'token') { h.bind({}); h.bind(h.token); }
+    if (change === 'node') { const value = h.card.textNodes.get(0); h.card.textNodes.set(0, { ...value, value: { tag: 99 } }); }
+    if (change === 'generation') h.card.state.measurement = { ...h.card.state.measurement, generation: Object.freeze({}) };
+    if (change === 'canvas') h.card.canvasNode = { tag: 90002 };
+    if (change === 'version') {
+      h.card.props = { ...h.card.props, display: { ...h.card.props.display, preview: { ...h.card.props.display.preview, renderer_version: v9Profile } } };
+      h.card.setState(h.PieceVisualCard.getDerivedStateFromProps(h.card.props, h.card.state));
+    }
+    if (change === 'unmount') h.card.componentWillUnmount();
+    const state = h.card.state.measurement; pending.forEach(p => p.resolve(p.r)); await tickV9();
+    assert.equal(h.card.state.measurement, state, `${stage}/${change}`); assert.equal(h.fit(), undefined);
+    assert.notEqual(state.phase, 'native_checked');
+  }
+});
+
+test('containment frame waits, native replies and queued adoption share the original eight-second expiry', async () => {
+  for (const boundary of ['local-frames', 'local-reply', 'placed-frames', 'placed-reply', 'queued']) {
+    const stage = boundary.startsWith('local') ? 'local' : 'placed', pending = [];
+    const h = containmentHarness({ inspect: r => r.stage === stage && !boundary.endsWith('frames')
+      ? new Promise(resolve => pending.push({ r, resolve })) : r });
+    const deadline = h.card.deadline; await prepare(h); layoutV9(h); await tickV9();
+    if (boundary !== 'local-frames') { h.flushFrame(); h.flushFrame(); await tickV9(); }
+    if (boundary.startsWith('placed') || boundary === 'queued') {
+      h.render(); layoutV9(h);
+      if (boundary !== 'placed-frames') { h.flushFrame(); h.flushFrame(); await tickV9(); }
+    }
+    let apply, updates;
+    if (boundary === 'queued') {
+      updates = []; apply = h.card.setState.bind(h.card); h.card.setState = value => updates.push(value);
+      pending.forEach(p => p.resolve(p.r)); await tickV9(); assert.equal(updates.length, 1);
+    }
+    h.now(NOW + 8000);
+    if (boundary.endsWith('frames')) { h.flushFrame(); h.flushFrame(); }
+    else if (boundary === 'queued') { h.card.setState = apply; updates.forEach(update => apply(update)); }
+    else pending.forEach(p => p.resolve(p.r));
+    await tickV9(); for (const timer of [...h.timers.values()]) timer();
+    assert.equal(h.fit(), undefined, boundary); assert.notEqual(h.card.state.measurement.phase, 'native_checked');
+    assert.equal(h.card.deadline, deadline); assert.equal(deadline.expiresAt, NOW + 8000);
+  }
+});
+
+test('containment final fit is synchronously revoked by changed placement and cannot acquire another budget', async () => {
+  const h = containmentHarness(); await localContainment(h); await placedContainment(h);
+  const fit = h.fit(), deadline = h.card.deadline; assert.ok(fit);
+  const m = h.card.state.measurement, ticket = { key: m.key, sizeIndex: m.sizeIndex, generation: m.generation };
+  const updates = [], apply = h.card.setState.bind(h.card); h.card.setState = value => updates.push(value);
+  h.card.notePlacement(ticket, 'composition', { x: 96, y: 97, width: 888, height: m.plan.totalHeight });
+  assert.equal(fit.isCurrent(h.card.props.display.preview, h.token), false);
+  h.card.setState = apply; updates.forEach(update => apply(update));
+  assert.equal(h.card.state.measurement.phase, 'unavailable'); assert.equal(h.card.deadline, deadline);
+  h.now(NOW + 9000); h.resize(360); assert.equal(h.card.deadline, deadline); assert.equal(deadline.expiresAt, NOW + 8000);
+});
+
+test('containment current-fit reads reject the exact original expiry and a replacement deadline object', async () => {
+  for (const change of ['expired', 'deadline-replaced']) {
+    const h = containmentHarness(); await localContainment(h); await placedContainment(h);
+    const fit = h.fit(), preview = h.card.props.display.preview, deadline = h.card.deadline;
+    assert.ok(fit); assert.equal(fit.isCurrent(preview, h.token), true);
+    h.now(NOW + 7999); assert.equal(fit.isCurrent(preview, h.token), true);
+    const calls = h.nativeCalls.length;
+    if (change === 'expired') h.now(NOW + 8000);
+    else h.card.deadline = { ...deadline };
+    assert.equal(fit.isCurrent(preview, h.token), false, change);
+    assert.equal(h.nativeCalls.length, calls, 'reading the handle performs no new inspection');
+    assert.equal(deadline.expiresAt, NOW + 8000);
+  }
 });

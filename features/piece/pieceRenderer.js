@@ -124,6 +124,53 @@ export async function inspectPieceSelectedLineV2(node, expected) {
   return readPieceSelectedLineV2Inspection(value, { ...expected, tag, canvasTag, platform: Platform.OS });
 }
 
+// Containment v1 keeps V2 intact. Its three independently measured footprints
+// cover scale-1 direct paint, unclipped native-scale paint and the natural layer.
+// Recompute the exact union here; neither a component nor the supplied union
+// can silently narrow the visible footprint. This remains local evidence only.
+export function readPieceSelectedLineV3Inspection(value, expected) {
+  const fields = ['version', 'platform', 'font_size', 'width', 'height', 'utf16_length', 'boundaries',
+    'line_ends', 'ink', 'glyph_check', 'independent_metrics_f64le', 'stage', 'tag', 'canvas_tag',
+    'canvas_frame', 'content_frame', 'raster_scale', 'snapshot_token', 'native_raster_scale', 'component_inks'];
+  const inkRect = rect => Array.isArray(rect) && rect.length === 4 && rect.every(finite) &&
+    rect[2] > rect[0] && rect[3] > rect[1];
+  if (!value || Object.keys(value).sort().join() !== fields.sort().join() ||
+      value.version !== 'piece.native_selected_line.v3' || !finite(value.native_raster_scale) ||
+      value.native_raster_scale <= 0 || !value.component_inks || Array.isArray(value.component_inks) ||
+      Object.keys(value.component_inks).sort().join() !== 'direct,layer,native' ||
+      !['direct', 'native', 'layer'].every(key => inkRect(value.component_inks[key])) ||
+      !inkRect(value.ink)) throw measurementError();
+  const components = ['direct', 'native', 'layer'].map(key => value.component_inks[key]);
+  const union = [Math.min(...components.map(rect => rect[0])), Math.min(...components.map(rect => rect[1])),
+    Math.max(...components.map(rect => rect[2])), Math.max(...components.map(rect => rect[3]))];
+  if (union.some((n, i) => !Object.is(n, value.ink[i])) ||
+      expected.stage === 'placed' && (expected.local?.version !== 'piece.native_selected_line.v3' ||
+        expected.local.stage !== 'local' || value.native_raster_scale !== expected.local.nativeRasterScale)) throw measurementError();
+  const { native_raster_scale: nativeRasterScale, component_inks: componentInks, ...v2Evidence } = value;
+  // V2's closed geometry, identity, independent metrics and one-line checks
+  // apply unchanged. The bridge entry and retained result version stay V3.
+  const inspected = readPieceSelectedLineV2Inspection({ ...v2Evidence, version: 'piece.native_selected_line.v2' }, expected);
+  return Object.freeze({ ...inspected, version: value.version, nativeRasterScale,
+    componentInks: Object.freeze(Object.fromEntries(['direct', 'native', 'layer'].map(key =>
+      [key, Object.freeze([...componentInks[key]])]))) });
+}
+
+export async function inspectPieceSelectedLineV3(node, expected) {
+  const tag = findNodeHandle(node), canvasTag = findNodeHandle(expected.canvasNode), module = NativeModules.PieceTextMetrics;
+  if (Platform.OS !== 'ios' || !Number.isInteger(tag) || tag <= 0 || !Number.isInteger(canvasTag) ||
+      canvasTag <= 0 || tag === canvasTag || !finite(expected.expiresAt) || Date.now() >= expected.expiresAt ||
+      !['local', 'placed'].includes(expected.stage) || typeof module?.inspectSelectedLineV3 !== 'function' ||
+      expected.stage === 'placed' && (expected.local?.version !== 'piece.native_selected_line.v3' ||
+        expected.local.stage !== 'local')) throw measurementError();
+  let value;
+  try { value = await module.inspectSelectedLineV3(tag, expected.text, expected.fontSize, {
+    stage: expected.stage, canvas_tag: canvasTag, expires_at_ms: expected.expiresAt,
+    snapshot_token: expected.stage === 'placed' ? expected.local.snapshotToken : null,
+  }); } catch { throw measurementError(); }
+  if (Date.now() >= expected.expiresAt) throw measurementError();
+  return readPieceSelectedLineV3Inspection(value, { ...expected, tag, canvasTag, platform: Platform.OS });
+}
+
 // Candidates are shaped with an immutable snapshot of the mounted Text's
 // font. They guide B9 selection; each selected Text is inspected again.
 function candidateRowCount(boundaries) {

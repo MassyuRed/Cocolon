@@ -11,6 +11,8 @@
 #include <unistd.h>
 #include <atomic>
 #include <float.h>
+#include <memory>
+#include <new>
 @implementation RCTBridge
 @end
 @implementation RCTUIManager
@@ -31,6 +33,20 @@
 }
 - (NSTextStorage *)cocolonPieceTextStorage { return self.fixtureStorage; }
 - (CGRect)cocolonPieceContentFrame { return self.fixtureContentFrame; }
+
+// V3-only wrapper: old fixtures never draw through this helper. The application
+// still uses the pinned RN implementation, not this test boundary double.
+- (BOOL)cocolonPieceIsPlainText {
+  __block BOOL plain=YES;
+  [self.fixtureStorage enumerateAttributesInRange:NSMakeRange(0,self.fixtureStorage.length) options:0 usingBlock:^(NSDictionary *attrs,NSRange range,BOOL *stop){
+    if(attrs[NSAttachmentAttributeName]||attrs[NSBackgroundColorAttributeName]||attrs[NSShadowAttributeName]){plain=NO;*stop=YES;}
+  }];return plain;
+}
+- (void)cocolonPiecePaintGlyphRange:(NSRange)glyphs {
+  NSLayoutManager *layout = self.fixtureStorage.layoutManagers.firstObject;
+  [layout drawBackgroundForGlyphRange:glyphs atPoint:self.fixtureContentFrame.origin];
+  [layout drawGlyphsForGlyphRange:glyphs atPoint:self.fixtureContentFrame.origin];
+}
 @end
 // Aggregate only the mixed420 candidate call, without changing native results.
 // Atomic counters sum per-operation time across workers, not wall-clock time.
@@ -214,6 +230,23 @@ static CFDataRef v9ProviderData(CGDataProviderRef provider) {
   if (fault == 5 && v9FaultView) v9FaultView.superview.transform = CGAffineTransformMakeTranslation(1, 0);
   return original;
 }
+
+// Each fault is scoped to included product code and disabled for all old175.
+static int v3FixtureBufferFault = 0;
+static void *v3FixtureCalloc(size_t count, size_t size) {
+  if (v3FixtureBufferFault == 1) return NULL;
+  return calloc(count, size);
+}
+static CGContextRef v3FixtureBitmapContext(void *data, size_t width, size_t height,
+    size_t bits, size_t stride, CGColorSpaceRef space, uint32_t info) {
+  CGContextRef cg = CGBitmapContextCreate(data, width, height, bits, stride, space, info);
+  if (cg && v3FixtureBufferFault == 2 && data && width && height && bits == 8 && stride >= width * 4)
+    ((UInt8 *)data)[(height / 2) * stride + 3] = 255;
+  return cg;
+}
+
+#define calloc v3FixtureCalloc
+#define CGBitmapContextCreate v3FixtureBitmapContext
 #define CGDataProviderCopyData v9ProviderData
 #define CTLineCreateWithAttributedString profiledCreateLine
 #define CTTypesetterCreateWithAttributedString profiledTypesetter
@@ -239,6 +272,8 @@ static CFDataRef v9ProviderData(CGDataProviderRef provider) {
 #undef CFRelease
 #undef CFAttributedStringCreateWithSubstring
 #undef CGDataProviderCopyData
+#undef CGBitmapContextCreate
+#undef calloc
 
 static NSUInteger checks = 0, failures = 0;
 static void check(NSString *name, BOOL passed) {
@@ -972,6 +1007,161 @@ static BOOL runV9Checks(PieceTextMetrics *module, RCTBridge *bridge) {
   return v9Checks == expected && v9Failures == 0;
 }
 
+
+// Test-only, naturally drawn v3 fixtures. Getter faults do not change product
+// rendering or clocks; after preparation each named invalid condition is fixed.
+@interface PieceV3FixtureLayer : CALayer
+@property(nonatomic) BOOL fixtureNilContents;
+@property(nonatomic) BOOL fixtureDirtyDisplay;
+@property(nonatomic) BOOL fixtureDirtyLayout;
+@property(nonatomic) CGFloat fixtureScaleOverride;
+@end
+@implementation PieceV3FixtureLayer
+- (id)contents { return self.fixtureNilContents ? nil : [super contents]; }
+- (BOOL)needsDisplay { return self.fixtureDirtyDisplay || [super needsDisplay]; }
+- (BOOL)needsLayout { return self.fixtureDirtyLayout || [super needsLayout]; }
+- (CGFloat)contentsScale { return self.fixtureScaleOverride > 0 ? self.fixtureScaleOverride : [super contentsScale]; }
+@end
+@interface PieceV3FixtureTextView : RCTTextView
+@property(nonatomic) BOOL fixtureNativeClipTrap;
+@property(nonatomic) CGFloat fixtureViewScaleOverride;
+@end
+@implementation PieceV3FixtureTextView
++ (Class)layerClass { return PieceV3FixtureLayer.class; }
+- (CGFloat)contentScaleFactor { return self.fixtureViewScaleOverride > 0 ? self.fixtureViewScaleOverride : [super contentScaleFactor]; }
+- (void)cocolonPiecePaintGlyphRange:(NSRange)glyphs {
+  [super cocolonPiecePaintGlyphRange:glyphs];
+  CGContextRef cg = UIGraphicsGetCurrentContext();
+  CGAffineTransform ctm = cg ? CGContextGetCTM(cg) : CGAffineTransformIdentity;
+  // Controlled synthetic paint fault: nativeS reference retains the cell,
+  // natural backing clips it, direct1 layout-only paint never adds it.
+  if (self.fixtureNativeClipTrap && cg && fabs(ctm.a) > 1) {
+    CGFloat scale = fabs(ctm.a);
+    CGContextSaveGState(cg); CGContextSetRGBFillColor(cg, 0, 0, 0, 1);
+    CGContextFillRect(cg, CGRectMake(self.fixtureContentFrame.origin.x + 4, -1 / scale, 1 / scale, 1 / scale));
+    CGContextRestoreGState(cg);
+  }
+}
+- (void)drawRect:(CGRect)rect {
+  NSLayoutManager *layout = self.fixtureStorage.layoutManagers.firstObject;
+  [self cocolonPiecePaintGlyphRange:[layout glyphRangeForTextContainer:layout.textContainers.firstObject]];
+}
+@end
+static PieceV3FixtureTextView *v3View(NSString *text, CGFloat font, CGFloat scale, BOOL trap) {
+  CGFloat logical=font==28?40:75;
+  RCTTextView *source = v9View(text, font, logical, 0);
+  PieceV3FixtureTextView *view = [[PieceV3FixtureTextView alloc] initWithFrame:CGRectMake(0, 0, 1080, logical+1)];
+  view.fixtureAttached = YES; view.fixtureRequiresRealWindow = YES;
+  view.fixtureStorage = source.fixtureStorage;
+  view.fixtureContentFrame = CGRectMake(96, 0, 888, logical+1);
+  view.fixtureStorage.layoutManagers.firstObject.textContainers.firstObject.size = view.fixtureContentFrame.size;
+  view.opaque = NO; view.backgroundColor = UIColor.clearColor;
+  view.contentScaleFactor = scale; view.layer.contentsScale = scale;
+  view.fixtureNativeClipTrap = trap;
+  return view;
+}
+static BOOL v3NaturalReady(UIView *view) {
+  // Only fixture setup waits. No forced display/layout/flush or product retry.
+  NSTimeInterval stop = NSProcessInfo.processInfo.systemUptime + 0.25;
+  do {
+    [NSRunLoop.mainRunLoop runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.005]];
+    if (view.layer.contents && !view.layer.needsDisplay && !view.layer.needsLayout) return YES;
+  } while (NSProcessInfo.processInfo.systemUptime < stop);
+  return NO;
+}
+static NSDictionary *v3Call(PieceTextMetrics *module, NSString *text, CGFloat font, NSDictionary *request, NSString **code) {
+  __block NSDictionary *result = nil; __block NSString *error = nil;
+  [module inspectSelectedLineV3:@1 text:text fontSize:font request:request resolver:^(id value) {
+    if ([value isKindOfClass:NSDictionary.class]) result = value; else error = @"INVALID_RESULT";
+  } rejecter:^(NSString *value, __unused NSString *message, __unused NSError *cause) { error = value; }];
+  *code = error ?: (result ? nil : @"TEST_CALLBACK_MISSING"); return result;
+}
+static NSArray *v3Union(NSDictionary *components) {
+  NSArray *a=components[@"direct"], *b=components[@"native"], *c=components[@"layer"];
+  if (a.count != 4 || b.count != 4 || c.count != 4) return nil;
+  return @[@(fmin([a[0] doubleValue],fmin([b[0] doubleValue],[c[0] doubleValue]))),
+    @(fmin([a[1] doubleValue],fmin([b[1] doubleValue],[c[1] doubleValue]))),
+    @(fmax([a[2] doubleValue],fmax([b[2] doubleValue],[c[2] doubleValue]))),
+    @(fmax([a[3] doubleValue],fmax([b[3] doubleValue],[c[3] doubleValue])))];
+}
+static NSUInteger v3Checks=0, v3Failures=0;
+static void v3Check(NSString *name, BOOL pass) {
+  v3Checks++; if (!pass) v3Failures++;
+  printf("%s v3_%s\n",pass?"PASS":"FAIL",name.UTF8String);
+}
+static BOOL runV3Checks(PieceTextMetrics *module, RCTBridge *bridge) {
+  printf("STAGE v3_begin\n");
+  UIWindow *window=[[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+  window.rootViewController=[UIViewController new]; [window makeKeyAndVisible];
+  UIView *canvas=[[UIView alloc] initWithFrame:CGRectMake(0,0,1080,1350)];
+  [window.rootViewController.view addSubview:canvas];
+  NSArray *names=@[@"closed20_union_direct_v2_unchanged",@"native_scale2",@"native_scale3",@"positive_fractional_phase",@"negative_fractional_phase",@"one_use",
+    @"branding_opacity08",@"controlled_native_clip_trap",@"nil_contents",@"dirty_display",@"dirty_layout",@"scale_mismatch",@"contents_snapshot_changed",
+    @"version_tokens_isolated",@"unsupported_paint",@"resource_integer_bound",@"allocation_fault",@"extent_edge_fault",@"empty_alpha",@"expired_deadline"];
+  for (NSString *name in names) { @autoreleasepool {
+    NSString *text=[name isEqual:@"empty_alpha"]?@"   ":@"Cocolon", *code=nil;
+    CGFloat scale=[name isEqual:@"native_scale2"]?2:3, font=[name isEqual:@"branding_opacity08"]?28:48;
+    UIView *row=[[UIView alloc] initWithFrame:CGRectMake(0,96,1080,140)]; [canvas addSubview:row];
+    PieceV3FixtureTextView *view=v3View(text,font,scale,[name isEqual:@"controlled_native_clip_trap"]);
+    if ([name isEqual:@"branding_opacity08"]) view.alpha=0.8;
+    [row addSubview:view]; view.contentScaleFactor=scale;view.layer.contentsScale=scale;bridge.uiManager.registry=@{@1:view,@2:canvas};
+    BOOL ready=v3NaturalReady(view);
+    NSMutableDictionary *req=[@{@"stage":@"local",@"canvas_tag":@2,@"expires_at_ms":@(NSDate.date.timeIntervalSince1970*1000+8000),@"snapshot_token":NSNull.null} mutableCopy];
+    PieceV3FixtureLayer *layer=(PieceV3FixtureLayer *)view.layer;
+    BOOL validCase=[@[@"closed20_union_direct_v2_unchanged",@"native_scale2",@"native_scale3",@"positive_fractional_phase",@"negative_fractional_phase",@"one_use",@"branding_opacity08",@"controlled_native_clip_trap"] containsObject:name];
+    if ([name isEqual:@"nil_contents"]) layer.fixtureNilContents=YES;
+    if ([name isEqual:@"dirty_display"]) layer.fixtureDirtyDisplay=YES;
+    if ([name isEqual:@"dirty_layout"]) layer.fixtureDirtyLayout=YES;
+    if ([name isEqual:@"scale_mismatch"]) layer.fixtureScaleOverride=2;
+    if ([name isEqual:@"unsupported_paint"]) view.layer.shadowOpacity=0.5;
+    if ([name isEqual:@"resource_integer_bound"]) { view.fixtureViewScaleOverride=CGFLOAT_MAX; layer.fixtureScaleOverride=CGFLOAT_MAX; }
+    if ([name isEqual:@"allocation_fault"]) v3FixtureBufferFault=1;
+    if ([name isEqual:@"extent_edge_fault"]) v3FixtureBufferFault=2;
+    if ([name isEqual:@"expired_deadline"]) req[@"expires_at_ms"]=@(NSDate.date.timeIntervalSince1970*1000-1);
+    NSDictionary *v2=nil;
+    if ([name isEqual:@"closed20_union_direct_v2_unchanged"] || [name isEqual:@"version_tokens_isolated"]) v2=v9Call(module,text,font,req,&code);
+    NSDictionary *local=v3Call(module,text,font,req,&code);
+    v3FixtureBufferFault=0;
+    BOOL pass=ready;
+    if (validCase) {
+      NSDictionary *parts=local[@"component_inks"];
+      pass=pass&&code==nil&&local.count==20&&[local[@"version"] isEqual:@"piece.native_selected_line.v3"]&&
+        parts.count==3&&[local[@"ink"] isEqual:v3Union(parts)]&&[local[@"native_raster_scale"] doubleValue]==scale;
+      if ([name isEqual:@"closed20_union_direct_v2_unchanged"]) pass=pass&&v2.count==18&&[parts[@"direct"] isEqual:v2[@"ink"]]&&[local[@"independent_metrics_f64le"] isEqual:v2[@"independent_metrics_f64le"]];
+      if ([name isEqual:@"controlled_native_clip_trap"]) pass=pass&&[parts[@"direct"][1] doubleValue]>=0&&[parts[@"layer"][1] doubleValue]>=0&&[parts[@"native"][1] doubleValue]<0&&[local[@"ink"][1] doubleValue]<0;
+      if ([name isEqual:@"branding_opacity08"]) pass=pass&&fabs(view.alpha-0.8)<1e-6&&fabs(view.layer.opacity-0.8)<1e-6;
+      if ([name isEqual:@"positive_fractional_phase"]) row.transform=CGAffineTransformMakeTranslation(0.25,0.5);
+      if ([name isEqual:@"negative_fractional_phase"]) row.transform=CGAffineTransformMakeTranslation(-0.25,-0.5);
+      req[@"stage"]=@"placed";req[@"snapshot_token"]=local[@"snapshot_token"]?:NSNull.null;
+      NSDictionary *placed=v3Call(module,text,font,req,&code);
+      CGPoint origin=[view convertPoint:CGPointZero toView:canvas];
+      pass=pass&&placed.count==20&&code==nil&&[placed[@"ink"] isEqual:v3Union(placed[@"component_inks"])]&&
+        [placed[@"snapshot_token"] isEqual:local[@"snapshot_token"]]&&[placed[@"canvas_frame"] isEqual:PiecePixelRectArray((CGRect){origin,view.bounds.size})];
+      if ([name isEqual:@"one_use"]) { NSDictionary *again=v3Call(module,text,font,req,&code);pass=pass&&!again&&[code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"]; }
+    } else if ([name isEqual:@"contents_snapshot_changed"]) {
+      pass=pass&&local!=nil&&code==nil;req[@"stage"]=@"placed";req[@"snapshot_token"]=local[@"snapshot_token"]?:NSNull.null;
+      id originalContents=view.layer.contents;
+      PieceV3FixtureTextView *replacement=v3View(text,font,scale,NO);[row addSubview:replacement];
+      replacement.contentScaleFactor=scale;replacement.layer.contentsScale=scale;
+      BOOL replacementReady=v3NaturalReady(replacement);id alternateContents=replacement.layer.contents;
+      pass=pass&&replacementReady&&alternateContents!=nil&&alternateContents!=originalContents;
+      view.layer.contents=alternateContents;
+      pass=pass&&!view.layer.needsDisplay&&!view.layer.needsLayout&&view.layer.contents!=nil;
+      NSDictionary *result=v3Call(module,text,font,req,&code);
+      pass=pass&&!result&&[code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"];
+    } else if ([name isEqual:@"version_tokens_isolated"]) {
+      pass=pass&&v2!=nil&&local!=nil;
+      req[@"stage"]=@"placed";req[@"snapshot_token"]=v2[@"snapshot_token"]?:NSNull.null;
+      NSDictionary *a=v3Call(module,text,font,req,&code);pass=pass&&!a&&[code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"];
+      req[@"snapshot_token"]=local[@"snapshot_token"]?:NSNull.null;
+      NSDictionary *b=v9Call(module,text,font,req,&code);pass=pass&&!b&&[code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"];
+    } else pass=pass&&!local&&[code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"];
+    v3Check(name,pass);[row removeFromSuperview];
+  } }
+  printf("V3_NATIVE_CHECKS=%lu PASS=%lu FAIL=%lu SKIP=0 EXPECTED=20\n",(unsigned long)v3Checks,(unsigned long)(v3Checks-v3Failures),(unsigned long)v3Failures);
+  window.hidden=YES;return v3Checks==20&&v3Failures==0;
+}
+
 static int runNativeMetricsChecks(void) {
   @autoreleasepool {
     printf("iOS native metrics source test; synthetic RN boundary; real UIKit/TextKit/CoreText\n");
@@ -1216,11 +1406,12 @@ static int runNativeMetricsChecks(void) {
       (unsigned long)(checks-failures), (unsigned long)failures);
     runV5Checks(module, bridge);
     BOOL v9Passed = runV9Checks(module, bridge);
+    BOOL v3Passed = runV3Checks(module, bridge);
     // The workflow's unchanged 129 summary is emitted only after v9 has
     // completed too. A crash/timeout in either suite cannot masquerade as pass.
     printf("NATIVE_CHECKS=%lu PASS=%lu FAIL=%lu SKIP=0\n", (unsigned long)checks,
       (unsigned long)(checks-failures), (unsigned long)failures);
-    return failures || !v9Passed ? 1 : 0;
+    return failures || !v9Passed || !v3Passed ? 1 : 0;
   }
 }
 

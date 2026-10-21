@@ -236,3 +236,30 @@ test('v5 search fit and search null are metric-table results, not claims about i
   assert.equal(plan(input, 0, [otherContext]), null);
   assert.deepEqual(copy(plan({ ...input, candidateProfile: undefined }, 0, [{ ...table, version: undefined }])).groups, [['ab']]);
 });
+
+const containmentProfile = 'piece.rn_native_preview.containment.prototype.v1';
+test('containment preview retains every existing B9 oracle result and source row without mutating metrics', () => {
+  for (const c of fixture.cases) {
+    const input = { ...copy(c.input), candidateProfile: containmentProfile };
+    const tables = c.measurements.map(table => ({ ...copy(table), version: 'piece.native_candidates.v5' }));
+    const before = JSON.stringify({ input, tables });
+    assert.deepEqual(copy(plan(input, c.sizeIndex, tables)), c.expected, c.id);
+    assert.equal(JSON.stringify({ input, tables }), before, c.id);
+    tables.forEach(table => table.rows.reverse());
+    assert.deepEqual(copy(plan(input, c.sizeIndex, tables)), c.expected, c.id + '/reordered');
+  }
+});
+
+test('containment planner accepts only complete v5 candidate tables and preserves unavailable search results', () => {
+  const c = validCase(), input = { ...c.input, candidateProfile: containmentProfile };
+  const tables = c.measurements.map(table => ({ ...table, version: 'piece.native_candidates.v5' }));
+  for (const version of [undefined, 'piece.native_candidates.v1', 'piece.native_candidates.v3', 'piece.native_candidates.v4']) {
+    assert.throws(() => plan(input, c.sizeIndex, tables.map(table => ({ ...table, version }))), unavailable);
+  }
+  const tiny = { candidateProfile: containmentProfile, blocks: ['ab'], contentWidth: 20, contentHeight: 10,
+    sizes: [10], lineRatio: 1, paragraphRatio: 0 };
+  const table = { version: 'piece.native_candidates.v5', boundaries: [0, 1, 2],
+    rows: [[0, 1, 21, 0, -8, 21, 2], [0, 2, 42, 0, -8, 42, 2], [1, 2, 21, 0, -8, 21, 2]] };
+  assert.equal(plan(tiny, 0, [table]), null);
+  assert.throws(() => plan(tiny, 0, [{ ...table, rows: [[0, 1, 9999, 'width_overflow']] }]), unavailable);
+});

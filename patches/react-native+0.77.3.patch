@@ -1,22 +1,51 @@
 diff --git a/node_modules/react-native/Libraries/Text/Text/RCTTextView.mm b/node_modules/react-native/Libraries/Text/Text/RCTTextView.mm
 --- a/node_modules/react-native/Libraries/Text/Text/RCTTextView.mm
 +++ b/node_modules/react-native/Libraries/Text/Text/RCTTextView.mm
-@@ -96,6 +96,18 @@
+@@ -96,6 +96,37 @@
    }
  
    [self setNeedsDisplay];
 +}
 +
-+// Piece reads the exact mounted TextKit layout without KVC or a second renderer.
-+// Read-only: normal Text measurement and drawing are unchanged.
-+- (NSTextStorage *)cocolonPieceTextStorage
++// Piece observes the existing TextKit objects. No KVC/private-ivar read.
++- (NSTextStorage *)cocolonPieceTextStorage { return _textStorage; }
++- (CGRect)cocolonPieceContentFrame { return _contentFrame; }
++
++// Plainness is required only by the optional Piece v3 inspector. It never
++// suppresses the normal drawing of other RN Text instances.
++- (BOOL)cocolonPieceIsPlainText
 +{
-+  return _textStorage;
++  if (!_textStorage || _highlightLayer) return NO;
++  __block BOOL plain = YES;
++  [_textStorage enumerateAttributesInRange:NSMakeRange(0, _textStorage.length) options:0
++    usingBlock:^(NSDictionary<NSAttributedStringKey, id> *attributes, NSRange range, BOOL *stop) {
++      UIColor *background = attributes[NSBackgroundColorAttributeName];
++      if (attributes[NSAttachmentAttributeName] || attributes[NSShadowAttributeName] ||
++          [attributes[RCTTextAttributesIsHighlightedAttributeName] boolValue] ||
++          (background && (![background isKindOfClass:UIColor.class] || CGColorGetAlpha(background.CGColor) != 0))) {
++        plain = NO; *stop = YES;
++      }
++    }];
++  return plain;
 +}
 +
-+- (CGRect)cocolonPieceContentFrame
++// The exact two original paint calls are shared with the unclipped reference.
++// Layout/attributes/view state and the normal highlight path are not mutated.
++- (void)cocolonPiecePaintGlyphRange:(NSRange)glyphRange
 +{
-+  return _contentFrame;
++  NSLayoutManager *layoutManager = _textStorage.layoutManagers.firstObject;
++  [layoutManager drawBackgroundForGlyphRange:glyphRange atPoint:_contentFrame.origin];
++  [layoutManager drawGlyphsForGlyphRange:glyphRange atPoint:_contentFrame.origin];
  }
  
  - (void)drawRect:(CGRect)rect
+@@ -118,8 +149,7 @@
+ #endif
+ 
+   NSRange glyphRange = [layoutManager glyphRangeForTextContainer:textContainer];
+-  [layoutManager drawBackgroundForGlyphRange:glyphRange atPoint:_contentFrame.origin];
+-  [layoutManager drawGlyphsForGlyphRange:glyphRange atPoint:_contentFrame.origin];
++  [self cocolonPiecePaintGlyphRange:glyphRange];
+ 
+   __block UIBezierPath *highlightPath = nil;
+   NSRange characterRange = [layoutManager characterRangeForGlyphRange:glyphRange actualGlyphRange:NULL];

@@ -41624,3 +41624,8 @@ source1f168d19の一度のrun39509902845は全6job/CI success、JS915/native175 
 ### 2026-10-21 — Piece実layer包含修復の具体仕様（実装判断待ち）
 
 入口§87/map§65.35/weekly§5.6.15/manifest v104。旧v2を保持する別preview containment.prototype.v1＋selected_line.v3で、direct1・忠実性を実行時照合するnative-scale非clip参照・自然layerのunionを既存Card配置/本文・branding高/余白/次fontへ渡す最小案を具体化。nativegrid0→stage位相、filter範囲、opacity0.8、同時memory/元8秒・90秒、19pathと一度のCI・旧915/native175＋新20/RN11＋追加2条件・未達STOPを固定。新ink/wire/profileのみRule18§11.3の判断待ち。今回は資料5file、製品/test/workflow/CI/DB/API/deploy/main0。正式採用/通常保存/本人再表示未完了、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。前回JS915/native175/RN11の成立を新修復の実績へ加算しない。
+
+
+### 2026-10-21 — Piece承認済み包含修復の実装source
+
+入口§88/map§65.36/weekly§5.6.16/manifest v105。Mash明示承認の別preview＋v3 closed20field/direct-native-layer unionを既存19pathへ実装、旧v2/v9・saved/export境界と元8秒/90秒を保持。native runtime clipped-reference/native-layer全alpha occupancy比較、fractional boundsでのclip前paint、provider所有/atomic32MiB、自然状態/local-placed currentを接続。standaloneの既存OS QuartzCore linkと195unique検査を整合。local JS933全成功、native195/RN13/画像差・時間は未確認で一度CIへ。新tracked file/依存/DB/API/runtime/flag/env/deploy/main0。STRUCTURE_MAP_DELTA_PRESENTは限定preview測定責務、正式採用/通常保存は未完了。

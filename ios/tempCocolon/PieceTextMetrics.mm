@@ -11,11 +11,15 @@
 #include <vector>
 #include <atomic>
 #include <unordered_map>
+#include <memory>
+#include <new>
 
 // Read-only accessors added by the pinned RN patch; no KVC/private-ivar read.
 @interface RCTTextView (CocolonPieceMetrics)
 - (NSTextStorage *)cocolonPieceTextStorage;
 - (CGRect)cocolonPieceContentFrame;
+- (void)cocolonPiecePaintGlyphRange:(NSRange)glyphs;
+- (BOOL)cocolonPieceIsPlainText;
 @end
 
 @interface PieceTextMetrics : NSObject <RCTBridgeModule>
@@ -26,6 +30,9 @@
                        resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject;
 - (void)inspectSnapshot:(NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize
           selectedLine:(BOOL)selectedLine pixelRequest:(NSDictionary *)pixelRequest resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject;
+- (void)inspectSnapshot:(NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize
+          selectedLine:(BOOL)selectedLine pixelRequest:(NSDictionary *)pixelRequest containment:(BOOL)containment
+          resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject;
 @end
 
 // One candidate call at a time across every module/card. Its joined workers
@@ -83,6 +90,63 @@ static BOOL PiecePixelCanvasFrame(RCTTextView *view, UIView *canvas, CGRect *res
   *result = (CGRect){origin, view.bounds.size};
   return YES;
 }
+// Pure v2 raster primitive. Neither snapshot nor mounted geometry is mutated.
+static NSArray *PieceDirectPixelInk(NSLayoutManager *layout, NSRange glyphs, CGRect frame,
+    CGRect extent, CGPoint phase, BOOL (^withinDeadline)(void), BOOL boundedOwnership = NO) {
+  @autoreleasepool {
+    if (!PiecePixelRect(extent) || extent.size.width > 4096 || extent.size.height > 4096 ||
+        extent.size.width * extent.size.height > 4 * 1024 * 1024) return nil;
+    UIGraphicsImageRendererFormat *format = [UIGraphicsImageRendererFormat defaultFormat];
+    format.scale = 1; format.opaque = NO; format.preferredRange = UIGraphicsImageRendererFormatRangeStandard;
+    UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:extent.size format:format];
+    UIImage *image = [renderer imageWithActions:^(UIGraphicsImageRendererContext *context) {
+      CGContextSaveGState(context.CGContext);
+      @try {
+        CGContextTranslateCTM(context.CGContext, phase.x - extent.origin.x, phase.y - extent.origin.y);
+        [layout drawGlyphsForGlyphRange:glyphs atPoint:frame.origin];
+      } @finally { CGContextRestoreGState(context.CGContext); }
+    }];
+    CGImageRef cg = image.CGImage;
+    if (!cg || CGImageIsMask(cg) || !withinDeadline() || CGImageGetWidth(cg) != (size_t)extent.size.width ||
+        CGImageGetHeight(cg) != (size_t)extent.size.height || CGImageGetBitsPerComponent(cg) != 8) return nil;
+    const size_t width = CGImageGetWidth(cg), height = CGImageGetHeight(cg), stride = CGImageGetBytesPerRow(cg);
+    CGBitmapInfo info = CGImageGetBitmapInfo(cg), order = info & kCGBitmapByteOrderMask;
+    CGImageAlphaInfo alpha = CGImageGetAlphaInfo(cg);
+    size_t bytesPerPixel, alphaIndex;
+    if (alpha == kCGImageAlphaOnly && CGImageGetBitsPerPixel(cg) == 8 && order == kCGBitmapByteOrderDefault) {
+      bytesPerPixel = 1; alphaIndex = 0;
+    } else {
+      BOOL first = alpha == kCGImageAlphaFirst || alpha == kCGImageAlphaPremultipliedFirst;
+      BOOL last = alpha == kCGImageAlphaLast || alpha == kCGImageAlphaPremultipliedLast;
+      if (CGImageGetBitsPerPixel(cg) != 32 || (!first && !last) ||
+          (order != kCGBitmapByteOrderDefault && order != kCGBitmapByteOrder32Big && order != kCGBitmapByteOrder32Little)) return nil;
+      bytesPerPixel = 4; alphaIndex = order == kCGBitmapByteOrder32Little ? (first ? 3 : 0) : (first ? 0 : 3);
+    }
+    if (info & kCGBitmapFloatComponents || width > SIZE_MAX / bytesPerPixel || stride < width * bytesPerPixel ||
+        height > SIZE_MAX / stride || stride * height > 32 * 1024 * 1024) return nil;
+    if (boundedOwnership && stride * height > 16 * 1024 * 1024) return nil;
+    CFDataRef data = CGDataProviderCopyData(CGImageGetDataProvider(cg));
+    if (!data) return nil;
+    size_t minX = width, minY = height, maxX = 0, maxY = 0;
+    BOOL seen = NO, edge = NO, expired = NO;
+    @try {
+      if (CFDataGetLength(data) < 0 || (size_t)CFDataGetLength(data) < stride * height) return nil;
+      const UInt8 *bytes = CFDataGetBytePtr(data);
+      if (!bytes) return nil;
+      for (size_t y = 0; y < height; y++) {
+        if (!withinDeadline()) { expired = YES; break; }
+        for (size_t x = 0; x < width; x++) if (bytes[y * stride + x * bytesPerPixel + alphaIndex] > 0) {
+          seen = YES; minX = MIN(minX, x); minY = MIN(minY, y); maxX = MAX(maxX, x); maxY = MAX(maxY, y);
+          if (x == 0 || y == 0 || x + 1 == width || y + 1 == height) edge = YES;
+        }
+      }
+    } @finally { CFRelease(data); }
+    if (!seen || edge || expired || !withinDeadline()) return nil;
+    return @[@(minX + extent.origin.x - phase.x), @(minY + extent.origin.y - phase.y),
+      @(maxX + 1 + extent.origin.x - phase.x), @(maxY + 1 + extent.origin.y - phase.y)];
+  }
+}
+
 static NSDictionary *PieceSelectedPixels(RCTTextView *view, UIView *canvas, NSNumber *tag, NSDictionary *request,
     NSTextStorage *storage, NSLayoutManager *layout, NSTextContainer *container, NSRange glyphs,
     CGRect textKitInk, double fontSize, NSData *independent) {
@@ -140,54 +204,10 @@ static NSDictionary *PieceSelectedPixels(RCTTextView *view, UIView *canvas, NSNu
     CGPoint phase = placed ? canvasFrame.origin : CGPointZero;
     CGRect extent = CGRectIntegral(CGRectOffset(CGRectInset(CGRectUnion(bounds, textKitInk),
       -2 * fontSize, -2 * fontSize), phase.x, phase.y));
-    if (!PiecePixelRect(extent) || extent.size.width > 4096 || extent.size.height > 4096 ||
-        extent.size.width * extent.size.height > 4 * 1024 * 1024) return nil;
-    UIGraphicsImageRendererFormat *format = [UIGraphicsImageRendererFormat defaultFormat];
-    format.scale = 1; format.opaque = NO; format.preferredRange = UIGraphicsImageRendererFormatRangeStandard;
-    UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:extent.size format:format];
-    UIImage *image = [renderer imageWithActions:^(UIGraphicsImageRendererContext *context) {
-      CGContextSaveGState(context.CGContext);
-      @try {
-        CGContextTranslateCTM(context.CGContext, phase.x - extent.origin.x, phase.y - extent.origin.y);
-        [layout drawGlyphsForGlyphRange:glyphs atPoint:frame.origin];
-      } @finally { CGContextRestoreGState(context.CGContext); }
-    }];
-    CGImageRef cg = image.CGImage;
-    if (!cg || CGImageIsMask(cg) || !withinDeadline() || CGImageGetWidth(cg) != (size_t)extent.size.width ||
-        CGImageGetHeight(cg) != (size_t)extent.size.height || CGImageGetBitsPerComponent(cg) != 8) return nil;
-    const size_t width = CGImageGetWidth(cg), height = CGImageGetHeight(cg), stride = CGImageGetBytesPerRow(cg);
-    CGBitmapInfo info = CGImageGetBitmapInfo(cg), order = info & kCGBitmapByteOrderMask;
-    CGImageAlphaInfo alpha = CGImageGetAlphaInfo(cg);
-    size_t bytesPerPixel, alphaIndex;
-    if (alpha == kCGImageAlphaOnly && CGImageGetBitsPerPixel(cg) == 8 && order == kCGBitmapByteOrderDefault) {
-      bytesPerPixel = 1; alphaIndex = 0;
-    } else {
-      BOOL first = alpha == kCGImageAlphaFirst || alpha == kCGImageAlphaPremultipliedFirst;
-      BOOL last = alpha == kCGImageAlphaLast || alpha == kCGImageAlphaPremultipliedLast;
-      if (CGImageGetBitsPerPixel(cg) != 32 || (!first && !last) ||
-          (order != kCGBitmapByteOrderDefault && order != kCGBitmapByteOrder32Big && order != kCGBitmapByteOrder32Little)) return nil;
-      bytesPerPixel = 4; alphaIndex = order == kCGBitmapByteOrder32Little ? (first ? 3 : 0) : (first ? 0 : 3);
-    }
-    if (info & kCGBitmapFloatComponents || width > SIZE_MAX / bytesPerPixel || stride < width * bytesPerPixel ||
-        height > SIZE_MAX / stride || stride * height > 32 * 1024 * 1024) return nil;
-    CFDataRef data = CGDataProviderCopyData(CGImageGetDataProvider(cg));
-    if (!data) return nil;
-    size_t minX = width, minY = height, maxX = 0, maxY = 0;
-    BOOL seen = NO, edge = NO, expired = NO;
-    @try {
-      if (CFDataGetLength(data) < 0 || (size_t)CFDataGetLength(data) < stride * height) return nil;
-      const UInt8 *bytes = CFDataGetBytePtr(data);
-      if (!bytes) return nil;
-      for (size_t y = 0; y < height; y++) {
-        if (!withinDeadline()) { expired = YES; break; }
-        for (size_t x = 0; x < width; x++) if (bytes[y * stride + x * bytesPerPixel + alphaIndex] > 0) {
-          seen = YES; minX = MIN(minX, x); minY = MIN(minY, y); maxX = MAX(maxX, x); maxY = MAX(maxY, y);
-          if (x == 0 || y == 0 || x + 1 == width || y + 1 == height) edge = YES;
-        }
-      }
-    } @finally { CFRelease(data); }
+    NSArray *directInk = PieceDirectPixelInk(layout, glyphs, frame, extent, phase, withinDeadline);
+    if (!directInk) return nil;
     CGRect afterFrame;
-    if (!seen || edge || expired || !withinDeadline() || view.cocolonPieceTextStorage != storage ||
+    if (!withinDeadline() || view.cocolonPieceTextStorage != storage ||
         storage.layoutManagers.firstObject != layout || layout.textContainers.firstObject != container ||
         ![storage isEqualToAttributedString:attributes] || !CGSizeEqualToSize(container.size, containerSize) ||
         container.lineFragmentPadding != padding || container.lineBreakMode != lineBreak || container.maximumNumberOfLines != 0 ||
@@ -213,9 +233,362 @@ static NSDictionary *PieceSelectedPixels(RCTTextView *view, UIView *canvas, NSNu
     return @{ @"version":@"piece.native_selected_line.v2", @"stage":stage, @"tag":tag, @"canvas_tag":canvasTag,
       @"canvas_frame":PiecePixelRectArray(canvasFrame), @"content_frame":PiecePixelRectArray(frame),
       @"raster_scale":@1, @"snapshot_token":token,
-      @"ink":@[@(minX + extent.origin.x - phase.x), @(minY + extent.origin.y - phase.y),
-        @(maxX + 1 + extent.origin.x - phase.x), @(maxY + 1 + extent.origin.y - phase.y)] };
+      @"ink":directInk };
   }
+}
+
+// The v3 reference is temporary measurement, never the displayed renderer.
+// Owned buffers/providers share one checked 32MiB budget. CA's private caches
+// are not claimed to be measurable code-owned allocations.
+static char PieceContainmentSnapshotKey;
+static constexpr size_t PieceContainmentMemoryLimit = 32 * 1024 * 1024;
+struct PieceRasterBudget {
+  std::atomic<size_t> live{0};
+  bool reserve(size_t n) {
+    size_t old = live.load(std::memory_order_relaxed);
+    do {
+      if (old > PieceContainmentMemoryLimit || n > PieceContainmentMemoryLimit - old) return false;
+    } while (!live.compare_exchange_weak(old, old + n, std::memory_order_relaxed));
+    return true;
+  }
+  void release(size_t n) { live.fetch_sub(n, std::memory_order_relaxed); }
+};
+using PieceRasterBudgetOwner = std::shared_ptr<PieceRasterBudget>;
+static BOOL PieceRasterPlan(CGSize size, CGFloat scale, size_t *width, size_t *height, size_t *length) {
+  double w = ceil(size.width * scale), h = ceil(size.height * scale);
+  if (!isfinite(scale) || scale <= 0 || !isfinite(w) || !isfinite(h) || w < 1 || h < 1 ||
+      w > 4096 || h > 4096 || w * h > 4 * 1024 * 1024) return NO;
+  *width = (size_t)w; *height = (size_t)h;
+  if (*width > SIZE_MAX / 4 || *height > SIZE_MAX / (*width * 4)) return NO;
+  *length = *width * 4 * *height;
+  return *length <= PieceContainmentMemoryLimit;
+}
+struct PieceOwnedPixels {
+  PieceRasterBudgetOwner budget;
+  bool owns = true;
+  UInt8 *data = nullptr;
+  CGContextRef context = nullptr;
+  size_t width = 0, height = 0, stride = 0, length = 0;
+  PieceOwnedPixels() = default;
+  PieceOwnedPixels(const PieceOwnedPixels &) = delete;
+  PieceOwnedPixels &operator=(const PieceOwnedPixels &) = delete;
+  void reset() {
+    if (context) CGContextRelease(context);
+    if (owns && data) free(data);
+    if (owns && budget) budget->release(length);
+    budget.reset(); owns = true; data = nullptr; context = nullptr; width = height = stride = length = 0;
+  }
+  ~PieceOwnedPixels() { reset(); }
+  bool make(CGSize size, CGFloat scale, const PieceRasterBudgetOwner &owner) {
+    size_t w, h, n;
+    if (!PieceRasterPlan(size, scale, &w, &h, &n)) return false;
+    return makeExact(w, h, scale, owner);
+  }
+  bool makeExact(size_t w, size_t h, CGFloat scale, const PieceRasterBudgetOwner &owner) {
+    if (!w || !h || w > 4096 || h > 4096 || w > (4 * 1024 * 1024) / h ||
+        w > SIZE_MAX / 4 || h > SIZE_MAX / (w * 4)) return false;
+    size_t n = w * 4 * h;
+    if (!owner->reserve(n)) return false;
+    budget = owner; width = w; height = h; stride = w * 4; length = n;
+    data = (UInt8 *)calloc(height, stride);
+    CGColorSpaceRef space = data ? CGColorSpaceCreateWithName(kCGColorSpaceSRGB) : NULL;
+    context = space ? CGBitmapContextCreate(data, width, height, 8, stride, space,
+      kCGBitmapByteOrder32Big | kCGImageAlphaPremultipliedLast) : NULL;
+    if (space) CGColorSpaceRelease(space);
+    if (!context) { reset(); return false; }
+    CGContextTranslateCTM(context, 0, height);
+    CGContextScaleCTM(context, scale, -scale);
+    return true;
+  }
+};
+// Provider ownership follows the last CGImage/CA reference. A detached layer
+// retaining an old contents image cannot outlive/free its pixel allocation.
+struct PieceProviderAllocation {
+  PieceRasterBudgetOwner budget;
+  size_t length;
+};
+static void PieceProviderPixelsRelease(void *info, const void *data, __unused size_t size) {
+  auto *allocation = (PieceProviderAllocation *)info;
+  free((void *)data); allocation->budget->release(allocation->length); delete allocation;
+}
+static CGImageRef PiecePixelsImage(PieceOwnedPixels &pixels) {
+  if (!pixels.data || !pixels.owns) return NULL;
+  if (pixels.context) { CGContextRelease(pixels.context); pixels.context = nullptr; }
+  auto *allocation = new (std::nothrow) PieceProviderAllocation{pixels.budget, pixels.length};
+  if (!allocation) return NULL;
+  CGDataProviderRef provider = CGDataProviderCreateWithData(allocation, pixels.data, pixels.length, PieceProviderPixelsRelease);
+  if (!provider) { delete allocation; return NULL; }
+  pixels.owns = false;
+  CGColorSpaceRef space = CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
+  CGImageRef image = space ? CGImageCreate(pixels.width, pixels.height, 8, 32, pixels.stride, space,
+    kCGBitmapByteOrder32Big | kCGImageAlphaPremultipliedLast, provider, NULL, false, kCGRenderingIntentDefault) : NULL;
+  if (space) CGColorSpaceRelease(space);
+  CGDataProviderRelease(provider);
+  if (!image) pixels.reset();
+  return image;
+}
+static BOOL PieceScanPixels(const PieceOwnedPixels &pixels, BOOL (^withinDeadline)(void), BOOL rejectEdge, CGRect *ink) {
+  size_t l = pixels.width, t = pixels.height, r = 0, b = 0; BOOL seen = NO, edge = NO;
+  for (size_t y = 0; y < pixels.height; y++) {
+    if (!withinDeadline()) return NO;
+    for (size_t x = 0; x < pixels.width; x++) if (pixels.data[y * pixels.stride + x * 4 + 3] > 0) {
+      seen = YES; l = MIN(l, x); t = MIN(t, y); r = MAX(r, x); b = MAX(b, y);
+      if (x == 0 || y == 0 || x + 1 == pixels.width || y + 1 == pixels.height) edge = YES;
+    }
+  }
+  if (!seen || (rejectEdge && edge) || !withinDeadline()) return NO;
+  *ink = CGRectMake(l, t, r + 1 - l, b + 1 - t); return YES;
+}
+static NSArray *PieceInkEdges(CGRect rect) {
+  return @[@(CGRectGetMinX(rect)), @(CGRectGetMinY(rect)), @(CGRectGetMaxX(rect)), @(CGRectGetMaxY(rect))];
+}
+static BOOL PieceIdentityTransform(CATransform3D t) {
+  return t.m11 == 1 && t.m22 == 1 && t.m33 == 1 && t.m44 == 1 &&
+    t.m12 == 0 && t.m13 == 0 && t.m14 == 0 && t.m21 == 0 && t.m23 == 0 && t.m24 == 0 &&
+    t.m31 == 0 && t.m32 == 0 && t.m34 == 0 && t.m41 == 0 && t.m42 == 0 && t.m43 == 0;
+}
+static NSDictionary *PieceContainmentLayerState(RCTTextView *view) {
+  CALayer *layer = view.layer;
+  if (!layer.contents || layer.needsDisplay || layer.needsLayout || view.hidden || layer.hidden || layer.opaque ||
+      !isfinite(view.alpha) || view.alpha <= 0 || view.alpha > 1 ||
+      !isfinite(layer.opacity) || layer.opacity <= 0 || layer.opacity > 1 ||
+      !isfinite(view.contentScaleFactor) || view.contentScaleFactor <= 0 || layer.contentsScale != view.contentScaleFactor ||
+      layer.sublayers.count || layer.mask || layer.borderWidth != 0 || layer.cornerRadius != 0 || layer.shadowOpacity != 0 ||
+      layer.shouldRasterize || layer.drawsAsynchronously || layer.filters.count || layer.backgroundFilters.count || layer.compositingFilter ||
+      (layer.backgroundColor && CGColorGetAlpha(layer.backgroundColor) != 0) ||
+      !PieceIdentityTransform(layer.transform) || !PieceIdentityTransform(layer.sublayerTransform) ||
+      !CGRectEqualToRect(layer.bounds, view.bounds) || !CGPointEqualToPoint(view.bounds.origin, CGPointZero) ||
+      !CGRectEqualToRect(layer.contentsRect, CGRectMake(0, 0, 1, 1)) ||
+      !CGRectEqualToRect(layer.contentsCenter, CGRectMake(0, 0, 1, 1)) ||
+      ![layer.contentsGravity isEqualToString:@"resize"] ||
+      ![layer.minificationFilter isEqualToString:@"linear"] || ![layer.magnificationFilter isEqualToString:@"linear"] ||
+      layer.minificationFilterBias != 0 || layer.geometryFlipped || layer.animationKeys.count ||
+      ![view respondsToSelector:@selector(cocolonPieceIsPlainText)] || ![view cocolonPieceIsPlainText] ||
+      ![view respondsToSelector:@selector(cocolonPiecePaintGlyphRange:)]) return nil;
+  return @{@"contents":layer.contents, @"scale":@(layer.contentsScale), @"alpha":@(view.alpha), @"opacity":@(layer.opacity),
+    @"anchor":[NSValue valueWithCGPoint:layer.anchorPoint], @"bounds":[NSValue valueWithCGRect:layer.bounds],
+    @"masks":@(layer.masksToBounds), @"position":[NSValue valueWithCGPoint:layer.position]};
+}
+static BOOL PieceContainmentSameLayer(NSDictionary *a, NSDictionary *b, BOOL placementAllowed) {
+  if (!a || !b || a[@"contents"] != b[@"contents"] || ![a[@"scale"] isEqual:b[@"scale"]] ||
+      ![a[@"alpha"] isEqual:b[@"alpha"]] || ![a[@"opacity"] isEqual:b[@"opacity"]] ||
+      ![a[@"anchor"] isEqual:b[@"anchor"]] || ![a[@"bounds"] isEqual:b[@"bounds"]] ||
+      ![a[@"masks"] isEqual:b[@"masks"]]) return NO;
+  return placementAllowed || [a[@"position"] isEqual:b[@"position"]];
+}
+static CALayer *PieceReferenceLayer(CGImageRef image, CGRect bounds, CALayer *original) {
+  // A public temporary layer; never a copy of a UIKit private subclass.
+  CALayer *layer = [CALayer layer];
+  layer.actions = @{@"contents":NSNull.null, @"bounds":NSNull.null, @"anchorPoint":NSNull.null,
+    @"contentsScale":NSNull.null, @"contentsRect":NSNull.null, @"contentsCenter":NSNull.null, @"opacity":NSNull.null};
+  layer.bounds = bounds; layer.anchorPoint = original.anchorPoint;
+  layer.contents = (__bridge id)image; layer.contentsScale = original.contentsScale;
+  layer.contentsRect = original.contentsRect; layer.contentsCenter = original.contentsCenter;
+  layer.contentsGravity = original.contentsGravity; layer.minificationFilter = original.minificationFilter;
+  layer.magnificationFilter = original.magnificationFilter; layer.minificationFilterBias = original.minificationFilterBias;
+  layer.opacity = original.opacity; layer.opaque = NO; layer.masksToBounds = original.masksToBounds;
+  return layer;
+}
+static BOOL PieceCompositePixels(CALayer *layer, CGRect extent, CGFloat scale, CGPoint origin, CGPoint outputPhase,
+    const PieceRasterBudgetOwner &budget, BOOL (^withinDeadline)(void), CGRect *ink) {
+  PieceOwnedPixels pixels;
+  if (!withinDeadline() || !pixels.make(extent.size, scale, budget) || !withinDeadline()) return NO;
+  CGContextTranslateCTM(pixels.context, origin.x - extent.origin.x, origin.y - extent.origin.y);
+  [layer renderInContext:pixels.context];
+  CGRect cells;
+  if (!PieceScanPixels(pixels, withinDeadline, YES, &cells)) return NO;
+  *ink = CGRectMake(cells.origin.x / scale + extent.origin.x - outputPhase.x,
+    cells.origin.y / scale + extent.origin.y - outputPhase.y, cells.size.width / scale, cells.size.height / scale);
+  return YES;
+}
+static BOOL PieceNativeAndLayerInk(RCTTextView *view, NSRange glyphs, CGRect textKitInk, double fontSize,
+    CGPoint phase, const PieceRasterBudgetOwner &budget, BOOL (^withinDeadline)(void), CGRect *nativeInk, CGRect *layerInk) {
+  const CGFloat scale = view.contentScaleFactor;
+  CGRect expanded = CGRectInset(textKitInk, -2 * fontSize, -2 * fontSize);
+  const double x0 = floor(expanded.origin.x * scale), y0 = floor(expanded.origin.y * scale);
+  const double x1 = ceil(CGRectGetMaxX(expanded) * scale), y1 = ceil(CGRectGetMaxY(expanded) * scale);
+  if (!isfinite(x0) || !isfinite(y0) || !isfinite(x1) || !isfinite(y1) ||
+      fabs(x0) > 0x1p52 || fabs(y0) > 0x1p52 || fabs(x1) > 0x1p52 || fabs(y1) > 0x1p52) return NO;
+  CGRect nativeExtent = CGRectMake(x0 / scale, y0 / scale, (x1 - x0) / scale, (y1 - y0) / scale);
+  CGRect logicalExtent = CGRectIntegral(CGRectOffset(CGRectUnion(view.bounds, nativeExtent), phase.x, phase.y));
+  // One transparent logical cell is only scratch for filter support, never
+  // added to returned ink. Alpha touching that outer boundary is rejected.
+  logicalExtent = CGRectInset(logicalExtent, -1, -1);
+  size_t nw, nh, nb, vw, vh, vb, lw, lh, lb;
+  if (!PiecePixelRect(nativeExtent) || !PiecePixelRect(logicalExtent) ||
+      !PieceRasterPlan(CGSizeMake(x1 - x0, y1 - y0), 1, &nw, &nh, &nb) ||
+      !PieceRasterPlan(view.bounds.size, scale, &vw, &vh, &vb) ||
+      !PieceRasterPlan(logicalExtent.size, 1, &lw, &lh, &lb)) return NO;
+  const size_t bitBytes = (vw * vh + 7) / 8;
+  // Preflight all peaks before any v3 allocation; image providers own these
+  // same allocations without a second pixel copy.
+  if (nb > PieceContainmentMemoryLimit - lb || nb > PieceContainmentMemoryLimit - vb ||
+      vb > (PieceContainmentMemoryLimit - bitBytes) / 2) return NO;
+  PieceOwnedPixels native, clipped;
+  if (!withinDeadline() || !native.makeExact(nw, nh, scale, budget) || !withinDeadline()) return NO;
+  CGContextTranslateCTM(native.context, -nativeExtent.origin.x, -nativeExtent.origin.y);
+  UIGraphicsPushContext(native.context);
+  @try { [view cocolonPiecePaintGlyphRange:glyphs]; }
+  @finally { UIGraphicsPopContext(); }
+  CGRect nativeCells;
+  if (!PieceScanPixels(native, withinDeadline, YES, &nativeCells)) return NO;
+  const double projectedLeft = floor((CGRectGetMinX(nativeCells) + x0) / scale + phase.x) - phase.x;
+  const double projectedTop = floor((CGRectGetMinY(nativeCells) + y0) / scale + phase.y) - phase.y;
+  const double projectedRight = ceil((CGRectGetMaxX(nativeCells) + x0) / scale + phase.x) - phase.x;
+  const double projectedBottom = ceil((CGRectGetMaxY(nativeCells) + y0) / scale + phase.y) - phase.y;
+  CGRect projected = CGRectMake(projectedLeft, projectedTop, projectedRight - projectedLeft, projectedBottom - projectedTop);
+  CGImageRef expandedImage = PiecePixelsImage(native), clippedImage = NULL;
+  CALayer *reference = nil;
+  UInt8 *bits = nullptr;
+  BOOL reservedBits = NO;
+  @try {
+    if (!expandedImage) return NO;
+    reference = PieceReferenceLayer(expandedImage, (CGRect){CGPointZero, nativeExtent.size}, view.layer);
+    CGRect filtered;
+    if (!reference || !PieceCompositePixels(reference, logicalExtent, 1,
+        CGPointMake(phase.x + nativeExtent.origin.x, phase.y + nativeExtent.origin.y), phase, budget, withinDeadline, &filtered)) return NO;
+    *nativeInk = CGRectUnion(projected, filtered);
+    if (!withinDeadline() || !clipped.make(view.bounds.size, scale, budget) || !withinDeadline()) return NO;
+    // Clip the SAME native-grid paint BEFORE filtering, including fractional
+    // UIKit view bounds (Yoga heights can be one float ULP off a pixel edge).
+    // Cropping a pre-rasterized cell cannot reproduce a fractional glyph clip.
+    CGContextClipToRect(clipped.context, view.bounds);
+    UIGraphicsPushContext(clipped.context);
+    @try { [view cocolonPiecePaintGlyphRange:glyphs]; }
+    @finally { UIGraphicsPopContext(); }
+    reference.contents = nil; reference = nil;
+    CGImageRelease(expandedImage); expandedImage = NULL; native.reset();
+    clippedImage = PiecePixelsImage(clipped);
+    if (!clippedImage || !budget->reserve(bitBytes)) return NO;
+    reservedBits = YES; bits = (UInt8 *)calloc(bitBytes, 1);
+    if (!bits) return NO;
+    reference = PieceReferenceLayer(clippedImage, view.bounds, view.layer);
+    if (!reference) return NO;
+    {
+      PieceOwnedPixels compared;
+      if (!withinDeadline() || !compared.make(view.bounds.size, scale, budget) || !withinDeadline()) return NO;
+      [reference renderInContext:compared.context];
+      for (size_t y = 0; y < vh; y++) {
+        if (!withinDeadline()) return NO;
+        for (size_t x = 0; x < vw; x++) if (compared.data[y * compared.stride + x * 4 + 3] > 0) {
+          size_t index = y * vw + x; bits[index / 8] |= (UInt8)(1 << (index % 8));
+        }
+      }
+    }
+    reference.contents = nil; reference = nil;
+    CGImageRelease(clippedImage); clippedImage = NULL; clipped.reset();
+    {
+      PieceOwnedPixels actual;
+      if (!withinDeadline() || !actual.make(view.bounds.size, scale, budget) || !withinDeadline()) return NO;
+      [view.layer renderInContext:actual.context];
+      for (size_t y = 0; y < vh; y++) {
+        if (!withinDeadline()) return NO;
+        for (size_t x = 0; x < vw; x++) {
+          size_t index = y * vw + x;
+          if ((actual.data[y * actual.stride + x * 4 + 3] > 0) != ((bits[index / 8] & (1 << (index % 8))) != 0)) return NO;
+        }
+      }
+    }
+    free(bits); bits = nullptr; budget->release(bitBytes); reservedBits = NO;
+    return PieceCompositePixels(view.layer, logicalExtent, 1, phase, phase, budget, withinDeadline, layerInk);
+  } @finally {
+    reference.contents = nil;
+    if (expandedImage) CGImageRelease(expandedImage);
+    if (clippedImage) CGImageRelease(clippedImage);
+    if (bits) free(bits);
+    if (reservedBits) budget->release(bitBytes);
+  }
+}
+static NSDictionary *PieceContainmentPixels(RCTTextView *view, UIView *canvas, NSNumber *tag, NSDictionary *request,
+    NSTextStorage *storage, NSLayoutManager *layout, NSTextContainer *container, NSRange glyphs,
+    CGRect textKitInk, double fontSize, NSData *independent) {
+  try {
+  @autoreleasepool {
+    NSDictionary *prior = objc_getAssociatedObject(view, &PieceContainmentSnapshotKey);
+    objc_setAssociatedObject(view, &PieceContainmentSnapshotKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    NSArray *keys = @[@"stage", @"canvas_tag", @"expires_at_ms", @"snapshot_token"];
+    if (![request isKindOfClass:NSDictionary.class] ||
+        ![[NSSet setWithArray:request.allKeys] isEqualToSet:[NSSet setWithArray:keys]]) return nil;
+    NSString *stage = request[@"stage"]; BOOL placed = [stage isEqual:@"placed"];
+    NSNumber *canvasTag = request[@"canvas_tag"], *expires = request[@"expires_at_ms"];
+    if ((!placed && ![stage isEqual:@"local"]) || ![canvasTag isKindOfClass:NSNumber.class] ||
+        !isfinite(canvasTag.doubleValue) || canvasTag.doubleValue <= 0 || canvasTag.doubleValue != floor(canvasTag.doubleValue) ||
+        [canvasTag isEqual:tag] || ![expires isKindOfClass:NSNumber.class] || !isfinite(expires.doubleValue)) return nil;
+    const double deadline = expires.doubleValue;
+    const NSTimeInterval monotonicDeadline = placed ? [prior[@"monotonic_deadline"] doubleValue]
+      : NSProcessInfo.processInfo.systemUptime + (deadline - NSDate.date.timeIntervalSince1970 * 1000) / 1000;
+    BOOL (^withinDeadline)(void) = ^{ return NSDate.date.timeIntervalSince1970 * 1000 < deadline &&
+      NSProcessInfo.processInfo.systemUptime < monotonicDeadline; };
+    if (!withinDeadline() || deadline > NSDate.date.timeIntervalSince1970 * 1000 + 8000) return nil;
+    CGRect canvasFrame, bounds = view.bounds, frame = view.cocolonPieceContentFrame;
+    if (!PiecePixelCanvasFrame(view, canvas, &canvasFrame) || !PiecePixelRect(frame) || !PiecePixelRect(textKitInk)) return nil;
+    NSDictionary *layerState = PieceContainmentLayerState(view);
+    if (!layerState) return nil;
+    NSAttributedString *attributes = [storage copy];
+    CGSize containerSize = container.size; CGFloat padding = container.lineFragmentPadding;
+    NSLineBreakMode lineBreak = container.lineBreakMode; BOOL leading = layout.usesFontLeading;
+    CGRect canvasBounds = canvas.bounds, canvasViewFrame = canvas.frame; CGAffineTransform canvasTransform = canvas.transform;
+    NSString *token = placed ? request[@"snapshot_token"] : NSUUID.UUID.UUIDString;
+    if (placed) {
+      BOOL (^sameCanvas)(UIView *) = prior[@"same_canvas"];
+      if (![token isKindOfClass:NSString.class] || ![prior[@"token"] isEqual:token] || !sameCanvas || !sameCanvas(canvas) ||
+          prior[@"storage"] != storage || prior[@"layout"] != layout || prior[@"container"] != container ||
+          ![prior[@"attributes"] isEqualToAttributedString:attributes] ||
+          !CGRectEqualToRect([prior[@"bounds"] CGRectValue], bounds) || !CGRectEqualToRect([prior[@"frame"] CGRectValue], frame) ||
+          !CGSizeEqualToSize([prior[@"container_size"] CGSizeValue], containerSize) || [prior[@"padding"] doubleValue] != padding ||
+          [prior[@"line_break"] integerValue] != lineBreak || [prior[@"leading"] boolValue] != leading ||
+          !CGRectEqualToRect([prior[@"canvas_bounds"] CGRectValue], canvasBounds) ||
+          !CGRectEqualToRect([prior[@"canvas_frame"] CGRectValue], canvasViewFrame) ||
+          !CGAffineTransformEqualToTransform([prior[@"canvas_transform"] CGAffineTransformValue], canvasTransform) ||
+          ![prior[@"independent"] isEqualToData:independent] || ![prior[@"deadline"] isEqual:expires] ||
+          !PieceContainmentSameLayer(prior[@"layer"], layerState, YES)) return nil;
+    } else if (request[@"snapshot_token"] != NSNull.null) return nil;
+    CGPoint phase = placed ? canvasFrame.origin : CGPointZero;
+    CGRect extent = CGRectIntegral(CGRectOffset(CGRectInset(CGRectUnion(bounds, textKitInk), -2 * fontSize, -2 * fontSize), phase.x, phase.y));
+    NSArray *direct = PieceDirectPixelInk(layout, glyphs, frame, extent, phase, withinDeadline, YES);
+    if (!direct) return nil;
+    PieceRasterBudgetOwner budget = std::make_shared<PieceRasterBudget>();
+    CGRect nativeInk, layerInk;
+    if (!PieceNativeAndLayerInk(view, glyphs, textKitInk, fontSize, phase, budget, withinDeadline, &nativeInk, &layerInk)) return nil;
+    CGRect afterFrame;
+    if (!withinDeadline() || view.cocolonPieceTextStorage != storage || storage.layoutManagers.firstObject != layout ||
+        layout.textContainers.firstObject != container || ![storage isEqualToAttributedString:attributes] ||
+        !CGSizeEqualToSize(container.size, containerSize) || container.lineFragmentPadding != padding ||
+        container.lineBreakMode != lineBreak || container.maximumNumberOfLines != 0 || layout.usesFontLeading != leading ||
+        !NSEqualRanges([layout glyphRangeForTextContainer:container], glyphs) || !CGRectEqualToRect(view.bounds, bounds) ||
+        !CGRectEqualToRect(view.cocolonPieceContentFrame, frame) || !PiecePixelCanvasFrame(view, canvas, &afterFrame) ||
+        !CGRectEqualToRect(afterFrame, canvasFrame) || !CGRectEqualToRect(canvas.bounds, canvasBounds) ||
+        !CGRectEqualToRect(canvas.frame, canvasViewFrame) || !CGAffineTransformEqualToTransform(canvas.transform, canvasTransform) ||
+        !PieceContainmentSameLayer(layerState, PieceContainmentLayerState(view), NO)) return nil;
+    if (!placed) {
+      __weak UIView *weakCanvas = canvas;
+      BOOL (^sameCanvas)(UIView *) = ^BOOL(UIView *value) { return weakCanvas && value == weakCanvas; };
+      objc_setAssociatedObject(view, &PieceContainmentSnapshotKey, @{
+        @"token":token, @"same_canvas":[sameCanvas copy], @"storage":storage, @"layout":layout, @"container":container,
+        @"attributes":attributes, @"bounds":[NSValue valueWithCGRect:bounds], @"frame":[NSValue valueWithCGRect:frame],
+        @"container_size":[NSValue valueWithCGSize:containerSize], @"padding":@(padding), @"line_break":@(lineBreak), @"leading":@(leading),
+        @"canvas_bounds":[NSValue valueWithCGRect:canvasBounds], @"canvas_frame":[NSValue valueWithCGRect:canvasViewFrame],
+        @"canvas_transform":[NSValue valueWithCGAffineTransform:canvasTransform], @"independent":independent,
+        @"deadline":expires, @"monotonic_deadline":@(monotonicDeadline), @"layer":layerState
+      }, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    }
+    if (!withinDeadline()) {
+      objc_setAssociatedObject(view, &PieceContainmentSnapshotKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+      return nil;
+    }
+    NSArray *nativeEdges = PieceInkEdges(nativeInk), *layerEdges = PieceInkEdges(layerInk);
+    NSMutableArray *unionEdges = [NSMutableArray new];
+    for (NSUInteger i = 0; i < 4; i++) {
+      double a = [direct[i] doubleValue], b = [nativeEdges[i] doubleValue], c = [layerEdges[i] doubleValue];
+      [unionEdges addObject:@(i < 2 ? MIN(a, MIN(b, c)) : MAX(a, MAX(b, c)))];
+    }
+    return @{@"version":@"piece.native_selected_line.v3", @"stage":stage, @"tag":tag, @"canvas_tag":canvasTag,
+      @"canvas_frame":PiecePixelRectArray(canvasFrame), @"content_frame":PiecePixelRectArray(frame),
+      @"raster_scale":@1, @"snapshot_token":token, @"native_raster_scale":layerState[@"scale"],
+      @"component_inks":@{@"direct":direct, @"native":nativeEdges, @"layer":layerEdges},
+      @"ink":unionEdges};
+  }
+  } catch (const std::bad_alloc &) { return nil; }
 }
 
 @implementation PieceTextMetrics
@@ -568,12 +941,28 @@ RCT_EXPORT_METHOD(inspectSelectedLineV2:(nonnull NSNumber *)tag text:(NSString *
     pixelRequest:[request isKindOfClass:NSDictionary.class] ? request : @{} resolver:resolve rejecter:reject];
 }
 
+RCT_EXPORT_METHOD(inspectSelectedLineV3:(nonnull NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize
+                  request:(NSDictionary *)request resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+{
+  [self inspectSnapshot:tag text:expected fontSize:fontSize selectedLine:YES
+    pixelRequest:[request isKindOfClass:NSDictionary.class] ? request : @{} containment:YES resolver:resolve rejecter:reject];
+}
+
 - (void)inspectSnapshot:(NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize
           selectedLine:(BOOL)selectedLine pixelRequest:(NSDictionary *)pixelRequest resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject
 {
+  [self inspectSnapshot:tag text:expected fontSize:fontSize selectedLine:selectedLine pixelRequest:pixelRequest
+    containment:NO resolver:resolve rejecter:reject];
+}
+
+- (void)inspectSnapshot:(NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize
+          selectedLine:(BOOL)selectedLine pixelRequest:(NSDictionary *)pixelRequest containment:(BOOL)containment
+          resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject
+{
+  const void *snapshotKey = containment ? &PieceContainmentSnapshotKey : &PieceSelectedPixelSnapshotKey;
   __block __weak RCTTextView *pixelView = nil;
   void (^unavailable)(void) = ^{
-    if (pixelRequest && pixelView) objc_setAssociatedObject(pixelView, &PieceSelectedPixelSnapshotKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    if (pixelRequest && pixelView) objc_setAssociatedObject(pixelView, snapshotKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
     reject(@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE", @"Text measurement unavailable", nil);
   };
   if (!isfinite(tag.doubleValue) || tag.doubleValue <= 0 || tag.doubleValue != floor(tag.doubleValue) ||
@@ -581,7 +970,7 @@ RCT_EXPORT_METHOD(inspectSelectedLineV2:(nonnull NSNumber *)tag text:(NSString *
     if (pixelRequest && _bridge.uiManager && isfinite(tag.doubleValue) && tag.doubleValue > 0 && tag.doubleValue == floor(tag.doubleValue)) {
       [_bridge.uiManager addUIBlock:^(__unused RCTUIManager *manager, NSDictionary<NSNumber *, UIView *> *registry) {
         UIView *view = registry[tag];
-        if ([view isKindOfClass:RCTTextView.class]) objc_setAssociatedObject(view, &PieceSelectedPixelSnapshotKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+        if ([view isKindOfClass:RCTTextView.class]) objc_setAssociatedObject(view, snapshotKey, nil, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
         unavailable();
       }];
     } else unavailable();
@@ -679,7 +1068,9 @@ RCT_EXPORT_METHOD(inspectSelectedLineV2:(nonnull NSNumber *)tag text:(NSString *
         if (pixelRequest) {
           id canvasTag = pixelRequest[@"canvas_tag"];
           UIView *canvas = [canvasTag isKindOfClass:NSNumber.class] ? registry[canvasTag] : nil;
-          NSDictionary *pixels = PieceSelectedPixels(view, canvas, tag, pixelRequest, storage, layout, container, all, ink, fontSize, independentBytes);
+          NSDictionary *pixels = containment
+            ? PieceContainmentPixels(view, canvas, tag, pixelRequest, storage, layout, container, all, ink, fontSize, independentBytes)
+            : PieceSelectedPixels(view, canvas, tag, pixelRequest, storage, layout, container, all, ink, fontSize, independentBytes);
           if (!pixels || registry[tag] != view || registry[canvasTag] != canvas) { unavailable(); return; }
           [selected addEntriesFromDictionary:pixels];
         }

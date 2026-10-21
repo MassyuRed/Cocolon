@@ -72,14 +72,15 @@ for (const method of ['measureCandidates', 'measureCandidatesForWidth', 'measure
   };
 }
 
-const selectedV2 = renderer.inspectPieceSelectedLineV2;
-renderer.inspectPieceSelectedLineV2 = async (...args) => {
+const selectedV3 = renderer.inspectPieceSelectedLineV3;
+renderer.inspectPieceSelectedLineV3 = async (...args) => {
   const trace = activeTrace, start = performance.now(), sample = { stage: args[1].stage, font_size: args[1].fontSize, status: 'pending' };
   trace?.selected.push(sample);
   try {
-    const result = await selectedV2(...args);
+    const result = await selectedV3(...args);
     Object.assign(sample, { status: 'resolved', elapsed_ms: performance.now() - start, tag: result.tag,
-      canvas_tag: result.canvasTag, canvas_frame: result.canvasFrame, ink: result.ink });
+      canvas_tag: result.canvasTag, canvas_frame: result.canvasFrame, ink: result.ink,
+      native_raster_scale: result.nativeRasterScale, component_inks: result.componentInks });
     return result;
   } catch (error) { Object.assign(sample, { status: 'rejected', elapsed_ms: performance.now() - start }); throw error; }
 };
@@ -102,7 +103,7 @@ class CanvasCases extends React.Component {
   };
   poll = () => {
     const fixture = this.caseFixtures[this.state.index];
-    if (fixture.evidence_set === 'raw_text_diagnostic') {
+    if (typeof fixture.raw_text === 'string') {
       this.probeRawText();
       if (!this.finishing && (this.rawReport || performance.now() - this.started >= 8000)) {
         this.finishing = true;
@@ -184,16 +185,28 @@ class CanvasCases extends React.Component {
       if (lines.length !== 1 || lines[0].text !== text || box.width !== 1080 || !Number.isFinite(box.height) || Math.abs(box.height - 75) > 0.5 ||
           !['x', 'y', 'width', 'height'].every(key => Number.isFinite(lines[0][key])) ||
           lines[0].width < 0 || lines[0].height <= 0 || lines[0].width > 888 || lines[0].height > 75) throw Error('raw_geometry');
-      const input = { candidateProfile: 'piece.rn_native_preview.prototype.v9', blocks: [text], contentWidth: 888,
+      const input = { candidateProfile: 'piece.rn_native_preview.containment.prototype.v1', blocks: [text], contentWidth: 888,
         contentHeight: 75, sizes: [48], lineRatio: 75 / 48, paragraphRatio: 0, alignment: 'left' };
       const table = await renderer.measurePieceCandidates(node, text, 48, { candidateProfile: 'piece.rn_native_preview.prototype.v5' });
       if (!current()) return;
       const plan = measuredWrap.planPieceMeasuredRows(input, 0, [table]);
       if (JSON.stringify(plan?.groups) !== JSON.stringify([[text]])) throw Error('raw_b9_selection');
       const expected = { text, fontSize: 48, box, lineEnds: [text.length], canvasNode: operation.canvas, expiresAt: this.originalExpiresAt };
-      const result = await renderer.inspectPieceSelectedLineV2(node, { ...expected, stage: 'local' });
+      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+      if (!current()) return;
+      const result = await renderer.inspectPieceSelectedLineV3(node, { ...expected, stage: 'local' });
       if (!current()) return;
       operation.inspection = result;
+      if (fixture.controlled_native_clip_trap) {
+        const c = result.componentInks;
+        const observed = !!c && c.direct[1] >= 0 && c.layer[1] >= 0 && c.native[1] < 0 &&
+          result.ink[1] < 0 && result.overflow === true && result.wrapViolation === false;
+        this.rawReport = { phase: 'measurement_checked', diagnostic_valid: observed, body_preserved: true,
+          native_clip_trap_synthetic: true, expected_overflow: true, native_clip_trap_detected: observed,
+          plan_groups: plan.groups, plan_line_height: plan.lineHeight, inspection: [result], local_inspection: [result],
+          on_text_layout: lines, candidate_range_count: table.rows.length, same_selected_text_node: true };
+        return;
+      }
       const [advance, left, top, right, bottom] = result.independentMetrics;
       if (result.overflow || result.wrapViolation || Math.max(advance, right) - Math.min(0, left) > 888 || bottom - top > 75) throw Error('raw_independent_overflow');
       const contentLeft = result.ink[0] - 96, contentRight = result.ink[2] - 96;
@@ -204,7 +217,7 @@ class CanvasCases extends React.Component {
       await new Promise(resolve => this.setState({ rawLeft }, resolve));
       await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
       if (!current() || this.state.rawLeft !== rawLeft) return;
-      const placed = await renderer.inspectPieceSelectedLineV2(node, { ...expected, stage: 'placed', local: result,
+      const placed = await renderer.inspectPieceSelectedLineV3(node, { ...expected, stage: 'placed', local: result,
         canvasFrame: [rawLeft, 96, box.width, box.height] });
       if (!current() || this.state.rawLeft !== rawLeft) return;
       const [x, y] = placed.canvasFrame, [l, t, r, b] = placed.ink;
@@ -222,7 +235,7 @@ class CanvasCases extends React.Component {
   finishRawText = async () => {
     const fixture = this.caseFixtures[this.state.index];
     const report = { name: fixture.name, evidence_set: fixture.evidence_set, diagnostic_only: true,
-      candidate_profile: 'piece.rn_native_preview.prototype.v9', font_size: 48, elapsed_ms: performance.now() - this.started,
+      candidate_profile: 'piece.rn_native_preview.containment.prototype.v1', font_size: 48, elapsed_ms: performance.now() - this.started,
       width: 1080, height: 320, content_width: 888, content_height: 75, margin: 96, branding_zone: 0, branding: false,
       rows: [fixture.raw_text], blocks: [fixture.raw_text], trace: this.trace,
       ...(this.rawReport || { phase: 'measurement_unavailable', diagnostic_valid: false, body_preserved: false }) };
@@ -230,7 +243,7 @@ class CanvasCases extends React.Component {
   };
   render() {
     const fixture = this.caseFixtures[this.state.index];
-    if (fixture.evidence_set === 'raw_text_diagnostic') return <View key={fixture.name} style={{ width: 360, height: 320 / 3 }}>
+    if (typeof fixture.raw_text === 'string') return <View key={fixture.name} style={{ width: 360, height: 320 / 3 }}>
       <View collapsable={false} ref={node => { this.rawCanvasNode = node; }} style={{ position: 'absolute', width: 1080, height: 320,
         left: -360, top: (320 / 3 - 320) / 2, transform: [{ scale: 1 / 3 }], backgroundColor: '#F6F1E8' }}>
         <View collapsable={false} style={{ position: 'absolute', left: 0, top: 0, width: 1080, height: 320,

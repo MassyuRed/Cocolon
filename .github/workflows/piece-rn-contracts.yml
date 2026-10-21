@@ -154,7 +154,7 @@ jobs:
             -target "$ARCH-apple-ios15.1-simulator" \
             -isysroot "$(xcrun --sdk iphonesimulator --show-sdk-path)" \
             -I "$TEST_DIR/include" -I tests/native \
-            -framework UIKit -framework Foundation -framework CoreText -framework CoreGraphics \
+            -framework UIKit -framework Foundation -framework CoreText -framework CoreGraphics -framework QuartzCore \
             -Werror=objc-method-access -Werror=implicit-function-declaration \
             tests/native/piece-text-metrics-ios.mm -o "$APP_DIR/piece-native-metrics"
           python3 - "$APP_DIR/Info.plist" <<'PY_PLIST'
@@ -213,8 +213,15 @@ jobs:
           expected = 'NATIVE_CHECKS=129 PASS=129 FAIL=0 SKIP=0'
           legacy = 'LEGACY_NATIVE_CHECKS=97 PASS=97 FAIL=0 SKIP=0'
           legacy_summaries = [line for line in lines if line.startswith('LEGACY_NATIVE_CHECKS=')]
-          if int(sys.argv[2]) != 0 or summaries != [expected] or legacy_summaries != [legacy] or any(line.startswith('FAIL ') for line in lines):
-              raise SystemExit('Native metrics did not finish the unchanged 97 checks and all 32 v5 additions successfully')
+          v9 = [line for line in lines if line.startswith('V9_NATIVE_CHECKS=')]
+          v3 = [line for line in lines if line.startswith('V3_NATIVE_CHECKS=')]
+          passed = [line[5:] for line in lines if line.startswith('PASS ')]
+          if (int(sys.argv[2]) != 0 or summaries != [expected] or legacy_summaries != [legacy]
+                  or v9 != ['V9_NATIVE_CHECKS=46 PASS=46 FAIL=0 SKIP=0 EXPECTED=46']
+                  or v3 != ['V3_NATIVE_CHECKS=20 PASS=20 FAIL=0 SKIP=0 EXPECTED=20']
+                  or len(passed) != 195 or len(set(passed)) != 195
+                  or any(line.startswith('FAIL ') for line in lines)):
+              raise SystemExit('Native metrics did not finish the unchanged175 and all20 containment additions with195 unique PASS')
           PY_RESULT
 
   piece-ios-rn-canvas:

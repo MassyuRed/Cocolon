@@ -1690,3 +1690,10 @@ primary=BLOCKER_NARROWED。非clip意図描画と実layerを扱う最小修復�
 19既存path・一度のCI・元915/native175を保持して新native20追加予定、RN既存11＋cliptrap/branding追加2条件、元8秒/native90秒/各資源上限・未達STOPを入口§87へ固定。新ink/wire/profileの実装と限定検証はRule18§11.3の明示判断待ちで未実行、資料5fileだけ反映。全体設計/全file map/tree1909、現38file・上流RN原典を照合し、DBはproject status確認以外0。診断反復や設計記録を製品修復の実績へ加算しません。
 
 10/22通常初回保存・10/23共有は引き続き前提未達。修復候補成立後も正式renderer/saved reader/InputScreen正式供給/既存API本人保存→本人詳細・履歴を閉じる必要があります。formal_admission/product_acceptance/normal_save_reopen_complete=false、automatic_progression=false、STRUCTURE_MAP_DELTA_NONE。
+
+
+#### 5.6.16 P-W1：承認済み包含修復を実装（2026-10-21）
+
+入口§88/map§65.36/manifest v105。Mashが§87新候補の実装と一度CIを明示承認。旧v2保持の別preview＋20field v3で、同paint native-scale非clip/自然layer/元directのunionを配置・余白・本文候補サイズへ接続。branding28/40/.8は固定。元boundsで先にclipするnative参照を自然layerと実行時に全alpha occupancy比較し、same contents/scale/state/deadlineを束縛します。provider最終解放・shared atomic32MiB、元8秒/90秒を保持。workflowへ既存OS QuartzCoreのlinkと新195unique照合を最小追加しました。
+
+local JS933全成功（元915＋新18、14.436秒）。native195/実RN13・PNG/画素/時間は未確認、一度の新source CIで確かめます。実RN追加trapは自然font不具合と偽らないcontrolled paint fault。19既存fileのみ・新dependency/DB/API/runtime/flag/env/deploy/main0。STRUCTURE_MAP_DELTA_PRESENTは限定previewの内部測定/paint責務。正式renderer/通常保存/本人GET・履歴/実機は未完了で、10/22保存・10/23共有を達成扱いしません。automatic_progression=false。

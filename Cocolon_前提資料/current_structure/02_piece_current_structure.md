@@ -16,6 +16,10 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**最新は入口§88／current map§65.36／weekly§5.6.16／manifest v105です。Mash承認済みの包含修復候補を実装。local JS933件成功、既存19pathの反映・全文照合後、新sourceを一度のCIで確認します。native195／実RN13条件・画素/時間の成立は未確認です。旧v2/v9・saved/export境界を保持し、正式採用・通常保存は未完了です。**
+
+### §87の設計時点（履歴）
+
 **最新は入口§87／current map§65.35／weekly§5.6.15／manifest v104です。実layer包含修復の具体仕様を確定しGitHubへ記録。旧v2を保持する別preview候補で、native非clip参照・自然layer・配置/余白判定を一体化する案です。新ink/wire/profileの実装と一度の検証は判断待ち・未実行。前回JS915/native175/RN11成功は保持し、正式採用・通常保存は未完了です。**
 
 ### §86.2〜86.3の結果（履歴）
@@ -3117,3 +3121,10 @@ BLOCKER_NARROWED、包含判定の修復・正式採用・通常保存は未完�
 入口§87／weekly§5.6.15／manifest v104。v2成功inkを変えない追加rejectだけではCardの配置・本文/branding論理高/余白・次fontを一体修復できないため、旧v2を保持する別preview containment.prototype.v1＋selected_line.v3を具体化。direct1、同paint native-scale非clip参照（実行時にclip参照と自然layerのalpha occupancy対応を検証、nativecell射影＋filter込みlogical合成）、自然layerの3成分unionを20fieldで渡す案です。nativegridはview0、local phase0→placed実小数位相、検証済みoverflowだけ既存次font、未準備/不一致/期限はunavailable。branding28/40/opacity0.8固定、branding自体の縮小は追加しません。
 
 既存19path・元8秒/native90秒/4096・4Mpixel/provider32MiBを保持し同時保有32MiBをpreflight、新native20を旧175に追加予定。一度の既存CI、既存RN11＋cliptrap/opacity追加2条件と画像の可視差、旧版保存/export拒否を確認する具体条件は入口§87.2〜87.4。上流RN全文blob47632aa確認、全体地図/tree1909/materialized38原典照合。新ink/wire/profileだけRule18§11.3 LEVEL_3未承認、製品/test/workflow/CI効果0、資料5fileのみ。現v9未採用・正式renderer/通常保存/本人履歴未完了、STRUCTURE_MAP_DELTA_NONE・automatic_progression=false。旧metadata/raw診断の再実行は次作業にしません。
+
+
+#### 65.36 2026-10-21 — 承認済み包含候補のsource実装
+
+入口§88/weekly§5.6.16/manifest v105。Mashの「いいよ、進めて。」で§87新契約/19path/元8秒/一度CIを承認。旧v2/v9を保持し、containment.prototype.v1→selected_line.v3の20field/direct＋native非clip(実cell射影＋filter)＋自然layer unionをCard配置/論理高/余白/次fontへ接続しました。RN同paint共有/専用plain gate、nativegrid0、自然contents同一性、runtime clipped-reference全alpha occupancy照合、provider所有権とatomic32MiB、各stage2RAFと元期限を保持。fractional viewのclip参照は元boundsで同paintを直接clipしてからfilterへ通します。branding28/40/.8固定。通常表示やsaved/exportを新rendererへ変更しません。
+
+JS元915＋18=933 PASS/FAIL0、14.436秒。旧native175＋新20=195、実RN元11＋synthetic cliptrap/branding2=13は未実行。新参照/fixtureに既存OS QuartzCoreをstandalone link明示、時間や外部依存増加0。次は一度の既存CIと原物/画像/期限の結果回収、未達は未採用STOP。STRUCTURE_MAP_DELTA_PRESENTは同RN Text内のprofile/計測契約/paint責務だけ、新file/API/DB0。正式採用・通常保存・本人履歴未完了、automatic_progression=false。

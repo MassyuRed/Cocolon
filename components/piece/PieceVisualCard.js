@@ -3,8 +3,8 @@
  */
 import React from 'react';
 import { View, Text } from 'react-native';
-import { PIECE_NATIVE_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, preparePieceNativeCard, createPieceNativeMeasurement, pieceNativeTypography, recordPieceNativeMeasurement } from '../../features/piece/pieceLayout';
-import { inspectPieceText, inspectPieceSelectedLine, inspectPieceSelectedLineV2, measurePieceCandidates } from '../../features/piece/pieceRenderer';
+import { PIECE_NATIVE_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, preparePieceNativeCard, createPieceNativeMeasurement, pieceNativeTypography, recordPieceNativeMeasurement } from '../../features/piece/pieceLayout';
+import { inspectPieceText, inspectPieceSelectedLine, inspectPieceSelectedLineV2, inspectPieceSelectedLineV3, measurePieceCandidates } from '../../features/piece/pieceRenderer';
 import { planPieceMeasuredRows } from '../../features/piece/pieceMeasuredWrap';
 
 export default class PieceVisualCard extends React.Component {
@@ -65,18 +65,21 @@ export default class PieceVisualCard extends React.Component {
         operation.snapshot.blocks !== snapshot.blocks) return;
     const input = preparePieceNativeCard(this.props);
     if (!input || input.key !== snapshot.key || display?.preview?.renderer_version !== input.candidateProfile) return;
-    const pixels = input.candidateProfile === PIECE_NATIVE_PREVIEW_V9_VERSION;
+    const pixels = [PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION].includes(input.candidateProfile);
     if (pixels && (operation.placementEpoch !== this.placementEpoch || operation.canvas !== node ||
         snapshot.inspection.some(row => row.stage !== 'placed') || !this.deadline ||
         Date.now() >= this.deadline.expiresAt)) {
       this.invalidatePlacement('measurement_timeout'); return;
     }
     const plan = snapshot.plan, inspection = snapshot.inspection, generation = snapshot.generation;
+    const fitDeadline = this.deadline;
     const record = { valid: true, listener, handle: null };
     record.handle = Object.freeze({ isCurrent: (preview, displayToken) => {
       try {
         if (!record.valid || this.props.onSaveFitChange !== listener || !this.bindingCurrent(binding) || this.state.measurement !== snapshot ||
-            this.inspection !== operation || pixels && (operation.placementEpoch !== this.placementEpoch || operation.canvas !== this.canvasNode) ||
+            this.inspection !== operation || input.candidateProfile === PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION &&
+              (!fitDeadline || this.deadline !== fitDeadline || Date.now() >= fitDeadline.expiresAt) ||
+            pixels && (operation.placementEpoch !== this.placementEpoch || operation.canvas !== this.canvasNode) ||
             snapshot.plan !== plan || snapshot.inspection !== inspection ||
             snapshot.generation !== generation || operation.evidence !== inspection || this.canvasNode !== node ||
             this.props.exportCanvas === true || Object.prototype.hasOwnProperty.call(this.props, 'savedRecord') ||
@@ -107,12 +110,12 @@ export default class PieceVisualCard extends React.Component {
   syncDeadline = () => {
     const phase = this.state.measurement.phase;
     if (!this.bindingCurrent(this.state.binding) ||
-        this.props.display?.preview?.renderer_version !== PIECE_NATIVE_PREVIEW_V9_VERSION &&
+        ![PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION].includes(this.props.display?.preview?.renderer_version) &&
         !['planning', 'measuring', 'geometry_checked'].includes(phase)) {
       this.clearDeadline(); return;
     }
     const input = preparePieceNativeCard(this.props);
-    const pixels = input?.candidateProfile === PIECE_NATIVE_PREVIEW_V9_VERSION;
+    const pixels = [PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION].includes(input?.candidateProfile);
     if (!this.bindingCurrent(this.state.binding) || !input || input.key !== this.state.measurement.key) {
       this.clearDeadline(); return;
     }
@@ -159,7 +162,7 @@ export default class PieceVisualCard extends React.Component {
 
   notePlacement = (ticket, key, value) => {
     const input = preparePieceNativeCard(this.props), snapshot = this.state.measurement;
-    if (input?.candidateProfile !== PIECE_NATIVE_PREVIEW_V9_VERSION || !this.active ||
+    if (![PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION].includes(input?.candidateProfile) || !this.active ||
         ticket.key !== snapshot.key || ticket.generation !== snapshot.generation || snapshot.phase === 'unavailable') return;
     if (!value || !['x', 'y', 'width', 'height'].every(k => Number.isFinite(value[k]))) {
       this.invalidatePlacement(); return;
@@ -180,7 +183,7 @@ export default class PieceVisualCard extends React.Component {
     if (node === this.canvasNode) return;
     const changed = !!this.canvasNode;
     this.canvasNode = node; this.placementEpoch++;
-    if (changed && preparePieceNativeCard(this.props)?.candidateProfile === PIECE_NATIVE_PREVIEW_V9_VERSION &&
+    if (changed && [PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION].includes(preparePieceNativeCard(this.props)?.candidateProfile) &&
         ['positioning', 'native_checked'].includes(this.state.measurement.phase)) this.invalidatePlacement();
   };
 
@@ -192,7 +195,7 @@ export default class PieceVisualCard extends React.Component {
       if (value) this.textNodes.set(index, { value, generation });
       else if (previous?.generation === generation) this.textNodes.delete(index);
       if (previous?.generation === generation && previous.value !== value &&
-          preparePieceNativeCard(this.props)?.candidateProfile === PIECE_NATIVE_PREVIEW_V9_VERSION &&
+          [PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION].includes(preparePieceNativeCard(this.props)?.candidateProfile) &&
           this.state.measurement.generation === generation &&
           ['positioning', 'native_checked'].includes(this.state.measurement.phase)) this.invalidatePlacement();
     };
@@ -227,7 +230,7 @@ export default class PieceVisualCard extends React.Component {
     input.candidateProfile === PIECE_NATIVE_PREVIEW_VERSION
       ? measurePieceCandidates(nodes[index], text, input.sizes[sizeIndex])
       : measurePieceCandidates(nodes[index], text, input.sizes[sizeIndex],
-        [PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION].includes(input.candidateProfile)
+        [PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION].includes(input.candidateProfile)
           ? { candidateProfile: PIECE_NATIVE_PREVIEW_V5_VERSION }
           : { candidateProfile: input.candidateProfile, contentWidth: input.contentWidth })))
     // Speculation may fail after a larger font has already succeeded. Handle
@@ -272,7 +275,7 @@ export default class PieceVisualCard extends React.Component {
       this.setState(previous => current() && previous.measurement === snapshot ? {
         measurement: plan ? { ...snapshot, phase: 'measuring', plan, generation: Object.freeze({}), blocks: {} }
           : snapshot.sizeIndex + 1 < input.sizes.length ? { ...createPieceNativeMeasurement(input), sizeIndex: snapshot.sizeIndex + 1 }
-          : { ...snapshot, phase: 'unavailable', reason: [PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION].includes(input.candidateProfile)
+          : { ...snapshot, phase: 'unavailable', reason: [PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION].includes(input.candidateProfile)
             ? 'layout_search_unavailable' : 'font_floor_overflow' },
       } : null);
     } catch {
@@ -286,17 +289,17 @@ export default class PieceVisualCard extends React.Component {
     if (!this.active || !['geometry_checked', 'positioning'].includes(snapshot.phase) || this.inspection?.snapshot === snapshot) return;
     const raw = preparePieceNativeCard(this.props), input = raw && this.drawingInput(raw, snapshot);
     if (!input || input.key !== snapshot.key) return;
-    const pixels = input.candidateProfile === PIECE_NATIVE_PREVIEW_V9_VERSION;
+    const pixels = [PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION].includes(input.candidateProfile);
     const stage = pixels && snapshot.rowOffsets ? 'placed' : 'local';
     const operation = { snapshot, stage, canvas: this.canvasNode }, binding = this.state.binding; this.inspection = operation;
-    const exploration = [PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION].includes(input.candidateProfile);
+    const exploration = [PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION].includes(input.candidateProfile);
     const current = () => this.bindingCurrent(binding) && this.inspection === operation && this.state.measurement === snapshot &&
       preparePieceNativeCard(this.props)?.key === input.key && this.deadline && Date.now() < this.deadline.expiresAt &&
       (!pixels || this.canvasNode === operation.canvas && (!operation.dispatched || operation.placementEpoch === this.placementEpoch)) &&
       (!exploration || !operation.nodes || operation.nodes.every((node, index) =>
         this.textNodes.get(index)?.value === node && this.textNodes.get(index)?.generation === snapshot.generation));
     try {
-      if (pixels && stage === 'placed') {
+      if (pixels && (stage === 'placed' || input.candidateProfile === PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION)) {
         await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
         if (!current()) return;
       }
@@ -322,7 +325,8 @@ export default class PieceVisualCard extends React.Component {
       // missing/invalid result still rejects the entire image, never a subset.
       operation.placementEpoch = this.placementEpoch;
       operation.dispatched = pixels && stage === 'placed';
-      const inspector = pixels ? inspectPieceSelectedLineV2 : exploration ? inspectPieceSelectedLine : inspectPieceText;
+      const inspector = input.candidateProfile === PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION ? inspectPieceSelectedLineV3
+        : pixels ? inspectPieceSelectedLineV2 : exploration ? inspectPieceSelectedLine : inspectPieceText;
       const evidence = await Promise.all(targets.map(target => inspector(target.node, target.expected)));
       if (!current()) return;
       operation.evidence = evidence;
@@ -331,7 +335,7 @@ export default class PieceVisualCard extends React.Component {
         const [rawLeft, top, rawRight, bottom] = result.ink;
         // Only placement uses content coordinates. Keep raw ink and the actual
         // outer view bounds intact for strict own-view overflow rejection.
-        const inset = [PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION].includes(input.candidateProfile) ? input.margin : 0;
+        const inset = [PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION].includes(input.candidateProfile) ? input.margin : 0;
         const left = rawLeft - inset, right = rawRight - inset;
         const width = Math.max(snapshot.blocks[index].lines[0].width, right) - Math.min(0, left);
         return { x: -Math.min(0, left) + (input.alignment === 'center' ? (input.contentWidth - width) / 2 : 0),
@@ -340,6 +344,9 @@ export default class PieceVisualCard extends React.Component {
       // Moving a Text view cannot recover ink clipped by its own bounds.
       // Only already-contained ink may be repositioned within its row.
       const overflow = evidence.some(result => result.overflow) ||
+        input.candidateProfile === PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION && evidence.some((result, index) =>
+          result.ink[2] - result.ink[0] > input.contentWidth ||
+          result.ink[3] - result.ink[1] > (index < input.blocks.length ? lineHeight : 40)) ||
         pixels && stage === 'placed' && evidence.some((result, index) => {
           const [x, y] = result.canvasFrame, [left, top, right, bottom] = result.ink;
           return right - left > input.contentWidth || bottom - top > (index < input.blocks.length ? lineHeight : 40) ||
@@ -369,11 +376,11 @@ export default class PieceVisualCard extends React.Component {
   measure = (ticket, index, kind, value) => {
     if (!this.bindingCurrent(this.state.binding) || this.state.measurement.phase === 'planning') return;
     const raw = preparePieceNativeCard(this.props), input = raw && this.drawingInput(raw);
-    if (input?.candidateProfile === PIECE_NATIVE_PREVIEW_V9_VERSION && kind === 'box') {
+    if ([PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION].includes(input?.candidateProfile) && kind === 'box') {
       this.notePlacement(ticket, `text:${index}`, value);
     }
     const snapshot = this.state.measurement;
-    if (input?.candidateProfile === PIECE_NATIVE_PREVIEW_V9_VERSION && kind === 'lines' &&
+    if ([PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION].includes(input?.candidateProfile) && kind === 'lines' &&
         (snapshot.phase === 'native_checked' || this.inspection?.dispatched &&
           this.inspection.snapshot.generation === snapshot.generation) &&
         recordPieceNativeMeasurement(input, snapshot, ticket, index, kind, value) !== snapshot) {
@@ -407,8 +414,8 @@ export default class PieceVisualCard extends React.Component {
     const { fontSize, lineHeight, gap } = pieceNativeTypography(input, measurement.sizeIndex);
     // Reinspection revokes visibility, not this generation's existing placement.
     // Moving the rows back to zero would trigger another layout/inspection cycle.
-    const positioned = !!measurement.rowOffsets, pixels = input.candidateProfile === PIECE_NATIVE_PREVIEW_V9_VERSION;
-    const drawingInset = !planning && [PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION].includes(input.candidateProfile) ? input.margin : 0;
+    const positioned = !!measurement.rowOffsets, pixels = [PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION].includes(input.candidateProfile);
+    const drawingInset = !planning && [PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION].includes(input.candidateProfile) ? input.margin : 0;
     const ticket = { key: input.key, sizeIndex: measurement.sizeIndex, generation: measurement.generation };
     const scale = this.state.width / input.width;
     if (planning && (this.candidates?.key !== input.key || this.candidates.binding !== this.state.binding)) {
@@ -444,7 +451,7 @@ export default class PieceVisualCard extends React.Component {
         if (this.props.exportCanvas === true) return;
         const width = event.nativeEvent?.layout?.width;
         if (this.active && Number.isFinite(width) && width > 0 && Math.min(width, 1080) !== this.state.width) {
-          if (input.candidateProfile === PIECE_NATIVE_PREVIEW_V9_VERSION) {
+          if ([PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION].includes(input.candidateProfile)) {
             this.placementEpoch++;
             if (['positioning', 'native_checked'].includes(this.state.measurement.phase)) this.invalidatePlacement();
           }

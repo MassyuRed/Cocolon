@@ -10,6 +10,10 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
+**最新は入口§88／current map§65.36／weekly§5.6.16／manifest v105です。Mash承認済みの包含修復候補を実装。local JS933件成功、既存19pathの反映・全文照合後、新sourceを一度のCIで確認します。native195／実RN13条件・画素/時間の成立は未確認です。旧v2/v9・saved/export境界を保持し、正式採用・通常保存は未完了です。**
+
+### §87の設計時点（履歴）
+
 **最新は入口§87／current map§65.35／weekly§5.6.15／manifest v104です。実layer包含修復の具体仕様を確定しGitHubへ記録。旧v2を保持する別preview候補で、native非clip参照・自然layer・配置/余白判定を一体化する案です。新ink/wire/profileの実装と一度の検証は判断待ち・未実行。前回JS915/native175/RN11成功は保持し、正式採用・通常保存は未完了です。**
 
 ### §86.2〜86.3の結果（履歴）
@@ -2820,3 +2824,49 @@ JSは元915を保持し、新閉schema/全成分偽造/union/同一性/期限/�
 今回完了したのは具体仕様と原典照合の既存5資料への記録です。製品/test/workflow変更、CI実行、DB/API/runtime/flag/env/依存追加/署名/配布/deploy/main mergeは0。STRUCTURE_MAP_DELTA_NONE。モデル条件はPIECE_WORK_ALLOWED、華恋rootが単一writer、補助agent3名は独立read-only検討です。正式admission/product acceptance/通常保存・本人再表示はfalse、automatic_progression=falseを維持します。
 
 必要な判断は、**§87.2〜87.4の新ink/wire/profileを含む限定実装・GitHub19path反映・新source一度のCIと全結果記録まで進めること**です。追加購入/依存/定常費用0、実装工数と既存CI一回の使用量が増えます。前回CI20分59秒は参考実績で、今回の所要時間/8秒成立を約束しません。承認がない場合は設計記録で止まり、現在のv9や通常保存を開放しません。成立後も正式renderer採用→同版saved reader→InputScreen正式isSaveAdmitted供給→既存controller/API通常初回保存→本人GET/履歴は別の未完了作業です。
+
+
+## 88. 2026-10-21 — 承認済み包含修復候補の実装と一度のCI
+
+Mashは直前の「旧v2を保持し、元の8秒制限を維持した新候補の実装と、一度のCI検証まで進めてよいですか？」へ「いいよ、進めて。」と明示承認しました。§87.2〜87.4の新ink/wire/profile・既存19path反映・一度の検証と結果記録が今回の範囲です。設計時点の未承認記載は履歴であり、同じ判断やGitHub許可を再確認しません。
+
+### 88.1 開始と今回の完成単位
+
+| start field | current actual |
+|---|---|
+| product_destination | 実描画を過小評価しないPiece preview候補から、正式renderer/通常保存へ接続する |
+| current_gate_or_subgate | weekly P-W1、実Text非clip意図描画と自然layerの包含修復 |
+| exact_work | §87の別preview containment.prototype.v1＋selected_line.v3を19pathへ実装、全source照合、一度の既存CIと全結果記録 |
+| scope_classification | LEVEL_3、今回Mash明示承認済み |
+| approval_or_delegation_basis | 今回の「いいよ、進めて。」、入口§87の具体仕様と元8秒・一度CI/未達STOP |
+| execution_owner | 華恋root、Codex GPT-6系、PIECE_WORK_ALLOWED。rootが唯一repo writer、補助agentはread-only reviewとscratch draftだけ |
+| success_credit | 成立時は候補のTECHNICAL_CREDITに限定。正式admission/商品完成/通常保存のcreditへ変換しない |
+| completion_condition | 19path全文照合＋一度CIのJS/native全分母/実RN13条件/PNG/独立5値・fit/元期限の実結果を記録 |
+| stop_condition | native195/実RN/参照対応/包含/元8秒・90秒/資源上限が未達なら未採用STOP。同source再実行・条件緩和0 |
+| prohibited_scope | 旧v2/旧v9の定義置換、bitmap表示、正式保存/export/Android候補開放、DB/API/runtime/flag/env/依存追加/deploy/署名/配布/main merge0 |
+| next_product_read_or_mash_decision_point | 今回の有限検証後の正式採用・同版saved/InputScreen正式供給・通常保存/本人GETは未完了。自動進行しない |
+| current_source_test_receipt | Cocolon0d09bb6、前回source1f168d19/run39509902845の独立証拠を保持。今回source/testはmanifestの19path preimage/新blobで束縛 |
+| current_docs_and_heads | PR30 head0d09bb6c1f466711aa8e6d5d86c0b2f7f3f3f4f7/tree774d155b0dc1475b365590cb0a1c6abb070245da、API PR3 a536e50ee284785f585ac73329ef2947dca8bba9。全体設計/全file map/tree1909・最新weekly/current map・規則/mandatory incident全文を再確認 |
+| affected_current_structure_maps | Piece current map§65.36。STRUCTURE_MAP_DELTA_PRESENT：同じRN Text内の新preview/計測wire/共有paint責務。新tracked file・API/DB/cross-core route変更0 |
+
+System Context prepareは今回もtools module未提供で失敗し、原典直接read fallbackを使用。Karen-Diary入口と指定2memory、作業規則入口/CURRENT_RULES/Rule18/開始check、全体地図、対象実source/testを確認。current source/treeとmaterialized原典のblobを照合し、単に過去summaryを承認根拠にしません。Supabase操作・本人行・業務RPCは今回0です。
+
+### 88.2 実装した差分と内部調整
+
+1. 新profile `piece.rn_native_preview.containment.prototype.v1`だけ、新bridge entry `inspectSelectedLineV3`と閉じた20fieldを使用します。元候補v5/B9・font順・本文/recipe・独立CTLine5値は保持。旧v2のscale1 draw/scanだけをpure関数へ分け、旧snapshot key/18field/返却を維持しました。
+2. RN既存patchで通常drawRectの背景/glyph2呼出しを共有methodへ移し、元super/highlight/Catalyst処理を維持。v3専用plain gateを別methodとし、Piece以外の通常Text表示を拒否しません。共有methodは表示rendererの置換ではなく、同TextStorageの計測にも使います。
+3. native gridはview原点0/Sへ固定し、TextKit ink±2font内で非clip描画/全alpha走査。実native cellをlogical1へ外向き射影し、同public filter/geometryの非clip合成範囲もnative成分に含めます。自然layer成分と元direct成分のunionを4edgeのmin/maxで返し、JSも厳密再計算します。
+4. **fractional view高を整数cropで近似しません。** 既観測のArabic高98.333328247×3は294.9999847であり、整数一致を新しい門にすると通常のRNを拒否します。clipped参照は同grid/同paintを元view boundsで先にclipして描き、full-view透明画像→同filterのnative合成→自然layerの全alpha occupancyと実行時比較します。失敗後retryではなく、必須比較用参照の忠実な生成方法です。未知drawing stateを許容差や固定1pxで通しません。
+5. provider最終releaseがRGBA allocationを解放する所有権へ移し、CAがcontents画像を遅延保持してもuse-after-freeを生じさせません。shared atomic budgetもproviderまで生存。各context4096/4Mpixel、provider/同時保有32MiBを確保前に確認し、遅延保持中の予約も残します。一時layerのimplicit actionsを止め、実layerの再parent/強制layout/display/transaction flushは行いません。private CA cacheをcode-owned memoryとして計測できるとは主張しません。
+6. 新profileだけlocal/placed各2RAF、自然nonnull/clean/同contents/scale/geometry/attrs/layout/元dual期限を確認。nil/不一致/stale/資源/期限はunavailable、有効なunionの幾何超過だけ既存次fontへ進めます。branding28/40/opacity0.8は固定。fit handleも新profileでは後続readごとに元deadline同一性とexpiryを再確認します。
+7. workflowの原時間/job/検査分母を保持し、旧97/129＋v9 46＋新v3 20の4summaryと195unique PASSを要求。新参照とnative fixtureが使用する**既存iOS SDKのQuartzCore**をstandalone compileのframework一覧へ明示しました。§87でworkflowを件数照合中心とした記載に対するbuild整合の最小追加で、新third-party依存/serviceや時間条件の拡張ではありません。
+
+### 88.3 source時点の検証と未確認
+
+Node24.19.0＋既存dev dependency TypeScript5.2.2を一時test環境へ用意し、既存13test fileを通しで**933 PASS、FAIL/SKIP/CANCEL0、14,436.28399ms**。元915を保持し、renderer16＋measured-wrap2の18件を追加。閉schema/成分偽造・4edge両方向1ULP/正確union/同S・token/期限・各stage2RAF/本文とbrandingの超過・floor/不成立unavailable/fit失効/旧版互換を確認しました。実React/フォント/画素の合格には換算しません。元raw logはmanifest内のlossless gzipへ保存します。
+
+nativeは旧175uniqueを維持して20追加、actualRNはbaseline5/補足3/raw3の元11を省かず、synthetic native clip trapとbranding0.8の2条件を追加しました。trapは実fontで自然発生した欠陥ではなく、test-only共有paintへnativeS時だけ元view上辺外1cellを描く明示故障です。元directはfit、自然backingはclip、非clipnativeはoverflowすることを独立raw oracle/実node/frame/unionで要求します。falseなcanvasだけで検出成功にしません。
+
+通常drawRectと参照paintのCTM/clip/frame/Sも同じ現viewに束縛して観測。RN patchは公式0.77.3全文への適用dry-runが成功。LinuxではUIKit実行/コンパイルは未実行です。**JS933だけで新sourceの描画成立、195/13条件、資源/時間成立、正式renderer採用を主張しません。** 次は新sourceを一度の既存push CIで確認し、結果を同じownerへ記録します。source反映後は製品/test/workflowを追加編集せず、全job原ログ/実RN原物/画像差を回収します。途中結果も全件成功とは扱いません。
+
+formal_admission/product_acceptance/normal_save_reopen_complete=false、新候補/旧v9とも未採用、automatic_progression=false。今回の実装は通常初回保存・本人詳細/履歴・実機受入れの完了ではありません。
