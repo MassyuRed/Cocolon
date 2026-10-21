@@ -41649,3 +41649,8 @@ source1f168d19の一度のrun39509902845は全6job/CI success、JS915/native175 
 ## 2026-10-21 — Piece test syntax修復の一度CI途中結果
 
 入口§89.3/map§65.37.1/weekly§5.6.17.1/manifest v109。source fbf9c233eef738329456780b9fd1b79b89a78134/tree ea8517feの全6pathをGitHub全文照合。一度CI39544012216 attempt1でJS933 PASS/FAIL0/SKIP0/15,862.724ms、native195個別/195unique/重複0/FAIL0・4summary一致・launch0。main04:32:01.205044Z→最終summary04:32:32.348149Z＝31.143105秒で元90秒内。Android source成功、export2jobはscope skipによるsuccessで依存compileを今回実行したとは扱わない。実RNは継続中、13条件/PNG/8秒は未確認。5job原ログ・run/job metadata・独立集計をmanifestへ可逆保存。source/test/workflow追加変更・再CI0、STRUCTURE_MAP_DELTA_NONE、正式採用/通常保存・本人履歴は未完了、automatic_progression=false。
+
+
+## 2026-10-21 — Piece実RN test構文修復の一度CIを終了、local拒否へ絞る
+
+入口§89.4/map§65.37.2/weekly§5.6.17.2/manifest v110。source fbf9c233、一度CI39544012216 attempt1はfailure（19分49秒）。test macro build停止は解消し全13reportへ到達。JS933/native195unique・FAIL0/31.143秒成功。旧saved1/raw3/controlled fault1は成立、PNG5。既存4PNGはbyte/全画素一致。新preview8はv3 local inspector/decoder拒否でplaced前に停止、具体guardは未確定。全13report<8秒でも420完成/採用の合格にはしない。全6jobログ/元13report/PNG5/解析をmanifest、55MBの元artifact全体も永続保存済み。次は同一失敗local操作のnative/decoder拒否を分ける最小診断（未実施）。primary BLOCKER_NARROWED、新候補未採用STOP、正式admission/saved reader/InputScreen正式供給/通常保存→本人履歴・実機は未完了。source/test/workflow追加変更・同source再実行0、結果5資料のみ、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。

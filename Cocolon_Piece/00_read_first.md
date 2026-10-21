@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§89.3／current map§65.37.1／weekly§5.6.17.1／manifest v109です。test902の最小修復source fbf9c233を6path全文照合。一度CI39544012216でJS933/native195unique・失敗0、native31.143秒/元90秒内と5job成功を確認。実RN13/PNG/元8秒は同CI継続中、未確認です。正式採用・通常保存は未完了です。**
+**最新は入口§89.4／current map§65.37.2／weekly§5.6.17.2／manifest v110です。test構文修復で実RN13条件へ到達。一度CI39544012216はfailure：JS933/native195成功、旧saved1/raw3/clip故障検出1は成立、新preview8はlocal inspector/decoder境界で拒否され配置前に停止しました。PNG5を確認、既存4枚は前回と完全一致。具体的拒否guardは未確定、新候補未採用STOP、正式採用・通常保存は未完了です。**
 
 ### §87の設計時点（履歴）
 
@@ -2961,3 +2961,58 @@ System Context prepareを実行したところ、保存lockが要求する祖先
 ### 89.3 途中結果：syntax修復source照合、native195完走
 
 source fbf9c233eef738329456780b9fd1b79b89a78134/tree ea8517feの全6pathをGitHub全文照合。一度CI39544012216 attempt1でJS933 PASS/FAIL0/SKIP0/15,862.724ms、native195個別/195unique/重複0/FAIL0・4summary一致・launch0。main04:32:01.205044Z→最終summary04:32:32.348149Z＝31.143105秒で元90秒内。Android source成功、export2jobはscope skipによるsuccessで依存compileを今回実行したとは扱わない。実RNは継続中、13条件/PNG/8秒は未確認。5job原ログ・run/job metadata・独立集計をmanifestへ可逆保存。source/test/workflow追加変更・再CI0、STRUCTURE_MAP_DELTA_NONE、正式採用/通常保存・本人履歴は未完了、automatic_progression=false。
+
+
+### 89.4 最終結果：build修復は成立、実RNの新preview8件はlocal段階で停止
+
+source `fbf9c233eef738329456780b9fd1b79b89a78134`、一度の [CI39544012216 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39544012216) は **failure**。04:26:06Z→04:45:55Z＝19分49秒。6job中5success、実RN1failureです。source6pathと途中結果ca358df0の5pathはそれぞれGitHubから全文読戻し済み。今回の実装差分はtest902行への括弧2文字だけで、以後のsource/test/workflow変更・同source再実行は0です。
+
+| 検証群 | 実結果 |
+|---|---|
+| JS | 933 PASS / FAIL0 / SKIP0、15,862.724ms |
+| standalone native | 195個別/195unique、重複0/FAIL0、旧129（内包97）＋v9 46＋v3 20、4summary一致。main後31.143105秒、元90秒内、launch0 |
+| Android source | compile成功 |
+| export2job | scope skipによりsuccess。今回Pod/Android export依存compileを実行したとは扱わない |
+| 実RN build | build_completed04:40:07.874580Z、test_started04:42:23.212459Z。前回のmacro構文停止は解消 |
+| 実RN13条件 | baseline1/5（旧savedのみ）、supplemental0/3、raw3/3、controlled clip trap1/1、opacity追加0/1 |
+| PNG | 新規原物5枚。旧savedとraw3は前回原PNGとbyte/全画素一致。clip trapは今回のcontrolled fault原物。失敗preview8のPNGは存在しない |
+
+全13reportの本文保持はtrue、report時刻は元8秒内です。ただし新preview8は完成/同token fitへ到達していないため、420完了・画素包含・8秒内の有効preview成立とは扱いません。
+
+| 条件 | 実phase | reportまでms | 完成PNG |
+|---|---|---:|---|
+| essay_paragraphs | unavailable | 2817.294 | なし |
+| quote_unicode | unavailable | 598.815 | なし |
+| declaration_no_brand | unavailable | 339.500 | なし |
+| essay_max420 | unavailable | 4306.925 | なし |
+| saved_essay_canvas | native_checked | 382.878 | あり |
+| suffix_latin_ligature | unavailable | 204.963 | なし |
+| suffix_arabic | unavailable | 210.776 | なし |
+| suffix_max420_a | unavailable | 2339.797 | なし |
+| suffix_spaces_raw | measurement_checked | 292.311 | あり |
+| suffix_hebrew_raw | measurement_checked | 191.883 | あり |
+| suffix_mixed_bidi_raw | measurement_checked | 165.489 | あり |
+| containment_native_clip_trap | measurement_checked | 130.307 | あり |
+| containment_branding_opacity08 | unavailable | 218.588 | なし |
+
+#### 89.4.1 失敗を確定できる範囲、確定できない範囲
+
+新preview8件は全てgeometry_checked後、v3 local inspector/decoderを包むPromiseが拒否され、native_measurement_unavailableとなりました。placed試行0、保持されたlocal/placed inspection0、fit false、PNG0です。Arabic72/Latin72/opacity72では本文local1件はresolved、branding28ptがrejectedです。branding高40.3333740234375×scale3＝121.0001220703125でceil122となる事実、複数本文rowで小数高さとの相関もあります。一方quoteの拒否は同じ相関外であり、これだけを共通原因と断定しません。
+
+現traceはrenderer全体のcatchをrejectedと記録し、native moduleの拒否とraw20field decoderの拒否を分離していません。失敗Cardはcapture前に止まりpaint context/opacity factsも保存されません。**具体的なnative nil guard、alpha対応の失敗、JS decoderのどこかは未確定**です。時間超過・32MiB不足を今回の原因へ推測で足しません。8Cardの表示成立・opacity.8・余白/全行fitは未確認です。
+
+計画上68Text（v3目標62）と実capture10Text（旧saved6＋raw3＋trap1）を分離します。実際に保持されたv3 inspectionはraw placed3＋trap local1の4件、raw local/placedは3pairです。trace resolved29件（local26＋placed3）の3成分unionは独立再計算で一致。20field raw原responseはArabic body1件のみで、全62件のwire検証へ換算しません。scratch解析のcheck数を製品検査合格数へ加算しません。
+
+#### 89.4.2 原物保存、限定credit、次の一作業
+
+GitHub manifestのlossless bundleへ全6jobの元decodedログ、run/job/artifact metadata、原xcodebuild.log/results13/PNG5、独立集計・画像比較・診断・元artifact全1006memberのchecksum一覧を保存しました。大きいxcresultを含む元ZIP55,925,398bytes全体も別の永続原物として保存済み。SHA256は `94e460945dbbce83945758a9eeb4a2cecf88adc6baa439149923f9067e2e6c79`、具体的保存identityはmanifestのartifact_archiveです。期限付きActionsのURLだけには依存しません。過去の原PNGを今回の欠落PNGへ流用していません。
+
+primary outcomeは **BLOCKER_NARROWED**。再利用できる事実はmacro build停止の解消、JS933/native195、新実行での旧saved/raw3/controlled fault、および失敗箇所を配置前v3境界へ絞れたことです。新previewの採用・商品合格creditはありません。原寸PNG5枚と全体一覧を目視し、旧saved本文/改行/配置/余白/brandingとraw3の画像一致を確認しました。新8Cardに画像品質の合格を付けません。
+
+次の最小未実施作業は、失敗した同一local1操作（例：Latin branding28）のnative resolve/rejectとdecoder入口/出口をtest-onlyで区別し、native側なら既存拒否分岐のscalar stageを識別する診断です。時計・guard・wire・font/行選択・強制display・再試行を変えません。今回の失敗記録はその実装/新CIの実行記録や自動進行権限ではなく、sourceは固定して本単位を未採用STOPで閉じます。
+
+#### 89.4.3 正式採用までの残件と今回の境界
+
+今回のactual失敗とは別に、原典read-only reviewで確認した未証明範囲を保持します。32MiB counterは各inspectionで新設され、provider最終解放までその予約は維持されますが、CAがcall間で保持したallocationの合算保証は今回の原物にありません。超過発生とは断定せず、§87.3の同時合計条件をper-callへ黙って変更しません。nativeはwall/systemUptime両期限を使い、Card最終fitは同deadline object/Date.now expiryを確認します。wall時計巻戻りを含む最後までのmonotonic保証は未成立です。これらを今回8件の拒否原因とは呼びません。
+
+正式renderer採用、containment版saved reader、InputScreen正式isSaveAdmitted供給、実Auth/API通常初回保存→同owner詳細/履歴、物理実機の受入れは未完了です。結果5資料のみの更新、STRUCTURE_MAP_DELTA_NONE。製品source/fixture/workflow/API/DB write/業務RPC/runtime/flag/env/依存/署名/配布/deploy/main merge0。全体設計/全file地図と既存責務は維持し、元8秒/90秒・旧v2/v9/saved境界は不変です。追加購入/新service/定常費用・Mash追加操作0、既存Actions一回の実使用量は発生、請求額は未取得。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。

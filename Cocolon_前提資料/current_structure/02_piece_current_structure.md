@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§89.3／current map§65.37.1／weekly§5.6.17.1／manifest v109です。test902の最小修復source fbf9c233を6path全文照合。一度CI39544012216でJS933/native195unique・失敗0、native31.143秒/元90秒内と5job成功を確認。実RN13/PNG/元8秒は同CI継続中、未確認です。正式採用・通常保存は未完了です。**
+**最新は入口§89.4／current map§65.37.2／weekly§5.6.17.2／manifest v110です。test構文修復で実RN13条件へ到達。一度CI39544012216はfailure：JS933/native195成功、旧saved1/raw3/clip故障検出1は成立、新preview8はlocal inspector/decoder境界で拒否され配置前に停止しました。PNG5を確認、既存4枚は前回と完全一致。具体的拒否guardは未確定、新候補未採用STOP、正式採用・通常保存は未完了です。**
 
 ### §87の設計時点（履歴）
 
@@ -3148,3 +3148,8 @@ JS元915＋18=933 PASS/FAIL0、14.436秒。旧native175＋新20=195、実RN元11
 #### 65.37.1 途中結果：native195成功、実RN継続中
 
 入口§89.3／manifest v109。source fbf9c233eef738329456780b9fd1b79b89a78134/tree ea8517feの全6pathをGitHub全文照合。一度CI39544012216 attempt1でJS933 PASS/FAIL0/SKIP0/15,862.724ms、native195個別/195unique/重複0/FAIL0・4summary一致・launch0。main04:32:01.205044Z→最終summary04:32:32.348149Z＝31.143105秒で元90秒内。Android source成功、export2jobはscope skipによるsuccessで依存compileを今回実行したとは扱わない。実RNは継続中、13条件/PNG/8秒は未確認。5job原ログ・run/job metadata・独立集計をmanifestへ可逆保存。source/test/workflow追加変更・再CI0、STRUCTURE_MAP_DELTA_NONE、正式採用/通常保存・本人履歴は未完了、automatic_progression=false。
+
+
+#### 65.37.2 最終結果：build修復後、preview8はlocal拒否で未採用
+
+入口§89.4／manifest v110。source fbf9c233、一度CI39544012216 attempt1はfailure（19分49秒）。test macro build停止は解消し全13reportへ到達。JS933/native195unique・FAIL0/31.143秒成功。旧saved1/raw3/controlled fault1は成立、PNG5。既存4PNGはbyte/全画素一致。新preview8はv3 local inspector/decoder拒否でplaced前に停止、具体guardは未確定。全13report<8秒でも420完成/採用の合格にはしない。全6jobログ/元13report/PNG5/解析をmanifest、55MBの元artifact全体も永続保存済み。次は同一失敗local操作のnative/decoder拒否を分ける最小診断（未実施）。primary BLOCKER_NARROWED、新候補未採用STOP、正式admission/saved reader/InputScreen正式供給/通常保存→本人履歴・実機は未完了。source/test/workflow追加変更・同source再実行0、結果5資料のみ、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
