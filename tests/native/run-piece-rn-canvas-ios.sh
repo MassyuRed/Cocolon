@@ -17,7 +17,7 @@ import json
 from pathlib import Path
 import re
 
-EXPECTED_SHA256 = '5c940c98344611a5051729d3c57c6da54c41eb9e5bc427be4e5c119a7f8c2392'
+EXPECTED_SHA256 = "f74791da358e1c8f2f2ba6db1ec9aeaccc33d79ae84ee3abb57d506981d3ba23"
 PREFIX = '''
 // Hosted-test-only scalar diagnostic, injected in this disposable checkout.
 // No wire field, guard expression, return value, clock or paint is changed.
@@ -99,7 +99,7 @@ def build(original):
         value=stage['kind'].removeprefix('return_')
         replacement = f'return (CocolonPieceDiagnosticMark({number}), {value});' if stage['kind'].startswith('return_') else f'(CocolonPieceDiagnosticMark({number}), unavailable());'
         edits.append((stage['offset'],stage['offset']+len(stage['original_expression']),replacement))
-    assert len(stages)==63, ('Expected exact63 guarded-return/rejection locations',len(stages))
+    assert len(stages)==65, ('Expected exact65 guarded-return/rejection locations',len(stages))
     instrumented=original
     for start,end,replacement in sorted(edits,reverse=True):
         instrumented=instrumented[:start]+replacement+instrumented[end:]

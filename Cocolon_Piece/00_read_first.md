@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§91.4／current map§65.39.2／weekly§5.6.19.2／manifest v115です。一度CI39555207737はfailure。JS933・旧native175は成功、新v3は10PASS/10FAIL。実RNは保存済み1条件のみnative_checked、新プレビュー7条件はunavailable、9件目はlog/PNGのみでJSON欠落、後続4条件未到達。自然UIKit contextをCGBitmapとした前提不成立を確認し、候補は未採用STOP。旧7画素不一致とquote制約は未解決、正式admission/通常保存は未完了です。**
+**最新は入口§92／current map§65.40／weekly§5.6.20／manifest v116です。今回の継続指示を受け、前回のbitmap前提を除く最小製品修復と既存harnessの記録欠落修復を実装。自然CTM/clip/sourceを保持し、clean contentsを公開CF型でCGImage確認後だけ実寸取得。JS933成功、独立read-only review2件。新source一度CIは未実行、実RN13条件・旧7alpha不一致/quote制約の解消・正式admission/通常保存は未確認です。**
 
 ### §87の設計時点（履歴）
 
@@ -3132,3 +3132,18 @@ PRIMARY_OUTCOME=BLOCKER_NARROWED、bounded_work_complete=true、validation_succe
 
 
 CURRENT_RULES R10.2の「同じblocker familyで2回連続STOP」に従い、DETOUR_RISK_STOPとして追加開発・再試行を停止します。本来の完了条件は元13条件の本文画像を成立させることです。今回増えた証拠はbitmap前提不成立と記録欠落の範囲だけで、商品品質creditは増えていません。次の推奨経路exact1は、元の全画素guardを維持した製品grid直接修復と既存harnessの欠落修復を一体の最小作業へ戻すこと（未実施）。追加helper/診断family/恒久checkerを挟まず、同じ失敗sourceを再実行しません。
+
+
+## 92. 本文画像へ戻す直接修復：同じclean contentsの公開CGImage寸法
+
+2026-10-21のMash「Pieceの残件作業を進めて」をcurrent requestとし、Rule18§0A/§11.3のLEVEL2で、§91.4に示した製品grid直接修復と既存harness欠落修復を同一単位で進めます。前回の失敗・DETOUR_RISK_STOPは不変。同じsourceの再実行・closed authority再活性化・追加helper/診断familyではありません。root単一writer、今回の新sourceで既存CI一度、未達は未採用STOP、次Gate自動進行falseです。
+
+自然drawRectのsnapshotをCGBitmap幅高照会から切り離し、CTM/clip/bounds/content frame/scale/storage/属性を保持。cleanな同Text layer.contentsをstrong localで一度読み、CFGetTypeID==CGImageGetTypeID確認後だけCGImageGetWidth/Heightを使用します。size_tで0/4096辺/4Mpixelを検査し、grid/contents/寸法をlocal・placed・afterの同一性へ束縛。未知typeは拒否し、clip/ceil/roundから実backing寸法を推定しません。元の全alpha占有比較、provider共有32MiB、native非clip・filter・direct・layer union、wire20・旧v2を維持します。UIKitのcontentsが実際にCGImageであること、元画素比較とquoteの資源制約成立は新CIで未確認です。
+
+fixtureは実RNと同じglyphRange計算→snapshot→共有paintへ揃え、初回属性fixup前のsnapshotを避けます。既存harnessはnative_ink_framesの[x,y,maxX,maxY]各値を既存PieceFiniteへ通し、非有限値をnull/native_canvas_valid=falseで保存。saveReport内でJSON error/nil・atomic書込失敗・例外を明示保持/記録し、append後のrejectによる同名二重reportを避けて元capture callbackへ戻します。元111 assertion行の内容/順番を保ち、記録失敗nil確認1件だけ追加。fixture13/native195/元8秒・90秒/±2font/4096/4M/32MiBは変更しません。
+
+既存source5＋資料5の10path、新file0。local JS933 PASS/FAIL0/SKIP0（11,918.940381ms）、RN0.77.3全文へのpatch --fuzz=0 dry-run・runner bash構文・既存observer65marker/字句復元一致、独立read-only review2件を確認。最初のlocal JS processは既存TypeScript参照設定不足でMODULE_NOT_FOUND、NODE_PATHを既存5.2.2へ設定して実行しました。project依存追加0。これらはUIKit実行・画像品質・13条件完遂の証拠ではありません。
+
+既存preflight bundleに開始範囲・pre/post source・review・両local JS原ログ・65markerを可逆保存。System Context prepareはresidual without markerで失敗し、同ownerが許すdirect original読取りへ戻りました。Context修復を挟まず、全体設計/全file地図/current map/最新weeklyとactual1747blobをfresh head9f0709dfへ一致確認、mashos-api a536e50e、Supabase ACTIVE_HEALTHYを確認しました。API/DB query/apply/RPC/flags/env/依存/workflow/deploy/main merge変更0、STRUCTURE_MAP_DELTA_NONE（既存optional metrics/共有paintとharness内部のみ）。
+
+今回のsource反映・全文読戻し後は追加source/test/workflow編集をせず、既存CI一度のJS933/native195/実RN13条件と元PNG・時間・画素を回収して判定します。旧7alpha不一致とquote制約は現段階未解決。正式renderer、containment版saved reader、InputScreen正式isSaveAdmitted供給、実Auth/端末の通常保存→同owner再表示は未完了。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。

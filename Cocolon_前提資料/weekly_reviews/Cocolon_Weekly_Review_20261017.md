@@ -1750,3 +1750,8 @@ local JS933全成功（元915＋新18、14.436秒）。native195/実RN13・PNG/�
 
 
 CURRENT_RULES R10.2の「同じblocker familyで2回連続STOP」に従い、DETOUR_RISK_STOPとして追加開発・再試行を停止します。本来の完了条件は元13条件の本文画像を成立させることです。今回増えた証拠はbitmap前提不成立と記録欠落の範囲だけで、商品品質creditは増えていません。次の推奨経路exact1は、元の全画素guardを維持した製品grid直接修復と既存harnessの欠落修復を一体の最小作業へ戻すこと（未実施）。追加helper/診断family/恒久checkerを挟まず、同じ失敗sourceを再実行しません。
+
+
+#### 5.6.20 P-W1：元13条件本文画像へ戻す最小直接修復
+
+入口§92／map§65.40／manifest v116。今回のMash継続指示＋Rule18 LEVEL2で、§91.4の製品grid直接修復と既存harness記録修復を同一単位で実装。自然contextのbitmap仮定を除き、CTM/clip/source保持＋同じclean contentsのCFtype確認後CGImage実寸を使用、grid/contents/寸法を同一性へ束縛。未知type拒否、元全alpha比較/wire20/13条件/native195/8秒90秒/資源不変。非有限frameは既存PieceFiniteでnull/invalid、JSON/atomic保存失敗・例外記録とcallback完了を維持し二重reportを防ぐ。元assertion111行順序不変＋保存確認1件。5source＋5docs、新file/依存/workflow/API/DB/deploy/main0。JS933成功11,918.940381ms、最初のcompiler参照不足は既存5.2.2のNODE_PATH設定へ修復。patch/observer65字句復元/独立review2成功は実RN成功ではない。新source一度CIは未実行、旧7alpha不一致/quote制約・正式admission/通常保存は未解決。失敗sourceの再実行0、追加helper/診断family0、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。

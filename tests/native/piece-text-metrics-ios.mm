@@ -42,9 +42,8 @@
   CGContextRef context = UIGraphicsGetCurrentContext();
   self.fixturePaintGrid = nil;
   if (!context || ![self cocolonPieceIsPlainText]) return;
-  size_t width = CGBitmapContextGetWidth(context), height = CGBitmapContextGetHeight(context);
-  if (!width || !height) return;
-  self.fixturePaintGrid = @{ @"width":@(width), @"height":@(height),
+  // Preserve natural geometry even when UIKit exposes no bitmap context.
+  self.fixturePaintGrid = @{
     @"ctm":[NSValue valueWithCGAffineTransform:CGContextGetCTM(context)],
     @"clip":[NSValue valueWithCGRect:CGContextGetClipBoundingBox(context)],
     @"bounds":[NSValue valueWithCGRect:self.bounds], @"frame":[NSValue valueWithCGRect:self.fixtureContentFrame],
@@ -1061,8 +1060,9 @@ static BOOL runV9Checks(PieceTextMetrics *module, RCTBridge *bridge) {
 }
 - (void)drawRect:(CGRect)rect {
   NSLayoutManager *layout = self.fixtureStorage.layoutManagers.firstObject;
+  NSRange glyphs = [layout glyphRangeForTextContainer:layout.textContainers.firstObject];
   [self cocolonPieceRecordPaintGrid];
-  [self cocolonPiecePaintGlyphRange:[layout glyphRangeForTextContainer:layout.textContainers.firstObject]];
+  [self cocolonPiecePaintGlyphRange:glyphs];
 }
 @end
 static PieceV3FixtureTextView *v3View(NSString *text, CGFloat font, CGFloat scale, BOOL trap) {

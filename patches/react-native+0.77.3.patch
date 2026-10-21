@@ -9,7 +9,7 @@ diff --git a/node_modules/react-native/Libraries/Text/Text/RCTTextView.mm b/node
  }
  
  - (instancetype)initWithFrame:(CGRect)frame
-@@ -96,6 +97,54 @@
+@@ -96,6 +97,53 @@
    }
  
    [self setNeedsDisplay];
@@ -54,9 +54,8 @@ diff --git a/node_modules/react-native/Libraries/Text/Text/RCTTextView.mm b/node
 +  CGContextRef context = UIGraphicsGetCurrentContext();
 +  _cocolonPiecePaintGrid = nil;
 +  if (!context || ![self cocolonPieceIsPlainText]) return;
-+  size_t width = CGBitmapContextGetWidth(context), height = CGBitmapContextGetHeight(context);
-+  if (!width || !height) return;
-+  _cocolonPiecePaintGrid = @{ @"width":@(width), @"height":@(height),
++  // Preserve natural geometry even when UIKit exposes no bitmap context.
++  _cocolonPiecePaintGrid = @{
 +    @"ctm":[NSValue valueWithCGAffineTransform:CGContextGetCTM(context)],
 +    @"clip":[NSValue valueWithCGRect:CGContextGetClipBoundingBox(context)],
 +    @"bounds":[NSValue valueWithCGRect:self.bounds], @"frame":[NSValue valueWithCGRect:_contentFrame],
@@ -64,7 +63,7 @@ diff --git a/node_modules/react-native/Libraries/Text/Text/RCTTextView.mm b/node
  }
  
  - (void)drawRect:(CGRect)rect
-@@ -118,8 +167,8 @@
+@@ -118,8 +166,8 @@
  #endif
  
    NSRange glyphRange = [layoutManager glyphRangeForTextContainer:textContainer];

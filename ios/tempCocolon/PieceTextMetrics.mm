@@ -360,16 +360,16 @@ static NSDictionary *PieceContainmentLayerState(RCTTextView *view) {
       !CGRectEqualToRect([grid[@"bounds"] CGRectValue], view.bounds) ||
       !CGRectEqualToRect([grid[@"frame"] CGRectValue], view.cocolonPieceContentFrame) ||
       [grid[@"scale"] doubleValue] != view.contentScaleFactor) return nil;
-  const double width = [grid[@"width"] doubleValue], height = [grid[@"height"] doubleValue];
   CGAffineTransform ctm = [grid[@"ctm"] CGAffineTransformValue];
   CGRect clip = [grid[@"clip"] CGRectValue];
-  if (!isfinite(width) || !isfinite(height) || width < 1 || height < 1 || width != floor(width) || height != floor(height) ||
-      width > 4096 || height > 4096 || width * height > 4 * 1024 * 1024 ||
-      !isfinite(ctm.a) || !isfinite(ctm.d) || !isfinite(ctm.tx) || !isfinite(ctm.ty) ||
+  if (!isfinite(ctm.a) || !isfinite(ctm.d) || !isfinite(ctm.tx) || !isfinite(ctm.ty) ||
       ctm.a != view.contentScaleFactor || ctm.d != -view.contentScaleFactor || ctm.b != 0 || ctm.c != 0 ||
       !PiecePixelRect(clip)) return nil;
   CALayer *layer = view.layer;
-  if (!layer.contents || layer.needsDisplay || layer.needsLayout || view.hidden || layer.hidden || layer.opaque ||
+  // UIKit owns the natural context; its public bitmap queries need not work.
+  // Retain the same clean contents before inspecting its public CF type.
+  id contents = layer.contents;
+  if (!contents || layer.needsDisplay || layer.needsLayout || view.hidden || layer.hidden || layer.opaque ||
       !isfinite(view.alpha) || view.alpha <= 0 || view.alpha > 1 ||
       !isfinite(layer.opacity) || layer.opacity <= 0 || layer.opacity > 1 ||
       !isfinite(view.contentScaleFactor) || view.contentScaleFactor <= 0 || layer.contentsScale != view.contentScaleFactor ||
@@ -385,12 +385,20 @@ static NSDictionary *PieceContainmentLayerState(RCTTextView *view) {
       layer.minificationFilterBias != 0 || layer.geometryFlipped || layer.animationKeys.count ||
       ![view respondsToSelector:@selector(cocolonPieceIsPlainText)] || ![view cocolonPieceIsPlainText] ||
       ![view respondsToSelector:@selector(cocolonPiecePaintGlyphRange:)]) return nil;
-  return @{@"paint_grid":grid, @"contents":layer.contents, @"scale":@(layer.contentsScale), @"alpha":@(view.alpha), @"opacity":@(layer.opacity),
+  // This is a plain naturally drawn Text layer, not an arbitrary id input.
+  // Unknown backing types remain unsupported; never infer dimensions from clip.
+  if (CFGetTypeID((__bridge CFTypeRef)contents) != CGImageGetTypeID()) return nil;
+  CGImageRef image = (__bridge CGImageRef)contents;
+  const size_t width = CGImageGetWidth(image), height = CGImageGetHeight(image);
+  if (!width || !height || width > 4096 || height > 4096 ||
+      width > (4 * 1024 * 1024) / height) return nil;
+  return @{@"paint_grid":grid, @"contents":contents, @"width":@(width), @"height":@(height), @"scale":@(layer.contentsScale), @"alpha":@(view.alpha), @"opacity":@(layer.opacity),
     @"anchor":[NSValue valueWithCGPoint:layer.anchorPoint], @"bounds":[NSValue valueWithCGRect:layer.bounds],
     @"masks":@(layer.masksToBounds), @"position":[NSValue valueWithCGPoint:layer.position]};
 }
 static BOOL PieceContainmentSameLayer(NSDictionary *a, NSDictionary *b, BOOL placementAllowed) {
-  if (!a || !b || a[@"paint_grid"] != b[@"paint_grid"] || a[@"contents"] != b[@"contents"] || ![a[@"scale"] isEqual:b[@"scale"]] ||
+  if (!a || !b || a[@"paint_grid"] != b[@"paint_grid"] || a[@"contents"] != b[@"contents"] ||
+      ![a[@"width"] isEqual:b[@"width"]] || ![a[@"height"] isEqual:b[@"height"]] || ![a[@"scale"] isEqual:b[@"scale"]] ||
       ![a[@"alpha"] isEqual:b[@"alpha"]] || ![a[@"opacity"] isEqual:b[@"opacity"]] ||
       ![a[@"anchor"] isEqual:b[@"anchor"]] || ![a[@"bounds"] isEqual:b[@"bounds"]] ||
       ![a[@"masks"] isEqual:b[@"masks"]]) return NO;
@@ -421,12 +429,12 @@ static BOOL PieceCompositePixels(CALayer *layer, CGRect extent, CGFloat scale, C
     cells.origin.y / scale + extent.origin.y - outputPhase.y, cells.size.width / scale, cells.size.height / scale);
   return YES;
 }
-static BOOL PieceNativeAndLayerInk(RCTTextView *view, NSRange glyphs, CGRect textKitInk, double fontSize,
+static BOOL PieceNativeAndLayerInk(RCTTextView *view, NSDictionary *layerState, NSRange glyphs, CGRect textKitInk, double fontSize,
     CGPoint phase, const PieceRasterBudgetOwner &budget, BOOL (^withinDeadline)(void), CGRect *nativeInk, CGRect *layerInk) {
   const CGFloat scale = view.contentScaleFactor;
-  NSDictionary *grid = [view cocolonPiecePaintGrid];
+  NSDictionary *grid = layerState[@"paint_grid"];
   CGAffineTransform naturalCTM = [grid[@"ctm"] CGAffineTransformValue];
-  const size_t naturalWidth = [grid[@"width"] unsignedLongLongValue], naturalHeight = [grid[@"height"] unsignedLongLongValue];
+  const size_t naturalWidth = [layerState[@"width"] unsignedLongLongValue], naturalHeight = [layerState[@"height"] unsignedLongLongValue];
   // Top-down pixel coordinates of the actual UIKit draw, including the small
   // fractional translation introduced by Yoga's nonintegral Text height.
   const double px = naturalCTM.tx, py = (double)naturalHeight - naturalCTM.ty;
@@ -484,7 +492,7 @@ static BOOL PieceNativeAndLayerInk(RCTTextView *view, NSRange glyphs, CGRect tex
         CGPointMake(phase.x + filteredExtent.origin.x, phase.y + filteredExtent.origin.y), phase, budget, withinDeadline, &filtered)) return NO;
     *nativeInk = CGRectUnion(projected, filtered);
     if (!withinDeadline() || !clipped.makeExact(vw, vh, scale, budget, &naturalCTM) || !withinDeadline()) return NO;
-    // Replay the observed natural bitmap grid and clip, rather than assuming
+    // Replay the observed CTM/clip on the same contents image dimensions, not
     // ceil(bounds*S) or discarding UIKit's fractional CTM translation.
     CGContextClipToRect(clipped.context, [grid[@"clip"] CGRectValue]);
     UIGraphicsPushContext(clipped.context);
@@ -583,7 +591,7 @@ static NSDictionary *PieceContainmentPixels(RCTTextView *view, UIView *canvas, N
     if (!direct) return nil;
     PieceRasterBudgetOwner budget = std::make_shared<PieceRasterBudget>();
     CGRect nativeInk, layerInk;
-    if (!PieceNativeAndLayerInk(view, glyphs, textKitInk, fontSize, phase, budget, withinDeadline, &nativeInk, &layerInk)) return nil;
+    if (!PieceNativeAndLayerInk(view, layerState, glyphs, textKitInk, fontSize, phase, budget, withinDeadline, &nativeInk, &layerInk)) return nil;
     CGRect afterFrame;
     if (!withinDeadline() || view.cocolonPieceTextStorage != storage || storage.layoutManagers.firstObject != layout ||
         layout.textContainers.firstObject != container || ![storage isEqualToAttributedString:attributes] ||

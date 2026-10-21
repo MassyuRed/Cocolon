@@ -598,6 +598,7 @@ static NSArray *PieceComponentUnion(NSDictionary *parts) {
 @interface PieceCanvasTest : NSObject <RCTBridgeModule>
 @property(nonatomic, weak) RCTBridge *bridge;
 @property(nonatomic, strong) NSMutableArray *reports;
+@property(nonatomic, strong) NSError *reportPersistenceError;
 @property(nonatomic, copy) dispatch_block_t completed;
 @end
 @implementation PieceCanvasTest
@@ -624,9 +625,28 @@ RCT_EXPORT_MODULE();
     report = observed;
   }
   [self.reports addObject:report];
-  NSData *data = [NSJSONSerialization dataWithJSONObject:self.reports options:NSJSONWritingPrettyPrinted error:nil];
-  [data writeToFile:[PieceEvidenceDirectory() stringByAppendingPathComponent:@"results.json"] atomically:YES];
-  NSLog(@"PIECE_RN_CASE %@", [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:report options:0 error:nil] encoding:NSUTF8StringEncoding]);
+  // Preserve callback completion: rejecting after append would make JS record
+  // the same case twice. Persist errors fail this existing hosted test below.
+  @try {
+    NSError *error = nil;
+    NSData *data = [NSJSONSerialization dataWithJSONObject:self.reports options:NSJSONWritingPrettyPrinted error:&error];
+    if (!data || ![data writeToFile:[PieceEvidenceDirectory() stringByAppendingPathComponent:@"results.json"]
+                          options:NSDataWritingAtomic error:&error]) {
+      self.reportPersistenceError = error ?: [NSError errorWithDomain:@"PieceCanvasReport" code:1 userInfo:nil];
+      NSLog(@"PIECE_RN_REPORT_PERSISTENCE_ERROR %@ %@", report[@"name"], self.reportPersistenceError);
+    }
+    error = nil;
+    NSData *caseData = [NSJSONSerialization dataWithJSONObject:report options:0 error:&error];
+    if (caseData) NSLog(@"PIECE_RN_CASE %@", [[NSString alloc] initWithData:caseData encoding:NSUTF8StringEncoding]);
+    else {
+      self.reportPersistenceError = error ?: [NSError errorWithDomain:@"PieceCanvasReport" code:2 userInfo:nil];
+      NSLog(@"PIECE_RN_REPORT_LOG_JSON_ERROR %@ %@", report[@"name"], self.reportPersistenceError);
+    }
+  } @catch (NSException *exception) {
+    self.reportPersistenceError = [NSError errorWithDomain:@"PieceCanvasReport" code:3
+      userInfo:@{NSLocalizedDescriptionKey:exception.reason ?: exception.name}];
+    NSLog(@"PIECE_RN_REPORT_PERSISTENCE_EXCEPTION %@ %@", report[@"name"], self.reportPersistenceError);
+  }
 }
 RCT_EXPORT_METHOD(record:(NSDictionary *)report) {
   dispatch_async(dispatch_get_main_queue(), ^{ [self saveReport:report]; });
@@ -711,7 +731,8 @@ RCT_EXPORT_METHOD(capture:(nonnull NSNumber *)tag report:(NSDictionary *)raw res
       if (i < rows.count && [@[@"piece.rn_native_preview.prototype.v7", @"piece.rn_native_preview.prototype.v8", @"piece.rn_native_preview.prototype.v9", PieceContainmentProfile] containsObject:raw[@"candidate_profile"]])
         valid = valid && CGRectGetHeight(localInk) <= [raw[@"plan_line_height"] doubleValue];
       CGRect ink = [view convertRect:localInk toView:canvas];
-      [frames addObject:@[@(ink.origin.x), @(ink.origin.y), @(CGRectGetMaxX(ink)), @(CGRectGetMaxY(ink))]];
+      valid = valid && isfinite(ink.origin.x) && isfinite(ink.origin.y) && isfinite(CGRectGetMaxX(ink)) && isfinite(CGRectGetMaxY(ink));
+      [frames addObject:@[PieceFinite(ink.origin.x), PieceFinite(ink.origin.y), PieceFinite(CGRectGetMaxX(ink)), PieceFinite(CGRectGetMaxY(ink))]];
       CGFloat margin = [raw[@"margin"] doubleValue], height = [raw[@"height"] doubleValue];
       CGFloat bottom = height - margin - (i < rows.count ? [raw[@"branding_zone"] doubleValue] : 0);
       valid = valid && CGRectContainsRect(view.bounds, localInk) && CGRectGetMinX(ink) >= margin - 0.5 &&
@@ -957,6 +978,7 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
   window.rootViewController.view = root;
   [window makeKeyAndVisible];
   [self waitForExpectations:@[done] timeout:90];
+  XCTAssertNil(self.resultModule.reportPersistenceError);
   NSArray *baselineNames = @[@"essay_paragraphs", @"quote_unicode", @"declaration_no_brand", @"essay_max420", @"saved_essay_canvas"];
   NSArray *supplementalNames = @[@"suffix_latin_ligature", @"suffix_arabic", @"suffix_max420_a"];
   NSArray *rawNames = @[@"suffix_spaces_raw", @"suffix_hebrew_raw", @"suffix_mixed_bidi_raw"];
