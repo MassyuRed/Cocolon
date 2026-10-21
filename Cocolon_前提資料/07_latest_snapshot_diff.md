@@ -41659,3 +41659,8 @@ source1f168d19の一度のrun39509902845は全6job/CI success、JS915/native175 
 ## 2026-10-21 — Pieceのlocal拒否原因を新しいtest-only単位で観測
 
 入口§90／map§65.38／weekly§5.6.18／manifest v111。新依頼のLEVEL2 test-only原因診断。既存test3＋資料5の8path、製品source変更0。元native一回とdecoder一回のraw/reject/adapter結果を分離、CI隔離copyへ元59guardのTLS first-stageを注入しcallback同threadで照合。failed reportにも保存。全13fixture/assertion、元8秒/90秒、条件式/return/wire/draw/row/fontを維持。新source CI一回のみ、同source再実行0。現時点未実行、原因未確定、既存failure保持・新候補未採用。通常保存等は未完了、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+
+## 2026-10-21 — Pieceの元native拒否診断を一度CIの実物で終了
+
+入口§90.2／map§65.38.1／weekly§5.6.18.1／manifest v112。source ae77b721、一度CI39548735598 attempt1はfailure。JS933/native195成功、実RN13条件到達。旧saved1/raw3/controlled fault1は成立しPNG5は前回原物とbyte/全RGBA画素一致。新preview8はnative拒否を再現し、7条件は原line488のalpha occupancy不一致（stage38）、quoteは原line260のPieceRasterPlan複合制約（stage15、具体operand未確定）へ分離。native65uniqueの対応は全件一致、37resolve/28reject。JS/adapterは30resolve/16reject/19pending、native成功後のadapter拒否0。元本文/13fixture/assertion/8秒/90秒と製品処理は不変。診断単位は未採用STOP、プレビュー修復・正式採用・通常保存は未完了。 次の未実施：自然layerと参照が同じ描画gridを使う根拠を整えて7条件の画素不一致を修復し、quoteは同一操作でPieceRasterPlanへ渡った寸法/scaleと拒否operandを確定する。元guard/8秒/90秒/4096辺/4Mpixel/32MiBを緩めず、新source一度CIで全13条件を検証する。今回この修復・追加観測・追加CIは未実施。 結果5資料のみ、source固定・再CI0、未採用STOP、通常保存未完了、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。

@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§90／current map§65.38／weekly§5.6.18／manifest v111です。新preview8のlocal拒否について、新しい依頼単位のtest-only原因診断を開始。元のnative処理一回とdecoderの結果を分け、既存guardのfirst failure stageを観測します。判定・全13条件・元8秒/90秒は維持、一度の新source CIのみ。製品未採用、正式採用・通常保存は未完了です。**
+**最新は入口§90.2／current map§65.38.1／weekly§5.6.18.1／manifest v112です。新preview8の拒否をnative側と確定。7条件は画素占有の不一致、quote1条件はラスタ計画の複合制約guardです。 JS933/native195成功。新source一度CI39548735598はfailure、元13条件・8秒/90秒と製品処理は維持。原物を保存し診断単位を未採用STOPで終了。プレビュー修復・正式採用・通常保存は未完了です。**
 
 ### §87の設計時点（履歴）
 
@@ -3158,3 +3158,8 @@ JS元915＋18=933 PASS/FAIL0、14.436秒。旧native175＋新20=195、実RN元11
 ### 65.38 新preview local拒否のtest-only診断開始
 
 入口§90／manifest v111。新依頼のLEVEL2 test-only原因診断。既存test3＋資料5の8path、製品source変更0。元native一回とdecoder一回のraw/reject/adapter結果を分離、CI隔離copyへ元59guardのTLS first-stageを注入しcallback同threadで照合。failed reportにも保存。全13fixture/assertion、元8秒/90秒、条件式/return/wire/draw/row/fontを維持。新source CI一回のみ、同source再実行0。現時点未実行、原因未確定、既存failure保持・新候補未採用。通常保存等は未完了、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+
+#### 65.38.1 最終結果：test-only拒否診断の原物確定
+
+入口§90.2／manifest v112。source ae77b721、一度CI39548735598 attempt1はfailure。JS933/native195成功、実RN13条件到達。旧saved1/raw3/controlled fault1は成立しPNG5は前回原物とbyte/全RGBA画素一致。新preview8はnative拒否を再現し、7条件は原line488のalpha occupancy不一致（stage38）、quoteは原line260のPieceRasterPlan複合制約（stage15、具体operand未確定）へ分離。native65uniqueの対応は全件一致、37resolve/28reject。JS/adapterは30resolve/16reject/19pending、native成功後のadapter拒否0。元本文/13fixture/assertion/8秒/90秒と製品処理は不変。診断単位は未採用STOP、プレビュー修復・正式採用・通常保存は未完了。 次の未実施：自然layerと参照が同じ描画gridを使う根拠を整えて7条件の画素不一致を修復し、quoteは同一操作でPieceRasterPlanへ渡った寸法/scaleと拒否operandを確定する。元guard/8秒/90秒/4096辺/4Mpixel/32MiBを緩めず、新source一度CIで全13条件を検証する。今回この修復・追加観測・追加CIは未実施。 診断単位は未採用STOP、STRUCTURE_MAP_DELTA_NONE、正式採用・通常保存未完了、automatic_progression=false。

@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§90／current map§65.38／weekly§5.6.18／manifest v111です。新preview8のlocal拒否について、新しい依頼単位のtest-only原因診断を開始。元のnative処理一回とdecoderの結果を分け、既存guardのfirst failure stageを観測します。判定・全13条件・元8秒/90秒は維持、一度の新source CIのみ。製品未採用、正式採用・通常保存は未完了です。**
+**最新は入口§90.2／current map§65.38.1／weekly§5.6.18.1／manifest v112です。新preview8の拒否をnative側と確定。7条件は画素占有の不一致、quote1条件はラスタ計画の複合制約guardです。 JS933/native195成功。新source一度CI39548735598はfailure、元13条件・8秒/90秒と製品処理は維持。原物を保存し診断単位を未採用STOPで終了。プレビュー修復・正式採用・通常保存は未完了です。**
 
 ### §87の設計時点（履歴）
 
@@ -3031,3 +3031,44 @@ Mashの新しい「Pieceの残件作業を進めて」を受け、完了済み§
 診断は元8秒内の処理時間に含みます。時計、deadline、guard、20field wire、drawing、row/font、fit、opacity、保存admission、fixture13、XCTest全assertion、standalone native195、元90秒は変更しません。強制display/flush、追加draw、decoderやnativeの二重呼出し、preview成功の擬装、再試行は0。native guard stage不明またはcompile失敗でも同source再実行・その場の迂回修正はせず、原物を保存して未採用STOP。one-source CIは一回だけで、全体failureも観測結果として残します。native成功後のadapter拒否なら実raw/expectedと期限から切り分け、証拠が足りなければ未確定とします。
 
 結果はGitHubへ元ログ・13report・PNG・stage mapとchecksum付きで残し、全変更fileを全文読戻します。現時点CI未実行、具体guard未確定、既存failureは撤回しません。製品source/API/DB/業務RPC/runtime/env/flag/依存/署名/deploy/main merge0、通常保存・履歴/実機は未完了。追加購入/定常費用/新service/Mash操作0、既存Actions一回の実使用量は発生します。STRUCTURE_MAP_DELTA_NONE。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。
+
+
+### 90.2 最終結果：同じnative呼出しで拒否した分岐を記録
+
+source `ae77b72102da82f58aa8b941083ad1d6aacebc1f`、一度の [CI39548735598 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39548735598) を終了。source8pathは全てGitHubから全文読戻しし、local git blob SHAとも一致しました。以後test/source/workflow編集0、同source再実行0。結果は failure。source ae77b721、一度CI39548735598 attempt1はfailure。JS933/native195成功、実RN13条件到達。旧saved1/raw3/controlled fault1は成立しPNG5は前回原物とbyte/全RGBA画素一致。新preview8はnative拒否を再現し、7条件は原line488のalpha occupancy不一致（stage38）、quoteは原line260のPieceRasterPlan複合制約（stage15、具体operand未確定）へ分離。native65uniqueの対応は全件一致、37resolve/28reject。JS/adapterは30resolve/16reject/19pending、native成功後のadapter拒否0。元本文/13fixture/assertion/8秒/90秒と製品処理は不変。診断単位は未採用STOP、プレビュー修復・正式採用・通常保存は未完了。
+
+JS933 PASS/FAIL0/SKIP0（15,128.900842ms）、standalone native195 unique PASS/FAIL0/重複0、旧129（内包97）＋v9 46＋v3 20の4summary一致。mainから最終summaryまで28.173337秒で元90秒内、launch0。Android source compile成功。export2jobは既存scope skipによりsuccessで、依存libraryを今回compileしたとは扱いません。共通5checkも全successです。
+
+| 条件 | 実phase | reportまでms | PNG |
+|---|---|---:|---|
+| essay_paragraphs | unavailable | 2580.322 | なし |
+| quote_unicode | unavailable | 2534.952 | なし |
+| declaration_no_brand | unavailable | 424.127 | なし |
+| essay_max420 | unavailable | 5550.626 | なし |
+| saved_essay_canvas | native_checked | 371.957 | あり |
+| suffix_latin_ligature | unavailable | 236.310 | なし |
+| suffix_arabic | unavailable | 176.894 | なし |
+| suffix_max420_a | unavailable | 2089.520 | なし |
+| suffix_spaces_raw | measurement_checked | 296.340 | あり |
+| suffix_hebrew_raw | measurement_checked | 160.093 | あり |
+| suffix_mixed_bidi_raw | measurement_checked | 155.527 | あり |
+| containment_native_clip_trap | measurement_checked | 129.983 | あり |
+| containment_branding_opacity08 | unavailable | 230.471 | なし |
+
+#### 90.2.1 実観測と因果関係の限界
+
+native original境界65件は65unique、tag/canvas/font/stage tuple重複0、JS selected/raw native/native originalの対応は全65件1対1。raw identity flagは全てObjective-C boxed expression由来の数値1で、解析時に原値を保持したまま厳密1/trueを扱い、tag/font/request_stage/enabled/main_threadを独立再計算して全件一致しました。native37resolvedはstage0、28rejectedはstage38が27件、stage15が1件。他stage0件です。最初のJS完了rejectは8Card中7Cardがstage38、quoteだけstage15。JS/adapter30resolved・16rejected・19pendingでstatus矛盾0、native resolve後のadapter reject0。JS時点pending19に対応するnative結果は7resolve/12rejectですが、JSのpendingを完了や孤児化へ換算しません。stage38はPieceNativeAndLayerInk原488行で、clipped参照をrenderしたbitsと自然view.layerをrenderしたactualのalpha>0を全画素で比較し不一致ならNOを返す分岐です。7CardをJS decoderの拒否とは扱いません。quoteのtag139/80pt/『🇯🇵。違いを大切にして、』はPieceRasterPlan原260行のfinite/正値/4096辺/4Mpixel等の複合条件で拒否されました。
+
+stage38における最初の不一致座標/alpha値、自然backingの実寸/CTMは未取得です。scale3・box高さから算出したceil−roundはlocal成功34件で0、stage38拒否27件で1という相関がありますが、自然backingをroundした実寸だと仮定せず、ceil→roundの修正根拠にしません。Apple公式CoreAnimationガイドはcontents画像をboundsへ拡縮することを説明していますが、fractional backingの整数丸め方はここから確定できません。quoteではどのPieceRasterPlan呼出し・どのoperand・どの実寸が拒否を生んだかは未取得で、4Mpixel/4096/32MiB超過や時計超過を断定しません。raw20fieldはJSへ届いた30件すべてで閉じたfield集合・3成分union・finiteなF64LE5値を再計算、全30件は元wall expiry前に受信。native37resolveのうちJS snapshotでpendingの7件にはraw wireを捏造しません。JSONはnegative zeroのbit identityを保証しません。
+
+native/JSのordinalを無条件に同一視せず、tag・canvas・font・local/placedを用いて照合しました。pending・欠落・同tuple重複は欠落/曖昧のまま保持し、観測していないcallbackや追加drawの結果を作成していません。stageは元guardの実行位置であり、複合条件の各operandまで自動特定したとは扱いません。marker mapのpreimage/postimage SHA、59marker・3reset、元source lexical projection一致、元XCTest111行・fixture hash不変を確認しました。実RN build copyの診断以外は製品処理不変です。
+
+#### 90.2.2 原物、商品評価、次の未実施作業
+
+全6jobのdecoded元ログ、原run/job/artifact metadata、実際のPIECE_V3_DIAGNOSTIC_MAP、13reportとPNG、元xcodebuild.log、guard原文context、独立解析とhash一覧をmanifestのlossless bundleへ保存し、全memberを展開してchecksum照合しました。大きい元xcresultを含むZIP全体は別の永続原物として保存、具体identity/digest/member ledgerをmanifestに記載。Actionsの期限付きURLだけには依存しません。
+
+全13reportはbody_preserved=trueかつ元8秒内（最大5550.626ms）ですが、新preview8はplaced0/fit未達/完成PNG0なので、420文字完了・有効プレビュー成立・opacity.8や余白/全行fitの合格にはしません。実captureは旧saved6Text＋raw3＋trap1の10Text、計画68Text/v3目標62を成功数へ加算しません。原PNG5枚を一覧で目視し、旧savedの本文/改行/配置/余白/brandingとraw3/controlled trapは前回原画像にbyte/全RGBA画素一致することを確認しました。失敗8Cardの画像品質は未検証です。 原画像比較の事実はmanifest.image_comparisonを参照。primary outcomeは BLOCKER_NARROWED。診断単位を**新候補未採用STOP**として終了し、プレビュー成立の合格へ換算しません。
+
+次の最小未実施作業：自然layerと参照が同じ描画gridを使う根拠を整えて7条件の画素不一致を修復し、quoteは同一操作でPieceRasterPlanへ渡った寸法/scaleと拒否operandを確定する。元guard/8秒/90秒/4096辺/4Mpixel/32MiBを緩めず、新source一度CIで全13条件を検証する。今回この修復・追加観測・追加CIは未実施。
+
+今回の原物から32MiBのcall間合算保証やwall時計巻戻りを含む最終monotonic保証を立証したとは扱わず、過去に記録した未証明範囲を保持します。formal renderer採用、containment版saved reader、InputScreen正式isSaveAdmitted供給、実Auth/API通常初回保存→同owner詳細/履歴、実機受入れは引き続き未完了。結果5資料のみの更新、STRUCTURE_MAP_DELTA_NONE。製品source/fixture/workflow/API/DB/業務RPC/runtime/env/flag/依存/署名/配布/deploy/main merge0。追加購入/新service/定常費用/Mash追加操作0、既存Actions一回の実使用量は発生、請求額は未取得。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。
