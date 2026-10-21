@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§88.4／current map§65.36.1／weekly§5.6.16.1／manifest v106です。承認済みsource9b0abdedの19pathを全文照合し、一度のCI39523761970を実行中。CI JS933・native195件成功、6job中5成功、実RN13条件・PNG/時間は未確認。旧v2/v9と元8秒/90秒を維持し、新候補の正式採用・通常保存は未完了です。**
+**最新は入口§88.5／current map§65.36.2／weekly§5.6.16.2／manifest v107です。承認済み新候補の実装と一度CI39523761970の結果記録を完了。CI全体failure：JS933/native195と他3jobは成功、実RNはtest902行のXCTest macro構文エラーでbuild停止。今回の実RN13条件・PNGは0件/全未検証です。旧v2/v9・元8秒/90秒を保持し、新候補は未採用STOP。原因と未適用の最小1行修復案を記録しました。正式採用・通常保存は未完了です。**
 
 ### §87の設計時点（履歴）
 
@@ -2889,3 +2889,36 @@ native compile警告はenum型ORとshim nullability注釈。main後の実行時�
 5jobの原ログ・source/run/job metadata・native独立集計・元Podfile.lock ZIPをlossless bundleで保存しました。旧placed-composite最終bundleは、全内容を読戻し済みのsource9b0abded内の同JSON pointerへ不変参照化し、旧compressed hash/member情報を保持。旧原物はGit履歴から復元可能です。これはmanifest全体の全文再取得を可能に保つ整理で、過去証拠の廃棄ではありません。
 
 製品/test/workflowはsource確定後に追加変更0。資料5pathだけの途中保存で新Piece CIを起動せず、同source再実行0。正式採用/product acceptance/normal save/reopenはfalse、automatic_progression=false。残る一度CIの原物を回収し、未達条件があれば未採用STOPで最終記録します。
+
+
+### 88.5 最終結果：実RN testのmacro構文でbuild停止、未採用STOP
+
+一度のCI [39523761970 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39523761970)はsource `9b0abdeda1e417f475a212a269021374f72e1553`で**failure**。created/run_started00:50:46Z→updated01:04:51Zは14分05秒です。途中資料b2eafc22の5pathもGitHub全文一致を確認しました。今回の承認単位である実装・19path照合・一度CI・全結果保存までを終え、検証合格や正式採用には至っていません。
+
+| 対象 | 最終実結果・限界 |
+|---|---|
+| JS | CI933/933 PASS、FAIL/SKIP/CANCEL0、11,430.378062ms。local933/14,436.28399msとは別の原ログ |
+| native | 195個別PASS/195unique/重複0/FAIL0。旧129（内包97）＋v9 46＋新v3 20、4summary一致。main後41.425065秒、launch0、元90秒内 |
+| Android source/export Android/export Pods | 3job success。後2jobは今回は依存compileを実行。配布や実機exportの成功ではない |
+| 実RN | job failure、test build exit65。test902:277が最初のerror、macro展開から20件連鎖。test_started/PIECE_RN_CASE/実行report0 |
+| 実RN条件/画像 | 13条件すべて未検証、results.json0、PNG0。rendered row/local-placed pair/独立5値/fit/8秒/clip trap/opacity.8/画像差は今回未確認。13条件が画素判定に失敗したという意味ではない |
+
+#### 88.5.1 原因と、未適用の最小修復案
+
+既存 `tests/native/piece-rn-canvas-ios.m` 902行の `XCTAssertEqualObjects`第2引数内に、追加2条件の配列リテラル `@[@"containment_native_clip_trap",@"containment_branding_opacity08"]` を直接置きました。Cプリプロセッサは角括弧をmacro引数の保護として扱わず、内部commaが引数を分割し、残りがXCTest可変引数へ渡って構文を壊します。原xcodebuild.logには902行の最初のerrorとXCTestAssertions.h→XCTestAssertionsImpl.hの展開位置が残っています。これは華恋が今回加えたtestの不備で、実RNビルド前の確認で見落としたものです。
+
+次の具体的な最小修復案は**同じ902行の第2引数全体を丸括弧で囲むだけ**です。判定・13件の名前と順・元11条件・分母・deadlineは変わりません。未適用のafter全文を示します。
+
+```objc
+XCTAssertEqualObjects([self.resultModule.reports valueForKey:@"name"], ([[[baselineNames arrayByAddingObjectsFromArray:supplementalNames] arrayByAddingObjectsFromArray:rawNames] arrayByAddingObjectsFromArray:@[@"containment_native_clip_trap",@"containment_branding_opacity08"]]));
+```
+
+修復案のiOSコンパイル成功や実RN13条件の成立は未確認です。今回のsource確定後の製品/test/workflow追加変更0・同source再実行0を守り、この1行もまだ適用していません。別の新sourceでの限定検証単位として扱い、今回失敗を黙って修正・再実行した成功へ置換しません。正式admission・採用版saved reader・InputScreen正式供給・通常初回保存→本人GET/履歴・実機は引き続き未完了です。
+
+#### 88.5.2 保存した原物と完了範囲
+
+全6jobのdecoded原ログ、RN artifact ZIP25,718bytes（SHA256 `4181f551dd91cf5c0cd48badee6633df303883cb428238b58fc61c6c3dde61f6`）と唯一の原member `xcodebuild.log`354,682bytes、Podfile.lock ZIP、source19pathのmetadata・run/job/artifact metadata・native独立集計・今回のfailure解析をlossless tar/gzip/base64でmanifestへ保存しました。RN成果物に存在しないPNG/reportを旧runから流用せず、旧11PNG/59pair/7fitを今回の分母へ換算しません。旧証拠は§88.4の不変Git参照を維持します。
+
+primary outcomeは **BLOCKER_NARROWED**。native新20を含む195成功とJS933は部分的な技術証拠ですが、実RN包含/画素/元8秒成立は未確認、新候補未採用STOPです。今回の一度CIは14分05秒で終了。新購入/third-party依存/定常service追加0、既存Actions一回の実使用量は発生し、請求額は今回取得していません。Mash様への追加操作依頼0です。
+
+source19pathのうち製品6/test7/workflow1は9b0abdedのbytesを固定。最終記録は同じ資料5pathだけ、STRUCTURE_MAP_DELTA_NONE（実装時の限定測定/paint責務は§65.36に保持）。DB/query/business RPC/API/runtime/flag/env/署名/配布/deploy/main merge0。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。今回の有限作業は結果保存まで完了、商品完成ではありません。

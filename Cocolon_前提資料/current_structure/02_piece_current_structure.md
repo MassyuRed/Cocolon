@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§88.4／current map§65.36.1／weekly§5.6.16.1／manifest v106です。承認済みsource9b0abdedの19pathを全文照合し、一度のCI39523761970を実行中。CI JS933・native195件成功、6job中5成功、実RN13条件・PNG/時間は未確認。旧v2/v9と元8秒/90秒を維持し、新候補の正式採用・通常保存は未完了です。**
+**最新は入口§88.5／current map§65.36.2／weekly§5.6.16.2／manifest v107です。承認済み新候補の実装と一度CI39523761970の結果記録を完了。CI全体failure：JS933/native195と他3jobは成功、実RNはtest902行のXCTest macro構文エラーでbuild停止。今回の実RN13条件・PNGは0件/全未検証です。旧v2/v9・元8秒/90秒を保持し、新候補は未採用STOP。原因と未適用の最小1行修復案を記録しました。正式採用・通常保存は未完了です。**
 
 ### §87の設計時点（履歴）
 
@@ -3133,3 +3133,8 @@ JS元915＋18=933 PASS/FAIL0、14.436秒。旧native175＋新20=195、実RN元11
 #### 65.36.1 途中結果：native195成功、実RN継続
 
 入口§88.4／manifest v106。source9b0abded/treeb83d10e5の19path全文一致。CI39523761970 attempt1でJS933・native195unique（旧129＋v9 46＋新20）/FAIL0、main→summary41.425065秒・元90秒内。Android sourceと両export compileを含む5/6job成功、実RN13/PNG/元8秒は継続中・未確認。原ログ5jobを可逆保存、source/test/workflow追加編集と再CI0。正式採用・通常保存・本人履歴は未完了、automatic_progression=false。
+
+
+#### 65.36.2 最終結果：RN test build失敗、13条件未検証
+
+入口§88.5／manifest v107。source9b0abded、一度CI39523761970 attempt1はfailure。JS933・native195unique/FAIL0・旧90秒内41.425065秒と他3compile job成功。実RN test902行のXCTAssertEqualObjects内inline配列commaがmacro引数を分割しbuild exit65、13条件は全未検証、report/PNG0。元8秒/画素/fit成立は今回未確認。第2引数を丸括弧で囲む同一1行の最小修復案を入口へ記録したが未適用。source凍結/再実行0、未採用STOP、primary BLOCKER_NARROWED。全6job原ログ/唯一のRN xcodebuild.log/ZIP/metadataを可逆保存。正式renderer/採用saved/InputScreen正式供給/通常保存→本人履歴は未完了、automatic_progression=false。

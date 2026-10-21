@@ -1702,3 +1702,8 @@ local JS933全成功（元915＋新18、14.436秒）。native195/実RN13・PNG/�
 #### 5.6.16.1 途中結果：一度CIでnative195成功
 
 入口§88.4／manifest v106。source9b0abded/treeb83d10e5の19path全文一致。CI39523761970 attempt1でJS933・native195unique（旧129＋v9 46＋新20）/FAIL0、main→summary41.425065秒・元90秒内。Android sourceと両export compileを含む5/6job成功、実RN13/PNG/元8秒は継続中・未確認。原ログ5jobを可逆保存、source/test/workflow追加編集と再CI0。正式採用・通常保存・本人履歴は未完了、automatic_progression=false。
+
+
+#### 5.6.16.2 最終結果：一度CI失敗、最小test修復点を特定
+
+入口§88.5／manifest v107。source9b0abded、一度CI39523761970 attempt1はfailure。JS933・native195unique/FAIL0・旧90秒内41.425065秒と他3compile job成功。実RN test902行のXCTAssertEqualObjects内inline配列commaがmacro引数を分割しbuild exit65、13条件は全未検証、report/PNG0。元8秒/画素/fit成立は今回未確認。第2引数を丸括弧で囲む同一1行の最小修復案を入口へ記録したが未適用。source凍結/再実行0、未採用STOP、primary BLOCKER_NARROWED。全6job原ログ/唯一のRN xcodebuild.log/ZIP/metadataを可逆保存。正式renderer/採用saved/InputScreen正式供給/通常保存→本人履歴は未完了、automatic_progression=false。
