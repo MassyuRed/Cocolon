@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§90.2／current map§65.38.1／weekly§5.6.18.1／manifest v112です。新preview8の拒否をnative側と確定。7条件は画素占有の不一致、quote1条件はラスタ計画の複合制約guardです。 JS933/native195成功。新source一度CI39548735598はfailure、元13条件・8秒/90秒と製品処理は維持。原物を保存し診断単位を未採用STOPで終了。プレビュー修復・正式採用・通常保存は未完了です。**
+**最新は入口§91／current map§65.39／weekly§5.6.19／manifest v113です。自然drawRectの実bitmap寸法・CTM・clipへ参照を束縛する内部修復を実装。元全alpha一致guard・wire20・8秒/90秒・資源上限・195検査/13条件は維持。quoteは同じ失敗呼出しの拒否寸法を記録します。JS933成功、iOS/実RNは新source一度CIでこれから検証し、正式採用・通常保存は未完了です。**
 
 ### §87の設計時点（履歴）
 
@@ -3072,3 +3072,28 @@ native/JSのordinalを無条件に同一視せず、tag・canvas・font・local/
 次の最小未実施作業：自然layerと参照が同じ描画gridを使う根拠を整えて7条件の画素不一致を修復し、quoteは同一操作でPieceRasterPlanへ渡った寸法/scaleと拒否operandを確定する。元guard/8秒/90秒/4096辺/4Mpixel/32MiBを緩めず、新source一度CIで全13条件を検証する。今回この修復・追加観測・追加CIは未実施。
 
 今回の原物から32MiBのcall間合算保証やwall時計巻戻りを含む最終monotonic保証を立証したとは扱わず、過去に記録した未証明範囲を保持します。formal renderer採用、containment版saved reader、InputScreen正式isSaveAdmitted供給、実Auth/API通常初回保存→同owner詳細/履歴、実機受入れは引き続き未完了。結果5資料のみの更新、STRUCTURE_MAP_DELTA_NONE。製品source/fixture/workflow/API/DB/業務RPC/runtime/env/flag/依存/署名/配布/deploy/main merge0。追加購入/新service/定常費用/Mash追加操作0、既存Actions一回の実使用量は発生、請求額は未取得。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。
+
+
+## 91. 自然描画の実gridへ参照を合わせる内部修復（2026-10-21）
+
+Mashの新しいPiece残件続行依頼に基づくLEVEL_2／OBSERVED_BLOCKER_MINIMAL_FIX。実行環境はWork／PIECE_WORK_ALLOWED、root華恋だけをexecution・GitHub writerとし、独立read-only reviewer3名の技術・全体経路reviewを統合しました。目的は§90.2の7条件のalpha不一致を、表示Textと参照の同じ実gridを使うことで修復し、本文を失わない画像プレビューへ戻すことです。前回STOPの同source再実行ではありません。
+
+基点PR30 a713ea3ec50af0dd821eb2a4d4a8b893c9472088、API PR3 a536e50ee284785f585ac73329ef2947dca8bba9。添付引継ぎ・作業規則00/CURRENT_RULES/18・恒久incident全文・全体設計01/01A/01B/01C・02国家システム/全file地図の全体経路と対象family・最新weekly/Piece currentを確認。全1,747blobをGitHub treeと照合し不一致0。巨大地図全約3万行の逐語読了という主張はしません。System Context prepareはlocal material commitの非子孫エラーで失敗し、規定の原典直接読取を採用、生成contextを根拠にせずsystem変更0。Supabaseはcocolon-project ACTIVE_HEALTHYの一覧readのみ、SQL/本人行/業務RPC/変更0です。
+
+### 91.1 原因と同じ契約内の修復
+
+原物の自然paint CTM.tyはbounds.height×Sであり、整数bitmap高さとは限りません。例：bounds高75.33332824707031、S3、ty225.99998474121094、clip.y約−0.000005086263。単純なceil→round変更では自然gridの位相まで復元できません。
+
+既存RN patchの通常drawRectで実bitmap幅高・CTM6値・clip・bounds/contentFrame/scale/storage/属性copyをprivate snapshotへ記録し、CGContextや画素は保持しません。v3だけが非bitmap/不正値/staleを拒否し、local/placed/処理後で同snapshot identityと既存layer/source stateを照合します。自然paint呼出し、super/highlightの順序は維持。ただし全plain RCTTextViewに読取・属性copy/辞書保持コストを追加し、Piece外性能は未計測です。
+
+自然top-down位相p=(CTM.tx,H−CTM.ty)を使い、±2fontの非clip extentを同格子へfloor/ceilします。expanded contextの最終CTMをidentity contextへ一度だけ適用し、割算→再乗算や逆CTM往復の丸めを避けます。raw native cellのlogical射影と、元bitmap→view.bounds写像を延長したCA filter参照をunionします。clipped参照は実W/H・元CTM・clipで描画し、両方を従来共通のceil比較canvasへ合成して元の全alpha occupancy一致guardをそのまま実行します。旧『nativegrid0』という実装仮定を実測gridへ修復するもので、表示renderer、wire20、成分定義、許容幅、±2font、4096辺/4Mpixel/32MiB、元8秒/90秒は変更しません。
+
+quoteの具体operandはまだ未確定です。test-only runnerの同じPieceRasterPlan呼出しでsize/scale/ceil幅高/拒否maskを記録し、追加描画・再試行は行いません。非有限値はNSNullとmaskでJSONへ保持。新sourceの元guard63箇所をscalar標識し、標識・単一operand observer除去後の元全文一致をlocalで確認。実RN paint観測はCTM6値/bitmap寸法/clipも重複除外keyへ含め、expanded後のclipped原物を落としません。旧XCTest判定文と全fixtureは維持しました。
+
+### 91.2 範囲・検証・停止
+
+変更は既存製品2path（native metrics/RN patch）、検査4path（shim/native fixture/実RN観測/runner）、資料5pathの計11path、新tracked file0。Rule18§11.3既存設計内の可逆的最小修復で、商品目的/公開API/DB/課金/他core/依存/本番/flag/env/署名/配布/deploy/main mergeは変更しません。PRODUCT_ROUTE_ALIGNEDと独立原典reviewのTECHNICALLY_ADMISSIBLEは成立しましたが、実iOS成功とは別です。
+
+local JS933 PASS/FAIL0/SKIP0（9,725.963454ms）、RN patch dry-run成功、runner bash構文と診断lexical復元成功。旧native195とXCTest assertion列の不変を確認。iOS/native195/実RN13/完成画像/元時間内の結果は未確認で、新sourceの既存push CIを一度だけ実行します。原13条件・画像とrow/font・fitを全件確認し、自然/clipped実gridを独立照合します。失敗・未達なら未採用STOP、同source再実行0。quoteが資源制約なら上限や±2fontをその場で変えません。
+
+正式renderer採用・containment版saved reader・InputScreen正式isSaveAdmitted供給・実Auth/API通常初回保存→本人詳細/履歴・物理実機は今回も未完了。新snapshot全否定境界の検査成功はclaimせず、JS/195だけで商品合格へ換算しません。追加購入/新service/定常費用/Mash操作0、既存Actions一回の実使用量は発生します。構造責務・公開経路は不変のためSTRUCTURE_MAP_DELTA_NONE、formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。

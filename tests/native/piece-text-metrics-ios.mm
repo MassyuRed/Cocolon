@@ -34,6 +34,23 @@
 - (NSTextStorage *)cocolonPieceTextStorage { return self.fixtureStorage; }
 - (CGRect)cocolonPieceContentFrame { return self.fixtureContentFrame; }
 
+// Record private geometry/source snapshots in natural drawRect, never in reference
+// paint. UIKit owns this context; no context or pixel data outlives the draw.
+- (NSDictionary *)cocolonPiecePaintGrid { return self.fixturePaintGrid; }
+- (void)cocolonPieceRecordPaintGrid
+{
+  CGContextRef context = UIGraphicsGetCurrentContext();
+  self.fixturePaintGrid = nil;
+  if (!context || ![self cocolonPieceIsPlainText]) return;
+  size_t width = CGBitmapContextGetWidth(context), height = CGBitmapContextGetHeight(context);
+  if (!width || !height) return;
+  self.fixturePaintGrid = @{ @"width":@(width), @"height":@(height),
+    @"ctm":[NSValue valueWithCGAffineTransform:CGContextGetCTM(context)],
+    @"clip":[NSValue valueWithCGRect:CGContextGetClipBoundingBox(context)],
+    @"bounds":[NSValue valueWithCGRect:self.bounds], @"frame":[NSValue valueWithCGRect:self.fixtureContentFrame],
+    @"scale":@(self.contentScaleFactor), @"storage":self.fixtureStorage, @"attributes":[self.fixtureStorage copy] };
+}
+
 // V3-only wrapper: old fixtures never draw through this helper. The application
 // still uses the pinned RN implementation, not this test boundary double.
 - (BOOL)cocolonPieceIsPlainText {
@@ -1044,6 +1061,7 @@ static BOOL runV9Checks(PieceTextMetrics *module, RCTBridge *bridge) {
 }
 - (void)drawRect:(CGRect)rect {
   NSLayoutManager *layout = self.fixtureStorage.layoutManagers.firstObject;
+  [self cocolonPieceRecordPaintGrid];
   [self cocolonPiecePaintGlyphRange:[layout glyphRangeForTextContainer:layout.textContainers.firstObject]];
 }
 @end

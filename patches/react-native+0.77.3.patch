@@ -1,7 +1,15 @@
 diff --git a/node_modules/react-native/Libraries/Text/Text/RCTTextView.mm b/node_modules/react-native/Libraries/Text/Text/RCTTextView.mm
 --- a/node_modules/react-native/Libraries/Text/Text/RCTTextView.mm
 +++ b/node_modules/react-native/Libraries/Text/Text/RCTTextView.mm
-@@ -96,6 +96,37 @@
+@@ -29,6 +29,7 @@
+   NSArray<UIView *> *_Nullable _descendantViews;
+   NSTextStorage *_Nullable _textStorage;
+   CGRect _contentFrame;
++  NSDictionary *_cocolonPiecePaintGrid;
+ }
+ 
+ - (instancetype)initWithFrame:(CGRect)frame
+@@ -96,6 +97,54 @@
    }
  
    [self setNeedsDisplay];
@@ -36,15 +44,33 @@ diff --git a/node_modules/react-native/Libraries/Text/Text/RCTTextView.mm b/node
 +  NSLayoutManager *layoutManager = _textStorage.layoutManagers.firstObject;
 +  [layoutManager drawBackgroundForGlyphRange:glyphRange atPoint:_contentFrame.origin];
 +  [layoutManager drawGlyphsForGlyphRange:glyphRange atPoint:_contentFrame.origin];
++}
++
++// Record private geometry/source snapshots in natural drawRect, never in reference
++// paint. UIKit owns this context; no context or pixel data outlives the draw.
++- (NSDictionary *)cocolonPiecePaintGrid { return _cocolonPiecePaintGrid; }
++- (void)cocolonPieceRecordPaintGrid
++{
++  CGContextRef context = UIGraphicsGetCurrentContext();
++  _cocolonPiecePaintGrid = nil;
++  if (!context || ![self cocolonPieceIsPlainText]) return;
++  size_t width = CGBitmapContextGetWidth(context), height = CGBitmapContextGetHeight(context);
++  if (!width || !height) return;
++  _cocolonPiecePaintGrid = @{ @"width":@(width), @"height":@(height),
++    @"ctm":[NSValue valueWithCGAffineTransform:CGContextGetCTM(context)],
++    @"clip":[NSValue valueWithCGRect:CGContextGetClipBoundingBox(context)],
++    @"bounds":[NSValue valueWithCGRect:self.bounds], @"frame":[NSValue valueWithCGRect:_contentFrame],
++    @"scale":@(self.contentScaleFactor), @"storage":_textStorage, @"attributes":[_textStorage copy] };
  }
  
  - (void)drawRect:(CGRect)rect
-@@ -118,8 +149,7 @@
+@@ -118,8 +167,8 @@
  #endif
  
    NSRange glyphRange = [layoutManager glyphRangeForTextContainer:textContainer];
 -  [layoutManager drawBackgroundForGlyphRange:glyphRange atPoint:_contentFrame.origin];
 -  [layoutManager drawGlyphsForGlyphRange:glyphRange atPoint:_contentFrame.origin];
++  [self cocolonPieceRecordPaintGrid];
 +  [self cocolonPiecePaintGlyphRange:glyphRange];
  
    __block UIBezierPath *highlightPath = nil;

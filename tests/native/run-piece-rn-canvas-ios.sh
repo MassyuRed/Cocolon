@@ -17,7 +17,7 @@ import json
 from pathlib import Path
 import re
 
-EXPECTED_SHA256 = '240ea5afb0789d0f6aab6afa46591f061c61481860d28d348b11f4cf3e5a272e'
+EXPECTED_SHA256 = '5c940c98344611a5051729d3c57c6da54c41eb9e5bc427be4e5c119a7f8c2392'
 PREFIX = '''
 // Hosted-test-only scalar diagnostic, injected in this disposable checkout.
 // No wire field, guard expression, return value, clock or paint is changed.
@@ -27,10 +27,23 @@ struct CocolonPieceDiagnosticTLSState {
   NSInteger requestStage;
   NSInteger firstFailureStage;
   bool enabled;
+  double rasterWidth, rasterHeight, rasterScale, rasterColumns, rasterRows;
+  unsigned int rasterFailures;
 };
-static thread_local CocolonPieceDiagnosticTLSState CocolonPieceDiagnosticTLS = {0, 0, 0, 0, false};
+static thread_local CocolonPieceDiagnosticTLSState CocolonPieceDiagnosticTLS = {};
 static inline void CocolonPieceDiagnosticBegin(long long tag, double fontSize, NSInteger stage, BOOL enabled) {
-  CocolonPieceDiagnosticTLS = {tag, fontSize, stage, 0, enabled != NO};
+  CocolonPieceDiagnosticTLS = {};
+  CocolonPieceDiagnosticTLS.tag=tag; CocolonPieceDiagnosticTLS.fontSize=fontSize;
+  CocolonPieceDiagnosticTLS.requestStage=stage; CocolonPieceDiagnosticTLS.enabled=enabled != NO;
+}
+static inline void CocolonPieceDiagnosticRaster(CGSize size, CGFloat scale, double w, double h) {
+  auto &d=CocolonPieceDiagnosticTLS;
+  if (!d.enabled || d.rasterFailures) return;
+  unsigned int failures=(!isfinite(scale)?1:0)|(scale<=0?2:0)|(!isfinite(w)?4:0)|(!isfinite(h)?8:0)|
+    (w<1?16:0)|(h<1?32:0)|(w>4096?64:0)|(h>4096?128:0)|(w*h>4*1024*1024?256:0);
+  if (!failures) return;
+  d.rasterWidth=size.width; d.rasterHeight=size.height; d.rasterScale=scale;
+  d.rasterColumns=w; d.rasterRows=h; d.rasterFailures=failures;
 }
 static inline void CocolonPieceDiagnosticMark(NSInteger stage) {
   if (CocolonPieceDiagnosticTLS.enabled && CocolonPieceDiagnosticTLS.firstFailureStage == 0)
@@ -45,7 +58,11 @@ GETTER = '''
     @"request_stage":@(CocolonPieceDiagnosticTLS.requestStage),
     @"first_failure_stage":@(CocolonPieceDiagnosticTLS.firstFailureStage),
     @"enabled":@(CocolonPieceDiagnosticTLS.enabled),
-    @"main_thread":@(NSThread.isMainThread)};
+    @"main_thread":@(NSThread.isMainThread),
+    @"raster_plan_failure":@{@"input_width":(isfinite(CocolonPieceDiagnosticTLS.rasterWidth) ? @(CocolonPieceDiagnosticTLS.rasterWidth) : (id)NSNull.null),
+      @"input_height":(isfinite(CocolonPieceDiagnosticTLS.rasterHeight) ? @(CocolonPieceDiagnosticTLS.rasterHeight) : (id)NSNull.null), @"scale":(isfinite(CocolonPieceDiagnosticTLS.rasterScale) ? @(CocolonPieceDiagnosticTLS.rasterScale) : (id)NSNull.null),
+      @"columns":(isfinite(CocolonPieceDiagnosticTLS.rasterColumns) ? @(CocolonPieceDiagnosticTLS.rasterColumns) : (id)NSNull.null), @"rows":(isfinite(CocolonPieceDiagnosticTLS.rasterRows) ? @(CocolonPieceDiagnosticTLS.rasterRows) : (id)NSNull.null),
+      @"failure_mask":@(CocolonPieceDiagnosticTLS.rasterFailures)}};
 }
 '''
 
@@ -82,7 +99,7 @@ def build(original):
         value=stage['kind'].removeprefix('return_')
         replacement = f'return (CocolonPieceDiagnosticMark({number}), {value});' if stage['kind'].startswith('return_') else f'(CocolonPieceDiagnosticMark({number}), unavailable());'
         edits.append((stage['offset'],stage['offset']+len(stage['original_expression']),replacement))
-    assert len(stages)==59, ('Expected exact59 guarded-return/rejection locations',len(stages))
+    assert len(stages)==63, ('Expected exact63 guarded-return/rejection locations',len(stages))
     instrumented=original
     for start,end,replacement in sorted(edits,reverse=True):
         instrumented=instrumented[:start]+replacement+instrumented[end:]
@@ -90,6 +107,14 @@ def build(original):
     # preservation before introducing declarations and reset-only statements.
     restored=re.sub(r'return \(CocolonPieceDiagnosticMark\(\d+\), (NO|nil)\);',r'return \1;',instrumented)
     restored=re.sub(r'\(CocolonPieceDiagnosticMark\(\d+\), unavailable\(\)\);','unavailable();',restored)
+    raster_anchor='  double w = ceil(size.width * scale), h = ceil(size.height * scale);\n'
+    raster_observer='  CocolonPieceDiagnosticRaster(size, scale, w, h);\n'
+    assert instrumented.count(raster_anchor)==1
+    instrumented=instrumented.replace(raster_anchor,raster_anchor+raster_observer,1)
+    restored=re.sub(r'return \(CocolonPieceDiagnosticMark\(\d+\), (NO|nil)\);',r'return \1;',instrumented)
+    restored=re.sub(r'\(CocolonPieceDiagnosticMark\(\d+\), unavailable\(\)\);','unavailable();',restored)
+    assert restored.count(raster_observer)==1
+    restored=restored.replace(raster_observer,'',1)
     assert restored==original, 'Instrumentation changed original tokens'
     begin='  CocolonPieceDiagnosticBegin(tag.longLongValue, fontSize, [pixelRequest[@"stage"] isEqual:@"local"] ? 1 : ([pixelRequest[@"stage"] isEqual:@"placed"] ? 2 : 0), containment);\n'
     # All block callbacks observe TLS on the actual executing thread. Reset in
@@ -110,7 +135,7 @@ def build(original):
     declaration='// Read-only accessors added by the pinned RN patch; no KVC/private-ivar read.\n'
     assert instrumented.count(declaration)==1
     instrumented=instrumented.replace(declaration,PREFIX+'\n'+declaration,1)
-    return instrumented, {'preimage_sha256':EXPECTED_SHA256,'instrumented_sha256':hashlib.sha256(instrumented.encode()).hexdigest(),'markers':stages,'marker_count':len(stages),'tls_resets':3,'postimage_is_test_instrumentation_only':True,'unchanged_original_lexical_projection':True}
+    return instrumented, {'preimage_sha256':EXPECTED_SHA256,'instrumented_sha256':hashlib.sha256(instrumented.encode()).hexdigest(),'markers':stages,'marker_count':len(stages),'tls_resets':3,'same_call_raster_observers':1,'postimage_is_test_instrumentation_only':True,'unchanged_original_lexical_projection':True}
 
 
 source=Path('ios/tempCocolon/PieceTextMetrics.mm')

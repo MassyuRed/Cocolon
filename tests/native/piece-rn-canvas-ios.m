@@ -539,7 +539,10 @@ static void PieceObservePaintContext(RCTTextView *view, NSString *kind) {
   CGContextRef cg=UIGraphicsGetCurrentContext(); if (!cg) return;
   NSString *identity=[NSString stringWithFormat:@"%p",(__bridge void *)view];
   NSString *storageIdentity=[NSString stringWithFormat:@"%p",(__bridge void*)view.cocolonPieceTextStorage];
-  NSString *key=[NSString stringWithFormat:@"%@|%@|%@|%@|%@|%@",identity,kind,view.reactTag,storageIdentity,PieceRect(view.bounds),PieceRect(view.cocolonPieceContentFrame)];
+  CGAffineTransform paintCTM=CGContextGetCTM(cg);
+  NSArray *paintMatrix=@[PieceFinite(paintCTM.a),PieceFinite(paintCTM.b),PieceFinite(paintCTM.c),PieceFinite(paintCTM.d),PieceFinite(paintCTM.tx),PieceFinite(paintCTM.ty)];
+  NSArray *paintBitmap=@[@(CGBitmapContextGetWidth(cg)),@(CGBitmapContextGetHeight(cg))];
+  NSString *key=[NSString stringWithFormat:@"%@|%@|%@|%@|%@|%@|%@|%@|%@",identity,kind,view.reactTag,storageIdentity,PieceRect(view.bounds),PieceRect(view.cocolonPieceContentFrame),paintMatrix,paintBitmap,PieceRect(CGContextGetClipBoundingBox(cg))];
   if ([PiecePaintContextKeys containsObject:key]) return;
   [PiecePaintContextKeys addObject:key];
   CGAffineTransform ctm=CGContextGetCTM(cg);
@@ -547,7 +550,7 @@ static void PieceObservePaintContext(RCTTextView *view, NSString *kind) {
     @"text":view.cocolonPieceTextStorage.string?:@"",@"bounds":PieceRect(view.bounds),
     @"content_frame":PieceRect(view.cocolonPieceContentFrame),@"view_scale":PieceFinite(view.contentScaleFactor),
     @"layer_scale":PieceFinite(view.layer.contentsScale),@"ctm":@[PieceFinite(ctm.a),PieceFinite(ctm.b),PieceFinite(ctm.c),PieceFinite(ctm.d),PieceFinite(ctm.tx),PieceFinite(ctm.ty)],
-    @"clip":PieceRect(CGContextGetClipBoundingBox(cg)),@"view_alpha":PieceFinite(view.alpha),@"layer_opacity":PieceFinite(view.layer.opacity)}];
+    @"bitmap_pixels":paintBitmap,@"clip":PieceRect(CGContextGetClipBoundingBox(cg)),@"view_alpha":PieceFinite(view.alpha),@"layer_opacity":PieceFinite(view.layer.opacity)}];
 }
 static void PieceObservedNaturalDraw(RCTTextView *view, SEL cmd, CGRect rect) {
   BOOL before=PieceInsideNaturalDraw; PieceInsideNaturalDraw=YES;

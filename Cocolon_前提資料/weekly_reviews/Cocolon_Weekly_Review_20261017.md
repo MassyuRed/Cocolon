@@ -1732,3 +1732,8 @@ local JS933全成功（元915＋新18、14.436秒）。native195/実RN13・PNG/�
 ##### 5.6.18.1 最終結果：新preview拒否診断
 
 入口§90.2／map§65.38.1／manifest v112。source ae77b721、一度CI39548735598 attempt1はfailure。JS933/native195成功、実RN13条件到達。旧saved1/raw3/controlled fault1は成立しPNG5は前回原物とbyte/全RGBA画素一致。新preview8はnative拒否を再現し、7条件は原line488のalpha occupancy不一致（stage38）、quoteは原line260のPieceRasterPlan複合制約（stage15、具体operand未確定）へ分離。native65uniqueの対応は全件一致、37resolve/28reject。JS/adapterは30resolve/16reject/19pending、native成功後のadapter拒否0。元本文/13fixture/assertion/8秒/90秒と製品処理は不変。診断単位は未採用STOP、プレビュー修復・正式採用・通常保存は未完了。 次の未実施：自然layerと参照が同じ描画gridを使う根拠を整えて7条件の画素不一致を修復し、quoteは同一操作でPieceRasterPlanへ渡った寸法/scaleと拒否operandを確定する。元guard/8秒/90秒/4096辺/4Mpixel/32MiBを緩めず、新source一度CIで全13条件を検証する。今回この修復・追加観測・追加CIは未実施。 P-W1通常保存・再表示/実機は未完了、10/22目標を達成扱いしません。診断単位は未採用STOP、automatic_progression=false。
+
+
+#### 5.6.19 P-W1：自然描画gridを使う内部修復
+
+入口§91／manifest v113。自然drawRectの実bitmap/CTM6値/clip/source snapshotへ既存v3参照を束縛。自然格子位相と元bitmap→bounds写像を再現、clipped実寸と元全alpha一致guardを維持。旧grid0仮定の内部修復。quoteは同呼出しの拒否operandをtest-onlyで記録。既存製品2/検査4/資料5の11path、全13fixture/XCTest判定/195分母/元8秒/90秒/4096/4M/32MiBは不変。JS933成功、実iOSは新source一度CIで未確認。root単一writer、3独立read-only review。正式renderer/通常保存/本人履歴・実機未完了、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。 10/22通常保存・10/23共有の目標達成には数えません。

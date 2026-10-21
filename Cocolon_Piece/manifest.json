@@ -1,14 +1,14 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v112",
+  "schema_version": "cocolon.piece.workstream_manifest.v113",
   "generated_at": "2026-10-21 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v111",
-    "predecessor_head": "ae77b72102da82f58aa8b941083ad1d6aacebc1f",
-    "carry_forward": "Close one new-source diagnostic CI; preserve original guards, original13cases/deadlines and failures. No product adoption.",
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v112",
+    "predecessor_head": "a713ea3ec50af0dd821eb2a4d4a8b893c9472088",
+    "carry_forward": "New request: repair natural paint grid within existing containment contract; preserve all original guards, cases, deadlines and prior failure.",
     "immutable_prior_evidence_references": [
       {
         "format": "git-commit-json-pointer",
@@ -50,17 +50,17 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "e7c2c41e7815bb4adc6ad025569a423290ab306f",
-    "raw_sha256": "ca63ff2dcf275c3405429c0db49b064171595fb009e4c46c94c1afbe62bc4fb8",
-    "utf8_bytes": 465861,
-    "chars": 277094
+    "git_blob_sha1": "0f16044025663fbf615beb057284fc04a109f41d",
+    "raw_sha256": "b1cd0627a12bd2de2da4e4afb6346431e54b82445eb4521ea038af064c849ea9",
+    "utf8_bytes": 470906,
+    "chars": 280003
   },
   "current_premise": {
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
-    "git_blob_sha1": "433fe2087a2ebf2928a2a713ce81a3442fb32f6c",
-    "raw_sha256": "70958bb9a4c9039290d2639cc35b32dde5e7ef53f8451f13cea620fa187f1772",
-    "utf8_bytes": 503069,
-    "chars": 293700
+    "git_blob_sha1": "293f9d04b617f2f9cf2a50695c0a0a6d567140fd",
+    "raw_sha256": "4e40a6d759f703eaff90db89dce4d9a69eff9f7a651c9a0546419176e5bee610",
+    "utf8_bytes": 503759,
+    "chars": 294117
   },
   "product_definition": {
     "user_facing_name": "Piece",
@@ -355,12 +355,12 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "PIECE_WORK_ALLOWED",
-    "state": "BOUNDED_DIAGNOSTIC_COMPLETE__NATIVE_REJECT_PATHS_IDENTIFIED__PREVIEW8_UNAVAILABLE__UNADOPTED_STOP",
-    "current_map_section": "65.38.1",
-    "current_entry_section": "90.2",
+    "state": "NATURAL_GRID_REPAIR_SOURCE_PREPARED__ONE_CI_NOT_EXECUTED",
+    "current_map_section": "65.39",
+    "current_entry_section": "91",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
-    "weekly_review_section": "5.6.18.1",
-    "first_unfinished_work": "自然layerと参照が同じ描画gridを使う根拠を整えて7条件の画素不一致を修復し、quoteは同一操作でPieceRasterPlanへ渡った寸法/scaleと拒否operandを確定する。元guard/8秒/90秒/4096辺/4Mpixel/32MiBを緩めず、新source一度CIで全13条件を検証する。今回この修復・追加観測・追加CIは未実施。",
+    "weekly_review_section": "5.6.19",
+    "first_unfinished_work": "新source一度CIでnative195/実RN13/元時間/原画像と自然clipped gridを確認。quote拒否operandを確定。未達なら未採用STOP。",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 6,
@@ -475,7 +475,8 @@
     "containment_macro_repair_bounded_work_complete": true,
     "containment_macro_build_fixed": true,
     "containment_macro_real_rn_preview_success": false,
-    "containment_diagnostic_bounded_work_complete": true
+    "containment_diagnostic_bounded_work_complete": true,
+    "natural_grid_repair_owner": "ios_preview_natural_grid_repair_20261021"
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -529,10 +530,10 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "433fe2087a2ebf2928a2a713ce81a3442fb32f6c",
-    "raw_sha256": "70958bb9a4c9039290d2639cc35b32dde5e7ef53f8451f13cea620fa187f1772",
-    "utf8_bytes": 503069,
-    "chars": 293700
+    "git_blob_sha1": "293f9d04b617f2f9cf2a50695c0a0a6d567140fd",
+    "raw_sha256": "4e40a6d759f703eaff90db89dce4d9a69eff9f7a651c9a0546419176e5bee610",
+    "utf8_bytes": 503759,
+    "chars": 294117
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -705,25 +706,25 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "TEST_ONLY_REJECTION_DIAGNOSTIC_FINAL_RESULTS_DOCUMENTS_ONLY",
-    "primary_outcome": "BLOCKER_NARROWED",
+    "classification": "NATURAL_GRID_REPAIR_SOURCE",
     "paths": [
+      "ios/tempCocolon/PieceTextMetrics.mm",
+      "patches/react-native+0.77.3.patch",
+      "tests/native/piece-ios-react-shim.h",
+      "tests/native/piece-rn-canvas-ios.m",
+      "tests/native/piece-text-metrics-ios.mm",
+      "tests/native/run-piece-rn-canvas-ios.sh",
       "Cocolon_Piece/00_read_first.md",
       "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
       "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
       "Cocolon_前提資料/07_latest_snapshot_diff.md",
       "Cocolon_Piece/manifest.json"
     ],
-    "documentation_paths": 5,
-    "source_commit": "ae77b72102da82f58aa8b941083ad1d6aacebc1f",
-    "ci_run": 39548735598,
-    "ci_conclusion": "failure",
-    "product_source_changes": 0,
-    "test_source_changes": 0,
+    "product_source_changes": 2,
+    "test_source_changes": 4,
     "workflow_changes": 0,
     "new_files": 0,
     "new_ci_execution": 0,
-    "same_source_reruns": 0,
     "live_database_query": 0,
     "live_database_apply": 0,
     "business_rpc": 0,
@@ -82144,5 +82145,577 @@
     "unadopted_stop": true,
     "primary_outcome": "BLOCKER_NARROWED",
     "specific_reject_guard_identified": true
+  },
+  "ios_preview_natural_grid_repair_20261021": {
+    "state": "NATURAL_GRID_REPAIR_SOURCE_PREPARED__ONE_CI_NOT_EXECUTED",
+    "base_head": "a713ea3ec50af0dd821eb2a4d4a8b893c9472088",
+    "entry_section": "91",
+    "map_section": "65.39",
+    "weekly_section": "5.6.19",
+    "classification": "LEVEL2_EXISTING_CONTRACT_CAUSAL_REPAIR",
+    "environment": "WORK_PIECE_WORK_ALLOWED",
+    "execution_owner": "Karen_root_only",
+    "source_paths": [
+      "ios/tempCocolon/PieceTextMetrics.mm",
+      "patches/react-native+0.77.3.patch",
+      "tests/native/piece-ios-react-shim.h",
+      "tests/native/piece-rn-canvas-ios.m",
+      "tests/native/piece-text-metrics-ios.mm",
+      "tests/native/run-piece-rn-canvas-ios.sh"
+    ],
+    "all_paths": [
+      "ios/tempCocolon/PieceTextMetrics.mm",
+      "patches/react-native+0.77.3.patch",
+      "tests/native/piece-ios-react-shim.h",
+      "tests/native/piece-rn-canvas-ios.m",
+      "tests/native/piece-text-metrics-ios.mm",
+      "tests/native/run-piece-rn-canvas-ios.sh",
+      "Cocolon_Piece/00_read_first.md",
+      "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+      "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
+      "Cocolon_Piece/manifest.json"
+    ],
+    "new_files": 0,
+    "ci_executions": 0,
+    "ci_execution_limit": 1,
+    "same_source_reruns": 0,
+    "native_expected": 195,
+    "real_rn_conditions": 13,
+    "local_js": {
+      "tests": 933,
+      "pass": 933,
+      "fail": 0,
+      "skip": 0,
+      "duration_ms": 9725.963454
+    },
+    "original_deadline_ms": 8000,
+    "original_native_deadline_seconds": 90,
+    "original_assertion_sequence_preserved": true,
+    "original_fixtures_preserved": true,
+    "diagnostic_map": {
+      "preimage_sha256": "5c940c98344611a5051729d3c57c6da54c41eb9e5bc427be4e5c119a7f8c2392",
+      "instrumented_sha256": "41e313fd63e356843c00f8e69e118422c1c48b9ebfbf5f6989d8b7e1338880ae",
+      "markers": [
+        {
+          "offset": 3339,
+          "span": "shared_canvas_frame",
+          "kind": "return_NO",
+          "original_line": 67,
+          "original_expression": "return NO;",
+          "stage": 1
+        },
+        {
+          "offset": 4172,
+          "span": "shared_canvas_frame",
+          "kind": "return_NO",
+          "original_line": 80,
+          "original_expression": "return NO;",
+          "stage": 2
+        },
+        {
+          "offset": 4268,
+          "span": "shared_canvas_frame",
+          "kind": "return_NO",
+          "original_line": 82,
+          "original_expression": "return NO;",
+          "stage": 3
+        },
+        {
+          "offset": 4419,
+          "span": "shared_canvas_frame",
+          "kind": "return_NO",
+          "original_line": 84,
+          "original_expression": "return NO;",
+          "stage": 4
+        },
+        {
+          "offset": 4906,
+          "span": "shared_canvas_frame",
+          "kind": "return_NO",
+          "original_line": 90,
+          "original_expression": "return NO;",
+          "stage": 5
+        },
+        {
+          "offset": 5424,
+          "span": "shared_direct_paint",
+          "kind": "return_nil",
+          "original_line": 99,
+          "original_expression": "return nil;",
+          "stage": 6
+        },
+        {
+          "offset": 6392,
+          "span": "shared_direct_paint",
+          "kind": "return_nil",
+          "original_line": 112,
+          "original_expression": "return nil;",
+          "stage": 7
+        },
+        {
+          "offset": 7234,
+          "span": "shared_direct_paint",
+          "kind": "return_nil",
+          "original_line": 123,
+          "original_expression": "return nil;",
+          "stage": 8
+        },
+        {
+          "offset": 7550,
+          "span": "shared_direct_paint",
+          "kind": "return_nil",
+          "original_line": 127,
+          "original_expression": "return nil;",
+          "stage": 9
+        },
+        {
+          "offset": 7626,
+          "span": "shared_direct_paint",
+          "kind": "return_nil",
+          "original_line": 128,
+          "original_expression": "return nil;",
+          "stage": 10
+        },
+        {
+          "offset": 7726,
+          "span": "shared_direct_paint",
+          "kind": "return_nil",
+          "original_line": 130,
+          "original_expression": "return nil;",
+          "stage": 11
+        },
+        {
+          "offset": 7942,
+          "span": "shared_direct_paint",
+          "kind": "return_nil",
+          "original_line": 134,
+          "original_expression": "return nil;",
+          "stage": 12
+        },
+        {
+          "offset": 8023,
+          "span": "shared_direct_paint",
+          "kind": "return_nil",
+          "original_line": 136,
+          "original_expression": "return nil;",
+          "stage": 13
+        },
+        {
+          "offset": 8537,
+          "span": "shared_direct_paint",
+          "kind": "return_nil",
+          "original_line": 145,
+          "original_expression": "return nil;",
+          "stage": 14
+        },
+        {
+          "offset": 16698,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 261,
+          "original_expression": "return NO;",
+          "stage": 15
+        },
+        {
+          "offset": 16818,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 263,
+          "original_expression": "return NO;",
+          "stage": 16
+        },
+        {
+          "offset": 20482,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 338,
+          "original_expression": "return NO;",
+          "stage": 17
+        },
+        {
+          "offset": 20830,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 344,
+          "original_expression": "return NO;",
+          "stage": 18
+        },
+        {
+          "offset": 21490,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 356,
+          "original_expression": "return nil;",
+          "stage": 19
+        },
+        {
+          "offset": 21968,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 362,
+          "original_expression": "return nil;",
+          "stage": 20
+        },
+        {
+          "offset": 22608,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 370,
+          "original_expression": "return nil;",
+          "stage": 21
+        },
+        {
+          "offset": 24204,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 387,
+          "original_expression": "return nil;",
+          "stage": 22
+        },
+        {
+          "offset": 25009,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 396,
+          "original_expression": "return NO;",
+          "stage": 23
+        },
+        {
+          "offset": 26423,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 415,
+          "original_expression": "return NO;",
+          "stage": 24
+        },
+        {
+          "offset": 26650,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 419,
+          "original_expression": "return NO;",
+          "stage": 25
+        },
+        {
+          "offset": 28088,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 437,
+          "original_expression": "return NO;",
+          "stage": 26
+        },
+        {
+          "offset": 29367,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 454,
+          "original_expression": "return NO;",
+          "stage": 27
+        },
+        {
+          "offset": 29463,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 456,
+          "original_expression": "return NO;",
+          "stage": 28
+        },
+        {
+          "offset": 29791,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 461,
+          "original_expression": "return NO;",
+          "stage": 29
+        },
+        {
+          "offset": 30051,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 464,
+          "original_expression": "return NO;",
+          "stage": 30
+        },
+        {
+          "offset": 30285,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 469,
+          "original_expression": "return NO;",
+          "stage": 31
+        },
+        {
+          "offset": 31034,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 480,
+          "original_expression": "return NO;",
+          "stage": 32
+        },
+        {
+          "offset": 31381,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 484,
+          "original_expression": "return NO;",
+          "stage": 33
+        },
+        {
+          "offset": 31549,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 486,
+          "original_expression": "return NO;",
+          "stage": 34
+        },
+        {
+          "offset": 32141,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 496,
+          "original_expression": "return NO;",
+          "stage": 35
+        },
+        {
+          "offset": 32228,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 498,
+          "original_expression": "return NO;",
+          "stage": 36
+        },
+        {
+          "offset": 32335,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 500,
+          "original_expression": "return NO;",
+          "stage": 37
+        },
+        {
+          "offset": 32486,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 503,
+          "original_expression": "return NO;",
+          "stage": 38
+        },
+        {
+          "offset": 32620,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 506,
+          "original_expression": "return NO;",
+          "stage": 39
+        },
+        {
+          "offset": 33091,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 516,
+          "original_expression": "return NO;",
+          "stage": 40
+        },
+        {
+          "offset": 33224,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 519,
+          "original_expression": "return NO;",
+          "stage": 41
+        },
+        {
+          "offset": 33427,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 522,
+          "original_expression": "return NO;",
+          "stage": 42
+        },
+        {
+          "offset": 34611,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 545,
+          "original_expression": "return nil;",
+          "stage": 43
+        },
+        {
+          "offset": 35129,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 550,
+          "original_expression": "return nil;",
+          "stage": 44
+        },
+        {
+          "offset": 35656,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 556,
+          "original_expression": "return nil;",
+          "stage": 45
+        },
+        {
+          "offset": 35870,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 558,
+          "original_expression": "return nil;",
+          "stage": 46
+        },
+        {
+          "offset": 35968,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 560,
+          "original_expression": "return nil;",
+          "stage": 47
+        },
+        {
+          "offset": 37655,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 578,
+          "original_expression": "return nil;",
+          "stage": 48
+        },
+        {
+          "offset": 37725,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 579,
+          "original_expression": "return nil;",
+          "stage": 49
+        },
+        {
+          "offset": 38063,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 583,
+          "original_expression": "return nil;",
+          "stage": 50
+        },
+        {
+          "offset": 38305,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 586,
+          "original_expression": "return nil;",
+          "stage": 51
+        },
+        {
+          "offset": 39369,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 596,
+          "original_expression": "return nil;",
+          "stage": 52
+        },
+        {
+          "offset": 40519,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 611,
+          "original_expression": "return nil;",
+          "stage": 53
+        },
+        {
+          "offset": 41383,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 625,
+          "original_expression": "return nil;",
+          "stage": 54
+        },
+        {
+          "offset": 66951,
+          "span": "v3_snapshot_method",
+          "kind": "unavailable",
+          "original_line": 1008,
+          "original_expression": "unavailable();",
+          "stage": 55
+        },
+        {
+          "offset": 66987,
+          "span": "v3_snapshot_method",
+          "kind": "unavailable",
+          "original_line": 1010,
+          "original_expression": "unavailable();",
+          "stage": 56
+        },
+        {
+          "offset": 67487,
+          "span": "v3_snapshot_method",
+          "kind": "unavailable",
+          "original_line": 1019,
+          "original_expression": "unavailable();",
+          "stage": 57
+        },
+        {
+          "offset": 68035,
+          "span": "v3_snapshot_method",
+          "kind": "unavailable",
+          "original_line": 1026,
+          "original_expression": "unavailable();",
+          "stage": 58
+        },
+        {
+          "offset": 68415,
+          "span": "v3_snapshot_method",
+          "kind": "unavailable",
+          "original_line": 1032,
+          "original_expression": "unavailable();",
+          "stage": 59
+        },
+        {
+          "offset": 72451,
+          "span": "v3_snapshot_method",
+          "kind": "unavailable",
+          "original_line": 1088,
+          "original_expression": "unavailable();",
+          "stage": 60
+        },
+        {
+          "offset": 73125,
+          "span": "v3_snapshot_method",
+          "kind": "unavailable",
+          "original_line": 1094,
+          "original_expression": "unavailable();",
+          "stage": 61
+        },
+        {
+          "offset": 74413,
+          "span": "v3_snapshot_method",
+          "kind": "unavailable",
+          "original_line": 1108,
+          "original_expression": "unavailable();",
+          "stage": 62
+        },
+        {
+          "offset": 74608,
+          "span": "v3_snapshot_method",
+          "kind": "unavailable",
+          "original_line": 1113,
+          "original_expression": "unavailable();",
+          "stage": 63
+        }
+      ],
+      "marker_count": 63,
+      "tls_resets": 3,
+      "same_call_raster_observers": 1,
+      "postimage_is_test_instrumentation_only": true,
+      "unchanged_original_lexical_projection": true
+    },
+    "review": {
+      "independent_read_only_reviewers": 3,
+      "verdict": "TECHNICALLY_ADMISSIBLE",
+      "not_ios_execution_evidence": true
+    },
+    "formal_admission": false,
+    "product_acceptance": false,
+    "normal_save_reopen_complete": false,
+    "automatic_progression": false
   }
 }

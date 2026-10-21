@@ -20,6 +20,7 @@
 - (CGRect)cocolonPieceContentFrame;
 - (void)cocolonPiecePaintGlyphRange:(NSRange)glyphs;
 - (BOOL)cocolonPieceIsPlainText;
+- (NSDictionary *)cocolonPiecePaintGrid;
 @end
 
 @interface PieceTextMetrics : NSObject <RCTBridgeModule>
@@ -284,7 +285,8 @@ struct PieceOwnedPixels {
     if (!PieceRasterPlan(size, scale, &w, &h, &n)) return false;
     return makeExact(w, h, scale, owner);
   }
-  bool makeExact(size_t w, size_t h, CGFloat scale, const PieceRasterBudgetOwner &owner) {
+  bool makeExact(size_t w, size_t h, CGFloat scale, const PieceRasterBudgetOwner &owner,
+      const CGAffineTransform *paintTransform = nullptr) {
     if (!w || !h || w > 4096 || h > 4096 || w > (4 * 1024 * 1024) / h ||
         w > SIZE_MAX / 4 || h > SIZE_MAX / (w * 4)) return false;
     size_t n = w * 4 * h;
@@ -296,8 +298,11 @@ struct PieceOwnedPixels {
       kCGBitmapByteOrder32Big | kCGImageAlphaPremultipliedLast) : NULL;
     if (space) CGColorSpaceRelease(space);
     if (!context) { reset(); return false; }
-    CGContextTranslateCTM(context, 0, height);
-    CGContextScaleCTM(context, scale, -scale);
+    if (paintTransform) CGContextConcatCTM(context, *paintTransform);
+    else {
+      CGContextTranslateCTM(context, 0, height);
+      CGContextScaleCTM(context, scale, -scale);
+    }
     return true;
   }
 };
@@ -348,6 +353,21 @@ static BOOL PieceIdentityTransform(CATransform3D t) {
     t.m31 == 0 && t.m32 == 0 && t.m34 == 0 && t.m41 == 0 && t.m42 == 0 && t.m43 == 0;
 }
 static NSDictionary *PieceContainmentLayerState(RCTTextView *view) {
+  if (![view respondsToSelector:@selector(cocolonPiecePaintGrid)]) return nil;
+  NSDictionary *grid = [view cocolonPiecePaintGrid];
+  if (![grid isKindOfClass:NSDictionary.class] || grid[@"storage"] != view.cocolonPieceTextStorage ||
+      ![grid[@"attributes"] isEqualToAttributedString:view.cocolonPieceTextStorage] ||
+      !CGRectEqualToRect([grid[@"bounds"] CGRectValue], view.bounds) ||
+      !CGRectEqualToRect([grid[@"frame"] CGRectValue], view.cocolonPieceContentFrame) ||
+      [grid[@"scale"] doubleValue] != view.contentScaleFactor) return nil;
+  const double width = [grid[@"width"] doubleValue], height = [grid[@"height"] doubleValue];
+  CGAffineTransform ctm = [grid[@"ctm"] CGAffineTransformValue];
+  CGRect clip = [grid[@"clip"] CGRectValue];
+  if (!isfinite(width) || !isfinite(height) || width < 1 || height < 1 || width != floor(width) || height != floor(height) ||
+      width > 4096 || height > 4096 || width * height > 4 * 1024 * 1024 ||
+      !isfinite(ctm.a) || !isfinite(ctm.d) || !isfinite(ctm.tx) || !isfinite(ctm.ty) ||
+      ctm.a != view.contentScaleFactor || ctm.d != -view.contentScaleFactor || ctm.b != 0 || ctm.c != 0 ||
+      !PiecePixelRect(clip)) return nil;
   CALayer *layer = view.layer;
   if (!layer.contents || layer.needsDisplay || layer.needsLayout || view.hidden || layer.hidden || layer.opaque ||
       !isfinite(view.alpha) || view.alpha <= 0 || view.alpha > 1 ||
@@ -365,12 +385,12 @@ static NSDictionary *PieceContainmentLayerState(RCTTextView *view) {
       layer.minificationFilterBias != 0 || layer.geometryFlipped || layer.animationKeys.count ||
       ![view respondsToSelector:@selector(cocolonPieceIsPlainText)] || ![view cocolonPieceIsPlainText] ||
       ![view respondsToSelector:@selector(cocolonPiecePaintGlyphRange:)]) return nil;
-  return @{@"contents":layer.contents, @"scale":@(layer.contentsScale), @"alpha":@(view.alpha), @"opacity":@(layer.opacity),
+  return @{@"paint_grid":grid, @"contents":layer.contents, @"scale":@(layer.contentsScale), @"alpha":@(view.alpha), @"opacity":@(layer.opacity),
     @"anchor":[NSValue valueWithCGPoint:layer.anchorPoint], @"bounds":[NSValue valueWithCGRect:layer.bounds],
     @"masks":@(layer.masksToBounds), @"position":[NSValue valueWithCGPoint:layer.position]};
 }
 static BOOL PieceContainmentSameLayer(NSDictionary *a, NSDictionary *b, BOOL placementAllowed) {
-  if (!a || !b || a[@"contents"] != b[@"contents"] || ![a[@"scale"] isEqual:b[@"scale"]] ||
+  if (!a || !b || a[@"paint_grid"] != b[@"paint_grid"] || a[@"contents"] != b[@"contents"] || ![a[@"scale"] isEqual:b[@"scale"]] ||
       ![a[@"alpha"] isEqual:b[@"alpha"]] || ![a[@"opacity"] isEqual:b[@"opacity"]] ||
       ![a[@"anchor"] isEqual:b[@"anchor"]] || ![a[@"bounds"] isEqual:b[@"bounds"]] ||
       ![a[@"masks"] isEqual:b[@"masks"]]) return NO;
@@ -404,38 +424,53 @@ static BOOL PieceCompositePixels(CALayer *layer, CGRect extent, CGFloat scale, C
 static BOOL PieceNativeAndLayerInk(RCTTextView *view, NSRange glyphs, CGRect textKitInk, double fontSize,
     CGPoint phase, const PieceRasterBudgetOwner &budget, BOOL (^withinDeadline)(void), CGRect *nativeInk, CGRect *layerInk) {
   const CGFloat scale = view.contentScaleFactor;
+  NSDictionary *grid = [view cocolonPiecePaintGrid];
+  CGAffineTransform naturalCTM = [grid[@"ctm"] CGAffineTransformValue];
+  const size_t naturalWidth = [grid[@"width"] unsignedLongLongValue], naturalHeight = [grid[@"height"] unsignedLongLongValue];
+  // Top-down pixel coordinates of the actual UIKit draw, including the small
+  // fractional translation introduced by Yoga's nonintegral Text height.
+  const double px = naturalCTM.tx, py = (double)naturalHeight - naturalCTM.ty;
   CGRect expanded = CGRectInset(textKitInk, -2 * fontSize, -2 * fontSize);
-  const double x0 = floor(expanded.origin.x * scale), y0 = floor(expanded.origin.y * scale);
-  const double x1 = ceil(CGRectGetMaxX(expanded) * scale), y1 = ceil(CGRectGetMaxY(expanded) * scale);
+  const double x0 = floor(expanded.origin.x * scale + px), y0 = floor(expanded.origin.y * scale + py);
+  const double x1 = ceil(CGRectGetMaxX(expanded) * scale + px), y1 = ceil(CGRectGetMaxY(expanded) * scale + py);
   if (!isfinite(x0) || !isfinite(y0) || !isfinite(x1) || !isfinite(y1) ||
       fabs(x0) > 0x1p52 || fabs(y0) > 0x1p52 || fabs(x1) > 0x1p52 || fabs(y1) > 0x1p52) return NO;
-  CGRect nativeExtent = CGRectMake(x0 / scale, y0 / scale, (x1 - x0) / scale, (y1 - y0) / scale);
-  CGRect logicalExtent = CGRectIntegral(CGRectOffset(CGRectUnion(view.bounds, nativeExtent), phase.x, phase.y));
+  CGRect nativeExtent = CGRectMake((x0 - px) / scale, (y0 - py) / scale, (x1 - x0) / scale, (y1 - y0) / scale);
+  // Extend the original backing-pixel -> layer-bounds resize mapping for
+  // the expanded image. Drawing coordinates and CA contents coordinates are
+  // distinct when the natural backing dimension is not exactly bounds*S.
+  CGRect filteredExtent = CGRectMake(x0 * view.bounds.size.width / naturalWidth,
+    y0 * view.bounds.size.height / naturalHeight,
+    (x1 - x0) * view.bounds.size.width / naturalWidth,
+    (y1 - y0) * view.bounds.size.height / naturalHeight);
+  CGRect logicalExtent = CGRectIntegral(CGRectOffset(CGRectUnion(CGRectUnion(view.bounds, nativeExtent), filteredExtent), phase.x, phase.y));
   // One transparent logical cell is only scratch for filter support, never
   // added to returned ink. Alpha touching that outer boundary is rejected.
   logicalExtent = CGRectInset(logicalExtent, -1, -1);
   size_t nw, nh, nb, vw, vh, vb, lw, lh, lb;
   if (!PiecePixelRect(nativeExtent) || !PiecePixelRect(logicalExtent) ||
       !PieceRasterPlan(CGSizeMake(x1 - x0, y1 - y0), 1, &nw, &nh, &nb) ||
-      !PieceRasterPlan(view.bounds.size, scale, &vw, &vh, &vb) ||
+      !PieceRasterPlan(CGSizeMake(naturalWidth, naturalHeight), 1, &vw, &vh, &vb) ||
       !PieceRasterPlan(logicalExtent.size, 1, &lw, &lh, &lb)) return NO;
-  const size_t bitBytes = (vw * vh + 7) / 8;
+  size_t cw, ch, cb;
+  if (!PieceRasterPlan(view.bounds.size, scale, &cw, &ch, &cb)) return NO;
+  const size_t bitBytes = (cw * ch + 7) / 8;
   // Preflight all peaks before any v3 allocation; image providers own these
   // same allocations without a second pixel copy.
   if (nb > PieceContainmentMemoryLimit - lb || nb > PieceContainmentMemoryLimit - vb ||
-      vb > (PieceContainmentMemoryLimit - bitBytes) / 2) return NO;
+      cb > PieceContainmentMemoryLimit - vb - bitBytes) return NO;
   PieceOwnedPixels native, clipped;
-  if (!withinDeadline() || !native.makeExact(nw, nh, scale, budget) || !withinDeadline()) return NO;
-  CGContextTranslateCTM(native.context, -nativeExtent.origin.x, -nativeExtent.origin.y);
+  CGAffineTransform expandedCTM = CGAffineTransformMake(scale, 0, 0, -scale, px - x0, (double)nh + y0 - py);
+  if (!withinDeadline() || !native.makeExact(nw, nh, scale, budget, &expandedCTM) || !withinDeadline()) return NO;
   UIGraphicsPushContext(native.context);
   @try { [view cocolonPiecePaintGlyphRange:glyphs]; }
   @finally { UIGraphicsPopContext(); }
   CGRect nativeCells;
   if (!PieceScanPixels(native, withinDeadline, YES, &nativeCells)) return NO;
-  const double projectedLeft = floor((CGRectGetMinX(nativeCells) + x0) / scale + phase.x) - phase.x;
-  const double projectedTop = floor((CGRectGetMinY(nativeCells) + y0) / scale + phase.y) - phase.y;
-  const double projectedRight = ceil((CGRectGetMaxX(nativeCells) + x0) / scale + phase.x) - phase.x;
-  const double projectedBottom = ceil((CGRectGetMaxY(nativeCells) + y0) / scale + phase.y) - phase.y;
+  const double projectedLeft = floor((CGRectGetMinX(nativeCells) + x0 - px) / scale + phase.x) - phase.x;
+  const double projectedTop = floor((CGRectGetMinY(nativeCells) + y0 - py) / scale + phase.y) - phase.y;
+  const double projectedRight = ceil((CGRectGetMaxX(nativeCells) + x0 - px) / scale + phase.x) - phase.x;
+  const double projectedBottom = ceil((CGRectGetMaxY(nativeCells) + y0 - py) / scale + phase.y) - phase.y;
   CGRect projected = CGRectMake(projectedLeft, projectedTop, projectedRight - projectedLeft, projectedBottom - projectedTop);
   CGImageRef expandedImage = PiecePixelsImage(native), clippedImage = NULL;
   CALayer *reference = nil;
@@ -443,16 +478,15 @@ static BOOL PieceNativeAndLayerInk(RCTTextView *view, NSRange glyphs, CGRect tex
   BOOL reservedBits = NO;
   @try {
     if (!expandedImage) return NO;
-    reference = PieceReferenceLayer(expandedImage, (CGRect){CGPointZero, nativeExtent.size}, view.layer);
+    reference = PieceReferenceLayer(expandedImage, (CGRect){CGPointZero, filteredExtent.size}, view.layer);
     CGRect filtered;
     if (!reference || !PieceCompositePixels(reference, logicalExtent, 1,
-        CGPointMake(phase.x + nativeExtent.origin.x, phase.y + nativeExtent.origin.y), phase, budget, withinDeadline, &filtered)) return NO;
+        CGPointMake(phase.x + filteredExtent.origin.x, phase.y + filteredExtent.origin.y), phase, budget, withinDeadline, &filtered)) return NO;
     *nativeInk = CGRectUnion(projected, filtered);
-    if (!withinDeadline() || !clipped.make(view.bounds.size, scale, budget) || !withinDeadline()) return NO;
-    // Clip the SAME native-grid paint BEFORE filtering, including fractional
-    // UIKit view bounds (Yoga heights can be one float ULP off a pixel edge).
-    // Cropping a pre-rasterized cell cannot reproduce a fractional glyph clip.
-    CGContextClipToRect(clipped.context, view.bounds);
+    if (!withinDeadline() || !clipped.makeExact(vw, vh, scale, budget, &naturalCTM) || !withinDeadline()) return NO;
+    // Replay the observed natural bitmap grid and clip, rather than assuming
+    // ceil(bounds*S) or discarding UIKit's fractional CTM translation.
+    CGContextClipToRect(clipped.context, [grid[@"clip"] CGRectValue]);
     UIGraphicsPushContext(clipped.context);
     @try { [view cocolonPiecePaintGlyphRange:glyphs]; }
     @finally { UIGraphicsPopContext(); }
@@ -468,10 +502,10 @@ static BOOL PieceNativeAndLayerInk(RCTTextView *view, NSRange glyphs, CGRect tex
       PieceOwnedPixels compared;
       if (!withinDeadline() || !compared.make(view.bounds.size, scale, budget) || !withinDeadline()) return NO;
       [reference renderInContext:compared.context];
-      for (size_t y = 0; y < vh; y++) {
+      for (size_t y = 0; y < ch; y++) {
         if (!withinDeadline()) return NO;
-        for (size_t x = 0; x < vw; x++) if (compared.data[y * compared.stride + x * 4 + 3] > 0) {
-          size_t index = y * vw + x; bits[index / 8] |= (UInt8)(1 << (index % 8));
+        for (size_t x = 0; x < cw; x++) if (compared.data[y * compared.stride + x * 4 + 3] > 0) {
+          size_t index = y * cw + x; bits[index / 8] |= (UInt8)(1 << (index % 8));
         }
       }
     }
@@ -481,10 +515,10 @@ static BOOL PieceNativeAndLayerInk(RCTTextView *view, NSRange glyphs, CGRect tex
       PieceOwnedPixels actual;
       if (!withinDeadline() || !actual.make(view.bounds.size, scale, budget) || !withinDeadline()) return NO;
       [view.layer renderInContext:actual.context];
-      for (size_t y = 0; y < vh; y++) {
+      for (size_t y = 0; y < ch; y++) {
         if (!withinDeadline()) return NO;
-        for (size_t x = 0; x < vw; x++) {
-          size_t index = y * vw + x;
+        for (size_t x = 0; x < cw; x++) {
+          size_t index = y * cw + x;
           if ((actual.data[y * actual.stride + x * 4 + 3] > 0) != ((bits[index / 8] & (1 << (index % 8))) != 0)) return NO;
         }
       }

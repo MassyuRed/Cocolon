@@ -23,6 +23,9 @@ static inline dispatch_queue_t RCTGetUIManagerQueue(void) { return dispatch_get_
 @property(nonatomic, strong) NSTextStorage *fixtureStorage;
 @property(nonatomic) CGRect fixtureContentFrame;
 @property(nonatomic) BOOL fixtureAttached;
+@property(nonatomic, strong) NSDictionary *fixturePaintGrid;
+- (NSDictionary *)cocolonPiecePaintGrid;
+- (void)cocolonPieceRecordPaintGrid;
 - (void)cocolonPiecePaintGlyphRange:(NSRange)glyphs;
 - (BOOL)cocolonPieceIsPlainText;
 @end
