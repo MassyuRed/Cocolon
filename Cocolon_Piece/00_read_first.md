@@ -3299,3 +3299,54 @@ source87335f4ff489389a75857f90e7fb3f93367ce153／tree8846d921d8174bb9f9a3332380d
 新V4の唯一の成功はempty_alphaの合成検査。正常想定8件と、正常controlを前提にする拒否・snapshot・token等11件は失敗した。各拒否faultへ到達した合格とは扱わない。standaloneには具体的な拒否stage/code比較詳細がなく、snapshot/alpha/A同値/資源のどれが直接原因かはこの集計から確定しない。旧A同値・新V4 pixel忠実性を証明したとは扱わない。
 
 実RN13条件とPNG、iOS export library compileは同runで継続中。今回checkpointへ完了4jobの元decodedログ、jobs metadata、独立native集計を可逆保存した。新候補は未採用STOPとし、source/test/workflow追加修正・同source再実行0。残る同run原物の回収と最終結果記録だけを続ける。通常保存/本人再表示・正式admissionは未完了、automatic_progression=false。
+
+
+### 94.6 最終結果：承認単位完了、CI failure、新候補未採用STOP
+
+§93へのMash明示承認に従い、旧候補を保持した出力logical1比較の別候補を実装し、新source87335f4ff489389a75857f90e7fb3f93367ce153で[CI39683393855 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39683393855)を一度だけ実行した。2026-10-21T22:01:33Z開始→22:23:32Z最終更新、全6job完了・総合failure。実装と一回検証の承認単位は完了したが、品質条件は未達で新候補未採用。結果後のsource/test/workflow修正0、同source再実行0、追加CI0を維持する。§94.5の「継続中」は当時の途中記録であり、現在は終了済みである。
+
+| job | 最終結果・成立範囲 |
+|---|---|
+| piece-rn-contracts | success、JS949 PASS/FAIL0/SKIP0/CANCEL0、9,990.680848ms |
+| piece-android-source | success、native source回帰 |
+| piece-export-android | success、既存export依存4library実compile、BUILD SUCCESSFUL |
+| piece-export-pods | success、既存export依存4Pods実compile、Podfile.lock元blob c11ea8959571227856f67f2f631047924be0861dに一致 |
+| piece-ios-source | failure、syntax/patch compileは成功、旧native175 PASS、新V4は1PASS/19FAIL |
+| piece-ios-rn-canvas | failure、実RN host build成功、XCTest実行失敗。元13reportとPNG5を回収 |
+
+nativeは195unique中176PASS/19FAIL、重複0。旧129（内包97）＋旧V9 46＝175は全成功。新20の唯一の成功はoutput_v4_empty_alphaで、正常8条件と正常controlを前提とする11条件は失敗した。拒否faultの成功へ付け替えず、A旧V2同値・S2/S3・phase・union・opacity0.8・clip trap・資源/版/tokenの成立を主張しない。旧V3の20は今回profileで明示未実行、旧10FAILと原物・helper・期待値を保持する。standalone main→最終summaryは42.039325秒/元90秒内だが、終了status0は検査成功を意味しない。standaloneには呼出し別stageがなく、その19FAIL原因をRNのstageから一括確定しない。
+
+元13names/順序/入力とsaved DTOを保持し、strict JSON13件を保存した。結果は次の通り（elapsedはreport値で、完成captureまでの成功時間ではない）。
+
+| 元name | phase | elapsed ms | PNG |
+|---|---|---:|---|
+| essay_paragraphs | unavailable | 2390.151 | なし |
+| quote_unicode | unavailable | 368.577 | なし |
+| declaration_no_brand | unavailable | 471.464 | なし |
+| essay_max420 | unavailable | 5533.348 | なし |
+| saved_essay_canvas | native_checked | 699.256 | あり |
+| suffix_latin_ligature | unavailable | 252.987 | なし |
+| suffix_arabic | unavailable | 286.411 | なし |
+| suffix_max420_a | unavailable | 3075.043 | なし |
+| suffix_spaces_raw | measurement_unavailable | 448.760 | あり |
+| suffix_hebrew_raw | measurement_unavailable | 157.187 | あり |
+| suffix_mixed_bidi_raw | measurement_unavailable | 169.607 | あり |
+| containment_native_clip_trap | measurement_unavailable | 156.210 | あり |
+| containment_branding_opacity08 | unavailable | 219.171 | なし |
+
+新preview8はすべてunavailableで完成PNG/fit0。旧saved1だけが元版のままnative_checked/native_canvas_valid=true、raw3＋trap1はmeasurement_unavailable/native_canvas_valid=false。Card9件のcanSave/canExport/save_fit_currentはすべてfalse。全13のblocksと元fixtureは一致、Card9のplan_groups連結も一致し、raw4のnative_texts/rows/blocksも元文字列と一致した。raw4のbody_preserved=falseは既存catchの固定flagであり、本文改変を観測したという意味ではない。一方、新完成画像がないため表示の本文忠実性は未証明である。
+
+実RN native境界62件は全local/rejected、tuple重複0、診断identity一致、placed成功0。その61件はstage83（原native806行）のclipped独立参照と自然Text layerのlogical1全cell alpha>0占有不一致。独立非clip描画/scan、B公開filter合成、clipped参照/scan/bitset、自然layer描画/scanまでは到達している。不一致x/y、actual alpha、参照bit/alpha、比較geometry operandは原物にないため、位相・filter・丸め等の単一原因や具体修正箇所を断定しない。snapshot/CGImage仮定/自然bitmap照会/確保/期限失敗へ読み替えない。
+
+残るquote_unicodeのtag139/80ptの1件はstage15、raster failure mask256。3481×1285＝4,473,085画素が元4,194,304上限を超える。各辺4096と32MiBの超過ではない。どのRasterPlan呼出しかを専用fieldで記録しておらず、寸法からの推論と確定事項を分ける。62件すべての記録済み自然snapshotはpresent/paint_complete/stable_mask0と属性・storage・bounds・frame・scale一致で、旧V3 snapshot複合失敗の原因解明を今回へ流用しない。JS trace snapshotの31rejected＋31pendingに対しnative原境界は62callback完了しており、pendingを孤児化/timeoutと断定しない。
+
+全13のreport elapsedは8秒未満（最大5,533.348333ms）だが、早いunavailableを8秒内成功/420成功/実RN最終fitのmonotonic保証とはしない。A/B/Cの製品union・全画素一致・clip trap overflow検出・branding0.8成立・新画像品質も未証明である。
+
+PNG5の原bytes SHA256と全RGBAを前回contents-grid結果へ照合し、5枚すべて完全一致。root華恋が5枚contact sheetと旧saved原画像を目視した。旧savedは元5本文行とbrandingを表示し、raw4はnative Textを表示するが、新候補成功のcreditにはしない。原zip59,523,256byte/1020member（完全な元xcresultを含む）のSHA256はccfd99e62ea378a22ea50dd81a082f115c5295966749b94404becee870fd49e8でGitHub digestに一致し、有効期限を持つActionsコピーとは別に保存済み。全memberのbytes/SHA256台帳、全6job元ログ、元results.json、原PNG5、xcodebuild.log、元xcresult root JSON、診断stage map、独立レビュー2件、原Pod lock zipを既存manifestのfinal_evidence_bundleへ可逆保存した。XCTestは1method/1failed、59failure summariesで、13fixtureを13test methodへ加算しない。
+
+今回最後の同期は既存資料5pathのみ、STRUCTURE_MAP_DELTA_NONE。15source/test/workflowはsource87335f4fのbytesと一致確認済み。追加dependency/service/flags/env/deploy/main merge、API/DB/SQL/user rows/業務RPC操作0。補助2担当はread-only、root華恋のみ結果資料を同期した。同時pushのphase6-contract-guardsはrun39683393854のcontract-guards 1job successであり、追加Piece検証や複数jobとは数えない。
+
+PRIMARY_OUTCOME=BLOCKER_NARROWEDは「画像占有不一致61件と画素数上限1件を区別し、旧snapshot/opaque CGImage原因の流用を避けた」範囲だけ。商品品質credit0、DETOUR_RISK_STOPを維持する。次の未完exact1は既存logical1参照合成と自然layerの対応を直接修復する具体案の設計であり、現原物だけでは原因/修正箇所が一意でなく、修復案未成立・未実装・未実行。同source再実行、追加診断family、比較許容差/上限緩和、別helperへの迂回を自動開始しない。通常保存→本人再表示・正式admission・写真保存/共有・物理実機受入れは未完了、10/22保存目標未達のまま。bounded_work_complete=trueとvalidation_success=falseを区別し、formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=falseを維持する。
+
+
+結果保存時の補足：9,828,497byte版manifestの全文取得はTransport closedで失敗し、branchへは反映しなかった。過去診断と前回contents-gridの二つの原物bundleだけを、全文照合済みv122固定commit0ef6a57e11c1c020421995ddcf846d16eab09a94／blob e0295a73124b009f5555bf79c7d15585088c6e3cのJSON pointerへ置き換えた。圧縮bytes/SHA256/member数と原bytesはGit履歴に保持し、今回のfinal原物bundleは不変更。製品・検査・workflowやCIには影響しない。

@@ -41725,3 +41725,12 @@ STRUCTURE_MAP_DELTA_PRESENT（既存owner内の別候補/独立比較座標/sour
 ## 2026-10-22 — Piece新V4 native失敗、実RN結果を回収中 途中：新V4 1PASS/19FAIL、実RN継続
 
 入口§94.5／manifest v122。同source87335f4f、一度CI39683393855 attempt1でJS949/Android source/Android export実compile成功。iOS syntax/patch成功、旧native175成功、新V4 1PASS/19FAIL（正常controlを含む）、計176unique PASS/19FAIL・重複0・旧V3 20未実行。main→summary42.039325秒/元90秒内。standalone拒否stageは未記録で原因を推定しない。実RN13/PNGとiOS exportは継続中、完了4job原ログを保存。新候補未採用、source/test/workflow固定/追加変更/同source再実行0、通常保存/正式admission未完了、automatic_progression=false。今回結果5資料のみ、STRUCTURE_MAP_DELTA_NONE。
+
+
+## 2026-10-22 — Piece出力logical1候補の一度CI終了、未採用 最終：実装＋一度CI完了、logical1新候補未採用STOP
+
+入口§94.6／manifest v123。同source87335f4fの唯一のCI39683393855 attempt1は全6job終了/failure。JS949・旧native175・Android source・export Android4library/Pods4library実compile成功。新V4は1PASS/19FAIL、計195unique＝176PASS/19FAIL、旧V3 20明示未実行。native main→summary42.039325秒/元90秒内。実RN13元names/順序/入力を保存したが、新preview8はunavailable/完成PNG0/fit0、旧saved1だけnative_checked、raw4はmeasurement_unavailable。Card9すべて保存/export/fitfalse。raw4のbody_preserved=falseは既存catchflagで、native Text元本文一致を別確認済み。
+
+native原境界62local拒否の61件はstage83の全logical1占有不一致、quote80ptの1件は3481×1285＝4,473,085画素/元4M超過（stage15/mask256、辺4096/32MiB超過ではない）。全62snapshot記録は一致。比較の差座標/alpha/geometry operand未記録で根因は未確定、standalone19FAILへ同原因を一括流用しない。早い拒否を8秒/420/最終fit成功へ換算しない。原PNG5は前回とbytes/全RGBA一致しroot目視済み、旧saved/raw表示を新候補成功に加算しない。全6元ログ・元13report/PNG5・stage map・xcresult root・独立レビュー・全archive member台帳をmanifestへ可逆保存、完全xcresultを含む原ZIP59,523,256byte/1020member/SHA256一致も保存済み。
+
+承認された実装/一度CIの単位は完了、validation_success=false/unadopted=true/DETOUR_RISK_STOPを維持。source/test/workflow固定、追加修正/同source再実行/追加CI0。次の未完exact1は既存logical1参照合成と自然layerの対応を直接修復する具体案の設計（案未成立、未実装・未実行）。正式admission/通常保存→同owner再表示/写真保存共有/実機受入れと10/22保存目標は未完了。今回結果5資料のみSTRUCTURE_MAP_DELTA_NONE、商品品質credit0、automatic_progression=false。
