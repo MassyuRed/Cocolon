@@ -3259,3 +3259,12 @@ native原境界62local拒否の61件はstage83の全logical1占有不一致、qu
 ##### 65.44.2 途中：5job完了、単体新V4は1PASS/19FAIL
 
 入口§96.4／manifest v127。同CI39692007906 attempt1、JS949PASS/Android source成功。iOS compile成功、旧native175PASS＋新V4 1PASS/19FAIL＝195unique、旧V3 20明示未実行、37.68472秒/90秒内。単体19FAIL原因は今回operand未取得のため未確定。export2job successはpath条件skipであり、4library実compile/Pod解決を今回成功扱いしない。既存guard1job success。元5job＋guardログ/metadata/native集計を可逆保存。実RN canvas/元13report/画像/operandは実行中。source固定、新counter1/上限1・rerun0、資料4fileだけSTRUCTURE_MAP_DELTA_NONE、商品品質credit0、通常保存/本人再表示未完了。
+
+
+##### 65.44.3 最終：原因調査＋CI一回終了、operand61件成立、製品失敗STOP
+
+入口§96.5／manifest v128。承認source a79773bdの唯一CI39692007906 attempt1は全6job終了/failure。JS949/旧native175/Android source成功、新V4 1PASS/19FAIL、旧V3 20明示未実行。export2jobはnative工程skipで新compile証拠なし。実RN元13names/順序/入力保持、新preview8 unavailable/PNG0/fit0、旧saved1 native_checked、raw4 measurement_unavailable。原PNG5は前回bytes/全RGBA一致・root目視済み。
+
+実境界62local拒否中stage83の61件は同call scalar全valid。最初の差は全61でactual alpha1〜9>0/参照非占有。自然bbox topは参照−1cell、heightは59件+2/2件+1、全bbox包含だが全mask包含は未証明。両contentsAreFlipped=true/geometryFlipped=false、scale3/opacity一致、q/CTM式残差0。反転flag不一致や一律Y移動だけで説明する根拠はなく、参照補間falseの因果/自然backing処理は未確定。残1件はquote80pt stage15、4,473,085pixel/4M超過、比較未到達。閾値/上限/期待値/期限の緩和0。
+
+全6元ログ＋guard1job元ログ、元report/PNG/map/xcresult root/全archive台帳/独立レビュー等を可逆保存。完全原ZIP58,482,322byte/994memberもSHA256一致で保存済み。旧run大bundleは全文照合済み固定98b0e3f0の同pointerへ保持。observation_success=trueと元CI/product failureを分離。原因調査の承認単位完了、新counter1/上限1・rerun0・source追加修正0、資料4のみSTRUCTURE_MAP_DELTA_NONE。BLOCKER_NARROWED・商品品質credit0、通常保存/本人再表示と10/22目標未完。直接修復案未成立・未実装、追加修復/CI/診断familyへ自動進行せず停止。

@@ -3448,3 +3448,41 @@ Mashは§95の「原因調査に限定し、この記録追加とCI一回を進�
 export-android/export-podsはjob successだが、今回差分がrunnerだけのため、既存path条件で依存install/4library実compile/Pod解決/Podlock artifactをskipした。今回は新しいexport compile成功証拠がない。既存phase6 run39692007783のcontract-guards 1jobはsuccess。完了5jobとguardの元decoded logsはBOM/CR/LFを含め無変換bytesで回収し、job metadata/単体native集計とともにmanifestへ可逆保存・全member hash照合した。
 
 実RN canvas jobはまだ実行中で、13report/5PNG/今回operandの取得と有効性は未確定。新counter1/上限1、rerun0、source追加修正0を維持して結果回収だけを続ける。資料4fileのみ、STRUCTURE_MAP_DELTA_NONE、商品品質credit0、通常保存/本人再表示未完了、automatic_progression=false。
+
+
+### 96.5 最終：原因調査限定＋一度CI終了、61件のscalar観測成立、製品失敗STOP
+
+Mash承認の§95/§96に従い、承認runnerだけをsource a79773bdfa1ea0bd8b929c2a7ceb5ab9a470cfa9へ反映し、[CI39692007906 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39692007906)を一度実行した。2026-10-21T23:13:35Z開始→23:38:39Z最終更新、全6job完了/総合failure。新診断counter1/上限1・Actions rerun0、source追加修正0。旧run39683393855/counter1/failureは保持。原因調査の承認単位は完了し、追加修復/追加CIへ進まず停止する。§96.3〜4の継続中表記は途中記録である。
+
+| 元job | 最終結果と成立範囲 |
+|---|---|
+| piece-rn-contracts | success、JS949PASS/0FAIL/0SKIP/0cancel、16,371.395362ms |
+| piece-android-source | success、既存native source compile |
+| piece-export-android | success、既存path条件でnative compile等skip。今回の4library実compile証拠なし |
+| piece-export-pods | success、既存path条件でPod解決/compile/artifact skip。今回の新Pod lockなし |
+| piece-ios-source | failure、source compile成功、旧175PASS＋新V4 1PASS/19FAIL＝195unique。旧V3 20明示未実行 |
+| piece-ios-rn-canvas | failure、instrumented実RN host build成功、XCTest1method/1failed/59failure summaries。元13report/PNG5を回収 |
+
+単体nativeのmain→summary37.68472秒/元90秒内、唯一の新PASSはoutput_v4_empty_alpha。正常controlを前提とするfault検査など19FAILを成功へ付け替えず、呼出し別operandのない単体19件へ実RNの原因を一括流用しない。
+
+#### 96.5.1 今回実際に得たoperandと、原因として言える限界
+
+native原境界は実数62件、全local/rejected、unique tuple62、placed成功0。stage83が61件、stage15が1件で、前回分母を固定せず原物から集計した。stage83の61件は全件で同call identity、available/first_mismatch_present、整数indices/正寸法、alpha uint8、参照bool、占有不一致、有限geometryが成立し、独立担当とrootの照合に矛盾0。元104guard/3resetと製品preimageに対応する診断map/postimage SHAも承認案と完全一致した。observation_success=trueはこのscalar取得だけを指し、元CI/新preview/fit成功とは分ける。
+
+61件すべての最初の不一致はactual alpha1〜9>0に対してreference_occupied=false。自然側bbox topは参照よりlogical1cell上にあり、height差は59件+2・2件+1、全61で自然側bboxが参照bboxを包含した。例：essay_paragraphs/tag59/48ptは1082×271比較gridのcell(243,114)、actualAlpha1/参照非占有。参照bbox[99,115,399,42]に対し自然bbox[99,114,399,44]（形式[x,y,width,height]）。bbox包含は全maskのpointwise包含を証明しない。
+
+全61でcontentsAreFlippedは自然/参照ともtrue、geometryFlippedはともfalse、contentsScaleとも3、opacity同値（57件1、4件0.800000011920929）。観測済みq格子/native extent/paint CTM式は再計算残差0で、ty符号や両側の反転flag不一致は今回の値からは示されない。参照のCGImage shouldInterpolate=falseは実測したが、opaque自然backingの同flag・実寸・形式やrendererの優先処理は取得していない。全体を一律Y移動するだけではbbox height差を説明できない一方、補間・filter・再標本化・自然backing写像等のどれが根因かは一意未確定である。alpha1〜9も元のalpha>0契約では占有であり、閾値変更・1px水増し・許容差追加で合格へ置換しない。新たな製品修復案は選定/実装/実行していない。
+
+比較前のquote_unicode/tag139/80ptの1件はstage15/mask256、3481×1285＝4,473,085pixelで元4,194,304超過。4096辺/32MiB超過ではない。output_grid_comparison={}は未到達で、0座標・透明alpha・差なしの観測へ読み替えない。全62の記録済みnatural snapshotはpresent/paint_complete/stable_mask0と属性/storage/bounds/frame/scale一致を維持する。
+
+#### 96.5.2 元13条件・画像・期限・原物保存
+
+strict JSON13件、元names/順序/blocks/観測入力projectionは前回と一致。新preview8は全unavailable、完成PNG0/fit0。旧saved1のみ元v3/native_checked（401.311917ms）、raw/trap4はmeasurement_unavailable。Card9のcanSave/canExport/save_fit_currentはfalse。raw4のbody_preserved=falseは既存catchflagで、native Textの元文字列一致を別確認した。saved DTO全体はreportにserializeされないため、元fixture/helper/entryのbytes一致による構築不変と実測した旧版/blocks/flagsを区別する。
+
+全13のreport elapsedは8秒未満、最大4250.887msだが、新previewの8秒内完成/420成功/実RN最終fit保証は成立しない。62dispatchは期限前でcase内dispatch/adapter expiryは同一、観測できた36callbackは期限前。JS traceのpending26はsnapshot上の時刻欠測であり、別採取native境界62callbackの完了拒否と区別し、孤児化やtimeoutと断定しない。Card自身の開始時刻は未出力で8秒起点そのものの実測証明もない。元8秒/90秒/4096辺/4Mpixel/32MiBと比較式/期待195/入力/20field wire/version/tokenを維持した。
+
+原PNG5のbytesと全RGBAは前回と完全一致。root華恋が5枚contact sheetと旧saved原画像を目視し、旧5本文行/brandingとraw表示を確認した。新候補の画像忠実性や計測成功には加算しない。完全xcresult入り原ZIP58,482,322byte/994member、SHA256 6c71aa2ea0c4c458069fb7f2505154e0998a5f1698a3456959e774635fb86389はGitHub artifact digestに一致し、原bytesを保存済み。元6job＋既存guard1jobのdecoded logs、元13report/PNG5/xcodebuild.log/Info.plist、timestamp prefixだけを除いたxcresulttool root JSON、診断map、全archive member台帳、独立レビュー3件/root解析/保存identityをmanifest final_evidence_bundleへ可逆保存し、全member bytes/hashの復号一致を確認した。
+
+前回実装runのfinal/途中bundleと今回途中bundleの3件は、全文照合済み固定commit98b0e3f026977c766aa25bd1a8d3e87993fcfe5c/blob ee718a072773777d4497e48b95f11e1183332e41内の同JSON pointerへ置換し、元圧縮hash/bytes/member数を保持した。元bytesはGit履歴に残り、今回の完全原物bundleは直接内包する。現在のsource/test/workflow15pathがCI開始時と一致し、API head a536e50e不変も確認した。同pushの既存phase6 run39692007783はcontract-guards 1job successであり、Pieceの追加診断CIへ加算しない。
+
+今回最終同期は資料4fileのみ、STRUCTURE_MAP_DELTA_NONE（既存test-only scalar補足以外の実構造不変）。07は本単位の更新対象外。root華恋だけがwriter、補助3担当はread-only。DB/SQL/user rows/API/本番/配布/main操作0。PRIMARY_OUTCOME=BLOCKER_NARROWEDは「境界supportの差を実測し、単なる反転flag不一致/一律Y移動だけでは説明できないことを区別した」範囲で、商品品質credit0。次の未完exact1は、この出力alpha support差を生む既存参照合成と自然layer対応の直接修復案の設計。根因/検証済み修正案は未成立で、追加診断family・同source再実行・次CIへ自動進行しない。通常保存→同owner再表示・admission・写真保存共有・実機受入れと10/22保存目標は未完了。bounded_work_complete=true、formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=falseを維持して停止する。
