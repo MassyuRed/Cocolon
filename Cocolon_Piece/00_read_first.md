@@ -3285,3 +3285,8 @@ Mashは直前の「旧候補を保持し、出力画像の座標で全画素比�
 sourceをGitHubへ反映・全20file読戻し確認後、同sourceの既存push CI一回の完了を待つ。元13names/入力/saved DTOを保持し、新候補のrow/branding/source/token/fit/画像/実経過とraw/trap/opacity0.8を確認する。native新profile195、実RNの各対応条件、full alpha比較、資源/期限/原文保持のどれかが未達なら未採用STOP。同source再実行・結果後source/test/workflow追加修正・追加診断CIは0。
 
 CIの全job原ログ・元report・PNG・xcresultの取得可能な原物を既存manifestへ保存し、結果を同じownerへ追記して終了する。現時点CI未実行、画像成立/正式admission/商品合格/通常保存・再表示の成功は主張しない。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=falseを維持する。10/22保存・10/23共有の目標も達成扱いしない。
+
+
+### 94.4 途中checkpoint：source全20file読戻しと一度CI開始
+
+source87335f4ff489389a75857f90e7fb3f93367ce153／tree8846d921d8174bb9f9a3332380df349f74314215をPR30へ反映し、全20fileをGitHubから全文取得してlocal bytes/blob SHAと一致確認した。一度の[CI39683393855 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39683393855)は同sourceで実行中。以後製品/test/workflowを固定し、source追加修正・同source再実行0を維持する。local949 PASSはCIの結果や実RN13条件へ換算しない。全6jobと実PNG/fit/期限はこのcheckpoint時点で未確定。今回のreadbackと実run identityを継続記録し、完了後に同じ単位へ結果を追記する。候補未採用、正式admission/通常保存・本人再表示は未完了、automatic_progression=false。

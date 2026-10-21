@@ -1,14 +1,14 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v120",
+  "schema_version": "cocolon.piece.workstream_manifest.v121",
   "generated_at": "2026-10-22 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v119",
-    "predecessor_head": "7ce4426b552d5ffe2276c70b30489db01df6344c",
-    "carry_forward": "Mash explicitly approved section93. Implement distinct V4; retain prior V3 source and failed evidence; exactly one source CI follows full source readback.",
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v120",
+    "predecessor_head": "87335f4ff489389a75857f90e7fb3f93367ce153",
+    "carry_forward": "Source20 full readback and sole source CI identity recorded; no source edits/rerun.",
     "immutable_prior_evidence_references": [
       {
         "format": "git-commit-json-pointer",
@@ -50,17 +50,17 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "026b149c02a2b8a49d68204fda5d9762ab17511c",
-    "raw_sha256": "3350201446477f15377906baa88901b205ead9a286ed3a087279abf16fae4ddb",
-    "utf8_bytes": 508232,
-    "chars": 302008
+    "git_blob_sha1": "29ad9b2f7f4063efd3ccf5e34606f6229b6278fa",
+    "raw_sha256": "66553f4446965382b2f8661ff14e47de4cecfce4de1581bf3bb372cdff8697c6",
+    "utf8_bytes": 509076,
+    "chars": 302544
   },
   "current_premise": {
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
-    "git_blob_sha1": "3a5933f01854440f86cf3c0c47ce09cf75eb9697",
-    "raw_sha256": "f6e852d60f184dc5c93c3effaa7b97240959702ce568eb394ad286d2008f282c",
-    "utf8_bytes": 513399,
-    "chars": 299899
+    "git_blob_sha1": "2f364a86774ad3887e15a6bb7e7e00d3e49d3b2c",
+    "raw_sha256": "a015d415f942679fd14dc7d8ea985b496a4723ce4113e5c168495f7516c420cf",
+    "utf8_bytes": 513907,
+    "chars": 300228
   },
   "product_definition": {
     "user_facing_name": "Piece",
@@ -355,12 +355,12 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "PIECE_WORK_ALLOWED",
-    "state": "MASH_APPROVED_OUTPUT_GRID_V4_SOURCE_PREPARED__ONE_CI_PENDING",
-    "current_map_section": "65.42",
-    "current_entry_section": "94",
+    "state": "MASH_APPROVED_OUTPUT_GRID_V4_ONE_CI_IN_PROGRESS_SOURCE_FROZEN",
+    "current_map_section": "65.42.1",
+    "current_entry_section": "94.4",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
-    "weekly_review_section": "5.6.22",
-    "first_unfinished_work": "承認済み§94新source全20fileをGitHub読戻し後、同source push CI一回の全job/13report/PNG/fit/原8秒を回収し結果記録する。未達は未採用STOP、source追加修正・同source再CI0。正式admission/通常保存へ自動進行しない。",
+    "weekly_review_section": "5.6.22.1",
+    "first_unfinished_work": "同source87335f4fの一度CI39683393855 attempt1を完了まで確認し、全6job原ログ/元13report/PNG/fit/期限を保存する。source/test/workflow固定、追加修正/再実行0。",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 6,
@@ -541,10 +541,10 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "3a5933f01854440f86cf3c0c47ce09cf75eb9697",
-    "raw_sha256": "f6e852d60f184dc5c93c3effaa7b97240959702ce568eb394ad286d2008f282c",
-    "utf8_bytes": 513399,
-    "chars": 299899
+    "git_blob_sha1": "2f364a86774ad3887e15a6bb7e7e00d3e49d3b2c",
+    "raw_sha256": "a015d415f942679fd14dc7d8ea985b496a4723ce4113e5c168495f7516c420cf",
+    "utf8_bytes": 513907,
+    "chars": 300228
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -717,44 +717,23 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "MASH_APPROVED_OUTPUT_GRID_V4_SOURCE_AND_DOCS",
+    "classification": "OUTPUT_GRID_V4_SOURCE_READBACK_AND_RUNNING_CI_CHECKPOINT_DOCS_ONLY",
     "paths": [
-      ".github/workflows/piece-rn-contracts.yml",
-      "components/piece/PieceVisualCard.js",
-      "features/piece/pieceLayout.js",
-      "features/piece/pieceMeasuredWrap.js",
-      "features/piece/pieceRenderer.js",
-      "ios/tempCocolon/PieceTextMetrics.mm",
-      "patches/react-native+0.77.3.patch",
-      "tests/native/piece-ios-react-shim.h",
-      "tests/native/piece-rn-canvas-entry.js",
-      "tests/native/piece-rn-canvas-fixtures.cjs",
-      "tests/native/piece-rn-canvas-ios.m",
-      "tests/native/piece-text-metrics-ios.mm",
-      "tests/native/run-piece-rn-canvas-ios.sh",
-      "tests/piece-v2-measured-wrap.test.js",
-      "tests/piece-v2-renderer.test.js",
       "Cocolon_Piece/00_read_first.md",
       "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
       "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
       "Cocolon_前提資料/07_latest_snapshot_diff.md",
       "Cocolon_Piece/manifest.json"
     ],
-    "product_source_changes": 6,
-    "test_source_changes": 8,
-    "workflow_changes": 1,
-    "documentation_changes": 5,
+    "source_commit": "87335f4ff489389a75857f90e7fb3f93367ce153",
+    "ci_run": 39683393855,
+    "product_source_changes": 0,
+    "test_source_changes": 0,
+    "workflow_changes": 0,
     "new_files": 0,
-    "ci_executions": 0,
+    "new_ci_executions": 0,
     "same_source_reruns": 0,
-    "api_changes": 0,
-    "live_database_query": 0,
-    "live_database_apply": 0,
-    "business_rpc": 0,
-    "deploy": 0,
-    "main_merge": 0,
-    "structure_map": "STRUCTURE_MAP_DELTA_PRESENT",
-    "product_acceptance": false,
+    "structure_map": "STRUCTURE_MAP_DELTA_NONE",
     "automatic_progression": false
   },
   "b06_q3_context_fence": {
@@ -84305,7 +84284,7 @@
     }
   },
   "ios_preview_output_grid_implementation_20261022": {
-    "state": "SOURCE_PREPARED_CI_NOT_EXECUTED",
+    "state": "ONE_CI_IN_PROGRESS_SOURCE_FROZEN",
     "base_head": "7ce4426b552d5ffe2276c70b30489db01df6344c",
     "api_head": "a536e50ee284785f585ac73329ef2947dca8bba9",
     "approval": "Mash explicitly approved section93: 進めていいよ。",
@@ -84498,7 +84477,7 @@
     },
     "implementation_started": true,
     "source_prepared": true,
-    "ci_executions": 0,
+    "ci_executions": 1,
     "ci_execution_limit": 1,
     "same_source_reruns": 0,
     "source_edits_after_ci": 0,
@@ -84514,6 +84493,114 @@
       "natural backing reconstruction and nativeS equivalence are not claimed",
       "snapshot6 and actual alpha/quote/resource/deadline outcomes await one CI",
       "final JS fit is monotonic-bounded; no absolute native finish/CA internal execution-time guarantee claimed"
-    ]
+    ],
+    "source_commit": "87335f4ff489389a75857f90e7fb3f93367ce153",
+    "source_tree": "8846d921d8174bb9f9a3332380df349f74314215",
+    "source_full_readbacks": [
+      {
+        "path": ".github/workflows/piece-rn-contracts.yml",
+        "sha": "d03e30af1ca88f5f2fb7e9f67deceae57c540ec9",
+        "full_text_match": true
+      },
+      {
+        "path": "Cocolon_Piece/00_read_first.md",
+        "sha": "026b149c02a2b8a49d68204fda5d9762ab17511c",
+        "full_text_match": true
+      },
+      {
+        "path": "Cocolon_Piece/manifest.json",
+        "sha": "0513f681892308f6df3fc2c5a7a7e84ae970e329",
+        "full_text_match": true
+      },
+      {
+        "path": "Cocolon_前提資料/07_latest_snapshot_diff.md",
+        "sha": "d468aff85751b72304b6ccfb2dae1dc367c11ec0",
+        "full_text_match": true
+      },
+      {
+        "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+        "sha": "3a5933f01854440f86cf3c0c47ce09cf75eb9697",
+        "full_text_match": true
+      },
+      {
+        "path": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
+        "sha": "7f708f74ebdd87f7d992851cabc7f8c8d0182b32",
+        "full_text_match": true
+      },
+      {
+        "path": "components/piece/PieceVisualCard.js",
+        "sha": "4e697848c5419002d6dfa08a4e0b145ddabd8a51",
+        "full_text_match": true
+      },
+      {
+        "path": "features/piece/pieceLayout.js",
+        "sha": "6c1762941c7f9ebff0d25cbd3e3af4760b90c783",
+        "full_text_match": true
+      },
+      {
+        "path": "features/piece/pieceMeasuredWrap.js",
+        "sha": "a70a64163cce0901385f41fb5efd5da964924de8",
+        "full_text_match": true
+      },
+      {
+        "path": "features/piece/pieceRenderer.js",
+        "sha": "a7d87b3667d439ac401d14ab2a0f0d9c476c2988",
+        "full_text_match": true
+      },
+      {
+        "path": "ios/tempCocolon/PieceTextMetrics.mm",
+        "sha": "de2858c9ab0bbe0b7def729bf47922d014cc85d4",
+        "full_text_match": true
+      },
+      {
+        "path": "patches/react-native+0.77.3.patch",
+        "sha": "8b7fa011817606394fd1d56b82b8559c5faf1f38",
+        "full_text_match": true
+      },
+      {
+        "path": "tests/native/piece-ios-react-shim.h",
+        "sha": "4ee69c778e52e68a11a73d543e88c385396ebc03",
+        "full_text_match": true
+      },
+      {
+        "path": "tests/native/piece-rn-canvas-entry.js",
+        "sha": "39295e7333dec3de2c88473d730cce0a65fb843f",
+        "full_text_match": true
+      },
+      {
+        "path": "tests/native/piece-rn-canvas-fixtures.cjs",
+        "sha": "1966dba85fadb43dc103a2e50213f5654aa1ed32",
+        "full_text_match": true
+      },
+      {
+        "path": "tests/native/piece-rn-canvas-ios.m",
+        "sha": "c6011025bebfe4324c70c299ef6a0b0f6471b97b",
+        "full_text_match": true
+      },
+      {
+        "path": "tests/native/piece-text-metrics-ios.mm",
+        "sha": "ddf341cc1c7e79d70626c81b8c458d37ab52be3a",
+        "full_text_match": true
+      },
+      {
+        "path": "tests/native/run-piece-rn-canvas-ios.sh",
+        "sha": "fa39f2d246a7342a78bd9c6e59523fc23cd6d9e3",
+        "full_text_match": true
+      },
+      {
+        "path": "tests/piece-v2-measured-wrap.test.js",
+        "sha": "7580a70af38a6fe6e8f1d70df0a97a325bbe16de",
+        "full_text_match": true
+      },
+      {
+        "path": "tests/piece-v2-renderer.test.js",
+        "sha": "588d459872e9b632ce8f56ab9654077b7e4ae62e",
+        "full_text_match": true
+      }
+    ],
+    "ci_run": 39683393855,
+    "ci_attempt": 1,
+    "ci_status": "in_progress",
+    "ci_url": "https://github.com/MassyuRed/Cocolon/actions/runs/39683393855"
   }
 }
