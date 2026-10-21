@@ -1820,3 +1820,8 @@ native原境界62local拒否の61件はstage83の全logical1占有不一致、qu
 入口§96／manifest v125。Mashが§95の原因調査限定・記録追加＋CI一回と、診断専用CI/R1.5単独診断の今回限り例外を明示承認。旧counter1/failureを保持し、新counterは別管理する。承認runner19,974byte/SHA07700096…/blob2e2f952…を保存bundleから一致確認して適用、元nativeSHA6250785…/製品/patch/fixture/workflow/期待195/元13入力/全上限は不変更。test-only参照観測1＋first mismatch観測1、104guard/3resetと元比較/NO/paint/scan/buffer維持。
 
 新sourceの既存push CI一回だけ、compile/infra/記録不足でも再実行0。旧62call/61stage83を分母へ固定せず、同call identity/整数indices/alpha-bit不一致/有限geometryを実数で判定する。全job元ログ・元report/画像/map/原物保存後停止し、製品修復・次CIへ自動進行しない。現在CI未実行、観測取得・UIKit成功は未確認。runner1＋資料4の計5path、新tracked0、STRUCTURE_MAP_DELTA_NONE。商品品質credit0、P-W1通常保存/本人再表示は未完了、automatic_progression=false。
+
+
+##### 5.6.24.1 承認source全文照合、一度CI開始
+
+入口§96.3／manifest v126。source a79773bd/tree0b6d7acaの承認5path全remote全文一致。診断CI39692007906 attempt1は10/22 08:13:35 JST開始、新counter1/上限1、rerun0。旧run39683393855 counter1/failureは保持。全6jobと同call operand/元13report/画像は実行中・未確定。既存phase6 guard run39692007783は別のcontract-guards 1job。以後コード固定、結果回収・原物保存だけを続け、製品修復/再CI/採用へ自動進行しない。checkpoint資料4のみSTRUCTURE_MAP_DELTA_NONE、商品品質credit0、P-W1通常保存/本人再表示未完了。

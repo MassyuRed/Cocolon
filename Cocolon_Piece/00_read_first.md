@@ -3432,3 +3432,10 @@ Mashは§95の「原因調査に限定し、この記録追加とCI一回を進�
 診断の取得と元CIの合否を分ける。有効な同call identityのstage83 recordでavailable/first_mismatch_present、整数indices/寸法、alpha0〜255と参照boolの占有不一致、有限geometryを確認する。取得できた範囲を実数で記録し、値の相違だけで根因を断定しない。全6job元ログ・元report/取得PNG・診断map・取得可能原物を既存manifestへ保存したところで停止する。製品修復、次CI、admission、通常保存/本人再表示へ自動進行しない。
 
 現時点はtest source準備でCI未実行。STRUCTURE_MAP_DELTA_NONE（既存診断内のscalar補足だけ、製品構造不変）。DB/SQL/user rows/API/本番/配布/main操作0、商品品質credit0、formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。
+
+
+### 96.3 途中checkpoint：承認runnerの全文反映と一度CI開始
+
+新test source a79773bdfa1ea0bd8b929c2a7ceb5ab9a470cfa9/tree0b6d7aca004fd85967e71ad3bad1385ac3bafa95を反映し、変更集合が承認5pathだけであることと全5fileのremote全文一致を確認した。[CI39692007906 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39692007906)は同sourceのpushで2026-10-21T23:13:35Z（10/22 08:13:35 JST）に開始した。新診断counter1/上限1、Actions rerun0。旧§93/run39683393855のcounter1/failureを保持する。
+
+同pushの既存phase6_contract_guards run39692007783も起動し、contract-guards 1jobだけである。追加したworkflow/jobではなく、Pieceの診断結果へ合算しない。今回source pushを再送せず、以後runner/製品/patch/test/workflowを固定する。全6jobの元結果とoperandの取得・13report/画像はまだ未確定であり、元の合否と診断成立を分けて回収・保存だけを続ける。今回checkpointは結果資料4fileのみ、STRUCTURE_MAP_DELTA_NONE、商品品質credit0、通常保存/本人再表示は未完了、automatic_progression=false。
