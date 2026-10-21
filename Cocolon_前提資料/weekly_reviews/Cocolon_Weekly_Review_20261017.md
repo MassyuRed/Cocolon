@@ -1712,3 +1712,8 @@ local JS933全成功（元915＋新18、14.436秒）。native195/実RN13・PNG/�
 #### 5.6.17 2026-10-21 — 未実行の実RN13条件へ戻す最小test修復
 
 入口§89／map§65.37／weekly§5.6.17／manifest v108。前回test902の第2引数全体を括弧で囲む1行だけ修復。今回のMash明示続行指示＋current next workを根拠とする新しい限定単位で、旧失敗/閉鎖は不変。cppの修正前3引数エラー→修正後2引数展開と独立read-only reviewを確認。新source一度CIはsource時点で未実行。JS933/native195/実RN13/全画像・元8秒/90秒の実結果を確認し、未達なら未採用STOP。正式採用/通常保存・本人再表示は未完了。STRUCTURE_MAP_DELTA_NONE、製品/fixture/workflow/API/DB/runtime/依存/deploy/main変更0、automatic_progression=false。
+
+
+##### 5.6.17.1 途中結果：native195成功、実RN未確認
+
+入口§89.3／manifest v109。source fbf9c233eef738329456780b9fd1b79b89a78134/tree ea8517feの全6pathをGitHub全文照合。一度CI39544012216 attempt1でJS933 PASS/FAIL0/SKIP0/15,862.724ms、native195個別/195unique/重複0/FAIL0・4summary一致・launch0。main04:32:01.205044Z→最終summary04:32:32.348149Z＝31.143105秒で元90秒内。Android source成功、export2jobはscope skipによるsuccessで依存compileを今回実行したとは扱わない。実RNは継続中、13条件/PNG/8秒は未確認。5job原ログ・run/job metadata・独立集計をmanifestへ可逆保存。source/test/workflow追加変更・再CI0、STRUCTURE_MAP_DELTA_NONE、正式採用/通常保存・本人履歴は未完了、automatic_progression=false。
