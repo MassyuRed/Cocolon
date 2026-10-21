@@ -448,6 +448,54 @@ static NSDictionary *PieceReadPlacedLayer(id module, NSNumber *tag, NSString *te
   sample[@"observation_ms"] = PieceFinite((CACurrentMediaTime() - began) * 1000);
   return sample;
 }
+
+// Getter exists only in the scalar-instrumented disposable hosted-test app.
+@interface NSObject (PieceHostedDiagnosticRead)
+- (NSDictionary *)cocolonPieceDiagnosticState;
+@end
+static PieceSelectedV2Call PieceUnobservedSelectedV3Call;
+static NSMutableArray *PieceNativeV3BoundaryRecords;
+static NSUInteger PieceNativeV3BoundaryOrdinal;
+
+static void PieceRecordNativeV3Boundary(id module, NSDictionary *identity,
+    NSString *status, id wire, NSString *code, NSString *message) {
+  // The getter is called synchronously on the original native resolve/reject
+  // callback stack. Never dispatch it: TLS belongs to this executing thread.
+  @try {
+    id value=[module respondsToSelector:@selector(cocolonPieceDiagnosticState)]
+      ? [module cocolonPieceDiagnosticState] : nil;
+    NSDictionary *state=[value isKindOfClass:NSDictionary.class]?value:nil;
+    NSMutableDictionary *record=[identity mutableCopy];
+    record[@"native_status"]=status;record[@"callback_main_thread"]=@(NSThread.isMainThread);
+    record[@"diagnostic"]=state?:@{};
+    NSInteger expectedStage=[identity[@"stage"] isEqual:@"local"]?1:([identity[@"stage"] isEqual:@"placed"]?2:0);
+    record[@"diagnostic_identity_match"]=@(state && [state[@"enabled"] boolValue] &&
+      [state[@"tag"] isEqual:identity[@"tag"]] && [state[@"font_size"] isEqual:identity[@"font_size"]] &&
+      [state[@"request_stage"] integerValue]==expectedStage &&
+      [state[@"main_thread"] boolValue]==NSThread.isMainThread);
+    if([status isEqual:@"resolved"]){
+      record[@"raw_is_dictionary"]=@([wire isKindOfClass:NSDictionary.class]);
+      if([wire isKindOfClass:NSDictionary.class])record[@"raw_key_count"]=@([(NSDictionary *)wire count]);
+    }else{record[@"reject_code"]=code?:NSNull.null;record[@"reject_message"]=message?:NSNull.null;}
+    @synchronized(PieceNativeV3BoundaryRecords){[PieceNativeV3BoundaryRecords addObject:record];}
+  } @catch (__unused NSException *exception) {
+    // Observation failures never alter the original resolve/reject value.
+    NSLog(@"PIECE_V3_NATIVE_DIAGNOSTIC_OBSERVATION_FAILED");
+  }
+}
+static void PieceDiagnosticNativeV3Call(id module, SEL selector, NSNumber *tag, NSString *text,
+    double fontSize, NSDictionary *request, RCTPromiseResolveBlock resolve, RCTPromiseRejectBlock reject) {
+  NSUInteger ordinal;@synchronized(PieceNativeV3BoundaryRecords){ordinal=++PieceNativeV3BoundaryOrdinal;}
+  NSDictionary *identity=@{@"native_ordinal":@(ordinal),@"tag":tag?:NSNull.null,
+    @"font_size":@(fontSize),@"stage":request[@"stage"]?:NSNull.null,
+    @"canvas_tag":request[@"canvas_tag"]?:NSNull.null};
+  PieceUnobservedSelectedV3Call(module,selector,tag,text,fontSize,request,^(id wire){
+    PieceRecordNativeV3Boundary(module,identity,@"resolved",wire,nil,nil);resolve(wire);
+  },^(NSString *code,NSString *message,NSError *error){
+    PieceRecordNativeV3Boundary(module,identity,@"rejected",nil,code,message);reject(code,message,error);
+  });
+}
+
 static void PieceObservedSelectedV2Call(id module, SEL selector, NSNumber *tag, NSString *text,
                                       double fontSize, NSDictionary *request,
                                       RCTPromiseResolveBlock resolve, RCTPromiseRejectBlock reject) {
@@ -555,6 +603,18 @@ RCT_EXPORT_MODULE();
 + (BOOL)requiresMainQueueSetup { return NO; }
 - (dispatch_queue_t)methodQueue { return RCTGetUIManagerQueue(); }
 - (void)saveReport:(NSDictionary *)report {
+
+  // Both native capture and failed-card record use this same saveReport owner.
+  // Keep only the actual tags dispatched by this report's captured JS trace.
+  NSMutableSet *diagnosticTags=[NSMutableSet new];
+  for(NSDictionary *sample in report[@"trace"][@"native_selected_v3"]){
+    id tag=sample[@"tag"];if([tag isKindOfClass:NSNumber.class])[diagnosticTags addObject:tag];
+  }
+  NSArray *boundarySnapshot;@synchronized(PieceNativeV3BoundaryRecords){boundarySnapshot=[PieceNativeV3BoundaryRecords copy];}
+  NSMutableArray *boundaries=[NSMutableArray new];
+  for(NSDictionary *sample in boundarySnapshot)if([diagnosticTags containsObject:sample[@"tag"]])[boundaries addObject:sample];
+  NSMutableDictionary *withDiagnostics=[report mutableCopy];withDiagnostics[@"native_original_boundary_records"]=boundaries;
+  report=withDiagnostics;
   if ([report[@"name"] isEqual:@"suffix_arabic"]) {
     NSMutableDictionary *observed = [report mutableCopy];
     observed[@"native_selected_observations"] = [PieceArabicObservations copy] ?: @[];
@@ -868,7 +928,9 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
   XCTAssertNotEqual(pixelMethod, NULL); if (!pixelMethod) return;
   XCTAssertEqual(method_getNumberOfArguments(pixelMethod), 8u); if (method_getNumberOfArguments(pixelMethod) != 8u) return;
   IMP pixelIMP = method_getImplementation(pixelMethod);
-  PieceOriginalSelectedV2Call = (PieceSelectedV2Call)pixelIMP;
+  PieceNativeV3BoundaryRecords=[NSMutableArray new];PieceNativeV3BoundaryOrdinal=0;
+  PieceUnobservedSelectedV3Call = (PieceSelectedV2Call)pixelIMP;
+  PieceOriginalSelectedV2Call = PieceDiagnosticNativeV3Call;
   method_setImplementation(pixelMethod, (IMP)PieceObservedSelectedV2Call);
   IMP priorIMP = method_getImplementation(selectedMethod);
   PieceOriginalSelectedCall = (PieceSelectedCall)priorIMP;

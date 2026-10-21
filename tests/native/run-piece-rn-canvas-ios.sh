@@ -1,12 +1,124 @@
 #!/bin/bash
 # Only run in a disposable checkout: build isolation replaces the app launch
-# source there. The actual Piece/RN rendering sources and native patch stay intact.
+# source there. The native build copy gets scalar test diagnostics; the tracked
+# product source and native patch stay intact.
 set -euo pipefail
 : "${RUNNER_TEMP:?Requires an isolated CI checkout}"
 test "${GITHUB_ACTIONS:-}" = true
 ROOT="$PWD"
 OUT="$RUNNER_TEMP/piece-rn-canvas"
 mkdir -p "$OUT"
+# Scalar guard observation exists only in this disposable hosted-test build.
+# Product preimage and exact lexical projection are checked before compilation.
+python3 - "$OUT/piece-native-diagnostic-map.json" <<'PIECE_DIAGNOSTIC_PY'
+import hashlib
+import sys
+import json
+from pathlib import Path
+import re
+
+EXPECTED_SHA256 = '240ea5afb0789d0f6aab6afa46591f061c61481860d28d348b11f4cf3e5a272e'
+PREFIX = '''
+// Hosted-test-only scalar diagnostic, injected in this disposable checkout.
+// No wire field, guard expression, return value, clock or paint is changed.
+struct CocolonPieceDiagnosticTLSState {
+  long long tag;
+  double fontSize;
+  NSInteger requestStage;
+  NSInteger firstFailureStage;
+  bool enabled;
+};
+static thread_local CocolonPieceDiagnosticTLSState CocolonPieceDiagnosticTLS = {0, 0, 0, 0, false};
+static inline void CocolonPieceDiagnosticBegin(long long tag, double fontSize, NSInteger stage, BOOL enabled) {
+  CocolonPieceDiagnosticTLS = {tag, fontSize, stage, 0, enabled != NO};
+}
+static inline void CocolonPieceDiagnosticMark(NSInteger stage) {
+  if (CocolonPieceDiagnosticTLS.enabled && CocolonPieceDiagnosticTLS.firstFailureStage == 0)
+    CocolonPieceDiagnosticTLS.firstFailureStage = stage;
+}
+'''
+GETTER = '''
+// Present only in the disposable hosted-test app, never an RN export.
+- (NSDictionary *)cocolonPieceDiagnosticState {
+  return @{@"tag":@(CocolonPieceDiagnosticTLS.tag),
+    @"font_size":@(CocolonPieceDiagnosticTLS.fontSize),
+    @"request_stage":@(CocolonPieceDiagnosticTLS.requestStage),
+    @"first_failure_stage":@(CocolonPieceDiagnosticTLS.firstFailureStage),
+    @"enabled":@(CocolonPieceDiagnosticTLS.enabled),
+    @"main_thread":@(NSThread.isMainThread)};
+}
+'''
+
+
+def build(original):
+    assert hashlib.sha256(original.encode()).hexdigest() == EXPECTED_SHA256, 'Unexpected product preimage'
+    assert 'CocolonPieceDiagnosticTLS' not in original
+    method_marker = '- (void)inspectSnapshot:(NSNumber *)tag text:(NSString *)expected fontSize:(double)fontSize\n          selectedLine:(BOOL)selectedLine pixelRequest:(NSDictionary *)pixelRequest containment:(BOOL)containment\n          resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject\n'
+    method_start = original.index(method_marker)
+    spans = [
+      ('shared_canvas_frame', original.index('static BOOL PiecePixelCanvasFrame('), original.index('// Pure v2 raster primitive.')),
+      ('shared_direct_paint', original.index('static NSArray *PieceDirectPixelInk('), original.index('static NSDictionary *PieceSelectedPixels(')),
+      ('v3_helpers', original.index('struct PieceRasterBudget {'), original.index('@implementation PieceTextMetrics')),
+    ]
+    edits = []
+    stages = []
+    # Only the already-existing false/nil returns are annotated. The comma
+    # operator evaluates the scalar write then returns the identical constant.
+    for label, start, end in spans:
+        for match in re.finditer(r'\breturn (NO|nil);', original[start:end]):
+            position = start + match.start(); value = match.group(1)
+            stages.append({'offset':position,'span':label,'kind':'return_'+value,
+              'original_line':original.count('\n',0,position)+1,
+              'original_expression':match.group(0)})
+    method = original[method_start:]
+    for match in re.finditer(r'\bunavailable\(\);', method):
+        position = method_start + match.start()
+        stages.append({'offset':position,'span':'v3_snapshot_method','kind':'unavailable',
+          'original_line':original.count('\n',0,position)+1,
+          'original_expression':match.group(0)})
+    stages.sort(key=lambda entry:entry['offset'])
+    for number, stage in enumerate(stages,1):
+        stage['stage']=number
+        value=stage['kind'].removeprefix('return_')
+        replacement = f'return (CocolonPieceDiagnosticMark({number}), {value});' if stage['kind'].startswith('return_') else f'(CocolonPieceDiagnosticMark({number}), unavailable());'
+        edits.append((stage['offset'],stage['offset']+len(stage['original_expression']),replacement))
+    assert len(stages)==59, ('Expected exact59 guarded-return/rejection locations',len(stages))
+    instrumented=original
+    for start,end,replacement in sorted(edits,reverse=True):
+        instrumented=instrumented[:start]+replacement+instrumented[end:]
+    # Restore every modified return/reject expression to prove exact lexical
+    # preservation before introducing declarations and reset-only statements.
+    restored=re.sub(r'return \(CocolonPieceDiagnosticMark\(\d+\), (NO|nil)\);',r'return \1;',instrumented)
+    restored=re.sub(r'\(CocolonPieceDiagnosticMark\(\d+\), unavailable\(\)\);','unavailable();',restored)
+    assert restored==original, 'Instrumentation changed original tokens'
+    begin='  CocolonPieceDiagnosticBegin(tag.longLongValue, fontSize, [pixelRequest[@"stage"] isEqual:@"local"] ? 1 : ([pixelRequest[@"stage"] isEqual:@"placed"] ? 2 : 0), containment);\n'
+    # All block callbacks observe TLS on the actual executing thread. Reset in
+    # the original method covers immediate input rejection; reset in each of
+    # its two UIBlocks covers the async UIManager-queue -> main-thread hop.
+    old=method_marker+'{\n'
+    assert instrumented.count(old)==1
+    instrumented=instrumented.replace(old,old+begin,1)
+    index=instrumented.index(method_marker)
+    head,tail=instrumented[:index],instrumented[index:]
+    block='NSDictionary<NSNumber *, UIView *> *registry) {\n'
+    assert tail.count(block)==2
+    tail=tail.replace(block,block+begin)
+    instrumented=head+tail
+    implementation='@implementation PieceTextMetrics\n'
+    assert instrumented.count(implementation)==1
+    instrumented=instrumented.replace(implementation,implementation+GETTER,1)
+    declaration='// Read-only accessors added by the pinned RN patch; no KVC/private-ivar read.\n'
+    assert instrumented.count(declaration)==1
+    instrumented=instrumented.replace(declaration,PREFIX+'\n'+declaration,1)
+    return instrumented, {'preimage_sha256':EXPECTED_SHA256,'instrumented_sha256':hashlib.sha256(instrumented.encode()).hexdigest(),'markers':stages,'marker_count':len(stages),'tls_resets':3,'postimage_is_test_instrumentation_only':True,'unchanged_original_lexical_projection':True}
+
+
+source=Path('ios/tempCocolon/PieceTextMetrics.mm')
+instrumented, metadata=build(source.read_text())
+source.write_text(instrumented)
+Path(sys.argv[1]).write_text(json.dumps(metadata,indent=2)+'\n')
+print('PIECE_V3_DIAGNOSTIC_MAP '+json.dumps(metadata,separators=(',',':')))
+PIECE_DIAGNOSTIC_PY
 node tests/native/piece-rn-canvas-fixtures.cjs > tests/native/piece-rn-canvas-fixtures.json
 cat > tests/native/piece-rn-no-transport.js <<'JS'
 export const apiFetch = () => { throw new Error('TRANSPORT_FORBIDDEN_IN_RENDER_TEST'); };

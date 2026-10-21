@@ -1722,3 +1722,8 @@ local JS933全成功（元915＋新18、14.436秒）。native195/実RN13・PNG/�
 ##### 5.6.17.2 最終結果：構文停止解消、実RN preview8未達
 
 入口§89.4／manifest v110。source fbf9c233、一度CI39544012216 attempt1はfailure（19分49秒）。test macro build停止は解消し全13reportへ到達。JS933/native195unique・FAIL0/31.143秒成功。旧saved1/raw3/controlled fault1は成立、PNG5。既存4PNGはbyte/全画素一致。新preview8はv3 local inspector/decoder拒否でplaced前に停止、具体guardは未確定。全13report<8秒でも420完成/採用の合格にはしない。全6jobログ/元13report/PNG5/解析をmanifest、55MBの元artifact全体も永続保存済み。次は同一失敗local操作のnative/decoder拒否を分ける最小診断（未実施）。primary BLOCKER_NARROWED、新候補未採用STOP、正式admission/saved reader/InputScreen正式供給/通常保存→本人履歴・実機は未完了。source/test/workflow追加変更・同source再実行0、結果5資料のみ、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。 P-W1の通常保存・再表示は未完了で、10/22目標を達成扱いしません。
+
+
+#### 5.6.18 Piece新preview停止の原因診断
+
+入口§90／map§65.38／manifest v111。新依頼のLEVEL2 test-only原因診断。既存test3＋資料5の8path、製品source変更0。元native一回とdecoder一回のraw/reject/adapter結果を分離、CI隔離copyへ元59guardのTLS first-stageを注入しcallback同threadで照合。failed reportにも保存。全13fixture/assertion、元8秒/90秒、条件式/return/wire/draw/row/fontを維持。新source CI一回のみ、同source再実行0。現時点未実行、原因未確定、既存failure保持・新候補未採用。通常保存等は未完了、STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。 10/22の通常保存/再表示目標は未達のまま。

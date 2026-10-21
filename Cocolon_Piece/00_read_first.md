@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§89.4／current map§65.37.2／weekly§5.6.17.2／manifest v110です。test構文修復で実RN13条件へ到達。一度CI39544012216はfailure：JS933/native195成功、旧saved1/raw3/clip故障検出1は成立、新preview8はlocal inspector/decoder境界で拒否され配置前に停止しました。PNG5を確認、既存4枚は前回と完全一致。具体的拒否guardは未確定、新候補未採用STOP、正式採用・通常保存は未完了です。**
+**最新は入口§90／current map§65.38／weekly§5.6.18／manifest v111です。新preview8のlocal拒否について、新しい依頼単位のtest-only原因診断を開始。元のnative処理一回とdecoderの結果を分け、既存guardのfirst failure stageを観測します。判定・全13条件・元8秒/90秒は維持、一度の新source CIのみ。製品未採用、正式採用・通常保存は未完了です。**
 
 ### §87の設計時点（履歴）
 
@@ -3016,3 +3016,18 @@ primary outcomeは **BLOCKER_NARROWED**。再利用できる事実はmacro build
 今回のactual失敗とは別に、原典read-only reviewで確認した未証明範囲を保持します。32MiB counterは各inspectionで新設され、provider最終解放までその予約は維持されますが、CAがcall間で保持したallocationの合算保証は今回の原物にありません。超過発生とは断定せず、§87.3の同時合計条件をper-callへ黙って変更しません。nativeはwall/systemUptime両期限を使い、Card最終fitは同deadline object/Date.now expiryを確認します。wall時計巻戻りを含む最後までのmonotonic保証は未成立です。これらを今回8件の拒否原因とは呼びません。
 
 正式renderer採用、containment版saved reader、InputScreen正式isSaveAdmitted供給、実Auth/API通常初回保存→同owner詳細/履歴、物理実機の受入れは未完了です。結果5資料のみの更新、STRUCTURE_MAP_DELTA_NONE。製品source/fixture/workflow/API/DB write/業務RPC/runtime/flag/env/依存/署名/配布/deploy/main merge0。全体設計/全file地図と既存責務は維持し、元8秒/90秒・旧v2/v9/saved境界は不変です。追加購入/新service/定常費用・Mash追加操作0、既存Actions一回の実使用量は発生、請求額は未取得。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。
+
+
+## 90. 新依頼に基づくtest-only拒否原因診断（2026-10-21）
+
+Mashの新しい「Pieceの残件作業を進めて」を受け、完了済み§89の同source再実行ではなく、§89.4が残した最小診断を新しい限定作業として開始します。app全体設計01/01A/01B/01C、全file地図、現行Piece map、最新weekly 20261017、作業規範・transport current contractと恒久incident全文を再確認。PR30は8c41edbc、API PR3はa536e50eで基点一致、Supabase projectはACTIVE_HEALTHY（一覧readのみ）。context prepareはlocal checkpoint f313a4aとa77b79c5の非子孫判定で失敗したため、生成contextを信用せずtechnical ownerが原典を直接読みました。context systemは変更しません。
+
+変更レベルはLEVEL2（既存目的・契約内の技術的原因調査）。製品観点は「本文と行選択を保持したプレビューが配置前に止まる原因を実物から識別する」、技術観点は「同じ原native呼出しとdecoder一回を保持し、元拒否guardの第一位置だけを観測する」で一致。rootを唯一のrepo writerとし、独立reviewer2名はscratch draft/read-only担当です。新規product API/featureではありません。
+
+### 90.1 実行前の契約と停止条件
+
+既存test3path（runner、RN entry、native XCTest）と既存資料5pathの計8path。新tracked file0。runnerは隔離されたCI checkoutのnative build copyへTLS scalar first_failure_stage/tag/font/stageの観測だけを注入します。59箇所の既存return NO/nil/unavailableを原条件式・return値のまま標識し、元source SHA256、標識除去後の全文一致、3つのthread resetを検査。原native product fileをGitへ変更しません。getterは元resolve/reject callbackと同じ同期stackで読み、thread/tag/font/stage照合を記録します。JSは元native Promise一回とrenderer/decoder一回のままraw20fieldまたはrejectとadapter結果を対応付けます。失敗Cardにも共通saveReportから観測を付記し、late callbackは開始caseへ保持します。
+
+診断は元8秒内の処理時間に含みます。時計、deadline、guard、20field wire、drawing、row/font、fit、opacity、保存admission、fixture13、XCTest全assertion、standalone native195、元90秒は変更しません。強制display/flush、追加draw、decoderやnativeの二重呼出し、preview成功の擬装、再試行は0。native guard stage不明またはcompile失敗でも同source再実行・その場の迂回修正はせず、原物を保存して未採用STOP。one-source CIは一回だけで、全体failureも観測結果として残します。native成功後のadapter拒否なら実raw/expectedと期限から切り分け、証拠が足りなければ未確定とします。
+
+結果はGitHubへ元ログ・13report・PNG・stage mapとchecksum付きで残し、全変更fileを全文読戻します。現時点CI未実行、具体guard未確定、既存failureは撤回しません。製品source/API/DB/業務RPC/runtime/env/flag/依存/署名/deploy/main merge0、通常保存・履歴/実機は未完了。追加購入/定常費用/新service/Mash操作0、既存Actions一回の実使用量は発生します。STRUCTURE_MAP_DELTA_NONE。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。

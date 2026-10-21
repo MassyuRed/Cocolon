@@ -72,17 +72,72 @@ for (const method of ['measureCandidates', 'measureCandidatesForWidth', 'measure
   };
 }
 
+// Keep the raw native reply and the original adapter outcome in the SAME
+// actual call. The adapter performs its unchanged native await and decoder.
+// Capturing trace/context here prevents a late callback entering another case.
+let selectedV3Ordinal = 0, nativeV3Ordinal = 0, dispatchingSelectedV3 = null;
+const diagnosticNodeTag = node => {
+  try { return findNodeHandle(node); } catch { return null; }
+};
+const nativeSelectedV3 = NativeModules.PieceTextMetrics.inspectSelectedLineV3;
+if (typeof nativeSelectedV3 === 'function') {
+  NativeModules.PieceTextMetrics.inspectSelectedLineV3 = function (...args) {
+    const dispatch = dispatchingSelectedV3, trace = dispatch?.trace ?? activeTrace;
+    const started = performance.now(), request = args[3];
+    const sample = { ordinal: ++nativeV3Ordinal, adapter_ordinal: dispatch?.ordinal ?? null,
+      tag: args[0], canvas_tag: request?.canvas_tag ?? null, stage: request?.stage ?? null,
+      font_size: args[2], expires_at_ms: request?.expires_at_ms ?? null,
+      dispatched_at_ms: Date.now(), status: 'pending' };
+    trace?.native_selected_v3.push(sample);
+    try {
+      // Exactly one original native call; neither request nor reply is changed.
+      const pending = nativeSelectedV3.apply(this, args);
+      return pending.then(value => {
+        Object.assign(sample, { status: 'resolved', received_at_ms: Date.now(),
+          elapsed_ms: performance.now() - started, raw_wire: value });
+        return value;
+      }, error => {
+        Object.assign(sample, { status: 'rejected', rejected_at_ms: Date.now(),
+          elapsed_ms: performance.now() - started,
+          reject_code: error?.code ?? null, reject_message: error?.message ?? null });
+        throw error;
+      });
+    } catch (error) {
+      Object.assign(sample, { status: 'threw', rejected_at_ms: Date.now(),
+        elapsed_ms: performance.now() - started,
+        reject_code: error?.code ?? null, reject_message: error?.message ?? null });
+      throw error;
+    }
+  };
+}
 const selectedV3 = renderer.inspectPieceSelectedLineV3;
 renderer.inspectPieceSelectedLineV3 = async (...args) => {
-  const trace = activeTrace, start = performance.now(), sample = { stage: args[1].stage, font_size: args[1].fontSize, status: 'pending' };
+  const trace = activeTrace, start = performance.now(), expected = args[1];
+  const ordinal = ++selectedV3Ordinal;
+  const sample = { adapter_ordinal: ordinal, stage: expected.stage, font_size: expected.fontSize, status: 'pending',
+    expected: { text: expected.text, box: expected.box ? { ...expected.box } : null,
+      line_ends: Array.isArray(expected.lineEnds) ? [...expected.lineEnds] : null,
+      tag: diagnosticNodeTag(args[0]), canvas_tag: diagnosticNodeTag(expected.canvasNode),
+      stage: expected.stage, font_size: expected.fontSize, expires_at_ms: expected.expiresAt ?? null } };
   trace?.selected.push(sample);
   try {
-    const result = await selectedV3(...args);
-    Object.assign(sample, { status: 'resolved', elapsed_ms: performance.now() - start, tag: result.tag,
+    let pending;
+    const previous = dispatchingSelectedV3;
+    dispatchingSelectedV3 = { trace, ordinal };
+    try { pending = selectedV3(...args); }
+    finally { dispatchingSelectedV3 = previous; }
+    const result = await pending;
+    Object.assign(sample, { status: 'resolved', adapter_completed_at_ms: Date.now(),
+      elapsed_ms: performance.now() - start, tag: result.tag,
       canvas_tag: result.canvasTag, canvas_frame: result.canvasFrame, ink: result.ink,
       native_raster_scale: result.nativeRasterScale, component_inks: result.componentInks });
     return result;
-  } catch (error) { Object.assign(sample, { status: 'rejected', elapsed_ms: performance.now() - start }); throw error; }
+  } catch (error) {
+    Object.assign(sample, { status: 'rejected', adapter_rejected_at_ms: Date.now(),
+      elapsed_ms: performance.now() - start,
+      reject_code: error?.code ?? null, reject_message: error?.message ?? null });
+    throw error;
+  }
 };
 
 class CanvasCases extends React.Component {
@@ -96,7 +151,7 @@ class CanvasCases extends React.Component {
   componentWillUnmount() { clearTimeout(this.timer); }
   startCase = () => {
     this.started = performance.now(); this.originalExpiresAt = Date.now() + 8000;
-    this.trace = { candidates: [], adapters: [], plans: [], states: [], selected: [] };
+    this.trace = { candidates: [], adapters: [], plans: [], states: [], selected: [], native_selected_v3: [] };
     activeTrace = this.trace;
     this.finishing = false; this.rawOperation = null; this.rawReport = null;
     this.poll();

@@ -1,14 +1,14 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v110",
+  "schema_version": "cocolon.piece.workstream_manifest.v111",
   "generated_at": "2026-10-21 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v109",
-    "predecessor_head": "ca358df0358d111d9d272eb2be853b38a9769dc3",
-    "carry_forward": "Close new-request one-CI unit: macro build repaired; actual13 reached but preview8 local unavailable. Preserve all prior failures and original8s/90s; no adoption.",
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v110",
+    "predecessor_head": "8c41edbcbd93a62c149bbf1cb1342a04eb764c77",
+    "carry_forward": "Preserve all prior failures; new-request test-only first-rejection diagnosis; one source CI; no adoption.",
     "immutable_prior_evidence_references": [
       {
         "format": "git-commit-json-pointer",
@@ -50,17 +50,17 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "8183ac20acedf7b5adc0dd81f1553408c97e13ce",
-    "raw_sha256": "654a209c6112b0d77697580ef4eeec987d905ccd7e045c099ea5cf317d9fd2cb",
-    "utf8_bytes": 454715,
-    "chars": 270300
+    "git_blob_sha1": "767b61def9dc9f14e745385ec373e6cc0d90029c",
+    "raw_sha256": "6f22371a1fe67c044a47aba4aeaf3496ec774dbb2d0e177e1fedcee8e08f2ee0",
+    "utf8_bytes": 458090,
+    "chars": 272223
   },
   "current_premise": {
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
-    "git_blob_sha1": "8a2c5ba8a64bcbd57c84e7ea5cc863d7a3eea079",
-    "raw_sha256": "ab9f18d8f282b2b720b7b50e894d6b617e0b6ee703a94c6b19120fe6c26f99e7",
-    "utf8_bytes": 501085,
-    "chars": 292534
+    "git_blob_sha1": "19a01d9210856c12d18f62280f049ce30080a65e",
+    "raw_sha256": "af60388cfbc139cc04b981647bcbbf0283ee5d559fdb2d32e0394694ce7580fc",
+    "utf8_bytes": 501708,
+    "chars": 292914
   },
   "product_definition": {
     "user_facing_name": "Piece",
@@ -227,7 +227,7 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "ca358df0358d111d9d272eb2be853b38a9769dc3",
+    "cocolon_pre_sync_head": "8c41edbcbd93a62c149bbf1cb1342a04eb764c77",
     "mashos_api_head": "a536e50ee284785f585ac73329ef2947dca8bba9",
     "current_user_visible_piece_shape": "CANDIDATE_NORMAL_INPUT_V2_SAVED_SOURCE_ONLY__TUTORIAL_NEXUS_LEGACY_REMAIN__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
@@ -344,18 +344,20 @@
     "piece_v2_containment_macro_repair_source": "fbf9c233eef738329456780b9fd1b79b89a78134",
     "piece_v2_containment_real_rn_executed_conditions": 13,
     "piece_v2_containment_preview_conditions_met": 0,
-    "piece_v2_containment_preview_conditions_total": 8
+    "piece_v2_containment_preview_conditions_total": 8,
+    "piece_v3_rejection_diagnostic_ci_executed": false,
+    "piece_v3_specific_reject_guard_identified": false
   },
   "next_group": {
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "PIECE_WORK_ALLOWED",
-    "state": "BOUNDED_WORK_COMPLETE__BUILD_REPAIRED__PREVIEW8_LOCAL_UNAVAILABLE__UNADOPTED_STOP",
-    "current_map_section": "65.37.2",
-    "current_entry_section": "89.4",
+    "state": "NEW_REQUEST_TEST_ONLY_DIAGNOSTIC__SOURCE_PREPARED__CI_NOT_EXECUTED",
+    "current_map_section": "65.38",
+    "current_entry_section": "90",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
-    "weekly_review_section": "5.6.17.2",
-    "first_unfinished_work": "Observe native resolve/reject and v3 decoder entry/exit for one failing local Text (Latin branding28), preserve same operation/clock/guard/wire/font/row. If native rejects, identify existing reject stage with scalar-only test observation. No forced display, geometric rounding fix, widened acceptance or rerun is authorized by this result record.",
+    "weekly_review_section": "5.6.18",
+    "first_unfinished_work": "Publish full8file readback; run one new-source CI; distinguish native reject stage from adapter decode/deadline failure using actual observations.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 6,
@@ -523,10 +525,10 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "8a2c5ba8a64bcbd57c84e7ea5cc863d7a3eea079",
-    "raw_sha256": "ab9f18d8f282b2b720b7b50e894d6b617e0b6ee703a94c6b19120fe6c26f99e7",
-    "utf8_bytes": 501085,
-    "chars": 292534
+    "git_blob_sha1": "19a01d9210856c12d18f62280f049ce30080a65e",
+    "raw_sha256": "af60388cfbc139cc04b981647bcbbf0283ee5d559fdb2d32e0394694ce7580fc",
+    "utf8_bytes": 501708,
+    "chars": 292914
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -699,31 +701,28 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "MACRO_REPAIR_FINAL_FAILURE_RESULTS_DOCUMENTS_ONLY",
-    "primary_outcome": "BLOCKER_NARROWED",
+    "classification": "LEVEL2_TEST_ONLY_REJECTION_DIAGNOSTIC_SOURCE",
     "paths": [
+      "tests/native/run-piece-rn-canvas-ios.sh",
+      "tests/native/piece-rn-canvas-ios.m",
+      "tests/native/piece-rn-canvas-entry.js",
       "Cocolon_Piece/00_read_first.md",
       "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
       "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
       "Cocolon_前提資料/07_latest_snapshot_diff.md",
       "Cocolon_Piece/manifest.json"
     ],
+    "test_source_paths": 3,
     "documentation_paths": 5,
-    "source_commit": "fbf9c233eef738329456780b9fd1b79b89a78134",
-    "ci_run": 39544012216,
-    "ci_conclusion": "failure",
-    "product_source_changes": 0,
-    "test_source_changes": 0,
-    "workflow_changes": 0,
     "new_files": 0,
-    "new_ci_execution": 0,
-    "same_source_reruns": 0,
-    "live_database_query": 0,
-    "live_database_apply": 0,
-    "business_rpc": 0,
+    "product_source_changes": 0,
+    "workflow_changes": 0,
     "api_changes": 0,
+    "database_apply": 0,
+    "business_rpc": 0,
     "deploy": 0,
     "main_merge": 0,
+    "same_source_reruns": 0,
     "structure_map": "STRUCTURE_MAP_DELTA_NONE",
     "product_acceptance": false,
     "automatic_progression": false
@@ -72813,5 +72812,527 @@
     "unadopted_stop": true,
     "primary_outcome": "BLOCKER_NARROWED",
     "next_unexecuted_work": "Observe native resolve/reject and v3 decoder entry/exit for one failing local Text (Latin branding28), preserve same operation/clock/guard/wire/font/row. If native rejects, identify existing reject stage with scalar-only test observation. No forced display, geometric rounding fix, widened acceptance or rerun is authorized by this result record."
+  },
+  "ios_preview_containment_rejection_diagnostic_20261021": {
+    "state": "NEW_REQUEST_TEST_ONLY_DIAGNOSTIC__SOURCE_PREPARED__CI_NOT_EXECUTED",
+    "base_head": "8c41edbcbd93a62c149bbf1cb1342a04eb764c77",
+    "entry_section": "90",
+    "map_section": "65.38",
+    "weekly_section": "5.6.18",
+    "classification": "LEVEL2_EXISTING_PURPOSE_TECHNICAL_DIAGNOSIS",
+    "root_only_repo_writer": true,
+    "independent_reviewers": 2,
+    "source_paths": [
+      "tests/native/run-piece-rn-canvas-ios.sh",
+      "tests/native/piece-rn-canvas-ios.m",
+      "tests/native/piece-rn-canvas-entry.js",
+      "Cocolon_Piece/00_read_first.md",
+      "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+      "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
+      "Cocolon_前提資料/07_latest_snapshot_diff.md",
+      "Cocolon_Piece/manifest.json"
+    ],
+    "test_paths": [
+      "tests/native/run-piece-rn-canvas-ios.sh",
+      "tests/native/piece-rn-canvas-ios.m",
+      "tests/native/piece-rn-canvas-entry.js"
+    ],
+    "source_preimage_and_stage_map": {
+      "preimage_sha256": "240ea5afb0789d0f6aab6afa46591f061c61481860d28d348b11f4cf3e5a272e",
+      "instrumented_sha256": "bf03e3149ccc3de14de17e5757fa9e29d8ebefa69b14e5fd0e17e35736a690fa",
+      "markers": [
+        {
+          "offset": 3298,
+          "span": "shared_canvas_frame",
+          "kind": "return_NO",
+          "original_line": 66,
+          "original_expression": "return NO;",
+          "stage": 1
+        },
+        {
+          "offset": 4131,
+          "span": "shared_canvas_frame",
+          "kind": "return_NO",
+          "original_line": 79,
+          "original_expression": "return NO;",
+          "stage": 2
+        },
+        {
+          "offset": 4227,
+          "span": "shared_canvas_frame",
+          "kind": "return_NO",
+          "original_line": 81,
+          "original_expression": "return NO;",
+          "stage": 3
+        },
+        {
+          "offset": 4378,
+          "span": "shared_canvas_frame",
+          "kind": "return_NO",
+          "original_line": 83,
+          "original_expression": "return NO;",
+          "stage": 4
+        },
+        {
+          "offset": 4865,
+          "span": "shared_canvas_frame",
+          "kind": "return_NO",
+          "original_line": 89,
+          "original_expression": "return NO;",
+          "stage": 5
+        },
+        {
+          "offset": 5383,
+          "span": "shared_direct_paint",
+          "kind": "return_nil",
+          "original_line": 98,
+          "original_expression": "return nil;",
+          "stage": 6
+        },
+        {
+          "offset": 6351,
+          "span": "shared_direct_paint",
+          "kind": "return_nil",
+          "original_line": 111,
+          "original_expression": "return nil;",
+          "stage": 7
+        },
+        {
+          "offset": 7193,
+          "span": "shared_direct_paint",
+          "kind": "return_nil",
+          "original_line": 122,
+          "original_expression": "return nil;",
+          "stage": 8
+        },
+        {
+          "offset": 7509,
+          "span": "shared_direct_paint",
+          "kind": "return_nil",
+          "original_line": 126,
+          "original_expression": "return nil;",
+          "stage": 9
+        },
+        {
+          "offset": 7585,
+          "span": "shared_direct_paint",
+          "kind": "return_nil",
+          "original_line": 127,
+          "original_expression": "return nil;",
+          "stage": 10
+        },
+        {
+          "offset": 7685,
+          "span": "shared_direct_paint",
+          "kind": "return_nil",
+          "original_line": 129,
+          "original_expression": "return nil;",
+          "stage": 11
+        },
+        {
+          "offset": 7901,
+          "span": "shared_direct_paint",
+          "kind": "return_nil",
+          "original_line": 133,
+          "original_expression": "return nil;",
+          "stage": 12
+        },
+        {
+          "offset": 7982,
+          "span": "shared_direct_paint",
+          "kind": "return_nil",
+          "original_line": 135,
+          "original_expression": "return nil;",
+          "stage": 13
+        },
+        {
+          "offset": 8496,
+          "span": "shared_direct_paint",
+          "kind": "return_nil",
+          "original_line": 144,
+          "original_expression": "return nil;",
+          "stage": 14
+        },
+        {
+          "offset": 16657,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 260,
+          "original_expression": "return NO;",
+          "stage": 15
+        },
+        {
+          "offset": 16777,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 262,
+          "original_expression": "return NO;",
+          "stage": 16
+        },
+        {
+          "offset": 20293,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 333,
+          "original_expression": "return NO;",
+          "stage": 17
+        },
+        {
+          "offset": 20641,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 339,
+          "original_expression": "return NO;",
+          "stage": 18
+        },
+        {
+          "offset": 22818,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 367,
+          "original_expression": "return nil;",
+          "stage": 19
+        },
+        {
+          "offset": 23563,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 376,
+          "original_expression": "return NO;",
+          "stage": 20
+        },
+        {
+          "offset": 24977,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 395,
+          "original_expression": "return NO;",
+          "stage": 21
+        },
+        {
+          "offset": 25204,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 399,
+          "original_expression": "return NO;",
+          "stage": 22
+        },
+        {
+          "offset": 26139,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 411,
+          "original_expression": "return NO;",
+          "stage": 23
+        },
+        {
+          "offset": 26887,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 421,
+          "original_expression": "return NO;",
+          "stage": 24
+        },
+        {
+          "offset": 27216,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 426,
+          "original_expression": "return NO;",
+          "stage": 25
+        },
+        {
+          "offset": 27353,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 428,
+          "original_expression": "return NO;",
+          "stage": 26
+        },
+        {
+          "offset": 27676,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 434,
+          "original_expression": "return NO;",
+          "stage": 27
+        },
+        {
+          "offset": 28405,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 445,
+          "original_expression": "return NO;",
+          "stage": 28
+        },
+        {
+          "offset": 28746,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 449,
+          "original_expression": "return NO;",
+          "stage": 29
+        },
+        {
+          "offset": 28906,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 451,
+          "original_expression": "return NO;",
+          "stage": 30
+        },
+        {
+          "offset": 29569,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 462,
+          "original_expression": "return NO;",
+          "stage": 31
+        },
+        {
+          "offset": 29656,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 464,
+          "original_expression": "return NO;",
+          "stage": 32
+        },
+        {
+          "offset": 29763,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 466,
+          "original_expression": "return NO;",
+          "stage": 33
+        },
+        {
+          "offset": 29914,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 469,
+          "original_expression": "return NO;",
+          "stage": 34
+        },
+        {
+          "offset": 30048,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 472,
+          "original_expression": "return NO;",
+          "stage": 35
+        },
+        {
+          "offset": 30519,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 482,
+          "original_expression": "return NO;",
+          "stage": 36
+        },
+        {
+          "offset": 30652,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 485,
+          "original_expression": "return NO;",
+          "stage": 37
+        },
+        {
+          "offset": 30855,
+          "span": "v3_helpers",
+          "kind": "return_NO",
+          "original_line": 488,
+          "original_expression": "return NO;",
+          "stage": 38
+        },
+        {
+          "offset": 32039,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 511,
+          "original_expression": "return nil;",
+          "stage": 39
+        },
+        {
+          "offset": 32557,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 516,
+          "original_expression": "return nil;",
+          "stage": 40
+        },
+        {
+          "offset": 33084,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 522,
+          "original_expression": "return nil;",
+          "stage": 41
+        },
+        {
+          "offset": 33298,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 524,
+          "original_expression": "return nil;",
+          "stage": 42
+        },
+        {
+          "offset": 33396,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 526,
+          "original_expression": "return nil;",
+          "stage": 43
+        },
+        {
+          "offset": 35083,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 544,
+          "original_expression": "return nil;",
+          "stage": 44
+        },
+        {
+          "offset": 35153,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 545,
+          "original_expression": "return nil;",
+          "stage": 45
+        },
+        {
+          "offset": 35491,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 549,
+          "original_expression": "return nil;",
+          "stage": 46
+        },
+        {
+          "offset": 35733,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 552,
+          "original_expression": "return nil;",
+          "stage": 47
+        },
+        {
+          "offset": 36797,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 562,
+          "original_expression": "return nil;",
+          "stage": 48
+        },
+        {
+          "offset": 37947,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 577,
+          "original_expression": "return nil;",
+          "stage": 49
+        },
+        {
+          "offset": 38811,
+          "span": "v3_helpers",
+          "kind": "return_nil",
+          "original_line": 591,
+          "original_expression": "return nil;",
+          "stage": 50
+        },
+        {
+          "offset": 64379,
+          "span": "v3_snapshot_method",
+          "kind": "unavailable",
+          "original_line": 974,
+          "original_expression": "unavailable();",
+          "stage": 51
+        },
+        {
+          "offset": 64415,
+          "span": "v3_snapshot_method",
+          "kind": "unavailable",
+          "original_line": 976,
+          "original_expression": "unavailable();",
+          "stage": 52
+        },
+        {
+          "offset": 64915,
+          "span": "v3_snapshot_method",
+          "kind": "unavailable",
+          "original_line": 985,
+          "original_expression": "unavailable();",
+          "stage": 53
+        },
+        {
+          "offset": 65463,
+          "span": "v3_snapshot_method",
+          "kind": "unavailable",
+          "original_line": 992,
+          "original_expression": "unavailable();",
+          "stage": 54
+        },
+        {
+          "offset": 65843,
+          "span": "v3_snapshot_method",
+          "kind": "unavailable",
+          "original_line": 998,
+          "original_expression": "unavailable();",
+          "stage": 55
+        },
+        {
+          "offset": 69879,
+          "span": "v3_snapshot_method",
+          "kind": "unavailable",
+          "original_line": 1054,
+          "original_expression": "unavailable();",
+          "stage": 56
+        },
+        {
+          "offset": 70553,
+          "span": "v3_snapshot_method",
+          "kind": "unavailable",
+          "original_line": 1060,
+          "original_expression": "unavailable();",
+          "stage": 57
+        },
+        {
+          "offset": 71841,
+          "span": "v3_snapshot_method",
+          "kind": "unavailable",
+          "original_line": 1074,
+          "original_expression": "unavailable();",
+          "stage": 58
+        },
+        {
+          "offset": 72036,
+          "span": "v3_snapshot_method",
+          "kind": "unavailable",
+          "original_line": 1079,
+          "original_expression": "unavailable();",
+          "stage": 59
+        }
+      ],
+      "marker_count": 59,
+      "tls_resets": 3,
+      "postimage_is_test_instrumentation_only": true,
+      "unchanged_original_lexical_projection": true
+    },
+    "ci_executions": 0,
+    "ci_execution_limit": 1,
+    "same_source_reruns": 0,
+    "native_original_calls_per_inspection": 1,
+    "original_condition_return_wire_preserved": true,
+    "original_case_deadline_ms": 8000,
+    "original_native_deadline_seconds": 90,
+    "fixtures": 13,
+    "assertions_weakened": 0,
+    "product_source_changes": 0,
+    "formal_admission": false,
+    "product_acceptance": false,
+    "normal_save_reopen_complete": false,
+    "automatic_progression": false,
+    "next_unexecuted_work": "Publish full8file readback; run one new-source CI; distinguish native reject stage from adapter decode/deadline failure using actual observations."
   }
 }
