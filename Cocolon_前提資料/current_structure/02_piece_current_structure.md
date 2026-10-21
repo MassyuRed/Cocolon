@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§88／current map§65.36／weekly§5.6.16／manifest v105です。Mash承認済みの包含修復候補を実装。local JS933件成功、既存19pathの反映・全文照合後、新sourceを一度のCIで確認します。native195／実RN13条件・画素/時間の成立は未確認です。旧v2/v9・saved/export境界を保持し、正式採用・通常保存は未完了です。**
+**最新は入口§88.4／current map§65.36.1／weekly§5.6.16.1／manifest v106です。承認済みsource9b0abdedの19pathを全文照合し、一度のCI39523761970を実行中。CI JS933・native195件成功、6job中5成功、実RN13条件・PNG/時間は未確認。旧v2/v9と元8秒/90秒を維持し、新候補の正式採用・通常保存は未完了です。**
 
 ### §87の設計時点（履歴）
 
@@ -3128,3 +3128,8 @@ BLOCKER_NARROWED、包含判定の修復・正式採用・通常保存は未完�
 入口§88/weekly§5.6.16/manifest v105。Mashの「いいよ、進めて。」で§87新契約/19path/元8秒/一度CIを承認。旧v2/v9を保持し、containment.prototype.v1→selected_line.v3の20field/direct＋native非clip(実cell射影＋filter)＋自然layer unionをCard配置/論理高/余白/次fontへ接続しました。RN同paint共有/専用plain gate、nativegrid0、自然contents同一性、runtime clipped-reference全alpha occupancy照合、provider所有権とatomic32MiB、各stage2RAFと元期限を保持。fractional viewのclip参照は元boundsで同paintを直接clipしてからfilterへ通します。branding28/40/.8固定。通常表示やsaved/exportを新rendererへ変更しません。
 
 JS元915＋18=933 PASS/FAIL0、14.436秒。旧native175＋新20=195、実RN元11＋synthetic cliptrap/branding2=13は未実行。新参照/fixtureに既存OS QuartzCoreをstandalone link明示、時間や外部依存増加0。次は一度の既存CIと原物/画像/期限の結果回収、未達は未採用STOP。STRUCTURE_MAP_DELTA_PRESENTは同RN Text内のprofile/計測契約/paint責務だけ、新file/API/DB0。正式採用・通常保存・本人履歴未完了、automatic_progression=false。
+
+
+#### 65.36.1 途中結果：native195成功、実RN継続
+
+入口§88.4／manifest v106。source9b0abded/treeb83d10e5の19path全文一致。CI39523761970 attempt1でJS933・native195unique（旧129＋v9 46＋新20）/FAIL0、main→summary41.425065秒・元90秒内。Android sourceと両export compileを含む5/6job成功、実RN13/PNG/元8秒は継続中・未確認。原ログ5jobを可逆保存、source/test/workflow追加編集と再CI0。正式採用・通常保存・本人履歴は未完了、automatic_progression=false。

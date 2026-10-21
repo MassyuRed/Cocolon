@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§88／current map§65.36／weekly§5.6.16／manifest v105です。Mash承認済みの包含修復候補を実装。local JS933件成功、既存19pathの反映・全文照合後、新sourceを一度のCIで確認します。native195／実RN13条件・画素/時間の成立は未確認です。旧v2/v9・saved/export境界を保持し、正式採用・通常保存は未完了です。**
+**最新は入口§88.4／current map§65.36.1／weekly§5.6.16.1／manifest v106です。承認済みsource9b0abdedの19pathを全文照合し、一度のCI39523761970を実行中。CI JS933・native195件成功、6job中5成功、実RN13条件・PNG/時間は未確認。旧v2/v9と元8秒/90秒を維持し、新候補の正式採用・通常保存は未完了です。**
 
 ### §87の設計時点（履歴）
 
@@ -2870,3 +2870,22 @@ nativeは旧175uniqueを維持して20追加、actualRNはbaseline5/補足3/raw3
 通常drawRectと参照paintのCTM/clip/frame/Sも同じ現viewに束縛して観測。RN patchは公式0.77.3全文への適用dry-runが成功。LinuxではUIKit実行/コンパイルは未実行です。**JS933だけで新sourceの描画成立、195/13条件、資源/時間成立、正式renderer採用を主張しません。** 次は新sourceを一度の既存push CIで確認し、結果を同じownerへ記録します。source反映後は製品/test/workflowを追加編集せず、全job原ログ/実RN原物/画像差を回収します。途中結果も全件成功とは扱いません。
 
 formal_admission/product_acceptance/normal_save_reopen_complete=false、新候補/旧v9とも未採用、automatic_progression=false。今回の実装は通常初回保存・本人詳細/履歴・実機受入れの完了ではありません。
+
+
+### 88.4 途中保存：source19path照合、一度CIのnative195完走
+
+source `9b0abdeda1e417f475a212a269021374f72e1553`、tree `b83d10e5808f82ad163cedd3544af2495e54f909`、parent0d09bb6cの19pathをGitHubから全文取得しlocal正本と一致確認。一度のpush CI [39523761970 attempt1](https://github.com/MassyuRed/Cocolon/actions/runs/39523761970)は同source固定で実行中です。
+
+| 検証 | 今回確認した実結果 |
+|---|---|
+| JS | CI933 PASS/FAIL0、11,430.378062ms。local933/14,436.28399msも別証拠として保持 |
+| native | 195 PASS行/195unique/重複0/FAIL0。旧97を内包する129＋v9 46＋新v3 20。4summary一致、launch status0 |
+| native時間 | main_entered00:56:44.380589Z→最終summary00:57:25.805654Z、ログ時刻差41.425065秒。元alarm90秒内 |
+| CI jobs | JS/native/Android source/export Pods/export Androidの5job success。両export依存compileは今回は実行済み |
+| 実RN | 最後のcanvas job継続中。13条件/全PNG/全rendered row/元8秒の成立はまだ未確認 |
+
+native compile警告はenum型ORとshim nullability注釈。main後の実行時異常は見当たらず、fault名のPASSは意図的拒否検査です。195件はstandalone wrapperの証拠であり、実RNや実機・正式admissionへ換算しません。
+
+5jobの原ログ・source/run/job metadata・native独立集計・元Podfile.lock ZIPをlossless bundleで保存しました。旧placed-composite最終bundleは、全内容を読戻し済みのsource9b0abded内の同JSON pointerへ不変参照化し、旧compressed hash/member情報を保持。旧原物はGit履歴から復元可能です。これはmanifest全体の全文再取得を可能に保つ整理で、過去証拠の廃棄ではありません。
+
+製品/test/workflowはsource確定後に追加変更0。資料5pathだけの途中保存で新Piece CIを起動せず、同source再実行0。正式採用/product acceptance/normal save/reopenはfalse、automatic_progression=false。残る一度CIの原物を回収し、未達条件があれば未採用STOPで最終記録します。

@@ -1697,3 +1697,8 @@ primary=BLOCKER_NARROWED。非clip意図描画と実layerを扱う最小修復�
 入口§88/map§65.36/manifest v105。Mashが§87新候補の実装と一度CIを明示承認。旧v2保持の別preview＋20field v3で、同paint native-scale非clip/自然layer/元directのunionを配置・余白・本文候補サイズへ接続。branding28/40/.8は固定。元boundsで先にclipするnative参照を自然layerと実行時に全alpha occupancy比較し、same contents/scale/state/deadlineを束縛します。provider最終解放・shared atomic32MiB、元8秒/90秒を保持。workflowへ既存OS QuartzCoreのlinkと新195unique照合を最小追加しました。
 
 local JS933全成功（元915＋新18、14.436秒）。native195/実RN13・PNG/画素/時間は未確認、一度の新source CIで確かめます。実RN追加trapは自然font不具合と偽らないcontrolled paint fault。19既存fileのみ・新dependency/DB/API/runtime/flag/env/deploy/main0。STRUCTURE_MAP_DELTA_PRESENTは限定previewの内部測定/paint責務。正式renderer/通常保存/本人GET・履歴/実機は未完了で、10/22保存・10/23共有を達成扱いしません。automatic_progression=false。
+
+
+#### 5.6.16.1 途中結果：一度CIでnative195成功
+
+入口§88.4／manifest v106。source9b0abded/treeb83d10e5の19path全文一致。CI39523761970 attempt1でJS933・native195unique（旧129＋v9 46＋新20）/FAIL0、main→summary41.425065秒・元90秒内。Android sourceと両export compileを含む5/6job成功、実RN13/PNG/元8秒は継続中・未確認。原ログ5jobを可逆保存、source/test/workflow追加編集と再CI0。正式採用・通常保存・本人履歴は未完了、automatic_progression=false。

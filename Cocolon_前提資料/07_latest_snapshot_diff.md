@@ -41629,3 +41629,8 @@ source1f168d19の一度のrun39509902845は全6job/CI success、JS915/native175 
 ### 2026-10-21 — Piece承認済み包含修復の実装source
 
 入口§88/map§65.36/weekly§5.6.16/manifest v105。Mash明示承認の別preview＋v3 closed20field/direct-native-layer unionを既存19pathへ実装、旧v2/v9・saved/export境界と元8秒/90秒を保持。native runtime clipped-reference/native-layer全alpha occupancy比較、fractional boundsでのclip前paint、provider所有/atomic32MiB、自然状態/local-placed currentを接続。standaloneの既存OS QuartzCore linkと195unique検査を整合。local JS933全成功、native195/RN13/画像差・時間は未確認で一度CIへ。新tracked file/依存/DB/API/runtime/flag/env/deploy/main0。STRUCTURE_MAP_DELTA_PRESENTは限定preview測定責務、正式採用/通常保存は未完了。
+
+
+## 2026-10-21 — Piece包含候補の一度CI途中結果
+
+入口§88.4/map§65.36.1/weekly§5.6.16.1/manifest v106。source9b0abded/treeb83d10e5の19path全文一致。CI39523761970 attempt1でJS933・native195unique（旧129＋v9 46＋新20）/FAIL0、main→summary41.425065秒・元90秒内。Android sourceと両export compileを含む5/6job成功、実RN13/PNG/元8秒は継続中・未確認。原ログ5jobを可逆保存、source/test/workflow追加編集と再CI0。正式採用・通常保存・本人履歴は未完了、automatic_progression=false。STRUCTURE_MAP_DELTA_NONE（結果資料5pathのみ）。
