@@ -1,7 +1,7 @@
 # Cocolon System Context — V1 current technical management entry
 
 status: CURRENT_TECHNICAL_OWNER__V1_MANAGEMENT_ENTRY_ACTIVE_ON_PR37_WORKING_LINEAGE
-revision_date: 2026-08-22
+revision_date: 2026-10-22
 scope: Cocolon System Context Steps 1–7 plus Step 9 management entry and V1 implementation freeze
 step8_status: SKIPPED_BY_MASH_DECISION
 management_entry_activation: 1
@@ -32,10 +32,28 @@ STEP7_BOUNDED_IMPLEMENTATION_COMPLETE
 This activates the management entry and freezes the V1 implementation. It does
 not claim `SYSTEM_CONTEXT_V1_OPERATOR_CONTEXT_ACTUAL_PROOF_COMPLETE`.
 
+## Mandatory whole-product baseline (2026-10-22 Mash instruction)
+
+Before `prepare`, read the entire fresh working-owner original
+[`../00_cocolon_current_product_and_state.md`](../00_cocolon_current_product_and_state.md).
+This applies to every Cocolon task, including specification discussion,
+observation teaching and model selection. After each task, replace only its
+changed function, decision, state, remaining work and evidence in that original
+in the same change unit; record no relevant delta in the existing work record.
+
+Generated selection is supplementary. An old inventory, fixed MAIN snapshot,
+missing seed or stale output never waives this direct original read. The existing
+task profiles select the baseline as CURRENT_OWNER when present in a fresh
+inventory. New task profiles must retain the same seed. Do not edit generated
+manifests or expand the frozen operator contract to add this baseline. Historical
+scope restrictions in frozen output do not cancel later explicit Mash decisions,
+including the decided learned-model/CMEE connection.
+
 ## Standard flow
 
 ```text
 work-attitude 00_read_first
+→ fresh whole-product current baseline (full original)
 → this V1 technical entry
 → exact workspace resolve and freshness
 → task Context compile

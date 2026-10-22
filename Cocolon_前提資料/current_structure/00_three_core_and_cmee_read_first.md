@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_three_core_and_cmee_current_structure_entry
 title: "三大中核構造とCMEE — Current Structure Read First"
-revision_date: "2026-10-04 JST"
+revision_date: "2026-10-22 JST"
 document_role: "CURRENT_STRUCTURE_ROUTING_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
@@ -10,6 +10,8 @@ operational_owner: "Karen"
 implementation_effect: 0
 automatic_progression: false
 ---
+
+> **全製品の必読現在地：[Cocolon 最新情報](../00_cocolon_current_product_and_state.md)。毎作業全文を読み、関連差分を同じ変更単位で置換更新する。** 本fileは詳細ownerへの構造案内。以下のQ1〜Q4等の日付付き経過は当時の記録で、全製品の現時点ではない。
 
 > 2026-09-11 Q4現在地：修正版v1.2のQ4コード実装・統合・公開接続準備と今回の検証を完了。公開用mode・単一作者・旧client/保存版互換・停止復旧・bootstrap/RNを接続し、初回/肯定的回答/当時訂正と回答名詞化・時点の不具合を修正した。API179 PASS、RNは保存済み56 PASS。新しい保存22ケースを全文確認し、既存100件は全読済みの前版と全record一致。長い再掲・定型性など商品品質はNOT_CLEARとして保持する。現行結果は正本06とAPI既存handoffの末尾Q4 continuation節。実DB・端末・実課金・Mash正式判断・公開操作は別作業、既定OFF。
 
@@ -65,14 +67,16 @@ CMEEは設計候補がlocal artifactに留まり、GitHub上のdurable ownerが�
 
 このdirectoryは、これを防ぐためのcurrent構造図である。新しいchecker、Gate、Receipt、進行authorityではない。
 
-## 1. 最初に読むexact4
+## 1. 全体を確認してから、対象の詳細mapへ進む
 
-| 構造 | Current structure map | 商品target | Current stateの要点 |
-|---|---|---|---|
-| EmlisAI構造 | [01_emlis_ai_current_structure.md](01_emlis_ai_current_structure.md) | 入力を「読まれた形」の観測へ変え、必要な場合だけ一点を問い、回答分だけ観測を深める | production観測／受け取りはCURRENT_ACTUAL。問い／refined observationはQ1〜Q3コード実装済み、Q4統合が次。環境適用・商品判断は別作業 |
-| Piece構造 | [02_piece_current_structure.md](02_piece_current_structure.md) | 保存済み入力を、他者が単独で受け取れるcanonical textと画像artifactへ変える | current user-visibleはold Q&A。Piece V2はCODE_DISABLED／DESIGNED_NOT_IMPLEMENTED |
-| 分析構造 | [03_analysis_current_structure.md](03_analysis_current_structure.md) | 蓄積入力から現在の自己構造routeを根拠付きで示し、観測routeと分離したIF routeを扱う | 場面・担当の完全な本人過去節に付く「今日/昨日/その後/それから」を文章・図へ接続し、場面→担当→行動の明示順序を保持。関連181検査・606 subtests、RN13検査、合成6本文の一致を確認。u121でAPI42ff019…がlive、公開health200/未認証401確認。比較DBはu120適用済み。新TestFlight1.0(6301)のarchive/export/upload成功。初期read_only/比較OFFの設定手順はMash実施報告。u122で端末の正常空結果を取得エラーにするRN表示を修正、関連17検査成功（6301未収録）。u123でdevelopment設定手順後の同じAPI再配置がJST16:12 live、公開health200/未認証401。設定値はMash手順報告。次は6301で本人生成/表示/再表示。内容実装は03 §4.24、実行現在地はAPI運用資料§27・正本06末尾u123 |
-| CMEE | [04_cmee_current_structure.md](04_cmee_current_structure.md) | exact3の商品に共通するsource・意味・plan・realization・traceを持つ共有生成中枢 | core別currentは各map・最新06を参照。Analysis u118は既存compiler/realizerの場面・担当の明示日/順序を接続。共有意味owner/外部DTO変更0。比較SQL適用済み、u121で内容修正版API live・native6301送信成功。端末確認/比較有効化・商品受入れは未成立 |
+最初に[全機能・全状態](../00_cocolon_current_product_and_state.md)を全文読む。現在状態をここへ重複転記せず、詳細は次のownerへ戻る。
+
+| 構造 | 詳細owner | 担当 |
+|---|---|---|
+| EmlisAI | [01](01_emlis_ai_current_structure.md) | 当回の観測・受け取り・問い・回答更新 |
+| Piece | [02](02_piece_current_structure.md) | 本人の意味を伝える文章・画像・保存・公開 |
+| Analysis | [03](03_analysis_current_structure.md) | こころ天気・わたしマップ・期間比較・もしも／Saved |
+| CMEE | [04](04_cmee_current_structure.md) | 三中核の共有生成責務と学習済AI接続方針の実現 |
 
 CMEEは技術上first-classに育てる共有Engine targetであるが、独立したuser-facing商品目的を持たないため、商品構造上の「第四の中核」ではない。商品中核はEmlisAI／Piece／分析構造のexact3である。
 
@@ -83,7 +87,7 @@ CMEEは技術上first-classに育てる共有Engine targetであるが、独立�
 1. ../work_attitude_rules_for_karen/00_read_first.txt
 2. ../work_attitude_rules_for_karen/CURRENT_RULES.md
 3. ../work_attitude_rules_for_karen/09_work_start_checklist.txt
-4. 本file
+4. ../00_cocolon_current_product_and_state.md全文と本file
 5. 変更対象のcurrent structure map exact1以上
 6. mapが指定するproduct/design owner
 7. mapが指定する実際のsource、contract、test、RN、API、DB owner
@@ -136,6 +140,8 @@ CMEEの詳細設計へ入る場合は、04 mapから [CMEE V1 詳細設計 — R
 各mapのLEGACY、CODE_DISABLED、PROTECTED_TEST等のsuffixはこのlifecycleを狭くする補助分類である。「設計がある」「testがある」「Draftがある」を、「稼働している」「商品合格した」へ変換しない。
 
 ## 6. Mapの更新契約
+
+毎作業、全製品の`../00_cocolon_current_product_and_state.md`への関連差分を確認し、変化した機能・状態・残件・根拠だけを同じ変更単位で置換更新する。差分なしは既存作業記録へ理由を一行残す。次の詳細map更新と併用する。
 
 次のいずれかを変更するworkは、影響するmapを同じGitHub write unitで更新する。
 

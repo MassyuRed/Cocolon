@@ -1,6 +1,6 @@
 {
   "schema_version": "cocolon.work_attitude_rules.current.v3",
-  "revision_date": "2026-10-20",
+  "revision_date": "2026-10-22",
   "normative_status": "CURRENT",
   "status": "CURRENT_EFFECTIVE",
   "effective_when": "NECESSITY_PRODUCT_DIRECTNESS_AND_MINIMUM_SAFETY_BOUNDARY_REMOTE_POSTVERIFIED",
@@ -56,7 +56,9 @@
       "cmee": "../current_structure/04_cmee_current_structure.md",
       "update_contract": "09_work_start_checklist.txt"
     },
-    "current_navigation_ref_resolution": "fresh applicable ref required; audit-time working current is Cocolon Draft PR #29 @ 0854e21f92f841fd2cfdcef08b9e3117fc93f96a; after merge/head change re-resolve and never freeze this SHA as future current"
+    "current_navigation_ref_resolution": "fresh applicable ref required; audit-time working current is Cocolon Draft PR #29 @ 0854e21f92f841fd2cfdcef08b9e3117fc93f96a; after merge/head change re-resolve and never freeze this SHA as future current",
+    "whole_product_current_state": "../00_cocolon_current_product_and_state.md",
+    "product_destination_scope": "EmlisAI roadmap only; whole product purpose/functions/states are in whole_product_current_state"
   },
   "current_workflow_policy": {
     "start_gate": "09_work_start_checklist.txt",
@@ -70,7 +72,7 @@
     "result": "conditional when Receipt cannot restore cause / judgment / restart condition",
     "handoff": "conditional when actor / environment / session changes and 08 + Receipt are insufficient",
     "standalone_comparison": "conditional when acceptance gate requires independent evidence",
-    "current_state": "08 current-only replace",
+    "current_state": "whole product: ../00_cocolon_current_product_and_state.md current-only replace; Cycle001 only: 08 current-only replace",
     "milestone_history": "07 milestone-only append",
     "execution_plan": "route / evidence history; not daily current owner",
     "automatic_progression": false,
@@ -82,7 +84,8 @@
     "technical_candidate_owner": "Ultra Karen",
     "level2_standing_delegation": "Rule18 allowed scope only; Pro product-route alignment + Ultra initial/final technical design and TECHNICALLY_ADMISSIBLE; Ultra execution owner; post-work plain-language report",
     "level3": "Pro plain-language decision brief + Ultra final technical body + Mash explicit decision / approval before first effect",
-    "structure_map_update": "when EmlisAI, Piece, Analysis, or CMEE is affected: update affected map in same write unit, or STRUCTURE_MAP_DELTA_NONE with one-line reason; unrelated Cocolon work: NOT_APPLICABLE"
+    "structure_map_update": "when EmlisAI, Piece, Analysis, or CMEE is affected: update affected map in same write unit, or STRUCTURE_MAP_DELTA_NONE with one-line reason; unrelated Cocolon work: NOT_APPLICABLE",
+    "whole_product_state_update": "EVERY_COCOLON_WORK: read fresh whole-product original in full before task-specific owners; check delta each work unit, replace only changed function/decision/state/remaining work/evidence in same change unit; no delta: one line with reason in existing work record; no unrelated re-audit or new checker"
   },
   "current_reference_files": {
     "01_cocolon_business_life_funding_source.txt": "product / life-funding premise",
@@ -106,6 +109,7 @@
   "activation": {
     "all_cocolon_work": [
       "00_read_first.txt",
+      "../00_cocolon_current_product_and_state.md",
       "CURRENT_RULES.md",
       "09_work_start_checklist.txt",
       "99_integrated_paste_each_time.txt",

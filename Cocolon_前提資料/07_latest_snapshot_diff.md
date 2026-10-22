@@ -41750,3 +41750,8 @@ Mashが「その認識でいい。記録として残せ」と承認。[第3回D0
 [OBS-20261022-003のD01〜D05](observation_learning/sessions/2026/OBS-20261022-003/01_dialogue.md#d01)と[学習ノート§6](observation_learning/sessions/2026/OBS-20261022-003/02_learning_notes.md)を採録。Mashは「何が気になるか」「何が不安か」を問い、本人役の回答後、返却の遅れ・本人が伝えた週末・遅れる連絡の不在・友人への影響の懸念を観測文へ整理した。その文が復唱になることと、このような応答へのアプリ需要を問題提起した。新情報は回答後のsourceとして扱い、初期入力だけから分かった教材にしない。架空本人役の説明から実ユーザーの気づき・需要の肯定／否定を認定しない。
 
 次はMashの需要についての問いへの華恋の意見と続きの対話。観測会終了・最終教示・商品PASS・モデル採用は未確定。今回の対象は原文・ノート・観測学習README・本milestoneの既存4fileのみ。モデル推論・GPU・学習・CMEE・製品コード・API・DB・配置0。STRUCTURE_MAP_DELTA_NONE、ADMINISTRATIVE_ONLY。
+
+
+## 2026-10-22 — 全製品の必読現在地を一本化し、毎作業の差分置換へ接続
+
+Mashの明示指示により[00_cocolon_current_product_and_state.md](00_cocolon_current_product_and_state.md)を全機能・全状態の必読原本として作成。決定済み学習済AI＋CMEE接続、三中核、もしも／Saved、周辺機能、設計／コード／配置／本人端末／商品受入れと残件を区別した。root AGENTS・観測学習README・既存必読入口、CURRENT_RULES R2、09／99、両manifest、System Contextの原本直読と既存task seedへ接続。毎作業、関連差分だけを同じ変更単位で置換更新し、差分なしは既存作業記録へ理由を一行。08はCycle001専用、07は履歴で、全体currentをEOFへ積み上げない。詳細構造ownerと実物は維持。資料・読順設定のみ、runtime／API／DB／配置／学習0。ADMINISTRATIVE_ONLY、商品品質credit0。source照合点と未確認範囲は新正本§1・9。GitHub反映・後読確認はこの記録を含むrevisionから解決する。

@@ -1,3 +1,7 @@
+> **2026-10-22 現行必読：全機能・全状態は [Cocolon 最新情報](00_cocolon_current_product_and_state.md) を毎作業、全文確認する。** 作業単位ごとに関連差分を同じ変更単位で置換更新する。旧本文の「最新」・07 EOF優先・08を全体現在地とする指示は履歴。08はCycle001専用、07は節目の履歴。仕様・実装・稼働・本人端末・商品受入れを分け、詳細正本と実物へ進む。
+
+本資料は構造・実ファイルへの詳細地図。全機能の現在状態は上記正本へ集約し、以下の追記日付を全製品の最新検証日へ転用しない。
+
 > 2026-10-19最新差分：u355。安堵・寂しさと併記された元の経験に未明示の「同時」を足す表現を、原文の接続詞を保つ既存経験文へ修復。意味・選択・Reception不変。対象技術検証321件、保存DTO18件再表示。PRODUCT_NOT_CLEAR／正式Product Read0/3は維持。詳細は[u355監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u355_MixedReceivedTimeNeutral_20261019.md)。
 
 > 2026-10-19最新差分：u354。本人の不明を「今は／現在は嬉しくない」へ訂正した後の本文停止を、既存意味・全plan・selectedを変えずに修復。対象技術検証188件・保存DTO16件再表示。PRODUCT_NOT_CLEAR／正式Product Read0/3は維持。詳細は[u354監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u354_NegativeRevisionSurface_20261019.md)。

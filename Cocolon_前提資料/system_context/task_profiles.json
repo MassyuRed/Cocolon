@@ -7,6 +7,14 @@
       "current_owner_rules": [
         {
           "path_globs": [
+            "Cocolon_前提資料/00_cocolon_current_product_and_state.md"
+          ],
+          "repository_keys": [
+            "Cocolon"
+          ]
+        },
+        {
+          "path_globs": [
             "Cocolon_前提資料/current_structure/*.md",
             "Cocolon_前提資料/designs/cmee/Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md",
             "Cocolon_前提資料/designs/cmee/v1/*.md"
@@ -361,6 +369,16 @@
       ],
       "required_category_exact": 10,
       "seed_rules": [
+        {
+          "classification": "CURRENT_OWNER",
+          "id": "whole_product_current_baseline",
+          "path_globs": [
+            "Cocolon_前提資料/00_cocolon_current_product_and_state.md"
+          ],
+          "repository_keys": [
+            "Cocolon"
+          ]
+        },
         {
           "classification": "CURRENT_OWNER",
           "id": "current_structure_exact5",
@@ -1472,6 +1490,16 @@
       ],
       "seed_rules": [
         {
+          "classification": "CURRENT_OWNER",
+          "id": "whole_product_current_baseline",
+          "path_globs": [
+            "Cocolon_前提資料/00_cocolon_current_product_and_state.md"
+          ],
+          "repository_keys": [
+            "Cocolon"
+          ]
+        },
+        {
           "id": "account_profile_direct_source_exact8",
           "classification": "CURRENT_OWNER",
           "repository_keys": [
@@ -1506,6 +1534,14 @@
         }
       ],
       "current_owner_rules": [
+        {
+          "path_globs": [
+            "Cocolon_前提資料/00_cocolon_current_product_and_state.md"
+          ],
+          "repository_keys": [
+            "Cocolon"
+          ]
+        },
         {
           "repository_keys": [
             "Cocolon",

@@ -1999,3 +1999,10 @@ Mashの「進めていいよ」を受領。入口§115/map65.58/manifest v153。
 ###### 5.6.38.2 最終：起動条件修復後の新export14全成立
 
 入口§115.2/map65.58.2/manifest v155。source d2e1244cの唯一CI39780623108 attempt1は21:42:54〜22:07:18 JST、全体failure。新export正常8PNG/拒否6は元条件全成立、8PNGは同saved全canvasへbytes/RGBA一致。描画中消失を含む実mutation4も確認。元開始8112.953ms後の同saved画像保持と撮影、全構築8秒内。旧13/12/17の39項目・59PNG一致、全83decode。JS979/新native44成功、旧native195=176PASS19FAIL、旧V3別20未実行。XCTest4method/失敗1・59summaryは全て旧method。両OS export実compile成功。原ZIP71,895,632B/1129memberをdigest一致で全文保存、全6logs/4report/監査等はmanifestへ可逆保存。限定TECHNICAL_CREDIT/validation_success=true/product_credit0。今回counter1上限1/rerun0/source追加修復0で単位終了。P-W1の新renderer稼働供給と実Auth通常保存→同owner履歴/詳細、P-W2実OS/Android新版/backend receipt、P-W3本人実機は未完。結果4資料のみSTRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+
+## 2026-10-22 — Mash指示：全機能・全状態の最新情報を毎作業必読・差分更新へ
+
+Mashは、確認のたびに基本情報・機能・決定が抜けて指摘を繰り返す状態を改め、Cocolonの全機能と全状態を最新情報として残し、毎作業必読・毎回差分更新するよう指示した。[全体現在地](../00_cocolon_current_product_and_state.md)へ目的・機能間接続・既決／未決・コード／稼働／本人端末／商品受入れ・残件・根拠を集約した。学習済AI＋CMEE接続は既決、選定・学習方式・配置等は未決／未実施と区別。Piece・Analysis・もしも／Savedを含め、一応答のみでCocolonを完結して評価しない。
+
+root AGENTS・観測学習README・既存00入口・CURRENT_RULES R2・開始／出力確認・manifest・System Context原本直読と既存seedへ接続。全体現在地は関連箇所を同じ変更単位で置換更新し、差分なしは既存作業記録へ理由を一行残す。巨大資料への日々のcurrent追記、生成manifest手編集、checker新設はしない。08はCycle001専用、07はmilestone履歴。今回は資料・読順設定の更新で、製品コード・API・DB・配置・GPU・学習の変更0、商品品質credit0。根拠照合はCocolon e9f1e48…／API a536e50…、今回live・DB・端末を新規確認したとはしない。

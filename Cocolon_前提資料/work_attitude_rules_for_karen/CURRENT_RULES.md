@@ -1,6 +1,6 @@
 ---
 doc_id: cocolon_current_work_rules
-revision_date: 2026-08-16
+revision_date: 2026-10-22
 normative_status: CURRENT_GENERAL_RULE_OWNER
 status: CURRENT_EFFECTIVE
 effective_when: NECESSITY_PRODUCT_DIRECTNESS_AND_MINIMUM_SAFETY_BOUNDARY_REMOTE_POSTVERIFIED
@@ -220,7 +220,9 @@ authorityとして扱いません。後続の設計本文に矛盾する記載�
 6. historical、current、proposed、invalid、superseded、noncreditを分けます。
 7. 書かれていないことは「書かれていない」とし、許可なく仮説で埋めません。
 8. 確認済み事実、未確認、推測、華恋の意見を分離します。
-9. document ownerを次の五層へ分離します。商品目的はcurrent long-term roadmap、技術・商品品質規範はimmutable original design + current alignment、Cycle経路はoriginal execution plan + current closure route、今この瞬間の現在地は`../08_cycle001_current_state.md`、実行事実はactual source / test / body-free Receiptです。historical baseline、`07`、old Plan、old Handoffをcurrent next action ownerへ戻しません。
+9. document ownerを分離します。全製品の目的・全機能・全状態の現在地は`../00_cocolon_current_product_and_state.md`、各商品の詳細目的・仕様は各canonical owner（Emlis roadmapはEmlisの範囲）、技術・商品品質規範は各original design + current alignment、Cycle001経路はexecution plan + closure route、Cycle001専用の進行現在地は`../08_cycle001_current_state.md`、実行事実はactual source / test /確認記録です。historical baseline、`07`、old Plan、old Handoffを全体currentやcurrent next actionへ戻しません。
+10. 全Cocolon作業で`../00_cocolon_current_product_and_state.md`を毎回全文読みます。仕様相談・観測会・AI選定も例外にしません。全体の機能間接続を確認してから個別ownerと実物へ進み、Emlisの一応答だけでCocolon全体を完結して評価しません。既決の学習済AI＋CMEE接続、Piece、Analysis、もしもルートを対象外として消しません。
+11. 毎作業、全体現在地への関連差分を確認し、変化した機能・決定・状態・残件・根拠を同じ変更単位で置換更新します。未実装を理由に決定済みを未決へ戻さず、設計・コード・稼働・本人端末・正式受入れを分けます。差分なしは既存作業記録／PR説明へ理由を一行残し、無関係な再監査・日付更新・新checker・新履歴系列を増やしません。System Contextに未選択／staleでもfresh ownerの原本を直接読みます。
 
 source reference:
 - `02_forbidden_assumed_understanding_unverified_assertion.txt`
@@ -476,7 +478,7 @@ source reference:
 
 | 条件 | 必ず読むもの |
 |---|---|
-| 全Cocolon作業 | 本file、`09_work_start_checklist.txt`、`99_integrated_paste_each_time.txt` |
+| 全Cocolon作業 | `../00_cocolon_current_product_and_state.md`全文、 本file、`09_work_start_checklist.txt`、`99_integrated_paste_each_time.txt` |
 | GitHub write | `08_artifact_delivery_rules.txt`、技術正本`../11_cocolon_github_transport_and_session_continuity.md` |
 | material artifact / handoff / STOP保存 | `17_continuous_durable_work_recording_and_emergency_handoff.txt`、技術正本`../14_cocolon_continuous_work_recording_and_emergency_handoff.md` |
 | Work Python / pytest | `16_test_runner_runtime_continuity_and_one_shot_prelaunch.txt`、技術正本`../13_cocolon_work_test_runner_runtime_continuity.md` |

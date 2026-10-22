@@ -1,6 +1,6 @@
 # Cocolon作業開始チェックリスト
 
-revision_date: 2026-08-15
+revision_date: 2026-10-22
 normative_status: CURRENT_EXECUTION_GATE
 status: CURRENT_EFFECTIVE
 effective_when: NECESSITY_PRODUCT_DIRECTNESS_AND_MINIMUM_SAFETY_BOUNDARY_REMOTE_POSTVERIFIED
@@ -30,6 +30,12 @@ Workを起動する前に、次のexact14 fieldsをcurrent actualで埋める。
 - [ ] `affected_current_structure_maps`: EmlisAI / Piece / 分析構造 / CMEEに影響する場合は対象map exact1以上と、構造更新または`STRUCTURE_MAP_DELTA_NONE`を固定した。該当しないCocolon作業は`NOT_APPLICABLE`とした。
 
 一つでも具体化できなければ、Workを起動せず`START_ALLOWED`を出さない。
+
+## 全体現在地 — 全作業必須
+
+- [ ] fresh applicable ownerの`../00_cocolon_current_product_and_state.md`を毎回全文読み、全機能・機能間接続・既決方針・未決／未完了を確認した。
+- [ ] 対象詳細ownerと実物へ戻り、旧追記・古い稼働記録・生成Contextを最新と誤認していない。設計／コード／稼働／端末／商品受入れを分けた。
+- [ ] 今回変化する機能・状態・残件・根拠を、同じ変更単位で最新情報へ置換更新する。関連差分なしなら既存作業記録／PR説明へ理由を一行残す。
 
 ## A. Model / environment
 
