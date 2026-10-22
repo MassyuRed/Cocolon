@@ -1,14 +1,14 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v137",
+  "schema_version": "cocolon.piece.workstream_manifest.v138",
   "generated_at": "2026-10-22 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v136",
-    "predecessor_head": "458e6b8614559277adcd0791543652b51c27debd",
-    "carry_forward": "Approved section99 implementation source and tests finalized for one existing push CI. Prior WIP preserved immutably. No native success claimed.",
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v137",
+    "predecessor_head": "15b0a62a1973f88ba1849989ecda6d020061b71a",
+    "carry_forward": "Source18 readback complete. One authorized push CI running at exact source; no rerun authorized.",
     "immutable_prior_evidence_references": [
       {
         "format": "git-commit-json-pointer",
@@ -279,17 +279,17 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "046d99cbfb0295e387d4d41679593d6d42faa8fd",
-    "raw_sha256": "892ebd7a0a65c2ce98e8695a3ef582d9420837eb6e69d47bae409534558d915c",
-    "utf8_bytes": 589469,
-    "chars": 350181
+    "git_blob_sha1": "3559d6b824d1bfae2931f03825491a30a1608ea6",
+    "raw_sha256": "b5824dbd8276c7483ce18493fd1b686b3c5817daf4450c469bef6564c6eb6aa6",
+    "utf8_bytes": 590304,
+    "chars": 350695
   },
   "current_premise": {
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
-    "git_blob_sha1": "b98631b72a24e805e630579228e7c8085d3e40e5",
-    "raw_sha256": "86b770b0e1e47101868fc1d15401b9074e5dcb43cb5c33c3af58bf53de146c4e",
-    "utf8_bytes": 531994,
-    "chars": 310898
+    "git_blob_sha1": "e20050a269c7e613e7f91d626c5eefeb29043be9",
+    "raw_sha256": "7766d395f4fb3717b3822cd83eb1c48ffc99b619816efb56fdeb0d2c0716c6f7",
+    "utf8_bytes": 532327,
+    "chars": 311103
   },
   "product_definition": {
     "user_facing_name": "Piece",
@@ -584,12 +584,12 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "PIECE_WORK_ALLOWED",
-    "state": "BITMAP_IMPLEMENTATION_SOURCE_PREPARED_SINGLE_PUSH_CI_PENDING",
-    "current_map_section": "65.49",
-    "current_entry_section": "101",
+    "state": "BITMAP_SOURCE_FIXED_SINGLE_CI_RUNNING",
+    "current_map_section": "65.50",
+    "current_entry_section": "102",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
-    "weekly_review_section": "5.6.29",
-    "first_unfinished_work": "承認済み新sourceの既存push CI一回→原物/全新画像確認→成功/未採用STOPの記録。追加CI不可。",
+    "weekly_review_section": "5.6.30",
+    "first_unfinished_work": "一回CI39717661329の結果/原物/新画像回収と判定・記録。追加source/CI不可。",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 6,
@@ -734,7 +734,7 @@
     "interpolation_repair_ci_executions": 1,
     "interpolation_repair_implementation_owner": "ios_preview_v4_interpolation_repair_20261022",
     "bitmap_implementation_owner": "ios_bitmap_preview_implementation_20261022",
-    "bitmap_ci_executions": 0
+    "bitmap_ci_executions": 1
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -788,10 +788,10 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "b98631b72a24e805e630579228e7c8085d3e40e5",
-    "raw_sha256": "86b770b0e1e47101868fc1d15401b9074e5dcb43cb5c33c3af58bf53de146c4e",
-    "utf8_bytes": 531994,
-    "chars": 310898
+    "git_blob_sha1": "e20050a269c7e613e7f91d626c5eefeb29043be9",
+    "raw_sha256": "7766d395f4fb3717b3822cd83eb1c48ffc99b619816efb56fdeb0d2c0716c6f7",
+    "utf8_bytes": 532327,
+    "chars": 311103
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -964,34 +964,22 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "APPROVED_LEVEL3_DIRECT_PRODUCT_OR_ACCEPTANCE_WORK",
+    "classification": "AUTHORIZED_CI_RESULT_PRESERVATION",
     "paths": [
-      "ios/tempCocolon/PieceTextMetrics.mm",
-      "features/piece/pieceLayout.js",
-      "features/piece/pieceRenderer.js",
-      "features/piece/pieceMeasuredWrap.js",
-      "components/piece/PieceVisualCard.js",
-      "tests/native/piece-ios-react-shim.h",
-      "tests/native/piece-text-metrics-ios.mm",
-      "tests/native/piece-rn-canvas-entry.js",
-      "tests/native/piece-rn-canvas-fixtures.cjs",
-      "tests/native/piece-rn-canvas-ios.m",
-      "tests/native/run-piece-rn-canvas-ios.sh",
-      "tests/piece-v2-renderer.test.js",
-      "tests/piece-v2-measured-wrap.test.js",
-      "tests/piece-v2-preview-display.test.js",
       "Cocolon_Piece/00_read_first.md",
       "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
       "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
       "Cocolon_Piece/manifest.json"
     ],
-    "product_source_changes": 5,
-    "test_source_changes": 9,
-    "documentation_changes": 4,
+    "source_commit": "15b0a62a1973f88ba1849989ecda6d020061b71a",
+    "ci_run": 39717661329,
+    "product_source_changes": 0,
+    "test_source_changes": 0,
     "workflow_changes": 0,
     "new_files": 0,
     "new_ci_executions": 0,
-    "structure_map": "STRUCTURE_MAP_DELTA_PRESENT",
+    "same_source_reruns": 0,
+    "structure_map": "STRUCTURE_MAP_DELTA_NONE",
     "automatic_progression": false
   },
   "b06_q3_context_fence": {
@@ -88841,11 +88829,11 @@
     "approval_basis": "Mash current direct reply: 進めていいよ。 to the section99 method change + bounded implementation + one new-source CI"
   },
   "ios_bitmap_preview_implementation_20261022": {
-    "state": "BITMAP_IMPLEMENTATION_SOURCE_PREPARED_SINGLE_PUSH_CI_PENDING",
+    "state": "BITMAP_SOURCE_FIXED_SINGLE_CI_RUNNING",
     "source_base": "69cedb8303b3dbe36ac3d9391381921bea90a17b",
     "approved_entry": "99",
     "entry_section": "101",
-    "ci_executions": 0,
+    "ci_executions": 1,
     "ci_max": 1,
     "active_source_publication": true,
     "wip_source_bundle": {
@@ -88994,6 +88982,38 @@
     "tests_implemented": true,
     "legacy_fixture_sha256": "a0abedcfa4f61240ce26b1c9d4481848cff3bdaa6a12d6133a9bced0df92c01f",
     "structure_map": "STRUCTURE_MAP_DELTA_PRESENT",
-    "same_source_rerun_allowed": false
+    "same_source_rerun_allowed": false,
+    "source_commit": "15b0a62a1973f88ba1849989ecda6d020061b71a",
+    "source_tree": "531c86e0569361e8bc3a7849090206e3ab6004c2",
+    "run_id": 39717661329,
+    "run_attempt": 1,
+    "readback": {
+      "paths": 18,
+      "full_content_equal": true,
+      "blob_sha_equal": true,
+      "changed_set_equal": true
+    },
+    "checkpoints": [
+      {
+        "entry": "102",
+        "state": "BITMAP_SOURCE_FIXED_SINGLE_CI_RUNNING",
+        "facts": {
+          "state": "BITMAP_SOURCE_FIXED_SINGLE_CI_RUNNING",
+          "source_commit": "15b0a62a1973f88ba1849989ecda6d020061b71a",
+          "source_tree": "531c86e0569361e8bc3a7849090206e3ab6004c2",
+          "run_id": 39717661329,
+          "run_attempt": 1,
+          "ci_executions": 1,
+          "ci_max": 1,
+          "readback": {
+            "paths": 18,
+            "full_content_equal": true,
+            "blob_sha_equal": true,
+            "changed_set_equal": true
+          },
+          "same_source_rerun_allowed": false
+        }
+      }
+    ]
   }
 }

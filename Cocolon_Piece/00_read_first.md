@@ -3751,3 +3751,8 @@ STRUCTURE_MAP_DELTA_PRESENT。新tracked file0／全tree1917のfile配置は維�
 local既存CIと同じ13 JS suitesは957 PASS／FAIL0／skip0／cancel0（旧949＋新8、12.433秒）。TypeScript5.2.2を既存disposable依存から使用した。初回はNODE_PATH未設定で14件失敗し、同じ既存compilerを指定して解消。関連3suite370 PASSは部分集合なので合算しない。新preview fixture testの挿入位置が旧VM preludeを壊した失敗はEOF配置へ修正し、957成功を得た。RN entry/Card/rendererのJSX parse diagnostic0。native sourceとrunnerのSHA pin一致、旧instrumentation104guard/3reset/lexical projection一致、旧RN13 method保持を静的確認した。読取担当3名によるsource reviewの具体的指摘（host設定/source windowと最大行数/node交換/lazy登録例外/明示category宣言/provider test）を補修済み。UIKit compile／新44／新RN12／新画像の成功はまだ主張しない。
 
 このsource pushで承認された既存CI一回へ進む。現在CI0/上限1、run ID取得後に同じ一回を記録し、原物とログ/画像を回収して判定する。旧V4の既知19失敗は失敗のまま残し、新groupとの分母を混ぜない。今回workflow/RN patch/Pod/依存/API/DB/本番/main merge0。未達なら未採用STOP、追加修正/追加CIへの自動進行なし。通常保存/本人再表示/画像共有/実機未完、商品credit0。途中source bundleは全文readback済み458e6b86のimmutable pointerへ置換し、失われるbyteはない。
+
+
+### 102 bitmap新source CI一回を開始
+
+承認済み§99の実装sourceは15b0a62a1973f88ba1849989ecda6d020061b71a（親458e6b8614559277adcd0791543652b51c27debd、tree531c86e0569361e8bc3a7849090206e3ab6004c2）。許可済み18pathすべてのblob SHAと全文をGitHubから読み戻し、changed-path setが18で一致、ahead1を確認した。既存push workflow Piece RN preview and owner contractsのrun39717661329/attempt1が起動し、このbitmap単位のCIは1/上限1を消費した。sourceを固定し、以後は原物/ログ/画像の回収と判定だけを行う。成功・新画像・native結果はまだ未確認。旧V4失敗を隠さず別groupで確認し、未達なら未採用STOP。same-source rerun/別source再CI/閾値緩和なし。通常保存/再表示/正式admission/共有/実機は未完。

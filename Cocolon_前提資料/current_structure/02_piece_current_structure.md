@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§101／本map§65.49／weekly§5.6.29／manifest v137。承認済みbitmap実装を確定、local JS957 PASS。新source既存CI一回と実iOS/全cell/画像の確認へ進みます。現在CI0/上限1、正式admission/通常保存/本人再表示は未完了です。**
+**最新は入口§102／本map§65.50／weekly§5.6.30／manifest v138。bitmap新source15b0a62aの既存CI39717661329 attempt1を実行中、1/上限1を消費しました。結果/原物/新画像回収中で、正式admission/通常保存/本人再表示は未完了です。**
 
 ### §99の判断案（履歴）
 
@@ -3335,3 +3335,8 @@ Mashが入口§99の新bitmap方式・18path限定実装・新source CI一回を
 ##### 65.49 bitmap実装確定と責務地図
 
 入口§101／manifest v137。承認済みbitmap方式の製品5＋付随test9を確定し、既存push CI一回へ進む。STRUCTURE_MAP_DELTA_PRESENT、既存native file内に所有bitmap/layer/view/manager、JS renderer/Cardへ新profileの非表示測定Text→同CGImage表示→全cell検査と失効を接続。新file0。旧native195・旧RN13保持、新native44期待／別RN12。local既存CI対象957 PASS、JSX parse0、pin/104guard/旧fixture同一を確認。実iOS成功は未確認、CI0/上限1。正式admission/保存/export/通常保存再表示は未完、未達時STOP。
+
+
+##### 65.50 bitmap新source CI一回を開始
+
+新source15b0a62a・許可18blob全文とchanged setをreadback一致確認。既存CI39717661329 attempt1起動、bitmap単位1/上限1消費。source固定、結果/全新画像回収中。成功未主張、未達なら未採用STOP、追加CI不可。正式admission/保存/export false。

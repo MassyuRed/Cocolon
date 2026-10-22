@@ -1890,3 +1890,8 @@ Mashが入口§99の新bitmap方式・18path限定実装・新source CI一回を
 ##### 5.6.29 bitmap実装確定と一度CI
 
 入口§101／manifest v137。承認済みbitmap方式の製品5＋付随test9を確定し、既存push CI一回へ進む。STRUCTURE_MAP_DELTA_PRESENT、既存native file内に所有bitmap/layer/view/manager、JS renderer/Cardへ新profileの非表示測定Text→同CGImage表示→全cell検査と失効を接続。新file0。旧native195・旧RN13保持、新native44期待／別RN12。local既存CI対象957 PASS、JSX parse0、pin/104guard/旧fixture同一を確認。実iOS成功は未確認、CI0/上限1。正式admission/保存/export/通常保存再表示は未完、未達時STOP。
+
+
+##### 5.6.30 bitmap新source CI一回を開始
+
+新source15b0a62a・許可18blob全文とchanged setをreadback一致確認。既存CI39717661329 attempt1起動、bitmap単位1/上限1消費。source固定、結果/全新画像回収中。成功未主張、未達なら未採用STOP、追加CI不可。正式admission/保存/export false。
