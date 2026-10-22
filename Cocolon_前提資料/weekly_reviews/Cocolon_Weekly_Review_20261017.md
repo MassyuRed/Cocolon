@@ -1959,3 +1959,18 @@ LEVEL2の新しいbounded source接続単位。production6＋既存test8＋資�
 入口§111/map§65.56/manifest v149。P-W1の最初のlive未完はAPI明示構成での新renderer供給と実Auth保存→本人履歴/詳細。今回、計画が許可するP-W2並行source準備を実施した。既存本人詳細hostでstrict owner-read/export flag・本人/表示record/lifecycleを確認し、明示準備のfresh同record→固定全canvas→既存Photos/Shareへ接続。private native token/binding二項とnative前後照合で、JS通知前の失効・子消失・複数/不一致を拒否する。新bitmapだけlayer capture、旧v3方法は保持。背景/枠を捨てない。初期失敗・二重操作・背景化・対象/本人変更・取消/cleanupと結果メッセージの帰属を検証した。
 
 local13suite979 PASS/FAIL0/SKIP0、JSX/runner/patch dry-run成功。旧13＋12＋17のfixture bytes不変。新実RN14は正常saved8とnative拒否6、実view-shot全PNG/RGBA比較を一度の新CIで確認する（現時点未実行、counter0上限1）。旧native195/新44/旧RN失敗を保持し、追加修復/再CIへ自動進行しない。新source/既存test/資料だけ、API/DB/env/flag/deploy/実OS/配布/main0。STRUCTURE_MAP_DELTA_PRESENT。稼働保存往復・新版OS操作/Android・backend receipt・実機受入れは未完。
+
+
+###### 5.6.36.1 source一度CI開始
+
+source fbf0deaec8679ebf6a58f53e0702d2e437318680/tree26d330c5の変更20pathをGitHubから全文read-backし、changed set/blob SHA/bytes一致。大きいmanifestはfetch_blob全文で確認。一度CI39750366489 attempt1が起動し、counter1/上限1を消費した。source固定、結果/原画像回収だけを進める。新export14/native44/JS979は未確定、旧期待を維持し、追加修復/再CI/稼働有効化0。
+
+
+###### 5.6.36.2 P-W2一度CIの停止・具体修復候補
+
+入口§111.2/112/map§65.56.2/manifest v150。JS979成功（local/CI別実行、合算なし）、Android source成功。新export14はnative install前のpatch-package parse不備で未実行/PNG0。原因はroot作成patchの末尾余分LF1byte。GNU iOS部分dry-runだけでfull pinned parserを確認しなかった不足として記録し、旧失敗や環境のせいにしない。
+
+修復候補は末尾LF1byte除去だけ。pinned8.0.1 parserで元fail/候補4file9hunk成功、pinned5.1.1への全4file適用成功、適用後4fileは元patchと全bytes一致。9,359byte/hashcc46937cの全文をmanifestへ保持。旧一回counter1を戻さず、新source CI一回までの限定修復案をRule18§11.3の個別承認へ提示する。source修復/追加CI/期待変更/DB/env/deploy/実OS/配布0。P-W1 live通常保存、P-W2実OS/新版Android/backend receipt、P-W3実機は未完。結果/候補4資料のみSTRUCTURE_MAP_DELTA_NONE。
+
+
+最終原物追補：CI39750366489は全6job終了/failure（17:47:17〜17:58:52 JST）。新bitmap native44はunique44全PASS。旧195は176PASS/19FAIL、旧V3別20は明示未実行。新export14とPNGはinstall前停止で未実行。全6job原logs/run/job/artifact0 metadata・元local失敗/最終979・fixture比較・pinned parser integrity/修復候補/全4file一致等20memberをmanifest同単位のfinal_evidence_bundleへ可逆保存する。sourceはCI開始後不変更、counter1/上限1、追加CI0。

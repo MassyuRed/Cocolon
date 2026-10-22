@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§111／map§65.56／weekly§5.6.36／manifest v149。通常本人詳細→新iOS版の画像保存/共有sourceを準備。local979成功、実view-shot/PNG/拒否14条件は新一度CI待ち。P-W1実Auth通常保存・実OS操作・本人実機は未完です。**
+**最新は入口§111.2/112／map§65.56.2／weekly§5.6.36.2／manifest v150。通常詳細の新iOS版export sourceを反映しJS979成功。native検証はpatch末尾LF1byte不備で開始前に停止。1byteだけの修復候補を準備、適用/新CIは個別承認待ち。P-W1実保存/実OS/本人実機は未完です。**
 
 ### §87の設計時点（履歴）
 
@@ -3936,3 +3936,24 @@ localは既存CI同一13suite979 PASS/FAIL0/SKIP0/cancel0（17,401.43458ms）。
 新sourceで既存CIを一度だけ行い、新group14＝正常saved8＋clear/removed/token/binding/multiple/during拒否6を別判定する。正常は通常hostと同じoffscreen geometryで実view-shotを通し、全canvas PNGを同じsaved native像とRGBA比較する。初回完成後8秒超のcaptureも確認する。旧groupとは分母/結果を混同しない。新compile/runtime/PNG/拒否条件の未達は原actualを保存して停止し、CI後修復・追加CIへ自動進行しない。現時点CI未実行/counter0上限1、native/実PNGの成功は未主張。
 
 STRUCTURE_MAP_DELTA_PRESENT。全変更pathはmanifest同単位を正本とする。P-W1の実Auth通常保存、P-W2の実OS写真保存/共有とAndroid新版、backend書出しreceipt、P-W3本人実機/商品受入れは残る。今回のsource準備を全体完成・稼働有効化と呼ばない。前回CI39734534523はclosed/failure/消費1を保持する。automatic_progression=false。
+
+
+### 111.1 source照合と一度CI開始
+
+source fbf0deaec8679ebf6a58f53e0702d2e437318680/tree26d330c5の変更20pathをGitHubから全文read-backし、changed set/blob SHA/bytes一致。大きいmanifestはfetch_blob全文で確認。一度CI39750366489 attempt1が起動し、counter1/上限1を消費した。source固定、結果/原画像回収だけを進める。新export14/native44/JS979は未確定、旧期待を維持し、追加修復/再CI/稼働有効化0。
+
+### 111.2 一度CI：JS979成功、nativeインストール前のpatch形式不備で停止
+
+source fbf0deae/CI39750366489 attempt1/counter1上限1。CIのJS979 PASS/FAIL0/SKIP0/cancel0（20,791.787504ms）、Android Piece source成功を確認。iOS実RNと両OS export依存jobはnpm ci/postinstallで停止した。rootが編集したreact-native-view-shot5.1.1 patchの最終行がLF二つで終わり、patch-package8.0.1が最後の空行をcontextとして加算し、最終hunkの宣言6→10に対し7→11と読んでparseを拒否した。iOS index header欠如が原因ではない。rootの事前確認はGNU patchのiOS部分だけであり、full patch/pinned parser確認が不足していた。旧native/RN失敗との混同や環境偶発扱いをしない。
+
+実RN render/buildは開始されず、新export14は全て未実行、新PNG0・artifact0。旧13/bitmap12/admitted17のfixture bytes不変と、前回39734534523原画像は保持するが、今回の成功へ流用しない。standaloneの新bitmap44は個別unique44/44 PASS、旧195は176PASS/19FAIL、計239は220PASS/19FAIL。旧V3別20は従来どおり明示未実行。sourcejobは旧19失敗でfailure。全6job終了、CI全体failure（17:47:17〜17:58:52 JST）。新getterのcompileと既存bitmap描画の技術確認であり、private capture/新PNGのruntime成功ではない。source準備を稼働完成・商品creditへ昇格しない。PRIMARY_OUTCOME=BLOCKER_NARROWED、validation_success=false、bounded_work_complete=false、source追加修復/再CI0、API/DB/env/flag/deploy/実OS/main0。
+
+## 112. patch末尾LF1byteだけの修復案 — 未承認・未適用
+
+修復候補は既存patchの末尾LFを一つだけ除く。現在9,360byte/SHA256 `383d4700bd13adadc7f7f22b92d0184cd522a45a839251a9ceb8709e17d850bd` → 候補9,359byte/SHA256 `cc46937cde1b767f564c5597313f956d090d6ecf6bfa406a666de3d0ef253399`。候補の全bytesはmanifest `ios_bitmap_owner_export_patch_repair_proposal_20261022.candidate_text`に保持する。現在sourceをそのまま保持し、候補はまだ適用していない。
+
+product package-lockとarchive SHA512が完全一致するpatch-package8.0.1の実parserで、元patchの失敗→候補全4file/9hunkのparse成功を再現した。npm pinned react-native-view-shot5.1.1の全4fileへの適用も成功。元patchと候補をGNU patchで各同じ原本へ適用した出力は、Android native/iOS native/lib typing/src typingの4file全bytes一致。本文、native処理、PNG仕様、private token/binding、版、8秒、期待、runner/workflow、依存を変更しない。iOS原本のlocal materialization末尾にも余分なLFがあったため、古いlocal intended比較はその1byteを区別し、採用原本はnpm pinned bytesへ固定した。この差を実装差分とは扱わない。
+
+次の実行対象はpatch1file＋結果資料4fileの既存5path。Mash承認後に候補1byte修復を適用し、新source pushの既存CIを一回だけ行う案。前runをActions rerunしない。成功条件はparse/apply成功と、旧native195/新44・旧RN13/bitmap12/admitted17を保持した上で新export正常8/拒否6の元条件と画像を確認すること。旧失敗を消して全体GREENへ作り替えない。新条件の未達は一回で停止し、再修復/追加CI/稼働設定/DB/実機/次Gateへ自動進行しない。
+
+Rule18§11.3のstanding delegation外には **「closed or consumed single-use authorityのreuse / retry / reactivation / repair」** が明記されている。今回の一度CIを消費した後の修復・新CIとなるため、同条に従い具体候補への個別承認を待つ。作業規則の変更、新しいGate/例外、承認済みとする自己判断は行わない。原失敗/消費counterは保持する。STRUCTURE_MAP_DELTA_NONE（結果/候補記録4資料だけ）、automatic_progression=false。

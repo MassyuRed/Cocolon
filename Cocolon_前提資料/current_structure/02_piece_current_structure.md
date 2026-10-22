@@ -3416,3 +3416,18 @@ localは既存CI同一13suite979 PASS/FAIL0/SKIP0/cancel0（17,401.43458ms）。
 新sourceで既存CIを一度だけ行い、新group14＝正常saved8＋clear/removed/token/binding/multiple/during拒否6を別判定する。正常は通常hostと同じoffscreen geometryで実view-shotを通し、全canvas PNGを同じsaved native像とRGBA比較する。初回完成後8秒超のcaptureも確認する。旧groupとは分母/結果を混同しない。新compile/runtime/PNG/拒否条件の未達は原actualを保存して停止し、CI後修復・追加CIへ自動進行しない。現時点CI未実行/counter0上限1、native/実PNGの成功は未主張。
 
 STRUCTURE_MAP_DELTA_PRESENT。全変更pathはmanifest同単位を正本とする。P-W1の実Auth通常保存、P-W2の実OS写真保存/共有とAndroid新版、backend書出しreceipt、P-W3本人実機/商品受入れは残る。今回のsource準備を全体完成・稼働有効化と呼ばない。前回CI39734534523はclosed/failure/消費1を保持する。automatic_progression=false。
+
+
+#### 65.56.1 新source一度CI開始
+
+source fbf0deaec8679ebf6a58f53e0702d2e437318680/tree26d330c5の変更20pathをGitHubから全文read-backし、changed set/blob SHA/bytes一致。大きいmanifestはfetch_blob全文で確認。一度CI39750366489 attempt1が起動し、counter1/上限1を消費した。source固定、結果/原画像回収だけを進める。新export14/native44/JS979は未確定、旧期待を維持し、追加修復/再CI/稼働有効化0。
+
+
+#### 65.56.2 一度CI停止と末尾LF1byte修復候補
+
+入口§111.2/112、manifest v150。CI39750366489/sourcefbf0deaeのJS979/Android source成功、実RN・export nativeはroot編集patchのparse不備でbuild前停止。最終空行がhunk contextとして余分に数えられた。新export14/PNGは未実行、CI後source変更0。旧群結果と混同しない。
+
+末尾LF1byteだけを除く9,359byte/hashcc46937cの候補をmanifestへ全文保持。package-lock完全一致の実patch-package8.0.1 parserで元失敗/候補4file9hunk成功、pinned view-shot5.1.1全4file適用・修復前後の適用後bytes完全一致を確認。新規source・期待変更なし。Rule18§11.3の消費済み単位repair境界により、既存patch1＋結果資料4の限定適用と新source CI一回はMash判断待ち。BLOCKER_NARROWED/未採用、追加修復/再CI/稼働/DB/実OS/実機0。STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+
+最終原物追補：CI39750366489は全6job終了/failure（17:47:17〜17:58:52 JST）。新bitmap native44はunique44全PASS。旧195は176PASS/19FAIL、旧V3別20は明示未実行。新export14とPNGはinstall前停止で未実行。全6job原logs/run/job/artifact0 metadata・元local失敗/最終979・fixture比較・pinned parser integrity/修復候補/全4file一致等20memberをmanifest同単位のfinal_evidence_bundleへ可逆保存する。sourceはCI開始後不変更、counter1/上限1、追加CI0。
