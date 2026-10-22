@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§103／本map§65.51／weekly§5.6.31／manifest v139。CI39717661329はJS957成功。新native44はgroup開始時の検証用Text例外で未完、実RN結果/原物は回収待ちです。CI1/上限1、source固定、正式admission/通常保存/本人再表示は未完了です。**
+**最新は入口§104／本map§65.52／weekly§5.6.32／manifest v140。bitmap新実RN12成立・新8プレビュー画像を確認、両420も元8秒以内。一度CI39717661329は新native44のfixture例外と旧群失敗によりfailure、未採用STOPです。CI1/上限1完了、正式admission/通常保存/本人再表示は未完了。**
 
 ### §99の判断案（履歴）
 
@@ -3345,3 +3345,8 @@ Mashが入口§99の新bitmap方式・18path限定実装・新source CI一回を
 ##### 65.51 一度CI途中結果：JS957成功／新native group開始時例外
 
 source15b0a62a/CI39717661329 attempt1継続。JS957 PASS、iOS source/standalone compile成功。旧native129+V946成功、V4既知19FAIL。新bitmap groupは最初のaddSubview時RCTTextView isTrackingKeyboard例外、新44判定は未実行。実RN/画像待ち。CI1/上限1、修正/再CIなし、未採用を保持。
+
+
+##### 65.52 bitmap一度CI完了：新実RN12成立／native44未検証で未採用STOP
+
+入口§104／manifest v140。source15b0a62aの一度CI39717661329はfailure、1/上限1で閉じた。限定TECHNICAL_CREDIT：新実RN12（preview8＋raw3＋crop期待拒否1）成立、新22PNG、420は6.719/3.903秒、全cell/fit/本文保持。新standalone44は製品描画前のfake-window fixture例外で未検証。旧native195は176/19、旧RN13と5PNGは前回同じ。原ZIP63,808,871B/1071membersを保持、画像目視と独立照合を記録。未採用STOP、正式admission/保存/export/実機未完、source修正/追加CI0。

@@ -3763,3 +3763,35 @@ local既存CIと同じ13 JS suitesは957 PASS／FAIL0／skip0／cancel0（旧949
 固定source15b0a62aの一度CI39717661329 attempt1は継続中。JS13suite957 PASS/FAIL0/skip0/cancel0（13.472秒）、Android source検査成功、iOS実header構文compile/旧patch適用とstandalone binary compile成功。native実行は旧NATIVE129/129、V9 46/46、V4 1PASS/19FAILまで到達し、旧V3の別20は従来どおり明示未実行。新STAGE bitmap_beginの直後、最初のsource Text addSubview時にNSInvalidArgumentException「-[RCTTextView isTrackingKeyboard]: unrecognized selector」で終了。BITMAP_PASS/FAILも新44件集計も出ていないため、新44を失敗44/成功44へ換算しない。新bitmap製品methodの描画成功もまだ示さない。
 
 standalone shimのRCTTextView.windowが未mount時にselfをUIWindowへcastして返す既存構造を、新groupが本物のwindowへaddSubviewする経路で使ったこととの関係を読取中。例外のselector/stackは原ログで確定しているが、追加修正や次CIによる因果確認は未実施。native alarm90秒は保持し、ログ末尾は例外終了、期限変更なし。実RN simulator jobはまだ継続中で、原物/新PNG/新12結果は未到着。counter1/上限1消費済み、source固定、通常保存/admission/exportは未完。
+
+
+### 104 bitmap一度CI完了：新実RN12成立／native44未検証で未採用STOP
+
+固定source15b0a62a1973f88ba1849989ecda6d020061b71aの既存CI39717661329 attempt1は完了（failure）。承認済みbitmap単位のCIは1/上限1で閉じ、source修正・追加run・same-source rerunは0。GitHub全18blobと変更集合のreadbackを済ませたsourceをそのまま検証した。限定TECHNICAL_CREDITは「同一所有bitmapによる実RN preview8完成＋raw3描画＋crop時失効」だけ。新standalone44未完のためvalidation_success=false、未採用STOP、商品credit0。旧失敗群も成功へ変更しない。
+
+JS13suite957 PASS/FAIL0/skip0/cancel0、Android source成功、iOS実header/patch構文compileとstandalone binary compile成功。export Android/Pods jobは対象外guardの正常終了で、新しいexport build成功へ読み替えない。native旧175は全成功、旧V4は1成功/19失敗＝unique195件は176PASS/19FAIL。旧V3別20は従来どおり明示未実行。新bitmap44はgroup開始直後の最初のsource addSubviewでNSInvalidArgumentException「-[RCTTextView isTrackingKeyboard]: unrecognized selector」により判定0/44。製品renderBitmapCanvasへ入る前で、90秒alarmではない（main→例外約46.86秒）。未mount時selfをUIWindow*として返す既存shimを、新groupがreal-window flagなしで実windowへmountする前提不成立とstack/source順が一致する。UIKit内部照会そのものは未観測、修復後CIでの因果確認も未実施。
+
+新RNは別12caseすべて固定sourceの成立条件を満たした。preview8は本文/全native Text保持、全logical1 alpha占有一致、同CGImage host、有効fit／誤token拒否、画像と自然Text参照画像。raw3は元空白/Hebrew/mixed-bidiを変えず同じ描画/文字検査成功。crop1はfit成立後の設定変更でimage消去→unavailable/native_bitmap_invalidated→fit失効の期待拒否。trapのcapture_error=true/PNGなしは拒否期待であり、完成画像11件へ加算しない。全件canSave/canExport=false、元8秒以内。最大420は6718.778ms／3903.472ms、両36pt/sizeIndex3、期限増加/clock再起算なし。このelapsedはCard/fit確認までで、続くPNG/参考PNGの保存時間を含めない。実機や永続保存/exportの性能保証にはしない。
+
+| 新RN case | phase | font | elapsed ms |
+|---|---|---:|---:|
+| bitmap_essay_paragraphs | native_checked | 48 | 901.623 |
+| bitmap_quote_unicode | native_checked | 80 | 754.157 |
+| bitmap_declaration_no_brand | native_checked | 72 | 367.223 |
+| bitmap_essay_max420 | native_checked | 36 | 6718.778 |
+| bitmap_suffix_latin_ligature | native_checked | 72 | 241.013 |
+| bitmap_suffix_arabic | native_checked | 72 | 257.211 |
+| bitmap_suffix_max420_a | native_checked | 36 | 3903.472 |
+| bitmap_containment_branding_opacity08 | native_checked | 72 | 251.848 |
+| bitmap_suffix_spaces_raw | bitmap_checked | 48 | 52.592 |
+| bitmap_suffix_hebrew_raw | bitmap_checked | 48 | 61.350 |
+| bitmap_suffix_mixed_bidi_raw | bitmap_checked | 48 | 46.210 |
+| bitmap_host_crop_trap | unavailable | 48 | 425.601 |
+
+XCTestは2method実行/1method失敗、59 failure summaryはすべて旧testWholeCanvasWithRealReactNative。新12の原reportをsourceのassertionへ独立照合して成立を確認した。旧RN13は前回原reportとnames/blocks/phase/reasonが同じで、preview8拒否・saved1完成・raw3/旧trap1の検査不成立を維持。旧5PNGは前回とbyte同一。新12で旧13の失敗を埋めず、25/25合格とは呼ばない。
+
+新8を360幅と原寸body cropで目視し、句読点/濁点/café accent/家族・旗・thumb emoji/Latin ligature・AV To/Arabicの接続と点と下端/両420末尾/branding0.8/対比/余白に、明白な新欠け・豆腐・重なり・左右反転・余白衝突は見えなかった。補足raw Hebrew/mixed-bidiにも新しい明白な崩れは見えない。bitmap輪郭は自然RN参照より硬くシャープに見え、AA/細線/自然描画と同等とは主張しない。外周の段状帯は旧savedにも共通し、参照背景/細枠はharnessの独立塗りで条件が異なる。これを新方式固有の劣化や背景同等の証明へしない。原寸/360目視は担当read-only reviewとrootで確認し、本人実機受入れへ昇格しない。
+
+原物ZIPは63,808,871byte／1071members、SHA256 `3cf77b0e45f61fd111fab1cd19f8677cbbec5936746bf87dc3b1146d39443776`、GitHub artifact12400646587のdigestと一致。原ZIP全文を保持（libfile_e1b763448acc8191928695bdea8fd8b3 v0）。新22PNG＝完成像11＋自然参照11、旧5を含め全27PNG。JSON/全job原ログ/xcresult summary/独立照合/全PNG hashをmanifestのlossless evidenceと原物参照へ保持する。前runの大きなfinal bundleは、全文readback済みimmutable69cedb83/manifest blob88dd0aafの同hash pointerへ移し、履歴byteを失わない。
+
+入口§99の未達STOPと一回上限を適用し、この限定実装＋一度CIの単位を未採用で閉じる。次の最小候補は新standalone groupだけを実window前提のfixtureへ直すことだが、未実装・新scope判断前で、別CIを自動開始しない。新44の所有権/phase/resource/fault検査未完、正式renderer admission・通常保存/本人再表示・共有・実機は残件。8秒/90秒/4096辺/4,194,304px/共有32MiB・本文/独立5metric・旧fixture/失敗分母を保持。API head a536e50e、DB/env/deploy/main merge変更0、両Draft/open/unmerged。STRUCTURE_MAP_DELTA_NONE（結果記録4fileのみ、source14はCI開始後不変）。
