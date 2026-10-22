@@ -3373,7 +3373,7 @@ def test_repository_cmee_workspace_profile_keeps_disabled_acceptance_boundary() 
         "agent/three-core-cmee-current-structure-20260815"
     )
     assert product["expected_head"] == (
-        "6a073151facb674efa412e80451403dd50f8bfa6"
+        "8e3c26f66e13c26e82349c4e02415e149e5e3943"
     )
     assert "expected_ancestor" not in product
     api = cmee["repositories"]["mashos-api"]
@@ -3381,7 +3381,7 @@ def test_repository_cmee_workspace_profile_keeps_disabled_acceptance_boundary() 
         "agent/cmee-v1a-i1sx-source-explicit-20260815"
     )
     assert api["expected_head"] == (
-        "ce8466253b99fcf0992a8b5c3ca38284d1fb5ef0"
+        "3084c99e5a08d6e475d8a177e62ebf1548e8a0f9"
     )
 
 
@@ -3874,7 +3874,13 @@ def test_unit_c_t56_account_profile_read_only_preserves_explicit_gaps() -> None:
     assert is_v2 is True
     assert profile["publication_mode"] == "EPHEMERAL_VERIFY_ONLY"
     assert profile["required_category_exact"] == 2
-    assert [len(rule["path_globs"]) for rule in profile["seed_rules"]] == [8, 5]
+    assert [len(rule["path_globs"]) for rule in profile["seed_rules"]] == [1, 8, 5]
+    baseline = profile["seed_rules"][0]
+    assert baseline["id"] == "whole_product_current_baseline"
+    assert baseline["classification"] == "CURRENT_OWNER"
+    assert baseline["path_globs"] == [
+        "Cocolon_前提資料/00_cocolon_current_product_and_state.md"
+    ]
     contract = profile["operator_contract"]
     assert len(contract["canonical_owner_refs"]) == 2
     assert {row["remote_ref"] for row in contract["canonical_owner_refs"]} == {

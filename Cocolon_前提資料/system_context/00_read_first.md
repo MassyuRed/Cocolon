@@ -1,7 +1,7 @@
 # Cocolon System Context — V1 current technical management entry
 
 status: CURRENT_TECHNICAL_OWNER__V1_MANAGEMENT_ENTRY_ACTIVE_ON_PR37_WORKING_LINEAGE
-revision_date: 2026-09-08
+revision_date: 2026-10-23
 scope: Cocolon System Context Steps 1–7 plus Step 9 management entry and V1 implementation freeze
 step8_status: SKIPPED_BY_MASH_DECISION
 management_entry_activation: 1
@@ -34,10 +34,60 @@ STEP7_BOUNDED_IMPLEMENTATION_COMPLETE
 This activates the management entry and freezes the V1 implementation. It does
 not claim `SYSTEM_CONTEXT_V1_OPERATOR_CONTEXT_ACTUAL_PROOF_COMPLETE`.
 
+## 2026-10-23 current information and execution route
+
+Mash requested a complete System Context information refresh on 2026-10-23.
+The implementation owner is [PR #37](https://github.com/MassyuRed/Cocolon/pull/37).
+The product material owners are [PR #30](https://github.com/MassyuRed/Cocolon/pull/30)
+and [API PR #3](https://github.com/MassyuRed/mashos-api/pull/3).
+The copy of this entry on the product branch routes to that existing implementation; do not
+run the older product-branch copy of `tools.cocolon_context` as the current CLI.
+Do not overlay the implementation and product checkouts into a synthetic tree.
+
+Before any prepare or Cocolon judgment, read the entire fresh product-owner
+[whole-product current baseline on PR30](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/00_cocolon_current_product_and_state.md).
+The version on the PR37 implementation branch is not the product current owner.
+This applies to specification discussion, observation teaching, model selection,
+implementation, audit and document maintenance. Update relevant state differences
+in that original in the same product change unit. An absent generated seed,
+stale cache or fixed historical claim never waives the original read.
+
+The current material baseline includes all three cores, the decided learned-model
+connection to CMEE, observation/model-comparison materials, the latest weekly
+review and the overall structure maps. Model selection, integration and training
+remain incomplete; the decided connection is not revoked by an old
+`NO_EXTERNAL_GENERATIVE_AI` snapshot. Emlis question/answer is implemented;
+Analysis IF/Saved remains designed but unimplemented. Code, deployment, device
+verification and product acceptance are separate states. Piece's private API
+configuration is deployed while the new RN distribution and owner round trip
+remain unverified. Resolve their changing details from the fresh baseline and
+its original owners, not this navigation summary.
+
+The tracked `current/cmee_working/**` is the historical August snapshot
+(Cocolon `6b0973c841d536a2e6eaa97c586c320a93f83dc7`, API
+`06ce311b3ea728b06f83439d268a34bed917c01c`). It is not the current cache.
+Its inventory omits later files, including the whole-product baseline,
+October weekly review and observation-learning materials. On the pre-update
+product heads `bef22aecef5169a931bda399be6e51e17bc3d7b9` and
+`3084c99e5a08d6e475d8a177e62ebf1548e8a0f9`, the tracked-path census is
+1766 + 2444 = 4210; this is an inventory count, not full semantic review of
+every blob. Keep the historical bytes unchanged and regenerate through PR37's
+existing fixed-environment workflow into the separate cache.
+
+Current execution success must be read from PR37's exact-head actual-prepare
+run, its doctor/prepare/verify-only diagnostics and material-head checks.
+Verifier test success alone is not actual prepare. A later material or
+implementation change requires fresh prepare; an older successful cache is
+not current. Cache artifacts expire after seven days; the recipe and source
+remain in GitHub. The plain split `index_scip_run.py` has a known historical
+syntax error, but the actual code-index entry executes a hash-verified encoded
+payload. Do not misreport the unused split file as a current execution blocker.
+
 ## Standard flow
 
 ```text
 work-attitude 00_read_first
+→ fresh whole-product current baseline (full original)
 → this V1 technical entry
 → exact workspace resolve and freshness
 → task Context compile

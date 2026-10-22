@@ -7,6 +7,7 @@
       "current_owner_rules": [
         {
           "path_globs": [
+            "Cocolon_前提資料/00_cocolon_current_product_and_state.md",
             "Cocolon_前提資料/current_structure/*.md",
             "Cocolon_前提資料/designs/cmee/Cocolon_MeaningExperienceEngine_V1_FinalTechnicalDesign_ProReviewApplied_20260815.md",
             "Cocolon_前提資料/designs/cmee/v1/*.md"
@@ -45,7 +46,7 @@
           ]
         }
       ],
-      "task_orientation": "Read the latest valid Emlis Q1-Q4 continuation in the API handoff and current product originals. Preserve initial input, question, independent answer, correction/withdrawal, saved state and current body. Resume shared observation/reception quality work, not historical Round 0, UI/payment work or environment construction; NOT_CLEAR and default OFF remain.",
+      "task_orientation": "Read the entire fresh PR30 whole-product baseline before any task, then its detailed canonical owners and current source. Cover Emlis question/answer and reception, Piece text/image and private deployment versus pending native distribution, Analysis V2/comparison versus unimplemented IF/Saved, and the decided learned-model/CMEE connection and pending model trials. Preserve original input, independent supplements, correction/withdrawal, saved identity, per-core source adoption and product acceptance boundaries. Historical disabled/default-OFF claims describe their frozen scope and do not revoke later explicit Mash decisions or assert current deployment state. Select the next work from the current user instruction and fresh owners; do not automatically start model trials, training, deployment, release or historical Cycle001 work.",
       "required_categories": [
         {
           "id": "current_production_emlis_ai",
@@ -386,6 +387,58 @@
       ],
       "required_category_exact": 10,
       "seed_rules": [
+        {
+          "classification": "CURRENT_OWNER",
+          "id": "whole_product_current_baseline",
+          "path_globs": [
+            "Cocolon_前提資料/00_cocolon_current_product_and_state.md"
+          ],
+          "repository_keys": [
+            "Cocolon"
+          ]
+        },
+        {
+          "classification": "REFERENCE_AS_NEEDED",
+          "id": "current_whole_product_navigation",
+          "path_globs": [
+            "AGENTS.md",
+            "Cocolon_前提資料/01_cocolon_overall_structure.md",
+            "Cocolon_前提資料/01A_cocolon_overall_structure_app_foundation_home.md",
+            "Cocolon_前提資料/01B_cocolon_overall_structure_analysis_piece_emotionlog_ranking.md",
+            "Cocolon_前提資料/01C_cocolon_overall_structure_account_subscription_backend_support.md",
+            "Cocolon_前提資料/02_cocolon_national_system.md",
+            "Cocolon_前提資料/weekly_reviews/README.md",
+            "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
+            "Cocolon_前提資料/observation_learning/README.md",
+            "Cocolon_前提資料/observation_learning/model_selection/2026-10-22-three-core/README.md"
+          ],
+          "repository_keys": [
+            "Cocolon"
+          ]
+        },
+        {
+          "classification": "MUST_READ_FULL",
+          "id": "three_core_current_runtime_sources",
+          "path_globs": [
+            "ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py",
+            "ai/services/ai_inference/cocolon_meaning_experience_engine/piece*.py",
+            "ai/services/ai_inference/analysis_observed_service.py",
+            "ai/services/ai_inference/astor_material_snapshots.py",
+            "ai/services/ai_inference/watashi_map_service.py",
+            "ai/services/ai_inference/kokoro_weather_service.py",
+            "ai/services/ai_inference/piece_v2*service.py",
+            "screens/input/InputPieceActionArea.js",
+            "screens/piece/*.js",
+            "features/piece/*.js",
+            "ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/*.py",
+            "components/piece/*.js",
+            "components/selfStructure/WatashiMapV2Renderer.js"
+          ],
+          "repository_keys": [
+            "Cocolon",
+            "mashos-api"
+          ]
+        },
         {
           "classification": "CURRENT_OWNER",
           "id": "latest_emlis_quality_continuation",
@@ -2010,6 +2063,16 @@
         "shared"
       ],
       "seed_rules": [
+        {
+          "classification": "CURRENT_OWNER",
+          "id": "whole_product_current_baseline",
+          "path_globs": [
+            "Cocolon_前提資料/00_cocolon_current_product_and_state.md"
+          ],
+          "repository_keys": [
+            "Cocolon"
+          ]
+        },
         {
           "id": "account_profile_direct_source_exact8",
           "classification": "CURRENT_OWNER",
