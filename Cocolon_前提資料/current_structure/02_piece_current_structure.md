@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§98／本map§65.46／weekly§5.6.26／manifest v130です。Mash承認済みV4参照補間修復を適用し、新source一度CIを準備しました。実描画/成否は未確認、quote4M拒否・正式admission/通常保存未完を維持します。**
+**最新は入口§98.5／本map§65.46.3／weekly§5.6.26.3／manifest v134です。V4参照補間修復を承認どおり適用し一度CIを完了しましたが、総合failure。補間trueは61件で実測できても占有不一致は残り、新preview8件は全未成立。JS949/旧native175は成功、新V4は1PASS/19FAIL。原物を保存し候補未採用STOP、正式admission/通常保存/本人再表示は未完了です。**
 
 ### §97候補判断時点（履歴）
 
@@ -3307,3 +3307,8 @@ native原境界62local拒否の61件はstage83の全logical1占有不一致、qu
 ##### 65.46.2.1 途中記録の読戻し容量を縮小、原物保持
 
 入口§98.4.1/manifest v133。途中manifest8,388,394byteが全文取得Transport closed二回のため、旧runの既照合raw bundleだけを固定c79c06aa/blob542f7267同pointerへ保持し、今回5job＋guard原logsは直接内包する。checkpoint内bundle重複を同manifest pointerへ整理。旧/新原物のbytes/hashは不変、source/runner/CI追加0。実RNは同run継続中。
+
+
+##### 65.46.3 最終：承認修復＋一度CI完了、補間有効でも占有不一致、未採用STOP
+
+入口§98.5/manifest v134。承認source66be9cbeの唯一CI39704913859 attempt1は全6job終了/failure。JS949/旧native175/Android source成功、新V4 1PASS/19FAIL、旧V3 20未実行。export2job主要native工程skip。実RN13件の新preview8は全unavailable/PNG0/fit0、旧saved1のみnative_checked、raw3+trap1はmeasurement_unavailable。stage83の61件すべてで補間trueと不一致を実測し、初差はactual0/ref有52・actual有/ref無9へ変化。27件はbbox同一でもmask不一致、単純な補間flag変更では修復できない。quote4M拒否継続。全6＋guard元logs/元report/PNG/map/xcresult JSON/台帳/解析を可逆保存、完全原ZIP55,728,124byte/998memberもdigest一致で保存済み。新counter1/上限1・rerun0・追加修正0。BLOCKER_NARROWEDは試した単一修正の不足確認だけ、商品品質credit0。候補未採用/DETOUR_RISK_STOP、通常保存/本人再表示/実機未完、資料4fileのみSTRUCTURE_MAP_DELTA_NONE、automatic_progression=false。

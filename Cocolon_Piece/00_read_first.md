@@ -3593,3 +3593,51 @@ export2jobはjob successでも、既存path条件で依存install/Pods解決/4li
 既に全文照合済みの固定commit c79c06aaac7a1e38023e640f7c502653bd36ba48/blob542f7267e4aadb23dd68caef0cd02d6afd6f4256に同一bytesで存在する旧run39692007906のfinal_evidence_bundleだけを、その同JSON pointerへのimmutable参照へ置換する。元圧縮bytes/hash/member数は保持し、Git履歴や原ZIPを削除しない。今回run39704913859の元5job＋guard原ログbundleは直接内包し、checkpoint facts側の同bundle重複だけを同manifest内pointerへ置換する。原物を減らさず、新しいnative/runner/test/workflow/CI効果を生まない容量修復である。
 
 この記録の全文読戻しを確認してから途中原物の保存完了とする。実RNは同じ唯一CIで継続中、source固定/counter1・rerun0、通常保存/本人再表示未完、STRUCTURE_MAP_DELTA_NONE。
+
+
+### 98.5 最終：承認修復＋一度CI完了、補間有効でも占有不一致、未採用STOP
+
+Mash承認の§97/§98に従い、承認native/runnerをsource66be9cbedb8babd15b1c59cc1479a2fd10624747へ反映し、CI39704913859 attempt1を一度実行した。2026-10-22T01:18:28Z開始→01:37:49Z最終更新（10/22 10:18:28〜10:37:49 JST、約19分21秒）、全6job終了/総合failure。新counter1/上限1、Actions rerun0、結果後source追加修正0。§98.3〜4の実行中表記は途中履歴である。旧run39692007906・39683393855のcounter1/failureを維持し、今回候補も未採用として単位を終了する。
+
+| 元job | 実結果と成立範囲 |
+|---|---|
+| piece-rn-contracts | success、JS949PASS/0FAIL/0SKIP/0cancel、10,131.470663ms |
+| piece-android-source | success、既存native source compile |
+| piece-export-pods / piece-export-android | successだが既存path条件で依存install/Pod解決/4library実compileをskip。今回の新export native compile証拠なし |
+| piece-ios-source | source compile/patch成功、旧175PASS＋新V4 1PASS/19FAIL＝195unique。旧V3 20明示未実行、job failure |
+| piece-ios-rn-canvas | instrumented実RN host build成功、XCTest1method/1failed/59failure summaries、元13report/PNG5取得、job failure |
+
+単体nativeはmain_entered→最終summaryのログ差約35.89秒、元alarm90を維持してsummaryへ到達した。唯一の新PASSはempty_alpha。残19項目は正常control成功を前提とするため、19独立故障や個別guard破損と断定しない。standalone各callの拒否operandは今回も取得しておらず、実RNのcauseを一括流用しない。simctl exit0や期限内の終了をテスト成功へ付け替えない。
+
+#### 98.5.1 補間指定の効果と修復不成立
+
+元native境界62件は全local/rejected。stage83が61、quoteのstage15が1。比較61件すべてで同call identity・reference_image_should_interpolate=true・first_mismatch_present=true・有限geometry・正寸法/範囲内indexと占有不一致を確認した。承認native preimage/実instrumentation mapは候補と完全一致、元104guard/3reset/比較if/NOは不変。全62の自然snapshotはpresent/paint_complete/stable_mask0と属性/storage/bounds/frame/scale一致を維持する。
+
+| 各callの最初の不一致 | 前回run39692007906 | 今回run39704913859 |
+|---|---:|---:|
+| actual alpha>0・参照非占有 | 61（alpha1〜9） | 9（alpha1が6、alpha2が3） |
+| actual alpha0・参照占有 | 0 | 52 |
+
+これは最初の差の分布であり、総不一致画素数や差分率ではない。自然側bboxは61件すべて前回と同じ、参照側bboxは61件すべて変化。今回27件は両bboxが一致しても内部の占有maskが一致しない。したがってbbox一致だけで全alpha占有一致に代えない。
+
+例：essay_paragraphs/tag59/48ptは同1082×271gridでactual bbox[99,114,399,44]、参照bbox[98,114,400,44]。最初の差cell(246,114)はactual alpha0/参照占有で、前回のactual alpha1/参照非占有とは変わった。補間指定は参照出力へ作用したと実測できたが、単にtrueへ揃える修正だけでは忠実性比較を解消しない。自然backingの補間設定/実寸/内部filter写像や唯一の根因を確定したとはしない。全alpha>0占有真偽の完全一致、A/B/C厳密union、全資源/期限/期待値は維持する。
+
+quote_unicode/tag139/80ptのstage15は前回と同じ3481×1285＝4,473,085pixel、mask256、4,194,304pixel上限超過。比較未到達であり、空の比較objectを透明alphaや差なしとして数えない。上限増加/領域縮小/tile化/資源拒否からのfont縮小へ範囲を広げていない。
+
+#### 98.5.2 元13条件・画像・時間と保存
+
+strict JSON13件を原reportから確認し、元names/順序/blocks/rows/plan_groups/renderer/candidate/幅高/brandingは前回と一致。新preview8は全unavailable、完成PNG0/fit0。旧saved1だけ元prototype.v3/native_checked（679.403458ms）、raw3＋cliptrap1はmeasurement_unavailable。全Card9の保存/export/current-fitはfalse。raw4のbody_preserved=falseは既存catchflagであり、今回もnative_texts＝元rows＝blocksを実確認した。元saved DTO全文はreportにserializeされないため、fixture/entry bytes不変とreportの旧版/本文/flagsを区別する。
+
+全13report elapsedは8秒未満、最大5,450.421459msだが拒否までの時間であり、新preview完成/420成功/最終inspectionまでの元8秒保証ではない。元5PNGは前回添付ZIP内の対応原PNGとbytes/全RGBAが5/5完全一致。rootはcontact sheetで全5を目視し、旧savedの本文5行/brandingとraw表示を確認した。新候補の改善画像や描画成功には加算しない。独立read-only2担当も同じ成否と占有方向の変化を確認し、別モデルPro/Ultraの成立は主張しない。局所PNG解析がreportだけの旧展開先を参照して一度失敗したため、添付旧ZIPの原PNGを直接読むよう訂正した。製品/CI/期待値は変更していない。
+
+全6job＋既存guard1jobのdecoded原ログ、元13report/PNG5/xcodebuild.log/Info.plist、timestamp prefixだけを除いたxcresulttool root JSON、実診断map、全archive member台帳、source凍結照合、解析/補助review/保存identityをmanifest final_evidence_bundleへ可逆保存し、各member bytes/hashの復号一致を確認した。完全原ZIP55,728,124byte/998member/SHA256 a74eed4184a8938f71017c1fc297a7669442788ceb38addd800fcdf206779985はGitHub artifact digestと一致。完全xcresultを含む原bytesはlibfile_496805d086c8819196eb9e71eb705b5e/version0へ保存し、同じ原fileへidentityを適用済み。Actions側copyは10/29期限だが保存済み原物を保持する。
+
+今回raw bundleの追加後も全文取得を可能にするため、旧containment macro修復のfinal bundleだけを、全文照合済み固定c79c06aa/blob542f7267の同JSON pointerへ参照保持する。旧compressed bytes/hash/member台帳は不変でGit履歴から復元可能。今回のfinal raw bundleは直接内包する。途中§98.4.1の容量修復も原物削除やsource変更ではない。
+
+#### 98.5.3 終了・残件
+
+source後の変更集合は資料4fileのみで、native/runner/patch/test/fixture/workflowを全て固定したこととAPI head a536e50e不変、同sourceのPiece CI attempt1だけを確認した。同pushのphase6 run39704913858は既存contract-guards 1job successで、追加修復CIには数えない。今回最終同期も資料4fileのみ、STRUCTURE_MAP_DELTA_NONE。DB/SQL/user rows/API/依存/本番/配布/main操作0。
+
+PRIMARY_OUTCOME=BLOCKER_NARROWEDは「補間trueの実作用を確認し、このflagだけの修正では全占有一致を直せないと実測した」範囲に限定する。再利用可能な合格renderer/商品品質creditは0、validation_success=false/unadopted=true/DETOUR_RISK_STOP。bounded_work_complete=trueは承認された適用＋一度検証＋結果保存の単位だけで、formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。
+
+次の未完exact1は、残る参照合成と自然layerのfilter/占有対応を既存品質契約内で直接修復する具体案の設計。唯一根因/次の検証済み修正案は未成立であり、追加修復/診断family/同source再実行/次CIへ自動進行しない。quote資源方式、正式renderer admission、採用版saved key/profile/InputScreen供給、通常保存→同owner再表示、写真保存共有、実機受入れとP-W1〜3管理点は未完了。今回承認範囲で停止する。
