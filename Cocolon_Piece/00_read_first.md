@@ -4159,7 +4159,7 @@ GitHubのiOS TestFlight Build最新成功はrun38041653252/attempt1/run_number65
 
 55142229→87151d39は382commits/146 changed path、実際の製品/native/依存差は既存29pathですべてPiece系。App.js/AppRuntimeContext/navigation/Emlis・Analysis componentは同blob、InputScreen/InputActionArea/NexusScreen/NexusHeaderの差はPiece接続・旧導線制御。共有react-native Text patchを含むため、他core source不変を共有nativeへの影響ゼロと読み替えない。Android対応resource1も含むが、新Android版の成立は未認定。iOS既存workflow差分1はNode18/npm install→24.19.0/npm ci、署名・Archive・Export・uploadは同じ。追加検査差分18pathを含む既存最新treeをそのまま固定し、新sourceや新workflowを作らない。
 
-[固定候補branch](https://github.com/MassyuRed/Cocolon/tree/agent/piece-testflight-private-20261023)は87151d3983818f18e556651d333d95be7bb487d7を指す。新ref不存在を確認して作成し、remote refをreadback一致。current開発branchの後続docs-only更新を配布sourceへ混ぜないための一回限りpinであり、新しいbuild systemではない。branch作成1/source変更0/RN CI追加0、署名・Archive・IPA export・TestFlight upload0。
+[固定候補branch](https://github.com/MassyuRed/Cocolon/tree/agent/piece-testflight-private-20261023)は87151d3983818f18e556651d333d95be7bb487d7を指す。新ref不存在を確認して作成し、remote refをreadback一致。current開発branchの後続docs-only更新を配布sourceへ混ぜないための一回限りpinであり、新しいbuild systemではない。branch作成1/source変更0/専用RN描画CI追加0、署名・Archive・IPA export・TestFlight upload0。branch作成に伴う既存汎用phase6 CI1件は§119.5へ別記する。
 
 ### 119.4 次の具体的操作と個別承認境界
 
@@ -4168,3 +4168,12 @@ GitHubのiOS TestFlight Build最新成功はrun38041653252/attempt1/run_number65
 既存workflowは署名/配布を含むためbuild確認だけとして実行しない。Rule18§11.3のproduction/release effectに該当し、今回は具体的候補の準備まで。個別承認受領前にdispatch/署名/送信しない。承認された場合は一度だけ実行し、operatorによるrerun/別source修復追加を行わず、失敗stageの事実を保存する。既存CocoaPods step内の最大3attempt等は変更しない。送信成功とApple処理完了・本人導入・通常保存/同owner再読・実OS・商品受入れは別に扱う。
 
 P-W1本人保存→履歴/詳細が最初の未完のまま。本人session/入力選択をservice_roleやRenderログインで代用せず、実削除を自動実行しない。P-W2実Photos/Share/Android/backend receipt、P-W3端末・商品受入れ、M5独立残件を維持。資料5pathを入口§119/map65.62/weekly5.6.42/manifest v159/全体現在地で同期し、同じ既存責務の修復とsource pinだけのためSTRUCTURE_MAP_DELTA_NONE、PRIMARY_OUTCOME=TECHNICAL_CREDIT（正本source/CIのみ）、product_credit0、automatic_progression=false。
+
+
+### 119.5 既存の自動検査を別集計する
+
+候補branch作成で既存phase6-contract-guardsのrun39864428434（push/head87151/attempt1）が自動起動し、119 passed/5 warningsでsuccess。RN描画・署名・配布工程はなく、API checkoutも既存workflowのdefault branch指定のため、正本3084の限定CI1805やiOS新版の描画成功へ合算しない。専用RN描画CIの追加・手動dispatchは0。
+
+最初の資料反映4571ec976e27a9eff50cea31c4cb94cf8435b06bで既存自動検査5件が起動した。39865542709（read-only policy）、39865542871（phase6/PR）、39865524122（phase6/push）はsuccess。39865542760（inventory step9）と39865542717（pytest bootstrap step8）は各225 passed/1 failed。両方ともtest_task_context.py:3831のtest_unit_c_t56_account_profile_read_only_preserves_explicit_gapsで、seed path数の期待[8,5]に対してwhole_product_current_baselineを含む現物[1,8,5]が不一致。対象test/task_profiles.jsonは親87151から全文不変で、今回のPiece変更による失敗、又はfrozen/stale検出の失敗とは扱わない。
+
+3jobの原decoded logをbytes/SHA256付きgzip+base64でmanifestへ可逆保存。検査の失敗は未修復のまま明示し、System Context source/期待値/fixture/workflowの変更、再試行、追加CIは0。既存iOS workflowにこれらの検査を新たな依存条件として設けない。結果記録だけの最終資料補正には[skip ci]を付け、同じ汎用検査を再発火させない。Piece商品credit0と未実施の署名/TestFlight/本人受入れを維持する。

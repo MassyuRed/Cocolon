@@ -153,4 +153,4 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 次回はfresh headと変更pathを比較し、関係する根拠だけを再確認する。確認していない機能の検証日を更新せず、この一枚を「毎回全体を読む」入口として保つ。
 
-10/23今回Piece差分は、正本APIの同一2blob同期/原CI39864098163、既存Render稼働不変、最新TestFlight成功run/source/Upload stepと現RNの配布差、固定candidate refを照合したもの。API source2path/既存CI1/配布候補branch1、今回Render/DB/本人row/署名build/TestFlight送信0。他機能の品質・本人端末を再検証した意味ではない。
+10/23今回Piece差分は、正本APIの同一2blob同期/原CI39864098163、既存Render稼働不変、最新TestFlight成功run/source/Upload stepと現RNの配布差、固定candidate refを照合したもの。API source2path/正本の限定CI1/配布候補branch1、今回Render/DB/本人row/署名build/TestFlight送信0。別集計として候補branch既存phase6自動検査1成功、最初のdocs反映4571の既存自動検査5件は3成功/2失敗。System Context2件は変更していないseed期待[8,5]と現profile[1,8,5]の不一致、各225 PASS/1 FAILで未修復。原log・区別は入口§119.5/manifestに記録し、再試行0/最終docs補正は[skip ci]。他機能の品質・本人端末を再検証した意味ではない。

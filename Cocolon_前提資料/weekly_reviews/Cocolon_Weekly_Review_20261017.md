@@ -2050,6 +2050,9 @@ P-W1の配置・有効化部分は成立したが、実Auth通常入力→previe
 
 本番だけにあったPiece URL ID修復を、開発PR3の既存middleware/B12 testへ同一2blobで反映した。3084c99eは親a536、2pathだけで全文readback一致。既存Piece push CI39864098163 attempt1はsuccess、原23summary合計1805 PASS/FAIL0/ERROR0/SKIP0（shared/default128/native persistence46）。Auth/source/HTTPは合成、旧1805との加算なし。原log841516B/digest付き可逆保存は入口§119/manifest v159へ同期。新helper/依存/workflow・開始後修復/rerun0。Render Live3577/承認command/autoOffは監視readで不変、今回再配置・本人DB操作0。
 
-P-W1の本人保存にはRN新版の配布が必要と確定。最新iOS TestFlight成功は10/10のrun38041653252/source55142229、番号式6501であり、正式eligibility供給と保存host接続、新iOS bitmap版を含まない。本人導入済みは未確認。current87151との製品差29pathはPiece系（共有RN native patchを含む）、root/nav/Emlis・Analysis componentは同blob。candidate branch agent/piece-testflight-private-20261023を87151へ固定、source追加/RN CI追加0。
+P-W1の本人保存にはRN新版の配布が必要と確定。最新iOS TestFlight成功は10/10のrun38041653252/source55142229、番号式6501であり、正式eligibility供給と保存host接続、新iOS bitmap版を含まない。本人導入済みは未確認。current87151との製品差29pathはPiece系（共有RN native patchを含む）、root/nav/Emlis・Analysis componentは同blob。candidate branch agent/piece-testflight-private-20261023を87151へ固定、source変更/専用RN描画CI追加0。branch作成の既存汎用phase6自動CI39864428434は119 PASS/5警告でsuccess、RN描画/署名/送信なし。
 
 次の案は同固定branchで既存ios-build.ymlを一度実行し、署名Archive→IPA→既存TestFlight appへ送信。workflowが配布まで一体のため、確認buildとして勝手に実行しない。Rule18§11.3 release effectの個別承認前でdispatch/署名/送信0。公開App Store/Android/API/DB/flag変更なし。本人通常保存→履歴/詳細、P-W2実OS/backend receipt/P-W3端末/商品受入れ・M5未完、10/22保存・10/23共有目標を達成へ替えない。10/24の実残差と10/31管理線への確認を維持。5資料同期/STRUCTURE_MAP_DELTA_NONE、TECHNICAL_CREDITは正本修復/CIだけ、product_credit0、automatic_progression=false。
+
+
+資料反映4571で既存自動検査5件が起動し3成功/2失敗。System Context39865542760/39865542717は各225 PASS/1 FAIL、親87151から不変のtestがseed path数[8,5]を期待し、現profile[1,8,5]と不一致。Piece製品の失敗やfrozen/stale検出の結果には転用せず、原logを入口§119.5/manifestへ保存した。未修復/再試行/周辺source変更0、最終docs補正だけ[skip ci]。正本API1805・旧RN描画・TestFlight配布の評価へ合算しない。

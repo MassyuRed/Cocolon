@@ -3499,6 +3499,9 @@ GET /healthz200、/app/bootstrap200とPiece8flag一致（private4true/public-wri
 
 現在ownerは入口§119/weekly5.6.42/manifest v159。PR3@a536の既存middleware/testを本番3577と同一blobへ戻し込み、3084c99e/treeeb57c8b6へ反映。差分2pathだけ、全文readback一致。唯一既存push CI39864098163は23summary合計1805 PASS/FAIL0/ERROR0/SKIP0（shared/default128/native46）、実Authは合成。原logをmanifestへ可逆保存。新helper/依存/workflow/公開契約/DB/RN変更0、STRUCTURE_MAP_DELTA_NONE。Live3577/承認構成は監視readで不変、今回再配置0。
 
-最新iOS TestFlight成功38041653252/source55142229（番号式6501）には、current InputScreenの正式bitmap eligibility供給・host保存接続がない。current87151は同接続と新iOS bitmapを持つ。比較全146path中、製品/native/依存は既存29pathでPiece系であり、これに加えiOS workflow1が変わる。App/AppRuntime/navigation/Emlis・Analysis componentは同blob、共有RN native Text patchを含む影響はゼロとしない。既存最新sourceをbranch agent/piece-testflight-private-20261023@87151へ固定し、GitHub ref一致を確認した。source/CI追加なし。
+最新iOS TestFlight成功38041653252/source55142229（番号式6501）には、current InputScreenの正式bitmap eligibility供給・host保存接続がない。current87151は同接続と新iOS bitmapを持つ。比較全146path中、製品/native/依存は既存29pathでPiece系であり、これに加えiOS workflow1が変わる。App/AppRuntime/navigation/Emlis・Analysis componentは同blob、共有RN native Text patchを含む影響はゼロとしない。既存最新sourceをbranch agent/piece-testflight-private-20261023@87151へ固定し、GitHub ref一致を確認した。source変更/専用RN描画CI追加0。branch作成に伴う既存phase6自動CI39864428434は119 PASS/5警告でsuccess、描画/署名/配布なし。
 
 次は同branchに既存ios-build.ymlを一度dispatchし、署名Archive/IPA/TestFlight送信まで進める個別承認の判断。GitHub pluginにdispatchがないため画面操作案。現在dispatch/署名/送信0、App Store公開/Android/API/DB/flags変更0。実Auth本人保存/再読・実OS/端末/商品受入れ、P-W2/P-W3/M5は未完。source pinを新しい事前gateや商品creditへ変換しない。automatic_progression=false。
+
+
+資料反映4571の既存自動検査5件は3成功/2失敗。System Context2件（39865542760/39865542717）は各225 PASS/1 FAIL、変更していないtestのseed期待[8,5]と現profile[1,8,5]の不一致。未修復/再試行0、Piece CI1805やRN描画へ合算しない。詳細・原logは入口§119.5/manifest。最終docs補正のみ[skip ci]。
