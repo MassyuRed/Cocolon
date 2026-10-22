@@ -1994,3 +1994,8 @@ Mashの「進めていいよ」を受領。入口§115/map65.58/manifest v153。
 ##### 5.6.38.1 source照合と一度CI開始
 
 入口§115.1/map65.58.1/manifest v154。source d2e1244cの5path全文/blobSHA/bytes一致。起動条件修復後、唯一のPiece CI39780623108 attempt1が21:42:54 JSTに開始し、今回counter1/上限1を消費。全6job実行中、新8PNG/拒否6と新旧群の結果は未確定。source固定、追加修復/再CI/採用/稼働効果0。checkpoint資料4のみSTRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+
+###### 5.6.38.2 最終：起動条件修復後の新export14全成立
+
+入口§115.2/map65.58.2/manifest v155。source d2e1244cの唯一CI39780623108 attempt1は21:42:54〜22:07:18 JST、全体failure。新export正常8PNG/拒否6は元条件全成立、8PNGは同saved全canvasへbytes/RGBA一致。描画中消失を含む実mutation4も確認。元開始8112.953ms後の同saved画像保持と撮影、全構築8秒内。旧13/12/17の39項目・59PNG一致、全83decode。JS979/新native44成功、旧native195=176PASS19FAIL、旧V3別20未実行。XCTest4method/失敗1・59summaryは全て旧method。両OS export実compile成功。原ZIP71,895,632B/1129memberをdigest一致で全文保存、全6logs/4report/監査等はmanifestへ可逆保存。限定TECHNICAL_CREDIT/validation_success=true/product_credit0。今回counter1上限1/rerun0/source追加修復0で単位終了。P-W1の新renderer稼働供給と実Auth通常保存→同owner履歴/詳細、P-W2実OS/Android新版/backend receipt、P-W3本人実機は未完。結果4資料のみSTRUCTURE_MAP_DELTA_NONE、automatic_progression=false。

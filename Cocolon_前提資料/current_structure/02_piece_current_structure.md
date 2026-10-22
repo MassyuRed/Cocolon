@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§115.1／map§65.58.1／weekly§5.6.38.1／manifest v154。承認済み起動条件1行修復のsource d2e1244cを全文照合し、Piece CI39780623108 attempt1が開始。今回counter1/上限1、rerun0、source固定。新export8PNG＋拒否6の結果は未確定。P-W1実保存/実OS/本人実機は未完です。**
+**最新は入口§115.2／map§65.58.2／weekly§5.6.38.2／manifest v155。承認済み起動条件修復の唯一CI39780623108で、新export正常8PNG＋拒否6が全成立。旧RN13/12/17の39項目・旧59PNGは一致、JS979/新native44成功。旧失敗を含むCI全体はfailure。今回の限定検証完了、実Auth通常保存/実OS/本人実機は未完です。**
 
 ### §99の判断案（履歴）
 
@@ -3451,3 +3451,8 @@ source fbf0deaec8679ebf6a58f53e0702d2e437318680/tree26d330c5の変更20pathをGi
 #### 65.58.1 source固定、一度CI開始
 
 入口§115.1/weekly5.6.38.1/manifest v154。source d2e1244cの5pathを全文・SHA照合、唯一CI39780623108 attempt1開始、今回counter1/上限1/rerun0。全6job実行中、新export14/PNGは未確定、追加修復/再CI/有効化0。checkpoint資料4のみSTRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+
+#### 65.58.2 最終：新8PNG/拒否6成立、旧失敗を保持
+
+入口§115.2/weekly5.6.38.2/manifest v155。唯一CI39780623108/source d2e1244c/attempt1は全体failure、今回counter1上限1/rerun0/source修復0。新export14は全成立、8PNGは全canvas oracleへbytes/RGBA一致、拒否6（実mutation4を含む）成立。元開始8112.953ms後も同saved像を撮影、全構築8秒内。旧13/12/17の39項目・旧59PNG一致、全83PNG decode可。JS979/新native44成功、旧native195=176PASS19FAIL、旧V3別20未実行。XCTest4method/失敗1、59summaryは旧methodのみ。両OS export実compile成功。71,895,632B原ZIP/1129memberをdigest一致で全文保存、6logs/4report/各監査等をmanifestへ可逆保存。TECHNICAL_CREDIT/限定validation_success=true、product_credit0。P-W1稼働本人保存/実OS/実機未完、今回単位終了。結果4資料のみSTRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
