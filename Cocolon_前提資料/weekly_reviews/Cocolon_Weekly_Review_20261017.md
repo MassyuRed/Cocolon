@@ -1952,3 +1952,10 @@ LEVEL2の新しいbounded source接続単位。production6＋既存test8＋資�
 入口§110.2/map§65.55.2/manifest v148。明示版preview/savedとInputScreen eligibilityを既存controllerへ接続したsource55430e4eを唯一CI39734534523で確認。新native44/44、新実RN17条件が成立。savedは元8秒内完成後も8103.191msまで同image保持、saved fitなし。新32PNGは全8pair/既存bitmapにbyte/RGBA一致、旧27画像/旧25case logical fieldsも前回一致。4つの420は6.284/6.482/3.495/3.777秒、全36pt。JS964PASS。
 
 旧native19FAILと旧RN method59summaryを維持するためCI全体failure。新成功で相殺しない。原ZIP70,304,655B/1118member保存、原logs/元JSON/独立監査と59PNG原本member参照を可逆記録。限定SOURCE_CONNECTION_TECHNICAL_CREDIT、source単位完了/追加CI0。次は新renderer発行の稼働設定と実Authの通常保存→本人履歴/詳細、P-W2新版画像保存共有、P-W3実機。商品採用/稼働完成は未確認、API/DB/env/deploy/main0。結果4資料のみSTRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+
+##### 5.6.36 P-W2独立準備：通常本人詳細から新版PNG/写真保存・共有のsource接続
+
+入口§111/map§65.56/manifest v149。P-W1の最初のlive未完はAPI明示構成での新renderer供給と実Auth保存→本人履歴/詳細。今回、計画が許可するP-W2並行source準備を実施した。既存本人詳細hostでstrict owner-read/export flag・本人/表示record/lifecycleを確認し、明示準備のfresh同record→固定全canvas→既存Photos/Shareへ接続。private native token/binding二項とnative前後照合で、JS通知前の失効・子消失・複数/不一致を拒否する。新bitmapだけlayer capture、旧v3方法は保持。背景/枠を捨てない。初期失敗・二重操作・背景化・対象/本人変更・取消/cleanupと結果メッセージの帰属を検証した。
+
+local13suite979 PASS/FAIL0/SKIP0、JSX/runner/patch dry-run成功。旧13＋12＋17のfixture bytes不変。新実RN14は正常saved8とnative拒否6、実view-shot全PNG/RGBA比較を一度の新CIで確認する（現時点未実行、counter0上限1）。旧native195/新44/旧RN失敗を保持し、追加修復/再CIへ自動進行しない。新source/既存test/資料だけ、API/DB/env/flag/deploy/実OS/配布/main0。STRUCTURE_MAP_DELTA_PRESENT。稼働保存往復・新版OS操作/Android・backend receipt・実機受入れは未完。

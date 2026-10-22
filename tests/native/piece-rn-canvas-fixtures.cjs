@@ -127,5 +127,15 @@ for (const original of bitmapCases.filter(c => c.evidence_set === 'bitmap_previe
 const admittedTrap = JSON.parse(JSON.stringify(admittedCases[0]));
 admittedTrap.name = 'admitted_host_crop_trap'; admittedTrap.evidence_set = 'admitted_host_trap'; admittedTrap.controlled_host_crop = true;
 admittedCases.push(admittedTrap); module.exports.admitted = admittedCases;
-if (require.main === module) process.stdout.write(JSON.stringify(process.env.PIECE_RN_ADMITTED_GROUP === '1' ? admittedCases
+// Independent export group preserves all historical input bytes and expectations.
+const exportCases=admittedCases.filter(c=>c.evidence_set==='admitted_saved').map(c=>{
+  const f=JSON.parse(JSON.stringify(c));f.name=c.name.replace('admitted_saved_','export_saved_');
+  f.evidence_set='export_saved';f.props.exportCanvas=true;return f;
+});
+for(const mode of ['clear','removed','token','binding','multiple','during']){
+  const f=JSON.parse(JSON.stringify(exportCases[0]));f.name='export_reject_'+mode;
+  f.evidence_set='export_trap';f.export_trap=mode;delete f.retain_after_deadline;exportCases.push(f);
+}
+module.exports.export=exportCases;
+if (require.main === module) process.stdout.write(JSON.stringify(process.env.PIECE_RN_EXPORT_GROUP === '1' ? exportCases : process.env.PIECE_RN_ADMITTED_GROUP === '1' ? admittedCases
   : process.env.PIECE_RN_BITMAP_GROUP === '1' ? bitmapCases : module.exports, null, 2) + '\n');

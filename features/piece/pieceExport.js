@@ -10,7 +10,7 @@ import { CameraRoll } from '@react-native-camera-roll/camera-roll';
 import { Dirs, FileSystem } from 'react-native-file-access';
 import { requestPieceOwner, PieceApiError } from './pieceApi';
 import { readPieceOwnerDisplay } from './pieceOwnerModel';
-import { preparePieceNativeSavedDisplay, PIECE_NATIVE_PREVIEW_VERSION } from './pieceLayout';
+import { preparePieceNativeSavedDisplay, PIECE_NATIVE_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION } from './pieceLayout';
 
 const failed = () => new PieceApiError('PIECE_TEMPORARILY_UNAVAILABLE');
 const hashPattern = /^[0-9a-f]{64}$/;
@@ -86,7 +86,7 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
   const record = readPieceOwnerDisplay(await requestPieceOwner('detail', { piece_id: pieceId }, { expectedUserId, signal }));
   current();
   const input = preparePieceNativeSavedDisplay(record);
-  if (!input || record.renderer_version !== PIECE_NATIVE_PREVIEW_VERSION) throw failed();
+  if (!input || ![PIECE_NATIVE_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION].includes(record.renderer_version)) throw failed();
   const dirs = roots();
   try { await prepareRawCache(dirs.raw); } catch { throw failed(); }
   current();
@@ -96,6 +96,9 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
     if (busy || captured || target?.key !== input.key || target.width !== input.width ||
         target.height !== input.height || typeof target.isCurrent !== 'function' || !target.node) throw failed();
     const check = () => { current(); if (target.isCurrent() !== true) throw failed(); };
+    if (record.renderer_version === PIECE_BITMAP_RENDERER_VERSION &&
+        (typeof target.bitmapToken !== 'string' || !target.bitmapToken ||
+         typeof target.bitmapBinding !== 'string' || !target.bitmapBinding)) throw failed();
     check(); busy = true;
     let raw = null, directory = null, path = null, handedOff = false, operating = false;
     const cleanup = async () => {
@@ -106,7 +109,9 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
     };
     try {
       raw = await captureRef(target.node, { format: 'png', result: 'tmpfile', quality: 1,
-        width: input.width, height: input.height, snapshotContentContainer: false, cocolonPieceCache: true });
+        width: input.width, height: input.height, snapshotContentContainer: false, cocolonPieceCache: true,
+        ...(record.renderer_version === PIECE_BITMAP_RENDERER_VERSION ? {
+          useRenderInContext: true, cocolonPieceBitmapToken: target.bitmapToken, cocolonPieceBitmapBinding: target.bitmapBinding } : {}) });
       const source = rawPath(raw, dirs.raw);
       check();
       const token = sessionId();
@@ -134,7 +139,7 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
       return Object.freeze({
         // Candidate metadata only. No body, local URI, recipient or formal receipt.
         candidate: Object.freeze({ piece_id: record.public_id, piece_text_hash: record.piece_text_hash,
-          visual_recipe_hash: record.visual_recipe_hash, renderer_version: PIECE_NATIVE_PREVIEW_VERSION,
+          visual_recipe_hash: record.visual_recipe_hash, renderer_version: record.renderer_version,
           asset_sha256: assetHash, mime_type: 'image/png', width: input.width, height: input.height }),
         async saveToPhotos() {
           begin();

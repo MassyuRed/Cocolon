@@ -77,8 +77,7 @@ export function preparePieceNativeSavedDisplay(raw) {
 export function preparePieceNativeCard(props) {
   const saved = Object.prototype.hasOwnProperty.call(props, 'savedRecord');
   if (saved && Object.prototype.hasOwnProperty.call(props, 'display')) return null;
-  if (saved) return props.exportCanvas === true && props.savedRecord?.renderer_version === PIECE_BITMAP_RENDERER_VERSION
-    ? null : preparePieceNativeSavedDisplay(props.savedRecord);
+  if (saved) return preparePieceNativeSavedDisplay(props.savedRecord);
   const input = preparePieceNativePreview(props.display);
   return props.exportCanvas === true && [PIECE_BITMAP_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION]
     .includes(input?.candidateProfile) ? null : input;

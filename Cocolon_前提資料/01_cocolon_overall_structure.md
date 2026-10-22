@@ -7336,3 +7336,8 @@ STRUCTURE_MAP_DELTA_PRESENT。既存production10owner内の変更、新private l
 ### 2026-10-22 Piece P-W1 source構造差分：明示renderer identityと保存再表示
 
 STRUCTURE_MAP_DELTA_PRESENT。既存RN owner内で、新外部版 `piece.rn_bitmap_renderer.ios.v1` と既検証内部bitmap profileを分離し、同版preview/savedの描画を共有する。InputScreen→既存InputPieceActionAreaへrenderer eligibility predicateを供給し、既存controllerの同preview/token/live fit・owner/flag/quota再確認からprivate-saveへつなぐsourceを準備する。saved identityにpreview状態を混入せず、期限内完成後の画像をnative lifecycleまで保持する。新exportは閉じる。API/DB/依存/稼働構成は変えない。詳細はPiece入口§110/current map§65.55/weekly§5.6.35。local964 PASS、CIはPENDINGで、実Auth・稼働保存・本人実機・商品採用の完成ではない。
+
+
+## 2026-10-22 Piece P-W2：通常詳細から同一保存画像を明示書出し
+
+STRUCTURE_MAP_DELTA_PRESENT。既存PieceOwnerHistoryScreen hostがfresh同recordと本人/flag/lifecycleを確認し、既存PieceExportCanvas/pieceExportへ接続する。新iOS bitmap saved全canvasのcaptureはprivate native token/bindingを撮影前後に照合し、背景/枠/本文を保持。公開API/DB/稼働flag/配置変更なし。既存owner責務の詳細/全変更pathは01Bと入口§111、現在地はmap§65.56/weekly§5.6.36。local979成功、実PNG一度CIは未実行。P-W1 live保存/実OS/実機/商品受入れは未完。

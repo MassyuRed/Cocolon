@@ -1564,6 +1564,12 @@ PIECE_BITMAP_LAYER_SET(CGColorRef,setBackgroundColor,self.backgroundColor==value
     (!layer.backgroundColor || CGColorGetAlpha(layer.backgroundColor) == 0) &&
     (!_bitmapImage || layer.contents == _bitmapImage);
 }
+// Called only by the existing Piece-only capture on its native UI block.
+// A cleared image is rejected before its asynchronous JS event is delivered.
+- (NSString *)cocolonPieceCaptureIdentity {
+  return NSThread.isMainThread && _bitmapImage && _bitmapToken.length && _bitmapBinding.length &&
+    [self bitmapConfigurationCurrent] ? [_bitmapToken copy] : nil;
+}
 - (void)layoutSubviews {
   [super layoutSubviews];
   if (_bitmapImage && ![self bitmapConfigurationCurrent]) [self clearBitmap];

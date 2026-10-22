@@ -33,9 +33,9 @@ export default class PieceVisualCard extends React.Component {
         binding: Object.freeze({}), bindingSerial: state.bindingSerial + 1 };
   }
 
-  componentDidMount() { this.active = true; this.syncDeadline(); this.syncSaveFit(); }
-  componentDidUpdate() { this.syncBitmapArtifact(); this.syncDeadline(); this.syncSaveFit(); this.inspectDrawing(); }
-  componentWillUnmount() { this.active = false; this.clearBitmapArtifact(); this.clearSaveFit(); this.clearDeadline(); this.inspection = null; this.planning = null; this.textNodes.clear(); this.probeReady.clear(); this.placementLayouts.clear(); this.textRefs.clear(); }
+  componentDidMount() { this.active = true; this.syncDeadline(); this.syncSaveFit(); this.syncCaptureTarget(); }
+  componentDidUpdate() { this.syncBitmapArtifact(); this.syncDeadline(); this.syncSaveFit(); this.inspectDrawing(); this.syncCaptureTarget(); }
+  componentWillUnmount() { this.active = false; this.syncCaptureTarget(); this.clearBitmapArtifact(); this.clearSaveFit(); this.clearDeadline(); this.inspection = null; this.planning = null; this.textNodes.clear(); this.probeReady.clear(); this.placementLayouts.clear(); this.textRefs.clear(); }
 
   bitmapBindingFor = generation => {
     if (!this.bitmapBindings.has(generation)) this.bitmapBindings.set(generation, `piece-bitmap-${++pieceBitmapBindingSerial}`);
@@ -524,12 +524,43 @@ export default class PieceVisualCard extends React.Component {
   // Only the dedicated saved-record canvas exposes it, after its final render.
   getCaptureTarget = () => {
     const input = preparePieceNativeCard(this.props), snapshot = this.state.measurement;
-    const node = this.canvasNode;
-    if (!this.active || this.props.exportCanvas !== true || !this.props.savedRecord ||
+    const node = this.canvasNode, binding = this.state.binding;
+    if (!this.bindingCurrent(binding) || this.props.exportCanvas !== true || !this.props.savedRecord ||
         !input || input.key !== snapshot.key || snapshot.phase !== 'native_checked' || !node) return null;
+    const bitmap = input.candidateProfile === PIECE_BITMAP_PREVIEW_VERSION;
+    const artifact = this.bitmapArtifact, operation = this.inspection;
+    const current = () => {
+      if (!this.bindingCurrent(binding) || this.props.exportCanvas !== true || !this.props.savedRecord ||
+          this.canvasNode !== node || this.state.measurement !== snapshot ||
+          preparePieceNativeCard(this.props)?.key !== input.key) return false;
+      return !bitmap || !!artifact && !!operation?.bitmap && this.bitmapArtifact === artifact &&
+        this.bitmapNode === artifact.node && this.inspection === operation &&
+        artifact.binding === binding && artifact.generation === snapshot.generation &&
+        artifact.key === input.key && artifact.token === snapshot.bitmapCanvas?.artifactToken &&
+        operation.canvas === node && operation.evidence === snapshot.inspection &&
+        operation.nodes.every((value, i) => this.textNodes.get(i)?.value === value &&
+          this.textNodes.get(i)?.generation === snapshot.generation);
+    };
+    if (!current()) return null;
     return Object.freeze({ node, key: input.key, width: input.width, height: input.height,
-      isCurrent: () => this.active && this.props.exportCanvas === true && this.canvasNode === node &&
-        this.state.measurement === snapshot && preparePieceNativeCard(this.props)?.key === input.key });
+      ...(bitmap ? { bitmapToken: artifact.token, bitmapBinding: operation.bindingToken } : {}), isCurrent: current });
+  };
+
+  syncCaptureTarget = () => {
+    const listener = this.props.onCaptureTargetChange, old = this.captureNotice;
+    if (old && (old.listener !== listener || !old.target.isCurrent())) {
+      this.captureNotice = null;
+      try { old.listener(null, old.target); } catch { /* A revoked target stays revoked. */ }
+    }
+    if (this.state.measurement.phase === 'unavailable' && this.captureFailureBinding !== this.state.binding) {
+      this.captureFailureBinding = this.state.binding;
+      try { this.props.onCaptureUnavailable?.(); } catch { /* The unavailable canvas stays closed. */ }
+    }
+    if (this.captureNotice || typeof listener !== 'function') return;
+    const target = this.getCaptureTarget();
+    if (!target) return;
+    this.captureNotice = { listener, target };
+    try { listener(target, null); } catch { this.captureNotice = null; }
   };
 
   render() {

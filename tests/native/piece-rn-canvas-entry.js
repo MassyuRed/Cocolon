@@ -6,6 +6,8 @@ import { preparePieceNativeCard } from '../../features/piece/pieceLayout';
 import fixtures from './piece-rn-canvas-fixtures.json';
 import bitmapFixtures from './piece-rn-bitmap-fixtures.json';
 import admittedFixtures from './piece-rn-admitted-fixtures.json';
+import exportFixtures from './piece-rn-export-fixtures.json';
+import { captureRef, releaseCapture } from 'react-native-view-shot';
 
 // Test-only timing around the unchanged native bridge call. In particular,
 // distinguish a pending candidate table from planner/render/inspection work.
@@ -209,7 +211,7 @@ renderer.inspectPieceSelectedLineV4 = async (...args) => {
 };
 
 class CanvasCases extends React.Component {
-  caseFixtures = (this.props.pieceGroup === 'admitted' ? admittedFixtures : this.props.pieceGroup === 'bitmap' ? bitmapFixtures : fixtures).map(fixture => fixture.props?.display ? { ...fixture,
+  caseFixtures = (this.props.pieceGroup === 'export' ? exportFixtures : this.props.pieceGroup === 'admitted' ? admittedFixtures : this.props.pieceGroup === 'bitmap' ? bitmapFixtures : fixtures).map(fixture => fixture.props?.display ? { ...fixture,
     props: { ...fixture.props, display: { ...fixture.props.display, visualToken: Object.freeze({}) } } } : fixture);
   state = { index: 0, rawLeft: 0 };
   saveFitChanged = (next, previous) => {
@@ -310,6 +312,31 @@ class CanvasCases extends React.Component {
           card.deadline === deadline && deadline.handle === null && !card.saveFit && !this.saveFitHandle;
       } else report.retention_error = 'missing_original_deadline';
     }
+    if (fixture.evidence_set === 'export_saved' || fixture.evidence_set === 'export_trap') {
+      const target=card?.getCaptureTarget();let uri=null;
+      report.export_target_current=target?.isCurrent()===true;report.export_rejected=false;
+      try {
+        if(!target)throw new Error('no_current_export_target');
+        if(['clear','removed','multiple','during'].includes(fixture.export_trap)){
+          report.export_mutation_applied=await NativeModules.PieceCanvasTest.mutateExportBitmap(m.bitmapCanvas.canvasTag,findNodeHandle(target.node),fixture.export_trap);
+        }
+        const options={format:'png',result:'tmpfile',quality:1,width:target.width,height:target.height,
+          snapshotContentContainer:false,cocolonPieceCache:true,useRenderInContext:true,
+          cocolonPieceBitmapToken:fixture.export_trap==='token'?'wrong-token':target.bitmapToken,
+          cocolonPieceBitmapBinding:fixture.export_trap==='binding'?'wrong-binding':target.bitmapBinding};
+        // Trap calls intentionally bypass the JS predicate after mutation to
+        // test the native boundary before/independent of queued JS events.
+        uri=await captureRef(target.node,options);
+        report.export_target_after=target.isCurrent();report.export_capture_uri=uri;
+      }catch {report.export_rejected=true;}
+      if(fixture.export_trap){
+        if(uri)releaseCapture(uri);delete report.export_capture_uri;
+        NativeModules.PieceCanvasTest.record(report);
+        this.advanceCase();return;
+      }
+      try {await this.captureAndAdvance(report,card?.canvasNode);}finally{if(uri)releaseCapture(uri);}
+      return;
+    }
     await this.captureAndAdvance(report, card?.canvasNode);
   };
   captureAndAdvance = async (report, node) => {
@@ -322,8 +349,11 @@ class CanvasCases extends React.Component {
       else await NativeModules.PieceCanvasTest.capture(tag, report);
     }
     catch { NativeModules.PieceCanvasTest.record({ ...report, capture_error: true }); }
-    if (this.state.index + 1 === this.caseFixtures.length) { NativeModules.PieceCanvasTest.done(); return; }
-    this.setState(({ index }) => ({ index: index + 1, rawLeft: 0 }), this.startCase);
+    this.advanceCase();
+  };
+  advanceCase = () => {
+    if(this.state.index+1===this.caseFixtures.length){NativeModules.PieceCanvasTest.done();return;}
+    this.setState(({index})=>({index:index+1,rawLeft:0}),this.startCase);
   };
   probeRawBitmap = async () => {
     const fixture = this.caseFixtures[this.state.index], node = this.rawTextNode;
@@ -465,7 +495,7 @@ class CanvasCases extends React.Component {
         </View>
       </View>
     </View>;
-    return <View style={{ width: 360 }}><PieceVisualCard key={fixture.name} ref={node => { this.card = node; }}
+    return <View style={this.props.pieceGroup==='export'?{position:'absolute',left:-10000,top:0,width:1080}:{width:360}}><PieceVisualCard key={fixture.name} ref={node => { this.card = node; }}
       {...fixture.props} onSaveFitChange={this.saveFitChanged} /></View>;
   }
 }

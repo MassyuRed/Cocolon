@@ -2458,7 +2458,7 @@ function bitmapHarness(reply = value => value, options = {}) {
   return { ...h, bitmapCalls: calls, bitmapReleases: releases };
 }
 
-test('explicit iOS bitmap identity shares preview/saved drawing while preserving old readers and export boundary', async () => {
+test('explicit iOS bitmap identity shares preview/saved/export drawing while preserving old readers', async () => {
   const version = 'piece.rn_bitmap_renderer.ios.v1';
   for (const format of ['short_essay', 'quote', 'declaration']) for (const ratio of ['4:5', '9:16']) {
     const p = { ...sample(format, ratio), renderer_version: version }, h = bitmapHarness(v => v, { packet: copy(p), version });
@@ -2467,7 +2467,7 @@ test('explicit iOS bitmap identity shares preview/saved drawing while preserving
     const body = v => { const x = copy(v); delete x.key; return x; };
     assert.deepEqual(body(input), body(previewInput)); assert.notEqual(input.key, previewInput.key);
     assert.equal(input.candidateProfile, bitmapProfile); assert.equal(input.rendererVersion, version);
-    assert.equal(h.preparePieceNativeCard({ savedRecord: saved, exportCanvas: true }), null);
+    assert.deepEqual(copy(h.preparePieceNativeCard({ savedRecord: saved, exportCanvas: true })),copy(input));
     assert.equal(h.preparePieceNativeSavedDisplay({ ...saved, renderer_version: bitmapProfile }), null);
     h.context.Platform.OS = 'android'; assert.equal(h.preparePieceNativeSavedDisplay(saved), null);
     assert.equal(h.preparePieceNativePreview(display(p)), null);
@@ -2883,4 +2883,24 @@ test('v4 adapter rechecks its monotonic deadline after decoding a native respons
   h.NativeModules.PieceTextMetrics.inspectSelectedLineV4 = async () => wire;
   await assert.rejects(() => h.inspectPieceSelectedLineV4({ tag: 1 }, {
     ...v9Expected(), canvasNode: { tag: 10001 }, expiresAt: deadline.expiresAt, deadline }), /UNAVAILABLE/);
+});
+
+test('saved bitmap export target binds full canvas and native artifact and survives only completed saved lifetime',async()=>{
+  for(const boundary of ['none','node','bitmap','artifact','binding','generation','inspection','native','unmount']){
+    const h=rawHarness({...savedSample(),renderer_version:'piece.rn_bitmap_renderer.ios.v1'},undefined,true,undefined,NOW,true);
+    h.context.NativeModules.PieceTextMetrics.renderBitmapCanvas=async req=>bitmapReply(req);
+    h.context.NativeModules.PieceTextMetrics.releaseBitmapCanvas=()=>{};
+    await prepare(h);await finishBitmap(h);const target=h.card.getCaptureTarget();assert.ok(target,boundary);
+    assert.equal(target.node,h.card.canvasNode);assert.notEqual(target.node,h.card.bitmapNode);
+    assert.equal(target.bitmapToken,h.card.bitmapArtifact.token);assert.equal(target.bitmapBinding,h.card.inspection.bindingToken);
+    h.now(NOW+9000);h.monotonic(9000);assert.equal(target.isCurrent(),true);
+    if(boundary==='node')h.card.canvasNode={};if(boundary==='bitmap')h.card.bitmapNode={};
+    if(boundary==='artifact')h.card.bitmapArtifact={...h.card.bitmapArtifact};
+    if(boundary==='binding')h.card.state.binding={};
+    if(boundary==='generation')h.card.state.measurement={...h.card.state.measurement,generation:{}};
+    if(boundary==='inspection')h.card.inspection={...h.card.inspection};
+    if(boundary==='native')h.card.bitmapInvalidated({nativeEvent:{binding_token:h.card.bitmapBindingFor(h.card.state.measurement.generation)}});
+    if(boundary==='unmount')h.card.componentWillUnmount();
+    assert.equal(target.isCurrent(),boundary==='none');if(boundary!=='unmount')h.card.componentWillUnmount();
+  }
 });

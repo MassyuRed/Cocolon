@@ -27,7 +27,7 @@ function record(extra = {}) {
     render_reproducibility_version: 'piece.render_reproducibility.v1', piece_id: PID, public_id: 'piece:' + PID,
     lifecycle_status: 'saved', saved_at: '2026-10-10T01:00:00+00:00', row_version: 2, ...extra };
 }
-function harness({ send, session, random } = {}) {
+function harness({ send, session, random, exportPrepare } = {}) {
   const calls = [], sessions = [], alerts = [], appListeners = new Set();
   const React = { Component: class {
     constructor(props) { this.props = props; this.state = {}; }
@@ -39,7 +39,8 @@ function harness({ send, session, random } = {}) {
     getAccessToken: async owner => { sessions.push(owner); return session ? session(owner, sessions.length) : 'synthetic'; },
     Alert: { alert: (...args) => alerts.push(args) },
     AppState: { currentState: 'active', addEventListener: (event, fn) => { appListeners.add(fn); return { remove: () => appListeners.delete(fn) }; } },
-    PieceVisualCard: 'PieceVisualCard', View: 'View', Text: 'Text', ScrollView: 'ScrollView', Button: 'Button', SafeAreaView: 'SafeAreaView', ActivityIndicator: 'ActivityIndicator',
+    require: name => {assert.equal(name,'../features/piece/pieceExport');return {preparePieceExportPrototype:exportPrepare || (async()=>{throw Error('disabled');})};},
+    PieceExportCanvas: 'PieceExportCanvas', PieceVisualCard: 'PieceVisualCard', View: 'View', Text: 'Text', ScrollView: 'ScrollView', Button: 'Button', SafeAreaView: 'SafeAreaView', ActivityIndicator: 'ActivityIndicator',
   });
   // Each ESM module retains a distinct scope, as in the application bundle.
   const exports = [
@@ -559,4 +560,74 @@ test('owner entry remains available independently of public and resonance loadin
   n.entry().props.onPress(); assert.equal(n.routes.length, 1);
   assert.ok(!n.legacyCalls.some(([, args]) => args.some(arg => arg?.user_id === OWNER)));
   n.dispose();
+});
+
+function exportHost({prepareWait, fresh, captureWait, result={outcome:'saved_to_photos'}}={}) {
+  const events=[];
+  const asset={dispose:async()=>events.push('dispose'),saveToPhotos:async()=>{events.push('photos');return result;},
+    openShare:async()=>{events.push('share');return result;}};
+  const h=harness({exportPrepare:async options=>{events.push(['prepare',options]);if(prepareWait)await prepareWait;
+    return {record:fresh||record(),capture:async target=>{events.push(['capture',target]);if(captureWait)await captureWait;return asset;}};}});
+  const host=ownerHost(h,savedEntry(),{flags:{piece_v2_owner_read_enabled:true,piece_v2_export_enabled:true}});
+  const target={isCurrent:()=>true};
+  const ready=async()=>{host.componentDidMount();await tick();await host.prepareExport(host.controller.getView().record);
+    host.exportAttempt?.onTarget(target,null);return host.exportAttempt;};
+  return {h,host,events,asset,target,ready};
+}
+test('normal detail export is explicit, defaults OFF, fetches a fresh record and waits for current canvas',async()=>{
+  const h=harness(),host=ownerHost(h);host.componentDidMount();await tick();
+  assert.equal(button(host,'画像の保存・共有を準備'),undefined);host.componentWillUnmount();
+  const u=exportHost();u.host.componentDidMount();await tick();assert.equal(u.events.length,0);
+  const displayed=u.host.controller.getView().record;await button(u.host,'画像の保存・共有を準備').props.onPress();
+  assert.equal(u.events.length,1);assert.equal(u.events[0][1].pieceId,PID);assert.equal(u.events[0][1].expectedUserId,OWNER);
+  assert.equal(button(u.host,'写真に保存').props.disabled,true);
+  await button(u.host,'写真に保存').props.onPress();assert.equal(u.events.length,1);
+  u.host.exportAttempt.onTarget(u.target,null);assert.equal(button(u.host,'写真に保存').props.disabled,false);
+  await button(u.host,'写真に保存').props.onPress();assert.equal(u.events.filter(x=>x==='photos').length,1);
+  assert.ok(texts(u.host.render()).includes('写真に保存しました。'));assert.equal(u.host.controller.getView().record,displayed);
+  u.host.componentWillUnmount();
+});
+test('fresh changed record cannot replace the selected detail for export',async()=>{
+  const u=exportHost({fresh:record({row_version:3})});await u.ready();
+  assert.equal(u.host.exportAttempt,null);assert.equal(u.events.filter(x=>Array.isArray(x)&&x[0]==='capture').length,0);
+  assert.ok(texts(u.host.render()).includes('画像を準備できませんでした。もう一度お試しください。'));u.host.componentWillUnmount();
+});
+for(const boundary of ['owner','flag','background','history','target','unmount'])test(`export ${boundary} aborts fresh preparation and cannot revive on return`,async()=>{
+  let resolve;const wait=new Promise(r=>{resolve=r;});const u=exportHost({prepareWait:wait});u.host.componentDidMount();await tick();
+  const pending=u.host.prepareExport(u.host.controller.getView().record),old=u.host.exportAttempt;
+  if(boundary==='owner')u.host.props={...u.host.props,owner:RID};
+  if(boundary==='flag')u.host.props={...u.host.props,flags:{...u.host.props.flags,piece_v2_export_enabled:false}};
+  if(boundary==='target')u.host.props={...u.host.props,savedPiece:savedEntry(RID)};
+  if(['owner','flag','target'].includes(boundary))u.host.componentDidUpdate();
+  if(boundary==='background')u.h.background('inactive');
+  if(boundary==='history')await u.host.act('loadHistory');
+  if(boundary==='unmount')u.host.componentWillUnmount();
+  resolve();await pending;assert.equal(u.host.exportAttempt,null);assert.equal(old.abort.signal.aborted,true);
+  assert.equal(u.events.filter(x=>Array.isArray(x)&&x[0]==='capture').length,0);
+  if(boundary!=='unmount')u.host.componentWillUnmount();
+});
+test('duplicate export presses produce one capture; late capture is disposed without OS handoff',async()=>{
+  let resolve;const wait=new Promise(r=>{resolve=r;});const u=exportHost({captureWait:wait});const attempt=await u.ready();
+  const pending=u.host.exportImage(attempt,'saveToPhotos');await u.host.exportImage(attempt,'openShare');
+  u.h.background('inactive');resolve();await pending;
+  assert.equal(u.events.filter(x=>Array.isArray(x)&&x[0]==='capture').length,1);
+  assert.equal(u.events.includes('photos'),false);assert.equal(u.events.includes('share'),false);assert.ok(u.events.includes('dispose'));
+  u.host.componentWillUnmount();
+});
+test('share cancellation is shown as cancellation, and failed canvas offers explicit fresh preparation',async()=>{
+  const u=exportHost({result:{outcome:'cancelled'}}),attempt=await u.ready();await u.host.exportImage(attempt,'openShare');
+  assert.ok(texts(u.host.render()).includes('共有をキャンセルしました。'));
+  await u.host.prepareExport(u.host.controller.getView().record);const next=u.host.exportAttempt;next.onUnavailable();
+  assert.equal(u.host.exportAttempt,null);assert.ok(button(u.host,'画像の保存・共有を準備'));u.host.componentWillUnmount();
+});
+
+for(const boundary of ['history','owner','target','flag'])test(`terminal export result stays bound to its record across ${boundary}`,async()=>{
+  const u=exportHost(),attempt=await u.ready();await u.host.exportImage(attempt,'saveToPhotos');
+  assert.ok(texts(u.host.render()).includes('写真に保存しました。'));
+  if(boundary==='history')await u.host.act('loadHistory');
+  if(boundary==='owner')u.host.props={...u.host.props,owner:RID};
+  if(boundary==='target')u.host.props={...u.host.props,savedPiece:savedEntry(RID)};
+  if(boundary==='flag')u.host.props={...u.host.props,flags:{...u.host.props.flags,piece_v2_export_enabled:false}};
+  assert.equal(texts(u.host.render()).includes('写真に保存しました。'),false);
+  u.host.componentDidUpdate();assert.equal(u.host.exportMessage,null);u.host.componentWillUnmount();
 });

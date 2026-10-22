@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§110.2／map§65.55.2／weekly§5.6.35.2／manifest v148。明示iOS版の保存条件・saved reader接続をsource55430e4eの唯一CIで確認。JS964/新native44/新実RN17成立、画像8pair一致・saved期限後保持成立。旧失敗によりCI全体failure。稼働通常保存/新版共有/本人実機の商品受入れは未完です。**
+**最新は入口§111／map§65.56／weekly§5.6.36／manifest v149。通常本人詳細→新iOS版の画像保存/共有sourceを準備。local979成功、実view-shot/PNG/拒否14条件は新一度CI待ち。P-W1実Auth通常保存・実OS操作・本人実機は未完です。**
 
 ### §87の設計時点（履歴）
 
@@ -3918,3 +3918,21 @@ XCTestは3method実行/失敗1。xcresult59 failure summaryは全て旧testWhole
 PRIMARY_OUTCOME=SOURCE_CONNECTION_TECHNICAL_CREDIT、bounded_work_complete=true、validation_success=true、source_connection_complete=true。InputScreenの明示版eligibility→同mount/token fit→既存保存controller/API、および同版saved readerがsourceとして揃った。native_checked自体はcanSave/canExport=falseであり、hostの別条件を省略しない。新実RNのsavedは閉じた合成DTO、JS保存一往復はAuth/HTTP/native代替を含む。実Auth/稼働API/新renderer発行設定による通常保存→本人履歴詳細の成功や、正式商品採用を認定しない。
 
 次の未完は新renderer版を供給する稼働設定の採用と実Authによる通常保存→同owner履歴/詳細の一往復。P-W2の新版画像保存共有、P-W3本人実機受入れも残る。API/DTO/DB/SQL/flag/env/deploy/main merge変更0、両PRはDraft/open/unmerged。今回の新source単位はここで終了し、追加修復/再CI/別Gateへ自動進行しない。今回結果資料4pathはSTRUCTURE_MAP_DELTA_NONE、source段階で行った21path/STRUCTURE_MAP_DELTA_PRESENTの責務地図は維持、automatic_progression=false。
+
+## 111. 2026-10-22 — P-W2通常本人詳細と新版画像保存・共有のsource接続
+
+Mashの今回の残件指示を受け、GitHub Cocolon8c81076d/APIa536e50e、前提資料・作業規則・全体設計01/全file地図01A/B/C・最新weekly20261017を照合した。P-W1のRN接続は成立済み。first live unfinishedは新rendererの稼働供給と実Auth保存→本人履歴/詳細であり、その配置・本人データ操作はRule18§11.3の別承認範囲。API既定appはlegacy、明示create_application(piece_preview_configuration=...)だけがcandidateを構成し、既存env値だけの切替はない。Supabase cocolon-projectのPiece8table存在/RLS enabledをread-only metadataで確認した。live保存・通常利用成功には数えない。
+
+weekly§5.6.1が明記するP-W2独立準備の並行範囲で、既存通常本人詳細→同じ保存recordのfresh GET→固定全canvas→既存PNG/Photos/Shareのsourceを接続した。LEVEL2/Rule18§0A、実行はroot華恋一人、補助担当はread-only。API/DTO/DB/flag/env/deploy/署名配布/実Photos/Share/main merge効果0。新controller/subsystem/dependencyは追加しない。P-W1を共有完成へ置換しない。
+
+`PieceOwnerHistoryScreen`既存hostはowner-read/exportのstrict実効flagと本人/focus/foreground/表示recordを確認し、明示準備操作でだけexport ownerを読み込む。fresh detailのpiece ID/row version/3hash/rendererは表示対象と一致必須。offscreenに既存PieceExportCanvasをmountし、current target完成後に写真保存/共有を明示操作へ結ぶ。二重操作、本人/flag/対象/背景化/履歴/削除/公開範囲変更/unmountで旧attemptを破棄し、遅いcaptureはdisposeする。初期native unavailableも通知して再準備を可能にする。成功・取消・失敗メッセージは元record/contextにだけ表示する。Share外部読取中のcopy保全とPhotos保存確定後のcleanup失敗の扱いは既存export ownerを維持する。
+
+新明示iOS版savedだけをexportCanvasへ接続する。prototype/未知版/Android新bitmapは拒否し、旧v3の描画/capture方法は保持する。capture targetは同じ全logical canvas、bitmap node/artifact token/binding、snapshot/generation/inspection/record keyへ束縛し、保存用fitや新期限を作らない。完成済みsavedは元8秒後も保持するが、構築8秒/preview fit期限は変えない。export candidate metadataのrendererは実保存版を保持する。
+
+native clearからJS通知までの間や、撮影中の子消失を拒否するため、既存view-shot Piece専用optionへprivate token/binding二項を追加した。公開API/DTO/DB変更ではない。iOS同一main blockで、bitmap descendant厳密1個と現native token/binding/configを撮影前後に照合する。欠落/複数/不一致はlegacyへfallbackせず拒否。bitmapだけを撮ると背景/枠が消えるため、全canvasを保持する。新bitmapのみ既存useRenderInContext=trueで同じlayer画像を撮り、offscreen drawViewHierarchyのblank-success問題を回避する。旧v3 callerは従来方法のまま。
+
+localは既存CI同一13suite979 PASS/FAIL0/SKIP0/cancel0（17,401.43458ms）。新しい意味のない全suite再検査ではなく、接続/lifecycle/native identity条件を確認する。新JS検査とVM import補正、初期unavailable/terminal messageのreview補修を含む。JSX parse0error、runner bash syntax成功、pinned view-shot5.1.1原sourceへのpatch dry-run成功。旧RN13/bitmap12/admitted17のfixture JSON bytesを前回固定sourceへ完全一致確認。旧native195/新44と旧RN失敗期待を削らない。
+
+新sourceで既存CIを一度だけ行い、新group14＝正常saved8＋clear/removed/token/binding/multiple/during拒否6を別判定する。正常は通常hostと同じoffscreen geometryで実view-shotを通し、全canvas PNGを同じsaved native像とRGBA比較する。初回完成後8秒超のcaptureも確認する。旧groupとは分母/結果を混同しない。新compile/runtime/PNG/拒否条件の未達は原actualを保存して停止し、CI後修復・追加CIへ自動進行しない。現時点CI未実行/counter0上限1、native/実PNGの成功は未主張。
+
+STRUCTURE_MAP_DELTA_PRESENT。全変更pathはmanifest同単位を正本とする。P-W1の実Auth通常保存、P-W2の実OS写真保存/共有とAndroid新版、backend書出しreceipt、P-W3本人実機/商品受入れは残る。今回のsource準備を全体完成・稼働有効化と呼ばない。前回CI39734534523はclosed/failure/消費1を保持する。automatic_progression=false。

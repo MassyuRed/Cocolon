@@ -56,7 +56,7 @@ function harness({os='ios', version=35, record=fixture()} = {}) {
     ['features/piece/pieceApi.js',['PieceApiError','readPiecePreviewSnapshot','readPieceOwnerSnapshot']],
     ['features/piece/piecePreviewModel.js',['verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js',['readPieceOwnerDisplay']],
-    ['features/piece/pieceLayout.js',['preparePieceNativeSavedDisplay','PIECE_NATIVE_PREVIEW_VERSION']],
+    ['features/piece/pieceLayout.js',['preparePieceNativeSavedDisplay','PIECE_NATIVE_PREVIEW_VERSION','PIECE_BITMAP_RENDERER_VERSION']],
   ]) {
     const source=fs.readFileSync(path.join(ROOT,file),'utf8').replace(/^import .*;$/gm,'').replace(/^export /gm,'');
     vm.runInContext(`{${source}\n${names.map(n=>`globalThis.${n}=${n};`).join('\n')}}`,context);
@@ -69,9 +69,16 @@ function harness({os='ios', version=35, record=fixture()} = {}) {
 }
 const count=(h,kind)=>h.calls.filter(c=>c[0]===kind).length;
 const failure=p=>assert.rejects(p,e=>e.code==='PIECE_TEMPORARILY_UNAVAILABLE');
-test('explicit bitmap saved rendering does not open legacy image export or its receipt version', async()=>{
-  const h=harness({record:{...fixture(),renderer_version:'piece.rn_bitmap_renderer.ios.v1'}});
-  await failure(h.prepare());assert.equal(count(h,'capture'),0);assert.equal(count(h,'photo'),0);
+test('explicit iOS bitmap capture preserves renderer and requires private native identity options', async()=>{
+  const h=harness({record:{...fixture(),renderer_version:'piece.rn_bitmap_renderer.ios.v1'}}),job=await h.prepare();
+  await failure(job.capture(h.target()));assert.equal(count(h,'capture'),0);
+  const target={...h.target(),bitmapToken:'saved-artifact',bitmapBinding:'saved-binding'};
+  const asset=await job.capture(target);
+  const options=h.calls.find(c=>c[0]==='capture')[1];
+  assert.equal(options.useRenderInContext,true);assert.equal(options.cocolonPieceBitmapToken,'saved-artifact');assert.equal(options.cocolonPieceBitmapBinding,'saved-binding');
+  assert.equal(asset.candidate.renderer_version,'piece.rn_bitmap_renderer.ios.v1');await asset.dispose();
+  const android=harness({os:'android',record:{...fixture(),renderer_version:'piece.rn_bitmap_renderer.ios.v1'}});
+  await failure(android.prepare());assert.equal(count(android,'capture'),0);
 });
 async function image(h) {return (await h.prepare()).capture(h.target());}
 

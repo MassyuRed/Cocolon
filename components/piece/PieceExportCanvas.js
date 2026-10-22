@@ -8,6 +8,6 @@ export default class PieceExportCanvas extends React.Component {
   getCaptureTarget = () => this.card?.getCaptureTarget() || null;
   render() {
     return React.createElement(PieceVisualCard, { savedRecord: this.props.savedRecord,
-      exportCanvas: true, ref: card => { this.card = card; } });
+      exportCanvas: true, onCaptureTargetChange: this.props.onCaptureTargetChange, onCaptureUnavailable: this.props.onCaptureUnavailable, ref: card => { this.card = card; } });
   }
 }

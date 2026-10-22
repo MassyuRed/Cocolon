@@ -24,7 +24,29 @@
 - (NSString *)bitmapToken;
 - (NSString *)bitmapBinding;
 - (BOOL)bitmapConfigurationCurrent;
+- (NSString *)cocolonPieceCaptureIdentity;
 @end
+
+@interface PieceExportMutationLayer : CALayer
+@end
+@implementation PieceExportMutationLayer
+- (void)renderInContext:(CGContextRef)ctx {
+  [super renderInContext:ctx];
+  UIView *canvas=(UIView *)self.delegate;
+  for(UIView *view in [canvas.subviews copy])
+    if([view respondsToSelector:@selector(cocolonPieceCaptureIdentity)])[view removeFromSuperview];
+}
+@end
+static NSData *PieceExportRGBA(UIImage *image) {
+  if(!image.CGImage)return nil;
+  size_t w=CGImageGetWidth(image.CGImage),h=CGImageGetHeight(image.CGImage);
+  if(w!=1080 || (h!=1350 && h!=1920))return nil;
+  NSMutableData *data=[NSMutableData dataWithLength:w*h*4];
+  CGColorSpaceRef space=CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
+  CGContextRef ctx=CGBitmapContextCreate(data.mutableBytes,w,h,8,w*4,space,kCGBitmapByteOrder32Big|kCGImageAlphaPremultipliedLast);
+  CGColorSpaceRelease(space);if(!ctx)return nil;
+  CGContextDrawImage(ctx,CGRectMake(0,0,w,h),image.CGImage);CGContextRelease(ctx);return data;
+}
 
 // Test-only observation of the original selected-line operation. The product
 // inspector, its wire object, and the already-mounted Text remain unchanged.
@@ -744,6 +766,20 @@ RCT_EXPORT_METHOD(cropBitmapHost:(nonnull NSNumber *)tag token:(NSString *)token
     resolve(@{@"image_cleared":@(![host bitmapImage]&&![host bitmapToken]&&!host.layer.contents)});
   }];
 }
+RCT_EXPORT_METHOD(mutateExportBitmap:(nonnull NSNumber *)tag canvas:(nonnull NSNumber *)canvasTag mode:(NSString *)mode resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+  [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *manager,NSDictionary<NSNumber *,UIView *> *registry){
+    UIView *host=registry[tag],*canvas=registry[canvasTag];
+    if(![host respondsToSelector:@selector(cocolonPieceCaptureIdentity)] || ![host cocolonPieceCaptureIdentity]){reject(@"TEST_EXPORT",@"Missing bitmap",nil);return;}
+    if([mode isEqual:@"clear"])host.clipsToBounds=YES;
+    else if([mode isEqual:@"removed"])[host removeFromSuperview];
+    else if([mode isEqual:@"multiple"]){UIView *extra=[[NSClassFromString(@"PieceBitmapCanvasView")alloc]initWithFrame:host.frame];[canvas addSubview:extra];}
+    else if([mode isEqual:@"during"]){
+      if(object_getClass(canvas.layer)!=CALayer.class){reject(@"TEST_EXPORT",@"Unexpected layer class",nil);return;}
+      object_setClass(canvas.layer,PieceExportMutationLayer.class);
+    }else{reject(@"TEST_EXPORT",@"Unknown mutation",nil);return;}
+    resolve(@YES);
+  }];
+}
 RCT_EXPORT_METHOD(captureBitmap:(nonnull NSNumber *)tag report:(NSDictionary *)raw resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
   [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *manager,NSDictionary<NSNumber *,UIView *> *registry){
     @try {
@@ -789,6 +825,19 @@ RCT_EXPORT_METHOD(captureBitmap:(nonnull NSNumber *)tag report:(NSDictionary *)r
       NSString *name=[raw[@"name"]stringByAppendingString:@".png"];
       BOOL written=[UIImagePNGRepresentation(image)writeToFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:name]atomically:YES];
       if(written)report[@"png"]=name;else valid=NO;
+      if([raw[@"evidence_set"]isEqual:@"export_saved"]){
+        NSString *uri=raw[@"export_capture_uri"],*cache=[NSSearchPathForDirectoriesInDomains(NSCachesDirectory,NSUserDomainMask,YES).firstObject stringByAppendingPathComponent:@"piece-capture"];
+        NSString *path=[uri hasPrefix:@"file://"]?[uri substringFromIndex:7]:uri;
+        BOOL owned=[path isKindOfClass:NSString.class]&&[[path stringByDeletingLastPathComponent]isEqual:cache]&&[[path lastPathComponent]hasPrefix:@"piece-"]&&[path.pathExtension isEqual:@"png"];
+        NSData *bytes=owned?[NSData dataWithContentsOfFile:path]:nil;
+        UIImage *exportImage=bytes?[UIImage imageWithData:bytes]:nil;
+        NSData *expected=PieceExportRGBA(image),*actual=PieceExportRGBA(exportImage);
+        report[@"export_pixels_equal"]=@(expected&&actual&&[expected isEqual:actual]);
+        NSString *exportName=[raw[@"name"]stringByAppendingString:@"_view-shot.png"];
+        BOOL saved=bytes&&[bytes writeToFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:exportName]atomically:YES];
+        if(saved)report[@"export_png"]=exportName;
+        report[@"export_file_saved"]=@(saved);[report removeObjectForKey:@"export_capture_uri"];
+      }
       // Same selected RN Text/layer, font, rows and recipe; reference only.
       // Hidden source views are rendered individually at the recorded p.
       NSDictionary *colors=raw[@"colors"];
@@ -1187,6 +1236,30 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     for(NSUInteger i=0;i<16 && i+1<self.resultModule.reports.count;i+=2){NSDictionary *preview=self.resultModule.reports[i],*saved=self.resultModule.reports[i+1];
       for(NSString *key in @[@"blocks",@"rows",@"font_size",@"width",@"height",@"branding_mode"])XCTAssertEqualObjects(preview[key],saved[key]);
       if(preview[@"png"]&&saved[@"png"]){NSData *a=[NSData dataWithContentsOfFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:preview[@"png"]]],*b=[NSData dataWithContentsOfFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:saved[@"png"]]];XCTAssertEqualObjects(a,b);}
+    }
+  }@finally{[bridge invalidate];}
+}
+
+- (void)testSavedBitmapExportWithRealViewShot {
+  self.resultModule=[PieceCanvasTest new];self.resultModule.reports=[NSMutableArray new];self.resultModule.reportFilename=@"export-results.json";
+  XCTestExpectation *done=[self expectationWithDescription:@"Same saved bitmap full PNG export"];
+  self.resultModule.completed=^{[done fulfill];};RCTBridge *bridge=[[RCTBridge alloc]initWithDelegate:self launchOptions:nil];
+  @try{
+    RCTRootView *root=[[RCTRootView alloc]initWithBridge:bridge moduleName:@"PieceCanvasCases" initialProperties:@{@"pieceGroup":@"export"}];
+    UIWindow *window=[[[UIApplication sharedApplication]delegate]window];window.rootViewController.view=root;[window makeKeyAndVisible];
+    [self waitForExpectations:@[done]timeout:90];XCTAssertNil(self.resultModule.reportPersistenceError);
+    NSArray *names=@[@"export_saved_essay_paragraphs",@"export_saved_quote_unicode",@"export_saved_declaration_no_brand",@"export_saved_essay_max420",@"export_saved_suffix_latin_ligature",@"export_saved_suffix_arabic",@"export_saved_suffix_max420_a",@"export_saved_containment_branding_opacity08",@"export_reject_clear",@"export_reject_removed",@"export_reject_token",@"export_reject_binding",@"export_reject_multiple",@"export_reject_during"];
+    XCTAssertEqual(self.resultModule.reports.count,14);XCTAssertEqualObjects([self.resultModule.reports valueForKey:@"name"],names);
+    for(NSDictionary *report in self.resultModule.reports){
+      XCTAssertEqualObjects(report[@"export_target_current"],@YES);XCTAssertLessThan([report[@"elapsed_ms"]doubleValue],8000);
+      XCTAssertEqualObjects(report[@"save_fit_current"],@NO);XCTAssertEqualObjects(report[@"save_fit_handle_keys"],@[]);
+      if([report[@"evidence_set"]isEqual:@"export_trap"]){XCTAssertEqualObjects(report[@"export_rejected"],@YES);
+        if(![@[@"export_reject_token",@"export_reject_binding"]containsObject:report[@"name"]])XCTAssertEqualObjects(report[@"export_mutation_applied"],@YES);continue;}
+      XCTAssertEqualObjects(report[@"phase"],@"native_checked");XCTAssertEqualObjects(report[@"body_preserved"],@YES);
+      XCTAssertEqualObjects(report[@"export_rejected"],@NO);XCTAssertEqualObjects(report[@"export_target_after"],@YES);
+      XCTAssertEqualObjects(report[@"native_canvas_valid"],@YES);XCTAssertEqualObjects(report[@"bitmap_all_cells_equal"],@YES);
+      XCTAssertEqualObjects(report[@"export_pixels_equal"],@YES);XCTAssertEqualObjects(report[@"export_file_saved"],@YES);
+      if([report[@"name"]isEqual:@"export_saved_essay_paragraphs"])XCTAssertEqualObjects(report[@"saved_retained_after_deadline"],@YES);
     }
   }@finally{[bridge invalidate];}
 }
