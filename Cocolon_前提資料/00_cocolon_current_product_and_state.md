@@ -87,9 +87,9 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | export | 本人詳細→fresh GET→表示recordのID・row version・3hash・renderer一致→全canvas→明示Photos／Shareをsource接続 | 実OS写真保存・Share、Android新版export、backend receipt、本人端末商品受入れは未完。外部へ出た画像コピーは内部非公開／削除で回収できない |
 | 新renderer | iOS `piece.rn_bitmap_renderer.ios.v1`。検査した同一bitmapを表示／書出し。preview fit・構築は元8秒、完成saved画像は8秒後も保持 | live供給採用・商品採用は未完。Android新版の成立へ拡張しない |
 | 最新限定検証 | 新export正常8PNG＋native拒否6。JS979・新native44成功。旧195は176PASS／19FAILを保持 | CI39780623108 attempt1 completed／failure、head`d2e1244…`、10/22 JST21:42:54〜22:07:18。CI全体合格ではない。限定TECHNICAL_CREDITの記録あり、product_credit=0 |
-| live・次の未完 | 10/23照会のliveは`5c8bd8e5…`、起動`app:app`、autoDeploy off。DB既適用/RLSはmetadata再確認、本人row/RPC操作0。現在ownerは入口§117／map§65.60／weekly§5.6.40／manifest v157 | MashはTTL600秒/private preview-save-owner-read-delete/全認証sessionの既存API配置・有効化を明示承認済み。PR4候補`3577d7fd…`は既存監視のURL ID混入を2path修復、CI39858883604は1805 PASS/FAIL0/SKIP0。Render pluginに固定commit配置/start更新がなくCLI認証もないため未適用。ブラウザ切替の許可だけが実行経路の次確認、配置scopeを再承認へ戻さない。実Auth通常保存→本人履歴/詳細は未実施 |
+| live・次の未完 | 10/23 07:07:33 JSTに`3577d7fd…`/`dep-dbd8hjoae00c73firbt0`がLive。既存APIの明示factory起動へ切替、autoDeploy off/linked main維持。現在ownerは入口§118／map§65.61／weekly§5.6.41／manifest v158 | 承認済みTTL600秒/private preview-save-owner-read-deleteを同API全認証sessionへ反映。public/write-read-visibility/export OFF、health200/bootstrap8flags一致/未認証history401を確認済み。実本人Authの通常保存1件→履歴/詳細、実OS/端末・商品受入れは未確認。privacy2pathはPR4だけにありPR3へ未戻し込み |
 
-詳細owner：[Piece map](current_structure/02_piece_current_structure.md)、[Piece入口](../Cocolon_Piece/00_read_first.md)、[manifest](../Cocolon_Piece/manifest.json)。同変更単位でcurrent_entry/current_premise/current_structure pinを現物へ同期。承認済み設定はpreview TTL600秒、明示iOS版、private preview/save/owner read/delete、public/export OFF。同APIの全認証sessionへ及ぶ。技術的ready不足を承認やCIで免除せず、実Auth本人保存・本人実機/商品受入れは未確認。アクセスログ無効/httpx WARNINGの起動構成も準備済みだが未適用。
+詳細owner：[Piece map](current_structure/02_piece_current_structure.md)、[Piece入口](../Cocolon_Piece/00_read_first.md)、[manifest](../Cocolon_Piece/manifest.json)。同変更単位でcurrent_entry/current_premise/current_structure pinを現物へ同期。TTL600秒とpiece.rn_bitmap_renderer.ios.v1は配置command readback根拠、private4true/public4falseは実bootstrap根拠。配置済みを実Auth本人保存や商品受入れの成功としない。本人データ/業務RPC/DB変更0、次の最初の未完は本人通常sessionの保存→同owner履歴/詳細。
 
 ## 7. その他の全機能・共通基盤
 
@@ -145,7 +145,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | Emlis・CMEE実物 | API `cocolon_meaning_experience_engine/engine.py`、`emlis_thread_service.py`とthread source／question／answer_update／surface、RN `InputScreen`・`useEmlisThread`・`EmlisThreadModal`。API path prefixは`ai/services/ai_inference/` |
 | AI試験 | `observation_learning/trials/2026-10-21-qwen27-demo/README.md`と8出力JSON。`fine_tuning_performed=false`、`cmee_integration_performed=false` |
 | Analysis実物 | API `astor_material_snapshots.py`、`analysis_observed_service.py`、`watashi_map_service.py`、`kokoro_weather_service.py`、RN `WatashiMapV2Renderer`・access policy。設計04 §10 IF／§11 Saved、schema05 §7・9.6 |
-| Piece実物 | `PieceOwnerHistoryScreen`、`pieceExport`、`PieceExportCanvas`、`pieceRenderer`、`InputPieceActionArea`。入口§117／map§65.60／manifest v157、CI39780623108とAPI修正版CI39858883604 |
+| Piece実物 | `PieceOwnerHistoryScreen`、`pieceExport`、`PieceExportCanvas`、`pieceRenderer`、`InputPieceActionArea`。入口§118／map§65.61／manifest v158、CI39780623108とAPI39858883604、Live dep-dbd8hjoae00c73firbt0 |
 | 周辺機能実物 | RootNavigator・MainTabsと5 Stack、Input／AnalysisHistory／TodayQuestionHistory／Nexus／Account／Ranking／Settings各screen、`lib/nexusApi`・home/account API transport、対応APIとaccess policy。`lib/iap/iapService.js` L432〜445・527〜531、`SubscriptionContext.js` L165〜234、API `api_public_profile.py` L81〜108、`navigation/linkingRuntime.js` |
 | 作業導線 | repository root `AGENTS.md`、観測学習README、work rules00／CURRENT_RULES R2／09／99・manifest、System Context00・task_profiles。元の必読incident・品質規則は継続 |
 
@@ -153,4 +153,4 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 次回はfresh headと変更pathを比較し、関係する根拠だけを再確認する。確認していない機能の検証日を更新せず、この一枚を「毎回全体を読む」入口として保つ。
 
-10/23 Piece差分は、既承認Render workspaceのread-only service/deploy照会、Supabase pg_catalog/RLS、live基点PR4の2path監視privacy修復、CI39858883604原23summary・合成merge/candidate同tree、Mashの配置承認と利用可能toolを照合したもの。Render/本人データへの変更は0。Emlis・Analysis・他機能の実装/配置/端末状態を今回新規再検証した意味ではない。
+10/23 Piece差分は、既承認Render workspace/対象service、承認起動設定の保存、exact3577d7fd配置とLive/startup identity、無認証GET3本、privacy修復CI39858883604を照合したもの。設定保存1/配置1、本人データ・業務RPC・DB変更0。Emlis・Analysis・他機能の品質/端末状態を今回新規再検証した意味ではない。

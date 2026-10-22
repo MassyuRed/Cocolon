@@ -1,14 +1,14 @@
 ---
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
-revision_date: "2026-10-22 JST"
-latest_api_implementation: "804beca66f9f02e18dc4522232478466f4d52b13"
+revision_date: "2026-10-23 JST"
+latest_api_implementation: "3577d7fdeb19158ef5e675f51960652a52c24487"
 latest_storage_candidate: "4fcb140b778850a1b7a5a65d8e0a26005b3a24c4"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
 effective_when: "MERGED_TO_COCOLON_MAIN"
 publication_state: "DRAFT_PR_CANDIDATE_UNTIL_MERGED"
 implementation_effect: 0
-activation_effect: 0
+activation_effect: 1
 automatic_progression: false
 ---
 
@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§117／map§65.60／weekly§5.6.40／manifest v157。MashはTTL600秒/private preview-save-read-delete/同API全認証sessionへの配置・有効化を明示承認済み。Piece URL IDのログ混入経路を既存2fileで最小修復し、候補3577d7fdの唯一CI39858883604は1805 PASS/FAIL0/SKIP0。Render接続はcommit指定/起動コマンド変更に非対応、CLI認証もなく未適用。配置承認を再要求しない。実Auth保存/端末は未確認。**
+**最新は入口§118／map§65.61／weekly§5.6.41／manifest v158。承認済みコミット3577d7fdを既存APIへ配置し、2026-10-23 07:07:33 JSTにLive。TTL600秒/明示iOS版/private preview-save-owner-read-deleteを同API全認証sessionへ有効化、public/read/visibility/exportはOFF。health200/bootstrap8flags一致/未認証history401を確認。本人通常保存・同owner再読/実OS/端末・商品受入れは未確認。**
 
 ### §99の判断案（履歴）
 
@@ -3484,3 +3484,12 @@ source fbf0deaec8679ebf6a58f53e0702d2e437318680/tree26d330c5の変更20pathをGi
 PR4候補3577d7fdは08875643から2pathだけを修復。live基点の計11path（製品6/test4/workflow1）、全2pathをGitHub全文読戻し一致。唯一CI39858883604 attempt1はsuccess、原23summary合計1805 PASS/FAIL0/SKIP0（shared/default128/native persistence46）。合成merge0689de53はheadと同tree。Auth/source/HTTPは合成、本人往復未確認。旧1793成功を今回へ転用しない。privacy修復はPR4限定、PR3@a536e50eは未変更で後続への戻し込みは未実施。source/test/監視の既存責務を増設しないためSTRUCTURE_MAP_DELTA_NONE。
 
 Renderはlive5c8bd8e5/app:app/autoDeploy offのまま。現在のpluginはcommit指定deploy/startCommand更新に非対応、CLI/設定済keyもない。汎用main deploy/env更新を使わず、ブラウザtoolが要求するfallback切替の許可前はUIへ入らない。配置・有効化承認は成立済み、実行経路だけ未成立。次は対応する既存Dashboardで承認済みcommandとexact sourceを適用し、実効flag/認証拒否/本人往復を段階ごとに確認すること。現在は未配置/未有効化/実Auth未確認、実OS・本人受入れも未完。automatic_progression=false。
+
+
+## 65.61 2026-10-23 — 既存APIのprivate構成を稼働へ反映
+
+入口§118、weekly§5.6.41、manifest v158がcurrent。Mashのbrowser fallback承認・本人認証後、既存service srv-d4ppfpm3jp1c73952bj0の起動commandを承認全文へSave Changes、保存直後にdeploy0/autoDeploy offを読み戻した。Manual Deploy→Deploy a specific commitで完全SHA3577d7fdを一度指定。deploy dep-dbd8hjoae00c73firbt0は07:06:07開始、07:07:33 JST Live、旧5c8bd8e5はdeactivated。linked mainは変更せず、実checkout SHAとstartup/Liveでidentityを確認した。
+
+稼働ownerは既存app.create_application(piece_preview_configuration=...)→piece_v2_runtime_control→既存各handler。TTL600秒/piece.rn_bitmap_renderer.ios.v1/private preview-save-owner-read-deleteの明示構成を採用。保存・quota・owner-read/delete・preview visual/cancelの既存compositionを稼働へ接続した。source責務/API/DTO/DB/RNの新設0、STRUCTURE_MAP_DELTA_NONE。default app:app自体はsource上legacy/OFFであり、production起動構成と混同しない。
+
+GET /healthz200、/app/bootstrap200とPiece8flag一致（private4true/public-write-read-visibility-export4false）、未認証/emotion/piece/history401 PIECE_AUTH_REQUIRED/no-store/Bearerを確認。TTL/rendererはcommand readback根拠、実Auth/DB業務往復は未確認。現在は同API全認証sessionへ有効化済みであり、owner限定ではない。本人通常保存1件→履歴/詳細、実OS/端末・商品受入れ、P-W2/P-W3/M5独立残件を保持。privacy2pathはPR4だけにありPR3へ未戻し込み。今回source/CI追加0、設定保存1/配置1、DB/本人row/main merge/新service/料金0、product_credit0、automatic_progression=false。

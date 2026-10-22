@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_piece_read_first
 title: "Cocolon Piece — Read First"
-revision_date: "2026-10-22 JST"
+revision_date: "2026-10-23 JST"
 decision_owner: "Mash"
 workstream: "Cocolon / Piece"
 document_status: "CURRENT_PIECE_WORKSTREAM_ENTRY"
@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§117／map§65.60／weekly§5.6.40／manifest v157。MashはTTL600秒/private preview-save-read-delete/同API全認証sessionへの配置・有効化を明示承認済み。Piece URL IDのログ混入経路を既存2fileで最小修復し、候補3577d7fdの唯一CI39858883604は1805 PASS/FAIL0/SKIP0。Render接続はcommit指定/起動コマンド変更に非対応、CLI認証もなく未適用。配置承認を再要求しない。実Auth保存/端末は未確認。**
+**最新は入口§118／map§65.61／weekly§5.6.41／manifest v158。承認済みコミット3577d7fdを既存APIへ配置し、2026-10-23 07:07:33 JSTにLive。TTL600秒/明示iOS版/private preview-save-owner-read-deleteを同API全認証sessionへ有効化、public/read/visibility/exportはOFF。health200/bootstrap8flags一致/未認証history401を確認。本人通常保存・同owner再読/実OS/端末・商品受入れは未確認。**
 
 ### §87の設計時点（履歴）
 
@@ -4108,3 +4108,26 @@ CI39858883604 attempt1は2026-10-23 06:38:25〜06:42:08 JSTにcompleted/success�
 承認済みconfigは600秒/iOS明示版とpreview/save/owner_read/owner_delete strict requested/ready pair true、public/read/visibility/export false。起動command全文はmanifest v157のapproved_runtime_configuration.start_commandに保持する。ブラウザ切替が許可され、利用可能な認証sessionで対象workspace/serviceを確認できる場合だけ、同じcommandと修正版exact SHAを適用する。保存操作が自動deployを起動するUIなら、linked mainを配置しない安全な固定sourceの手順を現物確認して選び、勝手に別branch/mainへ切り替えない。固定commit指定はRenderのManual Deploy→Deploy a specific commitを使用し、current commit identityとstatus live、/healthz、/app/bootstrapの実効8flag、未認証owner/private操作の拒否を確認する。実本人Authの通常private保存1件→同owner履歴/詳細はその後に確認し、service_roleで代用しない。
 
 稼働configurationはまだ適用していない。P-W1実Auth/本人再読、P-W2実Photos/Share/Android/backend receipt、P-W3本人端末/商品受入れ、M5独立残件を保持。配置・設定・DB・本人row・main merge効果0、automatic_progression=false。今回のprivacy修復は既存契約の因果箇所だけで、STRUCTURE_MAP_DELTA_NONE。結果/承認状態とmap/pin/全体現在地は同じ5資料へ同期する。
+
+
+## 118. 2026-10-23 — 承認済みprivate構成の既存API配置
+
+Mashは§117の実行経路についてRenderブラウザ操作への切替を明示承認し、必要な本人認証を完了した。まっしゅ's workspace/tea-d4pp61idbo4c73bf4hkgの既存mashos-api/srv-d4ppfpm3jp1c73952bj0を画面とpluginで照合。root華恋だけが設定保存・配置を行い、補助担当はsource/手順のread-only照合だけを行った。配置・有効化の既承認条件を変更せず、新しい個別承認へ戻していない。認証の秘密値・session URL・コードは資料へ残さない。
+
+### 118.1 保存とexact配置
+
+UIの既存Start Commandをmanifest v157のapproved_runtime_configuration.start_commandと同一のcommandへ変更し、Save Changesで保存した。pluginのreadbackで全文一致、autoDeploy off、linked main/既存build/rootDirを確認し、直後のdeploy一覧には新規配置0（旧5c8bd8e5だけlive）を確認した。次にManual Deploy→Deploy a specific commitで完全SHA3577d7fdeb19158ef5e675f51960652a52c24487を検索し、同commit messageと一致する1件を選択、Deploy commitを一度実行した。branch変更・latest deploy・restart・clear cache・env updateは行わない。
+
+新deployはdep-dbd8hjoae00c73firbt0、開始2026-10-23 07:06:07 JST、manual Dashboard、source3577d7fd/treead5a219c。buildログに同完全SHAのcheckoutと既存pip install -r requirements.txtを確認。Renderの表示上branch mainと出ても、実配置identityは指定SHAで照合する。配置時に製品source変更/追加CI/DB migration/本人row/RPC操作0。ブラウザ環境の一時中断後も保存済みcommandと無配置をpluginで照合してから同じ画面へ復帰した。
+
+同deployは07:07:33.910 JSTにlive、旧dep-db50bcd9fdbs73b5dgn0はdeactivated。新instance srv-d4ppfpm3jp1c73952bj0-52skzで07:07:04に承認command起動、07:07:29にApplication startup complete/0.0.0.0:10000を確認し、UIにもDeploy succeeded | Live、source3577d7fが表示された。配置後pluginで起動command全文一致、autoDeploy off/linked main維持を再確認。保存設定とlive/instanceを対応づけた証跡をmanifest v158へ保存する。起動ログの既存subscription.phase3 ios_ready/android_ready falseとTerms/Privacy URL未設定警告は残っており、今回変更・解消していない。限定startup検査以外の全監視・全機能成立を認定しない。
+
+### 118.2 現在の効果と残件
+
+実効化は同APIの全認証sessionへ及ぶ。preview TTL600秒、piece.rn_bitmap_renderer.ios.v1、private preview/save/owner history-detail/deleteを有効化し、public write/read/visibility/exportはOFFを維持する。TTL/rendererは配置commandのreadback根拠、未認証bootstrapのfeature_flagsとは別の確認対象。OFFは今回Piece V2のruntime flagsを指し、Nexus等を含む全公開経路廃止を確認した意味ではない。既定app:appのsourceを変更せず、明示factory呼出しを稼働入口へ採用した。
+
+2026-10-23 07:08:45 JST、Authorization/cookieなしのGET3本だけを実施。/healthzは200 {status:ok,app:Cocolon MyModel}、/app/bootstrapは200でfeature_flagsがpreview/save/owner_read/delete=true、public_write/public_read/visibility_toggle/export=falseの期待8項目すべて一致。/emotion/piece/historyは401 {code:PIECE_AUTH_REQUIRED}、Cache-Control:no-store/WWW-Authenticate:Bearer。source上の認証先行順と実401を対応づけ、本人rowを読み書きしていない。各取得のend-to-end計時は約7.75〜7.83秒で、アプリ処理時間やRenderの5秒HTTP checkを達成した計測ではない。既存healthCheckPath空のTCP設定は未変更。実Auth・業務RPC・preview生成・保存・削除は0。
+
+これらは既存APIの配置・起動・認証拒否の技術確認であり、実本人Authの通常入力→preview→private保存1件→同owner履歴/詳細、同id/version/3hash/rendererの一致、期限超過挙動を実利用で成立させた結果ではない。本人データを勝手に選ばず、service_roleでAuthを代用せず、実削除を自動実行しない。次の最初の未完はP-W1の本人通常sessionによる保存/再読。P-W2実Photos/Share/Android/backend receipt、P-W3本人端末/商品受入れとM5独立残件を保持し、10/22保存/10/23共有目標の未達を配置だけで解消済みにしない。
+
+privacy修復の開発正本PR3への戻し込みは未実施で、PR4@3577d7fdだけにある。今後の開発配置でこの2pathを落とさない。今回source/CI追加0、設定保存1/固定commit配置1、新service/料金/DB変更/main merge0。結果と画面証跡をmanifestへ保存し、入口§118/map§65.61/weekly§5.6.41/manifest v158/全体現在地の5資料を同時同期する。STRUCTURE_MAP_DELTA_NONE（既存factory/route/ownerを採用、責務新設0）、product_credit=0、automatic_progression=false。

@@ -2035,3 +2035,12 @@ Mashは前回の600秒/private preview-save-owner-read-delete/全認証session�
 既存Renderはlive5c8bd8e5/app:app/autoDeploy off。接続toolは固定commit指定とstartCommand更新に非対応、CLI/keyもないため、generic main deploy/危険なenv更新は0。ブラウザfallbackはtoolが別途の切替許可を要求しており、未初期化/未操作。これは配置承認待ちではなく実行経路の不足として示す。承認済起動構成にはaccess_log=False/httpx WARNINGを明示し、既存数値/エラー監視は保持する。
 
 現在配置/設定/本人DB/端末/main merge効果0、実Auth通常保存→本人履歴/詳細未完。10/22保存・10/23共有の未達を解消済みにしない。10/24のP-W1〜3実残差/10/31管理線への確認は維持し、未適用を進捗率や商品creditへ加点しない。STRUCTURE_MAP_DELTA_NONE、配置・設定の承認は受領済み、ブラウザ切替可否だけが適用経路の次の確認、automatic_progression=false。
+
+
+#### 5.6.41 10/23 — 承認済みprivate構成を既存APIへ配置・有効化
+
+browser切替の承認を受領し、Mashの本人認証完了後に同workspace/既存mashos-apiへ到達。承認起動commandをSave Changesで保存し、pluginで全文一致/autoDeploy off/新配置0を照合。続けてexact3577d7fdをManual Deploy→Deploy a specific commitで一度指定した。deploy dep-dbd8hjoae00c73firbt0は07:06:07〜07:07:33 JSTにLive、旧5c8bd8e5はdeactivated。source/CI追加0、別commit・restart・env更新・branch変更0。
+
+07:08:45 JSTに無認証GETだけでhealth200、bootstrap200/期待8flags一致、本人history401 PIECE_AUTH_REQUIRED/no-store/Bearerを確認。TTL600秒/明示iOS版/private4操作ON、public/write-read-visibility/exportOFFを同API全認証sessionへ反映済み。起動commandとstartup instance/liveの対応も確認し、詳細/元証跡は入口§118/map65.61/manifest v158へ保存する。
+
+P-W1の配置・有効化部分は成立したが、実Auth通常入力→preview→private保存1件→本人履歴/詳細は未確認。P-W2実Photos/Share/Android/backend receipt、P-W3本人端末・商品受入れも残る。10/22保存・10/23共有の未達を配置だけで達成へ替えず、10/24の実残差と10/31管理線へ戻す。既存subscription準備/Terms/Privacy警告も今回解消していない。privacy修復はPR4限定、正本PR3へ未反映。設定保存1/配置1、DB/本人データ/main merge/新service/料金0。5資料同期、STRUCTURE_MAP_DELTA_NONE、product_credit0、automatic_progression=false。
