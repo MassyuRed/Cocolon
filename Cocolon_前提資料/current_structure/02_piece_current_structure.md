@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§104／本map§65.52／weekly§5.6.32／manifest v140。bitmap新実RN12成立・新8プレビュー画像を確認、両420も元8秒以内。一度CI39717661329は新native44のfixture例外と旧群失敗によりfailure、未採用STOPです。CI1/上限1完了、正式admission/通常保存/本人再表示は未完了。**
+**最新は入口§105／本map§65.53／weekly§5.6.33／manifest v141。新native44の検証用Windowを4地点だけ修復する具体案を準備、新source CI一回はMash判断待ち。前回RN12成立・両420元8秒内、native44未検証・旧失敗・未採用STOPを維持。今回source/CI0、正式admission/通常保存/本人再表示は未完了。**
 
 ### §99の判断案（履歴）
 
@@ -3350,3 +3350,9 @@ source15b0a62a/CI39717661329 attempt1継続。JS957 PASS、iOS source/standalone
 ##### 65.52 bitmap一度CI完了：新実RN12成立／native44未検証で未採用STOP
 
 入口§104／manifest v140。source15b0a62aの一度CI39717661329はfailure、1/上限1で閉じた。限定TECHNICAL_CREDIT：新実RN12（preview8＋raw3＋crop期待拒否1）成立、新22PNG、420は6.719/3.903秒、全cell/fit/本文保持。新standalone44は製品描画前のfake-window fixture例外で未検証。旧native195は176/19、旧RN13と5PNGは前回同じ。原ZIP63,808,871B/1071membersを保持、画像目視と独立照合を記録。未採用STOP、正式admission/保存/export/実機未完、source修正/追加CI0。
+
+## 65.53. 2026-10-22 — 新bitmap native44のWindow前提修復候補（未適用）
+
+入口§105／weekly§5.6.33／manifest v141。前回新RN12条件と両420の元8秒内は再確認、native44は製品描画前の検証用RCTTextView.windowがselfをUIWindow*として返すmount区間で例外。既存test fileの新group内4地点だけ、addSubview前にfixtureRequiresRealWindow=YESを設定する候補を準備した。Unicode/fault/overlap/fractionalすべてを含み、旧group/製品source/全判定/期限/資源は維持。四代入の逆射影で元全文一致、read-only独立review指摘なし。UIKitでの修復成功は未検証。
+
+今回記録4fileだけ、active source/CI0。消費済み§99一回の再利用はRule18§11.3で禁止されるため、新5path単位（test1＋結果資料4）と既存CI一回はMash判断待ち。旧native195/旧V3別20未実行・旧RN群を保持、新44/44とRN12条件を別評価。旧失敗が残ればCI全体failure。未達時の追加修正/再CI/自動採用は0。STRUCTURE_MAP_DELTA_NONE、正式admission/通常保存→本人履歴・詳細/共有/実機は未完、商品credit0。候補全文復元patchとbase/candidate台帳はmanifestのios_bitmap_native_window_repair_proposal_20261022。詳細と承認理由は入口§105。

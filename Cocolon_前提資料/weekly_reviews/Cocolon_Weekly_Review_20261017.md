@@ -1905,3 +1905,9 @@ source15b0a62a/CI39717661329 attempt1継続。JS957 PASS、iOS source/standalone
 ##### 5.6.32 bitmap一度CI完了：新実RN12成立／native44未検証で未採用STOP
 
 入口§104／manifest v140。source15b0a62aの一度CI39717661329はfailure、1/上限1で閉じた。限定TECHNICAL_CREDIT：新実RN12（preview8＋raw3＋crop期待拒否1）成立、新22PNG、420は6.719/3.903秒、全cell/fit/本文保持。新standalone44は製品描画前のfake-window fixture例外で未検証。旧native195は176/19、旧RN13と5PNGは前回同じ。原ZIP63,808,871B/1071membersを保持、画像目視と独立照合を記録。未採用STOP、正式admission/保存/export/実機未完、source修正/追加CI0。
+
+##### 5.6.33 新bitmap native44を止めたWindow前提の修復案を準備
+
+入口§105／map§65.53／manifest v141。新RN12条件/preview8/両420の6718.778・3903.472msを再確認。native44は判定0/44のまま。検証shimが未mountのText自身をWindowとして返した例外区間へ、既存flagを4地点でmount前にYESとする候補を限定した。製品/旧group/本文/比較器/期待値/分母/8秒・90秒・資源上限は不変。候補全文の逆射影一致と読取reviewを確認し、patch/台帳を既存manifestへ保存する。active test変更0、新CI0、記録4fileのみSTRUCTURE_MAP_DELTA_NONE。
+
+前回CI一回は閉じたまま。Rule18§11.3の消費済みsingle-use境界により、新5path（test1＋結果資料4）の適用と既存CI一回は具体案へのMash判断待ち。成功は新44/44と新RN12の元条件、旧群の失敗は別保持。未達は一回でSTOPし、追加修復/再CI/正式admission/保存へ自動進行しない。P-W1通常保存→同owner履歴/詳細、P-W2共有、P-W3実機・10/22保存目標は未完。今回ADMINISTRATIVE_ONLY、商品credit0。Supabase一覧readでACTIVE_HEALTHY、DB変更0。System Contextは部分materializationで必要Python module未取得、同ref原典直接読取を使用した。

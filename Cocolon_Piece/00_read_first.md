@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§92.2／current map§65.40.2／weekly§5.6.20.2／manifest v118です。一度CI39565918631はfailure。JS933/旧native175は成功、新v3 10FAIL。診断保存は13件・重複0へ修復できましたが、新プレビュー8件は未成立。実RN62拒否の56件はcontentsがCGImageでないこと、残6件はsnapshot整合guard停止を確認。元alpha7不一致/quote制約は未再検証。候補未採用DETOUR_RISK_STOP、正式admission/通常保存は未完了です。**
+**最新は入口§105／current map§65.53／weekly§5.6.33／manifest v141です。新bitmap native44の検証用Windowを4地点だけ直す具体候補を準備し、新source CI一回はMash判断待ち。前回RN12成立・両420元8秒内、native44未検証・旧失敗・未採用STOPを保持。今回は記録のみ、active source/CI0、正式admission/通常保存は未完了です。**
 
 ### §87の設計時点（履歴）
 
@@ -3795,3 +3795,35 @@ XCTestは2method実行/1method失敗、59 failure summaryはすべて旧testWhol
 原物ZIPは63,808,871byte／1071members、SHA256 `3cf77b0e45f61fd111fab1cd19f8677cbbec5936746bf87dc3b1146d39443776`、GitHub artifact12400646587のdigestと一致。原ZIP全文を保持（libfile_e1b763448acc8191928695bdea8fd8b3 v0）。新22PNG＝完成像11＋自然参照11、旧5を含め全27PNG。JSON/全job原ログ/xcresult summary/独立照合/全PNG hashをmanifestのlossless evidenceと原物参照へ保持する。前runの大きなfinal bundleは、全文readback済みimmutable69cedb83/manifest blob88dd0aafの同hash pointerへ移し、履歴byteを失わない。
 
 入口§99の未達STOPと一回上限を適用し、この限定実装＋一度CIの単位を未採用で閉じる。次の最小候補は新standalone groupだけを実window前提のfixtureへ直すことだが、未実装・新scope判断前で、別CIを自動開始しない。新44の所有権/phase/resource/fault検査未完、正式renderer admission・通常保存/本人再表示・共有・実機は残件。8秒/90秒/4096辺/4,194,304px/共有32MiB・本文/独立5metric・旧fixture/失敗分母を保持。API head a536e50e、DB/env/deploy/main merge変更0、両Draft/open/unmerged。STRUCTURE_MAP_DELTA_NONE（結果記録4fileのみ、source14はCI開始後不変）。
+
+## 105. 2026-10-22 — bitmap追加44件を止めた検証用Windowの最小修復案（未適用）
+
+前回§104の一度CI39717661329/attempt1はfailureで閉じたまま保持する。新実RN12条件（preview8/raw3/crop拒否1）、最大420の6718.778/3903.472ms、旧native175成功・旧V4 1PASS/19FAILと新44判定0/44を独立再確認した。未検証を44失敗または44成功へ換算しない。新方式は未採用、正式admission/通常保存/同owner再表示/共有/実機は未完である。
+
+### 105.1 現物から絞った原因と具体差分
+
+native job119623547332の原ログはbitmap_begin直後、最初のsource addSubviewでNSInvalidArgumentException「-[RCTTextView isTrackingKeyboard]: unrecognized selector」。stackはUIView _willMoveToWindow→_addSubview→runBitmapChecks+828。検証shimのwindowはfixtureRequiresRealWindow=false、fixtureAttached=trueの未mount時にselfをUIWindow*として返す。新groupはこの状態で実Windowへmountするが、旧v9/v3/v4 fixtureは既存flagを先にYESへ設定している。製品renderBitmapCanvasより前の検証前提不成立と一致する。UIKit内部selector照会の全経路や修復後の因果は未実行なので確定成功とはしない。
+
+候補は既存tests/native/piece-text-metrics-ios.mmのrunBitmapChecks内4地点だけへ、addSubview前のfixtureRequiresRealWindow=YESを追加する。Unicode8本文、fault source、overlap second、fractional phase sourceを全て対象にする。makeView共通関数やwindow getterを変更すると旧groupへ影響するため採用しない。新helper、新property、診断field、待機、例外握り潰しは追加しない。
+
+候補base125,744byte/SHA256 961c2ecb43e1d188689fd528829563735ff3131a63f3487a6d22f89b1dcb9b7b（blob64de7f7b64bfc98c4d3e66a4305115131ed62cca）、候補125,892byte/SHA256 80eb9ebc7f765dbc5b5760ac5c305db5ef92e0f98cbe9512fa4bc57272f0e309（blob a63e6a46e1b7554e4b0033c8c31a47988b1872f3）。四代入を戻すと元全文へbyte一致。差分と台帳はmanifestのios_bitmap_native_window_repair_proposal_20261022へ保存し、固定baseとpatchから候補全文を復元できる。active test sourceへは未適用。
+
+44の判定式/Unicode/fault/phase/所有権/provider/資源検査、旧group、製品5file、RN25条件と本文/画像fixture、JS957、workflowとrunner、比較器/分母を維持。8秒/90秒/4096辺/4,194,304px/共有32MiBを変えない。静的な四地点前置・group外一致・逆射影一致とread-only独立reviewを確認した。同translation unitの宣言済みBOOL propertyへの代入であり、新APIは使わない。UIKit compile/実行/44件成功は未確認。
+
+### 105.2 実行案と一回の終了条件
+
+提案の適用pathはtest1（tests/native/piece-text-metrics-ios.mm）＋既存結果資料4（入口/manifest/Piece map/weekly20261017）の計5、新tracked0。製品/runner/workflow/fixture本文/期待値/依存/API/DB/env/配布/main mergeは変更0。root華恋だけが反映・実行し、補助agentは読取reviewだけ。PIECE_WORK_ALLOWED、別Pro/Ultra model成立の申告なし。
+
+承認後はbaseをfresh確認して四代入を適用し、新source pushによる既存CI一回だけを行う。同source rerun0、追加修正→再CI0。現旧run counter1/上限1をresetせず、新単位counter0/上限1を別記録する。原logs/report/PNG/取得可能原物を保存して一回で閉じる。所要は前回約20分台を参考にするが保証しない。既存Actions一回の使用量、外部service/依存/定常課金/Mash端末操作は追加0。
+
+成功はnative新44/44の個別判定とsummary・重複0、旧195および旧V3別20未実行の区別、新RN12の元条件とpreview8画像・両420の元8秒内を確認すること。旧V4既知19FAIL/旧RN群を新成功で相殺しない。全体CIに旧失敗が残ればfailureと明記し、限定新group成功と分ける。compile/例外/timeout/記録不足/44未完/期待未達なら未採用STOP、修復や別CIへ自動進行しない。通過しても正式採用/通常保存を完了扱いせず次Gateへ自動進行しない。
+
+P-W1の本筋は、候補検証不足解消→正式renderer admission・採用版saved reader/profile→InputScreen正式isSaveAdmitted/同preview保存直前fit→既存保存controller/API→同owner履歴/詳細の一往復。P-W2画像保存共有、P-W3実機も残る。fixture修復を新しい商品機能や完了へ数えない。
+
+### 105.3 今回の記録・承認境界
+
+開始Cocolon PR30 head7d5069a48a349c401575b516a2c320a73bdc875c、API PR3 a536e50ee284785f585ac73329ef2947dca8bba9。前提入口/恒久incident全文/作業rule、全体設計01・全file地図01A/01B/01C、三中核共通入口/Piece map、最新weekly20261017、実source/前回原物を確認した。System Context prepareはconnectorからの部分materializationでtools.cocolon_context_inventory未取得により起動失敗。生成contextのfresh成立を主張せず、同refのGit blob一致原典を直接使用した。Supabaseはproject一覧readのみcocolon-project ACTIVE_HEALTHY、schema/SQL/業務RPC操作0。
+
+今回exact workはOBSERVED_BLOCKER_MINIMAL_FIX候補の設計・記録であり、候補採用/稼働効果/品質creditは0。current source/判定/契約を変更しない記録4fileはMashの残件継続指示とRule18 standing delegationによる。STRUCTURE_MAP_DELTA_NONE（製品構造・配置は不変）。開始recordはproduct_destination=P-W1本文画像から通常保存への接続、current_gate=追加native44未検証、execution_owner=root華恋、completion=四地点候補と独立review・remote記録の成立、STOP=追加effect前の承認不足、prohibited=製品/比較/本文/期限変更・追加CI・次Gate進行、success_credit=ADMINISTRATIVE_ONLY、next_Mash_decision=下記の新限定単位。今回active test/source変更0、新CI0。
+
+一般の内部修復にはRule18 §11.3 LEVEL2(3)が適用できるが、§99.5/§104で閉じた一回上限をそのまま再利用できない。Rule18 §11.3は「closed or consumed single-use authorityのreuse / retry / reactivation / repair」をstanding delegation外とする。したがって判断対象は方式の再承認ではなく、**この四地点test-only修復の適用と新sourceの既存CI一回を新たな限定単位として実行すること**。上記具体差分・5path・一回終了条件までを対象とする。承認前のsource適用/新CIは0。候補実行はLEVEL3(4)(6)判断待ちであり、旧失敗counter/未採用STOPとformal_admission/can_save/can_export/automatic_progression=falseを維持する。
