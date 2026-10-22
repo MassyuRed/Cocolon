@@ -3387,3 +3387,8 @@ source15b0a62a/CI39717661329 attempt1継続。JS957 PASS、iOS source/standalone
 Card構築・最終adoptionは元8秒、preview fitも元8秒。新明示版savedだけ完成時に構築timerを解除し、同じimmutable画像を8秒後も保持する。期限外完了救済/再起算0、saved fit発行0、画像構成/window/source変化の失効とprovider共有budgetは維持。新版exportは閉じ、旧export3を保つ。native/API/DB/env/flag/deploy変更0。
 
 LEVEL2の新しいsource接続単位で、前回closed CIは再利用しない。旧native195/新44、旧RN13＋bitmap12を維持、新preview8/saved8/crop1＋saved完了後8秒超保持を付随検査する。local964 PASS/FAIL0/SKIP0/cancel0、新source既存CI一回はPENDING、rerun/結果後修復0。STRUCTURE_MAP_DELTA_PRESENT、source段階をlive保存/本人再表示・共有・実機の商品完成へしない。
+
+
+### 65.55.1 明示版source固定、一度CI開始
+
+入口§110.1/weekly§5.6.35.1/manifest v147。source55430e4eの21path全文・変更集合一致、唯一CI39734534523 attempt1開始、counter1/上限1。JS964成功、iOS/RN新17条件は未確定。source固定、追加修復/再CI0。旧原物4bundleは全文照合済v146同pointerへ保持し、元bytes/hash不変。checkpoint資料4のみSTRUCTURE_MAP_DELTA_NONE。live保存再表示/共有/実機/商品採用は未完。

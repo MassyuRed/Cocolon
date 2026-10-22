@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§110／map§65.55／weekly§5.6.35／manifest v146。明示iOS bitmap版のpreview・同版saved再構築とInputScreen保存条件を接続。local964 PASS、新sourceの一度CIはこれから。旧失敗は維持し、稼働通常保存・共有・実機受入れは未完です。**
+**最新は入口§110.1／map§65.55.1／weekly§5.6.35.1／manifest v147。明示iOS版source55430e4eの21path全文照合、一度CI39734534523開始。JS964成功、iOS新17条件は結果待ち。source固定・追加修復/再CI0、通常保存/共有/本人実機の完成は未確認です。**
 
 ### §87の設計時点（履歴）
 
@@ -3892,3 +3892,10 @@ sourceを確定してGitHubへ反映・全文readbackした後、新source push�
 STRUCTURE_MAP_DELTA_PRESENT。既存production6＋付随test8＋資料7の21path、新tracked0。詳細scopeはmanifest内同単位に固定し、既存ownerだけを更新する。source段階の技術成功・商品credit・稼働readinessを分離する。現時点はsource準備、local964成功/CI結果PENDING、product_credit=0、通常保存→同owner履歴/詳細の稼働完成・P-W2画像共有・P-W3本人実機・正式商品採用は未確認、automatic_progression=false。
 
 実装中の検査で、全profileへのrendererVersion追加による旧v3比較差分を発見し、bitmap profileだけへ限定して修復した。追加integrationのsyntheticFit helper取得漏れ、InputScreen検査でReact state更新数をIO回数と誤読した期待、旧fixture比較用Moduleの基準pathを補正した。部分materializationに不足した既存依存は同head原blobで補い、完成964件の実行で解消を確認した。新商品仕様へ合わせて旧期待を削ったものではない。
+
+
+### 110.1 新sourceを全文照合、一度CIを開始
+
+source55430e4ed57821ed725b13feba292d85a67b66a0（親7a6c6434/tree14c548a3）の変更21pathはGitHub全blob全文・変更集合一致。既存push CI39734534523 attempt1が開始し、今回counter1/上限1を消費した。sourceを固定し、原物回収と判定だけを進める。JS jobは964 PASS、iOS/native/RNは継続中。新17ケースとsaved元期限後の画像保持はまだ未確定。旧run39727150432の終了・counterを再利用せず、追加修復/再CI0。
+
+新source時点v146/blob1c2797e452f768835914fbac6fd8326c42447e69を全文照合できたため、旧bitmap二単位の4つの大きな原物bundleはその同一JSON pointerへimmutable参照を固定した。元bytes/hash/memberと履歴を維持し、今回結果を全文取得できる余地を確保する。今回のcheckpointは資料4pathのみSTRUCTURE_MAP_DELTA_NONE（sourceで更新した責務地図は維持）。正式商品採用・live通常保存・同owner再表示/共有/本人実機は未完、automatic_progression=false。

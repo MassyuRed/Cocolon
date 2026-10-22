@@ -1940,3 +1940,8 @@ source15b0a62a/CI39717661329 attempt1継続。JS957 PASS、iOS source/standalone
 入口§110／map§65.55。前回新44/RN12成立から、既存設計どおり明示版 `piece.rn_bitmap_renderer.ios.v1` のpreview/savedを同じ検証済み内部bitmap profileへ接続する。InputScreenは既存renderer ownerの純粋predicateを既存hostへ渡し、同mount/token fit・owner/flag/quotaの保存直前再確認を保つ。savedはpreview/token/expiryを捏造せず、期限内完成後だけ構築timerを解除して完成像を保持する。元8秒の構築/preview fitとnative比較・B9・本文/recipe/catalog・資源制約は変えない。新明示版exportは未開放、API/DB/env/稼働flag/deploy0。
 
 LEVEL2の新しいbounded source接続単位。production6＋既存test8＋資料7、新tracked0。旧native195/新44・旧RN13＋bitmap12を保ち、新preview8/saved8/crop1とsaved完了後8秒超保持の付随条件を確認する。local既存CI同一13suite964 PASS/FAIL0/SKIP0/cancel0、JSX/runner/旧fixture不変確認。新source既存CI一回はPENDING、旧closed CI再利用0、結果後修復/追加CI0。STRUCTURE_MAP_DELTA_PRESENT。P-W1のlive通常保存→本人履歴/詳細、P-W2共有、P-W3実機・正式商品採用は未完。
+
+
+###### 5.6.35.1 明示iOS版sourceを反映、一度CI開始
+
+入口§110.1/map§65.55.1/manifest v147。source55430e4eの21path全文と変更集合一致を確認。唯一CI39734534523 attempt1、counter1/上限1、JS964成功・iOS/RN結果待ち。旧bundleを同一v146 immutable pointerへ維持、追加CI/修復なし。今回資料4のみで構造追加なし。通常保存→本人履歴/詳細の稼働完成、P-W2共有/P-W3実機・正式採用は未完。
