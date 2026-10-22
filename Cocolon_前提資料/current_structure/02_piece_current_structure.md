@@ -3297,3 +3297,8 @@ native原境界62local拒否の61件はstage83の全logical1占有不一致、qu
 ##### 65.46.1 承認source全6fileを照合、一度CI開始
 
 入口§98.3/manifest v131。承認source66be9cbe/tree f9dddc8aの全6file remote全文一致、changed paths一致。一度CI39704913859 attempt1は10/22 10:18:28 JST開始、新counter1/上限1・rerun0。旧失敗counter不変。全6jobの最終結果/元13report/画像/alpha対応は未確定。source/test/workflow固定、checkpoint資料4fileのみSTRUCTURE_MAP_DELTA_NONE、商品品質credit0、通常保存/本人再表示未完。
+
+
+##### 65.46.2 途中：旧native175成功、新V4は1成功/19失敗
+
+入口§98.4/manifest v132。唯一CI39704913859 attempt1でJS949/Android source/旧native175成功。新V4 1PASS/19FAIL（計195unique）、旧V3 20明示未実行、iOS compile成功。export2jobは主要native工程skipで新compile証拠なし。5job＋既存guard原logs/metadata/集計を可逆保存。実RN13/画像/alpha比較/fitは同run継続中。source固定、counter1/上限1・rerun0・追加修正0、資料4fileだけSTRUCTURE_MAP_DELTA_NONE、商品品質credit0、通常保存未完。

@@ -3575,3 +3575,12 @@ source1/runner1/結果資料4の承認6pathだけを新source commitへ反映し
 source 66be9cbedb8babd15b1c59cc1479a2fd10624747/treef9dddc8a4fc4d02f6980cd5648596d50f2f9d5e6の承認6pathを全文読み戻し、changed-path setがnative1/runner1/資料4だけであることを確認した。CI39704913859 attempt1は2026-10-22T01:18:28Z（10/22 10:18:28 JST）に同sourceのpushで開始。新counter1/上限1、Actions rerun0。以後source/runner/patch/test/workflowを固定し、結果回収と保存だけを続ける。
 
 同pushの既存phase6-contract-guards run39704913858は別のcontract-guards 1jobであり、Piece診断/修復の追加実行に数えない。現在全6jobの結果は未確定。途中のiOSsource compile/patch stepはsuccessだが、新native195/実RN13/PNG/alpha対応/fit/期限の成功へ換算しない。今回checkpointは資料4fileのみ、STRUCTURE_MAP_DELTA_NONE、商品品質credit0、通常保存/本人再表示未完、automatic_progression=false。
+
+
+### 98.4 途中：旧native175成功、新V4は1成功/19失敗
+
+同source66be9cbedb8babd15b1c59cc1479a2fd10624747/唯一CI39704913859 attempt1の5jobが終了。JS949PASS/0FAIL/0SKIP/0cancel（10,131.470663ms）、Android source成功。iOS source compile/patch step成功後、旧native175PASS・新V4 1PASS（empty_alpha）/19FAIL、計195unique＝176PASS/19FAIL、旧V3 20は明示未実行。正常controlが必要な19項目を19独立故障と扱わず、未採用を維持する。補間変更だけでこの単体条件が通らなかったことは確認できたが、call別原因は未記録で根因断定しない。
+
+export2jobはjob successでも、既存path条件で依存install/Pods解決/4library実compileをskipしているため今回の新export compile証拠なし。既存phase6 guard run39704913858/contract-guards 1job success。完了5jobとguardの元decoded logsをBOM/CR/LF含め無変換bytesで回収し、元metadata/JS/native集計とともにmanifestへ可逆保存・全member復号一致を確認した。
+
+実RN canvas jobは継続中で、元13report/PNG/参照補間trueと双方占有対応/時間/fitの結果は未確定。source/runner/patch/test/workflow固定、新counter1/上限1・Actions rerun0、追加修正0。checkpoint資料4fileのみSTRUCTURE_MAP_DELTA_NONE、商品品質credit0、通常保存/本人再表示未完。全6jobと原物の回収/保存だけを続ける。
