@@ -1,6 +1,6 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v150",
-  "generated_at": "2026-10-22T18:01:37.709752+09:00",
+  "schema_version": "cocolon.piece.workstream_manifest.v151",
+  "generated_at": "2026-10-22T18:16:54.991403+09:00",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
@@ -482,10 +482,10 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "17248e3f4567af9809e733f89c69a3327fd94d37",
-    "raw_sha256": "9b2d419d881add1dbd75868fce032fb90b8f56ace073f2d5dd24cb77f831ec4a",
-    "utf8_bytes": 624242,
-    "chars": 371222
+    "git_blob_sha1": "568ad70db09daf342707e6a47d4d64302719a148",
+    "raw_sha256": "ba3e8d5fcfaa441a7ddcda4659823dd99629e5697176a7717c21d133e9defee5",
+    "utf8_bytes": 635068,
+    "chars": 377717
   },
   "current_premise": {
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
@@ -676,7 +676,7 @@
     "input_screen_source_connected": true,
     "live_auth_input_to_preview_to_device_verified": false,
     "database_evidence_owner": "live_db_apply_20261019",
-    "remaining_work_owner": "ios_bitmap_owner_export_patch_repair_proposal_20261022",
+    "remaining_work_owner": "ios_bitmap_owner_export_patch_repair_20261022",
     "product_acceptance": false,
     "piece_v2_default_application_registered": false,
     "piece_v2_quota_http_present": true,
@@ -792,11 +792,11 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "PIECE_WORK_ALLOWED",
-    "state": "P_W2_SOURCE_UNADOPTED_PATCH_PARSE_STOP__P_W1_LIVE_AUTH_PENDING",
-    "current_map_section": "65.56.2",
-    "current_entry_section": "112",
+    "state": "APPROVED_EXACT_LF_REPAIR_CI_PENDING__P_W1_LIVE_AUTH_PENDING",
+    "current_map_section": "65.57",
+    "current_entry_section": "113",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
-    "weekly_review_section": "5.6.36.2",
+    "weekly_review_section": "5.6.37",
     "first_unfinished_work": "Adopt actual runtime renderer supplier and verify real Auth/normal input preview→explicit private save→same-owner history/detail; new bitmap export/share and physical device acceptance remain incomplete. Source unit closed, no automatic gate advancement.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
@@ -947,7 +947,8 @@
     "bitmap_save_connection_ci_executions": 1,
     "bitmap_save_connection_bounded_work_complete": true,
     "bitmap_save_connection_validation_success": true,
-    "parallel_source_preparation": "P-W2 source pushed but not admitted: npm patch parsing failed before native/RN. Exact one-byte repair proposal pending separate approval."
+    "parallel_source_preparation": "P-W2 source pushed but not admitted: npm patch parsing failed before native/RN. Exact one-byte repair proposal pending separate approval.",
+    "patch_repair_owner": "ios_bitmap_owner_export_patch_repair_20261022"
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -1177,14 +1178,15 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "SOURCE_FAILURE_PRESERVATION_AND_EXACT_REPAIR_PROPOSAL",
+    "classification": "APPROVED_EXACT_ONE_BYTE_PATCH_REPAIR_SOURCE",
     "paths": [
+      "patches/react-native-view-shot+5.1.1.patch",
       "Cocolon_Piece/00_read_first.md",
       "Cocolon_Piece/manifest.json",
       "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
       "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md"
     ],
-    "source_changes": 0,
+    "source_changes": 1,
     "new_ci_executions": 0,
     "api_db_env_flag_deploy_device_effect": 0,
     "structure_map": "STRUCTURE_MAP_DELTA_NONE",
@@ -91845,6 +91847,99 @@
     "actions_rerun": 0,
     "success": "Pinned patch-package parses/applies full patch. Same protected native195 and new44, old RN13/bitmap12/admitted17 and newexport14 conditions unchanged. Verify actual offscreen full PNG8 and native rejection6. Preserve old group failures; do not require whole CI green by deleting old expectations.",
     "stop": "First new compile/runtime/expected-output failure ends one CI. Preserve actual; no additional repair/rerun/activation or next gate.",
+    "automatic_progression": false
+  },
+  "ios_bitmap_owner_export_patch_repair_20261022": {
+    "state": "APPROVED_EXACT_LF_REPAIR_SOURCE_PREPARED_CI_PENDING",
+    "approval": {
+      "user_instruction": "Pieceの残件作業を進めて。",
+      "interpreted_scope": "Continuation of immediately preceding exact §112 repair and one new-source CI request.",
+      "proposal_owner": "ios_bitmap_owner_export_patch_repair_proposal_20261022",
+      "prior_consumed_authority_reused": false
+    },
+    "base_head": "7e3350e1d1e249af62910d5224588b0643634cfc",
+    "paths": [
+      "patches/react-native-view-shot+5.1.1.patch",
+      "Cocolon_Piece/00_read_first.md",
+      "Cocolon_Piece/manifest.json",
+      "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+      "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md"
+    ],
+    "identity": {
+      "source_commit": "fbf0deaec8679ebf6a58f53e0702d2e437318680",
+      "path": "patches/react-native-view-shot+5.1.1.patch",
+      "before_bytes": 9360,
+      "after_bytes": 9359,
+      "before_sha256": "383d4700bd13adadc7f7f22b92d0184cd522a45a839251a9ceb8709e17d850bd",
+      "after_sha256": "cc46937cde1b767f564c5597313f956d090d6ecf6bfa406a666de3d0ef253399",
+      "change": "Remove only the last LF byte; retain all preceding bytes exactly."
+    },
+    "verification": {
+      "pinned_parser": "patch-package8.0.1",
+      "original_parser": "hunk header integrity check failed",
+      "candidate_parser": "success all4file9hunks",
+      "candidate_full_patch_application": "success pinned npm react-native-view-shot5.1.1 all4file",
+      "ios_output_matches_intended_except_prior_local_materialization_final_LF": true,
+      "ios_sha256": "c6060447aa78e76040e9da63f1ca3702894d6438fe21b2362b91135d662b8572",
+      "production_source_mutations_after_ci": 0,
+      "additional_ci": 0,
+      "all4_applied_files_unchanged_by_LF_repair": [
+        {
+          "path": "android/src/main/java/fr/greweb/reactnativeviewshot/RNViewShotModule.java",
+          "bytes": 8802,
+          "sha256": "38e1e427be6f50d3cbca87918177f0f433974ffb1f1581194d4d871743109ba2",
+          "before_after_applied_bytes_equal": true
+        },
+        {
+          "path": "ios/RNViewShot.mm",
+          "bytes": 11523,
+          "sha256": "c6060447aa78e76040e9da63f1ca3702894d6438fe21b2362b91135d662b8572",
+          "before_after_applied_bytes_equal": true
+        },
+        {
+          "path": "lib/index.d.ts",
+          "bytes": 4894,
+          "sha256": "8d74b83b05f6ccf00a1499aaa4416dc0049f36bb38094ed3a268f76865602d65",
+          "before_after_applied_bytes_equal": true
+        },
+        {
+          "path": "src/index.tsx",
+          "bytes": 14603,
+          "sha256": "e171166d86c3389db163e83c493176b1040cc41dae15e84c39d95ad44d0ee66b",
+          "before_after_applied_bytes_equal": true
+        }
+      ]
+    },
+    "independent_review": "Read-only reviewer verified exact byte delta, pinned parser, integrity, all4 applied file bytes, allowed paths and acceptance counts; blockers0.",
+    "ci": {
+      "executions": 0,
+      "limit": 1,
+      "actions_rerun": 0,
+      "result": "PENDING",
+      "post_ci_source_repair": 0
+    },
+    "protected_conditions": {
+      "old_native": 195,
+      "new_bitmap_native": 44,
+      "old_rn": 13,
+      "bitmap_rn": 12,
+      "admitted_rn": 17,
+      "new_export": {
+        "saved_png": 8,
+        "native_rejection": 6
+      }
+    },
+    "scope_effects": {
+      "production_logic": 0,
+      "test_expectations": 0,
+      "runner_workflow": 0,
+      "dependencies": 0,
+      "api_db_env_flag_deploy_device": 0,
+      "structure_map": "STRUCTURE_MAP_DELTA_NONE"
+    },
+    "product_credit": 0,
+    "bounded_work_complete": false,
+    "validation_success": false,
     "automatic_progression": false
   }
 }

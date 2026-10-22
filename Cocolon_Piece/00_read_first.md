@@ -3957,3 +3957,12 @@ product package-lockとarchive SHA512が完全一致するpatch-package8.0.1の�
 次の実行対象はpatch1file＋結果資料4fileの既存5path。Mash承認後に候補1byte修復を適用し、新source pushの既存CIを一回だけ行う案。前runをActions rerunしない。成功条件はparse/apply成功と、旧native195/新44・旧RN13/bitmap12/admitted17を保持した上で新export正常8/拒否6の元条件と画像を確認すること。旧失敗を消して全体GREENへ作り替えない。新条件の未達は一回で停止し、再修復/追加CI/稼働設定/DB/実機/次Gateへ自動進行しない。
 
 Rule18§11.3のstanding delegation外には **「closed or consumed single-use authorityのreuse / retry / reactivation / repair」** が明記されている。今回の一度CIを消費した後の修復・新CIとなるため、同条に従い具体候補への個別承認を待つ。作業規則の変更、新しいGate/例外、承認済みとする自己判断は行わない。原失敗/消費counterは保持する。STRUCTURE_MAP_DELTA_NONE（結果/候補記録4資料だけ）、automatic_progression=false。
+
+
+## 113. 2026-10-22 — 承認済み§112の末尾LF1byte修復と一度CI
+
+Mashの今回の「Pieceの残件作業を進めて」を、直前に提示した§112の具体修復＋新source CI一回への続行指示として受領した。前回単位の消費済counter1/CI39750366489/failureは変更しない。今回は独立した承認済み修復単位で、対象は既存patch1＋資料4の5pathだけ。root華恋が適用・GitHub反映・CI結果採取を担当し、補助担当はread-only。モデル制限解除を適用する。
+
+patchの最終LF一つだけを除去した。9,360→9,359byte、SHA256 383d4700bd13adadc7f7f22b92d0184cd522a45a839251a9ceb8709e17d850bd → cc46937cde1b767f564c5597313f956d090d6ecf6bfa406a666de3d0ef253399。pinned patch-package8.0.1実parserの全4file/9hunk成功、npm view-shot5.1.1原本への全4file適用成功、元patchと修復patchの全適用後bytes一致を独立照合した。製品logic/test/fixture/runner/workflow/依存の変更0。STRUCTURE_MAP_DELTA_NONE、source責務地図は§65.56を維持する。
+
+GitHubで変更5pathと全文を照合後、新source pushによる既存CIを一度だけ行う。今回counter0/上限1、旧Actions rerun0。旧native195/新44、旧RN13/bitmap12/admitted17の元条件を保持し、新export14＝saved PNG8＋native拒否6を別判定する。旧失敗を削らず全体結論と分ける。新compile/runtime/期待条件未達なら原actualを保存して終了し、追加修復/再CIへ自動進行しない。API/DTO/DB/flag/env/deploy/実Auth/実Photos/Share/本人実機/main merge効果0。P-W1稼働供給と本人保存再表示・P-W2実OS・P-W3商品受入れは未完、product_credit=0、automatic_progression=false。

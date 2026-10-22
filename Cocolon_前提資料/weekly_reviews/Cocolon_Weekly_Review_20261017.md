@@ -1974,3 +1974,8 @@ source fbf0deaec8679ebf6a58f53e0702d2e437318680/tree26d330c5の変更20pathをGi
 
 
 最終原物追補：CI39750366489は全6job終了/failure（17:47:17〜17:58:52 JST）。新bitmap native44はunique44全PASS。旧195は176PASS/19FAIL、旧V3別20は明示未実行。新export14とPNGはinstall前停止で未実行。全6job原logs/run/job/artifact0 metadata・元local失敗/最終979・fixture比較・pinned parser integrity/修復候補/全4file一致等20memberをmanifest同単位のfinal_evidence_bundleへ可逆保存する。sourceはCI開始後不変更、counter1/上限1、追加CI0。
+
+
+#### 5.6.37 2026-10-22 — §112の具体修復を承認済み単位で実行
+
+Mashの「Pieceの残件作業を進めて」により、直前の末尾LF1byte修復＋新source CI一回案を実行する。前提資料・全体設計01/全file地図01A/B/C・current Piece map・本weeklyを最新GitHubへ照合。rootがwrite/CI、補助はread-only。patch9,360→9,359byte、末尾以外不変、実pinned parserと全4file適用後byte不変の独立確認成立。変更はpatch＋資料4path、STRUCTURE_MAP_DELTA_NONE。今回counter0/上限1、前39750366489の消費1/failureと未実行export14を保持。新一度CIで正常PNG8/拒否6を確認し、旧195/新44/旧RN13/12/17と旧失敗期待を保つ。追加修復/再CI/稼働設定/DB/実Auth/実OS/実機/main merge0。P-W1稼働本人保存再表示をP-W2source成功へ置換せず、商品完成は未確認、automatic_progression=false。詳細は入口§113、manifest同修復単位。
