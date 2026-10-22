@@ -320,7 +320,7 @@ static void PieceProviderPixelsRelease(void *info, const void *data, __unused si
   auto *allocation = (PieceProviderAllocation *)info;
   free((void *)data); allocation->budget->release(allocation->length); delete allocation;
 }
-static CGImageRef PiecePixelsImage(PieceOwnedPixels &pixels) {
+static CGImageRef PiecePixelsImage(PieceOwnedPixels &pixels, bool shouldInterpolate = false) {
   if (!pixels.data || !pixels.owns) return NULL;
   if (pixels.context) { CGContextRelease(pixels.context); pixels.context = nullptr; }
   auto *allocation = new (std::nothrow) PieceProviderAllocation{pixels.budget, pixels.length};
@@ -330,7 +330,7 @@ static CGImageRef PiecePixelsImage(PieceOwnedPixels &pixels) {
   pixels.owns = false;
   CGColorSpaceRef space = CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
   CGImageRef image = space ? CGImageCreate(pixels.width, pixels.height, 8, 32, pixels.stride, space,
-    kCGBitmapByteOrder32Big | kCGImageAlphaPremultipliedLast, provider, NULL, false, kCGRenderingIntentDefault) : NULL;
+    kCGBitmapByteOrder32Big | kCGImageAlphaPremultipliedLast, provider, NULL, shouldInterpolate, kCGRenderingIntentDefault) : NULL;
   if (space) CGColorSpaceRelease(space);
   CGDataProviderRelease(provider);
   if (!image) pixels.reset();
@@ -747,7 +747,7 @@ static BOOL PieceNativeAndLayerV4Ink(RCTTextView *view, NSDictionary *layerState
   const double right = ceil((CGRectGetMaxX(nativeCells) + x0 - tx) / scale + phase.x) - phase.x;
   const double bottom = ceil((CGRectGetMaxY(nativeCells) + y0 + ty) / scale + phase.y) - phase.y;
   CGRect projected = CGRectMake(left, top, right - left, bottom - top);
-  CGImageRef expandedImage = PiecePixelsImage(native), clippedImage = NULL;
+  CGImageRef expandedImage = PiecePixelsImage(native, true), clippedImage = NULL;
   CALayer *reference = nil;
   UInt8 *bits = nullptr;
   BOOL reservedBits = NO;
@@ -769,7 +769,7 @@ static BOOL PieceNativeAndLayerV4Ink(RCTTextView *view, NSDictionary *layerState
     UIGraphicsPushContext(clipped.context);
     @try { [view cocolonPiecePaintGlyphRange:glyphs]; }
     @finally { UIGraphicsPopContext(); }
-    clippedImage = PiecePixelsImage(clipped);
+    clippedImage = PiecePixelsImage(clipped, true);
     if (!clippedImage || !budget->reserve(bitBytes)) return NO;
     reservedBits = YES; bits = (UInt8 *)calloc(bitBytes, 1);
     if (!bits) return NO;

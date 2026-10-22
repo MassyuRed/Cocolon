@@ -1,14 +1,14 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v129",
+  "schema_version": "cocolon.piece.workstream_manifest.v130",
   "generated_at": "2026-10-22 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v128",
-    "predecessor_head": "c3929573a0e1b355f5de372a3130b92ee83ce986",
-    "carry_forward": "Preserve sole diagnostic failure and all raw evidence. Record exact unapplied V4 reference interpolation repair candidate and source-plus-one-CI decision boundary; no new runtime effect.",
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v129",
+    "predecessor_head": "c79c06aaac7a1e38023e640f7c502653bd36ba48",
+    "carry_forward": "Apply Mash-approved exact V4 interpolation candidate. Preserve all prior failures/raw evidence. One new-source push CI only, no rerun or automatic progression.",
     "immutable_prior_evidence_references": [
       {
         "format": "git-commit-json-pointer",
@@ -110,17 +110,17 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "fea37259641deab8ade40a175c1c5bd5d15112b4",
-    "raw_sha256": "1a32aa35b7a0f3b875e79129f33e1fb305cfb8cf10a4088ade4652746c0f1c28",
-    "utf8_bytes": 553088,
-    "chars": 329020
+    "git_blob_sha1": "886925c5103b1222df3ca8b56a2d865a513e5b8c",
+    "raw_sha256": "524197f1d13b0b86b1a628b3faddba520a6d71bee3ec3bbe3eb9e2fed068a6ad",
+    "utf8_bytes": 556782,
+    "chars": 331217
   },
   "current_premise": {
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
-    "git_blob_sha1": "b71a51061ae1c1caa0f28683bad973f88c68c6b2",
-    "raw_sha256": "3e7855c11c56761217e718784e615a2be2beff1e2e95717db27844dba48356c5",
-    "utf8_bytes": 524561,
-    "chars": 306544
+    "git_blob_sha1": "0c708f89816e888315a83cea6597d476f71ef69a",
+    "raw_sha256": "fd65ac931cd56d7bf79891163a5f9cfbd41fce631f2b46e3afffcc218dfe9f37",
+    "utf8_bytes": 525851,
+    "chars": 307300
   },
   "product_definition": {
     "user_facing_name": "Piece",
@@ -415,12 +415,12 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "PIECE_WORK_ALLOWED",
-    "state": "V4_REFERENCE_INTERPOLATION_REPAIR_EXACT_CANDIDATE_AWAITING_DECISION",
-    "current_map_section": "65.45",
-    "current_entry_section": "97",
+    "state": "APPROVED_V4_INTERPOLATION_REPAIR_SOURCE_APPLIED__SOLE_CI_PENDING",
+    "current_map_section": "65.46",
+    "current_entry_section": "98",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
-    "weekly_review_section": "5.6.25",
-    "first_unfinished_work": "V4参照画像二箇所だけ補間trueにする直接修復候補を全文保存。根因/成否未実測、適用と新source一度CIは具体判断待ち。旧診断counter1/failure・quote4M拒否を保持し、通常保存/本人再表示は未完了。",
+    "weekly_review_section": "5.6.26",
+    "first_unfinished_work": "承認済み候補native/runnerを適用。新sourceの既存CI一回を実行し全結果/原物を保存、成否を問わず停止。quote4M拒否/正式admission/通常保存は未完了。",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 6,
@@ -561,8 +561,9 @@
     "operand_observation_success": true,
     "operand_observation_same_source_rerun_allowed": false,
     "interpolation_repair_proposal_owner": "ios_preview_v4_interpolation_repair_proposal_20261022",
-    "interpolation_repair_approved": false,
-    "interpolation_repair_ci_executions": 0
+    "interpolation_repair_approved": true,
+    "interpolation_repair_ci_executions": 0,
+    "interpolation_repair_implementation_owner": "ios_preview_v4_interpolation_repair_20261022"
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -616,10 +617,10 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "b71a51061ae1c1caa0f28683bad973f88c68c6b2",
-    "raw_sha256": "3e7855c11c56761217e718784e615a2be2beff1e2e95717db27844dba48356c5",
-    "utf8_bytes": 524561,
-    "chars": 306544
+    "git_blob_sha1": "0c708f89816e888315a83cea6597d476f71ef69a",
+    "raw_sha256": "fd65ac931cd56d7bf79891163a5f9cfbd41fce631f2b46e3afffcc218dfe9f37",
+    "utf8_bytes": 525851,
+    "chars": 307300
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -792,15 +793,17 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "UNAPPLIED_V4_INTERPOLATION_DIRECT_REPAIR_PROPOSAL_DOCS_ONLY",
+    "classification": "APPROVED_V4_INTERPOLATION_REPAIR_SOURCE_PREPARATION",
     "paths": [
+      "ios/tempCocolon/PieceTextMetrics.mm",
+      "tests/native/run-piece-rn-canvas-ios.sh",
       "Cocolon_Piece/00_read_first.md",
       "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
       "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
       "Cocolon_Piece/manifest.json"
     ],
-    "product_source_changes": 0,
-    "test_source_changes": 0,
+    "product_source_changes": 1,
+    "test_source_changes": 1,
     "workflow_changes": 0,
     "new_files": 0,
     "new_ci_executions": 0,
@@ -87137,7 +87140,7 @@
     }
   },
   "ios_preview_v4_interpolation_repair_proposal_20261022": {
-    "state": "PROPOSED_UNAPPLIED_EXACT_SOURCE_AND_ONE_CI_AWAITING_MASH_DECISION",
+    "state": "APPROVED_CANDIDATE_APPLIED_BEFORE_SOLE_CI",
     "environment": "PIECE_WORK_ALLOWED",
     "execution_owner": "Karen root only",
     "scope_classification_for_future_effect": "LEVEL_3_MASH_DECISION_AND_APPROVAL_REQUIRED_SCOPE",
@@ -87238,9 +87241,9 @@
     "previous_run": 39692007906,
     "previous_run_counter": 1,
     "previous_result": "failure_preserved",
-    "proposed_source_applied": false,
+    "proposed_source_applied": true,
     "proposed_ci_count": 0,
-    "mash_approved": false,
+    "mash_approved": true,
     "current_effects": {
       "docs_modified": 4,
       "tracked_product_changes": 0,
@@ -87263,6 +87266,61 @@
       "rule_model_exception": "Rule18 0A Piece only; no Pro/Ultra identity claim",
       "read_fallback": "Original same-hash files; generated prepare failed task_profiles missing; no generated context adopted",
       "future_product_read_distance": "Containment plus quote resource issue, renderer admission, adopted saved key/profile/InputScreen supplier, actual normal-save same-owner roundtrip and device acceptance remain"
-    }
+    },
+    "approval_text": "具体案§97の適用と、新ソースでのCI一回 → 進めていいよ。",
+    "approval_date": "2026-10-22 JST"
+  },
+  "ios_preview_v4_interpolation_repair_20261022": {
+    "state": "APPROVED_SOURCE_APPLIED_CI_PENDING",
+    "approval_owner": "Mash",
+    "approval_basis": "Direct user approval of immutable proposal c79c06aa section97 and exact native/runner candidate.",
+    "execution_owner": "Karen root only",
+    "environment": "PIECE_WORK_ALLOWED",
+    "base_head": "c79c06aaac7a1e38023e640f7c502653bd36ba48",
+    "api_head": "a536e50ee284785f585ac73329ef2947dca8bba9",
+    "source_identities": [
+      {
+        "path": "ios/tempCocolon/PieceTextMetrics.mm",
+        "git_blob_sha1": "6a81d8e2531434581dc730f7ca00352e605664bd",
+        "raw_sha256": "f3dadd39774bfaf3886dc180e4a5be55a165f2918194b26614aa75af87241340",
+        "utf8_bytes": 96744,
+        "chars": 96744
+      },
+      {
+        "path": "tests/native/run-piece-rn-canvas-ios.sh",
+        "git_blob_sha1": "187897dc5d0307d9091c69216dfd28345848cd27",
+        "raw_sha256": "d71f0677b7648f229745597cb2140955a57fee94cacd5a405bcec04fb1e96259",
+        "utf8_bytes": 19974,
+        "chars": 19974
+      }
+    ],
+    "candidate_bundle_owner": "ios_preview_v4_interpolation_repair_proposal_20261022.lossless_candidate_bundle",
+    "source_preimage_sha256": "6250785b9d9d09e9fdf293ff78b48134995c5210ab5c37e73551027753902111",
+    "runner_preimage_sha256": "07700096663e332d4c9dcec5fa09c87d0d3f8686911ea10f7bb4c720ce9d0b1a",
+    "exact_paths": [
+      "ios/tempCocolon/PieceTextMetrics.mm",
+      "tests/native/run-piece-rn-canvas-ios.sh",
+      "Cocolon_Piece/00_read_first.md",
+      "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+      "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
+      "Cocolon_Piece/manifest.json"
+    ],
+    "source_applied": true,
+    "ci_executions": 0,
+    "ci_limit": 1,
+    "actions_reruns": 0,
+    "post_result_source_edits": 0,
+    "old_ci_counter": 1,
+    "old_run_id": 39692007906,
+    "old_result": "failure_preserved",
+    "root_cause_confirmed": false,
+    "quote4m_rejection_remaining": true,
+    "native_expected": 195,
+    "native_old_v3_20": "explicitly_unexecuted",
+    "rn_original_reports": 13,
+    "normal_save_reopen_complete": false,
+    "formal_admission": false,
+    "automatic_progression": false,
+    "product_credit": 0
   }
 }

@@ -3547,3 +3547,24 @@ PRIMARY_OUTCOME=ADMINISTRATIVE_ONLY。新しい修復candidateを具体化した
 - https://developer.apple.com/documentation/coregraphics/cgimage/init(width:height:bitspercomponent:bitsperpixel:bytesperrow:space:bitmapinfo:provider:decode:shouldinterpolate:intent:)
 - https://developer.apple.com/documentation/quartzcore/calayer/minificationfilter
 - https://developer.apple.com/documentation/quartzcore/scaling-filters
+
+
+## 98. 2026-10-22 — Mash承認済みV4参照補間修復を適用（新source準備）
+
+Mashは具体案§97の適用と新sourceのCI一回へ「進めていいよ。」と明示承認した。§97の未承認記述は設計時履歴であり、同じ承認を再質問しない。旧run39692007906/counter1/failureと旧run39683393855/counter1/failureは不変に保ち、今回の新製品修復候補と一度CIを独立に記録する。
+
+開始Cocolon PR30 c79c06aaac7a1e38023e640f7c502653bd36ba48/tree587bd48c6210b20cd1647c968ecc32d948742362、API PR3 a536e50ee284785f585ac73329ef2947dca8bba9。fresh head、tree1917entry/truncated=false、materialized98file全blob一致/差分0と、承認manifest内candidate bundle6memberの復号全文/hashを確認した。前提資料/作業規則/全体設計/全file地図/最新weekly/Piece map/実sourceの前回確認を同refで継承し、恒久incidentは今回も先頭からEOFまで全文確認。model/environmentはPIECE_WORK_ALLOWED、root華恋が唯一のwriter/execution owner、補助担当はread-only。別モデルPro/Ultraの成立は主張しない。
+
+### 98.1 適用したbytesと検証境界
+
+製品nativeは承認済み候補96,744byte/SHA256 f3dadd39774bfaf3886dc180e4a5be55a165f2918194b26614aa75af87241340をbundleからそのまま適用した。PiecePixelsImageへ既定falseの補間引数を追加し、V4のexpanded/clipped二参照だけtrue、V3二呼出しはfalseを維持する。runner19,974byte/SHA256 d71f0677b7648f229745597cb2140955a57fee94cacd5a405bcec04fb1e96259はsource hash pin一箇所だけの承認bytes。同candidateの局所確認・104guard全式/順序・3reset・元比較if/NOと注釈逆射影結果は§97保存済みで、適用時hashとbash -nも成功した。
+
+自然Text/opaque backing非読取、CTM/clip、全logical1 cellのalpha>0占有真偽一致、A/B/C厳密union、wire20field/version/token、元13names/順序/本文/旧saved DTO、旧175＋新V4 20の195期待（旧V3 20明示未実行）、8秒/90秒/4096辺/4Mpixel/32MiBを維持する。alpha値やRGBA値そのものの一致を要求する別比較へ変更していない。追加診断/描画/走査/bitmap buffer/待機/再試行0。filter後Bと配置/fontへの可視差は承認した修復候補の評価対象で、成功の保証ではない。
+
+### 98.2 一度CIと終了条件
+
+source1/runner1/結果資料4の承認6pathだけを新source commitへ反映し、既存push CIを一回だけ実行する。新counter0→1、Actions rerun0、workflow/job/fixture/期待値変更0。全結果の元logs/report/PNG/診断map/取得可能原物を保存して終了し、compile/infra/検査未達でも追加修正→再CIや別診断へ進まない。旧失敗のcounterはresetしない。
+
+現時点はsource準備、CI未実行。ObjC++compile/UIKit描画/alpha対応/8秒/195成功は未確認。既知quote80ptの4,473,085pixel/4M拒否と、standalone19FAILの個別原因未特定は維持し、全体成功/修復完了へ読み替えない。新正常preview・raw・trap・opacityと元保存済み旧版を分けて判定する。新全alpha占有比較が改善しても、元各条件未達なら候補未採用のまま。
+
+今回STRUCTURE_MAP_DELTA_NONE（既存未採用V4内の参照補間指定修復、route/owner/wire不変）。DB/SQL/user rows/API/依存/本番/配布/main操作0。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。正式admission/通常保存→同owner再表示/画像保存共有/実機受入れとP-W1〜3の管理点は未完了であり、この単回結果へ自動進行を含めない。
