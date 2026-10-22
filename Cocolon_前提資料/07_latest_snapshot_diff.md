@@ -41734,3 +41734,12 @@ STRUCTURE_MAP_DELTA_PRESENT（既存owner内の別候補/独立比較座標/sour
 native原境界62local拒否の61件はstage83の全logical1占有不一致、quote80ptの1件は3481×1285＝4,473,085画素/元4M超過（stage15/mask256、辺4096/32MiB超過ではない）。全62snapshot記録は一致。比較の差座標/alpha/geometry operand未記録で根因は未確定、standalone19FAILへ同原因を一括流用しない。早い拒否を8秒/420/最終fit成功へ換算しない。原PNG5は前回とbytes/全RGBA一致しroot目視済み、旧saved/raw表示を新候補成功に加算しない。全6元ログ・元13report/PNG5・stage map・xcresult root・独立レビュー・全archive member台帳をmanifestへ可逆保存、完全xcresultを含む原ZIP59,523,256byte/1020member/SHA256一致も保存済み。
 
 承認された実装/一度CIの単位は完了、validation_success=false/unadopted=true/DETOUR_RISK_STOPを維持。source/test/workflow固定、追加修正/同source再実行/追加CI0。次の未完exact1は既存logical1参照合成と自然layerの対応を直接修復する具体案の設計（案未成立、未実装・未実行）。正式admission/通常保存→同owner再表示/写真保存共有/実機受入れと10/22保存目標は未完了。今回結果5資料のみSTRUCTURE_MAP_DELTA_NONE、商品品質credit0、automatic_progression=false。
+
+
+## 2026-10-22 — 観測会：短い日常入力についての認識を共有し、第4回の材料を準備
+
+Mashが「その認識でいい。記録として残せ」と承認。[第3回D06〜D07](observation_learning/sessions/2026/OBS-20261022-002/01_dialogue.md#d06)と[ノート§8](observation_learning/sessions/2026/OBS-20261022-002/02_learning_notes.md)へ保存した。長い相談を前提にせず、普通の短い言葉に表れる本人の基準を拾うことを重視し、事実を受け取って終える入力も保持する。毎回の深読み・問い・新発見を価値の前提にしない。チュートリアル案・「人を選ぶから今のままでよい」という旧判断への承認、入力分布や商品価値の実証へ広げない。
+
+続く依頼へ、華恋は[第4回 OBS-20261022-003](observation_learning/sessions/2026/OBS-20261022-003/01_dialogue.md)を実際の入力形式に近い短い架空記録から始める形で準備。不安（弱）と、本を返すのが遅れ友人へ謝った後の「大丈夫って言ってくれたけど、まだちょっと気になる」を初期材料とする。本人役の事前設定は初期sourceに含めず、実際の問い・回答・読みの更新だけを追記する。問いなしの終了も不足扱いしない。既存の相談教材を保持する。
+
+今回の対象は観測学習README、前回原文・ノート、新回原文・ノート、本milestoneの6fileのみ。モデル推論・GPU起動・追加学習・CMEE接続・製品コード・API・DB・配置0。27B候補保持・製品採用未確定を維持。STRUCTURE_MAP_DELTA_NONE、ADMINISTRATIVE_ONLY（合意と教材材料の保存）。
