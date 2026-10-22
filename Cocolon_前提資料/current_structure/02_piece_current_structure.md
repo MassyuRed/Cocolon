@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§106／本map§65.54／weekly§5.6.34／manifest v142。§105のWindow四地点修復をMash承認どおり適用、新source既存CI一回へ。新native44/RN12結果未確認、正式admission/通常保存/本人再表示は未完。**
+**最新は入口§109／本map§65.54.3／weekly§5.6.34.3／manifest v145。承認Window修復の新native44/44・RN12が成立し、両420は元8秒内、全27PNG前回byte一致。旧群失敗でCI全体failure。限定検証単位は完了、正式admission/通常保存/本人再表示は未完。**
 
 ### §99の判断案（履歴）
 
@@ -3371,3 +3371,10 @@ source15b0a62a/CI39717661329 attempt1継続。JS957 PASS、iOS source/standalone
 ### 65.54.2 途中：新native44/44、実RNは継続中
 
 入口§108／weekly§5.6.34.2／manifest v144。source c43a8ae6の一度CI39727150432でWindow例外が解消、新bitmap個別44/44・重複0、約36.506秒/元90秒内。旧175成功＋V4 1PASS/19FAIL、計239unique＝220PASS/19FAIL、旧V3別20未実行。native jobは旧失敗によりfailure。JS957/Android source成功。新RN12/画像/両420は同run継続中・未確定。原5job logs等を可逆保存、source固定・再CI/追加修復0。正式admission/通常保存未完、結果4資料のみSTRUCTURE_MAP_DELTA_NONE。
+
+
+### 65.54.3 最終：新44/44・RN12成立、正式採用/保存は未完
+
+入口§109／weekly§5.6.34.3／manifest v145。source c43a8ae6の唯一CI39727150432 attempt1全6job完了/failure。Window例外は解消、新bitmap個別44全成功/欠落重複0、main→summary36.505744秒。旧175成功＋V4 1PASS19FAIL、native計239unique/220PASS19FAIL、旧V3別20未実行。JS957/Androidsource/iOS compile成功。新RN12全source条件成立、preview8/raw3/crop失効1、両420は3880.234417/2360.958ms・36pt・元8秒内。新22＋旧5の全27PNGは前回byte/RGBA一致。XCTest2method/失敗1、59 failure summaryは全て旧method。旧失敗を新成功へ相殺しない。
+
+原ZIP65,532,011byte/1073memberはdigest照合・全文保存済、全6logs/元JSON/独立監査/PNG台帳等18memberをmanifestへ可逆保存。限定TECHNICAL_CREDIT、bounded_work_complete/validation_success=true、product_credit0。source追加修復/再CI0、結果4資料のみSTRUCTURE_MAP_DELTA_NONE。正式admission/採用版saved profile→InputScreen正式保存条件/同preview fit→既存保存API→本人履歴詳細と、共有/実機は未完。今回単位終了、automatic_progression=false。

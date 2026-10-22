@@ -1926,3 +1926,10 @@ source15b0a62a/CI39717661329 attempt1継続。JS957 PASS、iOS source/standalone
 ##### 5.6.34.2 途中：Window例外解消、新native44全件成功
 
 入口§108／map§65.54.2／manifest v144。一度CI39727150432/source c43a8ae6、新bitmap44個別名・summary全成功、重複0、main→summary約36.506秒。旧native175成功/V4 1PASS19FAILを保持し、計239unique/220PASS19FAIL。旧V3別20未実行、native jobはfailure。JS957・Android source成功、実RN12/画像/420は同run継続中で未確定。5job logs＋metadata等8memberを保存。source/条件不変、追加CI/修復0。P-W1正式admission/通常保存/本人再表示、共有/実機未完、商品credit0、結果資料4のみSTRUCTURE_MAP_DELTA_NONE。
+
+
+##### 5.6.34.3 最終：Window修復の新44/44・RN12成立
+
+入口§109／map§65.54.3／manifest v145。唯一CI39727150432/source c43a8ae6は14:17:16〜14:34:20 JST、全6job完了/failure。前回Window例外を解消し、新native44名/順序/summary全成功、欠落重複0、main→summary36.505744秒。旧175成功/V4 1PASS19FAILは保持、計239unique/220PASS19FAIL、旧V3別20未実行。JS957/Androidsource/iOScompile成功。新RN12全条件成立、preview8/raw3/crop拒否1、両420は3880.234417/2360.958msで元8秒内。全27PNG前回byte/RGBA一致。XCTest失敗1methodの59 summaryは全て旧method、新群で相殺しない。
+
+原ZIP65,532,011byte/1073memberをdigest照合・保存し、全6原logs/元JSON/独立監査/PNG台帳等18memberをmanifestへ可逆保存。限定TECHNICAL_CREDIT、今回の修復＋一度検証単位は完了/validation_success=true。product_credit0、正式admission/通常保存→同owner履歴詳細・共有・実機と10/22保存目標は未完。counter1/上限1、追加修復/再CI/次Gate自動進行0、API/DB/本番変更0、結果資料4だけSTRUCTURE_MAP_DELTA_NONE。

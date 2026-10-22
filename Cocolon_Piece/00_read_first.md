@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§106／map§65.54／weekly§5.6.34／manifest v142。Mash承認済みの検証用Window四地点修復を適用し、新sourceの既存CI一回へ進みます。新native44/RN12の結果は未確認。旧一回失敗/未採用・正式admission/通常保存未完を保持します。**
+**最新は入口§109／map§65.54.3／weekly§5.6.34.3／manifest v145。承認済みWindow四地点修復＋一度CIを完了し、新native44/44・実RN12成立、両420は3.88秒/2.36秒。全27PNGは前回byte一致。旧native19FAIL/旧RN群の失敗でCI全体failureを維持。限定TECHNICAL_CREDIT、正式admission/通常保存/本人再表示は未完です。**
 
 ### §87の設計時点（履歴）
 
@@ -3852,3 +3852,22 @@ Mashは§105の「この修復の適用と、新ソースでのCI一回」へ「
 旧175は全成功、旧V4は1PASS/19FAILを維持、旧V3別20は明示未実行。実行239unique＝220PASS/19FAIL、新44を旧195の19FAILへ相殺しない。native jobは旧期待未達でfailure。JS957 PASS/FAIL0/SKIP0/cancel0・12357.158562ms、Android source成功、export2jobは主要native工程が対象外のため今回新build成功へ換算しない。実RN jobは同じ一度CIで継続中、RN12/新画像/420時間は未確定。
 
 完了5job原ログとrun/job metadata・集計8memberをmanifest内interim_evidence_bundleへ可逆保存。source/期待/fixture本文/workflow不変、新counter1/上限1、追加run/追加修復0。STRUCTURE_MAP_DELTA_NONE（結果記録4fileだけ）、formal_admission/canSave/canExport/通常保存/同owner再表示/共有/実機は未完、automatic_progression=false。
+
+
+### 109. Window四地点修復＋一度CI完了：新native44/44・実RN12成立
+
+Mash承認済み§105の修復をsource c43a8ae6f2661a971cfae9149a143ea547375b5aへ適用し、既存CI39727150432 attempt1を一回だけ実行した。CIは2026-10-22 14:17:16〜14:34:20 JSTの約17分、全6job完了、全体conclusion=failure。新単位counter1/上限1、Actions rerun0、結果後source追加変更0。今回の限定validation_success=trueと、旧群を含むCI全体failureを分ける。旧run39717661329のcounter1/failureは変更しない。
+
+**修復の技術結果：新bitmap44は全件PASS・欠落/重複/FAIL0。新実RN12も全元条件成立。** 前回のWindow mount例外は解消した。native原ログの44名/順序・summaryをrootと独立担当で照合し、正常8renderの戻り値・同CGImage等の元判定も成立した。main→bitmap summary36.505744秒、bitmap group0.400869秒、元90秒alarm不変。内部entry traceは新設していないため製品method到達は正常戻り値と元assertionからの推論である。旧175全成功/V4 1PASS19FAIL、native計239unique＝220PASS/19FAIL。旧V3別20は従来どおり明示未実行。旧19FAILの修復を主張しない。
+
+JS957 PASS/FAIL0/SKIP0/cancel0（12,357.158562ms）、Android source成功、iOS実header構文/旧patch適用/standalone compile成功。export Android/Podsのjob successは対象外guardによる主要build工程skipを含み、今回新export build成功へ換算しない。XCTestは2method実行/1method失敗、xcresultの59 failure summaryは全て旧testWholeCanvasWithRealReactNativeに属する。新bitmap methodのfailure summaryは0。旧native jobと旧RN methodの失敗を新groupで埋めない。
+
+新RN12はpreview8の本文/全行/段落/branding/全logical1 alpha占有一致・同CGImage host・current fit/誤token拒否/期限、raw3の本文保持と描画、crop1の画像消去/native_bitmap_invalidated/fit失効の全source assertionを独立照合した。両420は3,880.234417msと2,360.958ms、両36ptで元8秒以内。この時間はCard/fit確認までで、続くPNGと自然参考PNGの保存を含まない。全ケースcanSave/canExport=false。crop trapのPNGなし/capture_error=trueは拒否期待であり完成像へ加算しない。
+
+新22PNG（完成11＋自然参考11）と旧5PNG、計27枚は全て前回原物とbyte/RGBA一致。rootも新8画像の一覧とquote原寸を確認し、今回の修復で増えた明白な欠け・重なり・反転は見られない。自然RN Textと同画質、AA/細線の同等性、実機受入れを認定しない。旧RN13のnames/本文blocks/rows/phase/reason/font/native_textsも前回一致し、旧preview8拒否等はそのままである。
+
+元artifact12404211832は65,532,011byte/1073member、SHA256 fc5fd18844173fd12a8e86189cfed4cd86c66bf04965b68d56bb02facb674f7bをGitHub digestへ照合し、原ZIP全文を保存した（libfile_fa7c691be5fc819194d1a276ad04a456 v0、local metadata反映済）。全6job原ログ/元JSON/runとjob・artifact metadata/独立native・RN監査/PNG hashと比較台帳/原物参照等18memberをmanifestのfinal_evidence_bundleへ可逆保存した。signed URLは保存しない。前回原物や旧失敗の証拠を削除・成功化しない。
+
+PRIMARY_OUTCOME=TECHNICAL_CREDIT（検証用Window不備解消と、承認済みbitmap候補の新44＋RN12限定技術確認）。bounded_work_complete=true、validation_success=true、product_credit=0、formal_admission/can_save/can_export/normal_save_reopen_complete=false。新候補の正式採用・通常保存は別の未完条件であり、CI全体GREENや商品完成とは呼ばない。
+
+次の未完は正式renderer admission・採用版saved reader/profile整合と、InputScreen正式isSaveAdmitted/同preview保存直前fit→既存保存controller/API→同owner履歴/詳細の一往復。P-W2画像保存共有/P-W3実機も残る。今回の承認単位はここで終了し、追加修復/再CI/次Gateへ自動進行しない。実API/Auth/稼働flag/本番DB/本人実機での完成は未確認。API a536e50e/DB/env/deploy/main merge変更0、両Draft/open/unmerged。STRUCTURE_MAP_DELTA_NONE（結果記録4fileだけ、sourceはCI開始後不変）。
