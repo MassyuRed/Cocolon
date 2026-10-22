@@ -1865,3 +1865,8 @@ native原境界62local拒否の61件はstage83の全logical1占有不一致、qu
 ##### 5.6.26.2 途中：旧native175成功、新V4は1成功/19失敗
 
 入口§98.4/manifest v132。唯一CI39704913859 attempt1でJS949/Android source/旧native175成功。新V4 1PASS/19FAIL（計195unique）、旧V3 20明示未実行、iOS compile成功。export2jobは主要native工程skipで新compile証拠なし。5job＋既存guard原logs/metadata/集計を可逆保存。実RN13/画像/alpha比較/fitは同run継続中。source固定、counter1/上限1・rerun0・追加修正0、資料4fileだけSTRUCTURE_MAP_DELTA_NONE、商品品質credit0、通常保存未完。
+
+
+##### 5.6.26.2.1 途中記録の読戻し容量を縮小、原物保持
+
+入口§98.4.1/manifest v133。途中manifest8,388,394byteが全文取得Transport closed二回のため、旧runの既照合raw bundleだけを固定c79c06aa/blob542f7267同pointerへ保持し、今回5job＋guard原logsは直接内包する。checkpoint内bundle重複を同manifest pointerへ整理。旧/新原物のbytes/hashは不変、source/runner/CI追加0。実RNは同run継続中。
