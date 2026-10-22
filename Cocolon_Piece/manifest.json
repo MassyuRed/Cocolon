@@ -482,10 +482,10 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "cba3b8de04241268df669146f966df0c2f34ef7f",
-    "raw_sha256": "46050ca0a5b0d19756f55e363156336bd6d11ea62659084931945d2c80c71009",
-    "utf8_bytes": 639295,
-    "chars": 380194
+    "git_blob_sha1": "23a225d055eb7370e6a376f697aecee770ab9ac2",
+    "raw_sha256": "ccb7b6b4994ca77494bb464d9e3b5f1005c8bb1e199a276c236e86a633c8abfc",
+    "utf8_bytes": 639360,
+    "chars": 380229
   },
   "current_premise": {
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
@@ -92028,7 +92028,8 @@
     },
     "blocker": "Unescaped plus in workflow path filter does not match literal patch-only source change. Workflow edit excluded by exact §112 scope.",
     "new_export_cases_executed": 0,
-    "new_export_pngs": 0
+    "new_export_pngs": 0,
+    "diagnostic_basis": "Inference from observed zero Piece workflow runs, exact changed paths, unchanged workflow source and official plus-pattern semantics; internal GitHub path-evaluation trace not retrieved."
   },
   "ios_bitmap_export_ci_trigger_repair_proposal_20261022": {
     "path": ".github/workflows/piece-rn-contracts.yml",

@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§109／本map§65.54.3／weekly§5.6.34.3／manifest v145。承認Window修復の新native44/44・RN12が成立し、両420は元8秒内、全27PNG前回byte一致。旧群失敗でCI全体failure。限定検証単位は完了、正式admission/通常保存/本人再表示は未完。**
+**最新は入口§113.1/114／map§65.57.1／weekly§5.6.37.1／manifest v152。末尾LF1byte修復をsource5a9812bdへ反映・全文照合済み。Piece CIは既存path filterの未escape + による未起動と判断し、今回CI0・新export14/PNG未実行を保持。起動条件1行＋既存CI一回の具体案は未承認・未適用。P-W1実保存/実OS/本人実機は未完です。**
 
 ### §99の判断案（履歴）
 

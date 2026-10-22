@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§111.2/112／map§65.56.2／weekly§5.6.36.2／manifest v150。通常詳細の新iOS版export sourceを反映しJS979成功。native検証はpatch末尾LF1byte不備で開始前に停止。1byteだけの修復候補を準備、適用/新CIは個別承認待ち。P-W1実保存/実OS/本人実機は未完です。**
+**最新は入口§113.1/114／map§65.57.1／weekly§5.6.37.1／manifest v152。末尾LF1byte修復をsource5a9812bdへ反映・全文照合済み。Piece CIは既存path filterの未escape + による未起動と判断し、今回CI0・新export14/PNG未実行を保持。起動条件1行＋既存CI一回の具体案は未承認・未適用。P-W1実保存/実OS/本人実機は未完です。**
 
 ### §87の設計時点（履歴）
 
