@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§116／map§65.59／weekly§5.6.39／manifest v156。稼働API5c8bd8e5を土台に、既承認Piece製品5＋test4を移したDraft PR4（08875643）を準備。一度CI39803099295は1793 PASS/FAIL0/SKIP0。稼働版の候補factoryにはsave/quota/delete未接続と確認した。配置・設定・実Auth保存/本人再表示・実OS・本人実機は未実施、採用案は個別判断待ち。**
+**最新は入口§117／map§65.60／weekly§5.6.40／manifest v157。MashはTTL600秒/private preview-save-read-delete/同API全認証sessionへの配置・有効化を明示承認済み。Piece URL IDのログ混入経路を既存2fileで最小修復し、候補3577d7fdの唯一CI39858883604は1805 PASS/FAIL0/SKIP0。Render接続はcommit指定/起動コマンド変更に非対応、CLI認証もなく未適用。配置承認を再要求しない。実Auth保存/端末は未確認。**
 
 ### §99の判断案（履歴）
 
@@ -3474,3 +3474,13 @@ source fbf0deaec8679ebf6a58f53e0702d2e437318680/tree26d330c5の変更20pathをGi
 最初のref作成でCI0、既存workflowを比較用baseへのPR発火へ結び直し、CI39803099295 attempt1はsuccess、23 invocation合計1793 PASS/FAIL0/SKIP0。合成merge407bf140のtreeは候補08875643と同一。実CMEE/隔離SQL、Auth/source/HTTPは合成。原logはmanifestで可逆保存、詳細は入口§116.4。旧native/RN失敗と前回新export8/拒否6の範囲を変更しない。
 
 次は同候補の稼働採用値（提案TTL600秒/明示iOS版、preview/save/read/deleteのみ、public/export OFF）と起動構成変更の個別承認。600秒は新提案で、native8秒や完成saved保持とは別。readyはDB定義/CIだけで自動認定しない。有効化は同APIの全認証sessionへ及び、保存1件上限はowner限定ではない。技術的ready不足時は承認後も未有効化で停止する。通常本人Authでprivate保存→同owner履歴/詳細は未完。P-W2実Photos/Share/Android/backend receipt、P-W3実機受入れ、M5全体は残る。配置・設定・DB・実user操作・商品採用0、automatic_progression=false。
+
+## 65.60 2026-10-23 — 承認済みprivate稼働設定と監視の既存privacy修復
+
+入口§117、weekly§5.6.40、manifest v157がcurrent。MashはTTL600秒/明示iOS版/private preview-save-owner-read-delete/全認証sessionへの既存API配置・有効化を明示承認した。public/visibility/export OFFを維持し、同じ承認を再要求しない。
+
+配置前のsource点検で、既存middleware_request_perf.pyがPiece URLのrecord/source/preview IDをmetrics/serialized logへ渡す経路を確認。実漏出は未観測。同owner内の開始時固定path→終了時code-owned template又は固定fallback→metrics後再上書きだけを修復した。非Piece挙動は維持。既存B12 testに実metrics/実JSON loggerの12caseを追加、新factory/helper/file/依存/API/DTO/DB/RNは0。起動構成にはUvicorn access_log=False/httpx WARNINGを明示するが、ベンダー全ログの保証ではない。
+
+PR4候補3577d7fdは08875643から2pathだけを修復。live基点の計11path（製品6/test4/workflow1）、全2pathをGitHub全文読戻し一致。唯一CI39858883604 attempt1はsuccess、原23summary合計1805 PASS/FAIL0/SKIP0（shared/default128/native persistence46）。合成merge0689de53はheadと同tree。Auth/source/HTTPは合成、本人往復未確認。旧1793成功を今回へ転用しない。privacy修復はPR4限定、PR3@a536e50eは未変更で後続への戻し込みは未実施。source/test/監視の既存責務を増設しないためSTRUCTURE_MAP_DELTA_NONE。
+
+Renderはlive5c8bd8e5/app:app/autoDeploy offのまま。現在のpluginはcommit指定deploy/startCommand更新に非対応、CLI/設定済keyもない。汎用main deploy/env更新を使わず、ブラウザtoolが要求するfallback切替の許可前はUIへ入らない。配置・有効化承認は成立済み、実行経路だけ未成立。次は対応する既存Dashboardで承認済みcommandとexact sourceを適用し、実効flag/認証拒否/本人往復を段階ごとに確認すること。現在は未配置/未有効化/実Auth未確認、実OS・本人受入れも未完。automatic_progression=false。

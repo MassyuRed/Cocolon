@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§116／map§65.59／weekly§5.6.39／manifest v156。稼働API5c8bd8e5を土台に、既承認Piece製品5＋test4を移したDraft PR4（08875643）を準備。一度CI39803099295は1793 PASS/FAIL0/SKIP0。稼働版の候補factoryにはsave/quota/delete未接続と確認した。配置・設定・実Auth保存/本人再表示・実OS・本人実機は未実施、採用案は個別判断待ち。**
+**最新は入口§117／map§65.60／weekly§5.6.40／manifest v157。MashはTTL600秒/private preview-save-read-delete/同API全認証sessionへの配置・有効化を明示承認済み。Piece URL IDのログ混入経路を既存2fileで最小修復し、候補3577d7fdの唯一CI39858883604は1805 PASS/FAIL0/SKIP0。Render接続はcommit指定/起動コマンド変更に非対応、CLI認証もなく未適用。配置承認を再要求しない。実Auth保存/端末は未確認。**
 
 ### §87の設計時点（履歴）
 
@@ -4068,3 +4068,43 @@ PRIMARY_OUTCOME=TECHNICAL_CREDIT。稼働版を基準に再利用可能なPiece�
 M5全体・Nexus/tutorial・全公開経路の切替はweekly§5.6.3の独立残件を維持し、この候補組立てへ新しい事前gateとして追加しない。P-W1通常保存/本人再読は未完、P-W2実Photos/Share/Android新版/backend receipt、P-W3本人実機/商品受入れも未完。10/22保存・10/23共有目標の達成を今回の準備で認定しない。外部有効化と本人データ操作はRule18§11.3のproduction deployment/user dataを含むため個別承認対象。既承認workspace読取・既適用SQLの再承認は求めない。
 
 今回資料5pathはSTRUCTURE_MAP_DELTA_NONE（既存責務/route/contractを新設せず、候補のprovenanceと残件を同期）。manifestのcurrent_premise/current_entryは今回の現物hash/bytesへ合わせ、既知の旧pin不一致を解消する。PRIMARY_OUTCOME=TECHNICAL_CREDIT（候補source/限定検証のみ）、product_credit=0、runtime_adopted=false、automatic_progression=false。
+
+## 117. 2026-10-23 — 配置承認受領、適用前の監視修復と利用可能経路
+
+### 117.1 明示承認の受領と今回のscope
+
+Mashは§116.4の配置案を引用し「進めていいよ」と明示承認した。承認はpreview TTL600秒、piece.rn_bitmap_renderer.ios.v1、private preview/save/owner history/detail/deleteを有効化し、同APIの全認証sessionへ反映する範囲。public write/read/visibility/exportはOFF、既存APIのみ、DB migration/新service/新料金/main merge/実削除の自動操作は含めない。Rule18の配置・有効化承認は成立済みであり、同じ承認を再び待機理由にしない。実Authの通常保存と本人端末受入れは別の未確認である。
+
+Cocolon32d74c84、API候補PR4@08875643、開発PR3@a536e50eをfresh照合。全機能最新情報全文と必読incident、既読rule/全体設計01/地図01A/B/C/current map/最新weeklyを同じrefの関連差分へ照合した。System Contextのgenerated/fresh clone検証を採用せず原典直接読取を維持。root華恋が唯一の編集/実行/反映owner、補助担当はread-only。モデル制限解除を適用する。
+
+### 117.2 配置前に実測した既存privacy契約の未成立
+
+candidateのmiddleware_request_perf.pyは開始時にrequest.url.pathをRequestMetricsへ入れ、遅延/5xx/例外等のhttp_request_perfにもraw pathを渡していた。snapshot側のpathは後置**metricsによってログへ再上書きされ得る。observability.log_eventはJSON化するだけでredactionを行わない。Piece detail/source-ref/preview mutationのURLにはrecord/source/preview IDが含まれ、PCE7 Monitoring Privacy §4の既存禁止に抵触する到達経路をsource上で確定した。実利用者の漏出ログを確認したという主張ではない。
+
+新しい監視機構・Gate・builderは作らない。既存middleware_request_perf.py内だけで、Pieceの開始時metricsには固定/emotion/piece/{route}を渡し、終了時はcode-owned route path/path_formatが取れればそのtemplate、取れなければ固定fallbackを使う。**metricsの後にPieceだけpathを強制上書きする。404/405/ルーティング前例外でもraw IDを出さず、非Pieceの既存merge順/挙動を保持する。
+
+既存test_b12_shared_preview_composition.pyへ12caseを追加した。detail/source-ref/preview、unknown404/405、handler500/route前例外、slow、metrics override、query、encoded slash、非Piece対照を実middleware/RequestMetrics/完全serialized JSON loggerで検査する。405はStarlette実装差によるcode-owned template又は固定fallbackだけを許し、raw pathを許さない。新file/外部依存/新factory/helper/公開API/DTO/DB/RN変更0。独立read-only reviewとASTparseでrun前の具体的不備は見つからなかった。local pytestは実行せず、既存GitHub隔離workflowで同一sourceを確認する。
+
+配置起動構成ではuvicorn.runへaccess_log=False、httpx loggerへWARNINGを明示し、既存appのbasicConfig(INFO)から別経路で詳細URLが出ることも防ぐ。request_perfの既存数値・status・遅延監視は保持する。ベンダー管理の全アクセスログを無IDと保証するものではない。Uvicornの公開settingsページはHTTP503/timeoutで参照不能、現runtimeに同packageもないため、今回この2点のproduction起動成功は未実測とする。Renderの現行deploys/health-checks文書は直接取得・本文確認済み。
+
+### 117.3 既存候補へ反映した最小修復とCI
+
+[API Draft PR4](https://github.com/MassyuRed/mashos-api/pull/4)を3577d7fdeb19158ef5e675f51960652a52c24487/treead5a219c79236ea793cef8d5ad30073f0abb0b6fへ更新した。直前08875643との差は上記middlewareと既存testの2pathだけ。両pathのGitHub全文/shaをlocal検査bytesへ照合済み。live5c8bd8e5からは製品6/test4/既存workflow1の計11path、Emlis/Analysis後続変更は含めない。
+
+唯一CI39858883604 attempt1が起動した。旧CI39803099295の1793成功は旧sourceの結果として保持し、今回へ加算しない。新source一度だけ、rerun0、CI開始後のsource修復/追加CI0。結果は以下へ同期する。
+
+CI39858883604 attempt1は2026-10-23 06:38:25〜06:42:08 JSTにcompleted/success、job120104101871全32step success。checkout0689de531b34e68d60038c0358b7bfa5ecbc9cf3はhead3577d7fdと同一treead5a219c。原log23 pytest summaryは46/4/61/48/36/57/39/74/47/33/77/26/49/166/13/458/67/36/132/149/13/128/46、合計1805 PASS/FAIL0/SKIP0。新12caseを含むshared/default128、実隔離native persistence46。CMEE/review/projection/Postgres16.15は実体、Auth/source/HTTPは合成で本人往復ではない。既存FastAPI on_event deprecation警告を保持する。原log841380bytes/SHA256 237a7340c2abe00698d7c42d6842f49245924795c95ee906c07cf03517215a24をmanifestへgzip+base64可逆保存。既存1793成功は旧sourceにのみ帰属する。privacy修復はPR4候補にのみ反映し、開発正本PR3@a536e50eは未変更。後続開発へ戻す際にこの2pathを落とさないこと。
+
+### 117.4 配置経路の実在性と承認の分離
+
+既承認workspaceでRender service/deployを再照会した。対象srv-d4ppfpm3jp1c73952bj0、live dep-db50bcd9fdbs73b5dgn0/5c8bd8e5d7f876335eb840ceee26883a030a34a5、起動uvicorn app:app --host 0.0.0.0 --port $PORT、linked main/autoDeploy offを維持している。Supabase Piece8tableのRLS enabledもmetadataで再確認し、row/RPC/DDL操作0。
+
+現Render pluginのtrigger_deploy引数にはserviceId/clearCache/workspaceIdだけでcommitIdがない。serviceのstartCommandを更新するtoolもない。plugin discoveryも既存Renderが有効であることを再確認したが、必要な2capabilityは提供されない。ローカルにRender CLIがなく、既存RENDER_API_KEY/RENDER_API_TOKENも未設定。新しいkeyを探したり、秘密値を要求/取得/出力したりしていない。汎用triggerやenv updateはlinked main/旧startで別sourceを起動し得るため呼び出さない。
+
+残る既存手段はRender Dashboardでの固定commit指定と起動コマンド変更である。ブラウザtoolの明文指示がservice plugin不足時のfallbackに事前許可を要求しているため、現在はブラウザ初期化/タブ/ログイン/設定保存/配置を一切行っていない。これは配置・有効化の承認不足ではなく、使える実行経路の不足。配置scopeを再承認へ戻さず、ブラウザ操作への切替だけを必要な確認として示す。今回未適用を「安全に配置できた」「完了」と呼ばない。
+
+### 117.5 次のexact操作と現在地
+
+承認済みconfigは600秒/iOS明示版とpreview/save/owner_read/owner_delete strict requested/ready pair true、public/read/visibility/export false。起動command全文はmanifest v157のapproved_runtime_configuration.start_commandに保持する。ブラウザ切替が許可され、利用可能な認証sessionで対象workspace/serviceを確認できる場合だけ、同じcommandと修正版exact SHAを適用する。保存操作が自動deployを起動するUIなら、linked mainを配置しない安全な固定sourceの手順を現物確認して選び、勝手に別branch/mainへ切り替えない。固定commit指定はRenderのManual Deploy→Deploy a specific commitを使用し、current commit identityとstatus live、/healthz、/app/bootstrapの実効8flag、未認証owner/private操作の拒否を確認する。実本人Authの通常private保存1件→同owner履歴/詳細はその後に確認し、service_roleで代用しない。
+
+稼働configurationはまだ適用していない。P-W1実Auth/本人再読、P-W2実Photos/Share/Android/backend receipt、P-W3本人端末/商品受入れ、M5独立残件を保持。配置・設定・DB・本人row・main merge効果0、automatic_progression=false。今回のprivacy修復は既存契約の因果箇所だけで、STRUCTURE_MAP_DELTA_NONE。結果/承認状態とmap/pin/全体現在地は同じ5資料へ同期する。

@@ -87,9 +87,9 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | export | 本人詳細→fresh GET→表示recordのID・row version・3hash・renderer一致→全canvas→明示Photos／Shareをsource接続 | 実OS写真保存・Share、Android新版export、backend receipt、本人端末商品受入れは未完。外部へ出た画像コピーは内部非公開／削除で回収できない |
 | 新renderer | iOS `piece.rn_bitmap_renderer.ios.v1`。検査した同一bitmapを表示／書出し。preview fit・構築は元8秒、完成saved画像は8秒後も保持 | live供給採用・商品採用は未完。Android新版の成立へ拡張しない |
 | 最新限定検証 | 新export正常8PNG＋native拒否6。JS979・新native44成功。旧195は176PASS／19FAILを保持 | CI39780623108 attempt1 completed／failure、head`d2e1244…`、10/22 JST21:42:54〜22:07:18。CI全体合格ではない。限定TECHNICAL_CREDITの記録あり、product_credit=0 |
-| live・次の未完 | 10/23のRender照会でliveは10/10の`5c8bd8e5…`、起動`app:app`、autoDeploy off。明示candidateのsave/quota/delete接続も同版には未配置。SupabaseのPiece8tableはRLS enabled、8RPC signatureのEXECUTEはpostgres/service_roleのみ。業務RPC・本人row操作0。最新ownerは入口§116、map§65.59、manifest v156 | [Piece限定API候補PR4](https://github.com/MassyuRed/mashos-api/pull/4)をlive基点に準備。既承認製品5＋test4同blob、既存workflow1。候補`08875643…`のCI39803099295は1793 PASS/FAIL0/SKIP0（合成Auth・隔離SQL）。配置・稼働採用・実Auth通常保存→同owner履歴/詳細は未実施 |
+| live・次の未完 | 10/23照会のliveは`5c8bd8e5…`、起動`app:app`、autoDeploy off。DB既適用/RLSはmetadata再確認、本人row/RPC操作0。現在ownerは入口§117／map§65.60／weekly§5.6.40／manifest v157 | MashはTTL600秒/private preview-save-owner-read-delete/全認証sessionの既存API配置・有効化を明示承認済み。PR4候補`3577d7fd…`は既存監視のURL ID混入を2path修復、CI39858883604は1805 PASS/FAIL0/SKIP0。Render pluginに固定commit配置/start更新がなくCLI認証もないため未適用。ブラウザ切替の許可だけが実行経路の次確認、配置scopeを再承認へ戻さない。実Auth通常保存→本人履歴/詳細は未実施 |
 
-詳細owner：[Piece map](current_structure/02_piece_current_structure.md)、[Piece入口](../Cocolon_Piece/00_read_first.md)、[manifest](../Cocolon_Piece/manifest.json)。10/23の同変更単位で、manifestのcurrent_entry/current_premise/current_structure pinを更新後の現物hash・bytesへ同期し、旧pin不一致を解消する。候補設定はpreview TTL600秒（新提案）と明示iOS版、private preview/save/owner read/delete、public/export OFF。既存resolverはapp単位のため同APIの全認証sessionへ及ぶ。技術的ready不足をCIや承認で免除せず、採用・配置・本人操作は別途の具体的承認対象。
+詳細owner：[Piece map](current_structure/02_piece_current_structure.md)、[Piece入口](../Cocolon_Piece/00_read_first.md)、[manifest](../Cocolon_Piece/manifest.json)。同変更単位でcurrent_entry/current_premise/current_structure pinを現物へ同期。承認済み設定はpreview TTL600秒、明示iOS版、private preview/save/owner read/delete、public/export OFF。同APIの全認証sessionへ及ぶ。技術的ready不足を承認やCIで免除せず、実Auth本人保存・本人実機/商品受入れは未確認。アクセスログ無効/httpx WARNINGの起動構成も準備済みだが未適用。
 
 ## 7. その他の全機能・共通基盤
 
@@ -145,7 +145,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | Emlis・CMEE実物 | API `cocolon_meaning_experience_engine/engine.py`、`emlis_thread_service.py`とthread source／question／answer_update／surface、RN `InputScreen`・`useEmlisThread`・`EmlisThreadModal`。API path prefixは`ai/services/ai_inference/` |
 | AI試験 | `observation_learning/trials/2026-10-21-qwen27-demo/README.md`と8出力JSON。`fine_tuning_performed=false`、`cmee_integration_performed=false` |
 | Analysis実物 | API `astor_material_snapshots.py`、`analysis_observed_service.py`、`watashi_map_service.py`、`kokoro_weather_service.py`、RN `WatashiMapV2Renderer`・access policy。設計04 §10 IF／§11 Saved、schema05 §7・9.6 |
-| Piece実物 | `PieceOwnerHistoryScreen`、`pieceExport`、`PieceExportCanvas`、`pieceRenderer`、`InputPieceActionArea`。入口§116／map§65.59／manifest v156、CI39780623108とAPI候補CI39803099295 |
+| Piece実物 | `PieceOwnerHistoryScreen`、`pieceExport`、`PieceExportCanvas`、`pieceRenderer`、`InputPieceActionArea`。入口§117／map§65.60／manifest v157、CI39780623108とAPI修正版CI39858883604 |
 | 周辺機能実物 | RootNavigator・MainTabsと5 Stack、Input／AnalysisHistory／TodayQuestionHistory／Nexus／Account／Ranking／Settings各screen、`lib/nexusApi`・home/account API transport、対応APIとaccess policy。`lib/iap/iapService.js` L432〜445・527〜531、`SubscriptionContext.js` L165〜234、API `api_public_profile.py` L81〜108、`navigation/linkingRuntime.js` |
 | 作業導線 | repository root `AGENTS.md`、観測学習README、work rules00／CURRENT_RULES R2／09／99・manifest、System Context00・task_profiles。元の必読incident・品質規則は継続 |
 
@@ -153,4 +153,4 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 次回はfresh headと変更pathを比較し、関係する根拠だけを再確認する。確認していない機能の検証日を更新せず、この一枚を「毎回全体を読む」入口として保つ。
 
-10/23 Piece差分は、既承認Render workspaceのread-only service/deploy照会、Supabase pg_catalog定義/RLS/ACL、liveとPR3のPiece5source差分、live基点のPR4候補全10path、CI39803099295原23summary・合成merge/candidate同treeを照合したもの。Emlis・Analysis・他機能の実装/配置/端末状態を今回新規再検証した意味ではない。
+10/23 Piece差分は、既承認Render workspaceのread-only service/deploy照会、Supabase pg_catalog/RLS、live基点PR4の2path監視privacy修復、CI39858883604原23summary・合成merge/candidate同tree、Mashの配置承認と利用可能toolを照合したもの。Render/本人データへの変更は0。Emlis・Analysis・他機能の実装/配置/端末状態を今回新規再検証した意味ではない。

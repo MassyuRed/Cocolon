@@ -2025,3 +2025,13 @@ P-W1の再開点を入口§116/map§65.59へ固定した。既承認workspaceの
 次の採用案は既存APIへの同候補配置＋明示factory起動、TTL600秒（未採用の新提案）と明示iOS renderer、private preview/save/owner read/deleteのみ。public/exportはOFF。ready根拠と限定使用範囲を確認して個別承認へ出し、CIやDB存在だけでreadyを自己認定しない。設定はapp単位で同APIの全認証sessionへ及ぶため、本人1件試験をowner限定有効化と呼ばない。技術的ready不足は承認で免除しない。実本人Auth通常保存1件→同owner GET/履歴/詳細が到達先であり、source候補PRをその成功としない。M5全体を新たな事前gateへ増やさず、独立残件として維持する。
 
 10/22通常保存目標は未達。10/23両OS共有も未成立で、P-W1稼働採用/本人往復、P-W2実OS/Android/backend receipt、P-W3本人端末/商品受入れが残る。10/24にこの実残差と10/31管理線への影響を戻す。新しい公開目標・自動延期・商品合格・進捗率の加点は行わない。資料5path/STRUCTURE_MAP_DELTA_NONE、manifest旧pinを今回現物へ同期。配置/設定/本人データ/実機/main merge0、product_credit=0、automatic_progression=false。
+
+#### 5.6.40 10/23 — 配置・有効化承認を受領、適用前のURL監視修復
+
+Mashは前回の600秒/private preview-save-owner-read-delete/全認証sessionの既存API配置案へ「進めていいよ」と明示承認した。配置・有効化の承認は成立済みとして記録し、同じ範囲の再承認を依頼しない。
+
+配置前確認で、既存request_perfがPieceのrecord/source/preview IDをURLからmetrics/logへ渡す経路をsource上で確認した。実漏出を観測したとはしない。既存middleware内で開始時固定path・終了時code-owned template/fallback・metrics後再上書きに修復。非Piece挙動を維持し、既存B12 testへ12caseを追加した。新helper/file/依存/公開contract0。PR4修正版3577d7fdの唯一CI39858883604 attempt1は06:38:25〜06:42:08 JSTにsuccess。原23summary合計1805 PASS/FAIL0/SKIP0、shared/default128/native persistence46。合成merge0689de53は候補と同tree。原log841380bytesを入口§117/manifestでdigest付き可逆保存。Auth/source/HTTPは合成で本人往復ではなく、旧1793成功は旧sourceに限定する。PR3正本は未変更、privacy2pathの戻し込みは未実施。
+
+既存Renderはlive5c8bd8e5/app:app/autoDeploy off。接続toolは固定commit指定とstartCommand更新に非対応、CLI/keyもないため、generic main deploy/危険なenv更新は0。ブラウザfallbackはtoolが別途の切替許可を要求しており、未初期化/未操作。これは配置承認待ちではなく実行経路の不足として示す。承認済起動構成にはaccess_log=False/httpx WARNINGを明示し、既存数値/エラー監視は保持する。
+
+現在配置/設定/本人DB/端末/main merge効果0、実Auth通常保存→本人履歴/詳細未完。10/22保存・10/23共有の未達を解消済みにしない。10/24のP-W1〜3実残差/10/31管理線への確認は維持し、未適用を進捗率や商品creditへ加点しない。STRUCTURE_MAP_DELTA_NONE、配置・設定の承認は受領済み、ブラウザ切替可否だけが適用経路の次の確認、automatic_progression=false。
