@@ -1,14 +1,14 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v130",
+  "schema_version": "cocolon.piece.workstream_manifest.v131",
   "generated_at": "2026-10-22 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v129",
-    "predecessor_head": "c79c06aaac7a1e38023e640f7c502653bd36ba48",
-    "carry_forward": "Apply Mash-approved exact V4 interpolation candidate. Preserve all prior failures/raw evidence. One new-source push CI only, no rerun or automatic progression.",
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v130",
+    "predecessor_head": "66be9cbedb8babd15b1c59cc1479a2fd10624747",
+    "carry_forward": "Approved exact source fully postverified; sole new-source CI39704913859 attempt1 running. Freeze source, collect raw results, no rerun or automatic progression.",
     "immutable_prior_evidence_references": [
       {
         "format": "git-commit-json-pointer",
@@ -110,17 +110,17 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "886925c5103b1222df3ca8b56a2d865a513e5b8c",
-    "raw_sha256": "524197f1d13b0b86b1a628b3faddba520a6d71bee3ec3bbe3eb9e2fed068a6ad",
-    "utf8_bytes": 556782,
-    "chars": 331217
+    "git_blob_sha1": "02b789edd23da1aee6df26a4a869b24db4f9081e",
+    "raw_sha256": "1729ecaf4d9e03ce861d6bbeeeebee666aab338e31a33e3c14f76ee301eaebd8",
+    "utf8_bytes": 557760,
+    "chars": 331873
   },
   "current_premise": {
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
-    "git_blob_sha1": "0c708f89816e888315a83cea6597d476f71ef69a",
-    "raw_sha256": "fd65ac931cd56d7bf79891163a5f9cfbd41fce631f2b46e3afffcc218dfe9f37",
-    "utf8_bytes": 525851,
-    "chars": 307300
+    "git_blob_sha1": "4dcc3b501eee4090f3ae18bc0bc99c1a55dd9c98",
+    "raw_sha256": "eeea2977419a451cd6c38d9ced2767b0f904ca0b33eccbe2176c65039f6406f0",
+    "utf8_bytes": 526358,
+    "chars": 307638
   },
   "product_definition": {
     "user_facing_name": "Piece",
@@ -415,12 +415,12 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "PIECE_WORK_ALLOWED",
-    "state": "APPROVED_V4_INTERPOLATION_REPAIR_SOURCE_APPLIED__SOLE_CI_PENDING",
-    "current_map_section": "65.46",
-    "current_entry_section": "98",
+    "state": "APPROVED_V4_INTERPOLATION_REPAIR_SOLE_CI_RUNNING",
+    "current_map_section": "65.46.1",
+    "current_entry_section": "98.3",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
-    "weekly_review_section": "5.6.26",
-    "first_unfinished_work": "承認済み候補native/runnerを適用。新sourceの既存CI一回を実行し全結果/原物を保存、成否を問わず停止。quote4M拒否/正式admission/通常保存は未完了。",
+    "weekly_review_section": "5.6.26.1",
+    "first_unfinished_work": "同sourceの唯一CI39704913859 attempt1の結果回収/保存だけを続ける。追加修正/再CI0、正式admission/通常保存は未完。",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 6,
@@ -562,7 +562,7 @@
     "operand_observation_same_source_rerun_allowed": false,
     "interpolation_repair_proposal_owner": "ios_preview_v4_interpolation_repair_proposal_20261022",
     "interpolation_repair_approved": true,
-    "interpolation_repair_ci_executions": 0,
+    "interpolation_repair_ci_executions": 1,
     "interpolation_repair_implementation_owner": "ios_preview_v4_interpolation_repair_20261022"
   },
   "durable_history": {
@@ -617,10 +617,10 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "0c708f89816e888315a83cea6597d476f71ef69a",
-    "raw_sha256": "fd65ac931cd56d7bf79891163a5f9cfbd41fce631f2b46e3afffcc218dfe9f37",
-    "utf8_bytes": 525851,
-    "chars": 307300
+    "git_blob_sha1": "4dcc3b501eee4090f3ae18bc0bc99c1a55dd9c98",
+    "raw_sha256": "eeea2977419a451cd6c38d9ced2767b0f904ca0b33eccbe2176c65039f6406f0",
+    "utf8_bytes": 526358,
+    "chars": 307638
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -793,17 +793,17 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "APPROVED_V4_INTERPOLATION_REPAIR_SOURCE_PREPARATION",
+    "classification": "V4_INTERPOLATION_REPAIR_RUNNING_CHECKPOINT_DOCS_ONLY",
     "paths": [
-      "ios/tempCocolon/PieceTextMetrics.mm",
-      "tests/native/run-piece-rn-canvas-ios.sh",
       "Cocolon_Piece/00_read_first.md",
       "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
       "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
       "Cocolon_Piece/manifest.json"
     ],
-    "product_source_changes": 1,
-    "test_source_changes": 1,
+    "source_commit": "66be9cbedb8babd15b1c59cc1479a2fd10624747",
+    "ci_run": 39704913859,
+    "product_source_changes": 0,
+    "test_source_changes": 0,
     "workflow_changes": 0,
     "new_files": 0,
     "new_ci_executions": 0,
@@ -87306,7 +87306,7 @@
       "Cocolon_Piece/manifest.json"
     ],
     "source_applied": true,
-    "ci_executions": 0,
+    "ci_executions": 1,
     "ci_limit": 1,
     "actions_reruns": 0,
     "post_result_source_edits": 0,
@@ -87321,6 +87321,36 @@
     "normal_save_reopen_complete": false,
     "formal_admission": false,
     "automatic_progression": false,
-    "product_credit": 0
+    "product_credit": 0,
+    "source_commit": "66be9cbedb8babd15b1c59cc1479a2fd10624747",
+    "source_tree": "f9dddc8a4fc4d02f6980cd5648596d50f2f9d5e6",
+    "run_id": 39704913859,
+    "run_attempt": 1,
+    "ci_status": "in_progress",
+    "ci_started_at": "2026-10-22T01:18:28Z",
+    "source_remote_full_match": true,
+    "changed_paths_verified": true,
+    "source_frozen": true,
+    "related_guard_run": 39704913858,
+    "checkpoints": [
+      {
+        "entry": "98.3",
+        "state": "APPROVED_V4_INTERPOLATION_REPAIR_SOLE_CI_RUNNING",
+        "facts": {
+          "source_commit": "66be9cbedb8babd15b1c59cc1479a2fd10624747",
+          "source_tree": "f9dddc8a4fc4d02f6980cd5648596d50f2f9d5e6",
+          "run_id": 39704913859,
+          "run_attempt": 1,
+          "ci_executions": 1,
+          "ci_status": "in_progress",
+          "ci_started_at": "2026-10-22T01:18:28Z",
+          "source_remote_full_match": true,
+          "changed_paths_verified": true,
+          "source_frozen": true,
+          "actions_reruns": 0,
+          "related_guard_run": 39704913858
+        }
+      }
+    ]
   }
 }

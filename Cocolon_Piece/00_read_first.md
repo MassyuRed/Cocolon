@@ -3568,3 +3568,10 @@ source1/runner1/結果資料4の承認6pathだけを新source commitへ反映し
 現時点はsource準備、CI未実行。ObjC++compile/UIKit描画/alpha対応/8秒/195成功は未確認。既知quote80ptの4,473,085pixel/4M拒否と、standalone19FAILの個別原因未特定は維持し、全体成功/修復完了へ読み替えない。新正常preview・raw・trap・opacityと元保存済み旧版を分けて判定する。新全alpha占有比較が改善しても、元各条件未達なら候補未採用のまま。
 
 今回STRUCTURE_MAP_DELTA_NONE（既存未採用V4内の参照補間指定修復、route/owner/wire不変）。DB/SQL/user rows/API/依存/本番/配布/main操作0。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。正式admission/通常保存→同owner再表示/画像保存共有/実機受入れとP-W1〜3の管理点は未完了であり、この単回結果へ自動進行を含めない。
+
+
+### 98.3 承認source全6fileを照合、一度CI開始
+
+source 66be9cbedb8babd15b1c59cc1479a2fd10624747/treef9dddc8a4fc4d02f6980cd5648596d50f2f9d5e6の承認6pathを全文読み戻し、changed-path setがnative1/runner1/資料4だけであることを確認した。CI39704913859 attempt1は2026-10-22T01:18:28Z（10/22 10:18:28 JST）に同sourceのpushで開始。新counter1/上限1、Actions rerun0。以後source/runner/patch/test/workflowを固定し、結果回収と保存だけを続ける。
+
+同pushの既存phase6-contract-guards run39704913858は別のcontract-guards 1jobであり、Piece診断/修復の追加実行に数えない。現在全6jobの結果は未確定。途中のiOSsource compile/patch stepはsuccessだが、新native195/実RN13/PNG/alpha対応/fit/期限の成功へ換算しない。今回checkpointは資料4fileのみ、STRUCTURE_MAP_DELTA_NONE、商品品質credit0、通常保存/本人再表示未完、automatic_progression=false。
