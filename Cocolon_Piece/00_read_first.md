@@ -3843,3 +3843,12 @@ Mashは§105の「この修復の適用と、新ソースでのCI一回」へ「
 ### 107. Window修復sourceを全文照合、一度CI開始
 
 承認source c43a8ae6f2661a971cfae9149a143ea547375b5a（親69c233019a2af86dba17546d4075ecd54d7a65af/tree4dc6984c96117b6d8193743d21d5c4f372c30c69）の全許可5pathをGitHubから全文readbackし、changed-path set一致を確認。既存push CI39727150432 attempt1が起動し、このWindow修復単位のcounter1/上限1を消費した。sourceを固定し、以後は原物/ログ/画像回収と判定のみ。旧run39717661329 failure/counter1は不変、新native44/RN12の成否は未確定。same-source rerun/結果後追加修正/別CI/正式採用/通常保存への自動進行0。PRに伴う既存の読取workflow・contract guardは別runであり、手動で検証runを増やしていない。STRUCTURE_MAP_DELTA_NONE（checkpoint資料4fileだけ）。
+
+
+### 108. 一度CI途中：Window例外を解消、新native44/44成功
+
+固定source c43a8ae6、一度CI39727150432 attempt1。native job119653577225は実header構文/旧patch/standalone compile後に実行し、新bitmap44個別名の全件・重複0・BITMAP_NATIVE_CHECKS=44 PASS=44 FAIL=0 SKIP=0を確認した。元44判定/faultを削らず、前回のmount直後例外を解消してUnicode/独立RGBA/透明/provider保持と最終解放/fault/資源/小数位相へ到達した。main→新summary約36.506秒、元90秒alarm不変。元検証用Window不備を四代入で解消した技術結果であり、正式採用や通常保存の結果ではない。
+
+旧175は全成功、旧V4は1PASS/19FAILを維持、旧V3別20は明示未実行。実行239unique＝220PASS/19FAIL、新44を旧195の19FAILへ相殺しない。native jobは旧期待未達でfailure。JS957 PASS/FAIL0/SKIP0/cancel0・12357.158562ms、Android source成功、export2jobは主要native工程が対象外のため今回新build成功へ換算しない。実RN jobは同じ一度CIで継続中、RN12/新画像/420時間は未確定。
+
+完了5job原ログとrun/job metadata・集計8memberをmanifest内interim_evidence_bundleへ可逆保存。source/期待/fixture本文/workflow不変、新counter1/上限1、追加run/追加修復0。STRUCTURE_MAP_DELTA_NONE（結果記録4fileだけ）、formal_admission/canSave/canExport/通常保存/同owner再表示/共有/実機は未完、automatic_progression=false。

@@ -1921,3 +1921,8 @@ source15b0a62a/CI39717661329 attempt1継続。JS957 PASS、iOS source/standalone
 ##### 5.6.34.1 Window修復source照合と一度CI開始
 
 入口§107／map§65.54.1／manifest v143。source c43a8ae6全5pathのremote全文とchanged set一致、一度CI39727150432 attempt1が起動。新counter1/上限1、旧failure不変、source固定・追加修復/再CI0。新native44/RN12結果未確定。P-W1正式admission/通常保存・同owner再表示は未完、資料4だけSTRUCTURE_MAP_DELTA_NONE。
+
+
+##### 5.6.34.2 途中：Window例外解消、新native44全件成功
+
+入口§108／map§65.54.2／manifest v144。一度CI39727150432/source c43a8ae6、新bitmap44個別名・summary全成功、重複0、main→summary約36.506秒。旧native175成功/V4 1PASS19FAILを保持し、計239unique/220PASS19FAIL。旧V3別20未実行、native jobはfailure。JS957・Android source成功、実RN12/画像/420は同run継続中で未確定。5job logs＋metadata等8memberを保存。source/条件不変、追加CI/修復0。P-W1正式admission/通常保存/本人再表示、共有/実機未完、商品credit0、結果資料4のみSTRUCTURE_MAP_DELTA_NONE。
