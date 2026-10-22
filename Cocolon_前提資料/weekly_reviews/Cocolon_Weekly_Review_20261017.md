@@ -1979,3 +1979,8 @@ source fbf0deaec8679ebf6a58f53e0702d2e437318680/tree26d330c5の変更20pathをGi
 #### 5.6.37 2026-10-22 — §112の具体修復を承認済み単位で実行
 
 Mashの「Pieceの残件作業を進めて」により、直前の末尾LF1byte修復＋新source CI一回案を実行する。前提資料・全体設計01/全file地図01A/B/C・current Piece map・本weeklyを最新GitHubへ照合。rootがwrite/CI、補助はread-only。patch9,360→9,359byte、末尾以外不変、実pinned parserと全4file適用後byte不変の独立確認成立。変更はpatch＋資料4path、STRUCTURE_MAP_DELTA_NONE。今回counter0/上限1、前39750366489の消費1/failureと未実行export14を保持。新一度CIで正常PNG8/拒否6を確認し、旧195/新44/旧RN13/12/17と旧失敗期待を保つ。追加修復/再CI/稼働設定/DB/実Auth/実OS/実機/main merge0。P-W1稼働本人保存再表示をP-W2source成功へ置換せず、商品完成は未確認、automatic_progression=false。詳細は入口§113、manifest同修復単位。
+
+
+##### 5.6.37.1 LF1byte修復を反映、Piece CIの起動条件不備を特定
+
+入口§113.1/114/manifest v152。source5a9812bdの指定5path全文・SHA/bytesを照合、patch末尾1byte修復完了。一般5run success、Piece専用run0、今回sourcepush1/CI0/旧Actions rerun0。新export14は未実行、過去の成功を加算しない。起動filterのpatch名の未escape `+`がGitHub pattern文字として扱われる既存不備を公式仕様と独立reviewで確認。前回は他の変更pathで起動していた。今回scopeはworkflow変更0のため修復を追加せず、1行のsingle-quoted escape候補と既存CI一回の具体案を提示する。候補5path＝workflow＋資料4、job/製品/期待/依存不変、未承認/未適用。旧run39750366489失敗/消費1は維持。BLOCKER_NARROWED、商品credit0、P-W1稼働本人保存/実OS/実機未完。STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。

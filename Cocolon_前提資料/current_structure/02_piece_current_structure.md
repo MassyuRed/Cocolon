@@ -3436,3 +3436,8 @@ source fbf0deaec8679ebf6a58f53e0702d2e437318680/tree26d330c5の変更20pathをGi
 ### 65.57 承認済み末尾LF1byte修復の独立単位
 
 入口§113/weekly§5.6.37/manifest v151。Mashの続行指示により§112の具体修復＋新source CI一回を採用。patch9,360→9,359B、末尾LFだけ除去、pinned parser4file/9hunkと全4file適用後byte不変を独立確認。既存patch＋資料4の5path、logic/test/workflow/依存変更0、STRUCTURE_MAP_DELTA_NONE。今回counter0/上限1、旧run39750366489消費1/failureを維持、Actions rerun0。新export8PNG＋拒否6はCI待ち。追加修復/再CI/稼働有効化0、P-W1本人実Auth保存再表示・実OS/実機/商品採用は未完。
+
+
+#### 65.57.1 最終：LF修復完了／未escape + の起動条件でPiece CI未実行
+
+入口§113.1/114、weekly§5.6.37.1、manifest v152。source5a9812bd/tree8ed9ba1aの5path全文/SHA一致。末尾LF1byte修復は成立。一般5run successだがPiece CI登録0、今回sourcepush1/CI executions0/rerun0、新export14/PNG未実行。workflow pathsのpatch名`+`がliteral escapeされず今回差分に一致しないことを公式仕様と照合。承認済み5pathにはworkflowを含まずworkflow変更0を維持した。次の具体候補は当該1行をsingle quote＋\+へ修復し既存CI一回、未承認/未適用。製品logic/job/期待/依存不変。旧39750366489失敗/消費1保持、BLOCKER_NARROWED、validation_success=false、追加修復/稼働/実OS/実機0。STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。

@@ -3966,3 +3966,26 @@ Mashの今回の「Pieceの残件作業を進めて」を、直前に提示し�
 patchの最終LF一つだけを除去した。9,360→9,359byte、SHA256 383d4700bd13adadc7f7f22b92d0184cd522a45a839251a9ceb8709e17d850bd → cc46937cde1b767f564c5597313f956d090d6ecf6bfa406a666de3d0ef253399。pinned patch-package8.0.1実parserの全4file/9hunk成功、npm view-shot5.1.1原本への全4file適用成功、元patchと修復patchの全適用後bytes一致を独立照合した。製品logic/test/fixture/runner/workflow/依存の変更0。STRUCTURE_MAP_DELTA_NONE、source責務地図は§65.56を維持する。
 
 GitHubで変更5pathと全文を照合後、新source pushによる既存CIを一度だけ行う。今回counter0/上限1、旧Actions rerun0。旧native195/新44、旧RN13/bitmap12/admitted17の元条件を保持し、新export14＝saved PNG8＋native拒否6を別判定する。旧失敗を削らず全体結論と分ける。新compile/runtime/期待条件未達なら原actualを保存して終了し、追加修復/再CIへ自動進行しない。API/DTO/DB/flag/env/deploy/実Auth/実Photos/Share/本人実機/main merge効果0。P-W1稼働供給と本人保存再表示・P-W2実OS・P-W3商品受入れは未完、product_credit=0、automatic_progression=false。
+
+
+### 113.1 LF修復を反映・全文照合、Piece CIは起動されず未実行
+
+source5a9812bd0005055ea336c5b26db9c60ff5d27227/tree8ed9ba1a4fee5463137ec1711ec6e368db0e6604（親7e3350e1）の変更5path/全blob全文とlocal SHA/bytesを確認した。patchは指定どおり9,359B/hashcc46937c、末尾1byte以外不変。元patchからの修復完了は成立する。
+
+一方、source push後のGitHub Actions一覧では一般5runがsuccessで終了したが、Piece RN preview and owner contractsのrun登録は0。今回のPiece CI executions=0、source pushes=1、Actions rerun0。前回39750366489の消費1/failureは保持する。新export14/PNGは今回も未実行で、前回のJS979/native44や画像を今回の実行結果へ転用しない。
+
+原因を既存workflowのpath filterへ絞った。`patches/react-native-view-shot+5.1.1.patch` の `+` は未escapeで、GitHub公式のfilter仕様では「直前文字の一回以上」のpattern文字である。今回変更は当該patch＋資料4のみで、他のpathsは一致しない。前回はcomponents/tests等が同時変更されていたため起動していた。起動条件の見落としはrootの確認不足。workflowのjob内部scopeはgit diffの`patches`/workflow pathを確認しており、起動後は全対象build条件が成立する。
+
+PRIMARY_OUTCOME=BLOCKER_NARROWED、patch_format_repaired=true、validation_success=false、bounded_work_complete=false。商品完成/稼働有効化のcredit0。今回承認済み5pathにworkflowは含まれず、workflow変更0という明示境界があるため、その場で起動条件を変えたり別pathへ無意味な変更を加えて起動しない。結果資料4pathだけを反映し、ソースは固定する。STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+## 114. 起動条件1行だけの修復案 — 未承認・未適用
+
+目的は、修復済みの同一製品sourceを元の既存CIで一回確認し、新export正常8PNG＋native拒否6の元条件を判定すること。新test/新機能/新runnerを作らない。実行には未成立の起動条件修復が必要であり、行わなければ今回14条件は未実行のまま残る。
+
+候補は `.github/workflows/piece-rn-contracts.yml` のpaths内一行だけを `      - 'patches/react-native-view-shot\+5.1.1.patch'` へ変更する。旧行は同pathの無quote・無escape版。19,409→19,412B、SHA256 800870d8376c55883f69040edb9bce7e5abf3e436e269c69ddafcf340551257d → 1349c188af68d0c0564a4d60bbc08efa7b03186dbaaed162a1ce0bf20159cabc。全候補bytesと一行差分はmanifest同proposalに固定した。独立read-only reviewはYAML parse後の全objectが当該scalar一つ以外同一、scalar内のbackslash一つ保持を確認した。job/steps/permissions/timeout/期待/製品logic/依存は不変。
+
+承認対象はworkflow1＋同じ結果資料4の既存5path、新source pushの既存Piece CI一回だけ。一般checkは既存自動実行のまま。旧runのActions rerun0。前回・今回の原履歴/counterは保持し、新単位を分ける。成功は実pinned patch apply/buildと、旧native195/新44・旧RN13/bitmap12/admitted17を保持した上で新PNG8と拒否6の元条件/全画像原物を確認すること。旧失敗を削って全体GREENにしない。新compile/runtime/期待条件未達は原actualを保存して終了し、修復追加/再CI/採用/稼働/DB/実Auth/実OS/実機/mainへ進めない。追加費用は既存CI一回分、所要は未実測（過去同CIは約11〜23分、今回の所要保証ではない）。
+
+共同推奨はこの一行修正である。既存起動契約のliteral patch名を直す最小差分で、無意味な製品変更や別CI経路を作らない。Rule18§11.3のscope/path変更と明示workflow変更0境界を超えるため、Mashの個別承認対象。§112の承認をworkflow修復へ流用しない。approval未成立、candidate未適用、CI0、automatic_progression=false。
+
+公式根拠: https://docs.github.com/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet （+ は直前文字の一回以上。literal名にはescapeが必要）。
