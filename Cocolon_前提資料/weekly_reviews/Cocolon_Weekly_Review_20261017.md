@@ -1989,3 +1989,8 @@ Mashの「Pieceの残件作業を進めて」により、直前の末尾LF1byte�
 #### 5.6.38 2026-10-22 — §114を明示承認、起動条件1行を適用
 
 Mashの「進めていいよ」を受領。入口§115/map65.58/manifest v153。fresh7ea8143cと全体設計/全file地図/本weeklyを照合し、同時進行の観測会資料を保持する。workflow patch名のliteral + escape一行だけを承認固定全文へ置換、YAML内の他全job/steps同一、製品/検査/依存変更0。今回workflow＋資料4の5path、STRUCTURE_MAP_DELTA_NONE、source後の既存CI一回はcounter0/上限1/rerun0。旧CI39750366489消費1/failure、LF修復push1/CI0は過去単位として保持。新8PNG/拒否6と旧195/新44/RN13/12/17を原条件で確認し、新失敗なら原actual保存で停止、修復/再CIを追加しない。P-W1稼働本人保存/実OS/実機未完、商品credit0、automatic_progression=false。
+
+
+##### 5.6.38.1 source照合と一度CI開始
+
+入口§115.1/map65.58.1/manifest v154。source d2e1244cの5path全文/blobSHA/bytes一致。起動条件修復後、唯一のPiece CI39780623108 attempt1が21:42:54 JSTに開始し、今回counter1/上限1を消費。全6job実行中、新8PNG/拒否6と新旧群の結果は未確定。source固定、追加修復/再CI/採用/稼働効果0。checkpoint資料4のみSTRUCTURE_MAP_DELTA_NONE、automatic_progression=false。

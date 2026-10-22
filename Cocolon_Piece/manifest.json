@@ -1,6 +1,6 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v153",
-  "generated_at": "2026-10-22T21:41:45.314352+09:00",
+  "schema_version": "cocolon.piece.workstream_manifest.v154",
+  "generated_at": "2026-10-22T21:44:41.514096+09:00",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
@@ -482,10 +482,10 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "64deb00f78679015a29451f2974cb817e846b29b",
-    "raw_sha256": "7feead8d35407019bb6106d73ef7c1b69931ab08cf980b653bb4e65089866dd2",
-    "utf8_bytes": 641330,
-    "chars": 381467
+    "git_blob_sha1": "24fec0085b034a041c6f5437467007c5a9d2b108",
+    "raw_sha256": "1e00fc5d1ee1d1eb747c594e379a4155aaec0c0c94d2aae923632e057a7cbecb",
+    "utf8_bytes": 641976,
+    "chars": 381924
   },
   "current_premise": {
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
@@ -792,11 +792,11 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "PIECE_WORK_ALLOWED",
-    "state": "APPROVED_TRIGGER_REPAIR_SOURCE_CI_PENDING__P_W1_LIVE_AUTH_PENDING",
-    "current_map_section": "65.58",
-    "current_entry_section": "115",
+    "state": "TRIGGER_REPAIR_ONE_CI_RUNNING__P_W1_LIVE_AUTH_PENDING",
+    "current_map_section": "65.58.1",
+    "current_entry_section": "115.1",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
-    "weekly_review_section": "5.6.38",
+    "weekly_review_section": "5.6.38.1",
     "first_unfinished_work": "Adopt actual runtime renderer supplier and verify real Auth/normal input preview→explicit private save→same-owner history/detail; new bitmap export/share and physical device acceptance remain incomplete. Source unit closed, no automatic gate advancement.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
@@ -1180,17 +1180,16 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "APPROVED_ONE_SCALAR_CI_PATH_FILTER_REPAIR",
+    "classification": "SOURCE_READBACK_AND_ONE_CI_CHECKPOINT",
     "paths": [
-      ".github/workflows/piece-rn-contracts.yml",
       "Cocolon_Piece/00_read_first.md",
       "Cocolon_Piece/manifest.json",
       "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
       "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md"
     ],
-    "workflow_trigger_scalar_changes": 1,
-    "production_source_changes": 0,
-    "new_piece_ci_executions": 0,
+    "source_changes": 0,
+    "new_piece_ci_executions": 1,
+    "additional_ci_executions": 0,
     "api_db_env_flag_deploy_device_effect": 0,
     "structure_map": "STRUCTURE_MAP_DELTA_NONE",
     "automatic_progression": false
@@ -92071,7 +92070,7 @@
     "automatic_progression": false
   },
   "ios_bitmap_export_ci_trigger_repair_20261022": {
-    "state": "APPROVED_EXACT_TRIGGER_SCALAR_APPLIED_SOURCE_PREPARED_CI_PENDING",
+    "state": "SOURCE_VERIFIED_ONE_CI_RUNNING",
     "approval": {
       "user_instruction": "§114の修復案どおり、起動条件1行の修正とCI一回 → 進めていいよ。",
       "proposal_commit": "68b2d19dd7b6298bc01da72c0d34c3351981a38a",
@@ -92104,11 +92103,15 @@
     },
     "independent_review": "PASS; candidate allbytes/hash exact, YAML whole object equal except paths[20]; all jobs unchanged.",
     "ci": {
-      "executions": 0,
+      "executions": 1,
       "limit": 1,
       "actions_rerun": 0,
-      "result": "PENDING",
-      "post_ci_source_repair": 0
+      "result": "IN_PROGRESS",
+      "post_ci_source_repair": 0,
+      "run_id": 39780623108,
+      "attempt": 1,
+      "started_at": "2026-10-22T12:42:54Z",
+      "url": "https://github.com/MassyuRed/Cocolon/actions/runs/39780623108"
     },
     "protected_conditions": {
       "old_native": 195,
@@ -92131,6 +92134,11 @@
     "product_credit": 0,
     "bounded_work_complete": false,
     "validation_success": false,
-    "automatic_progression": false
+    "automatic_progression": false,
+    "source_commit": "d2e1244c36a480b9c04c1a0cbb3b55df3409f8c5",
+    "source_tree": "2e1927facc6da14b8d0b406c85569e5c3b5b416a",
+    "source_changed_paths_verified": 5,
+    "full_blob_readback": true,
+    "source_pushes": 1
   }
 }

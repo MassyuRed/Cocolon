@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§115／map§65.58／weekly§5.6.38／manifest v153。Mashの§114明示承認に基づき、CI起動条件のpatch名1項目だけをliteral +へ修復。新sourceで既存CI一回を実行予定（counter0/上限1）。製品logic/job/期待/依存は不変、新export8PNG＋拒否6の結果は未確定。P-W1実保存/実OS/本人実機は未完です。**
+**最新は入口§115.1／map§65.58.1／weekly§5.6.38.1／manifest v154。承認済み起動条件1行修復のsource d2e1244cを全文照合し、Piece CI39780623108 attempt1が開始。今回counter1/上限1、rerun0、source固定。新export8PNG＋拒否6の結果は未確定。P-W1実保存/実OS/本人実機は未完です。**
 
 ### §99の判断案（履歴）
 
@@ -3446,3 +3446,8 @@ source fbf0deaec8679ebf6a58f53e0702d2e437318680/tree26d330c5の変更20pathをGi
 ### 65.58 承認済みCI起動条件の1行修復
 
 入口§115/weekly§5.6.38/manifest v153。Mashの§114明示承認に基づき、既存workflow paths内のpatch名一項目だけをsingle quote＋\+へ修復。全candidate bytesは承認案hash1349c188と一致、YAML object差は一scalarだけ、全job不変。workflow＋資料4の5path、製品logic/test/fixture/期待/依存変更0、STRUCTURE_MAP_DELTA_NONE。新source既存CI一回はPENDING、今回counter0/上限1/rerun0。旧39750366489消費1/failureとLF修復push1/CI0を保持。旧195/新44/RN13/12/17と新export正常8PNG/拒否6を元条件で分離判定する。追加修復/再CI/稼働/実OS/実機0、商品未完、automatic_progression=false。
+
+
+#### 65.58.1 source固定、一度CI開始
+
+入口§115.1/weekly5.6.38.1/manifest v154。source d2e1244cの5pathを全文・SHA照合、唯一CI39780623108 attempt1開始、今回counter1/上限1/rerun0。全6job実行中、新export14/PNGは未確定、追加修復/再CI/有効化0。checkpoint資料4のみSTRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
