@@ -16,6 +16,10 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
+**最新は入口§99／本map§65.47／weekly§5.6.27／manifest v135です。根拠ある次の設定修復は特定できず、検査した同一bitmapを表示する新iOS preview方式の具体案を保存しました。描画元・比較方法・見え方が変わるため限定実装＋一度CIはMash判断待ち。今回はsource/CI0、旧V4失敗/未採用STOPを保持し、正式admission/通常保存/本人再表示は未完了です。**
+
+### §98.5の結果（履歴）
+
 **最新は入口§98.5／本map§65.46.3／weekly§5.6.26.3／manifest v134です。V4参照補間修復を承認どおり適用し一度CIを完了しましたが、総合failure。補間trueは61件で実測できても占有不一致は残り、新preview8件は全未成立。JS949/旧native175は成功、新V4は1PASS/19FAIL。原物を保存し候補未採用STOP、正式admission/通常保存/本人再表示は未完了です。**
 
 ### §97候補判断時点（履歴）
@@ -3312,3 +3316,8 @@ native原境界62local拒否の61件はstage83の全logical1占有不一致、qu
 ##### 65.46.3 最終：承認修復＋一度CI完了、補間有効でも占有不一致、未採用STOP
 
 入口§98.5/manifest v134。承認source66be9cbeの唯一CI39704913859 attempt1は全6job終了/failure。JS949/旧native175/Android source成功、新V4 1PASS/19FAIL、旧V3 20未実行。export2job主要native工程skip。実RN13件の新preview8は全unavailable/PNG0/fit0、旧saved1のみnative_checked、raw3+trap1はmeasurement_unavailable。stage83の61件すべてで補間trueと不一致を実測し、初差はactual0/ref有52・actual有/ref無9へ変化。27件はbbox同一でもmask不一致、単純な補間flag変更では修復できない。quote4M拒否継続。全6＋guard元logs/元report/PNG/map/xcresult JSON/台帳/解析を可逆保存、完全原ZIP55,728,124byte/998memberもdigest一致で保存済み。新counter1/上限1・rerun0・追加修正0。BLOCKER_NARROWEDは試した単一修正の不足確認だけ、商品品質credit0。候補未採用/DETOUR_RISK_STOP、通常保存/本人再表示/実機未完、資料4fileのみSTRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+
+##### 65.47 2026-10-22 — 同一bitmap表示への方式判断案（未実装）
+
+入口§99／manifest v135に新方式の具体判断案を保存。現証拠から座標/clip/CG stateの一意な修復は確定できず、推測flag/追加診断CIを止める。推奨は新iOS piece.rn_bitmap_preview.prototype.v1：最終logical1の透明text/branding bitmapを検査し、同じ不変CGImageをnative viewへ直接表示する。旧自然Text/nativeS参照と同じ品質・契約とは認定せず、見え方/比較方法変更はRule18§11.3 LEVEL3の判断対象。小数位相一回/整数移植/透明段階の全画素保持/同image layer全cell一致、元8秒/90秒/4096辺/4Mpixel/32MiBを固定。既存18path限定の製品実装＋一度CIが候補（未承認、今回source/CI0）。旧195期待/RN13を維持して新group8画像＋raw3＋host拒否を別評価し、未達は一回で未採用STOP。後日再表示は保存text/recipe/renderer版から再構築、各transaction内で画像同一；PNG永続化/API/DB追加なし。正式admission/通常保存/本人再表示/写真共有/実機受入れ未完、商品credit0、DETOUR_RISK_STOP/automatic_progression=false。

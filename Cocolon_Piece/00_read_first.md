@@ -3641,3 +3641,87 @@ source後の変更集合は資料4fileのみで、native/runner/patch/test/fixtu
 PRIMARY_OUTCOME=BLOCKER_NARROWEDは「補間trueの実作用を確認し、このflagだけの修正では全占有一致を直せないと実測した」範囲に限定する。再利用可能な合格renderer/商品品質creditは0、validation_success=false/unadopted=true/DETOUR_RISK_STOP。bounded_work_complete=trueは承認された適用＋一度検証＋結果保存の単位だけで、formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。
 
 次の未完exact1は、残る参照合成と自然layerのfilter/占有対応を既存品質契約内で直接修復する具体案の設計。唯一根因/次の検証済み修正案は未成立であり、追加修復/診断family/同source再実行/次CIへ自動進行しない。quote資源方式、正式renderer admission、採用版saved key/profile/InputScreen供給、通常保存→同owner再表示、写真保存共有、実機受入れとP-W1〜3管理点は未完了。今回承認範囲で停止する。
+
+
+## 99. 2026-10-22 — 検査した同一bitmapを表示する方式の判断案（未承認・未実装）
+
+### 99.1 再開と結論
+
+Mashの新しい「Pieceの残件作業を進めて。」を受け、head e1eff1d6e08ebc3bae726492e4d5af32336be055／tree dd696f322bd3720f1a1e0f922063b692beb99e5b／1917件・truncated=false、API head a536e50ee284785f585ac73329ef2947dca8bba9をfresh確認した。既存materialized 98fileは全てremote blobと一致。前提・current rule・incident全文・01/01A/01B/01C全体設計・全file index/tree・Piece入口/manifest/map・最新weekly20261017を確認した。system_context prepareはtask_profiles.json欠落でcode2、許可済みの原資料直接読取へ戻した。root単一writer、補助3担当は読取reviewのみ、PIECE_WORK_ALLOWED。過去の一回CI・失敗・未採用は消費済みのまま保持する。
+
+独立した座標・描画state・商品経路のreviewとrootの原物再確認では、現契約内で因果が確定した次の一行修復を見つけられなかった。61比較は全てlocal/phase[0,0]。記録extentからpaintCTMを再構成した残差は0、first mismatch中心はclip端から最短約9.50pt内側である。placed位相や単純clip端を原因とは断定できない。同じTextKit共有paintでも、自然UIKit contextの全描画stateとCA合成写像の同値は現証拠では証明できず、未記録のAA/textMatrix等を原因と扱わない。補間trueで52件actual空/ref占有、9件actual占有/ref空へ変わった事実は、次のflag変更を根拠づけない。
+
+**推奨はexact1：自然Textと別参照を一致させ続ける経路を保留し、欠けを検査したアプリ所有bitmapそのものを新iOS previewへ表示する方式を、一回の製品実装＋付随検証単位として試す。** 旧V4の修復・合格・契約同値とは呼ばない。§85.3の未採用案の自動再開でもなく、現在の実装点と元上限に合わせた新しい方式判断である。今回行ったのはこの設計・原典確認・資料反映まで、製品/test/runner/workflow変更0・新CI0・DB/API操作0。資料反映に商品品質creditを付けない。
+
+### 99.2 商品への意味と判断差
+
+別preview `piece.rn_bitmap_preview.prototype.v1`、別検査 `piece.native_bitmap_canvas.v1`を使う。本文・段落・grapheme・catalog/font候補とfloor・B9選択順・theme/ratio/branding・1080×1350または1080×1920・余白・欠字/ellipsis/本文削除0は維持する。旧版の外観やsaved recordを同じversionで書換えない。
+
+変更するのは描画元と証明の対象である。自然RN TextのnativeS描画を別画像へ復元する代わりに、最終出力と同じlogical1/scale1のRGBA8/sRGB文字画像を自ら生成する。旧A/B/CとnativeS参照の検出感度を継承したとは主張しない。新方式では**選択行全体の非clip描画→同じ画素の最終canvasへの保持→同じCGImageを持つ表示layerの全logical1cell占有一致**を検査する。未知backingの読み出しや推定、許容差/alpha閾値/1px膨張/差分率による通過は採用しない。
+
+文字のAA、細線、emoji、選択fontや配置に現自然Textとの可視差が出る可能性がある。元catalog内の有効なink overflowによる次候補以外のfont縮小は行わず、資源拒否は画像unavailableのまま。scale1を「現方式と同じ品質」「高速化が成立」と先に認定しない。原寸と通常表示サイズの比較・目視で本文/記号/色/余白/brandingの可読性を確認し、明白な崩れや欠けなら不採用にする。physical deviceとAndroidの受入れは別途未完として保持する。
+
+### 99.3 最小の実装と所有権
+
+1. 既存B9の計画と選択行を再利用する。新profileをpieceMeasuredWrap.blockContextのV5探索allowlistへ明示追加し、旧profileを偽装しない。nativeは同じRCTTextViewの本文・属性・TextStorage/LayoutManager/Container・全glyph range・独立5値・grapheme/禁則を確認する。shared paintを使う計測用Textは表示/読み上げへ重複させない。自然contents/paint-gridを新方式の画素証明へ使わない。
+2. native既存PieceTextMetrics.mmに、bitmap生成entryと専用native view/managerを同居させる。新service/registry/cache/file/依存は増やさない。1080×Hの透明text＋branding canvasを確保し、選択行ごとのTextKit ink±2fontをscale1で非clip描画する。行のローカルinkから既存のalignment/lineHeight/gapと余白に従い配置pを決め、最終pの小数位相を含めて描く。元期限内の必要なlocal/placed描画を同一の製品操作内で行い、失敗後のextent拡張retryやoffset探索はしない。
+3. 各rowの整数buffer原点o=floor(拡張ink+p)を使い、画素(i,j)はfinal(o.x+i,o.y+j)へ整数移植する。小数位相はdraw CTMへ一度だけ含め、copy後に再加算/丸め/移動/resampleしない。透明pixelで他行を消さず、占有cell同士の重複を拒否する。全行本文・brandingを一枚ずつ検査し、外縁占有0・欠字0・行/安全余白内・body/branding重複0と、元sourceの不変を確認する。行画像は次行前に解放する。
+4. 欠け検査は透明text/branding canvasで行う。背景で全面opaqueにしてからalpha>0を検査することは禁止する。背景色は既存固定canvasの別Viewに保ち、画像との色/ratio/branding bindingを固定する。全source占有cellが同じ整数位置に保持されたことを確認し、その完成した透明canvasをprovider所有の不変CGImageへ移す。移譲後の画素書換え0。
+5. 新native viewのlayer.contentsへ**この同じCGImage**を直接設定する。PNG/base64/JS画素/Image decode/ディスクcacheを経由しない。bounds=1080×H、contentsScale=1、contentsRect/Center=full、gravity=resize、identity transform、期待opacity、clip/mask/shadow/animationなしを閉条件とする。表示layerのlogical1出力を同じ既知CGImageのmaskと全cell比較し、alpha>0の真偽が一つでも異なれば拒否する。画像identityと設定は検査前後で一致させる。画面上は既存固定canvasの縮小だけを使い、後からrowを動かさない。
+6. bridgeへ画像を出さず、閉じた結果schemaでversion/profile、native canvas tag、preview/key/binding、artifact token、寸法/scale、行の元identity/配置/ink、検査完了を返す。新request/resultの全fieldsをdecoderで照合し、unknown/missing/nonfinite/version/token違いを拒否する。現props/plan/generation/node/期限とnative画像の両方が同じ場合だけ表示とlocal fit handleを発行する。onReadyだけでは許可しない。本文/recipe変更、unmount、node交換、bounds/image/config変更、失効は表示・fit・native画像を失効させ、旧遅延結果を採用しない。Androidは新profileを拒否し、未登録native viewを初期化しない。
+
+provider最終解放までbudgetを返さない現PiecePixelsImage所有権を再利用し、旧generation/layer残存分を含め全新旧V4のcode-owned rasterで同じprocess budgetを共有する。完成canvasと最大rowは8,294,400＋16,777,216＝25,071,616bytes。row解放後の表示比較ならcanvas＋actual＋bitsetは16,848,000bytes。これらは配列以外の予約を含む上限保証ではなく、全live pixel/bitsetを実装で予約し32MiB超過は拒否するための設計上の内訳である。CA/GPU/OS内部cacheやTextKit全体のメモリまで32MiBと主張しない。
+
+各bitmap4096辺/4,194,304pixel、code-owned live raster32MiB、Card開始から元8秒のwall＋monotonic期限、元native90秒alarmを維持する。quoteをnativeSで作る旧4,473,085px拒否は未解決履歴のまま残す。新scale1生成は別方式の正規寸法で評価し、上限変更/領域縮小/tile化/失敗を次fontへ分類変更して回避しない。新方式でも上限/期限に達すればSTOP。
+
+### 99.4 正式保存と再表示への接続
+
+この一回はpreviewの完成画像とlocal fitまで。正式renderer admission、runtime/flag有効化、通常保存、export製品利用は開放しない。InputScreenは現在正式admission providerを供給していないため、画像が表示できても保存完成ではない。
+
+PCE5 render reproducibility §1/4/5/7/9の原文はcross-device PNG byte同一を要求しない。保存済み本文/recipe/catalog/renderer版から後日再構築し、**各描画transaction内で検査した同一bitmapを表示・将来exportへ渡す**という意味である。PNGそのものを永続保存する新仕様は足さない。API保存要求と閉じたowner DTOへURI/画像/row planを追加しない。旧recordは旧rendererで再表示する。
+
+成立後の残件は、採用renderer版とsaved reader/key/profileの明示対応→InputScreen正式admission供給→既存PieceCreateController/requestPieceSave→本人GET/history/detailで同版再構築→既存exportの本人GET/Photos/Share/cleanupを使い同CGImageからPNGを得る対応→実機受入れ。既存controller/API/DBを作り直さない。この将来順を今回の自動実行許可とは扱わない。
+
+### 99.5 承認候補の範囲と一回検証
+
+候補は既存18pathに限定する。製品5path：
+
+- `ios/tempCocolon/PieceTextMetrics.mm`
+- `features/piece/pieceLayout.js`
+- `features/piece/pieceRenderer.js`
+- `features/piece/pieceMeasuredWrap.js`
+- `components/piece/PieceVisualCard.js`
+
+
+付随検証9path：
+
+- `tests/native/piece-ios-react-shim.h`
+- `tests/native/piece-text-metrics-ios.mm`
+- `tests/native/piece-rn-canvas-entry.js`
+- `tests/native/piece-rn-canvas-fixtures.cjs`
+- `tests/native/piece-rn-canvas-ios.m`
+- `tests/native/run-piece-rn-canvas-ios.sh`
+- `tests/piece-v2-renderer.test.js`
+- `tests/piece-v2-measured-wrap.test.js`
+- `tests/piece-v2-preview-display.test.js`
+
+
+記録は既存入口/manifest/current map/最新weeklyの4path。新tracked file0、RN patch/Pod/依存/workflow/Android/API/DB/本番/署名/配布/main merge0。新native viewは同じbitmapを商品へ表示する本体であり、診断専用helperを追加する単位ではない。ここに示すpathで実現不能なら範囲を黙って増やさず未実行差を示して停止する。
+
+検証はsource適用後の既存push CIを一回だけ。実装中の静的確認/既存JS検査は必要な範囲で行い、原fixture/本文/期待/旧版比較器を変更しない。旧native175＋旧V4 20＝195期待と旧V3 20未実行の区別、元RN13names/順序/本文/旧saved DTOを保持する。旧V4の既知19FAILを新方式の成功へ転記せず、旧groupがfailのままならCI全体をgreenと呼ばない。
+
+新groupでは元preview8条件を新profileとして複製し、全8件の完成画像・current-fit true/wrong-token false・全本文/段落/inspection/余白/branding・420文字も元8秒内を要求する。raw spaces/Hebrew/mixed-bidiは本文・全行・新画像の実描画一致を追加確認する。元clip trapは元期待のまま保持し、新native bitmap hostをcrop/設定変更したtrapでは拒否/fit無効を要求する。新wireのunknown/missing/nonfinite/token/世代/期限/画像交換、pixel/side/livebudget超過、外縁・欠字・source変化・占有重複・host clip・provider生存/最終解放を同じ実装に付随して検査する。失敗を件数削除/fixture変更/旧flagへfallbackして通さない。
+
+新8完成PNGは同font/行/recipeの自然Text参考表示と原寸/通常サイズで並べ、本文・約物・細線・bidi/ligature・emoji・branding0.8・対比・余白をrootが目視する。参考画像を品質合格の代わりに使わず、bitmap/表示layerの全占有一致と本文不変を別々に確認する。原画像と機械結果を保存し、新native/新RN/旧native/旧RN/JS/job結果を分けて報告する。
+
+successはこの新preview候補が上記を全て満たすこと。旧V4の修復・正式admission/通常保存/実機の成功は含まない。compile/記録不足/timeout/画像未成立/比較不一致/品質崩れなら一回で未採用STOPし、追加修正→再CI/別flag/別helperへ自動進行しない。作業増分は新rendererのnative表示本体＋既存5file接続＋付随検証、CIは通常約20分の一回（保証なし）。外部service/依存/継続課金の追加0。実装工数/成功日時は未確定で10/22の通常保存目標は未達のまま。
+
+### 99.6 今回必要なMash判断
+
+Rule18 §11.3 LEVEL3(1)は「商品目的、商品体験、method family、contract、acceptanceまたは品質条件を追加、変更、置換または弱化する」作業を明示判断前に実行しないと定める。§85.3/§93/§97の自然Text維持・bitmap表示不採用と元比較契約を今回の継続指示だけで解除しない。R10.2の同family反復STOPに従い、推測設定の第三修復や診断専用CIへ進まない。
+
+**判断対象は§99.2〜99.5の別bitmap preview方式への変更を含む、限定実装と新sourceのCI一回。** 新方式の変更点・画質差・18path・成功/STOPまでを一つの候補として提示する。既存GitHub接続/承認済み内部修正の許可を再質問するものではない。候補が承認されるまではsource effect0、CI counter0。METHOD_OR_PRODUCT_DECISION_CANDIDATE、root final technical verdict=CANDIDATE_CORRECTED（透明canvasでの検査/小数位相一回/明示B9 allowlist/transaction内同一性を反映）。独立reviewは実際に存在する読取agentであり、別Pro/Ultra modelを使用したとは申告しない。
+
+今回の完了は設計記録だけ、商品credit0。DETOUR_RISK_STOP、formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。適用・CI・本番効果を先取りしない。
+
+原典：Piece_Render_Reproducibility_Contract_20260808.md（blob7769f2d7）、native PieceTextMetrics.mm／RN patch／Card/B9/renderer/export/保存ownerの現実装、前後run39692007906/39704913859原report。Apple Graphics Contextsの公開原典はUIViewが描画環境を構成しbitmap contextは指定した画素bufferを更新すると説明するが、自然TextとのCG状態/画素同値を保証しない（https://developer.apple.com/library/archive/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_context/dq_context.html）。公開API全般の不可能性証明はしていない。
