@@ -3756,3 +3756,10 @@ local既存CIと同じ13 JS suitesは957 PASS／FAIL0／skip0／cancel0（旧949
 ### 102 bitmap新source CI一回を開始
 
 承認済み§99の実装sourceは15b0a62a1973f88ba1849989ecda6d020061b71a（親458e6b8614559277adcd0791543652b51c27debd、tree531c86e0569361e8bc3a7849090206e3ab6004c2）。許可済み18pathすべてのblob SHAと全文をGitHubから読み戻し、changed-path setが18で一致、ahead1を確認した。既存push workflow Piece RN preview and owner contractsのrun39717661329/attempt1が起動し、このbitmap単位のCIは1/上限1を消費した。sourceを固定し、以後は原物/ログ/画像の回収と判定だけを行う。成功・新画像・native結果はまだ未確認。旧V4失敗を隠さず別groupで確認し、未達なら未採用STOP。same-source rerun/別source再CI/閾値緩和なし。通常保存/再表示/正式admission/共有/実機は未完。
+
+
+### 103 一度CI途中結果：JS957成功／新native group開始時例外
+
+固定source15b0a62aの一度CI39717661329 attempt1は継続中。JS13suite957 PASS/FAIL0/skip0/cancel0（13.472秒）、Android source検査成功、iOS実header構文compile/旧patch適用とstandalone binary compile成功。native実行は旧NATIVE129/129、V9 46/46、V4 1PASS/19FAILまで到達し、旧V3の別20は従来どおり明示未実行。新STAGE bitmap_beginの直後、最初のsource Text addSubview時にNSInvalidArgumentException「-[RCTTextView isTrackingKeyboard]: unrecognized selector」で終了。BITMAP_PASS/FAILも新44件集計も出ていないため、新44を失敗44/成功44へ換算しない。新bitmap製品methodの描画成功もまだ示さない。
+
+standalone shimのRCTTextView.windowが未mount時にselfをUIWindowへcastして返す既存構造を、新groupが本物のwindowへaddSubviewする経路で使ったこととの関係を読取中。例外のselector/stackは原ログで確定しているが、追加修正や次CIによる因果確認は未実施。native alarm90秒は保持し、ログ末尾は例外終了、期限変更なし。実RN simulator jobはまだ継続中で、原物/新PNG/新12結果は未到着。counter1/上限1消費済み、source固定、通常保存/admission/exportは未完。

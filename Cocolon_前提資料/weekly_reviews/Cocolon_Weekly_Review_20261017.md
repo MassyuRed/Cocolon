@@ -1895,3 +1895,8 @@ Mashが入口§99の新bitmap方式・18path限定実装・新source CI一回を
 ##### 5.6.30 bitmap新source CI一回を開始
 
 新source15b0a62a・許可18blob全文とchanged setをreadback一致確認。既存CI39717661329 attempt1起動、bitmap単位1/上限1消費。source固定、結果/全新画像回収中。成功未主張、未達なら未採用STOP、追加CI不可。正式admission/保存/export false。
+
+
+##### 5.6.31 一度CI途中結果：JS957成功／新native group開始時例外
+
+source15b0a62a/CI39717661329 attempt1継続。JS957 PASS、iOS source/standalone compile成功。旧native129+V946成功、V4既知19FAIL。新bitmap groupは最初のaddSubview時RCTTextView isTrackingKeyboard例外、新44判定は未実行。実RN/画像待ち。CI1/上限1、修正/再CIなし、未採用を保持。
