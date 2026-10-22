@@ -1,16 +1,18 @@
 # Cocolon System Context — V1 current technical management entry
 
 status: CURRENT_TECHNICAL_OWNER__V1_MANAGEMENT_ENTRY_ACTIVE_ON_PR37_WORKING_LINEAGE
-revision_date: 2026-10-22
+revision_date: 2026-10-23
 scope: Cocolon System Context Steps 1–7 plus Step 9 management entry and V1 implementation freeze
 step8_status: SKIPPED_BY_MASH_DECISION
 management_entry_activation: 1
 v1_implementation_freeze: 1
+execution_hardening_status: COMPLETE
 operator_proof_activation: 0
 operator_actual_proof_completion_claim: null
 product_credit: 0
-technical_credit: 0
-primary_outcome: ADMINISTRATIVE_ONLY
+technical_credit: 1
+technical_credit_scope: V1_EXECUTION_REPRODUCIBILITY_AND_NAVIGATION_COST
+primary_outcome: TECHNICAL_CREDIT
 automatic_progression: false
 
 ## Purpose
@@ -32,22 +34,54 @@ STEP7_BOUNDED_IMPLEMENTATION_COMPLETE
 This activates the management entry and freezes the V1 implementation. It does
 not claim `SYSTEM_CONTEXT_V1_OPERATOR_CONTEXT_ACTUAL_PROOF_COMPLETE`.
 
-## Mandatory whole-product baseline (2026-10-22 Mash instruction)
+## 2026-10-23 current information and execution route
 
-Before `prepare`, read the entire fresh working-owner original
-[`../00_cocolon_current_product_and_state.md`](../00_cocolon_current_product_and_state.md).
-This applies to every Cocolon task, including specification discussion,
-observation teaching and model selection. After each task, replace only its
-changed function, decision, state, remaining work and evidence in that original
-in the same change unit; record no relevant delta in the existing work record.
+Mash requested a complete System Context information refresh on 2026-10-23.
+The implementation owner is [PR #37](https://github.com/MassyuRed/Cocolon/pull/37).
+The product material owners are [PR #30](https://github.com/MassyuRed/Cocolon/pull/30)
+and [API PR #3](https://github.com/MassyuRed/mashos-api/pull/3).
+The copy of this entry on the product branch routes to that existing implementation; do not
+run the older product-branch copy of `tools.cocolon_context` as the current CLI.
+Do not overlay the implementation and product checkouts into a synthetic tree.
 
-Generated selection is supplementary. An old inventory, fixed MAIN snapshot,
-missing seed or stale output never waives this direct original read. The existing
-task profiles select the baseline as CURRENT_OWNER when present in a fresh
-inventory. New task profiles must retain the same seed. Do not edit generated
-manifests or expand the frozen operator contract to add this baseline. Historical
-scope restrictions in frozen output do not cancel later explicit Mash decisions,
-including the decided learned-model/CMEE connection.
+Before any prepare or Cocolon judgment, read the entire fresh product-owner
+[whole-product current baseline on PR30](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/00_cocolon_current_product_and_state.md).
+The version on the PR37 implementation branch is not the product current owner.
+This applies to specification discussion, observation teaching, model selection,
+implementation, audit and document maintenance. Update relevant state differences
+in that original in the same product change unit. An absent generated seed,
+stale cache or fixed historical claim never waives the original read.
+
+The current material baseline includes all three cores, the decided learned-model
+connection to CMEE, observation/model-comparison materials, the latest weekly
+review and the overall structure maps. Model selection, integration and training
+remain incomplete; the decided connection is not revoked by an old
+`NO_EXTERNAL_GENERATIVE_AI` snapshot. Emlis question/answer is implemented;
+Analysis IF/Saved remains designed but unimplemented. Code, deployment, device
+verification and product acceptance are separate states. Piece's private API
+configuration is deployed while the new RN distribution and owner round trip
+remain unverified. Resolve their changing details from the fresh baseline and
+its original owners, not this navigation summary.
+
+The tracked `current/cmee_working/**` is the historical August snapshot
+(Cocolon `6b0973c841d536a2e6eaa97c586c320a93f83dc7`, API
+`06ce311b3ea728b06f83439d268a34bed917c01c`). It is not the current cache.
+Its inventory omits later files, including the whole-product baseline,
+October weekly review and observation-learning materials. On the pre-update
+product heads `bef22aecef5169a931bda399be6e51e17bc3d7b9` and
+`3084c99e5a08d6e475d8a177e62ebf1548e8a0f9`, the tracked-path census is
+1766 + 2444 = 4210; this is an inventory count, not full semantic review of
+every blob. Keep the historical bytes unchanged and regenerate through PR37's
+existing fixed-environment workflow into the separate cache.
+
+Current execution success must be read from PR37's exact-head actual-prepare
+run, its doctor/prepare/verify-only diagnostics and material-head checks.
+Verifier test success alone is not actual prepare. A later material or
+implementation change requires fresh prepare; an older successful cache is
+not current. Cache artifacts expire after seven days; the recipe and source
+remain in GitHub. The plain split `index_scip_run.py` has a known historical
+syntax error, but the actual code-index entry executes a hash-verified encoded
+payload. Do not misreport the unused split file as a current execution blocker.
 
 ## Standard flow
 
@@ -62,36 +96,139 @@ work-attitude 00_read_first
 → human judgment
 ```
 
-Run from the Cocolon repository root.
+Run the V1 entry from the PR #37 implementation checkout. The implementation
+root and the material roots are deliberately separate: the executing tools and
+embedded payloads come from the exact PR #37 checkout, while `--repo-root`
+selects the exact PR #30 Cocolon material checkout and
+`--external-workspace-root` contains the exact PR #3 `mashos-api` material
+checkout. They are never overlaid into one synthetic Git tree.
+
+Open the implementation checkout with `.devcontainer/devcontainer.json` and
+verify the locked toolchain before preparing Context:
 
 ```bash
+python3 -m tools.cocolon_context doctor
+
 python3 -m tools.cocolon_context prepare \
   --workspace cmee_working \
-  --task cmee
+  --task cmee \
+  --repo-root "$COCOLON_MATERIAL_ROOT" \
+  --system-context-root "$PWD/Cocolon_前提資料/system_context" \
+  --external-workspace-root "$EXTERNAL_MATERIAL_ROOT"
 ```
 
-The command resolves exact `Cocolon` and `mashos-api` refs, compares the
-saved workspace lock, verifies same-ref bytes, derives
+`doctor` verifies the exact Python, Node, TypeScript, SCIP providers and locked
+test dependencies recorded by the repository. A missing or mismatched tool is
+a fail-closed stop, not a warning or a syntax-only success.
+
+The command resolves the exact `Cocolon` and `mashos-api` refs pinned by
+`workspace_profiles.json`, rejects a dirty material checkout, compares the
+saved workspace lock and execution-input fingerprint, verifies same-ref bytes,
+derives
 added/modified/deleted/renamed/type-changed paths for changed refs, refreshes
 only the causally affected layers or uses the bounded full-rebuild fallback,
-and writes the current result to:
+and writes the current result to a regenerable cache outside the tracked
+historical snapshot. The default cache root is
+`<PR37-implementation-root>/.cocolon-context-cache`; `--cache-root` may select
+an equivalent explicit local cache root.
 
 ```text
-Cocolon_前提資料/system_context/current/cmee_working/prepare_summary.json
-Cocolon_前提資料/system_context/current/cmee_working/prepare_summary.md
-Cocolon_前提資料/system_context/current/cmee_working/task_context/cmee/
+<cache-root>/cmee_working/prepare_summary.json
+<cache-root>/cmee_working/prepare_summary.md
+<cache-root>/cmee_working/task_context/cmee/
 ```
 
 The actual original full-file reading order is:
 
 ```text
-Cocolon_前提資料/system_context/current/cmee_working/task_context/cmee/full_text_read_order.md
+<cache-root>/cmee_working/task_context/cmee/full_text_read_order.md
 ```
+
+Standard stdout is a bounded brief receipt containing identities, freshness,
+proof state, counts and cache paths. `--output-format full` is an explicit
+diagnostic view. The exact logical outputs, transport manifests and full
+original-reading order remain in the cache; stdout reduction does not remove
+or truncate their evidence.
 
 `prepare` is complete only after the execution owner has read the applicable
 actual original files in that order before making a Cocolon judgment. The
 generated order is navigation evidence, not a claim that every file was
 permanently memorized or that its meaning was machine-approved.
+
+### Fixed-environment execution when the chat host cannot restore it
+
+Mash explicitly prioritized restoring System Context on 2026-09-07, including
+current material refs, doctor, actual prepare and regenerable cache creation.
+The existing toolchain lock and its exact versions remain unchanged. The
+2026-09-08 Dockerfile acquisition correction below changes transport only.
+Do not change required tool versions merely to match the chat host.
+
+The additional `.github/workflows/cocolon-system-context-prepare.yml` executes
+the existing CLI on the exact same-repository Draft PR #37 head. Relevant PR
+synchronization triggers it; it is not a scheduled worker or automatic Git
+writer. The three pre-existing verifier workflows still only verify their
+assigned tests. Their success alone does not prove actual prepare succeeded.
+
+The actual-prepare job checks the current PR #30 and PR #3 heads against the
+approved `cmee_working` profile, creates separate clean material checkouts and
+the exact historical Cycle001 external checkout, builds the locked container,
+and runs `doctor`, `prepare`, then `prepare --verify-only`. It verifies all
+material heads and tracked trees plus the current PR heads again afterward.
+The implementation tree is mounted read-only. Only temporary workspaces and
+the regenerable cache are writable. The container receives no credential or
+private product input; network access is limited by purpose to the existing
+public Git owner/ref resolution. No Emlis generation or production effect is
+part of this job.
+
+The first actual Python indexing run reached the provider but exhausted its
+approximately 4 GiB V8 heap. The actual runner now supplies
+`NODE_OPTIONS=--max-old-space-size=8192`, the provider's documented 8 GiB heap
+setting, including spawned Node processes. This is a resource setting, not a
+version change, index-scope reduction or verification relaxation.
+
+For each run, inspect its actual terminal result rather than the workflow's
+presence. Diagnostics are retained as `system-context-diagnostics-<head>`.
+Only after successful prepare, verify-only and final-head checks is
+`system-context-cache-<head>` published as an Actions artifact containing
+`system-context-cache.tar.gz`. Both artifacts have seven-day retention; they
+are regenerable and are not the permanent source of truth. An expired artifact
+is not evidence that the source or implementation disappeared.
+
+Before using a retained cache in a later session, confirm its implementation,
+material refs and recorded fingerprints against the intended approved work.
+A changed material ref requires explicit profile/current-test alignment and a
+new prepare; do not treat an older successful artifact as current. Read the
+applicable original files through the generated reading order. Downloading an
+artifact does not repair the chat host's Python/Node installation, establish
+Operator actual-value proof, or convert pending remote proof into PASS.
+Current execution results belong in PR #37's current report; historical tracked
+`current/cmee_working/**` remains unchanged.
+
+### Bounded acquisition recovery — 2026-09-08
+
+Mash approved bounded acquisition timeouts and a same-content alternative
+transport after the observed Debian HTTP 503 failures. The existing Dockerfile
+tries `snapshot.debian.org`, then `snapshot-mmx-01.debian.org`, each only
+at the locked `20260822T000000Z` snapshot and the same three suites. The earlier
+Cloudflare endpoint also returned HTTP 503 in actual CI; the alternative now
+uses Debian's separately named snapshot server instead of that failed CDN path.
+APT keeps its Debian signature and package-hash verification; update errors are fatal
+for that transport. No current-suite, unsigned or arbitrary-mirror fallback
+is allowed. Each update and download phase has a 180-second overall timeout
+plus a 10-second kill grace; connection/data timeout is 20 seconds and retries
+are limited to one. Packages are installed only after complete download, with
+`--no-download`. If an earlier transport supplied verified InRelease files,
+the next transport must supply byte-identical files. When no earlier metadata
+was obtainable, cross-transport equality is not claimed; snapshot identity,
+APT verification and the unchanged locked tool checks remain required.
+
+Node/SCIP archive acquisition also has bounded curl timeouts/retries; npm and
+pip acquisition have 300-second overall timeouts. Existing archive SHA-256,
+package lock integrity and tool-version checks are not weakened. Cache packing
+runs as the existing producer in a read-only, network-disabled container and
+compares the archive against the source without widening cache permissions.
+Actual run outcomes and artifact verification belong in PR #37's current
+report, not in an assumed-success statement in this entry.
 
 ## Freshness and fallback
 
@@ -99,7 +236,15 @@ permanently memorized or that its meaning was machine-approved.
 
 Existing inventory, code index, route graph and task Context may be reused only
 when their manifests, logical output hashes, transport manifests and context
-fingerprint verify. A mismatch is rejected; it is not converted into PASS.
+fingerprint verify. The fingerprint covers the exact material refs and the
+implementation tools, embedded payloads, profiles, schemas and fixed
+environment lock. A mismatch is rejected; it is not converted into PASS.
+
+Input freshness, output freshness and remote proof status are separate states.
+A fresh local rebuild is not mislabeled stale merely because remote proof is
+pending, and pending proof is not converted into freshness. Exact refs and
+clean worktrees are checked at both start and end; movement during execution
+stops without retry or publication.
 
 ### Changed refs
 
@@ -117,11 +262,18 @@ unverifiable Context fails closed. The original tracked files remain canonical
 and directly readable; System Context failure never prohibits direct original
 read.
 
+The tracked `current/cmee_working/**` bytes remain the historical frozen
+snapshot during this hardening step. They are not deleted, rewritten or used as
+the standard writable cache.
+
 ## Current verification ownership
 
 The three PR-triggered System Context workflows are read-only exact-head
-verifiers. They use `contents: read` and `pull-requests: read`, do not
-commit or push, and verify the open Draft PR head before and after tests.
+verifiers. They build the fixed environment from the small `.devcontainer`
+context, mount the exact Draft head read-only at runtime, run `doctor`, compile
+the bounded active Python entries and execute their assigned tests without
+runtime network access. They use `contents: read` and `pull-requests: read`, do
+not commit or push, and verify the open Draft PR head before and after tests.
 Automatic writer count is 0.
 
 A generated current update, if separately authorized later, belongs to an
@@ -180,8 +332,14 @@ Any later retirement requires a separate Mash decision.
 ## V1 implementation freeze and future enhancement
 
 Step 7 source, tests, profiles, workflows, and generated actual at
-`92e4ad913f61c064e42320bd62ab13fa0ba97fa7` are the frozen V1 implementation
-baseline. This Step 9 changes the management position only.
+`92e4ad913f61c064e42320bd62ab13fa0ba97fa7` remain the frozen V1 behavior and
+evidence baseline. Mash's 2026-09-02 decision authorizes only the bounded
+execution hardening documented above: exact implementation/material identity,
+fixed environment validation, freshness/cache correction and lightweight
+stdout. It does not reopen product behavior or Operator actual-proof claims.
+The 2026-09-07 restoration authorization adds the bounded execution route,
+material-ref alignment and its directly related test maintenance described
+above; it does not change those product or proof boundaries.
 
 A future enhancement is allowed only when all exact4 conditions hold:
 
@@ -202,6 +360,7 @@ selection mutation, and automatic owner mutation remain 0 by default.
 STEP7_BOUNDED_IMPLEMENTATION = COMPLETE
 STEP8_STATUS = SKIPPED_BY_MASH_DECISION
 STEP9_MANAGEMENT_ENTRY_MIGRATION_AND_V1_FREEZE = COMPLETE
+COCOLON_SYSTEM_CONTEXT_V1_EXECUTION_HARDENING = COMPLETE
 MANAGEMENT_ENTRY_ACTIVATION = 1
 V1_IMPLEMENTATION_FREEZE = 1
 SYSTEM_CONTEXT_V1_MANAGEMENT_ENTRY_ACTIVATED_AND_IMPLEMENTATION_FROZEN = TRUE
@@ -209,8 +368,9 @@ SYSTEM_CONTEXT_V1_OPERATOR_CONTEXT_ACTUAL_PROOF_COMPLETE = NOT_CLAIMED
 OPERATOR_PROOF_ACTIVATION = 0
 OPERATOR_GENERATED_COMPLETION_CLAIM = null
 PRODUCT_CREDIT = 0
-TECHNICAL_CREDIT = 0
-PRIMARY_OUTCOME = ADMINISTRATIVE_ONLY
+TECHNICAL_CREDIT = 1
+TECHNICAL_CREDIT_SCOPE = V1_EXECUTION_REPRODUCIBILITY_AND_NAVIGATION_COST
+PRIMARY_OUTCOME = TECHNICAL_CREDIT
 AUTOMATIC_PROGRESSION = false
 STRUCTURE_MAP_DELTA_NONE
 ```
@@ -220,13 +380,75 @@ production dependency, CMEE/EmlisAI/Piece/Analysis output, default-branch
 state, ready state, merge state, deployment, release, or `mashos-api` byte.
 It is active on the PR #37 working lineage only.
 
-The bounded final claims are:
+The bounded current claims are:
 
 ```text
 STEP9_MANAGEMENT_ENTRY_MIGRATION_AND_V1_FREEZE_COMPLETE
 SYSTEM_CONTEXT_V1_MANAGEMENT_ENTRY_ACTIVATED_AND_IMPLEMENTATION_FROZEN
+COCOLON_SYSTEM_CONTEXT_V1_EXECUTION_HARDENING_COMPLETE
 ```
 
 `SYSTEM_CONTEXT_V1_COMPLETE`, Operator actual-proof completion, Operator value
-PASS, Product Read, merge-ready and release-ready are not claimed. Step 9 does
-not automatically start any next work.
+PASS, Product Read, merge-ready and release-ready are not claimed. Neither
+Step 9 nor this execution hardening automatically starts any next work.
+
+
+## 2026-09-15 — Pro portable Emlis execution connection
+
+Mash explicitly authorized a bounded separate unit: build the Emlis test
+runtime, transfer it through the GitHub artifact connector, and run the
+existing persistent Emlis test in Pro. This adds execution support beside
+System Context navigation; it does not replace or relax the indexing
+`.devcontainer` toolchain, original tests, private-data boundary, or product
+acceptance. It does not redirect the original Emlis quality continuation or
+add UI/payment follow-up to that workstream.
+
+The implementation is `.github/workflows/emlis-pro-runtime.yml`,
+`tools/emlis_pro_runtime_build.py`, and `tools/emlis_pro_runtime_run.py`.
+The read-only PR #37 job binds API PR #3 at
+`ce8466253b99fcf0992a8b5c3ca38284d1fb5ef0` and app PR #30 at
+`6a073151facb674efa412e80451403dd50f8bfa6`. It packages Python 3.12.13,
+pytest 8.4.1 and the unchanged exact46 wheel lock, Node 22.16.0 and PGlite
+0.5.8. It executes no Emlis or private evaluation in GitHub Actions.
+
+Use the connector's `download_workflow_artifact` for the successful exact-head
+`emlis-pro-runtime-<head>` artifact. Verify the recorded ZIP digest, ZIP CRC,
+inner `archive.sha256`, every `SHA256SUMS` member, source manifest and required
+heads before use. Extract into a new directory with traversal/link protection;
+do not overlay a prior installation. The bundle has documented filtered
+text-source snapshots, not full Git checkouts: no `.env`, credentials, Git
+history, native/media files or private work records. Checked-in fixture data
+is included only from the existing test-fixture directories. Acquire any
+additional required originals rather than treating exclusions as nonexistent.
+
+From the extracted `emlis-pro-runtime` directory, run:
+
+```bash
+./python/bin/python3 run_tests.py
+./python/bin/python3 run_tests.py -q ai/tests/test_emlis_q2_application.py
+```
+
+The launcher discards inherited configuration/credentials, verifies the exact
+46 packages and interpreter, and denies Internet socket creation in Python
+and its Node children. Unix socket IPC remains available to asyncio/PGlite.
+The first launcher incorrectly denied `sendto` for local event-loop wakeups
+and timed out; that is a launcher defect, not an Emlis result. The corrected
+launcher passed the original persistent round/restart test (1 PASS), then the
+unchanged complete Q2 application file (32 PASS, two deprecation warnings) in
+Pro. These are startup/persistence results, not 33 distinct tests. Final
+artifact identities and post-download replay belong in this PR's current
+execution report. No product source or existing assertion was changed.
+
+Artifacts expire after seven days; the build recipe and fixed dependency lock
+remain in GitHub. Reuse a verified runtime while its dependencies and platform
+remain applicable. Do not use its source snapshot for a later head without
+fetching and checking that head's originals, and do not rebuild tools merely
+because prose/code was edited. Changes to the packaged source heads require
+updating the builder/workflow's matching pins together before regeneration.
+
+This startup unit does not complete the mandatory Emlis suites, canonical100,
+all inherited saved-conversation comparisons, RN rendering tests, actual DB/
+store/device checks, product PASS, or Operator actual-use proof. System Context
+workspace/task profiles and the generated cache have not been refreshed by
+this runtime build; their earlier results remain historical. Emlis validation
+and System Context freshness must continue to be reported separately.

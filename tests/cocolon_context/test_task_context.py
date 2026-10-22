@@ -3828,7 +3828,13 @@ def test_unit_c_t56_account_profile_read_only_preserves_explicit_gaps() -> None:
     assert is_v2 is True
     assert profile["publication_mode"] == "EPHEMERAL_VERIFY_ONLY"
     assert profile["required_category_exact"] == 2
-    assert [len(rule["path_globs"]) for rule in profile["seed_rules"]] == [8, 5]
+    assert [len(rule["path_globs"]) for rule in profile["seed_rules"]] == [1, 8, 5]
+    baseline = profile["seed_rules"][0]
+    assert baseline["id"] == "whole_product_current_baseline"
+    assert baseline["classification"] == "CURRENT_OWNER"
+    assert baseline["path_globs"] == [
+        "Cocolon_前提資料/00_cocolon_current_product_and_state.md"
+    ]
     contract = profile["operator_contract"]
     assert len(contract["canonical_owner_refs"]) == 2
     assert {row["remote_ref"] for row in contract["canonical_owner_refs"]} == {

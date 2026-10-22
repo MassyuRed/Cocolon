@@ -1,5 +1,5 @@
 work_attitude_rules_for_karen
-revision_date: 2026-10-22
+revision_date: 2026-10-23
 created_at: 2026-05-17 18:58:26 JST
 format: UTF-8 text / Notepad向け
 normative_status: CURRENT_ENTRY
@@ -53,10 +53,10 @@ non-Pro成果物は`UNTRUSTED_NOT_ADOPTED`として扱い、最後のPro verifie
 7. 全体の現在地は`../00_cocolon_current_product_and_state.md`から確認し、関連する最新作業記録・handoffを読む。`../07_latest_snapshot_diff.md`は関連する節目の履歴として参照し、EOFを全体currentの代用にしない。Cycle001の次作業だけはfreshな`08_cycle001_current_state.md`から選ぶ。
 8. GitHub上の`Cocolon` / `mashos-api` current head、対象path、指定predecessorを確認する。
 9. Cocolonについて設計・実装・診断・監査・前提資料更新・仕様判断を行う前に、`../system_context/00_read_first.md`を読み、次を実行する。
-   - `python3 -m tools.cocolon_context prepare --workspace cmee_working --task cmee`
+   - 実装はPR37 checkout、商品原本はfresh PR30とAPI PR3の別checkoutとする。実行引数・固定環境・cacheは上記technical入口のcurrent手順に従う。商品branch内の旧CLIを現行実装として実行しない。
    - same-refなら保存済みmanifest／output hashの検証結果を使う。
    - changed-refならchanged path導出後に自動refreshし、stale contextを判断根拠へ使わない。
-   - `../system_context/current/cmee_working/task_context/cmee/full_text_read_order.md`の対象実ファイルを、判断前に実際に全文確認する。
+   - 正規prepareが出力したcache内の`cmee_working/task_context/cmee/full_text_read_order.md`から対象実ファイルを確認する。tracked `system_context/current/**`は8月のhistorical snapshotであり、現在の読順として使わない。
    - Mash様へmanifest確認、SHA比較、更新対象選択、refresh command組立てを戻さない。
 10. `manifest.json`のactivation mapから、今回必要な専門ruleだけを読む。
 11. EmlisAI / Piece / 分析構造 / CMEEを触る場合、`../current_structure/00_three_core_and_cmee_read_first.md`と対象mapを読み、商品目的、current route、owner path、保護境界、current / futureを固定する。
