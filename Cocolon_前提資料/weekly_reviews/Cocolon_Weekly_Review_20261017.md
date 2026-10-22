@@ -2044,3 +2044,12 @@ browser切替の承認を受領し、Mashの本人認証完了後に同workspace
 07:08:45 JSTに無認証GETだけでhealth200、bootstrap200/期待8flags一致、本人history401 PIECE_AUTH_REQUIRED/no-store/Bearerを確認。TTL600秒/明示iOS版/private4操作ON、public/write-read-visibility/exportOFFを同API全認証sessionへ反映済み。起動commandとstartup instance/liveの対応も確認し、詳細/元証跡は入口§118/map65.61/manifest v158へ保存する。
 
 P-W1の配置・有効化部分は成立したが、実Auth通常入力→preview→private保存1件→本人履歴/詳細は未確認。P-W2実Photos/Share/Android/backend receipt、P-W3本人端末・商品受入れも残る。10/22保存・10/23共有の未達を配置だけで達成へ替えず、10/24の実残差と10/31管理線へ戻す。既存subscription準備/Terms/Privacy警告も今回解消していない。privacy修復はPR4限定、正本PR3へ未反映。設定保存1/配置1、DB/本人データ/main merge/新service/料金0。5資料同期、STRUCTURE_MAP_DELTA_NONE、product_credit0、automatic_progression=false。
+
+
+#### 5.6.42 10/23 — privacy修復を正本へ戻し、本人保存に必要なiOS配布差を確定
+
+本番だけにあったPiece URL ID修復を、開発PR3の既存middleware/B12 testへ同一2blobで反映した。3084c99eは親a536、2pathだけで全文readback一致。既存Piece push CI39864098163 attempt1はsuccess、原23summary合計1805 PASS/FAIL0/ERROR0/SKIP0（shared/default128/native persistence46）。Auth/source/HTTPは合成、旧1805との加算なし。原log841516B/digest付き可逆保存は入口§119/manifest v159へ同期。新helper/依存/workflow・開始後修復/rerun0。Render Live3577/承認command/autoOffは監視readで不変、今回再配置・本人DB操作0。
+
+P-W1の本人保存にはRN新版の配布が必要と確定。最新iOS TestFlight成功は10/10のrun38041653252/source55142229、番号式6501であり、正式eligibility供給と保存host接続、新iOS bitmap版を含まない。本人導入済みは未確認。current87151との製品差29pathはPiece系（共有RN native patchを含む）、root/nav/Emlis・Analysis componentは同blob。candidate branch agent/piece-testflight-private-20261023を87151へ固定、source追加/RN CI追加0。
+
+次の案は同固定branchで既存ios-build.ymlを一度実行し、署名Archive→IPA→既存TestFlight appへ送信。workflowが配布まで一体のため、確認buildとして勝手に実行しない。Rule18§11.3 release effectの個別承認前でdispatch/署名/送信0。公開App Store/Android/API/DB/flag変更なし。本人通常保存→履歴/詳細、P-W2実OS/backend receipt/P-W3端末/商品受入れ・M5未完、10/22保存・10/23共有目標を達成へ替えない。10/24の実残差と10/31管理線への確認を維持。5資料同期/STRUCTURE_MAP_DELTA_NONE、TECHNICAL_CREDITは正本修復/CIだけ、product_credit0、automatic_progression=false。

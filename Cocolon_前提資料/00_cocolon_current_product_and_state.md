@@ -6,7 +6,7 @@
 
 これは全製品の現在地を一度で確認する正本である。毎回全文を読み、対象機能の詳細正本と実ファイルへ進む。過去の読了、会話の要約、検索断片だけで代用しない。repository rootの`AGENTS.md`、`00_karen_read_first.md`、work rulesの入口からここへ入り、System Contextの生成物に含まれない場合もfreshな作業ownerから直接読む。
 
-現時点の確認基準はCocolon Draft PR [#30](https://github.com/MassyuRed/Cocolon/pull/30) `818d428d2f5905db7a365ee678cdb232f3c14720`、mashos-api Draft PR [#3](https://github.com/MassyuRed/mashos-api/pull/3) `a536e50ee284785f585ac73329ef2947dca8bba9`。両方open／draft。これは今回の照合点であり、次回の最新headを固定する指示ではない。本資料の配置commitは、この変更を含むGitHub revisionから解決する。
+現時点の確認基準はCocolon Draft PR [#30](https://github.com/MassyuRed/Cocolon/pull/30) `87151d3983818f18e556651d333d95be7bb487d7`、mashos-api Draft PR [#3](https://github.com/MassyuRed/mashos-api/pull/3) `3084c99e5a08d6e475d8a177e62ebf1548e8a0f9`。両方open／draft。これは今回の照合点であり、次回の最新headを固定する指示ではない。本資料の配置commitは、この変更を含むGitHub revisionから解決する。
 
 **作業ごとに差分を確認し、変化した機能・決定・状態・残件・根拠だけを、当該作業と同じ変更単位で置換更新する。** 日付だけを全行で更新しない。無関係な機能の再監査や全資料の再生成はしない。関連差分なしは既存の作業記録／PR説明に「全体現在地差分なし」と理由を一行残す。詳細mapに構造差分があれば、そのmapも同時に更新する。
 
@@ -54,7 +54,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | Emlis初回 | 観測と「Emlisから」の受け取り。Layer1は根拠を外さず、Layer2が人間的な受け取りを担う。比率1:9〜4:6は内容に応じた方針で、文字数割当ではない | 生成・保存・API・RN接続あり。有限表現、主体・時点の誤認、原文反復、薄い／定型的受け取りが残る。商品`PRODUCT_NOT_CLEAR`、正式Product Read未成立、`candidate_ready=false` |
 | Emlis任意問い・回答更新 | 問いは実装済み。Free／Plusはthread全体0..1、Premiumは本人続行により逐次0..3。skip・終了・訂正・撤回・再読あり。原入力と補足を別sourceとして束縛 | 問いを出さないENDだけで十分理解したとは判断しない。回答は新規感情入力件数や国家eventへ加算しない。一般入力・回答後本文・本人実機一往復の品質が残る |
 | Emlis有料拡張 | Plusの適格本人履歴、Premiumの逐次問い・本人が修正／否定できる根拠付きframe、条件付きLayer3を実装 | 履歴が使えるコードと、本人固有の深さ・有料差の体感を分ける。有料商品品質は未受入れ |
-| 配置と本人確認 | 最終稼働確認記録は10/20議事録にある10/10版`5c8bd8e…`。u353〜355は未配置と記録 | 今回Renderへ直接再照会していない。10/10の本人実機表示1件は確認記録あり、内容はMash評価で不合格。同じ保存本文の履歴再表示まで確認済みにしない |
+| 配置と本人確認 | 共通APIは10/23にPiece限定overlay3577d7fdでLive、Emlis内容は土台10/10版5c8bd8eを継承。u353〜355は未配置 | Piece作業でservice identityのみ確認。Emlisの本人実機/品質は今回再検証なし。10/10の本人表示1件はMash評価で不合格。同じ保存本文の履歴再表示まで確認済みにしない |
 | 27B候補試験 | `Qwen3.8-27B-Q4_K_M.gguf`を候補保持。10/21、架空相談2題×実演あり／なし×初回／回答後＝8出力の推論試験 | 追加情報の取込みは見られたが、未確認な意味の補完、近い問いの再提示、更新記録の欠落が残る。実演ありの一貫した優位未確認。重みの追加学習0、27BのCMEE統合0、他core適性未検証、製品採用未確定。Pod停止はMash報告受領済み |
 | 観測教材 | 観測・一点への問い・本人回答で何を修正するかを記録。相談教材と、感情選択＋その時点で見える実体寄り入力を区別 | 教材蓄積は学習実施ではない。[三中核の分担・比較案](observation_learning/model_selection/2026-10-22-three-core/README.md)を作成。20比較場面（新規評価候補15・既知派生4・境界1、独立した新規候補5family）、最初の4場面、可視入力と採点条件を分離して保存した。モデル試験・本統合・追加学習は未実行。自然な入力分布・一般化・学習効果は未実証。最新教材は`observation_learning/README.md`から辿る |
 
@@ -82,14 +82,14 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 |---|---|---|
 | 本文・visual recipe | 保存済み本人source→単独で伝わるcanonical text＋画像。現V2 source adapter／pure coreはoriginal＋normal／pre-questionのみ。refinedは別sourceのopt-in補足を使う設計だが、現コードは`source_role_or_stage_not_yet_supported`で未対応 | 旧Q&Aの存在を新商品の定義にしない。Emlis生成本文・Analysis推定の原文流用は禁止。補足をoriginalへ連結してrefined接続済みにしない |
 | preview・保存 | 本文・画像設定・取消・保存・回復のsource接続あり。iOS renderer供給とsame-mount/token current fitを接続。owner／runtime／quotaを別に確認 | 実Authの通常入力→preview→明示private保存は未確認。preview＝保存record＝card＝renderer入力＝export本文を保つ。保存後の本文・format・recipe変更は新record |
-| V2有効化・旧経路 | API登録は明示preview／shared候補に限定。default applicationはlegacy、各flag既定OFF。RN通常入力のV2接続sourceあり、tutorial／Nexus旧経路は残る | 配置済み状態は今回再確認なし。source接続をlive化へ換算しない |
+| V2有効化・旧経路 | 既存APIの明示factory構成は10/23に3577d7fdでLive、private4true/public4false。default app:appはsource上legacy/OFFを維持。RN通常入力のV2 sourceあり、tutorial/Nexus旧経路は残る | 稼働設定成立と本人端末の通常保存は別。M5の全公開経路廃止は未完 |
 | 本人履歴・詳細・公開範囲 | owner一覧・詳細・公開切替・削除、通常導線・保存後再取得を接続。privateはownerのみ、publicも既存access policy内 | 同一ownerの実Auth保存→履歴／詳細往復は未完。アプリ内公開と外部画像共有を分ける |
 | export | 本人詳細→fresh GET→表示recordのID・row version・3hash・renderer一致→全canvas→明示Photos／Shareをsource接続 | 実OS写真保存・Share、Android新版export、backend receipt、本人端末商品受入れは未完。外部へ出た画像コピーは内部非公開／削除で回収できない |
-| 新renderer | iOS `piece.rn_bitmap_renderer.ios.v1`。検査した同一bitmapを表示／書出し。preview fit・構築は元8秒、完成saved画像は8秒後も保持 | live供給採用・商品採用は未完。Android新版の成立へ拡張しない |
+| 新renderer | iOS `piece.rn_bitmap_renderer.ios.v1`。検査した同一bitmapを表示/書出し。preview fit・構築の元8秒、完成saved画像は8秒後も保持 | API供給はTTL600秒/同rendererでLive。本人通常描画・保存・再読と商品採用は未確認。最新送信6501は新版を含まず、87151固定候補のTestFlight送信は未実行。Android新版成立へ拡張しない |
 | 最新限定検証 | 新export正常8PNG＋native拒否6。JS979・新native44成功。旧195は176PASS／19FAILを保持 | CI39780623108 attempt1 completed／failure、head`d2e1244…`、10/22 JST21:42:54〜22:07:18。CI全体合格ではない。限定TECHNICAL_CREDITの記録あり、product_credit=0 |
-| live・次の未完 | 10/23 07:07:33 JSTに`3577d7fd…`/`dep-dbd8hjoae00c73firbt0`がLive。既存APIの明示factory起動へ切替、autoDeploy off/linked main維持。現在ownerは入口§118／map§65.61／weekly§5.6.41／manifest v158 | 承認済みTTL600秒/private preview-save-owner-read-deleteを同API全認証sessionへ反映。public/write-read-visibility/export OFF、health200/bootstrap8flags一致/未認証history401を確認済み。実本人Authの通常保存1件→履歴/詳細、実OS/端末・商品受入れは未確認。privacy2pathはPR4だけにありPR3へ未戻し込み |
+| live・次の未完 | 10/23 Live3577d7fd/dep-dbd8hjoae00c73firbt0・承認command/autoOffは監視readで不変。privacy2pathはPR3@3084c99eへ同一blobで同期済み、唯一CI39864098163は1805 PASS/FAIL0/SKIP0 | 現在ownerは入口§119/map65.62/weekly5.6.42/manifest v159。本人保存にはRN新版が必要。候補branchを87151へ固定、既存署名build/TestFlight送信1回の個別判断前。本人保存/再読・実OS/端末/商品受入れ未完 |
 
-詳細owner：[Piece map](current_structure/02_piece_current_structure.md)、[Piece入口](../Cocolon_Piece/00_read_first.md)、[manifest](../Cocolon_Piece/manifest.json)。同変更単位でcurrent_entry/current_premise/current_structure pinを現物へ同期。TTL600秒とpiece.rn_bitmap_renderer.ios.v1は配置command readback根拠、private4true/public4falseは実bootstrap根拠。配置済みを実Auth本人保存や商品受入れの成功としない。本人データ/業務RPC/DB変更0、次の最初の未完は本人通常sessionの保存→同owner履歴/詳細。
+詳細owner：[Piece map](current_structure/02_piece_current_structure.md)、[Piece入口](../Cocolon_Piece/00_read_first.md)、[manifest](../Cocolon_Piece/manifest.json)。配置済みのAPIを本人保存成功へ昇格しない。最新iOS送信成功38041653252/source55142229（番号式6501）には正式eligibility供給と保存host接続がなく、current87151の既存製品差29pathを含む版が必要。固定候補の署名build/IPA/TestFlight送信は未実行。本人端末への導入有無も未確認。
 
 ## 7. その他の全機能・共通基盤
 
@@ -129,7 +129,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | AI選定・観測教材 | 三core分担と20場面の比較案は準備済み。次は[比較案](observation_learning/model_selection/2026-10-22-three-core/README.md)の最初の4場面について、固定モデル／正規fixture束縛・環境・実行費用上限を具体化し、現方式と未接続proxyの実出力を得る。27B採用・本統合・追加学習は未確定／未実行 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。u353〜355のコードと配置差を保持 |
 | Analysis | 最新内容修正版の配置差、6401本人生成・再表示・比較、複数ANSWER採用、一般理解、有料差、IF／Savedの未実装 |
-| Piece | live基点のPiece限定候補PR4/CIは準備済み。次は起動構成・TTL600秒案・全認証sessionへ及ぶprivate機能の採用判断と、技術的ready照合後の配置・実Auth保存→本人履歴／詳細。実Photos／Share、Android、backend receipt、商品受入れは残る |
+| Piece | API private構成はLive。正本privacy差は3084c99eで解消。本人保存に必要なRN sourceはbranch agent/piece-testflight-private-20261023@87151へ固定、既存iOS workflowによる署名Archive/TestFlight送信1回は個別判断前・未実行。本人保存→同owner履歴/詳細、実Photos/Share、Android/backend receipt、商品受入れは残る |
 | 全体・release | 自他所有／公開／削除、認証復帰、finish失敗の成功扱い・account切替後旧応答・公開visibility取得失敗時default、共有URL入口、通知配送等の通常実機経路と未受入れ品質 |
 
 この表は新しい作業の自動開始・GPU再起動・merge／deploy／公開の指示ではない。Mashの現行タスクを進め、対象の詳細ownerから具体的な一手を選ぶ。文書更新は商品品質の改善creditに数えない。
@@ -145,7 +145,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | Emlis・CMEE実物 | API `cocolon_meaning_experience_engine/engine.py`、`emlis_thread_service.py`とthread source／question／answer_update／surface、RN `InputScreen`・`useEmlisThread`・`EmlisThreadModal`。API path prefixは`ai/services/ai_inference/` |
 | AI試験 | `observation_learning/trials/2026-10-21-qwen27-demo/README.md`と8出力JSON。`fine_tuning_performed=false`、`cmee_integration_performed=false` |
 | Analysis実物 | API `astor_material_snapshots.py`、`analysis_observed_service.py`、`watashi_map_service.py`、`kokoro_weather_service.py`、RN `WatashiMapV2Renderer`・access policy。設計04 §10 IF／§11 Saved、schema05 §7・9.6 |
-| Piece実物 | `PieceOwnerHistoryScreen`、`pieceExport`、`PieceExportCanvas`、`pieceRenderer`、`InputPieceActionArea`。入口§118／map§65.61／manifest v158、CI39780623108とAPI39858883604、Live dep-dbd8hjoae00c73firbt0 |
+| Piece実物 | `PieceOwnerHistoryScreen`、`pieceExport`、`PieceExportCanvas`、`pieceRenderer`、`InputPieceActionArea`。入口§119／map§65.62／manifest v159、CI39780623108とAPI39864098163、Live dep-dbd8hjoae00c73firbt0 |
 | 周辺機能実物 | RootNavigator・MainTabsと5 Stack、Input／AnalysisHistory／TodayQuestionHistory／Nexus／Account／Ranking／Settings各screen、`lib/nexusApi`・home/account API transport、対応APIとaccess policy。`lib/iap/iapService.js` L432〜445・527〜531、`SubscriptionContext.js` L165〜234、API `api_public_profile.py` L81〜108、`navigation/linkingRuntime.js` |
 | 作業導線 | repository root `AGENTS.md`、観測学習README、work rules00／CURRENT_RULES R2／09／99・manifest、System Context00・task_profiles。元の必読incident・品質規則は継続 |
 
@@ -153,4 +153,4 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 次回はfresh headと変更pathを比較し、関係する根拠だけを再確認する。確認していない機能の検証日を更新せず、この一枚を「毎回全体を読む」入口として保つ。
 
-10/23 Piece差分は、既承認Render workspace/対象service、承認起動設定の保存、exact3577d7fd配置とLive/startup identity、無認証GET3本、privacy修復CI39858883604を照合したもの。設定保存1/配置1、本人データ・業務RPC・DB変更0。Emlis・Analysis・他機能の品質/端末状態を今回新規再検証した意味ではない。
+10/23今回Piece差分は、正本APIの同一2blob同期/原CI39864098163、既存Render稼働不変、最新TestFlight成功run/source/Upload stepと現RNの配布差、固定candidate refを照合したもの。API source2path/既存CI1/配布候補branch1、今回Render/DB/本人row/署名build/TestFlight送信0。他機能の品質・本人端末を再検証した意味ではない。

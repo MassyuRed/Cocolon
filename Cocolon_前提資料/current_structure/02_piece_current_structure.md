@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§118／map§65.61／weekly§5.6.41／manifest v158。承認済みコミット3577d7fdを既存APIへ配置し、2026-10-23 07:07:33 JSTにLive。TTL600秒/明示iOS版/private preview-save-owner-read-deleteを同API全認証sessionへ有効化、public/read/visibility/exportはOFF。health200/bootstrap8flags一致/未認証history401を確認。本人通常保存・同owner再読/実OS/端末・商品受入れは未確認。**
+**最新は入口§119／map§65.62／weekly§5.6.42／manifest v159。APIのprivacy修復を開発正本PR3@3084c99eへ同一2blobで戻し込み、唯一CI39864098163は1805 PASS/FAIL0/SKIP0。Live3577d7fd/承認設定は不変。本人保存に必要なRN配布差を確定し、TestFlight候補branchを87151d39へ固定。署名build/TestFlight送信は未実行・個別判断前、実本人保存/再読/端末受入れは未確認。**
 
 ### §99の判断案（履歴）
 
@@ -3493,3 +3493,12 @@ Renderはlive5c8bd8e5/app:app/autoDeploy offのまま。現在のpluginはcommit
 稼働ownerは既存app.create_application(piece_preview_configuration=...)→piece_v2_runtime_control→既存各handler。TTL600秒/piece.rn_bitmap_renderer.ios.v1/private preview-save-owner-read-deleteの明示構成を採用。保存・quota・owner-read/delete・preview visual/cancelの既存compositionを稼働へ接続した。source責務/API/DTO/DB/RNの新設0、STRUCTURE_MAP_DELTA_NONE。default app:app自体はsource上legacy/OFFであり、production起動構成と混同しない。
 
 GET /healthz200、/app/bootstrap200とPiece8flag一致（private4true/public-write-read-visibility-export4false）、未認証/emotion/piece/history401 PIECE_AUTH_REQUIRED/no-store/Bearerを確認。TTL/rendererはcommand readback根拠、実Auth/DB業務往復は未確認。現在は同API全認証sessionへ有効化済みであり、owner限定ではない。本人通常保存1件→履歴/詳細、実OS/端末・商品受入れ、P-W2/P-W3/M5独立残件を保持。privacy2pathはPR4だけにありPR3へ未戻し込み。今回source/CI追加0、設定保存1/配置1、DB/本人row/main merge/新service/料金0、product_credit0、automatic_progression=false。
+
+
+## 65.62 2026-10-23 — API privacy正本同期とiOS本人保存の配布差
+
+現在ownerは入口§119/weekly5.6.42/manifest v159。PR3@a536の既存middleware/testを本番3577と同一blobへ戻し込み、3084c99e/treeeb57c8b6へ反映。差分2pathだけ、全文readback一致。唯一既存push CI39864098163は23summary合計1805 PASS/FAIL0/ERROR0/SKIP0（shared/default128/native46）、実Authは合成。原logをmanifestへ可逆保存。新helper/依存/workflow/公開契約/DB/RN変更0、STRUCTURE_MAP_DELTA_NONE。Live3577/承認構成は監視readで不変、今回再配置0。
+
+最新iOS TestFlight成功38041653252/source55142229（番号式6501）には、current InputScreenの正式bitmap eligibility供給・host保存接続がない。current87151は同接続と新iOS bitmapを持つ。比較全146path中、製品/native/依存は既存29pathでPiece系であり、これに加えiOS workflow1が変わる。App/AppRuntime/navigation/Emlis・Analysis componentは同blob、共有RN native Text patchを含む影響はゼロとしない。既存最新sourceをbranch agent/piece-testflight-private-20261023@87151へ固定し、GitHub ref一致を確認した。source/CI追加なし。
+
+次は同branchに既存ios-build.ymlを一度dispatchし、署名Archive/IPA/TestFlight送信まで進める個別承認の判断。GitHub pluginにdispatchがないため画面操作案。現在dispatch/署名/送信0、App Store公開/Android/API/DB/flags変更0。実Auth本人保存/再読・実OS/端末/商品受入れ、P-W2/P-W3/M5は未完。source pinを新しい事前gateや商品creditへ変換しない。automatic_progression=false。

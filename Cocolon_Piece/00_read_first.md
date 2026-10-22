@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§118／map§65.61／weekly§5.6.41／manifest v158。承認済みコミット3577d7fdを既存APIへ配置し、2026-10-23 07:07:33 JSTにLive。TTL600秒/明示iOS版/private preview-save-owner-read-deleteを同API全認証sessionへ有効化、public/read/visibility/exportはOFF。health200/bootstrap8flags一致/未認証history401を確認。本人通常保存・同owner再読/実OS/端末・商品受入れは未確認。**
+**最新は入口§119／map§65.62／weekly§5.6.42／manifest v159。APIのprivacy修復を開発正本PR3@3084c99eへ同一2blobで戻し込み、唯一CI39864098163は1805 PASS/FAIL0/SKIP0。Live3577d7fd/承認設定は不変。本人保存に必要なRN配布差を確定し、TestFlight候補branchを87151d39へ固定。署名build/TestFlight送信は未実行・個別判断前、実本人保存/再読/端末受入れは未確認。**
 
 ### §87の設計時点（履歴）
 
@@ -4131,3 +4131,40 @@ UIの既存Start Commandをmanifest v157のapproved_runtime_configuration.start_
 これらは既存APIの配置・起動・認証拒否の技術確認であり、実本人Authの通常入力→preview→private保存1件→同owner履歴/詳細、同id/version/3hash/rendererの一致、期限超過挙動を実利用で成立させた結果ではない。本人データを勝手に選ばず、service_roleでAuthを代用せず、実削除を自動実行しない。次の最初の未完はP-W1の本人通常sessionによる保存/再読。P-W2実Photos/Share/Android/backend receipt、P-W3本人端末/商品受入れとM5独立残件を保持し、10/22保存/10/23共有目標の未達を配置だけで解消済みにしない。
 
 privacy修復の開発正本PR3への戻し込みは未実施で、PR4@3577d7fdだけにある。今後の開発配置でこの2pathを落とさない。今回source/CI追加0、設定保存1/固定commit配置1、新service/料金/DB変更/main merge0。結果と画面証跡をmanifestへ保存し、入口§118/map§65.61/weekly§5.6.41/manifest v158/全体現在地の5資料を同時同期する。STRUCTURE_MAP_DELTA_NONE（既存factory/route/ownerを採用、責務新設0）、product_credit=0、automatic_progression=false。
+
+
+## 119. 2026-10-23 — privacy修復の開発正本同期と本人保存に必要なiOS配布差
+
+### 119.1 今回のbounded作業と実行境界
+
+MashのPiece残件継続指示に基づく。root華恋だけが編集・GitHub反映owner、補助担当はread-onlyのsource/CI/稼働照合。最新の全機能情報全文、CURRENT_RULES、Rule18、恒久incident全文、既読全体設計01/全file地図01A/B/Cとfresh関連owner、入口§118/map65.61/最新weekly§5.6.41を照合した。System Context生成物がstale/未選択のため原典直接fallbackを維持し、新checker/生成物編集を行わない。Pieceモデル制限解除を維持する。
+
+本番3577d7fdに入れた既存privacy修復が正本PR3にはなく、次の正本採用でURL ID混入を復活させる具体的差を解消する。MANDATORY_DAMAGE_PREVENTION、Rule18 LEVEL1の既承認bytes mechanical publication範囲。新しい保護・Gate・helper・監視機構を作らず、既存2pathを同一blobへ合わせるだけ。今回の安全作業を商品本文/画像の品質creditへ変換しない。本人保存の直接作業へ戻るため、RN配布差を確認し、配布候補のsource pinまでを併せて具体化した。
+
+### 119.2 API正本へ同一2blobを戻し込み
+
+PR3開始head a536e50ee284785f585ac73329ef2947dca8bba9。middleware_request_perf.pyのpreimage08a392d702f7698a401ca65b7127c8009f6c702b/2304B、既存test_b12_shared_preview_composition.pyは1fedf16625e0d383094acdec63e884d88c44ba8e/38665Bで、PR4修復前08875643の同2fileと一致した。両者を本番と同じ3c99f15fa54cb7c9894f83a220e6767321797eb4/3118B、5880a8d0a4abd58efcc5f618f17aff9877e857ea/43314Bへ変更。privacy sourceと既存12caseを再設計せず、非Piece挙動・元test prefixを保持した。
+
+commit3084c99e5a08d6e475d8a177e62ebf1548e8a0f9/treeeb57c8b60cff334c85d48218af212f062daa3808、親a536。compareは上記2pathだけ（middleware16追加2削除、test89追加）、GitHub全文readback一致。関連Piece source/test/metrics/observability/appの166fileと依存3正本の比較で、差はこの2fileだけと独立確認した。API workflowは既存2本を確認し、このpushはPiece isolated1件だけを起動、Analysisはpaths不一致。workflow/test期待/fixture/依存/DB/RN変更0。
+
+唯一[CI39864098163](https://github.com/MassyuRed/mashos-api/actions/runs/39864098163)はpush/attempt1/head3084c99eでsuccess、job120121818573全32step success。原23pytest summaryは46/4/61/48/36/57/39/74/47/33/77/26/49/166/13/458/67/36/132/149/13/128/46、合計1805 PASS/FAIL0/ERROR0/SKIP0。shared/default128にprivacy12を含み、native disposable persistence46。Python3.12.15/Postgres16.15、Auth/source/HTTPは合成でlive本人往復ではない。原log841516B/SHA256533c7aed4651892b5f279af8c7f4adc9ed251a3d8cc859afb315f93a45f77519をmanifestへ可逆保存。旧PR4の1805と合算しない。追加run/rerun/CI開始後修復0。
+
+Render監視skillの既承認workspace readで07:17 JSTもLive dep-dbd8hjoae00c73firbt0/3577d7fd、start command全文一致、autoDeploy off/linked main維持、新配置0を確認。今回HTTP/本人データ/ログ本文を再取得せず、Render設定・配置・DB操作0。開発正本の同期は本番を再配置した意味ではない。
+
+### 119.3 本人保存を阻む配布版とRN sourceの差
+
+GitHubのiOS TestFlight Build最新成功はrun38041653252/attempt1/run_number65、2026-10-10、source55142229b6860b9c8195989cdddf0f218f07700a。既存workflowのBUILD_NUMBER=run_number*100+attemptにより6501、Upload to TestFlight stepもsuccess。本人端末への6501導入を確認した意味ではない。6401/6301を最新の送信成功として扱わない。
+
+6501 sourceのInputScreenはInputPieceActionAreaへisSaveAdmittedを供給せず、同hostにonSave/savePreview/isSaveAdmitted接続がない。pieceLayoutもprototype.v3だけ。current87151d39はInputScreenのisPieceBitmapSaveAdmitted供給→host savePreview→保存後PieceOwnerHistory遷移、新iOS bitmap版を含む。従ってAPI有効化だけでは6501の通常本人保存試験を完結できない。
+
+55142229→87151d39は382commits/146 changed path、実際の製品/native/依存差は既存29pathですべてPiece系。App.js/AppRuntimeContext/navigation/Emlis・Analysis componentは同blob、InputScreen/InputActionArea/NexusScreen/NexusHeaderの差はPiece接続・旧導線制御。共有react-native Text patchを含むため、他core source不変を共有nativeへの影響ゼロと読み替えない。Android対応resource1も含むが、新Android版の成立は未認定。iOS既存workflow差分1はNode18/npm install→24.19.0/npm ci、署名・Archive・Export・uploadは同じ。追加検査差分18pathを含む既存最新treeをそのまま固定し、新sourceや新workflowを作らない。
+
+[固定候補branch](https://github.com/MassyuRed/Cocolon/tree/agent/piece-testflight-private-20261023)は87151d3983818f18e556651d333d95be7bb487d7を指す。新ref不存在を確認して作成し、remote refをreadback一致。current開発branchの後続docs-only更新を配布sourceへ混ぜないための一回限りpinであり、新しいbuild systemではない。branch作成1/source変更0/RN CI追加0、署名・Archive・IPA export・TestFlight upload0。
+
+### 119.4 次の具体的操作と個別承認境界
+
+提案は固定branch/commitに対して既存.github/workflows/ios-build.yml（blobff3eeaaa83639a3b00db47f3fa09f924dab3bccd、workflow237145246）を一度workflow_dispatchし、既存macos-26・署名設定でRelease Archive→IPA export→既存TestFlight appへ送信すること。GitHub pluginにdispatch機能がないためGitHub画面の既存Run workflowを使う案。API/DB/flags/公開App Store/Android配布は変更しない。Piece V2公開・export OFFを保持する。次がrun66/attempt1なら算出build6601だが、番号とsourceはactual runで確定し、先に成功を宣言しない。
+
+既存workflowは署名/配布を含むためbuild確認だけとして実行しない。Rule18§11.3のproduction/release effectに該当し、今回は具体的候補の準備まで。個別承認受領前にdispatch/署名/送信しない。承認された場合は一度だけ実行し、operatorによるrerun/別source修復追加を行わず、失敗stageの事実を保存する。既存CocoaPods step内の最大3attempt等は変更しない。送信成功とApple処理完了・本人導入・通常保存/同owner再読・実OS・商品受入れは別に扱う。
+
+P-W1本人保存→履歴/詳細が最初の未完のまま。本人session/入力選択をservice_roleやRenderログインで代用せず、実削除を自動実行しない。P-W2実Photos/Share/Android/backend receipt、P-W3端末・商品受入れ、M5独立残件を維持。資料5pathを入口§119/map65.62/weekly5.6.42/manifest v159/全体現在地で同期し、同じ既存責務の修復とsource pinだけのためSTRUCTURE_MAP_DELTA_NONE、PRIMARY_OUTCOME=TECHNICAL_CREDIT（正本source/CIのみ）、product_credit0、automatic_progression=false。
