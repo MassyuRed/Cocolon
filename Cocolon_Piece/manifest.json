@@ -1,14 +1,14 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v141",
+  "schema_version": "cocolon.piece.workstream_manifest.v142",
   "generated_at": "2026-10-22 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v140",
-    "predecessor_head": "7d5069a48a349c401575b516a2c320a73bdc875c",
-    "carry_forward": "Prepare exact four-site test-only real-window repair proposal. Preserve prior single-use closed/failure, real RN12 credit, native44 unverified and legacy failures. No active source or new CI before explicit bounded decision.",
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v141",
+    "predecessor_head": "69c233019a2af86dba17546d4075ecd54d7a65af",
+    "carry_forward": "Mash approved exact section105 four-site test-only repair and new source single existing CI. Apply approved candidate bytes, preserve prior consumed failure and all original expectations. New CI limit1.",
     "immutable_prior_evidence_references": [
       {
         "format": "git-commit-json-pointer",
@@ -294,17 +294,17 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "f89514220d404b5d896f4232d4f860cec772bfd8",
-    "raw_sha256": "1c4d90a5b47a0cb326ba7e9f0b2846d2566e41c81ff8dd4b962a9e18329b353b",
-    "utf8_bytes": 603956,
-    "chars": 359132
+    "git_blob_sha1": "01998523f802371f38e96e209776ce2a884d237a",
+    "raw_sha256": "79b13cb3ff223a0f440851cd5efbdf2fcd736701d09e3c305137e897810a3589",
+    "utf8_bytes": 606071,
+    "chars": 360420
   },
   "current_premise": {
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
-    "git_blob_sha1": "298e41c14a1493b2e6f73af6e8d67bb351d3ad5a",
-    "raw_sha256": "6c5d53066964cdd0c72ebeff644256a92b217af66dfaecd1ed77bc5b1f3f0482",
-    "utf8_bytes": 534773,
-    "chars": 312549
+    "git_blob_sha1": "5c0916a3ccf399432f8ba535a20b3da2407ae911",
+    "raw_sha256": "22c31514f79a929afe0827ab50c4c22a8dae31415c811244a69233eaad456be8",
+    "utf8_bytes": 535471,
+    "chars": 313015
   },
   "product_definition": {
     "user_facing_name": "Piece",
@@ -471,7 +471,7 @@
     "test_rerun_in_this_doc_sync": false
   },
   "current_actual_basis": {
-    "cocolon_pre_sync_head": "7d5069a48a349c401575b516a2c320a73bdc875c",
+    "cocolon_pre_sync_head": "69c233019a2af86dba17546d4075ecd54d7a65af",
     "mashos_api_head": "a536e50ee284785f585ac73329ef2947dca8bba9",
     "current_user_visible_piece_shape": "CANDIDATE_NORMAL_INPUT_V2_SAVED_SOURCE_ONLY__TUTORIAL_NEXUS_LEGACY_REMAIN__DEPLOYED_STATE_NOT_RECHECKED",
     "piece_v2_pure_contract_owner_present": true,
@@ -487,7 +487,7 @@
     "input_screen_source_connected": true,
     "live_auth_input_to_preview_to_device_verified": false,
     "database_evidence_owner": "live_db_apply_20261019",
-    "remaining_work_owner": "ios_bitmap_native_window_repair_proposal_20261022",
+    "remaining_work_owner": "ios_bitmap_native_window_repair_20261022",
     "product_acceptance": false,
     "piece_v2_default_application_registered": false,
     "piece_v2_quota_http_present": true,
@@ -599,12 +599,12 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "PIECE_WORK_ALLOWED",
-    "state": "BITMAP_NATIVE_WINDOW_FOUR_SITE_REPAIR_PROPOSAL_PREPARED_EXPLICIT_NEW_CI_DECISION_PENDING",
-    "current_map_section": "65.53",
-    "current_entry_section": "105",
+    "state": "APPROVED_BITMAP_WINDOW_REPAIR_SOURCE_PREPARED_SINGLE_CI_PENDING",
+    "current_map_section": "65.54",
+    "current_entry_section": "106",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
-    "weekly_review_section": "5.6.33",
-    "first_unfinished_work": "native44のtest-only Window四地点修復と新source CI一回の具体案は準備済み。旧一回counter消費済み、適用/新CIはMash限定判断前。正式admission/通常保存/実機未完。",
+    "weekly_review_section": "5.6.34",
+    "first_unfinished_work": "承認済み四地点fixture修復sourceの既存CI一回を実行し、新44/RN12を旧群と分けて判定・原物保存。正式admission/通常保存/実機未完。",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
     "piece_migrations_already_applied": 6,
@@ -803,10 +803,10 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "298e41c14a1493b2e6f73af6e8d67bb351d3ad5a",
-    "raw_sha256": "6c5d53066964cdd0c72ebeff644256a92b217af66dfaecd1ed77bc5b1f3f0482",
-    "utf8_bytes": 534773,
-    "chars": 312549
+    "git_blob_sha1": "5c0916a3ccf399432f8ba535a20b3da2407ae911",
+    "raw_sha256": "22c31514f79a929afe0827ab50c4c22a8dae31415c811244a69233eaad456be8",
+    "utf8_bytes": 535471,
+    "chars": 313015
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -979,20 +979,20 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "READ_ONLY_BLOCKER_ANALYSIS_AND_REVIEWED_UNAPPLIED_CANDIDATE_RECORD",
+    "classification": "MASH_APPROVED_SECTION105_FOUR_SITE_TEST_FIX_AND_SINGLE_SOURCE_CI",
     "paths": [
+      "tests/native/piece-text-metrics-ios.mm",
       "Cocolon_Piece/00_read_first.md",
       "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
       "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
       "Cocolon_Piece/manifest.json"
     ],
-    "source_commit": "15b0a62a1973f88ba1849989ecda6d020061b71a",
-    "prior_ci_run": 39717661329,
     "product_source_changes": 0,
-    "test_source_changes": 0,
+    "test_source_changes": 1,
     "workflow_changes": 0,
     "new_files": 0,
     "new_ci_executions": 0,
+    "ci_execution_limit": 1,
     "same_source_reruns": 0,
     "structure_map": "STRUCTURE_MAP_DELTA_NONE",
     "automatic_progression": false
@@ -90395,6 +90395,84 @@
     "technical_credit": 0,
     "product_credit": 0,
     "implementation_approved": false,
+    "formal_admission": false,
+    "can_save": false,
+    "can_export": false,
+    "automatic_progression": false
+  },
+  "ios_bitmap_native_window_repair_20261022": {
+    "state": "APPROVED_SOURCE_PREPARED_CI_PENDING",
+    "base_head": "69c233019a2af86dba17546d4075ecd54d7a65af",
+    "base_tree": "69c233019a2af86dba17546d4075ecd54d7a65af",
+    "api_head": "a536e50ee284785f585ac73329ef2947dca8bba9",
+    "approval": {
+      "owner": "Mash",
+      "text": "進めていいよ。",
+      "scope": "Section105 four-site test-only fixture repair apply and existing CI once with new source",
+      "proposal_commit": "69c233019a2af86dba17546d4075ecd54d7a65af",
+      "entry_section": "105"
+    },
+    "entry_section": "106",
+    "map_section": "65.54",
+    "weekly_section": "5.6.34",
+    "classification": "MASH_APPROVED_LEVEL3",
+    "environment": "PIECE_WORK_ALLOWED",
+    "execution_owner": "Karen root only; auxiliary reviewer read-only",
+    "exact_paths": [
+      "tests/native/piece-text-metrics-ios.mm",
+      "Cocolon_Piece/00_read_first.md",
+      "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+      "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
+      "Cocolon_Piece/manifest.json"
+    ],
+    "new_tracked_files": 0,
+    "source_applied": true,
+    "source_path": "tests/native/piece-text-metrics-ios.mm",
+    "source_identity": {
+      "bytes": 125892,
+      "sha256": "80eb9ebc7f765dbc5b5760ac5c305db5ef92e0f98cbe9512fa4bc57272f0e309",
+      "git_blob_sha1": "a63e6a46e1b7554e4b0033c8c31a47988b1872f3"
+    },
+    "source_preimage": {
+      "repository": "MassyuRed/Cocolon",
+      "commit": "7d5069a48a349c401575b516a2c320a73bdc875c",
+      "path": "tests/native/piece-text-metrics-ios.mm",
+      "bytes": 125744,
+      "sha256": "961c2ecb43e1d188689fd528829563735ff3131a63f3487a6d22f89b1dcb9b7b",
+      "git_blob_sha1": "64de7f7b64bfc98c4d3e66a4305115131ed62cca"
+    },
+    "exact_delta": "four existing fixtureRequiresRealWindow=YES assignments before mounting Unicode/fault/overlap second/fractional source; outside runBitmapChecks identical",
+    "preflight": {
+      "five_current_path_blobs_match": true,
+      "candidate_manifest_bytes_match": true,
+      "reverse_projection_match": true,
+      "independent_review_no_static_blocker": true,
+      "full_incident_read": true
+    },
+    "ci_executions": 0,
+    "ci_limit": 1,
+    "actions_reruns": 0,
+    "post_result_source_edits": 0,
+    "old_run": 39717661329,
+    "old_run_counter": 1,
+    "old_run_conclusion": "failure",
+    "native_expected": 44,
+    "native_legacy_expected": 195,
+    "old_v3_separate20": "explicitly unexecuted",
+    "rn_new_expected": 12,
+    "rn_legacy_expected": 13,
+    "js_expected": 957,
+    "original_case_ms": 8000,
+    "original_native_seconds": 90,
+    "max_side": 4096,
+    "max_pixels": 4194304,
+    "live_budget_bytes": 33554432,
+    "product_source_changes": 0,
+    "runner_changes": 0,
+    "workflow_changes": 0,
+    "api_db_effect": 0,
+    "validation_success": false,
+    "product_credit": 0,
     "formal_admission": false,
     "can_save": false,
     "can_export": false,

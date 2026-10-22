@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§105／current map§65.53／weekly§5.6.33／manifest v141です。新bitmap native44の検証用Windowを4地点だけ直す具体候補を準備し、新source CI一回はMash判断待ち。前回RN12成立・両420元8秒内、native44未検証・旧失敗・未採用STOPを保持。今回は記録のみ、active source/CI0、正式admission/通常保存は未完了です。**
+**最新は入口§106／map§65.54／weekly§5.6.34／manifest v142。Mash承認済みの検証用Window四地点修復を適用し、新sourceの既存CI一回へ進みます。新native44/RN12の結果は未確認。旧一回失敗/未採用・正式admission/通常保存未完を保持します。**
 
 ### §87の設計時点（履歴）
 
@@ -3827,3 +3827,14 @@ P-W1の本筋は、候補検証不足解消→正式renderer admission・採用�
 今回exact workはOBSERVED_BLOCKER_MINIMAL_FIX候補の設計・記録であり、候補採用/稼働効果/品質creditは0。current source/判定/契約を変更しない記録4fileはMashの残件継続指示とRule18 standing delegationによる。STRUCTURE_MAP_DELTA_NONE（製品構造・配置は不変）。開始recordはproduct_destination=P-W1本文画像から通常保存への接続、current_gate=追加native44未検証、execution_owner=root華恋、completion=四地点候補と独立review・remote記録の成立、STOP=追加effect前の承認不足、prohibited=製品/比較/本文/期限変更・追加CI・次Gate進行、success_credit=ADMINISTRATIVE_ONLY、next_Mash_decision=下記の新限定単位。今回active test/source変更0、新CI0。
 
 一般の内部修復にはRule18 §11.3 LEVEL2(3)が適用できるが、§99.5/§104で閉じた一回上限をそのまま再利用できない。Rule18 §11.3は「closed or consumed single-use authorityのreuse / retry / reactivation / repair」をstanding delegation外とする。したがって判断対象は方式の再承認ではなく、**この四地点test-only修復の適用と新sourceの既存CI一回を新たな限定単位として実行すること**。上記具体差分・5path・一回終了条件までを対象とする。承認前のsource適用/新CIは0。候補実行はLEVEL3(4)(6)判断待ちであり、旧失敗counter/未採用STOPとformal_admission/can_save/can_export/automatic_progression=falseを維持する。
+
+
+## 106. 2026-10-22 — §105承認済みWindow四地点修復を適用、新source一度CIへ
+
+Mashは§105の「この修復の適用と、新ソースでのCI一回」へ「進めていいよ。」と明示承認した。開始PR30 head69c233019a2af86dba17546d4075ecd54d7a65af/tree e615cdcfbdaaecb8dfb818fc87b1dd6b226ff76d、API PR3 a536e50ee284785f585ac73329ef2947dca8bba9をfresh確認。許可5pathの現Git blobとlocal bytes、manifest内patch/candidate台帳を照合し、恒久incidentは今回も全文読了。§105の判断待ちは履歴へ移り、同じ承認を再質問しない。
+
+適用は承認済みtest125,892byte/SHA256 80eb9ebc7f765dbc5b5760ac5c305db5ef92e0f98cbe9512fa4bc57272f0e309（blob a63e6a46e1b7554e4b0033c8c31a47988b1872f3）そのもの。runBitmapChecks内Unicode/fault/overlap second/fractionalの4地点でaddSubview前のfixtureRequiresRealWindow=YESを追加した。逆射影で元全文一致、group外/判定/fault/44期待/旧195/旧V3別20未実行/RN旧13＋新12/JS957・本文/元期限/資源を維持し、独立read-only reviewは指摘なし。製品/runner/workflow/依存/API/SQL/DB/本番/mainは不変更。PIECE_WORK_ALLOWED、root華恋単一writer。別Pro/Ultra model成立の申告なし。
+
+今回の新source pushで既存CIを一回だけ実行する。新単位counter0→run取得時1/上限1、旧run39717661329 counter1/failureは不変。same-source rerun/結果後source追加修正/次CI/別Gateへの進行は0。原logs/report/PNG/取得可能原物を保存して、元44個別判定とsummary・RN12元条件・両420の元8秒内を評価する。旧群の失敗を新groupで相殺せず、全体CIが失敗ならfailureと記録する。compile/例外/timeout/記録不足/期待未達でも一回で停止する。
+
+現時点はsource確定、UIKitでの修復成功/44成立/新RN条件は未確認。STRUCTURE_MAP_DELTA_NONE（検証fixture内修復だけ）。正式admission/canSave/canExport/通常保存/同owner再表示/画像保存共有/本人実機は未完、商品credit0、automatic_progression=false。既存P-W1の採用版→正式admission→同preview保存・同owner履歴/詳細の本線を維持する。

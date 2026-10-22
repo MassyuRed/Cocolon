@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§105／本map§65.53／weekly§5.6.33／manifest v141。新native44の検証用Windowを4地点だけ修復する具体案を準備、新source CI一回はMash判断待ち。前回RN12成立・両420元8秒内、native44未検証・旧失敗・未採用STOPを維持。今回source/CI0、正式admission/通常保存/本人再表示は未完了。**
+**最新は入口§106／本map§65.54／weekly§5.6.34／manifest v142。§105のWindow四地点修復をMash承認どおり適用、新source既存CI一回へ。新native44/RN12結果未確認、正式admission/通常保存/本人再表示は未完。**
 
 ### §99の判断案（履歴）
 
@@ -3356,3 +3356,8 @@ source15b0a62a/CI39717661329 attempt1継続。JS957 PASS、iOS source/standalone
 入口§105／weekly§5.6.33／manifest v141。前回新RN12条件と両420の元8秒内は再確認、native44は製品描画前の検証用RCTTextView.windowがselfをUIWindow*として返すmount区間で例外。既存test fileの新group内4地点だけ、addSubview前にfixtureRequiresRealWindow=YESを設定する候補を準備した。Unicode/fault/overlap/fractionalすべてを含み、旧group/製品source/全判定/期限/資源は維持。四代入の逆射影で元全文一致、read-only独立review指摘なし。UIKitでの修復成功は未検証。
 
 今回記録4fileだけ、active source/CI0。消費済み§99一回の再利用はRule18§11.3で禁止されるため、新5path単位（test1＋結果資料4）と既存CI一回はMash判断待ち。旧native195/旧V3別20未実行・旧RN群を保持、新44/44とRN12条件を別評価。旧失敗が残ればCI全体failure。未達時の追加修正/再CI/自動採用は0。STRUCTURE_MAP_DELTA_NONE、正式admission/通常保存→本人履歴・詳細/共有/実機は未完、商品credit0。候補全文復元patchとbase/candidate台帳はmanifestのios_bitmap_native_window_repair_proposal_20261022。詳細と承認理由は入口§105。
+
+
+## 65.54. 2026-10-22 — 承認済み新bitmap native fixture Window修復を適用
+
+入口§106／weekly§5.6.34／manifest v142。Mashが§105の四地点修復＋新source既存CI一回を明示承認。既存testのrunBitmapChecks内だけ、Unicode/fault/overlap second/fractional mount前にfixtureRequiresRealWindow=YESを設定した。候補blob a63e6a46e1b7554e4b0033c8c31a47988b1872f3のbytesを適用し、旧group/全判定/分母/製品/runner/workflow/元8秒90秒/資源は維持。read-only独立review指摘なし。新source pushによる既存CI一回、結果後追加修正/再CI0。現在結果未確認、新44/新RN12を旧失敗と別記録する。STRUCTURE_MAP_DELTA_NONE、正式admission/通常保存→本人履歴詳細/共有/実機は未完、automatic_progression=false。

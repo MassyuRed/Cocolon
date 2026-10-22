@@ -1434,7 +1434,7 @@ static BOOL runBitmapChecks(PieceTextMetrics *module,RCTBridge *bridge) {
   PieceBitmapCanvasView *host=[[PieceBitmapCanvasView alloc]initWithFrame:CGRectMake(0,0,1080,1350)];[parent addSubview:host];
   NSArray *strings=@[@"Cocolon",@"私は言葉を大切にします。",@"office ffi e\u0301",@"مرحبا بالعالم",@"👩‍👩‍👧‍👦 👍🏽 🇯🇵",@"  keep spaces  ",@"שלום עולם",@"abc (אבג) 12"];
   for(NSUInteger i=0;i<strings.count;i++){@autoreleasepool{
-    RCTTextView *source=makeView(strings[i],48);[parent addSubview:source];CGFloat height=i%2?1920:1350;
+    RCTTextView *source=makeView(strings[i],48);source.fixtureRequiresRealWindow=YES;[parent addSubview:source];CGFloat height=i%2?1920:1350;
     NSMutableDictionary *request=bitmapRequest(source,host,height);bridge.uiManager.registry=@{@1:source,@2:host};
     NSString *code=nil;NSDictionary *reply=bitmapCall(module,request,&code);CGImageRef image=(__bridge CGImageRef)host.bitmapImage;
     BOOL valid=code==nil&&[reply[@"checked"]isEqual:@YES]&&[reply[@"overflow"]isEqual:@NO]&&host.bitmapToken.length>0&&
@@ -1475,7 +1475,7 @@ static BOOL runBitmapChecks(PieceTextMetrics *module,RCTBridge *bridge) {
   for(NSString *fault in faults){@autoreleasepool{
     NSString *text=[fault isEqual:@"empty"]?@"   ":[fault isEqual:@"missing_glyph"]?@"\u0378":@"Cocolon";
     RCTTextView *base=makeView(text,48);PieceBitmapFaultText *source=[[PieceBitmapFaultText alloc]initWithFrame:base.frame];
-    source.fixtureStorage=base.fixtureStorage;source.fixtureContentFrame=base.fixtureContentFrame;source.fixtureAttached=YES;[parent addSubview:source];
+    source.fixtureStorage=base.fixtureStorage;source.fixtureContentFrame=base.fixtureContentFrame;source.fixtureAttached=YES;source.fixtureRequiresRealWindow=YES;[parent addSubview:source];
     NSMutableDictionary *request=bitmapRequest(source,host,1350);bridge.uiManager.registry=@{@1:source,@2:host};
     if([fault isEqual:@"unknown"])request[@"unknown"]=@1;
     if([fault isEqual:@"missing"])[request removeObjectForKey:@"rows"];
@@ -1489,7 +1489,7 @@ static BOOL runBitmapChecks(PieceTextMetrics *module,RCTBridge *bridge) {
     if([fault isEqual:@"source_attributes"])source.bitmapFault=3;
     if([fault isEqual:@"overflow"]||[fault isEqual:@"overlap"]){request[@"line_height"]=@1;request[@"total_height"]=@1;}
     RCTTextView *second=nil;
-    if([fault isEqual:@"overlap"]){second=makeView(text,48);[parent addSubview:second];second.frame=source.frame;second.fixtureContentFrame=source.fixtureContentFrame;
+    if([fault isEqual:@"overlap"]){second=makeView(text,48);second.fixtureRequiresRealWindow=YES;[parent addSubview:second];second.frame=source.frame;second.fixtureContentFrame=source.fixtureContentFrame;
       NSMutableDictionary *row=[request[@"rows"][0]mutableCopy];row[@"tag"]=@3;request[@"rows"]=[request[@"rows"]arrayByAddingObject:row];request[@"total_height"]=@2;
       bridge.uiManager.registry=@{@1:source,@2:host,@3:second};}
     const auto budget=PieceV4RasterBudget();size_t reserved=0;
@@ -1514,7 +1514,7 @@ static BOOL runBitmapChecks(PieceTextMetrics *module,RCTBridge *bridge) {
   bitmapCheck(@"side_4096_bound",!rejected.makeExact(4097,1,1,PieceV4RasterBudget()));
   bitmapCheck(@"pixel_4m_bound",!rejected.makeExact(4096,1025,1,PieceV4RasterBudget()));
   // The buffer origin is integral and phase participates once in the CTM.
-  RCTTextView *source=makeView(@"office ffi e\u0301",48);[parent addSubview:source];NSMutableDictionary *req=bitmapRequest(source,host,1350);
+  RCTTextView *source=makeView(@"office ffi e\u0301",48);source.fixtureRequiresRealWindow=YES;[parent addSubview:source];NSMutableDictionary *req=bitmapRequest(source,host,1350);
   NSDictionary *snap=PieceBitmapSource(source,req[@"rows"][0],host,^BOOL{return YES;});
   PieceOwnedPixels fractional;CGRect extent,ink;
   BOOL phaseOK=snap&&PieceBitmapPaint(snap,48,CGPointMake(.375,-.625),1,PieceV4RasterBudget(),^BOOL{return YES;},fractional,&extent,&ink);

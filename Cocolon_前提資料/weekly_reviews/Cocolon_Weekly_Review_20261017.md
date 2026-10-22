@@ -1911,3 +1911,8 @@ source15b0a62a/CI39717661329 attempt1継続。JS957 PASS、iOS source/standalone
 入口§105／map§65.53／manifest v141。新RN12条件/preview8/両420の6718.778・3903.472msを再確認。native44は判定0/44のまま。検証shimが未mountのText自身をWindowとして返した例外区間へ、既存flagを4地点でmount前にYESとする候補を限定した。製品/旧group/本文/比較器/期待値/分母/8秒・90秒・資源上限は不変。候補全文の逆射影一致と読取reviewを確認し、patch/台帳を既存manifestへ保存する。active test変更0、新CI0、記録4fileのみSTRUCTURE_MAP_DELTA_NONE。
 
 前回CI一回は閉じたまま。Rule18§11.3の消費済みsingle-use境界により、新5path（test1＋結果資料4）の適用と既存CI一回は具体案へのMash判断待ち。成功は新44/44と新RN12の元条件、旧群の失敗は別保持。未達は一回でSTOPし、追加修復/再CI/正式admission/保存へ自動進行しない。P-W1通常保存→同owner履歴/詳細、P-W2共有、P-W3実機・10/22保存目標は未完。今回ADMINISTRATIVE_ONLY、商品credit0。Supabase一覧readでACTIVE_HEALTHY、DB変更0。System Contextは部分materializationで必要Python module未取得、同ref原典直接読取を使用した。
+
+
+##### 5.6.34 承認済みWindow四地点修復を適用、新source一度CIへ
+
+入口§106／map§65.54／manifest v142。Mashの「進めていいよ」により、既存testの新bitmap groupだけ四地点へ実Window flagをmount前に設定。候補全文/hashと原典一致・逆射影一致・独立review指摘なし。既存5path（test1＋結果資料4）、製品/runner/workflow/API/DB/依存0、STRUCTURE_MAP_DELTA_NONE。新source既存CI一回を行い、旧counter1/failureを維持、新44/旧195/RN旧13＋新12を別判定する。現在実行結果は未確認、追加修復/再CI/次Gateへの自動進行0。P-W1正式admission/通常保存/同owner再表示、P-W2共有、P-W3実機未完、商品credit0。
