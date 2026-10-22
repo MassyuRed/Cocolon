@@ -2056,3 +2056,12 @@ P-W1の本人保存にはRN新版の配布が必要と確定。最新iOS TestFli
 
 
 資料反映4571で既存自動検査5件が起動し3成功/2失敗。System Context39865542760/39865542717は各225 PASS/1 FAIL、親87151から不変のtestがseed path数[8,5]を期待し、現profile[1,8,5]と不一致。Piece製品の失敗やfrozen/stale検出の結果には転用せず、原logを入口§119.5/manifestへ保存した。未修復/再試行/周辺source変更0、最終docs補正だけ[skip ci]。正本API1805・旧RN描画・TestFlight配布の評価へ合算しない。
+
+
+#### 10/23 — 三中核のAI原価・生成制限・料金の再試算
+
+Mashは、旧費用がEmlis応答中心であり、CMEEへモデルを接続する全機能の原価、利用制限、サブスク料金の見直しを出すよう指示した。[費用案](../observation_learning/model_selection/2026-10-22-three-core/2026-10-23-cost-and-plans.md)・再計算コード・172条件CSVを保存。現行表示はPlus300/Premium980（plan設定read-only、実ストア価格/税込区分未確認）、旧680/980・1480/1980は提案値と分離。Piece5/30/∞は保存件数で本文preview数ではなく、Emlis1/3問も月quotaではないとsource確認した。
+
+華恋は原価面の比較基準として税込Plus1980/Premium3980、Free3/Plus60/Premium60セッション、Piece本文1/30/60、分析1/4/8、将来IF0/0/4を推奨した。価格決定ではなく、仮の秒数・FX160・serverless48GB1.22$/h・20%再試行・10%税決済変動予備での試算。全枠時の変動原価予算Free28.99/Plus511.03/Premium1138.02円、固定基盤11000円。MAU1000/有料5%/有料内訳80:20では推奨案の月残額約6882〜19972円（手数料26〜15%、人件費/広告等前）。1480/2980は同条件で赤字。必須2passや重いcold startでは推奨案も赤字になる条件を記載し、販売成立としない。
+
+次は最初の4場面C0最大4/M1最大4。既27Bの取得元/revision/本体hash、ctx8kの適合を確認し、実call数・tokens・処理/課金時間を測る。A40最大3h/利用消費500円は未実行予算案。長い履歴、Premium3回答、100件＋前期の分割集約は料金確定前の追加計測が残る。今回GPU/推論/チャージ/追加学習/価格/quota/配置変更0、プラン設定のread-only以外の本人DB取得操作0。全体現在地・観測入口・比較入口を同時更新。STRUCTURE_MAP_DELTA_NONE、ADMINISTRATIVE_ONLY、product_credit0、automatic_progression=false。

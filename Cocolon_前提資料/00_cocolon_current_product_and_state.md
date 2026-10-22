@@ -1,12 +1,12 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-23 JST（今回の差分はSystem Contextの現行実行導線）。全Cocolon作業の必読原本。仕様相談、観測会、AI選定、実装、監査、文書更新も対象。
+更新日：2026-10-23 JST（最新差分は三中核のAI原価・制限・料金案。System Contextの現行実行導線も維持）。全Cocolon作業の必読原本。仕様相談、観測会、AI選定、実装、監査、文書更新も対象。
 
 ## 1. この資料の役割と更新方法
 
 これは全製品の現在地を一度で確認する正本である。毎回全文を読み、対象機能の詳細正本と実ファイルへ進む。過去の読了、会話の要約、検索断片だけで代用しない。repository rootの`AGENTS.md`、`00_karen_read_first.md`、work rulesの入口からここへ入り、System Contextの生成物に含まれない場合もfreshな作業ownerから直接読む。
 
-現時点の確認基準はCocolon Draft PR [#30](https://github.com/MassyuRed/Cocolon/pull/30) `87151d3983818f18e556651d333d95be7bb487d7`、mashos-api Draft PR [#3](https://github.com/MassyuRed/mashos-api/pull/3) `3084c99e5a08d6e475d8a177e62ebf1548e8a0f9`。両方open／draft。これは今回の照合点であり、次回の最新headを固定する指示ではない。本資料の配置commitは、この変更を含むGitHub revisionから解決する。
+現時点の確認基準はCocolon Draft PR [#30](https://github.com/MassyuRed/Cocolon/pull/30) `8e3c26f66e13c26e82349c4e02415e149e5e3943`、mashos-api Draft PR [#3](https://github.com/MassyuRed/mashos-api/pull/3) `3084c99e5a08d6e475d8a177e62ebf1548e8a0f9`。両方open／draft。これは今回の照合点であり、次回の最新headを固定する指示ではない。本資料の配置commitは、この変更を含むGitHub revisionから解決する。
 
 **作業ごとに差分を確認し、変化した機能・決定・状態・残件・根拠だけを、当該作業と同じ変更単位で置換更新する。** 日付だけを全行で更新しない。無関係な機能の再監査や全資料の再生成はしない。関連差分なしは既存の作業記録／PR説明に「全体現在地差分なし」と理由を一行残す。詳細mapに構造差分があれば、そのmapも同時に更新する。
 
@@ -125,9 +125,13 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | Plus | 適格本人履歴を用いたEmlis、こころ天気の文章／理由、標準map・直近1年履歴、Piece月30 | 履歴参照と有料差の体感は同義ではない |
 | Premium | 修正できるframeと本人続行の最大3問、長期weather・深いmap、無制限履歴／Piece、設計上のIF・Saved | IF／Saved未実装。同一期間V2 light／standard／deepの本文・graph差は未成立／未確認で、表示上の権利を能力の完成へ換算しない |
 
+10/23のプラン設定read-only照会ではPlus表示は月300円、Premium月980円（RN/API fallbackも同額）。実ストア価格・税込区分は未確認。Pieceの5/30/無制限は保存数で、新AI生成数の上限ではない。Emlisの1/3問もthread単位であり、月間生成費を制限しない。
+
+[全三中核の費用・制限・料金再試算](observation_learning/model_selection/2026-10-22-three-core/2026-10-23-cost-and-plans.md)を作成した。新AI導入時の比較基準はPlus1,980円／Premium3,980円と生成枠の組合せを華恋が推奨。Free3/Plus60/Premium60セッション、Piece本文1/30/60、分析1/4/8、将来IF0/0/4の月枠案。実測前の仮定による計算で、料金・権利・quota・モデル採用は未決／未変更。1,480/2,980円は有料転換5%・全枠で赤字。必須2pass・cold start・長文の分割集約で推奨案も悪化するため、最初の4場面と履歴／長期分析の実測後に確定する。無料者・保存再読・数値集計・固定基盤費・ストア費も別に計上し、Emlis単体の旧試算を全体採算へ使わない。
+
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
-| AI選定・観測教材 | 三core分担と20場面の比較案は準備済み。次は[比較案](observation_learning/model_selection/2026-10-22-three-core/README.md)の最初の4場面について、固定モデル／正規fixture束縛・環境・実行費用上限を具体化し、現方式と未接続proxyの実出力を得る。27B採用・本統合・追加学習は未確定／未実行 |
+| AI選定・観測教材 | 三core比較案と全体原価・料金案を準備済み。次は最初の4場面の正規fixture束縛、既27Bの取得元/revision/本体hash確認、context/VRAMと実呼出し数を具体化し、C0最大4＋M1最大4の実出力・課金時間を得る。有料試験は最大3h・消費500円の未実行案で、今回起動・課金0。長い履歴／Premium3回答／100件＋前期分析の費用は別途実測が必要。採用・本統合・追加学習・商品料金改定は未実行 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。u353〜355のコードと配置差を保持 |
 | Analysis | 最新内容修正版の配置差、6401本人生成・再表示・比較、複数ANSWER採用、一般理解、有料差、IF／Savedの未実装 |
 | Piece | API private構成はLive。正本privacy差は3084c99eで解消。本人保存に必要なRN sourceはbranch agent/piece-testflight-private-20261023@87151へ固定、既存iOS workflowによる署名Archive/TestFlight送信1回は個別判断前・未実行。本人保存→同owner履歴/詳細、実Photos/Share、Android/backend receipt、商品受入れは残る |
@@ -157,3 +161,5 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 10/23今回Piece差分は、正本APIの同一2blob同期/原CI39864098163、既存Render稼働不変、最新TestFlight成功run/source/Upload stepと現RNの配布差、固定candidate refを照合したもの。API source2path/正本の限定CI1/配布候補branch1、今回Render/DB/本人row/署名build/TestFlight送信0。別集計として候補branch既存phase6自動検査1成功、最初のdocs反映4571の既存自動検査5件は3成功/2失敗。System Context2件は変更していないseed期待[8,5]と現profile[1,8,5]の不一致、各225 PASS/1 FAILで当時未修復（本System Context更新でseed期待を修復）。原log・区別は入口§119.5/manifestに記録し、再試行0/最終docs補正は[skip ci]。他機能の品質・本人端末を再検証した意味ではない。
 
 10/23 System Context更新：全tracked pathと全体設計・全file地図・current maps・最新weekly・全機能原本・対象sourceを照合。旧inventoryとの差はCocolon追加168/API追加328、削除各0（照合head bef22ae…/3084c99e…）。全blobの意味読了ではない。正規実装はPR37の固定環境・material分離・cache方式であり、商品側入口を同期した。学習済AI方針・問い実装・Analysis IF/Saved・Piece API/RNの区別は既存正本どおり保持。今回の差分はSystem Contextのみ、他機能の稼働/本人端末/商品品質再検証は行っていない。実行結果の追記だけのために商品headを動かさず、PR37の最新実行報告を確認先とする。STRUCTURE_MAP_DELTA_NONE（商品source/接続変更なし）。
+
+10/23費用差分：上記固定headのsourceと27B原本、現行プラン表示設定、公式GPU・基盤・ストア手数料を照合。全体原価を仮定付き172条件で計算し、料金・生成枠と4場面の実行予算を提案した。今回DBはプラン設定のread-onlyのみ、本人入力取得／変更0、GPU／有料推論／チャージ／price/quota変更0。STRUCTURE_MAP_DELTA_NONE（接続実装・商品contract差分なし）、product_credit=0。
