@@ -2006,3 +2006,12 @@ Mashの「進めていいよ」を受領。入口§115/map65.58/manifest v153。
 Mashは、確認のたびに基本情報・機能・決定が抜けて指摘を繰り返す状態を改め、Cocolonの全機能と全状態を最新情報として残し、毎作業必読・毎回差分更新するよう指示した。[全体現在地](../00_cocolon_current_product_and_state.md)へ目的・機能間接続・既決／未決・コード／稼働／本人端末／商品受入れ・残件・根拠を集約した。学習済AI＋CMEE接続は既決、選定・学習方式・配置等は未決／未実施と区別。Piece・Analysis・もしも／Savedを含め、一応答のみでCocolonを完結して評価しない。
 
 root AGENTS・観測学習README・既存00入口・CURRENT_RULES R2・開始／出力確認・manifest・System Context原本直読と既存seedへ接続。全体現在地は関連箇所を同じ変更単位で置換更新し、差分なしは既存作業記録へ理由を一行残す。巨大資料への日々のcurrent追記、生成manifest手編集、checker新設はしない。08はCycle001専用、07はmilestone履歴。今回は資料・読順設定の更新で、製品コード・API・DB・配置・GPU・学習の変更0、商品品質credit0。根拠照合はCocolon e9f1e48…／API a536e50…、今回live・DB・端末を新規確認したとはしない。
+
+
+## 2026-10-22 — 三中核のCMEE・モデル分担と具体的比較試験案を準備
+
+Mashは「CMEEとモデルの分担、および三中核それぞれの具体的な比較試験案」の説明を受け、「わかった、作って」と指示した。[比較案](../observation_learning/model_selection/2026-10-22-three-core/README.md)と可視入力20行・case index・採点者用guideの4fileを作成。モデルは意味・問い・表現・構造の候補、既存CMEEはsource採用・意味/根拠・問い予算・本人更新・artifact採用、既存app/rendererは保存/公開/権限/fit等を所有する提案として整理した。詳細分担の実装採用、public contract変更、モデル採用、商品合格は今回の効果ではない。
+
+新規評価候補15checkpointは独立した5事例family、既存旅行/夕食教示由来のA01は4checkpointとも既知派生、補足2件の接続境界1を別枠にした。初回へ未来回答・採点条件を見せず、E02の補足枝は独立・問い残数0、更新種別の正解labelはモデルへ渡さない。最初の4場面（E02初回/別説明、Piece原入力、新規Analysis次期）で現CMEE対27Bの未接続proxyを各最大4出力比較する提案。本統合・追加学習を別段階にし、C0 END後に仮問いを付けない。
+
+実source照合で、Piece V2はoriginal normal/pre-questionのみでrefined補足未対応、Analysis pureも補足2件以上を拒否、IF/Savedはruntime未実装と確認。全体現在地へ関連差分だけを置換し、観測学習READMEの再開先を更新した。Piece最新CIの限定TECHNICAL_CREDITは既存週次原記録どおり保持し、商品品質credit0と区別した。実行は今回なし、推論/重み学習/GPU/課金/製品コード/API/DB/配置/実機/モデル採用0。資料・fixtureの構文/参照/露出分離/現wireとの整合とread-onlyレビューを確認。STRUCTURE_MAP_DELTA_NONE（実ownerと製品接続変更0、分担は案）、ADMINISTRATIVE_ONLY、商品品質credit0。source確認点はCocolon 5d14a293…／API a536e50…、GitHub保存と後読確認はこの記録を含むrevisionから解決する。
