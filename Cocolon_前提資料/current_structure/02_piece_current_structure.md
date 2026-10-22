@@ -3361,3 +3361,8 @@ source15b0a62a/CI39717661329 attempt1継続。JS957 PASS、iOS source/standalone
 ## 65.54. 2026-10-22 — 承認済み新bitmap native fixture Window修復を適用
 
 入口§106／weekly§5.6.34／manifest v142。Mashが§105の四地点修復＋新source既存CI一回を明示承認。既存testのrunBitmapChecks内だけ、Unicode/fault/overlap second/fractional mount前にfixtureRequiresRealWindow=YESを設定した。候補blob a63e6a46e1b7554e4b0033c8c31a47988b1872f3のbytesを適用し、旧group/全判定/分母/製品/runner/workflow/元8秒90秒/資源は維持。read-only独立review指摘なし。新source pushによる既存CI一回、結果後追加修正/再CI0。現在結果未確認、新44/新RN12を旧失敗と別記録する。STRUCTURE_MAP_DELTA_NONE、正式admission/通常保存→本人履歴詳細/共有/実機は未完、automatic_progression=false。
+
+
+### 65.54.1 Window修復sourceと一度CIを固定
+
+入口§107／weekly§5.6.34.1／manifest v143。承認source c43a8ae6の全5path全文と変更集合一致を確認。一度CI39727150432 attempt1開始、新counter1/上限1。旧counter/failure維持、source固定・追加修正/再CI0。新44/RN12結果は未確定、正式admission/通常保存/本人再表示未完。今回checkpoint資料4のみSTRUCTURE_MAP_DELTA_NONE。

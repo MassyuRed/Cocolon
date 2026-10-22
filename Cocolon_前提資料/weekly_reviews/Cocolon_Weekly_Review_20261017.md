@@ -1916,3 +1916,8 @@ source15b0a62a/CI39717661329 attempt1継続。JS957 PASS、iOS source/standalone
 ##### 5.6.34 承認済みWindow四地点修復を適用、新source一度CIへ
 
 入口§106／map§65.54／manifest v142。Mashの「進めていいよ」により、既存testの新bitmap groupだけ四地点へ実Window flagをmount前に設定。候補全文/hashと原典一致・逆射影一致・独立review指摘なし。既存5path（test1＋結果資料4）、製品/runner/workflow/API/DB/依存0、STRUCTURE_MAP_DELTA_NONE。新source既存CI一回を行い、旧counter1/failureを維持、新44/旧195/RN旧13＋新12を別判定する。現在実行結果は未確認、追加修復/再CI/次Gateへの自動進行0。P-W1正式admission/通常保存/同owner再表示、P-W2共有、P-W3実機未完、商品credit0。
+
+
+##### 5.6.34.1 Window修復source照合と一度CI開始
+
+入口§107／map§65.54.1／manifest v143。source c43a8ae6全5pathのremote全文とchanged set一致、一度CI39727150432 attempt1が起動。新counter1/上限1、旧failure不変、source固定・追加修復/再CI0。新native44/RN12結果未確定。P-W1正式admission/通常保存・同owner再表示は未完、資料4だけSTRUCTURE_MAP_DELTA_NONE。

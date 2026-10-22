@@ -3838,3 +3838,8 @@ Mashは§105の「この修復の適用と、新ソースでのCI一回」へ「
 今回の新source pushで既存CIを一回だけ実行する。新単位counter0→run取得時1/上限1、旧run39717661329 counter1/failureは不変。same-source rerun/結果後source追加修正/次CI/別Gateへの進行は0。原logs/report/PNG/取得可能原物を保存して、元44個別判定とsummary・RN12元条件・両420の元8秒内を評価する。旧群の失敗を新groupで相殺せず、全体CIが失敗ならfailureと記録する。compile/例外/timeout/記録不足/期待未達でも一回で停止する。
 
 現時点はsource確定、UIKitでの修復成功/44成立/新RN条件は未確認。STRUCTURE_MAP_DELTA_NONE（検証fixture内修復だけ）。正式admission/canSave/canExport/通常保存/同owner再表示/画像保存共有/本人実機は未完、商品credit0、automatic_progression=false。既存P-W1の採用版→正式admission→同preview保存・同owner履歴/詳細の本線を維持する。
+
+
+### 107. Window修復sourceを全文照合、一度CI開始
+
+承認source c43a8ae6f2661a971cfae9149a143ea547375b5a（親69c233019a2af86dba17546d4075ecd54d7a65af/tree4dc6984c96117b6d8193743d21d5c4f372c30c69）の全許可5pathをGitHubから全文readbackし、changed-path set一致を確認。既存push CI39727150432 attempt1が起動し、このWindow修復単位のcounter1/上限1を消費した。sourceを固定し、以後は原物/ログ/画像回収と判定のみ。旧run39717661329 failure/counter1は不変、新native44/RN12の成否は未確定。same-source rerun/結果後追加修正/別CI/正式採用/通常保存への自動進行0。PRに伴う既存の読取workflow・contract guardは別runであり、手動で検証runを増やしていない。STRUCTURE_MAP_DELTA_NONE（checkpoint資料4fileだけ）。

@@ -1,13 +1,13 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v142",
+  "schema_version": "cocolon.piece.workstream_manifest.v143",
   "generated_at": "2026-10-22 JST",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
   "automatic_progression": false,
   "manifest_lineage": {
-    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v141",
-    "predecessor_head": "69c233019a2af86dba17546d4075ecd54d7a65af",
+    "predecessor_schema_version": "cocolon.piece.workstream_manifest.v142",
+    "predecessor_head": "c43a8ae6f2661a971cfae9149a143ea547375b5a",
     "carry_forward": "Mash approved exact section105 four-site test-only repair and new source single existing CI. Apply approved candidate bytes, preserve prior consumed failure and all original expectations. New CI limit1.",
     "immutable_prior_evidence_references": [
       {
@@ -294,17 +294,17 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "01998523f802371f38e96e209776ce2a884d237a",
-    "raw_sha256": "79b13cb3ff223a0f440851cd5efbdf2fcd736701d09e3c305137e897810a3589",
-    "utf8_bytes": 606071,
-    "chars": 360420
+    "git_blob_sha1": "88c8e2ac3f08362ad92a538c6889d64edddd1f16",
+    "raw_sha256": "98deaa3eed3fd44e2e63129254b2187f7d4a2a324cb2ab7fb73152ed175e2593",
+    "utf8_bytes": 606907,
+    "chars": 360954
   },
   "current_premise": {
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
-    "git_blob_sha1": "5c0916a3ccf399432f8ba535a20b3da2407ae911",
-    "raw_sha256": "22c31514f79a929afe0827ab50c4c22a8dae31415c811244a69233eaad456be8",
-    "utf8_bytes": 535471,
-    "chars": 313015
+    "git_blob_sha1": "dcca6868e725250258f1b7481a38d9eec20b3516",
+    "raw_sha256": "2c0ff836eb5518158c1cd5716a3deda553cb4d96df91396dd5d214b8d5c911d4",
+    "utf8_bytes": 535909,
+    "chars": 313289
   },
   "product_definition": {
     "user_facing_name": "Piece",
@@ -599,11 +599,11 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "PIECE_WORK_ALLOWED",
-    "state": "APPROVED_BITMAP_WINDOW_REPAIR_SOURCE_PREPARED_SINGLE_CI_PENDING",
-    "current_map_section": "65.54",
-    "current_entry_section": "106",
+    "state": "WINDOW_REPAIR_SINGLE_CI_RUNNING_SOURCE_FIXED",
+    "current_map_section": "65.54.1",
+    "current_entry_section": "107",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
-    "weekly_review_section": "5.6.34",
+    "weekly_review_section": "5.6.34.1",
     "first_unfinished_work": "承認済み四地点fixture修復sourceの既存CI一回を実行し、新44/RN12を旧群と分けて判定・原物保存。正式admission/通常保存/実機未完。",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
@@ -803,10 +803,10 @@
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
     "state": "CURRENT_STRUCTURE_OWNER_WHEN_MERGED",
     "update_rule": "product purpose, current route, owner path, lifecycle, phase, or cross-core boundary changes update this map in the same write unit",
-    "git_blob_sha1": "5c0916a3ccf399432f8ba535a20b3da2407ae911",
-    "raw_sha256": "22c31514f79a929afe0827ab50c4c22a8dae31415c811244a69233eaad456be8",
-    "utf8_bytes": 535471,
-    "chars": 313015
+    "git_blob_sha1": "dcca6868e725250258f1b7481a38d9eec20b3516",
+    "raw_sha256": "2c0ff836eb5518158c1cd5716a3deda553cb4d96df91396dd5d214b8d5c911d4",
+    "utf8_bytes": 535909,
+    "chars": 313289
   },
   "historical_actual_basis_before_b2a": {
     "cocolon_pre_sync_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
@@ -979,20 +979,19 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "MASH_APPROVED_SECTION105_FOUR_SITE_TEST_FIX_AND_SINGLE_SOURCE_CI",
+    "classification": "AUTHORIZED_RUN_START_CHECKPOINT",
     "paths": [
-      "tests/native/piece-text-metrics-ios.mm",
       "Cocolon_Piece/00_read_first.md",
       "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
       "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
       "Cocolon_Piece/manifest.json"
     ],
+    "source_commit": "c43a8ae6f2661a971cfae9149a143ea547375b5a",
+    "ci_run": 39727150432,
     "product_source_changes": 0,
-    "test_source_changes": 1,
-    "workflow_changes": 0,
+    "test_source_changes": 0,
     "new_files": 0,
     "new_ci_executions": 0,
-    "ci_execution_limit": 1,
     "same_source_reruns": 0,
     "structure_map": "STRUCTURE_MAP_DELTA_NONE",
     "automatic_progression": false
@@ -90401,7 +90400,7 @@
     "automatic_progression": false
   },
   "ios_bitmap_native_window_repair_20261022": {
-    "state": "APPROVED_SOURCE_PREPARED_CI_PENDING",
+    "state": "SOURCE_VERIFIED_SINGLE_CI_RUNNING",
     "base_head": "69c233019a2af86dba17546d4075ecd54d7a65af",
     "base_tree": "69c233019a2af86dba17546d4075ecd54d7a65af",
     "api_head": "a536e50ee284785f585ac73329ef2947dca8bba9",
@@ -90412,7 +90411,7 @@
       "proposal_commit": "69c233019a2af86dba17546d4075ecd54d7a65af",
       "entry_section": "105"
     },
-    "entry_section": "106",
+    "entry_section": "107",
     "map_section": "65.54",
     "weekly_section": "5.6.34",
     "classification": "MASH_APPROVED_LEVEL3",
@@ -90449,7 +90448,7 @@
       "independent_review_no_static_blocker": true,
       "full_incident_read": true
     },
-    "ci_executions": 0,
+    "ci_executions": 1,
     "ci_limit": 1,
     "actions_reruns": 0,
     "post_result_source_edits": 0,
@@ -90476,6 +90475,14 @@
     "formal_admission": false,
     "can_save": false,
     "can_export": false,
-    "automatic_progression": false
+    "automatic_progression": false,
+    "source_commit": "c43a8ae6f2661a971cfae9149a143ea547375b5a",
+    "source_tree": "4dc6984c96117b6d8193743d21d5c4f372c30c69",
+    "run_id": 39727150432,
+    "run_attempt": 1,
+    "readback": {
+      "full_blob_count": 5,
+      "exact_changed_paths": true
+    }
   }
 }
