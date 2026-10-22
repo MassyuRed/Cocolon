@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§113.1/114／map§65.57.1／weekly§5.6.37.1／manifest v152。末尾LF1byte修復をsource5a9812bdへ反映・全文照合済み。Piece CIは既存path filterの未escape + による未起動と判断し、今回CI0・新export14/PNG未実行を保持。起動条件1行＋既存CI一回の具体案は未承認・未適用。P-W1実保存/実OS/本人実機は未完です。**
+**最新は入口§115／map§65.58／weekly§5.6.38／manifest v153。Mashの§114明示承認に基づき、CI起動条件のpatch名1項目だけをliteral +へ修復。新sourceで既存CI一回を実行予定（counter0/上限1）。製品logic/job/期待/依存は不変、新export8PNG＋拒否6の結果は未確定。P-W1実保存/実OS/本人実機は未完です。**
 
 ### §99の判断案（履歴）
 
@@ -3441,3 +3441,8 @@ source fbf0deaec8679ebf6a58f53e0702d2e437318680/tree26d330c5の変更20pathをGi
 #### 65.57.1 最終：LF修復完了／未escape + の起動条件でPiece CI未実行
 
 入口§113.1/114、weekly§5.6.37.1、manifest v152。source5a9812bd/tree8ed9ba1aの5path全文/SHA一致。末尾LF1byte修復は成立。一般5run successだがPiece CI登録0、今回sourcepush1/CI executions0/rerun0、新export14/PNG未実行。workflow pathsのpatch名`+`がliteral escapeされず今回差分に一致しないことを公式仕様と照合。承認済み5pathにはworkflowを含まずworkflow変更0を維持した。次の具体候補は当該1行をsingle quote＋\+へ修復し既存CI一回、未承認/未適用。製品logic/job/期待/依存不変。旧39750366489失敗/消費1保持、BLOCKER_NARROWED、validation_success=false、追加修復/稼働/実OS/実機0。STRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+
+### 65.58 承認済みCI起動条件の1行修復
+
+入口§115/weekly§5.6.38/manifest v153。Mashの§114明示承認に基づき、既存workflow paths内のpatch名一項目だけをsingle quote＋\+へ修復。全candidate bytesは承認案hash1349c188と一致、YAML object差は一scalarだけ、全job不変。workflow＋資料4の5path、製品logic/test/fixture/期待/依存変更0、STRUCTURE_MAP_DELTA_NONE。新source既存CI一回はPENDING、今回counter0/上限1/rerun0。旧39750366489消費1/failureとLF修復push1/CI0を保持。旧195/新44/RN13/12/17と新export正常8PNG/拒否6を元条件で分離判定する。追加修復/再CI/稼働/実OS/実機0、商品未完、automatic_progression=false。

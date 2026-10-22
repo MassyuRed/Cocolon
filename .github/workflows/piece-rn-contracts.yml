@@ -25,7 +25,7 @@ name: Piece RN preview and owner contracts
       - ios/Podfile
       - ios/Podfile.lock
       - ios/tempCocolon/Info.plist
-      - patches/react-native-view-shot+5.1.1.patch
+      - 'patches/react-native-view-shot\+5.1.1.patch'
       - patches/react-native-file-access+3.2.0.patch
       - patches/@react-native-camera-roll+camera-roll+7.10.2.patch
       - android/build.gradle

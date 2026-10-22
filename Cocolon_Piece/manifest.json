@@ -1,6 +1,6 @@
 {
-  "schema_version": "cocolon.piece.workstream_manifest.v152",
-  "generated_at": "2026-10-22T18:23:10.428004+09:00",
+  "schema_version": "cocolon.piece.workstream_manifest.v153",
+  "generated_at": "2026-10-22T21:41:45.314352+09:00",
   "decision_owner": "Mash",
   "operational_owner": "Karen",
   "workstream": "Cocolon / Piece",
@@ -482,10 +482,10 @@
   },
   "current_entry": {
     "path": "Cocolon_Piece/00_read_first.md",
-    "git_blob_sha1": "23a225d055eb7370e6a376f697aecee770ab9ac2",
-    "raw_sha256": "ccb7b6b4994ca77494bb464d9e3b5f1005c8bb1e199a276c236e86a633c8abfc",
-    "utf8_bytes": 639360,
-    "chars": 380229
+    "git_blob_sha1": "64deb00f78679015a29451f2974cb817e846b29b",
+    "raw_sha256": "7feead8d35407019bb6106d73ef7c1b69931ab08cf980b653bb4e65089866dd2",
+    "utf8_bytes": 641330,
+    "chars": 381467
   },
   "current_premise": {
     "path": "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
@@ -676,7 +676,7 @@
     "input_screen_source_connected": true,
     "live_auth_input_to_preview_to_device_verified": false,
     "database_evidence_owner": "live_db_apply_20261019",
-    "remaining_work_owner": "ios_bitmap_export_ci_trigger_repair_proposal_20261022",
+    "remaining_work_owner": "ios_bitmap_export_ci_trigger_repair_20261022",
     "product_acceptance": false,
     "piece_v2_default_application_registered": false,
     "piece_v2_quota_http_present": true,
@@ -792,11 +792,11 @@
     "id": "B10_WITH_B12C_ADOPTION_BOUNDARY",
     "name": "P_W1_NORMAL_PREVIEW_EXPLICIT_SAVE_AND_SAME_OWNER_REOPEN",
     "environment": "PIECE_WORK_ALLOWED",
-    "state": "LF_REPAIR_DONE__PIECE_CI_TRIGGER_PROPOSAL_PENDING_APPROVAL__P_W1_LIVE_AUTH_PENDING",
-    "current_map_section": "65.57.1",
-    "current_entry_section": "114",
+    "state": "APPROVED_TRIGGER_REPAIR_SOURCE_CI_PENDING__P_W1_LIVE_AUTH_PENDING",
+    "current_map_section": "65.58",
+    "current_entry_section": "115",
     "weekly_review_owner": "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
-    "weekly_review_section": "5.6.37.1",
+    "weekly_review_section": "5.6.38",
     "first_unfinished_work": "Adopt actual runtime renderer supplier and verify real Auth/normal input preview→explicit private save→same-owner history/detail; new bitmap export/share and physical device acceptance remain incomplete. Source unit closed, no automatic gate advancement.",
     "repeat_completed_b2a_or_b7": false,
     "repeat_existing_preview_factory": false,
@@ -949,7 +949,8 @@
     "bitmap_save_connection_validation_success": true,
     "parallel_source_preparation": "P-W2 source pushed but not admitted: npm patch parsing failed before native/RN. Exact one-byte repair proposal pending separate approval.",
     "patch_repair_owner": "ios_bitmap_owner_export_patch_repair_20261022",
-    "trigger_repair_proposal_owner": "ios_bitmap_export_ci_trigger_repair_proposal_20261022"
+    "trigger_repair_proposal_owner": "ios_bitmap_export_ci_trigger_repair_proposal_20261022",
+    "trigger_repair_owner": "ios_bitmap_export_ci_trigger_repair_20261022"
   },
   "durable_history": {
     "previous_checkpoint": "Cocolon_前提資料/07N_piece_pce8_design_closure_checkpoint_20260808.md",
@@ -1179,16 +1180,17 @@
     "historical_scope": "All results and remaining fields in this object describe bee830; current context coverage and remaining gates are b06_q3_context_fence."
   },
   "current_sync_effects": {
-    "classification": "LF_REPAIR_SOURCE_POSTVERIFICATION_AND_TRIGGER_PROPOSAL",
+    "classification": "APPROVED_ONE_SCALAR_CI_PATH_FILTER_REPAIR",
     "paths": [
+      ".github/workflows/piece-rn-contracts.yml",
       "Cocolon_Piece/00_read_first.md",
       "Cocolon_Piece/manifest.json",
       "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
       "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md"
     ],
-    "source_changes": 0,
+    "workflow_trigger_scalar_changes": 1,
+    "production_source_changes": 0,
     "new_piece_ci_executions": 0,
-    "general_automatic_checks_success": 5,
     "api_db_env_flag_deploy_device_effect": 0,
     "structure_map": "STRUCTURE_MAP_DELTA_NONE",
     "automatic_progression": false
@@ -92066,6 +92068,69 @@
     "success": "New export PNG8 + native rejection6 unchanged, preserve native195/new44 and old RN13/12/17; collect original outputs. Whole CI can retain pre-existing failures.",
     "stop": "One new-source CI. First new compile/runtime/expected-output failure: preserve actual then stop; no extra repair/rerun/activation.",
     "approval_reason": "Exact §112 scope explicitly excludes workflow changes and this adds a path; Rule18 §11.3 requires individual approval.",
+    "automatic_progression": false
+  },
+  "ios_bitmap_export_ci_trigger_repair_20261022": {
+    "state": "APPROVED_EXACT_TRIGGER_SCALAR_APPLIED_SOURCE_PREPARED_CI_PENDING",
+    "approval": {
+      "user_instruction": "§114の修復案どおり、起動条件1行の修正とCI一回 → 進めていいよ。",
+      "proposal_commit": "68b2d19dd7b6298bc01da72c0d34c3351981a38a",
+      "proposal_owner": "ios_bitmap_export_ci_trigger_repair_proposal_20261022",
+      "scope": "Exact workflow one scalar + four existing result docs; one new-source existing Piece CI.",
+      "prior_consumed_authority_reused": false
+    },
+    "base_head": "7ea8143c42bc8098f728d67c0fc48ac79c1a62c8",
+    "paths": [
+      ".github/workflows/piece-rn-contracts.yml",
+      "Cocolon_Piece/00_read_first.md",
+      "Cocolon_Piece/manifest.json",
+      "Cocolon_前提資料/current_structure/02_piece_current_structure.md",
+      "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md"
+    ],
+    "workflow_identity": {
+      "path": ".github/workflows/piece-rn-contracts.yml",
+      "before": {
+        "bytes": 19409,
+        "sha256": "800870d8376c55883f69040edb9bce7e5abf3e436e269c69ddafcf340551257d",
+        "blob_sha1": "d03e30af1ca88f5f2fb7e9f67deceae57c540ec9"
+      },
+      "after": {
+        "bytes": 19412,
+        "sha256": "1349c188af68d0c0564a4d60bbc08efa7b03186dbaaed162a1ce0bf20159cabc",
+        "blob_sha1": "e0129ac49775c7cd1fc510a8157cd9c795cb6878"
+      },
+      "old_line": "      - patches/react-native-view-shot+5.1.1.patch",
+      "candidate_line": "      - 'patches/react-native-view-shot\\+5.1.1.patch'"
+    },
+    "independent_review": "PASS; candidate allbytes/hash exact, YAML whole object equal except paths[20]; all jobs unchanged.",
+    "ci": {
+      "executions": 0,
+      "limit": 1,
+      "actions_rerun": 0,
+      "result": "PENDING",
+      "post_ci_source_repair": 0
+    },
+    "protected_conditions": {
+      "old_native": 195,
+      "new_bitmap_native": 44,
+      "old_rn": 13,
+      "bitmap_rn": 12,
+      "admitted_rn": 17,
+      "new_export_saved_png": 8,
+      "new_export_native_rejection": 6
+    },
+    "source_effects": {
+      "workflow_trigger_scalar": 1,
+      "job_steps": 0,
+      "production_logic": 0,
+      "test_expectations_fixtures": 0,
+      "dependencies": 0,
+      "api_db_env_flag_deploy_auth_os_device_main": 0,
+      "structure_map": "STRUCTURE_MAP_DELTA_NONE"
+    },
+    "product_credit": 0,
+    "bounded_work_complete": false,
+    "validation_success": false,
     "automatic_progression": false
   }
 }

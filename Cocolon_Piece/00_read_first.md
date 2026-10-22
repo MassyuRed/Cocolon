@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§113.1/114／map§65.57.1／weekly§5.6.37.1／manifest v152。末尾LF1byte修復をsource5a9812bdへ反映・全文照合済み。Piece CIは既存path filterの未escape + による未起動と判断し、今回CI0・新export14/PNG未実行を保持。起動条件1行＋既存CI一回の具体案は未承認・未適用。P-W1実保存/実OS/本人実機は未完です。**
+**最新は入口§115／map§65.58／weekly§5.6.38／manifest v153。Mashの§114明示承認に基づき、CI起動条件のpatch名1項目だけをliteral +へ修復。新sourceで既存CI一回を実行予定（counter0/上限1）。製品logic/job/期待/依存は不変、新export8PNG＋拒否6の結果は未確定。P-W1実保存/実OS/本人実機は未完です。**
 
 ### §87の設計時点（履歴）
 
@@ -3989,3 +3989,12 @@ PRIMARY_OUTCOME=BLOCKER_NARROWED、patch_format_repaired=true、validation_succe
 共同推奨はこの一行修正である。既存起動契約のliteral patch名を直す最小差分で、無意味な製品変更や別CI経路を作らない。Rule18§11.3のscope/path変更と明示workflow変更0境界を超えるため、Mashの個別承認対象。§112の承認をworkflow修復へ流用しない。approval未成立、candidate未適用、CI0、automatic_progression=false。
 
 公式根拠: https://docs.github.com/actions/using-workflows/workflow-syntax-for-github-actions#filter-pattern-cheat-sheet （+ は直前文字の一回以上。literal名にはescapeが必要）。
+
+
+## 115. 2026-10-22 — 承認済み§114の起動条件1行修復と一度CI
+
+Mashが§114の「起動条件1行の修正とCI一回」に対し「進めていいよ」と明示承認した。LEVEL3の承認済み限定単位、OBSERVED_BLOCKER_MINIMAL_FIX/PIECE_WORK_ALLOWED。root華恋がwrite/CI/回収の単一owner、補助担当はread-only。fresh Cocolon7ea8143cの追加1commitは観測会資料4pathだけで、今回5pathの原bytesは68b2d19dと同じ。全体設計01・全file地図01A/B/C・current Piece map・最新weekly20261017と作業規則を照合し、並行更新を保持する。
+
+workflow pathsの `patches/react-native-view-shot+5.1.1.patch` 一行だけをsingle-quoted `patches/react-native-view-shot\+5.1.1.patch` へ置換した。候補は§114固定全文と全byte一致、19,412B/SHA2561349c188af68d0c0564a4d60bbc08efa7b03186dbaaed162a1ce0bf20159cabc。YAML parse後の差はpaths[20]だけで、全job/steps/permissions/timeoutは同一。git diffの内部scopeは既存patches/workflowを検出するため変更不要。製品logic/test/fixture/依存/8秒の変更0、既存修復済みpatch9,359B/hashcc46937cは保持する。STRUCTURE_MAP_DELTA_NONE、既存owner責務を変えない。
+
+対象はworkflow＋結果資料4の5path。source全文とchanged setをGitHubから照合し、新source pushによる既存Piece CIを一回だけ実行する。今回counter0/上限1、Actions rerun0。前39750366489のCI消費1/failure、LF修復source5a9812bdのpush1/CI0を変更しない。旧native195/新44、旧RN13/bitmap12/admitted17を保ち、新export14＝正常saved8PNG＋native拒否6を原条件で別判定する。全体CIの旧失敗と新条件を混同しない。新compile/runtime/期待条件未達は原actualを保存して終了し、追加修復/再CI/採用/稼働/DB/実Auth/実OS/実機/main mergeへ自動進行しない。product_credit=0、validation_success=false（結果待ち）、automatic_progression=false。
