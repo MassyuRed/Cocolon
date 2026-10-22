@@ -3725,3 +3725,16 @@ Rule18 §11.3 LEVEL3(1)は「商品目的、商品体験、method family、contr
 今回の完了は設計記録だけ、商品credit0。DETOUR_RISK_STOP、formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。適用・CI・本番効果を先取りしない。
 
 原典：Piece_Render_Reproducibility_Contract_20260808.md（blob7769f2d7）、native PieceTextMetrics.mm／RN patch／Card/B9/renderer/export/保存ownerの現実装、前後run39692007906/39704913859原report。Apple Graphics Contextsの公開原典はUIViewが描画環境を構成しbitmap contextは指定した画素bufferを更新すると説明するが、自然TextとのCG状態/画素同値を保証しない（https://developer.apple.com/library/archive/documentation/GraphicsImaging/Conceptual/drawingwithquartz2d/dq_context/dq_context.html）。公開API全般の不可能性証明はしていない。
+
+
+## 100. 2026-10-22 — Mash承認済みbitmap方式の実装開始・途中保存
+
+Mashは§99の「この方式変更を含む限定実装と、新ソースのCI一回へ進めてよろしいでしょうか。」へ「進めていいよ。」と明示承認した。§99の18path、品質差/元上限、旧検査保持、新group、未達STOP、正式admission/保存/export/本番0をそのまま実行範囲とする。旧一度CIの再利用ではなく、新bitmap単位のcounterは0/上限1。
+
+fresh Cocolon head69cedb8303b3dbe36ac3d9391381921bea90a17b/tree1d2b91a592f1f6f22aa92e7f53485966f66865c0（1917 entries/truncated=false）、API a536e50ee284785f585ac73329ef2947dca8bba9。現前提/作業rule/incident全文/全体設計・全file地図/最新weekly/入口§99を参照した。System Context prepareは従来どおりtask_profiles.json欠落、原典直接読取を使用。PIECE_WORK_ALLOWED、華恋root単一writer、補助担当は読取だけ。分類はMash承認済みLEVEL3 / DIRECT_PRODUCT_OR_ACCEPTANCE_WORK。
+
+途中実装はnative同file内の所有bitmap生成とnative view、closed wire decoder、別profile/B9接続、Card wholecanvas/fit/失効分岐。旧自然Text検査の実装は保持した。共有budget/provider、phase一回/整数copy、透明maskと同CGImage host比較を実装中。独立source reviewで指摘されたhost設定・node交換時の即失効、source最大行数/window同一性、native manager取得例外を補修した。これらはCI前の実装作業であり、UIKit compile・成功画像・商品合格を示さない。
+
+関連既存JS3fileは362 PASS/FAIL0/skip0（新native結果をstubしたものではなく旧362件の回帰）。最初は検証VMの新named export未配線により失敗し、同じ許可済みrenderer test内のVM公開名を補完して解消した。最初の失敗を隠さず、local成功をiOS結果へ換算しない。新方式のJS/native/RN追加検査はまだ実装途中、CI未実行。
+
+この途中保存は、許可済み製品/test14pathの現全文をmanifestのlossless bundleへ保持する。remoteのactive source pathはまだ変更せず、未完成sourceを先行pushして一度CIを消費しない。bundleはWIPで未採用、restore時はbase69cedb83のpathとhashを照合する。次は新group検査追加と最小修正/静的確認→全許可source確定→新source既存push CI一回→原物回収と判定。追加source/別CIへ自動進行しない。通常保存/本人再表示/画像共有/実機未完、商品credit0、automatic_progression=false。

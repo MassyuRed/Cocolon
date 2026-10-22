@@ -1880,3 +1880,8 @@ native原境界62local拒否の61件はstage83の全logical1占有不一致、qu
 ##### 5.6.27 2026-10-22 — 同一bitmap表示への方式判断案（未実装）
 
 入口§99／manifest v135に新方式の具体判断案を保存。現証拠から座標/clip/CG stateの一意な修復は確定できず、推測flag/追加診断CIを止める。推奨は新iOS piece.rn_bitmap_preview.prototype.v1：最終logical1の透明text/branding bitmapを検査し、同じ不変CGImageをnative viewへ直接表示する。旧自然Text/nativeS参照と同じ品質・契約とは認定せず、見え方/比較方法変更はRule18§11.3 LEVEL3の判断対象。小数位相一回/整数移植/透明段階の全画素保持/同image layer全cell一致、元8秒/90秒/4096辺/4Mpixel/32MiBを固定。既存18path限定の製品実装＋一度CIが候補（未承認、今回source/CI0）。旧195期待/RN13を維持して新group8画像＋raw3＋host拒否を別評価し、未達は一回で未採用STOP。後日再表示は保存text/recipe/renderer版から再構築、各transaction内で画像同一；PNG永続化/API/DB追加なし。正式admission/通常保存/本人再表示/写真共有/実機受入れ未完、商品credit0、DETOUR_RISK_STOP/automatic_progression=false。
+
+
+##### 5.6.28 承認済みbitmap実装の途中保存
+
+Mashが入口§99の新bitmap方式・18path限定実装・新source CI一回を明示承認。入口§100/manifest v136に実装途中の14 source/test全文をlossless bundleで保持した。native所有image/view・decoder・B9/Card接続を実装中、関連旧JS362 PASS。新group追加/実iOS compile/画像は未確認、CI0/上限1。active remote sourceは未変更、WIP未採用。次は付随検査確定→許可source反映と一度CI→元画像/結果確認。元上限・旧195/RN13・正式admission/通常保存/共有/実機未完を保持する。
