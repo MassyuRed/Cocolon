@@ -6,7 +6,8 @@
  * body, runtime flag activation, quota default or export. Initial save delegates
  * to the existing controller only with a separately supplied, synchronous,
  * side-effect-free `isSaveAdmitted(preview, displayToken)` predicate. The current
- * InputScreen supplies no such predicate: native_checked is not admission.
+ * InputScreen supplies the explicit iOS renderer predicate; native_checked
+ * alone is not admission and the live mounted fit remains independently checked.
  * A fresh opaque save key is created only on the explicit initial-save press;
  * retries remain owned by the controller's immutable request/key.
  */

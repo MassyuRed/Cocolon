@@ -69,6 +69,10 @@ function harness({os='ios', version=35, record=fixture()} = {}) {
 }
 const count=(h,kind)=>h.calls.filter(c=>c[0]===kind).length;
 const failure=p=>assert.rejects(p,e=>e.code==='PIECE_TEMPORARILY_UNAVAILABLE');
+test('explicit bitmap saved rendering does not open legacy image export or its receipt version', async()=>{
+  const h=harness({record:{...fixture(),renderer_version:'piece.rn_bitmap_renderer.ios.v1'}});
+  await failure(h.prepare());assert.equal(count(h,'capture'),0);assert.equal(count(h,'photo'),0);
+});
 async function image(h) {return (await h.prepare()).capture(h.target());}
 
 test('fresh owner detail, verified saved canvas, exact PNG and body-free identity precede iOS add-only save', async()=>{

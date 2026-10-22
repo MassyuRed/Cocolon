@@ -163,8 +163,8 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
     ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'readPieceOwnerSnapshot']],
     ['features/piece/piecePreviewModel.js', ['readPiecePreviewDisplay', 'verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay']],
-    ['features/piece/pieceLayout.js', ['PIECE_BITMAP_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'PIECE_NATIVE_PREVIEW_V7_VERSION', 'PIECE_NATIVE_PREVIEW_V8_VERSION', 'PIECE_NATIVE_PREVIEW_V9_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
-    ['features/piece/pieceRenderer.js', ['pieceBitmapNativeView', 'pieceBitmapDeadlineCurrent', 'renderPieceBitmapCanvas', 'releasePieceBitmapCanvas', 'readPieceBitmapCanvas', 'inspectPieceText', 'readPieceTextInspection', 'inspectPieceSelectedLine', 'readPieceSelectedLineInspection', 'readPieceSelectedLineV2Inspection', 'inspectPieceSelectedLineV2', 'readPieceSelectedLineV3Inspection', 'inspectPieceSelectedLineV3', 'readPieceSelectedLineV4Inspection', 'inspectPieceSelectedLineV4', 'pieceContainmentV2DeadlineCurrent', 'measurePieceCandidates']],
+    ['features/piece/pieceLayout.js', ['PIECE_BITMAP_RENDERER_VERSION', 'PIECE_BITMAP_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'PIECE_NATIVE_PREVIEW_V7_VERSION', 'PIECE_NATIVE_PREVIEW_V8_VERSION', 'PIECE_NATIVE_PREVIEW_V9_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
+    ['features/piece/pieceRenderer.js', ['isPieceBitmapSaveAdmitted', 'pieceBitmapNativeView', 'pieceBitmapDeadlineCurrent', 'renderPieceBitmapCanvas', 'releasePieceBitmapCanvas', 'readPieceBitmapCanvas', 'inspectPieceText', 'readPieceTextInspection', 'inspectPieceSelectedLine', 'readPieceSelectedLineInspection', 'readPieceSelectedLineV2Inspection', 'inspectPieceSelectedLineV2', 'readPieceSelectedLineV3Inspection', 'inspectPieceSelectedLineV3', 'readPieceSelectedLineV4Inspection', 'inspectPieceSelectedLineV4', 'pieceContainmentV2DeadlineCurrent', 'measurePieceCandidates']],
     ['features/piece/pieceMeasuredWrap.js', ['planPieceMeasuredRows']],
     ['components/piece/PieceVisualCard.js', ['PieceVisualCard']],
   ];
@@ -2449,14 +2449,98 @@ function bitmapReply(request) {
         local_ink: [l, t, r, b], origin: p, ink: [l + p[0], Math.ceil(t + p[1]), r + p[0], Math.floor(b + p[1])], kind: row.kind };
     }) };
 }
-function bitmapHarness(reply = value => value) {
-  const h = fitHarness({ version: bitmapProfile }), calls = [], releases = [];
+function bitmapHarness(reply = value => value, options = {}) {
+  const h = fitHarness({ version: bitmapProfile, ...options }), calls = [], releases = [];
   h.context.NativeModules.PieceTextMetrics.renderBitmapCanvas = async request => {
     calls.push(request); return reply(bitmapReply(request), request);
   };
   h.context.NativeModules.PieceTextMetrics.releaseBitmapCanvas = (tag, token) => releases.push({ tag, token });
   return { ...h, bitmapCalls: calls, bitmapReleases: releases };
 }
+
+test('explicit iOS bitmap identity shares preview/saved drawing while preserving old readers and export boundary', async () => {
+  const version = 'piece.rn_bitmap_renderer.ios.v1';
+  for (const format of ['short_essay', 'quote', 'declaration']) for (const ratio of ['4:5', '9:16']) {
+    const p = { ...sample(format, ratio), renderer_version: version }, h = bitmapHarness(v => v, { packet: copy(p), version });
+    const saved = { ...savedSample(p), renderer_version: version };
+    const input = h.preparePieceNativeSavedDisplay(saved), previewInput = h.input();
+    const body = v => { const x = copy(v); delete x.key; return x; };
+    assert.deepEqual(body(input), body(previewInput)); assert.notEqual(input.key, previewInput.key);
+    assert.equal(input.candidateProfile, bitmapProfile); assert.equal(input.rendererVersion, version);
+    assert.equal(h.preparePieceNativeCard({ savedRecord: saved, exportCanvas: true }), null);
+    assert.equal(h.preparePieceNativeSavedDisplay({ ...saved, renderer_version: bitmapProfile }), null);
+    h.context.Platform.OS = 'android'; assert.equal(h.preparePieceNativeSavedDisplay(saved), null);
+    assert.equal(h.preparePieceNativePreview(display(p)), null);
+    assert.equal(h.isPieceBitmapSaveAdmitted(p, h.token), false); h.card.componentWillUnmount();
+  }
+});
+test('explicit bitmap admission verifies current closed artifact and bridge without drawing or replacing live fit', async () => {
+  const h = bitmapHarness(v => v, { version: 'piece.rn_bitmap_renderer.ios.v1' });
+  const p = h.card.props.display.preview;
+  assert.equal(h.isPieceBitmapSaveAdmitted(p, h.token), true);
+  assert.equal(h.fit(), undefined, 'renderer eligibility alone is not mounted fit');
+  const counts = [h.bitmapCalls.length, h.bitmapReleases.length, h.candidateCalls.length];
+  for (let i=0;i<3;i++) assert.equal(h.isPieceBitmapSaveAdmitted(p,h.token),true);
+  assert.deepEqual([h.bitmapCalls.length,h.bitmapReleases.length,h.candidateCalls.length],counts);
+  for (const mutate of [v=>{v.renderer_version=bitmapProfile;},v=>{v.renderer_version='unknown';},
+    v=>{v.piece_text+='x';},v=>{v.visual_recipe.theme.theme_id='unknown';},v=>{v.expires_at='2000-01-01T00:00:00Z';},v=>{v.extra=1;}]) {
+    const value=copy(p);mutate(value);assert.equal(h.isPieceBitmapSaveAdmitted(value,h.token),false);
+  }
+  for(const token of [null,undefined,1,'token',[]])assert.equal(h.isPieceBitmapSaveAdmitted(p,token),false);
+  const module=h.context.NativeModules.PieceTextMetrics;
+  for(const name of ['measureExplorationCandidates','renderBitmapCanvas','releaseBitmapCanvas']){const old=module[name];delete module[name];assert.equal(h.isPieceBitmapSaveAdmitted(p,h.token),false);module[name]=old;}
+  const manager=h.context.UIManager.getViewManagerConfig;h.context.UIManager.getViewManagerConfig=()=>{throw Error('PRIVATE');};
+  assert.equal(h.isPieceBitmapSaveAdmitted(p,h.token),false);h.context.UIManager.getViewManagerConfig=manager;
+  await finishBitmap(h);const fit=h.fit();assert.ok(fit);assert.equal(fit.isCurrent(p,h.token),true);
+  assert.equal(fit.isCurrent({...p,renderer_version:bitmapProfile},h.token),false);
+  h.now(NOW+8000);assert.equal(fit.isCurrent(p,h.token),false);h.card.componentWillUnmount();
+});
+test('saved explicit bitmap uses a fresh render transaction, publishes no save fit and invalidates its actual image', async () => {
+  const p={...savedSample(),renderer_version:'piece.rn_bitmap_renderer.ios.v1'},h=rawHarness(p,undefined,true);
+  const calls=[],released=[];h.context.NativeModules.PieceTextMetrics.renderBitmapCanvas=async req=>{calls.push(req);return bitmapReply(req);};
+  h.context.NativeModules.PieceTextMetrics.releaseBitmapCanvas=(tag,token)=>released.push({tag,token});
+  await prepare(h);const queuedTimeout=[...h.timers.values()][0];
+  await finishBitmap(h);assert.equal(h.card.state.measurement.phase,'native_checked');assert.equal(calls.length,1);
+  assert.equal(h.card.saveFit,null);assert.equal(h.card.props.display,undefined);assert.equal(h.input().candidateProfile,bitmapProfile);
+  assert.equal(h.input().key.includes(p.piece_id),true);assert.equal(h.input().key.includes(p.saved_at),true);
+  assert.equal(h.card.deadline.expiresAt,NOW+8000);assert.equal(h.timers.size,0);
+  const artifact=h.card.bitmapArtifact;h.now(NOW+9000);h.monotonic(9000);queuedTimeout();h.card.componentDidUpdate();
+  assert.equal(h.card.state.measurement.phase,'native_checked');assert.equal(h.card.bitmapArtifact,artifact);
+  assert.equal(h.card.deadline.expiresAt,NOW+8000);assert.equal(h.card.saveFit,null);
+  const token=h.card.state.measurement.bitmapCanvas.bindingToken;
+  h.card.bitmapInvalidated({nativeEvent:{binding_token:token}});assert.equal(h.card.state.measurement.phase,'unavailable');
+  assert.equal(h.card.bitmapArtifact,null);assert.equal(released.length>0,true);h.card.componentWillUnmount();
+});
+test('actual bitmap fit and explicit supplier gate the existing private-save controller and same-owner reconstruction', async () => {
+  const source=fs.readFileSync(path.join(__dirname,'piece-v2-initial-save-host.test.js'),'utf8');
+  const body=source.slice(source.indexOf('function integrated('),source.indexOf("test('initial-save integration: actual"));
+  const context=vm.createContext({vm,require,fs,path,ROOT,__dirname,AbortController,setImmediate,OWNER:'10000000-0000-4000-8000-000000000001',INPUT:'20000000-0000-4000-8000-000000000002',copy,tick:tickV9});
+  const fitSource=source.slice(source.indexOf('function syntheticFit('),source.indexOf('function unit('));
+  vm.runInContext(fitSource+body+'\nglobalThis.makeIntegration=integrated;',context);
+  let h;const version='piece.rn_bitmap_renderer.ios.v1';
+  const u=context.makeIntegration({rendererVersion:version,admission:(p,t)=>!!h&&h.isPieceBitmapSaveAdmitted(p,t)});
+  await u.ready();const view=u.host.controller.getView();u.host.receiveSaveFit(null,u.host.saveFitHandle);
+  h=bitmapHarness(v=>v,{packet:copy(view.preview),version});h.bind(view.visualToken);
+  assert.equal(u.initial(),undefined);await finishBitmap(h);u.host.receiveSaveFit(h.fit(),null);
+  const button=u.initial();assert.ok(button);button.props.onPress();await tickV9();
+  assert.deepEqual(copy(u.counts()),{keyCalls:1,saveCalls:1});assert.equal(u.host.controller.getView().phase,'saved');
+  const request=u.calls.find(([url])=>url==='/emotion/piece/save');assert.ok(request);
+  assert.equal(Object.keys(JSON.parse(request[1].body)).includes('renderer_version'),false);
+  const record={...savedSample(view.preview),renderer_version:view.preview.renderer_version};
+  assert.equal(h.preparePieceNativeSavedDisplay(record).rendererVersion,version);
+  h.card.componentWillUnmount();u.host.componentWillUnmount();
+});
+test('saved bitmap refuses a native completion outside its original eight-second transaction', async () => {
+  const h=rawHarness({...savedSample(),renderer_version:'piece.rn_bitmap_renderer.ios.v1'},undefined,true);
+  let complete,reply;const releases=[];
+  h.context.NativeModules.PieceTextMetrics.renderBitmapCanvas=req=>{reply=bitmapReply(req);return new Promise(resolve=>{complete=resolve;});};
+  h.context.NativeModules.PieceTextMetrics.releaseBitmapCanvas=(tag,token)=>releases.push(token);
+  await finishBitmap(h);assert.equal(typeof complete,'function');const deadline=h.card.deadline;
+  h.now(NOW+8001);h.monotonic(8001);for(const fn of [...h.timers.values()])fn();
+  complete(reply);await tickV9();assert.equal(h.card.state.measurement.phase,'unavailable');
+  assert.equal(h.card.bitmapArtifact,null);assert.equal(h.card.deadline,deadline);
+  assert.equal(releases.includes(reply.artifact_token),true);h.card.componentWillUnmount();
+});
 async function finishBitmap(h) {
   await prepare(h);
   for (let i = 0; i < h.drawing().blocks.length + (h.input().brandingMode === 'off' ? 0 : 1); i++) {

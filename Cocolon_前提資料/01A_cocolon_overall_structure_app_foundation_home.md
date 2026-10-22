@@ -4414,3 +4414,10 @@ STRUCTURE_MAP_DELTA_NONE。既存production3file内、新production／型／意�
 | Cocolon | `Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md` | E05/E06/E08の限定更新と残件 |
 | Cocolon | `Cocolon_前提資料/07_latest_snapshot_diff.md` | milestone差分 |
 | Cocolon | `Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u355_MixedReceivedTimeNeutral_20261019.md` | 開始根拠・実本文・全差分・残件 |
+
+
+### 2026-10-22 Piece P-W1：InputScreenから既存renderer eligibilityを供給
+
+STRUCTURE_MAP_DELTA_PRESENT。`screens/InputScreen.js` は `features/piece/pieceRenderer.js` のside-effect-free `isPieceBitmapSaveAdmitted` を既存 `screens/input/InputPieceActionArea.js` へ渡す。既存saved-input入口/Auth/runtime/背景化・本人変更の破棄責務は維持する。hostはpredicate単独で保存せず、同preview/tokenと同mount fit、owner/flag/quotaを保存直前に再確認する。HTTP/鍵生成/保存は既存明示操作とcontrollerだけが担当し、新しいhost/controllerは作らない。
+
+同版saved再表示とbitmap lifecycleは01Bの既存Piece ownerを参照する。source準備のlocal964 PASS、CIはPENDING、API/DB/env/deploy/本人データ操作0。詳細は入口§110／map§65.55／weekly§5.6.35。

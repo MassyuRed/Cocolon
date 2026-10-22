@@ -5,6 +5,7 @@ import PieceVisualCard from '../../components/piece/PieceVisualCard';
 import { preparePieceNativeCard } from '../../features/piece/pieceLayout';
 import fixtures from './piece-rn-canvas-fixtures.json';
 import bitmapFixtures from './piece-rn-bitmap-fixtures.json';
+import admittedFixtures from './piece-rn-admitted-fixtures.json';
 
 // Test-only timing around the unchanged native bridge call. In particular,
 // distinguish a pending candidate table from planner/render/inspection work.
@@ -208,7 +209,7 @@ renderer.inspectPieceSelectedLineV4 = async (...args) => {
 };
 
 class CanvasCases extends React.Component {
-  caseFixtures = (this.props.pieceGroup === 'bitmap' ? bitmapFixtures : fixtures).map(fixture => fixture.props?.display ? { ...fixture,
+  caseFixtures = (this.props.pieceGroup === 'admitted' ? admittedFixtures : this.props.pieceGroup === 'bitmap' ? bitmapFixtures : fixtures).map(fixture => fixture.props?.display ? { ...fixture,
     props: { ...fixture.props, display: { ...fixture.props.display, visualToken: Object.freeze({}) } } } : fixture);
   state = { index: 0, rawLeft: 0 };
   saveFitChanged = (next, previous) => {
@@ -298,6 +299,17 @@ class CanvasCases extends React.Component {
       ...(input?.candidateProfile === BITMAP_PROFILE ? { bitmap_canvas: m?.bitmapCanvas ?? null, colors: input.colors,
         branding_mode: input.brandingMode, crop_result: this.cropResult, crop_before_fit: this.cropBeforeFit } : {}),
     };
+    if (fixture.retain_after_deadline) {
+      const deadline = card?.deadline, artifact = card?.bitmapArtifact;
+      report.saved_retained_after_deadline = false;
+      if (deadline && Number.isFinite(deadline.monotonicStartedAt)) {
+        await new Promise(resolve => setTimeout(resolve, Math.max(0, 8100 - (performance.now() - deadline.monotonicStartedAt))));
+        report.retained_deadline_elapsed_ms = performance.now() - deadline.monotonicStartedAt;
+        report.saved_retained_after_deadline = this.card === card && card.state.measurement === m &&
+          m?.phase === 'native_checked' && card.bitmapArtifact === artifact && !!artifact &&
+          card.deadline === deadline && deadline.handle === null && !card.saveFit && !this.saveFitHandle;
+      } else report.retention_error = 'missing_original_deadline';
+    }
     await this.captureAndAdvance(report, card?.canvasNode);
   };
   captureAndAdvance = async (report, node) => {

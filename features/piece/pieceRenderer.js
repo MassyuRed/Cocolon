@@ -2,7 +2,7 @@
  * Results are local drawing evidence, never server fit/save/export authority.
  */
 import { NativeModules, Platform, findNodeHandle, requireNativeComponent, UIManager } from 'react-native';
-import { PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION, PIECE_BITMAP_PREVIEW_VERSION } from './pieceLayout';
+import { PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION, PIECE_BITMAP_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION, preparePieceNativePreview } from './pieceLayout';
 
 const pieceNoStart = new Set(Array.from('、。，．,？！!?：；:;)]）］｝】〉》」』〕〗〙〛ー々ぁぃぅぇぉっゃゅょァィゥェォッャュョ'));
 const pieceNoEnd = new Set(Array.from('([（［｛【〈《「『〔〖〘〚'));
@@ -10,6 +10,20 @@ const measurementError = () => new Error('PIECE_NATIVE_MEASUREMENT_UNAVAILABLE')
 const finite = value => typeof value === 'number' && Number.isFinite(value);
 
 const BITMAP_WIRE = 'piece.native_bitmap_canvas.v1';
+// Read-only renderer eligibility. The host separately checks owner/runtime/
+// quota and the SAME mounted Card's live token-bound fit before every save.
+// This performs no native drawing, component initialization, HTTP or mutation.
+export function isPieceBitmapSaveAdmitted(preview, displayToken) {
+  try {
+    if (Platform.OS !== 'ios' || preview?.renderer_version !== PIECE_BITMAP_RENDERER_VERSION ||
+        !displayToken || typeof displayToken !== 'object' || Array.isArray(displayToken)) return false;
+    const input = preparePieceNativePreview({ phase: 'received', preview, visualToken: displayToken });
+    const module = NativeModules.PieceTextMetrics;
+    return input?.candidateProfile === PIECE_BITMAP_PREVIEW_VERSION && input.rendererVersion === PIECE_BITMAP_RENDERER_VERSION &&
+      ['measureExplorationCandidates', 'renderBitmapCanvas', 'releaseBitmapCanvas'].every(name => typeof module?.[name] === 'function') &&
+      typeof UIManager?.getViewManagerConfig === 'function' && !!UIManager.getViewManagerConfig('PieceBitmapCanvas');
+  } catch { return false; }
+}
 let bitmapNativeView;
 export function pieceBitmapNativeView() {
   try {

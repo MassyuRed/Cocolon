@@ -1933,3 +1933,10 @@ source15b0a62a/CI39717661329 attempt1継続。JS957 PASS、iOS source/standalone
 入口§109／map§65.54.3／manifest v145。唯一CI39727150432/source c43a8ae6は14:17:16〜14:34:20 JST、全6job完了/failure。前回Window例外を解消し、新native44名/順序/summary全成功、欠落重複0、main→summary36.505744秒。旧175成功/V4 1PASS19FAILは保持、計239unique/220PASS19FAIL、旧V3別20未実行。JS957/Androidsource/iOScompile成功。新RN12全条件成立、preview8/raw3/crop拒否1、両420は3880.234417/2360.958msで元8秒内。全27PNG前回byte/RGBA一致。XCTest失敗1methodの59 summaryは全て旧method、新群で相殺しない。
 
 原ZIP65,532,011byte/1073memberをdigest照合・保存し、全6原logs/元JSON/独立監査/PNG台帳等18memberをmanifestへ可逆保存。限定TECHNICAL_CREDIT、今回の修復＋一度検証単位は完了/validation_success=true。product_credit0、正式admission/通常保存→同owner履歴詳細・共有・実機と10/22保存目標は未完。counter1/上限1、追加修復/再CI/次Gate自動進行0、API/DB/本番変更0、結果資料4だけSTRUCTURE_MAP_DELTA_NONE。
+
+
+##### 5.6.35 P-W1：明示iOS rendererと同版保存再表示のsource準備
+
+入口§110／map§65.55。前回新44/RN12成立から、既存設計どおり明示版 `piece.rn_bitmap_renderer.ios.v1` のpreview/savedを同じ検証済み内部bitmap profileへ接続する。InputScreenは既存renderer ownerの純粋predicateを既存hostへ渡し、同mount/token fit・owner/flag/quotaの保存直前再確認を保つ。savedはpreview/token/expiryを捏造せず、期限内完成後だけ構築timerを解除して完成像を保持する。元8秒の構築/preview fitとnative比較・B9・本文/recipe/catalog・資源制約は変えない。新明示版exportは未開放、API/DB/env/稼働flag/deploy0。
+
+LEVEL2の新しいbounded source接続単位。production6＋既存test8＋資料7、新tracked0。旧native195/新44・旧RN13＋bitmap12を保ち、新preview8/saved8/crop1とsaved完了後8秒超保持の付随条件を確認する。local既存CI同一13suite964 PASS/FAIL0/SKIP0/cancel0、JSX/runner/旧fixture不変確認。新source既存CI一回はPENDING、旧closed CI再利用0、結果後修復/追加CI0。STRUCTURE_MAP_DELTA_PRESENT。P-W1のlive通常保存→本人履歴/詳細、P-W2共有、P-W3実機・正式商品採用は未完。

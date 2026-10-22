@@ -246,7 +246,7 @@ test('initial-save host unit: entropy and admission callbacks cannot switch the 
 
 // This existing source harness loads the actual API/model/controller/host/modal.
 // Only native entropy/Alert are added to its already synthetic boundaries.
-function integrated({ outcome, admission = () => true } = {}) {
+function integrated({ outcome, admission = () => true, rendererVersion } = {}) {
   let keyCalls = 0, saveCalls = 0, enabled = true, saveEnabled = true;
   const alerts = [];
   const vmWithNative = { ...vm, createContext: sandbox => vm.createContext({
@@ -259,6 +259,7 @@ function integrated({ outcome, admission = () => true } = {}) {
   const context = vm.createContext({ require: testRequire, __dirname: path.join(ROOT, 'tests'), AbortController, setImmediate });
   vm.runInContext(prelude + '\nglobalThis.fixtures = {previewUiHarness,response,uiSaveReceipt};', context);
   const f = context.fixtures, expected = copy(f.response());
+  if (rendererVersion) expected.renderer_version = rendererVersion;
   const ref = { source_input_id: INPUT, source_input_version: 'emlis.current_input_bundle.v1',
     source_input_bundle_commitment: 'sha256:' + 'a'.repeat(64), emlis_observation_stage: 'normal_observation',
     emlis_observation_result_identity: 'synthetic-observation', question_need_decision_identity: null,

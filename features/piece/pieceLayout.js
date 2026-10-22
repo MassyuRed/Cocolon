@@ -18,6 +18,8 @@ export const PIECE_NATIVE_PREVIEW_V9_VERSION = 'piece.rn_native_preview.prototyp
 export const PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION = 'piece.rn_native_preview.containment.prototype.v1';
 export const PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION = 'piece.rn_native_preview.containment.prototype.v2';
 export const PIECE_BITMAP_PREVIEW_VERSION = 'piece.rn_bitmap_preview.prototype.v1';
+// External saved identity is distinct from the immutable measurement profile.
+export const PIECE_BITMAP_RENDERER_VERSION = 'piece.rn_bitmap_renderer.ios.v1';
 const nativeThemes = {
   soft_paper: { canvas: '#F6F1E8', surface: '#FFFDF8', text: '#111827', secondary: '#4B5563',
     accent: '#800020', border: '#D7D2C9', branding: '#800020', vector_end: '#FFFFFF' },
@@ -41,7 +43,7 @@ export function preparePieceNativePreview(display, nowMs = Date.now()) {
   const checked = readPiecePreviewDisplay(display, nowMs);
   if (!checked.hashVerified || !checked.preview) return null;
   const p = checked.preview;
-  const candidateProfile = p.renderer_version === PIECE_BITMAP_PREVIEW_VERSION ? PIECE_BITMAP_PREVIEW_VERSION
+  const candidateProfile = [PIECE_BITMAP_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION].includes(p.renderer_version) ? PIECE_BITMAP_PREVIEW_VERSION
     : p.renderer_version === PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION ? PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION
     : p.renderer_version === PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION ? PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION
     : p.renderer_version === PIECE_NATIVE_PREVIEW_V9_VERSION ? PIECE_NATIVE_PREVIEW_V9_VERSION
@@ -58,22 +60,25 @@ export function preparePieceNativePreview(display, nowMs = Date.now()) {
 
 // A saved record is not a preview. Recheck the closed saved contract and all
 // three hashes, without inventing expiry, source, quota or current-plan data.
-// Only this implemented prototype can be reconstructed here. In particular,
-// the design's rn_renderer.v1 example is not an admitted implementation.
+// Preserve the old v3 appearance. Only the new explicit iOS bitmap identity
+// is additionally reconstructed; prototype/unknown saved versions stay closed.
 export function preparePieceNativeSavedDisplay(raw) {
   try {
     const p = readPieceOwnerDisplay(raw);
-    if (p.renderer_version !== PIECE_NATIVE_PREVIEW_VERSION) return null;
-    const key = JSON.stringify([PIECE_NATIVE_PREVIEW_VERSION, 'saved', p.piece_id, p.public_id,
+    if (![PIECE_NATIVE_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION].includes(p.renderer_version) ||
+        p.renderer_version === PIECE_BITMAP_RENDERER_VERSION && Platform.OS !== 'ios') return null;
+    const profile = p.renderer_version === PIECE_BITMAP_RENDERER_VERSION ? PIECE_BITMAP_PREVIEW_VERSION : PIECE_NATIVE_PREVIEW_VERSION;
+    const key = JSON.stringify([profile, 'saved', p.piece_id, p.public_id,
       p.row_version, p.saved_at, p.piece_text_hash, p.content_payload_hash, p.visual_recipe_hash, p.renderer_version]);
-    return preparePieceNativeArtifact(p, key);
+    return preparePieceNativeArtifact(p, key, profile);
   } catch { return null; }
 }
 
 export function preparePieceNativeCard(props) {
   const saved = Object.prototype.hasOwnProperty.call(props, 'savedRecord');
   if (saved && Object.prototype.hasOwnProperty.call(props, 'display')) return null;
-  if (saved) return preparePieceNativeSavedDisplay(props.savedRecord);
+  if (saved) return props.exportCanvas === true && props.savedRecord?.renderer_version === PIECE_BITMAP_RENDERER_VERSION
+    ? null : preparePieceNativeSavedDisplay(props.savedRecord);
   const input = preparePieceNativePreview(props.display);
   return props.exportCanvas === true && [PIECE_BITMAP_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION]
     .includes(input?.candidateProfile) ? null : input;
@@ -84,7 +89,9 @@ export function preparePieceNativeCard(props) {
 function preparePieceNativeArtifact(p, key, candidateProfile = PIECE_NATIVE_PREVIEW_VERSION) {
   const recipe = p.visual_recipe, ratio = recipe.aspect_ratio;
   const tall = ratio === '9:16', margin = tall ? 108 : 96, brandingZone = tall ? 84 : 72;
-  return frozenNative({ key, candidateProfile, width: 1080, height: tall ? 1920 : 1350, margin, brandingZone,
+  return frozenNative({ key, candidateProfile,
+    ...(candidateProfile === PIECE_BITMAP_PREVIEW_VERSION ? { rendererVersion: p.renderer_version } : {}),
+    width: 1080, height: tall ? 1920 : 1350, margin, brandingZone,
     contentWidth: 1080 - 2 * margin, contentHeight: (tall ? 1920 : 1350) - 2 * margin - brandingZone,
     blocks: [...p.content_payload.body_blocks], sizes: [...nativeScales[p.format_type][ratio]],
     lineRatio: nativeLineRatios[p.format_type], paragraphRatio: p.format_type === 'short_essay' ? 0.65 : 0,

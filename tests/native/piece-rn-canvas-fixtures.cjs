@@ -103,4 +103,29 @@ const bitmapTrap = JSON.parse(JSON.stringify(bitmapCases[0]));
 bitmapTrap.name = 'bitmap_host_crop_trap'; bitmapTrap.evidence_set = 'bitmap_host_trap'; bitmapTrap.controlled_host_crop = true;
 bitmapCases.push(bitmapTrap);
 module.exports.bitmap = bitmapCases;
-if (require.main === module) process.stdout.write(JSON.stringify(process.env.PIECE_RN_BITMAP_GROUP === '1' ? bitmapCases : module.exports, null, 2) + '\n');
+// The explicit renderer keeps all former fixtures byte-identical and adds
+// preview/saved pairs from the same canonical artifact without preview fields.
+const admittedVersion = 'piece.rn_bitmap_renderer.ios.v1';
+const admittedCases = [];
+for (const original of bitmapCases.filter(c => c.evidence_set === 'bitmap_preview')) {
+  const preview = JSON.parse(JSON.stringify(original));
+  const baseName = original.name.slice('bitmap_'.length);
+  preview.name = `admitted_preview_${baseName}`; preview.evidence_set = 'admitted_preview';
+  preview.props.display.preview.renderer_version = admittedVersion;
+  admittedCases.push(preview);
+  const p = preview.props.display.preview;
+  const shared = ['api_contract_version', 'piece_contract_version', 'format_type', 'piece_text', 'piece_text_hash',
+    'content_payload', 'content_payload_hash', 'visual_recipe', 'visual_recipe_hash', 'renderer_version', 'row_version', 'content_status'];
+  const savedRecord = { ...Object.fromEntries(shared.map(k => [k, p[k]])),
+    export_contract_version: 'piece.export_contract.v1', render_interface_version: 'piece.render_interface.v1',
+    render_reproducibility_version: 'piece.render_reproducibility.v1',
+    piece_id: '40000000-0000-4000-8000-000000000004', public_id: 'piece:40000000-0000-4000-8000-000000000004',
+    lifecycle_status: 'saved', visibility_scope: 'private', saved_at: '2026-10-13T00:00:00Z' };
+  admittedCases.push({ name: `admitted_saved_${baseName}`, evidence_set: 'admitted_saved', test_profile: 'bitmap-v1',
+    ...(baseName === 'essay_paragraphs' ? { retain_after_deadline: true } : {}), props: { savedRecord } });
+}
+const admittedTrap = JSON.parse(JSON.stringify(admittedCases[0]));
+admittedTrap.name = 'admitted_host_crop_trap'; admittedTrap.evidence_set = 'admitted_host_trap'; admittedTrap.controlled_host_crop = true;
+admittedCases.push(admittedTrap); module.exports.admitted = admittedCases;
+if (require.main === module) process.stdout.write(JSON.stringify(process.env.PIECE_RN_ADMITTED_GROUP === '1' ? admittedCases
+  : process.env.PIECE_RN_BITMAP_GROUP === '1' ? bitmapCases : module.exports, null, 2) + '\n');

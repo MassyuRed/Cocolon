@@ -86,7 +86,7 @@ export async function preparePieceExportPrototype({ pieceId, expectedUserId, isC
   const record = readPieceOwnerDisplay(await requestPieceOwner('detail', { piece_id: pieceId }, { expectedUserId, signal }));
   current();
   const input = preparePieceNativeSavedDisplay(record);
-  if (!input) throw failed();
+  if (!input || record.renderer_version !== PIECE_NATIVE_PREVIEW_VERSION) throw failed();
   const dirs = roots();
   try { await prepareRawCache(dirs.raw); } catch { throw failed(); }
   current();

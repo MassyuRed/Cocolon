@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_piece_read_first
 title: "Cocolon Piece — Read First"
-revision_date: "2026-10-21 JST"
+revision_date: "2026-10-22 JST"
 decision_owner: "Mash"
 workstream: "Cocolon / Piece"
 document_status: "CURRENT_PIECE_WORKSTREAM_ENTRY"
@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§109／map§65.54.3／weekly§5.6.34.3／manifest v145。承認済みWindow四地点修復＋一度CIを完了し、新native44/44・実RN12成立、両420は3.88秒/2.36秒。全27PNGは前回byte一致。旧native19FAIL/旧RN群の失敗でCI全体failureを維持。限定TECHNICAL_CREDIT、正式admission/通常保存/本人再表示は未完です。**
+**最新は入口§110／map§65.55／weekly§5.6.35／manifest v146。明示iOS bitmap版のpreview・同版saved再構築とInputScreen保存条件を接続。local964 PASS、新sourceの一度CIはこれから。旧失敗は維持し、稼働通常保存・共有・実機受入れは未完です。**
 
 ### §87の設計時点（履歴）
 
@@ -3871,3 +3871,24 @@ JS957 PASS/FAIL0/SKIP0/cancel0（12,357.158562ms）、Android source成功、iOS
 PRIMARY_OUTCOME=TECHNICAL_CREDIT（検証用Window不備解消と、承認済みbitmap候補の新44＋RN12限定技術確認）。bounded_work_complete=true、validation_success=true、product_credit=0、formal_admission/can_save/can_export/normal_save_reopen_complete=false。新候補の正式採用・通常保存は別の未完条件であり、CI全体GREENや商品完成とは呼ばない。
 
 次の未完は正式renderer admission・採用版saved reader/profile整合と、InputScreen正式isSaveAdmitted/同preview保存直前fit→既存保存controller/API→同owner履歴/詳細の一往復。P-W2画像保存共有/P-W3実機も残る。今回の承認単位はここで終了し、追加修復/再CI/次Gateへ自動進行しない。実API/Auth/稼働flag/本番DB/本人実機での完成は未確認。API a536e50e/DB/env/deploy/main merge変更0、両Draft/open/unmerged。STRUCTURE_MAP_DELTA_NONE（結果記録4fileだけ、sourceはCI開始後不変）。
+
+
+## 110. 2026-10-22 — 明示iOS renderer版と保存再表示を既存P-W1へ接続するsource準備
+
+Mashの今回の「Pieceの残件作業を進めて」を受け、最新§109の新native44/44・実RN12成立と、全体設計/全file地図/最新weeklyを照合した。前回Window修復の一度CI39727150432はcounter1/failureで閉じたまま保持し、その承認を再利用しない。今回のbounded workは既存P-W1設計内のsource接続と付随検証であり、Rule18 §11.3 LEVEL2のstanding delegationを根拠とする。物理端末確認をsource準備の追加事前Gateへしない。root華恋のみが反映・実行し、補助担当はread-only reviewを担う。
+
+新しい外部renderer identityを `piece.rn_bitmap_renderer.ios.v1` とし、検証済みの内部計測profile `piece.rn_bitmap_preview.prototype.v1` をそのまま使う。既存 `features/piece/pieceLayout.js` で明示版previewと同版savedを同じbitmap計測/描画へ結び、keyにはpreview/savedの区別、ID、revision、保存時点またはpreview期限、3hash、外部renderer版を保持する。savedへpreview/token/expiryを捏造しない。旧v3 saved・旧prototype preview・未知版の既存表示境界は維持し、旧recordを新外観へ置換しない。本文/recipe/catalog/font/B9/native paint・比較器・wire・資源上限は不変更。
+
+既存 `features/piece/pieceRenderer.js` のside-effect-free `isPieceBitmapSaveAdmitted` を `screens/InputScreen.js` から既存 `screens/input/InputPieceActionArea.js` へ渡す。predicateは明示版・iOS・閉じたpreview/hash/期限/catalog・必要native interface/managerを確認し、HTTP、描画、component初期化を発行しない。host/controllerのowner・実効flag・quota・同じpreview/tokenと同mountのlive fit、および保存直前の前後再確認は維持する。版文字列やnative_checkedだけで保存を成立させない。
+
+`components/piece/PieceVisualCard.js` は同じ内部profileをpreview/savedの双方で用い、bitmap生成と最終adoptionは新しい描画transaction開始から元8秒のwall/monotonic期限内に完了させる。preview fitの元8秒は変えない。新明示版savedだけは期限内のnative_checked採用を確認した後に構築用timerを解除し、完成像を8秒後も保持する。期限外の遅延完了を救済せず、時計/期限の再起算もしない。savedはsave fitを発行せず、source/key/generation/node/config/window/unmount変更時の失効と、provider最終解放までの共有32MiB予約を維持する。これは構築期限と完成saved画像の寿命を区別する既存商品目的内の補正で、旧prototypeの期限動作は変えない。
+
+新明示版の画像exportは `features/piece/pieceExport.js` とCard入口で閉じ、旧v3 exportを維持する。今回のAPI code/閉DTO/DB/SQL/flag/env/deploy/署名配布/main merge効果は0。実APIが新renderer版を発行する設定・実Auth/稼働APIの往復は別の未確認項目であり、source実装をlive通常保存の成功へ換算しない。既存保存controller/API/owner reads/DBを再作成しない。
+
+付随検証は既存8test path内へ追加する。旧native195期待と新bitmap44、旧V3別20未実行の区別、旧RN13＋bitmap12のfixture JSON bytesと期待を維持する。新groupは明示版preview8/saved8/crop拒否1の17ケース。最初のsaved case内で元期限後8秒超の同画像保持も確認し、localでは構成変更による失効と期限外完了拒否も確認する。preview/savedの本文・行・font・recipeと画像同等性、savedのfit非発行、明示版export拒否、InputScreen供給と既存保存controllerへの同token接続を確認する。localは既存CI同一13suiteで964 PASS/FAIL0/SKIP0/cancel0（16,930.086392ms）。追加7件を含み、別実行との件数合算はしない。JSX parse error0、runner bash構文、旧13/bitmap12 fixture JSON byte一致、旧XCTest methodの逆射影全文一致も確認した。
+
+sourceを確定してGitHubへ反映・全文readbackした後、新source pushによる既存CIを一回だけ実行する。今回counter0/上限1、旧runをrerunせず、結果後のsource修復/追加CIへ自動進行しない。既存6job/原logs/report/PNGと新旧groupの個別結果を保存する。元期待を削らず、旧群の失敗が残れば全体failureと明記する。新期待のcompile/runtime/記録/期限/画像条件が未達なら、そのactualを保存して一回で停止する。
+
+STRUCTURE_MAP_DELTA_PRESENT。既存production6＋付随test8＋資料7の21path、新tracked0。詳細scopeはmanifest内同単位に固定し、既存ownerだけを更新する。source段階の技術成功・商品credit・稼働readinessを分離する。現時点はsource準備、local964成功/CI結果PENDING、product_credit=0、通常保存→同owner履歴/詳細の稼働完成・P-W2画像共有・P-W3本人実機・正式商品採用は未確認、automatic_progression=false。
+
+実装中の検査で、全profileへのrendererVersion追加による旧v3比較差分を発見し、bitmap profileだけへ限定して修復した。追加integrationのsyntheticFit helper取得漏れ、InputScreen検査でReact state更新数をIO回数と誤読した期待、旧fixture比較用Moduleの基準pathを補正した。部分materializationに不足した既存依存は同head原blobで補い、完成964件の実行で解消を確認した。新商品仕様へ合わせて旧期待を削ったものではない。

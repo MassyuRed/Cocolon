@@ -1,7 +1,7 @@
 ---
 doc_id: cocolon_piece_current_structure
 title: "Piece構造 — Current Structure"
-revision_date: "2026-10-20 JST"
+revision_date: "2026-10-22 JST"
 latest_api_implementation: "804beca66f9f02e18dc4522232478466f4d52b13"
 latest_storage_candidate: "4fcb140b778850a1b7a5a65d8e0a26005b3a24c4"
 document_role: "PIECE_CURRENT_STRUCTURE_OWNER"
@@ -3378,3 +3378,12 @@ source15b0a62a/CI39717661329 attempt1継続。JS957 PASS、iOS source/standalone
 入口§109／weekly§5.6.34.3／manifest v145。source c43a8ae6の唯一CI39727150432 attempt1全6job完了/failure。Window例外は解消、新bitmap個別44全成功/欠落重複0、main→summary36.505744秒。旧175成功＋V4 1PASS19FAIL、native計239unique/220PASS19FAIL、旧V3別20未実行。JS957/Androidsource/iOS compile成功。新RN12全source条件成立、preview8/raw3/crop失効1、両420は3880.234417/2360.958ms・36pt・元8秒内。新22＋旧5の全27PNGは前回byte/RGBA一致。XCTest2method/失敗1、59 failure summaryは全て旧method。旧失敗を新成功へ相殺しない。
 
 原ZIP65,532,011byte/1073memberはdigest照合・全文保存済、全6logs/元JSON/独立監査/PNG台帳等18memberをmanifestへ可逆保存。限定TECHNICAL_CREDIT、bounded_work_complete/validation_success=true、product_credit0。source追加修復/再CI0、結果4資料のみSTRUCTURE_MAP_DELTA_NONE。正式admission/採用版saved profile→InputScreen正式保存条件/同preview fit→既存保存API→本人履歴詳細と、共有/実機は未完。今回単位終了、automatic_progression=false。
+
+
+## 65.55. 2026-10-22 — 明示iOS bitmap版の保存接続source準備
+
+入口§110／weekly§5.6.35。新外部版 `piece.rn_bitmap_renderer.ios.v1` を、検証済み内部profile `piece.rn_bitmap_preview.prototype.v1` へ明示対応させる。`pieceLayout.js` はpreview/savedの別identity keyと同じbitmap再構築を担当し、savedへpreview期限/tokenを作らない。旧v3/旧prototype/未知版の境界を維持する。`pieceRenderer.js` の純粋predicateをInputScreen→既存hostへ供給し、host/controllerのowner/flag/quota/同mount-token fitと保存直前再確認は変えない。
+
+Card構築・最終adoptionは元8秒、preview fitも元8秒。新明示版savedだけ完成時に構築timerを解除し、同じimmutable画像を8秒後も保持する。期限外完了救済/再起算0、saved fit発行0、画像構成/window/source変化の失効とprovider共有budgetは維持。新版exportは閉じ、旧export3を保つ。native/API/DB/env/flag/deploy変更0。
+
+LEVEL2の新しいsource接続単位で、前回closed CIは再利用しない。旧native195/新44、旧RN13＋bitmap12を維持、新preview8/saved8/crop1＋saved完了後8秒超保持を付随検査する。local964 PASS/FAIL0/SKIP0/cancel0、新source既存CI一回はPENDING、rerun/結果後修復0。STRUCTURE_MAP_DELTA_PRESENT、source段階をlive保存/本人再表示・共有・実機の商品完成へしない。

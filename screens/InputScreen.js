@@ -67,6 +67,7 @@ import { useInputFeedbackModal } from "./input/useInputFeedbackModal";
 import { useInputKeyboardAwareMemo } from "./input/useInputKeyboardAwareMemo";
 import InputActionArea from "./input/InputActionArea";
 import InputPieceActionArea from "./input/InputPieceActionArea";
+import { isPieceBitmapSaveAdmitted } from "../features/piece/pieceRenderer";
 import InputCategorySection from "./input/InputCategorySection";
 import InputEmotionSection from "./input/InputEmotionSection";
 import InputFeedbackReplyModal from "./input/InputFeedbackReplyModal";
@@ -1515,7 +1516,8 @@ ${String(error?.message || error)}`
               {mountSavedPieceInput ? (
                 <View testID="piece-saved-input-entry" style={showSavedPieceInput ? styles.section : undefined}>
                   {showSavedPieceInput ? <Text style={styles.sectionLabel}>直前に保存した入力</Text> : null}
-                  <InputPieceActionArea savedInput={savedPieceInput.savedInput} navigation={navigation} />
+                  <InputPieceActionArea savedInput={savedPieceInput.savedInput} navigation={navigation}
+                    isSaveAdmitted={isPieceBitmapSaveAdmitted} />
                 </View>
               ) : null}
 

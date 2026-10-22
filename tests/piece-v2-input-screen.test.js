@@ -149,6 +149,7 @@ function harness(options = {}) {
       open: async id => { threadIds.push(id); if (control.threadOpen) return control.threadOpen(id);
         control.threadVisible = control.threadMode; return control.threadMode; } }) };
     if (name === './input/InputPieceActionArea') return { __esModule: true, default: Host };
+    if (name === '../features/piece/pieceRenderer') return { isPieceBitmapSaveAdmitted: control.rendererAdmission || (() => false) };
     if (name === '../components/TutorialOverlay') return { __esModule: true, default: 'TutorialOverlay',
       syncTutorialSpotlightTarget: async () => null, waitForTutorialFrames: async () => {} };
     if (name === '../components/UnreadBadge') return { ScreenUnreadBadge: 'ScreenUnreadBadge' };
@@ -207,6 +208,14 @@ function harness(options = {}) {
 async function saved(options = {}) {
   const h = harness(options); h.fill(); await h.submit(); h.render(); h.finishObservation(); return h;
 }
+test('InputScreen supplies the explicit renderer predicate to the existing saved-input host without issuing IO', async () => {
+  const admission = () => false;
+  const h = await saved({ rendererAdmission: admission });
+  assert.equal(h.slot().props.isSaveAdmitted, admission);
+  assert.equal(h.u.calls.length, 0); const writes = h.writes();
+  assert.equal(h.slot().props.isSaveAdmitted({}, Object.freeze({})), false);
+  assert.equal(h.writes(), writes); assert.equal(h.u.calls.length, 0); h.dispose();
+});
 
 test('confirmed save reaches the real Piece host after the existing observation closes; no automatic IO', async () => {
   const h = harness(); h.fill(); assert.equal(h.slot(), undefined);
