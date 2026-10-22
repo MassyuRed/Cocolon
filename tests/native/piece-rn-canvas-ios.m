@@ -18,6 +18,14 @@
 - (NSDictionary *)cocolonPiecePaintObservation;
 @end
 
+// Public properties of the app-owned bitmap host, not UIKit private backing.
+@interface UIView (PieceBitmapTestAccess)
+- (id)bitmapImage;
+- (NSString *)bitmapToken;
+- (NSString *)bitmapBinding;
+- (BOOL)bitmapConfigurationCurrent;
+@end
+
 // Test-only observation of the original selected-line operation. The product
 // inspector, its wire object, and the already-mounted Text remain unchanged.
 typedef void (*PieceSelectedCall)(id, SEL, NSNumber *, NSString *, double,
@@ -670,6 +678,7 @@ static NSArray *PieceComponentUnion(NSDictionary *parts) {
 @property(nonatomic, strong) NSMutableArray *reports;
 @property(nonatomic, strong) NSError *reportPersistenceError;
 @property(nonatomic, copy) dispatch_block_t completed;
+@property(nonatomic, copy) NSString *reportFilename;
 @end
 @implementation PieceCanvasTest
 RCT_EXPORT_MODULE();
@@ -702,7 +711,7 @@ RCT_EXPORT_MODULE();
   @try {
     NSError *error = nil;
     NSData *data = [NSJSONSerialization dataWithJSONObject:self.reports options:NSJSONWritingPrettyPrinted error:&error];
-    if (!data || ![data writeToFile:[PieceEvidenceDirectory() stringByAppendingPathComponent:@"results.json"]
+    if (!data || ![data writeToFile:[PieceEvidenceDirectory() stringByAppendingPathComponent:self.reportFilename ?: @"results.json"]
                           options:NSDataWritingAtomic error:&error]) {
       self.reportPersistenceError = error ?: [NSError errorWithDomain:@"PieceCanvasReport" code:1 userInfo:nil];
       NSLog(@"PIECE_RN_REPORT_PERSISTENCE_ERROR %@ %@", report[@"name"], self.reportPersistenceError);
@@ -726,6 +735,85 @@ RCT_EXPORT_METHOD(record:(NSDictionary *)report) {
 - (void)collectText:(UIView *)view into:(NSMutableArray *)texts {
   if ([view isKindOfClass:RCTTextView.class]) [texts addObject:view];
   for (UIView *child in view.subviews) [self collectText:child into:texts];
+}
+RCT_EXPORT_METHOD(cropBitmapHost:(nonnull NSNumber *)tag token:(NSString *)token resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+  [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *manager,NSDictionary<NSNumber *,UIView *> *registry){
+    UIView *host=registry[tag];
+    if(![host isKindOfClass:NSClassFromString(@"PieceBitmapCanvasView")] || ![[host bitmapToken]isEqual:token]){reject(@"BITMAP_TEST_HOST",@"Missing current host",nil);return;}
+    host.clipsToBounds=YES;
+    resolve(@{@"image_cleared":@(![host bitmapImage]&&![host bitmapToken]&&!host.layer.contents)});
+  }];
+}
+RCT_EXPORT_METHOD(captureBitmap:(nonnull NSNumber *)tag report:(NSDictionary *)raw resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
+  [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *manager,NSDictionary<NSNumber *,UIView *> *registry){
+    @try {
+    UIView *canvas=registry[tag];NSDictionary *meta=raw[@"bitmap_canvas"];
+    UIView *host=[meta isKindOfClass:NSDictionary.class]?registry[meta[@"canvasTag"]]:nil;
+    NSMutableDictionary *report=[raw mutableCopy];NSMutableArray *texts=[NSMutableArray new],*strings=[NSMutableArray new];
+    if(canvas)[self collectText:canvas into:texts];
+    NSArray *rows=raw[@"rows"],*inspection=meta[@"rows"];
+    BOOL valid=[host isKindOfClass:NSClassFromString(@"PieceBitmapCanvasView")] && canvas.window && host.window==canvas.window &&
+      [host isDescendantOfView:canvas] && [host bitmapImage] && host.layer.contents==[host bitmapImage] && [host bitmapConfigurationCurrent] &&
+      [[host bitmapToken]isEqual:meta[@"artifactToken"]] && [[host bitmapBinding]isEqual:meta[@"bindingToken"]] &&
+      [meta[@"version"]isEqual:@"piece.native_bitmap_canvas.v1"] && [meta[@"checked"]boolValue] && ![meta[@"overflow"]boolValue] &&
+      canvas.bounds.size.width==1080 && canvas.bounds.size.height==[raw[@"height"]doubleValue] &&
+      texts.count==rows.count+([raw[@"branding"]boolValue]?1:0) && texts.count==inspection.count;
+    for(NSUInteger i=0;i<texts.count;i++) {
+      RCTTextView *view=texts[i];NSString *text=view.cocolonPieceTextStorage.string?:@"";[strings addObject:text];
+      valid=valid&&[text isEqual:(i<rows.count?rows[i]:@"Cocolon")]&&i<inspection.count&&[inspection[i][@"tag"]isEqual:view.reactTag];
+    }
+    report[@"native_texts"]=strings;report[@"native_canvas_valid"]=@(valid);
+    if(valid) {
+      CGImageRef cg=(__bridge CGImageRef)[host bitmapImage];
+      valid=CGImageGetWidth(cg)==1080&&CGImageGetHeight(cg)==(size_t)canvas.bounds.size.height;
+      // Independent hosted oracle reads this known app-owned RGBA8 image.
+      // It never interprets UIKit's opaque Text contents.
+      CFDataRef data=CGDataProviderCopyData(CGImageGetDataProvider(cg));
+      size_t width=CGImageGetWidth(cg),height=CGImageGetHeight(cg),stride=CGImageGetBytesPerRow(cg);
+      UInt8 *actual=calloc(height,width*4);CGColorSpaceRef space=CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
+      CGContextRef context=actual&&space?CGBitmapContextCreate(actual,width,height,8,width*4,space,kCGBitmapByteOrder32Big|kCGImageAlphaPremultipliedLast):NULL;
+      if(space)CGColorSpaceRelease(space);BOOL maskEqual=context&&data&&CGImageGetBitsPerPixel(cg)==32&&
+        CFDataGetLength(data)>=(CFIndex)(height*stride);BOOL seen=NO,empty=NO;
+      if(maskEqual){CGContextTranslateCTM(context,0,height);CGContextScaleCTM(context,1,-1);[host.layer renderInContext:context];
+        const UInt8 *source=CFDataGetBytePtr(data);
+        for(size_t y=0;y<height;y++)for(size_t x=0;x<width;x++){
+          BOOL bit=source[y*stride+x*4+3]>0;seen|=bit;empty|=!bit;
+          if(bit!=(actual[y*width*4+x*4+3]>0))maskEqual=NO;
+        }
+      }
+      if(context)CGContextRelease(context);free(actual);if(data)CFRelease(data);
+      report[@"bitmap_all_cells_equal"]=@(maskEqual&&seen&&empty);valid=valid&&maskEqual&&seen&&empty;
+      UIGraphicsImageRendererFormat *format=[UIGraphicsImageRendererFormat defaultFormat];format.scale=1;format.opaque=YES;
+      UIGraphicsImageRenderer *renderer=[[UIGraphicsImageRenderer alloc]initWithSize:canvas.bounds.size format:format];
+      UIImage *image=[renderer imageWithActions:^(UIGraphicsImageRendererContext *ctx){[canvas.layer renderInContext:ctx.CGContext];}];
+      NSString *name=[raw[@"name"]stringByAppendingString:@".png"];
+      BOOL written=[UIImagePNGRepresentation(image)writeToFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:name]atomically:YES];
+      if(written)report[@"png"]=name;else valid=NO;
+      // Same selected RN Text/layer, font, rows and recipe; reference only.
+      // Hidden source views are rendered individually at the recorded p.
+      NSDictionary *colors=raw[@"colors"];
+      UIColor *(^color)(NSString *)=^UIColor *(NSString *hex){unsigned int rgb=0;[[NSScanner scannerWithString:[hex substringFromIndex:1]]scanHexInt:&rgb];
+        return [UIColor colorWithRed:((rgb>>16)&255)/255.0 green:((rgb>>8)&255)/255.0 blue:(rgb&255)/255.0 alpha:1];};
+      UIImage *reference=[renderer imageWithActions:^(UIGraphicsImageRendererContext *ctx){
+        [color(colors[@"canvas"])setFill];UIRectFill(canvas.bounds);
+        CGFloat margin=[raw[@"margin"]doubleValue];CGRect panel=CGRectInset(canvas.bounds,margin/2,margin/2);
+        [color(colors[@"border"])setFill];UIRectFill(panel);[color(colors[@"surface"])setFill];UIRectFill(CGRectInset(panel,2,2));
+        for(NSUInteger i=0;i<texts.count;i++){
+          RCTTextView *view=texts[i];NSArray *p=inspection[i][@"origin"];CGFloat alpha=view.alpha;
+          [CATransaction begin];[CATransaction setDisableActions:YES];
+          view.alpha=i<rows.count?1:([raw[@"branding_mode"]isEqual:@"required_subtle"]?0.8:1);
+          CGContextSaveGState(ctx.CGContext);CGContextTranslateCTM(ctx.CGContext,[p[0]doubleValue],[p[1]doubleValue]);[view.layer renderInContext:ctx.CGContext];CGContextRestoreGState(ctx.CGContext);
+          view.alpha=alpha;[CATransaction commit];
+        }
+      }];
+      NSString *refName=[raw[@"name"]stringByAppendingString:@"_natural-reference.png"];
+      if([UIImagePNGRepresentation(reference)writeToFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:refName]atomically:YES])report[@"natural_reference_png"]=refName;
+      else valid=NO;
+      report[@"native_canvas_valid"]=@(valid);report[@"capture_error"]=@(!written);
+    }else report[@"capture_error"]=@YES;
+    [self saveReport:report];resolve(@YES);
+    }@catch(NSException *exception){reject(@"BITMAP_TEST_CAPTURE",@"Bitmap capture unavailable",nil);}
+  }];
 }
 RCT_EXPORT_METHOD(capture:(nonnull NSNumber *)tag report:(NSDictionary *)raw resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject) {
   [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *manager, NSDictionary<NSNumber *,UIView *> *registry) {
@@ -1066,6 +1154,51 @@ RCT_EXPORT_METHOD(done) { dispatch_async(dispatch_get_main_queue(), ^{ if (self.
     NSArray*ac=a[@"ctm"],*bc=b[@"ctm"];for(NSUInteger j=0;j<4;j++)XCTAssertEqualWithAccuracy([ac[j]doubleValue],[bc[j]doubleValue],1e-6);
   }
   XCTAssertNotNil(report[@"png"]);
+}
+
+- (void)testBitmapCanvasGroupWithRealReactNative {
+  self.resultModule=[PieceCanvasTest new];self.resultModule.reports=[NSMutableArray new];self.resultModule.reportFilename=@"bitmap-results.json";
+  XCTestExpectation *done=[self expectationWithDescription:@"Separate bitmap preview group"];
+  self.resultModule.completed=^{[done fulfill];};
+  RCTBridge *bridge=[[RCTBridge alloc]initWithDelegate:self launchOptions:nil];
+  @try {
+    RCTRootView *root=[[RCTRootView alloc]initWithBridge:bridge moduleName:@"PieceCanvasCases" initialProperties:@{@"pieceGroup":@"bitmap"}];
+    UIWindow *window=[[[UIApplication sharedApplication]delegate]window];window.rootViewController.view=root;[window makeKeyAndVisible];
+    [self waitForExpectations:@[done] timeout:90];XCTAssertNil(self.resultModule.reportPersistenceError);
+    NSArray *names=@[@"bitmap_essay_paragraphs",@"bitmap_quote_unicode",@"bitmap_declaration_no_brand",@"bitmap_essay_max420",
+      @"bitmap_suffix_latin_ligature",@"bitmap_suffix_arabic",@"bitmap_suffix_max420_a",@"bitmap_containment_branding_opacity08",
+      @"bitmap_suffix_spaces_raw",@"bitmap_suffix_hebrew_raw",@"bitmap_suffix_mixed_bidi_raw",@"bitmap_host_crop_trap"];
+    XCTAssertEqual(self.resultModule.reports.count,12);XCTAssertEqualObjects([self.resultModule.reports valueForKey:@"name"],names);
+    for(NSDictionary *report in self.resultModule.reports){
+      BOOL preview=[report[@"evidence_set"]isEqual:@"bitmap_preview"],raw=[report[@"evidence_set"]isEqual:@"bitmap_raw"];
+      if(preview||raw){
+        XCTAssertEqualObjects(report[@"phase"],preview?@"native_checked":@"bitmap_checked",@"%@",report);
+        XCTAssertEqualObjects(report[@"body_preserved"],@YES,@"%@",report);
+        XCTAssertEqualObjects(report[@"native_canvas_valid"],@YES,@"%@",report);
+        XCTAssertEqualObjects(report[@"bitmap_all_cells_equal"],@YES,@"%@",report);
+        XCTAssertEqualObjects(report[@"capture_error"],@NO,@"%@",report);
+        XCTAssertLessThan([report[@"elapsed_ms"]doubleValue],8000,@"%@",report);
+        XCTAssertEqualObjects(report[@"state_can_save"],@NO);XCTAssertEqualObjects(report[@"state_can_export"],@NO);
+        XCTAssertEqualObjects(report[@"bitmap_canvas"][@"version"],@"piece.native_bitmap_canvas.v1");
+        XCTAssertEqualObjects(report[@"bitmap_canvas"][@"profile"],@"piece.rn_bitmap_preview.prototype.v1");
+        XCTAssertEqualObjects(report[@"bitmap_canvas"][@"checked"],@YES);
+        NSMutableArray *expected=[report[@"rows"]mutableCopy];if([report[@"branding"]boolValue])[expected addObject:@"Cocolon"];
+        XCTAssertEqualObjects(report[@"native_texts"],expected);
+        if(preview){XCTAssertEqualObjects(report[@"save_fit_current"],@YES);XCTAssertEqualObjects(report[@"save_fit_wrong_token_current"],@NO);XCTAssertEqualObjects(report[@"save_fit_handle_keys"],@[@"isCurrent"]);}
+        for(NSString *key in @[@"png",@"natural_reference_png"]){
+          NSString *filename=report[key];XCTAssertNotNil(filename);
+          if(filename){UIImage *image=[UIImage imageWithContentsOfFile:[PieceEvidenceDirectory()stringByAppendingPathComponent:filename]];XCTAssertNotNil(image);
+            if(image){XCTAttachment *attachment=[XCTAttachment attachmentWithImage:image];attachment.name=filename;attachment.lifetime=XCTAttachmentLifetimeKeepAlways;[self addAttachment:attachment];}}
+        }
+      }else{
+        XCTAssertEqualObjects(report[@"name"],@"bitmap_host_crop_trap");XCTAssertEqualObjects(report[@"phase"],@"unavailable");
+        XCTAssertEqualObjects(report[@"reason"],@"native_bitmap_invalidated");XCTAssertEqualObjects(report[@"crop_before_fit"],@YES);
+        XCTAssertEqualObjects(report[@"crop_result"][@"image_cleared"],@YES);XCTAssertEqualObjects(report[@"save_fit_current"],@NO);
+        XCTAssertEqualObjects(report[@"state_can_save"],@NO);XCTAssertEqualObjects(report[@"state_can_export"],@NO);
+        XCTAssertLessThan([report[@"elapsed_ms"]doubleValue],8000);
+      }
+    }
+  }@finally{[bridge invalidate];}
 }
 
 - (void)testWholeCanvasWithRealReactNative {

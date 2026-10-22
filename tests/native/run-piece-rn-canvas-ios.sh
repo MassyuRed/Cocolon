@@ -17,7 +17,7 @@ import json
 from pathlib import Path
 import re
 
-EXPECTED_SHA256 = "f3dadd39774bfaf3886dc180e4a5be55a165f2918194b26614aa75af87241340"
+EXPECTED_SHA256 = "1bf7cf3769587c1034efeec7a6019db59f7e749cfa85e65f8dac5ca0b5dcbba6"
 PREFIX = '''
 // Hosted-test-only scalar diagnostic, injected in this disposable checkout.
 // No wire field, guard expression, return value, clock or paint is changed.
@@ -213,6 +213,7 @@ Path(sys.argv[1]).write_text(json.dumps(metadata,indent=2)+'\n')
 print('PIECE_V4_DIAGNOSTIC_MAP '+json.dumps(metadata,separators=(',',':')))
 PIECE_DIAGNOSTIC_PY
 PIECE_RN_CANVAS_PROFILE=output-grid-v4 node tests/native/piece-rn-canvas-fixtures.cjs > tests/native/piece-rn-canvas-fixtures.json
+PIECE_RN_CANVAS_PROFILE=output-grid-v4 PIECE_RN_BITMAP_GROUP=1 node tests/native/piece-rn-canvas-fixtures.cjs > tests/native/piece-rn-bitmap-fixtures.json
 cat > tests/native/piece-rn-no-transport.js <<'JS'
 export const apiFetch = () => { throw new Error('TRANSPORT_FORBIDDEN_IN_RENDER_TEST'); };
 export const getAccessToken = () => { throw new Error('AUTH_FORBIDDEN_IN_RENDER_TEST'); };

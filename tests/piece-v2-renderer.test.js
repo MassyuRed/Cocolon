@@ -37,6 +37,8 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
   }, createElement: (type, props, ...children) => ({ type, props: props || {}, children }) };
   const context = vm.createContext({ React, View: 'View', Text: 'Text',
     Platform: { OS: 'ios' }, findNodeHandle: node => node?.tag,
+    UIManager: { getViewManagerConfig: name => name === 'PieceBitmapCanvas' ? {} : null },
+    requireNativeComponent: name => name,
     NativeModules: { PieceTextMetrics: { measureCandidates: async (tag, text, fontSize) => {
       const result = candidateTable(text, fontSize); candidateCalls.push({ tag, text, fontSize });
       return nativeCandidates ? nativeCandidates(result, candidateCalls.length) : result;
@@ -161,8 +163,8 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
     ['features/piece/pieceApi.js', ['PieceApiError', 'readPiecePreviewSnapshot', 'readPieceOwnerSnapshot']],
     ['features/piece/piecePreviewModel.js', ['readPiecePreviewDisplay', 'verifyPieceArtifactHashes']],
     ['features/piece/pieceOwnerModel.js', ['readPieceOwnerDisplay']],
-    ['features/piece/pieceLayout.js', ['PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'PIECE_NATIVE_PREVIEW_V7_VERSION', 'PIECE_NATIVE_PREVIEW_V8_VERSION', 'PIECE_NATIVE_PREVIEW_V9_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
-    ['features/piece/pieceRenderer.js', ['inspectPieceText', 'readPieceTextInspection', 'inspectPieceSelectedLine', 'readPieceSelectedLineInspection', 'readPieceSelectedLineV2Inspection', 'inspectPieceSelectedLineV2', 'readPieceSelectedLineV3Inspection', 'inspectPieceSelectedLineV3', 'readPieceSelectedLineV4Inspection', 'inspectPieceSelectedLineV4', 'pieceContainmentV2DeadlineCurrent', 'measurePieceCandidates']],
+    ['features/piece/pieceLayout.js', ['PIECE_BITMAP_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_VERSION', 'PIECE_NATIVE_PREVIEW_V4_VERSION', 'PIECE_NATIVE_PREVIEW_V5_VERSION', 'PIECE_NATIVE_PREVIEW_V6_VERSION', 'PIECE_NATIVE_PREVIEW_V7_VERSION', 'PIECE_NATIVE_PREVIEW_V8_VERSION', 'PIECE_NATIVE_PREVIEW_V9_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION', 'PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION', 'preparePieceNativeSavedDisplay', 'preparePieceNativeCard', 'preparePieceNativePreview', 'createPieceNativeMeasurement', 'pieceNativeTypography', 'recordPieceNativeMeasurement']],
+    ['features/piece/pieceRenderer.js', ['pieceBitmapNativeView', 'pieceBitmapDeadlineCurrent', 'renderPieceBitmapCanvas', 'releasePieceBitmapCanvas', 'readPieceBitmapCanvas', 'inspectPieceText', 'readPieceTextInspection', 'inspectPieceSelectedLine', 'readPieceSelectedLineInspection', 'readPieceSelectedLineV2Inspection', 'inspectPieceSelectedLineV2', 'readPieceSelectedLineV3Inspection', 'inspectPieceSelectedLineV3', 'readPieceSelectedLineV4Inspection', 'inspectPieceSelectedLineV4', 'pieceContainmentV2DeadlineCurrent', 'measurePieceCandidates']],
     ['features/piece/pieceMeasuredWrap.js', ['planPieceMeasuredRows']],
     ['components/piece/PieceVisualCard.js', ['PieceVisualCard']],
   ];
@@ -178,7 +180,7 @@ function rawHarness(p = sample(), nativeInspect, saved = false, nativeCandidates
       // React retains a mounted native node when only the callback identity
       // changes; a replacement canvas binding remounts all descendants.
       const key = card.state.bindingSerial + ':' + node.props.testID + ':' + (node.props.key ?? '');
-      if (!mountedNodes.has(key)) mountedNodes.set(key, { tag: node.props.testID === 'piece-logical-canvas' ? 10001 : Number(node.props.testID.split('-').pop()) + 1 });
+      if (!mountedNodes.has(key)) mountedNodes.set(key, { tag: node.props.testID === 'piece-logical-canvas' ? 10001 : node.props.testID === 'piece-bitmap-canvas' ? 10002 : Number(node.props.testID.split('-').pop()) + 1 });
       node.props.ref(mountedNodes.get(key));
     }
     return tree;
@@ -2428,6 +2430,117 @@ const outputContainmentHarness = options => fitHarness({ ...options, version: ou
 const outputContainmentWire = () => ({ ...containmentWire(), version: 'piece.native_selected_line.v4', snapshot_token: 'v4-snapshot-1' });
 const outputDeadline = (start = 0) => ({ profile: outputContainmentProfile, startedAt: NOW,
   expiresAt: NOW + 8000, monotonicStartedAt: start });
+
+const bitmapProfile = 'piece.rn_bitmap_preview.prototype.v1';
+function bitmapReply(request) {
+  let top = request.margin + (request.content_height - request.total_height) / 2;
+  return { version: 'piece.native_bitmap_canvas.v1', profile: bitmapProfile, platform: 'ios',
+    canvas_tag: request.canvas_tag, preview_key: request.preview_key, binding_token: request.binding_token,
+    width: request.width, height: request.height, raster_scale: 1, checked: true, overflow: false,
+    artifact_token: `bitmap-${request.binding_token}`, rows: request.rows.map(row => {
+      const brand = row.kind === 'branding', l = brand ? 100 : request.margin + 2, t = 10, r = l + 200, b = brand ? 30 : 50;
+      const width = Math.max(row.line_width, r - (brand ? 0 : request.margin)) - Math.min(0, l - (brand ? 0 : request.margin));
+      const p = brand ? [request.margin, request.height - request.margin - request.branding_zone]
+        : [request.alignment === 'center' ? (request.content_width - width) / 2 : 0, top + (request.line_height - (b - t)) / 2 - t];
+      if (!brand) top += request.line_height + row.gap_after;
+      return { tag: row.tag, font_size: row.font_size, width: row.width, height: row.height,
+        utf16_length: row.text.length, boundaries: [0, ...[...new Intl.Segmenter('ja', { granularity: 'grapheme' }).segment(row.text)].map(s => s.index + s.segment.length)],
+        line_ends: [row.text.length], glyph_check: 'no_missing_observed', independent_metrics_f64le: selectedBytes([row.line_width, 0, -40, row.line_width, 10]),
+        local_ink: [l, t, r, b], origin: p, ink: [l + p[0], Math.ceil(t + p[1]), r + p[0], Math.floor(b + p[1])], kind: row.kind };
+    }) };
+}
+function bitmapHarness(reply = value => value) {
+  const h = fitHarness({ version: bitmapProfile }), calls = [], releases = [];
+  h.context.NativeModules.PieceTextMetrics.renderBitmapCanvas = async request => {
+    calls.push(request); return reply(bitmapReply(request), request);
+  };
+  h.context.NativeModules.PieceTextMetrics.releaseBitmapCanvas = (tag, token) => releases.push({ tag, token });
+  return { ...h, bitmapCalls: calls, bitmapReleases: releases };
+}
+async function finishBitmap(h) {
+  await prepare(h);
+  for (let i = 0; i < h.drawing().blocks.length + (h.input().brandingMode === 'off' ? 0 : 1); i++) {
+    const brand = i === h.drawing().blocks.length;
+    sendBlock(h, i, { width: brand ? h.input().contentWidth : h.input().width,
+      height: (brand ? 40 : h.card.state.measurement.plan.lineHeight) + 1 / 3,
+      lines: [{ text: brand ? 'Cocolon' : h.drawing().blocks[i], x: 0, y: 0, width: 500, height: brand ? 40 : h.card.state.measurement.plan.lineHeight }] });
+  }
+  h.render(); h.flushFrame(); h.flushFrame(); await tickV9();
+}
+test('bitmap preview has its own native wholecanvas, hidden source Texts and local fit without save/export admission', async () => {
+  const h = bitmapHarness(); await finishBitmap(h);
+  assert.equal(h.card.state.measurement.phase, 'native_checked'); assert.equal(h.bitmapCalls.length, 1);
+  assert.equal(h.nativeCalls.length, 0, 'old row inspectors are not the new bitmap renderer');
+  const fit = h.fit(); assert.ok(fit); assert.equal(fit.isCurrent(h.card.props.display.preview, h.token), true);
+  assert.equal(fit.isCurrent(h.card.props.display.preview, Object.freeze({})), false);
+  assert.deepEqual(Object.keys(fit), ['isCurrent']);
+  assert.equal(h.card.state.measurement.canSave, false); assert.equal(h.card.state.measurement.canExport, false);
+  assert.equal(h.card.getCaptureTarget(), null);
+  assert.equal(h.card.deadline.expiresAt, NOW + 8000); assert.equal(h.card.deadline.profile, bitmapProfile);
+  assert.ok(h.find('piece-bitmap-canvas')); assert.equal(h.input().candidateProfile, bitmapProfile);
+  assert.ok(h.nodes(h.render()).some(n => n.props.style?.left === h.input().margin &&
+    n.props.style?.width === h.input().contentWidth && n.props.style?.opacity === 0));
+});
+test('bitmap closed decoder rejects unknown, missing, nonfinite, wrong identity and fabricated overflow', async () => {
+  for (const mutate of [v => ({ ...v, extra: 1 }), v => { delete v.checked; return v; },
+    v => ({ ...v, width: NaN }), v => ({ ...v, canvas_tag: 3 }), v => ({ ...v, binding_token: 'old' }),
+    v => ({ ...v, preview_key: 'old' }), v => ({ ...v, raster_scale: 3 }), v => ({ ...v, checked: false, overflow: true, artifact_token: null }),
+    v => { v.rows[0].origin[1] += .5; return v; }, v => { v.rows[0].tag = 555; return v; },
+    v => { v.rows[0].line_ends = [1]; return v; }, v => { v.rows[0].independent_metrics_f64le = ''; return v; }]) {
+    const h = bitmapHarness(v => mutate(copy(v))); await finishBitmap(h);
+    assert.equal(h.card.state.measurement.phase, 'unavailable'); assert.equal(h.fit(), undefined); assert.equal(h.bitmapCalls.length, 1);
+  }
+});
+test('bitmap pending results cannot survive token, source node, canvas node, deadline, generation or unmount changes', async () => {
+  for (const kind of ['token', 'source', 'canvas', 'bitmap', 'deadline', 'generation', 'unmount']) {
+    let complete, value;
+    const h = bitmapHarness(v => { value = v; return new Promise(resolve => { complete = resolve; }); }); await finishBitmap(h);
+    assert.ok(complete, kind); assert.equal(h.fit(), undefined);
+    if (kind === 'token') h.bind(Object.freeze({}));
+    if (kind === 'source') h.card.textRef(0, h.card.state.measurement.generation)({ tag: 555 });
+    if (kind === 'canvas') h.card.setCanvasNode({ tag: 999 });
+    if (kind === 'bitmap') h.card.setBitmapNode({ tag: 999 });
+    if (kind === 'deadline') h.monotonic(8000);
+    if (kind === 'generation') h.card.state = { ...h.card.state, measurement: { ...h.card.state.measurement, generation: Object.freeze({}) } };
+    if (kind === 'unmount') h.card.componentWillUnmount();
+    complete(value); await tickV9();
+    assert.notEqual(h.card.state.measurement.phase, 'native_checked', kind); assert.equal(h.fit(), undefined, kind);
+    assert.equal(h.bitmapReleases.at(-1)?.token, value.artifact_token, kind);
+  }
+});
+test('bitmap source/config invalidation revokes fit and image, and the original expiry cannot restart', async () => {
+  for (const kind of ['source', 'canvas', 'native', 'expiry']) {
+    const h = bitmapHarness(); await finishBitmap(h); const fit = h.fit(), artifact = h.card.bitmapArtifact, deadline = h.card.deadline;
+    assert.ok(fit);
+    if (kind === 'source') h.card.textRef(0, h.card.state.measurement.generation)(null);
+    if (kind === 'canvas') h.card.setCanvasNode(null);
+    if (kind === 'native') h.card.bitmapInvalidated({ nativeEvent: { artifact_token: artifact.token, binding_token: artifact.result.bindingToken } });
+    if (kind === 'expiry') { h.monotonic(8000); h.now(NOW - 1); for (const fn of h.timers.values()) fn(); }
+    assert.equal(fit.isCurrent(h.card.props.display.preview, h.token), false, kind);
+    assert.equal(h.card.state.measurement.phase, 'unavailable', kind); assert.equal(h.card.bitmapArtifact, null, kind);
+    h.resize(360); assert.equal(h.card.deadline, deadline); assert.equal(h.bitmapCalls.length, 1);
+  }
+});
+test('bitmap manager remains lazy, rejects Android and contains native registration exceptions', () => {
+  const h = bitmapHarness(); h.context.Platform.OS = 'android';
+  assert.equal(h.pieceBitmapNativeView(), null); assert.equal(h.preparePieceNativeCard(h.card.props), null);
+  h.context.Platform.OS = 'ios'; h.context.UIManager.getViewManagerConfig = () => { throw new Error('not registered'); };
+  assert.equal(h.pieceBitmapNativeView(), null);
+  assert.equal(h.preparePieceNativeSavedDisplay({ ...savedSample(), renderer_version: bitmapProfile }), null);
+});
+test('bitmap only validated geometric overflow advances font without renewing the Card deadline', async () => {
+  const h = bitmapHarness((v, req) => {
+    const row = v.rows[0], [l, t, r] = row.local_ink, height = req.line_height + 1;
+    row.local_ink[3] = t + height;
+    row.origin[1] = req.margin + (req.content_height - req.total_height) / 2 + (req.line_height - height) / 2 - t;
+    row.ink = [l + row.origin[0], Math.floor(t + row.origin[1]), r + row.origin[0], Math.ceil(t + height + row.origin[1])];
+    return { ...v, checked: false, overflow: true, artifact_token: null };
+  });
+  const deadline = h.card.deadline; await finishBitmap(h);
+  assert.equal(h.card.state.measurement.phase, 'planning'); assert.equal(h.card.state.measurement.sizeIndex, 1);
+  assert.equal(h.card.deadline, deadline); assert.equal(h.card.deadline.expiresAt, NOW + 8000);
+  assert.equal(h.card.bitmapArtifact, undefined); assert.equal(h.fit(), undefined);
+});
 
 test('containment v2 keeps distinct profile identity and B9 while saved, export and Android remain unavailable', async () => {
   const h = outputContainmentHarness(), old = containmentHarness();

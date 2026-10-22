@@ -4,10 +4,12 @@ import { AppRegistry, View, Text, NativeModules, findNodeHandle } from 'react-na
 import PieceVisualCard from '../../components/piece/PieceVisualCard';
 import { preparePieceNativeCard } from '../../features/piece/pieceLayout';
 import fixtures from './piece-rn-canvas-fixtures.json';
+import bitmapFixtures from './piece-rn-bitmap-fixtures.json';
 
 // Test-only timing around the unchanged native bridge call. In particular,
 // distinguish a pending candidate table from planner/render/inspection work.
 const OUTPUT_GRID_PROFILE = 'piece.rn_native_preview.containment.prototype.v2';
+const BITMAP_PROFILE = 'piece.rn_bitmap_preview.prototype.v1';
 let activeTrace;
 // Keep adapter decoding and B9 time separate from the raw native call. These
 // wrappers observe the real functions; no candidate, plan or deadline changes.
@@ -206,7 +208,7 @@ renderer.inspectPieceSelectedLineV4 = async (...args) => {
 };
 
 class CanvasCases extends React.Component {
-  caseFixtures = fixtures.map(fixture => fixture.props?.display ? { ...fixture,
+  caseFixtures = (this.props.pieceGroup === 'bitmap' ? bitmapFixtures : fixtures).map(fixture => fixture.props?.display ? { ...fixture,
     props: { ...fixture.props, display: { ...fixture.props.display, visualToken: Object.freeze({}) } } } : fixture);
   state = { index: 0, rawLeft: 0 };
   saveFitChanged = (next, previous) => {
@@ -218,15 +220,18 @@ class CanvasCases extends React.Component {
     this.started = performance.now(); this.originalStartedAt = Date.now(); this.originalExpiresAt = this.originalStartedAt + 8000;
     this.outputGridDeadline = Object.freeze({ profile: OUTPUT_GRID_PROFILE, startedAt: this.originalStartedAt,
       expiresAt: this.originalExpiresAt, monotonicStartedAt: this.started });
+    this.bitmapDeadline = Object.freeze({ profile: BITMAP_PROFILE, startedAt: this.originalStartedAt,
+      expiresAt: this.originalExpiresAt, monotonicStartedAt: this.started });
     this.trace = { candidates: [], adapters: [], plans: [], states: [], selected: [], native_selected_v3: [], native_selected_v4: [] };
     activeTrace = this.trace;
     this.finishing = false; this.rawOperation = null; this.rawReport = null;
+    this.cropApplied = false; this.cropResult = null; this.cropBeforeFit = false;
     this.poll();
   };
   poll = () => {
     const fixture = this.caseFixtures[this.state.index];
     if (typeof fixture.raw_text === 'string') {
-      this.probeRawText();
+      if (fixture.candidate_profile === BITMAP_PROFILE) this.probeRawBitmap(); else this.probeRawText();
       if (!this.finishing && (this.rawReport || performance.now() - this.started >= 8000)) {
         this.finishing = true;
         requestAnimationFrame(() => requestAnimationFrame(() => this.finishRawText()));
@@ -234,6 +239,9 @@ class CanvasCases extends React.Component {
       return;
     }
     const card = this.card, snapshot = card?.state.measurement;
+    if (fixture.controlled_host_crop && this.cropApplied && snapshot?.phase === 'native_checked' && performance.now() - this.started < 8000) {
+      this.timer = setTimeout(this.poll, 20); return;
+    }
     const state = snapshot && `${snapshot.phase}:${snapshot.sizeIndex}`;
     if (state && this.trace.states[this.trace.states.length - 1]?.state !== state) this.trace.states.push({ state, elapsed_ms: performance.now() - this.started });
     if (!this.finishing && snapshot && (['native_checked', 'unavailable'].includes(snapshot.phase) || performance.now() - this.started > 10000)) {
@@ -252,6 +260,13 @@ class CanvasCases extends React.Component {
   };
   finishCase = async () => {
     const fixture = this.caseFixtures[this.state.index], card = this.card, m = card?.state.measurement;
+    if (fixture.controlled_host_crop && !this.cropApplied && m?.phase === 'native_checked') {
+      this.cropApplied = true;
+      this.cropBeforeFit = this.saveFitHandle?.isCurrent(fixture.props.display.preview, fixture.props.display.visualToken) === true;
+      try { this.cropResult = await NativeModules.PieceCanvasTest.cropBitmapHost(findNodeHandle(card.bitmapNode), m.bitmapCanvas.artifactToken); }
+      catch { this.cropResult = { image_cleared: false }; }
+      this.finishing = false; this.poll(); return;
+    }
     const input = preparePieceNativeCard(fixture.props);
     const display = fixture.props.display, fit = this.saveFitHandle;
     // Read the actual mounted handle before elapsed_ms so its integrity checks
@@ -280,6 +295,8 @@ class CanvasCases extends React.Component {
       save_fit_current: saveFitCurrent, save_fit_wrong_token_current: saveFitWrongTokenCurrent,
       save_fit_handle_keys: fit ? Object.keys(fit) : [],
       body_preserved: !!m?.plan && m.plan.groups.every((rows, index) => rows.join('') === input.blocks[index]),
+      ...(input?.candidateProfile === BITMAP_PROFILE ? { bitmap_canvas: m?.bitmapCanvas ?? null, colors: input.colors,
+        branding_mode: input.brandingMode, crop_result: this.cropResult, crop_before_fit: this.cropBeforeFit } : {}),
     };
     await this.captureAndAdvance(report, card?.canvasNode);
   };
@@ -289,11 +306,37 @@ class CanvasCases extends React.Component {
       // RN rejects a null NSNumber before calling native, leaving its Promise
       // pending. Preserve every failure report so the baseline and additions finish.
       if (!Number.isInteger(tag) || tag <= 0) NativeModules.PieceCanvasTest.record({ ...report, capture_error: true });
+      else if (report.candidate_profile === BITMAP_PROFILE) await NativeModules.PieceCanvasTest.captureBitmap(tag, report);
       else await NativeModules.PieceCanvasTest.capture(tag, report);
     }
     catch { NativeModules.PieceCanvasTest.record({ ...report, capture_error: true }); }
-    if (this.state.index + 1 === fixtures.length) { NativeModules.PieceCanvasTest.done(); return; }
+    if (this.state.index + 1 === this.caseFixtures.length) { NativeModules.PieceCanvasTest.done(); return; }
     this.setState(({ index }) => ({ index: index + 1, rawLeft: 0 }), this.startCase);
+  };
+  probeRawBitmap = async () => {
+    const fixture = this.caseFixtures[this.state.index], node = this.rawTextNode;
+    if (this.rawOperation || this.finishing || !node || !this.rawBitmapNode || this.rawBox?.name !== fixture.name || this.rawLines?.name !== fixture.name) return;
+    const operation = { node, name: fixture.name, host: this.rawBitmapNode }; this.rawOperation = operation;
+    try {
+      const text = fixture.raw_text, box = this.rawBox.value, lines = this.rawLines.value;
+      if (lines.length !== 1 || lines[0].text !== text) throw new Error('raw source mismatch');
+      const input = { key: fixture.name, candidateProfile: BITMAP_PROFILE, width: 1080, height: 1350, margin: 96,
+        brandingZone: 72, contentWidth: 888, contentHeight: 1086, alignment: 'left', brandingMode: 'off' };
+      const table = await renderer.measurePieceCandidates(node, text, 48, { candidateProfile: 'piece.rn_native_preview.prototype.v5' });
+      const plan = measuredWrap.planPieceMeasuredRows({ ...input, blocks: [text], sizes: [48], lineRatio: 75 / 48, paragraphRatio: 0 }, 0, [table]);
+      if (!plan || plan.groups.length !== 1 || plan.groups[0].length !== 1 || plan.groups[0][0] !== text) throw new Error('raw B9 mismatch');
+      const result = await renderer.renderPieceBitmapCanvas(operation.host, { input, bindingToken: fixture.name, deadline: this.bitmapDeadline,
+        totalHeight: 75, lineHeight: 75, rows: [{ node, text, fontSize: 48, box, lineEnds: [text.length], lineWidth: lines[0].width, gapAfter: 0, kind: 'body' }] });
+      if (this.rawOperation !== operation || this.caseFixtures[this.state.index].name !== fixture.name) return;
+      this.rawReport = { name: fixture.name, evidence_set: 'bitmap_raw', candidate_profile: BITMAP_PROFILE,
+        phase: result.checked ? 'bitmap_checked' : 'measurement_unavailable', bitmap_canvas: result,
+        rows: [text], blocks: [text], width: 1080, height: 1350, margin: 96, branding_zone: 72,
+        content_width: 888, content_height: 1086, plan_line_height: 75, branding: false, body_preserved: true,
+        colors: { canvas: '#F6F1E8', surface: '#FFFDF8', border: '#D7D2C9' }, trace: this.trace,
+        elapsed_ms: performance.now() - this.started, state_can_save: false, state_can_export: false };
+    } catch { this.rawReport = { name: fixture.name, evidence_set: 'bitmap_raw', candidate_profile: BITMAP_PROFILE,
+      phase: 'measurement_unavailable', body_preserved: false, rows: [fixture.raw_text], blocks: [fixture.raw_text],
+      elapsed_ms: performance.now() - this.started, trace: this.trace }; }
   };
   // The three below-minimum historical strings use the actual RN Text,
   // candidate adapter, B9 and selected-line inspector without inventing a
@@ -373,6 +416,27 @@ class CanvasCases extends React.Component {
   };
   render() {
     const fixture = this.caseFixtures[this.state.index];
+    if (typeof fixture.raw_text === 'string' && fixture.candidate_profile === BITMAP_PROFILE) {
+      const BitmapCanvas = renderer.pieceBitmapNativeView();
+      return <View key={fixture.name} style={{ width: 360, height: 450 }}>
+        <View collapsable={false} ref={node => { this.rawCanvasNode = node; }} style={{ position: 'absolute', width: 1080, height: 1350,
+          left: -360, top: -450, transform: [{ scale: 1 / 3 }], backgroundColor: '#F6F1E8' }}>
+          <View style={{ position: 'absolute', left: 48, top: 48, right: 48, bottom: 48,
+            backgroundColor: '#FFFDF8', borderColor: '#D7D2C9', borderWidth: 2 }} />
+          {BitmapCanvas ? <BitmapCanvas collapsable={false} ref={node => { this.rawBitmapNode = node; }} bitmapBinding={fixture.name}
+            style={{ position: 'absolute', left: 0, top: 0, width: 1080, height: 1350 }} /> : null}
+          <View style={{ opacity: 0 }}><Text collapsable={false} ref={node => { this.rawTextNode = node; }}
+            allowFontScaling={false} adjustsFontSizeToFit={false} accessible={false}
+            android_hyphenationFrequency="none" textBreakStrategy="highQuality" lineBreakStrategyIOS="standard"
+            onLayout={event => { if (this.caseFixtures[this.state.index].name === fixture.name) this.rawBox = { name: fixture.name, value: event.nativeEvent.layout }; }}
+            onTextLayout={event => { if (this.caseFixtures[this.state.index].name === fixture.name) this.rawLines = { name: fixture.name, value: event.nativeEvent.lines }; }}
+            style={{ position: 'absolute', left: 0, top: 0, width: 1080, paddingHorizontal: 96, fontSize: 48, lineHeight: 75,
+              fontWeight: '400', fontStyle: 'normal', letterSpacing: 0, includeFontPadding: false, textAlign: 'left', color: '#111827' }}>
+            {fixture.raw_text}
+          </Text></View>
+        </View>
+      </View>;
+    }
     if (typeof fixture.raw_text === 'string') return <View key={fixture.name} style={{ width: 360, height: 320 / 3 }}>
       <View collapsable={false} ref={node => { this.rawCanvasNode = node; }} style={{ position: 'absolute', width: 1080, height: 320,
         left: -360, top: (320 / 3 - 320) / 2, transform: [{ scale: 1 / 3 }], backgroundColor: '#F6F1E8' }}>

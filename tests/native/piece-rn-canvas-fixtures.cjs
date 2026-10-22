@@ -87,4 +87,20 @@ if (outputGridV4) for (const fixture of module.exports) {
   if (typeof fixture.raw_text === 'string') fixture.candidate_profile = containmentProfile;
 }
 
-if (require.main === module) process.stdout.write(JSON.stringify(module.exports, null, 2) + '\n');
+// A separate group leaves the historical 13 output bytes and denominator intact.
+const bitmapProfile = 'piece.rn_bitmap_preview.prototype.v1';
+const bitmapCases = module.exports.filter(c => c.props?.display).map(c => {
+  const fixture = JSON.parse(JSON.stringify(c));
+  fixture.name = `bitmap_${fixture.name}`; fixture.evidence_set = 'bitmap_preview'; fixture.test_profile = 'bitmap-v1';
+  fixture.props.display.preview.renderer_version = bitmapProfile;
+  return fixture;
+});
+bitmapCases.push(...module.exports.filter(c => c.evidence_set === 'raw_text_diagnostic').map(c => ({
+  name: `bitmap_${c.name}`, evidence_set: 'bitmap_raw', raw_text: c.raw_text,
+  candidate_profile: bitmapProfile, test_profile: 'bitmap-v1',
+})));
+const bitmapTrap = JSON.parse(JSON.stringify(bitmapCases[0]));
+bitmapTrap.name = 'bitmap_host_crop_trap'; bitmapTrap.evidence_set = 'bitmap_host_trap'; bitmapTrap.controlled_host_crop = true;
+bitmapCases.push(bitmapTrap);
+module.exports.bitmap = bitmapCases;
+if (require.main === module) process.stdout.write(JSON.stringify(process.env.PIECE_RN_BITMAP_GROUP === '1' ? bitmapCases : module.exports, null, 2) + '\n');

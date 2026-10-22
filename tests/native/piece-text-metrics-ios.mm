@@ -15,6 +15,9 @@
 #include <new>
 @implementation RCTBridge
 @end
+@implementation RCTViewManager
+- (UIView *)view { return [UIView new]; }
+@end
 @implementation RCTUIManager
 - (void)addUIBlock:(void (^)(RCTUIManager *, NSDictionary<NSNumber *, UIView *> *))block {
   NSCAssert(NSThread.isMainThread, @"Fixture dispatch must stay on main");
@@ -1390,6 +1393,150 @@ static BOOL runOutputV4Checks(PieceTextMetrics *module, RCTBridge *bridge) {
 }
 
 
+static NSUInteger bitmapChecks=0,bitmapFailures=0;
+static void bitmapCheck(NSString *name, BOOL pass) {
+  bitmapChecks++;if(!pass)bitmapFailures++;
+  printf("%s %s\n",pass?"BITMAP_PASS":"BITMAP_FAIL",name.UTF8String);fflush(stdout);
+}
+@interface PieceBitmapFaultText : RCTTextView
+@property(nonatomic) NSUInteger bitmapFault;
+@end
+@implementation PieceBitmapFaultText
+- (void)cocolonPiecePaintGlyphRange:(NSRange)glyphs {
+  [super cocolonPiecePaintGlyphRange:glyphs];
+  if(self.bitmapFault==1)self.fixtureContentFrame=CGRectOffset(self.fixtureContentFrame,1,0);
+  if(self.bitmapFault==2)self.fixtureStorage.layoutManagers.firstObject.textContainers.firstObject.maximumNumberOfLines=1;
+  if(self.bitmapFault==3)[self.fixtureStorage addAttribute:NSForegroundColorAttributeName value:UIColor.redColor range:NSMakeRange(0,self.fixtureStorage.length)];
+}
+@end
+static NSDictionary *bitmapCall(PieceTextMetrics *module,NSDictionary *request,NSString **code) {
+  __block NSDictionary *answer=nil;__block NSString *error=nil;
+  [module renderBitmapCanvas:request resolver:^(id value){answer=value;} rejecter:^(NSString *c,NSString *message,NSError *e){error=c;}];
+  *code=error?: (answer?nil:@"MISSING_BITMAP_CALLBACK");return answer;
+}
+static NSMutableDictionary *bitmapRequest(RCTTextView *source,PieceBitmapCanvasView *host,CGFloat height) {
+  CGFloat m=height==1920?108:96,bz=height==1920?84:72,cw=1080-2*m;
+  source.frame=CGRectMake(0,0,1080,140);source.fixtureContentFrame=CGRectMake(m,0,cw,140);
+  NSTextContainer *container=source.fixtureStorage.layoutManagers.firstObject.textContainers.firstObject;
+  container.size=CGSizeMake(cw,140);
+  host.frame=CGRectMake(0,0,1080,height);host.bitmapBinding=@"native-bitmap-binding";
+  double width=[source.fixtureStorage.layoutManagers.firstObject usedRectForTextContainer:container].size.width;
+  return [@{@"version":@"piece.native_bitmap_canvas.v1",@"profile":@"piece.rn_bitmap_preview.prototype.v1",@"canvas_tag":@2,
+    @"preview_key":@"synthetic-native-artifact",@"binding_token":host.bitmapBinding,@"expires_at_ms":@(NSDate.date.timeIntervalSince1970*1000+8000),@"remaining_ms":@8000,
+    @"width":@1080,@"height":@(height),@"margin":@(m),@"branding_zone":@(bz),@"content_width":@(cw),@"content_height":@(height-2*m-bz),
+    @"line_height":@75,@"total_height":@75,@"alignment":@"left",@"branding_mode":@"off",
+    @"rows":@[@{@"tag":@1,@"text":source.fixtureStorage.string,@"font_size":@48,@"width":@1080,@"height":@140,@"line_width":@(width),@"gap_after":@0,@"kind":@"body"}]} mutableCopy];
+}
+static BOOL runBitmapChecks(PieceTextMetrics *module,RCTBridge *bridge) {
+  printf("STAGE bitmap_begin\n");
+  UIWindow *window=[[UIWindow alloc]initWithFrame:UIScreen.mainScreen.bounds];window.rootViewController=[UIViewController new];[window makeKeyAndVisible];
+  UIView *parent=window.rootViewController.view;
+  PieceBitmapCanvasView *host=[[PieceBitmapCanvasView alloc]initWithFrame:CGRectMake(0,0,1080,1350)];[parent addSubview:host];
+  NSArray *strings=@[@"Cocolon",@"私は言葉を大切にします。",@"office ffi e\u0301",@"مرحبا بالعالم",@"👩‍👩‍👧‍👦 👍🏽 🇯🇵",@"  keep spaces  ",@"שלום עולם",@"abc (אבג) 12"];
+  for(NSUInteger i=0;i<strings.count;i++){@autoreleasepool{
+    RCTTextView *source=makeView(strings[i],48);[parent addSubview:source];CGFloat height=i%2?1920:1350;
+    NSMutableDictionary *request=bitmapRequest(source,host,height);bridge.uiManager.registry=@{@1:source,@2:host};
+    NSString *code=nil;NSDictionary *reply=bitmapCall(module,request,&code);CGImageRef image=(__bridge CGImageRef)host.bitmapImage;
+    BOOL valid=code==nil&&[reply[@"checked"]isEqual:@YES]&&[reply[@"overflow"]isEqual:@NO]&&host.bitmapToken.length>0&&
+      host.layer.contents==host.bitmapImage&&image&&CGImageGetWidth(image)==1080&&CGImageGetHeight(image)==(size_t)height&&
+      [reply[@"rows"]count]==1&&[reply[@"rows"][0][@"utf16_length"]unsignedIntegerValue]==[strings[i]length];
+    bitmapCheck([NSString stringWithFormat:@"owned_canvas_unicode_%lu",(unsigned long)i],valid);
+    if(valid){
+      CFDataRef data=CGDataProviderCopyData(CGImageGetDataProvider(image));BOOL empty=NO,seen=NO;
+      if(data){const UInt8 *bytes=CFDataGetBytePtr(data);for(size_t k=3;k<(size_t)CFDataGetLength(data);k+=4){seen|=bytes[k]>0;empty|=bytes[k]==0;}CFRelease(data);}
+      bitmapCheck([NSString stringWithFormat:@"transparent_content_%lu",(unsigned long)i],seen&&empty);
+      if(i==0){
+        size_t ow=1080,oh=1350,os=ow*4;UInt8 *oracle=(UInt8 *)calloc(oh,os);
+        CGColorSpaceRef space=CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
+        CGContextRef cg=oracle&&space?CGBitmapContextCreate(oracle,ow,oh,8,os,space,kCGBitmapByteOrder32Big|kCGImageAlphaPremultipliedLast):NULL;
+        if(space)CGColorSpaceRelease(space);NSArray *p=reply[@"rows"][0][@"origin"];
+        if(cg){CGContextConcatCTM(cg,CGAffineTransformMake(1,0,0,-1,[p[0]doubleValue],oh-[p[1]doubleValue]));
+          UIGraphicsPushContext(cg);[source cocolonPiecePaintGlyphRange:[source.fixtureStorage.layoutManagers.firstObject glyphRangeForTextContainer:source.fixtureStorage.layoutManagers.firstObject.textContainers.firstObject]];UIGraphicsPopContext();}
+        CFDataRef reference=CGDataProviderCopyData(CGImageGetDataProvider(image));
+        BOOL equal=cg&&reference&&CFDataGetLength(reference)==(CFIndex)(oh*os)&&memcmp(oracle,CFDataGetBytePtr(reference),oh*os)==0;
+        bitmapCheck(@"integer_copy_all_rgba_independent_canvas",equal);
+        if(reference)CFRelease(reference);if(cg)CGContextRelease(cg);free(oracle);
+        const auto budget=PieceV4RasterBudget();size_t live=budget->live.load();CGImageRetain(image);[host clearBitmap];
+        bitmapCheck(@"provider_held_after_host_clear",budget->live.load()==live&&live>=1080*1350*4);
+        CGImageRelease(image);
+        // CA may retain the detached host image. Verify final provider release
+        // deterministically with an image that is never handed to a layer.
+        size_t baseline=budget->live.load();PieceOwnedPixels providerPixels;
+        BOOL allocated=providerPixels.makeExact(2,2,1,budget);
+        CGImageRef providerImage=allocated?PiecePixelsImage(providerPixels):NULL;
+        BOOL reserved=providerImage&&budget->live.load()==baseline+16;
+        if(providerImage)CGImageRelease(providerImage);
+        bitmapCheck(@"provider_final_release_returns_budget",reserved&&budget->live.load()==baseline);
+      }
+    }
+    [host clearBitmap];[source removeFromSuperview];
+  }}
+  NSArray *faults=@[@"unknown",@"missing",@"nonfinite",@"wrong_binding",@"expired",@"allocation",@"edge",@"live_budget",@"empty",@"missing_glyph",@"source_frame",@"source_max_lines",@"source_attributes",@"host_clip",@"host_mask",@"host_contents",@"host_opacity",@"host_transform",@"host_scale",@"old_release",@"overflow",@"overlap"];
+  for(NSString *fault in faults){@autoreleasepool{
+    NSString *text=[fault isEqual:@"empty"]?@"   ":[fault isEqual:@"missing_glyph"]?@"\u0378":@"Cocolon";
+    RCTTextView *base=makeView(text,48);PieceBitmapFaultText *source=[[PieceBitmapFaultText alloc]initWithFrame:base.frame];
+    source.fixtureStorage=base.fixtureStorage;source.fixtureContentFrame=base.fixtureContentFrame;source.fixtureAttached=YES;[parent addSubview:source];
+    NSMutableDictionary *request=bitmapRequest(source,host,1350);bridge.uiManager.registry=@{@1:source,@2:host};
+    if([fault isEqual:@"unknown"])request[@"unknown"]=@1;
+    if([fault isEqual:@"missing"])[request removeObjectForKey:@"rows"];
+    if([fault isEqual:@"nonfinite"])request[@"width"]=@(NAN);
+    if([fault isEqual:@"wrong_binding"])request[@"binding_token"]=@"stale-binding";
+    if([fault isEqual:@"expired"])request[@"expires_at_ms"]=@(NSDate.date.timeIntervalSince1970*1000-1);
+    if([fault isEqual:@"allocation"])v3FixtureBufferFault=1;
+    if([fault isEqual:@"edge"])v3FixtureBufferFault=2;
+    if([fault isEqual:@"source_frame"])source.bitmapFault=1;
+    if([fault isEqual:@"source_max_lines"])source.bitmapFault=2;
+    if([fault isEqual:@"source_attributes"])source.bitmapFault=3;
+    if([fault isEqual:@"overflow"]||[fault isEqual:@"overlap"]){request[@"line_height"]=@1;request[@"total_height"]=@1;}
+    RCTTextView *second=nil;
+    if([fault isEqual:@"overlap"]){second=makeView(text,48);[parent addSubview:second];second.frame=source.frame;second.fixtureContentFrame=source.fixtureContentFrame;
+      NSMutableDictionary *row=[request[@"rows"][0]mutableCopy];row[@"tag"]=@3;request[@"rows"]=[request[@"rows"]arrayByAddingObject:row];request[@"total_height"]=@2;
+      bridge.uiManager.registry=@{@1:source,@2:host,@3:second};}
+    const auto budget=PieceV4RasterBudget();size_t reserved=0;
+    if([fault isEqual:@"live_budget"]){reserved=PieceContainmentMemoryLimit-budget->live.load();NSCAssert(budget->reserve(reserved),@"reserve remaining raster budget");}
+    NSString *code=nil;NSDictionary *reply=bitmapCall(module,request,&code);v3FixtureBufferFault=0;if(reserved)budget->release(reserved);
+    BOOL mutation=[fault hasPrefix:@"host_"]||[fault isEqual:@"old_release"];
+    if(mutation){BOOL control=[reply[@"checked"]boolValue]&&host.bitmapImage!=nil;NSString *token=host.bitmapToken;
+      if([fault isEqual:@"host_clip"])host.clipsToBounds=YES;
+      if([fault isEqual:@"host_mask"])host.layer.mask=[CALayer layer];
+      if([fault isEqual:@"host_contents"])host.layer.contents=nil;
+      if([fault isEqual:@"host_opacity"])host.layer.opacity=0.8;
+      if([fault isEqual:@"host_transform"])host.transform=CGAffineTransformMakeTranslation(.5,0);
+      if([fault isEqual:@"host_scale"])host.contentScaleFactor=2;
+      if([fault isEqual:@"old_release"]){[module releaseBitmapCanvas:@2 token:@"stale-token"];control=control&&[host.bitmapToken isEqual:token];[module releaseBitmapCanvas:@2 token:token];}
+      bitmapCheck(fault,control&&!host.bitmapImage&&!host.bitmapToken&&!host.layer.contents);
+      host.clipsToBounds=NO;host.layer.mask=nil;host.layer.opacity=1;host.transform=CGAffineTransformIdentity;host.contentScaleFactor=1;host.layer.contentsScale=1;
+    }else if([fault isEqual:@"overflow"])bitmapCheck(fault,code==nil&&[reply[@"overflow"]isEqual:@YES]&&[reply[@"checked"]isEqual:@NO]&&!host.bitmapImage);
+    else bitmapCheck(fault,reply==nil&&[code isEqual:@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE"]&&!host.bitmapImage);
+    [host clearBitmap];[source removeFromSuperview];[second removeFromSuperview];
+  }}
+  PieceOwnedPixels rejected;
+  bitmapCheck(@"side_4096_bound",!rejected.makeExact(4097,1,1,PieceV4RasterBudget()));
+  bitmapCheck(@"pixel_4m_bound",!rejected.makeExact(4096,1025,1,PieceV4RasterBudget()));
+  // The buffer origin is integral and phase participates once in the CTM.
+  RCTTextView *source=makeView(@"office ffi e\u0301",48);[parent addSubview:source];NSMutableDictionary *req=bitmapRequest(source,host,1350);
+  NSDictionary *snap=PieceBitmapSource(source,req[@"rows"][0],host,^BOOL{return YES;});
+  PieceOwnedPixels fractional;CGRect extent,ink;
+  BOOL phaseOK=snap&&PieceBitmapPaint(snap,48,CGPointMake(.375,-.625),1,PieceV4RasterBudget(),^BOOL{return YES;},fractional,&extent,&ink);
+  if(phaseOK){
+    CGRect expected=CGRectIntegral(CGRectOffset(CGRectInset([snap[@"ink"]CGRectValue],-96,-96),.375,-.625));
+    size_t width=(size_t)expected.size.width,height=(size_t)expected.size.height,stride=width*4;
+    UInt8 *bytes=(UInt8 *)calloc(height,stride);CGColorSpaceRef space=CGColorSpaceCreateWithName(kCGColorSpaceSRGB);
+    CGContextRef cg=space&&bytes?CGBitmapContextCreate(bytes,width,height,8,stride,space,kCGBitmapByteOrder32Big|kCGImageAlphaPremultipliedLast):NULL;
+    if(space)CGColorSpaceRelease(space);
+    phaseOK=cg&&CGRectEqualToRect(expected,extent)&&width==fractional.width&&height==fractional.height;
+    if(phaseOK){
+      CGContextConcatCTM(cg,CGAffineTransformMake(1,0,0,-1,.375-expected.origin.x,height-(-.625-expected.origin.y)));
+      UIGraphicsPushContext(cg);[source cocolonPiecePaintGlyphRange:[snap[@"glyphs"]rangeValue]];UIGraphicsPopContext();
+      phaseOK=memcmp(bytes,fractional.data,height*stride)==0;
+    }
+    if(cg)CGContextRelease(cg);free(bytes);
+  }
+  bitmapCheck(@"fractional_phase_independent_draw",phaseOK);[source removeFromSuperview];[host clearBitmap];[host removeFromSuperview];window.hidden=YES;
+  printf("BITMAP_NATIVE_CHECKS=%lu PASS=%lu FAIL=%lu SKIP=0\n",(unsigned long)bitmapChecks,(unsigned long)(bitmapChecks-bitmapFailures),(unsigned long)bitmapFailures);
+  return bitmapFailures==0;
+}
+
 static int runNativeMetricsChecks(void) {
   @autoreleasepool {
     printf("iOS native metrics source test; synthetic RN boundary; real UIKit/TextKit/CoreText\n");
@@ -1646,7 +1793,8 @@ static int runNativeMetricsChecks(void) {
     // completed too. A crash/timeout in either suite cannot masquerade as pass.
     printf("NATIVE_CHECKS=%lu PASS=%lu FAIL=%lu SKIP=0\n", (unsigned long)checks,
       (unsigned long)(checks-failures), (unsigned long)failures);
-    return failures || !v9Passed || !candidatePassed ? 1 : 0;
+    BOOL bitmapPassed=runBitmapChecks(module,bridge);
+    return failures || !v9Passed || !candidatePassed || !bitmapPassed ? 1 : 0;
   }
 }
 

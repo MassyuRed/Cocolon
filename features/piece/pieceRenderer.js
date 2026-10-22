@@ -1,13 +1,109 @@
 /** Native inspection of the Text instance actually used by PieceVisualCard.
  * Results are local drawing evidence, never server fit/save/export authority.
  */
-import { NativeModules, Platform, findNodeHandle } from 'react-native';
-import { PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION } from './pieceLayout';
+import { NativeModules, Platform, findNodeHandle, requireNativeComponent, UIManager } from 'react-native';
+import { PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION, PIECE_BITMAP_PREVIEW_VERSION } from './pieceLayout';
 
 const pieceNoStart = new Set(Array.from('、。，．,？！!?：；:;)]）］｝】〉》」』〕〗〙〛ー々ぁぃぅぇぉっゃゅょァィゥェォッャュョ'));
 const pieceNoEnd = new Set(Array.from('([（［｛【〈《「『〔〖〘〚'));
 const measurementError = () => new Error('PIECE_NATIVE_MEASUREMENT_UNAVAILABLE');
 const finite = value => typeof value === 'number' && Number.isFinite(value);
+
+const BITMAP_WIRE = 'piece.native_bitmap_canvas.v1';
+let bitmapNativeView;
+export function pieceBitmapNativeView() {
+  try {
+    if (Platform.OS !== 'ios' || typeof requireNativeComponent !== 'function' ||
+        typeof UIManager?.getViewManagerConfig !== 'function' || !UIManager.getViewManagerConfig('PieceBitmapCanvas')) return null;
+    if (!bitmapNativeView) bitmapNativeView = requireNativeComponent('PieceBitmapCanvas');
+    return bitmapNativeView;
+  } catch { return null; }
+}
+export function pieceBitmapDeadlineCurrent(deadline) {
+  try {
+    const wall = Date.now(), mono = globalThis.performance?.now();
+    return deadline?.profile === PIECE_BITMAP_PREVIEW_VERSION && finite(deadline.startedAt) &&
+      finite(deadline.expiresAt) && deadline.expiresAt - deadline.startedAt === 8000 &&
+      finite(deadline.monotonicStartedAt) && deadline.monotonicStartedAt >= 0 &&
+      finite(wall) && wall < deadline.expiresAt && finite(mono) && mono >= deadline.monotonicStartedAt &&
+      mono - deadline.monotonicStartedAt < 8000;
+  } catch { return false; }
+}
+export function releasePieceBitmapCanvas(node, token) {
+  try {
+    const tag = findNodeHandle(node);
+    if (Platform.OS === 'ios' && Number.isInteger(tag) && tag > 0 && typeof token === 'string' && token.length &&
+        typeof NativeModules.PieceTextMetrics?.releaseBitmapCanvas === 'function') NativeModules.PieceTextMetrics.releaseBitmapCanvas(tag, token);
+  } catch { /* An unmounted native host also releases its image. */ }
+}
+export function readPieceBitmapCanvas(value, expected) {
+  const fields = ['version', 'profile', 'platform', 'canvas_tag', 'preview_key', 'binding_token', 'width', 'height',
+    'raster_scale', 'overflow', 'checked', 'artifact_token', 'rows'];
+  const rowFields = ['tag', 'font_size', 'width', 'height', 'utf16_length', 'boundaries', 'line_ends', 'glyph_check',
+    'independent_metrics_f64le', 'local_ink', 'origin', 'ink', 'kind'];
+  const closed = (v, keys) => v && typeof v === 'object' && !Array.isArray(v) && Object.keys(v).sort().join() === [...keys].sort().join();
+  const ink = v => Array.isArray(v) && v.length === 4 && v.every(finite) && v[2] > v[0] && v[3] > v[1];
+  const { input, rows, bindingToken, canvasTag, totalHeight, lineHeight } = expected;
+  if (Platform.OS !== 'ios' || input?.candidateProfile !== PIECE_BITMAP_PREVIEW_VERSION ||
+      !closed(value, fields) || value.version !== BITMAP_WIRE || value.profile !== input.candidateProfile || value.platform !== 'ios' ||
+      value.canvas_tag !== canvasTag || !Number.isInteger(canvasTag) || canvasTag <= 0 ||
+      value.preview_key !== input.key || value.binding_token !== bindingToken || typeof bindingToken !== 'string' || !bindingToken.length ||
+      value.width !== input.width || value.height !== input.height || value.raster_scale !== 1 ||
+      typeof value.overflow !== 'boolean' || value.checked !== !value.overflow ||
+      (value.checked ? typeof value.artifact_token !== 'string' || !value.artifact_token.length || value.artifact_token.length > 128 : value.artifact_token !== null) ||
+      !Array.isArray(value.rows) || value.rows.length !== rows.length) throw measurementError();
+  let rowTop = input.margin + (input.contentHeight - totalHeight) / 2, overflow = false;
+  const inspected = value.rows.map((row, index) => {
+    const source = rows[index], brand = source.kind === 'branding';
+    if (!closed(row, rowFields) || row.tag !== source.tag || row.kind !== source.kind || !ink(row.local_ink) || !ink(row.ink) ||
+        !Array.isArray(row.origin) || row.origin.length !== 2 || !row.origin.every(finite)) throw measurementError();
+    const base = readPieceSelectedLineInspection({ version: 'piece.native_selected_line.v1', platform: 'ios',
+      ...Object.fromEntries(['font_size', 'width', 'height', 'utf16_length', 'boundaries', 'line_ends', 'glyph_check', 'independent_metrics_f64le'].map(k => [k, row[k]])),
+      ink: row.local_ink }, { text: source.text, fontSize: source.fontSize, box: source.box, lineEnds: source.lineEnds, platform: 'ios' });
+    const [l, t, r, b] = row.local_ink, left = l - (brand ? 0 : input.margin), right = r - (brand ? 0 : input.margin);
+    const width = Math.max(source.lineWidth, right) - Math.min(0, left);
+    const origin = brand ? [input.margin, input.height - input.margin - input.brandingZone]
+      : [-Math.min(0, left) + (input.alignment === 'center' ? (input.contentWidth - width) / 2 : 0), rowTop + (lineHeight - (b - t)) / 2 - t];
+    if (row.origin.some((v, i) => v !== origin[i])) throw measurementError();
+    const [pl, pt, pr, pb] = row.ink, top = brand ? input.height - input.margin - input.brandingZone : rowTop;
+    overflow ||= width > input.contentWidth || b - t > (brand ? 40 : lineHeight) || pr - pl > input.contentWidth ||
+      pb - pt > (brand ? 40 : lineHeight) || pl < input.margin || pr > input.width - input.margin || pt < top ||
+      pb > top + (brand ? input.brandingZone : lineHeight) || pb > input.height - input.margin - (brand ? 0 : input.brandingZone);
+    if (!brand) rowTop += lineHeight + source.gapAfter;
+    return Object.freeze({ ...base, tag: row.tag, kind: row.kind, origin: Object.freeze([...row.origin]),
+      localInk: Object.freeze([...row.local_ink]), ink: Object.freeze([...row.ink]), stage: 'bitmap', overflow: value.overflow });
+  });
+  if (overflow !== value.overflow) throw measurementError();
+  return Object.freeze({ version: BITMAP_WIRE, profile: value.profile, canvasTag, bindingToken, previewKey: input.key,
+    artifactToken: value.artifact_token, checked: value.checked, overflow, width: value.width, height: value.height,
+    rasterScale: 1, rows: Object.freeze(inspected) });
+}
+export async function renderPieceBitmapCanvas(node, expected) {
+  const { input, deadline, bindingToken, totalHeight, lineHeight } = expected;
+  const module = NativeModules.PieceTextMetrics, canvasTag = findNodeHandle(node);
+  if (!pieceBitmapDeadlineCurrent(deadline) || input?.candidateProfile !== PIECE_BITMAP_PREVIEW_VERSION ||
+      Platform.OS !== 'ios' || !Number.isInteger(canvasTag) || canvasTag <= 0 || typeof module?.renderBitmapCanvas !== 'function') throw measurementError();
+  const rows = expected.rows.map(row => ({ ...row, tag: findNodeHandle(row.node) }));
+  if (rows.some(row => !Number.isInteger(row.tag) || row.tag <= 0 || row.tag === canvasTag ||
+      !Array.isArray(row.lineEnds) || row.lineEnds.length !== 1 || row.lineEnds[0] !== row.text.length) ||
+      new Set(rows.map(row => row.tag)).size !== rows.length) throw measurementError();
+  const remaining = Math.min(deadline.expiresAt - Date.now(), 8000 - (globalThis.performance.now() - deadline.monotonicStartedAt));
+  let value;
+  try { value = await module.renderBitmapCanvas({ version: BITMAP_WIRE, profile: input.candidateProfile, canvas_tag: canvasTag,
+    preview_key: input.key, binding_token: bindingToken, expires_at_ms: deadline.expiresAt, remaining_ms: remaining,
+    width: input.width, height: input.height, margin: input.margin, branding_zone: input.brandingZone,
+    content_width: input.contentWidth, content_height: input.contentHeight, line_height: lineHeight, total_height: totalHeight,
+    alignment: input.alignment, branding_mode: input.brandingMode,
+    rows: rows.map(row => ({ tag: row.tag, text: row.text, font_size: row.fontSize, width: row.box.width,
+      height: row.box.height, line_width: row.lineWidth, gap_after: row.gapAfter, kind: row.kind })) });
+    const result = readPieceBitmapCanvas(value, { ...expected, rows, canvasTag });
+    if (!pieceBitmapDeadlineCurrent(deadline)) throw measurementError();
+    return result;
+  } catch {
+    if (typeof value?.artifact_token === 'string') releasePieceBitmapCanvas(node, value.artifact_token);
+    throw measurementError();
+  }
+}
 
 export function readPieceTextInspection(value, { text, fontSize, box, lineEnds, platform }) {
   const fields = ['version', 'platform', 'font_size', 'width', 'height', 'utf16_length', 'boundaries', 'line_ends', 'ink', 'glyph_check'];

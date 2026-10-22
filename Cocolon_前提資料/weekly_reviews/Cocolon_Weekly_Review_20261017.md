@@ -1885,3 +1885,8 @@ native原境界62local拒否の61件はstage83の全logical1占有不一致、qu
 ##### 5.6.28 承認済みbitmap実装の途中保存
 
 Mashが入口§99の新bitmap方式・18path限定実装・新source CI一回を明示承認。入口§100/manifest v136に実装途中の14 source/test全文をlossless bundleで保持した。native所有image/view・decoder・B9/Card接続を実装中、関連旧JS362 PASS。新group追加/実iOS compile/画像は未確認、CI0/上限1。active remote sourceは未変更、WIP未採用。次は付随検査確定→許可source反映と一度CI→元画像/結果確認。元上限・旧195/RN13・正式admission/通常保存/共有/実機未完を保持する。
+
+
+##### 5.6.29 bitmap実装確定と一度CI
+
+入口§101／manifest v137。承認済みbitmap方式の製品5＋付随test9を確定し、既存push CI一回へ進む。STRUCTURE_MAP_DELTA_PRESENT、既存native file内に所有bitmap/layer/view/manager、JS renderer/Cardへ新profileの非表示測定Text→同CGImage表示→全cell検査と失効を接続。新file0。旧native195・旧RN13保持、新native44期待／別RN12。local既存CI対象957 PASS、JSX parse0、pin/104guard/旧fixture同一を確認。実iOS成功は未確認、CI0/上限1。正式admission/保存/export/通常保存再表示は未完、未達時STOP。

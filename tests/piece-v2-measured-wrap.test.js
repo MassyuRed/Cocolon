@@ -149,6 +149,16 @@ test('v9 preserves every Python B9 result with complete v5 metrics in both row o
     assert.deepEqual(copy(plan(input, c.sizeIndex, tables)), c.expected, c.id);
   }
 });
+test('bitmap profile reuses every unchanged Python B9 result with complete V5 rows', () => {
+  for (const c of fixture.cases) {
+    const input = { ...copy(c.input), candidateProfile: 'piece.rn_bitmap_preview.prototype.v1' };
+    const tables = copy(c.measurements).map(table => ({ ...table, version: 'piece.native_candidates.v5' }));
+    assert.deepEqual(copy(plan(input, c.sizeIndex, tables)), c.expected, c.id);
+    tables.forEach(table => table.rows.reverse());
+    assert.deepEqual(copy(plan(input, c.sizeIndex, tables)), c.expected, c.id);
+    assert.throws(() => plan(input, c.sizeIndex, copy(c.measurements)), unavailable, c.id);
+  }
+});
 test('every metric position rejects nonfinite, nonnumeric and missing values', () => {
   for (let field = 2; field < 7; field++) for (const invalid of [NaN, Infinity, -Infinity, '1', null, undefined]) {
     const c = validCase(); c.measurements[0].rows[0][field] = invalid;

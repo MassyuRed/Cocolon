@@ -3,6 +3,9 @@
 #import <React/RCTUIManager.h>
 #import <React/RCTUIManagerUtils.h>
 #import <React/RCTTextView.h>
+#if __has_include(<React/RCTViewManager.h>)
+#import <React/RCTViewManager.h>
+#endif
 #import <CoreText/CoreText.h>
 #import <QuartzCore/QuartzCore.h>
 #import <objc/runtime.h>
@@ -1417,6 +1420,427 @@ RCT_EXPORT_METHOD(inspectSelectedLineV4:(nonnull NSNumber *)tag text:(NSString *
         resolve(selected);
       } else resolve(result);
     } @catch (__unused NSException *exception) { unavailable(); }
+  }];
+}
+@end
+
+// §99 bitmap preview. This owns its pixels; natural UIView backing is never
+// read. The old inspectors and their comparison contracts above stay intact.
+static NSString *const PieceBitmapProfile = @"piece.rn_bitmap_preview.prototype.v1";
+static NSString *const PieceBitmapVersion = @"piece.native_bitmap_canvas.v1";
+static BOOL PieceBitmapFields(NSDictionary *value, NSArray *keys) {
+  return [value isKindOfClass:NSDictionary.class] && value.count == keys.count &&
+    [[NSSet setWithArray:value.allKeys] isEqualToSet:[NSSet setWithArray:keys]];
+}
+static BOOL PieceBitmapNumber(id value) {
+  return [value isKindOfClass:NSNumber.class] && CFGetTypeID((__bridge CFTypeRef)value) != CFBooleanGetTypeID() && isfinite([value doubleValue]);
+}
+static BOOL PieceBitmapTag(id value) {
+  return PieceBitmapNumber(value) && [value doubleValue] > 0 && [value doubleValue] == floor([value doubleValue]);
+}
+static BOOL PieceBitmapString(id value, NSUInteger limit) {
+  return [value isKindOfClass:NSString.class] && [value length] > 0 && [value length] <= limit;
+}
+
+@interface PieceBitmapLayer : CALayer
+@property(nonatomic, copy) BOOL (^bitmapInvalidation)(void);
+@property(nonatomic) BOOL bitmapMutationAllowed;
+@end
+@implementation PieceBitmapLayer
+- (void)invalidateBitmap { if (!_bitmapMutationAllowed && _bitmapInvalidation) _bitmapInvalidation(); }
+- (void)setContents:(id)value {
+  if (self.contents != value && !_bitmapMutationAllowed && _bitmapInvalidation && _bitmapInvalidation()) return;
+  [super setContents:value];
+}
+#define PIECE_BITMAP_LAYER_SET(type, setter, same) - (void)setter:(type)value { if (!(same)) [self invalidateBitmap]; [super setter:value]; }
+PIECE_BITMAP_LAYER_SET(CGRect,setBounds,CGRectEqualToRect(self.bounds,value))
+PIECE_BITMAP_LAYER_SET(CGPoint,setPosition,CGPointEqualToPoint(self.position,value))
+PIECE_BITMAP_LAYER_SET(CGPoint,setAnchorPoint,CGPointEqualToPoint(self.anchorPoint,value))
+PIECE_BITMAP_LAYER_SET(CATransform3D,setTransform,CATransform3DEqualToTransform(self.transform,value))
+PIECE_BITMAP_LAYER_SET(CATransform3D,setSublayerTransform,CATransform3DEqualToTransform(self.sublayerTransform,value))
+PIECE_BITMAP_LAYER_SET(CGAffineTransform,setAffineTransform,CGAffineTransformEqualToTransform(self.affineTransform,value))
+PIECE_BITMAP_LAYER_SET(CGFloat,setContentsScale,self.contentsScale==value)
+PIECE_BITMAP_LAYER_SET(CGRect,setContentsRect,CGRectEqualToRect(self.contentsRect,value))
+PIECE_BITMAP_LAYER_SET(CGRect,setContentsCenter,CGRectEqualToRect(self.contentsCenter,value))
+PIECE_BITMAP_LAYER_SET(NSString *,setContentsGravity,[self.contentsGravity isEqual:value])
+PIECE_BITMAP_LAYER_SET(NSString *,setMinificationFilter,[self.minificationFilter isEqual:value])
+PIECE_BITMAP_LAYER_SET(NSString *,setMagnificationFilter,[self.magnificationFilter isEqual:value])
+PIECE_BITMAP_LAYER_SET(float,setMinificationFilterBias,self.minificationFilterBias==value)
+PIECE_BITMAP_LAYER_SET(float,setOpacity,self.opacity==value)
+PIECE_BITMAP_LAYER_SET(BOOL,setHidden,self.hidden==value)
+PIECE_BITMAP_LAYER_SET(BOOL,setOpaque,self.opaque==value)
+PIECE_BITMAP_LAYER_SET(BOOL,setMasksToBounds,self.masksToBounds==value)
+PIECE_BITMAP_LAYER_SET(CALayer *,setMask,self.mask==value)
+PIECE_BITMAP_LAYER_SET(NSArray *,setSublayers,[self.sublayers isEqual:value] || self.sublayers==value)
+PIECE_BITMAP_LAYER_SET(CGFloat,setBorderWidth,self.borderWidth==value)
+PIECE_BITMAP_LAYER_SET(CGFloat,setCornerRadius,self.cornerRadius==value)
+PIECE_BITMAP_LAYER_SET(float,setShadowOpacity,self.shadowOpacity==value)
+PIECE_BITMAP_LAYER_SET(BOOL,setShouldRasterize,self.shouldRasterize==value)
+PIECE_BITMAP_LAYER_SET(BOOL,setDrawsAsynchronously,self.drawsAsynchronously==value)
+PIECE_BITMAP_LAYER_SET(BOOL,setGeometryFlipped,self.geometryFlipped==value)
+PIECE_BITMAP_LAYER_SET(NSArray *,setFilters,[self.filters isEqual:value] || self.filters==value)
+PIECE_BITMAP_LAYER_SET(NSArray *,setBackgroundFilters,[self.backgroundFilters isEqual:value] || self.backgroundFilters==value)
+PIECE_BITMAP_LAYER_SET(id,setCompositingFilter,self.compositingFilter==value)
+PIECE_BITMAP_LAYER_SET(CGColorRef,setBackgroundColor,self.backgroundColor==value || (self.backgroundColor && value && CGColorEqualToColor(self.backgroundColor,value)))
+#undef PIECE_BITMAP_LAYER_SET
+- (void)addAnimation:(CAAnimation *)animation forKey:(NSString *)key { [self invalidateBitmap]; [super addAnimation:animation forKey:key]; }
+- (void)addSublayer:(CALayer *)layer { [self invalidateBitmap]; [super addSublayer:layer]; }
+- (void)insertSublayer:(CALayer *)layer atIndex:(unsigned)index { [self invalidateBitmap]; [super insertSublayer:layer atIndex:index]; }
+- (void)insertSublayer:(CALayer *)layer below:(CALayer *)other { [self invalidateBitmap]; [super insertSublayer:layer below:other]; }
+- (void)insertSublayer:(CALayer *)layer above:(CALayer *)other { [self invalidateBitmap]; [super insertSublayer:layer above:other]; }
+- (void)replaceSublayer:(CALayer *)old with:(CALayer *)layer { [self invalidateBitmap]; [super replaceSublayer:old with:layer]; }
+@end
+
+@interface PieceBitmapCanvasView : UIView
+@property(nonatomic, copy) NSString *bitmapBinding;
+@property(nonatomic, copy) RCTDirectEventBlock onBitmapInvalidated;
+@property(nonatomic, strong) id bitmapImage;
+@property(nonatomic, copy) NSString *bitmapToken;
+@property(nonatomic) CGSize bitmapSize;
+- (void)clearBitmap;
+- (BOOL)bitmapConfigurationCurrent;
+@end
+@implementation PieceBitmapCanvasView
++ (Class)layerClass { return PieceBitmapLayer.class; }
+- (instancetype)initWithFrame:(CGRect)frame {
+  if ((self = [super initWithFrame:frame])) {
+    self.opaque = NO; self.backgroundColor = UIColor.clearColor;
+    self.contentScaleFactor = 1; self.layer.contentsScale = 1;
+    self.layer.contentsGravity = kCAGravityResize;
+    self.layer.minificationFilter = kCAFilterLinear; self.layer.magnificationFilter = kCAFilterLinear;
+    self.isAccessibilityElement = NO;
+    __weak PieceBitmapCanvasView *weakSelf = self;
+    ((PieceBitmapLayer *)self.layer).bitmapInvalidation = ^BOOL {
+      PieceBitmapCanvasView *view = weakSelf;
+      if (!view.bitmapImage) return NO;
+      [view clearBitmap]; return YES;
+    };
+  }
+  return self;
+}
+- (void)clearBitmap {
+  NSString *oldToken = _bitmapToken;
+  _bitmapToken = nil;
+  PieceBitmapLayer *layer=(PieceBitmapLayer *)self.layer; layer.bitmapMutationAllowed=YES;
+  [CATransaction begin]; [CATransaction setDisableActions:YES]; layer.contents = nil; [CATransaction commit];
+  layer.bitmapMutationAllowed=NO;
+  _bitmapImage = nil; _bitmapSize = CGSizeZero;
+  if (oldToken && _onBitmapInvalidated) _onBitmapInvalidated(@{@"artifact_token":oldToken,@"binding_token":_bitmapBinding ?: @""});
+}
+- (void)setBitmapBinding:(NSString *)value {
+  if ([_bitmapBinding isEqualToString:value]) return;
+  [self clearBitmap]; _bitmapBinding = [value copy];
+}
+- (void)setBounds:(CGRect)value {
+  if (_bitmapImage && !CGRectEqualToRect(value, self.bounds)) [self clearBitmap];
+  [super setBounds:value];
+}
+- (void)setFrame:(CGRect)value {
+  if (_bitmapImage && !CGRectEqualToRect(value, self.frame)) [self clearBitmap];
+  [super setFrame:value];
+}
+- (void)setAlpha:(CGFloat)value {
+  if (_bitmapImage && value != 1) [self clearBitmap];
+  [super setAlpha:value];
+}
+- (void)setHidden:(BOOL)value { if (_bitmapImage && value!=self.hidden) [self clearBitmap]; [super setHidden:value]; }
+- (void)setClipsToBounds:(BOOL)value { if (_bitmapImage && value!=self.clipsToBounds) [self clearBitmap]; [super setClipsToBounds:value]; }
+- (void)setTransform:(CGAffineTransform)value { if (_bitmapImage && !CGAffineTransformEqualToTransform(value,self.transform)) [self clearBitmap]; [super setTransform:value]; }
+- (void)setContentScaleFactor:(CGFloat)value { if (_bitmapImage && value!=self.contentScaleFactor) [self clearBitmap]; [super setContentScaleFactor:value]; }
+- (BOOL)bitmapConfigurationCurrent {
+  CALayer *layer = self.layer;
+  return self.window && !self.hidden && self.alpha == 1 && !self.opaque &&
+    CGPointEqualToPoint(self.bounds.origin, CGPointZero) && CGSizeEqualToSize(self.bounds.size, _bitmapSize) &&
+    self.contentScaleFactor == 1 && layer.contentsScale == 1 && !layer.hidden && !layer.opaque && layer.opacity == 1 &&
+    CGRectEqualToRect(layer.bounds, self.bounds) && CGPointEqualToPoint(layer.anchorPoint,CGPointMake(0.5,0.5)) &&
+    CGRectEqualToRect(self.frame,(CGRect){CGPointZero,_bitmapSize}) && PieceIdentityTransform(layer.transform) &&
+    PieceIdentityTransform(layer.sublayerTransform) && !layer.geometryFlipped &&
+    CGRectEqualToRect(layer.contentsRect, CGRectMake(0,0,1,1)) && CGRectEqualToRect(layer.contentsCenter, CGRectMake(0,0,1,1)) &&
+    [layer.contentsGravity isEqual:kCAGravityResize] && [layer.minificationFilter isEqual:kCAFilterLinear] &&
+    [layer.magnificationFilter isEqual:kCAFilterLinear] && layer.minificationFilterBias == 0 &&
+    !layer.masksToBounds && !layer.mask && !layer.sublayers.count && layer.borderWidth == 0 && layer.cornerRadius == 0 &&
+    layer.shadowOpacity == 0 && !layer.shouldRasterize && !layer.drawsAsynchronously && !layer.animationKeys.count &&
+    !layer.filters.count && !layer.backgroundFilters.count && !layer.compositingFilter &&
+    (!layer.backgroundColor || CGColorGetAlpha(layer.backgroundColor) == 0) &&
+    (!_bitmapImage || layer.contents == _bitmapImage);
+}
+- (void)layoutSubviews {
+  [super layoutSubviews];
+  if (_bitmapImage && ![self bitmapConfigurationCurrent]) [self clearBitmap];
+}
+- (void)didMoveToWindow {
+  [super didMoveToWindow]; if (_bitmapImage || !self.window) [self clearBitmap];
+  if (self.window) { self.contentScaleFactor=1; self.layer.contentsScale=1; }
+}
+// UIView remains its own layer delegate. No UIKit bitmap is created here.
+- (void)displayLayer:(CALayer *)layer {
+  if (_bitmapImage && [self bitmapConfigurationCurrent]) layer.contents = _bitmapImage;
+  else if (_bitmapImage) [self clearBitmap];
+  else layer.contents = nil;
+}
+@end
+
+@interface PieceBitmapCanvasManager : RCTViewManager
+@end
+@implementation PieceBitmapCanvasManager
+RCT_EXPORT_MODULE(PieceBitmapCanvas)
+RCT_EXPORT_VIEW_PROPERTY(bitmapBinding, NSString)
+RCT_EXPORT_VIEW_PROPERTY(onBitmapInvalidated, RCTDirectEventBlock)
++ (BOOL)requiresMainQueueSetup { return YES; }
+- (UIView *)view { return [[PieceBitmapCanvasView alloc] initWithFrame:CGRectZero]; }
+@end
+
+// Strong source identities live only for this one synchronous UI operation.
+// CoreText sees a copied attributed string; it never fixes the live storage.
+static NSDictionary *PieceBitmapSource(RCTTextView *view, NSDictionary *row, UIView *host, BOOL (^current)(void)) {
+  if (![view isKindOfClass:RCTTextView.class] || !view.window || view.window != host.window ||
+      !view.superview || ![view respondsToSelector:@selector(cocolonPieceIsPlainText)] || ![view cocolonPieceIsPlainText] ||
+      ![view respondsToSelector:@selector(cocolonPiecePaintGlyphRange:)] || !current()) return nil;
+  NSTextStorage *storage = view.cocolonPieceTextStorage;
+  NSLayoutManager *layout = storage.layoutManagers.firstObject;
+  NSTextContainer *container = layout.textContainers.firstObject;
+  NSString *text = row[@"text"]; double fontSize = [row[@"font_size"] doubleValue];
+  CGRect frame = view.cocolonPieceContentFrame;
+  if (![storage.string isEqual:text] || !layout || !container || container.maximumNumberOfLines != 0 ||
+      !PiecePixelRect(view.bounds) || !PiecePixelRect(frame) || view.bounds.size.width > 1080 || view.bounds.size.height > 1920 ||
+      fabs(view.bounds.size.width - [row[@"width"] doubleValue]) > 0.5 ||
+      fabs(view.bounds.size.height - [row[@"height"] doubleValue]) > 0.5) return nil;
+  [layout ensureLayoutForTextContainer:container];
+  NSRange glyphs = [layout glyphRangeForTextContainer:container];
+  NSRange chars = [layout characterRangeForGlyphRange:glyphs actualGlyphRange:NULL];
+  if (glyphs.location != 0 || NSMaxRange(glyphs) != layout.numberOfGlyphs || chars.location != 0 || chars.length != text.length) return nil;
+  __block BOOL valid = YES; __block NSUInteger lines = 0;
+  [storage enumerateAttribute:NSFontAttributeName inRange:chars options:0 usingBlock:^(UIFont *font, NSRange range, BOOL *stop) {
+    if (![font isKindOfClass:UIFont.class] || fabs(font.pointSize - fontSize) > 0.5) { valid = NO; *stop = YES; }
+  }];
+  for (NSUInteger i = 0; valid && i < layout.numberOfGlyphs; i++) {
+    NSGlyphProperty property = [layout propertyForGlyphAtIndex:i];
+    if ([layout CGGlyphAtIndex:i] == 0 && !(property & (NSGlyphPropertyNull | NSGlyphPropertyControlCharacter))) valid = NO;
+  }
+  [layout enumerateLineFragmentsForGlyphRange:glyphs usingBlock:^(CGRect rect, CGRect used, NSTextContainer *c, NSRange range, BOOL *stop) {
+    NSRange part = [layout characterRangeForGlyphRange:range actualGlyphRange:NULL]; lines++;
+    if (part.location != 0 || part.length != text.length ||
+        [layout truncatedGlyphRangeInLineFragmentForGlyphAtIndex:range.location].location != NSNotFound) valid = NO;
+  }];
+  if (!valid || lines != 1 || !current()) return nil;
+  NSAttributedString *copy = [[NSAttributedString alloc] initWithAttributedString:storage];
+  CTLineRef line = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef)copy);
+  if (!line) return nil;
+  NSData *independent = nil;
+  @try {
+    for (id object in (__bridge NSArray *)CTLineGetGlyphRuns(line)) {
+      CTRunRef run = (__bridge CTRunRef)object;
+      CTFontRef font = (CTFontRef)CFDictionaryGetValue(CTRunGetAttributes(run), kCTFontAttributeName);
+      NSString *name = font ? CFBridgingRelease(CTFontCopyPostScriptName(font)) : nil;
+      if (!font || [name rangeOfString:@"LastResort" options:NSCaseInsensitiveSearch].location != NSNotFound) valid = NO;
+      for (CFIndex i = 0; i < CTRunGetGlyphCount(run); i++) { CGGlyph g; CTRunGetGlyphs(run,CFRangeMake(i,1),&g); if (!g) valid = NO; }
+    }
+    double advance = CTLineGetTypographicBounds(line,NULL,NULL,NULL); CGRect ink = CTLineGetImageBounds(line,NULL);
+    if (CGRectIsNull(ink) && [text rangeOfCharacterFromSet:NSCharacterSet.whitespaceAndNewlineCharacterSet.invertedSet].location == NSNotFound) ink = CGRectZero;
+    double values[] = {advance,CGRectGetMinX(ink),-CGRectGetMaxY(ink),CGRectGetMaxX(ink),-CGRectGetMinY(ink)};
+    uint64_t packed[5];
+    for (NSUInteger i=0;i<5;i++) { if (!isfinite(values[i])) valid=NO; uint64_t bits; memcpy(&bits,&values[i],8); packed[i]=CFSwapInt64HostToLittle(bits); }
+    if (advance < 0 || values[3]<values[1] || values[4]<values[2]) valid=NO;
+    if (valid) independent=[NSData dataWithBytes:packed length:sizeof(packed)];
+  } @finally { CFRelease(line); }
+  if (!valid || !independent || ![copy isEqualToAttributedString:storage] || !current()) return nil;
+  CGRect ink = CGRectOffset([layout boundingRectForGlyphRange:glyphs inTextContainer:container],frame.origin.x,frame.origin.y);
+  if (!PiecePixelRect(ink)) return nil;
+  NSMutableArray *boundaries=[NSMutableArray arrayWithObject:@0];
+  [text enumerateSubstringsInRange:NSMakeRange(0,text.length) options:NSStringEnumerationByComposedCharacterSequences
+    usingBlock:^(NSString *sub,NSRange range,NSRange enclosing,BOOL *stop){[boundaries addObject:@(NSMaxRange(range))];}];
+  return @{@"view":view,@"storage":storage,@"attributes":copy,@"layout":layout,@"container":container,
+    @"glyphs":[NSValue valueWithRange:glyphs],@"frame":[NSValue valueWithCGRect:frame],@"bounds":[NSValue valueWithCGRect:view.bounds],
+    @"container_size":[NSValue valueWithCGSize:container.size],@"padding":@(container.lineFragmentPadding),
+    @"line_break":@(container.lineBreakMode),@"leading":@(layout.usesFontLeading),@"ink":[NSValue valueWithCGRect:ink],
+    @"independent":independent,@"boundaries":boundaries,@"window":view.window,@"maximum_lines":@(container.maximumNumberOfLines)};
+}
+static BOOL PieceBitmapSameSource(NSDictionary *s) {
+  RCTTextView *v=s[@"view"]; NSTextStorage *storage=v.cocolonPieceTextStorage;
+  NSLayoutManager *layout=storage.layoutManagers.firstObject; NSTextContainer *container=layout.textContainers.firstObject;
+  return v.window && s[@"window"]==v.window && s[@"storage"]==storage && [s[@"attributes"] isEqualToAttributedString:storage] &&
+    s[@"layout"]==layout && s[@"container"]==container && [v cocolonPieceIsPlainText] &&
+    CGRectEqualToRect([s[@"bounds"] CGRectValue],v.bounds) && CGRectEqualToRect([s[@"frame"] CGRectValue],v.cocolonPieceContentFrame) &&
+    NSEqualRanges([s[@"glyphs"] rangeValue],[layout glyphRangeForTextContainer:container]) &&
+    CGSizeEqualToSize([s[@"container_size"] CGSizeValue],container.size) && [s[@"padding"] doubleValue]==container.lineFragmentPadding &&
+    [s[@"line_break"] integerValue]==container.lineBreakMode && [s[@"leading"] boolValue]==layout.usesFontLeading &&
+    [s[@"maximum_lines"] unsignedIntegerValue]==container.maximumNumberOfLines && container.maximumNumberOfLines==0;
+}
+static BOOL PieceBitmapPaint(NSDictionary *s, double font, CGPoint p, double opacity,
+    const PieceRasterBudgetOwner &budget, BOOL (^current)(void), PieceOwnedPixels &pixels, CGRect *extent, CGRect *ink) {
+  CGRect expanded=CGRectInset([s[@"ink"] CGRectValue],-2*font,-2*font);
+  *extent=CGRectIntegral(CGRectOffset(expanded,p.x,p.y));
+  if (!PiecePixelRect(*extent) || !PieceBitmapSameSource(s) || !current() || !pixels.make(extent->size,1,budget)) return NO;
+  CGContextTranslateCTM(pixels.context,p.x-extent->origin.x,p.y-extent->origin.y);
+  CGContextSetAlpha(pixels.context,opacity);
+  UIGraphicsPushContext(pixels.context);
+  @try { [(RCTTextView *)s[@"view"] cocolonPiecePaintGlyphRange:[s[@"glyphs"] rangeValue]]; }
+  @finally { UIGraphicsPopContext(); }
+  CGRect cells;
+  if (!PieceScanPixels(pixels,current,YES,&cells) || !PieceBitmapSameSource(s)) return NO;
+  *ink=CGRectOffset(cells,extent->origin.x,extent->origin.y); return current();
+}
+struct PieceBitmapMask {
+  PieceRasterBudgetOwner budget; UInt8 *data=nullptr; size_t length=0;
+  ~PieceBitmapMask(){if(data)free(data);if(budget)budget->release(length);}
+  bool make(size_t cells,const PieceRasterBudgetOwner &owner){length=(cells+7)/8;if(!owner->reserve(length))return false;
+    budget=owner;data=(UInt8 *)calloc(length,1);return data!=nullptr;}
+};
+
+@interface PieceTextMetrics (BitmapCanvas)
+- (void)renderBitmapCanvas:(NSDictionary *)request resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject;
+- (void)releaseBitmapCanvas:(nonnull NSNumber *)tag token:(NSString *)token;
+@end
+
+@implementation PieceTextMetrics (BitmapCanvas)
+RCT_EXPORT_METHOD(renderBitmapCanvas:(NSDictionary *)request resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+{
+  NSArray *keys=@[@"version",@"profile",@"canvas_tag",@"preview_key",@"binding_token",@"expires_at_ms",@"remaining_ms",
+    @"width",@"height",@"margin",@"branding_zone",@"content_width",@"content_height",@"line_height",@"total_height",@"alignment",@"branding_mode",@"rows"];
+  if (!PieceBitmapFields(request,keys) || ![request[@"version"] isEqual:PieceBitmapVersion] || ![request[@"profile"] isEqual:PieceBitmapProfile] ||
+      !PieceBitmapTag(request[@"canvas_tag"]) || !PieceBitmapString(request[@"preview_key"],4096) || !PieceBitmapString(request[@"binding_token"],128) || !self.bridge.uiManager) {
+    reject(@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",@"Bitmap unavailable",nil); return;
+  }
+  double now=NSDate.date.timeIntervalSince1970*1000;
+  if (!PieceBitmapNumber(request[@"expires_at_ms"]) || !PieceBitmapNumber(request[@"remaining_ms"]) ||
+      [request[@"remaining_ms"] doubleValue]<=0 || [request[@"remaining_ms"] doubleValue]>8000 || [request[@"expires_at_ms"] doubleValue]<=now ||
+      [request[@"expires_at_ms"] doubleValue]-now>8000) { reject(@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",@"Bitmap unavailable",nil);return; }
+  NSTimeInterval end=CACurrentMediaTime()+MIN([request[@"remaining_ms"] doubleValue],[request[@"expires_at_ms"] doubleValue]-now)/1000;
+  [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *manager, NSDictionary<NSNumber *,UIView *> *views) {
+    PieceBitmapCanvasView *host=(PieceBitmapCanvasView *)views[request[@"canvas_tag"]];
+    void (^fail)(void)=^{ if([host isKindOfClass:PieceBitmapCanvasView.class] && [host.bitmapBinding isEqual:request[@"binding_token"]]) [host clearBitmap];
+      reject(@"PIECE_NATIVE_MEASUREMENT_UNAVAILABLE",@"Bitmap unavailable",nil); };
+    @try { try {
+    if (![host isKindOfClass:PieceBitmapCanvasView.class] || ![host.bitmapBinding isEqual:request[@"binding_token"]]) {fail();return;}
+    [host clearBitmap];
+    UIWindow *initialWindow=host.window;
+    BOOL (^current)(void)=^BOOL{ return NSThread.isMainThread && CACurrentMediaTime()<end &&
+      NSDate.date.timeIntervalSince1970*1000<[request[@"expires_at_ms"] doubleValue] && views[request[@"canvas_tag"]]==host &&
+      [host.bitmapBinding isEqual:request[@"binding_token"]] && initialWindow && host.window==initialWindow; };
+    for(NSString *key in @[@"width",@"height",@"margin",@"branding_zone",@"content_width",@"content_height",@"line_height",@"total_height"])
+      if(!PieceBitmapNumber(request[key]) || [request[key] doubleValue]<=0){fail();return;}
+    double w=[request[@"width"] doubleValue],h=[request[@"height"] doubleValue],m=[request[@"margin"] doubleValue],bz=[request[@"branding_zone"] doubleValue];
+    double cw=[request[@"content_width"] doubleValue],ch=[request[@"content_height"] doubleValue],lh=[request[@"line_height"] doubleValue],total=[request[@"total_height"] doubleValue];
+    NSString *mode=request[@"branding_mode"];
+    if(w!=1080 || (h!=1350 && h!=1920) || m!=(h==1920?108:96) || bz!=(h==1920?84:72) || cw!=w-2*m || ch!=h-2*m-bz ||
+       total>ch || ![@[@"left",@"center"] containsObject:request[@"alignment"]] ||
+       ![@[@"required_small",@"required_subtle",@"off"] containsObject:mode] || !current()) {fail();return;}
+    host.bitmapSize=CGSizeMake(w,h);
+    if(![host bitmapConfigurationCurrent]){fail();return;}
+    NSArray *rows=request[@"rows"]; BOOL branded=![mode isEqual:@"off"];
+    if(![rows isKindOfClass:NSArray.class] || rows.count<(branded?2:1) || rows.count>513){fail();return;}
+    NSUInteger bodyCount=rows.count-(branded?1:0);
+    NSMutableArray *sources=[NSMutableArray new],*resultRows=[NSMutableArray new]; NSMutableSet *tags=[NSMutableSet new];
+    double summed=bodyCount*lh;
+    NSArray *rowKeys=@[@"tag",@"text",@"font_size",@"width",@"height",@"line_width",@"gap_after",@"kind"];
+    for(NSUInteger i=0;i<rows.count;i++) {
+      NSDictionary *row=rows[i]; BOOL brand=i==bodyCount;
+      if(!PieceBitmapFields(row,rowKeys) || !PieceBitmapTag(row[@"tag"]) || [tags containsObject:row[@"tag"]] ||
+         [row[@"tag"] isEqual:request[@"canvas_tag"]] || !PieceBitmapString(row[@"text"],4096) ||
+         ![row[@"kind"] isEqual:(brand?@"branding":@"body")]){fail();return;}
+      for(NSString *key in @[@"font_size",@"width",@"height",@"line_width",@"gap_after"])
+        if(!PieceBitmapNumber(row[key]) || [row[key] doubleValue]<0){fail();return;}
+      if([row[@"font_size"] doubleValue]<1 || [row[@"font_size"] doubleValue]>100 || [row[@"width"] doubleValue]<=0 || [row[@"height"] doubleValue]<=0 ||
+         [row[@"line_width"] doubleValue]>cw || [row[@"gap_after"] doubleValue]>ch ||
+         (brand && (![row[@"text"] isEqual:@"Cocolon"] || [row[@"font_size"] doubleValue]!=28 || [row[@"gap_after"] doubleValue]!=0)) ||
+         (!brand && i+1==bodyCount && [row[@"gap_after"] doubleValue]!=0)) {fail();return;}
+      if(!brand) summed+=[row[@"gap_after"] doubleValue];
+      [tags addObject:row[@"tag"]];
+      NSDictionary *s=PieceBitmapSource((RCTTextView *)views[row[@"tag"]],row,host,current);
+      if(!s || !current()){fail();return;} [sources addObject:s];
+    }
+    if(fabs(summed-total)>0.000001){fail();return;}
+    const auto budget=PieceV4RasterBudget();
+    // Local scan selects p; it is never reused as the placed mask.
+    double rowTop=m+(ch-total)/2; BOOL overflow=NO;
+    for(NSUInteger i=0;i<rows.count;i++) {
+      NSDictionary *row=rows[i],*s=sources[i]; BOOL brand=i==bodyCount;
+      PieceOwnedPixels local; CGRect extent,ink;
+      double opacity=brand && [mode isEqual:@"required_subtle"]?0.8:1;
+      if(!PieceBitmapPaint(s,[row[@"font_size"] doubleValue],CGPointZero,opacity,budget,current,local,&extent,&ink)){fail();return;}
+      double left=CGRectGetMinX(ink)-(brand?0:m),right=CGRectGetMaxX(ink)-(brand?0:m);
+      double rowWidth=MAX([row[@"line_width"] doubleValue],right)-MIN(0,left);
+      CGPoint p=brand?CGPointMake(m,h-m-bz):CGPointMake(-MIN(0,left)+([request[@"alignment"] isEqual:@"center"]?(cw-rowWidth)/2:0),rowTop+(lh-ink.size.height)/2-ink.origin.y);
+      if(rowWidth>cw || ink.size.height>(brand?40:lh))overflow=YES;
+      [resultRows addObject:[@{@"tag":row[@"tag"],@"font_size":row[@"font_size"],@"width":row[@"width"],@"height":row[@"height"],
+        @"utf16_length":@([row[@"text"] length]),@"boundaries":s[@"boundaries"],@"line_ends":@[@([row[@"text"] length])],
+        @"glyph_check":@"no_missing_observed",@"independent_metrics_f64le":[s[@"independent"] base64EncodedStringWithOptions:0],
+        @"local_ink":PieceInkEdges(ink),@"origin":@[@(p.x),@(p.y)],@"ink":NSNull.null,@"kind":row[@"kind"]} mutableCopy]];
+      if(!brand)rowTop+=lh+[row[@"gap_after"] doubleValue];
+    }
+    PieceOwnedPixels canvas;
+    if(!current() || !canvas.make(CGSizeMake(w,h),1,budget)){fail();return;}
+    // The canvas context is no longer used: only integer occupied-cell copies.
+    CGContextRelease(canvas.context);canvas.context=nullptr;
+    for(NSUInteger i=0;i<rows.count;i++) {
+      NSDictionary *row=rows[i],*s=sources[i]; NSMutableDictionary *result=resultRows[i]; BOOL brand=i==bodyCount;
+      NSArray *origin=result[@"origin"]; CGPoint p=CGPointMake([origin[0] doubleValue],[origin[1] doubleValue]);
+      PieceOwnedPixels placed;CGRect extent,ink;double opacity=brand&&[mode isEqual:@"required_subtle"]?0.8:1;
+      if(!PieceBitmapPaint(s,[row[@"font_size"] doubleValue],p,opacity,budget,current,placed,&extent,&ink)){fail();return;}
+      result[@"ink"]=PieceInkEdges(ink);
+      double top=brand?h-m-bz:m+(ch-total)/2+i*lh;
+      if(!brand)for(NSUInteger j=0;j<i;j++)top+=[rows[j][@"gap_after"] doubleValue];
+      if(ink.size.width>cw || ink.size.height>(brand?40:lh) || CGRectGetMinX(ink)<m || CGRectGetMaxX(ink)>w-m ||
+         CGRectGetMinY(ink)<top || CGRectGetMaxY(ink)>top+(brand?bz:lh) ||
+         CGRectGetMaxY(ink)>h-m-(brand?0:bz))overflow=YES;
+      // Even overflow must finish every source/glyph/paint check. Only fully
+      // validated geometric overflow may request another catalog font.
+      for(size_t y=0;y<placed.height;y++) {
+        if(!current()){fail();return;}
+        for(size_t x=0;x<placed.width;x++) {
+          UInt8 *src=placed.data+y*placed.stride+x*4;if(!src[3])continue;
+          long long dx=(long long)extent.origin.x+(long long)x,dy=(long long)extent.origin.y+(long long)y;
+          if(dx<0 || dy<0 || dx>=(long long)canvas.width || dy>=(long long)canvas.height){overflow=YES;continue;}
+          UInt8 *dst=canvas.data+(size_t)dy*canvas.stride+(size_t)dx*4;
+          if(dst[3]){fail();return;} memcpy(dst,src,4);
+        }
+      }
+    }
+    for(NSUInteger i=0;i<sources.count;i++)if(views[rows[i][@"tag"]]!=sources[i][@"view"] || !PieceBitmapSameSource(sources[i])){fail();return;}
+    NSMutableDictionary *reply=[@{@"version":PieceBitmapVersion,@"profile":PieceBitmapProfile,@"platform":@"ios",
+      @"canvas_tag":request[@"canvas_tag"],@"preview_key":request[@"preview_key"],@"binding_token":request[@"binding_token"],
+      @"width":@(w),@"height":@(h),@"raster_scale":@1,@"overflow":@(overflow),@"checked":@NO,@"artifact_token":NSNull.null,@"rows":resultRows} mutableCopy];
+    if(!current() || ![host bitmapConfigurationCurrent]){fail();return;}
+    if(overflow){resolve(reply);return;}
+    CGRect allInk;
+    if(!PieceScanPixels(canvas,current,YES,&allInk)){fail();return;}
+    PieceBitmapMask mask;
+    if(!mask.make(canvas.width*canvas.height,budget)){fail();return;}
+    for(size_t y=0;y<canvas.height;y++) {
+      if(!current()){fail();return;}
+      for(size_t x=0;x<canvas.width;x++)if(canvas.data[y*canvas.stride+x*4+3]){size_t k=y*canvas.width+x;mask.data[k/8]|=(UInt8)(1<<(k%8));}
+    }
+    CGImageRef image=PiecePixelsImage(canvas,true);
+    if(!image){fail();return;}
+    @try {
+      host.bitmapImage=(__bridge id)image;
+      ((PieceBitmapLayer *)host.layer).bitmapMutationAllowed=YES;
+      [CATransaction begin];[CATransaction setDisableActions:YES];host.layer.contents=host.bitmapImage;[CATransaction commit];
+      ((PieceBitmapLayer *)host.layer).bitmapMutationAllowed=NO;
+      if(!current() || ![host bitmapConfigurationCurrent]){fail();return;}
+      PieceOwnedPixels actual;
+      if(!actual.make(CGSizeMake(w,h),1,budget) || !current()){fail();return;}
+      [host.layer renderInContext:actual.context];
+      for(size_t y=0;y<actual.height;y++) {
+        if(!current()){fail();return;}
+        for(size_t x=0;x<actual.width;x++){size_t k=y*actual.width+x;
+          if((actual.data[y*actual.stride+x*4+3]>0)!=((mask.data[k/8]&(1<<(k%8)))!=0)){fail();return;}}
+      }
+      for(NSUInteger i=0;i<sources.count;i++)if(views[rows[i][@"tag"]]!=sources[i][@"view"] || !PieceBitmapSameSource(sources[i])){fail();return;}
+      if(!current() || ![host bitmapConfigurationCurrent] || host.bitmapImage!=(__bridge id)image){fail();return;}
+      host.bitmapToken=NSUUID.UUID.UUIDString;reply[@"artifact_token"]=host.bitmapToken;reply[@"checked"]=@YES;
+      resolve(reply);
+    } @finally {CGImageRelease(image);}
+    } catch (...) {fail();}
+    } @catch(__unused NSException *exception){fail();}
+  }];
+}
+RCT_EXPORT_METHOD(releaseBitmapCanvas:(nonnull NSNumber *)tag token:(NSString *)token)
+{
+  if(!PieceBitmapTag(tag) || !PieceBitmapString(token,128) || !self.bridge.uiManager)return;
+  [self.bridge.uiManager addUIBlock:^(__unused RCTUIManager *manager,NSDictionary<NSNumber *,UIView *> *views){
+    PieceBitmapCanvasView *host=(PieceBitmapCanvasView *)views[tag];
+    if([host isKindOfClass:PieceBitmapCanvasView.class] && [host.bitmapToken isEqual:token])[host clearBitmap];
   }];
 }
 @end

@@ -17,6 +17,7 @@ export const PIECE_NATIVE_PREVIEW_V8_VERSION = 'piece.rn_native_preview.prototyp
 export const PIECE_NATIVE_PREVIEW_V9_VERSION = 'piece.rn_native_preview.prototype.v9';
 export const PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION = 'piece.rn_native_preview.containment.prototype.v1';
 export const PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION = 'piece.rn_native_preview.containment.prototype.v2';
+export const PIECE_BITMAP_PREVIEW_VERSION = 'piece.rn_bitmap_preview.prototype.v1';
 const nativeThemes = {
   soft_paper: { canvas: '#F6F1E8', surface: '#FFFDF8', text: '#111827', secondary: '#4B5563',
     accent: '#800020', border: '#D7D2C9', branding: '#800020', vector_end: '#FFFFFF' },
@@ -40,7 +41,8 @@ export function preparePieceNativePreview(display, nowMs = Date.now()) {
   const checked = readPiecePreviewDisplay(display, nowMs);
   if (!checked.hashVerified || !checked.preview) return null;
   const p = checked.preview;
-  const candidateProfile = p.renderer_version === PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION ? PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION
+  const candidateProfile = p.renderer_version === PIECE_BITMAP_PREVIEW_VERSION ? PIECE_BITMAP_PREVIEW_VERSION
+    : p.renderer_version === PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION ? PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION
     : p.renderer_version === PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION ? PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION
     : p.renderer_version === PIECE_NATIVE_PREVIEW_V9_VERSION ? PIECE_NATIVE_PREVIEW_V9_VERSION
     : p.renderer_version === PIECE_NATIVE_PREVIEW_V8_VERSION ? PIECE_NATIVE_PREVIEW_V8_VERSION
@@ -48,7 +50,7 @@ export function preparePieceNativePreview(display, nowMs = Date.now()) {
     : p.renderer_version === PIECE_NATIVE_PREVIEW_V6_VERSION ? PIECE_NATIVE_PREVIEW_V6_VERSION
     : p.renderer_version === PIECE_NATIVE_PREVIEW_V5_VERSION ? PIECE_NATIVE_PREVIEW_V5_VERSION
     : p.renderer_version === PIECE_NATIVE_PREVIEW_V4_VERSION ? PIECE_NATIVE_PREVIEW_V4_VERSION : PIECE_NATIVE_PREVIEW_VERSION;
-  if ([PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(candidateProfile) && Platform.OS !== 'ios') return null;
+  if ([PIECE_BITMAP_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(candidateProfile) && Platform.OS !== 'ios') return null;
   const key = JSON.stringify([candidateProfile, 'preview', p.preview_id, p.preview_revision,
     p.row_version, p.expires_at, p.piece_text_hash, p.content_payload_hash, p.visual_recipe_hash, p.renderer_version]);
   return preparePieceNativeArtifact(p, key, candidateProfile);
@@ -73,7 +75,7 @@ export function preparePieceNativeCard(props) {
   if (saved && Object.prototype.hasOwnProperty.call(props, 'display')) return null;
   if (saved) return preparePieceNativeSavedDisplay(props.savedRecord);
   const input = preparePieceNativePreview(props.display);
-  return props.exportCanvas === true && [PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION]
+  return props.exportCanvas === true && [PIECE_BITMAP_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION]
     .includes(input?.candidateProfile) ? null : input;
 }
 
@@ -144,6 +146,18 @@ export function recordPieceNativeMeasurement(input, state, ticket, blockIndex, k
   const { gap, lineHeight } = pieceNativeTypography(input, state.sizeIndex);
   const compositionHeight = input.plannedRows ? state.plan.totalHeight : input.blocks.reduce((total, _, index) => total + blocks[index].box.height, 0) +
     (input.rowGaps ? input.rowGaps.reduce((a, b) => a + b, 0) : gap * (input.blocks.length - 1));
+  if (input.candidateProfile === PIECE_BITMAP_PREVIEW_VERSION) {
+    // These Texts only supply the selected TextKit source. Their natural view
+    // height is not the bitmap's ink height. Whole-canvas pixel fit owns that.
+    for (let index = 0; index < count; index++) {
+      const { box, lines } = blocks[index], brand = index === input.blocks.length;
+      if (Math.abs(box.width - (brand ? input.contentWidth : input.width)) > 0.5 || lines.length !== 1 ||
+          lines[0].width > input.contentWidth || lines[0].end !== (brand ? 'Cocolon' : input.blocks[index]).length) {
+        return nativeReject(next, 'invalid_bitmap_source');
+      }
+    }
+    return { ...next, phase: 'geometry_checked', compositionHeight };
+  }
   const tolerance = 0.01;
   let overflow = compositionHeight > input.contentHeight + tolerance;
   for (let index = 0; index < count; index++) {

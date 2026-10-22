@@ -3738,3 +3738,16 @@ fresh Cocolon head69cedb8303b3dbe36ac3d9391381921bea90a17b/tree1d2b91a592f1f6f22
 関連既存JS3fileは362 PASS/FAIL0/skip0（新native結果をstubしたものではなく旧362件の回帰）。最初は検証VMの新named export未配線により失敗し、同じ許可済みrenderer test内のVM公開名を補完して解消した。最初の失敗を隠さず、local成功をiOS結果へ換算しない。新方式のJS/native/RN追加検査はまだ実装途中、CI未実行。
 
 この途中保存は、許可済み製品/test14pathの現全文をmanifestのlossless bundleへ保持する。remoteのactive source pathはまだ変更せず、未完成sourceを先行pushして一度CIを消費しない。bundleはWIPで未採用、restore時はbase69cedb83のpathとhashを照合する。次は新group検査追加と最小修正/静的確認→全許可source確定→新source既存push CI一回→原物回収と判定。追加source/別CIへ自動進行しない。通常保存/本人再表示/画像共有/実機未完、商品credit0、automatic_progression=false。
+
+
+## 101. 2026-10-22 — 承認済みbitmap実装確定・新source CI一回へ
+
+Mash承認済み入口§99の18path限定実装を確定する。新profile `piece.rn_bitmap_preview.prototype.v1`／inspection `piece.native_bitmap_canvas.v1` はiOSプレビュー専用。既存B9/catalog/font候補・本文/空白/段落・5独立metric・glyph資格を保持し、非表示RN Textと同じTextKit paintから透明scale1所有bitmapを生成する。local inkで既存式の配置pを決め、最終fractional phaseをCTMへ一度だけ入れ、整数cell copyで全canvasへ合成。同じimmutable CGImageを専用native viewのcontentsへ直に渡し、その実hostの全cell alpha占有と照合する。PNG/base64/Image decodeは製品経路に入れない。旧naturalText/nativeSとの外観差は§99の明示承認範囲であり、同画質の証明ではない。
+
+STRUCTURE_MAP_DELTA_PRESENT。新tracked file0／全tree1917のfile配置は維持し、既存native .mm内にPieceBitmapLayer/View/Managerと同moduleの生成/解放entryを同居させた。layer/viewは同一image/tokenを所有し、source/node/config/generation/deadline/unmount変更時に失効する。既存rendererはclosed wire読取とlazy manager、Cardは非表示測定Text→wholecanvas一回→token付きfitの別分岐、Layout/MeasuredWrapは新profileの許可だけを担当する。旧保存prototype.v3 readerと旧V4検査を保持し、正式admission/canSave/canExportはfalse。8秒wall+monotonic原期限、native90秒、各4096辺/4,194,304px、既存code-owned共有32MiBを保持。resource拒否は次fontの理由にせず、全sourceが妥当な最終ink overflowだけ既存順序の次候補へ進む。
+
+付随検証は既存test9pathへ追加し、新tracked fileを作らない。旧native195件は削除/成功化せず、旧V4失敗後も新bitmap44期待を別counterで実行する。provider解放の厳密testはCAへ渡さない別imageを用い、host imageはCAの最終参照まで予約保持する契約を検査する。新RN group12件は既存preview8を新profileで維持、raw RTL/bidi3と別host crop trap1。旧RN13件のJSON bytesとtest methodは同一。旧fixture JSON SHA256 `a0abedcfa4f61240ce26b1c9d4481848cff3bdaa6a12d6133a9bced0df92c01f`。新8画像と自然RN Text参照を別保存し、全cell一致と本人の可読性を混同しない。
+
+local既存CIと同じ13 JS suitesは957 PASS／FAIL0／skip0／cancel0（旧949＋新8、12.433秒）。TypeScript5.2.2を既存disposable依存から使用した。初回はNODE_PATH未設定で14件失敗し、同じ既存compilerを指定して解消。関連3suite370 PASSは部分集合なので合算しない。新preview fixture testの挿入位置が旧VM preludeを壊した失敗はEOF配置へ修正し、957成功を得た。RN entry/Card/rendererのJSX parse diagnostic0。native sourceとrunnerのSHA pin一致、旧instrumentation104guard/3reset/lexical projection一致、旧RN13 method保持を静的確認した。読取担当3名によるsource reviewの具体的指摘（host設定/source windowと最大行数/node交換/lazy登録例外/明示category宣言/provider test）を補修済み。UIKit compile／新44／新RN12／新画像の成功はまだ主張しない。
+
+このsource pushで承認された既存CI一回へ進む。現在CI0/上限1、run ID取得後に同じ一回を記録し、原物とログ/画像を回収して判定する。旧V4の既知19失敗は失敗のまま残し、新groupとの分母を混ぜない。今回workflow/RN patch/Pod/依存/API/DB/本番/main merge0。未達なら未採用STOP、追加修正/追加CIへの自動進行なし。通常保存/本人再表示/画像共有/実機未完、商品credit0。途中source bundleは全文readback済み458e6b86のimmutable pointerへ置換し、失われるbyteはない。

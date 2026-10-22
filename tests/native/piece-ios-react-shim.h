@@ -6,13 +6,19 @@
 #import <dispatch/dispatch.h>
 typedef void (^RCTPromiseResolveBlock)(id result);
 typedef void (^RCTPromiseRejectBlock)(NSString *code, NSString *message, NSError *error);
+typedef void (^RCTDirectEventBlock)(NSDictionary *body);
 @protocol RCTBridgeModule <NSObject>
 @end
 #define RCT_EXPORT_MODULE(...)
 #define RCT_EXPORT_METHOD(...) - (void)__VA_ARGS__
+#define RCT_EXPORT_VIEW_PROPERTY(name, type)
 @class RCTUIManager;
 @interface RCTBridge : NSObject
 @property(nonatomic, strong) RCTUIManager *uiManager;
+@end
+@interface RCTViewManager : NSObject <RCTBridgeModule>
+@property(nonatomic, strong) RCTBridge *bridge;
+- (UIView *)view;
 @end
 @interface RCTUIManager : NSObject
 @property(nonatomic, strong) NSDictionary<NSNumber *, UIView *> *registry;

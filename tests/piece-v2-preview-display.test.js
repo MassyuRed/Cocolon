@@ -56,6 +56,8 @@ function deferredPieceResponse() {
   const promise = new Promise((yes, no) => { resolve = yes; reject = no; });
   return { promise, resolve, reject };
 }
+
+
 const controllerInput = extras => ({ ...options, request: request(), ...extras });
 const pieceTick = () => new Promise(resolve => setImmediate(resolve));
 const pieceHttp = value => ({ status: 200, json: async () => value });
@@ -927,3 +929,24 @@ for (const boundary of ['owner', 'input', 'key', 'disable', 'unmount']) {
     u.host.componentWillUnmount();
   });
 }
+
+
+test('bitmap harness keeps the original 13 fixture bytes and uses a separate exact-text group', () => {
+  const { execFileSync } = require('node:child_process');
+  const env = { ...process.env, PIECE_RN_CANVAS_PROFILE: 'output-grid-v4', PIECE_RN_BITMAP_GROUP: '0' };
+  const runner = path.join(__dirname, 'native/piece-rn-canvas-fixtures.cjs');
+  const legacyBytes = execFileSync(process.execPath, [runner], { env });
+  assert.equal(hash(legacyBytes), 'a0abedcfa4f61240ce26b1c9d4481848cff3bdaa6a12d6133a9bced0df92c01f');
+  const legacy = JSON.parse(legacyBytes), next = JSON.parse(execFileSync(process.execPath, [runner], { env: { ...env, PIECE_RN_BITMAP_GROUP: '1' } }));
+  assert.equal(legacy.length, 13); assert.equal(next.length, 12);
+  const previews = next.filter(row => row.evidence_set === 'bitmap_preview'); assert.equal(previews.length, 8);
+  for (const fixture of previews) {
+    const old = legacy.find(row => fixture.name === `bitmap_${row.name}`);
+    assert.ok(old); assert.equal(fixture.props.display.preview.renderer_version, 'piece.rn_bitmap_preview.prototype.v1');
+    const normalized = clone(fixture.props); normalized.display.preview.renderer_version = old.props.display.preview.renderer_version;
+    assert.deepEqual(normalized, old.props);
+  }
+  for (const raw of next.filter(row => row.evidence_set === 'bitmap_raw'))
+    assert.equal(raw.raw_text, legacy.find(old => raw.name === `bitmap_${old.name}`).raw_text);
+  assert.equal(next.at(-1).controlled_host_crop, true);
+});
