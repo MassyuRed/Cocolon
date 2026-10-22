@@ -3486,3 +3486,64 @@ strict JSON13件、元names/順序/blocks/観測入力projectionは前回と一�
 前回実装runのfinal/途中bundleと今回途中bundleの3件は、全文照合済み固定commit98b0e3f026977c766aa25bd1a8d3e87993fcfe5c/blob ee718a072773777d4497e48b95f11e1183332e41内の同JSON pointerへ置換し、元圧縮hash/bytes/member数を保持した。元bytesはGit履歴に残り、今回の完全原物bundleは直接内包する。現在のsource/test/workflow15pathがCI開始時と一致し、API head a536e50e不変も確認した。同pushの既存phase6 run39692007783はcontract-guards 1job successであり、Pieceの追加診断CIへ加算しない。
 
 今回最終同期は資料4fileのみ、STRUCTURE_MAP_DELTA_NONE（既存test-only scalar補足以外の実構造不変）。07は本単位の更新対象外。root華恋だけがwriter、補助3担当はread-only。DB/SQL/user rows/API/本番/配布/main操作0。PRIMARY_OUTCOME=BLOCKER_NARROWEDは「境界supportの差を実測し、単なる反転flag不一致/一律Y移動だけでは説明できないことを区別した」範囲で、商品品質credit0。次の未完exact1は、この出力alpha support差を生む既存参照合成と自然layer対応の直接修復案の設計。根因/検証済み修正案は未成立で、追加診断family・同source再実行・次CIへ自動進行しない。通常保存→同owner再表示・admission・写真保存共有・実機受入れと10/22保存目標は未完了。bounded_work_complete=true、formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=falseを維持して停止する。
+
+
+## 97. 2026-10-22 — V4参照画像の補間指定を揃える直接修復候補（未適用・新CI判断待ち）
+
+### 97.1 現在地・事実・推論
+
+Mashの新しいPiece残件続行指示を受け、入口§96.5の次exact1「既存参照合成と自然layer対応の直接修復案」を具体化した。開始Cocolon PR30 head c3929573a0e1b355f5de372a3130b92ee83ce986、API PR3 head a536e50ee284785f585ac73329ef2947dca8bba9。recursive tree1917entry/truncated=false、local materialized98fileのblob一致/差分0を確認。添付txt/CI39692007906原物、Karen-Diary指定3file、前提入口・作業ルール・恒久incident全文、全体設計01と01A/B/Cの全体flow/責務/関連file、三中核共通map/Piece map、最新weekly20261017のP-W1〜3/末尾結果、実source/patch/test/runnerを照合した。巨大地図全体や1917entry全実ファイルの逐語精読を主張しない。System Context prepareはtask_profiles.json未materializedで終了code2、technical entryの原典直接read fallbackを使用し生成context更新/採用0。Supabaseはproject一覧readのみ、cocolon-project ACTIVE_HEALTHY。user rows/SQL/RPC/migration操作0。
+
+実測は前回のまま：実RN stage83の61件すべてでactual alpha1〜9/参照非占有、自然bbox上端−1cell・高さ+1/+2。flip/scale/opacity一致・q/CTM残差0で、一律Y移動だけでは説明できない。現sourceのPiecePixelsImageはCGImageCreateのshouldInterpolateをfalseへ固定する一方、自然layerはlinear filterを要求し、参照layerは同じlinearをコピーする。自然paintと参照paintはpatchの同じTextKit二呼出しを共有している。
+
+AppleのCGImageCreateはshouldInterpolateを画像補間の指定、CALayer minificationFilterは縮小filter、linearは線形補間と説明する。しかし、この二指定の優先関係・opaqueな自然backingの補間値・今回の61件の根因を公開資料だけでは確定できない。今回の「補間の違いが薄い輪郭差を生む」は根拠のある**修復仮説**であり、原因確定/修復済み/成功保証ではない。前回§95で根拠なく補間を決め打ちしなかった判断を遡及誤りにせず、今回取得済みの61件の輪郭support差を根拠に、明示的な一候補へ絞った。
+
+別系統のquote80pt/stage15は3481×1285＝4,473,085pixelが元4,194,304pixel上限を超えるとsource照合した。本案でこの拒否を解消するとはしない。standalone19FAILはcall別operandがないため、すべてが同じ補間原因とは扱わない。
+
+### 97.2 適用前に固定したexact candidate
+
+推奨は既存V4参照画像の補間だけを有効にする一案。新renderer/version/familyを作らず、既存containment.prototype.v2/selected_line.v4内の新source候補として試す。旧未採用source・元失敗・counter・原物は維持する。
+
+```diff
+-static CGImageRef PiecePixelsImage(PieceOwnedPixels &pixels) {
++static CGImageRef PiecePixelsImage(PieceOwnedPixels &pixels, bool shouldInterpolate = false) {
+ // CGImageCreate の shouldInterpolate に固定falseではなく引数を渡す。
+-  CGImageRef expandedImage = PiecePixelsImage(native), clippedImage = NULL;
++  CGImageRef expandedImage = PiecePixelsImage(native, true), clippedImage = NULL;
+-  clippedImage = PiecePixelsImage(clipped);
++  clippedImage = PiecePixelsImage(clipped, true);
+```
+
+上記二呼出しの変更はV4関数だけ。V3の同名二呼出しは既定falseのまま。providerの所有権/解放順序/割当buffer/寸法/budget、自然Text/layer、opaque backing非読取、CTM/clip、全cell alpha>0完全一致、A/B/C厳密union、wire20field/version/token、8秒/90秒/4096辺/4Mpixel/32MiBを維持する。alpha閾値・許容差・固定1px追加・差の無視は0。V4のfilter後B/maskが変わるため、その後のfont/配置が変わる可能性はある。参照を変えるだけで合格を保証したとはしない。
+
+候補native96,744byte/SHA256 f3dadd39774bfaf3886dc180e4a5be55a165f2918194b26614aa75af87241340。元preimage SHA256 6250785b9d9d09e9fdf293ff78b48134995c5210ab5c37e73551027753902111。既存runnerはこのsource preimage pinの1箇所だけを更新し、候補19,974byte/SHA256 d71f0677b7648f229745597cb2140955a57fee94cacd5a405bcec04fb1e96259。診断観測/記録field/処理/guardを追加しない。候補全文2file・patch・局所確認・instrumentation map・実補助reviewをmanifestのios_preview_v4_interpolation_repair_proposal_20261022.lossless_candidate_bundleへ可逆保存する。現在のtracked製品/runnerへは未適用。
+
+局所確認はbash -n、既存埋込Python構文/build関数の隔離実行、旧→候補の注釈逆射影一致、runner差がhash1箇所だけ、元104guard全式/順序・3reset・既存観測数/比較if/NO不変を確認した。UIKit/ObjC++ compile/描画/CIは未実行。これらの静的確認を画像一致・8秒内成功・195成功へ換算しない。read-only補助2担当は実行候補として具体的で、静的な重大blockerなし、商品routeに合うと判断。別モデルPro/Ultra審査の成立は主張しない。
+
+### 97.3 今回の判断対象・実行上限・終了条件
+
+製品の純粋な内部修正に毎回承認を求める扱いへ戻さない。ただし旧§96の承認は原因調査＋一回CIで終了し、製品/patch不変更・結果後の修復/次CIへ自動進行しない境界だった。本候補のnative変更と新source一度CIをその消費済み診断承認へ含められない。Rule18 §11.3 LEVEL3(3)(4)(6)の新envelope/allowed effect/STOP境界の判断として、**この具体候補の適用と付随CI一回**をMashへ確認する。GitHub接続許可や同じ比較契約の再承認ではなく、単独診断CI例外をもう一度提案するものでもない。一般ruleは変更しない。
+
+| 項目 | 限定範囲 |
+|---|---|
+| 適用後のexact paths | source1：ios/tempCocolon/PieceTextMetrics.mm、runner1：tests/native/run-piece-rn-canvas-ios.sh、既存資料4：本入口/manifest/Piece map/weekly20261017。計6、新tracked0 |
+| 実行owner/環境 | root華恋一人、PIECE_WORK_ALLOWED。補助担当はread-only。原典と候補preimageをfresh確認して適用 |
+| 実行 | 新source pushによる既存CI一回。workflow/job追加0、Actions rerun0。同source再実行/結果後のsource追加修正0 |
+| 検査 | 旧175＋新V4 20の195期待を維持、旧V3 20は明示未実行。元13names/順序/本文/旧saved DTO、元JS949を保持。fault拒否は目的の経路到達を確認 |
+| 成功/不成立 | 全alpha一致と元各期待・元上限を評価。新preview/PNG/fitは実際の成立数で記録し、未達は候補未採用。quote資源拒否の残存を含め、部分改善を全合格や通常保存へ昇格しない |
+| 終了 | 成否/compile/infra不成立を問わず一回で閉じ、元jobログ/report/PNG/診断map/取得可能原物を保存して停止。条件緩和/次診断/別修復/追加CIを自動開始しない |
+| 費用・期間・負担 | 既存Actions使用量一回。前回全6job約25分は参考で所要保証なし。新依存/service/購入/定常費用/Mash端末操作0 |
+| 対象外 | quote資源方式変更、admission、saved版切替、通常保存/同owner再表示、写真保存/共有、API/DB/SQL/本番/配布/main変更 |
+
+承認後も根因確定は実比較の結果で判断する。補間を有効化して差が減っても、他のguard/資源/時間/paint対応が未達なら未採用のまま。正式renderer admission→同採用版saved key/profile→InputScreen正式isSaveAdmitted→既存保存controller/API→同owner履歴/詳細というP-W1後続を再作成せず、現残件として保持する。
+
+### 97.4 今回の実効果
+
+今回反映は資料4fileだけ。source/runner/test/workflow/fixtureのtracked変更0、CI0、DB/API/本番/配布/main操作0。候補全文はmanifest内に未適用で保存。Piece map冒頭の古い「最新§92.2」を実際の最新pending§97へ訂正し、過去本文は履歴として保持する。STRUCTURE_MAP_DELTA_NONE（実製品構造不変、候補判断案内のみ）。07はmilestone-onlyにより今回更新しない。
+
+PRIMARY_OUTCOME=ADMINISTRATIVE_ONLY。新しい修復candidateを具体化したが実画像の新証拠/商品品質credit0。旧§96/run39692007906 counter1/failureと旧§94/run39683393855 counter1/failureは不変。新候補適用/CI counter0、approval_pending=true。formal_admission/product_acceptance/normal_save_reopen_complete/can_save/can_export/automatic_progression=false。10/22通常保存目標未完、10/23共有/10/24実機の予定は未達成として保持する。
+
+原典（2026-10-22確認）：
+- https://developer.apple.com/documentation/coregraphics/cgimage/init(width:height:bitspercomponent:bitsperpixel:bytesperrow:space:bitmapinfo:provider:decode:shouldinterpolate:intent:)
+- https://developer.apple.com/documentation/quartzcore/calayer/minificationfilter
+- https://developer.apple.com/documentation/quartzcore/scaling-filters

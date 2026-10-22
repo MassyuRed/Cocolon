@@ -1839,3 +1839,12 @@ native原境界62local拒否の61件はstage83の全logical1占有不一致、qu
 実境界62local拒否中stage83の61件は同call scalar全valid。最初の差は全61でactual alpha1〜9>0/参照非占有。自然bbox topは参照−1cell、heightは59件+2/2件+1、全bbox包含だが全mask包含は未証明。両contentsAreFlipped=true/geometryFlipped=false、scale3/opacity一致、q/CTM式残差0。反転flag不一致や一律Y移動だけで説明する根拠はなく、参照補間falseの因果/自然backing処理は未確定。残1件はquote80pt stage15、4,473,085pixel/4M超過、比較未到達。閾値/上限/期待値/期限の緩和0。
 
 全6元ログ＋guard1job元ログ、元report/PNG/map/xcresult root/全archive台帳/独立レビュー等を可逆保存。完全原ZIP58,482,322byte/994memberもSHA256一致で保存済み。旧run大bundleは全文照合済み固定98b0e3f0の同pointerへ保持。observation_success=trueと元CI/product failureを分離。原因調査の承認単位完了、新counter1/上限1・rerun0・source追加修正0、資料4のみSTRUCTURE_MAP_DELTA_NONE。BLOCKER_NARROWED・商品品質credit0、通常保存/本人再表示と10/22目標未完。直接修復案未成立・未実装、追加修復/CI/診断familyへ自動進行せず停止。
+
+
+##### 5.6.25 V4参照の補間指定を揃える直接修復候補（未適用）
+
+入口§97/manifest v129。旧§96の一回診断結果/失敗/counter1を保持し、新しい続行指示から直接修復候補を作成。native helperの補間引数を既定falseにしV4二参照だけtrue、旧V3はfalseを維持する。実測61件の薄い輪郭差と整合する修復仮説で、原因確定/修復済みではない。自然Text/backing非読取・全alpha>0完全一致/union/入力/195期待/元全上限を維持する。filter後Bによりfont/配置が変わり得る。quote80pt4M拒否と単体19FAILの未特定原因は残る。
+
+候補source全文96,744byte/SHA f3dadd39…、runnerはhash pin一箇所だけの19,974byte/SHA d71f0677…、patch/局所確認/補助reviewをmanifestへ可逆保存。bash/Python/build注釈逆射影/104guard全式順序/3resetを確認、ObjC++/UIKit/CI未実行。旧診断承認を新source修復/次CIへ流用せず、Rule18§11.3と入口§96の消費済み単回停止境界に基づき、候補適用＋新sourceの既存CI一回を具体判断待ちとする。新診断family/条件緩和は提案しない。承認後scopeはnative1/runner1/資料4の計6path、新tracked0、rerun0、結果保存後停止。
+
+今回資料4fileのみ、tracked製品/test/workflow/CI/DB/API0。STRUCTURE_MAP_DELTA_NONE、ADMINISTRATIVE_ONLY、商品品質credit0。P-W1通常保存/同owner再表示・P-W2共有・P-W3実機/10月管理点は未達のまま、formal_admission/can_save/can_export/automatic_progression=false。
