@@ -2015,3 +2015,13 @@ Mashは「CMEEとモデルの分担、および三中核それぞれの具体的
 新規評価候補15checkpointは独立した5事例family、既存旅行/夕食教示由来のA01は4checkpointとも既知派生、補足2件の接続境界1を別枠にした。初回へ未来回答・採点条件を見せず、E02の補足枝は独立・問い残数0、更新種別の正解labelはモデルへ渡さない。最初の4場面（E02初回/別説明、Piece原入力、新規Analysis次期）で現CMEE対27Bの未接続proxyを各最大4出力比較する提案。本統合・追加学習を別段階にし、C0 END後に仮問いを付けない。
 
 実source照合で、Piece V2はoriginal normal/pre-questionのみでrefined補足未対応、Analysis pureも補足2件以上を拒否、IF/Savedはruntime未実装と確認。全体現在地へ関連差分だけを置換し、観測学習READMEの再開先を更新した。Piece最新CIの限定TECHNICAL_CREDITは既存週次原記録どおり保持し、商品品質credit0と区別した。実行は今回なし、推論/重み学習/GPU/課金/製品コード/API/DB/配置/実機/モデル採用0。資料・fixtureの構文/参照/露出分離/現wireとの整合とread-onlyレビューを確認。STRUCTURE_MAP_DELTA_NONE（実ownerと製品接続変更0、分担は案）、ADMINISTRATIVE_ONLY、商品品質credit0。source確認点はCocolon 5d14a293…／API a536e50…、GitHub保存と後読確認はこの記録を含むrevisionから解決する。
+
+#### 5.6.39 10/23 — 稼働版差を確認し、Piece限定のAPI配置候補へ分離
+
+P-W1の再開点を入口§116/map§65.59へ固定した。既承認workspaceのread権限を配置ownerから確認し、再承認せずRenderを照会。稼働版は10/10の5c8bd8e5/dep-db50bcd9fdbs73b5dgn0、app:app・autoDeploy off。明示candidateへのsave/quota/delete登録も旧版にはなく、PR3最新にだけ存在した。単なるenv切替やrenderer部品の再実装では通常保存へ届かない。Supabase Piece8tableのRLSと8RPC signatureのEXECUTE範囲をmetadataだけ確認し、本人row/業務RPC/DDL/再適用は0。
+
+[API Draft PR4](https://github.com/MassyuRed/mashos-api/pull/4)は稼働版を親に、既承認最新Piece製品5+対応test4を同一byteで移した限定配置候補08875643。Emlis/Analysis後続変更を巻き込まず、default legacy/OFFは維持する。既存workflowをこの比較baseへのPRだけへ結び、唯一CI39803099295 attempt1は00:15:28〜00:19:20 JSTにsuccess。原23 pytest invocation合計1793 PASS/FAIL0/SKIP0（shared/default116/native persistence46を含む）。PR合成merge407bf140のtreeは候補headと同一。実CMEE/隔離SQL、Auth/source/HTTPは合成で本人実Authではない。初回ec66a99bのref作成ではCI0であり、failed/retried runではない。新runner/依存/fixture/期待の変更0、追加CIへ自動進行しない。詳細と原log可逆保存は入口§116.4/manifestへ同期。PRIMARY_OUTCOME=TECHNICAL_CREDITは限定source候補のみ。
+
+次の採用案は既存APIへの同候補配置＋明示factory起動、TTL600秒（未採用の新提案）と明示iOS renderer、private preview/save/owner read/deleteのみ。public/exportはOFF。ready根拠と限定使用範囲を確認して個別承認へ出し、CIやDB存在だけでreadyを自己認定しない。設定はapp単位で同APIの全認証sessionへ及ぶため、本人1件試験をowner限定有効化と呼ばない。技術的ready不足は承認で免除しない。実本人Auth通常保存1件→同owner GET/履歴/詳細が到達先であり、source候補PRをその成功としない。M5全体を新たな事前gateへ増やさず、独立残件として維持する。
+
+10/22通常保存目標は未達。10/23両OS共有も未成立で、P-W1稼働採用/本人往復、P-W2実OS/Android/backend receipt、P-W3本人端末/商品受入れが残る。10/24にこの実残差と10/31管理線への影響を戻す。新しい公開目標・自動延期・商品合格・進捗率の加点は行わない。資料5path/STRUCTURE_MAP_DELTA_NONE、manifest旧pinを今回現物へ同期。配置/設定/本人データ/実機/main merge0、product_credit=0、automatic_progression=false。

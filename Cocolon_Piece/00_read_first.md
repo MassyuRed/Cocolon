@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§115.2／map§65.58.2／weekly§5.6.38.2／manifest v155。承認済み起動条件修復の唯一CI39780623108で、新export正常8PNG＋拒否6が全成立。旧RN13/12/17の39項目・旧59PNGは一致、JS979/新native44成功。旧失敗を含むCI全体はfailure。今回の限定検証完了、実Auth通常保存/実OS/本人実機は未完です。**
+**最新は入口§116／map§65.59／weekly§5.6.39／manifest v156。稼働API5c8bd8e5を土台に、既承認Piece製品5＋test4を移したDraft PR4（08875643）を準備。一度CI39803099295は1793 PASS/FAIL0/SKIP0。稼働版の候補factoryにはsave/quota/delete未接続と確認した。配置・設定・実Auth保存/本人再表示・実OS・本人実機は未実施、採用案は個別判断待ち。**
 
 ### §87の設計時点（履歴）
 
@@ -4020,3 +4020,51 @@ JSはCI13suite979 PASS/FAIL0/SKIP0/cancel0、18,144.607112ms。前local979や旧
 原artifact12428841022のZIP71,895,632B/1129member、SHA256 eb8f5f2f26d669dfeca664a5d7130311197bf9a5cb608961a833b46e34d12a1cをGitHub digestへ照合して全文保存した（libfile_f1c82fb1e9648191968c675ed051fb82 v0、local metadata反映済）。全1129memberのbytes/hashと83PNGの正確な原ZIP参照をmanifest同単位へ保持する。全6原joblogs/元4report/xcodebuild原log/xcresult原JSON/run-job-artifact metadata/各監査/Pod原artifactをfinal_evidence_bundleへ可逆内包した。画像bytesは原ZIPから復元でき、重複内包しない。signed URLは保存しない。
 
 PRIMARY_OUTCOME=TECHNICAL_CREDIT、bounded_work_complete=true、validation_success=true（今回限定の実PNG/拒否条件）、product_credit=0。§114の修復単位とP-W2 iOS保存画像書出しsource検証を閉じる。通常本人詳細のfresh GETと操作UIはJS source検証、実RN savedは合成DTOであり、実Authの本人保存/再表示・実Photos保存/Share・Android新版export・backend receipt・P-W3本人実機の商品受入れは未完。次のfirst unfinishedは新rendererの稼働供給採用と実Authの通常保存→同owner履歴/詳細一往復である。今回結果資料4pathはSTRUCTURE_MAP_DELTA_NONE、責務地図は既存§65.56を維持。API/DB/flag/env/deploy/実OS/main merge効果0、両PRはDraft/open/unmerged、追加修復/再CI/次Gateへ自動進行しない、automatic_progression=false。
+
+## 116. 2026-10-23 — 稼働版を土台にしたPiece限定のAPI配置候補
+
+### 116.1 今回の再開点と開始条件
+
+Mashの「Pieceの残件作業を進めて。モデル制限は無し」を受領。実行ownerはroot華恋一人、補助担当はread-only。Rule18§0AのPieceモデル制限解除を適用し、今回のread-only現在確認・既承認sourceの可逆的な候補組立て・既存test一回・GitHub反映はLEVEL2/standing delegation内。production配置、起動構成採用、本人データ操作、実機、releaseはこのscopeに含めない。必要性はP-W1の実Auth通常保存→同owner履歴/詳細を妨げる未配置接続を解消するための直接準備。未使用factory/helperを新設しない。
+
+fresh Cocolon818d428dとAPIa536e50e、AGENTS、全機能最新情報全文、必読incident全文、Karen-Diary必読3file、作業入口/CURRENT_RULES/Rule18/開始・出力Gate、全体設計01/全file地図01A/B/C、current_structure/00と02、最新weekly20261017§5.6・最新追補を確認した。大量履歴の全blob精読や全機能再検証は主張しない。System Contextは凍結snapshot・fresh clone検証未成立のため準備結果を採用せず、fresh原典の直接読取fallbackを使った。既存生成物を手編集しない。
+
+### 116.2 稼働先とDBの今回確認
+
+API配置owner ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md §11にある2026-10-03の「まっしゅ's workspace」読取許可を確認して継承。Renderの初回unscoped読取はworkspace未選択を返したが、新規workspace選択や再承認をせず、既承認workspace IDをrequestへ明示して照会した。
+
+- 対象：workspace tea-d4pp61idbo4c73bf4hkg、既存mashos-api srv-d4ppfpm3jp1c73952bj0。
+- live deploy：dep-db50bcd9fdbs73b5dgn0、commit5c8bd8e5d7f876335eb840ceee26883a030a34a5。10/10 18:32:12 JSTにliveとなった同版が今回もlive。statusは配置管理情報であり、今回のHTTP健康・本人業務操作成功ではない。
+- rootDir=ai/services/ai_inference、起動=uvicorn app:app --host 0.0.0.0 --port $PORT。linked main、autoDeploy=no/off。設定変更・deploy0。同repoのweb serviceは1件、他は既存worker1/cron3。別の既存開発web APIは確認できなかった。
+- live app.pyのapp=create_application()は既定legacy/OFF。liveの明示候補factoryはsave_requested/save_ready/owner_delete pairを持たず、save/quota/deleteのhandler登録がない。flagsだけ変えて新renderer発行・private保存へ進めない。
+- Supabase cocolon-projectのpg_catalogをread-only確認。publicのPiece8tableはすべてRLS enabled。Piece RPC8signatureはpostgres/service_roleのみEXECUTEで、anon/authenticated/PUBLICのEXECUTEなし。既存6migrationを再適用せず、業務RPC・row読取/write・DDL0。定義/ACLの存在を稼働ready/実Auth成功へ換算しない。
+
+liveからPR3最新までの変更120fileのうち、Piece候補の製品差分は既存5fileだけ。api_piece_v2.py、api_app_bootstrap.py、Piece preview/service/contract、隔離DB conftest/requirementsはliveと同blob。最新APIを丸ごと配置するとEmlis/Analysisの未配置変更も入るため、今回の配置候補はliveを親に分離した。
+
+### 116.3 レビュー可能な候補と検証
+
+[Draft PR4](https://github.com/MassyuRed/mashos-api/pull/4)、base=agent/piece-runtime-live-base-20261023@5c8bd8e5、head=agent/piece-private-runtime-candidate-20261023@08875643dee17e7f2213060b13c53590ef2bb236。これは限定配置用の候補であり、三中核の通常開発ownerは従来PR3/PR30を維持する。
+
+製品5はapp.py、api_contract_registry.py、api_emotion_piece.py、api_piece_compat.py、piece_v2_runtime_control.py（prefix ai/services/ai_inference/）。test4はtest_b12_shared_preview_composition.py、test_b14a_piece_preview_composition.py、db/test_b10_preview_application_native.py、db/test_b12_shared_preview_native.py（prefix ai/tests/piece_v2/）。9fileはすべてa536e50eの既承認原blobと全byte同一。新しい製品logic・factory・CLI・env・dependency・public contractは追加していない。default legacy compositionを維持し、明示candidateだけが既存private save/quota/owner read/deleteへ接続する。
+
+初回ec66a99bはref作成だけではpush CIが登録されず、CI executions0。既存workflowの候補branch push行を取り除き、既存検証を比較用base branchのDraft PRへ結ぶpull_request条件4行（opened/synchronize/reopened）へ置換した。08875643のPR synchronizeにより唯一run39803099295 attempt1が起動。製品9fileは初回から不変、変更10pathは製品5+test4+既存workflow1だけ。新runner/fixture/期待/分母の変更0、rerun0。CI失敗時は原actualを保存し、追加source修復・追加CIへ自動進行しない。
+
+[CI39803099295](https://github.com/MassyuRed/mashos-api/actions/runs/39803099295)の結果は下の116.4へ記録する。過去CI39780623108の新export8+拒否6、旧native19失敗/RN失敗はそのまま保持し、この候補CIへ成功数を加算しない。添付原ZIPの8組も独立RGBA全画素比較で不一致0と確認したが、新実Auth/端末成功ではない。
+
+### 116.4 今回の最終結果と次の具体案
+
+唯一CI39803099295 attempt1は2026-10-23 00:15:28〜00:19:20 JSTにcompleted/success。job119909025173の全step成功。原pytest summary23 invocationを個別集計し1793 PASS/FAIL0/SKIP0。警告付きsummaryも含め、同じ検査を分割加算して二重計数していない。最終shared/default contract116成功、shared→native disposable persistence46成功を含む。全repository suite成功ではない。最初の集計scriptはwarningを含まない10summary/915だけを抽出していたため、原23summaryを照合してparserを補正した。製品/test/期待/実行回数は不変。
+
+実checkoutはPR合成merge407bf140ac1bcc6f89c23991d1a4f5a7b7214aadだが、GitHub git commitのtree98a0dfa9cd780c0a141bce51a0f1f6625a3f210dは候補head08875643と完全同一。run metadataのheadも08875643。実CMEE/review/response projection/PostgreSQL16.15 native SQLを通し、Bearer/source IO/active-user Auth/PostgRESTは合成。実listener/lifespan/live Supabase Auth/本人DB/RN/端末は未検証。log中の制約違反は拒否検査の期待したDBエラーであり、pytest失敗へ換算しない。原decoded log841620B/SHA25636b7597968b4ce585c05ce4f43fadd7b21de41cb2aa14a3be66a5fe97b3e1396をmanifest同単位へgzip/base64で可逆保存する。
+
+PRIMARY_OUTCOME=TECHNICAL_CREDIT。稼働版を基準に再利用可能なPiece限定source/test候補が成立した。source_preparation_complete=true、validation_success=true（この候補の限定隔離検証）、runtime_adopted=false、live_auth_roundtrip_complete=false、product_credit=0。追加source修復/追加CI/rerun0。稼働供給採用と実Auth通常保存/再表示は未完。
+
+稼働採用の候補設定はpreview TTL600秒（10分、新採用案であり既存採用値ではない）、renderer=piece.rn_bitmap_renderer.ios.v1。既存factoryへpreview/save/owner_read/owner_deleteのrequested/ready strict pairだけを渡す。public write/read、visibility、exportはOFF。ready値は今回のDB存在/CIだけで自動成立させず、対象環境の前提と限定試験範囲を照合し、別のMash承認後にのみ採用する。TTLはpreviewの有効期限であり、native構築/preview fitの元8秒と完成saved保持を変えない。
+
+この設定は既存resolverのapp単位の変更であり、同じAPIを使う全認証sessionへ実効flagが投影される。本人の保存1件という検証上限は、利用者をMash一人へ限定する仕組みではない。owner allowlistを新設せず、全認証利用者に及ぶ有効化として承認scopeを明示する。技術的readyの前提（migration/atomic RPC/quota/monitoring/安全なowner projection）が対象環境で不足する場合は、Mash承認があってもtrueへ強行せず未有効化で具体的不足を返す。
+
+稼働変更はPR4 exact commitを既存APIへ配置し、既存create_application(piece_preview_configuration=...)を明示呼出しする起動構成へ変更する案。新service/料金/DB migration/main merge/共有public/exportの有効化を追加しない。既存設定値・秘密値を転載せず、Emlis/Analysis設定を変えない。通常入力→明示preview→private保存1件→同owner GET/履歴/詳細を同じid/version/3hash/rendererで照合する。本人入力の選択と認証は本人の通常sessionを使い、service_roleで本人Authを代用しない。owner-deleteを使う実削除は別の本人明示操作に限り、この確認で自動削除しない。結果不明では元の同一keyで確認し、別Pieceへ再生成して置換しない。
+
+M5全体・Nexus/tutorial・全公開経路の切替はweekly§5.6.3の独立残件を維持し、この候補組立てへ新しい事前gateとして追加しない。P-W1通常保存/本人再読は未完、P-W2実Photos/Share/Android新版/backend receipt、P-W3本人実機/商品受入れも未完。10/22保存・10/23共有目標の達成を今回の準備で認定しない。外部有効化と本人データ操作はRule18§11.3のproduction deployment/user dataを含むため個別承認対象。既承認workspace読取・既適用SQLの再承認は求めない。
+
+今回資料5pathはSTRUCTURE_MAP_DELTA_NONE（既存責務/route/contractを新設せず、候補のprovenanceと残件を同期）。manifestのcurrent_premise/current_entryは今回の現物hash/bytesへ合わせ、既知の旧pin不一致を解消する。PRIMARY_OUTCOME=TECHNICAL_CREDIT（候補source/限定検証のみ）、product_credit=0、runtime_adopted=false、automatic_progression=false。

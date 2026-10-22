@@ -16,7 +16,7 @@ automatic_progression: false
 
 ## 0. Current conclusion
 
-**最新は入口§115.2／map§65.58.2／weekly§5.6.38.2／manifest v155。承認済み起動条件修復の唯一CI39780623108で、新export正常8PNG＋拒否6が全成立。旧RN13/12/17の39項目・旧59PNGは一致、JS979/新native44成功。旧失敗を含むCI全体はfailure。今回の限定検証完了、実Auth通常保存/実OS/本人実機は未完です。**
+**最新は入口§116／map§65.59／weekly§5.6.39／manifest v156。稼働API5c8bd8e5を土台に、既承認Piece製品5＋test4を移したDraft PR4（08875643）を準備。一度CI39803099295は1793 PASS/FAIL0/SKIP0。稼働版の候補factoryにはsave/quota/delete未接続と確認した。配置・設定・実Auth保存/本人再表示・実OS・本人実機は未実施、採用案は個別判断待ち。**
 
 ### §99の判断案（履歴）
 
@@ -3456,3 +3456,21 @@ source fbf0deaec8679ebf6a58f53e0702d2e437318680/tree26d330c5の変更20pathをGi
 #### 65.58.2 最終：新8PNG/拒否6成立、旧失敗を保持
 
 入口§115.2/weekly5.6.38.2/manifest v155。唯一CI39780623108/source d2e1244c/attempt1は全体failure、今回counter1上限1/rerun0/source修復0。新export14は全成立、8PNGは全canvas oracleへbytes/RGBA一致、拒否6（実mutation4を含む）成立。元開始8112.953ms後も同saved像を撮影、全構築8秒内。旧13/12/17の39項目・旧59PNG一致、全83PNG decode可。JS979/新native44成功、旧native195=176PASS19FAIL、旧V3別20未実行。XCTest4method/失敗1、59summaryは旧methodのみ。両OS export実compile成功。71,895,632B原ZIP/1129memberをdigest一致で全文保存、6logs/4report/各監査等をmanifestへ可逆保存。TECHNICAL_CREDIT/限定validation_success=true、product_credit0。P-W1稼働本人保存/実OS/実機未完、今回単位終了。結果4資料のみSTRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
+
+## 65.59 2026-10-23 — P-W1を阻む稼働版差とPiece限定API候補
+
+現在の未完了ownerは入口§116、weekly§5.6.39、manifest v156。既承認workspaceのRender readでlive5c8bd8e5/dep-db50bcd9fdbs73b5dgn0、起動app:app、autoDeploy offを確認。live明示candidateにはsave/quota/delete登録がなく、後続PR3にある既存5sourceの接続が未配置だった。SupabaseのPiece8tableはRLS enabled、8RPC signatureはpostgres/service_roleのみEXECUTE。業務RPC/本人row操作/再migration/配置は行っていない。
+
+配置候補[API Draft PR4](https://github.com/MassyuRed/mashos-api/pull/4)はliveを親に、最新a536e50eのPiece製品5+test4を全byte同一で移した08875643。Emlis/Analysis後続変更は混ぜず、従来の開発正本PR3/PR30は維持。既存責務は下表、STRUCTURE_MAP_DELTA_NONE。
+
+| 既存owner | 今回の候補に含む責務 |
+|---|---|
+| app.py | 明示構成だけ旧Piece/reflection quotaとpublish/cancel四writeを除外、既定legacy/OFFは維持 |
+| piece_v2_runtime_control.py | preview/save/owner-read/owner-deleteのstrict requested/ready pair、既存handler登録。TTL/rendererの既定なし |
+| api_contract_registry.py | 明示candidateのsave/quota/delete契約。既定公開registryは維持 |
+| api_emotion_piece.py / api_piece_compat.py | candidateだけ旧quotaの登録を除外 |
+| 対応既存4test / 既存隔離workflow | 同じ候補のdefault/candidate、実service/隔離SQL一往復。Auth/source/HTTPは合成、live本人成功ではない |
+
+最初のref作成でCI0、既存workflowを比較用baseへのPR発火へ結び直し、CI39803099295 attempt1はsuccess、23 invocation合計1793 PASS/FAIL0/SKIP0。合成merge407bf140のtreeは候補08875643と同一。実CMEE/隔離SQL、Auth/source/HTTPは合成。原logはmanifestで可逆保存、詳細は入口§116.4。旧native/RN失敗と前回新export8/拒否6の範囲を変更しない。
+
+次は同候補の稼働採用値（提案TTL600秒/明示iOS版、preview/save/read/deleteのみ、public/export OFF）と起動構成変更の個別承認。600秒は新提案で、native8秒や完成saved保持とは別。readyはDB定義/CIだけで自動認定しない。有効化は同APIの全認証sessionへ及び、保存1件上限はowner限定ではない。技術的ready不足時は承認後も未有効化で停止する。通常本人Authでprivate保存→同owner履歴/詳細は未完。P-W2実Photos/Share/Android/backend receipt、P-W3実機受入れ、M5全体は残る。配置・設定・DB・実user操作・商品採用0、automatic_progression=false。
