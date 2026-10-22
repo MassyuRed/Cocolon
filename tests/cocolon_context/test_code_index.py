@@ -90,6 +90,7 @@ class CodeIndexTests(unittest.TestCase):
 
             def probe(command, **kwargs):
                 self.assertEqual(command[0], "scip-python")
+                self.assertEqual(kwargs["timeout"], 1800)
                 observed_commands.append(list(command))
                 return run_command(["node", str(entry), *command[1:]], **kwargs)
 
@@ -106,6 +107,23 @@ class CodeIndexTests(unittest.TestCase):
             self.assertEqual(observed["child"]["options"], "--max-old-space-size=8192")
             self.assertGreaterEqual(observed["child"]["limit"], 8192 * 1024 * 1024)
             self.assertFalse(result["output_exists"])
+            self.assertTrue(code_index.provider_failures({"runs": [result]}))
+
+    def test_typescript_provider_retains_budget_and_timeout_failure(self) -> None:
+        with tempfile.TemporaryDirectory() as raw:
+            root = pathlib.Path(raw)
+            expired = subprocess.CompletedProcess([], 124, "", "provider timeout")
+            with mock.patch.object(code_index, "run_command", return_value=expired) as run:
+                result = code_index.run_provider(
+                    {"run_id": "cocolon_typescript", "repository_key": "Cocolon",
+                     "family": "typescript", "required": True, "candidate_count": 1},
+                    [], {"Cocolon": root}, {"Cocolon": "c" * 40}, root,
+                )
+            self.assertEqual(run.call_count, 1)
+            self.assertEqual(run.call_args.kwargs["timeout"], 1200)
+            self.assertEqual(run.call_args.kwargs["env"]["NODE_OPTIONS"],
+                             "--max-old-space-size=4096")
+            self.assertEqual(result["exit_code"], 124)
             self.assertTrue(code_index.provider_failures({"runs": [result]}))
 
     def test_python_syntax_extracts_symbols_and_imports(self) -> None:

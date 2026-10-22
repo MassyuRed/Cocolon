@@ -83,6 +83,26 @@ remain in GitHub. The plain split `index_scip_run.py` has a known historical
 syntax error, but the actual code-index entry executes a hash-verified encoded
 payload. Do not misreport the unused split file as a current execution blocker.
 
+### 2026-10-23 bounded Python index deadline repair
+
+The first refresh at implementation `c19072d584b86f7fc7e768484b6260358c7ff617`
+([run 39868533336](https://github.com/MassyuRed/Cocolon/actions/runs/39868533336))
+passed all 34 doctor checks and both TypeScript index providers. The API Python
+provider had 1874 candidates and timed out at 1200 seconds (exit 124); prepare
+exited 2. No verify-only or current cache succeeded. Final implementation and
+material trees and remote heads were unchanged. Diagnostic artifact
+`12466027317` is failure evidence, not a current context.
+
+The minimum execution repair keeps the same pinned provider, heap, candidate
+set, generated schema, required coverage, failure handling, source pins and
+45-minute workflow cap. Only the Python indexing subprocess deadline changes
+from 1200 to 1800 seconds; TypeScript retains 1200. The verified encoded source
+and loader hashes are updated together. The unused historical split module is
+not the execution owner. Existing Python boundary testing and a TypeScript
+boundary check preserve timeout-as-failure. This finite adjustment does not
+guarantee completion; the new exact-head actual run decides whether the cache
+can be used. No successful old cache or partial Python output is substituted.
+
 ## Standard flow
 
 ```text
