@@ -10,7 +10,7 @@ automatic_progression: false
 
 # Cocolon Piece — Read First
 
-**最新は入口§110.1／map§65.55.1／weekly§5.6.35.1／manifest v147。明示iOS版source55430e4eの21path全文照合、一度CI39734534523開始。JS964成功、iOS新17条件は結果待ち。source固定・追加修復/再CI0、通常保存/共有/本人実機の完成は未確認です。**
+**最新は入口§110.2／map§65.55.2／weekly§5.6.35.2／manifest v148。明示iOS版の保存条件・saved reader接続をsource55430e4eの唯一CIで確認。JS964/新native44/新実RN17成立、画像8pair一致・saved期限後保持成立。旧失敗によりCI全体failure。稼働通常保存/新版共有/本人実機の商品受入れは未完です。**
 
 ### §87の設計時点（履歴）
 
@@ -3899,3 +3899,22 @@ STRUCTURE_MAP_DELTA_PRESENT。既存production6＋付随test8＋資料7の21path
 source55430e4ed57821ed725b13feba292d85a67b66a0（親7a6c6434/tree14c548a3）の変更21pathはGitHub全blob全文・変更集合一致。既存push CI39734534523 attempt1が開始し、今回counter1/上限1を消費した。sourceを固定し、原物回収と判定だけを進める。JS jobは964 PASS、iOS/native/RNは継続中。新17ケースとsaved元期限後の画像保持はまだ未確定。旧run39727150432の終了・counterを再利用せず、追加修復/再CI0。
 
 新source時点v146/blob1c2797e452f768835914fbac6fd8326c42447e69を全文照合できたため、旧bitmap二単位の4つの大きな原物bundleはその同一JSON pointerへimmutable参照を固定した。元bytes/hash/memberと履歴を維持し、今回結果を全文取得できる余地を確保する。今回のcheckpointは資料4pathのみSTRUCTURE_MAP_DELTA_NONE（sourceで更新した責務地図は維持）。正式商品採用・live通常保存・同owner再表示/共有/本人実機は未完、automatic_progression=false。
+
+
+### 110.2 最終：明示版preview/saved17条件成立、保存経路のsource接続を確認
+
+source55430e4ed57821ed725b13feba292d85a67b66a0の唯一CI39734534523 attempt1は2026-10-22 15:32:04〜15:55:05 JST、全6job終了、全体conclusion=failure。今回counter1/上限1、rerun0、CI開始後source修復0。新17条件の限定validation_success=trueと、旧失敗を含むCI全体failureを分ける。
+
+明示版piece.rn_bitmap_renderer.ios.v1のpreview8/saved8は全native_checked、本文・元段落・選択行・brandingと全logical1 alpha占有検査を満たした。previewは同tokenのcurrent fit=true/誤token=false、saved8件はfit=false/handle keys=[]。crop1は画像消去・native_bitmap_invalidated・fit失効の期待どおり拒否。構築/最終確認は全17件で221.246〜6482.381ms、元8秒を保持した。420 essayはpreview6283.610ms/saved6482.381ms、420aは3495.471ms/3777.398ms、全36pt。最初のsavedは構築613.869msで完成し、元monotonic開始から8103.191ms後も同mount・同imageを保持した。期限の再起算やsaved fit発行はない。
+
+新32PNG（完成16＋自然参考16）は全decode可。8組のpreview/savedは完成像・参考像の両方がbyte/RGBA/寸法一致し、さらに新32枚すべてが既存bitmapの同入力画像にbyte/RGBA一致した。旧13＋bitmap12は名称/順序と本文/行/phase/reason/font等39項目完全一致、旧27PNGも全byte/RGBA一致。runtimeの時刻/tagを含む元report JSON全体のbyte一致は主張しない。rootは8画像一覧と保存済みArabic原寸を確認し、新しい明白な欠け・重なり・反転を見なかった。自然RN TextのAA/細線同等性、本人実機の品質受入れは別である。
+
+新native44は全PASS・unique44・欠落/重複0、前回名順/判定一致。main→summary48.273075秒、元90秒alarm維持。旧195は176PASS/19FAIL、旧V3別20は従来の明示未実行。JSはlocal既存CI同一13suite964 PASS（16930.086392ms）、CIも964 PASS（22509.70222ms）、FAIL/SKIP/cancel0。両実行を合算しない。Android sourceとiOS実header/旧patch/standalone compileは成功、Android既存annotation18警告は保持。export2job successは主要build対象外guardを含み、今回新export build成功へ換算しない。
+
+XCTestは3method実行/失敗1。xcresult59 failure summaryは全て旧testWholeCanvasWithRealReactNativeに属し、新明示版17methodと既存bitmap methodのfailure summary0。source assertと独立監査を照合した。監査側でnative NSNumber由来の0/1をPython boolだけへ厳格比較した初回33型差は、その初回出力を保存して当該3項目だけboolまたは厳密整数0/1へ合わせた。製品/元XCTestの期待は変更せず、最終監査failures=[]。
+
+原artifact12407134086のZIPは70,304,655byte/1118member、SHA256 f2e3d6c7ebc4471ff494018ad239f4ec76d183aa47547fce9540e6c46e35d29eをGitHub digestへ照合して全文保存した（libfile_ce4f31caf9c08191878e012f58a381a8 v0、local metadata反映済）。全6job原logs・元3report・xcodebuild原log・run/job/artifact metadata・各独立監査・初回型差監査・結果等23memberはmanifestのfinal_evidence_bundleへ可逆内包する。全59PNGは保存済み原ZIPの正確なmember/path/bytes/hash参照から復元でき、全memberをZIP原本へ再照合した。現在manifestの全文取得可能性を保つため画像を重複内包せず、原画像bytesを削除・置換していない。signed URLは保存しない。
+
+PRIMARY_OUTCOME=SOURCE_CONNECTION_TECHNICAL_CREDIT、bounded_work_complete=true、validation_success=true、source_connection_complete=true。InputScreenの明示版eligibility→同mount/token fit→既存保存controller/API、および同版saved readerがsourceとして揃った。native_checked自体はcanSave/canExport=falseであり、hostの別条件を省略しない。新実RNのsavedは閉じた合成DTO、JS保存一往復はAuth/HTTP/native代替を含む。実Auth/稼働API/新renderer発行設定による通常保存→本人履歴詳細の成功や、正式商品採用を認定しない。
+
+次の未完は新renderer版を供給する稼働設定の採用と実Authによる通常保存→同owner履歴/詳細の一往復。P-W2の新版画像保存共有、P-W3本人実機受入れも残る。API/DTO/DB/SQL/flag/env/deploy/main merge変更0、両PRはDraft/open/unmerged。今回の新source単位はここで終了し、追加修復/再CI/別Gateへ自動進行しない。今回結果資料4pathはSTRUCTURE_MAP_DELTA_NONE、source段階で行った21path/STRUCTURE_MAP_DELTA_PRESENTの責務地図は維持、automatic_progression=false。

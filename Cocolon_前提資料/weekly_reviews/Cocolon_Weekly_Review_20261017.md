@@ -1945,3 +1945,10 @@ LEVEL2の新しいbounded source接続単位。production6＋既存test8＋資�
 ###### 5.6.35.1 明示iOS版sourceを反映、一度CI開始
 
 入口§110.1/map§65.55.1/manifest v147。source55430e4eの21path全文と変更集合一致を確認。唯一CI39734534523 attempt1、counter1/上限1、JS964成功・iOS/RN結果待ち。旧bundleを同一v146 immutable pointerへ維持、追加CI/修復なし。今回資料4のみで構造追加なし。通常保存→本人履歴/詳細の稼働完成、P-W2共有/P-W3実機・正式採用は未完。
+
+
+###### 5.6.35.2 P-W1最終：明示版source接続・実RN17を確認
+
+入口§110.2/map§65.55.2/manifest v148。明示版preview/savedとInputScreen eligibilityを既存controllerへ接続したsource55430e4eを唯一CI39734534523で確認。新native44/44、新実RN17条件が成立。savedは元8秒内完成後も8103.191msまで同image保持、saved fitなし。新32PNGは全8pair/既存bitmapにbyte/RGBA一致、旧27画像/旧25case logical fieldsも前回一致。4つの420は6.284/6.482/3.495/3.777秒、全36pt。JS964PASS。
+
+旧native19FAILと旧RN method59summaryを維持するためCI全体failure。新成功で相殺しない。原ZIP70,304,655B/1118member保存、原logs/元JSON/独立監査と59PNG原本member参照を可逆記録。限定SOURCE_CONNECTION_TECHNICAL_CREDIT、source単位完了/追加CI0。次は新renderer発行の稼働設定と実Authの通常保存→本人履歴/詳細、P-W2新版画像保存共有、P-W3実機。商品採用/稼働完成は未確認、API/DB/env/deploy/main0。結果4資料のみSTRUCTURE_MAP_DELTA_NONE、automatic_progression=false。

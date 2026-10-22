@@ -3392,3 +3392,10 @@ LEVEL2の新しいsource接続単位で、前回closed CIは再利用しない�
 ### 65.55.1 明示版source固定、一度CI開始
 
 入口§110.1/weekly§5.6.35.1/manifest v147。source55430e4eの21path全文・変更集合一致、唯一CI39734534523 attempt1開始、counter1/上限1。JS964成功、iOS/RN新17条件は未確定。source固定、追加修復/再CI0。旧原物4bundleは全文照合済v146同pointerへ保持し、元bytes/hash不変。checkpoint資料4のみSTRUCTURE_MAP_DELTA_NONE。live保存再表示/共有/実機/商品採用は未完。
+
+
+### 65.55.2 最終：明示版保存接続sourceと実RN17成立
+
+入口§110.2/weekly§5.6.35.2/manifest v148。source55430e4eの唯一CI39734534523 attempt1は全体failure、新source14は開始後不変。新実RN17条件は全成立（preview8/saved8/crop拒否1）、savedはfitなし・元開始8103.191ms後も同imageを保持。4つの420構築は6283.610/6482.381/3495.471/3777.398ms、全36pt/元8秒内。新32PNGは8組preview/savedおよび同入力既存bitmapに全byte/RGBA一致。旧13＋bitmap12の39項目、旧27PNGも前回一致。
+
+新native44/44 uniquePASS、旧195=176PASS19FAIL/旧V3別20未実行。JS local/CIとも964PASS（重複加算なし）。XCTest3method/失敗1、59summaryは全て旧method。原ZIP70,304,655B/1118memberをdigest一致保存、6原logs/元JSON/各監査等23memberと59PNG原ZIPmember参照をmanifestへ可逆保存。SOURCE_CONNECTION_TECHNICAL_CREDIT/限定validation_success=true、runtime通常保存/本人再表示・新版export・実機・商品採用は未完。API/DB/env/deploy0、追加CI/修復0。結果資料4のみSTRUCTURE_MAP_DELTA_NONE、automatic_progression=false。
