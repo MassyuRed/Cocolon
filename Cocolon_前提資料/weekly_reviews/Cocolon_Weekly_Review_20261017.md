@@ -2534,3 +2534,16 @@ Mashからlatest_results.jsonを受領し、48,910 bytes／SHA256 5fb61702d4c5b9
 全12rawは欄名付き平文でJSON解析成功0/12。ただし今回のtask_instructionは出力欄だけを指定しJSON objectのみと明示しておらず、Transformers生成にもJSON拘束なし。これはモデルが明示JSON命令を破った結果と評価せず、華恋のpromptと機械検査の不整合として分ける。形式不備だけで本文の意味誤りを説明しない。次の有料実行は自動で行わず、指示／検査整合と、入力の意味・不明・否定・順序・時点に根拠を置く教材／設定の具体案を先に整理する。今回の6評価を補修教材へ使った場合、未使用評価と再称しない。
 
 adapter3fileの保存hashは受領したが本体は未受領、保管・独立読戻し／再loadは未確認。今回のPod Stop完了・残高差・単価／総課金も未確認。Mashへ試験終了後のStopを案内した。既存experiment状態をEXECUTION_COMPLETE_NOT_QUALITY_ACCEPTED／fine_tuning_performed=trueへ更新し、教材入口・全体現在地・README・全file地図を同期。今回の4dataset・原18候補・教示5参照・原対話／撤回第7回・20fixture・M1 rawは不変。今回の実行はMashのPodであり、華恋環境からのGPU／有料推論0。製品CMEE P6・API/RN・DB・Render・merge/deploy変更0。STRUCTURE_MAP_DELTA_NONE（offline受領結果資料のみ）。
+
+<a id="20261024-emlis-free-teacher-fit-diagnostic"></a>
+## AA. 2026-10-24 — 次は保存adapterの既存9教師への適合を確認する
+
+Mashの「次は？」を受け、原9教師と初回runner・実結果を再読した。初回は学習外6場面だけを前後生成しており、教えた9件への適合と応答再現は未計測。途中の9lossは対象と重みが変わるため、全9件の同一条件前後NLLではない。教材増量やepoch／対象module変更を先に行うと、何が効いたかを分けにくい。
+
+[Free pack](../observation_learning/training/2026-10-24-emlis-free-pilot/README.md)へ一回用diagnose_learning.pyを追加した。初回結果と同じrunにあるadapter3file・原runner・4datasetのhashを照合し、既存cacheの同じ9B baseを先に測定、同baseへ保存adapterをis_trainable=Falseで読む。全9教師の最終assistant限定maskでNLLを各9／計18forwardし、例別・token数加重平均を残す。同9promptで各9／計18回答を元evaluate経路で生成し、教師completionを生成入力へ渡さない。全parameter凍結・active adapter／対象16module／有限32tensorと終了時file不変を確認する。学習・optimizer・モデル保存なし。元結果やadapterを上書きしない。
+
+既存教師への適合／再現だけの診断であり、未知入力の一般化・商品品質・観測技術獲得とは別。NLLだけが改善しても意味品質が改善したとはしない。NLL／応答がほぼ同じでも直ちに学習量不足へ結論せず、adapter適用・有効化と条件を先に確認する。教師に効くが学習外へ移らない場合は、教材範囲／転移を次に検討する。JSON明示はこの診断と同時に変えず、必要なら両モデルへ同条件を足す別比較。追加学習・予算拡張を自動で行わない。
+
+準備時の検証は、構文、生成9promptに教師がないこと、加重NLLと異常値停止、保存run選択とadapter欠損／改変の停止、実固定tokenizerのprompt+1024最大1637／2048以内。PEFT0.21.2公式from_pretrainedと非学習読込の指定を確認した。Torch／PEFT／GPUでの実診断・完走は未検証。Runpodでは既存venvで本scriptだけを取得／実行し、900秒で終了要求＋30秒で強制終了する。cache欠損時は再downloadせず停止。Pod自動Stopなし、Mashが終了／失敗／時間切れ後にStop。結果latest_diagnosis.jsonは初回latest_results.jsonと分離する。状態DIAGNOSTIC_PREPARED_NOT_RUN。
+
+全体00・教材入口・初回試験README／Free README・experiment・file地図を同期。原9教師／6評価・初回raw・adapter・原18候補・教示5参照・撤回第7回・既存製品runtimeは不変。今回GPU起動・追加推論／学習・DB・Render・API/RN・merge/deploy0。STRUCTURE_MAP_DELTA_NONE（既存教師への一回のoffline診断scriptのみ）。

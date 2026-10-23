@@ -4602,3 +4602,7 @@ folder `Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-free
 | README.md | 原本照合、A40試験完了と商品品質の区別、全6場面の前後本文診断、JSON指示／検査の不整合、未受領adapter・Pod Stop／費用の未確認 |
 
 training側README／experiment・全体00・教材入口・最新weekly Zを同期。試験は9stepまで完了したが十分な品質改善・正式Product Read／採用・P6統合は未成立。4dataset・runner・製品コードは不変。STRUCTURE_MAP_DELTA_NONE（offline試験の受領資料のみ。製品owner／型／接続／公開契約変更なし）。
+
+## 2026-10-24 — 保存adapterの9教師適合診断（製品runtime差分なし）
+
+新 `Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-free-pilot/diagnose_learning.py` は初回原結果／adapter3file／runner／教材hashを照合し、同じ9教師についてbaseと非学習adapterのNLL18forward・回答18件を比較する。生成入力は教師を除く元prompt、既存evaluateを共用。既存cache限定・学習なし・元adapter不変、結果は作業先latest_diagnosis.jsonと固有diagnostics folder。ローカル構文・入力／hash／NLL式・実tokenizer枠を確認、GPU実診断は未実施。全体00・教材入口・Free README／experiment・初回結果README・weekly AAへ同期。原4datasetと製品sourceは変更0。STRUCTURE_MAP_DELTA_NONE（offline一回診断のみ。製品owner／型／接続／契約変更なし）。

@@ -327,5 +327,29 @@
     "json_parse_before": 0,
     "json_parse_after": 0,
     "format_issue": "output fields specified but JSON-only instruction absent; no response_format enforcement; do not claim explicit JSON instruction was violated"
+  },
+  "next_diagnostic": {
+    "status": "DIAGNOSTIC_PREPARED_NOT_RUN",
+    "script": "diagnose_learning.py",
+    "purpose": "paired fit on existing 9 teachers before altering data or training",
+    "reference_sha256": "5fb61702d4c5b9e4f1317088b3ef91de53041168fa3313f14086d0c67f09ceb9",
+    "require_saved_adapter_sha256": true,
+    "source_runner_sha256": "c0491131cb6fcccadcb94e25d618acd95bcff9b6eeb875403b2d9723ccc613e4",
+    "new_training": false,
+    "prompt_changed": false,
+    "json_instruction_changed": false,
+    "model_changed": false,
+    "nll_forward_passes": 18,
+    "generation_requests": 18,
+    "training_target_used_in_generation": false,
+    "local_cache_only": true,
+    "new_dependencies": false,
+    "timeout_seconds": 900,
+    "kill_after_seconds": 30,
+    "automatically_stops_pod": false,
+    "result": "/workspace/cocolon_emlis_free_20261024/latest_diagnosis.json",
+    "local_checks": "syntax, 9 target-free prompts, weighted-NLL and invalid values, missing/tampered adapter rejection, saved-run matching, real-tokenizer context max1637/2048",
+    "gpu_validated": false,
+    "limits": "training-example fit only; NLL alone is not semantic quality, generalization or product acceptance; no automatic retraining"
   }
 }

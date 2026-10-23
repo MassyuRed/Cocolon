@@ -32,6 +32,7 @@ Mashの「で？どないすんの、これ。」を受け、既承認の教材�
 | runpod.sh | 固定commitの教材取得、既存Torchを維持する別venv、prepare／runの入口、run処理の時間制限 |
 | run_pilot.py | 教材照合・CPU token／label確認、学習前6回答・9教材1epoch・学習後6回答、adapterとraw保存 |
 | test_tokenization.py | 実Transformersと固定tokenizerによるCPU回帰検証。旧型不整合の再現、9教材のloss範囲と終端、6評価のcontext確認。重み取得なし |
+| diagnose_learning.py | 保存した初回adapterを非学習で読み、9教師へのNLLと同9promptの生成をbaseと対比較する一回の診断。学習・元adapter変更なし |
 
 出力は[既存モデル比較](../../model_selection/2026-10-22-three-core/task_inputs.jsonl)のEmlis用6欄（observation／reception／question／update_note／grounded_points／unknowns）を使う。これは比較試験のtask cardへの投影であり、公開API／DTO／実CMEEの新schema・意味採用・保存成功ではない。本文をアプリへ配置していない。
 
@@ -127,3 +128,25 @@ E06の乾燥完了補完は解消、E05の現在の出たい気持ちは明瞭�
 全12rawはJSON解析失敗だが、task_instructionもJSONのみを明示せず欄名だけを指定していた。モデルの明示JSON命令違反とは評価しない。試験側の指示／検査不整合として次の具体案に残す。教師・評価・template・runnerを結果受領時に変更していない。
 
 状態EXECUTION_COMPLETE_NOT_QUALITY_ACCEPTED、fine_tuning_performed=true。adapter本体は受領しておらず、保存hashの報告のみ。保管・独立再loadと今回のPod Stop完了、総費用は未確認。追加推論・追加学習を自動で行わない。前節の未実施記載は当該準備・修正時点の履歴であり、現在の未実施へ戻さない。CMEE通常接続・P6統合・他core・商品受入れは未成立。
+
+## 9. 次の一手：既存9教師への適合を、保存adapterで確認する
+
+Mashの「次は？」を受け、教師を増やす／epoch等を変える前に、初回adapterが既存教師へどう効いたかを確認する。初回は学習外6場面の前後だけを生成しており、教えた9件への生成・同一教師の前後NLLは未計測だった。9stepのlossは題材も途中の重みも違うため、その代用にはならない。
+
+`diagnose_learning.py` は初回runnerのSHA256、原結果SHA256、同じrun内のadapter3fileのSHA256と4datasetを照合する。別adapterや単に最新のfolderを使わず、一致する保存本体がなければ再学習せず中止する。既存cacheのみ・追加packageなしで、初回の固定モデル／package／prompt／非thinking・greedy・出力1024を維持する。
+
+比較は以下に固定する。
+
+- 同じ9教師・同じ最終assistantだけのmaskでbase／adapterのNLLを各9回、計18forward。例別と教師token数による加重平均を保存する。
+- 同じ9promptでbase／adapterの回答を各9件、計18回答。生成へ教師completionを渡さない。文面完全一致ではなく、主体・理由・不明・残す事実・失効した内容・問い／END・自然な受け取りを読む。
+- base測定後に同じbaseへ保存adapterをis_trainable=Falseで読み、active adapter／対象16module／32有限tensor／全parameter凍結を確認する。終了後も元adapterのhashが不変か確認する。
+
+既存9件への適合と再現の診断であり、学習外への一般化・商品品質・観測技術獲得の証明ではない。NLLが下がっただけで意味理解が良くなったとは判断しない。応答まで改善するが学習外6件では崩れる場合、次は教材の範囲と転移を検討する。NLL／応答がほぼ変わらない場合も、まずadapterの適用・有効化と条件を確認し、直ちに学習量不足／学習失敗へ断定しない。結果を見ず自動で教師追加・再学習へ進まない。
+
+JSON明示指示はこの診断へ混ぜない。初回と同じpromptで比べ、必要なら後にbase／adapterの両側へ同じ明示を加える別比較にする。学習外6件を教材化する場合、未使用評価と再称しない。
+
+Runpodでは固定commitの本scriptを `/workspace/cocolon_emlis_free_20261024/diagnose_learning.py` へ取得し、既存 `venv/bin/python` で実行する。会話のコマンドに実commitを埋める。外側のtimeoutは900秒＋kill猶予30秒。これはPod全稼働時間／課金上限や自動Stopではなく、完了・失敗・時間切れ後にMashがPodをStopする。モデルcacheがなければdownloadせず止まる。
+
+結果は固有の `diagnostics/<UTC日時>-<ID>/` と `/workspace/cocolon_emlis_free_20261024/latest_diagnosis.json`。初回latest_results.json／元adapter／教師・評価は上書きしない。
+
+準備時に実施した検証：構文、生成9promptに教師回答が入らないこと、NLL加重式と異常値停止、保存run選択・adapter欠損／改変時停止、実固定tokenizerで9prompt＋1024が最大1637で2048以内。PEFT0.21.2公式from_pretrainedのis_trainable=Falseを参照。Torch／PEFT／GPUでのこの診断scriptの実動作・完走は未検証。状態DIAGNOSTIC_PREPARED_NOT_RUN。追加学習・追加GPU実行はこの準備作業で行っていない。
