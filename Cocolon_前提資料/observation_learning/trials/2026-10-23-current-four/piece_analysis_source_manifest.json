@@ -1,0 +1,54 @@
+{
+  "repository": "MassyuRed/mashos-api",
+  "commit": "3084c99e5a08d6e475d8a177e62ebf1548e8a0f9",
+  "files": [
+    {
+      "path": "piece_v2_generation.py",
+      "sha": "f557f406e28944d45c51d3d104b2dd6cd6164845"
+    },
+    {
+      "path": "piece_v2_contract.py",
+      "sha": "e4d20c9d0994b0a05f086ff6543de9d5cf2f31aa"
+    },
+    {
+      "path": "piece_v2_content_policy.py",
+      "sha": "ff03637c701e8253523667dc7c429fe0df6f2f66"
+    },
+    {
+      "path": "piece_v2_expression.py",
+      "sha": "79d5606223e49de8c52704c829395ba030aafa59"
+    },
+    {
+      "path": "piece_text_formatter.py",
+      "sha": "2573ea391dba9c84123a4762174bb7978b35ac8a"
+    },
+    {
+      "path": "cocolon_meaning_experience_engine/piece_source.py",
+      "sha": "9420b855858d36a53d7814b8ee51ba09bbe653e2"
+    },
+    {
+      "path": "cocolon_meaning_experience_engine/piece_v1c.py",
+      "sha": "c8223642822b613f29f16e92580bb5bdf2334f78"
+    },
+    {
+      "path": "cocolon_meaning_experience_engine/cores/analysis/source_adapter.py",
+      "sha": "9fb6a26a3f9eab0bc140a25a15e63d111a921cc1"
+    },
+    {
+      "path": "cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py",
+      "sha": "5081e2d6e803c2b4fed9ca71a2b739f7474a86f5"
+    },
+    {
+      "path": "cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py",
+      "sha": "673c5777d2954567cf4b6bc661903fec85bc3194"
+    },
+    {
+      "path": "cocolon_meaning_experience_engine/cores/__init__.py",
+      "sha": "c995d72459083ec20d1333d387d5c484991c0b2f"
+    },
+    {
+      "path": "cocolon_meaning_experience_engine/cores/analysis/__init__.py",
+      "sha": "7ae98fb29a476430a946c651167d72879a23c3b7"
+    }
+  ]
+}

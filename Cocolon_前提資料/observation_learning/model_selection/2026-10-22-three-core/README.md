@@ -6,6 +6,9 @@ Mashの「わかった、作って」により、具体的な入力・作らせ�
 
 > 2026-10-23 Mash決定：Plus980円／Premium1,980円が価格上限、27B除外。[小型AI再選定](2026-10-23-small-model-reselection.md)をcurrentとし、旧高価格推奨と27B再試験を撤回。最初のM1はDeepInfra標準`Qwen/Qwen3.5-9B`従量APIへ変更。利用消費50円・モデル最大4リクエストは未実行案。旧GPU秒ベースの[費用試算](2026-10-23-cost-and-plans.md)・172条件は履歴。既存fixture原文・意味評価・C0最大4は維持。価格/quota/モデル採用/推論実行0。
 
+
+> 2026-10-23実行：Mashの「進めて」を受け、[現CMEE側の4場面](../../trials/2026-10-23-current-four/README.md)を正規offline入口で確認。Emlis初回本文あり／問いなし、補足は実pendingなしでN/A、Piece・Analysisは実理由付きUNAVAILABLE。9B APIは認証未完了・推論0、両条件比較は未完。Mashの続く質問を受け、同記録§2へモデル選定前に進められるsource投影・未採用候補・意味admission・回答更新・三core接続の先行準備を具体化した。任意LLM候補の受け口は現Engineに未実装。
+
 ## 1. 今回できたものと、最初に出す結果
 
 | ファイル | 用途 | モデルへの渡し方 |

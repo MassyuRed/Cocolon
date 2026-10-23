@@ -2076,3 +2076,14 @@ Mashは『Plus980円、Premium1980円、これがMAX。これでも高い』『�
 使用量感度はFree30/Plus100/Premium150セッション、Piece5/30/60、分析1/8/12、将来IF0/0/4。仮token×160円/$×再試行1.2×決済等1.1で月変動原価5.57/37.07/147.28円。MAU1000/有料5%/有料比80:20/固定11000円なら980/1980の月残額+19052〜25542円（手数料26〜15%、人件費等前）。全工程総token2倍でも+10808〜17298円。ただし品質/速度/実token量未測定、商品quota変更ではない。独立算術照合一致。
 
 次は既存4場面C0最大4＋M1 Qwen9B未接続proxy最大4。利用消費50円は未実行案、初回入金条件は別・未確認。27B再起動・本体hash確認をcurrent nextへ戻さない。fixture原文/意味評価は不変、今回API/GPU推論・課金/チャージ・学習・価格/quota/配置変更0。全体現在地・観測入口・比較入口を同期。STRUCTURE_MAP_DELTA_NONE、ADMINISTRATIVE_ONLY、product_credit0、automatic_progression=false。
+
+
+#### 10/23 — 4場面の現CMEEを実行、モデル選定前の接続準備を先行
+
+MashはQwen9B従量APIを三中核の候補として4場面比較する案へ「進めて」と指示。現CMEE側はAPI3084c99eの正規pure入口で実行。E02-0は8.004秒/GENERATED/本文あり/問いなし、E02-Bは実pendingなしでN_A_NO_ACTUAL_PENDING_QUESTION、Piece P01-NはPIECE_CONTENT_UNAVAILABLE/saved_emotion_meaning_not_yet_supported、Analysis A02-P1はanalysis_observed_route_not_established。本文生成試行3/補足生成0、元fixture7fieldを改変せず、依存84blob照合、全outcome/コード/再現条件を[実行記録](../observation_learning/trials/2026-10-23-current-four/README.md)へ保存した。初回Emlisは引用・復唱が中心で商品合格とはしない。fixture転記とmanifest形式の準備エラー2件は本試験前に修正、C0実行後の自動retryなし。
+
+外部9Bはenvキー未設定・ブラウザ未ログインを確認。安全な認証依頼は中断され、認証後状態は未確認。M1推論・課金・チャージ0、実モデル比較は未完了。Mashは続いて「先にCMEE側で学習済みAIを導入する準備でできることないの？選定するまで無理？」と質問した。選定を待たずにsource材料の投影、provider差替境界、未採用意味候補→既存型へのadmission、実pending回答更新、三core artifact接続を具体化・offline準備できると回答する。
+
+実物には任意LLM候補hookはなく、Emlis候補poolと意味planは現有限parserからの再導出と一致する検査を持つ。型へJSONを詰めるだけでは導入不能。この受口と責任変更を先行設計するのが中心で、HTTP呼出し追加だけで統合済みや任意候補を検証可能とはしない。Piece refined/Analysis複数補足/IF Savedの未対応も維持。既存Engineへ接続する範囲を具体化し、第二Engineや独立checkerを追加しない。
+
+価格上限980/1980・27B除外・9B最大4/消費50円を維持。今回はoffline束縛/現方式の出力取得のみの限定TECHNICAL_CREDIT、モデル導入・production contract/API/DB/RN/稼働/学習・商品採用0。STRUCTURE_MAP_DELTA_NONE、product_credit0、automatic_progression=false。全体現在地/観測入口/比較入口を同期。
