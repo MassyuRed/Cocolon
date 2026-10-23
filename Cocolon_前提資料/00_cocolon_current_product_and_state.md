@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-23 JST（最新差分は第6回の実問D01に対する、本人の主体と喜びの理由の明示訂正D02（10/24 JST）まで。既存の学習用16候補・教示5参照は維持。モデルの追加学習・改善評価・P6本統合は未実施。M1の品質不足とP1〜P5の限定内部実装を維持）。全Cocolon作業の必読原本。
+更新日：2026-10-24 JST（最新差分は第6回の本人訂正後のMash案D03と、華恋の講評・会話表現案D04まで。既存の学習用16候補・教示5参照は維持。モデルの追加学習・改善評価・P6本統合は未実施。M1の品質不足とP1〜P5の限定内部実装を維持）。全Cocolon作業の必読原本。
 
 ## 1. この資料の役割と更新方法
 
@@ -58,7 +58,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | Emlis有料拡張 | Plusの適格本人履歴、Premiumの逐次問い・本人が修正／否定できる根拠付きframe、条件付きLayer3を実装 | 履歴が使えるコードと、本人固有の深さ・有料差の体感を分ける。有料商品品質は未受入れ |
 | 配置と本人確認 | 共通APIは10/23にPiece限定overlay3577d7fdでLive、Emlis内容は土台10/10版5c8bd8eを継承。u353〜355は未配置 | Piece作業でservice identityのみ確認。Emlisの本人実機/品質は今回再検証なし。10/10の本人表示1件はMash評価で不合格。同じ保存本文の履歴再表示まで確認済みにしない |
 | 27B旧試験（選定除外） | 10/23 Mash決定で27Bを候補から除外。`Qwen3.8-27B-Q4_K_M.gguf`の試験は履歴として保持。10/21、架空相談2題×実演あり／なし×初回／回答後＝8出力の推論試験 | 追加情報の取込みは見られたが、未確認な意味の補完、近い問いの再提示、更新記録の欠落が残る。実演ありの一貫した優位未確認。重みの追加学習0、27BのCMEE統合0、他core適性未検証、製品採用未確定。Pod停止はMash報告受領済み |
-| 観測教材 | 観測・問い・本人回答後の理解を記録。4回の対話を原典として、[追加学習用候補16件と教示5参照](observation_learning/training/2026-10-23-pilot-prep/README.md)へ整形。Mashの原文問い9・華恋編集3・架空補充4を分離し、各時点の可視入力と出典を照合 | 学習候補の準備で、実際の追加学習・改善評価は未実施。問いへの偏り、自然な完成応答・実更新・Piece/Analysisの完成教材と独立評価が不足。既知派生とM1を見た開発3familyを区別し、未使用評価候補は2family/3場面。[Runpod M1](observation_learning/trials/2026-10-23-qwen9b-m1/README.md)は取得4/4だが意味に重大不足。元の20比較fixture・P1〜P5・M1 rawは不変。第5回はD10まで。Mash案と華恋編集を分けた受け取り候補1件をsessionノートへ整理し、未回答の達成差・最終承認なしを残した。[第6回D02](observation_learning/sessions/2026/OBS-20261024-001/01_dialogue.md#d02)まで。喜びの理由への実問D01に、事前案どおり「全部一人で」を友人との共同修理へ、喜びの理由を独力から再使用へ訂正する本人役回答を提示。椅子修理・再使用・喜び中は残る。初回記述を信じたMashを誤りとせず、原入力は不変。Mashの訂正後更新・新completion採用・学習は未成立。最新は[weekly U](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261024-observation-session-006) |
+| 観測教材 | 観測・問い・本人回答後の理解を記録。4回の対話を原典として、[追加学習用候補16件と教示5参照](observation_learning/training/2026-10-23-pilot-prep/README.md)へ整形。Mashの原文問い9・華恋編集3・架空補充4を分離し、各時点の可視入力と出典を照合 | 学習候補の準備で、実際の追加学習・改善評価は未実施。問いへの偏り、自然な完成応答・実更新・Piece/Analysisの完成教材と独立評価が不足。既知派生とM1を見た開発3familyを区別し、未使用評価候補は2family/3場面。[Runpod M1](observation_learning/trials/2026-10-23-qwen9b-m1/README.md)は取得4/4だが意味に重大不足。元の20比較fixture・P1〜P5・M1 rawは不変。第5回はD10まで。Mash案と華恋編集を分けた受け取り候補1件をsessionノートへ整理し、未回答の達成差・最終承認なしを残した。[第6回D04](observation_learning/sessions/2026/OBS-20261024-001/01_dialogue.md#d04)まで。実問D01にD02で「全部一人で」を友人との共同修理へ、喜びの理由を独力から再使用へ本人が明示訂正。MashはD03で再使用できる喜びを捉え、D04は華恋の講評・会話表現案として分離した。椅子修理・再使用・喜び中と原入力は保持。訂正前の完成観測がないため初回観測全文からの修正実演とは数えず、新completion採用・学習・品質合格は未成立。最新は[weekly U](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261024-observation-session-006) |
 
 詳細owner：[Emlis map](current_structure/01_emlis_ai_current_structure.md)、[CMEE map](current_structure/04_cmee_current_structure.md)、[Emlis詳細設計](designs/cmee/v1/02_emlis_v1a_detailed_design.md)、[観測教材](observation_learning/README.md)。古いmap本文の「問い未実装」は後続Q3／Q4・実sourceと矛盾する旧状態であり、現在へ戻さない。
 
