@@ -4591,3 +4591,14 @@ Cocolon側の新analysis_semantic_snapshot_results.jsonは全private完成state�
 ## 2026-10-24 — Free実験runnerのtoken返却型修正（製品runtime差分なし）
 
 folder `Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-free-pilot/` のrun_pilot.pyは、全4呼出しをchat_token_idsへ統一し、Transformers 5.19.0のBatchEncoding既定へ依存せずflat token IDsを受け取る。prefix・最終assistant限定loss・無切捨てを維持。新test_tokenization.pyは実固定tokenizerで旧型不整合を再現し、9教材のmask／終端と6評価のcontextをCPU検査する。実3検査成功、詳細はexperiment.json／README・latest weekly Y。Runpodの修正版prepare・GPU学習は未実施。全体00・教材入口も同期。4dataset・runpod.shは不変。STRUCTURE_MAP_DELTA_NONE（offline実験scriptと回帰testのみ。製品のowner／型／接続／契約変更なし）。
+
+## 2026-10-24 — Free LoRA完了結果の所在（製品runtime差分なし）
+
+新folder `Cocolon_前提資料/observation_learning/trials/2026-10-24-qwen9b-free-lora/`。
+
+| file | 所有する内容 |
+|---|---|
+| pilot_results.json | Mash受領latest_results.jsonをbyteそのまま保存。固定入力・前後12raw／tokenIDs・9step log・環境／source／adapter保存hash。adapter本体は含まない |
+| README.md | 原本照合、A40試験完了と商品品質の区別、全6場面の前後本文診断、JSON指示／検査の不整合、未受領adapter・Pod Stop／費用の未確認 |
+
+training側README／experiment・全体00・教材入口・最新weekly Zを同期。試験は9stepまで完了したが十分な品質改善・正式Product Read／採用・P6統合は未成立。4dataset・runner・製品コードは不変。STRUCTURE_MAP_DELTA_NONE（offline試験の受領資料のみ。製品owner／型／接続／公開契約変更なし）。

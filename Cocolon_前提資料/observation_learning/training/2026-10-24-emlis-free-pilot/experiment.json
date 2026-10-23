@@ -1,6 +1,6 @@
 {
   "schema": "cocolon_emlis_free_sft_pilot_proposal.v1",
-  "status": "TOKENIZATION_FIXED_CPU_VALIDATED_RUNPOD_RETRY_PENDING",
+  "status": "EXECUTION_COMPLETE_NOT_QUALITY_ACCEPTED",
   "prepared_at": "2026-10-24 JST",
   "author": "Karen / Codex Work Mode",
   "scope": {
@@ -71,11 +71,7 @@
     "max_context_tokens": 2048,
     "silent_truncation": false
   },
-  "unresolved_before_gpu": [
-    "Runpodで修正commitのprepareを再実行し、準備確認OKとpreflight.jsonを取得する。旧prepareは依存installとconfig/index/tokenizerまで到達後、型不整合で停止。実tokenizerを使うローカル修正版の9教師・6評価検証は成功。",
-    "A40でのVRAM・時間と任意高速kernelなしの挙動は未検証。現在単価・合計費用は未照会。runの制限は3600秒＋kill猶予30秒で、prepareやPod全稼働の課金上限ではない。",
-    "実modelの16対象と実trainable範囲をrun内で再照合し、学習前後rawを取得する。現在は実学習・実比較未実施。"
-  ],
+  "unresolved_before_gpu": [],
   "comparison": {
     "pre_and_post_same_input": true,
     "temperature": 0,
@@ -91,8 +87,8 @@
     "insufficient": "学習した題材の再現だけ、JSON形だけ、定型語の増加だけでは改善判定しない。",
     "no_signal": "改善が見えなくても9件・1回の結果だけで追加学習全体の不可能を断定しない。追加実行・予算拡張を自動で行わない。"
   },
-  "gpu_started": false,
-  "fine_tuning_performed": false,
+  "gpu_started": true,
+  "fine_tuning_performed": true,
   "cmee_integration_performed": false,
   "automatic_progression": false,
   "primary_sources": [
@@ -122,9 +118,9 @@
     "result": "/workspace/cocolon_emlis_free_20261024/latest_results.json",
     "local_verification": "prior syntax/data/loss/venv checks plus actual Transformers 5.19.0 and fixed Qwen tokenizer: 3 regression tests pass (9 train and 6 eval), no Torch/model weights/GPU",
     "runpod_prepare_performed": true,
-    "gpu_execution_validated": false,
-    "runpod_prepare_completed": false,
-    "fixed_runpod_prepare_retried": false,
+    "gpu_execution_validated": true,
+    "runpod_prepare_completed": true,
+    "fixed_runpod_prepare_retried": true,
     "tokenization_contract": {
       "return_dict": false,
       "return_tensors": null,
@@ -132,7 +128,8 @@
       "enable_thinking": false,
       "required_shape": "nonempty flat list[int]",
       "prefix_assertion_preserved": true
-    }
+    },
+    "validation_scope": "Mash-uploaded result verified against fixed runner/data: complete one 9-step A40 pilot and 6+6 generations; no independent GPU rerun or adapter reload"
   },
   "latest_prepare_attempt": {
     "source_commit": "84c784daa86842ee7007a4c03d061dab41211f84",
@@ -251,5 +248,84 @@
     ],
     "model_weights_loaded": false,
     "gpu_used": false
+  },
+  "latest_result": {
+    "source_commit": "d53f9ef0a906624acaeb519f8c4c6eb153e60e51",
+    "artifact": "../../trials/2026-10-24-qwen9b-free-lora/pilot_results.json",
+    "readme": "../../trials/2026-10-24-qwen9b-free-lora/README.md",
+    "sha256": "5fb61702d4c5b9e4f1317088b3ef91de53041168fa3313f14086d0c67f09ceb9",
+    "bytes": 48910,
+    "executed_by": "Mash on Runpod A40",
+    "status": "EXECUTION_COMPLETE_NOT_QUALITY_ACCEPTED",
+    "training_steps": 9,
+    "before": 6,
+    "after": 6,
+    "elapsed_seconds": 72.53313755989075,
+    "peak_torch_allocated_gib": 19.939082622528076,
+    "adapter_hashes_reported": {
+      "README.md": "b24b74667d1eb9c991047b4507c329613ae38707f4450446a94217081af69e96",
+      "adapter_model.safetensors": "1115f50162c6f8b67bc162f4e7667b653821229a4a959b21abfdc6ac34a0a6bf",
+      "adapter_config.json": "f133d0336298bb13d1a415abdf230783a072b9ae60deb9e127bc6f5dd55be3da"
+    },
+    "adapter_files_received": false,
+    "adapter_reload_verified": false,
+    "pod_stop_confirmed": false,
+    "total_cost_verified": false
+  },
+  "remaining_after_pilot": [
+    "全6場面の内部本文診断で十分な品質改善は確認できない。商品採用・正式Product Read・P6統合・他core評価は未成立。",
+    "JSON解析成功0/12だが、promptにJSON形式の明示がない。次の有料実行前に指示と検査の整合を具体化する。",
+    "adapter本体の保管／独立読戻し・再load、今回PodのStop完了、全稼働時間／現在単価／総課金は未確認。追加実行・予算拡張は自動で行わない。"
+  ],
+  "semantic_review": {
+    "reviewer": "Karen internal full-text review, not Mash Product Read",
+    "overall": "NO_SUFFICIENT_OVERALL_QUALITY_IMPROVEMENT_DEMONSTRATED",
+    "cases": [
+      {
+        "case_id": "EFREE-E01",
+        "judgment": "WORSE_OR_UNRESOLVED",
+        "before": "拍手を他者の肯定へ昇格し、喜びの有無を内面の喜び／達成感の正体へずらした。",
+        "after": "『承認された』を断定。問いが本人の喜びの有無から『評価か礼儀か』という根拠のない二択へ逸れる。",
+        "retained": "最後まで話した事実と拍手は保持。"
+      },
+      {
+        "case_id": "EFREE-E02",
+        "judgment": "WORSE_OR_UNRESOLVED",
+        "before": "『間に合ったため引き返した』と順序・理由を逆転し、『ベランダに取り込み』と場所関係も不正確。疲労理由を使ってはいないが、その明示否定を省いた。",
+        "after": "同じ順序・場所関係の誤りが残り、『雨に濡れる不安』という本人未記載の感情を追加。",
+        "retained": "洗濯物の取り込みと平穏、問いなしは保持。"
+      },
+      {
+        "case_id": "EFREE-E03",
+        "judgment": "WORSE_OR_UNRESOLVED",
+        "before": "本人が先生へ説明した主体と、言語化できた喜びは保持。ただし『特に印象に残る理由』を作って問う。",
+        "after": "主体は保持するが、『共有できた温かみ』や未記載の他参加者との交流・楽しさへ問いを広げる。",
+        "retained": "説明主体の反転は前後ともない。"
+      },
+      {
+        "case_id": "EFREE-E04",
+        "judgment": "BASELINE_ALREADY_RETAINS_CORRECTION_NO_CLEAR_GAIN",
+        "before": "重複だけ削除・残したい写真の保持、探しやすさ・すっきり、訂正と問いなしを保持。",
+        "after": "訂正と問いなしは保持するが、『残したい写真は保持』の明示が落ちる。",
+        "retained": "全部削除を現在事実として復活させていない。"
+      },
+      {
+        "case_id": "EFREE-E05",
+        "judgment": "PARTIAL_GAIN_WITH_UNRESOLVED_OMISSION",
+        "before": "昨日申し込み／今日の迷いはあるが、昨日うれしかったことと今も出たい気持ちの明示が落ちる。",
+        "after": "今の出たい気持ちは明瞭。ただし昨日の喜びはなお欠落。問いは理由から決断期限へ変わる。",
+        "retained": "参加／取消をモデルが確定してはいない。"
+      },
+      {
+        "case_id": "EFREE-E06",
+        "judgment": "LOCAL_GAIN_RECEPTION_STILL_GENERIC",
+        "before": "洗って干したことを『乾燥が完了』へ昇格。受け取りは『平穏な日常の一コマ』の定型。",
+        "after": "『洗って干した』へ戻り、乾燥完了の補完は解消。受け取りの定型は同じ。",
+        "retained": "前後とも問いを強制せず、人格評価はしていない。"
+      }
+    ],
+    "json_parse_before": 0,
+    "json_parse_after": 0,
+    "format_issue": "output fields specified but JSON-only instruction absent; no response_format enforcement; do not claim explicit JSON instruction was violated"
   }
 }

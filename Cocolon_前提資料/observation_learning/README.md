@@ -6,9 +6,9 @@
 
 Cocolon／EmlisAIが、相手自身の価値基準を学び、その人の思考経路を辿って理解を更新する技術を育てるための保存先です。Mashの口調や結論だけを模倣することを目的にしません。
 
-## 現在地（2026-10-24・限定Emlis Freeの教材と2段階の実行コマンドを準備）
+## 現在地（2026-10-24・限定Emlis FreeのLoRA試験を完了、品質は未合格）
 
-[Free試験用pack](training/2026-10-24-emlis-free-pilot/README.md)へ、今回入力＋同thread一回答だけを使う完成応答案9件と、学習に使わない比較入力6件を保存した。初回6件は問いあり3／なし3、回答後3件は問いなし。全て華恋の編集・補充で、Mashの完成実演や品質承認ではない。原18候補・教示5参照・実対話は維持し、独立27教材と加算しない。固定commitのprepare／run入口と同条件の学習前後比較を実装。Mashのprepareはinstall後、Transformers 5.19.0のBatchEncodingをtoken列と取り違えた華恋の不備で停止。全4経路の型指定を修復し、実Transformers＋固定tokenizerで旧失敗再現と9教材・6評価のCPU回帰3検査が成功。修正版Runpod prepareの再実行・GPU完走は未実施。モデル実行・学習・効果判定は未実施。run処理は1時間制限、Podは自動Stopされず完了／失敗後にMashがStopする。prepareのinstall時間やPod全課金の上限ではない。[最新weekly Y](../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261024-emlis-free-tokenization-fix)。
+[Free試験用pack](training/2026-10-24-emlis-free-pilot/README.md)の9教師・学習外6評価を使い、MashのRunpod A40で学習前6回答→9教材を各1回／9step→学習後6回答が完了。[受領原本と全件診断](trials/2026-10-24-qwen9b-free-lora/README.md)を保存し、runner／教材hash・固定評価入力・件数／順序を照合した。初回のBatchEncoding取り違えは修正済み。E06の乾燥完了補完の解消とE05の部分改善はあるが、根拠外の承認・不安・交流の問い等が残る／悪化し、十分な品質改善は確認できない。全12rawはJSON解析失敗だが、試験のpromptにもJSONのみと明示がなく、この指示／検査不整合をモデルの命令違反へ転嫁しない。原18候補・教示5参照・今回の4dataset・実対話は不変。独立27教材に加算せず、9stepだけで育成全体の可否を結論しない。adapter本体の保管・再load、今回のPod Stopと総課金は未確認。追加GPU実行を自動で行わない。[最新weekly Z](../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261024-emlis-free-pilot-result)。
 
 [学習用候補18件と教示5参照](training/2026-10-23-pilot-prep/README.md)を保存済み。第5回の華恋編集による受け取り1件と、第6回のMash原文による訂正後の観測1件を追加し、当初16行は不変。問い9／訂正後観測1／華恋編集4／華恋補充4。未回答の達成差・訂正前の完成観測なし・品質承認なしを保持する。
 
@@ -16,9 +16,9 @@ Cocolon／EmlisAIが、相手自身の価値基準を学び、その人の思考
 
 これは部分課題の候補で、追加学習済みでも、全三中核の完成応答の正解集でもない。問いへの偏り、自然な受け取り／実際の読み直し、Piece・Analysisの完成教材、独立した三中核評価は不足。既知派生5場面とM1を見た開発確認3family/12場面を区別し、未使用評価候補は2family/3場面。元の20fixture・採点guide・M1原応答は教材のmessagesへ転用していない。先に最初の学習試験で必要な実演と未使用評価例を補い、その範囲で採用行・方法・量・上限時間／費用・評価・打切りを具体化する。教材を増やし続ける工程や別の管理systemは作らない。
 
-[Runpod Qwen3.5-9B M1](trials/2026-10-23-qwen9b-m1/README.md)は固定4応答を取得・全本文診断済み。根拠外補完・行動欠落・因果創作・unknown欠落があり、そのまま採用できる品質ではない。MashからPodのStop完了報告を受領した。追加GPU起動・推論・重み学習は本整形作業で行っていない。旧DeepInfra APIの4回/50円枠はRunpod GPU学習予算ではない。Plus980円／Premium1,980円の価格上限・27B除外を維持する。
+[Runpod Qwen3.5-9B M1](trials/2026-10-23-qwen9b-m1/README.md)は固定4応答を取得・全本文診断済み。根拠外補完・行動欠落・因果創作・unknown欠落があり、そのまま採用できる品質ではない。MashからPodのStop完了報告を受領した。M1教材整形時の追加GPU起動・推論・重み学習はなかった。後続の今回Free LoRA完了は上段に区別する。旧DeepInfra APIの4回/50円枠はRunpod GPU学習予算ではない。Plus980円／Premium1,980円の価格上限・27B除外を維持する。
 
-CMEEのP1〜P5の限定内部準備は維持する。原E02-0の二行動とJOY_ASPECT不明はoffline profile2で保持、Piece P4・Analysis P5は同一private保存再読まで限定実装済み。任意LLMの意味理解・本統合P6・通常有効化・一般文章の商品品質・追加学習は未完。[内部準備の実結果](trials/2026-10-23-current-four/README.md)と上記M1／教材準備を混同しない。以下の日付付き記録は当時の状態で、27B候補保持や「今回未実行」等を現在へ戻さない。
+CMEEのP1〜P5の限定内部準備は維持する。原E02-0の二行動とJOY_ASPECT不明はoffline profile2で保持、Piece P4・Analysis P5は同一private保存再読まで限定実装済み。任意LLMの意味理解・本統合P6・通常有効化・一般文章の商品品質は未完。限定Freeの9step追加学習は上段のとおり完了したが、品質改善・採用は未成立。[内部準備の実結果](trials/2026-10-23-current-four/README.md)と上記M1／教材準備を混同しない。以下の日付付き記録は当時の状態で、27B候補保持や「今回未実行」等を現在へ戻さない。
 
 ## 第7回の経過（2026-10-24・取り下げ）
 

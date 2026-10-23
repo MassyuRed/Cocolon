@@ -2523,3 +2523,14 @@ Mashから「準備確認OKが出ない」「前回別窓で起動していた�
 今回初めてローカル隔離venvへ実Transformers5.19.0とtokenizers0.23.3を入れ、固定Qwen tokenizerをCPU取得した。test_tokenization.pyの3検査が7.291秒で成功。旧既定で誤比較を再現し、実input_idsのprefixは一致することを確認。修正後の9教材は最終JSON＋im_end／改行だけが学習対象、prompt全-100、全長495〜785／loss67〜172token。6評価prompt421〜540、出力枠1024を加えても最大1564で2048以内。実model重み・Torch／PEFT・GPU実行は使っていない。ID別実token数と受領log SHA256はexperiment.jsonに保存した。
 
 修正版をGitHubへ反映し、今のRunpod Terminalで同じwrapperへ修正commitを渡してprepareをやり直す。準備確認OKの後だけrunに進む。状態TOKENIZATION_FIXED_CPU_VALIDATED_RUNPOD_RETRY_PENDING。修正版のRunpod再prepare・GPU完走・学習前後比較・品質判定は未実施。runの1時間制限とPod手動Stopの責務は維持する。全体現在地・教材入口・実験README／manifest・全file地図を同時更新。4dataset・原18候補・教示5参照・撤回第7回・既存評価／M1 raw・製品runtimeは不変。STRUCTURE_MAP_DELTA_NONE（実験runnerの返却型修正とCPU回帰testのみ）。
+
+<a id="20261024-emlis-free-pilot-result"></a>
+## Z. 2026-10-24 — Emlis Free 9教材LoRAの初回完了と全6場面の前後診断
+
+Mashからlatest_results.jsonを受領し、48,910 bytes／SHA256 5fb61702d4c5b9e4f1317088b3ef91de53041168fa3313f14086d0c67f09ceb9のまま[試験原本](../observation_learning/trials/2026-10-24-qwen9b-free-lora/pilot_results.json)へ保存。実行sourceは修正d53f9ef。runner／4教材hashとeval_requestsを固定原本へ完全照合した。A40で学習前6回答→9教材各1回／9step→同6回答まで完了。9lossは全有限、前後ID／token長一致、全12EOS／出力上限到達0。adapter対象はtext q/v16module、trainable1,114,112。run記録上72.533秒、PyTorch peak allocated19.939GiB。これはinstall・prepare・待機・Pod全時間／全VRAM／総課金ではない。実行完了と品質合格を分ける。
+
+入力6件と前後12本文を全て読み、[全件診断](../observation_learning/trials/2026-10-24-qwen9b-free-lora/README.md)へ保存。E06の乾燥完了補完の解消、E05の現在の出たい気持ちの明瞭化はある。一方、E01は拍手を承認へ断定し評価か礼儀かの二択、E02は『間に合ったため引き返した』と順序／理由を逆転し未記載の不安を追加、E03は共有の温かみや他参加者の交流へ逸れる。E04の主要訂正保持は学習前から成立し、学習後は残す写真の明示が落ちる。十分な全体品質改善は確認できない。9教材・1epoch・q/v16という限定条件から、追加学習全体や9B育成の不可能／成功へ結論しない。華恋の内部診断であり、Mashの正式Product Readや商品受入れではない。
+
+全12rawは欄名付き平文でJSON解析成功0/12。ただし今回のtask_instructionは出力欄だけを指定しJSON objectのみと明示しておらず、Transformers生成にもJSON拘束なし。これはモデルが明示JSON命令を破った結果と評価せず、華恋のpromptと機械検査の不整合として分ける。形式不備だけで本文の意味誤りを説明しない。次の有料実行は自動で行わず、指示／検査整合と、入力の意味・不明・否定・順序・時点に根拠を置く教材／設定の具体案を先に整理する。今回の6評価を補修教材へ使った場合、未使用評価と再称しない。
+
+adapter3fileの保存hashは受領したが本体は未受領、保管・独立読戻し／再loadは未確認。今回のPod Stop完了・残高差・単価／総課金も未確認。Mashへ試験終了後のStopを案内した。既存experiment状態をEXECUTION_COMPLETE_NOT_QUALITY_ACCEPTED／fine_tuning_performed=trueへ更新し、教材入口・全体現在地・README・全file地図を同期。今回の4dataset・原18候補・教示5参照・原対話／撤回第7回・20fixture・M1 rawは不変。今回の実行はMashのPodであり、華恋環境からのGPU／有料推論0。製品CMEE P6・API/RN・DB・Render・merge/deploy変更0。STRUCTURE_MAP_DELTA_NONE（offline受領結果資料のみ）。

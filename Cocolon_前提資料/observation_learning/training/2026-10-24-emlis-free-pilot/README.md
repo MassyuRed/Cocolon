@@ -1,6 +1,6 @@
 # Emlis Free：初回・一回答後の完成応答案による小規模学習準備
 
-2026-10-24 JST／華恋／Codex Work Mode。状態：**教師案9件・比較入力6件とprepare／runコマンドを準備。MashのRunpod prepare試行は依存install後、token返却型の取り違えで停止。修正後、実Transformers 5.19.0＋固定tokenizerで9教師・6評価のCPU検証が成功。Runpod再prepare・GPU実行・学習・品質評価は未実施。**
+2026-10-24 JST／華恋／Codex Work Mode。状態：**MashのA40で学習前6回答→9教材1epoch／9step→学習後6回答まで完了し、受領原本を照合。十分な品質改善は確認できず、商品採用・P6統合は未成立。結果は[実行記録と全件診断](../../trials/2026-10-24-qwen9b-free-lora/README.md)。**
 
 Mashの「で？どないすんの、これ。」を受け、既承認の教材整形・不足の補充として作成した。次の観測会をMashへ依頼する代わりに、今回の入力への観測・人間的な受け取り・任意一問・一回答後の更新が揃う応答案を華恋が作る。原18候補・教示5参照・原対話は変更しない。取り下げた読書会の題材は使わない。
 
@@ -75,6 +75,8 @@ Mashの「で？どないすんの、これ。」を受け、既承認の教材�
 
 ## 6. Runpodでの2段階の実行
 
+以下は再現用の手順記録。今回の実行は完了済みで、新たにprepare／runを行う指示ではない。
+
 A40 48GBのPodのJupyterLab Terminalで実行する想定。まずこのfolderの `runpod.sh` を固定commitのraw URLから `/workspace/cocolon_pilot.sh` へ取得し、同じcommitを環境変数 `COCOLON_SOURCE_COMMIT` に指定して `bash /workspace/cocolon_pilot.sh prepare` を実行する。会話で渡すコマンドには実commit SHAを埋める。branch追従のlatest取得にはしない。
 
 prepareは4教材fileのSHA256／件数／Freeの可視範囲・問い残数／評価family分離、固定config・重みindexの16対象、importと4package版、固定tokenizerでのprefix・loss範囲・token数を確認する。モデル重みのダウンロード・modelのGPU配置・推論・学習は行わない。CPU確認でもPodが起動していれば通常の課金は続く。
@@ -101,9 +103,9 @@ Mashから受領したTerminal全文では、直接4packageのinstallとTorch 2.
 
 ローカルの隔離venvへ実Transformers 5.19.0／tokenizers 0.23.3を導入し、固定revisionの実tokenizerで3回帰testが成功（7.291秒）。旧既定のBatchEncodingで誤比較を再現し、input_idsそのもののprefixは一致することを確認した。修正後は9件全てprompt側label=-100、教師側が最終JSON＋im_end／改行だけ、全長495〜785token／loss67〜172token。6評価promptは421〜540tokenで、出力1024を足しても最大1564、2048枠以内。詳細のID別token数はexperiment.jsonに保存。
 
-今回のローカル検証にTorch／PEFTやmodel重みは不要。モデルクラスのローカル実import・GPU読込・学習・完走は未検証で、Runpodの修正版prepareもまだ再実行していない。状態は **TOKENIZATION_FIXED_CPU_VALIDATED_RUNPOD_RETRY_PENDING**。9件・1回で追加学習全体の可否やCocolonの商品品質を断定しない。
+今回のローカル検証にTorch／PEFTやmodel重みは不要。モデルクラスのローカル実import・GPU読込・学習・完走は未検証で、Runpodの修正版prepareもまだ再実行していない。この修正時点の状態は **TOKENIZATION_FIXED_CPU_VALIDATED_RUNPOD_RETRY_PENDING** だった。後続の完了は下記§8に区別する。9件・1回で追加学習全体の可否やCocolonの商品品質を断定しない。
 
-今のRunpod Terminalでは、同じ `/workspace/cocolon_pilot.sh` に修正commitをCOCOLON_SOURCE_COMMITで渡してprepareする。依存は導入済みで、教材とrunnerを同commitから再取得する。準備確認OKの後にだけrunへ進む。前回のAIサーバーを再起動する必要はない。
+修正時点では、同じ `/workspace/cocolon_pilot.sh` に修正commitをCOCOLON_SOURCE_COMMITで渡し、prepare後にrunする再開手順を案内した。その後の完了は下記§8に記録する。前回のAIサーバーの再起動は不要だった。
 
 公式原典：
 - [Transformers 5.19.0 apply_chat_templateの既定return_dict=True](https://github.com/huggingface/transformers/blob/v5.19.0/src/transformers/tokenization_utils_base.py)
@@ -115,3 +117,13 @@ Mashから受領したTerminal全文では、直接4packageのinstallとTorch 2.
 - [Transformers 5.19.0](https://pypi.org/project/transformers/5.19.0/)・[PEFT 0.21.2](https://pypi.org/project/peft/0.21.2/)・[Accelerate 1.15.0](https://pypi.org/project/accelerate/1.15.0/)・[Safetensors 0.8.0](https://pypi.org/project/safetensors/0.8.0/)
 
 華恋環境からのGPU起動・追加推論・実学習・DB・Render・API/RN・merge/deployは0。MashのPodでは上記prepare試行があり、稼働分の課金総額は未確認。実モデルの新規応答はまだ取得していない。STRUCTURE_MAP_DELTA_NONE：offline比較用の実験scriptのみでruntime owner・型・接続・商品契約の変更なし。
+
+## 8. 今回の実行結果（2026-10-24）
+
+MashのRunpod A40で修正版prepare後、6回答→9step→同6回答が完了。[受領原本・全本文診断](../../trials/2026-10-24-qwen9b-free-lora/README.md)へ保存。runner／4dataset hashとeval_requests完全一致、9教材各1回・loss全有限・前後6ID／token長一致・全12EOSで上限到達0。run記録上72.533秒、PyTorch peak allocated19.939GiBであり、Pod全稼働・総課金・全VRAMの測定ではない。
+
+E06の乾燥完了補完は解消、E05の現在の出たい気持ちは明瞭になった。一方E01の承認断定・根拠のない二択、E02の順序／理由誤りと不安の追加、E03の未記載の交流への問いなどが残る／悪化。E04の主要訂正は学習前から保持されていた。今回の限定条件で十分な品質改善は確認できない。
+
+全12rawはJSON解析失敗だが、task_instructionもJSONのみを明示せず欄名だけを指定していた。モデルの明示JSON命令違反とは評価しない。試験側の指示／検査不整合として次の具体案に残す。教師・評価・template・runnerを結果受領時に変更していない。
+
+状態EXECUTION_COMPLETE_NOT_QUALITY_ACCEPTED、fine_tuning_performed=true。adapter本体は受領しておらず、保存hashの報告のみ。保管・独立再loadと今回のPod Stop完了、総費用は未確認。追加推論・追加学習を自動で行わない。前節の未実施記載は当該準備・修正時点の履歴であり、現在の未実施へ戻さない。CMEE通常接続・P6統合・他core・商品受入れは未成立。
