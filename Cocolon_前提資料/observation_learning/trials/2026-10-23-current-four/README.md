@@ -193,3 +193,25 @@ snapshot schemaは`cocolon.cmee.emlis_semantic_snapshot.v2`、checkpointは`coco
 原E02の有限文法と既受理event/feelingの併存に閉じる。一般unknown/ACTION、新要素自身の変更・解消・依存削除はHOLD/UNSUPPORTED。旧Q2 cap4では混在更新の5 contributionを提供できず意味保存後BODY_UNAVAILABLEとなる制限を残し、capを緩めない。現在のQ3実serviceでの隔離SQL/RPC保存・中断再開成功と区別する。実モデル／有料推論／重み／学習／本人DB／Render／通常application有効化／公開API・DTO・RN変更／merge／deployは0。限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT、product_credit=0／PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=false。
 
 原文/全未加工outcome/checkpoint/source blob/途中の問題は、既存semantic_snapshot_results.jsonのtargeted_unknown_action_v2へ追記。過去C0/P1/P2と旧v1結果を上書きしない。初回E02はP1材料request prep-b9e74c65cdf2eaac838906c19e661d18ee980855c5bda172bd7a520997869763が一致。新単位はモデル推論ではなく、保存済み手作業P2候補の限定採用を確認したもの。
+
+<a id="identity-repair-and-p4-proposal"></a>
+## 10. 前回CIの実結果・共有owner同期・次のP4具体案
+
+前回API723ce9fの[CI39912451179](https://github.com/MassyuRed/mashos-api/actions/runs/39912451179)はcompleted/failure。Analysis generation/saved readは1634 tests＋12020 subtests成功（453.12秒）だが、次の共有owner照合1件で、現行identity fixtureが旧値のままのため停止した。先の146成功は限定対象の結果として維持し、CI全体成功にしない。
+
+今回、既存producerから`ai/tests/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json`の5検証fieldだけを同期。scope fieldは保持。language/runtime payloadの変化は承認済み6owner（contracts／source plan／Observation作者／HR作者／gate／input-specific meaning）だけ。historical IM03、旧adapter全outcome、製品code、検査assertionは変更0。最初の同期用診断はscope fieldもあるためkey-set確認で停止、書込前でfixture不変。scopeを保存する形へ直して同期した。診断を試験成功に数えない。
+
+Python3.12.14、pytest8.4.1／pytest-subtests0.14.2、既存CIと同じ検査選択で **1 passed／194 deselected、26.43秒**。再実行・新本文生成0、146との合算0。新設testや検査緩和はない。既存依存の再発見とimport成功を確認してから実行した。
+
+```bash
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONDONTWRITEBYTECODE=1 \
+PYTHONPATH=ai/services/ai_inference:ai/tests:ai \
+python -B -m pytest -q --tb=short -ra -p pytest_subtests.plugin \
+-p no:cacheprovider -c /dev/null --noconftest \
+ai/tests/test_cmee_v1a_i1sx_contracts.py \
+-k test_active_final_language_owner_chain_has_zero_legacy_compose_calls
+```
+
+API反映は[302d122](https://github.com/MassyuRed/mashos-api/commit/302d1223362484b30cf66c9c2c3ca3a72b6cdf2d)、fixture1pathだけをGitHub全文／blob／changed paths／PR headで確認済み。追加の広範囲CIは実行せず[skip ci]。元CIの失敗履歴を維持する。
+
+次の内部準備は[Piece P4具体案](../../../designs/cmee/v1/03_piece_v1c_detailed_design.md#cmee-p4-offline-piece-proposal)。P01-Nの候補→immutable意味snapshot→既存plan／作者→同一private保存再読、構造化選択の保持と本文への非補完を具体化。未実装・契約差分の判断前。[Analysis P5の実source差分](../../../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#cmee-p5-offline-gap)も残した。P1/P2/C0／元packet／結果JSONは不変で再生成0。新profileの実admission、通常B8、実DB、Render、モデル呼出しは今回0。STRUCTURE_MAP_DELTA_NONE、primary=BLOCKER_NARROWED、product_credit=0、automatic_progression=false。

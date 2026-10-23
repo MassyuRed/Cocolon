@@ -3090,3 +3090,22 @@ snapshot schemaは`cocolon.cmee.emlis_semantic_snapshot.v2`、checkpointは`coco
 新専用SnapshotEvidenceSpanResolverV2は同snapshotから復元した四typed tupleを既存resolverへ渡す内部adapterで、別作者・Engine・runnerではない。source sliceはlisten raw14:22／native lexical14:21を保持し、終端「。」だけを除外。新unknown carrierは声明present/neutral/uncertainと対象joy past/positive/feeling、元evidenceと一意なgraph対応をexact照合する。
 
 原E02の有限文法と既受理event/feelingの併存に閉じる。一般unknown/ACTION、新要素自身の変更・解消・依存削除はHOLD/UNSUPPORTED。旧Q2 cap4では混在更新の5 contributionを提供できず意味保存後BODY_UNAVAILABLEとなる制限を残し、capを緩めない。現在のQ3実serviceでの隔離SQL/RPC保存・中断再開成功と区別する。実モデル／有料推論／重み／学習／本人DB／Render／通常application有効化／公開API・DTO・RN変更／merge／deployは0。限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT、product_credit=0／PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=false。
+
+<a id="cmee-p4-piece-snapshot-proposal"></a>
+
+## 2026-10-23 — P4 Piece private snapshot型案（PROPOSED_ONLY）
+
+未実装・未承認。[設計03の限定範囲](03_piece_v1c_detailed_design.md#cmee-p4-offline-piece-proposal)専用で、旧`PieceSourceMeaning`／public DTOへfieldを足す案ではない。全型はimmutable・closed fieldとし、候補自身がowner、source版、採用状態、graph IDを決めない。
+
+| private型案 | 必須field・拘束 |
+|---|---|
+| `PieceSemanticSnapshotV1` | `schema_version=cocolon.cmee.piece_semantic_snapshot.v1`、`semantic_profile=piece_candidate_snapshot.v1`、`admission_version`、`adapter_version`、`request_ref`、`source_snapshot`、`source_commitment`、`candidate_packet`、`claim_bindings`、`relation_bindings`、`source_selections`、`snapshot_ref`。原7field／memoとmemo_actionを保持。graph IDは意味hashへ循環投入しない |
+| `PieceSemanticClaimBindingV1` | `claim_ref`、元`source_id/field_path`、scalar／UTF-8半開範囲、`subject_binding`、`predicate/arguments`、`polarity/scope_refs`、`modality`、`about_time`、報告／否定／将来条件qualifierと各根拠。P01の全6claimが一意対応。同一原文文の2claimも別binding。旧node.valueへ生成文を入れない |
+| `PieceSemanticRelationBindingV1` | `relation_ref/type/endpoint_claim_refs/evidence_refs`と原markerの範囲。留保とte連結のみ、因果未確定。quoteを失った関係・端点差替えを拒否 |
+| `PieceSourceSelectionV1` | `selection_field/selection_index/label/strength/source_commitment`、`text_binding_refs`、`coverage_state`。元`emotions`と`emotion_details`の対応を照合し、両fieldを別の二感情として重複計上しない。全選択が残ることを要求。本文がない選択の`coverage_state=SOURCE_SELECTION_RETAINED_NOT_TEXTUALIZED`を、本文に表出した感情へ偽装しない |
+| `PieceSemanticDutyBindingV1` | `duty_ref/claim_refs/node_refs/source_binding_refs/operation/required_scope_refs`。同spanの複数claimは別claim参照で全被覆し、一つの文へまとめる場合も各対象を消さない。原文外の新命題を許す汎用operationは作らない |
+| `PieceSemanticPlanV1` | `schema_version=cocolon.cmee.piece_semantic_plan.v1`、`semantic_profile/snapshot_ref/source_commitment/graph_id`、`duties/block_node_ids/selection_duties/eligible_formats/intent`。選択の保持責務と本文表出責務を別に照合。全claimと関係から再導出した同版planだけを作者へ渡す。既存compiler内の新profile分岐が作り、旧`PieceArtifactPlan`を名乗らない |
+| `PieceSemanticArtifactV1` | `schema_version=cocolon.cmee.piece_semantic_artifact.v1`、`meaning_contract_version=cocolon.cmee.piece_candidate_meaning.v1`、`semantic_profile/snapshot_ref/plan_ref/source_commitment/body_blocks/piece_text/piece_text_hash/format_type/eligible_formats/claim_realizations/retained_selection_refs`。各`claim_realizations`は`claim_ref/duty_ref/node_refs/source_binding_refs/block_index/visible_scalar_start/end`を持ち、必要scopeと実本文の半開範囲をauthor-free検査が照合する。本文の削除・入替え・複製・否定／時点改変をhash再計算後も拒否。旧public `PieceArtifact.content_payload()`や`piece.content_meaning.v1`へ変換せず、旧Safety合格を継承したと主張しない |
+| `PieceSemanticResultV1` | `decision/reason_codes/request_ref`、採用時だけ`snapshot/plan/artifact`（上記新private型）、非採用時はそれらnull。P1 receiptは別の未採用受取として保持。旧Pieceのpublic結果へ新意味を付替えない |
+
+snapshot refはsource commitment・候補全文・版・bindings・全選択からCMEEが導出。private再読は同じschema/profile/admission/adapterの組と全bindingを再検証し、hashの自己整合だけでは採用しない。意味確定後の再開は同snapshotを使用し、本文確定後は保存artifactを返す。本文原文7fieldの削減、選択無視、原因や強度の補完で成功にしない。private serialized recordだけを扱い、公開API／DB列／migration／稼働schema変更0。実装時の追加fieldがこの拘束を変える場合は、同じ案の単なる命名調整と扱わず差分を示す。

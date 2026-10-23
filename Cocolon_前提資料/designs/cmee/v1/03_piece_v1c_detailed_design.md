@@ -477,3 +477,58 @@ P1後の固定原本はCocolon PR30 `141973b4eb35428b50e09cb5c74e9a0f7e2aa208`�
 | `validate_candidate_text`／`choose_format`、既存recipe／renderer／保存owner | content envelope、プラン別選択、正規本文hash、preview/save/read/export identity | モデルのproposed formatは提案だけ。新意味経路ができてもformat・fit・recipe・本番保存の成功条件は免除しない |
 
 P2は上記の差分表まで。current guardの緩和・削除、native型の追加、語彙／文法拡張、通常Engineへの候補注入、既存本文の再生成は0。次の実装案は、P01の全意味と未確定をどのversioned意味表現で保持し、どの候補を保留／未対応にするかを先に具体化し、既存承認と照合する。型を埋めたこと、stub成功、文書反映を意味採用・商品品質の成功へ数えない。
+
+<a id="cmee-p4-offline-piece-proposal"></a>
+
+## 2026-10-23 — P4限定内部実装案：Pieceの意味採用と構造化選択の分離
+
+**PROPOSED_ONLY／未実装・未承認。** 確認原本はAPI PR3 `723ce9fe2128e66bd8a296b342466708da031bb3`、Cocolon PR30 `01cd04e366206c3e021875f09f74731ad1cf6574`。P3のEmlis承認はPieceへ流用しない。本節は今回のCMEE内部準備指示で実sourceとP2標本から具体化した次の一実装単位。実モデル、通常Piece、preview／保存／画像出力は対象外。
+
+### P4-1. 解消する条件・Mash判断が必要な差
+
+P01-NはP1で元7fieldを凍結できるが、候補意味から既存plan／作者へ入る入口がない。`engine.generate(semantic_input=...)`は現在Emlis専用で、Pieceは`semantic_offline_thread_required`になる。通常Pieceの`_selected_feeling_bindings`も「現在肯定・明示一人称・原文一文で全選択を被覆する」条件を満たさず、C0は`saved_emotion_meaning_not_yet_supported`だった。
+
+推奨は、**新規・明示offlineの原入力Pieceだけに、版付き採用snapshotを意味の起点として追加する**こと。sourceの同一性・意味被覆・作者と独立検査・版と再開を維持し、旧有限parserとの完全一致を新profileの意味採用条件にはしない。新しい自由paraphraseを無検査で通す案ではなく、最初はP01-Nの閉じた意味familyだけを扱う。
+
+本人が選んだ「喜び・不安／各weak」は本人の構造化入力であり、削除可能な装飾ではない。新profileでは全選択をsnapshot／planの独立した保持責務として残す一方、**本文に明示されない感情・程度・原因・時点を選択欄から補わない**。「不安もあった」「弱い喜びだった」を追加せず、過去の嬉しさを現在へ変えない。対応する本文がない選択は`SOURCE_SELECTION_RETAINED_NOT_TEXTUALIZED`で保持し、本文へ表出できたとは数えない。
+
+これは旧profileの「全選択を本文で被覆する」契約からの変更で、Mashの具体承認が必要。選択欄を消してP01-N成功にせず、原文にない不安文を足しても成功にしない。公開された文章だけで選択不安まで伝わるという保証も付けない。
+
+### P4-2. 型・変更owner・接続境界
+
+型field案は[設計05のP4](05_json_schema_and_versioning.md#cmee-p4-piece-snapshot-proposal)。新profile名案は`piece_candidate_snapshot.v1`。P1 receiptの`NOT_ADOPTED`は不変、採用snapshotは別private成果物とする。
+
+| exact path（API `ai/services/ai_inference/`から） | 許可を求める変更 |
+|---|---|
+| `cocolon_meaning_experience_engine/engine.py` | Piece requestの明示offline＋新profileだけをdispatch。既存Emlis／Analysis／通常Pieceは維持 |
+| `cocolon_meaning_experience_engine/piece_semantic_admission.py`（新規案1module） | P1材料／receipt再束縛、閉鎖候補採否、immutable snapshot、原格／scope／選択、private serialize/reload。別Engine・別作者なし |
+| `cocolon_meaning_experience_engine/piece_source.py` | 新profileのsource／候補／意味対応を検証。旧`validate_piece_saved_fields`／有限再導出／選択資格を維持し、新意味を旧型へ偽装しない |
+| `cocolon_meaning_experience_engine/piece_v1c.py` | 既存compiler／唯一作者に新profileの閉じたarm。全claimと保持責務からplan／本文を生成 |
+| `piece_v2_content_policy.py` | 既存author-free検査に新profileの意味被覆／引数／時点／否定scope／条件／選択照合。作者再実行を独立検査の代用にしない |
+| repository root `ai/tests/test_cmee_piece_semantic_snapshot.py`（新test案） | 新profile・意味変異・再読・旧Piece非影響。必要な同family fixtureは1つまで |
+
+`piece_v2_generation.generate_piece_candidate`は現Engine結果を旧source／plan／作者で全再導出するB8接続点であり、今回は変更しない。新profileの結果を通常B8へ流さない。公開API／DTO／DB／RN／format適格性／tier／recipe／renderer／fit／quota／export、refined／補足／履歴／モデルDIは対象外。公開outcomeへ新private型を混ぜず、明示offline呼出しだけが新private結果を受け取る。新profileのplan／artifactは設計05の`PieceSemanticPlanV1`／`PieceSemanticArtifactV1`とし、claim→node／duty→実本文範囲・選択保持責務を持たせる。既存compiler／唯一作者／policy内の版分岐がこの型を扱い、別作者は作らない。旧`PieceArtifact.content_payload()`が固定で返す`piece.content_meaning.v1`は新profileへ流用しない。新しい一般checker／runnerを作らない。
+
+### P4-3. P01-Nの必要意味・拒否変異
+
+P2保存済み手作業packetを再利用する。モデル出力・完成native graphではない。省略主体、共同相手、絶対時点、動機は補わない。
+
+| 対象 | 保持する内容 | 拒否する変異 |
+|---|---|---|
+| `p.joy` | 「助かった」と言われた本人報告、過去の嬉しさ、報告scope | 相手の本心・信頼・成長の断定、現在感情化 |
+| `p.work_left`／`p.late` | 仕事の残り、帰りの遅れ、原te連結 | 手伝いが唯一原因、量・時刻追加、同時性 |
+| `p.no_regret` | 「手伝ったことを後悔しているわけではない」の対象・否定scope | 「全く後悔がない」「良い経験だった」への強化 |
+| `p.next` | 次回引受け未確定、その時の余裕で決めたい意向 | 引受け／拒否／決意／実行済みへの変換 |
+| `p.help` | 依頼され、同僚の発表資料を一緒に直した本人報告 | 共同相手・役割・他文との実行時刻の補完 |
+| `p.contrast`／`p.cooccur` | 「でも」の留保とte連結、因果未確定 | 矛盾・因果・同時性への昇格 |
+| 全選択 | 喜び／不安・各weak、field／index／元値 | 選択削除、不安の理由追加、過去感情の強度への転写 |
+
+### P4-4. 採否・private保存再開・完了／停止
+
+採否は`ADOPTED_PROVISIONAL / HOLD / UNSUPPORTED / REJECTED`を分ける。quote一致は必要条件で意味の正しさの証明ではない。owner／版／元7field／request／参照の不一致や改変は拒否、対応未確定は保留、型・作者で全必要意味を扱えなければ未対応。成功しやすい一部だけを採用しない。
+
+同source／同版の採用snapshotはimmutable。意味確定後／plan後／本文後の中断を隔離したprivate serialized recordで再開し、同snapshot・plan・本文hashを復元する。候補再取得、旧parserへの切戻し、保存本文の再著述で置換しない。非採用は採用snapshot／成功artifactを発行しない。実DB／Piece保存tableへの書込は0。
+
+検証は元7field・owner・版・Unicode/UTF-8範囲と別request拒否、6claim／2関係／全選択の欠落・否定／時点／scope変異、整合再hash改変と別profile混入、実作者の本文・author-free照合、意味確定前後の中断／同一結果再読、旧profile全outcomeとB8非影響。旧期待を緩めず、必要な現行owner identityのみ実差分へ同期する。主担当が全本文を読み、復唱・定型性等を商品品質未達として記録する。
+
+完了は限定P01-N familyを意味→plan→既存作者の実本文→同一private保存再読へ通し、非採用と旧互換を確認すること。一般日本語・自由paraphrase・モデル・通常アプリ・商品合格は含まない。別作者、新公開保存、一般unknown／conflict、新依存、契約外意味が必要ならeffect前に停止する。既存作者へ追加する有限armでも収容不可ならHOLD／UNSUPPORTEDを維持する。同範囲の内部整合修復を版数ごとの再承認へ戻さない。

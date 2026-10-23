@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-23 JST（最新差分はMash承認の本人明示不明/二行動の限定offline profile2実装・本文/保存再開。通常application／実モデルは未接続。価格上限・27B除外、System Context再生成停止は維持）。全Cocolon作業の必読原本。
+更新日：2026-10-23 JST（最新差分は前回CIの現行owner照合同期漏れ修復と、次のPiece P4限定内部実装案。Emlis profile2の実装・旧Q2制限は維持。P4は未実装・契約判断前、通常application／実モデル未接続）。全Cocolon作業の必読原本。
 
 ## 1. この資料の役割と更新方法
 
@@ -28,7 +28,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 **学習済AIをCMEEへ接続し、既存資産を生かす方針は決定済み。** 学習済みの言語能力を土台に、Mashの観測・問い・回答後の修正を教材として観測技術を育てる。適用・評価対象はEmlisだけでなくPiece・Analysisを含む全体。採用モデル、各coreでモデルへ担わせる具体的責務・入出力、学習方法、配置・費用・速度は未決で、接続実装は未実施である。
 
-**10/23 Mash承認：CMEE側の接続仕様・offline準備を先行する。** Mashの追加範囲への「進めていいよ」を受領し、本人明示のJOY_ASPECT不明と二行動を、新規・明示offlineの`emlis_candidate_snapshot.v2`へ限定実装した。原E02-0は四claim／unknown statement→joy対象／過去の喜びと記述present／原格4つ／OMITTED主体／te連結とconcessionを、既存作者の実本文・private保存再開まで保持する。E02-0自身は問いなしENDで、架空pendingを作らない。 最終対象146 passed／FAIL0／SKIP0、106.30秒、既存警告2。内訳はsnapshot同family70（旧35＋新35）、P1旧22、Q2/Q3 application旧54。34 subtests・反復実行・本文採取を件数へ加算しない。旧adapter1/2の全outcome fixtureは変更0。旧広範囲Q1/Q3の未分類失敗は未解消で、全suite成功とはしない。 実モデル/通常有効化は未実施。最新は[weekly L](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-targeted-unknown-action-v2)と[trial §9](observation_learning/trials/2026-10-23-current-four/README.md#targeted-unknown-action-v2)。旧v1のE02未対応はその版の履歴。
+**10/23 Mash承認：CMEE側の接続仕様・offline準備を先行する。** Mashの追加範囲への「進めていいよ」を受領し、本人明示のJOY_ASPECT不明と二行動を、新規・明示offlineの`emlis_candidate_snapshot.v2`へ限定実装した。原E02-0は四claim／unknown statement→joy対象／過去の喜びと記述present／原格4つ／OMITTED主体／te連結とconcessionを、既存作者の実本文・private保存再開まで保持する。E02-0自身は問いなしENDで、架空pendingを作らない。 最終対象146 passed／FAIL0／SKIP0、106.30秒、既存警告2。内訳はsnapshot同family70（旧35＋新35）、P1旧22、Q2/Q3 application旧54。34 subtests・反復実行・本文採取を件数へ加算しない。旧adapter1/2の全outcome fixtureは変更0。旧広範囲Q1/Q3の未分類失敗は未解消で、全suite成功とはしない。 実モデル/通常有効化は未実施。最新は[weekly L](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-targeted-unknown-action-v2)と[trial §9](observation_learning/trials/2026-10-23-current-four/README.md#targeted-unknown-action-v2)。旧v1のE02未対応はその版の履歴。 前回CIは共有owner identity fixtureの同期漏れで失敗。fixture1pathをAPI302d122で同期し、既存失敗検査1件は成功（広範囲CIの再実行0）。次のPiece P4を[具体案](designs/cmee/v1/03_piece_v1c_detailed_design.md#cmee-p4-offline-piece-proposal)まで作成した。元選択を保持し本文にない感情を補わない扱いは新しい契約差分で、未実装・判断前。Analysis P5は実sourceの採用／保存差分を整理した段階。
 
 わたしマップは性格分類ではない。場面→役割→注意・思考→行動・非行動→結果・その後を、成立する範囲で示す。守る意向、負荷、不明、不一致を添え、人格を固定しない。もしもルート／IFとSavedRouteIntentは既存の設計・残件であり、省略・廃止された構想ではない。
 
@@ -133,7 +133,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
-| AI選定・観測教材 | Mashの追加範囲への「進めていいよ」を受領し、本人明示のJOY_ASPECT不明と二行動を、新規・明示offlineの`emlis_candidate_snapshot.v2`へ限定実装した。原E02-0は四claim／unknown statement→joy対象／過去の喜びと記述present／原格4つ／OMITTED主体／te連結とconcessionを、既存作者の実本文・private保存再開まで保持する。E02-0自身は問いなしENDで、架空pendingを作らない。 対象146成功（snapshot70/P1旧22/旧application54）。Q2旧cap4の混在5 contribution本文不可は残る。旧profile再現、通常非有効化を維持。C0/P1/P2原結果は保持。E02-B実pendingなしN/A、Piece/Analysis新admissionと正式Product Readは未完。9B最大4リクエスト/利用消費50円は既承認未実行、価格上限980/1,980円・27B除外を維持 |
+| AI選定・観測教材 | Mashの追加範囲への「進めていいよ」を受領し、本人明示のJOY_ASPECT不明と二行動を、新規・明示offlineの`emlis_candidate_snapshot.v2`へ限定実装した。原E02-0は四claim／unknown statement→joy対象／過去の喜びと記述present／原格4つ／OMITTED主体／te連結とconcessionを、既存作者の実本文・private保存再開まで保持する。E02-0自身は問いなしENDで、架空pendingを作らない。 対象146成功（snapshot70/P1旧22/旧application54）は前回の限定結果。今回CIの共有owner同期漏れだけを修復し、失敗した既存1検査は成功。次P4 Pieceの元7field・6claim・全選択保持とprivate再読を具体案まで完了、未実装・契約判断前。P5 Analysisのunknown根拠・行動負荷・保存validator差分を確認。Q2旧cap4の混在5 contribution本文不可は残る。旧profile再現、通常非有効化を維持。C0/P1/P2原結果は保持。E02-B実pendingなしN/A、Piece/Analysis新admissionと正式Product Readは未完。9B最大4リクエスト/利用消費50円は既承認未実行、価格上限980/1,980円・27B除外を維持 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。u353〜355のコードと配置差を保持 |
 | Analysis | 最新内容修正版の配置差、6401本人生成・再表示・比較、複数ANSWER採用、一般理解、有料差、IF／Savedの未実装 |
 | Piece | API private構成はLive。正本privacy差は3084c99eで解消。本人保存に必要なRN sourceはbranch agent/piece-testflight-private-20261023@87151へ固定、既存iOS workflowによる署名Archive/TestFlight送信1回は個別判断前・未実行。本人保存→同owner履歴/詳細、実Photos/Share、Android/backend receipt、商品受入れは残る |

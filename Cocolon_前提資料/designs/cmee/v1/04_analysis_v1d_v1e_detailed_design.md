@@ -1512,3 +1512,21 @@ V1-DまたはV1-Eをthree-core completionへ自動変換しない。
 | `analysis_observed_service.private_storage_evidence`／`_checked_projection`、既存read／commit owner | 原文・private propositionを公開／保存DTOへ出さない、閉じたfield集合、owner／期間／source集合・保存identity、再読で意味再生成0 | 新type／scope／annotationを加える場合、pure graphだけでなくserializer・saved-wire validatorも影響先。P2はそれらを変更せず、新型を既存DTOへ黙って保存しない |
 
 P2の結論は「sourceは保持できるが、一般候補を既存graph・safe表示へ採用する責任と表現に未対応差がある」。型の形状対応がある要素、根拠／読みを確認するまで保留する要素、native contract自体に表現がない要素を混同しない。全source／必要意味を保存した同一候補から、採用・保留・未対応の理由を示す案を次の実装判断へ出す。実compiler／guard／DB／API／RNの変更は未実装・未承認であり、本設計反映から自動開始しない。
+
+<a id="cmee-p5-offline-gap"></a>
+
+## 2026-10-23 — P5内部準備：実sourceで確認した採用・保存差分
+
+未実装。確認API原本723ce9f。P3 Emlisの承認をAnalysisへ拡大しない。次の実装判断はP4 Pieceへ絞り、本節はP5の具体案を作る際に戻る調査結果とする。P1 source-only freeze／半開期間／owner／元7field／版／locator／補足上限を再利用できる。
+
+| 実owner（API `ai/services/ai_inference/`から） | 今の制限と、P5案へ明示すべき差 |
+|---|---|
+| `cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py`の`UnknownGap` | 対象node／scope／reasonだけで、不明そのものの根拠fieldがない。本人明示の不明と、今回の材料に回答がない状態を分け、対象・由来・解消状態・根拠を保持する新private表現が必要 |
+| 同directory `observed_route_realizer.py::_safe_label` | 旧有限parserのproposition完全再導出が必要。新candidate snapshotを意味の起点にするなら、新profile専用の根拠付きlabel責任を設計する |
+| 同`_annotation_badges`／`analysis_observed_service.py::_checked_projection` | 現在SELFの希望＋「つらい／苦しい」の有限注記。行動への過去の「少し面倒」を同型へ偽装できない。対象・過去時点・程度・購入肯定結果との対比を保つ別の注記責任が必要 |
+| `analysis_observed_service.py::private_storage_evidence` | raw label／propositionを保存せず、unknown独自の根拠も現型にない。新意味を保存して復元するにはserializer／validatorまで一体設計が必要 |
+| repository root `supabase/migrations/20261004041627_analysis_period_comparison.sql` | private evidenceのschema allowlistはv1/v2。新snapshotを既存DBへそのまま流せない。最初はpure artifactと版付き隔離serialize/reloadに限定する案を推奨。SQL変更・実DB適用は今回0 |
+
+A02-P1のP2手作業12claimは完成native graphではない。`a.notice`（分類／送信／待機）、`a.tools_action`（貸出時記録／照合）、`a.buying`（メモ作成／見ながら購入）は複数行動をまとめており、原field範囲と必要意味の個別bindingを詰める必要がある。新candidateを旧有限parserへ合わせて削減しない。材料に使いやすさの回答がないことを、本人が知らない／使いにくい／返事待ちへ変えない。行動順を原因、同一期間を改善、複数記録を反復傾向へ補完しない。
+
+想定するP5の最小到達先は、凍結3記録→版付き採用snapshot→根拠付きgraph→同一graphの文章・図→同一artifactの隔離serialize/reload。一般conflict／複数補足／期間比較／IF／Saved／通常applicationは含めない。型・全必要意味・独立検査・保存再読の具体案を完成してから実装判断する。今回の構造追加・本文生成・試験・DB・Render・モデルは0、STRUCTURE_MAP_DELTA_NONE。

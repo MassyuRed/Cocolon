@@ -933,3 +933,17 @@ snapshot schemaは`cocolon.cmee.emlis_semantic_snapshot.v2`、checkpointは`coco
 最終対象146 passed／FAIL0／SKIP0、106.30秒、既存警告2。内訳はsnapshot同family70（旧35＋新35）、P1旧22、Q2/Q3 application旧54。34 subtests・反復実行・本文採取を件数へ加算しない。旧adapter1/2の全outcome fixtureは変更0。旧広範囲Q1/Q3の未分類失敗は未解消で、全suite成功とはしない。
 
 原E02の有限文法と既受理event/feelingの併存に閉じる。一般unknown/ACTION、新要素自身の変更・解消・依存削除はHOLD/UNSUPPORTED。旧Q2 cap4では混在更新の5 contributionを提供できず意味保存後BODY_UNAVAILABLEとなる制限を残し、capを緩めない。現在のQ3実serviceでの隔離SQL/RPC保存・中断再開成功と区別する。実モデル／有料推論／重み／学習／本人DB／Render／通常application有効化／公開API・DTO・RN変更／merge／deployは0。限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT、product_credit=0／PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=false。
+
+<a id="cmee-p4-next-unit"></a>
+
+## 2026-10-23 — 次の内部準備単位：Piece意味snapshotの限定案
+
+Emlis新profile2の承認・実装を維持し、旧Q2のcap4を緩めない。次は未着手だったP4を[Piece設計03の具体案](03_piece_v1c_detailed_design.md#cmee-p4-offline-piece-proposal)と[private型案05](05_json_schema_and_versioning.md#cmee-p4-piece-snapshot-proposal)まで具体化した。**PROPOSED_ONLY／実admission未実装・未承認**。モデル選定や認証を待たずに判断できる案で、実モデル接続を含まない。
+
+新規・明示offline・原入力1件のPieceだけで、元7field／P1 request→候補採否→immutable意味snapshot→既存plan／唯一作者／author-free照合→同一private serialize/reloadを実装する案。P01-Nの6claim／2関係と全選択を保持する。全選択を本文一文に対応させる旧契約から、構造化選択は別の本人入力として必ず保持し、本文にない感情・程度・時点・原因は補わない契約への差分を明示した。旧profile／旧保存は維持。通常B8／preview／実保存／fit／export／DB／RNは未変更・案の対象外。
+
+Analysis P5も実sourceを確認した。対象付きunknownの根拠、行動への過去の軽い負荷、safe label、private serialize/reloadが一体の差分となる。[Analysis設計04の調査結果](04_analysis_v1d_v1e_detailed_design.md#cmee-p5-offline-gap)へ残した。P2手作業packetを完成graphとせず、Pieceと一括して実装承認済みにしない。最初の実装判断はP4一単位に絞る。
+
+前回API CI39912451179はAnalysis対象1634成功後、現行共有owner identity fixtureの同期漏れで1失敗。既存producerから承認済み6ownerの差を同期し、既存失敗検査は1 passed／194 deselected、26.43秒。API `302d1223362484b30cf66c9c2c3ca3a72b6cdf2d`はfixture1pathだけ、GitHubの全文・blob・変更集合・PR headを読戻し確認済み。historical IM03・旧全outcome・検査assertion・production codeは変更0。過去CIは失敗のまま、新しい全suite／CI合格を主張しない。新しい広範囲再実行は0。
+
+今回のprimaryはBLOCKER_NARROWED（次P4の具体差分）。identity修復は前回実装の検証整合だけで商品品質creditにしない。STRUCTURE_MAP_DELTA_NONE（既存ownerと現行fixtureの同期、P4/P5の新runtime ownerは未追加）、product_credit=0、PRODUCT_NOT_CLEAR、正式0/3、candidate_ready=false、automatic_progression=false。Codex Work Modeで主担当が統合・反映し、補助担当は読取のみ。確認できないPro／Ultraの正式審査・実モデル・稼働・本人受入れは申告しない。
