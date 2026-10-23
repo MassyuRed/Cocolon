@@ -4541,3 +4541,7 @@ Cocolon側の新analysis_semantic_snapshot_results.jsonは全private完成state�
 | split_manifest.json | 学習候補の題材と、既存20場面の既知派生／開発確認／未使用評価候補の区分。元fixture・guideを変更しない |
 
 全機能00・観測教材入口・モデル比較入口・latest weekly Sへ同期。元観測記録／実演／M1 raw・API source・CMEE P1〜P5は不変。STRUCTURE_MAP_DELTA_NONE（教材資料の所在のみ。runtime owner／型／接続／公開契約変更0）、実学習・GPU起動・課金0。
+
+## 2026-10-23 — 第5回観測会の資料所在（runtime構造差分なし）
+
+新規 `observation_learning/sessions/2026/OBS-20261023-001/01_dialogue.md` は短い架空感情入力D00と今後の実発言だけを、同 `02_learning_notes.md` は初回に見せない本人役の事前設定・未設定・実回答後の出典対応を所有する。両pathのrootは `Cocolon_前提資料/`。初回に見えない心理を当てる試験にせず、実問答・読み直しは未実演。既存教材16件へ未追加。入口・全機能00・latest weekly Tへ同期。STRUCTURE_MAP_DELTA_NONE（教材所在のみ。runtime owner／型／接続／公開契約変更0）。GPU・推論・学習0。
