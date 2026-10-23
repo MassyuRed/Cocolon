@@ -4561,3 +4561,18 @@ Cocolon側の新analysis_semantic_snapshot_results.jsonは全private完成state�
 | Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-002/02_learning_notes.md（新） | 初回前に固定した本人役の設定、可視範囲、問いへの回答範囲、未設定と分担 |
 
 教材入口・全機能00・latest weekly Vへ同期。第7回targetはまだなく、18候補を全三中核の完成教材や学習改善へ昇格しない。STRUCTURE_MAP_DELTA_NONE（教材所在のみ。runtime owner／型／接続／公開契約変更0）。GPU・推論・学習・課金0。
+
+## 2026-10-24 — Emlis Free教師案・比較入力pack（runtime構造差分なし）
+
+新規folderは `Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-free-pilot/`。
+
+| file | 所有する内容 |
+|---|---|
+| README.md | 既存Free仕様への対応、今回の教師案・比較条件・未確認・次の具体作業 |
+| sft_examples.jsonl | 華恋編集7＋架空補充2の完成応答案9件。出典・可視順・由来・制限 |
+| train_messages.jsonl | 同9件のmessagesのみ。元18候補と連結しない |
+| eval_inputs.jsonl | 学習に使わない6題材。モデルへはmessagesだけ |
+| eval_review.jsonl | 別保存の意味・自然さの確認点。モデルpromptへ渡さない |
+| experiment.json | 範囲・件数・固定model・方法案・実行未準備の残件・比較と打切りの考え方 |
+
+全機能00・教材入口・原18候補のREADME・latest weekly Wへ同期。原18候補・教示5参照・原対話・旧20評価fixtureは不変。既存比較用のEmlis6欄への教材投影で、公開API／DTO／実CMEEの新型・採用・保存ではない。STRUCTURE_MAP_DELTA_NONE（教材所在のみ）。GPU・モデル実行・学習・課金0。

@@ -1,0 +1,97 @@
+{
+  "schema": "cocolon_emlis_free_sft_pilot_proposal.v1",
+  "status": "DATA_PREPARED_EXECUTION_NOT_READY",
+  "prepared_at": "2026-10-24 JST",
+  "author": "Karen / Codex Work Mode",
+  "scope": {
+    "core": "EmlisAI",
+    "tier": "free",
+    "source": "current original + same-thread answer only",
+    "history": false,
+    "frame": false,
+    "question_budget_total": 1,
+    "after_answer_question_remaining": 0,
+    "cmee_integration": false
+  },
+  "dataset": {
+    "teacher_rows": 9,
+    "teacher_families": 6,
+    "with_question": 3,
+    "question_null": 6,
+    "initial_rows": 6,
+    "after_one_answer_rows": 3,
+    "original18_unchanged": true,
+    "teaching5_unchanged": true,
+    "withdrawn_session_excluded": "OBS-20261024-002",
+    "source_commit": "d57fe2205cfa74d018b2a33a1e4e74ca6837310d",
+    "note": "既存素材を使う別の完成応答案9件。原18行と合計して独立27教材と数えない。2補充の感情選択・カテゴリは今回の作者設定。",
+    "initial_with_question": 3,
+    "initial_question_null": 3,
+    "origin_counts": {
+      "KAREN_EDIT_OF_EXISTING_RECORD": 7,
+      "KAREN_NEW_FICTITIOUS_SUPPLEMENT": 2
+    }
+  },
+  "evaluation": {
+    "new_case_count": 6,
+    "new_family_count": 6,
+    "input_file": "eval_inputs.jsonl",
+    "review_file": "eval_review.jsonl",
+    "training_use": false,
+    "author_has_read": true,
+    "blind_final_evaluation": false,
+    "existing20fixtures_unchanged": true,
+    "limits": "限定Freeの比較用。Plus/Premium/Piece/Analysis/IFの品質や統計的な一般化を証明しない。"
+  },
+  "base_model": {
+    "model": "Qwen/Qwen3.5-9B",
+    "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "root_architecture": "Qwen3_5ForConditionalGeneration",
+    "text_only_request": true,
+    "thinking": false
+  },
+  "method_proposal": {
+    "method": "PEFT LoRA",
+    "base_dtype": "bfloat16",
+    "rank": 8,
+    "alpha": 16,
+    "bias": "none",
+    "batch_size": 1,
+    "gradient_checkpointing": true,
+    "use_cache": false,
+    "max_epochs": 1,
+    "loss": "final assistant completion only",
+    "training_target": "actual text language_model Linear modules; vision/embedding/lm_head frozen",
+    "save": "adapter only",
+    "status": "PROPOSAL_NOT_IMPLEMENTED_OR_VALIDATED"
+  },
+  "unresolved_before_gpu": [
+    "固定checkpointのtokenizerで9件・6評価のtoken数をCPU上で計測し、chat-template prefixと最終assistant loss範囲を確認する。無断切捨てをしない。",
+    "対応Transformers/PEFTとQwen3.5の実module名・利用kernelを確認し、固定する。generic Qwen3 causal classへ取り違えない。",
+    "同じmodel revision・入力・chat template・非thinking・温度0の学習前後比較手順を用意する。M1とは入力が違うため直接勝敗へしない。",
+    "A40 48GBでの実VRAM・時間は未測定。実行手順とGPU利用の上限時間／金額・停止担当を具体化してから有料実行の承認対象とする。"
+  ],
+  "comparison": {
+    "pre_and_post_same_input": true,
+    "temperature": 0,
+    "train_on_eval": false,
+    "save_raw_outputs_separately": true,
+    "semantic_review": "evaluate all 6 actual responses for groundedness, source revision, unknown/time/actor and human reception; no JSON-only PASS"
+  },
+  "decision": {
+    "positive_signal": "複数の学習外題材で根拠外の理由・主体反転・訂正の復活が減り、自然な受け取りが悪化しない。",
+    "insufficient": "学習した題材の再現だけ、JSON形だけ、定型語の増加だけでは改善判定しない。",
+    "no_signal": "改善が見えなくても9件・1回の結果だけで追加学習全体の不可能を断定しない。追加実行・予算拡張を自動で行わない。"
+  },
+  "gpu_started": false,
+  "fine_tuning_performed": false,
+  "cmee_integration_performed": false,
+  "automatic_progression": false,
+  "primary_sources": [
+    "https://huggingface.co/Qwen/Qwen3.5-9B/blob/c202236235762e1c871ad0ccb60c8ee5ba337b9a/config.json",
+    "https://huggingface.co/docs/transformers/en/model_doc/qwen3_5",
+    "https://huggingface.co/docs/peft/en/package_reference/lora",
+    "https://huggingface.co/docs/trl/en/sft_trainer",
+    "https://huggingface.co/Qwen/Qwen3.5-9B/blob/c202236235762e1c871ad0ccb60c8ee5ba337b9a/chat_template.jinja"
+  ]
+}

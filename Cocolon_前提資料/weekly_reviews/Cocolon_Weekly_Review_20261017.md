@@ -2488,3 +2488,14 @@ D01は課題範囲の確認で、架空入力者への観測質問ではない�
 Mashは、Plus想定と今回Bを応答対象とする場面を今決めたのか、Cocolonの仕様を確認せず提示したのかと指摘した。華恋は、機能・プラン・利用場面を確定せず題材を出し、指摘後にPlus想定を後付けしたことを認め、観測依頼を取り下げた。単なる説明不足として処理しない。原文はsession D03/D04へ保存し、D00〜D02・事前設定H01〜H12は改稿しない。
 
 第7回はWITHDRAWN_NOT_FOR_TRAINING、学習対象・次の観測会から外す。SFT候補18件・教示5参照は既にGitHubへ保存済みで、読書会の題材は含まれていない。今回その18件・5参照・既存評価割当は変更せず、撤回した題材を有効な再開先としていた入口・現在地・準備README／manifestを訂正する。題材の経過を削除せず、品質合格や新しい実行承認へ読み替えない。STRUCTURE_MAP_DELTA_NONE、runtime・商品仕様・GPU・学習・課金・DB・配置変更0。
+
+<a id="20261024-emlis-free-pilot-data"></a>
+## W. 2026-10-24 — Emlis Freeの仕様へ対応した教師案9件と学習外比較6件
+
+Mashの「で？どないすんの、これ。」を受け、観測会の再依頼を開始条件にせず、華恋が完成応答案と比較入力を作成した。最初の範囲を既存Emlis Free仕様（今回原入力と同thread回答だけ、履歴・frameなし、問い0..1、回答後残数0）に固定した。全三中核を育てる既決方針をFreeだけへ縮小する決定ではない。
+
+新規[2026-10-24-emlis-free-pilot](../observation_learning/training/2026-10-24-emlis-free-pilot/README.md)へ、出典付き教師案9行・messagesだけの同9行・学習外の比較入力6件・別rubric6件・実験案を保存。9件は華恋編集7＋架空補充2、六つの教材family、初回6（問いあり3／なし3）＋一回答後3（全て問いなし）。本返却・椅子・開店は実問D01と実回答D02までに閉じ、二問目以降をFreeの一往復へ偽装しない。椅子初回は後の訂正を先読みせず、訂正後だけ共同修理と再使用へ更新。基本補充2件の感情選択・カテゴリは今回の作成者設定と明記した。Mashの完成実演・品質承認へは昇格しない。
+
+学習外6件は作者が読んだ比較問題であり盲検の最終評価ではない。根拠外の理由・主体・不明・否定・時点・数量訂正・問い選択と自然な受け取りを本文で比較する。原18候補・教示5参照・原対話・旧20評価fixture・M1 rawは不変。独立27教材とは数えず、取り下げた第7回も使わない。
+
+方法は同じ固定9BへのBF16 LoRA案。公式の固定config・model docs・PEFT／SFT／chat templateを参照したが、rootはQwen3_5ForConditionalGenerationで、実module・依存とkernel・token／label・A40実VRAM／時間は未検証。今回の状態はDATA_PREPARED_EXECUTION_NOT_READY。次の具体作業はCPU token／prefix／completion label確認と、実行手順・現在単価・上限時間／費用・停止担当の具体化。GPU起動・追加モデル推論・実学習・課金・DB・Render・API/RN・merge/deploy0。STRUCTURE_MAP_DELTA_NONE（教材資料のみ）、商品品質・学習効果は未成立。
