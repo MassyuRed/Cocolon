@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-23 JST（最新差分は三中核のAI原価・制限・料金案。System Contextの現行実行導線も維持）。全Cocolon作業の必読原本。仕様相談、観測会、AI選定、実装、監査、文書更新も対象。
+更新日：2026-10-23 JST（最新差分は三中核のAI原価・制限・料金案とSystem Context再生成停止）。全Cocolon作業の必読原本。仕様相談、観測会、AI選定、実装、監査、文書更新も対象。
 
 ## 1. この資料の役割と更新方法
 
@@ -113,7 +113,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | ProfileCreate旧資産 | `ProfileCreateScreen.js`・`api_profile_create.py`は現存 | fresh Root＋5 Stackに通常route／importを確認できず。通常入口接続済みへ昇格しない |
 | 国家システム・非同期処理 | 原入力保存・event dispatch、分析素材／queue、通知・集計・保持期限、API／DB／認証・公開governanceが各ownerを持つ | 原入力の保存を生成成功に従属させない。Emlis補足・続行を入力件数／課金eventへ再加算しない。queue・job・retryの存在をlive稼働／全処理成功へ換算しない |
 | 生成基盤・開発運用 | APIのCMEE EngineにEmlis thread／Piece／Analysis consumer分岐あり。既存共有text core・生成guard・contract・tests、RN build／CIは支援基盤 | 固定snapshot／旧禁止条項はその時点の範囲。学習済AI接続は未実装だが方針は既決。稼働設定・秘密値・DB実値・端末は原本sourceから推測しない |
-| System Context | 実装正本はPR37、商品原本はPR30/API PR3の別checkout。固定環境doctor→prepare→verify-only、非追跡cacheが現行route。商品側の旧CLI実行案内を正規routeへ同期し、baseline seedと旧期待値の不一致を修復 | tracked currentは8月snapshotで使用不可。現行参照・全機能原本・最新weekly・観測教材・三core現物の生成対象同期を行い、実再生成の成否は[PR37](https://github.com/MassyuRed/Cocolon/pull/37)の最新exact-head実行記録から確認する。検査成功だけで生成成功としない。商品品質・本人端末・配置状態の変更なし |
+| System Context | 実装正本はPR37、商品原本はPR30/API PR3の別checkout。旧CLI/追跡読順を正規routeへ同期し、全機能原本・最新weekly・観測教材・三core現物を選択対象へ追加、seed期待の不一致を修復 | 最新cacheは未生成。固定環境doctor34項目/関連CIは成功したが、API Python索引1874対象が1200秒/1800秒ともtimeout。2回目は処理中のPR30費用案更新により終了時head確認も不一致。失敗・原本との差を[PR37](https://github.com/MassyuRed/Cocolon/pull/37)へ記録し、同じ時間延長だけの再試行を停止。tracked currentは8月snapshotで使用不可。fresh原本の直接読取を使い、最新索引完成とは扱わない |
 
 共通状態として、未入力／不足、保存中／保存失敗、本文生成失敗、回答待ち／skip／終了／訂正／撤回、履歴なし／期限切れ／source失効、未認証／owner不一致／プラン不足、非公開／公開／削除、未読／既読、課金保留／有効／失効／復元を区別する。具体的挙動は該当contract・実ownerで確認し、この列挙を全状態遷移の実機合格証にしない。
 
@@ -160,6 +160,6 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 10/23今回Piece差分は、正本APIの同一2blob同期/原CI39864098163、既存Render稼働不変、最新TestFlight成功run/source/Upload stepと現RNの配布差、固定candidate refを照合したもの。API source2path/正本の限定CI1/配布候補branch1、今回Render/DB/本人row/署名build/TestFlight送信0。別集計として候補branch既存phase6自動検査1成功、最初のdocs反映4571の既存自動検査5件は3成功/2失敗。System Context2件は変更していないseed期待[8,5]と現profile[1,8,5]の不一致、各225 PASS/1 FAILで当時未修復（本System Context更新でseed期待を修復）。原log・区別は入口§119.5/manifestに記録し、再試行0/最終docs補正は[skip ci]。他機能の品質・本人端末を再検証した意味ではない。
 
-10/23 System Context更新：全tracked pathと全体設計・全file地図・current maps・最新weekly・全機能原本・対象sourceを照合。旧inventoryとの差はCocolon追加168/API追加328、削除各0（照合head bef22ae…/3084c99e…）。全blobの意味読了ではない。正規実装はPR37の固定環境・material分離・cache方式であり、商品側入口を同期した。学習済AI方針・問い実装・Analysis IF/Saved・Piece API/RNの区別は既存正本どおり保持。今回の差分はSystem Contextのみ、他機能の稼働/本人端末/商品品質再検証は行っていない。実行結果の追記だけのために商品headを動かさず、PR37の最新実行報告を確認先とする。STRUCTURE_MAP_DELTA_NONE（商品source/接続変更なし）。
+10/23 System Context更新：全tracked pathと全体設計・全file地図・current maps・最新weekly・全機能原本・対象sourceを照合。旧inventoryとの差はCocolon追加168/API追加328、削除各0（照合head bef22ae…/3084c99e…）。全blobの意味読了ではない。正規実装はPR37の固定環境・material分離・cache方式であり、商品側入口を同期した。学習済AI方針・問い実装・Analysis IF/Saved・Piece API/RNの区別は既存正本どおり保持。今回の差分はSystem Contextのみ、他機能の稼働/本人端末/商品品質再検証は行っていない。実再生成は固定環境doctor34項目を通過したが、Python1874対象が20分/30分ともtimeoutで最新cache未生成。2回目は処理中の費用案更新で商品headも進み、終了時head確認が失敗した。資料・参照・読取導線の更新と索引の未完了を区別し、同じ時間延長だけの追加試行は停止。fresh原本を直接読み、診断・次の再開条件はPR37から解決する。STRUCTURE_MAP_DELTA_NONE（商品source/接続変更なし）。
 
 10/23費用差分：上記固定headのsourceと27B原本、現行プラン表示設定、公式GPU・基盤・ストア手数料を照合。全体原価を仮定付き172条件で計算し、料金・生成枠と4場面の実行予算を提案した。今回DBはプラン設定のread-onlyのみ、本人入力取得／変更0、GPU／有料推論／チャージ／price/quota変更0。STRUCTURE_MAP_DELTA_NONE（接続実装・商品contract差分なし）、product_credit=0。
