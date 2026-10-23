@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-23 JST（最新差分はP2後の新規Emlis限定snapshot／問い・回答更新・保存再開案の具体化。意味採用契約の実装判断待ち、実admission未実装。価格上限・27B除外とSystem Context再生成停止は維持）。全Cocolon作業の必読原本。仕様相談、観測会、AI選定、実装、監査、文書更新も対象。
+更新日：2026-10-23 JST（最新差分はMash承認済みの新規Emlis限定offline snapshot／実問い・回答更新・隔離保存再開の内部実装。通常application／実モデルは未接続。価格上限・27B除外とSystem Context再生成停止は維持）。全Cocolon作業の必読原本。仕様相談、観測会、AI選定、実装、監査、文書更新も対象。
 
 ## 1. この資料の役割と更新方法
 
@@ -28,7 +28,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 **学習済AIをCMEEへ接続し、既存資産を生かす方針は決定済み。** 学習済みの言語能力を土台に、Mashの観測・問い・回答後の修正を教材として観測技術を育てる。適用・評価対象はEmlisだけでなくPiece・Analysisを含む全体。採用モデル、各coreでモデルへ担わせる具体的責務・入出力、学習方法、配置・費用・速度は未決で、接続実装は未実施である。
 
-**10/23 Mash承認：CMEE側の接続仕様・offline準備を先行し、モデル比較を並行する。** [最新議事録の作業計画](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)を再開地点とする。P1の内部材料・未採用候補受口を実装し、固定4場面20receiptを確認済み。実モデル接続・API推論・重み読込・意味採用0。外部認証・モデル最終選定を待たない。P2の具体差分表と4手作業設計例28claim/60quoteを保持し、後続の[限定実装案](designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-p3-bounded-proposal)を具体化した。新規Emlis threadのみで意味snapshot→問い／回答更新→隔離保存・再開を同一版へ揃える案。旧threadは現行方式、runtime_profileのQ2/Q3条件は維持する。既存SQLのjsonbを使う保存案はsource確認までで、実DB成功ではない。Piece／Analysisへの新候補採用、実モデル、通常application有効化は対象外。次は有限再導出から暫定採用snapshotへ意味の起点を変える契約差分の判断。実admission adapterは未実装。
+**10/23 Mash承認：CMEE側の接続仕様・offline準備を先行する。** P1材料/未採用受口とP2設計対応を保持し、後続の限定実装案へ「進めていいよ」を受領。[限定内部実装](designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-p3-implemented)で、新規Emlisの明示offline候補→暫定snapshot→既存作者/実問い→ADD/REVISE/WITHDRAW→意味先行保存/中断再開を接続した。旧profileとQ2/Q3 runtime、通常serviceの非有効化を維持。実モデル/API推論/実DB/Render0。対象101成功、旧広範囲試験の失敗は残り全suite成功ではない。E02-0のunknown/actionsはUNSUPPORTED、E02-Bは実pendingなしN/A、Piece/Analysis新admissionは範囲外。実本文の時点語反復は未解決で商品合格ではない。[最新weekly J](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)と[trial P3](observation_learning/trials/2026-10-23-current-four/README.md#p3)から、残る意味要素/native/作者の具体対応を詰める。認証やモデル最終選定を待たず、同じ限定範囲を再承認待ちへ戻さない。
 
 わたしマップは性格分類ではない。場面→役割→注意・思考→行動・非行動→結果・その後を、成立する範囲で示す。守る意向、負荷、不明、不一致を添え、人格を固定しない。もしもルート／IFとSavedRouteIntentは既存の設計・残件であり、省略・廃止された構想ではない。
 
@@ -133,7 +133,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
-| AI選定・観測教材 | Mash承認の[先行準備＋並行比較計画](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)を優先。P1とP2設計対応は完了。4手作業例は全未採用。P2後の限定実装案を設計01／schema05へ保存：新規Emlisのoffline意味採用・実pending更新・保存再開を一単位とし、旧意味profileとQ2/Q3 runtimeを維持。契約差分の実装判断待ち。新候補によるadmission／Emlis回答更新・Piece／Analysis接続は未実装。C0は保存済みを再利用（本文1／N_A1／未対応2）、9B最大4リクエスト／利用消費50円は承認済み未実行・認証後状態未確認。価格上限980／1,980円・27B除外を維持。本統合／モデル採用／追加学習／価格・quota変更は未実施 |
+| AI選定・観測教材 | P1/P2に続き、Mash承認済みの新規Emlis限定offline snapshot/実pending更新/隔離保存再開を実装。新25＋P1旧22＋旧application54＝対象101成功、広範囲旧Q1/Q3の失敗は未解消。E02-0のunknown/actionsは全体UNSUPPORTED、E02-BはN/A。旧profile/Q2/Q3 runtime・通常非有効化を維持。C0/P1/P2原結果は再利用、実モデル/推論/実DB/Render0。9B最大4リクエスト/利用消費50円は既承認未実行、価格上限980/1,980円・27B除外を維持。モデル採用/追加学習/通常統合/価格・quota変更は未実施 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。u353〜355のコードと配置差を保持 |
 | Analysis | 最新内容修正版の配置差、6401本人生成・再表示・比較、複数ANSWER採用、一般理解、有料差、IF／Savedの未実装 |
 | Piece | API private構成はLive。正本privacy差は3084c99eで解消。本人保存に必要なRN sourceはbranch agent/piece-testflight-private-20261023@87151へ固定、既存iOS workflowによる署名Archive/TestFlight送信1回は個別判断前・未実行。本人保存→同owner履歴/詳細、実Photos/Share、Android/backend receipt、商品受入れは残る |
@@ -170,4 +170,4 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 10/23接続準備差分：固定4fixture・source84blobのC0実結果を再利用し、Mash承認の先行offline準備と並行9B比較について、作業順・変更owner・成果・完了条件・予算・新セッションの最初の1作業を最新議事録へ具体化した。今回の変更は既存5文書のみ。後続のMashの指摘を受け、先行準備はCMEE内部の仕様・材料整理と固定仮データ確認で、実モデル接続を含まないと明確化した。P1実装・stub実行・新規C0・外部9B推論・費用・本人DB・production実装／契約／稼働変更0。STRUCTURE_MAP_DELTA_NONE（作業計画・再開導線のみ）。先の限定TECHNICAL_CREDITはoffline束縛／C0出力だけ、今回ADMINISTRATIVE_ONLY、product_credit=0、実モデル比較未完了。
 
-10/23内部準備実装差分：今回のMash明示指示によりP1を実装。正規sourceの材料投影と未採用receipt、固定4場面20往復、合成境界unittestを確認。全結果は既存trial P1。通常Engine／意味guard／service／DB／公開DTO／RN／本番は未変更、C0・fixture・M1 messagesを保持。後続P2で既存型／採否責任・維持／再設計する検査を具体表へ反映済み。実admissionは未実装。P2のAPI code/test/guard変更0、原文参照／型fieldのinspectionだけを実施、primary=BLOCKER_NARROWED／product_credit=0。STRUCTURE_MAP_DELTA_PRESENT（未接続offline境界と2private型）、限定TECHNICAL_CREDIT、product_credit=0。未提供metadataをnullとして保持し、stubを実モデルの理解・速度・料金の実測へ転用しない。
+10/23内部準備の最新差分：P1二module/元結果とP2四設計例は保持。承認済み限定Emlis snapshotの新owner1＋既存production4とtest1を追加/変更し、旧single-input三guard/作者/共有型/旧fixtureは変更0。実型と保存版は設計05、全変更fileは01A末尾、実検証と未加工合成本文はtrial P3。通常API/DTO/RN/実DB/Renderは未変更。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、product_credit=0。P1stub・手作業候補を実モデルの理解/速度/料金実測へ換算しない。

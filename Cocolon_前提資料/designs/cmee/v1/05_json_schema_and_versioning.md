@@ -3002,9 +3002,9 @@ sealはcanonical JSONのseal_ref空版に対するSHA256。received prefix `init
 
 <a id="cmee-p3-snapshot-schema"></a>
 
-## 2026-10-23 — P2後の新規Emlis限定snapshot案（未実装）
+## 2026-10-23 — P2後の新規Emlis限定snapshot案（提案時）
 
-**PROPOSED_ONLY / IMPLEMENTATION_APPROVAL_PENDING。** [限定範囲・実owner・検証条件](01_shared_kernel_and_runtime_contracts.md#cmee-p3-bounded-proposal)は設計01、型と版の案は本節を唯一ownerとする。既存型・SEMANTIC_SCHEMA定数・SQL・保存内容は今回変更0。
+**提案時：PROPOSED_ONLY / IMPLEMENTATION_APPROVAL_PENDING。現在はMash承認済み、実型は後続[cmee-p3-actual-schema](#cmee-p3-actual-schema)。** [限定範囲・実owner・検証条件](01_shared_kernel_and_runtime_contracts.md#cmee-p3-bounded-proposal)は設計01、型と版の案は本節を唯一ownerとする。既存型・SEMANTIC_SCHEMA定数・SQL・保存内容は今回変更0。
 
 ### 版と入出力
 
@@ -3042,3 +3042,21 @@ sealはcanonical JSONのseal_ref空版に対するSHA256。received prefix `init
 非採用評価は既存OPERATION eventのprivate payload内へ`semantic_profile / attempted_source_prefix_ref / prior_active_snapshot_ref / decision / candidate_receipt / reason_codes / unresolved_refs`を保存し、thread dataの`semantic_evaluation_ref`へ結ぶ。新MEANING_UPDATEやsnapshotは作らず、evaluated_prefix_refを新prefixへ進めない。初回priorはnull。回答後のprior snapshotは旧prefixの履歴としてのみ保持し、実ANSWERと未反映理由を残す。新prefixのcurrentな読み・成功本文へ付け替えず、下流へ成功handoffしない。再開時のREAD_NONADOPTEDは保存評価を再読し、勝手な候補再採用をしない。本文失敗後の意味確定と、意味未確定の回答保留を混同しない。raw候補を公開DTOへ返さず、既存events／結果記録の範囲を使い、新しい台帳・保存serviceを増やさない。
 
 P1の2型・P2例28claim/60quote・既存22件の結果は履歴として保持。本案で新たなruntime型・新admission・schema検査・意味採用が成立した件数は0。
+
+<a id="cmee-p3-actual-schema"></a>
+## 2026-10-23 — 限定offline Emlisの実型・保存版
+
+本節が実装済みのfield owner。前節の未実装案は提案時の記録。旧`GenerationRequest`／`EmlisThreadControl`／`EmlisMeaningCheckpointV1`のfieldと旧schemaは変更しない。`emlis_semantic_admission.py`に次のprivate型を置き、通常APIで受け付けるfieldは追加しない。
+
+| 実型／版 | field・役割 |
+|---|---|
+| `SemanticInput` | frozen/slots、`mode,receipt=None,snapshot_json=None,prior_snapshot_json=None`。Engine／prepareのkeyword-only引数。FRESH_CANDIDATEはreceipt必須・既存checkpoint ref禁止、回答時prior必須。RESUME_ADOPTEDはsnapshotのみ |
+| `SnapshotCheckpoint(EmlisMeaningCheckpointV1)` | 旧fieldを継承し、`semantic_schema_version=cocolon.cmee.emlis_answer_meaning.v2`、`semantic_profile=emlis_candidate_snapshot.v1`、`semantic_snapshot`（canonical JSON str）、`snapshot_ref`を追加 |
+| `SnapshotPreparedMeaning(PreparedEmlisMeaning)` | `semantic_snapshot`と凍結P1材料`semantic_material_json`を追加。既存作者への入力にだけ使用 |
+| `SemanticNotAdopted(ValueError)` | `decision`=REJECT/HOLD/UNSUPPORTED、閉じた`reason_code`、private `receipt`。本文の成功へ変換しない |
+
+snapshot schemaは`cocolon.cmee.emlis_semantic_snapshot.v1`。全keyは`schema_version,semantic_profile,admission_version,adapter_version,request_ref,source_prefix_ref,source_bindings,packet,prior_ref,prior_snapshot,receipt,answer_count,question_control,claim_mapping,snapshot_ref`。admission/adapter版は各文字列`1`。packetはP2 proposalのcandidate＋evidence、receiptは元P1診断も含む。source_bindingsはsource_id/version/role/envelope_id/commitment。claim_mappingは候補IDからCMEE導出native IDへの対応。prior_snapshotは過去active意味と累積更新の再構成用に保持する。
+
+snapshot_refはcanonicalな上記意味内容（schema/profile/各版/request/prefix/source_bindings/packet/prior_ref/answer_count/question_control/claim_mapping）のSHA256。receiptのraw JSON書式やusage/時間/provider診断は意味identityから除外し、receiptそのものは保存する。priorはprior_refへ束縛し、再開時は原sourceから各過去prefixを復元して検証。checkpoint IDはprefix＋snapshot refへ束縛する。同prefixを別候補で上書きしない。snapshotは生成された自由strの語彙拡張ではなく、現native enumと既存lexical責務に閉じた読みの固定である。
+
+新thread.dataへsemantic_profileとOFFLINE_CANDIDATE modeを保存し、runtime_profileはq2.free.one_round.v1／q3.plan.sequential.v1のまま。MEANING_UPDATE.payloadの既存jsonbへ新版checkpointを保存する。非採用は既存OPERATION.payloadのstage=SEMANTIC_NOT_ADOPTED、attempted_source_prefix_ref／prior_active_snapshot_ref／decision／reason_codes／candidate_receipt（取得未完了ならnull）を持つ。READ_NONADOPTEDは新公開modeや型を作らず、この保存評価を既存service内で再読する分岐として実装した。新table/column/migration、公開DTO fieldは0。

@@ -1845,3 +1845,7 @@ Observationも修復し、本人説明と不明を原文順だけで「一つの
 技術検証：分割実行・重複除外で対象140件通過（旧全比較50を含むcore90、source31、SQL15、既存manifest3、現行owner identity1）。独立した未変更u352原本50件と、checkpoint・original plan・accepted核・更新plan・関係・selected・本文・質問・停止が一致。保存済み完成DTOは再生成せず、未完成は保存checkpointの再利用／意味前再開を分けて検証した。同一の保存DTO 15件を実apiClient→API→hook→Modalで閉じて再表示2回まで確認。HTTP/Auth/nativeはstub、本人実機ではない。pytestは専用`--noconftest`の対象検証で、全suite成功とは呼ばない。
 
 STRUCTURE_MAP_DELTA_PRESENT。既存production10owner内の変更、新private logical3型で87→90。公開API／DTO／DB migration／RN製品code／Safety仕様／依存は変更していない。Work補助担当は読取レビュー、編集・実行・統合・GitHub反映は主担当。別modelの正式二重評価やProduct Read成功へ転用しない。PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=falseを維持。初回一体単位の限定技術修復を閉じるが、E04〜E09・深い理解・一般入力・否定unknown訂正の別generic整合・本人実機は残件。Piece/Analysis主枠53.25％、10/20方式判断・10/31管理線・12/18公開目標は再評価していない。Draft PR3／PR30継続、merge／deployなし。詳細・実本文・全変更地図は[u353監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u353_InitialPersonalMeaning_20261018.md)。
+
+## 2026-10-23 — 承認済み限定offline snapshot経路
+
+新規Emlisの明示offline DIだけ、手作業候補→新semantic snapshot→既存thread plan/projection/author/question→実回答ADD/REVISE/WITHDRAW→意味先行保存と再開を接続した。実owner/全fileは01A末尾、schemaは設計05、制限と実行は[trial P3](../observation_learning/trials/2026-10-23-current-four/README.md#p3)。旧意味parser/guardは既定経路で維持し、通常factory/API/RNは新profileを開始・更新できない。未設定serviceでは保存再読のみ、can_write=false。Q2/Q3 runtimeと既存tier制御は維持。モデル接続・通常有効化・商品品質合格は未実施。

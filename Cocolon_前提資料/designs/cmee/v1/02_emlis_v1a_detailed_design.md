@@ -3474,3 +3474,9 @@ P2として確定するのは以上の対応先・維持条件・不足の区別
 ### P2後の限定実装案（2026-10-23、未承認・未実装）
 
 次の具体案を[共有設計01](01_shared_kernel_and_runtime_contracts.md#cmee-p3-bounded-proposal)へ、profile／snapshot／checkpointの型案を[設計05](05_json_schema_and_versioning.md#cmee-p3-snapshot-schema)へまとめた。新規Emlis threadのoffline呼出しだけを対象に、採用済み意味snapshotをplan/pool/projection/question/traceとserviceの保存再開へ通す。旧thread／旧pendingは旧profile、Q2/Q3 runtimeは維持する。E02-B probeは実pendingの代わりにしない。既存作者へ必要意味を全て写せない候補は保留／未対応とし、別作者やguardの単純緩和を追加しない。通常application・Piece eligibilityの有効化・実モデル・稼働DBは範囲外。これは実装前の契約差分判断であり、上記P2の実施記録を遡及変更しない。
+
+## 2026-10-23 — 承認済み新規Emlisの限定offline意味経路
+
+[共有01の実装](01_shared_kernel_and_runtime_contracts.md#cmee-p3-implemented)と[実型05](05_json_schema_and_versioning.md#cmee-p3-actual-schema)を参照。新`emlis_semantic_admission.py`が手作業候補を既存nucleus/frame/contrastへ正規化し、実pendingへのADD/REVISE/WITHDRAWと累積ABOUTを扱う。既存Engine→thread projection/author→question→serviceの同じ経路を使う。旧source parser・旧checkpoint復元・完成済みDTO非再生成は既存分岐を維持し、shared contracts／元作者／single-input三guardは無変更。
+
+通常serviceから新profileへのmutationは拒否し、保存再読だけ許す。原入力は閉じた過去event/feeling、回答は明示した現在または原時点のfinite feelingに限定。活用と時点を照合し、明示第三者・引用埋込み・条件意味・未対応unknownを自己感情へ押し込まない。程度や「帰宅しても」は原文sliceとして保持する範囲で、一般条件理解を構造化した保証ではない。元E02-0はUNSUPPORTED、E02-Bは実pendingなしN/A。本人の不明・ACTION等への拡張、自然な受容本文、適格履歴の新profile消費は残件。実本文の時点語反復も残り、商品合格にはしない。

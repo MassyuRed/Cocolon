@@ -20412,3 +20412,13 @@ u354実本文の残件をLEVEL_2で修復。安堵・寂しさのpair＋received
 対象321件の最終結果passed、未解消fail／skip0。未変更u354の60recordで全意味・選択・Reception・本文のその他fieldが一致し、Observation一文と本文由来IDだけ24recordで変わる。残り36は本文／停止も同一。旧u350未完成checkpointは旧時点解釈を保持して現行表面へ進むため、この一文だけ変わり得る。完成済み旧DTO・確定旧失敗は非再生成。実SQL14件で初回・実pendingへのADD／現在否定REVISE・旧保存・意味前後中断再開を通し、同じ18DTOを現行apiClient→API→hook→Modalで各2回close/reopenした。HTTP/Auth/nativeはstub、実端末・本番・全suiteの成功ではない。
 
 STRUCTURE_MAP_DELTA_NONE。既存production3file内、新production／型／意味版／依存／API／DTO／DB／RN／Safety変更0、logical90を維持。正式別model評価ではなく主担当実行と補助読取レビュー。限定TECHNICAL_CREDIT。PRODUCT_NOT_CLEAR／正式0/3／candidate_ready=false／automatic_progression=false。長い原文反復、深い受容、一般入力、PARTIAL、説明Mを含む別sourceの更新、任意多段・本人実機は残る。範囲外の元reaction訂正では「その時は今は嬉しい」等の時点衝突が比較本文に残り、次の具体的な診断対象とする。次はE05/E06/E08の実本文品質と既存方式判断へ戻る。10/20方式判断・10/31管理線・12/18公開目標、Piece/Analysis主枠53.25％は再評価しない。Draft PR3／30、merge・deployなし。詳細・全変更file・本文は[u355監査](https://github.com/MassyuRed/Cocolon/blob/agent/three-core-cmee-current-structure-20260815/Cocolon_前提資料/audits/emlis_ai/Cocolon_EmlisAI_u355_MixedReceivedTimeNeutral_20261019.md)。
+
+## 2026-10-23 — 承認済み限定snapshotの実行検証
+
+新`test_cmee_emlis_semantic_snapshot.py`25件＋P1既存22件＝47 passed（21.63秒、fail/skip0、34 subTestは件数へ加算しない）。新25には実既存migrations/RPCをPGliteで動かす保存・回答・候補/意味/本文の中断再開、取得未完了retryの確定HOLD、private情報のDTO非流出、通常serviceの新profile mutation拒否、Premium三回答と第三回答わからないを含む。元sourceparserを例外化してもsnapshot経路で本文/問いが成立する。その他は主体/時制/肯否/source/未知core/不正snapshot/qualifier/節欠落/重複claim等の拒否と、初回/ADD/REVISE/非focusWITHDRAWを確認する。
+
+同じ旧Q2/Q3 application54件は、未変更b7eb534と変更後の両方で54 passed、fail/skip0（79.13／80.70秒、既存警告2）。重複除外の最終対象成功は101件で、108や実行回数を足さない。旧Q1/Q3広範囲の試行は多くの失敗で打切り。先頭のQ1 reception期待113行『次も同じ成果を求められるようで、重かった。』だけは未変更b7eb534でも同じ失敗を再現した。残りの広範囲失敗は未分類・未解消であり、全suite合格を申告しない。protected期待値・旧fixtureは変更0。
+
+Python3.12.14／pytest8.4.1／pytest-subtests0.14.2／FastAPI0.142.2／Pydantic2.13.5／httpx0.28.1、PGlite0.5.8をscratchへ用意し、実importでREADY確認後に`--noconftest`で実施。repository依存file変更0。絶対interpreterと対象PYTHONPATH、Q2_PGLITE_MODULEを指定した対象検証であり、正規全CIや実Postgres/Supabaseの成功ではない。
+
+実例は[既存trial P3](../../../observation_learning/trials/2026-10-23-current-four/README.md#p3)とsemantic_snapshot_results.json。P2既存E02-0 receiptを一度admissionへ渡してUNSUPPORTEDを確認し、固定C0やP1/P2結果は再生成しない。別の合成系列で実作者の初回/ADD/REVISE/WITHDRAWを採取した。原文・出力・source blob・実行失敗をそのまま保持する。受容本文の時点語重複と定型性は残り、正式Product Read0/3／PRODUCT_NOT_CLEAR／candidate_ready=false／automatic_progression=false。実モデル/推論/重み/追加学習/課金/実DB/Render/公開API/DTO/RN/merge/deployは0。

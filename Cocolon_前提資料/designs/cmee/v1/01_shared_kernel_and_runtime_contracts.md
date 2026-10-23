@@ -769,7 +769,7 @@ P01は「自分の仕事が」の主語を「自分」へ縮めず、報告・�
 
 ## 2026-10-23 — P2後の限定実装案：新規Emlis threadの意味snapshot
 
-**PROPOSED_ONLY / IMPLEMENTATION_APPROVAL_PENDING。** 今回の「学習済みAI選定前のCMEE内部準備を進めろ」に基づく、P2後の具体化である。今回実施したのは実sourceの読取・契約差分の特定と本案の保存。製品code・test・保存形式を変更した記録ではない。確認原本はCocolon `db33718a47cbd0b09f3bff066ad865d67180d0d9`、API `b7eb534d44658549896baf449e7c319d49d14396`。
+**提案時：PROPOSED_ONLY / IMPLEMENTATION_APPROVAL_PENDING。現在はMash承認済み・実装結果を後続[cmee-p3-implemented](#cmee-p3-implemented)へ記録。** 今回の「学習済みAI選定前のCMEE内部準備を進めろ」に基づく、P2後の具体化である。今回実施したのは実sourceの読取・契約差分の特定と本案の保存。製品code・test・保存形式を変更した記録ではない。確認原本はCocolon `db33718a47cbd0b09f3bff066ad865d67180d0d9`、API `b7eb534d44658549896baf449e7c319d49d14396`。
 
 ### 1. 推奨する一つの範囲と、判断が必要な点
 
@@ -863,3 +863,16 @@ APIの製品変更候補は共有package内の`emlis_thread_contracts.py`、新�
 想定作業は主担当の内部実装・必要検証を1変更単位で進め、途中保存するもの。所要は実装後の作者適合性・保存検査次第で、現時点で完了時刻は保証しない。追加課金0、Mashの端末操作0、実モデル待ち0。本案の承認で同範囲の内部技術修正・検証・GitHub反映まで進め、単なる内部版数変更ごとに同じ承認を求めない。実モデル選定・接続、P4/P5、通常applicationへの有効化は別の残件である。
 
 今回の文書具体化は`STRUCTURE_MAP_DELTA_NONE`、primary=`BLOCKER_NARROWED`、product_credit=0。承認・実装・新profileの意味採用・新検査実行はいずれも未実施、automatic_progression=false。
+
+<a id="cmee-p3-implemented"></a>
+## 2026-10-23 — 承認済み限定Emlis snapshot内部実装
+
+Mashの「この限定範囲の内部実装へ進めてよろしいでしょうか。→進めていいよ」を受領し、上記案を明示offline・新規Emlisだけへ実装した。上記PROPOSED_ONLYは案作成時の履歴であり、同範囲の再承認待ちではない。API開始原本b7eb534／Cocolon開始原本fcdfe2。実装ownerは新`emlis_semantic_admission.py`と既存`engine.py`／`emlis_answer_update.py`／`emlis_thread_engine.py`／`emlis_thread_service.py`だけ。既存作者・共有型・single-inputの三guardを変更せず、既存thread projectionが受け取るplanの起点を新profileだけsnapshotへ切替えた。
+
+内部keyword-only `semantic_input`でFRESH_CANDIDATEとRESUME_ADOPTEDを明示する。P1 receiptはNOT_ADOPTEDのまま、別ownerが暫定採用を判断。版・source commitment・prefix・実control・canonical packet・native対応表・prior refを凍結し、plan/pool/graph/問い/traceを同じ起点から作る。使用しないquoteで不足節を隠す候補、主体・時制・肯否不一致、重複source範囲claimは採用しない。未対応unknown/conflict/引数/qualifier/埋込みを黙って落とさない。元の選択感情などの全source材料は保持するが、それだけで自由意味理解を主張しない。
+
+実pendingに束縛したADD、原時点への明示REVISE、完全引用WITHDRAW、わからないの無更新を既存更新型へ結合。未変更核・元contrastと過去回答のABOUT関係を保持し、撤回核を復活させない。既存のFree/Plus一問・Premium本人continue最大三問、runtime_profileのQ2/Q3等値判定は維持。新profileを履歴として別threadへ渡す機能は未対応で拒否し、旧履歴の扱いは維持する。
+
+serviceは候補取得STARTEDとRECEIVEDを既存private OPERATIONへ別保存し、意味checkpointを本文前に保存。receipt保存後の再開は同receipt、意味保存後は同snapshot/checkpointを使用し、候補の再取得・同prefix再採用をしない。取得開始後にreceiptが残らなかった場合、明示retryはHOLDを保存してCOMPLETEDへ閉じる。非採用はMEANING_UPDATEを作らず、新prefixの評価済み参照を進めず、旧本文をcurrentへ付替えない。無更新の早期return前にも保存snapshotを再検証する。
+
+通常serviceは新profileの保存再読だけ可能でcan_write=false。answer/action/frame mutation・commit/processには同じ明示offline設定を必須とし、通常application factory／API／DTO fieldは変更しない。新旧threadの移行も行わない。実型は[05の実装追記](05_json_schema_and_versioning.md#cmee-p3-actual-schema)、検証・実本文・失敗は[trial](../../../observation_learning/trials/2026-10-23-current-four/README.md#p3)。限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT、product_credit=0、automatic_progression=false。

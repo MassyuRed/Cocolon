@@ -7349,3 +7349,7 @@ STRUCTURE_MAP_DELTA_PRESENT。既存PieceOwnerHistoryScreen hostがfresh同recor
 ## 2026-10-23 — モデル選定前のCMEE内部準備P1
 
 原入力・独立補足・適格履歴・凍結期間を意味生成と分けて扱う未接続offline境界を共有CMEE packageへ追加。既存Engine／三中核の通常生成・保存・公開・DB／RNは不変。詳細責務とcurrent/futureは[CMEE map P1](current_structure/04_cmee_current_structure.md#cmee-p1)、全追加fileは01A末尾、実結果は[trial P1](observation_learning/trials/2026-10-23-current-four/README.md#p1)。4fixture・20receiptを確認、意味採用0・実モデル接続0。STRUCTURE_MAP_DELTA_PRESENTは内部準備だけで、商品改善credit=0。後続のP2は[既存型／検査の具体対応](designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-p2)まで完了。P2は設計・inspectionのみ、runtime構造・API byte差分なし。
+
+## 2026-10-23 — 承認済み限定Emlis snapshot内部経路
+
+STRUCTURE_MAP_DELTA_PRESENT。新規・明示offlineのEmlisだけに、P1未採用receipt→新semantic admission→版付きsnapshot→既存thread plan/projection/作者/実問い→実回答更新→既存serviceの意味先行保存/本文/再開を接続した。旧threadは旧経路を維持する。新owner1と既存production4、test1の全pathは01A末尾、実型は設計05、実行範囲と未対応はCMEE map04／trial P3。通常application/public API/DTO/RN/実DB/Render、Piece/Analysisの新admission責務差分は0のため01B/Cは変更しない。商品合格ではなく限定内部TECHNICAL_CREDIT。

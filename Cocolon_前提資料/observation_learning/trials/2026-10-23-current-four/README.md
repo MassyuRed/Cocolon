@@ -1,5 +1,7 @@
 # 現CMEEの4場面・実行結果と、モデル選定前の接続準備
 
+最新追記：[承認済み限定Emlis snapshotの実装/実行P3](#p3)。C0/P1/P2原結果は過去時点のまま保持する。
+
 2026-10-23 JST。API `3084c99e5a08d6e475d8a177e62ebf1548e8a0f9`／Cocolon `4450b15ff7d5cb21121b723b9d30d97c8e8cad7c` を照合。原入力は[比較fixture](../../model_selection/2026-10-22-three-core/task_inputs.jsonl)の既存4ID。架空入力のみ、実user本文なし。
 
 MashはQwen3.5-9Bの従量APIと現CMEEを三中核の4場面で比べる作業へ「進めて」と指示した。現CMEE側を先に実行した。9B側はAPIキーが実行環境に未設定、ブラウザ未ログインを確認し、安全な認証フォームの依頼は中断された。認証後の状態は未確認。**9B推論・課金・チャージ0、両条件の比較は未完了。** ユーザーは続いて、モデル選定前にCMEE側の導入準備を先行できるか尋ねた。本記録はその具体的な準備先も示す。
@@ -134,3 +136,24 @@ API実装commit：[b7eb534](https://github.com/MassyuRed/mashos-api/commit/b7eb5
 API/P1code・guard・protected testの変更0。今回pytest／unittest追加・再実行0（P1最終22件は過去の成立結果として保持）。実行したのはP1受取と参照／型field／関数所在の一時的なinspection（例の作成・修正に3回実行、最終snapshotだけを保存）で、C0生成／外部推論／重み／DB／RN／配置／課金0。inspection結果の最終snapshotのみをdistinct evidenceとして数え、作成途中の例・照合を成功数に加算しない。
 
 現在の具体的blockerは、source境界ではなく、新しい意味を現finite再導出へ依存せず採用・plan・問い・本文／graph・保存へ通す版付き責任が未実装であること。次は設計01末尾の限定実admission変更案。P2で旧guardを無効化しない。STRUCTURE_MAP_DELTA_NONE、primary=BLOCKER_NARROWED、product_credit=0、automatic_progression=false。
+
+<a id="p3"></a>
+## 7. 承認済み限定Emlis snapshotの内部実装・実行
+
+Mashが限定実装へ「進めていいよ」と明示承認。API原本b7eb534／Cocolon原本fcdfe2から、既存Engine・更新・thread作者・serviceへ新規Emlisの明示offline profileを接続した。[実装01](../../../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-p3-implemented)／[実型05](../../../designs/cmee/v1/05_json_schema_and_versioning.md#cmee-p3-actual-schema)を参照。P1/P2/C0原結果は変更せず、[semantic_snapshot_results.json](semantic_snapshot_results.json)へ今回の実出力・source blob・検証結果を保存した。手作業候補であり、モデル出力ではない。
+
+| 今回の実検査 | 結果・限界 |
+|---|---|
+| 初回/実pending ADD/REVISE/非focus WITHDRAW | 既存作者で本文と問いを生成、主体/時点/肯否/未変更素材・撤回を確認。原sourceを旧parserで再解釈させない |
+| 新25test＋既存P1 22test | 47 passed、fail/skip0、21.63秒。34 subTestは上乗せしない |
+| 旧Q2/Q3 application同54test | 未変更HEAD 54 passed 79.13秒／変更後54 passed 80.70秒。fail/skip0、既存warnings2。保存/RPCは隔離PGliteで実行 |
+| 新25に含む保存/再開 | RECEIVED保存後・MEANING_UPDATE保存後・本文保存時の中断から再取得せず復旧。STARTEDのみ中断は明示retryでHOLD確定、attemptを残さない。Premium実continue三回答と第三回答わからないも確認 |
+| 旧Q1/Q3広範囲 | 多くの失敗で打切り。先頭Q1のreception期待113行だけ旧b7eb534でも再現、残りは未分類/未解消。全suite合格ではない |
+| P2 E02-0既存receipt一度 | UNSUPPORTED: semantic_unknown_or_conflict_not_projectable。unknown/actionsを落として採用しない。本文生成なし |
+| E02-B / P01-N / A02-P1 | E02-Bは実pendingなしN/A、Piece/Analysisは範囲外で今回admission未実行。成功数に含めない |
+
+最終対象は重複除外101成功で、合成本文採取や反復実行を加点しない。途中レビューで主体/unused evidence/累積ABOUT/無更新base ref/無更新再開検証に加え、時制の不一致、通常service mutation、重複claim、取得未完了retryを修復した。通常readerのcan_write=falseを反映する前の新testはDTO比較1件失敗し、明示offline再開設定を検査へ正しく与えて最終成功。protected旧期待値は変更0。Python/depsは既存CI版をscratchへ用意し実import READY後に対象試験、製品依存変更0。実SQLは既存Q2/Q3 migrations/RPC、実Supabaseではない。
+
+本文は意味軸の限定到達に留まる。REVISEの「その時はあの時も本当は嬉しかった」、WITHDRAW後の「その時にその時は寂しかった」のような時点語重複が実出力に残る。自然な受容や一般理解、正式Product Readに合格したとは扱わない。程度/「帰宅しても」等は原文slice保持で、一般条件の構造化理解ではない。新profile履歴消費も未対応。次は残る意味要素のnative対応を具体化し、E02-0の不明/行動と本文品質、Piece/Analysisの既存未対応へ戻る。モデル接続や通常有効化を自動開始しない。
+
+実モデル/推論/重み/追加学習/課金/実DB/Render/公開API/DTO/RN/merge/deploy、C0再実行は0。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、product_credit=0／PRODUCT_NOT_CLEAR／正式0/3／candidate_ready=false／automatic_progression=false。

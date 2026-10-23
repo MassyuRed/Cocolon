@@ -1770,3 +1770,12 @@ STRUCTURE_MAP_DELTA_PRESENT。既存production10owner内の変更、新private l
 最新weeklyのP1を実施。共有packageに`preparation.py`（材料凍結／request binding／未採用receipt）と`preparation_sources.py`（Piece／Analysis source-only投影）を追加。正規source ownerを再利用し、現在の意味生成成功を材料条件にしない。2つのprivate型はP1専用で、active Emlis logical90、Engine.generate、admission／意味／本文guard、API／DB／RN／稼働は変えない。通常経路からの接続は0。
 
 4場面×5状態の固定stub往復を完了。E02-Bはprobeであって実回答更新ではない。型・failure・P2の採否責任案は[設計01末尾](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-p1)、検証は[既存trial](../observation_learning/trials/2026-10-23-current-four/README.md#p1)。新規testの実結果も同記録へ置く。実モデル・意味admission・本統合・本文改善・商品合格へ換算しない。STRUCTURE_MAP_DELTA_PRESENT（offline内部境界）、product_credit=0。後続P2の[具体差分表](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-p2)と4手作業例28claim/60quoteは全未採用で保持。さらに[限定実装案](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-p3-bounded-proposal)を具体化：新規Emlisのoffline意味snapshot／実pending更新／隔離保存再開を一単位とし、旧profile・Q2/Q3 runtimeと既存作者を維持。Piece／Analysisの新admissionと通常applicationは含まない。実sourceのservice再導出・Q3 runtime等値判定・Piece handoffの意味版検査まで確認した。今回の案作成はSTRUCTURE_MAP_DELTA_NONE、実admission・API byte・新検査実行0。次は同案の意味採用・再導出契約差分の実装判断。
+
+<a id="cmee-p3"></a>
+## 2026-10-23 — 承認済み限定Emlis意味snapshotの現在構造
+
+Mashの「進めていいよ」を受け限定内部実装・必要検証まで完了。上記P2後の実装判断待ちは承認前の履歴。新owner`emlis_semantic_admission.py`がP1receiptを別の暫定採用へ判断し、snapshotとsource/実controlからnative意味を作る。既存Engine/answer_update/thread_engine/serviceだけに明示offline分岐を置き、既存thread projection/作者/本文検査/問いへ渡す。single-input三guardや元parserは緩めない。P1受口自体のNOT_ADOPTEDも維持。
+
+serviceの既存OPERATIONへ取得STARTED/RECEIVED/非採用を保存し、MEANING_UPDATEを本文前に保存。receipt/意味保存後の明示retryは同じ保存物から復旧。取得開始だけ残る場合は再取得せずHOLDでattemptを終了する。無更新もsnapshot検証を通す。新profileを通常serviceで更新せず、保存再読だけ可能。Q2/Q3 runtime、旧profile/旧pending、完成DTOの非再生成は維持。新profile履歴の別thread利用、Piece/Analysisの新admission、通常applicationは未接続。
+
+全owner/pathは01A末尾、[設計01の実装](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-p3-implemented)と[型05](../designs/cmee/v1/05_json_schema_and_versioning.md#cmee-p3-actual-schema)、[実行P3](../observation_learning/trials/2026-10-23-current-four/README.md#p3)が正本。新25/P1旧22/旧application54の対象101成功。旧広範囲Q1/Q3は多失敗で打切り、先頭失敗のみ旧HEAD再現。他の失敗の解決・全suite成功ではない。STRUCTURE_MAP_DELTA_PRESENT（内部owner1、private dataclass3）、限定TECHNICAL_CREDIT、product_credit=0／PRODUCT_NOT_CLEAR／正式0/3／automatic_progression=false。

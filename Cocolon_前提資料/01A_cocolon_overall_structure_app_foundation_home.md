@@ -4435,3 +4435,20 @@ STRUCTURE_MAP_DELTA_PRESENT。`screens/InputScreen.js` は `features/piece/piece
 同directoryの`semantic_mapping_inspection.json`はP2の4手作業設計例、実P1受取、26native型field／9関数所在のinspection。実意味admissionを行うmoduleではない。P2仕様は既存design01〜05末尾、再開はweekly/P2。P2のruntime構造差分0。
 
 P1仕様は既存design01／05、検証境界はtrial README、進行は最新weeklyの20261023-cmee-model-preparation、現在地は00、CMEE map04と観測／比較READMEを同じ変更単位で同期。新しい引継ぎ／管理systemは作らない。STRUCTURE_MAP_DELTA_PRESENTはoffline境界追加、通常三中核・公開契約・保存・稼働は差分なし。
+
+## 2026-10-23 — 限定Emlis snapshotの全変更file地図
+
+prefix `ai/services/ai_inference/`はmashos-api。新規production1／既存production4、新test1。その他既存作者・shared contracts／single-input三guard・SQL migrationは変更0。
+
+| exact path | 責務・接続 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py`（新） | closed候補採否、canonical snapshot、native核/関係/plan、実pending更新、snapshot由来question。新private dataclass3と例外1 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py` | 新規offline Emlisだけkeyword-only semantic_inputをdispatch |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 新profile prepare/updated planをsnapshot ownerへ渡し、旧経路は維持 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py` | 保存snapshotのplan/作者/問いを同じ起点で利用 |
+| `ai/services/ai_inference/emlis_thread_service.py` | 明示offline DI、private候補段階/非採用保存、新旧checkpoint dispatch、保存再開、通常service mutation拒否 |
+| `ai/tests/test_cmee_emlis_semantic_snapshot.py`（新） | pure意味/実pending/改変拒否＋隔離Q2/Q3実SQL・中断再開25件 |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 実source・境界・残件を既存handoffへ追記 |
+| Cocolon `Cocolon_前提資料/observation_learning/trials/2026-10-23-current-four/semantic_snapshot_results.json`（新） | 4合成実本文、P2 E02-0未対応の一実検査、source blob・最終対象試験結果。新runnerではない |
+
+Cocolonの既存文書差分は00、01、本01A、current map01/04、design01/02/05/06、latest weekly、trial README、観測README、比較README。型の唯一ownerはdesign05、構造は本表/CMEE map、実行/失敗はtrial、進行はweeklyへ分離する。P1二moduleと全旧test/fixture、P2inspectionは不変。

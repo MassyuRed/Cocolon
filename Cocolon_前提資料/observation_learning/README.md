@@ -8,13 +8,13 @@ Cocolon／EmlisAIが、相手自身の価値基準を学び、その人の思考
 
 ## 現在の再開地点（2026-10-23・CMEEのoffline準備を先行、9B比較を並行）
 
-**P1完了：三中核の材料投影と未採用候補の内部受口を実装し、固定4場面×5状態の20receiptをoffline確認しました。** 実モデル接続・推論・意味採用は0。[実装・全結果・限界](trials/2026-10-23-current-four/README.md#p1)。P2の具体差分表も設計01〜05へ反映済みです。[4設計例と型／検査の実照合](trials/2026-10-23-current-four/README.md#p2)。次は、意味採用snapshotと旧profile互換を含む限定実admissionの変更案・判断です。[最新議事録の作業順・残件](../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)から再開し、認証・採用モデル・GPUを待ちません。
+**P1/P2に続き、Mash承認済みの限定Emlis snapshot内部実装を完了しました。** 新規・明示offlineだけで暫定意味→既存本文/実問い→ADD/REVISE/WITHDRAW→隔離保存/再開まで接続。[実結果・未加工本文・限界](trials/2026-10-23-current-four/README.md#p3)。新25＋P1旧22＋旧application54の対象101成功、旧広範囲失敗は未解消で全suite成功ではありません。実モデル/推論/実DB/Render/通常application有効化0。E02-0の本人不明/行動は未対応のまま保持。次は[latest weekly J](../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)からnative対応と作者の具体差分へ進み、認証/モデル最終選定を待ちません。
 
 Plus980円／Premium1,980円は価格上限、27Bは候補外。[小型AI再選定](model_selection/2026-10-22-three-core/2026-10-23-small-model-reselection.md)のQwen3.5-9B従量API比較は最大4リクエスト／利用消費50円の既承認範囲で並行する。外部推論・課金・チャージ0。安全な認証依頼が中断された後の認証状態は未確認で、準備側の停止条件にしない。
 
 [現CMEEの4場面と再現コード](trials/2026-10-23-current-four/README.md)は保存済み。E02-0は本文あり／問いなし、E02-Bは実pendingなしでN/A、P01-Nはsaved_emotion_meaning_not_yet_supported、A02-P1はanalysis_observed_route_not_established。C0は再利用し、原文変更・架空の問いで通さない。sourceの許可・凍結と現方式の意味成立を分け、未対応入力もraw sourceからモデルへ渡せるようにする。
 
-P2は候補の各要素・native field・維持する検査／再設計が必要な一致条件まで具体化済み。実admissionの契約差分を明示してから、Emlisの問い・回答更新、Piece、Analysisの既存ownerへの実接続を扱う。現Engineに任意LLM候補hookはなく、現有限parser再導出との一致検査へJSONを詰めるだけでは統合にならない。本統合・モデル採用・商品quota／価格・追加学習は未実施。refined、複数ANSWER、IF／Savedの残件を保持する。観測会は比較で不足した問い・理解更新の実演を補う位置とする。
+P2で詰めた対応を踏まえ、限定新profileの内部portを既存Engineへ接続済みです。旧有限parserとの一致検査は旧経路で維持し、新profileは採用snapshotを再検証します。任意LLMの自由意味理解、本統合、モデル採用、商品quota/価格、追加学習は未実施。Piece/Analysis、refined、複数ANSWER、IF/Saved、自然な受容本文の残件を保持します。
 
 以下の各回にある27B候補保持・未実行等は記録当時の状態であり、上段の最新決定を優先する。
 

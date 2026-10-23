@@ -1,0 +1,1756 @@
+{
+  "schema_version": "cocolon.cmee.semantic_snapshot_inspection.v1",
+  "semantic_profile": "emlis_candidate_snapshot.v1",
+  "api_base_ref": "b7eb534d44658549896baf449e7c319d49d14396",
+  "cocolon_base_ref": "fcdfe2bd0f94ce4e279868532a8fc24bc05a0994",
+  "p2_sha256": "e8be6afe060d930aef6c8e642264189a9833218366c3f963f7336f05a311c791",
+  "external_model_requests": 0,
+  "live_db_calls": 0,
+  "render_changes": 0,
+  "c0_reruns": 0,
+  "p2_existing_case_checks": [
+    {
+      "case_id": "E02-0",
+      "decision": "UNSUPPORTED",
+      "reason_code": "semantic_unknown_or_conflict_not_projectable",
+      "body_generated": false
+    },
+    {
+      "case_id": "E02-B",
+      "decision": "N_A_NO_REAL_PENDING",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "P01-N",
+      "decision": "OUT_OF_SCOPE",
+      "execution": "NOT_RUN"
+    },
+    {
+      "case_id": "A02-P1",
+      "decision": "OUT_OF_SCOPE",
+      "execution": "NOT_RUN"
+    }
+  ],
+  "synthetic_outputs": [
+    {
+      "case": "initial",
+      "origin": "HAND_AUTHORED_SYNTHETIC_NOT_MODEL_OUTPUT",
+      "original": {
+        "id": "q1-synthetic",
+        "created_at": "2026-09-10T00:00:00Z",
+        "memo": "褒められたのに、嬉しくなかった。",
+        "memo_action": "",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "medium"
+          }
+        ],
+        "is_secret": false
+      },
+      "answer": null,
+      "initial_body": {
+        "artifact_id": "emlis-artifact-52c15ebc86f5288f7b9ec78a385b27d7a8c8e81ee6d89a04c01d7f81b58b64e4",
+        "observation": "「褒められた」の一方で「嬉しくなかった」とあります。",
+        "reception": "褒められたことは、嬉しさにはつながらなかったのですね。",
+        "source_prefix_ref": "emlis-source-prefix-c04b634d5cf2fd7b96db975f53ba44e24069f1f702cdd8c4e11e871287322198",
+        "meaning_checkpoint_ref": "semantic-checkpoint-c83a01e84636a669b80fe2cd97859b63a40137d5c3d0d9a60de8fa9b4ac7e732",
+        "qualified_evidence_refs": [
+          {
+            "thread_span_id": "s1",
+            "local_source_span_id": "s1",
+            "evidence": {
+              "evidence_id": "ev-cebc5866b93300f1c8a7b059",
+              "source_span_id": "s1",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "memo",
+              "element_index": -1,
+              "field_utf8_start": 318,
+              "field_utf8_end": 366,
+              "scalar_start": 0,
+              "scalar_end": 15,
+              "utf8_start": 318,
+              "utf8_end": 363,
+              "field_sha256": "657ef4fd73baac0c5d049b83b7926b278e5b6194ce7c3f31fb4bf8db4c697c9e",
+              "literal_sha256": "6766d28bcac6aac3f053437ae285f2732a7d09e1164b10178395b5e490c7c356"
+            }
+          },
+          {
+            "thread_span_id": "s2",
+            "local_source_span_id": "s2",
+            "evidence": {
+              "evidence_id": "ev-f58b8dbbfadd199080d1dd78",
+              "source_span_id": "s2",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "emotion_details.0.type",
+              "element_index": 0,
+              "field_utf8_start": 427,
+              "field_utf8_end": 433,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 427,
+              "utf8_end": 433,
+              "field_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df",
+              "literal_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df"
+            }
+          },
+          {
+            "thread_span_id": "s3",
+            "local_source_span_id": "s3",
+            "evidence": {
+              "evidence_id": "ev-d4b688999f363bcbae61d0c8",
+              "source_span_id": "s3",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "emotions.0",
+              "element_index": 0,
+              "field_utf8_start": 457,
+              "field_utf8_end": 463,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 457,
+              "utf8_end": 463,
+              "field_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df",
+              "literal_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df"
+            }
+          },
+          {
+            "thread_span_id": "s4",
+            "local_source_span_id": "s4",
+            "evidence": {
+              "evidence_id": "ev-44333ace7179e9ac7ec426f8",
+              "source_span_id": "s4",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "category.0",
+              "element_index": 0,
+              "field_utf8_start": 487,
+              "field_utf8_end": 493,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 487,
+              "utf8_end": 493,
+              "field_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3",
+              "literal_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3"
+            }
+          }
+        ],
+        "meaning_trace": [
+          {
+            "required_difference_ref": "required-difference:b30425a35bbff5dc5ac8c5a6be715e0f0c3d0e0e9f34c443d6657137955ca0f2@cocolon.cmee.emlis.required_difference.v1",
+            "selected_reading_ref": "selected-emlis-provisional-reading:149e74b94159429a0cec52bbe28a567d9d117098927aaa1ebf81cd2dedea036c@cocolon.cmee.emlis.selected_emlis_provisional_reading.v1",
+            "configuration_ref": "difference-configuration:0bde00247be1f570267e25ab61551bb66764d1d9c4528fbc325773144eaab7ec@cocolon.cmee.emlis.difference_configuration.v1",
+            "configuration_component_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "source_qualifier_refs": [
+              "polarity:negative",
+              "polarity:neutral"
+            ],
+            "invariant_codes": [
+              "POLARITY_REVERSAL",
+              "REQUIRED_RETENTION_ERASURE"
+            ],
+            "layer1_contribution_refs": [
+              "contribution-7cea9e6fd57cc9d2a0d45667f7c53eb00bf25f714a5c0c7e5ac5c60ed68bf3f9"
+            ]
+          },
+          {
+            "required_difference_ref": "required-difference:b731f84535da1b436c4cd4780dd15c496d492b72f72b749187e389e54658a863@cocolon.cmee.emlis.required_difference.v1",
+            "selected_reading_ref": "selected-emlis-provisional-reading:149e74b94159429a0cec52bbe28a567d9d117098927aaa1ebf81cd2dedea036c@cocolon.cmee.emlis.selected_emlis_provisional_reading.v1",
+            "configuration_ref": "difference-configuration:0bde00247be1f570267e25ab61551bb66764d1d9c4528fbc325773144eaab7ec@cocolon.cmee.emlis.difference_configuration.v1",
+            "configuration_component_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "source_qualifier_refs": [
+              "modality:fact",
+              "modality:feeling",
+              "polarity:negative",
+              "polarity:neutral"
+            ],
+            "invariant_codes": [
+              "MODALITY_PROMOTION",
+              "REQUIRED_RETENTION_ERASURE"
+            ],
+            "layer1_contribution_refs": [
+              "contribution-7cea9e6fd57cc9d2a0d45667f7c53eb00bf25f714a5c0c7e5ac5c60ed68bf3f9"
+            ]
+          },
+          {
+            "required_difference_ref": "required-difference:bec39494fab9719950c8157e5ead770816f2991023289e4eac68887fb6d4c578@cocolon.cmee.emlis.required_difference.v1",
+            "selected_reading_ref": "selected-emlis-provisional-reading:149e74b94159429a0cec52bbe28a567d9d117098927aaa1ebf81cd2dedea036c@cocolon.cmee.emlis.selected_emlis_provisional_reading.v1",
+            "configuration_ref": "difference-configuration:0bde00247be1f570267e25ab61551bb66764d1d9c4528fbc325773144eaab7ec@cocolon.cmee.emlis.difference_configuration.v1",
+            "configuration_component_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "source_qualifier_refs": [
+              "modality:fact",
+              "modality:feeling"
+            ],
+            "invariant_codes": [
+              "MODALITY_PROMOTION",
+              "REQUIRED_RETENTION_ERASURE"
+            ],
+            "layer1_contribution_refs": [
+              "contribution-7cea9e6fd57cc9d2a0d45667f7c53eb00bf25f714a5c0c7e5ac5c60ed68bf3f9"
+            ]
+          },
+          {
+            "required_difference_ref": "required-difference:e194a72c9183a5f44a78b6c9700112ca566030a2816a92c93660374996e73ccc@cocolon.cmee.emlis.required_difference.v1",
+            "selected_reading_ref": "selected-emlis-provisional-reading:149e74b94159429a0cec52bbe28a567d9d117098927aaa1ebf81cd2dedea036c@cocolon.cmee.emlis.selected_emlis_provisional_reading.v1",
+            "configuration_ref": "difference-configuration:0bde00247be1f570267e25ab61551bb66764d1d9c4528fbc325773144eaab7ec@cocolon.cmee.emlis.difference_configuration.v1",
+            "configuration_component_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "source_qualifier_refs": [
+              "actor:current_user",
+              "aspect:unknown",
+              "epistemic:provisional_interpretation",
+              "epistemic:source_explicit",
+              "modality:fact",
+              "modality:feeling",
+              "polarity:negative",
+              "polarity:neutral",
+              "scope:source_bounded",
+              "time_scope:past",
+              "world:unknown"
+            ],
+            "invariant_codes": [
+              "ENDPOINT_COLLAPSE",
+              "REQUIRED_RETENTION_ERASURE"
+            ],
+            "layer1_contribution_refs": [
+              "contribution-7cea9e6fd57cc9d2a0d45667f7c53eb00bf25f714a5c0c7e5ac5c60ed68bf3f9"
+            ]
+          }
+        ],
+        "reception_trace": [
+          {
+            "branch": "NORMAL",
+            "meaning_outcome_ref": "selected-emlis-provisional-reading:149e74b94159429a0cec52bbe28a567d9d117098927aaa1ebf81cd2dedea036c@cocolon.cmee.emlis.selected_emlis_provisional_reading.v1",
+            "reading_consequence_ref": "reading-consequence:ae23080ffa73c4e8ce03865ccad49893feb53891db181aa9f1c0cd5622f5304e@cocolon.cmee.emlis.reading_consequence.v1",
+            "reception_record_ref": "meaning-bound-reception:b846782827b5caf71846ec1b7763e9c7e217dd2016ad2317b06020b738f371ef@cocolon.cmee.emlis.meaning_bound_reception.v1",
+            "projected_claim_ref": "subjective-claim-b2f172c0fef2f2b9fc801463084cbcc8a4d24134fa14d666a3e6f9287ea1d0a5",
+            "layer1_contribution_refs": [
+              "contribution-7cea9e6fd57cc9d2a0d45667f7c53eb00bf25f714a5c0c7e5ac5c60ed68bf3f9",
+              "contribution-829523706989a150e09a0196c54536d6faf814c3cff7f635b088ecd3eb73a91b"
+            ],
+            "response_object_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "edge:me-e1f6d2b6954c0e0644ac4e15dcd960436fe6ddff67557affb1d7af52f95fc561@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "projected_response_object_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "preserved_difference_refs": [
+              "required-difference:b30425a35bbff5dc5ac8c5a6be715e0f0c3d0e0e9f34c443d6657137955ca0f2@cocolon.cmee.emlis.required_difference.v1",
+              "required-difference:b731f84535da1b436c4cd4780dd15c496d492b72f72b749187e389e54658a863@cocolon.cmee.emlis.required_difference.v1",
+              "required-difference:bec39494fab9719950c8157e5ead770816f2991023289e4eac68887fb6d4c578@cocolon.cmee.emlis.required_difference.v1",
+              "required-difference:e194a72c9183a5f44a78b6c9700112ca566030a2816a92c93660374996e73ccc@cocolon.cmee.emlis.required_difference.v1"
+            ]
+          }
+        ],
+        "body_status": "GENERATED",
+        "schema_version": "cocolon.cmee.emlis_thread_artifact.v1",
+        "history_line": null,
+        "history_line_plan": null,
+        "interpretive_frames": []
+      },
+      "body": {
+        "artifact_id": "emlis-artifact-52c15ebc86f5288f7b9ec78a385b27d7a8c8e81ee6d89a04c01d7f81b58b64e4",
+        "observation": "「褒められた」の一方で「嬉しくなかった」とあります。",
+        "reception": "褒められたことは、嬉しさにはつながらなかったのですね。",
+        "source_prefix_ref": "emlis-source-prefix-c04b634d5cf2fd7b96db975f53ba44e24069f1f702cdd8c4e11e871287322198",
+        "meaning_checkpoint_ref": "semantic-checkpoint-c83a01e84636a669b80fe2cd97859b63a40137d5c3d0d9a60de8fa9b4ac7e732",
+        "qualified_evidence_refs": [
+          {
+            "thread_span_id": "s1",
+            "local_source_span_id": "s1",
+            "evidence": {
+              "evidence_id": "ev-cebc5866b93300f1c8a7b059",
+              "source_span_id": "s1",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "memo",
+              "element_index": -1,
+              "field_utf8_start": 318,
+              "field_utf8_end": 366,
+              "scalar_start": 0,
+              "scalar_end": 15,
+              "utf8_start": 318,
+              "utf8_end": 363,
+              "field_sha256": "657ef4fd73baac0c5d049b83b7926b278e5b6194ce7c3f31fb4bf8db4c697c9e",
+              "literal_sha256": "6766d28bcac6aac3f053437ae285f2732a7d09e1164b10178395b5e490c7c356"
+            }
+          },
+          {
+            "thread_span_id": "s2",
+            "local_source_span_id": "s2",
+            "evidence": {
+              "evidence_id": "ev-f58b8dbbfadd199080d1dd78",
+              "source_span_id": "s2",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "emotion_details.0.type",
+              "element_index": 0,
+              "field_utf8_start": 427,
+              "field_utf8_end": 433,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 427,
+              "utf8_end": 433,
+              "field_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df",
+              "literal_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df"
+            }
+          },
+          {
+            "thread_span_id": "s3",
+            "local_source_span_id": "s3",
+            "evidence": {
+              "evidence_id": "ev-d4b688999f363bcbae61d0c8",
+              "source_span_id": "s3",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "emotions.0",
+              "element_index": 0,
+              "field_utf8_start": 457,
+              "field_utf8_end": 463,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 457,
+              "utf8_end": 463,
+              "field_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df",
+              "literal_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df"
+            }
+          },
+          {
+            "thread_span_id": "s4",
+            "local_source_span_id": "s4",
+            "evidence": {
+              "evidence_id": "ev-44333ace7179e9ac7ec426f8",
+              "source_span_id": "s4",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "category.0",
+              "element_index": 0,
+              "field_utf8_start": 487,
+              "field_utf8_end": 493,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 487,
+              "utf8_end": 493,
+              "field_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3",
+              "literal_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3"
+            }
+          }
+        ],
+        "meaning_trace": [
+          {
+            "required_difference_ref": "required-difference:b30425a35bbff5dc5ac8c5a6be715e0f0c3d0e0e9f34c443d6657137955ca0f2@cocolon.cmee.emlis.required_difference.v1",
+            "selected_reading_ref": "selected-emlis-provisional-reading:149e74b94159429a0cec52bbe28a567d9d117098927aaa1ebf81cd2dedea036c@cocolon.cmee.emlis.selected_emlis_provisional_reading.v1",
+            "configuration_ref": "difference-configuration:0bde00247be1f570267e25ab61551bb66764d1d9c4528fbc325773144eaab7ec@cocolon.cmee.emlis.difference_configuration.v1",
+            "configuration_component_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "source_qualifier_refs": [
+              "polarity:negative",
+              "polarity:neutral"
+            ],
+            "invariant_codes": [
+              "POLARITY_REVERSAL",
+              "REQUIRED_RETENTION_ERASURE"
+            ],
+            "layer1_contribution_refs": [
+              "contribution-7cea9e6fd57cc9d2a0d45667f7c53eb00bf25f714a5c0c7e5ac5c60ed68bf3f9"
+            ]
+          },
+          {
+            "required_difference_ref": "required-difference:b731f84535da1b436c4cd4780dd15c496d492b72f72b749187e389e54658a863@cocolon.cmee.emlis.required_difference.v1",
+            "selected_reading_ref": "selected-emlis-provisional-reading:149e74b94159429a0cec52bbe28a567d9d117098927aaa1ebf81cd2dedea036c@cocolon.cmee.emlis.selected_emlis_provisional_reading.v1",
+            "configuration_ref": "difference-configuration:0bde00247be1f570267e25ab61551bb66764d1d9c4528fbc325773144eaab7ec@cocolon.cmee.emlis.difference_configuration.v1",
+            "configuration_component_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "source_qualifier_refs": [
+              "modality:fact",
+              "modality:feeling",
+              "polarity:negative",
+              "polarity:neutral"
+            ],
+            "invariant_codes": [
+              "MODALITY_PROMOTION",
+              "REQUIRED_RETENTION_ERASURE"
+            ],
+            "layer1_contribution_refs": [
+              "contribution-7cea9e6fd57cc9d2a0d45667f7c53eb00bf25f714a5c0c7e5ac5c60ed68bf3f9"
+            ]
+          },
+          {
+            "required_difference_ref": "required-difference:bec39494fab9719950c8157e5ead770816f2991023289e4eac68887fb6d4c578@cocolon.cmee.emlis.required_difference.v1",
+            "selected_reading_ref": "selected-emlis-provisional-reading:149e74b94159429a0cec52bbe28a567d9d117098927aaa1ebf81cd2dedea036c@cocolon.cmee.emlis.selected_emlis_provisional_reading.v1",
+            "configuration_ref": "difference-configuration:0bde00247be1f570267e25ab61551bb66764d1d9c4528fbc325773144eaab7ec@cocolon.cmee.emlis.difference_configuration.v1",
+            "configuration_component_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "source_qualifier_refs": [
+              "modality:fact",
+              "modality:feeling"
+            ],
+            "invariant_codes": [
+              "MODALITY_PROMOTION",
+              "REQUIRED_RETENTION_ERASURE"
+            ],
+            "layer1_contribution_refs": [
+              "contribution-7cea9e6fd57cc9d2a0d45667f7c53eb00bf25f714a5c0c7e5ac5c60ed68bf3f9"
+            ]
+          },
+          {
+            "required_difference_ref": "required-difference:e194a72c9183a5f44a78b6c9700112ca566030a2816a92c93660374996e73ccc@cocolon.cmee.emlis.required_difference.v1",
+            "selected_reading_ref": "selected-emlis-provisional-reading:149e74b94159429a0cec52bbe28a567d9d117098927aaa1ebf81cd2dedea036c@cocolon.cmee.emlis.selected_emlis_provisional_reading.v1",
+            "configuration_ref": "difference-configuration:0bde00247be1f570267e25ab61551bb66764d1d9c4528fbc325773144eaab7ec@cocolon.cmee.emlis.difference_configuration.v1",
+            "configuration_component_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "source_qualifier_refs": [
+              "actor:current_user",
+              "aspect:unknown",
+              "epistemic:provisional_interpretation",
+              "epistemic:source_explicit",
+              "modality:fact",
+              "modality:feeling",
+              "polarity:negative",
+              "polarity:neutral",
+              "scope:source_bounded",
+              "time_scope:past",
+              "world:unknown"
+            ],
+            "invariant_codes": [
+              "ENDPOINT_COLLAPSE",
+              "REQUIRED_RETENTION_ERASURE"
+            ],
+            "layer1_contribution_refs": [
+              "contribution-7cea9e6fd57cc9d2a0d45667f7c53eb00bf25f714a5c0c7e5ac5c60ed68bf3f9"
+            ]
+          }
+        ],
+        "reception_trace": [
+          {
+            "branch": "NORMAL",
+            "meaning_outcome_ref": "selected-emlis-provisional-reading:149e74b94159429a0cec52bbe28a567d9d117098927aaa1ebf81cd2dedea036c@cocolon.cmee.emlis.selected_emlis_provisional_reading.v1",
+            "reading_consequence_ref": "reading-consequence:ae23080ffa73c4e8ce03865ccad49893feb53891db181aa9f1c0cd5622f5304e@cocolon.cmee.emlis.reading_consequence.v1",
+            "reception_record_ref": "meaning-bound-reception:b846782827b5caf71846ec1b7763e9c7e217dd2016ad2317b06020b738f371ef@cocolon.cmee.emlis.meaning_bound_reception.v1",
+            "projected_claim_ref": "subjective-claim-b2f172c0fef2f2b9fc801463084cbcc8a4d24134fa14d666a3e6f9287ea1d0a5",
+            "layer1_contribution_refs": [
+              "contribution-7cea9e6fd57cc9d2a0d45667f7c53eb00bf25f714a5c0c7e5ac5c60ed68bf3f9",
+              "contribution-829523706989a150e09a0196c54536d6faf814c3cff7f635b088ecd3eb73a91b"
+            ],
+            "response_object_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "edge:me-e1f6d2b6954c0e0644ac4e15dcd960436fe6ddff67557affb1d7af52f95fc561@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "projected_response_object_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "preserved_difference_refs": [
+              "required-difference:b30425a35bbff5dc5ac8c5a6be715e0f0c3d0e0e9f34c443d6657137955ca0f2@cocolon.cmee.emlis.required_difference.v1",
+              "required-difference:b731f84535da1b436c4cd4780dd15c496d492b72f72b749187e389e54658a863@cocolon.cmee.emlis.required_difference.v1",
+              "required-difference:bec39494fab9719950c8157e5ead770816f2991023289e4eac68887fb6d4c578@cocolon.cmee.emlis.required_difference.v1",
+              "required-difference:e194a72c9183a5f44a78b6c9700112ca566030a2816a92c93660374996e73ccc@cocolon.cmee.emlis.required_difference.v1"
+            ]
+          }
+        ],
+        "body_status": "GENERATED",
+        "schema_version": "cocolon.cmee.emlis_thread_artifact.v1",
+        "history_line": null,
+        "history_line_plan": null,
+        "interpretive_frames": []
+      },
+      "question": {
+        "question_id": "semantic-question-f97bb771cc4dc7e343a1da8ddbabac6fcb7e13793bc56b10144a9cc9844960a1",
+        "parent_request_id": "q1-synthetic",
+        "thread_id": "q1-thread",
+        "original_source_ref": "src-f097cbfe3b62ed4e565e1e83",
+        "decision": {
+          "disposition": "ASK",
+          "target_ref": "emlis-target-31bce928856981b43cad80a88a3cb461ab5762a51b4505f33980beb7825528b5",
+          "target_kind": "PERSONAL_RECEIVED_MEANING",
+          "supporting_evidence_refs": [
+            "ev-cebc5866b93300f1c8a7b059"
+          ],
+          "missing_dimension": "personal_received_meaning",
+          "affected_meaning_refs": [
+            "semantic-nucleus-4804f277dc1c1174d5482b1e4dd6ec5e5fa9d9367ca2fe5ed1395be2ae0b8d01",
+            "semantic-nucleus-ce9156aa44ea3ea1cdda8384b6d732325c0a089c121906aec9c4d0f80f3a1a45"
+          ],
+          "affected_reception_refs": [
+            "semantic-nucleus-4804f277dc1c1174d5482b1e4dd6ec5e5fa9d9367ca2fe5ed1395be2ae0b8d01"
+          ],
+          "asked_target_refs": [],
+          "decision_reason": "source_bound_event_personal_meaning_missing"
+        },
+        "prompt_private": "「褒められた」は、あなたにはどんな意味として届きましたか。",
+        "skip_allowed": true,
+        "answer_limit": 1,
+        "answer_source_role": "SUPPLEMENTAL_ANSWER",
+        "schema_version": "cocolon.cmee.emlis_clarification.v1"
+      },
+      "checkpoint_ref": "semantic-checkpoint-c83a01e84636a669b80fe2cd97859b63a40137d5c3d0d9a60de8fa9b4ac7e732",
+      "snapshot_ref": "semantic-a2f3bd712cff2854a22bf771fe064dc5f958adfef098abe4ac8743e71a7328d7",
+      "automatic_progression": false
+    },
+    {
+      "case": "ADD",
+      "origin": "HAND_AUTHORED_SYNTHETIC_NOT_MODEL_OUTPUT",
+      "original": {
+        "id": "q1-synthetic",
+        "created_at": "2026-09-10T00:00:00Z",
+        "memo": "褒められたのに、嬉しくなかった。",
+        "memo_action": "",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "medium"
+          }
+        ],
+        "is_secret": false
+      },
+      "answer": "今は嬉しい。",
+      "initial_body": {
+        "artifact_id": "emlis-artifact-52c15ebc86f5288f7b9ec78a385b27d7a8c8e81ee6d89a04c01d7f81b58b64e4",
+        "observation": "「褒められた」の一方で「嬉しくなかった」とあります。",
+        "reception": "褒められたことは、嬉しさにはつながらなかったのですね。",
+        "source_prefix_ref": "emlis-source-prefix-c04b634d5cf2fd7b96db975f53ba44e24069f1f702cdd8c4e11e871287322198",
+        "meaning_checkpoint_ref": "semantic-checkpoint-c83a01e84636a669b80fe2cd97859b63a40137d5c3d0d9a60de8fa9b4ac7e732",
+        "qualified_evidence_refs": [
+          {
+            "thread_span_id": "s1",
+            "local_source_span_id": "s1",
+            "evidence": {
+              "evidence_id": "ev-cebc5866b93300f1c8a7b059",
+              "source_span_id": "s1",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "memo",
+              "element_index": -1,
+              "field_utf8_start": 318,
+              "field_utf8_end": 366,
+              "scalar_start": 0,
+              "scalar_end": 15,
+              "utf8_start": 318,
+              "utf8_end": 363,
+              "field_sha256": "657ef4fd73baac0c5d049b83b7926b278e5b6194ce7c3f31fb4bf8db4c697c9e",
+              "literal_sha256": "6766d28bcac6aac3f053437ae285f2732a7d09e1164b10178395b5e490c7c356"
+            }
+          },
+          {
+            "thread_span_id": "s2",
+            "local_source_span_id": "s2",
+            "evidence": {
+              "evidence_id": "ev-f58b8dbbfadd199080d1dd78",
+              "source_span_id": "s2",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "emotion_details.0.type",
+              "element_index": 0,
+              "field_utf8_start": 427,
+              "field_utf8_end": 433,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 427,
+              "utf8_end": 433,
+              "field_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df",
+              "literal_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df"
+            }
+          },
+          {
+            "thread_span_id": "s3",
+            "local_source_span_id": "s3",
+            "evidence": {
+              "evidence_id": "ev-d4b688999f363bcbae61d0c8",
+              "source_span_id": "s3",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "emotions.0",
+              "element_index": 0,
+              "field_utf8_start": 457,
+              "field_utf8_end": 463,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 457,
+              "utf8_end": 463,
+              "field_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df",
+              "literal_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df"
+            }
+          },
+          {
+            "thread_span_id": "s4",
+            "local_source_span_id": "s4",
+            "evidence": {
+              "evidence_id": "ev-44333ace7179e9ac7ec426f8",
+              "source_span_id": "s4",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "category.0",
+              "element_index": 0,
+              "field_utf8_start": 487,
+              "field_utf8_end": 493,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 487,
+              "utf8_end": 493,
+              "field_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3",
+              "literal_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3"
+            }
+          }
+        ],
+        "meaning_trace": [
+          {
+            "required_difference_ref": "required-difference:b30425a35bbff5dc5ac8c5a6be715e0f0c3d0e0e9f34c443d6657137955ca0f2@cocolon.cmee.emlis.required_difference.v1",
+            "selected_reading_ref": "selected-emlis-provisional-reading:149e74b94159429a0cec52bbe28a567d9d117098927aaa1ebf81cd2dedea036c@cocolon.cmee.emlis.selected_emlis_provisional_reading.v1",
+            "configuration_ref": "difference-configuration:0bde00247be1f570267e25ab61551bb66764d1d9c4528fbc325773144eaab7ec@cocolon.cmee.emlis.difference_configuration.v1",
+            "configuration_component_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "source_qualifier_refs": [
+              "polarity:negative",
+              "polarity:neutral"
+            ],
+            "invariant_codes": [
+              "POLARITY_REVERSAL",
+              "REQUIRED_RETENTION_ERASURE"
+            ],
+            "layer1_contribution_refs": [
+              "contribution-7cea9e6fd57cc9d2a0d45667f7c53eb00bf25f714a5c0c7e5ac5c60ed68bf3f9"
+            ]
+          },
+          {
+            "required_difference_ref": "required-difference:b731f84535da1b436c4cd4780dd15c496d492b72f72b749187e389e54658a863@cocolon.cmee.emlis.required_difference.v1",
+            "selected_reading_ref": "selected-emlis-provisional-reading:149e74b94159429a0cec52bbe28a567d9d117098927aaa1ebf81cd2dedea036c@cocolon.cmee.emlis.selected_emlis_provisional_reading.v1",
+            "configuration_ref": "difference-configuration:0bde00247be1f570267e25ab61551bb66764d1d9c4528fbc325773144eaab7ec@cocolon.cmee.emlis.difference_configuration.v1",
+            "configuration_component_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "source_qualifier_refs": [
+              "modality:fact",
+              "modality:feeling",
+              "polarity:negative",
+              "polarity:neutral"
+            ],
+            "invariant_codes": [
+              "MODALITY_PROMOTION",
+              "REQUIRED_RETENTION_ERASURE"
+            ],
+            "layer1_contribution_refs": [
+              "contribution-7cea9e6fd57cc9d2a0d45667f7c53eb00bf25f714a5c0c7e5ac5c60ed68bf3f9"
+            ]
+          },
+          {
+            "required_difference_ref": "required-difference:bec39494fab9719950c8157e5ead770816f2991023289e4eac68887fb6d4c578@cocolon.cmee.emlis.required_difference.v1",
+            "selected_reading_ref": "selected-emlis-provisional-reading:149e74b94159429a0cec52bbe28a567d9d117098927aaa1ebf81cd2dedea036c@cocolon.cmee.emlis.selected_emlis_provisional_reading.v1",
+            "configuration_ref": "difference-configuration:0bde00247be1f570267e25ab61551bb66764d1d9c4528fbc325773144eaab7ec@cocolon.cmee.emlis.difference_configuration.v1",
+            "configuration_component_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "source_qualifier_refs": [
+              "modality:fact",
+              "modality:feeling"
+            ],
+            "invariant_codes": [
+              "MODALITY_PROMOTION",
+              "REQUIRED_RETENTION_ERASURE"
+            ],
+            "layer1_contribution_refs": [
+              "contribution-7cea9e6fd57cc9d2a0d45667f7c53eb00bf25f714a5c0c7e5ac5c60ed68bf3f9"
+            ]
+          },
+          {
+            "required_difference_ref": "required-difference:e194a72c9183a5f44a78b6c9700112ca566030a2816a92c93660374996e73ccc@cocolon.cmee.emlis.required_difference.v1",
+            "selected_reading_ref": "selected-emlis-provisional-reading:149e74b94159429a0cec52bbe28a567d9d117098927aaa1ebf81cd2dedea036c@cocolon.cmee.emlis.selected_emlis_provisional_reading.v1",
+            "configuration_ref": "difference-configuration:0bde00247be1f570267e25ab61551bb66764d1d9c4528fbc325773144eaab7ec@cocolon.cmee.emlis.difference_configuration.v1",
+            "configuration_component_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "source_qualifier_refs": [
+              "actor:current_user",
+              "aspect:unknown",
+              "epistemic:provisional_interpretation",
+              "epistemic:source_explicit",
+              "modality:fact",
+              "modality:feeling",
+              "polarity:negative",
+              "polarity:neutral",
+              "scope:source_bounded",
+              "time_scope:past",
+              "world:unknown"
+            ],
+            "invariant_codes": [
+              "ENDPOINT_COLLAPSE",
+              "REQUIRED_RETENTION_ERASURE"
+            ],
+            "layer1_contribution_refs": [
+              "contribution-7cea9e6fd57cc9d2a0d45667f7c53eb00bf25f714a5c0c7e5ac5c60ed68bf3f9"
+            ]
+          }
+        ],
+        "reception_trace": [
+          {
+            "branch": "NORMAL",
+            "meaning_outcome_ref": "selected-emlis-provisional-reading:149e74b94159429a0cec52bbe28a567d9d117098927aaa1ebf81cd2dedea036c@cocolon.cmee.emlis.selected_emlis_provisional_reading.v1",
+            "reading_consequence_ref": "reading-consequence:ae23080ffa73c4e8ce03865ccad49893feb53891db181aa9f1c0cd5622f5304e@cocolon.cmee.emlis.reading_consequence.v1",
+            "reception_record_ref": "meaning-bound-reception:b846782827b5caf71846ec1b7763e9c7e217dd2016ad2317b06020b738f371ef@cocolon.cmee.emlis.meaning_bound_reception.v1",
+            "projected_claim_ref": "subjective-claim-b2f172c0fef2f2b9fc801463084cbcc8a4d24134fa14d666a3e6f9287ea1d0a5",
+            "layer1_contribution_refs": [
+              "contribution-7cea9e6fd57cc9d2a0d45667f7c53eb00bf25f714a5c0c7e5ac5c60ed68bf3f9",
+              "contribution-829523706989a150e09a0196c54536d6faf814c3cff7f635b088ecd3eb73a91b"
+            ],
+            "response_object_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "edge:me-e1f6d2b6954c0e0644ac4e15dcd960436fe6ddff67557affb1d7af52f95fc561@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "projected_response_object_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "preserved_difference_refs": [
+              "required-difference:b30425a35bbff5dc5ac8c5a6be715e0f0c3d0e0e9f34c443d6657137955ca0f2@cocolon.cmee.emlis.required_difference.v1",
+              "required-difference:b731f84535da1b436c4cd4780dd15c496d492b72f72b749187e389e54658a863@cocolon.cmee.emlis.required_difference.v1",
+              "required-difference:bec39494fab9719950c8157e5ead770816f2991023289e4eac68887fb6d4c578@cocolon.cmee.emlis.required_difference.v1",
+              "required-difference:e194a72c9183a5f44a78b6c9700112ca566030a2816a92c93660374996e73ccc@cocolon.cmee.emlis.required_difference.v1"
+            ]
+          }
+        ],
+        "body_status": "GENERATED",
+        "schema_version": "cocolon.cmee.emlis_thread_artifact.v1",
+        "history_line": null,
+        "history_line_plan": null,
+        "interpretive_frames": []
+      },
+      "body": {
+        "artifact_id": "emlis-artifact-2087c3c8bf6fca50481d47f297e879abdbd7f557343a3c7a0010f0426ad7a019",
+        "observation": "「褒められた」のに「嬉しくなかった」、回答した時点では「今は嬉しい」とあります。",
+        "reception": "褒められたことについて、回答した時点では今は嬉しいのですね。",
+        "source_prefix_ref": "emlis-source-prefix-11c39e85b77b31972500946dcccaa0d08b0844d02fb5276ba08ecd267e4aa952",
+        "meaning_checkpoint_ref": "semantic-checkpoint-3649532e4f8f0598e7743f060bdea12763467711f487e9fb2a369563af870d36",
+        "qualified_evidence_refs": [
+          {
+            "thread_span_id": "s1",
+            "local_source_span_id": "s1",
+            "evidence": {
+              "evidence_id": "ev-cebc5866b93300f1c8a7b059",
+              "source_span_id": "s1",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "memo",
+              "element_index": -1,
+              "field_utf8_start": 318,
+              "field_utf8_end": 366,
+              "scalar_start": 0,
+              "scalar_end": 15,
+              "utf8_start": 318,
+              "utf8_end": 363,
+              "field_sha256": "657ef4fd73baac0c5d049b83b7926b278e5b6194ce7c3f31fb4bf8db4c697c9e",
+              "literal_sha256": "6766d28bcac6aac3f053437ae285f2732a7d09e1164b10178395b5e490c7c356"
+            }
+          },
+          {
+            "thread_span_id": "s2",
+            "local_source_span_id": "s2",
+            "evidence": {
+              "evidence_id": "ev-f58b8dbbfadd199080d1dd78",
+              "source_span_id": "s2",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "emotion_details.0.type",
+              "element_index": 0,
+              "field_utf8_start": 427,
+              "field_utf8_end": 433,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 427,
+              "utf8_end": 433,
+              "field_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df",
+              "literal_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df"
+            }
+          },
+          {
+            "thread_span_id": "s3",
+            "local_source_span_id": "s3",
+            "evidence": {
+              "evidence_id": "ev-d4b688999f363bcbae61d0c8",
+              "source_span_id": "s3",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "emotions.0",
+              "element_index": 0,
+              "field_utf8_start": 457,
+              "field_utf8_end": 463,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 457,
+              "utf8_end": 463,
+              "field_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df",
+              "literal_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df"
+            }
+          },
+          {
+            "thread_span_id": "s4",
+            "local_source_span_id": "s4",
+            "evidence": {
+              "evidence_id": "ev-44333ace7179e9ac7ec426f8",
+              "source_span_id": "s4",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "category.0",
+              "element_index": 0,
+              "field_utf8_start": 487,
+              "field_utf8_end": 493,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 487,
+              "utf8_end": 493,
+              "field_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3",
+              "literal_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3"
+            }
+          },
+          {
+            "thread_span_id": "s5",
+            "local_source_span_id": "s1",
+            "evidence": {
+              "evidence_id": "ev-f4ffeb4d7ee09211f450f189",
+              "source_span_id": "s1",
+              "source_envelope_id": "src-f523ca8141031625b95f2480",
+              "field_path": "answer_text_private",
+              "element_index": -1,
+              "field_utf8_start": 427,
+              "field_utf8_end": 445,
+              "scalar_start": 0,
+              "scalar_end": 5,
+              "utf8_start": 427,
+              "utf8_end": 442,
+              "field_sha256": "4156a679e5e80d5a948ee569af4fc6c91008839b7bf1c1639ca718832c04dba7",
+              "literal_sha256": "8a53cb0d2feb50f29f67da74892044a8ab924471372e742696b7ff20c59721cb"
+            }
+          }
+        ],
+        "meaning_trace": [
+          {
+            "limited_outcome_ref": "limited-meaning-outcome:a19efc64a227a2091f80ae59d6d3ae2b12bd1ba68365f8ee2cee8aaecd75bb4f@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+            "source_object_ref": "node:mn-5084a34ff4b74be76c14fe81585033ef51c29d36573c6c70f59533f92e37f353@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+            "layer1_contribution_refs": [
+              "contribution-aad3fa6f9d2ac357838f2344c7d6f1f9ae9c8a780756432b4b8f31dcd336ed85"
+            ]
+          },
+          {
+            "limited_outcome_ref": "limited-meaning-outcome:a19efc64a227a2091f80ae59d6d3ae2b12bd1ba68365f8ee2cee8aaecd75bb4f@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+            "source_object_ref": "node:mn-b2be182aa385d283fe40c6c2580a6252fdaf0da3f2997413cae88ca8a50fc706@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+            "layer1_contribution_refs": [
+              "contribution-2103a3ef1e520f480bce124fc3b0bf1f33c92d245222cf725d13d8be139da74a"
+            ]
+          },
+          {
+            "limited_outcome_ref": "limited-meaning-outcome:a19efc64a227a2091f80ae59d6d3ae2b12bd1ba68365f8ee2cee8aaecd75bb4f@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+            "source_object_ref": "node:mn-bc56eaaf4175b6b424f6c6ed1b3708b2577e907ae28e5ac2388b22cd40ae774c@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+            "layer1_contribution_refs": [
+              "contribution-aad3fa6f9d2ac357838f2344c7d6f1f9ae9c8a780756432b4b8f31dcd336ed85"
+            ]
+          }
+        ],
+        "reception_trace": [
+          {
+            "branch": "LIMITED",
+            "meaning_outcome_ref": "limited-meaning-outcome:a19efc64a227a2091f80ae59d6d3ae2b12bd1ba68365f8ee2cee8aaecd75bb4f@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+            "reading_consequence_ref": null,
+            "reception_record_ref": "bounded-limited-reception:c81f7052e62de737ccd323c154b30d9f685e76cb27142cadcca1331dfeed28dd@cocolon.cmee.emlis.bounded_limited_reception.v1",
+            "projected_claim_ref": "subjective-claim-71b7d236249683a1e545dc3020957edd0de1409cef872bf4a834f962d72a80f2",
+            "layer1_contribution_refs": [
+              "contribution-2103a3ef1e520f480bce124fc3b0bf1f33c92d245222cf725d13d8be139da74a"
+            ],
+            "response_object_refs": [
+              "node:mn-5084a34ff4b74be76c14fe81585033ef51c29d36573c6c70f59533f92e37f353@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-b2be182aa385d283fe40c6c2580a6252fdaf0da3f2997413cae88ca8a50fc706@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-bc56eaaf4175b6b424f6c6ed1b3708b2577e907ae28e5ac2388b22cd40ae774c@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "projected_response_object_refs": [
+              "node:mn-b2be182aa385d283fe40c6c2580a6252fdaf0da3f2997413cae88ca8a50fc706@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "preserved_difference_refs": []
+          }
+        ],
+        "body_status": "GENERATED",
+        "schema_version": "cocolon.cmee.emlis_thread_artifact.v1",
+        "history_line": null,
+        "history_line_plan": null,
+        "interpretive_frames": []
+      },
+      "question": null,
+      "checkpoint_ref": "semantic-checkpoint-3649532e4f8f0598e7743f060bdea12763467711f487e9fb2a369563af870d36",
+      "snapshot_ref": "semantic-181769c4ce2990057946fae3bd8a77b43c3ad6e8b1efdac69aa6d03922e58985",
+      "automatic_progression": false
+    },
+    {
+      "case": "REVISE",
+      "origin": "HAND_AUTHORED_SYNTHETIC_NOT_MODEL_OUTPUT",
+      "original": {
+        "id": "q1-synthetic",
+        "created_at": "2026-09-10T00:00:00Z",
+        "memo": "褒められたのに、嬉しくなかった。",
+        "memo_action": "",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "medium"
+          }
+        ],
+        "is_secret": false
+      },
+      "answer": "あの時も本当は嬉しかった。書き方を間違えた。",
+      "initial_body": {
+        "artifact_id": "emlis-artifact-52c15ebc86f5288f7b9ec78a385b27d7a8c8e81ee6d89a04c01d7f81b58b64e4",
+        "observation": "「褒められた」の一方で「嬉しくなかった」とあります。",
+        "reception": "褒められたことは、嬉しさにはつながらなかったのですね。",
+        "source_prefix_ref": "emlis-source-prefix-c04b634d5cf2fd7b96db975f53ba44e24069f1f702cdd8c4e11e871287322198",
+        "meaning_checkpoint_ref": "semantic-checkpoint-c83a01e84636a669b80fe2cd97859b63a40137d5c3d0d9a60de8fa9b4ac7e732",
+        "qualified_evidence_refs": [
+          {
+            "thread_span_id": "s1",
+            "local_source_span_id": "s1",
+            "evidence": {
+              "evidence_id": "ev-cebc5866b93300f1c8a7b059",
+              "source_span_id": "s1",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "memo",
+              "element_index": -1,
+              "field_utf8_start": 318,
+              "field_utf8_end": 366,
+              "scalar_start": 0,
+              "scalar_end": 15,
+              "utf8_start": 318,
+              "utf8_end": 363,
+              "field_sha256": "657ef4fd73baac0c5d049b83b7926b278e5b6194ce7c3f31fb4bf8db4c697c9e",
+              "literal_sha256": "6766d28bcac6aac3f053437ae285f2732a7d09e1164b10178395b5e490c7c356"
+            }
+          },
+          {
+            "thread_span_id": "s2",
+            "local_source_span_id": "s2",
+            "evidence": {
+              "evidence_id": "ev-f58b8dbbfadd199080d1dd78",
+              "source_span_id": "s2",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "emotion_details.0.type",
+              "element_index": 0,
+              "field_utf8_start": 427,
+              "field_utf8_end": 433,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 427,
+              "utf8_end": 433,
+              "field_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df",
+              "literal_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df"
+            }
+          },
+          {
+            "thread_span_id": "s3",
+            "local_source_span_id": "s3",
+            "evidence": {
+              "evidence_id": "ev-d4b688999f363bcbae61d0c8",
+              "source_span_id": "s3",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "emotions.0",
+              "element_index": 0,
+              "field_utf8_start": 457,
+              "field_utf8_end": 463,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 457,
+              "utf8_end": 463,
+              "field_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df",
+              "literal_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df"
+            }
+          },
+          {
+            "thread_span_id": "s4",
+            "local_source_span_id": "s4",
+            "evidence": {
+              "evidence_id": "ev-44333ace7179e9ac7ec426f8",
+              "source_span_id": "s4",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "category.0",
+              "element_index": 0,
+              "field_utf8_start": 487,
+              "field_utf8_end": 493,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 487,
+              "utf8_end": 493,
+              "field_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3",
+              "literal_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3"
+            }
+          }
+        ],
+        "meaning_trace": [
+          {
+            "required_difference_ref": "required-difference:b30425a35bbff5dc5ac8c5a6be715e0f0c3d0e0e9f34c443d6657137955ca0f2@cocolon.cmee.emlis.required_difference.v1",
+            "selected_reading_ref": "selected-emlis-provisional-reading:149e74b94159429a0cec52bbe28a567d9d117098927aaa1ebf81cd2dedea036c@cocolon.cmee.emlis.selected_emlis_provisional_reading.v1",
+            "configuration_ref": "difference-configuration:0bde00247be1f570267e25ab61551bb66764d1d9c4528fbc325773144eaab7ec@cocolon.cmee.emlis.difference_configuration.v1",
+            "configuration_component_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "source_qualifier_refs": [
+              "polarity:negative",
+              "polarity:neutral"
+            ],
+            "invariant_codes": [
+              "POLARITY_REVERSAL",
+              "REQUIRED_RETENTION_ERASURE"
+            ],
+            "layer1_contribution_refs": [
+              "contribution-7cea9e6fd57cc9d2a0d45667f7c53eb00bf25f714a5c0c7e5ac5c60ed68bf3f9"
+            ]
+          },
+          {
+            "required_difference_ref": "required-difference:b731f84535da1b436c4cd4780dd15c496d492b72f72b749187e389e54658a863@cocolon.cmee.emlis.required_difference.v1",
+            "selected_reading_ref": "selected-emlis-provisional-reading:149e74b94159429a0cec52bbe28a567d9d117098927aaa1ebf81cd2dedea036c@cocolon.cmee.emlis.selected_emlis_provisional_reading.v1",
+            "configuration_ref": "difference-configuration:0bde00247be1f570267e25ab61551bb66764d1d9c4528fbc325773144eaab7ec@cocolon.cmee.emlis.difference_configuration.v1",
+            "configuration_component_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "source_qualifier_refs": [
+              "modality:fact",
+              "modality:feeling",
+              "polarity:negative",
+              "polarity:neutral"
+            ],
+            "invariant_codes": [
+              "MODALITY_PROMOTION",
+              "REQUIRED_RETENTION_ERASURE"
+            ],
+            "layer1_contribution_refs": [
+              "contribution-7cea9e6fd57cc9d2a0d45667f7c53eb00bf25f714a5c0c7e5ac5c60ed68bf3f9"
+            ]
+          },
+          {
+            "required_difference_ref": "required-difference:bec39494fab9719950c8157e5ead770816f2991023289e4eac68887fb6d4c578@cocolon.cmee.emlis.required_difference.v1",
+            "selected_reading_ref": "selected-emlis-provisional-reading:149e74b94159429a0cec52bbe28a567d9d117098927aaa1ebf81cd2dedea036c@cocolon.cmee.emlis.selected_emlis_provisional_reading.v1",
+            "configuration_ref": "difference-configuration:0bde00247be1f570267e25ab61551bb66764d1d9c4528fbc325773144eaab7ec@cocolon.cmee.emlis.difference_configuration.v1",
+            "configuration_component_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "source_qualifier_refs": [
+              "modality:fact",
+              "modality:feeling"
+            ],
+            "invariant_codes": [
+              "MODALITY_PROMOTION",
+              "REQUIRED_RETENTION_ERASURE"
+            ],
+            "layer1_contribution_refs": [
+              "contribution-7cea9e6fd57cc9d2a0d45667f7c53eb00bf25f714a5c0c7e5ac5c60ed68bf3f9"
+            ]
+          },
+          {
+            "required_difference_ref": "required-difference:e194a72c9183a5f44a78b6c9700112ca566030a2816a92c93660374996e73ccc@cocolon.cmee.emlis.required_difference.v1",
+            "selected_reading_ref": "selected-emlis-provisional-reading:149e74b94159429a0cec52bbe28a567d9d117098927aaa1ebf81cd2dedea036c@cocolon.cmee.emlis.selected_emlis_provisional_reading.v1",
+            "configuration_ref": "difference-configuration:0bde00247be1f570267e25ab61551bb66764d1d9c4528fbc325773144eaab7ec@cocolon.cmee.emlis.difference_configuration.v1",
+            "configuration_component_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "source_qualifier_refs": [
+              "actor:current_user",
+              "aspect:unknown",
+              "epistemic:provisional_interpretation",
+              "epistemic:source_explicit",
+              "modality:fact",
+              "modality:feeling",
+              "polarity:negative",
+              "polarity:neutral",
+              "scope:source_bounded",
+              "time_scope:past",
+              "world:unknown"
+            ],
+            "invariant_codes": [
+              "ENDPOINT_COLLAPSE",
+              "REQUIRED_RETENTION_ERASURE"
+            ],
+            "layer1_contribution_refs": [
+              "contribution-7cea9e6fd57cc9d2a0d45667f7c53eb00bf25f714a5c0c7e5ac5c60ed68bf3f9"
+            ]
+          }
+        ],
+        "reception_trace": [
+          {
+            "branch": "NORMAL",
+            "meaning_outcome_ref": "selected-emlis-provisional-reading:149e74b94159429a0cec52bbe28a567d9d117098927aaa1ebf81cd2dedea036c@cocolon.cmee.emlis.selected_emlis_provisional_reading.v1",
+            "reading_consequence_ref": "reading-consequence:ae23080ffa73c4e8ce03865ccad49893feb53891db181aa9f1c0cd5622f5304e@cocolon.cmee.emlis.reading_consequence.v1",
+            "reception_record_ref": "meaning-bound-reception:b846782827b5caf71846ec1b7763e9c7e217dd2016ad2317b06020b738f371ef@cocolon.cmee.emlis.meaning_bound_reception.v1",
+            "projected_claim_ref": "subjective-claim-b2f172c0fef2f2b9fc801463084cbcc8a4d24134fa14d666a3e6f9287ea1d0a5",
+            "layer1_contribution_refs": [
+              "contribution-7cea9e6fd57cc9d2a0d45667f7c53eb00bf25f714a5c0c7e5ac5c60ed68bf3f9",
+              "contribution-829523706989a150e09a0196c54536d6faf814c3cff7f635b088ecd3eb73a91b"
+            ],
+            "response_object_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "edge:me-e1f6d2b6954c0e0644ac4e15dcd960436fe6ddff67557affb1d7af52f95fc561@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "projected_response_object_refs": [
+              "node:mn-00df74230ab98f17b0385056c6b2d03bcab0b970cd5659b042183e7b78d11404@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-6c15751d379c261fbce218e2156e78ef8356ce2fb8f86b8a689ce2a15061c4a6@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "preserved_difference_refs": [
+              "required-difference:b30425a35bbff5dc5ac8c5a6be715e0f0c3d0e0e9f34c443d6657137955ca0f2@cocolon.cmee.emlis.required_difference.v1",
+              "required-difference:b731f84535da1b436c4cd4780dd15c496d492b72f72b749187e389e54658a863@cocolon.cmee.emlis.required_difference.v1",
+              "required-difference:bec39494fab9719950c8157e5ead770816f2991023289e4eac68887fb6d4c578@cocolon.cmee.emlis.required_difference.v1",
+              "required-difference:e194a72c9183a5f44a78b6c9700112ca566030a2816a92c93660374996e73ccc@cocolon.cmee.emlis.required_difference.v1"
+            ]
+          }
+        ],
+        "body_status": "GENERATED",
+        "schema_version": "cocolon.cmee.emlis_thread_artifact.v1",
+        "history_line": null,
+        "history_line_plan": null,
+        "interpretive_frames": []
+      },
+      "body": {
+        "artifact_id": "emlis-artifact-c3b135d9b06afbbc099d154ce6da758211be49a1f3b49aabc8a186e90843fa7a",
+        "observation": "「褒められた」ことについて、その時の受け止めは「あの時も本当は嬉しかった」と書かれています。",
+        "reception": "褒められたことについて、その時はあの時も本当は嬉しかったのですね。",
+        "source_prefix_ref": "emlis-source-prefix-c15aad60b8cfbb267c479d6c07e0be362b12529b2493ba9e936bc5de50507f24",
+        "meaning_checkpoint_ref": "semantic-checkpoint-edde9b0ae020481a7f74d05563ea8dc55cad03742b94a863f55c9f9ee373bc1a",
+        "qualified_evidence_refs": [
+          {
+            "thread_span_id": "s1",
+            "local_source_span_id": "s1",
+            "evidence": {
+              "evidence_id": "ev-cebc5866b93300f1c8a7b059",
+              "source_span_id": "s1",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "memo",
+              "element_index": -1,
+              "field_utf8_start": 318,
+              "field_utf8_end": 366,
+              "scalar_start": 0,
+              "scalar_end": 15,
+              "utf8_start": 318,
+              "utf8_end": 363,
+              "field_sha256": "657ef4fd73baac0c5d049b83b7926b278e5b6194ce7c3f31fb4bf8db4c697c9e",
+              "literal_sha256": "6766d28bcac6aac3f053437ae285f2732a7d09e1164b10178395b5e490c7c356"
+            }
+          },
+          {
+            "thread_span_id": "s2",
+            "local_source_span_id": "s2",
+            "evidence": {
+              "evidence_id": "ev-f58b8dbbfadd199080d1dd78",
+              "source_span_id": "s2",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "emotion_details.0.type",
+              "element_index": 0,
+              "field_utf8_start": 427,
+              "field_utf8_end": 433,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 427,
+              "utf8_end": 433,
+              "field_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df",
+              "literal_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df"
+            }
+          },
+          {
+            "thread_span_id": "s3",
+            "local_source_span_id": "s3",
+            "evidence": {
+              "evidence_id": "ev-d4b688999f363bcbae61d0c8",
+              "source_span_id": "s3",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "emotions.0",
+              "element_index": 0,
+              "field_utf8_start": 457,
+              "field_utf8_end": 463,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 457,
+              "utf8_end": 463,
+              "field_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df",
+              "literal_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df"
+            }
+          },
+          {
+            "thread_span_id": "s4",
+            "local_source_span_id": "s4",
+            "evidence": {
+              "evidence_id": "ev-44333ace7179e9ac7ec426f8",
+              "source_span_id": "s4",
+              "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+              "field_path": "category.0",
+              "element_index": 0,
+              "field_utf8_start": 487,
+              "field_utf8_end": 493,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 487,
+              "utf8_end": 493,
+              "field_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3",
+              "literal_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3"
+            }
+          },
+          {
+            "thread_span_id": "s5",
+            "local_source_span_id": "s1",
+            "evidence": {
+              "evidence_id": "ev-457182564786511bf26558dc",
+              "source_span_id": "s1",
+              "source_envelope_id": "src-88027489ec7d32cfbc664b38",
+              "field_path": "answer_text_private",
+              "element_index": -1,
+              "field_utf8_start": 427,
+              "field_utf8_end": 493,
+              "scalar_start": 0,
+              "scalar_end": 12,
+              "utf8_start": 427,
+              "utf8_end": 463,
+              "field_sha256": "48223fa92fc14f9cff4da1393e22297a031278259fd5067ef6af2e52eb2fbebe",
+              "literal_sha256": "e4abeff3c6ef0c5821e45daee00312204630d3ff51bfb3d089b6e7baf0cc23c2"
+            }
+          },
+          {
+            "thread_span_id": "s6",
+            "local_source_span_id": "s2",
+            "evidence": {
+              "evidence_id": "ev-7a56139b66de6a33ed9ad872",
+              "source_span_id": "s2",
+              "source_envelope_id": "src-88027489ec7d32cfbc664b38",
+              "field_path": "answer_text_private",
+              "element_index": -1,
+              "field_utf8_start": 427,
+              "field_utf8_end": 493,
+              "scalar_start": 13,
+              "scalar_end": 21,
+              "utf8_start": 466,
+              "utf8_end": 490,
+              "field_sha256": "48223fa92fc14f9cff4da1393e22297a031278259fd5067ef6af2e52eb2fbebe",
+              "literal_sha256": "f6a46dde4dddb55afd9dd37bb5baa154b0f188f0c9280506411705d07e6da754"
+            }
+          }
+        ],
+        "meaning_trace": [
+          {
+            "limited_outcome_ref": "limited-meaning-outcome:43ec14fbdb14ecfb9715ac205e67bf3b6110794686fa94de9b92f8c51263cd01@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+            "source_object_ref": "node:mn-dedffad588fce7eb32312e576aae24cfe39a91d32289816e4d78d9dcde67b35a@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+            "layer1_contribution_refs": [
+              "contribution-b3e08620fe5f50ab7dc6fbe8d94f4b1f93572fb6dfeca18147c3057926203a77"
+            ]
+          },
+          {
+            "limited_outcome_ref": "limited-meaning-outcome:43ec14fbdb14ecfb9715ac205e67bf3b6110794686fa94de9b92f8c51263cd01@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+            "source_object_ref": "node:mn-f6e39082d83b1c6a88fa4a65c3a76e5c6fa4ea171c31345da87c6ed546b2cfc6@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+            "layer1_contribution_refs": [
+              "contribution-8af3ffdb56d8be0d6492539714367553d2542dba208122009d760d40d5510d0a"
+            ]
+          }
+        ],
+        "reception_trace": [
+          {
+            "branch": "LIMITED",
+            "meaning_outcome_ref": "limited-meaning-outcome:43ec14fbdb14ecfb9715ac205e67bf3b6110794686fa94de9b92f8c51263cd01@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+            "reading_consequence_ref": null,
+            "reception_record_ref": "bounded-limited-reception:78e25a60d958a23e53d2a653dce8d44c557757c21f4409f0143aebce187ee169@cocolon.cmee.emlis.bounded_limited_reception.v1",
+            "projected_claim_ref": "subjective-claim-fcccf2a854a726c2721881fc36e47d7cf9ab453ffaf87dec574d62db83ea5561",
+            "layer1_contribution_refs": [
+              "contribution-b3e08620fe5f50ab7dc6fbe8d94f4b1f93572fb6dfeca18147c3057926203a77"
+            ],
+            "response_object_refs": [
+              "node:mn-dedffad588fce7eb32312e576aae24cfe39a91d32289816e4d78d9dcde67b35a@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-f6e39082d83b1c6a88fa4a65c3a76e5c6fa4ea171c31345da87c6ed546b2cfc6@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "projected_response_object_refs": [
+              "node:mn-dedffad588fce7eb32312e576aae24cfe39a91d32289816e4d78d9dcde67b35a@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "preserved_difference_refs": []
+          }
+        ],
+        "body_status": "GENERATED",
+        "schema_version": "cocolon.cmee.emlis_thread_artifact.v1",
+        "history_line": null,
+        "history_line_plan": null,
+        "interpretive_frames": []
+      },
+      "question": null,
+      "checkpoint_ref": "semantic-checkpoint-edde9b0ae020481a7f74d05563ea8dc55cad03742b94a863f55c9f9ee373bc1a",
+      "snapshot_ref": "semantic-66c5221d2683b50b5d3d4b23a54c422fc2270c897385d2df3b5c1bb74909f18a",
+      "automatic_progression": false
+    },
+    {
+      "case": "WITHDRAW",
+      "origin": "HAND_AUTHORED_SYNTHETIC_NOT_MODEL_OUTPUT",
+      "original": {
+        "id": "q1-synthetic",
+        "created_at": "2026-09-10T00:00:00Z",
+        "memo": "褒められたのに、嬉しくなかった。",
+        "memo_action": "帰宅しても苦しかった。",
+        "category": [
+          "仕事"
+        ],
+        "emotions": [
+          "不安"
+        ],
+        "emotion_details": [
+          {
+            "type": "不安",
+            "strength": "medium"
+          }
+        ],
+        "is_secret": false
+      },
+      "answer": "その時は寂しかった。「帰宅しても苦しかった」は誤りです。",
+      "initial_body": {
+        "artifact_id": "emlis-artifact-18d98e8ff1e24b99fcbf377242cd38fa91fc165ef689cdf29d202786e8dad157",
+        "observation": "「褒められた」の一方で「嬉しくなかった」とあります。\n今は、「帰宅しても苦しかった」という感覚や状態が前に出ています。",
+        "reception": "褒められたことと嬉しくなかったことの両方を、その違いも含めて小さくせずに受け止めています。",
+        "source_prefix_ref": "emlis-source-prefix-7a39453bbff81c3f084ab264226f573be9a13fa722e79d19053f0408dbd67837",
+        "meaning_checkpoint_ref": "semantic-checkpoint-89bd0c0d8a683b1d88b121d6665c32ffe192cd5d9b7dd7372d795e9a8fa7733d",
+        "qualified_evidence_refs": [
+          {
+            "thread_span_id": "s1",
+            "local_source_span_id": "s1",
+            "evidence": {
+              "evidence_id": "ev-4c4d30bd15a2c00d8d534ca7",
+              "source_span_id": "s1",
+              "source_envelope_id": "src-bf922ecf9715f15948ea4252",
+              "field_path": "memo",
+              "element_index": -1,
+              "field_utf8_start": 351,
+              "field_utf8_end": 399,
+              "scalar_start": 0,
+              "scalar_end": 15,
+              "utf8_start": 351,
+              "utf8_end": 396,
+              "field_sha256": "657ef4fd73baac0c5d049b83b7926b278e5b6194ce7c3f31fb4bf8db4c697c9e",
+              "literal_sha256": "6766d28bcac6aac3f053437ae285f2732a7d09e1164b10178395b5e490c7c356"
+            }
+          },
+          {
+            "thread_span_id": "s2",
+            "local_source_span_id": "s2",
+            "evidence": {
+              "evidence_id": "ev-de1ca50dee1be29e76fb207d",
+              "source_span_id": "s2",
+              "source_envelope_id": "src-bf922ecf9715f15948ea4252",
+              "field_path": "memo_action",
+              "element_index": -1,
+              "field_utf8_start": 425,
+              "field_utf8_end": 458,
+              "scalar_start": 0,
+              "scalar_end": 10,
+              "utf8_start": 425,
+              "utf8_end": 455,
+              "field_sha256": "8a964dbdeeb860bf83cd48e53c58851daee374e2e62d3b2afafc32cfd117caa8",
+              "literal_sha256": "3c9bc7abfa463ffcc7d7e0f43fca84134d809c73a7c8846bf7a9a74dd3f41aba"
+            }
+          },
+          {
+            "thread_span_id": "s3",
+            "local_source_span_id": "s3",
+            "evidence": {
+              "evidence_id": "ev-1c9a4e5156c63939c544b617",
+              "source_span_id": "s3",
+              "source_envelope_id": "src-bf922ecf9715f15948ea4252",
+              "field_path": "emotion_details.0.type",
+              "element_index": 0,
+              "field_utf8_start": 494,
+              "field_utf8_end": 500,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 494,
+              "utf8_end": 500,
+              "field_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df",
+              "literal_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df"
+            }
+          },
+          {
+            "thread_span_id": "s4",
+            "local_source_span_id": "s4",
+            "evidence": {
+              "evidence_id": "ev-eb70e7f1d2fc920b06dd8044",
+              "source_span_id": "s4",
+              "source_envelope_id": "src-bf922ecf9715f15948ea4252",
+              "field_path": "emotions.0",
+              "element_index": 0,
+              "field_utf8_start": 524,
+              "field_utf8_end": 530,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 524,
+              "utf8_end": 530,
+              "field_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df",
+              "literal_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df"
+            }
+          },
+          {
+            "thread_span_id": "s5",
+            "local_source_span_id": "s5",
+            "evidence": {
+              "evidence_id": "ev-77888891f5e03ed6e87be2af",
+              "source_span_id": "s5",
+              "source_envelope_id": "src-bf922ecf9715f15948ea4252",
+              "field_path": "category.0",
+              "element_index": 0,
+              "field_utf8_start": 554,
+              "field_utf8_end": 560,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 554,
+              "utf8_end": 560,
+              "field_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3",
+              "literal_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3"
+            }
+          }
+        ],
+        "meaning_trace": [
+          {
+            "limited_outcome_ref": "limited-meaning-outcome:1da192a00205b10e523f7ce0f441634528e262a15358deb9f68aa47d2b67f3c2@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+            "source_object_ref": "node:mn-4c515f2407557be6f8d9430e84dbeab4f406e3139f3c3fb6539811cdcbde87f1@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+            "layer1_contribution_refs": [
+              "contribution-86f65d272bb8b864d29888a20fefb9b617b7fbda867b8edb632929cadebe2764"
+            ]
+          },
+          {
+            "limited_outcome_ref": "limited-meaning-outcome:1da192a00205b10e523f7ce0f441634528e262a15358deb9f68aa47d2b67f3c2@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+            "source_object_ref": "node:mn-aa99c7035b72c9f636530c022060600b08a99ea0e1504398614b8df6702e32f5@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+            "layer1_contribution_refs": [
+              "contribution-3510f77d31706caf49c3868cd9f402ad83ffea94f6ea71f5d1143ce451b6712f"
+            ]
+          },
+          {
+            "limited_outcome_ref": "limited-meaning-outcome:1da192a00205b10e523f7ce0f441634528e262a15358deb9f68aa47d2b67f3c2@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+            "source_object_ref": "node:mn-b516177f0cbda2b79f5979f6da5e889bedb68ff98bc5814c0ccf016c77c258b8@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+            "layer1_contribution_refs": [
+              "contribution-3510f77d31706caf49c3868cd9f402ad83ffea94f6ea71f5d1143ce451b6712f"
+            ]
+          }
+        ],
+        "reception_trace": [
+          {
+            "branch": "LIMITED",
+            "meaning_outcome_ref": "limited-meaning-outcome:1da192a00205b10e523f7ce0f441634528e262a15358deb9f68aa47d2b67f3c2@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+            "reading_consequence_ref": null,
+            "reception_record_ref": "bounded-limited-reception:597c4295df22c3daddae72be97064baa994eee71613e4c531aa56b74210c921b@cocolon.cmee.emlis.bounded_limited_reception.v1",
+            "projected_claim_ref": "subjective-claim-427884a35f20dc8cf0fe6cdd374e0115908d0edfc620838bcc130e5831994bb2",
+            "layer1_contribution_refs": [
+              "contribution-3510f77d31706caf49c3868cd9f402ad83ffea94f6ea71f5d1143ce451b6712f"
+            ],
+            "response_object_refs": [
+              "node:mn-4c515f2407557be6f8d9430e84dbeab4f406e3139f3c3fb6539811cdcbde87f1@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-aa99c7035b72c9f636530c022060600b08a99ea0e1504398614b8df6702e32f5@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-b516177f0cbda2b79f5979f6da5e889bedb68ff98bc5814c0ccf016c77c258b8@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "projected_response_object_refs": [
+              "node:mn-b516177f0cbda2b79f5979f6da5e889bedb68ff98bc5814c0ccf016c77c258b8@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-aa99c7035b72c9f636530c022060600b08a99ea0e1504398614b8df6702e32f5@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "preserved_difference_refs": []
+          }
+        ],
+        "body_status": "GENERATED",
+        "schema_version": "cocolon.cmee.emlis_thread_artifact.v1",
+        "history_line": null,
+        "history_line_plan": null,
+        "interpretive_frames": []
+      },
+      "body": {
+        "artifact_id": "emlis-artifact-95308721c7febf9129d1c5c20ba98fd802d848738b44641be54547ffe129ac60",
+        "observation": "「褒められた」のに「嬉しくなかった」、その時は「その時は寂しかった」とあります。",
+        "reception": "褒められたことについて、その時にその時は寂しかったことを小さくせずに受け止めています。",
+        "source_prefix_ref": "emlis-source-prefix-0f7e8f8b2ca8fafa4867a6805fc01ce2e95c7e5941d60c358cafeeed106e7f03",
+        "meaning_checkpoint_ref": "semantic-checkpoint-a738381408a0692a99650a4ae1845596608f92659609c109533e5869f99801cf",
+        "qualified_evidence_refs": [
+          {
+            "thread_span_id": "s1",
+            "local_source_span_id": "s1",
+            "evidence": {
+              "evidence_id": "ev-4c4d30bd15a2c00d8d534ca7",
+              "source_span_id": "s1",
+              "source_envelope_id": "src-bf922ecf9715f15948ea4252",
+              "field_path": "memo",
+              "element_index": -1,
+              "field_utf8_start": 351,
+              "field_utf8_end": 399,
+              "scalar_start": 0,
+              "scalar_end": 15,
+              "utf8_start": 351,
+              "utf8_end": 396,
+              "field_sha256": "657ef4fd73baac0c5d049b83b7926b278e5b6194ce7c3f31fb4bf8db4c697c9e",
+              "literal_sha256": "6766d28bcac6aac3f053437ae285f2732a7d09e1164b10178395b5e490c7c356"
+            }
+          },
+          {
+            "thread_span_id": "s2",
+            "local_source_span_id": "s2",
+            "evidence": {
+              "evidence_id": "ev-de1ca50dee1be29e76fb207d",
+              "source_span_id": "s2",
+              "source_envelope_id": "src-bf922ecf9715f15948ea4252",
+              "field_path": "memo_action",
+              "element_index": -1,
+              "field_utf8_start": 425,
+              "field_utf8_end": 458,
+              "scalar_start": 0,
+              "scalar_end": 10,
+              "utf8_start": 425,
+              "utf8_end": 455,
+              "field_sha256": "8a964dbdeeb860bf83cd48e53c58851daee374e2e62d3b2afafc32cfd117caa8",
+              "literal_sha256": "3c9bc7abfa463ffcc7d7e0f43fca84134d809c73a7c8846bf7a9a74dd3f41aba"
+            }
+          },
+          {
+            "thread_span_id": "s3",
+            "local_source_span_id": "s3",
+            "evidence": {
+              "evidence_id": "ev-1c9a4e5156c63939c544b617",
+              "source_span_id": "s3",
+              "source_envelope_id": "src-bf922ecf9715f15948ea4252",
+              "field_path": "emotion_details.0.type",
+              "element_index": 0,
+              "field_utf8_start": 494,
+              "field_utf8_end": 500,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 494,
+              "utf8_end": 500,
+              "field_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df",
+              "literal_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df"
+            }
+          },
+          {
+            "thread_span_id": "s4",
+            "local_source_span_id": "s4",
+            "evidence": {
+              "evidence_id": "ev-eb70e7f1d2fc920b06dd8044",
+              "source_span_id": "s4",
+              "source_envelope_id": "src-bf922ecf9715f15948ea4252",
+              "field_path": "emotions.0",
+              "element_index": 0,
+              "field_utf8_start": 524,
+              "field_utf8_end": 530,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 524,
+              "utf8_end": 530,
+              "field_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df",
+              "literal_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df"
+            }
+          },
+          {
+            "thread_span_id": "s5",
+            "local_source_span_id": "s5",
+            "evidence": {
+              "evidence_id": "ev-77888891f5e03ed6e87be2af",
+              "source_span_id": "s5",
+              "source_envelope_id": "src-bf922ecf9715f15948ea4252",
+              "field_path": "category.0",
+              "element_index": 0,
+              "field_utf8_start": 554,
+              "field_utf8_end": 560,
+              "scalar_start": 0,
+              "scalar_end": 2,
+              "utf8_start": 554,
+              "utf8_end": 560,
+              "field_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3",
+              "literal_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3"
+            }
+          },
+          {
+            "thread_span_id": "s6",
+            "local_source_span_id": "s1",
+            "evidence": {
+              "evidence_id": "ev-38d1def2ee4573321373b0eb",
+              "source_span_id": "s1",
+              "source_envelope_id": "src-2a56d28929fd14bbfab9d0d9",
+              "field_path": "answer_text_private",
+              "element_index": -1,
+              "field_utf8_start": 427,
+              "field_utf8_end": 511,
+              "scalar_start": 0,
+              "scalar_end": 9,
+              "utf8_start": 427,
+              "utf8_end": 454,
+              "field_sha256": "44e6c4c1f0c29d118f3709c73b68068ad5148355c708879b06c1fef82986c748",
+              "literal_sha256": "18bf400374f750212d4117cecf76ad821e73564275fb3dbe2e504e4f41b11518"
+            }
+          },
+          {
+            "thread_span_id": "s7",
+            "local_source_span_id": "s2",
+            "evidence": {
+              "evidence_id": "ev-96f8d8b8cf51c6029d9f5d09",
+              "source_span_id": "s2",
+              "source_envelope_id": "src-2a56d28929fd14bbfab9d0d9",
+              "field_path": "answer_text_private",
+              "element_index": -1,
+              "field_utf8_start": 427,
+              "field_utf8_end": 511,
+              "scalar_start": 10,
+              "scalar_end": 27,
+              "utf8_start": 457,
+              "utf8_end": 508,
+              "field_sha256": "44e6c4c1f0c29d118f3709c73b68068ad5148355c708879b06c1fef82986c748",
+              "literal_sha256": "786910afcbadd950f91150c0f9f70828b3230ee198b6d204e22bb60775dfd501"
+            }
+          }
+        ],
+        "meaning_trace": [
+          {
+            "limited_outcome_ref": "limited-meaning-outcome:3ab6d435c44840c424671c2a696e8fbd63eea584024e2508839dc97bed1e9a46@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+            "source_object_ref": "node:mn-881fb3fd972d51cfd5803ed182aa4b3bc208c358ab21b380df168eca6b29f16c@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+            "layer1_contribution_refs": [
+              "contribution-e462f8c595f82444a1949d8b804ae4112a0dbaaadedfae6fc1908c2bfd72f973"
+            ]
+          },
+          {
+            "limited_outcome_ref": "limited-meaning-outcome:3ab6d435c44840c424671c2a696e8fbd63eea584024e2508839dc97bed1e9a46@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+            "source_object_ref": "node:mn-928723b0dffdbce9993ebb5eecc5bb38a524a8ea958e9bfa48191c077b602679@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+            "layer1_contribution_refs": [
+              "contribution-b991525e69abc12906fe03bdbc6c0b44e788c26ef86e4e84e94028e68be7532c"
+            ]
+          },
+          {
+            "limited_outcome_ref": "limited-meaning-outcome:3ab6d435c44840c424671c2a696e8fbd63eea584024e2508839dc97bed1e9a46@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+            "source_object_ref": "node:mn-f434f69d48b5fb43c3a9bd87896b5790aa468a67a085042aeb37ebfae86d6780@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+            "layer1_contribution_refs": [
+              "contribution-e462f8c595f82444a1949d8b804ae4112a0dbaaadedfae6fc1908c2bfd72f973"
+            ]
+          }
+        ],
+        "reception_trace": [
+          {
+            "branch": "LIMITED",
+            "meaning_outcome_ref": "limited-meaning-outcome:3ab6d435c44840c424671c2a696e8fbd63eea584024e2508839dc97bed1e9a46@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+            "reading_consequence_ref": null,
+            "reception_record_ref": "bounded-limited-reception:cda728cc446e47e396b56047b07700fac0e1ad07c43e87c33b49aee6f43fc3f2@cocolon.cmee.emlis.bounded_limited_reception.v1",
+            "projected_claim_ref": "subjective-claim-f245e3cc52abc2d652220ebfa09751fa376cdb3f6331c70c86e2e680921350bc",
+            "layer1_contribution_refs": [
+              "contribution-b991525e69abc12906fe03bdbc6c0b44e788c26ef86e4e84e94028e68be7532c"
+            ],
+            "response_object_refs": [
+              "node:mn-881fb3fd972d51cfd5803ed182aa4b3bc208c358ab21b380df168eca6b29f16c@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-928723b0dffdbce9993ebb5eecc5bb38a524a8ea958e9bfa48191c077b602679@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "node:mn-f434f69d48b5fb43c3a9bd87896b5790aa468a67a085042aeb37ebfae86d6780@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "projected_response_object_refs": [
+              "node:mn-928723b0dffdbce9993ebb5eecc5bb38a524a8ea958e9bfa48191c077b602679@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+            ],
+            "preserved_difference_refs": []
+          }
+        ],
+        "body_status": "GENERATED",
+        "schema_version": "cocolon.cmee.emlis_thread_artifact.v1",
+        "history_line": null,
+        "history_line_plan": null,
+        "interpretive_frames": []
+      },
+      "question": null,
+      "checkpoint_ref": "semantic-checkpoint-a738381408a0692a99650a4ae1845596608f92659609c109533e5869f99801cf",
+      "snapshot_ref": "semantic-2a544d297fbb3f96f4480887c5fd38d45503f0eb2b5511abc68b40df39aee6ec",
+      "automatic_progression": false
+    }
+  ],
+  "source_blobs": {
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "e73094852b2b93d2459fa852f92216b84e7fd898",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py": "ff00e8b5d449c156c9aad51456aa2b62f388852d",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py": "b9a354e665c73b197ba3f19a4d9e2f0e8a350ae1",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py": "c2173056a1089b81ae31e45bb9d9f00686830f03",
+    "ai/services/ai_inference/emlis_thread_service.py": "40b5440fb5b265771f217beabffb9ebd97ecec64",
+    "ai/tests/test_cmee_emlis_semantic_snapshot.py": "c2968ef0faa8536e6b41dee9e2c2a2a590494d6f"
+  },
+  "verification": {
+    "runtime": {
+      "python": "3.12.14",
+      "pytest": "8.4.1",
+      "pytest_subtests": "0.14.2",
+      "fastapi": "0.142.2",
+      "pydantic": "2.13.5",
+      "httpx": "0.28.1",
+      "pglite": "0.5.8",
+      "dependency_changes_in_repository": 0
+    },
+    "final_new_and_p1": {
+      "files": [
+        "ai/tests/test_cmee_emlis_semantic_snapshot.py",
+        "ai/tests/test_cmee_preparation.py"
+      ],
+      "new_cases": 25,
+      "existing_p1_cases": 22,
+      "passed": 47,
+      "failed": 0,
+      "skipped": 0,
+      "subtests_not_added_to_case_total": 34,
+      "seconds": 21.63
+    },
+    "legacy_application_comparison": {
+      "files": [
+        "ai/tests/test_emlis_q2_application.py",
+        "ai/tests/test_emlis_q3_application.py"
+      ],
+      "baseline": {
+        "passed": 54,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 79.13
+      },
+      "changed": {
+        "passed": 54,
+        "failed": 0,
+        "skipped": 0,
+        "seconds": 80.7
+      },
+      "existing_deprecation_warnings": 2
+    },
+    "distinct_final_passed": 101,
+    "legacy_q1_q3_broad_run": "INTERRUPTED_AFTER_MANY_FAILURES_NOT_A_PASS",
+    "first_failure_baseline_reproduction": {
+      "test": "test_design_answers_reach_selected_meaning_and_shared_human_reception",
+      "parameter": "次も同じ成果を求められるようで、重かった。",
+      "assertion": "test_cmee_emlis_q1_thread.py:113 expected in result.artifact.reception",
+      "baseline_failed": 1,
+      "baseline_deselected": 72,
+      "seconds": 9.01,
+      "remaining_broad_failures": "NOT_CLASSIFIED_OR_RESOLVED"
+    },
+    "full_suite_pass_claim": false,
+    "ui_or_device_execution": 0
+  },
+  "limitations": [
+    "Provisional bounded native mapping; no arbitrary semantic understanding guarantee",
+    "E02-0 explicit unknown/actions remain unsupported; no partial adoption",
+    "Degree/conditional prefixes retained as exact source slices, not general structured qualifier understanding",
+    "Existing author output still repeats time expressions (その時はあの時も / その時にその時は); no product-quality acceptance",
+    "New-profile history handoff unsupported; legacy history handling unchanged",
+    "P1/P2/C0 original results untouched; synthetic output harvesting is not counted as extra passing tests",
+    "Actual SQL uses isolated PGlite and existing migrations/RPC only; no live Supabase/Render"
+  ]
+}

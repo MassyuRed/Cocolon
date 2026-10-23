@@ -2167,7 +2167,7 @@ Analysisは実loaderの当期最大100記録＋比較期最大100記録を踏ま
 
 1. repositoryの必読入口・**[全機能／全状態](../00_cocolon_current_product_and_state.md)**を読み、本節と[比較README](../observation_learning/model_selection/2026-10-22-three-core/README.md)、[C0実行記録](../observation_learning/trials/2026-10-23-current-four/README.md)へ進む。System Context最新cacheは未生成。8月のtracked snapshotをcurrentへ使わず、fresh原本を直接読む。同じtimeoutの再試行や全体再監査をP1の前提にしない。
 2. 作業ownerのfresh headと差分を確認する。照合点はCocolon [PR30](https://github.com/MassyuRed/Cocolon/pull/30)、branch `agent/three-core-cmee-current-structure-20260815`、本追記前head `504ca1951511e87cf9b0f531bcf26a0561206791`。APIは[PR3](https://github.com/MassyuRed/mashos-api/pull/3)、branch `agent/cmee-v1a-i1sx-source-explicit-20260815`、head `3084c99e5a08d6e475d8a177e62ebf1548e8a0f9`。いずれもopen／draft／unmerged。このSHAを次回の最新headへ固定せず、差分と関係ownerだけを再確認する。
-3. C0の主要保存commit `8becb4cc1ce50ea582109937c362c126d9079cc2`と説明補正 `504ca1951511e87cf9b0f531bcf26a0561206791`、fixture blob、全結果を再利用する。コード中の未実行分岐を実行済みにしない。**P1は下記Gの限定範囲まで完了。P2は後続Hまで完了。次回最初は後続Iと設計01の限定実装案を読み、実装承認の有無を確認する。承認前は製品契約を変えず、承認後は同案の内部実装・必要検証・保存までを進める。9B認証、モデル最終選定、追加学習の完了を待たない。**
+3. C0の主要保存commit `8becb4cc1ce50ea582109937c362c126d9079cc2`と説明補正 `504ca1951511e87cf9b0f531bcf26a0561206791`、fixture blob、全結果を再利用する。コード中の未実行分岐を実行済みにしない。**P1は下記Gの限定範囲まで完了。P2は後続Hまで完了。次回最初は後続Jと設計01の実装追記を読む。限定実装の承認・内部実装は完了し、Iの判断待ちへ戻さない。残る未対応意味と本文品質の具体差分から再開する。9B認証、モデル最終選定、追加学習の完了を待たない。**
 4. P1を終えた時点で、実際の変更file・検証したsource／失敗・未完了・次の一作業を本節へ置換更新する。同じ変更単位で全体現在地・観測入口・比較入口の案内を同期する。技術仕様は上記既存設計、構造が変われば該当current mapへ反映する。未実行工程に完了印を付けない。
 
 **Mashの後続指摘と説明訂正：** Mashは「CMEE側だけでやることはないのか」と、実モデル接続との混同を指摘した。華恋の直前の「入力をモデルへ渡し、返答を受け取るoffline接続」という説明が不正確だった。先行するのは上記のCMEE内部準備であり、実モデル接続・認証・推論は不要。比較runnerの仮データ確認をCMEE本体への実接続成功として扱わない。
@@ -2238,3 +2238,15 @@ P2の設計対応は完了。次は設計01末尾の限定実admission変更案�
 意味の起点を現finite parserの再導出一致から暫定採用snapshotへ変えることは、Rule18 §11.3 LEVEL_3のcontract差分。この点の実装判断が次。内部準備の進め方・P1/P2完了を再承認待ちへ戻さない。承認後は同範囲の技術修正・必要検証・GitHub反映を一単位で進め、単なる内部版数変更ごとの再承認を求めない。通常application有効化・実モデル・実DB／配備まで承認されたとは扱わない。
 
 今回source/test/fixture/guard/DB/公開DTO/RN/実モデル/推論/課金/Render/merge変更0。新規test実行0、意味採用0、実本文生成0。既存関数・SQLと既存test期待の静的照合であり、新profileの成功件数を作らない。STRUCTURE_MAP_DELTA_NONE（提案の具体化、実際のowner／型／経路変更なし）、primary=BLOCKER_NARROWED、product_credit=0、automatic_progression=false。
+
+##### J. 10/23後続 — 承認済み限定Emlis snapshotの内部実装と検証
+
+Mashの「この限定範囲の内部実装へ進めてよろしいでしょうか。→進めていいよ」を受領。同範囲の実装承認は済み、Iの判断待ちへ戻さない。必読の全機能/全状態、全体設計図、全file地図01A/B/C、latest weeklyと実owner原本を確認し、Codex Work Modeで実装した。主担当が編集/統合/GitHub反映、補助は読取レビューと比較実行を担当。確認できないPro/Ultraや別model正式審査へ換算しない。開始API b7eb534／Cocolon fcdfe2、既存Draft PR3/PR30のbranchを継続する。
+
+実装は新emlis_semantic_admission.pyと既存Engine/answer_update/thread_engine/serviceのみ。明示offlineの新規Emlisに、P1未採用候補→暫定snapshot→既存作者/実問い→実回答ADD/REVISE/非focusWITHDRAW→意味先行保存/中断再開を接続。旧thread/旧pending/完成DTOを維持し、single-input三guard/作者/共有型/旧期待は変更0。通常serviceは保存再読だけ、新profileのmutationには同じ明示offline設定が必須。P1receiptのNOT_ADOPTEDと元P2設計例も保持する。
+
+新25＋P1既存22＝47 passed（21.63秒）、旧Q2/Q3 application同54は変更前後で各54 passed、fail/skip0。重複除外101成功。隔離PGliteで実SQL/RPCと候補/意味/本文中断、Premium本人continue三回答・わからないを確認した。旧Q1/Q3広範囲試験は多失敗で打切り、先頭Q1 reception期待113行は未変更b7eb534でも再現。その他広範囲失敗は未分類/未解消で全suite合格ではない。時制/主体/未使用quote/重複核/通常mutation/中断attemptの指摘を修復し最終検証。Runtime READYはscratchの絶対Python3.12.14＋既存CI依存版の実importで確認、製品依存file変更0。
+
+P2 E02-0既存receiptを一度渡し、unknown/actions未対応を理由に全体UNSUPPORTED。E02-Bは実pendingなしN/A、P01-N/A02-P1は範囲外のまま。全件未対応だけで完了にせず、別の承認済み合成系列は実本文へ到達した。本文の時点語重複・定型性は残る。実出力・source blob・失敗・未対応は[trial P3](../observation_learning/trials/2026-10-23-current-four/README.md#p3)とsemantic_snapshot_results.jsonへ集約。技術詳細は既存設計01/02/05/06、全変更fileは01A、構造は全体01/current01/04、現在地00/観測・比較入口を同期した。
+
+実モデル/推論/重み/追加学習/課金/実DB/Render/公開API/DTO/RN/本番設定/merge/deploy0。M1比較の既承認は維持するが今回は開始0。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、product_credit=0／PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=false。次の一作業は、新profileが未対応として残したE02-0の本人不明/行動と既存native/作者責務の具体差分を詰めること。Piece/Analysisの一般否定/不明対象/負荷/複数補足/refined/IF/Saved、有料履歴と通常接続、本文品質は残件。9B認証・モデル最終選定を待つ理由へ戻さず、通常有効化/実モデル/DB/配備へ自動拡大もしない。
