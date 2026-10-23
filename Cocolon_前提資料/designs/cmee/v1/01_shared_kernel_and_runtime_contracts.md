@@ -966,3 +966,10 @@ MashのCMEE内部準備継続指示により、P4完了の現在地から[Analys
 実装変更案はEngine、Analysisの新semantic_admission.py、既存compiler、既存realizerの4 production path＋新test／fixture各1。新shared契約へ広げず、通常service／DB／API／RN／モデル接続は含めない。新private型と意味起点の追加はRule18 §11.3 LEVEL_3の具体契約差分で、Mashがこの範囲を判断後に実装する。内部準備資料・source位置検査までを再承認待ちにしない。
 
 今回確認原本はAPI4fd8db4／Cocolon967c7d4。P1同一material／request／期間／全memberを照合、55quoteの元scalar／UTF8と参照を確認したP1受取はCANDIDATE_UNREVIEWEDのみ。全手作業例・原入力・source blob・実施限界はtrialのanalysis_semantic_admission_proposal.json。旧P1/P2/C0は不変、今回test／実admission／生成／DB／Render／モデル0。STRUCTURE_MAP_DELTA_NONE、BLOCKER_NARROWED、商品0／正式0/3／candidate_ready=false／automatic_progression=false。
+
+
+## 2026-10-23 — Mash承認済みP5のactual接続
+
+be37f40dの具体案へMashの「進めていいよ」を受領し、API 666b28517ef04aba170ebffe3c86980fea4c11bdに限定実装した。[実仕様04](04_analysis_v1d_v1e_detailed_design.md#cmee-p5-implemented)／[実型05](05_json_schema_and_versioning.md#cmee-p5-actual-types)を参照。旧PROPOSED_ONLYは案作成時の履歴。新規・明示offlineの原3記録／Plus／補足0／比較なしだけで、P1→immutable snapshot→新private graph→既存唯一realizerの文章・図→3段階private再読へ接続する。
+
+18保持単位／11原文group／8source scope／unknown／負荷注記／選択4を保持。完成済みは候補取得・再採用・compiler・作者を呼ばず同artifactを返し、実作者失敗時は採用snapshotを消さない。新private6型・例外2、旧logical registry／通常service／SQL／public DTO／RNは不変。対象9file905成功・12058subtestsは加算せず、全suiteや商品合格とはしない。API全6fileの全文／blob／変更集合／headを確認済み。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、商品0／正式0/3／candidate_ready=false／automatic_progression=false。通常有効化・実モデルへ自動拡大しない。

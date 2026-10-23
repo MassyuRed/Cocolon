@@ -7375,3 +7375,10 @@ snapshot schemaは`cocolon.cmee.emlis_semantic_snapshot.v2`、checkpointは`coco
 STRUCTURE_MAP_DELTA_PRESENT。新規明示offline Piece request→P1元7field／未採用receipt再束縛→Piece専用immutable semantic snapshot→既存Piece compiler／唯一作者の専用private plan/artifact→author-free policy→同一private serialize/reload。新ownerは同共有package内piece_semantic_admission.py一つ。通常B8／公開API／DB／RN／画像／モデル接続は不変。
 
 元6claim／5文／2関係と全感情選択を保持し、未表出選択から本文へ感情・原因・強度・時点を足さない。旧profileと保存結果を維持。実出力は原文2段落保持で、一般文章品質・商品受入れではない。actual型は設計05、全7fileは01A、実検証339成功と限界は最新weekly N／trial§11。
+
+
+## 2026-10-23 — 承認済みCMEE P5の限定offline Analysis経路
+
+STRUCTURE_MAP_DELTA_PRESENT。新規・明示offline Analysis request＋private semantic_input→既存P1の元3記録／receipt再束縛→新semantic_admission.pyのimmutable snapshot→既存Analysis compilerのprivate graph→既存唯一realizerの文章・図payload→同一private serialize/reload。原18保持単位＝16node＋従属scope1＋負荷注記1、原文11group、8source scope／route edge0、材料unknown1、論理選択4を保持する。省略主体・意向・否定・比較留保・程度を補完しない。
+
+API 666b28517ef04aba170ebffe3c86980fea4c11bdの6file、実型6／例外2。旧通常Analysis／watashi.map.v2／DB／RN／IF／Saved・Emlis/Pieceの経路と公開契約は不変。文章は原文11文＋限定unknown表示、図は新private構造化payloadで、一般文章品質・RN描画・商品受入れではない。全fileは01A、actual型05、実検証905成功と限界はweekly P／trial§13。モデル選定・接続前の内部到達として記録する。

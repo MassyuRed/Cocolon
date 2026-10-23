@@ -20450,3 +20450,12 @@ P1/旧application/旧広範囲失敗は今回再実行0。過去101件や旧広�
 Mash承認のP4をAPI4fd8db4へ実装。正本03#cmee-p4-implemented／05#cmee-p4-actual-types、実結果はtrial/piece_semantic_snapshot_results.json。新P4・P1・旧Piece4file・既存Emlis snapshotの計7file、339 passed／FAIL0／SKIP0、38.78秒、34 subtestsと既存warning1。73件初回や中間runとの合算なし。
 
 元7field／owner／record／version／stage／P1 receiptとquote、6claim／2関係／全選択、引用は正しい意味変異、再hash改変、bool/int型混同、author-free検査の作者非呼出し、意味／plan／完成本文のprivate再読、意味保存後の実作者例外と明示再開、完成本文の再生成禁止、旧B8選択資格と隔離SQL保存を確認。旧期待・historical fixtureを緩めない。初回のtest構文、誤標本、環境変数漏れをtrialへ記録した。実DB／Auth／端末／画像／商品受入れ／追加CIではない。出力は原文段落保持。通常B8／実モデル／DB・稼働有効化は0、P5や一般文章品質へ自動進行しない。
+
+
+## 2026-10-23 — P5限定offline実装・検証
+
+be37f40dの具体案をMash承認後、API 666b28517ef04aba170ebffe3c86980fea4c11bdの4 production path＋新test／fixture各1へ実装。exact offline Analysis→P1受取再束縛→原文に基づく限定意味snapshot→private graph→既存唯一realizer文章・図→同一private再読。仕様04#cmee-p5-implemented、型05#cmee-p5-actual-types、全file01A、全実出力・失敗・限界はtrial§13／analysis_semantic_snapshot_results.json。
+
+対象9file905 passed／FAIL0／SKIP0、110.62秒、既存warning1、12058subtestsは加算しない。新112＋旧793。原文の必要意味／引用が正しい意味変異／再hash／strict型／graph・片側本文・図改変／保存段階／実作者例外／同一file再開／完成時の取得・採用・compiler・作者禁止／旧Analysis5file／P1／P4／Emlis snapshotを確認。途中runとの合算0。旧期待・旧fixture変更0、追加CI0。
+
+実文章は原文11文と限定unknown表示、図は同一graphのprivate payload。商品文章・RN描画・実Auth・本人DB・自動durabilityの合格ではない。通常有効化／複数補足／比較／IF／Saved／モデル接続は別残件で、自動開始しない。限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT、商品0／正式0/3／candidate_ready=false／automatic_progression=false。

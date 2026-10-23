@@ -263,3 +263,38 @@ P4完了のCocolon967c7d4／API4fd8db4を確認し、Mashの内部準備継続�
 想定実装はEngine＋Analysis新admission＋既存compiler／唯一realizerの4 production path、新test／fixture各1。必要な意味変異・片側投影変異・保存／実作者例外／完成再読・旧経路回帰とSTOPを04へ固定。旧parser／safe projection／通常serializer／SQL allowlistへ新graphをそのまま渡さない。最初はcaller-managed private fileだけで、実Auth／自動durability／通常保存の成立は主張しない。
 
 今回実モデル／推論／学習／課金／C0／DB／Render／API／RN／merge／deploy0。API source変更0、前提資料のみ。STRUCTURE_MAP_DELTA_NONE、BLOCKER_NARROWED、product_credit=0／PRODUCT_NOT_CLEAR／正式0/3／candidate_ready=false／automatic_progression=false。次は具体案の新契約範囲の判断後に限定実装する。
+
+
+<a id="p5-analysis-semantic-implemented"></a>
+## 13. 承認済みP5：原意味・同一文章／図・private保存再読
+
+Mashの具体承認によりAPI [666b285](https://github.com/MassyuRed/mashos-api/commit/666b28517ef04aba170ebffe3c86980fea4c11bd)の6fileへ実装、GitHub全文／blob／変更集合／parent／headを確認済み。仕様は[04 actual](../../../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#cmee-p5-implemented)、実型は[05](../../../designs/cmee/v1/05_json_schema_and_versioning.md#cmee-p5-actual-types)、全pathは01A。新private型6／例外2、旧共有logical registryは不変。
+
+新[analysis_semantic_snapshot_results.json](analysis_semantic_snapshot_results.json)は全private完成stateに元7field／元packet／snapshot／graph／文章・図／31traceを保持し、意味／graph／完成のserialized hash・同一再読・型fields・source blob・検査・失敗・限界を記録。手作業の合成packetでモデル出力ではない。既存承認案JSON・P1/P2/C0／過去結果は上書きしない。意味段階とgraph段階の全stateは完成stateから後段fieldをnullにした同版payloadで再現できる。実raw採取生成1と再読は試験成功へ加算しない。
+
+18保持単位＝16node＋従属scope1＋負荷注記1、原文11group、8source scope／route edge0、材料unknown1、選択4、根拠55。意味を原文range・格・肯否・modality・時点・qualifier／parentごと照合し、別ID／ownerへ正しく再束縛した同構文も確認。quote/hash一致だけでは採用せず、unknownの対象／由来／6field coverageと負荷target・degreeを独立照合。感情の元alias保持と本文非追加も確認した。
+
+最終対象9fileは905 passed／FAIL0／SKIP0、110.62秒、既存warning1、12058subtests。新112＋旧793。反復・中間run・本文採取・subtestを加算しない。旧Analysis5file、P1、P4、Emlis snapshotを含む限定範囲で全suiteではない。
+
+```bash
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONDONTWRITEBYTECODE=1 \
+Q2_PGLITE_MODULE=/path/to/existing/@electric-sql/pglite \
+PYTHONPATH=/path/to/existing/test-deps:ai/services/ai_inference:ai/tests:ai \
+python -B -m pytest -q --tb=short -ra -p pytest_subtests.plugin \
+-p no:cacheprovider -c /dev/null --noconftest \
+ai/tests/test_cmee_analysis_semantic_snapshot.py \
+ai/tests/test_cmee_analysis_v1d_vertical.py \
+ai/tests/test_cmee_analysis_nominal_relations.py \
+ai/tests/test_analysis_observed_storage.py \
+ai/tests/test_analysis_saved_period.py \
+ai/tests/test_analysis_observed_api.py \
+ai/tests/test_cmee_preparation.py \
+ai/tests/test_cmee_piece_semantic_snapshot.py \
+ai/tests/test_cmee_emlis_semantic_snapshot.py
+```
+
+Python3.12.14／pytest8.4.1／subtests0.14.2、Node24.19.0／既存PGlite0.5.8を再発見・import確認。製品依存変更0。初回default Pythonはpytestなしで検査0。新file初回81成功／2失敗2.84秒は旧staticmethodのpatch先とnative source例外型、次85成功／27失敗6.73秒は改変拒否後のprojection例外型漏れ。classの正しいsymbolと固定private例外境界へ修復し最終全成功。旧期待／fixture／assertionを緩めていない。初期authoring時のtuple/list照合問題は前§12の別履歴。
+
+意味・graph・完成の隔離file roundtrip、意味保存後の実作者RuntimeError、同snapshotからの明示再開、完成済みのreceive／admission／compiler／作者禁止再読を確認。source field scalar／envelope UTF8／可視text section scalarを区別し、再hash後のcandidate/snapshot/graph/artifact各層の意味変異も拒否した。immutable tupleのlist偽装も拒否。
+
+実本文は原11文の保持と材料unknown表示で、一般言換え／商品品質合格ではない。図はprivate構造payloadでRN描画ではない。caller-managed fileで、実Auth・自動durability・本人DB保存の成立ではない。実モデル／推論／学習／課金／C0／実DB／Render／通常application／公開API／DTO／RN／merge／deploy0、追加GitHub CI0。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、商品0／正式0/3／PRODUCT_NOT_CLEAR／candidate_ready=false／automatic_progression=false。

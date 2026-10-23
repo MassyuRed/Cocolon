@@ -4502,3 +4502,19 @@ Cocolonの変更ownerは全機能00／全体01／本01A／current Piece02・CMEE
 `Cocolon_前提資料/observation_learning/trials/2026-10-23-current-four/analysis_semantic_admission_proposal.json`（新）は、Analysis P5の原3記録／手作業18保持単位／原文11group／8scope／unknown／注記／4選択と、P1位置のみの受取・55raw座標proof・source blob・未実装の限界を所有する。モデル出力・採用snapshot・実graphではない。設計の正本はdesigns/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#cmee-p5-offline-analysis-proposal、型・保存案は05#cmee-p5-analysis-schema-proposal、共有導線は01、実inspectionはtrial README§12／最新weekly O。
 
 今回API file・runtime owner・呼出し接続・公開schemaの実変更0。全体設計／current mapsの責務はP4 actualから不変で、STRUCTURE_MAP_DELTA_NONE。提案内の新Analysis module名を実在fileとして登録しない。P4の7fileとactual型は前節のまま保持する。
+
+
+## 2026-10-23 — 承認済みP5 Analysisの全変更fileと接続
+
+STRUCTURE_MAP_DELTA_PRESENT。API 666b28517ef04aba170ebffe3c86980fea4c11bd。新profile専用private型6／例外2で、旧共有logical registryは不変。
+
+| exact API path | 実責務 |
+|---|---|
+| ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py（新） | 明示offline・原3記録・Plus・補足0・比較なしの採否、P1/source/receipt再束縛、原文に基づく有限意味照合、immutable snapshot、3段階private状態の保存／再読／再開 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py | exact Analysis request＋明示semantic_inputだけ新armへdispatch。旧経路維持 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/intent_compiler.py | 新private graph型とcompiler／独立validator。16node・scope・注記・unknown・選択・原文groupを保持。旧parser／graphを維持 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/observed_route_realizer.py | 既存唯一realizer内の新private文章／図artifactとauthor-free保存読取。旧safe projection／反復共起本文へ新scopeを流さない |
+| ai/tests/test_cmee_analysis_semantic_snapshot.py（新） | 新112case。各層の意味・再hash変異、同一投影、3段階保存、実作者例外、完成再読の禁止呼出し、旧経路分離 |
+| ai/tests/fixtures/cmee_analysis_semantic_snapshot_v1.json（新） | 承認案の原3記録／全packet。37,620 bytes、手作業合成標本、モデル出力ではない |
+
+Cocolon側の新analysis_semantic_snapshot_results.jsonは全private完成state／文章／図／31trace／段階別serialized hash／同一再読／6型fields／全source blob／検証・途中失敗・限界を所有する。旧proposal JSON・P1/P2/C0／過去結果は上書きしない。既存全機能00／全体01／本01A／current Analysis03・CMEE04／design01・04・05・06／weekly／trial READMEを同時同期する。新runner／checker／管理systemなし。

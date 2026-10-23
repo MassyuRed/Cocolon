@@ -3156,3 +3156,24 @@ Mash承認済みのP4をAPI4fd8db4へ実装。上のP4型案は当初案、実fi
 source scalar範囲は元field相対、UTF8範囲は長さprefix付き元envelope相対、可視scalar範囲はtext section相対。既存native spanの終端は句点を含まないことがある。candidateの句点込みrangeを元field bytesから証明し、重なるnative evidence IDを同一exact spanのように付替えない。今回55rangeの一致は位置確認だけで、意味採用や完成artifactの独立検証は未実行。
 
 通常serviceのprivate_evidence v1/v2やpublic watashi.map.v2へこれらのJSONを渡さない。新SQL／migration／本人DB保存／API／RNは案の範囲外。最初はcaller-managed private file roundtripだけで、認証・永続保証・通常履歴・表示商品の合格は別に残る。型が必要意味を収容できない場合は削減して旧型へ詰めずHOLD／UNSUPPORTEDで停止する。
+
+
+<a id="cmee-p5-actual-types"></a>
+## 2026-10-23 — P5の実型・保存版
+
+Mash承認済みP5をAPI 666b28517ef04aba170ebffe3c86980fea4c11bdへ実装。当初の型案を各rowごとの12実classとして追加したのではなく、実private dataclassは6、例外2。canonical JSON stringとimmutable tuple内に全rowと意味拘束を保持し、旧共有logical registry／public DTOへ追加しない。全field一覧のactual正本はtrial/analysis_semantic_snapshot_results.json.native_dataclass_fields。
+
+| actual型・owner | 実fieldと拘束 |
+|---|---|
+| AnalysisSemanticInputV1（新semantic_admission.py） | prepared／receipt／tier／semantic_profile。新規明示offlineだけ。Plus・原3記録・補足0・比較なしを照合 |
+| AnalysisSemanticUnitBindingV1（同） | unit_ref／carrier／node_kind／source_binding_ref／source_binding_json／claim_json／group_ref。後2つのJSON stringは原主体・格・肯否・modality・時点・qualifier・全原範囲をdeep freeze。native重複span IDをexact rangeへ偽装しない |
+| AnalysisSemanticSnapshotV1（同） | schema_version／semantic_profile／admission_version／adapter_version／request_binding／source_snapshot／source_commitment／candidate_packet／unit_bindings／source_set_ref／period／snapshot_ref。schema/profileは案どおり、admission/adapter各1。JSON fieldsはcanonical string、bindings／periodは厳密tuple。payload()はdetachedなdecoded copyを返す |
+| AnalysisSemanticResultV1（同） | decision／reason_codes／request_ref／status／snapshot／graph／artifact。採用はADOPTED_PROVISIONAL、段階はMEANING_READY／GRAPH_READY／GENERATED。作者失敗はsnapshot・valid graphを残しUNAVAILABLE。非採用はHOLD／UNSUPPORTED／REJECTED |
+| AnalysisSemanticGraphV1（既存intent_compiler.py） | graph_jsonだけをcanonical immutable stringで保持。payload内にschema/profile／snapshot/source/period identity、16node／従属scope／11group／8scope／unknown／注記／選択／全evidence／unit-node bindings／route_edges=[]／graph_ref。旧ObservedGraphの代用にしない |
+| AnalysisSemanticArtifactV1（既存observed_route_realizer.py） | artifact_jsonだけをcanonical immutable stringで保持。payload内にschema/profile/meaning版、snapshot_ref／graph_ref／source_commitment、文章4section／新private visual payload／31trace／retained_selection_refs／content_hash／artifact_ref。旧content_payload()は提供しない |
+
+snapshot_refは自己refを除く全decoded snapshot payloadから導出し、owner／operation request／P1 request／tier／期間／全member／原7field／全packet／bindings・版を含む。node refはsnapshot後にunit refから導出。graph_refは自己refを除く全graph payloadから導出。artifactは自己artifact_ref/content_hashを除く全payload→content_hash→schema/profile/snapshot_ref/graph_refとhashからartifact_refの順。自己循環はない。各層で全canonical意味を照合し、再hashしても意味・source・対象・型の違いを拒否する。
+
+stateはcocolon.cmee.analysis_semantic_state.v1、closed keysはschema_version/request_binding/snapshot/graph/artifact。保存上のnested JSONはdecoded object、実snapshot内部はcanonical string／tuple。reloadは現requestへ同版の全sourceと意味をrebindし、receive/admissionを呼ばない。graph/artifactを保存から直接検証し、compiler／作者を呼ばない。artifactのみ存在する非連続状態を拒否。完成時だけGENERATEDを導出する。private JSON不正・source／projection改変は固定AnalysisSemanticErrorへ閉じる。
+
+SourceSelection／SentenceGroup／ScopeRelation／Unknown／Burden／Realizationのrowはcanonical payloadに閉鎖fieldで保持する。31traceのmeaning_refはunit／relation／unknown／selectionの4family。非表出selectionのgroup／section／可視範囲はnull、visual_refは元選択の保持先。source scalar／envelope UTF8／text section scalarの座標は別。旧watashi.map.v2／service private_evidence v1/v2／DB schema／migration／API／RNへ新stateを通す変換は実装していない。

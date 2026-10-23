@@ -1604,3 +1604,21 @@ private stateは意味確定／graph確定／完成artifactの段階を持つ。
 増分は上記production4file＋test／fixture各1と既存前提資料の同期、外部費用0。実装時間は未計測で完了日を約束しない。材料を削って通す、旧検査を弱める、別作者／helper family／通常service／SQL／モデル／有料推論が必要になった場合はその拡張前でSTOPし、同案を完了済みにしない。有限profileで成立しない場合はHOLD／UNSUPPORTEDの証拠を残す。モデル選定後に一般化する際はこの限定profileを互換再読用に残し、黙って一般profileへ再採用しない。
 
 今回の実施は、上記手作業案、既存source freeze／P1投影の同一性、55quoteのraw scalar／UTF8・digest／参照範囲検査、P1位置のみのCANDIDATE_UNREVIEWED受取1件まで。実admission／graph生成／本文・図生成／試験／C0／DB／Render／モデル呼出し0。STRUCTURE_MAP_DELTA_NONE、primary=BLOCKER_NARROWED、product_credit=0、PRODUCT_NOT_CLEAR、正式0/3、candidate_ready=false、automatic_progression=false。
+
+
+<a id="cmee-p5-implemented"></a>
+## 2026-10-23 — P5実装済み：原意味・同一文章／図・private保存再読
+
+Mashの具体承認を受け、API [666b285](https://github.com/MassyuRed/mashos-api/commit/666b28517ef04aba170ebffe3c86980fea4c11bd)の6fileに実装。上のPROPOSED_ONLYは当初案の履歴で、現状態は限定offline実装済み。exact request＋AnalysisSemanticInputV1のみ新armへ入り、通常Analysis／service／SQL／public DTO／RNを変更していない。実型・canonical fieldの正本は[05 actual](05_json_schema_and_versioning.md#cmee-p5-actual-types)、全pathは01A、全未加工private stateと実本文・図はtrialのanalysis_semantic_snapshot_results.json。
+
+新semantic_admission.pyは原3記録／Plus／補足0／比較なし、原文3構文familyへ閉じる。記録ID・owner・日付・カテゴリ・選択をfixture hashだけで認めず、現requestのP1・全member・元7fieldと、原文rangeに基づく主張／格／肯否／modality／時点／qualifier／parent／関係／unknown／注記／全選択を照合。別ID・ownerへ正しく再束縛した同構文も成立する検査を含む。一般日本語の理解ではなく、別の文言・補足・比較・tierはUNSUPPORTED等のまま。
+
+実graphは16node＋従属scope1＋負荷注記1、原文11group、8source scope relation、route edge0、材料unknown1、論理選択4、根拠55range。省略主体・意向内内容・否定・過去／相対日・比較基準未確定・「も」・「少し」・留保・ながらを保持する。unknownの6field hashは位置／coverage拘束で、回答不在の意味はこの原材料を読取確認した限定構文から別照合する。負荷targetは同recordのメモ作成という記述で、同一出来事・時点や購入の原因を加えない。
+
+実文章は原3recordのmemo＋改行＋memo_actionと「今回の材料には、使いやすさについての回答が記されていない。」の4section。原11文の保持で、自由な言換え・文章品質向上を主張しない。図は同一graphのprivate structured projectionで、旧五段階ルート完成やRN描画ではない。31realization trace＝18unit＋8relation＋unknown1＋選択4。非表出選択はnull可視範囲で保持し、不安・平穏・強さ・原因を本文へ足さない。
+
+意味／graph／完成のprivate serialize/reloadを実行。意味保存fileの存在を確認して実作者RuntimeErrorを発生させ、採用snapshotとvalid graphを保持したUNAVAILABLEから同fileで明示再開。完成済みはreceive／admission／compiler／作者を全て例外化しても同一artifact・serialized stateを返す。原文を再解釈し直した採用ではなく、現requestへsaved snapshotを再束縛する検証である。実Auth・自動durability・本人DB保存は未確認。
+
+最終9fileは905 passed／FAIL0／SKIP0、110.62秒、12058 subtestsは上乗せしない、既存warning1。新P5 112＋旧対象793。旧Analysis5file／P1／P4／Emlis snapshotを含む限定範囲で、全suiteや既存広範囲失敗の解消ではない。途中の旧staticmethodの誤patchとprivate境界の例外型漏れを修復。graph/artifactの改変自体は途中でも拒否しており、旧期待・assertionを弱めず最終成功。全履歴とruntimeはtrial§13。
+
+実モデル／推論／重み／学習／課金／C0／実DB／Render／通常application／公開API／DTO／RN／merge／deploy0。追加GitHub CIは[skip ci]で0。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、product_credit=0／PRODUCT_NOT_CLEAR／正式0/3／candidate_ready=false／automatic_progression=false。本承認単位は実装・必要検証・反映まで完了。一般化、通常接続、複数補足、期間比較、IF／Saved、商品文章品質は別残件。

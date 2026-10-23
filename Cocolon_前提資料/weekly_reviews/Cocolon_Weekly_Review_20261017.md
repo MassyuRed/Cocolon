@@ -2336,3 +2336,21 @@ Mashの「学習済みAI選定前の、CMEE内部準備を進めろ」を受領�
 今回変更はdesign01/04/05、全機能00、全file地図01Aの資料inventory、本weekly、trial README／提案JSONだけ。全体設計とcurrent mapsのruntime責務に差がなく、STRUCTURE_MAP_DELTA_NONE（file地図は新資料所在だけ登録）。新runtime／rule／runner／checker0。P1/P2/C0・旧全outcome・過去結果JSON・API sourceは不変。実admission／graph／本文・図生成／test／C0／実DB／Render／モデル／課金／merge／deploy0。primary=BLOCKER_NARROWED、商品0／正式0/3／PRODUCT_NOT_CLEAR／candidate_ready=false／automatic_progression=false。
 
 次は本O、全機能00、design04のP5具体案、schema05、trial§12とGitHub fresh headsから再開。本案の新意味・保存契約の具体範囲をMashが判断後、限定実装・必要検証・反映を一単位で行う。内部準備方針を再確認するためには停止しない。通常Analysis／SQL／DB／RN／IF／Saved／モデル呼出しへは自動拡張しない。
+
+
+<a id="20261023-cmee-p5-implemented"></a>
+## P. 2026-10-23 — 承認済みAnalysis P5：意味保持・文章と図・同一private再読
+
+Mashがbe37f40dの[具体案04](../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#cmee-p5-offline-analysis-proposal)へ「進めていいよ」と承認。開始fresh原本Cocolon be37f40d／API4fd8db4、全機能00・全体設計／全file地図・最新O・規則／恒久incident・実sourceを確認。同範囲を実装し、API [666b285](https://github.com/MassyuRed/mashos-api/commit/666b28517ef04aba170ebffe3c86980fea4c11bd)の全6fileをGitHub全文／blob／変更集合／parent／PR headで読戻し済み。open/draft/unmerged。主担当は新admission／Engine・統合実行・反映、2分担はcompiler/realizerと新test/fixture、別担当はadmission読取レビュー。正式Pro／Ultra審査は申告しない。System Context timeoutの再試行0、fresh原本を直接使用。
+
+新private6型／例外2。原3記録／Plus／補足0／比較なしの明示offlineだけで、P1→immutable意味snapshot→既存compilerのprivate graph→既存唯一realizer文章・図→3段階private保存再読へ到達。18保持単位（16node＋従属scope1＋負荷注記1）、11原文group、8source scope／route edge0、材料unknown1、選択4、根拠55、trace31。意向・肯否・省略主体・格・比較留保・も／少し・留保／ながらを保持し、unknown由来・負荷target・感情選択から本文を補わない。未知の文言／補足／比較／tierは未対応のまま。
+
+新112case＋既存793、9file最終905 passed／FAIL0／SKIP0、110.62秒、既存warning1。12058subtestsは上乗せせず、途中run・raw採取と合算しない。旧Analysis generation／nominal relations／保存／期間／APIの5fileとP1／P4／Emlis snapshotを含む。全suite・以前の広範囲失敗の解消ではない。Python3.12.14／pytest8.4.1／subtests0.14.2／Node24.19.0／既存PGlite0.5.8を再発見・import確認して使用。製品依存変更0、実DBではない。
+
+最初のdefault Pythonはpytest不在で検査0。新file初回81成功／2失敗は旧staticmethodのpatch先とnative source例外型、次85成功／27失敗は改変自体は拒否していたがprojectionの例外型漏れ。正しい旧class symbolへpatchし、private lifecycleの不正JSON／source／graph／artifactエラーを固定AnalysisSemanticErrorへ閉じて最終成功。旧期待・assertionを弱めていない。reviewでsnapshotのbinding／periodを厳密tupleへ固定しmutable list偽装を拒否した。
+
+実作者例外前に意味を隔離fileへ保存し、実RuntimeError後の同file明示再開を確認。完成済みはreceive／admission／compiler／作者を全て例外化しても同じ文章・図・serialized stateを返す。実文章は原3recordの11文と限定unknown表示の4sectionで、一般的な言換えや文章品質向上ではない。図は同一graphのprivate構造payload、RN描画の成立ではない。実Auth・自動durability・本人DB保存は未確認。
+
+actual仕様04#cmee-p5-implemented／型05#cmee-p5-actual-types、全変更01A、実本文／全private完成state／3段階hash／same replay／型fields／source blob／途中失敗はtrialの新analysis_semantic_snapshot_results.jsonとREADME§13。P1/P2/C0・承認案JSON・旧全outcomeは変更0。全体00／設計01／map01A／current Analysis03・CMEE04／design01・04・05・06／本weekly／trialを同単位で同期。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、商品0／正式0/3／PRODUCT_NOT_CLEAR／candidate_ready=false／automatic_progression=false。
+
+本承認単位は限定実装・必要検証・GitHub反映まで完了。実モデル／推論／重み／学習／課金／実DB／Render／通常application／公開API／DTO／RN／merge／deploy0、追加CIは[skip ci]で0。次回はfresh heads、本P、全機能00、actual型05とtrial§13から復元し、完了済みP4/P5を未着手へ戻さない。一般意味理解・商品文章品質・通常接続・複数回答／比較・IF／Saved・モデル選定と接続は別残件。

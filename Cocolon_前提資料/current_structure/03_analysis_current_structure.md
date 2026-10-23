@@ -886,3 +886,14 @@ CMEE Analysis detailed design candidate:
       aa87c02fcebc7e950e3dabdb4a289cb53141a3bf
 
 次回はfresh refと実fileを再確認する。
+
+
+## 2026-10-23 — P5：承認済みprivate意味snapshot経路
+
+Mashがbe37f40dの具体案を承認し、API 666b28517ef04aba170ebffe3c86980fea4c11bdへ限定実装。exact AnalysisObservedMapRequest＋AnalysisSemanticInputV1だけが、P1再束縛→cores/analysis/semantic_admission.py→既存intent_compiler.compile_semantic_graph→既存observed_route_realizer.realize_semantic_graphへ進む。型・保存・再読もprivate版で、旧service／public DTO／SQL／RNの通常経路は変えない。
+
+原3記録／Plus／補足0／比較なし、既読の原文構文に限定。元7field・owner・期間・全memberと18保持単位／11文group／8source scope／材料unknown／負荷注記／全選択を保つ。省略主体をSELFにせず、軽い負荷を行動注記にし、不明を本人不知・使いにくさ・返事待ちへ変えない。旧ORDER／共起edgeに新scopeを詰めずroute edge0。
+
+文章は原文3record section＋範囲を明記したunknown1section。図は同一graphから作る新private structured payloadで、完成五段階ルート／RN描画の合格ではない。意味／graph／完成のcaller-managed file再読、実作者例外後の同snapshot再開、完成済みの再取得・再採用・compiler・作者禁止再読を確認。対象9file905成功、12058 subtestsは加算しない。全suiteや本人実機の成功へ換算しない。
+
+STRUCTURE_MAP_DELTA_PRESENT、新private型6／例外2、実fileは01A、actual仕様はdesign04#cmee-p5-implemented、型05#cmee-p5-actual-types、実結果trial§13／analysis_semantic_snapshot_results.json。通常保存・一般日本語・複数回答・比較・IF／Saved・モデルは別残件。

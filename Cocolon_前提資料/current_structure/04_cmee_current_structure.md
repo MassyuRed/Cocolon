@@ -1803,3 +1803,12 @@ snapshot schemaは`cocolon.cmee.emlis_semantic_snapshot.v2`、checkpointは`coco
 新piece_semantic_admission.pyがP1元7field／receiptを再束縛し、P01の6claim／5文／2関係と全選択をimmutable snapshotへ保持。Engineの明示offline Piece inputだけが既存source／compiler／唯一作者／author-free policyのprivate armへ接続する。既存B8／public lifecycle／DB／RN／renderer／fit／exportは未接続・変更0。Emlis／Analysisのsource資格を拡大しない。
 
 出力は原文二段落の保持で、選択不安を本文へ補わず、一般文章整形・商品合格とはしない。private caller-managedの意味／plan／完成本文serialize/reload、意味保存後の作者例外と明示再開、完成本文の非再生成を確認。対象7file339成功、34subtestsは加算しない。実sourceはAPI4fd8db4、全file01A末尾、型05#cmee-p4-actual-types、仕様03#cmee-p4-implemented、結果trial§11／JSON。STRUCTURE_MAP_DELTA_PRESENT、新private dataclass10・例外2（旧共有logical registry不変）。限定TECHNICAL_CREDIT、商品0／正式0/3／candidate_ready=false／automatic_progression=false。通常接続・モデル・P5・一般文章品質は別残件。
+
+
+## 2026-10-23 — CMEE P5：承認済み限定offline Analysis snapshot
+
+API 666b28517ef04aba170ebffe3c86980fea4c11bd。Engine exact Analysis request＋明示semantic_input→Analysis専用semantic_admission.py→既存compiler／唯一realizerの新private arm→author-free検証→同一private再読。P1材料／receiptとowner・期間・全member・原7fieldを再束縛し、全18保持単位・11文group・8source scope・unknown・負荷注記・選択4を保持する。新private型6／例外2、旧shared logical registryは不変。
+
+source-bound有限構文の検査とcanonical全payload比較で、引用が正しい意味変異や再hash改変も拒否する。原文11文と限定unknown表示、同一graphのprivate図payloadまでで、一般言換え・商品受入れではない。意味／graph／完成のfile再読、実作者例外、完成時の取得・採用・compiler・作者禁止再読を確認。対象9file905成功、12058subtestsは上乗せしない。旧通常Analysis・Piece P4・Emlis snapshotを必要対象で確認。
+
+STRUCTURE_MAP_DELTA_PRESENT。通常API／DB／RN／公開schema／モデル接続／課金／merge／deploy0。正本design04#cmee-p5-implemented／05#cmee-p5-actual-types、全file01A、結果trial§13。有限profile以外・通常接続・一般文章品質は残件、candidate_ready=false／商品0／正式0/3。
