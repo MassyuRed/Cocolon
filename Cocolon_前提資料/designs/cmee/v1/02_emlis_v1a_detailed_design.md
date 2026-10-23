@@ -3470,3 +3470,7 @@ P1のE02-Bは`SUPPLEMENTAL_PROBE`、`thread_answer_admitted=false`、`N_A_NO_ACT
 5. 実pendingは、その発行時の意味profile・target・根拠・問い予算と結ぶ。Free/Plus最大1、Premiumは本人continueで逐次最大3、skip/ENDを保つ。候補の返した問い文やP1 probeで既存pendingを代用しない。
 
 P2として確定するのは以上の対応先・維持条件・不足の区別である。sourceだけ既存型へ戻せる部分、形は対応しても意味採用責任が未成立な部分、現在のnative契約で表せない部分を残した。実admissionの変更は、この具体差分の承認と設計05のprofile・保存・検証条件が成立した後の別実装単位である。今回production/guard/test/fixture/実モデル/API/DB/RN/稼働変更0。PRODUCT_NOT_CLEAR、candidate_ready=false、automatic_progression=falseを維持する。
+
+### P2後の限定実装案（2026-10-23、未承認・未実装）
+
+次の具体案を[共有設計01](01_shared_kernel_and_runtime_contracts.md#cmee-p3-bounded-proposal)へ、profile／snapshot／checkpointの型案を[設計05](05_json_schema_and_versioning.md#cmee-p3-snapshot-schema)へまとめた。新規Emlis threadのoffline呼出しだけを対象に、採用済み意味snapshotをplan/pool/projection/question/traceとserviceの保存再開へ通す。旧thread／旧pendingは旧profile、Q2/Q3 runtimeは維持する。E02-B probeは実pendingの代わりにしない。既存作者へ必要意味を全て写せない候補は保留／未対応とし、別作者やguardの単純緩和を追加しない。通常application・Piece eligibilityの有効化・実モデル・稼働DBは範囲外。これは実装前の契約差分判断であり、上記P2の実施記録を遡及変更しない。

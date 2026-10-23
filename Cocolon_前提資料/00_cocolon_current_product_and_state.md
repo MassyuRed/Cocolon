@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-23 JST（最新差分はP2の候補→既存意味型／検査の具体対応完了。実admissionは未実装。価格上限・27B除外とSystem Context再生成停止は維持）。全Cocolon作業の必読原本。仕様相談、観測会、AI選定、実装、監査、文書更新も対象。
+更新日：2026-10-23 JST（最新差分はP2後の新規Emlis限定snapshot／問い・回答更新・保存再開案の具体化。意味採用契約の実装判断待ち、実admission未実装。価格上限・27B除外とSystem Context再生成停止は維持）。全Cocolon作業の必読原本。仕様相談、観測会、AI選定、実装、監査、文書更新も対象。
 
 ## 1. この資料の役割と更新方法
 
@@ -28,7 +28,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 **学習済AIをCMEEへ接続し、既存資産を生かす方針は決定済み。** 学習済みの言語能力を土台に、Mashの観測・問い・回答後の修正を教材として観測技術を育てる。適用・評価対象はEmlisだけでなくPiece・Analysisを含む全体。採用モデル、各coreでモデルへ担わせる具体的責務・入出力、学習方法、配置・費用・速度は未決で、接続実装は未実施である。
 
-**10/23 Mash承認：CMEE側の接続仕様・offline準備を先行し、モデル比較を並行する。** [最新議事録の作業計画](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)を再開地点とする。P1の内部材料・未採用候補受口を実装し、固定4場面20receiptを確認済み。実モデル接続・API推論・重み読込・意味採用0。外部認証・モデル最終選定を待たない。P2でclaim／主体・時点・否定scope・関係・不明と既存型／検査の具体差分表を設計01〜05へ反映した。4手作業設計例28claim/60quoteをP1へ受け取り、26native型fieldと9関数の所在を照合。実admission adapterは未実装。次は旧profile互換を保つ限定実admissionの変更案・判断。
+**10/23 Mash承認：CMEE側の接続仕様・offline準備を先行し、モデル比較を並行する。** [最新議事録の作業計画](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)を再開地点とする。P1の内部材料・未採用候補受口を実装し、固定4場面20receiptを確認済み。実モデル接続・API推論・重み読込・意味採用0。外部認証・モデル最終選定を待たない。P2の具体差分表と4手作業設計例28claim/60quoteを保持し、後続の[限定実装案](designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-p3-bounded-proposal)を具体化した。新規Emlis threadのみで意味snapshot→問い／回答更新→隔離保存・再開を同一版へ揃える案。旧threadは現行方式、runtime_profileのQ2/Q3条件は維持する。既存SQLのjsonbを使う保存案はsource確認までで、実DB成功ではない。Piece／Analysisへの新候補採用、実モデル、通常application有効化は対象外。次は有限再導出から暫定採用snapshotへ意味の起点を変える契約差分の判断。実admission adapterは未実装。
 
 わたしマップは性格分類ではない。場面→役割→注意・思考→行動・非行動→結果・その後を、成立する範囲で示す。守る意向、負荷、不明、不一致を添え、人格を固定しない。もしもルート／IFとSavedRouteIntentは既存の設計・残件であり、省略・廃止された構想ではない。
 
@@ -133,7 +133,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
-| AI選定・観測教材 | Mash承認の[先行準備＋並行比較計画](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)を優先。P1完了：三中核の内部材料投影と候補受取、固定4場面20receipt（全NOT_ADOPTED）。P2設計対応は完了：共通schema05と三core設計02〜04でnative field／保持検査／有限再導出一致／型不足／保存互換を具体化。4手作業例は全未採用。次は設計01末尾の限定実admission変更案と既存契約との差分判断。実admission・Emlis回答更新・Piece／Analysisへの新候補接続は未実装。C0は保存済みを再利用（本文1／N_A1／未対応2）、9B最大4リクエスト／利用消費50円は承認済み未実行・認証後状態未確認。価格上限980／1,980円・27B除外を維持。本統合／モデル採用／追加学習／価格・quota変更は未実施 |
+| AI選定・観測教材 | Mash承認の[先行準備＋並行比較計画](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)を優先。P1とP2設計対応は完了。4手作業例は全未採用。P2後の限定実装案を設計01／schema05へ保存：新規Emlisのoffline意味採用・実pending更新・保存再開を一単位とし、旧意味profileとQ2/Q3 runtimeを維持。契約差分の実装判断待ち。新候補によるadmission／Emlis回答更新・Piece／Analysis接続は未実装。C0は保存済みを再利用（本文1／N_A1／未対応2）、9B最大4リクエスト／利用消費50円は承認済み未実行・認証後状態未確認。価格上限980／1,980円・27B除外を維持。本統合／モデル採用／追加学習／価格・quota変更は未実施 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。u353〜355のコードと配置差を保持 |
 | Analysis | 最新内容修正版の配置差、6401本人生成・再表示・比較、複数ANSWER採用、一般理解、有料差、IF／Savedの未実装 |
 | Piece | API private構成はLive。正本privacy差は3084c99eで解消。本人保存に必要なRN sourceはbranch agent/piece-testflight-private-20261023@87151へ固定、既存iOS workflowによる署名Archive/TestFlight送信1回は個別判断前・未実行。本人保存→同owner履歴/詳細、実Photos/Share、Android/backend receipt、商品受入れは残る |

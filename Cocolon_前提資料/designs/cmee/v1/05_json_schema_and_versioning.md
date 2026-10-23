@@ -2999,3 +2999,46 @@ sealはcanonical JSONのseal_ref空版に対するSHA256。received prefix `init
 現`EmlisMeaningCheckpointV1`に任意候補全体の保存fieldはない。追加先は既存service/store/serializerの実contractと照合する必要があり、P2からDB変更不要・既存JSONへ自由に保存可能と断定しない。公開DTOにprivate候補を混ぜない。Piece canonical text・Analysis graphの保存版とnative renderer/readerも同じ新profileを理解する必要がある。
 
 一般モデルの読解・言換えの正しさは位置・型検査だけでは保証できない。新profileでモデル解釈をどの範囲で暫定採用し、どの条件で保留するかは商品contractの具体的変更点である。別のLLMによる自己採点器や常時の人手承認をP2の隠れた前提にせず、実候補と既存評価で品質・誤採用を確認し、変更範囲を示して判断する。
+
+<a id="cmee-p3-snapshot-schema"></a>
+
+## 2026-10-23 — P2後の新規Emlis限定snapshot案（未実装）
+
+**PROPOSED_ONLY / IMPLEMENTATION_APPROVAL_PENDING。** [限定範囲・実owner・検証条件](01_shared_kernel_and_runtime_contracts.md#cmee-p3-bounded-proposal)は設計01、型と版の案は本節を唯一ownerとする。既存型・SEMANTIC_SCHEMA定数・SQL・保存内容は今回変更0。
+
+### 版と入出力
+
+| 対象 | 新版の提案 | 互換・責任 |
+|---|---|---|
+| 意味profile | `emlis_candidate_snapshot.v1` | runtime_profileのQ2/Q3値とは別軸。内部offline開始時だけ指定しthread中固定。旧threadの欠落は既存legacy形へだけ解決 |
+| snapshot | `cocolon.cmee.emlis_semantic_snapshot.v1` | source／候補／正規化意味／対応・保留をimmutableな一内容として保持 |
+| 新checkpoint | `cocolon.cmee.emlis_answer_meaning.v2` | 旧V1を上書きせず別版でdispatch。既存checkpoint fieldに新snapshot全体と内容refを加える案 |
+| 内部request | `EmlisThreadInputV1`の新private入力 | semantic_profileと処理modeを明示。FRESH_CANDIDATEは未採用receipt、RESUME_ADOPTEDは保存snapshot必須、READ_NONADOPTEDは保存評価参照。raw client指定・公開DTOには出さない |
+| admission結果 | `decision: ADOPT / HOLD / UNSUPPORTED / REJECT` | P1 receiptは常にNOT_ADOPTEDを維持。ADOPT結果だけが採用済みsnapshotを作る。残りはcandidate/理由/未対応refを保持しsnapshotを偽造しない |
+
+新checkpointの各名称は実装前の案であり、新旧型を同じfield集合へ曖昧にunionしない。未知版・余剰field・RESUME_ADOPTEDに保存snapshotなし・core／source不一致は拒否する。FRESH_CANDIDATEはsnapshot作成前の入口で、当該prefixの採用済みsnapshot持込みを拒否する。旧public DTOへprivate candidate・引用・snapshotを混ぜない。
+
+### snapshotに保持する内容
+
+| field群（提案） | 内容／拘束 |
+|---|---|
+| `schema_version / semantic_profile / core` | 上記版とemlis。profile・checkpoint・requestの組を一致させる |
+| `admission_version / adapter_version` | 採用条件とnative投影の版。provider model名・runtime_profileで代用しない |
+| `request_ref / source_prefix_ref / source_bindings` | P1 request内容identityと正規sourceのID・版・role・親・原文identity。適格履歴は当回と別roleで保持 |
+| `candidate_receipt / candidate_content` | 元候補・根拠配列・未提供をnullで残したprovider/model/revision/usage等。候補の説明や生成文を本人sourceにしない |
+| `normalized_meaning / claim_mapping` | 必要なclaim・主体／引数・時点・否定scope・qualifier・関係・unknown.origin・conflictとnative参照の対応。raw anchorと暫定解釈を区別。P2共通schemaから必要項目を黙って落とさない |
+| `prior_snapshot_ref / accepted_update / inactive_claim_refs` | 初回priorはnull。実pendingとANSWER、prior active claim、ADD/REVISE/WITHDRAW、依存失効を束縛。元sourceを上書きしない |
+| `unresolved_parts / unsupported_parts` | 既存型で安全に保持できる未確定と、native型／作者に載らない必要意味を区別。後者を削ってADOPTしない |
+| `snapshot_ref` | 既存canonical JSON規約に従う意味内容identity。schema/profile/admission/adapter版、request/sourceの意味材料、normalized_meaning、claim_mapping、prior/update/inactiveと表現済みunknownを算入。自身のref、providerのusage／finish・所要・実行metadata・raw出力の書式差は算入しない。同sourceでも異なる採用意味・版・更新には異なるref |
+
+`normalized_meaning`は自由なJSONを後段へ無検査で渡すfieldではない。P2の閉じた構造を検証し、既存native語彙への写像と全軸の消費が成立する範囲に限定する。複数claimの同一根拠共有を許しても、別意味を一claimへ潰さない。snapshotは意味の再現性を確保するものであり、解釈の真実性を証明しない。`ADOPT ⇒ unsupported_partsは空`、`unresolved_partsは既存nativeで表現済みのunknownのみ`を拘束する。候補receiptの非意味metadataも保存するが意味identityへ混ぜず、再開時は保存値をそのまま復元してcheckpoint全内容の一致を検査する。
+
+### checkpoint・保存の結合
+
+新checkpointはsource prefix・snapshot ref・有効plan ref・回答更新を一緒に束縛する。旧V1は従来のfield・ID・再導出を保持し、完成済み旧DTOを再生成しない。新profileの再開は同snapshotを復元し、現モデルや現finite parserで意味を差し替えない。同一prefixのADOPT後はimmutable。同prefix／同schemaで別読みのcheckpointを追加・上書きしない。実ANSWERによりprefixが進んだ時だけprior_snapshot_refを持つ次snapshotを作る。
+
+`emlis_thread_service._process`のMEANING_UPDATE payload内へsnapshot全体を保存する案とする。既存`emlis_input_threads.data`には意味profileを別fieldとして保持し、runtime_profileは維持する。source SQLはjsonb payloadを保存可能だが、これだけで保存成功は確定しない。serializer→store→隔離SQL→復元→同checkpoint／DTOの検証が必要。SQL DDL・ACL・RLS・稼働table・公開RPC引数の変更は本限定案に含めない。
+
+非採用評価は既存OPERATION eventのprivate payload内へ`semantic_profile / attempted_source_prefix_ref / prior_active_snapshot_ref / decision / candidate_receipt / reason_codes / unresolved_refs`を保存し、thread dataの`semantic_evaluation_ref`へ結ぶ。新MEANING_UPDATEやsnapshotは作らず、evaluated_prefix_refを新prefixへ進めない。初回priorはnull。回答後のprior snapshotは旧prefixの履歴としてのみ保持し、実ANSWERと未反映理由を残す。新prefixのcurrentな読み・成功本文へ付け替えず、下流へ成功handoffしない。再開時のREAD_NONADOPTEDは保存評価を再読し、勝手な候補再採用をしない。本文失敗後の意味確定と、意味未確定の回答保留を混同しない。raw候補を公開DTOへ返さず、既存events／結果記録の範囲を使い、新しい台帳・保存serviceを増やさない。
+
+P1の2型・P2例28claim/60quote・既存22件の結果は履歴として保持。本案で新たなruntime型・新admission・schema検査・意味採用が成立した件数は0。

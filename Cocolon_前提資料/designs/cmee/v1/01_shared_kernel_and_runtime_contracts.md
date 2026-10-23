@@ -764,3 +764,102 @@ P01は「自分の仕事が」の主語を「自分」へ縮めず、報告・�
 次は、上記対応に沿った限定実admissionの変更案を一つにまとめる。対象は、(a) 新しいprivate semantic profileと採用済み意味snapshotの版・内容identity、(b) 旧profileを維持した新profileのplan/pool/thread/question/traceの起点分岐、(c) 旧保存互換・中断再開とprivate保存field、(d) coreの未対応を保留して意味を捨てない失敗結果、である。新profileが任意の日本語意味・本文を一般的に保証できるとはしない。
 
 これは既存の意味採用・再導出契約を変える具体的な範囲であり、P2設計の指示だけで製品guardを変更しない。最新weeklyのP2後の実装判断へ戻し、同じ意味の確認を繰り返し求める承認連鎖にはしない。P3の実Engine／回答更新、P4/P5、M1/M2は別の未実施工程として保持する。STRUCTURE_MAP_DELTA_NONE（実経路・型変更0）、primary=BLOCKER_NARROWED、product_credit=0。
+
+<a id="cmee-p3-bounded-proposal"></a>
+
+## 2026-10-23 — P2後の限定実装案：新規Emlis threadの意味snapshot
+
+**PROPOSED_ONLY / IMPLEMENTATION_APPROVAL_PENDING。** 今回の「学習済みAI選定前のCMEE内部準備を進めろ」に基づく、P2後の具体化である。今回実施したのは実sourceの読取・契約差分の特定と本案の保存。製品code・test・保存形式を変更した記録ではない。確認原本はCocolon `db33718a47cbd0b09f3bff066ad865d67180d0d9`、API `b7eb534d44658549896baf449e7c319d49d14396`。
+
+### 1. 推奨する一つの範囲と、判断が必要な点
+
+最初の実装は、**明示的なoffline呼出しで開始する新規Emlis threadだけ**に、候補の意味を暫定採用するprofileとimmutable snapshotを導入する。実モデルを接続せず、P1の固定候補・手作業候補を内部portへ注入する。既存Engineと既存thread serviceを使い、初回→実pendingへの回答→意味確定→本文→隔離保存／中断再開まで一つの変更単位にする。snapshotだけの別prototypeを追加して工程を増やさない。
+
+意味の起点を「現finite parserが再導出した読み」から「sourceを照合して暫定採用した版付きの読み」へ変える点が、今回判断を求める契約差分である。引用一致・型一致は、モデルが日本語を正しく読んだという保証にならない。この制限を隠さず、本人が訂正可能な解釈として扱い、既存のsource保護・根拠のない推論の禁止・本文検査・商品受入条件は維持する。Rule18 §11.3 LEVEL_3対象。P1/P2の実施承認だけを実admission変更の承認へ読み替えない。
+
+既存thread／旧pendingの移行、通常applicationへの有効化、公開API／DTO、RN、実DB・Render、実モデル／課金、Piece／Analysisの新admissionは本案の外。旧threadは旧意味profileで継続する。新profileのデフォルト有効化やclient指定は加えず、既存の内部依存注入だけで隔離検証する。
+
+### 2. 実sourceで確認した差分
+
+以下のprefixはAPI `ai/services/ai_inference/`。`.../`は`cocolon_meaning_experience_engine/`。
+
+| 実owner | 現在の拘束 | 限定案で必要な変更 |
+|---|---|---|
+| `.../emlis_thread_contracts.py::EmlisMeaningCheckpointV1` | source prefix・base意味・更新・参照を保持するが、候補由来の意味内容全体は保持しない | 新版checkpointとsnapshotを結合。旧V1のfieldと再構築を維持 |
+| `.../emlis_answer_update.py::prepare_emlis_meaning` | 原source／全回答から現finite planを再構築し、既知legacy版を照合 | 新profileだけ保存snapshotから有効意味を構築。旧profileは現行経路 |
+| `.../emlis_stage1_response.py::_validate_canonical_semantic_inputs`／`validate_interpretation_candidate_pool` | sourceの再凍結に加え、現plan／poolの再導出完全一致 | sourceの再凍結と意味の正規化を分離。新profileのplan／poolは同一snapshotから再導出し完全一致を確認 |
+| `.../emlis_thread_projection.py::_project_thread_meaning_aggregate` | `build_updated_grounded_plan`一致と原source由来の保持資格を確認 | plan／graph／pool／component／selectedに同じsnapshot refを通す。旧retained資格を新意味へ自動付与しない |
+| `.../emlis_question.py::question_candidate`／`validate_question_binding` | 原plan・原文recognizerからcanonicalな問いを再導出 | 新profileはsnapshot上の未確定対象から再導出し、実pending・既質問・予算へ結合。候補が書いた問い文を直接発行しない |
+| `.../emlis_v1a.py::validate_positive_realization_trace`／`.../emlis_thread_surface.py::realize_emlis_thread_body` | planから既存作者、surface、inverse、gateを通す | 同じ採用意味・選択・関係端点・qualifierの消費を確認。作者が表現できない意味はUNSUPPORTED。trace一致だけで自然な本文の合格にしない |
+| `emlis_thread_service.py::_process` | MEANING_UPDATEを本文前に保存。単一SEMANTIC_SCHEMA判定と再導出checkpointのJSON完全一致 | 新旧意味版のdispatch、保存snapshotの復元、同一checkpointとの完全一致。後段effective_plan_ref算出も同じ起点へ揃える |
+| `emlis_thread_service.py::_context_current`／`_generation_current`／`_public_frames`とQ3 SQL | `runtime_profile == q3.plan.sequential.v1`等で有料context・CASを判定 | runtime_profileは変更しない。semantic_profileを別軸にして既存tier/history/frame条件を維持 |
+
+単に3つのguardを緩める案では、thread projection・問い・service側の再導出が旧意味を使うため成立しない。P1の`CandidateReceipt.adoption_state=NOT_ADOPTED`も維持し、P1受口自体を採用器へ変更しない。
+
+### 3. 初版の意味採用範囲
+
+1. 正規sourceのowner／親／版／role／field／scalar・UTF-8位置を再照合する。候補IDはnative IDにせず、対応表をCMEEが作る。候補の狭いquoteは既存sourceに結びついたprivate subrangeとして保持し、存在しないnative spanを作らない。
+2. 既存nucleus／frame／interpretation operator／argument role／component／作者へ、主体・対象・時点・肯否・必要qualifierを**全て**写せる意味だけを対象にする。native語彙を自由str・attribute codeで拡大しない。任意の日本語を全件採用できる契約にはしない。
+3. 原文literalのanchorと、モデル候補が与えた読みを区別する。読みには既存の暫定解釈責務を適用し、quoteがあるだけでモデル由来の主語解決・原因・相手意図等をSOURCE_EXPLICITの事実へ昇格しない。既存型／後段でこの区別を保持できなければUNSUPPORTEDとする。
+4. 関係自体の否定、報告／条件の埋込み、未対応のunknown.originやconflictなど、必要意味がどこか一段で失われる候補は全体をHOLD／UNSUPPORTEDとする。必要な一節だけ消して部分成功にせず、候補全文・理由・対象をprivateに保持する。既存PARTIALを新profileの意味落ちの許可に使わない。
+5. E02-0は嬉しさと対象不明、説明を任せた行動と最後まで聞いた行動を分離する。E02-Bの否定理由は、現型へ押し込まず未対応のまま残してよい。E02-Bはprobeであり、実pendingへの回答成功へ加算しない。P01-N／A02-P1もP4/P5前に採用しない。
+
+**採用できるか、本文へ出せるか、商品として良いかは別判定。** 新profileでもSafety別owner、LIMITED／UNAVAILABLE等の既存商品結果を維持する。候補自身のconfidence、別LLM採点、常時のMash承認を採用の隠れた条件にしない。
+
+#### 初版で必ず通すnative対応と実pending系列
+
+初版の採用対象は、既存のevent／reactionとclaim単位の肯否・過去／現在、明示contrast、実pendingに束縛したABOUT_TARGET、同範囲の回答更新に絞る。他の型へ自動拡大しない。最小成功参照は既存`ai/tests/test_cmee_emlis_q1_thread.py`の`ORIGINAL='褒められたのに、嬉しくなかった。'`と`initial/answered/prepared_request`。これは旧経路の既存期待から選んだ到達目標で、新profileの実行成功記録ではない。E02-0だけを成功条件にせず、**全件UNSUPPORTEDのまま完了にしない**。
+
+| claim／関係 | native nucleus／frame | 暫定interpretationへの対応 |
+|---|---|---|
+| 「褒められた」 | event／predicate=event、neutral、fact、past | DIRECT_STATE／PRESENT_STATE、PRIMARY |
+| 「嬉しくなかった」 | reaction／feeling、negative、feeling、past | DIRECT_STATE／PRESENT_STATE、PRIMARY＋EXPERIENCER |
+| 「のに」の二対象 | contrast、event→reaction、両端とmarker根拠を分離 | TENSION／SYNTHESIZE_RELATION／TENSION_WITH、LEFT(event)＋RIGHT(reaction) |
+| 実pendingへのADD「今は嬉しい。」 | positive reaction、present、thread_time:answer_time。元negative／pastとcontrastを保持 | DIRECT_STATE／PRESENT_STATE、PRIMARY＋EXPERIENCER。焦点との結合はABOUT_TARGETで、原因や変化を補わない |
+| 実pendingへのREVISE「あの時も本当は嬉しかった。書き方を間違えた。」 | positive reaction、past、thread_time:original_occasion。旧negativeと依存contrastを失効、event保持 | 同direct型と対象束縛。現在の感情へ移さない |
+| memo_action「帰宅しても苦しかった。」を持つ実pendingへの回答 `その時は寂しかった。「帰宅しても苦しかった」は誤りです。` | 原時点のnegative reactionをADD、完全引用で一意に特定したmemo_action核と依存だけWITHDRAW。原event／reaction／contrast保持 | 残るdirect型を維持。撤回用の新nodeを作らない。単独撤回での本文成功を保証しない |
+
+元fixtureの正確な引用は`その時は寂しかった。「帰宅しても苦しかった」は誤りです。`。opaqueなnative IDは候補から受け取らずCMEEが導出する。graphのSOURCE_EXPLICITはraw literal anchorにだけ使い、読みは`EmlisInterpretationCandidate.epistemic_state=PROVISIONAL_INTERPRETATION`へ置く。`MeaningNode.epistemic_state`へ存在しない暫定enumを入れない。省略主体をもつ上記参照でのactor=current_userは本人文脈への暫定解釈として保持し、sourceのsubject.binding=OMITTEDをEXPLICITへ書換えない。任意の省略主語、明示第三者、引用へこの対応を一般化しない。構造化された元感情選択・カテゴリ・別fieldも材料から落とさない。
+
+静的根拠は`emlis_ai_grounded_observation_plan.py::_received_event_reaction_text_projections`、共有`contracts.py::_foreground_direct_shape/_foreground_direct_argument_bindings/project_stage1_relation_shape`、`emlis_answer_update.py::_answer_nucleus/_prepare_answer/_active_plan`と上記testの既存期待。共有contracts.pyと元作者は今回の変更対象にせず、現enumへの対応先として読む。候補の意味対応を旧parserの正解一致で代替せず、実装後の新profileで同一の原文・意味軸・本文・問い・保存再開へ到達することを必須にする。
+
+### 4. 問い・回答更新と版の固定
+
+新profileは新規thread開始時だけ選び、そのthread中は固定する。入口は、FRESH_CANDIDATE（当該prefixの未採用receipt必須・採用済みsnapshotの持込み禁止）、RESUME_ADOPTED（保存snapshot必須・候補再採用禁止）、READ_NONADOPTED（保存された非採用評価を返すだけ）の三つを区別する。初回にsnapshotがないことは正常であり、再開で保存snapshotがないこととは異なる。profile欠落をlegacyと解決してよいのは、既存旧thread／旧checkpointの形が一致した場合だけ。未知profile・再開snapshot欠落／破損・core違いは拒否し、旧finite経路へ自動fallbackしない。
+
+新profileの実pendingは、発行時snapshot・target・根拠・round・既質問と既存上限へ結ぶ。Free／Plusはthread全体最大1、Premiumは本人continueで逐次最大3、skip／END／期限と既存tier contextを維持する。未解決候補の存在だけで自動質問を発行しない。
+
+回答は本人の実ANSWER envelopeとprior snapshotのactive claimに結びつけ、ADD／REVISE／WITHDRAW／無更新／対象不明を分ける。未変更claim・独立不明・元の経験と各時点を保持する。失効したclaimと依存関係を次snapshotへ明示し、本文失敗でも確定済み訂正・撤回を復活させない。profile内の表現可能範囲を超える回答は、新しい意味を黙って部分採用せず保留する。旧snapshotは履歴として保持するが、新ANSWER後のprefixに対する現在の読み・成功本文へ付け替えない。保留中のprefixを下流へ成功handoffしない。
+
+### 5. 保存・再開とcross-core
+
+同一prefixで一度ADOPTした意味はimmutableとする。別の読みで同prefix／同schemaのMEANING_UPDATEを追加・上書きせず、実ANSWERで新prefixになった時だけ次のsnapshotを作る。
+
+非採用のHOLD／UNSUPPORTED／REJECTにはMEANING_UPDATEも採用snapshotも作らない。既存OPERATION eventのprivate payloadへ、attempted_source_prefix_ref・prior_active_snapshot_ref・decision・候補全文・理由を保存し、data.semantic_evaluation_refから参照する。priorは旧prefixの履歴でありcurrent採用の参照ではない。初回は本文未提供、回答後は既存ANSWER_UNREFLECTED相当で未反映とする。意味確定済みと誤認させるevaluated_prefix_ref更新をしない。保存した非採用評価をREAD_NONADOPTEDで再読でき、再開だけを理由に候補を再採用しない。
+
+型・field案の唯一ownerは[設計05の限定案](05_json_schema_and_versioning.md#cmee-p3-snapshot-schema)。既存SQL `supabase/migrations/20260911020509_emlis_input_threads_q2.sql`のevents.payloadはjsonbで、MEANING_UPDATEのuniqueはthread／source_prefix_ref／semantic_schema_version。`supabase/migrations/20260911041749_emlis_q3_plan_rounds.sql`もpayloadを保存するため、**source上は物理column追加やmigrationを要しない案**にできる。ただし、Pythonの保存・再開contractは変更対象。実DBへ適用・保存できると検証した意味ではない。
+
+| 中断／再読 | 限定案の動作 |
+|---|---|
+| 意味確定前 | 本人source・未採用候補／保留理由から再開。保存前候補を確定済み扱いしない。候補が失われた時は未完了を返し、実モデルを勝手に再呼出ししない |
+| 意味確定後・本文前 | 保存済みsnapshotを復元し本文だけ再開。同じprefixのMEANING_UPDATEを二重追加しない。再推論・再採用・撤回復活なし |
+| 本文保存済み | 新旧とも保存済み本文・DTOを再読。profile／model／作者版の変更を再生成理由にしない |
+| 旧未完成checkpoint | 既存legacy source／意味／問いの再導出と同じID照合を維持。復元不能を新候補で置換しない |
+
+Pieceの`piece_v2_source_adapter.py::_original_observation_handoff`は、旧Emlis意味schema・INITIAL・checkpoint／source／成功attemptを検査する。新profileを通常applicationへ有効化する将来工程では影響するownerであり、今回offline成功をPiece eligibility成立へ広げない。今回は同関数を変更せず、全schema許可へ緩めない。
+
+Pieceのsource→meaning再導出／本文の有限命題検査、Analysisのgraph compiler／safe label再導出／保存allowlistはP4/P5まで維持する。新snapshotを各旧保存型へ流さず、refined・複数補足・IF／Saved等の既存未対応も残す。
+
+### 6. 承認後の対象・検証・完了と打切り
+
+APIの製品変更候補は共有package内の`emlis_thread_contracts.py`、新規`emlis_semantic_admission.py`、`engine.py`、`emlis_thread_source.py`、`emlis_answer_update.py`、`emlis_stage1_response.py`、`emlis_thread_projection.py`、`emlis_question.py`、`emlis_v1a.py`、`emlis_thread_surface.py`、`emlis_thread_engine.py`と既存`emlis_thread_service.py`に限定する。新moduleは同packageのadmission adapter一つで、別Engine／管理systemではない。既存SourceEnvelope・P1二module・public factory・SQL／migration・Piece/Analysis codeは変更しない。実装時に必要なtestは同packageの新profile用testと既存Q1/Q2/Q3・service検査へ限定し、既存の固定期待・historical fixtureを変更しない。正本02/05/06・全体00/01/01A・Emlis/CMEE map・weekly・既存API handoffの関連差分を同単位で同期する。
+
+最小検証は、(a) source/owner/親/版/quote/Unicode座標と別core拒否、(b) native対応の欠落・未対応・保留と旧prefixの非昇格、(c) 新profileの同一snapshotからplan/pool/問い/traceを再導出し、改変snapshot・差替え参照を拒否、(d) 初回と**実発行pending**へのADD/REVISE/WITHDRAW・無更新・対象不明、未変更意味／時点保持、(e) Free/Plus/Premiumの既存予算・履歴・frame・continue/skip/END、(f) 意味保存前／後中断・非採用OPERATIONの再読・同prefix再採用禁止・volatile非算入・旧完成DTOの非再生成・旧未完成復元と同一DTO再読、(g) 旧経路の必要回帰、である。固定4場面のHOLD／UNSUPPORTEDを成功本文へ数えず、全suite成功・実Auth・本人実機を主張しない。
+
+**完了は**、表現可能な新profileの初回／実回答について、採用意味と実本文・問い・保存再開を同じidentityで確認し、未対応4場面の理由を保全し、旧形式を維持した限定内部実装。本文は主担当が全件読み、復唱・意味落ち・時点誤読・汎用受け取りの残りを記録する。内部実装成立を商品品質改善やProduct Read PASSに換算しない。
+
+**打切りは**、別作者・語彙一般化・public DTO・migration・稼働有効化が必要と判明した時、または新profileを通すため既存Safety／意味保持／本文検査を弱める必要が生じた時。scopeを自動拡大せず、具体的に足りない意味とownerを既存記録へ残す。同じ成果へ戻るための新checkerや承認系列を増やさない。
+
+想定作業は主担当の内部実装・必要検証を1変更単位で進め、途中保存するもの。所要は実装後の作者適合性・保存検査次第で、現時点で完了時刻は保証しない。追加課金0、Mashの端末操作0、実モデル待ち0。本案の承認で同範囲の内部技術修正・検証・GitHub反映まで進め、単なる内部版数変更ごとに同じ承認を求めない。実モデル選定・接続、P4/P5、通常applicationへの有効化は別の残件である。
+
+今回の文書具体化は`STRUCTURE_MAP_DELTA_NONE`、primary=`BLOCKER_NARROWED`、product_credit=0。承認・実装・新profileの意味採用・新検査実行はいずれも未実施、automatic_progression=false。
