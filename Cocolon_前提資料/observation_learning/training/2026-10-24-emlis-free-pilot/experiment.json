@@ -329,7 +329,7 @@
     "format_issue": "output fields specified but JSON-only instruction absent; no response_format enforcement; do not claim explicit JSON instruction was violated"
   },
   "next_diagnostic": {
-    "status": "BLOCKED_BEFORE_DOWNLOAD_WORKDIR_MISSING",
+    "status": "BLOCKED_EMPTY_WORKSPACE_OVERLAY_NEEDS_STORAGE_REVIEW",
     "script": "diagnose_learning.py",
     "purpose": "paired fit on existing 9 teachers before altering data or training",
     "reference_sha256": "5fb61702d4c5b9e4f1317088b3ef91de53041168fa3313f14086d0c67f09ceb9",
@@ -363,6 +363,29 @@
       "data_loss_confirmed": false,
       "adapter_missing_confirmed": false,
       "next": "read-only listing, mount/disk and bounded saved-artifact search before mkdir/install/retraining"
+    },
+    "storage_readback": {
+      "source_log": "Mash-uploaded terminal text 20261023-232323",
+      "source_log_sha256": "ad8a4cd6b75f5c20830583a8a900974a1fd99db449516ab954c6706b91329815",
+      "source_log_bytes": 1840,
+      "workspace_listing": "total 0",
+      "workspace_df": {
+        "filesystem": "overlay",
+        "size": "50G",
+        "used": "16M",
+        "available": "50G",
+        "mounted_on": "/"
+      },
+      "bounded_artifact_search_results": 0,
+      "diagnostic_started": false,
+      "previous_training_pod_identity_verified": false,
+      "data_loss_confirmed": false,
+      "next": "Stop the currently idle task Pod, then read Console Pods list and existing storage configuration; locate original training Pod/volume before recovery or new compute",
+      "initial_training_storage_persistence_was_verified": false,
+      "official_sources": [
+        "https://docs.runpod.io/pods/storage/types",
+        "https://docs.runpod.io/pods/manage-pods"
+      ]
     }
   }
 }

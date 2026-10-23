@@ -156,3 +156,11 @@ Runpodでは固定commitの本scriptを `/workspace/cocolon_emlis_free_20261024/
 MashのTerminal全文では、curlの保存先 `/workspace/cocolon_emlis_free_20261024/diagnose_learning.py` についてNo such file or directory、curl23で停止した。&&の後のPython診断は始まっていない。前回の作業folderが現在のPodでは存在しない／利用できないことは確認できるが、adapter消失・volume消失・Pod削除を断定する証拠ではない。
 
 前回の保存環境が残る前提で案内した華恋の不足として扱う。mkdirだけで隠したり、venv再install／再学習を先行したりしない。まず `ls -l /workspace`、`df -h /workspace` とworkspace配下5階層までの初回結果／adapter／SOURCE_COMMITの読取探索で保存先・接続状態を確認する。現物の所在を確認してから次を選ぶ。状態BLOCKED_BEFORE_DOWNLOAD_WORKDIR_MISSING。初回9stepと6+6結果の完了は維持し、診断失敗を学習済み重みの品質失敗へ読み替えない。新規推論・学習0、総課金・今回Pod Stopは未確認。STRUCTURE_MAP_DELTA_NONE。
+
+### 保存先の読取結果（2026-10-24 JST）
+
+次のTerminal全文1,840 bytes／SHA256 `ad8a4cd6b75f5c20830583a8a900974a1fd99db449516ab954c6706b91329815` を受領。現在のworkspace一覧はtotal0。dfはoverlay・50G・使用16M・mount /を示し、/workspaceの専用永続mountは見えていない。5階層内のadapter／pilot_results／SOURCE_COMMITは0件。診断は未起動で、学習品質の追加結果は得ていない。
+
+初回学習時の保存先mountを確認せずStopを案内した華恋の不足。現在の空workspaceだけでは、前回adapterの消失・元Pod削除・別volumeの有無を断定できない。今回学習PodのIDは受領結果にないため、過去M1 screenshotのPodIDを学習Podと同一視しない。
+
+次は現在の診断未起動PodをStopし、ConsoleのPods一覧と既存Storage／volume設定を読取り確認して元の学習Pod／保存先を探す。root空folderへの再install／再学習を先行しない。原結果JSON・教師・評価・実行codeはGitHub保存済みだがadapter本体は受領しておらず、JSONから学習済み重みを復元できるとは扱わない。公式Storage options／Manage Podsで、container diskはStopで消去、volume diskはStopで保持しTerminateで削除、network volumeはPodから独立と確認した。状態BLOCKED_EMPTY_WORKSPACE_OVERLAY_NEEDS_STORAGE_REVIEW。

@@ -2556,3 +2556,9 @@ Mashから「だめだった」とTerminal全文txt1,479 bytes／SHA256 00975798
 前回の保存環境が残る前提で案内した華恋の不足。作業folderが現在Podで利用できないことは観測事実だが、adapterやvolumeの消失、Pod削除を断定しない。mkdirだけ、依存再install、再学習のやり直しを先行せず、workspaceの一覧・dfと5階層内のadapter／pilot_results／SOURCE_COMMIT所在を読取確認する。未接続・別保存先・現物なし等の区別はその出力後に行う。状態BLOCKED_BEFORE_DOWNLOAD_WORKDIR_MISSING。今回のPod Stop／全課金は未確認。
 
 実験manifestとREADME、全体現在地を同期。診断code・原教師／評価・初回raw・学習設定・製品runtimeは不変。STRUCTURE_MAP_DELTA_NONE（環境停止の記録のみ、全file地図の実責務・path差分なし）。
+
+### AB追記：workspace空・root overlayの読取結果（2026-10-24）
+
+MashからTerminal全文1,840 bytes／SHA256 ad8a4cd6b75f5c20830583a8a900974a1fd99db449516ab954c6706b91329815を受領。workspaceはtotal0、dfはoverlay50G／使用16M／mount /、5階層内のadapter／pilot_results／SOURCE_COMMIT検索0。現在Podの/workspaceに専用永続mountと既知成果物が見えず、診断未起動であることを確認した。前回の学習データ消失や元Pod削除は未確定。初回結果に学習PodIDはなく、過去M1のscreenshot IDを学習Podと同一視しない。
+
+保存先の永続mountを確認せずにStopを案内した華恋の不足。原結果・教材・codeはGitHubにあるが、adapter本体は未受領。JSONから重みを復元できるとは扱わない。公式Storage optionsとManage Pods（2026-10-24確認）ではcontainer diskはStopで消去、volume diskはStopで保持／Terminateで削除、network volumeはPodから独立。次は現在の診断未起動PodをStopし、ConsoleのPods一覧と既存Storage／volume設定を読み、元の学習Pod／保存先の有無を確認する。再install・再学習・新規Pod／volume作成を先行しない。状態BLOCKED_EMPTY_WORKSPACE_OVERLAY_NEEDS_STORAGE_REVIEW。実験manifest・README・全体00を同期、code・dataset・原結果は不変。STRUCTURE_MAP_DELTA_NONE、今回の新規推論／学習0、現在PodのStop完了と総費用は未確認。
