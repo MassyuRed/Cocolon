@@ -1,7 +1,7 @@
 """Fixture binding proposal for root's single-owner C0 execution.
 
 Prepared against mashos-api 3084c99e5a08d6e475d8a177e62ebf1548e8a0f9.
-This module has NOT been used to run the two trial cases. No DB/API/Auth I/O.
+Used once by root for P01-N and A02-P1 in current_four_results.json. No DB/API/Auth I/O.
 Set PYTHONPATH to the exact materialized ai/services/ai_inference directory.
 """
 from dataclasses import asdict
