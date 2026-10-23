@@ -7345,3 +7345,7 @@ STRUCTURE_MAP_DELTA_PRESENT。既存RN owner内で、新外部版 `piece.rn_bitm
 ## 2026-10-22 Piece P-W2：通常詳細から同一保存画像を明示書出し
 
 STRUCTURE_MAP_DELTA_PRESENT。既存PieceOwnerHistoryScreen hostがfresh同recordと本人/flag/lifecycleを確認し、既存PieceExportCanvas/pieceExportへ接続する。新iOS bitmap saved全canvasのcaptureはprivate native token/bindingを撮影前後に照合し、背景/枠/本文を保持。公開API/DB/稼働flag/配置変更なし。既存owner責務の詳細/全変更pathは01Bと入口§111、現在地はmap§65.56/weekly§5.6.36。local979成功、実PNG一度CIは未実行。P-W1 live保存/実OS/実機/商品受入れは未完。
+
+## 2026-10-23 — モデル選定前のCMEE内部準備P1
+
+原入力・独立補足・適格履歴・凍結期間を意味生成と分けて扱う未接続offline境界を共有CMEE packageへ追加。既存Engine／三中核の通常生成・保存・公開・DB／RNは不変。詳細責務とcurrent/futureは[CMEE map P1](current_structure/04_cmee_current_structure.md#cmee-p1)、全追加fileは01A末尾、実結果は[trial P1](observation_learning/trials/2026-10-23-current-four/README.md#p1)。4fixture・20receiptを確認、意味採用0・実モデル接続0。STRUCTURE_MAP_DELTA_PRESENTは内部準備だけで、商品改善credit=0。

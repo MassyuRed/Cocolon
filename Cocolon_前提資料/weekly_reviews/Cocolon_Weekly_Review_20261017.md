@@ -2094,7 +2094,7 @@ MashはQwen9B従量APIを三中核の候補として4場面比較する案へ「
 
 #### 10/23 — CMEE接続仕様・offline準備を先行し、9B比較を並行する作業計画（新セッションの再開地点）
 
-記録担当：華恋。**現在の次作業はP1。計画の記録まで完了、P1以降の実装は未着手。**
+記録担当：華恋。**P1は2026-10-23の明示作業指示で実装・限定検証まで完了。現在の次作業はP2の具体差分表。意味採用・本統合は未実装。**
 
 **先行するのはCMEE内部だけの準備。** 三中核の材料整理、将来の意味候補を受け取る内部仕様、採用／保留条件の設計を、用意した固定仮データ（stub）で確認する。実モデルへの接続・推論API呼出し・モデル重みの読込は、この準備には含めない。モデル比較は別作業として並行する。 この節を本件の作業順・残件・再開地点とし、技術仕様は既存CMEE設計と実sourceへ反映する。別の引継ぎ・管理systemは作らない。
 
@@ -2118,12 +2118,12 @@ MashはQwen9B従量APIを三中核の候補として4場面比較する案へ「
 
 ##### B. CMEE側で先行する具体的作業
 
-作業担当は華恋。実装する責任の置き場所は下表の既存ownerとし、分担読取を使っても統合・結果確認をMashへ戻さない。P1→P2を先行し、採用境界が具体化した範囲でP3／P4／P5を進める。9B比較M1は独立して並行する。各行は未完了であり、文書を置くだけで技術完了とはしない。
+作業担当は華恋。実装する責任の置き場所は下表の既存ownerとし、分担読取を使っても統合・結果確認をMashへ戻さない。P1→P2を先行し、採用境界が具体化した範囲でP3／P4／P5を進める。9B比較M1は独立して並行する。以下の状態はP1実装後へ更新した。文書を置くだけで技術完了とはしない。
 
 | 順序・状態 | 作業と変更先 | 得る成果・完了条件 |
 |---|---|---|
-| **P1：次回最初／未着手** | CMEE内部の材料投影・未採用候補の入出力仕様を整理し、既存4場面runnerで固定仮データだけを使って確認する薄いoffline境界を作る。既存source ownerを再利用し、必要な内部入出力の案を既存設計01／05へ記す | 下記Cの4場面投影とstub往復を完了。外部認証・採用モデル・GPU不要。現`generate`／意味採用guard／public DTOを変更せず、実装と記録を残す |
-| **P2：P1後／未着手** | モデルの意味候補→既存意味型への対応・採用／保留／未対応を具体化。既存設計01／02／03／04／05と、各coreの意味・検査ownerへ対応表を置く | 候補の各要素、元source／根拠箇所、主体・時点・肯否・関係・不明・不一致の対応が示せる。現有限parserとの完全一致をどこでどう扱い直すか、維持するsource検査、意味の読みを機械的に保証できない範囲を明記。検査を無効化するだけの案やモデル自己採点で採用しない |
+| **P1：内部実装・限定検証完了** | CMEE内部の材料投影・未採用候補の入出力仕様を整理し、既存4場面runnerで固定仮データだけを使って確認する薄いoffline境界を作る。既存source ownerを再利用し、必要な内部入出力の案を既存設計01／05へ記す | 下記Cの4場面投影・20stub receiptとstdlib境界test22件を完了。API追加2module／新test1、既存runnerにprepare-onlyを追加。現`generate`／意味採用guard／public DTOは不変。全候補NOT_ADOPTED、実モデル接続0 |
+| **P2：対応案まで／具体差分表・実admission未完** | モデルの意味候補→既存意味型への対応・採用／保留／未対応を具体化。既存設計01／02／03／04／05と、各coreの意味・検査ownerへ対応表を置く | 設計01末尾へ既存型・ownerと採否責任案を記録。次に候補の各claim／argument、元source／根拠箇所、主体・時点・肯否・関係・不明・不一致の具体的差分を固定する。現有限parserとの完全一致をどこでどう扱い直すか、維持するsource検査、意味の読みを機械的に保証できない範囲を明記。検査を無効化するだけの案やモデル自己採点で採用しない |
 | **P3：P2の対応確定後／未着手** | Emlis初回と実pendingへの回答更新を既存Engineへ接続。`engine.py`、`emlis_stage1_response.py`、`emlis_v1a.py`、`emlis_answer_update.py`、既存thread経路がowner | 原入力→意味候補→採用／保留→観測・受け取り・任意問いが追跡できる。回答は独立補足としてADD／REVISE／WITHDRAW・無更新・未解決を区別し、未変更意味と時点を保つ。`prepare_emlis_update`→`prepare_emlis_meaning`→`EmlisMeaningCheckpointV1`と本文確定・保存を混同しない。実pending、Free／Plus最大1問・Premium逐次最大3問、skip／終了、旧checkpoint／完成本文の扱いを確認 |
 | **P4：P2後、P3と並行可／未着手** | Pieceのsource→意味候補→既存plan／artifactへ接続。`piece_source.py`、`piece_v1c.py`、`piece_v2_generation.py`がowner | `PieceSourceMeaning`等への対応を経て、喜びと負荷、後悔の否定、次回の条件を落とさない本人の文章を作れる。Emlisの声・助言・架空の決意へ変えない。format適格性・正規本文・既存recipe／保存／export同一性は既存責任へ残し、画像fitをモデルへ判定させない |
 | **P5：P2後、P3／P4と並行可／未着手** | Analysisの凍結期間source→根拠付きgraph候補→既存artifactへ接続。`cores/analysis/source_adapter.py`、`intent_compiler.py`、`observed_route_realizer.py`がowner | `ObservedGraph`等への対応を経て、場面・役割・行動・結果と未確認を区別できる。各node／edgeが元記録へ戻り、性格・他者の反応・期間外の出来事を補完しない。graph成立、説明文、保存／再読は別に確認。観測ルートと条件付きIFを混ぜない |
@@ -2133,7 +2133,7 @@ MashはQwen9B従量APIを三中核の候補として4場面比較する案へ「
 
 **技術仕様の既存反映先：** `Cocolon_前提資料/designs/cmee/v1/`の`01_shared_kernel_and_runtime_contracts.md`、`02_emlis_v1a_detailed_design.md`、`03_piece_v1c_detailed_design.md`、`04_analysis_v1d_v1e_detailed_design.md`、`05_json_schema_and_versioning.md`、`06_implementation_order_migration_and_verification.md`。各作業に必要な差分だけを更新する。
 
-##### C. 次回P1で実際に終える範囲
+##### C. P1で実施した範囲と保持する仕様
 
 「モデルへ渡す／返答を受け取る」は、将来のための内部仕様と仮データの確認を指す。この段階では実モデルを接続しない。既存のsource凍結・問い・回答更新・checkpoint自体は実装済みであり、作り直さない。不足は、意味生成の成功と分けて材料を扱う部分と、将来の新候補を受ける内部境界である。採用条件はP2で設計し、この準備だけで現行guardを変更しない。
 
@@ -2143,7 +2143,7 @@ MashはQwen9B従量APIを三中核の候補として4場面比較する案へ「
 4. **外部通信なしのstubで往復する。** 正常な候補、空、不正形式、timeout、token上限終了を分けて残し、候補はNOT_ADOPTED相当の未採用状態を保つ。既存guardを迂回してartifact・checkpoint・DBへ流さない。検査は境界の実際の失敗とsource混入を確認する範囲に絞る。
 5. **E02-Bの二つの役割を区別する。** 固定補足probeとしては材料を投影できるが、C0に実pendingがない事実は維持する。stub成功を実thread回答更新成功へ数えない。既存M1のmessagesはこの準備の都合で書換えない。後の統合用投影に差があれば版と差分を記録する。
 
-P1の完了は「4場面の正規sourceから依頼を作り、未採用候補と失敗をofflineで取り出せる」こと。モデル品質・意味採用・CMEE本統合・商品完成の合格ではない。**今回の保存依頼ではP1のコード作成・stub実行を行っていない。**
+P1の完了は「4場面の正規sourceから依頼を作り、未採用候補と失敗をofflineで取り出せる」こと。モデル品質・意味採用・CMEE本統合・商品完成の合格ではない。**計画保存時はコード未作成だったが、後続の今回指示によりP1を実装・stub実行した。実測は下記Gへ分離する。**
 
 ##### D. 並行するM1：9Bの4場面比較
 
@@ -2167,11 +2167,36 @@ Analysisは実loaderの当期最大100記録＋比較期最大100記録を踏ま
 
 1. repositoryの必読入口・**[全機能／全状態](../00_cocolon_current_product_and_state.md)**を読み、本節と[比較README](../observation_learning/model_selection/2026-10-22-three-core/README.md)、[C0実行記録](../observation_learning/trials/2026-10-23-current-four/README.md)へ進む。System Context最新cacheは未生成。8月のtracked snapshotをcurrentへ使わず、fresh原本を直接読む。同じtimeoutの再試行や全体再監査をP1の前提にしない。
 2. 作業ownerのfresh headと差分を確認する。照合点はCocolon [PR30](https://github.com/MassyuRed/Cocolon/pull/30)、branch `agent/three-core-cmee-current-structure-20260815`、本追記前head `504ca1951511e87cf9b0f531bcf26a0561206791`。APIは[PR3](https://github.com/MassyuRed/mashos-api/pull/3)、branch `agent/cmee-v1a-i1sx-source-explicit-20260815`、head `3084c99e5a08d6e475d8a177e62ebf1548e8a0f9`。いずれもopen／draft／unmerged。このSHAを次回の最新headへ固定せず、差分と関係ownerだけを再確認する。
-3. C0の主要保存commit `8becb4cc1ce50ea582109937c362c126d9079cc2`と説明補正 `504ca1951511e87cf9b0f531bcf26a0561206791`、fixture blob、全結果を再利用する。コード中の未実行分岐を実行済みにしない。**次回最初に着手するのはP1。9B認証、モデル最終選定、追加学習の完了を待たない。**
+3. C0の主要保存commit `8becb4cc1ce50ea582109937c362c126d9079cc2`と説明補正 `504ca1951511e87cf9b0f531bcf26a0561206791`、fixture blob、全結果を再利用する。コード中の未実行分岐を実行済みにしない。**P1は下記Gの限定範囲まで完了。次回最初はP2の具体差分表。9B認証、モデル最終選定、追加学習の完了を待たない。**
 4. P1を終えた時点で、実際の変更file・検証したsource／失敗・未完了・次の一作業を本節へ置換更新する。同じ変更単位で全体現在地・観測入口・比較入口の案内を同期する。技術仕様は上記既存設計、構造が変われば該当current mapへ反映する。未実行工程に完了印を付けない。
 
 **Mashの後続指摘と説明訂正：** Mashは「CMEE側だけでやることはないのか」と、実モデル接続との混同を指摘した。華恋の直前の「入力をモデルへ渡し、返答を受け取るoffline接続」という説明が不正確だった。先行するのは上記のCMEE内部準備であり、実モデル接続・認証・推論は不要。比較runnerの仮データ確認をCMEE本体への実接続成功として扱わない。
 
 **既承認を確認待ちへ戻さない範囲：** CMEE側の接続仕様・offline準備を先行する方向、9Bの4場面比較とその上限、今回の記録保存。通常の原本読取・P1のoffline準備で同じ進め方の承認を繰り返し求めない。一方、P2で明らかになる意味採用責任・商品contractの変更、新規有料資源、実DB／配備などの別effectを一括承認へ読み替えない。判断が本当に必要なら、先に具体案・対象差分・実結果を作り、既存authorityで足りるか確認したうえで必要な点だけを示す。
 
-今回の反映は既存5文書のみ。P1実装／stub実行／新規C0／9B推論／GPU／チャージ／追加学習／DB／API／RN／配備／mergeは0。文書更新を製品改善へ加点しない。`STRUCTURE_MAP_DELTA_NONE`（作業計画と再開導線のみ、製品構造・接続・型の変更なし）、`ADMINISTRATIVE_ONLY`、`product_credit=0`。今後の各工程を一括自動実行する記録ではない。
+当初の計画保存は既存5文書のみでP1実装／stub実行0だった。後続の内部準備実装は下記Gの別記録とし、当時の0effectを遡及変更しない。文書更新を製品改善へ加点しない。`STRUCTURE_MAP_DELTA_NONE`（作業計画と再開導線のみ、製品構造・接続・型の変更なし）、`ADMINISTRATIVE_ONLY`、`product_credit=0`。今後の各工程を一括自動実行する記録ではない。
+
+##### G. 10/23後続 — CMEE内部準備P1の実装・検証結果
+
+Mashの「学習済みAI選定前の、CMEE内部準備を進めろ」を受領。作業環境はCodex Work Mode。確認できないPro／Ultraモデル名を申告せず、今回の明示P1指示と既存C仕様の内部準備だけを実施した。既承認を再質問せず、外部推論・課金・DB・稼働へ拡大していない。
+
+開始条件：未完了は「正規sourceの材料投影と未採用候補の受口がないこと」。固定4fixture、API開始head `3084c99e5a08d6e475d8a177e62ebf1548e8a0f9`／Cocolon開始head `482a32a2c5c76631249f02a5abd11840d913ca58`を原本として、2つのpure module・新test・既存runnerのprepare-onlyと既存資料だけを変更対象とした。主担当が統合とGitHub反映を所有し、Piece/Analysis source補助と独立検証を限定分担。新しいEngine・管理機構・依存・runtime構築は行わない。完了は4投影／5状態の未採用往復と検証、停止はsource不一致・scope拡大。商品完成／意味採用を完了条件へ混ぜない。
+
+| 実結果 | 確認できた範囲 |
+|---|---|
+| E02-0 | 原7fieldと実control、原入力source1を投影 |
+| E02-B | 同原入力＋固定補足probeのsource2。native envelopeなし、実pendingなしN/Aを維持 |
+| P01-N | 原7field/source1と本文2field、選択感情を保持。現意味未対応でも材料を保持 |
+| A02-P1 | 原3記録/source3、凍結半開期間と根拠を保持。現graph未対応でも材料を保持 |
+| 各5状態＝20receipt | CANDIDATE_UNREVIEWED／EMPTY／INVALID_FORMAT／TIMEOUT／TOKEN_LIMIT。全NOT_ADOPTED。providerは固定stub、model/revision/usage/時間は未提供null |
+| stdlib unittest22件 | 深い凍結・request内容束縛・source/quote拒否・Unicode・数値overflow・実native補足とPlus/Premium履歴・Free履歴拒否・Piece owner/版/role・Analysis期間/owner/版/複数補足拒否を確認。全成功、fail0/skip0 |
+
+途中レビューでPiece/Analysisのtask欠落とJSON指数overflowがreceiptを失う問題を検出し、両方を最終検査前に修復した。timeoutは固定終了状態の分類で、実時計timeout／実モデル速度の試験ではない。22件は最終新規test methodsの数で、subTestや4場面20receiptを重複加算しない。正式全suiteの合格、本人実機、実Auth/DB、回答後意味更新の合格ではない。
+
+実装はAPI `ai/services/ai_inference/cocolon_meaning_experience_engine/preparation.py`／`preparation_sources.py`、検査は`ai/tests/test_cmee_preparation.py`。既存runnerの`--prepare-only`、全結果は[trial P1](../observation_learning/trials/2026-10-23-current-four/README.md#p1)へ保存。元fixture blob `6aaa369c9c31388325d0e1203627b355ebb87d61`、M1 messages、C0原結果、既存84依存blobを維持。新しい2moduleのblobを結果へ併記。生成本文や評価guideを材料に混入しない。
+
+P2の対応案を既存設計01へ残し、schemaは05、検証はtrialへ置き、全体現在地00・設計図01・file地図01A・CMEE map04・観測入口・比較入口を同期。source位置の一致と意味採用を区別し、現parser不一致を候補の誤りへ自動変換しない。次は候補claim/argument→既存意味型・検査の具体差分表。実admissionの変更案が固まる前にguardを外さない。
+
+今回の実モデル接続／推論／重み読込／追加学習／GPU／チャージ／課金／実DB／公開API/DTO／RN／本番設定／deploy／merge／商品採用は0。通常Engine/guard/serviceも未変更。P1の内部準備だけの限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT（未接続offline境界・2private型追加）、product_credit=0、automatic_progression=false。M1は別の既承認比較として未実行、今回並行して勝手に推論を開始していない。
+
+P1最終補正：stop済みの実controlは残質問枠0とし、回帰testを追加。21件の独立検証後、主担当の最終22件は全成功（0.116秒）。source変更後の明示stub再実行は別pathで一度行い、全4材料と20receiptが初回と同一であることを照合して最終source blobへ更新した。実stub runは計2、重複除外した最終scenarioは20。初回結果digest・source blob・実行履歴をpreparation_results.jsonへ保持。C0再実行は0。

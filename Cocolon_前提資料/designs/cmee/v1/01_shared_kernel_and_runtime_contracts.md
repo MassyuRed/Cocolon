@@ -696,3 +696,37 @@ Q1 request・prefixは既存版を保持し、Q3のsource集合と寄与数だ�
 ## 2026-09-11 Q4 — 実行modeと既存作者
 
 ExecutionModeへEMLIS_APPLICATIONを追加する。保存serviceが認証・mode・sourceを検証してEmlis thread付きrequestだけを渡し、public single requestではREJECTEDとする。旧OFFLINE_CANDIDATEの純粋生成は維持する。EngineOutcomeのbody-free表示も実modeを保持し、内部でofflineを装わない。Q2/Q3保存profileと意味checkpointのsource identityを維持し、旧保存版を同じsourceから読める。Human Reception → Sentence Surface → independent inverseの所有者は同一。作者を二重実行するfallbackを置かない。
+
+<a id="cmee-p1"></a>
+
+## 2026-10-23 — P1：モデル選定前の内部材料・未採用候補
+
+Mashの「学習済みAI選定前の、CMEE内部準備を進めろ」によるP1。新しい生成Engineやproviderを作らず、既存package内の`preparation.py`と`preparation_sources.py`に純粋なoffline関数を置いた。Engine、service、保存ownerからのimport／接続はない。sourceを扱えることと、現有限方式で意味が成立することを分ける。
+
+| 内部入口 | 再利用・保持するもの | 今回の境界 |
+|---|---|---|
+| `prepare_emlis(GenerationRequest)` | `admit_emlis_thread`の原入力・独立回答・実question control、owner解決済み履歴の原入力／回答、frame feedback | 意味plan／本文を生成しない。履歴の所有・期限は既存loader責務。原入力と歴史を結合せず、意味が現parserで成立することを材料条件にしない |
+| 同入口の`supplemental_probe` | 固定E02-Bの補足ID・親・原文 | `SUPPLEMENTAL_PROBE`、実thread回答ではない。元C0のpendingなし／更新N/Aを維持、question IDを発明しない。probeの残数0と実controlの残数を別fieldで保持 |
+| `prepare_piece(PieceSourceSnapshot)` | 元7fieldのcanonical JSON・ID・版・owner一致、memo→空行→memo_actionのview | `_saved_field_projection`は`_sentences`も呼ぶため、そのまま使わずsource照合だけを分離。引用・不完全文等の有限意味可否をP1の前提にしない。既存本体は不変。originalのnormal／pre-questionだけ |
+| `prepare_analysis(AnalysisObservedMapRequest)` | `freeze_analysis_sources`、所有／版／親／半開期間、INCLUDED/EXCLUDED member、根拠 | 既存複数補足拒否を維持。比較requestはP1未対応として明示拒否。期間外本文はsourceへ流さない |
+| `receive_candidate` | 同一requestへのraw候補・終了理由・実提供metadata、候補JSONと根拠位置 | 通信0。全結果NOT_ADOPTED。位置整合は意味・自然さ・Safety・商品合格を証明しない |
+
+材料はcanonical JSON文字列へ凍結し内容hashのrequest IDへ束縛する。`payload()`は独立copy。元7fieldのnull・選択・時刻を保持し、text fieldは分離、生成文を本人sourceにしない。元sourceのEvidenceRefは保持。Pieceは意味前にnative envelopeが無いためenvelope IDを捏造せず、保存JSON commitmentとfield座標を保持する。Analysis補足のnative memo座標と投影上のanswer_text_privateを明示する。
+
+今回の固定stubは通信形の標本であり、意味の主張・手本・学習成果ではない。モデル名・revision・usage・時間は未提供ならnull。実際のtimeoutを待つ試験ではなく、timeoutを表す固定応答の分類試験。4場面20往復と境界testの実結果は[既存試験記録](../../../observation_learning/trials/2026-10-23-current-four/README.md#p1)。
+
+### P2へ残す採用責任の対応案（設計案、未実装・guard変更なし）
+
+| 未採用候補に必要な情報 | 対応する既存型／owner | P1後の具体的未完了 |
+|---|---|---|
+| source ID・版・役割・field・根拠range | `SourceEnvelope`／`EvidenceRef`、core別source adapter | 位置一致に加え、候補の各claim／argumentがどの根拠を使うかを対応付ける。metadata・生成文を本人発言へしない |
+| 主体・時点・肯否・関係・不明・不一致 | Emlis `GroundedMeaningGraph`／`EmlisInterpretationCandidate`のargument_bindings・relation_basis・epistemic_state・required_qualifiers | 現在の有限enum／operatorに写せる部分と表せない部分を、最初の実候補で確定する。存在しない対応を自動補完しない |
+| 回答で追加・訂正・撤回する対象 | `emlis_answer_update`／`AnswerMeaningUpdateV1`／`EmlisMeaningCheckpointV1` | 実pendingへ束縛し、未変更claim・時点を保持。更新と本文生成・保存を分ける。probeでは代替しない |
+| Pieceの意味・本人の声・条件・否定 | `PieceSourceMeaning`→既存plan／artifactと意味保持検査 | 原文と新本文の意味保持責任を具体化。既存selected-feeling／完全replayの有限制約と、生成候補の読みを区別する |
+| Analysisのnode／edge・unknown・conflict | `ObservedGraph`のnodes/edges/unknown_gaps/source_updates/conflicts/annotations | nodeだけでなく関係の根拠を戻す。期間外・他者意図・性格を補わない。観測mapとIFを分離 |
+
+候補の扱い案は、source／requestの不一致なら拒否、core未対応なら未対応、根拠不足／複数の読み／訂正対象不明なら保留、形式と位置が揃ってもcore側の採用責任が未成立なら未採用とする。**現parserと不一致というだけで候補の意味を誤りと断定せず、保留して対応差を残す。モデルの自己採点で採用しない。**
+
+変更が必要な実ownerは、Emlis `emlis_stage1_response._validate_canonical_semantic_inputs`（source再凍結と現plan再導出一致を分ける箇所）、`validate_interpretation_candidate_pool`（現poolの完全一致）、`emlis_v1a.validate_positive_realization_trace`（plan／本文の整合）である。Piece source→meaning→planと内容検査、Analysis freeze→compile_observed_graph→realizerも同様。source identity／親／owner／期間の検査は維持対象で、有限意味への一致をどう置換するかは別の具体案が必要。今回検査を削除・緩和していない。P1で語彙・意味の新admissionを承認済みにしない。
+
+次作業はP2の各claim／argumentと既存型・検査の具体的差分表。実モデル選定・認証を待たず、保存済み候補／固定例から設計できる。実admissionの変更は、その具体差分に対する既存承認範囲を確認してから扱う。本番、DB、公開DTO、RN、課金、モデル接続のeffectはP1に含めない。

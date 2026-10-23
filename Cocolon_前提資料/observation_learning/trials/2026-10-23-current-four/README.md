@@ -67,3 +67,47 @@ Piece refined未対応、Analysis補足2件以上拒否、IF／Savedのruntime�
 C0のfixture束縛・実行・結果取得まで完了。M1未実行、AI意味候補admission adapter／provider hookは未実装。上の接続準備は現物に基づく先行作業案で、production contract変更や既存検査の緩和を実施したものではない。
 
 本番／DB／公開API／アプリ／課金・価格／quota／モデル重みの変更0。STRUCTURE_MAP_DELTA_NONE。限定TECHNICAL_CREDITはoffline束縛・C0基準出力取得、product_credit=0、両条件比較未完了、automatic_progression=false。
+
+<a id="p1"></a>
+
+## 5. P1内部準備 — 実装・4場面20receipt・境界検証
+
+2026-10-23 JST。Mashの今回の内部準備指示を実施した。開始原本はAPI PR3 `3084c99e5a08d6e475d8a177e62ebf1548e8a0f9`／Cocolon PR30 `482a32a2c5c76631249f02a5abd11840d913ca58`。本変更を含むcommitが最終実装版であり、旧C0固定版とは分ける。
+
+- API packageの`preparation.py`は共通凍結request・Emlis材料・未採用receipt、`preparation_sources.py`はPiece/Analysis材料。現Engine／guard／public DTO／serviceへ接続せず、意味生成を材料の前提にしない。
+- [preparation_results.json](preparation_results.json)に全4材料と各5状態、計20receipt、既存84＋新2source blobを保存。新候補はすべてNOT_ADOPTED、正常も意味の主張がない固定標本。モデルの意味候補生成／admission成功ではない。
+- 原7fieldはそのまま、memoとmemo_actionを分離。E02-BはSUPPLEMENTAL_PROBE（実回答更新N/A）。Pieceはmemo→空行→memo_actionのview、Analysisは3記録と凍結期間を保持。
+- C0のcurrent_four_results.json、元fixture・messages・既存84source blobは変更なし。C0再生成0。既存runnerはdefault C0を保持し、明示prepare-onlyを追加した。
+
+| fixture | source数 | 5状態すべてで保持すること |
+|---|---:|---|
+| E02-0 | 1 | 原入力／実control。初回へ未来補足を混ぜない |
+| E02-B | 2 | 本人補足を別probeとして保持、架空pendingを作らない |
+| P01-N | 1 | 現意味未対応でも元7fieldを保持、本人の声の採用は未実装 |
+| A02-P1 | 3 | 凍結期間・3記録のID/版/根拠。graph採用は未実装 |
+
+各fixtureは CANDIDATE_UNREVIEWED／EMPTY／INVALID_FORMAT／TIMEOUT／TOKEN_LIMIT の5結果。終了理由を候補parseより優先する。request ID／引用位置が一致しても意味・自然さ・Safetyを保証しない。未提供のmodel/revision/usage/時間はnull。固定timeout応答を実時間・実API障害の検証へ換算しない。
+
+独立担当21件・最終補正後に主担当が確認したstdlib unittest **22件成功／失敗0／skip0**（Python 3.12.14／Clang 22.1.3）。18件成功後に不足していたnative回答source／履歴の陽性を追加し、21件へ拡張した。18／21／22と重複加算しない。最終レビューで終了済みcontrolの残数を0とする補正と回帰testを追加し、22件の最終runを主担当が確認した。初読レビューでtask欠落と指数overflowを検出し最終run前に修復。深い凍結、他request参照拒否、quote/範囲/source混入、native実質問からの補足、Plus/Premium履歴、Free拒否、Piece元source、Analysis半開期間と複数補足拒否を確認。実Auth資格・回答後意味更新・本文品質・正式全suiteの合格ではない。
+
+実際のtestコマンド（cwd=mashos-api）：
+
+```bash
+PYTHONPATH=ai/services/ai_inference python -B -m unittest discover -s ai/tests -p test_cmee_preparation.py -v
+```
+
+同環境のPython実版を実行記録と照合済み。
+
+再現コマンド（repositoryを同じ親directoryへ取得した場合）：
+
+```bash
+python Cocolon/Cocolon_前提資料/observation_learning/trials/2026-10-23-current-four/run_current_four.py --prepare-only --api-root mashos-api --output /tmp/cmee-p1-replay.json
+```
+
+結果pathが既存なら上書きせず停止する。今回実行は同じ引数でoutputをこのdirectoryの`preparation_results.json`とした。再現は必要な場合だけ明示して行い、保存結果の再読を新規実行へ数えない。
+
+採用責任の案とP2の残りは[共有設計01](../../../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md)末尾。P1は完了、次はclaim／既存意味型と有限parser一致検査の具体差分表。意味admission／既存Engine hook／実モデル接続／推論／DB／配置／課金0。STRUCTURE_MAP_DELTA_PRESENTは未接続内部準備のみ、限定TECHNICAL_CREDIT、product_credit=0、automatic_progression=false。
+
+P1最終補正：stop済みの実controlは残質問枠0とし、回帰testを追加。21件の独立検証後、主担当の最終22件は全成功（0.116秒）。source変更後の明示stub再実行は別pathで一度行い、全4材料と20receiptが初回と同一であることを照合して最終source blobへ更新した。実stub runは計2、重複除外した最終scenarioは20。初回結果digest・source blob・実行履歴をpreparation_results.jsonへ保持。C0再実行は0。
+
+API実装commit：[b7eb534](https://github.com/MassyuRed/mashos-api/commit/b7eb534d44658549896baf449e7c319d49d14396)。新規2module＋testの3pathだけを変更。Cocolonの記録はこの節を含むrevisionから解決する。

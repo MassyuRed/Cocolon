@@ -2935,3 +2935,23 @@ sealはcanonical JSONのseal_ref空版に対するSHA256。received prefix `init
 原envelopeを再admitし、original・更新plan・resolver全span/qualified refs・資格・aggregate・selected全体を比較する。局所sealだけを原文の代用にしない。専用IRはevent/reaction/M三slotと元contrastのみで、回答grammarへ変換しない。実本文の独立readerは作者なしで意味保持と欠落／事実化／現在化／原因化を検査する。
 
 旧u352初回は新source資格を無効にした全旧sourceから復元。実pendingの新implicit過去ADDは既存retention版へ入り、旧IDは既存legacy経路で旧plan・selected・本文／停止を復元する。旧完成DTO非再生成と、旧未完成checkpoint再開を別々に検証する。
+
+## 2026-10-23 — P1内部準備schema（public／意味schemaと独立）
+
+`cocolon.cmee.internal_preparation.v1`はprocess-localのprivate材料。新型は`PreparedRequest`／`CandidateReceipt`の2つで、既存`GenerationRequest`、意味checkpoint、artifact、公開wireの版を変えない。active Emlisのlogical90へP1の未接続型を混算しない。
+
+- request：`core/task/tier`、独立した`sources`（元7field、ID／版／役割／親、記録時点、text_fields、元根拠）、`period`、実`control`、既存方針の投影、core別出力条件、`adoption_state=NOT_ADOPTED`。全体をcanonical JSONで凍結し、`prep-`＋SHA256をrequest IDとする。元JSONの保持とcanonicalなidentity表現を区別する。
+- probe：E02-Bだけの固定材料は`SUPPLEMENTAL_PROBE`、`thread_answer_admitted=false`、native envelope／版／時刻はnull。元の本人補足役割を別fieldへ保持し、実問いを発明しない。
+- responseの仮構造：`{"candidate": {"...": "未採用内容"}, "evidence": [{"source_id":"...", "field_path":"memo", "start":0, "end":1, "quote":"原"}]}`。candidateはP2意味schemaを先取りしないJSON object。根拠はfield相対Unicode scalar座標。request側のnative EvidenceRefのUTF-8座標を上書きしない。
+- receipt：同じrequest IDとrequest内容hashを照合。raw文字列と構造化できたcandidate JSON、provider/model/revision/usage/終了理由/所要時間を別保持。未提供はnull。全状態NOT_ADOPTEDで、採用setter／Engine hook／保存処理はない。
+
+| status | 意味 |
+|---|---|
+| CANDIDATE_UNREVIEWED | JSON形と根拠引用の位置一致まで。意味採用0 |
+| EMPTY | 正常終了でも本文なし |
+| INVALID_FORMAT | JSON不正／重複key／非有限数／候補形不正 |
+| INVALID_EVIDENCE | source／field／範囲／quote不一致。構造化候補は未採用で保持 |
+| TIMEOUT / TOKEN_LIMIT / PROVIDER_ERROR | 終了理由が正常JSONより優先。途中候補も採用しない |
+| UNKNOWN_FINISH | 未提供・未対応の終了理由。正常扱いしない |
+
+別requestへの付替え、不正metadataは明示例外。位置照合は各candidate claimの充足検査ではなく、意味の妥当性・自然さ・Safetyの一般検証ではない。provider固有の終了理由・usage形式の正規化は実接続時の未実装事項。実値を固定stub値へ読み替えない。

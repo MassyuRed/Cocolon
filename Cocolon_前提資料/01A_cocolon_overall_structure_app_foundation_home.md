@@ -4421,3 +4421,15 @@ STRUCTURE_MAP_DELTA_NONE。既存production3file内、新production／型／意�
 STRUCTURE_MAP_DELTA_PRESENT。`screens/InputScreen.js` は `features/piece/pieceRenderer.js` のside-effect-free `isPieceBitmapSaveAdmitted` を既存 `screens/input/InputPieceActionArea.js` へ渡す。既存saved-input入口/Auth/runtime/背景化・本人変更の破棄責務は維持する。hostはpredicate単独で保存せず、同preview/tokenと同mount fit、owner/flag/quotaを保存直前に再確認する。HTTP/鍵生成/保存は既存明示操作とcontrollerだけが担当し、新しいhost/controllerは作らない。
 
 同版saved再表示とbitmap lifecycleは01Bの既存Piece ownerを参照する。source準備のlocal964 PASS、CIはPENDING、API/DB/env/deploy/本人データ操作0。詳細は入口§110／map§65.55／weekly§5.6.35。
+
+## 2026-10-23 — CMEE P1追加file地図
+
+| exact path（repositoryからの相対path） | 責務・接続 |
+|---|---|
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/preparation.py` | `PreparedRequest`／`CandidateReceipt`、Emlis材料、core wrappers、source位置照合のみの未採用受取。Engine/serviceから未接続 |
+| mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/preparation_sources.py` | Piece元7fieldのsource-only投影、Analysisの既存freeze再利用。意味compiler／本文生成を呼ばない |
+| mashos-api `ai/tests/test_cmee_preparation.py` | stdlib unittestの合成材料・凍結・owner／版／期間／補足・候補失敗・根拠の限定検証 |
+| Cocolon `Cocolon_前提資料/observation_learning/trials/2026-10-23-current-four/run_current_four.py` | 既存C0 defaultを維持、明示`--prepare-only`で4場面×5状態の固定stub。C0再生成しない |
+| 同directory `preparation_results.json` | 全材料・20未採用receipt・fixture／既存84＋新2 source blob。架空fixtureのみ |
+
+P1仕様は既存design01／05、検証境界はtrial README、進行は最新weeklyの20261023-cmee-model-preparation、現在地は00、CMEE map04と観測／比較READMEを同じ変更単位で同期。新しい引継ぎ／管理systemは作らない。STRUCTURE_MAP_DELTA_PRESENTはoffline境界追加、通常三中核・公開契約・保存・稼働は差分なし。
