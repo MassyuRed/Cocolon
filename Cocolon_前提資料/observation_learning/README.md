@@ -8,7 +8,7 @@ Cocolon／EmlisAIが、相手自身の価値基準を学び、その人の思考
 
 ## 現在の再開地点（2026-10-23・CMEEのoffline準備を先行、9B比較を並行）
 
-**Mash承認済みの作業順・変更owner・完了条件・予算・新セッションの再開手順は[最新議事録の具体的計画](../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)。次はP1：既存4場面の凍結sourceをモデル非依存の依頼へ投影し、返答を未採用候補として受け取るoffline境界を既存runner内に作る。** 認証・採用モデル・GPUを待たない。計画の記録まで完了、P1の実装・stub実行は未着手。
+**Mash承認済みの作業順・変更owner・完了条件・予算・新セッションの再開手順は[最新議事録の具体的計画](../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)。次はP1：CMEE内部の材料・未採用候補の入出力仕様を整理し、既存4場面と固定仮データだけでoffline確認する準備。実モデル接続・API推論・重み読込は含めない。** 認証・採用モデル・GPUを待たない。計画の記録まで完了、P1の実装・stub実行は未着手。
 
 Plus980円／Premium1,980円は価格上限、27Bは候補外。[小型AI再選定](model_selection/2026-10-22-three-core/2026-10-23-small-model-reselection.md)のQwen3.5-9B従量API比較は最大4リクエスト／利用消費50円の既承認範囲で並行する。外部推論・課金・チャージ0。安全な認証依頼が中断された後の認証状態は未確認で、準備側の停止条件にしない。
 

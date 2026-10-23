@@ -2094,7 +2094,9 @@ MashはQwen9B従量APIを三中核の候補として4場面比較する案へ「
 
 #### 10/23 — CMEE接続仕様・offline準備を先行し、9B比較を並行する作業計画（新セッションの再開地点）
 
-記録担当：華恋。**現在の次作業はP1。計画の記録まで完了、P1以降の実装は未着手。** この節を本件の作業順・残件・再開地点とし、技術仕様は既存CMEE設計と実sourceへ反映する。別の引継ぎ・管理systemは作らない。
+記録担当：華恋。**現在の次作業はP1。計画の記録まで完了、P1以降の実装は未着手。**
+
+**先行するのはCMEE内部だけの準備。** 三中核の材料整理、将来の意味候補を受け取る内部仕様、採用／保留条件の設計を、用意した固定仮データ（stub）で確認する。実モデルへの接続・推論API呼出し・モデル重みの読込は、この準備には含めない。モデル比較は別作業として並行する。 この節を本件の作業順・残件・再開地点とし、技術仕様は既存CMEE設計と実sourceへ反映する。別の引継ぎ・管理systemは作らない。
 
 **Mashが承認した進め方（今回の会話）：**
 
@@ -2120,7 +2122,7 @@ MashはQwen9B従量APIを三中核の候補として4場面比較する案へ「
 
 | 順序・状態 | 作業と変更先 | 得る成果・完了条件 |
 |---|---|---|
-| **P1：次回最初／未着手** | 既存4場面runnerに、凍結source→モデル非依存の依頼→未採用候補を受け取る薄いoffline境界を作る。既存source ownerを再利用し、必要な内部入出力の案を既存設計01／05へ記す | 下記Cの4場面投影とstub往復を完了。外部認証・採用モデル・GPU不要。現`generate`／意味採用guard／public DTOを変更せず、実装と記録を残す |
+| **P1：次回最初／未着手** | CMEE内部の材料投影・未採用候補の入出力仕様を整理し、既存4場面runnerで固定仮データだけを使って確認する薄いoffline境界を作る。既存source ownerを再利用し、必要な内部入出力の案を既存設計01／05へ記す | 下記Cの4場面投影とstub往復を完了。外部認証・採用モデル・GPU不要。現`generate`／意味採用guard／public DTOを変更せず、実装と記録を残す |
 | **P2：P1後／未着手** | モデルの意味候補→既存意味型への対応・採用／保留／未対応を具体化。既存設計01／02／03／04／05と、各coreの意味・検査ownerへ対応表を置く | 候補の各要素、元source／根拠箇所、主体・時点・肯否・関係・不明・不一致の対応が示せる。現有限parserとの完全一致をどこでどう扱い直すか、維持するsource検査、意味の読みを機械的に保証できない範囲を明記。検査を無効化するだけの案やモデル自己採点で採用しない |
 | **P3：P2の対応確定後／未着手** | Emlis初回と実pendingへの回答更新を既存Engineへ接続。`engine.py`、`emlis_stage1_response.py`、`emlis_v1a.py`、`emlis_answer_update.py`、既存thread経路がowner | 原入力→意味候補→採用／保留→観測・受け取り・任意問いが追跡できる。回答は独立補足としてADD／REVISE／WITHDRAW・無更新・未解決を区別し、未変更意味と時点を保つ。`prepare_emlis_update`→`prepare_emlis_meaning`→`EmlisMeaningCheckpointV1`と本文確定・保存を混同しない。実pending、Free／Plus最大1問・Premium逐次最大3問、skip／終了、旧checkpoint／完成本文の扱いを確認 |
 | **P4：P2後、P3と並行可／未着手** | Pieceのsource→意味候補→既存plan／artifactへ接続。`piece_source.py`、`piece_v1c.py`、`piece_v2_generation.py`がowner | `PieceSourceMeaning`等への対応を経て、喜びと負荷、後悔の否定、次回の条件を落とさない本人の文章を作れる。Emlisの声・助言・架空の決意へ変えない。format適格性・正規本文・既存recipe／保存／export同一性は既存責任へ残し、画像fitをモデルへ判定させない |
@@ -2132,6 +2134,8 @@ MashはQwen9B従量APIを三中核の候補として4場面比較する案へ「
 **技術仕様の既存反映先：** `Cocolon_前提資料/designs/cmee/v1/`の`01_shared_kernel_and_runtime_contracts.md`、`02_emlis_v1a_detailed_design.md`、`03_piece_v1c_detailed_design.md`、`04_analysis_v1d_v1e_detailed_design.md`、`05_json_schema_and_versioning.md`、`06_implementation_order_migration_and_verification.md`。各作業に必要な差分だけを更新する。
 
 ##### C. 次回P1で実際に終える範囲
+
+「モデルへ渡す／返答を受け取る」は、将来のための内部仕様と仮データの確認を指す。この段階では実モデルを接続しない。既存のsource凍結・問い・回答更新・checkpoint自体は実装済みであり、作り直さない。不足は、意味生成の成功と分けて材料を扱う部分と、将来の新候補を受ける内部境界である。採用条件はP2で設計し、この準備だけで現行guardを変更しない。
 
 1. **4fixtureの材料を投影する。** 原文と元7fieldを保持し、memoとmemo_actionの区別、source ID／版・役割、本人の原入力と独立補足、適格履歴、対象期間・記録時点・根拠箇所を依頼へ渡す。Pieceの既存本文投影はmemo→空行→memo_actionの順。Analysisはsource凍結の同一性と期間境界を保つ。存在しない項目や履歴は補わない。
 2. **sourceを渡せる条件と、現方式で意味を作れる条件を分ける。** P01-N／A02-P1は現有限意味が成立しなかった改善対象である。許可・凍結できたraw sourceまで捨てず、既存意味成立をモデル入力の前提にしない。生成したEmlis応答、Piece本文、Analysis推定を本人sourceへ逆流させない。
@@ -2165,6 +2169,8 @@ Analysisは実loaderの当期最大100記録＋比較期最大100記録を踏ま
 2. 作業ownerのfresh headと差分を確認する。照合点はCocolon [PR30](https://github.com/MassyuRed/Cocolon/pull/30)、branch `agent/three-core-cmee-current-structure-20260815`、本追記前head `504ca1951511e87cf9b0f531bcf26a0561206791`。APIは[PR3](https://github.com/MassyuRed/mashos-api/pull/3)、branch `agent/cmee-v1a-i1sx-source-explicit-20260815`、head `3084c99e5a08d6e475d8a177e62ebf1548e8a0f9`。いずれもopen／draft／unmerged。このSHAを次回の最新headへ固定せず、差分と関係ownerだけを再確認する。
 3. C0の主要保存commit `8becb4cc1ce50ea582109937c362c126d9079cc2`と説明補正 `504ca1951511e87cf9b0f531bcf26a0561206791`、fixture blob、全結果を再利用する。コード中の未実行分岐を実行済みにしない。**次回最初に着手するのはP1。9B認証、モデル最終選定、追加学習の完了を待たない。**
 4. P1を終えた時点で、実際の変更file・検証したsource／失敗・未完了・次の一作業を本節へ置換更新する。同じ変更単位で全体現在地・観測入口・比較入口の案内を同期する。技術仕様は上記既存設計、構造が変われば該当current mapへ反映する。未実行工程に完了印を付けない。
+
+**Mashの後続指摘と説明訂正：** Mashは「CMEE側だけでやることはないのか」と、実モデル接続との混同を指摘した。華恋の直前の「入力をモデルへ渡し、返答を受け取るoffline接続」という説明が不正確だった。先行するのは上記のCMEE内部準備であり、実モデル接続・認証・推論は不要。比較runnerの仮データ確認をCMEE本体への実接続成功として扱わない。
 
 **既承認を確認待ちへ戻さない範囲：** CMEE側の接続仕様・offline準備を先行する方向、9Bの4場面比較とその上限、今回の記録保存。通常の原本読取・P1のoffline準備で同じ進め方の承認を繰り返し求めない。一方、P2で明らかになる意味採用責任・商品contractの変更、新規有料資源、実DB／配備などの別effectを一括承認へ読み替えない。判断が本当に必要なら、先に具体案・対象差分・実結果を作り、既存authorityで足りるか確認したうえで必要な点だけを示す。
 

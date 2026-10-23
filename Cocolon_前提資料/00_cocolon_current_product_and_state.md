@@ -6,7 +6,7 @@
 
 これは全製品の現在地を一度で確認する正本である。毎回全文を読み、対象機能の詳細正本と実ファイルへ進む。過去の読了、会話の要約、検索断片だけで代用しない。repository rootの`AGENTS.md`、`00_karen_read_first.md`、work rulesの入口からここへ入り、System Contextの生成物に含まれない場合もfreshな作業ownerから直接読む。
 
-現時点の確認基準はCocolon Draft PR [#30](https://github.com/MassyuRed/Cocolon/pull/30) `504ca1951511e87cf9b0f531bcf26a0561206791`、mashos-api Draft PR [#3](https://github.com/MassyuRed/mashos-api/pull/3) `3084c99e5a08d6e475d8a177e62ebf1548e8a0f9`。両方open／draft。これは今回の照合点であり、次回の最新headを固定する指示ではない。本資料の配置commitは、この変更を含むGitHub revisionから解決する。
+現時点の確認基準はCocolon Draft PR [#30](https://github.com/MassyuRed/Cocolon/pull/30) `f05b6699207672490f050fdec0be95375581f78c`、mashos-api Draft PR [#3](https://github.com/MassyuRed/mashos-api/pull/3) `3084c99e5a08d6e475d8a177e62ebf1548e8a0f9`。両方open／draft。これは今回の照合点であり、次回の最新headを固定する指示ではない。本資料の配置commitは、この変更を含むGitHub revisionから解決する。
 
 **作業ごとに差分を確認し、変化した機能・決定・状態・残件・根拠だけを、当該作業と同じ変更単位で置換更新する。** 日付だけを全行で更新しない。無関係な機能の再監査や全資料の再生成はしない。関連差分なしは既存の作業記録／PR説明に「全体現在地差分なし」と理由を一行残す。詳細mapに構造差分があれば、そのmapも同時に更新する。
 
@@ -28,7 +28,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 **学習済AIをCMEEへ接続し、既存資産を生かす方針は決定済み。** 学習済みの言語能力を土台に、Mashの観測・問い・回答後の修正を教材として観測技術を育てる。適用・評価対象はEmlisだけでなくPiece・Analysisを含む全体。採用モデル、各coreでモデルへ担わせる具体的責務・入出力、学習方法、配置・費用・速度は未決で、接続実装は未実施である。
 
-**10/23 Mash承認：CMEE側の接続仕様・offline準備を先行し、モデル比較を並行する。** [最新議事録の作業計画](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)を再開地点とする。次回最初は、既存4場面の凍結sourceをモデル非依存の依頼へ投影し、返答を未採用候補として受け取るoffline境界の実装。外部認証・モデル最終選定を待たない。計画保存まで完了、この境界と意味採用adapterの実装は未着手。
+**10/23 Mash承認：CMEE側の接続仕様・offline準備を先行し、モデル比較を並行する。** [最新議事録の作業計画](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)を再開地点とする。次回最初は、CMEE内部の材料・未採用候補の入出力仕様を整理し、既存4場面と固定仮データだけでoffline確認する準備。実モデル接続・API推論・重み読込は含めない。外部認証・モデル最終選定を待たない。計画保存まで完了、この境界と意味採用adapterの実装は未着手。
 
 わたしマップは性格分類ではない。場面→役割→注意・思考→行動・非行動→結果・その後を、成立する範囲で示す。守る意向、負荷、不明、不一致を添え、人格を固定しない。もしもルート／IFとSavedRouteIntentは既存の設計・残件であり、省略・廃止された構想ではない。
 
@@ -133,7 +133,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
-| AI選定・観測教材 | Mash承認の[先行準備＋並行比較計画](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)を優先。次はP1：4場面のsource投影→未採用候補受取を既存runner内でoffline実装。P1後に意味採用対応・Emlis回答更新・Piece／Analysis接続を進める。現有限parser一致検査の変更責任は未具体化。C0は保存済みを再利用（本文1／N_A1／未対応2）、9B最大4リクエスト／利用消費50円は承認済み未実行・認証後状態未確認。価格上限980／1,980円・27B除外を維持。P1／本統合／モデル採用／追加学習／価格・quota変更は未実施 |
+| AI選定・観測教材 | Mash承認の[先行準備＋並行比較計画](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)を優先。次はP1：CMEE内部の材料投影・候補受取仕様を、4場面と固定仮データだけでoffline確認（実モデル接続0）。P1後に意味採用対応・Emlis回答更新・Piece／Analysis接続を進める。現有限parser一致検査の変更責任は未具体化。C0は保存済みを再利用（本文1／N_A1／未対応2）、9B最大4リクエスト／利用消費50円は承認済み未実行・認証後状態未確認。価格上限980／1,980円・27B除外を維持。P1／本統合／モデル採用／追加学習／価格・quota変更は未実施 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。u353〜355のコードと配置差を保持 |
 | Analysis | 最新内容修正版の配置差、6401本人生成・再表示・比較、複数ANSWER採用、一般理解、有料差、IF／Savedの未実装 |
 | Piece | API private構成はLive。正本privacy差は3084c99eで解消。本人保存に必要なRN sourceはbranch agent/piece-testflight-private-20261023@87151へ固定、既存iOS workflowによる署名Archive/TestFlight送信1回は個別判断前・未実行。本人保存→同owner履歴/詳細、実Photos/Share、Android/backend receipt、商品受入れは残る |
@@ -168,4 +168,4 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 10/23再選定差分：Mashの価格上限・27B除外を受領し、高価格案を撤回。Qwen9B公開API単価・公開重み・非thinking・データ方針と4B追加学習手段を公式原典から確認し、全三中核の仮tokenで再計算した。既製API原価と独自育成版を分離。価格/商品quota/モデル採用/本統合/有料実行の実変更0。STRUCTURE_MAP_DELTA_NONE、ADMINISTRATIVE_ONLY、product_credit=0。
 
-10/23接続準備差分：固定4fixture・source84blobのC0実結果を再利用し、Mash承認の先行offline準備と並行9B比較について、作業順・変更owner・成果・完了条件・予算・新セッションの最初の1作業を最新議事録へ具体化した。今回の変更は既存5文書のみ、P1実装・stub実行・新規C0・外部9B推論・費用・本人DB・production実装／契約／稼働変更0。STRUCTURE_MAP_DELTA_NONE（作業計画・再開導線のみ）。先の限定TECHNICAL_CREDITはoffline束縛／C0出力だけ、今回ADMINISTRATIVE_ONLY、product_credit=0、実モデル比較未完了。
+10/23接続準備差分：固定4fixture・source84blobのC0実結果を再利用し、Mash承認の先行offline準備と並行9B比較について、作業順・変更owner・成果・完了条件・予算・新セッションの最初の1作業を最新議事録へ具体化した。今回の変更は既存5文書のみ。後続のMashの指摘を受け、先行準備はCMEE内部の仕様・材料整理と固定仮データ確認で、実モデル接続を含まないと明確化した。P1実装・stub実行・新規C0・外部9B推論・費用・本人DB・production実装／契約／稼働変更0。STRUCTURE_MAP_DELTA_NONE（作業計画・再開導線のみ）。先の限定TECHNICAL_CREDITはoffline束縛／C0出力だけ、今回ADMINISTRATIVE_ONLY、product_credit=0、実モデル比較未完了。
