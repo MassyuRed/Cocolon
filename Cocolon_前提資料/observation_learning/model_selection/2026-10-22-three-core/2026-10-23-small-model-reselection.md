@@ -10,7 +10,7 @@ Mashの明示条件は、**Plus月980円／Premium月1,980円が上限、これ�
 
 ## 2. 出す候補と推奨順
 
-**最初に三中核を試す候補は `Qwen/Qwen3.5-9B` のDeepInfra標準従量API。** 固定GPUを新規に確保せず、全coreの実token量で支払う。自己管理・観測技術の追加学習用には `Qwen/Qwen3.5-4B` を別候補として残す。
+**10/23 Mashの希望を受領：次のQwen3.5-9B試験はRunpodを優先する。** Mashは27B／120B試験で利用したRunpodに残高があるため、同じ提供元での試験を希望。公開重みをGPU Pod上で動かす方式にできる。旧DeepInfra標準従量API案は比較用の選択肢として保持し、試験先の第一候補から外す。自己管理・追加学習用のQwen3.5-4B別候補と、27B除外・価格上限は維持。Runpodの現在残高・Pod状態・空きGPU・実単価は未照会。
 
 | 候補 | 確認できた現実の選択肢 | 採否に必要な確認 |
 |---|---|---|
@@ -23,7 +23,7 @@ DeepInfraの4Bは旧紹介記事に価格があったが、現在のモデルURL
 
 ## 3. 公開APIの原価
 
-2026-10-23 JST公式確認。標準tier、割引／cache／batchの効果を見込まない。
+2026-10-23 JST公式確認。以下は既製APIを使う場合の比較資料で、Runpod自己hostのGPU試験費・本番原価ではない。標準tier、割引／cache／batchの効果を見込まない。
 
 | 提供元 | 正確な既製モデルID | 入力100万token | 出力100万token | 備考 |
 |---|---|---:|---:|---|
@@ -100,9 +100,9 @@ DeepInfraのCustom LLMはGPU時間課金で、LoRAはbase対応・単価の確�
 
 27Bの試験は行わない。既存4場面E02-0／E02-B／P01-N／A02-P1を、C0 current CMEE最大4出力と、M1 Qwen3.5-9B未接続proxy最大4出力で比べる案へ変更する。可視原入力・採点の意味条件・未知family区分は維持し、モデルを小さくするために原文を言い換えない。
 
-DeepInfra標準tier・非thinking指定・JSON、各Emlis/Piece出力上限1,024・Analysis3,072、入力token・model ID・provider側revision表示／非表示・request ID・設定・usage・本文・実時間を保存する。providerの裏のweight hashが取得できなければ、ローカルGGUFのように固定できたとは報告しない。JSON対応だけで意味の採用・保存成功・商品合格としない。
+Runpodでの初回候補はQwen3.5-9B。公開重みの版・形式・量子化、実GPU/VRAM、実行backend/version、context／非thinking／出力上限・JSON設定を固定し、入力／出力token・全本文・実時間・GPU稼働時間を記録する。前回27BはA40とllama.cpp b11784だったが、現在のPod・9B対応backendの再利用可否は未確認。既存4場面と評価条件を維持し、JSON成功を意味採用や商品合格にしない。
 
-実行予算案は**最大4モデルリクエスト・利用消費50円**。C0のoffline4出力は別。追加モデル、再試行、残り16場面、自動課金チャージへ広げない。新しい初回最低入金額・残高は未確認で、消費50円とチャージ額は別である。今回の依頼は候補提示であり、今回有料実行・アカウント作成・ユーザー本文送信は0。
+**旧最大4リクエスト／利用消費50円はDeepInfra API向けの既承認枠。RunpodのGPU起動予算へそのまま移さない。** RunpodはGPU稼働と保存領域を残高から消費し、準備／model load／待機も稼働時間に含まれる。次セッションではread-onlyで現在Pod・単価・残高・保存構成を確認し、GPU種別／時間上限／総消費上限／終了後Stopと保存費を含む具体案を確定する。既存残高を使う希望は、未確定のGPU起動や追加チャージ・残り16場面の一括実行承認ではない。今回は起動・推論・ダウンロード・課金操作0。
 
 費用面では980円／1,980円内を比較できる具体候補が得られた。**品質面の採用は、同じ三中核の実出力で決める。** 安いAPIを見つけたことを商品完成・需要の証明にしない。
 
@@ -115,3 +115,5 @@ DeepInfra標準tier・非thinking指定・JSON、各Emlis/Piece出力上限1,024
 - 商品資料照合点：Cocolon PR30 `54d34985ba180e54b521549100fc1f9fcc72f309`、API PR3 `3084c99e5a08d6e475d8a177e62ebf1548e8a0f9`。System Context最新cache未生成・既存timeoutの状態は変更せず、fresh原本を直接読んだ。
 
 STRUCTURE_MAP_DELTA_NONE（source／runtime接続／契約変更なし）。価格上限・27B除外はMash決定、9B API優先／4B育成候補・利用量・試験予算は華恋の提案。ADMINISTRATIVE_ONLY、product_credit=0、automatic_progression=false。
+
+Runpod優先への変更根拠：2026-10-23 Mashの「残高まだあるからrunpodがいい」。公式[残高・計算資源・保存の課金](https://docs.runpod.io/accounts-billing/billing)、[Pod料金と停止中保存費](https://docs.runpod.io/pods/pricing)、[Qwen3.5-9B公開重み・対応backend](https://huggingface.co/Qwen/Qwen3.5-9B)を確認。単価・機材構成は次の現物確認へ残す。試験場所の希望で、本番hostやモデル採用の決定ではない。

@@ -1,4 +1,4 @@
-> **2026-10-23現在の再開地点：[CMEE先行準備・並行9B比較の具体的作業計画](#20261023-cmee-model-preparation)。Mash承認済み。次はP1（4場面のsource投影と未採用候補受取のoffline境界）。モデル最終選定・認証を待たない。以下の過去の未決・未着手記載は当時の履歴。**
+> **2026-10-23現在：P1〜P5の限定内部準備は後続Pまで完了。次のモデル比較M1はMashの残高利用希望によりRunpod優先（後続Q）。P6はM1候補取得後の統合評価で未着手。GPU構成・時間／総消費上限の具体化前で、有料起動は未実施。**
 
 > **2026-10-20 観測学習の保存先を作成：[観測技術の記録](../observation_learning/README.md)。第1回は写真展示会の架空事例で、対話原文・Mashの教示・華恋の整理を分けて保存した。経験は探る場所と価値観の持ち込みに気づくために使い、人物タイプの統計分類を目的にしない。モデル学習は未実行。**
 
@@ -2094,7 +2094,7 @@ MashはQwen9B従量APIを三中核の候補として4場面比較する案へ「
 
 #### 10/23 — CMEE接続仕様・offline準備を先行し、9B比較を並行する作業計画（新セッションの再開地点）
 
-記録担当：華恋。**P1は2026-10-23の明示作業指示で実装・限定検証まで完了。P2の具体差分表は後続Hまで完了。P2後の限定実装案は後続Iで具体化済み。限定Emlisの意味snapshot／本文／保存再開は後続J〜Lで実装済み。Piece P4も後続Nで承認・限定内部実装済み。P5の具体化、通常三中核の本統合と商品品質は未完。**
+記録担当：華恋。**P1は2026-10-23の明示作業指示で実装・限定検証まで完了。P2の具体差分表は後続Hまで完了。P2後の限定実装案は後続Iで具体化済み。限定Emlisの意味snapshot／本文／保存再開は後続J〜Lで実装済み。Piece P4も後続Nで承認・限定内部実装済み。P5も後続Pで承認・限定実装済み。P6・通常三中核の本統合と商品品質は未完。次のM1実行先は後続QのRunpod優先へ更新。**
 
 **先行するのはCMEE内部だけの準備。** 三中核の材料整理、将来の意味候補を受け取る内部仕様、採用／保留条件の設計を、用意した固定仮データ（stub）で確認する。実モデルへの接続・推論API呼出し・モデル重みの読込は、この準備には含めない。モデル比較は別作業として並行する。 この節を本件の作業順・残件・再開地点とし、技術仕様は既存CMEE設計と実sourceへ反映する。別の引継ぎ・管理systemは作らない。
 
@@ -2126,7 +2126,7 @@ MashはQwen9B従量APIを三中核の候補として4場面比較する案へ「
 | **P2：設計対応表・inspection完了／実admission未実装** | モデルの意味候補→既存意味型への対応・採用／保留／未対応を具体化。既存設計01／02／03／04／05と、各coreの意味・検査ownerへ対応表を置く | 設計01〜05で候補各要素→正確なnative field・保持／再設計する検査・保留／未対応・旧保存互換を具体化。4手作業設計例28claim/60quoteと26native型field/9関数所在を照合。実admissionは未実装。現有限parserとの完全一致をどこでどう扱い直すか、維持するsource検査、意味の読みを機械的に保証できない範囲を明記。検査を無効化するだけの案やモデル自己採点で採用しない |
 | **P3：限定Emlis実装済み（J〜L）／一般更新・品質等は残件** | Emlis初回と実pendingへの回答更新を既存Engineへ接続。`engine.py`、`emlis_stage1_response.py`、`emlis_v1a.py`、`emlis_answer_update.py`、既存thread経路がowner | 原入力→意味候補→採用／保留→観測・受け取り・任意問いが追跡できる。回答は独立補足としてADD／REVISE／WITHDRAW・無更新・未解決を区別し、未変更意味と時点を保つ。`prepare_emlis_update`→`prepare_emlis_meaning`→`EmlisMeaningCheckpointV1`と本文確定・保存を混同しない。実pending、Free／Plus最大1問・Premium逐次最大3問、skip／終了、旧checkpoint／完成本文の扱いを確認 |
 | **P4：Mash承認・限定内部実装済み（N）／通常B8・商品品質は未完** | Pieceのsource→意味候補→既存plan／artifactへ接続。`piece_source.py`、`piece_v1c.py`、`piece_v2_generation.py`がowner | `PieceSourceMeaning`等への対応を経て、喜びと負荷、後悔の否定、次回の条件を落とさない本人の文章を作れる。Emlisの声・助言・架空の決意へ変えない。format適格性・正規本文・既存recipe／保存／export同一性は既存責任へ残し、画像fitをモデルへ判定させない |
-| **P5：実sourceの採用・保存差分を確認（M）／実装未着手** | Analysisの凍結期間source→根拠付きgraph候補→既存artifactへ接続。`cores/analysis/source_adapter.py`、`intent_compiler.py`、`observed_route_realizer.py`がowner | `ObservedGraph`等への対応を経て、場面・役割・行動・結果と未確認を区別できる。各node／edgeが元記録へ戻り、性格・他者の反応・期間外の出来事を補完しない。graph成立、説明文、保存／再読は別に確認。観測ルートと条件付きIFを混ぜない |
+| **P5：承認・限定内部実装済み（P）／通常接続・商品品質は未完** | Analysisの凍結期間source→根拠付きgraph候補→既存artifactへ接続。`cores/analysis/source_adapter.py`、`intent_compiler.py`、`observed_route_realizer.py`がowner | `ObservedGraph`等への対応を経て、場面・役割・行動・結果と未確認を区別できる。各node／edgeが元記録へ戻り、性格・他者の反応・期間外の出来事を補完しない。graph成立、説明文、保存／再読は別に確認。観測ルートと条件付きIFを混ぜない |
 | **P6：各core接続とM1取得後／未着手** | 同じ4場面でM2統合offline評価。既存runner・結果記録と、既存設計06の検証へ反映 | モデル候補→実admission→core artifactの到達・保留・未対応を個別に示す。M1の良い文章を貼ってM2成功にしない。まず保存済みM1 raw候補を再利用可能か確認し、追加API呼出しを自動で増やさない。品質・時間・全工程tokenを記録し、未対応を平均で隠さない |
 
 **実sourceのprefix：** mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/`。sourceの正規ownerは`source_kernel.py::freeze_text_source`、`emlis_thread_source.py::admit_emlis_thread`、Pieceの`PieceSourceSnapshot`／`_saved_field_projection`、Analysisの`freeze_analysis_sources`／`AnalysisSavedRecord`／`AnalysisObservedMapRequest`。上表は実行時にfresh sourceへ戻るための案内であり、今回sourceを変更した記録ではない。
@@ -2145,13 +2145,11 @@ MashはQwen9B従量APIを三中核の候補として4場面比較する案へ「
 
 P1の完了は「4場面の正規sourceから依頼を作り、未採用候補と失敗をofflineで取り出せる」こと。モデル品質・意味採用・CMEE本統合・商品完成の合格ではない。**計画保存時はコード未作成だったが、後続の今回指示によりP1を実装・stub実行した。実測は下記Gへ分離する。**
 
-##### D. 並行するM1：9Bの4場面比較
+##### D. 並行するM1：9Bの4場面比較（Runpod優先へ更新）
 
-- **対象と上限は既承認のまま。** DeepInfra標準`Qwen/Qwen3.5-9B`、固定4ID、最大4リクエスト、利用消費合計50円。認証・残高・提供model・現行単価を実行前に確認し、この上限内で進める。新規チャージ・最低入金条件・追加有料枠を利用消費50円の承認へ含めない。
-- 対象行の固定messagesだけを使用し、初回は手本を足さない。非thinking、出力上限はE02-0／E02-B／P01-N各1,024、A02-P1は3,072tokenの既存案。実際に受理された設定・providerが返したmodel／revision（未提供なら未確認）・raw本文・usage／finish理由・時間・失敗を残す。単価だけを先に品質判定へ使わない。
-- 既存C0との比較に、意味保持・主体／時点／肯否／関係・必要な問い・更新・本人の声・根拠付き構造を使う。まず華恋が明白な欠落を点検し、全出力をMashへ丸投げしない。Mashの観測判断が必要な箇所は、原文・候補・判断点を具体的に並べる。
-- 認証が整わなくてもP1／P2は進める。失敗を自動retryして4リクエスト／50円を超えない。M1は未接続proxyであり、意味採用・checkpoint・保存の成功には換算しない。
-- 公開9B APIの安価な従量料金と、独自LoRA／追加学習版の学習・配備費を分ける。追加学習は未実行、別の比較・費用確認が必要。27Bの再起動・本体確認を次作業へ戻さない。
+2026-10-23 Mashの残高利用希望により、実行場所はRunpodを優先する。Qwen3.5-9BをGPU Podへ置く方式で、モデルの最終選定・本番host決定ではない。現在Pod／GPU／単価／残高／runtimeと重み版をread-onlyで確認後、GPU時間・総消費上限・Stop／保存費を含む具体案を決める。GPU起動・download・推論は今回0。
+
+固定4ID・原入力／評価・実usage／本文／時間の記録は維持する。旧DeepInfra標準APIの最大4リクエスト／利用消費50円は別の既承認枠として保持し、RunpodのGPU予算や追加チャージ許可へ転用しない。Runpod試験ではmodel load／待機を含むGPU稼働時間と保存費も別記録する。M1は未接続proxy比較で、CMEEへ候補を通すP6/M2と分ける。27Bを再候補化しない。
 
 ##### E. 4場面の後にも残す評価と商品接続
 
@@ -2354,3 +2352,13 @@ Mashがbe37f40dの[具体案04](../designs/cmee/v1/04_analysis_v1d_v1e_detailed_
 actual仕様04#cmee-p5-implemented／型05#cmee-p5-actual-types、全変更01A、実本文／全private完成state／3段階hash／same replay／型fields／source blob／途中失敗はtrialの新analysis_semantic_snapshot_results.jsonとREADME§13。P1/P2/C0・承認案JSON・旧全outcomeは変更0。全体00／設計01／map01A／current Analysis03・CMEE04／design01・04・05・06／本weekly／trialを同単位で同期。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、商品0／正式0/3／PRODUCT_NOT_CLEAR／candidate_ready=false／automatic_progression=false。
 
 本承認単位は限定実装・必要検証・GitHub反映まで完了。実モデル／推論／重み／学習／課金／実DB／Render／通常application／公開API／DTO／RN／merge／deploy0、追加CIは[skip ci]で0。次回はfresh heads、本P、全機能00、actual型05とtrial§13から復元し、完了済みP4/P5を未着手へ戻さない。一般意味理解・商品文章品質・通常接続・複数回答／比較・IF／Saved・モデル選定と接続は別残件。
+
+
+<a id="20261023-model-runpod-preference"></a>
+## Q. 2026-10-23 — 次セッションのモデル比較はRunpodを優先
+
+Mashが27B／120B試験時に使ったRunpodに残高があるため、同じ提供元での試験を希望。次のQwen3.5-9B比較M1はRunpodを第一候補へ変更し、DeepInfra API第一案から更新した。現アカウントの残高・Pod状態・空きGPU・単価は未照会。既存記録で27BはA40 Pod／llama.cpp b11784を使用していたことを確認したが、同Pod・binaryを9Bへそのまま再利用できると確認したわけではない。
+
+Runpod公式billing／Pod pricingとQwen公式9B model cardを確認。残高からcomputeとstorageを消費し、停止中のpersistent storage費は残り得る。先の4回／50円はDeepInfra API枠で、GPU時間課金の予算ではない。次セッションで現物をread-only確認し、重み形式・backend／GPU・VRAM／context／時間上限／総消費上限／終了Stopと保存費を具体化する。起動・download・推論・追加チャージ・課金設定変更は今回0。
+
+小型AI再選定資料／全機能00／本計画の現在案を同期。P1〜P5の限定内部実装は完了済みで、P6はM1候補取得後の三中核統合評価。モデル選定前の準備と実モデル試験を混同しない。STRUCTURE_MAP_DELTA_NONE（文書上の試験先希望、runtime／接続／public契約の実変更なし）、ADMINISTRATIVE_ONLY、商品0、automatic_progression=false。
