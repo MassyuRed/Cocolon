@@ -1,3 +1,5 @@
+> **2026-10-23現在の再開地点：[CMEE先行準備・並行9B比較の具体的作業計画](#20261023-cmee-model-preparation)。Mash承認済み。次はP1（4場面のsource投影と未採用候補受取のoffline境界）。モデル最終選定・認証を待たない。以下の過去の未決・未着手記載は当時の履歴。**
+
 > **2026-10-20 観測学習の保存先を作成：[観測技術の記録](../observation_learning/README.md)。第1回は写真展示会の架空事例で、対話原文・Mashの教示・華恋の整理を分けて保存した。経験は探る場所と価値観の持ち込みに気づくために使い、人物タイプの統計分類を目的にしない。モデル学習は未実行。**
 
 > **2026-10-20 方針追補：Mashの言葉の模倣ではなく観測技術を継承する。学習済み言語能力を土台に、観測・問い・理解更新を教材から育てる方向へ転換した。[会話・合意・未決・次作業](#20261020-observation-learning)を優先参照。具体モデル・費用・配置・学習の実行は未決／未着手。**
@@ -2087,3 +2089,83 @@ MashはQwen9B従量APIを三中核の候補として4場面比較する案へ「
 実物には任意LLM候補hookはなく、Emlis候補poolと意味planは現有限parserからの再導出と一致する検査を持つ。型へJSONを詰めるだけでは導入不能。この受口と責任変更を先行設計するのが中心で、HTTP呼出し追加だけで統合済みや任意候補を検証可能とはしない。Piece refined/Analysis複数補足/IF Savedの未対応も維持。既存Engineへ接続する範囲を具体化し、第二Engineや独立checkerを追加しない。
 
 価格上限980/1980・27B除外・9B最大4/消費50円を維持。今回はoffline束縛/現方式の出力取得のみの限定TECHNICAL_CREDIT、モデル導入・production contract/API/DB/RN/稼働/学習・商品採用0。STRUCTURE_MAP_DELTA_NONE、product_credit0、automatic_progression=false。全体現在地/観測入口/比較入口を同期。
+
+<a id="20261023-cmee-model-preparation"></a>
+
+#### 10/23 — CMEE接続仕様・offline準備を先行し、9B比較を並行する作業計画（新セッションの再開地点）
+
+記録担当：華恋。**現在の次作業はP1。計画の記録まで完了、P1以降の実装は未着手。** この節を本件の作業順・残件・再開地点とし、技術仕様は既存CMEE設計と実sourceへ反映する。別の引継ぎ・管理systemは作らない。
+
+**Mashが承認した進め方（今回の会話）：**
+
+> 進め方は、CMEE側の接続仕様・offline準備を先行し、モデル比較を並行する形に改めます。  
+> →うん、それでお願い。  
+> しないといけない作業を具体化して最新議事録か何かの資料に残して、新セッションでも進められるようにして。
+
+学習済AI＋CMEE接続、三中核を対象にすることは既決。モデルは日本語の意味理解・関係の読み・意味候補・問いと更新・各coreの生成にも使う。最終文の言換えだけに閉じない。CMEEはsourceの許可・凍結、根拠と本人状態、意味の採用／保留、履歴・更新・保存への接続を担う。詳細な採用方法は以下で具体化する。Plus980円／Premium1,980円は価格上限、27Bは候補外。価格・商品quota・モデル採用・追加学習・稼働切替は今回確定していない。
+
+##### A. 再利用する実績と、残っている実装差
+
+| 区分 | 2026-10-23時点の事実 | 次作業での扱い |
+|---|---|---|
+| C0実行 | [4場面のコード・全結果・再現条件](../observation_learning/trials/2026-10-23-current-four/README.md)。E02-0はGENERATED・8.004秒・問いなし、E02-Bは実pendingなしでN/A、P01-Nはsaved_emotion_meaning_not_yet_supported、A02-P1はanalysis_observed_route_not_established | 保存済みを基準として再利用する。新セッションだからという理由で再生成しない。Emlisの本文取得を商品合格、Piece／Analysisの未対応を入力不足へ読み替えない |
+| 入力と評価 | [task_inputs.jsonl](../observation_learning/model_selection/2026-10-22-three-core/task_inputs.jsonl)、blob `6aaa369c9c31388325d0e1203627b355ebb87d61`。初回はE02-0／E02-B／P01-N／A02-P1。評価は別の[review_guide.md](../observation_learning/model_selection/2026-10-22-three-core/review_guide.md) | 原文・枝の独立性・評価条件を保持。評価file、未来補足、他枝の回答をモデルへ渡さない。架空本人sourceのみ |
+| 任意モデルの受口 | `MeaningExperienceEngine.generate`は三coreのnative requestを扱うが、外部モデル候補を差し込むhookは未実装 | P1は未採用候補を扱うoffline境界、P2以降で既存Engineへの実接続を扱う。別Engineへ作り直さない |
+| 意味採用の制約 | Emlisの`_validate_canonical_semantic_inputs`、`validate_interpretation_candidate_pool`、`emlis_v1a.py::validate_positive_realization_trace`等は、現有限parserから再導出したplan／poolとの一致を要求する。Piece意味保持検査・Analysis graph生成にも現方式の範囲がある | JSONを既存型へ格納するだけでは導入にならない。sourceの整合検査と意味解釈の妥当性を分け、変更する採用責任をP2で明示する |
+| 外部9B | DeepInfraの標準`Qwen/Qwen3.5-9B`が最初の比較候補。M1推論0・課金0・チャージ0。環境にAPIキーなし、ブラウザ未ログインを確認後、安全な認証依頼が中断。認証後の状態は未確認 | 認証未成立をCMEE側の停止理由にしない。既承認の最大4リクエスト／利用消費50円を維持。鍵・パスワードを会話本文へ求めない |
+
+##### B. CMEE側で先行する具体的作業
+
+作業担当は華恋。実装する責任の置き場所は下表の既存ownerとし、分担読取を使っても統合・結果確認をMashへ戻さない。P1→P2を先行し、採用境界が具体化した範囲でP3／P4／P5を進める。9B比較M1は独立して並行する。各行は未完了であり、文書を置くだけで技術完了とはしない。
+
+| 順序・状態 | 作業と変更先 | 得る成果・完了条件 |
+|---|---|---|
+| **P1：次回最初／未着手** | 既存4場面runnerに、凍結source→モデル非依存の依頼→未採用候補を受け取る薄いoffline境界を作る。既存source ownerを再利用し、必要な内部入出力の案を既存設計01／05へ記す | 下記Cの4場面投影とstub往復を完了。外部認証・採用モデル・GPU不要。現`generate`／意味採用guard／public DTOを変更せず、実装と記録を残す |
+| **P2：P1後／未着手** | モデルの意味候補→既存意味型への対応・採用／保留／未対応を具体化。既存設計01／02／03／04／05と、各coreの意味・検査ownerへ対応表を置く | 候補の各要素、元source／根拠箇所、主体・時点・肯否・関係・不明・不一致の対応が示せる。現有限parserとの完全一致をどこでどう扱い直すか、維持するsource検査、意味の読みを機械的に保証できない範囲を明記。検査を無効化するだけの案やモデル自己採点で採用しない |
+| **P3：P2の対応確定後／未着手** | Emlis初回と実pendingへの回答更新を既存Engineへ接続。`engine.py`、`emlis_stage1_response.py`、`emlis_v1a.py`、`emlis_answer_update.py`、既存thread経路がowner | 原入力→意味候補→採用／保留→観測・受け取り・任意問いが追跡できる。回答は独立補足としてADD／REVISE／WITHDRAW・無更新・未解決を区別し、未変更意味と時点を保つ。`prepare_emlis_update`→`prepare_emlis_meaning`→`EmlisMeaningCheckpointV1`と本文確定・保存を混同しない。実pending、Free／Plus最大1問・Premium逐次最大3問、skip／終了、旧checkpoint／完成本文の扱いを確認 |
+| **P4：P2後、P3と並行可／未着手** | Pieceのsource→意味候補→既存plan／artifactへ接続。`piece_source.py`、`piece_v1c.py`、`piece_v2_generation.py`がowner | `PieceSourceMeaning`等への対応を経て、喜びと負荷、後悔の否定、次回の条件を落とさない本人の文章を作れる。Emlisの声・助言・架空の決意へ変えない。format適格性・正規本文・既存recipe／保存／export同一性は既存責任へ残し、画像fitをモデルへ判定させない |
+| **P5：P2後、P3／P4と並行可／未着手** | Analysisの凍結期間source→根拠付きgraph候補→既存artifactへ接続。`cores/analysis/source_adapter.py`、`intent_compiler.py`、`observed_route_realizer.py`がowner | `ObservedGraph`等への対応を経て、場面・役割・行動・結果と未確認を区別できる。各node／edgeが元記録へ戻り、性格・他者の反応・期間外の出来事を補完しない。graph成立、説明文、保存／再読は別に確認。観測ルートと条件付きIFを混ぜない |
+| **P6：各core接続とM1取得後／未着手** | 同じ4場面でM2統合offline評価。既存runner・結果記録と、既存設計06の検証へ反映 | モデル候補→実admission→core artifactの到達・保留・未対応を個別に示す。M1の良い文章を貼ってM2成功にしない。まず保存済みM1 raw候補を再利用可能か確認し、追加API呼出しを自動で増やさない。品質・時間・全工程tokenを記録し、未対応を平均で隠さない |
+
+**実sourceのprefix：** mashos-api `ai/services/ai_inference/cocolon_meaning_experience_engine/`。sourceの正規ownerは`source_kernel.py::freeze_text_source`、`emlis_thread_source.py::admit_emlis_thread`、Pieceの`PieceSourceSnapshot`／`_saved_field_projection`、Analysisの`freeze_analysis_sources`／`AnalysisSavedRecord`／`AnalysisObservedMapRequest`。上表は実行時にfresh sourceへ戻るための案内であり、今回sourceを変更した記録ではない。
+
+**技術仕様の既存反映先：** `Cocolon_前提資料/designs/cmee/v1/`の`01_shared_kernel_and_runtime_contracts.md`、`02_emlis_v1a_detailed_design.md`、`03_piece_v1c_detailed_design.md`、`04_analysis_v1d_v1e_detailed_design.md`、`05_json_schema_and_versioning.md`、`06_implementation_order_migration_and_verification.md`。各作業に必要な差分だけを更新する。
+
+##### C. 次回P1で実際に終える範囲
+
+1. **4fixtureの材料を投影する。** 原文と元7fieldを保持し、memoとmemo_actionの区別、source ID／版・役割、本人の原入力と独立補足、適格履歴、対象期間・記録時点・根拠箇所を依頼へ渡す。Pieceの既存本文投影はmemo→空行→memo_actionの順。Analysisはsource凍結の同一性と期間境界を保つ。存在しない項目や履歴は補わない。
+2. **sourceを渡せる条件と、現方式で意味を作れる条件を分ける。** P01-N／A02-P1は現有限意味が成立しなかった改善対象である。許可・凍結できたraw sourceまで捨てず、既存意味成立をモデル入力の前提にしない。生成したEmlis応答、Piece本文、Analysis推定を本人sourceへ逆流させない。
+3. **共通依頼と返答の最小形を置く。** core／task、source参照、利用プラン（Free／Plus／Premium）と実際の問い状態、必要な既存方針・出力条件を依頼へ束縛する。返答はraw出力、構造化できた未採用候補、provider／model、終了理由、usage、所要時間、失敗の区別を保持する。未提供のtoken・model revision等は未確認とし、空返答を意味なしの成功へしない。
+4. **外部通信なしのstubで往復する。** 正常な候補、空、不正形式、timeout、token上限終了を分けて残し、候補はNOT_ADOPTED相当の未採用状態を保つ。既存guardを迂回してartifact・checkpoint・DBへ流さない。検査は境界の実際の失敗とsource混入を確認する範囲に絞る。
+5. **E02-Bの二つの役割を区別する。** 固定補足probeとしては材料を投影できるが、C0に実pendingがない事実は維持する。stub成功を実thread回答更新成功へ数えない。既存M1のmessagesはこの準備の都合で書換えない。後の統合用投影に差があれば版と差分を記録する。
+
+P1の完了は「4場面の正規sourceから依頼を作り、未採用候補と失敗をofflineで取り出せる」こと。モデル品質・意味採用・CMEE本統合・商品完成の合格ではない。**今回の保存依頼ではP1のコード作成・stub実行を行っていない。**
+
+##### D. 並行するM1：9Bの4場面比較
+
+- **対象と上限は既承認のまま。** DeepInfra標準`Qwen/Qwen3.5-9B`、固定4ID、最大4リクエスト、利用消費合計50円。認証・残高・提供model・現行単価を実行前に確認し、この上限内で進める。新規チャージ・最低入金条件・追加有料枠を利用消費50円の承認へ含めない。
+- 対象行の固定messagesだけを使用し、初回は手本を足さない。非thinking、出力上限はE02-0／E02-B／P01-N各1,024、A02-P1は3,072tokenの既存案。実際に受理された設定・providerが返したmodel／revision（未提供なら未確認）・raw本文・usage／finish理由・時間・失敗を残す。単価だけを先に品質判定へ使わない。
+- 既存C0との比較に、意味保持・主体／時点／肯否／関係・必要な問い・更新・本人の声・根拠付き構造を使う。まず華恋が明白な欠落を点検し、全出力をMashへ丸投げしない。Mashの観測判断が必要な箇所は、原文・候補・判断点を具体的に並べる。
+- 認証が整わなくてもP1／P2は進める。失敗を自動retryして4リクエスト／50円を超えない。M1は未接続proxyであり、意味採用・checkpoint・保存の成功には換算しない。
+- 公開9B APIの安価な従量料金と、独自LoRA／追加学習版の学習・配備費を分ける。追加学習は未実行、別の比較・費用確認が必要。27Bの再起動・本体確認を次作業へ戻さない。
+
+##### E. 4場面の後にも残す評価と商品接続
+
+4場面だけでは、適格履歴による有料差、実pendingへの回答更新、Premium最大3問、訂正／撤回の連鎖、期間比較、長期性能は確認できない。P3〜P6と合わせ、既存20fixtureの該当範囲と到達可能な実threadで確認する。残り16場面の有料一括実行は、最初の4リクエスト承認に含めない。
+
+Analysisは実loaderの当期最大100記録＋比較期最大100記録を踏まえ、source量・入力token切詰め・根拠脱落・timeout・再試行を測る。Emlisの一回のUI操作だけでなく、意味候補・問い・回答更新・本文までの呼出しを合計し、Piece preview／再生成とAnalysis・将来IFも含む月原価を再計算する。保存済みartifactの再読と新規生成は分け、Piece保存5／30／無制限をモデル生成上限へ流用しない。[小型AI再選定の費用仮定](../observation_learning/model_selection/2026-10-22-three-core/2026-10-23-small-model-reselection.md)は実測で更新するが、価格上限を理由なく引き上げない。月間生成枠・販売価格・課金仕様は別の具体的判断で確定する。
+
+**既知の未対応を残す：** refined Piece、Analysisの一記録に複数ANSWER（現serviceは2件以上を未対応、pureには複数補足の制限もある）、IF／Savedのruntime・保存・表示は未完了。答えを結合して一件に偽装したり、sourceを黙って落としたりしない。わたしマップは性格診断ではなく、もしもルートは廃止ではない。こころ天気・map・期間比較・IF等のconsumer差は設計04の各ownerから解消し、観測map一場面の成功をAnalysis全機能の成功へ広げない。
+
+実DB・公開API／DTO・RN・保存／再表示・削除・認証・quota・本番設定・配備は、このoffline準備の完了とは別の接続工程として扱う。新しいモデル候補のために既存商品の未完了を消さず、既存製品経路へ接続できる具体案になってから、その変更範囲の既存authorityを確認する。
+
+##### F. 新セッションでの再開手順と、更新する場所
+
+1. repositoryの必読入口・**[全機能／全状態](../00_cocolon_current_product_and_state.md)**を読み、本節と[比較README](../observation_learning/model_selection/2026-10-22-three-core/README.md)、[C0実行記録](../observation_learning/trials/2026-10-23-current-four/README.md)へ進む。System Context最新cacheは未生成。8月のtracked snapshotをcurrentへ使わず、fresh原本を直接読む。同じtimeoutの再試行や全体再監査をP1の前提にしない。
+2. 作業ownerのfresh headと差分を確認する。照合点はCocolon [PR30](https://github.com/MassyuRed/Cocolon/pull/30)、branch `agent/three-core-cmee-current-structure-20260815`、本追記前head `504ca1951511e87cf9b0f531bcf26a0561206791`。APIは[PR3](https://github.com/MassyuRed/mashos-api/pull/3)、branch `agent/cmee-v1a-i1sx-source-explicit-20260815`、head `3084c99e5a08d6e475d8a177e62ebf1548e8a0f9`。いずれもopen／draft／unmerged。このSHAを次回の最新headへ固定せず、差分と関係ownerだけを再確認する。
+3. C0の主要保存commit `8becb4cc1ce50ea582109937c362c126d9079cc2`と説明補正 `504ca1951511e87cf9b0f531bcf26a0561206791`、fixture blob、全結果を再利用する。コード中の未実行分岐を実行済みにしない。**次回最初に着手するのはP1。9B認証、モデル最終選定、追加学習の完了を待たない。**
+4. P1を終えた時点で、実際の変更file・検証したsource／失敗・未完了・次の一作業を本節へ置換更新する。同じ変更単位で全体現在地・観測入口・比較入口の案内を同期する。技術仕様は上記既存設計、構造が変われば該当current mapへ反映する。未実行工程に完了印を付けない。
+
+**既承認を確認待ちへ戻さない範囲：** CMEE側の接続仕様・offline準備を先行する方向、9Bの4場面比較とその上限、今回の記録保存。通常の原本読取・P1のoffline準備で同じ進め方の承認を繰り返し求めない。一方、P2で明らかになる意味採用責任・商品contractの変更、新規有料資源、実DB／配備などの別effectを一括承認へ読み替えない。判断が本当に必要なら、先に具体案・対象差分・実結果を作り、既存authorityで足りるか確認したうえで必要な点だけを示す。
+
+今回の反映は既存5文書のみ。P1実装／stub実行／新規C0／9B推論／GPU／チャージ／追加学習／DB／API／RN／配備／mergeは0。文書更新を製品改善へ加点しない。`STRUCTURE_MAP_DELTA_NONE`（作業計画と再開導線のみ、製品構造・接続・型の変更なし）、`ADMINISTRATIVE_ONLY`、`product_credit=0`。今後の各工程を一括自動実行する記録ではない。

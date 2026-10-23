@@ -6,15 +6,17 @@
 
 Cocolon／EmlisAIが、相手自身の価値基準を学び、その人の思考経路を辿って理解を更新する技術を育てるための保存先です。Mashの口調や結論だけを模倣することを目的にしません。
 
-## 現在の再開地点（2026-10-23・現CMEEの実行と、選定前の接続準備）
+## 現在の再開地点（2026-10-23・CMEEのoffline準備を先行、9B比較を並行）
 
-Mashの条件はPlus980円/Premium1,980円が価格上限、27Bは候補外。[小型AI再選定](model_selection/2026-10-22-three-core/2026-10-23-small-model-reselection.md)のQwen3.5-9B従量APIを使う比較へ「進めて」を受領した。
+**Mash承認済みの作業順・変更owner・完了条件・予算・新セッションの再開手順は[最新議事録の具体的計画](../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)。次はP1：既存4場面の凍結sourceをモデル非依存の依頼へ投影し、返答を未採用候補として受け取るoffline境界を既存runner内に作る。** 認証・採用モデル・GPUを待たない。計画の記録まで完了、P1の実装・stub実行は未着手。
 
-[既存4場面の現CMEE側](trials/2026-10-23-current-four/README.md)をAPI3084c99eの正規offline入口で実行。E02-0は本文取得・問いなし、E02-Bは実pendingなしでN/A、P01-Nはsaved_emotion_meaning_not_yet_supported、A02-P1はanalysis_observed_route_not_established。意味未対応を通すための原文変更・架空の問いは0。入力束縛3fileと全結果、依存84blobを保存。9BはAPIキー未設定／ブラウザ未ログインを確認、安全な認証依頼は中断され認証後状態は未確認。API推論/課金0、両条件比較未完了。
+Plus980円／Premium1,980円は価格上限、27Bは候補外。[小型AI再選定](model_selection/2026-10-22-three-core/2026-10-23-small-model-reselection.md)のQwen3.5-9B従量API比較は最大4リクエスト／利用消費50円の既承認範囲で並行する。外部推論・課金・チャージ0。安全な認証依頼が中断された後の認証状態は未確認で、準備側の停止条件にしない。
 
-Mashは続いて「先にCMEE側で学習済みAIを導入する準備でできることないの？選定するまで無理？」と質問した。**選定前でも接続準備は可能**。[同記録§2](trials/2026-10-23-current-four/README.md#2-選定を待たずに進められるcmee側の準備)に現source・意味候補admission・問い更新・三coreの実ownerから先行作業を具体化。現在は任意LLM候補を採用するhookがなく、既存検査は現有限parserから再導出した意味との一致を要求する。型にJSONを入れるだけで接続済みとはしない。
+[現CMEEの4場面と再現コード](trials/2026-10-23-current-four/README.md)は保存済み。E02-0は本文あり／問いなし、E02-Bは実pendingなしでN/A、P01-Nはsaved_emotion_meaning_not_yet_supported、A02-P1はanalysis_observed_route_not_established。C0は再利用し、原文変更・架空の問いで通さない。sourceの許可・凍結と現方式の意味成立を分け、未対応入力もraw sourceからモデルへ渡せるようにする。
 
-次は、モデルへ渡す材料／未採用候補の受取／既存意味型への対応・保留／本人回答更新／三中核artifactの接続仕様とoffline準備を先行し、認証が整った後の9B最大4出力を並行して比較する。9Bの利用消費上限50円・最大4リクエストを維持。production接続・検査緩和・モデル採用・商品quota/価格・追加学習は未実施。観測会は比較で不足した問い／理解更新の実演を補う位置を維持する。
+P1後は意味候補の採用／保留対応を具体化し、Emlisの問い・回答更新、Piece、Analysisの既存ownerへ接続する。現Engineに任意LLM候補hookはなく、現有限parser再導出との一致検査へJSONを詰めるだけでは統合にならない。本統合・モデル採用・商品quota／価格・追加学習は未実施。refined、複数ANSWER、IF／Savedの残件を保持する。観測会は比較で不足した問い・理解更新の実演を補う位置とする。
+
+以下の各回にある27B候補保持・未実行等は記録当時の状態であり、上段の最新決定を優先する。
 
 ## 第4回の対話到達点（2026-10-22）
 

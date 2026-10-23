@@ -1,10 +1,12 @@
 # CMEEと学習済AIの分担案・三中核の比較試験
 
-作成：2026-10-22 JST／華恋。状態：**比較案と架空入力の準備完了、試験未実行**。
+作成：2026-10-22 JST／華恋。10/23現在：**C0保存済み、M1は承認済み未実行。CMEE接続仕様・offline準備を先行し、9B比較を並行する。次はP1。**
 
-Mashの「わかった、作って」により、具体的な入力・作らせる結果・比較方法を作成した。学習済AI＋CMEE接続は既決。本書で提案する責務の詳細、試験条件、候補の採用は、製品実装・契約変更・商品合格として確定しない。推論・GPU起動・追加学習・課金資源取得・API/DB/配置・本番設定の変更は今回0。
+**作業順・変更owner・成果・完了条件・予算・新セッションの最初の1作業は[最新議事録の具体的計画](../../../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)を参照。** 次は4場面のsource投影と未採用候補受取のoffline境界を作る。認証・モデル最終選定を待たない。P1実装は未着手。
 
-> 2026-10-23 Mash決定：Plus980円／Premium1,980円が価格上限、27B除外。[小型AI再選定](2026-10-23-small-model-reselection.md)をcurrentとし、旧高価格推奨と27B再試験を撤回。最初のM1はDeepInfra標準`Qwen/Qwen3.5-9B`従量APIへ変更。利用消費50円・モデル最大4リクエストは未実行案。旧GPU秒ベースの[費用試算](2026-10-23-cost-and-plans.md)・172条件は履歴。既存fixture原文・意味評価・C0最大4は維持。価格/quota/モデル採用/推論実行0。
+10/22にMashの「わかった、作って」により、具体的な入力・作らせる結果・比較方法を作成した。学習済AI＋CMEE接続は既決。本書で提案する責務の詳細、試験条件、候補の採用は、製品実装・契約変更・商品合格として確定しない。10/22作成時点は推論・GPU起動・追加学習・課金資源取得・API/DB/配置・本番設定の変更0。10/23のC0実行と後続承認は下記へ区別して記す。
+
+> 2026-10-23 Mash決定：Plus980円／Premium1,980円が価格上限、27B除外。[小型AI再選定](2026-10-23-small-model-reselection.md)をcurrentとし、旧高価格推奨と27B再試験を撤回。最初のM1はDeepInfra標準`Qwen/Qwen3.5-9B`従量APIへ変更。利用消費50円・モデル最大4リクエストは後続の「進めて」で承認済み・未実行。旧GPU秒ベースの[費用試算](2026-10-23-cost-and-plans.md)・172条件は履歴。既存fixture原文・意味評価・C0最大4は維持。価格／quota／モデル採用／外部モデル推論0。
 
 
 > 2026-10-23実行：Mashの「進めて」を受け、[現CMEE側の4場面](../../trials/2026-10-23-current-four/README.md)を正規offline入口で確認。Emlis初回本文あり／問いなし、補足は実pendingなしでN/A、Piece・Analysisは実理由付きUNAVAILABLE。9B APIは認証未完了・推論0、両条件比較は未完。Mashの続く質問を受け、同記録§2へモデル選定前に進められるsource投影・未採用候補・意味admission・回答更新・三core接続の先行準備を具体化した。任意LLM候補の受け口は現Engineに未実装。
@@ -18,7 +20,7 @@ Mashの「わかった、作って」により、具体的な入力・作らせ�
 | [case_index.json](case_index.json) | 場面の由来・独立性、現方式の制限、最初の4場面 | 実行者用。採点側の情報として扱う |
 | [review_guide.md](review_guide.md) | 保持すべき意味、してはいけない昇格、比較記録欄 | 採点者用。prompt・手本・検索対象に含めない |
 
-まず試す具体的な4場面は次。これは実行の提案であり、今回取得した出力ではない。
+最初の比較対象は次の4場面。下表は期待する役割で、実出力は[C0実行記録](../../trials/2026-10-23-current-four/README.md)へ分離して保存済み。M1は未実行。
 
 | ID | 実際の材料 | 最初に見たい結果 |
 |---|---|---|
@@ -109,14 +111,14 @@ API prefixは`ai/services/ai_inference/`。本書のモデル出力欄は**offli
 
 emotion_details等のwire表現は正規ownerへ合わせ、原文・意味・強さを保持する。fixtureの可視7field以外のowner/version等は実行者が比較用IDから束縛する。Fixture shapeとnative request shapeは同一と装わない。sourceの許可範囲が異なる場合は「同一条件」の結果へ合算しない。
 
-保存・API・実Authを伴う`analysis_observed_service.generate_saved`や通常Piece preview APIはこのoffline比較に使わない。pure入口成功はDB・認証・本人履歴往復の成功ではない。ここまでの呼出しコード/adapter実装を今回作ったとは主張しない。
+保存・API・実Authを伴う`analysis_observed_service.generate_saved`や通常Piece preview APIはこのoffline比較に使わない。pure入口成功はDB・認証・本人履歴往復の成功ではない。10/22作成時点では呼出しコード／adapter未作成。10/23にC0のfixture bindingを実装・保存したが、任意モデル候補のadmission adapterは未実装。
 
 ## 7. 比較の実施手順
 
-1. Cocolon/APIのfresh refを記録し、今回固定点からの対象source差分を確認する。モデルは実取得元、revision、ファイル名、hash、量子化、推論backend/版、prompt template、context上限を記録する。モデル名や27Bだけを同一性にしない。
+1. Cocolon/APIのfresh refを記録し、今回固定点からの対象source差分を確認する。モデルは実取得元、revision、精度、推論設定、context上限を記録する。自己管理ならファイル名／hash／backend版も採る。公開APIが返さない情報は未確認とし、架空のhashやrevisionを補わない。モデル名だけを同一性にしない。
 2. 最初の4IDをfreezeする。モデルへ渡すのは該当行のmessagesだけ。review_guide、case_index、他行、全体README、原文を読むためのGitHub検索機能をモデルへ与えない。試験内でtool/RAGを使わない。
 3. M1は重み・prompt・sampling・context/output上限を固定して各1回。温度0を第一案とし、未対応なら最小の対応設定を記録する。未取得のseed決定性を主張しない。長さ上限はEmlis1024/ Piece1024/ Analysis3072生成tokenを案とする。切れたらTRUNCATEDとして保存し、同条件の失敗を黙って再生成しない。
-4. C0は同じ可視sourceを既存pure contractへ束縛して各1回。必要なfixture bindingが未作成ならNOT_RUN_ADAPTER_REQUIRED、実行環境不備はINFRA_ERROR。本文が出ない実能力制約はUNAVAILABLE等の実status/reasonも残す。
+4. C0は保存済み4場面を再利用し、新セッションだけを理由に再生成しない。source変更で必要な再検証は範囲を特定する。当初の実行手順は同じ可視sourceを既存pure contractへ束縛して各1回。必要なfixture bindingが未作成ならNOT_RUN_ADAPTER_REQUIRED、実行環境不備はINFRA_ERROR。本文が出ない実能力制約はUNAVAILABLE等の実status/reasonも残す。
 5. 生成元を伏せたA/Bで本文を読む。原文sourceは採点者へ見せる。Pieceの第三者理解では、最初にPieceだけから内容を説明できるか見て、その後に原入力と照合する。すべての根拠と失敗を両条件へ同じ基準で記録する。
 6. 最初の4場面の結果から、残りのどの場面で追加確認する必要があるかを選ぶ。2条件に共通して出力がある行だけの比較と、20行全体に対する到達範囲を両方示す。出力できない行を消して成績を良く見せない。
 
@@ -154,9 +156,11 @@ PY
 - 自己host案：GPU保持時間、ロード/idle、実処理時間、同時処理、保存/転送/運用を含む月費用を利用量別に算出。1リクエストの推論秒だけを運用原価にしない。
 - 速度：初回応答、問い、回答後更新、Piece本文、期間Analysisの時間・token、load時間、実batch条件を別に記録。少数4件の最大をp95と呼ばない。
 
-次の有料実行を具体化する時点で、実験の金額・時間・リクエスト数の上限を示す。**今回の有料実行上限は0**。費用未計算のままPodを起動する指示ではない。
+10/23のM1上限は**最大4リクエスト／利用消費50円、承認済み未実行**。認証・残高と実行時単価を確認し、追加チャージや再試行で上限を広げない。固定GPUなし。残り16場面・新規有料資源はこの上限へ混ぜず、具体化して別に扱う。10/22作成時の有料実行上限0は、後続のMash指示でこの限定比較へ更新された。
 
-## 9. 今回の確認点・根拠・完了
+## 9. 10/22提案作成時の確認点・根拠・完了（履歴）
+
+現行の実績・承認・未着手状態は本書先頭と[10/23計画](../../../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)を優先する。以下を現在の試験未承認・C0未実行へ戻す根拠にしない。
 
 - Cocolon PR30：`5d14a2930dc21a66578d577b7238585c903b807a`。API PR3：`a536e50ee284785f585ac73329ef2947dca8bba9`。両方open/draft。新しい配置確認はしていない。
 - [全体現在地](../../../00_cocolon_current_product_and_state.md)、[10/20方針を含む週次](../../../weekly_reviews/Cocolon_Weekly_Review_20261017.md)、既存観測教材と27B8出力の記録へ接続。
