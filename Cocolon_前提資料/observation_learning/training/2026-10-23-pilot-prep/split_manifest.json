@@ -220,12 +220,14 @@
       "rows": 2
     }
   ],
-  "reserved_training_families": [
+  "reserved_training_families": [],
+  "withdrawn_sessions": [
     {
       "family": "reading-group-own-reception",
       "source_session": "OBS-20261024-002",
       "rows": 0,
-      "note": "同じ人の二記録を初回提示。観測・問い・回答は未取得で、学習targetなし。全派生を独立未知評価へ数えない。"
+      "note": "利用場面の後付けを指摘され、D04で観測依頼を取り下げ。既存18行に未含有。原入力・事前設定・経過は保存し、次の観測会・学習対象・独立未知評価へ数えない。",
+      "status": "WITHDRAWN_NOT_FOR_TRAINING"
     }
   ]
 }
