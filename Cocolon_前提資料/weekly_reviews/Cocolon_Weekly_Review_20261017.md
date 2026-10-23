@@ -1,4 +1,4 @@
-> **2026-10-23現在：P1〜P5の限定内部準備は後続Pまで完了。次のモデル比較M1はMashの残高利用希望によりRunpod優先（後続Q）。P6はM1候補取得後の統合評価で未着手。GPU構成・時間／総消費上限の具体化前で、有料起動は未実施。**
+> **2026-10-23現在：[Runpod 9B M1実取得・全本文診断](#20261023-qwen9b-runpod-m1-results)。P1〜P5の限定内部準備を維持。M1は4応答を取得済みだが、根拠外補完・欠落が残り、そのまま採用できる品質ではない。次のP6/M2統合offline評価・追加学習は未実施。GPU停止完了と実総消費は未確認。**
 
 > **2026-10-20 観測学習の保存先を作成：[観測技術の記録](../observation_learning/README.md)。第1回は写真展示会の架空事例で、対話原文・Mashの教示・華恋の整理を分けて保存した。経験は探る場所と価値観の持ち込みに気づくために使い、人物タイプの統計分類を目的にしない。モデル学習は未実行。**
 
@@ -2362,3 +2362,19 @@ Mashが27B／120B試験時に使ったRunpodに残高があるため、同じ提
 Runpod公式billing／Pod pricingとQwen公式9B model cardを確認。残高からcomputeとstorageを消費し、停止中のpersistent storage費は残り得る。先の4回／50円はDeepInfra API枠で、GPU時間課金の予算ではない。次セッションで現物をread-only確認し、重み形式・backend／GPU・VRAM／context／時間上限／総消費上限／終了Stopと保存費を具体化する。起動・download・推論・追加チャージ・課金設定変更は今回0。
 
 小型AI再選定資料／全機能00／本計画の現在案を同期。P1〜P5の限定内部実装は完了済みで、P6はM1候補取得後の三中核統合評価。モデル選定前の準備と実モデル試験を混同しない。STRUCTURE_MAP_DELTA_NONE（文書上の試験先希望、runtime／接続／public契約の実変更なし）、ADMINISTRATIVE_ONLY、商品0、automatic_progression=false。
+
+
+<a id="20261023-qwen9b-runpod-m1-results"></a>
+## R. 2026-10-23 — Runpod A40でQwen3.5-9B M1を4件取得、品質不足を診断
+
+Mashが画面でA40 48GB/GPU単価$0.59/h、Container50GB＋Volume50GB /workspace、PyTorch/Jupyterを選択しPodを起動。華恋の手順で専用Python3.12環境にvLLMを導入し、モデル版を記録してtext-only／BF16／非thinking／context8192／同時1／eagerで起動した。19:17の画面でApplication startup complete、19:25に結果JSONを受領。アカウントの直接操作・追加チャージは華恋側0。起動前残高の画面表示は$5.15。GPUの総稼働時間・実総消費・Stop完了は独立取得しておらず、停止案内済みを停止済みへ変えない。
+
+[受領原本・全4場面の本文診断と技術条件](../observation_learning/trials/2026-10-23-qwen9b-m1/README.md)へ保存。M1要求は19:23:13.933〜19:24:44.715 JST、4件各1回、temperature0、seed20261023、JSON object、非stream。全件HTTP200／finish_reason stop／JSON構文有効、打切りなし。全4request.messagesは固定commit371bacの該当4行と一致し、raw→response→parsedも一致。E02-Bは固定補足probeで実thread回答ではない。vLLM0.32.0／torch2.13.0+cu132／A40 46068MiB、記録model revision c202236235762e1c871ad0ccb60c8ee5ba337b9a。起動設定と重みSHAは原本内の記録で、応答APIだけによる全実引数・実weight hashの独立証明ではない。
+
+要求時間はE02-0 14.371秒／E02-B 6.182秒／P01-N 7.793秒／A02-P1 62.261秒、合計90.607秒。入力2373＋出力2432＝4805token。これを準備・読込・待機込みGPU総費用へ換算しない。旧DeepInfra4回/50円をGPU起動予算へ流用しない。
+
+本文診断：E02-0は本人の喜びの焦点が曖昧なのに「役割を全うした達成感」「後輩の成長を見守れる安心感」を断定。E02-Bは本人補足を一部反映する一方、旧理由が自己抑制だった変更履歴を創作。Pieceはcanonical_textがmemoと完全一致し、頼まれて同僚の発表資料を一緒に直した行動が全欠落。Analysisは面倒さ→不安などの未明示因果、返事待ち→任務完了、使いやすさ未確認の欠落／unknowns=[]を含む。華恋＋2読取補助による診断で、blind A/B・Mash正式human Product Readではない。今回の出力をそのまま採用できる品質とはしないが、9B全用途や接続・追加学習後の品質までは確定しない。
+
+C0/P1〜P5の結果・期待は変更0、再生成0。P6/M2は保存raw候補と現admission／private意味型を照合し、根拠外補完・欠落を採用しないoffline評価で、今回未着手。モデル出力の手修正をモデル成功へ変えない。追加推論・再試行・他モデル・追加学習・通常アプリ接続／本番host決定・Render／Supabase／API／DTO／RN／product source／merge／deployは0。
+
+Rule18 LEVEL_1の受領・既存試験記録同期。華恋が統合・反映、補助は読取のみ。primary=TECHNICAL_CREDIT（M1の実取得のみ）、product_credit=0／PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=false。STRUCTURE_MAP_DELTA_NONE（資料所在だけ登録、製品runtime／型／接続差分なし）。現在地00、全file地図01A、比較入口／小型再選定、本weekly、trial原本／READMEを同一変更単位で保存する。

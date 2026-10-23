@@ -1,6 +1,6 @@
 # 価格上限980円／1,980円に合わせた小型モデルの再選定
 
-2026-10-23 JST／華恋。モデル推論・有料資源取得・価格／商品quota変更は未実行。
+2026-10-23 JST／華恋。Runpod A40のM1は4件取得・全本文診断済み。今回の出力には重大不足、P6統合・追加学習・価格／商品quota変更は未実施。[実結果](../../trials/2026-10-23-qwen9b-m1/README.md)。
 
 ## 1. Mashの決定と、前案の訂正
 
@@ -10,7 +10,7 @@ Mashの明示条件は、**Plus月980円／Premium月1,980円が上限、これ�
 
 ## 2. 出す候補と推奨順
 
-**10/23 Mashの希望を受領：次のQwen3.5-9B試験はRunpodを優先する。** Mashは27B／120B試験で利用したRunpodに残高があるため、同じ提供元での試験を希望。公開重みをGPU Pod上で動かす方式にできる。旧DeepInfra標準従量API案は比較用の選択肢として保持し、試験先の第一候補から外す。自己管理・追加学習用のQwen3.5-4B別候補と、27B除外・価格上限は維持。Runpodの現在残高・Pod状態・空きGPU・実単価は未照会。
+**10/23 Mashの希望を受領：次のQwen3.5-9B試験はRunpodを優先する。** Mashは27B／120B試験で利用したRunpodに残高があるため、同じ提供元での試験を希望。公開重みをGPU Pod上で動かす方式にできる。旧DeepInfra標準従量API案は比較用の選択肢として保持し、試験先の第一候補から外す。自己管理・追加学習用のQwen3.5-4B別候補と、27B除外・価格上限は維持。後続のMash画面操作でA40 48GB・GPU表示$0.59/h・起動前残高$5.15、Volume50GB /workspaceを確認し、M1を実行した。現残高・実総消費・GPU停止完了は未確認。
 
 | 候補 | 確認できた現実の選択肢 | 採否に必要な確認 |
 |---|---|---|
@@ -96,13 +96,13 @@ Qwen4Bを追加学習用に残す理由は、公開重み、商用・改変可�
 
 DeepInfraのCustom LLMはGPU時間課金で、LoRAはbase対応・単価の確認が別に必要。4B／9BのCocolon独自LoRAを上の共用API単価で運用できると確認した事実はない。学習費、学習後の自己host／custom endpointのscale-to-zero費用を別の小規模上限で評価する。未確認の独自版を販売構成として確定しない。
 
-## 7. 次の最小試験
+## 7. 最初のM1実行結果と次の範囲
 
-27Bの試験は行わない。既存4場面E02-0／E02-B／P01-N／A02-P1を、C0 current CMEE最大4出力と、M1 Qwen3.5-9B未接続proxy最大4出力で比べる案へ変更する。可視原入力・採点の意味条件・未知family区分は維持し、モデルを小さくするために原文を言い換えない。
+27B除外を維持。既存4場面E02-0／E02-B／P01-N／A02-P1のM1 Qwen3.5-9B未接続proxyをRunpodで各1回実行し、4件の原本・本文を[結果記録](../../trials/2026-10-23-qwen9b-m1/README.md)へ保存した。全HTTP200／stop／JSON構文有効、要求90.607秒、入力2373／出力2432token。根拠外補完・行動欠落・未明示因果・unknown欠落により、この出力のまま採用しない。固定原入力は変更0。C0は保存原本を再利用、再実行0。E02-Bは実thread回答でなく固定補足probe。
 
 Runpodでの初回候補はQwen3.5-9B。公開重みの版・形式・量子化、実GPU/VRAM、実行backend/version、context／非thinking／出力上限・JSON設定を固定し、入力／出力token・全本文・実時間・GPU稼働時間を記録する。前回27BはA40とllama.cpp b11784だったが、現在のPod・9B対応backendの再利用可否は未確認。既存4場面と評価条件を維持し、JSON成功を意味採用や商品合格にしない。
 
-**旧最大4リクエスト／利用消費50円はDeepInfra API向けの既承認枠。RunpodのGPU起動予算へそのまま移さない。** RunpodはGPU稼働と保存領域を残高から消費し、準備／model load／待機も稼働時間に含まれる。次セッションではread-onlyで現在Pod・単価・残高・保存構成を確認し、GPU種別／時間上限／総消費上限／終了後Stopと保存費を含む具体案を確定する。既存残高を使う希望は、未確定のGPU起動や追加チャージ・残り16場面の一括実行承認ではない。今回は起動・推論・ダウンロード・課金操作0。
+**旧最大4リクエスト／利用消費50円はDeepInfra API向けの既承認枠。RunpodのGPU起動予算へそのまま移さない。** RunpodはGPU稼働と保存領域を残高から消費し、準備／model load／待機も稼働時間に含まれる。後続のMash操作でPod起動・モデルdownload・M1推論を実施した。起動設定／環境と要求時間は結果原本に記録されているが、準備・読込・待機込みのGPU総時間／実総消費・停止完了は未確認。追加チャージ・残り16場面・再試行は0。次は保存候補をCMEEの現admission／意味型へ照合するP6/M2 offline評価で、今回未着手。重み／backend版／sampling等の記録と、APIだけで独立確認できない範囲を結果記録で区別する。
 
 費用面では980円／1,980円内を比較できる具体候補が得られた。**品質面の採用は、同じ三中核の実出力で決める。** 安いAPIを見つけたことを商品完成・需要の証明にしない。
 
@@ -114,6 +114,6 @@ Runpodでの初回候補はQwen3.5-9B。公開重みの版・形式・量子化�
 - [UnslothのQwen3.5追加学習](https://unsloth.ai/docs/models/qwen3.5/fine-tune)、[Gemma4公式](https://ai.google.dev/gemma/docs/core/model_card_4)。
 - 商品資料照合点：Cocolon PR30 `54d34985ba180e54b521549100fc1f9fcc72f309`、API PR3 `3084c99e5a08d6e475d8a177e62ebf1548e8a0f9`。System Context最新cache未生成・既存timeoutの状態は変更せず、fresh原本を直接読んだ。
 
-STRUCTURE_MAP_DELTA_NONE（source／runtime接続／契約変更なし）。価格上限・27B除外はMash決定、9B API優先／4B育成候補・利用量・試験予算は華恋の提案。ADMINISTRATIVE_ONLY、product_credit=0、automatic_progression=false。
+STRUCTURE_MAP_DELTA_NONE（source／runtime接続／契約変更なし）。価格上限・27B除外・Runpod残高利用希望はMash決定。9B未接続M1の実取得は限定TECHNICAL_CREDIT、商品品質合格は0。4B育成候補・利用量は華恋案。product_credit=0、automatic_progression=false。
 
 Runpod優先への変更根拠：2026-10-23 Mashの「残高まだあるからrunpodがいい」。公式[残高・計算資源・保存の課金](https://docs.runpod.io/accounts-billing/billing)、[Pod料金と停止中保存費](https://docs.runpod.io/pods/pricing)、[Qwen3.5-9B公開重み・対応backend](https://huggingface.co/Qwen/Qwen3.5-9B)を確認。単価・機材構成は次の現物確認へ残す。試験場所の希望で、本番hostやモデル採用の決定ではない。

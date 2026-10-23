@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-23 JST（最新差分はMash承認のAnalysis P5限定offline意味snapshot／文章・図／private保存再読。対象9file905成功、通常Analysis／実モデル未接続。Piece P4・Emlis profile2・旧Q2制限を維持）。全Cocolon作業の必読原本。
+更新日：2026-10-23 JST（最新差分はRunpod A40でのQwen3.5-9B M1実取得4件と全本文診断。取得4/4・品質に重大不足、P6統合／追加学習は未実施。P1〜P5の限定内部実装は維持）。全Cocolon作業の必読原本。
 
 ## 1. この資料の役割と更新方法
 
@@ -58,7 +58,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | Emlis有料拡張 | Plusの適格本人履歴、Premiumの逐次問い・本人が修正／否定できる根拠付きframe、条件付きLayer3を実装 | 履歴が使えるコードと、本人固有の深さ・有料差の体感を分ける。有料商品品質は未受入れ |
 | 配置と本人確認 | 共通APIは10/23にPiece限定overlay3577d7fdでLive、Emlis内容は土台10/10版5c8bd8eを継承。u353〜355は未配置 | Piece作業でservice identityのみ確認。Emlisの本人実機/品質は今回再検証なし。10/10の本人表示1件はMash評価で不合格。同じ保存本文の履歴再表示まで確認済みにしない |
 | 27B旧試験（選定除外） | 10/23 Mash決定で27Bを候補から除外。`Qwen3.8-27B-Q4_K_M.gguf`の試験は履歴として保持。10/21、架空相談2題×実演あり／なし×初回／回答後＝8出力の推論試験 | 追加情報の取込みは見られたが、未確認な意味の補完、近い問いの再提示、更新記録の欠落が残る。実演ありの一貫した優位未確認。重みの追加学習0、27BのCMEE統合0、他core適性未検証、製品採用未確定。Pod停止はMash報告受領済み |
-| 観測教材 | 観測・一点への問い・本人回答で何を修正するかを記録。相談教材と、感情選択＋その時点で見える実体寄り入力を区別 | 教材蓄積は学習実施ではない。[三中核の分担・比較案](observation_learning/model_selection/2026-10-22-three-core/README.md)を作成。20比較場面（新規評価候補15・既知派生4・境界1、独立した新規候補5family）、最初の4場面、可視入力と採点条件を分離して保存した。現CMEE側の4場面は10/23にoffline実行済み（本文1/N_A1/未対応2）。9B API・本統合・追加学習は未実行。自然な入力分布・一般化・学習効果は未実証。最新教材は`observation_learning/README.md`から辿る |
+| 観測教材 | 観測・一点への問い・本人回答で何を修正するかを記録。相談教材と、感情選択＋その時点で見える実体寄り入力を区別 | 教材蓄積は学習実施ではない。[三中核の分担・比較案](observation_learning/model_selection/2026-10-22-three-core/README.md)を作成。20比較場面（新規評価候補15・既知派生4・境界1、独立した新規候補5family）、最初の4場面、可視入力と採点条件を分離して保存した。現CMEE側の4場面は10/23にoffline実行済み（本文1/N_A1/未対応2）。[Runpod 9B M1](observation_learning/trials/2026-10-23-qwen9b-m1/README.md)は4件取得済み（HTTP200／stop／JSON構文有効4/4）。Emlisの根拠外補完・Pieceのmemo_action欠落・Analysisの因果創作とunknown欠落があり、そのまま採用できる品質ではない。本統合P6・追加学習は未実施。自然な入力分布・一般化・学習効果は未実証。最新教材は`observation_learning/README.md`から辿る |
 
 詳細owner：[Emlis map](current_structure/01_emlis_ai_current_structure.md)、[CMEE map](current_structure/04_cmee_current_structure.md)、[Emlis詳細設計](designs/cmee/v1/02_emlis_v1a_detailed_design.md)、[観測教材](observation_learning/README.md)。古いmap本文の「問い未実装」は後続Q3／Q4・実sourceと矛盾する旧状態であり、現在へ戻さない。
 
@@ -130,11 +130,11 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 10/23のプラン設定read-only照会ではPlus表示は月300円、Premium月980円（RN/API fallbackも同額）。実ストア価格・税込区分は未確認。Pieceの5/30/無制限は保存数で、新AI生成数の上限ではない。Emlisの1/3問もthread単位であり、月間生成費を制限しない。
 
-**10/23 Mash決定：Plus980円／Premium1,980円が価格の上限（これでも高い）、27Bは候補外。** 旧1,980/3,980円の推奨と27B再試験案を撤回。[小型AI再選定・全core原価](observation_learning/model_selection/2026-10-22-three-core/2026-10-23-small-model-reselection.md)では、Mashの残高利用希望により、次のQwen3.5-9B試験はRunpod優先へ変更。現Pod／単価／残高／backend再利用可否は未照会で、GPU時間・総消費・停止条件は具体化前。DeepInfra既製APIは比較資料へ残し、Qwen3.5-4Bは自己管理／追加学習用の別候補とする。980/1,980円を売価の比較基準とし、Free30/Plus100/Premium150セッション等の利用量でも、以前のDeepInfra既製APIを仮定した月原価は約5.57/37.07/147.28円で、Runpod自己hostの原価ではない。無料者・固定基盤・税相当留保・ストア費を含めて計算した。これらは利用量感度で、商品quota変更・採用・品質合格ではない。独自追加学習版の配備に公開API単価を流用せず、育成費・学習後のhost費用は別確認。旧費用資料は履歴として参照する。
+**10/23 Mash決定：Plus980円／Premium1,980円が価格の上限（これでも高い）、27Bは候補外。** 旧1,980/3,980円の推奨と27B再試験案を撤回。[小型AI再選定・全core原価](observation_learning/model_selection/2026-10-22-three-core/2026-10-23-small-model-reselection.md)では、Mashの残高利用希望により、Qwen3.5-9BのM1をMashがRunpod A40で実行し、4件の受領原本と全本文を照合済み。画面上のGPU単価は$0.59/h、起動前残高$5.15。受領原本のvLLM0.32.0／BF16／非thinking／context8192／温度0で、要求90.607秒・4805token。インストール・読込・待機を含むGPU総時間・総消費・Stop完了は未確認。DeepInfra既製APIは比較資料へ残し、Qwen3.5-4Bは自己管理／追加学習用の別候補とする。980/1,980円を売価の比較基準とし、Free30/Plus100/Premium150セッション等の利用量でも、以前のDeepInfra既製APIを仮定した月原価は約5.57/37.07/147.28円で、Runpod自己hostの原価ではない。無料者・固定基盤・税相当留保・ストア費を含めて計算した。これらは利用量感度で、商品quota変更・採用・品質合格ではない。独自追加学習版の配備に公開API単価を流用せず、育成費・学習後のhost費用は別確認。旧費用資料は履歴として参照する。
 
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
-| AI選定・観測教材 | Mashの追加範囲への「進めていいよ」を受領し、本人明示のJOY_ASPECT不明と二行動を、新規・明示offlineの`emlis_candidate_snapshot.v2`へ限定実装した。原E02-0は四claim／unknown statement→joy対象／過去の喜びと記述present／原格4つ／OMITTED主体／te連結とconcessionを、既存作者の実本文・private保存再開まで保持する。E02-0自身は問いなしENDで、架空pendingを作らない。 対象146成功（snapshot70/P1旧22/旧application54）は前回の限定結果。今回CIの共有owner同期漏れだけを修復し、失敗した既存1検査は成功。承認済みP4 Pieceの元7field・6claim／5文・2関係・全選択保持とprivate再読を限定実装。対象339成功、通常B8と一般文章品質は未完。P5 Analysisは承認済み限定offline実装をAPI666b285へ反映。18保持単位／11原文group／8source scope／unknown／負荷注記／全選択を同一private文章・図と保存再読へ通し、対象905成功。通常経路・一般文章品質は残る。Q2旧cap4の混在5 contribution本文不可は残る。旧profile再現、通常非有効化を維持。C0/P1/P2原結果は保持。E02-B実pendingなしN/A。Piece／Analysis新admissionは限定offlineのみ実装、通常接続と正式Product Readは未完。次の9B試験は残高利用のRunpod優先。GPU構成・時間／総消費上限・停止条件は未確定、有料起動未実行。旧DeepInfra APIの4回/50円枠はGPU予算へ流用しない。価格上限980/1,980円・27B除外を維持 |
+| AI選定・観測教材 | Mashの追加範囲への「進めていいよ」を受領し、本人明示のJOY_ASPECT不明と二行動を、新規・明示offlineの`emlis_candidate_snapshot.v2`へ限定実装した。原E02-0は四claim／unknown statement→joy対象／過去の喜びと記述present／原格4つ／OMITTED主体／te連結とconcessionを、既存作者の実本文・private保存再開まで保持する。E02-0自身は問いなしENDで、架空pendingを作らない。 対象146成功（snapshot70/P1旧22/旧application54）は前回の限定結果。今回CIの共有owner同期漏れだけを修復し、失敗した既存1検査は成功。承認済みP4 Pieceの元7field・6claim／5文・2関係・全選択保持とprivate再読を限定実装。対象339成功、通常B8と一般文章品質は未完。P5 Analysisは承認済み限定offline実装をAPI666b285へ反映。18保持単位／11原文group／8source scope／unknown／負荷注記／全選択を同一private文章・図と保存再読へ通し、対象905成功。通常経路・一般文章品質は残る。Q2旧cap4の混在5 contribution本文不可は残る。旧profile再現、通常非有効化を維持。C0/P1/P2原結果は保持。E02-B実pendingなしN/A。Piece／Analysis新admissionは限定offlineのみ実装、通常接続と正式Product Readは未完。9BのRunpod M1は4件取得・全本文診断まで完了。今回の出力には重大不足があり、保存rawをP6で現admission／意味型へ照合する統合評価は未着手。追加推論・追加学習・通常接続は未実施、GPU停止完了・実総消費は未確認。旧DeepInfra APIの4回/50円枠はGPU予算へ流用しない。価格上限980/1,980円・27B除外を維持 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。u353〜355のコードと配置差を保持 |
 | Analysis | 最新内容修正版の配置差、6401本人生成・再表示・比較、複数ANSWER採用、一般理解、有料差、IF／Savedの未実装 |
 | Piece | API private構成はLive。正本privacy差は3084c99eで解消。本人保存に必要なRN sourceはbranch agent/piece-testflight-private-20261023@87151へ固定、既存iOS workflowによる署名Archive/TestFlight送信1回は個別判断前・未実行。本人保存→同owner履歴/詳細、実Photos/Share、Android/backend receipt、商品受入れは残る |
@@ -167,9 +167,9 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 10/23費用差分：上記固定headのsourceと27B原本、現行プラン表示設定、公式GPU・基盤・ストア手数料を照合。全体原価を仮定付き172条件で計算し、料金・生成枠と4場面の実行予算を提案した。今回DBはプラン設定のread-onlyのみ、本人入力取得／変更0、GPU／有料推論／チャージ／price/quota変更0。STRUCTURE_MAP_DELTA_NONE（接続実装・商品contract差分なし）、product_credit=0。
 
-10/23再選定差分：Mashの価格上限・27B除外を受領し、高価格案を撤回。Qwen9B公開API単価・公開重み・非thinking・データ方針と4B追加学習手段を公式原典から確認し、全三中核の仮tokenで再計算した。既製API原価と独自育成版を分離。価格/商品quota/モデル採用/本統合/有料実行の実変更0。STRUCTURE_MAP_DELTA_NONE、ADMINISTRATIVE_ONLY、product_credit=0。
+10/23 M1実行前の再選定差分：Mashの価格上限・27B除外を受領し、高価格案を撤回。Qwen9B公開API単価・公開重み・非thinking・データ方針と4B追加学習手段を公式原典から確認し、全三中核の仮tokenで再計算した。既製API原価と独自育成版を分離。価格/商品quota/モデル採用/本統合/有料実行の実変更0。STRUCTURE_MAP_DELTA_NONE、ADMINISTRATIVE_ONLY、product_credit=0。
 
-10/23接続準備差分：固定4fixture・source84blobのC0実結果を再利用し、Mash承認の先行offline準備と並行9B比較について、作業順・変更owner・成果・完了条件・予算・新セッションの最初の1作業を最新議事録へ具体化した。今回の変更は既存5文書のみ。後続のMashの指摘を受け、先行準備はCMEE内部の仕様・材料整理と固定仮データ確認で、実モデル接続を含まないと明確化した。P1実装・stub実行・新規C0・外部9B推論・費用・本人DB・production実装／契約／稼働変更0。STRUCTURE_MAP_DELTA_NONE（作業計画・再開導線のみ）。先の限定TECHNICAL_CREDITはoffline束縛／C0出力だけ、今回ADMINISTRATIVE_ONLY、product_credit=0、実モデル比較未完了。
+10/23 M1実行前の接続準備差分：固定4fixture・source84blobのC0実結果を再利用し、Mash承認の先行offline準備と並行9B比較について、作業順・変更owner・成果・完了条件・予算・新セッションの最初の1作業を最新議事録へ具体化した。今回の変更は既存5文書のみ。後続のMashの指摘を受け、先行準備はCMEE内部の仕様・材料整理と固定仮データ確認で、実モデル接続を含まないと明確化した。P1実装・stub実行・新規C0・外部9B推論・費用・本人DB・production実装／契約／稼働変更0。STRUCTURE_MAP_DELTA_NONE（作業計画・再開導線のみ）。先の限定TECHNICAL_CREDITはoffline束縛／C0出力だけ、今回ADMINISTRATIVE_ONLY、product_credit=0、実モデル比較未完了。
 
 10/23内部準備の最新差分：Mashの追加範囲への「進めていいよ」を受領し、本人明示のJOY_ASPECT不明と二行動を、新規・明示offlineの`emlis_candidate_snapshot.v2`へ限定実装した。原E02-0は四claim／unknown statement→joy対象／過去の喜びと記述present／原格4つ／OMITTED主体／te連結とconcessionを、既存作者の実本文・private保存再開まで保持する。E02-0自身は問いなしENDで、架空pendingを作らない。 今回は既存production10（作者/共有型/独立readerを含む）、新fixture1、同family test拡張。全pathは01A、型は設計05、全実出力/失敗/制限はtrial JSON.targeted_unknown_action_v2。原E02の有限文法と既受理event/feelingの併存に閉じる。一般unknown/ACTION、新要素自身の変更・解消・依存削除はHOLD/UNSUPPORTED。旧Q2 cap4では混在更新の5 contributionを提供できず意味保存後BODY_UNAVAILABLEとなる制限を残し、capを緩めない。現在のQ3実serviceでの隔離SQL/RPC保存・中断再開成功と区別する。実モデル／有料推論／重み／学習／本人DB／Render／通常application有効化／公開API・DTO・RN変更／merge／deployは0。限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT、product_credit=0／PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=false。
 

@@ -1,12 +1,12 @@
 # CMEEと学習済AIの分担案・三中核の比較試験
 
-作成：2026-10-22 JST／華恋。10/23現在：**C0/P1/P2原結果を保持し、承認済み限定Emlis snapshot内部実装と隔離検証まで完了。M1は既承認未実行。**
+作成：2026-10-22 JST／華恋。10/23現在：**P1〜P5の限定内部準備を維持。[Runpod 9B M1](../../trials/2026-10-23-qwen9b-m1/README.md)は4件取得・全本文診断まで完了。出力に重大不足があり、P6統合・追加学習は未実施。**
 
-**現在の再開先は[latest weekly L](../../../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-targeted-unknown-action-v2)。** Mashの追加範囲への「進めていいよ」を受領し、本人明示のJOY_ASPECT不明と二行動を、新規・明示offlineの`emlis_candidate_snapshot.v2`へ限定実装した。原E02-0は四claim／unknown statement→joy対象／過去の喜びと記述present／原格4つ／OMITTED主体／te連結とconcessionを、既存作者の実本文・private保存再開まで保持する。E02-0自身は問いなしENDで、架空pendingを作らない。 対象146成功、正式Product Read0/3。旧profile/C0/P1/P2を保持し、通常有効化/実モデル/実DB/Renderは0。新要素自身の一般更新はHOLD、Q2旧cap制限と商品品質は残件。
+**現在の再開先は[latest weekly R](../../../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-qwen9b-runpod-m1-results)と[Runpod M1実結果](../../trials/2026-10-23-qwen9b-m1/README.md)。** 以下の日付付き内部実装記録と旧API案は履歴。Emlis profile2・Piece P4・Analysis P5の限定offline実装を維持し、M1の実出力をそのまま商品合格へ昇格しない。
 
 10/22にMashの「わかった、作って」により、具体的な入力・作らせる結果・比較方法を作成した。学習済AI＋CMEE接続は既決。本書で提案する責務の詳細、試験条件、候補の採用は、製品実装・契約変更・商品合格として確定しない。10/22作成時点は推論・GPU起動・追加学習・課金資源取得・API/DB/配置・本番設定の変更0。10/23のC0実行と後続承認は下記へ区別して記す。
 
-> 2026-10-23 Mash決定：Plus980円／Premium1,980円が価格上限、27B除外。[小型AI再選定](2026-10-23-small-model-reselection.md)をcurrentとし、旧高価格推奨と27B再試験を撤回。最初のM1はDeepInfra標準`Qwen/Qwen3.5-9B`従量APIへ変更。利用消費50円・モデル最大4リクエストは後続の「進めて」で承認済み・未実行。旧GPU秒ベースの[費用試算](2026-10-23-cost-and-plans.md)・172条件は履歴。既存fixture原文・意味評価・C0最大4は維持。価格／quota／モデル採用／外部モデル推論0。
+> 2026-10-23 Mash決定：Plus980円／Premium1,980円が価格上限、27B除外。[小型AI再選定](2026-10-23-small-model-reselection.md)をcurrentとする。後続の残高利用希望でRunpod優先となり、M1は各1回・4応答取得済み。旧DeepInfra4回/50円はAPI向けの履歴で、Runpod GPU予算へ流用しない。価格／quota／製品採用は変更0、P6統合と追加学習は未実施。
 
 
 > 2026-10-23実行：Mashの「進めて」を受け、[現CMEE側の4場面](../../trials/2026-10-23-current-four/README.md)を正規offline入口で確認。Emlis初回本文あり／問いなし、補足は実pendingなしでN/A、Piece・Analysisは実理由付きUNAVAILABLE。9B APIは認証未完了・推論0、両条件比較は未完。Mashの続く質問を受け、同記録§2へモデル選定前に進められるsource投影・未採用候補・意味admission・回答更新・三core接続の先行準備を具体化した。任意LLM候補の受け口は現Engineに未実装。
@@ -20,7 +20,7 @@
 | [case_index.json](case_index.json) | 場面の由来・独立性、現方式の制限、最初の4場面 | 実行者用。採点側の情報として扱う |
 | [review_guide.md](review_guide.md) | 保持すべき意味、してはいけない昇格、比較記録欄 | 採点者用。prompt・手本・検索対象に含めない |
 
-最初の比較対象は次の4場面。下表は期待する役割で、実出力は[C0実行記録](../../trials/2026-10-23-current-four/README.md)へ分離して保存済み。M1は未実行。
+最初の比較対象は次の4場面。下表は期待する役割で、実出力は[C0実行記録](../../trials/2026-10-23-current-four/README.md)へ分離して保存済み。M1の実結果は上記Runpod記録へ分離済み（4応答取得、本文の重大不足あり）。
 
 | ID | 実際の材料 | 最初に見たい結果 |
 |---|---|---|

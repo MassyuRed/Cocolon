@@ -4518,3 +4518,13 @@ STRUCTURE_MAP_DELTA_PRESENT。API 666b28517ef04aba170ebffe3c86980fea4c11bd。新
 | ai/tests/fixtures/cmee_analysis_semantic_snapshot_v1.json（新） | 承認案の原3記録／全packet。37,620 bytes、手作業合成標本、モデル出力ではない |
 
 Cocolon側の新analysis_semantic_snapshot_results.jsonは全private完成state／文章／図／31trace／段階別serialized hash／同一再読／6型fields／全source blob／検証・途中失敗・限界を所有する。旧proposal JSON・P1/P2/C0／過去結果は上書きしない。既存全機能00／全体01／本01A／current Analysis03・CMEE04／design01・04・05・06／weekly／trial READMEを同時同期する。新runner／checker／管理systemなし。
+
+
+## 2026-10-23 — Runpod 9B M1実出力の資料所在（製品runtime差分なし）
+
+| exact path（Cocolon root） | 所有する内容 |
+|---|---|
+| Cocolon_前提資料/observation_learning/trials/2026-10-23-qwen9b-m1/qwen9b_m1_results.json（新） | MashがRunpodで取得した固定4request／未加工応答本文／parsed output／環境／tokens／要求時間。受領53,178 bytesを保持。M1未接続proxyで、P6意味snapshot・追加学習ではない |
+| Cocolon_前提資料/observation_learning/trials/2026-10-23-qwen9b-m1/README.md（新） | 入力原本照合、技術取得4/4と本文診断の分離、全4場面の具体的な補完・欠落、GPU課金／停止未確認、次のP6境界 |
+
+全機能00・小型再選定／比較入口・latest weekly Rへ結果導線を同期。既存C0/P1〜P5実装・期待・出力とAPI sourceは変更0。STRUCTURE_MAP_DELTA_NONE（資料所在のみ。runtime owner／型／接続／公開契約の実変更なし）。
