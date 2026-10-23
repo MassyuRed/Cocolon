@@ -730,3 +730,37 @@ Mashの「学習済みAI選定前の、CMEE内部準備を進めろ」によるP
 変更が必要な実ownerは、Emlis `emlis_stage1_response._validate_canonical_semantic_inputs`（source再凍結と現plan再導出一致を分ける箇所）、`validate_interpretation_candidate_pool`（現poolの完全一致）、`emlis_v1a.validate_positive_realization_trace`（plan／本文の整合）である。Piece source→meaning→planと内容検査、Analysis freeze→compile_observed_graph→realizerも同様。source identity／親／owner／期間の検査は維持対象で、有限意味への一致をどう置換するかは別の具体案が必要。今回検査を削除・緩和していない。P1で語彙・意味の新admissionを承認済みにしない。
 
 次作業はP2の各claim／argumentと既存型・検査の具体的差分表。実モデル選定・認証を待たず、保存済み候補／固定例から設計できる。実admissionの変更は、その具体差分に対する既存承認範囲を確認してから扱う。本番、DB、公開DTO、RN、課金、モデル接続のeffectはP1に含めない。
+
+<a id="cmee-p2"></a>
+
+## 2026-10-23 — P2：候補・既存意味型・検査の具体対応
+
+**P2の設計対応は完了、実admissionは未実装。** Mashの継続指示により、P1の未採用受口から既存三中核へ写すためのfield対応、保持する検査、再設計が必要な一致条件を具体化した。source原本はCocolon PR30 `141973b4eb35428b50e09cb5c74e9a0f7e2aa208`／API PR3 `b7eb534d44658549896baf449e7c319d49d14396`。今回API code/test/guard/schema、実モデル、DB、RN、本番の変更0。
+
+| 設計owner | P2で具体化したもの | 実装へ残る差分 |
+|---|---|---|
+| [共通schema05](05_json_schema_and_versioning.md#cmee-p2-schema) | claim／引数、主体の明示／省略、否定scope、modality、source時刻とabout_time、程度／報告／条件のqualifier、関係・unknown origin・conflict・updateの最小案 | schemaの格納だけでは採用しない。既存profileとの版分岐とcoreごとの実admissionが必要 |
+| [Emlis 02](02_emlis_v1a_detailed_design.md#cmee-p2-emlis) | nucleus.semantic_frame→graph→component／qualifier→候補／問い／更新／本文／保存のfield対応 | MeaningNodeのvalueだけでは主体・時点・肯否を伝えられない。既知の3guard以外にthread plan・question再導出一致も対象 |
+| [Piece 03](03_piece_v1c_detailed_design.md#cmee-p2-piece) | PieceSourceMeaningと有限評価／scope／選択感情、plan／artifactと全意味保持 | 原文slice replayと全meaning再導出、有限編集だけの検査は一般モデル文の意味同等性を保証しない |
+| [Analysis 04](04_analysis_v1d_v1e_detailed_design.md#cmee-p2-analysis) | ObservedProposition／node／edge／unknown／conflict／annotationからsafe表示・保存まで | UnknownGapの根拠／対象の不足、wish限定annotation、safe label再導出とsaved validatorまで対応が必要 |
+
+### 現検査の責任をどう分けるか
+
+1. 原文・field・scalar／UTF-8・版・親・owner・期間・既質問／上限・保存identityは維持する。同一sourceに位置があることと、その意味解釈が妥当であることを混ぜない。
+2. 現finite parserでplan/pool/graph/問い/propositionを再導出し完全一致する検査は、旧profileの保証として残す。一般候補を扱う新profileでは、意味の起点を採用済みの版付きsnapshotにする具体的変更案が必要。検査を削ってrawモデル本文を通す案ではない。
+3. snapshotからplan・意味被覆・関係端点・qualifier・本文／safe graph・保存版が同じ意味を消費するよう対応させる。新候補が現enum／型／作者に写らなければ、自由strやattribute codeに偽装せず未対応として残す。
+4. 原文反復・自然さ・意味の読みは、source位置と型だけでは保証できない。新profileの保証範囲と、モデルの読解を暫定採用する商品上の変更点を明示する。モデル自身の採点で正しさを保証しない。
+
+### 4場面の設計例から得た具体的な差
+
+E02-0は説明を任せた行動と最後まで聞いた行動を分け、嬉しさの対象不明と併存させる。E02-Bは否定された理由への言及を実事実にせず、否定を理由関係へ一度だけ付ける。「私」は思いつかなかった従属節の主体であって、主節の主体を機械確定する証拠ではない。元行動と元不明は落とさず、probeで解決済み／REVISE済みにしない。
+
+P01は「自分の仕事が」の主語を「自分」へ縮めず、報告・嬉しさ・帰りの遅れ・後悔の否定scope・次回の条件を保持。A02は本人の希望から実現／未実現を決めず、購入できた結果と軽い面倒さの「けど」を残す。「聞いていない」は記述時点までの非行動で、記録上の使いやすさ未観測は本人が絶対知らないというclaimではない。
+
+[全設計例と実inspection](../../../observation_learning/trials/2026-10-23-current-four/README.md#p2)は、手作業例28claim／60quoteをP1受口へ4回通し、26native型のfieldと9関数の実在を照合したもの。意味採用、native graph構築、本文生成、モデル推論、P2 schemaのruntime検証は0。引用一致とnative対応を混同しない。
+
+### 次の具体的な変更判断
+
+次は、上記対応に沿った限定実admissionの変更案を一つにまとめる。対象は、(a) 新しいprivate semantic profileと採用済み意味snapshotの版・内容identity、(b) 旧profileを維持した新profileのplan/pool/thread/question/traceの起点分岐、(c) 旧保存互換・中断再開とprivate保存field、(d) coreの未対応を保留して意味を捨てない失敗結果、である。新profileが任意の日本語意味・本文を一般的に保証できるとはしない。
+
+これは既存の意味採用・再導出契約を変える具体的な範囲であり、P2設計の指示だけで製品guardを変更しない。最新weeklyのP2後の実装判断へ戻し、同じ意味の確認を繰り返し求める承認連鎖にはしない。P3の実Engine／回答更新、P4/P5、M1/M2は別の未実施工程として保持する。STRUCTURE_MAP_DELTA_NONE（実経路・型変更0）、primary=BLOCKER_NARROWED、product_credit=0。

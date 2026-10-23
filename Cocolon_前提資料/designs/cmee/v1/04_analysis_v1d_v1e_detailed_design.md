@@ -1452,3 +1452,63 @@ requires:
 - simulation safety / clarification / display proofを通過する。
 
 V1-DまたはV1-Eをthree-core completionへ自動変換しない。
+
+<a id="cmee-p2-analysis"></a>
+
+## 2026-10-23 — P2：未採用候補から観測graphまでの対応差分（PROPOSED_ONLY）
+
+固定原本：Cocolon PR30 `141973b4eb35428b50e09cb5c74e9a0f7e2aa208`、API PR3 `b7eb534d44658549896baf449e7c319d49d14396`。P1の材料投影は実装済み。本節は候補要素と既存型／検査の対応を具体化する設計案で、実admission・意味型・compiler・safe projection・guard・保存contractを変更していない。モデル接続／新本文生成／本人DB／配置0、候補は全てNOT_ADOPTED。現在の商品・稼働・未完了は[全体現在地](../../../00_cocolon_current_product_and_state.md)へ戻る。
+
+共通提案schemaとclaimごとの根拠束縛は[05のP2](05_json_schema_and_versioning.md)が所有する。以下の「型へ写せる」は形状上の収容先を指すだけで、正しい解釈・観測済み・表示可・商品合格を意味しない。モデルの自己採点、根拠quoteの位置一致、手書き対応例から採用状態を発行しない。わたしマップの観測graphと、未実装のIF／SavedRouteIntentは別のまま扱う。
+
+### P2-D1. 各候補要素の正確なfield対応
+
+実source prefixはAPI `ai/services/ai_inference/cocolon_meaning_experience_engine/cores/analysis/`。
+
+| 候補の意味要素 | 現型の正確な収容先 | 保持条件・表現差分 |
+|---|---|---|
+| 凍結source・期間・全member | `AnalysisSourceSet.source_set_ref/owner_scope/period/members/sources`、`AnalysisSourceMember.saved_record_ref/saved_record_version/source_commitment/inclusion_status/inclusion_or_exclusion_reason/child_source_envelope_refs` | `freeze_analysis_sources`が所有・版・親・LIVE・半開期間・重複・補足数を判定する。INCLUDEDだけの本人sourceを読む。期間外memberは除外根拠を保持し、本文を候補材料へ戻さない |
+| nodeの分類・表示元・根拠 | `ObservedNode.node_ref/node_kind/visible_label/record_refs/evidence_refs/polarity/modality/temporal_scope/proposition/update_refs` | `node_kind`はSCENE／ROLE／ATTENTION_OR_THOUGHT／ACTION_OR_NONACTION／IMMEDIATE_RESULT_OR_AFTERMATHの5種。モデル分類だけで観測factにしない。claim IDとCMEE node IDを分け、引用・情報源の主体と本人主体を混同しない |
+| 主体・格・述語 | `ObservedProposition.actor/arguments/predicate_lemma/source_parts` | `arguments`はcase particleと原文名詞の組、`source_parts`は全節内のgrammar roleとscalar範囲。モデルのparaphraseを原文partsのように扱わない。省略主体は省略として保持し、所有者一致だけでSELFへ昇格しない。新predicate／格解釈が現parserにない場合は未対応 |
+| 肯否・確定度・時点 | `ObservedProposition.polarity/modality/temporal_scope/possible_content/result_state/dependent_form/scene_state/role_state/written_modifiers`、node側の対応3field | 部分否定、程度、報告scope、未完了、希望、過去／記述時点／相対日を保持する。現記述の意味と候補field間に差があれば保留。recordの`created_at`を全節の出来事時刻へコピーしない |
+| 相対日・順序・同一機会 | `ObservedProposition.sequence_marker/relative_day`、source envelope・record単位のidentity | 「今日／昨日」は各sourceに束縛し、表示当日や別recordをanchorにしない。「前より」は比較対象未確定のまま。field順やrecordの日付順を、出来事順・因果へ昇格しない |
+| 観測された関係 | `ObservedEdge.edge_ref/edge_kind/endpoint_refs/evidence_refs` | currentのedge種別はOBSERVED_ORDERとREPEATED_COOCCURRENCE。前者は明示順序の両端とmarker／全scope、後者は別の記録機会2件以上の根拠を要する。単なる「て」や同一recordの二field、原入力＋補足を因果・反復へ変えない。一般因果・条件・対比を新edge名で詰めるのは未対応 |
+| unknown | `UnknownGap.gap_ref/between_node_refs/missing_scope/reason_code` | 現型は根拠欄を持たず、safe表示も5node種別／SOURCE_SCOPE／ROUTE_CONNECTIONの固定scopeを前提とする。対象付き「使いやすさ未確認」等をそのまま写すと対象・根拠が失われる。共通候補側の対象refs／dimension／根拠を保持し、native対応が未確定なunknownは保留。知らない内容を既知nodeへ補完しない |
+| 本人の訂正／撤回 | `ObservedSourceUpdate.update_ref/operation/record_ref/target_evidence/answer_evidence_refs/replacement_evidence_refs`、`ObservedNode.update_refs`、annotationの`update_refs` | 現更新は同じ親の補足によるREVISE／WITHDRAWを`_active_sources`で扱う。ordinary補足は別sourceのまま。モデル判断だけで旧factを消さず、target・回答根拠・本人のoperationを束縛する。複数補足未対応を結合・除外で回避しない |
+| 不一致 | `ObservedConflict.conflict_ref/target_refs/evidence_refs/reason_code` | 現行は同じ原source・field・相対日・同種scopeにおける限定的な肯否対立。原因・正解・同一機会を推定しない。一般の食い違い・複数解釈は型に入るだけでは採用不可。異なるrecordの役割／行動の違いを矛盾としない |
+| 注記・負荷・守る意向 | `ObservedAnnotation.annotation_ref/target_ref/predicate_lemma/source_labels/evidence_refs/update_refs/kind/annotation_state/uncertainty/alternative_explanations/forbidden_promotions` | 現BURDENは「希望」と対比したつらい／苦しい、PROTECTIVEは限定された守る希望。A02-6の行動に付く「少し面倒だった」をそのまま現BURDENへ入れるとtarget／predicate／時点条件に反する。候補へ保持して未対応とする。原因・性格・診断・動機へ昇格しない |
+| artifactと文章／図 | `ObservedSelfStructureMap.owner_scope/source_set_ref/period/graph/source_members`、`safe_projection`／`safe_text_projection`、`period_comparison` | source集合と期間に束縛された同一graphから文章・図を返す。自由なnarrativeを別の真実ownerにしない。新candidate graphが現safe再導出で通るとは主張しない。比較期間・保存・再読・権限の責任を引き継ぐ |
+
+### P2-D2. A02-P1の固定source対応例
+
+以下は固定fixtureを人手で対応づけたPROPOSED_ONLYの例。C0の`analysis_observed_route_not_established`とP1の「3sourceを材料として凍結できた」を両方保持し、ここで新しいnode／artifactを生成済みにしない。rangeは各元fieldのUnicode scalar半開区間。全記録の選択感情・強さ・created_atも元7fieldとして保持するが、それらから行動の原因や人格を作らない。
+
+| 元source | 候補として保持する意味 | 既存型へ対応できる部分と保留／未対応 |
+|---|---|---|
+| `A02-4.memo[0,10)`「今日も連絡係だった。」 | 当日の連絡係という役割の本人報告。「も」は本人の表現 | ROLEと過去／相対日の型はあるが、現「担当した」等の有限証明へ原文を書換えて通さない。source-bound役割claimの採用は未実装。「も」だけで別記録との反復edgeを作らない |
+| `A02-4.memo[10,31)`「まだ返事のない人がいることも残したかった。」 | 未回答者がいるという記述と、それも残したかったという過去の意向 | ATTENTION_OR_THOUGHTの候補と対象付き未確定を分離。「残したかった」を実際に記録した行動へ変えず、未回答者の理由・意図を補わない。一般scopeのnative採用は保留 |
+| `A02-4.memo[31,44)`「前より待つ時間は短かった。」 | 本人が書いた相対的な待ち時間の比較 | 比較対象・基準期間は不明。`period_comparison`の改善や当期／前期差を生成しない。比較語を落として単なる「短い」へ縮めない。現native表現は未対応 |
+| `A02-4.memo_action[0,31)`「回答済みと未回答を分けて途中の案内を送り、最終の返事を待った。」 | 分類・途中案内の送信・最後の返事を待つ行動 | ACTION_OR_NONACTIONの候補群と、どの順序が原文から成立するかを個別に保持。markerと両端の根拠なしでOBSERVED_ORDERを作らず、送信が待ち時間短縮の原因とも言わない。一般述語・複合scopeのadmissionは未対応 |
+| `A02-5.memo[0,10)`「今日は道具係だった。」 | 当日の道具係という役割 | ROLEの型に収容先はあるが、現parserとの不一致を役割が無いことへ読み替えない。連絡係だった別recordとの違いは不一致／性格変化ではない |
+| `A02-5.memo[10,27)`「数を照らし合わせられてほっとした。」 | 数を照合できたことと、その時の安堵 | 結果／余韻と関係scopeの候補を保持。ほっとした時点を現在へ変えず、「て」だけを一般因果edgeへしない。current feeling grammarへの収容・safe表示の保証は未成立 |
+| `A02-5.memo[27,43)`「使いやすかったかは聞いていない。」 | 尋ねていないという非行動の記述と、今回材料に使いやすさの回答がないという対象付きunknown | 2責務を分ける。非行動型の収容先はあるが「使いにくかった」等の結果へしない。今回材料に使いやすさの回答がないことはA02-4の返事待ちとは別target（返事がまだないこと自体は本人の記述で、不明そのものではない）。現UnknownGapにはこの対象／根拠の専用表現がないため候補に保持して保留 |
+| `A02-5.memo_action[0,25)`「道具を貸す時に数を記録し、返ってきた数と照合した。」 | 貸出時の記録、返却数との照合という行動・scope | ACTION_OR_NONACTION候補と時点scopeを保持。借り手・場所・数値・動機は補わない。recording→matchingの順序は根拠が成立する範囲だけで、どの「て」も因果にはしない |
+| `A02-5.memo_action[25,33)`「全て戻っていた。」 | 全てが戻っていたという本人報告の結果 | IMMEDIATE_RESULT_OR_AFTERMATHの収容先はあるが、「全て」の対象照応をscope付きで確認する必要がある。任意の道具数や紛失防止成功の理由を作らない。一般照応の採用は保留 |
+| `A02-6.memo[0,28)`「買う物は買えたけど、今日はメモを作るのが少し面倒だった。」 | 購入できたことと、当日のメモ作成に感じた軽い面倒さを両方保持 | 結果と負荷の対比候補。買えたから負荷が無い／面倒だから失敗した、のどちらにも統合しない。「少し」を落とさず、人格へしない。現annotationはwishに付くつらい／苦しいだけなので、この負荷annotationは未対応 |
+| `A02-6.memo_action[0,22)`「買い物前にメモを作り、メモを見ながら買った。」 | 買い物前のメモ作成、メモを見ながら買ったこと | ACTION_OR_NONACTION候補と明示的な前後／並行scope。場所・買物の価値基準・将来の習慣を補わない。行動候補があってもSCENEを勝手に埋めない |
+
+この3記録からSCENE全件・役割全件・一本の五段階ルートが必ず成立するとはしない。候補は欠けた段階・scopeをその対象とともに残す。期間内のrecord順は閲覧順／記録時刻であり、一つの出来事列ではない。異なる係・作業・日を同一場面へまとめず、性格・成長・成功原因を生成しない。全件でconflictを出す必要もない。保留のunknown／負荷を削ってgraphを成立させる案は採用しない。
+
+### P2-D3. source検査の維持と、意味・表示の再設計箇所
+
+| 実owner・関数 | 維持する検査 | 新admissionで別案が必要な部分 |
+|---|---|---|
+| `source_adapter.freeze_analysis_sources`／`_source`／`scoped_source_view` | 所有、LIVE、元7field、record version、supplement親／版／role／数、重複、半開期間、raw scalar/UTF-8／digest | candidateのquoteからnative `EvidenceRef`を作る時にもこのsourceを再利用する。既存locatorのfield／envelope座標を上書きせず、P1のprojection aliasと区別 |
+| `intent_compiler.compile_observed_graph` | sourceごとの根拠、主体・肯否・時点、個別機会、原入力＋補足を一機会とする集計、未対応scopeの保持 | currentは`build_final_stage1_grounded_observation_plan`→`_fragment`→有限`_proposition`を通す。新candidateの要素を別の意味採用責任へ写す案が必要。有限parserに無いからsourceを無視する、またはguard全体を外す案にはしない |
+| 同owner `_active_sources`／`_admit_ordinary_supplement` | 本人補足、原source、whole-clause訂正target、withdrawn材料の非復活 | 一般candidateのADD／REVISE／WITHDRAWはこの現有限target grammarとは別。対象不明を保留し、未変更意味・source時点を保持する。実source上限を増やしたことにしない |
+| `_explicit_order_pairs`／`_opposed_claim_pairs`／`_proposition_meaning`／`compare_period_meaning` | 明示順序の根拠、同一機会の範囲、異なるsourceの非混合、比較期間の同等条件 | 一般言語の関係・同義性・不一致判定は現在のgrammar keyと同じ保証を持たない。モデルのrelationや一致判定をそのままedge／反復／期間差へ採用しない |
+| `observed_route_realizer._safe_label` | node.propositionとnodeの肯否・確定度・時点の一致、sourceに即した表示 | 現在は`_proposition(node.visible_label)`または限定te形の全再導出とpropositionの完全一致が必須。新解釈を入れてもsafe表示はそのまま通らない。新意味profile・表示検査を定めるまで未採用を維持 |
+| `ObservedSelfStructureMap._unknown_gap_projection`／`_annotation_badges`／`_conflict_badges` | unknown対象、注記とrouteの分離、原因・性格・診断の非追加、不一致両端 | 対象付きunknown、行動に付く過去の軽い負荷、一般conflictは現型／固定labelと一致しない。labelを偽装して通さず、表現・対応範囲・失敗結果を具体化してから変更案とする |
+| `analysis_observed_service.private_storage_evidence`／`_checked_projection`、既存read／commit owner | 原文・private propositionを公開／保存DTOへ出さない、閉じたfield集合、owner／期間／source集合・保存identity、再読で意味再生成0 | 新type／scope／annotationを加える場合、pure graphだけでなくserializer・saved-wire validatorも影響先。P2はそれらを変更せず、新型を既存DTOへ黙って保存しない |
+
+P2の結論は「sourceは保持できるが、一般候補を既存graph・safe表示へ採用する責任と表現に未対応差がある」。型の形状対応がある要素、根拠／読みを確認するまで保留する要素、native contract自体に表現がない要素を混同しない。全source／必要意味を保存した同一候補から、採用・保留・未対応の理由を示す案を次の実装判断へ出す。実compiler／guard／DB／API／RNの変更は未実装・未承認であり、本設計反映から自動開始しない。

@@ -2955,3 +2955,47 @@ sealはcanonical JSONのseal_ref空版に対するSHA256。received prefix `init
 | UNKNOWN_FINISH | 未提供・未対応の終了理由。正常扱いしない |
 
 別requestへの付替え、不正metadataは明示例外。位置照合は各candidate claimの充足検査ではなく、意味の妥当性・自然さ・Safetyの一般検証ではない。provider固有の終了理由・usage形式の正規化は実接続時の未実装事項。実値を固定stub値へ読み替えない。
+
+<a id="cmee-p2-schema"></a>
+
+## 2026-10-23 — P2意味候補の具体的対応schema案（PROPOSED_ONLY）
+
+**DESIGN_MAPPING_COMPLETE / RUNTIME_ADMISSION_NOT_IMPLEMENTED。** Mashの「P2を進めて」に基づき、P1の未採用候補と三中核の既存型を対応させる案を具体化した。本節は既存schemaの撤回・guard緩和・native型追加・保存field追加の実施ではない。P1の既存2型・22件検証はそのまま、今回API byte変更0。新語彙を現native enumへ追加したものでもない。
+
+候補例の版名は`cocolon.cmee.semantic_mapping_proposal.v1`。P1の`{candidate, evidence}`をそのまま使い、candidate内部に次を提案する。例のraw JSONと実P1受取、native field照合は[semantic_mapping_inspection.json](../../../observation_learning/trials/2026-10-23-current-four/semantic_mapping_inspection.json)。手作業の設計例で、モデル生成物ではない。
+
+| 提案field | 形と意味 | 対応時の条件 |
+|---|---|---|
+| `candidate.schema_version/core` | 上記提案版、emlis/piece/analysis | P1 requestのcore・task・source集合へ束縛。別coreの候補や未来補足を混ぜない |
+| `claims[].claim_id/kind/text/evidence_indexes` | 候補内ID、claim種別、未採用の内容、根拠index列 | modelローカルIDはnative IDではない。kindは提案語彙。元sourceを全文言換えしてSOURCE_EXPLICITにするfieldではない |
+| `claims[].subject` | `{binding, source_entity, evidence_indexes}`。bindingはEXPLICIT/OMITTED/UNRESOLVED、entityは原文の対象またはnull | 原文「私」が従属節にあるだけなら主文の主体へ拡張しない。「自分の仕事」の所有者を主語「自分」に変えない。省略をSELFで自動補完しない |
+| `claims[].predicate` | `{surface, arguments}`。引数は`{role,text,claim_ref,evidence_indexes}` | 各引数と格にも根拠を付ける。「に」を受取人・場所・原因と自動決定せず、例ではWRITTEN_に等で原格を保持。複合節は複数claim／scopeへ分ける。空のexample argumentsは引数不存在の確定ではない |
+| `claims[].polarity` | `{value, scope_refs, evidence_indexes}` | 否定の対象をclaim／関係／引用内の範囲へ固定。「理由の否定」を「感情の否定」にしない。否定済み理由の内部命題を実事実として独立採用しない |
+| `claims[].modality` | `{value,evidence_indexes}` | 事実報告、本人感情、希望、可能性、否定された理由への言及を区別。希望は実現／未実現のどちらも自動確定しない。現native語彙に無ければその差を保持 |
+| `claims[].about_time` | `{kind,expression,anchor_source_id,evidence_indexes}` | 元語・時制・どのsourceに属する相対時点かを残す。recorded_atはsourceの記録時刻であり、このfieldへコピーして出来事日時を作らない。絶対時刻の解決は未実装 |
+| `claims[].qualifiers`／`relations[].qualifiers` | `[{kind,text,scope_refs,evidence_indexes}]` | 程度「少し」、限定否定「わけではない」、報告・埋込み・条件・時点のscopeを落とさない。native fieldが無いなら保留／未対応、自由attributeで迂回しない |
+| `relations[]` | `{relation_id,type,from_claim_id,to_claim_id,polarity,scope_refs,qualifiers,evidence_indexes}` | 両端の根拠と関係自体のmarker／scope根拠を分離。単なるfield順・record順・「て」を因果や同時性へ変えない。否定された理由は関係のNEGATEDを一重で保持 |
+| `unknowns[]` | `{unknown_id,target_claim_refs,dimension,description,origin,resolution_state,evidence_indexes}` | originはPERSON_STATED／NOT_OBSERVED_IN_MATERIAL／UNRESOLVED_READINGを区別。本人の「まだ曖昧」と、材料に他者の回答が無いことは別。「聞いていない」から本人が絶対に知らないとは言わない |
+| `conflicts[]` | `{conflict_id,claim_refs,conflict_kind,status,evidence_indexes}` | 二claim・対象・時点・scopeを特定。両価感情、別の日の役割、本人訂正、論理的矛盾を混同しない。conflict無しは空配列でよい |
+| `updates[]` | `{operation,target_claim_refs,new_claim_refs,answer_source_id,prior_meaning_ref}` | 実回答source、既存active claim、依存範囲と時点を特定してからADD/REVISE/WITHDRAWへ対応。自己申告だけで更新しない。E02-Bは実pending無しprobeなので実更新はN/A、例のupdatesは空 |
+
+`evidence`各要素はP1の`source_id/field_path/start/end/quote`を維持。`evidence_indexes`はこの配列の0始まりindex。版・role・元field・native envelopeは、自己申告候補ではなく同じ凍結requestから解決する。候補のfield相対Unicode scalarをnative envelope絶対UTF-8座標へそのまま代入しない。既存ledgerより狭いrangeは候補側で保持し、native span/ownerの生成方針はsource owner側の実装判断とする。
+
+### 型の対応と、採否は別の判定
+
+| 判定 | 具体的条件 | 結果の意味 |
+|---|---|---|
+| REJECT | source／request／親／owner／版／期間／quote/rangeが不一致、生成本文を本人sourceとして使用 | 不正な候補。原入力保存を取り消す理由にはしない |
+| HOLD | 根拠位置はあるが主体・否定scope・対象・時点・複数の読みを確定できない、既存意味との対応が未確定 | raw候補・対象・不明を保持。モデルconfidenceや自己採点で採用しない |
+| UNSUPPORTED | 必要意味の格納field・enum・admission・作者・safe表示／保存が現profileに無い | 入力不足や意味の誤りと読み替えず、具体的な型／検査差分を返す。sourceを削って成功させない |
+| ADOPT（将来の意味採用処理だけ） | 対象の承認済みsemantic profileがあり、source照合、claim/引数/関係/qualifier/unknownの対応・被覆、coreの意味採用条件、実更新資格、snapshot／version束縛を満たしたもの | provisionalな解釈の採用と本人明示事実を分離。本文成功、保存成功、商品合格を意味しない。**P2では到達0、実装0** |
+
+現parserとの不一致だけではREJECTしない。型を構築できてもADOPTではない。四例は全NOT_ADOPTEDで、上表のHOLD／UNSUPPORTEDは手作業の設計上の分類であり、新しいruntime判定器が実行した結果ではない。P1のCANDIDATE_UNREVIEWEDもP2 schema／意味を検査しない。P2の共通proposalは最低保持項目の案で、任意の言語理解を機械的に証明する保証ではない。
+
+### 将来profileに必要な版・保存差分（今回は導入しない）
+
+旧profileは旧source→旧意味→旧plan／問い／traceの再導出を維持。新profileを実装する場合は、採用済みの意味内容、core/profile/admission/adapterの版、source/requestの内容identity、claim対応、保留／未対応部分をひとまとまりのimmutable snapshotとして保持する。checkpointにはその内容identityを結合し、再開・再読で実モデルを再推論して旧意味を作り直さない。旧完成本文の非再生成と、旧未完成checkpointの原版再導出を維持する。
+
+現`EmlisMeaningCheckpointV1`に任意候補全体の保存fieldはない。追加先は既存service/store/serializerの実contractと照合する必要があり、P2からDB変更不要・既存JSONへ自由に保存可能と断定しない。公開DTOにprivate候補を混ぜない。Piece canonical text・Analysis graphの保存版とnative renderer/readerも同じ新profileを理解する必要がある。
+
+一般モデルの読解・言換えの正しさは位置・型検査だけでは保証できない。新profileでモデル解釈をどの範囲で暫定採用し、どの条件で保留するかは商品contractの具体的変更点である。別のLLMによる自己採点器や常時の人手承認をP2の隠れた前提にせず、実候補と既存評価で品質・誤採用を確認し、変更範囲を示して判断する。

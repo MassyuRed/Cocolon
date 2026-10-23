@@ -3377,3 +3377,96 @@ appraisal内容型v1・whole meaningの契約は不変。満足から経験全�
 新しいprivate `ComponentReceptionOpportunityV1` exact7（schema_version、opportunity_ref、move_ref、reception_act、component_ref、basis_contribution_refs、bound_relation_refs）を、選択済みwhole・component・既存Move・全所有根拠へbindする。同じact分類でも別opportunity／claim／traceを持つ。旧RetainedReceptionActRow exact3と旧validatorを保持し、新versionだけdispatchする。独立closureはsource Move、target/support、組、relation、basisとparent/envelopeの分類を照合する。訂正後の3成分のうちReception対象は2成分で、第三Moveは追加しない。既存意味型／内容型・Human Reception作者・独立gateを使い、公開API/DTO/DB/RN、source認識、各上限は変更しない。
 
 適用資格・本文限界は8/28意味設計末尾u281、file責務は01A末尾u281。TECHNICAL_CREDIT / PRODUCT_NOT_CLEAR。初回一体単位未完了、正式受入0/3、candidate_ready=false、automatic_progression=false、Draft/open/unmerged・未配置。
+
+<a id="cmee-p2-emlis"></a>
+
+## 2026-10-23 P2 — Emlisの意味候補・既存型・採用責任の対応案
+
+**PROPOSED_ONLY / DESIGN_MAPPING_ONLY。** Mashが指示したモデル選定前のCMEE内部準備として、P1の未採用候補から既存Emlisへ進むための設計差分を具体化する。実admission、現parser・guard・checkpoint schema・問い契約・本文作者・保存処理の変更は今回行わない。下表は型へ格納できる形と、その意味を採用できる根拠を分ける。実装上`str`であるfieldにも、任意のモデル値を採用する権限は生じない。
+
+照合点はCocolon PR30 `141973b4eb35428b50e09cb5c74e9a0f7e2aa208`、API PR3 `b7eb534d44658549896baf449e7c319d49d14396`。P1は同APIの`preparation.py`／`preparation_sources.py`。候補共通schema・採否の語彙は[設計05](05_json_schema_and_versioning.md)を唯一のownerとし、本節から別schema・別Engine・別checkerを追加しない。[共有設計01のP1/P2](01_shared_kernel_and_runtime_contracts.md#cmee-p1)と[最新weeklyのP1〜P6](../../../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)へ接続する。
+
+### P2-E1. 候補のどの情報を、既存のどのfieldへ対応させるか
+
+以下のAPI path prefixは`ai/services/ai_inference/`。`contracts.py`等の短縮名は`cocolon_meaning_experience_engine/`内を指す。native型を変更せずその場で採用できる、という表ではない。
+
+| 候補が述べる情報 | 実在する既存field／owner | 保持できるものと、採用前に残る差分 |
+|---|---|---|
+| 原入力・補足・履歴の出所 | `SourceEnvelope.envelope_id/source_record_id/source_role/source_schema_version/source_contract_version/raw_utf8/raw_sha256`。`admit_emlis_thread`、`FrozenSupplementalAnswer`、`OwnedHistorySourceV1` | sourceの版・役割・原文はP1から再利用できる。generated本文・問い・model説明を本人sourceへ変換しない。model名をsource schema版へ代入しない |
+| 根拠のfieldと位置 | `EvidenceRef.source_envelope_id/field_path/element_index/field_utf8_start/field_utf8_end/scalar_start/scalar_end/utf8_start/utf8_end/field_sha256/literal_sha256`、threadの`QualifiedEvidenceRef` | native evidenceは元field相対scalarとenvelope絶対UTF-8を使う。候補quoteが一致しても意味は未採用。候補が既存ledgerの一部だけを指す場合、そのsubrangeを共通候補内に保持し、存在しない`sN`やnative EvidenceRefを捏造しない。既存spanの参照で十分か、source ownerの版変更が要るかをP3前に確定する |
+| 何を述べるclaimか | `GroundedSemanticNucleus.nucleus_id/kind/source_span_ids/source_fields/surface_anchor_ids/semantic_frame/grounding_kind/retention/allowed_claim_scope/forbidden_inference_codes`（`emlis_ai_grounded_observation_plan.py`） | source→claimの対応先。ID・required範囲・優先度はCMEEが決める。モデルの文章を`kind`や`allowed_claim_scope`へ無検証で写さない。claimが同じ引用を共有しても別意味なら一方へ潰さない |
+| 主体・述語・肯否・確かさ・時点・程度 | 同nucleusの`GroundedSemanticFrame.actor/predicate_kind/polarity/modality/target_anchor_ids/time_scope/degree/attribute_codes` | `polarity`はpositive/negative/mixed/neutral、`modality`はfact/feeling/wish/possibility/uncertain/refusal/intentionという現語彙を持つ。語の否定が述語・理由・引用のどこにかかるかを先に決める。記録時刻を出来事の日時へ補完しない。既存にない意味を自由な`attribute_codes`で通す案は不可 |
+| graphのnodeとedge | `MeaningNode.node_id/owner_id/node_kind/grounding_kind/value/epistemic_state/evidence_ids`、`MeaningEdge.edge_id/owner_id/relation/source_node_id/target_node_id/grounding_kind/epistemic_state/evidence_ids` | **MeaningNodeにはactor/time/polarity専用fieldがない。** `value`へJSONを入れるだけではqualifier伝達にならない。native nucleus／relationからgraphへ投影し、後段のcomponent／qualifierへ連続させる。`EpistemicState`はSOURCE_EXPLICIT/UNKNOWNだけで、モデル推測をSOURCE_EXPLICITへ昇格する器ではない |
+| claimの引数と関係 | `ArgumentBinding.role/semantic_ref`、`EmlisInterpretationCandidate.argument_bindings/relation_operator/relation_basis_refs/semantic_refs/evidence_refs` | 引数roleはPRIMARY/EXPERIENCER/LEFT/RIGHT/BEFORE/AFTER/ACTION/CHANGE/CAUSE/EFFECT。参照はCMEEのnode/edgeへ解決する。モデルのローカルIDをnative ID扱いせず対応を残す。relationの両端と関係自体の根拠を別に検査する |
+| 入力固有の読み候補 | `EmlisInterpretationCandidate.candidate_kind/claim_domain/semantic_operator/derivation_rule_id/basis_candidate_refs/epistemic_state/required_qualifiers/forbidden_promotions` | `InterpretationEpistemicState`はPROVISIONAL_INTERPRETATION。現InterpretationKind/SemanticOperator/RelationOperatorに対応する場合も、既存poolへ混ぜる前にsource・scope・意味採用責任が必要。モデルの自己評価やderivation名は承認済み導出規則の代用にならない |
+| 後段へ渡る意味の各軸 | `GroundedSemanticComponentProjection.typed_predicate_key/semantic_kind_key/owner_key/scope_key/role_key/epistemic_state_key/temporal_state_key/modality_key/polarity_key/qualifier_refs/source_evidence_refs/material_unknown_refs`、`GroundedInterpretationProjection.component_rows/relation_path_refs/source_evidence_refs/required_qualifier_refs` | sourceの主体・時点・肯否をgraphのraw値だけへ置き去りにしない。既存IM03/Receptionが消費する実際の投影まで対応させる。語彙未対応なら投影成功を装わず保留／未対応とする |
+| 本文へのqualifier拘束 | `SourceQualifierBinding.source_candidate_ref/source_argument_role/canonical_qualifier_codes/polarity/modality/time_scope`とbinding refs | 現三軸を引数単位で維持する。`PRESENT_STATE`等のoperator名から過去の原文を現在へ読み替えない。新しいrelation否定・引用scopeを三軸の値へ押し込まない |
+| 本人が明示した不明 | `GroundedUnknownBoundary.unknown_id/dimension/affected_nucleus_ids/evidence_span_ids/surface_policy`、`EmlisMeaningField.material_unknown_refs` | 不明の対象と本人の原文を結びつける。現在parserが認識しない対象付きunknownを、一般的なsource不足や空文字へ潰さない。対象の特定不能と本人が不明と言ったことを分ける |
+| 複数の読み・不一致 | `SelectedEmlisProvisionalReading.unresolved_alternative_refs`、`LimitedMeaningOutcome.unresolved_alternative_refs`、`GroundedUnknownBoundary` | これらは代替読みに使えるfieldだが、任意の二つのsource claim間のconflictを直接表す専用契約ではない。本人の両価感情、対象の違い、時点変化、訂正と論理的矛盾を同じcontrastへ潰さない。表現できないconflictは設計05の未採用候補に残し、native採用を保留する |
+| 回答による変更 | `EmlisAnswerUpdateItemV1.binding_kind/target_meaning_refs/evidence_refs/temporal_binding/operation/changed_claim_refs/superseded_claim_refs/affected_dependency_refs` | 実pendingのsourceへ結合してADD/REVISE/WITHDRAWを判断する。旧claimがないのにREVISE、語が否定形というだけでWITHDRAW、を行わない。モデルのoperation正解labelを採用根拠にしない |
+| 更新全体と確定済み意味 | `AnswerMeaningUpdateV1.answer_source_ref/question_ref/prior_meaning_ref/updates/unresolved_parts/disposition/new_meaning_ref`、`EmlisMeaningCheckpointV1.checkpoint_id/source_prefix_ref/base_meaning_ref/answer_update/assessment_status/accepted_update_refs/inactive_claim_refs/unresolved_parts/semantic_schema_version` | MATERIAL_UPDATE/NO_MATERIAL_UPDATE/UNRESOLVEDとRESOLVED/PARTIAL/UNRESOLVEDを分ける。checkpoint確定と本文確定は別。候補があるだけではこれらを生成・保存しない |
+
+設計05の共通提案は、P1の`{candidate,evidence}`を保ち、candidate内に`schema_version/core/claims/relations/unknowns/conflicts/updates`を置く。native型とのfield対応は次のとおりであり、新しいruntime schemaを本節で定義しない。
+
+| 共通提案のfield | Emlis側の対応／未対応 |
+|---|---|
+| `claims[].claim_id/kind/text/evidence_indexes` | ローカルclaim ID→nucleus/graph IDの対応、kind→既存NucleusKind、根拠index→native evidenceへCMEEが変換する。`text`をSOURCE_EXPLICITの`value`へそのまま採用しない |
+| `claims[].subject.binding/source_entity/evidence_indexes`、`predicate.surface/arguments` | 主体のEXPLICIT/OMITTED/UNRESOLVEDを分け、nucleusのactor/predicateとcandidateのargument_bindingsへ対応する。省略主体を自動でcurrent_userへ確定せず、任意のentity名をactorへ代入しない。主語・目的語等の元位置と、意味解釈の主体を分ける |
+| `claims[].polarity.value/scope_refs/evidence_indexes`、`modality.value/evidence_indexes`、`about_time.kind/expression/anchor_source_id/evidence_indexes` | semantic_frame、component projection、SourceQualifierBindingへ対応。polarityのscope_refsを失って単一positive/negativeへ縮めない。about_timeの明示表現・source anchorと記録時刻を分ける |
+| `relations[].relation_id/type/from_claim_id/to_claim_id/polarity/scope_refs/evidence_indexes` | relation両端・根拠はnative relation/edgeへ対応する。関係自体の否定とscopeは現在のnative専用fieldがなく、対応未成立として残す |
+| `unknowns[].unknown_id/target_claim_refs/dimension/description/evidence_indexes` | native unknown boundaryの対象・dimension・evidenceへ対応する案。descriptionを新しい観測factへしない。targetを落として曖昧な一般的不足へしない |
+| `conflicts[].conflict_id/claim_refs/conflict_kind/status/evidence_indexes` | source不一致・代替解釈・訂正を区別したまま共通候補内に保持。現Emlisのunresolved alternativesへ意味を確定せず押し込まない |
+| `updates[].operation/target_claim_refs/new_claim_refs/answer_source_id/prior_meaning_ref` | 実回答sourceと現在の採用済み意味を照合してからnative update項目へ対応。存在しないtargetを作らず、候補のoperationを自己承認させない |
+
+`evidence_indexes`はP1と同じtop-level evidence配列のindexである。top-levelの各要素は`source_id/field_path/start/end/quote`のまま保持する。index/範囲/quoteが整合しても、subjectの解決・否定scope・時点・関係の読みが正しいとは保証しない。
+
+### P2-E2. 維持するsource検査と、再設計が必要な有限意味の一致
+
+| 現owner／実assertion | 旧profileで維持すること | 将来の別profileで具体的に再設計する責任（今回未実装） |
+|---|---|---|
+| `source_kernel.freeze_text_source/validate_evidence_refs/build_source_owner_universe`、`emlis_thread_source.admit_emlis_thread` | 原文bytes、版、field、scalar/UTF-8、label、秘密入力境界、source親、実質問列、plan別履歴・問い上限、source prefixを維持 | 元sourceに対して候補のclaim/引数ごとの根拠とscopeを解決する。任意の新ledger span・ownerを候補に自己申告させない。source検査が通ったことは意味採用の合格ではない |
+| `emlis_stage1_response._validate_canonical_semantic_inputs` | `source != expected_source`、owner universe再照合、evidence到達性を保持。旧active/final plan、graph、parentへの完全一致も旧結果用に保持 | 現在はsourceから有限parserで`expected_active_plan/expected_final_plan`を再導出し、`grounded_plan_matches`、`graph != expected_graph`、parent一致を要求する。新候補経路はこの意味導出元を、承認された採用済み意味snapshotへ版付きで切り替える具体案が必要。一致を削るだけでは不可 |
+| `validate_interpretation_candidate_pool` | 旧`tuple(candidates) == build_interpretation_candidate_pool(...)`を維持 | 外部JSON候補を既存poolへ追加して旧検査を緩めない。採用済み意味→有限の既存表現範囲／未対応をCMEEが変換し、各argument・relation・qualifier・unknownの閉包を検査する。対応不能な自由候補を既存enumに偽装しない |
+| `emlis_v1a._validate_source_owner_graph_contract`／`validate_positive_realization_trace` | owner分母、required/optional、source/evidence、visible/unresolved分割、trace全被覆、plan/graphのidentity、実本文への根拠連続性を保持 | trace validatorの前半は現在parserからcanonical plan/graphを作り、V2では`compile_stage1_response`のprojection/unitsまで完全一致する。新profileでは採用済み意味を同じ起点としてplan→本文→traceを照合する。sourceへの位置一致だけ、モデル自身の意味自己採点だけでは置換しない |
+| `emlis_thread_projection._project_thread_meaning_aggregate` | `plan != build_updated_grounded_plan(prepared)`の拒否、checkpoint・source prefixと全node/edge/qualifierの結合を保持 | 実threadはsingle-input検査だけではない。この再導出元も旧有限意味／新採用済み意味を明示分岐する必要がある。IDだけ旧checkpointへ貼り、新planを通すことを禁止する |
+| `emlis_question.question_candidate/validate_question_binding` | 実質問のsource/thread/target/evidence/発行数、skip/終了・本人continueを維持。旧質問は旧planから同じcanonical質問を再導出 | 現`validate_question_binding`は`question_candidate`で再生成した質問との一致を要求する。モデルの問い文だけを現pendingへ入れない。新しい対象付きunknownから問いを出す責任と、発行済み質問の再読・回答資格を新profileで具体化する。現在のE02-0のENDを過去へ遡ってASKへ変えない |
+| `emlis_answer_update.prepare_emlis_meaning/_prepare_answer/build_updated_grounded_plan` | 本人回答の別envelope、訂正対象・依存先・当時/回答時点、非更新・未解決・PARTIAL、旧legacy再導出を維持 | 候補の更新対象とscopeを既存のactive claimへ特定する処理が必要。新しい解釈を保存済み旧意味の再導出として扱わない。回答の一部が未対応なら、その部分を失わず未解決とする |
+| `emlis_thread_surface.realize_emlis_thread_body`、`emlis_ai_grounded_sentence_surface.validate_grounded_surface_result`、`emlis_ai_grounded_observation_gate.evaluate_grounded_surface_body_inverse/evaluate_grounded_observation_gate` | 同一planからObservation/Receptionを作り、実本文で主体・時点・肯否・関係・不明・禁止推論・原文反復等を検査する責任を維持 | 現作者・独立readerは有限の意味／表現に依存する。新claimを入れても本文と独立照合が未対応なら本文は未成立。原文replayやrawモデル文の貼付を成功fallbackにしない。将来モデルへ表現を担わせる場合も同じ意味・本文検証の責任を別途具体化する |
+| `emlis_thread_service.EmlisThreadService._process` | MEANING_UPDATEを先に保存し、`_json(outcome.meaning_checkpoint) != cp`を拒否。完成OBSERVATIONの非再生成、非更新の保存本文再使用、中断再開を維持 | 現checkpointは意味参照を持つが、自由なモデル意味候補全体を保存するfieldはない。同じsourceから再推論して旧意味を再現する設計は不可。新profileの採用済み意味snapshot・内容identity・admission版とcheckpointを保存・再開へ渡す差分を、既存保存owner/設計05で確定する必要がある |
+
+新profile・新admissionという記述自体が設計案である。旧contractの撤回・検査の無効化・公開DTO変更・新保存fieldの導入承認ではない。source検査・意味対応・生成表現・商品受入れを一つの成功へ合算しない。
+
+### P2-E3. E02-0：嬉しさと、その対象がまだ曖昧であることを分ける設計例
+
+固定fixture原文からの**手作業の設計例**であり、実モデル候補、採用済み意味、再実行結果ではない。保存済みC0はGENERATED/問いなしのまま保持する。
+
+| 材料／位置 | 候補に保持する読み | 既存fieldとの対応と限界 |
+|---|---|---|
+| `E02-O.memo`全25scalar/75UTF-8 byte。`うれしかった`はscalar[0,6)、field UTF-8[0,18) | 本人がその場面で嬉しかったという報告 | reaction nucleusのactor=current_user、modality=feeling、polarity=positiveへ対応する案。過去の感情を回答時点の現在へしない。原fieldの部分quoteは共通候補の根拠位置であり、別のnative`sN`を作った意味ではない |
+| 同memoの`どこがうれしかったかはまだ曖昧`はscalar[9,24)、field UTF-8[27,72) | 嬉しさそのものを疑うのでなく、何が嬉しかったかが未確定 | `GroundedUnknownBoundary.affected_nucleus_ids`で当該嬉しさへ結びつける対応案。dimensionalな意味の新採用は未実装。曖昧だから喜びを取り消す、原因を自動補完する、とはしない |
+| `E02-O.memo_action`全22scalar/66UTF-8 byte | 打合せで後輩に説明を任せ、最後まで聞いたという本人行動 | action nucleusと原field/evidenceを保持。後輩の意図・出来栄え、本人の成長・信頼・任せられた安心、喜びの理由を、この行動だけから加えない |
+
+嬉しさと対象不明は共存でき、同じ単語への肯定・否定の矛盾ではない。元memoの`けど`のscopeを保持する。memo_actionとの関連が同じ記録内にあることと、どの行動が喜びの原因かが確定したことを分ける。現在graphの`action_supports_change`を、新候補のcauseの正解labelとして流用しない。
+
+この候補を現型に形だけ写すことと、現parserのplan/poolが同じ読みを返すことは別である。対応がないunknownやscopeは共通候補内で保留し、sourceを捨てない。必要な一点への問いを検討する余地はあるが、新しい問い資格を今回発行しない。既存C0に実pendingがない事実を変えない。
+
+### P2-E4. E02-B：理由の否定を、感情の否定や架空訂正にしない設計例
+
+P1のE02-Bは`SUPPLEMENTAL_PROBE`、`thread_answer_admitted=false`、`N_A_NO_ACTUAL_PENDING_QUESTION`である。このfixtureを実ANSWERへ昇格しない。以下は将来の対応を調べるための手作業例で、実thread更新成功ではない。
+
+| 材料／位置 | 意味と否定scope | 現型の対応・未対応 |
+|---|---|---|
+| `E02-S2`第一文scalar[0,27)、field UTF-8[0,81)：`自分が口を挟まずに済んだから嬉しかったのではないです。` | 否定されているのは「口を挟まずに済んだことが嬉しさの理由」という説明。本人の嬉しさを否定していない | `GroundedSemanticFrame.polarity`をjoyへnegativeとして設定してはならない。現`GroundedSemanticRelation`には関係自体の否定scope専用fieldがなく、`RelationOperator.SOURCE_EXPLICIT_CAUSE`だけではこの否定を表せない。共通候補にscopeを残し、対応未成立を保留／未対応とする。`other_explicit`や自由attributeへ押し込んで採用しない |
+| 第二文scalar[27,61)、field UTF-8[81,183)：`後輩の説明で、私が思いつかなかったやり方を知れたのが嬉しかったです。` | 本人にとって、思いつかなかったやり方を後輩の説明から知れたことが嬉しさへ結びつく。`思いつかなかった`の主体は本人で、方法についての限定 | 明示原因の候補は関係両端と両端の原文根拠を保持し、対応範囲では`GroundedSemanticRelation.type=user_stated_cause`／候補CAUSE/EFFECT引数とSOURCE_EXPLICIT_CAUSEへ対応し得る。method修飾・否定主体まで保持できるnative対応は別途必要。後輩の意図や本人の成長・能力評価を加えない |
+
+旧採用済み意味に「口を挟まずに済んだから嬉しかった」というcauseが実在しなければ、それを架空の`target_meaning_refs`としてREVISE/WITHDRAWしない。実pendingが存在する別threadで本人がこの補足をした場合は、未確定だった理由へのADD、既に採用済みcauseへのREVISE、本人の明示撤回、無更新、対象不明を、実際のprior meaningと回答scopeから個別に判断する。第一文だけで元の喜び・行動・独立不明を失効させない。第二文の理由が明示された場合も、本人がなお不明とする残りの範囲を自動で全解決扱いしない。
+
+### P2-E5. 旧保存・実pending・中断再開に必要な将来差分
+
+1. 完成済み旧OBSERVATION/DTOは保存本文のまま再読する。モデルやadmission版の変更を、同じ保存本文の再生成理由にしない。
+2. 未完成の旧checkpointは、現在の既知legacy分岐による旧source/旧意味の完全な再導出と同じID照合を維持する。新しい候補の読みを旧`checkpoint_id/base_meaning_ref`へ貼り替えない。復元不能は復元不能のまま示す。
+3. 新profileを実装する前に、採用済み意味snapshotの保存先・版・内容identity・source prefixとの結合を設計05と既存service/storeで確定する。モデルの再呼出しは同じ意味snapshotの再現方法ではない。model/revisionの未提供を仮値で埋めない。
+4. 意味確定前の中断は、元入力・実回答と未採用候補／採否の状態から再開する。意味確定後の中断は、その採用済みsnapshotとcheckpointから本文だけを再開し、本人回答・MEANING_UPDATEを二重追加しない。本文失敗で訂正・撤回を復活させない。
+5. 実pendingは、その発行時の意味profile・target・根拠・問い予算と結ぶ。Free/Plus最大1、Premiumは本人continueで逐次最大3、skip/ENDを保つ。候補の返した問い文やP1 probeで既存pendingを代用しない。
+
+P2として確定するのは以上の対応先・維持条件・不足の区別である。sourceだけ既存型へ戻せる部分、形は対応しても意味採用責任が未成立な部分、現在のnative契約で表せない部分を残した。実admissionの変更は、この具体差分の承認と設計05のprofile・保存・検証条件が成立した後の別実装単位である。今回production/guard/test/fixture/実モデル/API/DB/RN/稼働変更0。PRODUCT_NOT_CLEAR、candidate_ready=false、automatic_progression=falseを維持する。

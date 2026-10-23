@@ -111,3 +111,26 @@ python Cocolon/Cocolon_前提資料/observation_learning/trials/2026-10-23-curre
 P1最終補正：stop済みの実controlは残質問枠0とし、回帰testを追加。21件の独立検証後、主担当の最終22件は全成功（0.116秒）。source変更後の明示stub再実行は別pathで一度行い、全4材料と20receiptが初回と同一であることを照合して最終source blobへ更新した。実stub runは計2、重複除外した最終scenarioは20。初回結果digest・source blob・実行履歴をpreparation_results.jsonへ保持。C0再実行は0。
 
 API実装commit：[b7eb534](https://github.com/MassyuRed/mashos-api/commit/b7eb534d44658549896baf449e7c319d49d14396)。新規2module＋testの3pathだけを変更。Cocolonの記録はこの節を含むrevisionから解決する。
+
+<a id="p2"></a>
+
+## 6. P2：候補要素・既存意味型・検査の対応
+
+2026-10-23 JST。MashのP2継続指示で実施。**設計対応表は完了、実意味admissionは未実装。** 既存設計[01](../../../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-p2)／[02](../../../designs/cmee/v1/02_emlis_v1a_detailed_design.md#cmee-p2-emlis)／[03](../../../designs/cmee/v1/03_piece_v1c_detailed_design.md#cmee-p2-piece)／[04](../../../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#cmee-p2-analysis)／[05](../../../designs/cmee/v1/05_json_schema_and_versioning.md#cmee-p2-schema)へ反映した。新しい生成Engine・admission checkerは作っていない。
+
+[semantic_mapping_inspection.json](semantic_mapping_inspection.json)には手作業設計4例、28claim、60個の原文quote、実P1 receipt4件、26native dataclassの全field一覧、9関数のAST位置とsource blobを保存。proposalの根拠index・関係端点・quote範囲を照合した。全receiptはCANDIDATE_UNREVIEWED／NOT_ADOPTED。これは候補意味やP2 schemaのruntime合格、native graph構築、実更新、本文生成ではない。P1材料・C0・M1 fixture/messagesは不変。
+
+| 例 | 設計上の扱いと具体的な差 |
+|---|---|
+| E02-0 | HOLD。元の2行動・嬉しさ・対象不明を分ける。nucleus/component/qualifierまでの対応が必要 |
+| E02-B | 実pending無しの更新はUNSUPPORTED/N_A。理由否定を感情否定にせず、否定された理由内の内容をfactへ昇格しない。元行動／不明を保持 |
+| P01-N | 現Piece meaning profileではUNSUPPORTED。一般主体／報告／否定scope／未来条件と既存選択感情の被覆を、有限再導出・原文replayへ詰めるだけでは通らない |
+| A02-P1 | 型fieldの部分対応はあるがHOLD。UnknownGapの対象／根拠、行動に付く軽い負荷、safe label再導出・保存validatorが未対応 |
+
+これらは手作業の設計分類で、新runtimeの判定結果ではない。predicate argumentsは代表的な原格に根拠を付けたもので、全節の日本語解析を完成した例ではない。省略主体・絶対時点を補完せず、現nativeで表せないscopeを自由な文字列で通さない。
+
+原文range・型field・実関数名を分担照合し、主担当が統合。独立レビューで、①E02主節と従属節の主体混同、②E02の委任行動／元不明欠落、③理由否定の二重scope、④P01の所有者→主語の誤変換、⑤A02希望の未実現断定、⑥購入結果と負荷の留保欠落、⑦非行動内容と時制の混同、を修正した。sourceの引用が正しくても意味候補が誤り得る具体例として扱い、quote検査の万能性を主張しない。
+
+API/P1code・guard・protected testの変更0。今回pytest／unittest追加・再実行0（P1最終22件は過去の成立結果として保持）。実行したのはP1受取と参照／型field／関数所在の一時的なinspection（例の作成・修正に3回実行、最終snapshotだけを保存）で、C0生成／外部推論／重み／DB／RN／配置／課金0。inspection結果の最終snapshotのみをdistinct evidenceとして数え、作成途中の例・照合を成功数に加算しない。
+
+現在の具体的blockerは、source境界ではなく、新しい意味を現finite再導出へ依存せず採用・plan・問い・本文／graph・保存へ通す版付き責任が未実装であること。次は設計01末尾の限定実admission変更案。P2で旧guardを無効化しない。STRUCTURE_MAP_DELTA_NONE、primary=BLOCKER_NARROWED、product_credit=0、automatic_progression=false。

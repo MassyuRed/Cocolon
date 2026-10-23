@@ -423,3 +423,57 @@ CMEE_V1C_PIECE_VISUAL_OPERATIONAL
 - Piece current structure map / manifest / historyがsame packetで同期する。
 
 このstateをCMEE three-core operational completionへ自動変換しない。
+
+<a id="cmee-p2-piece"></a>
+
+## 2026-10-23 — P2：未採用候補からPiece意味・本文までの対応差分（PROPOSED_ONLY）
+
+P1後の固定原本はCocolon PR30 `141973b4eb35428b50e09cb5c74e9a0f7e2aa208`、API PR3 `b7eb534d44658549896baf449e7c319d49d14396`。本節はMashが指示したCMEE内部準備の具体化であり、実admission・grammar・realizer・guard・商品contractの変更、モデル接続、本文生成、保存・配置を実施／承認した記録ではない。冒頭のfuture topologyや旧activation状態から現在を復元せず、現在の実装・稼働・残件は[全体現在地](../../../00_cocolon_current_product_and_state.md)とPiece current mapへ戻る。
+
+共通の未採用候補schemaは[05のP2](05_json_schema_and_versioning.md)が所有する。本節の「型へ写せる」はfieldの収容先があるという設計上の対応だけで、候補が妥当・採用済み・表示可能という意味ではない。P1の`CandidateReceipt.adoption_state=NOT_ADOPTED`を維持する。モデルの自己採点、quoteの位置一致、下表の記載だけでは採用しない。
+
+### P2-C1. 既存型への対応と、保持できない意味
+
+実source prefixはAPI `ai/services/ai_inference/cocolon_meaning_experience_engine/`。
+
+| 候補の意味要素 | 既存の正確な収容先 | 写像条件・差分 |
+|---|---|---|
+| source ID・版・原7field・本文field | `PieceSourceSnapshot.saved_input_id/source_version/saved_original_json/original_text`、`PieceSourceMeaning.saved_snapshot/envelope/evidence` | snapshotは既存ownerが取得・再照合する。P1のfield locatorをnative `EvidenceRef`と偽らず、採用時に既存source envelopeへ束縛した正規locatorをCMEE側で作る。原7fieldとmemo→空行→memo_actionを保持 |
+| claimのID・本文・根拠 | `GroundedMeaningGraph.nodes[]`の`MeaningNode.node_id/owner_id/node_kind/grounding_kind/value/epistemic_state/evidence_ids`、`PieceSentenceMeaning.node_id/evidence_id/source_start/source_end/role` | currentの`node.value`は原文の完全な文そのもの。モデルの言換え本文をここへ入れるとsource slice一致を壊す。candidate IDとCMEEが割当てるnode/owner IDを分ける。抽象claimから原文nodeへの対応は採用adapterの未実装責任 |
+| 主体・述語・対象 | 限定評価は`PiecePersonalEvaluation.scalar_parts/utf8_parts`（speaker／predicate／target）、`construction/kind/copula`。明示role/nameは`PieceRoleBinding` | `MeaningNode`に一般actor/predicate/argument欄はない。省略主体を「私」の明示根拠へ変換しない。一般感情・非行動・被依頼行為などを評価frameへ押し込まない。未対応分は候補に保持し、nativeへ未採用 |
+| 肯否・時点・確定度 | 限定評価は`PiecePersonalEvaluation.polarity/temporal_scope/commitment`。その他の原文nodeは完全原文を保持 | 原記録`created_at`と、記述対象の過去／次回／そのときは別。一般claimのnegation scope、報告内感情、将来条件をこれらの有限評価fieldだけでは表し切れない。native拡張／別の採用表現を決めるまで保留 |
+| 関係・条件・留保 | `MeaningEdge.relation/source_node_id/target_node_id/evidence_ids`、限定scopeは`PieceExpressionScope.relation/marker/scope_scalar_span/scope_utf8_span/expression_scalar_span/expression_utf8_span` | currentは原文の接続詞と限定grammarから再導出する。relation文字列を入れられることと、妥当な関係として採用できることを分ける。markerや両端の根拠なしに因果・同時性・決意を作らない |
+| 明示参照・照応 | `PieceNominalReference.antecedent_node_id/reference_node_id/nominal_head`と両側scalar/UTF-8 span | currentの限定名詞参照と同等のsource証拠が必要。「そのとき」が指す未来の条件を、既存nominal referenceの成功へ偽装しない |
+| 選択感情・強さ | 保存JSONの`emotions/emotion_details`、限定対応の`PieceSelectedFeeling.selection_field/selection_index/label/strength/node_id/evidence_id` | selected labelは本文と別の本人入力。ラベルから感情の原因を補わない。現在の`_selected_feeling_bindings`は現在肯定の明示自己感情文との一致を要求するため、P01の過去感情へそのまま適用できない |
+| unknown・複数の読み・不一致 | 現`PieceSourceMeaning`／`PieceArtifactPlan`に一般unknown/conflict集合はない | 原文の未確定・否定・対比はnodeから落とさず、候補側の対象・scope・根拠を保持する。架空のnode_kindや空の根拠で穴埋めせず、一般採用は未対応／保留とする。嬉しさと仕事の残りは両立する内容で、矛盾へ変換しない |
+| 本文責務・段落・format | `PieceArtifactPlan.graph_id/source_version/intent/duties/block_node_ids/declaration_eligible`、`PieceTextDuty.node_id/operation` | 各claimのmust-keep対応を確認してからCMEEがplanを作る。モデルが返したplanをそのまま採用しない。本人の声、条件・否定・留保を保つ新本文の採用責任は現有限operationと別に具体化が必要 |
+| canonical textとartifact | `PieceArtifact.body_blocks/piece_text/piece_text_hash/format_type/eligible_formats` | 型へ入れた時点ではartifact採用0。本文、既存format適格性、publicization、recipe／保存／画像fit／export identityの成立を分ける。モデルがfitやrenderer成功を宣言しても証拠にしない |
+
+### P2-C2. P01-Nの具体的な意味と保留箇所
+
+以下は固定fixtureを人手で対応づけた設計例であり、モデル出力・新しい採用済みgraphではない。全rangeは`P01-O`の元fieldに対するUnicode scalar半開区間。UTF-8は元fieldから再計算し、native envelopeに無いIDや座標を捏造しない。
+
+| 元source | 保持する意味・scope | current型との対応／候補の扱い |
+|---|---|---|
+| `memo[0,19)`「助かったと言ってもらえてうれしかった。」 | 他者からそう言われたという本人報告と、本人の過去の嬉しさ。相手の内心の真偽は別 | 原文nodeへ残す形はある。一般報告・感情・その関係のcandidate→native採用は未対応。話者が省略されていることも候補で明示し、勝手な固有人物や現在感情へ変えない |
+| `memo[19,41)`「でも自分の仕事が残って、帰るのが遅くなった。」 | 自分の仕事が残ったこと、帰りの遅れ、先行する嬉しさとの留保 | 2端点と「でも／残って」のscopeを候補へ保持。仕事量や時刻、手伝いが遅れの唯一原因という断定を追加しない。一般対比・結果のadmissionは保留 |
+| `memo[41,61)`「手伝ったことを後悔しているわけではない。」 | 「手伝ったこと」に向く後悔の否定scopeを全文のまま保持 | `PiecePersonalEvaluation`の有限好き／価値文へ偽装しない。「全く後悔がない」「良い経験だった」へ強めない。一般否定scopeのnative対応が未完のため未採用 |
+| `memo[61,84)`「次も引き受けるかは、そのときの余裕で決めたい。」 | 次回の引受けは未確定、その時の余裕を判断基準にしたいという意向 | `PieceExpressionScope`の原文「なら」等の成功に偽装しない。一般意思・条件・未来時点の採用は未対応。「次も引き受ける／断る」と確定せず、declaration適格性を自己認定しない |
+| `memo_action[0,19)`「頼まれて同僚の発表資料を一緒に直した。」 | 依頼され、同僚の発表資料を一緒に直したという本人報告（共同相手は未特定） | fieldはmemoと別のまま保持。本文順を根拠に、この行動が前四文のいつに起きたか／本人の動機を補わない。`KEEP_COMPLETE_SOURCE_CONTEXT`の保持形と、新しい自然なcanonical textの意味採用を区別 |
+| `emotions`／`emotion_details` | 喜び・不安、各weakの本人選択 | 7fieldにはそのまま保持するが、過去の嬉しさだけから不安の原因・現在強度を補わない。C0の`saved_emotion_meaning_not_yet_supported`は未解消のまま |
+
+候補が「嬉しかった」「負担もあった」「後悔の否定」「次回は余裕次第」のうち一つを欠く場合、原文の一部だけから読みやすい本文を作れても採用しない。候補quoteの一致だけでは、そのquoteからclaimが導けるとは判定できない。意味の対応が曖昧なら保留、現native構造や作者に収容できないなら未対応とし、sourceを削って既存grammarへ合わせない。
+
+### P2-C3. 維持する検査と、変更案が必要な正確なowner
+
+| 実owner・関数 | 維持する責任 | 実admission実装前に設計／承認を要する差分 |
+|---|---|---|
+| `piece_v2_source_adapter.project_saved_original_source`、`piece_source._saved_field_projection` | owner解決済み保存record、canonical JSON、ID・版・元7field、二本文fieldの同一性 | `_saved_field_projection`内の`_sentences`は有限意味側の条件。P1のsource-only投影を本番admission成功へ転用しない。新候補のsource照合と現grammar条件を分離する実装案が必要 |
+| `piece_source.build_piece_source_meaning`、`_selected_feeling_bindings` | 元本文・構造化選択・根拠位置を落とさない。生成文を本人sourceへ混ぜない | 新しい意味候補の主体・時点・肯否・関係の採用と、selected labelの保持／表出条件を具体化。有限grammarとの不一致だけで意味を誤りと決めず、未対応差を出す |
+| `piece_source.validate_piece_saved_fields` | snapshotとsource・evidence・意味の結び付き | 現在は同snapshotから`build_piece_source_meaning`を全再導出して`expected == meaning`。sourceの厳密一致と意味の有限再導出一致を分ける。再導出削除だけでは代替にならない |
+| `validate_piece_nominal_references`／`validate_piece_personal_evaluations`／`validate_piece_expression_scopes` | 全参照・主体・否定・時点・scopeの根拠保持 | 現有限導出と完全一致する型だけが通る。一般candidateを同型へ詰めた場合の保証範囲を拡げたことにしない |
+| `piece_v1c.compile_piece_artifact_plan`／`realize_piece_artifact` | 全nodeを落とさないduties／blocks、本人の声、plan-source binding | `plan == compile_piece_artifact_plan(meaning)`、原文sliceと`node.value`の一致、有限operationの作者を現行どおり維持。モデルの言換え・段落案を使うなら、意味被覆・否定scope・条件・多重性をどう検査するかが別の変更案 |
+| `piece_v2_content_policy.validate_source_meaning_preservation` | 本文とsourceの意味被覆、否定・時点・引数・role・条件の保持 | author-freeでも現有限grammarと許可編集だけを認める検査。一般paraphraseやLLM自己採点を検証できるものではない。新方式の意味検証と、機械で保証できず人が判断する範囲を明示する |
+| `validate_candidate_text`／`choose_format`、既存recipe／renderer／保存owner | content envelope、プラン別選択、正規本文hash、preview/save/read/export identity | モデルのproposed formatは提案だけ。新意味経路ができてもformat・fit・recipe・本番保存の成功条件は免除しない |
+
+P2は上記の差分表まで。current guardの緩和・削除、native型の追加、語彙／文法拡張、通常Engineへの候補注入、既存本文の再生成は0。次の実装案は、P01の全意味と未確定をどのversioned意味表現で保持し、どの候補を保留／未対応にするかを先に具体化し、既存承認と照合する。型を埋めたこと、stub成功、文書反映を意味採用・商品品質の成功へ数えない。

@@ -4432,4 +4432,6 @@ STRUCTURE_MAP_DELTA_PRESENT。`screens/InputScreen.js` は `features/piece/piece
 | Cocolon `Cocolon_前提資料/observation_learning/trials/2026-10-23-current-four/run_current_four.py` | 既存C0 defaultを維持、明示`--prepare-only`で4場面×5状態の固定stub。C0再生成しない |
 | 同directory `preparation_results.json` | 全材料・20未採用receipt・fixture／既存84＋新2 source blob。架空fixtureのみ |
 
+同directoryの`semantic_mapping_inspection.json`はP2の4手作業設計例、実P1受取、26native型field／9関数所在のinspection。実意味admissionを行うmoduleではない。P2仕様は既存design01〜05末尾、再開はweekly/P2。P2のruntime構造差分0。
+
 P1仕様は既存design01／05、検証境界はtrial README、進行は最新weeklyの20261023-cmee-model-preparation、現在地は00、CMEE map04と観測／比較READMEを同じ変更単位で同期。新しい引継ぎ／管理systemは作らない。STRUCTURE_MAP_DELTA_PRESENTはoffline境界追加、通常三中核・公開契約・保存・稼働は差分なし。
