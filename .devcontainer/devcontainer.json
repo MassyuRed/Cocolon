@@ -1,0 +1,11 @@
+{
+  "name": "Cocolon System Context V1",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+  "runArgs": [
+    "--platform=linux/amd64"
+  ],
+  "remoteUser": "root"
+}

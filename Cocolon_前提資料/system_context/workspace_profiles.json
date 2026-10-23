@@ -5,10 +5,15 @@
     "schema_version": "cocolon.system_context.code_index_configuration.v1",
     "toolchain": {
       "node_major": "20",
+      "node": "20.20.2",
+      "npm": "10.8.2",
+      "python": "3.11.16",
+      "platform": "linux/amd64",
       "typescript_syntax": "5.2.2",
       "scip_cli": "v0.7.1",
       "scip_typescript": "0.4.0",
-      "scip_python": "0.6.6"
+      "scip_python": "0.6.6",
+      "environment_lock": ".devcontainer/system-context-toolchain.lock.json"
     },
     "runs": [
       {
@@ -34,12 +39,12 @@
   },
   "profiles": {
     "production_main": {
-      "purpose": "Merged production baseline for RN and API",
+      "purpose": "Merged Git main baselines only; these refs do not identify a deployed runtime or current Draft product work",
       "repositories": {
         "Cocolon": {
           "repository": "MassyuRed/Cocolon",
           "checkout_ref": "main",
-          "expected_head": "de9c3d985053bbaaa7fc0d396e688cc2097ece40",
+          "expected_head": "e3aed2d9728b9b79976ef0b8805b4e262f272f4e",
           "role": "RN application, premise documents, and product structure owners"
         },
         "mashos-api": {
@@ -51,19 +56,24 @@
       }
     },
     "cmee_working": {
-      "purpose": "CMEE working view: stacked Cocolon context branch plus current disabled CMEE API draft",
+      "purpose": "Current whole-product material view: exact Cocolon PR30 and API PR3, all three core owners, learned-model/CMEE decisions and implementation/deployment/device/acceptance distinctions from the fresh whole-product baseline. System Context execution comes independently from PR37; this context update has no product behavior or deployment effect.",
+      "current_product_owner_adoption_state": "IMPLEMENTED_NOT_ACCEPTED",
+      "im10_state": "NON_PASS",
+      "candidate_ready": false,
+      "production_effect": 0,
+      "automatic_progression": false,
       "repositories": {
         "Cocolon": {
           "repository": "MassyuRed/Cocolon",
-          "checkout_ref": "SELF",
-          "expected_ancestor": "d29042f44e882110514b74dcc6a1b3f31ec746e6",
-          "role": "RN application, premise documents, CMEE design, and system-context owner"
+          "checkout_ref": "agent/three-core-cmee-current-structure-20260815",
+          "expected_head": "54d34985ba180e54b521549100fc1f9fcc72f309",
+          "role": "RN application, fresh whole-product baseline, structure maps, current weekly review, observation/model comparison and detailed product originals on Draft PR #30"
         },
         "mashos-api": {
           "repository": "MassyuRed/mashos-api",
           "checkout_ref": "agent/cmee-v1a-i1sx-source-explicit-20260815",
-          "expected_head": "06ce311b3ea728b06f83439d268a34bed917c01c",
-          "role": "FastAPI backend plus disabled CMEE implementation Draft PR #3"
+          "expected_head": "3084c99e5a08d6e475d8a177e62ebf1548e8a0f9",
+          "role": "FastAPI backend and current CMEE/Emlis, Piece and Analysis sources on Draft PR #3; source state is distinct from the separately recorded deployed overlay and product acceptance"
         }
       }
     },

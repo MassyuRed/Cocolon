@@ -37,3 +37,8 @@ yarn-error.*
 *.tsbuildinfo
 
 app-example
+
+# Cocolon System Context regenerable local state
+.cocolon-context-cache/
+.cocolon-context-workspace/
+__pycache__/

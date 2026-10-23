@@ -7,7 +7,9 @@ writes a machine-readable receipt.  It never changes product/runtime behavior.
 """
 from __future__ import annotations
 
+from contextlib import contextmanager
 from dataclasses import dataclass
+import fcntl
 import hashlib
 import json
 import os
@@ -18,13 +20,17 @@ import sqlite3
 import subprocess
 import sys
 import tempfile
-from typing import Any, Iterable, Mapping, Sequence
+from typing import Any, Callable, Iterable, Iterator, Mapping, Sequence
 
 from tools.cocolon_context_inventory import (
     InventoryError,
     build_bytes as build_inventory_bytes,
     verify as verify_inventory,
     write as write_inventory_output,
+)
+from tools.cocolon_context_environment import (
+    EnvironmentVerificationError,
+    verify_environment,
 )
 from tools.cocolon_context_publish_transport import (
     DEFAULT_MAX_PART_BYTES,
@@ -36,11 +42,25 @@ from tools.cocolon_context_publish_transport import (
 )
 from tools.cocolon_context_task import (
     ContextCompileError,
+    OPERATOR_CONTRACT_UNIT_C_KEYS,
+    PROFILE_SCHEMA_VERSION,
+    PROFILE_SCHEMA_VERSION_V1,
+    SAFE_PUBLIC_ID_RE,
+    UNIT_C_CMEE_OUTPUT_NAMES,
+    UNIT_C_NON_CMEE_OUTPUT_NAMES,
+    _git_blob_prefix,
+    _require_safe_git_ref,
+    _require_safe_repo_path,
+    _strict_json_loads,
+    _task_profile,
+    canonical_owner_bundle_fingerprint,
     compile_task_context,
+    extract_restricted_metadata,
     verify_task_context,
 )
 
 SCHEMA_VERSION = "cocolon.system_context.prepare_receipt.v1"
+SCHEMA_VERSION_V2 = "cocolon.system_context.prepare_receipt.v2"
 STEP5_CLAIM = "STEP5_COCOLON_STANDARD_ENTRY_CONNECTED"
 OVERALL_CLAIM = "COCOLON_SYSTEM_CONTEXT_STEPS1_TO_5_COMPLETE"
 STEP4_CLAIM = "STEP4_TASK_CONTEXT_COMPILER_CMEE_ACTUAL_REVIEW_COMPLETE"
@@ -49,6 +69,51 @@ RECEIPT_NAME = "prepare_summary.json"
 REPORT_NAME = "prepare_summary.md"
 STATUS_COMPLETE = "COMPLETE"
 STATUS_PENDING_REMOTE = "PENDING_REMOTE_VERIFICATION"
+UNIT_C_OPERATOR_CONTRACT_KEYS = frozenset(OPERATOR_CONTRACT_UNIT_C_KEYS)
+CMEE_TERMINAL_OUTPUTS = frozenset(UNIT_C_CMEE_OUTPUT_NAMES)
+NON_CMEE_TERMINAL_OUTPUTS = frozenset(UNIT_C_NON_CMEE_OUTPUT_NAMES)
+IMPLEMENTATION_ROOT = Path(__file__).resolve().parents[1]
+EXECUTION_INPUT_PATHS = (
+    ".devcontainer/Dockerfile",
+    ".devcontainer/devcontainer.json",
+    ".devcontainer/system-context-node/package.json",
+    ".devcontainer/system-context-node/package-lock.json",
+    ".devcontainer/system-context-python.lock",
+    ".devcontainer/system-context-toolchain.lock.json",
+    "tools/cocolon_context.py",
+    "tools/cocolon_context_environment.py",
+    "tools/cocolon_context_prepare.py",
+    "tools/cocolon_context_inventory.py",
+    "tools/cocolon_context_code_index.py",
+    "tools/cocolon_context_routes.py",
+    "tools/cocolon_context_task.py",
+    "tools/cocolon_context_publish_transport.py",
+    "tools/cocolon_context_ts_syntax.cjs",
+    "tools/cocolon_context_ts_routes.cjs",
+)
+EXECUTION_INPUT_DIRECTORIES = (
+    ".github/context-payloads/step2-code",
+    ".github/context-payloads/step3",
+    ".github/context-payloads/step3-c",
+    ".github/context-payloads/step3-ts-routes",
+)
+FULL_REBUILD_MODES = frozenset(
+    {
+        "INITIAL_FULL_BUILD",
+        "FULL_REBUILD_BASE_UNAVAILABLE",
+        "FULL_REBUILD_COMMIT_IDENTITY_CHANGE",
+        "FULL_REBUILD_EXECUTION_INPUT_CHANGE",
+        "FULL_REBUILD_FALLBACK",
+    }
+)
+PUBLICATION_PHASES = frozenset(
+    {
+        "CANDIDATE_VERIFIED",
+        "LIVE_MOVED_TO_BACKUP",
+        "CANDIDATE_PROMOTED",
+        "FINAL_VERIFIED",
+    }
+)
 
 
 class PrepareError(RuntimeError):
@@ -61,6 +126,17 @@ class RepositoryRef:
     path: Path
     commit: str
     tree: str
+
+
+@dataclass(frozen=True)
+class WorkspacePublicationPaths:
+    parent: Path
+    live: Path
+    candidate: Path
+    backup: Path
+    quarantine: Path
+    marker: Path
+    lock: Path
 
 
 @dataclass(frozen=True)
@@ -95,9 +171,312 @@ def _write_atomic(path: Path, data: bytes) -> None:
 
 def _load_json(path: Path) -> Any:
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
-    except (OSError, json.JSONDecodeError) as exc:
+        return _strict_json_loads(path.read_text(encoding="utf-8"), str(path))
+    except (OSError, UnicodeDecodeError, json.JSONDecodeError, ContextCompileError) as exc:
         raise PrepareError(f"cannot read JSON {path}: {exc}") from exc
+
+
+def _publication_paths(current_parent: Path, workspace: str) -> WorkspacePublicationPaths:
+    if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]{0,127}", workspace):
+        raise PrepareError("unsafe workspace publication identity")
+    parent = current_parent.resolve()
+    return WorkspacePublicationPaths(
+        parent=parent,
+        live=parent / workspace,
+        candidate=parent / f".{workspace}.cocolon-candidate",
+        backup=parent / f".{workspace}.cocolon-backup",
+        quarantine=parent / f".{workspace}.cocolon-quarantine",
+        marker=parent / f".{workspace}.cocolon-publication-transaction.json",
+        lock=parent / f".{workspace}.cocolon-publication.lock",
+    )
+
+
+def _assert_publication_path(path: Path, paths: WorkspacePublicationPaths) -> None:
+    allowed = {
+        paths.live,
+        paths.candidate,
+        paths.backup,
+        paths.quarantine,
+        paths.marker,
+        paths.lock,
+    }
+    if path not in allowed or path.parent != paths.parent:
+        raise PrepareError(f"unsafe publication path: {path}")
+
+
+def _remove_publication_tree(path: Path, paths: WorkspacePublicationPaths) -> None:
+    _assert_publication_path(path, paths)
+    if path.is_symlink() or path.is_file():
+        path.unlink()
+    elif path.is_dir():
+        shutil.rmtree(path)
+
+
+def _fsync_path(path: Path) -> None:
+    descriptor = os.open(path, os.O_RDONLY)
+    try:
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+
+
+def _fsync_directory(path: Path) -> None:
+    descriptor = os.open(path, os.O_RDONLY | os.O_DIRECTORY)
+    try:
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+
+
+def _write_publication_marker(
+    paths: WorkspacePublicationPaths, marker: Mapping[str, Any]
+) -> None:
+    _assert_publication_path(paths.marker, paths)
+    marker_temporary = paths.marker.with_name(paths.marker.name + ".tmp")
+    if marker_temporary.exists() or marker_temporary.is_symlink():
+        raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: marker temp exists")
+    _write_atomic(paths.marker, _canonical_bytes(marker))
+    _fsync_path(paths.marker)
+    _fsync_directory(paths.parent)
+
+
+@contextmanager
+def _publication_lock(paths: WorkspacePublicationPaths) -> Iterator[None]:
+    paths.parent.mkdir(parents=True, exist_ok=True)
+    _assert_publication_path(paths.lock, paths)
+    descriptor = os.open(
+        paths.lock,
+        os.O_RDWR | os.O_CREAT | getattr(os, "O_NOFOLLOW", 0),
+        0o600,
+    )
+    try:
+        try:
+            fcntl.flock(descriptor, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError as exc:
+            raise PrepareError("WORKSPACE_PUBLICATION_ALREADY_RUNNING") from exc
+        yield
+    finally:
+        try:
+            fcntl.flock(descriptor, fcntl.LOCK_UN)
+        finally:
+            os.close(descriptor)
+        try:
+            paths.lock.unlink()
+        except FileNotFoundError:
+            pass
+
+
+def _workspace_publication_identity(workspace_dir: Path, task: str) -> str:
+    if workspace_dir.is_symlink() or not workspace_dir.is_dir():
+        raise PrepareError("workspace publication identity root is unsafe")
+    task_root = workspace_dir / "task_context"
+    if not task_root.is_dir() or task_root.is_symlink():
+        raise PrepareError("workspace primary task root is missing or unsafe")
+    task_entries = sorted(task_root.iterdir(), key=lambda path: path.name)
+    if (
+        len(task_entries) != 1
+        or task_entries[0].name != task
+        or task_entries[0].is_symlink()
+        or not task_entries[0].is_dir()
+    ):
+        raise PrepareError("workspace must contain declared primary task exact1")
+    required = (
+        "manifest.json",
+        "code_index/code_index_manifest.json",
+        "route_graph/route_graph_manifest.json",
+        "publication_transport.json",
+        RECEIPT_NAME,
+        f"task_context/{task}/context_manifest.json",
+        f"task_context/{task}/publication_transport.json",
+    )
+    hashes: dict[str, str] = {}
+    for relative in required:
+        path = workspace_dir / relative
+        if not path.is_file():
+            raise PrepareError(
+                f"workspace publication identity file missing: {relative}"
+            )
+        hashes[relative] = sha256_file(path)
+    return hashlib.sha256(_canonical_bytes(hashes)).hexdigest()
+
+
+def _publication_marker(
+    *, paths: WorkspacePublicationPaths, workspace: str, task: str,
+    phase: str, pre_swap_identity: str | None, candidate_identity: str,
+) -> dict[str, Any]:
+    if phase not in PUBLICATION_PHASES:
+        raise PrepareError(f"unsupported publication phase: {phase}")
+    return {
+        "schema_version": "cocolon.system_context.workspace_publication_transaction.v1",
+        "workspace": workspace,
+        "primary_task": task,
+        "live_basename": paths.live.name,
+        "candidate_basename": paths.candidate.name,
+        "backup_basename": paths.backup.name,
+        "quarantine_basename": paths.quarantine.name,
+        "phase": phase,
+        "pre_swap_identity": pre_swap_identity,
+        "candidate_identity": candidate_identity,
+        "completion_claim": None,
+        "v1_activation": 0,
+        "product_credit": 0,
+        "technical_credit": 0,
+        "automatic_progression": False,
+    }
+
+
+def _validate_publication_marker(
+    marker: Any, *, paths: WorkspacePublicationPaths, workspace: str, task: str
+) -> Mapping[str, Any]:
+    expected_keys = {
+        "schema_version",
+        "workspace",
+        "primary_task",
+        "live_basename",
+        "candidate_basename",
+        "backup_basename",
+        "quarantine_basename",
+        "phase",
+        "pre_swap_identity",
+        "candidate_identity",
+        "completion_claim",
+        "v1_activation",
+        "product_credit",
+        "technical_credit",
+        "automatic_progression",
+    }
+    if not isinstance(marker, Mapping) or set(marker) != expected_keys:
+        raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: invalid marker shape")
+    expected_values = {
+        "schema_version": "cocolon.system_context.workspace_publication_transaction.v1",
+        "workspace": workspace,
+        "primary_task": task,
+        "live_basename": paths.live.name,
+        "candidate_basename": paths.candidate.name,
+        "backup_basename": paths.backup.name,
+        "quarantine_basename": paths.quarantine.name,
+        "completion_claim": None,
+        "v1_activation": 0,
+        "product_credit": 0,
+        "technical_credit": 0,
+        "automatic_progression": False,
+    }
+    if any(marker.get(key) != value for key, value in expected_values.items()):
+        raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: marker identity mismatch")
+    if marker.get("phase") not in PUBLICATION_PHASES:
+        raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: invalid marker phase")
+    for key in ("pre_swap_identity", "candidate_identity"):
+        value = marker.get(key)
+        if value is not None and not re.fullmatch(r"[0-9a-f]{64}", str(value)):
+            raise PrepareError(
+                f"PUBLICATION_RECOVERY_AMBIGUOUS: invalid {key}"
+            )
+    if marker.get("candidate_identity") is None:
+        raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: candidate identity missing")
+    return marker
+
+
+def _recover_workspace_publication(
+    paths: WorkspacePublicationPaths, *, workspace: str, task: str
+) -> None:
+    marker_temporary = paths.marker.with_name(paths.marker.name + ".tmp")
+    if marker_temporary.exists() or marker_temporary.is_symlink():
+        raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: marker temp exists")
+    if paths.marker.is_symlink() or any(
+        path.is_symlink()
+        for path in (paths.live, paths.candidate, paths.backup, paths.quarantine)
+    ):
+        raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: symlink publication state")
+    residuals = [
+        path
+        for path in (paths.candidate, paths.backup, paths.quarantine)
+        if path.exists() or path.is_symlink()
+    ]
+    if not paths.marker.is_file():
+        if residuals:
+            raise PrepareError(
+                "PUBLICATION_RECOVERY_AMBIGUOUS: residual without marker"
+            )
+        return
+    marker = _validate_publication_marker(
+        _load_json(paths.marker), paths=paths, workspace=workspace, task=task
+    )
+    phase = str(marker["phase"])
+    pre_swap_identity = marker.get("pre_swap_identity")
+    candidate_identity = str(marker["candidate_identity"])
+    if phase == "CANDIDATE_VERIFIED":
+        if paths.backup.exists() or paths.quarantine.exists() or not paths.candidate.is_dir():
+            raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: candidate phase layout")
+        if pre_swap_identity is not None:
+            if not paths.live.is_dir() or _workspace_publication_identity(
+                paths.live, task
+            ) != pre_swap_identity:
+                raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: last-good live mismatch")
+        elif paths.live.exists():
+            raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: unexpected initial live")
+        _remove_publication_tree(paths.candidate, paths)
+    elif phase == "LIVE_MOVED_TO_BACKUP":
+        if not paths.backup.is_dir():
+            raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: backup missing")
+        if pre_swap_identity is None or _workspace_publication_identity(
+            paths.backup, task
+        ) != pre_swap_identity:
+            raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: backup identity mismatch")
+        if paths.live.exists():
+            raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: unexpected live")
+        os.replace(paths.backup, paths.live)
+        if paths.candidate.exists():
+            _remove_publication_tree(paths.candidate, paths)
+    elif phase == "CANDIDATE_PROMOTED":
+        if not paths.live.is_dir() or _workspace_publication_identity(
+            paths.live, task
+        ) != candidate_identity:
+            raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: promoted live mismatch")
+        if pre_swap_identity is None:
+            if paths.backup.exists():
+                raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: unexpected backup")
+            _remove_publication_tree(paths.live, paths)
+        else:
+            if not paths.backup.is_dir() or _workspace_publication_identity(
+                paths.backup, task
+            ) != pre_swap_identity:
+                raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: backup identity mismatch")
+            os.replace(paths.live, paths.quarantine)
+            os.replace(paths.backup, paths.live)
+            _remove_publication_tree(paths.quarantine, paths)
+        if paths.candidate.exists():
+            _remove_publication_tree(paths.candidate, paths)
+    else:  # FINAL_VERIFIED
+        if not paths.live.is_dir() or _workspace_publication_identity(
+            paths.live, task
+        ) != candidate_identity:
+            raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: final live mismatch")
+        if paths.backup.exists():
+            _remove_publication_tree(paths.backup, paths)
+        if paths.candidate.exists() or paths.quarantine.exists():
+            raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: final residual")
+    paths.marker.unlink()
+    _fsync_directory(paths.parent)
+
+
+@contextmanager
+def _candidate_system_context_root(
+    *, source_root: Path, candidate_workspace: Path, workspace: str,
+    temporary_parent: Path,
+) -> Iterator[Path]:
+    temporary_parent.mkdir(parents=True, exist_ok=True)
+    with tempfile.TemporaryDirectory(
+        prefix="cocolon-system-context-candidate-", dir=temporary_parent
+    ) as temporary:
+        root = Path(temporary) / "system_context"
+        (root / "current").mkdir(parents=True)
+        for name in ("workspace_profiles.json", "task_profiles.json"):
+            source = (source_root / name).resolve()
+            if not source.is_file():
+                raise PrepareError(f"candidate profile missing: {name}")
+            os.symlink(source, root / name)
+        os.symlink(candidate_workspace.resolve(), root / "current" / workspace)
+        yield root
 
 
 def _run(
@@ -126,6 +505,141 @@ def _git(repo: Path, *args: str) -> str:
 def _assert_repo(repo: Path, key: str) -> None:
     if not (repo / ".git").exists():
         raise PrepareError(f"repository unavailable: {key}={repo}")
+
+
+def _assert_clean_checkout(repo: Path, key: str) -> None:
+    """Reject bytes that are not represented by the resolved Git commit."""
+    dirty = _git(
+        repo,
+        "-c",
+        "core.quotepath=false",
+        "status",
+        "--porcelain=v1",
+        "--untracked-files=all",
+    )
+    if dirty:
+        first = dirty.splitlines()[0]
+        raise PrepareError(f"{key} material checkout is not clean: {first}")
+
+
+def _implementation_git_identity() -> tuple[str, str]:
+    _assert_repo(IMPLEMENTATION_ROOT, "System Context implementation")
+    commit = _git(IMPLEMENTATION_ROOT, "rev-parse", "HEAD")
+    tree = _git(IMPLEMENTATION_ROOT, "rev-parse", "HEAD^{tree}")
+    return commit, tree
+
+
+def _execution_input_identity(
+    system_context_root: Path, environment_fingerprint: str | None = None
+) -> dict[str, Any]:
+    """Bind cache reuse to the actual generators, payloads, profiles and locks."""
+    files: dict[str, dict[str, Any]] = {}
+
+    def add(logical_path: str, physical_path: Path) -> None:
+        if not physical_path.is_file():
+            raise PrepareError(f"execution input missing: {logical_path}")
+        data = physical_path.read_bytes()
+        files[logical_path] = {
+            "sha256": hashlib.sha256(data).hexdigest(),
+            "size": len(data),
+        }
+
+    for relative in EXECUTION_INPUT_PATHS:
+        add(relative, IMPLEMENTATION_ROOT / relative)
+    for relative in EXECUTION_INPUT_DIRECTORIES:
+        directory = IMPLEMENTATION_ROOT / relative
+        if not directory.is_dir():
+            raise PrepareError(f"execution input directory missing: {relative}")
+        for path in sorted(item for item in directory.rglob("*") if item.is_file()):
+            logical = path.relative_to(IMPLEMENTATION_ROOT).as_posix()
+            add(logical, path)
+    for name in ("workspace_profiles.json", "task_profiles.json"):
+        add(f"Cocolon_前提資料/system_context/{name}", system_context_root / name)
+    implementation_commit, implementation_tree = _implementation_git_identity()
+    identity: dict[str, Any] = {
+        "implementation_commit": implementation_commit,
+        "implementation_tree": implementation_tree,
+        "environment_fingerprint": environment_fingerprint,
+        "files": dict(sorted(files.items())),
+    }
+    identity["fingerprint"] = hashlib.sha256(_canonical_bytes(identity)).hexdigest()
+    return identity
+
+
+def _standard_environment_identity() -> Mapping[str, Any]:
+    """Gate the public standard entry on one clean implementation and toolchain."""
+    _assert_clean_checkout(IMPLEMENTATION_ROOT, "System Context implementation")
+    return verify_environment(implementation_root=IMPLEMENTATION_ROOT)
+
+
+def _assert_cache_root_untracked(
+    cache_root: Path, repository_roots: Sequence[Path]
+) -> None:
+    """Reject an explicit cache location that Git could publish by accident."""
+    target = cache_root.resolve()
+    candidates: set[Path] = set()
+    for repository in repository_roots:
+        root = repository.resolve()
+        try:
+            target.relative_to(root)
+        except ValueError:
+            continue
+        if (root / ".git").exists():
+            candidates.add(root)
+
+    existing_parent = target
+    while not existing_parent.exists() and existing_parent != existing_parent.parent:
+        existing_parent = existing_parent.parent
+    discovered = subprocess.run(
+        ("git", "-C", str(existing_parent), "rev-parse", "--show-toplevel"),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.DEVNULL,
+        text=True,
+    )
+    if discovered.returncode == 0 and discovered.stdout.strip():
+        candidates.add(Path(discovered.stdout.strip()).resolve())
+    containing = []
+    for root in candidates:
+        try:
+            target.relative_to(root)
+        except ValueError:
+            continue
+        containing.append(root)
+    if not containing:
+        return
+    root = max(containing, key=lambda path: len(path.parts))
+    relative = target.relative_to(root)
+    if not relative.parts:
+        raise PrepareError(f"cache root cannot be a repository root: {target}")
+    tracked = subprocess.run(
+        ("git", "-C", str(root), "ls-files", "--", relative.as_posix()),
+        stdout=subprocess.PIPE,
+        stderr=subprocess.DEVNULL,
+        text=True,
+    )
+    if tracked.returncode != 0:
+        raise PrepareError(f"cannot inspect cache root tracking state: {target}")
+    if tracked.stdout:
+        raise PrepareError(f"cache root contains tracked paths: {target}")
+    ignored = subprocess.run(
+        (
+            "git",
+            "-C",
+            str(root),
+            "check-ignore",
+            "--quiet",
+            "--no-index",
+            "--",
+            f"{relative.as_posix().rstrip('/')}/",
+        ),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    ).returncode == 0
+    if not ignored:
+        raise PrepareError(
+            "cache root is inside a Git repository but is not ignored: "
+            f"{target}"
+        )
 
 
 def _commit_paths(repo: Path, parent: str, commit: str) -> list[str]:
@@ -166,6 +680,7 @@ def _resolve_refs(
     for key in sorted(paths):
         path = paths[key].resolve()
         _assert_repo(path, key)
+        _assert_clean_checkout(path, key)
         checkout_head = _git(path, "rev-parse", "HEAD")
         commit = effective_material_commit(path, checkout_head) if key == "Cocolon" else checkout_head
         spec = repository_specs[key]
@@ -190,6 +705,520 @@ def _resolve_refs(
             tree=_git(path, "rev-parse", f"{commit}^{{tree}}"),
         )
     return refs
+
+
+def _ref_identity(refs: Mapping[str, RepositoryRef]) -> dict[str, dict[str, str]]:
+    return {
+        key: {"commit": ref.commit, "tree": ref.tree}
+        for key, ref in sorted(refs.items())
+    }
+
+
+def _assert_refs_stable(
+    *,
+    start_refs: Mapping[str, RepositoryRef],
+    repo_root: Path,
+    external_workspace_root: Path,
+    workspace_profile: Mapping[str, Any],
+) -> dict[str, RepositoryRef]:
+    """Resolve again and reject any checkout ref/tree drift during the run."""
+    end_refs = _resolve_refs(
+        repo_root=repo_root,
+        external_workspace_root=external_workspace_root,
+        workspace_profile=workspace_profile,
+    )
+    if _ref_identity(start_refs) != _ref_identity(end_refs):
+        raise PrepareError(
+            "MATERIAL_REF_MOVED_DURING_RUN: "
+            f"start={_ref_identity(start_refs)} end={_ref_identity(end_refs)}"
+        )
+    return end_refs
+
+
+def _canonical_github_url(
+    workspace_profile: Mapping[str, Any], repository_key: str,
+) -> str:
+    specifications = workspace_profile.get("repositories")
+    if not isinstance(specifications, dict) or repository_key not in specifications:
+        raise PrepareError(f"canonical owner repository is not workspace-allowlisted: {repository_key}")
+    spec = specifications[repository_key]
+    if not isinstance(spec, dict):
+        raise PrepareError(f"workspace repository specification is invalid: {repository_key}")
+    allowlisted = str(spec.get("repository") or "")
+    if not re.fullmatch(r"[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+", allowlisted):
+        raise PrepareError(f"unsafe canonical GitHub repository: {allowlisted!r}")
+    return f"https://github.com/{allowlisted}.git"
+
+
+def _validate_owner_ref(ref: Any) -> str:
+    try:
+        return _require_safe_git_ref(ref, "canonical owner ref")
+    except ContextCompileError as exc:
+        raise PrepareError("unsafe canonical owner ref") from exc
+
+
+def _ls_remote_exact_head(url: str, ref: str) -> str:
+    raw = _run(("git", "ls-remote", "--exit-code", "--refs", url, ref)).strip()
+    rows = [line for line in raw.splitlines() if line]
+    if len(rows) != 1:
+        raise PrepareError(f"REMOTE_UNRESOLVED: expected exact1 row for {ref}")
+    fields = rows[0].split("\t")
+    if len(fields) != 2 or fields[1] != ref or not re.fullmatch(r"[0-9a-f]{40}", fields[0]):
+        raise PrepareError(f"REMOTE_UNRESOLVED: malformed ls-remote row for {ref}")
+    return fields[0]
+
+
+def _owner_namespace(task: str, owner_id: str) -> str:
+    safe_task = re.sub(r"[^A-Za-z0-9._-]+", "-", task).strip("-.")
+    safe_owner = re.sub(r"[^A-Za-z0-9._-]+", "-", owner_id).strip("-.")
+    if not safe_task or not safe_owner:
+        raise PrepareError("canonical owner namespace is unsafe")
+    task_digest = hashlib.sha256(task.encode("utf-8")).hexdigest()[:12]
+    owner_digest = hashlib.sha256(owner_id.encode("utf-8")).hexdigest()[:16]
+    return (
+        "refs/cocolon-context/owners/"
+        f"{safe_task[:48]}-{task_digest}/{safe_owner[:64]}-{owner_digest}"
+    )
+
+
+def _namespace_head(repo: Path, namespace: str) -> str:
+    head = _git(repo, "rev-parse", "--verify", f"{namespace}^{{commit}}")
+    if not re.fullmatch(r"[0-9a-f]{40}", head):
+        raise PrepareError(f"fetched canonical owner head is invalid: {head!r}")
+    return head
+
+
+def _fetch_owner_namespace(
+    repo: Path, url: str, ref: str, namespace: str
+) -> str:
+    _git(repo, "fetch", "--no-tags", url, f"+{ref}:{namespace}")
+    return _namespace_head(repo, namespace)
+
+
+def _is_ancestor(repo: Path, ancestor: str, descendant: str) -> bool:
+    return subprocess.run(
+        ("git", "-C", str(repo), "merge-base", "--is-ancestor", ancestor, descendant),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    ).returncode == 0
+
+
+def _name_status_evidence(raw: str) -> list[dict[str, Any]]:
+    changes: list[dict[str, Any]] = []
+    for line in raw.splitlines():
+        if not line:
+            continue
+        fields = line.split("\t")
+        code = fields[0]
+        kind = code[:1]
+        if kind in {"R", "C"} and len(fields) == 3:
+            status = "RENAMED" if kind == "R" else "COPIED"
+            old_path, new_path = fields[1], fields[2]
+        elif len(fields) == 2 and kind in {"A", "M", "D", "T"}:
+            status = {
+                "A": "ADDED",
+                "M": "MODIFIED",
+                "D": "DELETED",
+                "T": "TYPE_CHANGED",
+            }[kind]
+            old_path = fields[1] if kind == "D" else None
+            new_path = None if kind == "D" else fields[1]
+        else:
+            raise PrepareError(f"unrecognized canonical owner diff row: {line!r}")
+        changes.append(
+            {
+                "git_status": code,
+                "status": status,
+                "old_path": old_path,
+                "new_path": new_path,
+            }
+        )
+    return sorted(
+        changes,
+        key=lambda row: (
+            str(row["old_path"] or ""),
+            str(row["new_path"] or ""),
+            str(row["git_status"]),
+        ),
+    )
+
+
+def _changed_paths(evidence: Sequence[Mapping[str, Any]]) -> list[str]:
+    return sorted(
+        {
+            str(path)
+            for row in evidence
+            for path in (row.get("new_path") or row.get("old_path"),)
+            if path
+        }
+    )
+
+
+def _classify_owner_relation(
+    repo: Path, workspace_commit: str, owner_head: str
+) -> Mapping[str, Any]:
+    if workspace_commit == owner_head:
+        relation = "SAME_REF"
+    elif _is_ancestor(repo, owner_head, workspace_commit):
+        relation = "WORKSPACE_CONTAINS_OWNER_REF"
+    elif _is_ancestor(repo, workspace_commit, owner_head):
+        relation = "OWNER_REF_AHEAD"
+    else:
+        relation = "DIVERGED"
+    merge_base = _git(repo, "merge-base", workspace_commit, owner_head)
+    owner_changes = _name_status_evidence(
+        _git(
+            repo, "-c", "core.quotepath=false", "diff", "--name-status", "-M",
+            merge_base, owner_head,
+        )
+    )
+    workspace_changes = _name_status_evidence(
+        _git(
+            repo, "-c", "core.quotepath=false", "diff", "--name-status", "-M",
+            merge_base, workspace_commit,
+        )
+    )
+    return {
+        "relation": relation,
+        "merge_base": merge_base,
+        "owner_side_unique_commit_count": int(
+            _git(repo, "rev-list", "--count", f"{workspace_commit}..{owner_head}")
+        ),
+        "workspace_side_unique_commit_count": int(
+            _git(repo, "rev-list", "--count", f"{owner_head}..{workspace_commit}")
+        ),
+        "owner_side_changes": owner_changes,
+        "workspace_side_changes": workspace_changes,
+        "owner_side_changed_paths": _changed_paths(owner_changes),
+        "workspace_side_changed_paths": _changed_paths(workspace_changes),
+    }
+
+
+def _bind_required_premises(
+    *, workspace_refs: Mapping[str, RepositoryRef],
+    owner_rows: Sequence[Mapping[str, Any]],
+    required_premises: Sequence[Mapping[str, Any]],
+) -> tuple[list[dict[str, Any]], set[str]]:
+    owners = {str(row["owner_id"]): row for row in owner_rows}
+    bindings: list[dict[str, Any]] = []
+    blocking: set[str] = set()
+    for premise in required_premises:
+        premise_id = str(premise.get("premise_id") or "")
+        if not SAFE_PUBLIC_ID_RE.fullmatch(premise_id):
+            raise PrepareError(f"unsafe required premise ID: {premise_id!r}")
+        owner_id = str(premise.get("owner_id") or "")
+        owner = owners.get(owner_id)
+        path = _require_safe_repo_path(premise.get("path"), f"{premise_id}.path")
+        base = {
+            "premise_id": premise_id,
+            "owner_id": owner_id,
+            "repository_key": str(premise.get("repository_key") or ""),
+            "path": path,
+            "required": bool(premise.get("required", True)),
+            "entry_chain_order": int(premise.get("entry_chain_order", 0)),
+            "expected_identity_policy": str(premise.get("expected_identity_policy") or ""),
+        }
+        repository_ref = workspace_refs.get(base["repository_key"])
+        if repository_ref is None:
+            raise PrepareError(
+                f"required premise repository is not materialized: "
+                f"{premise_id}={base['repository_key']}"
+            )
+        if (
+            owner is not None
+            and str(owner.get("repository_key") or "") != base["repository_key"]
+        ):
+            raise PrepareError(
+                f"required premise repository does not match owner: {premise_id}"
+            )
+        if owner is None or owner.get("relation") == "REMOTE_UNRESOLVED":
+            code = "REQUIRED_PREMISE_OWNER_UNRESOLVED"
+            bindings.append({**base, "status": "UNRESOLVED", "reason_code": code, "fresh": False, "selected": False})
+            if base["required"]:
+                blocking.add(code)
+            continue
+        if base["expected_identity_policy"] != "BIND_EXACT_IDENTITY_AT_RESOLVED_OWNER_REF":
+            raise PrepareError(
+                f"Unit A premise policy is unsupported: {premise_id}={base['expected_identity_policy']}"
+            )
+        head = str(owner["fetched_namespace_head"])
+        try:
+            raw = _git(repository_ref.path, "ls-tree", "-z", head, "--", path)
+            rows = [row for row in raw.split("\x00") if row]
+            if len(rows) != 1 or "\t" not in rows[0]:
+                raise PrepareError("path did not resolve to exact1 Git tree row")
+            identity, actual_path = rows[0].split("\t", 1)
+            mode, object_type, blob_sha = identity.split(" ", 2)
+            if actual_path != path or mode != "100644" or object_type != "blob" or not re.fullmatch(r"[0-9a-f]{40}", blob_sha):
+                raise PrepareError("path did not resolve to an exact regular blob")
+            _git(repository_ref.path, "cat-file", "-e", f"{blob_sha}^{{blob}}")
+            metadata = extract_restricted_metadata(
+                _git_blob_prefix(repository_ref.path, blob_sha), ()
+            )
+            bindings.append(
+                {
+                    **base,
+                    "resolved_commit": head,
+                    "resolved_blob_sha": blob_sha,
+                    "status": "RESOLVED",
+                    "reason_code": "PREMISE_EXACT_OWNER_BLOB_RESOLVED",
+                    "fresh": True,
+                    "selected": True,
+                    "metadata": metadata,
+                }
+            )
+        except (PrepareError, ContextCompileError):
+            code = "REQUIRED_PREMISE_MISSING_OR_UNREADABLE"
+            bindings.append({**base, "resolved_commit": head, "status": "UNRESOLVED", "reason_code": code, "fresh": False, "selected": False})
+            if base["required"]:
+                blocking.add(code)
+    bindings.sort(key=lambda row: (row["entry_chain_order"], row["premise_id"]))
+    return bindings, blocking
+
+
+def _bind_document_responsibilities(
+    *, workspace_refs: Mapping[str, RepositoryRef],
+    owner_rows: Sequence[Mapping[str, Any]],
+    responsibilities: Sequence[Mapping[str, Any]],
+) -> tuple[list[dict[str, Any]], set[str]]:
+    owners = {str(row["owner_id"]): row for row in owner_rows}
+    owners_by_repository: dict[str, list[Mapping[str, Any]]] = {}
+    for row in owner_rows:
+        owners_by_repository.setdefault(str(row["repository_key"]), []).append(row)
+    bindings: list[dict[str, Any]] = []
+    blocking: set[str] = set()
+    for responsibility in responsibilities:
+        responsibility_id = str(responsibility.get("responsibility_id") or "")
+        locator = responsibility.get("subject_locator")
+        if not isinstance(locator, dict):
+            raise PrepareError(f"responsibility subject locator missing: {responsibility_id}")
+        repository_key = str(locator.get("repository_key") or "")
+        owner_id = str(locator.get("owner_id") or "")
+        if not owner_id:
+            candidates = owners_by_repository.get(repository_key, [])
+            if len(candidates) == 1:
+                owner_id = str(candidates[0]["owner_id"])
+        owner = owners.get(owner_id)
+        path = _require_safe_repo_path(
+            locator.get("path"), f"{responsibility_id}.subject_locator.path"
+        )
+        base = {
+            "responsibility_id": responsibility_id,
+            "owner_id": owner_id or None,
+            "repository_key": repository_key,
+            "path": path,
+        }
+        repository_ref = workspace_refs.get(repository_key)
+        if repository_ref is None:
+            raise PrepareError(
+                f"responsibility subject repository is not materialized: "
+                f"{responsibility_id}={repository_key}"
+            )
+        if (
+            owner is not None
+            and str(owner.get("repository_key") or "") != repository_key
+        ):
+            raise PrepareError(
+                "responsibility subject repository does not match owner: "
+                f"{responsibility_id}"
+            )
+        if owner is None or owner.get("relation") == "REMOTE_UNRESOLVED":
+            code = "RESPONSIBILITY_SUBJECT_OWNER_UNRESOLVED"
+            bindings.append({**base, "status": "UNRESOLVED", "reason_code": code, "fresh": False})
+            blocking.add(code)
+            continue
+        head = str(owner["fetched_namespace_head"])
+        try:
+            raw = _git(repository_ref.path, "ls-tree", "-z", head, "--", path)
+            rows = [row for row in raw.split("\x00") if row]
+            if len(rows) != 1 or "\t" not in rows[0]:
+                raise PrepareError("responsibility subject did not resolve exact1")
+            identity, actual_path = rows[0].split("\t", 1)
+            mode, object_type, blob_sha = identity.split(" ", 2)
+            if actual_path != path or mode != "100644" or object_type != "blob" or not re.fullmatch(r"[0-9a-f]{40}", blob_sha):
+                raise PrepareError("responsibility subject is not an exact regular blob")
+            _git(repository_ref.path, "cat-file", "-e", f"{blob_sha}^{{blob}}")
+            assertions = responsibility.get("metadata_assertions", [])
+            maximum = (
+                64 * 1024
+                if any(
+                    isinstance(assertion, Mapping)
+                    and assertion.get("metadata_kind") == "JSON_POINTER"
+                    for assertion in assertions
+                )
+                else 16 * 1024
+            )
+            bindings.append(
+                {
+                    **base,
+                    "resolved_commit": head,
+                    "resolved_blob_sha": blob_sha,
+                    "status": "RESOLVED",
+                    "reason_code": "RESPONSIBILITY_SUBJECT_EXACT_OWNER_BLOB_RESOLVED",
+                    "fresh": True,
+                    "metadata": extract_restricted_metadata(
+                        _git_blob_prefix(repository_ref.path, blob_sha, maximum),
+                        assertions,
+                    ),
+                }
+            )
+        except (PrepareError, ContextCompileError):
+            code = "RESPONSIBILITY_SUBJECT_MISSING_OR_UNREADABLE"
+            bindings.append({**base, "resolved_commit": head, "status": "UNRESOLVED", "reason_code": code, "fresh": False})
+            blocking.add(code)
+    bindings.sort(key=lambda row: row["responsibility_id"])
+    return bindings, blocking
+
+
+def _owner_bundle_fingerprint(bundle: Mapping[str, Any]) -> str:
+    return canonical_owner_bundle_fingerprint(bundle)
+
+
+def resolve_canonical_owner_bundle_initial(
+    *, repo_root: Path, workspace: str, task: str,
+    workspace_profile: Mapping[str, Any], workspace_refs: Mapping[str, RepositoryRef],
+    task_profile: Mapping[str, Any],
+) -> Mapping[str, Any]:
+    contract = task_profile.get("operator_contract")
+    if not isinstance(contract, dict):
+        raise PrepareError("task_profiles.v2 operator_contract is missing")
+    owner_rows: list[dict[str, Any]] = []
+    blocking: set[str] = set()
+    for declaration in contract.get("canonical_owner_refs", []):
+        if not isinstance(declaration, dict):
+            raise PrepareError("canonical owner declaration must be an object")
+        owner_id = str(declaration.get("owner_id") or "")
+        if not SAFE_PUBLIC_ID_RE.fullmatch(owner_id):
+            raise PrepareError(f"unsafe canonical owner ID: {owner_id!r}")
+        repository_key = str(declaration.get("repository_key") or "")
+        if repository_key not in workspace_refs:
+            raise PrepareError(f"canonical owner repository is not materialized: {repository_key}")
+        if declaration.get("freshness_policy") != "READ_ONLY_EXACT_REF":
+            raise PrepareError(f"canonical owner access must be READ_ONLY_EXACT_REF: {owner_id}")
+        ref = _validate_owner_ref(declaration.get("remote_ref"))
+        url = _canonical_github_url(workspace_profile, repository_key)
+        repository_spec = workspace_profile["repositories"][repository_key]
+        repository = str(repository_spec["repository"])
+        repository_ref = workspace_refs[repository_key]
+        row: dict[str, Any] = {
+            "owner_id": owner_id,
+            "repository_key": repository_key,
+            "repository": repository,
+            "ref": ref,
+            "required": bool(declaration.get("required", True)),
+            "access_mode": "READ_ONLY_EXACT_REF",
+            "workspace_material_commit": repository_ref.commit,
+            "workspace_incorporation_claim": False,
+            "write_authority": False,
+            "merge_required": False,
+            "rebase_required": False,
+            "integration_required": False,
+        }
+        try:
+            first = _ls_remote_exact_head(url, ref)
+            namespace = _owner_namespace(task, owner_id)
+            fetched = _fetch_owner_namespace(repository_ref.path, url, ref, namespace)
+            if fetched != first:
+                raise PrepareError("REMOTE_REF_MOVED_DURING_RUN: first != fetched")
+            relation = _classify_owner_relation(
+                repository_ref.path, repository_ref.commit, fetched
+            )
+            row.update(
+                {
+                    "canonical_url": url,
+                    "namespace": namespace,
+                    "first_resolved_head": first,
+                    "fetched_namespace_head": fetched,
+                    "pre_publish_resolved_head": None,
+                    **relation,
+                }
+            )
+        except PrepareError as exc:
+            if "REMOTE_REF_MOVED_DURING_RUN" in str(exc):
+                raise
+            code = "CANONICAL_OWNER_REMOTE_UNRESOLVED"
+            row.update(
+                {
+                    "canonical_url": url,
+                    "first_resolved_head": None,
+                    "fetched_namespace_head": None,
+                    "pre_publish_resolved_head": None,
+                    "relation": "REMOTE_UNRESOLVED",
+                    "reason_code": code,
+                    "owner_side_unique_commit_count": None,
+                    "workspace_side_unique_commit_count": None,
+                    "owner_side_changes": [],
+                    "workspace_side_changes": [],
+                    "owner_side_changed_paths": [],
+                    "workspace_side_changed_paths": [],
+                }
+            )
+            if row["required"]:
+                blocking.add(code)
+        owner_rows.append(row)
+    premise_rows, premise_blocking = _bind_required_premises(
+        workspace_refs=workspace_refs,
+        owner_rows=owner_rows,
+        required_premises=contract.get("required_premises", []),
+    )
+    blocking.update(premise_blocking)
+    responsibility_rows, responsibility_blocking = _bind_document_responsibilities(
+        workspace_refs=workspace_refs,
+        owner_rows=owner_rows,
+        responsibilities=contract.get("document_responsibilities", []),
+    )
+    blocking.update(responsibility_blocking)
+    bundle: dict[str, Any] = {
+        "schema_version": "cocolon.system_context.canonical_owner_bundle.v1",
+        "workspace": workspace,
+        "task": task,
+        "phase": "INITIAL_RESOLVED",
+        "owners": owner_rows,
+        "premises": premise_rows,
+        "responsibility_subjects": responsibility_rows,
+        "blocking_codes": sorted(blocking),
+        "workspace_incorporation_claim": False,
+        "write_authority": False,
+        "integration_required": False,
+        "automatic_progression": False,
+    }
+    bundle["task_dependency_fingerprint"] = _owner_bundle_fingerprint(bundle)
+    return bundle
+
+
+def finalize_canonical_owner_bundle(
+    bundle: Mapping[str, Any], *, workspace_refs: Mapping[str, RepositoryRef]
+) -> Mapping[str, Any]:
+    owners: list[dict[str, Any]] = []
+    for raw in bundle.get("owners", []):
+        row = dict(raw)
+        if row.get("relation") == "REMOTE_UNRESOLVED":
+            owners.append(row)
+            continue
+        repository_key = str(row.get("repository_key") or "")
+        repository_ref = workspace_refs.get(repository_key)
+        if repository_ref is None:
+            raise PrepareError(
+                f"canonical owner repository is not materialized: {repository_key}"
+            )
+        namespace_head = _namespace_head(
+            repository_ref.path, str(row.get("namespace") or "")
+        )
+        final = _ls_remote_exact_head(str(row["canonical_url"]), str(row["ref"]))
+        if not (
+            row.get("first_resolved_head")
+            == row.get("fetched_namespace_head")
+            == namespace_head
+            == final
+        ):
+            raise PrepareError("REMOTE_REF_MOVED_DURING_RUN: exact3 equality failed")
+        row["pre_publish_resolved_head"] = final
+        owners.append(row)
+    finalized = dict(bundle)
+    finalized["phase"] = "PRE_PUBLISH_FINALIZED"
+    finalized["owners"] = owners
+    finalized["task_dependency_fingerprint"] = _owner_bundle_fingerprint(finalized)
+    return finalized
 
 
 def _load_saved_refs(workspace_dir: Path) -> dict[str, str]:
@@ -230,6 +1259,20 @@ def _diff_changes(repo_ref: RepositoryRef, old_commit: str | None) -> list[Chang
     return changes
 
 
+def _commit_available(
+    repo: Path, commit: str, descendant: str | None = None
+) -> bool:
+    """Return whether a saved commit is a safe incremental base."""
+    exists = subprocess.run(
+        ("git", "-C", str(repo), "cat-file", "-e", f"{commit}^{{commit}}"),
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+    ).returncode == 0
+    if not exists:
+        return False
+    return descendant is None or _is_ancestor(repo, commit, descendant)
+
+
 def _is_source(path: str) -> bool:
     return PurePosixPath(path.lower()).suffix in {
         ".py", ".pyi", ".ts", ".tsx", ".js", ".jsx", ".dart", ".java",
@@ -245,7 +1288,6 @@ def _global_owner_path(path: str) -> bool:
         lower.startswith("tools/cocolon_context")
         or lower.startswith(".github/workflows/cocolon-system-context")
         or lower.endswith("workspace_profiles.json")
-        or lower.endswith("task_profiles.json")
         or name in {
             "package.json", "package-lock.json", "pyproject.toml",
             "requirements.txt", "requirements.lock", "tsconfig.json",
@@ -297,7 +1339,14 @@ def plan_refresh(
                 reasons.add("NON_CODE_CHANGE")
     requested_layers = sorted(affected)
     modified_non_code_only = bool(changes) and all_modified and not has_source and not global_owner
-    if not changes:
+    if forced_full_rebuild_reasons:
+        execution_mode = "FULL_REBUILD_FALLBACK"
+        fallback = sorted({
+            "BOUNDED_GLOBAL_OWNER_OR_PATH_IDENTITY_REBUILD_REQUIRED",
+            "STALE_INDEX_REUSE_FORBIDDEN",
+        } | set(forced_full_rebuild_reasons))
+        executed_layers = ["code_index", "inventory", "route_graph", "task_context"]
+    elif not changes:
         execution_mode = "SAME_REF_REUSE"
         fallback: list[str] = []
         executed_layers = requested_layers
@@ -558,8 +1607,8 @@ def _incremental_non_code_rebind(
         profiles_path, workspace,
         {key: value.path for key, value in refs.items()}, materialized,
     )
-    _run((sys.executable, str(repo_root / "tools/cocolon_context_code_index.py"), "verify", "--inventory", str(materialized / "files.jsonl"), "--output", str(code_dir)), cwd=repo_root)
-    _run((sys.executable, str(repo_root / "tools/cocolon_context_routes.py"), "verify", "--inventory", str(materialized / "files.jsonl"), "--code-index", str(code_dir), "--output", str(route_dir)), cwd=repo_root)
+    _run((sys.executable, str(IMPLEMENTATION_ROOT / "tools/cocolon_context_code_index.py"), "verify", "--inventory", str(materialized / "files.jsonl"), "--output", str(code_dir)), cwd=IMPLEMENTATION_ROOT)
+    _run((sys.executable, str(IMPLEMENTATION_ROOT / "tools/cocolon_context_routes.py"), "verify", "--inventory", str(materialized / "files.jsonl"), "--code-index", str(code_dir), "--output", str(route_dir)), cwd=IMPLEMENTATION_ROOT)
 
     pack_outputs(materialized, max_part_bytes)
     shutil.rmtree(workspace_dir)
@@ -774,28 +1823,28 @@ def _run_partial_code_index(
         repo_args.extend(("--repo", f"{key}={provider_repos[key]}"))
     _run(
         (
-            python, str(repo_root / "tools/cocolon_context_code_index.py"),
+            python, str(IMPLEMENTATION_ROOT / "tools/cocolon_context_code_index.py"),
             "run-scip", "--inventory", str(inventory), *repo_args,
             "--work", str(scip_work),
         ),
-        cwd=repo_root,
+        cwd=IMPLEMENTATION_ROOT,
     )
     _run(
         (
-            python, str(repo_root / "tools/cocolon_context_code_index.py"),
+            python, str(IMPLEMENTATION_ROOT / "tools/cocolon_context_code_index.py"),
             "build", "--inventory", str(inventory), *repo_args,
             "--scip-work", str(scip_work),
-            "--ts-helper", str(repo_root / "tools/cocolon_context_ts_syntax.cjs"),
+            "--ts-helper", str(IMPLEMENTATION_ROOT / "tools/cocolon_context_ts_syntax.cjs"),
             "--output", str(output),
         ),
-        cwd=repo_root,
+        cwd=IMPLEMENTATION_ROOT,
     )
     _run(
         (
-            python, str(repo_root / "tools/cocolon_context_code_index.py"),
+            python, str(IMPLEMENTATION_ROOT / "tools/cocolon_context_code_index.py"),
             "verify", "--inventory", str(inventory), "--output", str(output),
         ),
-        cwd=repo_root,
+        cwd=IMPLEMENTATION_ROOT,
     )
     return _load_json(output / "provider_runs.json")
 
@@ -1289,11 +2338,11 @@ def _incremental_source_dependent_closure(
     _refresh_code_manifest(code_dir=code_dir, inventory=materialized / "files.jsonl")
     _run(
         (
-            sys.executable, str(repo_root / "tools/cocolon_context_code_index.py"),
+            sys.executable, str(IMPLEMENTATION_ROOT / "tools/cocolon_context_code_index.py"),
             "verify", "--inventory", str(materialized / "files.jsonl"),
             "--output", str(code_dir),
         ),
-        cwd=repo_root,
+        cwd=IMPLEMENTATION_ROOT,
     )
 
     replacements: dict[str, str] = {}
@@ -1317,22 +2366,22 @@ def _incremental_source_dependent_closure(
     shutil.rmtree(route_candidate, ignore_errors=True)
     _run(
         (
-            sys.executable, str(repo_root / "tools/cocolon_context_routes.py"),
+            sys.executable, str(IMPLEMENTATION_ROOT / "tools/cocolon_context_routes.py"),
             "build", "--inventory", str(materialized / "files.jsonl"),
             *_repo_args(refs),
             "--code-index", str(code_dir),
-            "--rn-helper", str(repo_root / "tools/cocolon_context_ts_routes.cjs"),
+            "--rn-helper", str(IMPLEMENTATION_ROOT / "tools/cocolon_context_ts_routes.cjs"),
             "--output", str(route_candidate),
         ),
-        cwd=repo_root,
+        cwd=IMPLEMENTATION_ROOT,
     )
     _run(
         (
-            sys.executable, str(repo_root / "tools/cocolon_context_routes.py"),
+            sys.executable, str(IMPLEMENTATION_ROOT / "tools/cocolon_context_routes.py"),
             "verify", "--inventory", str(materialized / "files.jsonl"),
             "--code-index", str(code_dir), "--output", str(route_candidate),
         ),
-        cwd=repo_root,
+        cwd=IMPLEMENTATION_ROOT,
     )
     route_evidence = _merge_route_candidate(
         old_route_dir=route_dir,
@@ -1342,11 +2391,11 @@ def _incremental_source_dependent_closure(
     )
     _run(
         (
-            sys.executable, str(repo_root / "tools/cocolon_context_routes.py"),
+            sys.executable, str(IMPLEMENTATION_ROOT / "tools/cocolon_context_routes.py"),
             "verify", "--inventory", str(materialized / "files.jsonl"),
             "--code-index", str(code_dir), "--output", str(route_dir),
         ),
-        cwd=repo_root,
+        cwd=IMPLEMENTATION_ROOT,
     )
 
     verify_inventory(
@@ -1396,11 +2445,11 @@ def _run_layer_commands(
     shutil.rmtree(scip_work, ignore_errors=True)
     scip_work.mkdir(parents=True, exist_ok=True)
     repo_args = _repo_args(refs)
-    _run((python, str(repo_root / "tools/cocolon_context_code_index.py"), "run-scip", "--inventory", str(inventory), *repo_args, "--work", str(scip_work)), cwd=repo_root)
-    _run((python, str(repo_root / "tools/cocolon_context_code_index.py"), "build", "--inventory", str(inventory), *repo_args, "--scip-work", str(scip_work), "--ts-helper", str(repo_root / "tools/cocolon_context_ts_syntax.cjs"), "--output", str(workspace_dir / "code_index")), cwd=repo_root)
-    _run((python, str(repo_root / "tools/cocolon_context_code_index.py"), "verify", "--inventory", str(inventory), "--output", str(workspace_dir / "code_index")), cwd=repo_root)
-    _run((python, str(repo_root / "tools/cocolon_context_routes.py"), "build", "--inventory", str(inventory), *repo_args, "--code-index", str(workspace_dir / "code_index"), "--rn-helper", str(repo_root / "tools/cocolon_context_ts_routes.cjs"), "--output", str(workspace_dir / "route_graph")), cwd=repo_root)
-    _run((python, str(repo_root / "tools/cocolon_context_routes.py"), "verify", "--inventory", str(inventory), "--code-index", str(workspace_dir / "code_index"), "--output", str(workspace_dir / "route_graph")), cwd=repo_root)
+    _run((python, str(IMPLEMENTATION_ROOT / "tools/cocolon_context_code_index.py"), "run-scip", "--inventory", str(inventory), *repo_args, "--work", str(scip_work)), cwd=IMPLEMENTATION_ROOT)
+    _run((python, str(IMPLEMENTATION_ROOT / "tools/cocolon_context_code_index.py"), "build", "--inventory", str(inventory), *repo_args, "--scip-work", str(scip_work), "--ts-helper", str(IMPLEMENTATION_ROOT / "tools/cocolon_context_ts_syntax.cjs"), "--output", str(workspace_dir / "code_index")), cwd=IMPLEMENTATION_ROOT)
+    _run((python, str(IMPLEMENTATION_ROOT / "tools/cocolon_context_code_index.py"), "verify", "--inventory", str(inventory), "--output", str(workspace_dir / "code_index")), cwd=IMPLEMENTATION_ROOT)
+    _run((python, str(IMPLEMENTATION_ROOT / "tools/cocolon_context_routes.py"), "build", "--inventory", str(inventory), *repo_args, "--code-index", str(workspace_dir / "code_index"), "--rn-helper", str(IMPLEMENTATION_ROOT / "tools/cocolon_context_ts_routes.cjs"), "--output", str(workspace_dir / "route_graph")), cwd=IMPLEMENTATION_ROOT)
+    _run((python, str(IMPLEMENTATION_ROOT / "tools/cocolon_context_routes.py"), "verify", "--inventory", str(inventory), "--code-index", str(workspace_dir / "code_index"), "--output", str(workspace_dir / "route_graph")), cwd=IMPLEMENTATION_ROOT)
 
 
 def _build_all(
@@ -1443,8 +2492,8 @@ def _verify_workspace(
         {key: value.path for key, value in refs.items()},
         workspace_dir,
     )
-    _run((sys.executable, str(repo_root / "tools/cocolon_context_code_index.py"), "verify", "--inventory", str(workspace_dir / "files.jsonl"), "--output", str(workspace_dir / "code_index")), cwd=repo_root)
-    _run((sys.executable, str(repo_root / "tools/cocolon_context_routes.py"), "verify", "--inventory", str(workspace_dir / "files.jsonl"), "--code-index", str(workspace_dir / "code_index"), "--output", str(workspace_dir / "route_graph")), cwd=repo_root)
+    _run((sys.executable, str(IMPLEMENTATION_ROOT / "tools/cocolon_context_code_index.py"), "verify", "--inventory", str(workspace_dir / "files.jsonl"), "--output", str(workspace_dir / "code_index")), cwd=IMPLEMENTATION_ROOT)
+    _run((sys.executable, str(IMPLEMENTATION_ROOT / "tools/cocolon_context_routes.py"), "verify", "--inventory", str(workspace_dir / "files.jsonl"), "--code-index", str(workspace_dir / "code_index"), "--output", str(workspace_dir / "route_graph")), cwd=IMPLEMENTATION_ROOT)
     return verify_outputs(workspace_dir)
 
 
@@ -1452,6 +2501,8 @@ def _compile_and_pack_task(
     *, repo_root: Path, system_context_root: Path, external_workspace_root: Path,
     workspace: str, task: str, task_profiles_path: Path, task_output: Path,
     remote_verified: bool, max_part_bytes: int,
+    canonical_owner_bundle: Mapping[str, Any] | None = None,
+    expected_publication_mode: str | None = None,
 ) -> Mapping[str, Any]:
     compile_task_context(
         repo_root=repo_root,
@@ -1463,16 +2514,43 @@ def _compile_and_pack_task(
         output_dir=task_output,
         external_workspace_root=external_workspace_root,
         remote_verified=remote_verified,
+        canonical_owner_bundle=canonical_owner_bundle,
     )
     pack_outputs(task_output, max_part_bytes)
-    return _verify_task(task_output)
+    return _verify_task(
+        task_output,
+        expected_unit_a=canonical_owner_bundle is not None,
+        expected_task=task,
+        expected_publication_mode=expected_publication_mode,
+    )
 
 
-def _verify_task(task_output: Path) -> Mapping[str, Any]:
+def _verify_task(
+    task_output: Path,
+    *,
+    expected_unit_a: bool | None = None,
+    expected_task: str | None = None,
+    expected_publication_mode: str | None = None,
+) -> Mapping[str, Any]:
     verify_outputs(task_output)
     with tempfile.TemporaryDirectory(prefix="cocolon-task-context-materialized-") as temporary:
-        materialized = materialize_outputs(task_output, Path(temporary) / "task")
-        return verify_task_context(materialized)
+        materialized_workspace = Path(temporary) / "workspace"
+        materialized = materialize_outputs(
+            task_output,
+            materialized_workspace / "task_context" / task_output.name,
+        )
+        source_route_graph = task_output.parent.parent / "route_graph"
+        if source_route_graph.is_dir():
+            os.symlink(
+                source_route_graph.resolve(),
+                materialized_workspace / "route_graph",
+            )
+        return verify_task_context(
+            materialized,
+            expected_unit_a=expected_unit_a,
+            expected_task=expected_task,
+            expected_publication_mode=expected_publication_mode,
+        )
 
 
 def _receipt_markdown(receipt: Mapping[str, Any]) -> bytes:
@@ -1508,7 +2586,95 @@ def _write_receipt(workspace_dir: Path, receipt: Mapping[str, Any]) -> None:
     _write_atomic(workspace_dir / REPORT_NAME, _receipt_markdown(receipt))
 
 
-def prepare(
+def _brief_receipt(
+    receipt: Mapping[str, Any], workspace_dir: Path
+) -> dict[str, Any]:
+    """Return the bounded terminal view; complete exact outputs stay in cache."""
+    refs = receipt.get("resolved_refs")
+    task_context = receipt.get("task_context")
+    refresh_plan = receipt.get("refresh_plan")
+    publication_mode = receipt.get("publication_mode")
+    ephemeral = publication_mode == "EPHEMERAL_VERIFY_ONLY"
+    return {
+        "schema_version": "cocolon.system_context.prepare_brief.v1",
+        "workspace": receipt.get("workspace"),
+        "task": receipt.get("task"),
+        "publication_mode": publication_mode,
+        "status": receipt.get("status"),
+        "input_freshness": receipt.get("input_freshness"),
+        "output_freshness": receipt.get("output_freshness"),
+        "proof_status": receipt.get("proof_status"),
+        "ref_drift": receipt.get("ref_drift"),
+        "cache_decision": receipt.get("cache_decision"),
+        "execution_input_fingerprint": receipt.get(
+            "execution_input_fingerprint"
+        ),
+        "execution_input": (
+            dict(receipt["execution_input"])
+            if isinstance(receipt.get("execution_input"), Mapping)
+            else None
+        ),
+        "execution_mode": (
+            refresh_plan.get("execution_mode")
+            if isinstance(refresh_plan, Mapping)
+            else None
+        ),
+        "resolved_refs": {
+            key: {
+                "commit": value.get("commit"),
+                "tree": value.get("tree"),
+            }
+            for key, value in sorted(refs.items())
+            if isinstance(value, Mapping)
+        }
+        if isinstance(refs, Mapping)
+        else {},
+        "task_context": {
+            key: task_context.get(key)
+            for key in (
+                "status",
+                "context_fingerprint",
+                "selected_file_count",
+                "closure_edge_count",
+                "blocking_unresolved_count",
+                "actual_unincorporated_finding_count",
+            )
+        }
+        if isinstance(task_context, Mapping)
+        else {},
+        "cache": {
+            "retention": (
+                "EPHEMERAL_DISCARDED" if ephemeral else "PERSISTENT_CACHE"
+            ),
+            "workspace": None if ephemeral else str(workspace_dir),
+            "receipt": (
+                None if ephemeral else str(workspace_dir / RECEIPT_NAME)
+            ),
+            "full_text_read_order": (
+                None
+                if ephemeral
+                else str(
+                    workspace_dir
+                    / "task_context"
+                    / str(receipt.get("task") or "")
+                    / "full_text_read_order.md"
+                )
+            ),
+        },
+        "effects": {
+            "mashos_api_write_count": receipt.get("mashos_api_write_count"),
+            "product_behavior_change_count": receipt.get(
+                "product_behavior_change_count"
+            ),
+            "product_credit": receipt.get("product_credit"),
+            "technical_credit": receipt.get("technical_credit", 0),
+            "v1_activation": receipt.get("v1_activation", 0),
+            "automatic_progression": receipt.get("automatic_progression"),
+        },
+    }
+
+
+def _prepare_impl(
     *, repo_root: Path, system_context_root: Path, external_workspace_root: Path,
     workspace: str, task: str, remote_verified: bool = False,
     fresh_clone_verified: bool = False,
@@ -1518,6 +2684,8 @@ def prepare(
     verify_only: bool = False,
     require_remote_verified: bool = False,
     max_part_bytes: int = DEFAULT_MAX_PART_BYTES,
+    _workspace_dir: Path | None = None,
+    environment_fingerprint: str | None = None,
 ) -> Mapping[str, Any]:
     repo_root = repo_root.resolve()
     system_context_root = system_context_root.resolve()
@@ -1525,6 +2693,8 @@ def prepare(
     profiles_path = system_context_root / "workspace_profiles.json"
     task_profiles_path = system_context_root / "task_profiles.json"
     profiles = _load_json(profiles_path)
+    task_profiles = _load_json(task_profiles_path)
+    task_profile, is_v2 = _task_profile(task_profiles, task)
     workspace_profile = profiles.get("profiles", {}).get(workspace)
     if not isinstance(workspace_profile, dict):
         raise PrepareError(f"workspace profile not found: {workspace}")
@@ -1533,7 +2703,25 @@ def prepare(
         external_workspace_root=external_workspace_root,
         workspace_profile=workspace_profile,
     )
-    workspace_dir = system_context_root / "current" / workspace
+    start_ref_identity = _ref_identity(refs)
+    execution_input = _execution_input_identity(
+        system_context_root, environment_fingerprint
+    )
+    owner_bundle_initial: Mapping[str, Any] | None = None
+    if is_v2:
+        owner_bundle_initial = resolve_canonical_owner_bundle_initial(
+            repo_root=repo_root,
+            workspace=workspace,
+            task=task,
+            workspace_profile=workspace_profile,
+            workspace_refs=refs,
+            task_profile=task_profile,
+        )
+    workspace_dir = (
+        _workspace_dir.resolve()
+        if _workspace_dir is not None
+        else system_context_root / "current" / workspace
+    )
     task_output = workspace_dir / "task_context" / task
     previous_receipt_path = workspace_dir / RECEIPT_NAME
     previous_receipt = (
@@ -1547,23 +2735,68 @@ def prepare(
         external_source_incremental_evidence = loaded_evidence
     saved_refs = _load_saved_refs(workspace_dir)
     changes: list[Change] = []
+    base_unavailable: list[str] = []
     for key, repo_ref in refs.items():
-        changes.extend(_diff_changes(repo_ref, saved_refs.get(key)))
-    forced_full_rebuild_reasons = _forced_full_rebuild_reasons(
+        old_commit = saved_refs.get(key)
+        if old_commit and not _commit_available(
+            repo_ref.path, old_commit, repo_ref.commit
+        ):
+            base_unavailable.append(key)
+            continue
+        changes.extend(_diff_changes(repo_ref, old_commit))
+    forced_full_rebuild_reasons = set(_forced_full_rebuild_reasons(
         refs=refs,
         saved_refs=saved_refs,
         changes=changes,
-    )
-    refresh_plan = plan_refresh(
-        changes,
-        forced_full_rebuild_reasons=forced_full_rebuild_reasons,
-    )
+    ))
     current_ref_map = {key: ref.commit for key, ref in refs.items()}
     refs_match = saved_refs == current_ref_map
+    previous_execution_fingerprint = str(
+        previous_receipt.get("execution_input_fingerprint") or ""
+    )
+    execution_fingerprint_matches = (
+        previous_execution_fingerprint == execution_input["fingerprint"]
+    )
+    workspace_exists = workspace_dir.is_dir()
+    if base_unavailable:
+        forced_full_rebuild_reasons.add("PRIOR_COMMIT_BASE_UNAVAILABLE")
+    if saved_refs and set(saved_refs) != set(refs):
+        forced_full_rebuild_reasons.add("PRIOR_REF_BUNDLE_INCOMPLETE")
+    if saved_refs and not refs_match and not changes and not base_unavailable:
+        forced_full_rebuild_reasons.add(
+            "COMMIT_IDENTITY_CHANGED_WITHOUT_TREE_DIFF"
+        )
+    if workspace_exists and not execution_fingerprint_matches:
+        forced_full_rebuild_reasons.add("EXECUTION_INPUT_FINGERPRINT_CHANGED")
+    refresh_plan = plan_refresh(
+        changes,
+        forced_full_rebuild_reasons=sorted(forced_full_rebuild_reasons),
+    )
+    if not workspace_exists or not saved_refs:
+        refresh_plan["execution_mode"] = "INITIAL_FULL_BUILD"
+    elif base_unavailable:
+        refresh_plan["execution_mode"] = "FULL_REBUILD_BASE_UNAVAILABLE"
+    elif not refs_match and not changes:
+        refresh_plan["execution_mode"] = "FULL_REBUILD_COMMIT_IDENTITY_CHANGE"
+    elif not execution_fingerprint_matches:
+        refresh_plan["execution_mode"] = "FULL_REBUILD_EXECUTION_INPUT_CHANGE"
+    if refresh_plan["execution_mode"] in FULL_REBUILD_MODES:
+        refresh_plan["executed_layers"] = [
+            "code_index", "inventory", "route_graph", "task_context"
+        ]
+    cache_reusable = bool(
+        workspace_exists and refs_match and execution_fingerprint_matches
+    )
 
     if verify_only:
         if not refs_match:
             raise PrepareError(f"verify-only ref mismatch: saved={saved_refs} actual={current_ref_map}")
+        if not execution_fingerprint_matches:
+            raise PrepareError(
+                "verify-only execution input is stale: "
+                f"saved={previous_execution_fingerprint or 'MISSING'} "
+                f"actual={execution_input['fingerprint']}"
+            )
         workspace_transport = _verify_workspace(
             repo_root=repo_root,
             workspace=workspace,
@@ -1571,13 +2804,41 @@ def prepare(
             refs=refs,
             profiles_path=profiles_path,
         )
-        task_manifest = _verify_task(task_output)
+        owner_bundle = (
+            finalize_canonical_owner_bundle(
+                owner_bundle_initial, workspace_refs=refs
+            )
+            if owner_bundle_initial is not None
+            else None
+        )
+        task_manifest = _verify_task(
+            task_output,
+            expected_unit_a=is_v2,
+            expected_task=task,
+            expected_publication_mode=(
+                str(task_profile["publication_mode"]) if is_v2 else None
+            ),
+        )
+        if owner_bundle is not None and task_manifest.get("input_sha256", {}).get(
+            "owner_bundle"
+        ) != owner_bundle.get("task_dependency_fingerprint"):
+            raise PrepareError("verify-only canonical owner dependency is stale")
         if require_remote_verified and task_manifest.get("status") != STEP4_CLAIM:
             raise PrepareError("remote-verified Step 4 context is required")
         receipt = _load_json(workspace_dir / RECEIPT_NAME)
         if require_remote_verified:
             if receipt.get("completion_claim") != STEP5_CLAIM or receipt.get("overall_claim") != OVERALL_CLAIM:
                 raise PrepareError("Step 5 completion receipt is not remotely sealed")
+        _assert_refs_stable(
+            start_refs=refs,
+            repo_root=repo_root,
+            external_workspace_root=external_workspace_root,
+            workspace_profile=workspace_profile,
+        )
+        if _execution_input_identity(
+            system_context_root, environment_fingerprint
+        ) != execution_input:
+            raise PrepareError("EXECUTION_INPUT_MOVED_DURING_RUN")
         return receipt
 
     work_root = external_workspace_root / "prepare" / workspace
@@ -1585,7 +2846,7 @@ def prepare(
     workspace_transport: Mapping[str, Any]
     source_incremental_evidence: Mapping[str, Any] | None = None
     execution_mode = refresh_plan["execution_mode"]
-    if refs_match and workspace_dir.is_dir():
+    if cache_reusable:
         workspace_transport = _verify_workspace(
             repo_root=repo_root,
             workspace=workspace,
@@ -1631,7 +2892,58 @@ def prepare(
             max_part_bytes=max_part_bytes,
         )
 
-    task_needs_compile = not task_output.is_dir() or not refs_match or remote_verified
+    owner_bundle = (
+        finalize_canonical_owner_bundle(owner_bundle_initial, workspace_refs=refs)
+        if owner_bundle_initial is not None
+        else None
+    )
+    existing_owner_fingerprint: str | None = None
+    existing_task_profile_fingerprint: str | None = None
+    if task_output.is_dir():
+        try:
+            existing_task_manifest = _verify_task(
+                task_output,
+                expected_unit_a=is_v2,
+                expected_task=task,
+                expected_publication_mode=(
+                    str(task_profile["publication_mode"]) if is_v2 else None
+                ),
+            )
+            existing_owner_fingerprint = str(
+                existing_task_manifest.get("input_sha256", {}).get("owner_bundle")
+                or ""
+            ) or None
+            existing_task_profile_fingerprint = str(
+                existing_task_manifest.get("input_sha256", {}).get("task_profile")
+                or ""
+            ) or None
+        except (PrepareError, ContextCompileError, PublicationTransportError, OSError):
+            existing_owner_fingerprint = None
+            existing_task_profile_fingerprint = None
+    current_owner_fingerprint = (
+        str(owner_bundle.get("task_dependency_fingerprint"))
+        if owner_bundle is not None
+        else None
+    )
+    current_task_profile_fingerprint = hashlib.sha256(
+        _canonical_bytes(
+            {
+                "schema_version": task_profiles["schema_version"],
+                "task": task,
+                "profile": task_profile,
+            }
+        )
+    ).hexdigest()
+    task_needs_compile = bool(
+        not task_output.is_dir()
+        or not refs_match
+        or remote_verified
+        or is_v2
+        and (
+            existing_owner_fingerprint != current_owner_fingerprint
+            or existing_task_profile_fingerprint != current_task_profile_fingerprint
+        )
+    )
     task_manifest: Mapping[str, Any]
     if task_needs_compile:
         task_manifest = _compile_and_pack_task(
@@ -1644,17 +2956,52 @@ def prepare(
             task_output=task_output,
             remote_verified=remote_verified,
             max_part_bytes=max_part_bytes,
+            canonical_owner_bundle=owner_bundle,
+            expected_publication_mode=(
+                str(task_profile["publication_mode"]) if is_v2 else None
+            ),
         )
         if refs_match and remote_verified:
             execution_mode = "TASK_CONTEXT_REMOTE_SEAL"
     else:
-        task_manifest = _verify_task(task_output)
+        task_manifest = _verify_task(
+            task_output,
+            expected_unit_a=is_v2,
+            expected_task=task,
+            expected_publication_mode=(
+                str(task_profile["publication_mode"]) if is_v2 else None
+            ),
+        )
+
+    end_refs = _assert_refs_stable(
+        start_refs=refs,
+        repo_root=repo_root,
+        external_workspace_root=external_workspace_root,
+        workspace_profile=workspace_profile,
+    )
+    end_execution_input = _execution_input_identity(
+        system_context_root, environment_fingerprint
+    )
+    if end_execution_input != execution_input:
+        raise PrepareError("EXECUTION_INPUT_MOVED_DURING_RUN")
+
+    cache_decisions = {
+        "SAME_REF_REUSE": "SAME_REF_CACHE_VERIFIED",
+        "INITIAL_FULL_BUILD": "INITIAL_CACHE_BUILD",
+        "FULL_REBUILD_BASE_UNAVAILABLE": "STALE_CACHE_REBUILT_BASE_UNAVAILABLE",
+        "FULL_REBUILD_COMMIT_IDENTITY_CHANGE": "STALE_CACHE_REBUILT_COMMIT_IDENTITY",
+        "FULL_REBUILD_EXECUTION_INPUT_CHANGE": "STALE_CACHE_REBUILT_EXECUTION_INPUT",
+        "FULL_REBUILD_FALLBACK": "STALE_CACHE_REBUILT_FULL",
+        "INCREMENTAL_NON_CODE_REBIND": "STALE_CACHE_REFRESHED_NON_CODE",
+        "INCREMENTAL_SOURCE_DEPENDENT_CLOSURE": "STALE_CACHE_REFRESHED_SOURCE_CLOSURE",
+        "TASK_CONTEXT_REMOTE_SEAL": "SAME_REF_TASK_CONTEXT_RESEALED",
+    }
+    cache_decision = cache_decisions.get(execution_mode, "CACHE_DECISION_UNKNOWN")
 
     cumulative_changed_refresh = bool(
         (
             changes
-            and execution_mode in {
-                "FULL_REBUILD_FALLBACK",
+            and execution_mode in FULL_REBUILD_MODES | {
                 "INCREMENTAL_NON_CODE_REBIND",
                 "INCREMENTAL_SOURCE_DEPENDENT_CLOSURE",
             }
@@ -1662,7 +3009,7 @@ def prepare(
         or previous_receipt.get("changed_ref_refresh_verified")
     )
     cumulative_fallback = bool(
-        (changes and refresh_plan["fallback_reasons"])
+        (execution_mode in FULL_REBUILD_MODES and refresh_plan["fallback_reasons"])
         or previous_receipt.get("full_rebuild_fallback_verified")
     )
     inherited_remote_seal = bool(
@@ -1737,10 +3084,31 @@ def prepare(
         and cumulative_fallback
     )
     receipt: dict[str, Any] = {
-        "schema_version": SCHEMA_VERSION,
+        "schema_version": SCHEMA_VERSION_V2 if is_v2 else SCHEMA_VERSION,
         "workspace": workspace,
         "task": task,
         "status": STATUS_COMPLETE if complete else STATUS_PENDING_REMOTE,
+        "input_freshness": "EXACT_INPUTS_VERIFIED",
+        "output_freshness": "FRESH_FOR_EXACT_INPUTS",
+        "proof_status": (
+            "REMOTE_PROOF_COMPLETE" if complete else "REMOTE_PROOF_PENDING"
+        ),
+        "start_refs": start_ref_identity,
+        "end_refs": _ref_identity(end_refs),
+        "ref_drift": "NONE",
+        "cache_decision": cache_decision,
+        "execution_input_fingerprint": execution_input["fingerprint"],
+        "previous_execution_input_fingerprint": (
+            previous_execution_fingerprint or None
+        ),
+        "execution_input": {
+            "implementation_commit": execution_input["implementation_commit"],
+            "implementation_tree": execution_input["implementation_tree"],
+            "environment_fingerprint": execution_input[
+                "environment_fingerprint"
+            ],
+            "file_count": len(execution_input["files"]),
+        },
         "standard_flow": [
             "00_read_first", "workspace_resolve", "inventory_freshness",
             "task_context", "actual_full_text_read", "judgment",
@@ -1749,6 +3117,53 @@ def prepare(
             key: {"commit": ref.commit, "tree": ref.tree, "path_role": key}
             for key, ref in sorted(refs.items())
         },
+        "canonical_owner": (
+            {
+                "task_dependency_fingerprint": owner_bundle.get(
+                    "task_dependency_fingerprint"
+                ),
+                "phase": owner_bundle.get("phase"),
+                "owners": [
+                    {
+                        key: row.get(key)
+                        for key in (
+                            "owner_id",
+                            "repository_key",
+                            "repository",
+                            "ref",
+                            "access_mode",
+                            "workspace_material_commit",
+                            "first_resolved_head",
+                            "fetched_namespace_head",
+                            "pre_publish_resolved_head",
+                            "relation",
+                            "owner_side_unique_commit_count",
+                            "workspace_side_unique_commit_count",
+                            "owner_side_changes",
+                            "workspace_side_changes",
+                            "owner_side_changed_paths",
+                            "workspace_side_changed_paths",
+                            "workspace_incorporation_claim",
+                            "write_authority",
+                            "integration_required",
+                        )
+                    }
+                    for row in owner_bundle.get("owners", [])
+                ],
+                "premises": owner_bundle.get("premises", []),
+                "responsibility_subjects": owner_bundle.get(
+                    "responsibility_subjects", []
+                ),
+                "blocking_codes": owner_bundle.get("blocking_codes", []),
+                "completion_claim": None,
+                "v1_activation": 0,
+                "product_credit": 0,
+                "technical_credit": 0,
+                "automatic_progression": False,
+            }
+            if owner_bundle is not None
+            else None
+        ),
         "previous_refs": dict(sorted(saved_refs.items())),
         "refresh_plan": {**refresh_plan, "execution_mode": execution_mode},
         "changed_paths": [_change_json(change) for change in changes],
@@ -1766,11 +3181,11 @@ def prepare(
             "transport_sha256": sha256_file(task_output / "publication_transport.json"),
             "full_text_read_order": f"task_context/{task}/full_text_read_order.md",
         },
-        "same_ref_reuse_verified": bool(refs_match),
+        "same_ref_reuse_verified": execution_mode == "SAME_REF_REUSE",
         "changed_ref_refresh_verified": cumulative_changed_refresh,
         "full_rebuild_fallback_verified": cumulative_fallback,
         "semantic_reuse": {
-            "full_code_index_provider_rerun": execution_mode == "FULL_REBUILD_FALLBACK",
+            "full_code_index_provider_rerun": execution_mode in FULL_REBUILD_MODES,
             "partial_code_index_provider_rerun": (
                 execution_mode == "INCREMENTAL_SOURCE_DEPENDENT_CLOSURE"
             ),
@@ -1801,8 +3216,378 @@ def prepare(
         "product_credit": 0,
         "automatic_progression": False,
     }
+    if is_v2:
+        operator_status: str | None = None
+        for field in (
+            "unit_c_collaboration_support",
+            "unit_b_work_context",
+            "unit_a_premise_management",
+        ):
+            value = task_manifest.get(field)
+            if isinstance(value, Mapping) and isinstance(value.get("status"), str):
+                operator_status = str(value["status"])
+                break
+        receipt.update(
+            {
+                "primary_task": str(task_profiles["persistent_primary_task"]),
+                "publication_mode": str(task_profile["publication_mode"]),
+                "integrity_status": "VALID",
+                "legacy_context": {
+                    "status": task_manifest.get("status"),
+                    "completion_claim": task_manifest.get("completion_claim"),
+                    "completion_gates": task_manifest.get("completion_gates"),
+                },
+                "operator_v1": {
+                    "status": operator_status,
+                    "completion_candidate_status": "NOT_EVALUATED",
+                    "completion_claim": None,
+                    "blocking_reason_codes": owner_bundle.get("blocking_codes", [])
+                    if owner_bundle is not None
+                    else [],
+                },
+                "primary_task_manifest_sha256": sha256_file(
+                    task_output / "context_manifest.json"
+                ),
+                "primary_task_dependency_fingerprint": (
+                    owner_bundle.get("task_dependency_fingerprint")
+                    if owner_bundle is not None
+                    else None
+                ),
+                "workspace_manifest_set": {
+                    relative: sha256_file(workspace_dir / relative)
+                    for relative in (
+                        "manifest.json",
+                        "code_index/code_index_manifest.json",
+                        "route_graph/route_graph_manifest.json",
+                        "publication_transport.json",
+                    )
+                },
+                "nested_primary_task_transport_sha256": sha256_file(
+                    task_output / "publication_transport.json"
+                ),
+                "operator_v1_completion_claim": None,
+                "v1_activation": 0,
+                "technical_credit": 0,
+            }
+        )
     _write_receipt(workspace_dir, receipt)
     return receipt
+
+
+def _validate_terminal_task_receipt(
+    receipt: Mapping[str, Any], *, task: str, publication_mode: str
+) -> None:
+    task_context = receipt.get("task_context")
+    outputs = task_context.get("output_sha256") if isinstance(task_context, Mapping) else None
+    if not isinstance(outputs, Mapping):
+        raise PrepareError("terminal task receipt output map is missing")
+    expected = (
+        CMEE_TERMINAL_OUTPUTS
+        if publication_mode == "PERSISTENT_PRIMARY" and task == "cmee"
+        else NON_CMEE_TERMINAL_OUTPUTS
+    )
+    if set(outputs) != set(expected):
+        label = "CMEE exact11" if len(expected) == 11 else "non-CMEE exact9"
+        raise PrepareError(
+            f"terminal task output set is not canonical {label}: "
+            f"{sorted(outputs)}"
+        )
+    if (
+        receipt.get("operator_v1_completion_claim") is not None
+        or receipt.get("v1_activation") != 0
+        or receipt.get("product_credit") != 0
+        or receipt.get("technical_credit") != 0
+        or receipt.get("automatic_progression") is not False
+    ):
+        raise PrepareError("Step 7 activation, completion, or credit boundary violated")
+
+
+def _publish_workspace_candidate(
+    *, paths: WorkspacePublicationPaths, workspace: str, task: str,
+    verify_promoted: Callable[[], None],
+) -> None:
+    if paths.candidate.is_symlink() or not paths.candidate.is_dir():
+        raise PrepareError("workspace publication candidate is missing")
+    if paths.live.is_symlink():
+        raise PrepareError("workspace live publication target is unsafe")
+    if paths.backup.exists() or paths.quarantine.exists() or paths.marker.exists():
+        raise PrepareError("PUBLICATION_RECOVERY_AMBIGUOUS: unhandled publication state")
+    pre_swap_identity = (
+        _workspace_publication_identity(paths.live, task)
+        if paths.live.is_dir()
+        else None
+    )
+    candidate_identity = _workspace_publication_identity(paths.candidate, task)
+    marker = _publication_marker(
+        paths=paths,
+        workspace=workspace,
+        task=task,
+        phase="CANDIDATE_VERIFIED",
+        pre_swap_identity=pre_swap_identity,
+        candidate_identity=candidate_identity,
+    )
+    _write_publication_marker(paths, marker)
+    try:
+        if paths.live.is_dir():
+            os.replace(paths.live, paths.backup)
+            _fsync_directory(paths.parent)
+            marker["phase"] = "LIVE_MOVED_TO_BACKUP"
+            _write_publication_marker(paths, marker)
+        os.replace(paths.candidate, paths.live)
+        _fsync_directory(paths.parent)
+        marker["phase"] = "CANDIDATE_PROMOTED"
+        _write_publication_marker(paths, marker)
+        verify_promoted()
+        if _workspace_publication_identity(paths.live, task) != candidate_identity:
+            raise PrepareError("promoted workspace identity changed during verification")
+        marker["phase"] = "FINAL_VERIFIED"
+        _write_publication_marker(paths, marker)
+        if paths.backup.exists():
+            _remove_publication_tree(paths.backup, paths)
+        paths.marker.unlink()
+        _fsync_directory(paths.parent)
+    except Exception:
+        if paths.backup.is_dir():
+            if paths.live.exists():
+                os.replace(paths.live, paths.quarantine)
+            os.replace(paths.backup, paths.live)
+        elif pre_swap_identity is None and paths.live.exists():
+            _remove_publication_tree(paths.live, paths)
+        if paths.candidate.exists():
+            _remove_publication_tree(paths.candidate, paths)
+        if paths.quarantine.exists():
+            _remove_publication_tree(paths.quarantine, paths)
+        if paths.marker.exists():
+            paths.marker.unlink()
+        _fsync_directory(paths.parent)
+        raise
+
+
+def _seed_workspace_candidate(paths: WorkspacePublicationPaths) -> None:
+    if paths.candidate.exists() or paths.candidate.is_symlink():
+        raise PrepareError("workspace publication candidate already exists")
+    if paths.live.is_symlink():
+        raise PrepareError("workspace live publication target is unsafe")
+    if paths.live.is_dir():
+        shutil.copytree(paths.live, paths.candidate, copy_function=shutil.copy2)
+    elif paths.live.exists() or paths.live.is_symlink():
+        raise PrepareError("workspace live publication target is not a directory")
+    else:
+        paths.candidate.mkdir(parents=True)
+
+
+def _run_v2_candidate(
+    *, repo_root: Path, source_system_context_root: Path,
+    external_workspace_root: Path, workspace: str, task: str,
+    candidate_workspace: Path, remote_verified: bool,
+    fresh_clone_verified: bool, non_code_incremental_verified: bool,
+    source_incremental_verified: bool,
+    source_incremental_evidence_path: Path | None,
+    require_remote_verified: bool, max_part_bytes: int,
+    environment_fingerprint: str | None = None,
+) -> Mapping[str, Any]:
+    with _candidate_system_context_root(
+        source_root=source_system_context_root,
+        candidate_workspace=candidate_workspace,
+        workspace=workspace,
+        temporary_parent=external_workspace_root,
+    ) as candidate_system_context_root:
+        return _prepare_impl(
+            repo_root=repo_root,
+            system_context_root=candidate_system_context_root,
+            external_workspace_root=external_workspace_root,
+            workspace=workspace,
+            task=task,
+            remote_verified=remote_verified,
+            fresh_clone_verified=fresh_clone_verified,
+            non_code_incremental_verified=non_code_incremental_verified,
+            source_incremental_verified=source_incremental_verified,
+            source_incremental_evidence_path=source_incremental_evidence_path,
+            verify_only=False,
+            require_remote_verified=require_remote_verified,
+            max_part_bytes=max_part_bytes,
+            _workspace_dir=candidate_workspace,
+            environment_fingerprint=environment_fingerprint,
+        )
+
+
+def prepare(
+    *, repo_root: Path, system_context_root: Path, external_workspace_root: Path,
+    workspace: str, task: str, remote_verified: bool = False,
+    fresh_clone_verified: bool = False,
+    non_code_incremental_verified: bool = False,
+    source_incremental_verified: bool = False,
+    source_incremental_evidence_path: Path | None = None,
+    verify_only: bool = False,
+    require_remote_verified: bool = False,
+    max_part_bytes: int = DEFAULT_MAX_PART_BYTES,
+    cache_root: Path | None = None,
+    environment_fingerprint: str | None = None,
+) -> Mapping[str, Any]:
+    """Run the standard entry with terminal V2 publication isolation.
+
+    The legacy v1 route is retained unchanged.  A terminal V2 persistent primary
+    is compiled in a complete sibling workspace and atomically promoted only
+    after verification.  An ephemeral V2 task is always compiled and verified in
+    a temporary sibling and is discarded without touching live current output or
+    its receipt/transport.
+    """
+    repo_root = repo_root.resolve()
+    system_context_root = system_context_root.resolve()
+    external_workspace_root = external_workspace_root.resolve()
+    publication_parent = (
+        cache_root.resolve()
+        if cache_root is not None
+        else system_context_root / "current"
+    )
+    task_profiles_path = system_context_root / "task_profiles.json"
+    task_profiles = _load_json(task_profiles_path)
+    task_profile, is_v2 = _task_profile(task_profiles, task)
+    if not is_v2:
+        return _prepare_impl(
+            repo_root=repo_root,
+            system_context_root=system_context_root,
+            external_workspace_root=external_workspace_root,
+            workspace=workspace,
+            task=task,
+            remote_verified=remote_verified,
+            fresh_clone_verified=fresh_clone_verified,
+            non_code_incremental_verified=non_code_incremental_verified,
+            source_incremental_verified=source_incremental_verified,
+            source_incremental_evidence_path=source_incremental_evidence_path,
+            verify_only=verify_only,
+            require_remote_verified=require_remote_verified,
+            max_part_bytes=max_part_bytes,
+            _workspace_dir=(
+                publication_parent / workspace if cache_root is not None else None
+            ),
+            environment_fingerprint=environment_fingerprint,
+        )
+    contract = task_profile.get("operator_contract")
+    if not isinstance(contract, Mapping) or set(contract) != set(
+        UNIT_C_OPERATOR_CONTRACT_KEYS
+    ):
+        raise PrepareError(
+            "STEP7_TERMINAL_LIVE_PUBLICATION_REQUIRES_UNIT_C_EXACT10"
+        )
+    publication_mode = str(task_profile.get("publication_mode") or "")
+    current_parent = publication_parent
+    paths = _publication_paths(current_parent, workspace)
+    if publication_mode == "EPHEMERAL_VERIFY_ONLY":
+        current_parent.mkdir(parents=True, exist_ok=True)
+        primary_task = str(task_profiles.get("persistent_primary_task") or "")
+        with _publication_lock(paths):
+            _recover_workspace_publication(
+                paths, workspace=workspace, task=primary_task
+            )
+            with tempfile.TemporaryDirectory(
+                prefix=f".{workspace}.{task}.ephemeral-", dir=current_parent
+            ) as temporary:
+                candidate_workspace = Path(temporary) / workspace
+                if paths.live.is_dir():
+                    shutil.copytree(
+                        paths.live, candidate_workspace, copy_function=shutil.copy2
+                    )
+                else:
+                    candidate_workspace.mkdir(parents=True)
+                receipt = _run_v2_candidate(
+                    repo_root=repo_root,
+                    source_system_context_root=system_context_root,
+                    external_workspace_root=external_workspace_root,
+                    workspace=workspace,
+                    task=task,
+                    candidate_workspace=candidate_workspace,
+                    remote_verified=False,
+                    fresh_clone_verified=False,
+                    non_code_incremental_verified=False,
+                    source_incremental_verified=False,
+                    source_incremental_evidence_path=None,
+                    require_remote_verified=False,
+                    max_part_bytes=max_part_bytes,
+                    environment_fingerprint=environment_fingerprint,
+                )
+                _validate_terminal_task_receipt(
+                    receipt, task=task, publication_mode=publication_mode
+                )
+                return receipt
+    if publication_mode != "PERSISTENT_PRIMARY" or task != task_profiles.get(
+        "persistent_primary_task"
+    ):
+        raise PrepareError("invalid persistent primary task publication route")
+    with _publication_lock(paths):
+        _recover_workspace_publication(paths, workspace=workspace, task=task)
+        if verify_only:
+            receipt = _prepare_impl(
+                repo_root=repo_root,
+                system_context_root=system_context_root,
+                external_workspace_root=external_workspace_root,
+                workspace=workspace,
+                task=task,
+                remote_verified=remote_verified,
+                fresh_clone_verified=fresh_clone_verified,
+                non_code_incremental_verified=non_code_incremental_verified,
+                source_incremental_verified=source_incremental_verified,
+                source_incremental_evidence_path=source_incremental_evidence_path,
+                verify_only=True,
+                require_remote_verified=require_remote_verified,
+                max_part_bytes=max_part_bytes,
+                _workspace_dir=paths.live,
+                environment_fingerprint=environment_fingerprint,
+            )
+            _validate_terminal_task_receipt(
+                receipt, task=task, publication_mode=publication_mode
+            )
+            return receipt
+        _seed_workspace_candidate(paths)
+        try:
+            receipt = _run_v2_candidate(
+                repo_root=repo_root,
+                source_system_context_root=system_context_root,
+                external_workspace_root=external_workspace_root,
+                workspace=workspace,
+                task=task,
+                candidate_workspace=paths.candidate,
+                remote_verified=remote_verified,
+                fresh_clone_verified=fresh_clone_verified,
+                non_code_incremental_verified=non_code_incremental_verified,
+                source_incremental_verified=source_incremental_verified,
+                source_incremental_evidence_path=source_incremental_evidence_path,
+                require_remote_verified=require_remote_verified,
+                max_part_bytes=max_part_bytes,
+                environment_fingerprint=environment_fingerprint,
+            )
+            _validate_terminal_task_receipt(
+                receipt, task=task, publication_mode=publication_mode
+            )
+
+            def verify_promoted() -> None:
+                verified = _prepare_impl(
+                    repo_root=repo_root,
+                    system_context_root=system_context_root,
+                    external_workspace_root=external_workspace_root,
+                    workspace=workspace,
+                    task=task,
+                    verify_only=True,
+                    require_remote_verified=require_remote_verified,
+                    max_part_bytes=max_part_bytes,
+                    _workspace_dir=paths.live,
+                    environment_fingerprint=environment_fingerprint,
+                )
+                _validate_terminal_task_receipt(
+                    verified, task=task, publication_mode=publication_mode
+                )
+
+            _publish_workspace_candidate(
+                paths=paths,
+                workspace=workspace,
+                task=task,
+                verify_promoted=verify_promoted,
+            )
+            return receipt
+        except Exception:
+            if paths.candidate.exists() and not paths.marker.exists():
+                _remove_publication_tree(paths.candidate, paths)
+            raise
 
 
 def cli(argv: Sequence[str] | None = None) -> int:
@@ -1814,6 +3599,10 @@ def cli(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--repo-root", type=Path, default=Path.cwd())
     parser.add_argument("--system-context-root", type=Path)
     parser.add_argument("--external-workspace-root", type=Path)
+    parser.add_argument("--cache-root", type=Path)
+    parser.add_argument(
+        "--output-format", choices=("brief", "full"), default="brief"
+    )
     parser.add_argument("--remote-verified", action="store_true")
     parser.add_argument("--fresh-clone-verified", action="store_true")
     parser.add_argument("--non-code-incremental-verified", action="store_true")
@@ -1827,14 +3616,28 @@ def cli(argv: Sequence[str] | None = None) -> int:
     system_context_root = (
         args.system_context_root.resolve()
         if args.system_context_root
-        else repo_root / "Cocolon_前提資料" / "system_context"
+        else IMPLEMENTATION_ROOT / "Cocolon_前提資料" / "system_context"
     )
     external_workspace_root = (
         args.external_workspace_root.resolve()
         if args.external_workspace_root
-        else repo_root / ".cocolon-context-workspace"
+        else IMPLEMENTATION_ROOT / ".cocolon-context-workspace"
+    )
+    cache_root = (
+        args.cache_root.resolve()
+        if args.cache_root
+        else IMPLEMENTATION_ROOT / ".cocolon-context-cache"
     )
     try:
+        _assert_cache_root_untracked(
+            cache_root,
+            (
+                IMPLEMENTATION_ROOT,
+                repo_root,
+                external_workspace_root / "mashos-api",
+            ),
+        )
+        environment_report = _standard_environment_identity()
         result = prepare(
             repo_root=repo_root,
             system_context_root=system_context_root,
@@ -1849,11 +3652,27 @@ def cli(argv: Sequence[str] | None = None) -> int:
             verify_only=args.verify_only,
             require_remote_verified=args.require_remote_verified,
             max_part_bytes=args.max_part_bytes,
+            cache_root=cache_root,
+            environment_fingerprint=str(
+                environment_report["environment_fingerprint"]
+            ),
         )
-    except (PrepareError, InventoryError, PublicationTransportError, ContextCompileError, OSError) as exc:
+    except (
+        PrepareError,
+        InventoryError,
+        PublicationTransportError,
+        ContextCompileError,
+        EnvironmentVerificationError,
+        OSError,
+    ) as exc:
         print(f"COCOLON_CONTEXT_PREPARE_ERROR: {exc}", file=sys.stderr)
         return 2
-    print(_canonical_bytes(result).decode("utf-8"), end="")
+    output = (
+        result
+        if args.output_format == "full"
+        else _brief_receipt(result, cache_root / args.workspace)
+    )
+    print(_canonical_bytes(output).decode("utf-8"), end="")
     return 0
 
 
