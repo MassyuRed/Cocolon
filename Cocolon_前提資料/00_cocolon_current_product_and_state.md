@@ -1,12 +1,12 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-23 JST（最新差分は三中核のAI原価・制限・料金案とSystem Context再生成停止）。全Cocolon作業の必読原本。仕様相談、観測会、AI選定、実装、監査、文書更新も対象。
+更新日：2026-10-23 JST（最新差分は価格上限・27B除外と小型AI再選定。System Context再生成停止は維持）。全Cocolon作業の必読原本。仕様相談、観測会、AI選定、実装、監査、文書更新も対象。
 
 ## 1. この資料の役割と更新方法
 
 これは全製品の現在地を一度で確認する正本である。毎回全文を読み、対象機能の詳細正本と実ファイルへ進む。過去の読了、会話の要約、検索断片だけで代用しない。repository rootの`AGENTS.md`、`00_karen_read_first.md`、work rulesの入口からここへ入り、System Contextの生成物に含まれない場合もfreshな作業ownerから直接読む。
 
-現時点の確認基準はCocolon Draft PR [#30](https://github.com/MassyuRed/Cocolon/pull/30) `8e3c26f66e13c26e82349c4e02415e149e5e3943`、mashos-api Draft PR [#3](https://github.com/MassyuRed/mashos-api/pull/3) `3084c99e5a08d6e475d8a177e62ebf1548e8a0f9`。両方open／draft。これは今回の照合点であり、次回の最新headを固定する指示ではない。本資料の配置commitは、この変更を含むGitHub revisionから解決する。
+現時点の確認基準はCocolon Draft PR [#30](https://github.com/MassyuRed/Cocolon/pull/30) `54d34985ba180e54b521549100fc1f9fcc72f309`、mashos-api Draft PR [#3](https://github.com/MassyuRed/mashos-api/pull/3) `3084c99e5a08d6e475d8a177e62ebf1548e8a0f9`。両方open／draft。これは今回の照合点であり、次回の最新headを固定する指示ではない。本資料の配置commitは、この変更を含むGitHub revisionから解決する。
 
 **作業ごとに差分を確認し、変化した機能・決定・状態・残件・根拠だけを、当該作業と同じ変更単位で置換更新する。** 日付だけを全行で更新しない。無関係な機能の再監査や全資料の再生成はしない。関連差分なしは既存の作業記録／PR説明に「全体現在地差分なし」と理由を一行残す。詳細mapに構造差分があれば、そのmapも同時に更新する。
 
@@ -55,7 +55,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | Emlis任意問い・回答更新 | 問いは実装済み。Free／Plusはthread全体0..1、Premiumは本人続行により逐次0..3。skip・終了・訂正・撤回・再読あり。原入力と補足を別sourceとして束縛 | 問いを出さないENDだけで十分理解したとは判断しない。回答は新規感情入力件数や国家eventへ加算しない。一般入力・回答後本文・本人実機一往復の品質が残る |
 | Emlis有料拡張 | Plusの適格本人履歴、Premiumの逐次問い・本人が修正／否定できる根拠付きframe、条件付きLayer3を実装 | 履歴が使えるコードと、本人固有の深さ・有料差の体感を分ける。有料商品品質は未受入れ |
 | 配置と本人確認 | 共通APIは10/23にPiece限定overlay3577d7fdでLive、Emlis内容は土台10/10版5c8bd8eを継承。u353〜355は未配置 | Piece作業でservice identityのみ確認。Emlisの本人実機/品質は今回再検証なし。10/10の本人表示1件はMash評価で不合格。同じ保存本文の履歴再表示まで確認済みにしない |
-| 27B候補試験 | `Qwen3.8-27B-Q4_K_M.gguf`を候補保持。10/21、架空相談2題×実演あり／なし×初回／回答後＝8出力の推論試験 | 追加情報の取込みは見られたが、未確認な意味の補完、近い問いの再提示、更新記録の欠落が残る。実演ありの一貫した優位未確認。重みの追加学習0、27BのCMEE統合0、他core適性未検証、製品採用未確定。Pod停止はMash報告受領済み |
+| 27B旧試験（選定除外） | 10/23 Mash決定で27Bを候補から除外。`Qwen3.8-27B-Q4_K_M.gguf`の試験は履歴として保持。10/21、架空相談2題×実演あり／なし×初回／回答後＝8出力の推論試験 | 追加情報の取込みは見られたが、未確認な意味の補完、近い問いの再提示、更新記録の欠落が残る。実演ありの一貫した優位未確認。重みの追加学習0、27BのCMEE統合0、他core適性未検証、製品採用未確定。Pod停止はMash報告受領済み |
 | 観測教材 | 観測・一点への問い・本人回答で何を修正するかを記録。相談教材と、感情選択＋その時点で見える実体寄り入力を区別 | 教材蓄積は学習実施ではない。[三中核の分担・比較案](observation_learning/model_selection/2026-10-22-three-core/README.md)を作成。20比較場面（新規評価候補15・既知派生4・境界1、独立した新規候補5family）、最初の4場面、可視入力と採点条件を分離して保存した。モデル試験・本統合・追加学習は未実行。自然な入力分布・一般化・学習効果は未実証。最新教材は`observation_learning/README.md`から辿る |
 
 詳細owner：[Emlis map](current_structure/01_emlis_ai_current_structure.md)、[CMEE map](current_structure/04_cmee_current_structure.md)、[Emlis詳細設計](designs/cmee/v1/02_emlis_v1a_detailed_design.md)、[観測教材](observation_learning/README.md)。古いmap本文の「問い未実装」は後続Q3／Q4・実sourceと矛盾する旧状態であり、現在へ戻さない。
@@ -127,11 +127,11 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 10/23のプラン設定read-only照会ではPlus表示は月300円、Premium月980円（RN/API fallbackも同額）。実ストア価格・税込区分は未確認。Pieceの5/30/無制限は保存数で、新AI生成数の上限ではない。Emlisの1/3問もthread単位であり、月間生成費を制限しない。
 
-[全三中核の費用・制限・料金再試算](observation_learning/model_selection/2026-10-22-three-core/2026-10-23-cost-and-plans.md)を作成した。新AI導入時の比較基準はPlus1,980円／Premium3,980円と生成枠の組合せを華恋が推奨。Free3/Plus60/Premium60セッション、Piece本文1/30/60、分析1/4/8、将来IF0/0/4の月枠案。実測前の仮定による計算で、料金・権利・quota・モデル採用は未決／未変更。1,480/2,980円は有料転換5%・全枠で赤字。必須2pass・cold start・長文の分割集約で推奨案も悪化するため、最初の4場面と履歴／長期分析の実測後に確定する。無料者・保存再読・数値集計・固定基盤費・ストア費も別に計上し、Emlis単体の旧試算を全体採算へ使わない。
+**10/23 Mash決定：Plus980円／Premium1,980円が価格の上限（これでも高い）、27Bは候補外。** 旧1,980/3,980円の推奨と27B再試験案を撤回。[小型AI再選定・全core原価](observation_learning/model_selection/2026-10-22-three-core/2026-10-23-small-model-reselection.md)では、華恋はDeepInfraの既製`Qwen/Qwen3.5-9B`標準従量APIを第一試験へ推奨し、Qwen3.5-4Bを自己管理／追加学習用の別候補とする。980/1,980円を売価の比較基準とし、Free30/Plus100/Premium150セッション等の利用量でも、仮tokenと予備込み月原価は約5.57/37.07/147.28円。無料者・固定基盤・税相当留保・ストア費を含めて計算した。これらは利用量感度で、商品quota変更・採用・品質合格ではない。独自追加学習版の配備に公開API単価を流用せず、育成費・学習後のhost費用は別確認。旧費用資料は履歴として参照する。
 
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
-| AI選定・観測教材 | 三core比較案と全体原価・料金案を準備済み。次は最初の4場面の正規fixture束縛、既27Bの取得元/revision/本体hash確認、context/VRAMと実呼出し数を具体化し、C0最大4＋M1最大4の実出力・課金時間を得る。有料試験は最大3h・消費500円の未実行案で、今回起動・課金0。長い履歴／Premium3回答／100件＋前期分析の費用は別途実測が必要。採用・本統合・追加学習・商品料金改定は未実行 |
+| AI選定・観測教材 | 価格上限980/1,980円、27B除外を固定。次は既存4場面でC0最大4＋Qwen3.5-9B未接続API proxy最大4を比較する具体化。標準単価・非thinking指定・実usage・意味保持・三core品質を確認し、公開APIの非固定weight revisionも記録。利用消費50円は未実行予算案、今回API推論/課金0。4Bの追加学習・育成後host・本統合・商品quota/価格改定は未実行。27Bの本体hash確認/再起動をcurrent nextに戻さない |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。u353〜355のコードと配置差を保持 |
 | Analysis | 最新内容修正版の配置差、6401本人生成・再表示・比較、複数ANSWER採用、一般理解、有料差、IF／Savedの未実装 |
 | Piece | API private構成はLive。正本privacy差は3084c99eで解消。本人保存に必要なRN sourceはbranch agent/piece-testflight-private-20261023@87151へ固定、既存iOS workflowによる署名Archive/TestFlight送信1回は個別判断前・未実行。本人保存→同owner履歴/詳細、実Photos/Share、Android/backend receipt、商品受入れは残る |
@@ -163,3 +163,5 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 10/23 System Context更新：全tracked pathと全体設計・全file地図・current maps・最新weekly・全機能原本・対象sourceを照合。旧inventoryとの差はCocolon追加168/API追加328、削除各0（照合head bef22ae…/3084c99e…）。全blobの意味読了ではない。正規実装はPR37の固定環境・material分離・cache方式であり、商品側入口を同期した。学習済AI方針・問い実装・Analysis IF/Saved・Piece API/RNの区別は既存正本どおり保持。今回の差分はSystem Contextのみ、他機能の稼働/本人端末/商品品質再検証は行っていない。実再生成は固定環境doctor34項目を通過したが、Python1874対象が20分/30分ともtimeoutで最新cache未生成。2回目は処理中の費用案更新で商品headも進み、終了時head確認が失敗した。資料・参照・読取導線の更新と索引の未完了を区別し、同じ時間延長だけの追加試行は停止。fresh原本を直接読み、診断・次の再開条件はPR37から解決する。STRUCTURE_MAP_DELTA_NONE（商品source/接続変更なし）。
 
 10/23費用差分：上記固定headのsourceと27B原本、現行プラン表示設定、公式GPU・基盤・ストア手数料を照合。全体原価を仮定付き172条件で計算し、料金・生成枠と4場面の実行予算を提案した。今回DBはプラン設定のread-onlyのみ、本人入力取得／変更0、GPU／有料推論／チャージ／price/quota変更0。STRUCTURE_MAP_DELTA_NONE（接続実装・商品contract差分なし）、product_credit=0。
+
+10/23再選定差分：Mashの価格上限・27B除外を受領し、高価格案を撤回。Qwen9B公開API単価・公開重み・非thinking・データ方針と4B追加学習手段を公式原典から確認し、全三中核の仮tokenで再計算した。既製API原価と独自育成版を分離。価格/商品quota/モデル採用/本統合/有料実行の実変更0。STRUCTURE_MAP_DELTA_NONE、ADMINISTRATIVE_ONLY、product_credit=0。

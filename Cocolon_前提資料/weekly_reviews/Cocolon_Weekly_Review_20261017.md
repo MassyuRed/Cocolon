@@ -2065,3 +2065,14 @@ Mashは、旧費用がEmlis応答中心であり、CMEEへモデルを接続す�
 華恋は原価面の比較基準として税込Plus1980/Premium3980、Free3/Plus60/Premium60セッション、Piece本文1/30/60、分析1/4/8、将来IF0/0/4を推奨した。価格決定ではなく、仮の秒数・FX160・serverless48GB1.22$/h・20%再試行・10%税決済変動予備での試算。全枠時の変動原価予算Free28.99/Plus511.03/Premium1138.02円、固定基盤11000円。MAU1000/有料5%/有料内訳80:20では推奨案の月残額約6882〜19972円（手数料26〜15%、人件費/広告等前）。1480/2980は同条件で赤字。必須2passや重いcold startでは推奨案も赤字になる条件を記載し、販売成立としない。
 
 次は最初の4場面C0最大4/M1最大4。既27Bの取得元/revision/本体hash、ctx8kの適合を確認し、実call数・tokens・処理/課金時間を測る。A40最大3h/利用消費500円は未実行予算案。長い履歴、Premium3回答、100件＋前期の分割集約は料金確定前の追加計測が残る。今回GPU/推論/チャージ/追加学習/価格/quota/配置変更0、プラン設定のread-only以外の本人DB取得操作0。全体現在地・観測入口・比較入口を同時更新。STRUCTURE_MAP_DELTA_NONE、ADMINISTRATIVE_ONLY、product_credit0、automatic_progression=false。
+
+
+#### 10/23 — Mashの価格上限・27B除外、小型AIへ再選定
+
+Mashは『Plus980円、Premium1980円、これがMAX。これでも高い』『実現可能な学習済みAIを出せ。27Bは無理』と明示した。980/1980は上限であって販売価格の確定や現DB300/980の更新承認ではない。華恋の1980/3980推奨・27B再試験案を撤回し、[小型AI再選定](../observation_learning/model_selection/2026-10-22-three-core/2026-10-23-small-model-reselection.md)へ置換した。旧費用書先頭にsupersededを明示、履歴の算術は保持。
+
+公式現行提供が確認できたDeepInfra標準Qwen/Qwen3.5-9B（BF16、入力$0.10/出力$0.15各1Mtoken）を最初の三core試験へ推奨。固定GPUなし。自己管理・追加学習用の別候補はQwen3.5-4B（bf16 LoRA約10GB目安、素の既試験品質は未達）。独自LoRA/育成版を共用APIと同単価で配備できるとの根拠はなく、学習費/学習後hostは別確認とした。CMEE接続・観測技術育成の方針は維持する。
+
+使用量感度はFree30/Plus100/Premium150セッション、Piece5/30/60、分析1/8/12、将来IF0/0/4。仮token×160円/$×再試行1.2×決済等1.1で月変動原価5.57/37.07/147.28円。MAU1000/有料5%/有料比80:20/固定11000円なら980/1980の月残額+19052〜25542円（手数料26〜15%、人件費等前）。全工程総token2倍でも+10808〜17298円。ただし品質/速度/実token量未測定、商品quota変更ではない。独立算術照合一致。
+
+次は既存4場面C0最大4＋M1 Qwen9B未接続proxy最大4。利用消費50円は未実行案、初回入金条件は別・未確認。27B再起動・本体hash確認をcurrent nextへ戻さない。fixture原文/意味評価は不変、今回API/GPU推論・課金/チャージ・学習・価格/quota/配置変更0。全体現在地・観測入口・比較入口を同期。STRUCTURE_MAP_DELTA_NONE、ADMINISTRATIVE_ONLY、product_credit0、automatic_progression=false。
