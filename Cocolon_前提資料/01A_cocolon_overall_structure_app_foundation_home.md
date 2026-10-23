@@ -4545,3 +4545,7 @@ Cocolon側の新analysis_semantic_snapshot_results.jsonは全private完成state�
 ## 2026-10-23 — 第5回観測会の資料所在（runtime構造差分なし）
 
 新規 `observation_learning/sessions/2026/OBS-20261023-001/01_dialogue.md` は短い架空感情入力D00と今後の実発言だけを、同 `02_learning_notes.md` は初回に見せない本人役の事前設定・未設定・実回答後の出典対応を所有する。両pathのrootは `Cocolon_前提資料/`。初回に見えない心理を当てる試験にせず、実問答・読み直しは未実演。既存教材16件へ未追加。入口・全機能00・latest weekly Tへ同期。STRUCTURE_MAP_DELTA_NONE（教材所在のみ。runtime owner／型／接続／公開契約変更0）。GPU・推論・学習0。
+
+## 2026-10-24 — 第6回の本人訂正教材の所在（runtime構造差分なし）
+
+新規 `Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-001/01_dialogue.md` は椅子修理の初回D00と今後の実問答、同 `02_learning_notes.md` は本人役の事前実情・明示訂正案と可視順序を所有する。初回→本人の訂正→実際の観測更新を記録するための題材で、訂正や完成応答はまだ未提示・未取得。第5回ノートには原文／華恋編集を分けた受け取り候補1件を整理し、元の16候補へ未追加。入口・全機能00・weekly Uへ同期。STRUCTURE_MAP_DELTA_NONE（教材所在のみ。runtime owner／型／接続／公開契約変更0）、GPU／追加モデル推論／学習0。
