@@ -245,3 +245,21 @@ ai/tests/test_cmee_emlis_semantic_snapshot.py
 意味／plan／完成本文の段階別private roundtripに加え、実作者を例外化する前に意味を隔離fileへ保存し、実例外後に同fileから候補再取得／再採用なしで再開を確認。完成済みはcompiler／作者を例外化しても同artifactを返す。sourceの所有者照合は認証の代用ではない。caller-managed private保存で、サービスの自動durability、実Auth、Supabase保存、画像や本人端末は未確認。
 
 新raw採取・同一再読は本文確認用で、339へ加算しない。全7変更byteとsource blobをremote照合済み、追加GitHub CIは[skip ci]で0。全suiteや既存失敗の修復とはしない。実モデル／推論／学習／課金／実DB／Render／通常B8／公開API/DTO／RN／画像／merge/deploy0。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、商品0／正式0/3／PRODUCT_NOT_CLEAR／candidate_ready=false／automatic_progression=false。P5と一般文章品質／通常接続は別残件。
+
+
+<a id="p5-analysis-semantic-proposal"></a>
+## 12. P5 Analysisの具体案と、位置だけの実inspection
+
+P4完了のCocolon967c7d4／API4fd8db4を確認し、Mashの内部準備継続指示で[具体案04](../../../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#cmee-p5-offline-analysis-proposal)／[型・保存案05](../../../designs/cmee/v1/05_json_schema_and_versioning.md#cmee-p5-analysis-schema-proposal)を作成した。新admission／graph／文章・図生成は未実装、PROPOSED_ONLY。P4の具体承認をP5へ流用しない。
+
+新[analysis_semantic_admission_proposal.json](analysis_semantic_admission_proposal.json)は原7field・全member・P1 identity・手作業packet・P1位置受取・raw座標proof・source blob・限界を持つ。旧P1/P2/C0／既存packet／旧結果JSONは変更0。最終inspectionでは既存freeze／P1投影で同じ材料・request・source set・期間・全memberを確認。55quoteのfield相対scalarとenvelope相対UTF8／digestを照合し、8関係の端点・scope、全unitと原文groupの対応も確認した。受取はCANDIDATE_UNREVIEWED／LOCATION_ONLY_NOT_SEMANTIC_ADMISSION。意味が正しい、表示できた、保存復元できたという実結果ではない。
+
+18保持単位は16node候補＋従属scope1＋負荷注記1。原11文groupに接続・句読点を残す。8 source scope関係、route edge0、材料unknown1、選択4。られるの読みを独立した能力／受身へ強制せず、過去の安堵に付く原文scopeのまま保持。聞いていない非行動と材料に回答がないunknownを分け、メモ作成への「少し面倒だった」を購入失敗／性格へ変えない。選択感情から本文の感情・原因・強度を補わない。
+
+2担当が読取レビューし、必須矛盾の指摘0。追加拘束として、①6field hashだけで回答不在の意味を証明しない、②負荷attachmentは行動記述への対応で同一出来事・時点を加えない、③別refの意味重複も拒否して正当な親子の根拠共有を保つ、を設計へ反映。正式なPro／Ultra審査や実意味採用ではない。
+
+一時的なauthoring inspectionは2回。初回はdataclass内tupleと保存JSON listの直接比較でpacket作成前に停止し、canonical JSONの同値比較へ修正した。最終snapshotはsource freeze2呼出し（全作成runで4）、P1位置受取1。作成途中を成功数に足さず、pytest／unittest実行0、新checker／runnerをrepositoryへ追加0。今回使ったのは既存Pythonとsource adapterのimportで、依存変更なし。文章・図payload／admission／typed graph／保存再開の実成功は0。
+
+想定実装はEngine＋Analysis新admission＋既存compiler／唯一realizerの4 production path、新test／fixture各1。必要な意味変異・片側投影変異・保存／実作者例外／完成再読・旧経路回帰とSTOPを04へ固定。旧parser／safe projection／通常serializer／SQL allowlistへ新graphをそのまま渡さない。最初はcaller-managed private fileだけで、実Auth／自動durability／通常保存の成立は主張しない。
+
+今回実モデル／推論／学習／課金／C0／DB／Render／API／RN／merge／deploy0。API source変更0、前提資料のみ。STRUCTURE_MAP_DELTA_NONE、BLOCKER_NARROWED、product_credit=0／PRODUCT_NOT_CLEAR／正式0/3／candidate_ready=false／automatic_progression=false。次は具体案の新契約範囲の判断後に限定実装する。

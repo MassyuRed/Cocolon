@@ -954,3 +954,15 @@ Analysis P5も実sourceを確認した。対象付きunknownの根拠、行動�
 Mash承認により[Piece P4](03_piece_v1c_detailed_design.md#cmee-p4-implemented)を実装。新規明示offline PieceだけでP1→版付き採用snapshot→既存compiler／唯一作者／author-free policy→同一private再読。実型と版は[05 actual](05_json_schema_and_versioning.md#cmee-p4-actual-types)。旧P4未承認の記載は案作成時の履歴で、現状態ではない。P01の6claim／5文／2関係と全選択を保持。出力は原文2段落保持で一般文章生成・商品品質合格ではない。
 
 API4fd8db4の7fileはGitHub全文／blob／変更集合／head確認済み。対象339成功、34 subtestsは加算せず、全suite／CI成功とはしない。通常B8／Analysis／Emlis profileの意味契約・公開API／DB／RN／モデルは不変。新private dataclass10／例外2はPiece専用で共有logical registryは不変。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、商品0／正式0/3／candidate_ready=false／automatic_progression=false。次の別残件はP5の実型・採用／保存差分、通常接続と商品品質。今回の承認から自動開始しない。
+
+<a id="cmee-p5-next-unit"></a>
+
+## 2026-10-23 — 次の内部準備：Analysis P5の具体案
+
+MashのCMEE内部準備継続指示により、P4完了の現在地から[Analysis P5の一単位](04_analysis_v1d_v1e_detailed_design.md#cmee-p5-offline-analysis-proposal)と[private型・保存案](05_json_schema_and_versioning.md#cmee-p5-analysis-schema-proposal)を具体化した。PROPOSED_ONLYで、新admission／graph／本文・図は未実装。既承認Emlis／Pieceのactualを未実装へ戻さない。
+
+原入力3件・補足0・比較なしの明示offlineに限り、P1→immutable採用snapshot→新private graph→既存唯一realizerの文章・図→同一private serialize/reloadを最小到達先とする。18保持単位は16node候補＋従属scope1＋負荷注記1、原文11文group、8 source scope relation、route edge0。本人の省略主体・意向・否定・比較留保・程度・選択感情を保持し、不明は本人不知と材料内未観測を分ける。旧finite parser／safe projection／通常serializer／SQLを新意味の受入れへ黙って流用しない。
+
+実装変更案はEngine、Analysisの新semantic_admission.py、既存compiler、既存realizerの4 production path＋新test／fixture各1。新shared契約へ広げず、通常service／DB／API／RN／モデル接続は含めない。新private型と意味起点の追加はRule18 §11.3 LEVEL_3の具体契約差分で、Mashがこの範囲を判断後に実装する。内部準備資料・source位置検査までを再承認待ちにしない。
+
+今回確認原本はAPI4fd8db4／Cocolon967c7d4。P1同一material／request／期間／全memberを照合、55quoteの元scalar／UTF8と参照を確認したP1受取はCANDIDATE_UNREVIEWEDのみ。全手作業例・原入力・source blob・実施限界はtrialのanalysis_semantic_admission_proposal.json。旧P1/P2/C0は不変、今回test／実admission／生成／DB／Render／モデル0。STRUCTURE_MAP_DELTA_NONE、BLOCKER_NARROWED、商品0／正式0/3／candidate_ready=false／automatic_progression=false。

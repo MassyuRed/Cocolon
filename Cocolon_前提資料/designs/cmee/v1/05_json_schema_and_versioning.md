@@ -3125,3 +3125,34 @@ Mash承認済みのP4をAPI4fd8db4へ実装。上のP4型案は当初案、実fi
 `PieceSemanticResultV1`のdecisionはADOPTED_PROVISIONAL/HOLD/UNSUPPORTED/REJECTED。採用済みでも本文失敗時はsnapshotを保持してartifact=null、status=UNAVAILABLEとなる。GENERATEDは実artifactがある時だけ。通常B8の旧結果型へ付替えない。有効な材料について非採用結果もP1 request_refを保持する。
 
 保存は`cocolon.cmee.piece_semantic_state.v1`、closed keysはschema_version/request_binding/snapshot/plan/artifact。request_bindingにoperation request_id／expected owner／record／version／tier／requested_formatを含める。同一snapshotから意味を照合し、保存plan／完成本文はauthor-free検査で再読する。候補取得・再採用・完成済み作者再実行は禁止。私有source bytesはcanonical original JSONのUTF8 stringで保存し、公開DTO／実DB schema／migration変更0。
+
+<a id="cmee-p5-analysis-schema-proposal"></a>
+
+## 2026-10-23 — P5 Analysis private型・状態の具体案（PROPOSED_ONLY）
+
+[実装範囲・意味・検証の正本は04](04_analysis_v1d_v1e_detailed_design.md#cmee-p5-offline-analysis-proposal)。API4fd8db4には以下の型は存在せず、旧logical registry／`ObservedGraph`／`ObservedSelfStructureMap`／公開DTO／SQLを更新した意味ではない。名称・fieldは実装判断用の具体案。承認後の技術的な命名調整は可能だが、意味・保存・公開境界を変える場合は同じ案と扱わない。
+
+| private型案 | 必須field・不変条件 |
+|---|---|
+| `AnalysisSemanticInputV1` | `prepared/receipt/tier/semantic_profile`。exact requestとP1 material・request hash・同receiptを再照合する。profile=`analysis_candidate_snapshot.v1`、原入力3・補足0・比較なし。明示offline以外へ流さない |
+| `AnalysisSemanticUnitBindingV1` | `unit_ref/carrier/node_kind/source_binding_ref/claim_json/evidence_json/group_ref`。carrierはGRAPH_NODE／DEPENDENT_SCOPE／ANNOTATION。完全canonical claim_json内に原主体binding／格・名詞／述語／肯否／modality／時点／程度／原文scopeと全根拠を持つ。source bindingはrecord／版／envelope／field／scalar／envelope UTF8／digest。snapshot内へ未来のnode IDを入れない |
+| `AnalysisSemanticSentenceGroupV1` | `group_ref/source_binding_ref/unit_refs/original_text`。原文11文を接続詞・句読点ごと保持。unit単位の断片表示だけで従属scopeを切らない。source座標と表示座標を区別 |
+| `AnalysisSemanticScopeRelationV1` | `relation_ref/kind/endpoint_unit_refs/evidence_refs/marker_evidence_refs/projection_role`。8関係全てSOURCE_SCOPE_NOT_ROUTE_EDGE。端点の原field・全文scope・markerを照合し、旧ORDER／共起edgeへ変換しない |
+| `AnalysisSemanticMaterialUnknownV1` | `unknown_ref/target_unit_refs/target_dimension/origin/resolution_state/evidence_refs/checked_source_set_ref/checked_text_fields/label`。今回のoriginはNOT_OBSERVED_IN_MATERIAL、各checked fieldにsource／field／digest。非行動のquoteだけで不在を認めず、6fieldの限定coverageを照合。本人明示不明の型へ昇格しない |
+| `AnalysisSemanticBurdenAnnotationV1` | `annotation_ref/unit_ref/target_unit_refs/target_nominal_evidence_refs/degree_evidence_refs/temporal_scope/evidence_refs/forbidden_promotions`。同recordのメモ作成への限定bindingと原「少し」・過去・留保を保持。旧wish限定annotationへ収納しない |
+| `AnalysisSemanticSourceSelectionV1` | `selection_ref/source_id/label/strength/source_commitment/alias_refs/coverage_state`。論理4件、両元field/indexを保持し重複計上しない。未表出はSOURCE_SELECTION_RETAINED_NOT_TEXTUALIZED |
+| `AnalysisSemanticSnapshotV1` | schema=`cocolon.cmee.analysis_semantic_snapshot.v1`、`semantic_profile/admission_version/adapter_version/request_binding/source_snapshot/source_commitment/candidate_packet/units/groups/scope_relations/unknowns/annotations/source_selections/snapshot_ref`。admission/adapter各1。可変normalized dictを正本とせず、原7fieldと全candidate・bindingをdeep freeze。request_bindingはowner／operation request／P1 request／tier／期間／全memberを含む |
+| `AnalysisSemanticGraphV1` | schema=`cocolon.cmee.analysis_semantic_graph.v1`、`semantic_profile/snapshot_ref/source_commitment/source_set_ref/period/graph_ref/nodes/dependent_scopes/groups/scope_relations/unknowns/annotations/source_selections/unit_node_bindings`。今回16node＋従属1＋注記1、route edge0。5 node種別の語彙だけを再利用し、旧ObservedGraphの完全routeと名乗らない。CMEE node refはsnapshot確定後に導出 |
+| `AnalysisSemanticRealizationV1` | `meaning_ref/trace_kind/carrier_ref/group_ref/source_binding_refs/text_section_index/visible_scalar_start/end/visual_ref`。meaning_refはunit／relation／unknown／selection refを閉鎖種別で区別する。全必要意味→文章の原文group範囲とprivate図のnode／scope／注記へ束縛。unknownの独自表示はgroup_ref=null。非表出選択はtrace_kind=RETAINED_SOURCE_SELECTIONとしてgroup_ref／text_section_index／visible_scalar_start/endを全てnull、visual_refは構造化選択保持先、source_binding_refsは元選択field/indexのbindingだけとし、架空の可視範囲を作らない |
+| `AnalysisSemanticArtifactV1` | schema=`cocolon.cmee.analysis_semantic_artifact.v1`、meaning版=`cocolon.cmee.analysis_candidate_meaning.v1`、`semantic_profile/snapshot_ref/graph_ref/source_commitment/artifact_ref/visual_projection_json/text_sections/realizations/retained_selection_refs/content_hash`。private visual schemaは`cocolon.cmee.analysis_semantic_visual.v1`。文章と図は同一graph identity。生成済み本文を新sourceへ再投入しない |
+| `AnalysisSemanticResultV1` | `decision/reason_codes/request_ref/status/snapshot/graph/artifact`。非採用は後3者null。有効材料のrequest refは保持。採用後の生成失敗はsnapshot保持・artifact=null・UNAVAILABLE。GENERATEDは両投影が検証済みの実artifactを持つ時だけ |
+
+参照導出順は、全source・候補・版・bindings→snapshot_ref→unit/node bindings・graph_ref→両投影・trace・artifact_ref。snapshot_refは自己refを除く全snapshot payloadから導出し、未来のnode／graph IDを含めない。graph_refは自己graph_refを除く全typed graph payloadのcanonical hashから導出。artifactは自己artifact_refとcontent_hashを除く全payloadのcanonical hashをcontent_hashとし、そのhashとschema/profile/snapshot_ref/graph_refからartifact_refを導出する。再読でも同じ除外集合と導出順を照合し、循環投入しない。各refを再hashしても型・意味・対象・coverageが違えば拒否する。candidateのunit refは外部候補の識別で、CMEE node ref・保存artifact refと同一視しない。
+
+隔離state schema案は`cocolon.cmee.analysis_semantic_state.v1`、closed keysは`schema_version/request_binding/snapshot/graph/artifact`。意味確定時graph/artifact=null、graph確定時artifact=null、完成時全て実体を持つ。artifactだけ存在する等の非連続状態は拒否する。private原7fieldはcanonical JSON UTF8 string、全packet／propositionもcanonical string／immutable tupleで保持し、内部dictの後変更が意味を変えないようにする。
+
+再読時は現exact request・owner・期間・全member・source原7field・版・tier・P1と全閉鎖schema/profile/admission/adapterを再束縛し、snapshotの意味拘束をauthor-free検証する。これはproviderからの再取得やreceiptの再採用ではない。graphは同snapshotからのtyped構造をcompiler非呼出しで照合し、完成済み文章・図は作者非呼出しでscope／全可視範囲／trace／選択を照合する。意味段階だけ保存された場合は同snapshotから残工程を実行する。
+
+source scalar範囲は元field相対、UTF8範囲は長さprefix付き元envelope相対、可視scalar範囲はtext section相対。既存native spanの終端は句点を含まないことがある。candidateの句点込みrangeを元field bytesから証明し、重なるnative evidence IDを同一exact spanのように付替えない。今回55rangeの一致は位置確認だけで、意味採用や完成artifactの独立検証は未実行。
+
+通常serviceのprivate_evidence v1/v2やpublic watashi.map.v2へこれらのJSONを渡さない。新SQL／migration／本人DB保存／API／RNは案の範囲外。最初はcaller-managed private file roundtripだけで、認証・永続保証・通常履歴・表示商品の合格は別に残る。型が必要意味を収容できない場合は削減して旧型へ詰めずHOLD／UNSUPPORTEDで停止する。

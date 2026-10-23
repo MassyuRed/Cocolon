@@ -1530,3 +1530,77 @@ P2の結論は「sourceは保持できるが、一般候補を既存graph・safe
 A02-P1のP2手作業12claimは完成native graphではない。`a.notice`（分類／送信／待機）、`a.tools_action`（貸出時記録／照合）、`a.buying`（メモ作成／見ながら購入）は複数行動をまとめており、原field範囲と必要意味の個別bindingを詰める必要がある。新candidateを旧有限parserへ合わせて削減しない。材料に使いやすさの回答がないことを、本人が知らない／使いにくい／返事待ちへ変えない。行動順を原因、同一期間を改善、複数記録を反復傾向へ補完しない。
 
 想定するP5の最小到達先は、凍結3記録→版付き採用snapshot→根拠付きgraph→同一graphの文章・図→同一artifactの隔離serialize/reload。一般conflict／複数補足／期間比較／IF／Saved／通常applicationは含めない。型・全必要意味・独立検査・保存再読の具体案を完成してから実装判断する。今回の構造追加・本文生成・試験・DB・Render・モデルは0、STRUCTURE_MAP_DELTA_NONE。
+
+<a id="cmee-p5-offline-analysis-proposal"></a>
+
+## 2026-10-23 — P5具体案：意味・不明・軽い負荷を保つAnalysis内部経路
+
+**PROPOSED_ONLY／新admission未実装。** 固定確認原本はAPI `4fd8db4f5ad24336368a63f09f9d88170ab41fa0`、Cocolon `967c7d49fb2b075d3b218998cbe616b5bb37eeee`。MashのCMEE内部準備継続指示により、P4完了後に残る本案を具体化した。P4の承認をAnalysisの新意味契約へ拡張しない。旧P5-gapの723ce9fは調査時点の履歴である。
+
+目的は、モデル選定前にA02-P1の必要意味を落とさず、候補→immutable snapshot→根拠付きprivate graph→既存唯一realizerの文章・図→同一private保存再読へ通せる最小内部単位を作ること。行わない場合、P1の材料保持と未採用候補までで停止し、対象付き不明と行動負荷を旧graphへ偽装できない状態が残る。
+
+### P5-1. 原材料・分割・意味の固定
+
+[手作業の全具体例と位置検査](../../../observation_learning/trials/2026-10-23-current-four/analysis_semantic_admission_proposal.json)を保存した。既存P1/P2/C0の結果・packetは上書きしていない。P1 requestは`prep-747095ce8bd8f10e87900a149eafac68a88a82d9e13975808c2639baa6a30251`、source setは`analysis-set:7108340b2d886b44aa7ec1328a7723a059059ee4b122f783f35a69898cc67416`。期間は`[2026-10-07T15:00:00+00:00, 2026-10-14T15:00:00+00:00)`、Plus、原入力A02-4/5/6の3件、補足0・比較前期間なし。
+
+18は本案の保持単位数で、18件の独立した出来事を断定する数ではない。**16 node候補＋従属scope1＋負荷注記1**に分け、接続詞・句読点を含む原文11文groupを並行保持する。省略された行為者をownerからSELFへ変換しない。明記された名詞・問い内容・名詞化行動は原格付きargumentとして残す。
+
+| 元field・scalar半開範囲 | private保持先・必要意味 |
+|---|---|
+| A02-4 memo 0:10 / 10:31 / 31:44 | ROLE「今日も連絡係だった」／過去の意向「まだ返事のない人がいることも残したかった」／比較基準未確定の待ち時間比較。今日・二つの「も」・意向内の内容を保持。記録完了／反復回数／前期間の改善へ昇格しない |
+| A02-4 memo_action 0:12 / 12:20 / 21:31 | 分類／途中案内の送信／最終の返事を待つ、の3 node。分けて・送り、の従属連結と全文groupを保持。返事の受領や短縮原因を作らない |
+| A02-5 memo 0:10 / 10:21 / 21:27 / 27:43 | ROLE／照合に関する従属scope／過去の安堵／使いやすさを尋ねていない非行動。`照らし合わせられて`は原形scopeとして残し、独立した能力・受身の解釈や一般因果を強制しない。安堵の本文表現と元選択感情は別責務 |
+| A02-5 memo_action 0:12 / 13:25 / 25:33 | 貸す時の数の記録／返ってきた数との照合／全て戻っていた結果。「貸す時」は時点文脈で、別の貸出完了nodeを追加しない。「全て」の対象や個数を補わない |
+| A02-6 memo 0:7 / 10:28 | 購入できた肯定結果／当日のメモ作成が少し面倒だった過去の負荷注記。`けど[7:9)`、`メモを作るのが[13:20)`、`少し[20:22)`を保持。注記targetは同recordのメモ作成だけ。購入失敗・性格・つらさ一般へ変えない |
+| A02-6 memo_action 0:10 / 11:18 / 18:22 | 買物前のメモ作成／メモを見るscope／購入の3 node。買物前の文脈と「ながら」を残し、record順やte形だけを厳密順序・成功原因へ変えない |
+
+8関係は、TE1、連用連結3、安堵の従属scope1、留保1、買物前の文脈1、ながら1。全て根拠・両端・原marker・全文scopeを持つ**source scope relation**で、旧`ObservedEdge`のOBSERVED_ORDER／REPEATED_COOCCURRENCEへ流用しない。route edgeは0。買物前の関係は同じ文の買物文脈と購入を結ぶ限定bindingで、一般照応や全記録の出来事列ではない。メモ作成への注記targetも同recordの明記されたメモ作成だけへ閉じる。
+
+unknownは1件。`聞いていない`という本人記述の非行動と、`NOT_OBSERVED_IN_MATERIAL / NO_USABILITY_ANSWER_IN_MATERIAL`を分ける。後者は使いやすさの問い内容・対象unit・原根拠に加え、checked source setと今回対象の6 text field／digestを束縛し、「今回の材料には、使いやすさについての回答が記されていない」とだけ表す。非行動一文だけから回答不在を証明せず、本人が知らない／使いにくい／返事待ち／一度も回答を受け取っていない、へ変えない。
+
+6fieldのhash一致だけでは「回答不在」の意味証明にならない。この固定材料を読取確認した限定profileの拘束から、unknownの由来・target・回答が観測されない範囲を別に照合し、candidateの自己申告を採用根拠にしない。負荷とメモ作成nodeのattachmentも同recordの明記された行動記述への対応であり、両文が同一出来事・同一時点だという新たな同定を加えない。
+
+元7fieldと選択は全件保持。論理選択はA02-4平穏weak、A02-5平穏medium、A02-6平穏weak・不安weakの4件。元`emotions`／`emotion_details`の各indexをaliasとして保持し、8件に数えない。選択はSOURCE_SELECTION_RETAINED_NOT_TEXTUALIZEDで、行動の原因・本文の感情・強さへ転写しない。
+
+### P5-2. 実装判断に出すexact pathと責務
+
+API path prefixは`ai/services/ai_inference/`。新しい作者・汎用scanner・別serviceを作らず、次の4 production pathと同familyのtest／fixture各1へ限定する。
+
+| exact path | 最小変更案 |
+|---|---|
+| `cocolon_meaning_experience_engine/engine.py` | exact `AnalysisObservedMapRequest`と新`AnalysisSemanticInputV1`の組だけ明示dispatch。semantic_inputなしの旧Analysisと既存Emlis／Pieceを維持 |
+| `cocolon_meaning_experience_engine/cores/analysis/semantic_admission.py`（新） | P1 request／receipt、現owner／期間／全member／sourceを再束縛。closed採否、原文scope witnessの限定照合、全必要意味の被覆、immutable snapshot、独立検証、private serialize/reloadを所有 |
+| 同`intent_compiler.py` | 新snapshot専用armから新private graphを構築。旧`compile_observed_graph(AnalysisSourceSet)`と旧型・parser・期待値を維持。候補unit refとCMEE node refを別に導出 |
+| 同`observed_route_realizer.py` | 同一graphから新private artifactの文章・図を作る専用arm。唯一realizerのまま、旧safe projectionへ新graphを渡さない。完成artifactのauthor-free検査も持つ |
+| `ai/tests/test_cmee_analysis_semantic_snapshot.py`／`ai/tests/fixtures/cmee_analysis_semantic_snapshot_v1.json`（新） | 原7field・上記手作業packet／意味・表示変異／中断・同一再読／旧経路の維持。既存fixtureとassertionを置換しない |
+
+`source_adapter.freeze_analysis_sources`の所有者・LIVE・7field・版・重複・半開期間・補足親／数とlocatorを再利用する。最初のprofileはincluded original3件、補足0、比較なしだけ。別材料、範囲外の補足・比較等を黙って捨てて成功させない。fixtureのID/hashが同じという理由だけで意味を認めず、各主張・格・scope・時制・関係・unknown coverage・注記targetを別に照合する。一方で一般日本語理解を宣言せず、今回の有限scopeを超える解釈はHOLD／UNSUPPORTEDとする。
+
+旧`_safe_label`は旧parserで全再導出し、旧`_text_from_visual`は非ORDER関係を反復共起として扱う。そのままの再利用では新意味が変わるため、新private schemaの文章・図分岐が必要。新graphを旧5段階完成ルートと呼ばず、足りないSCENE等を作らない。文章は初版では原文11文groupをrecord別に保持する限定表現と、範囲を明記したunknown表示。図も同じgroupと16 node／従属scope／注記／8 source scopeを持つ構造化private projectionとする。一般的な言換え・美文・RN描画の成立は含めない。
+
+`analysis_observed_service.py`のserializer／`_checked_projection`、SQLのv1/v2 allowlist、public `watashi.map.v2`、RN／API／通常保存経路は変更しない。新snapshot／graph／artifactは全て専用schema/profileで、旧公開DTOや旧Safety合格へ付替えない。private file roundtripはcaller-managedで、実Auth・自動durability・Supabase保存の成立とはしない。[版付き型・状態案は05](05_json_schema_and_versioning.md#cmee-p5-analysis-schema-proposal)。
+
+### P5-3. 採否・保存・検証・完了とSTOP
+
+新意味起点は`analysis_candidate_snapshot.v1`、snapshot schema `cocolon.cmee.analysis_semantic_snapshot.v1`、admission/adapter各1案。採用はADOPTED_PROVISIONALだけで、未採用P1受取と区別する。HOLDは解釈を閉じられない場合、UNSUPPORTEDはprofile範囲外、REJECTEDは型／source／版／閉鎖field／根拠・意味改変。非採用時はgraph／artifactを作らない。有効材料のrequest refと理由は残す。本文・図生成失敗は採用snapshotを保持してartifact=null／UNAVAILABLEとし、採用を消したり古い本文を新状態へ付けない。
+
+`AnalysisSourceSet`の外殻はfrozenでも内部`normalized`はmutable dictなのでsnapshotの正本へ保持しない。原7field・全packet・bindings・選択をcanonical JSON／immutable tupleへdeep freezeする。snapshot refはowner／operation request／P1 request／tier／期間／全member／source commitment／全意味・版から導出。node ID／graph IDはsnapshot確定後に導出し、snapshot hashへ循環投入しない。hashの再計算だけで改変を通さない。
+
+private stateは意味確定／graph確定／完成artifactの段階を持つ。同owner・request・期間・全member・元sourceと版へrebindした上で、同snapshotの全拘束を検証する。意味以降の再開は候補の再取得・再採用を行わず、完成済みはcompiler／realizerを呼ばず保存した文章・図の同artifactを返す。実作者例外前に意味を隔離fileへ保存し、例外後に同fileから明示再開する確認までを一単位に含む。
+
+| 検証軸 | 実装後の必須確認（本案では未実行） |
+|---|---|
+| 意味・source | 18単位／11group／8scope／unknown／注記／4選択を全被覆。別owner／record／版／期間、source改変、欠落・重複・余分claimを拒否。refだけ変えた同じ意味／原範囲の水増しも拒否し、正当な親group／childや別命題の同span共有と区別。意向→完了、否定→肯定、時点・比較基準・格・「も」・程度・従属scope・対象の改変をcanonical再hash後も拒否 |
+| 文章・図の一致 | 同snapshot／graph refから全意味→node／scope／注記／文章可視範囲を照合。片側欠落・target差替え・肯否反転・反復／因果の追加・unknown由来改変・選択の本文追加を拒否。作者自身の自己採点では通さない |
+| private保存・再開 | 意味／graph／完成のroundtrip、原入力・保存packetのmutable漏れなし、保存後の実作者例外から同snapshotで再開。完成再読は候補取得・再採用・compiler・作者を例外化しても同一artifact。schema/profile／bool-int等の厳密型・再hash改変も拒否 |
+| 旧経路 | 旧Analysis generation／nominal relations／保存／期間／APIの必要対象、P1、P4、Emlis dispatchを旧期待のまま確認。全suite合格や既存広範囲失敗の解消へ換算しない |
+
+新profile FRESHでは旧`_proposition`／`_parsed_proposition`／`compile_observed_graph`／`_safe_label`／`_text_from_visual`を例外化しても、専用compiler／唯一realizer armで成立することを確認する。完成reloadではreceive／admissionも例外化し、意味検証と再採用を区別する。変異はcandidate／snapshot／graph／artifact各層へ独立に入れ、完成readerの期待値をcompiler／作者の再実行で作らない。
+
+旧Analysis回帰のexact対象は`ai/tests/test_cmee_analysis_v1d_vertical.py`、`test_cmee_analysis_nominal_relations.py`、`test_analysis_observed_storage.py`、`test_analysis_saved_period.py`、`test_analysis_observed_api.py`の5file（後4つも同`ai/tests/`配下）。P1の`test_cmee_preparation.py`、P4の`test_cmee_piece_semantic_snapshot.py`と既存Emlis dispatchの必要対象を加える。今回は実行0で、将来の成功数を先に申告しない。
+
+完了は上記限定経路の実装、必要対象の成功、未加工の文章・private図payload・保存状態・失敗・限界とsource blobの記録、GitHub全変更path／全文／blob／headの読戻しまで。商品受入れ・モデル適格性の合格とはしない。新admission・型契約の追加なのでRule18 §11.3 LEVEL_3としてMashがこの具体範囲を判断した後に着手する。既承認P4や準備資料作成を再承認待ちへ戻さない。
+
+増分は上記production4file＋test／fixture各1と既存前提資料の同期、外部費用0。実装時間は未計測で完了日を約束しない。材料を削って通す、旧検査を弱める、別作者／helper family／通常service／SQL／モデル／有料推論が必要になった場合はその拡張前でSTOPし、同案を完了済みにしない。有限profileで成立しない場合はHOLD／UNSUPPORTEDの証拠を残す。モデル選定後に一般化する際はこの限定profileを互換再読用に残し、黙って一般profileへ再採用しない。
+
+今回の実施は、上記手作業案、既存source freeze／P1投影の同一性、55quoteのraw scalar／UTF8・digest／参照範囲検査、P1位置のみのCANDIDATE_UNREVIEWED受取1件まで。実admission／graph生成／本文・図生成／試験／C0／DB／Render／モデル呼出し0。STRUCTURE_MAP_DELTA_NONE、primary=BLOCKER_NARROWED、product_credit=0、PRODUCT_NOT_CLEAR、正式0/3、candidate_ready=false、automatic_progression=false。

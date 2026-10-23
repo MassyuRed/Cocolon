@@ -2318,3 +2318,21 @@ API[4fd8db4](https://github.com/MassyuRed/mashos-api/commit/4fd8db4f5ad24336368a
 全体00、全体設計01／全file地図01A、Piece/CMEE maps、design01/03/05/06、本weeklyとtrialを同単位で同期。STRUCTURE_MAP_DELTA_PRESENT、新rule／管理system／runner／checkerなし。限定TECHNICAL_CREDIT、商品0／正式0/3／PRODUCT_NOT_CLEAR／candidate_ready=false／automatic_progression=false。P1/P2/C0と旧全outcome fixture・Emlis既存結果は不変。実モデル／推論／学習／課金／実DB／Render／通常B8有効化／公開API/DTO／RN／画像／merge/deploy0。
 
 この承認単位は限定実装・必要検証・反映まで完了。P5 Analysisの具体型／採用／保存差分、Piece一般文章品質・通常接続／画像、有料履歴・Emlis旧広範囲失敗や旧Q2 cap制限は残件。次回はfresh head、本N、全機能00、actual型05、trial§11から復元し、別scopeを自動開始しない。
+
+
+<a id="20261023-cmee-p5-proposal"></a>
+## O. 2026-10-23 — Analysis P5：意味を保持する内部経路の具体化
+
+Mashの「学習済みAI選定前の、CMEE内部準備を進めろ」を受領。Cocolon967c7d4／API4fd8db4のfresh PR headと現在地を確認し、全機能00・全体設計／全file地図の責務と最新差分・恒久incident・本weekly N・P4 actual・Analysis実sourceから、残るP5を具体化した。System Context timeoutの時間延長再試行は0、fresh原本直接読取。全repo全blobの意味監査ではない。主担当が編集・位置確認・反映、2担当は読取レビューのみ。確認不能なPro／Ultraの正式審査は申告しない。
+
+[P5一単位の具体案](../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#cmee-p5-offline-analysis-proposal)と[private型・保存案](../designs/cmee/v1/05_json_schema_and_versioning.md#cmee-p5-analysis-schema-proposal)を保存。原入力A02-4/5/6・補足0・比較なしの明示offlineだけで、P1→immutable snapshot→新private graph→既存唯一realizerの文章・図→同一private serialize/reload。新admission・型・意味起点の追加はRule18 §11.3 LEVEL_3なので、本案はPROPOSED_ONLY／未実装。P4承認済みの実装を再承認待ちにしない。
+
+原P2複合claimを、18保持単位（16node候補＋従属scope1＋負荷注記1）と原文11文groupへ展開。8 source scope relationはroute edge0のまま、意向／肯否／省略主体／格／比較留保／「も」／程度／けど／ながらを保持。使いやすさのunknownは本人不知ではなく、今回6 text fieldに回答が観測されない範囲を明記。hash一致だけで回答不在を証明せず、source-bound限定profileの意味照合を要求。負荷はメモ作成という記述への限定attachmentで、同一出来事・時点・購入失敗を追加しない。元選択4件は別保持し、本文へ感情・原因・強度を補わない。
+
+既存freeze／P1投影から同じrequest・材料・source set・期間・全memberを再確認し、55quoteの元field scalar／envelope UTF8・digest・参照範囲を照合した。P1受取1はCANDIDATE_UNREVIEWED、位置のみ。全原入力／手作業packet／未審査receipt／位置proof／source blob／限界はtrialの新analysis_semantic_admission_proposal.json。初回作成はtuple対JSON listの直接比較でpacket作成前に停止し、canonical JSONで同値比較へ修正した。元source・既存期待は変更0。最終snapshotの位置確認を複数の試験成功へ加算しない。
+
+既存safe labelの全再導出、非ORDERを反復共起にする旧本文、旧serializer／SQL allowlistへ新graphを通さない。実装案はEngine＋新Analysis admission＋既存compiler／realizerの4 production path、同family test／fixture各1。意味／graph／完成のprivate保存と実作者例外からの同snapshot再開、完成時に取得／採用／compiler／作者を全て禁止した同一文章・図の再読までを必須検証に含める。旧Analysis回帰5file・P1・P4・Emlis dispatchも旧期待を維持する。
+
+今回変更はdesign01/04/05、全機能00、全file地図01Aの資料inventory、本weekly、trial README／提案JSONだけ。全体設計とcurrent mapsのruntime責務に差がなく、STRUCTURE_MAP_DELTA_NONE（file地図は新資料所在だけ登録）。新runtime／rule／runner／checker0。P1/P2/C0・旧全outcome・過去結果JSON・API sourceは不変。実admission／graph／本文・図生成／test／C0／実DB／Render／モデル／課金／merge／deploy0。primary=BLOCKER_NARROWED、商品0／正式0/3／PRODUCT_NOT_CLEAR／candidate_ready=false／automatic_progression=false。
+
+次は本O、全機能00、design04のP5具体案、schema05、trial§12とGitHub fresh headsから再開。本案の新意味・保存契約の具体範囲をMashが判断後、限定実装・必要検証・反映を一単位で行う。内部準備方針を再確認するためには停止しない。通常Analysis／SQL／DB／RN／IF／Saved／モデル呼出しへは自動拡張しない。

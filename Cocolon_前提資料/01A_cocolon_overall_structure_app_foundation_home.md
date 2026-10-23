@@ -4495,3 +4495,10 @@ STRUCTURE_MAP_DELTA_PRESENT。API新production1／既存production4／新test1�
 | ai/tests/fixtures/cmee_piece_semantic_snapshot_v1.json（新） | 元P2 P01 packetとP1元7fieldを保持した合成標本。モデル出力ではない |
 
 Cocolonの変更ownerは全機能00／全体01／本01A／current Piece02・CMEE04／design01・03・05・06／最新weekly／trial READMEと新piece_semantic_snapshot_results.json。新結果JSONは実本文／状態／同一再読／型field／検証とsource blobを持ち、既存C0/P1/P2/Emlis結果を上書きしない。新管理system／runner／checkerなし。
+
+
+## 2026-10-23 — P5内部準備の資料所在（runtime追加なし）
+
+`Cocolon_前提資料/observation_learning/trials/2026-10-23-current-four/analysis_semantic_admission_proposal.json`（新）は、Analysis P5の原3記録／手作業18保持単位／原文11group／8scope／unknown／注記／4選択と、P1位置のみの受取・55raw座標proof・source blob・未実装の限界を所有する。モデル出力・採用snapshot・実graphではない。設計の正本はdesigns/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#cmee-p5-offline-analysis-proposal、型・保存案は05#cmee-p5-analysis-schema-proposal、共有導線は01、実inspectionはtrial README§12／最新weekly O。
+
+今回API file・runtime owner・呼出し接続・公開schemaの実変更0。全体設計／current mapsの責務はP4 actualから不変で、STRUCTURE_MAP_DELTA_NONE。提案内の新Analysis module名を実在fileとして登録しない。P4の7fileとactual型は前節のまま保持する。
