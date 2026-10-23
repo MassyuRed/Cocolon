@@ -3480,3 +3480,9 @@ P2として確定するのは以上の対応先・維持条件・不足の区別
 [共有01の実装](01_shared_kernel_and_runtime_contracts.md#cmee-p3-implemented)と[実型05](05_json_schema_and_versioning.md#cmee-p3-actual-schema)を参照。新`emlis_semantic_admission.py`が手作業候補を既存nucleus/frame/contrastへ正規化し、実pendingへのADD/REVISE/WITHDRAWと累積ABOUTを扱う。既存Engine→thread projection/author→question→serviceの同じ経路を使う。旧source parser・旧checkpoint復元・完成済みDTO非再生成は既存分岐を維持し、shared contracts／元作者／single-input三guardは無変更。
 
 通常serviceから新profileへのmutationは拒否し、保存再読だけ許す。原入力は閉じた過去event/feeling、回答は明示した現在または原時点のfinite feelingに限定。活用と時点を照合し、明示第三者・引用埋込み・条件意味・未対応unknownを自己感情へ押し込まない。程度や「帰宅しても」は原文sliceとして保持する範囲で、一般条件理解を構造化した保証ではない。元E02-0はUNSUPPORTED、E02-Bは実pendingなしN/A。本人の不明・ACTION等への拡張、自然な受容本文、適格履歴の新profile消費は残件。実本文の時点語反復も残り、商品合格にはしない。
+
+## 2026-10-23 — 時点範囲修復と次のE02-0案
+
+[adapter2](01_shared_kernel_and_runtime_contracts.md#cmee-adapter-v2-correction)は裸時点語/はを作者へ重ねて渡さず、原snapshot/時点/程度/否定を保持。保存1は原版再現、もは意味を守り反復残件を残す。最終対象35成功。作者/通常API/RNは変更0。
+
+[本人明示不明/二行動の次案](01_shared_kernel_and_runtime_contracts.md#cmee-targeted-unknown-action-proposal)は未実装。過去の喜びと記述時点の曖昧な側面、二行動/原格/省略主体/te連結を別roleで保つ。JOY_ASPECT新問と新要素自身の一般更新は含めず、実pending/ENDを維持し、未対応回答はHOLD。具体owner/完了/停止は01、型は05、実行事実はtrialへ置く。

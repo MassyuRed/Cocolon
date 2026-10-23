@@ -20422,3 +20422,11 @@ STRUCTURE_MAP_DELTA_NONE。既存production3file内、新production／型／意�
 Python3.12.14／pytest8.4.1／pytest-subtests0.14.2／FastAPI0.142.2／Pydantic2.13.5／httpx0.28.1、PGlite0.5.8をscratchへ用意し、実importでREADY確認後に`--noconftest`で実施。repository依存file変更0。絶対interpreterと対象PYTHONPATH、Q2_PGLITE_MODULEを指定した対象検証であり、正規全CIや実Postgres/Supabaseの成功ではない。
 
 実例は[既存trial P3](../../../observation_learning/trials/2026-10-23-current-four/README.md#p3)とsemantic_snapshot_results.json。P2既存E02-0 receiptを一度admissionへ渡してUNSUPPORTEDを確認し、固定C0やP1/P2結果は再生成しない。別の合成系列で実作者の初回/ADD/REVISE/WITHDRAWを採取した。原文・出力・source blob・実行失敗をそのまま保持する。受容本文の時点語重複と定型性は残り、正式Product Read0/3／PRODUCT_NOT_CLEAR／candidate_ready=false／automatic_progression=false。実モデル/推論/重み/追加学習/課金/実DB/Render/公開API/DTO/RN/merge/deployは0。
+
+## 2026-10-23 — adapter2時点範囲の最終検証
+
+test_cmee_emlis_semantic_snapshot.py：35 passed、FAIL/SKIP0、21.49秒。元25＋新10（旧e5ca453から修正前に採取した3系列の全outcome再現、新3、旧v1実pending→v2回答1、現在/当時/今もと程度/否定/本当は3）。旧fixtureは変更0、新fixtureはai/tests/fixtures/cmee_emlis_semantic_adapter_v1.json。既存SQL/RPC保存/中断/三回答は元25に含む。25→32→34→34→35の反復を加算しない。sourceは新adapter既存ownerのみ。
+
+実本文はADDの「回答した時点では今は」→「回答した時点では」、WITHDRAW併存の「その時にその時は寂しかったことを」→「その時の寂しさを」。途中読取レビューで、もまで削ると添加が失われると判明し、最終前に旧範囲保持へ修正。あの時も…の反復は未解消。全前後本文/source blob/snapshotはtrialのsemantic_snapshot_results.json.adapter_v2_correction。本文採取や反復を試験数へ加算しない。
+
+P1/旧application/旧広範囲失敗は今回再実行0。過去101件や旧広範囲失敗を今回の全suite合格へ変換しない。新unknown/ACTION案は静的対応のみ、意味採用/新本文0。実モデル/DB/Render/公開API/DTO/RN/課金/merge/deploy0。STRUCTURE_MAP_DELTA_NONE、限定TECHNICAL_CREDIT、product_credit=0/PRODUCT_NOT_CLEAR/正式0/3/candidate_ready=false/automatic_progression=false。

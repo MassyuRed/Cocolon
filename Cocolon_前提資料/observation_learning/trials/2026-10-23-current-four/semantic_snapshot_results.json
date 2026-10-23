@@ -1752,5 +1752,653 @@
     "New-profile history handoff unsupported; legacy history handling unchanged",
     "P1/P2/C0 original results untouched; synthetic output harvesting is not counted as extra passing tests",
     "Actual SQL uses isolated PGlite and existing migrations/RPC only; no live Supabase/Render"
-  ]
+  ],
+  "adapter_v2_correction": {
+    "api_base_ref": "e5ca453a4fec8d11c84f57ac9337d3df8de82933",
+    "cocolon_base_ref": "4a57f8ecd503206c73b028bea5c9aaafc375bac4",
+    "cause": "Adapter included written time topic in preserve_source_predicate lexical range; existing author supplies thread_time again",
+    "scope": "Remove bare/time+は prefix only; keep も and all remaining lexical modifiers; no author or adoption expansion",
+    "source_blobs": {
+      "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "5773d41c395d48dd31098c6562f95381847e489d",
+      "ai/tests/test_cmee_emlis_semantic_snapshot.py": "e3768fe1d1247069055ade7af15affe3b32a30a5",
+      "ai/tests/fixtures/cmee_emlis_semantic_adapter_v1.json": "669dd6a11bd926fded328e446f0791bc53ebcb58"
+    },
+    "before_after": [
+      {
+        "case": "ADD",
+        "original": {
+          "id": "q1-synthetic",
+          "created_at": "2026-09-10T00:00:00Z",
+          "memo": "褒められたのに、嬉しくなかった。",
+          "memo_action": "",
+          "category": [
+            "仕事"
+          ],
+          "emotions": [
+            "不安"
+          ],
+          "emotion_details": [
+            {
+              "type": "不安",
+              "strength": "medium"
+            }
+          ],
+          "is_secret": false
+        },
+        "answer": "今は嬉しい。",
+        "old_adapter": "1",
+        "new_adapter": "2",
+        "before": {
+          "observation": "「褒められた」のに「嬉しくなかった」、回答した時点では「今は嬉しい」とあります。",
+          "reception": "褒められたことについて、回答した時点では今は嬉しいのですね。"
+        },
+        "after": {
+          "observation": "「褒められた」のに「嬉しくなかった」、回答した時点では「嬉しい」とあります。",
+          "reception": "褒められたことについて、回答した時点では嬉しいのですね。"
+        },
+        "additive_particle_retained": false,
+        "snapshot": "{\"adapter_version\":\"2\",\"admission_version\":\"1\",\"answer_count\":1,\"claim_mapping\":{\"answer\":\"semantic-nucleus-ed6a23a87717c5d721bd3350b23b7937fe13b8ea7d3e14cc4eca7ec6755b9c5b\",\"event\":\"semantic-nucleus-4804f277dc1c1174d5482b1e4dd6ec5e5fa9d9367ca2fe5ed1395be2ae0b8d01\",\"reaction\":\"semantic-nucleus-ce9156aa44ea3ea1cdda8384b6d732325c0a089c121906aec9c4d0f80f3a1a45\"},\"packet\":{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"event\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"event\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"褒められた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"褒められた\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"reaction\",\"evidence_indexes\":[1],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"reaction\"],\"value\":\"NEGATED\"},\"predicate\":{\"arguments\":[],\"surface\":\"嬉しくなかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"嬉しくなかった\"},{\"about_time\":{\"anchor_source_id\":\"snapshot-answer\",\"evidence_indexes\":[3],\"expression\":\"今\",\"kind\":\"ANSWER_TIME\"},\"claim_id\":\"answer\",\"evidence_indexes\":[3],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"answer\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"嬉しい\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"今は嬉しい\"}],\"conflicts\":[],\"core\":\"emlis\",\"relations\":[{\"evidence_indexes\":[2],\"from_claim_id\":\"event\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"contrast\",\"scope_refs\":[\"contrast\"],\"to_claim_id\":\"reaction\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"}],\"schema_version\":\"cocolon.cmee.semantic_mapping_proposal.v1\",\"unknowns\":[],\"updates\":[{\"answer_source_id\":\"snapshot-answer\",\"new_claim_refs\":[\"answer\"],\"operation\":\"ADD\",\"prior_meaning_ref\":\"semantic-428308d2ff86c7e610f98fcc24782848138ba04c134b32c1370002d49b7ffd97\",\"target_claim_refs\":[\"reaction\"]}]},\"evidence\":[{\"end\":5,\"field_path\":\"memo\",\"quote\":\"褒められた\",\"source_id\":\"q1-synthetic\",\"start\":0},{\"end\":15,\"field_path\":\"memo\",\"quote\":\"嬉しくなかった\",\"source_id\":\"q1-synthetic\",\"start\":8},{\"end\":7,\"field_path\":\"memo\",\"quote\":\"のに\",\"source_id\":\"q1-synthetic\",\"start\":5},{\"end\":5,\"field_path\":\"answer_text_private\",\"quote\":\"今は嬉しい\",\"source_id\":\"snapshot-answer\",\"start\":0}]},\"prior_ref\":\"semantic-428308d2ff86c7e610f98fcc24782848138ba04c134b32c1370002d49b7ffd97\",\"prior_snapshot\":{\"adapter_version\":\"2\",\"admission_version\":\"1\",\"answer_count\":0,\"claim_mapping\":{\"event\":\"semantic-nucleus-4804f277dc1c1174d5482b1e4dd6ec5e5fa9d9367ca2fe5ed1395be2ae0b8d01\",\"reaction\":\"semantic-nucleus-ce9156aa44ea3ea1cdda8384b6d732325c0a089c121906aec9c4d0f80f3a1a45\"},\"packet\":{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"event\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"event\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"褒められた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"褒められた\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"reaction\",\"evidence_indexes\":[1],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"reaction\"],\"value\":\"NEGATED\"},\"predicate\":{\"arguments\":[],\"surface\":\"嬉しくなかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"嬉しくなかった\"}],\"conflicts\":[],\"core\":\"emlis\",\"relations\":[{\"evidence_indexes\":[2],\"from_claim_id\":\"event\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"contrast\",\"scope_refs\":[\"contrast\"],\"to_claim_id\":\"reaction\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"}],\"schema_version\":\"cocolon.cmee.semantic_mapping_proposal.v1\",\"unknowns\":[],\"updates\":[]},\"evidence\":[{\"end\":5,\"field_path\":\"memo\",\"quote\":\"褒められた\",\"source_id\":\"q1-synthetic\",\"start\":0},{\"end\":15,\"field_path\":\"memo\",\"quote\":\"嬉しくなかった\",\"source_id\":\"q1-synthetic\",\"start\":8},{\"end\":7,\"field_path\":\"memo\",\"quote\":\"のに\",\"source_id\":\"q1-synthetic\",\"start\":5}]},\"prior_ref\":null,\"prior_snapshot\":null,\"question_control\":{\"asked_target_refs\":[],\"issued_count\":0,\"issued_questions\":[],\"pending_question\":null,\"question_limit\":1,\"stop\":false},\"receipt\":{\"candidate_json\":\"{\\\"candidate\\\":{\\\"claims\\\":[{\\\"about_time\\\":{\\\"anchor_source_id\\\":null,\\\"evidence_indexes\\\":[0],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"event\\\",\\\"evidence_indexes\\\":[0],\\\"kind\\\":\\\"EVENT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[0],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[0],\\\"scope_refs\\\":[\\\"event\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"褒められた\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"褒められた\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":null,\\\"evidence_indexes\\\":[1],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"reaction\\\",\\\"evidence_indexes\\\":[1],\\\"kind\\\":\\\"STATE\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[1],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[1],\\\"scope_refs\\\":[\\\"reaction\\\"],\\\"value\\\":\\\"NEGATED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"嬉しくなかった\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"嬉しくなかった\\\"}],\\\"conflicts\\\":[],\\\"core\\\":\\\"emlis\\\",\\\"relations\\\":[{\\\"evidence_indexes\\\":[2],\\\"from_claim_id\\\":\\\"event\\\",\\\"polarity\\\":\\\"AFFIRMED\\\",\\\"qualifiers\\\":[],\\\"relation_id\\\":\\\"contrast\\\",\\\"scope_refs\\\":[\\\"contrast\\\"],\\\"to_claim_id\\\":\\\"reaction\\\",\\\"type\\\":\\\"SOURCE_WRITTEN_CONCESSION\\\"}],\\\"schema_version\\\":\\\"cocolon.cmee.semantic_mapping_proposal.v1\\\",\\\"unknowns\\\":[],\\\"updates\\\":[]},\\\"evidence\\\":[{\\\"end\\\":5,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"褒められた\\\",\\\"source_id\\\":\\\"q1-synthetic\\\",\\\"start\\\":0},{\\\"end\\\":15,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"嬉しくなかった\\\",\\\"source_id\\\":\\\"q1-synthetic\\\",\\\"start\\\":8},{\\\"end\\\":7,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"のに\\\",\\\"source_id\\\":\\\"q1-synthetic\\\",\\\"start\\\":5}]}\",\"metadata_json\":\"{\\\"elapsed_seconds\\\":null,\\\"evidence_check\\\":\\\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\\\",\\\"finish_reason\\\":\\\"stop\\\",\\\"model\\\":null,\\\"provider\\\":null,\\\"revision\\\":null,\\\"usage\\\":null}\",\"raw_output\":\"{\\\"candidate\\\": {\\\"schema_version\\\": \\\"cocolon.cmee.semantic_mapping_proposal.v1\\\", \\\"core\\\": \\\"emlis\\\", \\\"claims\\\": [{\\\"claim_id\\\": \\\"event\\\", \\\"kind\\\": \\\"EVENT\\\", \\\"text\\\": \\\"褒められた\\\", \\\"subject\\\": {\\\"binding\\\": \\\"OMITTED\\\", \\\"source_entity\\\": null, \\\"evidence_indexes\\\": []}, \\\"predicate\\\": {\\\"surface\\\": \\\"褒められた\\\", \\\"arguments\\\": []}, \\\"polarity\\\": {\\\"value\\\": \\\"AFFIRMED\\\", \\\"scope_refs\\\": [\\\"event\\\"], \\\"evidence_indexes\\\": [0]}, \\\"modality\\\": {\\\"value\\\": \\\"ASSERTED_AS_WRITTEN\\\", \\\"evidence_indexes\\\": [0]}, \\\"about_time\\\": {\\\"kind\\\": \\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\", \\\"expression\\\": null, \\\"anchor_source_id\\\": null, \\\"evidence_indexes\\\": [0]}, \\\"qualifiers\\\": [], \\\"evidence_indexes\\\": [0]}, {\\\"claim_id\\\": \\\"reaction\\\", \\\"kind\\\": \\\"STATE\\\", \\\"text\\\": \\\"嬉しくなかった\\\", \\\"subject\\\": {\\\"binding\\\": \\\"OMITTED\\\", \\\"source_entity\\\": null, \\\"evidence_indexes\\\": []}, \\\"predicate\\\": {\\\"surface\\\": \\\"嬉しくなかった\\\", \\\"arguments\\\": []}, \\\"polarity\\\": {\\\"value\\\": \\\"NEGATED\\\", \\\"scope_refs\\\": [\\\"reaction\\\"], \\\"evidence_indexes\\\": [1]}, \\\"modality\\\": {\\\"value\\\": \\\"ASSERTED_AS_WRITTEN\\\", \\\"evidence_indexes\\\": [1]}, \\\"about_time\\\": {\\\"kind\\\": \\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\", \\\"expression\\\": null, \\\"anchor_source_id\\\": null, \\\"evidence_indexes\\\": [1]}, \\\"qualifiers\\\": [], \\\"evidence_indexes\\\": [1]}], \\\"relations\\\": [{\\\"relation_id\\\": \\\"contrast\\\", \\\"type\\\": \\\"SOURCE_WRITTEN_CONCESSION\\\", \\\"from_claim_id\\\": \\\"event\\\", \\\"to_claim_id\\\": \\\"reaction\\\", \\\"polarity\\\": \\\"AFFIRMED\\\", \\\"scope_refs\\\": [\\\"contrast\\\"], \\\"qualifiers\\\": [], \\\"evidence_indexes\\\": [2]}], \\\"unknowns\\\": [], \\\"conflicts\\\": [], \\\"updates\\\": []}, \\\"evidence\\\": [{\\\"source_id\\\": \\\"q1-synthetic\\\", \\\"field_path\\\": \\\"memo\\\", \\\"start\\\": 0, \\\"end\\\": 5, \\\"quote\\\": \\\"褒められた\\\"}, {\\\"source_id\\\": \\\"q1-synthetic\\\", \\\"field_path\\\": \\\"memo\\\", \\\"start\\\": 8, \\\"end\\\": 15, \\\"quote\\\": \\\"嬉しくなかった\\\"}, {\\\"source_id\\\": \\\"q1-synthetic\\\", \\\"field_path\\\": \\\"memo\\\", \\\"start\\\": 5, \\\"end\\\": 7, \\\"quote\\\": \\\"のに\\\"}]}\",\"request_id\":\"prep-d360ffd2e412350f2ac0d53abd26d46a1c4db87c12dee9ca82fc088fcf30d32c\",\"status\":\"CANDIDATE_UNREVIEWED\"},\"request_ref\":\"prep-d360ffd2e412350f2ac0d53abd26d46a1c4db87c12dee9ca82fc088fcf30d32c\",\"schema_version\":\"cocolon.cmee.emlis_semantic_snapshot.v1\",\"semantic_profile\":\"emlis_candidate_snapshot.v1\",\"snapshot_ref\":\"semantic-428308d2ff86c7e610f98fcc24782848138ba04c134b32c1370002d49b7ffd97\",\"source_bindings\":[{\"envelope_id\":\"src-f097cbfe3b62ed4e565e1e83\",\"role\":\"ORIGINAL_INPUT\",\"source_commitment\":\"4ba0805847a82c7f57f41c391beafdc37a8ebe77ddf593817d365d2f0f4533b2\",\"source_id\":\"q1-synthetic\",\"source_version\":\"emlis.current_input_bundle.v1\"}],\"source_prefix_ref\":\"emlis-source-prefix-c04b634d5cf2fd7b96db975f53ba44e24069f1f702cdd8c4e11e871287322198\"},\"question_control\":{\"asked_target_refs\":[\"emlis-target-31bce928856981b43cad80a88a3cb461ab5762a51b4505f33980beb7825528b5\"],\"issued_count\":1,\"issued_questions\":[],\"pending_question\":{\"answer_limit\":1,\"answer_source_role\":\"SUPPLEMENTAL_ANSWER\",\"decision\":{\"affected_meaning_refs\":[\"semantic-nucleus-4804f277dc1c1174d5482b1e4dd6ec5e5fa9d9367ca2fe5ed1395be2ae0b8d01\",\"semantic-nucleus-ce9156aa44ea3ea1cdda8384b6d732325c0a089c121906aec9c4d0f80f3a1a45\"],\"affected_reception_refs\":[\"semantic-nucleus-4804f277dc1c1174d5482b1e4dd6ec5e5fa9d9367ca2fe5ed1395be2ae0b8d01\"],\"asked_target_refs\":[],\"decision_reason\":\"source_bound_event_personal_meaning_missing\",\"disposition\":\"ASK\",\"missing_dimension\":\"personal_received_meaning\",\"supporting_evidence_refs\":[\"ev-cebc5866b93300f1c8a7b059\"],\"target_kind\":\"PERSONAL_RECEIVED_MEANING\",\"target_ref\":\"emlis-target-31bce928856981b43cad80a88a3cb461ab5762a51b4505f33980beb7825528b5\"},\"original_source_ref\":\"src-f097cbfe3b62ed4e565e1e83\",\"parent_request_id\":\"q1-synthetic\",\"prompt_private\":\"「褒められた」は、あなたにはどんな意味として届きましたか。\",\"question_id\":\"semantic-question-648fc66de73a09a30fa3dd55a93783f6e65e3b23d2248b514745826e8906f2ab\",\"schema_version\":\"cocolon.cmee.emlis_clarification.v1\",\"skip_allowed\":true,\"thread_id\":\"q1-thread\"},\"question_limit\":1,\"stop\":false},\"receipt\":{\"candidate_json\":\"{\\\"candidate\\\":{\\\"claims\\\":[{\\\"about_time\\\":{\\\"anchor_source_id\\\":null,\\\"evidence_indexes\\\":[0],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"event\\\",\\\"evidence_indexes\\\":[0],\\\"kind\\\":\\\"EVENT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[0],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[0],\\\"scope_refs\\\":[\\\"event\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"褒められた\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"褒められた\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":null,\\\"evidence_indexes\\\":[1],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"reaction\\\",\\\"evidence_indexes\\\":[1],\\\"kind\\\":\\\"STATE\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[1],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[1],\\\"scope_refs\\\":[\\\"reaction\\\"],\\\"value\\\":\\\"NEGATED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"嬉しくなかった\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"嬉しくなかった\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"snapshot-answer\\\",\\\"evidence_indexes\\\":[3],\\\"expression\\\":\\\"今\\\",\\\"kind\\\":\\\"ANSWER_TIME\\\"},\\\"claim_id\\\":\\\"answer\\\",\\\"evidence_indexes\\\":[3],\\\"kind\\\":\\\"STATE\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[3],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[3],\\\"scope_refs\\\":[\\\"answer\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"嬉しい\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"今は嬉しい\\\"}],\\\"conflicts\\\":[],\\\"core\\\":\\\"emlis\\\",\\\"relations\\\":[{\\\"evidence_indexes\\\":[2],\\\"from_claim_id\\\":\\\"event\\\",\\\"polarity\\\":\\\"AFFIRMED\\\",\\\"qualifiers\\\":[],\\\"relation_id\\\":\\\"contrast\\\",\\\"scope_refs\\\":[\\\"contrast\\\"],\\\"to_claim_id\\\":\\\"reaction\\\",\\\"type\\\":\\\"SOURCE_WRITTEN_CONCESSION\\\"}],\\\"schema_version\\\":\\\"cocolon.cmee.semantic_mapping_proposal.v1\\\",\\\"unknowns\\\":[],\\\"updates\\\":[{\\\"answer_source_id\\\":\\\"snapshot-answer\\\",\\\"new_claim_refs\\\":[\\\"answer\\\"],\\\"operation\\\":\\\"ADD\\\",\\\"prior_meaning_ref\\\":\\\"semantic-428308d2ff86c7e610f98fcc24782848138ba04c134b32c1370002d49b7ffd97\\\",\\\"target_claim_refs\\\":[\\\"reaction\\\"]}]},\\\"evidence\\\":[{\\\"end\\\":5,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"褒められた\\\",\\\"source_id\\\":\\\"q1-synthetic\\\",\\\"start\\\":0},{\\\"end\\\":15,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"嬉しくなかった\\\",\\\"source_id\\\":\\\"q1-synthetic\\\",\\\"start\\\":8},{\\\"end\\\":7,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"のに\\\",\\\"source_id\\\":\\\"q1-synthetic\\\",\\\"start\\\":5},{\\\"end\\\":5,\\\"field_path\\\":\\\"answer_text_private\\\",\\\"quote\\\":\\\"今は嬉しい\\\",\\\"source_id\\\":\\\"snapshot-answer\\\",\\\"start\\\":0}]}\",\"metadata_json\":\"{\\\"elapsed_seconds\\\":null,\\\"evidence_check\\\":\\\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\\\",\\\"finish_reason\\\":\\\"stop\\\",\\\"model\\\":null,\\\"provider\\\":null,\\\"revision\\\":null,\\\"usage\\\":null}\",\"raw_output\":\"{\\\"candidate\\\": {\\\"claims\\\": [{\\\"about_time\\\": {\\\"anchor_source_id\\\": null, \\\"evidence_indexes\\\": [0], \\\"expression\\\": null, \\\"kind\\\": \\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"}, \\\"claim_id\\\": \\\"event\\\", \\\"evidence_indexes\\\": [0], \\\"kind\\\": \\\"EVENT\\\", \\\"modality\\\": {\\\"evidence_indexes\\\": [0], \\\"value\\\": \\\"ASSERTED_AS_WRITTEN\\\"}, \\\"polarity\\\": {\\\"evidence_indexes\\\": [0], \\\"scope_refs\\\": [\\\"event\\\"], \\\"value\\\": \\\"AFFIRMED\\\"}, \\\"predicate\\\": {\\\"arguments\\\": [], \\\"surface\\\": \\\"褒められた\\\"}, \\\"qualifiers\\\": [], \\\"subject\\\": {\\\"binding\\\": \\\"OMITTED\\\", \\\"evidence_indexes\\\": [], \\\"source_entity\\\": null}, \\\"text\\\": \\\"褒められた\\\"}, {\\\"about_time\\\": {\\\"anchor_source_id\\\": null, \\\"evidence_indexes\\\": [1], \\\"expression\\\": null, \\\"kind\\\": \\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"}, \\\"claim_id\\\": \\\"reaction\\\", \\\"evidence_indexes\\\": [1], \\\"kind\\\": \\\"STATE\\\", \\\"modality\\\": {\\\"evidence_indexes\\\": [1], \\\"value\\\": \\\"ASSERTED_AS_WRITTEN\\\"}, \\\"polarity\\\": {\\\"evidence_indexes\\\": [1], \\\"scope_refs\\\": [\\\"reaction\\\"], \\\"value\\\": \\\"NEGATED\\\"}, \\\"predicate\\\": {\\\"arguments\\\": [], \\\"surface\\\": \\\"嬉しくなかった\\\"}, \\\"qualifiers\\\": [], \\\"subject\\\": {\\\"binding\\\": \\\"OMITTED\\\", \\\"evidence_indexes\\\": [], \\\"source_entity\\\": null}, \\\"text\\\": \\\"嬉しくなかった\\\"}, {\\\"claim_id\\\": \\\"answer\\\", \\\"kind\\\": \\\"STATE\\\", \\\"text\\\": \\\"今は嬉しい\\\", \\\"subject\\\": {\\\"binding\\\": \\\"OMITTED\\\", \\\"source_entity\\\": null, \\\"evidence_indexes\\\": []}, \\\"predicate\\\": {\\\"surface\\\": \\\"嬉しい\\\", \\\"arguments\\\": []}, \\\"polarity\\\": {\\\"value\\\": \\\"AFFIRMED\\\", \\\"scope_refs\\\": [\\\"answer\\\"], \\\"evidence_indexes\\\": [3]}, \\\"modality\\\": {\\\"value\\\": \\\"ASSERTED_AS_WRITTEN\\\", \\\"evidence_indexes\\\": [3]}, \\\"about_time\\\": {\\\"kind\\\": \\\"ANSWER_TIME\\\", \\\"expression\\\": \\\"今\\\", \\\"anchor_source_id\\\": \\\"snapshot-answer\\\", \\\"evidence_indexes\\\": [3]}, \\\"qualifiers\\\": [], \\\"evidence_indexes\\\": [3]}], \\\"conflicts\\\": [], \\\"core\\\": \\\"emlis\\\", \\\"relations\\\": [{\\\"evidence_indexes\\\": [2], \\\"from_claim_id\\\": \\\"event\\\", \\\"polarity\\\": \\\"AFFIRMED\\\", \\\"qualifiers\\\": [], \\\"relation_id\\\": \\\"contrast\\\", \\\"scope_refs\\\": [\\\"contrast\\\"], \\\"to_claim_id\\\": \\\"reaction\\\", \\\"type\\\": \\\"SOURCE_WRITTEN_CONCESSION\\\"}], \\\"schema_version\\\": \\\"cocolon.cmee.semantic_mapping_proposal.v1\\\", \\\"unknowns\\\": [], \\\"updates\\\": [{\\\"operation\\\": \\\"ADD\\\", \\\"target_claim_refs\\\": [\\\"reaction\\\"], \\\"new_claim_refs\\\": [\\\"answer\\\"], \\\"answer_source_id\\\": \\\"snapshot-answer\\\", \\\"prior_meaning_ref\\\": \\\"semantic-428308d2ff86c7e610f98fcc24782848138ba04c134b32c1370002d49b7ffd97\\\"}]}, \\\"evidence\\\": [{\\\"end\\\": 5, \\\"field_path\\\": \\\"memo\\\", \\\"quote\\\": \\\"褒められた\\\", \\\"source_id\\\": \\\"q1-synthetic\\\", \\\"start\\\": 0}, {\\\"end\\\": 15, \\\"field_path\\\": \\\"memo\\\", \\\"quote\\\": \\\"嬉しくなかった\\\", \\\"source_id\\\": \\\"q1-synthetic\\\", \\\"start\\\": 8}, {\\\"end\\\": 7, \\\"field_path\\\": \\\"memo\\\", \\\"quote\\\": \\\"のに\\\", \\\"source_id\\\": \\\"q1-synthetic\\\", \\\"start\\\": 5}, {\\\"source_id\\\": \\\"snapshot-answer\\\", \\\"field_path\\\": \\\"answer_text_private\\\", \\\"start\\\": 0, \\\"end\\\": 5, \\\"quote\\\": \\\"今は嬉しい\\\"}]}\",\"request_id\":\"prep-7299d0f3ce4a65a2e372972a37f4448fce8328489c1267f6f595de58f3e9abcc\",\"status\":\"CANDIDATE_UNREVIEWED\"},\"request_ref\":\"prep-7299d0f3ce4a65a2e372972a37f4448fce8328489c1267f6f595de58f3e9abcc\",\"schema_version\":\"cocolon.cmee.emlis_semantic_snapshot.v1\",\"semantic_profile\":\"emlis_candidate_snapshot.v1\",\"snapshot_ref\":\"semantic-57ae74dee51e80fa6b7ecca89a18ad815c223348fc25cd1bc8855c8848a83fcc\",\"source_bindings\":[{\"envelope_id\":\"src-f097cbfe3b62ed4e565e1e83\",\"role\":\"ORIGINAL_INPUT\",\"source_commitment\":\"4ba0805847a82c7f57f41c391beafdc37a8ebe77ddf593817d365d2f0f4533b2\",\"source_id\":\"q1-synthetic\",\"source_version\":\"emlis.current_input_bundle.v1\"},{\"envelope_id\":\"src-ff3366e25b2e122fdf1cb1af\",\"role\":\"SUPPLEMENTAL_ANSWER\",\"source_commitment\":\"c9e0a2bc751e4f875e1af5e8757053c9aa4a9b8ccfecaabfa1d291fc6a829c63\",\"source_id\":\"snapshot-answer\",\"source_version\":\"cocolon.cmee.supplemental_answer.v1\"}],\"source_prefix_ref\":\"emlis-source-prefix-bc1927788134316e28572b0268ca3b2269dd9582feb2188c45c53e113efe20e8\"}",
+        "artifact": {
+          "artifact_id": "emlis-artifact-d8af2dc0701d689c65bdea99cdea5f1e0ab22862ba655e009a8b28aa17131bad",
+          "observation": "「褒められた」のに「嬉しくなかった」、回答した時点では「嬉しい」とあります。",
+          "reception": "褒められたことについて、回答した時点では嬉しいのですね。",
+          "source_prefix_ref": "emlis-source-prefix-bc1927788134316e28572b0268ca3b2269dd9582feb2188c45c53e113efe20e8",
+          "meaning_checkpoint_ref": "semantic-checkpoint-5114902cb7cfadbd724112c01896500dfa09c660f3206ab47a778714424f1835",
+          "qualified_evidence_refs": [
+            {
+              "thread_span_id": "s1",
+              "local_source_span_id": "s1",
+              "evidence": {
+                "evidence_id": "ev-cebc5866b93300f1c8a7b059",
+                "source_span_id": "s1",
+                "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+                "field_path": "memo",
+                "element_index": -1,
+                "field_utf8_start": 318,
+                "field_utf8_end": 366,
+                "scalar_start": 0,
+                "scalar_end": 15,
+                "utf8_start": 318,
+                "utf8_end": 363,
+                "field_sha256": "657ef4fd73baac0c5d049b83b7926b278e5b6194ce7c3f31fb4bf8db4c697c9e",
+                "literal_sha256": "6766d28bcac6aac3f053437ae285f2732a7d09e1164b10178395b5e490c7c356"
+              }
+            },
+            {
+              "thread_span_id": "s2",
+              "local_source_span_id": "s2",
+              "evidence": {
+                "evidence_id": "ev-f58b8dbbfadd199080d1dd78",
+                "source_span_id": "s2",
+                "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+                "field_path": "emotion_details.0.type",
+                "element_index": 0,
+                "field_utf8_start": 427,
+                "field_utf8_end": 433,
+                "scalar_start": 0,
+                "scalar_end": 2,
+                "utf8_start": 427,
+                "utf8_end": 433,
+                "field_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df",
+                "literal_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df"
+              }
+            },
+            {
+              "thread_span_id": "s3",
+              "local_source_span_id": "s3",
+              "evidence": {
+                "evidence_id": "ev-d4b688999f363bcbae61d0c8",
+                "source_span_id": "s3",
+                "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+                "field_path": "emotions.0",
+                "element_index": 0,
+                "field_utf8_start": 457,
+                "field_utf8_end": 463,
+                "scalar_start": 0,
+                "scalar_end": 2,
+                "utf8_start": 457,
+                "utf8_end": 463,
+                "field_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df",
+                "literal_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df"
+              }
+            },
+            {
+              "thread_span_id": "s4",
+              "local_source_span_id": "s4",
+              "evidence": {
+                "evidence_id": "ev-44333ace7179e9ac7ec426f8",
+                "source_span_id": "s4",
+                "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+                "field_path": "category.0",
+                "element_index": 0,
+                "field_utf8_start": 487,
+                "field_utf8_end": 493,
+                "scalar_start": 0,
+                "scalar_end": 2,
+                "utf8_start": 487,
+                "utf8_end": 493,
+                "field_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3",
+                "literal_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3"
+              }
+            },
+            {
+              "thread_span_id": "s5",
+              "local_source_span_id": "s1",
+              "evidence": {
+                "evidence_id": "ev-4cd3bfc5900c8db1c652b9ea",
+                "source_span_id": "s1",
+                "source_envelope_id": "src-ff3366e25b2e122fdf1cb1af",
+                "field_path": "answer_text_private",
+                "element_index": -1,
+                "field_utf8_start": 427,
+                "field_utf8_end": 445,
+                "scalar_start": 0,
+                "scalar_end": 5,
+                "utf8_start": 427,
+                "utf8_end": 442,
+                "field_sha256": "4156a679e5e80d5a948ee569af4fc6c91008839b7bf1c1639ca718832c04dba7",
+                "literal_sha256": "8a53cb0d2feb50f29f67da74892044a8ab924471372e742696b7ff20c59721cb"
+              }
+            }
+          ],
+          "meaning_trace": [
+            {
+              "limited_outcome_ref": "limited-meaning-outcome:1d652508ff07078dd5abecffd54e7aef2c592e6bea851a2cc70b43f3e991dbdc@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+              "source_object_ref": "node:mn-5922b0a6778a21f600f27c76da74a176d7c2ebff39e57a33d0d3c67764efcfa1@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "layer1_contribution_refs": [
+                "contribution-34e6f99a5868c3097b887dc098e340848df4011ef1d81c554b2b028f70d57e21"
+              ]
+            },
+            {
+              "limited_outcome_ref": "limited-meaning-outcome:1d652508ff07078dd5abecffd54e7aef2c592e6bea851a2cc70b43f3e991dbdc@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+              "source_object_ref": "node:mn-9db44345faa7cf586d387eee7af5f341d26ada780dc171fc6da452517c6cf626@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "layer1_contribution_refs": [
+                "contribution-5bbc133f05db7138ee84e68addedde85cc48a076860277b98d5ede2d91e7f95c"
+              ]
+            },
+            {
+              "limited_outcome_ref": "limited-meaning-outcome:1d652508ff07078dd5abecffd54e7aef2c592e6bea851a2cc70b43f3e991dbdc@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+              "source_object_ref": "node:mn-a5f22243663e5abb84f175b906d31651150e19fedb2f0c0742ee4b3ce745dbc7@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "layer1_contribution_refs": [
+                "contribution-5bbc133f05db7138ee84e68addedde85cc48a076860277b98d5ede2d91e7f95c"
+              ]
+            }
+          ],
+          "reception_trace": [
+            {
+              "branch": "LIMITED",
+              "meaning_outcome_ref": "limited-meaning-outcome:1d652508ff07078dd5abecffd54e7aef2c592e6bea851a2cc70b43f3e991dbdc@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+              "reading_consequence_ref": null,
+              "reception_record_ref": "bounded-limited-reception:043bd4b95c1daceda5705c3f4292c76bc861311350bc0cbdbf3efd1150935ce5@cocolon.cmee.emlis.bounded_limited_reception.v1",
+              "projected_claim_ref": "subjective-claim-3a5dc40920a42a9b7097bf2057908e9ae539112e1afbbf0b65f1468d3eba9ba2",
+              "layer1_contribution_refs": [
+                "contribution-34e6f99a5868c3097b887dc098e340848df4011ef1d81c554b2b028f70d57e21"
+              ],
+              "response_object_refs": [
+                "node:mn-5922b0a6778a21f600f27c76da74a176d7c2ebff39e57a33d0d3c67764efcfa1@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+                "node:mn-9db44345faa7cf586d387eee7af5f341d26ada780dc171fc6da452517c6cf626@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+                "node:mn-a5f22243663e5abb84f175b906d31651150e19fedb2f0c0742ee4b3ce745dbc7@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+              ],
+              "projected_response_object_refs": [
+                "node:mn-5922b0a6778a21f600f27c76da74a176d7c2ebff39e57a33d0d3c67764efcfa1@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+              ],
+              "preserved_difference_refs": []
+            }
+          ],
+          "body_status": "GENERATED",
+          "schema_version": "cocolon.cmee.emlis_thread_artifact.v1",
+          "history_line": null,
+          "history_line_plan": null,
+          "interpretive_frames": []
+        }
+      },
+      {
+        "case": "REVISE",
+        "original": {
+          "id": "q1-synthetic",
+          "created_at": "2026-09-10T00:00:00Z",
+          "memo": "褒められたのに、嬉しくなかった。",
+          "memo_action": "",
+          "category": [
+            "仕事"
+          ],
+          "emotions": [
+            "不安"
+          ],
+          "emotion_details": [
+            {
+              "type": "不安",
+              "strength": "medium"
+            }
+          ],
+          "is_secret": false
+        },
+        "answer": "あの時も本当は嬉しかった。書き方を間違えた。",
+        "old_adapter": "1",
+        "new_adapter": "2",
+        "before": {
+          "observation": "「褒められた」ことについて、その時の受け止めは「あの時も本当は嬉しかった」と書かれています。",
+          "reception": "褒められたことについて、その時はあの時も本当は嬉しかったのですね。"
+        },
+        "after": {
+          "observation": "「褒められた」ことについて、その時の受け止めは「あの時も本当は嬉しかった」と書かれています。",
+          "reception": "褒められたことについて、その時はあの時も本当は嬉しかったのですね。"
+        },
+        "additive_particle_retained": true,
+        "snapshot": "{\"adapter_version\":\"2\",\"admission_version\":\"1\",\"answer_count\":1,\"claim_mapping\":{\"answer\":\"semantic-nucleus-c2194ff85062a48c15de494690012835c50a58b78d7176a519f9c83e3aa92f3e\",\"event\":\"semantic-nucleus-4804f277dc1c1174d5482b1e4dd6ec5e5fa9d9367ca2fe5ed1395be2ae0b8d01\"},\"packet\":{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"event\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"event\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"褒められた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"褒められた\"},{\"about_time\":{\"anchor_source_id\":\"snapshot-answer\",\"evidence_indexes\":[3],\"expression\":\"あの時\",\"kind\":\"ORIGINAL_OCCASION\"},\"claim_id\":\"answer\",\"evidence_indexes\":[3],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"answer\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"嬉しかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"あの時も本当は嬉しかった\"}],\"conflicts\":[],\"core\":\"emlis\",\"relations\":[],\"schema_version\":\"cocolon.cmee.semantic_mapping_proposal.v1\",\"unknowns\":[],\"updates\":[{\"answer_source_id\":\"snapshot-answer\",\"new_claim_refs\":[\"answer\"],\"operation\":\"REVISE\",\"prior_meaning_ref\":\"semantic-428308d2ff86c7e610f98fcc24782848138ba04c134b32c1370002d49b7ffd97\",\"target_claim_refs\":[\"reaction\"]}]},\"evidence\":[{\"end\":5,\"field_path\":\"memo\",\"quote\":\"褒められた\",\"source_id\":\"q1-synthetic\",\"start\":0},{\"end\":15,\"field_path\":\"memo\",\"quote\":\"嬉しくなかった\",\"source_id\":\"q1-synthetic\",\"start\":8},{\"end\":7,\"field_path\":\"memo\",\"quote\":\"のに\",\"source_id\":\"q1-synthetic\",\"start\":5},{\"end\":12,\"field_path\":\"answer_text_private\",\"quote\":\"あの時も本当は嬉しかった\",\"source_id\":\"snapshot-answer\",\"start\":0}]},\"prior_ref\":\"semantic-428308d2ff86c7e610f98fcc24782848138ba04c134b32c1370002d49b7ffd97\",\"prior_snapshot\":{\"adapter_version\":\"2\",\"admission_version\":\"1\",\"answer_count\":0,\"claim_mapping\":{\"event\":\"semantic-nucleus-4804f277dc1c1174d5482b1e4dd6ec5e5fa9d9367ca2fe5ed1395be2ae0b8d01\",\"reaction\":\"semantic-nucleus-ce9156aa44ea3ea1cdda8384b6d732325c0a089c121906aec9c4d0f80f3a1a45\"},\"packet\":{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"event\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"event\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"褒められた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"褒められた\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"reaction\",\"evidence_indexes\":[1],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"reaction\"],\"value\":\"NEGATED\"},\"predicate\":{\"arguments\":[],\"surface\":\"嬉しくなかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"嬉しくなかった\"}],\"conflicts\":[],\"core\":\"emlis\",\"relations\":[{\"evidence_indexes\":[2],\"from_claim_id\":\"event\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"contrast\",\"scope_refs\":[\"contrast\"],\"to_claim_id\":\"reaction\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"}],\"schema_version\":\"cocolon.cmee.semantic_mapping_proposal.v1\",\"unknowns\":[],\"updates\":[]},\"evidence\":[{\"end\":5,\"field_path\":\"memo\",\"quote\":\"褒められた\",\"source_id\":\"q1-synthetic\",\"start\":0},{\"end\":15,\"field_path\":\"memo\",\"quote\":\"嬉しくなかった\",\"source_id\":\"q1-synthetic\",\"start\":8},{\"end\":7,\"field_path\":\"memo\",\"quote\":\"のに\",\"source_id\":\"q1-synthetic\",\"start\":5}]},\"prior_ref\":null,\"prior_snapshot\":null,\"question_control\":{\"asked_target_refs\":[],\"issued_count\":0,\"issued_questions\":[],\"pending_question\":null,\"question_limit\":1,\"stop\":false},\"receipt\":{\"candidate_json\":\"{\\\"candidate\\\":{\\\"claims\\\":[{\\\"about_time\\\":{\\\"anchor_source_id\\\":null,\\\"evidence_indexes\\\":[0],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"event\\\",\\\"evidence_indexes\\\":[0],\\\"kind\\\":\\\"EVENT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[0],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[0],\\\"scope_refs\\\":[\\\"event\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"褒められた\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"褒められた\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":null,\\\"evidence_indexes\\\":[1],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"reaction\\\",\\\"evidence_indexes\\\":[1],\\\"kind\\\":\\\"STATE\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[1],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[1],\\\"scope_refs\\\":[\\\"reaction\\\"],\\\"value\\\":\\\"NEGATED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"嬉しくなかった\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"嬉しくなかった\\\"}],\\\"conflicts\\\":[],\\\"core\\\":\\\"emlis\\\",\\\"relations\\\":[{\\\"evidence_indexes\\\":[2],\\\"from_claim_id\\\":\\\"event\\\",\\\"polarity\\\":\\\"AFFIRMED\\\",\\\"qualifiers\\\":[],\\\"relation_id\\\":\\\"contrast\\\",\\\"scope_refs\\\":[\\\"contrast\\\"],\\\"to_claim_id\\\":\\\"reaction\\\",\\\"type\\\":\\\"SOURCE_WRITTEN_CONCESSION\\\"}],\\\"schema_version\\\":\\\"cocolon.cmee.semantic_mapping_proposal.v1\\\",\\\"unknowns\\\":[],\\\"updates\\\":[]},\\\"evidence\\\":[{\\\"end\\\":5,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"褒められた\\\",\\\"source_id\\\":\\\"q1-synthetic\\\",\\\"start\\\":0},{\\\"end\\\":15,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"嬉しくなかった\\\",\\\"source_id\\\":\\\"q1-synthetic\\\",\\\"start\\\":8},{\\\"end\\\":7,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"のに\\\",\\\"source_id\\\":\\\"q1-synthetic\\\",\\\"start\\\":5}]}\",\"metadata_json\":\"{\\\"elapsed_seconds\\\":null,\\\"evidence_check\\\":\\\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\\\",\\\"finish_reason\\\":\\\"stop\\\",\\\"model\\\":null,\\\"provider\\\":null,\\\"revision\\\":null,\\\"usage\\\":null}\",\"raw_output\":\"{\\\"candidate\\\": {\\\"schema_version\\\": \\\"cocolon.cmee.semantic_mapping_proposal.v1\\\", \\\"core\\\": \\\"emlis\\\", \\\"claims\\\": [{\\\"claim_id\\\": \\\"event\\\", \\\"kind\\\": \\\"EVENT\\\", \\\"text\\\": \\\"褒められた\\\", \\\"subject\\\": {\\\"binding\\\": \\\"OMITTED\\\", \\\"source_entity\\\": null, \\\"evidence_indexes\\\": []}, \\\"predicate\\\": {\\\"surface\\\": \\\"褒められた\\\", \\\"arguments\\\": []}, \\\"polarity\\\": {\\\"value\\\": \\\"AFFIRMED\\\", \\\"scope_refs\\\": [\\\"event\\\"], \\\"evidence_indexes\\\": [0]}, \\\"modality\\\": {\\\"value\\\": \\\"ASSERTED_AS_WRITTEN\\\", \\\"evidence_indexes\\\": [0]}, \\\"about_time\\\": {\\\"kind\\\": \\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\", \\\"expression\\\": null, \\\"anchor_source_id\\\": null, \\\"evidence_indexes\\\": [0]}, \\\"qualifiers\\\": [], \\\"evidence_indexes\\\": [0]}, {\\\"claim_id\\\": \\\"reaction\\\", \\\"kind\\\": \\\"STATE\\\", \\\"text\\\": \\\"嬉しくなかった\\\", \\\"subject\\\": {\\\"binding\\\": \\\"OMITTED\\\", \\\"source_entity\\\": null, \\\"evidence_indexes\\\": []}, \\\"predicate\\\": {\\\"surface\\\": \\\"嬉しくなかった\\\", \\\"arguments\\\": []}, \\\"polarity\\\": {\\\"value\\\": \\\"NEGATED\\\", \\\"scope_refs\\\": [\\\"reaction\\\"], \\\"evidence_indexes\\\": [1]}, \\\"modality\\\": {\\\"value\\\": \\\"ASSERTED_AS_WRITTEN\\\", \\\"evidence_indexes\\\": [1]}, \\\"about_time\\\": {\\\"kind\\\": \\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\", \\\"expression\\\": null, \\\"anchor_source_id\\\": null, \\\"evidence_indexes\\\": [1]}, \\\"qualifiers\\\": [], \\\"evidence_indexes\\\": [1]}], \\\"relations\\\": [{\\\"relation_id\\\": \\\"contrast\\\", \\\"type\\\": \\\"SOURCE_WRITTEN_CONCESSION\\\", \\\"from_claim_id\\\": \\\"event\\\", \\\"to_claim_id\\\": \\\"reaction\\\", \\\"polarity\\\": \\\"AFFIRMED\\\", \\\"scope_refs\\\": [\\\"contrast\\\"], \\\"qualifiers\\\": [], \\\"evidence_indexes\\\": [2]}], \\\"unknowns\\\": [], \\\"conflicts\\\": [], \\\"updates\\\": []}, \\\"evidence\\\": [{\\\"source_id\\\": \\\"q1-synthetic\\\", \\\"field_path\\\": \\\"memo\\\", \\\"start\\\": 0, \\\"end\\\": 5, \\\"quote\\\": \\\"褒められた\\\"}, {\\\"source_id\\\": \\\"q1-synthetic\\\", \\\"field_path\\\": \\\"memo\\\", \\\"start\\\": 8, \\\"end\\\": 15, \\\"quote\\\": \\\"嬉しくなかった\\\"}, {\\\"source_id\\\": \\\"q1-synthetic\\\", \\\"field_path\\\": \\\"memo\\\", \\\"start\\\": 5, \\\"end\\\": 7, \\\"quote\\\": \\\"のに\\\"}]}\",\"request_id\":\"prep-d360ffd2e412350f2ac0d53abd26d46a1c4db87c12dee9ca82fc088fcf30d32c\",\"status\":\"CANDIDATE_UNREVIEWED\"},\"request_ref\":\"prep-d360ffd2e412350f2ac0d53abd26d46a1c4db87c12dee9ca82fc088fcf30d32c\",\"schema_version\":\"cocolon.cmee.emlis_semantic_snapshot.v1\",\"semantic_profile\":\"emlis_candidate_snapshot.v1\",\"snapshot_ref\":\"semantic-428308d2ff86c7e610f98fcc24782848138ba04c134b32c1370002d49b7ffd97\",\"source_bindings\":[{\"envelope_id\":\"src-f097cbfe3b62ed4e565e1e83\",\"role\":\"ORIGINAL_INPUT\",\"source_commitment\":\"4ba0805847a82c7f57f41c391beafdc37a8ebe77ddf593817d365d2f0f4533b2\",\"source_id\":\"q1-synthetic\",\"source_version\":\"emlis.current_input_bundle.v1\"}],\"source_prefix_ref\":\"emlis-source-prefix-c04b634d5cf2fd7b96db975f53ba44e24069f1f702cdd8c4e11e871287322198\"},\"question_control\":{\"asked_target_refs\":[\"emlis-target-31bce928856981b43cad80a88a3cb461ab5762a51b4505f33980beb7825528b5\"],\"issued_count\":1,\"issued_questions\":[],\"pending_question\":{\"answer_limit\":1,\"answer_source_role\":\"SUPPLEMENTAL_ANSWER\",\"decision\":{\"affected_meaning_refs\":[\"semantic-nucleus-4804f277dc1c1174d5482b1e4dd6ec5e5fa9d9367ca2fe5ed1395be2ae0b8d01\",\"semantic-nucleus-ce9156aa44ea3ea1cdda8384b6d732325c0a089c121906aec9c4d0f80f3a1a45\"],\"affected_reception_refs\":[\"semantic-nucleus-4804f277dc1c1174d5482b1e4dd6ec5e5fa9d9367ca2fe5ed1395be2ae0b8d01\"],\"asked_target_refs\":[],\"decision_reason\":\"source_bound_event_personal_meaning_missing\",\"disposition\":\"ASK\",\"missing_dimension\":\"personal_received_meaning\",\"supporting_evidence_refs\":[\"ev-cebc5866b93300f1c8a7b059\"],\"target_kind\":\"PERSONAL_RECEIVED_MEANING\",\"target_ref\":\"emlis-target-31bce928856981b43cad80a88a3cb461ab5762a51b4505f33980beb7825528b5\"},\"original_source_ref\":\"src-f097cbfe3b62ed4e565e1e83\",\"parent_request_id\":\"q1-synthetic\",\"prompt_private\":\"「褒められた」は、あなたにはどんな意味として届きましたか。\",\"question_id\":\"semantic-question-648fc66de73a09a30fa3dd55a93783f6e65e3b23d2248b514745826e8906f2ab\",\"schema_version\":\"cocolon.cmee.emlis_clarification.v1\",\"skip_allowed\":true,\"thread_id\":\"q1-thread\"},\"question_limit\":1,\"stop\":false},\"receipt\":{\"candidate_json\":\"{\\\"candidate\\\":{\\\"claims\\\":[{\\\"about_time\\\":{\\\"anchor_source_id\\\":null,\\\"evidence_indexes\\\":[0],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"event\\\",\\\"evidence_indexes\\\":[0],\\\"kind\\\":\\\"EVENT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[0],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[0],\\\"scope_refs\\\":[\\\"event\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"褒められた\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"褒められた\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"snapshot-answer\\\",\\\"evidence_indexes\\\":[3],\\\"expression\\\":\\\"あの時\\\",\\\"kind\\\":\\\"ORIGINAL_OCCASION\\\"},\\\"claim_id\\\":\\\"answer\\\",\\\"evidence_indexes\\\":[3],\\\"kind\\\":\\\"STATE\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[3],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[3],\\\"scope_refs\\\":[\\\"answer\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"嬉しかった\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"あの時も本当は嬉しかった\\\"}],\\\"conflicts\\\":[],\\\"core\\\":\\\"emlis\\\",\\\"relations\\\":[],\\\"schema_version\\\":\\\"cocolon.cmee.semantic_mapping_proposal.v1\\\",\\\"unknowns\\\":[],\\\"updates\\\":[{\\\"answer_source_id\\\":\\\"snapshot-answer\\\",\\\"new_claim_refs\\\":[\\\"answer\\\"],\\\"operation\\\":\\\"REVISE\\\",\\\"prior_meaning_ref\\\":\\\"semantic-428308d2ff86c7e610f98fcc24782848138ba04c134b32c1370002d49b7ffd97\\\",\\\"target_claim_refs\\\":[\\\"reaction\\\"]}]},\\\"evidence\\\":[{\\\"end\\\":5,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"褒められた\\\",\\\"source_id\\\":\\\"q1-synthetic\\\",\\\"start\\\":0},{\\\"end\\\":15,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"嬉しくなかった\\\",\\\"source_id\\\":\\\"q1-synthetic\\\",\\\"start\\\":8},{\\\"end\\\":7,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"のに\\\",\\\"source_id\\\":\\\"q1-synthetic\\\",\\\"start\\\":5},{\\\"end\\\":12,\\\"field_path\\\":\\\"answer_text_private\\\",\\\"quote\\\":\\\"あの時も本当は嬉しかった\\\",\\\"source_id\\\":\\\"snapshot-answer\\\",\\\"start\\\":0}]}\",\"metadata_json\":\"{\\\"elapsed_seconds\\\":null,\\\"evidence_check\\\":\\\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\\\",\\\"finish_reason\\\":\\\"stop\\\",\\\"model\\\":null,\\\"provider\\\":null,\\\"revision\\\":null,\\\"usage\\\":null}\",\"raw_output\":\"{\\\"candidate\\\": {\\\"claims\\\": [{\\\"about_time\\\": {\\\"anchor_source_id\\\": null, \\\"evidence_indexes\\\": [0], \\\"expression\\\": null, \\\"kind\\\": \\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"}, \\\"claim_id\\\": \\\"event\\\", \\\"evidence_indexes\\\": [0], \\\"kind\\\": \\\"EVENT\\\", \\\"modality\\\": {\\\"evidence_indexes\\\": [0], \\\"value\\\": \\\"ASSERTED_AS_WRITTEN\\\"}, \\\"polarity\\\": {\\\"evidence_indexes\\\": [0], \\\"scope_refs\\\": [\\\"event\\\"], \\\"value\\\": \\\"AFFIRMED\\\"}, \\\"predicate\\\": {\\\"arguments\\\": [], \\\"surface\\\": \\\"褒められた\\\"}, \\\"qualifiers\\\": [], \\\"subject\\\": {\\\"binding\\\": \\\"OMITTED\\\", \\\"evidence_indexes\\\": [], \\\"source_entity\\\": null}, \\\"text\\\": \\\"褒められた\\\"}, {\\\"claim_id\\\": \\\"answer\\\", \\\"kind\\\": \\\"STATE\\\", \\\"text\\\": \\\"あの時も本当は嬉しかった\\\", \\\"subject\\\": {\\\"binding\\\": \\\"OMITTED\\\", \\\"source_entity\\\": null, \\\"evidence_indexes\\\": []}, \\\"predicate\\\": {\\\"surface\\\": \\\"嬉しかった\\\", \\\"arguments\\\": []}, \\\"polarity\\\": {\\\"value\\\": \\\"AFFIRMED\\\", \\\"scope_refs\\\": [\\\"answer\\\"], \\\"evidence_indexes\\\": [3]}, \\\"modality\\\": {\\\"value\\\": \\\"ASSERTED_AS_WRITTEN\\\", \\\"evidence_indexes\\\": [3]}, \\\"about_time\\\": {\\\"kind\\\": \\\"ORIGINAL_OCCASION\\\", \\\"expression\\\": \\\"あの時\\\", \\\"anchor_source_id\\\": \\\"snapshot-answer\\\", \\\"evidence_indexes\\\": [3]}, \\\"qualifiers\\\": [], \\\"evidence_indexes\\\": [3]}], \\\"conflicts\\\": [], \\\"core\\\": \\\"emlis\\\", \\\"relations\\\": [], \\\"schema_version\\\": \\\"cocolon.cmee.semantic_mapping_proposal.v1\\\", \\\"unknowns\\\": [], \\\"updates\\\": [{\\\"operation\\\": \\\"REVISE\\\", \\\"target_claim_refs\\\": [\\\"reaction\\\"], \\\"new_claim_refs\\\": [\\\"answer\\\"], \\\"answer_source_id\\\": \\\"snapshot-answer\\\", \\\"prior_meaning_ref\\\": \\\"semantic-428308d2ff86c7e610f98fcc24782848138ba04c134b32c1370002d49b7ffd97\\\"}]}, \\\"evidence\\\": [{\\\"end\\\": 5, \\\"field_path\\\": \\\"memo\\\", \\\"quote\\\": \\\"褒められた\\\", \\\"source_id\\\": \\\"q1-synthetic\\\", \\\"start\\\": 0}, {\\\"end\\\": 15, \\\"field_path\\\": \\\"memo\\\", \\\"quote\\\": \\\"嬉しくなかった\\\", \\\"source_id\\\": \\\"q1-synthetic\\\", \\\"start\\\": 8}, {\\\"end\\\": 7, \\\"field_path\\\": \\\"memo\\\", \\\"quote\\\": \\\"のに\\\", \\\"source_id\\\": \\\"q1-synthetic\\\", \\\"start\\\": 5}, {\\\"source_id\\\": \\\"snapshot-answer\\\", \\\"field_path\\\": \\\"answer_text_private\\\", \\\"start\\\": 0, \\\"end\\\": 12, \\\"quote\\\": \\\"あの時も本当は嬉しかった\\\"}]}\",\"request_id\":\"prep-aa67a01c2b3a3a8ef718d1062a06dbcafe0fb7b71b138b30e22d39d104805518\",\"status\":\"CANDIDATE_UNREVIEWED\"},\"request_ref\":\"prep-aa67a01c2b3a3a8ef718d1062a06dbcafe0fb7b71b138b30e22d39d104805518\",\"schema_version\":\"cocolon.cmee.emlis_semantic_snapshot.v1\",\"semantic_profile\":\"emlis_candidate_snapshot.v1\",\"snapshot_ref\":\"semantic-5a4fcf88c24a073d9a9adf6d8a1b4730dcc27daa9fc19d42c300fb102c2a591a\",\"source_bindings\":[{\"envelope_id\":\"src-f097cbfe3b62ed4e565e1e83\",\"role\":\"ORIGINAL_INPUT\",\"source_commitment\":\"4ba0805847a82c7f57f41c391beafdc37a8ebe77ddf593817d365d2f0f4533b2\",\"source_id\":\"q1-synthetic\",\"source_version\":\"emlis.current_input_bundle.v1\"},{\"envelope_id\":\"src-0abe079f10d14bba7bbe63ac\",\"role\":\"SUPPLEMENTAL_ANSWER\",\"source_commitment\":\"b27af6541016d0ce05a24d162ed51ebf639938c0a9ead37d24d31c3fcbbbea0f\",\"source_id\":\"snapshot-answer\",\"source_version\":\"cocolon.cmee.supplemental_answer.v1\"}],\"source_prefix_ref\":\"emlis-source-prefix-b6b4c073c6a536c81e181a541605a7f226461fde9ca55b8620ec9a5a2a3a4489\"}",
+        "artifact": {
+          "artifact_id": "emlis-artifact-c20bec3a1f05cf52de54a8af8e0369537365afd71e1cb38d5d58dae848355c0f",
+          "observation": "「褒められた」ことについて、その時の受け止めは「あの時も本当は嬉しかった」と書かれています。",
+          "reception": "褒められたことについて、その時はあの時も本当は嬉しかったのですね。",
+          "source_prefix_ref": "emlis-source-prefix-b6b4c073c6a536c81e181a541605a7f226461fde9ca55b8620ec9a5a2a3a4489",
+          "meaning_checkpoint_ref": "semantic-checkpoint-e91bef062b2e53d186ca64519bd8fdca4ea27420c8f1082c5ffc956997ef3df7",
+          "qualified_evidence_refs": [
+            {
+              "thread_span_id": "s1",
+              "local_source_span_id": "s1",
+              "evidence": {
+                "evidence_id": "ev-cebc5866b93300f1c8a7b059",
+                "source_span_id": "s1",
+                "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+                "field_path": "memo",
+                "element_index": -1,
+                "field_utf8_start": 318,
+                "field_utf8_end": 366,
+                "scalar_start": 0,
+                "scalar_end": 15,
+                "utf8_start": 318,
+                "utf8_end": 363,
+                "field_sha256": "657ef4fd73baac0c5d049b83b7926b278e5b6194ce7c3f31fb4bf8db4c697c9e",
+                "literal_sha256": "6766d28bcac6aac3f053437ae285f2732a7d09e1164b10178395b5e490c7c356"
+              }
+            },
+            {
+              "thread_span_id": "s2",
+              "local_source_span_id": "s2",
+              "evidence": {
+                "evidence_id": "ev-f58b8dbbfadd199080d1dd78",
+                "source_span_id": "s2",
+                "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+                "field_path": "emotion_details.0.type",
+                "element_index": 0,
+                "field_utf8_start": 427,
+                "field_utf8_end": 433,
+                "scalar_start": 0,
+                "scalar_end": 2,
+                "utf8_start": 427,
+                "utf8_end": 433,
+                "field_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df",
+                "literal_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df"
+              }
+            },
+            {
+              "thread_span_id": "s3",
+              "local_source_span_id": "s3",
+              "evidence": {
+                "evidence_id": "ev-d4b688999f363bcbae61d0c8",
+                "source_span_id": "s3",
+                "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+                "field_path": "emotions.0",
+                "element_index": 0,
+                "field_utf8_start": 457,
+                "field_utf8_end": 463,
+                "scalar_start": 0,
+                "scalar_end": 2,
+                "utf8_start": 457,
+                "utf8_end": 463,
+                "field_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df",
+                "literal_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df"
+              }
+            },
+            {
+              "thread_span_id": "s4",
+              "local_source_span_id": "s4",
+              "evidence": {
+                "evidence_id": "ev-44333ace7179e9ac7ec426f8",
+                "source_span_id": "s4",
+                "source_envelope_id": "src-f097cbfe3b62ed4e565e1e83",
+                "field_path": "category.0",
+                "element_index": 0,
+                "field_utf8_start": 487,
+                "field_utf8_end": 493,
+                "scalar_start": 0,
+                "scalar_end": 2,
+                "utf8_start": 487,
+                "utf8_end": 493,
+                "field_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3",
+                "literal_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3"
+              }
+            },
+            {
+              "thread_span_id": "s5",
+              "local_source_span_id": "s1",
+              "evidence": {
+                "evidence_id": "ev-56268d3aebf0c0cf9384485a",
+                "source_span_id": "s1",
+                "source_envelope_id": "src-0abe079f10d14bba7bbe63ac",
+                "field_path": "answer_text_private",
+                "element_index": -1,
+                "field_utf8_start": 427,
+                "field_utf8_end": 493,
+                "scalar_start": 0,
+                "scalar_end": 12,
+                "utf8_start": 427,
+                "utf8_end": 463,
+                "field_sha256": "48223fa92fc14f9cff4da1393e22297a031278259fd5067ef6af2e52eb2fbebe",
+                "literal_sha256": "e4abeff3c6ef0c5821e45daee00312204630d3ff51bfb3d089b6e7baf0cc23c2"
+              }
+            },
+            {
+              "thread_span_id": "s6",
+              "local_source_span_id": "s2",
+              "evidence": {
+                "evidence_id": "ev-4bd824217a5cf815d090b3d2",
+                "source_span_id": "s2",
+                "source_envelope_id": "src-0abe079f10d14bba7bbe63ac",
+                "field_path": "answer_text_private",
+                "element_index": -1,
+                "field_utf8_start": 427,
+                "field_utf8_end": 493,
+                "scalar_start": 13,
+                "scalar_end": 21,
+                "utf8_start": 466,
+                "utf8_end": 490,
+                "field_sha256": "48223fa92fc14f9cff4da1393e22297a031278259fd5067ef6af2e52eb2fbebe",
+                "literal_sha256": "f6a46dde4dddb55afd9dd37bb5baa154b0f188f0c9280506411705d07e6da754"
+              }
+            }
+          ],
+          "meaning_trace": [
+            {
+              "limited_outcome_ref": "limited-meaning-outcome:173ac503609bdd783f5da28858ca3b8baba7f233a4fe421cda39c07d71c7993e@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+              "source_object_ref": "node:mn-90cf46532b408f588d3f2d2e928acaa5b650f1f0fa6dabeef65871cd1ff0ab33@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "layer1_contribution_refs": [
+                "contribution-c11657317cb1504f6a0b758cf3e562ce5b4cd90bf8230b0d9a16c5444febeaf2"
+              ]
+            },
+            {
+              "limited_outcome_ref": "limited-meaning-outcome:173ac503609bdd783f5da28858ca3b8baba7f233a4fe421cda39c07d71c7993e@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+              "source_object_ref": "node:mn-c24c8fb20032c75d56e01b322877317aa72f73559171cb7a62d02b32adc8a854@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "layer1_contribution_refs": [
+                "contribution-d1d7c474433064597ab7f108de73ead7c3dc62630bdc13894695c8e1b352c1c1"
+              ]
+            }
+          ],
+          "reception_trace": [
+            {
+              "branch": "LIMITED",
+              "meaning_outcome_ref": "limited-meaning-outcome:173ac503609bdd783f5da28858ca3b8baba7f233a4fe421cda39c07d71c7993e@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+              "reading_consequence_ref": null,
+              "reception_record_ref": "bounded-limited-reception:3a12ec9f023114824bc863282cca263d5095cc1aaa7ac59ed5f6b90f31b3e269@cocolon.cmee.emlis.bounded_limited_reception.v1",
+              "projected_claim_ref": "subjective-claim-89e77963abe4ea65ec0142a9c319fcde8e14ad565e463b09d778e1c68b1f1fe6",
+              "layer1_contribution_refs": [
+                "contribution-d1d7c474433064597ab7f108de73ead7c3dc62630bdc13894695c8e1b352c1c1"
+              ],
+              "response_object_refs": [
+                "node:mn-90cf46532b408f588d3f2d2e928acaa5b650f1f0fa6dabeef65871cd1ff0ab33@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+                "node:mn-c24c8fb20032c75d56e01b322877317aa72f73559171cb7a62d02b32adc8a854@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+              ],
+              "projected_response_object_refs": [
+                "node:mn-c24c8fb20032c75d56e01b322877317aa72f73559171cb7a62d02b32adc8a854@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+              ],
+              "preserved_difference_refs": []
+            }
+          ],
+          "body_status": "GENERATED",
+          "schema_version": "cocolon.cmee.emlis_thread_artifact.v1",
+          "history_line": null,
+          "history_line_plan": null,
+          "interpretive_frames": []
+        }
+      },
+      {
+        "case": "WITHDRAW",
+        "original": {
+          "id": "q1-synthetic",
+          "created_at": "2026-09-10T00:00:00Z",
+          "memo": "褒められたのに、嬉しくなかった。",
+          "memo_action": "帰宅しても苦しかった。",
+          "category": [
+            "仕事"
+          ],
+          "emotions": [
+            "不安"
+          ],
+          "emotion_details": [
+            {
+              "type": "不安",
+              "strength": "medium"
+            }
+          ],
+          "is_secret": false
+        },
+        "answer": "その時は寂しかった。「帰宅しても苦しかった」は誤りです。",
+        "old_adapter": "1",
+        "new_adapter": "2",
+        "before": {
+          "observation": "「褒められた」のに「嬉しくなかった」、その時は「その時は寂しかった」とあります。",
+          "reception": "褒められたことについて、その時にその時は寂しかったことを小さくせずに受け止めています。"
+        },
+        "after": {
+          "observation": "「褒められた」のに「嬉しくなかった」、その時は「寂しかった」とあります。",
+          "reception": "褒められたことについて、その時の寂しさを小さくせずに受け止めています。"
+        },
+        "additive_particle_retained": false,
+        "snapshot": "{\"adapter_version\":\"2\",\"admission_version\":\"1\",\"answer_count\":1,\"claim_mapping\":{\"answer\":\"semantic-nucleus-9c1c5c0281e6c291b74cff641419e96c21c5b90677dc4060ac1e2703c1f7b46c\",\"event\":\"semantic-nucleus-fc187c33fd03467ec5a15ab38e4a058e43b8c456c23c08f7b0b2adf6214840b3\",\"reaction\":\"semantic-nucleus-ad96a6d3bed75a9c46f1cf99e4a2b3940ac103c3f06d13fb822b75303ccce791\"},\"packet\":{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"event\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"event\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"褒められた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"褒められた\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"reaction\",\"evidence_indexes\":[1],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"reaction\"],\"value\":\"NEGATED\"},\"predicate\":{\"arguments\":[],\"surface\":\"嬉しくなかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"嬉しくなかった\"},{\"about_time\":{\"anchor_source_id\":\"snapshot-answer\",\"evidence_indexes\":[4],\"expression\":\"その時\",\"kind\":\"ORIGINAL_OCCASION\"},\"claim_id\":\"answer\",\"evidence_indexes\":[4],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[4],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[4],\"scope_refs\":[\"answer\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"寂しかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"その時は寂しかった\"}],\"conflicts\":[],\"core\":\"emlis\",\"relations\":[{\"evidence_indexes\":[2],\"from_claim_id\":\"event\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"contrast\",\"scope_refs\":[\"contrast\"],\"to_claim_id\":\"reaction\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"}],\"schema_version\":\"cocolon.cmee.semantic_mapping_proposal.v1\",\"unknowns\":[],\"updates\":[{\"answer_source_id\":\"snapshot-answer\",\"new_claim_refs\":[\"answer\"],\"operation\":\"ADD\",\"prior_meaning_ref\":\"semantic-5594d4384671b001f70624e8ca9602e2a0dd75aef0193e71826cd8ffecfb58ef\",\"target_claim_refs\":[\"reaction\"]},{\"answer_source_id\":\"snapshot-answer\",\"new_claim_refs\":[],\"operation\":\"WITHDRAW\",\"prior_meaning_ref\":\"semantic-5594d4384671b001f70624e8ca9602e2a0dd75aef0193e71826cd8ffecfb58ef\",\"target_claim_refs\":[\"other\"]}]},\"evidence\":[{\"end\":5,\"field_path\":\"memo\",\"quote\":\"褒められた\",\"source_id\":\"q1-synthetic\",\"start\":0},{\"end\":15,\"field_path\":\"memo\",\"quote\":\"嬉しくなかった\",\"source_id\":\"q1-synthetic\",\"start\":8},{\"end\":7,\"field_path\":\"memo\",\"quote\":\"のに\",\"source_id\":\"q1-synthetic\",\"start\":5},{\"end\":10,\"field_path\":\"memo_action\",\"quote\":\"帰宅しても苦しかった\",\"source_id\":\"q1-synthetic\",\"start\":0},{\"end\":9,\"field_path\":\"answer_text_private\",\"quote\":\"その時は寂しかった\",\"source_id\":\"snapshot-answer\",\"start\":0},{\"end\":21,\"field_path\":\"answer_text_private\",\"quote\":\"帰宅しても苦しかった\",\"source_id\":\"snapshot-answer\",\"start\":11}]},\"prior_ref\":\"semantic-5594d4384671b001f70624e8ca9602e2a0dd75aef0193e71826cd8ffecfb58ef\",\"prior_snapshot\":{\"adapter_version\":\"2\",\"admission_version\":\"1\",\"answer_count\":0,\"claim_mapping\":{\"event\":\"semantic-nucleus-fc187c33fd03467ec5a15ab38e4a058e43b8c456c23c08f7b0b2adf6214840b3\",\"other\":\"semantic-nucleus-fe3f5c386b0bc47222f369af5d170edae59bf94ca1a751704260a93f9b31c794\",\"reaction\":\"semantic-nucleus-ad96a6d3bed75a9c46f1cf99e4a2b3940ac103c3f06d13fb822b75303ccce791\"},\"packet\":{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"event\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"event\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"褒められた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"褒められた\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"reaction\",\"evidence_indexes\":[1],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"reaction\"],\"value\":\"NEGATED\"},\"predicate\":{\"arguments\":[],\"surface\":\"嬉しくなかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"嬉しくなかった\"},{\"about_time\":{\"anchor_source_id\":null,\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"other\",\"evidence_indexes\":[3],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"other\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"苦しかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"帰宅しても苦しかった\"}],\"conflicts\":[],\"core\":\"emlis\",\"relations\":[{\"evidence_indexes\":[2],\"from_claim_id\":\"event\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"contrast\",\"scope_refs\":[\"contrast\"],\"to_claim_id\":\"reaction\",\"type\":\"SOURCE_WRITTEN_CONCESSION\"}],\"schema_version\":\"cocolon.cmee.semantic_mapping_proposal.v1\",\"unknowns\":[],\"updates\":[]},\"evidence\":[{\"end\":5,\"field_path\":\"memo\",\"quote\":\"褒められた\",\"source_id\":\"q1-synthetic\",\"start\":0},{\"end\":15,\"field_path\":\"memo\",\"quote\":\"嬉しくなかった\",\"source_id\":\"q1-synthetic\",\"start\":8},{\"end\":7,\"field_path\":\"memo\",\"quote\":\"のに\",\"source_id\":\"q1-synthetic\",\"start\":5},{\"end\":10,\"field_path\":\"memo_action\",\"quote\":\"帰宅しても苦しかった\",\"source_id\":\"q1-synthetic\",\"start\":0}]},\"prior_ref\":null,\"prior_snapshot\":null,\"question_control\":{\"asked_target_refs\":[],\"issued_count\":0,\"issued_questions\":[],\"pending_question\":null,\"question_limit\":1,\"stop\":false},\"receipt\":{\"candidate_json\":\"{\\\"candidate\\\":{\\\"claims\\\":[{\\\"about_time\\\":{\\\"anchor_source_id\\\":null,\\\"evidence_indexes\\\":[0],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"event\\\",\\\"evidence_indexes\\\":[0],\\\"kind\\\":\\\"EVENT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[0],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[0],\\\"scope_refs\\\":[\\\"event\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"褒められた\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"褒められた\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":null,\\\"evidence_indexes\\\":[1],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"reaction\\\",\\\"evidence_indexes\\\":[1],\\\"kind\\\":\\\"STATE\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[1],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[1],\\\"scope_refs\\\":[\\\"reaction\\\"],\\\"value\\\":\\\"NEGATED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"嬉しくなかった\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"嬉しくなかった\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":null,\\\"evidence_indexes\\\":[3],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"other\\\",\\\"evidence_indexes\\\":[3],\\\"kind\\\":\\\"STATE\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[3],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[3],\\\"scope_refs\\\":[\\\"other\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"苦しかった\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"帰宅しても苦しかった\\\"}],\\\"conflicts\\\":[],\\\"core\\\":\\\"emlis\\\",\\\"relations\\\":[{\\\"evidence_indexes\\\":[2],\\\"from_claim_id\\\":\\\"event\\\",\\\"polarity\\\":\\\"AFFIRMED\\\",\\\"qualifiers\\\":[],\\\"relation_id\\\":\\\"contrast\\\",\\\"scope_refs\\\":[\\\"contrast\\\"],\\\"to_claim_id\\\":\\\"reaction\\\",\\\"type\\\":\\\"SOURCE_WRITTEN_CONCESSION\\\"}],\\\"schema_version\\\":\\\"cocolon.cmee.semantic_mapping_proposal.v1\\\",\\\"unknowns\\\":[],\\\"updates\\\":[]},\\\"evidence\\\":[{\\\"end\\\":5,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"褒められた\\\",\\\"source_id\\\":\\\"q1-synthetic\\\",\\\"start\\\":0},{\\\"end\\\":15,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"嬉しくなかった\\\",\\\"source_id\\\":\\\"q1-synthetic\\\",\\\"start\\\":8},{\\\"end\\\":7,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"のに\\\",\\\"source_id\\\":\\\"q1-synthetic\\\",\\\"start\\\":5},{\\\"end\\\":10,\\\"field_path\\\":\\\"memo_action\\\",\\\"quote\\\":\\\"帰宅しても苦しかった\\\",\\\"source_id\\\":\\\"q1-synthetic\\\",\\\"start\\\":0}]}\",\"metadata_json\":\"{\\\"elapsed_seconds\\\":null,\\\"evidence_check\\\":\\\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\\\",\\\"finish_reason\\\":\\\"stop\\\",\\\"model\\\":null,\\\"provider\\\":null,\\\"revision\\\":null,\\\"usage\\\":null}\",\"raw_output\":\"{\\\"candidate\\\": {\\\"schema_version\\\": \\\"cocolon.cmee.semantic_mapping_proposal.v1\\\", \\\"core\\\": \\\"emlis\\\", \\\"claims\\\": [{\\\"claim_id\\\": \\\"event\\\", \\\"kind\\\": \\\"EVENT\\\", \\\"text\\\": \\\"褒められた\\\", \\\"subject\\\": {\\\"binding\\\": \\\"OMITTED\\\", \\\"source_entity\\\": null, \\\"evidence_indexes\\\": []}, \\\"predicate\\\": {\\\"surface\\\": \\\"褒められた\\\", \\\"arguments\\\": []}, \\\"polarity\\\": {\\\"value\\\": \\\"AFFIRMED\\\", \\\"scope_refs\\\": [\\\"event\\\"], \\\"evidence_indexes\\\": [0]}, \\\"modality\\\": {\\\"value\\\": \\\"ASSERTED_AS_WRITTEN\\\", \\\"evidence_indexes\\\": [0]}, \\\"about_time\\\": {\\\"kind\\\": \\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\", \\\"expression\\\": null, \\\"anchor_source_id\\\": null, \\\"evidence_indexes\\\": [0]}, \\\"qualifiers\\\": [], \\\"evidence_indexes\\\": [0]}, {\\\"claim_id\\\": \\\"reaction\\\", \\\"kind\\\": \\\"STATE\\\", \\\"text\\\": \\\"嬉しくなかった\\\", \\\"subject\\\": {\\\"binding\\\": \\\"OMITTED\\\", \\\"source_entity\\\": null, \\\"evidence_indexes\\\": []}, \\\"predicate\\\": {\\\"surface\\\": \\\"嬉しくなかった\\\", \\\"arguments\\\": []}, \\\"polarity\\\": {\\\"value\\\": \\\"NEGATED\\\", \\\"scope_refs\\\": [\\\"reaction\\\"], \\\"evidence_indexes\\\": [1]}, \\\"modality\\\": {\\\"value\\\": \\\"ASSERTED_AS_WRITTEN\\\", \\\"evidence_indexes\\\": [1]}, \\\"about_time\\\": {\\\"kind\\\": \\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\", \\\"expression\\\": null, \\\"anchor_source_id\\\": null, \\\"evidence_indexes\\\": [1]}, \\\"qualifiers\\\": [], \\\"evidence_indexes\\\": [1]}, {\\\"claim_id\\\": \\\"other\\\", \\\"kind\\\": \\\"STATE\\\", \\\"text\\\": \\\"帰宅しても苦しかった\\\", \\\"subject\\\": {\\\"binding\\\": \\\"OMITTED\\\", \\\"source_entity\\\": null, \\\"evidence_indexes\\\": []}, \\\"predicate\\\": {\\\"surface\\\": \\\"苦しかった\\\", \\\"arguments\\\": []}, \\\"polarity\\\": {\\\"value\\\": \\\"AFFIRMED\\\", \\\"scope_refs\\\": [\\\"other\\\"], \\\"evidence_indexes\\\": [3]}, \\\"modality\\\": {\\\"value\\\": \\\"ASSERTED_AS_WRITTEN\\\", \\\"evidence_indexes\\\": [3]}, \\\"about_time\\\": {\\\"kind\\\": \\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\", \\\"expression\\\": null, \\\"anchor_source_id\\\": null, \\\"evidence_indexes\\\": [3]}, \\\"qualifiers\\\": [], \\\"evidence_indexes\\\": [3]}], \\\"relations\\\": [{\\\"relation_id\\\": \\\"contrast\\\", \\\"type\\\": \\\"SOURCE_WRITTEN_CONCESSION\\\", \\\"from_claim_id\\\": \\\"event\\\", \\\"to_claim_id\\\": \\\"reaction\\\", \\\"polarity\\\": \\\"AFFIRMED\\\", \\\"scope_refs\\\": [\\\"contrast\\\"], \\\"qualifiers\\\": [], \\\"evidence_indexes\\\": [2]}], \\\"unknowns\\\": [], \\\"conflicts\\\": [], \\\"updates\\\": []}, \\\"evidence\\\": [{\\\"source_id\\\": \\\"q1-synthetic\\\", \\\"field_path\\\": \\\"memo\\\", \\\"start\\\": 0, \\\"end\\\": 5, \\\"quote\\\": \\\"褒められた\\\"}, {\\\"source_id\\\": \\\"q1-synthetic\\\", \\\"field_path\\\": \\\"memo\\\", \\\"start\\\": 8, \\\"end\\\": 15, \\\"quote\\\": \\\"嬉しくなかった\\\"}, {\\\"source_id\\\": \\\"q1-synthetic\\\", \\\"field_path\\\": \\\"memo\\\", \\\"start\\\": 5, \\\"end\\\": 7, \\\"quote\\\": \\\"のに\\\"}, {\\\"source_id\\\": \\\"q1-synthetic\\\", \\\"field_path\\\": \\\"memo_action\\\", \\\"start\\\": 0, \\\"end\\\": 10, \\\"quote\\\": \\\"帰宅しても苦しかった\\\"}]}\",\"request_id\":\"prep-6b19ba79c38a47dd583135c8d8b4d3696e8e60624f853dfcbfbc0ec1d5edae57\",\"status\":\"CANDIDATE_UNREVIEWED\"},\"request_ref\":\"prep-6b19ba79c38a47dd583135c8d8b4d3696e8e60624f853dfcbfbc0ec1d5edae57\",\"schema_version\":\"cocolon.cmee.emlis_semantic_snapshot.v1\",\"semantic_profile\":\"emlis_candidate_snapshot.v1\",\"snapshot_ref\":\"semantic-5594d4384671b001f70624e8ca9602e2a0dd75aef0193e71826cd8ffecfb58ef\",\"source_bindings\":[{\"envelope_id\":\"src-bf922ecf9715f15948ea4252\",\"role\":\"ORIGINAL_INPUT\",\"source_commitment\":\"1dcaec0c9f59fa1b268961d43f81e1f40b5c14c877b059205be0ed88aa8df214\",\"source_id\":\"q1-synthetic\",\"source_version\":\"emlis.current_input_bundle.v1\"}],\"source_prefix_ref\":\"emlis-source-prefix-7a39453bbff81c3f084ab264226f573be9a13fa722e79d19053f0408dbd67837\"},\"question_control\":{\"asked_target_refs\":[\"emlis-target-cd50cbc5b21664ec8f84c83fc98abbbf4251cba88bc8984a84643e962eb06ea0\"],\"issued_count\":1,\"issued_questions\":[],\"pending_question\":{\"answer_limit\":1,\"answer_source_role\":\"SUPPLEMENTAL_ANSWER\",\"decision\":{\"affected_meaning_refs\":[\"semantic-nucleus-fc187c33fd03467ec5a15ab38e4a058e43b8c456c23c08f7b0b2adf6214840b3\",\"semantic-nucleus-ad96a6d3bed75a9c46f1cf99e4a2b3940ac103c3f06d13fb822b75303ccce791\"],\"affected_reception_refs\":[\"semantic-nucleus-fc187c33fd03467ec5a15ab38e4a058e43b8c456c23c08f7b0b2adf6214840b3\"],\"asked_target_refs\":[],\"decision_reason\":\"source_bound_event_personal_meaning_missing\",\"disposition\":\"ASK\",\"missing_dimension\":\"personal_received_meaning\",\"supporting_evidence_refs\":[\"ev-4c4d30bd15a2c00d8d534ca7\"],\"target_kind\":\"PERSONAL_RECEIVED_MEANING\",\"target_ref\":\"emlis-target-cd50cbc5b21664ec8f84c83fc98abbbf4251cba88bc8984a84643e962eb06ea0\"},\"original_source_ref\":\"src-bf922ecf9715f15948ea4252\",\"parent_request_id\":\"q1-synthetic\",\"prompt_private\":\"「褒められた」は、あなたにはどんな意味として届きましたか。\",\"question_id\":\"semantic-question-590df483cf85ba0a82926dce212b9dc20c7dd7ad10e6c7737f8441cc010ee2f7\",\"schema_version\":\"cocolon.cmee.emlis_clarification.v1\",\"skip_allowed\":true,\"thread_id\":\"q1-thread\"},\"question_limit\":1,\"stop\":false},\"receipt\":{\"candidate_json\":\"{\\\"candidate\\\":{\\\"claims\\\":[{\\\"about_time\\\":{\\\"anchor_source_id\\\":null,\\\"evidence_indexes\\\":[0],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"event\\\",\\\"evidence_indexes\\\":[0],\\\"kind\\\":\\\"EVENT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[0],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[0],\\\"scope_refs\\\":[\\\"event\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"褒められた\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"褒められた\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":null,\\\"evidence_indexes\\\":[1],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"reaction\\\",\\\"evidence_indexes\\\":[1],\\\"kind\\\":\\\"STATE\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[1],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[1],\\\"scope_refs\\\":[\\\"reaction\\\"],\\\"value\\\":\\\"NEGATED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"嬉しくなかった\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"嬉しくなかった\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"snapshot-answer\\\",\\\"evidence_indexes\\\":[4],\\\"expression\\\":\\\"その時\\\",\\\"kind\\\":\\\"ORIGINAL_OCCASION\\\"},\\\"claim_id\\\":\\\"answer\\\",\\\"evidence_indexes\\\":[4],\\\"kind\\\":\\\"STATE\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[4],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[4],\\\"scope_refs\\\":[\\\"answer\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"寂しかった\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"その時は寂しかった\\\"}],\\\"conflicts\\\":[],\\\"core\\\":\\\"emlis\\\",\\\"relations\\\":[{\\\"evidence_indexes\\\":[2],\\\"from_claim_id\\\":\\\"event\\\",\\\"polarity\\\":\\\"AFFIRMED\\\",\\\"qualifiers\\\":[],\\\"relation_id\\\":\\\"contrast\\\",\\\"scope_refs\\\":[\\\"contrast\\\"],\\\"to_claim_id\\\":\\\"reaction\\\",\\\"type\\\":\\\"SOURCE_WRITTEN_CONCESSION\\\"}],\\\"schema_version\\\":\\\"cocolon.cmee.semantic_mapping_proposal.v1\\\",\\\"unknowns\\\":[],\\\"updates\\\":[{\\\"answer_source_id\\\":\\\"snapshot-answer\\\",\\\"new_claim_refs\\\":[\\\"answer\\\"],\\\"operation\\\":\\\"ADD\\\",\\\"prior_meaning_ref\\\":\\\"semantic-5594d4384671b001f70624e8ca9602e2a0dd75aef0193e71826cd8ffecfb58ef\\\",\\\"target_claim_refs\\\":[\\\"reaction\\\"]},{\\\"answer_source_id\\\":\\\"snapshot-answer\\\",\\\"new_claim_refs\\\":[],\\\"operation\\\":\\\"WITHDRAW\\\",\\\"prior_meaning_ref\\\":\\\"semantic-5594d4384671b001f70624e8ca9602e2a0dd75aef0193e71826cd8ffecfb58ef\\\",\\\"target_claim_refs\\\":[\\\"other\\\"]}]},\\\"evidence\\\":[{\\\"end\\\":5,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"褒められた\\\",\\\"source_id\\\":\\\"q1-synthetic\\\",\\\"start\\\":0},{\\\"end\\\":15,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"嬉しくなかった\\\",\\\"source_id\\\":\\\"q1-synthetic\\\",\\\"start\\\":8},{\\\"end\\\":7,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"のに\\\",\\\"source_id\\\":\\\"q1-synthetic\\\",\\\"start\\\":5},{\\\"end\\\":10,\\\"field_path\\\":\\\"memo_action\\\",\\\"quote\\\":\\\"帰宅しても苦しかった\\\",\\\"source_id\\\":\\\"q1-synthetic\\\",\\\"start\\\":0},{\\\"end\\\":9,\\\"field_path\\\":\\\"answer_text_private\\\",\\\"quote\\\":\\\"その時は寂しかった\\\",\\\"source_id\\\":\\\"snapshot-answer\\\",\\\"start\\\":0},{\\\"end\\\":21,\\\"field_path\\\":\\\"answer_text_private\\\",\\\"quote\\\":\\\"帰宅しても苦しかった\\\",\\\"source_id\\\":\\\"snapshot-answer\\\",\\\"start\\\":11}]}\",\"metadata_json\":\"{\\\"elapsed_seconds\\\":null,\\\"evidence_check\\\":\\\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\\\",\\\"finish_reason\\\":\\\"stop\\\",\\\"model\\\":null,\\\"provider\\\":null,\\\"revision\\\":null,\\\"usage\\\":null}\",\"raw_output\":\"{\\\"candidate\\\": {\\\"claims\\\": [{\\\"about_time\\\": {\\\"anchor_source_id\\\": null, \\\"evidence_indexes\\\": [0], \\\"expression\\\": null, \\\"kind\\\": \\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"}, \\\"claim_id\\\": \\\"event\\\", \\\"evidence_indexes\\\": [0], \\\"kind\\\": \\\"EVENT\\\", \\\"modality\\\": {\\\"evidence_indexes\\\": [0], \\\"value\\\": \\\"ASSERTED_AS_WRITTEN\\\"}, \\\"polarity\\\": {\\\"evidence_indexes\\\": [0], \\\"scope_refs\\\": [\\\"event\\\"], \\\"value\\\": \\\"AFFIRMED\\\"}, \\\"predicate\\\": {\\\"arguments\\\": [], \\\"surface\\\": \\\"褒められた\\\"}, \\\"qualifiers\\\": [], \\\"subject\\\": {\\\"binding\\\": \\\"OMITTED\\\", \\\"evidence_indexes\\\": [], \\\"source_entity\\\": null}, \\\"text\\\": \\\"褒められた\\\"}, {\\\"about_time\\\": {\\\"anchor_source_id\\\": null, \\\"evidence_indexes\\\": [1], \\\"expression\\\": null, \\\"kind\\\": \\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"}, \\\"claim_id\\\": \\\"reaction\\\", \\\"evidence_indexes\\\": [1], \\\"kind\\\": \\\"STATE\\\", \\\"modality\\\": {\\\"evidence_indexes\\\": [1], \\\"value\\\": \\\"ASSERTED_AS_WRITTEN\\\"}, \\\"polarity\\\": {\\\"evidence_indexes\\\": [1], \\\"scope_refs\\\": [\\\"reaction\\\"], \\\"value\\\": \\\"NEGATED\\\"}, \\\"predicate\\\": {\\\"arguments\\\": [], \\\"surface\\\": \\\"嬉しくなかった\\\"}, \\\"qualifiers\\\": [], \\\"subject\\\": {\\\"binding\\\": \\\"OMITTED\\\", \\\"evidence_indexes\\\": [], \\\"source_entity\\\": null}, \\\"text\\\": \\\"嬉しくなかった\\\"}, {\\\"claim_id\\\": \\\"answer\\\", \\\"kind\\\": \\\"STATE\\\", \\\"text\\\": \\\"その時は寂しかった\\\", \\\"subject\\\": {\\\"binding\\\": \\\"OMITTED\\\", \\\"source_entity\\\": null, \\\"evidence_indexes\\\": []}, \\\"predicate\\\": {\\\"surface\\\": \\\"寂しかった\\\", \\\"arguments\\\": []}, \\\"polarity\\\": {\\\"value\\\": \\\"AFFIRMED\\\", \\\"scope_refs\\\": [\\\"answer\\\"], \\\"evidence_indexes\\\": [4]}, \\\"modality\\\": {\\\"value\\\": \\\"ASSERTED_AS_WRITTEN\\\", \\\"evidence_indexes\\\": [4]}, \\\"about_time\\\": {\\\"kind\\\": \\\"ORIGINAL_OCCASION\\\", \\\"expression\\\": \\\"その時\\\", \\\"anchor_source_id\\\": \\\"snapshot-answer\\\", \\\"evidence_indexes\\\": [4]}, \\\"qualifiers\\\": [], \\\"evidence_indexes\\\": [4]}], \\\"conflicts\\\": [], \\\"core\\\": \\\"emlis\\\", \\\"relations\\\": [{\\\"evidence_indexes\\\": [2], \\\"from_claim_id\\\": \\\"event\\\", \\\"polarity\\\": \\\"AFFIRMED\\\", \\\"qualifiers\\\": [], \\\"relation_id\\\": \\\"contrast\\\", \\\"scope_refs\\\": [\\\"contrast\\\"], \\\"to_claim_id\\\": \\\"reaction\\\", \\\"type\\\": \\\"SOURCE_WRITTEN_CONCESSION\\\"}], \\\"schema_version\\\": \\\"cocolon.cmee.semantic_mapping_proposal.v1\\\", \\\"unknowns\\\": [], \\\"updates\\\": [{\\\"operation\\\": \\\"ADD\\\", \\\"target_claim_refs\\\": [\\\"reaction\\\"], \\\"new_claim_refs\\\": [\\\"answer\\\"], \\\"answer_source_id\\\": \\\"snapshot-answer\\\", \\\"prior_meaning_ref\\\": \\\"semantic-5594d4384671b001f70624e8ca9602e2a0dd75aef0193e71826cd8ffecfb58ef\\\"}, {\\\"operation\\\": \\\"WITHDRAW\\\", \\\"target_claim_refs\\\": [\\\"other\\\"], \\\"new_claim_refs\\\": [], \\\"answer_source_id\\\": \\\"snapshot-answer\\\", \\\"prior_meaning_ref\\\": \\\"semantic-5594d4384671b001f70624e8ca9602e2a0dd75aef0193e71826cd8ffecfb58ef\\\"}]}, \\\"evidence\\\": [{\\\"end\\\": 5, \\\"field_path\\\": \\\"memo\\\", \\\"quote\\\": \\\"褒められた\\\", \\\"source_id\\\": \\\"q1-synthetic\\\", \\\"start\\\": 0}, {\\\"end\\\": 15, \\\"field_path\\\": \\\"memo\\\", \\\"quote\\\": \\\"嬉しくなかった\\\", \\\"source_id\\\": \\\"q1-synthetic\\\", \\\"start\\\": 8}, {\\\"end\\\": 7, \\\"field_path\\\": \\\"memo\\\", \\\"quote\\\": \\\"のに\\\", \\\"source_id\\\": \\\"q1-synthetic\\\", \\\"start\\\": 5}, {\\\"end\\\": 10, \\\"field_path\\\": \\\"memo_action\\\", \\\"quote\\\": \\\"帰宅しても苦しかった\\\", \\\"source_id\\\": \\\"q1-synthetic\\\", \\\"start\\\": 0}, {\\\"source_id\\\": \\\"snapshot-answer\\\", \\\"field_path\\\": \\\"answer_text_private\\\", \\\"start\\\": 0, \\\"end\\\": 9, \\\"quote\\\": \\\"その時は寂しかった\\\"}, {\\\"source_id\\\": \\\"snapshot-answer\\\", \\\"field_path\\\": \\\"answer_text_private\\\", \\\"start\\\": 11, \\\"end\\\": 21, \\\"quote\\\": \\\"帰宅しても苦しかった\\\"}]}\",\"request_id\":\"prep-c0005500a075b75cb667e96493e7421032d9d0150bdd32c856bf7da96a1b389e\",\"status\":\"CANDIDATE_UNREVIEWED\"},\"request_ref\":\"prep-c0005500a075b75cb667e96493e7421032d9d0150bdd32c856bf7da96a1b389e\",\"schema_version\":\"cocolon.cmee.emlis_semantic_snapshot.v1\",\"semantic_profile\":\"emlis_candidate_snapshot.v1\",\"snapshot_ref\":\"semantic-1e00ad5ce8a52ec2efd01ed9bcf333aa77edf96a8263f59ae0c8b31c6037f02d\",\"source_bindings\":[{\"envelope_id\":\"src-bf922ecf9715f15948ea4252\",\"role\":\"ORIGINAL_INPUT\",\"source_commitment\":\"1dcaec0c9f59fa1b268961d43f81e1f40b5c14c877b059205be0ed88aa8df214\",\"source_id\":\"q1-synthetic\",\"source_version\":\"emlis.current_input_bundle.v1\"},{\"envelope_id\":\"src-98794932c505c55adf799db5\",\"role\":\"SUPPLEMENTAL_ANSWER\",\"source_commitment\":\"f802ee5a07cffd4b075117964c8e964f0c4518202d97baeecd449ff83a0f5acc\",\"source_id\":\"snapshot-answer\",\"source_version\":\"cocolon.cmee.supplemental_answer.v1\"}],\"source_prefix_ref\":\"emlis-source-prefix-14a1934891d352262788c819bfc473cf60877ac4264099c2a4d93be5460fc5c4\"}",
+        "artifact": {
+          "artifact_id": "emlis-artifact-a52e7cd003d10702bcf45ad271eb8f7b5b1bebeba8b817b9a3d4cb7c60927307",
+          "observation": "「褒められた」のに「嬉しくなかった」、その時は「寂しかった」とあります。",
+          "reception": "褒められたことについて、その時の寂しさを小さくせずに受け止めています。",
+          "source_prefix_ref": "emlis-source-prefix-14a1934891d352262788c819bfc473cf60877ac4264099c2a4d93be5460fc5c4",
+          "meaning_checkpoint_ref": "semantic-checkpoint-2959d87c1a15437f12087e0abcc7cbc15ab8c5d3f1c8db010dff25059a01dabc",
+          "qualified_evidence_refs": [
+            {
+              "thread_span_id": "s1",
+              "local_source_span_id": "s1",
+              "evidence": {
+                "evidence_id": "ev-4c4d30bd15a2c00d8d534ca7",
+                "source_span_id": "s1",
+                "source_envelope_id": "src-bf922ecf9715f15948ea4252",
+                "field_path": "memo",
+                "element_index": -1,
+                "field_utf8_start": 351,
+                "field_utf8_end": 399,
+                "scalar_start": 0,
+                "scalar_end": 15,
+                "utf8_start": 351,
+                "utf8_end": 396,
+                "field_sha256": "657ef4fd73baac0c5d049b83b7926b278e5b6194ce7c3f31fb4bf8db4c697c9e",
+                "literal_sha256": "6766d28bcac6aac3f053437ae285f2732a7d09e1164b10178395b5e490c7c356"
+              }
+            },
+            {
+              "thread_span_id": "s2",
+              "local_source_span_id": "s2",
+              "evidence": {
+                "evidence_id": "ev-de1ca50dee1be29e76fb207d",
+                "source_span_id": "s2",
+                "source_envelope_id": "src-bf922ecf9715f15948ea4252",
+                "field_path": "memo_action",
+                "element_index": -1,
+                "field_utf8_start": 425,
+                "field_utf8_end": 458,
+                "scalar_start": 0,
+                "scalar_end": 10,
+                "utf8_start": 425,
+                "utf8_end": 455,
+                "field_sha256": "8a964dbdeeb860bf83cd48e53c58851daee374e2e62d3b2afafc32cfd117caa8",
+                "literal_sha256": "3c9bc7abfa463ffcc7d7e0f43fca84134d809c73a7c8846bf7a9a74dd3f41aba"
+              }
+            },
+            {
+              "thread_span_id": "s3",
+              "local_source_span_id": "s3",
+              "evidence": {
+                "evidence_id": "ev-1c9a4e5156c63939c544b617",
+                "source_span_id": "s3",
+                "source_envelope_id": "src-bf922ecf9715f15948ea4252",
+                "field_path": "emotion_details.0.type",
+                "element_index": 0,
+                "field_utf8_start": 494,
+                "field_utf8_end": 500,
+                "scalar_start": 0,
+                "scalar_end": 2,
+                "utf8_start": 494,
+                "utf8_end": 500,
+                "field_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df",
+                "literal_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df"
+              }
+            },
+            {
+              "thread_span_id": "s4",
+              "local_source_span_id": "s4",
+              "evidence": {
+                "evidence_id": "ev-eb70e7f1d2fc920b06dd8044",
+                "source_span_id": "s4",
+                "source_envelope_id": "src-bf922ecf9715f15948ea4252",
+                "field_path": "emotions.0",
+                "element_index": 0,
+                "field_utf8_start": 524,
+                "field_utf8_end": 530,
+                "scalar_start": 0,
+                "scalar_end": 2,
+                "utf8_start": 524,
+                "utf8_end": 530,
+                "field_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df",
+                "literal_sha256": "bc95c7b5b70f17ee6357e6de77c5e0d572789ebbc921191438ca1fbea1f5c1df"
+              }
+            },
+            {
+              "thread_span_id": "s5",
+              "local_source_span_id": "s5",
+              "evidence": {
+                "evidence_id": "ev-77888891f5e03ed6e87be2af",
+                "source_span_id": "s5",
+                "source_envelope_id": "src-bf922ecf9715f15948ea4252",
+                "field_path": "category.0",
+                "element_index": 0,
+                "field_utf8_start": 554,
+                "field_utf8_end": 560,
+                "scalar_start": 0,
+                "scalar_end": 2,
+                "utf8_start": 554,
+                "utf8_end": 560,
+                "field_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3",
+                "literal_sha256": "fb7db808eb037549d52b2149ab1384a352561105d0abfd2bf3f358b5c8acf8a3"
+              }
+            },
+            {
+              "thread_span_id": "s6",
+              "local_source_span_id": "s1",
+              "evidence": {
+                "evidence_id": "ev-36712d97c2b386f63f998b11",
+                "source_span_id": "s1",
+                "source_envelope_id": "src-98794932c505c55adf799db5",
+                "field_path": "answer_text_private",
+                "element_index": -1,
+                "field_utf8_start": 427,
+                "field_utf8_end": 511,
+                "scalar_start": 0,
+                "scalar_end": 9,
+                "utf8_start": 427,
+                "utf8_end": 454,
+                "field_sha256": "44e6c4c1f0c29d118f3709c73b68068ad5148355c708879b06c1fef82986c748",
+                "literal_sha256": "18bf400374f750212d4117cecf76ad821e73564275fb3dbe2e504e4f41b11518"
+              }
+            },
+            {
+              "thread_span_id": "s7",
+              "local_source_span_id": "s2",
+              "evidence": {
+                "evidence_id": "ev-b47f4fba17da473fb2aa37cf",
+                "source_span_id": "s2",
+                "source_envelope_id": "src-98794932c505c55adf799db5",
+                "field_path": "answer_text_private",
+                "element_index": -1,
+                "field_utf8_start": 427,
+                "field_utf8_end": 511,
+                "scalar_start": 10,
+                "scalar_end": 27,
+                "utf8_start": 457,
+                "utf8_end": 508,
+                "field_sha256": "44e6c4c1f0c29d118f3709c73b68068ad5148355c708879b06c1fef82986c748",
+                "literal_sha256": "786910afcbadd950f91150c0f9f70828b3230ee198b6d204e22bb60775dfd501"
+              }
+            }
+          ],
+          "meaning_trace": [
+            {
+              "limited_outcome_ref": "limited-meaning-outcome:ad1085fc4af87801fae0837feb19d845d24c8b3066f2f1814d284ffac57671e7@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+              "source_object_ref": "node:mn-17f2f6bb8cde0484c49059c1fa5973d31c3ab0723fb907feacae3ad1165b1adc@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "layer1_contribution_refs": [
+                "contribution-a209b7e655acdbb3d9914fdcd47e9ed907d8f22ffb52f5ac1ac9da4044c3d1f7"
+              ]
+            },
+            {
+              "limited_outcome_ref": "limited-meaning-outcome:ad1085fc4af87801fae0837feb19d845d24c8b3066f2f1814d284ffac57671e7@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+              "source_object_ref": "node:mn-9074604cb70c512f6e34a5d6fd82785fa70abad098793b68da401696d08feac1@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "layer1_contribution_refs": [
+                "contribution-a209b7e655acdbb3d9914fdcd47e9ed907d8f22ffb52f5ac1ac9da4044c3d1f7"
+              ]
+            },
+            {
+              "limited_outcome_ref": "limited-meaning-outcome:ad1085fc4af87801fae0837feb19d845d24c8b3066f2f1814d284ffac57671e7@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+              "source_object_ref": "node:mn-99fdf79be34105af7940983943c49fcc322bb7a39a57aa00c4002b92b7ddcb9d@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+              "layer1_contribution_refs": [
+                "contribution-29ff6ec9b5aa242021619aea1fb2ac9fe84965c9cef510ad8f9860a0e68387ea"
+              ]
+            }
+          ],
+          "reception_trace": [
+            {
+              "branch": "LIMITED",
+              "meaning_outcome_ref": "limited-meaning-outcome:ad1085fc4af87801fae0837feb19d845d24c8b3066f2f1814d284ffac57671e7@cocolon.cmee.emlis.limited_meaning_outcome.v1",
+              "reading_consequence_ref": null,
+              "reception_record_ref": "bounded-limited-reception:cc3dc080fae391d0894b64f3dc1cab993828d7fddb2fe5dbad00cd6505208cdf@cocolon.cmee.emlis.bounded_limited_reception.v1",
+              "projected_claim_ref": "subjective-claim-f4177337ecdfd5b4160d94285e87f9733a9309e276f2d87473dfe6acafbbd3e7",
+              "layer1_contribution_refs": [
+                "contribution-29ff6ec9b5aa242021619aea1fb2ac9fe84965c9cef510ad8f9860a0e68387ea"
+              ],
+              "response_object_refs": [
+                "node:mn-17f2f6bb8cde0484c49059c1fa5973d31c3ab0723fb907feacae3ad1165b1adc@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+                "node:mn-9074604cb70c512f6e34a5d6fd82785fa70abad098793b68da401696d08feac1@cocolon.cmee.grounded_meaning_graph.v1alpha1",
+                "node:mn-99fdf79be34105af7940983943c49fcc322bb7a39a57aa00c4002b92b7ddcb9d@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+              ],
+              "projected_response_object_refs": [
+                "node:mn-99fdf79be34105af7940983943c49fcc322bb7a39a57aa00c4002b92b7ddcb9d@cocolon.cmee.grounded_meaning_graph.v1alpha1"
+              ],
+              "preserved_difference_refs": []
+            }
+          ],
+          "body_status": "GENERATED",
+          "schema_version": "cocolon.cmee.emlis_thread_artifact.v1",
+          "history_line": null,
+          "history_line_plan": null,
+          "interpretive_frames": []
+        }
+      }
+    ],
+    "external_inference_requests": 0,
+    "live_db_calls": 0,
+    "c0_reruns": 0,
+    "legacy_broad_suite_reruns": 0,
+    "verification": {
+      "final_passed": 35,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 21.49,
+      "existing_cases": 25,
+      "added_cases": 10,
+      "frozen_v1_full_outcome_replays": 3,
+      "v1_pending_to_v2_answer": 1,
+      "isolated_sql_tests_included": true,
+      "full_suite_rerun": false,
+      "intermediate_review_correction": "Keep additive temporal も; its original range and residual repetition remain"
+    },
+    "limitations": [
+      "Temporal additive も keeps full source range and repetition remains",
+      "Not a general Reception naturalness acceptance",
+      "E02-0 targeted unknown/actions remain unsupported; mapping proposal only"
+    ]
+  }
 }

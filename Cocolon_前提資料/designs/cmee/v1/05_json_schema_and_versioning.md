@@ -3060,3 +3060,22 @@ snapshot schemaは`cocolon.cmee.emlis_semantic_snapshot.v1`。全keyは`schema_v
 snapshot_refはcanonicalな上記意味内容（schema/profile/各版/request/prefix/source_bindings/packet/prior_ref/answer_count/question_control/claim_mapping）のSHA256。receiptのraw JSON書式やusage/時間/provider診断は意味identityから除外し、receiptそのものは保存する。priorはprior_refへ束縛し、再開時は原sourceから各過去prefixを復元して検証。checkpoint IDはprefix＋snapshot refへ束縛する。同prefixを別候補で上書きしない。snapshotは生成された自由strの語彙拡張ではなく、現native enumと既存lexical責務に閉じた読みの固定である。
 
 新thread.dataへsemantic_profileとOFFLINE_CANDIDATE modeを保存し、runtime_profileはq2.free.one_round.v1／q3.plan.sequential.v1のまま。MEANING_UPDATE.payloadの既存jsonbへ新版checkpointを保存する。非採用は既存OPERATION.payloadのstage=SEMANTIC_NOT_ADOPTED、attempted_source_prefix_ref／prior_active_snapshot_ref／decision／reason_codes／candidate_receipt（取得未完了ならnull）を持つ。READ_NONADOPTEDは新公開modeや型を作らず、この保存評価を既存service内で再読する分岐として実装した。新table/column/migration、公開DTO fieldは0。
+
+## 2026-10-23 — adapter2実装版と、次のprivate binding案
+
+実装済み：現profile/snapshot/checkpoint版とadmission_version=1は不変。FRESH adapter_version=2、RESUME許可は保存1/2。裸時点語/はだけのlexical範囲を修復し、も/程度/本当は/否定/全raw claimは保持。意味identityにadapter版を含め、旧1は全outcome再現。前節の「両版とも1」は初版の履歴。
+
+以下はPROPOSED_ONLY。[次限定案](01_shared_kernel_and_runtime_contracts.md#cmee-targeted-unknown-action-proposal)の型owner。profile=emlis_candidate_snapshot.v2、snapshot=cocolon.cmee.emlis_semantic_snapshot.v2、checkpoint=cocolon.cmee.emlis_answer_meaning.v3を別にし、そのadmission/adapterは各1から開始する案。旧profile/旧型は維持。dispatch keyは(profile,snapshot schema,admission版,adapter版)の組とし、新profileのadapter1は旧profileのadapter2時点修復を基底にする。同番号を旧実装へのaliasにしない。新snapshotは現packet/source/control/priorにnative_bindingsを加え全体を意味identityへ含める。
+
+| 新profile専用private型案 | 必須field/保持条件 |
+|---|---|
+| SnapshotSourceSliceBindingV2 | slice_ref,claim_ref,nucleus_ref,source_ref,source_version,native_span_ref,field_path,raw_field_start,raw_field_end,lexical_start,lexical_end,quote,subject_binding,source_entity。field/実span内座標を分離し、OMITTEDと暫定SELFを別保持 |
+| SnapshotCaseArgumentBindingV2 | argument_ref,owning_nucleus_ref,written_role,text,source_slice_refs。今回WRITTEN_で/に/を/までだけ。native ArgumentRoleを自由文字列で拡張しない |
+| SnapshotPersonStatedUnknownBindingV2 | unknown_ref,statement_nucleus_ref,target_nucleus_refs,origin,dimension,resolution_state,statement_polarity,statement_modality,statement_time_scope,target_time_scope,evidence_slice_refs。PERSON_STATED/JOY_ASPECT/SOURCE_STATEMENT_RETAINED、喜びpast/曖昧さは記述present。SOURCE_EXPLICIT記述/PROVISIONAL読み/UNKNOWN部分を混ぜない |
+| SnapshotWrittenLinkBindingV2 | relation_ref,source_type,from_nucleus_ref,to_nucleus_ref,marker_slice_refs,scope_refs,polarity。TE_LINKとjoy→unknown CONCESSIONだけ。teを厳密順序/原因/同時へしない |
+
+P2unknownにはstatement_claim_refがないため、同evidenceのEXPLICIT_UNKNOWN claimが一意に完全一致する場合だけ解決し、複数ならHOLD。targetはactive joyへ束縛。claim→核→graph/componentは明示対応と被覆を確認し、同span同kindを値文字列や候補IDだけで区別しない。P2 listen14:22は原quoteを保持し、native lexical14:21との差は終端「。」に限って型へ記録する。snapshotに格/対象を保存しただけで作者未消費のまま通す案は不採用。内部構成の整合修正を新たな採用範囲拡大へ変えない。
+
+次案の座標はraw_field_*が元field相対、lexical_*が実native spanのnormalized_raw_text相対のUnicode scalar半開区間。UTF-8座標へ直接流用しない。unknown statementの命題はAFFIRMED/ASSERTED_AS_WRITTENで、native uncertaintyの感情方向はneutral/modality uncertainへ対応させる案。原文の明示記述SOURCE_EXPLICIT、主体/対象への読みPROVISIONAL_INTERPRETATION、未確定な側面UNKNOWNを別roleに保持し、喜びや曖昧さをNEGATEDへ書換えない。
+
+新案のsnapshotはclaim/nucleus/sliceまでをhashへ固定し、graph_node_refを含めない。graph IDは現sourceでcheckpointに依存するため、snapshot→checkpoint→graph→snapshotの循環を作らない。checkpoint確定後にprojection ownerがnucleus→graph nodeの明示対応を導出/照合し、component/traceへ渡す。保存再開は同snapshot/checkpointから同対応を再導出する。

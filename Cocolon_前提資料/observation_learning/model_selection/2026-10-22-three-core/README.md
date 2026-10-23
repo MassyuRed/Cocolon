@@ -2,7 +2,7 @@
 
 作成：2026-10-22 JST／華恋。10/23現在：**C0/P1/P2原結果を保持し、承認済み限定Emlis snapshot内部実装と隔離検証まで完了。M1は既承認未実行。**
 
-**最新の作業順・実装owner・成果・残件は[latest weekly J](../../../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)を参照。** P1材料/未採用receipt、P2四手作業例を維持し、Mash承認済みの限定offline意味採用/実pending更新/保存再開を実装。[実結果・限界](../../trials/2026-10-23-current-four/README.md#p3)。対象101成功、旧広範囲失敗は未解消、元E02-0はunknown/actions未対応。実モデル接続/推論/実DB/Render/通常有効化0。同範囲を再承認待ちへ戻さず、残る意味要素/native/作者対応を詰めます。モデル最終選定や認証を内部準備の前提にしません。
+**最新の作業順・実装owner・成果・残件は[latest weekly K](../../../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)を参照。** P1材料/未採用receipt、P2四手作業例を維持し、Mash承認済みの限定offline意味採用/実pending更新/保存再開を実装。[実結果・限界](../../trials/2026-10-23-current-four/README.md#p3)。初版対象101成功、adapter範囲修復の最終対象35成功。旧広範囲失敗は未解消、元E02-0はunknown/actions未対応。実モデル接続/推論/実DB/Render/通常有効化0。同範囲を再承認待ちへ戻さず、本人不明/二行動の具体追加案は共有設計01/schema05へ保存し、その追加範囲の判断へ進みます。モデル最終選定や認証を内部準備の前提にしません。
 
 10/22にMashの「わかった、作って」により、具体的な入力・作らせる結果・比較方法を作成した。学習済AI＋CMEE接続は既決。本書で提案する責務の詳細、試験条件、候補の採用は、製品実装・契約変更・商品合格として確定しない。10/22作成時点は推論・GPU起動・追加学習・課金資源取得・API/DB/配置・本番設定の変更0。10/23のC0実行と後続承認は下記へ区別して記す。
 

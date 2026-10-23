@@ -157,3 +157,19 @@ Mashが限定実装へ「進めていいよ」と明示承認。API原本b7eb534
 本文は意味軸の限定到達に留まる。REVISEの「その時はあの時も本当は嬉しかった」、WITHDRAW後の「その時にその時は寂しかった」のような時点語重複が実出力に残る。自然な受容や一般理解、正式Product Readに合格したとは扱わない。程度/「帰宅しても」等は原文slice保持で、一般条件の構造化理解ではない。新profile履歴消費も未対応。次は残る意味要素のnative対応を具体化し、E02-0の不明/行動と本文品質、Piece/Analysisの既存未対応へ戻る。モデル接続や通常有効化を自動開始しない。
 
 実モデル/推論/重み/追加学習/課金/実DB/Render/公開API/DTO/RN/merge/deploy、C0再実行は0。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、product_credit=0／PRODUCT_NOT_CLEAR／正式0/3／candidate_ready=false／automatic_progression=false。
+
+## 8. adapter2の時点範囲修復と具体的な次案
+
+時点反復には新adapterの時点込みlexical範囲が直接寄与していた。同じ既存作者の旧parserは分離しており、「作者だけの残件」という説明を訂正。FRESHだけadapter2、保存1/2は全original/prior/current plan/問い/再開を各版で再現。裸時点語/はだけを分離し、も/程度/本当は/否定/全raw claimを保持した。
+
+| 実例 | 修正前Receptionの一部 | 修正後 |
+|---|---|---|
+| ADD 今は嬉しい | 回答した時点では今は嬉しいのですね。 | 回答した時点では嬉しいのですね。 |
+| WITHDRAW併存 その時は寂しかった | その時にその時は寂しかったことを小さくせずに… | その時の寂しさを小さくせずに… |
+| REVISE あの時も本当は嬉しかった | その時はあの時も本当は嬉しかったのですね。 | もを削らず同範囲を維持。反復残件 |
+
+全原文/前後Observation・Reception/新版snapshot・artifact/source blobはsemantic_snapshot_results.jsonのadapter_v2_correction。未変更e5ca453から修正前に実採取した3系列の旧snapshot/全outcomeはAPIの新fixture cmee_emlis_semantic_adapter_v1.json。旧全outcome再現3、新出力3、旧pending混在1、別時点/否定/程度/今も3を元25へ加え、最終35 passed/FAIL0/SKIP0、21.49秒。隔離SQL保存/中断/Premium三回答も同対象内。反復実行/採取を加点しない。P1/旧application/旧広範囲は再実行0で、既存失敗は未解消のまま。
+
+E02-0は依然UNSUPPORTED。本人不明のstatement/joy対象/二時点、同span二actionの一意対応、原格/省略主体/te節とconcession、listenの句点によるfield/native範囲差を[具体的追加案](../../../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-targeted-unknown-action-proposal)へ保存。未実装であり、E02-Bの架空pendingやJOY_ASPECT新問は含めない。次案の静的照合を試験成功へ換算しない。
+
+source修復はemlis_semantic_admission.pyだけ。作者/共有型/通常service/公開API/DTO/RN/実DB/Render/モデル/課金/merge/deploy0、新runner/checkerなし。STRUCTURE_MAP_DELTA_NONE、限定TECHNICAL_CREDIT、商品0/正式0/3/candidate_ready=false/automatic_progression=false。

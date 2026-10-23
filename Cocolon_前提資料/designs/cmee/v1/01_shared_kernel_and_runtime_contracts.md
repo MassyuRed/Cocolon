@@ -876,3 +876,42 @@ Mashの「この限定範囲の内部実装へ進めてよろしいでしょう�
 serviceは候補取得STARTEDとRECEIVEDを既存private OPERATIONへ別保存し、意味checkpointを本文前に保存。receipt保存後の再開は同receipt、意味保存後は同snapshot/checkpointを使用し、候補の再取得・同prefix再採用をしない。取得開始後にreceiptが残らなかった場合、明示retryはHOLDを保存してCOMPLETEDへ閉じる。非採用はMEANING_UPDATEを作らず、新prefixの評価済み参照を進めず、旧本文をcurrentへ付替えない。無更新の早期return前にも保存snapshotを再検証する。
 
 通常serviceは新profileの保存再読だけ可能でcan_write=false。answer/action/frame mutation・commit/processには同じ明示offline設定を必須とし、通常application factory／API／DTO fieldは変更しない。新旧threadの移行も行わない。実型は[05の実装追記](05_json_schema_and_versioning.md#cmee-p3-actual-schema)、検証・実本文・失敗は[trial](../../../observation_learning/trials/2026-10-23-current-four/README.md#p3)。限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT、product_credit=0、automatic_progression=false。
+
+<a id="cmee-adapter-v2-correction"></a>
+## 2026-10-23 — 既承認adapterの時点範囲修復
+
+新adapterが時点込み全claimをlexical:preserve_source_predicateへ渡し、既存作者のthread_time表示と重なっていた。同じ作者の旧parser側は時点を分離しており、「既存作者だけの残件」という説明を訂正する。既承認の保持意味/作者を変えない整合修復としてFRESHのadapter_versionを2へ進めた。RESUMEは保存1/2を全original/prior/current plan・問い・再開で明示dispatchする。profile/schema/admission版は不変。
+
+2では回答の裸時点語/「は」だけをlexical範囲から分離し、snapshot全claim/根拠/時点/程度/本当は/否定は保持。「も」は添加/継続を担うので削らず旧範囲を維持し、反復残件として残す。原文や出力の後処理置換ではない。e5ca453から修正前に実採取したv1三系列はcheckpoint/graph/本文/問い/停止を含む全outcomeが一致し、v1実pending→新回答prefixだけv2の混在も成立。対象35件成功、全suite/商品合格ではない。STRUCTURE_MAP_DELTA_NONE、限定TECHNICAL_CREDIT。
+
+<a id="cmee-targeted-unknown-action-proposal"></a>
+## 次の限定案 — E02-0の本人明示不明と二行動
+
+**PROPOSED_ONLY / IMPLEMENTATION_APPROVAL_PENDING。** 今回この追加採用は実装0。既承認のevent/reaction初版を自動拡大しない。次の一単位は明示offlineの新規Emlisだけで、本人不明と二行動を初回本文/保存再開まで保持すること。既存の実pendingが成立する混在系列では、新要素を変更しない既受理回答後にも保持する。E02-0自体に架空の問い/回答を作らない。
+
+| 正確に残す意味 | 現sourceの不足と最小変更 |
+|---|---|
+| 過去の喜びは成立し、どの部分かは記述時点でも曖昧 | GroundedUnknownBoundary/UNKNOWN nodeのdimensionだけではstatementと対象joyを区別できない。旧不明資格は同一根拠のSELF「わからない」statement核を指す。新profileのPERSON_STATED/JOY_ASPECT bindingでstatement_ref/target_joy_ref/記述presentと対象pastを別保持し、projection→basis/qualifier→作者/trace/独立readerへ渡す。喜び自体の否定/原因不明/後輩への信頼へ変えない |
+| 後輩に説明を任せて、最後まで聞いた二行動 | action/fact/past/PRESENT_ACTUAL_OUTPUTは存在するが、現binderはowner/kind/grounding/evidenceだけで検索するため同span二actionが一意にならない。実spanと正規subrange、claim→nucleus→graph nodeの明示対応を新profileへ追加。旧曖昧検索を緩めず架空spanを作らない |
+| 打合せで/後輩に/説明を/最後まで、OMITTED主体 | ArgumentRoleは命題間役割で文内格ではない。原格/owning claim/根拠をtyped case bindingで保持し、受取人/原因等を推測しない。本人source所有と省略主体、暫定SELF読みを区別 |
+| te連結、joy→unknownのけど | TE_LINKをACTION_BEFORE_AFTERへ写すとshift/厳密時点を補う。元連結のみを保持し、因果/同時性/信頼/成長/喜びの原因を作らない。既存HRは「任せて」を単独完了節として名詞化できないため、完全連結節のまま既存作者/独立readerで両行動を消費する有限対応が必要 |
+| listen終端句点の座標差 | P2 quote14:22はnative memo_action span終端21を一字越える。raw field quoteを保持し、native lexical14:21との対応を型で明示する。除外許可は終端「。」のみ。内部字/否定/markerを削らず他のcross-spanは未対応 |
+
+### 実ownerと責任（API prefix: ai/services/ai_inference/）
+
+- `cocolon_meaning_experience_engine/emlis_semantic_admission.py`：closed ACTION/対象付き不明/格/主体/te/句点対応と全意味被覆、typed binding生成。
+- 同`contracts.py`＋`emlis_stage1_response.py`＋`emlis_thread_projection.py`：設計05の新profile専用binding、同span二核の明示対応、unknown statement→joy対象、component/qualifier/traceの消費。旧型へnull fieldを追加して全旧identityを変えない。
+- `emlis_ai_grounded_observation_plan.py`：完全連結原文から過去/従属teを確認。単独「任せて」を自由な完了事実へしない。
+- `emlis_ai_grounded_sentence_surface.py`＋`emlis_ai_grounded_human_reception.py`：完全二行動と対象付き曖昧さを既存作者内で表現。別作者/末尾の定型補足を作らない。
+- `emlis_ai_grounded_observation_gate.py`＋同packageの`emlis_v1a.py`＋`emlis_thread_surface.py`：作者を呼ばず格/主体/時点/肯否/未知対象/両行動/連結を確認。
+- 同packageの`engine.py`＋`emlis_answer_update.py`＋`emlis_thread_engine.py`と`emlis_thread_service.py`：明示offline新profileだけdispatch、意味先行保存と原版再開。既存test_cmee_emlis_semantic_snapshot.pyと同family fixtureで検証し、protected旧期待を差替えない。
+
+### 採用・更新・問い・完了・停止
+
+全4claim/unknown対象/二relation/全格を同じsnapshotから消費できる閉じた本人sourceだけ暫定採用する。任意ACTION/一般日本語/第三者意図理解へ広げない。JOY_ASPECT専用の新しい問いはこの案へ含めず、既存必要性/実pending/skip/END/予算を維持。不明の存在だけでASKにしない。
+
+別焦点への既受理ADD/REVISE/WITHDRAWでは、新要素が未変更なら保持する。新unknown/ACTION/格/te自体を変更・解消する回答や依存先を失わせる変更はHOLD/UNSUPPORTEDとし、新prefixへ旧意味/本文を付替えない。この単位で一般的な行動訂正やunknown解消文法まで完成としない。
+
+完了は全意味を残す初回実本文、同版保存再読/中断再開、実際に成立するpending系列での未変更素材保持、旧profile/保存adapter1/2再現、必要逆検査と回帰。本文失敗でも意味先行保存を維持し、欠ける節を消して部分成功へしない。復唱/意味label/集合定型性が明白ならProduct ReadをMashへ戻さない。型/trace/試験数だけで新案を完了にしない。
+
+Rule18 §11.3 LEVEL_3（既説明scope外の意味採用・私有保持契約追加）。モデル選定前に本人明示不明/二行動を落とす現blockerを解消するための一案。複数ownerの実装/本文確認/旧互換/保存再開を一単位、所要は未実測で途中保存を行う。追加課金/Mash端末操作0。新Engine/runner/checker、通常application/公開API/DTO/RN/実DB/Render/実モデル/学習/merge/deployは範囲外。必要意味が一段でも落ちる、旧版再解釈、別仕組み追加やscope増加が必要なら止め、最小差分だけ既存ownerへ残す。

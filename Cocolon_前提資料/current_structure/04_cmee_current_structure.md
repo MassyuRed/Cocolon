@@ -1778,4 +1778,6 @@ Mashの「進めていいよ」を受け限定内部実装・必要検証まで�
 
 serviceの既存OPERATIONへ取得STARTED/RECEIVED/非採用を保存し、MEANING_UPDATEを本文前に保存。receipt/意味保存後の明示retryは同じ保存物から復旧。取得開始だけ残る場合は再取得せずHOLDでattemptを終了する。無更新もsnapshot検証を通す。新profileを通常serviceで更新せず、保存再読だけ可能。Q2/Q3 runtime、旧profile/旧pending、完成DTOの非再生成は維持。新profile履歴の別thread利用、Piece/Analysisの新admission、通常applicationは未接続。
 
+現adapter2は裸時点語/はのlexical範囲修復のみ。保存1/2は各版再現、もは元範囲/反復残件を維持する。本人不明/二行動の追加採用は設計01/05の提案で未実装。今回実構造差分なし。
+
 全owner/pathは01A末尾、[設計01の実装](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-p3-implemented)と[型05](../designs/cmee/v1/05_json_schema_and_versioning.md#cmee-p3-actual-schema)、[実行P3](../observation_learning/trials/2026-10-23-current-four/README.md#p3)が正本。新25/P1旧22/旧application54の対象101成功。旧広範囲Q1/Q3は多失敗で打切り、先頭失敗のみ旧HEAD再現。他の失敗の解決・全suite成功ではない。STRUCTURE_MAP_DELTA_PRESENT（内部owner1、private dataclass3）、限定TECHNICAL_CREDIT、product_credit=0／PRODUCT_NOT_CLEAR／正式0/3／automatic_progression=false。

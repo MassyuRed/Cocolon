@@ -2250,3 +2250,19 @@ Mashの「この限定範囲の内部実装へ進めてよろしいでしょう�
 P2 E02-0既存receiptを一度渡し、unknown/actions未対応を理由に全体UNSUPPORTED。E02-Bは実pendingなしN/A、P01-N/A02-P1は範囲外のまま。全件未対応だけで完了にせず、別の承認済み合成系列は実本文へ到達した。本文の時点語重複・定型性は残る。実出力・source blob・失敗・未対応は[trial P3](../observation_learning/trials/2026-10-23-current-four/README.md#p3)とsemantic_snapshot_results.jsonへ集約。技術詳細は既存設計01/02/05/06、全変更fileは01A、構造は全体01/current01/04、現在地00/観測・比較入口を同期した。
 
 実モデル/推論/重み/追加学習/課金/実DB/Render/公開API/DTO/RN/本番設定/merge/deploy0。M1比較の既承認は維持するが今回は開始0。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、product_credit=0／PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=false。次の一作業は、新profileが未対応として残したE02-0の本人不明/行動と既存native/作者責務の具体差分を詰めること。Piece/Analysisの一般否定/不明対象/負荷/複数補足/refined/IF/Saved、有料履歴と通常接続、本文品質は残件。9B認証・モデル最終選定を待つ理由へ戻さず、通常有効化/実モデル/DB/配備へ自動拡大もしない。
+
+##### K. 10/23後続 — 時点範囲の既存整合修復と本人不明/二行動の次案
+
+MashのCMEE内部準備継続指示。fresh Cocolon4a57f8/APIe5ca453、全機能00/作業規則/恒久incident/全体設計/全file地図/最新Jと実ownerを確認。System Context最新cacheなし/同timeout再試行STOPを維持、fresh原本を直接使用。Codex Work Mode、主担当が編集/統合/反映、補助は読取/少数helper比較。確認できないPro/Ultra正式審査を申告しない。
+
+今回のexact unitは新adapterの時点込みlexical範囲と作者のthread_time表示の不整合修復。OBSERVED_BLOCKER_MINIMAL_FIX、既承認内部範囲/Rule18 LEVEL_2相当。完了は旧全outcome再現＋新出力改善＋必要試験/保存。意味/主体/否定/修飾が落ちる・旧版再解釈・採用範囲増加なら止める。費用/Mash端末操作0。
+
+API変更はai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py、ai/tests/test_cmee_emlis_semantic_snapshot.py、新ai/tests/fixtures/cmee_emlis_semantic_adapter_v1.json、既存ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.mdのみ。FRESH adapter2、保存1/2を全original/prior/current plan/問い/再開で各版復元。裸時点語/はだけlexical範囲から分離、全claim/時点/根拠/程度/本当は/否定は保持。もは添加を担うので元範囲/反復残件を保持する。
+
+最終対象35 passed/FAIL0/SKIP0、21.49秒。元25＋新10。旧e5ca453で補修前に実採取した3系列の全outcome再現、新3、旧pending→新回答1、現在/当時/今も・程度/否定/本当は3。元25に隔離SQL/RPC保存/中断/三回答を含む。反復実行を加算せず、P1/旧application/広範囲旧失敗は今回再実行0。途中レビューの「も」脱落を最終前に修正した。
+
+実本文の差は「回答した時点では今は嬉しい」→「回答した時点では嬉しい」、「その時にその時は寂しかったことを」→「その時の寂しさを」。以前の説明を補正し、作者だけでなく新adapterとの範囲不整合が原因と記録。あの時も…の反復と一般自然さは未解消。未加工前後本文/原文/snapshot/source blobはtrial JSONのadapter_v2_correction、検証境界は[trial §8](../observation_learning/trials/2026-10-23-current-four/README.md)。商品合格ではない。
+
+JのE02-0残件も具体化。[共有01の次限定案](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-targeted-unknown-action-proposal)とschema05へ、本人不明statement/joy対象と二時点、同span二actionの明示対応、原格/省略主体/te節・concession/句点差、作者/逆検査、版/保存/完了/停止を一案として保存。新profile採用は未実装、既説明scope外の意味保持契約を追加するRule18 §11.3 LEVEL_3。既存初版修復の再承認待ちには戻さない。JOY_ASPECT新問/新要素自身の一般更新は含めず、実pendingなしをN/Aで保持する。
+
+STRUCTURE_MAP_DELTA_NONE（既存owner内の修復、private型/経路の実追加0、新fixtureは01Aへ登録）、限定TECHNICAL_CREDIT、product_credit=0/PRODUCT_NOT_CLEAR/正式0/3/candidate_ready=false/automatic_progression=false。外部推論/重み/学習/課金/実DB/Render/通常application/公開API/DTO/RN/merge/deploy0。次は追加採用範囲の判断後、本人不明/二行動を初回本文/保存再開と、実在pendingでの未変更素材保持へ一単位で実装する。

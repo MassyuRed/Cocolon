@@ -4447,7 +4447,8 @@ prefix `ai/services/ai_inference/`はmashos-api。新規production1／既存prod
 | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_answer_update.py` | 新profile prepare/updated planをsnapshot ownerへ渡し、旧経路は維持 |
 | `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_engine.py` | 保存snapshotのplan/作者/問いを同じ起点で利用 |
 | `ai/services/ai_inference/emlis_thread_service.py` | 明示offline DI、private候補段階/非採用保存、新旧checkpoint dispatch、保存再開、通常service mutation拒否 |
-| `ai/tests/test_cmee_emlis_semantic_snapshot.py`（新） | pure意味/実pending/改変拒否＋隔離Q2/Q3実SQL・中断再開25件 |
+| `ai/tests/test_cmee_emlis_semantic_snapshot.py` | pure意味/実pending/改変拒否＋隔離SQL/中断再開、adapter2補修後35対象 |
+| `ai/tests/fixtures/cmee_emlis_semantic_adapter_v1.json`（新） | 未変更e5ca453で補修前に実採取した合成3系列の旧snapshot/全outcome。保存1の非再解釈を検証 |
 | `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 実source・境界・残件を既存handoffへ追記 |
 | Cocolon `Cocolon_前提資料/observation_learning/trials/2026-10-23-current-four/semantic_snapshot_results.json`（新） | 4合成実本文、P2 E02-0未対応の一実検査、source blob・最終対象試験結果。新runnerではない |
 
