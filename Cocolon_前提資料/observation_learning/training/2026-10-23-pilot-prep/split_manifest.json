@@ -1,0 +1,202 @@
+{
+  "schema": "cocolon_observation_pilot_split.v1",
+  "status": "PREPARATION_ONLY_NOT_TRAINED",
+  "source_commit": "63064b12ec985eb3c3c24d69964b3a92dbab954c",
+  "source_index": {
+    "path": "Cocolon_前提資料/observation_learning/model_selection/2026-10-22-three-core/case_index.json",
+    "blob_sha": "7fc490883caaa95d7e7ecbf976cc470afe119076"
+  },
+  "training_candidate_families": [
+    {
+      "family": "observation-exhibition",
+      "source_session": "OBS-20261020-001",
+      "rows": 3
+    },
+    {
+      "family": "observation-travel",
+      "source_session": "OBS-20261022-001",
+      "rows": 5,
+      "note": "関連する予定・対人調整構造の偏りを保持。異なる題材だけで一般化を証明しない。"
+    },
+    {
+      "family": "observation-daily-udon",
+      "source_session": "OBS-20261022-002",
+      "rows": 1
+    },
+    {
+      "family": "observation-book-return",
+      "source_session": "OBS-20261022-003",
+      "rows": 3
+    },
+    {
+      "family": "supplement-music-tone",
+      "author": "Karen",
+      "rows": 1
+    },
+    {
+      "family": "supplement-knit",
+      "author": "Karen",
+      "rows": 2,
+      "note": "unknown/withdrawalは同じ題材の枝"
+    },
+    {
+      "family": "supplement-repot",
+      "author": "Karen",
+      "rows": 1
+    }
+  ],
+  "existing_evaluation_assignments": [
+    {
+      "case_id": "E01-0",
+      "family": "desk-space",
+      "original_split": "heldout_candidate",
+      "current_role": "UNUSED_EVALUATION_CANDIDATE",
+      "model_input_used_for_training_in_this_prep": false
+    },
+    {
+      "case_id": "E02-0",
+      "family": "junior-explanation",
+      "original_split": "heldout_candidate",
+      "current_role": "DEVELOPMENT_DIAGNOSTIC",
+      "model_input_used_for_training_in_this_prep": false
+    },
+    {
+      "case_id": "E02-A",
+      "family": "junior-explanation",
+      "original_split": "heldout_candidate",
+      "current_role": "DEVELOPMENT_DIAGNOSTIC",
+      "model_input_used_for_training_in_this_prep": false
+    },
+    {
+      "case_id": "E02-B",
+      "family": "junior-explanation",
+      "original_split": "heldout_candidate",
+      "current_role": "DEVELOPMENT_DIAGNOSTIC",
+      "model_input_used_for_training_in_this_prep": false
+    },
+    {
+      "case_id": "E02-C",
+      "family": "junior-explanation",
+      "original_split": "heldout_candidate",
+      "current_role": "DEVELOPMENT_DIAGNOSTIC",
+      "model_input_used_for_training_in_this_prep": false
+    },
+    {
+      "case_id": "E02-W",
+      "family": "junior-explanation",
+      "original_split": "heldout_candidate",
+      "current_role": "DEVELOPMENT_DIAGNOSTIC",
+      "model_input_used_for_training_in_this_prep": false
+    },
+    {
+      "case_id": "E03-0",
+      "family": "yesterday-today-request",
+      "original_split": "heldout_candidate",
+      "current_role": "UNUSED_EVALUATION_CANDIDATE",
+      "model_input_used_for_training_in_this_prep": false
+    },
+    {
+      "case_id": "E02-PLUS",
+      "family": "junior-explanation",
+      "original_split": "heldout_candidate",
+      "current_role": "DEVELOPMENT_DIAGNOSTIC",
+      "model_input_used_for_training_in_this_prep": false
+    },
+    {
+      "case_id": "E02-PREMIUM",
+      "family": "junior-explanation",
+      "original_split": "heldout_candidate",
+      "current_role": "DEVELOPMENT_DIAGNOSTIC",
+      "model_input_used_for_training_in_this_prep": false
+    },
+    {
+      "case_id": "P01-N",
+      "family": "helping-colleague",
+      "original_split": "heldout_candidate",
+      "current_role": "DEVELOPMENT_DIAGNOSTIC",
+      "model_input_used_for_training_in_this_prep": false
+    },
+    {
+      "case_id": "P01-R",
+      "family": "helping-colleague",
+      "original_split": "heldout_candidate",
+      "current_role": "DEVELOPMENT_DIAGNOSTIC",
+      "model_input_used_for_training_in_this_prep": false
+    },
+    {
+      "case_id": "A01-P0",
+      "family": "schedule-consultation",
+      "original_split": "known_derived_transfer",
+      "current_role": "KNOWN_DERIVED_OR_BOUNDARY",
+      "model_input_used_for_training_in_this_prep": false
+    },
+    {
+      "case_id": "A01-P1",
+      "family": "schedule-consultation",
+      "original_split": "known_derived_transfer",
+      "current_role": "KNOWN_DERIVED_OR_BOUNDARY",
+      "model_input_used_for_training_in_this_prep": false
+    },
+    {
+      "case_id": "A01-C",
+      "family": "schedule-consultation",
+      "original_split": "known_derived_transfer",
+      "current_role": "KNOWN_DERIVED_OR_BOUNDARY",
+      "model_input_used_for_training_in_this_prep": false
+    },
+    {
+      "case_id": "A01-IF",
+      "family": "schedule-consultation",
+      "original_split": "known_derived_transfer",
+      "current_role": "KNOWN_DERIVED_OR_BOUNDARY",
+      "model_input_used_for_training_in_this_prep": false
+    },
+    {
+      "case_id": "A02-P0",
+      "family": "explicit-roles-information",
+      "original_split": "heldout_candidate",
+      "current_role": "DEVELOPMENT_DIAGNOSTIC",
+      "model_input_used_for_training_in_this_prep": false
+    },
+    {
+      "case_id": "A02-P1",
+      "family": "explicit-roles-information",
+      "original_split": "heldout_candidate",
+      "current_role": "DEVELOPMENT_DIAGNOSTIC",
+      "model_input_used_for_training_in_this_prep": false
+    },
+    {
+      "case_id": "A02-C",
+      "family": "explicit-roles-information",
+      "original_split": "heldout_candidate",
+      "current_role": "DEVELOPMENT_DIAGNOSTIC",
+      "model_input_used_for_training_in_this_prep": false
+    },
+    {
+      "case_id": "A03-SPARSE",
+      "family": "desk-space",
+      "original_split": "heldout_candidate",
+      "current_role": "UNUSED_EVALUATION_CANDIDATE",
+      "model_input_used_for_training_in_this_prep": false
+    },
+    {
+      "case_id": "A04-TWO-ANSWERS",
+      "family": "schedule-consultation",
+      "original_split": "boundary_only",
+      "current_role": "KNOWN_DERIVED_OR_BOUNDARY",
+      "model_input_used_for_training_in_this_prep": false
+    }
+  ],
+  "limits": [
+    "全familyとも実際の学習未実施。学習候補の用途を記録したもの。",
+    "M1出力の欠陥を踏まえて教材を選んだ3familyは開発確認。盲検の最終評価ではない。",
+    "未使用候補は2family/3場面で、Piece・期間Analysis等の独立評価が不足。",
+    "今後手本/学習へ使う場合、そのfamilyの全枝を未知評価から外す。",
+    "事前学習データへの未出は保証しない。同じ話の名詞置換で独立例を増やさない。"
+  ],
+  "gpu_started": false,
+  "fine_tuning_performed": false,
+  "cmee_integration_performed": false,
+  "automatic_progression": false
+}
+

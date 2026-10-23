@@ -2,7 +2,7 @@
 
 作成：2026-10-22 JST／華恋。10/23現在：**P1〜P5の限定内部準備を維持。[Runpod 9B M1](../../trials/2026-10-23-qwen9b-m1/README.md)は4件取得・全本文診断まで完了。出力に重大不足があり、P6統合・追加学習は未実施。**
 
-**現在の再開先は[latest weekly R](../../../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-qwen9b-runpod-m1-results)と[Runpod M1実結果](../../trials/2026-10-23-qwen9b-m1/README.md)。** 以下の日付付き内部実装記録と旧API案は履歴。Emlis profile2・Piece P4・Analysis P5の限定offline実装を維持し、M1の実出力をそのまま商品合格へ昇格しない。
+**現在の再開先は[最新weekly S](../../../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-observation-training-prep)と[追加学習用教材16候補](../../training/2026-10-23-pilot-prep/README.md)。** M1実出力4件の重大不足を受け、Mashの指示で既存観測会の整形・不足例の補充まで実施。学習実行・改善評価・P6統合は未実施。下記の20fixture／採点guide／M1原出力は変更せず、学習用messagesへ転用していない。既知派生5場面、開発確認12場面、未使用評価候補3場面の区別は教材のsplit_manifestへ保存。以下の内部実装記録と旧API案は履歴で、Emlis profile2・Piece P4・Analysis P5を維持する。
 
 10/22にMashの「わかった、作って」により、具体的な入力・作らせる結果・比較方法を作成した。学習済AI＋CMEE接続は既決。本書で提案する責務の詳細、試験条件、候補の採用は、製品実装・契約変更・商品合格として確定しない。10/22作成時点は推論・GPU起動・追加学習・課金資源取得・API/DB/配置・本番設定の変更0。10/23のC0実行と後続承認は下記へ区別して記す。
 

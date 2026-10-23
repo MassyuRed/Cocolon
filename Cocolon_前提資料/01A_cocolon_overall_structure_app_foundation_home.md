@@ -4528,3 +4528,16 @@ Cocolon側の新analysis_semantic_snapshot_results.jsonは全private完成state�
 | Cocolon_前提資料/observation_learning/trials/2026-10-23-qwen9b-m1/README.md（新） | 入力原本照合、技術取得4/4と本文診断の分離、全4場面の具体的な補完・欠落、GPU課金／停止未確認、次のP6境界 |
 
 全機能00・小型再選定／比較入口・latest weekly Rへ結果導線を同期。既存C0/P1〜P5実装・期待・出力とAPI sourceは変更0。STRUCTURE_MAP_DELTA_NONE（資料所在のみ。runtime owner／型／接続／公開契約の実変更なし）。
+
+## 2026-10-23 — 追加学習用教材の所在（runtime構造差分なし）
+
+新規4fileは `Cocolon_前提資料/observation_learning/training/2026-10-23-pilot-prep/` に配置。
+
+| file | 実責務 |
+|---|---|
+| README.md | 16部分課題の由来、可視範囲、採らなかった補完、確認結果・不足・次作業。追加学習や完成応答の合格ではない |
+| sft_candidates.jsonl | messagesと出典。Mash原文問い9／華恋編集3／華恋架空補充4を区別し、本人sourceの未来回答を混ぜない |
+| teaching_reference.jsonl | Mash教示5件の逐語参照。一般原則・自己点検・仮定の読み分けを区別し、SFT本文へ混ぜない |
+| split_manifest.json | 学習候補の題材と、既存20場面の既知派生／開発確認／未使用評価候補の区分。元fixture・guideを変更しない |
+
+全機能00・観測教材入口・モデル比較入口・latest weekly Sへ同期。元観測記録／実演／M1 raw・API source・CMEE P1〜P5は不変。STRUCTURE_MAP_DELTA_NONE（教材資料の所在のみ。runtime owner／型／接続／公開契約変更0）、実学習・GPU起動・課金0。

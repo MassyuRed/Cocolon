@@ -2378,3 +2378,22 @@ Mashが画面でA40 48GB/GPU単価$0.59/h、Container50GB＋Volume50GB /workspac
 C0/P1〜P5の結果・期待は変更0、再生成0。P6/M2は保存raw候補と現admission／private意味型を照合し、根拠外補完・欠落を採用しないoffline評価で、今回未着手。モデル出力の手修正をモデル成功へ変えない。追加推論・再試行・他モデル・追加学習・通常アプリ接続／本番host決定・Render／Supabase／API／DTO／RN／product source／merge／deployは0。
 
 Rule18 LEVEL_1の受領・既存試験記録同期。華恋が統合・反映、補助は読取のみ。primary=TECHNICAL_CREDIT（M1の実取得のみ）、product_credit=0／PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=false。STRUCTURE_MAP_DELTA_NONE（資料所在だけ登録、製品runtime／型／接続差分なし）。現在地00、全file地図01A、比較入口／小型再選定、本weekly、trial原本／READMEを同一変更単位で保存する。
+
+<a id="20261023-observation-training-prep"></a>
+## S. 2026-10-23 — Mash承認による既存観測教材の追加学習用整形
+
+Mashから9B試験PodのStop完了報告を受領。その後「小さな追加学習」の教材準備について、既存記録を学習用に整え、不足例だけ追加する説明へ「進めて」を受領した。今回のscopeは教材準備で、GPU再起動・追加課金・学習実行・製品契約の変更ではない。先ほどの提案時点では量・方法・費用は未具体化だったことも保持する。
+
+原本はCocolon PR30@63064b12ec985eb3c3c24d69964b3a92dbab954c。全機能00、全体設計01／全file地図01A、current maps、最新R、観測4回の対話・ノート、既存比較fixtureを確認した。System Contextは既知の索引timeoutに対して再試行せず、fresh原本の直接読取。主担当はCodex Work Modeの華恋、2分担担当は原文抽出・読取レビュー。正式なPro/Ultra独立審査やhuman Product Readを偽って申告しない。
+
+[新教材owner](../observation_learning/training/2026-10-23-pilot-prep/README.md)に部分課題候補16件を作成した。内訳はMashの原文問い9、既存sourceに基づく華恋編集3、華恋作成の架空補充4（曲の音／編み物unknown・撤回枝／植え替え）。後二者をMash実演へ昇格せず、教示5件は参照JSONLへ分離した。出典のblob・D番号・scalar引用とその時点の可視入力を束縛。観測会の多問を製品の質問上限へ転用しない。元の対話・ノート・お手本、比較20fixture・guide・M1 rawは変更0。
+
+元実演にある未確認前提・仮説を全て正解として学習しない。展示会D03の「相手のやりたいことは叶う」、D07の情報不足な人物解釈、D09の「率先して」を継承しない。旅行D11の後からの振返りを初回仮説へ置かず、D13/D17の仮定を実回答へしない。夕食の未明示の動機・身体状態を除く編集は華恋案として明示。本返却の週末・無連絡・影響懸念は各回答以降だけ使う。レビューで二人の「合わせる」を一方的な同調へ狭めないこと、過去の面倒さ、理由が記録にないことと本人の理由未確定の区別を修正した。
+
+一回限りのデータ検査は16行JSON／ID／messages役割、Mash target9件、source/target引用53件、教示引用5件、原本blob、未来D混入、既存評価messagesとの直接一致0、family割当を確認した。保存時にsourceコピー末尾へ付いたLF1byteはGitHub実blobへ一致するよう修正してから生成。新checker／runner／CIは追加しない。機械構文・出典一致と、観測／自然さ／一般化の品質を混同しない。
+
+split_manifestは全20場面を、既知派生・境界5（A01/A04）、既にM1を見た開発確認12（E02/P01/A02の3family）、未使用評価候補3（E01/A03のdesk-spaceとE03の2family）へ区別した。枝・plan違い・同じ話の名詞置換を独立未知例へ数えず、今後学習へ使うfamilyは未知評価から全枝を除く。未使用の2familyだけではPiece・期間Analysis等の独立評価が不足する。
+
+現在の16件には問い9件という偏りがあり、本人への自然な完成応答、実回答に基づく高品質な読みの修正、Piece/Analysis/IF等の完成教材が不足する。この量で9Bが改善するとは未判断。次は採用行・学習方法・量・時間／費用上限・未使用事例での三中核比較・打切りを具体化し、際限のない教材蓄積や管理systemへ逸れない。今回の承認から実学習を自動開始しない。
+
+教材4fileと既存入口／全機能00／全file地図01A／本weeklyを同期。STRUCTURE_MAP_DELTA_NONE（教材所在のみ、runtime owner／型／接続／商品contract差分なし）。M1品質不足、P1〜P5限定実装、P6本統合未着手を維持。追加推論／GPU起動／学習／Render／DB／API／RN／merge／deploy0、商品改善credit0／PRODUCT_NOT_CLEAR／candidate_ready=false／automatic_progression=false。停止はMash報告で、管理画面の独立確認・実総消費の照会はしていない。
