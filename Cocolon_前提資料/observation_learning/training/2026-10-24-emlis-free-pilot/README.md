@@ -1,6 +1,6 @@
 # Emlis Free：初回・一回答後の完成応答案による小規模学習準備
 
-2026-10-24 JST／華恋／Codex Work Mode。状態：**教師案9件・比較入力6件を準備。モデル実行・学習は未実施。実行手順とtoken／VRAM・費用の確認は未完。**
+2026-10-24 JST／華恋／Codex Work Mode。状態：**教師案9件・比較入力6件とprepare／runの2段階コマンドを準備。Runpod実環境のprepare・GPU実行・学習・品質評価は未実施。**
 
 Mashの「で？どないすんの、これ。」を受け、既承認の教材整形・不足の補充として作成した。次の観測会をMashへ依頼する代わりに、今回の入力への観測・人間的な受け取り・任意一問・一回答後の更新が揃う応答案を華恋が作る。原18候補・教示5参照・原対話は変更しない。取り下げた読書会の題材は使わない。
 
@@ -28,7 +28,9 @@ Mashの「で？どないすんの、これ。」を受け、既承認の教材�
 | train_messages.jsonl | 同じ9行のmessagesだけを抽出した学習入力候補。原18件を一緒に連結しない |
 | eval_inputs.jsonl | 学習に使わない6題材の入力。モデルへ渡すのは各行のmessagesだけ |
 | eval_review.jsonl | 6入力の意味・自然さの確認点。モデルprompt・学習データへ含めない。唯一の模範文は置かない |
-| experiment.json | 対象範囲・件数・固定モデル・学習方法案・未確認・比較条件・実行状態 |
+| experiment.json | 対象範囲・件数・固定モデル・実装した学習設定・未確認・比較条件・実行状態 |
+| runpod.sh | 固定commitの教材取得、既存Torchを維持する別venv、prepare／runの入口、run処理の時間制限 |
+| run_pilot.py | 教材照合・CPU token／label確認、学習前6回答・9教材1epoch・学習後6回答、adapterとraw保存 |
 
 出力は[既存モデル比較](../../model_selection/2026-10-22-three-core/task_inputs.jsonl)のEmlis用6欄（observation／reception／question／update_note／grounded_points／unknowns）を使う。これは比較試験のtask cardへの投影であり、公開API／DTO／実CMEEの新schema・意味採用・保存成功ではない。本文をアプリへ配置していない。
 
@@ -62,19 +64,44 @@ Mashの「で？どないすんの、これ。」を受け、既承認の教材�
 
 同じ固定モデル・同じ6入力・同じ非thinking／温度0等で学習前後を比較し、rawを別保存する。JSON形だけで合格にせず、理由の創作・主体反転・否定／不明／時点の欠落・訂正の復活が減ったか、受け取りが自然かを全本文で読む。学習した9件の再現だけ、定型句の増加だけでは成功にしない。
 
-## 5. 学習方法案と、実行前に残る作業
+## 5. 実装した限定学習設定
 
-同じ `Qwen/Qwen3.5-9B@c202236235762e1c871ad0ccb60c8ee5ba337b9a` へのLoRAを候補とする。固定configのrootは `Qwen3_5ForConditionalGeneration`。テキストのみのrequestを使い、vision・埋め込み・lm_headを凍結し、実際のtext language_model内の対象moduleを確認してadapterだけを学習する案。genericなQwen3 causal classへ置き換えない。r8／alpha16／batch1／checkpointing／最大1epochは今回の提案で、実検証済みの実行設定ではない。
+同じ `Qwen/Qwen3.5-9B@c202236235762e1c871ad0ccb60c8ee5ba337b9a` を、`Qwen3_5ForConditionalGeneration` で読み込む。BF16、テキストのself_attn q_proj／v_proj計16moduleだけへのPEFT LoRA（r8／alpha16／dropout0／biasなし）。vision・embedding・lm_head・MTPとその他のbase重みは凍結する。batch1、学習率1e-4、weight decay0、checkpointing、cacheなし、1epoch＝9step。保存はadapterだけ。未検証のGPU設定を、既に完走した設定とは扱わない。
 
-最終assistantだけにlossを掛け、system・user・過去の問い・paddingを対象から外す。固定tokenizerとchat templateで全9件・評価6件のtoken数、prompt/fullのprefix一致、label範囲をCPU上で確認する。長い例を無断で切らない。
+最終assistantだけにlossを掛ける。promptとfullのtoken prefixが一致することを確認し、system・user・過去の問いは-100とする。paddingは使用しない。2048tokenを超える教材や、評価prompt＋1024出力枠が2048を超える場合は切り捨てず中止する。学習前後ともTransformersの同じgreedy生成経路・固定template・非thinking・最大1024tokenを使う。vLLMとの生成経路差を学習効果へ混ぜない。
 
-次に華恋が行う作業は、そのCPU確認、依存version・実moduleとkernelの固定、同条件の学習前後比較手順、GPU利用の上限時間／金額と停止担当を具体化すること。**現時点では実行手順を検証できておらず、GPUを起動する段階ではない。** A40 48GBのVRAM・実時間・現在の料金は未測定／未照会。以前の画面単価$0.59/hを現在価格や完走費用の保証へ流用しない。追加学習の効果は未確認で、9件・1回で不可能／実用を断定しない。
+直接依存はtransformers 5.19.0／peft 0.21.2／accelerate 1.15.0／safetensors 0.8.0。前回の `/workspace/cocolon9b/.venv` があれば、そのTorch／CUDA環境を再利用し、今回の別venvへ上記4packageを入れる。親venvのsite-packagesを明示して既存Torchの差し替えを防ぎ、解決済みpackage一覧を保存する。既存HF cacheを検索し、固定checkpointの重複ダウンロードを避ける。Qwen3.5の任意高速kernelを新たに導入する手順にはしていないため、fallbackの速度・VRAMは実GPUで未確認。
+
+## 6. Runpodでの2段階の実行
+
+A40 48GBのPodのJupyterLab Terminalで実行する想定。まずこのfolderの `runpod.sh` を固定commitのraw URLから `/workspace/cocolon_pilot.sh` へ取得し、同じcommitを環境変数 `COCOLON_SOURCE_COMMIT` に指定して `bash /workspace/cocolon_pilot.sh prepare` を実行する。会話で渡すコマンドには実commit SHAを埋める。branch追従のlatest取得にはしない。
+
+prepareは4教材fileのSHA256／件数／Freeの可視範囲・問い残数／評価family分離、固定config・重みindexの16対象、importと4package版、固定tokenizerでのprefix・loss範囲・token数を確認する。モデル重みのダウンロード・modelのGPU配置・推論・学習は行わない。CPU確認でもPodが起動していれば通常の課金は続く。
+
+`準備確認OK（モデル重み・GPU学習はまだ読み込んでいません）` が出た後、次の1行で進める。
+
+```bash
+bash /workspace/cocolon_pilot.sh run
+```
+
+runは同じprepare確認を繰り返し、CUDA／BF16・全40GiB以上かつ空き32GiB以上を確認してから、**学習前6回答 → 9教材を1epoch → 学習後6回答**を実行する。既存vLLM等を勝手に終了せず、VRAM不足やmodule差異・非有限lossで中止する。自動再試行・予算拡張はしない。
+
+run処理はmodel取得も含め3600秒で終了要求、さらに30秒で強制終了する。この制限にはprepareのinstall時間・Pod全体の稼働時間を含まない。**Podは自動Stopされないため、完了・失敗・時間切れのいずれでもMashがRunpod管理画面でStopする。** A40実VRAM・所要時間・現在単価・合計費用は未測定／未照会。以前の$0.59/hを現在価格や完走費用の保証へ流用しない。
+
+作業先は `/workspace/cocolon_emlis_free_20261024`。prepare結果は `preflight.json`、package一覧は `resolved-packages.txt`。各runは固有の `results/<UTC日時>-<ID>/` へ `run.json`・`before.jsonl`・`after.jsonl`・`training.jsonl`・`adapter/` を保存する。成功時に入力・学習前後raw・学習log・実行metadataをまとめた `pilot_results.json` と、取得しやすい `/workspace/cocolon_emlis_free_20261024/latest_results.json` を作る。JSON解析失敗を自動修正せず、そのまま残す。失敗時は途中までの個別rawとrun.jsonを確認する。実行完了は品質合格を意味しない。
+
+## 7. 今回実際に検証した範囲
+
+ローカルではPython構文・bash構文、実教材のhash／9件・6件、loss maskの境界・prefix不一致・空target・超過・教材改変時の停止、JSON未修正、16module限定を確認した。別venvから親venvを参照できることと、子venvのpackageが優先することを小さな実venvで確認した。
+
+ローカルにはTorch／Transformers／PEFTがないため、固定tokenizerによる実token数・model classの実import・GPU読込・学習・完走は未検証。これをprepare済み／学習済みと記録しない。現在は **COMMANDS_PREPARED_RUNPOD_PREFLIGHT_AND_GPU_UNVERIFIED**。9件・1回で追加学習全体の可否やCocolonの商品品質を断定しない。
 
 公式原典：
 - [Qwen3.5モデルクラス・テキスト利用・kernel注意](https://huggingface.co/docs/transformers/en/model_doc/qwen3_5)
 - [固定checkpointのconfig](https://huggingface.co/Qwen/Qwen3.5-9B/blob/c202236235762e1c871ad0ccb60c8ee5ba337b9a/config.json)
+- [固定checkpointの重みindex](https://huggingface.co/Qwen/Qwen3.5-9B/blob/c202236235762e1c871ad0ccb60c8ee5ba337b9a/model.safetensors.index.json)
 - [PEFT LoRA](https://huggingface.co/docs/peft/en/package_reference/lora)
-- [SFTとcompletionの学習範囲](https://huggingface.co/docs/trl/en/sft_trainer)
 - [固定chat template](https://huggingface.co/Qwen/Qwen3.5-9B/blob/c202236235762e1c871ad0ccb60c8ee5ba337b9a/chat_template.jinja)
+- [Transformers 5.19.0](https://pypi.org/project/transformers/5.19.0/)・[PEFT 0.21.2](https://pypi.org/project/peft/0.21.2/)・[Accelerate 1.15.0](https://pypi.org/project/accelerate/1.15.0/)・[Safetensors 0.8.0](https://pypi.org/project/safetensors/0.8.0/)
 
-GPU起動・追加推論・実学習・課金・DB・Render・API/RN・merge/deployは0。実モデルはまだ一応答も取得していない。STRUCTURE_MAP_DELTA_NONE：教材資料のみでruntime owner・型・接続・商品契約の変更なし。
+今回の準備作業でGPU起動・追加推論・実学習・課金・DB・Render・API/RN・merge/deployは0。実モデルの新規応答はまだ取得していない。STRUCTURE_MAP_DELTA_NONE：offline比較用の実験scriptのみでruntime owner・型・接続・商品契約の変更なし。

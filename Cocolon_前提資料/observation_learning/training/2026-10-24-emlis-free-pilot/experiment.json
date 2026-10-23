@@ -1,6 +1,6 @@
 {
   "schema": "cocolon_emlis_free_sft_pilot_proposal.v1",
-  "status": "DATA_PREPARED_EXECUTION_NOT_READY",
+  "status": "COMMANDS_PREPARED_RUNPOD_PREFLIGHT_AND_GPU_UNVERIFIED",
   "prepared_at": "2026-10-24 JST",
   "author": "Karen / Codex Work Mode",
   "scope": {
@@ -61,22 +61,30 @@
     "use_cache": false,
     "max_epochs": 1,
     "loss": "final assistant completion only",
-    "training_target": "actual text language_model Linear modules; vision/embedding/lm_head frozen",
+    "training_target": "exact 16 text self_attn q_proj/v_proj modules at layers 3,7,11,15,19,23,27,31; all other base weights frozen",
     "save": "adapter only",
-    "status": "PROPOSAL_NOT_IMPLEMENTED_OR_VALIDATED"
+    "status": "IMPLEMENTED_GPU_NOT_VALIDATED",
+    "learning_rate": 0.0001,
+    "weight_decay": 0,
+    "dropout": 0,
+    "steps": 9,
+    "max_context_tokens": 2048,
+    "silent_truncation": false
   },
   "unresolved_before_gpu": [
-    "固定checkpointのtokenizerで9件・6評価のtoken数をCPU上で計測し、chat-template prefixと最終assistant loss範囲を確認する。無断切捨てをしない。",
-    "対応Transformers/PEFTとQwen3.5の実module名・利用kernelを確認し、固定する。generic Qwen3 causal classへ取り違えない。",
-    "同じmodel revision・入力・chat template・非thinking・温度0の学習前後比較手順を用意する。M1とは入力が違うため直接勝敗へしない。",
-    "A40 48GBでの実VRAM・時間は未測定。実行手順とGPU利用の上限時間／金額・停止担当を具体化してから有料実行の承認対象とする。"
+    "Runpod prepareで固定tokenizerの実token数・prefix・最終assistant label、4packageの実importと版を確認する。ローカルのstub検査を実token計測へ昇格しない。",
+    "A40でのVRAM・時間と任意高速kernelなしの挙動は未検証。現在単価・合計費用は未照会。runの制限は3600秒＋kill猶予30秒で、prepareやPod全稼働の課金上限ではない。",
+    "実modelの16対象と実trainable範囲をrun内で再照合し、学習前後rawを取得する。現在は実学習・実比較未実施。"
   ],
   "comparison": {
     "pre_and_post_same_input": true,
     "temperature": 0,
     "train_on_eval": false,
     "save_raw_outputs_separately": true,
-    "semantic_review": "evaluate all 6 actual responses for groundedness, source revision, unknown/time/actor and human reception; no JSON-only PASS"
+    "semantic_review": "evaluate all 6 actual responses for groundedness, source revision, unknown/time/actor and human reception; no JSON-only PASS",
+    "generation_engine": "Transformers same before/after",
+    "do_sample": false,
+    "max_new_tokens": 1024
   },
   "decision": {
     "positive_signal": "複数の学習外題材で根拠外の理由・主体反転・訂正の復活が減り、自然な受け取りが悪化しない。",
@@ -91,7 +99,29 @@
     "https://huggingface.co/Qwen/Qwen3.5-9B/blob/c202236235762e1c871ad0ccb60c8ee5ba337b9a/config.json",
     "https://huggingface.co/docs/transformers/en/model_doc/qwen3_5",
     "https://huggingface.co/docs/peft/en/package_reference/lora",
-    "https://huggingface.co/docs/trl/en/sft_trainer",
-    "https://huggingface.co/Qwen/Qwen3.5-9B/blob/c202236235762e1c871ad0ccb60c8ee5ba337b9a/chat_template.jinja"
-  ]
+    "https://huggingface.co/Qwen/Qwen3.5-9B/blob/c202236235762e1c871ad0ccb60c8ee5ba337b9a/chat_template.jinja",
+    "https://huggingface.co/Qwen/Qwen3.5-9B/blob/c202236235762e1c871ad0ccb60c8ee5ba337b9a/model.safetensors.index.json"
+  ],
+  "execution": {
+    "entry": "runpod.sh",
+    "runner": "run_pilot.py",
+    "source": "fixed Git commit from COCOLON_SOURCE_COMMIT",
+    "prepare": "separate venv reusing unchanged existing Torch/CUDA; hashes/imports/config/index/tokenizer/label checks only; no model weights or GPU inference/training",
+    "run": "same 6 baseline -> 9 training steps -> same 6 after",
+    "direct_pins": {
+      "transformers": "5.19.0",
+      "peft": "0.21.2",
+      "accelerate": "1.15.0",
+      "safetensors": "0.8.0"
+    },
+    "timeout_seconds": 3600,
+    "kill_after_seconds": 30,
+    "timeout_scope": "run process only; preparation and Pod billing excluded",
+    "automatically_stops_pod": false,
+    "pod_stop_owner": "Mash via Runpod console after success/failure/timeout",
+    "result": "/workspace/cocolon_emlis_free_20261024/latest_results.json",
+    "local_verification": "syntax, data hashes and roles, loss-mask and stopping tests, text-only target set, real venv path precedence",
+    "runpod_prepare_performed": false,
+    "gpu_execution_validated": false
+  }
 }

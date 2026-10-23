@@ -4576,3 +4576,14 @@ Cocolon側の新analysis_semantic_snapshot_results.jsonは全private完成state�
 | experiment.json | 範囲・件数・固定model・方法案・実行未準備の残件・比較と打切りの考え方 |
 
 全機能00・教材入口・原18候補のREADME・latest weekly Wへ同期。原18候補・教示5参照・原対話・旧20評価fixtureは不変。既存比較用のEmlis6欄への教材投影で、公開API／DTO／実CMEEの新型・採用・保存ではない。STRUCTURE_MAP_DELTA_NONE（教材所在のみ）。GPU・モデル実行・学習・課金0。
+
+## 2026-10-24 — Free小規模学習のRunpod実行script（製品runtime差分なし）
+
+以下2fileを `Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-free-pilot/` へ追加する。
+
+| file | 実責務 |
+|---|---|
+| runpod.sh | 固定commitの教材・runner取得、既存Torch／CUDAを維持する別venv、既存HF cache再利用、prepare／run入口、runの3600秒＋30秒制限。Pod自動Stopはしない |
+| run_pilot.py | 4dataset hash・Free範囲・固定config／index・token／lossのpreflight、固定text q/v16moduleへの9step LoRA、同6入力の前後rawとadapter／比較JSON保存。prepareは重みを読まない |
+
+同folder README.md／experiment.jsonは実装設定・未確認・手順を更新。全体現在地00・教材入口・latest weekly Xへ同期。ローカル構文・データ／loss検査とvenv参照は確認、Runpod実tokenizer・import・GPU完走は未検証。今回の4datasetは不変。STRUCTURE_MAP_DELTA_NONE（offline実験scriptのみ。製品runtime owner／型／接続／公開契約の変更なし）。GPU・モデル実行・学習・課金0。

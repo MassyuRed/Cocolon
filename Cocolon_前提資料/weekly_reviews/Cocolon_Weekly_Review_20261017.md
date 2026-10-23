@@ -2499,3 +2499,16 @@ Mashの「で？どないすんの、これ。」を受け、観測会の再依�
 学習外6件は作者が読んだ比較問題であり盲検の最終評価ではない。根拠外の理由・主体・不明・否定・時点・数量訂正・問い選択と自然な受け取りを本文で比較する。原18候補・教示5参照・原対話・旧20評価fixture・M1 rawは不変。独立27教材とは数えず、取り下げた第7回も使わない。
 
 方法は同じ固定9BへのBF16 LoRA案。公式の固定config・model docs・PEFT／SFT／chat templateを参照したが、rootはQwen3_5ForConditionalGenerationで、実module・依存とkernel・token／label・A40実VRAM／時間は未検証。今回の状態はDATA_PREPARED_EXECUTION_NOT_READY。次の具体作業はCPU token／prefix／completion label確認と、実行手順・現在単価・上限時間／費用・停止担当の具体化。GPU起動・追加モデル推論・実学習・課金・DB・Render・API/RN・merge/deploy0。STRUCTURE_MAP_DELTA_NONE（教材資料のみ）、商品品質・学習効果は未成立。
+
+<a id="20261024-emlis-free-pilot-commands"></a>
+## X. 2026-10-24 — Runpod用prepare／runコマンドの保存（実GPU未検証）
+
+Mashの「試すのはさっきと一緒のやり方？」「コマンドは？」を受け、[Free pack](../observation_learning/training/2026-10-24-emlis-free-pilot/README.md)へrunpod.sh・run_pilot.pyを追加した。A40のJupyterLab Terminalで固定commitを取得し、prepareが成功してからrunを行う。実装は前後ともTransformersの同じ経路で、固定Qwen3.5-9B／非thinking／greedy／最大1024token、学習外6回答→教師9行を1epoch→同じ6回答。vLLMの前回4回答との直接勝敗にはしない。
+
+prepareは既存Torch／CUDAを再利用する別venv、直接4packageの固定、4file hash、9／6件とFree可視範囲・family分離、固定config／indexのtext q/v16module、tokenizer prefix／最終assistant loss／2048枠を確認する。重み取得・GPU配置・推論・学習はしない。親venv参照用.pthを明示し、前回のHF cacheも検索する。実token数やimportはユーザーのRunpod prepareで初めて確定する。
+
+runはBF16・全40GiB／空き32GiB以上を確認し、text q/v16対象だけのLoRA r8／alpha16／dropout0／batch1／学習率1e-4／9step、その他のbaseとvision・MTPは凍結。最終assistantだけにloss、超過は切捨てず停止。adapterと学習前後raw、比較用latest_results.jsonを保存し、JSON失敗を修復して隠さない。既存プロセス終了・自動再試行・追加実験・予算拡張を行わない。
+
+run処理は3600秒で終了要求、30秒後に強制終了。prepareのinstallやPod全稼働時間を含む課金上限ではない。Podは自動Stopされず、完了／失敗／時間切れ後にMashが管理画面からStopする。現在単価・実VRAM・時間・合計費用は未確認で、以前の$0.59/hを保証へ流用しない。
+
+実施したローカル確認はPython／bash構文、実教材hash／件数・役割、loss maskと異常停止、16対象限定、JSON非修復、実venvで親参照と子package優先。Torch／Transformers／PEFTがローカルにないため、実tokenizer・実model import・GPU学習・完走は未検証。状態をCOMMANDS_PREPARED_RUNPOD_PREFLIGHT_AND_GPU_UNVERIFIEDへ更新した。現行の全体現在地・教材入口・file地図にも同期。原18候補・教示5参照・今回の4dataset・原対話・撤回第7回・20fixture・M1 rawは不変。今回GPU起動・追加モデル推論・学習・課金・DB・Render・API/RN・merge/deploy0。STRUCTURE_MAP_DELTA_NONE：実験scriptのみで製品runtime／型／接続・仕様変更なし。品質合格・P6統合・商品採用ではない。
