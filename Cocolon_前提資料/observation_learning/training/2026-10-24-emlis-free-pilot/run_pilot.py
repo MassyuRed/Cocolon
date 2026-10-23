@@ -77,9 +77,19 @@ def validate_data(directory):
     return examples, evaluation
 
 
+def chat_token_ids(tokenizer, messages, *, generation_prompt):
+    # Transformers 5.19 defaults to BatchEncoding, not a flat token-ID list.
+    ids = tokenizer.apply_chat_template(messages, tokenize=True, return_dict=False,
+                return_tensors=None, truncation=False,
+                add_generation_prompt=generation_prompt, enable_thinking=False)
+    if not isinstance(ids, list) or not ids or any(not isinstance(token, int) for token in ids):
+        raise ValueError("chat templateが一次元のtoken ID列を返しません。中止します")
+    return ids
+
+
 def encode_training(tokenizer, messages):
-    prompt = tokenizer.apply_chat_template(messages[:-1], tokenize=True, add_generation_prompt=True, enable_thinking=False)
-    full = tokenizer.apply_chat_template(messages, tokenize=True, add_generation_prompt=False, enable_thinking=False)
+    prompt = chat_token_ids(tokenizer, messages[:-1], generation_prompt=True)
+    full = chat_token_ids(tokenizer, messages, generation_prompt=False)
     if not prompt or full[:len(prompt)] != prompt:
         raise ValueError("prompt/fullのtoken prefix不一致。学習は開始しません")
     if len(full) <= len(prompt):
@@ -115,7 +125,7 @@ def prepare(directory):
         training_stats.append({"id": example["id"], "total": len(item["input_ids"]), "prompt": prefix, "loss_tokens": len(item["input_ids"]) - prefix})
     eval_stats = []
     for item in evaluation:
-        ids = tokenizer.apply_chat_template(item["messages"], tokenize=True, add_generation_prompt=True, enable_thinking=False)
+        ids = chat_token_ids(tokenizer, item["messages"], generation_prompt=True)
         if len(ids) + MAX_NEW > CONTEXT:
             raise ValueError(f"{item['case_id']}の入力と出力枠が{CONTEXT} tokenを超えます。切り捨てず中止")
         eval_stats.append({"id": item["case_id"], "prompt": len(ids), "output_limit": MAX_NEW})
@@ -151,7 +161,7 @@ def evaluate(model, tokenizer, cases, path, device):
     settings = GenerationConfig(do_sample=False, num_beams=1, max_new_tokens=MAX_NEW, eos_token_id=eos, pad_token_id=pad, use_cache=True)
     with Path(path).open("x", encoding="utf-8") as stream:
         for case in cases:
-            ids = tokenizer.apply_chat_template(case["messages"], tokenize=True, add_generation_prompt=True, enable_thinking=False)
+            ids = chat_token_ids(tokenizer, case["messages"], generation_prompt=True)
             batch = torch.tensor([ids], dtype=torch.long, device=device)
             started = time.monotonic()
             with torch.inference_mode():

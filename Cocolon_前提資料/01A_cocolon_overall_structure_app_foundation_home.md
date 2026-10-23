@@ -4587,3 +4587,7 @@ Cocolon側の新analysis_semantic_snapshot_results.jsonは全private完成state�
 | run_pilot.py | 4dataset hash・Free範囲・固定config／index・token／lossのpreflight、固定text q/v16moduleへの9step LoRA、同6入力の前後rawとadapter／比較JSON保存。prepareは重みを読まない |
 
 同folder README.md／experiment.jsonは実装設定・未確認・手順を更新。全体現在地00・教材入口・latest weekly Xへ同期。ローカル構文・データ／loss検査とvenv参照は確認、Runpod実tokenizer・import・GPU完走は未検証。今回の4datasetは不変。STRUCTURE_MAP_DELTA_NONE（offline実験scriptのみ。製品runtime owner／型／接続／公開契約の変更なし）。GPU・モデル実行・学習・課金0。
+
+## 2026-10-24 — Free実験runnerのtoken返却型修正（製品runtime差分なし）
+
+folder `Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-free-pilot/` のrun_pilot.pyは、全4呼出しをchat_token_idsへ統一し、Transformers 5.19.0のBatchEncoding既定へ依存せずflat token IDsを受け取る。prefix・最終assistant限定loss・無切捨てを維持。新test_tokenization.pyは実固定tokenizerで旧型不整合を再現し、9教材のmask／終端と6評価のcontextをCPU検査する。実3検査成功、詳細はexperiment.json／README・latest weekly Y。Runpodの修正版prepare・GPU学習は未実施。全体00・教材入口も同期。4dataset・runpod.shは不変。STRUCTURE_MAP_DELTA_NONE（offline実験scriptと回帰testのみ。製品のowner／型／接続／契約変更なし）。

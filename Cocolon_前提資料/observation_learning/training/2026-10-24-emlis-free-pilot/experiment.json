@@ -1,6 +1,6 @@
 {
   "schema": "cocolon_emlis_free_sft_pilot_proposal.v1",
-  "status": "COMMANDS_PREPARED_RUNPOD_PREFLIGHT_AND_GPU_UNVERIFIED",
+  "status": "TOKENIZATION_FIXED_CPU_VALIDATED_RUNPOD_RETRY_PENDING",
   "prepared_at": "2026-10-24 JST",
   "author": "Karen / Codex Work Mode",
   "scope": {
@@ -72,7 +72,7 @@
     "silent_truncation": false
   },
   "unresolved_before_gpu": [
-    "Runpod prepareで固定tokenizerの実token数・prefix・最終assistant label、4packageの実importと版を確認する。ローカルのstub検査を実token計測へ昇格しない。",
+    "Runpodで修正commitのprepareを再実行し、準備確認OKとpreflight.jsonを取得する。旧prepareは依存installとconfig/index/tokenizerまで到達後、型不整合で停止。実tokenizerを使うローカル修正版の9教師・6評価検証は成功。",
     "A40でのVRAM・時間と任意高速kernelなしの挙動は未検証。現在単価・合計費用は未照会。runの制限は3600秒＋kill猶予30秒で、prepareやPod全稼働の課金上限ではない。",
     "実modelの16対象と実trainable範囲をrun内で再照合し、学習前後rawを取得する。現在は実学習・実比較未実施。"
   ],
@@ -120,8 +120,136 @@
     "automatically_stops_pod": false,
     "pod_stop_owner": "Mash via Runpod console after success/failure/timeout",
     "result": "/workspace/cocolon_emlis_free_20261024/latest_results.json",
-    "local_verification": "syntax, data hashes and roles, loss-mask and stopping tests, text-only target set, real venv path precedence",
-    "runpod_prepare_performed": false,
-    "gpu_execution_validated": false
+    "local_verification": "prior syntax/data/loss/venv checks plus actual Transformers 5.19.0 and fixed Qwen tokenizer: 3 regression tests pass (9 train and 6 eval), no Torch/model weights/GPU",
+    "runpod_prepare_performed": true,
+    "gpu_execution_validated": false,
+    "runpod_prepare_completed": false,
+    "fixed_runpod_prepare_retried": false,
+    "tokenization_contract": {
+      "return_dict": false,
+      "return_tensors": null,
+      "truncation": false,
+      "enable_thinking": false,
+      "required_shape": "nonempty flat list[int]",
+      "prefix_assertion_preserved": true
+    }
+  },
+  "latest_prepare_attempt": {
+    "source_commit": "84c784daa86842ee7007a4c03d061dab41211f84",
+    "source_log": "Mash-uploaded terminal text 20261023-225306",
+    "source_log_sha256": "ede6ced95f6a35519d5e0e0081f692010577f733c6c111eba7878b0481ca7b72",
+    "status": "FAILED_BEFORE_INFERENCE_OR_TRAINING",
+    "torch": "2.8.0+cu128",
+    "cuda_build": "12.8",
+    "direct_dependency_installation": "succeeded",
+    "failed_at": "encode_training first example prefix check",
+    "exception": "ValueError: prompt/fullのtoken prefix不一致。学習は開始しません",
+    "cause": "Transformers 5.19.0 apply_chat_template defaults return_dict=True; BatchEncoding incorrectly treated as flat token IDs",
+    "hf_token_warning_is_not_this_failure": true,
+    "prior_vllm_required": false
+  },
+  "local_tokenization_validation": {
+    "transformers": "5.19.0",
+    "tokenizers": "0.23.3",
+    "model": "Qwen/Qwen3.5-9B",
+    "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+    "training": [
+      {
+        "id": "FT-UDON-INITIAL",
+        "total": 495,
+        "prompt": 428,
+        "loss_tokens": 67
+      },
+      {
+        "id": "FT-BOOK-INITIAL",
+        "total": 531,
+        "prompt": 425,
+        "loss_tokens": 106
+      },
+      {
+        "id": "FT-BOOK-AFTER-ANSWER",
+        "total": 710,
+        "prompt": 552,
+        "loss_tokens": 158
+      },
+      {
+        "id": "FT-CHAIR-INITIAL",
+        "total": 536,
+        "prompt": 423,
+        "loss_tokens": 113
+      },
+      {
+        "id": "FT-CHAIR-AFTER-CORRECTION",
+        "total": 699,
+        "prompt": 558,
+        "loss_tokens": 141
+      },
+      {
+        "id": "FT-SHOP-INITIAL",
+        "total": 572,
+        "prompt": 442,
+        "loss_tokens": 130
+      },
+      {
+        "id": "FT-SHOP-AFTER-ANSWER",
+        "total": 785,
+        "prompt": 613,
+        "loss_tokens": 172
+      },
+      {
+        "id": "FT-REPOT-INITIAL",
+        "total": 510,
+        "prompt": 424,
+        "loss_tokens": 86
+      },
+      {
+        "id": "FT-KNIT-INITIAL",
+        "total": 553,
+        "prompt": 437,
+        "loss_tokens": 116
+      }
+    ],
+    "evaluation": [
+      {
+        "id": "EFREE-E01",
+        "prompt": 430,
+        "output_limit": 1024
+      },
+      {
+        "id": "EFREE-E02",
+        "prompt": 441,
+        "output_limit": 1024
+      },
+      {
+        "id": "EFREE-E03",
+        "prompt": 436,
+        "output_limit": 1024
+      },
+      {
+        "id": "EFREE-E04",
+        "prompt": 540,
+        "output_limit": 1024
+      },
+      {
+        "id": "EFREE-E05",
+        "prompt": 444,
+        "output_limit": 1024
+      },
+      {
+        "id": "EFREE-E06",
+        "prompt": 421,
+        "output_limit": 1024
+      }
+    ],
+    "regression_tests": 3,
+    "failures": 0,
+    "seconds": 7.291,
+    "checks": [
+      "old BatchEncoding miscomparison reproduced; underlying IDs prefix matches",
+      "all 9: final assistant JSON + end token only; prompt labels -100",
+      "all 6: flat input IDs and prompt+1024 <=2048"
+    ],
+    "model_weights_loaded": false,
+    "gpu_used": false
   }
 }

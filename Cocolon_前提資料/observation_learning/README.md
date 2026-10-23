@@ -8,7 +8,7 @@ Cocolon／EmlisAIが、相手自身の価値基準を学び、その人の思考
 
 ## 現在地（2026-10-24・限定Emlis Freeの教材と2段階の実行コマンドを準備）
 
-[Free試験用pack](training/2026-10-24-emlis-free-pilot/README.md)へ、今回入力＋同thread一回答だけを使う完成応答案9件と、学習に使わない比較入力6件を保存した。初回6件は問いあり3／なし3、回答後3件は問いなし。全て華恋の編集・補充で、Mashの完成実演や品質承認ではない。原18候補・教示5参照・実対話は維持し、独立27教材と加算しない。固定commitのprepare／run入口と同条件の学習前後比較を実装。構文・データ照合・loss範囲の検査と実venvのpath優先を確認したが、Runpod prepareの実token数・import・GPU完走は未検証。モデル実行・学習・効果判定は未実施。run処理は1時間制限、Podは自動Stopされず完了／失敗後にMashがStopする。prepareのinstall時間やPod全課金の上限ではない。[最新weekly X](../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261024-emlis-free-pilot-commands)。
+[Free試験用pack](training/2026-10-24-emlis-free-pilot/README.md)へ、今回入力＋同thread一回答だけを使う完成応答案9件と、学習に使わない比較入力6件を保存した。初回6件は問いあり3／なし3、回答後3件は問いなし。全て華恋の編集・補充で、Mashの完成実演や品質承認ではない。原18候補・教示5参照・実対話は維持し、独立27教材と加算しない。固定commitのprepare／run入口と同条件の学習前後比較を実装。Mashのprepareはinstall後、Transformers 5.19.0のBatchEncodingをtoken列と取り違えた華恋の不備で停止。全4経路の型指定を修復し、実Transformers＋固定tokenizerで旧失敗再現と9教材・6評価のCPU回帰3検査が成功。修正版Runpod prepareの再実行・GPU完走は未実施。モデル実行・学習・効果判定は未実施。run処理は1時間制限、Podは自動Stopされず完了／失敗後にMashがStopする。prepareのinstall時間やPod全課金の上限ではない。[最新weekly Y](../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261024-emlis-free-tokenization-fix)。
 
 [学習用候補18件と教示5参照](training/2026-10-23-pilot-prep/README.md)を保存済み。第5回の華恋編集による受け取り1件と、第6回のMash原文による訂正後の観測1件を追加し、当初16行は不変。問い9／訂正後観測1／華恋編集4／華恋補充4。未回答の達成差・訂正前の完成観測なし・品質承認なしを保持する。
 

@@ -1,6 +1,6 @@
 # Emlis Free：初回・一回答後の完成応答案による小規模学習準備
 
-2026-10-24 JST／華恋／Codex Work Mode。状態：**教師案9件・比較入力6件とprepare／runの2段階コマンドを準備。Runpod実環境のprepare・GPU実行・学習・品質評価は未実施。**
+2026-10-24 JST／華恋／Codex Work Mode。状態：**教師案9件・比較入力6件とprepare／runコマンドを準備。MashのRunpod prepare試行は依存install後、token返却型の取り違えで停止。修正後、実Transformers 5.19.0＋固定tokenizerで9教師・6評価のCPU検証が成功。Runpod再prepare・GPU実行・学習・品質評価は未実施。**
 
 Mashの「で？どないすんの、これ。」を受け、既承認の教材整形・不足の補充として作成した。次の観測会をMashへ依頼する代わりに、今回の入力への観測・人間的な受け取り・任意一問・一回答後の更新が揃う応答案を華恋が作る。原18候補・教示5参照・原対話は変更しない。取り下げた読書会の題材は使わない。
 
@@ -31,6 +31,7 @@ Mashの「で？どないすんの、これ。」を受け、既承認の教材�
 | experiment.json | 対象範囲・件数・固定モデル・実装した学習設定・未確認・比較条件・実行状態 |
 | runpod.sh | 固定commitの教材取得、既存Torchを維持する別venv、prepare／runの入口、run処理の時間制限 |
 | run_pilot.py | 教材照合・CPU token／label確認、学習前6回答・9教材1epoch・学習後6回答、adapterとraw保存 |
+| test_tokenization.py | 実Transformersと固定tokenizerによるCPU回帰検証。旧型不整合の再現、9教材のloss範囲と終端、6評価のcontext確認。重み取得なし |
 
 出力は[既存モデル比較](../../model_selection/2026-10-22-three-core/task_inputs.jsonl)のEmlis用6欄（observation／reception／question／update_note／grounded_points／unknowns）を使う。これは比較試験のtask cardへの投影であり、公開API／DTO／実CMEEの新schema・意味採用・保存成功ではない。本文をアプリへ配置していない。
 
@@ -94,9 +95,18 @@ run処理はmodel取得も含め3600秒で終了要求、さらに30秒で強制
 
 ローカルではPython構文・bash構文、実教材のhash／9件・6件、loss maskの境界・prefix不一致・空target・超過・教材改変時の停止、JSON未修正、16module限定を確認した。別venvから親venvを参照できることと、子venvのpackageが優先することを小さな実venvで確認した。
 
-ローカルにはTorch／Transformers／PEFTがないため、固定tokenizerによる実token数・model classの実import・GPU読込・学習・完走は未検証。これをprepare済み／学習済みと記録しない。現在は **COMMANDS_PREPARED_RUNPOD_PREFLIGHT_AND_GPU_UNVERIFIED**。9件・1回で追加学習全体の可否やCocolonの商品品質を断定しない。
+Mashから受領したTerminal全文では、直接4packageのinstallとTorch 2.8.0+cu128維持は成功し、config／index・tokenizer読込後の最初の教材で `ValueError: prompt/fullのtoken prefix不一致` となった。原因はTransformers 5.19.0の `apply_chat_template` が標準でBatchEncodingを返すのに、華恋のrunnerがtoken列と取り違えたこと。前回の別窓のvLLM終了とは無関係。HF_TOKEN未設定のwarningを停止原因にしない。受領log SHA256は `ede6ced95f6a35519d5e0e0081f692010577f733c6c111eba7878b0481ca7b72`。この失敗までに推論・学習は開始していない。
+
+修正では4呼出しを `chat_token_ids` へ統一し、`return_dict=False`／`return_tensors=None`／`truncation=False`／非thinkingを明示。一次元の空でないint列を確認する。prefix検査、teacher／eval全行、chat templateと学習条件は変更しない。
+
+ローカルの隔離venvへ実Transformers 5.19.0／tokenizers 0.23.3を導入し、固定revisionの実tokenizerで3回帰testが成功（7.291秒）。旧既定のBatchEncodingで誤比較を再現し、input_idsそのもののprefixは一致することを確認した。修正後は9件全てprompt側label=-100、教師側が最終JSON＋im_end／改行だけ、全長495〜785token／loss67〜172token。6評価promptは421〜540tokenで、出力1024を足しても最大1564、2048枠以内。詳細のID別token数はexperiment.jsonに保存。
+
+今回のローカル検証にTorch／PEFTやmodel重みは不要。モデルクラスのローカル実import・GPU読込・学習・完走は未検証で、Runpodの修正版prepareもまだ再実行していない。状態は **TOKENIZATION_FIXED_CPU_VALIDATED_RUNPOD_RETRY_PENDING**。9件・1回で追加学習全体の可否やCocolonの商品品質を断定しない。
+
+今のRunpod Terminalでは、同じ `/workspace/cocolon_pilot.sh` に修正commitをCOCOLON_SOURCE_COMMITで渡してprepareする。依存は導入済みで、教材とrunnerを同commitから再取得する。準備確認OKの後にだけrunへ進む。前回のAIサーバーを再起動する必要はない。
 
 公式原典：
+- [Transformers 5.19.0 apply_chat_templateの既定return_dict=True](https://github.com/huggingface/transformers/blob/v5.19.0/src/transformers/tokenization_utils_base.py)
 - [Qwen3.5モデルクラス・テキスト利用・kernel注意](https://huggingface.co/docs/transformers/en/model_doc/qwen3_5)
 - [固定checkpointのconfig](https://huggingface.co/Qwen/Qwen3.5-9B/blob/c202236235762e1c871ad0ccb60c8ee5ba337b9a/config.json)
 - [固定checkpointの重みindex](https://huggingface.co/Qwen/Qwen3.5-9B/blob/c202236235762e1c871ad0ccb60c8ee5ba337b9a/model.safetensors.index.json)
@@ -104,4 +114,4 @@ run処理はmodel取得も含め3600秒で終了要求、さらに30秒で強制
 - [固定chat template](https://huggingface.co/Qwen/Qwen3.5-9B/blob/c202236235762e1c871ad0ccb60c8ee5ba337b9a/chat_template.jinja)
 - [Transformers 5.19.0](https://pypi.org/project/transformers/5.19.0/)・[PEFT 0.21.2](https://pypi.org/project/peft/0.21.2/)・[Accelerate 1.15.0](https://pypi.org/project/accelerate/1.15.0/)・[Safetensors 0.8.0](https://pypi.org/project/safetensors/0.8.0/)
 
-今回の準備作業でGPU起動・追加推論・実学習・課金・DB・Render・API/RN・merge/deployは0。実モデルの新規応答はまだ取得していない。STRUCTURE_MAP_DELTA_NONE：offline比較用の実験scriptのみでruntime owner・型・接続・商品契約の変更なし。
+華恋環境からのGPU起動・追加推論・実学習・DB・Render・API/RN・merge/deployは0。MashのPodでは上記prepare試行があり、稼働分の課金総額は未確認。実モデルの新規応答はまだ取得していない。STRUCTURE_MAP_DELTA_NONE：offline比較用の実験scriptのみでruntime owner・型・接続・商品契約の変更なし。

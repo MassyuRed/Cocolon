@@ -2512,3 +2512,14 @@ runはBF16・全40GiB／空き32GiB以上を確認し、text q/v16対象だけ�
 run処理は3600秒で終了要求、30秒後に強制終了。prepareのinstallやPod全稼働時間を含む課金上限ではない。Podは自動Stopされず、完了／失敗／時間切れ後にMashが管理画面からStopする。現在単価・実VRAM・時間・合計費用は未確認で、以前の$0.59/hを保証へ流用しない。
 
 実施したローカル確認はPython／bash構文、実教材hash／件数・役割、loss maskと異常停止、16対象限定、JSON非修復、実venvで親参照と子package優先。Torch／Transformers／PEFTがローカルにないため、実tokenizer・実model import・GPU学習・完走は未検証。状態をCOMMANDS_PREPARED_RUNPOD_PREFLIGHT_AND_GPU_UNVERIFIEDへ更新した。現行の全体現在地・教材入口・file地図にも同期。原18候補・教示5参照・今回の4dataset・原対話・撤回第7回・20fixture・M1 rawは不変。今回GPU起動・追加モデル推論・学習・課金・DB・Render・API/RN・merge/deploy0。STRUCTURE_MAP_DELTA_NONE：実験scriptのみで製品runtime／型／接続・仕様変更なし。品質合格・P6統合・商品採用ではない。
+
+<a id="20261024-emlis-free-tokenization-fix"></a>
+## Y. 2026-10-24 — Runpod prepareのtoken返却型不整合を修復
+
+Mashから「準備確認OKが出ない」「前回別窓で起動していたものは落ちている」と連絡を受け、Terminal全文txtを受領した。公開84c784d版で直接4packageのinstallと既存Torch 2.8.0+cu128維持は成功。config／index／tokenizerの読込後、最初のencode_trainingでprompt/full prefix不一致となり停止している。前回のvLLM終了とは無関係で、HF_TOKEN未設定warningが原因でもない。推論・学習は未開始。Pod稼働分の費用は未確認。
+
+原因は華恋のrunnerがTransformers 5.19.0のapply_chat_templateを旧形式のlist[int]として扱ったこと。同版の公式sourceでは既定return_dict=TrueでBatchEncodingを返すため、len／sliceはtoken列の操作にならない。準備2経路と評価2経路の全4呼出しをchat_token_idsへ統一し、return_dict=False／return_tensors=None／truncation=False／非thinkingと一次元int列を明示した。prefix検査を削らず、template・教材・モデルrevision・LoRA設定を変更しない。
+
+今回初めてローカル隔離venvへ実Transformers5.19.0とtokenizers0.23.3を入れ、固定Qwen tokenizerをCPU取得した。test_tokenization.pyの3検査が7.291秒で成功。旧既定で誤比較を再現し、実input_idsのprefixは一致することを確認。修正後の9教材は最終JSON＋im_end／改行だけが学習対象、prompt全-100、全長495〜785／loss67〜172token。6評価prompt421〜540、出力枠1024を加えても最大1564で2048以内。実model重み・Torch／PEFT・GPU実行は使っていない。ID別実token数と受領log SHA256はexperiment.jsonに保存した。
+
+修正版をGitHubへ反映し、今のRunpod Terminalで同じwrapperへ修正commitを渡してprepareをやり直す。準備確認OKの後だけrunに進む。状態TOKENIZATION_FIXED_CPU_VALIDATED_RUNPOD_RETRY_PENDING。修正版のRunpod再prepare・GPU完走・学習前後比較・品質判定は未実施。runの1時間制限とPod手動Stopの責務は維持する。全体現在地・教材入口・実験README／manifest・全file地図を同時更新。4dataset・原18候補・教示5参照・撤回第7回・既存評価／M1 raw・製品runtimeは不変。STRUCTURE_MAP_DELTA_NONE（実験runnerの返却型修正とCPU回帰testのみ）。
