@@ -329,7 +329,7 @@
     "format_issue": "output fields specified but JSON-only instruction absent; no response_format enforcement; do not claim explicit JSON instruction was violated"
   },
   "next_diagnostic": {
-    "status": "DIAGNOSTIC_PREPARED_NOT_RUN",
+    "status": "BLOCKED_BEFORE_DOWNLOAD_WORKDIR_MISSING",
     "script": "diagnose_learning.py",
     "purpose": "paired fit on existing 9 teachers before altering data or training",
     "reference_sha256": "5fb61702d4c5b9e4f1317088b3ef91de53041168fa3313f14086d0c67f09ceb9",
@@ -350,6 +350,19 @@
     "result": "/workspace/cocolon_emlis_free_20261024/latest_diagnosis.json",
     "local_checks": "syntax, 9 target-free prompts, weighted-NLL and invalid values, missing/tampered adapter rejection, saved-run matching, real-tokenizer context max1637/2048",
     "gpu_validated": false,
-    "limits": "training-example fit only; NLL alone is not semantic quality, generalization or product acceptance; no automatic retraining"
+    "limits": "training-example fit only; NLL alone is not semantic quality, generalization or product acceptance; no automatic retraining",
+    "latest_attempt": {
+      "source_commit": "67d4186608302d9694ca92122d2617af2028cddd",
+      "source_log": "Mash-uploaded terminal text 20261023-231911",
+      "source_log_sha256": "009757985a3423986acb0d09ecfed1c9bf48b56d6b6365047755a6e31df8cfdc",
+      "source_log_bytes": 1479,
+      "error": "curl: (23) Failure writing output to destination; /workspace/cocolon_emlis_free_20261024/diagnose_learning.py: No such file or directory",
+      "diagnostic_started": false,
+      "inference_started": false,
+      "cause_confirmed": "destination parent directory is absent or unavailable in the current Pod",
+      "data_loss_confirmed": false,
+      "adapter_missing_confirmed": false,
+      "next": "read-only listing, mount/disk and bounded saved-artifact search before mkdir/install/retraining"
+    }
   }
 }

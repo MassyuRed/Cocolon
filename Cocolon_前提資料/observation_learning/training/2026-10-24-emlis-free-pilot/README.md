@@ -150,3 +150,9 @@ Runpodでは固定commitの本scriptを `/workspace/cocolon_emlis_free_20261024/
 結果は固有の `diagnostics/<UTC日時>-<ID>/` と `/workspace/cocolon_emlis_free_20261024/latest_diagnosis.json`。初回latest_results.json／元adapter／教師・評価は上書きしない。
 
 準備時に実施した検証：構文、生成9promptに教師回答が入らないこと、NLL加重式と異常値停止、保存run選択・adapter欠損／改変時停止、実固定tokenizerで9prompt＋1024が最大1637で2048以内。PEFT0.21.2公式from_pretrainedのis_trainable=Falseを参照。Torch／PEFT／GPUでのこの診断scriptの実動作・完走は未検証。状態DIAGNOSTIC_PREPARED_NOT_RUN。追加学習・追加GPU実行はこの準備作業で行っていない。
+
+### 診断取得前の停止（2026-10-24 JST）
+
+MashのTerminal全文では、curlの保存先 `/workspace/cocolon_emlis_free_20261024/diagnose_learning.py` についてNo such file or directory、curl23で停止した。&&の後のPython診断は始まっていない。前回の作業folderが現在のPodでは存在しない／利用できないことは確認できるが、adapter消失・volume消失・Pod削除を断定する証拠ではない。
+
+前回の保存環境が残る前提で案内した華恋の不足として扱う。mkdirだけで隠したり、venv再install／再学習を先行したりしない。まず `ls -l /workspace`、`df -h /workspace` とworkspace配下5階層までの初回結果／adapter／SOURCE_COMMITの読取探索で保存先・接続状態を確認する。現物の所在を確認してから次を選ぶ。状態BLOCKED_BEFORE_DOWNLOAD_WORKDIR_MISSING。初回9stepと6+6結果の完了は維持し、診断失敗を学習済み重みの品質失敗へ読み替えない。新規推論・学習0、総課金・今回Pod Stopは未確認。STRUCTURE_MAP_DELTA_NONE。

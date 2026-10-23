@@ -2547,3 +2547,12 @@ Mashの「次は？」を受け、原9教師と初回runner・実結果を再読
 準備時の検証は、構文、生成9promptに教師がないこと、加重NLLと異常値停止、保存run選択とadapter欠損／改変の停止、実固定tokenizerのprompt+1024最大1637／2048以内。PEFT0.21.2公式from_pretrainedと非学習読込の指定を確認した。Torch／PEFT／GPUでの実診断・完走は未検証。Runpodでは既存venvで本scriptだけを取得／実行し、900秒で終了要求＋30秒で強制終了する。cache欠損時は再downloadせず停止。Pod自動Stopなし、Mashが終了／失敗／時間切れ後にStop。結果latest_diagnosis.jsonは初回latest_results.jsonと分離する。状態DIAGNOSTIC_PREPARED_NOT_RUN。
 
 全体00・教材入口・初回試験README／Free README・experiment・file地図を同期。原9教師／6評価・初回raw・adapter・原18候補・教示5参照・撤回第7回・既存製品runtimeは不変。今回GPU起動・追加推論／学習・DB・Render・API/RN・merge/deploy0。STRUCTURE_MAP_DELTA_NONE（既存教師への一回のoffline診断scriptのみ）。
+
+<a id="20261024-emlis-free-diagnostic-workdir-missing"></a>
+## AB. 2026-10-24 — 診断は取得先folder不存在で未起動
+
+Mashから「だめだった」とTerminal全文txt1,479 bytes／SHA256 009757985a3423986acb0d09ecfed1c9bf48b56d6b6365047755a6e31df8cfdcを受領。67d4186版diagnose_learning.py取得時、保存先/workspace/cocolon_emlis_free_20261024/diagnose_learning.pyの親folderが存在しない／利用できずcurl23で停止した。&&の後の診断Pythonは起動しておらず、model／adapter読込・NLL・生成・追加学習0。初回9step／6+6回答の完了とは別の環境到達問題である。
+
+前回の保存環境が残る前提で案内した華恋の不足。作業folderが現在Podで利用できないことは観測事実だが、adapterやvolumeの消失、Pod削除を断定しない。mkdirだけ、依存再install、再学習のやり直しを先行せず、workspaceの一覧・dfと5階層内のadapter／pilot_results／SOURCE_COMMIT所在を読取確認する。未接続・別保存先・現物なし等の区別はその出力後に行う。状態BLOCKED_BEFORE_DOWNLOAD_WORKDIR_MISSING。今回のPod Stop／全課金は未確認。
+
+実験manifestとREADME、全体現在地を同期。診断code・原教師／評価・初回raw・学習設定・製品runtimeは不変。STRUCTURE_MAP_DELTA_NONE（環境停止の記録のみ、全file地図の実責務・path差分なし）。
