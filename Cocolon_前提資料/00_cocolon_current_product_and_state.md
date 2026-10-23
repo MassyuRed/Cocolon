@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-23 JST（最新差分は不足実演を補う第5回の初回提示。既存の学習用16候補・教示5参照は維持。モデルの追加学習・改善評価・P6本統合は未実施。M1の品質不足とP1〜P5の限定内部実装を維持）。全Cocolon作業の必読原本。
+更新日：2026-10-23 JST（最新差分は不足実演を補う第5回の実問答D02（10/24 JST）まで。既存の学習用16候補・教示5参照は維持。モデルの追加学習・改善評価・P6本統合は未実施。M1の品質不足とP1〜P5の限定内部実装を維持）。全Cocolon作業の必読原本。
 
 ## 1. この資料の役割と更新方法
 
@@ -58,7 +58,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | Emlis有料拡張 | Plusの適格本人履歴、Premiumの逐次問い・本人が修正／否定できる根拠付きframe、条件付きLayer3を実装 | 履歴が使えるコードと、本人固有の深さ・有料差の体感を分ける。有料商品品質は未受入れ |
 | 配置と本人確認 | 共通APIは10/23にPiece限定overlay3577d7fdでLive、Emlis内容は土台10/10版5c8bd8eを継承。u353〜355は未配置 | Piece作業でservice identityのみ確認。Emlisの本人実機/品質は今回再検証なし。10/10の本人表示1件はMash評価で不合格。同じ保存本文の履歴再表示まで確認済みにしない |
 | 27B旧試験（選定除外） | 10/23 Mash決定で27Bを候補から除外。`Qwen3.8-27B-Q4_K_M.gguf`の試験は履歴として保持。10/21、架空相談2題×実演あり／なし×初回／回答後＝8出力の推論試験 | 追加情報の取込みは見られたが、未確認な意味の補完、近い問いの再提示、更新記録の欠落が残る。実演ありの一貫した優位未確認。重みの追加学習0、27BのCMEE統合0、他core適性未検証、製品採用未確定。Pod停止はMash報告受領済み |
-| 観測教材 | 観測・問い・本人回答後の理解を記録。4回の対話を原典として、[追加学習用候補16件と教示5参照](observation_learning/training/2026-10-23-pilot-prep/README.md)へ整形。Mashの原文問い9・華恋編集3・架空補充4を分離し、各時点の可視入力と出典を照合 | 学習候補の準備で、実際の追加学習・改善評価は未実施。問いへの偏り、自然な完成応答・実更新・Piece/Analysisの完成教材と独立評価が不足。既知派生とM1を見た開発3familyを区別し、未使用評価候補は2family/3場面。[Runpod M1](observation_learning/trials/2026-10-23-qwen9b-m1/README.md)は取得4/4だが意味に重大不足。元の20比較fixture・P1〜P5・M1 rawは不変。先に不足する実演を補う第5回[初回D00](observation_learning/sessions/2026/OBS-20261023-001/01_dialogue.md#d00)を提示し、Mashの実演待ち。完成例・読み直し・学習は未成立。最新は[weekly T](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-observation-session-005) |
+| 観測教材 | 観測・問い・本人回答後の理解を記録。4回の対話を原典として、[追加学習用候補16件と教示5参照](observation_learning/training/2026-10-23-pilot-prep/README.md)へ整形。Mashの原文問い9・華恋編集3・架空補充4を分離し、各時点の可視入力と出典を照合 | 学習候補の準備で、実際の追加学習・改善評価は未実施。問いへの偏り、自然な完成応答・実更新・Piece/Analysisの完成教材と独立評価が不足。既知派生とM1を見た開発3familyを区別し、未使用評価候補は2family/3場面。[Runpod M1](observation_learning/trials/2026-10-23-qwen9b-m1/README.md)は取得4/4だが意味に重大不足。元の20比較fixture・P1〜P5・M1 rawは不変。第5回は[実問D01と本人役回答D02](observation_learning/sessions/2026/OBS-20261023-001/01_dialogue.md#d01)まで採録。二人で以前店の話をしたが具体的な共同計画・約束はなく、友人の実現を知って寂しかったという本人役の説明。Mashの観測・受け取り・読み直しは未受領、完成例・学習は未成立。最新は[weekly T](weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-observation-session-005) |
 
 詳細owner：[Emlis map](current_structure/01_emlis_ai_current_structure.md)、[CMEE map](current_structure/04_cmee_current_structure.md)、[Emlis詳細設計](designs/cmee/v1/02_emlis_v1a_detailed_design.md)、[観測教材](observation_learning/README.md)。古いmap本文の「問い未実装」は後続Q3／Q4・実sourceと矛盾する旧状態であり、現在へ戻さない。
 
