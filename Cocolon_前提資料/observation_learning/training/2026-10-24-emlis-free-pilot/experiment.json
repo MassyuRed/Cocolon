@@ -329,7 +329,7 @@
     "format_issue": "output fields specified but JSON-only instruction absent; no response_format enforcement; do not claim explicit JSON instruction was violated"
   },
   "next_diagnostic": {
-    "status": "BLOCKED_EMPTY_WORKSPACE_OVERLAY_NEEDS_STORAGE_REVIEW",
+    "status": "AWAITING_EXISTING_POD_DETAILS",
     "script": "diagnose_learning.py",
     "purpose": "paired fit on existing 9 teachers before altering data or training",
     "reference_sha256": "5fb61702d4c5b9e4f1317088b3ef91de53041168fa3313f14086d0c67f09ceb9",
@@ -380,12 +380,24 @@
       "diagnostic_started": false,
       "previous_training_pod_identity_verified": false,
       "data_loss_confirmed": false,
-      "next": "Stop the currently idle task Pod, then read Console Pods list and existing storage configuration; locate original training Pod/volume before recovery or new compute",
+      "next": "Open novel_silver_hamster Details without starting it; compare creation time/storage with the initial training run at 2026-10-24 08:00-08:01 JST. It is only a candidate.",
       "initial_training_storage_persistence_was_verified": false,
       "official_sources": [
         "https://docs.runpod.io/pods/storage/types",
         "https://docs.runpod.io/pods/manage-pods"
-      ]
+      ],
+      "current_pod_newly_created_user_confirmed": true,
+      "current_pod_stop_user_confirmed": true,
+      "prior_storage_loss_inferred": false
+    },
+    "pod_list_observation": {
+      "source": "Mash screenshot 2026-10-24 082757 and explicit message",
+      "current_new_pod": "noble_magenta_moth",
+      "initial_m1_pod_confirmed": "eastern_silver_sheep",
+      "initial_m1_equals_training_pod_confirmed": false,
+      "training_pod_candidate": "novel_silver_hamster",
+      "training_pod_identity_confirmed": false,
+      "all_six_displayed_as_stopped": true
     }
   }
 }

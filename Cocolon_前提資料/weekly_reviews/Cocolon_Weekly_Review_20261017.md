@@ -2562,3 +2562,9 @@ Mashから「だめだった」とTerminal全文txt1,479 bytes／SHA256 00975798
 MashからTerminal全文1,840 bytes／SHA256 ad8a4cd6b75f5c20830583a8a900974a1fd99db449516ab954c6706b91329815を受領。workspaceはtotal0、dfはoverlay50G／使用16M／mount /、5階層内のadapter／pilot_results／SOURCE_COMMIT検索0。現在Podの/workspaceに専用永続mountと既知成果物が見えず、診断未起動であることを確認した。前回の学習データ消失や元Pod削除は未確定。初回結果に学習PodIDはなく、過去M1のscreenshot IDを学習Podと同一視しない。
 
 保存先の永続mountを確認せずにStopを案内した華恋の不足。原結果・教材・codeはGitHubにあるが、adapter本体は未受領。JSONから重みを復元できるとは扱わない。公式Storage optionsとManage Pods（2026-10-24確認）ではcontainer diskはStopで消去、volume diskはStopで保持／Terminateで削除、network volumeはPodから独立。次は現在の診断未起動PodをStopし、ConsoleのPods一覧と既存Storage／volume設定を読み、元の学習Pod／保存先の有無を確認する。再install・再学習・新規Pod／volume作成を先行しない。状態BLOCKED_EMPTY_WORKSPACE_OVERLAY_NEEDS_STORAGE_REVIEW。実験manifest・README・全体00を同期、code・dataset・原結果は不変。STRUCTURE_MAP_DELTA_NONE、今回の新規推論／学習0、現在PodのStop完了と総費用は未確認。
+
+### AB追記：今回新しいPodを作成したこと・Stop済みの本人報告
+
+MashはPods一覧を提示し、どれが以前のものか分からず、今回は新しく作り、もうStopしたと明示。現在の空workspaceは新規noble_magenta_mothのものである。前回の保存失敗／消失を示す証拠としない。画面では6件が停止表示。M1時点の既知IDと一致するのはeastern_silver_sheepだが、初回9教師学習の受領結果にはPodIDがないため、追加学習Podとは同定しない。
+
+次は候補novel_silver_hamsterのDetailsを起動せず読み、作成日時・保存領域を確認する。追加学習の実行記録時刻2026-10-24 08:00〜08:01 JSTと照合する。候補を確定扱いせず、GPU起動／新規作成／再学習を先行しない。状態AWAITING_EXISTING_POD_DETAILS。現在の新規PodのStop報告受領、元学習Pod／adapter所在・総課金は未確定。manifest・README・全体00へ同期。STRUCTURE_MAP_DELTA_NONE、code／dataset／原結果・製品runtime不変。
