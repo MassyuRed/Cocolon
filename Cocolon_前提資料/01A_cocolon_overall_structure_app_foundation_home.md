@@ -4478,3 +4478,20 @@ API既存production10／既存test1／新fixture1／既存handoff1。新producti
 Cocolon側は現在地00、全体01、本01A、current01/04、design01/02/05/06、最新weeklyと入口README、観測/比較README、既存trial README/JSONを同期。新rule/runner/checkerは作らない。
 
 原E02の有限文法と既受理event/feelingの併存に閉じる。一般unknown/ACTION、新要素自身の変更・解消・依存削除はHOLD/UNSUPPORTED。旧Q2 cap4では混在更新の5 contributionを提供できず意味保存後BODY_UNAVAILABLEとなる制限を残し、capを緩めない。現在のQ3実serviceでの隔離SQL/RPC保存・中断再開成功と区別する。実モデル／有料推論／重み／学習／本人DB／Render／通常application有効化／公開API・DTO・RN変更／merge／deployは0。限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT、product_credit=0／PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=false。
+
+
+## 2026-10-23 — CMEE P4 Piece意味snapshotの全変更file
+
+STRUCTURE_MAP_DELTA_PRESENT。API新production1／既存production4／新test1／新fixture1。公開API/DTO/DB/RN/通常B8/renderer/依存は変更0。
+
+| exact path（mashos-api root） | 責務 |
+|---|---|
+| ai/services/ai_inference/cocolon_meaning_experience_engine/piece_semantic_admission.py（新） | 明示P4 input、P1再束縛、閉鎖採否、private10型、snapshot／段階serialize/reload、本文失敗の意味保持 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/engine.py | 明示offline Piece semantic_inputだけdispatch、他core／旧Piece維持 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/piece_source.py | 新snapshotのsource／意味検証、旧有限再導出維持 |
+| ai/services/ai_inference/cocolon_meaning_experience_engine/piece_v1c.py | 既存compiler／唯一作者にprivate plan/artifact arm。5文と原接続詞を保持 |
+| ai/services/ai_inference/piece_v2_content_policy.py | shape限界を共用し、旧payload版を流用しない。作者非呼出しの全可視範囲／trace／選択検査 |
+| ai/tests/test_cmee_piece_semantic_snapshot.py（新） | 新意味／選択／厳密型／改変／作者非呼出し／中断とprivate再読／旧B8拒否 |
+| ai/tests/fixtures/cmee_piece_semantic_snapshot_v1.json（新） | 元P2 P01 packetとP1元7fieldを保持した合成標本。モデル出力ではない |
+
+Cocolonの変更ownerは全機能00／全体01／本01A／current Piece02・CMEE04／design01・03・05・06／最新weekly／trial READMEと新piece_semantic_snapshot_results.json。新結果JSONは実本文／状態／同一再読／型field／検証とsource blobを持ち、既存C0/P1/P2/Emlis結果を上書きしない。新管理system／runner／checkerなし。

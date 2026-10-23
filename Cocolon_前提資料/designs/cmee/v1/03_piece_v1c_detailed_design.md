@@ -482,7 +482,7 @@ P2は上記の差分表まで。current guardの緩和・削除、native型の�
 
 ## 2026-10-23 — P4限定内部実装案：Pieceの意味採用と構造化選択の分離
 
-**PROPOSED_ONLY／未実装・未承認。** 確認原本はAPI PR3 `723ce9fe2128e66bd8a296b342466708da031bb3`、Cocolon PR30 `01cd04e366206c3e021875f09f74731ad1cf6574`。P3のEmlis承認はPieceへ流用しない。本節は今回のCMEE内部準備指示で実sourceとP2標本から具体化した次の一実装単位。実モデル、通常Piece、preview／保存／画像出力は対象外。
+**承認範囲の案作成時記録。2026-10-23のMash明示承認・限定実装は後続P4実装節。** 確認原本はAPI PR3 `723ce9fe2128e66bd8a296b342466708da031bb3`、Cocolon PR30 `01cd04e366206c3e021875f09f74731ad1cf6574`。P3のEmlis承認はPieceへ流用しない。本節は今回のCMEE内部準備指示で実sourceとP2標本から具体化した次の一実装単位。実モデル、通常Piece、preview／保存／画像出力は対象外。
 
 ### P4-1. 解消する条件・Mash判断が必要な差
 
@@ -532,3 +532,20 @@ P2保存済み手作業packetを再利用する。モデル出力・完成native
 検証は元7field・owner・版・Unicode/UTF-8範囲と別request拒否、6claim／2関係／全選択の欠落・否定／時点／scope変異、整合再hash改変と別profile混入、実作者の本文・author-free照合、意味確定前後の中断／同一結果再読、旧profile全outcomeとB8非影響。旧期待を緩めず、必要な現行owner identityのみ実差分へ同期する。主担当が全本文を読み、復唱・定型性等を商品品質未達として記録する。
 
 完了は限定P01-N familyを意味→plan→既存作者の実本文→同一private保存再読へ通し、非採用と旧互換を確認すること。一般日本語・自由paraphrase・モデル・通常アプリ・商品合格は含まない。別作者、新公開保存、一般unknown／conflict、新依存、契約外意味が必要ならeffect前に停止する。既存作者へ追加する有限armでも収容不可ならHOLD／UNSUPPORTEDを維持する。同範囲の内部整合修復を版数ごとの再承認へ戻さない。
+
+
+<a id="cmee-p4-implemented"></a>
+## 2026-10-23 — Mash承認済みP4の限定内部実装
+
+Mashの「具体案の範囲で→進めていいよ」を受領。上のP4案は承認範囲の履歴で、同範囲を未承認へ戻さない。API開始302d122、Cocolon開始3c2fa9c、API実装[4fd8db4](https://github.com/MassyuRed/mashos-api/commit/4fd8db4f5ad24336368a63f09f9d88170ab41fa0)。新`piece_semantic_admission.py`と既存4owner（Engine/source/compiler兼作者/policy）、新test1・fixture1の計7fileを反映・全文読戻し確認済み。通常B8は変更0。
+
+- `PieceSemanticInputV1`は明示offline Pieceだけへ渡す。実sourceからP1材料を再作成し、expected owner／record／version／stage／tierを束縛。P1 request IDにはownerが含まれないため、source snapshot・private保存requestへownerを別に含める。raw/metadataをP1受取で再検証してreceipt偽装を拒否。元receiptはNOT_ADOPTEDのまま。
+- 初版はP01の閉じた構文familyだけを照合。元7field、6claimと5文、報告・否定・将来条件、留保と因果未確定のte連結をtyped bindingへ保持。仕事／帰りの2claimは同じ第二文へ対応し、原「でも」・読点を残す。一般候補／unknown/conflict/updateは未対応、必要意味の欠落・引用だけ正しい意味改変は拒否する。
+- 喜び／不安weakは論理的な2選択。emotionsとemotion_detailsの両field/indexをaliasとして保持し、重複計上しない。本文に対応しない選択を別責務へ保持し、不安文・原因・過去感情の強度を足さない。新profileの自己理解選択は未対応で、旧modeを変更しない。
+- 意味snapshotから既存compilerがprivate planを作り、既存唯一作者の新armが完全な原文2段落を保持する。5文のためshort_essayだけが適格で、quote／declarationを付与しない。公開payloadへ変換せず、新private meaning版を使う。既存text envelope／tier／拒否detectorは共用する。
+- author-free検査はcompiler／作者を呼ばず、接続詞を含む全可視範囲・6意味とtrace・選択責務・plan／本文hashを照合する。source構文照合はadmissionと共有しており、parser独立性や一般paraphrase検証とはしない。
+- private stateは意味／plan／完成本文の段階別にserialize/reloadできる。意味保存後の実作者例外→同保存から明示再開、完成後の作者／compiler／候補取得禁止再読を検証。caller-managedの隔離ファイル保存で、serviceの自動durabilityや本番DB保存ではない。本文失敗でもADOPTED_PROVISIONALのsnapshotを返し、旧本文を付けない。
+
+最終対象7file **339 passed／FAIL0／SKIP0、38.78秒、既存warning1、34 subtestsは加算しない**。新P4／P1／旧Piece4file／既存Emlis snapshotを含み、全suite・CI・本人実機合格ではない。初回の新test構文ミス、誤ったUNSUPPORTED標本、Q2 module環境変数不足、review修復はtrial記録へ残した。旧期待やhistorical fixtureは変更0。
+
+実本文は原文と同一の二段落。これは意味採用→本文→同一private再読の限定到達で、自然な新文章・一般理解・商品品質改善の証明ではない。全結果と型field・原packetは[実結果JSON](../../../observation_learning/trials/2026-10-23-current-four/piece_semantic_snapshot_results.json)。実モデル／推論／DB／Render／公開API/DTO／RN／preview／保存quota／fit／export／merge/deploy0。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、product_credit=0／PRODUCT_NOT_CLEAR／正式0/3／candidate_ready=false／automatic_progression=false。P5 Analysis、通常接続、自由paraphrase、画像商品品質は残件。

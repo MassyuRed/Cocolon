@@ -947,3 +947,10 @@ Analysis P5も実sourceを確認した。対象付きunknownの根拠、行動�
 前回API CI39912451179はAnalysis対象1634成功後、現行共有owner identity fixtureの同期漏れで1失敗。既存producerから承認済み6ownerの差を同期し、既存失敗検査は1 passed／194 deselected、26.43秒。API `302d1223362484b30cf66c9c2c3ca3a72b6cdf2d`はfixture1pathだけ、GitHubの全文・blob・変更集合・PR headを読戻し確認済み。historical IM03・旧全outcome・検査assertion・production codeは変更0。過去CIは失敗のまま、新しい全suite／CI合格を主張しない。新しい広範囲再実行は0。
 
 今回のprimaryはBLOCKER_NARROWED（次P4の具体差分）。identity修復は前回実装の検証整合だけで商品品質creditにしない。STRUCTURE_MAP_DELTA_NONE（既存ownerと現行fixtureの同期、P4/P5の新runtime ownerは未追加）、product_credit=0、PRODUCT_NOT_CLEAR、正式0/3、candidate_ready=false、automatic_progression=false。Codex Work Modeで主担当が統合・反映し、補助担当は読取のみ。確認できないPro／Ultraの正式審査・実モデル・稼働・本人受入れは申告しない。
+
+
+## 2026-10-23 — 承認済みP4のactual接続
+
+Mash承認により[Piece P4](03_piece_v1c_detailed_design.md#cmee-p4-implemented)を実装。新規明示offline PieceだけでP1→版付き採用snapshot→既存compiler／唯一作者／author-free policy→同一private再読。実型と版は[05 actual](05_json_schema_and_versioning.md#cmee-p4-actual-types)。旧P4未承認の記載は案作成時の履歴で、現状態ではない。P01の6claim／5文／2関係と全選択を保持。出力は原文2段落保持で一般文章生成・商品品質合格ではない。
+
+API4fd8db4の7fileはGitHub全文／blob／変更集合／head確認済み。対象339成功、34 subtestsは加算せず、全suite／CI成功とはしない。通常B8／Analysis／Emlis profileの意味契約・公開API／DB／RN／モデルは不変。新private dataclass10／例外2はPiece専用で共有logical registryは不変。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、商品0／正式0/3／candidate_ready=false／automatic_progression=false。次の別残件はP5の実型・採用／保存差分、通常接続と商品品質。今回の承認から自動開始しない。

@@ -3095,7 +3095,7 @@ snapshot schemaは`cocolon.cmee.emlis_semantic_snapshot.v2`、checkpointは`coco
 
 ## 2026-10-23 — P4 Piece private snapshot型案（PROPOSED_ONLY）
 
-未実装・未承認。[設計03の限定範囲](03_piece_v1c_detailed_design.md#cmee-p4-offline-piece-proposal)専用で、旧`PieceSourceMeaning`／public DTOへfieldを足す案ではない。全型はimmutable・closed fieldとし、候補自身がowner、source版、採用状態、graph IDを決めない。
+当初案の記録。後続のP4実型節にMash承認・実装版を記載。[設計03の限定範囲](03_piece_v1c_detailed_design.md#cmee-p4-offline-piece-proposal)専用で、旧`PieceSourceMeaning`／public DTOへfieldを足す案ではない。全型はimmutable・closed fieldとし、候補自身がowner、source版、採用状態、graph IDを決めない。
 
 | private型案 | 必須field・拘束 |
 |---|---|
@@ -3109,3 +3109,19 @@ snapshot schemaは`cocolon.cmee.emlis_semantic_snapshot.v2`、checkpointは`coco
 | `PieceSemanticResultV1` | `decision/reason_codes/request_ref`、採用時だけ`snapshot/plan/artifact`（上記新private型）、非採用時はそれらnull。P1 receiptは別の未採用受取として保持。旧Pieceのpublic結果へ新意味を付替えない |
 
 snapshot refはsource commitment・候補全文・版・bindings・全選択からCMEEが導出。private再読は同じschema/profile/admission/adapterの組と全bindingを再検証し、hashの自己整合だけでは採用しない。意味確定後の再開は同snapshotを使用し、本文確定後は保存artifactを返す。本文原文7fieldの削減、選択無視、原因や強度の補完で成功にしない。private serialized recordだけを扱い、公開API／DB列／migration／稼働schema変更0。実装時の追加fieldがこの拘束を変える場合は、同じ案の単なる命名調整と扱わず差分を示す。
+
+
+<a id="cmee-p4-actual-types"></a>
+## 2026-10-23 — P4実型・保存版
+
+Mash承認済みのP4をAPI4fd8db4へ実装。上のP4型案は当初案、実fieldの唯一actual ownerは`cocolon_meaning_experience_engine/piece_semantic_admission.py`。新private dataclass10・例外2で、旧共有logical registry／公開DTOへ追加しない。全field一覧はtrial `piece_semantic_snapshot_results.json.native_dataclass_fields`。
+
+`PieceSemanticInputV1(prepared,receipt,semantic_profile)`だけがEngineへの明示候補入口。snapshot schema／profileは案どおり、admission_version=adapter_version=1。`candidate_packet`と各claimの`claim_json`、relationの`evidence_json`をcanonical JSON stringとしてdeep freezeし、payloadの可変dictを保持しない。claim bindingにsource_id/field_path、scalar/UTF8半開範囲、node_ref/source_binding_refを持つ。subject／arguments／polarity／modality／time／qualifierは完全claim_jsonに保ち、自由な語彙として旧型へ押し込まない。
+
+`PieceSourceSelectionV1`のprimary field/indexに加えて`alias_refs`で両元field/indexを保持し、論理的な選択を一つに束ねる。未表出は全てSOURCE_SELECTION_RETAINED_NOT_TEXTUALIZEDでtext_binding_refs=()。source commitmentに加え、snapshot_refはownerを含む全source snapshot／P1 request／全packet／版／bindings／選択から導出する。版や座標のbool/int混同もcanonical全payload比較で拒否する。
+
+`PieceSemanticPlanV1`は6duties／5node／2blocksと選択保持責務を持つ。graph_idはこのprivate binding graphのidentityで、旧GroundedMeaningGraphの構築成功とはしない。plan_refは全planから導出。`PieceSemanticRealizationV1`は各claim/duty/node/sourcebinding→block相対scalar範囲を持ち、source座標と混ぜない。`PieceSemanticArtifactV1`は専用schema/profile/meaning版、snapshot_ref/plan_ref/commitment、blocks/text/hash、format適格性、6realizations、全選択保持参照を持つ。旧content_payload()／旧meaning/Safety版への変換を提供しない。
+
+`PieceSemanticResultV1`のdecisionはADOPTED_PROVISIONAL/HOLD/UNSUPPORTED/REJECTED。採用済みでも本文失敗時はsnapshotを保持してartifact=null、status=UNAVAILABLEとなる。GENERATEDは実artifactがある時だけ。通常B8の旧結果型へ付替えない。有効な材料について非採用結果もP1 request_refを保持する。
+
+保存は`cocolon.cmee.piece_semantic_state.v1`、closed keysはschema_version/request_binding/snapshot/plan/artifact。request_bindingにoperation request_id／expected owner／record／version／tier／requested_formatを含める。同一snapshotから意味を照合し、保存plan／完成本文はauthor-free検査で再読する。候補取得・再採用・完成済み作者再実行は禁止。私有source bytesはcanonical original JSONのUTF8 stringで保存し、公開DTO／実DB schema／migration変更0。

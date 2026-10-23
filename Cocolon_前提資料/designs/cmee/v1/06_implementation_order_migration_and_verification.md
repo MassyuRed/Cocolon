@@ -20443,3 +20443,10 @@ P1/旧application/旧広範囲失敗は今回再実行0。過去101件や旧広�
 途中の63対象ではread-only can_write差を全文DTO等値へ含めた期待1件を修正。旧Q2 cap4の混在更新不可をQ3成功へ混ぜず記録。visible traceで既存sentence間の空白を除いた独立読取が必要となった中間9失敗も修正し、最終に全対象を再実施した。新fixtureは元P2 E02-0のoriginal/packetの凍結であり、旧fixture差替えではない。
 
 原E02の有限文法と既受理event/feelingの併存に閉じる。一般unknown/ACTION、新要素自身の変更・解消・依存削除はHOLD/UNSUPPORTED。旧Q2 cap4では混在更新の5 contributionを提供できず意味保存後BODY_UNAVAILABLEとなる制限を残し、capを緩めない。現在のQ3実serviceでの隔離SQL/RPC保存・中断再開成功と区別する。実モデル／有料推論／重み／学習／本人DB／Render／通常application有効化／公開API・DTO・RN変更／merge／deployは0。限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT、product_credit=0／PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=false。
+
+
+## 2026-10-23 — P4限定offline実装・検証
+
+Mash承認のP4をAPI4fd8db4へ実装。正本03#cmee-p4-implemented／05#cmee-p4-actual-types、実結果はtrial/piece_semantic_snapshot_results.json。新P4・P1・旧Piece4file・既存Emlis snapshotの計7file、339 passed／FAIL0／SKIP0、38.78秒、34 subtestsと既存warning1。73件初回や中間runとの合算なし。
+
+元7field／owner／record／version／stage／P1 receiptとquote、6claim／2関係／全選択、引用は正しい意味変異、再hash改変、bool/int型混同、author-free検査の作者非呼出し、意味／plan／完成本文のprivate再読、意味保存後の実作者例外と明示再開、完成本文の再生成禁止、旧B8選択資格と隔離SQL保存を確認。旧期待・historical fixtureを緩めない。初回のtest構文、誤標本、環境変数漏れをtrialへ記録した。実DB／Auth／端末／画像／商品受入れ／追加CIではない。出力は原文段落保持。通常B8／実モデル／DB・稼働有効化は0、P5や一般文章品質へ自動進行しない。

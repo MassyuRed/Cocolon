@@ -215,3 +215,33 @@ ai/tests/test_cmee_v1a_i1sx_contracts.py \
 API反映は[302d122](https://github.com/MassyuRed/mashos-api/commit/302d1223362484b30cf66c9c2c3ca3a72b6cdf2d)、fixture1pathだけをGitHub全文／blob／changed paths／PR headで確認済み。追加の広範囲CIは実行せず[skip ci]。元CIの失敗履歴を維持する。
 
 次の内部準備は[Piece P4具体案](../../../designs/cmee/v1/03_piece_v1c_detailed_design.md#cmee-p4-offline-piece-proposal)。P01-Nの候補→immutable意味snapshot→既存plan／作者→同一private保存再読、構造化選択の保持と本文への非補完を具体化。未実装・契約差分の判断前。[Analysis P5の実source差分](../../../designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md#cmee-p5-offline-gap)も残した。P1/P2/C0／元packet／結果JSONは不変で再生成0。新profileの実admission、通常B8、実DB、Render、モデル呼出しは今回0。STRUCTURE_MAP_DELTA_NONE、primary=BLOCKER_NARROWED、product_credit=0、automatic_progression=false。
+
+<a id="p4-piece-semantic-implemented"></a>
+## 11. 承認済みP4：元選択を保持するPiece内部実装
+
+Mashの具体承認後、API302d122／Cocolon3c2fa9cから限定実装。[API4fd8db4](https://github.com/MassyuRed/mashos-api/commit/4fd8db4f5ad24336368a63f09f9d88170ab41fa0)の7fileをGitHubから全文・blob・変更集合・headで確認済み。新private10型／例外2、既存4ownerのarm、新test／fixture。P1 receipt・元P2 packet・C0・旧全outcome fixture・既存結果JSONは変更0。actual仕様はdesign03#cmee-p4-implemented、型は05#cmee-p4-actual-types、全fileは01A末尾。
+
+新`piece_semantic_snapshot_results.json`にP01元7field／元候補／全private serialized state／実artifact／同一再読／型field一覧／source blobを保存した。モデル出力ではない。本人選択は喜び／不安weakの2件で、元の両field/indexをaliasとして保持し、全てSOURCE_SELECTION_RETAINED_NOT_TEXTUALIZED。本文へ不安・原因・強度を足さない。6claim／5文／2関係、原「でも」・te連結・否定・次回の条件を保持。実本文は原文と同一の二段落で、自然な新文章や商品品質向上を主張しない。
+
+最終実行は7file **339 passed／FAIL0／SKIP0、38.78秒、既存warning1、34 subtests**。34や初回73・中間runを加算しない。Python3.12.14、pytest8.4.1／pytest-subtests0.14.2、Node24.19.0／既存PGlite0.5.8を再発見・import確認して使用。製品依存変更0、実DBではない。
+
+```bash
+# Q2_PGLITE_MODULE is the rediscovered existing @electric-sql/pglite directory.
+PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONDONTWRITEBYTECODE=1 \
+PYTHONPATH=ai/services/ai_inference:ai/tests:ai \
+python -B -m pytest -q --tb=short -ra -p pytest_subtests.plugin \
+-p no:cacheprovider -c /dev/null --noconftest \
+ai/tests/test_cmee_piece_semantic_snapshot.py \
+ai/tests/test_cmee_preparation.py \
+ai/tests/piece_v2/test_b08_cmee_piece_consumer.py \
+ai/tests/piece_v2/test_b08_engine_result_binding.py \
+ai/tests/piece_v2/test_b08_source_meaning_review.py \
+ai/tests/piece_v2/test_b05a_piece_selected_feeling_binding.py \
+ai/tests/test_cmee_emlis_semantic_snapshot.py
+```
+
+初回new testはwith文の構文ミスを起動前compileで直し、73件成功。その後reviewでdataclassのbool/int型混同をcanonical全文比較へ修復し、本文失敗の採用snapshot保持・有効request ref保持・巨大elapsed整数のOverflowError拒否を追加した。中間7file検査は323成功／1失敗／11skip／2error、19.35秒。新UNSUPPORTED検査が変更sourceに旧quoteを使っていたためP1が正しくREJECTEDとし、意図した未対応familyを検査できていなかった。実sourceへ合うquoteに修正した。SQL分はQ2 module環境変数漏れで、再発見済み既存moduleを指定して最終全成功。旧期待や期限・時計・SQLを変更していない。
+
+意味／plan／完成本文の段階別private roundtripに加え、実作者を例外化する前に意味を隔離fileへ保存し、実例外後に同fileから候補再取得／再採用なしで再開を確認。完成済みはcompiler／作者を例外化しても同artifactを返す。sourceの所有者照合は認証の代用ではない。caller-managed private保存で、サービスの自動durability、実Auth、Supabase保存、画像や本人端末は未確認。
+
+新raw採取・同一再読は本文確認用で、339へ加算しない。全7変更byteとsource blobをremote照合済み、追加GitHub CIは[skip ci]で0。全suiteや既存失敗の修復とはしない。実モデル／推論／学習／課金／実DB／Render／通常B8／公開API/DTO／RN／画像／merge/deploy0。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、商品0／正式0/3／PRODUCT_NOT_CLEAR／candidate_ready=false／automatic_progression=false。P5と一般文章品質／通常接続は別残件。

@@ -3505,3 +3505,10 @@ GET /healthz200、/app/bootstrap200とPiece8flag一致（private4true/public-wri
 
 
 資料反映4571の既存自動検査5件は3成功/2失敗。System Context2件（39865542760/39865542717）は各225 PASS/1 FAIL、変更していないtestのseed期待[8,5]と現profile[1,8,5]の不一致。未修復/再試行0、Piece CI1805やRN描画へ合算しない。詳細・原logは入口§119.5/manifest。最終docs補正のみ[skip ci]。
+
+
+## 2026-10-23 — Piece P4：承認済み限定offline意味snapshot
+
+新piece_semantic_admission.pyがP1元7field／receiptを再束縛し、P01の6claim／5文／2関係と全選択をimmutable snapshotへ保持。Engineの明示offline Piece inputだけが既存source／compiler／唯一作者／author-free policyのprivate armへ接続する。既存B8／public lifecycle／DB／RN／renderer／fit／exportは未接続・変更0。Emlis／Analysisのsource資格を拡大しない。
+
+出力は原文二段落の保持で、選択不安を本文へ補わず、一般文章整形・商品合格とはしない。private caller-managedの意味／plan／完成本文serialize/reload、意味保存後の作者例外と明示再開、完成本文の非再生成を確認。対象7file339成功、34subtestsは加算しない。実sourceはAPI4fd8db4、全file01A末尾、型05#cmee-p4-actual-types、仕様03#cmee-p4-implemented、結果trial§11／JSON。STRUCTURE_MAP_DELTA_PRESENT、新private dataclass10・例外2（旧共有logical registry不変）。限定TECHNICAL_CREDIT、商品0／正式0/3／candidate_ready=false／automatic_progression=false。通常接続・モデル・P5・一般文章品質は別残件。
