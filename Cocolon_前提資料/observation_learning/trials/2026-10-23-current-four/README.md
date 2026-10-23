@@ -173,3 +173,23 @@ Mashが限定実装へ「進めていいよ」と明示承認。API原本b7eb534
 E02-0は依然UNSUPPORTED。本人不明のstatement/joy対象/二時点、同span二actionの一意対応、原格/省略主体/te節とconcession、listenの句点によるfield/native範囲差を[具体的追加案](../../../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-targeted-unknown-action-proposal)へ保存。未実装であり、E02-Bの架空pendingやJOY_ASPECT新問は含めない。次案の静的照合を試験成功へ換算しない。
 
 source修復はemlis_semantic_admission.pyだけ。作者/共有型/通常service/公開API/DTO/RN/実DB/Render/モデル/課金/merge/deploy0、新runner/checkerなし。STRUCTURE_MAP_DELTA_NONE、限定TECHNICAL_CREDIT、商品0/正式0/3/candidate_ready=false/automatic_progression=false。
+
+
+<a id="targeted-unknown-action-v2"></a>
+## 9. 承認済み本人明示不明・二行動の実装と保存再開
+
+Mashの追加範囲への「進めていいよ」を受領し、本人明示のJOY_ASPECT不明と二行動を、新規・明示offlineの`emlis_candidate_snapshot.v2`へ限定実装した。原E02-0は四claim／unknown statement→joy対象／過去の喜びと記述present／原格4つ／OMITTED主体／te連結とconcessionを、既存作者の実本文・private保存再開まで保持する。E02-0自身は問いなしENDで、架空pendingを作らない。
+
+snapshot schemaは`cocolon.cmee.emlis_semantic_snapshot.v2`、checkpointは`cocolon.cmee.emlis_answer_meaning.v3`、admission/adapter各1。旧profileはFRESH adapter2・保存1/2をそのまま再現する。namespace tupleと全prior edgeの同profileを照合する。native_bindingsは意味hashへ含め、graph IDはhashへ含めない。checkpoint確定後のclaim→nucleus→nodeとnative relation→edgeを明示導出し、同span二actionを別核・別nodeとして保持する。
+
+実際に成立する別焦点のQ3 pendingからADD／REVISE／WITHDRAWを通し、新四要素のpacket・typed bindings・核対応が未変更であることを確認。Q3実serviceは意味保存後のCancelledError→保存GET→明示retryを通し、候補再取得なし・意味checkpoint重複なし。通常readerの再開は作者を呼ばず保存DTOを返し、can_write=falseになる。未対応更新はprivate評価を残しANSWER_UNREFLECTED／current_observation=nullで旧本文を新prefixへ付替えない。
+
+初回の実Observationは「うれしかった一方で、どこがうれしかったかはまだ曖昧なのですね。」「打合せで後輩に説明を任せて、最後まで聞いたのですね。」。Receptionは「その打合せでの関わり方に、私は心が留まります。うれしかったという気持ちも、どの部分かまだ曖昧なままで受け止めています。」。行動の短い照応は同prefixの実Observationが独立読取に合格した場合だけ束縛し、別の生成本文・保存旧本文から補わない。喜びのどの部分かを保持し、原因不明／喜び自体の不明／信頼・成長へ変えない。
+
+四typed binding familyは既存PreMeaningの新専用qualifier rowへ渡し、UNKNOWN carrierとjoyの肯否・modality・時点・evidence、原格とTE witnessを独立照合する。native TEはprivate scope-only linkで、ACTION_BEFORE_AFTER／同時性へ代用しない。既存Observation／HR作者と既存独立readerに有限armを追加。各section17件のSnapshotBindingConsumptionV2が、slice／case／unknown／written linkを実visible範囲とgraph対応へ束縛する。本文変異8条件、candidate閉鎖5、canonical再hash改変5、新要素target更新4、越native句点1、unknown carrier改変3、TE witness改変3等を拒否確認した。
+
+最終対象146 passed／FAIL0／SKIP0、106.30秒、既存警告2。内訳はsnapshot同family70（旧35＋新35）、P1旧22、Q2/Q3 application旧54。34 subtests・反復実行・本文採取を件数へ加算しない。旧adapter1/2の全outcome fixtureは変更0。旧広範囲Q1/Q3の未分類失敗は未解消で、全suite成功とはしない。
+
+原E02の有限文法と既受理event/feelingの併存に閉じる。一般unknown/ACTION、新要素自身の変更・解消・依存削除はHOLD/UNSUPPORTED。旧Q2 cap4では混在更新の5 contributionを提供できず意味保存後BODY_UNAVAILABLEとなる制限を残し、capを緩めない。現在のQ3実serviceでの隔離SQL/RPC保存・中断再開成功と区別する。実モデル／有料推論／重み／学習／本人DB／Render／通常application有効化／公開API・DTO・RN変更／merge／deployは0。限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT、product_credit=0／PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=false。
+
+原文/全未加工outcome/checkpoint/source blob/途中の問題は、既存semantic_snapshot_results.jsonのtargeted_unknown_action_v2へ追記。過去C0/P1/P2と旧v1結果を上書きしない。初回E02はP1材料request prep-b9e74c65cdf2eaac838906c19e661d18ee980855c5bda172bd7a520997869763が一致。新単位はモデル推論ではなく、保存済み手作業P2候補の限定採用を確認したもの。

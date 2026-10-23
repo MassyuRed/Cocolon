@@ -2,9 +2,7 @@
 
 ## 現在の再開案内 — 2026-10-23
 
-**CMEE接続仕様・offline準備を先行し、9B比較を並行する方針をMashが承認。** [最新議事録の具体的作業計画](Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)へ、変更owner・依存順・成果・完了条件・未着手状態・予算・新セッションの再開手順を保存しました。**次はP1：CMEE内部の材料・未採用候補の入出力仕様を整理し、既存4場面と固定仮データだけでoffline確認する準備。実モデル接続・API推論・重み読込は含みません。** モデル最終選定・外部認証を待たずに進められます。
-
-現CMEEのC0は実行・保存済み。9B最大4リクエスト／利用消費50円は承認済み未実行。Plus980円／Premium1,980円は価格上限、27Bは候補外。今回の成果は計画保存であり、offline境界実装・意味採用・追加学習・DB／配備・商品合格ではありません。全機能の現在地は[最新情報](../00_cocolon_current_product_and_state.md)を先に確認し、以下の古い未決・未着手記載は当時の履歴として読みます。
+**現在の再開先は[latest weekly L](Cocolon_Weekly_Review_20261017.md#20261023-cmee-targeted-unknown-action-v2)。** Mashの追加範囲への「進めていいよ」を受領し、本人明示のJOY_ASPECT不明と二行動を、新規・明示offlineの`emlis_candidate_snapshot.v2`へ限定実装した。原E02-0は四claim／unknown statement→joy対象／過去の喜びと記述present／原格4つ／OMITTED主体／te連結とconcessionを、既存作者の実本文・private保存再開まで保持する。E02-0自身は問いなしENDで、架空pendingを作らない。 対象146成功、正式Product Read0/3。旧profile/C0/P1/P2を保持し、通常有効化/実モデル/実DB/Renderは0。新要素自身の一般更新はHOLD、Q2旧cap制限と商品品質は残件。
 
 ## 2026-10-20 方針追補（履歴） 観測技術の継承と学習型EmlisAI
 

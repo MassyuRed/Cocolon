@@ -887,7 +887,7 @@ serviceは候補取得STARTEDとRECEIVEDを既存private OPERATIONへ別保存�
 <a id="cmee-targeted-unknown-action-proposal"></a>
 ## 次の限定案 — E02-0の本人明示不明と二行動
 
-**PROPOSED_ONLY / IMPLEMENTATION_APPROVAL_PENDING。** 今回この追加採用は実装0。既承認のevent/reaction初版を自動拡大しない。次の一単位は明示offlineの新規Emlisだけで、本人不明と二行動を初回本文/保存再開まで保持すること。既存の実pendingが成立する混在系列では、新要素を変更しない既受理回答後にも保持する。E02-0自体に架空の問い/回答を作らない。
+**提案時はPROPOSED_ONLY / IMPLEMENTATION_APPROVAL_PENDING。Mashは追加範囲を承認済み。実装・検証結果は後続節を参照。** 提案作成時点ではこの追加採用は実装0。既承認のevent/reaction初版を自動拡大しない。次の一単位は明示offlineの新規Emlisだけで、本人不明と二行動を初回本文/保存再開まで保持すること。既存の実pendingが成立する混在系列では、新要素を変更しない既受理回答後にも保持する。E02-0自体に架空の問い/回答を作らない。
 
 | 正確に残す意味 | 現sourceの不足と最小変更 |
 |---|---|
@@ -915,3 +915,21 @@ serviceは候補取得STARTEDとRECEIVEDを既存private OPERATIONへ別保存�
 完了は全意味を残す初回実本文、同版保存再読/中断再開、実際に成立するpending系列での未変更素材保持、旧profile/保存adapter1/2再現、必要逆検査と回帰。本文失敗でも意味先行保存を維持し、欠ける節を消して部分成功へしない。復唱/意味label/集合定型性が明白ならProduct ReadをMashへ戻さない。型/trace/試験数だけで新案を完了にしない。
 
 Rule18 §11.3 LEVEL_3（既説明scope外の意味採用・私有保持契約追加）。モデル選定前に本人明示不明/二行動を落とす現blockerを解消するための一案。複数ownerの実装/本文確認/旧互換/保存再開を一単位、所要は未実測で途中保存を行う。追加課金/Mash端末操作0。新Engine/runner/checker、通常application/公開API/DTO/RN/実DB/Render/実モデル/学習/merge/deployは範囲外。必要意味が一段でも落ちる、旧版再解釈、別仕組み追加やscope増加が必要なら止め、最小差分だけ既存ownerへ残す。
+
+
+<a id="20261023-cmee-targeted-unknown-action-v2"></a>
+## 2026-10-23 — 承認済み本人明示不明・二行動の限定実装
+
+Mashの追加範囲への「進めていいよ」を受領し、本人明示のJOY_ASPECT不明と二行動を、新規・明示offlineの`emlis_candidate_snapshot.v2`へ限定実装した。原E02-0は四claim／unknown statement→joy対象／過去の喜びと記述present／原格4つ／OMITTED主体／te連結とconcessionを、既存作者の実本文・private保存再開まで保持する。E02-0自身は問いなしENDで、架空pendingを作らない。
+
+snapshot schemaは`cocolon.cmee.emlis_semantic_snapshot.v2`、checkpointは`cocolon.cmee.emlis_answer_meaning.v3`、admission/adapter各1。旧profileはFRESH adapter2・保存1/2をそのまま再現する。namespace tupleと全prior edgeの同profileを照合する。native_bindingsは意味hashへ含め、graph IDはhashへ含めない。checkpoint確定後のclaim→nucleus→nodeとnative relation→edgeを明示導出し、同span二actionを別核・別nodeとして保持する。
+
+四typed binding familyは既存PreMeaningの新専用qualifier rowへ渡し、UNKNOWN carrierとjoyの肯否・modality・時点・evidence、原格とTE witnessを独立照合する。native TEはprivate scope-only linkで、ACTION_BEFORE_AFTER／同時性へ代用しない。既存Observation／HR作者と既存独立readerに有限armを追加。各section17件のSnapshotBindingConsumptionV2が、slice／case／unknown／written linkを実visible範囲とgraph対応へ束縛する。本文変異8条件、candidate閉鎖5、canonical再hash改変5、新要素target更新4、越native句点1、unknown carrier改変3、TE witness改変3等を拒否確認した。
+
+実際に成立する別焦点のQ3 pendingからADD／REVISE／WITHDRAWを通し、新四要素のpacket・typed bindings・核対応が未変更であることを確認。Q3実serviceは意味保存後のCancelledError→保存GET→明示retryを通し、候補再取得なし・意味checkpoint重複なし。通常readerの再開は作者を呼ばず保存DTOを返し、can_write=falseになる。未対応更新はprivate評価を残しANSWER_UNREFLECTED／current_observation=nullで旧本文を新prefixへ付替えない。
+
+初回の実Observationは「うれしかった一方で、どこがうれしかったかはまだ曖昧なのですね。」「打合せで後輩に説明を任せて、最後まで聞いたのですね。」。Receptionは「その打合せでの関わり方に、私は心が留まります。うれしかったという気持ちも、どの部分かまだ曖昧なままで受け止めています。」。行動の短い照応は同prefixの実Observationが独立読取に合格した場合だけ束縛し、別の生成本文・保存旧本文から補わない。喜びのどの部分かを保持し、原因不明／喜び自体の不明／信頼・成長へ変えない。
+
+最終対象146 passed／FAIL0／SKIP0、106.30秒、既存警告2。内訳はsnapshot同family70（旧35＋新35）、P1旧22、Q2/Q3 application旧54。34 subtests・反復実行・本文採取を件数へ加算しない。旧adapter1/2の全outcome fixtureは変更0。旧広範囲Q1/Q3の未分類失敗は未解消で、全suite成功とはしない。
+
+原E02の有限文法と既受理event/feelingの併存に閉じる。一般unknown/ACTION、新要素自身の変更・解消・依存削除はHOLD/UNSUPPORTED。旧Q2 cap4では混在更新の5 contributionを提供できず意味保存後BODY_UNAVAILABLEとなる制限を残し、capを緩めない。現在のQ3実serviceでの隔離SQL/RPC保存・中断再開成功と区別する。実モデル／有料推論／重み／学習／本人DB／Render／通常application有効化／公開API・DTO・RN変更／merge／deployは0。限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT、product_credit=0／PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=false。

@@ -8,7 +8,7 @@ Cocolon／EmlisAIが、相手自身の価値基準を学び、その人の思考
 
 ## 現在の再開地点（2026-10-23・CMEEのoffline準備を先行、9B比較を並行）
 
-**P1/P2に続き、Mash承認済みの限定Emlis snapshot内部実装を完了しました。** 新規・明示offlineだけで暫定意味→既存本文/実問い→ADD/REVISE/WITHDRAW→隔離保存/再開まで接続。[実結果・未加工本文・限界](trials/2026-10-23-current-four/README.md#p3)。初版の新25＋P1旧22＋旧application54は対象101成功、今回adapter範囲修復の最終対象35成功、旧広範囲失敗は未解消で全suite成功ではありません。実モデル/推論/実DB/Render/通常application有効化0。E02-0の本人不明/行動は未対応のまま保持。裸時点語/はの反復を修復し、もは意味を残して未解消。本人不明/二行動の具体追加案は設計01/05へ保存しました。次は[latest weekly K](../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-model-preparation)からnative対応と作者の具体差分へ進み、認証/モデル最終選定を待ちません。
+**現在の再開先は[latest weekly L](../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261023-cmee-targeted-unknown-action-v2)。** Mashの追加範囲への「進めていいよ」を受領し、本人明示のJOY_ASPECT不明と二行動を、新規・明示offlineの`emlis_candidate_snapshot.v2`へ限定実装した。原E02-0は四claim／unknown statement→joy対象／過去の喜びと記述present／原格4つ／OMITTED主体／te連結とconcessionを、既存作者の実本文・private保存再開まで保持する。E02-0自身は問いなしENDで、架空pendingを作らない。 対象146成功、正式Product Read0/3。旧profile/C0/P1/P2を保持し、通常有効化/実モデル/実DB/Renderは0。新要素自身の一般更新はHOLD、Q2旧cap制限と商品品質は残件。
 
 Plus980円／Premium1,980円は価格上限、27Bは候補外。[小型AI再選定](model_selection/2026-10-22-three-core/2026-10-23-small-model-reselection.md)のQwen3.5-9B従量API比較は最大4リクエスト／利用消費50円の既承認範囲で並行する。外部推論・課金・チャージ0。安全な認証依頼が中断された後の認証状態は未確認で、準備側の停止条件にしない。
 

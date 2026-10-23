@@ -3486,3 +3486,16 @@ P2として確定するのは以上の対応先・維持条件・不足の区別
 [adapter2](01_shared_kernel_and_runtime_contracts.md#cmee-adapter-v2-correction)は裸時点語/はを作者へ重ねて渡さず、原snapshot/時点/程度/否定を保持。保存1は原版再現、もは意味を守り反復残件を残す。最終対象35成功。作者/通常API/RNは変更0。
 
 [本人明示不明/二行動の次案](01_shared_kernel_and_runtime_contracts.md#cmee-targeted-unknown-action-proposal)は未実装。過去の喜びと記述時点の曖昧な側面、二行動/原格/省略主体/te連結を別roleで保つ。JOY_ASPECT新問と新要素自身の一般更新は含めず、実pending/ENDを維持し、未対応回答はHOLD。具体owner/完了/停止は01、型は05、実行事実はtrialへ置く。
+
+
+## 2026-10-23 — 本人不明・二行動の承認済み実装
+
+Mashの追加範囲への「進めていいよ」を受領し、本人明示のJOY_ASPECT不明と二行動を、新規・明示offlineの`emlis_candidate_snapshot.v2`へ限定実装した。原E02-0は四claim／unknown statement→joy対象／過去の喜びと記述present／原格4つ／OMITTED主体／te連結とconcessionを、既存作者の実本文・private保存再開まで保持する。E02-0自身は問いなしENDで、架空pendingを作らない。
+
+初回の実Observationは「うれしかった一方で、どこがうれしかったかはまだ曖昧なのですね。」「打合せで後輩に説明を任せて、最後まで聞いたのですね。」。Receptionは「その打合せでの関わり方に、私は心が留まります。うれしかったという気持ちも、どの部分かまだ曖昧なままで受け止めています。」。行動の短い照応は同prefixの実Observationが独立読取に合格した場合だけ束縛し、別の生成本文・保存旧本文から補わない。喜びのどの部分かを保持し、原因不明／喜び自体の不明／信頼・成長へ変えない。
+
+実際に成立する別焦点のQ3 pendingからADD／REVISE／WITHDRAWを通し、新四要素のpacket・typed bindings・核対応が未変更であることを確認。Q3実serviceは意味保存後のCancelledError→保存GET→明示retryを通し、候補再取得なし・意味checkpoint重複なし。通常readerの再開は作者を呼ばず保存DTOを返し、can_write=falseになる。未対応更新はprivate評価を残しANSWER_UNREFLECTED／current_observation=nullで旧本文を新prefixへ付替えない。
+
+既存の唯一作者へ有限armを加え、別末尾補足や別rendererで欠落を隠さない。上の「未実装」は提案時の履歴。通常有効化と一般理解の完成は含まない。
+
+原E02の有限文法と既受理event/feelingの併存に閉じる。一般unknown/ACTION、新要素自身の変更・解消・依存削除はHOLD/UNSUPPORTED。旧Q2 cap4では混在更新の5 contributionを提供できず意味保存後BODY_UNAVAILABLEとなる制限を残し、capを緩めない。現在のQ3実serviceでの隔離SQL/RPC保存・中断再開成功と区別する。実モデル／有料推論／重み／学習／本人DB／Render／通常application有効化／公開API・DTO・RN変更／merge／deployは0。限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT、product_credit=0／PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=false。

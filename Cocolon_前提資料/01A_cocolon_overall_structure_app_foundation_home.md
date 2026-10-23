@@ -4453,3 +4453,28 @@ prefix `ai/services/ai_inference/`はmashos-api。新規production1／既存prod
 | Cocolon `Cocolon_前提資料/observation_learning/trials/2026-10-23-current-four/semantic_snapshot_results.json`（新） | 4合成実本文、P2 E02-0未対応の一実検査、source blob・最終対象試験結果。新runnerではない |
 
 Cocolonの既存文書差分は00、01、本01A、current map01/04、design01/02/05/06、latest weekly、trial README、観測README、比較README。型の唯一ownerはdesign05、構造は本表/CMEE map、実行/失敗はtrial、進行はweeklyへ分離する。P1二moduleと全旧test/fixture、P2inspectionは不変。
+
+
+## 2026-10-23 — 本人不明・二行動の全変更file地図
+
+API既存production10／既存test1／新fixture1／既存handoff1。新production module0。旧節の「作者/共有型変更0」は旧実装単位だけの履歴で、今回へ転用しない。既存scope readerも同じtyped TE束縛を消費するため変更。
+
+| exact path | 今回の責務 |
+|---|---|
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/contracts.py` | 新profile専用四binding、qualifier carrier、消費trace、UNKNOWN exact照合 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py` | 閉鎖admission、4family生成、版dispatch/hash/lineage、typed resolver、保護target更新HOLD |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_input_specific_meaning.py` | 既存private scope readerでTEの実edge/marker/原格groupを照合 |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_projection.py` | 同span二核の明示graph対応、scope-only TE、typed carrier |
+| `ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_thread_surface.py` | 同snapshot resolverと四familyのvisible trace、既存独立検査 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_plan.py` | 有限source groupと過去/従属te検証、閉鎖native TE kind |
+| `ai/services/ai_inference/emlis_ai_grounded_sentence_surface.py` | 既存Observation作者内の有限二行動/対象付き曖昧さ |
+| `ai/services/ai_inference/emlis_ai_grounded_human_reception.py` | 唯一HR作者内の有限groupと短い照応 |
+| `ai/services/ai_inference/emlis_ai_grounded_observation_gate.py` | 作者非呼出しのObservation/照応/格/対象/時点/二行動inverse |
+| `ai/services/ai_inference/emlis_thread_service.py` | 新旧private profile/checkpoint dispatch、明示offline DIのみ |
+| `ai/tests/test_cmee_emlis_semantic_snapshot.py` | 既存35維持＋新35、actual Q3 pending/SQL再開/変異拒否 |
+| `ai/tests/fixtures/cmee_emlis_semantic_targeted_unknown_action_v2.json`（新） | 元P2のoriginal/packetを保持。モデル出力ではない |
+| `ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md` | 現在地/残件/再開導線 |
+
+Cocolon側は現在地00、全体01、本01A、current01/04、design01/02/05/06、最新weeklyと入口README、観測/比較README、既存trial README/JSONを同期。新rule/runner/checkerは作らない。
+
+原E02の有限文法と既受理event/feelingの併存に閉じる。一般unknown/ACTION、新要素自身の変更・解消・依存削除はHOLD/UNSUPPORTED。旧Q2 cap4では混在更新の5 contributionを提供できず意味保存後BODY_UNAVAILABLEとなる制限を残し、capを緩めない。現在のQ3実serviceでの隔離SQL/RPC保存・中断再開成功と区別する。実モデル／有料推論／重み／学習／本人DB／Render／通常application有効化／公開API・DTO・RN変更／merge／deployは0。限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT、product_credit=0／PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=false。

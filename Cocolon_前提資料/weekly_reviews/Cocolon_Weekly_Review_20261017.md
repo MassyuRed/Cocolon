@@ -2266,3 +2266,23 @@ API変更はai/services/ai_inference/cocolon_meaning_experience_engine/emlis_sem
 JのE02-0残件も具体化。[共有01の次限定案](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-targeted-unknown-action-proposal)とschema05へ、本人不明statement/joy対象と二時点、同span二actionの明示対応、原格/省略主体/te節・concession/句点差、作者/逆検査、版/保存/完了/停止を一案として保存。新profile採用は未実装、既説明scope外の意味保持契約を追加するRule18 §11.3 LEVEL_3。既存初版修復の再承認待ちには戻さない。JOY_ASPECT新問/新要素自身の一般更新は含めず、実pendingなしをN/Aで保持する。
 
 STRUCTURE_MAP_DELTA_NONE（既存owner内の修復、private型/経路の実追加0、新fixtureは01Aへ登録）、限定TECHNICAL_CREDIT、product_credit=0/PRODUCT_NOT_CLEAR/正式0/3/candidate_ready=false/automatic_progression=false。外部推論/重み/学習/課金/実DB/Render/通常application/公開API/DTO/RN/merge/deploy0。次は追加採用範囲の判断後、本人不明/二行動を初回本文/保存再開と、実在pendingでの未変更素材保持へ一単位で実装する。
+
+
+<a id="20261023-cmee-targeted-unknown-action-v2"></a>
+## L. 2026-10-23 — 承認済み本人明示不明・二行動の限定offline実装
+
+Mashの追加範囲への「進めていいよ」を受領し、本人明示のJOY_ASPECT不明と二行動を、新規・明示offlineの`emlis_candidate_snapshot.v2`へ限定実装した。原E02-0は四claim／unknown statement→joy対象／過去の喜びと記述present／原格4つ／OMITTED主体／te連結とconcessionを、既存作者の実本文・private保存再開まで保持する。E02-0自身は問いなしENDで、架空pendingを作らない。
+
+snapshot schemaは`cocolon.cmee.emlis_semantic_snapshot.v2`、checkpointは`cocolon.cmee.emlis_answer_meaning.v3`、admission/adapter各1。旧profileはFRESH adapter2・保存1/2をそのまま再現する。namespace tupleと全prior edgeの同profileを照合する。native_bindingsは意味hashへ含め、graph IDはhashへ含めない。checkpoint確定後のclaim→nucleus→nodeとnative relation→edgeを明示導出し、同span二actionを別核・別nodeとして保持する。
+
+実際に成立する別焦点のQ3 pendingからADD／REVISE／WITHDRAWを通し、新四要素のpacket・typed bindings・核対応が未変更であることを確認。Q3実serviceは意味保存後のCancelledError→保存GET→明示retryを通し、候補再取得なし・意味checkpoint重複なし。通常readerの再開は作者を呼ばず保存DTOを返し、can_write=falseになる。未対応更新はprivate評価を残しANSWER_UNREFLECTED／current_observation=nullで旧本文を新prefixへ付替えない。
+
+初回の実Observationは「うれしかった一方で、どこがうれしかったかはまだ曖昧なのですね。」「打合せで後輩に説明を任せて、最後まで聞いたのですね。」。Receptionは「その打合せでの関わり方に、私は心が留まります。うれしかったという気持ちも、どの部分かまだ曖昧なままで受け止めています。」。行動の短い照応は同prefixの実Observationが独立読取に合格した場合だけ束縛し、別の生成本文・保存旧本文から補わない。喜びのどの部分かを保持し、原因不明／喜び自体の不明／信頼・成長へ変えない。
+
+最終対象146 passed／FAIL0／SKIP0、106.30秒、既存警告2。内訳はsnapshot同family70（旧35＋新35）、P1旧22、Q2/Q3 application旧54。34 subtests・反復実行・本文採取を件数へ加算しない。旧adapter1/2の全outcome fixtureは変更0。旧広範囲Q1/Q3の未分類失敗は未解消で、全suite成功とはしない。
+
+原E02の有限文法と既受理event/feelingの併存に閉じる。一般unknown/ACTION、新要素自身の変更・解消・依存削除はHOLD/UNSUPPORTED。旧Q2 cap4では混在更新の5 contributionを提供できず意味保存後BODY_UNAVAILABLEとなる制限を残し、capを緩めない。現在のQ3実serviceでの隔離SQL/RPC保存・中断再開成功と区別する。実モデル／有料推論／重み／学習／本人DB／Render／通常application有効化／公開API・DTO・RN変更／merge／deployは0。限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT、product_credit=0／PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=false。
+
+次回はfresh head/変更pathと本L、現在地00、全file地図01A、設計01/05、trial新§9を確認する。P1/P2や旧v1の未対応を現在の全未実装へ戻さず、通常有効化・実モデル・一般unknown更新へ自動拡張しない。Piece/Analysisの新admission、適格履歴、一般更新、旧時点語反復と商品品質は別残件として保持する。
+
+実装正本の今回commit：[API 723ce9f](https://github.com/MassyuRed/mashos-api/commit/723ce9fe2128e66bd8a296b342466708da031bb3)。source blobと全未加工出力はtrial JSONの同単位へ束縛済み。

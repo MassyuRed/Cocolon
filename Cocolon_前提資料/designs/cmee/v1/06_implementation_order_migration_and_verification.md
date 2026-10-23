@@ -20430,3 +20430,16 @@ test_cmee_emlis_semantic_snapshot.py：35 passed、FAIL/SKIP0、21.49秒。元25
 実本文はADDの「回答した時点では今は」→「回答した時点では」、WITHDRAW併存の「その時にその時は寂しかったことを」→「その時の寂しさを」。途中読取レビューで、もまで削ると添加が失われると判明し、最終前に旧範囲保持へ修正。あの時も…の反復は未解消。全前後本文/source blob/snapshotはtrialのsemantic_snapshot_results.json.adapter_v2_correction。本文採取や反復を試験数へ加算しない。
 
 P1/旧application/旧広範囲失敗は今回再実行0。過去101件や旧広範囲失敗を今回の全suite合格へ変換しない。新unknown/ACTION案は静的対応のみ、意味採用/新本文0。実モデル/DB/Render/公開API/DTO/RN/課金/merge/deploy0。STRUCTURE_MAP_DELTA_NONE、限定TECHNICAL_CREDIT、product_credit=0/PRODUCT_NOT_CLEAR/正式0/3/candidate_ready=false/automatic_progression=false。
+
+
+## 2026-10-23 — 本人不明・二行動の最終対象検証
+
+最終対象146 passed／FAIL0／SKIP0、106.30秒、既存警告2。内訳はsnapshot同family70（旧35＋新35）、P1旧22、Q2/Q3 application旧54。34 subtests・反復実行・本文採取を件数へ加算しない。旧adapter1/2の全outcome fixtureは変更0。旧広範囲Q1/Q3の未分類失敗は未解消で、全suite成功とはしない。
+
+四typed binding familyは既存PreMeaningの新専用qualifier rowへ渡し、UNKNOWN carrierとjoyの肯否・modality・時点・evidence、原格とTE witnessを独立照合する。native TEはprivate scope-only linkで、ACTION_BEFORE_AFTER／同時性へ代用しない。既存Observation／HR作者と既存独立readerに有限armを追加。各section17件のSnapshotBindingConsumptionV2が、slice／case／unknown／written linkを実visible範囲とgraph対応へ束縛する。本文変異8条件、candidate閉鎖5、canonical再hash改変5、新要素target更新4、越native句点1、unknown carrier改変3、TE witness改変3等を拒否確認した。
+
+実際に成立する別焦点のQ3 pendingからADD／REVISE／WITHDRAWを通し、新四要素のpacket・typed bindings・核対応が未変更であることを確認。Q3実serviceは意味保存後のCancelledError→保存GET→明示retryを通し、候補再取得なし・意味checkpoint重複なし。通常readerの再開は作者を呼ばず保存DTOを返し、can_write=falseになる。未対応更新はprivate評価を残しANSWER_UNREFLECTED／current_observation=nullで旧本文を新prefixへ付替えない。
+
+途中の63対象ではread-only can_write差を全文DTO等値へ含めた期待1件を修正。旧Q2 cap4の混在更新不可をQ3成功へ混ぜず記録。visible traceで既存sentence間の空白を除いた独立読取が必要となった中間9失敗も修正し、最終に全対象を再実施した。新fixtureは元P2 E02-0のoriginal/packetの凍結であり、旧fixture差替えではない。
+
+原E02の有限文法と既受理event/feelingの併存に閉じる。一般unknown/ACTION、新要素自身の変更・解消・依存削除はHOLD/UNSUPPORTED。旧Q2 cap4では混在更新の5 contributionを提供できず意味保存後BODY_UNAVAILABLEとなる制限を残し、capを緩めない。現在のQ3実serviceでの隔離SQL/RPC保存・中断再開成功と区別する。実モデル／有料推論／重み／学習／本人DB／Render／通常application有効化／公開API・DTO・RN変更／merge／deployは0。限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT、product_credit=0／PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=false。

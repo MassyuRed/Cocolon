@@ -3065,7 +3065,7 @@ snapshot_refはcanonicalな上記意味内容（schema/profile/各版/request/pr
 
 実装済み：現profile/snapshot/checkpoint版とadmission_version=1は不変。FRESH adapter_version=2、RESUME許可は保存1/2。裸時点語/はだけのlexical範囲を修復し、も/程度/本当は/否定/全raw claimは保持。意味identityにadapter版を含め、旧1は全outcome再現。前節の「両版とも1」は初版の履歴。
 
-以下はPROPOSED_ONLY。[次限定案](01_shared_kernel_and_runtime_contracts.md#cmee-targeted-unknown-action-proposal)の型owner。profile=emlis_candidate_snapshot.v2、snapshot=cocolon.cmee.emlis_semantic_snapshot.v2、checkpoint=cocolon.cmee.emlis_answer_meaning.v3を別にし、そのadmission/adapterは各1から開始する案。旧profile/旧型は維持。dispatch keyは(profile,snapshot schema,admission版,adapter版)の組とし、新profileのadapter1は旧profileのadapter2時点修復を基底にする。同番号を旧実装へのaliasにしない。新snapshotは現packet/source/control/priorにnative_bindingsを加え全体を意味identityへ含める。
+以下は提案作成時のPROPOSED_ONLY。現在は同追加範囲を承認済みで、後続の実装型節を参照。[次限定案](01_shared_kernel_and_runtime_contracts.md#cmee-targeted-unknown-action-proposal)の型owner。profile=emlis_candidate_snapshot.v2、snapshot=cocolon.cmee.emlis_semantic_snapshot.v2、checkpoint=cocolon.cmee.emlis_answer_meaning.v3を別にし、そのadmission/adapterは各1から開始する案。旧profile/旧型は維持。dispatch keyは(profile,snapshot schema,admission版,adapter版)の組とし、新profileのadapter1は旧profileのadapter2時点修復を基底にする。同番号を旧実装へのaliasにしない。新snapshotは現packet/source/control/priorにnative_bindingsを加え全体を意味identityへ含める。
 
 | 新profile専用private型案 | 必須field/保持条件 |
 |---|---|
@@ -3079,3 +3079,14 @@ P2unknownにはstatement_claim_refがないため、同evidenceのEXPLICIT_UNKNO
 次案の座標はraw_field_*が元field相対、lexical_*が実native spanのnormalized_raw_text相対のUnicode scalar半開区間。UTF-8座標へ直接流用しない。unknown statementの命題はAFFIRMED/ASSERTED_AS_WRITTENで、native uncertaintyの感情方向はneutral/modality uncertainへ対応させる案。原文の明示記述SOURCE_EXPLICIT、主体/対象への読みPROVISIONAL_INTERPRETATION、未確定な側面UNKNOWNを別roleに保持し、喜びや曖昧さをNEGATEDへ書換えない。
 
 新案のsnapshotはclaim/nucleus/sliceまでをhashへ固定し、graph_node_refを含めない。graph IDは現sourceでcheckpointに依存するため、snapshot→checkpoint→graph→snapshotの循環を作らない。checkpoint確定後にprojection ownerがnucleus→graph nodeの明示対応を導出/照合し、component/traceへ渡す。保存再開は同snapshot/checkpointから同対応を再導出する。
+
+
+## 2026-10-23 — 新profile2の実装型
+
+snapshot schemaは`cocolon.cmee.emlis_semantic_snapshot.v2`、checkpointは`cocolon.cmee.emlis_answer_meaning.v3`、admission/adapter各1。旧profileはFRESH adapter2・保存1/2をそのまま再現する。namespace tupleと全prior edgeの同profileを照合する。native_bindingsは意味hashへ含め、graph IDはhashへ含めない。checkpoint確定後のclaim→nucleus→nodeとnative relation→edgeを明示導出し、同span二actionを別核・別nodeとして保持する。
+
+前表の四型を実装した。WrittenLink.relation_refはnative semantic-relation ID、scope_refsは候補上の元scopeを保持。新SnapshotSourceQualifierRowV2はnode_ref／qualifier_refsとsnapshot_ref／checkpoint_ref／四family／nucleus_node_bindings／relation_edge_bindingsを持つ。旧GroundedSourceQualifierRowへnull fieldを足さない。SnapshotBindingConsumptionV2はsnapshot_ref／binding_kind／binding_ref／nucleus_refs／graph_node_refs／graph_edge_refs／source_slice_refs／section／visible_scalar_start/endを持ち、既存artifact private traceへ追加する。範囲はsection相対Unicode scalar半開区間で、source field座標と混ぜない。
+
+新専用SnapshotEvidenceSpanResolverV2は同snapshotから復元した四typed tupleを既存resolverへ渡す内部adapterで、別作者・Engine・runnerではない。source sliceはlisten raw14:22／native lexical14:21を保持し、終端「。」だけを除外。新unknown carrierは声明present/neutral/uncertainと対象joy past/positive/feeling、元evidenceと一意なgraph対応をexact照合する。
+
+原E02の有限文法と既受理event/feelingの併存に閉じる。一般unknown/ACTION、新要素自身の変更・解消・依存削除はHOLD/UNSUPPORTED。旧Q2 cap4では混在更新の5 contributionを提供できず意味保存後BODY_UNAVAILABLEとなる制限を残し、capを緩めない。現在のQ3実serviceでの隔離SQL/RPC保存・中断再開成功と区別する。実モデル／有料推論／重み／学習／本人DB／Render／通常application有効化／公開API・DTO・RN変更／merge／deployは0。限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT、product_credit=0／PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=false。

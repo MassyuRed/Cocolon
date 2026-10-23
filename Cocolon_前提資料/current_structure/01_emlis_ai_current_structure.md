@@ -1849,3 +1849,18 @@ STRUCTURE_MAP_DELTA_PRESENT。既存production10owner内の変更、新private l
 ## 2026-10-23 — 承認済み限定offline snapshot経路
 
 新規Emlisの明示offline DIだけ、手作業候補→新semantic snapshot→既存thread plan/projection/author/question→実回答ADD/REVISE/WITHDRAW→意味先行保存と再開を接続した。実owner/全fileは01A末尾、schemaは設計05、制限と実行は[trial P3](../observation_learning/trials/2026-10-23-current-four/README.md#p3)。旧意味parser/guardは既定経路で維持し、通常factory/API/RNは新profileを開始・更新できない。未設定serviceでは保存再読のみ、can_write=false。Q2/Q3 runtimeと既存tier制御は維持。モデル接続・通常有効化・商品品質合格は未実施。
+
+
+## 2026-10-23 — 本人不明・二行動の新profile2構造
+
+Mashの追加範囲への「進めていいよ」を受領し、本人明示のJOY_ASPECT不明と二行動を、新規・明示offlineの`emlis_candidate_snapshot.v2`へ限定実装した。原E02-0は四claim／unknown statement→joy対象／過去の喜びと記述present／原格4つ／OMITTED主体／te連結とconcessionを、既存作者の実本文・private保存再開まで保持する。E02-0自身は問いなしENDで、架空pendingを作らない。
+
+snapshot schemaは`cocolon.cmee.emlis_semantic_snapshot.v2`、checkpointは`cocolon.cmee.emlis_answer_meaning.v3`、admission/adapter各1。旧profileはFRESH adapter2・保存1/2をそのまま再現する。namespace tupleと全prior edgeの同profileを照合する。native_bindingsは意味hashへ含め、graph IDはhashへ含めない。checkpoint確定後のclaim→nucleus→nodeとnative relation→edgeを明示導出し、同span二actionを別核・別nodeとして保持する。
+
+四typed binding familyは既存PreMeaningの新専用qualifier rowへ渡し、UNKNOWN carrierとjoyの肯否・modality・時点・evidence、原格とTE witnessを独立照合する。native TEはprivate scope-only linkで、ACTION_BEFORE_AFTER／同時性へ代用しない。既存Observation／HR作者と既存独立readerに有限armを追加。各section17件のSnapshotBindingConsumptionV2が、slice／case／unknown／written linkを実visible範囲とgraph対応へ束縛する。本文変異8条件、candidate閉鎖5、canonical再hash改変5、新要素target更新4、越native句点1、unknown carrier改変3、TE witness改変3等を拒否確認した。
+
+実際に成立する別焦点のQ3 pendingからADD／REVISE／WITHDRAWを通し、新四要素のpacket・typed bindings・核対応が未変更であることを確認。Q3実serviceは意味保存後のCancelledError→保存GET→明示retryを通し、候補再取得なし・意味checkpoint重複なし。通常readerの再開は作者を呼ばず保存DTOを返し、can_write=falseになる。未対応更新はprivate評価を残しANSWER_UNREFLECTED／current_observation=nullで旧本文を新prefixへ付替えない。
+
+全変更fileの正本は01A末尾、型は設計05、実行は既存trial JSON.targeted_unknown_action_v2、進行はlatest weekly L。旧節の作者/共有型変更0は過去単位の履歴。
+
+原E02の有限文法と既受理event/feelingの併存に閉じる。一般unknown/ACTION、新要素自身の変更・解消・依存削除はHOLD/UNSUPPORTED。旧Q2 cap4では混在更新の5 contributionを提供できず意味保存後BODY_UNAVAILABLEとなる制限を残し、capを緩めない。現在のQ3実serviceでの隔離SQL/RPC保存・中断再開成功と区別する。実モデル／有料推論／重み／学習／本人DB／Render／通常application有効化／公開API・DTO・RN変更／merge／deployは0。限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT、product_credit=0／PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=false。
