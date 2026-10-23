@@ -66,7 +66,7 @@
         "Cocolon": {
           "repository": "MassyuRed/Cocolon",
           "checkout_ref": "agent/three-core-cmee-current-structure-20260815",
-          "expected_head": "8e3c26f66e13c26e82349c4e02415e149e5e3943",
+          "expected_head": "54d34985ba180e54b521549100fc1f9fcc72f309",
           "role": "RN application, fresh whole-product baseline, structure maps, current weekly review, observation/model comparison and detailed product originals on Draft PR #30"
         },
         "mashos-api": {

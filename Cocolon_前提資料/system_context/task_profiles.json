@@ -46,7 +46,7 @@
           ]
         }
       ],
-      "task_orientation": "Read the entire fresh PR30 whole-product baseline before any task, then its detailed canonical owners and current source. Cover Emlis question/answer and reception, Piece text/image and private deployment versus pending native distribution, Analysis V2/comparison versus unimplemented IF/Saved, and the decided learned-model/CMEE connection and pending model trials. Preserve original input, independent supplements, correction/withdrawal, saved identity, per-core source adoption and product acceptance boundaries. Historical disabled/default-OFF claims describe their frozen scope and do not revoke later explicit Mash decisions or assert current deployment state. Select the next work from the current user instruction and fresh owners; do not automatically start model trials, training, deployment, release or historical Cycle001 work.",
+      "task_orientation": "Read the entire fresh PR30 whole-product baseline before any task, then its detailed canonical owners and current source. Cover Emlis question/answer and reception, Piece text/image and private deployment versus pending native distribution, Analysis V2/comparison versus unimplemented IF/Saved, and the decided learned-model/CMEE connection and pending model trials. The latest three-core cost scenarios, proposed prices and generation caps are unadopted proposals, not current entitlements or authorization for paid trials. Preserve original input, independent supplements, correction/withdrawal, saved identity, per-core source adoption and product acceptance boundaries. Historical disabled/default-OFF claims describe their frozen scope and do not revoke later explicit Mash decisions or assert current deployment state. Select the next work from the current user instruction and fresh owners; do not automatically start model trials, training, deployment, release or historical Cycle001 work.",
       "required_categories": [
         {
           "id": "current_production_emlis_ai",
@@ -410,7 +410,10 @@
             "Cocolon_前提資料/weekly_reviews/README.md",
             "Cocolon_前提資料/weekly_reviews/Cocolon_Weekly_Review_20261017.md",
             "Cocolon_前提資料/observation_learning/README.md",
-            "Cocolon_前提資料/observation_learning/model_selection/2026-10-22-three-core/README.md"
+            "Cocolon_前提資料/observation_learning/model_selection/2026-10-22-three-core/README.md",
+            "Cocolon_前提資料/observation_learning/model_selection/2026-10-22-three-core/2026-10-23-cost-and-plans.md",
+            "Cocolon_前提資料/observation_learning/model_selection/2026-10-22-three-core/cost_model.py",
+            "Cocolon_前提資料/observation_learning/model_selection/2026-10-22-three-core/cost_scenarios.csv"
           ],
           "repository_keys": [
             "Cocolon"

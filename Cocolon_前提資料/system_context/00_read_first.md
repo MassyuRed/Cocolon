@@ -2,6 +2,8 @@
 
 status: CURRENT_TECHNICAL_OWNER__V1_MANAGEMENT_ENTRY_ACTIVE_ON_PR37_WORKING_LINEAGE
 revision_date: 2026-10-23
+current_information_state: REFERENCES_AND_ORIGINAL_ROUTING_UPDATED
+current_generated_context_state: BLOCKED_PYTHON_INDEX_TIMEOUT
 scope: Cocolon System Context Steps 1–7 plus Step 9 management entry and V1 implementation freeze
 step8_status: SKIPPED_BY_MASH_DECISION
 management_entry_activation: 1
@@ -63,6 +65,17 @@ configuration is deployed while the new RN distribution and owner round trip
 remain unverified. Resolve their changing details from the fresh baseline and
 its original owners, not this navigation summary.
 
+The 2026-10-23 three-core cost calculations, proposed prices and generation
+caps are unadopted proposals. Their 172 scenarios use assumed costs; they do
+not establish measured cost, current entitlements or permission for a paid
+model trial. Read the cost proposal, calculator and scenario CSV through the
+current navigation seed before discussing those proposals.
+
+The current configured material heads are Cocolon PR30
+`54d34985ba180e54b521549100fc1f9fcc72f309` and API PR3
+`3084c99e5a08d6e475d8a177e62ebf1548e8a0f9`. The Cocolon head includes
+the concurrent cost-proposal update and the explicit cache-blocker record.
+
 The tracked `current/cmee_working/**` is the historical August snapshot
 (Cocolon `6b0973c841d536a2e6eaa97c586c320a93f83dc7`, API
 `06ce311b3ea728b06f83439d268a34bed917c01c`). It is not the current cache.
@@ -102,6 +115,39 @@ not the execution owner. Existing Python boundary testing and a TypeScript
 boundary check preserve timeout-as-failure. This finite adjustment does not
 guarantee completion; the new exact-head actual run decides whether the cache
 can be used. No successful old cache or partial Python output is substituted.
+
+### 2026-10-23 terminal refresh result — generated cache blocked
+
+The repaired implementation `c602c69cd96d56383b4c18a6334a93451154b52a`
+([run 39871756999](https://github.com/MassyuRed/Cocolon/actions/runs/39871756999))
+again passed all 34 doctor checks. TypeScript indexing and JSON printing
+succeeded (268 and 8 documents), but both provider lint checks returned 1
+with missing external-library symbol information; this is not a complete
+lint pass. The API Python provider still timed out after 1800 seconds:
+1874 candidates, exit 124 and no verified document count. A partial SCIP file
+exists, but Python print/lint never ran and the recorded document count is 0;
+the partial file is not a verified index. Prepare exited 2; verify-only and
+current cache generation did not succeed. Diagnostic artifact `12468291238` records
+the failure. The final remote-head check also failed because PR30 advanced
+from `8e3c26f66e13c26e82349c4e02415e149e5e3943` to the cost-proposal
+commit `642049ad07f89b577f78690e27f72fed72233fc6` during this run.
+The implementation and API heads did not advance during the run.
+
+The final reference synchronization includes those new cost files and the
+subsequent PR30 blocker record. The tracked-path census at these latest
+material heads is 1769 + 2444 = 4213; this is a path census, not a claim that
+every blob received full semantic review. The final documentation/profile
+sync does not rerun the known failing generator and does not turn the earlier
+verifier successes into validation of a current generated cache.
+
+Information, references and original-reading routes are updated; the generated
+context remains blocked. Until a new actual prepare and verify-only succeed
+for the then-current exact heads, read the fresh whole-product baseline,
+applicable canonical owners and source originals directly. Neither the August
+snapshot nor a previous successful cache is current. Do not keep extending
+the timeout: diagnose the Python provider's indexing progress and resource
+use before selecting another repair. The timeout is observed; its deeper
+performance cause is not yet established. No third actual run was performed.
 
 ## Standard flow
 
