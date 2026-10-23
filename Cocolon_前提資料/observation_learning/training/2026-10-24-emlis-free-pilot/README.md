@@ -2,6 +2,8 @@
 
 2026-10-24 JST／華恋／Codex Work Mode。状態：**MashのA40で学習前6回答→9教材1epoch／9step→学習後6回答まで完了し、受領原本を照合。十分な品質改善は確認できず、商品採用・P6統合は未成立。結果は[実行記録と全件診断](../../trials/2026-10-24-qwen9b-free-lora/README.md)。**
 
+**最新の次工程：現在は初回adapter本体を回収できておらず、その重みでの診断は未実施。同じ9教材・同じ固定レシピを1回だけ別runで再作成し、同じsessionで教師適合を診断して重み入り退避fileをダウンロードする手順を準備した。再学習はまだ始めていない。初回重みの復元・同一重みの再現とは扱わない。 詳細は§10。**
+
 Mashの「で？どないすんの、これ。」を受け、既承認の教材整形・不足の補充として作成した。次の観測会をMashへ依頼する代わりに、今回の入力への観測・人間的な受け取り・任意一問・一回答後の更新が揃う応答案を華恋が作る。原18候補・教示5参照・原対話は変更しない。取り下げた読書会の題材は使わない。
 
 ## 1. 学ばせる範囲を先に固定する
@@ -170,3 +172,18 @@ MashのTerminal全文では、curlの保存先 `/workspace/cocolon_emlis_free_20
 Mashは今回新しいPodを作成したこととStop済みを明示し、Pods一覧を提示した。現在の空workspaceは新規noble_magenta_mothのものであり、これを前回の保存失敗／消失の証拠にはしない。一覧には停止中の6Podが残る。初回M1の画面IDに対応するのはeastern_silver_sheep。9教師追加学習の結果にはPodIDがなく、M1と同じPodで行ったとは確定できない。
 
 次はnovel_silver_hamsterの名前からDetailsを開き、作成日時・保存領域を起動せず確認する。このPodは候補であって学習先確定ではない。初回追加学習の記録時刻は2026-10-24 08:00〜08:01 JST。確認前のGPU起動・再学習・Pod削除は行わない。状態AWAITING_EXISTING_POD_DETAILS。現在の新規PodはStop報告受領、元の学習Pod／adapter所在は未確定。
+
+## 10. 重み未回収時の別run再作成・診断・退避（準備済み、未実行）
+
+Mashの「残ってない」とJupyter画面を受領。表示中の /workspace は空だが、画面にはPodIDやvolume設定がなく、初回学習Podの同定・元の重みの永久消失を証明するものではない。候補Podを追加起動して探索を重ねず、次の実行をまとめる具体案として用意する。状態 RECREATION_AND_DIAGNOSTIC_PREPARED_NOT_RUN。現在は初回adapter本体を回収できておらず、その重みでの診断は未実施。同じ9教材・同じ固定レシピを1回だけ別runで再作成し、同じsessionで教師適合を診断して重み入り退避fileをダウンロードする手順を準備した。再学習はまだ始めていない。初回重みの復元・同一重みの再現とは扱わない。
+
+1. `recreate_pilot.sh prepare` は固定d53f9ef0a906624acaeb519f8c4c6eb153e60e51の元runpod.shで、同じrunner・4dataset・依存を準備する。新しいwrapper／diagnostic／exportだけは COCOLON_RECREATION_COMMIT に指定した40桁commitから取得する。準備完了表示は「再作成準備OK」、ここでは学習を行わない。
+2. `recreate_pilot.sh run` は同じ9教師／1epoch／9step、同じseed／LoRA対象・学習率で**別run**を一度だけ実行する。教材・JSON指示・学習量の変更による品質改善試験ではなく、教師への効き方を診断できるadapterを確保するための再作成である。元の初回結果はGitHubで保持する。
+3. 学習後すぐに `export_checkpoint.py` でadapter3fileと結果・条件を退避する。その後 `diagnose_learning.py --reference-result /workspace/cocolon_emlis_free_20261024/latest_results.json` が新runの結果・adapter hash、固定runner／4教材・学習条件を照合し、同じ9教師へのNLL18forwardと生成18件を比較する。引数なしの旧診断は従来どおり初回hashだけを受け付ける。新runを初回重みの未計測結果と呼ばない。
+4. 診断終了・失敗時には再退避し、診断途中logも含める。学習前に停止した場合は重みがないため退避成功とは表示しない。元の学習段階だけのStop案内はwrapperの表示で差し替え、**最終archiveのダウンロード確認後にMashがPodをStop**する。
+
+手元へ保存するのは `/workspace/cocolon_emlis_free_20261024/cocolon_recreated_checkpoint.tar.gz` と同名末尾 `.sha256`。archive内はadapter本体・config・README、前後raw／学習log／診断、4dataset・runner・実行条件・出典commit・Pod識別（環境にあれば）・各fileのSHA256とbyte数。基盤9B重み・cache・venv・資格情報は含めない。生成時にarchive全fileを読み戻して一致確認する。ローカルへのダウンロードとchecksum照合は別に必要であり、Runpod内にarchiveを作っただけでは退避完了としない。ダウンロードしたarchiveをMashから受領した場合は、華恋がchecksumと中身を照合する。
+
+保存済み結果／adapterや開始markerがある場合は再学習を拒否する。内部modeにも排他的開始markerを設け、直接呼出しで繰り返せない。run全体は30分で終了要求＋30秒猶予。内側timerはforegroundで外側と同じprocess groupに保ち、子の学習・診断が時間制限から逃れない。診断自身は900秒＋30秒。**prepare・ダウンロード・待機・Pod全課金の上限ではなく、Podの自動Stopも行わない。** 強制KILLや保存先障害時に新規退避を保証せず、学習直後の先行archiveを残す。失敗しても自動再試行・epoch追加を行わない。
+
+CPUで実施した確認：Python／bash構文、明示した別runと固定レシピ／hash照合、原初回の選択との分離、改変adapterと設定違いの拒否、archive全file／manifest／外側checksumの読戻し、cache／venv除外、symlink・欠損adapter拒否と既存backup保持、診断失敗exit保持と退避、開始marker／内部呼出しの重複拒否。短縮外側1秒のstub試験で、入れ子の学習・診断の子がともに終了し、exit124と読めるadapter archiveを確認した。時間制限の初回stub試験では子が残り失敗したため、上記foreground修正後に両段階を再確認した。Torch／実モデル／GPUを使った新wrapperと診断の完走は未検証。華恋環境からGPU起動・有料推論・再学習は0。商品runtime・P6統合・品質受入れは変更しない。

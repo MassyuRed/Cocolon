@@ -11,7 +11,7 @@ import signal
 import time
 import uuid
 
-from run_pilot import MODEL, REVISION, PINS, SEED, MAX_NEW, EXPECTED_TARGETS, chat_token_ids, encode_training, evaluate, read_jsonl, validate_data, write_json
+from run_pilot import MODEL, REVISION, PINS, SEED, MAX_NEW, DATA_HASHES, EXPECTED_TARGETS, chat_token_ids, encode_training, evaluate, read_jsonl, validate_data, write_json
 
 REFERENCE_SHA256 = "5fb61702d4c5b9e4f1317088b3ef91de53041168fa3313f14086d0c67f09ceb9"
 RUNNER_SHA256 = "c0491131cb6fcccadcb94e25d618acd95bcff9b6eeb875403b2d9723ccc613e4"
@@ -30,16 +30,37 @@ def file_hash(path):
     return digest.hexdigest()
 
 
-def locate_saved_run(directory):
+def locate_saved_run(directory, explicit_reference=None):
     if file_hash(directory / "run_pilot.py") != RUNNER_SHA256:
         raise ValueError("比較元runnerが初回の固定版と異なります。中止します")
+    expected_reference = REFERENCE_SHA256
+    expected_adapters = ADAPTER_HASHES
+    if explicit_reference is not None:
+        data = json.loads(Path(explicit_reference).read_text(encoding="utf-8"))
+        run = data["run"]
+        preflight = run["preflight"]
+        if (run["status"] != "EXECUTION_COMPLETE_NOT_QUALITY_ACCEPTED"
+                or run["model"] != MODEL or run["revision"] != REVISION
+                or preflight["runner_sha256"] != RUNNER_SHA256
+                or preflight["data_sha256"] != DATA_HASHES or preflight["dependencies"] != PINS
+                or run["seed"] != SEED or run["epochs"] != 1 or run["learning_rate"] != 1e-4
+                or run["thinking"] is not False or run["temperature"] != 0
+                or run["max_new_tokens"] != MAX_NEW
+                or set(run["target_modules"]) != EXPECTED_TARGETS
+                or len(data["training"]) != 9
+                or sorted(row["example_index"] for row in data["training"]) != list(range(9))):
+            raise ValueError("明示した再作成結果が元の固定レシピと一致しません")
+        expected_adapters = run["adapter_sha256"]
+        if set(expected_adapters) != set(ADAPTER_HASHES):
+            raise ValueError("再作成adapterの3fileが一致しません")
+        expected_reference = file_hash(explicit_reference)
     for reference in sorted((directory / "results").glob("*/pilot_results.json")):
-        if file_hash(reference) != REFERENCE_SHA256:
+        if file_hash(reference) != expected_reference:
             continue
         adapter = reference.parent / "adapter"
-        if all((adapter / name).is_file() and file_hash(adapter / name) == sha for name, sha in ADAPTER_HASHES.items()):
+        if all((adapter / name).is_file() and file_hash(adapter / name) == sha for name, sha in expected_adapters.items()):
             return reference, adapter
-    raise FileNotFoundError("初回結果とhash一致するadapter本体がありません。再学習せず、保存先を確認してください")
+    raise FileNotFoundError("指定結果とhash一致するadapter本体がありません。再学習せず、保存先を確認してください")
 
 
 def teacher_prompts(examples):
@@ -91,9 +112,12 @@ def measure_nll(model, examples, encoded, path):
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--directory", type=Path, default=Path("/workspace/cocolon_emlis_free_20261024"))
+    parser.add_argument("--reference-result", type=Path, help="別runを明示して診断する場合だけ指定。初回重みの復元とは扱いません")
     args = parser.parse_args()
     directory = args.directory.resolve()
-    reference, adapter = locate_saved_run(directory)
+    reference, adapter = locate_saved_run(directory, args.reference_result)
+    reference_sha = file_hash(reference)
+    adapter_hashes = json.loads(reference.read_text(encoding="utf-8"))["run"]["adapter_sha256"]
     examples, _ = validate_data(directory)
     if {name: importlib.metadata.version(name) for name in PINS} != PINS:
         raise ValueError("初回の固定package版と異なります")
@@ -119,8 +143,11 @@ def main():
     out = directory / "diagnostics" / (time.strftime("%Y%m%d-%H%M%S", time.gmtime()) + "-" + uuid.uuid4().hex[:6])
     out.mkdir(parents=True)
     report = {"status": "RUNNING", "scope": "training-example fit only; not generalization or product acceptance",
-              "reference": str(reference), "reference_sha256": REFERENCE_SHA256,
-              "adapter": str(adapter), "adapter_sha256": ADAPTER_HASHES, "runner_sha256": RUNNER_SHA256,
+              "reference": str(reference), "reference_sha256": reference_sha,
+              "reference_kind": "EXPLICIT_SEPARATE_RUN" if args.reference_result else "ORIGINAL_PILOT",
+              "original_pilot_reference_sha256": REFERENCE_SHA256,
+              "original_weights_recovered": reference_sha == REFERENCE_SHA256,
+              "adapter": str(adapter), "adapter_sha256": adapter_hashes, "runner_sha256": RUNNER_SHA256,
               "diagnostic_sha256": file_hash(__file__), "model": MODEL, "revision": REVISION,
               "dependencies": PINS, "torch": torch.__version__, "cuda_build": torch.version.cuda,
               "gpu": torch.cuda.get_device_name(0), "started_unix": time.time(),
@@ -150,7 +177,7 @@ def main():
         evaluate(model, tokenizer, cases, out / "after.jsonl", "cuda:0")
         report.update(status="DIAGNOSTIC_COMPLETE_NOT_QUALITY_ACCEPTED", finished_unix=time.time(),
                       before_weighted_nll=weighted_nll(before_nll), after_weighted_nll=weighted_nll(after_nll),
-                      adapter_files_unchanged=all(file_hash(adapter / name) == sha for name, sha in ADAPTER_HASHES.items()))
+                      adapter_files_unchanged=all(file_hash(adapter / name) == sha for name, sha in adapter_hashes.items()))
         if not report["adapter_files_unchanged"]:
             raise RuntimeError("元adapterのfileが変化しました")
         combined = {"run": report, "teacher_prompt_requests": cases,

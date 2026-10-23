@@ -51,3 +51,7 @@ preflight内のCPU_PREPARED_GPU_NOT_TESTED／gpu_training_performed=falseは実�
 4. adapter本体の保管を確認してから将来再利用する。受領JSONだけで学習済み重みを復元できるとは扱わない。追加学習のやり直しを先に要求しない。
 
 原18候補・教示5参照・今回の9教師と6評価・撤回第7回・既存20fixture・M1 rawは不変。学習による商品通常経路・CMEE P6接続・API／RN／DB／Render・merge／deploy変更0。STRUCTURE_MAP_DELTA_NONE（offline実験の受領結果資料のみ）。
+
+## 後続：初回重み未回収と別runの診断準備
+
+現在は初回adapter本体を回収できておらず、その重みでの診断は未実施。同じ9教材・同じ固定レシピを1回だけ別runで再作成し、同じsessionで教師適合を診断して重み入り退避fileをダウンロードする手順を準備した。再学習はまだ始めていない。初回重みの復元・同一重みの再現とは扱わない。 [Free pack §10](../../training/2026-10-24-emlis-free-pilot/README.md#10-重み未回収時の別run再作成診断退避準備済み未実行)に、再作成→先行退避→教師適合診断→再退避をまとめた。これは初回の未計測NLLを回収したことにはならない。本fileとpilot_results.jsonの初回結果・品質診断はそのまま保持する。直近Jupyterの空表示だけから元Podの消失を断定しない。新wrapperのGPU完走は未検証、有料再実行は未開始。

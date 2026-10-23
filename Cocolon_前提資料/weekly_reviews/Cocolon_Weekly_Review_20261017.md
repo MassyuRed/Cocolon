@@ -2568,3 +2568,16 @@ MashからTerminal全文1,840 bytes／SHA256 ad8a4cd6b75f5c20830583a8a900974a1fd
 MashはPods一覧を提示し、どれが以前のものか分からず、今回は新しく作り、もうStopしたと明示。現在の空workspaceは新規noble_magenta_mothのものである。前回の保存失敗／消失を示す証拠としない。画面では6件が停止表示。M1時点の既知IDと一致するのはeastern_silver_sheepだが、初回9教師学習の受領結果にはPodIDがないため、追加学習Podとは同定しない。
 
 次は候補novel_silver_hamsterのDetailsを起動せず読み、作成日時・保存領域を確認する。追加学習の実行記録時刻2026-10-24 08:00〜08:01 JSTと照合する。候補を確定扱いせず、GPU起動／新規作成／再学習を先行しない。状態AWAITING_EXISTING_POD_DETAILS。現在の新規PodのStop報告受領、元学習Pod／adapter所在・総課金は未確定。manifest・README・全体00へ同期。STRUCTURE_MAP_DELTA_NONE、code／dataset／原結果・製品runtime不変。
+
+<a id="20261024-emlis-free-recreation-prepared"></a>
+## AC. 2026-10-24 — 重み未回収からの別run再作成・同session診断・退避を準備
+
+Mashの「残ってない」とJupyter screenshot2633を受領。表示 /workspace は空だが、PodID／Details／volume設定は写っていない。候補の同定や初回重みの永久消失を確定しない。原結果・教材・codeはGitHubにあり、adapter本体は未受領のまま。候補の追加起動による探索を重ねる前に、同じ9教師・同じ固定レシピを1回だけ別runで再作成し、教師適合を同sessionで測り、重み実体を手元に退避する具体案を作った。状態RECREATION_AND_DIAGNOSTIC_PREPARED_NOT_RUN、再学習は未開始。元の重みの復元・同一重みの保証や初回のNLL回収とは呼ばない。
+
+[Free pack §10](../observation_learning/training/2026-10-24-emlis-free-pilot/README.md#10-重み未回収時の別run再作成診断退避準備済み未実行)に一回用recreate_pilot.sh・export_checkpoint.pyを追加し、diagnose_learning.pyへ明示reference-resultの別run選択だけを追加。元d53 bootstrap／c049 runner・4dataset・学習条件・promptは変えない。引数なしは初回hash限定を維持、新runは固定レシピと自身の結果／adapter hashを照合する。診断自体は非学習で、NLL18forward・生成18件の元条件を維持する。再作成は別の学習1回を含み、品質改善策を変更する試験ではない。自動実行・自動再試行は行わない。
+
+学習直後にadapter3file・結果・実行条件・教材・code・logとchecksumを小さいarchiveへ退避し、診断後／例外EXIT時に再退避する。cache・venv・基盤重み・資格情報を除外。archiveの内部読戻しは行うが、手元ダウンロードとchecksum確認までを退避完了とする。run開始前と内部排他的markerで重複学習を拒否、Pod識別も記録する。run30分＋30秒、診断900秒＋30秒はPod全課金やprepare／手動退避を制限せず、Pod自動Stopなし。Mashがダウンロードを確認してからStopする。強制KILL／disk障害下の新規保存保証はせず、先行archiveを保持する。
+
+ローカルCPU確認は構文、別run選択／原初回との分離・hash／設定不一致拒否、archive／manifest／外側checksum読戻し、cache除外・symlink／欠損拒否と旧backup保持、診断失敗exit保持／退避、重複run／内部呼出し拒否。初回の短縮timeout stubでは入れ子timerから子が残り失敗した。内側をforegroundに修正し、外側1秒の学習／診断それぞれで子の終了・exit124・読めるarchiveを約1.1秒で確認した。補助agentのread-only確認は具体的blocker修正に使い、正式Product Readとはしない。Torch／GPUで新wrapper・診断は未完走。華恋からGPU起動・有料推論・学習0。
+
+全体00・教材入口・実験README／manifest・初回試験README・全file地図を同じ変更単位で同期。原9教師・6評価・初回raw・原18候補・教示5参照・撤回第7回・商品runtimeは不変。STRUCTURE_MAP_DELTA_NONE（offline試験用path追加のみ、商品owner／型／接続／契約なし）。品質採用・P6統合・DB／Render／API／RN・merge／deploy変更0。

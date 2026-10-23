@@ -329,7 +329,7 @@
     "format_issue": "output fields specified but JSON-only instruction absent; no response_format enforcement; do not claim explicit JSON instruction was violated"
   },
   "next_diagnostic": {
-    "status": "AWAITING_EXISTING_POD_DETAILS",
+    "status": "BLOCKED_ORIGINAL_ADAPTER_UNAVAILABLE",
     "script": "diagnose_learning.py",
     "purpose": "paired fit on existing 9 teachers before altering data or training",
     "reference_sha256": "5fb61702d4c5b9e4f1317088b3ef91de53041168fa3313f14086d0c67f09ceb9",
@@ -380,7 +380,7 @@
       "diagnostic_started": false,
       "previous_training_pod_identity_verified": false,
       "data_loss_confirmed": false,
-      "next": "Open novel_silver_hamster Details without starting it; compare creation time/storage with the initial training run at 2026-10-24 08:00-08:01 JST. It is only a candidate.",
+      "next": "No repeated Pod startups; separate one-run recreation and same-session diagnosis/export prepared, not executed.",
       "initial_training_storage_persistence_was_verified": false,
       "official_sources": [
         "https://docs.runpod.io/pods/storage/types",
@@ -398,6 +398,49 @@
       "training_pod_candidate": "novel_silver_hamster",
       "training_pod_identity_confirmed": false,
       "all_six_displayed_as_stopped": true
+    },
+    "latest_workspace_screenshot": {
+      "source": "Mash Jupyter screenshot 2633 and message 残ってない",
+      "workspace_visible_files": 0,
+      "pod_identity_visible": false,
+      "original_training_pod_confirmed": false,
+      "original_data_loss_confirmed": false
     }
+  },
+  "recreation_fallback": {
+    "status": "RECREATION_AND_DIAGNOSTIC_PREPARED_NOT_RUN",
+    "entry": "recreate_pilot.sh",
+    "exporter": "export_checkpoint.py",
+    "recipe_commit": "d53f9ef0a906624acaeb519f8c4c6eb153e60e51",
+    "recipe_changed": false,
+    "teacher_rows": 9,
+    "epochs": 1,
+    "steps": 9,
+    "new_training_proposed": true,
+    "new_training_performed": false,
+    "new_run_distinct_from_original": true,
+    "original_weights_recovered": false,
+    "bitwise_reproduction_guaranteed": false,
+    "automatic_execution": false,
+    "original_result_unchanged": true,
+    "diagnosis": "explicit reference-result selects this separate run after recipe and adapter hash validation",
+    "backup": "adapter and results archived before diagnosis; archive refreshed on EXIT; download plus checksum verification before Stop",
+    "result_archive": "/workspace/cocolon_emlis_free_20261024/cocolon_recreated_checkpoint.tar.gz",
+    "exclude_from_export": [
+      "base model",
+      "cache",
+      "venv",
+      "credentials"
+    ],
+    "timeout_seconds": 1800,
+    "kill_after_seconds": 30,
+    "timeout_scope": "run only; foreground inner timers remain in outer process group; prepare, manual download and whole Pod billing excluded",
+    "automatically_stops_pod": false,
+    "repeat_guard": "saved result/adapter or attempt marker blocks run; atomic internal execution marker blocks direct repeats",
+    "local_validation": "syntax; separate-run recipe/hash selection; archive/checksum round trip and rejection paths; CPU stub diagnosis failure and duplicate guards; shortened outer timeout kills nested training/diagnostic child in ~1.1 seconds with readable archive",
+    "initial_timeout_stub_failed": true,
+    "timeout_stub_fix": "inner timeout foreground; both child stages rechecked",
+    "gpu_validated": false,
+    "limits": "Recreated-run training-example fit only. No original-weight restoration, generalization, product acceptance or automatic training expansion."
   }
 }

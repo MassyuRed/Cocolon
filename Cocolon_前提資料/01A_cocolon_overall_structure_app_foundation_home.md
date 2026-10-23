@@ -4606,3 +4606,10 @@ training側README／experiment・全体00・教材入口・最新weekly Zを同�
 ## 2026-10-24 — 保存adapterの9教師適合診断（製品runtime差分なし）
 
 新 `Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-free-pilot/diagnose_learning.py` は初回原結果／adapter3file／runner／教材hashを照合し、同じ9教師についてbaseと非学習adapterのNLL18forward・回答18件を比較する。生成入力は教師を除く元prompt、既存evaluateを共用。既存cache限定・学習なし・元adapter不変、結果は作業先latest_diagnosis.jsonと固有diagnostics folder。ローカル構文・入力／hash／NLL式・実tokenizer枠を確認、GPU実診断は未実施。全体00・教材入口・Free README／experiment・初回結果README・weekly AAへ同期。原4datasetと製品sourceは変更0。STRUCTURE_MAP_DELTA_NONE（offline一回診断のみ。製品owner／型／接続／契約変更なし）。
+
+
+### 2026-10-24補記：重み未回収時の一回の再作成・診断・退避
+
+対象folder `Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-free-pilot/`。追加recreate_pilot.shは元d53 bootstrap／runner・4教材を変更せず1回だけ別runを作り、先行退避→明示した新runへの診断→再退避をまとめる。追加export_checkpoint.pyはadapter3file・結果・条件・教材／code／logをallowlistでarchive化し、manifestのSHA／bytesとarchive全fileの読戻しを確認する。venv／cache／基盤重みは含めない。既存diagnose_learning.pyへ別run用reference-resultを追加し、引数なしの初回hash限定・非学習測定を維持する。
+
+開始marker／内部排他的markerは重複学習を拒否。内側foreground timerを外側run30分process groupに保つ。学習直後に先行archive、診断後／失敗EXITに再退避するが、手元ダウンロード・checksum確認とPod手動StopはMashの操作。prepare／全課金は時間制限外。原9教師／6評価・runner／bootstrap・初回rawは不変、新runを元重みの復元・同一重み再現としない。CPUのhash選択／archive／失敗・重複拒否／両段階の短縮timeoutを確認、実GPUは未検証、再作成未開始。全体00・入口README・Free README／experiment・初回trial README・最新weekly ACを同期。STRUCTURE_MAP_DELTA_NONE（offline試験scriptのみ、製品のowner／型／接続／契約変更なし）。
