@@ -43,6 +43,18 @@
       "family": "supplement-repot",
       "author": "Karen",
       "rows": 1
+    },
+    {
+      "family": "friend-shop-shared-talk",
+      "source_session": "OBS-20261023-001",
+      "rows": 1,
+      "note": "10/24の追加整形。華恋編集、未回答D05を保持。"
+    },
+    {
+      "family": "chair-repair-explicit-correction",
+      "source_session": "OBS-20261024-001",
+      "rows": 1,
+      "note": "10/24の追加整形。Mashの訂正後の観測文、完全な訂正前後応答ではない。"
     }
   ],
   "existing_evaluation_assignments": [
@@ -197,6 +209,23 @@
   "gpu_started": false,
   "fine_tuning_performed": false,
   "cmee_integration_performed": false,
-  "automatic_progression": false
+  "automatic_progression": false,
+  "additional_source_commits": [
+    {
+      "commit": "d2822e0542af9311cd0f396644b800126096c6b8",
+      "sessions": [
+        "OBS-20261023-001",
+        "OBS-20261024-001"
+      ],
+      "rows": 2
+    }
+  ],
+  "reserved_training_families": [
+    {
+      "family": "reading-group-own-reception",
+      "source_session": "OBS-20261024-002",
+      "rows": 0,
+      "note": "同じ人の二記録を初回提示。観測・問い・回答は未取得で、学習targetなし。全派生を独立未知評価へ数えない。"
+    }
+  ]
 }
-

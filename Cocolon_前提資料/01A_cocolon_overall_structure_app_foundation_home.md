@@ -4549,3 +4549,15 @@ Cocolon側の新analysis_semantic_snapshot_results.jsonは全private完成state�
 ## 2026-10-24 — 第6回の本人訂正教材の所在（runtime構造差分なし）
 
 新規 `Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-001/01_dialogue.md` は椅子修理の初回D00と今後の実問答、同 `02_learning_notes.md` は本人役の事前実情・明示訂正案と可視順序を所有する。初回→本人の訂正→実際の観測更新を記録するための題材で、訂正や完成応答はまだ未提示・未取得。第5回ノートには原文／華恋編集を分けた受け取り候補1件を整理し、元の16候補へ未追加。入口・全機能00・weekly Uへ同期。STRUCTURE_MAP_DELTA_NONE（教材所在のみ。runtime owner／型／接続／公開契約変更0）、GPU／追加モデル推論／学習0。
+
+## 2026-10-24 — 教材18候補と第7回二記録の所在（runtime構造差分なし）
+
+| exact path（Cocolon root） | 今回の責務・差分 |
+|---|---|
+| Cocolon_前提資料/observation_learning/training/2026-10-23-pilot-prep/sft_candidates.jsonl | 当初16行を維持し、第5回の華恋編集受け取り・第6回Mashの訂正後観測を2行追加。計18。出典・可視順・由来を保持 |
+| 同folderのREADME.md・split_manifest.json | 18件の由来、追加source原本、教材family、評価分離と分担を同期。教示参照・既存評価割当は不変 |
+| 第5回02_learning_notes.md／第6回01_dialogue.md・02_learning_notes.md | 候補への追加整形の現在地だけ同期。元の提示・実発言・事前設定は不変 |
+| Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-002/01_dialogue.md（新） | 同じ人の読書会への参加／不参加に関する二記録の初回提示と、今後の実発言 |
+| Cocolon_前提資料/observation_learning/sessions/2026/OBS-20261024-002/02_learning_notes.md（新） | 初回前に固定した本人役の設定、可視範囲、問いへの回答範囲、未設定と分担 |
+
+教材入口・全機能00・latest weekly Vへ同期。第7回targetはまだなく、18候補を全三中核の完成教材や学習改善へ昇格しない。STRUCTURE_MAP_DELTA_NONE（教材所在のみ。runtime owner／型／接続／公開契約変更0）。GPU・推論・学習・課金0。
