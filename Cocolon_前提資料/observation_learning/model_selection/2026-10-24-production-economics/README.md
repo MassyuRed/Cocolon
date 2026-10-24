@@ -143,3 +143,10 @@ token仮定はFree Emlis2,000入力／512出力、Plus4,000／768、Premium8,000
 2026-10-24公式確認：[Runpod料金](https://www.runpod.io/pricing)、[Serverless課金範囲](https://docs.runpod.io/serverless/pricing)、[LoRA設定](https://docs.runpod.io/serverless/vllm/environment-variables)、[vLLM対応model](https://docs.vllm.ai/en/latest/models/supported_models/)。旧計画の基盤額は原資料へ参照し、現契約請求・実納税は取得していない。
 
 今回のGPU起動・有料推論・学習・本番配置・API／DB／RN／価格quota変更は0。STRUCTURE_MAP_DELTA_NONE（offline原価試算fileのみ、商品owner／型／接続／公開契約の変更なし）。
+
+
+## 8. 売上ゼロから始める場合の別検討
+
+Mashから、有料会員が最初からいる想定では初期負担を判断できないとの指摘を受領。[売上ゼロの少人数試用](zero_revenue_pilot.md)へ、支払者0・Plus相当5人14日の候補、前の8＋2人案との費用差、開始準備の未見積りと2万円の打切り配分案をまとめた。これは試用・予算・配備の決定ではない。上の50有料／950無料の計算を上書きせず、価格成立の証拠へ使わない。
+
+2026-10-24のread-only照会ではCocolonのSupabase所属organizationはFree plan。上の共通11,000円内のPro$25は本番想定の計画で、現在の契約費ではない。Render契約・全請求と既存支払／純増は未照合。従来の11,000円を試用の仮予算として丸ごと足した場合でも、開始後14日の稼働費約12,333〜13,356円と、品質改善・学習・接続・端末配布までの未見積り費用を分ける。現在は招待開始を勧められる品質・接続状態ではない。

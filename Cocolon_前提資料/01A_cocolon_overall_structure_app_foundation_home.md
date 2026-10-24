@@ -4671,3 +4671,8 @@ training側README／experiment・全体00・教材入口・最新weekly Zを同�
 | test_cost_model.py | 元OPS・無料分・固定費非二重加算・同GPU同額・起動ゼロ・容量／損益分岐と未実証の6検査 |
 
 全体00・観測入口・選定入口／費用正本・Free experiment・latest weekly AJへ同期。基準試算95,094円/月は手取り計画27,262円を上回り不成立。原出力・旧教師・runner・商品source・runtime／型／接続／契約は不変。STRUCTURE_MAP_DELTA_NONE（offline費用試算の所在のみ）。新GPU・有料推論・学習・配備0。
+
+
+### 2026-10-24 — 売上ゼロの少人数試用を検討（製品runtime差分なし）
+
+上記production-economics folderに`zero_revenue_pilot.md`を追加。支払者0／Plus相当5人14日の候補、仮の稼働費、試用準備の未見積り、未承認2万円の打切り配分と検証できる価値を所有する。Supabase orgの現planはFreeとread-only確認し、共通11,000円を現契約費へ昇格しない。既存50有料／950無料のcalculator／resultsは変更せず、全体00・同folder README・weekly AKへ差分同期。試用・課金・価格quota／権限変更・モデル接続・通常配備は未実行。STRUCTURE_MAP_DELTA_NONE（検討資料の所在のみ）。
