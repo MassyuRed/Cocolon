@@ -1435,3 +1435,28 @@ UNIX1792846093.324のPod一覧で試験名 `cocolon-4b-revised-20261024` を検�
 現在は `APPROVED_PENDING_CAPACITY`、承認未消費。単価・容量・最大時間・診断量・回収削除の同じ承認範囲なら、再承認を求めずfresh在庫/実quote確認から再開する。ただし本ターンの後に自動監視・予約・後日実行を行う設定は作っていない。上限超過、異なるGPU範囲、学習増量、本人/本番操作へ広げない。既存の非実行templateのfalseは、コピーだけで起動させないための状態であり、受領済み承認の取消ではない。
 
 BLOCKER_NARROWED（実行前の条件内capacity不足）、product_credit=0、実CMEE採用は前版before0/2・after0/2のまま。正式0/3・54.50％据置・candidate_ready=false・automatic_progression=false。STRUCTURE_MAP_DELTA_NONE（承認と実在庫/未実行状態のみ）。全機能00・本pack README・本weeklyの3文書へ差分反映。
+
+
+
+<a id="20261025-price-first-model-reselection"></a>
+## 18. 10/25 — 4B確定の撤回、価格優先の学習済みAI再選定
+
+Mashは、GPUの空き待ちと常時確保費用を選定時の前提として十分に説明しなかった華恋の進め方を指摘した。「安い候補」はGPUレンタル先ではなく学習済みAIそのものを意味し、**4B確定を明示撤回**した。10/24の4B確定・同モデルを前提にした作業順位は、この最新決定でsupersedeする。利用者へ応答できる提供基盤、三中核の商品品質、継続可能な総費用を一体で比較する。華恋がGPU候補として取り違えた調査を、求められたモデル候補の回答へ代用しない。
+
+### 現在の実行状態
+
+- モデル選定：`PRICE_FIRST_RESELECTION_NOT_ADOPTED`。4Bを確定モデルとして扱わない。
+- 未消費の修正版4B診断：`SUSPENDED_BY_MODEL_SELECTION_WITHDRAWAL`。§17の`APPROVED_PENDING_CAPACITY`は当時の記録。空きが戻っても、その承認を根拠に4B診断を開始しない。承認を消費したとも、新モデル/設定への承認を得たとも扱わない。
+- 新モデル採用/学習/推論/重み取得/新Pod/契約/課金/DB/Render/通常有効化/配布/merge/deployは0。既存Pod・volumeを操作せず、回収済み重みと教師・原rawを保存する。
+
+### 学習済みAIの小型候補（公式資料確認のみ・未採用）
+
+| 候補 | 規模 | 本体利用料・確認事項 |
+|---|---|---|
+| [Qwen3-0.6B](https://huggingface.co/Qwen/Qwen3-0.6B) | 0.6B | 公開post-trained重み、Apache2.0、本体利用料0円。テキスト用、多言語、non-thinking選択可。最小規模の比較候補 |
+| [Qwen3.5-0.8B](https://huggingface.co/Qwen/Qwen3.5-0.8B) | 言語部0.8B（総量は視覚部等を含む） | 公開post-trained重み、Apache2.0、本体利用料0円。公式は用途別追加学習を想定。小型の第一比較群 |
+| [Qwen3.5-2B](https://huggingface.co/Qwen/Qwen3.5-2B) | 言語部2B | 公開post-trained重み、Apache2.0、本体利用料0円。0.6B/0.8Bの品質不足時の比較候補。自動採用しない |
+
+本体利用料0円はアプリ運用費0円を意味しない。追加学習/推論を動かす機械・電気・接続・保守・冗長化等は別。モデルを小さくしても同じGPUを同時間借り続ければ固定費は変わらず、「0.8Bなら4Bの1/5料金」とは計算しない。手元M4/16GBで運用できればレンタル固定費を減らす道になるが、独自学習版の読込、実入力長、意味保持・自然本文・訂正・保存再読、待ち時間・同時数・安定提供は未検証。M4性能/電気代/本番総額を作らず、新モデルを決定しない。
+
+今回の到達は明示撤回の反映と候補の公式確認のみ。STRUCTURE_MAP_DELTA_NONE（モデル/商品runtime/型/接続sourceは変更しない）、product_credit=0、正式Product Read0/3、PRODUCT_NOT_CLEAR、candidate_ready=false、automatic_progression=false、全体54.50％据置。
