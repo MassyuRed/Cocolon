@@ -613,7 +613,7 @@
     "hold_reason": "Selection is not adoption. Establish own-trained-model serving economics and compare candidates under proposed680/1480 before further9B-specific repetitive training."
   },
   "next_selection_priority": {
-    "status": "PRICE_FEASIBILITY_UNRESOLVED_SERVING_COST_VALIDATION_FIRST",
+    "status": "FIXED_PRODUCTION_COSTING_SCENARIO_NO_GO_AT_REFERENCE_PERFORMANCE",
     "proposed_monthly_prices_jpy": {
       "plus": 680,
       "premium": 1480
@@ -649,7 +649,7 @@
       "https://docs.runpod.io/serverless/pricing"
     ],
     "smaller_model_guarantees_profit": false,
-    "next_step": "Validate a concrete production serving arrangement against explicit workload and allowable monthly cost before further teacher preparation or training. Baseline12 outputs do not establish production economics.",
+    "next_step": "Verify a concrete serving arrangement against the explicit4.46 billed GPU seconds per nominal generation budget at the fixed workload. Unmeasured200TPS batch sensitivity is not production proof. Keep further training and price/quota changes on hold.",
     "comparison_pack": "../../model_selection/2026-10-24-9b-4b-comparison/README.md",
     "fixed_case_count": 6,
     "maximum_generations": 12,
@@ -693,6 +693,31 @@
     "illustrative_max_average_cost_jpy_per_nominal_generation": 0.13686318745827483,
     "illustrative_always_on_a40_within_paid50_budget": false,
     "teacher_preparation_priority": "ON_HOLD_BEHIND_SERVING_COST_VALIDATION",
-    "correction_owner": "Karen recommendation in response to Mash's price-decision challenge; not a new model/price/quota adoption"
+    "correction_owner": "Karen recommendation in response to Mash's price-decision challenge; not a new model/price/quota adoption",
+    "production_costing_report": "../../model_selection/2026-10-24-production-economics/README.md",
+    "production_costing_inputs": "../../model_selection/2026-10-24-production-economics/inputs.json",
+    "production_costing_completed": true,
+    "production_serving_cost_measured": false,
+    "fixed_reference_scenario": {
+      "paid_users": 50,
+      "free_users": 950,
+      "monthly_generations": 78980,
+      "input_tokens": 309800000,
+      "output_tokens": 53702000,
+      "route": "Flex24GB min0 max4 concurrency1",
+      "output_tps_reference_assumption": 25,
+      "prefill_tps_unmeasured": 1000,
+      "cold_fraction_unmeasured": 0.1,
+      "model_load_seconds_unmeasured": 30,
+      "shared_fixed_jpy": 11000,
+      "monthly_cost_jpy": 95094.38,
+      "receipts_planning_jpy": 27261.82,
+      "balance_before_payroll_ads_training_jpy": -67832.56,
+      "decision": "NO_GO_FOR_THIS_SCENARIO_NOT_GENERAL_PRICE_IMPOSSIBILITY"
+    },
+    "allowable_average_billed_gpu_seconds_per_generation_at_flex24": 4.4629300258,
+    "same_gpu_same_work_same_performance_same_4b_9b_cost": true,
+    "code_checks_passed": 6,
+    "new_paid_execution_for_costing": false
   }
 }

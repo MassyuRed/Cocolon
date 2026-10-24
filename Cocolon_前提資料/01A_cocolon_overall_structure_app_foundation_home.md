@@ -4656,3 +4656,18 @@ training側README／experiment・全体00・教材入口・最新weekly Zを同�
 | README.md | 全12本文の比較、4B候補保持と両方未合格、既存9教師の範囲・次の判断 |
 
 全体00・観測入口・選定入口／費用資料・Free experiment・実行pack入口・latest weekly AHを同期。実行script／教材／受領済み重みと商品sourceは不変。今回の華恋は受領CPU解析のみで新GPU・推論・学習0。STRUCTURE_MAP_DELTA_NONE（offline結果の所在のみ、商品owner／型／接続／公開契約変更なし）。
+
+
+## 2026-10-24 — 本番提供案を固定した原価試算（製品runtime差分なし）
+
+新folder `Cocolon_前提資料/observation_learning/model_selection/2026-10-24-production-economics/`。
+
+| file | 責務 |
+|---|---|
+| README.md | 基準提供案・利用量・月費用・成否・損益分岐と未測定性能の境界 |
+| inputs.json | 4B/Flex24/min0/max4/同時数1、全三中核の旧OPS、人数／単価／性能仮定と公式原典 |
+| cost_model.py | 無料利用を含む入力・出力・起動／待機時間、常時必要台数、月費用と損益分岐の標準Python計算 |
+| results.json | 基準50有料／950無料、人数・使用量・手数料・他GPU・未測定性能の感度。実測請求ではない |
+| test_cost_model.py | 元OPS・無料分・固定費非二重加算・同GPU同額・起動ゼロ・容量／損益分岐と未実証の6検査 |
+
+全体00・観測入口・選定入口／費用正本・Free experiment・latest weekly AJへ同期。基準試算95,094円/月は手取り計画27,262円を上回り不成立。原出力・旧教師・runner・商品source・runtime／型／接続／契約は不変。STRUCTURE_MAP_DELTA_NONE（offline費用試算の所在のみ）。新GPU・有料推論・学習・配備0。
