@@ -1,8 +1,8 @@
 {
   "scope": "CPU_SYNTHETIC_FIXED_RAW_CONSUMER_NOT_MODEL_NOT_DYNAMIC_THREAD",
-  "cmee_api_commit": "02c0b943c96b67cb32354e1d3352a00dcb768e64",
-  "dataset_manifest_sha256": "c3442f296785f43ae394aa5fece46f2ddcda8c2a633cd54b9addcfe59bf49160",
-  "source_examples_sha256": "13f396945e6052652bcf20975b404563c2f12c78fdab518409723d3fe2ce03d8",
+  "cmee_api_commit": "1dabc4f196ae283264bf5e364e117a5d571af6a7",
+  "dataset_manifest_sha256": "75346d4f2d8bd4caa6abf1b6c896c28c400307996d402853144326691cb1511c",
+  "source_examples_sha256": "b055df79b4ffc6ccf2d81a0b294e5357ac1ea67012e605738f71682d4fe8961c",
   "model_calls": 0,
   "production_db_called": false,
   "full_source_packet_snapshot": "cpu_connection_results.json",
@@ -71,5 +71,42 @@
       },
       "question": null
     }
-  ]
+  ],
+  "instruction_repair": {
+    "previous_dataset_manifest_sha256": "c3442f296785f43ae394aa5fece46f2ddcda8c2a633cd54b9addcfe59bf49160",
+    "native_source_prior_target_and_provenance_unchanged": true,
+    "old_nine_and_actual_trial_files_unchanged": true,
+    "proxy_six_still_unsupported": true,
+    "old_message_projection_rejections": [
+      {
+        "id": "FT-CHAIR-INITIAL",
+        "status": "INPUT_MESSAGES_MISMATCH",
+        "scope": "OLD_PROMPT_WITH_AUTHORED_TARGET_NOT_REAL_RAW"
+      },
+      {
+        "id": "FT-CHAIR-AFTER-CORRECTION",
+        "status": "INPUT_MESSAGES_MISMATCH",
+        "scope": "OLD_PROMPT_WITH_AUTHORED_TARGET_NOT_REAL_RAW"
+      }
+    ],
+    "regression_tests": {
+      "files": [
+        "ai/tests/test_cmee_model_candidate_source.py",
+        "ai/tests/test_cmee_emlis_model_meaning.py"
+      ],
+      "passed": 54,
+      "failed": 0,
+      "warnings": 1,
+      "new_rejection_cases": 6
+    },
+    "runtime": {
+      "python": "3.12.14",
+      "pytest": "8.4.1",
+      "pytest_subtests": "0.14.2",
+      "readiness": "CURRENT_LOCAL_REQUIRED_ROLE_IMPORTS_AND_VERSION_PROBE_PASSED",
+      "pr37_exact46_runtime_claimed": false
+    },
+    "actual_model_quality_improvement_proven": false,
+    "new_gpu_or_training_run_authorized": false
+  }
 }

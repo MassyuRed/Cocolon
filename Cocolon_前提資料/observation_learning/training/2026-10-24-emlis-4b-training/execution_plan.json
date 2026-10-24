@@ -1,6 +1,6 @@
 {
   "schema": "cocolon.emlis_4b_execution_plan.v1",
-  "status": "SINGLE_GPU_DIAGNOSTIC_PROPOSED_NOT_AUTHORIZED",
+  "status": "CPU_INSTRUCTION_REPAIRED_NEW_GPU_RUN_NOT_AUTHORIZED",
   "model": "Qwen/Qwen3.5-4B",
   "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
   "semantic_profile": "emlis_model_proposal.v1",
@@ -24,7 +24,7 @@
   "storage_mount_description": null,
   "pod_external_receipt_destination": null,
   "automatic_pod_stop": false,
-  "limits": "一回分の提案はGPU単価上限$0.30/h・Pod起動から最大7200秒・process最大5400秒・計画予算$1。実quote/残高/mount/停止担当/有料実行の承認は未確認。process期限とmax_total_usdはPod請求の自動上限ではない。16GBで停止した後に24GBへ自動再借用しない。",
+  "limits": "前回の承認一回は学習・回収・試験Pod削除まで終了。本版はCPU上の指示/教材同期だけで、新GPU・追加学習・追加推論は未承認。以下は旧一回案の非実行templateであり、自動再承認しない。process期限とmax_total_usdはPod請求の自動上限ではなく、16GB失敗後の24GB自動再借用も行わない。",
   "proposed_pod_scope": {
     "approval_state": "PROPOSED_NOT_APPROVED",
     "gpu": "RTX A4000 16GB first; no automatic 24GB retry",
@@ -46,5 +46,5 @@
     "hard_billing_cap_enforced": false,
     "charges_started": false
   },
-  "token_limit_basis": "固定4B tokenizer実測：初回4080=2986+1094、訂正後7856=5979+1877 tokens。最大prompt5979+max_new2048=8027<=8192。入力/target切捨てなし。VRAM適合・学習効果は未測定。"
+  "token_limit_basis": "本CPU指示修復版の実tokenizer/index測定はcpu_tokenization_results.json。context8192/max_new2048を維持し、全source/prior/final assistant/EOSを切り捨てない。旧message版の24GB完走と本版の実GPU適合/意味品質は別で、16GBは未検証。"
 }

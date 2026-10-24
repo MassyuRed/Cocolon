@@ -1401,3 +1401,19 @@ Pod経過1074秒で2update完了、stage after_saved_adapter_reload、before NLL
 [実結果・全raw採否・全本文比較](../observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/README.md)を既存trials配下5fileへ保存。新4Bpack README、観測入口、全機能00、全file01A、本weeklyを同じ差分単位で更新。API/製品code/意味schema/採用条件/旧教師/依存定義/通常DB/Render/RN/merge/deployは変更0、STRUCTURE_MAP_DELTA_NONE（実行結果と所在のみ）。限定TECHNICAL_CREDIT、product_credit=0・正式0/3・PRODUCT_NOT_CLEAR・candidate_ready=false・automatic_progression=false・全体54.50％を維持。
 
 **次の最小候補：** 既存`model_candidate_source.py`のOUTPUT_SPECの座標文を各field先頭0/Unicode scalar/`field[start:end]==quote`へ短く置換し、bindings配列・必須fieldの形を明示する。意味採用を緩めず、同じ2教師のmessages/hash/token長とAPI pinを同時にCPU確認する。訂正promptの余裕は165tokenで、長い追記をしない。これは未実装で、意味更新/受容が同時に直るとも、追加学習が十分とも断定しない。原raw補修・teacher置換・epoch増量・再試験はしていない。
+
+
+<a id="20261024-4b-output-spec-cpu-repair"></a>
+## 16. 実拒否原因の出力指示・教材CPU修復（完了・新実GPU未実施）
+
+Mashの「4B学習＋CMEE接続を進めて」を受領し、§15.3の最小候補を実装した。前回承認一回の再実行ではない。OBSERVED_BLOCKER_MINIMAL_FIX / Rule18 LEVEL_2の既存設計内修復として、根拠座標/必須shapeの説明だけを既存OUTPUT_SPECへ反映。採用条件・意味schema・対応構文・独立本文検査は不変。説明文字列をそのままpredicate等の値へコピーしない点も明記した。
+
+API [1dabc4f](https://github.com/MassyuRed/mashos-api/commit/1dabc4f196ae283264bf5e364e117a5d571af6a7) はmodel_candidate_source.pyと既存testの2fileだけ。source＋meaning対象54 PASS/FAIL0、既存Pydantic warning1。新6件の誤座標2種・conflicts欠落・bindings object・surface誤nest・説明コピーを引き続き拒否し、rawを補修しない。独立agentは読取専用、華恋rootのみが編集/検証/反映。商品整合PRODUCT_ROUTE_ALIGNED、最終技術判断TECHNICALLY_ADMISSIBLE。
+
+同じ2教師のuser output_spec、train_messages、既読standalone EFREE6 proxyの指示、dataset hash/API pinを同期。system/本人source/native prior/assistant全文/source_refs/品質gold=falseは不変。合成target2件は新実messagesと一致して意味/本文まで通り、旧messagesを混ぜた2件はINPUT_MESSAGES_MISMATCH。モデルrawの成功には数えない。旧9教師・旧eval・回収重み・§15の実結果5fileは不変、旧runを新packで再評価/再分類していない。
+
+既存pack11検査成功。実tokenizer/indexをoffline cacheだけで測定し、初回3085+1094=4179、訂正後6078+1877=7955。生成枠最大6078+2048=8126<=8192、余白66、前版からprompt各+99。全source/prior/教師/EOSと16moduleを保持し、context拡張/切捨て/重み読込/GPU/実推論0。local Python3.12.14/pytest8.4.1/subtests0.14.2と必要roleを再確認。PR37 exact46環境や最新索引完成へ換算せず、既存の索引未成立を保持してfresh原本を直接読んだ。
+
+現在のcpu_raw_consumer_results.jsonとcpu_tokenization_results.jsonは新API/manifestの今回CPU結果。cpu_connection_results.jsonは意味/target不変の前版合成原本で再生成していない。pack8file＋全機能00＋本weeklyの計10fileを同期し、全体設計・全file地図・current mapsは確認のうえ構造差分がないためchurnしない。STRUCTURE_MAP_DELTA_NONE、限定TECHNICAL_CREDIT、商品0/正式0/3/全体54.50％/candidate_ready=false/automatic_progression=falseを維持。
+
+**残件と次の具体案：** 新指示での実4B生成/学習は0。実CMEE採用は前版before0/2・after0/2のまま、意味訂正/自然な受容/動的一往復/通常保存再読は未成立。[同じ2教師×1epoch・前後16生成の修正版一回案](../observation_learning/training/2026-10-24-emlis-4b-training/README.md#revised-gpu-diagnostic-proposal)を、16GB優先/24GB許容・新規Pod1台/試行1・最大2h/process5400秒・計画$1・回収照合後の試験Pod停止削除まで具体化した。旧run/adapterへの追加epochではなく、修正版のbase前後を観測する新規案。新しい有料一回の承認前は未実行で、planの有料flags=false/実単価nullを維持する。モデル再選定・採用緩和・raw補修・自動反復・通常配置へ進まない。

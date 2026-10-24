@@ -1,10 +1,48 @@
 # Emlis 4B学習・保存再loadの限定pack
 
-> **最新：承認一回の実4B診断は完了し、重み回収・試験Pod停止/削除まで終了。** [実結果と次の最小候補](../../trials/2026-10-24-qwen4b-cmee-diagnostic/README.md)。2update/前後16生成は完走しましたが、実rawのCMEE採用は前後0/2で商品品質未合格です。以下の一回案/CPU準備は当時の記録。配布用execution_plan.jsonは非実行templateを維持し、終了した一回の承認を新GPU/再実行へ継承しません。
+> **最新：実rawの拒否原因に対応する出力指示と教材のCPU修復を完了。** API `1dabc4f196ae283264bf5e364e117a5d571af6a7` の既存OUTPUT_SPECを具体化し、同じ2教師/6proxyのmessages・hash・API pinを同期しました。新指示での実4B生成・学習は未実施。[前版の実診断](../../trials/2026-10-24-qwen4b-cmee-diagnostic/README.md)は学習/回収/Pod削除まで終了していますが、CMEE採用は前後0/2・商品品質未合格のままです。終了した一回の承認は新GPUへ継承しません。
 
 対象は`Qwen/Qwen3.5-4B`、固定revision `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`、private profile `emlis_model_proposal.v1`です。旧9B pack・教師9件・旧eval・受領重みは変更しません。
 
-このpackはCPU実装後、承認された一回の実GPU診断を完了しました。4B重みの読込・LoRA2update・保存adapter非学習reload・24GBでの前後生成と回収を確認。16GB適合・意味採用・商品品質は未成立です。`contract_examples.json`は当時の非学習説明例で、正式2教師/実rawと区別します。
+前版packは承認された一回の実GPU診断で、4B重み読込・LoRA2update・保存adapter非学習reload・24GBでの前後生成と回収を確認しました。本CPU修復版の実GPU適合・意味採用・品質改善は未確認で、16GBは前版も未試験です。`contract_examples.json`は当時の非学習説明例で、正式2教師/実rawと区別します。
+
+<a id="cpu-instruction-repair"></a>
+## 2026-10-24 実拒否原因の最小修復（CPU完了・実モデル未検証）
+
+前回のINVALID_EVIDENCE、conflicts欠落、bindingsのobject化、claims内surface、説明文字列の出力を受け、既存OUTPUT_SPECだけを修復しました。根拠は各source_idの`text_fields[field_path]`内の先頭0/Unicode scalar/半開区間で、`field[start:end]==quote`です。UTF-8 byte・prompt全体位置を使いません。全必須field、candidate直下のsurface、bindings配列とsection、conflicts配列、説明文字列を実source/ID/整数参照へ置き換えることを明記しました。採用側・意味schema・対応構文・本文検査・source資格は変更していません。
+
+正式2教師のsystem、本人source、native_case/prior、assistantの全文、target_check、source_refsは不変です。変更したのは実`build_model_messages()`に一致するuserのoutput_specだけです。EFREE6も説明だけを同期し、standalone・新profile範囲外の学習外proxyを保持しました。旧9教師・旧eval・既受領重み・実試行の5結果fileは変更していません。
+
+| 検証 | 今回の結果 |
+|---|---|
+| API対象2file | 54 PASS、FAIL0、既存Pydantic warning1。うち新6件は誤座標2種/必須欠落/配列誤り/誤nest/説明コピーの拒否で、raw補修0 |
+| 学習pack既存検査 | 11成功。stub tokenizer・数値CE/勾配等であり、実4B推論ではない |
+| 実consumerへの合成target接続 | 2/2でmessages一致・意味/本文あり。旧messagesを混ぜた2/2はINPUT_MESSAGES_MISMATCH。実モデル採用数へ加算しない |
+| 実tokenizer/index（cacheのみ・重みなし） | 初回3085+1094=4179、訂正後6078+1877=7955。前版よりprompt各+99、教師/EOS不変、q/v16module不変 |
+| 生成上限 | 最大6078+2048=8126<=8192、残66token。source/prior/targetの切捨て0、context拡大0 |
+| 実4B品質 | 新生成/学習0。前版FIT前後0/2の結果を変更せず、自然な受容・意味訂正・動的一往復・通常保存再読は未成立 |
+
+実行環境はCodex Work/GPT-6、必要な既存CPU runtimeはPython3.12.14、pytest8.4.1/subtests0.14.2、固定4依存を再確認しました。PR37のexact46 portable runtime/最新System Context cache完成を主張しません。最新索引未成立の既存判断に従い、fresh原本を直接読みました。独立agentは読取専用、最終判断・編集・テスト・GitHub反映は華恋rootだけです。
+
+本単位はOBSERVED_BLOCKER_MINIMAL_FIX / Rule18 LEVEL_2の既存delegation。目的は4B→既存CMEEへの実接続を妨げる既観測の説明不足を直すこと、完了条件は既存採用条件不変・同messages/固定pin/hash・無切捨てのCPU照合とremote全文読戻しです。採用条件/target変更や8192超過、追加依存/費用/実推論が必要なら拡大しません。独立の商品整合reviewはPRODUCT_ROUTE_ALIGNED、技術判断はTECHNICALLY_ADMISSIBLEです。
+
+変更APIは既存`model_candidate_source.py`と`test_cmee_model_candidate_source.py`だけ。本packはsft/train_messages/eval_inputs・manifest・tokenization/raw_consumer結果・plan・本READMEの8file、Cocolonの他差分は全機能00/最新weeklyだけです。既存owner内の指示修復で、STRUCTURE_MAP_DELTA_NONE。限定TECHNICAL_CREDIT、商品0・正式0/3・54.50％据置、candidate_ready=false/automatic_progression=false。全体設計・全file地図・current mapsは確認し、新owner/構造/型変更がないため再追記しません。
+
+<a id="revised-gpu-diagnostic-proposal"></a>
+### 次の具体案：修正版の実4B診断1回（未承認・未実施）
+
+CPUで正しいtargetが通ることだけではモデルが新指示に従うか分からないため、次はこの修復版を含む公開済み固定Cocolon commit＋API`1dabc4f…`で、既存`runpod.sh fetch/validate/prepare/run/verify/export`を使う新規一回案です。旧run/旧adapterへの追加epoch・旧directoryの再試行ではありません。新しい学習前生成で指示変更後のbaseを観測し、同じ2教師×1epochの新LoRA後と比較します。採用0や同じ根拠/意味不正が残れば、その原rawを回収して終了し、自動増量しません。
+
+| 項目 | 次回一回だけの範囲 |
+|---|---|
+| GPU | 16GB優先。空き/適合条件がなければ実行前に許容24GBを選択。単価$0.30/h以下、新規試験Pod1台・run試行1回。開始後の再借用/再実行0 |
+| 内容 | baseでNLL2/生成8→2教師×1epoch/2update→adapter3file先退避→同baseへ非学習reload→NLL2/生成8→FIT2 rawをCMEEへ。EFREE6は範囲外proxyのまま。追加diagnose/動的生成0 |
+| 上限 | Pod起動〜停止で最大2時間。準備30分を超えたら学習開始せず終了。回収/照合/停止に15分を確保し、actual planのprocess上限は5400秒とPod残時間−900秒の小さい方。計画予算$1、税/実quoteを含むhard capではない |
+| 構成・回収 | 前回の公式image、container50GB/volume40GBを候補とし、Torch/CUDAと独立mount/空きを実確認。24GBならfree22GiBを目安にactual planへ記録。最終raw/重みarchiveをPod外受領・全member/adapter照合後、この試験Podだけを停止/削除 |
+| 支出の前提 | 既存料金仮定でGPU上限2h=$0.60、90GB稼働2h約$0.025、停止後40GB最大24h約$0.2667、合計約$0.8917。実見積りが$1内に収まらなければ開始しない。追加チャージ0 |
+| 禁止 | 旧承認の再利用、追加epoch/周回探索、raw手修正、採用条件緩和、モデル再選定、通常有効化/DB/Render/merge/deploy |
+
+実行前に新しい有料一回へのMash承認、固定source、実単価/mount/停止担当/退避先を確認するまで、配布planの有料flags=false/単価nullを維持します。前回archive/adapter/実結果はその旧message・旧API版に固定して保持します。この案は通常接続・実端末・商品受入れの完成保証ではありません。
 
 ## 教材の受口
 
@@ -88,13 +126,13 @@ exportは対象run、コード、dataset、manifest/plan、adapter3fileだけを
 
 **archive作成だけではPod外退避完了ではありません。** Pod外でarchiveとchecksumを受領し、内部manifestとadapter本体を確認後にPodを手動Stopします。失敗時は`--allow-missing-adapter`でlogのみ退避できますが、重み退避成功にはなりません。Pod Stop状態・GPU総時間・実単価・storage費は別途記録します。
 
-前回はstdlib/stubtokenizerの8検査を実施。今回のtail-loss修復後は同じ8件＋新3件の11検査が成功し、実4B tokenizer/indexもoffline cacheから再測定しました。prefix／final assistant mask／EOS／no truncationと固定indexの16moduleを保持しています。初回はprompt2986＋completion1094＝4080、訂正後は5979＋1877＝7856 tokens。最大prompt5979＋返答上限2048＝8027で8192以内です。後続の実GPUでmodule/勾配/保存後reload/24GB診断を確認しましたが、意味採用0/2・商品品質未合格です。本番/本人端末/16GBは未確認です。
+前版のtail-loss修復時は8件＋新3件の11検査が成功し、tokenizer実測は初回2986+1094=4080、訂正後5979+1877=7856、生成枠8027/8192でした。その旧message版で実GPUの24GB完走を確認しましたが、意味採用0/2・商品品質未合格です。本CPU修復版の実測は上段の4179/7955・生成枠8126/8192で、旧実GPU結果を本版へ付け替えません。
 
 ## 今回保存したCPU結果と次の実行境界
 
-`cpu_connection_results.json`は合成候補による実Engineの原source・packet・snapshot・本文・問い、`cpu_raw_consumer_results.json`は同target rawのconsumer結合結果要約、`cpu_tokenization_results.json`は重みを読み込まない実tokenizer／固定indexの結果です。モデルrawや学習結果には数えません。API固定sourceは`02c0b943c96b67cb32354e1d3352a00dcb768e64`です。保存rawの検証には、このAPI commitの別checkoutを`--api-root`へ明示します。
+`cpu_connection_results.json`は前版API02c0b943で得た合成targetの原source・packet・snapshot・本文・問いを保持する未変更原本です。意味/targetが不変のため再生成しません。現在の`cpu_raw_consumer_results.json`は同targetを新messages/新APIへ接続した今回の合成結果、`cpu_tokenization_results.json`は今回の実tokenizer/index測定です。新manifestのAPI pinは`1dabc4f196ae283264bf5e364e117a5d571af6a7`。新packの検証には同commitのclean checkoutを明示します。旧実rawは回収archive内の旧pack＋API02c0b943へ固定し、新packとのmessages一致を装いません。
 
-今回の一回は学習/回収/削除まで終了しました。追加の観測会や旧7教師の無理な変換をせず、次は実rawの座標/形式拒否から既存OUTPUT_SPECと同じ2教師をCPUで揃える最小修復候補です。具体の残差と未実装の範囲は実結果READMEに保持し、新GPU/追加epoch/通常有効化へ自動進行しません。
+前回の有料一回は学習/回収/削除まで終了し、その拒否原因へのCPU最小修復は本版で完了しました。次の実モデル確認は上段の修正版一回案であり、新しい有料承認前には実行しません。追加の観測会、旧7教師の無理な変換、通常有効化へ自動進行しません。
 
 
 <a id="single-gpu-diagnostic-proposal"></a>

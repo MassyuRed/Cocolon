@@ -4,12 +4,12 @@
   "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
   "semantic_profile": "emlis_model_proposal.v1",
   "runner_sha256": "00ece0ffac86e17f18544ee8e5fef44d315dd8cd2b641670cd8e6222ca60e40f",
-  "dataset_manifest_sha256": "c3442f296785f43ae394aa5fece46f2ddcda8c2a633cd54b9addcfe59bf49160",
-  "execution_plan_sha256": "b3be3ebfa4bfee502503018782cea4fe1e05c6682a4ef69bdd798b39142f8b43",
+  "dataset_manifest_sha256": "75346d4f2d8bd4caa6abf1b6c896c28c400307996d402853144326691cb1511c",
+  "execution_plan_sha256": "0b08d519d14b5412b9e6b4403c5e7b4e5fa04993d34db86b62d7e8495a4d37a3",
   "data_sha256": {
-    "sft_examples.jsonl": "13f396945e6052652bcf20975b404563c2f12c78fdab518409723d3fe2ce03d8",
-    "train_messages.jsonl": "4b4a6b9faf72768ac3b7bead37530af761ac844448c8e3ff1543a3e7bdae15ee",
-    "eval_inputs.jsonl": "f0d63608291ce157db70f19575511295a5a986f53a02f7db7d8c397f7ef60d3f",
+    "sft_examples.jsonl": "b055df79b4ffc6ccf2d81a0b294e5357ac1ea67012e605738f71682d4fe8961c",
+    "train_messages.jsonl": "eea6f3fe593c7ff08a398861a3169e36cb62d8a72b2d8f32b717ee24336febc7",
+    "eval_inputs.jsonl": "7da1fa972be5ba467df91c9e727227b8cb080d24cd96c28c0a2d1c8a607001bf",
     "eval_review.jsonl": "64fb1a6350dc24359b60316d6eb380a715582581b03f49df70a9a230354b0f80"
   },
   "source_commit": null,
@@ -44,19 +44,19 @@
   "training_tokens": [
     {
       "id": "FT-CHAIR-INITIAL",
-      "prompt_tokens": 2986,
+      "prompt_tokens": 3085,
       "completion_tokens": 1094,
-      "total_tokens": 4080,
-      "loss_labels_start": 2985,
+      "total_tokens": 4179,
+      "loss_labels_start": 3084,
       "logits_positions": 1095,
       "full_context_retained": true
     },
     {
       "id": "FT-CHAIR-AFTER-CORRECTION",
-      "prompt_tokens": 5979,
+      "prompt_tokens": 6078,
       "completion_tokens": 1877,
-      "total_tokens": 7856,
-      "loss_labels_start": 5978,
+      "total_tokens": 7955,
+      "loss_labels_start": 6077,
       "logits_positions": 1878,
       "full_context_retained": true
     }
@@ -64,41 +64,41 @@
   "generation_inputs": [
     {
       "case_id": "FIT-FT-CHAIR-INITIAL",
-      "input_tokens": 2986
+      "input_tokens": 3085
     },
     {
       "case_id": "FIT-FT-CHAIR-AFTER-CORRECTION",
-      "input_tokens": 5979
+      "input_tokens": 6078
     },
     {
       "case_id": "EFREE-E01",
-      "input_tokens": 1009
+      "input_tokens": 1108
     },
     {
       "case_id": "EFREE-E02",
-      "input_tokens": 1020
-    },
-    {
-      "case_id": "EFREE-E03",
-      "input_tokens": 1015
-    },
-    {
-      "case_id": "EFREE-E04",
       "input_tokens": 1119
     },
     {
+      "case_id": "EFREE-E03",
+      "input_tokens": 1114
+    },
+    {
+      "case_id": "EFREE-E04",
+      "input_tokens": 1218
+    },
+    {
       "case_id": "EFREE-E05",
-      "input_tokens": 1023
+      "input_tokens": 1122
     },
     {
       "case_id": "EFREE-E06",
-      "input_tokens": 1000
+      "input_tokens": 1099
     }
   ],
   "generations_per_stage": 8,
   "plan": {
     "schema": "cocolon.emlis_4b_execution_plan.v1",
-    "status": "SINGLE_GPU_DIAGNOSTIC_PROPOSED_NOT_AUTHORIZED",
+    "status": "CPU_INSTRUCTION_REPAIRED_NEW_GPU_RUN_NOT_AUTHORIZED",
     "model": "Qwen/Qwen3.5-4B",
     "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
     "semantic_profile": "emlis_model_proposal.v1",
@@ -122,7 +122,7 @@
     "storage_mount_description": null,
     "pod_external_receipt_destination": null,
     "automatic_pod_stop": false,
-    "limits": "一回分の提案はGPU単価上限$0.30/h・Pod起動から最大7200秒・process最大5400秒・計画予算$1。実quote/残高/mount/停止担当/有料実行の承認は未確認。process期限とmax_total_usdはPod請求の自動上限ではない。16GBで停止した後に24GBへ自動再借用しない。",
+    "limits": "前回の承認一回は学習・回収・試験Pod削除まで終了。本版はCPU上の指示/教材同期だけで、新GPU・追加学習・追加推論は未承認。以下は旧一回案の非実行templateであり、自動再承認しない。process期限とmax_total_usdはPod請求の自動上限ではなく、16GB失敗後の24GB自動再借用も行わない。",
     "proposed_pod_scope": {
       "approval_state": "PROPOSED_NOT_APPROVED",
       "gpu": "RTX A4000 16GB first; no automatic 24GB retry",
@@ -144,9 +144,19 @@
       "hard_billing_cap_enforced": false,
       "charges_started": false
     },
-    "token_limit_basis": "固定4B tokenizer実測：初回4080=2986+1094、訂正後7856=5979+1877 tokens。最大prompt5979+max_new2048=8027<=8192。入力/target切捨てなし。VRAM適合・学習効果は未測定。"
+    "token_limit_basis": "本CPU指示修復版の実tokenizer/index測定はcpu_tokenization_results.json。context8192/max_new2048を維持し、全source/prior/final assistant/EOSを切り捨てない。旧message版の24GB完走と本版の実GPU適合/意味品質は別で、16GBは未検証。"
   },
   "model_weights_loaded": false,
   "gpu_used": false,
-  "memory_limit": "Checkpoint bytes are not peak GPU memory; activations/optimizer/cache/runtime require an actual GPU."
+  "memory_limit": "Checkpoint bytes are not peak GPU memory; activations/optimizer/cache/runtime require an actual GPU.",
+  "instruction_repair": {
+    "cmee_api_commit": "1dabc4f196ae283264bf5e364e117a5d571af6a7",
+    "material_cocolon_predecessor": "7bdcff761a907277a12f2aa19e9d7d3931ebb076",
+    "native_source_prior_assistant_and_eos_retained": true,
+    "prompt_token_delta_per_native_case": 99,
+    "max_generation_input_plus_output_limit": 8126,
+    "remaining_context_tokens": 66,
+    "old_run_relabelled": false,
+    "actual_model_calls": 0
+  }
 }
