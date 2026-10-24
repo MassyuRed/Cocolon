@@ -1417,3 +1417,21 @@ API [1dabc4f](https://github.com/MassyuRed/mashos-api/commit/1dabc4f196ae283264b
 現在のcpu_raw_consumer_results.jsonとcpu_tokenization_results.jsonは新API/manifestの今回CPU結果。cpu_connection_results.jsonは意味/target不変の前版合成原本で再生成していない。pack8file＋全機能00＋本weeklyの計10fileを同期し、全体設計・全file地図・current mapsは確認のうえ構造差分がないためchurnしない。STRUCTURE_MAP_DELTA_NONE、限定TECHNICAL_CREDIT、商品0/正式0/3/全体54.50％/candidate_ready=false/automatic_progression=falseを維持。
 
 **残件と次の具体案：** 新指示での実4B生成/学習は0。実CMEE採用は前版before0/2・after0/2のまま、意味訂正/自然な受容/動的一往復/通常保存再読は未成立。[同じ2教師×1epoch・前後16生成の修正版一回案](../observation_learning/training/2026-10-24-emlis-4b-training/README.md#revised-gpu-diagnostic-proposal)を、16GB優先/24GB許容・新規Pod1台/試行1・最大2h/process5400秒・計画$1・回収照合後の試験Pod停止削除まで具体化した。旧run/adapterへの追加epochではなく、修正版のbase前後を観測する新規案。新しい有料一回の承認前は未実行で、planの有料flags=false/実単価nullを維持する。モデル再選定・採用緩和・raw補修・自動反復・通常配置へ進まない。
+
+
+<a id="20261024-revised-gpu-approved-capacity-blocked"></a>
+## 17. 修正版一回の承認受領と容量確認（実行前・空き未確保）
+
+Mashが固定Cocolon `ab987f2cf4c085e9f907969c30c924e0b0d4ef6e` の[修正版一回案](../observation_learning/training/2026-10-24-emlis-4b-training/README.md#revised-gpu-diagnostic-proposal)に「進めていいよ」と明示承認。APIは `1dabc4f196ae283264bf5e364e117a5d571af6a7`。承認範囲は新規試験Pod1台/診断1回、16GB優先・24GBまで、GPU単価≤$0.30/h、最大2h・計画$1、2教師×1epoch/2update・前後16生成、回収全member/adapter照合後に当該Pod停止/削除。回収等に15分を残し、process上限は5400秒と残時間−900秒の小さい方。通常配置・追加epoch・自動再借用は含めない。
+
+同じ作業の原本・全体設計/全file地図・最新weekly・作業rulesの読取とfresh headsを再確認し、固定ab987f2を別clean materialへ取得。今回新pytest/推論/学習/重み取得/DB/Render/通常有効化0。独立agentは読取比較準備だけで、実行ownerは華恋rootのまま。
+
+RunpodでSecure/Communityの在庫を確認。16GBのA4000/2000 Ada、CommunityのRTX4080/4080 SUPER等は空きなし。24GBのCommunity3090/3090Ti/A5000も空きなし。Secure A5000は一覧でGPU$0.27/h/24GB/公式PyTorch2.6.0 image/90GB disk・総額約$0.28/hを表示したが、checkoutはInstance not availableへ変化した。Deploy UI操作ではDeploy when availableの予約dialogが開いただけで、Subscribeを押さずCancelした。上限24GB内の20GB A4500も選択後checkoutで空きなしを確認し、Pod作成へ進めていない。最後のCommunity一覧も条件内の16〜24GB候補はOut of capacityだった。
+
+通知による画面読取中断後、fresh画面確認から再開できた。自動レビューの具体的な審査理由は表示されておらず、推測で記載しない。新GPUの作成成功・起動時刻・課金開始へ、予約dialogを開いた時刻を転用しない。
+
+UNIX1792846093.324のPod一覧で試験名 `cocolon-4b-revised-20261024` を検索しNo matching podsを確認。**新Pod0/学習試行0/新推論0/重み0/新規課金effect0、自動起動予約0。** 未回収データはなく、今回停止/削除すべき新Podもない。既存Pod/別volumeは未変更。account全体残高差を今回の試験料金へ帰属させない。
+
+現在は `APPROVED_PENDING_CAPACITY`、承認未消費。単価・容量・最大時間・診断量・回収削除の同じ承認範囲なら、再承認を求めずfresh在庫/実quote確認から再開する。ただし本ターンの後に自動監視・予約・後日実行を行う設定は作っていない。上限超過、異なるGPU範囲、学習増量、本人/本番操作へ広げない。既存の非実行templateのfalseは、コピーだけで起動させないための状態であり、受領済み承認の取消ではない。
+
+BLOCKER_NARROWED（実行前の条件内capacity不足）、product_credit=0、実CMEE採用は前版before0/2・after0/2のまま。正式0/3・54.50％据置・candidate_ready=false・automatic_progression=false。STRUCTURE_MAP_DELTA_NONE（承認と実在庫/未実行状態のみ）。全機能00・本pack README・本weeklyの3文書へ差分反映。
