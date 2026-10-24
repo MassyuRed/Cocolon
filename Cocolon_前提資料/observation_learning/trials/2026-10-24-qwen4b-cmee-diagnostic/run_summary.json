@@ -593,7 +593,11 @@
     "budget_usd": 1,
     "budget_limit_seconds": 7200,
     "cost_estimate_usd": 0.13,
-    "cost_scope": "Approximate rate-times-observed-duration, before tax/fees; no itemized invoice claim. Active GPU stopped before deletion. Other existing Pod storage excluded."
+    "cost_scope": "Conservative planning estimate: displayed total rate about USD 0.23/hour times the full deployment-request-to-deletion-observed interval (about 35 min), including time after GPU stop. GPU-only USD 0.22/hour times deployment-request-to-stop-request interval (about 31 min) is about USD 0.11. Before tax/fees; no itemized invoice claim. Other existing Pod storage excluded.",
+    "displayed_total_hourly_usd_approx": 0.23,
+    "deployment_to_stop_request_seconds": 1857.754,
+    "deployment_to_deletion_observed_seconds": 2075.429,
+    "gpu_rate_times_deployment_to_stop_usd_approx": 0.113529
   },
   "receipt": {
     "archive_sha256": "3ef2e2d88391b3eda7c191f23e32ca3591f09251f65fe08a4b211f0194fd3bcd",

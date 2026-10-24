@@ -12,7 +12,7 @@ Mash承認の一回を終了しました。**2教師×1epochの学習・保存ad
 | 教師NLL | 加重 0.25527284→0.24949186。2/2低下。教師適合のみで品質改善率ではない |
 | CMEE | FIT初回/訂正後の固定2例だけを実consumerへ接続。before0/2、after0/2。EFREE6は各段階で範囲外・未評価 |
 | GPU | 16GB空きなし。許容24GBのRTX3090で完走。peak allocated 14.954GiB、reserved 17.545GiB。16GB適合は未実証 |
-| 時間・費用 | run 894.31秒。新規Pod1台/試行1/再実行0。GPU$0.22/h、起動〜停止約31分、単価×観測時間の概算約$0.13（個別明細・税等は未照合）、計画$1/最大2h内 |
+| 時間・費用 | run 894.31秒。新規Pod1台/試行1/再実行0。GPU$0.22/h、起動要求〜停止要求約31分との積は約$0.11。画面総単価約$0.23/hを、GPU停止後も含む削除確認まで約35分の全区間へ適用した保守概算は約$0.13（個別明細・税等は未照合）、計画$1/最大2h内 |
 | 回収・終了 | 最終24member/adapter32tensorをPod外で全hash/実データ有限性まで照合、永続保存version1。その後試験Podだけを停止・削除。既存8Podは未変更 |
 
 詳しい機械結果は[run_summary.json](run_summary.json)、未修正rawと実採否は[before](before_cmee.json)／[after](after_cmee.json)、sourceと全16本文の所在・比較所見・次候補は[quality_review.json](quality_review.json)。[最新weekly §15](../../../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261024-approved-4b-gpu-diagnostic)に承認から削除までの経過を保持しました。

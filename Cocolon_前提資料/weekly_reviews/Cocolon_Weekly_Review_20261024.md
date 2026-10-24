@@ -1396,7 +1396,7 @@ Pod経過1074秒で2update完了、stage after_saved_adapter_reload、before NLL
 
 固定rawをAPI02c0b943へ接続した実結果はbefore0/2・after0/2採用、本文も0/2。初回のfield外根拠・形式不整合が残り、訂正後は説明文が具体化しても旧意味/不正refが残る。afterは初回/訂正ともINVALID_EVIDENCEで停止した。EFREE6はscope外の未評価6で、採用失敗6や独立未知評価へ加算しない。全16本文を内部pre-screenし、E04の残存すっきり等の局所変化と、E03の達成感補完/英語指示コピー・E05の矛盾label等の悪化が混在する。自然な受容・一般化の品質向上は未確認。human Product Read・商品受入れではない。
 
-回収・永続保存後、試験Pod`5u7ye0pqq3ppvp`のStopを実行し、Compute/Container storageのNot runningを確認。削除dialog表示時にユーザーの処理中断があったため、再開後に現dialogを再確認してから同じPodだけをTerminateした。停止要求記録UNIX1792841332.542、削除要求1792841467.596、削除後の一覧/名前検索で不存在確認1792841550.217。起動から停止は約31分、削除確認まで約35分で2h内。GPU$0.22/hとdisk/観測時間の概算は約$0.13（個別明細/税等は未照合）。既存8Podは未変更、新規Pod1・学習試行1・再実行0・追加チャージ0。この一回は終了し、新GPUや追加生成の許可へ継承しない。
+回収・永続保存後、試験Pod`5u7ye0pqq3ppvp`のStopを実行し、Compute/Container storageのNot runningを確認。削除dialog表示時にユーザーの処理中断があったため、再開後に現dialogを再確認してから同じPodだけをTerminateした。停止要求記録UNIX1792841332.542、削除要求1792841467.596、削除後の一覧/名前検索で不存在確認1792841550.217。起動から停止は約31分、削除確認まで約35分で2h内。GPU単価は$0.22/hで、起動要求〜停止要求の約31分との積は約$0.11。画面総単価約$0.23/hを、GPU停止後も含む削除確認まで約35分の全区間へ適用した保守概算は約$0.13（個別明細/税等は未照合）。既存8Podは未変更、新規Pod1・学習試行1・再実行0・追加チャージ0。この一回は終了し、新GPUや追加生成の許可へ継承しない。
 
 [実結果・全raw採否・全本文比較](../observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/README.md)を既存trials配下5fileへ保存。新4Bpack README、観測入口、全機能00、全file01A、本weeklyを同じ差分単位で更新。API/製品code/意味schema/採用条件/旧教師/依存定義/通常DB/Render/RN/merge/deployは変更0、STRUCTURE_MAP_DELTA_NONE（実行結果と所在のみ）。限定TECHNICAL_CREDIT、product_credit=0・正式0/3・PRODUCT_NOT_CLEAR・candidate_ready=false・automatic_progression=false・全体54.50％を維持。
 

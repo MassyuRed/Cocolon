@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-24 JST（最新差分：承認一回の実4B診断を完了。2教師×1epoch/2update・保存adapter非学習reload・前後各8生成、全16正常stop/JSON成功。24GBで完走しpeak allocated14.954GiB/reserved17.545GiB、16GB未試験。教師NLL0.25527284→0.24949186だが、実rawのCMEE採用/本文は前後とも0/2。根拠/形式/意味更新/受容が未達。重み入り最終archive全24member/32tensorをPod外照合・永続保存し、試験Pod1台を停止/削除済み。概算$0.13、明細未照合。正式0/3・全体54.50％据置）。全Cocolon作業の必読原本。
+更新日：2026-10-24 JST（最新差分：承認一回の実4B診断を完了。2教師×1epoch/2update・保存adapter非学習reload・前後各8生成、全16正常stop/JSON成功。24GBで完走しpeak allocated14.954GiB/reserved17.545GiB、16GB未試験。教師NLL0.25527284→0.24949186だが、実rawのCMEE採用/本文は前後とも0/2。根拠/形式/意味更新/受容が未達。重み入り最終archive全24member/32tensorをPod外照合・永続保存し、試験Pod1台を停止/削除済み。削除確認まで約35分の保守概算$0.13、明細未照合。正式0/3・全体54.50％据置）。全Cocolon作業の必読原本。
 
 > **最新報告会：[第8回・2026-10-24](weekly_reviews/Cocolon_Weekly_Review_20261024.md)。** 今週実績・前週目標の達否と10/24〜10/31の管理案を記録。**Mashの指示により報告会終了。** 華恋の意見全文は[§10](weekly_reviews/Cocolon_Weekly_Review_20261024.md#karen-closing-opinion)、終了時の区分と再開先は[§11](weekly_reviews/Cocolon_Weekly_Review_20261024.md#meeting-closed-and-next-session)。4B確定・GPU16GB優先/24GB許容の決定を追記。次週の推奨順位は[§4](weekly_reviews/Cocolon_Weekly_Review_20261024.md#next-week-priorities)、対象path・具体手順・失敗/回復検査・終了条件は[§8](weekly_reviews/Cocolon_Weekly_Review_20261024.md#detailed-work-breakdown)を参照。全体管理評価・公開見通しは[§9](weekly_reviews/Cocolon_Weekly_Review_20261024.md#overall-status-and-release-outlook)：54.50％、正式商品受入れ0/3、12/18達成の裏付け不足。会議途中の「進行中」は当時の記録。次週案全体への明示採否・個別実行の未決は§11に区別して保持する。モデル選定の決定と、以下の品質・配置・端末・費用の未完了を区別する。
 
