@@ -173,6 +173,32 @@ def encode_training(tokenizer, messages, *, context=None):
     return {"input_ids": full, "labels": [-100] * len(prompt) + full[len(prompt):]}, len(prompt)
 
 
+def assistant_loss_window(encoded):
+    """Keep full context, but materialize vocabulary logits only for its tail.
+
+    Pinned Qwen3.5 slices hidden states *before* lm_head; its causal loss then
+    shifts the supplied labels by one. Include the predecessor of the first
+    assistant token, and slice labels at that same position. The last logit
+    remains ignored, exactly as in the original full-sequence loss.
+    """
+    ids, labels = encoded["input_ids"], encoded["labels"]
+    if (not ids or len(ids) != len(labels)
+            or any(type(x) is not int or x < 0 for x in ids)
+            or any(type(x) is not int for x in labels)):
+        raise ValueError("assistant_loss_window_shape_invalid")
+    first = next((i for i, label in enumerate(labels) if label != -100), len(labels))
+    if first < 1 or first == len(labels) or labels[first:] != ids[first:]:
+        raise ValueError("assistant_loss_requires_masked_prompt_and_contiguous_target")
+    start = first - 1
+    return start, len(ids) - start
+
+
+def teacher_loss(model, *, input_ids, attention_mask, labels, encoded):
+    start, count = assistant_loss_window(encoded)
+    return model(input_ids=input_ids, attention_mask=attention_mask,
+                 labels=labels[:, start:], logits_to_keep=count, use_cache=False).loss
+
+
 def prepare(directory):
     examples, evaluation, manifest, hashes = validate_data(directory)
     plan = validate_plan(strict_json((directory / "execution_plan.json").read_text(encoding="utf-8")), paid_run=False)
@@ -193,9 +219,11 @@ def prepare(directory):
     encoded, stats = [], []
     for row in examples:
         value, prefix = encode_training(tokenizer, row["messages"], context=plan["context_tokens"])
+        loss_start, loss_count = assistant_loss_window(value)
         encoded.append(value)
         stats.append({"id": row["id"], "prompt_tokens": prefix, "completion_tokens": len(value["input_ids"]) - prefix,
-                      "total_tokens": len(value["input_ids"])})
+                      "total_tokens": len(value["input_ids"]), "loss_labels_start": loss_start,
+                      "logits_positions": loss_count, "full_context_retained": True})
     cases = teacher_fit_cases(examples) + evaluation
     eval_stats = []
     for row in cases:
@@ -266,7 +294,6 @@ def evaluate(model, tokenizer, cases, path, plan, *, adapter_revision=None):
             ended = bool(new_ids) and new_ids[-1] in eos_ids
             result = {"case_id": row["case_id"], "raw_text": raw, "raw_utf8_sha256": hashlib.sha256(raw.encode()).hexdigest(),
                 "output_token_ids": new_ids, "input_tokens": len(ids), "output_tokens": len(new_ids),
-                "usage": {"input_tokens": len(ids), "output_tokens": len(new_ids)},
                 "usage": {"prompt_tokens": len(ids), "completion_tokens": len(new_ids)},
                 "seconds": time.monotonic() - started, "finish_reason": "stop" if ended else "length",
                 "eos_reached": ended, "parsed": parsed, "parse_error": error,
@@ -288,7 +315,7 @@ def measure_nll(model, examples, encoded, path):
             labels = torch.tensor([item["labels"]], dtype=torch.long, device="cuda:0")
             count = int((labels[:, 1:] != -100).sum().item())
             with torch.inference_mode():
-                loss = model(input_ids=ids, attention_mask=torch.ones_like(ids), labels=labels, use_cache=False).loss
+                loss = teacher_loss(model, input_ids=ids, attention_mask=torch.ones_like(ids), labels=labels, encoded=item)
             nll = float(loss.detach().cpu())
             if not math.isfinite(nll) or count <= 0:
                 raise ValueError("invalid_teacher_nll")
@@ -398,7 +425,7 @@ def run(directory, prepared):
                 ids = torch.tensor([item["input_ids"]], dtype=torch.long, device="cuda:0")
                 labels = torch.tensor([item["labels"]], dtype=torch.long, device="cuda:0")
                 optimizer.zero_grad(set_to_none=True)
-                loss = model(input_ids=ids, attention_mask=torch.ones_like(ids), labels=labels, use_cache=False).loss
+                loss = teacher_loss(model, input_ids=ids, attention_mask=torch.ones_like(ids), labels=labels, encoded=item)
                 if not torch.isfinite(loss).item():
                     raise ValueError("non_finite_training_loss")
                 loss.backward()

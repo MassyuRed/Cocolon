@@ -1341,3 +1341,21 @@ Mashが§12の具体責務案に「進めて」と承認。報告会は終了済
 今回の到達はCPUのprivate接続と学習コード。GPU起動・重み本体取得・有料推論・LoRA更新・16/24GB適合・実adapter reloadは未実施。単価/期限/支出枠/mount/Pod外受領先が未確定のplanではrunを拒否する。次はそれらを固定した一回の16GB優先診断案へ進む。24GB自動再借用・epoch追加・通常有効化・DB/Render/配布へは進めていない。
 
 STRUCTURE_MAP_DELTA_PRESENT（private offline owner/profileのみ）。正式Product Read0/3・PRODUCT_NOT_CLEAR・candidate_ready=false・automatic_progression=false、全体54.50％据置。一般source/自由な日本語、Plus/Premium、Piece/Analysis、通常API/RNと本人端末・公開は残件として保持する。
+
+
+<a id="20261024-4b-tail-loss-and-gpu-proposal"></a>
+## 14. 報告会後 — 4B学習の不要logits修復と一回のGPU診断案
+
+Mashの「4B学習＋CMEE接続を進めて」により、GitHub PR30 d8781806／API PR3 02c0b943から再開。前回txt、Karen-Diary入口/行動原理/関係、作業rules、全機能原本、全体設計01・全file地図01A・CMEE map/共有設計、最新weeklyと実packを確認した。最新System Context cacheは未成立なのでfresh原本を直接読み、再生成やmodel再選定へ逸れない。現tracked一覧はCocolon1849/API2461=4310で、全blobの意味監査を行ったとはしない。
+
+今回のbounded scopeは、次の実4B診断を阻害する学習codeの因果箇所だけを修復し、一回の実行条件を具体化すること。OBSERVED_BLOCKER_MINIMAL_FIX、既承認診断の目的・教材・loss・学習量・CMEE意味/表面契約を維持。主担当華恋が編集/検証/反映し、補助agentはread-onlyの実装/接続/公式費用調査を分担した。独立した別Pro/Ultra modelを実行したとは報告しない。GPU課金はこのsource修復へ含めず、未承認のまま保持した。
+
+- 実欠陥：NLL/学習は教師以外をmaskしていたが、Qwenの全prompt位置の語彙logitsを作り、HF lossで全FP32へ変換していた。固定Transformers5.19.0のhidden slice/causal shiftとPEFT0.21.2のkwargs転送を確認し、全contextを保つtail計算へ限定修復。Pを最初の教師位置、Lを全長としてK=L-P+1、labels[:,P-1:]で最初の予測位置・全教師・EOSを保持する。旧full-objectiveと異なる損失へ変えない。
+- CPU結果：既存8＋新3の計11検査成功、FAIL0。新3は独立数値CE/解析勾配のfull比較、実呼出し引数、欠落/不連続targetの拒否。prefix1・教師1token等の17構成はsubtestで、11へ上乗せしない。実Torch/CUDA/modelの数値検査ではない。
+- 実固定tokenizer/indexをoffline cacheで再測定し、初回4080/訂正7856、16module、no truncationを保持。lm_headの位置は4080→1095／7856→1878となる。これは計算形の縮小で、GPU VRAM peakの実測値ではない。cpu_tokenization_resultsは今回のrunner/plan hashで置換した。
+- usage重複1箇所を整理し、従来実際に残っていたprompt_tokens/completion_tokensを維持。正式dataset4file/manifest、旧9教師/評価、API production/testは変更0。実モデルraw・LoRA更新・重み取得・GPU/有料推論0。
+- 一回案：[pack README](../observation_learning/training/2026-10-24-emlis-4b-training/README.md#single-gpu-diagnostic-proposal)。A4000 16GB優先、実単価≤$0.30/h、Pod最大2時間/process5400秒、container20GB＋volume40GB、計画予算$1。2update・16生成・4NLL、先退避/非学習reload/固定raw→CMEEを維持。2h稼働＋停止後volume24hの見積り約$0.8833、余裕約$0.1167。停止後も保管料金が続き、process timeout/計画額はPodのhard capではない。OOM時24GB自動再借用・追加epoch・未回収削除はしない。
+- 公式A4000はfrom $0.25/h、実slotは未照会。Runpod連携の検索は0件で、管理画面・残高・Podへアクセスしていない。次の確認は一回分の有料診断/画面操作/Pod外受領確認後の新規試験Podだけの停止・削除、その後actual単価/残高/mount/停止担当。planのgpu_run_authorized/storage_mount_verified等はfalse、gpu_hourly_usdはnullで、runは現状拒否する。過去の学習code承認を新課金承認へ転用しない。
+- 接続の残差：verify_cmeeの訂正は教師の固定priorを復元する単発fit。実初回のsnapshot/実questionからbuild_model_messagesへ接続する動的一往復は未実装/未実行で、固定16生成へ追加分を混ぜない。今回の修復で実service/SQL/通常アプリ保存が成功したとはしない。
+
+変更exact8：packのrun_pilot.py、test_training_pack.py、execution_plan.json、cpu_tokenization_results.json、README.md、全機能00、本weekly、全file01A。**STRUCTURE_MAP_DELTA_NONE**（学習runner内の同じ目的関数を保つ計算削減と一回案のみ。API/共有型/商品経路不変）。全体設計01・CMEE/Emlis map・schema05はruntime構造差分なしで再更新しない。API/DB/Render/RN/依存追加/通常有効化/merge/deploy変更0。限定TECHNICAL_CREDITは学習codeの修復とCPU検証だけ、正式0/3・PRODUCT_NOT_CLEAR・candidate_ready=false・automatic_progression=false・全体54.50％を維持。GPU費用/16GB適合/学習効果/商品品質は未実証。

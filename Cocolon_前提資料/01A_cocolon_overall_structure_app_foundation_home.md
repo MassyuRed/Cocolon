@@ -4724,3 +4724,10 @@ Cocolon新pack F/=`Cocolon_前提資料/observation_learning/training/2026-10-24
 | test_training_pack.py / README.md / .gitignore | 学習用8検査、使用範囲と未実証、生成run/重みをsourceへ混ぜない設定 |
 
 全機能00・全体01・本01A・Emlis/CMEE map・shared01/Emlis02/schema05/実装順06・観測入口・latest weekly実装節を同じ変更単位で同期。engine.py/answer_update.pyは既存dispatchで足り変更不要だった。backend対象220＋pack8、subtests/反復/本文採取を加算しない。実モデル/重み/学習/通常有効化・DB/Render/merge/deploy/商品受入れ0。
+
+
+### 2026-10-24 — 4B学習のtail-loss修復と一回案（商品runtime構造差分なし）
+
+上記F/の既存5fileを更新。run_pilot.pyは全context/教師集合を保持してNLL/学習のlogitsを教師先頭の前位置からに限定（L-P+1、labels[:,P-1:]）。test_training_pack.pyは独立数値loss/勾配・実呼出し/不正targetの3件追加で計11成功。execution_plan.jsonはGPU単価上限$0.30/h・Pod最大2時間/process5400秒・計画$1の未承認一回案を保持し、実単価null/認可・mount確認falseを維持。cpu_tokenization_results.jsonは実tokenizer/indexの今回再測定、README.mdは具体案/公式費用/手動停止/未実証と動的一往復の残差を所有する。
+
+同じ変更単位で全機能00と最新weekly§14を更新。exact8path、正式dataset/旧教師/評価/API sourceと型/商品経路は不変。STRUCTURE_MAP_DELTA_NONE。GPU/重み/学習/有料推論/DB/Render/通常有効化0。実GPUメモリや品質改善へCPU数値を換算しない。全体設計01・current maps・schemaの構造差分は0で、無関係な再更新をしない。

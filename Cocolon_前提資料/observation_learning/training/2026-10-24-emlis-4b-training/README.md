@@ -31,7 +31,7 @@ bash -n runpod.sh
 
 ## GPU開始前の未確定項目
 
-`execution_plan.json`はCPU実測に基づきcontext=8192／max_new=2048へ設定済みです。max_seconds、実GPU単価、総支出枠、minimum_free_gib、mount確認、Pod外受領先、Pod総課金範囲は未確定です。現状態でrunは拒否します。GPU起動・課金はこのCPU実装の承認範囲に含みません。
+`execution_plan.json`はcontext=8192／max_new=2048です。下記の一回案としてprocess最大5400秒・計画予算$1・開始時free 14GiB以上を記載しました。実GPU単価・実mount・停止担当・有料実行の承認は未確認で、gpu_run_authorized等はfalseのままです。現状態でrunは拒否します。数値を提案したことを、GPU起動・課金の許可や実請求上限の成立へ読み替えません。
 
 16GBを第一候補、24GBまで許容します。runnerは実GPU名／total/free／BF16／Torch/CUDAを記録し、16/24GB classと計画した空きを確認します。旧40/32GiB gateは使いません。この確認も実際の学習peakを証明しません。index上のcheckpoint bytesにはactivation、LoRA optimizer、KV cache、CUDA runtime等が含まれず、GPU適合には実測が必要です。
 
@@ -86,10 +86,48 @@ exportは対象run、コード、dataset、manifest/plan、adapter3fileだけを
 
 **archive作成だけではPod外退避完了ではありません。** Pod外でarchiveとchecksumを受領し、内部manifestとadapter本体を確認後にPodを手動Stopします。失敗時は`--allow-missing-adapter`でlogのみ退避できますが、重み退避成功にはなりません。Pod Stop状態・GPU総時間・実単価・storage費は別途記録します。
 
-今回、stdlib/stubtokenizerの8検査に加え、実4B tokenizerでprefix／final assistant mask／EOS／no truncationと固定indexの16moduleを確認しました。初回はprompt2986＋completion1094＝4080、訂正後は5979＋1877＝7856 tokens。最大prompt5979＋返答上限2048＝8027で8192以内です。実GPUのmodule／勾配／保存後reload／VRAM／学習効果、本番・本人端末・商品受入れは未確認です。
+前回はstdlib/stubtokenizerの8検査を実施。今回のtail-loss修復後は同じ8件＋新3件の11検査が成功し、実4B tokenizer/indexもoffline cacheから再測定しました。prefix／final assistant mask／EOS／no truncationと固定indexの16moduleを保持しています。初回はprompt2986＋completion1094＝4080、訂正後は5979＋1877＝7856 tokens。最大prompt5979＋返答上限2048＝8027で8192以内です。実GPUのmodule／勾配／保存後reload／VRAM／学習効果、本番・本人端末・商品受入れは未確認です。
 
 ## 今回保存したCPU結果と次の実行境界
 
 `cpu_connection_results.json`は合成候補による実Engineの原source・packet・snapshot・本文・問い、`cpu_raw_consumer_results.json`は同target rawのconsumer結合結果要約、`cpu_tokenization_results.json`は重みを読み込まない実tokenizer／固定indexの結果です。モデルrawや学習結果には数えません。API固定sourceは`02c0b943c96b67cb32354e1d3352a00dcb768e64`です。保存rawの検証には、このAPI commitの別checkoutを`--api-root`へ明示します。
 
-追加の観測会や旧7教師の無理な変換をせず、次はGPU実単価・上限時間／費用・実保存mount・Pod外受領先を具体化し、16GB優先の一回の診断実行を判断する段階です。今回の実装承認にGPU起動・有料推論・学習実行・24GB自動再借用・通常有効化は含めていません。
+追加の観測会や旧7教師の無理な変換はしません。次は下記一回案の有料範囲とRunpod画面操作をMashが判断し、実slotの単価・残高・保存mount・停止担当を確認してから実行条件を確定します。今回のコード修復・計画作成からGPU起動・有料推論・学習実行・24GB自動再借用・通常有効化を開始していません。
+
+
+<a id="single-gpu-diagnostic-proposal"></a>
+## 次の一回案 — 16GB優先、計画予算$1、Pod最大2時間（未承認）
+
+目的は、現在の2教師×1epochで実4Bの勾配更新・保存adapterの非学習reload・前後raw・固定rawのCMEE採否を得ることです。モデル選定、周回探索、通常配置には広げません。
+
+| 項目 | 一回案と、開始前に確認する実物 |
+|---|---|
+| GPU | RTX A4000 16GBを優先。実slotのGPU単価が$0.30/h以下の場合だけ。16GB適合は未実証。24GBは別判断とし、失敗後の自動再借用はしない |
+| 時間 | Podの起動から停止まで7200秒以内を計画。run processはprepare込み5400秒、残り1800秒は環境準備・取得・退避・停止。時間内完走を保証せず、準備が30分を超えたら学習を始めない |
+| 支出 | 計画予算$1。GPU最大$0.60、60GBの稼働disk2時間約$0.0167、停止後40GBを最大24時間保持した場合約$0.2667。合計約$0.8833、差額約$0.1167を税・見積差の余裕とする。720h/月換算の見積りで、実quoteや請求hard capではない |
+| 保存 | container20GB＋volume40GBを候補。学習directory・HF cache・adapter・archiveはvolume上。実mountを`findmnt -T /workspace`と`df -h /workspace`で確認するまでstorage_mount_verifiedはfalse |
+| 環境 | 既存のRunpod PyTorch/CUDA環境を用い、実Torch/CUDA/BF16と空き14GiB以上を記録。固定Transformers/PEFT等が不一致ならrunしない。今回、環境install・image選択・秘密値取得は未実施 |
+| 診断量 | 2update、before/after各8生成、NLL各2。保存adapterを先にarchive化し、非学習reload後のafterまで実行。rawの補修やteacherへの置換はしない |
+| CMEE | 固定API02c0b943を明示し、before/afterのFIT2 rawをverify_cmeeへ渡す。EFREE6は意味profile範囲外のまま。固定priorでのfit診断と、実初回からの動的一往復を分ける |
+| Pod外受領 | archive＋sha256をMashのPCへ取得し、添付後に華恋が内部manifest・adapter3fileの実体を確認。archive作成だけをPod外受領済みにしない |
+| 停止 | 成功・OOM・非有限値・長さ超過・期限到達で記録を退避し、PodをStop。process timeoutにPod停止機能はない。停止担当と実際の操作経路を開始前に確定 |
+| 保管終了 | Stop後もvolumeの料金が続く。今回求める範囲に、Pod外受領確認後のこの新規試験PodだけのTerminateを含める。既存Pod・未回収重みは削除しない。この範囲が承認されない場合は開始せず、24時間超の保管へ自動移行しない |
+
+2026-10-24の公式確認では[A4000 16GBはfrom $0.25/h](https://www.runpod.io/gpu-models/rtx-a4000)。実単価と空きはdeploy画面で確認します。[Pods課金](https://docs.runpod.io/pods/pricing)では稼働container/volume各$0.10/GB月、停止volume$0.20/GB月。[保存仕様](https://docs.runpod.io/pods/storage/types)ではvolumeは通常/workspace、Stop後は保持・Terminate時に消えます。Serverlessの価格をPodsへ使っていません。
+
+Runpod連携の検索結果は今回0件で、GPU管理画面・残高・稼働Podへはアクセスしていません。実行に進む場合は**この一回分の有料診断・Runpod画面操作・退避後の新規試験Podの停止/削除**を確認し、画面上のactualを華恋が引き取って条件を埋めます。GPU単価・mount・権限を推測でtrueへ変更しません。既存の[Rule18 §11.3](../../../work_attitude_rules_for_karen/18_chat_work_environment_selection_rule_2026_08_06.txt)の「明確な費用・期間増加」と、本READMEのGPU実行前条件に対応する確認です。
+
+### 今回直した学習メモリの不要計算
+
+固定Transformers5.19.0のQwen forwardは`logits_to_keep`でhidden stateを切り出してからlm_headを計算し、causal lossはlabelsを右へpadして1位置shiftします。従来はmask済みprompt全位置にもlogitsを作り、loss内でFP32へ変換していました。これは実装上の不要計算で、実OOMを観測したという意味ではありません。
+
+先頭教師位置P・全長Lに対し、全input_ids/attention_maskを保持したまま`logits_to_keep=L-P+1`と`labels[:,P-1:]`を共通teacher_lossへ渡します。最初の教師tokenの予測位置と末尾のignored logitを残し、教師集合・mean loss・勾配・EOS・順序・学習量は変えません。NLL／学習／保存後診断へ同じ修復が適用されます。
+
+| 例 | 全入力 | 教師対象 | lm_headの位置：修復前→後 |
+|---|---:|---:|---:|
+| 初回 | 4080 | 1094 | 4080→1095 |
+| 訂正後 | 7856 | 1877 | 7856→1878 |
+
+11検査のうち新3件は、独立した数値CE/解析勾配の旧full比較、全contextを保つ実呼出し引数、target欠落・不連続の拒否です。固定QwenとPEFTの実装をread-only reviewしました。Torch/CUDAはこのCPU環境にないため、実モデルの数値一致・VRAM peak・16GB合格を主張しません。dataset/teacher/eval/API/CMEE契約は不変。重複usageキーの前者を削除し、以前から実際に保存されていたprompt_tokens/completion_tokensを維持しました。
+
+実モデルの動的一往復は未実装・未実行です。既存build_model_messagesは実初回のsnapshot/questionから訂正入力を作れますが、現在のverify_cmeeは固定priorを復元します。今回の有料一回案は従来の16生成を維持し、動的追加生成・通常service/DBの保存成功へ拡張しません。保存rawの結果を得た後、その不足を具体的に判定します。

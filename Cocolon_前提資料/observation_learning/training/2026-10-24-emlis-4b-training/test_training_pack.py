@@ -2,7 +2,9 @@
 import copy
 import hashlib
 import json
+import math
 from pathlib import Path
+import random
 import tarfile
 import tempfile
 import unittest
@@ -51,6 +53,66 @@ def ready_dataset(directory):
 
 
 class TrainingPackTests(unittest.TestCase):
+    def test_tail_loss_preserves_full_context_and_first_prediction(self):
+        encoded = {"input_ids": [1, 2, 3, 4, 5], "labels": [-100, -100, -100, 4, 5]}
+        class Labels:
+            def __getitem__(self, key):
+                self.key = key
+                return "sliced-labels"
+        class Model:
+            def __call__(self, **kwargs):
+                self.kwargs = kwargs
+                return type("Output", (), {"loss": "actual-model-loss"})()
+        labels, model, ids, mask = Labels(), Model(), object(), object()
+        result = runner.teacher_loss(model, input_ids=ids, attention_mask=mask, labels=labels, encoded=encoded)
+        self.assertEqual(result, "actual-model-loss")
+        self.assertIs(model.kwargs["input_ids"], ids)
+        self.assertIs(model.kwargs["attention_mask"], mask)
+        self.assertEqual(labels.key, (slice(None), slice(2, None)))
+        self.assertEqual(model.kwargs["logits_to_keep"], 3)
+        self.assertEqual(model.kwargs["labels"], "sliced-labels")
+        self.assertFalse(model.kwargs["use_cache"])
+
+    def test_causal_loss_and_logits_gradients_equal_full_sequence_reference(self):
+        # Independent numerical CE/gradient reference for pinned HF's right-pad
+        # then labels[...,1:] shift. No torch/CUDA or real model is claimed here.
+        rng = random.Random(20261024)
+        def reference(logits, labels):
+            targets = labels[1:] + [-100]
+            count = sum(target != -100 for target in targets)
+            loss, gradients = 0.0, []
+            for values, target in zip(logits, targets, strict=True):
+                maximum = max(values)
+                exponentials = [math.exp(x - maximum) for x in values]
+                total = sum(exponentials)
+                if target == -100:
+                    gradients.append([0.0] * len(values))
+                else:
+                    loss += (math.log(total) + maximum - values[target]) / count
+                    gradients.append([(value / total - int(i == target)) / count
+                                      for i, value in enumerate(exponentials)])
+            return loss, gradients
+        for length in [2, 5, 13]:
+            for prefix in range(1, length):
+                with self.subTest(length=length, prefix=prefix):
+                    ids = [rng.randrange(7) for _ in range(length)]
+                    labels = [-100] * prefix + ids[prefix:]
+                    logits = [[rng.uniform(-8, 8) for _ in range(7)] for _ in ids]
+                    start, count = runner.assistant_loss_window({"input_ids": ids, "labels": labels})
+                    old_loss, old_grad = reference(logits, labels)
+                    new_loss, new_grad = reference(logits[-count:], labels[start:])
+                    self.assertEqual(old_loss, new_loss)
+                    self.assertEqual(old_grad[:start], [[0.0] * 7 for _ in range(start)])
+                    self.assertEqual(old_grad[start:], new_grad)
+                    self.assertEqual(count, length - prefix + 1)
+
+    def test_loss_window_rejects_empty_unmasked_or_discontinuous_targets(self):
+        for ids, labels in [([], []), ([1, 2], [-100]), ([1, 2], [-100, -100]),
+                            ([1, 2], [1, 2]), ([1, 2, 3], [-100, 2, -100]),
+                            ([1, 2], [-100, 3]), ([True, 2], [-100, 2])]:
+            with self.subTest(ids=ids, labels=labels), self.assertRaises(ValueError):
+                runner.assistant_loss_window({"input_ids": ids, "labels": labels})
+
     def test_unfinished_real_manifest_never_becomes_training_data(self):
         # Root may later finish the formal dataset; this test uses an isolated pending copy.
         with tempfile.TemporaryDirectory() as tmp:
