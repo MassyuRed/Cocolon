@@ -4613,3 +4613,17 @@ training側README／experiment・全体00・教材入口・最新weekly Zを同�
 対象folder `Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-free-pilot/`。追加recreate_pilot.shは元d53 bootstrap／runner・4教材を変更せず1回だけ別runを作り、先行退避→明示した新runへの診断→再退避をまとめる。追加export_checkpoint.pyはadapter3file・結果・条件・教材／code／logをallowlistでarchive化し、manifestのSHA／bytesとarchive全fileの読戻しを確認する。venv／cache／基盤重みは含めない。既存diagnose_learning.pyへ別run用reference-resultを追加し、引数なしの初回hash限定・非学習測定を維持する。
 
 開始marker／内部排他的markerは重複学習を拒否。内側foreground timerを外側run30分process groupに保つ。学習直後に先行archive、診断後／失敗EXITに再退避するが、手元ダウンロード・checksum確認とPod手動StopはMashの操作。prepare／全課金は時間制限外。原9教師／6評価・runner／bootstrap・初回rawは不変、新runを元重みの復元・同一重み再現としない。CPUのhash選択／archive／失敗・重複拒否／両段階の短縮timeoutを確認、実GPUは未検証、再作成未開始。全体00・入口README・Free README／experiment・初回trial README・最新weekly ACを同期。STRUCTURE_MAP_DELTA_NONE（offline試験scriptのみ、製品のowner／型／接続／契約変更なし）。
+
+
+### 2026-10-24補記：別runの診断完了結果と重み受領
+
+追加folder `Cocolon_前提資料/observation_learning/trials/2026-10-24-qwen9b-free-lora/recreated-run/`。
+
+| file | 所有する内容 |
+|---|---|
+| pilot_results.json | 別runの受領latest_results(1).jsonをbyteそのまま保存。9stepと学習外6+6raw、固定条件、保存adapter hash |
+| diagnosis_results.json | 同じ別runの教師9件NLL18forward・生成18件、base／保存adapter再loadとtensor検査。archive内latest_diagnosis.jsonのbyte原本 |
+| verification.json | archive／33file／単独JSON・source8blob・受領重み32tensor／診断normの照合、NLL再計算、未確認と全9教師の内部本文所見 |
+| README.md | 初回と別runの区別、実行／退避完了と観測品質未合格、全9教師と学習外6件の所見、次の限定比較候補 |
+
+新wrapper／診断のGPU完走はMash受領結果で確認し、重み本体は受領archiveに確保。NLLは全9件低下したが、教えた事例にも根拠外の返信・約束・喜びの理由の追加が残る。正式Product Read・商品採用・P6統合は未成立。全体00・観測入口・Free README／manifest・初回trial README・latest weekly ADを同期。初回raw／4dataset・runner／bootstrap・製品codeは不変。STRUCTURE_MAP_DELTA_NONE（受領資料pathの追加のみ、製品owner／型／接続／公開契約変更なし）。

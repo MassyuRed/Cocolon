@@ -275,7 +275,7 @@
   "remaining_after_pilot": [
     "全6場面の内部本文診断で十分な品質改善は確認できない。商品採用・正式Product Read・P6統合・他core評価は未成立。",
     "JSON解析成功0/12だが、promptにJSON形式の明示がない。次の有料実行前に指示と検査の整合を具体化する。",
-    "adapter本体の保管／独立読戻し・再load、今回PodのStop完了、全稼働時間／現在単価／総課金は未確認。追加実行・予算拡張は自動で行わない。"
+    "初回adapter未回収を維持。別runの重み本体は受領・内部値とhashを照合し、Runpod診断の再loadを確認済み。今回Pod Stop・総課金は未確認。観測品質・一般化・商品採用は未成立。追加実行は自動で行わない。"
   ],
   "semantic_review": {
     "reviewer": "Karen internal full-text review, not Mash Product Read",
@@ -329,7 +329,7 @@
     "format_issue": "output fields specified but JSON-only instruction absent; no response_format enforcement; do not claim explicit JSON instruction was violated"
   },
   "next_diagnostic": {
-    "status": "BLOCKED_ORIGINAL_ADAPTER_UNAVAILABLE",
+    "status": "COMPLETED_ON_SEPARATE_RECREATED_RUN",
     "script": "diagnose_learning.py",
     "purpose": "paired fit on existing 9 teachers before altering data or training",
     "reference_sha256": "5fb61702d4c5b9e4f1317088b3ef91de53041168fa3313f14086d0c67f09ceb9",
@@ -349,7 +349,7 @@
     "automatically_stops_pod": false,
     "result": "/workspace/cocolon_emlis_free_20261024/latest_diagnosis.json",
     "local_checks": "syntax, 9 target-free prompts, weighted-NLL and invalid values, missing/tampered adapter rejection, saved-run matching, real-tokenizer context max1637/2048",
-    "gpu_validated": false,
+    "gpu_validated": true,
     "limits": "training-example fit only; NLL alone is not semantic quality, generalization or product acceptance; no automatic retraining",
     "latest_attempt": {
       "source_commit": "67d4186608302d9694ca92122d2617af2028cddd",
@@ -380,7 +380,7 @@
       "diagnostic_started": false,
       "previous_training_pod_identity_verified": false,
       "data_loss_confirmed": false,
-      "next": "No repeated Pod startups; separate one-run recreation and same-session diagnosis/export prepared, not executed.",
+      "next": "Recreated-run adapter, results and diagnosis received and checked; Stop can be performed. No further paid run automatically.",
       "initial_training_storage_persistence_was_verified": false,
       "official_sources": [
         "https://docs.runpod.io/pods/storage/types",
@@ -405,10 +405,14 @@
       "pod_identity_visible": false,
       "original_training_pod_confirmed": false,
       "original_data_loss_confirmed": false
-    }
+    },
+    "original_run_status": "BLOCKED_ORIGINAL_ADAPTER_UNAVAILABLE",
+    "latest_completed_reference_sha256": "24e4f0dc7e9e2ed03115bf0dd960849fd96ce6432c850f2adad03b01c49620b5",
+    "validation_scope": "Mash-uploaded explicit separate-run completion, same nine NLL and 9+9 generations, adapter hash and loaded norm matched received weight file; no independent local GPU execution",
+    "received_result": "../../trials/2026-10-24-qwen9b-free-lora/recreated-run/diagnosis_results.json"
   },
   "recreation_fallback": {
-    "status": "RECREATION_AND_DIAGNOSTIC_PREPARED_NOT_RUN",
+    "status": "RECREATION_DIAGNOSIS_EXPORT_RECEIVED_NOT_QUALITY_ACCEPTED",
     "entry": "recreate_pilot.sh",
     "exporter": "export_checkpoint.py",
     "recipe_commit": "d53f9ef0a906624acaeb519f8c4c6eb153e60e51",
@@ -417,7 +421,7 @@
     "epochs": 1,
     "steps": 9,
     "new_training_proposed": true,
-    "new_training_performed": false,
+    "new_training_performed": true,
     "new_run_distinct_from_original": true,
     "original_weights_recovered": false,
     "bitwise_reproduction_guaranteed": false,
@@ -440,7 +444,118 @@
     "local_validation": "syntax; separate-run recipe/hash selection; archive/checksum round trip and rejection paths; CPU stub diagnosis failure and duplicate guards; shortened outer timeout kills nested training/diagnostic child in ~1.1 seconds with readable archive",
     "initial_timeout_stub_failed": true,
     "timeout_stub_fix": "inner timeout foreground; both child stages rechecked",
-    "gpu_validated": false,
-    "limits": "Recreated-run training-example fit only. No original-weight restoration, generalization, product acceptance or automatic training expansion."
+    "gpu_validated": true,
+    "limits": "Recreated-run training-example fit only. No original-weight restoration, generalization, product acceptance or automatic training expansion.",
+    "verification_scope": "received Mash Runpod execution and exported files; no Karen GPU rerun",
+    "archive_received": true,
+    "archive_sha256": "6a7b4fe0dbcc29cfcb858d9dd68f6fd5a65e1ebc5e8911bc63c2920f39a89b3d",
+    "archive_bytes": 4217463,
+    "export_file_hashes_verified": 33,
+    "adapter_files_received": true,
+    "pod_stop_confirmed": false,
+    "total_cost_verified": false
+  },
+  "latest_recreated_result": {
+    "readme": "../../trials/2026-10-24-qwen9b-free-lora/recreated-run/README.md",
+    "pilot": {
+      "bytes": 48751,
+      "sha256": "24e4f0dc7e9e2ed03115bf0dd960849fd96ce6432c850f2adad03b01c49620b5",
+      "status": "EXECUTION_COMPLETE_NOT_QUALITY_ACCEPTED",
+      "training_steps": 9,
+      "before": 6,
+      "after": 6,
+      "seconds": 73.80006289482117
+    },
+    "diagnosis": {
+      "bytes": 83973,
+      "sha256": "907ebb138e34cb7f958fa0249e3449cfcf6b75a15c33e4aaa0b6c49f35f17edf",
+      "status": "DIAGNOSTIC_COMPLETE_NOT_QUALITY_ACCEPTED",
+      "teacher_count": 9,
+      "teacher_tokens": 1089,
+      "teacher_completions_excluded_from_generation": true,
+      "before_weighted_nll": 1.8150625453288671,
+      "after_weighted_nll": 1.657143720034835,
+      "reduction_percent": 8.70046190421605,
+      "nll_pairs": [
+        {
+          "id": "FT-UDON-INITIAL",
+          "tokens": 67,
+          "before": 1.0017378330230713,
+          "after": 0.7905309200286865
+        },
+        {
+          "id": "FT-BOOK-INITIAL",
+          "tokens": 106,
+          "before": 1.7706255912780762,
+          "after": 1.6316614151000977
+        },
+        {
+          "id": "FT-BOOK-AFTER-ANSWER",
+          "tokens": 158,
+          "before": 2.031500816345215,
+          "after": 1.9413193464279175
+        },
+        {
+          "id": "FT-CHAIR-INITIAL",
+          "tokens": 113,
+          "before": 1.73739492893219,
+          "after": 1.5157406330108643
+        },
+        {
+          "id": "FT-CHAIR-AFTER-CORRECTION",
+          "tokens": 141,
+          "before": 1.5763933658599854,
+          "after": 1.3963851928710938
+        },
+        {
+          "id": "FT-SHOP-INITIAL",
+          "tokens": 130,
+          "before": 2.036282777786255,
+          "after": 1.89751136302948
+        },
+        {
+          "id": "FT-SHOP-AFTER-ANSWER",
+          "tokens": 172,
+          "before": 2.404301166534424,
+          "after": 2.2409636974334717
+        },
+        {
+          "id": "FT-REPOT-INITIAL",
+          "tokens": 86,
+          "before": 1.3348088264465332,
+          "after": 1.1654740571975708
+        },
+        {
+          "id": "FT-KNIT-INITIAL",
+          "tokens": 116,
+          "before": 1.630827784538269,
+          "after": 1.4780807495117188
+        }
+      ],
+      "all_nine_nll_decreased": true,
+      "generation_changed": 8,
+      "json_parsed_before": 0,
+      "json_parsed_after": 0,
+      "seconds": 105.6572482585907,
+      "adapter_files_unchanged": true
+    },
+    "adapter": {
+      "files_received": true,
+      "sha256": {
+        "README.md": "b24b74667d1eb9c991047b4507c329613ae38707f4450446a94217081af69e96",
+        "adapter_model.safetensors": "159b2c3f87ff189ab18c84dfd5ed56e95a39846f068dca2f8236958ed8f7986e",
+        "adapter_config.json": "e726a3406e7704e7eaa58a12be952754deedd2ba4dce88b45eff1f5a22b85c3c"
+      },
+      "bytes": 4461168,
+      "tensor_count": 32,
+      "trainable_parameter_count_in_pilot": 1114112,
+      "tensor_values_finite": true,
+      "all_tensors_nonzero": true,
+      "reported_loaded_norms_match_received_weights": true,
+      "runpod_reload_verified_from_received_output": true,
+      "independent_local_gpu_reload_performed": false
+    },
+    "original_weights_recovered": false,
+    "semantic_review": "TEACHER_NLL_DECREASED_BUT_OBSERVATION_BEHAVIOR_NOT_ESTABLISHED"
   }
 }

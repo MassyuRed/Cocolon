@@ -2581,3 +2581,17 @@ Mashの「残ってない」とJupyter screenshot2633を受領。表示 /workspa
 ローカルCPU確認は構文、別run選択／原初回との分離・hash／設定不一致拒否、archive／manifest／外側checksum読戻し、cache除外・symlink／欠損拒否と旧backup保持、診断失敗exit保持／退避、重複run／内部呼出し拒否。初回の短縮timeout stubでは入れ子timerから子が残り失敗した。内側をforegroundに修正し、外側1秒の学習／診断それぞれで子の終了・exit124・読めるarchiveを約1.1秒で確認した。補助agentのread-only確認は具体的blocker修正に使い、正式Product Readとはしない。Torch／GPUで新wrapper・診断は未完走。華恋からGPU起動・有料推論・学習0。
 
 全体00・教材入口・実験README／manifest・初回試験README・全file地図を同じ変更単位で同期。原9教師・6評価・初回raw・原18候補・教示5参照・撤回第7回・商品runtimeは不変。STRUCTURE_MAP_DELTA_NONE（offline試験用path追加のみ、商品owner／型／接続／契約なし）。品質採用・P6統合・DB／Render／API／RN・merge／deploy変更0。
+
+
+<a id="20261024-emlis-free-recreated-received"></a>
+## AD. 2026-10-24 — 別runの再作成・教師適合診断完了、重み入りarchiveを受領
+
+Mashからlatest_results(1).jsonとcocolon_recreated_checkpoint.tar.gz／.sha256を受領。archive4,217,463 bytesのSHA256 6a7b4fe0dbcc29cfcb858d9dd68f6fd5a65e1ebc5e8911bc63c2920f39a89b3d がsidecarと一致し、manifest全33fileのhash／bytes、archiveの通常file34件・重複／不正pathなしを照合。単独JSON48,751 bytesはarchive内結果と同一。再作成source182d1a1／元recipe d53f9ef／runner c049113…と4dataset、helper含む8blobをGitHub固定headと一致確認。初回の重みの復元ではなく別runで、初回JSONは保持する。
+
+[別run原本と全件診断](../observation_learning/trials/2026-10-24-qwen9b-free-lora/recreated-run/README.md)に新pilot_results.json・diagnosis_results.json・verification.jsonを保存。A40で6回答→9step→6回答、既存9教師のNLL18forwardと生成18回答が完了。run記録73.800秒／診断105.657秒はprepare・待機・Pod全稼働や全課金ではない。保存adapter本体4,461,168 bytes・32個のF32 tensor／1,114,112値を受領し、有限・非zero・data offset／shape・診断読込normと3file hash一致を確認。診断時のbaseへの非学習再loadと終了時不変は受領結果から確認、華恋環境でGPU再実行はしていない。ダウンロードの照合が成立したのでMashへPodをStop可能と案内。今回Stop完了と総課金は未確認。
+
+同じ教師token1,089の加重NLLは1.8150625453→1.6571437200、全9件で低下、平均低下8.7005%。教師prompt生成は8/9文面変化。教師系列が出やすくなった方向の変化で、観測精度8.7%向上や技術獲得の証明ではない。全9教師と前後18本文を読んだ。植え替えの未記載の不安解消の削除など限定改善はあるが、本では本人の気がかりから友人の真意へ逸れ、開店では未返信を追加し約束なしの本人説明に未来の約束や招待／排除を補完、椅子の訂正後には再使用に加えて協働・達成感を喜びの原因へ足す。教えた事例でも観測挙動は未成立。編み物の不明保持はbaseで既に成立し前後同一。問いなしを一律失敗にせず、任意問いの元指示を維持する。
+
+学習外6件も全12本文を確認。E06乾燥完了補完の解消とE05参加意欲の明瞭化はあるが、E01承認断定、E02因果逆転、E03未記載の交流の補完が残り十分な品質改善は示さない。初回とのraw一致はbase6/6、after2/6。教師生成のJSON解析0/9ずつも、既知のJSON-only明示のないprompt／検査不整合と分ける。NLL低下だけで商品品質・一般化・正式Product Readへ昇格しない。
+
+次は教師追加より先に、同じ9件で学習量だけを変える小比較の具体案が候補。ただし原因を学習量不足へ確定せず、教材／module／JSON指示を同時変更しない。追加実行は未開始で自動進行しない。全体00・教材入口・Free README／experiment・初回trial README・全file地図を同期。4dataset・元runner／bootstrap・原18候補・教示5参照・撤回第7回・商品runtimeは不変。STRUCTURE_MAP_DELTA_NONE（offline受領結果資料のみ）。華恋からGPU／有料推論／学習・DB／Render／API／RN・merge／deploy0。

@@ -55,3 +55,7 @@ preflight内のCPU_PREPARED_GPU_NOT_TESTED／gpu_training_performed=falseは実�
 ## 後続：初回重み未回収と別runの診断準備
 
 現在は初回adapter本体を回収できておらず、その重みでの診断は未実施。同じ9教材・同じ固定レシピを1回だけ別runで再作成し、同じsessionで教師適合を診断して重み入り退避fileをダウンロードする手順を準備した。再学習はまだ始めていない。初回重みの復元・同一重みの再現とは扱わない。 [Free pack §10](../../training/2026-10-24-emlis-free-pilot/README.md#10-重み未回収時の別run再作成診断退避準備済み未実行)に、再作成→先行退避→教師適合診断→再退避をまとめた。これは初回の未計測NLLを回収したことにはならない。本fileとpilot_results.jsonの初回結果・品質診断はそのまま保持する。直近Jupyterの空表示だけから元Podの消失を断定しない。新wrapperのGPU完走は未検証、有料再実行は未開始。
+
+### 別runの結果と重み受領（2026-10-24 JST）
+
+[recreated-run/README.md](recreated-run/README.md)へ再作成結果・教師適合診断を保存した。初回adapter未回収を維持する一方、同じ9教材・同じ設定の別run再作成と教師適合診断が完了し、重み入りarchiveを受領・checksum／内部33fileを照合した。9教師の加重NLLは1.81506→1.65714（全9件低下）だが、未記載の返信や約束・喜びの理由を補う誤りが教えた事例にも残り、観測品質は未合格。初回重みの復元とは扱わず、追加実行は自動で行わない。 初回の本README／pilot_results.jsonと別runの原本を分け、初回hashや未計測NLLを書き換えない。重み入り受領archiveの内部照合を完了し、PodはStop可能と案内した。今回Stopの本人報告・全費用は未確認。
