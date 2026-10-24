@@ -2641,3 +2641,21 @@ CPUでは両固定revisionのconfig／indexと実tokenizerを確認し、全6件
 結果を受けたら華恋が全12本文を比較し、意味保持・本人訂正・三core責務と速度／VRAMの差を整理する。4B同等なら小GPU適合の確認を優先、9Bに品質差があればその価値と価格内の提供方式を併せて判断。重大逸脱が両方で反復するなら同条件の反復学習を重ねない。残る候補だけ本番方式でlong history・同時処理・cold start／idle・LoRA負荷を上限付きで測り、6入力の単独秒数を月額黒字・p95へ換算しない。
 
 新pack7fileと全体00／観測入口／選定入口／費用資料／Free experiment／全file地図／本weeklyを同期。原教材・実raw／受領重み・商品source・DB／Render・価格／quota・merge／deploy変更0。華恋によるGPU起動・有料生成・学習0。STRUCTURE_MAP_DELTA_NONE（offline選定packの所在・責務のみ）。
+
+
+<a id="20261024-model-selection-comparison-received"></a>
+## AH. 2026-10-24 — 4B／9Bの12回答受領、4Bを次の候補として保持する推奨
+
+Mashからlatest_selection.jsonを受領。[原本・数値・全6caseの本文所見](../observation_learning/trials/2026-10-24-qwen4b-9b-comparison/README.md)へ保存。290,022 bytes／SHA256 4f8aba44aca3612c66494ec5a77e92be2018d10a181fe1809c8994730e4f1386。実行source a01fe0ca34455eed983139ac42f2c4a3d03c88a3のrunner／cases hash・6入力と順序、両modelの全入力token ID・同A40／Torch2.8+cu128／BF16／SDPA等を照合。全12JSON解析成功・出力枠打切りなし・EOS到達記録・exit0。追加学習／adapter／実CMEE接続はなし。wrapper250.478秒はPod全課金時間ではなく、今回Stop完了・実費は未確認。受領後にStopを案内した。
+
+MashのA40で4B／9B各6回答、計12回答が完走し受領原本と固定sourceを照合済み。JSON全件成功・打切りなしだが意味品質は両方未合格。9Bの品質優位は見られず、4Bを次の候補として保持することを華恋が推奨。4Bは不明保持・補足／椅子訂正で相対的に忠実だが、開店の距離方向を反転し、Piece根拠・Analysis結果を創作する。9Bにも感情理由補完・別記録への誤edgeが残る。PyTorch peak allocatedは4B8.737／9B17.814GiB、単独速度は出力量依存。本番提供原価・680／1,480円での採算は未測定。既存9教師は全件Emlisで、開店方向と自然な受け取りを既に教える一方、Piece／Analysis完成例は0。1／4／16周は保留し、4B向け教材／指示の変更案を次に具体化する。採用・追加学習・商品価格／quota変更なし。
+
+華恋とread-only別担当が全12本文をsourceと照合。4BはE02の理由不明保持・本人補足・椅子訂正で9Bより忠実だが、開店の「離れた」を「距離が縮まった」へ反転、Piece根拠欄で「仕事が増え遅刻」を創作、Analysisで連絡係の業務完了を追加。9Bは初回へ主導権／達成感、椅子へ自己効力感／安堵、開店へ未達成比較・原因を補完し、Analysisの連絡係N02から別記録の道具全返却N05へ結果edgeを作る。両Piece canonicalは元memoと完全同一で、同僚の資料を直した行動を欠き単独伝達性／文章形成が不足。両Emlisは人間的受け取りが分析報告調。任意問いの全nullを一律失敗にはせず、JSON成功も商品合格へ昇格しない。
+
+生成合計は4B109.465秒／2842token、9B78.649秒／1959token。4BのAnalysisは2062token／78.229秒、9B901token／35.493秒で長文化の差。残り5件は4B31.236秒／780token、9B43.156秒／1058token、token当たり速度差は小さい。peak allocated4B8.737／9B17.814GiBはPyTorch計測で、GPU全占有や小GPU適合を保証しない。load9.743／14.029秒はweight download入り得る記録。各1回・warmupなしなのでp95・同時処理・Serverless cold startや月額黒字は算定しない。
+
+既存9教師もCPUで照合。全件Emlis Free、初回6／一回答後3・6題材。開店afterは当時から離れた感覚、共同計画／約束なし、本人夢の未達成比較は不明と既に教える。本人へ向いたreceptionも全9件にある。今回4Bは未学習baseなので、反転を教師欠如・学習不能へ短絡しない。一方、Piece本文／meaning別根拠、Analysisのpending／完了・記録ごとnode／edgeの完成教師は0。同Emlis9件の再学習を三中核全体の修復へ一般化しない。教師は変更せず最終承認もしていない。
+
+次は4Bを固定する小試験の教材／指示の変更案を具体化する。既存Emlisの再利用とPiece／Analysisの不足を分け、補充は華恋編集案として出典を保持し、Mashの新観測会や実演を作り足さない。9Bの1／4／16周は保留、今回の12baseline再取得もしない。本番原価・680／1480の採算・long history・Premium frame／最大3問・IF・LoRA運用は未測定。モデル採用・育成開始への自動進行はしない。
+
+新受領3fileと全体00／観測入口／選定入口／費用資料／Free experiment／実行pack入口／全file地図／本weeklyを同期。rawはbyte不変、元script・教師・受領adapter・商品code・DB／Render・price／quota・merge／deploy変更0。今回華恋の新GPU起動／有料生成／学習0。正式Product Read0、商品未合格、STRUCTURE_MAP_DELTA_NONE（offline受領記録のみ）。

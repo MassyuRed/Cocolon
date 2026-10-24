@@ -1,6 +1,6 @@
 # 680円／1,480円を目標にした4B・9Bの選定比較
 
-2026-10-24 JST。**実行用pack準備・CPU検証済み、実GPU未実行。追加学習はしない。**
+2026-10-24 JST。**実GPU比較12回答は受領済み。追加学習なし。** [原本・全件診断・次の判断](../../trials/2026-10-24-qwen4b-9b-comparison/README.md)を参照。9Bの品質優位は確認できず、4Bを次の候補として保持する推奨だが、両方とも商品品質未合格。以下の12生成を自動再実行しない。
 
 Mashの「どうするの？」に対し、教材追加や9Bの1／4／16周を先行せず、同じ6入力を各base modelへ一度ずつ渡す最大12生成に絞った。価格は検討目標で、売価・商品quotaの変更やモデル採用ではない。元の学習結果・adapter・9教師・6評価・20fixtureを変更しない。
 
@@ -88,7 +88,7 @@ Runpod公式pricingを2026-10-24確認：A40 $0.59/h、A5000 $0.27/h、Flex48GB 
 - 実固定tokenizerをCPUで両modelへ適用し、表の6件すべて同じtoken長を確認。入力＋出力最大3899で8192以内。公開config／weight indexを両固定revisionから取得し、Qwen3_5ForConditionalGenerationを確認。weight本体はCPU検証では取得・loadしていない。
 - Python／bash構文確認、CPU unittest **6件成功**。固定入力改変拒否、12回答未完了の昇格拒否、完了／途中結果の保持、二重実行拒否、予算算術、実outer timeoutの短縮強制KILL後に6+2回答回収とchecksum一致を確認。
 - read-only別担当も元入力との一致とwrapperの回収処理を確認。正式Product Readではない。
-- 新packのGPU完走・品質・実提供原価は未確認。華恋によるGPU起動・有料生成・学習は0。STRUCTURE_MAP_DELTA_NONE（offline選定scriptのみ、商品owner／型／接続／公開契約変更なし）。
+- GPU完走はMash受領結果で確認済み。品質は両方未合格、実提供原価は未測定。華恋による受領解析中の追加GPU起動・有料生成・学習は0。STRUCTURE_MAP_DELTA_NONE（offline選定scriptのみ、商品owner／型／接続／公開契約変更なし）。
 
 ## fileの責務
 

@@ -613,7 +613,7 @@
     "hold_reason": "Selection is not adoption. Establish own-trained-model serving economics and compare candidates under proposed680/1480 before further9B-specific repetitive training."
   },
   "next_selection_priority": {
-    "status": "BASELINE_COMPARISON_PACK_READY_CPU_VERIFIED_GPU_NOT_RUN",
+    "status": "BASELINE_COMPARISON_RECEIVED_4B_PRIORITY_CANDIDATE_NOT_ACCEPTED",
     "proposed_monthly_prices_jpy": {
       "plus": 680,
       "premium": 1480
@@ -635,7 +635,7 @@
       "cold start and idle storage"
     ],
     "reuse_existing_results": true,
-    "paid_execution_started": false,
+    "paid_execution_started": true,
     "illustrative_a40_month": {
       "usd_per_hour": 0.59,
       "hours": 720,
@@ -649,12 +649,12 @@
       "https://docs.runpod.io/serverless/pricing"
     ],
     "smaller_model_guarantees_profit": false,
-    "next_step": "Mash runs one fixed-commit command on one A40 Pod; download latest_selection.json then manually Stop. Karen reviews all12 outputs. No further training before candidate/economics decision.",
+    "next_step": "Prepare one bounded4B teaching/instruction change proposal. Reuse existing Emlis teachers where applicable; identify absent Piece/Analysis completion examples. Do not repeat twelve baseline outputs or increase9B epochs. No paid execution automatically.",
     "comparison_pack": "../../model_selection/2026-10-24-9b-4b-comparison/README.md",
     "fixed_case_count": 6,
     "maximum_generations": 12,
     "fine_tuning_in_next_probe": false,
-    "new_gpu_execution_started": false,
+    "new_gpu_execution_started": true,
     "runner_implemented": true,
     "cpu_checks_passed": 6,
     "script_timeout_seconds": 1800,
@@ -667,6 +667,25 @@
       "long-history Analysis",
       "Premium frame and three questions",
       "own LoRA serving costs"
-    ]
+    ],
+    "gpu_execution_operator": "Mash; received A40 output",
+    "completed_generations": 12,
+    "received_result": "../../trials/2026-10-24-qwen4b-9b-comparison/selection_results.json",
+    "received_result_sha256": "4f8aba44aca3612c66494ec5a77e92be2018d10a181fe1809c8994730e4f1386",
+    "nine_b_quality_advantage_demonstrated": false,
+    "recommended_priority_candidate": "Qwen3.5-4B, not adopted",
+    "both_models_product_quality_accepted": false,
+    "formal_product_read_performed": false,
+    "pod_stop_confirmed": false,
+    "additional_training_started": false,
+    "teacher_coverage_review": {
+      "total": 9,
+      "emlis_free": 9,
+      "piece": 0,
+      "analysis": 0,
+      "shop_direction_and_direct_reception_already_present": true,
+      "teacher_changed": false
+    },
+    "karen_new_gpu_executions_in_receipt_analysis": 0
   }
 }

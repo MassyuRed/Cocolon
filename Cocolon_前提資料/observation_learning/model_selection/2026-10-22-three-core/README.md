@@ -1,6 +1,6 @@
 # CMEEと学習済AIの分担案・三中核の比較試験
 
-作成：2026-10-22 JST／華恋。**現在の再開先（2026-10-24）は[4B・9Bの一回比較pack](../2026-10-24-9b-4b-comparison/README.md)と[最新weekly AG](../../../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261024-model-selection-comparison-ready)。** 680／1,480円を目標にした4B・9Bの一回比較packを準備済み。三中核4件＋回答訂正後2件を各baseへ一度ずつ、最大12生成・追加学習なし。CPU実tokenizer／6検査は成功、実GPU未実行。処理全体30分＋30秒、途中JSON保存・重複拒否・手動Stop。26%手数料・有料構成80/20・基盤11,000円・運営余力20%の仮定なら、有料50人でAI／保存等の費用枠10,809円/月、100人で32,619円/月。本番処理能力・LoRA提供原価・cold startは未測定。1／4／16周案は保留、価格／quota実変更・追加GPU0。
+作成：2026-10-22 JST／華恋。**現在の再開先（2026-10-24）は[4B・9Bの受領結果](../../trials/2026-10-24-qwen4b-9b-comparison/README.md)と[最新weekly AH](../../../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261024-model-selection-comparison-received)。** MashのA40で4B／9B各6回答、計12回答が完走し受領原本と固定sourceを照合済み。JSON全件成功・打切りなしだが意味品質は両方未合格。9Bの品質優位は見られず、4Bを次の候補として保持することを華恋が推奨。4Bは不明保持・補足／椅子訂正で相対的に忠実だが、開店の距離方向を反転し、Piece根拠・Analysis結果を創作する。9Bにも感情理由補完・別記録への誤edgeが残る。PyTorch peak allocatedは4B8.737／9B17.814GiB、単独速度は出力量依存。本番提供原価・680／1,480円での採算は未測定。既存9教師は全件Emlisで、開店方向と自然な受け取りを既に教える一方、Piece／Analysis完成例は0。1／4／16周は保留し、4B向け教材／指示の変更案を次に具体化する。採用・追加学習・商品価格／quota変更なし。
 
 [候補18件・教示5参照](../../training/2026-10-23-pilot-prep/README.md)と[Free限定9step／別run診断受領](../../trials/2026-10-24-qwen9b-free-lora/recreated-run/README.md)は保存済み。NLL低下と重み再loadは成立したが観測品質は未合格。P1〜P5限定内部準備を維持し、P6本統合・商品採用は未実施。下記20fixture／採点guide／M1原出力は変更しない。既知派生5場面、開発確認12場面、未使用評価候補3場面の区別も保持する。以下の日付付き記録は当時の段階で、最新の学習完了・候補数・価格検討を巻き戻さない。
 

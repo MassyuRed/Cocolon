@@ -6,9 +6,9 @@
 
 Cocolon／EmlisAIが、相手自身の価値基準を学び、その人の思考経路を辿って理解を更新する技術を育てるための保存先です。Mashの口調や結論だけを模倣することを目的にしません。
 
-## 現在地（2026-10-24・4B／9B選定比較pack準備、実GPU未実行）
+## 現在地（2026-10-24・4B／9B実比較を受領、4B候補保持・採用未決）
 
-680／1,480円を目標にした4B・9Bの一回比較packを準備済み。三中核4件＋回答訂正後2件を各baseへ一度ずつ、最大12生成・追加学習なし。CPU実tokenizer／6検査は成功、実GPU未実行。処理全体30分＋30秒、途中JSON保存・重複拒否・手動Stop。26%手数料・有料構成80/20・基盤11,000円・運営余力20%の仮定なら、有料50人でAI／保存等の費用枠10,809円/月、100人で32,619円/月。本番処理能力・LoRA提供原価・cold startは未測定。1／4／16周案は保留、価格／quota実変更・追加GPU0。 [一回比較の実行・結果持出し](model_selection/2026-10-24-9b-4b-comparison/README.md)／[最新weekly AG](../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261024-model-selection-comparison-ready)が再開先。元M1の三中核4入力と訂正後2入力を再利用し、両modelへ同じJSON-only指示で一度ずつ取得する。旧M1とのbackend／decode条件差を明記し、旧結果を新4Bとの同条件速度比較に流用しない。
+MashのA40で4B／9B各6回答、計12回答が完走し受領原本と固定sourceを照合済み。JSON全件成功・打切りなしだが意味品質は両方未合格。9Bの品質優位は見られず、4Bを次の候補として保持することを華恋が推奨。4Bは不明保持・補足／椅子訂正で相対的に忠実だが、開店の距離方向を反転し、Piece根拠・Analysis結果を創作する。9Bにも感情理由補完・別記録への誤edgeが残る。PyTorch peak allocatedは4B8.737／9B17.814GiB、単独速度は出力量依存。本番提供原価・680／1,480円での採算は未測定。既存9教師は全件Emlisで、開店方向と自然な受け取りを既に教える一方、Piece／Analysis完成例は0。1／4／16周は保留し、4B向け教材／指示の変更案を次に具体化する。採用・追加学習・商品価格／quota変更なし。 [受領原本・全件所見](trials/2026-10-24-qwen4b-9b-comparison/README.md)／[最新weekly AH](../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261024-model-selection-comparison-received)が再開先。元packの12生成は取得済みなので再取得しない。旧M1とのbackend／JSON指示差は保持し、9B学習結果との同条件比較には使わない。今回の教師点検は内容照合だけで、教師変更・最終承認や4Bの学習試験ではない。
 
 [Free9教師の限定LoRA試験](training/2026-10-24-emlis-free-pilot/README.md)はMashのA40で初回9stepと、同設定の別run再作成・非学習の教師適合診断まで完了。[別runの原本・重み照合・全本文所見](trials/2026-10-24-qwen9b-free-lora/recreated-run/README.md)を保存。初回adapterは未回収だが、別runの重み入りarchive全33file／checksumは受領照合済み。加重NLL1.81506→1.65714、全9件低下、生成8/9変化。ただし未返信や約束、訂正後の喜びの原因の補完が教えた事例にも残り、十分な観測品質改善は未確認。初回重みの復元とは扱わない。JSON-only明示のない旧prompt／解析不整合は試験側の不足と分ける。原18候補・教示5参照・9教師・旧6評価・受領重みを変更しない。今は教材を増やす依頼をMashへ出さず、候補の意味保持・速度・提供可能性を華恋が比較する。
 

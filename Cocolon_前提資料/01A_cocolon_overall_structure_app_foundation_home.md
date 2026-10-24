@@ -4643,3 +4643,16 @@ training側README／experiment・全体00・教材入口・最新weekly Zを同�
 | test_compare.py | 失敗／完了・重複・固定入力・強制KILL時の6+2回収・予算算術のCPU6検査 |
 
 全体00・観測入口・選定入口／費用資料・Free experiment・latest weekly AGを同期。実固定tokenizerは両modelの全6件で成功、CPU6検査成功。新GPU実行は0、1／4／16周案は保留。原9教師・受領raw／重み・製品sourceは不変。STRUCTURE_MAP_DELTA_NONE（offline選定用pathのみ、製品owner／型／接続／公開契約変更なし）。
+
+
+## 2026-10-24 — 4B／9B比較の受領原本と診断（製品runtime差分なし）
+
+新folder `Cocolon_前提資料/observation_learning/trials/2026-10-24-qwen4b-9b-comparison/`。
+
+| file | 所有する内容 |
+|---|---|
+| selection_results.json | Mash受領latest_selection.jsonのbyte原本。固定6入力・4B／9B全12rawとtoken IDs・時間／VRAM・環境／source・完走記録 |
+| review.json | 原本／runner／cases照合、時間・token／PyTorch memory再計算、全6caseの内部意味所見・教師coverage・推奨／未測定 |
+| README.md | 全12本文の比較、4B候補保持と両方未合格、既存9教師の範囲・次の判断 |
+
+全体00・観測入口・選定入口／費用資料・Free experiment・実行pack入口・latest weekly AHを同期。実行script／教材／受領済み重みと商品sourceは不変。今回の華恋は受領CPU解析のみで新GPU・推論・学習0。STRUCTURE_MAP_DELTA_NONE（offline結果の所在のみ、商品owner／型／接続／公開契約変更なし）。
