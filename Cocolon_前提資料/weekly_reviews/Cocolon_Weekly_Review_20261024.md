@@ -4,11 +4,13 @@
 今週の実績対象：10/17報告会で確認した版の後〜10/24の今回確認時点  
 次週の対象：**2026年10月24日〜10月31日**  
 記録担当：華恋  
-会議状態：**進行中。議題1の報告・次週案に加え、4B確定とGPU16GB優先/24GB許容のMash決定を§7へ追記。次週の推奨順位を§4へ具体化。計画全体の採用・会議終了は未記録。**
+会議状態：**進行中。議題1の報告・次週案に加え、4B確定とGPU16GB優先/24GB許容のMash決定を§7へ追記。次週の推奨順位を§4へ具体化し、対象path・変更内容・順序・検証・終了条件を§8へ詳細化。計画全体の採用・会議終了は未記録。**
 
 **今週は、Emlisの限定修復、Pieceの新描画・保存経路とprivate API配置、三中核のCMEE内部準備、学習済みAIの比較試験が前進しました。一方、先週目標にした本人端末での保存・再表示・画像共有や、三中核の商品品質は未達です。華恋の週次評価は「技術成果は部分達成、利用体験の完成目標は未達」です。**
 
 前回の[第7回議事録](Cocolon_Weekly_Review_20261017.md)は、実績・承認・失敗・方針変更の原記録として保持します。最新の週次報告と10/24〜10/31の管理案は本議事録へ集約し、過去の未完了を削除したり、新しい期限だけを付け直して達成扱いにしたりしません。
+
+**作業再開の入口：** [優先順位と日程（§4）](#next-week-priorities)／[具体的な作業一覧（§8）](#detailed-work-breakdown)。§8には既存実装と未実装案を分け、最初に編集するowner、失敗・回復の確認、本人操作へ渡す条件を残した。
 
 ## 0. 今回の依頼、確認範囲、記録の区分
 
@@ -140,7 +142,7 @@ System Contextでは、全機能原本・最新weekly・観測教材・三中核
 | Piece P-W1：10/22まで通常保存→本人履歴・詳細 | **全体未達** | source・DB・API配置は進展。必要RN版の配布・本人Auth一往復が残る |
 | Piece P-W2：10/23まで両OS画像保存・共有 | **全体未達** | iOS限定PNGは前進。runtime export OFF、実Photos／Share・Androidが残る |
 | Piece P-W3：10/24の本文・画像・実機結果集約 | **全体未達** | 限定画像の記録あり。一般本文品質・通常実機・商品受入れなし |
-| Analysis：10/18〜22の通常生成・文章／図・保存再表示・比較 | **達成証拠なし** | P5は別の内部成果。通常内容修正版の配置差、6401本人確認等が残る |
+| Analysis：10/18〜22の通常生成・文章／図・保存再表示・比較 | **達成証拠なし** | P5は別の内部成果。通常内容修正版の配置差、本文生成・保存再読・比較の本人確認が残る。6501時点の不足案内表示は本人確認済み（§8.5） |
 | 購入C01／C02：10/18〜21の限定修復 | **未達** | 現行sourceでも既知欠陥が継続。旧10/04・10/13の未達も保持 |
 | 10/23〜24の同一候補の全体結合 | **達成証拠なし** | 開発・配置・端末版が揃わず、コード不足も残る |
 
@@ -169,7 +171,7 @@ Mashの「次週の優先順位を検討し、最新議事録に記載して」�
 
 | 優先・作業枠 | 対象と優先する理由 | 最初に進めること | 10/31に示す結果・終了条件 |
 |---|---|---|---|
-| **1：最優先の主枠** | **4B学習＋CMEE実モデル接続。** モデルは決まったため、育成と利用経路の実結果へ時間を使う | 既存教材とP1〜P5を再利用し、4B用学習・重み保存/再loadと、モデル出力を既存意味経路へ渡す処理を小さく結ぶ。Emlisを最初の完成単位にする | 4B学習結果の重み回収・再load、学習前後の実本文、学習に使っていない入力への結果。Emlisの原入力→観測/受け取り→必要な問い→本人回答による更新→同一保存再読。続いてPiece/Analysis各限定入力の成立・不足を示す。全商品品質の完成保証ではない |
+| **1：最優先の主枠** | **4B学習＋CMEE実モデル接続。** モデルは決まったため、育成と利用経路の実結果へ時間を使う | まず既存教師の完成応答JSONとP1の厳密なcandidate/evidence受口を実例で揃える（CM-01/T1）。既存教材とP1〜P5を再利用し、4B用学習・重み保存/再loadと、モデル出力を既存意味経路へ渡す処理を小さく結ぶ。Emlisを最初の完成単位にする | 4B学習結果の重み回収・再load、学習前後の実本文、学習に使っていない入力への結果。Emlisの原入力→観測/受け取り→必要な問い→本人回答による更新→同一保存再読。続いてPiece/Analysis各限定入力の成立・不足を示す。全商品品質の完成保証ではない |
 | **2：AIとは独立した並行主枠** | **Pieceの通常保存→履歴再読。** 保存部品・API配置まであるため、本人が使える一往復を先に閉じる | 87151固定候補の既存署名build/TestFlight送信の具体案・必要判断、配布、導入版での本人Authによるpreview→明示private保存→同一record履歴/詳細 | 通常保存と同一本文/画像設定の再読を実確認。成立後に同じ保存結果の画像保存/共有へ進む。配布未実行・コード不足・端末時間待ちを分離し、6501へ新版の成功を帰属させない |
 | **3：外さない限定必須枠** | **購入finish・account切替・visibility失敗境界。** 課金・本人状態・公開の誤りを残したまま実利用へ進めないため | 既存3欠陥を原因別に修復し、finish両方式失敗、旧account応答、visibility HTTP失敗を確認 | 失敗を成功扱いにせず購入回復を保持、切替後の旧応答遮断、visibility取得失敗時に公開扱いを進めないこと。既存ownerの限定修復とし、offline学習の新しい開始条件にはしない |
 | **4：次順位の結合枠** | **通常Analysisの文章・図→保存再表示→比較。** P5内部成功を本人の通常利用へ置き換えないため | 現行内容修正版・API配置版・RN版の差を固定し、一往復に必要な不足から閉じる。AI共有ownerの編集と競合する場合は順序を調整 | 同じ根拠・期間・保存identityで文章/図を再読し、比較を確認。未実装・未配置・本人未確認を別記。複数ANSWER、IF/Saved、有料差の不足と公開への影響も残す |
@@ -178,7 +180,9 @@ Mashの「次週の優先順位を検討し、最新議事録に記載して」�
 
 ### 4.2 4B学習とCMEE接続の具体的な進め方
 
-1. **4Bで使う最小の学習・接続単位を用意する。** 既存9教師の原入力・正解・指示・JSON形式を照合し、4B用runnerの学習対象、結果保存、同一入力の前後比較を揃える。既存9教師は全件Emlis用である。既存9B adapterを4Bへ載せたり、9B用1／4／16周案を自動流用したりしない。9Bの実行手順から再利用できる部分と変更する部分を明記する。
+**実作業の詳細は[§8](#detailed-work-breakdown)に集約する。** 初手は[CM-01](#task-cm-01)とT1の共通作業である。教師の完成応答とCMEE候補のshape差、旧runnerの9B固定・40/32GiB gateを直さずにGPU学習へ進めない。これは4Bを再選定する調査ではなく、決めた4Bを実際に育てて使うための差分である。
+
+1. **4Bで使う最小の学習・接続単位を用意する。** Emlis初回と訂正後の実例で、本人source→4Bへ求める意味/本文→rawの要求shape→採用先→最終本文を一表へ揃える。そのうえで既存9教師の原入力・正解・指示・JSON形式を照合し、4B用runnerの学習対象、結果保存、同一入力の前後比較を揃える。既存9教師は全件Emlis用である。既存9B adapterを4Bへ載せたり、9B用1／4／16周案を自動流用したりしない。9Bの実行手順から再利用できる部分と変更する部分を明記する。
 2. **4Bを限定学習し、保存・再loadと実本文を同じ作業で確認する。** 16GBで必要条件が成立するかを確認し、不足するなら原因を示して24GBの具体構成へ進む。教材への適合と、学習に使っていない入力への意味保持・自然な受け取りを分ける。既存評価と教師が重なる箇所は独立評価と呼ばない。保存領域を先に確認し、重み・設定・結果を回収して照合してから停止する。
 3. **実モデルの出力を、P1〜P5の既存責任へ渡す。** 新たな手書き候補・stubの成功で代用せず、モデル呼出し→未採用候補→意味snapshot→既存作者→保存・再読を通す。CPU側の接続実装は学習の全面完成を待たず並行し、実結合では使用した4B/adapter版を固定する。モデルの候補を華恋が手修正して接続成功と数えない。
 4. **Emlis一往復を先に閉じ、三中核へ広げる。** 既存の三中核4場面（Emlis初回・回答後、Piece、Analysis）の材料を再利用し、最初はEmlisの問い/回答更新と同一保存再読まで確認する。ただし固定E02-0は問いなしEND、E02-Bは実pendingなしのため、回答更新は実際のpendingが成立する既存入力で確認する。問いなしENDには架空のpendingや回答を作らない。P4/P5を作り直さず、各coreへ同じ4Bから得た実候補を渡せる範囲と不足を示す。Piece/Analysis教師の不足は既存source・仕様から必要な少数の編集案として扱い、Emlis9教師だけで学習済みとしない。新しい観測会や大規模教材作成をMashへ先行依頼しない。
@@ -189,7 +193,7 @@ Mashの「次週の優先順位を検討し、最新議事録に記載して」�
 
 ### 4.3 Pieceと共通残件を進める依存
 
-Pieceは、まず本人が保存して履歴で開き直せる単位です。P-W1が成立したら、現runtimeのexport OFFについて具体範囲を判断し、通常詳細→同じ画像→Photos/Shareを確認します。3形式、取消・権限拒否・失敗、Android新版、backend receipt、Nexus/tutorial等のM5を残件として保持します。iOSの限定PNGを両OS完成へ換算しません。
+Pieceは、まず本人が保存して履歴で開き直せる単位です。P-W1が成立したら、現runtimeのexport OFFについて具体範囲を判断します。現factoryにはexport_requested/export_readyの引数がなく、設定をtrueへ足すだけでは接続できないため、[P-05](#task-p-05)の最小source差分を準備したうえで通常詳細→同じ画像→Photos/Shareを確認します。3形式、取消・権限拒否・失敗、Android新版、backend receipt、Nexus/tutorial等のM5を残件として保持します。iOSの限定PNGを両OS完成へ換算しません。
 
 共通3欠陥は、課金・account切替・公開利用の結合確認前に閉じる必須枠です。4Bのoffline学習を止める前提にはしませんが、接続途中で本人境界へ直接影響すると判明した箇所は、その接続を進める前に優先修復します。Analysisは最新内容の配置差と本人一往復を追い、P5のprivate検証へ置き換えません。
 
@@ -207,7 +211,7 @@ Pieceは、まず本人が保存して履歴で開き直せる単位です。P-W
 | **10/30** | 三中核の実本文・保存結果と、本人通常操作の成立範囲を集約。公開に影響する不足を先に示す | 実行していない範囲を合格扱いせず、残り工程・必要判断・11月結合枠への影響を具体化 |
 | **10/31** | 各公開必須残差を「完了/実装残/配置残/本人確認残/採否待ち」で判定し、11/15結合・11/22候補・11/27提出へ進める条件を示す | 未達原因、残工程、次の一作業、12/18への影響を示す。自動延期・無断仕様削減はしない |
 
-**次セッションの最初の一作業は、確定した4Bで最初の学習・重み保存/再loadとCMEEへの接続を行うための、既存教材/runner/入出力/保存先の必要差分を揃えることです。** ここで長い新設計や補助機構を増やさず、実際の4B出力を得て利用する単位へつなぎます。別の個別作業指示があれば、その対象を上の順位との関係を保って進めます。
+**次セッションの最初の一作業は、CM-01/T1でEmlis初回1例と訂正後1例の「本人source→モデルinput→意味候補/自然な受け取り案→採用先→最終本文」を揃え、既存教師とCMEE受口の不一致を閉じることです。** その同じ契約でT2〜T5の教師・4B runner・学習量・保存先を固定します。対象path・操作・終了条件は[§8](#detailed-work-breakdown)を使います。 ここで長い新設計や補助機構を増やさず、実際の4B出力を得て利用する単位へつなぎます。別の個別作業指示があれば、その対象を上の順位との関係を保って進めます。
 
 ### 4.5 今週は後ろへ置くもの
 
@@ -248,7 +252,7 @@ Google Playの取得済みproduction accessを同一アプリで継承する既�
 
 次セッションはfreshな[全機能・全状態](../00_cocolon_current_product_and_state.md)と本議事録を読み、依頼対象の詳細owner・最新実ファイルへ進みます。Pieceは入口§119／map§65.62、AIは受領比較・原価・試用案、CMEEは内部準備trial、通常Analysisと共通欠陥は各実ownerを使います。旧第7回ALは本会議への引継ぎ履歴であり、今後の「まだ報告会未開催」という現在地にはしません。
 
-初回保存は議事録新規・weekly案内・全体現在地の3文書。今回の優先順位更新も同じ3文書に限定します。主担当の華恋が統合・反映し、補助担当は読取レビューのみ。source／test／DB／runtime／配布／費用／商品仕様の変更はありません。**ADMINISTRATIVE_ONLY、product_credit=0、STRUCTURE_MAP_DELTA_NONE**。全体現在地には4B決定と次週順位を同期し、各機能の稼働・商品状態は変えません。新しい常設台帳・自動化・承認規則は追加していません。
+初回保存は議事録新規・weekly案内・全体現在地の3文書。今回の優先順位・作業詳細更新も同じ3文書に限定します。主担当の華恋が統合・反映し、補助担当は読取レビューのみ。source／test／DB／runtime／配布／費用／商品仕様の変更はありません。**ADMINISTRATIVE_ONLY、product_credit=0、STRUCTURE_MAP_DELTA_NONE**。全体現在地には4B決定と次週順位を同期し、各機能の稼働・商品状態は変えません。新しい常設台帳・自動化・承認規則は追加していません。
 
 
 
@@ -289,3 +293,904 @@ Mashは、モデル選定の比較に時間を使い続けず学習へ進む必�
 原典：[Runpod Pods](https://docs.runpod.io/pods/overview)、[Serverless](https://docs.runpod.io/serverless/overview)、[Flex課金](https://docs.runpod.io/serverless/pricing)、[秒単価](https://docs.runpod.io/serverless/endpoints/endpoint-configurations)、[GPU料金](https://www.runpod.io/pricing)、[A4000](https://www.runpod.io/gpu-models/rtx-a4000)、[A5000](https://www.runpod.io/gpu-models/rtx-a5000)、[Qwen2B](https://huggingface.co/Qwen/Qwen3.5-2B)。
 
 今回の効果は会議での判断・推奨の記録と全体現在地の同期。新規GPU・有料推論・学習・配備・招待・DB・価格quota変更0、STRUCTURE_MAP_DELTA_NONE、ADMINISTRATIVE_ONLY。会議は継続中。
+<a id="detailed-work-breakdown"></a>
+## 8. 次週作業の詳細 — 対象ファイル・実行順・確認内容・終了条件
+
+Mashの「やるべき作業をもっと詳細化し、可能な限り具体的に残す」という依頼による追記。§4の順位を、次の担当が対象pathと最初の操作から再開できる単位へ分解した。**以下は未完了作業の計画であり、今回の文書更新で実装・テスト・GPU学習・CI・配布・DB・本番変更を実行した記録ではない。**
+
+詳細化の読取基準はCocolon `43143ffc6aee9e765e1a33b9d2830fe23b6ece13`／mashos-api `666b28517ef04aba170ebffe3c86980fea4c11bd`。§0の初回照合後、Cocolon側の会議文書だけが進んだ時点である。保存済み配置記録・実source・既存test・workflow・manifestを照合し、現環境を再照会したかのようには扱わない。参照先の固定SHAは調査時点で、実作業時には対象refの新差分だけを確認する。
+
+実装・準備・検証・GitHubへの記録は華恋が担当する。Mashには、仕様・費用・公開範囲等の具体判断と、準備が整った端末操作が必要な地点で対象・手順・期待結果を示す。既に決まった4B・16GB優先/24GB許容や既適用SQLを、再検討の議題へ戻さない。以下のIDは議事録内の参照用で、別の管理基盤や追加の承認規則を設けるものではない。
+
+### 8.0 読み方と、最初に着手する作業
+
+| 順位・枠 | 詳細への入口 | 今回見つかった具体的な依存／最初の一作業 |
+|---|---|---|
+| 1：4BとCMEEの共通初手 | [8.1 CM-01〜10](#details-cmee) | **CM-01/T1は同じ一作業。** Emlis初回1例・訂正後1例で、完成応答教師と厳密candidate/evidence受口を対応させる。意味と自然な本文の責務・変更ownerを実例で揃える |
+| 1：4B育成・実行保全 | [8.2 T1〜T9](#details-training) | 上の契約で教師を整え、旧9B固定・total40/free32GiB gate・診断hashを4Bへ合わせる。学習量／時間／支出／保存先を一設定に固定してから実行する |
+| 2：独立並行のPiece | [8.3 P-00〜12](#details-piece) | 既存87151配布候補を使う準備→必要版導入→本人preview/明示保存/履歴再読。exportは現factory引数に未接続なので、そのsource差分を先に準備する |
+| 3：限定必須の共通修復 | [8.4 C01/C02/C03](#details-common) | C02本人世代→C01購入完了/回復を結ぶ。C03 visibility失敗は独立APIで準備。offline学習の新しい開始条件へ広げない |
+| 4：通常Analysis | [8.5 A-01〜12](#details-analysis) | 6501不足案内の本人確認を保持。最新保存の再読と、monthly生成/履歴を別にする。配置差と通常経路の不足から閉じる |
+| 公開までの後続残件 | [8.6 REL-01〜12](#details-release) | 認証URL・両OS署名・価格/権利・申告・同一候補結合・提出・公開。必要準備を並行するが、全てを10/31完成目標や学習の前提にはしない |
+
+**直列にするのは意味/教材契約→その契約での学習→実4B候補での結合。** CPU側provider準備、Pieceの配布準備、共通修復、Analysisの版差分確認は独立する範囲で並行する。CMEEと通常Analysisが共有する意味ownerを同時に別々の方式へ編集しない。CM-01/T1を二重に実施せず、一つの対応表を両方で使う。
+
+各項目では「現存source」「未実装の変更案」「検証する失敗・回復」「本人の通常利用」「商品品質」を区別する。提案path・プレースホルダーは未作成と表示し、旧9B commandやstub commandを4B/P6の完成手順として渡さない。
+
+<a id="details-cmee"></a>
+### 8.1 CMEEと実4B接続 — CM-01〜10
+
+#### A. 最初に解消する実物の接続差
+
+**4Bを繋ぐだけの空欄は一つではない。** 現在は次の異なる入出力があり、この差を残したまま学習・接続を別々に進めない。
+
+| 実物 | 現在の入出力・実施済み範囲 | P6へ残る具体差 |
+|---|---|---|
+| 4B比較・Emlis9教師 | 観測／reception等の完成応答を扱う。4B比較はadapterなしbase。9教師は全件Emlis | この完成応答をそのまま意味candidateと見なさない。4Bへ意味・自然な本文のどこを任せるか未確定 |
+| `cocolon_meaning_experience_engine/preparation.py::prepare_emlis/prepare_piece/prepare_analysis` | core別の材料を`PreparedRequest(request_id, private_json)`へ凍結。request IDは材料から算出。原入力・補足・履歴を区別 | 4Bへ実際に渡すmessages／出力指示への変換が未接続。材料を切り捨ててcontextへ収めない |
+| 同`receive_candidate` | `raw_output`、`finish_reason`、provider/model/revision/usage/elapsedを受取。rawの厳密な最上位は`{candidate,evidence}`。evidenceはsource_id／field_path／start／end／quote。全receiptは`NOT_ADOPTED` | 既存の観測本文JSONとは別shape。引用位置一致は意味正当性を証明しない。provider通信・token生成は一切行わない |
+| Emlis `emlis_semantic_admission.py::prepare_snapshot_meaning` | 明示offlineの`SemanticInput`だけ採用／再開。`FRESH_CANDIDATE`と`RESUME_ADOPTED`を分離。v1/v2のfinite範囲 | 一般4B出力を無条件受理する入口ではない。既存型へ写せない意味を捨てて成功にしない。作者へ渡すだけで自然な受け取りの育成が完了するわけではない |
+| Piece `piece_semantic_admission.py` | P01構文の候補→snapshot→既存plan／作者→private保存再読。原文2段落保持 | 一般文章整形・モデル作成文章の採用は未実装。通常B8 artifactとprivate artifactは別 |
+| Analysis `cores/analysis/semantic_admission.py` | 原3構文family・Plus・補足0・比較なし。意味→private graph→文章／図payload→private保存再読 | 一般期間資料・モデルnarrative・通常保存／RN／比較へ未接続。3原文を保持できることと新しい観測文章の品質は別 |
+
+以下でいうAPI pathの共通prefixは `ai/services/ai_inference/`、CMEE packageは `cocolon_meaning_experience_engine/`。ownerの実pathを省略する場合もこのprefixから解決する。
+
+#### B. 作業順・依存・具体的な終了条件
+
+<a id="task-cm-01"></a>
+##### CM-01：4Bへ任せる意味・本文・問いの責務を、実入力と出力例で一単位に固定
+
+- 依存：4B確定は済。モデル選びを再開しない。学習担当の最初の教師／runner確定より先に閉じる。
+- 読む実物：`preparation.py::OUTPUT_CONDITIONS/_candidate/receive_candidate`、`engine.py::MeaningExperienceEngine.generate/prepare_emlis_update`、`emlis_semantic_admission.py::SemanticInput/prepare_snapshot_meaning`、既存9教師、4B受領12比較中の4B6本文。
+- 具体作業：Emlis初回1例と訂正後1例を使い、「本人source」「4Bが返す意味候補」「4Bが返す自然な受け取り案」「CMEEが確定する本文・実問い・更新・保存」を横に並べ、現在shapeと必要差分を示す。Piece／Analysisも同じ表に担当欄を設ける。
+- ここで具体化する未決：4Bは意味候補を返すのか、本文も生成するのか、両方か。根拠の保持・採用判断と自然な日本語生成をどの既存ownerが担当するか。既存唯一作者・独立reader・saved版との契約差分はどこか。共有の新Engineを増設しない。
+- 自然な観測・受け取りを育てる目的を保持する。**「4Bの意味候補を旧finite作者へ渡すだけ」に無承認で固定し、その作者の原文復唱を最終到達へ縮めない。** 逆に、生成された文章を本人の意味／factへ逆流させない。
+- 検証／終了：同じ入力から教師の正解・モデル要求shape・採用先型・最終本文が矛盾しない、変更予定pathと変更前後の具体例が示せること。新しい意味／作者責務を採用する具体判断が必要なら、この差分を判断対象にする。今の文書作成依頼だけで確定実装契約にしない。
+- 記録先：共有設計01、Emlis設計02、必要なPiece03／Analysis04／schema05の該当差分。議事録だけで終えず、採用時は該当する設計原本にも差分を反映する。既存P1〜P5の結果・fixtureは過去原本として保持する。
+
+<a id="task-cm-02"></a>
+##### CM-02：4B実推論を呼ぶ薄い境界と、材料→messages→raw受取を具体化
+
+- 依存：CM-01の入出力・責務。4B学習／重み保存準備とCPU側実装準備は並行可能。
+- 現状：P1は通信0。Emlis serviceには`offline_candidate_source(request, prior_snapshot)`という注入点があるが、実provider実装はない。既存比較runnerはCMEEの通常providerではない。
+- 具体作業：初期のRunpod Pods上4Bで、使用base revision／adapter revision／tokenizer／chat template／非thinking等の実条件、最大入力・出力、deadline、cancel時の扱い、raw bytesの保存、実usage／finish理由を、CM-01の要求形に結ぶ。
+- 終了理由を既存の`stop/length/timeout/error/unknown`へ対応させる。EOS到達、token上限、通信不明、空出力を区別する。未取得metadataはnullのまま、推定値を実usageにしない。
+- 同じ原入力に対する重複呼出しをどこで止めるかを既存attempt／source prefix／request identityへ結ぶ。providerの応答が失われた場合に、課金済みか不明な要求を無制限再送しない。provider側の重複抑止能力は未確認として具体化する。
+- 検証／終了：原材料のID・parent・owner・期間・元fieldが保持され、4B rawと実metadataが同じ要求へ束縛される。JSON括弧補完や意味の手修正なしで受領でき、timeout／lengthはJSONが一見完結していても正常採用しない。
+- 未決：実protocol・client配置path・認証方法・時間／出力量・終了理由対応のexact値。本書で新しいprovider file名・endpoint・環境変数・常設監視体系を確定しない。学習／開発Podsと提供Flexを混同しない。
+
+<a id="task-cm-03"></a>
+##### CM-03：原材料の投影・根拠座標・未採用状態を実4B出力へ保つ
+
+- 依存：CM-01/02。通常アプリへの配備前にofflineで行う。
+- 対象：`preparation.py::prepare_emlis/prepare_piece/prepare_analysis/receive_candidate`、`preparation_sources.py::piece_material/analysis_material`。
+- Emlis：原入力、各回答、適格履歴、frame feedbackと実question controlを分離。回答を新規入力件数にしない。過去の生成応答を本人sourceへ混ぜない。
+- Piece：保存済み元7field・source版・owner、memo／memo_action、全選択とnullを保持。`normal/pre-question`と未対応refinedを区別する。
+- Analysis：owner、半開期間、INCLUDED／EXCLUDED、元record版と補足を凍結。長文・複数回答を黙って削除せず、現上限に当たる場合は未対応を返す。
+- 根拠：モデルへ示したfield文字列とscalar座標、native envelopeのUTF8座標、可視本文の文字座標を混同しない。4Bが数えた位置だけを信用しない。
+- 検証／終了：誤source／他owner／異なるrequest／範囲外quote、bool-as-int、重複JSON key、NaN、途中JSON、未知終了を拒否。正しい引用でも誤主体・時点・肯否・関係は未採用に留まる。既存`CandidateReceipt.adoption_state=NOT_ADOPTED`を、形式成功で変更しない。
+
+<a id="task-cm-04"></a>
+##### CM-04：Emlis初回を実4B→意味→実本文へ通す
+
+- 依存：CM-01〜03、学習担当が保存・再load確認した4B版。base結果を使う場合はadapterなしと明記。
+- 実owner：`engine.py::MeaningExperienceEngine.prepare_emlis_update/generate`、`emlis_semantic_admission.py::prepare_snapshot_meaning/derive_snapshot_plan/snapshot_question`、`emlis_answer_update.py::prepare_emlis_meaning/build_updated_grounded_plan`、`emlis_thread_engine.py::generate_emlis_thread`。
+- 現入口：明示offline request＋`SemanticInput("FRESH_CANDIDATE", receipt, ...)`。採用後は同じsnapshotから`RESUME_ADOPTED`する。snapshot版、request／source prefix、prior、native bindingsと既存planを照合する。
+- 実4Bが返したunknownの対象、二行動、原格、省略主体、過去の喜び／現在の不明、TE連結／concessionを保持。joy不明を原因不明・信頼・成長へ書換えない。対応できないcandidateを手書きfixtureへ差し替えない。
+- **E02-0の現既存到達は問いなしEND。** 同例へ問いを強制して学習・接続成功を作らない。E02-Bの`SUPPLEMENTAL_PROBE`を実回答へ昇格しない。
+- 検証／終了：採用／HOLD／UNSUPPORTED／REJECTと理由、raw、snapshot、実Observation・受け取り・実問いまたはENDを同じ版で示す。本文が原文コピーに留まるなら、意味接続の技術到達と自然な文章の未達を別記する。CM-01で選んだ本文責務が実際に働くことを確認する。
+
+<a id="task-cm-05"></a>
+##### CM-05：実pendingのある別caseで、本人回答による読みの更新を通す
+
+- 依存：CM-04。E02-0に架空pendingを追加しない。
+- 既存の実pending例：`ai/tests/test_cmee_emlis_semantic_snapshot.py::test_initial_candidate_reaches_real_author_question_and_snapshot_replay`／`test_real_pending_answer_keeps_subject_time_and_unaffected_material`。同fileは`test_cmee_emlis_q1_thread.initial`を使う。実初回で得たquestion ID・target・予算を使い、合成したIDを作らない。
+- 対象：`emlis_question.py::question_candidate/validate_question_binding`、`emlis_answer_update.py::prepare_emlis_meaning`、serviceの`answer/action`。
+- 追加、明示訂正、撤回、不明、skip／終了、NO_MATERIAL_UPDATEを既存の到達可能な範囲で通す。回答envelope・parent・実question・既存prior snapshotと新candidateを束縛し、未変更内容・元経験・残存不明を失わない。
+- Free／Plusの0..1、Premiumの0..3と本人続行、同じ回答の再送、古いrevision・異なるquestion・別owner・END後の回答を検査する。初回でENDとなる入力はそのまま保持する。
+- 検証／終了：回答前後の意味差と本文差が一致し、訂正された理由を残したり否定された説明を出来事factへ変えたりしない。更新未解釈ならANSWER_UNREFLECTED、旧本文の新prefixへの付替えなし。実問いがないcaseはN/Aであり失敗・成功へ水増ししない。
+
+<a id="task-cm-06"></a>
+##### CM-06：候補取得・意味保存・本文保存の失敗／重複／再開を閉じる
+
+- 依存：CM-04、CM-05。一回のモデル出力だけで保存完了としない。
+- 実owner：`emlis_thread_service.py::EmlisThreadService.__init__/_semantic_candidate/_semantic_unadopted/_process/_replay/get/start/answer/action`。
+- 現状：`semantic_profile+offline_candidate_source`は`enforce_application_policy=True`と併用不可。`SEMANTIC_CANDIDATE_STARTED`→`...RECEIVED`→`MEANING_UPDATE`→本文を既存eventsへ保存する。STARTEDだけの中断は`semantic_candidate_acquisition_incomplete`、既受領receiptや既採用snapshotは再利用する。通常readerは対象profileを書込可能へしない。
+- 具体的な失敗地点：取得前／STARTED保存後／4B応答後receipt保存前／RECEIVED後／MEANING_UPDATE後／本文保存時／保存成功だが応答消失。各地点で、次回に候補再取得・再採用・意味event重複が起こるかを確認する。
+- 完成済みGET／start／close→reopenでprovider・採用・作者を呼ばない。意味確定後に作者が失敗した場合はsnapshotを保持し、明示再開で同じ意味を使う。旧完成DTOと確定旧失敗を勝手に作り直さない。
+- 検証／終了：原入力・回答・旧履歴・operation・checkpointが保持され、重複課金抑止と保存CASの具体動作を示せること。既存STARTED中断の制限を、仕様変更の判断なしに自動retryへ置換しない。HTTP／Auth／native stubの検査と本物の稼働成功を分ける。
+
+<a id="task-cm-07"></a>
+##### CM-07：Pieceへ実4Bを通し、単独伝達できる文章と保存再読の差を閉じる
+
+- 依存：CM-01〜03。CM-04/05がEmlisの最初の完成単位。教師はEmlis9件しかなく、Piece完成教師を学習済みとしない。
+- 実owner：`piece_semantic_admission.py::admit_piece_semantic_snapshot/generate_piece_semantic/serialize_piece_semantic_state/load_piece_semantic_state/resume_piece_semantic`、`piece_v1c.py::compile_piece_artifact_plan/realize_piece_artifact`、`piece_v2_content_policy.py::validate_piece_semantic_preservation`。
+- 現在は原P01構文の6claim／5文／2関係と全選択を保持し、本文は原文2段落。4B完成応答のcanonical textをそのまま既存snapshotと同じ型へ装わない。
+- 具体作業：本人が何を手伝ったか、喜び、帰宅の遅れ、後悔否定、次回は余裕で決めたい条件を、モデル本文と根拠へ結ぶ。未記載の仕事増・遅刻、選択感情からの原因・強度追加を拒否する。必要な少数の編集教師は既存本人sourceと仕様に基づく華恋編集案と明記する。
+- 検証／終了：snapshot／plan／完成のprivate再読、作者失敗後の同snapshot再開、完成済み再読で候補／採用／compiler／作者0呼出を維持しながら、原文コピーからどの意味をどう文章化したか説明できること。一般化や通常画像保存まで完成したとしない。
+- 通常接続の別差分：`piece_v2_generation.py::generate_piece_candidate`は旧meaning／plan／作者の再導出一致・author-free reviewを行う。private結果をB8へそのまま渡せる前提にせず、この一致条件とsource version・artifact型の変更案を具体化する。
+
+<a id="task-cm-08"></a>
+##### CM-08：Analysisへ実4Bを通し、同じ根拠から文章・図・再読を作る
+
+- 依存：CM-01〜03。CM-07と共有Engine編集を競合させない。
+- 実owner：`cores/analysis/semantic_admission.py::admit_analysis_semantics/generate_analysis_semantic/serialize_analysis_semantic_state/reload_analysis_semantic_state/resume_analysis_semantics`、`intent_compiler.py::compile_semantic_graph/validate_semantic_graph`、`observed_route_realizer.py::realize_semantic_graph/validate_semantic_artifact`。
+- 現在のP5は原3構文family／Plus／補足0／比較なし、18保持単位・11文group・8source scope・route edge0・unknown・負荷注記・選択4だけ。原11文を並べる現出力を完成した期間分析にしない。
+- 具体作業：原記録ごとのnode・scope・意向・否定・まだ分からないことを保ち、別記録の完了結果を別役割へ誤edge接続しない。本人の不知と資料内未観測を分け、負荷「少し面倒」を購入失敗／性格へ補完しない。モデルが作る文章と図で同じnode・edge・不明を使用する。
+- 検証／終了：同じsnapshot／graphから両投影とprivate保存再読、graph／本文片側改変の拒否、作者失敗後の同snapshot再開。4Bの実candidateでどこまで成立したかを示し、hand-authored packetの再生をモデル成功へしない。
+- 通常接続の別差分：`analysis_observed_service.py::generate_saved/private_storage_evidence/_checked_projection/read_saved`は通常artifactの`safe_projection/safe_text_projection`と既存RPCを使う。新private payloadを既存SQLへ渡すことは未実装。複数ANSWER拒否、比較未対応、IF／Saved未実装をこの限定P6で消さない。
+
+<a id="task-cm-09"></a>
+##### CM-09：offline結果から通常serviceへ接続する設計・実装差分を限定する
+
+- 依存：各coreの実4B出力・保存再読。通常有効化はoffline成功と別段階。
+- Emlis：`api_emlis_thread.py::register_emlis_thread_routes`は`EmlisThreadService(enforce_application_policy=True)`を作る。現semantic constructorは同時指定を拒否するため、flagをONにするだけでは接続できない。通常request mode・owner／tier／履歴期限・writer／reader・旧saved互換、provider呼出しの時点と停止方法を具体化する。
+- Piece：通常B8 consumer→preview→明示保存→本人履歴という既存ownerを継承し、private artifactから通常canonical text／format／recipe／rendererへの型・版変換を具体化する。refinedやNexus旧経路を黙って対応済みにしない。
+- Analysis：期間source loader→Engine→文章／graph／private evidence→既存保存RPC→read_savedの各型／schema差を特定。新SQLの要否は実差分から決め、P5成功を理由にSQL適用済みとしない。
+- 検証／終了：通常入口が1つの生成ownerを使い、旧データは旧版のまま読める。現在の本人sourceが削除／失効／変更された場合、他owner・expired・プラン不足時に既存条件を保つ。原入力保存をモデル成功に従属させない。
+- 未決・別判断：採用する通常profile、保存contract／migrationの要否、配置commit、runtime構成、提供方式、費用・timeout、実DB・本番適用範囲。本議事録での詳細化を包括承認にしない。
+
+<a id="task-cm-10"></a>
+##### CM-10：同一版で通常API→RN→本人保存再表示まで確認する
+
+- 依存：CM-09のsource検証、必要な個別配置・配布判断、同一候補版の準備。
+- Emlisの既存API：GET `/emlis/threads/by-input/{emotion_id}`、POST `/emlis/threads/{thread_id}/answers`／`actions`／`frames`。実装は上記`register_emlis_thread_routes`。初回生成開始をGETだけの仕事と誤認せず、通常入力保存の既存start呼出しから確認する。
+- RNの既存確認先：`InputScreen`→`useEmlisThread`→`EmlisThreadModal`、履歴から再表示、同じ元入力・観測・問い・回答・訂正後本文。別担当の配布版／実API版との一致を先に揃える。
+- Piece：通常入力→同一preview→明示private保存→本人履歴／詳細。モデル本文の保存と画像renderer／Photos／Shareは別の到達で報告する。
+- Analysis：latestは同一保存結果の再読、monthlyはmonthly生成→履歴→同じdetailで確認する（A-03/04）。比較は対応する同一版で別に確認する。
+- 検証／終了：HTTP/Auth/native stubの成功ではなく、対象版・本人認証・通常操作・実保存再表示の記録を残す。利用者に明らかな低品質を最終判定させる前に華恋が実本文を読み、意味反転・補完・訂正無視を修正する。正式商品受入れと実機動作成功も区別する。
+
+#### C. 現物で確認した検査・fixtureと、実行時に注意すること
+
+既存test／fixtureは再利用する。新しい総合checkerや別台帳を作らず、P6で変えた責務の実因果・保存再開・旧互換を検査する。
+
+| 現存path（mashos-api） | 使う既存検査 |
+|---|---|
+| `ai/tests/test_cmee_preparation.py` | 材料・receipt・終了理由・位置検査とNOT_ADOPTED |
+| `ai/tests/test_cmee_emlis_semantic_snapshot.py` | 初回・実pending、追加／訂正／撤回、adapter旧版、source変異、隔離service保存・中断再開・現reader |
+| `ai/tests/fixtures/cmee_emlis_semantic_adapter_v1.json` | 旧snapshot／全outcomeの互換対照。新4B結果へ書換えない。v2用の別fixture名は現存確認できず、新設済みとしない |
+| `ai/tests/test_cmee_piece_semantic_snapshot.py`、`ai/tests/fixtures/cmee_piece_semantic_snapshot_v1.json` | P01保持、選択非補完、private段階保存、実作者失敗・完成済み禁止再読。fixtureのoriginは手作業でモデル出力ではない |
+| `ai/tests/test_cmee_analysis_semantic_snapshot.py`、`ai/tests/fixtures/cmee_analysis_semantic_snapshot_v1.json` | 原3記録、未知／負荷／scope、片側投影改変、意味／graph／完成再読、実作者例外 |
+| `ai/tests/test_emlis_q2_application.py`、`test_emlis_q3_application.py` | 既存保存／回答／tier／continueの対照。今回の候補成功で旧未分類失敗を消さない |
+
+既存コマンドは以下のP1用だけ現物確認済みで、**4Bを呼ぶP6 commandではない**。本作業では実行0。
+
+```bash
+PYTHONPATH=ai/services/ai_inference python -B -m unittest discover -s ai/tests -p test_cmee_preparation.py -v
+```
+
+Cocolonの現存`observation_learning/trials/2026-10-23-current-four/run_current_four.py --prepare-only --api-root ... --output ...`は4材料・20stub receiptの再現用。`main()`は既存C0結果の存在で再実行を拒否する。新しいP6実モデルcommandへ名前だけ流用しない。**P6 runner／model endpoint／実行引数は未実装・未確定**なので、現時点でコピペ実行できるとするcommandは記載しない。
+
+既存P4／P5検査の過去実行はPython3.12.14、pytest8.4.1、pytest-subtests0.14.2、Node24.19.0／既存PGlite0.5.8と`Q2_PGLITE_MODULE`等を使用した。次の実装時には既存runtimeを発見・import確認し、その時点の実pathで対象検査だけを実行する。過去のscratch絶対pathを将来の固定commandにしない。今回は新test実行・P1/C0再生成・モデル呼出し・DB照会0。
+
+#### D. 最初の一作業と、週末に残す結果
+
+最初の一作業は**CM-01で、4B学習の完成応答教師とCMEE受口の不一致を、実入力／現出力／変更後の形／変更ownerで一つに揃えること**。学習担当の4B runner準備と連携し、長い新上位設計・広いモデル比較へ広げず、同じ4B実出力を取得して採用・文章・保存へ通す小単位へ結ぶ。
+
+週末にはCM-01〜06のEmlisを優先し、使った4B/adapter、raw、候補採否、意味、実本文／実問いまたはEND、回答更新、保存再読、失敗／重複／中断の結果を揃える。続いてCM-07/08でPiece／Analysisの限定到達・未対応・文章品質を示す。CM-09/10が未到達なら、内部接続成功と通常利用の残差を分ける。実行していないところを終了にせず、未完の次task ID・具体不足・必要判断を残す。
+
+モデル決定／GPU16GB優先・24GB許容は再選定しない。16GBで不成立なら原因と必要24GB構成を示す。提供Flexの採用・本配備、広い価格最適化、9B/2B比較、大量教材追加、IF/Saved新規拡張はこの主枠へ先行追加しない。意味反転・根拠外補完・訂正無視を残したまま周回だけを増やさず、取得・意味採用・本文形成のどこで起きたかを実結果から修復する。
+
+<a id="details-training"></a>
+### 8.2 4Bの教材・学習・重み保全 — T1〜T9
+
+略記：F/＝`Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-free-pilot/`、C/＝`Cocolon_前提資料/observation_learning/model_selection/2026-10-24-9b-4b-comparison/`、R/＝`Cocolon_前提資料/observation_learning/trials/2026-10-24-qwen9b-free-lora/recreated-run/`。下記は未実装の作業案で、新方式・予算・実行の採用ではない。
+
+<a id="task-t1"></a>
+#### T1. P6のモデル責務・入出力と学習targetを一致させる
+
+- **既存owner／実際の差**：P6の`preparation.receive_candidate`は厳密`{candidate,evidence}`・NOT_ADOPTED。F/sft_examples.jsonlとC/cases.jsonlの期待出力は観測／reception等の完成JSONで、意味候補へそのまま採用できない。
+- **やること**：P6側で最初に4Bへ担わせる意味候補／表面文等の責務を一案に具体化する。旧JSONの各fieldを「targetへ対応／根拠不足／表面文／未使用」に分ける。変換が必要ならexact owner・field・失敗時の扱いを決める。
+- **完了物**：本人source→model input→model raw→candidate/evidence又は許可表面文→既存admission／作者の対応表と、Emlisの一往復例。学習する内容とP6で受け取る内容が一致し、完成応答を意味候補へ無条件転用しない状態。
+- **依存**：P6責務・入出力が未決なら新教師とGPU学習を開始しない。本稿が新方式を決定しない。
+
+<a id="task-t2"></a>
+#### T2. 元教材を保持し、4B用train／非学習evalを固定する
+
+- **既存owner**：F/の4datasetと`run_pilot.validate_data()`。元9教師は6family（udon/book/chair/shop/repot/knit）、初回6／一回答後3、問いあり3／null6。華恋編集7／架空補充2で、Mash完成gold9件ではない。
+- **やること**：T1後に全9行を「出典／本人source／旧完成案／新input／新target／根拠／不明・訂正／採用可否」で対応付ける。意味候補targetならcandidate/evidenceを作り、表面文targetなら確定意味と許可範囲をinputへ与える。元9行・原18候補・教示5参照・撤回第7回は変更しない。
+- **評価分離**：元EFREE-E01〜E06は学習に使わない。既読の開発用6familyでblind最終評価とはしない。C/の6比較には教師由来の椅子・開店2件もあるため、全てを学習外と呼ばない。F/のPiece／Analysis教師は0で、Emlisだけの学習を三core育成へ換算しない。
+- **検証・完了**：採用行数N、family、input／completion tokens、filehashを固定。出典付き教材とtrain messages一致、ID非重複、train/eval family分離、Free・履歴frameなし、回答後問い残数0を検査。華恋がtarget全文を読み、model誤答・評価の正解をtrainへ混入しない。
+
+<a id="task-t3"></a>
+#### T3. 4B専用の固定runner／bootstrapを作る
+
+- **既存owner**：F/run_pilot.pyの定数・prepare()・run()、runpod.sh、recreate_pilot.sh、experiment.json。現runnerは9Bで、recreateはd53f9efの9B recipeをhardcodeして再取得する。
+- **やること**：9B履歴を上書きせず、MODEL=`Qwen/Qwen3.5-4B`、固定revision=`851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`（既存比較と同じ）を候補にする。9B出力directoryと分け、4B source／dataset／設定をmanifestへ束縛。9B adapterはloadしない。
+- **作業先案**：`training/2026-10-24-emlis-4b-training/` に同種runner／bootstrap／diagnose／export／tokenizer test／manifestを置く小pack案。**未作成の候補path**で、実行commandはまだない。主担当が既存owner内変更を選ぶ場合はそのexact pathへ置換。新汎用model比較frameworkを作らない。
+- **技術初期値案**：BF16／SDPA、batch1、r8／alpha16／dropout0／bias none、AdamW lr1e-4／weight_decay0、clip1.0、gradient checkpointing、use_cache=False、final assistant限定loss、非thinking／greedy／MAX_NEW1024。最適値・新承認とは扱わず、変える値の理由を明記する。
+
+<a id="task-t4"></a>
+#### T4. JSON指示・tokenizer・module・学習量を実行前に確定する
+
+- **既存owner**：F/`run_pilot.chat_token_ids()/encode_training()/prepare()`、test_tokenization.py、experiment.json。旧9B promptはJSON-only明示なし、C/は明示あり。旧parse0件を明示JSON命令違反としない。
+- **やること**：T1のtargetに合うJSON指示をtrain／eval／diagnoseで同一にする。4B tokenizerでreturn_dict=False、list[int]、prompt/full prefix、最終assistant mask、EOSをCPU確認。2048超過を切り捨てず、T1の必要inputからcontext案を決める。旧9Bとのprompt条件差は保持する。
+- **module確認**：4B固定indexと実named_modulesで、layer3,7,11,15,19,23,27,31のtext q/v16moduleを照合。base凍結・LoRAのみtrainableを一覧化。9B1,114,112parameter／32tensorという数だけで4B正当性を判定しない。
+- **学習量・完了**：N、epoch E、optimizer steps（batch1・accumulation1ならN×E、他条件なら端数とaccumulationを含む実式）、completion tokens、batch／accumulation、保存点／終了点、max seconds／max paid amountを一つの表へ固定する。旧9B1epoch9stepは既存小試験量で、4Bに十分な根拠ではない。保留1／4／16三条件比較を自動流用せず、一設定を選ぶ。P6とNが未決の現時点で最適epoch／総stepを確定済みにしない。
+
+<a id="task-t5"></a>
+#### T5. 保存領域・課金範囲を確認し、16GBを第一候補に準備する
+
+- **実際のblocker**：F/run_pilot.run()とdiagnose_learning.main()は**total40GiB／free32GiB未満を拒否**する。未変更で16／24GBの4Bを起動できない。
+- **やること**：4B用GPU admissionを実profile／実空きへ限定変更。単に40／32gateを削って動作実証済みにしない。GPU名、total/free、BF16、Torch／CUDA、他process、cache空きを記録。PINSはTransformers5.19.0／PEFT0.21.2／Accelerate1.15.0／Safetensors0.8.0を確認し、既存Torch／CUDAを維持する。
+- **保存先**：実directoryに対する`findmnt -T <実directory>`・`df -h <実directory>`等の読取案を用意し、Runpodのcontainer disk／volume／network volume設定と照合。/workspaceという名前だけで永続としない。新有料volume作成は別判断。
+- **完了・未決**：16GBで4B LoRAは未確認。実GPU単価、prepare／download／run／診断／退避／手動待機の時間と支出枠、停止担当を具体案へ置く。process timerはPod課金上限・自動Stopではない。課金範囲未承認なら有料実行しない。
+
+<a id="task-t6"></a>
+#### T6. 一つの固定設定で学習し、途中結果・失敗も保持する
+
+- **既存owner**：F/run_pilot.run()/evaluate()/write_json()、recreateの重複拒否／outer timer。9B recipe取得は4Bへ継承しない。
+- **やること**：4B code・manifestをGitHubへ保存・読戻し後、model／revision／datasetが一致する固定commandを一組にする。attempt marker、既存結果存在時拒否、出力先一意化を維持。base前raw→固定設定の学習→after rawを同じinputで行い、回答ごとflush／run.json atomic更新。
+- **記録**：loss、completion tokens、step／epoch、trainable一覧、peak allocated／reserved、可能ならGPU全使用量、各stagewalltime、parse／EOS・打切り、失敗status。教師NLL／教師生成を診断する生成数も事前の実行範囲へ含める。
+- **停止**：非有限loss、OOM、未知module学習、truncate要求、時間・支出上限で停止。16GB不足なら失敗log／結果／費用を保存し、同BF16／教材／長さの24GB移行案を出す。**24GBを自動で借り直さない。** 量子化・contextやtarget削減を混ぜて同条件成功としない。既存processをkillせず、epoch延長・9B／2B再比較も自動実行しない。
+
+<a id="task-t7"></a>
+#### T7. 先にadapterを退避し、同じ4B baseへの非学習reloadを確認する
+
+- **既存owner**：F/export_checkpoint.export()、diagnose_learning.locate_saved_run()/reuse_cache()/measure_nll()/main()。現診断は9B runnerhash／reference／adapterhash／cache／1epoch9step固定なので、そのまま4Bへ使えない。
+- **やること**：4B source・model・revision・recipe・dataset・runID・adapter3filehashへ束縛し直す。学習直後、README／adapter_config.json／adapter_model.safetensorsと必要raw／設定を先にarchive化。9B再作成のschema／recipe metadataを4Bへ貼らない。
+- **reload検証**：同じ固定4B baseへis_trainable=Falseでload。active adapter、module／tensor shape・dtype・有限値・norm、全parameter非学習を確認。教師completionをpromptへ渡さず教師NLLと生成を測り、診断前後のadapter3filehash不変を確認。診断はoptimizer／追加学習なし。
+- **完了・限界**：新manifestに一致する重み本体・非学習reload・rawが揃う。NLL低下率を観測精度改善率とせず、教師適合だけで商品採用へ進めない。9B旧hash／parameter数による代用をしない。
+
+<a id="task-t8"></a>
+#### T8. Pod外の重み退避を確認してからStopし、実費を記録する
+
+- **既存owner**：F/export_checkpoint.export()、recreateの退避→診断→再退避。既存exportはallowlist、64MiB/file上限、内部readback、archive SHA256を持つ。
+- **やること**：最終rawを再退避し、内部各fileのbytes/hash・全体sha256を照合。base／cache／venv／credentialsを除外。Pod外の受領先でもhash、adapter本体3file、model／revisionを確認。JSONだけの受領を重み退避完了としない。
+- **停止順**：退避確認後にPodを手動Stopし、Stop状態・GPU総時間・実単価・storage費を別記。旧runnerの即Stop案内は4Bで退避確認後Stopへ変更。adapterが無い失敗もlog・途中結果を回収して停止する。
+- **保全**：9B初回adapter未回収と別run受領の区分を維持。4B受領を初回9B復元へ帰属させない。重み未受領のまま再学習しない。旧adapterにoptimizer状態はなく、新optimizer開始を厳密resumeと呼ばない。
+
+<a id="task-t9"></a>
+#### T9. 教師適合・非学習品質・P6接続の達否を分ける
+
+- **既存owner**：F/eval_review.jsonl、R/README／verification、P6 core別admission・既存作者・保存再読。同4B base／afterのrawを全件読む。
+- **確認**：主体・時点・否定・方向・不明、訂正前意味復活、根拠外の返信・約束・理由・人格追加、自然な受け取り。問いなし一律失敗を避け、回答後残数0／ENDを守る。形式と意味、教師適合と非学習転移、standalone生成と実CMEE採用を分ける。
+- **判断**：教師に近づくが非学習で崩れるなら商品採用せず範囲・転移を修正。教師にも近づかないならmask／target／prompt／勾配・module／step実記録へ戻る。自動epoch追加、容量原因への即断、9B再比較をしない。
+- **完了物**：一つの固定4B recipe、契約一致train/eval、base前後raw、adapter本体・非学習reload、失敗と実費、P6適用可否。P6で意味→本文／問い更新→保存再読が成立した範囲を別記。**4B教材学習成功、16／24GB適合、三core商品品質、本番長文／同時数、月額採算は現在未成立。**
+
+#### 現存する旧commandと未作成の4B command
+
+旧9Bには`bash runpod.sh prepare|run`、`bash recreate_pilot.sh prepare|run`、`python diagnose_learning.py --directory ... --reference-result ...`、`python export_checkpoint.py --directory ...`がある。**4B用commandではない。** T1〜T5が閉じて4B codeを固定してから主担当が作成する。更新中branch名・未作成filenameを今すぐ実行可能な手順にしない。
+
+旧9B別runの実測は9step、peak19.939GiB、教師NLL1.81506→1.65714だが教えた事例にも観測欠陥が残る。4B成功へ読み替えない。元run_pilot blob=b1d79440b9a904e9a03fc111120743eda520d390、runpod=01354d161d073f6c5a075975c499c3c679bfa3f4、recreate=36fdb8e8ca1f6485ade508e11180afdeabf13d19、diagnose=15a8370b7c8947a009e3065c65f0340ea05c93fa、export=cd8f4eae29df8c556f9bf52a6b614a64e5e2892f。全12fileとR/結果は上記Cocolon固定版から取得済み。
+
+<a id="details-piece"></a>
+### 8.3 Pieceの通常保存・画像・公開残差 — P-00〜12
+
+#### 現在地と、繰り返さない完了済み作業
+
+- Piece6migrationは適用済み。10/19のquota／visual SQL2本も含む。再適用しない。
+- private APIは10/23の最終確認記録で3577d7fd／dep-dbd8hjoae00c73firbt0がLive。TTL600秒、renderer=piece.rn_bitmap_renderer.ios.v1、preview／save／owner_read／delete=true。public_write／public_read／visibility_toggle／export=false。今回の現環境照会ではない。
+- privacy2fileはAPI3084c99eで開発正本へ同期済み。新しい配置に使うsourceにも同一修復が入っているかだけを差分確認し、同じ修復を作り直さない。
+- 新iOS bitmap方式は限定実RNで420文字と正常8PNG／拒否6まで確認済み。JS979／新native44成功、旧195中19FAILは残存。旧失敗を消して総合GREENとしない。
+- 最新送信成功6501（run38041653252/source55142229）は新版保存host・正式eligibility供給・新bitmap rendererを含まない。6501で新版P-W1成功を判定しない。
+- 保存controller、同key回復、owner history/detail、画像設定PATCH、取消、owner削除はsourceに存在する。最初の未完は必要RN版の配布→本人Authでの通常保存再読。
+- 新型bitmap supplierはfeatures/piece/pieceRenderer.jsでPlatform.OS==='ios'に閉じる。Androidはcompile成功だけで新版保存・画像成立とはしない。
+- sourceの先頭コメントに残る「future/unconnected」は後続host実装と照合する。コメントだけで実装済み接続を未実装へ戻さない。
+
+#### 実行順と、各作業の到達物
+
+| ID | 順序・依存 | 作業・対象 | 完了を示す具体物 |
+|---|---|---|---|
+| P-00 | 各実作業の開始前、必要範囲のみ | 配布／API／端末の版を揃え、既承認を確かめる | source/ref、実行する既存手順、現承認範囲、残る差分が特定済み |
+| P-01 | 最初。P-00後 | 87151候補の既存署名build・TestFlight送信1回 | actual run/head/build番号、Archive／IPA／upload各結果 |
+| P-02 | P-01成功・Apple処理後 | 必要版の本人端末導入、正常private操作の準備 | TestFlight表示版と端末版の対応、対象操作と期待値が用意済み |
+| P-03 | P-02後 | 本人通常入力→preview→明示private保存→本人履歴／詳細 | 同じPieceの本文・recipe・3hash・rendererが保存再読で一致 |
+| P-04 | P-03と並行。破壊系は隔離環境を先行 | 保存不明、取消、期限、画像変更、account／background／flag境界 | 同key回復・無二重保存・無別候補混入・失効後の旧結果非採用 |
+| P-05 | P-03の結果を利用 | exportを可能にする既存compositionの最小source接続案 | default OFF／owner_read依存を維持した限定source・検証・配置案 |
+| P-06 | P-05の実効化後 | 通常本人詳細→同一画像→実Photos／Share、取消・拒否・cleanup | OS実結果と画像、結果メッセージ、コピー寿命の整合 |
+| P-07 | P-03以降の独立準備可 | Android新版renderer／保存／書出しの欠落を閉じる案 | Android固有の変更設計、実装・検査・実端末の段階別結果 |
+| P-08 | P-03／P-06の適格結果を利用 | 三形式・プラン差、未接続の形式選択 | entitlementとeligible_formatsに沿う表示／要求／保存再表示 |
+| P-09 | 各本文・画像が出た時点 | 本文の意味・単独伝達性・3形式画像の商品確認 | 改善／未改善／未提供をsource根拠で説明できる結果 |
+| P-10 | private一往復と共有が成立する順 | B12-A/B/C、Nexus公開・旧Q&AのM5残差 | 新旧混在を解消した同一backend/RN packetと公開境界検証 |
+| P-11 | P-06から独立設計可、実装は契約確認後 | B13-B body-free export receiptの未実装 | 既存record/hashに結び付く最小receipt、本文非保存の検証 |
+| P-12 | 公開前残差判定。M6以降は別段階 | 未解決native19、M6/M7/M8、再書出し等を取り落とさない | 各項目の採否・未完了・公開影響と次の一作業 |
+
+<a id="task-p-00"></a>
+##### P-00：同じ版と既承認を確認する
+
+対象：Cocolon_Piece/00_read_first.md §119、同manifestのcanonical_privacy_and_rn_distribution_20261023、current_structure/02_piece_current_structure.md §65.62、全機能現在地、最新weekly。
+
+1. fresh PR30／PR3 head、配布候補ref87151、既存workflow blob ff3eeaaa83639a3b00db47f3fa09f924dab3bccdを確認する。新しいsource差がある場合だけ該当pathを確認する。
+2. APIの「開発666b285」「稼働3577d7fd」、RNの「開発」「送信6501」「固定配布候補87151」「端末導入」を別欄にする。
+3. 既適用SQL・既有効private構成を再承認待ちへ戻さない。配布、export source／有効化、公開切替、追加DB、Android配布はそれぞれの現承認を照合する。
+4. ここで全repo再監査、新しいchecker、System Context全面再生成、GPU／model採用をP-W1の追加前提にしない。
+
+成果：その作業のsourceと対象環境、実行内容、既承認／未判断の差が1つの既存作業記録から分かる。秘密値、本人のrecord IDやcase digestを公開議事録へ載せない。
+
+<a id="task-p-01"></a>
+##### P-01：既存iOS workflowによる固定候補の配布
+
+現物：.github/workflows/ios-build.yml。workflow名iOS TestFlight Build、id237145246。workflow_dispatchにinputsはなく、UIではbranchを選ぶ。候補branchはagent/piece-testflight-private-20261023、head87151。
+
+実行前に用意する具体案：
+
+- 対象は既存TestFlight appへの1回の署名Archive→IPA export→upload。公開App Storeリリース、Android、API／DB／flagは含めない。
+- 既存macos-26、Node24.19.0、npm ci、Podfile.lock、既存署名設定をそのまま使用する。署名秘密値の取得・転載・再作成はしない。
+- actual build番号はGITHUB_RUN_NUMBER*100+GITHUB_RUN_ATTEMPT。次がrun66/attempt1なら6601だが、事前固定せずactual runと生成ログで確定する。
+- GitHub pluginにdispatch操作がないため、既存GitHub画面Run workflowによる案。利用可能な実行手段と必要なブラウザ切替の現承認を確認する。未承認のままdispatchしない。
+- 1回の実行後、失敗をoperator rerun／別source修正で自動延長しない。workflow内の既存CocoaPods最大3attemptはそのまま区別する。
+
+現workflowの実stage：
+
+1. CheckoutとXcode／SDK確認。
+2. npm ciと既存patch。
+3. CocoaPods（既存Pod削除・deintegrate・pod install --repo-update、内部retry最大3）。
+4. 既存証明書／profileのinstallと既存team／bundle整合検査。
+5. build番号設定。
+6. xcodebuild：workspace=tempCocolon.xcworkspace、scheme=tempCocolon、configuration=Release、destination=generic/platform=iOS、archivePath=build/Cocolon.xcarchive、Manual署名、deployment target15.1。
+7. 既存ExportOptions.plistでapp-store export、build配下IPA。
+8. xcrun altool --upload-appで既存TestFlightへ送信。
+
+完了条件：actual run URL／attempt／headが候補と一致し、Archive・IPA export・Upload stepがそれぞれ成功。送信成功とApple processing完了、テスターへの可用化、本人導入、アプリ動作は分ける。失敗stageなら原ログから対象path／原因／次の最小修復案を記録し、この一回を終了する。
+
+<a id="task-p-02"></a>
+##### P-02：本人端末で使う版と操作を準備
+
+1. P-01 actual番号を用い、Apple処理・TestFlight表示が揃ってから本人導入へ進む。6501と新番号を取り違えない。
+2. 実端末のOS・app version／buildを確認する。run/headとの対応は華恋側で作り、MashにSHA比較を戻さない。
+3. 通常本人Auth、tutorial外、現在のownerとruntimeロード完了を確認できる経路を用意する。Renderログインやservice_roleを本人Authの代用にしない。
+4. Mashへの案内は「どのbuild」「どの画面」「何を押す」「期待する表示」「既知の未提供（export OFF等）」まで準備してから依頼する。
+5. 本文は本人が選ぶ入力で始める。担当が無断で本人記録を抽出せず、故障注入や大量生成は合成／隔離環境を先に使う。
+
+成果：本人が必要版を特定して通常操作を行える短い手順。準備不足・コード不足と、準備完了後の端末操作待ちを別記する。
+
+<a id="task-p-03"></a>
+##### P-03：通常private保存と同じPieceの再読を閉じる
+
+source owner：
+
+- screens/InputScreen.js
+- screens/input/InputPieceActionArea.js
+- features/piece/PieceCreateController.js
+- features/piece/pieceApi.js、piecePreviewModel.js
+- components/piece/PiecePreviewModal.js、PieceVisualCard.js
+- features/piece/pieceRenderer.js／pieceLayout.js
+- screens/PieceOwnerHistoryScreen.js、features/piece/PieceOwnerHistoryController.js
+- API ai/services/ai_inference/api_piece_v2.py、piece_v2_preview_service.py、piece_v2_save_service.py、piece_v2_owner_service.py、piece_v2_store.py
+
+通常操作：
+
+1. 原入力を通常画面で保存し、保存済み入力の既存Piece入口を開く。原入力保存成功をPiece本文成功に従属させない。
+2. source-ref GET→preview POSTで本人が選んだ元入力を使用。ref取得・preview要求の本人、元request／key、tier／capabilitiesを照合する。
+3. 正文と画像を確認。previewの同ID／revision／3hash／renderer／期限、同mount・displayToken・current fitが揃う時だけ「保存」を提供する。
+4. 明示private保存。POST /emotion/piece/saveはpreview_id、expected_preview_revision、piece_text_hash、content_payload_hash、visual_recipe_hash（private既定）と同一保存keyを送る。本文・recipe・client fit自己申告は送らない。
+5. 保存receiptのpiece_idがpreview_idと一致、lifecycle=saved、消費identity、row_version、saved_atを確認。previewの作り直しで成功を代用しない。
+6. 保存後の本人詳細へ遷移しGET /emotion/piece/{piece_id}で再取得する。
+7. 「履歴に戻る」→一覧GET /emotion/piece/history→同じPieceを開く。通常Piece入口→Nexusの「自分のPieceを開く」からも本人専用履歴へ到達する。
+8. preview／保存record／詳細／履歴／renderer入力の本文・payload・recipe・3hash・rendererが同一であることを確認する。保存後のsource再生成は行わない。
+
+成果：同一recordの一往復と、本文・画像の確認結果。public議事録へは成功／失敗／版と非内容情報だけを記録する。本人ケースの原文・record識別子・個別hashは公開しない。実確認のためのinstrumentationが足りなければ、既存private test／transportの照合で足りる範囲をまず使い、新常設ログを増やさない。
+
+完了条件：本人Authの通常保存と再読の両方が成功し、別record・旧DTO・合成sourceへのすり替えがないこと。API200や保存toastだけでは完了にしない。
+
+<a id="task-p-04"></a>
+##### P-04：取消・期限・不明応答・本人切替を同じ保存単位で確認
+
+現物の再利用：PieceCreateController、InputPieceActionArea、pieceApi、PieceOwnerHistoryController。関連既存検査はtests/piece-v2-initial-save-host.test.js、piece-v2-initial-save-modal.test.js、piece-v2-saved-input-host.test.js、piece-v2-source-ref.test.js、piece-v2-owner-history.test.js、piece-v2-runtime.test.js、piece-v2-contracts.test.js。
+
+確認条件：
+
+- 保存の二重押し：同一候補の消費・record確定が一回。別保存keyを自動発行しない。
+- commit後ACK喪失・503・通信切断：自動新規保存ではなく「同じ保存要求で結果を確認」。receipt再取得をpreview期限切れ・再描画・現在fit不足で妨げない。別key／別previewで復元しない。
+- 取消：明示DELETE /emotion/piece/preview/{preview_id}は同ID／revision。結果不明は同じDELETEだけを明示再試行。closeはserver取消ではない。取消後に元POSTを復活させない。
+- preview TTL600秒：期限後に古いfit／tokenで保存しない。一方、保存済みrecordはpreview TTLへ従属させない。
+- renderer構築／fitの元8秒とpreview TTL600秒を区別。8秒後の未完成描画は採用しない。期限内に完成したsaved画像は構築用8秒の経過だけで消さない。
+- 画像設定：theme／aspect／brandingのcapabilities内選択をPATCH。正文・payload・renderer・expiryは不変でrecipe/hash・revisionを更新。応答不明は同じ元POST／request/keyで最新previewをread-only回収し、PATCHを自動再送しない。
+- 古いrevision：画像変更前の保存／取消callbackとfitを拒否。
+- logout／account切替／background／画面離脱／unmount／flag refresh：古い結果を別ownerや新画面へ採用しない。fresh runtimeに復帰しても自動生成しない。
+- 保存上限／tier変更／source失効：成功扱いせず、元入力保存とは分離する。課金・所有・削除を実本人で故障注入しない。
+- owner削除は既存実装を使うが、実本人recordの削除は明示選択後だけ。外部画像回収不可・保存回数非返還を表示し、応答不明は同key／versionで確認。
+
+成果：ケースごとの開始状態・操作・期待・実結果・残った原因。通常本人端末で確認する少数の操作と、隔離環境で故障注入する条件を分ける。成功件数を重複加算しない。
+
+<a id="task-p-05"></a>
+##### P-05：export OFFをsourceから解消する具体案
+
+今回の現物確認で判明した依存：API app.py:create_applicationはpiece_preview_configurationをcreate_piece_preview_application(**...)へ転送する。現piece_v2_runtime_control.pyのfactory引数にはpreview／save／owner_read／owner_deleteしかなく、export_requested／export_readyは存在しない。従って現行commandへexport=trueを足すだけでは有効化できない。
+
+次に具体化する差分案（未実装）：
+
+1. 既存factory内でexportのstrict requested／readyを受ける最小接続と、既存resolve_piece_feature_flagsのowner_read依存を使う案を作る。新しいfactory／env parser／controllerを作らない。
+2. default app:appと引数省略時OFF、非Piece route、private4、public3を維持する。exportだけを有効にする案ならpublic feed／visibilityを同時に開かない。
+3. exporter readinessの既存PCE-7条件、iOS署名版のnative依存・同一画像確認、本文非送信を対応させる。Mash承認やflag trueそれ自体をtechnical readinessにしない。
+4. 既存test_b14a_piece_v2_runtime_control.py、test_b14a_piece_preview_composition.py、test_b12_shared_preview_composition.pyでstrict bool／未指定OFF／owner_read停止時export false／bootstrap同値を確認する具体案を作る。
+5. 配置候補は稼働3577を土台に当該差分だけを含めるか、現在開発版採用の影響を根拠付きで選ぶ。未配置Emlis／Analysis等をついでに有効化しない。
+6. source、限定CI、起動command全文・期待するeffective8flag、対象service／commit／回復手順まで準備し、必要な個別配置判断へ出す。今回議事録だけで配置しない。
+
+完了条件：コード準備／限定検証／配置／bootstrap実効化を別段階で記録する。source成功段階では「実Photos／Share可能」としない。
+
+<a id="task-p-06"></a>
+##### P-06：通常本人詳細から実OSへ同じ画像を渡す
+
+source：
+
+- screens/PieceOwnerHistoryScreen.js
+- components/piece/PieceExportCanvas.js／PieceVisualCard.js
+- features/piece/pieceExport.js／pieceRenderer.js／pieceLayout.js
+- patches/react-native-view-shot+5.1.1.patch
+- patches/@react-native-camera-roll+camera-roll+7.10.2.patch
+- patches/react-native-file-access+3.2.0.patch
+- ios/tempCocolon/Info.plist、AndroidManifest.xml等は必要差分を実物で特定（未確認pathを変更済みとしない）
+
+手順：
+
+1. 保存済み本人詳細で「画像の保存・共有を準備」。fresh detail GET結果が画面recordのID・row_version・3hash・rendererと一致する時だけ採用。
+2. 同じ保存recordの全canvasを構築。背景／枠／本文／段落／brandingを含める。bitmap token／bindingをcapture前後に照合する。
+3. 「写真に保存」：iOSは既存add-only native経路でsaved=trueを確認。写真への実追加が完了後、local cleanup失敗やruntime変更があっても保存済み事実を失敗に変えて再試行させない。
+4. iOS写真権限の初回許可／拒否／再設定後を確認する。写真ライブラリの全読取権限を要求しない。
+5. 「画像を共有」：share sheet表示、明示取消、選択して閉じる経路、native失敗、背景化を確認。共有先への最終配送成功は保証しない。
+6. iOSは実sessionの完了／取消が確認できた後だけ渡した一時copyをcleanup。結果不明時・reader使用中に消さない。
+7. AndroidのShare成功はtarget選択時に解決し得るため、配送完了とせず、その時点でcopyを削除しない。現在の実装は保持する。この保持copyの後日の回収条件は別残差として明示する。
+8. 写真保存前のPNG signature／寸法／SHA照合、capture token違い、画像差替え、owner／flag／画面変更、重複操作を隔離testで確認する。
+9. nativeへ渡す前の一時rawとexport copy、handoff後のcopy、写真へ確定した外部画像を区別する。内部private化／削除で外部画像を回収できるとは表示しない。
+
+成果：実OS操作結果と、保存画像の欠け・重なり・反転・本文一致。iOS／Android、許可／拒否／取消／不明、cleanup成功／保留を別記する。backend正式receiptが未接続でもcandidate metadataを正式receiptへ格上げしない。
+
+<a id="task-p-07"></a>
+##### P-07：Android新版を成立させる
+
+実装上の出発点：pieceRenderer.jsの新bitmap supplierとrenderBitmapCanvasはiOS限定。android/app/src/main/java/com/anonymous/cocolonmvp/piece/PieceTextMetricsModule.javaには現在renderBitmapCanvas／releaseBitmapCanvas相当がなく、既存source compileは新版bitmap完成ではない。
+
+具体化する作業（現段階は設計案）：
+
+1. Androidの既存計測／raster／UIManager接続、font／glyph／B9行選択／clip／brandingを読む。iOS版renderer名をAndroidへ流用しない。
+2. 既存RN-first設計の範囲で、Androidで検査した同一画像を表示／captureする責務、immutable画像の寿命、window／世代／owner失効、資源上限を設計する。
+3. renderer identityと保存後の再現性・iOS保存recordをAndroidで開く場合の対応を明確にする。旧recordのrendererや正文を黙って書き換えない。
+4. Android bridge／view登録／JS caller／Gradle・既存依存／view-shot patchの正確な変更pathを固定する。新依存が必要なら既存ownerで比較し、黙って追加しない。
+5. 単体source compile→実Android app build→emulator描画→実端末の保存／再読／Photos／Shareの段階を分ける。現行iOS CIの成功を代用しない。
+6. APIの単一renderer供給を両OSへどう適用するかも同じ設計差分に含め、deviceからの自己申告版を無検証で採用しない。
+7. Android29未満のWRITE_EXTERNAL_STORAGEと29以上の保存、共有target選択・取消・中断・copy保持を現対応範囲で検証する。
+
+成果：実行可能な最小Android案と必要判断、段階別結果。10/31までの完成工数は未計測と残し、iOS版だけを「両OS完了」にしない。
+
+<a id="task-p-08"></a>
+##### P-08：三形式とプラン別操作、未接続の形式選択
+
+現契約：Free=fixed/short_essay、Plus=automatic、Premium=eligible_choice。eligible_formatsで適格とされた形式だけを使う。theme／比率／brandingもcapabilities内に閉じる。
+
+現source：InputPieceActionAreaはrequested_format:nullを生成。pieceApi.jsはrequested_formatを受理できるが、現preview PATCHはvisual_selectionだけで、形式を変更しない。components/piece/PiecePreviewModal.jsのtheme／aspect／brandingと形式選択を混同しない。
+
+作業案：
+
+1. short_essay／quote／declarationそれぞれで適格な合成sourceを用意し、なぜその形式が成立するか原文・format planで説明する。
+2. Freeでquote／declarationを強制したり、Plusへ手動形式変更を約束したりしない。
+3. Premium形式選択について「初回requested_formatを選べる接続」と「受領previewからの形式変更」を別に具体化する。後者を既存visual PATCHへ混ぜない。
+4. 同候補の形式変更が新生成／新key／取消／quotaにどう対応するかを既存正本と照合し、未定の契約を担当だけで決めない。保存後のtext／format／recipe変更はnew recordで、既存recordのin-place mutationはしない。
+5. 各形式の通常保存／履歴／再描画／書出しを同一本文で検証する。420文字条件を全形式に押し込まず、既存形式別最大・eligible条件を使う。
+6. 4:5／9:16、各theme、branding有無、Unicode／結合文字／ZWJ／Arabic等は適格なtierと既存catalogの範囲で確認する。
+
+成果：操作可能な範囲と未提供が画面・API・保存で一致する。全3形式を1形式へ縮めて週目標達成としない。
+
+<a id="task-p-09"></a>
+##### P-09：本文と画像を商品として読む
+
+1. 本人source→意味→plan→実正文で、本人の考え・価値観の核、否定・時点・留保・主体・関係が保たれるか確認する。
+2. 単独で他者に伝わる文章になっているか、原文の復唱／分類名／不要な長い反復／推測補完が中心ではないか、各形式の目的に合うかを読む。
+3. 感情選択だけから本文にない理由・原因・強度を補わない。Emlis生成文／Analysis推定を本人sourceへ逆流させない。
+4. 現V2 source adapterはoriginal＋normal／pre-question中心。refined／本人opt-in補足は未対応。入力を連結して接続済みにせず、未対応を明示する。
+5. 全文確認→画像の改行・余白・欠け・branding確認→保存再読でも同じ内容を確認する。一般品質の不足をrenderer試験成功で相殺しない。
+6. 明白な不足は華恋が原因ownerへ戻して修復前後を読む。低品質の合否判断をMashへ押し戻さない。正式商品受入れは華恋／subagentの機械成功で生成しない。
+
+成果：形式別の改善・未改善・未提供、原因、次の一修復。CMEE P4原文保持とこの通常商品本文品質を別扱いにする。
+
+<a id="task-p-10"></a>
+##### P-10：Nexus公開・旧Q&A切替（B12-A/B/C、M5）
+
+既存設計の候補pathは、実装済みpathとは区別する。API666b285のtreeにはapi_nexus_piece_v2.py／piece_v2_public_service.pyがなく、RNには旧screens/nexus/NexusPieceCard.jsがあり、新components/piece/NexusPieceCard.jsはない。既存Nexus owner履歴入口があることを新public feed完成へ読み替えない。
+
+準備順：
+
+1. B12-A：既存piece public/access/store ownerを読み、新public/Nexusのsource責務を確定。候補new pathはai/services/ai_inference/api_nexus_piece_v2.py、piece_v2_public_service.py、ai/tests/piece_v2/test_b12a_piece_v2_nexus_api.py（現時点未作成の設計名）。
+2. B12-B：lib/nexusApi.js、screens/NexusScreen.js、現screens/nexus/NexusPieceCard.js、contracts／normalizersを調査し、新canonical recordだけを読むcardへ切り替える最小差分を作る。
+3. 本人／フォロー／特定相手、visibility、private／deleted／不存在の同一404、現在viewer関係を毎読取・共鳴で再照合。private保存はNexus投稿／通知ではない。
+4. B12-C：app.py、api_contract_registry.py／PUBLIC_API_REGISTRY.md、api_piece_compat.py、旧api_emotion_piece.py／api_piece_runtime.pyのPiece登録、RN旧InputPiecePreviewController・EmotionPiecePreviewModal・emotionPieceApi・tutorial callerをfreshに走査し、実際の到達経路を特定する。
+5. 既に候補compositionで除去した旧publish/cancel4routeを再実装しない。Nexus／tutorialを含む旧経路全体は別に閉じる。
+6. M5 packetでnew generation／preview／save／history／Nexus／exportを同一backend/RNで成立させ、旧Q&A entry／generation／cardを到達不能にする。public.piecesの旧caller exact0と新projectionへの切替を確認する。
+7. private→public→非公開、follow解除／owner切替／削除、feed／detail／共鳴／再書出し、cache残存、cold start／tutorial resetを確認する。
+8. 設計にあるclean-cutover SQL名（20260808_005_piece_v2_clean_cutover.sql）は未作成の候補。既適用の20261010_005_quota_readと別物。必要性・fresh catalog・依存と正確なSQLを具体化するまで「適用する」と確定しない。
+
+成果：新旧混在なしの公開packet、未解決caller、変更source／DB／flag／配布、停止時の表示を具体化。M5の承認・実配置はこの文書で成立させない。未準備publicをprivate一往復の追加前提にも戻さない。
+
+<a id="task-p-11"></a>
+##### P-11：backend export receipt（B13-B）
+
+現物：RN pieceExport.jsはcandidate metadataを返すが、コメントどおりformal receiptではない。API666b285のapi_piece_v2.pyにexport-receipt routeはなく、設計上の新service/testもtreeに存在しない。
+
+次の具体化：
+
+1. PCE-5／PCE-7の既存receipt契約からfield・outcome・所有・保存要否を確認する。candidateのpiece_id=public_id等を未検証でserver schemaへ流用しない。
+2. 候補ownerは既存PCE-8指定のpiece_v2_export_receipt_service.py／test_b13b_piece_v2_export_receipt.py、api_piece_v2.pyへのPOST /emotion/piece/{piece_id}/export-receipt。未作成の提案として記載する。
+3. serverでowner・current record／hash・利用可否を再確認し、本文・画像bytes・local URI・共有相手を保存しない。画像はderived artifact、本文正本はsaved recordのまま。
+4. 写真確定・share取消・share sheet結果・実配送未確認を区別し、未知結果から「共有成功receipt」を作らない。
+5. receipt通信失敗で外部写真保存を取り消せた扱いにせず、明示再試行の重複抑制を既存契約で具体化する。
+6. receiptを保存するDB ownerが現設計／schemaで足りるか確認し、追加migrationが必要なら正確なDDLと権限まで準備して別の判断範囲にする。
+
+完了条件：契約・実装・隔離検証・稼働接続・RN結果との対応を分けて記録。未接続の現段階を正式receipt成立にしない。
+
+<a id="task-p-12"></a>
+##### P-12：旧native19失敗、公開前の残差、M6〜M8
+
+- tests/native/piece-text-metrics-ios.mm／piece-rn-canvas-ios.m／piece-rn-canvas-entry.js／piece-rn-canvas-fixtures.cjsの旧V4群19FAILと新bitmap群を実assertionから区分する。失敗期待を削ってGREENへしない。旧prototypeを正式に廃止するなら到達caller・旧保存版・新方式の受入れと既存契約を確認した具体案として判断する。
+- 既存CI39780623108の総合failureは保持する。新sourceや新承認なしに旧CIを再実行しない。一方、旧方式の診断修復を無期限に続けてP-W1を止めない。
+- M6のbody-free旧identity captureは新flowの検証後。M7旧データ破壊cleanupは独立した明示判断が必要で、M5初回配布と一緒に実施しない。
+- M8 obsolete route／wire／table制約／indexの廃止は依存を確認して実施する。shared mymodel_reflectionsや非Piece readerを一括削除しない。
+- rollbackは新機能を明示停止し、旧Q&Aを復活するsilent fallbackにしない。本人履歴／削除等の回復経路を保持する。
+- 10/31に「通常private一往復」「iOS実export」「Android」「三形式・本文」「public/M5」「receipt」「旧失敗・廃止判断」を個別判定し、各未達の具体原因と次の一手、11月結合枠／12/18公開への影響を残す。
+
+#### 既存検証の再利用方法（今回未実行）
+
+RNの現workflow .github/workflows/piece-rn-contracts.yml はNode24と既存TypeScript5.2.2を検査用disposable directoryへ用意し、次の13suiteを実行する。これは現物にあるcommandで、新たなrunner作成案ではない。
+
+```text
+node --test tests/piece-v2-contracts.test.js tests/piece-v2-state-models.test.js tests/piece-v2-preview-display.test.js tests/piece-v2-runtime.test.js tests/piece-v2-feature-disabled.test.js tests/piece-v2-saved-input-host.test.js tests/piece-v2-source-ref.test.js tests/piece-v2-input-screen.test.js tests/piece-v2-owner-history.test.js tests/piece-v2-renderer.test.js tests/piece-v2-measured-wrap.test.js tests/piece-v2-export.test.js tests/piece-v2-initial-save-modal.test.js
+```
+
+initial-save-host.test.jsも既存であるが、上記13suiteへ自動で含まれると仮定せず、変更対象なら現在のimport／実行範囲を確かめて選ぶ。native実RNは既存bash tests/native/run-piece-rn-canvas-ios.sh、単体source／export library工程も同workflowを使う。署名・TestFlight workflowとは別であり、描画CIから自動配布しない。
+
+APIは既存.github/workflows/piece-b2b-isolated-postgres.yml（Python3.12、既存requirements、disposable Postgres）を使い、変更に応じた既存集合を選ぶ。今回の追加runtime検証先はtest_b14a_piece_v2_runtime_control.py／test_b14a_piece_preview_composition.py／test_b12_shared_preview_composition.py。保存・取消・期限ならtest_b06_piece_v2_save_api.py、test_b05_preview_visual_mutation.py、db/test_b05_preview_cancel_http.py、db/test_b12_shared_preview_native.py等の現物へ戻る。未作成B12/B13 testを実行済み／成功済みとしない。
+
+毎回、sourceを反映・読戻してから、そのscopeで許された検証と実出力を確認する。検証数を足し上げて商品完成率にしない。今回文書化のためのCI起動・DB／本番・本人操作は0。
+
+<a id="details-common"></a>
+### 8.4 購入・本人切替・visibilityの共通修復 — C01/C02/C03
+
+#### 確認した現物と因果
+
+| ID | source owner・現在の位置 | 確認した欠陥 |
+|---|---|---|
+| C01 | `lib/iap/iapService.js` `finishTransactionSafe` L432〜446／`syncPurchaseToSubscriptionTier` L486〜539／purchase observer・requestSubscriptionForPlan | modern finish失敗→legacyも失敗、の両失敗を飲み込みresolve。呼出し元はAPI同期後にfinishをawaitしてdone／ok:trueへ進む。同購入がprocessing中でもok:true skipped:trueを返す。 |
+| C02 | `SubscriptionContext.js` `refreshTier` L165〜237／auth state change L277〜303／TTL・inFlight refs | Aの取得中にBへ変わってもAのinFlightを共有し、Aの応答でtier／有料情報／mode／TTLを上書きできる。成功だけでなくcatch・finallyも本人世代を確認しない。 |
+| C03 | API `ai/services/ai_inference/api_public_profile.py` `register_public_profile_routes` 内GET `/public/profile/by-share-code` L49〜140、privacy読取L81〜108 | privacyの初期値がprivate=false／code公開=true。visibility HTTP失敗時にdefaultを保持し、profile本文へ進む。今回実漏出を観測したという主張ではない。 |
+
+追加の再利用先：
+
+- `lib/apiClient.js`には既に`getAccessToken(expectedUserId)`→`buildCompatHeaders`→`apiFetch`の本人一致確認とsignal／timeoutがある。新しいtransportは不要。
+- `lib/subscriptionApi.js`の`getSubscriptionMe(opts)`・`postSubscriptionUpdate(payload,opts)`はoptsをそのまま既存clientへ渡せる。
+- `screens/account/useAccountSubscription.js`は同期・refreshの成功後に「復元が完了しました」と出すため、serviceのfalse successがUIへ到達する。
+- API `api_account_visibility.py`の`_get_or_create_settings`はHTTP失敗を502、正常に行がない場合だけ初期化、と分けている。public resolverがservice roleで利用者設定を新規作成する変更へ流用しない。
+- 公開設定のschemaはfriend/share互換名を持ち、既存defaultのpublic/非private自体は既存設計である。**取得失敗を公開の証明にする問題**と**正常な未設定行の扱い**を分ける。
+
+<a id="task-c01"></a>
+#### C01 — finish／ack完了の偽成功を閉じ、同購入の回復を保つ
+
+目的：storeの購入完了処理が未確認なのに「購入・復元完了」へ進まない。APIで既に成立した権利を、finish失敗だけでクライアントが取り消す変更はしない。
+
+| 作業ID | 具体作業 | 終了時に残す証拠・判定 |
+|---|---|---|
+| C01-01 | actual installed `react-native-iap`版をlockfileとiOS/Android導入版で固定。packageは`^13.0.4`なのでpackage宣言だけで実native署名を断定しない。現modern→legacy呼出しの適用範囲と、各OSのack/finish責務を既存phase3/4資料・sourceへ照合。 | 対象版・両OS・対応署名・既存fallbackを保持するかを一枚で特定。ライブラリ更新を修復の自動前提にしない。 |
+| C01-02 | `finishTransactionSafe`でmodern成功／legacy成功／両失敗を区別。両失敗を呼出し元へ伝える最小案を作成する。成功・失敗の内部結果または例外を選び、既存exportの戻り値・UI契約への影響を説明。元例外を保持するがreceipt／purchase tokenの値を新ログへ出さない。 | 両失敗でresolve-successにならず、`done`を書かない。modern成功時はlegacyを余計に呼ばない。 |
+| C01-03 | `_purchaseProcessingState`の`processing`と`done`を分離。同購入の重複通知・直接purchase戻り・restoreが重なったとき、処理中を即ok:trueにしない。既存Map内で同一進行Promiseの結果を待合せする等の最小案を評価し、状態を新常設queueへ拡張しない。 | 二つのcallerが同じ最終成功／失敗を受ける。同購入のAPI同期・finishを競合二重実行しない。`finally`やcatchが別世代の進行entryを消さない。 |
+| C01-04 | API同期成功→finish失敗時を「権利同期済み／store完了処理未了」と内部で切り分け、同じ購入識別での再通知・明示復元・再起動後回復へつなぐ。finishをAPI検証より前へ移さない。 | 再試行に新購入を要求しない。API再送が必要な場合は同purchase情報・既存server ownership/重複処理を保ち、二重付与しないことを別途確認。API反映済みの権利をローカルでfreeへ偽装しない。 |
+| C01-05 | `startIapPurchaseObserver`、`requestSubscriptionForPlan`、`useAccountSubscription.onRestorePurchases`の最終表示・refresh条件を追う。未完了を「購入なし」や「課金されなかった」へ変えない。observerの例外を単にconsoleへ落として回復不能にしない最小扱いを具体化。 | finish未了で成功Alertを出さず、busyを解除し、本人が同購入の回復へ戻れる。storeの支払キャンセル・pending・同期失敗と区別できる。 |
+| C01-06 | C02の本人境界を使い、API同期の送信先と完了表示を購入開始／回復時の本人へ束縛する必要範囲を点検。既存`appAccountToken`／Android obfuscated ID／server ownershipを維持。 | A購入の進行中にBへ切替えてBへ権利同期・成功表示しない。別人購入の再割当は許可しない。owner不足を推測で補わない。 |
+| C01-07 | 限定検査→既存回帰→必要版build→実store検証の順で閉じる。 | 下記機械条件と実store条件を別々にPASS/未実施と記録。 |
+
+C01の必要な失敗・回復検査：
+
+1. modern成功：legacy0、API→finish→doneの順序、ok:true。
+2. modern失敗・legacy成功：fallback1回、成功を返しdone。
+3. 両失敗：最終失敗伝達、done0、UI成功Alert0、busy解除、同purchaseの再試行が可能。
+4. API失敗／401／所有者不一致：finish0、done0、API原エラーを保持。「購入なし」へ変換しない。
+5. API成功→finish失敗→同purchase再通知成功：最終成功へ回復、二重権利付与なし。
+6. 同purchaseのobserverと直接戻り／restoreの同時到来：同じ進行処理へ待合せし、先行が失敗したのに後行だけ成功しない。
+7. 異なるpurchaseの並行、同transactionの再通知、接続失敗、user切替、unmount／再mount、プロセス再起動後の未完了transaction再配信。
+8. 既存の認識SKU・Android basePlan・upgrade・真正な購入履歴なし・store取消／pending・期限切れ／復元を壊さない。対象外SKUはfinishしない。
+
+既存test：
+
+- `tests/iap-restore-purchases.test.js`はチェックイン済みserviceとaccount callerをNodeで実行し、store取得失敗／真正な空配列／SKU優先／失敗後再取得／UI表示を検査する。今回修復後も再利用する。
+- 同testの`createService`ではfinishが常に成功stub、exportは`restoreAvailablePurchases`だけであり、両finish失敗・sync本体・同purchase待合せをまだ検査していない。既存source-loaderを再利用し、実`syncPurchaseToSubscriptionTier`を動かす追加対象を用意する。test本数目標を作らず上記の状態遷移を覆う。
+- API `ai/tests/test_subscription_projection.py`は権利期限・expired・profile有料だけでは昇格しない条件を確認する回帰候補。ただしstore updateの重複送信やack成功の証明には使えない。
+- `tests/rn-screen-contracts.test.js`のaccount subscription節は主にsource文字列の接続確認であり、失敗・競合・復元の動作証明の代替にはしない。
+
+後段の実store条件：用意済み版でiOS sandbox／Android license test等の適切な試験環境を使い、新規購入、復元、pending/取消、更新・失効、未finish再配信と再起動回復を検証。人工のfinishエラー注入と実storeの課金発生を区別する。今回の文書作成で実購入・署名配布の承認は成立していない。
+
+C01完了：対象source/testが必要回帰を通り、同購入の失敗→回復と本人境界が一致し、必要配布版の実store結果が揃う。機械修復完了と実store未確認を分ける。未決：最終失敗の内部結果／例外型、既存画面文言の最小差分、正確なnative導入版、API同購入再送の既存保証範囲。
+
+<a id="task-c02"></a>
+#### C02 — account切替後の旧subscription応答とcacheを遮断する
+
+目的：Aのtier・mode・有料情報をBまたはlogout後へ適用せず、Bの正しい取得もAの後始末で消さない。`subscription/bootstrap`は現clientでauth:falseの共通catalogなので、本人tierと同一のprivate ownerデータとして不必要に再設計しない。
+
+| 作業ID | 具体作業 | 終了時に残す証拠・判定 |
+|---|---|---|
+| C02-01 | providerの初回session／auth change／foreground／purchase後force refreshの入口を整理し、owner id＋認証世代を既存provider内で保持する最小案を作る。A→B→Aを同じowner idだけで許可しない。token refreshだけの同一人物を切替と混同しない。 | どのeventでowner世代が変わるか、logout・session取得失敗の状態が定まる。新account subsystemを作らない。 |
+| C02-02 | `refreshTier`開始時のowner・世代を捕捉し、`getSubscriptionMe({expectedUserId: ownerId, signal})`等、既存apiClientの本人束縛を利用する。最初のsession取得と実header作成の間で切替わる場合も送信を防ぐ。 | A用refreshがBのtokenで送信されず、無session／不明ownerは取得を成功扱いしない。public APIのpayload追加や新auth方式は不要。 |
+| C02-03 | 同一owner・世代内だけTTL／inFlightを共有。切替時は旧cache・lastFetchedAt・mode・planCode・entitlementStatus・expiresAt・autoRenew・store・productIdを失効し、新ownerは未知／再取得状態へ置く。旧通信は既存AbortControllerで中断可能なら中断し、応答無効化を独立して必須にする。 | BがAの10秒TTLやPromiseを利用しない。abort非対応／abort後到着でもA結果を採用しない。 |
+| C02-04 | `try`の成功だけでなく`catch`のreset／fallback、`finally`のloading、外側finallyのinFlight解放、lastFetchedAt更新すべてを捕捉世代・entryに束縛。 | Aの成功・失敗・finallyがBのtier／情報／loading／新inFlightを変更しない。old entryの削除はentry identityが一致する場合だけ。 |
+| C02-05 | `ensureTier`／`ensurePaid`／`ensurePremium`、context valueの`pieceEffectiveTier`、account表示のunknown→free等の既存投影を確認する。owner未確認中に前のpaidを使わせない。 | A premium→B free／unknownの切替で有料featureを一瞬でもA由来で許可しない。同ownerの一時通信失敗時の現行fallbackは別のポリシーとして維持／判断対象化する。 |
+| C02-06 | 実sourceを通すdeferred Promiseの順序検査、既存screen接続回帰、必要配布後の2account切替を行う。 | 下記競合条件が成立し、最終表示だけでなく途中のtier/mode/loading/refsの不正適用がない。 |
+
+C02の必要な順序・owner検査：
+
+- Aの`/me`開始→B login→B取得成功→A成功／A失敗／Afinally、各順序でBを保持。
+- A開始→logout→A成功／失敗：logout状態へpaidを復活させない。
+- A1開始→B→A2開始→A1返却：user idが再びAでも古い世代は採用しない。
+- A取得中のB force refresh：A Promiseを返さずB専用requestとなる。Aの後始末でB inFlight／loadingを消さない。
+- 同owner・同世代の並行refreshは既存dedupeを維持。10秒TTLは同ownerのみ、forceはTTLを越えるが別ownerの進行処理は共有しない。
+- session取得中にowner変更、header取得中にowner変更、HTTP abortが効かず旧応答到着、unmount後の各callback、foregroundイベントとauth eventの競合。
+- API401・timeout・malformed tier・allowed mode欠落等で、Bの状態へAのfallbackを混ぜない。
+- 同owner token更新では必要以上にtierを消さず、新tokenの本人一致を維持。通信取消の例外でUIの有料権利が根拠なく増えない。
+- 通常購入・復元からのrefreshとaccount hookが、最終current ownerの同じ状態を表示する。
+
+既存test再利用／不足：`tests/iap-restore-purchases.test.js`のsource-loaderとhook caller差替え方式、`tests/rn-screen-contracts.test.js`の接続回帰を再利用できる。今回読取範囲ではproviderのauth世代・deferred競合を直接覆う専用testは未確認。既存Babel／Node依存だけで実providerを動かしauth/AppState/APIを制御する最小testを用意する案とし、新renderer/runtime/依存の導入を自動前提にしない。loaderが実装を再現する別providerを作る方式は採らない。検査用doubleと実React/native試験の限界は明記する。
+
+C02完了：owner世代がsend／response／error／cleanup／cacheまで一貫し、旧ownerが新ownerの状態を変更できず、実2accountでlogin/logout/foreground/購入後refreshの必要経路を確認。機械条件と本人端末条件を別記。未決：同owner通信失敗のpaid維持方針を変更する必要があるか、session取得失敗のUI表示、既存auth event順序・起動版。今回の欠陥修復に不要ならpolicyは変えない。
+
+<a id="task-c03"></a>
+#### C03 — visibility取得失敗で公開profileへ進む経路を閉じる
+
+目的：公開許可を確認できないとき、氏名・接続コード等を公開相当のdefaultで返さない。本人設定や既存公開APIの正常時shapeを勝手に変更しない。
+
+| 作業ID | 具体作業 | 終了時に残す証拠・判定 |
+|---|---|---|
+| C03-01 | public resolverとaccount visibility正本、Web共有landing／RNのID検索callerを照合し、HTTP失敗、network exception、invalid JSON、row無し、field無し／null、正常falseを別状態へ分類。現実装ではJSON parse例外等も未整理である。 | 「取得失敗」と「正常に設定未登録」を一つのdefaultへまとめない。正本で決まっているdefaultを再質問しない。 |
+| C03-02 | 最小案として、visibility HTTP非2xxと取得不能を既存APIのupstream failure系（候補502）へ返し、成功profile本文へ進まない具体差分を作る。request timeout／接続失敗／JSON shape不正にも公開を許可しない。 | 各失敗でprofileのdisplay_name・connect_code／myprofile_code・share/friend_code等の非公開値をresponse・error detailへ含めない。正常public/private返却は同shape。 |
+| C03-03 | visibilityの正常空行／user_id欠落／必要field無し・nullの扱いを、既存DB初期化・backfill・schemaと照合。defaultを採用する場合も正常成功の証拠と正本根拠が必要。公開resolverから設定を作成するwriteを追加しない。 | 未登録defaultの変更が必要なら、変更対象・理由・影響・空行/失敗の具体案をMash判断へ分離。未承認で全利用者のprivacy policyを切替えない。 |
+| C03-04 | share-code非公開なら既存anti-enumerationの404を維持。private accountなら既存通りdisplay_nameとconnect/myprofileをnullにし、public accountの正常payload、share/friend等互換名とrouteを保持。 | 修復で非公開accountの存在・private設定の内容を新たなerror messageにしない。route rename／公開項目削減・追加を混ぜない。 |
+| C03-05 | API mini-appで実register関数へroute登録し、httpx/upstreamだけをdoubleにした失敗検査を追加。RN ID検索とWeb landingの502/timeout表示・retry・OGを確認する。 | upstream失敗を「その人は非公開」と断定せず、先行公開profile cacheを新しい公開許可として再使用しない。クライアント側も失敗でprivate情報を埋めない。 |
+| C03-06 | API限定回帰→承認が必要な公開失敗契約差分の判断→対象版配備→匿名clientのpublic/private/hidden/故障確認を順に閉じる。 | source合格・配備・匿名実利用確認を区別。実故障注入で本人データを公開せず合成account/隔離環境を優先。 |
+
+C03の必要なAPI検査：
+
+1. profiles失敗→現行502、profiles真正空→現行404、公開routeやfield aliasを保持。
+2. visibility200＋public明示→従来正常payload。
+3. visibility200＋private明示→display_name/connect/myprofileがnull。
+4. visibility200＋share-code公開false→従来404で識別情報なし。
+5. visibility401/403/404/429/500等→公開payload0。特に404を「設定行が無い」と推定しない（REST query成功空配列とは別）。
+6. timeout／接続例外／invalid JSON／非list／非object行／user_id欠落／boolean以外／null／必要field無し／正常空配列の各扱いを明示。正常未登録・nullを既存defaultで受けるかは正本照合後の判断内容に従う。
+7. 一度public成功→次回visibility失敗→再試行正常private、の順で古いpublic応答やOG/caller cacheを許可根拠として復活させない。
+8. 失敗ログ・error detailにsecret・upstream生response・本人profileを新規転載しない。サービスrole利用・認証ヘッダ・DB書込を増やさない。
+
+既存test：今回の現行ファイル名一覧・対象読取ではpublic resolver専用testを未発見。全test内容を総当たりして「存在しない」と断定はしていない。実装前に既存router/httpx testの最小harnessを再利用可能か確認し、候補`ai/tests/test_public_profile_visibility_failure.py`等でactual `register_public_profile_routes`を検査する。Emlis用のvisibilityという名前の既存検査はこのaccount公開routeの代替ではない。新DB・実service role・外部通信は不要。
+
+C03完了：許可不明の各失敗で公開情報が出ず、正常public/private/hiddenと互換shapeは維持され、関係callerの回復・対象版配置確認が揃う。**502等の失敗契約・空行/不正設定時の公開扱いを変える差分は、現在の文書詳細化で承認済みにしない。** 必要具体案を作った段階で保護境界に関する判断を分離する。
+
+#### 共通の順序・依存・報告の形
+
+- **実装の推奨順**：C02の本人束縛とcleanup条件を先に固め、C01の購入完了・回復を同じ本人境界へ接続する。C03は独立したAPI ownerで並行準備できる。3欠陥を大きな課金/identity基盤の作り直しへ広げない。
+- **10/31までの管理点**：各IDを「具体差分準備／承認差分あり／source実装／限定検査／配置／配布／実store・本人確認」に分け、止まる位置を明記する。いま実工数を測ったわけではなく、全段階の10/31完成保証はしない。
+- **既存公開/権利契約を維持**：serverの権利判定・store商品・価格・quota・DB schema・商品受入れ基準はこの修復案だけで変えない。private/public境界の具体差分が必要な箇所だけ個別判断とする。
+- **各修復の成果物**：最初に再現した失敗、変更pathと原因、修正後の同じ失敗条件＋正常/回復/owner対照、必要回帰の範囲と既知失敗、配置/配布/実機の有無、残る1作業を既存handoff/議事録へ残す。新常設台帳や形式だけのreceiptを増やさない。
+- **今回の状態**：3欠陥とも未修復。ここに作業IDがあることを実装開始・成功・署名配布・本番操作許可・追加費用承認へ換算しない。
+
+<a id="details-analysis"></a>
+### 8.5 通常Analysisの文章・図・保存・比較 — A-01〜12
+
+#### 1. 優先順位・責任・今回の到達目標
+
+4B学習とCMEE実接続を主枠、Piece本人保存を独立並行主枠として保つ。通常Analysisは次順位の結合枠だが、AI全体の完成待ちにはしない。華恋は版差分・合成入力での本文/保存/表示検証・対象版と端末手順を用意する。Mashの判断や端末操作が必要な地点は準備後に限定し、未準備を「本人待ち」へ置き換えない。
+
+通常Analysisの一単位は、**期間内の本人原入力/適格補足→通常APIの既存意味処理→同じ文章/図を保存→同じ保存identityで再読→比較の有無を正しく表示**すること。P5の固定3構文・Plus・補足0・比較なしのprivate snapshot実装/905成功とは別の経路である。P5を作り直したり、その成功で通常利用の未完了を埋めたりしない。
+
+#### 2. 最初に固定する現在地と、既存成功の保持
+
+##### 2.1 配置/端末版の履歴を古いまま使わない
+
+- 10/04のu128：API `1a42b9ebc25ba9765bdb17658cf47dd631d9f40d`、iOS 1.0(6401)、source `166343c0b160e787b857a7b9d407b6f0afce756d`、run37201625245は当時の空期間修正/送信記録。
+- **後続10/10 §39**：不足案内API `5c8bd8e5d7f876335eb840ceee26883a030a34a5`が18:32:12 JST live。iOS source `55142229b6860b9c8195989cdddf0f218f07700a`、run38041653252のarchive/export/upload成功、採番式による1.0(6501)、18:47:24 JST TestFlight送信成功。
+- **同日§40、18:51 JSTのMash報告**：「入力情報が少ないため、まだ分析を表示できません。」の本人実機表示は確認済み。端末build番号の独立照合、再表示/再起動、本文生成、内容品質、保存再読、比較成功は未確認。
+- したがって不足文言の表示だけをもう一度確認するための新入力・再配置・追加操作を要求しない。次は実際の分析が成立する経路と保存再読の残件である。
+- 共通APIの最後の配置記録は10/23 Piece overlay `3577d7fdeb19158ef5e675f51960652a52c24487`で、土台は5c8bd8e。今回Liveの再照会はしていない。
+
+原記録：[API運用記録@666b285 §39 L787](https://github.com/MassyuRed/mashos-api/blob/666b28517ef04aba170ebffe3c86980fea4c11bd/ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md#L787)、[本人表示報告§40 L799](https://github.com/MassyuRed/mashos-api/blob/666b28517ef04aba170ebffe3c86980fea4c11bd/ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md#L799)。doc blob=`964a3b5f641673a45797a911057c1edf791bc183`。同内容は[Cocolon current map03 L147/L149](https://github.com/MassyuRed/Cocolon/blob/43143ffc6aee9e765e1a33b9d2830fe23b6ece13/Cocolon_前提資料/current_structure/03_analysis_current_structure.md#L147)（blob `c18de076fec2c2ad86f2d350296288a8f2236f7d`）に反映済み。current00のu128/6401だけで「不足案内も未確認」へ戻さない。
+
+##### 2.2 取得した配置sourceと開発sourceの限定比較
+
+保存済みLive記録の3577d7fdとfresh666b285を、GitHub上の同一path/blobで比較した結果：
+
+| API path（prefix=`ai/services/ai_inference/`） | 3577d7fd | 666b285 | 判断 |
+|---|---|---|---|
+| `analysis_observed_service.py` | 4864821ed1e48045591a607da206408f128f36e0 | 同左 | 保存lifecycleの作り直しは不要 |
+| `api_self_structure.py` | c42a85de011a72d2fbc8ab5d40c274e49af0503c | 同左 | 通常latest/status/monthlyのV2分岐は既存 |
+| `astor_material_snapshots.py` | 83537a666335cf00c81676f2e13d5e96dc167c6d | 同左 | 複数ANSWER拒否も既存 |
+| `cores/analysis/source_adapter.py` | 9fb6a26a3f9eab0bc140a25a15e63d111a921cc1 | 同左 | owner/period/source検証は既存 |
+| `cores/analysis/intent_compiler.py` | 758c90432e0af9d825a304b57d2f0c3d7297e9d4 | 1847a05bdada3d75d22d82a0280747e2d841230d | 内容修正/後続P5追加等の差あり |
+| `cores/analysis/observed_route_realizer.py` | 62191971b5245720058b864981efaac24c26d5a6 | c23c6ea7c099b9b83c0c436d2ab38eba1206ca99 | 内容表示/後続P5追加等の差あり |
+
+これは6pathのsource比較であり、稼働serviceの新規検証や全依存差分の確定ではない。u129〜250は資料上未配置として保持する。最新APIを丸ごと配置すれば、別の未配置Emlis・P5等も入るので、**Analysisで必要な差だけと既存Piece overlayを両立した候補**の具体化が必要。共有意味ownerの差は4B接続主担当と同時編集を避けて統合する。
+
+#### 3. 作業ID別の具体案
+
+IDはこの議事録内の参照用で、新しい管理systemではない。全作業の実装/準備/検証/記録は華恋、商品範囲や追加効果の判断・準備済みの本人操作はMashと分ける。
+
+| ID・優先 | 実path・最初の操作 | 検証する内容 | 完了条件・依存/未決 |
+|---|---|---|---|
+| **A-01：通常経路の版固定（先行）** | API `analysis_observed_service.py`/`api_self_structure.py`/`astor_material_snapshots.py`、CMEE `cores/analysis/intent_compiler.py`/`observed_route_realizer.py`。上の3577→666b差を出発点に、通常経路へ作用する変更とP5専用追加を分け、共有依存を含む必要pathを一度確定する | current map03/設計04 §3.21〜3.80、運用§39/40、候補sourceを対応。必要なら既存合成入力で変更前後の意味/本文/図を比較 | 「何を変え、何は既存のままか」「対象API/RN/build」「追加配備の範囲」が一意。latestAPI全体の無条件配置やP5だけの合格で閉じない。現環境設定2値は資料上手順報告で、独立取得済みとしない |
+| **A-02：通常生成と待機/障害の区別** | API `analysis_observed_service.py::generate_saved/ensure_saved`、`api_self_structure.py`、RN `SelfStructureReportGenerateScreen.js::run`。既存testの合成recordで、成立/空期間/情報不足の3stateを同じ通常入口に通す準備 | 空期間はengine/commit0、非空だがroute未成立の厳密な組だけ `reason=insufficient_input`/`skip_reason=analysis_insufficient_input`/本文図null。HTTP/DB/権限/不正snapshot/比較失敗を「情報不足」で隠さない。force後の不足で古い本文を戻さない | 成立と不成立の意味がAPI/RNで一致。既存の不足文言表示成功は保持。新しい文字数/件数閾値や無理な文法拡張を追加しない |
+| **A-03：latest保存/再読の同一性** | `analysis_observed_service.py::generate_saved/read_saved/saved_status`。既存 `test_generate_commits_and_rereads_exact_identity`/`test_http_save_latest_status_read_and_owner_binding`を起点に、通常生成時のid/`projection_of`/期間/本文/graphを採取する合成検証を用意 | GET `/self-structure/latest`→GET同入口 `ensure=false`→GET `/self-structure/latest/status`。Plus以上なら同idのdetailも照合。再読は意味engineを呼ばず、commitが増えず、本文/図/版が変わらない。Freeは最新lightのみの許可を守る | 同じ保存結果の再読を説明できる。statusはtier既定modeを選ぶので、異なるmode/期間を混ぜない。HTTP200だけで完成扱いにしない |
+| **A-04：monthly履歴/詳細を別に閉じる** | API `api_self_structure.py`のPOST `/self-structure/monthly/ensure`、`api_self_structure_reports.py`、`report_artifact_read_service.py`。RN `AnalysisScreen.js`L560/`SelfStructureReportHistoryScreen.js`。合成monthly recordで生成→history→detailを追う | historyの既定 `report_type=monthly`、RNもmonthly固定。latestの行が自動でmonthly履歴へ出るとはしない。historyのidからdetailへ同じ本文/図/期間/modeを再取得し、既読idも一致。page重複/has_more/offset/旧v1混在を区別 | monthlyの同一保存identity往復が成立。latest→monthlyを新たに同一行化/導線追加する必要があるなら仕様差として具体判断。既存testでlatest rowをmonthlyへ書き換える合成例を実導線成功にしない。実期間にmonthly素材がない場合、本人記録の改変/日付偽装はしない |
+| **A-05：期間比較** | `analysis_observed_service.py::generate_saved`、`cores/analysis/intent_compiler.py`/`observed_route_realizer.py`、migration `20261004041627_analysis_period_comparison.sql`。既存比較fixtureで隣接同長のcurrent/previousを用意 | previous開始=current開始−current長、previous終了=current開始をUTCで照合。COMPARABLE/NO_PREVIOUS/比較不成立を区別。材料にない改善/悪化/因果を付けない。前期間だけの訂正/削除/期限切れで比較が失効すること、前期が保持範囲外なら明示eligibilityによりcurrent単独を残すこと、DB障害では単独fallbackしないこと | API本文とRN図/「文章で読む」の比較内容が一致、保存後も同じ比較identity。比較SQLは適用済みなので再適用しない。`COCOLON_ANALYSIS_PERIOD_COMPARISON_MODE=development`の実設定/有効化は既存操作範囲を照合し、文書作成で勝手に変更しない |
+| **A-06：source/期間/owner/tier/保持期限** | `astor_material_snapshots.py::_analysis_saved_member`、`cores/analysis/source_adapter.py::freeze_analysis_sources`、migration `20261003134440_analysis_observed_artifacts.sql`。既存境界testを一覧化して対象sourceが何か固定 | 原7fieldのcommitment、同owner、[start,end)内、UTCとしての保存時刻、duplicate/欠落/違うrecord_id/版、future/不正期間、100原入力上限、保持期限、Free light/Plus standard/Premium deep、Free履歴拒否/Plus deep拒否。生成文や問い本文を本人sourceにしない | 勝手な期間clip・レコード除外・source補完なしで許可/拒否を説明。100件超は暗黙の先頭100件採用で通さない。tier変更時の旧artifact可読はSQL再照合/無効化どおりで、画面ラベルだけで保証しない |
+| **A-07：訂正/撤回/削除・競合・通信断** | `astor_material_snapshots.py`、`analysis_observed_service.py::_rpc/generate_saved`、2migrationのinvalidate/commit/read、既存storage tests | 原入力編集、Emlis回答の訂正/撤回、source/アカウント削除、tier変更で旧結果を復活させない。生成後commit前のsource変更/追加とlock競合、commit ACK消失を分ける。409/503を成功や空表示にしない。ACK不明時の自動再送/新生成を行わない | 結果が有効なら同一再読、無効なら旧本文/別人本文を返さず利用者が状態を判断できる。通常engineの復元とsource失効を混同しない。現SQLの短いtable SHARE NOWAITが他user書込にも競合し得る制限は隠さない |
+| **A-08：複数ANSWERの未対応を閉じるか範囲判断** | 現loader `astor_material_snapshots.py`L130、pure `cores/analysis/source_adapter.py`L223、`test_analysis_saved_period.py::test_answer_binding_and_multiple_answers_fail_closed`。まず同thread0/1/2回答の現動作を合成で固定 | 2回答以上は `analysis_multiple_answers_not_supported`/`analysis_supplement_cardinality`で拒否する現実装。新しい拡張をする場合、複数回答のsource role/親版/round/順序/訂正撤回/全source再照合/保存失効を具体化。対象threadだけ除外、原入力だけ再利用、最初の1回答だけ採用をしない | 現拒否を仕様達成に数えず、Premiumの逐次問答との接続未完として記録。拡張の対象/責務/検証か、初回公開での扱いの具体判断が残る。文書のみで無断採用/廃止/コード変更しない |
+| **A-09：通常RNの文章/図・閲覧権限** | `WatashiMapV2Renderer.js`/`watashiMapV2Contract.js`/`watashiMapAccessPolicy.js`、Generate/History/Viewer3画面。既存backend合成projectionをRN validator/view modelへ渡す | projection_of/period/node/edge/unknown/annotation/conflict/比較と「文章で読む」が一致。共起線に矢印を付けず、未知対象を落とさない。不正/未来/private v2をlegacyへfallbackしない。Free履歴lock/Plus deep拒否、mode不明拒否。長文/文字サイズ/明暗theme/読み上げの実描画は対象版で確認 | API DTO成功→RN model→実描画の段階を分離。iOS/Androidの両方を未確認なら両OS成功としない。初回本文の根拠外補完を華恋が先に読む。本人端末確認へ明白な内容不良を戻さない |
+| **A-10：配備・本人通常一往復** | A-01候補、API運用記録§39/40、現iOS配布候補。必要なAPI差分/共有依存とPiece overlay維持を先に具体化し、配置/端末版の手順を整える | 配置exact SHAとRN/buildを合わせる。準備済み本人sessionで通常の分析→わたしマップ、成立した同じ結果を閉じて再読、対象にある場合monthly履歴/detail・比較。本人データ内容を公開記録へ載せない | 実装不足/未配置/配布不足/本人時間待ち/入力上まだ未成立を分離。実行する個別効果は現承認を照合する。今回の文書化から配置を開始しない。10/10不足文言の再確認だけを最初に戻さない |
+| **A-11：旧経路との切替/公開前のtruth owner** | 設計04 §15.2、旧 `watashi_map_service.py`/Analysis builder、通常latest/history、旧 `/mymodel/infer`/worker/cron。既存生成入口が何を呼ぶか必要範囲で対応表化 | V2有効入口の失敗からv1へsilent fallback0。歴史v1の表示compatは残すが同じ要求の真実生成ownerを二つにしない。read-only生成停止と旧generationを止めたglobal cutoverを混同しない | 未完了のglobal切替を「通常API分岐あり」で完了にしない。既存全workerの作り直しや新管理基盤へ拡大せず、実際のactive ingressに絞る。公開scopeを含む採否が必要 |
+| **A-12：IF/Saved・有料差の公開範囲判断（実装は後置）** | 設計04 §10/11/15.1/16、currentmap03 §9、プラン表示/説明。IF/Saved runtime owner=0、複数ANSWER、有料deep本文/graph差の未確認を機能と表示へ対応させる | IFは観測事実と別hypothetical artifact、1〜3並列候補、順位/未来保証なし、Savedは本人明示選択の別identity。未実装を観測mapへ混ぜない。プラン画面/ストア説明が実提供能力を超えないか照合 | 次週はIF全面実装を主枠へ戻さないが、勝手に廃止しない。「初回公開に何を提供し何を未提供とするか」、Premium説明/価格/商品範囲への影響を10/31判断へ明示。新しい仕様削減は未決として残す |
+
+##### 3.1 latestとmonthlyで実際に異なる点
+
+現通常APIはGET `/self-structure/latest` とPOST `/self-structure/monthly/ensure`を持つ。後者は `include_secret=false`/`now_iso` overrideをV2では400にする。`ensure_saved(monthly=True)`はJST月初0時をendとし、そこから設定period（既定28d）を引く。暦月全体と勝手に同一視しない。最新は現在時刻までの設定期間、同mode・同期間長の既存行が1日以上古ければdevelopment+ensureで生成対象になる。再表示のたびに常に同じartifactを作ると保証せず、**保存行を再読む操作**と**更新生成する操作**を分けて試験する。
+
+#### 4. 既存検証の再利用先と、未実行の具体コマンド
+
+この作業でテストを走らせてはいない。実装修復時は差分に対応する必要な集合だけを選び、同じ検証を意味なく反復しない。
+
+- APIの入口・正常空/不足/内部障害・history/detail・auth：`ai/tests/test_analysis_observed_api.py`。主な既存testは `test_http_save_latest_status_read_and_owner_binding`、`test_empty_current_http_latest_and_monthly_are_normal_unsaved_results`、`test_insufficient_current_input_is_pending_without_report_or_save`、`test_internal_generation_failure_is_not_insufficient_input`、`test_comparison_http_latest_history_detail_return_same_saved_text_and_graph`、`test_plan_and_unsupported_secret_override`、`test_active_failure_does_not_call_legacy_builder`。
+- 合成保存/再読/失効/ACK：`ai/tests/test_analysis_observed_storage.py`。`test_generate_commits_and_rereads_exact_identity`、`test_comparison_save_read_preserves_both_private_artifacts_and_public_identity`、`test_previous_outside_retention_keeps_current_single_period_available`、`test_comparison_storage_errors_never_fall_back_to_single_period`、`test_lost_ack_not_retried_or_returned_as_saved`、`test_insufficient_regeneration_does_not_fall_back_to_saved_report`等。
+- 原入力/補足/period/owner：`ai/tests/test_analysis_saved_period.py`。未来/保持外/100件超/duplicate/違うowner/複数ANSWER/元編集/生成直前再照合が既存。
+- 意味/文章/図：`ai/tests/test_cmee_analysis_v1d_vertical.py`、`test_cmee_analysis_nominal_relations.py`。共有feeling ownerを触る場合は `test_cmee_emlis_limited_change_feeling.py`と既存owner identity検査も関連範囲に含む。実本文を華恋が読む責任は検査成功で置き換えない。
+- SQL：`ai/tests/analysis_observed_storage_sql.cjs`。先頭コメントの既存コマンドは `NODE_PATH=/tmp/cocolon-analysis-db-check/node_modules node ai/tests/analysis_observed_storage_sql.cjs <fixture.json>`。fixtureは既存 `await test_analysis_observed_storage.storage_sql_fixture()`から合成生成する指定で、`<fixture.json>`は将来の実在ファイルに置換するプレースホルダー。稼働DBや本人データではない。これはPGlite単一接続であり、多接続競合/本番負荷の保証にはならない。
+- RN：`tests/analysis-watashi-map-v2-contracts.test.js`先頭で確認した既存コマンドは `NODE_PATH=tests/emlis-q2-tools/node_modules node --test tests/analysis-watashi-map-v2-contracts.test.js`。固定React/Babel道具の存在/版は実行前に確認し、製品依存を勝手に変更しない。repoの `npm test`は別screen集合なのでこのAnalysis集合を含むとはしない。
+- API既存workflow `.github/workflows/analysis-observed-content.yml`はPython3.12、pytest8.4.1/subtests0.14.2、環境 `PYTEST_DISABLE_PLUGIN_AUTOLOAD=1`/`PYTHONDONTWRITEBYTECODE=1`/`PYTHONPATH=ai/services/ai_inference:ai/tests`、`python -m pytest -q --tb=short -ra -p pytest_subtests.plugin -p no:cacheprovider -c /dev/null --noconftest`を使用。既存対象はvertical/nominal/storage/saved_period/shared_feelingの5fileと別owner検査。API HTTP fileはこの5fileへ含まれないので、HTTP修復時はそのfileも別途必要な対象として明示する。今回workflow起動0。
+
+不足した検証を新規追加する場合は「追加候補」として対象欠陥に対応させる。既存検査数を上乗せしたり、P5の905成功をこれらの合格へ流用しない。
+
+#### 5. 中間見直しと10/31の出し方
+
+- **10/26〜27**：A-01の版/変更pathとA-02/03の合成出力/保存再読を確認。必要差分が未確定なら「Analysisを全体作り直す」へ広げず、最初に止まるsource/意味/保存/読取/表示の責任へ戻る。
+- **10/28〜29**：準備できた通常版の本人一往復、monthly/比較の成立範囲、A-06/07/08の制限を確認。本人操作が未準備なら華恋側の残件、準備済みで時間未確保なら本人確認残と分ける。
+- **10/30**：文章/図/保存identity/表示/比較/権利/失効の実行範囲と未実行を集約。A-11/12とrelease残件の公開影響を示す。
+- **10/31**：完了/実装残/配置残/本人確認残/採否待ちをIDごとに記録し、11/15結合・11/22候補・11/27提出に渡せるか判断する。完成保証・自動延期・無断仕様削減はしない。4B/Pieceが主枠であることと、Analysisが未完なら公開への影響が残ることを両方記録する。
+
+#### 6. 主な固定根拠
+
+- [通常Analysis service](https://github.com/MassyuRed/mashos-api/blob/666b28517ef04aba170ebffe3c86980fea4c11bd/ai/services/ai_inference/analysis_observed_service.py)
+- [通常latest/status/monthly API](https://github.com/MassyuRed/mashos-api/blob/666b28517ef04aba170ebffe3c86980fea4c11bd/ai/services/ai_inference/api_self_structure.py)
+- [history/detail façade](https://github.com/MassyuRed/mashos-api/blob/666b28517ef04aba170ebffe3c86980fea4c11bd/ai/services/ai_inference/api_self_structure_reports.py)
+- [history/detail read owner](https://github.com/MassyuRed/mashos-api/blob/666b28517ef04aba170ebffe3c86980fea4c11bd/ai/services/ai_inference/report_artifact_read_service.py)
+- [通常期間source](https://github.com/MassyuRed/mashos-api/blob/666b28517ef04aba170ebffe3c86980fea4c11bd/ai/services/ai_inference/astor_material_snapshots.py#L130)
+- [保存migration](https://github.com/MassyuRed/mashos-api/blob/666b28517ef04aba170ebffe3c86980fea4c11bd/supabase/migrations/20261003134440_analysis_observed_artifacts.sql)
+- [比較migration](https://github.com/MassyuRed/mashos-api/blob/666b28517ef04aba170ebffe3c86980fea4c11bd/supabase/migrations/20261004041627_analysis_period_comparison.sql)
+- [RN通常履歴のmonthly固定](https://github.com/MassyuRed/Cocolon/blob/43143ffc6aee9e765e1a33b9d2830fe23b6ece13/screens/AnalysisScreen.js#L560)
+- [RN renderer](https://github.com/MassyuRed/Cocolon/blob/43143ffc6aee9e765e1a33b9d2830fe23b6ece13/components/selfStructure/WatashiMapV2Renderer.js)
+- [詳細設計04](https://github.com/MassyuRed/Cocolon/blob/43143ffc6aee9e765e1a33b9d2830fe23b6ece13/Cocolon_前提資料/designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md)
+
+<a id="details-release"></a>
+### 8.6 公開準備の後続残件 — REL-01〜12
+
+#### 優先と依存
+
+4B学習・CMEE接続のoffline開始条件へrelease全体を追加しません。Piece本人保存用の配布準備、既知の共通3欠陥、現在の認証入口を必要範囲で並行します。11/15の同一候補結合、11/22の提出候補、11/27の提出へ渡すには、以下の実装残・設定/配布残・本人確認残を別々に閉じます。11月の管理日は完成保証ではありません。
+
+<a id="task-rel-01"></a>
+##### REL-01 — 対象アプリ・候補の対応を先に固定（10/31までの準備枠）
+
+- **現物**：RN `android/app/build.gradle`、`ios/tempCocolon.xcodeproj/project.pbxproj`、`ios/tempCocolon/Info.plist`、`.github/workflows/ios-build.yml`。API `ai/services/ai_inference/subscription_release_config.py`。
+- **既知**：Android sourceはapplicationId `com.anonymous.cocolonmvp`、versionCode17/versionName1.0.0。iOS sourceのMARKETING_VERSION1.0/CURRENT_PROJECT_VERSION17はworkflowでbuild番号を上書きし、Release bundleはAPP_BUNDLE_IDENTIFIER経由です。これらを実配布版・Console値と同一と推定しません。
+- **最初の操作**：署名候補ごとに「source commit／API配置版／bundle又はpackage／native版数／TestFlight又はPlayの候補」を既存議事録の対象欄へ並べます。秘密値は載せません。
+- **検証・終了**：ビルドartifactに入ったidentifier・版数と、更新先アプリ登録・API設定が同じ対象を指すこと。Pieceの87151候補、6501既送信、Analysisの6401当時の記録と6501不足案内確認、最終公開候補を混同しないこと。
+- **未決**：最終公開candidate source・現在のストア登録/版数は未取得。新規アプリ登録へ勝手に切り替えません。
+
+<a id="task-rel-02"></a>
+##### REL-02 — iOS認証・共有URLのOS入口を接続（既知の実装残）
+
+- **現物**：`AuthContext.js`、`AuthScreen.js`、`navigation/RootNavigator.js`、`navigation/linkingRuntime.js`、`ios/tempCocolon/Info.plist`、`ios/tempCocolon/tempCocolon.entitlements`、`ios/tempCocolon/AppDelegate.mm`。
+- **既知**：JSは`cocolon://auth-callback`をsignup/resendのfallback、`https://emlis.app/auth/reset`をreset fallbackとして扱います。code/token pair/token_hash/OTPの受理、cold/warmのLinking処理はあります。一方、現iOS plistにURL scheme、entitlementsにassociated domains、AppDelegateにopenURL/continueUserActivityのforwardingはありません。
+- **最初の操作**：現行のdomain/Web帰還方式と認証redirect設定を必要範囲で照合し、JSが待つURLをOSが渡せる差分を具体化します。URL schemeの登録・必要なforwarding等はまだ未実装の提案です。HTTPSを直接開く方式とWeb→scheme方式を混ぜません。
+- **検証**：iOSで未起動/起動中、未ログイン/既ログイン、signup確認/再送/password recovery、正常/失効/再使用リンク。recoveryはAuthScreenに留まり更新後に通常画面へ戻ること。共有URLが別accountを表示する場合も本人sessionを混同しないこと。
+- **終了**：リンクがOS→JS→正しい認証/画面へ到達し、失敗を成功表示にしない同一署名候補の実結果。
+- **未決**：domain証明・実redirect設定・実端末結果は未確認。JS関数の存在を端末成立にしません。
+
+<a id="task-rel-03"></a>
+##### REL-03 — Android認証帰還と両OSの共有URL（実装/環境/実機を分離）
+
+- **現物**：`android/app/src/main/AndroidManifest.xml`、`AuthContext.js`、`navigation/linkingRuntime.js`、`navigation/navigationRef.js`、API `ai/services/ai_inference/api_public_profile.py`。Web補助の非公開path/内容は公開資料へ転載しません。
+- **既知**：Androidにcustom `cocolon` schemeと`https://emlis.app/u/`のfilterがあります。auth/resetのHTTPS filterはありませんが、それだけでWeb経由の認証全体不能とは断定できません。
+- **最初の操作**：現在のWeb引渡しを含む経路を一本ずつ対応付け、足りないnative/domain側だけ修復します。共有profileはcode→公開API→Accountの現在の経路を使います。
+- **検証**：cold/warm・認証前後、公開/非公開/共有code非公開/不在/HTTP失敗。HTMLとOGが同じ公開条件・API originを扱い、空display nameや一時障害を公開成功へ変えないこと。visibility失敗の既知修復は共通欠陥担当と重複編集しません。
+- **終了**：通常URLから意図した画面へ到達し、非公開・不在・失敗の表示と公開情報が一致すること。Web調整をEmlis本文品質へ加点しません。
+- **未決**：実domain/証明/公開Web内容・現在の検証済みApp Links状態は未確認です。
+
+<a id="task-rel-04"></a>
+##### REL-04 — iOS署名配布と最終候補を区別（Piece並行枠→候補枠）
+
+- **現物**：`.github/workflows/ios-build.yml`、Xcode project/plist/entitlements、Piece入口§119。
+- **既知**：既存workflowは手動dispatchでnpm ci→署名Archive→IPA export→TestFlight uploadまで一体です。単なるcompile確認として起動しません。build番号は`GITHUB_RUN_NUMBER * 100 + GITHUB_RUN_ATTEMPT`。sourceにはXcodeのarchive/exportと`xcrun altool --upload-app`があります。
+- **最初の操作**：Piece担当が固定候補87151と必要判断を整えた後、対象source/署名先/想定build番号/送信先を明記した既存一回の配布へ接続します。実行前に現候補との差分があれば保持/変更を分けます。
+- **検証・終了**：Archive成功、IPA export成功、Upload成功、TestFlight処理、対象端末導入、通常操作成功を別段階で記録。Uploadだけで導入・保存成功にしません。最終公開候補は後日の同一候補結合結果を反映したsourceへ固定します。
+- **未決**：87151署名配布は未実行。最終候補・Appleの現在状態・使える署名素材の有効性は今回照会していません。
+
+<a id="task-rel-05"></a>
+##### REL-05 — Android署名とclean候補build（11/15結合前）
+
+- **現物**：`android/app/build.gradle`、`android/gradlew`、`package.json`。先行議事録§3.18。
+- **既知**：Gradleはkey.propertiesがなければtask選択前に例外、release署名は同propertiesを参照します。先行記録にはrelease鍵/非空password設定の追跡がありますが、今回値を読んだり転載したりしていません。現packageのandroid scriptは`react-native run-android`で、release配布完了の手順ではありません。今回取得したworkflow一覧にAndroid署名配布workflowはありません。
+- **最初の操作**：実配布に使う署名との対応・保管場所・clean環境への供給方法を必要最小で確認し、既存Gradle設定で作る候補の具体手順を用意します。未確認のreleaseコマンドを実行済み/既存自動化ありと記載しません。
+- **検証**：clean候補build、署名/identifier/版数、インストール・更新、既存account利用。鍵の移動が必要ならdebug/library buildも壊さない差分で扱います。
+- **終了**：同一アプリへ更新できる署名候補を作れ、実機通常経路を確認できること。
+- **未決**：追跡鍵が実配布鍵と一致するか、移行/rotationが必要かは未確定。無断削除/rotateせず、秘密値を公開しません。
+
+<a id="task-rel-06"></a>
+##### REL-06 — native版数とJS/API headerの整合（候補固定前）
+
+- **現物**：`babel.config.js`、`lib/apiClient.js`、`AppRuntimeContext.js`、`runtime/AppRuntimeBootstrapGate.js`、iOS workflow/Android build.gradle。
+- **既知**：apiClientはX-App-Version/BuildをEXPO_PUBLIC_APP_VERSION/BUILD又はdevから設定。Babelの現inline対象はAPI URL4keyのみで版数は対象外です。native build番号を更新しただけでJS headerも一致とは言えません。
+- **最初の操作**：候補bundleに入る版数・API URL、実request headerとruntime gateの解釈を照合し、必要なら既存設定経路の不足だけ修復します。
+- **検証・終了**：iOS/Androidの同一候補でnative表示・API header・最低/推奨version判定が意図どおり一致。不明/失敗時も誤った更新必須や無条件利用可へ進まないこと。
+- **未決**：実配布bundleがdev/空だったという観測はありません。推測で不具合確定にしません。
+
+<a id="task-rel-07"></a>
+##### REL-07 — 商品ID・価格・権利・無料試用の実設定を揃える（実課金確認前）
+
+- **現物**：RN `lib/iap/iapConfig.js`、`lib/iap/iapRuntimeCatalog.js`、`screens/SubscriptionSelectScreen.js`、`SubscriptionContext.js`。API `subscription_config.py`、`subscription_bootstrap_store.py`、`subscription_release_config.py`、`subscription_live_console_check.py`、`subscription_verifier_ios.py`/`subscription_verifier_android.py`、`subscription_webhooks.py`（全てai/services/ai_inference配下）。
+- **最初の操作**：採用価格・プラン権利が決まった範囲だけ、bootstrap/RN表示、Apple商品、Google product/base plan/offer、API識別子を対応させます。現表示300/980と提案680/1480、上限980/1980、試用5人14日を混同しません。
+- **既存確認経路**：source上にGET `/subscription/config/release-check`、POST `.../compare-public`、GET `.../live`があります。今回は呼び出していません。`_require_admin_bearer`は設定token0件ならreturnするため、常にadmin保護済みとは書けません。実設定・公開範囲・取り扱う出力を確認した必要範囲で用います。
+- **検証**：bundle/package/SKU/base plan/offer/tag/価格表示と購入/復元/失効が対応。Apple通知URL・Google RTDN配送・規約Privacy URLはlive catalog endpointだけでは完了しないmanual項目です。
+- **終了**：表示価格/更新条件/権利、実storeの購入/復元/失効と再送回復が同じ意味。finish・account切替の既知修復を先に結合します。既存 `tests/iap-restore-purchases.test.js` はstore/server/ReactNative doublesの検査で実storeの代わりではありません。
+- **未決**：正式価格・quota/試用・現store値は未確定/未照会。4B確定だけで商品価格変更・新規trial付与しません。
+
+<a id="task-rel-08"></a>
+##### REL-08 — 利用規約・Privacy・支援URLと申告を実商品へ合わせる（11/22候補前）
+
+- **現物**：`screens/SubscriptionSelectScreen.js`、`lib/iap/iapConfig.js`、`guide/termsJa.js`、`ios/tempCocolon/PrivacyInfo.xcprivacy`、plist/AndroidManifest、API bootstrap/release config。
+- **既知**：購入画面のlinksはbootstrap→runtime→画面fallbackの順。fallbackに外部ページURLが存在しますが、今回その本文/閲覧性は検証していません。Privacy manifestの存在をストアのPrivacy/データ申告一致へ換算しません。
+- **最初の操作**：最終候補が実際に開く規約/Privacy/支援URLと、その候補の入力・保存・共有・削除・AI実行場所を対応付けます。予定のFlex構成を既存稼働として説明しません。
+- **検証・終了**：未ログインでも必要な公開ページが読め、候補内の表示とストア提出情報が一致。実装されないPremium/IF機能を利用可能と説明しないこと。権限文言・使用理由も実利用範囲と一致させます。
+- **未決**：現ストア規則と外部ページ本文の適合は今回未調査。提出時の実要件は公式原典とConsoleで確認し、文書保存だけで適合済みにしません。
+
+<a id="task-rel-09"></a>
+##### REL-09 — 両OS・同一候補の通常結合確認（11/15管理点）
+
+- **現物**：`navigation/RootNavigator.js`、`navigation/notificationRouting.js`、`lib/pushToken.js`、`screens/SettingsAppSettingsScreen.js`、`screens/SettingsOtherScreen.js`、`lib/accountLocalCleanup.js`。API `account_delete_service.py`、各owner/公開policy、subscription各owner。
+- **最初の操作**：REL-01の同じcandidateへ三core・共通修復を揃え、実行する操作・期待値・未実装を先に列挙します。Mashの操作を依頼する前に華恋側の準備と既知欠陥を整えます。
+- **検証**：cold/warm/通信失敗・再送・再起動、認証/ログアウト/account切替、購入/復元/失効、通知許可/拒否と未読/遷移、private/public/削除、三coreの通常保存再読。通知token登録成功を配送成功としません。退会は確認/取消、API失敗、成功後local cleanup/signOut、再ログインと派生物の扱いを各ownerで確認します。
+- **終了**：成功だけでなく失敗・取消・再試行後も本人/保存/権利/公開状態が一致する同一候補の両OS結果。本文や個人データを公開logへ載せません。
+- **未決**：本人実データを自由に取得する許可ではありません。試験account・対象データ・端末操作範囲を限定します。華恋未準備、実装残、端末時間待ちを別記します。
+
+<a id="task-rel-10"></a>
+##### REL-10 — 提出候補・申告・画像等の固定（11/22管理点）
+
+- **最初の操作**：REL-01〜09と三coreの結果から提出candidate、残制限、説明文/画像、Privacy・サポート/規約URL、版数/署名/権限説明を同一版へまとめます。資料のsourceは前回weekly§4〜5と各ownerです。
+- **検証・終了**：候補の実画面・実機能・購入条件が提出内容と一致し、未実装機能を宣伝せず、審査担当が通常経路へ入れる必要情報が用意されること。
+- **未決**：AI/IF/Premium等の初回公開範囲を無断削減しません。採否待ちを明示し、候補固定できない理由を10/31から持ち越し管理します。
+
+<a id="task-rel-11"></a>
+##### REL-11 — 同一アプリのConsole状態と実提出（11/27管理点）
+
+- **既存前提**：Mashの「2026年2月に条件クリア、4月に一度申請できた」を同一app/package・取得済みproduction accessの計画前提として継承。12人/14日資格取得を自動的に工程へ戻しません。初回公開/更新・現在のproduction access/公開状態は実確認が残ります。
+- **最初の操作**：現在のApple/Googleアプリ登録と候補を対応付け、審査用情報と公開制御を先に確認。Google Managed publishing等の利用可否を『申請できた』だけで確定しません。Apple公開日指定も審査承認とは別です。
+- **検証・終了**：候補をそれぞれへ提出した実status、対象build、残る審査指摘が分かること。提出済みと承認済み・公開済みを別記します。意図しない早期公開を防ぐ具体的方式が未確定なら、その判断を残します。
+- **未決**：実提出/公開設定は今回行っていません。旧版の一般公開、審査所要、両ストア同時刻公開を勝手に約束しません。
+
+<a id="task-rel-12"></a>
+##### REL-12 — 審査対応と公開可否（12/4・12/11・12/14・12/18）
+
+- 12/4：実審査・差戻し・補修状況で見通し更新。重大未完をこの日まで伏せません。
+- 12/11：承認/差戻し/残修復を確認。未承認を公開可能としません。
+- 12/14：品質・審査・公開制御の実条件で実施可否を判断します。
+- 12/18：両ストア正式公開の既存目標。審査提出日ではありません。11/27から21暦日は計画上の余地で所要保証ではありません。
+- 未達時は原因・残工程・次の一手・公開への影響を示します。自動延期・無断仕様削減・自動公開をこの記録で成立させません。
+
+#### 現物確認済みの検査/実行入口（今回は未実行）
+
+- `npm run test:rn-screens`：package.jsonに実在し、`node --test tests/rn-screen-contracts.test.js tests/iap-restore-purchases.test.js tests/theme-readability.test.js`。限定JS contract/restore検査で、native・store・全coreの検査ではありません。
+- `npm run android` / `npm run ios`：RN CLI run入口。release署名・ストア送信・実機商品合格を含むコマンドではありません。
+- iOS署名配布：既存 `.github/workflows/ios-build.yml`。Archive/export/uploadが一体。未承認の確認build代用にしません。
+- subscription3確認endpoint：現sourceに存在しますが、今回live未呼出し/未確認。認証設定・公開範囲・manual check不足を確認して使う対象です。
+- Android release build用の新CLI/CI手順、nativeリンクの修正差分は**提案/未確定**であり、既存自動化・実装完了として扱いません。
+
+
+<a id="detailed-work-handoff"></a>
+### 8.7 中間確認で残す結果と、再開のしかた
+
+§4.4の10/27・10/29・10/31は進捗を判断する管理点である。各作業の工数は未計測で、上記全項目が10/31に完成するという見積りではない。特にAndroid新版、M5公開切替、backend receipt、IF/Saved、最終署名候補と審査準備は、先行の成立範囲と公開への影響を見て後続枠へ配分する。
+
+| 管理点 | 必ず示す内容 | 未成立なら次に残すもの |
+|---|---|---|
+| 10/24〜25 | CM-01/T1の初回/訂正後の具体例、教師と受口の差、T2〜T5の必要変更、Piece配布候補/手順、C02→C01の原因と再現条件 | 調査テーマでなく、最初に止まっているfield・関数・変更案・必要な一判断 |
+| 10/26〜27 | 4Bの固定recipe/実行範囲/保存先、実行できた場合のraw・重み受領・非学習reload・16GB適否、実候補接続の到達点。Piece配布と通常保存の段階、共通source修復の結果 | 実行未開始/実行失敗/重み未受領/未接続を分ける。24GBが必要なら条件・時間・支出を明記し、モデル再選定へ戻さない |
+| 10/28〜29 | Emlisの実pending回答更新と同一再読、Piece同一保存結果とexport、Analysis latest/月次/比較の各成立範囲、共通3欠陥の失敗→回復と本人境界 | コード・配置・配布・端末導入・本人操作・内容品質のどこが不足か。準備不足を本人待ちにしない |
+| 10/30〜31 | 三中核の実本文と保存identity、未実施を含む検査/配布範囲、学習/診断/待機/保存の実費、公開必須残差と11/15・11/22・11/27への影響 | 各未完IDの次の一作業・担当・依存・必要判断。日付だけを付け直さず、仕様削減/延期の採否は未決なら未決のまま明示 |
+
+次の担当は、対象IDごとに既存owner/handoffへ次を残して中断する。
+
+- 変更したrepo/ref/commitとpath、何が不足していてどう直したか。
+- 入力条件と実出力、正常/失敗/取消/回復で確認した範囲、失敗原文の要約、実行していない検証。本人の本文・認証値・個別record識別子は公開記録へ転載しない。
+- source反映、限定検証、稼働配置、署名送信、端末導入、通常一往復、商品受入れのどこまで進んだか。テスト成功数を完成率へ加算しない。
+- GPUを使った場合は固定model/adapter/recipe、重み本体の受領とhash照合、Pod停止状態、実時間/単価/保存費を分けて記録する。
+- 残る最初の一作業と、正確な対象path。未確定commandを実行可能として残さず、必要な設計/費用/公開範囲の判断があれば具体差分を添える。
+
+今回の詳細化は既存議事録と入口の3文書のみ。実装・検査・稼働・費用・商品受入れの状態は進めていない。**ADMINISTRATIVE_ONLY、product_credit=0、STRUCTURE_MAP_DELTA_NONE、会議継続中。**

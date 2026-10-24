@@ -1,8 +1,8 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-24 JST（最新差分：次週の推奨順位を第8回§4へ記載。主枠は4B学習＋CMEE実接続、独立並行はPiece通常保存、共通3欠陥は必須枠、次いで通常Analysis一往復。広いモデル比較・Flex本配備・System Context全面再生成は後置。Mashが学習・接続対象をQwen3.5-4Bに確定。GPUは16GBを第一候補とし、必要なら24GBまで許容。モデルの広い比較を続けず4Bの育成・CMEE接続を具体化する。Runpod内のPodsとServerless Flexを区別し、華恋は学習・初期接続確認にPods、低頻度の利用者提供にFlexを推奨。提供方式への合意・切替、4B学習・16/24GB動作実証は未実施。品質未合格・P6未完、価格/試用/2万円総枠は未承認または未確定。GPU起動・有料推論・配置0）。全Cocolon作業の必読原本。
+更新日：2026-10-24 JST（最新差分：第8回§8へ次週作業を実path・順序・検証・終了条件まで詳細化。初手は教師の完成応答JSONとCMEE候補受口の一致、旧9B runner/40・32GiB gateの4B対応。Piece export factory未接続、Analysis latest/月次履歴の別経路も明記し、6501不足案内の本人確認済みを原記録から補正。次週の推奨順位を第8回§4へ記載。主枠は4B学習＋CMEE実接続、独立並行はPiece通常保存、共通3欠陥は必須枠、次いで通常Analysis一往復。広いモデル比較・Flex本配備・System Context全面再生成は後置。Mashが学習・接続対象をQwen3.5-4Bに確定。GPUは16GBを第一候補とし、必要なら24GBまで許容。モデルの広い比較を続けず4Bの育成・CMEE接続を具体化する。Runpod内のPodsとServerless Flexを区別し、華恋は学習・初期接続確認にPods、低頻度の利用者提供にFlexを推奨。提供方式への合意・切替、4B学習・16/24GB動作実証は未実施。品質未合格・P6未完、価格/試用/2万円総枠は未承認または未確定。GPU起動・有料推論・配置0）。全Cocolon作業の必読原本。
 
-> **最新報告会：[第8回・2026-10-24](weekly_reviews/Cocolon_Weekly_Review_20261024.md)。** 今週実績・前週目標の達否と10/24〜10/31の管理案を記録。会議進行中。4B確定・GPU16GB優先/24GB許容の決定を追記。次週の推奨順位は[§4](weekly_reviews/Cocolon_Weekly_Review_20261024.md#next-week-priorities)を参照。計画全体の採用・会議終了は未記録。モデル選定の決定と、以下の品質・配置・端末・費用の未完了を区別する。
+> **最新報告会：[第8回・2026-10-24](weekly_reviews/Cocolon_Weekly_Review_20261024.md)。** 今週実績・前週目標の達否と10/24〜10/31の管理案を記録。会議進行中。4B確定・GPU16GB優先/24GB許容の決定を追記。次週の推奨順位は[§4](weekly_reviews/Cocolon_Weekly_Review_20261024.md#next-week-priorities)、対象path・具体手順・失敗/回復検査・終了条件は[§8](weekly_reviews/Cocolon_Weekly_Review_20261024.md#detailed-work-breakdown)を参照。計画全体の採用・会議終了は未記録。モデル選定の決定と、以下の品質・配置・端末・費用の未完了を区別する。
 
 ## 1. この資料の役割と更新方法
 
@@ -76,10 +76,10 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 期間比較 | 隣接等長期間のルート・注記・不明範囲・不一致を比較し保存・表示。前期間なし／比較不能も区別 | 比較SQL適用済み。設定手順はMash報告で、稼働値の独立取得なし。本人の比較成功・正式受入れ未成立。改善・悪化・原因を自動判定しない |
 | もしもルート／IF | 詳細設計あり、runtime未実装。現在の観測ルート＋本人が選ぶ分岐点・意向・制約→条件・負荷・未知を伴う1〜3候補を並列提示 | SELF_ONLY。health／medical、および他人の意図・反応・関係の結末を対象とするIFは対象外。最適解の順位・成功確率を付けない。生成・保存・API・RN・実機・受入れが残る |
 | SavedRouteIntent | 本人がIF候補から明示保存した関心方向を残す設計あり。runtime未実装 | 観測事実、仮想候補、本人の選択を分離。選択を実行済み・達成・失敗・性格へ昇格しない |
-| 最新・履歴・詳細 | 保存成果物、文章と図、期間を同じidentityで再読。認証・tier・期限・source変更を再検査するV2コードあり | 専用table適用済み。6201実機OKは過去のMash報告。6401 TestFlight送信済みと、端末導入・正常空表示・本人生成成功を分ける。6401実機確認は残る |
+| 最新・履歴・詳細 | 保存成果物、文章と図、期間を同じidentityで再読。認証・tier・期限・source変更を再検査するV2コードあり | 専用table適用済み。6201実機OK・6401送信は過去記録。後続10/10にAPI5c8bd8eを配置し、6501を送信し、「入力情報が少ないため、まだ分析を表示できません。」は本人表示確認済み。端末build独立照合、本文生成・保存再読・比較は未確認。latest再読とmonthly履歴は別経路 |
 | Emlis補足との接続制限 | 原入力と適格補足を一つの記録機会に束縛。生成された問いや応答は本人sourceにしない | 現行期間source loaderは同一threadにANSWER2件以上で`analysis_multiple_answers_not_supported`。pure source adapterも補足2件以上を`analysis_supplement_cardinality`で拒否する。Premium複数回答全体の採用未対応。対象threadを除外したり原入力だけへ戻したりせず、その期間sourceの読取／生成を拒否する。「原入力＋2回答が期間Analysisへ接続済み」としない |
 
-詳細owner：[Analysis map](current_structure/03_analysis_current_structure.md)、[Analysis詳細設計](designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md) §7〜11・15〜16、schema §7・9.6。最後の配置記録はu128 API `1a42…`とnative6401。その後のコードと配置を分ける。
+詳細owner：[Analysis map](current_structure/03_analysis_current_structure.md)、[Analysis詳細設計](designs/cmee/v1/04_analysis_v1d_v1e_detailed_design.md) §7〜11・15〜16、schema §7・9.6。10/10の不足案内API `5c8bd8e5…`と6501送信、本人の不足文言表示確認はAPI運用記録§39/40にある。最後の共通API配置記録は10/23 Piece overlay `3577d7fd…`（5c8bd8e土台）で、今回Live再照会ではない。後続内容修正版の未配置と本文生成・保存再読・比較の未確認を分ける。詳細手順は[第8回§8.5](weekly_reviews/Cocolon_Weekly_Review_20261024.md#details-analysis)。
 
 ## 6. Piece — 本人の意味を他者へ伝える
 
@@ -134,13 +134,13 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 **10/23 Mash決定：Plus980円／Premium1,980円が価格の上限（これでも高い）、27Bは候補外。10/24は680円／1,480円を価格候補として検討する。980／1,980は9Bの損益分岐価格ではなく、独自LoRA版の本番原価は未測定。** 旧1,980/3,980円の推奨と27B再試験案を撤回。[小型AI再選定・全core原価](observation_learning/model_selection/2026-10-22-three-core/2026-10-23-small-model-reselection.md)では、Mashの残高利用希望により、Qwen3.5-9BのM1をMashがRunpod A40で実行し、4件の受領原本と全本文を照合済み。画面上のGPU単価は$0.59/h、起動前残高$5.15。受領原本のvLLM0.32.0／BF16／非thinking／context8192／温度0で、要求90.607秒・4805token。インストール・読込・待機を含むGPU総時間・総消費は未確認。Stop完了はMash報告を受領済みで、管理画面の独立確認はしていない。DeepInfra既製APIは比較資料へ残し、Qwen3.5-4Bは当時の別候補から、今回のMash決定で学習・接続対象へ確定した。10/23の旧比較では980/1,980円を基準とし、Free30/Plus100/Premium150セッション等の利用量でも、以前のDeepInfra既製APIを仮定した月原価は約5.57/37.07/147.28円で、Runpod自己hostの原価ではない。無料者・固定基盤・税相当留保・ストア費を含めて計算した。これらは利用量感度で、商品quota変更・採用・品質合格ではない。独自追加学習版の配備に公開API単価を流用せず、育成費・学習後のhost費用は別確認。旧費用資料は履歴として参照する。
 
-次週の推奨順位は[第8回§4](weekly_reviews/Cocolon_Weekly_Review_20261024.md#next-week-priorities)。4B学習とCMEE実接続を主枠、Piece通常保存を独立並行、finish/account/visibilityを限定必須枠、通常Analysis一往復を次順位とする。モデル再選定とFlex本配備を先行させない。具体的な実行権限・未検証は各ownerで確認する。
+次週の推奨順位は[第8回§4](weekly_reviews/Cocolon_Weekly_Review_20261024.md#next-week-priorities)。4B学習とCMEE実接続を主枠、Piece通常保存を独立並行、finish/account/visibilityを限定必須枠、通常Analysis一往復を次順位とする。モデル再選定とFlex本配備を先行させない。具体手順は[第8回§8](weekly_reviews/Cocolon_Weekly_Review_20261024.md#detailed-work-breakdown)。CM-01/T1で意味・本文・教師targetを一致させ、旧runnerの9B固定/40・32GiB gateを変更する。Emlisの通常serviceはsemantic profileとの併用制限、Piece B8とAnalysis通常保存にはprivate artifactとの型差があり、flagだけで接続済みにはならない。Piece exportにも既存factoryの最小source接続が必要。各作業の実行範囲・未検証は既存ownerで確認する。
 
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
 | AI選定・観測教材 | 680／1,480円の月額原価を、4B＋独自LoRA候補／Flex24GB・min0／max4・基準同時数1、旧利用感度の有料50／無料950・月78,980生成へ固定してCPU試算済み。出力25TPSを短文A40参照、入力1,000TPS・起動率10%／30秒等を未測定の仮定とすると、運用費95,094円／手取り計画27,262円、差額−67,833円で、この計算基準案は不採用を推奨。25TPSのまま起動・入力・待機ゼロでも運用費76,874円で、税込売上42,000円を超える。これは本番実測や680／1,480円一般の否定ではない。同GPU・同token仕事量・同仮定性能なら4B／9B費用は同額。価格維持には全GPU課金を平均4.46秒/生成以内へ収める実証が必要。4Bに確定し16GB優先・24GBまで許容。以後はモデルの広い比較を続けず、4B学習とCMEE接続の具体化へ進む。旧9Bの1／4／16周案と価格quota変更は保留。 [全仮定・再計算・損益分岐](observation_learning/model_selection/2026-10-24-production-economics/README.md)。無料者が常に有料者の19倍増える基準では変動費が売上を超え、人数増加だけでは黒字化しない。未測定の合計200出力TPS／8,000入力TPS／起動率1%・同時数8という別構成なら算術上は50有料で余力20%を満たすが残り約515円のみで、メモリ／品質／cold／batch未検証、採用根拠にしない。売上ゼロから始める場合は[少人数試用の検討](observation_learning/model_selection/2026-10-24-production-economics/zero_revenue_pilot.md)へ。華恋はPlus相当5人14日を候補とし、試用開始後の稼働費と品質・接続・配布の準備費を分離した。2万円の打切り配分は提案であり、開始総額・請求上限・試用可能状態は未成立。Supabase orgの現planはFree、共通11,000円は実請求ではない。直近の未解決は、4Bで三中核の品質・接続と実費を成立させること。華恋の推奨はRunpod内で学習/初期接続をPods、低頻度提供をFlexと使い分ける案で、提供方式はまだ採用/切替していない。広範囲の教材増量・baseline12再取得は先行しない。最初の4B学習・重み再load・実接続に必要な少数差分を既存教材/runnerから具体化する。P1〜P5限定offline／P6未完、正式Product Read・商品採用・runtime変更0を維持 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。u353〜355のコードと配置差を保持 |
-| Analysis | 最新内容修正版の配置差、6401本人生成・再表示・比較、複数ANSWER採用、一般理解、有料差、IF／Savedの未実装 |
+| Analysis | 最新内容修正版の配置差、通常本文生成・同一保存再読・monthly履歴/比較の本人確認、複数ANSWER採用、一般理解、有料差、IF／Savedの未実装。6501時点の不足案内表示は本人確認済みとして保持 |
 | Piece | API private構成はLive。正本privacy差は3084c99eで解消。本人保存に必要なRN sourceはbranch agent/piece-testflight-private-20261023@87151へ固定、既存iOS workflowによる署名Archive/TestFlight送信1回は個別判断前・未実行。本人保存→同owner履歴/詳細、実Photos/Share、Android/backend receipt、商品受入れは残る |
 | 全体・release | 自他所有／公開／削除、認証復帰、finish失敗の成功扱い・account切替後旧応答・公開visibility取得失敗時default、共有URL入口、通知配送等の通常実機経路と未受入れ品質 |
 
@@ -179,4 +179,5 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 
 10/23 P5内部準備の最新差分：Mashがbe37f40dの具体案へ承認後、[API666b285](https://github.com/MassyuRed/mashos-api/commit/666b28517ef04aba170ebffe3c86980fea4c11bd)の新Analysis admission／Engine／既存compiler・唯一realizer＋新test／fixtureの6fileへ実装。原18保持単位（16node＋従属scope1＋負荷注記1）／11文group／8source scope／route edge0／材料unknown1／選択4を保持する。同じsnapshot／graphから原文11文＋限定unknown表示とprivate図payloadを作り、意味／graph／完成の隔離file再読、実作者例外からの同snapshot再開、完成済み取得・再採用・compiler・作者禁止再読を確認。対象9file905成功／FAIL0／SKIP0、110.62秒、12058subtestsは加算しない、既存warning1。新private型6／例外2、旧logical registry不変。全実state／文章／図／source blob・途中失敗はtrialの新analysis_semantic_snapshot_results.json、actual仕様04／型05、最新weekly P／trial§13。原3構文family・Plus・補足0・比較なしだけで、一般日本語／商品文章／RN描画／実Auth／自動durabilityは未合格。API全6fileの全文／blob／変更集合／head読戻し済み。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、商品0／正式0/3／PRODUCT_NOT_CLEAR／candidate_ready=false／automatic_progression=false。実モデル／課金／実DB／Render／通常application／公開API／DTO／RN／merge／deploy変更0。
+
 
