@@ -1026,7 +1026,7 @@ P1の厳密な最上位`{candidate,evidence}`は維持し、`candidate`に**新�
 
 訂正後の例は、友人から手順を教わったこと／共同修理、新たに本人が説明した「捨てずにまた使える」喜びの理由を別に保持する。独力という説明と旧喜び理由だけを置換し、修理・再使用結果・喜びは残す。否定された旧理由を別の感情や人格へ変換しない。NOT_STATEDの旧gapは焦点自体の訂正により無効化し、未知の本人理由を勝手に解決したことにしない。
 
-`contract_examples.json`訂正後は、旧teacherの`text`を同一bytesで将来のnative field`answer_text_private`へ投影した**説明例**である。旧文字列のliteralな`\\n\\n`を実改行へ正規化していない。`$actual_prior_snapshot_ref`は実採用snapshotから将来注入する記号で、実在refではない。この例をそのまま学習・送信・native回答へ投入しない。
+`contract_examples.json`訂正後は、旧teacherの`text`を同一bytesで将来のnative field`answer_text_private`へ投影した**説明例**である。実改行2つを含む92文字の原回答を正規化せず保持している。`$actual_prior_snapshot_ref`は実採用snapshotから将来注入する記号で、実在refではない。この例をそのまま学習・送信・native回答へ投入しない。
 
 ### 4. 問い・本文の採用を、形式成功から分離する
 
@@ -1086,3 +1086,25 @@ Rule18 §11.3は「商品目的、商品体験、method family、contract、acce
 採用後の最初の一作業は新private profileのCPU実装と同sourceの初回→実問い→訂正→同一保存再読、および新target／4B runnerの契約一致。合成結果を実4B成功・本人実機・商品受入れへ数えない。所要はこの実装の1 bounded単位、追加金銭費用0。正確な作業時間は未測定で期限保証はしない。別一般parser・新外部service・dependency・通常policy・DB migration・公開contractの変更が不可欠と判明したら拡大せず具体差へ戻る。
 
 今回production/test/旧教材/重み変更0、新GPU/推論/学習/DB/Render/merge/deploy0。正式Product Read0/3／PRODUCT_NOT_CLEAR／candidate_ready=false／automatic_progression=false、全体管理54.50％は据置。STRUCTURE_MAP_DELTA_NONE（実装構造は不変、将来責務変更案と所在のみ）。今回の診断・案作成を商品品質改善に数えない。
+
+
+<a id="cmee-4b-model-proposal-implemented"></a>
+## 2026-10-24 — CM-01/T1承認後のactual：offline意味・自然本文・実問い・保存再開
+
+Mashが上記具体案に「進めて」と承認し、[API02c0b943](https://github.com/MassyuRed/mashos-api/commit/02c0b943c96b67cb32354e1d3352a00dcb768e64)の14fileへ実装した。上の未承認・未実装は案作成時点の履歴。新規・明示offline Freeのみで、旧v1/v2・通常applicationは維持する。実4Bモデルは呼んでおらず、合成候補で実Engine/serviceの接続を検証した。
+
+actual profileは`emlis_model_proposal.v1`、候補`semantic_and_surface_proposal.v1`、snapshot v3／checkpoint v4、private artifact `cocolon.cmee.emlis_model_thread_artifact.v1`。意味ownerはsource全文から修理／再使用／独力の喜び対象を採用し、実問いに対する共同修理・喜び理由の訂正だけを更新する。表面案・モデル自由説明・provider metadataを意味IDに混ぜず、原rawとproposalは別に保持する。NOT_STATEDの採用説明は対象／未記載性の検査後、CMEE側のcoverage説明へcanonical化し、モデルの原説明はreceiptへ残す。
+
+現最終本文ownerの新private分岐と、既存author-free ownerの独立句読取を接続した。生成templateへの置換・旧finite作者へのfallback・ref一致だけの意味合格はない。対応範囲内のモデル案は文面を保持して最終化し、未知の自由な日本語は本文不採用に閉じる。初回では「ぐらついていた椅子を直し、また座れるようになったのですね。」と「全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。」を同意味へ束縛。訂正後は友人の手順／共同修理、捨てずに再使用できる喜びへ更新し、独力理由を復活させない。実本文・全native bindings・問いは[CPU結果](../../../observation_learning/training/2026-10-24-emlis-4b-training/cpu_connection_results.json)に保存。合成の編集候補であって学習済モデルの文章や商品合格ではない。
+
+実質問はsource由来のPERSONAL_JOY_SIGNIFICANCEから現問いownerが発行する。モデルquestion文・IDを権限として採用しない。実ASK→本人訂正→REFINED、意味保存後CancelledError→同意味／同proposalで明示再開、完成GET/start/同key再送の非生成を隔離SQLで確認。source取得後STARTEDだけの中断を自動再送へ変えず、通常readerはcan_write=falseを保持した。
+
+新`model_candidate_source.py`は固定4B/revision、JSON-only messages、検証済みpriorの意味投影、async generator注入、実raw/finish/usage/baseとadapter identityをP1へ渡す薄境界。原材料は削らず、既に含まれる原文と重複するnative proofだけはモデルへ再送しない。実endpoint・secret・常設client・cache・DB・自動retryを持たず、通常APIへは未登録。P1 optional adapter_revisionは値がない旧receiptではkey自体を省いて全bytesを保つ。
+
+有限なsource資格は名詞token＋許可状態修飾／修理・再使用の構文family。品目／人名lookupや新しい一般parserは作らない。追加動詞節を名詞slotへ飲み込む実欠陥を最終reviewで発見し、sourceを削らずUNSUPPORTEDにするよう修復した。未知ひらがな複合名、一般関係・感情・自由文、Plus/Premium・他coreは今回未対応である。
+
+最終backend対象219 PASS/FAIL0/SKIP0（105.09秒、既存警告1、34subtestsは加算しない）、別のcurrent identity1検査PASS。旧snapshot全outcomeとP1/Q2/Q3を含む限定集合で、全suite/CI/本人実機成功ではない。current identity初回の旧runtime期待を現sourceから同期し、language identity・歴史的proofは不変。source scope escape、SQL readerのcan_write期待、participant回帰fixtureの途中失敗と修復はAPI既存handoffと最新weeklyへ記録した。
+
+4Bpackは旧9教師を変更せず、sourceと実priorに一致するchair2教師だけを用意し、未対応7件を理由付き保持する。旧EFREE6は学習外・既読のstandalone proxyで、このprofileの意味成功へ加算しない。実tokenizer/indexをCPU確認し、最大7856 tokens、context8192/max_new2048、N=2×1epochの診断コード・保存→先退避→非学習reload→after・固定rawのCMEE consumerを整備した。GPU条件が未確定の現状態ではrunを拒否する。実モデルの初回出力から回答入力を動的に作るGPU一往復はまだ行っていない。
+
+全pathは01A、actual private型は05、Emlis本文責務は02、実装結果と再開は06・第8回weeklyの実装節、新pack READMEへ同期。STRUCTURE_MAP_DELTA_PRESENTはprivate offline接続だけ。新GPU／有料推論／重み取得／学習／実DB／Render／通常API／DTO／RN／merge／deploy0。正式Product Read0/3／PRODUCT_NOT_CLEAR／candidate_ready=false／automatic_progression=false、全体54.50％は据置。次はGPUの単価・時間／支出・保存先を固定してから、実4B＋保存adapterを同じ接続へ通す。

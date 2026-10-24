@@ -7382,3 +7382,8 @@ STRUCTURE_MAP_DELTA_PRESENT。新規明示offline Piece request→P1元7field／
 STRUCTURE_MAP_DELTA_PRESENT。新規・明示offline Analysis request＋private semantic_input→既存P1の元3記録／receipt再束縛→新semantic_admission.pyのimmutable snapshot→既存Analysis compilerのprivate graph→既存唯一realizerの文章・図payload→同一private serialize/reload。原18保持単位＝16node＋従属scope1＋負荷注記1、原文11group、8source scope／route edge0、材料unknown1、論理選択4を保持する。省略主体・意向・否定・比較留保・程度を補完しない。
 
 API 666b28517ef04aba170ebffe3c86980fea4c11bdの6file、実型6／例外2。旧通常Analysis／watashi.map.v2／DB／RN／IF／Saved・Emlis/Pieceの経路と公開契約は不変。文章は原文11文＋限定unknown表示、図は新private構造化payloadで、一般文章品質・RN描画・商品受入れではない。全fileは01A、actual型05、実検証905成功と限界はweekly P／trial§13。モデル選定・接続前の内部到達として記録する。
+
+
+## 2026-10-24 — 4B意味・自然本文候補のprivate接続構造
+
+STRUCTURE_MAP_DELTA_PRESENT。承認済み新offline Free profileを既存CMEE Engine→意味admission→現最終作者/独立reader→実問い/更新→既存serviceの段階保存へ接続。新model_candidate_sourceはasync generator注入とraw/metadata受領だけを所有し、別Engine/renderer/endpoint/cacheを作らない。actual仕様はshared01#cmee-4b-model-proposal-implemented、全pathは01A、型05、現在地00/current maps。API02c0b943の限定backend220 PASS、4Bpackは2診断教師/6学習外proxy・実tokenizer/indexまで。実モデル/重み/学習/16・24GB適合、通常API/DB/RN/Render・商品受入れは未成立。既存三coreと他owner境界は維持。

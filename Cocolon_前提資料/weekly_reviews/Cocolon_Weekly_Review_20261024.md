@@ -1323,3 +1323,21 @@ Mashの新セッションの実装依頼により、§8のCM-01/T1を同じ一�
 - 学習量を4周/16周へ根拠なく増やさない。新targetに対応できたN行×1epochを勾配・教師適合診断とする一設定案。仮N=9なら9update、chair2＋学習外EFREE6をbefore/after各8生成、教師NLL各9。N・tokens・context/出力長・GPU単価・総時間／支出上限は未確定で、GPU開始前に実行案へ固定する。16GB未実証、24GBの自動借り直しなし。
 
 今回はCocolon資料のみ。API production/test、旧教師／eval、重みの変更0。新GPU／有料推論／学習／DB／Render／merge／deploy0。STRUCTURE_MAP_DELTA_NONE（runtime構造不変、将来案・資料所在のみ）。正式受入れ0/3・商品未合格・全体54.50％据置。今回の診断・案作成を品質改善済みの成果へ数えない。
+
+
+<a id="20261024-4b-cmee-cpu-implemented"></a>
+## 13. 報告会後 — 承認済み4B候補のCPU接続・学習コード実装
+
+Mashが§12の具体責務案に「進めて」と承認。報告会は終了済みのまま、新private offline Free profileをAPI02c0b943へ反映した。[shared01 actual](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-4b-model-proposal-implemented)、全file01A、型05、[4Bpack](../observation_learning/training/2026-10-24-emlis-4b-training/README.md)を参照。
+
+- 実装：モデル意味候補と自然本文案を分け、CMEEがsource・意味採否・独立本文読取・実問い・訂正・保存を持つ。合成候補で実ASK→本人訂正→REFINED、意味保存後CancelledError→同意味/同proposal再開、完成GET/start/同key再送の非生成を隔離SQL確認。既存read-only readerはcan_write=false。
+- new async sourceは固定4B/baseとadapter identity・raw/finish/usageを既存P1へ渡す。実endpointや本番設定は作っていない。source全体は保持し、priorの重複native proofをモデルへ再送しない。
+- 最終backend：219 PASS/FAIL0/SKIP0（105.09秒、旧146＋新73、34subtestsは加算しない）と、別current identity1PASS。pack8は別集合。全suite/CI/実機/商品品質成功ではない。
+- 失敗・修復：名詞slotが追加の破壊行動を飲み込む実欠陥をreviewで発見し、許可状態修飾＋名詞tokenにsource資格を限定。品目/人名lookupなし、未知語や複数行動は削らずUNSUPPORTED。SQL readerのcan_write期待1件、participant回帰の旧quote fixture1件、current runtime identityの旧期待1件も修正。歴史的proof・旧snapshot fixtureは不変。学習後に旧Parameter参照が残るコードも修正したが、GPUメモリ改善の実測はしていない。
+- 新2教師：chair初回/訂正後を実source・発行実問い・実priorに一致させ、同runtime messagesへ投影。合成編集の診断targetで品質goldではない。旧9教師/旧eval/9B重みは不変、旧7件は未対応理由を保持。EFREE6は学習外・既読のstandalone proxyで、今回の意味成功へ数えない。
+- 実4B tokenizer/index：初回2986+1094=4080、訂正後5979+1877=7856 tokens。prefix/final assistant loss/EOS/no truncationと16moduleをCPU確認。context8192/max_new2048、最大prompt+上限=8027。旧2048 contextでは不足する事実を確認した。最初のCPU prepareはhostのsocksio/Jinja2不足で失敗し、隔離runtimeだけ補って成功。重み/PyTorch/CUDAは読み込んでいない。
+- 学習コード：N=2×1epoch=2update、before/after各8生成・教師NLL各2。固定revision、JSON-only、保存adapter先退避→非学習reload→同入力after、raw→CMEE consumerまで整備。consumerの2caseは同target rawの合成検証で、実モデル初回から回答を動的に組む一往復ではない。
+
+今回の到達はCPUのprivate接続と学習コード。GPU起動・重み本体取得・有料推論・LoRA更新・16/24GB適合・実adapter reloadは未実施。単価/期限/支出枠/mount/Pod外受領先が未確定のplanではrunを拒否する。次はそれらを固定した一回の16GB優先診断案へ進む。24GB自動再借用・epoch追加・通常有効化・DB/Render/配布へは進めていない。
+
+STRUCTURE_MAP_DELTA_PRESENT（private offline owner/profileのみ）。正式Product Read0/3・PRODUCT_NOT_CLEAR・candidate_ready=false・automatic_progression=false、全体54.50％据置。一般source/自由な日本語、Plus/Premium、Piece/Analysis、通常API/RNと本人端末・公開は残件として保持する。

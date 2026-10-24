@@ -6,9 +6,11 @@
 
 Cocolon／EmlisAIが、相手自身の価値基準を学び、その人の思考経路を辿って理解を更新する技術を育てるための保存先です。Mashの口調や結論だけを模倣することを目的にしません。
 
-## 現在地（2026-10-24・4B確定、CM-01/T1の具体責務案を確認する段階）
+## 現在地（2026-10-24・承認済み4B候補のCPU接続・学習コードを実装）
 
-4B確定・GPU16GB優先／24GB許容を保持する。[CM-01/T1具体案](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-4b-cm01-t1-proposal)は、4Bに意味候補と自然本文案を作らせ、既存CMEEが採否・最終本文・実問い・更新・保存を担う一案。旧9教師／4B6保存rawの形式不一致と単純wrapの意味採用拒否をCPU診断済み。初回／訂正後の[契約例JSON](training/2026-10-24-emlis-4b-training/contract_examples.json)は説明用・非学習で、現folderのrunner／実行commandは未作成。新意味／作者契約のRule18 §11.3確認後にCPU実装・教師／4B runner整備へ進む。GPU費用／時間／保存先を具体化した有料実行は別判断。新学習・モデル呼出し・通常有効化0。
+4B確定・GPU16GB優先／24GB許容を保持する。Mashが具体案に「進めて」と承認し、[CM-01/T1 actual](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-4b-model-proposal-implemented)をAPI02c0b943へ実装。source-bound意味＋自然本文案の独立読取、実問い→本人訂正、意味先行保存・同proposal再開を新規offline Freeで確認した。thin async sourceと保存raw consumerまでで、実4Bは未呼出し。backend限定220検査と[新4Bpack](training/2026-10-24-emlis-4b-training/README.md)の8検査が成功。新2教師は合成編集の診断targetで品質goldではなく、旧7件は未対応。旧EFREE6は学習外・既読のstandalone proxyで意味成功へ加算しない。
+
+固定4Bの実tokenizer/indexをCPU確認済み。初回4080・訂正後7856 tokens、最大prompt5979+max_new2048=8027、context8192で原文/labelの切捨てなし。重み・CUDA・LoRA更新・16/24GB適合・非学習reloadの実GPU成功・実モデル品質・通常有効化は未実施。GPU単価・時間／支出枠・mount・Pod外受領先と停止を固定してから一回の診断実行を判断する。旧9教師／eval／受領9B重み・第7回撤回は維持する。説明用contract_examples.jsonは当時の非学習例として残し、現在の正式な限定診断targetは新packのsft_examples.jsonlに分ける。
 
 ### 費用検討の保持
 

@@ -20459,3 +20459,14 @@ be37f40dの具体案をMash承認後、API 666b28517ef04aba170ebffe3c86980fea4c1
 対象9file905 passed／FAIL0／SKIP0、110.62秒、既存warning1、12058subtestsは加算しない。新112＋旧793。原文の必要意味／引用が正しい意味変異／再hash／strict型／graph・片側本文・図改変／保存段階／実作者例外／同一file再開／完成時の取得・採用・compiler・作者禁止／旧Analysis5file／P1／P4／Emlis snapshotを確認。途中runとの合算0。旧期待・旧fixture変更0、追加CI0。
 
 実文章は原文11文と限定unknown表示、図は同一graphのprivate payload。商品文章・RN描画・実Auth・本人DB・自動durabilityの合格ではない。通常有効化／複数補足／比較／IF／Saved／モデル接続は別残件で、自動開始しない。限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT、商品0／正式0/3／candidate_ready=false／automatic_progression=false。
+
+
+## 2026-10-24 — 4B意味＋自然本文候補のCPU実装と次の実行境界
+
+Mash承認のCM-01/T1をAPI02c0b943へ実装。既存Engine dispatchをそのまま使用し、engine.py/answer_update.pyの変更は不要だった。新private意味／本文／問い／service保存を明示offline Freeだけへ追加、通常policy併用は禁止のまま。thin async sourceは実generator注入点までで、endpointや実4Bはまだ接続していない。
+
+最終7file対象219 PASS/FAIL0/SKIP0（旧146＋新73、105.09秒、34subtestsを加算しない）。current identityは別1PASSで、backend対象合計220。学習pack stdlib8は別集合。初回reader can_write=trueのtest期待、participant回帰の旧quote採取、current runtime hashの旧期待を修正。実欠陥の名詞slotへの追加行動混入はsource資格を狭め、破壊行動を省略した成功を拒否した。歴史的proof/旧snapshot fixtureは不変、全suite/CI/実機の成功へ換算しない。
+
+4Bpackの実native2教師、旧学習外EFREE6 proxy、実tokenizer/indexのCPU確認、context8192/max_new2048、1epoch2updateの診断コード、先退避・非学習reload・raw→CMEE consumerまで整備。教師も実本文も合成編集候補であり、学習済モデルの応答ではない。最大prompt5979+出力上限2048=8027、最大教師7856。入力・labelの切捨てなし、実VRAM/gradient/reloadは未実証。
+
+次は単価・上限時間/支出・実mount・Pod外退避先・停止担当を具体化した一回の16GB優先診断。未確定のplanではrun前に拒否、24GB自動再借用/epoch追加なし。新有料実行・通常有効化・実DB/Render/配布・正式Product Readは未承認/未実施として別に残す。全実出力はnew4B packのCPU結果、全pathは01A、詳細仕様はshared01/02/05。PRODUCT_NOT_CLEAR/正式0/3/全体54.50％を維持。

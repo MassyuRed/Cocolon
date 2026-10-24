@@ -1,0 +1,125 @@
+{
+  "status": "CPU_TOKENIZED_GPU_NOT_TESTED",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "semantic_profile": "emlis_model_proposal.v1",
+  "runner_sha256": "bf13e48dde6f7a666c78c6807db387ce6bb821242422f812f639840a42ecaaa6",
+  "dataset_manifest_sha256": "c3442f296785f43ae394aa5fece46f2ddcda8c2a633cd54b9addcfe59bf49160",
+  "execution_plan_sha256": "6d4b2201624bc62630ea769cfc1ca5bedf4c7da6fa98ac2cd70cd089aca8e109",
+  "data_sha256": {
+    "sft_examples.jsonl": "13f396945e6052652bcf20975b404563c2f12c78fdab518409723d3fe2ce03d8",
+    "train_messages.jsonl": "4b4a6b9faf72768ac3b7bead37530af761ac844448c8e3ff1543a3e7bdae15ee",
+    "eval_inputs.jsonl": "f0d63608291ce157db70f19575511295a5a986f53a02f7db7d8c397f7ef60d3f",
+    "eval_review.jsonl": "64fb1a6350dc24359b60316d6eb380a715582581b03f49df70a9a230354b0f80"
+  },
+  "source_commit": null,
+  "dependencies": {
+    "transformers": "5.19.0",
+    "peft": "0.21.2",
+    "accelerate": "1.15.0",
+    "safetensors": "0.8.0"
+  },
+  "weight_index_sha256": "cf3f798ee02ba45f9622aa8892a47369ab667d0afbf154ee7c2212de42e6302d",
+  "weight_bytes": 9319737856,
+  "target_modules": [
+    "model.language_model.layers.11.self_attn.q_proj",
+    "model.language_model.layers.11.self_attn.v_proj",
+    "model.language_model.layers.15.self_attn.q_proj",
+    "model.language_model.layers.15.self_attn.v_proj",
+    "model.language_model.layers.19.self_attn.q_proj",
+    "model.language_model.layers.19.self_attn.v_proj",
+    "model.language_model.layers.23.self_attn.q_proj",
+    "model.language_model.layers.23.self_attn.v_proj",
+    "model.language_model.layers.27.self_attn.q_proj",
+    "model.language_model.layers.27.self_attn.v_proj",
+    "model.language_model.layers.3.self_attn.q_proj",
+    "model.language_model.layers.3.self_attn.v_proj",
+    "model.language_model.layers.31.self_attn.q_proj",
+    "model.language_model.layers.31.self_attn.v_proj",
+    "model.language_model.layers.7.self_attn.q_proj",
+    "model.language_model.layers.7.self_attn.v_proj"
+  ],
+  "training_rows": 2,
+  "optimizer_steps": 2,
+  "training_tokens": [
+    {
+      "id": "FT-CHAIR-INITIAL",
+      "prompt_tokens": 2986,
+      "completion_tokens": 1094,
+      "total_tokens": 4080
+    },
+    {
+      "id": "FT-CHAIR-AFTER-CORRECTION",
+      "prompt_tokens": 5979,
+      "completion_tokens": 1877,
+      "total_tokens": 7856
+    }
+  ],
+  "generation_inputs": [
+    {
+      "case_id": "FIT-FT-CHAIR-INITIAL",
+      "input_tokens": 2986
+    },
+    {
+      "case_id": "FIT-FT-CHAIR-AFTER-CORRECTION",
+      "input_tokens": 5979
+    },
+    {
+      "case_id": "EFREE-E01",
+      "input_tokens": 1009
+    },
+    {
+      "case_id": "EFREE-E02",
+      "input_tokens": 1020
+    },
+    {
+      "case_id": "EFREE-E03",
+      "input_tokens": 1015
+    },
+    {
+      "case_id": "EFREE-E04",
+      "input_tokens": 1119
+    },
+    {
+      "case_id": "EFREE-E05",
+      "input_tokens": 1023
+    },
+    {
+      "case_id": "EFREE-E06",
+      "input_tokens": 1000
+    }
+  ],
+  "generations_per_stage": 8,
+  "plan": {
+    "schema": "cocolon.emlis_4b_execution_plan.v1",
+    "status": "CPU_IMPLEMENTATION_ONLY_GPU_NOT_AUTHORIZED",
+    "model": "Qwen/Qwen3.5-4B",
+    "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+    "semantic_profile": "emlis_model_proposal.v1",
+    "epochs": 1,
+    "batch_size": 1,
+    "gradient_accumulation": 1,
+    "context_tokens": 8192,
+    "max_new_tokens": 2048,
+    "max_seconds": null,
+    "gpu_hourly_usd": null,
+    "max_total_usd": null,
+    "minimum_free_gib": null,
+    "gpu_preference_gb": [
+      16,
+      24
+    ],
+    "gpu_run_authorized": false,
+    "additional_diagnostic_authorized": false,
+    "pod_billing_scope_confirmed": false,
+    "storage_mount_verified": false,
+    "storage_mount_description": null,
+    "pod_external_receipt_destination": null,
+    "automatic_pod_stop": false,
+    "limits": "新targetのtoken実測・実GPU空き・単価・Pod総時間/支出枠・保存mountを具体化後にGPU実行を判断する。process期限は請求上限ではない。",
+    "token_limit_basis": "固定4B tokenizer実測：初回4080=2986+1094、訂正後7856=5979+1877 tokens。最大prompt5979+max_new2048=8027<=8192。入力/target切捨てなし。VRAM適合・学習効果は未測定。"
+  },
+  "model_weights_loaded": false,
+  "gpu_used": false,
+  "memory_limit": "Checkpoint bytes are not peak GPU memory; activations/optimizer/cache/runtime require an actual GPU."
+}

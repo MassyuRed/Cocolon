@@ -1864,3 +1864,8 @@ snapshot schemaは`cocolon.cmee.emlis_semantic_snapshot.v2`、checkpointは`coco
 全変更fileの正本は01A末尾、型は設計05、実行は既存trial JSON.targeted_unknown_action_v2、進行はlatest weekly L。旧節の作者/共有型変更0は過去単位の履歴。
 
 原E02の有限文法と既受理event/feelingの併存に閉じる。一般unknown/ACTION、新要素自身の変更・解消・依存削除はHOLD/UNSUPPORTED。旧Q2 cap4では混在更新の5 contributionを提供できず意味保存後BODY_UNAVAILABLEとなる制限を残し、capを緩めない。現在のQ3実serviceでの隔離SQL/RPC保存・中断再開成功と区別する。実モデル／有料推論／重み／学習／本人DB／Render／通常application有効化／公開API・DTO・RN変更／merge／deployは0。限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT、product_credit=0／PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=false。
+
+
+## 2026-10-24 — 承認済み4B候補のprivate offline接続
+
+[shared01 actual](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-4b-model-proposal-implemented)／schema05／全file01Aへ同期。API02c0b943の新profileがsource-bound意味、自然本文案の独立読取、実問い→本人訂正、意味先行保存・同proposal再開・完成非生成を所有する。新thin sourceは固定4B/adapter identityとraw/finish/usageをP1へ渡す注入境界だけで、実endpoint/モデル呼出しはない。旧v1/v2・通常application/DTO/DB/RNは維持する。STRUCTURE_MAP_DELTA_PRESENT（private offline owner）。対象backend220 PASSとpack8は限定検証で、商品受入れ0/3・実GPU/重み/学習/通常有効化未実施。chairの構文family以外と一般自由文、他coreの実4Bは未対応。新学習packの実tokenizer/16moduleはCPU確認済み、16/24GB適合は未実証。

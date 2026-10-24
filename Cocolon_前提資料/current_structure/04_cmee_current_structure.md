@@ -1817,3 +1817,8 @@ STRUCTURE_MAP_DELTA_PRESENT。通常API／DB／RN／公開schema／モデル接�
 ## 2026-10-24 — 4B接続のCM-01/T1具体案（未実装）
 
 [共有設計01](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-4b-cm01-t1-proposal)へ、4Bの意味候補＋自然本文案を既存CMEEが採否・最終化する新private責務案を記録。[schema05](../designs/cmee/v1/05_json_schema_and_versioning.md#cmee-4b-proposal-shape)とEmlis設計02へ同期。旧9教師／保存4B6rawの形式不一致、単純wrap後の意味採用拒否をCPU診断済み。説明例2件は非学習・未採用。新profile／作者入力／問い焦点はRule18 §11.3確認対象、現Engine・旧v1/v2・唯一作者・serviceの実装変更0。STRUCTURE_MAP_DELTA_NONE（runtime不変、将来責務案と資料所在だけ）。GPU／学習／新推論／DB／Render／通常有効化0。正式0/3・PRODUCT_NOT_CLEARを維持。
+
+
+## 2026-10-24 — 承認済み4B候補のprivate offline接続
+
+[shared01 actual](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-4b-model-proposal-implemented)／schema05／全file01Aへ同期。API02c0b943の新profileがsource-bound意味、自然本文案の独立読取、実問い→本人訂正、意味先行保存・同proposal再開・完成非生成を所有する。新thin sourceは固定4B/adapter identityとraw/finish/usageをP1へ渡す注入境界だけで、実endpoint/モデル呼出しはない。旧v1/v2・通常application/DTO/DB/RNは維持する。STRUCTURE_MAP_DELTA_PRESENT（private offline owner）。対象backend220 PASSとpack8は限定検証で、商品受入れ0/3・実GPU/重み/学習/通常有効化未実施。chairの構文family以外と一般自由文、他coreの実4Bは未対応。新学習packの実tokenizer/16moduleはCPU確認済み、16/24GB適合は未実証。

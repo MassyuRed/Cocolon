@@ -3203,3 +3203,17 @@ SourceSelection／SentenceGroup／ScopeRelation／Unknown／Burden／Realization
 `$actual_prior_snapshot_ref`は説明例のsymbolic refであってhashやadopted refではない。新教師作成時にはmodelに返させるrefとruntimeが注入するbindingを区別し、記号をそのまま学習・本物のpriorへ流用しない。現JSON例の全quote座標一致とclaim/relation参照整合を確認したことは、このschemaの実装成功や意味採用を意味しない。
 
 nativeのcase/参加者・時点・否定・関係・更新のsource照合、新profileの独立本文読取が成立しなければ新candidateは未対応／不採用のまま。closed-field検査・型・引用・bindingだけを通して自由本文を採用する実装は本案に含めない。新汎用parserや別モデルが必要ならscopeを再判断する。新public DTO／DB schema／RNへの変更、通常application有効化、モデル実行は今回0。
+
+
+<a id="cmee-4b-model-actual-types"></a>
+## 2026-10-24 — 承認済み新private profileのactual型
+
+API02c0b943。profile=`emlis_model_proposal.v1`、candidate=`cocolon.cmee.semantic_and_surface_proposal.v1`、snapshot=`cocolon.cmee.emlis_semantic_snapshot.v3`、checkpoint=`cocolon.cmee.emlis_answer_meaning.v4`、artifact=`cocolon.cmee.emlis_model_thread_artifact.v1`。旧candidate/snapshot/checkpoint/artifactと旧logical registryは変更しない。
+
+新private dataclassはModelCheckpoint、ModelPreparedMeaning、EmlisModelThreadBodyArtifactV1、ModelCallLimits、ModelResponse。ModelCheckpointは旧checkpoint subclass、artifactも旧body artifact subclassで、既存field/serializationを変更せずupdate_noteとprivate schemaを追加する。ModelPreparedMeaningはthread/checkpoint/semantic_snapshot/semantic_material_json/meaning_json/surface_proposal_json/question_proposal_json/native_bindings_json。thin sourceのlimits/responseは実token上限・deadlineとraw/finish/provider/model/revision/adapter_revision/usageを持つ。
+
+snapshotのclosed keysはschema_version/semantic_profile/admission_version/adapter_version/request_ref/source_prefix_ref/source_bindings/packet/meaning_packet/native_bindings/prior_ref/prior_snapshot/receipt/answer_count/question_control/snapshot_ref/proposal_ref。版はadmission/adapter各1。意味IDはsource・採用meaning・native対応・prior・controlへ束縛し、surface/question文・元モデル説明・実行metadataから分離。proposal_refは元packet全体。再開は現sourceへreceipt/native/全payloadを再検証し、surfaceだけを旧意味へ付け替えない。
+
+model claimのpredicate.arguments空配列は「引数なし」の意味ではない。actual native_bindingsでsourceの原格・参加者・原TE・否定・全選択とsource slicesをCMEE側が独立導出する。モデルunknown説明は型・対象・未記載性を照合後、意味側をcanonical coverage説明にし、原文はpacket/receiptに保持する。P1 adapter_revisionは任意のprivate metadataで、None時は旧key集合・bytesを維持する。
+
+new public DTO／DB／RN schema・通常applicationへの切替は0。一般自由文の意味完全性は保証せず、source familyと独立readerの実装範囲外はHOLD/UNSUPPORTED/本文未生成。詳しいactualと実結果は[共有01](01_shared_kernel_and_runtime_contracts.md#cmee-4b-model-proposal-implemented)。

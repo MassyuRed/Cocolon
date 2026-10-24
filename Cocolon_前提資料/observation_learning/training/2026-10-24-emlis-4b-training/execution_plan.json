@@ -1,0 +1,29 @@
+{
+  "schema": "cocolon.emlis_4b_execution_plan.v1",
+  "status": "CPU_IMPLEMENTATION_ONLY_GPU_NOT_AUTHORIZED",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "semantic_profile": "emlis_model_proposal.v1",
+  "epochs": 1,
+  "batch_size": 1,
+  "gradient_accumulation": 1,
+  "context_tokens": 8192,
+  "max_new_tokens": 2048,
+  "max_seconds": null,
+  "gpu_hourly_usd": null,
+  "max_total_usd": null,
+  "minimum_free_gib": null,
+  "gpu_preference_gb": [
+    16,
+    24
+  ],
+  "gpu_run_authorized": false,
+  "additional_diagnostic_authorized": false,
+  "pod_billing_scope_confirmed": false,
+  "storage_mount_verified": false,
+  "storage_mount_description": null,
+  "pod_external_receipt_destination": null,
+  "automatic_pod_stop": false,
+  "limits": "新targetのtoken実測・実GPU空き・単価・Pod総時間/支出枠・保存mountを具体化後にGPU実行を判断する。process期限は請求上限ではない。",
+  "token_limit_basis": "固定4B tokenizer実測：初回4080=2986+1094、訂正後7856=5979+1877 tokens。最大prompt5979+max_new2048=8027<=8192。入力/target切捨てなし。VRAM適合・学習効果は未測定。"
+}

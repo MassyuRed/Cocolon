@@ -4685,3 +4685,42 @@ training側README／experiment・全体00・教材入口・最新weekly Zを同�
 | `Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-4b-training/contract_examples.json`（新） | 未承認・未実装・非学習のchair初回／訂正後契約例。元teacher/source参照、根拠scalar、旧9教師＋保存4B6rawの形式診断、単純wrapの実意味拒否。実model出力・adopted snapshot・native pendingではない |
 
 新folderの現存fileはこのJSONのみで、4B runner／bootstrap／診断／export／学習commandは未作成。共有設計01／Emlis02／schema05の具体責務案、全機能00／CMEE map04／観測入口／最新weekly§12へ差分同期。全体設計01のruntime責務差分は0で、再更新しない。API／production/test／旧教材・重みの変更なし。STRUCTURE_MAP_DELTA_NONE（資料所在と将来案のみ）。
+
+
+## 2026-10-24 — 承認済み4B候補のactual全変更file地図
+
+API commit02c0b943のexact14file。prefix A/=`mashos-api/ai/services/ai_inference/`、T/=`mashos-api/ai/tests/`。通常API/DTO/DB/RN・旧logical registry・旧v1/v2 fixtureは不変。STRUCTURE_MAP_DELTA_PRESENTはprivate offline profileとmodel注入境界のみ。
+
+| exact path | actual責務 |
+|---|---|
+| A/cocolon_meaning_experience_engine/emlis_semantic_admission.py | 新ModelCheckpoint/PreparedMeaning、source文法/原格/時点/理由/更新、snapshot・prior・再開、旧版分離 |
+| A/cocolon_meaning_experience_engine/emlis_question.py | 新喜び焦点の実ASK/END、source由来prompt/target/ID、実pending照合 |
+| A/cocolon_meaning_experience_engine/emlis_thread_contracts.py | 新private artifact subclass、旧artifact不変 |
+| A/cocolon_meaning_experience_engine/emlis_thread_engine.py | 新意味→現最終作者/独立reader/実問いを既存dispatch内で結ぶ |
+| A/cocolon_meaning_experience_engine/emlis_thread_surface.py | 新profile文面の最終化、旧finite作者へfallbackしない |
+| A/emlis_ai_grounded_observation_gate.py | 新profileのauthor-free句読取、誤意味/未知文/質問混入/反復を拒否 |
+| A/emlis_thread_service.py | 新profileの候補/意味/本文の段階保存・再開、通常policy併用拒否、完成非生成 |
+| A/cocolon_meaning_experience_engine/model_candidate_source.py（新） | source全投影と検証済みprior、固定4B/adapter identity、async generator/limits/raw receipt。実endpoint/DB/retryなし |
+| A/cocolon_meaning_experience_engine/preparation.py | optional adapter_revision。None時の旧receipt bytes維持 |
+| T/test_cmee_emlis_model_meaning.py（新） | source scope/意味軸/prior/訂正/gap/再開33検査 |
+| T/test_cmee_emlis_model_proposal.py（新） | 独立本文/実問い/訂正/隔離SQL/中断/完成非生成25検査 |
+| T/test_cmee_model_candidate_source.py（新） | 注入/identity/長さ/timeout/cancel/原raw保持15検査 |
+| T/fixtures/cmee_emlis_q1_shared_owner_identity_v1.json | current runtime identity同期。language identity/歴史的proofは不変 |
+| mashos-api/ai/docs/CMEE_V1A_I1SX_CurrentStateAndNextWorkHandoff_20260816.md | actual到達・失敗/修復・限定検証・再開の既存owner |
+
+Cocolon新pack F/=`Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-4b-training/`。旧contract_examples.jsonは変更しない。新fileの所在は以下。
+
+| exact path（F/から） | actual責務 |
+|---|---|
+| run_pilot.py / runpod.sh | 固定4B・可変N×1epoch、JSON-only/mask/EOS、16/24GB受口、固定取得/有料条件未確定時拒否 |
+| diagnose_learning.py / export_checkpoint.py | 同baseへの非学習reload・adapter hash、先退避/最終退避・archive全文読戻し |
+| verify_cmee.py | 実saved raw/metadataを固定native2caseのP1→意味→本文へ接続。実モデルの動的一往復ではない |
+| dataset_manifest.json / execution_plan.json | 固定API02c0b943、dataset/hash、未対応7、2step/16生成/4NLLの診断量、8k/2048と未確定の有料条件 |
+| sft_examples.jsonl / train_messages.jsonl | chair初回/訂正後2行、source/実問い/実prior/同messages。品質goldではない |
+| eval_inputs.jsonl / eval_review.jsonl | 旧EFREE6の学習外・既読proxy。新profile範囲外で意味成功へ加算しない |
+| cpu_connection_results.json | 合成候補のactual source/packet/snapshot/本文/実問い |
+| cpu_raw_consumer_results.json | 同target rawの固定consumer結合要約。実モデルrawではない |
+| cpu_tokenization_results.json | 固定4B実tokenizer/indexのCPU結果。重み/GPU未使用 |
+| test_training_pack.py / README.md / .gitignore | 学習用8検査、使用範囲と未実証、生成run/重みをsourceへ混ぜない設定 |
+
+全機能00・全体01・本01A・Emlis/CMEE map・shared01/Emlis02/schema05/実装順06・観測入口・latest weekly実装節を同じ変更単位で同期。engine.py/answer_update.pyは既存dispatchで足り変更不要だった。backend対象220＋pack8、subtests/反復/本文採取を加算しない。実モデル/重み/学習/通常有効化・DB/Render/merge/deploy/商品受入れ0。

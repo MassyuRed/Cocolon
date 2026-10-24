@@ -3514,3 +3514,10 @@ chairの初回は修理・再使用結果・喜び・独力でできたと本人
 意味採用後に本文が失敗した場合、同じ意味と保存proposalから既存明示再開を使う。モデル再呼出し・意味event重複・旧本文の新prefix付替えは行わない。完成済み・旧DTOは再生成しない。今回の説明用2JSON例は旧華恋編集の文章を対応表示したもので、学習target・新model raw・商品候補ではない。
 
 Rule18 §11.3の判断対象は、この意味／作者入力契約とchairの喜び焦点／訂正範囲の追加。GPU起動・有料推論・新dependency・DB migration・Render配置・通常API/RN・Plus/Premium・Piece/Analysisの切替は含めない。実装や品質改善を今回済みとはせず、正式0/3／PRODUCT_NOT_CLEAR／candidate_ready=falseを維持する。
+
+
+## 2026-10-24 — 承認済み4B候補の限定offline Emlis actual
+
+[共有01のactual](01_shared_kernel_and_runtime_contracts.md#cmee-4b-model-proposal-implemented)／[型05](05_json_schema_and_versioning.md#cmee-4b-model-actual-types)を参照。実装はAPI02c0b943の新private profile。sourceに束縛した意味とモデルsurface案を分離し、現唯一の最終本文owner内で独立逆読取後に最終化する。自然文案の原文を保持し、旧finite作者の復唱へfallbackしない。実ASKからの本人訂正で共同修理・再使用の喜びを保持し、旧独力理由を除く。未解釈の自由文やscope外sourceは未採用に閉じる。
+
+旧v1/v2と完成済みDTOは維持。意味確定後の作者失敗はsnapshotを消さず、同proposalから明示再開。隔離SQLで初回／訂正／意味後中断／完成非生成を確認したが、実model・本人DB・通常API/RN・本人端末・商品受入れは未実施。新teacher2行と実本文は4Bpack cpu_connection_results.json。旧説明例は過去の非学習資料で、現在の学習targetは別fileに保持する。
