@@ -1373,3 +1373,9 @@ Mashは§14の一回案について「進めていいよ」と明示承認。対
 - 現時点：container起動/Jupyter接続/実環境とmount確認済み。固定4依存のinstallを別venvで準備中、既存Torchをconstraintで固定。重み本体取得・学習・推論・adapter・商品受入れは0。認証の秘密値・接続token・account情報は記録しない。
 
 この節は承認とlive checkpoint。完了証拠ではない。GPU費用・生成結果・adapter3fileとarchiveのPod外保存・全文照合、Pod停止/削除の実結果を後続の同節結果へ追加する。通常API/DB/Render/RN/merge/deploy変更0、正式0/3・PRODUCT_NOT_CLEAR・candidate_ready=false・automatic_progression=false。構造差分なし。
+
+### 15.1 一回の診断processを開始（baseline保存を確認）
+
+固定4依存の導入とQwen class importが成功し、Torch2.6.0+cu126/実path/CUDA12.6は不変。取得code/datasetは固定27b06f19の2教師/EFREE6・SHA検証が成功。このPodだけのactual planに承認、GPU$0.22/h、free最低22GiB、観測済み40GB XFS、Pod期限と停止担当を記録した。
+
+実run ID `20261024-110719-dbe3c1bb`、run wrapper PID2892、起動UTC11:07:13。run_attemptのある同じdirectoryで一度だけ開始。Pod経過776秒時点でrun.json RUNNING/stage before、before_nll2行・before raw3行を保存確認。勾配更新・adapter・afterはこの確認時点で未実施。nvidia-smiの瞬間使用16376MiB/24576MiBはpeakや16GB不適合の確定ではない。因果conv/linear attentionの追加kernelなしで公式reference実装を使用しており、warningをエラーと扱わず、実行途中の依存追加や設定変更はしていない。

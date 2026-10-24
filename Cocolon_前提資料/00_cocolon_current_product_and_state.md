@@ -1,10 +1,10 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-24 JST（最新差分：Mashが一回分のRunpod画面操作・実4B診断・退避・受領確認後の新規試験Pod停止/削除を承認。16GB空きなし、許容24GBのRTX3090をGPU$0.22/h・disk込み表示約$0.23/hで1台作成。公式PyTorch環境と40GB /workspaceマウントを確認、現在は依存準備中。実学習・推論・重み回収はまだ0、最大2時間/計画$1を維持。正式商品受入れ0/3・全体54.50％据置）。全Cocolon作業の必読原本。
+更新日：2026-10-24 JST（最新差分：Mash承認の一回GPU診断をRTX3090 24GBで実行中。固定依存導入・code/dataset取得・実マウント確認後、run 20261024-110719-dbe3c1bbを一度起動。学習前NLL2件とbaseline生成3/8を保存確認、勾配更新はまだ未確認。最大2時間/計画$1、追加試行なし。正式商品受入れ0/3・全体54.50％据置）。全Cocolon作業の必読原本。
 
 > **最新報告会：[第8回・2026-10-24](weekly_reviews/Cocolon_Weekly_Review_20261024.md)。** 今週実績・前週目標の達否と10/24〜10/31の管理案を記録。**Mashの指示により報告会終了。** 華恋の意見全文は[§10](weekly_reviews/Cocolon_Weekly_Review_20261024.md#karen-closing-opinion)、終了時の区分と再開先は[§11](weekly_reviews/Cocolon_Weekly_Review_20261024.md#meeting-closed-and-next-session)。4B確定・GPU16GB優先/24GB許容の決定を追記。次週の推奨順位は[§4](weekly_reviews/Cocolon_Weekly_Review_20261024.md#next-week-priorities)、対象path・具体手順・失敗/回復検査・終了条件は[§8](weekly_reviews/Cocolon_Weekly_Review_20261024.md#detailed-work-breakdown)を参照。全体管理評価・公開見通しは[§9](weekly_reviews/Cocolon_Weekly_Review_20261024.md#overall-status-and-release-outlook)：54.50％、正式商品受入れ0/3、12/18達成の裏付け不足。会議途中の「進行中」は当時の記録。次週案全体への明示採否・個別実行の未決は§11に区別して保持する。モデル選定の決定と、以下の品質・配置・端末・費用の未完了を区別する。
 
-**報告会後の現在作業：** [一回のGPU診断・承認とlive再開先](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261024-approved-4b-gpu-diagnostic)。試験Pod `5u7ye0pqq3ppvp` を1台作成済みで、現在は環境準備。学習開始前の初回時間枠と2時間の終了時刻は同節。実学習・実raw→CMEE・adapter回収を未完了として保持し、同じPodの状態を先に確認する。新しいPodの起動・同一診断の再実行へ戻さない。
+**報告会後の現在作業：** [一回のGPU診断・承認とlive再開先](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261024-approved-4b-gpu-diagnostic)。試験Pod `5u7ye0pqq3ppvp` を1台作成済みで、固定依存・実マウント確認後、学習前の比較生成を実行中。起動・実行counterと2時間の終了時刻は同節。実学習・実raw→CMEE・adapter回収を未完了として保持し、同じPodの状態を先に確認する。新しいPodの起動・同一診断の再実行へ戻さない。
 
 ## 1. この資料の役割と更新方法
 
