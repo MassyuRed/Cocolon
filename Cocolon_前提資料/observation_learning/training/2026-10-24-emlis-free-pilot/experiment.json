@@ -613,7 +613,7 @@
     "hold_reason": "Selection is not adoption. Establish own-trained-model serving economics and compare candidates under proposed680/1480 before further9B-specific repetitive training."
   },
   "next_selection_priority": {
-    "status": "PRICE_AND_SERVING_ECONOMICS_BEFORE_FURTHER_9B_TRAINING",
+    "status": "BASELINE_COMPARISON_PACK_READY_CPU_VERIFIED_GPU_NOT_RUN",
     "proposed_monthly_prices_jpy": {
       "plus": 680,
       "premium": 1480
@@ -649,6 +649,24 @@
       "https://docs.runpod.io/serverless/pricing"
     ],
     "smaller_model_guarantees_profit": false,
-    "next_step": "Set allowable overall cost at proposed prices across paid counts and Free use; compare candidate serving patterns and existing quality before any bounded new paid test."
+    "next_step": "Mash runs one fixed-commit command on one A40 Pod; download latest_selection.json then manually Stop. Karen reviews all12 outputs. No further training before candidate/economics decision.",
+    "comparison_pack": "../../model_selection/2026-10-24-9b-4b-comparison/README.md",
+    "fixed_case_count": 6,
+    "maximum_generations": 12,
+    "fine_tuning_in_next_probe": false,
+    "new_gpu_execution_started": false,
+    "runner_implemented": true,
+    "cpu_checks_passed": 6,
+    "script_timeout_seconds": 1800,
+    "kill_after_seconds": 30,
+    "automatically_stops_pod": false,
+    "cost_envelope_is_illustrative_not_measured_profit": true,
+    "constraints_not_measured": [
+      "production throughput",
+      "serverless cold start/idle",
+      "long-history Analysis",
+      "Premium frame and three questions",
+      "own LoRA serving costs"
+    ]
   }
 }

@@ -4627,3 +4627,19 @@ training側README／experiment・全体00・教材入口・最新weekly Zを同�
 | README.md | 初回と別runの区別、実行／退避完了と観測品質未合格、全9教師と学習外6件の所見、次の限定比較候補 |
 
 新wrapper／診断のGPU完走はMash受領結果で確認し、重み本体は受領archiveに確保。NLLは全9件低下したが、教えた事例にも根拠外の返信・約束・喜びの理由の追加が残る。正式Product Read・商品採用・P6統合は未成立。全体00・観測入口・Free README／manifest・初回trial README・latest weekly ADを同期。初回raw／4dataset・runner／bootstrap・製品codeは不変。STRUCTURE_MAP_DELTA_NONE（受領資料pathの追加のみ、製品owner／型／接続／公開契約変更なし）。
+
+
+## 2026-10-24 — 680／1,480円に向けた4B・9B一回比較（製品runtime差分なし）
+
+新folder `Cocolon_前提資料/observation_learning/model_selection/2026-10-24-9b-4b-comparison/`。
+
+| file | 所有する内容 |
+|---|---|
+| README.md | 固定6入力×2modelの実行と持出し、品質比較・費用枠・未測定の境界 |
+| runpod.sh | 固定commit取得・既存Torch／CUDAを維持した別venv・cache再利用、全処理30分制限・outer側の途中結果回収、重複拒否。Podは手動Stop |
+| compare.py | 6入力hash・実tokenizer／8192枠・cache空き検査、4B→9Bの別processで最大12生成、回答ごとのraw／time／VRAM保存。追加学習なし |
+| cases.jsonl | 元M1の三中核4入力と教師completionを除いた訂正後2入力。同じJSON-only指示、Analysis3072／他1024 |
+| budget.py／budget_scenarios.json | 680／1480の仮定付き許容原価16条件。Freeを同じGPU予算内へ含める |
+| test_compare.py | 失敗／完了・重複・固定入力・強制KILL時の6+2回収・予算算術のCPU6検査 |
+
+全体00・観測入口・選定入口／費用資料・Free experiment・latest weekly AGを同期。実固定tokenizerは両modelの全6件で成功、CPU6検査成功。新GPU実行は0、1／4／16周案は保留。原9教師・受領raw／重み・製品sourceは不変。STRUCTURE_MAP_DELTA_NONE（offline選定用pathのみ、製品owner／型／接続／公開契約変更なし）。

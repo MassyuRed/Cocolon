@@ -2621,3 +2621,23 @@ Mashは、まだモデル選定でありこれだけの追加学習に意味が�
 次は680／1,480円での許容原価を有料人数と無料利用を含む全三中核の負荷へ落とし、保存済み9B／4Bの品質結果と提供方式を短く比較する。既存4Bの品質未達を消さず、既取得出力の不要な再取得を先行しない。価格内に提供できる可能性と必要品質がある候補の学習可能性を、上限を置く小試験で評価する。9B採用・4Bへの自動変更・商品quota削減を決めたわけではない。
 
 既存6資料（費用再選定・Free README／experiment・全体00・教材入口・本weekly）のみ同期。原教材・受領結果／adapter・商品sourceは不変。GPU／有料推論・学習・追加チャージ・DB／Render／価格quota実変更・merge／deploy0。STRUCTURE_MAP_DELTA_NONE（判断・計画の訂正のみ、構造／file責務差分なし）。
+
+
+<a id="20261024-model-selection-comparison-ready"></a>
+## AG. 2026-10-24 — 4B・9Bの一回比較コマンドと680／1,480円の費用枠を準備
+
+Mashの「私の推奨は、680円／1,480円を目標価格に置き、9Bと4Bを品質・速度・提供原価で比較し、条件に合う候補だけを育成する順序です→どうするの？」を受領。全体現在地・全file地図・最新AF・実試験原本と元runnerを確認し、[一回比較pack](../observation_learning/model_selection/2026-10-24-9b-4b-comparison/README.md)を実装した。新たな観測会をMashへ依頼せず、追加学習は0。AEの1／4／16周は保留のまま。
+
+元M1のE02-0／E02-B／P01-N／A02-P1と、既存教師案から正解completionを除いた椅子訂正後／開店回答後を、固定Qwen3.5-4Bと9Bへ一回ずつ最大12生成する。元本人message全6件を照合、共通のJSON-only指示だけsystem末尾へ追加。Analysis3072／他1024、context8192、BF16・SDPA・非thinking・greedy・同GPU・同時数1。旧M1のvLLM／JSON制約からbackend／指示が変わるので新9Bも同条件で一度取得し、旧M1を新4Bの同条件速度比較に流用しない。独立未知評価・実pending発行・本統合の証拠ではない。
+
+固定commitのwrapperをTerminalで一度実行すると、取得・別venv install・prepare・4B→9Bをまとめて進める。Torch／CUDAを維持し、既存cacheを再利用する。全内部処理30分＋30秒、重複run拒否、回答ごとのatomic保存、inner EXITに加えouter timeout後の再統合で途中JSONを回収する。単一latest_selection.jsonとSHA256を保存し、MashがダウンロードしてPodを手動Stopする。最初のwrapper取得・Pod前後待機・操作はtimer外で、Pod全課金の上限ではない。今回は学習重みを作らない。
+
+680／1,480円を目標にした4B・9Bの一回比較packを準備済み。三中核4件＋回答訂正後2件を各baseへ一度ずつ、最大12生成・追加学習なし。CPU実tokenizer／6検査は成功、実GPU未実行。処理全体30分＋30秒、途中JSON保存・重複拒否・手動Stop。26%手数料・有料構成80/20・基盤11,000円・運営余力20%の仮定なら、有料50人でAI／保存等の費用枠10,809円/月、100人で32,619円/月。本番処理能力・LoRA提供原価・cold startは未測定。1／4／16周案は保留、価格／quota実変更・追加GPU0。
+
+費用は仮定16条件で再計算。旧保守計画式`price/1.1-fee*price`、有料mix80/20、基盤11,000円、余力0%／20%、手数料15%／26%、為替160円/$。たとえば26%／余力20%で有料50人は10,809.45円、100人は32,618.91円がFreeを含むAI・storage等へ残る。売価・quota・実振込・確定利益ではなく、人件費／広告／返金／開発費等は別。有料50／無料950と旧名目回数を置くと78,980生成/月で、Flex48のstorage前55.376GPU時間＝平均2.524課金GPU秒分。cold start／idleもその枠内で、4Bだから黒字と決めず、小GPU・処理秒・台数削減が成立した分を測る。常時A40はGPUのみ67,968円/月で、有料50／100人の上記枠から外れる。9Bの必須構成とはしない。
+
+CPUでは両固定revisionのconfig／indexと実tokenizerを確認し、全6件とも両model同token長、入力＋出力最大3899で切捨てなし。構文とunittest6件成功：失敗／完了・入力hash・二重拒否・費用算術、実outer timeoutの1秒＋0.2秒短縮で強制KILL後に6+2回答とchecksumを回収。read-only別担当の原入力照合とwrapper確認も通過。weight本体のCPU load・新GPU完走・品質・本番原価は未確認。正式Product Readには数えない。
+
+結果を受けたら華恋が全12本文を比較し、意味保持・本人訂正・三core責務と速度／VRAMの差を整理する。4B同等なら小GPU適合の確認を優先、9Bに品質差があればその価値と価格内の提供方式を併せて判断。重大逸脱が両方で反復するなら同条件の反復学習を重ねない。残る候補だけ本番方式でlong history・同時処理・cold start／idle・LoRA負荷を上限付きで測り、6入力の単独秒数を月額黒字・p95へ換算しない。
+
+新pack7fileと全体00／観測入口／選定入口／費用資料／Free experiment／全file地図／本weeklyを同期。原教材・実raw／受領重み・商品source・DB／Render・価格／quota・merge／deploy変更0。華恋によるGPU起動・有料生成・学習0。STRUCTURE_MAP_DELTA_NONE（offline選定packの所在・責務のみ）。

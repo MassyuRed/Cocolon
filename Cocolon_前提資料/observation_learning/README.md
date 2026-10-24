@@ -6,9 +6,11 @@
 
 Cocolon／EmlisAIが、相手自身の価値基準を学び、その人の思考経路を辿って理解を更新する技術を育てるための保存先です。Mashの口調や結論だけを模倣することを目的にしません。
 
-## 現在地（2026-10-24・限定Emlis FreeのLoRA試験を完了、品質は未合格）
+## 現在地（2026-10-24・4B／9B選定比較pack準備、実GPU未実行）
 
-[Free試験用pack](training/2026-10-24-emlis-free-pilot/README.md)の9教師・学習外6評価を使い、MashのRunpod A40で学習前6回答→9教材を各1回／9step→学習後6回答が完了。[受領原本と全件診断](trials/2026-10-24-qwen9b-free-lora/README.md)を保存し、runner／教材hash・固定評価入力・件数／順序を照合した。初回のBatchEncoding取り違えは修正済み。E06の乾燥完了補完の解消とE05の部分改善はあるが、根拠外の承認・不安・交流の問い等が残る／悪化し、十分な品質改善は確認できない。全12rawはJSON解析失敗だが、試験のpromptにもJSONのみと明示がなく、この指示／検査不整合をモデルの命令違反へ転嫁しない。原18候補・教示5参照・今回の4dataset・実対話は不変。独立27教材に加算せず、9stepだけで育成全体の可否を結論しない。adapter本体の保管・再load、今回のPod Stopと総課金は未確認。Mashの「次は？」を受け、[保存adapterの9教師への適合診断](training/2026-10-24-emlis-free-pilot/README.md)を準備した。同じ9件のNLL各9forwardと回答生成各9件をbase／adapterで比べ、教材や学習量変更前に効き方を切り分ける。追加学習なし、promptとJSON指示は変更せず、実診断・GPU完走は未実施。追加GPU実行を自動で行わない。[最新weekly AD](../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261024-emlis-free-recreated-received)。初回adapter未回収を維持する一方、同じ9教材・同じ設定の別run再作成と教師適合診断が完了し、重み入りarchiveを受領・checksum／内部33fileを照合した。9教師の加重NLLは1.81506→1.65714（全9件低下）だが、未記載の返信や約束・喜びの理由を補う誤りが教えた事例にも残り、観測品質は未合格。初回重みの復元とは扱わず、追加実行は自動で行わない。 Free pack §12の1／4／16周案は保留。選定段階であることと680／1,480円の目標を受け、独自学習版の提供原価・人数と三中核の候補比較を先にする。[費用・選定順の訂正](model_selection/2026-10-22-three-core/2026-10-23-small-model-reselection.md#9-2026-10-24選定範囲へ戻し680円1480円を目標に原価を確認する)。最新の実結果はFree pack §11と[別run受領結果](trials/2026-10-24-qwen9b-free-lora/recreated-run/README.md)。再作成1回と非学習の診断を分け、原18候補や教師数の増量とは数えない。
+680／1,480円を目標にした4B・9Bの一回比較packを準備済み。三中核4件＋回答訂正後2件を各baseへ一度ずつ、最大12生成・追加学習なし。CPU実tokenizer／6検査は成功、実GPU未実行。処理全体30分＋30秒、途中JSON保存・重複拒否・手動Stop。26%手数料・有料構成80/20・基盤11,000円・運営余力20%の仮定なら、有料50人でAI／保存等の費用枠10,809円/月、100人で32,619円/月。本番処理能力・LoRA提供原価・cold startは未測定。1／4／16周案は保留、価格／quota実変更・追加GPU0。 [一回比較の実行・結果持出し](model_selection/2026-10-24-9b-4b-comparison/README.md)／[最新weekly AG](../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261024-model-selection-comparison-ready)が再開先。元M1の三中核4入力と訂正後2入力を再利用し、両modelへ同じJSON-only指示で一度ずつ取得する。旧M1とのbackend／decode条件差を明記し、旧結果を新4Bとの同条件速度比較に流用しない。
+
+[Free9教師の限定LoRA試験](training/2026-10-24-emlis-free-pilot/README.md)はMashのA40で初回9stepと、同設定の別run再作成・非学習の教師適合診断まで完了。[別runの原本・重み照合・全本文所見](trials/2026-10-24-qwen9b-free-lora/recreated-run/README.md)を保存。初回adapterは未回収だが、別runの重み入りarchive全33file／checksumは受領照合済み。加重NLL1.81506→1.65714、全9件低下、生成8/9変化。ただし未返信や約束、訂正後の喜びの原因の補完が教えた事例にも残り、十分な観測品質改善は未確認。初回重みの復元とは扱わない。JSON-only明示のない旧prompt／解析不整合は試験側の不足と分ける。原18候補・教示5参照・9教師・旧6評価・受領重みを変更しない。今は教材を増やす依頼をMashへ出さず、候補の意味保持・速度・提供可能性を華恋が比較する。
 
 [学習用候補18件と教示5参照](training/2026-10-23-pilot-prep/README.md)を保存済み。第5回の華恋編集による受け取り1件と、第6回のMash原文による訂正後の観測1件を追加し、当初16行は不変。問い9／訂正後観測1／華恋編集4／華恋補充4。未回答の達成差・訂正前の完成観測なし・品質承認なしを保持する。
 
