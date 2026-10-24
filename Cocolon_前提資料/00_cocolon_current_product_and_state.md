@@ -2,11 +2,13 @@
 
 更新日：2026-10-24 JST（最新差分：売上ゼロからのAI入り試用を検討。華恋の候補はPlus相当5人・14日、仮のGPU費1,333〜2,356円／共通月予算11,000円込み12,333〜13,356円。品質改善・CMEEモデル接続・端末配布までの準備費は含まず、開始総額・完成時期は未確定。2万円の打切り配分案は未承認・請求上限未実装。Supabase所属orgの現planはFreeとread-only確認し、11,000円を実契約費と扱わない。Premium試用は複数ANSWER／IF等の未完を保持して別段階へ残す。既存の有料50／無料950・参照性能の基準案95,094円/月は不成立のまま。Runpodを継続しA40/48GBのPodsから別の24GB GPUのServerlessへ変える仮案で、GPU・借り方の切替と性能実証は未実施。4B候補保持・両model品質未合格、追加学習・採用・価格quota変更・GPU／本番配置／招待0）。全Cocolon作業の必読原本。
 
+> **最新報告会：[第8回・2026-10-24](weekly_reviews/Cocolon_Weekly_Review_20261024.md)。** 今週実績・前週目標の達否と10/24〜10/31の管理案を記録。会議進行中、Mashの評価・次週案採用・会議終了は未記録。今回の商品状態変更はなく、以下の品質・配置・端末・費用の未完了を維持する。
+
 ## 1. この資料の役割と更新方法
 
 これは全製品の現在地を一度で確認する正本である。毎回全文を読み、対象機能の詳細正本と実ファイルへ進む。過去の読了、会話の要約、検索断片だけで代用しない。repository rootの`AGENTS.md`、`00_karen_read_first.md`、work rulesの入口からここへ入り、System Contextの生成物に含まれない場合もfreshな作業ownerから直接読む。
 
-現時点の確認基準はCocolon Draft PR [#30](https://github.com/MassyuRed/Cocolon/pull/30) のP1開始原本 `482a32a2c5c76631249f02a5abd11840d913ca58`、mashos-api Draft PR [#3](https://github.com/MassyuRed/mashos-api/pull/3) のP1実装 `b7eb534d44658549896baf449e7c319d49d14396`。両方open／draft。これは今回の照合点であり、次回の最新headを固定する指示ではない。本資料の配置commitは、この変更を含むGitHub revisionから解決する。
+10/24週次確認基準はCocolon Draft PR [#30](https://github.com/MassyuRed/Cocolon/pull/30) `ee2ff5f0be1fff4d61b9551eaaff937e1311de4b`、mashos-api Draft PR [#3](https://github.com/MassyuRed/mashos-api/pull/3) `666b28517ef04aba170ebffe3c86980fea4c11bd`。両方open／draft。これは議事録作成前の照合点であり、次回の最新headを固定する指示ではない。本資料の配置commitは、この変更を含むGitHub revisionから解決する。
 
 **作業ごとに差分を確認し、変化した機能・決定・状態・残件・根拠だけを、当該作業と同じ変更単位で置換更新する。** 日付だけを全行で更新しない。無関係な機能の再監査や全資料の再生成はしない。関連差分なしは既存の作業記録／PR説明に「全体現在地差分なし」と理由を一行残す。詳細mapに構造差分があれば、そのmapも同時に更新する。
 
@@ -149,7 +151,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 | 範囲 | 詳細原本・現物 |
 |---|---|
 | 全体構想・設計 | `cocolon_thought_material_for_karen.md`、`01_cocolon_overall_structure.md`と分冊01A／01B／01C、`02_cocolon_national_system.md`、`current_structure/00_three_core_and_cmee_read_first.md`と01〜04 |
-| 最新判断・配置記録 | `weekly_reviews/Cocolon_Weekly_Review_20261017.md`、とくに10/20議事録§相当L1525〜1609。API `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md`。会議記録は仕様・実装事実の代用ではない |
+| 最新判断・配置記録 | [第8回・10/24〜10/31](weekly_reviews/Cocolon_Weekly_Review_20261024.md)。方針・承認・配置の原記録は`weekly_reviews/Cocolon_Weekly_Review_20261017.md`（10/20観測学習、最新AL等）とAPI `ai/docs/EMLIS_DEPLOYMENT_AND_OPERATION_CHECKS.md`へ戻る。会議記録は仕様・実装事実の代用ではない |
 | Emlis・CMEE実物 | API `cocolon_meaning_experience_engine/engine.py`、`emlis_thread_service.py`とthread source／question／answer_update／surface、RN `InputScreen`・`useEmlisThread`・`EmlisThreadModal`。API path prefixは`ai/services/ai_inference/` |
 | AI試験 | `observation_learning/trials/2026-10-21-qwen27-demo/README.md`と8出力JSON。`fine_tuning_performed=false`、`cmee_integration_performed=false` |
 | Analysis実物 | API `astor_material_snapshots.py`、`analysis_observed_service.py`、`watashi_map_service.py`、`kokoro_weather_service.py`、RN `WatashiMapV2Renderer`・access policy。設計04 §10 IF／§11 Saved、schema05 §7・9.6 |
@@ -175,3 +177,4 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 
 10/23 P5内部準備の最新差分：Mashがbe37f40dの具体案へ承認後、[API666b285](https://github.com/MassyuRed/mashos-api/commit/666b28517ef04aba170ebffe3c86980fea4c11bd)の新Analysis admission／Engine／既存compiler・唯一realizer＋新test／fixtureの6fileへ実装。原18保持単位（16node＋従属scope1＋負荷注記1）／11文group／8source scope／route edge0／材料unknown1／選択4を保持する。同じsnapshot／graphから原文11文＋限定unknown表示とprivate図payloadを作り、意味／graph／完成の隔離file再読、実作者例外からの同snapshot再開、完成済み取得・再採用・compiler・作者禁止再読を確認。対象9file905成功／FAIL0／SKIP0、110.62秒、12058subtestsは加算しない、既存warning1。新private型6／例外2、旧logical registry不変。全実state／文章／図／source blob・途中失敗はtrialの新analysis_semantic_snapshot_results.json、actual仕様04／型05、最新weekly P／trial§13。原3構文family・Plus・補足0・比較なしだけで、一般日本語／商品文章／RN描画／実Auth／自動durabilityは未合格。API全6fileの全文／blob／変更集合／head読戻し済み。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、商品0／正式0/3／PRODUCT_NOT_CLEAR／candidate_ready=false／automatic_progression=false。実モデル／課金／実DB／Render／通常application／公開API／DTO／RN／merge／deploy変更0。
+
