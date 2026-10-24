@@ -1359,3 +1359,17 @@ Mashの「4B学習＋CMEE接続を進めて」により、GitHub PR30 d8781806�
 - 接続の残差：verify_cmeeの訂正は教師の固定priorを復元する単発fit。実初回のsnapshot/実questionからbuild_model_messagesへ接続する動的一往復は未実装/未実行で、固定16生成へ追加分を混ぜない。今回の修復で実service/SQL/通常アプリ保存が成功したとはしない。
 
 変更exact8：packのrun_pilot.py、test_training_pack.py、execution_plan.json、cpu_tokenization_results.json、README.md、全機能00、本weekly、全file01A。**STRUCTURE_MAP_DELTA_NONE**（学習runner内の同じ目的関数を保つ計算削減と一回案のみ。API/共有型/商品経路不変）。全体設計01・CMEE/Emlis map・schema05はruntime構造差分なしで再更新しない。API/DB/Render/RN/依存追加/通常有効化/merge/deploy変更0。限定TECHNICAL_CREDITは学習codeの修復とCPU検証だけ、正式0/3・PRODUCT_NOT_CLEAR・candidate_ready=false・automatic_progression=false・全体54.50％を維持。GPU費用/16GB適合/学習効果/商品品質は未実証。
+
+
+<a id="20261024-approved-4b-gpu-diagnostic"></a>
+## 15. 一回の実4B診断 — Mash承認、試験Pod作成（実行中）
+
+Mashは§14の一回案について「進めていいよ」と明示承認。対象はRunpod画面操作・学習1回・結果回収・回収照合後の新規試験Pod停止/削除。16GB優先・24GB許容、起動から最大7200秒、process最大5400秒、計画予算$1、追加epoch/再借用/通常配置なし。
+
+- 試験Pod：`5u7ye0pqq3ppvp`、`cocolon-4b-diag-20261024`、RTX3090 24GB×1、Community On-Demand。GPU$0.22/h、disk込み表示約$0.23/h。既存Podは未変更。A4000はSecure/Communityとも空きなし、A5000候補はCUDA12.4の不適合表示。新GPUへの学習試行はまだ0のまま、許容24GB/単価上限内の適合候補を選んだ。
+- 公式image：`runpod/pytorch:1.4.1-cu1281-torch260-ubuntu2404`。実測はPython3.12.3、Torch2.6.0+cu126、BF16/CUDA true、RTX3090。UIのimage名と実Torch CUDA buildを同一と推測しない。/workspaceは40GB XFSの独立マウント、空き約39GiBを確認。containerは公式推奨に合わせ50GB、合計90GBへ調整し、最大2hのGPU+稼働disk見積りは約$0.465、停止後volume24hを加えても約$0.732で計画$1内。実請求hard capではない。
+- 起動要求UNIX `1792839474.788`。準備開始枠は`1792841274.788`（起動から30分）、Podの終了上限は`1792846674.788`（2時間）。華恋が同じブラウザのPod状態を見て手動停止する。process timeoutはPodを止めない。起動途中で中断した新sessionは、このPodの状態と期限を先に確認し、残り時間がない場合は追加実行せず停止・回収へ進む。
+- 実行sourceはCocolon `27b06f19e222b4a8ce64634f259a81db0f8c8238`、API `02c0b943c96b67cb32354e1d3352a00dcb768e64`。dataset2教師/EFREE6、2update/16生成/4NLLを維持。取得後に、このPodの実単価・マウント・承認を同じruntime planへ記録する。配布用execution_plan.jsonは複製先の自動有効化を避ける非実行templateを保持し、承認済み一回のactual planとは区別する。
+- 現時点：container起動/Jupyter接続/実環境とmount確認済み。固定4依存のinstallを別venvで準備中、既存Torchをconstraintで固定。重み本体取得・学習・推論・adapter・商品受入れは0。認証の秘密値・接続token・account情報は記録しない。
+
+この節は承認とlive checkpoint。完了証拠ではない。GPU費用・生成結果・adapter3fileとarchiveのPod外保存・全文照合、Pod停止/削除の実結果を後続の同節結果へ追加する。通常API/DB/Render/RN/merge/deploy変更0、正式0/3・PRODUCT_NOT_CLEAR・candidate_ready=false・automatic_progression=false。構造差分なし。

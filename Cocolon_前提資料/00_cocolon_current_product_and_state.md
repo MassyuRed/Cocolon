@@ -1,10 +1,10 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-24 JST（最新差分：4B教師NLL/学習の不要なprompt全logits計算を修復。全入力・教師token・因果lossを保ち、語彙計算位置は初回4080→1095／訂正7856→1878。CPU限定11検査と固定tokenizer/index再測定成功、実GPU適合は未実証。16GB優先・単価上限$0.30/h・Pod最大2時間・process5400秒・計画予算$1の一回案を整備。actual単価/残高/mount/停止担当と有料診断・画面操作は未確認/未承認。GPU/重み/学習/Render/DB/配置0。正式商品受入れ0/3・全体54.50％据置）。全Cocolon作業の必読原本。
+更新日：2026-10-24 JST（最新差分：Mashが一回分のRunpod画面操作・実4B診断・退避・受領確認後の新規試験Pod停止/削除を承認。16GB空きなし、許容24GBのRTX3090をGPU$0.22/h・disk込み表示約$0.23/hで1台作成。公式PyTorch環境と40GB /workspaceマウントを確認、現在は依存準備中。実学習・推論・重み回収はまだ0、最大2時間/計画$1を維持。正式商品受入れ0/3・全体54.50％据置）。全Cocolon作業の必読原本。
 
 > **最新報告会：[第8回・2026-10-24](weekly_reviews/Cocolon_Weekly_Review_20261024.md)。** 今週実績・前週目標の達否と10/24〜10/31の管理案を記録。**Mashの指示により報告会終了。** 華恋の意見全文は[§10](weekly_reviews/Cocolon_Weekly_Review_20261024.md#karen-closing-opinion)、終了時の区分と再開先は[§11](weekly_reviews/Cocolon_Weekly_Review_20261024.md#meeting-closed-and-next-session)。4B確定・GPU16GB優先/24GB許容の決定を追記。次週の推奨順位は[§4](weekly_reviews/Cocolon_Weekly_Review_20261024.md#next-week-priorities)、対象path・具体手順・失敗/回復検査・終了条件は[§8](weekly_reviews/Cocolon_Weekly_Review_20261024.md#detailed-work-breakdown)を参照。全体管理評価・公開見通しは[§9](weekly_reviews/Cocolon_Weekly_Review_20261024.md#overall-status-and-release-outlook)：54.50％、正式商品受入れ0/3、12/18達成の裏付け不足。会議途中の「進行中」は当時の記録。次週案全体への明示採否・個別実行の未決は§11に区別して保持する。モデル選定の決定と、以下の品質・配置・端末・費用の未完了を区別する。
 
-**報告会後の現在作業：** private接続は[CM-01/T1 actual](designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-4b-model-proposal-implemented)／[会議後§13](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261024-4b-cmee-cpu-implemented)を保持。今回、4B学習codeの不要logits計算を修復し、[一回のGPU診断案](observation_learning/training/2026-10-24-emlis-4b-training/README.md#single-gpu-diagnostic-proposal)と[§14の結果](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261024-4b-tail-loss-and-gpu-proposal)へ再開先を進めた。固定raw→CMEEのconsumerは実装済みで、実4B/adapterの学習・推論・動的一往復は未実施。次は有料一回分/Runpod画面操作の判断と、実単価・残高・mount・停止担当の確認。モデル再選定や広い準備へ戻さない。
+**報告会後の現在作業：** [一回のGPU診断・承認とlive再開先](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261024-approved-4b-gpu-diagnostic)。試験Pod `5u7ye0pqq3ppvp` を1台作成済みで、現在は環境準備。学習開始前の初回時間枠と2時間の終了時刻は同節。実学習・実raw→CMEE・adapter回収を未完了として保持し、同じPodの状態を先に確認する。新しいPodの起動・同一診断の再実行へ戻さない。
 
 ## 1. この資料の役割と更新方法
 

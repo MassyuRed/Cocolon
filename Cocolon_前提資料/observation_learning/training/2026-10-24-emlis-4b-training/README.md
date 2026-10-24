@@ -1,5 +1,7 @@
 # Emlis 4B学習・保存再loadの限定pack
 
+> **最新：一回の実GPU診断はMash承認済みで実行中。** [最新weekly §15](../../../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261024-approved-4b-gpu-diagnostic)が唯一のlive再開先。試験Podを1台作成済みで、新規起動や同一診断の再実行をしない。以下の「未承認」は一回案作成時点の記録。配布用execution_plan.jsonは非実行templateを維持し、Pod上の一回限定actual planと区別する。
+
 対象は`Qwen/Qwen3.5-4B`、固定revision `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`、private profile `emlis_model_proposal.v1`です。旧9B pack・教師9件・旧eval・受領重みは変更しません。
 
 このpackはCPU側の接続・学習コードを実装済みです。固定4Bの実tokenizerとcheckpoint indexはCPU検証済み、重み／CUDA／学習／16・24GB適合／商品品質は未検証です。`contract_examples.json`は説明用原本で、symbolic priorと未実装native projectionを含むため学習できません。
@@ -96,7 +98,7 @@ exportは対象run、コード、dataset、manifest/plan、adapter3fileだけを
 
 
 <a id="single-gpu-diagnostic-proposal"></a>
-## 次の一回案 — 16GB優先、計画予算$1、Pod最大2時間（未承認）
+## 一回案 — 16GB優先、計画予算$1、Pod最大2時間（作成時点の記録、現在の承認/実行状態はweekly §15）
 
 目的は、現在の2教師×1epochで実4Bの勾配更新・保存adapterの非学習reload・前後raw・固定rawのCMEE採否を得ることです。モデル選定、周回探索、通常配置には広げません。
 
