@@ -1,8 +1,19 @@
 # Cocolon 週末報告会
 
-## 現在の再開案内 — 2026-10-23
+## 現在の再開案内 — 2026-10-24（次セッションの報告会準備）
 
-**現在の再開先は[latest weekly L](Cocolon_Weekly_Review_20261017.md#20261023-cmee-targeted-unknown-action-v2)。** Mashの追加範囲への「進めていいよ」を受領し、本人明示のJOY_ASPECT不明と二行動を、新規・明示offlineの`emlis_candidate_snapshot.v2`へ限定実装した。原E02-0は四claim／unknown statement→joy対象／過去の喜びと記述present／原格4つ／OMITTED主体／te連結とconcessionを、既存作者の実本文・private保存再開まで保持する。E02-0自身は問いなしENDで、架空pendingを作らない。 対象146成功、正式Product Read0/3。旧profile/C0/P1/P2を保持し、通常有効化/実モデル/実DB/Renderは0。新要素自身の一般更新はHOLD、Q2旧cap制限と商品品質は残件。
+Mashは次の新セッションで今週の報告会を行う予定。本セッションでは報告会を開始・終了したと扱わず、10/24の新しい正式議事録もまだ作成していない。
+
+最初にfreshな[Cocolon全機能・全状態](../00_cocolon_current_product_and_state.md)を全文確認し、[10/24の報告会への引継ぎ](Cocolon_Weekly_Review_20261017.md#20261024-next-session-review-handoff)から今回のAI選定・費用の話へ進む。全体設計・全ファイル地図・各中核のcurrent ownerと最新実ファイルも確認し、今週全体の実績・未完了・判断をまとめる。今回のAI費用の話だけでPiece・Analysis等の別作業全体を評価しない。
+
+今回の再開時に取り違えない点：
+
+- Runpodの利用は継続する案。実試験はA40・48GBのPods、試算は別の24GB GPUのServerless。GPUと借り方の変更は仮定で、切替・本番性能検証は未実施。
+- 4B／9Bは同GPU・同課金時間の仮定なら同額。4Bの費用優位や9Bの24GB長文動作は未実証。両model品質未合格、4Bは候補保持。
+- 680／1,480円は目標価格。売上0・Plus相当5人14日と総枠2万円は華恋の未承認提案で、準備込み総額・完成日・請求上限は未成立。
+- 次の報告会を、GPU再起動・追加学習・配備・招待・価格quota変更の承認へ読み替えない。
+
+根拠：[4B／9B受領比較](../observation_learning/trials/2026-10-24-qwen4b-9b-comparison/README.md)、[固定条件での原価試算](../observation_learning/model_selection/2026-10-24-production-economics/README.md)、[売上ゼロの少人数試用案](../observation_learning/model_selection/2026-10-24-production-economics/zero_revenue_pilot.md)。10/23のCMEE限定内部準備の経緯は[weekly L](Cocolon_Weekly_Review_20261017.md#20261023-cmee-targeted-unknown-action-v2)に保持するが、それだけを今回の最新再開先としない。
 
 ## 2026-10-20 方針追補（履歴） 観測技術の継承と学習型EmlisAI
 
