@@ -3055,3 +3055,37 @@ Phase10横断contractでは、EmlisAI状態回答と人間的フォローのmate
 | `tests/contract/test_emlis_state_answer_phase10_cross_contract_regression.py` | Piece / AnalysisがEmlisAI状態回答materialをimportしないこと、public responseにinternal material keyを出さないことを固定する。 |
 
 禁止: PieceをEmlisの観測文へ寄せる、Analysisを単発状態回答へ寄せる、`Emlisには` / `Emlisは` / `Emlisの感想` 系の温度をPiece / Analysisへ流用する、状態回答materialをpublic key化する。
+
+
+### 2026-10-22 Piece P-W1：明示iOS版preview/savedの共通描画
+
+STRUCTURE_MAP_DELTA_PRESENT。新tracked fileは増やさず、次の既存ownerへ責務を置く。
+
+| 既存path | 今回のsource責務 |
+|---|---|
+| `features/piece/pieceLayout.js` | 新外部renderer identityと内部bitmap profileの対応、preview/saved別key、同じcatalog/B9/描画入力。旧saved v3を保持。 |
+| `features/piece/pieceRenderer.js` | 閉preview/hash/expiry/catalog・iOS・必要native interfaceを純粋に確認するeligibility predicate。HTTPや描画を行わない。 |
+| `components/piece/PieceVisualCard.js` | 同profileのpreview/saved描画と失効。元8秒内の完成を要求し、preview fit期限を維持。新formal savedの完成像だけは8秒後も保持し、saved fitを発行しない。 |
+| `screens/InputScreen.js`／`screens/input/InputPieceActionArea.js` | 既存hostへのpredicate供給と、既存same mount/token fit・owner/flag/quotaの保存直前二重確認。 |
+| `features/piece/pieceExport.js` | 新formal版exportを明示拒否し、旧v3 exportを維持。 |
+
+付随検証は `tests/piece-v2-renderer.test.js`、`tests/piece-v2-input-screen.test.js`、`tests/piece-v2-initial-save-host.test.js`、`tests/piece-v2-export.test.js` と既存native entry/fixtures/iOS XCTest/runnerの8path。旧195/新44・旧RN13/bitmap12の期待を保持し、新版preview8/saved8/crop1とsaved完了後8秒超保持の条件を追加する。native製品、API/DTO/DB/SQL/稼働構成は変更しない。local964 PASS、JSX/runner/旧fixture不変確認、新source一度CIはPENDING。詳細はPiece入口§110／map§65.55／weekly§5.6.35であり、source準備を通常保存/画像共有/本人実機の商品完成へ換算しない。
+
+
+## 2026-10-22 Piece P-W2：通常本人詳細と新iOS版全canvas書出し
+
+STRUCTURE_MAP_DELTA_PRESENT。
+
+| 既存owner | 今回の責務 |
+|---|---|
+| screens/PieceOwnerHistoryScreen.js | 明示準備/fresh同record、本人/実効flag/lifecycle、準備失敗とPhotos/Share結果の元record帰属 |
+| components/piece/PieceExportCanvas.js | 既存固定canvasとcurrent/失敗通知 |
+| components/piece/PieceVisualCard.js | 明示saved export、同root/bitmap/artifact/snapshot/generationのcapture target、期限内完成後保持 |
+| features/piece/pieceLayout.js | 新明示iOS版savedの同profile全canvas export、旧版/未知/Android境界 |
+| features/piece/pieceExport.js | fresh owner再取得、実renderer metadata、private token/binding付きPNG、既存Photos/Share/cleanup |
+| ios/tempCocolon/PieceTextMetrics.mm | bitmap viewのprivate capture identity。新bridge methodは追加しない |
+| patches/react-native-view-shot+5.1.1.patch | Piece-only private option二項、同native blockの前後token/config/子所属検査。旧caller保持 |
+| tests/piece-v2-{export,owner-history,renderer}.test.js | 同record/flag/本人/lifecycle/結果帰属/失効と完成saved8秒超の検査 |
+| tests/native/piece-rn-canvas-{entry.js,fixtures.cjs,ios.m}/run-piece-rn-canvas-ios.sh | 旧3group不変、新export14を別検証。offscreen実view-shotと同saved PNG/RGBA、native拒否6 |
+
+local13suite979成功。新一度CIは未実行、元8秒・native195/44・旧RN期待を維持する。API/DTO/DB/env/flag/deploy/実OS/配布/main変更0。全変更pathはmanifest、詳細は入口§111/map§65.56/weekly§5.6.36。

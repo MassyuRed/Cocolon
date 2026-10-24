@@ -1,0 +1,169 @@
+diff --git a/node_modules/react-native-view-shot/android/src/main/java/fr/greweb/reactnativeviewshot/RNViewShotModule.java b/node_modules/react-native-view-shot/android/src/main/java/fr/greweb/reactnativeviewshot/RNViewShotModule.java
+index 36e7cd6..8c81c19 100644
+--- a/node_modules/react-native-view-shot/android/src/main/java/fr/greweb/reactnativeviewshot/RNViewShotModule.java
++++ b/node_modules/react-native-view-shot/android/src/main/java/fr/greweb/reactnativeviewshot/RNViewShotModule.java
+@@ -58,6 +58,14 @@ public class RNViewShotModule extends NativeRNViewShotSpec {
+         File file = new File(path);
+         if (!file.exists()) return;
+         File parent = file.getParentFile();
++        // Cocolon opt-in captures never enter the shared/external cache root.
++        try {
++            File pieceCache = new File(reactContext.getCacheDir(), "piece-capture").getCanonicalFile();
++            if (pieceCache.equals(file.getCanonicalFile().getParentFile())) {
++                file.delete();
++                return;
++            }
++        } catch (IOException ignored) { return; }
+         if (parent.equals(reactContext.getExternalCacheDir()) || parent.equals(reactContext.getCacheDir())) {
+             file.delete();
+         }
+@@ -90,7 +98,15 @@ public class RNViewShotModule extends NativeRNViewShotSpec {
+         try {
+             File outputFile = null;
+             if (Results.TEMP_FILE.equals(resultStreamFormat)) {
+-                outputFile = createTempFile(getReactApplicationContext(), extension, fileName);
++                if (options.hasKey("cocolonPieceCache") && options.getBoolean("cocolonPieceCache")) {
++                    File pieceCache = new File(context.getCacheDir(), "piece-capture");
++                    if (!pieceCache.isDirectory() && !pieceCache.mkdirs()) {
++                        throw new IOException("Cannot create Piece capture directory");
++                    }
++                    outputFile = File.createTempFile("piece-", "." + extension, pieceCache);
++                } else {
++                    outputFile = createTempFile(getReactApplicationContext(), extension, fileName);
++                }
+             }
+ 
+             final Activity activity = getCurrentActivity();
+diff --git a/node_modules/react-native-view-shot/ios/RNViewShot.mm b/node_modules/react-native-view-shot/ios/RNViewShot.mm
+--- a/node_modules/react-native-view-shot/ios/RNViewShot.mm
++++ b/node_modules/react-native-view-shot/ios/RNViewShot.mm
+@@ -14,6 +14,21 @@
+ #import <rnviewshot/rnviewshot.h>
+ #endif
+ 
++// App-private selector, not an RN bridge or a second renderer.
++@interface UIView (CocolonPieceCapture)
++- (NSString *)cocolonPieceCaptureIdentity;
++- (NSString *)bitmapBinding;
++@end
++static NSArray<UIView *> *CocolonPieceBitmapViews(UIView *root) {
++  NSMutableArray<UIView *> *pending=[NSMutableArray arrayWithObject:root], *result=[NSMutableArray new];
++  while(pending.count) {
++    UIView *view=pending.lastObject; [pending removeLastObject];
++    if([view respondsToSelector:@selector(cocolonPieceCaptureIdentity)]) [result addObject:view];
++    [pending addObjectsFromArray:view.subviews];
++  }
++  return result;
++}
++
+ @implementation RNViewShot
+ 
+ RCT_EXPORT_MODULE()
+@@ -34,6 +49,12 @@
+ 
+ RCT_EXPORT_METHOD(releaseCapture:(nonnull NSString *)uri)
+ {
++  NSString *pieceDirectory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:@"piece-capture"];
++  NSString *canonical = [[uri stringByStandardizingPath] stringByResolvingSymlinksInPath];
++  if ([[canonical stringByDeletingLastPathComponent] isEqualToString:[pieceDirectory stringByResolvingSymlinksInPath]]) {
++    [[NSFileManager defaultManager] removeItemAtPath:canonical error:NULL];
++    return;
++  }
+   NSString *directory = [NSTemporaryDirectory() stringByAppendingPathComponent:@"ReactNative"];
+   // Ensure it's a valid file in the tmp directory
+   if ([uri hasPrefix:directory] && ![uri isEqualToString:directory]) {
+@@ -134,9 +155,29 @@
+       scrollView.frame = CGRectMake(0, 0, scrollView.contentSize.width, scrollView.contentSize.height);
+     }
+ 
++    // Capture the full logical canvas. The glyph bitmap alone has no theme
++    // background/panel/border. Validate its current native identity atomically
++    // around this unchanged snapshot, even before JS receives invalidation.
++    id expectedToken=options[@"cocolonPieceBitmapToken"], expectedBinding=options[@"cocolonPieceBitmapBinding"];
++    BOOL bitmapExpected=expectedToken!=nil || expectedBinding!=nil;
++    if(bitmapExpected && (![RCTConvert BOOL:options[@"cocolonPieceCache"]] ||
++        ![expectedToken isKindOfClass:NSString.class] || ![expectedBinding isKindOfClass:NSString.class] ||
++        ![expectedToken length] || ![expectedBinding length])) {
++      reject(RCTErrorUnspecified, @"Invalid Piece capture identity", nil); return;
++    }
++    NSArray<UIView *> *pieceViews = [RCTConvert BOOL:options[@"cocolonPieceCache"]]
++      ? CocolonPieceBitmapViews(rendered) : @[];
++    NSString *pieceIdentity = pieceViews.count == 1 ? [pieceViews.firstObject cocolonPieceCaptureIdentity] : nil;
++    if (pieceViews.count > 1 || (pieceViews.count == 1 && !pieceIdentity.length) ||
++        (bitmapExpected && (pieceViews.count!=1 || ![pieceIdentity isEqual:expectedToken] ||
++         ![[pieceViews.firstObject bitmapBinding]isEqual:expectedBinding]))) {
++      reject(RCTErrorUnspecified, @"Piece image is no longer current", nil); return;
++    }
++
+     UIGraphicsImageRendererFormat *rendererFormat = [UIGraphicsImageRendererFormat preferredFormat];
+     rendererFormat.opaque = NO;
+-    rendererFormat.scale = 0; // 0 means "use device scale" (matches old UIGraphicsBeginImageContextWithOptions behaviour)
++    rendererFormat.scale = [RCTConvert BOOL:options[@"cocolonPieceCache"]] ? 1 : 0;
++    if ([RCTConvert BOOL:options[@"cocolonPieceCache"]]) rendererFormat.preferredRange = UIGraphicsImageRendererFormatRangeStandard;
+ 
+     UIGraphicsImageRenderer *renderer = [[UIGraphicsImageRenderer alloc] initWithSize:size format:rendererFormat];
+ 
+@@ -158,6 +199,16 @@
+       scrollView.frame = savedFrame;
+     }
+ 
++    if ([RCTConvert BOOL:options[@"cocolonPieceCache"]]) {
++      NSArray<UIView *> *after = CocolonPieceBitmapViews(rendered);
++      if (after.count != pieceViews.count || (pieceViews.count == 1 &&
++          (after.firstObject != pieceViews.firstObject || ![after.firstObject isDescendantOfView:rendered] ||
++           ![[after.firstObject cocolonPieceCaptureIdentity] isEqualToString:pieceIdentity] ||
++           (bitmapExpected && ![[after.firstObject bitmapBinding]isEqual:expectedBinding])))) {
++        reject(RCTErrorUnspecified, @"Piece image changed during capture", nil); return;
++      }
++    }
++
+     if (!success) {
+       reject(RCTErrorUnspecified, @"The view cannot be captured. drawViewHierarchyInRect was not successful. This is a potential technical or security limitation.", nil);
+       return;
+@@ -194,7 +245,15 @@
+       }
+       else {
+         // Save to a temp file
+-        NSString *path = RCTTempFilePath(format, &error);
++        NSString *path = nil;
++        if ([RCTConvert BOOL:options[@"cocolonPieceCache"]]) {
++          NSString *directory = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES).firstObject stringByAppendingPathComponent:@"piece-capture"];
++          if ([[NSFileManager defaultManager] createDirectoryAtPath:directory withIntermediateDirectories:YES attributes:nil error:&error]) {
++            path = [directory stringByAppendingPathComponent:[NSString stringWithFormat:@"piece-%@.%@", [NSUUID UUID].UUIDString, format]];
++          }
++        } else {
++          path = RCTTempFilePath(format, &error);
++        }
+         if (path && !error) {
+           if ([data writeToFile:path options:(NSDataWritingOptions)0 error:&error]) {
+             res = path;
+diff --git a/node_modules/react-native-view-shot/lib/index.d.ts b/node_modules/react-native-view-shot/lib/index.d.ts
+index 8dcef00..8ce8fac 100644
+--- a/node_modules/react-native-view-shot/lib/index.d.ts
++++ b/node_modules/react-native-view-shot/lib/index.d.ts
+@@ -1,6 +1,10 @@
+ import React, { ReactNode } from "react";
+ import { View, StyleProp, ViewStyle, LayoutChangeEvent } from "react-native";
+ export interface CaptureOptions {
++    /** Cocolon opt-in: fixed pixel scale and confined raw capture cache. */
++    cocolonPieceCache?: boolean;
++    cocolonPieceBitmapToken?: string;
++    cocolonPieceBitmapBinding?: string;
+     /**
+      * (Android only) the file name of the file. Must be at least 3 characters long.
+      */
+diff --git a/node_modules/react-native-view-shot/src/index.tsx b/node_modules/react-native-view-shot/src/index.tsx
+index a47e1c1..5e38965 100644
+--- a/node_modules/react-native-view-shot/src/index.tsx
++++ b/node_modules/react-native-view-shot/src/index.tsx
+@@ -25,6 +25,10 @@ const neverEndingPromise = new Promise(() => {});
+ // Options for capture configuration
+ 
+ export interface CaptureOptions {
++  /** Cocolon-only: confine raw tmpfile captures to the internal piece-capture directory. */
++  cocolonPieceCache?: boolean;
++  cocolonPieceBitmapToken?: string;
++  cocolonPieceBitmapBinding?: string;
+   /**
+    * (Android only) the file name of the file. Must be at least 3 characters long.
+    */

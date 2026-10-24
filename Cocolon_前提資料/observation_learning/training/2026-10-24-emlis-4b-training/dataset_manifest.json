@@ -1,0 +1,75 @@
+{
+  "schema": "cocolon.emlis_4b_dataset.v1",
+  "semantic_profile": "emlis_model_proposal.v1",
+  "status": "READY_FOR_BOUNDED_TRAINING_DIAGNOSTIC",
+  "training_rows": 2,
+  "evaluation_rows": 6,
+  "files": {
+    "examples": {
+      "path": "sft_examples.jsonl",
+      "sha256": "b055df79b4ffc6ccf2d81a0b294e5357ac1ea67012e605738f71682d4fe8961c"
+    },
+    "train_messages": {
+      "path": "train_messages.jsonl",
+      "sha256": "eea6f3fe593c7ff08a398861a3169e36cb62d8a72b2d8f32b717ee24336febc7"
+    },
+    "eval_inputs": {
+      "path": "eval_inputs.jsonl",
+      "sha256": "7da1fa972be5ba467df91c9e727227b8cb080d24cd96c28c0a2d1c8a607001bf"
+    },
+    "eval_review": {
+      "path": "eval_review.jsonl",
+      "sha256": "64fb1a6350dc24359b60316d6eb380a715582581b03f49df70a9a230354b0f80"
+    }
+  },
+  "explanatory_examples_trainable": false,
+  "old_nine_teacher_bytes_unchanged": true,
+  "new_targets_quality_gold": false,
+  "candidate_target_status": "READY_FOR_BOUNDED_TRAINING_DIAGNOSTIC",
+  "pending_supported_targets": [],
+  "unsupported_old_teachers": [
+    {
+      "id": "FT-UDON-INITIAL",
+      "reason": "食事と平穏の評価/表面文は今回のchair新profile範囲外"
+    },
+    {
+      "id": "FT-BOOK-INITIAL",
+      "reason": "謝罪後の気がかりと対象不明の問いは今回の喜び焦点範囲外"
+    },
+    {
+      "id": "FT-BOOK-AFTER-ANSWER",
+      "reason": "気がかりへの説明更新は今回の共同修理/喜び理由訂正範囲外"
+    },
+    {
+      "id": "FT-SHOP-INITIAL",
+      "reason": "他者開店への喜びと距離感の混在は今回のchair意味採用範囲外"
+    },
+    {
+      "id": "FT-SHOP-AFTER-ANSWER",
+      "reason": "関係の距離方向と理由説明は今回のchair更新範囲外"
+    },
+    {
+      "id": "FT-REPOT-INITIAL",
+      "reason": "第三者の説明受領と安心は今回のchair意味採用範囲外"
+    },
+    {
+      "id": "FT-KNIT-INITIAL",
+      "reason": "面倒さ/寂しさの本人明示不明は今回のNOT_STATED喜び焦点とは別"
+    }
+  ],
+  "evaluation_policy": "旧EFREE6は学習外6family・既読の開発評価。新shape指示へ投影するがassistant正解/学習targetを作らない。",
+  "cmee_api_commit": "1dabc4f196ae283264bf5e364e117a5d571af6a7",
+  "source_cocolon_predecessor": "7bdcff761a907277a12f2aa19e9d7d3931ebb076",
+  "supported_targets": [
+    "FT-CHAIR-INITIAL",
+    "FT-CHAIR-AFTER-CORRECTION"
+  ],
+  "actual_model_calls": 0,
+  "quality_gold": false,
+  "shared_system_instruction_sha256": "ddd5510ee5ac77852d886aae0f84c03a782086165ab16b8c8d29adce78b90271",
+  "old_source_hashes": {
+    "sft_examples.jsonl": "b3115af6a79bb39467517d49f92c94ee7a1019c168f3cf74e078c9960e18bd82",
+    "eval_inputs.jsonl": "300f353c9322c66cdfb2a0ad06e955aeb8176f1aa15fa6185fc3ef99b3559a0b",
+    "eval_review.jsonl": "3bd7ddcc6c6bbd8a778ba3ff849be96437e823df60bd652f83b85d9c1cd56282"
+  }
+}

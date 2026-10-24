@@ -1,0 +1,191 @@
+/** B13 RN-first preview geometry. No capture, persistence or save authority.
+ * Catalog values mirror PCE-5 / backend piece_v2_visual.py v1. Native wrapping
+ * uses B9 measured row selection; native/device equivalence remains unaccepted.
+ * onTextLayout supplies line boxes, NOT glyph availability/ink bounds. Thus
+ * geometry_checked never means layout_state=fit or canSave/canExport.
+ */
+import { readPiecePreviewDisplay } from './piecePreviewModel';
+import { readPieceOwnerDisplay } from './pieceOwnerModel';
+import { Platform } from 'react-native';
+
+export const PIECE_NATIVE_PREVIEW_VERSION = 'piece.rn_native_preview.prototype.v3';
+export const PIECE_NATIVE_PREVIEW_V4_VERSION = 'piece.rn_native_preview.prototype.v4';
+export const PIECE_NATIVE_PREVIEW_V5_VERSION = 'piece.rn_native_preview.prototype.v5';
+export const PIECE_NATIVE_PREVIEW_V6_VERSION = 'piece.rn_native_preview.prototype.v6';
+export const PIECE_NATIVE_PREVIEW_V7_VERSION = 'piece.rn_native_preview.prototype.v7';
+export const PIECE_NATIVE_PREVIEW_V8_VERSION = 'piece.rn_native_preview.prototype.v8';
+export const PIECE_NATIVE_PREVIEW_V9_VERSION = 'piece.rn_native_preview.prototype.v9';
+export const PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION = 'piece.rn_native_preview.containment.prototype.v1';
+export const PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION = 'piece.rn_native_preview.containment.prototype.v2';
+export const PIECE_BITMAP_PREVIEW_VERSION = 'piece.rn_bitmap_preview.prototype.v1';
+// External saved identity is distinct from the immutable measurement profile.
+export const PIECE_BITMAP_RENDERER_VERSION = 'piece.rn_bitmap_renderer.ios.v1';
+const nativeThemes = {
+  soft_paper: { canvas: '#F6F1E8', surface: '#FFFDF8', text: '#111827', secondary: '#4B5563',
+    accent: '#800020', border: '#D7D2C9', branding: '#800020', vector_end: '#FFFFFF' },
+  quiet_night: { canvas: '#0B1120', surface: '#111827', text: '#F9FAFB', secondary: '#CBD5E1',
+    accent: '#D4AF37', border: '#334155', branding: '#D4AF37', vector_end: '#1E293B' },
+};
+const nativeScales = {
+  short_essay: { '4:5': [48, 44, 40, 36], '9:16': [52, 48, 44, 40] },
+  quote: { '4:5': [72, 64, 56], '9:16': [80, 72, 64] },
+  declaration: { '4:5': [64, 56, 48], '9:16': [72, 64, 56] },
+};
+const nativeLineRatios = { short_essay: 1.55, quote: 1.35, declaration: 1.42 };
+const frozenNative = value => {
+  if (value && typeof value === 'object') { Object.values(value).forEach(frozenNative); Object.freeze(value); }
+  return value;
+};
+
+// Independently revalidate hashes/expiry. Only necessary render data reaches
+// the canvas; no quota, source, owner, session or visibility is copied into it.
+export function preparePieceNativePreview(display, nowMs = Date.now()) {
+  const checked = readPiecePreviewDisplay(display, nowMs);
+  if (!checked.hashVerified || !checked.preview) return null;
+  const p = checked.preview;
+  const candidateProfile = [PIECE_BITMAP_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION].includes(p.renderer_version) ? PIECE_BITMAP_PREVIEW_VERSION
+    : p.renderer_version === PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION ? PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION
+    : p.renderer_version === PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION ? PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION
+    : p.renderer_version === PIECE_NATIVE_PREVIEW_V9_VERSION ? PIECE_NATIVE_PREVIEW_V9_VERSION
+    : p.renderer_version === PIECE_NATIVE_PREVIEW_V8_VERSION ? PIECE_NATIVE_PREVIEW_V8_VERSION
+    : p.renderer_version === PIECE_NATIVE_PREVIEW_V7_VERSION ? PIECE_NATIVE_PREVIEW_V7_VERSION
+    : p.renderer_version === PIECE_NATIVE_PREVIEW_V6_VERSION ? PIECE_NATIVE_PREVIEW_V6_VERSION
+    : p.renderer_version === PIECE_NATIVE_PREVIEW_V5_VERSION ? PIECE_NATIVE_PREVIEW_V5_VERSION
+    : p.renderer_version === PIECE_NATIVE_PREVIEW_V4_VERSION ? PIECE_NATIVE_PREVIEW_V4_VERSION : PIECE_NATIVE_PREVIEW_VERSION;
+  if ([PIECE_BITMAP_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(candidateProfile) && Platform.OS !== 'ios') return null;
+  const key = JSON.stringify([candidateProfile, 'preview', p.preview_id, p.preview_revision,
+    p.row_version, p.expires_at, p.piece_text_hash, p.content_payload_hash, p.visual_recipe_hash, p.renderer_version]);
+  return preparePieceNativeArtifact(p, key, candidateProfile);
+}
+
+// A saved record is not a preview. Recheck the closed saved contract and all
+// three hashes, without inventing expiry, source, quota or current-plan data.
+// Preserve the old v3 appearance. Only the new explicit iOS bitmap identity
+// is additionally reconstructed; prototype/unknown saved versions stay closed.
+export function preparePieceNativeSavedDisplay(raw) {
+  try {
+    const p = readPieceOwnerDisplay(raw);
+    if (![PIECE_NATIVE_PREVIEW_VERSION, PIECE_BITMAP_RENDERER_VERSION].includes(p.renderer_version) ||
+        p.renderer_version === PIECE_BITMAP_RENDERER_VERSION && Platform.OS !== 'ios') return null;
+    const profile = p.renderer_version === PIECE_BITMAP_RENDERER_VERSION ? PIECE_BITMAP_PREVIEW_VERSION : PIECE_NATIVE_PREVIEW_VERSION;
+    const key = JSON.stringify([profile, 'saved', p.piece_id, p.public_id,
+      p.row_version, p.saved_at, p.piece_text_hash, p.content_payload_hash, p.visual_recipe_hash, p.renderer_version]);
+    return preparePieceNativeArtifact(p, key, profile);
+  } catch { return null; }
+}
+
+export function preparePieceNativeCard(props) {
+  const saved = Object.prototype.hasOwnProperty.call(props, 'savedRecord');
+  if (saved && Object.prototype.hasOwnProperty.call(props, 'display')) return null;
+  if (saved) return preparePieceNativeSavedDisplay(props.savedRecord);
+  const input = preparePieceNativePreview(props.display);
+  return props.exportCanvas === true && [PIECE_BITMAP_PREVIEW_VERSION, PIECE_NATIVE_PREVIEW_V4_VERSION, PIECE_NATIVE_PREVIEW_V5_VERSION, PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION]
+    .includes(input?.candidateProfile) ? null : input;
+}
+
+// One catalog/layout owner for both paths; neither grants save/export or
+// claims native-device acceptance. The host owns access and unmounting.
+function preparePieceNativeArtifact(p, key, candidateProfile = PIECE_NATIVE_PREVIEW_VERSION) {
+  const recipe = p.visual_recipe, ratio = recipe.aspect_ratio;
+  const tall = ratio === '9:16', margin = tall ? 108 : 96, brandingZone = tall ? 84 : 72;
+  return frozenNative({ key, candidateProfile,
+    ...(candidateProfile === PIECE_BITMAP_PREVIEW_VERSION ? { rendererVersion: p.renderer_version } : {}),
+    width: 1080, height: tall ? 1920 : 1350, margin, brandingZone,
+    contentWidth: 1080 - 2 * margin, contentHeight: (tall ? 1920 : 1350) - 2 * margin - brandingZone,
+    blocks: [...p.content_payload.body_blocks], sizes: [...nativeScales[p.format_type][ratio]],
+    lineRatio: nativeLineRatios[p.format_type], paragraphRatio: p.format_type === 'short_essay' ? 0.65 : 0,
+    alignment: p.format_type === 'quote' ? 'center' : 'left',
+    colors: { ...nativeThemes[recipe.theme.theme_id] }, brandingMode: recipe.branding.branding_mode });
+}
+
+export function createPieceNativeMeasurement(input) {
+  return { key: input?.key ?? null, phase: input ? 'planning' : 'unavailable', sizeIndex: 0, plan: null,
+    generation: Object.freeze({}), blocks: {}, compositionHeight: null, reason: null, canSave: false, canExport: false };
+}
+
+export function pieceNativeTypography(input, sizeIndex) {
+  const fontSize = input.sizes[sizeIndex], lineHeight = Math.ceil(fontSize * input.lineRatio);
+  return { fontSize, lineHeight, gap: lineHeight * input.paragraphRatio };
+}
+
+const nativeFinite = n => typeof n === 'number' && Number.isFinite(n);
+const nativeReject = (state, reason) => ({ ...state, phase: 'unavailable', blocks: {}, compositionHeight: null, reason });
+
+// Tickets bind to the exact preview + candidate size, so delayed native events
+// cannot validate a replaced candidate. Store only numbers after comparing
+// line text; native event text never becomes a second canonical body.
+export function recordPieceNativeMeasurement(input, state, ticket, blockIndex, kind, value) {
+  if (!input || state.key !== input.key || ticket?.key !== input.key || ticket.sizeIndex !== state.sizeIndex ||
+      ticket.generation !== state.generation || state.phase === 'unavailable') return state;
+  const branding = blockIndex === input.blocks.length;
+  if (!Number.isInteger(blockIndex) || blockIndex < 0 || blockIndex > input.blocks.length ||
+      branding && input.brandingMode === 'off') return state;
+  let measurement;
+  if (kind === 'box') {
+    if (!value || !nativeFinite(value.width) || !nativeFinite(value.height) || value.width <= 0 || value.height <= 0) {
+      return nativeReject(state, 'invalid_measurement');
+    }
+    measurement = { width: value.width, height: value.height };
+    if ([PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(input.candidateProfile)) {
+      if (!nativeFinite(value.x) || !nativeFinite(value.y)) return nativeReject(state, 'invalid_measurement');
+      measurement = { x: value.x, y: value.y, ...measurement };
+    }
+  } else if (kind === 'lines') {
+    if (!Array.isArray(value) || !value.length || value.length > 512 || value.some(line => !line ||
+        typeof line.text !== 'string' || !line.text.length ||
+        !['x', 'y', 'width', 'height'].every(k => nativeFinite(line[k])) || line.width < 0 || line.height <= 0)) {
+      return nativeReject(state, 'invalid_measurement');
+    }
+    if (value.map(line => line.text).join('') !== (branding ? 'Cocolon' : input.blocks[blockIndex])) {
+      return nativeReject(state, 'text_mismatch');
+    }
+    if (input.plannedRows && !branding && value.length !== 1) return nativeReject(state, 'native_rewrap');
+    let end = 0;
+    measurement = value.map(({ text, x, y, width, height }) => ({ x, y, width, height, end: end += text.length }));
+  } else return state;
+  const old = state.blocks[blockIndex] || {};
+  if (JSON.stringify(old[kind]) === JSON.stringify(measurement)) return state;
+  const blocks = { ...state.blocks, [blockIndex]: { ...old, [kind]: measurement } };
+  const next = { ...state, phase: 'measuring', blocks, compositionHeight: null, inspection: null };
+  const count = input.blocks.length + (input.brandingMode === 'off' ? 0 : 1);
+  if (Object.keys(blocks).length !== count || Object.values(blocks).some(b => !b.lines || !b.box)) return next;
+  const { gap, lineHeight } = pieceNativeTypography(input, state.sizeIndex);
+  const compositionHeight = input.plannedRows ? state.plan.totalHeight : input.blocks.reduce((total, _, index) => total + blocks[index].box.height, 0) +
+    (input.rowGaps ? input.rowGaps.reduce((a, b) => a + b, 0) : gap * (input.blocks.length - 1));
+  if (input.candidateProfile === PIECE_BITMAP_PREVIEW_VERSION) {
+    // These Texts only supply the selected TextKit source. Their natural view
+    // height is not the bitmap's ink height. Whole-canvas pixel fit owns that.
+    for (let index = 0; index < count; index++) {
+      const { box, lines } = blocks[index], brand = index === input.blocks.length;
+      if (Math.abs(box.width - (brand ? input.contentWidth : input.width)) > 0.5 || lines.length !== 1 ||
+          lines[0].width > input.contentWidth || lines[0].end !== (brand ? 'Cocolon' : input.blocks[index]).length) {
+        return nativeReject(next, 'invalid_bitmap_source');
+      }
+    }
+    return { ...next, phase: 'geometry_checked', compositionHeight };
+  }
+  const tolerance = 0.01;
+  let overflow = compositionHeight > input.contentHeight + tolerance;
+  for (let index = 0; index < count; index++) {
+    const { box, lines } = blocks[index];
+    // v6+ body rows retain the original TextContainer width inside a wider
+    // transparent drawing view. onTextLayout still uses container coordinates.
+    const insetRow = input.plannedRows && index < input.blocks.length &&
+      [PIECE_NATIVE_PREVIEW_V6_VERSION, PIECE_NATIVE_PREVIEW_V7_VERSION, PIECE_NATIVE_PREVIEW_V8_VERSION, PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(input.candidateProfile);
+    const viewWidth = input.contentWidth + (insetRow ? 2 * input.margin : 0);
+    if (Math.abs(box.width - viewWidth) > tolerance ||
+        input.plannedRows && index < input.blocks.length && Math.abs(box.height - lineHeight) > 0.5 ||
+        index === input.blocks.length && box.height > input.brandingZone) overflow = true;
+    let bottom = 0;
+    for (const line of lines) {
+      if (line.x < -tolerance || line.y < -tolerance || line.x + line.width > input.contentWidth + tolerance ||
+          line.y + line.height > box.height + tolerance || line.y < bottom - tolerance) overflow = true;
+      bottom = line.y + line.height;
+    }
+  }
+  if (overflow) return state.sizeIndex + 1 < input.sizes.length
+    ? { ...createPieceNativeMeasurement(input), sizeIndex: state.sizeIndex + 1 }
+    : nativeReject(next, 'font_floor_overflow');
+  return { ...next, phase: [PIECE_NATIVE_PREVIEW_V9_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V1_VERSION, PIECE_NATIVE_PREVIEW_CONTAINMENT_V2_VERSION].includes(input.candidateProfile) && state.rowOffsets
+    ? 'positioning' : 'geometry_checked', compositionHeight };
+}

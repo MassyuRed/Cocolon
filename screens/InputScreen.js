@@ -18,11 +18,9 @@ import {
 // Supabase Auth
 import { useAuth } from "../AuthContext";
 import { submitEmotionInput } from "../lib/api/home/emotionSubmitApi";
-import {
-  cancelEmotionPiece,
-  previewEmotionPiece,
-  publishEmotionPiece,
-} from "../lib/api/home/emotionPieceApi";
+import { useEmlisThread } from "./input/useEmlisThread";
+import { useAppRuntime } from "../AppRuntimeContext";
+import EmlisThreadModal from "./input/EmlisThreadModal";
 import { openNoticeAction } from "../lib/noticeActionRuntime";
 import { markAnalysisHomeSummaryDirty } from "../lib/analysisHomeSummaryRefreshSignal";
 import { STARTUP_POPUP_KIND, useHomeState } from "../features/home/useHomeState";
@@ -68,6 +66,8 @@ import { useInputDraftPersistence } from "./input/useInputDraftPersistence";
 import { useInputFeedbackModal } from "./input/useInputFeedbackModal";
 import { useInputKeyboardAwareMemo } from "./input/useInputKeyboardAwareMemo";
 import InputActionArea from "./input/InputActionArea";
+import InputPieceActionArea from "./input/InputPieceActionArea";
+import { isPieceBitmapSaveAdmitted } from "../features/piece/pieceRenderer";
 import InputCategorySection from "./input/InputCategorySection";
 import InputEmotionSection from "./input/InputEmotionSection";
 import InputFeedbackReplyModal from "./input/InputFeedbackReplyModal";
@@ -120,6 +120,22 @@ async function refreshHomeStateAfterEmotionSubmitTimeout(loadHomeState) {
   }
 }
 
+// One opaque key per confirmed saved-input selection. The already-installed
+// index.js random-values polyfill supplies entropy; never fall back to a clock,
+// source ID, owner ID or Math.random. Failure cannot fail the input save itself.
+function buildSavedPieceInput(savedInputId, expectedUserId) {
+  if (typeof savedInputId !== "string" ||
+      !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(savedInputId) ||
+      savedInputId === "00000000-0000-0000-0000-000000000000") return null;
+  try {
+    const bytes = new Uint8Array(16);
+    globalThis.crypto.getRandomValues(bytes);
+    const idempotencyKey = "piece-preview-" + Array.from(bytes,
+      value => value.toString(16).padStart(2, "0")).join("");
+    return Object.freeze({ savedInputId, expectedUserId, idempotencyKey });
+  } catch { return null; }
+}
+
 /**
  * Home（InputScreen）
  * - 背景・パネル・ボタンなどを ThemeContext から取得
@@ -140,6 +156,38 @@ export default function InputScreen({ navigation, route }) {
   const ui = useMemo(() => makeUiTokens(colors, themeName), [colors, themeName]);
   const styles = useMemo(() => createStyles(colors, ui), [colors, ui]);
   const currentUserId = String(session?.user?.id || "").trim();
+  const { isFeatureEnabled } = useAppRuntime();
+  const feedbackOwner = useRef({ id: currentUserId, epoch: 0 });
+  if (feedbackOwner.current.id !== currentUserId) feedbackOwner.current = { id: currentUserId, epoch: feedbackOwner.current.epoch + 1 };
+  useEffect(() => () => { feedbackOwner.current = { id: "", epoch: feedbackOwner.current.epoch + 1 }; }, []);
+  const emlisThread = useEmlisThread({ userId: currentUserId, enabled: isFeatureEnabled("emlis_threads_enabled", false) && !isTutorialMode });
+  // Piece keeps only a saved ID/key, not the input or Emlis body. A render-time
+  // owner/tutorial boundary conceals a previous selection before effect cleanup.
+  const pieceInputLifetime = useRef(null);
+  if (!pieceInputLifetime.current || pieceInputLifetime.current.owner !== feedbackOwner.current ||
+      pieceInputLifetime.current.tutorial !== isTutorialMode ||
+      pieceInputLifetime.current.reset !== tutorialResetToken) {
+    pieceInputLifetime.current = { owner: feedbackOwner.current,
+      tutorial: isTutorialMode, reset: tutorialResetToken, ticket: null };
+  }
+  const renderedPieceLifetime = pieceInputLifetime.current;
+  const [savedPieceInput, setSavedPieceInput] = useState(null);
+  const pieceInputMounted = useRef(false);
+  useEffect(() => {
+    pieceInputMounted.current = true;
+    return () => {
+      pieceInputMounted.current = false;
+      pieceInputLifetime.current.ticket = null;
+    };
+  }, []);
+  useEffect(() => { setSavedPieceInput(null); }, [currentUserId, isTutorialMode, tutorialResetToken]);
+  useEffect(() => {
+    const unsubscribe = navigation?.addListener?.("blur", () => {
+      pieceInputLifetime.current.ticket = null;
+      setSavedPieceInput(null);
+    });
+    return typeof unsubscribe === "function" ? unsubscribe : undefined;
+  }, [navigation]);
   const tutorialDisplayName = useMemo(() => {
     const metadata = session?.user?.user_metadata || {};
     return (
@@ -175,6 +223,13 @@ export default function InputScreen({ navigation, route }) {
     setTutorialStep,
   });
 
+  useEffect(() => {
+    resetInputFeedbackModal();
+    setSubmitting(false);
+    setPiecePreviewVisible(false);
+    setPiecePreviewPayload(null);
+  }, [currentUserId, resetInputFeedbackModal]);
+
   const {
     keyboardInset,
     inputMaxHeight,
@@ -204,12 +259,12 @@ export default function InputScreen({ navigation, route }) {
   const [sendEmotionNotification, setSendEmotionNotification] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [piecePreviewVisible, setPiecePreviewVisible] = useState(false);
-  const [piecePreviewLoading, setPiecePreviewLoading] = useState(false);
-  const [piecePublishLoading, setPiecePublishLoading] = useState(false);
   const [piecePreviewPayload, setPiecePreviewPayload] = useState(null);
   const wasTutorialModeRef = useRef(false);
 
   const resetLocalInputState = useCallback(() => {
+    pieceInputLifetime.current.ticket = null;
+    setSavedPieceInput(null);
     setSelectedEmotions([]);
     setMemo("");
     setMemoAction("");
@@ -220,8 +275,6 @@ export default function InputScreen({ navigation, route }) {
     setIsSecret(false);
     setSendEmotionNotification(true);
     setPiecePreviewVisible(false);
-    setPiecePreviewLoading(false);
-    setPiecePublishLoading(false);
     setPiecePreviewPayload(null);
     resetInputFeedbackModal();
     currentScrollYRef.current = 0;
@@ -326,8 +379,6 @@ const homeState = useHomeState({
     todayQuestionLoading,
   } = homeState;
 
-  const pieceQuota = homeState.pieceQuota;
-  const setPieceQuota = homeState.setPieceQuota;
 
 
 const {
@@ -558,7 +609,7 @@ const safeInsets = useSafeAreaInsets();
     startupModalVisible,
     noticeLoading,
     todayQuestionLoading,
-    inputFeedbackModalVisible,
+    inputFeedbackModalVisible: inputFeedbackModalVisible || emlisThread.visible,
     applyInputDraft,
     showToast,
   });
@@ -591,10 +642,20 @@ const safeInsets = useSafeAreaInsets();
     hasMemoInput &&
     selectedEmotions.length > 0 &&
     hasSelectedCategories;
-  const canPreviewPiece =
-    !piecePreviewLoading &&
-    !piecePublishLoading &&
-    canSubmit;
+  // The old preview is a local tutorial demonstration only. Real Piece uses
+  // the confirmed saved-input host; disabling V2 never restores legacy HTTP.
+  const canPreviewPiece = isTutorialMode && canSubmit;
+  const mountSavedPieceInput =
+    savedPieceInput?.lifetime === pieceInputLifetime.current &&
+    !isTutorialMode && !submitting && !emlisThread.visible && !emlisThread.busy &&
+    !inputFeedbackModalVisible && !startupModalVisible &&
+    !draftRestoreModalVisible && !hasMemoInput && selectedEmotions.length === 0 &&
+    selectedCategories.length === 0 && activeField === null;
+  // Keep the existing saved-input host through runtime refresh so its
+  // body-free cancellation receipt/unknown outcome survives. The host hides
+  // all actions while OFF and clears on owner/input/key/lifetime changes.
+  const showSavedPieceInput = mountSavedPieceInput &&
+    isFeatureEnabled("piece_v2_preview_enabled", false) === true;
   const hasUserStartedInput =
     selectedEmotions.length > 0 ||
     memo.trim().length > 0 ||
@@ -895,171 +956,72 @@ const safeInsets = useSafeAreaInsets();
   ]);
 
 
-  const handlePreviewPiece = useCallback(async () => {
-    if (!canPreviewPiece) return;
-
+  // Preserve the existing tutorial sample without retaining raw-input Piece
+  // HTTP. Bind its callbacks to the already-existing owner/tutorial lifetime.
+  const handlePreviewPiece = useCallback(() => {
+    if (!pieceInputMounted.current || !isTutorialMode || !canPreviewPiece ||
+        pieceInputLifetime.current !== renderedPieceLifetime ||
+        feedbackOwner.current !== renderedPieceLifetime.owner) return;
     registerInputInteraction();
+    setPiecePreviewPayload({ ...TUTORIAL_PIECE_PREVIEW });
+    setPiecePreviewVisible(true);
+  }, [canPreviewPiece, isTutorialMode, registerInputInteraction, renderedPieceLifetime]);
 
-    if (isTutorialMode) {
-      setPiecePreviewPayload({ ...TUTORIAL_PIECE_PREVIEW });
-      setPiecePreviewVisible(true);
-      return;
-    }
-
-    setPiecePreviewLoading(true);
-    try {
-      const payload = buildEmotionSubmitPayload();
-      const preview = await previewEmotionPiece(payload);
-      const quota = preview?.quota && typeof preview.quota === "object"
-        ? preview.quota
-        : null;
-      if (quota) {
-        setPieceQuota(quota);
-      }
-      setPiecePreviewPayload(preview && typeof preview === "object" ? preview : null);
-      setPiecePreviewVisible(true);
-    } catch (e) {
-      console.warn("InputScreen: previewEmotionPiece failed", e);
-      Alert.alert(
-        "ピースの生成",
-        String(e?.message || "ピースの生成に失敗しました。")
-      );
-    } finally {
-      setPiecePreviewLoading(false);
-    }
-  }, [
-    buildEmotionSubmitPayload,
-    canPreviewPiece,
-    isTutorialMode,
-    registerInputInteraction,
-  ]);
-
-  const handleCancelPiecePreview = useCallback(async () => {
-    const previewId = String(piecePreviewPayload?.preview_id || "").trim();
+  const handleCancelPiecePreview = useCallback(() => {
+    if (!pieceInputMounted.current || !isTutorialMode ||
+        pieceInputLifetime.current !== renderedPieceLifetime ||
+        feedbackOwner.current !== renderedPieceLifetime.owner) return;
     setPiecePreviewVisible(false);
-
-    if (isTutorialMode) {
-      setPiecePreviewPayload(null);
-      return;
-    }
-
-    if (!previewId) {
-      setPiecePreviewPayload(null);
-      return;
-    }
-    try {
-      await cancelEmotionPiece(previewId);
-    } catch (e) {
-      console.warn("InputScreen: cancelEmotionPiece failed", e);
-    } finally {
-      setPiecePreviewPayload(null);
-    }
-  }, [isTutorialMode, piecePreviewPayload?.preview_id]);
+    setPiecePreviewPayload(null);
+  }, [isTutorialMode, renderedPieceLifetime]);
 
   const handlePublishPiece = useCallback(async () => {
-    const previewId = String(piecePreviewPayload?.preview_id || "").trim();
-    if (!previewId || piecePublishLoading) return;
-
-    if (isTutorialMode) {
-      const inputFeedbackEmotionMeta = buildInputFeedbackEmotionMeta(selectedEmotions);
-      setPiecePreviewVisible(false);
-      setPiecePreviewPayload(null);
-      void ensureTutorialPiecesSeed();
-      await clearPersistedInputDraft();
-      setPendingInputDraft(null);
-      setDraftRestoreModalVisible(false);
-      Keyboard.dismiss();
-      const openedObservation = openInputFeedbackModal({
-        commentText: tutorialEmlisReplyText,
-        ...inputFeedbackEmotionMeta,
-        contextLabel: TUTORIAL_EMLIS_REPLY.contextLabel,
-        emlisAiMeta: TUTORIAL_EMLIS_REPLY.meta,
-        observationStatus: TUTORIAL_EMLIS_REPLY.meta?.observation_status,
-      });
-      if (openedObservation) {
-        setTutorialNavigateAfterReply(true);
-      } else {
-        completeTutorialAfterReply();
-      }
-      return;
+    const ownsResponse = () => pieceInputMounted.current && isTutorialMode &&
+      pieceInputLifetime.current === renderedPieceLifetime &&
+      feedbackOwner.current === renderedPieceLifetime.owner;
+    if (!ownsResponse() || !piecePreviewPayload?.preview_id) return;
+    const inputFeedbackEmotionMeta = buildInputFeedbackEmotionMeta(selectedEmotions);
+    setPiecePreviewVisible(false);
+    setPiecePreviewPayload(null);
+    void ensureTutorialPiecesSeed();
+    await clearPersistedInputDraft();
+    if (!ownsResponse()) return;
+    setPendingInputDraft(null);
+    setDraftRestoreModalVisible(false);
+    Keyboard.dismiss();
+    const openedObservation = openInputFeedbackModal({
+      commentText: tutorialEmlisReplyText,
+      ...inputFeedbackEmotionMeta,
+      contextLabel: TUTORIAL_EMLIS_REPLY.contextLabel,
+      emlisAiMeta: TUTORIAL_EMLIS_REPLY.meta,
+      observationStatus: TUTORIAL_EMLIS_REPLY.meta?.observation_status,
+    });
+    if (openedObservation) {
+      setTutorialNavigateAfterReply(true);
+    } else {
+      completeTutorialAfterReply();
     }
-
-    setPiecePublishLoading(true);
-    try {
-      const publishResult = await publishEmotionPiece(previewId);
-      const inputFeedback = publishResult?.input_feedback || null;
-      const inputFeedbackText = String(
-        inputFeedback?.comment_text || ""
-      ).trim();
-      const inputFeedbackAI = inputFeedback?.emlis_ai || null;
-      const inputFeedbackEmotionMeta = buildInputFeedbackEmotionMeta(selectedEmotions);
-
-      await clearPersistedInputDraft();
-      setPendingInputDraft(null);
-      setDraftRestoreModalVisible(false);
-
-      setSelectedEmotions([]);
-      setMemo("");
-      setMemoAction("");
-      setSelectedCategories([]);
-      setShowMemoSection(true);
-      setActiveField(null);
-      resetMemoInputHeights();
-      setIsSecret(false);
-      Keyboard.dismiss();
-
-      setPiecePreviewVisible(false);
-      setPiecePreviewPayload(null);
-
-      const nextQuota = publishResult?.quota && typeof publishResult.quota === "object"
-        ? publishResult.quota
-        : null;
-      if (nextQuota) {
-        setPieceQuota(nextQuota);
-      }
-
-      await loadHomeState({ force: true, includeStartupCandidate: false });
-      await markAnalysisHomeSummaryDirty();
-
-      const openedObservation = inputFeedbackText
-        ? openInputFeedbackModal({
-            commentText: inputFeedbackText,
-            ...inputFeedbackEmotionMeta,
-            contextLabel: "ピースを生成しました",
-            emlisAiMeta: inputFeedbackAI,
-            observationStatus: inputFeedbackAI?.observation_status,
-          })
-        : false;
-      if (!openedObservation) {
-        showToast("ピースを生成しました");
-      }
-    } catch (e) {
-      console.warn("InputScreen: publishEmotionPiece failed", e);
-      Alert.alert(
-        "ピースの生成",
-        String(e?.message || "ピースの生成に失敗しました。")
-      );
-    } finally {
-      setPiecePublishLoading(false);
-    }
-  }, [
-    clearPersistedInputDraft,
-    completeTutorialAfterReply,
-    ensureTutorialPiecesSeed,
-    isTutorialMode,
-    loadHomeState,
-    openInputFeedbackModal,
-    piecePreviewPayload?.preview_id,
-    piecePublishLoading,
-    resetMemoInputHeights,
-    selectedEmotions,
-    setTutorialStep,
-    showToast,
-    tutorialEmlisReplyText,
-  ]);
+  }, [clearPersistedInputDraft, completeTutorialAfterReply, ensureTutorialPiecesSeed,
+    isTutorialMode, openInputFeedbackModal, piecePreviewPayload?.preview_id,
+    renderedPieceLifetime, selectedEmotions, setDraftRestoreModalVisible,
+    setPendingInputDraft, setTutorialNavigateAfterReply, tutorialEmlisReplyText]);
 
   const handleOk = async () => {
+    const requestOwner = feedbackOwner.current;
+    if (requestOwner.id !== currentUserId) return;
+    const ownsResponse = () => feedbackOwner.current === requestOwner;
     if (!canSubmit) return;
+    const pieceLifetime = pieceInputLifetime.current;
+    const pieceTicket = {};
+    pieceLifetime.ticket = pieceTicket;
+    setSavedPieceInput(null);
+    const rememberSavedPieceInput = (savedInputId) => {
+      if (!pieceInputMounted.current || !ownsResponse() || isTutorialMode ||
+          pieceInputLifetime.current !== pieceLifetime || pieceLifetime.ticket !== pieceTicket ||
+          isFeatureEnabled("piece_v2_preview_enabled", false) !== true) return;
+      const savedInput = buildSavedPieceInput(savedInputId, requestOwner.id);
+      if (savedInput) setSavedPieceInput({ lifetime: pieceLifetime, savedInput });
+    };
     setSubmitting(true);
     try {
       // 1) 入力内容を MashOS Emotion Submit API 用のペイロードに変換
@@ -1078,6 +1040,7 @@ const safeInsets = useSafeAreaInsets();
         void ensureTutorialPiecesSeed();
 
         await clearPersistedInputDraft();
+        if (!ownsResponse()) return;
         setPendingInputDraft(null);
         setDraftRestoreModalVisible(false);
         Keyboard.dismiss();
@@ -1097,7 +1060,9 @@ const safeInsets = useSafeAreaInsets();
         return;
       }
 
-      const submitResult = await submitEmotionInput(payload);
+      const submitResult = await submitEmotionInput(payload, { expectedUserId: requestOwner.id });
+      if (!ownsResponse()) return;
+      const savedInputIdForPiece = submitResult?.id;
       const inputFeedback = submitResult?.input_feedback || null;
       const inputFeedbackAI = inputFeedback?.emlis_ai || null;
       const inputFeedbackText = String(
@@ -1108,6 +1073,7 @@ const safeInsets = useSafeAreaInsets();
 
 
       await clearPersistedInputDraft();
+      if (!ownsResponse()) return;
       setPendingInputDraft(null);
       setDraftRestoreModalVisible(false);
 
@@ -1123,7 +1089,16 @@ const safeInsets = useSafeAreaInsets();
       Keyboard.dismiss();
 
       await loadHomeState({ force: true, includeStartupCandidate: false });
+      if (!ownsResponse()) return;
       await markAnalysisHomeSummaryDirty();
+      if (!ownsResponse()) return;
+
+      const openedThread = await emlisThread.open(submitResult?.id);
+      if (!ownsResponse()) return;
+      // Opening a reader is not terminal eligibility. The Piece host performs
+      // the existing authoritative source-ref GET only on a separate action.
+      rememberSavedPieceInput(savedInputIdForPiece);
+      if (openedThread) return;
 
       const openedObservation = inputFeedbackText
         ? openInputFeedbackModal({
@@ -1144,9 +1119,11 @@ const safeInsets = useSafeAreaInsets();
 ${inputFeedbackEmotionMeta.emotionSummary}` : ""}`);
       }
     } catch (error) {
+      if (!ownsResponse()) return;
       if (isRequestTimeoutError(error)) {
         console.warn("InputScreen: emotion submit completion timed out", error);
         const refreshedAfterTimeout = await refreshHomeStateAfterEmotionSubmitTimeout(loadHomeState);
+        if (!ownsResponse()) return;
         Alert.alert(
           "記録の確認",
           getEmotionSubmitTimeoutRecoveryMessage(refreshedAfterTimeout)
@@ -1161,6 +1138,7 @@ ${inputFeedbackEmotionMeta.emotionSummary}` : ""}`);
 ${String(error?.message || error)}`
       );
     } finally {
+      if (!ownsResponse()) return;
       setSubmitting(false);
     }
   };
@@ -1527,7 +1505,6 @@ ${String(error?.message || error)}`
                   setSendEmotionNotification={setSendEmotionNotification}
                   handlePreviewPiece={handlePreviewPiece}
                   canPreviewPiece={canPreviewPiece}
-                  piecePreviewLoading={piecePreviewLoading}
                   handleOk={handleOk}
                   canSubmit={canSubmit}
                   submitting={submitting}
@@ -1535,6 +1512,14 @@ ${String(error?.message || error)}`
                   colors={colors}
                 />
               </View>
+
+              {mountSavedPieceInput ? (
+                <View testID="piece-saved-input-entry" style={showSavedPieceInput ? styles.section : undefined}>
+                  {showSavedPieceInput ? <Text style={styles.sectionLabel}>直前に保存した入力</Text> : null}
+                  <InputPieceActionArea savedInput={savedPieceInput.savedInput} navigation={navigation}
+                    isSaveAdmitted={isPieceBitmapSaveAdmitted} />
+                </View>
+              ) : null}
 
           </ScrollView>
         </TouchableWithoutFeedback>
@@ -1566,7 +1551,8 @@ ${String(error?.message || error)}`
   discardPendingInputDraft={discardPendingInputDraft}
 />
 
-<InputFeedbackReplyModal
+      <EmlisThreadModal thread={emlisThread} colors={colors} />
+      <InputFeedbackReplyModal
   visible={inputFeedbackModalVisible}
   text={inputFeedbackModalText}
   meta={inputFeedbackModalMeta}
@@ -1577,15 +1563,13 @@ ${String(error?.message || error)}`
   colors={colors}
 />
 
-<InputPiecePreviewController
+{isTutorialMode ? <InputPiecePreviewController
   visible={piecePreviewVisible}
   previewPayload={piecePreviewPayload}
-  pieceQuota={pieceQuota}
-  publishLoading={piecePublishLoading}
   onClose={handleCancelPiecePreview}
   onPublish={handlePublishPiece}
-  hideCancelButton={isTutorialMode}
-/>
+  hideCancelButton={true}
+/> : null}
       </View>
 
 {tutorialOverlayConfig ? (
@@ -2662,4 +2646,3 @@ toastText: {
 },
   }, ui));
 }
-

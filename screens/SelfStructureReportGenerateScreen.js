@@ -22,6 +22,9 @@ import { applyTypographyTokens } from "../ui/applyTypographyTokens";
 import { apiFetch, apiGet, API_BASE_URL } from "../lib/apiClient";
 import { SELF_STRUCTURE_WIRE } from "../lib/compat/legacyWireContracts";
 import WatashiMapRenderer from "../components/selfStructure/WatashiMapRenderer";
+import WatashiMapV2Renderer from "../components/selfStructure/WatashiMapV2Renderer";
+import { classifyWatashiMapVersion, parseWatashiMapContent, readWatashiMapV2Projection } from "../components/selfStructure/watashiMapV2Contract";
+import { canViewWatashiMapMode, getWatashiMapDetailLockLabel } from "../components/selfStructure/watashiMapAccessPolicy";
 import {
   hasWatashiMapRenderableContent,
   normalizeWatashiMapPayload,
@@ -87,16 +90,7 @@ function defaultModeForTier(tier, allowedModes) {
 }
 
 function safeParseJson(raw) {
-  if (!raw) return null;
-  if (typeof raw === "object") return raw;
-  if (typeof raw === "string") {
-    try {
-      return JSON.parse(raw);
-    } catch {
-      return null;
-    }
-  }
-  return null;
+  return parseWatashiMapContent(raw);
 }
 
 function escapeHtml(s) {
@@ -303,6 +297,7 @@ export default function SelfStructureReportGenerateScreen({ onBack, initialRepor
 
 const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState("");
+  const [emptyMsg, setEmptyMsg] = useState("");
   const [reportText, setReportText] = useState("");
   const [meta, setMeta] = useState(null);
 
@@ -338,12 +333,16 @@ const [loading, setLoading] = useState(true);
   const reportTitle = titleOverride || "今のわたしマップ";
 
   const contentJson = useMemo(() => safeParseJson(meta?.server_meta), [meta?.server_meta]);
+  const mapVersion = useMemo(() => classifyWatashiMapVersion(contentJson), [contentJson]);
+  const isLegacyMap = mapVersion === 'LEGACY';
   const fetchedReportMode = useMemo(() => {
     return normalizeSelfStructureMode(meta?.report_mode || contentJson?.report_mode || reportMode);
   }, [meta?.report_mode, contentJson?.report_mode, reportMode]);
+  const canViewVersionedMap = !tierLoading && canViewWatashiMapMode(subscriptionTier,
+    meta?.report_mode || contentJson?.report_mode || reportMode);
   const hasWatashiMapVisual = useMemo(() => {
-    return hasWatashiMapRenderableContent(contentJson);
-  }, [contentJson]);
+    return isLegacyMap && hasWatashiMapRenderableContent(contentJson);
+  }, [contentJson, isLegacyMap]);
   const watashiMapPayload = useMemo(() => {
     if (!hasWatashiMapVisual) return null;
     return normalizeWatashiMapPayload(contentJson, {
@@ -378,6 +377,7 @@ const run = useCallback(async ({ force = false } = {}) => {
   safeSet(() => {
     setLoading(true);
     setErrorMsg("");
+    setEmptyMsg("");
     setReportText("");
     setMeta(null);
   });
@@ -454,13 +454,39 @@ const run = useCallback(async ({ force = false } = {}) => {
     }
 
     const json = await res.json();
+    // Insufficient material is a declared waiting state, not a failed read
+    // or an analysis artifact. Never infer it from an error or missing DTO.
+    if (json?.reason === "insufficient_input") {
+      if (json?.status !== "ok" || json?.refreshed !== false
+        || json?.skip_reason !== "analysis_insufficient_input"
+        || json?.has_visible_content !== false || json?.meta !== null
+        || json?.content_text !== null || json?.title !== null
+        || json?.generated_at !== null || json?.latest_generated_at !== null) {
+        throw new Error("分析結果の形式を確認できませんでした。");
+      }
+      safeSet(() => setEmptyMsg("入力情報が少ないため、まだ分析を表示できません。"));
+      return; // No artifact exists to render, export, or mark as seen.
+    }
+    // A successful read can have no eligible saved map. This does not
+    // establish insufficient input (read-only mode also returns this shape).
+    if (json?.status === "ok" && json?.reason === "no_visible_content"
+      && json?.has_visible_content === false
+      && json?.skip_reason === "analysis_saved_map_unavailable"
+      && json?.meta === null
+      && (json?.content_text === null || json?.content_text === "")) {
+      safeSet(() => setEmptyMsg("現在表示できるわたしマップはありません。"));
+      return; // No artifact was displayed, so do not mark a version as seen.
+    }
     const serverMeta = safeParseJson(json?.meta);
-    const hasVisualContract = !!(serverMeta?.selfStructureDeepVisual || serverMeta?.watashiMap);
-    const text = sanitizeSelfStructureReportText(
+    const legacyResponse = classifyWatashiMapVersion(serverMeta) === 'LEGACY';
+    const versionedResponseDisplayable = !!readWatashiMapV2Projection(serverMeta)
+      && canViewWatashiMapMode(tier, json?.report_mode || effectiveMode);
+    const hasVisualContract = !legacyResponse || !!(serverMeta?.selfStructureDeepVisual || serverMeta?.watashiMap);
+    const text = legacyResponse ? sanitizeSelfStructureReportText(
       String(json?.content_text || "").trim()
-    );
+    ) : '';
     if (!text && !hasVisualContract) {
-      throw new Error("わたしマップにできる観測がまだ少なめでした。");
+      throw new Error("分析結果の形式を確認できませんでした。");
     }
 
     // ★ ここで画面がもう無い（戻った）なら、以降の setState を行わない
@@ -481,10 +507,15 @@ const run = useCallback(async ({ force = false } = {}) => {
       });
     });
 
-    if (typeof onLatestSeenVersion === "function") {
+    if ((legacyResponse || versionedResponseDisplayable) && typeof onLatestSeenVersion === "function") {
       try {
-        const latestStatusJson = await apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus);
-        const latestVersionKey = String(latestStatusJson?.version_key || "").trim();
+        // Mark the artifact actually displayed; a later status may name a
+        // different saved version generated concurrently on another device.
+        const latestStatusJson = legacyResponse
+          ? await apiGet(SELF_STRUCTURE_WIRE.routes.latestStatus) : null;
+        const latestVersionKey = String(legacyResponse
+          ? latestStatusJson?.version_key || ""
+          : readWatashiMapV2Projection(serverMeta)?.projection_of || "").trim();
         if (latestVersionKey) {
           await onLatestSeenVersion(latestVersionKey);
         }
@@ -670,8 +701,19 @@ const run = useCallback(async ({ force = false } = {}) => {
         </Text>
       )}
 
-      {!loading && !errorMsg && (
+      {!loading && !errorMsg && !!emptyMsg && (
+        <Text style={[styles.empty, themed.empty]}>{emptyMsg}</Text>
+      )}
+
+      {!loading && !errorMsg && !emptyMsg && (
         <>
+          {!isLegacyMap && canViewVersionedMap ? (
+            <WatashiMapV2Renderer contentJson={contentJson} colors={colors} isDark={isDark} />
+          ) : null}
+          {!isLegacyMap && !canViewVersionedMap ? (
+            <Text style={[styles.empty, themed.empty]}>{tierLoading ? 'プラン情報を確認しています…'
+              : getWatashiMapDetailLockLabel(subscriptionTier, fetchedReportMode)}</Text>
+          ) : null}
           {hasWatashiMapVisual ? (
             <WatashiMapRenderer
               contentJson={contentJson}
@@ -684,7 +726,7 @@ const run = useCallback(async ({ force = false } = {}) => {
             />
           ) : null}
 
-          {((reportText && (!hasWatashiMapVisual || shouldShowDetailText)) || (!hasWatashiMapVisual && !reportText)) ? (
+          {isLegacyMap && ((reportText && (!hasWatashiMapVisual || shouldShowDetailText)) || (!hasWatashiMapVisual && !reportText)) ? (
             <View style={[styles.bodyCard, themed.bodyCard]}>
               {hasWatashiMapVisual && reportText ? (
                 <Text style={[styles.sectionLabel, themed.sectionLabel]}>詳しい自己分析レポート</Text>

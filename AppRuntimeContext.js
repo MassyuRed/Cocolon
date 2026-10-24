@@ -1,9 +1,14 @@
-import React, { createContext, useCallback, useContext, useMemo, useState } from "react";
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
+import { AppState } from "react-native";
 
 import { apiGet } from "./lib/apiClient";
+import { supabase } from "./lib/supabase";
+import { PIECE_FEATURE_DEFAULTS, isPieceFeatureFlag, normalizePieceFeatureFlags, withoutPieceFeatureFlags, isPieceFeatureEnabled } from "./features/piece/pieceRuntime";
 
 const DEFAULT_FEATURE_FLAGS = Object.freeze({
+  ...PIECE_FEATURE_DEFAULTS,
   account_delete_enabled: true,
+  emlis_threads_enabled: false,
   myweb_mock_enabled: false,
   today_question_enabled: true,
   today_question_history_enabled: true,
@@ -23,13 +28,13 @@ function normalizeFeatureFlags(rawFlags) {
   if (rawFlags && typeof rawFlags === "object" && !Array.isArray(rawFlags)) {
     for (const [key, value] of Object.entries(rawFlags)) {
       const normalizedKey = String(key || "").trim();
-      if (!normalizedKey) continue;
+      if (!normalizedKey || isPieceFeatureFlag(normalizedKey)) continue;
       if (typeof value === "boolean") {
         nextFlags[normalizedKey] = value;
       }
     }
   }
-  return nextFlags;
+  return { ...nextFlags, ...normalizePieceFeatureFlags(rawFlags) };
 }
 
 function parseVersionParts(value) {
@@ -112,43 +117,148 @@ const INITIAL_RUNTIME_STATE = Object.freeze({
   },
 });
 
-const AppRuntimeContext = createContext({
+export const AppRuntimeContext = createContext({
   runtime: INITIAL_RUNTIME_STATE,
   featureFlags: INITIAL_RUNTIME_STATE.featureFlags,
   refreshAppRuntime: async () => INITIAL_RUNTIME_STATE,
-  isFeatureEnabled: (name, fallback = true) => Boolean(fallback),
+  isFeatureEnabled: (name, fallback = true) => isPieceFeatureFlag(String(name || "").trim()) ? false : Boolean(fallback),
 });
 
 export function AppRuntimeProvider({ children }) {
   const [runtime, setRuntime] = useState(INITIAL_RUNTIME_STATE);
+  const refreshSequence = useRef(0);
+  const latestRuntime = useRef(INITIAL_RUNTIME_STATE);
+  const restartInterruptedRefresh = useRef(false);
+  const deferredSessionRefresh = useRef(null);
 
   const refreshAppRuntime = useCallback(async () => {
-    setRuntime((prev) => ({
-      ...prev,
+    // An explicit or foreground read also satisfies an already queued auth
+    // refresh. Never issue a second bootstrap just because its timer remains.
+    if (deferredSessionRefresh.current !== null) {
+      clearTimeout(deferredSessionRefresh.current);
+      deferredSessionRefresh.current = null;
+    }
+    const sequence = ++refreshSequence.current;
+    // Do not expose cached Piece=true while checking a newer server state.
+    // Keep the previous non-Piece flags, version data and child placement.
+    const pending = {
+      ...latestRuntime.current,
       loading: true,
       error: null,
-    }));
+      featureFlags: withoutPieceFeatureFlags(latestRuntime.current.featureFlags),
+    };
+    latestRuntime.current = pending;
+    setRuntime(pending);
 
     try {
       const payload = await apiGet("/app/bootstrap", { auth: false });
+      // A late success cannot undo a newer failure/OFF response. Return the
+      // current snapshot, not a stale true value for this promise's caller.
+      if (sequence !== refreshSequence.current) return latestRuntime.current;
       const nextRuntime = buildRuntimeState(payload);
+      // A background/unknown-state bootstrap may update normal app metadata,
+      // but it cannot authorize a cached Piece presentation on the next resume.
+      if (AppState.currentState !== "active") {
+        nextRuntime.featureFlags = withoutPieceFeatureFlags(nextRuntime.featureFlags);
+      }
+      latestRuntime.current = nextRuntime;
       setRuntime(nextRuntime);
       return nextRuntime;
     } catch (error) {
-      setRuntime((prev) => ({
-        ...prev,
-        loaded: true,
-        loading: false,
-        error,
-      }));
+      if (sequence === refreshSequence.current) {
+        const failed = {
+          ...latestRuntime.current,
+          loaded: true,
+          loading: false,
+          error,
+          featureFlags: withoutPieceFeatureFlags(latestRuntime.current.featureFlags),
+        };
+        latestRuntime.current = failed;
+        setRuntime(failed);
+      }
+      // Preserve the existing rejection contract; obsolete errors do not
+      // replace a newer successful global runtime state.
       throw error;
     }
   }, []);
+
+  useEffect(() => {
+    let listening = true;
+    let previousAppState = AppState.currentState;
+
+    const invalidatePiecePresentation = (publish) => {
+      // Fence a request that began before this lifecycle boundary. No server
+      // operation is cancelled or retried, and no non-Piece flag is reset.
+      refreshSequence.current += 1;
+      if (deferredSessionRefresh.current !== null) {
+        clearTimeout(deferredSessionRefresh.current);
+        deferredSessionRefresh.current = null;
+      }
+      const invalidated = {
+        ...latestRuntime.current,
+        featureFlags: withoutPieceFeatureFlags(latestRuntime.current.featureFlags),
+      };
+      latestRuntime.current = invalidated;
+      if (publish) setRuntime(invalidated);
+    };
+
+    const subscription = AppState.addEventListener("change", (nextAppState) => {
+      if (!listening || nextAppState === previousAppState) return;
+      previousAppState = nextAppState;
+      if (nextAppState !== "active") {
+        invalidatePiecePresentation(true);
+        return;
+      }
+      // The existing refresh synchronously clears cached Piece=true. This is
+      // one bootstrap per active transition, never a preview generation/retry.
+      // Its failure state is already published by the existing runtime owner.
+      void refreshAppRuntime().catch(() => {});
+    });
+
+    // AuthProvider is a child of this provider. Observe the same existing
+    // client without reordering providers or retaining a session/token/user ID.
+    // All auth notifications invalidate advisory flags; none grants access.
+    const authSubscription = supabase.auth.onAuthStateChange(() => {
+      if (!listening) return;
+      invalidatePiecePresentation(true);
+      if (AppState.currentState !== "active") return;
+      // Keep the auth callback synchronous. Coalesce the current event burst
+      // and perform IO only after the auth callback has returned.
+      const timer = setTimeout(() => {
+        if (!listening || deferredSessionRefresh.current !== timer) return;
+        deferredSessionRefresh.current = null;
+        if (AppState.currentState !== "active") return;
+        void refreshAppRuntime().catch(() => {});
+      }, 0);
+      deferredSessionRefresh.current = timer;
+    });
+
+    if (previousAppState !== "active") invalidatePiecePresentation(true);
+    else if (restartInterruptedRefresh.current) {
+      // Effect replay can cancel the bootstrap while the child gate is still
+      // single-flight. Restart that interrupted read instead of leaving loading
+      // stuck; this is not a retry of generation or a failed server operation.
+      restartInterruptedRefresh.current = false;
+      void refreshAppRuntime().catch(() => {});
+    } else setRuntime(latestRuntime.current);
+    // Initial active startup remains owned by AppRuntimeBootstrapGate.
+    return () => {
+      listening = false;
+      restartInterruptedRefresh.current = deferredSessionRefresh.current !== null ||
+        (latestRuntime.current.loading && refreshSequence.current > 0);
+      subscription.remove();
+      authSubscription.data.subscription.unsubscribe();
+      invalidatePiecePresentation(false);
+    };
+  }, [refreshAppRuntime]);
 
   const isFeatureEnabled = useCallback(
     (name, fallback = true) => {
       const key = String(name || "").trim();
       if (!key) return Boolean(fallback);
+      if (isPieceFeatureFlag(key)) {
+        return AppState.currentState === "active" && isPieceFeatureEnabled(key, latestRuntime.current);
+      }
       const value = runtime?.featureFlags?.[key];
       return typeof value === "boolean" ? value : Boolean(fallback);
     },
