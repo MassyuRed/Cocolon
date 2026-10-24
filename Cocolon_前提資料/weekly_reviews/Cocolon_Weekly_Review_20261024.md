@@ -1460,3 +1460,248 @@ Mashは、GPUの空き待ちと常時確保費用を選定時の前提として�
 本体利用料0円はアプリ運用費0円を意味しない。追加学習/推論を動かす機械・電気・接続・保守・冗長化等は別。モデルを小さくしても同じGPUを同時間借り続ければ固定費は変わらず、「0.8Bなら4Bの1/5料金」とは計算しない。手元M4/16GBで運用できればレンタル固定費を減らす道になるが、独自学習版の読込、実入力長、意味保持・自然本文・訂正・保存再読、待ち時間・同時数・安定提供は未検証。M4性能/電気代/本番総額を作らず、新モデルを決定しない。
 
 今回の到達は明示撤回の反映と候補の公式確認のみ。STRUCTURE_MAP_DELTA_NONE（モデル/商品runtime/型/接続sourceは変更しない）、product_credit=0、正式Product Read0/3、PRODUCT_NOT_CLEAR、candidate_ready=false、automatic_progression=false、全体54.50％据置。
+
+
+
+<a id="20261025-vast-live-quote-and-same-gpu-model-policy"></a>
+## 19. 10/25 — Vast実出品の費用・契約条件と、同一GPU内でのモデル選定
+
+Mashの指示は「Vastの詳細を確認」「2Bも同GPUで動く可能性があるなら候補」「GPUと価格が同じなら、そのGPUで動く最も高性能なモデルを選ぶ」。2Bを0.6B/0.8Bの品質不足時だけの後備に固定する旧方針を更新する。**価格を先に固定し、そのGPU1台・同じ保存量・稼働時間・必要速度/同時数で成立する中から品質の高いモデルを比較する。** パラメータ数最大を商品品質最高と同一視しない。4B確定撤回と旧修正版診断の停止は維持し、新たな有料試験/契約へ転用しない。
+
+### 19.1 今回実際に行った照会
+
+公式[search offers API](https://docs.vast.ai/api-reference/search/search-offers)の公開endpointへ、認証・秘密値を使わず匿名のread-only POSTを実施しHTTP200を確認した。以前の4日前検索indexからの推測ではなく、今回の現出品照会。最終料金は `allocated_storage=30` を明示した結果で、先のdefault8GBの探索照会とは分ける。
+
+- RTX3060：JST **2026-10-25 08:41:46**。単GPU12GB、On-demand、verified/rentable/unrented、historical reliability>=99.5%、残期間>=60日、CUDA上限>=12.8、保存30GB、時給昇順で上位6出品。
+- データセンター別検索：JST **08:43:50**。同条件を基本にNVIDIA compute capability>=8.0/VRAM>=12GB/datacenter=trueへ広げ、上位3出品。RTX3060に限ったデータセンター検索は1件・約31,448円/月だったため、それをVastの全体最安と説明せず、別GPUも確認した。
+- 新規契約・instance作成・起動・課金・チャージ・本人情報送信・モデル重み取得/推論/学習は0。出品は取得時点でrentableであり、予約・確保済みではない。最終契約直前に同条件を再確認する。
+
+### 19.2 実出品の比較
+
+30日720時間・1ドル157円の仮定。下表はGPU+**保存30GB込み**、双方向通信/税/為替決済費/API共通基盤/予備機等は別。30GBが本番に十分とは実証していない。
+
+| 区分・出品ID | GPU/場所 | GPU+30GB時給 | 30日USD / 円 | 出品の契約終了日時JST |
+|---|---|---:|---:|---|
+| 一般host・54498042 | RTX3060 12GB / Poland | $0.06977778 | $50.24 / 約7,888円 | 2027-04-06 23:50:59 |
+| 一般host・57000358 | RTX3060 12GB / South Korea | $0.08833333 | $63.60 / 約9,985円 | 2027-04-21 13:53:43 |
+| datacenter限定検索・42458620 | RTX5060Ti 16GB級 / Maryland US | $0.19633333 | $141.36 / 約22,194円 | 2027-03-01 10:00:01 |
+| datacenter限定検索・41649273 | RTX5060Ti 16GB級 / Germany | $0.20300000 | $146.16 / 約22,947円 | 2028-01-01 16:00:00 |
+
+Poland例のGPU部分は$42.24/月、保存30GBは$8/月で、合計$50.24。通信はinstanceへ$0.00260417/GB、instanceから$0.00520833/GB。仮に両方向100GBずつなら+$0.78125（約123円）、合計約8,010円/月・税等別。これは利用量仮定で実請求ではない。韓国例は保存$6/月、通信各$0.00651042/GB。米国datacenter例は保存$6/月、通信各$0.03255208/GB。帯域条件はhostで違い、日本からの実RTT/速度は未実測。datacenterのRTX5060Tiは新しいGPU世代なので、採用するruntimeの互換確認も未了。
+
+### 19.3 公開資料で確認した契約・本番運用上の条件
+
+- [On-demand](https://docs.vast.ai/guides/instances/choosing/instance-types)は契約期間中の専有・固定価格・高優先。起動したまま維持すれば、利用者の要求ごとに借り直して空きを待つ方式ではない。Interruptibleは他需要で中断されるため、この常時提供候補へ混ぜない。
+- [Host契約仕様](https://docs.vast.ai/host/hosting-overview)では契約成立時に価格/仕様/終了日が固定され、後のhost値上げ・unlistは既契約を変更しない。終了日は無期限ではなく、延長はhostが同額以下で終了日を延ばす場合。値上げ後の既契約延長はできないため、期限前の継続/移行を用意する必要がある。
+- [料金内訳](https://docs.vast.ai/guides/instances/pricing)と[表示価格](https://docs.vast.ai/guides/instances/choosing/find-and-rent)はGPU+設定した保存領域、通信は別。停止しても保存費は継続し、GPUは解放される。今回の30GB込みへ保存30GB代を二重加算しない。
+- [Billing](https://docs.vast.ai/guides/reference/billing)は前払credits。残高0で自動停止/GPU解放が起こり、保存カードによる負残高等の自動精算があり得る。最低チャージ額の数値は未確認。今回支払方法/自動課金設定へアクセス・変更していない。
+- [Security FAQ](https://docs.vast.ai/guides/reference/faq/security)では個人hostとSecure Cloudの認証データセンターを区別する。verifiedはSecure Cloudと同義ではなく、hostの運用・セキュリティ差がある。最安の一般hostを本番の採用済み基盤へ変換しない。datacenter=trueで返った個別出品の認証/契約も契約前に確認する。
+- Reliabilityは過去の稼働/健康指標で、将来の無停止SLAではない。host障害・予定外保守・契約満了の復旧/移行、API認証・TLS・監視等の本番経路は今回未検証。単一GPU費用だけをアプリ全体費用へ換算しない。
+- Reservedは前払割引だが特定instanceに固定され、移行・早期解約条件がある。今回の比較は通常On-demandで、長期前払契約を採用/実行していない。
+
+### 19.4 同じ12GB GPUで比較するモデル
+
+| 候補 | 確認できた根拠 | 今回の判断 |
+|---|---|---|
+| Qwen3-0.6B / Qwen3.5-0.8B | 公式/MLXの公開実装 | 小型対照。最小であることだけで採用しない |
+| Qwen3.5-2B | [公式BF16重みindex](https://huggingface.co/Qwen/Qwen3.5-2B/raw/main/model.safetensors.index.json) total_size=4,548,144,832bytes | 同じRTX3060 12GBでの推論の有力候補へ戻す。元重みだけで約4.55GB |
+| Qwen3.5-4B（量子化も比較） | [公式BF16重みindex](https://huggingface.co/Qwen/Qwen3.5-4B/raw/main/model.safetensors.index.json) total_size=9,319,737,856bytes、量子化実装あり | 12GBでの比較余地あり。以前の4B確定の復活ではない |
+| Qwen3-8B・Q4_K_M等 | [Qwen公式GGUF](https://huggingface.co/Qwen/Qwen3-8B-GGUF/tree/main)の4bit系ファイル約5.03GB | 8B級にも重み容量上の比較余地。上限/最良とは未確定 |
+
+全て上記の容量は保存重みで、実行時VRAMではない。cache/作業領域/実入力長/生成長/同時数/LoRAで必要量が増える。[runtimeのメモリ/並列数条件](https://docs.vllm.ai/en/latest/configuration/optimization/)を維持し、Cocolonの必要入力を切り捨てたり意味採用を緩めたりして「動く」にしない。MLX形式をCUDAへそのまま使えるとも扱わない。追加学習は推論と別条件であり、同じ12GBでの追加学習成功も未実証。
+
+同一GPU1台・同時間・同diskならモデルを0.8Bから2B等へ替えても基本料金は同額。大モデル化で処理が遅くなり、必要台数を増やせば全体費用は変わる。**必要な速度/同時数・三中核品質を同じ実入力で満たす中で最も高性能な候補を選ぶ**というMash方針を採用するが、現時点で最大/最良モデルは決定しない。量子化・学習済み独自版の意味保持/自然本文/訂正/保存再読の実確認は残る。
+
+### 19.5 公開API照会の再現用抜粋
+
+下記は今回の公開出品情報だけで、credential/本人入力/public IPを含まない。JSON内の月額は720h、円額は157円/$の計算値。
+
+```json
+{
+  "observed3060_jst": "2026-10-25T08:41:46.542945+09:00",
+  "observed_datacenter_jst": "2026-10-25T08:43:50.587820+09:00",
+  "method": "anonymous read-only POST https://console.vast.ai/api/v0/bundles; HTTP 200; no instance creation",
+  "filters3060": {
+    "type": "on-demand",
+    "gpu_name": {
+      "eq": "RTX 3060"
+    },
+    "num_gpus": {
+      "eq": 1
+    },
+    "verified": {
+      "eq": true
+    },
+    "rentable": {
+      "eq": true
+    },
+    "rented": {
+      "eq": false
+    },
+    "reliability": {
+      "gte": 0.995
+    },
+    "duration": {
+      "gte": 5184000
+    },
+    "cuda_vers": {
+      "gte": 12.8
+    },
+    "disk_space": {
+      "gte": 30
+    },
+    "allocated_storage": 30,
+    "order": [
+      [
+        "dph_total",
+        "asc"
+      ]
+    ],
+    "limit": 6
+  },
+  "filters_datacenter": {
+    "type": "on-demand",
+    "num_gpus": {
+      "eq": 1
+    },
+    "verified": {
+      "eq": true
+    },
+    "rentable": {
+      "eq": true
+    },
+    "rented": {
+      "eq": false
+    },
+    "reliability": {
+      "gte": 0.995
+    },
+    "duration": {
+      "gte": 5184000
+    },
+    "cuda_vers": {
+      "gte": 12.8
+    },
+    "compute_cap": {
+      "gte": 800
+    },
+    "gpu_ram": {
+      "gte": 12288
+    },
+    "datacenter": {
+      "eq": true
+    },
+    "disk_space": {
+      "gte": 30
+    },
+    "allocated_storage": 30,
+    "order": [
+      [
+        "dph_total",
+        "asc"
+      ]
+    ],
+    "limit": 3
+  },
+  "selected_offers": [
+    {
+      "offer_id": 54498042,
+      "machine_id": 149975,
+      "gpu": "RTX 3060",
+      "gpu_ram_reported_mb": 12288,
+      "geolocation": "Poland, PL",
+      "hosting_type": 0,
+      "verified": "verified",
+      "rentable": true,
+      "rented": false,
+      "is_bid": false,
+      "usd_hour_gpu": 0.05866666666666666,
+      "usd_hour_gpu_plus_storage30": 0.06977777777777777,
+      "usd_month_storage30": 7.999999999999999,
+      "usd_gb_to_instance": 0.0026041666666666665,
+      "usd_gb_from_instance": 0.005208333333333333,
+      "contract_end_jst": "2027-04-06T23:50:59.000+09:00",
+      "reliability_historical": 0.9955793,
+      "cuda_max_good": 13,
+      "driver": "580.173.02",
+      "static_ip": false,
+      "usd_month720": 50.239999999999995,
+      "jpy_month720_at157": 7887.679999999999
+    },
+    {
+      "offer_id": 57000358,
+      "machine_id": 57254,
+      "gpu": "RTX 3060",
+      "gpu_ram_reported_mb": 12288,
+      "geolocation": "South Korea, KR",
+      "hosting_type": 0,
+      "verified": "verified",
+      "rentable": true,
+      "rented": false,
+      "is_bid": false,
+      "usd_hour_gpu": 0.08,
+      "usd_hour_gpu_plus_storage30": 0.08833333333333333,
+      "usd_month_storage30": 6,
+      "usd_gb_to_instance": 0.006510416666666667,
+      "usd_gb_from_instance": 0.006510416666666667,
+      "contract_end_jst": "2027-04-21T13:53:43.000+09:00",
+      "reliability_historical": 0.9977586,
+      "cuda_max_good": 13,
+      "driver": "580.159.03",
+      "static_ip": false,
+      "usd_month720": 63.6,
+      "jpy_month720_at157": 9985.2
+    },
+    {
+      "offer_id": 42458620,
+      "machine_id": 105116,
+      "gpu": "RTX 5060 Ti",
+      "gpu_ram_reported_mb": 16311,
+      "geolocation": "Maryland, US",
+      "hosting_type": 1,
+      "verified": "verified",
+      "rentable": true,
+      "rented": false,
+      "is_bid": false,
+      "usd_hour_gpu": 0.18799999999999997,
+      "usd_hour_gpu_plus_storage30": 0.1963333333333333,
+      "usd_month_storage30": 6,
+      "usd_gb_to_instance": 0.032552083333333336,
+      "usd_gb_from_instance": 0.032552083333333336,
+      "contract_end_jst": "2027-03-01T10:00:01.000+09:00",
+      "reliability_historical": 0.996756,
+      "cuda_max_good": 13.2,
+      "driver": "595.80",
+      "static_ip": true,
+      "usd_month720": 141.35999999999999,
+      "jpy_month720_at157": 22193.519999999997
+    },
+    {
+      "offer_id": 41649273,
+      "machine_id": 113463,
+      "gpu": "RTX 5060 Ti",
+      "gpu_ram_reported_mb": 16311,
+      "geolocation": "Germany, DE",
+      "hosting_type": 1,
+      "verified": "verified",
+      "rentable": true,
+      "rented": false,
+      "is_bid": false,
+      "usd_hour_gpu": 0.19466666666666665,
+      "usd_hour_gpu_plus_storage30": 0.20299999999999999,
+      "usd_month_storage30": 6,
+      "usd_gb_to_instance": 0.013020833333333334,
+      "usd_gb_from_instance": 0.013020833333333334,
+      "contract_end_jst": "2028-01-01T16:00:00.000+09:00",
+      "reliability_historical": 0.9965631,
+      "cuda_max_good": 13.2,
+      "driver": "595.104.02",
+      "static_ip": false,
+      "usd_month720": 146.16,
+      "jpy_month720_at157": 22947.12
+    }
+  ]
+}
+```
+
+今回変更は全機能00と本weeklyの2文書だけ。STRUCTURE_MAP_DELTA_NONE（商品source/型/接続/runtime/学習code不変）。追加GPU/課金/学習/推論/DB/Render/RN/merge/deploy0、product_credit=0、正式0/3・PRODUCT_NOT_CLEAR・candidate_ready=false・automatic_progression=false・全体54.50％を維持。
