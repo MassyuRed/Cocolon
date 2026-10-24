@@ -2,7 +2,7 @@
 
 ## 最新回 — 2026-10-24：第8回報告会（10/24〜10/31）
 
-**最新は[第8回議事録](Cocolon_Weekly_Review_20261024.md)です。** 今週10/17報告後〜10/24の作業・成果、先週目標の達否、10/24〜10/31の次週案と公開への影響を記録しました。会議は進行中です。Mashが**Qwen3.5-4B・GPU16GB優先/24GB許容**を確定し、[第8回§7](Cocolon_Weekly_Review_20261024.md#4b-decision-and-runpod-usage)へ追記しました。次週案全体の採用・会議終了は未記録です。
+**最新は[第8回議事録](Cocolon_Weekly_Review_20261024.md)です。** 今週10/17報告後〜10/24の作業・成果、先週目標の達否、10/24〜10/31の次週案と公開への影響を記録しました。会議は進行中です。Mashが**Qwen3.5-4B・GPU16GB優先/24GB許容**を確定し、[第8回§7](Cocolon_Weekly_Review_20261024.md#4b-decision-and-runpod-usage)へ追記しました。次週の推奨順位は[§4](Cocolon_Weekly_Review_20261024.md#next-week-priorities)へ更新しました。主枠は4B学習＋CMEE実接続、独立並行はPiece通常保存、共通3欠陥は必須枠、次いで通常Analysis一往復。広いモデル比較・Flex本配備・System Context全面再生成は後置します。計画全体の採用・会議終了は未記録です。
 
 Emlisの限定意味保持・停止修復、Pieceの新iOS描画／通常保存・書出しsource／private API配置、CMEE P1〜P5の限定内部保存再読、9B小規模学習と4B／9B比較が前進。一方、Piece P-W1〜3の本人端末一往復、通常Analysis、購入・account境界、三中核の商品受入れは未達です。比較したモデル両候補は品質未合格ですが、学習・接続対象のモデル選定は4Bで確定。P6は未完。固定公開運用案は費用不成立で、5人14日・2万円総枠・24GB Serverlessは未承認または未検証の検討案です。
 
