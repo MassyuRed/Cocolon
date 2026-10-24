@@ -1379,3 +1379,11 @@ Mashは§14の一回案について「進めていいよ」と明示承認。対
 固定4依存の導入とQwen class importが成功し、Torch2.6.0+cu126/実path/CUDA12.6は不変。取得code/datasetは固定27b06f19の2教師/EFREE6・SHA検証が成功。このPodだけのactual planに承認、GPU$0.22/h、free最低22GiB、観測済み40GB XFS、Pod期限と停止担当を記録した。
 
 実run ID `20261024-110719-dbe3c1bb`、run wrapper PID2892、起動UTC11:07:13。run_attemptのある同じdirectoryで一度だけ開始。Pod経過776秒時点でrun.json RUNNING/stage before、before_nll2行・before raw3行を保存確認。勾配更新・adapter・afterはこの確認時点で未実施。nvidia-smiの瞬間使用16376MiB/24576MiBはpeakや16GB不適合の確定ではない。因果conv/linear attentionの追加kernelなしで公式reference実装を使用しており、warningをエラーと扱わず、実行途中の依存追加や設定変更はしていない。
+
+### 15.2 重み入り途中退避をPod外で受領・照合
+
+Pod経過1074秒で2update完了、stage after_saved_adapter_reload、before NLL2/生成8、training2、after NLL2/生成1を確認。経過1319秒でafter生成5/8。新規モデル呼出し・追加診断は行わず、同じrunの残りを継続している。
+
+最初のarchive（stage adapter_saved_before_reload）をJupyterのDownloadからPod外へ受領。archive SHA256 `7dc38f4867911c58c7b3853f9e605d5d12d38c2abc772d9b7381da0e95968b7f`、adapter本体SHA256 `56cf9b8a2f9e8c256b9e6bbedfc9b05efacb71a6fb4d28f53719d12f147b4005`。全22memberの集合/bytes/SHA、固定source/revision/profile、実safetensors32tensorのshape/dtype/offset/全値finiteをPod外で確認。3,353,127bytesの重み入り原本を永続保存済み（private owner `libfile_d9425b1c05d8819180c37eee5a67ddd1`、version0）。まだ最終archiveではなく、最終版で同じ保存identityを更新する予定。認証token/credential/base weights/cacheを含めない。
+
+初回の勾配normは訂正行0.24094069、初回行0.43510807で、非0/finite。学習前NLLは初回0.38451940/訂正0.17994213。これを品質改善率にはしない。受領したbefore rawのFIT2を固定API02c0b943へCPU接続した結果は採用0/2、本文0/2、範囲外EFREE6は未評価6。初回INVALID_EVIDENCE、訂正semantic_shape_invalidで、モデル/revision/messagesのidentityは一致。原rawの修正やfixture置換は行わない。afterの採否・全本文は最終受領後に比較する。
