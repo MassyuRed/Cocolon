@@ -557,5 +557,58 @@
     },
     "original_weights_recovered": false,
     "semantic_review": "TEACHER_NLL_DECREASED_BUT_OBSERVATION_BEHAVIOR_NOT_ESTABLISHED"
+  },
+  "next_training_amount_comparison": {
+    "status": "CONCRETE_RECOMMENDATION_NOT_IMPLEMENTED_NOT_RUN",
+    "proposed_by": "Karen in response to Mash asking どうするの",
+    "purpose": "test same-teacher response fit before adding teachers; insufficient training amount is not yet established",
+    "start": "same pinned base, one new uninterrupted training trajectory",
+    "checkpoints_epochs": [
+      1,
+      4,
+      16
+    ],
+    "checkpoints_steps": [
+      9,
+      36,
+      144
+    ],
+    "max_epochs": 16,
+    "max_steps": 144,
+    "teacher_rows": 9,
+    "comparison_cases": 6,
+    "training_data_changed": false,
+    "prompt_changed": false,
+    "learning_rate_changed": false,
+    "lora_targets_changed": false,
+    "existing_adapter_resume": false,
+    "reason": "received adapter has no optimizer state; compare amounts within the same new training trajectory",
+    "evaluation": "same teacher NLL + actual 9 teacher replies + fixed 6 comparison replies at base and each checkpoint; not NLL-only or exact-text acceptance",
+    "primary_semantic_failures": [
+      "unsupported missing reply or promise/exclusion in shop",
+      "friend-intent forced choice instead of person's concern",
+      "collaboration/achievement added as joy reason after chair correction"
+    ],
+    "time_limit_seconds": 1800,
+    "kill_after_seconds": 30,
+    "time_limit_scope": "run only; prepare/download and whole Pod billing excluded",
+    "stop_on": [
+      "nonfinite loss",
+      "OOM",
+      "144 cumulative optimizer steps",
+      "run timeout"
+    ],
+    "automatic_extension": false,
+    "automatic_retry": false,
+    "automatically_stops_pod": false,
+    "save": "adapter and raw at each checkpoint; update archive; download archive plus checksum before manual Stop",
+    "same_run_only_comparison": true,
+    "existing_nine_are_not_mash_gold": true,
+    "comparison_six_are_not_blind_final_eval": true,
+    "new_mash_observation_requested": false,
+    "runner_implemented": false,
+    "gpu_started": false,
+    "training_performed": false,
+    "limits": "If fitted teachers improve but comparison cases do not, examine transfer/data coverage; if teacher behavior does not improve by limit, stop this repetition recipe and reconsider method. No proof of optimal epochs, generalization or product quality."
   }
 }

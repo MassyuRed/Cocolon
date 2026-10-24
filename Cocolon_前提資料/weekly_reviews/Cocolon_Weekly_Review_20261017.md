@@ -2595,3 +2595,15 @@ Mashからlatest_results(1).jsonとcocolon_recreated_checkpoint.tar.gz／.sha256
 学習外6件も全12本文を確認。E06乾燥完了補完の解消とE05参加意欲の明瞭化はあるが、E01承認断定、E02因果逆転、E03未記載の交流の補完が残り十分な品質改善は示さない。初回とのraw一致はbase6/6、after2/6。教師生成のJSON解析0/9ずつも、既知のJSON-only明示のないprompt／検査不整合と分ける。NLL低下だけで商品品質・一般化・正式Product Readへ昇格しない。
 
 次は教師追加より先に、同じ9件で学習量だけを変える小比較の具体案が候補。ただし原因を学習量不足へ確定せず、教材／module／JSON指示を同時変更しない。追加実行は未開始で自動進行しない。全体00・教材入口・Free README／experiment・初回trial README・全file地図を同期。4dataset・元runner／bootstrap・原18候補・教示5参照・撤回第7回・商品runtimeは不変。STRUCTURE_MAP_DELTA_NONE（offline受領結果資料のみ）。華恋からGPU／有料推論／学習・DB／Render／API／RN・merge／deploy0。
+
+
+<a id="20261024-emlis-free-training-amount-proposal"></a>
+## AE. 2026-10-24 — 次の推奨を同じ9教材の学習量比較へ具体化（未実装・未実行）
+
+Mashの「どうするの？」を受け、current head9ce701bの全体現在地・作業規則・前回AD・実結果と元runnerを照合。初回1epoch／9stepで全9NLLは低下したが、教えた事例にも未返信・約束・訂正後の喜びの理由の補完が残る。教材追加より前に、同じ9件・同じ設定で繰り返し量だけを変える一回の比較を華恋の推奨として具体化した。学習量不足が確定したという判断ではなく、Mashの新しい実行承認や商品採用として記録しない。
+
+[Free pack §12](../observation_learning/training/2026-10-24-emlis-free-pilot/README.md#12-次の推奨案同じ9教材で学習量だけを比較する具体化未実装未実行)で、新runの同一連続学習から累積1／4／16epoch（9／36／144step）の途中adapter・教師9件NLL／回答・既存比較6件の回答を保存する案へ固定。model／revision・原9教師・4dataset・対象module・学習率・JSON指示・生成条件は維持する。1／4／16は最適値ではなく、少数点で幅を持たせる選択。受領adapterにAdamW状態がないため、新optimizerで読み直して初回の単純継続とせず、新run内の学習履歴で比較する。
+
+上限16周／144step・run30分＋30秒、非有限loss／OOM等で停止、自動延長／再試行なし。各時点で重み入りarchiveを更新し、手元へのダウンロード・checksum確認後にPodを手動Stop。prepare／待機／全Pod課金は時間制限外。新しい観測会・Mashの教材作成負担は増やさず、本文の全件確認と記録は華恋が担う。教えた9件でも改善しない場合はこの反復条件を打切り、教師に効くが比較6件へ移らない場合は教材範囲・転移を検討する。どちらも追加学習全体の可否や商品合格へ一般化しない。
+
+今回は既存5資料（Free README／experiment・全体00・教材入口・本weekly）の具体案だけを更新。新runner／コマンドは未作成、GPU起動・学習・課金・商品source・DB／Render・merge／deploy0。原教材・受領結果・重みは不変。STRUCTURE_MAP_DELTA_NONE（既存offline試験の計画のみ、file責務・商品接続の差分なし）。追加実行は自動で行わない。
