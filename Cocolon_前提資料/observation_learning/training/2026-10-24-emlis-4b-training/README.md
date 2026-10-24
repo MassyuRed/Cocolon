@@ -1,10 +1,10 @@
 # Emlis 4B学習・保存再loadの限定pack
 
-> **最新：一回の実GPU診断はMash承認済みで実行中。** [最新weekly §15](../../../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261024-approved-4b-gpu-diagnostic)が唯一のlive再開先。試験Podを1台作成済みで、新規起動や同一診断の再実行をしない。以下の「未承認」は一回案作成時点の記録。配布用execution_plan.jsonは非実行templateを維持し、Pod上の一回限定actual planと区別する。
+> **最新：承認一回の実4B診断は完了し、重み回収・試験Pod停止/削除まで終了。** [実結果と次の最小候補](../../trials/2026-10-24-qwen4b-cmee-diagnostic/README.md)。2update/前後16生成は完走しましたが、実rawのCMEE採用は前後0/2で商品品質未合格です。以下の一回案/CPU準備は当時の記録。配布用execution_plan.jsonは非実行templateを維持し、終了した一回の承認を新GPU/再実行へ継承しません。
 
 対象は`Qwen/Qwen3.5-4B`、固定revision `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`、private profile `emlis_model_proposal.v1`です。旧9B pack・教師9件・旧eval・受領重みは変更しません。
 
-このpackはCPU側の接続・学習コードを実装済みです。固定4Bの実tokenizerとcheckpoint indexはCPU検証済み、重み／CUDA／学習／16・24GB適合／商品品質は未検証です。`contract_examples.json`は説明用原本で、symbolic priorと未実装native projectionを含むため学習できません。
+このpackはCPU実装後、承認された一回の実GPU診断を完了しました。4B重みの読込・LoRA2update・保存adapter非学習reload・24GBでの前後生成と回収を確認。16GB適合・意味採用・商品品質は未成立です。`contract_examples.json`は当時の非学習説明例で、正式2教師/実rawと区別します。
 
 ## 教材の受口
 
@@ -31,9 +31,9 @@ bash -n runpod.sh
 
 固定依存はTransformers5.19.0、PEFT0.21.2、Accelerate1.15.0、Safetensors0.8.0です。bootstrapは依存を自動installせず、既存Torch/CUDAを置換しません。必要な環境構築は既存Torch/CUDAの版を記録・維持して別途用意します。
 
-## GPU開始前の未確定項目
+## 配布用templateと、この一回の終了状態
 
-`execution_plan.json`はcontext=8192／max_new=2048です。下記の一回案としてprocess最大5400秒・計画予算$1・開始時free 14GiB以上を記載しました。実GPU単価・実mount・停止担当・有料実行の承認は未確認で、gpu_run_authorized等はfalseのままです。現状態でrunは拒否します。数値を提案したことを、GPU起動・課金の許可や実請求上限の成立へ読み替えません。
+`execution_plan.json`はcontext8192/max_new2048の非実行templateです。今回の承認はPod1台・診断1回に適用し、Pod上の実単価/確認済みmount/期限を記録したactual planは回収archiveへ保存しました。一回は終了しており、templateのfalseを変更して新しい実行を始める許可はありません。作成時の一回案と、実行/回収/削除の事実は実結果とweekly §15へ戻ります。
 
 16GBを第一候補、24GBまで許容します。runnerは実GPU名／total/free／BF16／Torch/CUDAを記録し、16/24GB classと計画した空きを確認します。旧40/32GiB gateは使いません。この確認も実際の学習peakを証明しません。index上のcheckpoint bytesにはactivation、LoRA optimizer、KV cache、CUDA runtime等が含まれず、GPU適合には実測が必要です。
 
@@ -69,7 +69,7 @@ python verify_cmee.py --directory . --run-directory results/実runID --api-root 
 
 `runpod.sh fetch`は40文字の固定`COCOLON_SOURCE_COMMIT`からallowlistのfileとmanifestのdatasetを新directoryに取得し、hash検証します。動くbranch名から取得せず、既存directoryへ上書きしません。未完成datasetではfetch完了にもなりません。
 
-後日、GPU計画を具体化して確認した同じsourceで以下のmodeを使います。**現時点でGPU実行可能な手順ではありません。**
+以下はmodeの使用方法です。終了した一回を再実行する指示ではなく、template単体では有料runを拒否します。新しい有料実行は別の具体的判断が必要です。
 
 ```bash
 bash runpod.sh fetch
@@ -88,13 +88,13 @@ exportは対象run、コード、dataset、manifest/plan、adapter3fileだけを
 
 **archive作成だけではPod外退避完了ではありません。** Pod外でarchiveとchecksumを受領し、内部manifestとadapter本体を確認後にPodを手動Stopします。失敗時は`--allow-missing-adapter`でlogのみ退避できますが、重み退避成功にはなりません。Pod Stop状態・GPU総時間・実単価・storage費は別途記録します。
 
-前回はstdlib/stubtokenizerの8検査を実施。今回のtail-loss修復後は同じ8件＋新3件の11検査が成功し、実4B tokenizer/indexもoffline cacheから再測定しました。prefix／final assistant mask／EOS／no truncationと固定indexの16moduleを保持しています。初回はprompt2986＋completion1094＝4080、訂正後は5979＋1877＝7856 tokens。最大prompt5979＋返答上限2048＝8027で8192以内です。実GPUのmodule／勾配／保存後reload／VRAM／学習効果、本番・本人端末・商品受入れは未確認です。
+前回はstdlib/stubtokenizerの8検査を実施。今回のtail-loss修復後は同じ8件＋新3件の11検査が成功し、実4B tokenizer/indexもoffline cacheから再測定しました。prefix／final assistant mask／EOS／no truncationと固定indexの16moduleを保持しています。初回はprompt2986＋completion1094＝4080、訂正後は5979＋1877＝7856 tokens。最大prompt5979＋返答上限2048＝8027で8192以内です。後続の実GPUでmodule/勾配/保存後reload/24GB診断を確認しましたが、意味採用0/2・商品品質未合格です。本番/本人端末/16GBは未確認です。
 
 ## 今回保存したCPU結果と次の実行境界
 
 `cpu_connection_results.json`は合成候補による実Engineの原source・packet・snapshot・本文・問い、`cpu_raw_consumer_results.json`は同target rawのconsumer結合結果要約、`cpu_tokenization_results.json`は重みを読み込まない実tokenizer／固定indexの結果です。モデルrawや学習結果には数えません。API固定sourceは`02c0b943c96b67cb32354e1d3352a00dcb768e64`です。保存rawの検証には、このAPI commitの別checkoutを`--api-root`へ明示します。
 
-追加の観測会や旧7教師の無理な変換はしません。次は下記一回案の有料範囲とRunpod画面操作をMashが判断し、実slotの単価・残高・保存mount・停止担当を確認してから実行条件を確定します。今回のコード修復・計画作成からGPU起動・有料推論・学習実行・24GB自動再借用・通常有効化を開始していません。
+今回の一回は学習/回収/削除まで終了しました。追加の観測会や旧7教師の無理な変換をせず、次は実rawの座標/形式拒否から既存OUTPUT_SPECと同じ2教師をCPUで揃える最小修復候補です。具体の残差と未実装の範囲は実結果READMEに保持し、新GPU/追加epoch/通常有効化へ自動進行しません。
 
 
 <a id="single-gpu-diagnostic-proposal"></a>

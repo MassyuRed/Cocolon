@@ -4731,3 +4731,17 @@ Cocolon新pack F/=`Cocolon_前提資料/observation_learning/training/2026-10-24
 上記F/の既存5fileを更新。run_pilot.pyは全context/教師集合を保持してNLL/学習のlogitsを教師先頭の前位置からに限定（L-P+1、labels[:,P-1:]）。test_training_pack.pyは独立数値loss/勾配・実呼出し/不正targetの3件追加で計11成功。execution_plan.jsonはGPU単価上限$0.30/h・Pod最大2時間/process5400秒・計画$1の未承認一回案を保持し、実単価null/認可・mount確認falseを維持。cpu_tokenization_results.jsonは実tokenizer/indexの今回再測定、README.mdは具体案/公式費用/手動停止/未実証と動的一往復の残差を所有する。
 
 同じ変更単位で全機能00と最新weekly§14を更新。exact8path、正式dataset/旧教師/評価/API sourceと型/商品経路は不変。STRUCTURE_MAP_DELTA_NONE。GPU/重み/学習/有料推論/DB/Render/通常有効化0。実GPUメモリや品質改善へCPU数値を換算しない。全体設計01・current maps・schemaの構造差分は0で、無関係な再更新をしない。
+
+
+### 2026-10-24 — 実4B一回診断の結果所在（商品runtime構造差分なし）
+
+新folder `Cocolon_前提資料/observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/` の5fileを追加。
+
+| file | 責務 |
+|---|---|
+| README.md | 承認一回の実結果、品質未合格、回収/Pod削除、次の最小修復候補 |
+| run_summary.json | 固定source/model/adapter、2update/前後16生成/4NLL、実GPU memory、回収hash/保存identity、停止/削除時刻と費用概算 |
+| before_cmee.json / after_cmee.json | 実rawを置換せずP1→意味/本文へ消費した実採否。FIT前後0/2、EFREE6は各段階で範囲外 |
+| quality_review.json | 原入力/訂正sourceと全16surfaceの実所在、前後の局所改善/悪化、商品未達、未実装の次候補 |
+
+同じ差分単位で全機能00・pack README・観測入口・本01A・最新weekly §15.3を更新。構造/公開API/意味schema/採用条件/製品code/旧教師/型/通常DB/Render/RNは不変で、全体設計01・current maps・schema05の再更新はしない。STRUCTURE_MAP_DELTA_NONE（実行結果と所在のみ）。新規Pod1/学習試行1、追加試行0、最終重み回収後に当該Pod停止/削除確認。限定TECHNICAL_CREDIT、商品0/正式0/3/全体54.50％据置。

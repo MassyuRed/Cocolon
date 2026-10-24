@@ -1,20 +1,22 @@
 # Mashの観測技術を継承するための記録
 
-> **観測会・AI選定の開始前も [Cocolon 最新情報 — 全機能・全状態](../00_cocolon_current_product_and_state.md) を毎回全文読む。** 学習済AI＋CMEE接続とQwen3.5-4B採用は既決。学習・実接続・商品品質は未完了。Emlisだけで全体を完結して判断せず、Piece・Analysis・もしもルートを含む機能間接続を確認する。今回変化した方針・状態・残件は全体現在地へ同じ変更単位で置換更新する。
+> **観測会・AI選定の開始前も [Cocolon 最新情報 — 全機能・全状態](../00_cocolon_current_product_and_state.md) を毎回全文読む。** 学習済AI＋CMEE接続とQwen3.5-4B採用は既決。一回の実学習診断は完了、実rawの採用・通常接続・商品品質は未成立。Emlisだけで全体を完結して判断せず、Piece・Analysis・もしもルートを含む機能間接続を確認する。今回変化した方針・状態・残件は全体現在地へ同じ変更単位で置換更新する。
 
 作成日：2026-10-20（日本時間）
 
 Cocolon／EmlisAIが、相手自身の価値基準を学び、その人の思考経路を辿って理解を更新する技術を育てるための保存先です。Mashの口調や結論だけを模倣することを目的にしません。
 
-## 現在地（2026-10-24・承認済み4B候補のCPU接続・学習コードを実装）
+## 現在地（2026-10-24・一回の実4B診断完了、CMEE採用は未達）
 
-4B確定・GPU16GB優先／24GB許容を保持する。Mashが具体案に「進めて」と承認し、[CM-01/T1 actual](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-4b-model-proposal-implemented)をAPI02c0b943へ実装。source-bound意味＋自然本文案の独立読取、実問い→本人訂正、意味先行保存・同proposal再開を新規offline Freeで確認した。thin async sourceと保存raw consumerまでで、実4Bは未呼出し。backend限定220検査と[新4Bpack](training/2026-10-24-emlis-4b-training/README.md)の8検査が成功。新2教師は合成編集の診断targetで品質goldではなく、旧7件は未対応。旧EFREE6は学習外・既読のstandalone proxyで意味成功へ加算しない。
+4B確定・16GB優先/24GB許容を保持。[CPU接続](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-4b-model-proposal-implemented)と[4Bpack](training/2026-10-24-emlis-4b-training/README.md)を使い、Mash承認の一回をRTX3090 24GBで実行。2診断教師/1epoch/2update・保存adapter非学習reload・before/after各8生成を完了し、全16正常stop/JSON構文成功。正式な商品品質goldではなく、旧7教師は未対応、旧9教師/eval/9B重みと第7回撤回は不変。
 
-固定4Bの実tokenizer/indexをCPU確認済み。初回4080・訂正後7856 tokens、最大prompt5979+max_new2048=8027、context8192で原文/labelの切捨てなし。重み・CUDA・LoRA更新・16/24GB適合・非学習reloadの実GPU成功・実モデル品質・通常有効化は未実施。GPU単価・時間／支出枠・mount・Pod外受領先と停止を固定してから一回の診断実行を判断する。旧9教師／eval／受領9B重み・第7回撤回は維持する。説明用contract_examples.jsonは当時の非学習例として残し、現在の正式な限定診断targetは新packのsft_examples.jsonlに分ける。
+[実結果・raw採否・全本文所見](trials/2026-10-24-qwen4b-cmee-diagnostic/README.md)を保存。教師加重NLL0.25527284→0.24949186だが、固定FITの意味採用/本文は前後とも0/2。根拠位置/形式、訂正後の旧意味残存、三人称の説明的Receptionが残る。EFREE6は既読の学習外proxyで意味profile範囲外、独立未知評価へ数えない。局所改善と悪化が混在し、全般的な商品品質改善は未確認。
+
+重み入り最終archive全24member/32tensorをPod外で照合し永続保存後、試験Podを停止/削除済み。peak allocated14.954GiB/reserved17.545GiB、16GB未試験。概算約$0.13（明細/税未照合）、計画$1/最大2h内。一回の有料承認は終了。次は既存指示の座標/形と2教師messagesをCPUで揃える最小候補で、追加epoch・新GPU・モデル再選定・通常有効化へ自動進行しない。動的一往復/本人端末/商品受入れは未成立。
 
 ### 費用検討の保持
 
-680／1,480円の月額原価を、4B＋独自LoRA候補／Flex24GB・min0／max4・基準同時数1、旧利用感度の有料50／無料950・月78,980生成へ固定してCPU試算済み。出力25TPSを短文A40参照、入力1,000TPS・起動率10%／30秒等を未測定の仮定とすると、運用費95,094円／手取り計画27,262円、差額−67,833円で、この計算基準案は不採用を推奨。25TPSのまま起動・入力・待機ゼロでも運用費76,874円で、税込売上42,000円を超える。これは本番実測や680／1,480円一般の否定ではない。同GPU・同token仕事量・同仮定性能なら4B／9B費用は同額。価格維持には全GPU課金を平均4.46秒/生成以内へ収める実証が必要。モデルは後続のMash決定で4Bに確定。旧1／4／16周比較・価格quota変更は保留で、現在の学習／接続作業は上記CM-01/T1に従う。 [固定案・全費用・未測定性能の境界](model_selection/2026-10-24-production-economics/README.md)／[最新weekly AJ](../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261024-production-economics-calculated)が再開先。追加GPU・学習・料金quota実設定は今回0。元の[4B／9B実比較12回答](trials/2026-10-24-qwen4b-9b-comparison/README.md)は完走したが両方商品品質未合格。既存Emlis9教師とPiece／Analysis完成教師0の区別は保持し、費用未成立のまま育成を先行しない。
+680／1,480円の月額原価を、4B＋独自LoRA候補／Flex24GB・min0／max4・基準同時数1、旧利用感度の有料50／無料950・月78,980生成へ固定してCPU試算済み。出力25TPSを短文A40参照、入力1,000TPS・起動率10%／30秒等を未測定の仮定とすると、運用費95,094円／手取り計画27,262円、差額−67,833円で、この計算基準案は不採用を推奨。25TPSのまま起動・入力・待機ゼロでも運用費76,874円で、税込売上42,000円を超える。これは本番実測や680／1,480円一般の否定ではない。同GPU・同token仕事量・同仮定性能なら4B／9B費用は同額。価格維持には全GPU課金を平均4.46秒/生成以内へ収める実証が必要。モデルは後続のMash決定で4Bに確定。旧1／4／16周比較・価格quota変更は保留で、現在の学習／接続作業は上記CM-01/T1に従う。 [固定案・全費用・未測定性能の境界](model_selection/2026-10-24-production-economics/README.md)／[最新weekly AJ](../weekly_reviews/Cocolon_Weekly_Review_20261017.md#20261024-production-economics-calculated)が再開先。費用試算作成時のGPU・学習・料金quota実設定は0。後続の一回診断は上段へ区別する。元の[4B／9B実比較12回答](trials/2026-10-24-qwen4b-9b-comparison/README.md)は完走したが両方商品品質未合格。既存Emlis9教師とPiece／Analysis完成教師0の区別は保持し、費用未成立のまま育成を先行しない。
 
 [Free9教師の限定LoRA試験](training/2026-10-24-emlis-free-pilot/README.md)はMashのA40で初回9stepと、同設定の別run再作成・非学習の教師適合診断まで完了。[別runの原本・重み照合・全本文所見](trials/2026-10-24-qwen9b-free-lora/recreated-run/README.md)を保存。初回adapterは未回収だが、別runの重み入りarchive全33file／checksumは受領照合済み。加重NLL1.81506→1.65714、全9件低下、生成8/9変化。ただし未返信や約束、訂正後の喜びの原因の補完が教えた事例にも残り、十分な観測品質改善は未確認。初回重みの復元とは扱わない。JSON-only明示のない旧prompt／解析不整合は試験側の不足と分ける。原18候補・教示5参照・9教師・旧6評価・受領重みを変更しない。新しい観測会をMashへ依頼せず、確定した4Bの契約一致・同一版の学習前後とCMEE接続を華恋が確認する。
 
