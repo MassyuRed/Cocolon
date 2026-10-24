@@ -3499,3 +3499,18 @@ Mashの追加範囲への「進めていいよ」を受領し、本人明示のJ
 既存の唯一作者へ有限armを加え、別末尾補足や別rendererで欠落を隠さない。上の「未実装」は提案時の履歴。通常有効化と一般理解の完成は含まない。
 
 原E02の有限文法と既受理event/feelingの併存に閉じる。一般unknown/ACTION、新要素自身の変更・解消・依存削除はHOLD/UNSUPPORTED。旧Q2 cap4では混在更新の5 contributionを提供できず意味保存後BODY_UNAVAILABLEとなる制限を残し、capを緩めない。現在のQ3実serviceでの隔離SQL/RPC保存・中断再開成功と区別する。実モデル／有料推論／重み／学習／本人DB／Render／通常application有効化／公開API・DTO・RN変更／merge／deployは0。限定TECHNICAL_CREDIT、STRUCTURE_MAP_DELTA_PRESENT、product_credit=0／PRODUCT_NOT_CLEAR／正式Product Read0/3／candidate_ready=false／automatic_progression=false。
+
+<a id="emlis-4b-natural-surface-proposal"></a>
+## 2026-10-24 — 4Bの意味候補と自然本文案を、現唯一作者へ結ぶ提案
+
+**未承認・未実装。** 第8回weekly CM-01/T1の[具体責務案は共有設計01](01_shared_kernel_and_runtime_contracts.md#cmee-4b-cm01-t1-proposal)、[field/版の案は05](05_json_schema_and_versioning.md#cmee-4b-proposal-shape)。新規明示offlineのFree Emlisを最初の対象とし、4Bに意味候補と自然なObservation/Reception/更新説明・任意問いの案を返させる。既存`realize_emlis_thread_body`は最終本文ownerのままで、別Engine・別renderer・本文を先に採用するmetadata wrapperは作らない。旧v1/v2 snapshotと通常serviceは維持する。
+
+chairの初回は修理・再使用結果・喜び・独力でできたと本人が述べた対象を保持し、理由の詳しい未記載を本人明示の不明へ変換しない。訂正では独力→共同修理、喜びの理由→再使用の2差分だけを更新し、修理・結果・喜びを消さない。意味と本文の双方で「一人でできたから」を復活させない。sourceの原格・明示参加者・省略主体・過去の時点はnative投影で照合し、quote一致だけで省略しない。
+
+新問い焦点`PERSONAL_JOY_SIGNIFICANCE`はsourceに明示された評価対象と喜びに限る案。対象自体が既述でも、その本人固有の詳しい意味づけが未記述の場合だけ問い候補にでき、既にその意味づけも説明されていれば聞き直さない。モデルの提案は実pendingではない。CMEEの初回が実際にASKしたquestion ID/target/予算へ回答を束縛し、回答後残0・任意skip/ENDを守る。実初回がENDなら、そのcaseへ教師のquestion IDを付けて一往復成功にしない。既存の褒められ／嬉しくなかった実pendingは旧互換・保存検証の対照として維持する。
+
+4Bの自由な自然文へ旧finite inverse成功を移植しない。既存author-free読取ownerに新profileの対応を実装し、原文／意味との矛盾・余計な理由・主体・時点・逆方向を拒否する。対応できない言い換えを原文コピーへ自動fallbackしない。根拠とbindingはモデルの自己申告にすぎず、一般自由文の意味完全性や商品品質を証明しない。実本文は華恋が全件読み、明白な復唱・定型受容・反転・補完が残る状態をMashの商品確認へ出さない。
+
+意味採用後に本文が失敗した場合、同じ意味と保存proposalから既存明示再開を使う。モデル再呼出し・意味event重複・旧本文の新prefix付替えは行わない。完成済み・旧DTOは再生成しない。今回の説明用2JSON例は旧華恋編集の文章を対応表示したもので、学習target・新model raw・商品候補ではない。
+
+Rule18 §11.3の判断対象は、この意味／作者入力契約とchairの喜び焦点／訂正範囲の追加。GPU起動・有料推論・新dependency・DB migration・Render配置・通常API/RN・Plus/Premium・Piece/Analysisの切替は含めない。実装や品質改善を今回済みとはせず、正式0/3／PRODUCT_NOT_CLEAR／candidate_ready=falseを維持する。

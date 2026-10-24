@@ -4676,3 +4676,12 @@ training側README／experiment・全体00・教材入口・最新weekly Zを同�
 ### 2026-10-24 — 売上ゼロの少人数試用を検討（製品runtime差分なし）
 
 上記production-economics folderに`zero_revenue_pilot.md`を追加。支払者0／Plus相当5人14日の候補、仮の稼働費、試用準備の未見積り、未承認2万円の打切り配分と検証できる価値を所有する。Supabase orgの現planはFreeとread-only確認し、共通11,000円を現契約費へ昇格しない。既存50有料／950無料のcalculator／resultsは変更せず、全体00・同folder README・weekly AKへ差分同期。試用・課金・価格quota／権限変更・モデル接続・通常配備は未実行。STRUCTURE_MAP_DELTA_NONE（検討資料の所在のみ）。
+
+
+### 2026-10-24 — 4B CM-01/T1の具体契約例（runtime構造差分なし）
+
+| exact path（Cocolon rootから） | 所在・役割 |
+|---|---|
+| `Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-4b-training/contract_examples.json`（新） | 未承認・未実装・非学習のchair初回／訂正後契約例。元teacher/source参照、根拠scalar、旧9教師＋保存4B6rawの形式診断、単純wrapの実意味拒否。実model出力・adopted snapshot・native pendingではない |
+
+新folderの現存fileはこのJSONのみで、4B runner／bootstrap／診断／export／学習commandは未作成。共有設計01／Emlis02／schema05の具体責務案、全機能00／CMEE map04／観測入口／最新weekly§12へ差分同期。全体設計01のruntime責務差分は0で、再更新しない。API／production/test／旧教材・重みの変更なし。STRUCTURE_MAP_DELTA_NONE（資料所在と将来案のみ）。

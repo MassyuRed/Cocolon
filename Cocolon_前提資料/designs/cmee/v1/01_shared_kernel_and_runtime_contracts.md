@@ -973,3 +973,116 @@ MashのCMEE内部準備継続指示により、P4完了の現在地から[Analys
 be37f40dの具体案へMashの「進めていいよ」を受領し、API 666b28517ef04aba170ebffe3c86980fea4c11bdに限定実装した。[実仕様04](04_analysis_v1d_v1e_detailed_design.md#cmee-p5-implemented)／[実型05](05_json_schema_and_versioning.md#cmee-p5-actual-types)を参照。旧PROPOSED_ONLYは案作成時の履歴。新規・明示offlineの原3記録／Plus／補足0／比較なしだけで、P1→immutable snapshot→新private graph→既存唯一realizerの文章・図→3段階private再読へ接続する。
 
 18保持単位／11原文group／8source scope／unknown／負荷注記／選択4を保持。完成済みは候補取得・再採用・compiler・作者を呼ばず同artifactを返し、実作者失敗時は採用snapshotを消さない。新private6型・例外2、旧logical registry／通常service／SQL／public DTO／RNは不変。対象9file905成功・12058subtestsは加算せず、全suiteや商品合格とはしない。API全6fileの全文／blob／変更集合／headを確認済み。STRUCTURE_MAP_DELTA_PRESENT、限定TECHNICAL_CREDIT、商品0／正式0/3／candidate_ready=false／automatic_progression=false。通常有効化・実モデルへ自動拡大しない。
+
+<a id="cmee-4b-cm01-t1-proposal"></a>
+## 2026-10-24 — 4B学習とCMEE接続の共通初手 CM-01/T1：意味・自然な本文の責務変更案
+
+**状態：具体案。未承認・未実装・未学習。** Mashの本セッションの「4B学習＋CMEE接続を進めて」に基づき、第8回weekly §8.1/8.2の共通初手を実物で確認した。ここで提案する新しい意味／作者入力契約は、Rule18 §11.3のLEVEL_3判断対象である。モデル4B確定と16GB優先／24GB許容は決定済みで、再選定しない。旧P1〜P5・旧9教師・受領9B重み・既存検査期待は変更していない。
+
+### 1. 実際に止まる位置と、今回実行した診断
+
+照合したheadはCocolon `98f3b46c7cd35df667c080e7fb7c85c57f6d588e`、API `666b28517ef04aba170ebffe3c86980fea4c11bd`。全機能00全文、作業規則入口／CURRENT_RULES／Rule18／incident、全体設計01・全file地図01Aの現P1〜P5節、三core共通入口・CMEE map、最新weeklyのCM-01〜10/T1〜9、関連sourceを確認した。System Contextは最新cache未完成の既知状態を保ち、8月snapshotを根拠にせずfresh原本を直接参照した。実行環境はWork／Python3.12.14。補助2担当は読取調査、編集・診断・反映は主担当華恋のみ。別modelのPro/Ultra実査と偽らない。
+
+| 確認した実物 | 今回のactual |
+|---|---|
+| 旧9教師のassistant JSON→現`preparation._candidate` | 9/9で`candidate_shape_invalid`。形式だけの診断で、モデル推論・意味評価・test suiteの件数ではない |
+| 保存済み4Bの6 raw→同関数 | 6/6で同じ形式不一致。旧実推論の保存rawを読み直したもので、新規4B呼出し0 |
+| chair初回の旧完成JSON→native材料を作る`prepare_emlis`→`receive_candidate` | `INVALID_FORMAT / NOT_ADOPTED`。合成時刻を使った診断requestであり本人record／本番操作ではない |
+| 同JSONを単に`candidate`へ入れ、原文に一致する`evidence`を1つ付与 | P1は`CANDIDATE_UNREVIEWED / NOT_ADOPTED`。続く実`prepare_snapshot_meaning`は`REJECT / semantic_shape_invalid` |
+| 現semantic v1/v2・唯一作者・問い | EVENT/STATE等の有限解釈、原E02限定のunknown/action。chairの修理・共同作業・理由訂正は一般対応外。完成した自然本文を受け取るfieldもない |
+
+結果の原本と、全文を埋めた初回／訂正後の契約例は [contract_examples.json](../../../observation_learning/training/2026-10-24-emlis-4b-training/contract_examples.json)。全source quoteは初回6／訂正後12参照のscalar範囲と一致することを確認した。新例は華恋の手作業の**契約説明用**で、モデルraw・adopted snapshot・学習target・商品候補ではない。表面文は旧華恋編集案を対応説明のため保持し、完成goldや品質改善済みへ昇格しない。正式な新教師では本文も改めて全文検討する。
+
+### 2. 推奨する一案：4Bに意味の候補と自然な文章の案を任せ、CMEEが確定する
+
+**4Bは意味候補と自然なObservation／Reception／更新説明・任意問いの案を生成する。CMEEは本人source、採否、最終本文、実問い、訂正・撤回、保存・再開のownerを維持する。** 4Bを引用抽出だけへ縮めず、旧finite作者の復唱を最終到達にも置かない。モデル本文を先に採用してCMEE metadataで包む方式、新Engine、別renderer、別モデルは追加しない。
+
+最初は**新規・明示offlineのFree Emlis**で、chair初回と本人訂正の一往復に絞る。これは一般入力・Plus/Premium・Piece/Analysisへの採用や通常有効化ではない。既存の一般的な動詞・主体・理由・結果の表現へ対応を広げるための最初のverticalとし、chair文面のlookup・固定応答を生成ownerにしない。新語を一つずつ足すだけの作業へ戻らない。
+
+| 役割 | 4Bが返すもの | CMEEが決めるもの／保持するもの |
+|---|---|---|
+| 意味 | 原文根拠付きclaim、主体・時点・肯否、本人の評価理由、関係、不明・競合、更新案 | 元source・全選択の保持、対応範囲内の採否、旧意味との更新差。位置一致だけで意味を認定しない |
+| 自然な本文 | 意味参照を付けた`surface_proposal.observation/reception/update_note` | 同じ採用意味から、既存最終本文ownerが検査・最終化する。文章を別coreの本人factにしない |
+| 問い | `question_proposal`またはnull | 実target・focus・question ID・予算・ASK/END。初回1問以内、回答後残0、skip/ENDを保持 |
+| 保存 | rawと実model metadata。modelにDB権限を与えない | 既存serviceがreceipt→意味→本文を保存。完成再読ではモデル／採用／作者を呼ばない |
+| Piece／Analysis | 将来、各core自身の意味・文章案 | 各coreのsource・声・artifact・保存・公開owner。今回のEmlis差分で既存P4/P5を切り替えない |
+
+### 3. 入出力の具体差分
+
+P1の厳密な最上位`{candidate,evidence}`は維持し、`candidate`に**新しいprivate候補版**を設ける。旧`semantic_mapping_proposal.v1`と旧snapshot v1/v2のdecoderは変更しない。提案する候補版は`cocolon.cmee.semantic_and_surface_proposal.v1`、明示profileは`emlis_model_proposal.v1`。snapshot／checkpointにも旧版と区別する専用版を与え、旧schemaへ新fieldを混ぜない。fieldの閉鎖形・列挙値・symbolic refの限界は[schema05の提案節](05_json_schema_and_versioning.md#cmee-4b-proposal-shape)を正本とする。これは今回新版を有効化したという記録ではない。
+
+旧完成JSONからの対応は次の一つにする。
+
+| 旧field | 新候補での位置 | 意味への扱い |
+|---|---|---|
+| observation/reception | `surface_proposal`の同名field | 意味の根拠に逆流させず、採用claim/relationへ束縛する文章案 |
+| question | `question_proposal.text`＋対象ref／focus、またはnull | 実pendingではない。CMEEだけが発行する |
+| update_note | `surface_proposal.update_note`と、別のtyped `updates` | 本文の説明文だけで意味を訂正せず、原回答の根拠を持つ更新差を別に表す |
+| grounded_points | 同一fieldの完全原文から再構成した最上位`evidence` | source ID／field／start／end／quoteが必要。fields配列だけを座標根拠へ昇格しない |
+| unknowns | typed `unknowns` | 本人明示の不明とNOT_STATEDを区別。モデルが知らないことを本人の不明にしない |
+| 旧完成JSONにないもの | `claims/relations/conflicts/updates` | 原入力・原回答を読み直して作る。本文から意味を逆生成しない。旧9件への自動変換は禁止 |
+
+初回のchair例は、修理・再使用可能な結果・本人の喜び・「全部一人で直せたこと」を喜びとして述べた対象を分ける。TE接続を客観原因や厳密な先後へ変換しない。「なぜそれがうれしいかの詳しい説明がない」はNOT_STATEDであり、本人が「わからない」と述べたUNKNOWNではない。初回へ将来の友人・再使用という喜びの理由・訂正を漏らさない。
+
+訂正後の例は、友人から手順を教わったこと／共同修理、新たに本人が説明した「捨てずにまた使える」喜びの理由を別に保持する。独力という説明と旧喜び理由だけを置換し、修理・再使用結果・喜びは残す。否定された旧理由を別の感情や人格へ変換しない。NOT_STATEDの旧gapは焦点自体の訂正により無効化し、未知の本人理由を勝手に解決したことにしない。
+
+`contract_examples.json`訂正後は、旧teacherの`text`を同一bytesで将来のnative field`answer_text_private`へ投影した**説明例**である。旧文字列のliteralな`\\n\\n`を実改行へ正規化していない。`$actual_prior_snapshot_ref`は実採用snapshotから将来注入する記号で、実在refではない。この例をそのまま学習・送信・native回答へ投入しない。
+
+### 4. 問い・本文の採用を、形式成功から分離する
+
+chair初回の旧teacher質問はMashの実演に由来するが、**現CMEEが発行した実問いではない**。新しい`PERSONAL_JOY_SIGNIFICANCE`焦点は、本人が明示した評価対象と喜びの組に限る変更案とする。問おうとする本人の詳しい意味づけ（PERSONAL_JOY_SIGNIFICANCE）が既に述べられている場合は聞き直さない。評価対象が既述であることと、その本人固有の意味づけが未記述であることを分ける。提案null、意味不採用、scope不成立、予算0、skip/stopでは発行しない。初回から返る実questionを使い、同threadへそのquestionに応じた訂正を提出できた場合だけchair一往復成功とする。初回がENDなら、架空pendingを足して訂正検証を成功にしない。
+
+新しい自由な日本語を、旧finite inverseが読めたことにはしない。既存のauthor-freeな逆検査ownerに、新profileの対応範囲を独立実装する。本人の共同修理・理由の肯否・過去時点・残存事実と本文の意味が対応しない文、対応範囲外の言い換えは本文へ採用しない。根拠座標・claim参照・hash・JSON成功だけで一般自由文の完全性は証明できない。自己申告したbindingの一致だけを新readerの代わりにしない。検査を同じbody作者に戻して同じ文を作り直す方式も採らない。
+
+**既存の逆検査で表現できず一般parser／別モデル／品質条件変更が必要と分かった場合は、今回の範囲を自動拡大せず、その具体差を報告する。** 既存検査を通すために4B文を原文コピーへ戻すfallbackも使わない。新profileの到達可能範囲、拒否、本文未生成と、自然な本文の実際の改善を分ける。実rawを華恋が全件読み、明白な反転・補完・復唱・定型受容をMashの商品確認へ戻さない。華恋の事前確認は正式human Product Readではない。
+
+### 5. 実装時のexact owner案
+
+共通prefixはmashos-api `ai/services/ai_inference/`。これは今後の変更対象案で、今回のproduction差分は0。
+
+| exact path | 変更案 |
+|---|---|
+| `cocolon_meaning_experience_engine/preparation.py` | 既存材料と未採用receiptを維持。新候補も最上位shape・quote位置だけで意味採用しない |
+| `cocolon_meaning_experience_engine/emlis_semantic_admission.py` | 新profileのclosed packet、意味とsurface案の分離、chair familyの更新、専用snapshot／checkpoint。旧版復元は維持 |
+| `cocolon_meaning_experience_engine/contracts.py`・`emlis_thread_contracts.py` | 実装で必要なprivate候補／snapshot fieldだけ。公開DTO・既存logical registryへ未承認で型を追加しない |
+| `cocolon_meaning_experience_engine/emlis_question.py` | 新焦点のsource資格、対象・予算・実発行。モデルはquestion IDを発行しない |
+| `cocolon_meaning_experience_engine/emlis_thread_surface.py` | 現最終本文owner内で新profileを最終化する分岐。別renderer・metadata wrapperは作らない |
+| `emlis_ai_grounded_sentence_surface.py`・`emlis_ai_grounded_human_reception.py`・`emlis_ai_grounded_observation_gate.py` | 新private profileに必要な実本文の組立／独立逆検査。旧finite検査と旧受容契約は維持 |
+| `cocolon_meaning_experience_engine/engine.py`・`emlis_answer_update.py`・`emlis_thread_engine.py` | 新profileを既存唯一のorchestrationへ渡す。意味確定を表面失敗で巻き戻さない |
+| `emlis_thread_service.py` | 既存eventに元raw／receipt／採用意味／本文を保存。明示offlineの注入点を使用し、通常policy併用禁止は維持 |
+| `ai/tests/test_cmee_emlis_semantic_snapshot.py`、同`test_cmee_preparation.py`（repo rootから） | 旧版全outcome不変、新候補の誤意味・誤表面・問い・保存中断を対象追加。旧fixture期待を書換えない |
+| 新`ai/tests/test_cmee_emlis_model_proposal.py`（案） | 新profileの一往復・surfaceを実境界で検査。fixtureを実model rawへ偽装しない |
+| 新`cocolon_meaning_experience_engine/model_candidate_source.py`（案） | `offline_candidate_source`へ渡す薄い明示client。PreparedRequest→messages→raw/finish/usage/identityだけ。別Engine・暗黙retry・DB・常設監視を持たない |
+
+モデル呼出しは最初のPods上の実4Bと同じ過程で検証し、別の有料公開APIへ切り替えない。providerの実protocol／認証／上限時間はGPU実行案で具体化し、秘密値をGitへ保存しない。CPU側のclient実装・synthetic transport検査と、実4Bを呼んだ成功は明確に区別する。
+
+### 6. 失敗・重複・保存再開の継承
+
+- `length/timeout/error/unknown`はJSON完結より優先。部分JSONの補修・内容の手修正・自動再送なし。
+- 意味不採用ならsurfaceを本文へ昇格しない。意味採用後の表面失敗はsnapshotを保持してBODY_UNAVAILABLE。同じ保存proposal／意味から明示再開し、4Bを再呼出ししない。
+- STARTEDのみで中断した場合は既存`semantic_candidate_acquisition_incomplete`を維持。応答不明を無料の未実行と見なして再送しない。
+- receipt後／意味後／本文保存後の中断・ACK消失で、採用event・入力件数・候補呼出しを増やさない。完成済みGET／再表示・旧完成DTOは再生成しない。
+- 親source・owner・版・実question・prior ref不一致、訂正後の旧独力理由復活、他人／現在への時点移動、未知文面は拒否または未対応にする。未解釈更新は旧本文を新prefixに付け替えない。
+- 通常API・RN・本人DB・Render配置は変更せず、CM-09/10の別到達として残す。
+
+### 7. 学習側を同じ契約に揃える最小順序
+
+1. 本責務変更を採用後、旧9教師を読み直し、対応可能な行だけ新candidate＋surface targetを作る。原本9件は不変。今回の2契約例をそのまま教師へ昇格しない。対応できない行は理由付き未対応のままで、N=9へ水増ししない。
+2. 4B専用folderにrunner／bootstrap／診断／exportを置く。モデルは`Qwen/Qwen3.5-4B`、revision `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`。旧9B recipe／adapter／run directory／hardcoded hashを継承しない。新folderの現存fileは契約例JSONのみで、実行commandはまだない。
+3. train/eval/診断で同じJSON-only指示を使用。4B tokenizerでflat token list、prefix、最終assistantのみloss、EOS、全input/completion長を確認。切捨てず、token実測後にcontext/max_newを決める。
+4. 実4Bのtext q/v対象module、base凍結・LoRAだけtrainableを確認。旧total40/free32GiB条件を、4B profileの実GPU total/free/BF16と見積りへ限定変更する。閾値を下げただけで16GB適合成功にしない。
+5. BF16/SDPA/r8/alpha16/dropout0/lr1e-4/batch1/accumulation1/checkpointing/seed20261024を初期案とする。最初はN行×1epochのoptimizer・教師適合診断1回。仮にN=9へ正しく対応できれば9updateであり、4周/16周や品質十分性の根拠はまだない。
+6. 同じbefore/afterはchair2件＋学習外EFREE6件＝各8生成、教師NLLは各N行。仮N=9なら計16生成・18NLL評価・9update。既読の開発確認でありblind最終評価ではない。context/出力長・単価・総時間・支出上限・保存mountは未確定で、GPU開始前に具体化する。
+7. 学習直後にadapterを先に退避し、同4Bへ非学習reloadしたものをafterとして使う。raw／recipe／dataset／model revision／adapter本体hashを保管。Pod外受領確認後Stopし、学習process時間とPod総課金時間を区別する。OOM時は記録して停止し、24GBの自動借り直し・量子化・教材削減をしない。
+
+1epoch案は新targetの勾配・適合確認であり、旧9Bの品質問題を再現して終える計画ではない。mask・実更新・教師適合・非学習への転移のどこが不足するかをactualから判定し、その結果なしに周回だけ増やさない。**今回の確認対象はCPU側の新private契約実装・教材/4B runner整備まで。GPU起動・課金・新volume・外部常設提供・deployの許可を含めない。** 実行用の値が揃った具体GPU案を後で示す。
+
+### 8. 今回の判断点と再開先
+
+推奨は上の一案。単なるJSON包み替え、4Bを意味抽出だけへ縮める案、先に4周/16周学習する案を採らない。構造整合しか確認できないまま自由本文を採用する案も採らない。
+
+Rule18 §11.3は「商品目的、商品体験、method family、contract、acceptanceまたは品質条件を追加、変更、置換または弱化する」作業に実行前のMash判断を要求している。今回は**モデルの意味候補に自然本文案を追加し、現唯一作者がそれを検査・最終化する入力契約と、chairの喜び焦点／訂正の対応範囲を変える**ため、既存方式内の機械的4B置換には当たらない。モデル決定や作業開始の指示を未決へ戻すものではなく、今回具体化した責務差だけを確認対象とする。
+
+採用後の最初の一作業は新private profileのCPU実装と同sourceの初回→実問い→訂正→同一保存再読、および新target／4B runnerの契約一致。合成結果を実4B成功・本人実機・商品受入れへ数えない。所要はこの実装の1 bounded単位、追加金銭費用0。正確な作業時間は未測定で期限保証はしない。別一般parser・新外部service・dependency・通常policy・DB migration・公開contractの変更が不可欠と判明したら拡大せず具体差へ戻る。
+
+今回production/test/旧教材/重み変更0、新GPU/推論/学習/DB/Render/merge/deploy0。正式Product Read0/3／PRODUCT_NOT_CLEAR／candidate_ready=false／automatic_progression=false、全体管理54.50％は据置。STRUCTURE_MAP_DELTA_NONE（実装構造は不変、将来責務変更案と所在のみ）。今回の診断・案作成を商品品質改善に数えない。

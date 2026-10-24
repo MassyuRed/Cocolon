@@ -1310,3 +1310,16 @@ Mashから次の指示を受領しました。
 最優先枠の初手は**[CM-01/T1](#task-cm-01)：Emlis初回1例と訂正後1例で、本人source→4B input→要求する意味候補/自然な受け取り案→採用先→最終本文を揃え、既存教師とCMEE受口の不一致を閉じる作業**です。その同じ契約でT2〜T5の教師・4B runner・学習量・保存先を固定します。独立並行のPiece通常保存、限定必須の共通修復、通常Analysisの枠も保持し、同じ意味ownerの同時編集は主担当が調整します。別の明示作業指示がある場合は、その対象とこの優先順位の関係を確認して進めます。
 
 今回の終了記録は本議事録・全体現在地・weekly案内の3文書のみ。製品source/test・GPU・CI・実DB・配置・配布・商品受入れの変更はありません。**ADMINISTRATIVE_ONLY、product_credit=0、STRUCTURE_MAP_DELTA_NONE。報告会終了。**
+
+<a id="20261024-4b-cm01-t1-concrete-proposal"></a>
+## 12. 報告会終了後の作業 — 4B学習＋CMEE接続の共通初手を具体化（2026-10-24）
+
+Mashの新セッションの実装依頼により、§8のCM-01/T1を同じ一作業として調査。**報告会は終了済みのままで、ここは会議後の作業記録。** 4B確定と16GB優先／24GB許容は再選定せず保持する。
+
+- 実コードによるCPU診断：旧9教師と保存済み4B6rawは、それぞれ全件`candidate_shape_invalid`。native chair初回へ旧完成JSONを渡しても`INVALID_FORMAT / NOT_ADOPTED`。単純に`candidate/evidence`へ包むとP1は未採用候補を返すが、実semantic admissionは`REJECT / semantic_shape_invalid`。形式診断であり、新学習・モデル推論・test suite／意味品質合格ではない。
+- 旧意味v1/v2は有限文法で、chairの修理・共同作業・喜び理由訂正と自然な4B本文をそのまま採用できない。旧teacherのchair質問も現CMEE発行済みの実pendingではない。4Bに意味だけ抽出させ、旧finite作者の復唱へ戻す案に目的を縮めない。
+- [共有設計01の具体案](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-4b-cm01-t1-proposal)へ、**4Bは意味と自然な本文の候補、CMEEは意味採否・最終本文・実問い・更新・保存**という一案を記載。初回／訂正後2例を根拠位置まで埋め、exact owner・新private版・問い焦点・独立読取・旧保存・中断再開・4B runner／学習の一設定案まで具体化した。[例JSON](../observation_learning/training/2026-10-24-emlis-4b-training/contract_examples.json)は非学習・未採用の説明資料。旧9教材の元bytesは不変。
+- 新しい意味／作者責務と問い焦点の差分はRule18 §11.3 LEVEL_3の確認対象。今回の作業開始指示や4B決定を取り消さず、この具体差だけを確認する。確認後の初手は新private profileのCPU実装・初回→実問い→訂正→同一保存再読と、教師／4B runnerの一致。旧native pendingも互換対照に残す。実4B成功は後のGPU実行結果から判断する。
+- 学習量を4周/16周へ根拠なく増やさない。新targetに対応できたN行×1epochを勾配・教師適合診断とする一設定案。仮N=9なら9update、chair2＋学習外EFREE6をbefore/after各8生成、教師NLL各9。N・tokens・context/出力長・GPU単価・総時間／支出上限は未確定で、GPU開始前に実行案へ固定する。16GB未実証、24GBの自動借り直しなし。
+
+今回はCocolon資料のみ。API production/test、旧教師／eval、重みの変更0。新GPU／有料推論／学習／DB／Render／merge／deploy0。STRUCTURE_MAP_DELTA_NONE（runtime構造不変、将来案・資料所在のみ）。正式受入れ0/3・商品未合格・全体54.50％据置。今回の診断・案作成を品質改善済みの成果へ数えない。

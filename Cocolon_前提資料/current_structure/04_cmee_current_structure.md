@@ -1812,3 +1812,8 @@ API 666b28517ef04aba170ebffe3c86980fea4c11bd。Engine exact Analysis request＋�
 source-bound有限構文の検査とcanonical全payload比較で、引用が正しい意味変異や再hash改変も拒否する。原文11文と限定unknown表示、同一graphのprivate図payloadまでで、一般言換え・商品受入れではない。意味／graph／完成のfile再読、実作者例外、完成時の取得・採用・compiler・作者禁止再読を確認。対象9file905成功、12058subtestsは上乗せしない。旧通常Analysis・Piece P4・Emlis snapshotを必要対象で確認。
 
 STRUCTURE_MAP_DELTA_PRESENT。通常API／DB／RN／公開schema／モデル接続／課金／merge／deploy0。正本design04#cmee-p5-implemented／05#cmee-p5-actual-types、全file01A、結果trial§13。有限profile以外・通常接続・一般文章品質は残件、candidate_ready=false／商品0／正式0/3。
+
+
+## 2026-10-24 — 4B接続のCM-01/T1具体案（未実装）
+
+[共有設計01](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-4b-cm01-t1-proposal)へ、4Bの意味候補＋自然本文案を既存CMEEが採否・最終化する新private責務案を記録。[schema05](../designs/cmee/v1/05_json_schema_and_versioning.md#cmee-4b-proposal-shape)とEmlis設計02へ同期。旧9教師／保存4B6rawの形式不一致、単純wrap後の意味採用拒否をCPU診断済み。説明例2件は非学習・未採用。新profile／作者入力／問い焦点はRule18 §11.3確認対象、現Engine・旧v1/v2・唯一作者・serviceの実装変更0。STRUCTURE_MAP_DELTA_NONE（runtime不変、将来責務案と資料所在だけ）。GPU／学習／新推論／DB／Render／通常有効化0。正式0/3・PRODUCT_NOT_CLEARを維持。

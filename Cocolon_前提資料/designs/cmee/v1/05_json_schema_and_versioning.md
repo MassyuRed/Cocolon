@@ -3177,3 +3177,29 @@ snapshot_refは自己refを除く全decoded snapshot payloadから導出し、ow
 stateはcocolon.cmee.analysis_semantic_state.v1、closed keysはschema_version/request_binding/snapshot/graph/artifact。保存上のnested JSONはdecoded object、実snapshot内部はcanonical string／tuple。reloadは現requestへ同版の全sourceと意味をrebindし、receive/admissionを呼ばない。graph/artifactを保存から直接検証し、compiler／作者を呼ばない。artifactのみ存在する非連続状態を拒否。完成時だけGENERATEDを導出する。private JSON不正・source／projection改変は固定AnalysisSemanticErrorへ閉じる。
 
 SourceSelection／SentenceGroup／ScopeRelation／Unknown／Burden／Realizationのrowはcanonical payloadに閉鎖fieldで保持する。31traceのmeaning_refはunit／relation／unknown／selectionの4family。非表出selectionのgroup／section／可視範囲はnull、visual_refは元選択の保持先。source scalar／envelope UTF8／text section scalarの座標は別。旧watashi.map.v2／service private_evidence v1/v2／DB schema／migration／API／RNへ新stateを通す変換は実装していない。
+
+<a id="cmee-4b-proposal-shape"></a>
+## 2026-10-24 — CM-01/T1の意味＋自然本文候補：private schema変更案
+
+**PROPOSED_NOT_APPROVED_NOT_IMPLEMENTED**。責務・対象・失敗／再開・実装owner・判断点は[共有設計01](01_shared_kernel_and_runtime_contracts.md#cmee-4b-cm01-t1-proposal)。旧candidate/snapshot/adapter/checkpointは変更しない。全fieldを埋めた説明例は[contract_examples.json](../../../observation_learning/training/2026-10-24-emlis-4b-training/contract_examples.json)。既存decoderに受理されるJSONではなく、trainable=falseの説明資料である。
+
+| 境界 | 新提案のclosed fields／型 |
+|---|---|
+| raw最上位 | 既存と同じ`candidate: object`、`evidence: array`だけ |
+| candidate | `schema_version: "cocolon.cmee.semantic_and_surface_proposal.v1"`、`core: "emlis"`、`claims/relations/unknowns/conflicts/updates: array`、`surface_proposal: object`、`question_proposal: object|null` |
+| evidence row | 既存と同じ`source_id/field_path/start/end/quote`。scalar半開区間、strict int、quote完全一致。native UTF8 locatorとは別 |
+| claim row | 既存の`claim_id/kind/text/subject/predicate/polarity/modality/about_time/qualifiers/evidence_indexes`を引き継ぐ形の案。textは根拠quoteと同じ原文。新kindは`ACTION_RESULT`／`USER_APPRAISAL_OBJECT`、既存`EVENT/STATE`と区別する。旧finite EVENT文法を無制限へ緩める指示ではない |
+| subject/predicate | 例の省略主体は`OMITTED`、source_entity=null。predicateのsurfaceは原文。原格・明示参加者・照応はnative admissionで別途sourceと束縛し、空argumentsを「引数が存在しない」という意味へ転用しない。現JSON例の空配列は新native投影の未実装を表す |
+| polarity/modality/time | 既存のAFFIRMED／ASSERTED_AS_WRITTEN／WRITTEN_PAST_UNRESOLVED_OCCASIONを参照する案。相手意図・現在化・客観因果へ変換しない。原文側の明示否定・時点等は対応できなければHOLDとし、単に例の定数へ埋めない |
+| relation row | `relation_id/type/from_claim_id/to_claim_id/polarity/scope_refs/qualifiers/evidence_indexes`。新typeは`SOURCE_WRITTEN_TE_LINK`と`USER_STATED_JOY_GROUND`。前者は書かれた接続のみ、後者は本人が述べた喜びの対象／理由で、客観因果ではない |
+| unknown row | `unknown_id/kind/target_claim_refs/description/evidence_indexes`。初回例のkind=`NOT_STATED`。本人明示unknownは旧UNKNOWNと別で、対象とwhole sourceの未記載性を検査する |
+| update row | `operation/target_kind/target_ref/replacement_refs/evidence_indexes/prior_snapshot_ref`。operation=`REVISE`又は`INVALIDATE_GAP`、target_kind=`CLAIM/RELATION/UNKNOWN`。既存実priorの該当対象だけを更新し、未変更claimを削除しない |
+| surface_proposal | `observation/reception: string`、`update_note: string|null`、`bindings: array`。可視本文は意味の新sourceではない。update_noteはtyped updatesの代わりにならない |
+| surface binding row | `section/claim_refs/relation_refs`、update_noteに限り`update_refs: array[int]`を付ける。bindingはモデルの自己申告であって本文意味の証明ではない。参照とactual本文の独立検査を行う |
+| question_proposal | null又は`text/target_unknown_ref/focus/claim_refs`。最初の新focus=`PERSONAL_JOY_SIGNIFICANCE`。実question ID・round・pending・budget・ASK判断は返させず、CMEEのみ発行する |
+
+新profile名案は`emlis_model_proposal.v1`、新意味snapshotは`cocolon.cmee.emlis_semantic_snapshot.v3`、新checkpointは`cocolon.cmee.emlis_answer_meaning.v4`とする。admission/adapter初版は各1。新profileの許可範囲と実fieldが確定した実装時に、canonical snapshotの意味payloadと表面proposalを分け、後者を意味IDの根拠へ混ぜない。同じ意味でも表面案・rawが違うことはあり得るため、候補receiptと完成artifact identityはそれぞれの実内容へ束縛する。旧意味に新表面を付け替える再生成はしない。
+
+`$actual_prior_snapshot_ref`は説明例のsymbolic refであってhashやadopted refではない。新教師作成時にはmodelに返させるrefとruntimeが注入するbindingを区別し、記号をそのまま学習・本物のpriorへ流用しない。現JSON例の全quote座標一致とclaim/relation参照整合を確認したことは、このschemaの実装成功や意味採用を意味しない。
+
+nativeのcase/参加者・時点・否定・関係・更新のsource照合、新profileの独立本文読取が成立しなければ新candidateは未対応／不採用のまま。closed-field検査・型・引用・bindingだけを通して自由本文を採用する実装は本案に含めない。新汎用parserや別モデルが必要ならscopeを再判断する。新public DTO／DB schema／RNへの変更、通常application有効化、モデル実行は今回0。
