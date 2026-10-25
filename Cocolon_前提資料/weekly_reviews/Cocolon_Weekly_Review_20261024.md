@@ -2508,3 +2508,8 @@ Jupyter新packでCUDA_VISIBLE_DEVICES空/offline cacheの実tokenizer全9、最�
 新一回は12更新→保存/非学習reload→9件検査、全9の意味/本文/JSON-EOS・chairASK3/訂正各3/REFINED・dailyFINALが成立時だけ2実service/隔離SQL保存・意味保存後中断/明示再開・保存済み非生成再読。最大45分/処理按分$0.195（記録$0.26/h、準備/回収/継続保持/保存/税等別）。plan=false/PROPOSEDで新有料試行は未承認、evalplan未作成。Rule18§11.3の新scope/費用/閉鎖済み一回試行の境界で全体一括承認後だけ実行し、その後CPU後/全9成功後の小分け再承認は不要。
 
 詳細source/path/CPU原本/修正経過/停止条件/今回の14項目開始記録への対応は[quote pack具体案](../observation_learning/training/2026-10-25-emlis-quote-address/README.md#quote-surface-fit12-proposal)。全体00/観測入口は新CPU準備/未承認へ置換、01Aへ新file所在だけ追記。今回の欠陥に新観測会は不要、独立2話/一般化/Piece・Analysis完成教師0は継続。STRUCTURE_MAP_DELTA_NONE、BLOCKER_NARROWED、商品0/正式0/3/54.50％据置。Jupyter直接のみ、GPU一覧/管理console/管理API/lifecycle/新課金/依存追加/Render/Supabase/本人DB/通常application/公開API/DTO/RN/merge/deploy0。GPU保持課金の停止を意味しない。
+
+
+### §48 10/26 JST — surface12一回＋条件付き2保存再読をMashが明示承認
+
+Mashはdd3cabb4の具体案「12更新→保存・再読込→9件検査→全件成功時のみ2件保存再読、最大45分・処理按分$0.195（保持等別）」へ「いいよ、進めて。」と承認。原proposedを保存し新planをAUTHORIZED_ONCEへ更新。旧138b/9教師/prompt/固定順/25token mask/LR/runner/reader/予算/停止を変更しない。Jupyter直接・単一root ownerで一回実行し、全9条件成立時だけ承認済み後段へ進む。その間の小分け再承認は不要。開始前モデル/学習/生成/SQL0。旧boundary12閉鎖/新041f未採用/後段0を保持し、この新承認を旧試行へ流用しない。
