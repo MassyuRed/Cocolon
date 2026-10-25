@@ -1,6 +1,6 @@
 # 4Bの引用選択と、CMEEの位置計算を分ける候補
 
-状態：**Mash承認済み・接続実装/CPU確認済み・実tokenizer確認前・GPU学習未開始**。2026-10-25 JST。
+状態：**Mash承認済み・接続実装/CPU確認済み・18更新/保存reload完了・FIT9進行中・重みPod外保全済み**。2026-10-25 JST。
 
 [承認対象の全仕様・変更path・CPU条件・18更新/成功時2call](../../../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-quote-address-offline-proposal)を正本とする。
 
@@ -29,3 +29,11 @@ Mashは「接続実装・18更新・全9件成功時の2件保存再読」へ「
 実行用sft_examples.jsonl/train_messages.jsonl/dataset_manifest.json、許可済みplan.json、run_quote_address_fit.py/consume_quote_fit_raw.pyを固定した。新daily promptの旧relations文言『with exact full-field coordinates』だけは新形式と矛盾するため数値不要へ明確化し、実build_model_messagesのcanonical JSONと一致させた。本文/意味/原source/根拠順/旧chairは不変。proposed3fileは当時の案として残し、実行には新plan.jsonだけを使う。
 
 既存GPUのJupyterへ接続でき、A4500/20470MiB/使用1MiBを実確認。管理consoleはrate limit表示だが、既存workloadのJupyterは使用可能。STOP/再起動/削除/新Pod/charge/install0。次は同じ承認範囲の実tokenizer確認後に一回だけ18更新/FIT9。全9成功時だけ別ID2保存再読へ進み、失敗時は回収して終了する。今回STRUCTURE_MAP_DELTA_PRESENT（privateモデルwireと位置compile責務）、限定TECHNICAL_CREDITはCPU接続/再導出の範囲だけ。商品0/正式0/3/54.50％を維持。
+
+## 実GPU進行checkpoint
+
+固定source1a34c968/API4002b457で実tokenizer9行を一回確認（maxprompt5045/assistantEOS2339、全context8192内、切捨て0）。同一sourceの18更新をPID607814で一回起動し、保存/非学習reloadまで完了、FIT生成は最終観測3/9。意味/本文の新採否はまだ未確認。途中のWork接続断は同じJupyterへ復旧し、training/modelの再実行なし。
+
+新adapter138b9ff7…を含む保存直後archive41bea5a3…/3,472,720bytes/16member（manifest15対象）をPod外照合、32F32有限を確認し[追加重みを保管](https://chatgpt.com/library?file_id=libfile_ae60b41c293c81919a5d52aeba59f86c&account_id=personal)。archive内runはFIT前gen0で、進行中runと時点が異なる。base全重み/optimizer/RNGは含まない。詳細weights_verification.json/runtime_checkpoint.json。旧重み/旧planは保持、新candidateを採用重みへ昇格していない。
+
+run_quote_address_holdout.py/eval_fixture.jsonを承認範囲の新形式へ固定したがeval_plan未作成/起動0。全9実FITが意味/本文へ成功した時だけ後段へ進む。学習を起動し直さず既存run/raw/logを確認し、現在の再開先はruntime_checkpoint.json。GPU停止/再起動/削除/charge0。商品0/正式0/3/54.50％据置。

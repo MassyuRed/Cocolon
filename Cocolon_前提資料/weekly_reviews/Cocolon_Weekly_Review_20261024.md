@@ -2361,3 +2361,11 @@ API[4002b457](https://github.com/MassyuRed/mashos-api/commit/4002b4577838d1ed667
 Runpod管理consoleはAPI rate limitを表示したが、既存workloadのJupyterへ接続でき、nvidia-smiでA4500/20470MiB/使用1MiBを実確認した。停止/再起動/削除/新Pod/charge/install0。現時点で新しいモデル生成/重み更新は0。新観測会不要、本番/Supabase/Render/RN/merge/deploy変更0。
 
 STRUCTURE_MAP_DELTA_PRESENT（privateモデルwire/位置compile責務）。全体00/観測入口/current01/04/共有01/schema05/01Aと本weeklyを同期。限定TECHNICAL_CREDITはCPU実装/再導出/保存互換だけ、商品0/正式0/3/54.50％据置。次は同一承認scope内の実tokenizer→一回18更新/FIT9/成功時2保存再読で、追加承認不要。
+
+### §42 実tokenizer・18更新/保存reload完了、FIT9進行中のcheckpoint
+
+source1a34c968の実tokenizer9行はmaxprompt5045/assistantEOS2339、全context8192内で無切捨て確認。既存PodでPID607814を一回起動し、旧chair各1/新daily各4の18更新、保存/非学習reloadを完了した。FIT新生成は最終観測3/9で意味/本文採否はまだ未確認。途中Work接続断は同Jupyterへ復旧し、旧/新trainerの再起動や同要求再callなし。
+
+保存直後の新adapter138b9ff7e5b7df59e6da80126a52b309edf9c22a9a860f2c165189a9e453c102、archive41bea5a3c7992f5953176b8d4a309e3a47f0270a2505b32a9b8df58c5f5c627c/3,472,720bytes/16member（manifest15対象）のsize/hashをPod外照合、32F32有限を確認し保管した。archive内runはgen0/保存直後の時点。重みの採用昇格は0。最初のlocal照合で表示hashのbeaをbaeと転記してassertが停止したが、元画面/元fileを確認して転記だけを修正し、回収archive bytesは不変。Jupyterの最初の小JSONダウンロード待機もtooltimeoutしたが、転送済みの実fileをmanifest/refと照合して成功を確定し、再ダウンロードしていない。
+
+進行/再開指示はquote-address/runtime_checkpoint.json、実tokenizer/重み検証も同pack。未使用のholdout source/fixtureだけを新形式へ固定、eval_plan/後段起動/model call0。次は既存processの9原raw/終了状態確認→無補修消費→全9成功時だけ2保存再読。新観測会不要、GPU停止/再起動/削除/charge0、本番/DB/Render/RN変更0、商品0/正式0/3/54.50％据置。
