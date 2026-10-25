@@ -1960,3 +1960,17 @@ CPU修復は限定TECHNICAL_CREDIT、実モデル成功・本人実機・商品�
 GitHub反映の前半はAPI7b649a2（source/test2path）とCocolon6dbd250（既存10path）を両方読み戻し、全blob/全文・変更集合・親を照合済み。後半は実結果5fileと既存4文書の最終同期。ブラウザの実行記録Download待機は一度timeoutしたが、同期先のinference_report.jsonは到着済みで、固定source/実messages/raw file hashを検証した。学習/推論の失敗や再実行として加算しない。
 
 座標原因の現物照合：今回の406..460/489..567はprompt位置の測定値ではなく、実messages内material.sources[0].evidence[0/1]のSOURCE_ENVELOPE utf8_start/endと完全一致した。要求する同rowのscalar_start/endは0..18/0..26。次の修復ではfield_path=memo/memo_actionそのものと、この二つの座標系の区別を具体的に示す。独立read-only reviewもraw/集計/観測会不要の判断と整合し、この説明精度を補正した。
+
+
+<a id="20261025-typed-hierarchy-and-field-scalar"></a>
+## 27. 10/25 — 出力階層と欄内scalar座標を、初回/訂正後別に提示
+
+API `0037ae59eddab00f4956a7e4c2506db2af8ccc35`で、出力の必須キー一覧を同じ既存schemaのJSON階層見本へ置換した。field_pathは実欄のキー、start/endは欄内Unicode位置で、nativeのutf8_*/field_utf8_*を使わない。見本の配列長や$placeholderを実値にしない。初回は4意味/unknown1/updates0、訂正後は元3意味IDを保持した6意味/unknown0/updates3とし、当段階に不要な提示を除く。source/material/prior/system・教師assistant・採用条件/reader/旧raw/重みは不変。新5拒否とstage独立性1を含めbackend64成功。最終tokenは初回3071+1094=4165、訂正6091+1877=7968、最大生成枠6091+2048=8139<=8192、切捨て0。合成target2/2の意味/本文整合と旧messages拒否を確認し、実モデル成功へ加算しない。
+
+Mashの続行指示に基づくOBSERVED_BLOCKER_MINIMAL_FIX / LEVEL_2相当。実行/編集/反映は華恋root、独立agentはread-onlyの全体整合/契約reviewで、別モデルPro/Ultraの実施を装わない。商品目的はCM-04初回の意味・自然本文と回答更新へ通すこと。既存2source/2targetを使い、説明/型/JSON階層の提示だけを修復する。STRUCTURE_MAP_DELTA_NONE（既存注入owner内、公開API/DB/RN/契約/型/三core境界不変）。
+
+初稿の全段階を同時に示す版はcontext超過をCPUが拒否したため未実行で撤回。原情報やtargetを削らず、重複説明の整理と段階別提示へ補正した。独立reviewで喜び理由relationのreplacement_refsがclaim2個に読める曖昧さを指摘され、新relation ID1個と明示して実GPU前に修正した。metadata/tokenizerは既存cache、固定4依存/CPU runtimeを再利用し、新しい環境を作り直していない。
+
+今回の実確認は、保持中A4500 y0eb0w0qn6nks0の同保存adapter（0bdac5e9…）を非学習reloadし、新messagesの初回/保存prior付き訂正後FIT2だけを1回ずつ生成する。元4B/revision・seed20261024・BF16/SDPA・greedy・max_new2048/context8192は維持。process上限900秒、optimizer/update/追加学習0、重みhash前後不変、既存結果上書き/自動再試行0。2件とも既知teacher familyの固定入力で、実初回の問いから動的に作る訂正入力とは区別する。計画したprocess時間の表示$0.26/h按分上限は$0.065で、準備/回収/継続保持/税等を含む請求hard capではない。GPUの停止/再起動/新Pod/チャージは禁止、今回も操作しない。
+
+観測会はこの形式修復には不要。Piece/Analysis完成教師0、自然な受け取り・全般品質・動的一往復/通常保存再読/本人端末は残る。既存0/2・前回同初回0/1を新成功へ付け替えず、正式0/3・全体54.50％を維持。実結果は後続に回収・差分記録する。

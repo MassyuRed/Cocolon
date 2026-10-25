@@ -1,20 +1,16 @@
 {
   "scope": "CPU_SYNTHETIC_FIXED_RAW_CONSUMER_NOT_MODEL_NOT_DYNAMIC_THREAD",
-  "cmee_api_commit": "7b649a23a6cdbfb5d55576a6ce58446ff24b414a",
-  "dataset_manifest_sha256": "d8880c313a6ee2e41c47e3ec2d0fc54ca25439f432ed83bf28f9c0493389a3a2",
-  "source_examples_sha256": "d02e6510af253a77d9168051adbf5e0a1ff67d4de288696114a655e30e89d5f0",
+  "cmee_api_commit": "0037ae59eddab00f4956a7e4c2506db2af8ccc35",
+  "dataset_manifest_sha256": "f0d44164b69837a4860f82f347fbc5686a38133f535497a56dea4b624277db8e",
+  "source_examples_sha256": "a6df4c0a175ac3c625835e793f4bcf5230f81d84d5d852a506175db3dcec0c08",
   "model_calls": 0,
   "production_db_called": false,
-  "full_source_packet_snapshot": "cpu_connection_results.json",
   "cases": [
     {
       "id": "FT-CHAIR-INITIAL",
       "raw_scope": "AUTHORED_TARGET_NOT_MODEL_OUTPUT",
-      "raw_sha256": "b4b3a2963340e6ea2065d9521c5b3abef7d27db3ae6e9b5fb6be8e77739a29c4",
       "messages_match": true,
       "status": "MEANING_AND_BODY_AVAILABLE",
-      "checkpoint_ref": "model-checkpoint-ba1557bcf41500f6acba5130671274515a5f232b6d0c8cc198dceccb0c827650",
-      "old_messages_status": "INPUT_MESSAGES_MISMATCH",
       "body": {
         "artifact_id": "emlis-model-artifact-25f39ce168877444c93cc55cdb409b83c537561fd9a32d0b23a65fd23d3b5b1e",
         "schema_version": "cocolon.cmee.emlis_model_thread_artifact.v1",
@@ -53,16 +49,14 @@
         "answer_limit": 1,
         "answer_source_role": "SUPPLEMENTAL_ANSWER",
         "schema_version": "cocolon.cmee.emlis_clarification.v1"
-      }
+      },
+      "old_messages_status": "INPUT_MESSAGES_MISMATCH"
     },
     {
       "id": "FT-CHAIR-AFTER-CORRECTION",
       "raw_scope": "AUTHORED_TARGET_NOT_MODEL_OUTPUT",
-      "raw_sha256": "58aeb28faa22e240e43a377251af67ea5cc8e5564d880554c26eb56251fc5961",
       "messages_match": true,
       "status": "MEANING_AND_BODY_AVAILABLE",
-      "checkpoint_ref": "model-checkpoint-d8523efcbc510addc5cb4ba6c1a9478ee9de3467390e0eddf06e889a7dcad4f1",
-      "old_messages_status": "INPUT_MESSAGES_MISMATCH",
       "body": {
         "artifact_id": "emlis-model-artifact-7a28cc404c7d88ccf2bba36ed31a0d60262f8db172b7debc4d11766b7f224e0c",
         "schema_version": "cocolon.cmee.emlis_model_thread_artifact.v1",
@@ -71,8 +65,9 @@
         "update_note": "共同修理と、また使えることへの喜びへ訂正しました。",
         "text": "見えたこと：\n友人に手順を教わり、一緒に椅子を直したのですね。\n\nEmlisから：\n捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。\n\n読み直したこと：\n共同修理と、また使えることへの喜びへ訂正しました。"
       },
-      "question": null
+      "question": null,
+      "old_messages_status": "INPUT_MESSAGES_MISMATCH"
     }
   ],
-  "instruction_repair": "20261025_surface_types_atomic_claims"
+  "instruction_repair": "typed_hierarchy_stage_specific_scalar_coordinates"
 }

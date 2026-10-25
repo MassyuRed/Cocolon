@@ -4,12 +4,12 @@
   "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
   "semantic_profile": "emlis_model_proposal.v1",
   "runner_sha256": "00ece0ffac86e17f18544ee8e5fef44d315dd8cd2b641670cd8e6222ca60e40f",
-  "dataset_manifest_sha256": "d8880c313a6ee2e41c47e3ec2d0fc54ca25439f432ed83bf28f9c0493389a3a2",
+  "dataset_manifest_sha256": "f0d44164b69837a4860f82f347fbc5686a38133f535497a56dea4b624277db8e",
   "execution_plan_sha256": "0b08d519d14b5412b9e6b4403c5e7b4e5fa04993d34db86b62d7e8495a4d37a3",
   "data_sha256": {
-    "sft_examples.jsonl": "d02e6510af253a77d9168051adbf5e0a1ff67d4de288696114a655e30e89d5f0",
-    "train_messages.jsonl": "b4063392563c9bd59ef22002cf7e73eec88cb4de02493227afdfe697338a7a13",
-    "eval_inputs.jsonl": "d0e66bb1c7cf8f61fe603d477bdddf2eeaab4e00cd4cbc4efd8083bebcbc5df2",
+    "sft_examples.jsonl": "a6df4c0a175ac3c625835e793f4bcf5230f81d84d5d852a506175db3dcec0c08",
+    "train_messages.jsonl": "0917c23d4498bb880ef8cb75075ca46eb621a6588bb006331e333598bdc3bf79",
+    "eval_inputs.jsonl": "8b70f0e530257eb151a080cb4d311486503b0f2536db0454cb95504075fe6117",
     "eval_review.jsonl": "64fb1a6350dc24359b60316d6eb380a715582581b03f49df70a9a230354b0f80"
   },
   "source_commit": null,
@@ -44,19 +44,19 @@
   "training_tokens": [
     {
       "id": "FT-CHAIR-INITIAL",
-      "prompt_tokens": 3110,
+      "prompt_tokens": 3071,
       "completion_tokens": 1094,
-      "total_tokens": 4204,
-      "loss_labels_start": 3109,
+      "total_tokens": 4165,
+      "loss_labels_start": 3070,
       "logits_positions": 1095,
       "full_context_retained": true
     },
     {
       "id": "FT-CHAIR-AFTER-CORRECTION",
-      "prompt_tokens": 6103,
+      "prompt_tokens": 6091,
       "completion_tokens": 1877,
-      "total_tokens": 7980,
-      "loss_labels_start": 6102,
+      "total_tokens": 7968,
+      "loss_labels_start": 6090,
       "logits_positions": 1878,
       "full_context_retained": true
     }
@@ -64,35 +64,35 @@
   "generation_inputs": [
     {
       "case_id": "FIT-FT-CHAIR-INITIAL",
-      "input_tokens": 3110
+      "input_tokens": 3071
     },
     {
       "case_id": "FIT-FT-CHAIR-AFTER-CORRECTION",
-      "input_tokens": 6103
+      "input_tokens": 6091
     },
     {
       "case_id": "EFREE-E01",
-      "input_tokens": 1133
+      "input_tokens": 1202
     },
     {
       "case_id": "EFREE-E02",
-      "input_tokens": 1144
+      "input_tokens": 1213
     },
     {
       "case_id": "EFREE-E03",
-      "input_tokens": 1139
+      "input_tokens": 1208
     },
     {
       "case_id": "EFREE-E04",
-      "input_tokens": 1243
+      "input_tokens": 1312
     },
     {
       "case_id": "EFREE-E05",
-      "input_tokens": 1147
+      "input_tokens": 1216
     },
     {
       "case_id": "EFREE-E06",
-      "input_tokens": 1124
+      "input_tokens": 1193
     }
   ],
   "generations_per_stage": 8,

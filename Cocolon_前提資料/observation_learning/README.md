@@ -1,5 +1,7 @@
 # Mashの観測技術を継承するための記録
 
+**今回の続行（§27）**：API `0037ae59eddab00f4956a7e4c2506db2af8ccc35`で、出力の必須キー一覧を同じ既存schemaのJSON階層見本へ置換した。field_pathは実欄のキー、start/endは欄内Unicode位置で、nativeのutf8_*/field_utf8_*を使わない。見本の配列長や$placeholderを実値にしない。初回は4意味/unknown1/updates0、訂正後は元3意味IDを保持した6意味/unknown0/updates3とし、当段階に不要な提示を除く。source/material/prior/system・教師assistant・採用条件/reader/旧raw/重みは不変。新5拒否とstage独立性1を含めbackend64成功。最終tokenは初回3071+1094=4165、訂正6091+1877=7968、最大生成枠6091+2048=8139<=8192、切捨て0。合成target2/2の意味/本文整合と旧messages拒否を確認し、実モデル成功へ加算しない。 [現行の作業範囲](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-typed-hierarchy-and-field-scalar)。実4Bの2FIT非学習検証はこれから。追加学習/停止0。
+
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
 作成日：2026-10-20（日本時間）
