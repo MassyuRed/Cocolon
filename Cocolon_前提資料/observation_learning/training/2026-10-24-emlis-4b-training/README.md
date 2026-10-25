@@ -1,4 +1,4 @@
-**現在：** [全文字座標提示の非学習確認§31](../../../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-unicode-map-fit2)。前回の保存32更新adapter ce644a5b…を固定し、各欄の全Unicode文字へ[start,end,char]を機械表示。意味型・参照・訂正根拠・受け取りと問いの説明を既存契約へ合わせた。原文/metadata/control/prior/教師本文とCMEE採用条件は不変。CPU backend69・pack13成功、実tokenizer初回1995/訂正5018＋最大生成2048<=8192・切捨て0。新入力の実FIT2は未実施で、現在の意味/本文採用は0/2のまま。追加学習0、GPU停止なし、観測会は今回不要、通常アプリ・一般入力・三中核の商品品質は未成立。
+**現在：** [新入力への形式学習§31](../../../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-unicode-fit32)。全文字位置表/契約説明を加えた非学習2FITは212.452秒でJSON/stop2/2、CMEE意味/本文0/2。初回は座標型/意味型、訂正後は誤根拠/範囲外参照/旧solo保持が未達。元32更新adapterは旧入力のみで学習されていたため、今のmessages/既存2target/採用条件を固定し、ce644a5b…から新optimizer32update一回で新入力への未適合仮説を確認する。beforeは今回raw2をbyte再利用、after2のみ。未実行のため改善は未主張。GPU停止なし、観測会は今回不要、通常アプリ・一般入力・三中核の商品品質は未成立。
 
 # Emlis 4B学習・保存再loadの限定pack
 

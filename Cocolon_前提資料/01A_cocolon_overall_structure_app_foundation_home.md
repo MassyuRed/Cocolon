@@ -4757,3 +4757,6 @@ F/continued_fit32/continue_fit.py と plan.jsonは、保存済みadapterから�
 ### 2026-10-25 — 全文字座標の非学習2FIT確認（商品構造差分なし）
 
 F/unicode_check/diagnostic.pyとplan.jsonが、保存32更新adapterの非学習2生成・固定hash/入力token/900秒・raw/report/archive回収を所有する。model_candidate_source.pyはmodel-visible sourceへ全文のfield_unicode_spansを機械追加し、既存kind/ref/訂正根拠/本文sectionの説明を具体化。native prepare/admission/reader/教師本文/公開API/DB/RNは不変。STRUCTURE_MAP_DELTA_NONE。source/対象検証/実行scopeと結果は最新weekly§31が所有する。旧32update計画は再開しない。
+
+
+全文字座標の非学習実結果はtrials/2026-10-24-qwen4b-cmee-diagnostic/unicode_map_20261025/が所有。raw/inference_report/actual_plan/diagnostic/preflight/execution_plan/unicode_attempt/unicode_file_manifest/dataset_manifest/integrity/cmee_result/comparison/README/result.jpgを保持する。続くF/unicode_fit32/continue_fit.py/plan.jsonは、新入力を学ぶ32update一回の初期重み/新schema/1995・5018token pinを所有し、旧学習planを再開しない。商品構造/契約差分なし、実結果と次作業はweekly§31へ戻る。

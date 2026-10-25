@@ -2050,3 +2050,17 @@ backend対象69成功、pack13成功（38subtestsは加算しない）。非BMP/
 同A4500 Pod y0eb0w0qn6nks0の保存ce644a5b…adapter（32更新後）を非学習reloadし、初回/保存prior付き訂正後FIT2を各1回だけ生成する。旧run/計画は閉じたまま、新unicode_check/diagnostic.pyとplan.jsonを固定。入力提示/説明だけを変え、base/revision・adapter・seed20261024・BF16/SDPA・greedy・context8192/max_new2048を固定。追加optimizer/update/学習0、原重み3file hash前後不変、rawを補修せず同APIへ消費。900秒・2生成・自動retry0。表示$0.26/h按分上限$0.065はprocess allocationであり、準備/保持/回収/税を含むPod請求hard capではない。新Pod/charge/STOP/再起動/削除/依存install/本人DB/Render/Supabase/本番/通常有効化/merge/deploy0。終了時のraw/report/source/実plan/hashをarchiveへ回収する。
 
 既存公開済み架空chair2入力だけを使用し、原OBS-20261024-001の「華恋作成・実ユーザーの記録ではない」/scenario_persons_fictitious=trueを保持。本人DB/Private diary/credentialの新取得・送信0。観測会は今回の根拠/形式問題には不要。実結果未確認のため意味/本文0/2、正式0/3/全体54.50％を維持。STRUCTURE_MAP_DELTA_NONE（model投影/説明と有限試験の所在だけ、商品責務/公開schema/DB/RN不変）。
+
+
+**§31 非学習実結果：** 212.4523757994175秒、2生成/0更新、初回1995→1783token、訂正5018→1968token、JSON/stop2/2。実CMEE意味/本文0/2、両方INVALID_EVIDENCE。[全raw/採否/比較/回収](../observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/unicode_map_20261025/README.md)。初回は全9根拠の座標がstring、全8claim kindが時点型、初回へguidance/joint/reuseが混入。訂正後の9/11 slice一致には原根拠重複2件を含み、補足2根拠は不一致。旧solo/unknown残存、claim/relation/updateの範囲外index、必要3更新に対して説明用enum直写1更新。受け取りは復唱/反復。独立2agentとrootの実読と整合し、改善/採用とは数えない。
+
+archive 8e776b7f0169af1b9b24467419b336299e30bc1519f73472e630a0e8bb8cb215、全13member/size/hashと固定source bytesを照合。元ce644の3file/32tensor有限性・非学習/前後hash不変、新重み0。最初のarchive hash照合は画面末尾の転記誤りで停止し、GPU上で前後32桁へ分けて再読して一致確認。再download/再生成0。別のCPU provenance初稿のflag nest誤りも原top-level/公開OBSへ戻って修正、本人DB/Private diary/credential0。unicode_check計画は終了済み/再実行不可に閉じ、実planはtrial原本に保持する。表示process按分約$0.015344は継続保持等を含む請求総額ではない。
+
+<a id="20261025-unicode-fit32"></a>
+### 同じ新messagesを学ぶ一回（新入力への未適合仮説）
+
+保存ce644は旧投影1409/3526tokenで学習し、今回1995/5018tokenの文字map＋説明/shapeへ変わった入力は未学習だった。上の非学習結果だけでは、map自体の不適合と新入力への未適合を分離できない。Mashの今回の継続指示に基づき、同messages/同2target/同source/prior/CMEE採用条件を固定し、ce644から新optimizer32updateを一回行う。入力変更を重ねず、この学習前後の差だけを見る。旧同条件の無目的な追加epochや閉じたrun再試行ではない。
+
+新unicode_fit32/continue_fit.pyとplan.jsonは既存有限runnerの初期adapter/schema/token pinだけを分けたもの。旧continued_fit32/planは閉じたまま。既存LoRA r8/alpha16/qv16module・AdamW1e-4・16周×2target=32update・seed/BF16/SDPA/greedy/8192/2048を維持。beforeは今回のraw2をbyte再利用、学習前後NLLを測定し、保存/先退避/非学習reload後after2だけ生成。原adapter3hash不変/新32tensor有限性と全回収を要求。新optimizerであり厳密途中再開ではない。
+
+同A4500のみ、process1800秒/計画$1・表示$0.26/h按分上限$0.13（保持/回収/準備/税別、Pod hard capではない）。追加生成/教材/自動retry/失敗後の増量0。STOP/再起動/削除/新Pod/charge/新依存/本人DB/Render/Supabase/通常有効化/merge/deploy0。観測会は今の形式適合に不要。成功しても既知2例の適合だけで、未知入力/三中核/正式受入れへ昇格しない。商品0/正式0/3/54.50％を保持する。

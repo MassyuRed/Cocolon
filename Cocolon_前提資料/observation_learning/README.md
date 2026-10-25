@@ -1,6 +1,6 @@
 # Mashの観測技術を継承するための記録
 
-**現在の直接作業：** [全文字座標提示の非学習確認§31](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-unicode-map-fit2)。前回の保存32更新adapter ce644a5b…を固定し、各欄の全Unicode文字へ[start,end,char]を機械表示。意味型・参照・訂正根拠・受け取りと問いの説明を既存契約へ合わせた。原文/metadata/control/prior/教師本文とCMEE採用条件は不変。CPU backend69・pack13成功、実tokenizer初回1995/訂正5018＋最大生成2048<=8192・切捨て0。新入力の実FIT2は未実施で、現在の意味/本文採用は0/2のまま。追加学習0、GPU停止なし、観測会は今回不要、通常アプリ・一般入力・三中核の商品品質は未成立。
+**現在の直接作業：** [新入力への形式学習§31](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-unicode-fit32)。全文字位置表/契約説明を加えた非学習2FITは212.452秒でJSON/stop2/2、CMEE意味/本文0/2。初回は座標型/意味型、訂正後は誤根拠/範囲外参照/旧solo保持が未達。元32更新adapterは旧入力のみで学習されていたため、今のmessages/既存2target/採用条件を固定し、ce644a5b…から新optimizer32update一回で新入力への未適合仮説を確認する。beforeは今回raw2をbyte再利用、after2のみ。未実行のため改善は未主張。GPU停止なし、観測会は今回不要、通常アプリ・一般入力・三中核の商品品質は未成立。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
@@ -81,7 +81,7 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 
 ## 現在地（2026-10-25・三中核の開発基準選定、本番は未成立）
 
-**今回の直接作業：** [全文字座標提示の非学習確認§31](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-unicode-map-fit2)。前回の保存32更新adapter ce644a5b…を固定し、各欄の全Unicode文字へ[start,end,char]を機械表示。意味型・参照・訂正根拠・受け取りと問いの説明を既存契約へ合わせた。原文/metadata/control/prior/教師本文とCMEE採用条件は不変。CPU backend69・pack13成功、実tokenizer初回1995/訂正5018＋最大生成2048<=8192・切捨て0。新入力の実FIT2は未実施で、現在の意味/本文採用は0/2のまま。追加学習0、GPU停止なし、観測会は今回不要、通常アプリ・一般入力・三中核の商品品質は未成立。
+**今回の直接作業：** [新入力への形式学習§31](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-unicode-fit32)。全文字位置表/契約説明を加えた非学習2FITは212.452秒でJSON/stop2/2、CMEE意味/本文0/2。初回は座標型/意味型、訂正後は誤根拠/範囲外参照/旧solo保持が未達。元32更新adapterは旧入力のみで学習されていたため、今のmessages/既存2target/採用条件を固定し、ce644a5b…から新optimizer32update一回で新入力への未適合仮説を確認する。beforeは今回raw2をbyte再利用、after2のみ。未実行のため改善は未主張。GPU停止なし、観測会は今回不要、通常アプリ・一般入力・三中核の商品品質は未成立。
 
 華恋の選定は4Bの共通基盤＋core別教示＋既存CMEE。0.6/0.8/1.7/2B・別4Bまで検討し、学習費と常時推論費を分離する。Mashの最新指示により、ローカル運用先はWindows／Macとも候補で未選定。既存M4 16GBの4bit案は検討材料であり、決定済みの移行先ではない。自前adapterのmerge/変換、量子化後の三中核品質、実入力・同時数・24時間運用は未確認。既存9教師はEmlisのみ、4B実診断は2教師/2update、Piece/Analysis完成教師0。単純なepoch増加を先行せず、各coreの完成実演と未使用入力で評価する。旧3070は今回fresh画面で既に停止表示、華恋の停止操作0。新A4500 20GB／Secure・表示$0.26/h、Pod y0eb0w0qn6nks0で修正版2教師/2update・保存reload・前後16生成が完走。peak allocated14.970/reserved17.588GiB、全24member/32tensor回収照合/永続保管済み。NLL0.251117→0.245189だがCMEE意味/本文は前後0/2。初回shape/自然文surface、訂正後の旧意味、proxy2件打切りが残る。[全実結果](trials/2026-10-24-qwen4b-cmee-diagnostic/repaired_a4500_20261025/README.md)。診断process5400秒/計画$1と今日のGPU保持課金を分離し、自動Stop/削除を行わない。本番変更0。正式0/3・54.50％据置。
 

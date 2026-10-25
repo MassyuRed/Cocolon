@@ -1,7 +1,7 @@
 {
   "schema": "cocolon.emlis_4b_unicode_inference_check.v1",
-  "status": "AUTHORIZED_ONCE_CURRENT_MASH_CONTINUATION",
-  "inference_authorized": true,
+  "status": "COMPLETED_NOT_REPLAYABLE",
+  "inference_authorized": false,
   "training_authorized": false,
   "adapter_directory": "/workspace/cocolon_4b_continued_fit32_20261025/results/20261025-034400-79baf136/adapter",
   "adapter_sha256": "ce644a5ba57dfcb9c8df047000cf45ba9ab32c1d09321d8a8da0f5a73fd6b0f4",
@@ -28,5 +28,7 @@
   "pod_billing_hard_cap": false,
   "automatic_pod_stop": false,
   "retry": false,
-  "notes": "Same saved adapter, changed model-visible Unicode map and existing contract instructions; known FIT2 only, not unseen evaluation. No new teacher, optimizer/update, DB/Render/deploy, Pod lifecycle or dependency install. Monthly added budget remains JPY10000; Pod remains running per Mash."
+  "notes": "Same saved adapter, changed model-visible Unicode map and existing contract instructions; known FIT2 only, not unseen evaluation. No new teacher, optimizer/update, DB/Render/deploy, Pod lifecycle or dependency install. Monthly added budget remains JPY10000; Pod remains running per Mash.",
+  "completed_source_commit": "5c26c06f6862993f191fc51c40f8c162dc27074b",
+  "completed_archive_sha256": "8e776b7f0169af1b9b24467419b336299e30bc1519f73472e630a0e8bb8cb215"
 }
