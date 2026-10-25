@@ -84,3 +84,34 @@ reception_fit6_cpu_validation.jsonのstdlib6条件（承認固定値/未承認�
 [全実結果/未補修raw/採否](../../trials/2026-10-25-quote-reception-fit6/README.md)。source6cea8816/API4002b457、6更新/保存/非学習reload/FIT9が939.715秒で完了。意味7/9・本文6/9（日常3/3、chair意味4/6・本文3/6）。全9成功前提に届かず、条件付き後段2件はcall0で閉じ、新f1e88e3eは不採用。初期138b/旧18plan/教師/prompt/raw/reader保持、追加更新/同要求retry/reader緩和0。旧chair01初回は不存在関係先、01訂正はobservation「直した」→「直せた」、03初回は反復/2560token打切り。reception NLL0.279112→0.015794の改善を全体保持や商品合格へ換算しない。
 
 早期archive全16対象/32F32有限をPod外照合しlibfile_5c99cce0e5c48191b628ba37d62be5d0へ保管。完了証拠全19対象と原raw9/consumer1,505,922bytes/index＋24partsも照合保存済み。後段draftと合成SQL30/model0の準備は実model保存再読の証拠にしない。reception_fit6_runtime_checkpoint.jsonはCLOSEDで、再起動しない。新観測会は今回不要。GPU停止/再起動/削除/新Pod/charge/管理API0、製品/DB/Render/RN変更0。STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％据置。
+
+
+<a id="quote-balanced-fit12-proposal"></a>
+## 新12更新案 — chair全文復習＋daily受け取り、CPU準備完了・GPU未承認
+
+未完了は、既存chairの意味・本文・問い・訂正更新を保持しながらdailyの自然な受け取りを成立させること。前回6-onlyはdaily3通過とchair3退行を実測した。共有LoRAを更新するため、daily以外をlossから外しても旧出力が保持される保証はなかった。原因をLRや4Bの一般能力に断定しない。今回の推奨は、旧138b9ff7からdaily各2回を維持し、既存chair6行を全文JSON＋EOSで各1回復習する一回。新教材・新観測会は不要。独立言語事例は2話のままで、一般化・Piece/Analysisの完成教師不足は解消しない。
+
+### 固定する実行内容
+
+- 初期adapter138b9ff7（旧quote18）を保持して開始。不採用f1e88e3eは使用しない。base/revision/API4002b457/9教師/prompt/readerは不変。
+- 固定12順：daily01、chair01初回、daily02、chair01訂正、daily03、chair02初回、daily01、chair02訂正、daily02、chair03初回、daily03、chair03訂正。
+- chair6は各1回、既存teacher_lossでassistant JSON＋EOS全文。daily3は各2回、既存11tokenのreception_loss。全文context/teacher/EOSは保持しdailyの他labelは-100。各stepのmean CEであり、半数ずつのstepをtoken重み50:50とは呼ばない。
+- 新AdamW/LR5e-5/weight_decay0/clip1/seed20261024、既存32 LoRA tensorのみ。厳密optimizer状態の再開ではない。前後NLLはchair全文6とdaily受け取り3を別記録。
+- 12更新→adapter保存/早期退避→非学習reload/32有限→固定9を各1生成。無補修rawを既存consume_quote_fit_raw.pyへ一回渡し、root華恋が全9本文/問い/訂正を読む。
+- 全9意味/本文成功・EOS/parse完了、chair初回ASK3、chair訂正各3更新/問いなし、daily FINAL/問いなしを満たす場合だけ、別identity2件の実service/隔離SQL保存・保存後生成禁止再読へ進む。2件目は意味保存後の中断→明示再開も検査する。新run_quote_balanced_holdout.pyはこの12更新結果へ束縛した準備済みsource。eval planは未作成、未activate。
+- 上限は学習/FIT1800秒/$0.13＋全件成功時だけ後段900秒/$0.065、合計45分/処理按分$0.195（記録単価$0.26/hによる配分、準備/回収/継続保持/保存/税別、請求総額のhard capではない）。deadline/nonfinite/source不一致/合否不成立で終了。追加更新、失敗model再call、LR探索、raw補修、reader緩和、旧plan再開0。
+- GPU lifecycle/Stop/再起動/削除/新Pod/charge、通常application、本人DB、Render/Supabase、公開API/DTO/RN、merge/deployは変更しない。終了してもGPU保持料金は止まらない。
+
+### 今回のCPU実結果とfile
+
+`run_quote_balanced_fit.py`と`balanced_fit12.plan.json`を実装。未承認planのCPU確認まで拒否していた分岐を、validate-onlyだけ通すよう実行前に修復。ログはtarget_visit/loss_scopeへ変更し、token原本もarchive対象にした。既存run_pilotの全文helperは疎labelを拒否するためdailyには直接causal lossを使う。
+
+`balanced_fit12_cpu_validation.json`は10条件成功。固定plan/未承認GPU拒否/拡大拒否/原教師hash/12順/全文と疎labelのcausal slice/実tokenizer原本/dispatchを確認。captureはモデル実行ではない。別文脈agentも変更箇所を読取確認したが、Pro/Ultra/human受入れを成立させた記録ではない。
+
+Jupyter直接接続で新pack `/workspace/cocolon_4b_quote_balanced_pack_20261025`を作り、固定source/planを配置。`CUDA_VISIBLE_DEVICES=''`、offline cache tokenizerのvalidate-onlyが成功した。実原本`balanced_fit12_tokenization.json`は全9、最大prompt5045/completion2339、全文最大7378で切捨て0。chair loss対象は1374/2330/1374/2333/1364/2339 tokenでEOS学習true、daily各11token/causal位置は前CPU診断と一致。原本SHAはbdcfcb810542b3532e124c75f544f242854b1d0eb4f7d5b07dedaa14c4644a8a。初期重みSHA138b9ff7もPodで再照合した。新モデル読込/forward/生成/optimizer更新/SQLは0。アップロードに約206秒を要したが学習時間ではない。
+
+### 承認境界・差分
+
+現在status=PROPOSED_NOT_AUTHORIZED/gpu_run_authorized=false。新12の有料一回試行は、終了済み6更新の消費済み承認から外れる。Rule18 §11.3 LEVEL_3の4/5/8およびclosed single-use再利用禁止に従い、この固定案への新しい承認後だけ起動する。承認後にCPU成功やall9成功を理由とする小分けの再承認は不要。旧18/6のplan、raw、教師、重み、readerは変更しない。
+
+今回の記録はCPU準備の限定TECHNICAL_CREDIT。商品0/正式0/3/管理54.50％据置。STRUCTURE_MAP_DELTA_NONE（有限学習sourceと所在の追加のみ）。全体設計・全file地図・最新weekly§45/原結果から選択した作業であり、全blob/稼働/本人端末/一般品質の再検証ではない。旧§43停止指示/停止未確認は歴史として保持する。

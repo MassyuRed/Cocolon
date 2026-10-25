@@ -4878,3 +4878,8 @@ observation_learning/trials/2026-10-25-quote-address-fit18/ はREADME.md（終�
 ## 2026-10-25 — 受け取り6更新の完了file地図
 
 observation_learning/trials/2026-10-25-quote-reception-fit6/ のREADME/closureは意味7・本文6/9、daily3通過とchair3退行、新不採用/後段0/停止境界を所有する。run/training/after_fit/前後reception NLLは実6更新/9生成/原出力、file_manifest/recovery/weights_verificationはPod外全19/早期16対象・32tensor照合、consumer.index＋24partsは全実consumer1,505,922bytesの無損失原本。conditional_holdout_runner_draft_NOT_ACTIVATED.py/conditional_holdout_cpu_preparation.jsonは実model後段へ進まなかった準備履歴。既存quote packのreception_fit6_runtime_checkpoint.jsonはCLOSEDへ更新し、原plan/teacher/source/旧raw/重みを保持する。意味/本文7/6、条件付き別ID2は0、新f1e88e3e不採用。STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％、最新weekly§45/全体00を参照。
+
+
+## 2026-10-25 — 新balanced12案のCPU準備file
+
+既存observation_learning/training/2026-10-25-emlis-quote-address/へrun_quote_balanced_fit.py（chair全文6各1＋daily受け取り3各2、固定12/保存reload/FIT9）、balanced_fit12.plan.json（未承認/実行false）、balanced_fit12_tokenization.json（Jupyter実tokenizer全9/全文EOSと疎11対象/モデル0）、balanced_fit12_cpu_validation.json（CPU10条件）、run_quote_balanced_holdout.py（全9成功後だけ2実service保存/中断再開/非生成再読、evalplan未作成）を追加。READMEのquote-balanced-fit12-proposalが目的・固定順・範囲・上限45分/$0.195処理按分・停止・承認境界の詳細owner。旧18/6plan/teacher/helper/raw/重み/reader不変。製品構造・契約変更なし、STRUCTURE_MAP_DELTA_NONE。全体00/観測入口/最新weekly§46へ現在地を戻す。商品0/正式0/3/54.50％。

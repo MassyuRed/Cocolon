@@ -2432,3 +2432,15 @@ Mashは「受け取りだけ6更新→保存・再読込→9件検査→全件�
 処理939.715479秒×記録単価$0.26/h=約$0.06786834（準備/回収/保持/保存/税別、請求総額ではない）、1800秒/$0.13内で後段900秒/$0.065未使用。初期重み3file/旧teacher/helper/reader/原raw不変。追加学習/同要求retry/LR探索/raw補修/reader緩和0、終了済みplanを再開しない。今回の残差へ新観測会は不要で、保存差分から日常と旧chair保持を両立する方式を次に検討する。自動新試行0、独立2話・Piece/Analysis完成教師0・一般品質未確立を保持。
 
 全体00/観測入口/pack/runtime checkpoint/全file地図01Aを同時更新。STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％据置。管理console/GPU一覧/Runpod API/Stop/再起動/削除/新Pod/charge/Render/Supabase/本人DB/RN/merge/deploy変更0。Jupyter直結のみ。旧§43停止指示/未確認は履歴として保持し、今回scopeでGPU lifecycleは変更していない。
+
+
+<a id="20261025-quote-balanced-fit12-cpu-proposal"></a>
+## 46. 10/25 — chair保持＋daily受け取りの新12案をCPU具体化、GPU承認前
+
+前回§45の6-onlyはdaily3成功/旧chair3退行で閉鎖・新f1不採用のまま。Mashの続行指示で旧138bからchair6全文各1＋daily3受け取り11token各2を固定順で交互に学ぶ最小replay案を具体化した。成功は未証明、LR原因や4B限界を断定しない。詳細・費用・対象・停止・source/原本は[quote packの新12案](../observation_learning/training/2026-10-25-emlis-quote-address/README.md#quote-balanced-fit12-proposal)。
+
+新runner/未承認planをJupyterへ配置し、CPU専用分岐の不備を実行前に修復。実cache tokenizer全9、最大prompt5045/completion2339/全文7378、chair6全文＋EOSとdaily3各11対象を照合。stdlib10条件成功。別文脈agentの読取確認も完了。新model読込/forward/生成/更新/SQL0。新後段runnerは12の結果だけへ束縛し、EOS/parse/ASK/訂正3更新/dailyFINALを検査。evalplan未作成・未activate。旧6の合成SQL準備を新実model成功へ移し替えない。
+
+新一回試行案は12更新→保存/非学習reload→FIT9→全件成功・旧問い/訂正保持時だけ2実service保存再読/意味保存後中断再開。1800秒/$0.13＋条件付き900秒/$0.065、合計45分/処理按分$0.195（記録$0.26/h、準備/回収/保持/税等別）。閉鎖済み6の承認を流用しない。Rule18§11.3 LEVEL_3 4/5/8の新scope明示承認前でgpu_run_authorized=false。root華恋/CodeX Work/GPT-6がsole writer/実行owner、Pro/Ultra/human受入れとは扱わない。
+
+今回必要な新観測会なし。2独立話/一般化未確認/Piece・Analysis完成教師0は継続。限定CPU技術準備、商品0/正式0/3/54.50％据置。全体00/観測入口/01A所在を同期しSTRUCTURE_MAP_DELTA_NONE。旧18/6plan/teacher/raw/重み/reader不変。Jupyter直接のみ、GPU一覧/管理API/lifecycle/新課金/Render/Supabase/本人DB/RN/merge/deploy操作0。GPU保持料金の停止を意味しない。
