@@ -1,6 +1,6 @@
 # 日常の食事と落ち着き — 次の意味対応・学習候補
 
-状態：**Mash承認済み／API実装・CPU確認済み／GPU学習前**。2026-10-25 JST。
+状態：**有限試行終了／18更新・保存reload完了／FIT chair6/6・daily0/3／別ID保存再読未実施**。2026-10-25 JST。
 
 ## 今回確定した障害
 
@@ -75,7 +75,7 @@ observationのbindingはreturn/cook/eatと行動関係3本。receptionはwarm_fo
 
 dailyの内部版はsourceの独立再認識から導出し、保存値の自己申告で切り替えない。dailyにanswer/prior、question/update_note、updatesがあれば拒否し、chair用訂正処理へ流さない。旧chairの版1/1・snapshot全体一致を回帰条件とする。
 
-新学習/実行sourceはこのfolderの `generate_candidates.py`、`run_daily_calm_fit.py`、`run_daily_calm_holdout.py`、`consume_fit_raw.py` と、対応plan/教師/messages/manifest/tokenization/fixture/result。既存有限runnerの同方式を再利用し、既に終了した旧planを編集・再実行しない。generate_candidates/run_daily_calm_fit/consume_fit_rawと9行の教師・messages・manifest・plan・CPU結果を作成済み。holdout runnerは学習後の採否を確認してから同じ承認範囲内で用意する。GPU学習はまだ実行していない。
+新学習/実行sourceはこのfolderの `generate_candidates.py`、`run_daily_calm_fit.py`、`run_daily_calm_holdout.py`、`consume_fit_raw.py` と、対応plan/教師/messages/manifest/tokenization/fixture/result。既存有限runnerの同方式を再利用し、既に終了した旧planを編集・再実行しない。generate_candidates/run_daily_calm_fit/consume_fit_rawと9行の教師・messages・manifest・plan・CPU結果を作成済み。holdout runnerは学習後の採否を確認してから同じ承認範囲内で用意する。この段落は学習前準備の履歴。18更新と採用結果は末尾およびtrialに記録する。
 
 ## 有限な学習・接続確認案
 
@@ -109,11 +109,11 @@ Renderのread-only最新照会は3577d7fd/dep-dbd8hjoae00c73firbt0がLive、自�
 | probe_current_profile.py | 実行した一回CPU診断のsource。再利用可能な新checker systemではない |
 
 
-## 承認後の実装・CPU結果（GPU実行前checkpoint）
+## 承認後の実装・CPU結果（GPU実行前checkpointの履歴）
 
 API **bd356566d37370911e14dab2819ab25a619c6353**、承認済み3製品owner＋新test/fixture2pathを反映し全5fileをGitHub全文読戻し照合。新dailyだけadmission/adapter2/2、旧chair1/1/native形/hash/意味/実本文/ASK/訂正3更新/model messagesは未変更API95d00bの実行captureと全文一致した。新familyの回答・prior・問い・gap・更新は不採用。通常app/API/DTO/DB/RN/本番配置は変更0。
 
-限定4testfile **174 passed /0failed/0skip、20.89秒、既存warning1**。新daily60件、既存114件。最初の新SQL2件は保存値でなく毎回変わるSQLnowまで比較したテストの誤りで失敗、persisted snapshot/eventsの比較へ修正後に全4fileを再実行して成功。製品codeの緩和やSQL時計変更は0。新dailyは16表現・5claim/4関係/8根拠・選択・意味と本文の拒否・保存内部版改変・実SQL2初回/非生成再読を確認した。scope数を独立言語16題へ換算しない。
+限定4testfile **174 passed /0failed/0skip、20.89秒、既存warning1**。新daily59件、既存115件。最初の新SQL2件は保存値でなく毎回変わるSQLnowまで比較したテストの誤りで失敗、persisted snapshot/eventsの比較へ修正後に全4fileを再実行して成功。製品codeの緩和やSQL時計変更は0。新dailyは16表現・5claim/4関係/8根拠・選択・意味と本文の拒否・保存内部版改変・実SQL2初回/非生成再読を確認した。scope数を独立言語16題へ換算しない。
 
 CPUの新教師束縛は元うどん3identity・合成candidate3・隔離SQL30RPCで、初回FINAL/END/保存GET/start非生成再読を確認。旧chair6行は原sft全bytes同一で先頭へ保持し、合わせて9行/2familyを凍結。raw/readerの修復はない。新model/GPU学習0、CPUの成功を4Bの成功へ転用しない。
 
@@ -122,3 +122,10 @@ CPUの新教師束縛は元うどん3identity・合成candidate3・隔離SQL30RP
 GPUはRunpod既存A4500/20470MiB/使用1MiB/単価$0.26hを今回再確認。現在adapter76309b86のhash一致。STOP/再起動/削除/新Pod/charge0。
 
 STRUCTURE_MAP_DELTA_PRESENT（新private daily意味/表面/内部版の採用範囲だけ）。全機能00/01A/current01・04/共有設計01/schema05/最新weekly§38を同じ作業内で更新。正式0/3・54.50％/商品credit0。
+
+
+## 18更新とFITの実結果・このplanは終了
+
+18更新・保存/非学習reload/FIT9を1189.666秒で完了。無補修rawの意味/本文はchair6/6・daily0/3（全INVALID_EVIDENCE）。FIT全9成功に未到達のため別IDの実service保存再読はcall0で終了し、追加更新/再試行0。新重み5f0e51e9はPod外検証・保管済みだが昇格せず、旧76309b86を保持。原欄座標・引用・根拠索引・KARA両作用域と受け取りが残件で、新観測会は今回不要。GPUはA4500稼働保持/STOP・再起動・削除0。本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。
+
+原本：[全raw・採否・実行条件・回収検査](../../trials/2026-10-25-daily-calm-fit18/README.md)。上記の「学習前」記述とmanifest/statusは当時の凍結原本であり、現成功へ上書きしない。

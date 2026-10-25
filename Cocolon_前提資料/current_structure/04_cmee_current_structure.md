@@ -1859,4 +1859,11 @@ API95d00bの明示offline attempt180秒/source150秒・通常30秒/SQL期限/CAS
 
 ## 2026-10-25 — 承認済みdaily食事family（学習前checkpoint）
 
-Mashが§37の日常食事family追加・18更新・保存再読の限定検証を明示承認。APIbd356566の3製品owner＋新test/fixtureを実装し、限定4file174成功（新60＋既存114）。旧chairの実行captureと意味/snapshot/本文/問い/3更新/model入力は全文一致。dailyだけ5claim/4関係/内部版2/2・初回/問いなしへ対応し、合成3service identity/SQL30RPCで保存非生成再読を確認。旧chair6行をbytes不変で保持した9行/2familyと18update/FIT9の新有限planを凍結。本物tokenizer事前確認とGPU学習・実model保存再読は未実行。GPUのA4500稼働/76309b86を再確認しSTOP0。新観測会不要、通常app/本番配置/DB変更0、正式0/3・54.50％据置。 CMEEの差分は既存MODEL_PROFILEのprivate source認識/5claim/4関係/表面逆検査とsnapshot内部admission/adapter2/2だけ。KARAはreturnからcook/eatの二作用域、TARAは記載の結び付きで一般causeではない。旧chairのversion1/1/native/hash/本文/messagesは不変、外側MODEL_SCHEMA/MODEL_CHECKPOINT_SCHEMA/semantic_profileは据置。dailyの回答/prior/gap/問い/更新は拒否し、通常入口へ接続しない。全実装pathは01A、原本は新daily pack、進行はweekly§38/全機能00。STRUCTURE_MAP_DELTA_PRESENT、商品0。
+Mashが§37の日常食事family追加・18更新・保存再読の限定検証を明示承認。APIbd356566の3製品owner＋新test/fixtureを実装し、限定4file174成功（新59＋既存115）。旧chairの実行captureと意味/snapshot/本文/問い/3更新/model入力は全文一致。dailyだけ5claim/4関係/内部版2/2・初回/問いなしへ対応し、合成3service identity/SQL30RPCで保存非生成再読を確認。旧chair6行をbytes不変で保持した9行/2familyと18update/FIT9の新有限planを凍結。本物tokenizer事前確認とGPU学習・実model保存再読は未実行。GPUのA4500稼働/76309b86を再確認しSTOP0。新観測会不要、通常app/本番配置/DB変更0、正式0/3・54.50％据置。 CMEEの差分は既存MODEL_PROFILEのprivate source認識/5claim/4関係/表面逆検査とsnapshot内部admission/adapter2/2だけ。KARAはreturnからcook/eatの二作用域、TARAは記載の結び付きで一般causeではない。旧chairのversion1/1/native/hash/本文/messagesは不変、外側MODEL_SCHEMA/MODEL_CHECKPOINT_SCHEMA/semantic_profileは据置。dailyの回答/prior/gap/問い/更新は拒否し、通常入口へ接続しない。全実装pathは01A、原本は新daily pack、進行はweekly§38/全機能00。STRUCTURE_MAP_DELTA_PRESENT、商品0。
+
+
+### 2026-10-25 §38最終結果 — 18更新完了、daily採用未達で終了
+
+18更新・保存/非学習reload/FIT9を1189.666秒で完了。無補修rawの意味/本文はchair6/6・daily0/3（全INVALID_EVIDENCE）。FIT全9成功に未到達のため別IDの実service保存再読はcall0で終了し、追加更新/再試行0。新重み5f0e51e9はPod外検証・保管済みだが昇格せず、旧76309b86を保持。原欄座標・引用・根拠索引・KARA両作用域と受け取りが残件で、新観測会は今回不要。GPUはA4500稼働保持/STOP・再起動・削除0。本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。
+
+APIbd356566/source e06d6b4c、実tokenizer max5045/2339、18更新・生成9・意味/本文6、holdout0。限定CPU174（新59＋既存115）/失敗0/skip0、既存warning1。原raw9・結果・凍結条件・32tensor/全member照合・失敗履歴を `observation_learning/trials/2026-10-25-daily-calm-fit18/` に保存。上記のGPU実行前checkpointは履歴として保持する。全ファイル地図の追加ownerはこのtrialのREADME/run/closure/raw/training/NLL/runtime/weights検査/consumer index＋20partsだけで、product責務の追加なし。

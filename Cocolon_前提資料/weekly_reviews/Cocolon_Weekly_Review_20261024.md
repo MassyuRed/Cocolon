@@ -2269,8 +2269,15 @@ primary outcome **BLOCKER_NARROWED**、商品0/正式0/3/全体54.50％据置。
 
 Mashが§37/具体案264896ffの範囲へ「いいよ、進めて」と明示承認。root華恋が単一実行/統合/反映owner。新APIbd356566は意味採用・独立本文検査・model指示の3owner、新test/fixtureの2pathだけ。全5fileのGitHub全文読戻しを確認済み。daily初回の5claim/4関係/8根拠/選択とから/て/たら/程度を保持し、新familyのみsnapshot内部版2/2。旧chairは未変更95d00bの実行captureとprepared/outcome/messages全文一致、版1/1・native形/hash・実問い・3更新は不変。通常app/DTO/DB/RN/配置は0。
 
-4target testfile174成功/失敗0/skip0、20.89秒/既存warning1（新60＋既存114）。最初の新SQL2件はtransient nowまで比較したテスト不備で失敗し、保存値/thread/eventsへの比較へ直した。製品code/SQL時計/期限/readerの緩和0。新daily16表現/意味と独立本文の拒否/版改変/実SQL2初回と保存非生成再読を確認。合成候補とmodel成功を分離する。
+4target testfile174成功/失敗0/skip0、20.89秒/既存warning1（新59＋既存115）。最初の新SQL2件はtransient nowまで比較したテスト不備で失敗し、保存値/thread/eventsへの比較へ直した。製品code/SQL時計/期限/readerの緩和0。新daily16表現/意味と独立本文の拒否/版改変/実SQL2初回と保存非生成再読を確認。合成候補とmodel成功を分離する。
 
 新packのCPU生成は元うどん3service identityで合成3/隔離SQL30RPC、FINAL/END/GET/start非生成再読が成立。旧chair6行の原sft bytes不変を確認し、新daily3と合わせ9行/2familyを凍結。新18update/2pass/LR5e-5/FIT9/1800秒/$0.13按分の有限plan、source/row/helper hashのCPU検査は成功。学習外最大2callは別scriptでFIT成功後だけ。既存本物tokenizerの事前確認、GPU学習/新model生成は次の段階で未実行。旧終了planを再開しない。
 
 原本は[新pack](../observation_learning/training/2026-10-25-emlis-daily-calm/README.md)。GPUは既存Runpod A4500/20470MiB/使用1MiB/単価$0.26hを今回確認し、現adapter76309b86のhash一致。GPU STOP/再起動/削除/新Pod/charge0。新観測会不要。STRUCTURE_MAP_DELTA_PRESENT（承認されたprivate採用範囲と内部版だけ）。正式0/3・54.50％・商品0を維持。
+
+
+### 2026-10-25 §38最終結果 — 18更新完了、daily採用未達で終了
+
+18更新・保存/非学習reload/FIT9を1189.666秒で完了。無補修rawの意味/本文はchair6/6・daily0/3（全INVALID_EVIDENCE）。FIT全9成功に未到達のため別IDの実service保存再読はcall0で終了し、追加更新/再試行0。新重み5f0e51e9はPod外検証・保管済みだが昇格せず、旧76309b86を保持。原欄座標・引用・根拠索引・KARA両作用域と受け取りが残件で、新観測会は今回不要。GPUはA4500稼働保持/STOP・再起動・削除0。本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。
+
+APIbd356566/source e06d6b4c、実tokenizer max5045/2339、18更新・生成9・意味/本文6、holdout0。限定CPU174（新59＋既存115）/失敗0/skip0、既存warning1。原raw9・結果・凍結条件・32tensor/全member照合・失敗履歴を `observation_learning/trials/2026-10-25-daily-calm-fit18/` に保存。上記のGPU実行前checkpointは履歴として保持する。全ファイル地図の追加ownerはこのtrialのREADME/run/closure/raw/training/NLL/runtime/weights検査/consumer index＋20partsだけで、product責務の追加なし。

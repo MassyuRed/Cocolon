@@ -4827,3 +4827,10 @@ F/trial prefixは先行表と同じ。初回の実service保存・非生成再�
 APIbd356566：`ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py`（有限source/意味/保存内部版2）、同`model_candidate_source.py`（dailyだけ指示切替）、`ai/services/ai_inference/emlis_ai_grounded_observation_gate.py`（独立本文読取）、`ai/tests/test_cmee_emlis_model_daily_calm.py`、`ai/tests/fixtures/cmee_emlis_model_daily_calm_v1.json`（未変更95d00b実行capture＋出典付きdaily）。旧chairの全snapshot/outcome/messages同一を含む174成功、schema/DTO/DB/RN不変。
 
 新daily packのgenerate_candidates.pyは3service identityの合成candidate/実SQL保存を担当、sft_examples/train_messages/dataset_manifest/cpu_connection_resultsは凍結9行/2familyとSQL30RPCの原本。run_daily_calm_fit.py/plan.jsonは76309b86から18更新/FIT9の一回、consume_fit_raw.pyは既存native request/固定priorで無補修rawを消費する。旧chair6原sft bytes不変。tokenizer確認/新model学習は未実行。新packREADMEとweekly§38へ進行を戻す。STRUCTURE_MAP_DELTA_PRESENTは新private採用範囲のみ、商品0/正式0/3/54.50％。
+
+
+### 2026-10-25 §38最終結果 — 18更新完了、daily採用未達で終了
+
+18更新・保存/非学習reload/FIT9を1189.666秒で完了。無補修rawの意味/本文はchair6/6・daily0/3（全INVALID_EVIDENCE）。FIT全9成功に未到達のため別IDの実service保存再読はcall0で終了し、追加更新/再試行0。新重み5f0e51e9はPod外検証・保管済みだが昇格せず、旧76309b86を保持。原欄座標・引用・根拠索引・KARA両作用域と受け取りが残件で、新観測会は今回不要。GPUはA4500稼働保持/STOP・再起動・削除0。本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。
+
+APIbd356566/source e06d6b4c、実tokenizer max5045/2339、18更新・生成9・意味/本文6、holdout0。限定CPU174（新59＋既存115）/失敗0/skip0、既存warning1。原raw9・結果・凍結条件・32tensor/全member照合・失敗履歴を `observation_learning/trials/2026-10-25-daily-calm-fit18/` に保存。上記のGPU実行前checkpointは履歴として保持する。全ファイル地図の追加ownerはこのtrialのREADME/run/closure/raw/training/NLL/runtime/weights検査/consumer index＋20partsだけで、product責務の追加なし。
