@@ -1,8 +1,8 @@
 {
   "scope": "CPU_SYNTHETIC_FIXED_RAW_CONSUMER_NOT_MODEL_NOT_DYNAMIC_THREAD",
-  "cmee_api_commit": "0037ae59eddab00f4956a7e4c2506db2af8ccc35",
-  "dataset_manifest_sha256": "f0d44164b69837a4860f82f347fbc5686a38133f535497a56dea4b624277db8e",
-  "source_examples_sha256": "a6df4c0a175ac3c625835e793f4bcf5230f81d84d5d852a506175db3dcec0c08",
+  "cmee_api_commit": "a6838fc17cc657f9f80da28bb93b422d0f94a2dd",
+  "dataset_manifest_sha256": "3d4792870616530474a44608ee4303080c9d783061a769b46ebab48806a5393a",
+  "source_examples_sha256": "fb85e083defc4ef6f1100795ecda8ae81fc652ee8afcee3541b544b315a8952e",
   "model_calls": 0,
   "production_db_called": false,
   "cases": [
@@ -49,8 +49,7 @@
         "answer_limit": 1,
         "answer_source_role": "SUPPLEMENTAL_ANSWER",
         "schema_version": "cocolon.cmee.emlis_clarification.v1"
-      },
-      "old_messages_status": "INPUT_MESSAGES_MISMATCH"
+      }
     },
     {
       "id": "FT-CHAIR-AFTER-CORRECTION",
@@ -65,9 +64,17 @@
         "update_note": "共同修理と、また使えることへの喜びへ訂正しました。",
         "text": "見えたこと：\n友人に手順を教わり、一緒に椅子を直したのですね。\n\nEmlisから：\n捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。\n\n読み直したこと：\n共同修理と、また使えることへの喜びへ訂正しました。"
       },
-      "question": null,
-      "old_messages_status": "INPUT_MESSAGES_MISMATCH"
+      "question": null
     }
   ],
-  "instruction_repair": "typed_hierarchy_stage_specific_scalar_coordinates"
+  "previous_messages": [
+    {
+      "id": "FT-CHAIR-INITIAL",
+      "status": "INPUT_MESSAGES_MISMATCH"
+    },
+    {
+      "id": "FT-CHAIR-AFTER-CORRECTION",
+      "status": "INPUT_MESSAGES_MISMATCH"
+    }
+  ]
 }

@@ -1973,4 +1973,16 @@ Mashの続行指示に基づくOBSERVED_BLOCKER_MINIMAL_FIX / LEVEL_2相当。�
 
 今回の実確認は、保持中A4500 y0eb0w0qn6nks0の同保存adapter（0bdac5e9…）を非学習reloadし、新messagesの初回/保存prior付き訂正後FIT2だけを1回ずつ生成する。元4B/revision・seed20261024・BF16/SDPA・greedy・max_new2048/context8192は維持。process上限900秒、optimizer/update/追加学習0、重みhash前後不変、既存結果上書き/自動再試行0。2件とも既知teacher familyの固定入力で、実初回の問いから動的に作る訂正入力とは区別する。計画したprocess時間の表示$0.26/h按分上限は$0.065で、準備/回収/継続保持/税等を含む請求hard capではない。GPUの停止/再起動/新Pod/チャージは禁止、今回も操作しない。
 
-観測会はこの形式修復には不要。Piece/Analysis完成教師0、自然な受け取り・全般品質・動的一往復/通常保存再読/本人端末は残る。既存0/2・前回同初回0/1を新成功へ付け替えず、正式0/3・全体54.50％を維持。実結果は後続に回収・差分記録する。
+観測会はこの形式修復には不要。Piece/Analysis完成教師0、自然な受け取り・全般品質・動的一往復/通常保存再読/本人端末は残る。既存0/2・前回同初回0/1を新成功へ付け替えず、正式0/3・全体54.50％を維持。実結果は[2FIT実検証](../observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/typed_hierarchy_20261025/README.md)へ回収。216.149秒、初回1875token stopでINVALID_EVIDENCE、訂正2048token lengthでTOKEN_LIMIT、意味/本文0/2。外側source_idでなくnested original/envelope IDとUTF-8位置のコピー、core/conflictsやkindの不正、pretty JSON長超過が残った。重み不変・更新0、raw/入力/hashと固定API実consumerをPod外照合済み。次は§28の同2target形式学習へ進む。
+
+
+<a id="20261025-source-id-minified-fit-training"></a>
+## 28. 10/25 — 外側source_idとcompact出力を明示した形式学習1回
+
+§27実rawでnested original/envelopeのIDを採用しpretty JSONが長くなる不正を確認した。API `a6838fc17cc657f9f80da28bb93b422d0f94a2dd`はoutput_specに`source_id=material.sources[i].source_id`とminified/no indentation/newlinesを追記。元material/system/prior/教師assistant・採用条件・readerは不変。inner source IDコピーの新拒否を加えbackend65成功。2教師/6proxyのoutput_specとhash/API pinのみ同期、合成target2/2が意味/本文あり、直前messages2/2拒否。tokenは初回3094+1094=4188、訂正6114+1877=7991、生成枠8162/8192、切捨て0。
+
+Mashの4B追加学習・本日の続行指示に基づき、保持中の同A4500で新promptを学習する一回を実施する。旧adapterを変更せず、固定baseから新LoRA、同2target/既存1epoch/2update。前後FIT2だけ各1回（計4生成）で、既読・profile範囲外のEFREE6は今回の生成から除く。元6proxyは削除/学習しない。runnerは任意evaluation_case_idsを明示選択し、非空/重複なし/実在IDを要求。未指定は旧8生成を維持し、全dataset数と実選択ID/件数を別記録する。pack13成功。学習方式/損失/LoRA範囲/target/seed/BF16/SDPA/greedy/8192/2048は同じ。
+
+同GPU/新directory/run1回のみ、process1800秒・表示$0.26/h按分上限$0.13、計画$1以内。継続保持/準備回収/税等と別で、Pod請求hard capではない。既存GPUの50GB container/非永続overlayへ保存し、archiveをPod外へ回収して全member/重みhashを照合する。自動再試行/追加epoch/新Pod/チャージ/STOP/再起動/削除0。旧execution_plan.jsonは過去の非実行templateとして不変で、この一回用のtyped_fit_execution_plan.jsonと区別する。
+
+実行/編集/反映は華恋root、read-only agentが実raw/実験範囲を独立確認。Codex Work/GPT-6であり別モデルPro/Ultraの実施を装わない。OBSERVED_BLOCKER_MINIMAL_FIX / LEVEL_2相当、既存owner内。構造/型/三core境界/公開API/DB/RN/本番設定は不変、STRUCTURE_MAP_DELTA_NONE。観測会は現形式修復には不要。実結果は回収後に本節へ差分反映する。正式0/3・54.50％は据置。

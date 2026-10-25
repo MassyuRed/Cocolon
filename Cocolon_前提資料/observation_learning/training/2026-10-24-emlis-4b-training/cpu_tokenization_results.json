@@ -3,13 +3,13 @@
   "model": "Qwen/Qwen3.5-4B",
   "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
   "semantic_profile": "emlis_model_proposal.v1",
-  "runner_sha256": "00ece0ffac86e17f18544ee8e5fef44d315dd8cd2b641670cd8e6222ca60e40f",
-  "dataset_manifest_sha256": "f0d44164b69837a4860f82f347fbc5686a38133f535497a56dea4b624277db8e",
+  "runner_sha256": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d",
+  "dataset_manifest_sha256": "3d4792870616530474a44608ee4303080c9d783061a769b46ebab48806a5393a",
   "execution_plan_sha256": "0b08d519d14b5412b9e6b4403c5e7b4e5fa04993d34db86b62d7e8495a4d37a3",
   "data_sha256": {
-    "sft_examples.jsonl": "a6df4c0a175ac3c625835e793f4bcf5230f81d84d5d852a506175db3dcec0c08",
-    "train_messages.jsonl": "0917c23d4498bb880ef8cb75075ca46eb621a6588bb006331e333598bdc3bf79",
-    "eval_inputs.jsonl": "8b70f0e530257eb151a080cb4d311486503b0f2536db0454cb95504075fe6117",
+    "sft_examples.jsonl": "fb85e083defc4ef6f1100795ecda8ae81fc652ee8afcee3541b544b315a8952e",
+    "train_messages.jsonl": "5fbc700c2c0c94814acb517bc404696763f03d3472e63d3a8dfa8e6355a4e260",
+    "eval_inputs.jsonl": "23bb913fde0bc1bb8cd4e42b458350f0538994775d968fbaa82ed778f2a510a5",
     "eval_review.jsonl": "64fb1a6350dc24359b60316d6eb380a715582581b03f49df70a9a230354b0f80"
   },
   "source_commit": null,
@@ -44,19 +44,19 @@
   "training_tokens": [
     {
       "id": "FT-CHAIR-INITIAL",
-      "prompt_tokens": 3071,
+      "prompt_tokens": 3094,
       "completion_tokens": 1094,
-      "total_tokens": 4165,
-      "loss_labels_start": 3070,
+      "total_tokens": 4188,
+      "loss_labels_start": 3093,
       "logits_positions": 1095,
       "full_context_retained": true
     },
     {
       "id": "FT-CHAIR-AFTER-CORRECTION",
-      "prompt_tokens": 6091,
+      "prompt_tokens": 6114,
       "completion_tokens": 1877,
-      "total_tokens": 7968,
-      "loss_labels_start": 6090,
+      "total_tokens": 7991,
+      "loss_labels_start": 6113,
       "logits_positions": 1878,
       "full_context_retained": true
     }
@@ -64,38 +64,59 @@
   "generation_inputs": [
     {
       "case_id": "FIT-FT-CHAIR-INITIAL",
-      "input_tokens": 3071
+      "input_tokens": 3094
     },
     {
       "case_id": "FIT-FT-CHAIR-AFTER-CORRECTION",
-      "input_tokens": 6091
+      "input_tokens": 6114
     },
     {
       "case_id": "EFREE-E01",
-      "input_tokens": 1202
+      "input_tokens": 1225
     },
     {
       "case_id": "EFREE-E02",
-      "input_tokens": 1213
+      "input_tokens": 1236
     },
     {
       "case_id": "EFREE-E03",
-      "input_tokens": 1208
+      "input_tokens": 1231
     },
     {
       "case_id": "EFREE-E04",
-      "input_tokens": 1312
+      "input_tokens": 1335
     },
     {
       "case_id": "EFREE-E05",
-      "input_tokens": 1216
+      "input_tokens": 1239
     },
     {
       "case_id": "EFREE-E06",
-      "input_tokens": 1193
+      "input_tokens": 1216
     }
   ],
   "generations_per_stage": 8,
+  "dataset_evaluation_rows": 6,
+  "available_generation_case_ids": [
+    "FIT-FT-CHAIR-INITIAL",
+    "FIT-FT-CHAIR-AFTER-CORRECTION",
+    "EFREE-E01",
+    "EFREE-E02",
+    "EFREE-E03",
+    "EFREE-E04",
+    "EFREE-E05",
+    "EFREE-E06"
+  ],
+  "selected_generation_case_ids": [
+    "FIT-FT-CHAIR-INITIAL",
+    "FIT-FT-CHAIR-AFTER-CORRECTION",
+    "EFREE-E01",
+    "EFREE-E02",
+    "EFREE-E03",
+    "EFREE-E04",
+    "EFREE-E05",
+    "EFREE-E06"
+  ],
   "plan": {
     "schema": "cocolon.emlis_4b_execution_plan.v1",
     "status": "CPU_INSTRUCTION_REPAIRED_NEW_GPU_RUN_NOT_AUTHORIZED",

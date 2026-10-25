@@ -224,7 +224,8 @@ def prepare(directory):
         stats.append({"id": row["id"], "prompt_tokens": prefix, "completion_tokens": len(value["input_ids"]) - prefix,
                       "total_tokens": len(value["input_ids"]), "loss_labels_start": loss_start,
                       "logits_positions": loss_count, "full_context_retained": True})
-    cases = teacher_fit_cases(examples) + evaluation
+    available_cases = teacher_fit_cases(examples) + evaluation
+    cases = select_generation_cases(available_cases, plan)
     eval_stats = []
     for row in cases:
         count = len(chat_token_ids(tokenizer, row["messages"], generation_prompt=True))
@@ -239,6 +240,9 @@ def prepare(directory):
         "dependencies": versions, "weight_index_sha256": digest(index_path), "weight_bytes": index.get("metadata", {}).get("total_size"),
         "target_modules": sorted(targets), "training_rows": len(examples), "optimizer_steps": len(examples),
         "training_tokens": stats, "generation_inputs": eval_stats, "generations_per_stage": len(cases),
+        "dataset_evaluation_rows": len(evaluation),
+        "available_generation_case_ids": [x["case_id"] for x in available_cases],
+        "selected_generation_case_ids": [x["case_id"] for x in cases],
         "plan": plan, "model_weights_loaded": False, "gpu_used": False,
         "memory_limit": "Checkpoint bytes are not peak GPU memory; activations/optimizer/cache/runtime require an actual GPU."}
     write_json(directory / "preflight.json", report)
@@ -250,6 +254,20 @@ def teacher_fit_cases(examples):
     # All selected fit cases remain explicitly training-family diagnostics.
     return [{"case_id": "FIT-" + row["id"], "family": row["family"], "messages": row["messages"][:-1],
              "scope": "TRAINING_FIT_NOT_HELD_OUT"} for row in examples if row.get("fit_generation", False)]
+
+
+def select_generation_cases(cases, plan):
+    """Explicit diagnostic subset; never infer an omitted or misspelled case."""
+    selected = plan.get("evaluation_case_ids")
+    if selected is None:
+        return cases
+    if (type(selected) is not list or not selected or any(type(x) is not str or not x for x in selected)
+            or len(set(selected)) != len(selected)):
+        raise ValueError("evaluation_case_ids_must_be_nonempty_unique_strings")
+    by_id = {row["case_id"]: row for row in cases}
+    if len(by_id) != len(cases) or any(x not in by_id for x in selected):
+        raise ValueError("evaluation_case_ids_must_exist_in_dataset")
+    return [by_id[x] for x in selected]
 
 
 def gpu_profile(torch, plan):
@@ -388,7 +406,8 @@ def run(directory, prepared):
     report = {"status": "RUNNING", "run_id": out.name, "model": MODEL, "revision": REVISION,
         "semantic_profile": PROFILE, "preflight": preflight, "gpu": gpu, "plan": plan,
         "dataset_manifest_sha256": digest(directory / "dataset_manifest.json"), "seed": SEED,
-        "epochs": 1, "optimizer_steps_planned": len(encoded), "started_unix": time.time()}
+        "epochs": 1, "optimizer_steps_planned": len(encoded), "started_unix": time.time(),
+        "selected_generation_case_ids": [x["case_id"] for x in cases], "generations_per_stage": len(cases)}
     def save():
         write_json(out / "run.json", report)
     save()
@@ -460,7 +479,7 @@ def run(directory, prepared):
             peak_reserved_gib=torch.cuda.max_memory_reserved() / 2**30, adapter_files_unchanged=True)
         save()
         export(directory, out)
-        print("実行終了。重み入りarchiveをPod外で受領・hash確認してからPodをStopしてください。Pod課金は自動停止しません。", flush=True)
+        print("実行終了。重み入りarchiveをPod外で受領・hash確認してください。Podは明示指示まで稼働保持し、自動停止しません。", flush=True)
     except BaseException as exc:
         report.update(status="STOPPED_OR_FAILED", error_type=type(exc).__name__, error=str(exc)[:1500], finished_unix=time.time())
         save()

@@ -53,6 +53,22 @@ def ready_dataset(directory):
 
 
 class TrainingPackTests(unittest.TestCase):
+    def test_generation_subset_keeps_original_cases_order_and_full_inputs(self):
+        cases = [{"case_id": "FIT-A", "messages": [{"content": "complete source"}]},
+                 {"case_id": "PROXY-B", "messages": [{"content": "complete proxy"}]}]
+        original = copy.deepcopy(cases)
+        self.assertIs(runner.select_generation_cases(cases, {}), cases)
+        selected = runner.select_generation_cases(cases, {"evaluation_case_ids": ["PROXY-B", "FIT-A"]})
+        self.assertIs(selected[0], cases[1])
+        self.assertIs(selected[1], cases[0])
+        self.assertEqual(cases, original)
+
+    def test_generation_subset_rejects_missing_duplicate_or_invalid_ids(self):
+        cases = [{"case_id": "FIT-A"}, {"case_id": "PROXY-B"}]
+        for ids in [[], "FIT-A", ["FIT-A", "FIT-A"], ["MISSING"], [True], [""], [None]]:
+            with self.subTest(ids=ids), self.assertRaises(ValueError):
+                runner.select_generation_cases(cases, {"evaluation_case_ids": ids})
+
     def test_tail_loss_preserves_full_context_and_first_prediction(self):
         encoded = {"input_ids": [1, 2, 3, 4, 5], "labels": [-100, -100, -100, 4, 5]}
         class Labels:
