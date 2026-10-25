@@ -2262,3 +2262,15 @@ rootの推奨はこのfamilyを既存offline採用範囲へ一つ加え、旧cha
 Renderはmetadata readで3577d7fd/dep-dbd8hjoae00c73firbt0がLive、自動配置OFFを確認。開発95d00b未配置。Supabase cocolon-projectはACTIVE_HEALTHYのmetadataのみ、本人row/SQL/変更0。GPUの新規稼働照会は未実施で、前回の稼働確認と今回STOP/再起動/削除操作0を区別する。通常application/実Auth/HTTP/RN/本人端末/一般入力/商品受入れは残る。
 
 primary outcome **BLOCKER_NARROWED**、商品0/正式0/3/全体54.50％据置。§36の既知chairのTECHNICAL_CREDITは保持。STRUCTURE_MAP_DELTA_NONE（現行製品code/契約/接続変更0、診断・変更候補のみ）。API開発正本へのwrite0、Cocolonは新pack4file＋全機能00/観測入口/共有設計01/本weekly/全file地図01Aの計9file。GPU停止/再起動/削除/新Pod/charge/Render変更/Supabase変更/merge/deploy0。次の一作業は具体案の判断後の限定実装/学習であり、自動開始しない。
+
+
+<a id="20261025-daily-calm-approved-implementation"></a>
+## 38. 10/25 — Mash承認後daily初回familyを実装、CPU174・合成3service保存再読
+
+Mashが§37/具体案264896ffの範囲へ「いいよ、進めて」と明示承認。root華恋が単一実行/統合/反映owner。新APIbd356566は意味採用・独立本文検査・model指示の3owner、新test/fixtureの2pathだけ。全5fileのGitHub全文読戻しを確認済み。daily初回の5claim/4関係/8根拠/選択とから/て/たら/程度を保持し、新familyのみsnapshot内部版2/2。旧chairは未変更95d00bの実行captureとprepared/outcome/messages全文一致、版1/1・native形/hash・実問い・3更新は不変。通常app/DTO/DB/RN/配置は0。
+
+4target testfile174成功/失敗0/skip0、20.89秒/既存warning1（新60＋既存114）。最初の新SQL2件はtransient nowまで比較したテスト不備で失敗し、保存値/thread/eventsへの比較へ直した。製品code/SQL時計/期限/readerの緩和0。新daily16表現/意味と独立本文の拒否/版改変/実SQL2初回と保存非生成再読を確認。合成候補とmodel成功を分離する。
+
+新packのCPU生成は元うどん3service identityで合成3/隔離SQL30RPC、FINAL/END/GET/start非生成再読が成立。旧chair6行の原sft bytes不変を確認し、新daily3と合わせ9行/2familyを凍結。新18update/2pass/LR5e-5/FIT9/1800秒/$0.13按分の有限plan、source/row/helper hashのCPU検査は成功。学習外最大2callは別scriptでFIT成功後だけ。既存本物tokenizerの事前確認、GPU学習/新model生成は次の段階で未実行。旧終了planを再開しない。
+
+原本は[新pack](../observation_learning/training/2026-10-25-emlis-daily-calm/README.md)。GPUは既存Runpod A4500/20470MiB/使用1MiB/単価$0.26hを今回確認し、現adapter76309b86のhash一致。GPU STOP/再起動/削除/新Pod/charge0。新観測会不要。STRUCTURE_MAP_DELTA_PRESENT（承認されたprivate採用範囲と内部版だけ）。正式0/3・54.50％・商品0を維持。

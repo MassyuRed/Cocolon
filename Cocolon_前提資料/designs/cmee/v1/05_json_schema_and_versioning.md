@@ -3217,3 +3217,8 @@ snapshotのclosed keysはschema_version/semantic_profile/admission_version/adapt
 model claimのpredicate.arguments空配列は「引数なし」の意味ではない。actual native_bindingsでsourceの原格・参加者・原TE・否定・全選択とsource slicesをCMEE側が独立導出する。モデルunknown説明は型・対象・未記載性を照合後、意味側をcanonical coverage説明にし、原文はpacket/receiptに保持する。P1 adapter_revisionは任意のprivate metadataで、None時は旧key集合・bytesを維持する。
 
 new public DTO／DB／RN schema・通常applicationへの切替は0。一般自由文の意味完全性は保証せず、source familyと独立readerの実装範囲外はHOLD/UNSUPPORTED/本文未生成。詳しいactualと実結果は[共有01](01_shared_kernel_and_runtime_contracts.md#cmee-4b-model-proposal-implemented)。
+
+
+## 2026-10-25 — 承認済みdaily食事family（学習前checkpoint）
+
+Mashが§37の日常食事family追加・18更新・保存再読の限定検証を明示承認。APIbd356566の3製品owner＋新test/fixtureを実装し、限定4file174成功（新60＋既存114）。旧chairの実行captureと意味/snapshot/本文/問い/3更新/model入力は全文一致。dailyだけ5claim/4関係/内部版2/2・初回/問いなしへ対応し、合成3service identity/SQL30RPCで保存非生成再読を確認。旧chair6行をbytes不変で保持した9行/2familyと18update/FIT9の新有限planを凍結。本物tokenizer事前確認とGPU学習・実model保存再読は未実行。GPUのA4500稼働/76309b86を再確認しSTOP0。新観測会不要、通常app/本番配置/DB変更0、正式0/3・54.50％据置。 private意味版の差分は既存MODEL_PROFILEのprivate source認識/5claim/4関係/表面逆検査とsnapshot内部admission/adapter2/2だけ。KARAはreturnからcook/eatの二作用域、TARAは記載の結び付きで一般causeではない。旧chairのversion1/1/native/hash/本文/messagesは不変、外側MODEL_SCHEMA/MODEL_CHECKPOINT_SCHEMA/semantic_profileは据置。dailyの回答/prior/gap/問い/更新は拒否し、通常入口へ接続しない。全実装pathは01A、原本は新daily pack、進行はweekly§38/全機能00。STRUCTURE_MAP_DELTA_PRESENT、商品0。

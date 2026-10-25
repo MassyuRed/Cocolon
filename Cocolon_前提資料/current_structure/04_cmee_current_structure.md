@@ -1855,3 +1855,8 @@ STRUCTURE_MAP_DELTA_PRESENT。通常API／DB／RN／公開schema／モデル接�
 API95d00bの明示offline attempt180秒/source150秒・通常30秒/SQL期限/CASを保持。既存chair1題2段階を正規service ID3組へ再束縛した凍結6教師に、全文12更新＋根拠表/参照重点6更新を実施し、保存/非学習reload後の同6入力FITは意味/本文5/6→6/6。新adapter76309b86…をPod外照合/保持。最初の学習外ID01は訂正INVALID_EVIDENCEで終了したが、別のfresh ID02の実4B2call/隔離SQL30RPCは210.939656秒で初回ASK・訂正3更新/END・意味保存後中断/明示再開・初回/最終GET/startとsame-key回答の非生成再読まで成立。raw/teacher/reader/API/SQL contractの修復・緩和0。同processの既知chair一往復であり、cold restart/未知言語/通常app/実Auth・端末/商品受入れは未成立。観測会は今回不要、GPU稼働保持/STOP0、商品credit0/正式0/3/54.50％据置。
 
 元の期限実装とCPU114は§35の履歴。今回API製品code/test/SQL/DTO/RN変更0、既存114の再実行0。教材/一回学習・検証source/実出力だけで、product ownerを新設しないためSTRUCTURE_MAP_DELTA_NONE。全file地図01Aの既存owner責務は不変。最新ownerはweekly§36と全機能00、原本はtrial/2026-10-25-service-binding。
+
+
+## 2026-10-25 — 承認済みdaily食事family（学習前checkpoint）
+
+Mashが§37の日常食事family追加・18更新・保存再読の限定検証を明示承認。APIbd356566の3製品owner＋新test/fixtureを実装し、限定4file174成功（新60＋既存114）。旧chairの実行captureと意味/snapshot/本文/問い/3更新/model入力は全文一致。dailyだけ5claim/4関係/内部版2/2・初回/問いなしへ対応し、合成3service identity/SQL30RPCで保存非生成再読を確認。旧chair6行をbytes不変で保持した9行/2familyと18update/FIT9の新有限planを凍結。本物tokenizer事前確認とGPU学習・実model保存再読は未実行。GPUのA4500稼働/76309b86を再確認しSTOP0。新観測会不要、通常app/本番配置/DB変更0、正式0/3・54.50％据置。 CMEEの差分は既存MODEL_PROFILEのprivate source認識/5claim/4関係/表面逆検査とsnapshot内部admission/adapter2/2だけ。KARAはreturnからcook/eatの二作用域、TARAは記載の結び付きで一般causeではない。旧chairのversion1/1/native/hash/本文/messagesは不変、外側MODEL_SCHEMA/MODEL_CHECKPOINT_SCHEMA/semantic_profileは据置。dailyの回答/prior/gap/問い/更新は拒否し、通常入口へ接続しない。全実装pathは01A、原本は新daily pack、進行はweekly§38/全機能00。STRUCTURE_MAP_DELTA_PRESENT、商品0。

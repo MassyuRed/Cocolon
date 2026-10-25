@@ -1,6 +1,6 @@
 # Mashの観測技術を継承するための記録
 
-**現在の直接作業：** [別場面の採用範囲の診断と具体案§37](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-daily-calm-scope-proposal)。既知chairの実4B→service→隔離SQL保存再読・adapter76309b86…は保持。別場面の既存FT-UDON-INITIALを現在のMODEL_PROFILEへ渡す一回CPU診断でUNSUPPORTED/model_repair_reuse_source_out_of_scopeを確認した。model指示・意味採用・本文逆検査の3ownerが修理/再使用familyに限定されるため、旧教材を反復するだけでは日常場面へ通らない。5claim/4関係・初回/問いなしの食事と落ち着きfamily、旧chair互換、18更新/FIT9/非学習service2callの具体案は未承認・未実装・未学習。新観測会は今回不要。今回GPU操作/STOP/新model/学習/DB変更/deploy0、商品0/正式0/3/54.50％据置。 [原入力・意味対応・有限実行案](training/2026-10-25-emlis-daily-calm/README.md)。
+**現在の直接作業：** [承認後の実装・9行学習準備§38](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-daily-calm-approved-implementation)。Mashが§37の日常食事family追加・18更新・保存再読の限定検証を明示承認。APIbd356566の3製品owner＋新test/fixtureを実装し、限定4file174成功（新60＋既存114）。旧chairの実行captureと意味/snapshot/本文/問い/3更新/model入力は全文一致。dailyだけ5claim/4関係/内部版2/2・初回/問いなしへ対応し、合成3service identity/SQL30RPCで保存非生成再読を確認。旧chair6行をbytes不変で保持した9行/2familyと18update/FIT9の新有限planを凍結。本物tokenizer事前確認とGPU学習・実model保存再読は未実行。GPUのA4500稼働/76309b86を再確認しSTOP0。新観測会不要、通常app/本番配置/DB変更0、正式0/3・54.50％据置。 [新pack](training/2026-10-25-emlis-daily-calm/README.md)。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
@@ -81,7 +81,7 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 
 ## 現在地（2026-10-25・三中核の開発基準選定、本番は未成立）
 
-**現在の直接作業：** [別場面の採用範囲の診断と具体案§37](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-daily-calm-scope-proposal)。既知chairの実4B→service→隔離SQL保存再読・adapter76309b86…は保持。別場面の既存FT-UDON-INITIALを現在のMODEL_PROFILEへ渡す一回CPU診断でUNSUPPORTED/model_repair_reuse_source_out_of_scopeを確認した。model指示・意味採用・本文逆検査の3ownerが修理/再使用familyに限定されるため、旧教材を反復するだけでは日常場面へ通らない。5claim/4関係・初回/問いなしの食事と落ち着きfamily、旧chair互換、18更新/FIT9/非学習service2callの具体案は未承認・未実装・未学習。新観測会は今回不要。今回GPU操作/STOP/新model/学習/DB変更/deploy0、商品0/正式0/3/54.50％据置。 [原入力・意味対応・有限実行案](training/2026-10-25-emlis-daily-calm/README.md)。
+**現在の直接作業：** [承認後の実装・9行学習準備§38](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-daily-calm-approved-implementation)。Mashが§37の日常食事family追加・18更新・保存再読の限定検証を明示承認。APIbd356566の3製品owner＋新test/fixtureを実装し、限定4file174成功（新60＋既存114）。旧chairの実行captureと意味/snapshot/本文/問い/3更新/model入力は全文一致。dailyだけ5claim/4関係/内部版2/2・初回/問いなしへ対応し、合成3service identity/SQL30RPCで保存非生成再読を確認。旧chair6行をbytes不変で保持した9行/2familyと18update/FIT9の新有限planを凍結。本物tokenizer事前確認とGPU学習・実model保存再読は未実行。GPUのA4500稼働/76309b86を再確認しSTOP0。新観測会不要、通常app/本番配置/DB変更0、正式0/3・54.50％据置。 [新pack](training/2026-10-25-emlis-daily-calm/README.md)。
 
 [凍結6教師と実行source](training/2026-10-25-emlis-service-binding/README.md)／[全実結果](trials/2026-10-25-service-binding/README.md)。
 

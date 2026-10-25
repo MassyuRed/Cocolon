@@ -4820,3 +4820,10 @@ F/trial prefixは先行表と同じ。初回の実service保存・非生成再�
 ## 2026-10-25 — 日常食事familyのscope診断と未採用案の所在
 
 `observation_learning/training/2026-10-25-emlis-daily-calm/` のREADME.md、source_mapping_candidate.json、current_profile_diagnostic.json、probe_current_profile.pyは、既存FT-UDONの5claim/4関係の未採用対応案と、現修理専用profileの実UNSUPPORTED診断だけを所有する。製品code/型/意味/reader/保存経路は変更0、STRUCTURE_MAP_DELTA_NONE。実装候補3owner＋新test/fixtureと有限18更新/保存再読の範囲・判断境界は同READMEと共有設計01#cmee-daily-calm-family-proposal、最新進行はweekly§37/全機能00。新model/学習/GPU操作0、旧§36 credit/重み/教材/raw/終了planは維持。
+
+
+## 2026-10-25 — 承認済みdaily食事・少し落ち着いたの全変更path
+
+APIbd356566：`ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py`（有限source/意味/保存内部版2）、同`model_candidate_source.py`（dailyだけ指示切替）、`ai/services/ai_inference/emlis_ai_grounded_observation_gate.py`（独立本文読取）、`ai/tests/test_cmee_emlis_model_daily_calm.py`、`ai/tests/fixtures/cmee_emlis_model_daily_calm_v1.json`（未変更95d00b実行capture＋出典付きdaily）。旧chairの全snapshot/outcome/messages同一を含む174成功、schema/DTO/DB/RN不変。
+
+新daily packのgenerate_candidates.pyは3service identityの合成candidate/実SQL保存を担当、sft_examples/train_messages/dataset_manifest/cpu_connection_resultsは凍結9行/2familyとSQL30RPCの原本。run_daily_calm_fit.py/plan.jsonは76309b86から18更新/FIT9の一回、consume_fit_raw.pyは既存native request/固定priorで無補修rawを消費する。旧chair6原sft bytes不変。tokenizer確認/新model学習は未実行。新packREADMEとweekly§38へ進行を戻す。STRUCTURE_MAP_DELTA_PRESENTは新private採用範囲のみ、商品0/正式0/3/54.50％。

@@ -1161,3 +1161,8 @@ API95d00bはconstructor/実thread限定180秒、残30秒を引くasync最大150�
 承認対象は、上記familyの意味採用/独立本文検査/model指示、native教師のCPU/実tokenizer確認、76309b86から9行×2passの新18更新一回・保存/reload/FIT9（1800秒/$0.13以内）、非学習service2call/隔離SQL保存再読（900秒/$0.065以内）、回収/保持まで。原うどんと固定した雑炊変形を範囲へ含め、後者は学習に入れない。費用は記録単価$0.26/hのprocess按分で、継続保持等を含む請求総額ではない。
 
 同案のRule18 LEVEL_3というroot判断は、新しい意味/関係を採用する契約拡張と解釈したため。既存のoffline180秒承認を流用せず、実装/学習はMash判断前に開始しない。今回は診断/具体案のみ、製品code/reader/teacher/重み/API/SQL/DTO/RNは不変。通常アプリ/本番/端末/商品合格へ進めず、追加試行/追加更新/LR探索/他core展開0。GPUはSTOPしない。STRUCTURE_MAP_DELTA_NONE、primary BLOCKER_NARROWED、商品0。現在地はweekly§37/全機能00。
+
+
+## 2026-10-25 — 承認済みdaily食事family（学習前checkpoint）
+
+Mashが§37の日常食事family追加・18更新・保存再読の限定検証を明示承認。APIbd356566の3製品owner＋新test/fixtureを実装し、限定4file174成功（新60＋既存114）。旧chairの実行captureと意味/snapshot/本文/問い/3更新/model入力は全文一致。dailyだけ5claim/4関係/内部版2/2・初回/問いなしへ対応し、合成3service identity/SQL30RPCで保存非生成再読を確認。旧chair6行をbytes不変で保持した9行/2familyと18update/FIT9の新有限planを凍結。本物tokenizer事前確認とGPU学習・実model保存再読は未実行。GPUのA4500稼働/76309b86を再確認しSTOP0。新観測会不要、通常app/本番配置/DB変更0、正式0/3・54.50％据置。 共有契約の差分は既存MODEL_PROFILEのprivate source認識/5claim/4関係/表面逆検査とsnapshot内部admission/adapter2/2だけ。KARAはreturnからcook/eatの二作用域、TARAは記載の結び付きで一般causeではない。旧chairのversion1/1/native/hash/本文/messagesは不変、外側MODEL_SCHEMA/MODEL_CHECKPOINT_SCHEMA/semantic_profileは据置。dailyの回答/prior/gap/問い/更新は拒否し、通常入口へ接続しない。全実装pathは01A、原本は新daily pack、進行はweekly§38/全機能00。STRUCTURE_MAP_DELTA_PRESENT、商品0。

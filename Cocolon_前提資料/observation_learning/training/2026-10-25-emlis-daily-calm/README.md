@@ -1,6 +1,6 @@
 # 日常の食事と落ち着き — 次の意味対応・学習候補
 
-状態：**具体案／未承認・未実装・未学習**。2026-10-25 JST。
+状態：**Mash承認済み／API実装・CPU確認済み／GPU学習前**。2026-10-25 JST。
 
 ## 今回確定した障害
 
@@ -57,7 +57,7 @@ Unicodeの半開区間。各claimはOMITTED主体・ASSERTED_AS_WRITTEN・記載
 
 observationのbindingはreturn/cook/eatと行動関係3本。receptionはwarm_food_eat/slight_calmとTARA。「よかった」はEmlisの反応とし、本人の新しい評価や理由にしない。unknowns/conflicts/updatesは空、question_proposal/update_noteはnull。理由を聞くためのgapは作らず、既存null→ENDを利用する。
 
-## 承認対象となる最小実装
+## 承認済みの最小実装
 
 既存offline profileの採用範囲を、修理familyに加えてこの**初回・食事＋少し落ち着いた**familyへ広げる。Free・当回・回答0・履歴0に限定する。一般unknown、訂正/撤回、Plus/Premium、Piece/Analysisへ同時展開しない。修理物の名詞差だけを別の言語familyと呼ばない。
 
@@ -75,7 +75,7 @@ observationのbindingはreturn/cook/eatと行動関係3本。receptionはwarm_fo
 
 dailyの内部版はsourceの独立再認識から導出し、保存値の自己申告で切り替えない。dailyにanswer/prior、question/update_note、updatesがあれば拒否し、chair用訂正処理へ流さない。旧chairの版1/1・snapshot全体一致を回帰条件とする。
 
-新学習/実行sourceはこのfolderの `generate_candidates.py`、`run_daily_calm_fit.py`、`run_daily_calm_holdout.py`、`consume_fit_raw.py` と、対応plan/教師/messages/manifest/tokenization/fixture/result。既存有限runnerの同方式を再利用し、既に終了した旧planを編集・再実行しない。これらは承認後に作る対象で、現時点では未作成・未実行。
+新学習/実行sourceはこのfolderの `generate_candidates.py`、`run_daily_calm_fit.py`、`run_daily_calm_holdout.py`、`consume_fit_raw.py` と、対応plan/教師/messages/manifest/tokenization/fixture/result。既存有限runnerの同方式を再利用し、既に終了した旧planを編集・再実行しない。generate_candidates/run_daily_calm_fit/consume_fit_rawと9行の教師・messages・manifest・plan・CPU結果を作成済み。holdout runnerは学習後の採否を確認してから同じ承認範囲内で用意する。GPU学習はまだ実行していない。
 
 ## 有限な学習・接続確認案
 
@@ -93,11 +93,11 @@ offline attempt180秒/source150秒、通常30秒、SQL期限/CAS、保存済み�
 
 ## 承認境界・今回の保存範囲
 
-Rule18 §11.3 LEVEL_3の「contract、acceptanceまたは品質条件を追加、変更」に該当する**解釈**である。根拠座標の誤り直しではなく、これまで対象外だった意味とprivate関係を受理する差分のため、実装/新学習の前にMashへこの一案の判断を求める。前のoffline180秒承認をこの意味拡張の承認へ流用しない。今回の診断/具体案・既存資料の差分保存は現行継続指示の範囲で行い、実装承認とは区別する。
+Rule18 §11.3 LEVEL_3の「contract、acceptanceまたは品質条件を追加、変更」に該当する**解釈**である。根拠座標の誤り直しではなく、これまで対象外だった意味とprivate関係を受理する差分のため、この一案を提示し、Mashから「いいよ、進めて」の明示承認を受領済み。前のoffline180秒承認をこの意味拡張の承認へ流用しない。今回の診断/具体案・既存資料の差分保存は現行継続指示の範囲で行い、実装承認とは区別する。
 
 実環境はCodex Work/GPT-6、統合/実行/反映ownerはroot華恋。別文脈agentのread-only意見を原sourceへ照合し、独立Pro/Ultraまたはhuman受入れと偽らない。System Context最新索引は未完成なのでfresh原本を直接読んだ。全体設計01・01A/B/Cのrouting、全機能00、current maps、最新weekly§36、学習目的/用途、ルール/恒久incident/Diaryを参照した。全blobを意味読了したという主張ではない。
 
-今回のprimary outcomeは **BLOCKER_NARROWED**。新しいmodel生成/学習/商品品質改善は0、正式0/3・54.50％据置。STRUCTURE_MAP_DELTA_NONE（現行製品source/型/採用条件は変更せず、変更候補と診断だけを保存）。実行済み旧§36のcreditは保持する。
+前回の診断のprimary outcomeはBLOCKER_NARROWEDとして保持する。承認後の今回途中結果は下段へ分離し、GPU生成/学習/商品合格はまだ加算しない。実行済み旧§36のcreditは保持する。
 
 Renderのread-only最新照会は3577d7fd/dep-dbd8hjoae00c73firbt0がLive、自動配置OFF。API開発95d00bは未配置。Supabase cocolon-projectはACTIVE_HEALTHYのmetadataのみ確認し、本人row/SQL取得0。今回のGPU操作/STOP/再起動/削除/Render変更/Supabase変更/merge/deployは各0。GPUの現在稼働への新規照会はしておらず、前回稼働確認から停止操作をしていないことと区別する。
 
@@ -107,3 +107,18 @@ Renderのread-only最新照会は3577d7fd/dep-dbd8hjoae00c73firbt0がLive、自�
 | source_mapping_candidate.json | 未採用draft全packet・原source・出典・選択・禁止推論 |
 | current_profile_diagnostic.json | 実scope拒否・source hash・8根拠検査・実行効果0の結果 |
 | probe_current_profile.py | 実行した一回CPU診断のsource。再利用可能な新checker systemではない |
+
+
+## 承認後の実装・CPU結果（GPU実行前checkpoint）
+
+API **bd356566d37370911e14dab2819ab25a619c6353**、承認済み3製品owner＋新test/fixture2pathを反映し全5fileをGitHub全文読戻し照合。新dailyだけadmission/adapter2/2、旧chair1/1/native形/hash/意味/実本文/ASK/訂正3更新/model messagesは未変更API95d00bの実行captureと全文一致した。新familyの回答・prior・問い・gap・更新は不採用。通常app/API/DTO/DB/RN/本番配置は変更0。
+
+限定4testfile **174 passed /0failed/0skip、20.89秒、既存warning1**。新daily60件、既存114件。最初の新SQL2件は保存値でなく毎回変わるSQLnowまで比較したテストの誤りで失敗、persisted snapshot/eventsの比較へ修正後に全4fileを再実行して成功。製品codeの緩和やSQL時計変更は0。新dailyは16表現・5claim/4関係/8根拠・選択・意味と本文の拒否・保存内部版改変・実SQL2初回/非生成再読を確認した。scope数を独立言語16題へ換算しない。
+
+CPUの新教師束縛は元うどん3identity・合成candidate3・隔離SQL30RPCで、初回FINAL/END/保存GET/start非生成再読を確認。旧chair6行は原sft全bytes同一で先頭へ保持し、合わせて9行/2familyを凍結。raw/readerの修復はない。新model/GPU学習0、CPUの成功を4Bの成功へ転用しない。
+
+新planは76309b86から18update・FIT9のみ、holdoutは別script最大2callでFIT成功後だけ。固定plan/data/helper hash/9行/旧6行bytesのCPU検査は成功。固定本物tokenizerによる事前確認はGPU側の既存cacheで次に実行する。超過/不一致/OOMなら学習開始せず、原文/target/上限を縮めて通さない。
+
+GPUはRunpod既存A4500/20470MiB/使用1MiB/単価$0.26hを今回再確認。現在adapter76309b86のhash一致。STOP/再起動/削除/新Pod/charge0。
+
+STRUCTURE_MAP_DELTA_PRESENT（新private daily意味/表面/内部版の採用範囲だけ）。全機能00/01A/current01・04/共有設計01/schema05/最新weekly§38を同じ作業内で更新。正式0/3・54.50％/商品credit0。
