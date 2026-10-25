@@ -1,6 +1,6 @@
 # 4B：有限成功後の接続制約診断と、一般入力2題の非学習評価案
 
-日付：2026-10-26 JST。状態：**CPU準備完了／新GPU推論は未承認・未実行**。
+日付：2026-10-26 JST。状態：**Mash承認済み・一回の実行前。CPU準備完了、モデル生成0。**
 
 基準：Cocolon PR30 `bc39981585e2b12a364b2fadf64ac2f86a7bfad7`／API PR3 `4002b4577838d1ed6671278a19585b61e7ccd10e`。両Draft/open。前回joint12は意味・本文9/9、同family日常の実保存再読2/2で一回閉鎖済み。選択重みは`45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6`で、商品／本番へ採用していない。
 
@@ -32,7 +32,7 @@ Jupyterへ直接接続した。管理console／GPU一覧／Runpod管理APIは開
 <a id="generalization-eval2-proposal"></a>
 ## 新しい一回案：原汎用prompt2題、追加学習なし、最大10分
 
-状態：`PROPOSED_NOT_AUTHORIZED`、`gpu_run_authorized=false`。[固定plan](generalization_eval2.plan.json)／[実行source](run_generalization_eval2.py)／[入力2件](generalization_eval2_cases.jsonl)／[CPU実tokenizer原本](generalization_eval2_cpu_preflight.json)。
+状態：`AUTHORIZED_ONCE`、`gpu_run_authorized=true`。原案は[proposed plan](generalization_eval2.proposed.json)へ保全。[固定plan](generalization_eval2.plan.json)／[実行source](run_generalization_eval2.py)／[入力2件](generalization_eval2_cases.jsonl)／[CPU実tokenizer原本](generalization_eval2_cpu_preflight.json)。
 
 1. `model_selection/2026-10-22-three-core/task_inputs.jsonl`の**E01-0／E03-0の元system＋user messagesを無変更で使用**する。chair native指示・JSON-only追加文・教師・採点guide・未来の回答は送らない。独立2familyは学習対象へ移さない。
 2. 既存Qwen3.5-4B固定revision `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`へ45779を非学習load。`is_trainable=false`、全parameterのrequires_grad=false、32adapter tensorの有限性を既存helperで確認する。新重み・optimizer・訓練stepは作らない。
@@ -67,3 +67,8 @@ Jupyterへ直接接続した。管理console／GPU一覧／Runpod管理APIは開
 | affected_current_structure_maps | Emlis01／CMEE04。STRUCTURE_MAP_DELTA_NONE（製品責務・接続・型・契約変更0） |
 
 GPUモデルload／forward／生成／更新0、SQL0、通常application変更0。今回のread-only CPU結果と実行準備を、観測品質の改善完了へ換算しない。
+
+
+## 10/26：Mash承認の受領、実行前checkpoint
+
+Mashは上の一回（追加学習なし・現重み45779・別題材2件・最大600秒／処理按分約$0.0434、保持等別）に「進めていいよ。」と明示承認した。原proposed bytesを保全し、planのstatusとgpu_run_authorizedだけを変更。runner／原2messages／旧helper／adapter／上限／停止は不変。現時点でモデルload／forward／生成／追加学習／SQL0、実行はroot華恋がJupyter直接で一回のみ。段階ごとの再承認を求めず、原本回収・内容診断・GitHub反映まで進める。GPU lifecycle操作は0。閉鎖joint12等の承認は流用していない。

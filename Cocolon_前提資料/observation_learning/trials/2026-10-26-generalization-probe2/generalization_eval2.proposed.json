@@ -1,0 +1,32 @@
+{
+  "schema": "cocolon.generalization_eval2.plan.v1",
+  "status": "PROPOSED_NOT_AUTHORIZED",
+  "gpu_run_authorized": false,
+  "source_cocolon_commit": "bc39981585e2b12a364b2fadf64ac2f86a7bfad7",
+  "api_commit_unchanged": "4002b4577838d1ed6671278a19585b61e7ccd10e",
+  "selected_adapter_sha256": "45779ad97111dd2d91c1f7f1a4b0ca697ef0586c5190cd56b1b7675fe540dab6",
+  "runner_sha256": "93f26cd5b9191168c21cee6b08f7cd7e171e4db653a62252815837a7805fff95",
+  "cases_sha256": "512d5468f439b7892abb16fcb1d9cd96034c9edad343d4f62f79976feda34183",
+  "max_model_calls": 2,
+  "max_seconds": 600,
+  "context_tokens": 8192,
+  "max_new_tokens": 2560,
+  "gpu_hourly_usd": 0.26,
+  "max_process_usd": 0.043334,
+  "training_updates": 0,
+  "cmee_adoption": false,
+  "automatic_progression": false,
+  "retry": false,
+  "source_prompt_changes": false,
+  "case_ids": [
+    "E01-0",
+    "E03-0"
+  ],
+  "original_task_path": "Cocolon_前提資料/observation_learning/model_selection/2026-10-22-three-core/task_inputs.jsonl",
+  "scope": "STANDALONE_RAW_TWO_INPUT_QUALITY_DIAGNOSIS",
+  "limits": [
+    "No intrinsic model limit or full generalization claim",
+    "No CMEE semantic/body adoption or persistence claim",
+    "Holding/storage/tax/preparation/recovery excluded from process allocation"
+  ]
+}

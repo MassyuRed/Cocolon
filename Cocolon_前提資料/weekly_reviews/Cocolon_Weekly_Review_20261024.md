@@ -2580,3 +2580,8 @@ Jupyter CPUで既存native9行のsource資格9/9と、E01-0／E03-0のUNSUPPORTE
 [全実測原本・開始14項目・具体案](../observation_learning/trials/2026-10-26-generalization-probe2/README.md#generalization-eval2-proposal)。新案は追加学習0・現重み45779・元system/user無変更・最大2生成／600秒／処理按分$0.043334（約$0.0434、保持等別）の一回。CPU準備は済んだが新GPUは未承認・未実行。新有料試行は§49の承認を再利用せず、Rule18§11.3の新費用／個別承認境界で判断を求める。原rawは文章返答／JSON解析失敗／EOS未到達でも保全。原promptは厳密JSONを要求しないためparse失敗だけでは2件目を止めず、EOS未到達／時間停止では停止し、実停止理由は旧helperのlength表示と別に記録する。sourceとplan hashを更新してCPU原本を再確認。再試行0、結果はこのadapter＋汎用prompt2件の診断に限定し、CMEE接続成功や商品受入れへ加算しない。既存2familyは学習へ転用しない。新観測会は今回不要、独立評価と三core完成教師の不足は継続する。
 
 BLOCKER_NARROWED、STRUCTURE_MAP_DELTA_NONE（製品責務／型／接続／契約変更0）、商品0／正式0/3／54.50％据置。新モデルload／forward／生成／更新／SQL／新依存／Render／Supabase／本人DB／通常application／公開API／DTO／RN／merge／deploy0。GPU保持、Jupyter直接のみ、管理console／GPU一覧／管理API／lifecycle0。全体00／観測入口の古いcurrentを置換し、全file地図へ今回の原本所在を記録する。
+
+
+### §50 10/26 JST — 非学習・原汎用2題の一回をMashが承認
+
+Mashは702c1d9bの具体案（最大2生成／600秒／処理按分約$0.0434、保持等別）に「進めていいよ。」と明示承認。原proposedを保存して新planをAUTHORIZED_ONCEへ変更。runner93f26cd5／原E01・E03／固定base・45779／旧helper／2call・600秒／再試行なし／raw-only非採用を維持する。Jupyter直接・root一人で実行し、内容確認・原本保全・読み戻しまで段階の再承認は不要。新profile実装／意味採用／reader緩和／訓練は承認範囲に含めない。実行前モデル／forward／生成／SQL0、GPU保持・管理API／lifecycle0。
