@@ -1745,3 +1745,56 @@ Pod名設定＋Deployのtool呼出しは自動承認レビューがdispatch前�
 拒否後のfresh画面もDeploy前のままで、新Pod/確保/起動/今回の課金effect/チャージ/重み取得/推論/学習は0。名前だけをcocolon-small-model-3070-20261025へ設定し、最終Deploy前に準備した。既存Pod/volume・支払設定は未変更。最終操作をユーザーへ引き継ぎ、実際の起動後に新Pod identity/Running/単価/GPU実物を確認する。予約・自動在庫監視は0。
 
 全機能00と本weeklyの2文書へ現在地を反映。STRUCTURE_MAP_DELTA_NONE（商品code/接続/型/教材不変）、product_credit=0、正式Product Read0/3、PRODUCT_NOT_CLEAR、candidate_ready=false、automatic_progression=false、全体54.50％据置。今回のblockerは既知の自動レビュー拒否であり、理由不明だった以前の画面中断と区別する。
+
+
+<a id="20261025-3070-running-cuda-uvm-io-error"></a>
+## 22. 10/25 — Mashによる3070起動、2B優先指示、モデル読込前のCUDA/UVM I/O失敗
+
+Mashは「動かした」と報告し、2Bに可能性があれば2Bから、確認するまでもなく無理なら0.8Bから始めるよう指示した。On-demandは稼働中に他利用者の需要で取り上げられる方式ではないが、残高0・host障害等で停止し得ると説明。「本人がSTOPするまで必ず使える」とは保証しない。[公式料金](https://docs.runpod.io/pods/pricing)は専有、残高0時の自動停止/非network-volume Podの終了・データ非回復を明記。設定変更や追加入金を華恋は行っていない。
+
+### 起動の独立確認と2Bの選択
+
+Pod名cocolon-small-model-3070-20261025、ID o1fno4spzx33fv、RTX3070 x1、画面合計表示$0.14/h、Stop button/Uptime/接続Readyを確認した。公式PyTorch2.8.0/CUDA12.8.1 template、container50GB、永続volume追加0。Jupyterへ接続し、実機で以下を取得。初期free7842MiBと後のnvidia-smi使用量1MiBは異なる取得点であり、同時値として合算しない。
+
+```json
+{
+  "gpu": "NVIDIA GeForce RTX 3070",
+  "gpu_total_mib": 8192,
+  "initial_free_mib": 7842,
+  "driver": "590.48.01",
+  "torch": "2.8.0+cu128",
+  "torch_cuda": "12.8",
+  "cuda_available": false,
+  "bf16_probe_supported": false,
+  "workspace_free_gib": 49.98,
+  "transformers": null,
+  "safetensors": null,
+  "accelerate": null,
+  "cuInit_return": 999,
+  "cuInit_error_name": "CUDA_ERROR_UNKNOWN",
+  "loaded_libcuda": "/usr/lib/x86_64-linux-gnu/libcuda.so.590.48.01",
+  "nvidia_driver_capabilities": "all",
+  "uvm_mode": "0666",
+  "uvm_open_errno": 5,
+  "uvm_open_error": "Input/output error",
+  "nvidiactl_open": "OK",
+  "assigned_nvidia3_open": "OK",
+  "uvm_node_major_minor": [510, 0],
+  "uvm_tools_node_major_minor": [510, 1],
+  "kernel_nvidia_uvm_major": 510
+}
+```
+
+[公式2B重みindex](https://huggingface.co/Qwen/Qwen3.5-2B/raw/15852e8c16360a2fea060d615a32b45270f8a8fc/model.safetensors.index.json)は4,548,144,832bytes（約4.55GB）で、8GBの短い単発テキスト推論を最初に試す候補性がある。想定pinは15852e8c16360a2fea060d615a32b45270f8a8fc。5.19.0公式sourceでAutoModelForCausalLM→Qwen3_5ForCausalLMとtext config交換をread-only確認した。元重み容量を実行時VRAM・速度・品質・追加学習成功へ換算しない。
+
+### 切り分けの結果と誤読訂正
+
+nvidia-smiはGPUを列挙できるが、PyTorch初期化と直接libcudaのcuInitが失敗した。割当GPU UUIDを新子processのCUDA_VISIBLE_DEVICESへ限定し、LD_LIBRARY_PATHを同子processだけ外した実検査でも、cuda_available=false、torch.ones(1,device=cuda)は初期化失敗・exit1。UUIDそのものやJupyter tokenを記録しない。Driverと実libcudaの版は一致し、GPU本体/ctlはopenできる一方、UVMの直接openはI/O error。node major510は/proc/devicesと一致していた。
+
+華恋は小さい画面のerrno5を誤読し、途中で「権限拒否/Operation not permitted」と説明した。再読で**errno5 Input/output error**へ訂正済み。独立agentにも誤ったEPERMを一度伝えたため、その旧助言は実原因の証拠に採用しない。権限mode、cgroup、driver古さのどれかを原因と断定せず、UVMのI/O失敗がCUDA/モデル読込前のblockerだと記録する。terminal入力の改行喪失・一つの診断式の括弧誤りは修正して取得し、これらをmodel試行/成功件数へ加算しない。
+
+BF16 probeのfalseはCUDA初期化不能時の結果であり、RTX3070のハードウェアBF16能力がないという判定ではない。
+
+2B/0.8B/0.6Bとも重み取得・読込・生成・学習0。CUDAが成立しない状態で0.8Bへ替える、CPU推論をGPU成功とする、依存installで直ったと仮定することはしない。現コンテナ内で権限拡張やhost変更なしに直す手段は特定できていない。PodのStop/再起動/削除/置換、driver変更、device権限変更、追加Pod、追加入金、自動停止設定、サポートへの送信は0。GPU保持中のまま、Runpod/host側にUVM環境の復旧を依頼することが次の具体手段となる。再起動/再作成はGPUを失う可能性があるため無断で実施しない。
+
+primary_outcome=BLOCKER_NARROWED、product_credit=0、正式Product Read0/3、PRODUCT_NOT_CLEAR、candidate_ready=false、automatic_progression=false、全体54.50％据置。変更は全機能00と本weeklyの2文書だけ。STRUCTURE_MAP_DELTA_NONE（商品source/接続/型/教材/CMEE/runtime contract不変）。GPUの稼働課金は始まっているが実総請求/開始時刻/経過全額は未確定、account残高差を今回費用へ帰属させない。
