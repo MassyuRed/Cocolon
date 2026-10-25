@@ -1867,3 +1867,7 @@ Mashが§37の日常食事family追加・18更新・保存再読の限定検証�
 18更新・保存/非学習reload/FIT9を1189.666秒で完了。無補修rawの意味/本文はchair6/6・daily0/3（全INVALID_EVIDENCE）。FIT全9成功に未到達のため別IDの実service保存再読はcall0で終了し、追加更新/再試行0。新重み5f0e51e9はPod外検証・保管済みだが昇格せず、旧76309b86を保持。原欄座標・引用・根拠索引・KARA両作用域と受け取りが残件で、新観測会は今回不要。GPUはA4500稼働保持/STOP・再起動・削除0。本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。
 
 APIbd356566/source e06d6b4c、実tokenizer max5045/2339、18更新・生成9・意味/本文6、holdout0。限定CPU174（新59＋既存115）/失敗0/skip0、既存warning1。原raw9・結果・凍結条件・32tensor/全member照合・失敗履歴を `observation_learning/trials/2026-10-25-daily-calm-fit18/` に保存。上記のGPU実行前checkpointは履歴として保持する。全ファイル地図の追加ownerはこのtrialのREADME/run/closure/raw/training/NLL/runtime/weights検査/consumer index＋20partsだけで、product責務の追加なし。
+
+## 2026-10-25 — 明示offline quote wire / native位置compile
+
+API4002b457の既存preparation.py/model_candidate_source.pyが、private cocolon.cmee.quote_candidate.v1（schema_version/candidate/evidence_quotes）を明示format指定だけで扱う。旧numericが既定、新rawのsource/field/完全引用を一意なscalar座標付きnative candidate/evidenceへcompileし、rawはそのままCandidateReceiptへ保持。既存receipt再導出/意味snapshot/独立本文reader/公開API/DTO/DB/RNは不変。新Python dataclass追加0、意味admission/adapter版不変、privateモデルwire版だけを追加。旧不正offsetのfallback/原raw補修/他core適用0。限定CPU197（重複除外）と合成9教師9/9、実GPU試行は未開始。承認済み18更新/FIT9/成功時2保存再読はquote-address pack/共有設計01/最新weekly§42。STRUCTURE_MAP_DELTA_PRESENT（モデル境界の責務変更）、商品0/正式0/3/54.50％据置。

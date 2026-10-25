@@ -2344,3 +2344,20 @@ Mashの「4B学習＋CMEE接続を進めて」を受領。開始Cocolon495110713
 Supabaseはproject一覧で対象cocolon-projectのACTIVE_HEALTHY表示だけを確認し、SQL/本人データ読書き0。Renderはworkspace一覧だけを確認、service/deploy/healthの今回確認0。API/本番/DB/DTO/RN/意味reader/merge/deploy変更0。GPU停止/再起動/削除/新Pod/charge/新学習/model call0、今回のlive GPU再照会はしていない。直前の稼働根拠はfocus12の終了記録を保持する。既知二familyを一般入力9題とせず、観測会は今回不要、Piece/Analysis完成教師と一般品質評価の不足は残す。
 
 primary=BLOCKER_NARROWED。新たな証拠は78引用の一意性・候補の可逆性と、原raw保存/再導出を壊さない最小責務変更の具体化。新TECHNICAL_CREDIT/商品credit0、原実績の意味7/9・本文6/9、正式0/3・54.50％据置。STRUCTURE_MAP_DELTA_NONE（未承認案のみで製品責務変更0）。全体00/観測入口/共有設計01/本weekly/全file地図01Aへ同じ差分を同期し、current01/04/schema05は実装/構造の新差分がないため更新不要。次は具体案の判断、第三の自動学習0。
+
+<a id="20261025-quote-address-approved-implementation"></a>
+## 42. 10/25 — Mash承認後quote接続を実装、限定CPU197・合成9教師9/9
+
+Mashは「この案で、接続実装・18更新・全9件成功時の2件保存再読まで進めてよろしいでしょうか。→進めていいよ。」と明示承認。開始Cocolon8097fb87/APIbd356566、実環境Codex Work/GPT-6、root華恋が単一実装/検証/反映owner、別文脈agentはsource/runtime/runnerのread-only確認だけ。旧承認の再利用ではなく今回の具体案全体への承認。
+
+API[4002b457](https://github.com/MassyuRed/mashos-api/commit/4002b4577838d1ed6671278a19585b61e7ccd10e)の既存2source＋新test1へ実装。private quote wireと既存native座標を分け、原rawを保存してnativeだけcompile、保存後のraw再receiveを維持した。重複とoverlap/空/foreign source/unknownfield/旧形式混在は拒否し、旧offset救済なし。既存意味/独立本文reader/公開API/DB/RNは不変。
+
+対象CPUは重複除外197成功を確認。最初の5file195成功/25.88秒/既存warning1の後、新quote SQL中断2variantを追加。新file32成功/2失敗/12.75秒で、初回meaning保存と回答更新DTOのmeaning_updatedを混同したtest期待を検出した。実DBの保存意味ID存在/不変へ戻り、初回boolean falseを維持する期待へ修正。選択したSQL3ケースは3成功/31deselected/11.47秒。反復実行を加算せず、製品の意味・停止・期限を変えていない。新SQL4variantは通常/初回意味保存後中断/明示再開/GET-start非生成再読/意味event1・取得1を確認。runtimeは再発見したPython3.12.14/pytest8.4.1/PGlite0.5.8、install0。
+
+合成9教師の新wire rawを既存native/意味/実本文へ通し9/9、さらに実行consumerのCPU smokeも9/9。新実model callではない。原chair6行のsft/messages bytesを保持、日常3は元candidate/本文/根拠順不変でquote形式へ投影。新promptの旧relations座標文言だけは新形式に合わせ数値不要と明確化し、実build_model_messagesのcanonical表現と完全一致させた。
+
+[実行原本](../observation_learning/training/2026-10-25-emlis-quote-address/README.md)の新planは旧chair6各1＋新daily3各4＝18、全assistant JSON＋EOS、LR5e-5・新AdamW・開始未採用affea8a7、保存/非学習reload/FIT9。全9意味/本文成功時だけ別identity2call/隔離SQL保存/非生成再読へ進む。旧18+12plan/旧重み/raw不変、reader緩和/追加更新/再call0。実tokenizer確認・GPU学習は本checkpoint時点で未開始。
+
+Runpod管理consoleはAPI rate limitを表示したが、既存workloadのJupyterへ接続でき、nvidia-smiでA4500/20470MiB/使用1MiBを実確認した。停止/再起動/削除/新Pod/charge/install0。現時点で新しいモデル生成/重み更新は0。新観測会不要、本番/Supabase/Render/RN/merge/deploy変更0。
+
+STRUCTURE_MAP_DELTA_PRESENT（privateモデルwire/位置compile責務）。全体00/観測入口/current01/04/共有01/schema05/01Aと本weeklyを同期。限定TECHNICAL_CREDITはCPU実装/再導出/保存互換だけ、商品0/正式0/3/54.50％据置。次は同一承認scope内の実tokenizer→一回18更新/FIT9/成功時2保存再読で、追加承認不要。

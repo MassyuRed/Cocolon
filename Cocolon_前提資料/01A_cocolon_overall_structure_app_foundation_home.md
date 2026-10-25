@@ -4851,3 +4851,7 @@ APIbd356566/source e06d6b4c、実tokenizer max5045/2339、18更新・生成9・�
 ## 2026-10-25 — 引用選択/位置計算を分ける未承認候補のfile地図
 
 `observation_learning/training/2026-10-25-emlis-quote-address/` のREADMEは共有設計01の未承認案へ戻る入口、train_messages.proposed.jsonlは旧chair6行bytes不変＋新quote形式の日常3行、cpu_feasibility.jsonは原9件78引用の一意性/可逆性、plan.proposed.jsonはGPU/実装許可falseの有限18更新/FIT9/条件付き2保存再読案を所有する。原teacher/原raw/旧planの所有を移さない。既存API preparation/model_candidate_sourceの新形式分岐が候補であり、今回製品source/reader/公開API/DB/RN変更0、新GPU試行0。STRUCTURE_MAP_DELTA_NONE。全体00/最新weekly§41/共有設計01のquote-address案へ進行を戻す。商品0/正式0/3/54.50％は不変。
+
+## 2026-10-25 — 承認後quote接続実装と実行file地図
+
+API4002b457のpreparation.py/model_candidate_source.pyは新quote wireの一意位置compile/原raw保持/明示format選択を所有し、新test_cmee_quote_candidate.pyがstrict拒否/再導出/SQL中断再開を所有。Cocolon quote-address packのsft_examples.jsonl/train_messages.jsonlは実行9教師、dataset_manifest.jsonはsource/data hash、cpu_connection_results.json/cpu_validation.jsonは合成接続/限定197の実証範囲、plan.jsonは承認済み一回18更新/FIT9、run_quote_address_fit.pyは既存全文loss/reload/FIT手順、consume_quote_fit_raw.pyは無補修raw/明示形式/既存意味本文の採否を所有する。proposed版は履歴で実行しない。実tokenizer/GPU試行前、STRUCTURE_MAP_DELTA_PRESENT、公開API/DB/RN/reader変更0。全体00/current01/04/共有01/schema05/最新weekly§42を同期。

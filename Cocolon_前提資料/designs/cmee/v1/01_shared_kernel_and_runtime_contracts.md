@@ -1177,7 +1177,7 @@ APIbd356566/source e06d6b4c、実tokenizer max5045/2339、18更新・生成9・�
 <a id="cmee-quote-address-offline-proposal"></a>
 ## 2026-10-25 — 引用の選択と位置計算を分ける明示offline案（未承認・未実装）
 
-状態：**PROPOSED_NOT_APPROVED_NOT_EXECUTABLE**。原本・9行の候補・CPU結果・有限planは[quote-address候補](../../../observation_learning/training/2026-10-25-emlis-quote-address/README.md)。Cocolon preimage49511071364bee1df1c4ecd43def61dd08d6c1a0／APIbd356566d37370911e14dab2819ab25a619c6353。
+状態：**MASH_APPROVED_IMPLEMENTED_CPU_CHECKED_GPU_PENDING**。以下の未承認記述は案作成時点の履歴。承認後actualは末尾と実行pack。原本・9行の候補・CPU結果・有限planは[quote-address候補](../../../observation_learning/training/2026-10-25-emlis-quote-address/README.md)。Cocolon preimage49511071364bee1df1c4ecd43def61dd08d6c1a0／APIbd356566d37370911e14dab2819ab25a619c6353。
 
 ### 目的と判断理由
 
@@ -1241,3 +1241,9 @@ CPU/実tokenizer条件が成立した場合だけ、未採用candidate affea8a70
 提案の実装・CPU・実tokenizer・上限18更新/FIT9・成功時2call保存再読・回収までを一つのscopeとし、承認後のscope内の実装詳細/byte hash固定だけで再承認を求めない。範囲/基準/費用枠の拡張が必要なら実行前に止める。通常アプリ/HTTP/Auth/RN/本人DB/本番/Supabase変更/Render配置/有料差/他core/商品受入れを含めない。
 
 実環境はCodex Work/GPT-6、root華恋が調査/統合/反映owner、別文脈agent2枠はread-only意見。独立Pro/Ultra/human受入れとは呼ばない。System Context最新cacheは本作業でも未成立でfresh原本fallbackを使用。STRUCTURE_MAP_DELTA_NONE（今回、未承認案・候補データのみで製品構造変更0）。商品credit0、正式0/3、全体54.50％据置。原実結果の意味7/9・本文6/9を新案の成功へ上書きしない。次は本案の判断であり、自動試行しない。
+
+## 2026-10-25 — 承認後quote形式のactual（実GPU試行前）
+
+Mash明示承認に基づきAPI4002b457のpreparation.py/model_candidate_source.py＋新test1へ実装。新wire cocolon.cmee.quote_candidate.v1はEmlisの明示offline形式選択だけ。旧デフォルト/旧receipt bytes/意味/reader/保存schemaは保持。新quote配列を順序不変で一意位置へcompileし、実rawは保存、candidate_jsonだけnative化。既存_receiptが実rawから同一結果を再導出する。重複/overlap/空/不一致/混在形式/別coreを拒否し、旧誤座標を救済しない。新sourceは要求形式違いをraw保持のPROVIDER_ERRORとして拒否、再callなし。
+
+限定対象は重複除外197成功、初回DTOと回答更新のtest期待修正履歴をcpu_validation.jsonへ保存。新SQL4variantで通常/意味保存後中断と明示再開/非生成GET-start、保存意味IDとevent数不変を確認。合成9教師はnative/意味/実本文9/9、旧chair6行bytes不変。実tokenizer/新18学習/FIT9/2保存再読はまだ未実行。詳細/実行用filesはquote-address pack、最新weekly§42。STRUCTURE_MAP_DELTA_PRESENT、限定CPU TECHNICAL_CREDIT、商品0/正式0/3/54.50％を保持。

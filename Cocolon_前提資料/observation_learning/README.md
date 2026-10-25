@@ -1,6 +1,6 @@
 # Mashの観測技術を継承するための記録
 
-**現在の直接作業（次案の判断前・製品未実装）：** 前focus12の実績は意味7/9・本文6/9、chair6/6・daily意味1/3/本文0/3のまま。新たに教師/原raw9件78引用の全てが指定原文欄で一意と確認し、位置3整数の学習反復を避ける『4Bは完全引用を選び、CMEEが位置を算出』の明示offline案と候補9行を具体化。旧chair6は行bytes不変、日常3は元nativeへ可逆投影一致。既存readerの受け取り拒否は妥当で、短い自然な反応の学習不足を保持する。新形式/教示/教師の変更、CPU互換・固定18更新/FIT9・全9成功時2保存再読を一範囲にしたが未承認・未実装・新GPU試行0。過去18+12planの再開0、旧重み/raw/採否は保持。新観測会不要、GPU停止操作0（今回live再照会なし）、本番/DB/Render/RN変更0、商品0・正式0/3・54.50％据置。 [具体案とCPU結果](training/2026-10-25-emlis-quote-address/README.md)。
+**現在の直接作業（承認後・接続CPU確認済み）：** Mashが引用形式の接続実装・18更新・全9成功時2保存再読を明示承認。API4002b457の既存2source＋新test1へ、明示offline quote形式/完全引用の一意scalar位置compile/原raw保持と再導出を実装。旧numeric/旧chair/意味/本文readerを保持し、限定CPU197成功（重複除外・test期待修正履歴あり）と合成9教師の意味/本文9/9を確認。新実行9教師/18更新planとrunnerを固定し、実tokenizer前・GPU学習未開始。前focus12の実モデル意味7/9・本文6/9は新合成結果で上書きしない。既存A4500/Jupyter接続と稼働を実確認、停止操作0。新観測会不要、本番/DB/Render/RN変更0、商品0・正式0/3・54.50％据置。 [接続実装・実行原本](training/2026-10-25-emlis-quote-address/README.md)。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
@@ -81,7 +81,7 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 
 ## 現在地（2026-10-25・三中核の開発基準選定、本番は未成立）
 
-**現在の直接作業（次案の判断前・製品未実装）：** 前focus12の実績は意味7/9・本文6/9、chair6/6・daily意味1/3/本文0/3のまま。新たに教師/原raw9件78引用の全てが指定原文欄で一意と確認し、位置3整数の学習反復を避ける『4Bは完全引用を選び、CMEEが位置を算出』の明示offline案と候補9行を具体化。旧chair6は行bytes不変、日常3は元nativeへ可逆投影一致。既存readerの受け取り拒否は妥当で、短い自然な反応の学習不足を保持する。新形式/教示/教師の変更、CPU互換・固定18更新/FIT9・全9成功時2保存再読を一範囲にしたが未承認・未実装・新GPU試行0。過去18+12planの再開0、旧重み/raw/採否は保持。新観測会不要、GPU停止操作0（今回live再照会なし）、本番/DB/Render/RN変更0、商品0・正式0/3・54.50％据置。 [具体案とCPU結果](training/2026-10-25-emlis-quote-address/README.md)。
+**現在の直接作業（承認後・接続CPU確認済み）：** Mashが引用形式の接続実装・18更新・全9成功時2保存再読を明示承認。API4002b457の既存2source＋新test1へ、明示offline quote形式/完全引用の一意scalar位置compile/原raw保持と再導出を実装。旧numeric/旧chair/意味/本文readerを保持し、限定CPU197成功（重複除外・test期待修正履歴あり）と合成9教師の意味/本文9/9を確認。新実行9教師/18更新planとrunnerを固定し、実tokenizer前・GPU学習未開始。前focus12の実モデル意味7/9・本文6/9は新合成結果で上書きしない。既存A4500/Jupyter接続と稼働を実確認、停止操作0。新観測会不要、本番/DB/Render/RN変更0、商品0・正式0/3・54.50％据置。 [接続実装・実行原本](training/2026-10-25-emlis-quote-address/README.md)。
 
 [凍結6教師と実行source](training/2026-10-25-emlis-service-binding/README.md)／[全実結果](trials/2026-10-25-service-binding/README.md)。
 

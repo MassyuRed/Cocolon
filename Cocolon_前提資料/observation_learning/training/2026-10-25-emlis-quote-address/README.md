@@ -1,6 +1,6 @@
 # 4Bの引用選択と、CMEEの位置計算を分ける候補
 
-状態：**未承認・製品未実装・新GPU試行0**。2026-10-25 JST。
+状態：**Mash承認済み・接続実装/CPU確認済み・実tokenizer確認前・GPU学習未開始**。2026-10-25 JST。
 
 [承認対象の全仕様・変更path・CPU条件・18更新/成功時2call](../../../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-quote-address-offline-proposal)を正本とする。
 
@@ -19,3 +19,13 @@
 Supabase list_projectsで対象cocolon-projectのACTIVE_HEALTHY表示を確認したが、本人データ/SQL読書き0。Renderはworkspace一覧だけでservice/deploy/healthの今回確認0。これらをモデル接続成功や本番品質の根拠にしない。保存先は引き続き隔離SQLの限定試験であり、本番DB変更案ではない。
 
 今回primary=BLOCKER_NARROWED。78引用の一意性と、位置計算を既存ownerへ移す具体的な責務/互換条件が増えた。新しい品質合格・TECHNICAL_CREDITは0、商品0/正式0/3/54.50％は維持。STRUCTURE_MAP_DELTA_NONE（未承認案だけ）。
+
+## 承認後の接続実装・CPU checkpoint
+
+Mashは「接続実装・18更新・全9件成功時の2件保存再読」へ「進めていいよ」と明示承認。[API4002b457](https://github.com/MassyuRed/mashos-api/commit/4002b4577838d1ed6671278a19585b61e7ccd10e)の既存2source＋新test1へ実装し、3blob全文を読み戻し照合した。旧形式を既定に保ち、新形式だけ完全引用をnative座標へcompile、原raw保存/receipt再導出/曖昧拒否/形式fallback禁止を確認。独立本文reader/意味採用/公開API/DB/RN不変。
+
+限定CPUは重複除外197ケースの成功を確認（既存4file＋新quote1file）。初回195成功、SQL中断2variant追加後は32成功/2失敗。失敗は初回meaning保存と回答更新DTOのmeaning_updatedを混同したtest期待であり、保存意味IDの存在/不変を直接確認する期待へ直した。該当3SQL再検査は成功。反復を件数へ加算せず、実検査の履歴はcpu_validation.jsonに保持。合成9教師も無補修raw→native→意味→実本文9/9、旧chair6行bytes不変。これは実モデルFIT成功ではない。
+
+実行用sft_examples.jsonl/train_messages.jsonl/dataset_manifest.json、許可済みplan.json、run_quote_address_fit.py/consume_quote_fit_raw.pyを固定した。新daily promptの旧relations文言『with exact full-field coordinates』だけは新形式と矛盾するため数値不要へ明確化し、実build_model_messagesのcanonical JSONと一致させた。本文/意味/原source/根拠順/旧chairは不変。proposed3fileは当時の案として残し、実行には新plan.jsonだけを使う。
+
+既存GPUのJupyterへ接続でき、A4500/20470MiB/使用1MiBを実確認。管理consoleはrate limit表示だが、既存workloadのJupyterは使用可能。STOP/再起動/削除/新Pod/charge/install0。次は同じ承認範囲の実tokenizer確認後に一回だけ18更新/FIT9。全9成功時だけ別ID2保存再読へ進み、失敗時は回収して終了する。今回STRUCTURE_MAP_DELTA_PRESENT（privateモデルwireと位置compile責務）、限定TECHNICAL_CREDITはCPU接続/再導出の範囲だけ。商品0/正式0/3/54.50％を維持。
