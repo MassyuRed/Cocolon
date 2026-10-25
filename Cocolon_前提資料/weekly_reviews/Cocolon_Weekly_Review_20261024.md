@@ -1870,7 +1870,7 @@ nvidia-smiはRTX A4500・20470MiB・初期free20044MiB、driver595.91.07。torch
 
 公式image runpod/pytorch:1.4.1-cu1281-torch280-ubuntu2404、固定Cocolon e703befa0d8a60777b4b8657bb846bf365db851c、API 1dabc4f196ae283264bf5e364e117a5d571af6a7、model Qwen/Qwen3.5-4B@851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a。packをfresh取得しdataset validate成功、Transformers5.19.0/PEFT0.21.2/Accelerate1.15.0/Safetensors0.8.0導入、prepare exit0。今回は新指示を反映したactual planにGPU単価・保存先・Pod外受領先・許可と保持課金を記録した。
 
-新run ID 20261025T011309-96fc8222、開始unix1792890782.851918。base NLL2/生成8→2教師×1epoch/2update→adapter先退避/reload→NLL2/生成8→固定FIT2のCMEE消費、の修正版一回。新しい教師やepoch追加/自動再試行なし。run process上限5400秒・計画$1を維持し、今日のGPU保持指示/保持料金は別とする。process timeoutはPodの自動Stop/請求上限ではない。actual weight723tensorの読込を確認、確認時GPU memory16331MiB/50%。causal-conv1d/flash-linear-attention未導入により公式PyTorch fallbackを使用する通知があり、最適化kernelは追加していない。完了・保存・CMEE採用・商品品質は未確定。別途fixed APIの正常Git checkoutを用意し、失効Git参照を流用しない。
+新run ID 20261025-011309-9f0c8622、開始unix1792890782.851918。base NLL2/生成8→2教師×1epoch/2update→adapter先退避/reload→NLL2/生成8→固定FIT2のCMEE消費、の修正版一回。新しい教師やepoch追加/自動再試行なし。run process上限5400秒・計画$1を維持し、今日のGPU保持指示/保持料金は別とする。process timeoutはPodの自動Stop/請求上限ではない。actual weight723tensorの読込を確認、確認時GPU memory16331MiB/50%。causal-conv1d/flash-linear-attention未導入により公式PyTorch fallbackを使用する通知があり、最適化kernelは追加していない。完了・保存・CMEE採用・商品品質は未確定。別途fixed APIの正常Git checkoutを用意し、失効Git参照を流用しない。
 
 ### 学習済モデルを持ち出して保持する意味
 
@@ -1883,3 +1883,5 @@ M4候補では、同じbase＋合格したLoRA→統合HFモデル→[MLX公式]
 ### checkpoint時点
 
 GPU確保・CUDA/BF16検査・固定pack prepare・4B読込/run開始まで確認。学習完了/回収/CMEE結果は未確定。GPUは今日の確保指示に従って保持し、Stop/Terminate/追加Pod/再起動/追加charge/他Pod操作0。回収前のStopを行わない。商品source/API/DB/Render/Supabase/教材/通常有効化/merge/deploy変更0。文書の状態同期は商品進捗へ加算しない。STRUCTURE_MAP_DELTA_NONE、正式Product Read0/3、PRODUCT_NOT_CLEAR、candidate_ready=false、automatic_progression=false、全体54.50％据置。
+
+進捗記録補正：terminal画面からのrun ID転記誤りを、実在directory名 `20261025-011309-9f0c8622`へ訂正した。誤ったpathでの状態読取1回はFileNotFoundErrorで、学習runの停止/再実行/追加試行は行っていない。現在、before NLL2・before生成3/8を確認した。
