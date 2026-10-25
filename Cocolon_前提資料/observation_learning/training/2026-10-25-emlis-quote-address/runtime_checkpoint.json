@@ -26,7 +26,7 @@
   "raw_repair": false,
   "gpu_stop_restart_delete_operations": 0,
   "work_environment_connection_interruption": "Disconnected once; reconnected to same Jupyter and observed same process progress, no restart/reexecution.",
-  "next": "Finite trial closed. Do not restart training or call holdout: all9 meaning+body success condition failed. Preserve raw/weights/oldplans; reception-only mismatch remains. No new observation meeting needed for this finite fit.",
+  "next": "Trial remains closed. GPU Stop is authorized but NOT confirmed because provider rate limit blocks control. Stop exact Pod and verify Stopped; no training/model calls.",
   "product_accepted": false,
   "automatic_progression": false,
   "meaning_count": 9,
@@ -39,5 +39,23 @@
     "memory_total_mib": 20470,
     "memory_used_mib": 1,
     "rental_kept_running": true
+  },
+  "rental_gpu_control": {
+    "user_instruction": "レンタルGPU停止できる？",
+    "stop_authorized": true,
+    "target_pod": "y0eb0w0qn6nks0",
+    "gpu": "NVIDIA RTX A4500",
+    "status": "STOP_REQUESTED_PROVIDER_RATE_LIMIT_BLOCKED_NOT_CONFIRMED",
+    "console_url": "https://console.runpod.io/pods",
+    "console_rate_limit_seconds_last_observed": 39531,
+    "waited_prior_console_interval_seconds": 333,
+    "official_existing_cli_stop_attempts": 1,
+    "official_cli_exit_code": 1,
+    "official_cli_error": "HTTP statuscode 429; existing runpodctl also reported config file not found; no credential creation or configuration attempted.",
+    "successful_stop_confirmations": 0,
+    "pod_deleted": false,
+    "last_confirmed_gpu_state": "RUNNING 20470MiB total / 1MiB used at trial closure; current stopped state unavailable",
+    "preserved_weights_raw_consumer": true,
+    "next": "Stop exact existing Pod and verify Stopped when Runpod control is available. No new approval required for this already requested Stop. Do not delete,restart,newpod,charge or rerun training."
   }
 }

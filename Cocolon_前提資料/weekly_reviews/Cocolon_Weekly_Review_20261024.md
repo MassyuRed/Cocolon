@@ -2377,3 +2377,13 @@ NLLは全文JSON+EOS対象でchair11114tokenとdaily4742tokenを別集計。dail
 rootは全9候補/本文/問い/更新を読み、別文脈agent2枠もread-onlyで同じgate不成立を確認。独立Pro/Ultra/human受入れではない。今回の有限教師への生成適合が未達という範囲に留め、単なる更新数不足・教材不足・4B能力限界は断定しない。新観測会は今回不要。9行は独立9話ではなくchair/dailyの2話で、一般化・Piece/Analysisの完成教材不足は残る。
 
 primary=BLOCKER_NARROWED。private接続実装の限定CPU TECHNICAL_CREDITを保持し、本文/一般品質/商品credit0・正式0/3・54.50％据置。今回終了記録はSTRUCTURE_MAP_DELTA_NONE、接続実装時のPRESENTは既存mapへ反映済み。全体00/観測入口/quote pack/runtime/01Aへ終了状態を同期。current01/04/共有01/schema05は終了記録で新構造差分がないため変更不要。GPUは稼働保持、STOP/再起動/削除/新Pod/charge0。本番/Supabase/Render/RN/merge/deploy変更0。
+
+
+<a id="20261025-gpu-stop-request-rate-limit"></a>
+## 43. 10/25 — Mashの停止指示を受領、Runpod制限でGPU停止は未完了
+
+Mashの「レンタルGPU停止できる？」を対象A4500/Pod y0eb0w0qn6nks0のStop指示として受領した。前§42の重み/原raw/consumer保全をread-only再確認し、追加学習/生成をせず停止操作へ進んだ。§42終了時のSTOP0/稼働保持は当時の事実で、今後の停止禁止ではない。
+
+管理consoleはAPI利用制限を表示。333秒の表示待機を守って一度開き直したが、約39,531秒（約11時間）の待機へ延長された。既存Pod内の公式/usr/bin/runpodctlのhelpでStop仕様、RUNPOD_POD_IDで対象ID一致を確認して、runpodctl stop pod y0eb0w0qn6nks0を一回試みたがHTTP429/exit1で拒否（既存configなしの表示もあり、資格情報の作成/設定はしていない）。Stop成功応答・Stopped状態は確認できず、停止済みと報告しない。新規pluginも検索結果0。管理画面の利用制限をbot検知と断定せず、反復/経路変更による回避はしない。
+
+現在はSTOP_REQUESTED_PROVIDER_RATE_LIMIT_BLOCKED_NOT_CONFIRMED。対象Podの停止は承認済みで、次は同PodのStop/Stopped確認だけ。削除/再起動/新Pod/charge/再学習/新model call0、製品/API/DB/Render/RN変更0、構造差分なし。全体00/観測入口/既存runtime checkpointを同期し、試行時点のrun/closure/重み/原rawは改変しない。保全済み成果はcommit5490250に保持。停止未確認のためGPU費用が止まったとは主張しない。
