@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-26 JST（最新差分：意味保持＋文章完成のjoint12案をJupyterでCPU検証、新GPU未承認）。全Cocolon作業の必読原本。
+更新日：2026-10-26 JST（最新差分：joint12承認済み一回の12更新/保存reload完了、固定9生成中）。全Cocolon作業の必読原本。
 
 > **最新報告会：[第8回・2026-10-24](weekly_reviews/Cocolon_Weekly_Review_20261024.md)。** 今週実績・前週目標の達否と10/24〜10/31の管理案を記録。**Mashの指示により報告会終了。** 華恋の意見全文は[§10](weekly_reviews/Cocolon_Weekly_Review_20261024.md#karen-closing-opinion)、終了時の区分と再開先は[§11](weekly_reviews/Cocolon_Weekly_Review_20261024.md#meeting-closed-and-next-session)。10/24の4B確定・GPU16GB優先/24GB許容は当時の決定で、4B確定は10/25に撤回済み。最新の開発基準選定は[§23](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-three-core-model-and-serving-decision)。華恋が今回の判断責任として選んだもので、旧4B確定・常時24GB契約の自動復活ではない。起動済み3070の実確認は[§22](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-3070-running-cuda-uvm-io-error)。A5000未確保は§20の履歴。Vast実見積りは§19の履歴。次週の推奨順位は[§4](weekly_reviews/Cocolon_Weekly_Review_20261024.md#next-week-priorities)、対象path・具体手順・失敗/回復検査・終了条件は[§8](weekly_reviews/Cocolon_Weekly_Review_20261024.md#detailed-work-breakdown)を参照。全体管理評価・公開見通しは[§9](weekly_reviews/Cocolon_Weekly_Review_20261024.md#overall-status-and-release-outlook)：54.50％、正式商品受入れ0/3、12/18達成の裏付け不足。会議途中の「進行中」は当時の記録。次週案全体への明示採否・個別実行の未決は§11に区別して保持する。モデル選定の決定と、以下の品質・配置・端末・費用の未完了を区別する。
 
@@ -8,7 +8,7 @@
 
 **GPUの最新確認：** 今回の承認済み一回をJupyter直接で実行・回収。12更新/保存reload/9生成完了、後段model/SQL0。GPUは維持、管理console/GPU一覧/Runpod管理API/Stop/再起動/削除/新Pod/charge0。§43の旧停止指示/HTTP429未確認は履歴として保持。処理完了は継続保持料金の停止を意味しない。
 
-**現在の直接作業（joint12のCPU準備完了・新GPU未承認）：** 前回surface12は意味8/9・本文8/9／全9raw本文候補は教師一致、daily02だけ「帰ってから」の引用・述語範囲不一致で終了、後段0／新e1db未採用のまま。局所mask追加の反復を打ち切り、原9教師と既存CMEEを保持してdaily全文JSON＋EOSの平均lossと完成surface25の平均lossを各0.5で同時に学ぶ一候補を具体化。Jupyter直接・GPU無効化の実tokenizer9行／有限CPU14条件が成功、4B読込・更新・生成・SQL0。旧138bからoptimizer12更新→保存reload→固定9→全9成功時だけ2実service保存再読、最大45分／処理按分$0.195（保持等別）の新一回は未承認。[具体案](observation_learning/training/2026-10-25-emlis-quote-address/README.md#quote-joint-fit12-proposal)、最新weekly§49。閉鎖planを再起動しない。新観測会は今回不要、一般化と他core教材不足は継続。商品0／正式0/3／54.50％。
+**現在の直接作業（joint12一回を実行中・全9採否未確定）：** Mashが新案を最大45分／処理按分$0.195（保持等別）で明示承認。source fe3f0f9a/API4002b457、旧138b/原9教師を保持しdaily全文JSON/EOSと完成surface25の平均lossを各0.5で12更新。保存・非学習reload完了、390.7秒時点で固定9生成1完了/2開始。新45779ad9の早期archive19対象hash/32F32有限を回収照合・保全済み。全9の意味/本文/JSON-EOS/問い/訂正が成功時だけ承認済み2実service保存再読へ進む。まだ採否未判定・後段0、商品0/正式0/3/54.50％。[実行中原本](observation_learning/trials/2026-10-26-quote-joint-fit12/README.md)。同processから続け、再起動しない。
 
 **4B関連作業の開始前：** 全体現在地を全文読んだ後、[観測学習の目的・用途・前提](observation_learning/README.md#observation-learning-intent-and-assumptions)を毎回読み、最新weeklyの決定/実結果と今回の作業を結び付ける。学習・教材作成・評価・CMEE接続・環境移行で共通。ローカル＝Macと決め付けず、学習の成功と観測品質の成立を分ける。
 

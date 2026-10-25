@@ -2547,3 +2547,6 @@ root華恋/Codex Work/GPT-6が単一writer／実行owner、別文脈agentは読�
 ### §49 10/26 JST — joint12一回＋条件付き2保存再読をMashが明示承認
 
 Mashは8d5ad494の新案「12更新→保存・再読込→9件検査→全件成功時のみ2件保存再読、最大45分・処理按分$0.195（保持等別）」へ「いいよ、進めて。」と明示承認。原proposedを保存しjoint12 planをAUTHORIZED_ONCEへ更新。旧138b/原9教師/prompt/API4002b/既存reader/全文とsurface各0.5/固定順/LR/runnerSHA c5dd1679/予算/停止を保持する。root一人がJupyter直接で一回実行し、全9条件成功時だけ承認済み後段へ進む。各段階の小分け再承認は不要。閉鎖済み旧試行は再利用しない。開始前の4B読込/更新/生成/SQL0、商品0/正式0/3/54.50％。STRUCTURE_MAP_DELTA_NONE。
+
+
+§49 実行中checkpoint（10/26 JST）：source fe3f0f9aから一回起動、PID647447/1792967562.7591531。12更新/保存/非学習reload完了、最後の読取390.7秒で固定9生成は1完了/2開始、全9採否未判定・後段0。新45779ad9の早期archive3,479,295bytes/19対象hash/32F32有限をPod外照合し、libfile_8485cd7181e481918b470bfb44735bf5 version0へ保全。照合用SHAの画面転記誤りは原本と実bytesで訂正、全manifest成功、再download0。実学習起動は一回・再起動0。trial/2026-10-26-quote-joint-fit12と同runtime checkpointから同processへ戻る。商品0/正式0/3/54.50％、GPU管理/API/lifecycle/本番変更0。

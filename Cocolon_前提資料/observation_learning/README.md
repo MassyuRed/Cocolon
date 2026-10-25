@@ -2,7 +2,7 @@
 
 **GPUの最新確認：** 今回の承認済み一回をJupyter直接で実行・回収。12更新/保存reload/9生成完了、後段model/SQL0。GPUは維持、管理console/GPU一覧/Runpod管理API/Stop/再起動/削除/新Pod/charge0。§43の旧停止指示/HTTP429未確認は履歴として保持。処理完了は継続保持料金の停止を意味しない。
 
-**現在の直接作業（joint12のCPU準備完了・新GPU未承認）：** 前回surface12は意味8/9・本文8/9／全9raw本文候補は教師一致、daily02だけ「帰ってから」の引用・述語範囲不一致で終了、後段0／新e1db未採用のまま。局所mask追加の反復を打ち切り、原9教師と既存CMEEを保持してdaily全文JSON＋EOSの平均lossと完成surface25の平均lossを各0.5で同時に学ぶ一候補を具体化。Jupyter直接・GPU無効化の実tokenizer9行／有限CPU14条件が成功、4B読込・更新・生成・SQL0。旧138bからoptimizer12更新→保存reload→固定9→全9成功時だけ2実service保存再読、最大45分／処理按分$0.195（保持等別）の新一回は未承認。[具体案](training/2026-10-25-emlis-quote-address/README.md#quote-joint-fit12-proposal)、最新weekly§49。閉鎖planを再起動しない。新観測会は今回不要、一般化と他core教材不足は継続。商品0／正式0/3／54.50％。
+**現在の直接作業（joint12一回を実行中・全9採否未確定）：** Mashが新案を最大45分／処理按分$0.195（保持等別）で明示承認。source fe3f0f9a/API4002b457、旧138b/原9教師を保持しdaily全文JSON/EOSと完成surface25の平均lossを各0.5で12更新。保存・非学習reload完了、390.7秒時点で固定9生成1完了/2開始。新45779ad9の早期archive19対象hash/32F32有限を回収照合・保全済み。全9の意味/本文/JSON-EOS/問い/訂正が成功時だけ承認済み2実service保存再読へ進む。まだ採否未判定・後段0、商品0/正式0/3/54.50％。[実行中原本](trials/2026-10-26-quote-joint-fit12/README.md)。同processから続け、再起動しない。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 

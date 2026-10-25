@@ -7,3 +7,6 @@
 再開は [runtime checkpoint](../../training/2026-10-25-emlis-quote-address/joint_fit12_runtime_checkpoint.json) と同じprocessのrun.jsonを読むこと。実行を起動し直さない。GPU管理console/一覧/API/Stop/再起動/削除/新Pod/charge、Render/Supabase/本人DB/通常application/公開API/DTO/RN/merge/deploy0。GPUは保持。
 
 STRUCTURE_MAP_DELTA_NONE。実行owner=root華恋/Codex Work/GPT-6。別文脈agentは読取補助でPro/Ultra/human受入れとしない。
+
+
+§49 実行中checkpoint（10/26 JST）：source fe3f0f9aから一回起動、PID647447/1792967562.7591531。12更新/保存/非学習reload完了、最後の読取390.7秒で固定9生成は1完了/2開始、全9採否未判定・後段0。新45779ad9の早期archive3,479,295bytes/19対象hash/32F32有限をPod外照合し、libfile_8485cd7181e481918b470bfb44735bf5 version0へ保全。照合用SHAの画面転記誤りは原本と実bytesで訂正、全manifest成功、再download0。実学習起動は一回・再起動0。trial/2026-10-26-quote-joint-fit12と同runtime checkpointから同processへ戻る。商品0/正式0/3/54.50％、GPU管理/API/lifecycle/本番変更0。
