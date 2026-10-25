@@ -2461,3 +2461,17 @@ Mashの「この12更新の一回試行を実行してよいですか？→い�
 reception NLL0.279111952→0.006958150、chair全文0.000944048→0.001216513。異なる対象のNLLは合算せず、loss低下を品質証明にしない。追加学習/失敗再call/LR探索/raw補修/reader緩和0。既存完全JSON教師がある残差なので新観測会は今回不要、独立2話/一般化未確認/Piece・Analysis完成教師0は継続。旧18/6plan/teacher/helper/reader/raw/初期重み不変。
 
 早期archive3,477,588bytes/18対象/32F32有限をPod外照合しlibfile_a3fe11afac408191b5b81dbac55f50e8へ保存。完了archive6,969,198bytes/SHA3c2ee5feef41b3cc6e2a98eb961554cd70551524cec1ccf8a2c9529d2cbafe3dの22対象、raw205,745bytes、全consumerを回収・hash照合しGitHub原本へ保全。処理按分約$0.07347042（記録$0.26/h、準備/回収/保持/保存/税等別）、前半1800秒/$0.13内、後段900秒/$0.065未使用。起動前構文失敗/接続復旧は上記checkpoint通りで、実学習一回/再起動0。商品0/正式0/3/54.50％、STRUCTURE_MAP_DELTA_NONE。全体00/観測入口/pack/runtime checkpoint/01Aを同期。Jupyter直結、GPU lifecycle/一覧/管理API/Render/Supabase/本人DB/通常application/RN/merge/deploy変更0。GPU保持課金の停止を意味しない。
+
+
+<a id="20261026-quote-boundary-fit12-cpu-proposal"></a>
+## 47. 10/26 — JSON区切り1tokenを加える新12案、Jupyter直接CPU9件確認・GPU未承認
+
+Mashの4B学習＋CMEE接続続行/Jupyter直接指示で、全機能00全文・作業規則・恒久incident・全体設計01/全file地図01A・最新weekly§46・観測目的・CMEE共通/04mapと実sourceを確認。API fresh4002b457不変、Cocolon開始adabec7d。System Contextの索引timeout未完了を保持しfresh原本を直接読取り、再index0。root華恋/Codex Work/GPT-6が単一execution/writer、補助agentはread-onlyで正式Pro/Ultra/human reviewとはしない。
+
+実raw/教師の直接比較で、daily01だけ`","`→spaceの1差、他8 parsed教師一致、EOS/stop/1584tokenを再確認。旧daily11token maskはこの区切りを除外していた。新runner/plan/後段を別identityへ具体化し、初期138b/旧9教師/12順/LR/全9条件を維持、daily11に区切りID2129の1tokenだけを追加。Jupyter実cacheで全9無切捨て/max5045/2339/7378、daily3各12loss/境界1token、chair6全文+EOSを確認。新GPU/model/更新/SQL0。旧balanced12は終了/8/9/後段0/2009b43c未採用のまま。
+
+具体source/CPU原本/正確なpath/途中の入力・helper hash拒否・Download timeoutと回収経過・実行/停止条件は[quote pack新12案](../observation_learning/training/2026-10-25-emlis-quote-address/README.md#quote-boundary-fit12-proposal)。source df80b427、CPU原本SHA ef58c86d47129e58d7565a9f208da8e6a548b0f20bef7dc5d2be9c7a80ec6a06（4425bytes）を回収照合。localの未承認GPU拒否/固定処理AST不変とread-only reviewを確認。新観測会はこの欠陥へ不要、独立2話/一般化/Piece・Analysis完成教師0は継続。
+
+新一回案は12更新→保存reload→FIT9、意味/本文/EOS/ASK/訂正3更新/dailyFINALが全9成功時だけ実service2件の隔離SQL保存・意味保存後中断/明示再開・非生成再読。最大45分/処理按分$0.195、保持/準備/回収/保存/税等別。閉鎖試行の承認を流用せず、Rule18 §11.3 LEVEL3の新有料試行全体を一括承認前でgpu_run_authorized=false。実eval plan未作成。承認後CPU後/全9成功後の小分け再承認は不要。
+
+管理console/GPU一覧/Runpod管理API/lifecycle0、Jupyter直接のみ。A4500 20470MiB/使用1MiBを実確認し保持。追加学習・新推論・依存追加・Supabase/Render/本人DB/RN/merge/deploy0。STRUCTURE_MAP_DELTA_NONE、今回BLOCKER_NARROWED/CPU準備だけ、商品0/正式0/3/54.50％据置。全体00/観測入口/pack/01A所在を差分更新する。

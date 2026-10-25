@@ -125,3 +125,33 @@ Mashは「この12更新の一回試行を実行してよいですか？→い�
 ### 10/26 JST — 固定12の最終結果
 
 [完了原本](../../trials/2026-10-26-quote-balanced-fit12/README.md)。12更新/保存非学習reload/FIT9を1017.282731秒で完了、意味/本文8/9。chair6全通過/ASK3/訂正各3更新を保持、daily02/03通過、daily01だけJSON区切り破損（EOSあり/打切りなし）。全9未達で条件付き2は実model/SQLとも0/evalplan未作成、新2009b43cは未採用。追加学習/再call/raw補修/reader緩和0、runtime checkpointはCLOSED_ALL9_GATE_NOT_MET_DO_NOT_RELAUNCH。早期18/完了22対象を回収照合し追加重み/全raw/consumerを保存。処理按分約$0.07347（保持等別）。新観測会は今回不要、一般化と三core教師不足は継続。商品0/正式0/3/54.50％、構造差分なし。
+
+
+
+<a id="quote-boundary-fit12-proposal"></a>
+## 10/26 JST — JSON区切り1tokenを追加する新12案（CPU検証済み・GPU未承認）
+
+前回balanced12は意味/本文8/9で閉鎖、新2009b43c未採用、後段0のまま。本案は閉鎖済みplanのretry/再起動ではない。実rawと既存9教師を直接比較した結果、8件はparsed教師一致、daily01だけ教師[3933,3936)の`","`がspace1文字へ変化した。1584token/EOS/stopで打切りではない。原rawを補修せず、既存reader/意味admission/教師/prompt/API/SQLを変えない。
+
+**改善対象：** dailyの受け取り11tokenに、直前のobservation/reception区切りを学習対象として加える。実tokenizerでは区切りはID2129の1token、各dailyのloss対象は12token。field key等の中間3tokenはmaskを維持し、全文context・causal loss位置を保持する。chair6の全文JSON+EOS各1回とdaily3の各2回、固定順`[6,0,7,1,8,2,6,3,7,4,8,5]`、旧138b初期重み、LR5e-5/AdamW/32LoRA/seed/2560上限は前回と同じ。全文JSONへdaily lossを広げない。この修正で全9が通ることはまだ実証されていない。
+
+| owner | 内容 |
+|---|---|
+| `boundary_fit12_diagnosis.json` | 前回原rawの唯一の差分、EOS/打切り区別 |
+| `run_quote_boundary_fit.py` | 新出力先の固定12、mask union、保存/非学習reload/FIT9。未承認planを拒否 |
+| `boundary_fit12.plan.json` | PROPOSED_NOT_AUTHORIZED、gpu_run_authorized=false。旧plan変更0 |
+| `boundary_fit12_tokenization.json` | Jupyter直接/実cache/CPU限定の全9行と3mask。学習/モデル0 |
+| `run_quote_boundary_holdout.py` | 新schema/出力先へ束縛した後段。全9成功時のみ実model最大2/隔離SQL保存、中断再開・非生成再読。実eval planは未作成 |
+| `boundary_fit12_runtime_checkpoint.json` | CPU完了・GPU承認待ちと正確な再開path |
+
+CPU実結果：最大prompt5045、completion+EOS2339、全文7378。全9無切捨て、chair6 EOS学習を保持。原本SHA256 `ef58c86d47129e58d7565a9f208da8e6a548b0f20bef7dc5d2be9c7a80ec6a06`、4425bytes。rootがJupyterのEditorから全原本を回収しhash一致を確認。ローカルではproposed受理/未承認GPU拒否、固定順・教材検証・causal lossのAST不変、後段はidentity/名前/出力先だけの差を確認。別文脈agentはread-only review、blockingなし。Pro/Ultra独立正式reviewやhuman受入れとは数えない。
+
+**一回分の実行案：** 固定12更新→保存/非学習reload→9件新生成→無補修rawを既存CMEEへ一回渡す。全9の意味/本文/EOS、chair初回ASK3/訂正各3更新と問いなし、daily FINALすべて成功時だけ、既存未使用別ID2初回の実service/隔離SQL保存・意味保存後中断/明示再開・保存済み非生成再読へ進む。最大1800秒/$0.13＋条件付き900秒/$0.065、合計45分/処理按分$0.195（記録$0.26/h。準備/回収/保持/保存/税等別、請求上限ではない）。不一致/非有限/期限/全9未達なら終了し、追加学習/再生成/LR探索/reader緩和/raw修理0。旧run/旧不採用重みを上書きしない。重み/全rawは回収保全する。
+
+**承認範囲：** 今回の続行指示でCPU診断・既存envelope内の可逆source準備/GitHub反映を実施。新しい有料GPU試行全体はRule18 §11.3 LEVEL3（閉鎖single-useの再利用不可、新12と条件付き2への個別承認）として一括判断前。gpu_run_authorized=false、新重み更新/モデルforward/生成/SQL0。承認後にCPU後/全9成功後の小分け再承認は要求しない。
+
+**再開：** Pod新pack `/workspace/cocolon_4b_quote_boundary_pack_20261026`。固定helperは`/workspace/cocolon_4b_service_binding_legacy_reference_20261025`、初期は`/workspace/cocolon_4b_quote_address_fit18_20261025/adapter`。source df80b4270af0446aa5b840584664beaee4c4f126。承認後は本新planを承認状態へ更新/固定してから新runnerを一回だけ実行する。実行引数はruntime checkpointのpathを使い、旧balanced12を起動しない。
+
+**今回の実行経過：** 最初のターミナルmultiline入力不備はshell段階でCPU/GPU/model/file effect前、診断未実行。別terminalでone-line入力へ変更。Podにrgがなく既存grepで参照先を確認。最初のCPU --validate-onlyは古いhelper指定をhash gateが拒否し、tokenizer/model/更新0で終了。既存helperのhashを照合し上記正規参照へ変更後、CPU一回完了。原本Download待機はtimeout/接続binding resetとなり、再downloadせずEditor全選択/clipboardで同一bytesを回収した。学習試行のretryではない。
+
+今回必要な新観測会なし。既存完全JSON教師があり、学習対象外だった境界を修正するため。独立言語2話・一般化未確認・Piece/Analysis完成教師0は残る。管理console/GPU一覧/Runpod管理API/Stop/再起動/削除/新Pod/charge/依存追加/本番/Supabase/Render/本人DB/RN/merge/deploy0。Jupyter直結だけを使用。A4500の稼働保持/使用1MiBを直接確認したが、保持課金の停止を意味しない。Codex Work/GPT-6、root華恋が単一実行・反映owner。STRUCTURE_MAP_DELTA_NONE（製品source/責務/型/公開契約不変）、商品0/正式0/3/全体54.50％据置。

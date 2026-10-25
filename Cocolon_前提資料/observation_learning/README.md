@@ -2,7 +2,7 @@
 
 **GPUの最新確認：** 今回は承認scopeの学習/検証をJupyterへ直接接続して実施。管理console/GPU一覧/Runpod API操作0、Stop/再起動/削除/新Pod/charge0。§43の旧停止指示とHTTP429で停止未確認だった履歴は保持し、今回の新承認scopeではPod lifecycleを変更していない。処理は完了したが、GPU料金停止を意味しない。
 
-**現在の直接作業（新12更新/FIT9完了・意味本文8/9、後段0で終了）：** source34c9d67f/API4002b457・初期138bから固定12更新/保存非学習reload/9生成を1017.283秒で完了。無補修rawの既存CMEEは意味8/9・本文8/9、chair6全通過/ASK3/訂正各3更新を保持し前回3退行を解消。daily02/03通過、daily01はobservationとreception間のJSON区切り破損（EOS到達、打切りなし）で不採用。全9条件未達で2実service保存再読は0/evalplan未作成、新2009b43cは未採用・追加試行0。早期18対象/32F32有限と完了22対象/全原raw/consumerをPod外照合・保存。今回の残差へ新観測会は不要。処理按分約$0.07347（保持等別）、商品0/正式0/3/54.50％。[完了原本](trials/2026-10-26-quote-balanced-fit12/README.md)、最新weekly§46最終結果。
+**現在の直接作業（区切り1token追加の新12案、CPU完了・GPU未承認）：** 前回balanced12は意味/本文8/9・daily01 JSON区切り不正・後段0・新2009b43c未採用で閉鎖。新案は初期138b/旧9教師/12順/LRを保持し、daily受け取り11tokenへ直前区切りID2129の1tokenだけを加える。Jupyter直接/実tokenizer全9/無切捨て・daily各12lossを確認、新学習/モデル/SQL0、gpu_run_authorized=false。最大45分/処理按分$0.195（保持等別）、全9成功時だけ2保存再読を含む新一回試行の承認前。[具体案とCPU原本](training/2026-10-25-emlis-quote-address/README.md#quote-boundary-fit12-proposal)、最新weekly§47。新観測会は今回不要、商品0/正式0/3/54.50％。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
@@ -83,7 +83,7 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 
 ## 現在地（2026-10-25・三中核の開発基準選定、本番は未成立）
 
-**現在の直接作業（受け取り6更新/FIT9完了・不採用）：** Mash承認後、source6cea8816/API4002b457・初期138b9ff7からdaily3の受け取り各11tokenだけ各2回＝6更新、保存/32F32有限/非学習reload/新生成9を939.715秒で完了。無補修rawの既存CMEE採否は意味7/9・本文6/9。dailyは教師parsed完全一致/意味本文3/3へ改善したが、chairは意味4/6・本文3/6へ退行（01初回の不存在関係先、01訂正の直した→直せた、03初回の反復/2560打切り）。全9条件未達で別ID2保存再読はcall0/終了、新f1e88e3eは不採用。追加学習/再call/reader緩和/raw補修0。早期追加重み16対象/32tensorと完了証拠19対象/全原raw/consumerをPod外照合・保存。新観測会は今回不要、独立2話/一般品質とPiece/Analysis完成教師不足は継続。商品0・正式0/3・54.50％据置。[全実結果](trials/2026-10-25-quote-reception-fit6/README.md)、[最新weekly§45](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-quote-reception-fit6-authorized)。
+**現在の直接作業（区切り1token追加の新12案、CPU完了・GPU未承認）：** 前回balanced12は意味/本文8/9・daily01 JSON区切り不正・後段0・新2009b43c未採用で閉鎖。新案は初期138b/旧9教師/12順/LRを保持し、daily受け取り11tokenへ直前区切りID2129の1tokenだけを加える。Jupyter直接/実tokenizer全9/無切捨て・daily各12lossを確認、新学習/モデル/SQL0、gpu_run_authorized=false。最大45分/処理按分$0.195（保持等別）、全9成功時だけ2保存再読を含む新一回試行の承認前。[具体案とCPU原本](training/2026-10-25-emlis-quote-address/README.md#quote-boundary-fit12-proposal)、最新weekly§47。新観測会は今回不要、商品0/正式0/3/54.50％。
 
 [凍結6教師と実行source](training/2026-10-25-emlis-service-binding/README.md)／[全実結果](trials/2026-10-25-service-binding/README.md)。
 
@@ -223,3 +223,4 @@ D05でMashは「事実を事実として捉えるのも観測」と教示し、�
 次に観測会を行う場合は、華恋が新しい観測会フォルダを作り、対話と教示を保存し、この一覧を更新します。Mashには普段の形で実演していただき、整理・参照の整備は華恋が担います。今回、定期実行の日時や頻度は設定していません。
 
 保存先を増やすための新システムやDBは作らず、既存のGitHub上で継続します。製品の構造・契約・CMEE実装を変更する場合は、その作業で対象の設計と接続を扱います。
+
