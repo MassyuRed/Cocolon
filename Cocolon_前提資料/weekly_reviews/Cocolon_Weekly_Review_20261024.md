@@ -2316,3 +2316,31 @@ STRUCTURE_MAP_DELTA_NONE（同じ学習/保存/実serviceの既存経路。製�
 chair全文NLL11114token 0.0014605675→0.0009372535、daily選択NLL2722token 0.0684506091→0.0172751111。全9低下だがscope別で、意味/文章の品質合格には換算しない。1037.96011154秒/按分$0.074963786、peak16.171364/18.779297GiB、保持/準備/回収/税別。保存新adapter affea8a7…、step12archive9969861e…/3,517,892bytes/18member/32F32有限、完了evidence538716ed…/278,852bytes/24memberをPod外照合。consumer1,477,818bytesはindex＋20partで無損失保全。旧重み・教師不変、before新生成0/FIT9/追加学習0/同要求再call0/holdout0/実serviceSQL0。
 
 全9成功条件に未到達なので承認済み後段は未実施。新holdout source/fixtureは0fdc73ecで固定したがeval_plan未作成・起動0。既存R10.2の同blocker family二試行後のDETOUR_RISK_STOPとして第三の自動試行や補助装置追加を行わない。primary outcome=BLOCKER_NARROWED、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。GPUは完了後A4500/20470MiB/使用1MiBを確認して稼働保持、STOP/再起動/削除/新Pod/charge0。全体00/観測入口/元daily/focus入口/01Aへ現在差分を同期、製品構造不変のcurrent01/04/共有01/schema05は更新不要。
+
+
+<a id="20261025-quote-address-proposal"></a>
+## 41. 10/25 — 原文引用78か所の一意性を確認し、位置計算をCMEEへ分ける案を具体化
+
+Mashの「4B学習＋CMEE接続を進めて」を受領。開始Cocolon49511071364bee1df1c4ecd43def61dd08d6c1a0／APIbd356566d37370911e14dab2819ab25a619c6353。全機能00全文、恒久incident、作業rule/current18、設計01/全file地図01Aと三分冊への導線、current04、観測目的/用途、前§40の原raw/凍結teacherと現物を確認した。System Context最新cacheは未成立のままfresh原本fallback。実環境Codex Work/GPT-6、root華恋が統合/反映owner、別文脈agent2枠はread-only review。独立Pro/Ultra/human判定と偽っていない。
+
+### 実際に確認したこと
+
+原9教師/原rawの78根拠が全て、束縛source_id/fieldの原文で一意に見つかる。3整数の座標不良と、daily3の受け取り差だけが残ることを再確認。教師のquote-only投影をnativeへ戻す静的比較は9/9一致。学習用の具体候補では旧chair6行をbytes不変、日常3だけsystem/shape/座標教示と重複文字mapを置換し、candidate本文/意味/根拠順を不変にした。日常3のnative可逆性3/3一致。新生成0、実receipt/意味/本文/SQLの新テスト0。rawを補修して採用成功と数えた結果ではない。
+
+現preparation._check_evidenceはfield-local scalarと原文sliceの一致を検査する。意味側_receiptは保存rawからreceive_candidateを再実行して同一receiptを要求する。日常readerの「あったかいものを食べて、少し落ち着けてよかったです」系の要求に対して、原出力の「少し落ち着いたのですね」は事実再確認で終わるため不採用は妥当。reader不整合や4B一般の能力限界とは断定しない。
+
+### 華恋の推奨を一つに固定
+
+[全仕様・変更path・上限を固定した案](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-quote-address-offline-proposal)／[候補9行・CPU実結果・未承認plan](../observation_learning/training/2026-10-25-emlis-quote-address/README.md)。
+
+4Bはsource/field/完全引用を選び、既存CMEE preparationが一意のscalar位置だけを計算する新しい明示offline形式を推奨。旧数値方式を既定のまま保持し、新quote版のmissing/ambiguous/overlap/他source/余剰fieldは拒否する。rawは元の新形式を保存し、native candidateだけcompile、保存後もrawから同一結果へ再導出する。新helper/新基盤/reader緩和/旧raw救済を追加しない。
+
+同じ3整数の再学習だけを行う案は変更量が小さいが、原文長や表現が変わるたびに数値計算へ学習量を使う弱点を残すため不採用を推奨。新quote方式も受け取りを自動では改善しない。CPU実装/旧互換/保存再導出/実tokenizer確認→旧chair6各1回＋新daily3各4回の18更新一回→保存reload/FIT9→全9成功時だけ別identity2件の実service保存非生成再読までを一scopeにまとめる。LR5e-5、全JSON＋EOS、倍率/疎mask/途中探索なし、学習・FIT1800秒＋後段900秒、記録単価$0.26h按分最大$0.195（準備/回収/継続保持/税等別）。開始未採用affea8a7、旧重み/旧18+12plan/原rawは保持。最適な18回を実証した案ではなく、変更した出力責務への有限適合試験。前提不成立・不採用・期限で終了し、再call/追加updateなし。
+
+新モデル出力契約/教示/教師とSTOP後の新試験なのでRule18§11.3 LEVEL_3の判断対象。現在の依頼で診断とレビュー可能な候補保存を行ったが、過去の12更新承認を流用せず製品実装/新GPU試行は0。CPU後/成功後に小分けの承認を増やす意図はなく、本scope全体を判断対象とする。
+
+### 今回の状態・残件
+
+Supabaseはproject一覧で対象cocolon-projectのACTIVE_HEALTHY表示だけを確認し、SQL/本人データ読書き0。Renderはworkspace一覧だけを確認、service/deploy/healthの今回確認0。API/本番/DB/DTO/RN/意味reader/merge/deploy変更0。GPU停止/再起動/削除/新Pod/charge/新学習/model call0、今回のlive GPU再照会はしていない。直前の稼働根拠はfocus12の終了記録を保持する。既知二familyを一般入力9題とせず、観測会は今回不要、Piece/Analysis完成教師と一般品質評価の不足は残す。
+
+primary=BLOCKER_NARROWED。新たな証拠は78引用の一意性・候補の可逆性と、原raw保存/再導出を壊さない最小責務変更の具体化。新TECHNICAL_CREDIT/商品credit0、原実績の意味7/9・本文6/9、正式0/3・54.50％据置。STRUCTURE_MAP_DELTA_NONE（未承認案のみで製品責務変更0）。全体00/観測入口/共有設計01/本weekly/全file地図01Aへ同じ差分を同期し、current01/04/schema05は実装/構造の新差分がないため更新不要。次は具体案の判断、第三の自動学習0。

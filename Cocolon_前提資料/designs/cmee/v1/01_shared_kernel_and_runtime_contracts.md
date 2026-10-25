@@ -1173,3 +1173,71 @@ Mashが§37の日常食事family追加・18更新・保存再読の限定検証�
 18更新・保存/非学習reload/FIT9を1189.666秒で完了。無補修rawの意味/本文はchair6/6・daily0/3（全INVALID_EVIDENCE）。FIT全9成功に未到達のため別IDの実service保存再読はcall0で終了し、追加更新/再試行0。新重み5f0e51e9はPod外検証・保管済みだが昇格せず、旧76309b86を保持。原欄座標・引用・根拠索引・KARA両作用域と受け取りが残件で、新観測会は今回不要。GPUはA4500稼働保持/STOP・再起動・削除0。本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。
 
 APIbd356566/source e06d6b4c、実tokenizer max5045/2339、18更新・生成9・意味/本文6、holdout0。限定CPU174（新59＋既存115）/失敗0/skip0、既存warning1。原raw9・結果・凍結条件・32tensor/全member照合・失敗履歴を `observation_learning/trials/2026-10-25-daily-calm-fit18/` に保存。上記のGPU実行前checkpointは履歴として保持する。全ファイル地図の追加ownerはこのtrialのREADME/run/closure/raw/training/NLL/runtime/weights検査/consumer index＋20partsだけで、product責務の追加なし。
+
+<a id="cmee-quote-address-offline-proposal"></a>
+## 2026-10-25 — 引用の選択と位置計算を分ける明示offline案（未承認・未実装）
+
+状態：**PROPOSED_NOT_APPROVED_NOT_EXECUTABLE**。原本・9行の候補・CPU結果・有限planは[quote-address候補](../../../observation_learning/training/2026-10-25-emlis-quote-address/README.md)。Cocolon preimage49511071364bee1df1c4ecd43def61dd08d6c1a0／APIbd356566d37370911e14dab2819ab25a619c6353。
+
+### 目的と判断理由
+
+focus12の実rawはchair6/6を保持、dailyは引用開始位置3整数と受け取り3件が残る。78根拠はすべてsource_id/fieldを固定すると原文内で一意に見つかる。原rawの3整数は実際に誤りで、本文の「少し落ち着いたのですね」も事実再確認に留まる。既存readerの拒否は妥当であり、bug扱いで緩和しない。
+
+同じ整数を第三の通常学習で暗記させる代わりに、4Bが原文のどこを引用するかを選び、既存preparationが完全引用のscalar位置を決める責務へ限定変更する。意味・自然な受け取りは引き続き4Bが生成し、CMEEは独立に採否を決める。位置一致は意味の証明ではない。新しい観測会は今回不要。一般理解・三中核品質の教師不足は別残件。
+
+### 新しい私的出力形式と旧形式の保持
+
+新形式は最上位exact3キーで明示する。
+
+```json
+{
+  "schema_version": "cocolon.cmee.quote_candidate.v1",
+  "candidate": {"schema_version": "cocolon.cmee.semantic_and_surface_proposal.v1"},
+  "evidence_quotes": [
+    {"source_id": "<requestのsource_id>", "field_path": "memo_action", "quote": "うどんを作って"}
+  ]
+}
+```
+
+上のcandidateは形式説明用の省略例であり、学習・採用できる完成packetではない。完全な5claim/4関係/本文を含む日常3教師は候補JSONLにある。最上位の旧exact2キーcandidate/evidenceと、新exact3キーschema_version/candidate/evidence_quotesを混在させない。未知版・余剰キー・行内start/end・空引用・不正型・重複JSONキー・非有限値は拒否。旧形式の誤座標を新形式として救済しない。
+
+ModelCandidateSource/build_model_messagesへ明示format引数を追加し、既定値は旧方式のまま。新引数はOFFLINE_CANDIDATEかつEmlisだけに限定する。新形式を指定した取得で旧形式が返っても自動fallbackせず不採用にする。旧chair6は旧prompt/旧packetのまま、新daily3と2holdoutだけ新引数を明示する。Piece/Analysis/通常applicationへ適用しない。新promptは原文・metadata/control/priorを保持して重複するfield_unicode_spansだけを外し、位置を出す教示/shapeを完全引用方式へ置換する。
+
+### 既存owner内での処理と保存
+
+| owner | 承認後に加える最小差分 |
+|---|---|
+| API `ai/services/ai_inference/cocolon_meaning_experience_engine/preparation.py` | strict parserの新形式分岐。一意quoteをnative5fieldへcompileして既存_check_evidenceへ渡す。旧分岐と旧receipt bytesを維持 |
+| API 同package `model_candidate_source.py` | 既定旧形式＋明示offlineの新format選択、矛盾しないsystem/output_spec、実rawの期待形式確認。新client/endpoint/補助routeなし |
+| API `ai/tests/test_cmee_preparation.py`、`test_cmee_model_candidate_source.py` | 既存assert/fixtureは不変で追加検証。旧prompt/receiptの全等値と新format指定・拒否を確認 |
+| API `ai/tests/test_cmee_quote_candidate.py`（新しい検証file1） | strict形式・引用一意性・原raw保持・receipt/snapshot再導出・偽造拒否・daily実本文/隔離保存再読をまとめる |
+| Cocolon quote-address候補pack内のrunner2file | 既存学習/helperとholdout手順を再利用する有限runner。旧planを変更せず、新3教師と明示formatを渡す |
+
+原文欄はrequestに束縛されたsource_idとfield_pathでexact指定する。quoteは正規化・trim・近似・他欄検索をせずそのまま探し、重なった出現も含め全開始位置を数える。0件または2件以上なら拒否。1件だけならstart、その後ろのscalar長からendを決め、配列順は保持する。空quoteも拒否する。例えば「あああ」に「ああ」は開始0/1の2件であり、一意としない。UTF8 byte/UTF16 code-unit位置へ読み替えない。_model_spanは意味owner側にあり、非重複countでもあるためpreparationからimportしない。
+
+CandidateReceipt.raw_outputは**実際の新形式rawそのもの**を保存する。candidate_jsonだけを従来nativeのcandidate/evidenceへcompileし、candidate本体・引用順・evidence_indexes・問い・更新を変えない。statusは位置確認後もCANDIDATE_UNREVIEWED。既存emlis_semantic_admission._receiptが同じ保存rawからreceive_candidateを再実行し同一receipt/native結果を再導出できることを必須とする。意味snapshot・保存・再開はこのnative結果を既存責務で扱う。生成rawを書き換えてreceive_candidateへ渡す実装は不可。
+
+### 実行前CPU条件と終了条件
+
+今回は製品実装・receipt再導出検査・pytest・GPUをまだ実行していない。行ったのは9教師/原raw78引用のread-only照合と候補の可逆投影だけ。旧chair6行bytes一致、日常3のcandidate/本文/根拠順/意味は不変、nativeへの復元3/3一致。これは4Bの新生成や採用成功ではない。
+
+承認後、上記APIの既存preparation/model/daily/proposalテストを含む限定回帰、旧chairのprompt/全receipt/snapshot/本文/問い/3更新の等値、新rawのreceipt再導出、改ざんraw/native拒否、重複/overlap/欠落/source/field不一致、絵文字・結合文字・改行のscalar位置、unknown finish/timeout優先を確認する。既存daily5claim/4関係と短い自然な反応のreaderは不変。合成新rawで意味→実本文→隔離SQL保存/意味保存後中断→再開/非生成再読まで通す。失敗時はGPUへ進まない。
+
+### 同じ判断範囲に含める有限学習と保存再読
+
+CPU/実tokenizer条件が成立した場合だけ、未採用candidate affea8a7094832dfbac27343af87a9ad1b302f61616c19ead33d1dcc7bf59cc3を開始点として新しい一回の試験を行う。旧76309/5f0/affeaと原raw/旧18+12planを保持し、終了planの再開はしない。
+
+- 凍結候補9行：旧chair6を各1回、新形式daily3を各4回、計18更新。全assistant JSON＋実EOSのloss、promptは除外。受け取り本文も元教師のまま教える。追加倍率/疎mask/途中探索なし。
+- 新AdamW、LR5e-5、decay0、clip1、batch1、accumulation1、seed20261024、既存LoRA32tensor/base/tokenizer。最初の9行をshuffle後、daily3の追加3周を同じrngでshuffle。
+- context8192/input5632/output2560、実tokenizerで超過・切捨て・EOS不整合があれば停止。前新生成0、保存・非学習reload後のFIT新生成9。
+- 学習/保存reload/FIT合計1800秒以内。全9の無補修実rawが意味/本文採用へ通り、chairの実問い/訂正3更新を維持した場合だけ、学習外の別identity2件を新形式で各1call、実service→隔離SQL保存→GET/startの非生成再読へ進む。後段900秒以内、最大2call。成功後の追加承認往復は不要。
+- 記録単価$0.26/hのprocess按分は最大45分/$0.195。準備/回収/継続保持/税等を含む請求総額ではない。18回は最適回数の実証値ではなく、新形式と受け取りの有限適合試験の上限。
+- 不一致/OOM/非有限/長さ/期限/意味または本文不採用で終了、追加update/LR探索/失敗要求再call/reader緩和/旧raw補修なし。失敗時も重み・全原結果をPod外へ回収する。GPUはSTOP/再起動/削除せず保持。
+
+### 判断範囲・今回の効果・残件
+
+この案はモデル出力形式・教示・教師投影・停止後の新試験を変更するため、Rule18§11.3 LEVEL_3の具体判断が必要。過去の追加12更新承認を流用しない。今回の継続依頼を根拠に診断・レビュー可能な案と候補データまで作成したが、未承認の製品変更/新GPU試行は0。
+
+提案の実装・CPU・実tokenizer・上限18更新/FIT9・成功時2call保存再読・回収までを一つのscopeとし、承認後のscope内の実装詳細/byte hash固定だけで再承認を求めない。範囲/基準/費用枠の拡張が必要なら実行前に止める。通常アプリ/HTTP/Auth/RN/本人DB/本番/Supabase変更/Render配置/有料差/他core/商品受入れを含めない。
+
+実環境はCodex Work/GPT-6、root華恋が調査/統合/反映owner、別文脈agent2枠はread-only意見。独立Pro/Ultra/human受入れとは呼ばない。System Context最新cacheは本作業でも未成立でfresh原本fallbackを使用。STRUCTURE_MAP_DELTA_NONE（今回、未承認案・候補データのみで製品構造変更0）。商品credit0、正式0/3、全体54.50％据置。原実結果の意味7/9・本文6/9を新案の成功へ上書きしない。次は本案の判断であり、自動試行しない。

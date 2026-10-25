@@ -1,0 +1,213 @@
+{
+  "scope": "READ_ONLY_REPRESENTATION_FEASIBILITY_NOT_ADMISSION_NOT_MODEL_SUCCESS",
+  "source_commit": "49511071364bee1df1c4ecd43def61dd08d6c1a0",
+  "api_commit": "bd356566d37370911e14dab2819ab25a619c6353",
+  "teacher_sha256": "07644176add91ed858f1de2ac2a8d73b4ceed02814f9962c70af1b850c366942",
+  "raw_sha256": "6eff35d6042764f8437af8dbb11b82441d2c9fc5818095a670fb68feb3ce96cb",
+  "model_calls": 0,
+  "training_updates": 0,
+  "actual_receipt_replays": 0,
+  "actual_semantic_or_body_tests": 0,
+  "cases": [
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "evidence_rows": 6,
+      "teacher_unique_quote_rows": 6,
+      "raw_unique_quote_rows": 6,
+      "teacher_projection_roundtrip_equal": true,
+      "raw_coordinate_differences": [],
+      "raw_reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+      "teacher_reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。"
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "evidence_rows": 12,
+      "teacher_unique_quote_rows": 12,
+      "raw_unique_quote_rows": 12,
+      "teacher_projection_roundtrip_equal": true,
+      "raw_coordinate_differences": [],
+      "raw_reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+      "teacher_reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。"
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "evidence_rows": 6,
+      "teacher_unique_quote_rows": 6,
+      "raw_unique_quote_rows": 6,
+      "teacher_projection_roundtrip_equal": true,
+      "raw_coordinate_differences": [],
+      "raw_reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+      "teacher_reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。"
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "evidence_rows": 12,
+      "teacher_unique_quote_rows": 12,
+      "raw_unique_quote_rows": 12,
+      "teacher_projection_roundtrip_equal": true,
+      "raw_coordinate_differences": [],
+      "raw_reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+      "teacher_reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。"
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "evidence_rows": 6,
+      "teacher_unique_quote_rows": 6,
+      "raw_unique_quote_rows": 6,
+      "teacher_projection_roundtrip_equal": true,
+      "raw_coordinate_differences": [],
+      "raw_reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+      "teacher_reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。"
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "evidence_rows": 12,
+      "teacher_unique_quote_rows": 12,
+      "raw_unique_quote_rows": 12,
+      "teacher_projection_roundtrip_equal": true,
+      "raw_coordinate_differences": [],
+      "raw_reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。",
+      "teacher_reception": "捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。"
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "evidence_rows": 8,
+      "teacher_unique_quote_rows": 8,
+      "raw_unique_quote_rows": 8,
+      "teacher_projection_roundtrip_equal": true,
+      "raw_coordinate_differences": [
+        {
+          "row": 1,
+          "field": "start",
+          "actual": 7,
+          "located": 6,
+          "quote": "うどんを作って"
+        }
+      ],
+      "raw_reception": "あったかいものを食べて、少し落ち着いたのですね。",
+      "teacher_reception": "あったかいものを食べて、少し落ち着けてよかったです。"
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "evidence_rows": 8,
+      "teacher_unique_quote_rows": 8,
+      "raw_unique_quote_rows": 8,
+      "teacher_projection_roundtrip_equal": true,
+      "raw_coordinate_differences": [],
+      "raw_reception": "あったかいものを食べて、少し落ち着いたのですね。",
+      "teacher_reception": "あったかいものを食べて、少し落ち着けてよかったです。"
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "evidence_rows": 8,
+      "teacher_unique_quote_rows": 8,
+      "raw_unique_quote_rows": 8,
+      "teacher_projection_roundtrip_equal": true,
+      "raw_coordinate_differences": [
+        {
+          "row": 1,
+          "field": "start",
+          "actual": 5,
+          "located": 6,
+          "quote": "うどんを作って"
+        },
+        {
+          "row": 6,
+          "field": "start",
+          "actual": 11,
+          "located": 10,
+          "quote": "作って食べた"
+        }
+      ],
+      "raw_reception": "あったかいものを食べて、少し落ち着いたのですね。",
+      "teacher_reception": "あったかいものを食べて、少し落ち着けてよかったです。"
+    }
+  ],
+  "summary": {
+    "cases": 9,
+    "evidence_rows": 78,
+    "teacher_roundtrip_cases": 9,
+    "raw_coordinate_integers_different": 3,
+    "reception_different_cases": 3
+  },
+  "overlap_examples": [
+    {
+      "text": "あああ",
+      "quote": "ああ",
+      "all_starts": [
+        0,
+        1
+      ]
+    },
+    {
+      "text": "abcabc",
+      "quote": "abc",
+      "all_starts": [
+        0,
+        3
+      ]
+    },
+    {
+      "text": "abc",
+      "quote": "x",
+      "all_starts": []
+    },
+    {
+      "text": "🙂食べた",
+      "quote": "食べた",
+      "all_starts": [
+        1
+      ]
+    }
+  ],
+  "proposed_projection_checks": [
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-INITIAL",
+      "whole_row_bytes_unchanged": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION",
+      "whole_row_bytes_unchanged": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-INITIAL",
+      "whole_row_bytes_unchanged": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION",
+      "whole_row_bytes_unchanged": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-INITIAL",
+      "whole_row_bytes_unchanged": true
+    },
+    {
+      "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION",
+      "whole_row_bytes_unchanged": true
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-01-INITIAL",
+      "native_candidate_unchanged": true,
+      "source_material_unchanged_except_character_map_removal": true,
+      "teacher_evidence_roundtrip_equal": true,
+      "explicit_new_top_level_consistent": true
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-02-INITIAL",
+      "native_candidate_unchanged": true,
+      "source_material_unchanged_except_character_map_removal": true,
+      "teacher_evidence_roundtrip_equal": true,
+      "explicit_new_top_level_consistent": true
+    },
+    {
+      "id": "TRAIN-DAILY-CALM-03-INITIAL",
+      "native_candidate_unchanged": true,
+      "source_material_unchanged_except_character_map_removal": true,
+      "teacher_evidence_roundtrip_equal": true,
+      "explicit_new_top_level_consistent": true
+    }
+  ],
+  "proposed_projection_sha256": "cbc9ab0a48c81601f59141d5e28c930979025b4acd4d4e4180fd2f340334174e",
+  "implementation_tests_executed": false,
+  "source_reader_fact": "emlis_ai_grounded_observation_gate.py:10061-10130 rejects echo reception; unchanged and considered correct"
+}
