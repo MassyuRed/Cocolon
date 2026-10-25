@@ -2216,4 +2216,18 @@ Mashの「4B学習＋CMEE接続を続けて」を受領。全機能00全文、�
 
 開始adapter9b845eced…から、新AdamW/LR5e-5・既存LoRA32tensorだけ・全文assistant JSON＋EOS lossで6行×2pass＝12更新。保存→非学習reload→FIT6生成を一度、before生成0。別の未学習identityはgold/priorを持たず、実serviceの初回ASKとactual priorで最大2callを一度だけ検証する。FIT6と動的service評価を別集計し、同chairのID保持を未知言語品質・商品受入れへ換算しない。学習1800秒/按分$0.13、評価900秒/$0.065、保持・準備・回収・税別。追加更新/LR探索/失敗model再callは自動実行しない。GPUをSTOP/再起動/削除しない。
 
-状態：CPU候補と有限source/planを固定、GPU学習・新実model評価は未実行。完了後の実結果でこの段落を置換する。STRUCTURE_MAP_DELTA_NONE（教材と一回診断sourceのみ、既存product/API/SQL/DTO/RNの責務不変）。観測会は今回不要。商品credit0/正式0/3/54.50％据置。
+### 12更新と最初の実service評価の結果（この二planは終了）
+
+12更新・保存/非学習reload・after6生成を857.759001528秒で完走。LoRA32tensorのみ、新optimizerで厳密な途中再開ではない。全6JSON/stop/EOS、意味/本文5/6（初回3/3、訂正2/3）。加重NLL0.01273694→0.00205076、全6低下だがbefore生成0で同入力の生成改善率は計算しない。採用5件は各teacher JSONと完全一致し、原教師の本文を維持する。残る03訂正はsource/意味/本文/参照/3更新が一致し、evidence[7..11].endだけ38→77、47→76、91→92、71→86、91→92となりINVALID_EVIDENCE。未採用を成功へ数えない。peak allocated16.171474/reserved18.779297GiB。
+
+開始9b845から新adapter adae463befe9c465fa6d3a465b29bdc66dafcf41f75328277aa90e2149eddf3dを保存。step12時点のarchive f07033f3…/3,481,591bytes/19member・全32F32有限をPod外照合し保持。これはFIT生成前の重みcheckpointで、FIT6完了は別のevidence archive951dca99…/101,150bytes/24memberを照合する。元重み/元教材/生成中の保存adapter不変。原本は[trial](../observation_learning/trials/2026-10-25-service-binding/README.md)。
+
+学習に入れなかったID01の実service最大2callは204.712963248秒/RPC18で終了。初回2059in/1375out/70.505570秒は意味/本文/ASK保存・GET/start非生成再読が成立。訂正5027in/2227out/112.900494秒はJSON/EOS正常だがINVALID_EVIDENCE。実priorと実問いを使用、source/adapter/API不変。根拠12→10（必要3行欠落/結合quote1追加）、引用座標不正2、配列範囲外のevidence_indexes19箇所。UUIDと、根拠索引を除く意味/本文/3更新fieldは期待teacherと一致する。訂正後の意味保存・中断再開は未到達。raw修復/同評価再call0でこのplanを終了した。export archive5bc34266…/68,863bytes/28member。
+
+起動前のvalidate-only一回は、Pod旧packのdataset_manifestだけがGitHub固定原本と異なるためmodel0/学習0で停止。旧packを変更せず固定6fileの参照用copyを作り、同じ新planの初回GPU学習を行った。CPU回収時にはarchive hashの画面転記誤りで一回照合失敗/未展開、続くconsumerはraw未展開で停止した。実hashをPod側と照合してから展開・consumerを一回完走。いずれも学習/生成/原rawへの追加効果0。監視表示commandの存在しないparse_error key参照一回も同じく効果0。
+
+### 観測された根拠不良を直接直す次のcandidate（準備中）
+
+currentのMash継続指示の同じ未完了に対し、旧12/2planや使用済みID01を再実行せず、新adae重みから同じ凍結6教師へ6更新の別candidateを作る。eval1には根拠表欠落と範囲外参照もあるため、end値だけの学習案は実行せず、top-level evidence表全文＋candidate内evidence_indexesへlossを絞る。context内のteacher全体を保持し、他valueはlossから除く。原teacher/意味/本文/reader/APIは変更0。保存/非学習reload/FIT6と、未学習fresh ID02による実service最大2callを新plan/newoutputで一回確認する。ID01を新教師へ混ぜず、旧rawをgoldへ昇格しない。これも既知chairの束縛確認で、独立言語品質ではない。現時点で新candidateのGPU効果0。
+
+STRUCTURE_MAP_DELTA_NONE（教材と一回診断sourceのみ、既存product/API/SQL/DTO/RNの責務不変）。観測会は今回不要。GPU停止/再起動/削除/新Pod/charge0。商品credit0/正式0/3/54.50％据置。

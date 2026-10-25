@@ -1,0 +1,20 @@
+{
+  "pid": 372822,
+  "source_commit": "cce9616599ba1e008f04241e71e182a5a481d78d",
+  "command": [
+    "/usr/local/bin/python",
+    "/workspace/cocolon_4b_service_binding_pack_20261025/run_service_binding_fit.py",
+    "--directory",
+    "/workspace/cocolon_4b_service_binding_pack_20261025",
+    "--legacy-pack",
+    "/workspace/cocolon_4b_service_binding_legacy_reference_20261025",
+    "--initial-adapter",
+    "/workspace/cocolon_4b_reception_fit4_lr5_20261025/adapter",
+    "--source-commit",
+    "cce9616599ba1e008f04241e71e182a5a481d78d"
+  ],
+  "max_updates": 12,
+  "max_fit_generations": 6,
+  "max_seconds": 1800,
+  "gpu_stop": false
+}

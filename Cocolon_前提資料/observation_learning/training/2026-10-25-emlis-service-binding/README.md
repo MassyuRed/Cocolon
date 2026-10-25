@@ -34,3 +34,9 @@
 `eval_fixture.json`は学習に入れないuser/input identity・日時と既知本人入力/訂正文だけ。gold/priorなし。`run_service_identity_holdout.py`は実serviceが作るthread/answer ID、実初回ASKと採用済みpriorで最大2callを一度行い、訂正意味の保存直後に中断して明示再開、保存本文の非生成再読を確認します。新学習重みhashをrootが固定するまで`eval_plan.json`は実行を拒否します。15分/process按分$0.065以内、offline attempt180秒/source150秒。合成smokeは候補2・RPC30で成功済みですが、実modelの成功ではありません。
 
 全体文脈8192、今回だけ生成2560/prompt5632、raw補修・追加更新/LR探索・自動model再call0。GPU停止/再起動/削除0、保持課金はprocess予算と別です。通常application/稼働DB/Render/DTO/RN/merge/deploy変更なし。STRUCTURE_MAP_DELTA_NONE。実結果は最新weekly§36と追記するtrialへ戻します。
+
+## 12更新と実service ID01の結果
+
+12更新・保存/非学習reload・FIT6は完走、意味/本文5/6（初回3/3、訂正2/3）、全JSON/EOS6/6。実service ID01は初回保存再読まで成立し、訂正は根拠表欠落/座標/参照不正でINVALID_EVIDENCE。この二planは終了・再実行しません。原本は[trial](../../trials/2026-10-25-service-binding/README.md)、詳細は最新weekly§36。
+
+同じ残件へ、[根拠表・参照の6更新候補](evidence_end_fit6/README.md)を新source/plan/outputとして準備しました。原teacher/reader/rawは変更せず、ID01を学習へ取り込みません。次のservice確認はfresh ID02です。

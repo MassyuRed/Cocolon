@@ -1,0 +1,12 @@
+{"step": 1, "pass": 1, "id": "TRAIN-SERVICE-CHAIR-02-INITIAL", "loss": 0.0039651840925216675, "gradient_norm": 0.8812376856803894}
+{"step": 2, "pass": 1, "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION", "loss": 0.017916392534971237, "gradient_norm": 1.340329647064209}
+{"step": 3, "pass": 1, "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION", "loss": 0.007935304194688797, "gradient_norm": 1.4101206064224243}
+{"step": 4, "pass": 1, "id": "TRAIN-SERVICE-CHAIR-01-INITIAL", "loss": 0.0046303714625537395, "gradient_norm": 1.686062216758728}
+{"step": 5, "pass": 1, "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION", "loss": 0.004203499294817448, "gradient_norm": 0.5963758826255798}
+{"step": 6, "pass": 1, "id": "TRAIN-SERVICE-CHAIR-03-INITIAL", "loss": 0.0033313166350126266, "gradient_norm": 0.8047617673873901}
+{"step": 7, "pass": 2, "id": "TRAIN-SERVICE-CHAIR-03-CORRECTION", "loss": 0.0031606140546500683, "gradient_norm": 0.9414188861846924}
+{"step": 8, "pass": 2, "id": "TRAIN-SERVICE-CHAIR-02-CORRECTION", "loss": 0.004255768842995167, "gradient_norm": 0.7010573744773865}
+{"step": 9, "pass": 2, "id": "TRAIN-SERVICE-CHAIR-02-INITIAL", "loss": 0.0019552139565348625, "gradient_norm": 0.06469039618968964}
+{"step": 10, "pass": 2, "id": "TRAIN-SERVICE-CHAIR-01-INITIAL", "loss": 0.0020412325393408537, "gradient_norm": 0.08044205605983734}
+{"step": 11, "pass": 2, "id": "TRAIN-SERVICE-CHAIR-03-INITIAL", "loss": 0.0019964983221143484, "gradient_norm": 0.05406606197357178}
+{"step": 12, "pass": 2, "id": "TRAIN-SERVICE-CHAIR-01-CORRECTION", "loss": 0.002489654580131173, "gradient_norm": 0.23586879670619965}
