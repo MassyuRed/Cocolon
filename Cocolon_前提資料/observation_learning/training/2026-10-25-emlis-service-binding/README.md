@@ -40,3 +40,7 @@
 12更新・保存/非学習reload・FIT6は完走、意味/本文5/6（初回3/3、訂正2/3）、全JSON/EOS6/6。実service ID01は初回保存再読まで成立し、訂正は根拠表欠落/座標/参照不正でINVALID_EVIDENCE。この二planは終了・再実行しません。原本は[trial](../../trials/2026-10-25-service-binding/README.md)、詳細は最新weekly§36。
 
 同じ残件へ、[根拠表・参照の6更新候補](evidence_end_fit6/README.md)を新source/plan/outputとして準備しました。原teacher/reader/rawは変更せず、ID01を学習へ取り込みません。次のservice確認はfresh ID02です。
+
+## 最新実結果
+
+重点6更新・保存/非学習reload後、凍結同6入力の意味/本文は5/6→6/6。fresh ID02の実model2call/隔離SQL30RPCで、初回/訂正後の保存・意味保存後中断/明示再開・GET/start/同key回答の非生成再読まで成立しました。元12更新・ID01の不採用は保持し、それぞれの有限planは終了・再実行しません。本文の新しい自然さや一般言語品質の証明には数えません。詳細は最新weekly§36とtrial/2026-10-25-service-binding、重み76309b86…はPod外回収/32tensor照合/保持済み。GPUは稼働保持します。

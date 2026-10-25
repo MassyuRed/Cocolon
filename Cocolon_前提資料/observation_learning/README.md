@@ -1,6 +1,6 @@
 # Mashの観測技術を継承するための記録
 
-**現在の直接作業：** [承認済み期限実装と実service結果§35](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-approved-offline-service-actual-result)。Mash承認のAPI95d00bで明示offline MODEL_PROFILEだけattempt最大180秒/source待機150秒を実装し、通常Q2/Q3/APPLICATION30秒とSQL期限/CASを維持。timeout HOLD保存の旧revision不整合も同service内で最小修復し、CPU対象3file114 PASS/FAIL0/SKIP0。実4B→ModelCandidateSource→既存service→隔離SQLの新規2callを155.760674秒で実行。初回67.859530秒は意味/本文/実問いの保存とGET/start非生成再読が成立。訂正66.391389秒は1306token/EOS終了だがJSON閉鎖/shape/根拠/更新構造が崩れINVALID_FORMATで不採用。本人役の訂正文は保存、意味未更新、旧本文current解除、ANSWER_UNREFLECTED/can_retry=false。訂正後の意味保存・中断再開には未到達で、実service一往復全体は未成立。原raw/teacher/prompt/reader/重みは変更せず、追加生成/追加学習0で今回planを終了。次は学習時と実serviceの入力差分を使い、既存chair教師を正規service ID/日時/actual priorへ再束縛するCPU候補と、閉形・source区別・3更新の検証を整える。UUID単独が原因とは未実証。新しい観測会はこの問題には不要。GPUは稼働保持/停止操作0、商品credit0/正式0/3/54.50％を維持。
+**現在の直接作業：** [承認済み期限実装と実service結果§35](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-approved-offline-service-actual-result)。API95d00bの明示offline attempt180秒/source150秒・通常30秒/SQL期限/CASを保持。既存chair1題2段階を正規service ID3組へ再束縛した凍結6教師に、全文12更新＋根拠表/参照重点6更新を実施し、保存/非学習reload後の同6入力FITは意味/本文5/6→6/6。新adapter76309b86…をPod外照合/保持。最初の学習外ID01は訂正INVALID_EVIDENCEで終了したが、別のfresh ID02の実4B2call/隔離SQL30RPCは210.939656秒で初回ASK・訂正3更新/END・意味保存後中断/明示再開・初回/最終GET/startとsame-key回答の非生成再読まで成立。raw/teacher/reader/API/SQL contractの修復・緩和0。同processの既知chair一往復であり、cold restart/未知言語/通常app/実Auth・端末/商品受入れは未成立。観測会は今回不要、GPU稼働保持/STOP0、商品credit0/正式0/3/54.50％据置。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
@@ -60,11 +60,11 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 
 原対話、お手本、本人役の回答、訂正の前後を保持する。Mashの原文、華恋の編集/補充、架空の例を区別し、生成に失敗したモデル本文をそのまま正解へ昇格しない。未提示の設定を当てる教材にせず、必要な問いと回答から実際に理解が変わる過程を扱う。既存の凍結した教材や評価を黙って書き換えない。本人DBから新たな学習材料を勝手に取得・送信しない。
 
-既存9教師はEmlis向けで、4B実学習の固有targetは2件で、直近は同2target×16周/32update。Piece/Analysisの完成教師は0。未教示の用途が同じ教材の反復だけで完成するとは見込まない。一方、教材作りを際限なく増やしたり、Mashへ毎回同じ説明や新しい観測会を求めたりせず、既存の確認済み材料を先に使う。
+既存9教師はEmlis向け。元の4B native教師はchair1題の2段階で、今回それを正規service identity3組へ束縛した6行を使い12＋6更新した。独立した言語事例は1題のままであり、6題へ増えたとは数えない。Piece/Analysisの完成教師は0。未教示の用途が同じ教材の反復だけで完成するとは見込まない。一方、教材作りを際限なく増やしたり、Mashへ毎回同じ説明や新しい観測会を求めたりせず、既存の確認済み材料を先に使う。
 
-直近の[新入力32更新実結果](trials/2026-10-24-qwen4b-cmee-diagnostic/unicode_fit32_20261025/README.md)では、A4500 20GBで保存adapterから同2targetへ32update、保存・非学習再読込・after2生成が完走し、追加重みはPod外回収/照合/永続保管済み。**意味0/2→2/2、本文0/2→1/2**。全根拠/参照/訂正3更新が整合し初回本文/問いは成立、訂正後の受け取り第2文が未成立。学習lossの低下、生成数、GPU成功を観測品質や三中核の完成へ置き換えない。既読のproxy6を未使用入力の品質評価へ数えない。
+32更新時点の履歴である[新入力32更新実結果](trials/2026-10-24-qwen4b-cmee-diagnostic/unicode_fit32_20261025/README.md)では、A4500 20GBで保存adapterから同2targetへ32update、保存・非学習再読込・after2生成が完走し、追加重みはPod外回収/照合/永続保管済み。**意味0/2→2/2、本文0/2→1/2**。全根拠/参照/訂正3更新が整合し初回本文/問いは成立、訂正後の受け取り第2文が未成立。学習lossの低下、生成数、GPU成功を観測品質や三中核の完成へ置き換えない。既読のproxy6を未使用入力の品質評価へ数えない。
 
-局所診断と受け取りloss4更新の結果はweekly§32〜33の履歴。LR5の同4更新で既知意味/本文2/2、実モデル2callのoffline一往復まで成立済み。最新は上段とweekly§34のEngine保存再開/通常service期限切り分けを優先する。旧学習/診断planは再開しない。
+局所診断と受け取りloss4更新の結果はweekly§32〜33の履歴。LR5の同4更新で既知意味/本文2/2、実モデル2callのoffline一往復まで成立済み。§34のEngine保存再開/期限切り分けと§35の最初のservice試験は履歴で、最新は上段とweekly§36の正規service束縛学習/実保存再読を優先する。旧学習/診断planは再開しない。
 
 ### 各作業の開始前に結び付けること
 
@@ -81,7 +81,9 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 
 ## 現在地（2026-10-25・三中核の開発基準選定、本番は未成立）
 
-**今回の直接作業：** [承認済み期限実装と実service結果§35](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-approved-offline-service-actual-result)。Mash承認のAPI95d00bで明示offline MODEL_PROFILEだけattempt最大180秒/source待機150秒を実装し、通常Q2/Q3/APPLICATION30秒とSQL期限/CASを維持。timeout HOLD保存の旧revision不整合も同service内で最小修復し、CPU対象3file114 PASS/FAIL0/SKIP0。実4B→ModelCandidateSource→既存service→隔離SQLの新規2callを155.760674秒で実行。初回67.859530秒は意味/本文/実問いの保存とGET/start非生成再読が成立。訂正66.391389秒は1306token/EOS終了だがJSON閉鎖/shape/根拠/更新構造が崩れINVALID_FORMATで不採用。本人役の訂正文は保存、意味未更新、旧本文current解除、ANSWER_UNREFLECTED/can_retry=false。訂正後の意味保存・中断再開には未到達で、実service一往復全体は未成立。原raw/teacher/prompt/reader/重みは変更せず、追加生成/追加学習0で今回planを終了。次は学習時と実serviceの入力差分を使い、既存chair教師を正規service ID/日時/actual priorへ再束縛するCPU候補と、閉形・source区別・3更新の検証を整える。UUID単独が原因とは未実証。新しい観測会はこの問題には不要。GPUは稼働保持/停止操作0、商品credit0/正式0/3/54.50％を維持。
+**今回の直接作業：** [service束縛学習と実保存再読§36](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-service-binding-fit12)。API95d00bの明示offline attempt180秒/source150秒・通常30秒/SQL期限/CASを保持。既存chair1題2段階を正規service ID3組へ再束縛した凍結6教師に、全文12更新＋根拠表/参照重点6更新を実施し、保存/非学習reload後の同6入力FITは意味/本文5/6→6/6。新adapter76309b86…をPod外照合/保持。最初の学習外ID01は訂正INVALID_EVIDENCEで終了したが、別のfresh ID02の実4B2call/隔離SQL30RPCは210.939656秒で初回ASK・訂正3更新/END・意味保存後中断/明示再開・初回/最終GET/startとsame-key回答の非生成再読まで成立。raw/teacher/reader/API/SQL contractの修復・緩和0。同processの既知chair一往復であり、cold restart/未知言語/通常app/実Auth・端末/商品受入れは未成立。観測会は今回不要、GPU稼働保持/STOP0、商品credit0/正式0/3/54.50％据置。
+
+[凍結6教師と実行source](training/2026-10-25-emlis-service-binding/README.md)／[全実結果](trials/2026-10-25-service-binding/README.md)。
 
 華恋の選定は4Bの共通基盤＋core別教示＋既存CMEE。0.6/0.8/1.7/2B・別4Bまで検討し、学習費と常時推論費を分離する。Mashの最新指示により、ローカル運用先はWindows／Macとも候補で未選定。既存M4 16GBの4bit案は検討材料であり、決定済みの移行先ではない。自前adapterのmerge/変換、量子化後の三中核品質、実入力・同時数・24時間運用は未確認。既存9教師はEmlisのみ、4B実診断は2教師/2update、Piece/Analysis完成教師0。単純なepoch増加を先行せず、各coreの完成実演と未使用入力で評価する。旧3070は今回fresh画面で既に停止表示、華恋の停止操作0。新A4500 20GB／Secure・表示$0.26/h、Pod y0eb0w0qn6nks0で修正版2教師/2update・保存reload・前後16生成が完走。peak allocated14.970/reserved17.588GiB、全24member/32tensor回収照合/永続保管済み。NLL0.251117→0.245189だがCMEE意味/本文は前後0/2。初回shape/自然文surface、訂正後の旧意味、proxy2件打切りが残る。[全実結果](trials/2026-10-24-qwen4b-cmee-diagnostic/repaired_a4500_20261025/README.md)。診断process5400秒/計画$1と今日のGPU保持課金を分離し、自動Stop/削除を行わない。本番変更0。正式0/3・54.50％据置。
 

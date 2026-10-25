@@ -2226,8 +2226,19 @@ Mashの「4B学習＋CMEE接続を続けて」を受領。全機能00全文、�
 
 起動前のvalidate-only一回は、Pod旧packのdataset_manifestだけがGitHub固定原本と異なるためmodel0/学習0で停止。旧packを変更せず固定6fileの参照用copyを作り、同じ新planの初回GPU学習を行った。CPU回収時にはarchive hashの画面転記誤りで一回照合失敗/未展開、続くconsumerはraw未展開で停止した。実hashをPod側と照合してから展開・consumerを一回完走。いずれも学習/生成/原rawへの追加効果0。監視表示commandの存在しないparse_error key参照一回も同じく効果0。
 
-### 観測された根拠不良を直接直す次のcandidate（準備中）
+### 根拠表・参照の重点6更新とfresh ID02の実結果
 
-currentのMash継続指示の同じ未完了に対し、旧12/2planや使用済みID01を再実行せず、新adae重みから同じ凍結6教師へ6更新の別candidateを作る。eval1には根拠表欠落と範囲外参照もあるため、end値だけの学習案は実行せず、top-level evidence表全文＋candidate内evidence_indexesへlossを絞る。context内のteacher全体を保持し、他valueはlossから除く。原teacher/意味/本文/reader/APIは変更0。保存/非学習reload/FIT6と、未学習fresh ID02による実service最大2callを新plan/newoutputで一回確認する。ID01を新教師へ混ぜず、旧rawをgoldへ昇格しない。これも既知chairの束縛確認で、独立言語品質ではない。現時点で新candidateのGPU効果0。
+currentのMash継続指示の同じ未完了に対し、旧12/2planや使用済みID01を再実行せず、新adae重みから同じ凍結6教師へ6更新の別candidateを作った。eval1には根拠表欠落と範囲外参照もあるため、end値だけの学習案は実行せず、top-level evidence表全文＋candidate内evidence_indexesへlossを絞った。context内のteacher全体を保持し、他valueはlossから除く。原teacher/意味/本文/reader/APIは変更0。保存/非学習reload/FIT6と、未学習fresh ID02による実service最大2callを新plan/newoutputで一回確認する。ID01を新教師へ混ぜず、旧rawをgoldへ昇格しない。これも既知chairの束縛確認で、独立言語品質ではない。この新candidateは6更新を完走し、保存/非学習reload後の同6入力FITで意味/本文6/6を確認した。
 
 STRUCTURE_MAP_DELTA_NONE（教材と一回診断sourceのみ、既存product/API/SQL/DTO/RNの責務不変）。観測会は今回不要。GPU停止/再起動/削除/新Pod/charge0。商品credit0/正式0/3/54.50％据置。
+
+
+重点6更新は727.066826466秒、peak allocated16.040695/reserved19.109375GiB。新adapter76309b86c6a76ed61cf3600f4beb1f45c658fac3bb3e3add4284ef54259276c5。選択範囲3798tokenのNLL0.000899329→0.000203828（旧全文NLLとは別指標）。同じ凍結6入力で旧FIT12の保存rawをbeforeとして再利用し、既存成功5rawは全文不変、03訂正のend5整数だけ77→38/76→47/92→91/86→71/92→91へ一致して採用5/6→6/6。6件の本文表現は不変で、新しい自然さ・観測の深さの実証ではない。
+
+**fresh ID02の実保存一往復は成立。** 直前のID01を再実行せず、未学習ID02/日時で新model2call、210.939656072秒/隔離SQL30RPC。初回2056in/1385out/69.504447秒、訂正5041in/2379out/119.395573秒、両JSON/EOS正常。実初回ASKと実priorを使い、CLAIM REVISE/RELATION REVISE/UNKNOWN INVALIDATE_GAPの3更新を保存。意味commit後の作者直前に同processでCancelledErrorを一回注入し、SQL上のRESPONSE_FAILED/worker_interrupted/meaning_updated=true/current本文Noneを保持。同じmeaning eventから明示resume1回でREFINED/COMPLETED/ENDとなった。model/source再取得0、初回・最終GET/startはcan_write以外同DTO、同key回答も元answer attempt指定以外同DTO、前後thread/events不変。raw=receipt=採用packet、source/adapter/API95d00b不変。独立read監査27整合項目も成立、新実行なし。cold process restart・通常app/実Auth・HTTP・RN・本人端末の成功へは換算しない。
+
+新重みarchive3caac288…/3,509,912bytes/20member・全32F32有限、重点FIT evidence bdb51d15…/127,620bytes/24member、ID02 export95aff777…/129,782bytes/33memberをPod外照合。重み本体は永続保持、全raw/意味/本文/問い/ANSWER/receipt/SQL状態/実行条件/検査結果はtrialへ保存する。FIXED FIT consumerは1,239,780bytesを6case＋indexへlossless分割し、元JSON全文の完全再構成/hash一致も確認した。モデル本体base全重み/optimizer/RNGはarchiveに含まない。
+
+今回の実行合計は全文12＋重点6更新、FIT生成12＋service生成4（計16）、新before生成0。閉じたplanの再実行/失敗modelの同一要求retryは0。4process合計2000.478447313秒、最終確認単価$0.26/h按分約$0.144479は準備/回収/継続保持/税等を含む請求総額ではない。GPUはA4500/20,470MiB/使用1MiBを完了後確認して保持、STOP/再起動/削除/新Pod/charge0。API製品code/SQL/reader/prompt/DTO/RN/Render/Supabase/merge/deploy変更0、生成枠以外の受理条件緩和0。
+
+primary outcome=TECHNICAL_CREDIT（既知chairの実4B→既存service→隔離SQL、訂正後保存・同process中断再開・非生成再読まで）。STRUCTURE_MAP_DELTA_NONE。全機能00/観測入口/元pack入口/current01/04/共有設計01へ同じ現在差分を同期。商品credit0/正式0/3/54.50％据置。今回の引用/参照不良に新しい観測会は不要。残件は別場面の意味対応、学習外言語の品質、通常経路/端末/商品受入れ、Windows/Mac未選定の運用/量子化等であり、この単一chairの成功から自動進行しない。

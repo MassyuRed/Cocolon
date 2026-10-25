@@ -1850,8 +1850,8 @@ STRUCTURE_MAP_DELTA_PRESENT。通常API／DB／RN／公開schema／モデル接�
 原本はtrial/service_persistence_20261025、one-shot sourceはpack/persistence_check/check_saved_roundtrip.py。通常service/SQLとEngine file保存を区別する。商品runtime/公開API/DB/RN/三core責務不変、STRUCTURE_MAP_DELTA_NONE。共有設計01の限定案は未適用で、最新weekly§34/全機能00を進行ownerとする。
 
 
-## 2026-10-25 — 承認済みoffline180秒と実service初回保存再読（現在）
+## 2026-10-25 — 正規service束縛学習と訂正後保存再読（現在）
 
-Mash承認のAPI95d00bで明示offline MODEL_PROFILEだけattempt最大180秒/source待機150秒を実装し、通常Q2/Q3/APPLICATION30秒とSQL期限/CASを維持。timeout HOLD保存の旧revision不整合も同service内で最小修復し、CPU対象3file114 PASS/FAIL0/SKIP0。実4B→ModelCandidateSource→既存service→隔離SQLの新規2callを155.760674秒で実行。初回67.859530秒は意味/本文/実問いの保存とGET/start非生成再読が成立。訂正66.391389秒は1306token/EOS終了だがJSON閉鎖/shape/根拠/更新構造が崩れINVALID_FORMATで不採用。本人役の訂正文は保存、意味未更新、旧本文current解除、ANSWER_UNREFLECTED/can_retry=false。訂正後の意味保存・中断再開には未到達で、実service一往復全体は未成立。原raw/teacher/prompt/reader/重みは変更せず、追加生成/追加学習0で今回planを終了。次は学習時と実serviceの入力差分を使い、既存chair教師を正規service ID/日時/actual priorへ再束縛するCPU候補と、閉形・source区別・3更新の検証を整える。UUID単独が原因とは未実証。新しい観測会はこの問題には不要。GPUは稼働保持/停止操作0、商品credit0/正式0/3/54.50％を維持。
+API95d00bの明示offline attempt180秒/source150秒・通常30秒/SQL期限/CASを保持。既存chair1題2段階を正規service ID3組へ再束縛した凍結6教師に、全文12更新＋根拠表/参照重点6更新を実施し、保存/非学習reload後の同6入力FITは意味/本文5/6→6/6。新adapter76309b86…をPod外照合/保持。最初の学習外ID01は訂正INVALID_EVIDENCEで終了したが、別のfresh ID02の実4B2call/隔離SQL30RPCは210.939656秒で初回ASK・訂正3更新/END・意味保存後中断/明示再開・初回/最終GET/startとsame-key回答の非生成再読まで成立。raw/teacher/reader/API/SQL contractの修復・緩和0。同processの既知chair一往復であり、cold restart/未知言語/通常app/実Auth・端末/商品受入れは未成立。観測会は今回不要、GPU稼働保持/STOP0、商品credit0/正式0/3/54.50％据置。
 
-API製品ownerは既存emlis_thread_service.pyのみ、test_cmee_emlis_model_proposal.pyで既存3file114件を確認。新しいsource/DB/DTO/RN ownerは追加しない。実model原本と不採用状態はtrial/service_roundtrip_20261025、有限runnerはF/service_roundtrip_check/run_service_roundtrip.py。STRUCTURE_MAP_DELTA_PRESENTは既存private runtime期限/timeout処理だけ。実modelの訂正後再開と通常application/本人端末は未成立。進行はweekly§35/全機能00。
+元の期限実装とCPU114は§35の履歴。今回API製品code/test/SQL/DTO/RN変更0、既存114の再実行0。教材/一回学習・検証source/実出力だけで、product ownerを新設しないためSTRUCTURE_MAP_DELTA_NONE。全file地図01Aの既存owner責務は不変。最新ownerはweekly§36と全機能00、原本はtrial/2026-10-25-service-binding。
