@@ -4766,3 +4766,12 @@ F/unicode_check/diagnostic.pyとplan.jsonが、保存32更新adapterの非学習
 
 
 reception_checkの実原本はtrials/2026-10-24-qwen4b-cmee-diagnostic/reception_instruction_20261025/。raw/inference_report/actual_plan/diagnostic/preflight/execution_plan/reception_attempt/reception_file_manifest/dataset_manifest/integrity/cmee_result/comparison/README/result.jpgに加え、restored_prompt_replay.jsonは旧実rawの新生成なし互換確認、next_local_difference.jsonはCPU文字列比較を所有する。候補promptは退行で不採用、model_candidate_sourceは学習時a3e82 exact bytesへ復元（API7a4dc32、全tree同一）。商品構造/採用条件差分なし。現在の残件と次の局所診断はweekly§31が所有する。
+
+
+### 2026-10-25 — 局所token診断と受け取りloss4更新の実原本
+
+F/branch_check/diagnostic.py/plan.jsonは固定a8baf0・元messagesで3forwardだけを行う非学習診断（完了済み）。F/reception_fit4/continue_fit.py/plan.jsonは全文input/teacher/EOSを保持してreceptionだけを学ぶ4update一回候補（完了・不採用）。旧planの再利用なし。
+
+trial/branch_check_20261025のresult/READMEは分岐token/rank/p/全token NLL/限界を所有する。trial/reception_fit4_20261025のrun/actual_plan/前後raw/前後reception_nll/前後cmee/comparison/file_manifest/integrity/consumer_provenance/SOURCE_COMMIT/READMEは実4step・2生成・不採用・回収・次作業を所有する。重みbinaryは回収archive libfile_cbe77bb15ad081918e252f6427c8a8c8、GitHubには原raw/結果とhashを置く。固定prompt/保存重みで分岐token1116を実測。誤枝「ようになった」p50.24％/1位、教師「ようになって」p23.73％/2位、gap0.75。既存2教師のreceptionだけを4update/AdamW1e-5で学ぶ一回候補を完走したが、前後raw2/2が同一で実CMEE意味2/2・本文1/2のまま。新e3743d…は不採用、旧a8baf0…を維持。全24member/32F32tensorの重みarchive回収照合/保管済み。 次は保存済み不採用e3743d…の同じ分岐prefixを非学習1forwardだけ測り、旧a8baf0のgap0.75と比較して、4更新で局所順位がどう変わったかを確認する。追加学習・新prompt・教師増量・reader緩和・raw補修・新生成を自動で行わない。
+
+STRUCTURE_MAP_DELTA_NONE（有限診断/学習candidateと結果の所在のみ）。CMEE製品source/API/DB/RN/意味型/採用reader/教師は不変。全体設計01・01B/01C・Piece/Analysis mapは構造差分がなく更新不要。全体現在地とlatest weekly§32へ進行を戻す。

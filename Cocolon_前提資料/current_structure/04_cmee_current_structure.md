@@ -1829,3 +1829,8 @@ STRUCTURE_MAP_DELTA_PRESENT。通常API／DB／RN／公開schema／モデル接�
 最新weekly§31と全機能00を現在地とする。model-visible sourceはnative証明を除く原文/metadata/controlを保持し、全文字のfield_unicode_spansを機械表示。新入力へ既存2target/32updateを行い、保存/非学習reload後の実FITで意味2/2・本文1/2を確認。初回本文/実問いと、訂正後の全根拠/参照/3更新は成立、訂正受け取り第2文は既存有限readerの対象外。説明60token追加の候補は意味1/2・本文0/2で不採用にして、API7a4dc32で学習時a3e82全treeへ戻した。以前の実rawのCPU互換確認2/1は新生成とは数えない。
 
 全source/試験所在は01A末尾、原raw/採否/回収はunicode_fit32_20261025とreception_instruction_20261025。新重みはPod外照合/永続保管、全計画終了済み、GPUは停止しない。通常API/DB/RN/三core責務/意味schema/採用readerは不変。STRUCTURE_MAP_DELTA_NONE、正式0/3・全体54.50％、一般入力/動的実model一往復/通常保存再読/商品品質は未成立。
+
+
+## 2026-10-25 — 局所分岐と受け取りloss4更新の不採用（現在）
+
+固定prompt/保存重みで分岐token1116を実測。誤枝「ようになった」p50.24％/1位、教師「ようになって」p23.73％/2位、gap0.75。既存2教師のreceptionだけを4update/AdamW1e-5で学ぶ一回候補を完走したが、前後raw2/2が同一で実CMEE意味2/2・本文1/2のまま。新e3743d…は不採用、旧a8baf0…を維持。全24member/32F32tensorの重みarchive回収照合/保管済み。次は保存済み不採用e3743d…の同じ分岐prefixを非学習1forwardだけ測り、旧a8baf0のgap0.75と比較して、4更新で局所順位がどう変わったかを確認する。追加学習・新prompt・教師増量・reader緩和・raw補修・新生成を自動で行わない。原本はbranch_check_20261025/reception_fit4_20261025、全pathは01A、進行ownerはweekly§32/全機能00。元teacher/prompt/意味/採用readerと通常商品sourceは不変、STRUCTURE_MAP_DELTA_NONE。GPUは指示まで保持、商品0/正式0/3/54.50％。一般入力/動的実model一往復/通常保存再読/三中核商品品質は未成立。

@@ -2087,3 +2087,21 @@ API2fbc0a2ae7e9b72dc8be2e676c2f4a2c3c81380eでOUTPUT_SPEC.proseへ、reception�
 本作業での新学習は新入力への32update一回だけ、新生成は最初の非学習FIT2＋学習後FIT2＋指示候補FIT2の計6。意味/原文/引用/本文の採用条件・reader/教師本文は変更0。学習後の意味/根拠/訂正3更新は成立したが、訂正reception第2文の既存有限reader不通過、60tokenの変更で引用も崩れる脆さが残る。次は学習時promptと保存a8baf0…を固定し、同一訂正例の局所分岐を診断する。next_local_difference.jsonの先頭差の0始まりindex45はCPUの本文比較で、model token選択確率/rankを未測定のまま推測しない。prompt反復/追加32update/reader条件緩和/未知評価への昇格を自動で行わない。
 
 追加重みarchiveは全24member/32tensor照合・保管済み（libfile_92793ab0520c81918d3cab3790583684）。元4B/optimizer/RNGは含まない。今回の公開済み架空2入力以外の本人DB/Private diary/credential取得送信0。全体現在地/観測目的/pack/current map/file mapを同期し、STRUCTURE_MAP_DELTA_NONE、商品credit0/正式0/3/54.50％据置。通常アプリ/未知入力/動的実model一往復/本人保存再読/三中核品質は残件。観測会は現在の形式/接続問題には不要。GPU停止/再起動/削除/新Pod/charge/新依存/Render/Supabase/merge/deploy0、Mashの指示まで稼働保持する。
+
+
+<a id="20261025-reception-local-fit4"></a>
+## 32. 10/25 — 局所分岐の実測と、受け取りloss4更新候補の不採用
+
+Mashの今回の継続指示に基づくOBSERVED_BLOCKER_MINIMAL_FIX。全機能原本・work rules/必読incident・全体設計/全file地図・最新§31・観測学習意図と実sourceを確認。Codex Work/GPT-6、root華恋が実装/実行/統合/反映を所有し、補助agentは読取reviewのみ。System Contextの最新索引未生成は保持、fresh原本の直接読取で進め、長時間再索引を反復しない。
+
+[固定prompt/保存adapterの局所診断](../observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/branch_check_20261025/README.md)は13.145198253914714秒、生成0/学習0、3forward。実生成token1116でactual「ようになった」p0.5024427175521851/rank1、teacher「ようになって」p0.237337127327919/rank2、gap0.75。argmaxは元rawと一致。全体NLLだけでは局所誤りが見えないことを確認した。原因が形式tokenへの勾配配分だけだという説明は仮説と区別する。
+
+[受け取りloss4更新の全実結果](../observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/reception_fit4_20261025/README.md)。source bc9cd9977d6906da5a2049bb9dcea8693925a76d/API7a4dc32、250.99854906834662秒。全input/teacher/EOSを保持し、reception25/24token以外のlabelsだけ-100。同2teacher×2周/4update・AdamW1e-5・seed20261024・既存LoRA32tensor。保存/非学習reload後の新生成2件は初回1095token、訂正1876token、JSON/stop2/2。reception NLLは初回0.05817059427499771→0.04138212278485298、訂正0.09130503982305527→0.07363682240247726。ただし前後raw_text/parsed packetは2/2完全同一。
+
+同じ固定APIの既存実consume_rawを前後各2件へ通し、意味2/2・本文1/2のまま。初回QUESTION_PENDING/本文/問いは維持、訂正3更新の意味は保つが、同じ受け取り第2文でmodel_surface_not_validated。損失低下を生成改善へ換算せず、新e3743d…は不採用、旧a8baf0…を維持した。新しい推論は学習後2生成のみ、before再利用/CPU消費を新生成へ加算しない。追加retry/update0。
+
+重み入りarchive SHA256 86ac452ac9d50f223d313b4e98409ece317e56c7617f6144bfc3a3c7f52f9344/3,499,146bytes、全24memberのsize/hash・32F32tensor有限性・旧新3file前後hash不変をPod外照合。Pod上でも受領hashとのprogram比較True。永続保管 libfile_cbe77bb15ad081918e252f6427c8a8c8、元4B全重み/optimizer/RNGは含まず厳密途中再開ではない。peak allocated12.606467247009277/reserved13.697265625GiB。表示$0.26/hによる本process按分$0.018127672988269478は準備/保持/回収/税を含む請求総額ではない。
+
+次は保存済み不採用e3743d…の同じ分岐prefixを非学習1forwardだけ測り、旧a8baf0のgap0.75と比較して、4更新で局所順位がどう変わったかを確認する。追加学習・新prompt・教師増量・reader緩和・raw補修・新生成を自動で行わない。
+
+教材不足/4B一般の不適性は未確定。今回の問題には観測会不要。旧18候補/9教師/evalは不変、Piece/Analysis完成教師0。通常application/動的実model往復/本人保存再読/一般入力/量子化/本番可用性は残件。全機能00・観測目的/pack・01A・current01/04を同期し、商品責務/公開API/DB/RN/意味schema/reader不変、STRUCTURE_MAP_DELTA_NONE。BLOCKER_NARROWED、商品credit0/正式0/3/54.50％据置。GPU停止/再起動/削除/新Pod/charge/新依存/Render/Supabase/merge/deploy0、指示まで稼働保持。

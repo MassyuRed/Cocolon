@@ -1,0 +1,10 @@
+{
+  "archive_sha256": "86ac452ac9d50f223d313b4e98409ece317e56c7617f6144bfc3a3c7f52f9344",
+  "archive_bytes": 3499146,
+  "members": 24,
+  "all_member_hashes_valid": true,
+  "finite_f32_tensors": 32,
+  "old_new_adapter_checks_recorded": true,
+  "source_script_sha256": "cb16a4df9e7b8a2ee7bb9cebd1788cb666aa9f30ab9c86a3128790e626757636",
+  "selected_candidate": false
+}

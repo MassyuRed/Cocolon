@@ -1869,3 +1869,8 @@ snapshot schemaは`cocolon.cmee.emlis_semantic_snapshot.v2`、checkpointは`coco
 ## 2026-10-24 — 承認済み4B候補のprivate offline接続
 
 [shared01 actual](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-4b-model-proposal-implemented)／schema05／全file01Aへ同期。API02c0b943の新profileがsource-bound意味、自然本文案の独立読取、実問い→本人訂正、意味先行保存・同proposal再開・完成非生成を所有する。新thin sourceは固定4B/adapter identityとraw/finish/usageをP1へ渡す注入境界だけで、実endpoint/モデル呼出しはない。旧v1/v2・通常application/DTO/DB/RNは維持する。STRUCTURE_MAP_DELTA_PRESENT（private offline owner）。対象backend220 PASSとpack8は限定検証で、商品受入れ0/3・実GPU/重み/学習/通常有効化未実施。chairの構文family以外と一般自由文、他coreの実4Bは未対応。新学習packの実tokenizer/16moduleはCPU確認済み、16/24GB適合は未実証。
+
+
+## 2026-10-25 — 実4B固定2例の現在地
+
+固定prompt/保存重みで分岐token1116を実測。誤枝「ようになった」p50.24％/1位、教師「ようになって」p23.73％/2位、gap0.75。既存2教師のreceptionだけを4update/AdamW1e-5で学ぶ一回候補を完走したが、前後raw2/2が同一で実CMEE意味2/2・本文1/2のまま。新e3743d…は不採用、旧a8baf0…を維持。全24member/32F32tensorの重みarchive回収照合/保管済み。次は保存済み不採用e3743d…の同じ分岐prefixを非学習1forwardだけ測り、旧a8baf0のgap0.75と比較して、4更新で局所順位がどう変わったかを確認する。追加学習・新prompt・教師増量・reader緩和・raw補修・新生成を自動で行わない。初回実問い/本文と訂正3更新の意味は保持するが、一般入力/通常接続/動的一往復/本人保存再読/有料差/商品受入れは未成立。現在の原本はweekly§32/全機能00、source/実raw所在は01A。採用条件・reader/意味schema/API/DB/RN/商品source変更0、STRUCTURE_MAP_DELTA_NONE。GPU保持、商品0/正式0/3/54.50％。
