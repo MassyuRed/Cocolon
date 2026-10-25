@@ -1,4 +1,4 @@
-**現在：** 32update/既存2target×16周を574.555秒で完走。保存済み06ca6381…から新optimizerで継続し、新adapterを保存/非学習reload、32tensor有限/旧3hash不変を確認。教師加重NLL0.221367054→0.054428520。同messagesの実CMEE採用は前0/2→後0/2。beforeは既存raw再利用、after2生成のみ。 [全実結果](../../trials/2026-10-24-qwen4b-cmee-diagnostic/continued_fit32_20261025/README.md)。current continued_fit32/plan.jsonは終了済み・再実行不可。GPU停止なし、商品品質/通常接続は未完。
+**現在：** [全文字座標提示の非学習確認§31](../../../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-unicode-map-fit2)。前回の保存32更新adapter ce644a5b…を固定し、各欄の全Unicode文字へ[start,end,char]を機械表示。意味型・参照・訂正根拠・受け取りと問いの説明を既存契約へ合わせた。原文/metadata/control/prior/教師本文とCMEE採用条件は不変。CPU backend69・pack13成功、実tokenizer初回1995/訂正5018＋最大生成2048<=8192・切捨て0。新入力の実FIT2は未実施で、現在の意味/本文採用は0/2のまま。追加学習0、GPU停止なし、観測会は今回不要、通常アプリ・一般入力・三中核の商品品質は未成立。
 
 # Emlis 4B学習・保存再loadの限定pack
 

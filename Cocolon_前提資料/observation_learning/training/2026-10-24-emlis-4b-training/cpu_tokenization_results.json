@@ -4,12 +4,12 @@
   "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
   "semantic_profile": "emlis_model_proposal.v1",
   "runner_sha256": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d",
-  "dataset_manifest_sha256": "4e739cc3307960eeb8fe1ead8ada6a99f41af0b2d86bcd5c65edb57924035df3",
-  "execution_plan_sha256": "0b08d519d14b5412b9e6b4403c5e7b4e5fa04993d34db86b62d7e8495a4d37a3",
+  "dataset_manifest_sha256": "727fde1474c86c497e79ee3e6c8110dc8194b546f63fa8f238842701d848d69b",
+  "execution_plan_sha256": "1665016c3e5baab0dec7b98160d2520ecca694fd91b515dcc908bedce6e6fea7",
   "data_sha256": {
-    "sft_examples.jsonl": "408ee9ae0d52f8e0dfb1f526b2330ec18af214b1245682a159b7e5aad96771da",
-    "train_messages.jsonl": "c12edd00f6b856fec20e2e60c6d23b62f169c5369cc6ef078a183d158db1b21b",
-    "eval_inputs.jsonl": "ce674dbfff194029ddd2f2c65b564df2b7cc665f47660d22b61677a8733b76ad",
+    "sft_examples.jsonl": "198847f535eed7a3cac8d6f9cd59f8bfe3e53bc9165eb6d3fb32ed6b17ee54d0",
+    "train_messages.jsonl": "32cd574649525c1352d870c8f276ed440a2362722e5026fe472254ce3cedea0e",
+    "eval_inputs.jsonl": "3a5ddb79ac3a6ae3a3a042728986d498dd6a55efec7b7212d1fb198ac96537c4",
     "eval_review.jsonl": "64fb1a6350dc24359b60316d6eb380a715582581b03f49df70a9a230354b0f80"
   },
   "source_commit": null,
@@ -44,19 +44,19 @@
   "training_tokens": [
     {
       "id": "FT-CHAIR-INITIAL",
-      "prompt_tokens": 1409,
+      "prompt_tokens": 1995,
       "completion_tokens": 1094,
-      "total_tokens": 2503,
-      "loss_labels_start": 1408,
+      "total_tokens": 3089,
+      "loss_labels_start": 1994,
       "logits_positions": 1095,
       "full_context_retained": true
     },
     {
       "id": "FT-CHAIR-AFTER-CORRECTION",
-      "prompt_tokens": 3526,
+      "prompt_tokens": 5018,
       "completion_tokens": 1877,
-      "total_tokens": 5403,
-      "loss_labels_start": 3525,
+      "total_tokens": 6895,
+      "loss_labels_start": 5017,
       "logits_positions": 1878,
       "full_context_retained": true
     }
@@ -64,38 +64,14 @@
   "generation_inputs": [
     {
       "case_id": "FIT-FT-CHAIR-INITIAL",
-      "input_tokens": 1409
+      "input_tokens": 1995
     },
     {
       "case_id": "FIT-FT-CHAIR-AFTER-CORRECTION",
-      "input_tokens": 3526
-    },
-    {
-      "case_id": "EFREE-E01",
-      "input_tokens": 1225
-    },
-    {
-      "case_id": "EFREE-E02",
-      "input_tokens": 1236
-    },
-    {
-      "case_id": "EFREE-E03",
-      "input_tokens": 1231
-    },
-    {
-      "case_id": "EFREE-E04",
-      "input_tokens": 1335
-    },
-    {
-      "case_id": "EFREE-E05",
-      "input_tokens": 1239
-    },
-    {
-      "case_id": "EFREE-E06",
-      "input_tokens": 1216
+      "input_tokens": 5018
     }
   ],
-  "generations_per_stage": 8,
+  "generations_per_stage": 2,
   "dataset_evaluation_rows": 6,
   "available_generation_case_ids": [
     "FIT-FT-CHAIR-INITIAL",
@@ -109,13 +85,7 @@
   ],
   "selected_generation_case_ids": [
     "FIT-FT-CHAIR-INITIAL",
-    "FIT-FT-CHAIR-AFTER-CORRECTION",
-    "EFREE-E01",
-    "EFREE-E02",
-    "EFREE-E03",
-    "EFREE-E04",
-    "EFREE-E05",
-    "EFREE-E06"
+    "FIT-FT-CHAIR-AFTER-CORRECTION"
   ],
   "plan": {
     "schema": "cocolon.emlis_4b_execution_plan.v1",
@@ -165,7 +135,11 @@
       "hard_billing_cap_enforced": false,
       "charges_started": false
     },
-    "token_limit_basis": "本CPU指示修復版の実tokenizer/index測定はcpu_tokenization_results.json。context8192/max_new2048を維持し、全source/prior/final assistant/EOSを切り捨てない。旧message版の24GB完走と本版の実GPU適合/意味品質は別で、16GBは未検証。"
+    "token_limit_basis": "本CPU指示修復版の実tokenizer/index測定はcpu_tokenization_results.json。context8192/max_new2048を維持し、全source/prior/final assistant/EOSを切り捨てない。旧message版の24GB完走と本版の実GPU適合/意味品質は別で、16GBは未検証。",
+    "evaluation_case_ids": [
+      "FIT-FT-CHAIR-INITIAL",
+      "FIT-FT-CHAIR-AFTER-CORRECTION"
+    ]
   },
   "model_weights_loaded": false,
   "gpu_used": false,

@@ -2036,3 +2036,17 @@ sourceはpackのcontinued_fit32/continue_fit.pyとplan.json。旧run_pilot/旧ep
 §30最終本文確認：after2件はminified/JSON/stop成功（1056/1764token）へ改善したが、初回根拠6中5、訂正補足4中4が誤座標で、意味/本文採用は0/2。初回joy/object kind逆・unknownをclaim_refsへ混入・同じ質問をreceptionで2回反復。訂正は共同修理/再使用へ6claim/3updatesを出したが、根拠indexずれとupdate_note.update_refs欠落、原文復唱が残る。独立read-only reviewと整合。Mashへの低品質本文review依頼はしない。次の直接作業は、原文上の欄内位置を参照できる入力提示と、参照index/意味型/問いと受け取りの役割をCPUで具体化する最小修復。採用条件緩和・raw補修・追加epochを自動実行しない。観測会は今の根拠/形式問題には不要。学習未使用入力・一般入力・三中核の完成と区別する。
 
 archiveは全24member/size/hash、32 F32 tensor有限性をPod外照合し保管済み（libfile_416a445cb4b08191b1357b5cc769f6d5）。CPU verifier初稿はTorch未導入で停止したが、同safetensors32本をNumPyで有限性照合し、GPU/学習の再実行0。Git pushは素材のprivate性について自動レビュー拒否後、公開済み架空2入力である根拠を確認して再判断した。続くGit transportの認証不在により反映できず、既存GitHub connectorで同じ確認済み素材/実行codeを反映し、18変更blobを全文照合した。private素材の送信拒否を未確認のまま迂回したものではない。本最終結果も同架空2入力だけで本人DB/Private diary/credentialは含まない。GPUは稼働保持し、停止/再起動/削除/新Pod/チャージ0。正式0/3・54.50％据置。
+
+
+<a id="20261025-unicode-map-fit2"></a>
+## 31. 10/25 — 全文のUnicode位置と既存契約の説明を修復し、同保存重みを非学習確認
+
+Mashの「4B学習＋CMEE接続を続けて」に基づく、§30実拒否のOBSERVED_BLOCKER_MINIMAL_FIX。商品目的・全機能/全状態・学習目的・全体設計/全ファイル地図・最新weekly・必読incidentを確認。current System Context生成索引は旧版のままなのでfresh sourceを直接読む既存fallbackを使い、長時間再索引を反復しない。root華恋が編集/検証/実行/反映を所有、2agentは読取reviewだけ。Codex Work/GPT-6、別モデルPro/Ultraと偽らない。新契約・新教師・新意味範囲・採用緩和はない。
+
+API a3e82f0e2156f9142ca37878425eb0a4b6046761で、model-visible sourceだけへfield_unicode_spans={field:[[start,end,char],...]}を追加。全欄全文を未正規化で機械展開し、補足の前置き/空行も0から続ける。意味でのquote選択・隠れた正解注入をしない。原文/source_id/metadata/control/prior/教師assistant/systemは不変、native proofはCMEEに保持しモデルへ再露出しない。kindの行動/結果/喜び/喜ぶ対象への対応、生成evidence配列のindexとclaim/relation/unknown名前空間、訂正の既存必須根拠、update_note.update_refs、受け取りと問いの分離を既存consumerの実要求へ合わせた。source資格/意味schema/採用側/独立reader/raw無補修は不変。
+
+backend対象69成功、pack13成功（38subtestsは加算しない）。非BMP/結合符/改行/quote/backslash/反復文字・補足全文offset・原本不変を確認。不正range/quoteはINVALID_EVIDENCEのまま。合成target2/2で同consumerの意味/本文あり、旧messages2/2は不一致で拒否。実tokenizerは初回1995+1094=3089、訂正5018+1877=6895、生成最大5018+2048=7066<=8192、切捨て0。CPU preflightのoptimizer_steps=2は元runnerの計画dataset数であり今回の実更新は0。旧proxy6は生成/学習せず、既読・profile外を維持。
+
+同A4500 Pod y0eb0w0qn6nks0の保存ce644a5b…adapter（32更新後）を非学習reloadし、初回/保存prior付き訂正後FIT2を各1回だけ生成する。旧run/計画は閉じたまま、新unicode_check/diagnostic.pyとplan.jsonを固定。入力提示/説明だけを変え、base/revision・adapter・seed20261024・BF16/SDPA・greedy・context8192/max_new2048を固定。追加optimizer/update/学習0、原重み3file hash前後不変、rawを補修せず同APIへ消費。900秒・2生成・自動retry0。表示$0.26/h按分上限$0.065はprocess allocationであり、準備/保持/回収/税を含むPod請求hard capではない。新Pod/charge/STOP/再起動/削除/依存install/本人DB/Render/Supabase/本番/通常有効化/merge/deploy0。終了時のraw/report/source/実plan/hashをarchiveへ回収する。
+
+既存公開済み架空chair2入力だけを使用し、原OBS-20261024-001の「華恋作成・実ユーザーの記録ではない」/scenario_persons_fictitious=trueを保持。本人DB/Private diary/credentialの新取得・送信0。観測会は今回の根拠/形式問題には不要。実結果未確認のため意味/本文0/2、正式0/3/全体54.50％を維持。STRUCTURE_MAP_DELTA_NONE（model投影/説明と有限試験の所在だけ、商品責務/公開schema/DB/RN不変）。

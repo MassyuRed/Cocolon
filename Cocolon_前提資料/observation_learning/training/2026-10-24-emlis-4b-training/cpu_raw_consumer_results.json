@@ -69,14 +69,13 @@
   "projection_checks": [
     {
       "id": "FT-CHAIR-INITIAL",
-      "before_material_chars": 4720,
-      "after_material_chars": 1539
+      "before_material_chars": 1539,
+      "after_material_chars": 2102
     },
     {
       "id": "FT-CHAIR-AFTER-CORRECTION",
-      "before_material_chars": 8990,
-      "after_material_chars": 4078
+      "before_material_chars": 4078,
+      "after_material_chars": 5776
     }
-  ],
-  "cmee_api_commit": "32dc3b3137ddc0a4401d2d1d045123f7da17683a"
+  ]
 }

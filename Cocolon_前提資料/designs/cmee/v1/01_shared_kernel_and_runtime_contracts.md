@@ -1099,7 +1099,7 @@ actual profileは`emlis_model_proposal.v1`、候補`semantic_and_surface_proposa
 
 実質問はsource由来のPERSONAL_JOY_SIGNIFICANCEから現問いownerが発行する。モデルquestion文・IDを権限として採用しない。実ASK→本人訂正→REFINED、意味保存後CancelledError→同意味／同proposalで明示再開、完成GET/start/同key再送の非生成を隔離SQLで確認。source取得後STARTEDだけの中断を自動再送へ変えず、通常readerはcan_write=falseを保持した。
 
-新`model_candidate_source.py`は固定4B/revision、JSON-only messages、検証済みpriorの意味投影、async generator注入、実raw/finish/usage/baseとadapter identityをP1へ渡す薄境界。原材料は削らず、既に含まれる原文と重複するnative proofだけはモデルへ再送しない。実endpoint・secret・常設client・cache・DB・自動retryを持たず、通常APIへは未登録。P1 optional adapter_revisionは値がない旧receiptではkey自体を省いて全bytesを保つ。
+新`model_candidate_source.py`は固定4B/revision、JSON-only messages、検証済みpriorの意味投影、async generator注入、実raw/finish/usage/baseとadapter identityをP1へ渡す薄境界。原材料は削らず、既に含まれる原文と重複するnative proofだけはモデルへ再送しない。実endpoint・secret・常設client・cache・DB・自動retryを持たず、通常APIへは未登録。 10/25のmodel投影では全text_fieldsの各Unicode文字をfield_unicode_spansの[start,end,char]として機械表示する。原文全文/metadata/control/priorを保持し、補足の前置き/空行も同欄の0から連続する。これは根拠/意味の選択ではなく、CMEE側のnative証明と採用条件・出力schemaは不変。P1 optional adapter_revisionは値がない旧receiptではkey自体を省いて全bytesを保つ。
 
 有限なsource資格は名詞token＋許可状態修飾／修理・再使用の構文family。品目／人名lookupや新しい一般parserは作らない。追加動詞節を名詞slotへ飲み込む実欠陥を最終reviewで発見し、sourceを削らずUNSUPPORTEDにするよう修復した。未知ひらがな複合名、一般関係・感情・自由文、Plus/Premium・他coreは今回未対応である。
 
