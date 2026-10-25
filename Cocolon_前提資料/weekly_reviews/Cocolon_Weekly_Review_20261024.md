@@ -2480,3 +2480,6 @@ Mashの4B学習＋CMEE接続続行/Jupyter直接指示で、全機能00全文・
 ### §47 10/26 JST — boundary12一回＋条件付き2保存再読をMashが承認
 
 上記新12→保存reload→FIT9→全9成功時だけ実service2件保存再読を、最大45分/$0.195処理按分（保持等別）で承認。前回CPUとsource/teacher/初期138b/順/LR/reader/停止を保持し、proposed原本を保存・実行planをtrueへ更新。開始前の新更新/モデル/SQL0、Jupyter直接/単一root ownerで一回実行。全9成功後の追加小分け承認は不要。旧balanced12閉鎖/未採用/後段0は保持。
+
+
+§47 実行中checkpoint：source1d5b971fから一回起動（PID620577、1792944459.4219685）。12更新/保存/非学習reload完了、最後の読取429.9秒でFIT9の2完了/3開始、2rawはEOS/parse正常。新041f4161重みの早期archive3,478,250bytes/18対象/32F32有限をPod外照合し永続保管。全9意味/本文の採否未判定・後段0、商品0。trial/2026-10-26-quote-boundary-fit12/READMEとpack runtime checkpointから同じprocessへ戻り、再起動しない。Jupyter直接/管理API/lifecycle0。

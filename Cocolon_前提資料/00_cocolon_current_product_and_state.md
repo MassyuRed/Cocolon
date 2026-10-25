@@ -8,7 +8,7 @@
 
 **GPUの最新確認：** 今回は承認scopeの学習/検証をJupyterへ直接接続して実施。管理console/GPU一覧/Runpod API操作0、Stop/再起動/削除/新Pod/charge0。§43の旧停止指示とHTTP429で停止未確認だった履歴は保持し、今回の新承認scopeではPod lifecycleを変更していない。処理は完了したが、GPU料金停止を意味しない。
 
-**現在の直接作業（boundary12一回＋条件付き2保存再読を承認、実行前）：** Mashが10/26 JSTに区切り1token追加の新12更新→保存reload→FIT9→全9成功時だけ2実service保存再読を承認。前回のCPU全9・教師/初期138b/12順/LR/reader/上限を保持し、新planをAUTHORIZED_ONCEへ更新。現時点の新学習/モデル/SQL0、Jupyter直接で一回実行する。最大45分/処理按分$0.195（保持等別）。[具体案・承認記録](observation_learning/training/2026-10-25-emlis-quote-address/README.md#quote-boundary-fit12-proposal)、最新weekly§47。旧balanced12再起動禁止、商品0/正式0/3/54.50％。
+**現在の直接作業（boundary12更新/保存reload完了、FIT9途中）：** 承認source1d5b971f/API4002b457・初期138bから12更新/保存/非学習reload完了。最後の読取429.9秒で2生成完了/3開始、2rawはEOS/parse正常。意味/本文/全9採否未判定、後段0。同じ実行を続け再起動しない。新041f4161を18対象hash/32F32有限で回収保管。最大45分/処理按分$0.195（保持等別）。[実行中原本](observation_learning/trials/2026-10-26-quote-boundary-fit12/README.md)、最新weekly§47。商品0/正式0/3/54.50％。
 
 **4B関連作業の開始前：** 全体現在地を全文読んだ後、[観測学習の目的・用途・前提](observation_learning/README.md#observation-learning-intent-and-assumptions)を毎回読み、最新weeklyの決定/実結果と今回の作業を結び付ける。学習・教材作成・評価・CMEE接続・環境移行で共通。ローカル＝Macと決め付けず、学習の成功と観測品質の成立を分ける。
 

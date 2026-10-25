@@ -1,7 +1,7 @@
 {
-  "status": "AUTHORIZED_NOT_STARTED",
+  "status": "RUNNING_FIT9_DO_NOT_RELAUNCH",
   "date": "2026-10-26 JST",
-  "source_commit": "df80b4270af0446aa5b840584664beaee4c4f126",
+  "source_commit": "1d5b971ffbf01b4594c1860c1f4b0bf25bf3b989",
   "api_commit": "4002b4577838d1ed6671278a19585b61e7ccd10e",
   "runner_sha256": "5c3222a22359aba2df66135ac8a9acf5aa11564dab0ae450421dacbec06b2919",
   "holdout_runner_sha256": "02eb8c8658df42c6ad179ed908657baa6b02e8ae86fa7cd7deb0716e7e09847f",
@@ -11,8 +11,8 @@
   "daily_boundary_tokens": 1,
   "daily_loss_tokens": 12,
   "boundary_token_id": 2129,
-  "training_updates": 0,
-  "model_calls": 0,
+  "training_updates": 12,
+  "model_calls": 3,
   "sql_calls": 0,
   "gpu_run_authorized": true,
   "old_balanced12_closed": true,
@@ -25,5 +25,15 @@
   "management_console_and_runpod_api_calls": 0,
   "gpu_lifecycle_operations": 0,
   "approval_date": "2026-10-26 JST",
-  "plan_sha256": "d461dafa4db54ac7238d76a86a4f45065736b757dc5964d3904825793667aaf2"
+  "plan_sha256": "d461dafa4db54ac7238d76a86a4f45065736b757dc5964d3904825793667aaf2",
+  "model_generations_completed": 2,
+  "last_observed_elapsed_seconds": 429.9,
+  "early_weights_recovered": true,
+  "early_weights_library_file_id": "libfile_02e5720e6eb08191a2efa3dfc3e6d8d4",
+  "adapter_sha256": "041f4161fe7bac82b437ecff2711b769ca4c8cfe093ddd04b30b4d728e42d217",
+  "all9_gate": "NOT_EVALUATED_INCOMPLETE",
+  "conditional_model_calls": 0,
+  "conditional_sql_calls": 0,
+  "launcher_pid": 620577,
+  "started_unix": 1792944459.4219685
 }
