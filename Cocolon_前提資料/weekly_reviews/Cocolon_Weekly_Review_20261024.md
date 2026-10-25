@@ -1885,3 +1885,25 @@ M4候補では、同じbase＋合格したLoRA→統合HFモデル→[MLX公式]
 GPU確保・CUDA/BF16検査・固定pack prepare・4B読込/run開始まで確認。学習完了/回収/CMEE結果は未確定。GPUは今日の確保指示に従って保持し、Stop/Terminate/追加Pod/再起動/追加charge/他Pod操作0。回収前のStopを行わない。商品source/API/DB/Render/Supabase/教材/通常有効化/merge/deploy変更0。文書の状態同期は商品進捗へ加算しない。STRUCTURE_MAP_DELTA_NONE、正式Product Read0/3、PRODUCT_NOT_CLEAR、candidate_ready=false、automatic_progression=false、全体54.50％据置。
 
 進捗記録補正：terminal画面からのrun ID転記誤りを、実在directory名 `20261025-011309-9f0c8622`へ訂正した。誤ったpathでの状態読取1回はFileNotFoundErrorで、学習runの停止/再実行/追加試行は行っていない。現在、before NLL2・before生成3/8を確認した。
+
+
+### §24 最終結果 — 20GBで追加学習/保存再load/回収が成立、品質採用は0/2
+
+[全実結果と保存raw一覧](../observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/repaired_a4500_20261025/README.md)を保存した。以下を今回の最終状態とし、上段の進行中記録は経過とする。
+
+| 項目 | 最終確認 |
+|---|---|
+| 実学習 | run 20261025-011309-9f0c8622、2教師×1epoch/2update、保存adapterの非学習reload、前後各NLL2/生成8が完走。status DIAGNOSTIC_COMPLETE_NOT_QUALITY_ACCEPTED |
+| 容量と時間 | A4500実20GB/free19.357GiBで完走。peak allocated14.970050/reserved17.587891GiB、実run1223.757秒（20分23.76秒）。16GB成功へは拡張しない |
+| 保持費 | GPU$0.25/h＋container50GB表示$0.007/h、合計表示$0.26/h。診断processの表示単価按分は約$0.0884。Pod uptime33分51秒の確認時点は約$0.1467の概算、明細/税未照合・他Pod保存費別。保持課金は継続する |
+| 学習の変化 | 教師token加重NLL0.2511168473→0.2451889939、raw6/8変化。32F32 LoRA tensor有限、保存hash/先行回収版/再load後のhash一致。loss低下やraw変更を商品品質へ換算しない |
+| 出力 | before8/8正常stop/JSON、after6/8正常stop/JSON。EFREE-E02/E05は2048token lengthで不完JSON。FIT2は正常stop。proxy6を正式意味評価へ数えない |
+| 実CMEE | fixed clean API1dabc4fでbefore/after各FIT2を消費。messages/モデル/adapter identity一致、意味・本文は前後0/2。初回はINVALID_EVIDENCE→semantic_shape_invalidへ進み座標は改善、自然文surface/必須shapeが未成立。訂正後rawは完全一致でINVALID_EVIDENCEのまま |
+| 回収 | adapter先行archive全22member/hash・32tensorをPod外照合/保管後、最終archive全24member/hash・同32tensorを照合し同じ保管fileの最終版へ更新。最終archive SHA256 db552321a39b28fbd48fce6f1eff24e988c1a78246c85f66fb2eebed79954984。元base全重みはarchiveに含まない |
+| 現Pod | 学習終了後もy0eb0w0qn6nks0のUptime/Stop/料金をfresh確認、稼働保持中。Stop/Terminate/再起動/追加Pod/追加run/追加epoch/追加charge0 |
+
+初回FITでは根拠が欄内0..18/0..26へ改善したが、本文欄をobject/nullとして出し、喜び対象と感情の統合・関係誤読・問い欠落も残った。訂正後FITはbefore/after rawが同一で、友人の教示/共同修理/再使用への喜びの更新が成立しない。proxyには説明文字列から入力に沿う文章へ変わる局所例もあるが、重複構造と打切りの悪化もある。全般的観測品質が改善したとは判定しない。
+
+次の直接作業は**同じ初回FITで、必須shapeと自然文surfaceを実4Bが契約どおり出し、既存consumerを通す最小修復**。教師の無制限増量、採用条件緩和、単純な追加epochへ進めない。三中核育成・通常接続・本番運用・M4変換の完成ではない。現runnerの厳密なoptimizer再開未対応も残す。
+
+固定元データ/コード/教材/採用条件は変更0。今回GitHubは全機能00・本weekly・観測README・4B pack READMEと既存trial owner内の実結果6fileを同期。元のraw JSONL bytesを変更せず、重みbinaryはGitHub公開しない。CMEE集計は重複rawを省いた派生summaryであり、元raw SHA・固定API・結果を明示する。STRUCTURE_MAP_DELTA_NONE（新production owner/接続/型/contractなし）。20GB学習・保存reload・回収の限定TECHNICAL_CREDIT、product_credit=0、正式0/3・PRODUCT_NOT_CLEAR・candidate_ready=false・automatic_progression=false・54.50％据置。
