@@ -1,13 +1,13 @@
 {
   "schema": "cocolon.quote_surface_fit12_runtime_checkpoint.v1",
-  "status": "AUTHORIZED_NOT_STARTED",
+  "status": "RUNNING_FIT9_DO_NOT_RELAUNCH",
   "proposal_commit": "dd3cabb4803f7a10eb660c1c370d0b9e521b9d05",
   "api_commit": "4002b4577838d1ed6671278a19585b61e7ccd10e",
   "runner_sha256": "819456ce9bf6589fb91becf16852a955ce3540eca59b2e9b4d5a01efe3d39826",
   "gpu_run_authorized": true,
-  "optimizer_steps_completed": 0,
-  "generation_calls_started": 0,
-  "new_generations": 0,
+  "optimizer_steps_completed": 12,
+  "generation_calls_started": 2,
+  "new_generations": 1,
   "conditional_service_model_calls": 0,
   "conditional_sql_calls": 0,
   "automatic_progression": false,
@@ -16,5 +16,21 @@
   "jupyter_pack": "/workspace/cocolon_4b_quote_surface_pack_20261026",
   "output_directory": "/workspace/cocolon_4b_quote_surface_fit12_20261026",
   "execution_owner": "root Karen / Codex Work GPT-6",
-  "next_action": "Launch this newly authorized trial exactly once through Jupyter; never relaunch if output/attempt already exists."
+  "next_action": "Continue observing PID643003 without relaunch. After all9 generated, consume original raw once. Only if all9 gate passes activate authorized conditional2.",
+  "source_commit": "c86ef0cae18b2c2905a4e043c0d5e4010e7638af",
+  "pid": 643003,
+  "started_unix": 1792963395.2611406,
+  "last_observed_elapsed_seconds": 340.7,
+  "stage": "NON_TRAINABLE_RELOAD",
+  "adapter_sha256": "e1db3df30b57b36b87187d54a4f75083bca5080396e8d1f758e1d8c1a44dfac5",
+  "early_archive": {
+    "bytes": 3478524,
+    "sha256": "ecc712b1c1176ad57302e7e45490504f4d3c9804c1978b6f3dfbec9f6c82f4cc",
+    "manifest_files": 18,
+    "finite_tensors": 32,
+    "library_file_id": "libfile_f2750b499f00819193e481ee48ca0eb7",
+    "version": 0
+  },
+  "plan_sha256": "47e5217fabfbd2da431825f49839fd7acded157068615c484f4841094f5483fc",
+  "prelaunch_syntax_error": "Python newline quoting error, before file/child/model effects; corrected; actual training launched once."
 }
