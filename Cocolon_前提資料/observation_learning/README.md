@@ -1,8 +1,8 @@
 # Mashの観測技術を継承するための記録
 
-**レンタルGPUの最新指示：** Mashが「レンタルGPU停止できる？」と明示指示。対象A4500/Pod y0eb0w0qn6nks0の停止を試みたが、Runpod管理consoleのAPI rate limitと既存公式runpodctlのHTTP429で拒否。表示333秒を待って一度再確認後、約39,531秒（約11時間）の制限を表示したため追加retryを打ち切った。停止完了は未確認・成功扱いしない。停止は承認済みで、旧『指示までSTOPしない』を停止禁止として継続しない。重み/原raw/consumerはPod外保全済み。次は対象PodのStopとStopped確認、削除/新Pod/charge/再学習は不要。
+**GPUの最新確認：** 今回のMashの「4B学習＋CMEE接続を進める・Jupyterへ直接接続」指示に従い、既存PodのJupyterへ直接接続。A4500/20470MiB/使用1MiBを実確認し、管理console/GPU一覧/API照会は0。今回Stop/再起動/削除/新Pod/チャージ0。§43の停止指示とHTTP429による停止未確認は履歴として保持し、停止済み・費用停止済みとはしない。今回のCPU診断でmodel読込/forward/生成/学習更新0。
 
-**現在の直接作業（quote接続・18更新/FIT9完了）：** 承認済みAPI4002b457/source1a34c968で一回18更新・保存/非学習reload・新生成9を1081.492秒で完了。無補修rawは意味9/9・本文6/9。旧chair6の意味/本文/初回問い/訂正3更新を保持し、daily3は引用位置と意味採用3/3まで通過したが、受け取りが『少し落ち着いたのですね／落ち着けたのですね』に留まり本文0/3。全9意味/本文成功条件に未達のため別ID2保存再読はcall0で終了、追加学習/再call/reader緩和0。新138b9ff7重みと全原raw/実結果をPod外保全、採用昇格0。新観測会は今回不要、GPU稼働保持/STOP・再起動・削除0、本番/DB/Render/RN変更0、商品0・正式0/3・54.50％据置。 [実結果](trials/2026-10-25-quote-address-fit18/README.md)。
+**現在の直接作業（quote18後のCPU診断完了）：** 終了済みquote18の意味9/9・本文6/9は不変。Jupyterで全9rawのtoken復号/教師とのparsed比較と原source/重みhash不変を確認し、daily3の差はreceptionだけと実測。各26文字・11tokenを既存方式で厳密にマスクでき、全文JSON+EOSの0.688〜0.706％。最初の相違tokenも全3で同マスク内。モデル読込/forward/新生成/更新0、終了済み18plan/条件付き後段call0は再開しない。保存138b9ff7から同3受け取り各2回＝新6更新、保存reload/FIT9、全9意味本文成功時だけ新ID2保存再読という一回候補を未承認planへ具体化。6が最適・原因がloss希釈と断定せず、既存reader/教師/prompt/quote方式を保持する。詳細は[最新weekly §44](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-quote-reception-cpu-and-fit6-proposal)と[固定CPU結果・新候補](training/2026-10-25-emlis-quote-address/README.md#quote-reception-cpu-and-fit6-proposal)。新観測会は今回不要、追加GPU試行未実施、商品0・正式0/3・54.50％据置。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
@@ -53,7 +53,7 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 | 移行に残すもの | 固定版の元4B全重み/config、tokenizer/chat template、追加学習分のLoRAと設定、教材・生成設定・source/prompt版・評価結果。環境に合わせて実行ソフト/形式/接続先を変え、必要なら重み統合・量子化を行う。環境変更だけを理由に観測学習を最初からやり直す必要はない |
 | 途中からの学習再開 | 学習済み重みから次の学習を始めることと、中断地点へ厳密に戻ることを区別する。後者にはoptimizer/RNG/step/教材位置等も必要。現2教師診断runnerはそれらを保存しないため、継続育成の再開経路は未完成 |
 | 費用 | 追加月額上限1万円を保持。GPU稼働・保存・通信・税等を含めて判断し、学習時の一時費用と本番の常時提供費を分ける。小型化すれば同じGPUの固定料金も下がる、と説明しない |
-| GPUの確保 | 必要時だけ借りる場合は在庫待ちがあり、稼働保持中は学習していなくても課金が続く。今日のA4500は確保済みで、停止/削除を勝手に行わない。一回診断の時間/費用と、保持の継続料金を混同しない |
+| GPUの確保 | 必要時だけ借りる場合は在庫待ちがあり、稼働保持中は学習していなくても課金が続く。A4500は今回Jupyter直接接続で稼働を確認。§43の停止指示/停止未確認を履歴に保持し、今回の再開作業で停止等の操作は0。一回診断の時間/費用と、保持の継続料金を混同しない |
 | 本番で必要な確認 | 選んだWindows/Macと実行方式で、量子化後を含む観測品質、実入力長、待ち時間、同時利用数、常時電源・回線・復帰/障害時対応、CMEEからの接続を確認する。GPUの在庫待ちでアプリが使えなくなる方式を通常運用の前提にしない |
 
 今回回収済みのarchiveは**追加重み・設定・生出力等**であり、元4B全重みは含まない。これだけで完全な単独モデルを保持済みとは言わず、移行時は元4Bも揃える。元モデル＋追加学習分の正本を残し、量子化した推論用コピーだけを継続育成の唯一の保存物にしない。Windowsでの方式やMacでの方式を変更しても、この保存方針は共通とする。
@@ -83,7 +83,7 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 
 ## 現在地（2026-10-25・三中核の開発基準選定、本番は未成立）
 
-**現在の直接作業（quote接続・18更新/FIT9完了）：** 承認済みAPI4002b457/source1a34c968で一回18更新・保存/非学習reload・新生成9を1081.492秒で完了。無補修rawは意味9/9・本文6/9。旧chair6の意味/本文/初回問い/訂正3更新を保持し、daily3は引用位置と意味採用3/3まで通過したが、受け取りが『少し落ち着いたのですね／落ち着けたのですね』に留まり本文0/3。全9意味/本文成功条件に未達のため別ID2保存再読はcall0で終了、追加学習/再call/reader緩和0。新138b9ff7重みと全原raw/実結果をPod外保全、採用昇格0。新観測会は今回不要、GPU稼働保持/STOP・再起動・削除0、本番/DB/Render/RN変更0、商品0・正式0/3・54.50％据置。 [実結果](trials/2026-10-25-quote-address-fit18/README.md)。
+**現在の直接作業（quote18後のCPU診断完了）：** 終了済みquote18の意味9/9・本文6/9は不変。Jupyterで全9rawのtoken復号/教師とのparsed比較と原source/重みhash不変を確認し、daily3の差はreceptionだけと実測。各26文字・11tokenを既存方式で厳密にマスクでき、全文JSON+EOSの0.688〜0.706％。最初の相違tokenも全3で同マスク内。モデル読込/forward/新生成/更新0、終了済み18plan/条件付き後段call0は再開しない。保存138b9ff7から同3受け取り各2回＝新6更新、保存reload/FIT9、全9意味本文成功時だけ新ID2保存再読という一回候補を未承認planへ具体化。6が最適・原因がloss希釈と断定せず、既存reader/教師/prompt/quote方式を保持する。詳細は[最新weekly §44](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-quote-reception-cpu-and-fit6-proposal)と[固定CPU結果・新候補](training/2026-10-25-emlis-quote-address/README.md#quote-reception-cpu-and-fit6-proposal)。新観測会は今回不要、追加GPU試行未実施、商品0・正式0/3・54.50％据置。
 
 [凍結6教師と実行source](training/2026-10-25-emlis-service-binding/README.md)／[全実結果](trials/2026-10-25-service-binding/README.md)。
 

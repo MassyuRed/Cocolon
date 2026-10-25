@@ -33,3 +33,37 @@ daily3のparsed packetは教師とreceptionだけが異なる。01は「あっ�
 実環境Codex Work/GPT-6、root華恋が単一実行/統合/反映owner。別文脈agent2枠は実source/全結果のread-only意見で、独立Pro/Ultra/human受入れではない。前回意味7/9→今回9/9、本文6/9のまま。primary=BLOCKER_NARROWED、限定TECHNICAL_CREDITはprivate接続/原raw再導出のCPU検証までで、一般品質/商品合格へ換算しない。STRUCTURE_MAP_DELTA_PRESENTは承認後private wire実装、今回終了記録の追加差分はNONE。
 
 今回の有限教師適合に新観測会は不要。9行は独立9話ではなくchair＋dailyの2話であり、一般化/Piece/Analysisの教材不足は残る。受け取りが未達の原因を更新数不足・教師不足・4B能力限界と断定しない。GPU稼働保持、STOP/再起動/削除/新Pod/charge0。本番/Supabase/Render/RN/merge/deploy変更0、商品0・正式0/3・54.50％据置。
+
+
+<a id="quote-reception-cpu-and-fit6-proposal"></a>
+## quote18後の受け取りCPU診断と、新6更新一回案（未承認・未実装）
+
+今回の依頼は「4B学習＋CMEE接続を進める／Jupyterへ直接接続」。前回の18更新・FIT9は終了済みであり、再起動しない。意味9/9・本文6/9、条件付き後段call0を維持する。
+
+既存PodのJupyterだけへ直接接続し、A4500/20470MiB/使用1MiBと原18更新/9生成を確認した。管理console・GPU一覧・provider API・停止/再起動/削除/新Pod/chargeは0。CPU cache tokenizerだけを読み、[実行source](diagnose_reception.py)と[原結果](reception_cpu_result.json)を回収した。結果SHA256は0396417dd2b89678eec7bf2f2a2ae82bb7757c380a56ac5fd718ec1ca0b22f25。
+
+| daily | 受け取りloss対象 | 全文JSON+EOS | 最初の相違token | 教師token / raw token |
+|---|---:|---:|---:|---|
+| 01 | 11 | 1585 | 1153 | 落ち着 / 落ち着いた |
+| 02 | 11 | 1559 | 1144 | けて / けた |
+| 03 | 11 | 1598 | 1159 | けて / けた |
+
+token座標は0-based。全9の原tokenを**元runnerと同じclean_up_tokenization_spaces=False**で復号しraw bytesと一致。chair6 parsedは教師一致、daily3は/candidate/surface_proposal/receptionだけが異なる。全3の元26文字[3948,3974)と11tokenの両端/連続性/causal直前位置が一致し、入力prompt・他JSON・EOSをlossから除外しても全文contextを保持できた。元source7fileのhashは不変。モデル読込/forward/生成/更新は0。
+
+最初の端末コマンドは改行の構文誤りでPython実行前に終了し、その後の最初のCPU実行は元runnerと異なるdecode既定値/stripによるraw一致assertで停止した。実runnerの復号設定へ揃えてから上記を完了した。原rawや採否を補修せず、GPU試行・学習の再実行ではない。ブラウザdownload待機はtimeoutしたが、実ファイル到着後にsize/hashを確認し、同じ結果を再downloadしなかった。
+
+11tokenは全文lossの約0.688〜0.706％。これを更新不足の確定原因や4B限界の証明にはしない。次は既存reception_fit4_lr5の同一mask/loss方式を現daily3へ適用する一回案を推奨する。新しい観測会はこの既存正解への不適合には不要。独立2話のままで、一般化・Piece/Analysis完成教師0は別残件。
+
+### 一つの承認対象
+
+[全固定条件](reception_fit6.proposed.json)。保存138b9ff7の未採用adapterからdaily3の既存受け取りだけを各2回＝6update、LR5e-5/新AdamW/既存32LoRA/clip1。元prompt・全文teacher・EOSはcontextに残し、11tokenだけlossにする。6が最適という実証はない。chairは学習せず、全9件のFITで意味/本文、初回ASK、訂正3更新、daily ENDの保持を確認する。
+
+実装は本packの新run_quote_reception_fit.pyとreception_fit6.plan.json、全9成功時だけのrun_quote_reception_holdout.py/reception_fit6.eval_plan.jsonへ限定し、既存quote runnerのvalidation/archive、既存reception mask/lossを再利用。既存data3file/原plan/旧runner/旧raw/旧重みは不変。CPU境界照合後に一度6update→保存/32有限/非学習reload→reception NLLと新FIT9→既存consume_quote_fit_raw.pyで無補修採否を一度確認する。before新生成0、前後teacher-forced NLL各3。全文9教師をreception教師3件へ書換えない。
+
+全9の意味/本文成功時だけ、新adapter/resultに結び付けた別eval plan/runnerを作り、既存未使用fixtureの別identity2初回を実serviceへ渡す。上限2新call、isolated SQLの保存・意味保存後中断・明示再開・生成しない再読を確認。既存run_quote_address_holdout.pyは旧18scopeへ固定されているため上書き再利用せず、新source/output bindingだけを持つ別runnerにする。失敗/期限では保存して終了、追加update/LR探索/同要求retry/raw補修/reader緩和0。実DBや通常APIは触らない。
+
+学習/保存/FITは1800秒、成功後だけ後段900秒。記録単価$0.26/h按分は$0.13+$0.065=$0.195以内（準備・回収・継続保持・保存・税別、請求hard capではない）。既存A4500/Jupyterだけを使い、新Pod/入金/Stop/再起動/削除/新依存0。先に新adapterをPod外回収、終了後全raw/resultsと32tensor/hashを確認する。
+
+Rule18 §11.3 LEVEL3の「既に説明したbounded scopeから作業が広がる」「closed or consumed single-use authorityのreuse / retry / reactivation / repair」を踏まえ、旧18試行への追加ではなく**新しい6更新一回の実装＋検証＋成功時2保存再読**をまとめて判断対象とする。今回の依頼で診断/候補具体化/資料反映までは実施したが、proposed flags=falseで新学習/新生成は未実施。承認後も同scope内のCPU後/成功後に小分けの再承認は不要。
+
+STRUCTURE_MAP_DELTA_NONE（商品owner/型/reader/公開API/DB/RN/三中核責務に差分なし）。商品credit0、正式0/3・54.50％据置。今回の資料更新は全体00の§8に残ったFIT途中表示も終了9件へ補正し、最新weekly§44と01Aのfile所在を同期する。

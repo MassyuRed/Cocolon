@@ -4863,3 +4863,8 @@ quote-address packのcpu_tokenization_results.jsonは実9行、weights_verificat
 observation_learning/trials/2026-10-25-quote-address-fit18/ はREADME.md（終了原本）、closure.json（gate/残差/境界）、run.json（実18更新/9生成/非学習reload/全順序）、after_fit.jsonl（無補修9原raw）、training.jsonl（18loss）、before_nll.jsonl/after_nll.jsonl（全文NLL）、file_manifest.json（Pod全18対象hash）、recovery_verification.json（完了archiveのPod外照合）、consumer.index.json＋consumer.part-*.txt（1,604,374bytesの無損失実consumer）を所有する。index順UTF8連結して元SHAを照合する。旧raw/旧plan/旧重みは移管/修正しない。
 
 今回の終了記録はSTRUCTURE_MAP_DELTA_NONE。privateモデルwire/compile責務の実装PRESENTは上記とcurrent01/04/共有01/schema05に反映済み。全体00/最新weekly§42は意味9/9・本文6/9・後段0へ同期。商品0/正式0/3/54.50％、新重み昇格0、GPU稼働保持/STOP・再起動・削除0。
+
+
+## 2026-10-25 — quote受け取りCPU診断と新6更新案のfile所在
+
+既存observation_learning/training/2026-10-25-emlis-quote-address/へdiagnose_reception.py（Jupyterで実行したCPU cache tokenizer診断）、reception_cpu_result.json（全9raw/parsed・daily3の各11token/両端/causal mask・原sourcehash不変）、reception_fit6.proposed.json（未承認flags=false/新6更新/FIT9/成功時2保存再読）を追加。READMEのquote-reception-cpu-and-fit6-proposal節が実測、最初のCPU準備失敗、変更候補path、費用/停止/承認境界を所有する。製品責務追加0、旧18plan/teacher/raw/重み/reader不変。全体00§8はFIT途中表示を意味9/本文6/終了後段0へ補正。最新weekly§44へ進行を戻す。新学習/モデル生成0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
