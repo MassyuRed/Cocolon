@@ -1,6 +1,6 @@
 # 4Bの引用選択とCMEEの位置計算 — 一回18更新の実結果
 
-状態：**接続実装済み・18更新/FIT9完了。意味9/9・本文6/9、条件付き2件保存再読はcall0で終了。** 2026-10-25 JST。
+状態：**最新surface12は12更新/保存再読込/FIT9完了、意味8/9・本文8/9、後段0・新重み未採用で閉鎖。** 詳細は末尾§48最終結果とtrial原本へ。以下の18更新は履歴。
 
 Mashは「接続実装・18更新・全9件成功時の2件保存再読」全体へ「進めていいよ」と明示承認。[全実結果](../../trials/2026-10-25-quote-address-fit18/README.md)を現在の終了原本とする。新GPU試行や第三の自動retryを、この終了planから始めない。
 
@@ -221,3 +221,16 @@ Mashはdd3cabb4の具体案「12更新→保存・再読込→9件検査→全�
 
 
 §48 実行中checkpoint（10/26 JST）：source c86ef0caから一回起動、PID643003/1792963395.2611406。12更新/保存/非学習reload完了、340.7秒の実読取でFIT9は1完了/2開始、全9採否未判定/後段0。新e1db3df3の早期archive3,478,524bytes/18対象hash/32F32有限をPod外照合し保全済み。起動コマンドの改行SyntaxErrorはfile/child/model効果前に修正し実学習一回、再起動0。同trial/runtime checkpointから同processへ戻る。商品0/正式0/3/54.50％、Jupyter直接、GPU lifecycle/管理API/本番変更0。
+
+
+### §48 最終結果（10/26 JST）— 未完文はraw上解消、引用範囲の不一致で意味/本文8/9・後段0
+
+[全実結果](../../trials/2026-10-26-quote-surface-fit12/README.md)。source c86ef0ca/API4002b457・旧138bから12更新/保存/非学習reload/9生成を1014.356336秒（16分54秒）で完了。無補修rawを既存consumerへ一回渡し意味8/9・本文8/9。全9JSON/EOS正常、全9surface_proposalは教師一致で前回daily02の未完文はrawとして解消。chair6/初回ASK3/訂正各3更新/REFINEDは保持、残8raw_textは前回boundary12と同一。
+
+daily02だけ帰宅claim.text/predicate.surface/引用の3箇所が「帰って」→「帰ってから」へ拡大。quote compileは入力内の[0,5)へ成功するが、固定意味admissionの帰宅role[0,3)と一致せずUNSUPPORTED/model_evidence_out_of_scopeで拒否。出典外創作やJSON不正ではない。root/別文脈agentが全9出力/採否/実admissionを読取し、正式Pro/Ultra/human受入れには数えない。前回意味9/9・本文8/9に対し今回は8/9・8/9で全体保持未達、新e1db3df3は未採用。全9gate=false、条件付き2はmodel/SQL0・evalplan未作成で閉鎖。追加学習/同要求再call/raw補修/reader緩和0。
+
+早期3,478,524bytes/18対象hash/32F32有限、完了training3,494,749bytes/21対象をPod外照合。全原raw211,357bytes、consumer1,605,267bytes（index＋27parts）、training/consumer/launch/gate入りrecovery3,624,744bytes/4対象も照合、同一保管identity libfile_f2750b499f00819193e481ee48ca0eb7 version1へ保全。早期/完了adapter同一、旧138b/教師/helper/API不変。surface25 NLL0.138614719→0.005865229、chair全文0.000944048→0.001161005は別対象として記録し品質成功へ換算しない。処理按分約$0.07325907（記録$0.26/h、準備/回収/保持/保存/税等別）、前半1800秒/$0.13内、後段900秒/$0.065未使用。
+
+起動前browser parse1/Python改行SyntaxError1はfile/child/model効果前で修正、実学習一回。早期SHA手入力誤記は原本と全manifestで解消、再download0。既存Node v24.22.1/PGlite0.5.8/private Pythonと固定API cleanをJupyterでread-only確認し追加依存0、条件未達なので新SQL起動0。新観測会はこの残差へ不要、引用・述語単位と既存CMEE根拠範囲の整合が残る。新有料試行/意味admission・reader変更は未承認。独立2話/一般化/Piece・Analysis完成教師0は継続。
+
+全体00/観測入口/pack/runtime/01Aを終了状態へ同期。BLOCKER_NARROWED、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。GPUは保持、Jupyter直接のみ。管理console/GPU一覧/管理API/Stop/再起動/削除/新Pod/charge/Render/Supabase/本人DB/通常application/公開API/DTO/RN/merge/deploy0。処理完了はGPU保持料金の停止を意味しない。
