@@ -2566,3 +2566,17 @@ Mashは8d5ad494の新案「12更新→保存・再読込→9件検査→全件�
 新45779はこの有限検証で成立した保存候補で、本番/商品へ採用していない。固定9は2言語話の教師適合、chair訂正は固定prior、後段2は同じ有限familyの別identity・初回日常だけ。一般入力、新adapterの動的chair訂正、Piece/Analysis教師/品質、ローカルWindows-Mac/量子化、本人端末/本番/正式商品受入れは残る。今回新観測会不要、Piece/Analysis完成教師0は継続。局所mask反復は終了し、次は有限教師を越える観測品質を既存材料で確認する段階。新有料試行・本番有効化は自動開始しない。
 
 全体00/観測入口/pack/runtime/01Aを完了へ同期。TECHNICAL_CREDIT（有限FIT9＋同family日常2件の実保存再読）、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％据置。Jupyter直接のみ、GPU保持。管理console/GPU一覧/管理API/Stop/再起動/削除/新Pod/charge/Render/Supabase/本人DB/通常application/公開API/DTO/RN/merge/deploy0。閉鎖済み一回を再起動しない。
+
+
+<a id="20261026-generalization-boundary-and-raw2"></a>
+## 50. 10/26 — 題材固定の接続制約をCPUで確定、原汎用2題の非学習評価案を準備
+
+Mashの4B学習＋CMEE接続続行／Jupyter直接／必要な前提資料差分更新指示で開始。全体00全文、作業規則・恒久incident・Karen-Diary、全体01／地図01A/B/C、current00/01/04、観測目的、最新§49、実APIと原教材を確認。開始Cocolon bc399815／API4002b457、両Draft。System Context索引timeoutを保持し、fresh原本を直接読取り、再index0。root華恋が単一実行・反映owner、別agentは読取補助。正式Pro／Ultra／human受入れを成立させていない。
+
+Jupyter CPUで既存native9行のsource資格9/9と、E01-0／E03-0のUNSUPPORTED/model_repair_reuse_source_out_of_scopeを確認。両入力へ現promptがchair4roleを要求することも確認した。モデル未実行であり能力失敗2件には数えない。source診断原本22,911bytes／SHA3af9a4fa…、成功診断1.875942秒。初回の内部thread型誤りは診断だけで修正し、製品変更0。
+
+題材固定を外す汎用profile実装も比較したが、候補生成品質が不明なまま採用条件を変えるため先行しない。既存の原汎用promptE01／E03をそのまま使うraw-only2生成を最小の次作業とした。read-only別文脈意見とactualをrootが統合。現CMEEへのadoption／reader緩和はしない。実tokenizer487／505、切捨て0、既存固定4依存／45779全3file hash一致、非学習runnerとfalse planをJupyterへ準備。古いhelper配置のhash不一致はtokenizer/model効果前に停止し、GitHub一致の既存参照配置へ修正した。
+
+[全実測原本・開始14項目・具体案](../observation_learning/trials/2026-10-26-generalization-probe2/README.md#generalization-eval2-proposal)。新案は追加学習0・現重み45779・元system/user無変更・最大2生成／600秒／処理按分$0.043334（約$0.0434、保持等別）の一回。CPU準備は済んだが新GPUは未承認・未実行。新有料試行は§49の承認を再利用せず、Rule18§11.3の新費用／個別承認境界で判断を求める。原rawは文章返答／JSON解析失敗／EOS未到達でも保全。原promptは厳密JSONを要求しないためparse失敗だけでは2件目を止めず、EOS未到達／時間停止では停止し、実停止理由は旧helperのlength表示と別に記録する。sourceとplan hashを更新してCPU原本を再確認。再試行0、結果はこのadapter＋汎用prompt2件の診断に限定し、CMEE接続成功や商品受入れへ加算しない。既存2familyは学習へ転用しない。新観測会は今回不要、独立評価と三core完成教師の不足は継続する。
+
+BLOCKER_NARROWED、STRUCTURE_MAP_DELTA_NONE（製品責務／型／接続／契約変更0）、商品0／正式0/3／54.50％据置。新モデルload／forward／生成／更新／SQL／新依存／Render／Supabase／本人DB／通常application／公開API／DTO／RN／merge／deploy0。GPU保持、Jupyter直接のみ、管理console／GPU一覧／管理API／lifecycle0。全体00／観測入口の古いcurrentを置換し、全file地図へ今回の原本所在を記録する。

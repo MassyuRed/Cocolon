@@ -1,8 +1,8 @@
 # Mashの観測技術を継承するための記録
 
-**GPUの最新確認：** 今回の承認済み一回をJupyter直接で実行・回収。12更新/保存reload/9生成完了、後段model/SQL0。GPUは維持、管理console/GPU一覧/Runpod管理API/Stop/再起動/削除/新Pod/charge0。§43の旧停止指示/HTTP429未確認は履歴として保持。処理完了は継続保持料金の停止を意味しない。
+**GPUの最新確認：** Jupyter直接で前回終了・保存45779を確認し、CPUのsource制約診断／原汎用prompt2件のtokenizer確認を行った。新モデルload／forward／生成／学習／SQL0、GPUは保持。管理console／GPU一覧／Runpod管理API／Stop／再起動／削除／新Pod／charge0。保持課金と処理按分を分ける。
 
-**現在の直接作業（joint12＋条件付き2保存再読を完了・一回閉鎖）：** 原9教師/旧138b/既存CMEEを保持し、daily全文JSON/EOSと完成surface25の平均lossを各0.5でoptimizer12更新。保存・非学習reload・固定9は意味9/9／本文9/9／全parsed教師一致・JSON/EOS正常。chair初回ASK3／訂正各3更新・REFINED、daily3FINALを保持し、前回の引用範囲と未完文を同時解消した。全9成功後だけ新45779ad9で2実service／隔離SQL保存・非生成再読も2/2、中断→明示再開1/1・再読時生成0を確認。学習/FIT1075.249713秒＋後段186.247434秒、CPU採否10.571209秒込み約21分12秒／処理按分約$0.091872（記録$0.26/h、準備/回収/段間保持/保存/税等別）。全raw/consumer/重み/保存原本を回収照合・保全。[全実結果](trials/2026-10-26-quote-joint-fit12/README.md)、最新weekly§49最終結果。新重みは当該有限検証の保存候補で、本番/商品採用ではない。閉鎖plan再起動/追加mask試行/reader緩和0、商品0/正式0/3/54.50％。新観測会は今回不要、独立2話・一般入力/他core教師不足は継続。
+**現在の直接作業（有限成功後の接続制約を確認、一般入力2題の非学習評価案を準備）：** joint12の固定9意味／本文9/9、同family日常2実保存再読2/2は成功・閉鎖済みで維持する。JupyterのCPU診断で現model profileは修理／再使用と日常食事の構文に限定され、E01（机の整理）／E03（昨日と今日の依頼）へchair専用指示を出し、両方をUNSUPPORTEDで拒否することを確認した。モデルを呼ばないため、4Bの能力失敗2件とは数えない。題材別regexやreader緩和を追加せず、まず45779を原汎用prompt2件で非学習評価する最小案を選んだ。実tokenizer487／505、切捨て0、false plan／runner準備済み。最大2生成・600秒／処理按分$0.043334（保持等別）の新一回は未承認・未実行。[実測・判断・具体案](trials/2026-10-26-generalization-probe2/README.md#generalization-eval2-proposal)、最新weekly§50。新観測会は今回不要、一般観測品質／動的chair訂正／他core／端末／本番／正式受入れは未完了。商品0／正式0/3／54.50％、STRUCTURE_MAP_DELTA_NONE。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
@@ -81,13 +81,11 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 既存資料にある情報をMashへ聞き直さず、華恋が原本から解決する。既存の承認範囲内で進められる作業を、新しい承認待ちへ戻さない。別の管理票・新しい検査systemを作ることを、この確認の目的にしない。最新の決定/状態が変わった場合は、本節・全体現在地・最新weeklyの関係箇所を同じ変更単位で更新する。
 
 
-## 現在地（2026-10-26・有限Emlis検証は成功、本番・三中核品質は未成立）
+## 現在地（2026-10-26・有限成功後の一般入力確認）
 
-**現在の直接作業（surface12完了・意味8/9／本文8/9、後段0で終了）：** source c86ef0ca/API4002b457・旧138bから12更新/保存非学習reload/FIT9を1014.356336秒で完了。全9JSON/EOS正常、全9本文候補surface_proposalは教師一致で未完文はraw上解消。chair6/ASK3/訂正各3更新は保持。daily02だけ引用/述語が「帰って」[0,3)→「帰ってから」[0,5)へ広がり、既存CMEE根拠範囲に不一致で意味不採用。全9未達で2実service保存再読はmodel/SQL0・evalplan未作成、新e1db3df3は保存・未採用。[全実結果](trials/2026-10-26-quote-surface-fit12/README.md)、最新weekly§48最終結果。原raw/consumer/重みを回収照合・保全済み。処理按分約$0.07326（保持等別）。新観測会はこの残差へ不要。閉鎖plan再起動/追加更新/raw補修/reader緩和0。商品0/正式0/3/54.50％。
+上段と[新しい実測・評価案](trials/2026-10-26-generalization-probe2/README.md)をcurrentとする。joint12の意味／本文9/9・日常2保存再読2/2は成立した。source制約のCPU9+2確認と、原汎用2題の実tokenizer487／505を得たが、新しいモデル推論・追加学習は0。次は保存済み45779を原prompt2件で一回だけ確認する案で、新GPUは未承認。現CMEEの意味採用・独立本文reader・通常接続を緩めない。
 
-[凍結6教師と実行source](training/2026-10-25-emlis-service-binding/README.md)／[全実結果](trials/2026-10-25-service-binding/README.md)。
-
-華恋の選定は4Bの共通基盤＋core別教示＋既存CMEE。0.6/0.8/1.7/2B・別4Bまで検討し、学習費と常時推論費を分離する。Mashの最新指示により、ローカル運用先はWindows／Macとも候補で未選定。既存M4 16GBの4bit案は検討材料であり、決定済みの移行先ではない。自前adapterのmerge/変換、量子化後の三中核品質、実入力・同時数・24時間運用は未確認。既存9教師はEmlisのみ、4B実診断は2教師/2update、Piece/Analysis完成教師0。単純なepoch増加を先行せず、各coreの完成実演と未使用入力で評価する。旧3070は今回fresh画面で既に停止表示、華恋の停止操作0。新A4500 20GB／Secure・表示$0.26/h、Pod y0eb0w0qn6nks0で修正版2教師/2update・保存reload・前後16生成が完走。peak allocated14.970/reserved17.588GiB、全24member/32tensor回収照合/永続保管済み。NLL0.251117→0.245189だがCMEE意味/本文は前後0/2。初回shape/自然文surface、訂正後の旧意味、proxy2件打切りが残る。[全実結果](trials/2026-10-24-qwen4b-cmee-diagnostic/repaired_a4500_20261025/README.md)。診断process5400秒/計画$1と今日のGPU保持課金を分離し、自動Stop/削除を行わない。本番変更0。正式0/3・54.50％据置。
+旧surface12の意味／本文8/9・後段0は[当時の結果](trials/2026-10-26-quote-surface-fit12/README.md)、後続joint12成功は[最終結果](trials/2026-10-26-quote-joint-fit12/README.md)へ戻る。閉鎖済みの旧planを再開しない。一般入力／三core品質／動的chair訂正／Windows-Mac／量子化／実機／本番は別残件。
 
 ## 10/24の実診断と当時の決定（履歴、現在の構成は上段）
 

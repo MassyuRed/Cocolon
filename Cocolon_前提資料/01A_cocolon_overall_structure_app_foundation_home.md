@@ -4910,3 +4910,8 @@ observation_learning/trials/2026-10-25-quote-reception-fit6/ のREADME/closure�
 
 
 10/26 JST joint12完了file：trial/2026-10-26-quote-joint-fit12のREADME/closure/run/after_fit/training/NLLは12更新・意味本文9/9・全parsed教師一致と前回引用範囲/未完文の同時解消を所有。consumer.index＋29partsは全1,703,898bytes、service/21原本＋manifestはmodel2/source2/隔離SQL RPC30/保存再読2/2・中断再開1/1・再読時生成0を保持。early/training/recovery_verificationは早期19/完了23/後段21/最終7対象・32F32有限・同一保管identity version1を所有する。packのjoint_fit12_runtime_checkpoint.jsonはCLOSED_FIT9_AND_CONDITIONAL2_COMPLETE_DO_NOT_RELAUNCH、eval_planは全9成功後だけactivateした原本。新45779は有限検証の保存候補、本番/商品未採用。製品責務/型/保存/公開契約不変、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。詳細は最新weekly§49最終結果。
+
+
+### 2026-10-26：有限成功後の接続制約診断／原汎用2題評価案（未実行）
+
+既存`observation_learning/trials/`に`2026-10-26-generalization-probe2/`を追加。READMEはactual診断／判断／新2生成案と開始記録、diagnose_general_boundary_cpu.py／general_boundary_cpu_result.jsonはAPI4002bの既存9対応・別2題拒否／誤ったchair指示のCPU原本を所有する。run_generalization_eval2.py／generalization_eval2_cases.jsonl／generalization_eval2.plan.jsonは保存45779の非学習・原汎用messages無変更・max2call／600秒／$0.043334（保持等別）一回案、generalization_eval2_cpu_preflight.jsonは実tokenizer487／505・切捨て0・モデル0の確認原本。新GPUはfalse／未承認、製品source／意味admission／reader／公開契約／DB／RN不変。新profileや題材別regexは実装しない。STRUCTURE_MAP_DELTA_NONE、商品0。currentは全体00／最新weekly§50／上記READMEへ戻る。
