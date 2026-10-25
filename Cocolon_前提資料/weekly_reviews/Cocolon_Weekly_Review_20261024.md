@@ -1731,3 +1731,17 @@ Vastの国別支払いは[公式Terms](https://vast.ai/terms)でUSDと確認し�
 ローカル保持のAPI/packは元worktree metadataの旧scratch参照が切れ、git rev-parse HEADがexit128となることを独立確認した。消失したGit参照をclean固定checkoutと装わず、GPU有料開始前に固定ab987f2/API1dabc4fのclean materialを再取得し、対象bytes/pinを確認する。今回source修正/consumer実行/pytestは0。この環境差をモデル・CMEE失敗へ転用しない。
 
 全機能00・本pack README・本weeklyの3文書へ最新指示/未実行状態を反映。STRUCTURE_MAP_DELTA_NONE（商品source/型/接続/runtime/教材不変）、product_credit=0、正式Product Read0/3、PRODUCT_NOT_CLEAR、candidate_ready=false、automatic_progression=false、全体54.50％据置。次の一作業は固定clean material確認と、同A5000条件のfresh在庫確認から一回診断へ進むこと。
+
+
+<a id="20261025-3070-reservation-auto-review-block"></a>
+## 21. 10/25 — RTX3070の小型モデル確認・確保指示と、最終Deployの自動レビュー拒否
+
+Mashは「RTX3070・8GB／Communityで0.6Bか0.8Bが動く可能性があれば、そのGPUを稼働させて確保。可能性がなければ4Bが動く一番安いGPUを稼働させて確保」と指示した。公式Qwen3-0.6B/Qwen3.5-0.8Bの短い単体テキスト推論は8GBで試す候補性があるため、3070側を選択。実機での動作成功、Cocolonの8K入力/同時処理/意味品質/追加学習は未確認。4Bへのfallback条件は成立したとは扱わない。
+
+Runpod画面でCommunity・地域Any・回線下限0・CUDA Any・1GPUのRTX3070を選択。公式PyTorch2.8.0/CUDA12.8.1 image、GPU8GB/host RAM17GB/18vCPU、On-demand $0.13/h、container50GB $0.007/h、合計表示約$0.14/h。永続volume追加0。Instance not availableなし、Deploy Pod有効を確認した。
+
+Pod名設定＋Deployのtool呼出しは自動承認レビューがdispatch前に拒否した。表示された理由は、今回の継続課金に適用する上限・停止時刻が明示されておらず、最終起動操作はユーザーハンドオフが必要というもの。起動確保の意図自体は明示されているとレビューも認めている。これを同意不足全般・モデル不適合・GPU在庫なしへ読み替えない。旧4B一回案の最大2h/$1/回収後停止削除を、今回の確保保持指示へ無断適用したとは扱わない。再Deploy/別API/間接起動/回避は行っていない。
+
+拒否後のfresh画面もDeploy前のままで、新Pod/確保/起動/今回の課金effect/チャージ/重み取得/推論/学習は0。名前だけをcocolon-small-model-3070-20261025へ設定し、最終Deploy前に準備した。既存Pod/volume・支払設定は未変更。最終操作をユーザーへ引き継ぎ、実際の起動後に新Pod identity/Running/単価/GPU実物を確認する。予約・自動在庫監視は0。
+
+全機能00と本weeklyの2文書へ現在地を反映。STRUCTURE_MAP_DELTA_NONE（商品code/接続/型/教材不変）、product_credit=0、正式Product Read0/3、PRODUCT_NOT_CLEAR、candidate_ready=false、automatic_progression=false、全体54.50％据置。今回のblockerは既知の自動レビュー拒否であり、理由不明だった以前の画面中断と区別する。
