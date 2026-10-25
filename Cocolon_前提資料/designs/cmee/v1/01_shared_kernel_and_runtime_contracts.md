@@ -1148,4 +1148,16 @@ API95d00bはconstructor/実thread限定180秒、残30秒を引くasync最大150�
 
 期限実装時のCPU3file114 PASSと、最初の実service初回保存のみ/訂正INVALID_FORMATはweekly§35・trial/service_roundtrip_20261025の履歴。後続の明示継続作業は、凍結chair教師のservice束縛12更新＋根拠表/参照6更新を別planで行った。API95d00bの明示offline attempt180秒/source150秒・通常30秒/SQL期限/CASを保持。既存chair1題2段階を正規service ID3組へ再束縛した凍結6教師に、全文12更新＋根拠表/参照重点6更新を実施し、保存/非学習reload後の同6入力FITは意味/本文5/6→6/6。新adapter76309b86…をPod外照合/保持。最初の学習外ID01は訂正INVALID_EVIDENCEで終了したが、別のfresh ID02の実4B2call/隔離SQL30RPCは210.939656秒で初回ASK・訂正3更新/END・意味保存後中断/明示再開・初回/最終GET/startとsame-key回答の非生成再読まで成立。raw/teacher/reader/API/SQL contractの修復・緩和0。同processの既知chair一往復であり、cold restart/未知言語/通常app/実Auth・端末/商品受入れは未成立。観測会は今回不要、GPU稼働保持/STOP0、商品credit0/正式0/3/54.50％据置。 共有schema/reader/作者/意味採用/SQLの契約は変更せず、今回の生成枠2560/prompt5632/context8192は診断runnerの新有限設定のみ。原本はtrial/2026-10-25-service-binding/README.md・weekly§36。
 
-次は同じchairの内容を変えず、実service ID/日時/priorの教師候補をCPUで再束縛・検証する範囲を具体化する。新観測会はこの問題には不要。今回planは実行終了、追加生成/学習/reader緩和なし。STRUCTURE_MAP_DELTA_PRESENT（private期限と取得中断処理のみ）、商品0/正式0/3/54.50％、GPU停止0。
+上記§36の実行planは終了済みで、同じchairの再束縛を現在の次作業へ戻さない。private期限の実装差分だけがSTRUCTURE_MAP_DELTA_PRESENT。現在の次作業は下のdaily-calm具体案で、商品0/正式0/3/54.50％を保持する。
+
+
+<a id="cmee-daily-calm-family-proposal"></a>
+## 2026-10-25 — 別の日常場面へ意味と自然本文を通す限定案（未承認）
+
+現在のemlis_model_proposal.v1はrepair/reuseのsource認識・4/6claim・専用逆検査を持つ。既存FT-UDON-INITIALの一回CPU診断はUNSUPPORTED/model_repair_reuse_source_out_of_scope。学習反復だけの問題としない。
+
+[具体案・原sourceと全packet・実診断](../../../observation_learning/training/2026-10-25-emlis-daily-calm/README.md)に、帰宅/調理/食事/温かいものを食べた/少し落ち着いたの5claimと4関係、原文のから/て/たらの作用域、限定語彙/否定・追加節拒否、metadata保持、旧chairの版/意味/hash/完成本文不変、初回だけ/問いなし、API3製品path＋新test/fixture2pathの最小変更を固定した。KARA/TARAは追加するprivate関係値の案で、未実装。
+
+承認対象は、上記familyの意味採用/独立本文検査/model指示、native教師のCPU/実tokenizer確認、76309b86から9行×2passの新18更新一回・保存/reload/FIT9（1800秒/$0.13以内）、非学習service2call/隔離SQL保存再読（900秒/$0.065以内）、回収/保持まで。原うどんと固定した雑炊変形を範囲へ含め、後者は学習に入れない。費用は記録単価$0.26/hのprocess按分で、継続保持等を含む請求総額ではない。
+
+同案のRule18 LEVEL_3というroot判断は、新しい意味/関係を採用する契約拡張と解釈したため。既存のoffline180秒承認を流用せず、実装/学習はMash判断前に開始しない。今回は診断/具体案のみ、製品code/reader/teacher/重み/API/SQL/DTO/RNは不変。通常アプリ/本番/端末/商品合格へ進めず、追加試行/追加更新/LR探索/他core展開0。GPUはSTOPしない。STRUCTURE_MAP_DELTA_NONE、primary BLOCKER_NARROWED、商品0。現在地はweekly§37/全機能00。

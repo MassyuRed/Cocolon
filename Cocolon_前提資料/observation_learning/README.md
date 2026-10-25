@@ -1,6 +1,6 @@
 # Mashの観測技術を継承するための記録
 
-**現在の直接作業：** [承認済み期限実装と実service結果§35](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-approved-offline-service-actual-result)。API95d00bの明示offline attempt180秒/source150秒・通常30秒/SQL期限/CASを保持。既存chair1題2段階を正規service ID3組へ再束縛した凍結6教師に、全文12更新＋根拠表/参照重点6更新を実施し、保存/非学習reload後の同6入力FITは意味/本文5/6→6/6。新adapter76309b86…をPod外照合/保持。最初の学習外ID01は訂正INVALID_EVIDENCEで終了したが、別のfresh ID02の実4B2call/隔離SQL30RPCは210.939656秒で初回ASK・訂正3更新/END・意味保存後中断/明示再開・初回/最終GET/startとsame-key回答の非生成再読まで成立。raw/teacher/reader/API/SQL contractの修復・緩和0。同processの既知chair一往復であり、cold restart/未知言語/通常app/実Auth・端末/商品受入れは未成立。観測会は今回不要、GPU稼働保持/STOP0、商品credit0/正式0/3/54.50％据置。
+**現在の直接作業：** [別場面の採用範囲の診断と具体案§37](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-daily-calm-scope-proposal)。既知chairの実4B→service→隔離SQL保存再読・adapter76309b86…は保持。別場面の既存FT-UDON-INITIALを現在のMODEL_PROFILEへ渡す一回CPU診断でUNSUPPORTED/model_repair_reuse_source_out_of_scopeを確認した。model指示・意味採用・本文逆検査の3ownerが修理/再使用familyに限定されるため、旧教材を反復するだけでは日常場面へ通らない。5claim/4関係・初回/問いなしの食事と落ち着きfamily、旧chair互換、18更新/FIT9/非学習service2callの具体案は未承認・未実装・未学習。新観測会は今回不要。今回GPU操作/STOP/新model/学習/DB変更/deploy0、商品0/正式0/3/54.50％据置。 [原入力・意味対応・有限実行案](training/2026-10-25-emlis-daily-calm/README.md)。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
@@ -81,7 +81,7 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 
 ## 現在地（2026-10-25・三中核の開発基準選定、本番は未成立）
 
-**今回の直接作業：** [service束縛学習と実保存再読§36](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-service-binding-fit12)。API95d00bの明示offline attempt180秒/source150秒・通常30秒/SQL期限/CASを保持。既存chair1題2段階を正規service ID3組へ再束縛した凍結6教師に、全文12更新＋根拠表/参照重点6更新を実施し、保存/非学習reload後の同6入力FITは意味/本文5/6→6/6。新adapter76309b86…をPod外照合/保持。最初の学習外ID01は訂正INVALID_EVIDENCEで終了したが、別のfresh ID02の実4B2call/隔離SQL30RPCは210.939656秒で初回ASK・訂正3更新/END・意味保存後中断/明示再開・初回/最終GET/startとsame-key回答の非生成再読まで成立。raw/teacher/reader/API/SQL contractの修復・緩和0。同processの既知chair一往復であり、cold restart/未知言語/通常app/実Auth・端末/商品受入れは未成立。観測会は今回不要、GPU稼働保持/STOP0、商品credit0/正式0/3/54.50％据置。
+**現在の直接作業：** [別場面の採用範囲の診断と具体案§37](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-daily-calm-scope-proposal)。既知chairの実4B→service→隔離SQL保存再読・adapter76309b86…は保持。別場面の既存FT-UDON-INITIALを現在のMODEL_PROFILEへ渡す一回CPU診断でUNSUPPORTED/model_repair_reuse_source_out_of_scopeを確認した。model指示・意味採用・本文逆検査の3ownerが修理/再使用familyに限定されるため、旧教材を反復するだけでは日常場面へ通らない。5claim/4関係・初回/問いなしの食事と落ち着きfamily、旧chair互換、18更新/FIT9/非学習service2callの具体案は未承認・未実装・未学習。新観測会は今回不要。今回GPU操作/STOP/新model/学習/DB変更/deploy0、商品0/正式0/3/54.50％据置。 [原入力・意味対応・有限実行案](training/2026-10-25-emlis-daily-calm/README.md)。
 
 [凍結6教師と実行source](training/2026-10-25-emlis-service-binding/README.md)／[全実結果](trials/2026-10-25-service-binding/README.md)。
 

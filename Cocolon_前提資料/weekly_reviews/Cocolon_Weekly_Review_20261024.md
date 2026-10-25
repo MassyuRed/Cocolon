@@ -2242,3 +2242,23 @@ STRUCTURE_MAP_DELTA_NONE（教材と一回診断sourceのみ、既存product/API
 今回の実行合計は全文12＋重点6更新、FIT生成12＋service生成4（計16）、新before生成0。閉じたplanの再実行/失敗modelの同一要求retryは0。4process合計2000.478447313秒、最終確認単価$0.26/h按分約$0.144479は準備/回収/継続保持/税等を含む請求総額ではない。GPUはA4500/20,470MiB/使用1MiBを完了後確認して保持、STOP/再起動/削除/新Pod/charge0。API製品code/SQL/reader/prompt/DTO/RN/Render/Supabase/merge/deploy変更0、生成枠以外の受理条件緩和0。
 
 primary outcome=TECHNICAL_CREDIT（既知chairの実4B→既存service→隔離SQL、訂正後保存・同process中断再開・非生成再読まで）。STRUCTURE_MAP_DELTA_NONE。全機能00/観測入口/元pack入口/current01/04/共有設計01へ同じ現在差分を同期。商品credit0/正式0/3/54.50％据置。今回の引用/参照不良に新しい観測会は不要。残件は別場面の意味対応、学習外言語の品質、通常経路/端末/商品受入れ、Windows/Mac未選定の運用/量子化等であり、この単一chairの成功から自動進行しない。
+
+
+<a id="20261025-daily-calm-scope-proposal"></a>
+## 37. 10/25 — 別場面を止めている修理専用の採用範囲を確認し、日常場面への具体案を固定
+
+Mashの「4B学習＋CMEE接続を進めて」を受領。開始Cocolon80080bdf/API95d00b9、全機能00全文/ルール/恒久incident/全体設計01・全file地図01A/B/Cの導線/current maps/最新§36/観測学習目的・用途/原教師と実sourceを確認。System Context最新索引は未完成のためfresh原本fallback。Codex Work/GPT-6、root華恋が統合/実行/反映owner、別文脈agentはread-onlyであり独立Pro/Ultraやhuman acceptanceを装わない。全blobの意味読了とは主張しない。
+
+**今回の実障害：** current MODEL_PROFILEのmodel-visible指示・source意味採用・本文逆検査の3ownerは、修理/再使用の構文familyに限定される。元4Bpackの旧7教師は既に範囲外と明記されている。別場面に対して追加学習だけを行っても、この境界のままCMEEの採用成功を期待できない。
+
+[原入力・全意味対応案・実診断・有限実行案](../observation_learning/training/2026-10-25-emlis-daily-calm/README.md)。既存FT-UDON-INITIALのsource引用を再照合し、5claim/4関係/8根拠の未採用draftを作成。一回の実prepare_model_snapshotはUNSUPPORTED/model_repair_reuse_source_out_of_scope。根拠8行・出典scalar一致・teacher/製品3source hash不変を確認。これは合成候補のscope診断で、実モデル出力や候補全体の将来採用妥当性の合格ではない。Python3.12.14の既存temporary runtimeを再発見して使用、新install/network0、pytest/SQL0、新model/学習/GPU操作0。
+
+既存教師は架空日常入力「あったかいもの食べたら、ちょっと落ち着いた。／帰ってから、うどんを作って食べた。」、華恋編集でMash品質承認ではない。帰宅・調理・食事とその作用域、原文のたらの結び付き、少しという程度、選択metadataを保持する。温かいもの＝うどんというidentity/空腹/目的/一般的原因は補わず、初回・問いなし/更新なしとする。private KARA/TARA値と5claim/4関係は提案で未実装。
+
+rootの推奨はこのfamilyを既存offline採用範囲へ一つ加え、旧chair互換を保ち、既存76309b86から新native9行（chair6＋daily3、独立2family）を18更新/FIT9、学習外2service identity/固定した雑炊の語彙変形で保存再読まで通す一案。新familyのbefore生成は0で改善率は算出しない。学習/保存/reload/FIT9は1800秒/$0.13、評価最大2call/900秒/$0.065、記録単価按分。実請求には準備/回収/継続保持/税等が別に掛かる。source/実tokenization/旧互換/OOM/長さ/期限/採用の不成立では終了し、raw補修/reader緩和/追加更新/LR探索/同要求再call0。Pod自体は停止しない。
+
+これは新しい意味の採用範囲を広げるため、Rule18§11.3のcontract/acceptance変更とrootが解釈しLEVEL_3の具体判断を求める。前のoffline期限承認の流用0、今回実装/学習0。CPU診断/具体案と関連資料の保存は現行継続指示の範囲として反映する。新観測会は今回不要。
+
+Renderはmetadata readで3577d7fd/dep-dbd8hjoae00c73firbt0がLive、自動配置OFFを確認。開発95d00b未配置。Supabase cocolon-projectはACTIVE_HEALTHYのmetadataのみ、本人row/SQL/変更0。GPUの新規稼働照会は未実施で、前回の稼働確認と今回STOP/再起動/削除操作0を区別する。通常application/実Auth/HTTP/RN/本人端末/一般入力/商品受入れは残る。
+
+primary outcome **BLOCKER_NARROWED**、商品0/正式0/3/全体54.50％据置。§36の既知chairのTECHNICAL_CREDITは保持。STRUCTURE_MAP_DELTA_NONE（現行製品code/契約/接続変更0、診断・変更候補のみ）。API開発正本へのwrite0、Cocolonは新pack4file＋全機能00/観測入口/共有設計01/本weekly/全file地図01Aの計9file。GPU停止/再起動/削除/新Pod/charge/Render変更/Supabase変更/merge/deploy0。次の一作業は具体案の判断後の限定実装/学習であり、自動開始しない。

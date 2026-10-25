@@ -1,0 +1,33 @@
+{
+  "status": "CURRENT_PROFILE_SCOPE_BLOCKER_CONFIRMED",
+  "api_commit": "95d00b907f6d9c42944666269acc457c9af34f37",
+  "python": "3.12.14",
+  "production_source_sha256": {
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_semantic_admission.py": "4a57bb27d3c0e00bb52d399c662749962cac282d9ff33282c909b21874f4f9c3",
+    "ai/services/ai_inference/cocolon_meaning_experience_engine/model_candidate_source.py": "b3058e4cdff65465516056fc0af4c7452bad6a6960310ecdd69ac008da872297",
+    "ai/services/ai_inference/emlis_ai_grounded_observation_gate.py": "297b0eff372265f2151fe070dfaf73c29c222d383fc529cf4b9dff551492c1bb"
+  },
+  "source_unchanged": true,
+  "teacher_path": "Cocolon_前提資料/observation_learning/training/2026-10-24-emlis-free-pilot/sft_examples.jsonl",
+  "teacher_sha256": "b3115af6a79bb39467517d49f92c94ee7a1019c168f3cf74e078c9960e18bd82",
+  "teacher_unchanged": true,
+  "dialogue_scalar_quote_verified": true,
+  "exact_evidence_rows_verified": 8,
+  "current_model_profile": "emlis_model_proposal.v1",
+  "current_message_meaning_spec": "Atomic exact quotes, one index/claim. Action=EVENT; established result=ACTION_RESULT; joy itself=STATE; what the person is glad about=USER_APPRAISAL_OBJECT. Initial4: repair/result/joy/object, NOT_STATED gap1, updates0. Corrected6: same repair/result/joy IDs + guidance/joint/reuse, gap0. Other grammars unsupported. NOT_STATED is missing detail, not uncertainty.",
+  "admission_decision": "UNSUPPORTED",
+  "reason_code": "model_repair_reuse_source_out_of_scope",
+  "semantic_adopted": false,
+  "body_generated": false,
+  "diagnostic_candidate_is_synthetic": true,
+  "full_future_candidate_validity_not_claimed": true,
+  "model_calls": 0,
+  "training_updates": 0,
+  "gpu_operations": 0,
+  "network_calls": 0,
+  "sql_calls": 0,
+  "production_mutations": 0,
+  "reader_relaxations": 0,
+  "product_credit": 0,
+  "automatic_progression": false
+}

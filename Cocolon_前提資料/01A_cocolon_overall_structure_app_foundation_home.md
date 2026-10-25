@@ -4815,3 +4815,8 @@ F/trial prefixは上表と同じ。現sourceのservice30秒と実model初回57.4
 | trial/service_roundtrip_20261025/ | 承認plan/CPU結果、実request/messages/raw/prior/receipt/DTO/snapshot/run/manifest/integrity/画像、runtime起動前失敗記録、入力差分と訂正不良の診断。通常app/商品受入れと分離 |
 
 F/trial prefixは先行表と同じ。初回の実service保存・非生成再読は成立、訂正はINVALID_FORMATで意味更新せずANSWERだけ保存。原raw無補修/重み不変。STRUCTURE_MAP_DELTA_PRESENTは既存serviceのprivate時間設定と取得中断処理。SQL/DTO/RN/他core source責務は不変。現在はweekly§35/全機能00。
+
+
+## 2026-10-25 — 日常食事familyのscope診断と未採用案の所在
+
+`observation_learning/training/2026-10-25-emlis-daily-calm/` のREADME.md、source_mapping_candidate.json、current_profile_diagnostic.json、probe_current_profile.pyは、既存FT-UDONの5claim/4関係の未採用対応案と、現修理専用profileの実UNSUPPORTED診断だけを所有する。製品code/型/意味/reader/保存経路は変更0、STRUCTURE_MAP_DELTA_NONE。実装候補3owner＋新test/fixtureと有限18更新/保存再読の範囲・判断境界は同READMEと共有設計01#cmee-daily-calm-family-proposal、最新進行はweekly§37/全機能00。新model/学習/GPU操作0、旧§36 credit/重み/教材/raw/終了planは維持。
