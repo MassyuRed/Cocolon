@@ -4768,10 +4768,28 @@ F/unicode_check/diagnostic.pyとplan.jsonが、保存32更新adapterの非学習
 reception_checkの実原本はtrials/2026-10-24-qwen4b-cmee-diagnostic/reception_instruction_20261025/。raw/inference_report/actual_plan/diagnostic/preflight/execution_plan/reception_attempt/reception_file_manifest/dataset_manifest/integrity/cmee_result/comparison/README/result.jpgに加え、restored_prompt_replay.jsonは旧実rawの新生成なし互換確認、next_local_difference.jsonはCPU文字列比較を所有する。候補promptは退行で不採用、model_candidate_sourceは学習時a3e82 exact bytesへ復元（API7a4dc32、全tree同一）。商品構造/採用条件差分なし。現在の残件と次の局所診断はweekly§31が所有する。
 
 
-### 2026-10-25 — 局所token診断と受け取りloss4更新の実原本
+### 2026-10-25 — 局所token診断と受け取りloss4更新の実原本（§32時点の履歴）
 
 F/branch_check/diagnostic.py/plan.jsonは固定a8baf0・元messagesで3forwardだけを行う非学習診断（完了済み）。F/reception_fit4/continue_fit.py/plan.jsonは全文input/teacher/EOSを保持してreceptionだけを学ぶ4update一回候補（完了・不採用）。旧planの再利用なし。
 
 trial/branch_check_20261025のresult/READMEは分岐token/rank/p/全token NLL/限界を所有する。trial/reception_fit4_20261025のrun/actual_plan/前後raw/前後reception_nll/前後cmee/comparison/file_manifest/integrity/consumer_provenance/SOURCE_COMMIT/READMEは実4step・2生成・不採用・回収・次作業を所有する。重みbinaryは回収archive libfile_cbe77bb15ad081918e252f6427c8a8c8、GitHubには原raw/結果とhashを置く。固定prompt/保存重みで分岐token1116を実測。誤枝「ようになった」p50.24％/1位、教師「ようになって」p23.73％/2位、gap0.75。既存2教師のreceptionだけを4update/AdamW1e-5で学ぶ一回候補を完走したが、前後raw2/2が同一で実CMEE意味2/2・本文1/2のまま。新e3743d…は不採用、旧a8baf0…を維持。全24member/32F32tensorの重みarchive回収照合/保管済み。 次は保存済み不採用e3743d…の同じ分岐prefixを非学習1forwardだけ測り、旧a8baf0のgap0.75と比較して、4更新で局所順位がどう変わったかを確認する。追加学習・新prompt・教師増量・reader緩和・raw補修・新生成を自動で行わない。
 
 STRUCTURE_MAP_DELTA_NONE（有限診断/学習candidateと結果の所在のみ）。CMEE製品source/API/DB/RN/意味型/採用reader/教師は不変。全体設計01・01B/01C・Piece/Analysis mapは構造差分がなく更新不要。全体現在地とlatest weekly§32へ進行を戻す。
+
+
+### 2026-10-25 — LRだけの受け取り4更新と実モデルoffline一往復（現在）
+
+Fは observation_learning/training/2026-10-24-emlis-4b-training/、trialは observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/ を指す。
+
+| path | 責務 |
+|---|---|
+| F/branch_check/compare_fit4.py | 不採用e3743dと元a8の固定prefixを同座標で比較。1forward/生成0/学習0。gap0.75→0.375、順位不変 |
+| trial/branch_compare_fit4_20261025/result.json・README.md | 1forwardの全実出力/固定hash/時間/限界、過去結果への比較 |
+| F/reception_fit4_lr5/continue_fit.py・plan.json | 元a8からLRだけ5e-5へ変更した4stepと非学習reload/新生成2/退避。planは完了・再実行不可 |
+| trial/reception_fit4_lr5_20261025/ | README、run、actual_plan、before/after JSONL、before/after_reception_nll、before/after_cmee、actual_prior_chain、comparison、file_manifest、integrity、consumer_provenance、SOURCE_COMMIT。knownFIT2/2・CPU actual prior replay・回収を所有 |
+| F/roundtrip_check/run_roundtrip.py | 実モデル初回→既存CMEE→実問いとactual initial snapshot→既存本人訂正→実モデル再生成→既存CMEEの逐次2call。更新0/teacher送信なし、900秒以内の一回で完了 |
+| trial/model_roundtrip_20261025/ | README/run/attempt、initial/correctionのmessages・raw・cmee、file_manifest/integrity、SOURCE_COMMIT。実2call/意味本文2/2/問い1/訂正3更新/ENDと回収を所有 |
+
+保存e3743dの同prefix1forwardで誤枝と教師のgapは0.75→0.375へ縮小したが順位は不変。元a8baf0から学習率だけ5e-5へ変えた同2教師/reception loss4updateを完走し、既存実CMEEで意味2/2・本文1/2→2/2。新9b845eced…を既知FIT/offline用候補に選び、旧a8baf0/e3743dは保持した。さらに保存重みを非学習reloadし、実モデル初回→実CMEE問い→本人の既存訂正→実モデル再生成の同一process一往復を新規2callで確認（意味/本文2/2、訂正3更新、問い1・最終None/END、172.492秒）。一往復ではraw置換/teacher送信/重み変更0。重みbinaryはarchive libfile_0ce9c648e89c8191acf7aabfa5a56b01に保管し、GitHubにはhash/source/raw/結果を置く。既知の架空chair2段階だけのoffline技術確認で、通常service/Auth/SQL/HTTP/RN/本人端末/保存再読、一般入力、三中核の商品品質は未確認。次は既存private注入境界とserviceの保存・中断再開責務を照合し、実モデル出力を保存再読へ渡す明示offline確認を準備する。新prompt/教師増量/追加学習/reader緩和/自動再試行は今回の結果から開始しない。
+
+STRUCTURE_MAP_DELTA_NONE。全体設計01・01B/01C・Piece/Analysis mapは商品owner/型/接続に差分がなく更新不要。最新weekly§33/全機能00が進行owner、current01/04は限定確認と通常未接続の区別を同期。商品0/正式0/3/54.50％、GPU停止なし。

@@ -4,5 +4,6 @@
   "members": 27,
   "all_hashes_valid": true,
   "finite_f32_tensors": 32,
-  "library_saved": false
+  "library_saved": true,
+  "library_file_id": "libfile_0ce9c648e89c8191acf7aabfa5a56b01"
 }

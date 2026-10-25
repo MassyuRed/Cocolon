@@ -2105,3 +2105,40 @@ Mashの今回の継続指示に基づくOBSERVED_BLOCKER_MINIMAL_FIX。全機能
 次は保存済み不採用e3743d…の同じ分岐prefixを非学習1forwardだけ測り、旧a8baf0のgap0.75と比較して、4更新で局所順位がどう変わったかを確認する。追加学習・新prompt・教師増量・reader緩和・raw補修・新生成を自動で行わない。
 
 教材不足/4B一般の不適性は未確定。今回の問題には観測会不要。旧18候補/9教師/evalは不変、Piece/Analysis完成教師0。通常application/動的実model往復/本人保存再読/一般入力/量子化/本番可用性は残件。全機能00・観測目的/pack・01A・current01/04を同期し、商品責務/公開API/DB/RN/意味schema/reader不変、STRUCTURE_MAP_DELTA_NONE。BLOCKER_NARROWED、商品credit0/正式0/3/54.50％据置。GPU停止/再起動/削除/新Pod/charge/新依存/Render/Supabase/merge/deploy0、指示まで稼働保持。
+
+
+<a id="20261025-reception-lr5-and-real-offline-roundtrip"></a>
+## 33. 10/25 — 学習率比較で既知FIT本文2/2、実モデルのoffline一往復
+
+Mashの新しい継続指示に基づくOBSERVED_BLOCKER_MINIMAL_FIX。fresh PR30 eff740/API7a4dc32、全機能00全文・work rules/必読incident・全体設計01/全file地図01A・CMEE current04・最新§32・観測学習の目的/用途/前提と実sourceを確認。Codex Work/GPT-6、root華恋が単一実行/統合/反映owner、補助agentは読取review。別モデルPro/Ultra審査へ換算しない。System Context最新索引未生成は保持し、fresh原本fallbackを使う。
+
+### 局所比較と学習率だけの4更新
+
+[保存e3743dの同prefix比較](../observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/branch_compare_fit4_20261025/README.md)はsource c5eee230、生成0/学習0/1forward、10.957347936555743秒。分岐token1116のactual p0.4538724720478058/rank1、teacher p0.3119416832923889/rank2、logit gap0.375（元0.75との差-0.375）。方向は教師へ近づいたが選択は逆転していない。一般能力/線形な学習率効果の実証とは扱わない。
+
+[LR5一回比較の全実結果](../observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/reception_fit4_lr5_20261025/README.md)はsource9778aedad/API7a4dc32、244.0810161260888秒。元a8baf0から、既存全文input/teacher/EOS・reception25/24token loss・4step[0,1,0,1]を固定して、AdamWのLRだけ1e-5→5e-5へ変更した。e3743dの継続や閉じた旧planの再開ではない。保存/非学習reload後の新生成2件、初回1095/訂正1878token、JSON/stop2/2。beforeは元a8の実raw再利用で、新生成へ加算しない。実CMEEは意味2/2、本文1/2→2/2、初回QUESTION_PENDING、訂正GENERATED/3更新。初回raw不変、訂正raw変化、両packetのsurface以外の意味/根拠/参照は前後同一。訂正Reception第2文は「またその椅子に座れるようになって、よかったですね。」となり既存readerを通過した。teacher/prompt/意味schema/reader/採用条件の変更0。peak allocated12.606467247009277/reserved13.697265625GiB。
+
+新adapter **9b845eced7738b32eb21cfe9193798a41ae58d6f439aac9a5731c68e96952835**を既知FIT/offline用選択候補へ更新。旧a8baf0/e3743dは保存保持する。実初回snapshotからの訂正messages/実question一致と、そのactual priorでの保存raw再消費はactual_prior_chain.jsonに記録したCPU replayで、次の実モデル往復とは別計上。
+
+### 実モデル初回から実問い・訂正・再生成へ
+
+[実モデルoffline一往復](../observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/model_roundtrip_20261025/README.md)はsource5f618f2/API7a4dc32、172.4916563341394秒。保存9b845ecedを非学習reloadし、同じmodel instanceから新規generateを順に2回呼んだ。初回はnative request/priorなしから実builderのmessages、実rawを既存consume_rawへ渡し、採用された実semantic_snapshotと実questionを取得する。question全体が既存の架空訂正scenarioと一致した場合だけ、その本人役の訂正とactual initial snapshotから次のrequest/messagesを作り、2回目を生成した。事前固定priorや保存済みrawで成功を置換していない。
+
+| 項目 | 実結果 |
+|---|---|
+| model calls | started2/completed2、更新0/optimizerなし、trainable parameter0 |
+| 初回 | input1995/output1095、stop/EOS/JSON成功、意味・本文あり、QUESTION_PENDING/ASK |
+| 訂正 | input5018/output1878、stop/EOS/JSON成功、意味・本文あり、GENERATED/REFINED |
+| actual prior/意味 | 初回実snapshot使用、snapshot_ref/meaning_packet/native_bindings/prior_refの4keyが各段階で既知FIT版と一致 |
+| 問い・更新 | 実問い1、訂正3更新、最終question=null/decision=END |
+| source/重み | fixtureとadapter全3file不変、raw補修/保存raw置換/teacher送信なし |
+
+モデルへ送ったmessagesは各2件のsystem/userのみ。既存teacherは比較用に読むだけでassistant targetとして送っていない。両実raw_textは先のFIT実出力とも一致したが、別の2回の新生成である。通常async ModelCandidateSource/service/Auth/SQL/HTTP/RN/本人保存再読は呼んでいない。したがって「既知fixtureで実モデル2callを順につないだoffline一往復」までの限定技術確認であり、通常アプリ接続・未知品質・商品受入れではない。
+
+### 回収・現在地と次
+
+重み入りarchive SHA256 **8aef1b0829ac75bc1bdb2f3fb755323f03dce343b274f332f1d89d7efca2c6ea**/3,522,063bytes、全27member/size/hash・32F32tensor有限性をPod外照合。Podでも受領hashとの比較True。永続保管 [重みarchive](https://chatgpt.com/library?file_id=libfile_0ce9c648e89c8191acf7aabfa5a56b01&account_id=personal)。元4B全重み/optimizer/RNGは非同梱。実一往復archive c7544154321f283ff1fff6ef6d144b2e2e768f5b59c2fcfc940fc6404fa72a13/42,694bytes、全11memberのmanifest/size/hashを照合し、全原raw/messages/CMEE/run/sourceをGitHubへ記録した。資料保存前のcheckpoint52f293は既知FIT成功/一往復実行中、その後本節で完了を確定した。
+
+次は既存private注入境界とserviceの保存・中断再開責務を照合し、実モデル出力を保存再読へ渡す明示offline確認を準備する。新prompt/教師増量/追加学習/reader緩和/自動再試行は今回の結果から開始しない。一般入力の独立評価と自然な観測品質、小さなprompt変更への安定性、Piece/Analysis完成教師0、通常保存再読/有料差/量子化/本番可用性は残る。今回の既知fixture問題に観測会は不要。旧18候補/9教師/evalは不変で、新しい教示が必要かは一般評価の不足を分けて判断する。
+
+全機能00・観測入口/pack・01A・current01/04を同期。STRUCTURE_MAP_DELTA_NONE（有限学習/確認sourceと結果の所在のみ、商品runtime/型/意味schema/reader/公開API/DB/RN/他core責務不変）。限定TECHNICAL_CREDIT、product_credit=0/正式0/3/全体54.50％据置。GPU停止/再起動/削除/新Pod/charge/新依存/Render/Supabase/merge/deploy0、指示まで既存A4500を稼働保持する。

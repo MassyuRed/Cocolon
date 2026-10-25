@@ -1,4 +1,4 @@
-**現在：** [局所分岐と4更新候補の不採用§32](../../../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-reception-local-fit4)。固定prompt/保存重みで分岐token1116を実測。誤枝「ようになった」p50.24％/1位、教師「ようになって」p23.73％/2位、gap0.75。既存2教師のreceptionだけを4update/AdamW1e-5で学ぶ一回候補を完走したが、前後raw2/2が同一で実CMEE意味2/2・本文1/2のまま。新e3743d…は不採用、旧a8baf0…を維持。全24member/32F32tensorの重みarchive回収照合/保管済み。次は保存済み不採用e3743d…の同じ分岐prefixを非学習1forwardだけ測り、旧a8baf0のgap0.75と比較して、4更新で局所順位がどう変わったかを確認する。追加学習・新prompt・教師増量・reader緩和・raw補修・新生成を自動で行わない。GPU停止なし、今回観測会不要、通常接続/一般入力/商品品質未成立。
+**現在：** [学習率比較と実モデルoffline一往復§33](../../../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-reception-lr5-and-real-offline-roundtrip)。保存e3743dの同prefix1forwardで誤枝と教師のgapは0.75→0.375へ縮小したが順位は不変。元a8baf0から学習率だけ5e-5へ変えた同2教師/reception loss4updateを完走し、既存実CMEEで意味2/2・本文1/2→2/2。新9b845eced…を既知FIT/offline用候補に選び、旧a8baf0/e3743dは保持した。さらに保存重みを非学習reloadし、実モデル初回→実CMEE問い→本人の既存訂正→実モデル再生成の同一process一往復を新規2callで確認（意味/本文2/2、訂正3更新、問い1・最終None/END、172.492秒）。一往復ではraw置換/teacher送信/重み変更0。既知の架空chair2段階だけのoffline技術確認で、通常service/Auth/SQL/HTTP/RN/本人端末/保存再読、一般入力、三中核の商品品質は未確認。次は既存private注入境界とserviceの保存・中断再開責務を照合し、実モデル出力を保存再読へ渡す明示offline確認を準備する。新prompt/教師増量/追加学習/reader緩和/自動再試行は今回の結果から開始しない。重みarchive全27member/32F32tensorと一往復archive全11memberをPod外照合。重みは永続保管済み。GPUは指示まで稼働保持し、今回観測会不要。商品credit0/正式0/3/54.50％を維持。
 
 # Emlis 4B学習・保存再loadの限定pack
 
@@ -180,4 +180,4 @@ Runpod連携の検索結果は今回0件で、GPU管理画面・残高・稼働P
 
 11検査のうち新3件は、独立した数値CE/解析勾配の旧full比較、全contextを保つ実呼出し引数、target欠落・不連続の拒否です。固定QwenとPEFTの実装をread-only reviewしました。Torch/CUDAはこのCPU環境にないため、実モデルの数値一致・VRAM peak・16GB合格を主張しません。dataset/teacher/eval/API/CMEE契約は不変。重複usageキーの前者を削除し、以前から実際に保存されていたprompt_tokens/completion_tokensを維持しました。
 
-実モデルの動的一往復は未実装・未実行です。既存build_model_messagesは実初回のsnapshot/questionから訂正入力を作れますが、現在のverify_cmeeは固定priorを復元します。今回の有料一回案は従来の16生成を維持し、動的追加生成・通常service/DBの保存成功へ拡張しません。保存rawの結果を得た後、その不足を具体的に判定します。
+この旧一回案の作成時点では、実モデルの動的一往復は未実装・未実行でした。現在は冒頭とweekly§33の既知fixtureによる限定offline一往復まで確認済みで、通常serviceの保存再読は残件です。既存build_model_messagesは実初回のsnapshot/questionから訂正入力を作れますが、現在のverify_cmeeは固定priorを復元します。今回の有料一回案は従来の16生成を維持し、動的追加生成・通常service/DBの保存成功へ拡張しません。保存rawの結果を得た後、その不足を具体的に判定します。

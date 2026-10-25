@@ -1,6 +1,6 @@
 {
   "schema": "cocolon.4b_reception_loss_fit4_lr5.v1",
-  "status": "AUTHORIZED_ONCE_CURRENT_MASH_CONTINUATION",
+  "status": "COMPLETED_NOT_REPLAYABLE",
   "basis": "Mash renewed continuation; fixed-prefix measurement on e3743d narrowed actual-minus-teacher gap .75 to .375 without changing rank. Test learning rate alone from original selected a8baf0, not reuse of closed fit4.",
   "source_predecessor": "c5eee230693229f2b438b1f40a3ab8394a090616",
   "api_commit": "7a4dc32c07f8c8a30609e8345207c6a9c831de23",
@@ -34,5 +34,15 @@
   "strict_optimizer_resume": false,
   "success": "Existing real CMEE: meaning/body2/2, initial question and all3 correction updates retained; new raw unmodified. Otherwise reject without retry.",
   "limits": "One finite reception-loss candidate, not replay of a closed run. Full original prompt and teacher including EOS retained in inputs; only reception labels receive loss. No new teacher/prompt/reader/adoption change, forced output/logit processor, raw repair, unknown-quality claim, service enabling, dependency, Pod lifecycle, charge, private DB, deployment or merge.",
-  "comparison_baseline": "reception_fit4_20261025: same original a8baf0, 4 updates at1e-5, raw unchanged; new candidate changes LR only."
+  "comparison_baseline": "reception_fit4_20261025: same original a8baf0, 4 updates at1e-5, raw unchanged; new candidate changes LR only.",
+  "training_authorized": false,
+  "actual_source_commit": "9778aedad5e7081e540a5ce5287ea869d3e04aea",
+  "actual_updates": 4,
+  "actual_new_generations": 2,
+  "candidate_selected_for_known_fit": true,
+  "product_accepted": false,
+  "selected_adapter_sha256": "9b845eced7738b32eb21cfe9193798a41ae58d6f439aac9a5731c68e96952835",
+  "archive_sha256": "8aef1b0829ac75bc1bdb2f3fb755323f03dce343b274f332f1d89d7efca2c6ea",
+  "library_file_id": "libfile_0ce9c648e89c8191acf7aabfa5a56b01",
+  "followup": "model_roundtrip_20261025 completed independently; no replay/retry authorized by this closed plan."
 }
