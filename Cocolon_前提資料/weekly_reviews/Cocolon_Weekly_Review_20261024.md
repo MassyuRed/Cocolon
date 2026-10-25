@@ -2452,3 +2452,12 @@ Mashの「この12更新の一回試行を実行してよいですか？→い�
 
 
 §46 実行中checkpoint（10/26 JST）：source34c9d67fから一回起動。12更新/保存非学習reload完了、読取486.8秒でFIT9は3完了/4開始、完了3rawのEOS/parse正常。全9意味/本文採否未判定、後段0。新2009b43cの早期archive3,477,588bytes/18対象/32F32有限をPod外照合、libfile_a3fe11afac408191b5b81dbac55f50e8へ保存。初期quote18と旧不採用f1は不変。起動コマンドの改行構文失敗はfile/child/model effect前に修正し、実学習は一回のみ。Jupyter白画面/transport errorは既存tabで回復、process再起動0。全実結果未確定、商品0。実行中原本2026-10-26-quote-balanced-fit12/READMEとquote pack runtime checkpointから同じ試行へ復帰する。
+
+
+### §46 最終結果（10/26 JST）— chair6保持、daily01区切り不正で意味本文8/9・後段0
+
+[完了原本](../observation_learning/trials/2026-10-26-quote-balanced-fit12/README.md)。source34c9d67f/API4002b457・初期138bから固定12更新/保存/非学習reload/9生成を1017.282731秒で完了。無補修の既存consumer一回で意味8/9・本文8/9。chair6は全件教師parsed一致、初回3 ASK/訂正各3更新・問いなしを保持し、前回の3退行は解消。daily02/03も教師parsed一致/FINAL。daily01だけobservation/reception間のJSON区切り3文字がspace1文字へ変化しINVALID_FORMAT（1584token/EOS/stop、打切りではない）。自然な受け取り改善文はrawにあるが補修せず不採用。root/別文脈agentとも全9本文・問い・更新・差分を読取。全9条件未達なので2実model/SQL保存再読は0/evalplan未作成、新2009b43cは未採用で終了。正式Pro/Ultra/human受入れではない。
+
+reception NLL0.279111952→0.006958150、chair全文0.000944048→0.001216513。異なる対象のNLLは合算せず、loss低下を品質証明にしない。追加学習/失敗再call/LR探索/raw補修/reader緩和0。既存完全JSON教師がある残差なので新観測会は今回不要、独立2話/一般化未確認/Piece・Analysis完成教師0は継続。旧18/6plan/teacher/helper/reader/raw/初期重み不変。
+
+早期archive3,477,588bytes/18対象/32F32有限をPod外照合しlibfile_a3fe11afac408191b5b81dbac55f50e8へ保存。完了archive6,969,198bytes/SHA3c2ee5feef41b3cc6e2a98eb961554cd70551524cec1ccf8a2c9529d2cbafe3dの22対象、raw205,745bytes、全consumerを回収・hash照合しGitHub原本へ保全。処理按分約$0.07347042（記録$0.26/h、準備/回収/保持/保存/税等別）、前半1800秒/$0.13内、後段900秒/$0.065未使用。起動前構文失敗/接続復旧は上記checkpoint通りで、実学習一回/再起動0。商品0/正式0/3/54.50％、STRUCTURE_MAP_DELTA_NONE。全体00/観測入口/pack/runtime checkpoint/01Aを同期。Jupyter直結、GPU lifecycle/一覧/管理API/Render/Supabase/本人DB/通常application/RN/merge/deploy変更0。GPU保持課金の停止を意味しない。

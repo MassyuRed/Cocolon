@@ -1,9 +1,15 @@
-# Balanced12 — 実行中checkpoint（2026-10-26 JST）
+# Balanced12 — 完了・全9条件未達（2026-10-26 JST）
 
-Mash承認の固定12更新をsource34c9d67f/API4002b457・初期138b9ff7から一回実行。12/12更新、保存/非学習reloadを確認。最後の読取点486.8秒でFIT9の3完了/4開始、3rawはEOS/parse正常。意味・本文・全9保持の採否は未判定、後段2件は0。これを完了結果と扱わず、同じprocessのrun.jsonから続ける。再起動/追加学習/失敗model再callをしない。
+Mash承認の固定12更新をsource34c9d67f739291c7da0a10be6ccd05730ebfaae8/API4002b457・初期138b9ff7から一回実行。chair6全文JSON＋EOS各1回とdaily3受け取り11token各2回を固定順で交互に学び、12/12更新→保存→非学習reload/32有限→9生成を1017.2827305626124秒（約16分57秒）で完了した。rawを補修せず既存consumerへ一回渡した結果は**意味8/9・本文8/9**。全9成功条件が未成立なので、条件付き実service/SQL2件は0、eval plan未作成で終了。新2009b43cは保存したが未採用。追加学習/失敗model再call/LR探索/raw補修/reader緩和0、閉じたplanを再起動しない。
 
-追加重み2009b43ca256f2960c1e2e7fdf1cb55a69b613594f28a5a76f4efdd19b4d0419を早期回収。archive3,477,588bytes/SHA99ea901e79147e7d359c42be227eb8cc75018e0db25a55b3e564ccf4f7b61f27、manifest18対象/32F32有限をPod外照合・永続保存（weights_verification.json）。early runのgeneration0は保存時点の記録で、現実行3完了と混ぜない。元4B全重み/optimizer/RNGは含まない。
+chair6は全件教師parsed一致・意味/本文6/6。初回3はASK/QUESTION_PENDING、訂正3は各3更新/問いなし/REFINEDを保持し、前回の関係先/observation/反復の3退行は解消した。daily02/03も教師parsed一致/意味本文2/2/問いなし/FINAL。daily01だけはobservationとreceptionの区切り `","`（teacher文字[3933,3936)）が半角space（raw[3933,3934)）に置き換わりJSON不正。EOS到達/stop/1584tokenで、打切りではない。改善した受け取り文はrawにあるがINVALID_FORMATのため意味/本文とも不採用。区切りを直して成功へ数えない。末尾改行以外のtext差分はこの1箇所のみ。実raw/全9surface・問い・更新・文字差分はclosure.jsonに保持。
 
-実行先/workspace/cocolon_4b_quote_balanced_fit12_20261025、pack/workspace/cocolon_4b_quote_balanced_pack_20261025。launcher616784、開始unix1792940671.5176206。内部1800秒/外側timeout1795秒+kill5秒、条件付き後段900秒、合計最大45分/処理按分$0.195（保持等別）。plan/runtime checkpointは既存quote packが所有する。Jupyter直接で、GPU lifecycle/通常DB/Render/Supabase/RN/merge/deploy操作0。
+rootは全9のraw/採用本文/問い/更新と教師差分を読み、別文脈agentも全9と同じgate不成立を読取確認した。formal Pro/Ultra/human受入れではない。consumerはTRAINING_FIT_FIXED_PRIOR_NOT_DYNAMICで、訂正には固定した既採用教師priorを使う。新実service往復/新言語の汎化/商品品質へ昇格しない。独立言語事例は2話/identity6のまま、Piece/Analysis完成教師0、商品0/正式0/3/54.50％据置。
 
-起動コマンドの改行構文失敗はPythonが全体をparseする段階で発生し、file/model/child effect前に修正。実学習起動は一回。途中Jupyterの白画面/操作transport errorを既存tab再取得で回復したが、学習processは再起動していない。商品0/正式0/3/54.50％、全9raw/consumerの採否は後続完了原本へ更新する。
+reception NLL平均0.2791119516→0.0069581495、chair全文NLL平均0.0009440483→0.0012165135。対象token数も目的も違うため合算しない。NLL低下は全件成功や一般品質の証明ではない。今回の残差には既存の完全JSON教師があり、新観測会は不要。新しい有料試行は開始せず、区切り保持を今後検討する。
+
+追加重み2009b43ca256f2960c1e2e7fdf1cb55a69b613594f28a5a76f4efdd19b4d0419の早期archiveは3,477,588bytes/SHA99ea901e79147e7d359c42be227eb8cc75018e0db25a55b3e564ccf4f7b61f27。18対象hash/32F32有限をPod外照合し、libfile_a3fe11afac408191b5b81dbac55f50e8へ永続保存。完了archive6,969,198bytes/SHA3c2ee5feef41b3cc6e2a98eb961554cd70551524cec1ccf8a2c9529d2cbafe3dの全22対象を照合し、早期archiveと重みが同一であることを確認。early runのgeneration0は保存時点の記録で、最終9と混ぜない。原raw205,745bytes/SHAa81ea62997eebb8bf8e66a0afa464aeb8e2afbcf43b810ac4b43bac09cd66723、全consumerはindex順にUTF8 partをseparatorなしで連結すると元bytes/SHAへ戻る。元4B全重み/optimizer/RNGはarchiveに含まない。
+
+処理按分は1017.282731秒×記録単価$0.26/h≒$0.07347042。前半1800秒/$0.13内で終了し、後段900秒/$0.065は未使用。準備/回収/保持/保存/税等は別で、請求総額ではない。起動コマンドの改行構文失敗はfile/child/model effect前に修正し、実学習は一回。Jupyter白画面/transport errorは既存tabで回復し、process再起動0。原18/6plan/teacher/initial重み/reader/raw不変。
+
+実行先/workspace/cocolon_4b_quote_balanced_fit12_20261025、pack/workspace/cocolon_4b_quote_balanced_pack_20261025。固定名は準備時10/25のもので実行日10/26 JSTと区別する。launcher616784/開始unix1792940671.5176206、内部1800秒/外側timeout1795秒+kill5秒。全9条件未達でrun_quote_balanced_holdout.py/eval_fixture.jsonは未使用、evalplan未作成。Jupyter直接以外のGPU一覧/管理API/lifecycle/Stop/再起動/削除/新Pod/charge操作0、Render/Supabase/本人DB/通常application/公開API/DTO/RN/merge/deploy変更0。旧§43の停止指示/停止未確認を保持し、今回GPUの保持料金が止まったとは扱わない。全体00/観測入口/weekly§46/01Aとruntime checkpointを同時更新。STRUCTURE_MAP_DELTA_NONE。

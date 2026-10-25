@@ -1,0 +1,12 @@
+{
+  "status": "COMPLETE_EVIDENCE_ALL_MEMBERS_VERIFIED",
+  "archive_bytes": 6969198,
+  "archive_sha256": "3c2ee5feef41b3cc6e2a98eb961554cd70551524cec1ccf8a2c9529d2cbafe3d",
+  "manifest_files": 22,
+  "raw_bytes": 205745,
+  "raw_sha256": "a81ea62997eebb8bf8e66a0afa464aeb8e2afbcf43b810ac4b43bac09cd66723",
+  "adapter_sha256": "2009b43ca256f2960c1e2e7fdf1cb55a69b613594f28a5a76f4efdd19b4d0419",
+  "seconds": 1017.2827305626124,
+  "early_archive_same_hash": true,
+  "adapter_same_as_early_32finite": true
+}

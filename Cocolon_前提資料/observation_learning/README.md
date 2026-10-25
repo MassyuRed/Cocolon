@@ -2,7 +2,7 @@
 
 **GPUの最新確認：** 今回は承認scopeの学習/検証をJupyterへ直接接続して実施。管理console/GPU一覧/Runpod API操作0、Stop/再起動/削除/新Pod/charge0。§43の旧停止指示とHTTP429で停止未確認だった履歴は保持し、今回の新承認scopeではPod lifecycleを変更していない。処理は完了したが、GPU料金停止を意味しない。
 
-**現在の直接作業（新12更新完了・保存reload後のFIT9実行中）：** Mashが10/26 JSTに固定12＋全9成功時2保存再読を承認。source34c9d67f/API4002b457・旧138bから12/12更新、保存/非学習reload完了。最後の読取486.8秒で生成3/9完了・4開始、3rawはEOS/parse正常、意味/本文採否は全9待ち。新2009b43cを早期回収、18対象hash/32F32有限をPod外照合・保存。全9合格は未確認、後段0、再起動しない。45分/$0.195処理按分（保持等別）。[実行中原本](trials/2026-10-26-quote-balanced-fit12/README.md)、quote packのruntime checkpointを参照。旧6の不採用/後段0、商品0/正式0/3/54.50％を保持。
+**現在の直接作業（新12更新/FIT9完了・意味本文8/9、後段0で終了）：** source34c9d67f/API4002b457・初期138bから固定12更新/保存非学習reload/9生成を1017.283秒で完了。無補修rawの既存CMEEは意味8/9・本文8/9、chair6全通過/ASK3/訂正各3更新を保持し前回3退行を解消。daily02/03通過、daily01はobservationとreception間のJSON区切り破損（EOS到達、打切りなし）で不採用。全9条件未達で2実service保存再読は0/evalplan未作成、新2009b43cは未採用・追加試行0。早期18対象/32F32有限と完了22対象/全原raw/consumerをPod外照合・保存。今回の残差へ新観測会は不要。処理按分約$0.07347（保持等別）、商品0/正式0/3/54.50％。[完了原本](trials/2026-10-26-quote-balanced-fit12/README.md)、最新weekly§46最終結果。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 

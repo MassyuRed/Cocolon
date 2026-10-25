@@ -120,3 +120,8 @@ Jupyter直接接続で新pack `/workspace/cocolon_4b_quote_balanced_pack_2026102
 ### 10/26 JST — 新12の一回実行をMashが明示承認
 
 Mashは「この12更新の一回試行を実行してよいですか？→いいよ、進めて。」と承認。直前9bff60dbの固定内容を維持し、原proposedをbalanced_fit12.proposed.jsonへ保存、実行planをAUTHORIZED_ONCEへ更新した。runtime checkpointはAUTHORIZED_NOT_STARTEDからactual進行へ更新する。新しい技術方式/教師/上限変更なし。承認済み全9成功後の条件付き2保存再読に再承認は不要。root華恋がJupyter直接で一回実行し、無補修raw/重みを回収する。準備時のCPU原本/planhashは当時のproposedを指し、今回の承認planのhashはcheckpointと実runへ保存する。Pod/file名20261025は準備時の固定名であり、実行日の表記は2026-10-26 JST。
+
+
+### 10/26 JST — 固定12の最終結果
+
+[完了原本](../../trials/2026-10-26-quote-balanced-fit12/README.md)。12更新/保存非学習reload/FIT9を1017.282731秒で完了、意味/本文8/9。chair6全通過/ASK3/訂正各3更新を保持、daily02/03通過、daily01だけJSON区切り破損（EOSあり/打切りなし）。全9未達で条件付き2は実model/SQLとも0/evalplan未作成、新2009b43cは未採用。追加学習/再call/raw補修/reader緩和0、runtime checkpointはCLOSED_ALL9_GATE_NOT_MET_DO_NOT_RELAUNCH。早期18/完了22対象を回収照合し追加重み/全raw/consumerを保存。処理按分約$0.07347（保持等別）。新観測会は今回不要、一般化と三core教師不足は継続。商品0/正式0/3/54.50％、構造差分なし。

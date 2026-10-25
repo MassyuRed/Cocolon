@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-26 JST（最新差分：12/12更新・保存reload完了、FIT9は3完了/4開始時点、重み早期回収済み）。全Cocolon作業の必読原本。
+更新日：2026-10-26 JST（最新差分：固定12/FIT9完了、意味本文8/9・JSON区切り1件不正、後段0で終了）。全Cocolon作業の必読原本。
 
 > **最新報告会：[第8回・2026-10-24](weekly_reviews/Cocolon_Weekly_Review_20261024.md)。** 今週実績・前週目標の達否と10/24〜10/31の管理案を記録。**Mashの指示により報告会終了。** 華恋の意見全文は[§10](weekly_reviews/Cocolon_Weekly_Review_20261024.md#karen-closing-opinion)、終了時の区分と再開先は[§11](weekly_reviews/Cocolon_Weekly_Review_20261024.md#meeting-closed-and-next-session)。10/24の4B確定・GPU16GB優先/24GB許容は当時の決定で、4B確定は10/25に撤回済み。最新の開発基準選定は[§23](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-three-core-model-and-serving-decision)。華恋が今回の判断責任として選んだもので、旧4B確定・常時24GB契約の自動復活ではない。起動済み3070の実確認は[§22](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-3070-running-cuda-uvm-io-error)。A5000未確保は§20の履歴。Vast実見積りは§19の履歴。次週の推奨順位は[§4](weekly_reviews/Cocolon_Weekly_Review_20261024.md#next-week-priorities)、対象path・具体手順・失敗/回復検査・終了条件は[§8](weekly_reviews/Cocolon_Weekly_Review_20261024.md#detailed-work-breakdown)を参照。全体管理評価・公開見通しは[§9](weekly_reviews/Cocolon_Weekly_Review_20261024.md#overall-status-and-release-outlook)：54.50％、正式商品受入れ0/3、12/18達成の裏付け不足。会議途中の「進行中」は当時の記録。次週案全体への明示採否・個別実行の未決は§11に区別して保持する。モデル選定の決定と、以下の品質・配置・端末・費用の未完了を区別する。
 
@@ -8,7 +8,7 @@
 
 **GPUの最新確認：** 今回は承認scopeの学習/検証をJupyterへ直接接続して実施。管理console/GPU一覧/Runpod API操作0、Stop/再起動/削除/新Pod/charge0。§43の旧停止指示とHTTP429で停止未確認だった履歴は保持し、今回の新承認scopeではPod lifecycleを変更していない。処理は完了したが、GPU料金停止を意味しない。
 
-**現在の直接作業（新12更新完了・保存reload後のFIT9実行中）：** Mashが10/26 JSTに固定12＋全9成功時2保存再読を承認。source34c9d67f/API4002b457・旧138bから12/12更新、保存/非学習reload完了。最後の読取486.8秒で生成3/9完了・4開始、3rawはEOS/parse正常、意味/本文採否は全9待ち。新2009b43cを早期回収、18対象hash/32F32有限をPod外照合・保存。全9合格は未確認、後段0、再起動しない。45分/$0.195処理按分（保持等別）。[実行中原本](observation_learning/trials/2026-10-26-quote-balanced-fit12/README.md)、quote packのruntime checkpointを参照。旧6の不採用/後段0、商品0/正式0/3/54.50％を保持。
+**現在の直接作業（新12更新/FIT9完了・意味本文8/9、後段0で終了）：** source34c9d67f/API4002b457・初期138bから固定12更新/保存非学習reload/9生成を1017.283秒で完了。無補修rawの既存CMEEは意味8/9・本文8/9、chair6全通過/ASK3/訂正各3更新を保持し前回3退行を解消。daily02/03通過、daily01はobservationとreception間のJSON区切り破損（EOS到達、打切りなし）で不採用。全9条件未達で2実service保存再読は0/evalplan未作成、新2009b43cは未採用・追加試行0。早期18対象/32F32有限と完了22対象/全原raw/consumerをPod外照合・保存。今回の残差へ新観測会は不要。処理按分約$0.07347（保持等別）、商品0/正式0/3/54.50％。[完了原本](observation_learning/trials/2026-10-26-quote-balanced-fit12/README.md)、最新weekly§46最終結果。
 
 **4B関連作業の開始前：** 全体現在地を全文読んだ後、[観測学習の目的・用途・前提](observation_learning/README.md#observation-learning-intent-and-assumptions)を毎回読み、最新weeklyの決定/実結果と今回の作業を結び付ける。学習・教材作成・評価・CMEE接続・環境移行で共通。ローカル＝Macと決め付けず、学習の成功と観測品質の成立を分ける。
 
@@ -144,11 +144,11 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 **10/23 Mash決定：Plus980円／Premium1,980円が価格の上限（これでも高い）、27Bは候補外。10/24は680円／1,480円を価格候補として検討する。980／1,980は9Bの損益分岐価格ではなく、独自LoRA版の本番原価は未測定。** 旧1,980/3,980円の推奨と27B再試験案を撤回。[小型AI再選定・全core原価](observation_learning/model_selection/2026-10-22-three-core/2026-10-23-small-model-reselection.md)では、Mashの残高利用希望により、Qwen3.5-9BのM1をMashがRunpod A40で実行し、4件の受領原本と全本文を照合済み。画面上のGPU単価は$0.59/h、起動前残高$5.15。受領原本のvLLM0.32.0／BF16／非thinking／context8192／温度0で、要求90.607秒・4805token。インストール・読込・待機を含むGPU総時間・総消費は未確認。Stop完了はMash報告を受領済みで、管理画面の独立確認はしていない。DeepInfra既製APIは比較資料へ残し、Qwen3.5-4Bは当時の別候補から、10/24のMash決定で一度確定した後、10/25に撤回された。10/23の旧比較では980/1,980円を基準とし、Free30/Plus100/Premium150セッション等の利用量でも、以前のDeepInfra既製APIを仮定した月原価は約5.57/37.07/147.28円で、Runpod自己hostの原価ではない。無料者・固定基盤・税相当留保・ストア費を含めて計算した。これらは利用量感度で、商品quota変更・採用・品質合格ではない。独自追加学習版の配備に公開API単価を流用せず、育成費・学習後のhost費用は別確認。旧費用資料は履歴として参照する。
 
-次週の旧推奨順位は第8回§4の履歴。4B/Runpod育成・Windows/Mac未選定を保持。quote18は意味9/9・本文6/9で終了、続く新6更新は意味7/9・本文6/9で旧chair保持に失敗して不採用。条件付き2保存再読はどちらもcall0。新12更新のCPU準備完了、10/26に一回実行承認（§46追記）。終了planを起動し直さない。
+次週の旧推奨順位は第8回§4の履歴。4B/Runpod育成・Windows/Mac未選定を保持。quote18は意味9/9・本文6/9で終了、続く新6更新は意味7/9・本文6/9で旧chair保持に失敗して不採用。条件付き2保存再読はどちらもcall0。新12は意味/本文8/9で完了・全9未達/後段0/新重み未採用（§46最終）。終了planを起動し直さない。
 
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
-| 学習済みAI・現在の作業 | 固定12/保存reload完了、最後の読取486.8秒でFIT9は3完了/4開始。新2009b43c重みを18対象hash/32F32有限で回収保存。全9採否未判定・後段0。既存runtime checkpointと2026-10-26-quote-balanced-fit12から同じ試行を継続し再起動しない。 |
+| 学習済みAI・現在の作業 | 新12/FIT9完了、意味/本文8/9。chair6保持、daily01だけJSON区切り破損。全9未達で後段0、新2009b43cは未採用、追加試行0。全raw/重み保存済み。2026-10-26-quote-balanced-fit12と§46最終結果を参照。 |
 | 10/24までの費用・4B選定履歴（当時の構成） | Flex24GBの旧月78,980生成・未測定の速度/起動仮定による運用費95,094円・赤字67,833円の試算は当時の構成の記録で、最新構成の原価ではない。[全仮定・再計算](observation_learning/model_selection/2026-10-24-production-economics/README.md)。旧4B実診断では24GBでLoRA保存・reload・16生成・回収を確認したが、FITは前後0/2。CPU指示修復API1dabc4fは54対象/pack11・合成2/2で、修正版は後続10/25にA4500 20GBで完走・回収済み、最新結果は§24。旧学習peak allocated14.954GiBを本番推論の必要VRAMへ流用しない。4bit/M4を第一候補とした§23は当時の華恋案で、現在の移行先はWindows／Mac未選定。公開API単価を独自育成版の原価へ流用しない。 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。u353〜355のコードと配置差を保持 |
 | Analysis | 最新内容修正版の配置差、通常本文生成・同一保存再読・monthly履歴/比較の本人確認、複数ANSWER採用、一般理解、有料差、IF／Savedの未実装。6501時点の不足案内表示は本人確認済みとして保持 |
