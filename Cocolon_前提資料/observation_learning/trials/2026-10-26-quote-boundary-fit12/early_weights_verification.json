@@ -1,0 +1,15 @@
+{
+  "archive_sha256": "cb6f7323b60178755f719f60ee4444944b3c20e0c2046291dc8ec1eb77572d6a",
+  "archive_bytes": 3478250,
+  "verified_members": 18,
+  "adapter_sha256": "041f4161fe7bac82b437ecff2711b769ca4c8cfe093ddd04b30b4d728e42d217",
+  "tensor_count": 32,
+  "all_finite": true,
+  "source_commit": "1d5b971ffbf01b4594c1860c1f4b0bf25bf3b989",
+  "run_stage": "ADAPTER_SAVED_BEFORE_GENERATION",
+  "optimizer_steps_completed": 12,
+  "new_generations": 0,
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "base_weights_included": false
+}

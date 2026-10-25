@@ -12,5 +12,10 @@
   "model": "Qwen/Qwen3.5-4B",
   "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
   "base_weights_included": false,
-  "library_file_id": "libfile_02e5720e6eb08191a2efa3dfc3e6d8d4"
+  "library_file_id": "libfile_02e5720e6eb08191a2efa3dfc3e6d8d4",
+  "completed_training_members_verified": 21,
+  "recovery_members_verified": 4,
+  "completed_library_version": 1,
+  "completed_recovery_bundle_sha256": "28cb273fea7bf3dabcb6f40409fba42b814a9c669c72805a3222253a123ccf1c",
+  "adapter_selection": "NOT_ADOPTED_ALL9_CONDITION_UNMET"
 }

@@ -2,7 +2,7 @@
 
 **GPUの最新確認：** 今回は承認scopeの学習/検証をJupyterへ直接接続して実施。管理console/GPU一覧/Runpod API操作0、Stop/再起動/削除/新Pod/charge0。§43の旧停止指示とHTTP429で停止未確認だった履歴は保持し、今回の新承認scopeではPod lifecycleを変更していない。処理は完了したが、GPU料金停止を意味しない。
 
-**現在の直接作業（boundary12更新/保存reload完了、FIT9途中）：** 承認source1d5b971f/API4002b457・初期138bから12更新/保存/非学習reload完了。最後の読取429.9秒で2生成完了/3開始、2rawはEOS/parse正常。意味/本文/全9採否未判定、後段0。同じ実行を続け再起動しない。新041f4161を18対象hash/32F32有限で回収保管。最大45分/処理按分$0.195（保持等別）。[実行中原本](trials/2026-10-26-quote-boundary-fit12/README.md)、最新weekly§47。商品0/正式0/3/54.50％。
+**現在の直接作業（boundary12完了、意味9/9・本文8/9、後段0で終了）：** source1d5b971f/API4002b457・初期138bから12更新/保存非学習reload/FIT9を1032.166秒で完了。全9のJSON/EOS正常、前回daily01区切り不正は解消。chair6/ASK3/訂正各3更新は保持。daily02だけ観測末尾と受け取り文末が欠け、既存readerが本文を不採用。全9条件未達で条件付き2保存再読はmodel/SQL0・evalplan未作成、新041f4161は未採用。全raw/consumer/重みを回収照合・保存済み。処理按分約$0.07455（保持等別）、新観測会は今回不要。[完了原本](trials/2026-10-26-quote-boundary-fit12/README.md)、最新weekly§47最終結果。商品0/正式0/3/54.50％。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
@@ -83,7 +83,7 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 
 ## 現在地（2026-10-25・三中核の開発基準選定、本番は未成立）
 
-**現在の直接作業（boundary12更新/保存reload完了、FIT9途中）：** 承認source1d5b971f/API4002b457・初期138bから12更新/保存/非学習reload完了。最後の読取429.9秒で2生成完了/3開始、2rawはEOS/parse正常。意味/本文/全9採否未判定、後段0。同じ実行を続け再起動しない。新041f4161を18対象hash/32F32有限で回収保管。最大45分/処理按分$0.195（保持等別）。[実行中原本](trials/2026-10-26-quote-boundary-fit12/README.md)、最新weekly§47。商品0/正式0/3/54.50％。
+**現在の直接作業（boundary12完了、意味9/9・本文8/9、後段0で終了）：** source1d5b971f/API4002b457・初期138bから12更新/保存非学習reload/FIT9を1032.166秒で完了。全9のJSON/EOS正常、前回daily01区切り不正は解消。chair6/ASK3/訂正各3更新は保持。daily02だけ観測末尾と受け取り文末が欠け、既存readerが本文を不採用。全9条件未達で条件付き2保存再読はmodel/SQL0・evalplan未作成、新041f4161は未採用。全raw/consumer/重みを回収照合・保存済み。処理按分約$0.07455（保持等別）、新観測会は今回不要。[完了原本](trials/2026-10-26-quote-boundary-fit12/README.md)、最新weekly§47最終結果。商品0/正式0/3/54.50％。
 
 [凍結6教師と実行source](training/2026-10-25-emlis-service-binding/README.md)／[全実結果](trials/2026-10-25-service-binding/README.md)。
 

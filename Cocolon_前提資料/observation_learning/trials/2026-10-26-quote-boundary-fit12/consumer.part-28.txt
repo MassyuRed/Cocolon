@@ -1,0 +1,545 @@
+                 "slight_calm",
+                      "warm_food_eat"
+                    ],
+                    "relation_refs": [
+                      "written_eat_calm"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "body_status": "GENERATED",
+            "schema_version": "cocolon.cmee.emlis_model_thread_artifact.v1",
+            "history_line": null,
+            "history_line_plan": null,
+            "interpretive_frames": [],
+            "update_note": null,
+            "proposal_ref": "model-proposal-b710ed656a7172f17ca07c48bde7636ea2ccb93caceadd8a36c5ef0326225a9d"
+          },
+          "meaning_graph": {
+            "schema_version": "cocolon.cmee.emlis_model_meaning_graph.v1",
+            "snapshot_ref": "semantic-9a125aa15b3844622c3cea40e378b95141de84b4872e05e36ac13fa542cca892",
+            "source_prefix_ref": "emlis-source-prefix-31137b58eab33f0fc2fcf7aa80404e3f12c2a190374b12910854458412b58aaa",
+            "claims": [
+              {
+                "about_time": {
+                  "anchor_source_id": "63502062-1016-471c-8549-1c4dd98b76ab",
+                  "evidence_indexes": [
+                    0
+                  ],
+                  "expression": null,
+                  "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                },
+                "claim_id": "return",
+                "evidence_indexes": [
+                  0
+                ],
+                "kind": "EVENT",
+                "modality": {
+                  "evidence_indexes": [
+                    0
+                  ],
+                  "value": "ASSERTED_AS_WRITTEN"
+                },
+                "polarity": {
+                  "evidence_indexes": [
+                    0
+                  ],
+                  "scope_refs": [
+                    "return"
+                  ],
+                  "value": "AFFIRMED"
+                },
+                "predicate": {
+                  "arguments": [],
+                  "surface": "帰って"
+                },
+                "qualifiers": [],
+                "subject": {
+                  "binding": "OMITTED",
+                  "evidence_indexes": [],
+                  "source_entity": null
+                },
+                "text": "帰って"
+              },
+              {
+                "about_time": {
+                  "anchor_source_id": "63502062-1016-471c-8549-1c4dd98b76ab",
+                  "evidence_indexes": [
+                    1
+                  ],
+                  "expression": null,
+                  "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                },
+                "claim_id": "cook",
+                "evidence_indexes": [
+                  1
+                ],
+                "kind": "EVENT",
+                "modality": {
+                  "evidence_indexes": [
+                    1
+                  ],
+                  "value": "ASSERTED_AS_WRITTEN"
+                },
+                "polarity": {
+                  "evidence_indexes": [
+                    1
+                  ],
+                  "scope_refs": [
+                    "cook"
+                  ],
+                  "value": "AFFIRMED"
+                },
+                "predicate": {
+                  "arguments": [],
+                  "surface": "うどんを作って"
+                },
+                "qualifiers": [],
+                "subject": {
+                  "binding": "OMITTED",
+                  "evidence_indexes": [],
+                  "source_entity": null
+                },
+                "text": "うどんを作って"
+              },
+              {
+                "about_time": {
+                  "anchor_source_id": "63502062-1016-471c-8549-1c4dd98b76ab",
+                  "evidence_indexes": [
+                    2
+                  ],
+                  "expression": null,
+                  "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                },
+                "claim_id": "eat",
+                "evidence_indexes": [
+                  2
+                ],
+                "kind": "EVENT",
+                "modality": {
+                  "evidence_indexes": [
+                    2
+                  ],
+                  "value": "ASSERTED_AS_WRITTEN"
+                },
+                "polarity": {
+                  "evidence_indexes": [
+                    2
+                  ],
+                  "scope_refs": [
+                    "eat"
+                  ],
+                  "value": "AFFIRMED"
+                },
+                "predicate": {
+                  "arguments": [],
+                  "surface": "食べた"
+                },
+                "qualifiers": [],
+                "subject": {
+                  "binding": "OMITTED",
+                  "evidence_indexes": [],
+                  "source_entity": null
+                },
+                "text": "食べた"
+              },
+              {
+                "about_time": {
+                  "anchor_source_id": "63502062-1016-471c-8549-1c4dd98b76ab",
+                  "evidence_indexes": [
+                    3
+                  ],
+                  "expression": null,
+                  "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                },
+                "claim_id": "warm_food_eat",
+                "evidence_indexes": [
+                  3
+                ],
+                "kind": "EVENT",
+                "modality": {
+                  "evidence_indexes": [
+                    3
+                  ],
+                  "value": "ASSERTED_AS_WRITTEN"
+                },
+                "polarity": {
+                  "evidence_indexes": [
+                    3
+                  ],
+                  "scope_refs": [
+                    "warm_food_eat"
+                  ],
+                  "value": "AFFIRMED"
+                },
+                "predicate": {
+                  "arguments": [],
+                  "surface": "あったかいもの食べた"
+                },
+                "qualifiers": [],
+                "subject": {
+                  "binding": "OMITTED",
+                  "evidence_indexes": [],
+                  "source_entity": null
+                },
+                "text": "あったかいもの食べた"
+              },
+              {
+                "about_time": {
+                  "anchor_source_id": "63502062-1016-471c-8549-1c4dd98b76ab",
+                  "evidence_indexes": [
+                    4
+                  ],
+                  "expression": null,
+                  "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION"
+                },
+                "claim_id": "slight_calm",
+                "evidence_indexes": [
+                  4
+                ],
+                "kind": "STATE",
+                "modality": {
+                  "evidence_indexes": [
+                    4
+                  ],
+                  "value": "ASSERTED_AS_WRITTEN"
+                },
+                "polarity": {
+                  "evidence_indexes": [
+                    4
+                  ],
+                  "scope_refs": [
+                    "slight_calm"
+                  ],
+                  "value": "AFFIRMED"
+                },
+                "predicate": {
+                  "arguments": [],
+                  "surface": "ちょっと落ち着いた"
+                },
+                "qualifiers": [],
+                "subject": {
+                  "binding": "OMITTED",
+                  "evidence_indexes": [],
+                  "source_entity": null
+                },
+                "text": "ちょっと落ち着いた"
+              }
+            ],
+            "relations": [
+              {
+                "evidence_indexes": [
+                  5
+                ],
+                "from_claim_id": "return",
+                "polarity": "AFFIRMED",
+                "qualifiers": [],
+                "relation_id": "return_before_cook",
+                "scope_refs": [
+                  "return_before_cook"
+                ],
+                "to_claim_id": "cook",
+                "type": "SOURCE_WRITTEN_TEMPORAL_KARA_LINK"
+              },
+              {
+                "evidence_indexes": [
+                  5
+                ],
+                "from_claim_id": "return",
+                "polarity": "AFFIRMED",
+                "qualifiers": [],
+                "relation_id": "return_before_eat",
+                "scope_refs": [
+                  "return_before_eat"
+                ],
+                "to_claim_id": "eat",
+                "type": "SOURCE_WRITTEN_TEMPORAL_KARA_LINK"
+              },
+              {
+                "evidence_indexes": [
+                  6
+                ],
+                "from_claim_id": "cook",
+                "polarity": "AFFIRMED",
+                "qualifiers": [],
+                "relation_id": "cook_and_eat",
+                "scope_refs": [
+                  "cook_and_eat"
+                ],
+                "to_claim_id": "eat",
+                "type": "SOURCE_WRITTEN_TE_LINK"
+              },
+              {
+                "evidence_indexes": [
+                  7
+                ],
+                "from_claim_id": "warm_food_eat",
+                "polarity": "AFFIRMED",
+                "qualifiers": [],
+                "relation_id": "written_eat_calm",
+                "scope_refs": [
+                  "written_eat_calm"
+                ],
+                "to_claim_id": "slight_calm",
+                "type": "SOURCE_WRITTEN_TARA_LINK"
+              }
+            ],
+            "unknowns": [],
+            "updates": [],
+            "native_bindings": {
+              "case_arguments": [
+                {
+                  "end": 9,
+                  "field_path": "memo_action",
+                  "owner_claim_ref": "cook",
+                  "source_id": "63502062-1016-471c-8549-1c4dd98b76ab",
+                  "start": 6,
+                  "text": "うどん",
+                  "written_role": "を"
+                }
+              ],
+              "family": "DAILY_CALM_V1",
+              "preserved_selections": {
+                "category": [
+                  "生活"
+                ],
+                "emotion_details": [
+                  {
+                    "strength": "medium",
+                    "type": "平穏"
+                  },
+                  {
+                    "strength": "weak",
+                    "type": "喜び"
+                  }
+                ],
+                "emotions": [
+                  "平穏",
+                  "喜び"
+                ],
+                "is_secret": null
+              },
+              "relation_roles": {
+                "cook_and_eat": "cook_and_eat",
+                "return_before_cook": "return_before_cook",
+                "return_before_eat": "return_before_eat",
+                "written_eat_calm": "written_eat_calm"
+              },
+              "roles": {
+                "cook": {
+                  "claim_ref": "cook",
+                  "end": 13,
+                  "field_path": "memo_action",
+                  "source_id": "63502062-1016-471c-8549-1c4dd98b76ab",
+                  "start": 6,
+                  "text": "うどんを作って"
+                },
+                "eat": {
+                  "claim_ref": "eat",
+                  "end": 16,
+                  "field_path": "memo_action",
+                  "source_id": "63502062-1016-471c-8549-1c4dd98b76ab",
+                  "start": 13,
+                  "text": "食べた"
+                },
+                "return": {
+                  "claim_ref": "return",
+                  "end": 3,
+                  "field_path": "memo_action",
+                  "source_id": "63502062-1016-471c-8549-1c4dd98b76ab",
+                  "start": 0,
+                  "text": "帰って"
+                },
+                "slight_calm": {
+                  "claim_ref": "slight_calm",
+                  "end": 21,
+                  "field_path": "memo",
+                  "source_id": "63502062-1016-471c-8549-1c4dd98b76ab",
+                  "start": 12,
+                  "text": "ちょっと落ち着いた"
+                },
+                "warm_food_eat": {
+                  "claim_ref": "warm_food_eat",
+                  "end": 10,
+                  "field_path": "memo",
+                  "source_id": "63502062-1016-471c-8549-1c4dd98b76ab",
+                  "start": 0,
+                  "text": "あったかいもの食べた"
+                }
+              },
+              "source_fields": {
+                "63502062-1016-471c-8549-1c4dd98b76ab": {
+                  "memo": "あったかいもの食べたら、ちょっと落ち着いた。",
+                  "memo_action": "帰ってから、うどんを作って食べた。"
+                }
+              },
+              "source_negations": [],
+              "source_slices": [
+                {
+                  "end": 3,
+                  "field_path": "memo_action",
+                  "native_span_refs": [
+                    "s2"
+                  ],
+                  "quote": "帰って",
+                  "source_id": "63502062-1016-471c-8549-1c4dd98b76ab",
+                  "start": 0
+                },
+                {
+                  "end": 13,
+                  "field_path": "memo_action",
+                  "native_span_refs": [
+                    "s2"
+                  ],
+                  "quote": "うどんを作って",
+                  "source_id": "63502062-1016-471c-8549-1c4dd98b76ab",
+                  "start": 6
+                },
+                {
+                  "end": 16,
+                  "field_path": "memo_action",
+                  "native_span_refs": [
+                    "s2"
+                  ],
+                  "quote": "食べた",
+                  "source_id": "63502062-1016-471c-8549-1c4dd98b76ab",
+                  "start": 13
+                },
+                {
+                  "end": 10,
+                  "field_path": "memo",
+                  "native_span_refs": [
+                    "s1"
+                  ],
+                  "quote": "あったかいもの食べた",
+                  "source_id": "63502062-1016-471c-8549-1c4dd98b76ab",
+                  "start": 0
+                },
+                {
+                  "end": 21,
+                  "field_path": "memo",
+                  "native_span_refs": [
+                    "s1"
+                  ],
+                  "quote": "ちょっと落ち着いた",
+                  "source_id": "63502062-1016-471c-8549-1c4dd98b76ab",
+                  "start": 12
+                },
+                {
+                  "end": 16,
+                  "field_path": "memo_action",
+                  "native_span_refs": [
+                    "s2"
+                  ],
+                  "quote": "帰ってから、うどんを作って食べた",
+                  "source_id": "63502062-1016-471c-8549-1c4dd98b76ab",
+                  "start": 0
+                },
+                {
+                  "end": 16,
+                  "field_path": "memo_action",
+                  "native_span_refs": [
+                    "s2"
+                  ],
+                  "quote": "作って食べた",
+                  "source_id": "63502062-1016-471c-8549-1c4dd98b76ab",
+                  "start": 10
+                },
+                {
+                  "end": 21,
+                  "field_path": "memo",
+                  "native_span_refs": [
+                    "s1"
+                  ],
+                  "quote": "あったかいもの食べたら、ちょっと落ち着いた",
+                  "source_id": "63502062-1016-471c-8549-1c4dd98b76ab",
+                  "start": 0
+                }
+              ],
+              "stage": "INITIAL",
+              "written_links": [
+                {
+                  "evidence_indexes": [
+                    5
+                  ],
+                  "from_claim_ref": "return",
+                  "relation_ref": "return_before_cook",
+                  "to_claim_ref": "cook",
+                  "type": "SOURCE_WRITTEN_TEMPORAL_KARA_LINK"
+                },
+                {
+                  "evidence_indexes": [
+                    5
+                  ],
+                  "from_claim_ref": "return",
+                  "relation_ref": "return_before_eat",
+                  "to_claim_ref": "eat",
+                  "type": "SOURCE_WRITTEN_TEMPORAL_KARA_LINK"
+                },
+                {
+                  "evidence_indexes": [
+                    6
+                  ],
+                  "from_claim_ref": "cook",
+                  "relation_ref": "cook_and_eat",
+                  "to_claim_ref": "eat",
+                  "type": "SOURCE_WRITTEN_TE_LINK"
+                },
+                {
+                  "evidence_indexes": [
+                    7
+                  ],
+                  "from_claim_ref": "warm_food_eat",
+                  "relation_ref": "written_eat_calm",
+                  "to_claim_ref": "slight_calm",
+                  "type": "SOURCE_WRITTEN_TARA_LINK"
+                }
+              ]
+            }
+          },
+          "reason_codes": [
+            "emlis_model_body_independently_read"
+          ]
+        },
+        "question_decision": {
+          "disposition": "END",
+          "target_ref": null,
+          "target_kind": null,
+          "supporting_evidence_refs": [],
+          "missing_dimension": null,
+          "affected_meaning_refs": [],
+          "affected_reception_refs": [],
+          "asked_target_refs": [],
+          "decision_reason": "model_question_not_proposed"
+        },
+        "question": null,
+        "meaning_checkpoint": {
+          "checkpoint_id": "model-checkpoint-3c1f215f207625e09cdc85bf94cef466ecc1ba40dbcaaf99e99f285a4905feb5",
+          "source_prefix_ref": "emlis-source-prefix-31137b58eab33f0fc2fcf7aa80404e3f12c2a190374b12910854458412b58aaa",
+          "base_meaning_ref": "semantic-9a125aa15b3844622c3cea40e378b95141de84b4872e05e36ac13fa542cca892",
+          "answer_update": null,
+          "assessment_status": "RESOLVED",
+          "accepted_update_refs": [],
+          "inactive_claim_refs": [],
+          "unresolved_parts": [],
+          "semantic_schema_version": "cocolon.cmee.emlis_answer_meaning.v4",
+          "semantic_profile": "emlis_model_proposal.v1",
+          "semantic_snapshot": "{\"adapter_version\":\"2\",\"admission_version\":\"2\",\"answer_count\":0,\"meaning_packet\":{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"return\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"return\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"帰って\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"帰って\"},{\"about_time\":{\"anchor_source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"cook\",\"evidence_indexes\":[1],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"cook\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"うどんを作って\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"うどんを作って\"},{\"about_time\":{\"anchor_source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"eat\",\"evidence_indexes\":[2],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"eat\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"食べた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"食べた\"},{\"about_time\":{\"anchor_source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"warm_food_eat\",\"evidence_indexes\":[3],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"warm_food_eat\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"あったかいもの食べた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"あったかいもの食べた\"},{\"about_time\":{\"anchor_source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"evidence_indexes\":[4],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"slight_calm\",\"evidence_indexes\":[4],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[4],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[4],\"scope_refs\":[\"slight_calm\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"ちょっと落ち着いた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"ちょっと落ち着いた\"}],\"conflicts\":[],\"core\":\"emlis\",\"relations\":[{\"evidence_indexes\":[5],\"from_claim_id\":\"return\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"return_before_cook\",\"scope_refs\":[\"return_before_cook\"],\"to_claim_id\":\"cook\",\"type\":\"SOURCE_WRITTEN_TEMPORAL_KARA_LINK\"},{\"evidence_indexes\":[5],\"from_claim_id\":\"return\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"return_before_eat\",\"scope_refs\":[\"return_before_eat\"],\"to_claim_id\":\"eat\",\"type\":\"SOURCE_WRITTEN_TEMPORAL_KARA_LINK\"},{\"evidence_indexes\":[6],\"from_claim_id\":\"cook\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"cook_and_eat\",\"scope_refs\":[\"cook_and_eat\"],\"to_claim_id\":\"eat\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[7],\"from_claim_id\":\"warm_food_eat\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"written_eat_calm\",\"scope_refs\":[\"written_eat_calm\"],\"to_claim_id\":\"slight_calm\",\"type\":\"SOURCE_WRITTEN_TARA_LINK\"}],\"schema_version\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"unknowns\":[],\"updates\":[]},\"evidence\":[{\"end\":3,\"field_path\":\"memo_action\",\"quote\":\"帰って\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":0},{\"end\":13,\"field_path\":\"memo_action\",\"quote\":\"うどんを作って\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":6},{\"end\":16,\"field_path\":\"memo_action\",\"quote\":\"食べた\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":13},{\"end\":10,\"field_path\":\"memo\",\"quote\":\"あったかいもの食べた\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":0},{\"end\":21,\"field_path\":\"memo\",\"quote\":\"ちょっと落ち着いた\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":12},{\"end\":16,\"field_path\":\"memo_action\",\"quote\":\"帰ってから、うどんを作って食べた\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":0},{\"end\":16,\"field_path\":\"memo_action\",\"quote\":\"作って食べた\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":10},{\"end\":21,\"field_path\":\"memo\",\"quote\":\"あったかいもの食べたら、ちょっと落ち着いた\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":0}]},\"native_bindings\":{\"case_arguments\":[{\"end\":9,\"field_path\":\"memo_action\",\"owner_claim_ref\":\"cook\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":6,\"text\":\"うどん\",\"written_role\":\"を\"}],\"family\":\"DAILY_CALM_V1\",\"preserved_selections\":{\"category\":[\"生活\"],\"emotion_details\":[{\"strength\":\"medium\",\"type\":\"平穏\"},{\"strength\":\"weak\",\"type\":\"喜び\"}],\"emotions\":[\"平穏\",\"喜び\"],\"is_secret\":null},\"relation_roles\":{\"cook_and_eat\":\"cook_and_eat\",\"return_before_cook\":\"return_before_cook\",\"return_before_eat\":\"return_before_eat\",\"written_eat_calm\":\"written_eat_calm\"},\"roles\":{\"cook\":{\"claim_ref\":\"cook\",\"end\":13,\"field_path\":\"memo_action\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":6,\"text\":\"うどんを作って\"},\"eat\":{\"claim_ref\":\"eat\",\"end\":16,\"field_path\":\"memo_action\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":13,\"text\":\"食べた\"},\"return\":{\"claim_ref\":\"return\",\"end\":3,\"field_path\":\"memo_action\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":0,\"text\":\"帰って\"},\"slight_calm\":{\"claim_ref\":\"slight_calm\",\"end\":21,\"field_path\":\"memo\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":12,\"text\":\"ちょっと落ち着いた\"},\"warm_food_eat\":{\"claim_ref\":\"warm_food_eat\",\"end\":10,\"field_path\":\"memo\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":0,\"text\":\"あったかいもの食べた\"}},\"source_fields\":{\"63502062-1016-471c-8549-1c4dd98b76ab\":{\"memo\":\"あったかいもの食べたら、ちょっと落ち着いた。\",\"memo_action\":\"帰ってから、うどんを作って食べた。\"}},\"source_negations\":[],\"source_slices\":[{\"end\":3,\"field_path\":\"memo_action\",\"native_span_refs\":[\"s2\"],\"quote\":\"帰って\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":0},{\"end\":13,\"field_path\":\"memo_action\",\"native_span_refs\":[\"s2\"],\"quote\":\"うどんを作って\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":6},{\"end\":16,\"field_path\":\"memo_action\",\"native_span_refs\":[\"s2\"],\"quote\":\"食べた\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":13},{\"end\":10,\"field_path\":\"memo\",\"native_span_refs\":[\"s1\"],\"quote\":\"あったかいもの食べた\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":0},{\"end\":21,\"field_path\":\"memo\",\"native_span_refs\":[\"s1\"],\"quote\":\"ちょっと落ち着いた\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":12},{\"end\":16,\"field_path\":\"memo_action\",\"native_span_refs\":[\"s2\"],\"quote\":\"帰ってから、うどんを作って食べた\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":0},{\"end\":16,\"field_path\":\"memo_action\",\"native_span_refs\":[\"s2\"],\"quote\":\"作って食べた\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":10},{\"end\":21,\"field_path\":\"memo\",\"native_span_refs\":[\"s1\"],\"quote\":\"あったかいもの食べたら、ちょっと落ち着いた\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":0}],\"stage\":\"INITIAL\",\"written_links\":[{\"evidence_indexes\":[5],\"from_claim_ref\":\"return\",\"relation_ref\":\"return_before_cook\",\"to_claim_ref\":\"cook\",\"type\":\"SOURCE_WRITTEN_TEMPORAL_KARA_LINK\"},{\"evidence_indexes\":[5],\"from_claim_ref\":\"return\",\"relation_ref\":\"return_before_eat\",\"to_claim_ref\":\"eat\",\"type\":\"SOURCE_WRITTEN_TEMPORAL_KARA_LINK\"},{\"evidence_indexes\":[6],\"from_claim_ref\":\"cook\",\"relation_ref\":\"cook_and_eat\",\"to_claim_ref\":\"eat\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[7],\"from_claim_ref\":\"warm_food_eat\",\"relation_ref\":\"written_eat_calm\",\"to_claim_ref\":\"slight_calm\",\"type\":\"SOURCE_WRITTEN_TARA_LINK\"}]},\"packet\":{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"return\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"return\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"帰って\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"帰って\"},{\"about_time\":{\"anchor_source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"cook\",\"evidence_indexes\":[1],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"cook\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"うどんを作って\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"うどんを作って\"},{\"about_time\":{\"anchor_source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"eat\",\"evidence_indexes\":[2],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"eat\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"食べた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"食べた\"},{\"about_time\":{\"anchor_source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"warm_food_eat\",\"evidence_indexes\":[3],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"warm_food_eat\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"あったかいもの食べた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"あったかいもの食べた\"},{\"about_time\":{\"anchor_source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"evidence_indexes\":[4],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"slight_calm\",\"evidence_indexes\":[4],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[4],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[4],\"scope_refs\":[\"slight_calm\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"ちょっと落ち着いた\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"ちょっと落ち着いた\"}],\"conflicts\":[],\"core\":\"emlis\",\"question_proposal\":null,\"relations\":[{\"evidence_indexes\":[5],\"from_claim_id\":\"return\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"return_before_cook\",\"scope_refs\":[\"return_before_cook\"],\"to_claim_id\":\"cook\",\"type\":\"SOURCE_WRITTEN_TEMPORAL_KARA_LINK\"},{\"evidence_indexes\":[5],\"from_claim_id\":\"return\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"return_before_eat\",\"scope_refs\":[\"return_before_eat\"],\"to_claim_id\":\"eat\",\"type\":\"SOURCE_WRITTEN_TEMPORAL_KARA_LINK\"},{\"evidence_indexes\":[6],\"from_claim_id\":\"cook\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"cook_and_eat\",\"scope_refs\":[\"cook_and_eat\"],\"to_claim_id\":\"eat\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[7],\"from_claim_id\":\"warm_food_eat\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"written_eat_calm\",\"scope_refs\":[\"written_eat_calm\"],\"to_claim_id\":\"slight_calm\",\"type\":\"SOURCE_WRITTEN_TARA_LINK\"}],\"schema_version\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"surface_proposal\":{\"bindings\":[{\"claim_refs\":[\"return\",\"cook\",\"eat\"],\"relation_refs\":[\"return_before_cook\",\"return_before_eat\",\"cook_and_eat\"],\"section\":\"observation\"},{\"claim_refs\":[\"warm_food_eat\",\"slight_calm\"],\"relation_refs\":[\"written_eat_calm\"],\"section\":\"reception\"}],\"observation\":\"帰ってから、うどんを作って食べたのですね。\",\"reception\":\"あったかいものを食べて、少し落ち着けてよかったです。\",\"update_note\":null},\"unknowns\":[],\"updates\":[]},\"evidence\":[{\"end\":3,\"field_path\":\"memo_action\",\"quote\":\"帰って\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":0},{\"end\":13,\"field_path\":\"memo_action\",\"quote\":\"うどんを作って\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":6},{\"end\":16,\"field_path\":\"memo_action\",\"quote\":\"食べた\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":13},{\"end\":10,\"field_path\":\"memo\",\"quote\":\"あったかいもの食べた\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":0},{\"end\":21,\"field_path\":\"memo\",\"quote\":\"ちょっと落ち着いた\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":12},{\"end\":16,\"field_path\":\"memo_action\",\"quote\":\"帰ってから、うどんを作って食べた\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":0},{\"end\":16,\"field_path\":\"memo_action\",\"quote\":\"作って食べた\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":10},{\"end\":21,\"field_path\":\"memo\",\"quote\":\"あったかいもの食べたら、ちょっと落ち着いた\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"start\":0}]},\"prior_ref\":null,\"prior_snapshot\":null,\"proposal_ref\":\"model-proposal-b710ed656a7172f17ca07c48bde7636ea2ccb93caceadd8a36c5ef0326225a9d\",\"question_control\":{\"asked_target_refs\":[],\"issued_count\":0,\"issued_questions\":[],\"pending_question\":null,\"question_limit\":1,\"stop\":false},\"receipt\":{\"candidate_json\":\"{\\\"candidate\\\":{\\\"claims\\\":[{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\",\\\"evidence_indexes\\\":[0],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"return\\\",\\\"evidence_indexes\\\":[0],\\\"kind\\\":\\\"EVENT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[0],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[0],\\\"scope_refs\\\":[\\\"return\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"帰って\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"帰って\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\",\\\"evidence_indexes\\\":[1],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"cook\\\",\\\"evidence_indexes\\\":[1],\\\"kind\\\":\\\"EVENT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[1],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[1],\\\"scope_refs\\\":[\\\"cook\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"うどんを作って\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"うどんを作って\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\",\\\"evidence_indexes\\\":[2],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"eat\\\",\\\"evidence_indexes\\\":[2],\\\"kind\\\":\\\"EVENT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[2],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[2],\\\"scope_refs\\\":[\\\"eat\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"食べた\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"食べた\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\",\\\"evidence_indexes\\\":[3],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"warm_food_eat\\\",\\\"evidence_indexes\\\":[3],\\\"kind\\\":\\\"EVENT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[3],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[3],\\\"scope_refs\\\":[\\\"warm_food_eat\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"あったかいもの食べた\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"あったかいもの食べた\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\",\\\"evidence_indexes\\\":[4],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"slight_calm\\\",\\\"evidence_indexes\\\":[4],\\\"kind\\\":\\\"STATE\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[4],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[4],\\\"scope_refs\\\":[\\\"slight_calm\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"ちょっと落ち着いた\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"ちょっと落ち着いた\\\"}],\\\"conflicts\\\":[],\\\"core\\\":\\\"emlis\\\",\\\"question_proposal\\\":null,\\\"relations\\\":[{\\\"evidence_indexes\\\":[5],\\\"from_claim_id\\\":\\\"return\\\",\\\"polarity\\\":\\\"AFFIRMED\\\",\\\"qualifiers\\\":[],\\\"relation_id\\\":\\\"return_before_cook\\\",\\\"scope_refs\\\":[\\\"return_before_cook\\\"],\\\"to_claim_id\\\":\\\"cook\\\",\\\"type\\\":\\\"SOURCE_WRITTEN_TEMPORAL_KARA_LINK\\\"},{\\\"evidence_indexes\\\":[5],\\\"from_claim_id\\\":\\\"return\\\",\\\"polarity\\\":\\\"AFFIRMED\\\",\\\"qualifiers\\\":[],\\\"relation_id\\\":\\\"return_before_eat\\\",\\\"scope_refs\\\":[\\\"return_before_eat\\\"],\\\"to_claim_id\\\":\\\"eat\\\",\\\"type\\\":\\\"SOURCE_WRITTEN_TEMPORAL_KARA_LINK\\\"},{\\\"evidence_indexes\\\":[6],\\\"from_claim_id\\\":\\\"cook\\\",\\\"polarity\\\":\\\"AFFIRMED\\\",\\\"qualifiers\\\":[],\\\"relation_id\\\":\\\"cook_and_eat\\\",\\\"scope_refs\\\":[\\\"cook_and_eat\\\"],\\\"to_claim_id\\\":\\\"eat\\\",\\\"type\\\":\\\"SOURCE_WRITTEN_TE_LINK\\\"},{\\\"evidence_indexes\\\":[7],\\\"from_claim_id\\\":\\\"warm_food_eat\\\",\\\"polarity\\\":\\\"AFFIRMED\\\",\\\"qualifiers\\\":[],\\\"relation_id\\\":\\\"written_eat_calm\\\",\\\"scope_refs\\\":[\\\"written_eat_calm\\\"],\\\"to_claim_id\\\":\\\"slight_calm\\\",\\\"type\\\":\\\"SOURCE_WRITTEN_TARA_LINK\\\"}],\\\"schema_version\\\":\\\"cocolon.cmee.semantic_and_surface_proposal.v1\\\",\\\"surface_proposal\\\":{\\\"bindings\\\":[{\\\"claim_refs\\\":[\\\"return\\\",\\\"cook\\\",\\\"eat\\\"],\\\"relation_refs\\\":[\\\"return_before_cook\\\",\\\"return_before_eat\\\",\\\"cook_and_eat\\\"],\\\"section\\\":\\\"observation\\\"},{\\\"claim_refs\\\":[\\\"warm_food_eat\\\",\\\"slight_calm\\\"],\\\"relation_refs\\\":[\\\"written_eat_calm\\\"],\\\"section\\\":\\\"reception\\\"}],\\\"observation\\\":\\\"帰ってから、うどんを作って食べたのですね。\\\",\\\"reception\\\":\\\"あったかいものを食べて、少し落ち着けてよかったです。\\\",\\\"update_note\\\":null},\\\"unknowns\\\":[],\\\"updates\\\":[]},\\\"evidence\\\":[{\\\"end\\\":3,\\\"field_path\\\":\\\"memo_action\\\",\\\"quote\\\":\\\"帰って\\\",\\\"source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\",\\\"start\\\":0},{\\\"end\\\":13,\\\"field_path\\\":\\\"memo_action\\\",\\\"quote\\\":\\\"うどんを作って\\\",\\\"source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\",\\\"start\\\":6},{\\\"end\\\":16,\\\"field_path\\\":\\\"memo_action\\\",\\\"quote\\\":\\\"食べた\\\",\\\"source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\",\\\"start\\\":13},{\\\"end\\\":10,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"あったかいもの食べた\\\",\\\"source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\",\\\"start\\\":0},{\\\"end\\\":21,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"ちょっと落ち着いた\\\",\\\"source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\",\\\"start\\\":12},{\\\"end\\\":16,\\\"field_path\\\":\\\"memo_action\\\",\\\"quote\\\":\\\"帰ってから、うどんを作って食べた\\\",\\\"source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\",\\\"start\\\":0},{\\\"end\\\":16,\\\"field_path\\\":\\\"memo_action\\\",\\\"quote\\\":\\\"作って食べた\\\",\\\"source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\",\\\"start\\\":10},{\\\"end\\\":21,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"あったかいもの食べたら、ちょっと落ち着いた\\\",\\\"source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\",\\\"start\\\":0}]}\",\"metadata_json\":\"{\\\"adapter_revision\\\":\\\"041f4161fe7bac82b437ecff2711b769ca4c8cfe093ddd04b30b4d728e42d217\\\",\\\"elapsed_seconds\\\":81.62807848397642,\\\"evidence_check\\\":\\\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\\\",\\\"finish_reason\\\":\\\"stop\\\",\\\"model\\\":\\\"Qwen/Qwen3.5-4B\\\",\\\"provider\\\":\\\"local_transformers\\\",\\\"revision\\\":\\\"851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a\\\",\\\"usage\\\":{\\\"completion_tokens\\\":1599,\\\"prompt_tokens\\\":1732}}\",\"raw_output\":\"{\\\"candidate\\\":{\\\"claims\\\":[{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\",\\\"evidence_indexes\\\":[0],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"return\\\",\\\"evidence_indexes\\\":[0],\\\"kind\\\":\\\"EVENT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[0],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[0],\\\"scope_refs\\\":[\\\"return\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"帰って\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"帰って\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\",\\\"evidence_indexes\\\":[1],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"cook\\\",\\\"evidence_indexes\\\":[1],\\\"kind\\\":\\\"EVENT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[1],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[1],\\\"scope_refs\\\":[\\\"cook\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"うどんを作って\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"うどんを作って\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\",\\\"evidence_indexes\\\":[2],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"eat\\\",\\\"evidence_indexes\\\":[2],\\\"kind\\\":\\\"EVENT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[2],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[2],\\\"scope_refs\\\":[\\\"eat\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"食べた\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"食べた\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\",\\\"evidence_indexes\\\":[3],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"warm_food_eat\\\",\\\"evidence_indexes\\\":[3],\\\"kind\\\":\\\"EVENT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[3],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[3],\\\"scope_refs\\\":[\\\"warm_food_eat\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"あったかいもの食べた\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"あったかいもの食べた\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\",\\\"evidence_indexes\\\":[4],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"slight_calm\\\",\\\"evidence_indexes\\\":[4],\\\"kind\\\":\\\"STATE\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[4],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[4],\\\"scope_refs\\\":[\\\"slight_calm\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"ちょっと落ち着いた\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"ちょっと落ち着いた\\\"}],\\\"conflicts\\\":[],\\\"core\\\":\\\"emlis\\\",\\\"question_proposal\\\":null,\\\"relations\\\":[{\\\"evidence_indexes\\\":[5],\\\"from_claim_id\\\":\\\"return\\\",\\\"polarity\\\":\\\"AFFIRMED\\\",\\\"qualifiers\\\":[],\\\"relation_id\\\":\\\"return_before_cook\\\",\\\"scope_refs\\\":[\\\"return_before_cook\\\"],\\\"to_claim_id\\\":\\\"cook\\\",\\\"type\\\":\\\"SOURCE_WRITTEN_TEMPORAL_KARA_LINK\\\"},{\\\"evidence_indexes\\\":[5],\\\"from_claim_id\\\":\\\"return\\\",\\\"polarity\\\":\\\"AFFIRMED\\\",\\\"qualifiers\\\":[],\\\"relation_id\\\":\\\"return_before_eat\\\",\\\"scope_refs\\\":[\\\"return_before_eat\\\"],\\\"to_claim_id\\\":\\\"eat\\\",\\\"type\\\":\\\"SOURCE_WRITTEN_TEMPORAL_KARA_LINK\\\"},{\\\"evidence_indexes\\\":[6],\\\"from_claim_id\\\":\\\"cook\\\",\\\"polarity\\\":\\\"AFFIRMED\\\",\\\"qualifiers\\\":[],\\\"relation_id\\\":\\\"cook_and_eat\\\",\\\"scope_refs\\\":[\\\"cook_and_eat\\\"],\\\"to_claim_id\\\":\\\"eat\\\",\\\"type\\\":\\\"SOURCE_WRITTEN_TE_LINK\\\"},{\\\"evidence_indexes\\\":[7],\\\"from_claim_id\\\":\\\"warm_food_eat\\\",\\\"polarity\\\":\\\"AFFIRMED\\\",\\\"qualifiers\\\":[],\\\"relation_id\\\":\\\"written_eat_calm\\\",\\\"scope_refs\\\":[\\\"written_eat_calm\\\"],\\\"to_claim_id\\\":\\\"slight_calm\\\",\\\"type\\\":\\\"SOURCE_WRITTEN_TARA_LINK\\\"}],\\\"schema_version\\\":\\\"cocolon.cmee.semantic_and_surface_proposal.v1\\\",\\\"surface_proposal\\\":{\\\"bindings\\\":[{\\\"claim_refs\\\":[\\\"return\\\",\\\"cook\\\",\\\"eat\\\"],\\\"relation_refs\\\":[\\\"return_before_cook\\\",\\\"return_before_eat\\\",\\\"cook_and_eat\\\"],\\\"section\\\":\\\"observation\\\"},{\\\"claim_refs\\\":[\\\"warm_food_eat\\\",\\\"slight_calm\\\"],\\\"relation_refs\\\":[\\\"written_eat_calm\\\"],\\\"section\\\":\\\"reception\\\"}],\\\"observation\\\":\\\"帰ってから、うどんを作って食べたのですね。\\\",\\\"reception\\\":\\\"あったかいものを食べて、少し落ち着けてよかったです。\\\",\\\"update_note\\\":null},\\\"unknowns\\\":[],\\\"updates\\\":[]},\\\"evidence_quotes\\\":[{\\\"field_path\\\":\\\"memo_action\\\",\\\"quote\\\":\\\"帰って\\\",\\\"source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\"},{\\\"field_path\\\":\\\"memo_action\\\",\\\"quote\\\":\\\"うどんを作って\\\",\\\"source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\"},{\\\"field_path\\\":\\\"memo_action\\\",\\\"quote\\\":\\\"食べた\\\",\\\"source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\"},{\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"あったかいもの食べた\\\",\\\"source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\"},{\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"ちょっと落ち着いた\\\",\\\"source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\"},{\\\"field_path\\\":\\\"memo_action\\\",\\\"quote\\\":\\\"帰ってから、うどんを作って食べた\\\",\\\"source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\"},{\\\"field_path\\\":\\\"memo_action\\\",\\\"quote\\\":\\\"作って食べた\\\",\\\"source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\"},{\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"あったかいもの食べたら、ちょっと落ち着いた\\\",\\\"source_id\\\":\\\"63502062-1016-471c-8549-1c4dd98b76ab\\\"}],\\\"schema_version\\\":\\\"cocolon.cmee.quote_candidate.v1\\\"}\\n\",\"request_id\":\"prep-c7b9d76ccb6987c157672f414f0180ddef909055d777b0ee5d3fed87a34c65be\",\"status\":\"CANDIDATE_UNREVIEWED\"},\"request_ref\":\"prep-c7b9d76ccb6987c157672f414f0180ddef909055d777b0ee5d3fed87a34c65be\",\"schema_version\":\"cocolon.cmee.emlis_semantic_snapshot.v3\",\"semantic_profile\":\"emlis_model_proposal.v1\",\"snapshot_ref\":\"semantic-9a125aa15b3844622c3cea40e378b95141de84b4872e05e36ac13fa542cca892\",\"source_bindings\":[{\"envelope_id\":\"src-a1b0c051df1279910edced1c\",\"role\":\"ORIGINAL_INPUT\",\"source_commitment\":\"0224ce27f5f2f42f86bf3f3cefc2372d1e87e088d5c3c588b926a999abf10423\",\"source_id\":\"63502062-1016-471c-8549-1c4dd98b76ab\",\"source_version\":\"emlis.current_input_bundle.v1\"}],\"source_prefix_ref\":\"emlis-source-prefix-31137b58eab33f0fc2fcf7aa80404e3f12c2a190374b12910854458412b58aaa\"}",
+          "snapshot_ref": "semantic-9a125aa15b3844622c3cea40e378b95141de84b4872e05e36ac13fa542cca892"
+        },
+        "body_sufficiency": "SUFFICIENT",
+        "body_state": "FINAL",
+        "reason_codes": [
+          "model_question_not_proposed"
+        ],
+        "schema_version": "cocolon.cmee.emlis_thread.v1",
+        "automatic_progression": false
+      }
+    }
+  ],
+  "meaning_count": 9,
+  "body_count": 8,
+  "source_raw_unchanged": true,
+  "seconds": 10.694004311226308
+}

@@ -2483,3 +2483,14 @@ Mashの4B学習＋CMEE接続続行/Jupyter直接指示で、全機能00全文・
 
 
 §47 実行中checkpoint：source1d5b971fから一回起動（PID620577、1792944459.4219685）。12更新/保存/非学習reload完了、最後の読取429.9秒でFIT9の2完了/3開始、2rawはEOS/parse正常。新041f4161重みの早期archive3,478,250bytes/18対象/32F32有限をPod外照合し永続保管。全9意味/本文の採否未判定・後段0、商品0。trial/2026-10-26-quote-boundary-fit12/READMEとpack runtime checkpointから同じprocessへ戻り、再起動しない。Jupyter直接/管理API/lifecycle0。
+
+
+### §47 最終結果 — 意味9/9・本文8/9、未完文1件で後段0・新重み未採用
+
+[全実結果](../observation_learning/trials/2026-10-26-quote-boundary-fit12/README.md)。source1d5b971f/API4002b457・初期138bから12更新/保存/非学習reload/9生成を1032.166184秒（17分12秒）で完了。無補修rawの既存consumer一回で意味9/9・本文8/9、全9JSON/EOS正常。前回daily01の区切り破損は解消したがdaily02が観測末尾「のですね」を失い、受け取りが「少し落ち着けてよ。」で終了。1557token/EOS/stopで打切りではなく、既存readerが本文不採用。chair6全parsed教師一致/初回ASK3/訂正各3更新/REFINEDを保持。root/別文脈agentが全9raw/本文/問い/更新/差分を読取し、formal Product Readには数えない。
+
+全9条件未達なので条件付き2実model/SQL保存再読は0、evalplan未作成、新041f4161は保存・未採用。reception+boundary NLL0.2559782167→0.0065368361、chair全文0.0009440483→0.0012243148。別対象を合算せず、loss低下を品質証明にしない。今回の技術結果は意味8→9/9、本文8/9据置で、商品受入れを進めない。
+
+早期archive3,478,250bytes/18対象/32F32有限と完了training archive3,494,481bytes/21対象/全raw211240bytesをPod外照合。recovery bundle3,629,750bytes/SHA28cb273fea7bf3dabcb6f40409fba42b814a9c669c72805a3222253a123ccf1cの4対象にconsumer/launchを追加保全し、同一保管identity version1へ更新。consumer全1,670,459bytesはindex/28partsでGitHub保全する。初期重み/旧teacher/helper/reader/API不変。追加学習/失敗model再call/LR探索/raw補修/reader緩和0、終了plan再起動禁止。
+
+処理按分約$0.07454534（記録$0.26/h、準備/回収/保持/保存/税等別）、前半1800秒/$0.13内で後段900秒/$0.065未使用。途中案内の16分46秒を原本17分12秒へ訂正。新観測会はこの欠陥へ不要、独立2話/一般化未確認/Piece・Analysis完成教師0は残る。次は既存教師の受け取り全文と観測末尾が崩れた事実を照合し、新有料試行等は未承認。管理console/GPU一覧/管理API/lifecycle/依存追加/Render/Supabase/本人DB/通常application/RN/merge/deploy0、Jupyter直接。商品0/正式0/3/54.50％、STRUCTURE_MAP_DELTA_NONE。全体00/観測入口/pack/runtime/01A所在を同期する。
