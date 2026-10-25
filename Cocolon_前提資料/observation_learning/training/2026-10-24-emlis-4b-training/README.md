@@ -1,4 +1,4 @@
-**現在の直接作業：** [weekly §29](../../../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-proof-metadata-projection)。モデルへ送るsourceから証明metadata3keyだけを除去。原文/metadata/control/prior/既存2targetは保持。API32dc3b3、backend65/pack13成功・合成target2/2。追加学習量は変更せず、保存済み06ca6381…adapterの新入力FIT2を一回確認する。GPUは停止しない。旧typed_fit計画は終了済みで再実行しない。
+**現在：** 証明metadata3keyだけを除く投影で初回JSON重複は解消、実CMEE0/2（欄長超過の引用座標／訂正後打切り）。[§29](../../../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-proof-metadata-projection)。次は[continued_fit32/plan.json](continued_fit32/plan.json)の一回。元2target/旧runner/旧計画不変、同保存adapterから新optimizerで32update、beforeは直前実rawを再利用、after2生成。GPU停止なし。
 
 # Emlis 4B学習・保存再loadの限定pack
 

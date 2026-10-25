@@ -1,0 +1,31 @@
+{
+  "schema": "cocolon.4b_continued_fit32.v1",
+  "status": "AUTHORIZED_ONCE_CURRENT_MASH_CONTINUATION",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "semantic_profile": "emlis_model_proposal.v1",
+  "initial_adapter_sha256": "06ca6381828841edd2b9c8237c3f7dc61f8242cba42eb8f9047d651fd5dc5749",
+  "distinct_targets": 2,
+  "passes": 16,
+  "max_optimizer_steps": 32,
+  "generation_case_ids": [
+    "FIT-FT-CHAIR-INITIAL",
+    "FIT-FT-CHAIR-AFTER-CORRECTION"
+  ],
+  "context_tokens": 8192,
+  "max_new_tokens": 2048,
+  "max_seconds": 1800,
+  "gpu_hourly_usd": 0.26,
+  "max_total_usd": 1,
+  "minimum_free_gib": 14.0,
+  "gpu_run_authorized": true,
+  "automatic_pod_stop": false,
+  "pod_id": "y0eb0w0qn6nks0",
+  "storage": "Existing 50GB container overlay; not durable",
+  "external_receipt": "Off-Pod archive member/adapter validation and durable storage; GPU remains running",
+  "dataset_manifest_sha256": "4e739cc3307960eeb8fe1ead8ada6a99f41af0b2d86bcd5c65edb57924035df3",
+  "baseline_raw_sha256": "11c3a4768fcc408cf5289e47179d399388bb2d72e093eab7ce970e9041403fee",
+  "basis": "Current Mash request to continue 4B learning and CMEE connection; new finite hypothesis test, not replay of closed one-epoch trial",
+  "hypothesis": "Two updates changed teacher-forced NLL but were insufficient to change self-generated format; test fixed 32 updates on unchanged two targets",
+  "notes": "New optimizer from saved adapter, not exact optimizer/RNG resume. FIT only, no product acceptance. No new Pod/service/DB/deployment or retry."
+}

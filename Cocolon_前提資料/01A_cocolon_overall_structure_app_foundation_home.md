@@ -4700,7 +4700,7 @@ API commit02c0b943のexact14file。prefix A/=`mashos-api/ai/services/ai_inferenc
 | A/cocolon_meaning_experience_engine/emlis_thread_surface.py | 新profile文面の最終化、旧finite作者へfallbackしない |
 | A/emlis_ai_grounded_observation_gate.py | 新profileのauthor-free句読取、誤意味/未知文/質問混入/反復を拒否 |
 | A/emlis_thread_service.py | 新profileの候補/意味/本文の段階保存・再開、通常policy併用拒否、完成非生成 |
-| A/cocolon_meaning_experience_engine/model_candidate_source.py（新） | source全投影と検証済みprior、固定4B/adapter identity、async generator/limits/raw receipt。実endpoint/DB/retryなし |
+| A/cocolon_meaning_experience_engine/model_candidate_source.py（新） | source原文/metadata全保持のモデル投影（10/25は証明用3keyをnative側だけへ保持）と検証済みprior、固定4B/adapter identity、async generator/limits/raw receipt。実endpoint/DB/retryなし |
 | A/cocolon_meaning_experience_engine/preparation.py | optional adapter_revision。None時の旧receipt bytes維持 |
 | T/test_cmee_emlis_model_meaning.py（新） | source scope/意味軸/prior/訂正/gap/再開33検査 |
 | T/test_cmee_emlis_model_proposal.py（新） | 独立本文/実問い/訂正/隔離SQL/中断/完成非生成25検査 |
@@ -4745,3 +4745,8 @@ Cocolon新pack F/=`Cocolon_前提資料/observation_learning/training/2026-10-24
 | quality_review.json | 原入力/訂正sourceと全16surfaceの実所在、前後の局所改善/悪化、商品未達、未実装の次候補 |
 
 同じ差分単位で全機能00・pack README・観測入口・本01A・最新weekly §15.3を更新。構造/公開API/意味schema/採用条件/製品code/旧教師/型/通常DB/Render/RNは不変で、全体設計01・current maps・schema05の再更新はしない。STRUCTURE_MAP_DELTA_NONE（実行結果と所在のみ）。新規Pod1/学習試行1、追加試行0、最終重み回収後に当該Pod停止/削除確認。限定TECHNICAL_CREDIT、商品0/正式0/3/全体54.50％据置。
+
+
+### 2026-10-25 — 継続学習32updateの所在（商品構造差分なし）
+
+F/continued_fit32/continue_fit.py と plan.jsonは、保存済みadapterから新optimizerで既存2target×16周/32updateを一回実行する有限な診断。旧runner/計画は不変。before実raw再利用、保存/非学習reload/after2生成/退避を担当する。採用条件/公開API/DB/RN/三core責務は不変、STRUCTURE_MAP_DELTA_NONE。投影修復実結果はtrials/2026-10-24-qwen4b-cmee-diagnostic/proof_projection_20261025/、実行/採否/次作業は最新weekly§29/30へ戻る。

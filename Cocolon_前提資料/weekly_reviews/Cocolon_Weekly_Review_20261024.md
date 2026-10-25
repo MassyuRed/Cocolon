@@ -2009,3 +2009,22 @@ Mashの4B追加学習・本日の続行指示に基づき、保持中の同A4500
 実GPUscopeは既存A4500 y0eb0w0qn6nks0、表示$0.26/hを保持し、新directoryで保存済みcompact-fit adapter06ca6381…をis_trainable=Falseで読む。初回/保存prior付き訂正後FIT各1、計2生成、context8192/max_new2048/greedy/BF16/SDPA固定、process900秒（表示按分上限$0.065、準備/回収/継続保持/税別）。重み新取得/学習/optimizer/update0、既存結果上書き/自動再試行/追加epoch0。GPU停止/再起動/削除/新Pod/チャージは禁止、操作しない。期限/OOM/identity不一致/採用失敗では実状態を保存し追加実行しない。原rawと入力/hash/重み不変をPod外照合し、結果を同節へ差分記録する。新しい観測会は今回不要、Piece/Analysis完成教師0は別残件。
 
 本番API/DB/Supabase/Render/RN/通常application/公開/merge/deploy0。STRUCTURE_MAP_DELTA_NONE（既存注入ownerの投影のみ、三core責務・source資格・型/contractは不変）。formal0/3・全体54.50％据置、商品credit0、automatic_progression=false。
+
+
+**§29 実結果：** [原raw・実messages・CMEE判定](../observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/proof_projection_20261025/README.md)。176.213秒、初回1409/1307token stop・重複キー消失だが欄長超過の引用座標/INVALID_EVIDENCE、訂正3526/2048token length/TOKEN_LIMIT、意味/本文0/2。実messages/identity各2/2、重み3hash不変・trainable0・32tensor有限。rootの保存先誤読による推論前の3起動失敗と補正引用符エラーを隠さずtrialへ記録し、実モデル生成2件と区別した。Download待機timeoutでも実ファイル到着、再Download0。raw/report/script/planはPod外byte一致、logのCR正規化だけ区別。次の学習前比較にはこの2rawを再利用する。
+
+<a id="20261025-continued-fit32"></a>
+## 30. 10/25 — 入力投影修復後、同2targetへの32更新を一回だけ確認
+
+Mashの今回の「4B学習＋CMEE接続を進めて」を根拠に、前runの閉じた一回承認を復活させず、新しい有限な学習試験を実施する。§29でsource proofコピーとcontext圧迫を修正しても採用0/2だったため、mask/gradient/保存に明白なbugがなくNLLが低下している実測と合わせ、『2更新では自己生成の形式選択を変える量が不足したか』を検証する。無目的に同2stepを反復したり、NLL低下だけで採用したりしない。
+
+既存2target/原文/prior/新投影/LoRA r8-alpha16-q/v16module/AdamW1e-4/seed20261024/8192/2048/greedy/BF16/SDPAとCMEE採用条件を固定。保存済み06ca6381…を新directoryへ読み、16周/32updateを一回行う。教材数は2件と記録し、32教材へ水増ししない。新optimizerでの継続学習で、optimizer/RNGの厳密な途中再開とは呼ばない。§29の実FIT2をbeforeへbyte再利用し、学習後は保存→非学習reload→同FIT2だけを新生成する。未知評価/商品受入れへ昇格しない。
+
+sourceはpackのcontinued_fit32/continue_fit.pyとplan.json。旧run_pilot/旧epoch1/旧execution_planは不変。新scriptは固定plan、source/dataset/旧adapter/baseline hash、実module/32trainable tensor、2原文の全context、GPU20GB/BF16/free14GiB、attempt一度を要求する。旧adapterを書換えず、新adapter保存前後・非学習reload・32tensor有限性とhashを照合する。既存exportでadapterを生成後すぐ退避し、学習後の2raw/実計画/実行source/教材と一緒にPod外回収する。
+
+同A4500 y0eb0w0qn6nks0のみ。process1800秒/計画$1、表示$0.26/h按分上限$0.13。準備/回収/保持/税別で、Pod請求hard capではない。新Pod/charge/STOP/再起動/削除/新依存/本人DB/Render/Supabase/本番/公開/merge/deploy0。deadline/OOM/nonfinite/identity不一致/生成失敗後に自動再試行・追加更新・他教材・条件緩和へ進まない。GPUはMashの明示まで保持する。
+
+根拠と変更変数を明記した今回の継続学習であり、単純な未診断epoch増量を先行したものではない。root華恋が商品経路/必要性と実行の単一owner、独立2agentはread-only。Codex Work/GPT-6、別モデルPro/Ultraと偽らない。OBSERVED_BLOCKER_MINIMAL_FIX、既存商品/意味/公開contract内、追加の恒久service/基盤なし。CPU AST/固定plan認可と認可false/増量/別adapter/時間超過/STOPの5拒否を確認。STRUCTURE_MAP_DELTA_NONE、正式0/3/54.50％・商品credit0は維持。実結果で採否と次作業を更新する。観測会は本形式/適合試験には不要、Piece/Analysis完成教師0と独立未知評価の不足は別に残す。
+
+
+§30反映前の自動レビューがGitHub pushを拒否した。理由はprivateな素材/生出力の送信許可が未確認という判定。現在のpublic repositoryと既反映d6f8febdの正式sft2行、原OBS-20261024-001 D00/D02を照合し、scenario_persons_fictitious=true、華恋作成の架空事例/実ユーザー記録ではない旨と同じ原文・補足であることを確認した。新ファイルはこの公開済み架空2入力のモデル生出力/実行記録/コード/条件のみで、本人DB/Private diary/credentialの取得・送信0。低リスク/既存指示の根拠を確認して同じ送信操作を再判断し、別経路での迂回は行わない。

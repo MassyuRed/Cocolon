@@ -1,6 +1,6 @@
 # Mashの観測技術を継承するための記録
 
-**今回の実結果（§28）**：外側source_id/minified指示で同2target・1epoch/2updateの新LoRAを1回作り、保存/非学習reload・前後FIT各2を完走（444.270秒）。新重みと全25member/32tensorをPod外照合して保管済み、旧adapter不変。NLL0.216489→0.210641だがrawは前後2/2同一、実CMEE意味/本文は前後0/2。初回は重複キーINVALID_FORMAT、訂正後は2048token打切りTOKEN_LIMIT。次は座標/証明metadataの入力投影と形式学習方法を見直す。同一runは完了済みに閉じ、GPUは停止しない。 [実結果・回収照合](trials/2026-10-24-qwen4b-cmee-diagnostic/compact_fit_training_20261025/README.md)。観測会は今の形式問題には不要。backend65・pack13成功、最大生成枠8162/8192・切捨て0。
+**現在の直接作業：** [入力投影修復と実推論§29](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-proof-metadata-projection)を完了。初回のJSON重複キーは解消したが欄長超過の引用座標、訂正後打切りで実CMEE0/2。入力1409/3526token、原文/prior/target保持。次は[同2target・保存重みから32更新の有限な一回§30](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-continued-fit32)。GPU停止なし、観測会は今回不要。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
