@@ -2449,3 +2449,6 @@ Mashは「受け取りだけ6更新→保存・再読込→9件検査→全件�
 ### §46 10/26 JST — 固定12一回＋条件付き2保存再読をMashが明示承認
 
 Mashの「この12更新の一回試行を実行してよいですか？→いいよ、進めて。」を受領。9bff60dbのsource/10条件CPU/実tokenizer全9/固定順/教師/LR/reader/予算/停止を維持し、proposed原本を保存して新実行planをtrueへ更新。開始前checkpointで学習・生成0。Jupyter直結で12更新/保存reload/FIT9を一回、全9成功と問い・訂正保持時だけ2実service保存再読/中断再開へ進む。合計GPU処理45分/$0.195按分（保持等別）、失敗後追加更新/再生成/探索0。開始後はactual counterへ更新する。GPU lifecycle/本人DB/通常配置変更0、商品0。旧6の承認再利用ではなくこの新12への明示承認で、CPU後/全成功後の小分け再承認は不要。
+
+
+§46 実行中checkpoint（10/26 JST）：source34c9d67fから一回起動。12更新/保存非学習reload完了、読取486.8秒でFIT9は3完了/4開始、完了3rawのEOS/parse正常。全9意味/本文採否未判定、後段0。新2009b43cの早期archive3,477,588bytes/18対象/32F32有限をPod外照合、libfile_a3fe11afac408191b5b81dbac55f50e8へ保存。初期quote18と旧不採用f1は不変。起動コマンドの改行構文失敗はfile/child/model effect前に修正し、実学習は一回のみ。Jupyter白画面/transport errorは既存tabで回復、process再起動0。全実結果未確定、商品0。実行中原本2026-10-26-quote-balanced-fit12/READMEとquote pack runtime checkpointから同じ試行へ復帰する。
