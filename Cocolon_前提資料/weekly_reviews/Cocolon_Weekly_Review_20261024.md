@@ -1936,7 +1936,7 @@ work rulesの既存入口の読順、全体現在地、観測README、4B packか
 
 **10/25 続行：必須型・意味分解の指示を最小修復。** API `7b649a23a6cdbfb5d55576a6ce58446ff24b414a` のOUTPUT_SPECで、観測/受け取りは空でない日本語文字列、全subject keyとconflictsは必須、出来事/結果/喜び/喜び対象は別claim、初回と訂正後の本文責務と関係方向を明示した。採用側・意味schema・独立reader・教師assistant/source/prior/systemは変更0。2教師/6proxyのuser.output_specと固定API/hashだけを同期。backend58成功（新4拒否を含む）、pack11成功、合成target2/2が意味/本文あり、旧messages2/2拒否。実tokenizerは初回3110+1094=4204、訂正6103+1877=7980、生成枠6103+2048=8151<=8192、切捨て0。合成成功を実4B採用へ加算しない。現在の実4B採用は前回の前後0/2のまま。次は保持中A4500の既存adapterを非学習reloadし、同初回FITを新指示で一回だけ生成して未修正rawを既存consumerへ渡す。追加epoch/教師増量/Pod停止なし。教材追加の前にこの形式不正を解消するため、今回の観測会は不要。Piece/Analysis完成教師0、一般自由文と動的一往復/通常保存再読/商品品質は残件。
 
-今回の開始範囲はOBSERVED_BLOCKER_MINIMAL_FIX / LEVEL_2相当、商品接続はEmlisの原入力から自然な受け取りへ至るCM-04。環境はCodex Work/GPT-6、実行とGitHub反映は華恋root、独立agentは読取レビューのみ。別モデルのPro/Ultra評価を実施したとは報告しない。全体設計01・全file地図01A/B/C・三core/CMEE map・shared01 actual・最新weeklyを確認し、System Contextの最新索引未完成はfresh原本の直接読取で補った。商品route/owner/型/契約変更なし、STRUCTURE_MAP_DELTA_NONE。
+今回の開始範囲はOBSERVED_BLOCKER_MINIMAL_FIX / LEVEL_2相当、商品接続はEmlisの原入力から自然な受け取りへ至るCM-04。環境はCodex Work/GPT-6、実行とGitHub反映は華恋root、独立agentは読取レビューのみ。別モデルのPro/Ultra評価を実施したとは報告しない。全体設計01・全file地図01A/B/C・三core共通入口と対象CMEE/Emlis map・shared01 actual・最新weeklyを確認し、System Contextの最新索引未完成はfresh原本の直接読取で補った。商品route/owner/型/契約変更なし、STRUCTURE_MAP_DELTA_NONE。
 
 独立reviewは既存契約内の指示明確化を支持した。初稿の初回/訂正後を分けない本文説明は訂正後教師と矛盾したため、実GPUへ渡す前に修正した。新回帰4件はobservation object、reception null、subject.source_entity欠落、claim結合を既存採用側が拒否することを確認する。採用側を変更してモデルを通したものではない。
 
@@ -1945,3 +1945,18 @@ CPU用Python3.12.14/pytest8.4.1/subtests0.14.2と、固定Transformers5.19.0/PEF
 **実GPU確認の範囲**：Pod y0eb0w0qn6nks0の既存adapterをis_trainable=Falseで読む。初回FIT1件のみ、非thinking/greedy/max_new2048/context8192/process900秒、optimizer/新学習/追加epoch0。同source・同adapterの前回初回rawと比較し、rawの型・意味採用・本文・問いを別に記録する。失敗でもrawを補修しない。2教師の追加学習や訂正後追加生成へ自動進行しない。GPU保持は表示$0.26/h、稼働は今回Runpod画面で確認した。停止/削除/再起動/新Pod/チャージ0。
 
 CPU修復は限定TECHNICAL_CREDIT、実モデル成功・本人実機・商品受入れは未成立。54.50％・正式0/3・candidate_ready=falseを維持。実行後に本節へ実raw/判定/次の一作業を差分記録する。
+
+
+### §26 実GPUの最終結果 — 本文欄は文字列化したが、意味/本文採用0/1
+
+[未修正raw・実行記録・固定consumer結果・前回比較](../observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/surface_instruction_20261025/README.md)を回収・保存した。初回FIT1件、入力3110/出力993token、正常stop/JSON、生成50.873663秒、prepare/reload込み58.846217秒。peak allocated9.328224/reserved9.652344GiB。既存adapter3fileは前後不変、32tensor有限、学習parameter/update/optimizer0。raw fileはPod側SHA256とPod外実bytesを照合し、実messagesとsource/dataset hashも一致した。元raw text SHA256は5c2c686b8cf8d0b1adb22acb5d87a94729a5b7f5941de4f5144adbf3f362ba29。
+
+型はobservation object/reception nullから両stringへ変化したが、どちらも同じ原文復唱で自然な受け取りに届かない。根拠はfield_path=text_fields.memo/text_fields.memo_action、source envelopeのUTF-8位置406..460/489..567へ回帰し、固定APIの既存consumerはINVALID_EVIDENCE。model/adapter/messages一致、意味・本文は0/1。candidate.core/conflicts・subject.source_entityの欠落、conflictsのclaim内誤配置、4役割を2claimへ結合、関係方向/section名の不正も残る。raw補修・採用条件緩和・合成target代用0。前回の0/2と今回の同初回0/1は別の診断として保持し、未知評価の件数へ足さない。
+
+この結果から、指示に必須事項を列挙するだけでは出力の階層/意味分解/座標を安定できないことが分かった。次の一作業は、既存schemaを具体的なJSON階層・値型として示す出力提示/形式学習の最小修復を整えること。field_pathは実sourceの許可field名、start/endはその欄のUnicode位置、本文は本人への受け取りとして分離する。正解本文をpromptへ混ぜず、教師assistant/source/priorを保ち、8192以内と実messages一致をCPUで先に確認する。未知parser/新schema/自動raw補修/無根拠な追加epoch/同じ失敗の再生成を増やす案は採らない。今回の1生成は終了し、追加生成/訂正後生成/再学習は行っていない。
+
+今回の形式問題には新しい観測会は不要。自然な完成受け取り・訂正実演・Piece/Analysis完成教材0・独立評価の不足は引き続き残る。指示修復の限定TECHNICAL_CREDITと、実モデル0/1の不合格を分け、正式0/3・全体54.50％は据置。今回のCPU/GPU手順では本人DB/Render/Supabase/通常有効化/merge/deploy変更0。GPUはMashの指示どおり稼働保持、停止/削除/再起動0。表示$0.26/hの58.846秒按分は約$0.00425で、待機/準備/回収と継続保持の総請求ではない。
+
+GitHub反映の前半はAPI7b649a2（source/test2path）とCocolon6dbd250（既存10path）を両方読み戻し、全blob/全文・変更集合・親を照合済み。後半は実結果5fileと既存4文書の最終同期。ブラウザの実行記録Download待機は一度timeoutしたが、同期先のinference_report.jsonは到着済みで、固定source/実messages/raw file hashを検証した。学習/推論の失敗や再実行として加算しない。
+
+座標原因の現物照合：今回の406..460/489..567はprompt位置の測定値ではなく、実messages内material.sources[0].evidence[0/1]のSOURCE_ENVELOPE utf8_start/endと完全一致した。要求する同rowのscalar_start/endは0..18/0..26。次の修復ではfield_path=memo/memo_actionそのものと、この二つの座標系の区別を具体的に示す。独立read-only reviewもraw/集計/観測会不要の判断と整合し、この説明精度を補正した。

@@ -79,7 +79,7 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 
 ## 現在地（2026-10-25・三中核の開発基準選定、本番は未成立）
 
-**今回の直接作業：** [weekly §26](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-surface-type-and-atomic-claim-repair)。出力指示の必須型/意味分解を修復し、同source/教師targetを保った2教師と6proxyへ同期。backend58・pack11成功、合成target2/2は意味/本文あり、旧messages2/2拒否。token実測の最大生成枠8151/8192、切捨て0。実4B採用は前回0/2のまま、保持中A4500の既存adapterで初回1生成だけを確認する。追加学習・停止なし。今回の型不正修復のための観測会は不要で、他core教師不足は保持する。
+**今回の直接作業：** [weekly §26](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-surface-type-and-atomic-claim-repair)。出力指示の必須型/意味分解を修復し、同source/教師targetを保った2教師と6proxyへ同期。backend58・pack11成功、合成target2/2は意味/本文あり、旧messages2/2拒否。token実測の最大生成枠8151/8192、切捨て0。保持中A4500の既存adapterで初回1生成を確認し、本文欄はstring化したが根拠位置/field名と意味分解が崩れて意味/本文0/1。[実結果](trials/2026-10-24-qwen4b-cmee-diagnostic/surface_instruction_20261025/README.md)を保持する。次は同schemaのJSON階層・値型・欄内座標を具体的に示す出力提示/形式学習の最小修復。追加学習・停止なし。今回の型不正修復のための観測会は不要で、他core教師不足は保持する。
 
 華恋の選定は4Bの共通基盤＋core別教示＋既存CMEE。0.6/0.8/1.7/2B・別4Bまで検討し、学習費と常時推論費を分離する。Mashの最新指示により、ローカル運用先はWindows／Macとも候補で未選定。既存M4 16GBの4bit案は検討材料であり、決定済みの移行先ではない。自前adapterのmerge/変換、量子化後の三中核品質、実入力・同時数・24時間運用は未確認。既存9教師はEmlisのみ、4B実診断は2教師/2update、Piece/Analysis完成教師0。単純なepoch増加を先行せず、各coreの完成実演と未使用入力で評価する。旧3070は今回fresh画面で既に停止表示、華恋の停止操作0。新A4500 20GB／Secure・表示$0.26/h、Pod y0eb0w0qn6nks0で修正版2教師/2update・保存reload・前後16生成が完走。peak allocated14.970/reserved17.588GiB、全24member/32tensor回収照合/永続保管済み。NLL0.251117→0.245189だがCMEE意味/本文は前後0/2。初回shape/自然文surface、訂正後の旧意味、proxy2件打切りが残る。[全実結果](trials/2026-10-24-qwen4b-cmee-diagnostic/repaired_a4500_20261025/README.md)。診断process5400秒/計画$1と今日のGPU保持課金を分離し、自動Stop/削除を行わない。本番変更0。正式0/3・54.50％据置。
 
