@@ -1907,3 +1907,25 @@ GPU確保・CUDA/BF16検査・固定pack prepare・4B読込/run開始まで確�
 次の直接作業は**同じ初回FITで、必須shapeと自然文surfaceを実4Bが契約どおり出し、既存consumerを通す最小修復**。教師の無制限増量、採用条件緩和、単純な追加epochへ進めない。三中核育成・通常接続・本番運用・M4変換の完成ではない。現runnerの厳密なoptimizer再開未対応も残す。
 
 固定元データ/コード/教材/採用条件は変更0。今回GitHubは全機能00・本weekly・観測README・4B pack READMEと既存trial owner内の実結果6fileを同期。元のraw JSONL bytesを変更せず、重みbinaryはGitHub公開しない。CMEE集計は重複rawを省いた派生summaryであり、元raw SHA・固定API・結果を明示する。STRUCTURE_MAP_DELTA_NONE（新production owner/接続/型/contractなし）。20GB学習・保存reload・回収の限定TECHNICAL_CREDIT、product_credit=0、正式0/3・PRODUCT_NOT_CLEAR・candidate_ready=false・automatic_progression=false・54.50％据置。
+
+
+<a id="20261025-learning-intent-and-local-platform"></a>
+## 25. 10/25 — 観測学習の目的・用途・前提を毎回の作業入口へ集約、Windows/Macは未選定
+
+Mashは、ローカル運用はMacに限らずWindows PCの可能性もあること、今後の学習前に「なぜ4Bへ観測学習するか」「何に使うか」「その他の必要情報」を毎回確認できるよう、前提資料/最新議事録へ残すことを指示した。
+
+現行の参照先は[観測学習READMEの目的・用途・前提](../observation_learning/README.md#observation-learning-intent-and-assumptions)。以下を一か所に集約した。
+
+- Mashの観測技術を、本人の基準/根拠/不明/問い/回答後の修正/自然な受け取りとして継承する目的。短い日常入力と、Cocolon全体の自己理解・他者理解・発信へ結び付ける。
+- Emlis、Piece、Analysisごとの具体的な使用先と既存CMEEの責務。Free/Plus/Premiumの既存目的、IF等の未実装と対象範囲を保ち、生成本文を本人の事実へ逆流させない。
+- リリースまでRunpodで学習し、結果を保持する方針。将来のローカル運用はWindows／Macとも候補でOS/機種/購入未確定。旧M4第一候補案を現在の決定扱いにしない。
+- 元4B＋追加重み＋設定/教材/評価の保持、環境に合わせた形式/実行ソフト変更、厳密な途中再開に必要な保存物。現在のarchiveが元base全重みを含まないことも明記。
+- 追加月額1万円、学習費/常時提供費/保持課金の区別、在庫待ちと本番可用性、Windows/Mac各実機で未確認の品質/待ち時間/同時数/常時運用。
+- 原教材の出自、Emlis9教師と今回4B2教師、Piece/Analysis完成教師0、直近CMEE前後0/2、次の最小修復。loss低下やGPU稼働を観測品質の完成へ置き換えない。
+- 毎回、目的・最新決定/実結果・使用する材料/保存済みモデル・今回の変更と評価・費用/回収を既存開始記録で結び付ける。既存情報をMashへ聞き直さず、別の管理票/承認段階を増やさない。
+
+work rulesの既存入口の読順、全体現在地、観測README、4B packから同じ節へ進むリンクを追加した。詳細の目的を複数ファイルへ全文複製しない。§23のM4案と§24の実行記録は履歴として保持し、現在の運用先は本節と前提資料を優先する。
+
+中断について、学習/保存reload/回収・最終結果のGitHub反映は前回までに完了しており、最後の画像保存/タブ維持の操作が中断された記録がある。「自動レビュー」表示の具体的な拒否理由は取得できておらず、課金/GPU/学習失敗等を原因と断定しない。画像保存の再試行は今回の依頼に不要なので行わない。今回read-onlyのRunpod画面でもA4500 Pod y0eb0w0qn6nks0はUptime44分16秒で稼働、表示$0.26/h。今回のGPU開始/停止/再起動/削除/追加学習/追加推論/追加charge0。
+
+変更は既存5文書のみ。新ファイル/商品source/API/DB/Render/Supabase/教材/重み/contract変更0、STRUCTURE_MAP_DELTA_NONE。今回の記録整備を商品進捗へ計上せず、ADMINISTRATIVE_ONLY、正式0/3・PRODUCT_NOT_CLEAR・candidate_ready=false・automatic_progression=false・54.50％据置。
