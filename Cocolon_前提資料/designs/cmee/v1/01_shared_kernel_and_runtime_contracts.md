@@ -1111,7 +1111,7 @@ actual profileは`emlis_model_proposal.v1`、候補`semantic_and_surface_proposa
 
 
 <a id="cmee-offline-model-service-deadline-proposal"></a>
-## 2026-10-25 — 通常service保存検証へ向けた、offline MODEL_PROFILE限定期限案（未適用）
+## 2026-10-25 — offline MODEL_PROFILE限定期限案（Mash承認後、実装済み・訂正以降未成立）
 
 ### 事実と今回の判断点
 
@@ -1138,4 +1138,14 @@ API製品source1file（上記service）、既存`ai/tests/test_cmee_emlis_model_
 
 既存A4500/同Podのみ、モデルcall各150秒以内、load/隔離SQL/回収を含むprocess最大900秒。前回表示$0.26/hで15分按分$0.065（準備回収/既存継続保持/税を含む請求hard capではない）。新Pod/charge/外部API/STOP/再起動/削除なし。終了/失敗後もMashの指示までGPUを保持する。今回の接続問題に新しい観測会は不要。
 
-**現状態：PROPOSED_NOT_APPLIED。** 製品service/SQL/通常動作は未変更。今回のEngine保存再開結果はtrial/service_persistence_20261025とweekly§34。
+**現状態：MASH_APPROVED_IMPLEMENTED_BOUNDED_ACTUAL_INITIAL_ONLY。** Mashが本具体案へ「いいよ、進めて」と承認し、API95d00bへsource1/test1を実装した。下段が最新actualで、上の未適用/判断待ちは案作成時点の履歴。SQL/通常applicationの30秒は不変。
+
+
+<a id="cmee-offline-model-service-deadline-implemented"></a>
+### 承認後のactual — 2026-10-25
+
+API95d00bはconstructor/実thread限定180秒、残30秒を引くasync最大150秒、timeout/cancelのSTARTED再取得禁止を実装。最初のSQL回帰で判明したSTARTED後旧revisionのHOLD競合は、同service内でfresh readとactive attempt一致確認へ最小修復した。通常Q2/Q3/APPLICATION・旧profile30秒、SQL期限/CAS/owner/sourceを維持する。同期sourceのhard中断は対象外で、実runnerはcancelをtoken loop停止へ伝える。新しいheartbeat/queue/公開fieldはない。
+
+最終CPU3file114 PASS/FAIL0/SKIP0。実4B2call/隔離RPC18は初回意味本文/実ASK保存・GET/start非生成再読まで成立。訂正はEOS1306tokenでJSON閉鎖欠落とsource/根拠/updates等の不良が残りINVALID_FORMAT、不採用。ANSWERは保存、意味未更新、旧本文current解除、再試行不可。実訂正後の意味保存/中断再開・最終完成再読は未到達で、全体一往復成功とはしない。原本と全制限はtrial/service_roundtrip_20261025/README.md・最新weekly§35。
+
+次は同じchairの内容を変えず、実service ID/日時/priorの教師候補をCPUで再束縛・検証する範囲を具体化する。新観測会はこの問題には不要。今回planは実行終了、追加生成/学習/reader緩和なし。STRUCTURE_MAP_DELTA_PRESENT（private期限と取得中断処理のみ）、商品0/正式0/3/54.50％、GPU停止0。

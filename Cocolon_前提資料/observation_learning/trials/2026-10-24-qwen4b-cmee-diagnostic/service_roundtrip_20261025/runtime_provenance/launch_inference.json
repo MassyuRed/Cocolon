@@ -1,0 +1,10 @@
+{
+  "process_id": 306611,
+  "preflight_process_starts": 1,
+  "previous_model_calls": 0,
+  "source_cache_files_moved": 86,
+  "script_changed": false,
+  "max_model_calls": 2,
+  "automatic_inference_retries": 0,
+  "gpu_lifecycle_operations": 0
+}

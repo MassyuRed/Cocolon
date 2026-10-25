@@ -2168,3 +2168,38 @@ serviceが作るUUID/request/source/controlは旧fixtureと異なり、意味ID�
 [共有設計01の具体案](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-offline-model-service-deadline-proposal)：明示offline MODEL_PROFILEだけattempt180秒/source待機150秒、通常Q2/Q3/APPLICATION30秒とSQL期限/CAS/再送禁止は維持する。実service生成入力→新model最大2call→意味/本文保存/中断再開/同一再読を同じ有限scopeで確認する。新private時間の内部具体化なのでLEVEL_2とする補助review意見もあるが、rootは保存attemptの失効境界が変わる点をRule18§11.3のruntime/STOP境界変更と解釈し、具体案の限定判断を求める。製品期限変更は未実施。今回完了したCPU再開を承認待ちへ戻さない。
 
 通常service/SQL/Auth/HTTP/RN/本人端末・未知入力/有料差/三中核の商品品質は未完。今回の接続問題には観測会不要、Piece/Analysis完成教師0と独立未知評価不足は別残件。全機能00・観測入口/pack・current01/04・01Aへ同じ差分を同期。STRUCTURE_MAP_DELTA_NONE（新one-shot確認と未適用提案のみ）、限定TECHNICAL_CREDIT、商品credit0/正式0/3/54.50％据置。GPU停止/再起動/削除/新Pod/charge/Render/Supabase/merge/deploy0。
+
+
+<a id="20261025-approved-offline-service-actual-result"></a>
+## 35. 10/25 — Mash承認後offline180秒を実装、実4Bの初回保存再読は成立・訂正は不採用
+
+Mashが[具体案](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-offline-model-service-deadline-proposal)へ「いいよ、進めて」と明示承認。全機能00/ルール/必読incident/全体設計・全file地図/current maps/最新§34/観測学習目的を確認して実装した。Codex Work/GPT-6、root華恋が統合/実行/反映owner、別文脈agentはread-onlyで別モデルPro/Ultraやhuman受入れを装わない。System Context最新索引未完成のためfresh原本を直接参照。
+
+### 実装と回帰
+
+[API95d00b](https://github.com/MassyuRed/mashos-api/commit/95d00b907f6d9c42944666269acc457c9af34f37)のsource1/test1を反映し全remote本文/blob/変更pathを確認。明示offline MODEL_PROFILEだけattempt最大180秒/source待機最大150秒、通常Q2/Q3/APPLICATION/旧profile30秒。SQL期限/CAS/owner/sourceは変更0。初回113 PASS/1 FAILでSTARTED保存後の旧revisionによるtimeout HOLD競合を検出し、同serviceのfresh read/active attempt確認だけで修復。最終指定3fileは**114 PASS/FAIL0/SKIP0、63.65秒**、既存warning3。単独46や初回件数を合算しない。専用runnerの合成smokeも実RPC30・候補2・3更新・中断/明示再開/非生成再読を一度確認したが、実model成功へ数えない。
+
+### 実modelとSQL保存の実結果
+
+[原本・全状態](../observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/service_roundtrip_20261025/README.md)。Cocolon031e1aの固定script/実行SHA ea58009d…、API95d00b、既存A4500/固定4B/保存9b845adapter非学習reload、trainable0/学習更新0。実service自身のUUID/request/初回実question/actual priorで最大2callを完了、全155.760673612秒/隔離RPC18。
+
+| 段階 | 実結果 |
+|---|---|
+| 初回 | 2070in/1347out・67.859530051秒、JSON/stop/EOS成功。意味/本文/実ASKを保存し、GET/startは作者/候補を呼ばず同DTOを返す。前後thread/events不変 |
+| 訂正 | 5005in/1306out・66.391389068秒、stop/EOSだがJSON不正。receiptINVALID_FORMAT、ANSWER保存済み/意味未更新/current本文None/旧is_current=false/ANSWER_UNREFLECTED/can_retry=false |
+
+訂正priorは実初回snapshot全文と一致し、原raw/receipt/request/question/answer/sourceは同一性を保持。原raw補修/ID置換/教師送信/保存raw代用0、重み/API/source前後不変。**実訂正の意味保存後中断/明示再開・最終完成DTOの非生成再読は未到達。** CPU合成の成功で埋めず、service_saved_roundtrip=falseを維持する。
+
+### 不良の内容と次の作業
+
+訂正はEOS1306/2048で終わり、時間切れ/token打切りではない。JSONの最上位閉鎖が不足し、診断上それだけを補ってもevidence誤配置、updates/unknowns欠落、整数ref、6根拠中一致1/2件start>end、原入力の事実を補足ANSWERへ束縛する誤りが残る。共同修理/手順の型と正しい訂正保持も不足する。『括弧1個だけ直せば成功』とはしない。補修rawを保存/採用せず、readerは維持した。
+
+学習時と実serviceのsystem/output_spec/本人source全文は一致し、ID/日時/control/request/priorが変わる。UUID単独を原因と断定しない。次は既存chairの内容を保って正規service ID/日時/actual priorへ教師候補をCPU再束縛し、閉形・source区別・引用座標・文字列参照・3更新を既存CMEEで検証する範囲を具体化する。新しい観測会はこの問題には不要。原9教師/18候補/旧評価/旧重みを黙って上書きしない。
+
+### 起動前失敗と回収・終端
+
+既存sparse checkoutに必要test/helper/SQLがなく事前import1回失敗し、正本3pathだけ追加した。そのimportで86個の未追跡pycを生成したため、最初のrunner processはsource-clean検査に0.037180736秒/model0/source0で停止。失敗artifactを保持し、全差分が未追跡__pycache__/*.pycだけと確認して退避、tracked .py/検査/同scriptは変更しない。同じ承認budget2内で初めて実推論を行った。process起動2回/実推論process1回/モデル再試行0を分離記録。監視commandの引用符ミス1回も推論への影響0。
+
+main archive941f5911…/53,260bytes/22member、aux34971c7b…/10,612bytes/9memberをPod外照合。全raw/messages/request/prior/receipt/DTO/snapshot/run、初回不変再読、失敗記録/実行条件/画像をGitHubへ保存。今回planは終了・再実行不可、追加推論/学習0。全機能00/観測入口/pack/current01/04/01A/共有設計01へ同じ差分を同期。STRUCTURE_MAP_DELTA_PRESENTは既存private runtime期限とtimeout処理のみ、意味schema/reader/公開API/SQL/DTO/RN/他core責務不変。限定TECHNICAL_CREDIT、商品credit0/正式0/3/54.50％据置。
+
+通常application/Auth/HTTP/RN/本人端末、一般観測品質、実model訂正後保存/中断再開は未完。稼働Supabase/Render/本人row/merge/deploy操作0。GPUは完了後もRTX A4500/20,470MiB/使用1MiBを確認し保持、STOP/再起動/削除/新Pod/charge0。実推論process按分約$0.01124938は準備/回収/継続保持/税等を含む請求総額ではない。

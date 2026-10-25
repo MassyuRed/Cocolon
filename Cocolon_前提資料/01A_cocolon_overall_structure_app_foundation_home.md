@@ -4803,3 +4803,15 @@ STRUCTURE_MAP_DELTA_NONE。全体設計01・01B/01C・Piece/Analysis mapは商�
 | trial/service_persistence_20261025/ | README/provenance、attempt/result、initial/correctionのsaved_input・cold_outcome。Engineのみの2/2同一、訂正3更新・ENDを保持。通常service/SQL未実行 |
 
 F/trial prefixは上表と同じ。現sourceのservice30秒と実model初回57.425/訂正95.995秒が不整合。次は共有設計01のoffline MODEL_PROFILE限定期限案の判断後、service自身のUUID/request/actual priorから新規model2callと保存再読へ進む。旧raw ID置換による成功流用は行わない。API/SQL/DTO/RN/meaning/readerの変更0、STRUCTURE_MAP_DELTA_NONE。最新はweekly§34/全機能00。
+
+
+## 2026-10-25 — 承認済みoffline model期限と実サービス保存のfile地図
+
+| path | 責務 |
+|---|---|
+| API ai/services/ai_inference/emlis_thread_service.py | 既存ownerへprivate model専用31..180秒設定/source最大150秒、通常30秒維持、timeout HOLDのfresh revision照合を追加。95d00b |
+| API ai/tests/test_cmee_emlis_model_proposal.py | constructor/実thread限定/timeout/cancel/receipt再利用/実SQL一往復と中断を検証。既存3file計114成功 |
+| F/service_roundtrip_check/run_service_roundtrip.py | 実service UUID/request/actual priorで新model最大2call、isolated SQL、意味保存後中断/明示再開/非生成再読を試す900秒one-shot。実訂正不採用のため後半未到達 |
+| trial/service_roundtrip_20261025/ | 承認plan/CPU結果、実request/messages/raw/prior/receipt/DTO/snapshot/run/manifest/integrity/画像、runtime起動前失敗記録、入力差分と訂正不良の診断。通常app/商品受入れと分離 |
+
+F/trial prefixは先行表と同じ。初回の実service保存・非生成再読は成立、訂正はINVALID_FORMATで意味更新せずANSWERだけ保存。原raw無補修/重み不変。STRUCTURE_MAP_DELTA_PRESENTは既存serviceのprivate時間設定と取得中断処理。SQL/DTO/RN/他core source責務は不変。現在はweekly§35/全機能00。

@@ -1,0 +1,28 @@
+{
+  "main_archive": {
+    "sha256": "941f5911367bfabbca0665008e613e4d4bbe4a7133dbfd7f8f63ff83239c5d13",
+    "bytes": 53260,
+    "members": 22,
+    "manifest_targets": 21,
+    "all_manifest_targets_match": true
+  },
+  "runtime_archive": {
+    "sha256": "34971c7b6bb20fd285837fa08206a3d1e1311d11a177d33d2d0be6f3a6e2c83f",
+    "bytes": 10612,
+    "members": 9,
+    "executed_script_matches_published_sha256": "ea58009d635f44605177c37479cf2d1135620f21e5fa4d4acedfa04b36c44841"
+  },
+  "published_runner_commit": "031e1a9692500d75596f7f34742235bc4b4af220",
+  "api_commit": "95d00b907f6d9c42944666269acc457c9af34f37",
+  "raw_text_matches_receipts": true,
+  "source_files_unchanged": true,
+  "adapter_files_unchanged": true,
+  "gpu_observed_after_run": {
+    "name": "NVIDIA RTX A4500",
+    "total_mib": 20470,
+    "used_mib": 1,
+    "stop_restart_delete_operations": 0,
+    "proof_sha256": "cc5ff37dea5f458edcefcd9c75bb53e370fddd8397080ebe663021b3b3d670a5"
+  },
+  "separate_context_read_only_review": "22 actual members, prior/question/answer/source/raw identity, initial read immutability, rejected correction state verified; not separate-model or human product acceptance"
+}

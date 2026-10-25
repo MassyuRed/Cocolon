@@ -1,0 +1,779 @@
+{
+  "now": "2026-10-25T07:06:55.671+00:00",
+  "tier": "free",
+  "events": [
+    {
+      "id": "ecb56bb4-8850-4d9e-ba81-31859df3497b",
+      "seq": 1,
+      "kind": "OPERATION",
+      "payload": {
+        "stage": "INITIAL",
+        "status": "RUNNING"
+      },
+      "thread_id": "6b6716a2-d4c1-4be2-b5d2-8fa7459c59a6",
+      "attempt_id": "1331a466-578b-492a-85f3-699c25be54be",
+      "question_id": null,
+      "recorded_at": "2026-10-25T07:05:38.577+00:00",
+      "round_index": 0,
+      "operation_id": "192f875d-6ee1-4403-bed4-c864b2a281c5",
+      "idempotency_key": "initial"
+    },
+    {
+      "id": "84167c95-9e91-41bf-8ada-4f8c95419011",
+      "seq": 2,
+      "kind": "OPERATION",
+      "payload": {
+        "stage": "SEMANTIC_CANDIDATE_STARTED",
+        "attempted_source_prefix_ref": "emlis-source-prefix-050c5d3befdc24843888afa877ae428be315be68d3d139eabfba96c74ad044b3"
+      },
+      "thread_id": "6b6716a2-d4c1-4be2-b5d2-8fa7459c59a6",
+      "attempt_id": "1331a466-578b-492a-85f3-699c25be54be",
+      "question_id": null,
+      "recorded_at": "2026-10-25T07:05:38.583+00:00",
+      "round_index": 0,
+      "operation_id": "192f875d-6ee1-4403-bed4-c864b2a281c5",
+      "idempotency_key": null
+    },
+    {
+      "id": "6accb455-c048-4b73-be89-fa372bdf4826",
+      "seq": 3,
+      "kind": "OPERATION",
+      "payload": {
+        "stage": "SEMANTIC_CANDIDATE_RECEIVED",
+        "candidate_receipt": {
+          "status": "CANDIDATE_UNREVIEWED",
+          "raw_output": "{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"repair\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"repair\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"ぐらついていた椅子を修理して\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"ぐらついていた椅子を修理して\"},{\"about_time\":{\"anchor_source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"usable_again\",\"evidence_indexes\":[1],\"kind\":\"ACTION_RESULT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"usable_again\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"また座れるようになった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"また座れるようになった\"},{\"about_time\":{\"anchor_source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"joy\",\"evidence_indexes\":[2],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"joy\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"うれしかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"うれしかった\"},{\"about_time\":{\"anchor_source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"joy_object\",\"evidence_indexes\":[3],\"kind\":\"USER_APPRAISAL_OBJECT\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"joy_object\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"全部一人で直せたこと\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"全部一人で直せたこと\"}],\"conflicts\":[],\"core\":\"emlis\",\"question_proposal\":{\"claim_refs\":[\"joy_object\",\"joy\"],\"focus\":\"PERSONAL_JOY_SIGNIFICANCE\",\"target_unknown_ref\":\"personal_significance\",\"text\":\"「全部一人で直せたこと」がなぜ嬉しかったのですか？\"},\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"repair\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"repair_and_result\",\"scope_refs\":[\"repair_and_result\"],\"to_claim_id\":\"usable_again\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[5],\"from_claim_id\":\"joy_object\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"joy_ground\",\"scope_refs\":[\"joy_ground\"],\"to_claim_id\":\"joy\",\"type\":\"USER_STATED_JOY_GROUND\"}],\"schema_version\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"surface_proposal\":{\"bindings\":[{\"claim_refs\":[\"repair\",\"usable_again\"],\"relation_refs\":[\"repair_and_result\"],\"section\":\"observation\"},{\"claim_refs\":[\"joy_object\",\"joy\",\"usable_again\"],\"relation_refs\":[\"joy_ground\"],\"section\":\"reception\"}],\"observation\":\"ぐらついていた椅子を直し、また座れるようになったのですね。\",\"reception\":\"全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。\",\"update_note\":null},\"unknowns\":[{\"description\":\"詳しい本人の意味づけは未記載。\",\"evidence_indexes\":[3,2],\"kind\":\"NOT_STATED\",\"target_claim_refs\":[\"joy_object\",\"joy\"],\"unknown_id\":\"personal_significance\"}],\"updates\":[]},\"evidence\":[{\"end\":14,\"field_path\":\"memo_action\",\"quote\":\"ぐらついていた椅子を修理して\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":0},{\"end\":26,\"field_path\":\"memo_action\",\"quote\":\"また座れるようになった\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":15},{\"end\":18,\"field_path\":\"memo\",\"quote\":\"うれしかった\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":12},{\"end\":10,\"field_path\":\"memo\",\"quote\":\"全部一人で直せたこと\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":0},{\"end\":15,\"field_path\":\"memo_action\",\"quote\":\"して、\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":12},{\"end\":18,\"field_path\":\"memo\",\"quote\":\"全部一人で直せたことが、うれしかった\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":0}]}\n",
+          "request_id": "prep-2504ba43db8051f9fdf41a78342fa14d5f1010669035962f71cc855afe7ca15e",
+          "metadata_json": "{\"adapter_revision\":\"9b845eced7738b32eb21cfe9193798a41ae58d6f439aac9a5731c68e96952835\",\"elapsed_seconds\":67.88243937119842,\"evidence_check\":\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\",\"finish_reason\":\"stop\",\"model\":\"Qwen/Qwen3.5-4B\",\"provider\":\"local_transformers\",\"revision\":\"851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a\",\"usage\":{\"completion_tokens\":1347,\"prompt_tokens\":2070}}",
+          "candidate_json": "{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"repair\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"repair\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"ぐらついていた椅子を修理して\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"ぐらついていた椅子を修理して\"},{\"about_time\":{\"anchor_source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"usable_again\",\"evidence_indexes\":[1],\"kind\":\"ACTION_RESULT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"usable_again\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"また座れるようになった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"また座れるようになった\"},{\"about_time\":{\"anchor_source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"joy\",\"evidence_indexes\":[2],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"joy\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"うれしかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"うれしかった\"},{\"about_time\":{\"anchor_source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"joy_object\",\"evidence_indexes\":[3],\"kind\":\"USER_APPRAISAL_OBJECT\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"joy_object\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"全部一人で直せたこと\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"全部一人で直せたこと\"}],\"conflicts\":[],\"core\":\"emlis\",\"question_proposal\":{\"claim_refs\":[\"joy_object\",\"joy\"],\"focus\":\"PERSONAL_JOY_SIGNIFICANCE\",\"target_unknown_ref\":\"personal_significance\",\"text\":\"「全部一人で直せたこと」がなぜ嬉しかったのですか？\"},\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"repair\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"repair_and_result\",\"scope_refs\":[\"repair_and_result\"],\"to_claim_id\":\"usable_again\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[5],\"from_claim_id\":\"joy_object\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"joy_ground\",\"scope_refs\":[\"joy_ground\"],\"to_claim_id\":\"joy\",\"type\":\"USER_STATED_JOY_GROUND\"}],\"schema_version\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"surface_proposal\":{\"bindings\":[{\"claim_refs\":[\"repair\",\"usable_again\"],\"relation_refs\":[\"repair_and_result\"],\"section\":\"observation\"},{\"claim_refs\":[\"joy_object\",\"joy\",\"usable_again\"],\"relation_refs\":[\"joy_ground\"],\"section\":\"reception\"}],\"observation\":\"ぐらついていた椅子を直し、また座れるようになったのですね。\",\"reception\":\"全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。\",\"update_note\":null},\"unknowns\":[{\"description\":\"詳しい本人の意味づけは未記載。\",\"evidence_indexes\":[3,2],\"kind\":\"NOT_STATED\",\"target_claim_refs\":[\"joy_object\",\"joy\"],\"unknown_id\":\"personal_significance\"}],\"updates\":[]},\"evidence\":[{\"end\":14,\"field_path\":\"memo_action\",\"quote\":\"ぐらついていた椅子を修理して\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":0},{\"end\":26,\"field_path\":\"memo_action\",\"quote\":\"また座れるようになった\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":15},{\"end\":18,\"field_path\":\"memo\",\"quote\":\"うれしかった\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":12},{\"end\":10,\"field_path\":\"memo\",\"quote\":\"全部一人で直せたこと\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":0},{\"end\":15,\"field_path\":\"memo_action\",\"quote\":\"して、\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":12},{\"end\":18,\"field_path\":\"memo\",\"quote\":\"全部一人で直せたことが、うれしかった\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":0}]}"
+        },
+        "attempted_source_prefix_ref": "emlis-source-prefix-050c5d3befdc24843888afa877ae428be315be68d3d139eabfba96c74ad044b3"
+      },
+      "thread_id": "6b6716a2-d4c1-4be2-b5d2-8fa7459c59a6",
+      "attempt_id": "1331a466-578b-492a-85f3-699c25be54be",
+      "question_id": null,
+      "recorded_at": "2026-10-25T07:06:46.526+00:00",
+      "round_index": 0,
+      "operation_id": "192f875d-6ee1-4403-bed4-c864b2a281c5",
+      "idempotency_key": null
+    },
+    {
+      "id": "d5d7da46-887e-415e-b463-2ddfb7175d4b",
+      "seq": 4,
+      "kind": "MEANING_UPDATE",
+      "payload": {
+        "snapshot_ref": "semantic-b5a6e025515e9328db7a7f6412abeb30386d257a976a3cf7b88494d6cc23e1a4",
+        "answer_update": null,
+        "checkpoint_id": "model-checkpoint-b6d4b63ee510b0ac375392addff354c492425c90834ab0bc802366751bb12026",
+        "base_meaning_ref": "semantic-b5a6e025515e9328db7a7f6412abeb30386d257a976a3cf7b88494d6cc23e1a4",
+        "semantic_profile": "emlis_model_proposal.v1",
+        "unresolved_parts": [],
+        "assessment_status": "RESOLVED",
+        "semantic_snapshot": "{\"adapter_version\":\"1\",\"admission_version\":\"1\",\"answer_count\":0,\"meaning_packet\":{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"repair\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"repair\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"ぐらついていた椅子を修理して\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"ぐらついていた椅子を修理して\"},{\"about_time\":{\"anchor_source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"usable_again\",\"evidence_indexes\":[1],\"kind\":\"ACTION_RESULT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"usable_again\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"また座れるようになった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"また座れるようになった\"},{\"about_time\":{\"anchor_source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"joy\",\"evidence_indexes\":[2],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"joy\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"うれしかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"うれしかった\"},{\"about_time\":{\"anchor_source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"joy_object\",\"evidence_indexes\":[3],\"kind\":\"USER_APPRAISAL_OBJECT\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"joy_object\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"全部一人で直せたこと\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"全部一人で直せたこと\"}],\"conflicts\":[],\"core\":\"emlis\",\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"repair\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"repair_and_result\",\"scope_refs\":[\"repair_and_result\"],\"to_claim_id\":\"usable_again\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[5],\"from_claim_id\":\"joy_object\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"joy_ground\",\"scope_refs\":[\"joy_ground\"],\"to_claim_id\":\"joy\",\"type\":\"USER_STATED_JOY_GROUND\"}],\"schema_version\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"unknowns\":[{\"description\":\"詳しい本人の意味づけは未記載。\",\"evidence_indexes\":[3,2],\"kind\":\"NOT_STATED\",\"target_claim_refs\":[\"joy_object\",\"joy\"],\"unknown_id\":\"personal_significance\"}],\"updates\":[]},\"evidence\":[{\"end\":14,\"field_path\":\"memo_action\",\"quote\":\"ぐらついていた椅子を修理して\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":0},{\"end\":26,\"field_path\":\"memo_action\",\"quote\":\"また座れるようになった\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":15},{\"end\":18,\"field_path\":\"memo\",\"quote\":\"うれしかった\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":12},{\"end\":10,\"field_path\":\"memo\",\"quote\":\"全部一人で直せたこと\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":0},{\"end\":15,\"field_path\":\"memo_action\",\"quote\":\"して、\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":12},{\"end\":18,\"field_path\":\"memo\",\"quote\":\"全部一人で直せたことが、うれしかった\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":0}]},\"native_bindings\":{\"case_arguments\":[{\"end\":9,\"field_path\":\"memo_action\",\"owner_claim_ref\":\"repair\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":0,\"text\":\"ぐらついていた椅子\",\"written_role\":\"を\"}],\"preserved_selections\":{\"category\":[\"生活\"],\"emotion_details\":[{\"strength\":\"medium\",\"type\":\"喜び\"}],\"emotions\":[\"喜び\"],\"is_secret\":null},\"relation_roles\":{\"joy_ground\":\"joy_ground\",\"repair_and_result\":\"repair_and_result\"},\"roles\":{\"joy\":{\"claim_ref\":\"joy\",\"end\":18,\"field_path\":\"memo\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":12,\"text\":\"うれしかった\"},\"repair\":{\"claim_ref\":\"repair\",\"end\":14,\"field_path\":\"memo_action\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":0,\"text\":\"ぐらついていた椅子を修理して\"},\"solo_appraisal_object\":{\"claim_ref\":\"joy_object\",\"end\":10,\"field_path\":\"memo\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":0,\"text\":\"全部一人で直せたこと\"},\"usable_again\":{\"claim_ref\":\"usable_again\",\"end\":26,\"field_path\":\"memo_action\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":15,\"text\":\"また座れるようになった\"}},\"source_fields\":{\"63059d93-b5e4-4b7d-beb3-78ce485b0229\":{\"memo\":\"全部一人で直せたことが、うれしかった。\",\"memo_action\":\"ぐらついていた椅子を修理して、また座れるようになった。\"}},\"source_negations\":[],\"source_slices\":[{\"end\":14,\"field_path\":\"memo_action\",\"native_span_refs\":[\"s2\"],\"quote\":\"ぐらついていた椅子を修理して\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":0},{\"end\":26,\"field_path\":\"memo_action\",\"native_span_refs\":[\"s2\"],\"quote\":\"また座れるようになった\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":15},{\"end\":18,\"field_path\":\"memo\",\"native_span_refs\":[\"s1\"],\"quote\":\"うれしかった\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":12},{\"end\":10,\"field_path\":\"memo\",\"native_span_refs\":[\"s1\"],\"quote\":\"全部一人で直せたこと\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":0},{\"end\":15,\"field_path\":\"memo_action\",\"native_span_refs\":[\"s2\"],\"quote\":\"して、\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":12},{\"end\":18,\"field_path\":\"memo\",\"native_span_refs\":[\"s1\"],\"quote\":\"全部一人で直せたことが、うれしかった\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":0}],\"stage\":\"INITIAL\",\"written_links\":[{\"evidence_indexes\":[4],\"from_claim_ref\":\"repair\",\"relation_ref\":\"repair_and_result\",\"to_claim_ref\":\"usable_again\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[5],\"from_claim_ref\":\"joy_object\",\"relation_ref\":\"joy_ground\",\"to_claim_ref\":\"joy\",\"type\":\"USER_STATED_JOY_GROUND\"}]},\"packet\":{\"candidate\":{\"claims\":[{\"about_time\":{\"anchor_source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"evidence_indexes\":[0],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"repair\",\"evidence_indexes\":[0],\"kind\":\"EVENT\",\"modality\":{\"evidence_indexes\":[0],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[0],\"scope_refs\":[\"repair\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"ぐらついていた椅子を修理して\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"ぐらついていた椅子を修理して\"},{\"about_time\":{\"anchor_source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"evidence_indexes\":[1],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"usable_again\",\"evidence_indexes\":[1],\"kind\":\"ACTION_RESULT\",\"modality\":{\"evidence_indexes\":[1],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[1],\"scope_refs\":[\"usable_again\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"また座れるようになった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"また座れるようになった\"},{\"about_time\":{\"anchor_source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"evidence_indexes\":[2],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"joy\",\"evidence_indexes\":[2],\"kind\":\"STATE\",\"modality\":{\"evidence_indexes\":[2],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[2],\"scope_refs\":[\"joy\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"うれしかった\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"うれしかった\"},{\"about_time\":{\"anchor_source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"evidence_indexes\":[3],\"expression\":null,\"kind\":\"WRITTEN_PAST_UNRESOLVED_OCCASION\"},\"claim_id\":\"joy_object\",\"evidence_indexes\":[3],\"kind\":\"USER_APPRAISAL_OBJECT\",\"modality\":{\"evidence_indexes\":[3],\"value\":\"ASSERTED_AS_WRITTEN\"},\"polarity\":{\"evidence_indexes\":[3],\"scope_refs\":[\"joy_object\"],\"value\":\"AFFIRMED\"},\"predicate\":{\"arguments\":[],\"surface\":\"全部一人で直せたこと\"},\"qualifiers\":[],\"subject\":{\"binding\":\"OMITTED\",\"evidence_indexes\":[],\"source_entity\":null},\"text\":\"全部一人で直せたこと\"}],\"conflicts\":[],\"core\":\"emlis\",\"question_proposal\":{\"claim_refs\":[\"joy_object\",\"joy\"],\"focus\":\"PERSONAL_JOY_SIGNIFICANCE\",\"target_unknown_ref\":\"personal_significance\",\"text\":\"「全部一人で直せたこと」がなぜ嬉しかったのですか？\"},\"relations\":[{\"evidence_indexes\":[4],\"from_claim_id\":\"repair\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"repair_and_result\",\"scope_refs\":[\"repair_and_result\"],\"to_claim_id\":\"usable_again\",\"type\":\"SOURCE_WRITTEN_TE_LINK\"},{\"evidence_indexes\":[5],\"from_claim_id\":\"joy_object\",\"polarity\":\"AFFIRMED\",\"qualifiers\":[],\"relation_id\":\"joy_ground\",\"scope_refs\":[\"joy_ground\"],\"to_claim_id\":\"joy\",\"type\":\"USER_STATED_JOY_GROUND\"}],\"schema_version\":\"cocolon.cmee.semantic_and_surface_proposal.v1\",\"surface_proposal\":{\"bindings\":[{\"claim_refs\":[\"repair\",\"usable_again\"],\"relation_refs\":[\"repair_and_result\"],\"section\":\"observation\"},{\"claim_refs\":[\"joy_object\",\"joy\",\"usable_again\"],\"relation_refs\":[\"joy_ground\"],\"section\":\"reception\"}],\"observation\":\"ぐらついていた椅子を直し、また座れるようになったのですね。\",\"reception\":\"全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。\",\"update_note\":null},\"unknowns\":[{\"description\":\"詳しい本人の意味づけは未記載。\",\"evidence_indexes\":[3,2],\"kind\":\"NOT_STATED\",\"target_claim_refs\":[\"joy_object\",\"joy\"],\"unknown_id\":\"personal_significance\"}],\"updates\":[]},\"evidence\":[{\"end\":14,\"field_path\":\"memo_action\",\"quote\":\"ぐらついていた椅子を修理して\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":0},{\"end\":26,\"field_path\":\"memo_action\",\"quote\":\"また座れるようになった\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":15},{\"end\":18,\"field_path\":\"memo\",\"quote\":\"うれしかった\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":12},{\"end\":10,\"field_path\":\"memo\",\"quote\":\"全部一人で直せたこと\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":0},{\"end\":15,\"field_path\":\"memo_action\",\"quote\":\"して、\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":12},{\"end\":18,\"field_path\":\"memo\",\"quote\":\"全部一人で直せたことが、うれしかった\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"start\":0}]},\"prior_ref\":null,\"prior_snapshot\":null,\"proposal_ref\":\"model-proposal-9b26bf06364f459cdd8768fe26e2e32c54b88d754e28392e2e72f1ef15101068\",\"question_control\":{\"asked_target_refs\":[],\"issued_count\":0,\"issued_questions\":[],\"pending_question\":null,\"question_limit\":1,\"stop\":false},\"receipt\":{\"candidate_json\":\"{\\\"candidate\\\":{\\\"claims\\\":[{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"63059d93-b5e4-4b7d-beb3-78ce485b0229\\\",\\\"evidence_indexes\\\":[0],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"repair\\\",\\\"evidence_indexes\\\":[0],\\\"kind\\\":\\\"EVENT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[0],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[0],\\\"scope_refs\\\":[\\\"repair\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"ぐらついていた椅子を修理して\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"ぐらついていた椅子を修理して\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"63059d93-b5e4-4b7d-beb3-78ce485b0229\\\",\\\"evidence_indexes\\\":[1],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"usable_again\\\",\\\"evidence_indexes\\\":[1],\\\"kind\\\":\\\"ACTION_RESULT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[1],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[1],\\\"scope_refs\\\":[\\\"usable_again\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"また座れるようになった\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"また座れるようになった\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"63059d93-b5e4-4b7d-beb3-78ce485b0229\\\",\\\"evidence_indexes\\\":[2],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"joy\\\",\\\"evidence_indexes\\\":[2],\\\"kind\\\":\\\"STATE\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[2],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[2],\\\"scope_refs\\\":[\\\"joy\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"うれしかった\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"うれしかった\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"63059d93-b5e4-4b7d-beb3-78ce485b0229\\\",\\\"evidence_indexes\\\":[3],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"joy_object\\\",\\\"evidence_indexes\\\":[3],\\\"kind\\\":\\\"USER_APPRAISAL_OBJECT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[3],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[3],\\\"scope_refs\\\":[\\\"joy_object\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"全部一人で直せたこと\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"全部一人で直せたこと\\\"}],\\\"conflicts\\\":[],\\\"core\\\":\\\"emlis\\\",\\\"question_proposal\\\":{\\\"claim_refs\\\":[\\\"joy_object\\\",\\\"joy\\\"],\\\"focus\\\":\\\"PERSONAL_JOY_SIGNIFICANCE\\\",\\\"target_unknown_ref\\\":\\\"personal_significance\\\",\\\"text\\\":\\\"「全部一人で直せたこと」がなぜ嬉しかったのですか？\\\"},\\\"relations\\\":[{\\\"evidence_indexes\\\":[4],\\\"from_claim_id\\\":\\\"repair\\\",\\\"polarity\\\":\\\"AFFIRMED\\\",\\\"qualifiers\\\":[],\\\"relation_id\\\":\\\"repair_and_result\\\",\\\"scope_refs\\\":[\\\"repair_and_result\\\"],\\\"to_claim_id\\\":\\\"usable_again\\\",\\\"type\\\":\\\"SOURCE_WRITTEN_TE_LINK\\\"},{\\\"evidence_indexes\\\":[5],\\\"from_claim_id\\\":\\\"joy_object\\\",\\\"polarity\\\":\\\"AFFIRMED\\\",\\\"qualifiers\\\":[],\\\"relation_id\\\":\\\"joy_ground\\\",\\\"scope_refs\\\":[\\\"joy_ground\\\"],\\\"to_claim_id\\\":\\\"joy\\\",\\\"type\\\":\\\"USER_STATED_JOY_GROUND\\\"}],\\\"schema_version\\\":\\\"cocolon.cmee.semantic_and_surface_proposal.v1\\\",\\\"surface_proposal\\\":{\\\"bindings\\\":[{\\\"claim_refs\\\":[\\\"repair\\\",\\\"usable_again\\\"],\\\"relation_refs\\\":[\\\"repair_and_result\\\"],\\\"section\\\":\\\"observation\\\"},{\\\"claim_refs\\\":[\\\"joy_object\\\",\\\"joy\\\",\\\"usable_again\\\"],\\\"relation_refs\\\":[\\\"joy_ground\\\"],\\\"section\\\":\\\"reception\\\"}],\\\"observation\\\":\\\"ぐらついていた椅子を直し、また座れるようになったのですね。\\\",\\\"reception\\\":\\\"全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。\\\",\\\"update_note\\\":null},\\\"unknowns\\\":[{\\\"description\\\":\\\"詳しい本人の意味づけは未記載。\\\",\\\"evidence_indexes\\\":[3,2],\\\"kind\\\":\\\"NOT_STATED\\\",\\\"target_claim_refs\\\":[\\\"joy_object\\\",\\\"joy\\\"],\\\"unknown_id\\\":\\\"personal_significance\\\"}],\\\"updates\\\":[]},\\\"evidence\\\":[{\\\"end\\\":14,\\\"field_path\\\":\\\"memo_action\\\",\\\"quote\\\":\\\"ぐらついていた椅子を修理して\\\",\\\"source_id\\\":\\\"63059d93-b5e4-4b7d-beb3-78ce485b0229\\\",\\\"start\\\":0},{\\\"end\\\":26,\\\"field_path\\\":\\\"memo_action\\\",\\\"quote\\\":\\\"また座れるようになった\\\",\\\"source_id\\\":\\\"63059d93-b5e4-4b7d-beb3-78ce485b0229\\\",\\\"start\\\":15},{\\\"end\\\":18,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"うれしかった\\\",\\\"source_id\\\":\\\"63059d93-b5e4-4b7d-beb3-78ce485b0229\\\",\\\"start\\\":12},{\\\"end\\\":10,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"全部一人で直せたこと\\\",\\\"source_id\\\":\\\"63059d93-b5e4-4b7d-beb3-78ce485b0229\\\",\\\"start\\\":0},{\\\"end\\\":15,\\\"field_path\\\":\\\"memo_action\\\",\\\"quote\\\":\\\"して、\\\",\\\"source_id\\\":\\\"63059d93-b5e4-4b7d-beb3-78ce485b0229\\\",\\\"start\\\":12},{\\\"end\\\":18,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"全部一人で直せたことが、うれしかった\\\",\\\"source_id\\\":\\\"63059d93-b5e4-4b7d-beb3-78ce485b0229\\\",\\\"start\\\":0}]}\",\"metadata_json\":\"{\\\"adapter_revision\\\":\\\"9b845eced7738b32eb21cfe9193798a41ae58d6f439aac9a5731c68e96952835\\\",\\\"elapsed_seconds\\\":67.88243937119842,\\\"evidence_check\\\":\\\"LOCATION_ONLY_NOT_SEMANTIC_ADMISSION\\\",\\\"finish_reason\\\":\\\"stop\\\",\\\"model\\\":\\\"Qwen/Qwen3.5-4B\\\",\\\"provider\\\":\\\"local_transformers\\\",\\\"revision\\\":\\\"851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a\\\",\\\"usage\\\":{\\\"completion_tokens\\\":1347,\\\"prompt_tokens\\\":2070}}\",\"raw_output\":\"{\\\"candidate\\\":{\\\"claims\\\":[{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"63059d93-b5e4-4b7d-beb3-78ce485b0229\\\",\\\"evidence_indexes\\\":[0],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"repair\\\",\\\"evidence_indexes\\\":[0],\\\"kind\\\":\\\"EVENT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[0],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[0],\\\"scope_refs\\\":[\\\"repair\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"ぐらついていた椅子を修理して\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"ぐらついていた椅子を修理して\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"63059d93-b5e4-4b7d-beb3-78ce485b0229\\\",\\\"evidence_indexes\\\":[1],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"usable_again\\\",\\\"evidence_indexes\\\":[1],\\\"kind\\\":\\\"ACTION_RESULT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[1],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[1],\\\"scope_refs\\\":[\\\"usable_again\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"また座れるようになった\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"また座れるようになった\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"63059d93-b5e4-4b7d-beb3-78ce485b0229\\\",\\\"evidence_indexes\\\":[2],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"joy\\\",\\\"evidence_indexes\\\":[2],\\\"kind\\\":\\\"STATE\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[2],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[2],\\\"scope_refs\\\":[\\\"joy\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"うれしかった\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"うれしかった\\\"},{\\\"about_time\\\":{\\\"anchor_source_id\\\":\\\"63059d93-b5e4-4b7d-beb3-78ce485b0229\\\",\\\"evidence_indexes\\\":[3],\\\"expression\\\":null,\\\"kind\\\":\\\"WRITTEN_PAST_UNRESOLVED_OCCASION\\\"},\\\"claim_id\\\":\\\"joy_object\\\",\\\"evidence_indexes\\\":[3],\\\"kind\\\":\\\"USER_APPRAISAL_OBJECT\\\",\\\"modality\\\":{\\\"evidence_indexes\\\":[3],\\\"value\\\":\\\"ASSERTED_AS_WRITTEN\\\"},\\\"polarity\\\":{\\\"evidence_indexes\\\":[3],\\\"scope_refs\\\":[\\\"joy_object\\\"],\\\"value\\\":\\\"AFFIRMED\\\"},\\\"predicate\\\":{\\\"arguments\\\":[],\\\"surface\\\":\\\"全部一人で直せたこと\\\"},\\\"qualifiers\\\":[],\\\"subject\\\":{\\\"binding\\\":\\\"OMITTED\\\",\\\"evidence_indexes\\\":[],\\\"source_entity\\\":null},\\\"text\\\":\\\"全部一人で直せたこと\\\"}],\\\"conflicts\\\":[],\\\"core\\\":\\\"emlis\\\",\\\"question_proposal\\\":{\\\"claim_refs\\\":[\\\"joy_object\\\",\\\"joy\\\"],\\\"focus\\\":\\\"PERSONAL_JOY_SIGNIFICANCE\\\",\\\"target_unknown_ref\\\":\\\"personal_significance\\\",\\\"text\\\":\\\"「全部一人で直せたこと」がなぜ嬉しかったのですか？\\\"},\\\"relations\\\":[{\\\"evidence_indexes\\\":[4],\\\"from_claim_id\\\":\\\"repair\\\",\\\"polarity\\\":\\\"AFFIRMED\\\",\\\"qualifiers\\\":[],\\\"relation_id\\\":\\\"repair_and_result\\\",\\\"scope_refs\\\":[\\\"repair_and_result\\\"],\\\"to_claim_id\\\":\\\"usable_again\\\",\\\"type\\\":\\\"SOURCE_WRITTEN_TE_LINK\\\"},{\\\"evidence_indexes\\\":[5],\\\"from_claim_id\\\":\\\"joy_object\\\",\\\"polarity\\\":\\\"AFFIRMED\\\",\\\"qualifiers\\\":[],\\\"relation_id\\\":\\\"joy_ground\\\",\\\"scope_refs\\\":[\\\"joy_ground\\\"],\\\"to_claim_id\\\":\\\"joy\\\",\\\"type\\\":\\\"USER_STATED_JOY_GROUND\\\"}],\\\"schema_version\\\":\\\"cocolon.cmee.semantic_and_surface_proposal.v1\\\",\\\"surface_proposal\\\":{\\\"bindings\\\":[{\\\"claim_refs\\\":[\\\"repair\\\",\\\"usable_again\\\"],\\\"relation_refs\\\":[\\\"repair_and_result\\\"],\\\"section\\\":\\\"observation\\\"},{\\\"claim_refs\\\":[\\\"joy_object\\\",\\\"joy\\\",\\\"usable_again\\\"],\\\"relation_refs\\\":[\\\"joy_ground\\\"],\\\"section\\\":\\\"reception\\\"}],\\\"observation\\\":\\\"ぐらついていた椅子を直し、また座れるようになったのですね。\\\",\\\"reception\\\":\\\"全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。\\\",\\\"update_note\\\":null},\\\"unknowns\\\":[{\\\"description\\\":\\\"詳しい本人の意味づけは未記載。\\\",\\\"evidence_indexes\\\":[3,2],\\\"kind\\\":\\\"NOT_STATED\\\",\\\"target_claim_refs\\\":[\\\"joy_object\\\",\\\"joy\\\"],\\\"unknown_id\\\":\\\"personal_significance\\\"}],\\\"updates\\\":[]},\\\"evidence\\\":[{\\\"end\\\":14,\\\"field_path\\\":\\\"memo_action\\\",\\\"quote\\\":\\\"ぐらついていた椅子を修理して\\\",\\\"source_id\\\":\\\"63059d93-b5e4-4b7d-beb3-78ce485b0229\\\",\\\"start\\\":0},{\\\"end\\\":26,\\\"field_path\\\":\\\"memo_action\\\",\\\"quote\\\":\\\"また座れるようになった\\\",\\\"source_id\\\":\\\"63059d93-b5e4-4b7d-beb3-78ce485b0229\\\",\\\"start\\\":15},{\\\"end\\\":18,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"うれしかった\\\",\\\"source_id\\\":\\\"63059d93-b5e4-4b7d-beb3-78ce485b0229\\\",\\\"start\\\":12},{\\\"end\\\":10,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"全部一人で直せたこと\\\",\\\"source_id\\\":\\\"63059d93-b5e4-4b7d-beb3-78ce485b0229\\\",\\\"start\\\":0},{\\\"end\\\":15,\\\"field_path\\\":\\\"memo_action\\\",\\\"quote\\\":\\\"して、\\\",\\\"source_id\\\":\\\"63059d93-b5e4-4b7d-beb3-78ce485b0229\\\",\\\"start\\\":12},{\\\"end\\\":18,\\\"field_path\\\":\\\"memo\\\",\\\"quote\\\":\\\"全部一人で直せたことが、うれしかった\\\",\\\"source_id\\\":\\\"63059d93-b5e4-4b7d-beb3-78ce485b0229\\\",\\\"start\\\":0}]}\\n\",\"request_id\":\"prep-2504ba43db8051f9fdf41a78342fa14d5f1010669035962f71cc855afe7ca15e\",\"status\":\"CANDIDATE_UNREVIEWED\"},\"request_ref\":\"prep-2504ba43db8051f9fdf41a78342fa14d5f1010669035962f71cc855afe7ca15e\",\"schema_version\":\"cocolon.cmee.emlis_semantic_snapshot.v3\",\"semantic_profile\":\"emlis_model_proposal.v1\",\"snapshot_ref\":\"semantic-b5a6e025515e9328db7a7f6412abeb30386d257a976a3cf7b88494d6cc23e1a4\",\"source_bindings\":[{\"envelope_id\":\"src-a0b894ad83bdbe6472358b38\",\"role\":\"ORIGINAL_INPUT\",\"source_commitment\":\"dd827bca10fc52772bffad552f68b553478ace56553831d008136a40fc2a5dac\",\"source_id\":\"63059d93-b5e4-4b7d-beb3-78ce485b0229\",\"source_version\":\"emlis.current_input_bundle.v1\"}],\"source_prefix_ref\":\"emlis-source-prefix-050c5d3befdc24843888afa877ae428be315be68d3d139eabfba96c74ad044b3\"}",
+        "source_prefix_ref": "emlis-source-prefix-050c5d3befdc24843888afa877ae428be315be68d3d139eabfba96c74ad044b3",
+        "inactive_claim_refs": [],
+        "accepted_update_refs": [],
+        "semantic_schema_version": "cocolon.cmee.emlis_answer_meaning.v4"
+      },
+      "thread_id": "6b6716a2-d4c1-4be2-b5d2-8fa7459c59a6",
+      "attempt_id": "1331a466-578b-492a-85f3-699c25be54be",
+      "question_id": null,
+      "recorded_at": "2026-10-25T07:06:46.548+00:00",
+      "round_index": 0,
+      "operation_id": "192f875d-6ee1-4403-bed4-c864b2a281c5",
+      "idempotency_key": null
+    },
+    {
+      "id": "b481bebe-8ee6-42f0-b8da-a6e961350447",
+      "seq": 5,
+      "kind": "OBSERVATION",
+      "payload": {
+        "text": "見えたこと：\nぐらついていた椅子を直し、また座れるようになったのですね。\n\nEmlisから：\n全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+        "stage": "INITIAL",
+        "artifact": {
+          "reception": "全部一人で直せたことが、うれしかったのですね。また座れるようになったと聞けて、私もうれしいです。",
+          "artifact_id": "emlis-model-artifact-d7f635023bfc6ec32bc4b037b71cedf8078a0c69a48ba7a54d061cb05dee964e",
+          "body_status": "GENERATED",
+          "observation": "ぐらついていた椅子を直し、また座れるようになったのですね。",
+          "update_note": null,
+          "history_line": null,
+          "proposal_ref": "model-proposal-9b26bf06364f459cdd8768fe26e2e32c54b88d754e28392e2e72f1ef15101068",
+          "meaning_trace": [
+            {
+              "section": "observation",
+              "sentences": [
+                {
+                  "end": 29,
+                  "start": 0,
+                  "claim_refs": [
+                    "repair",
+                    "usable_again"
+                  ],
+                  "relation_refs": [
+                    "repair_and_result"
+                  ]
+                }
+              ],
+              "claim_refs": [
+                "repair",
+                "usable_again"
+              ],
+              "relation_refs": [
+                "repair_and_result"
+              ]
+            }
+          ],
+          "schema_version": "cocolon.cmee.emlis_model_thread_artifact.v1",
+          "reception_trace": [
+            {
+              "section": "reception",
+              "sentences": [
+                {
+                  "end": 23,
+                  "start": 0,
+                  "claim_refs": [
+                    "joy",
+                    "joy_object"
+                  ],
+                  "relation_refs": [
+                    "joy_ground"
+                  ]
+                },
+                {
+                  "end": 48,
+                  "start": 23,
+                  "claim_refs": [
+                    "joy",
+                    "usable_again"
+                  ],
+                  "relation_refs": []
+                }
+              ],
+              "claim_refs": [
+                "joy",
+                "joy_object",
+                "usable_again"
+              ],
+              "relation_refs": [
+                "joy_ground"
+              ]
+            }
+          ],
+          "history_line_plan": null,
+          "source_prefix_ref": "emlis-source-prefix-050c5d3befdc24843888afa877ae428be315be68d3d139eabfba96c74ad044b3",
+          "interpretive_frames": [],
+          "meaning_checkpoint_ref": "model-checkpoint-b6d4b63ee510b0ac375392addff354c492425c90834ab0bc802366751bb12026",
+          "qualified_evidence_refs": [
+            {
+              "evidence": {
+                "utf8_end": 480,
+                "field_path": "memo",
+                "scalar_end": 18,
+                "utf8_start": 426,
+                "evidence_id": "ev-7cd030156a7deb58fd3659b9",
+                "field_sha256": "85804c565f75a24ab0fdd4acb9adcaa50db546e6062255ec71b8ccc8f6bceb26",
+                "scalar_start": 0,
+                "element_index": -1,
+                "field_utf8_end": 483,
+                "literal_sha256": "02b39a0ffd8af8628f7ec5f86c036c171c3f9f6b4da280cf85a3947126e1a869",
+                "source_span_id": "s1",
+                "field_utf8_start": 426,
+                "source_envelope_id": "src-a0b894ad83bdbe6472358b38"
+              },
+              "thread_span_id": "s1",
+              "local_source_span_id": "s1"
+            },
+            {
+              "evidence": {
+                "utf8_end": 587,
+                "field_path": "memo_action",
+                "scalar_end": 26,
+                "utf8_start": 509,
+                "evidence_id": "ev-925928f28697e7ae9519ee04",
+                "field_sha256": "324e839f25fca007dd31ea88d1ac7ec3feef0d53f20f5c7e89e2bf8bd674610f",
+                "scalar_start": 0,
+                "element_index": -1,
+                "field_utf8_end": 590,
+                "literal_sha256": "2dfb672f5d45e08505ab6781050560fd393713ec7127dd09bbcf077b4d371651",
+                "source_span_id": "s2",
+                "field_utf8_start": 509,
+                "source_envelope_id": "src-a0b894ad83bdbe6472358b38"
+              },
+              "thread_span_id": "s2",
+              "local_source_span_id": "s2"
+            },
+            {
+              "evidence": {
+                "utf8_end": 632,
+                "field_path": "emotion_details.0.type",
+                "scalar_end": 2,
+                "utf8_start": 626,
+                "evidence_id": "ev-7da5bae16ffe2ab380e0462f",
+                "field_sha256": "3ce61d4802bc001de7a7c1bd3ed8aafb4509648f1b68be0cc97fda5d292cc85c",
+                "scalar_start": 0,
+                "element_index": 0,
+                "field_utf8_end": 632,
+                "literal_sha256": "3ce61d4802bc001de7a7c1bd3ed8aafb4509648f1b68be0cc97fda5d292cc85c",
+                "source_span_id": "s3",
+                "field_utf8_start": 626,
+                "source_envelope_id": "src-a0b894ad83bdbe6472358b38"
+              },
+              "thread_span_id": "s3",
+              "local_source_span_id": "s3"
+            },
+            {
+              "evidence": {
+                "utf8_end": 662,
+                "field_path": "emotions.0",
+                "scalar_end": 2,
+                "utf8_start": 656,
+                "evidence_id": "ev-51a4444d511395fa8a926fb5",
+                "field_sha256": "3ce61d4802bc001de7a7c1bd3ed8aafb4509648f1b68be0cc97fda5d292cc85c",
+                "scalar_start": 0,
+                "element_index": 0,
+                "field_utf8_end": 662,
+                "literal_sha256": "3ce61d4802bc001de7a7c1bd3ed8aafb4509648f1b68be0cc97fda5d292cc85c",
+                "source_span_id": "s4",
+                "field_utf8_start": 656,
+                "source_envelope_id": "src-a0b894ad83bdbe6472358b38"
+              },
+              "thread_span_id": "s4",
+              "local_source_span_id": "s4"
+            },
+            {
+              "evidence": {
+                "utf8_end": 692,
+                "field_path": "category.0",
+                "scalar_end": 2,
+                "utf8_start": 686,
+                "evidence_id": "ev-c624220ea1fcda5efa798a93",
+                "field_sha256": "15d208d1b4c98aae0cbadefb1e5e984ec6c50431755b24808f168b9fecf9679f",
+                "scalar_start": 0,
+                "element_index": 0,
+                "field_utf8_end": 692,
+                "literal_sha256": "15d208d1b4c98aae0cbadefb1e5e984ec6c50431755b24808f168b9fecf9679f",
+                "source_span_id": "s5",
+                "field_utf8_start": 686,
+                "source_envelope_id": "src-a0b894ad83bdbe6472358b38"
+              },
+              "thread_span_id": "s5",
+              "local_source_span_id": "s5"
+            }
+          ]
+        },
+        "context_ref": "context-296b6b1be27eeae4a077f96df2936dcecd0cb55a90638ced08ee5b62d2a02ccf",
+        "meaning_graph": {
+          "claims": [
+            {
+              "kind": "EVENT",
+              "text": "ぐらついていた椅子を修理して",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "claim_id": "repair",
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  0
+                ]
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "repair"
+                ],
+                "evidence_indexes": [
+                  0
+                ]
+              },
+              "predicate": {
+                "surface": "ぐらついていた椅子を修理して",
+                "arguments": []
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": "63059d93-b5e4-4b7d-beb3-78ce485b0229",
+                "evidence_indexes": [
+                  0
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                0
+              ]
+            },
+            {
+              "kind": "ACTION_RESULT",
+              "text": "また座れるようになった",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "claim_id": "usable_again",
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  1
+                ]
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "usable_again"
+                ],
+                "evidence_indexes": [
+                  1
+                ]
+              },
+              "predicate": {
+                "surface": "また座れるようになった",
+                "arguments": []
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": "63059d93-b5e4-4b7d-beb3-78ce485b0229",
+                "evidence_indexes": [
+                  1
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                1
+              ]
+            },
+            {
+              "kind": "STATE",
+              "text": "うれしかった",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "claim_id": "joy",
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  2
+                ]
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "joy"
+                ],
+                "evidence_indexes": [
+                  2
+                ]
+              },
+              "predicate": {
+                "surface": "うれしかった",
+                "arguments": []
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": "63059d93-b5e4-4b7d-beb3-78ce485b0229",
+                "evidence_indexes": [
+                  2
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                2
+              ]
+            },
+            {
+              "kind": "USER_APPRAISAL_OBJECT",
+              "text": "全部一人で直せたこと",
+              "subject": {
+                "binding": "OMITTED",
+                "source_entity": null,
+                "evidence_indexes": []
+              },
+              "claim_id": "joy_object",
+              "modality": {
+                "value": "ASSERTED_AS_WRITTEN",
+                "evidence_indexes": [
+                  3
+                ]
+              },
+              "polarity": {
+                "value": "AFFIRMED",
+                "scope_refs": [
+                  "joy_object"
+                ],
+                "evidence_indexes": [
+                  3
+                ]
+              },
+              "predicate": {
+                "surface": "全部一人で直せたこと",
+                "arguments": []
+              },
+              "about_time": {
+                "kind": "WRITTEN_PAST_UNRESOLVED_OCCASION",
+                "expression": null,
+                "anchor_source_id": "63059d93-b5e4-4b7d-beb3-78ce485b0229",
+                "evidence_indexes": [
+                  3
+                ]
+              },
+              "qualifiers": [],
+              "evidence_indexes": [
+                3
+              ]
+            }
+          ],
+          "updates": [],
+          "unknowns": [
+            {
+              "kind": "NOT_STATED",
+              "unknown_id": "personal_significance",
+              "description": "詳しい本人の意味づけは未記載。",
+              "evidence_indexes": [
+                3,
+                2
+              ],
+              "target_claim_refs": [
+                "joy_object",
+                "joy"
+              ]
+            }
+          ],
+          "relations": [
+            {
+              "type": "SOURCE_WRITTEN_TE_LINK",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "scope_refs": [
+                "repair_and_result"
+              ],
+              "relation_id": "repair_and_result",
+              "to_claim_id": "usable_again",
+              "from_claim_id": "repair",
+              "evidence_indexes": [
+                4
+              ]
+            },
+            {
+              "type": "USER_STATED_JOY_GROUND",
+              "polarity": "AFFIRMED",
+              "qualifiers": [],
+              "scope_refs": [
+                "joy_ground"
+              ],
+              "relation_id": "joy_ground",
+              "to_claim_id": "joy",
+              "from_claim_id": "joy_object",
+              "evidence_indexes": [
+                5
+              ]
+            }
+          ],
+          "snapshot_ref": "semantic-b5a6e025515e9328db7a7f6412abeb30386d257a976a3cf7b88494d6cc23e1a4",
+          "schema_version": "cocolon.cmee.emlis_model_meaning_graph.v1",
+          "native_bindings": {
+            "roles": {
+              "joy": {
+                "end": 18,
+                "text": "うれしかった",
+                "start": 12,
+                "claim_ref": "joy",
+                "source_id": "63059d93-b5e4-4b7d-beb3-78ce485b0229",
+                "field_path": "memo"
+              },
+              "repair": {
+                "end": 14,
+                "text": "ぐらついていた椅子を修理して",
+                "start": 0,
+                "claim_ref": "repair",
+                "source_id": "63059d93-b5e4-4b7d-beb3-78ce485b0229",
+                "field_path": "memo_action"
+              },
+              "usable_again": {
+                "end": 26,
+                "text": "また座れるようになった",
+                "start": 15,
+                "claim_ref": "usable_again",
+                "source_id": "63059d93-b5e4-4b7d-beb3-78ce485b0229",
+                "field_path": "memo_action"
+              },
+              "solo_appraisal_object": {
+                "end": 10,
+                "text": "全部一人で直せたこと",
+                "start": 0,
+                "claim_ref": "joy_object",
+                "source_id": "63059d93-b5e4-4b7d-beb3-78ce485b0229",
+                "field_path": "memo"
+              }
+            },
+            "stage": "INITIAL",
+            "source_fields": {
+              "63059d93-b5e4-4b7d-beb3-78ce485b0229": {
+                "memo": "全部一人で直せたことが、うれしかった。",
+                "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。"
+              }
+            },
+            "source_slices": [
+              {
+                "end": 14,
+                "quote": "ぐらついていた椅子を修理して",
+                "start": 0,
+                "source_id": "63059d93-b5e4-4b7d-beb3-78ce485b0229",
+                "field_path": "memo_action",
+                "native_span_refs": [
+                  "s2"
+                ]
+              },
+              {
+                "end": 26,
+                "quote": "また座れるようになった",
+                "start": 15,
+                "source_id": "63059d93-b5e4-4b7d-beb3-78ce485b0229",
+                "field_path": "memo_action",
+                "native_span_refs": [
+                  "s2"
+                ]
+              },
+              {
+                "end": 18,
+                "quote": "うれしかった",
+                "start": 12,
+                "source_id": "63059d93-b5e4-4b7d-beb3-78ce485b0229",
+                "field_path": "memo",
+                "native_span_refs": [
+                  "s1"
+                ]
+              },
+              {
+                "end": 10,
+                "quote": "全部一人で直せたこと",
+                "start": 0,
+                "source_id": "63059d93-b5e4-4b7d-beb3-78ce485b0229",
+                "field_path": "memo",
+                "native_span_refs": [
+                  "s1"
+                ]
+              },
+              {
+                "end": 15,
+                "quote": "して、",
+                "start": 12,
+                "source_id": "63059d93-b5e4-4b7d-beb3-78ce485b0229",
+                "field_path": "memo_action",
+                "native_span_refs": [
+                  "s2"
+                ]
+              },
+              {
+                "end": 18,
+                "quote": "全部一人で直せたことが、うれしかった",
+                "start": 0,
+                "source_id": "63059d93-b5e4-4b7d-beb3-78ce485b0229",
+                "field_path": "memo",
+                "native_span_refs": [
+                  "s1"
+                ]
+              }
+            ],
+            "written_links": [
+              {
+                "type": "SOURCE_WRITTEN_TE_LINK",
+                "relation_ref": "repair_and_result",
+                "to_claim_ref": "usable_again",
+                "from_claim_ref": "repair",
+                "evidence_indexes": [
+                  4
+                ]
+              },
+              {
+                "type": "USER_STATED_JOY_GROUND",
+                "relation_ref": "joy_ground",
+                "to_claim_ref": "joy",
+                "from_claim_ref": "joy_object",
+                "evidence_indexes": [
+                  5
+                ]
+              }
+            ],
+            "case_arguments": [
+              {
+                "end": 9,
+                "text": "ぐらついていた椅子",
+                "start": 0,
+                "source_id": "63059d93-b5e4-4b7d-beb3-78ce485b0229",
+                "field_path": "memo_action",
+                "written_role": "を",
+                "owner_claim_ref": "repair"
+              }
+            ],
+            "relation_roles": {
+              "joy_ground": "joy_ground",
+              "repair_and_result": "repair_and_result"
+            },
+            "source_negations": [],
+            "preserved_selections": {
+              "category": [
+                "生活"
+              ],
+              "emotions": [
+                "喜び"
+              ],
+              "is_secret": null,
+              "emotion_details": [
+                {
+                  "type": "喜び",
+                  "strength": "medium"
+                }
+              ]
+            }
+          },
+          "source_prefix_ref": "emlis-source-prefix-050c5d3befdc24843888afa877ae428be315be68d3d139eabfba96c74ad044b3"
+        },
+        "context_guards": [],
+        "source_prefix_ref": "emlis-source-prefix-050c5d3befdc24843888afa877ae428be315be68d3d139eabfba96c74ad044b3",
+        "effective_plan_ref": "semantic-b5a6e025515e9328db7a7f6412abeb30386d257a976a3cf7b88494d6cc23e1a4",
+        "meaning_checkpoint_ref": "model-checkpoint-b6d4b63ee510b0ac375392addff354c492425c90834ab0bc802366751bb12026"
+      },
+      "thread_id": "6b6716a2-d4c1-4be2-b5d2-8fa7459c59a6",
+      "attempt_id": "1331a466-578b-492a-85f3-699c25be54be",
+      "question_id": null,
+      "recorded_at": "2026-10-25T07:06:55.654+00:00",
+      "round_index": 0,
+      "operation_id": "192f875d-6ee1-4403-bed4-c864b2a281c5",
+      "idempotency_key": null
+    },
+    {
+      "id": "f8ed2f5a-2e91-463a-a97e-7d4bb6ac0e25",
+      "seq": 6,
+      "kind": "QUESTION",
+      "payload": {
+        "decision": {
+          "target_ref": "emlis-target-200dfd9f430d654cf510dd85c16d3163042e860932f30c59c5ee98e3daf897a7",
+          "disposition": "ASK",
+          "target_kind": "PERSONAL_JOY_SIGNIFICANCE",
+          "decision_reason": "source_bound_joy_personal_significance_missing",
+          "asked_target_refs": [],
+          "missing_dimension": "personal_joy_significance",
+          "affected_meaning_refs": [
+            "joy_object",
+            "joy"
+          ],
+          "affected_reception_refs": [
+            "joy_object",
+            "joy"
+          ],
+          "supporting_evidence_refs": [
+            "model-question-evidence-40b0cb9015ef1433287c8cc4a93c062aa26e89b27953747a6efcb994227ffe73",
+            "model-question-evidence-016b644cc3eb5e37fb0accdfd706d163d143730315c75be8c7117fce0ea19a6a"
+          ]
+        },
+        "thread_id": "6b6716a2-d4c1-4be2-b5d2-8fa7459c59a6",
+        "question_id": "emlis-question-08ca286a19799de5f336f6fd1bd5ecff168852ac7b2ddddba41db08620456bc4",
+        "answer_limit": 1,
+        "skip_allowed": true,
+        "prompt_private": "「全部一人で直せたこと」がなぜ嬉しかったのですか？",
+        "schema_version": "cocolon.cmee.emlis_clarification.v1",
+        "parent_request_id": "emlis-6b6716a2-d4c1-4be2-b5d2-8fa7459c59a6",
+        "answer_source_role": "SUPPLEMENTAL_ANSWER",
+        "original_source_ref": "src-a0b894ad83bdbe6472358b38"
+      },
+      "thread_id": "6b6716a2-d4c1-4be2-b5d2-8fa7459c59a6",
+      "attempt_id": "1331a466-578b-492a-85f3-699c25be54be",
+      "question_id": "emlis-question-08ca286a19799de5f336f6fd1bd5ecff168852ac7b2ddddba41db08620456bc4",
+      "recorded_at": "2026-10-25T07:06:55.655+00:00",
+      "round_index": 1,
+      "operation_id": "192f875d-6ee1-4403-bed4-c864b2a281c5",
+      "idempotency_key": null
+    },
+    {
+      "id": "b6a98265-855a-477c-a7c1-522206fc5c9b",
+      "seq": 7,
+      "kind": "OPERATION",
+      "payload": {
+        "status": "AWAITING_ANSWER",
+        "failure_code": null
+      },
+      "thread_id": "6b6716a2-d4c1-4be2-b5d2-8fa7459c59a6",
+      "attempt_id": "1331a466-578b-492a-85f3-699c25be54be",
+      "question_id": null,
+      "recorded_at": "2026-10-25T07:06:55.656+00:00",
+      "round_index": 1,
+      "operation_id": "192f875d-6ee1-4403-bed4-c864b2a281c5",
+      "idempotency_key": null
+    }
+  ],
+  "thread": {
+    "id": "6b6716a2-d4c1-4be2-b5d2-8fa7459c59a6",
+    "data": {
+      "attempt_id": "1331a466-578b-492a-85f3-699c25be54be",
+      "body_state": "PRE_QUESTION",
+      "failure_code": null,
+      "operation_id": "192f875d-6ee1-4403-bed4-c864b2a281c5",
+      "started_tier": "free",
+      "evaluated_tier": "free",
+      "execution_mode": "OFFLINE_CANDIDATE",
+      "meaning_updated": false,
+      "runtime_profile": "q2.free.one_round.v1",
+      "semantic_profile": "emlis_model_proposal.v1",
+      "answer_assessment": "NOT_APPLICABLE",
+      "original_source_ref": "src-a0b894ad83bdbe6472358b38"
+    },
+    "state": "AWAITING_ANSWER",
+    "user_id": "019c218a-df85-4a50-a127-713b459a6805",
+    "revision": 5,
+    "created_at": "2026-10-25T07:05:38.575+00:00",
+    "updated_at": "2026-10-25T07:06:55.653+00:00",
+    "issued_count": 1,
+    "source_snapshot": {
+      "id": "63059d93-b5e4-4b7d-beb3-78ce485b0229",
+      "memo": "全部一人で直せたことが、うれしかった。",
+      "category": [
+        "生活"
+      ],
+      "emotions": [
+        "喜び"
+      ],
+      "created_at": "2026-10-25T07:05:38.547",
+      "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。",
+      "emotion_details": [
+        {
+          "type": "喜び",
+          "strength": "medium"
+        }
+      ]
+    },
+    "active_attempt_id": null,
+    "source_prefix_ref": "emlis-source-prefix-050c5d3befdc24843888afa877ae428be315be68d3d139eabfba96c74ad044b3",
+    "active_operation_id": null,
+    "original_emotion_id": "63059d93-b5e4-4b7d-beb3-78ce485b0229",
+    "evaluated_prefix_ref": "emlis-source-prefix-050c5d3befdc24843888afa877ae428be315be68d3d139eabfba96c74ad044b3",
+    "latest_answer_event_id": null,
+    "processing_deadline_at": null,
+    "current_meaning_event_id": "d5d7da46-887e-415e-b463-2ddfb7175d4b",
+    "last_observation_event_id": "b481bebe-8ee6-42f0-b8da-a6e961350447"
+  },
+  "original": {
+    "id": "63059d93-b5e4-4b7d-beb3-78ce485b0229",
+    "memo": "全部一人で直せたことが、うれしかった。",
+    "category": [
+      "生活"
+    ],
+    "emotions": [
+      "喜び"
+    ],
+    "created_at": "2026-10-25T07:05:38.547",
+    "memo_action": "ぐらついていた椅子を修理して、また座れるようになった。",
+    "emotion_details": [
+      {
+        "type": "喜び",
+        "strength": "medium"
+      }
+    ]
+  }
+}

@@ -1883,8 +1883,15 @@ snapshot schemaは`cocolon.cmee.emlis_semantic_snapshot.v2`、checkpointは`coco
 次は既存private注入境界とserviceの保存・中断再開責務を照合し、実モデル出力を保存再読へ渡す明示offline確認を準備する。新prompt/教師増量/追加学習/reader緩和/自動再試行は今回の結果から開始しない。既存private async注入sourceやservice persistenceの実呼出しはこの確認には含まない。CMEE意味型/採用reader/商品runtime/公開API/DB/RN/三core責務不変、STRUCTURE_MAP_DELTA_NONE。重みarchive全27member/32F32tensorと一往復archive全11memberをPod外照合。重みは永続保管済み。GPUは指示まで稼働保持し、今回観測会不要。商品credit0/正式0/3/54.50％を維持。
 
 
-## 2026-10-25 — Engineのcold file保存再開とservice期限（現在）
+## 2026-10-25 — Engineのcold file保存再開とservice期限（§34時点の履歴）
 
 既知架空chairの実4B raw2件を変更せず、意味snapshotとnative requestをfile保存し、別Python processで復元して全outcome・本文・問いの一致2/2、訂正3更新・最終ENDを確認した（30.241581秒）。これはEngineのcold file再開であり、通常service/SQL/本人履歴の保存再読は未実施。service現物のattempt期限は30秒で、実rawの生成は初回57.425457秒・訂正95.994996秒。RPCは期限後の受領保存を40001で拒否するため、このまま実serviceへ接続できない。旧rawのsource/prior IDも新serviceのUUIDと異なるため、成功のために書換えない。次は共有設計01の限定案（#cmee-offline-model-service-deadline-proposal）の判断後、明示offline MODEL_PROFILEだけの期限180秒と、service自身のrequest/実問い/actual priorを使う新規モデル最大2callで保存再読を確認する。通常Q2/Q3/APPLICATIONの30秒、SQL期限拒否/CAS/自動再送禁止は維持する。今回API製品code・期限・SQL・prompt・教師・reader・重みの変更0、新モデル呼出し/学習0。GPU停止/再起動/削除0。今回観測会不要、一般入力・三中核の商品品質は未成立。商品credit0/正式0/3/54.50％を維持。
 
 原本はtrial/service_persistence_20261025、one-shot sourceはpack/persistence_check/check_saved_roundtrip.py。通常service/SQLとEngine file保存を区別する。商品runtime/公開API/DB/RN/三core責務不変、STRUCTURE_MAP_DELTA_NONE。共有設計01の限定案は未適用で、最新weekly§34/全機能00を進行ownerとする。
+
+
+## 2026-10-25 — 承認済みoffline180秒と実service初回保存再読（現在）
+
+Mash承認のAPI95d00bで明示offline MODEL_PROFILEだけattempt最大180秒/source待機150秒を実装し、通常Q2/Q3/APPLICATION30秒とSQL期限/CASを維持。timeout HOLD保存の旧revision不整合も同service内で最小修復し、CPU対象3file114 PASS/FAIL0/SKIP0。実4B→ModelCandidateSource→既存service→隔離SQLの新規2callを155.760674秒で実行。初回67.859530秒は意味/本文/実問いの保存とGET/start非生成再読が成立。訂正66.391389秒は1306token/EOS終了だがJSON閉鎖/shape/根拠/更新構造が崩れINVALID_FORMATで不採用。本人役の訂正文は保存、意味未更新、旧本文current解除、ANSWER_UNREFLECTED/can_retry=false。訂正後の意味保存・中断再開には未到達で、実service一往復全体は未成立。原raw/teacher/prompt/reader/重みは変更せず、追加生成/追加学習0で今回planを終了。次は学習時と実serviceの入力差分を使い、既存chair教師を正規service ID/日時/actual priorへ再束縛するCPU候補と、閉形・source区別・3更新の検証を整える。UUID単独が原因とは未実証。新しい観測会はこの問題には不要。GPUは稼働保持/停止操作0、商品credit0/正式0/3/54.50％を維持。
+
+API製品ownerは既存emlis_thread_service.pyのみ、test_cmee_emlis_model_proposal.pyで既存3file114件を確認。新しいsource/DB/DTO/RN ownerは追加しない。実model原本と不採用状態はtrial/service_roundtrip_20261025、有限runnerはF/service_roundtrip_check/run_service_roundtrip.py。STRUCTURE_MAP_DELTA_PRESENTは既存private runtime期限/timeout処理だけ。実modelの訂正後再開と通常application/本人端末は未成立。進行はweekly§35/全機能00。

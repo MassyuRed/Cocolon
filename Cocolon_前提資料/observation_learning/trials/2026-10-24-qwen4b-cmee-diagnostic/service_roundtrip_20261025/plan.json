@@ -1,5 +1,5 @@
 {
-  "status": "AUTHORIZED_READY_NOT_STARTED",
+  "status": "COMPLETED_INITIAL_ONLY_CORRECTION_REJECTED_NOT_REPLAYABLE",
   "authorization": "Mash explicitly approved the linked offline deadline and service-save/read plan in this conversation",
   "proposal_commit": "1ba8449f6c42394510e64e957e03c005f92bacee",
   "proposal_anchor": "cmee-offline-model-service-deadline-proposal",
@@ -27,5 +27,12 @@
   "process_15min_prorated_usd": 0.065,
   "cost_scope": "Prorated process time only, not a bill hard cap; continuing rental/tax/preparation/recovery separate",
   "independent_human_product_acceptance": false,
-  "automatic_progression": false
+  "automatic_progression": false,
+  "actual_run_status": "ACTUAL_CORRECTION_DID_NOT_REACH_AUTHOR_NO_RESUME",
+  "model_calls_started": 2,
+  "model_calls_completed": 2,
+  "initial_saved_read": true,
+  "full_service_roundtrip": false,
+  "new_generation_or_training_after_result": false,
+  "preflight_only_process_failures": 1
 }
