@@ -1,0 +1,16 @@
+{
+  "status": "AUTHORIZED_NOT_STARTED",
+  "approval_date": "2026-10-26 JST",
+  "scope": "fixed12 save/reload FIT9 all9success then at most2 isolated SQL service saved rereads",
+  "gpu_updates": 0,
+  "model_generations": 0,
+  "source_baseline": "9bff60dbc7aafb1fad18e88b1ab51df829912ee5",
+  "runner_sha256": "30432c53003bf39ea7eb746a59a5faa69d05db64390d157e3b9029d59f9e37a4",
+  "plan_sha256": "4428e0dedd90d28448d1f7502208b3ac553e0fa9965b07ed775d0c6394999244",
+  "initial_adapter_sha256": "138b9ff7e5b7df59e6da80126a52b309edf9c22a9a860f2c165189a9e453c102",
+  "max_seconds": 2700,
+  "max_process_allocation_usd": 0.195,
+  "automatic_progression": false,
+  "retry": false,
+  "gpu_lifecycle_operations": 0
+}

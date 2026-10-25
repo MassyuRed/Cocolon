@@ -2444,3 +2444,8 @@ Mashは「受け取りだけ6更新→保存・再読込→9件検査→全件�
 新一回試行案は12更新→保存/非学習reload→FIT9→全件成功・旧問い/訂正保持時だけ2実service保存再読/意味保存後中断再開。1800秒/$0.13＋条件付き900秒/$0.065、合計45分/処理按分$0.195（記録$0.26/h、準備/回収/保持/税等別）。閉鎖済み6の承認を流用しない。Rule18§11.3 LEVEL_3 4/5/8の新scope明示承認前でgpu_run_authorized=false。root華恋/CodeX Work/GPT-6がsole writer/実行owner、Pro/Ultra/human受入れとは扱わない。
 
 今回必要な新観測会なし。2独立話/一般化未確認/Piece・Analysis完成教師0は継続。限定CPU技術準備、商品0/正式0/3/54.50％据置。全体00/観測入口/01A所在を同期しSTRUCTURE_MAP_DELTA_NONE。旧18/6plan/teacher/raw/重み/reader不変。Jupyter直接のみ、GPU一覧/管理API/lifecycle/新課金/Render/Supabase/本人DB/RN/merge/deploy操作0。GPU保持料金の停止を意味しない。
+
+
+### §46 10/26 JST — 固定12一回＋条件付き2保存再読をMashが明示承認
+
+Mashの「この12更新の一回試行を実行してよいですか？→いいよ、進めて。」を受領。9bff60dbのsource/10条件CPU/実tokenizer全9/固定順/教師/LR/reader/予算/停止を維持し、proposed原本を保存して新実行planをtrueへ更新。開始前checkpointで学習・生成0。Jupyter直結で12更新/保存reload/FIT9を一回、全9成功と問い・訂正保持時だけ2実service保存再読/中断再開へ進む。合計GPU処理45分/$0.195按分（保持等別）、失敗後追加更新/再生成/探索0。開始後はactual counterへ更新する。GPU lifecycle/本人DB/通常配置変更0、商品0。旧6の承認再利用ではなくこの新12への明示承認で、CPU後/全成功後の小分け再承認は不要。

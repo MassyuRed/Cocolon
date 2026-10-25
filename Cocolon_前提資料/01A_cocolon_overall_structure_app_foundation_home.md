@@ -4883,3 +4883,6 @@ observation_learning/trials/2026-10-25-quote-reception-fit6/ のREADME/closure�
 ## 2026-10-25 — 新balanced12案のCPU準備file
 
 既存observation_learning/training/2026-10-25-emlis-quote-address/へrun_quote_balanced_fit.py（chair全文6各1＋daily受け取り3各2、固定12/保存reload/FIT9）、balanced_fit12.plan.json（未承認/実行false）、balanced_fit12_tokenization.json（Jupyter実tokenizer全9/全文EOSと疎11対象/モデル0）、balanced_fit12_cpu_validation.json（CPU10条件）、run_quote_balanced_holdout.py（全9成功後だけ2実service保存/中断再開/非生成再読、evalplan未作成）を追加。READMEのquote-balanced-fit12-proposalが目的・固定順・範囲・上限45分/$0.195処理按分・停止・承認境界の詳細owner。旧18/6plan/teacher/helper/raw/重み/reader不変。製品構造・契約変更なし、STRUCTURE_MAP_DELTA_NONE。全体00/観測入口/最新weekly§46へ現在地を戻す。商品0/正式0/3/54.50％。
+
+
+10/26 JST 新balanced12の実行承認：同packへbalanced_fit12.proposed.json（承認前原本）とbalanced_fit12_runtime_checkpoint.json（承認/進行/終了のactual状態）を追加し、balanced_fit12.plan.jsonをMash明示承認の一回scopeへ更新。runner/teacher/reader/予算不変。構造差分なし、旧18/6を再開しない。

@@ -2,7 +2,7 @@
 
 **GPUの最新確認：** 今回は承認scopeの学習/検証をJupyterへ直接接続して実施。管理console/GPU一覧/Runpod API操作0、Stop/再起動/削除/新Pod/charge0。§43の旧停止指示とHTTP429で停止未確認だった履歴は保持し、今回の新承認scopeではPod lifecycleを変更していない。処理は完了したが、GPU料金停止を意味しない。
 
-**現在の直接作業（新12更新案のCPU準備完了・GPU未承認）：** 旧6更新はdaily3通過/旧chair3退行で不採用・後段0のまま保持。初期138b9ff7からchair6全文JSON＋EOS各1回とdaily3受け取り11token各2回を固定順で交互に学ぶ12更新案を実装した。Jupyter実tokenizer全9/最大prompt5045・completion2339/切捨て0、CPU10条件成功、新model読込/forward/生成/更新/SQL0。保存reload/FIT9の全件成功とASK/訂正保持時だけ別ID2保存再読へ進む固定案。上限45分/処理按分$0.195（保持等別）、新一回試行への承認前でplan=false。旧plan再開0。新観測会は今回不要、独立2話/一般品質・Piece/Analysis教材不足は継続。商品0/正式0/3/54.50％据置。[具体案と実CPU原本](training/2026-10-25-emlis-quote-address/README.md#quote-balanced-fit12-proposal)、最新weekly§46。
+**現在の直接作業（新12更新の一回実行を10/26承認・開始準備）：** 旧6更新はdaily3通過/旧chair3退行で不採用・後段0のまま保持。初期138b9ff7からchair6全文JSON＋EOS各1回とdaily3受け取り11token各2回を固定順で交互に学ぶ12更新案を実装した。Jupyter実tokenizer全9/最大prompt5045・completion2339/切捨て0、CPU10条件成功、新model読込/forward/生成/更新/SQL0。保存reload/FIT9の全件成功とASK/訂正保持時だけ別ID2保存再読へ進む固定案。上限45分/処理按分$0.195（保持等別）、Mashが10/26に新一回試行を明示承認、plan=true/開始前。旧plan再開0。新観測会は今回不要、独立2話/一般品質・Piece/Analysis教材不足は継続。商品0/正式0/3/54.50％据置。[具体案と実CPU原本](training/2026-10-25-emlis-quote-address/README.md#quote-balanced-fit12-proposal)、最新weekly§46。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 

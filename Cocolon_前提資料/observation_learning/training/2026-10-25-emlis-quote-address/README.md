@@ -115,3 +115,8 @@ Jupyter直接接続で新pack `/workspace/cocolon_4b_quote_balanced_pack_2026102
 現在status=PROPOSED_NOT_AUTHORIZED/gpu_run_authorized=false。新12の有料一回試行は、終了済み6更新の消費済み承認から外れる。Rule18 §11.3 LEVEL_3の4/5/8およびclosed single-use再利用禁止に従い、この固定案への新しい承認後だけ起動する。承認後にCPU成功やall9成功を理由とする小分けの再承認は不要。旧18/6のplan、raw、教師、重み、readerは変更しない。
 
 今回の記録はCPU準備の限定TECHNICAL_CREDIT。商品0/正式0/3/管理54.50％据置。STRUCTURE_MAP_DELTA_NONE（有限学習sourceと所在の追加のみ）。全体設計・全file地図・最新weekly§45/原結果から選択した作業であり、全blob/稼働/本人端末/一般品質の再検証ではない。旧§43停止指示/停止未確認は歴史として保持する。
+
+
+### 10/26 JST — 新12の一回実行をMashが明示承認
+
+Mashは「この12更新の一回試行を実行してよいですか？→いいよ、進めて。」と承認。直前9bff60dbの固定内容を維持し、原proposedをbalanced_fit12.proposed.jsonへ保存、実行planをAUTHORIZED_ONCEへ更新した。runtime checkpointはAUTHORIZED_NOT_STARTEDからactual進行へ更新する。新しい技術方式/教師/上限変更なし。承認済み全9成功後の条件付き2保存再読に再承認は不要。root華恋がJupyter直接で一回実行し、無補修raw/重みを回収する。準備時のCPU原本/planhashは当時のproposedを指し、今回の承認planのhashはcheckpointと実runへ保存する。Pod/file名20261025は準備時の固定名であり、実行日の表記は2026-10-26 JST。
