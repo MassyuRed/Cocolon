@@ -1985,4 +1985,11 @@ Mashの4B追加学習・本日の続行指示に基づき、保持中の同A4500
 
 同GPU/新directory/run1回のみ、process1800秒・表示$0.26/h按分上限$0.13、計画$1以内。継続保持/準備回収/税等と別で、Pod請求hard capではない。既存GPUの50GB container/非永続overlayへ保存し、archiveをPod外へ回収して全member/重みhashを照合する。自動再試行/追加epoch/新Pod/チャージ/STOP/再起動/削除0。旧execution_plan.jsonは過去の非実行templateとして不変で、この一回用のtyped_fit_execution_plan.jsonと区別する。
 
-実行/編集/反映は華恋root、read-only agentが実raw/実験範囲を独立確認。Codex Work/GPT-6であり別モデルPro/Ultraの実施を装わない。OBSERVED_BLOCKER_MINIMAL_FIX / LEVEL_2相当、既存owner内。構造/型/三core境界/公開API/DB/RN/本番設定は不変、STRUCTURE_MAP_DELTA_NONE。観測会は現形式修復には不要。実結果は回収後に本節へ差分反映する。正式0/3・54.50％は据置。
+実行/編集/反映は華恋root、read-only agentが実raw/実験範囲を独立確認。Codex Work/GPT-6であり別モデルPro/Ultraの実施を装わない。OBSERVED_BLOCKER_MINIMAL_FIX / LEVEL_2相当、既存owner内。構造/型/三core境界/公開API/DB/RN/本番設定は不変、STRUCTURE_MAP_DELTA_NONE。観測会は現形式修復には不要。実結果は以下へ回収済み。正式0/3・54.50％は据置。
+
+
+**§28 実結果・終了状態：** [全実結果](../observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/compact_fit_training_20261025/README.md)。source `cd3fbf4505ccf0cfe9fbbade41bafd95472ef073` / API `a6838fc17cc657f9f80da28bb93b422d0f94a2dd`、run `20261025-025406-cc300de8`。444.269722秒で2update/前後4生成、peak14.975895/17.587891GiB。固定typed_fit計画のSHA69814337…を新directoryのexecution_planへ適用し、実preflight.plan/hash/FIT2と照合した。加重NLL0.216488964→0.210640858、32tensor有限/新adapter hash06ca6381…だが前後raw2件とも完全同一。CMEEは前後0/2、初回1740token stopでもschema_version重複でINVALID_FORMAT、訂正2048token lengthでTOKEN_LIMIT。外側IDはbeforeからFT-CHAIR-Oへ直ったが、UTF-8位置/対象外emotion field/kind/pretty JSON/受け取り不正は残る。採用の下流検査を通過したとは扱わない。
+
+最終archive d46ae21f…の全25member/size/hash・adapter3file/32tensor有限性/保存reload後不変をPod外照合して保管済み。旧0bdac5e9…adapterも全3hash不変。元4B全重みとoptimizer/RNG途中再開状態は含まない。API consumerは同commitの専用clean worktreeで実行し、通常checkoutの既存未追跡物は変更0。実consumer/全raw/NLL/学習記録/hashはGitHubの同試行directoryへ保持。今回planはCOMPLETED_NOT_REPLAYABLE相当に閉じ、Mashの継続学習方針を未承認へ戻さず、次の具体scope/planを分ける。process按分約$0.03209は継続保持や回収等を含む請求総額ではない。STOP/再起動/削除/新Pod/チャージ0。
+
+独立read-only reviewも前後raw同一/0採用/NLL低下と整合。学習効果ゼロ/4Bの能力限界とは断定せず、『分布は変化したが今回のgreedy出力と採用は改善しなかった』と評価する。2updateが十分な学習量という根拠は未成立。同条件の再実行や指示語句追加の反復へ進まず、次はモデルへ見せる欄内Unicode座標とnative証明metadataの重複を含む入力投影、および既存targetを用いる形式学習方法を点検する。原文/source資格/採用条件/原rawを保持し、新しい観測会はこの形式問題には求めない。商品受入れ0/3・全体54.50％は維持。

@@ -1,6 +1,6 @@
 # Mashの観測技術を継承するための記録
 
-**今回の続行（§28）**：API `a6838fc17cc657f9f80da28bb93b422d0f94a2dd`で外側source_idとminified JSONを明示。source/教師assistant/prior/採用側は不変、backend65・pack13成功、実tokenizerの最大生成枠8162/8192。直前のstage別提示は実CMEE0/2（初回INVALID_EVIDENCE、訂正TOKEN_LIMIT）だった。新prompt・同2targetで固定baseから新LoRAを1回作り、既存1epoch/2update・前後FIT2（計4生成）を比較する。旧adapterを保持し、新重み/全rawを回収する範囲。GPUは稼働保持。 [現行作業](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-source-id-minified-fit-training)。
+**今回の実結果（§28）**：外側source_id/minified指示で同2target・1epoch/2updateの新LoRAを1回作り、保存/非学習reload・前後FIT各2を完走（444.270秒）。新重みと全25member/32tensorをPod外照合して保管済み、旧adapter不変。NLL0.216489→0.210641だがrawは前後2/2同一、実CMEE意味/本文は前後0/2。初回は重複キーINVALID_FORMAT、訂正後は2048token打切りTOKEN_LIMIT。次は座標/証明metadataの入力投影と形式学習方法を見直す。同一runは完了済みに閉じ、GPUは停止しない。 [実結果・回収照合](trials/2026-10-24-qwen4b-cmee-diagnostic/compact_fit_training_20261025/README.md)。観測会は今の形式問題には不要。backend65・pack13成功、最大生成枠8162/8192・切捨て0。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
@@ -81,7 +81,7 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 
 ## 現在地（2026-10-25・三中核の開発基準選定、本番は未成立）
 
-**今回の直接作業：** [weekly §28](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-source-id-minified-fit-training)。API `a6838fc17cc657f9f80da28bb93b422d0f94a2dd`で外側source_idとminified JSONを明示。source/教師assistant/prior/採用側は不変、backend65・pack13成功、実tokenizerの最大生成枠8162/8192。直前のstage別提示は実CMEE0/2（初回INVALID_EVIDENCE、訂正TOKEN_LIMIT）だった。新prompt・同2targetで固定baseから新LoRAを1回作り、既存1epoch/2update・前後FIT2（計4生成）を比較する。旧adapterを保持し、新重み/全rawを回収する範囲。GPUは稼働保持。 [直前の実結果](trials/2026-10-24-qwen4b-cmee-diagnostic/typed_hierarchy_20261025/README.md)。観測会は現形式修復には不要、Piece/Analysis完成教師0は残る。
+**今回の直接作業：** [weekly §28](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-source-id-minified-fit-training)。外側source_id/minified指示で同2target・1epoch/2updateの新LoRAを1回作り、保存/非学習reload・前後FIT各2を完走（444.270秒）。新重みと全25member/32tensorをPod外照合して保管済み、旧adapter不変。NLL0.216489→0.210641だがrawは前後2/2同一、実CMEE意味/本文は前後0/2。初回は重複キーINVALID_FORMAT、訂正後は2048token打切りTOKEN_LIMIT。次は座標/証明metadataの入力投影と形式学習方法を見直す。同一runは完了済みに閉じ、GPUは停止しない。 [実結果](trials/2026-10-24-qwen4b-cmee-diagnostic/compact_fit_training_20261025/README.md)。観測会は現形式問題には不要、Piece/Analysis完成教師0は残る。
 
 華恋の選定は4Bの共通基盤＋core別教示＋既存CMEE。0.6/0.8/1.7/2B・別4Bまで検討し、学習費と常時推論費を分離する。Mashの最新指示により、ローカル運用先はWindows／Macとも候補で未選定。既存M4 16GBの4bit案は検討材料であり、決定済みの移行先ではない。自前adapterのmerge/変換、量子化後の三中核品質、実入力・同時数・24時間運用は未確認。既存9教師はEmlisのみ、4B実診断は2教師/2update、Piece/Analysis完成教師0。単純なepoch増加を先行せず、各coreの完成実演と未使用入力で評価する。旧3070は今回fresh画面で既に停止表示、華恋の停止操作0。新A4500 20GB／Secure・表示$0.26/h、Pod y0eb0w0qn6nks0で修正版2教師/2update・保存reload・前後16生成が完走。peak allocated14.970/reserved17.588GiB、全24member/32tensor回収照合/永続保管済み。NLL0.251117→0.245189だがCMEE意味/本文は前後0/2。初回shape/自然文surface、訂正後の旧意味、proxy2件打切りが残る。[全実結果](trials/2026-10-24-qwen4b-cmee-diagnostic/repaired_a4500_20261025/README.md)。診断process5400秒/計画$1と今日のGPU保持課金を分離し、自動Stop/削除を行わない。本番変更0。正式0/3・54.50％据置。
 
