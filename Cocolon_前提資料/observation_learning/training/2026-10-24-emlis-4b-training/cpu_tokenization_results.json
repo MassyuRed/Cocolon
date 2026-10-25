@@ -4,12 +4,12 @@
   "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
   "semantic_profile": "emlis_model_proposal.v1",
   "runner_sha256": "00ece0ffac86e17f18544ee8e5fef44d315dd8cd2b641670cd8e6222ca60e40f",
-  "dataset_manifest_sha256": "75346d4f2d8bd4caa6abf1b6c896c28c400307996d402853144326691cb1511c",
+  "dataset_manifest_sha256": "d8880c313a6ee2e41c47e3ec2d0fc54ca25439f432ed83bf28f9c0493389a3a2",
   "execution_plan_sha256": "0b08d519d14b5412b9e6b4403c5e7b4e5fa04993d34db86b62d7e8495a4d37a3",
   "data_sha256": {
-    "sft_examples.jsonl": "b055df79b4ffc6ccf2d81a0b294e5357ac1ea67012e605738f71682d4fe8961c",
-    "train_messages.jsonl": "eea6f3fe593c7ff08a398861a3169e36cb62d8a72b2d8f32b717ee24336febc7",
-    "eval_inputs.jsonl": "7da1fa972be5ba467df91c9e727227b8cb080d24cd96c28c0a2d1c8a607001bf",
+    "sft_examples.jsonl": "d02e6510af253a77d9168051adbf5e0a1ff67d4de288696114a655e30e89d5f0",
+    "train_messages.jsonl": "b4063392563c9bd59ef22002cf7e73eec88cb4de02493227afdfe697338a7a13",
+    "eval_inputs.jsonl": "d0e66bb1c7cf8f61fe603d477bdddf2eeaab4e00cd4cbc4efd8083bebcbc5df2",
     "eval_review.jsonl": "64fb1a6350dc24359b60316d6eb380a715582581b03f49df70a9a230354b0f80"
   },
   "source_commit": null,
@@ -44,19 +44,19 @@
   "training_tokens": [
     {
       "id": "FT-CHAIR-INITIAL",
-      "prompt_tokens": 3085,
+      "prompt_tokens": 3110,
       "completion_tokens": 1094,
-      "total_tokens": 4179,
-      "loss_labels_start": 3084,
+      "total_tokens": 4204,
+      "loss_labels_start": 3109,
       "logits_positions": 1095,
       "full_context_retained": true
     },
     {
       "id": "FT-CHAIR-AFTER-CORRECTION",
-      "prompt_tokens": 6078,
+      "prompt_tokens": 6103,
       "completion_tokens": 1877,
-      "total_tokens": 7955,
-      "loss_labels_start": 6077,
+      "total_tokens": 7980,
+      "loss_labels_start": 6102,
       "logits_positions": 1878,
       "full_context_retained": true
     }
@@ -64,35 +64,35 @@
   "generation_inputs": [
     {
       "case_id": "FIT-FT-CHAIR-INITIAL",
-      "input_tokens": 3085
+      "input_tokens": 3110
     },
     {
       "case_id": "FIT-FT-CHAIR-AFTER-CORRECTION",
-      "input_tokens": 6078
+      "input_tokens": 6103
     },
     {
       "case_id": "EFREE-E01",
-      "input_tokens": 1108
+      "input_tokens": 1133
     },
     {
       "case_id": "EFREE-E02",
-      "input_tokens": 1119
+      "input_tokens": 1144
     },
     {
       "case_id": "EFREE-E03",
-      "input_tokens": 1114
+      "input_tokens": 1139
     },
     {
       "case_id": "EFREE-E04",
-      "input_tokens": 1218
+      "input_tokens": 1243
     },
     {
       "case_id": "EFREE-E05",
-      "input_tokens": 1122
+      "input_tokens": 1147
     },
     {
       "case_id": "EFREE-E06",
-      "input_tokens": 1099
+      "input_tokens": 1124
     }
   ],
   "generations_per_stage": 8,
@@ -148,15 +148,5 @@
   },
   "model_weights_loaded": false,
   "gpu_used": false,
-  "memory_limit": "Checkpoint bytes are not peak GPU memory; activations/optimizer/cache/runtime require an actual GPU.",
-  "instruction_repair": {
-    "cmee_api_commit": "1dabc4f196ae283264bf5e364e117a5d571af6a7",
-    "material_cocolon_predecessor": "7bdcff761a907277a12f2aa19e9d7d3931ebb076",
-    "native_source_prior_assistant_and_eos_retained": true,
-    "prompt_token_delta_per_native_case": 99,
-    "max_generation_input_plus_output_limit": 8126,
-    "remaining_context_tokens": 66,
-    "old_run_relabelled": false,
-    "actual_model_calls": 0
-  }
+  "memory_limit": "Checkpoint bytes are not peak GPU memory; activations/optimizer/cache/runtime require an actual GPU."
 }

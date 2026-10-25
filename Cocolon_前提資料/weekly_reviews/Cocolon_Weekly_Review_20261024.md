@@ -1929,3 +1929,19 @@ work rulesの既存入口の読順、全体現在地、観測README、4B packか
 中断について、学習/保存reload/回収・最終結果のGitHub反映は前回までに完了しており、最後の画像保存/タブ維持の操作が中断された記録がある。「自動レビュー」表示の具体的な拒否理由は取得できておらず、課金/GPU/学習失敗等を原因と断定しない。画像保存の再試行は今回の依頼に不要なので行わない。今回read-onlyのRunpod画面でもA4500 Pod y0eb0w0qn6nks0はUptime44分16秒で稼働、表示$0.26/h。今回のGPU開始/停止/再起動/削除/追加学習/追加推論/追加charge0。
 
 変更は既存5文書のみ。新ファイル/商品source/API/DB/Render/Supabase/教材/重み/contract変更0、STRUCTURE_MAP_DELTA_NONE。今回の記録整備を商品進捗へ計上せず、ADMINISTRATIVE_ONLY、正式0/3・PRODUCT_NOT_CLEAR・candidate_ready=false・automatic_progression=false・54.50％据置。
+
+
+<a id="20261025-surface-type-and-atomic-claim-repair"></a>
+## 26. 10/25 — 4Bの必須型・意味分解の指示修復、既存重みで初回を再確認
+
+**10/25 続行：必須型・意味分解の指示を最小修復。** API `7b649a23a6cdbfb5d55576a6ce58446ff24b414a` のOUTPUT_SPECで、観測/受け取りは空でない日本語文字列、全subject keyとconflictsは必須、出来事/結果/喜び/喜び対象は別claim、初回と訂正後の本文責務と関係方向を明示した。採用側・意味schema・独立reader・教師assistant/source/prior/systemは変更0。2教師/6proxyのuser.output_specと固定API/hashだけを同期。backend58成功（新4拒否を含む）、pack11成功、合成target2/2が意味/本文あり、旧messages2/2拒否。実tokenizerは初回3110+1094=4204、訂正6103+1877=7980、生成枠6103+2048=8151<=8192、切捨て0。合成成功を実4B採用へ加算しない。現在の実4B採用は前回の前後0/2のまま。次は保持中A4500の既存adapterを非学習reloadし、同初回FITを新指示で一回だけ生成して未修正rawを既存consumerへ渡す。追加epoch/教師増量/Pod停止なし。教材追加の前にこの形式不正を解消するため、今回の観測会は不要。Piece/Analysis完成教師0、一般自由文と動的一往復/通常保存再読/商品品質は残件。
+
+今回の開始範囲はOBSERVED_BLOCKER_MINIMAL_FIX / LEVEL_2相当、商品接続はEmlisの原入力から自然な受け取りへ至るCM-04。環境はCodex Work/GPT-6、実行とGitHub反映は華恋root、独立agentは読取レビューのみ。別モデルのPro/Ultra評価を実施したとは報告しない。全体設計01・全file地図01A/B/C・三core/CMEE map・shared01 actual・最新weeklyを確認し、System Contextの最新索引未完成はfresh原本の直接読取で補った。商品route/owner/型/契約変更なし、STRUCTURE_MAP_DELTA_NONE。
+
+独立reviewは既存契約内の指示明確化を支持した。初稿の初回/訂正後を分けない本文説明は訂正後教師と矛盾したため、実GPUへ渡す前に修正した。新回帰4件はobservation object、reception null、subject.source_entity欠落、claim結合を既存採用側が拒否することを確認する。採用側を変更してモデルを通したものではない。
+
+CPU用Python3.12.14/pytest8.4.1/subtests0.14.2と、固定Transformers5.19.0/PEFT0.21.2/Accelerate1.15.0/Safetensors0.8.0を使った。Torch/GPUはこのCPU環境で未使用、exact46 portable runtimeの成立とは別。初回prepareはhost側SOCKS依存不足で失敗し、CPU環境にsocksio1.0.0とJinja2 3.1.6を導入して同固定metadata/tokenizer/indexの確認を完了。token実測前に短い説明の中間版を改め、上記最終messages版へ全dataset/hashを同期した。元4B重みの新取得は0。
+
+**実GPU確認の範囲**：Pod y0eb0w0qn6nks0の既存adapterをis_trainable=Falseで読む。初回FIT1件のみ、非thinking/greedy/max_new2048/context8192/process900秒、optimizer/新学習/追加epoch0。同source・同adapterの前回初回rawと比較し、rawの型・意味採用・本文・問いを別に記録する。失敗でもrawを補修しない。2教師の追加学習や訂正後追加生成へ自動進行しない。GPU保持は表示$0.26/h、稼働は今回Runpod画面で確認した。停止/削除/再起動/新Pod/チャージ0。
+
+CPU修復は限定TECHNICAL_CREDIT、実モデル成功・本人実機・商品受入れは未成立。54.50％・正式0/3・candidate_ready=falseを維持。実行後に本節へ実raw/判定/次の一作業を差分記録する。

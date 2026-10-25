@@ -1,8 +1,8 @@
 {
   "scope": "CPU_SYNTHETIC_FIXED_RAW_CONSUMER_NOT_MODEL_NOT_DYNAMIC_THREAD",
-  "cmee_api_commit": "1dabc4f196ae283264bf5e364e117a5d571af6a7",
-  "dataset_manifest_sha256": "75346d4f2d8bd4caa6abf1b6c896c28c400307996d402853144326691cb1511c",
-  "source_examples_sha256": "b055df79b4ffc6ccf2d81a0b294e5357ac1ea67012e605738f71682d4fe8961c",
+  "cmee_api_commit": "7b649a23a6cdbfb5d55576a6ce58446ff24b414a",
+  "dataset_manifest_sha256": "d8880c313a6ee2e41c47e3ec2d0fc54ca25439f432ed83bf28f9c0493389a3a2",
+  "source_examples_sha256": "d02e6510af253a77d9168051adbf5e0a1ff67d4de288696114a655e30e89d5f0",
   "model_calls": 0,
   "production_db_called": false,
   "full_source_packet_snapshot": "cpu_connection_results.json",
@@ -14,6 +14,7 @@
       "messages_match": true,
       "status": "MEANING_AND_BODY_AVAILABLE",
       "checkpoint_ref": "model-checkpoint-ba1557bcf41500f6acba5130671274515a5f232b6d0c8cc198dceccb0c827650",
+      "old_messages_status": "INPUT_MESSAGES_MISMATCH",
       "body": {
         "artifact_id": "emlis-model-artifact-25f39ce168877444c93cc55cdb409b83c537561fd9a32d0b23a65fd23d3b5b1e",
         "schema_version": "cocolon.cmee.emlis_model_thread_artifact.v1",
@@ -61,6 +62,7 @@
       "messages_match": true,
       "status": "MEANING_AND_BODY_AVAILABLE",
       "checkpoint_ref": "model-checkpoint-d8523efcbc510addc5cb4ba6c1a9478ee9de3467390e0eddf06e889a7dcad4f1",
+      "old_messages_status": "INPUT_MESSAGES_MISMATCH",
       "body": {
         "artifact_id": "emlis-model-artifact-7a28cc404c7d88ccf2bba36ed31a0d60262f8db172b7debc4d11766b7f224e0c",
         "schema_version": "cocolon.cmee.emlis_model_thread_artifact.v1",
@@ -72,41 +74,5 @@
       "question": null
     }
   ],
-  "instruction_repair": {
-    "previous_dataset_manifest_sha256": "c3442f296785f43ae394aa5fece46f2ddcda8c2a633cd54b9addcfe59bf49160",
-    "native_source_prior_target_and_provenance_unchanged": true,
-    "old_nine_and_actual_trial_files_unchanged": true,
-    "proxy_six_still_unsupported": true,
-    "old_message_projection_rejections": [
-      {
-        "id": "FT-CHAIR-INITIAL",
-        "status": "INPUT_MESSAGES_MISMATCH",
-        "scope": "OLD_PROMPT_WITH_AUTHORED_TARGET_NOT_REAL_RAW"
-      },
-      {
-        "id": "FT-CHAIR-AFTER-CORRECTION",
-        "status": "INPUT_MESSAGES_MISMATCH",
-        "scope": "OLD_PROMPT_WITH_AUTHORED_TARGET_NOT_REAL_RAW"
-      }
-    ],
-    "regression_tests": {
-      "files": [
-        "ai/tests/test_cmee_model_candidate_source.py",
-        "ai/tests/test_cmee_emlis_model_meaning.py"
-      ],
-      "passed": 54,
-      "failed": 0,
-      "warnings": 1,
-      "new_rejection_cases": 6
-    },
-    "runtime": {
-      "python": "3.12.14",
-      "pytest": "8.4.1",
-      "pytest_subtests": "0.14.2",
-      "readiness": "CURRENT_LOCAL_REQUIRED_ROLE_IMPORTS_AND_VERSION_PROBE_PASSED",
-      "pr37_exact46_runtime_claimed": false
-    },
-    "actual_model_quality_improvement_proven": false,
-    "new_gpu_or_training_run_authorized": false
-  }
+  "instruction_repair": "20261025_surface_types_atomic_claims"
 }
