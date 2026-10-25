@@ -1,16 +1,13 @@
 {
   "scope": "CPU_SYNTHETIC_FIXED_RAW_CONSUMER_NOT_MODEL_NOT_DYNAMIC_THREAD",
-  "cmee_api_commit": "a6838fc17cc657f9f80da28bb93b422d0f94a2dd",
-  "dataset_manifest_sha256": "3d4792870616530474a44608ee4303080c9d783061a769b46ebab48806a5393a",
-  "source_examples_sha256": "fb85e083defc4ef6f1100795ecda8ae81fc652ee8afcee3541b544b315a8952e",
   "model_calls": 0,
   "production_db_called": false,
   "cases": [
     {
       "id": "FT-CHAIR-INITIAL",
-      "raw_scope": "AUTHORED_TARGET_NOT_MODEL_OUTPUT",
-      "messages_match": true,
+      "scope": "AUTHORED_TARGET_NOT_MODEL_OUTPUT",
       "status": "MEANING_AND_BODY_AVAILABLE",
+      "messages_match": true,
       "body": {
         "artifact_id": "emlis-model-artifact-25f39ce168877444c93cc55cdb409b83c537561fd9a32d0b23a65fd23d3b5b1e",
         "schema_version": "cocolon.cmee.emlis_model_thread_artifact.v1",
@@ -49,13 +46,14 @@
         "answer_limit": 1,
         "answer_source_role": "SUPPLEMENTAL_ANSWER",
         "schema_version": "cocolon.cmee.emlis_clarification.v1"
-      }
+      },
+      "previous_messages_status": "INPUT_MESSAGES_MISMATCH"
     },
     {
       "id": "FT-CHAIR-AFTER-CORRECTION",
-      "raw_scope": "AUTHORED_TARGET_NOT_MODEL_OUTPUT",
-      "messages_match": true,
+      "scope": "AUTHORED_TARGET_NOT_MODEL_OUTPUT",
       "status": "MEANING_AND_BODY_AVAILABLE",
+      "messages_match": true,
       "body": {
         "artifact_id": "emlis-model-artifact-7a28cc404c7d88ccf2bba36ed31a0d60262f8db172b7debc4d11766b7f224e0c",
         "schema_version": "cocolon.cmee.emlis_model_thread_artifact.v1",
@@ -64,17 +62,21 @@
         "update_note": "共同修理と、また使えることへの喜びへ訂正しました。",
         "text": "見えたこと：\n友人に手順を教わり、一緒に椅子を直したのですね。\n\nEmlisから：\n捨てずにまた使えるようになったことが、うれしかったのですね。またその椅子に座れるようになって、よかったですね。\n\n読み直したこと：\n共同修理と、また使えることへの喜びへ訂正しました。"
       },
-      "question": null
+      "question": null,
+      "previous_messages_status": "INPUT_MESSAGES_MISMATCH"
     }
   ],
-  "previous_messages": [
+  "projection_checks": [
     {
       "id": "FT-CHAIR-INITIAL",
-      "status": "INPUT_MESSAGES_MISMATCH"
+      "before_material_chars": 4720,
+      "after_material_chars": 1539
     },
     {
       "id": "FT-CHAIR-AFTER-CORRECTION",
-      "status": "INPUT_MESSAGES_MISMATCH"
+      "before_material_chars": 8990,
+      "after_material_chars": 4078
     }
-  ]
+  ],
+  "cmee_api_commit": "32dc3b3137ddc0a4401d2d1d045123f7da17683a"
 }

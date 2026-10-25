@@ -1993,3 +1993,19 @@ Mashの4B追加学習・本日の続行指示に基づき、保持中の同A4500
 最終archive d46ae21f…の全25member/size/hash・adapter3file/32tensor有限性/保存reload後不変をPod外照合して保管済み。旧0bdac5e9…adapterも全3hash不変。元4B全重みとoptimizer/RNG途中再開状態は含まない。API consumerは同commitの専用clean worktreeで実行し、通常checkoutの既存未追跡物は変更0。実consumer/全raw/NLL/学習記録/hashはGitHubの同試行directoryへ保持。今回planはCOMPLETED_NOT_REPLAYABLE相当に閉じ、Mashの継続学習方針を未承認へ戻さず、次の具体scope/planを分ける。process按分約$0.03209は継続保持や回収等を含む請求総額ではない。STOP/再起動/削除/新Pod/チャージ0。
 
 独立read-only reviewも前後raw同一/0採用/NLL低下と整合。学習効果ゼロ/4Bの能力限界とは断定せず、『分布は変化したが今回のgreedy出力と採用は改善しなかった』と評価する。2updateが十分な学習量という根拠は未成立。同条件の再実行や指示語句追加の反復へ進まず、次はモデルへ見せる欄内Unicode座標とnative証明metadataの重複を含む入力投影、および既存targetを用いる形式学習方法を点検する。原文/source資格/採用条件/原rawを保持し、新しい観測会はこの形式問題には求めない。商品受入れ0/3・全体54.50％は維持。
+
+
+<a id="20261025-proof-metadata-projection"></a>
+## 29. 10/25 — モデル入力の証明metadataを除き、同保存重みで初回／訂正後を確認
+
+今回のMashの「4B学習＋CMEE接続を進めて」に基づく、§28のobserved blocker最小修復。対象未完了は同chair初回／訂正後の意味・本文採用0/2。原文・根拠資格・CMEE採用条件を保ち、4BがコピーしたSOURCE_ENVELOPEのbyte locatorをモデルから除く。native prepare/receive/admissionは不変。`model_candidate_source.py`内のmodel-visible sourceからevidence/envelope_id/source_commitmentの3keyだけを除去し、original全metadata/text_fields/source_id/role/date/parent/controlと検証済みpriorを保持する。座標説明も実際の欄内Unicodeへ揃える。採用/reader/出力schema、rawの無補修は変更しない。
+
+学習方法の読取監査ではmask/causal shift/EOSに明白な不備なし。前runの勾配は非0、NLLは各低下、32tensorは有限。2updateが十分という証拠はなく、NLL微減とgreedy不変は矛盾しない。正解の1094/1877tokenに対し生成は改行209/304行で膨張し、schema_versionも重複。新観測会・教師増量・epoch増量は先行しない。
+
+必要性=OBSERVED_BLOCKER_MINIMAL_FIX、scope=既存purpose/contract内のLEVEL_2相当。Codex Work/GPT-6として実際の環境を記録し、別モデルPro/Ultraを装わない。実行/変更/GitHub反映ownerはroot華恋1人、独立2agentはread-onlyの投影/学習方法reviewのみ。対象はAPI source/test各1、Cocolon既存packのmessages/hash/CPU結果/READMEと本weekly/全機能/観測入口。成功条件は原文・prior・target不変、CPU exact messages/target2採用、8192内、同保存adapterで新messages2FITの実rawとCMEE結果を回収すること。商品改善は実本文で別判定し、自己受入れしない。
+
+最初のpytest起動は既存venvのfastapi不足で収集前失敗（商品test失敗0、未実行）。対象pure2fileを既存と同じ`--noconftest`で実行し65成功。pack13成功（38subtestsは上乗せしない）。合成target2/2は本文まで成立し、旧messages2/2は拒否。material文字数は4720→1539／8990→4078。実token値はpackのcpu_tokenization_results.json。assistant/source/prior切捨て0。
+
+実GPUscopeは既存A4500 y0eb0w0qn6nks0、表示$0.26/hを保持し、新directoryで保存済みcompact-fit adapter06ca6381…をis_trainable=Falseで読む。初回/保存prior付き訂正後FIT各1、計2生成、context8192/max_new2048/greedy/BF16/SDPA固定、process900秒（表示按分上限$0.065、準備/回収/継続保持/税別）。重み新取得/学習/optimizer/update0、既存結果上書き/自動再試行/追加epoch0。GPU停止/再起動/削除/新Pod/チャージは禁止、操作しない。期限/OOM/identity不一致/採用失敗では実状態を保存し追加実行しない。原rawと入力/hash/重み不変をPod外照合し、結果を同節へ差分記録する。新しい観測会は今回不要、Piece/Analysis完成教師0は別残件。
+
+本番API/DB/Supabase/Render/RN/通常application/公開/merge/deploy0。STRUCTURE_MAP_DELTA_NONE（既存注入ownerの投影のみ、三core責務・source資格・型/contractは不変）。formal0/3・全体54.50％据置、商品credit0、automatic_progression=false。

@@ -1,3 +1,5 @@
+**現在の直接作業：** [weekly §29](../../../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-proof-metadata-projection)。モデルへ送るsourceから証明metadata3keyだけを除去。原文/metadata/control/prior/既存2targetは保持。API32dc3b3、backend65/pack13成功・合成target2/2。追加学習量は変更せず、保存済み06ca6381…adapterの新入力FIT2を一回確認する。GPUは停止しない。旧typed_fit計画は終了済みで再実行しない。
+
 # Emlis 4B学習・保存再loadの限定pack
 
 **今回の実結果（§28）**：外側source_id/minified指示で同2target・1epoch/2updateの新LoRAを1回作り、保存/非学習reload・前後FIT各2を完走（444.270秒）。新重みと全25member/32tensorをPod外照合して保管済み、旧adapter不変。NLL0.216489→0.210641だがrawは前後2/2同一、実CMEE意味/本文は前後0/2。初回は重複キーINVALID_FORMAT、訂正後は2048token打切りTOKEN_LIMIT。次は座標/証明metadataの入力投影と形式学習方法を見直す。同一runは完了済みに閉じ、GPUは停止しない。 [実結果・回収照合](../../trials/2026-10-24-qwen4b-cmee-diagnostic/compact_fit_training_20261025/README.md)。観測会は今の形式問題には不要。backend65・pack13成功、最大生成枠8162/8192・切捨て0。
