@@ -2494,3 +2494,17 @@ Mashの4B学習＋CMEE接続続行/Jupyter直接指示で、全機能00全文・
 早期archive3,478,250bytes/18対象/32F32有限と完了training archive3,494,481bytes/21対象/全raw211240bytesをPod外照合。recovery bundle3,629,750bytes/SHA28cb273fea7bf3dabcb6f40409fba42b814a9c669c72805a3222253a123ccf1cの4対象にconsumer/launchを追加保全し、同一保管identity version1へ更新。consumer全1,670,459bytesはindex/28partsでGitHub保全する。初期重み/旧teacher/helper/reader/API不変。追加学習/失敗model再call/LR探索/raw補修/reader緩和0、終了plan再起動禁止。
 
 処理按分約$0.07454534（記録$0.26/h、準備/回収/保持/保存/税等別）、前半1800秒/$0.13内で後段900秒/$0.065未使用。途中案内の16分46秒を原本17分12秒へ訂正。新観測会はこの欠陥へ不要、独立2話/一般化未確認/Piece・Analysis完成教師0は残る。次は既存教師の受け取り全文と観測末尾が崩れた事実を照合し、新有料試行等は未承認。管理console/GPU一覧/管理API/lifecycle/依存追加/Render/Supabase/本人DB/通常application/RN/merge/deploy0、Jupyter直接。商品0/正式0/3/54.50％、STRUCTURE_MAP_DELTA_NONE。全体00/観測入口/pack/runtime/01A所在を同期する。
+
+
+<a id="20261026-quote-surface-fit12-cpu-proposal"></a>
+## 48. 10/26 — dailyの観測と受け取りを連続25tokenへ広げる新12案、Jupyter CPU準備完了・新GPU未承認
+
+Mashの4B学習＋CMEE接続続行/Jupyter直接指示で、全機能00全文・作業規則・恒久incident・全体設計/全file地図・current00/01/04・最新§47・観測目的・実sourceを確認。開始head Cocolon308b7514/API4002b457。System Contextの既知索引timeoutは保持しfresh原本を直接読取り、新index0。root華恋/Codex Work/GPT-6が単一実行/反映owner、別文脈agentはread-only補助、Pro/Ultra/human受入れとはしない。
+
+全9raw/教師は8parsed一致、daily02だけ観測「のですね」と受け取り「かったです」が欠落。1557token/EOS/stop、上限2560未到達、JSON正常、意味9/9・本文8/9のまま。教師強制NLLが低下しても自由生成prefixが教師から分岐し、旧daily12lossの対象外だった観測が崩れた。これを仮説として、既存教師の観測全文→JSON接続→受け取り全文→直後区切りを連続25token（9/11/5）で学ぶ一回を推奨。原因確定や4B限界とはしない。旧138b/9教師/prompt/固定12順/LR/chair6全文/EOS/reader/意味採用/API/SQLは不変。閉鎖boundary12/新041f未採用/後段0を再利用しない。
+
+Jupyter新packでCUDA_VISIBLE_DEVICES空/offline cacheの実tokenizer全9、最大5045/2339/7378、切捨て0を確認。別文脈read-only点検でCPU出力と本実行のmaskキー不一致を発見し、GPU/model効果前に修正・runner/planhash更新・CPU再実行。正規原本5194bytes/SHAe66adf4be5c638fad3c55e8b30c0af0be584a7be424f9f9ab19caa8c63c9869aを回収照合。Download待機はtimeoutしたが実file到着を確認、再download0。有限CPU11条件成功、因果slice/false拒否/後段gateを確認。モデル読込/forward/生成/optimizer/SQL0で、実4B品質成功には数えない。
+
+新一回は12更新→保存/非学習reload→9件検査、全9の意味/本文/JSON-EOS・chairASK3/訂正各3/REFINED・dailyFINALが成立時だけ2実service/隔離SQL保存・意味保存後中断/明示再開・保存済み非生成再読。最大45分/処理按分$0.195（記録$0.26/h、準備/回収/継続保持/保存/税等別）。plan=false/PROPOSEDで新有料試行は未承認、evalplan未作成。Rule18§11.3の新scope/費用/閉鎖済み一回試行の境界で全体一括承認後だけ実行し、その後CPU後/全9成功後の小分け再承認は不要。
+
+詳細source/path/CPU原本/修正経過/停止条件/今回の14項目開始記録への対応は[quote pack具体案](../observation_learning/training/2026-10-25-emlis-quote-address/README.md#quote-surface-fit12-proposal)。全体00/観測入口は新CPU準備/未承認へ置換、01Aへ新file所在だけ追記。今回の欠陥に新観測会は不要、独立2話/一般化/Piece・Analysis完成教師0は継続。STRUCTURE_MAP_DELTA_NONE、BLOCKER_NARROWED、商品0/正式0/3/54.50％据置。Jupyter直接のみ、GPU一覧/管理console/管理API/lifecycle/新課金/依存追加/Render/Supabase/本人DB/通常application/公開API/DTO/RN/merge/deploy0。GPU保持課金の停止を意味しない。

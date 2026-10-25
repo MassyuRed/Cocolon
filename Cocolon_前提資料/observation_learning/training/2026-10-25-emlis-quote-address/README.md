@@ -165,3 +165,51 @@ Mashは「12更新→保存・再読込→9件検査→全件成功時のみ2件
 ### 10/26 JST — boundary12最終結果
 
 [完了原本](../../trials/2026-10-26-quote-boundary-fit12/README.md)。12更新/保存非学習reload/9生成を1032.166184秒で完了、意味9/9・本文8/9。全9JSON/EOS正常、前回daily01区切り不正は解消、chair6/ASK3/訂正各3更新を保持。daily02だけ観測末尾と受け取り「少し落ち着けてよ。」が不完全で本文不採用。全9条件未達のため後段model/SQL0・evalplan未作成、新041fは保存・未採用。早期18/完了21対象と全raw/consumerを回収照合、32F32有限。追加学習/再生成/raw補修/reader緩和0、runtimeはCLOSED_ALL9_GATE_NOT_MET_DO_NOT_RELAUNCH。約$0.07454534処理按分（保持等別）。新観測会は今回不要、一般化/他core教師不足は継続。商品0/正式0/3/54.50％、構造差分なし。
+
+<a id="quote-surface-fit12-proposal"></a>
+## 10/26 JST — 観測と受け取りを一続きに学ぶ新12案（CPU準備完了・GPU未承認）
+
+### 実際に残っている欠陥と、今回の変更理由
+
+前回boundary12は閉鎖済み、意味9/9・本文8/9、新041f未採用、条件付き後段0のまま。root華恋が全9原raw・観測・受け取り・問い・訂正と教師を再照合した。8件はparsed教師一致。daily02だけ観測末尾「のですね」と受け取り末尾「かったです」が欠落した。1557token/EOS/stop、JSON正常、上限2560未到達のため打切りではない。既存readerは意味を保持した後、本文を`model_surface_not_validated`で不採用にした。原rawを補修せずreaderを維持する。
+
+旧dailyの12token lossは受け取り11＋直前区切り1で、観測文の9tokenは対象外だった。教師強制では失敗行のNLLも0.257516→0.007043へ低下したが、自由生成で観測文が教師と異なった。このprefix差に局所lossが対応していないことを改善仮説とする。介入比較前なので原因確定、更新数不足、4B能力限界とはしない。既存の正しい教師があるため、この修復に新観測会は不要。独立した言語事例は2話のままで、一般化・Piece/Analysis完成教師不足は解消していない。
+
+新案は、dailyを**観測全文値→間のJSON→受け取り全文値→直後区切り**の連続25tokenへ広げる。実tokenizerで観測9＋受け取り11＋接続5。全文context・EOSは入力に保持し、他の意味候補・引用・残JSON・EOSのdaily lossは-100。chair6は従来どおりassistant全文JSON＋EOSを各1回復習する。全文JSONへdaily lossを広げず、教師本文・原9行・prompt・API4002b457・意味採用・本文reader・SQLは変えない。終了済みboundary12を再開する方式ではない。
+
+### 固定する一回の範囲
+
+- 旧quote18の初期adapter138b9ff7から開始。不採用041fや2009を初期重みにしない。固定base/revision、32 LoRA、rank8/alpha16/dropout0を保持する。新AdamWでありoptimizer状態の厳密再開ではない。
+- 順序`[6,0,7,1,8,2,6,3,7,4,8,5]`、chair6各1＋daily3各2、計12更新。LR5e-5/weight_decay0/clip1/seed20261024を維持する。各stepのmean CEで、token配分50:50とは言わない。
+- 12更新→adapter保存/早期退避→非学習reload/32有限→固定9を各1生成。before新生成0。無補修rawを既存consumerへ一回渡し、root華恋が全件本文・問い・訂正を読む。
+- 全9で意味/本文、JSON/EOS、chair初回ASK3、chair訂正各3更新/問いなし/REFINED、daily問いなし/FINALが成功した場合だけ、別identityの2件を実service/隔離SQL保存・保存済み非生成再読へ進める。2件目は意味保存後の中断→明示response再開も確認する。新holdout runnerはsurface12の実結果だけに束縛する。eval planは未作成・未activate。
+- 学習/FIT1800秒/$0.13、成功時だけ後段900秒/$0.065、合計45分/処理按分$0.195。記録単価$0.26/hによる処理配分で、準備/回収/継続保持/保存/税は別、請求総額のhard capではない。期限・非有限・source/教師不一致・全9条件未成立で終了。追加更新・LR探索・失敗model再call・raw補修・reader緩和・閉鎖plan再起動0。
+- Jupyter直接のみ。GPU一覧/管理API/Stop/再起動/削除/新Pod/charge、通常application、本人DB、Render/Supabase、公開API/DTO/RN、merge/deployは操作しない。処理終了はGPU保持課金の停止を意味しない。
+
+### CPU原本と実行前修正
+
+Jupyter `/workspace/cocolon_4b_quote_surface_pack_20261026`へ新source/false planを配置。`CUDA_VISIBLE_DEVICES=''`とoffline cacheで実tokenizer全9を確認。最大prompt5045/completion2339/全文7378、切捨て0。daily3各25loss、chair6全文＋EOSを照合。モデル読込/forward/生成/optimizer/SQLは0。
+
+別文脈agentのread-only点検で、初版CPU出力`reception_masks`と本実行参照`surface_masks`の不一致を検出した。GPU/model効果前にキーを統一、runner hash/planを更新。初回CPU原本はPodで`surface_fit12_tokenization_pre_key_fix.json`へ保存し、修正版を再実行した。正規CPU原本5194bytes/SHAe66adf4be5c638fad3c55e8b30c0af0be584a7be424f9f9ab19caa8c63c9869aを回収・照合済み。Jupyter Downloadの待機toolはtimeoutしたが実fileは到着しており再downloadしない。全件token値・25maskは修正前後不変。新GPU試行は開始していない。
+
+rootの有限CPU検査11条件が成功（未承認GPU拒否、13更新拒否、初期重み変更拒否、sourcehash、実9token原本、chair/EOS/順、daily完結25対象、causal slice、CPU→本実行キー、後段gate不変）。これは実モデルの本文成功や正式商品受入れではない。別文脈agentは候補の読取補助で、独立Pro/Ultra/human受入れとは称さない。
+
+| file | 所有するもの |
+|---|---|
+| `surface_fit12_diagnosis.json` | 前回原raw9の教師照合、唯一の未完文、改善仮説と未確定境界 |
+| `run_quote_surface_fit.py` | 新25token連続mask、固定12/保存reload/FIT9。未承認通常実行をmodel前に拒否 |
+| `surface_fit12.plan.json` | false/PROPOSED、初期重み/教師hash、同じ予算/停止。root候補hashを固定 |
+| `surface_fit12_tokenization.json` | Jupyter実cacheの全9token・daily25/全文context・chair全文EOS、model0 |
+| `surface_fit12_cpu_validation.json` | 上記11条件の一回有限点検と、CPUキー修正記録 |
+| `run_quote_surface_holdout.py` | 全9条件成立後だけ2実service/隔離SQL/中断再開/保存済み生成禁止再読 |
+
+今回のrepository基準はCocolon308b751464213c38add45c15b705ee1401afa002/API4002b4577838d1ed6671278a19585b61e7ccd10e。新候補の実source commitはこの変更を含むGitHub revisionから解決する。CPUのCLI source引数308b7514は準備前のbaseであり、そのcommitに新runnerが存在したとは主張しない。CPU原本は実runner SHA819456ce9bf6589fb91becf16852a955ce3540eca59b2e9b4d5a01efe3d39826と結び付ける。
+
+### 承認境界と現在地
+
+新planは`PROPOSED_NOT_AUTHORIZED`/`gpu_run_authorized=false`。現行続行指示によりCPU診断/候補実装/記録まで進めたが、閉鎖済み一回承認を新しい有料試行に流用しない。Rule18 §11.3 LEVEL_3の新scope・費用・閉鎖済み一回試行境界に従い、上記**新12→保存reload→9検査→全9成功時だけ2保存再読**の一括承認後に実行する。承認後CPU後/全9成功後の追加小分け承認は不要。
+
+実行環境はCodex Work/GPT-6、root華恋が統合・実行・GitHub反映を担う。Pro/Ultra/human合格を生成しない。全機能原本・作業規則・恒久incident全文・全体設計/全file地図・current00/01/04・最新weekly§47・観測目的と実sourceを照合。System Contextの既知index timeoutは保持しfresh原本を直接読む。新index/補助基盤/依存は追加しない。
+
+今回は未完文の原因候補を絞り、次の一回をCPU実行可能な形まで具体化した。新学習/新生成/新重み/実model保存再読0。`STRUCTURE_MAP_DELTA_NONE`（有限runner内の学習範囲だけ、製品責務/型/保存/公開契約変更なし）。商品0/正式0/3/管理54.50％据置。
+

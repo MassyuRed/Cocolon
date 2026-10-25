@@ -4898,3 +4898,6 @@ observation_learning/trials/2026-10-25-quote-reception-fit6/ のREADME/closure�
 
 
 10/26 JST boundary12完了file：trial/2026-10-26-quote-boundary-fit12/README/closure/run/after_fit/training/NLLは実12更新/9生成/意味9・本文8/全9JSON-EOS正常・daily02未完文/後段0/新041f未採用を所有。file_manifest/recovery_verification/weights_verificationは完了21対象＋早期18対象/32F32有限/保管version1を保持。consumer.index＋28partsは既存consumer一回の全原本を順連結で復元。quote pack runtimeはCLOSED_ALL9_GATE_NOT_MET_DO_NOT_RELAUNCH。旧run/teacher/reader/API/SQL不変、製品責務/型/公開API/DB/RN差分なし、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+
+
+10/26 JST surface12 CPU準備file：既存quote-address packのrun_quote_surface_fit.pyは旧138b/9教師/固定12/chair全文を保持し、daily観測9＋受け取り11＋接続5を連続25tokenで学ぶ新候補。surface_fit12.plan.jsonはfalse/未承認、surface_fit12_tokenization.jsonはJupyter実cache全9/無切捨て/新model0、surface_fit12_cpu_validation.jsonは11条件とCPUキー修正の確認、surface_fit12_diagnosis.jsonは前回唯一の未完文と改善仮説。run_quote_surface_holdout.pyは新結果の全9条件後だけ実service2/隔離SQL/中断再開/非生成再読、evalplan未作成。旧boundary12は閉鎖/意味9・本文8/9/後段0/新041f未採用のまま。詳細は最新weekly§48/pack具体案。STRUCTURE_MAP_DELTA_NONE（有限学習runner内部だけ、製品責務/型/reader/公開API/DB/RN不変）、商品0。

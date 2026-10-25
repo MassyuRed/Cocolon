@@ -1,8 +1,8 @@
 # Mashの観測技術を継承するための記録
 
-**GPUの最新確認：** 今回は承認scopeの学習/検証をJupyterへ直接接続して実施。管理console/GPU一覧/Runpod API操作0、Stop/再起動/削除/新Pod/charge0。§43の旧停止指示とHTTP429で停止未確認だった履歴は保持し、今回の新承認scopeではPod lifecycleを変更していない。処理は完了したが、GPU料金停止を意味しない。
+**GPUの最新確認：** 今回はJupyterへ直接接続し、CPU専用tokenizer確認と新候補の配置まで実施。新モデル/forward/生成/学習0、管理console/GPU一覧/Runpod管理API/Stop/再起動/削除/新Pod/charge0。前回boundary12の終了と、今回の新GPU未承認を区別する。§43の旧停止指示/HTTP429未確認は履歴として保持。GPU保持課金は継続しており、処理按分と請求総額を混同しない。
 
-**現在の直接作業（boundary12完了、意味9/9・本文8/9、後段0で終了）：** source1d5b971f/API4002b457・初期138bから12更新/保存非学習reload/FIT9を1032.166秒で完了。全9のJSON/EOS正常、前回daily01区切り不正は解消。chair6/ASK3/訂正各3更新は保持。daily02だけ観測末尾と受け取り文末が欠け、既存readerが本文を不採用。全9条件未達で条件付き2保存再読はmodel/SQL0・evalplan未作成、新041f4161は未採用。全raw/consumer/重みを回収照合・保存済み。処理按分約$0.07455（保持等別）、新観測会は今回不要。[完了原本](trials/2026-10-26-quote-boundary-fit12/README.md)、最新weekly§47最終結果。商品0/正式0/3/54.50％。
+**現在の直接作業（surface12のCPU準備完了・新GPU試行は未承認）：** 前回boundary12の全9原raw/教師を再照合し、daily02の観測末尾と受け取り文末だけの欠落を確認。意味9/9・本文8/9/後段0/新041f未採用は不変。新候補は旧138b/9教師/12順/LR/readerを保持し、dailyの学習対象を観測9＋受け取り11＋接続5の連続25tokenへ変更。Jupyter直接・CPU実tokenizer全9/無切捨て、有限検査11条件を確認。CPU結果の項目名不一致をGPU実行前に修正し再確認済み。新モデル/生成/更新/SQL0。[具体案・原本](training/2026-10-25-emlis-quote-address/README.md#quote-surface-fit12-proposal)、最新weekly§48。全9成功時だけ2実service保存再読、最大45分/処理按分$0.195（保持等別）の一括承認前。新観測会はこの修復へ不要、独立2話/一般化/Piece・Analysis教師不足は継続。商品0/正式0/3/54.50％。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
@@ -83,7 +83,7 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 
 ## 現在地（2026-10-25・三中核の開発基準選定、本番は未成立）
 
-**現在の直接作業（boundary12完了、意味9/9・本文8/9、後段0で終了）：** source1d5b971f/API4002b457・初期138bから12更新/保存非学習reload/FIT9を1032.166秒で完了。全9のJSON/EOS正常、前回daily01区切り不正は解消。chair6/ASK3/訂正各3更新は保持。daily02だけ観測末尾と受け取り文末が欠け、既存readerが本文を不採用。全9条件未達で条件付き2保存再読はmodel/SQL0・evalplan未作成、新041f4161は未採用。全raw/consumer/重みを回収照合・保存済み。処理按分約$0.07455（保持等別）、新観測会は今回不要。[完了原本](trials/2026-10-26-quote-boundary-fit12/README.md)、最新weekly§47最終結果。商品0/正式0/3/54.50％。
+**現在の直接作業（surface12のCPU準備完了・新GPU試行は未承認）：** 前回boundary12の全9原raw/教師を再照合し、daily02の観測末尾と受け取り文末だけの欠落を確認。意味9/9・本文8/9/後段0/新041f未採用は不変。新候補は旧138b/9教師/12順/LR/readerを保持し、dailyの学習対象を観測9＋受け取り11＋接続5の連続25tokenへ変更。Jupyter直接・CPU実tokenizer全9/無切捨て、有限検査11条件を確認。CPU結果の項目名不一致をGPU実行前に修正し再確認済み。新モデル/生成/更新/SQL0。[具体案・原本](training/2026-10-25-emlis-quote-address/README.md#quote-surface-fit12-proposal)、最新weekly§48。全9成功時だけ2実service保存再読、最大45分/処理按分$0.195（保持等別）の一括承認前。新観測会はこの修復へ不要、独立2話/一般化/Piece・Analysis教師不足は継続。商品0/正式0/3/54.50％。
 
 [凍結6教師と実行source](training/2026-10-25-emlis-service-binding/README.md)／[全実結果](trials/2026-10-25-service-binding/README.md)。
 
@@ -223,4 +223,5 @@ D05でMashは「事実を事実として捉えるのも観測」と教示し、�
 次に観測会を行う場合は、華恋が新しい観測会フォルダを作り、対話と教示を保存し、この一覧を更新します。Mashには普段の形で実演していただき、整理・参照の整備は華恋が担います。今回、定期実行の日時や頻度は設定していません。
 
 保存先を増やすための新システムやDBは作らず、既存のGitHub上で継続します。製品の構造・契約・CMEE実装を変更する場合は、その作業で対象の設計と接続を扱います。
+
 
