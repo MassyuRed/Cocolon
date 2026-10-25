@@ -1,0 +1,30 @@
+{
+  "training_checkpoint.tar.gz": {
+    "bytes": 3495541,
+    "sha256": "8276aa0a27261b0eed52e0123001950b9553d57a734192a4104e0a2d57b0c910"
+  },
+  "consumer.json": {
+    "bytes": 1703898,
+    "sha256": "145027595ee37255c065e994791d085dbec6caeb51153d90bad35f1d6817268f"
+  },
+  "all9_gate.json": {
+    "bytes": 2853,
+    "sha256": "79f8a2ce79ba75ef1bb0de8427fcc685329c2f034705229c09fd16ac80cd1ab6"
+  },
+  "launch.json": {
+    "bytes": 552,
+    "sha256": "16ddb279b35766fdfb1eebabd6701c964e9bf443d773a7b8185cec4c6ceb9bca"
+  },
+  "service_result.tar.gz": {
+    "bytes": 41802,
+    "sha256": "92c5ec31e204c09e0a42a914c85077a5455aa5b7a9a19e9937709d5d24cee46a"
+  },
+  "joint_fit12.eval_plan.json": {
+    "bytes": 1353,
+    "sha256": "f6650b1c546fc9215bf8dc3fb3bb2b0227aff555040c8c58516fec5f628daab4"
+  },
+  "holdout_launch.json": {
+    "bytes": 408,
+    "sha256": "def1be3097adb8a00f3df6ed103c9f57abfa3de8f79c832302d8007a24e76477"
+  }
+}

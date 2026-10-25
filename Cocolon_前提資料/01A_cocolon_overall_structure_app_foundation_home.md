@@ -4907,3 +4907,6 @@ observation_learning/trials/2026-10-25-quote-reception-fit6/ のREADME/closure�
 
 
 10/26 JST joint12 CPU候補file：既存quote-address packのrun_quote_joint_fit.pyはdaily全文JSON/EOS平均CE＋完成surface25平均CEを各0.5で同時学習し、chair全文／原9教師／既存CMEEを保持する新一回案。joint_fit12.plan.jsonはPROPOSED/false、tokenization.jsonはJupyter実9行／全9全文EOS／daily25、check_quote_joint_cpu.pyとcpu_validation.jsonは有限14条件・合成CPU勾配一致を所有する。run_quote_joint_holdout.pyは新joint12全9成功時だけ既存2実service／隔離SQL／中断再開／非生成再読を許し、旧surface12結果を受け付けない。新evalplan未作成、4B読込/更新/生成/SQL0。最大45分/$0.195処理按分（保持等別）の新有料一回は未承認。詳細は最新weekly§49／pack具体案。旧surface12閉鎖／新e1db未採用を保持。製品責務/型/保存/公開契約不変、STRUCTURE_MAP_DELTA_NONE、商品0。
+
+
+10/26 JST joint12完了file：trial/2026-10-26-quote-joint-fit12のREADME/closure/run/after_fit/training/NLLは12更新・意味本文9/9・全parsed教師一致と前回引用範囲/未完文の同時解消を所有。consumer.index＋29partsは全1,703,898bytes、service/21原本＋manifestはmodel2/source2/隔離SQL RPC30/保存再読2/2・中断再開1/1・再読時生成0を保持。early/training/recovery_verificationは早期19/完了23/後段21/最終7対象・32F32有限・同一保管identity version1を所有する。packのjoint_fit12_runtime_checkpoint.jsonはCLOSED_FIT9_AND_CONDITIONAL2_COMPLETE_DO_NOT_RELAUNCH、eval_planは全9成功後だけactivateした原本。新45779は有限検証の保存候補、本番/商品未採用。製品責務/型/保存/公開契約不変、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。詳細は最新weekly§49最終結果。

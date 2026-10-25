@@ -2550,3 +2550,19 @@ Mashは8d5ad494の新案「12更新→保存・再読込→9件検査→全件�
 
 
 §49 実行中checkpoint（10/26 JST）：source fe3f0f9aから一回起動、PID647447/1792967562.7591531。12更新/保存/非学習reload完了、最後の読取390.7秒で固定9生成は1完了/2開始、全9採否未判定・後段0。新45779ad9の早期archive3,479,295bytes/19対象hash/32F32有限をPod外照合し、libfile_8485cd7181e481918b470bfb44735bf5 version0へ保全。照合用SHAの画面転記誤りは原本と実bytesで訂正、全manifest成功、再download0。実学習起動は一回・再起動0。trial/2026-10-26-quote-joint-fit12と同runtime checkpointから同processへ戻る。商品0/正式0/3/54.50％、GPU管理/API/lifecycle/本番変更0。
+
+
+
+### §49 最終結果（10/26 JST）— 固定9の意味/本文9/9、条件付き2実保存再読2/2成功・一回閉鎖
+
+[全実結果](../observation_learning/trials/2026-10-26-quote-joint-fit12/README.md)。学習source fe3f0f9a/API4002b457、旧138b/原9教師/既存CMEE/readerを保持。daily全文JSON/EOSとsurface25の平均lossを各0.5でoptimizer12更新（学習forward/backward18組）、保存・非学習reload・固定9を1075.249713秒で完了。意味9/9・本文9/9・parsed教師9/9・JSON/EOS9/9、全9raw→採用本文一致。chair初回ASK3/訂正各3更新・REFINED、daily3FINALを保持し、daily02の帰宅claim/述語/引用を「帰って」へ回復、未完文も解消。raw補修・reader緩和なし。
+
+全9成功後だけ、既承認後段source6e6ae549から新45779ad9でmodel2/source2を一回実行。実service→隔離SQL RPC30→同じ保存本文の非生成get/start再読2/2、中断→明示再開1/1、禁止source/生成0・adapter不変、186.247434秒。うどん/あったかい表記と雑炊/温かい表記を各入力どおり保持。2件目の中断状態は意味event1・本文0、明示再開で意味全文を不変に保ち本文1を追加した。root/別文脈agentが全9と後段2のraw/本文/出典/問い/訂正/保存/再読を確認し一致。正式Pro/Ultra/human Product Readではない。
+
+早期3,479,295bytes/19対象・完了training3,495,541bytes/23対象・32F32有限と早期/完了重み同一、raw211,319bytes/consumer1,703,898bytes、後段archive41,802bytes/21対象をPod外照合。最終recovery3,678,533bytes/7対象＋manifestを同一保管identity libfile_8485cd7181e481918b470bfb44735bf5 version1へ保全。consumer.index＋29partsとservice/の全原本から復元できる。画面から転記したSHAの一回の誤りは原本/実bytesで訂正、再download0。学習/後段起動は各1、追加学習/同要求再call/依存追加0。
+
+学習/FIT＋後段1261.497147秒/$0.0911081、CPU採否10.571209秒も按分すると1272.068356秒（約21分12秒）/$0.0918716。記録$0.26/hで、準備/回収/段間読取・保持/保存/税等は別。1800秒＋900秒/合計45分/$0.195内、請求総額ではない。学習peak allocated16.171854/reserved19.058594GiBは20GB A4500の実値で、量子化推論VRAMへ流用しない。NLLはchair全文0.000944048→0.001024976、daily全文0.003127896→0.001227573、surface25 0.138614719→0.007173922の別対象として記録し、実出力・保存成功と区別する。
+
+新45779はこの有限検証で成立した保存候補で、本番/商品へ採用していない。固定9は2言語話の教師適合、chair訂正は固定prior、後段2は同じ有限familyの別identity・初回日常だけ。一般入力、新adapterの動的chair訂正、Piece/Analysis教師/品質、ローカルWindows-Mac/量子化、本人端末/本番/正式商品受入れは残る。今回新観測会不要、Piece/Analysis完成教師0は継続。局所mask反復は終了し、次は有限教師を越える観測品質を既存材料で確認する段階。新有料試行・本番有効化は自動開始しない。
+
+全体00/観測入口/pack/runtime/01Aを完了へ同期。TECHNICAL_CREDIT（有限FIT9＋同family日常2件の実保存再読）、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％据置。Jupyter直接のみ、GPU保持。管理console/GPU一覧/管理API/Stop/再起動/削除/新Pod/charge/Render/Supabase/本人DB/通常application/公開API/DTO/RN/merge/deploy0。閉鎖済み一回を再起動しない。

@@ -1,0 +1,3 @@
+{"id": "TRAIN-DAILY-CALM-01-INITIAL", "loss_tokens": 25, "reception_tokens": 11, "observation_tokens": 9, "connector_tokens": 5, "nll": 0.13761046528816223}
+{"id": "TRAIN-DAILY-CALM-02-INITIAL", "loss_tokens": 25, "reception_tokens": 11, "observation_tokens": 9, "connector_tokens": 5, "nll": 0.14017726480960846}
+{"id": "TRAIN-DAILY-CALM-03-INITIAL", "loss_tokens": 25, "reception_tokens": 11, "observation_tokens": 9, "connector_tokens": 5, "nll": 0.1380564272403717}
