@@ -2346,7 +2346,7 @@ Supabaseはproject一覧で対象cocolon-projectのACTIVE_HEALTHY表示だけを
 primary=BLOCKER_NARROWED。新たな証拠は78引用の一意性・候補の可逆性と、原raw保存/再導出を壊さない最小責務変更の具体化。新TECHNICAL_CREDIT/商品credit0、原実績の意味7/9・本文6/9、正式0/3・54.50％据置。STRUCTURE_MAP_DELTA_NONE（未承認案のみで製品責務変更0）。全体00/観測入口/共有設計01/本weekly/全file地図01Aへ同じ差分を同期し、current01/04/schema05は実装/構造の新差分がないため更新不要。次は具体案の判断、第三の自動学習0。
 
 <a id="20261025-quote-address-approved-implementation"></a>
-## 42. 10/25 — Mash承認後quote接続を実装、限定CPU197・合成9教師9/9
+## 42. 10/25 — 承認後quote接続と18更新完了、意味9/9・本文6/9で終了
 
 Mashは「この案で、接続実装・18更新・全9件成功時の2件保存再読まで進めてよろしいでしょうか。→進めていいよ。」と明示承認。開始Cocolon8097fb87/APIbd356566、実環境Codex Work/GPT-6、root華恋が単一実装/検証/反映owner、別文脈agentはsource/runtime/runnerのread-only確認だけ。旧承認の再利用ではなく今回の具体案全体への承認。
 
@@ -2362,10 +2362,18 @@ Runpod管理consoleはAPI rate limitを表示したが、既存workloadのJupyte
 
 STRUCTURE_MAP_DELTA_PRESENT（privateモデルwire/位置compile責務）。全体00/観測入口/current01/04/共有01/schema05/01Aと本weeklyを同期。限定TECHNICAL_CREDITはCPU実装/再導出/保存互換だけ、商品0/正式0/3/54.50％据置。次は同一承認scope内の実tokenizer→一回18更新/FIT9/成功時2保存再読で、追加承認不要。
 
-### §42 実tokenizer・18更新/保存reload完了、FIT9進行中のcheckpoint
+### §42 最終結果 — 引用位置/意味採用は通過、日常の受け取りが残り後段call0
 
-source1a34c968の実tokenizer9行はmaxprompt5045/assistantEOS2339、全context8192内で無切捨て確認。既存PodでPID607814を一回起動し、旧chair各1/新daily各4の18更新、保存/非学習reloadを完了した。FIT新生成は最終観測3/9で意味/本文採否はまだ未確認。途中Work接続断は同Jupyterへ復旧し、旧/新trainerの再起動や同要求再callなし。
+固定source1a34c968/API4002b457で実tokenizer9行maxprompt5045/assistantEOS2339、無切捨て確認後、PID607814を一回起動。chair6各1＋daily3各4の18更新、保存/非学習reload、FIT新生成9を1081.492473秒で完了。途中Work接続断は同Jupyterへ復旧しただけで、学習/生成の再実行0。
 
-保存直後の新adapter138b9ff7e5b7df59e6da80126a52b309edf9c22a9a860f2c165189a9e453c102、archive41bea5a3c7992f5953176b8d4a309e3a47f0270a2505b32a9b8df58c5f5c627c/3,472,720bytes/16member（manifest15対象）のsize/hashをPod外照合、32F32有限を確認し保管した。archive内runはgen0/保存直後の時点。重みの採用昇格は0。最初のlocal照合で表示hashのbeaをbaeと転記してassertが停止したが、元画面/元fileを確認して転記だけを修正し、回収archive bytesは不変。Jupyterの最初の小JSONダウンロード待機もtooltimeoutしたが、転送済みの実fileをmanifest/refと照合して成功を確定し、再ダウンロードしていない。
+[全実結果](../observation_learning/trials/2026-10-25-quote-address-fit18/README.md)。原rawを補修せずCPU consumerへ一回投入し意味9/9・本文6/9。chair6は意味/本文6/6、初回ASK3・訂正各3更新を維持。dailyはquote→nativeと意味採用3/3へ到達、全3本文はUNAVAILABLE/model_surface_not_validated。parsed packetの教師差はreceptionだけで、01「…少し落ち着いたのですね。」、02/03「…少し落ち着けたのですね。」対教師「…少し落ち着けてよかったです。」。引用一致を意味/文章品質へ自動換算せず、別々のgateの実通過だけを数える。
 
-進行/再開指示はquote-address/runtime_checkpoint.json、実tokenizer/重み検証も同pack。未使用のholdout source/fixtureだけを新形式へ固定、eval_plan/後段起動/model call0。次は既存processの9原raw/終了状態確認→無補修消費→全9成功時だけ2保存再読。新観測会不要、GPU停止/再起動/削除/charge0、本番/DB/Render/RN変更0、商品0/正式0/3/54.50％据置。
+全9意味/本文成功条件未達なので、承認された条件付き2件保存再読はcall0で終了。holdout source/fixtureはcf316f1で固定済みだがeval_plan未作成/後段実serviceSQL0。追加学習/同要求再call/LR探索/raw補修/reader緩和0。この終了planを再起動しない。旧plan/旧teacher/旧重みを保持、新138b9ff7は未昇格。
+
+保存直後の追加重みarchive41bea5a3…/3,472,720bytes/16member（15対象）と32F32有限をPod外検証・保管済み（内runはFIT前gen0）。完了証拠archive b053dbcffa494c609aca33b1d4c4aaccb9274b31670211cc44435f3359d99065/6,963,640bytes/19member（18対象）も回収size/hash全一致。原raw9/211,275bytes、実consumer1,604,374bytesはindex＋text partsで無損失保存。最初のlocalhash期待の表示転記誤りでextract前assertが停止したが、Pod元表示を32桁ずつ再確認し期待転記だけ修正、archive bytesは不変。実転送不整合や学習再実行ではない。
+
+NLLは全文JSON+EOS対象でchair11114tokenとdaily4742tokenを別集計。daily約0.03274→0.00313まで低下したが、生成の受け取り成功を保証しない。peak allocated16.171474/reserved18.779297GiB、1081.492473秒を記録単価$0.26hで按分約$0.078108（準備/回収/継続保持/税等別、実請求額ではない）。実runtime/重み/全学習順/前後NLLはtrial/run.json等へ保持する。
+
+rootは全9候補/本文/問い/更新を読み、別文脈agent2枠もread-onlyで同じgate不成立を確認。独立Pro/Ultra/human受入れではない。今回の有限教師への生成適合が未達という範囲に留め、単なる更新数不足・教材不足・4B能力限界は断定しない。新観測会は今回不要。9行は独立9話ではなくchair/dailyの2話で、一般化・Piece/Analysisの完成教材不足は残る。
+
+primary=BLOCKER_NARROWED。private接続実装の限定CPU TECHNICAL_CREDITを保持し、本文/一般品質/商品credit0・正式0/3・54.50％据置。今回終了記録はSTRUCTURE_MAP_DELTA_NONE、接続実装時のPRESENTは既存mapへ反映済み。全体00/観測入口/quote pack/runtime/01Aへ終了状態を同期。current01/04/共有01/schema05は終了記録で新構造差分がないため変更不要。GPUは稼働保持、STOP/再起動/削除/新Pod/charge0。本番/Supabase/Render/RN/merge/deploy変更0。

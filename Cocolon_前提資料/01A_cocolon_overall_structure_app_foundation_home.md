@@ -4856,6 +4856,10 @@ APIbd356566/source e06d6b4c、実tokenizer max5045/2339、18更新・生成9・�
 
 API4002b457のpreparation.py/model_candidate_source.pyは新quote wireの一意位置compile/原raw保持/明示format選択を所有し、新test_cmee_quote_candidate.pyがstrict拒否/再導出/SQL中断再開を所有。Cocolon quote-address packのsft_examples.jsonl/train_messages.jsonlは実行9教師、dataset_manifest.jsonはsource/data hash、cpu_connection_results.json/cpu_validation.jsonは合成接続/限定197の実証範囲、plan.jsonは承認済み一回18更新/FIT9、run_quote_address_fit.pyは既存全文loss/reload/FIT手順、consume_quote_fit_raw.pyは無補修raw/明示形式/既存意味本文の採否を所有する。proposed版は履歴で実行しない。実tokenizer/GPU試行前、STRUCTURE_MAP_DELTA_PRESENT、公開API/DB/RN/reader変更0。全体00/current01/04/共有01/schema05/最新weekly§42を同期。
 
-## 2026-10-25 — quote18の実行中保全file
+## 2026-10-25 — quote18の完了証拠fileと後段未実施
 
-quote-address packにcpu_tokenization_results.json（実9行）、weights_verification.json（Pod外16member/32F32有限）、runtime_checkpoint.json（source/API/既存PID/18更新済み/次に再起動しない指示）を保存。run_quote_address_holdout.py/eval_fixture.jsonは新形式の未使用2初回用で、eval_plan/後段実行0。製品構造の追加差分はなくSTRUCTURE_MAP_DELTA_NONE。FIT採否/進行は全体00/最新weekly§42を参照。
+quote-address packのcpu_tokenization_results.jsonは実9行、weights_verification.jsonは保存直後Pod外16member/32F32有限、runtime_checkpoint.jsonは18更新/FIT9完了・意味9/本文6・条件付き後段call0の終了owner。run_quote_address_holdout.py/eval_fixture.jsonは未使用、eval_plan未作成。
+
+observation_learning/trials/2026-10-25-quote-address-fit18/ はREADME.md（終了原本）、closure.json（gate/残差/境界）、run.json（実18更新/9生成/非学習reload/全順序）、after_fit.jsonl（無補修9原raw）、training.jsonl（18loss）、before_nll.jsonl/after_nll.jsonl（全文NLL）、file_manifest.json（Pod全18対象hash）、recovery_verification.json（完了archiveのPod外照合）、consumer.index.json＋consumer.part-*.txt（1,604,374bytesの無損失実consumer）を所有する。index順UTF8連結して元SHAを照合する。旧raw/旧plan/旧重みは移管/修正しない。
+
+今回の終了記録はSTRUCTURE_MAP_DELTA_NONE。privateモデルwire/compile責務の実装PRESENTは上記とcurrent01/04/共有01/schema05に反映済み。全体00/最新weekly§42は意味9/9・本文6/9・後段0へ同期。商品0/正式0/3/54.50％、新重み昇格0、GPU稼働保持/STOP・再起動・削除0。

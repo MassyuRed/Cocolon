@@ -1,0 +1,74 @@
+{
+  "SOURCE_COMMIT": {
+    "sha256": "3cb1bb9de0d7e6552136161e1a87f01406ffa97936f03c92711263841c1bfb53",
+    "bytes": 41
+  },
+  "adapter/README.md": {
+    "sha256": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "bytes": 5184
+  },
+  "adapter/adapter_config.json": {
+    "sha256": "4df29c5daa4e4e25273f9fa0e18268929d7cb2fa2993a6e6e8136628efb5adc7",
+    "bytes": 1940
+  },
+  "adapter/adapter_model.safetensors": {
+    "sha256": "138b9ff7e5b7df59e6da80126a52b309edf9c22a9a860f2c165189a9e453c102",
+    "bytes": 3674728
+  },
+  "after_fit.jsonl": {
+    "sha256": "21787a79c2ecf5e1a60b47e5b9590bb18423d263ae88dc927e2b256b8eb5bb5d",
+    "bytes": 211275
+  },
+  "after_nll.jsonl": {
+    "sha256": "6b410e71736ad729654b1c3cde1515c10a70ef6f3481b492defa5728a8ef7c88",
+    "bytes": 824
+  },
+  "attempt.json": {
+    "sha256": "8dfc6bfde4ac34ae8550e4cb8ae57f53bf2d36a1d5a9efaf423c140ba1b0e2c7",
+    "bytes": 184
+  },
+  "before_nll.jsonl": {
+    "sha256": "626b216edc017403da4aff7cfd6d569beed3edb56a767f51f602c9356a081e64",
+    "bytes": 821
+  },
+  "cpu_connection_results.json": {
+    "sha256": "e7aa365785cfc2b8313a5aec0383c6cf017e4e8bb64a239a07ca34455a70df6a",
+    "bytes": 2700
+  },
+  "dataset_manifest.json": {
+    "sha256": "e183984bc4716ee0f7b3a0ca5af543fbd9e8ea957bced07dcdcdced1b36fefb3",
+    "bytes": 1647
+  },
+  "legacy_run_pilot.py": {
+    "sha256": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d",
+    "bytes": 28950
+  },
+  "plan.json": {
+    "sha256": "8b7ca1b56a6a9ffc062c62269086fed8e5c2c80bd75d3b3f80049cfd81f75471",
+    "bytes": 4217
+  },
+  "quote18_weights_step18.tar.gz": {
+    "sha256": "41bea5a3c7992f5953176b8d4a309e3a47f0270a2505b32a9b8df58c5f5c627c",
+    "bytes": 3472720
+  },
+  "run.json": {
+    "sha256": "b0692ff8717bcd5e3a063f0992143bee8797b27e9a106b5efc98528fc1c6180b",
+    "bytes": 23055
+  },
+  "runner_source.py": {
+    "sha256": "f1bf15a925193f81143bbebabf95fed8eb09df0cd5450624c747848bde2c3a72",
+    "bytes": 19167
+  },
+  "sft_examples.jsonl": {
+    "sha256": "fd73ddfeb5ed08a4451ed520ab01af54076c3b5e824e4bfeff326cf5cd69b0b5",
+    "bytes": 307770
+  },
+  "train_messages.jsonl": {
+    "sha256": "1da50c6655d132954e89511796a27f71b0cca4fc827125f54c11dd1c5088022f",
+    "bytes": 157443
+  },
+  "training.jsonl": {
+    "sha256": "9ae1a26ab0eed159a39985641a760793ac81dc1c81fc59b9c07f80b9c448ebc2",
+    "bytes": 2339
+  }
+}

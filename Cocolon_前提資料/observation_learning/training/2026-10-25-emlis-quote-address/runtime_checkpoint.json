@@ -1,13 +1,13 @@
 {
-  "status": "TRAINING18_SAVED_RELOADED_FIT9_IN_PROGRESS",
+  "status": "CLOSED_FIT9_MEANING9_BODY6_HOLDOUT0_NO_RETRY",
   "training_source_commit": "1a34c9688228628adfaab8021db572dc2b0aceb0",
   "api_commit": "4002b4577838d1ed6671278a19585b61e7ccd10e",
   "process_pid": 607814,
   "tokenizer_process_pid": 607722,
   "optimizer_steps_completed": 18,
-  "fit_generations_last_observed": 3,
+  "fit_generations_last_observed": 9,
   "fit_budget": 9,
-  "fit_adoption_not_checked": true,
+  "fit_adoption_not_checked": false,
   "holdout_model_calls": 0,
   "holdout_eval_plan_created": false,
   "source_directory": "/workspace/cocolon_4b_quote_address_pack_20261025",
@@ -26,7 +26,18 @@
   "raw_repair": false,
   "gpu_stop_restart_delete_operations": 0,
   "work_environment_connection_interruption": "Disconnected once; reconnected to same Jupyter and observed same process progress, no restart/reexecution.",
-  "next": "Read existing process run/raw/log. Do not restart trainer. After exactly9 completed, consume all raw once with pinned API/new consumer. Only9/9 meaning and body allows fresh eval_plan and at most2saved rereads. On failure preserve results and end.",
+  "next": "Finite trial closed. Do not restart training or call holdout: all9 meaning+body success condition failed. Preserve raw/weights/oldplans; reception-only mismatch remains. No new observation meeting needed for this finite fit.",
   "product_accepted": false,
-  "automatic_progression": false
+  "automatic_progression": false,
+  "meaning_count": 9,
+  "body_count": 6,
+  "fit_process_seconds": 1081.4924731357023,
+  "raw_consumer_file": "../../trials/2026-10-25-quote-address-fit18/consumer.index.json",
+  "closure_file": "../../trials/2026-10-25-quote-address-fit18/closure.json",
+  "gpu_after_completion": {
+    "name": "NVIDIA RTX A4500",
+    "memory_total_mib": 20470,
+    "memory_used_mib": 1,
+    "rental_kept_running": true
+  }
 }

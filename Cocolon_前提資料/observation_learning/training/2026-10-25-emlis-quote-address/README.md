@@ -1,39 +1,35 @@
-# 4Bの引用選択と、CMEEの位置計算を分ける候補
+# 4Bの引用選択とCMEEの位置計算 — 一回18更新の実結果
 
-状態：**Mash承認済み・接続実装/CPU確認済み・18更新/保存reload完了・FIT9進行中・重みPod外保全済み**。2026-10-25 JST。
+状態：**接続実装済み・18更新/FIT9完了。意味9/9・本文6/9、条件付き2件保存再読はcall0で終了。** 2026-10-25 JST。
 
-[承認対象の全仕様・変更path・CPU条件・18更新/成功時2call](../../../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-quote-address-offline-proposal)を正本とする。
+Mashは「接続実装・18更新・全9件成功時の2件保存再読」全体へ「進めていいよ」と明示承認。[全実結果](../../trials/2026-10-25-quote-address-fit18/README.md)を現在の終了原本とする。新GPU試行や第三の自動retryを、この終了planから始めない。
 
-前回focus12は意味7/9・本文6/9。今回は原raw9件の引用78か所を原文欄と照合し、すべて一意であることを確認した。残る位置不良は3整数、受け取り差は3件。元rawの不良は残したまま、4Bが選んだ完全引用の位置を機械で求める新形式の候補へ進める理由を具体化した。受け取り不足は引き続き学習対象で、readerの拒否は妥当。
+[承認仕様](../../../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-quote-address-offline-proposal)に従い、API[4002b457](https://github.com/MassyuRed/mashos-api/commit/4002b4577838d1ed6671278a19585b61e7ccd10e)の既存preparation/model_candidate_sourceと新testへ明示private quote形式を実装。旧数値形式を既定に保持し、4Bが選んだsource/field/完全引用からCMEEが一意のscalar位置だけを計算する。原rawは新形式のまま保持、candidate_jsonだけnativeへcompileし、意味採用時もrawから同一receiptを再導出する。空/欠落/複数一致/overlap/foreign source/余剰field/形式混在を拒否する。既存意味採用・独立本文reader・公開API/DTO/DB/RN不変。
 
-| file | 内容・現在の意味 |
+限定CPUは重複除外197成功。初回195成功、SQL中断2variant追加時32成功/2失敗は初回意味保存と回答更新DTOのbooleanを混同したtest期待で、保存意味IDの存在/不変を確認する期待へ修正し、該当3SQLを再検査して成功した。反復を件数へ加算しない。合成教師9/9とconsumer smoke9/9は実モデル成功件数へ数えない。詳細cpu_validation.json。
+
+固定source1a34c968/API4002b457で実tokenizer9行を確認（maxprompt5045/assistantEOS2339、context8192内、切捨て0）。開始未採用affea8a7、新AdamW/LR5e-5、chair6各1＋daily3各4、assistant全文JSON＋EOSの18更新をPID607814で一回実行。保存/32F32有限/非学習reload/FIT9を1081.492473秒で完了した。途中Work接続断は同じJupyterへ復旧、trainer/モデルの再起動0。
+
+| 実FIT | 意味採用 | 本文 | その他 |
+|---|---:|---:|---|
+| chair6 | 6/6 | 6/6 | 初回ASK3、訂正各3更新/問いなしを維持 |
+| daily3 | 3/3 | 0/3 | 全3 model_surface_not_validated |
+| 合計 | 9/9 | 6/9 | 全9の意味＋本文成功条件に未到達 |
+
+daily3のparsed packetは教師とreceptionだけが異なる。01は「あったかいものを食べて、少し落ち着いたのですね。」、02/03は「…少し落ち着けたのですね。」。教師の短い反応「…少し落ち着けてよかったです。」へ届かない。引用・native意味採用は今回全3成功したが、原文の言い直しでは本文を採用しない境界を維持する。全9成功条件に未達のためrun_quote_address_holdout.py/eval_fixture.jsonは未使用、eval_plan未作成、後段新model call/実serviceSQL0。追加更新・同要求再call・LR探索・raw補修・reader緩和0でこの有限試行を閉じる。
+
+新adapter138b9ff7e5b7df59e6da80126a52b309edf9c22a9a860f2c165189a9e453c102を含む保存直後archive41bea5a3…/3,472,720bytes/16member（15検査対象）をPod外照合し、[重みを保管](https://chatgpt.com/library?file_id=libfile_ae60b41c293c81919a5d52aeba59f86c&account_id=personal)。archive内runはFIT前gen0。完了証拠archive b053dbcf…/6,963,640bytes/19member（18検査対象）もPod外size/hash照合済み。重み・32tensor・原raw/consumer/学習/NLL/元runnerを失わず保持する。base全重み/optimizer/RNGは含まず、採用重みへ昇格していない。
+
+| file | 所有する事実 |
 |---|---|
-| train_messages.proposed.jsonl | 原chair6は行bytes不変。日常3だけ新top/schemaとquote表へ可逆投影。本文・意味・根拠順は元教師不変。まだ学習未使用 |
-| cpu_feasibility.json | 教師/原rawのhash、9件78引用の一意性、元teacherへの復元9/9、候補3/3可逆性、overlap例。製品テスト・モデル生成・新receipt採用ではない |
-| plan.proposed.json | 新形式/旧互換・CPU後の新18更新/FIT9/全件成功時2保存再読の上限。implementation_authorized=false、gpu_run_authorized=false |
+| sft_examples.jsonl / train_messages.jsonl | 実行した固定9教師。chair6は旧行bytes不変、daily3はcandidate/本文/根拠順不変のquote投影 |
+| dataset_manifest.json / plan.json | source/data hashと承認済み一回18更新/FIT9の凍結条件。planは履歴として保持、再実行しない |
+| run_quote_address_fit.py / consume_quote_fit_raw.py | 実行した全文loss/reload/FITと、無補修rawのnative採否 |
+| cpu_connection_results.json / cpu_validation.json / cpu_tokenization_results.json | 合成接続、CPU197、実9行tokenizer。実モデルFITと区別 |
+| weights_verification.json / runtime_checkpoint.json | 早期重み保全と最終終了/後段未実施への再開導線 |
+| run_quote_address_holdout.py / eval_fixture.json | 条件未成立で未使用の別identity2初回用。eval_planなし |
+| train_messages.proposed.jsonl / plan.proposed.json / cpu_feasibility.json | 実装承認前の案/一意性78根拠/可逆性の履歴。実行しない |
 
-旧9行、旧18/12plan、旧重み、原raw、readerは不変。新source/API/runnerは未実装。候補のsource解釈は既存実装の範囲で、引用一致から意味の正しさを推論しない。別ID2件も学習外identity/語彙の有限確認で、独立した一般品質評価へ数えない。
+実環境Codex Work/GPT-6、root華恋が単一実行/統合/反映owner。別文脈agent2枠は実source/全結果のread-only意見で、独立Pro/Ultra/human受入れではない。前回意味7/9→今回9/9、本文6/9のまま。primary=BLOCKER_NARROWED、限定TECHNICAL_CREDITはprivate接続/原raw再導出のCPU検証までで、一般品質/商品合格へ換算しない。STRUCTURE_MAP_DELTA_PRESENTは承認後private wire実装、今回終了記録の追加差分はNONE。
 
-実行環境Codex Work/GPT-6。root華恋がsingle owner、別文脈agent2枠は読み取り意見のみ。今回の現在指示を診断/案/候補保存の根拠とし、新しいモデル出力契約やGPU実行の承認へ広げない。新観測会は今回不要。GPU停止/再起動/削除/新Pod/charge/新model call/追加学習0。今回live GPU状態を再照会しておらず、直前の稼働確認はfocus12の終了記録。
-
-Supabase list_projectsで対象cocolon-projectのACTIVE_HEALTHY表示を確認したが、本人データ/SQL読書き0。Renderはworkspace一覧だけでservice/deploy/healthの今回確認0。これらをモデル接続成功や本番品質の根拠にしない。保存先は引き続き隔離SQLの限定試験であり、本番DB変更案ではない。
-
-今回primary=BLOCKER_NARROWED。78引用の一意性と、位置計算を既存ownerへ移す具体的な責務/互換条件が増えた。新しい品質合格・TECHNICAL_CREDITは0、商品0/正式0/3/54.50％は維持。STRUCTURE_MAP_DELTA_NONE（未承認案だけ）。
-
-## 承認後の接続実装・CPU checkpoint
-
-Mashは「接続実装・18更新・全9件成功時の2件保存再読」へ「進めていいよ」と明示承認。[API4002b457](https://github.com/MassyuRed/mashos-api/commit/4002b4577838d1ed6671278a19585b61e7ccd10e)の既存2source＋新test1へ実装し、3blob全文を読み戻し照合した。旧形式を既定に保ち、新形式だけ完全引用をnative座標へcompile、原raw保存/receipt再導出/曖昧拒否/形式fallback禁止を確認。独立本文reader/意味採用/公開API/DB/RN不変。
-
-限定CPUは重複除外197ケースの成功を確認（既存4file＋新quote1file）。初回195成功、SQL中断2variant追加後は32成功/2失敗。失敗は初回meaning保存と回答更新DTOのmeaning_updatedを混同したtest期待であり、保存意味IDの存在/不変を直接確認する期待へ直した。該当3SQL再検査は成功。反復を件数へ加算せず、実検査の履歴はcpu_validation.jsonに保持。合成9教師も無補修raw→native→意味→実本文9/9、旧chair6行bytes不変。これは実モデルFIT成功ではない。
-
-実行用sft_examples.jsonl/train_messages.jsonl/dataset_manifest.json、許可済みplan.json、run_quote_address_fit.py/consume_quote_fit_raw.pyを固定した。新daily promptの旧relations文言『with exact full-field coordinates』だけは新形式と矛盾するため数値不要へ明確化し、実build_model_messagesのcanonical JSONと一致させた。本文/意味/原source/根拠順/旧chairは不変。proposed3fileは当時の案として残し、実行には新plan.jsonだけを使う。
-
-既存GPUのJupyterへ接続でき、A4500/20470MiB/使用1MiBを実確認。管理consoleはrate limit表示だが、既存workloadのJupyterは使用可能。STOP/再起動/削除/新Pod/charge/install0。次は同じ承認範囲の実tokenizer確認後に一回だけ18更新/FIT9。全9成功時だけ別ID2保存再読へ進み、失敗時は回収して終了する。今回STRUCTURE_MAP_DELTA_PRESENT（privateモデルwireと位置compile責務）、限定TECHNICAL_CREDITはCPU接続/再導出の範囲だけ。商品0/正式0/3/54.50％を維持。
-
-## 実GPU進行checkpoint
-
-固定source1a34c968/API4002b457で実tokenizer9行を一回確認（maxprompt5045/assistantEOS2339、全context8192内、切捨て0）。同一sourceの18更新をPID607814で一回起動し、保存/非学習reloadまで完了、FIT生成は最終観測3/9。意味/本文の新採否はまだ未確認。途中のWork接続断は同じJupyterへ復旧し、training/modelの再実行なし。
-
-新adapter138b9ff7…を含む保存直後archive41bea5a3…/3,472,720bytes/16member（manifest15対象）をPod外照合、32F32有限を確認し[追加重みを保管](https://chatgpt.com/library?file_id=libfile_ae60b41c293c81919a5d52aeba59f86c&account_id=personal)。archive内runはFIT前gen0で、進行中runと時点が異なる。base全重み/optimizer/RNGは含まない。詳細weights_verification.json/runtime_checkpoint.json。旧重み/旧planは保持、新candidateを採用重みへ昇格していない。
-
-run_quote_address_holdout.py/eval_fixture.jsonを承認範囲の新形式へ固定したがeval_plan未作成/起動0。全9実FITが意味/本文へ成功した時だけ後段へ進む。学習を起動し直さず既存run/raw/logを確認し、現在の再開先はruntime_checkpoint.json。GPU停止/再起動/削除/charge0。商品0/正式0/3/54.50％据置。
+今回の有限教師適合に新観測会は不要。9行は独立9話ではなくchair＋dailyの2話であり、一般化/Piece/Analysisの教材不足は残る。受け取りが未達の原因を更新数不足・教師不足・4B能力限界と断定しない。GPU稼働保持、STOP/再起動/削除/新Pod/charge0。本番/Supabase/Render/RN/merge/deploy変更0、商品0・正式0/3・54.50％据置。
