@@ -2529,3 +2529,16 @@ daily02だけ帰宅claim.text/predicate.surface/引用の3箇所が「帰って�
 起動前browser parse1/Python改行SyntaxError1はfile/child/model効果前で修正、実学習一回。早期SHA手入力誤記は原本と全manifestで解消、再download0。既存Node v24.22.1/PGlite0.5.8/private Pythonと固定API cleanをJupyterでread-only確認し追加依存0、条件未達なので新SQL起動0。新観測会はこの残差へ不要、引用・述語単位と既存CMEE根拠範囲の整合が残る。新有料試行/意味admission・reader変更は未承認。独立2話/一般化/Piece・Analysis完成教師0は継続。
 
 全体00/観測入口/pack/runtime/01Aを終了状態へ同期。BLOCKER_NARROWED、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。GPUは保持、Jupyter直接のみ。管理console/GPU一覧/管理API/Stop/再起動/削除/新Pod/charge/Render/Supabase/本人DB/通常application/公開API/DTO/RN/merge/deploy0。処理完了はGPU保持料金の停止を意味しない。
+
+<a id="20261026-quote-joint-fit12-cpu-proposal"></a>
+## 49. 10/26 — 局所mask追加を打ち切り、意味保持＋文章完成を同時に学ぶ一候補をJupyterでCPU具体化
+
+Mashの続行指示で全体現在地／設計／全file地図／最新§48／観測目的／実raw・admissionを確認。surface12の残差は入力内引用の位置誤りではなく、帰宅event[0,3)と接続を含む[0,5)の意味範囲不一致だった。quote18の意味9/本文6とsurface12の全9raw本文完成・意味8/本文8を踏まえ、片側だけを重点化した学習の同時保持不足へ直接対応する。R10の比例性から個別mask追加を続けず、既存手段の一回CPU preflight→実生成／保存へ縮小。CMEEの意味契約変更やraw補修では通さない。
+
+新候補はdaily各visitの目的を0.5×全文JSON/EOS平均CE＋0.5×完成surface25平均CEへ固定。全文側にもsurfaceを含むためtoken半々ではない。chair6全文、旧138b、原9教師/prompt、12順/LR、CMEE/reader/API4002bは不変。既存損失2回のbackwardを合算してclip/optimizerはvisit毎に一回、optimizer12更新・学習forward/backward18組。両graphを同時保持せず、通常のモデルや依存を追加しない。
+
+Jupyter新packでCUDA_VISIBLE_DEVICES空／offline実tokenizer9行、最大5045/2339/7378／切捨て0／全9全文EOS／daily3各25tokenを確認。既存Torchの小さな合成CPU計算で、2回backwardの合算勾配と一つの加重目的が最大差0.0、AdamW1stepとchair不変も一致。未承認GPU・更新数/係数/初期重み変更拒否・旧結果を後段へ流用しない条件を含む14検査成功。**4B読込/forward/更新/生成/SQL0**で、合成CPU1stepを実学習へ数えない。CPU原本と配置source4fileを回収照合。Download待機timeoutは実file到着で解消、再download0。ローカル受渡しcommandのheredoc構文失敗はPod/file/child効果前で修正、Jupyter CPUは一回。
+
+[新具体案と全source／CPU原本](../observation_learning/training/2026-10-25-emlis-quote-address/README.md#quote-joint-fit12-proposal)。開始Cocolon013de4b6/API4002b457、runnerSHA c5dd1679c605e020e4dad56951c79d7c0661a1279a34a0ae0d47666d639d7128。最大45分／処理按分$0.195（記録$0.26/h、準備/回収/保持/保存/税等別）で、新12→保存reload→固定9→全9成功時だけ2実service/隔離SQL保存・中断再開・非生成再読。追加計算を含めた1800秒以内の完走は未実証、期限で終了して延長/再試行しない。新有料一回はRule18§11.3 LEVEL3／false／未承認、旧承認は再利用しない。承認後の条件付き後段まで小分け再承認は不要。新一回も未達なら、局所mask候補の連続追加を再開せず直接経路を見直す。
+
+root華恋/Codex Work/GPT-6が単一writer／実行owner、別文脈agentは読取補助で正式Pro/Ultra/human受入れではない。System Context索引未完了は保持しfresh原本を直接使用。新観測会はこの残差へ不要、独立2話／一般化／Piece・Analysis完成教師0は継続。新GPU試行/新重み/SQL/依存追加/Render/Supabase/本人DB/通常application/公開API/DTO/RN/merge/deploy/GPU管理・lifecycle0。11fileだけ差分反映、STRUCTURE_MAP_DELTA_NONE、限定TECHNICAL_CREDITはCPU候補の実行可能性だけ、商品0/正式0/3/54.50％据置。

@@ -4904,3 +4904,6 @@ observation_learning/trials/2026-10-25-quote-reception-fit6/ のREADME/closure�
 
 
 10/26 JST surface12完了file：trial/2026-10-26-quote-surface-fit12/README/closure/run/after_fit/training/NLLは実12更新/9生成/意味本文8/9・全9本文候補教師一致・daily02引用[0,5)と既存role[0,3)の不一致・後段0/新e1db未採用を所有する。file_manifest/recovery_verification/weights_verificationは完了21/早期18対象・32F32有限・同一保管identity version1を保持。consumer.index＋27partsは既存consumer一回の全1,605,267bytesを順連結で復元。pack runtimeはCLOSED_ALL9_GATE_NOT_MET_DO_NOT_RELAUNCH。旧138b/teacher/helper/API/reader不変、製品責務/型/保存/公開契約差分なし、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。
+
+
+10/26 JST joint12 CPU候補file：既存quote-address packのrun_quote_joint_fit.pyはdaily全文JSON/EOS平均CE＋完成surface25平均CEを各0.5で同時学習し、chair全文／原9教師／既存CMEEを保持する新一回案。joint_fit12.plan.jsonはPROPOSED/false、tokenization.jsonはJupyter実9行／全9全文EOS／daily25、check_quote_joint_cpu.pyとcpu_validation.jsonは有限14条件・合成CPU勾配一致を所有する。run_quote_joint_holdout.pyは新joint12全9成功時だけ既存2実service／隔離SQL／中断再開／非生成再読を許し、旧surface12結果を受け付けない。新evalplan未作成、4B読込/更新/生成/SQL0。最大45分/$0.195処理按分（保持等別）の新有料一回は未承認。詳細は最新weekly§49／pack具体案。旧surface12閉鎖／新e1db未採用を保持。製品責務/型/保存/公開契約不変、STRUCTURE_MAP_DELTA_NONE、商品0。

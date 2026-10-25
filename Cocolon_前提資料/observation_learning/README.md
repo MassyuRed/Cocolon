@@ -2,7 +2,7 @@
 
 **GPUの最新確認：** 今回の承認済み一回をJupyter直接で実行・回収。12更新/保存reload/9生成完了、後段model/SQL0。GPUは維持、管理console/GPU一覧/Runpod管理API/Stop/再起動/削除/新Pod/charge0。§43の旧停止指示/HTTP429未確認は履歴として保持。処理完了は継続保持料金の停止を意味しない。
 
-**現在の直接作業（surface12完了・意味8/9／本文8/9、後段0で終了）：** source c86ef0ca/API4002b457・旧138bから12更新/保存非学習reload/FIT9を1014.356336秒で完了。全9JSON/EOS正常、全9本文候補surface_proposalは教師一致で未完文はraw上解消。chair6/ASK3/訂正各3更新は保持。daily02だけ引用/述語が「帰って」[0,3)→「帰ってから」[0,5)へ広がり、既存CMEE根拠範囲に不一致で意味不採用。全9未達で2実service保存再読はmodel/SQL0・evalplan未作成、新e1db3df3は保存・未採用。[全実結果](trials/2026-10-26-quote-surface-fit12/README.md)、最新weekly§48最終結果。原raw/consumer/重みを回収照合・保全済み。処理按分約$0.07326（保持等別）。新観測会はこの残差へ不要。閉鎖plan再起動/追加更新/raw補修/reader緩和0。商品0/正式0/3/54.50％。
+**現在の直接作業（joint12のCPU準備完了・新GPU未承認）：** 前回surface12は意味8/9・本文8/9／全9raw本文候補は教師一致、daily02だけ「帰ってから」の引用・述語範囲不一致で終了、後段0／新e1db未採用のまま。局所mask追加の反復を打ち切り、原9教師と既存CMEEを保持してdaily全文JSON＋EOSの平均lossと完成surface25の平均lossを各0.5で同時に学ぶ一候補を具体化。Jupyter直接・GPU無効化の実tokenizer9行／有限CPU14条件が成功、4B読込・更新・生成・SQL0。旧138bからoptimizer12更新→保存reload→固定9→全9成功時だけ2実service保存再読、最大45分／処理按分$0.195（保持等別）の新一回は未承認。[具体案](training/2026-10-25-emlis-quote-address/README.md#quote-joint-fit12-proposal)、最新weekly§49。閉鎖planを再起動しない。新観測会は今回不要、一般化と他core教材不足は継続。商品0／正式0/3／54.50％。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 

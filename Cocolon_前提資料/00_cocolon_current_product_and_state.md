@@ -1,6 +1,6 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-26 JST（最新差分：surface12終了、意味8/9・本文8/9、未完文はraw上解消・引用範囲不一致で後段0）。全Cocolon作業の必読原本。
+更新日：2026-10-26 JST（最新差分：意味保持＋文章完成のjoint12案をJupyterでCPU検証、新GPU未承認）。全Cocolon作業の必読原本。
 
 > **最新報告会：[第8回・2026-10-24](weekly_reviews/Cocolon_Weekly_Review_20261024.md)。** 今週実績・前週目標の達否と10/24〜10/31の管理案を記録。**Mashの指示により報告会終了。** 華恋の意見全文は[§10](weekly_reviews/Cocolon_Weekly_Review_20261024.md#karen-closing-opinion)、終了時の区分と再開先は[§11](weekly_reviews/Cocolon_Weekly_Review_20261024.md#meeting-closed-and-next-session)。10/24の4B確定・GPU16GB優先/24GB許容は当時の決定で、4B確定は10/25に撤回済み。最新の開発基準選定は[§23](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-three-core-model-and-serving-decision)。華恋が今回の判断責任として選んだもので、旧4B確定・常時24GB契約の自動復活ではない。起動済み3070の実確認は[§22](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-3070-running-cuda-uvm-io-error)。A5000未確保は§20の履歴。Vast実見積りは§19の履歴。次週の推奨順位は[§4](weekly_reviews/Cocolon_Weekly_Review_20261024.md#next-week-priorities)、対象path・具体手順・失敗/回復検査・終了条件は[§8](weekly_reviews/Cocolon_Weekly_Review_20261024.md#detailed-work-breakdown)を参照。全体管理評価・公開見通しは[§9](weekly_reviews/Cocolon_Weekly_Review_20261024.md#overall-status-and-release-outlook)：54.50％、正式商品受入れ0/3、12/18達成の裏付け不足。会議途中の「進行中」は当時の記録。次週案全体への明示採否・個別実行の未決は§11に区別して保持する。モデル選定の決定と、以下の品質・配置・端末・費用の未完了を区別する。
 
@@ -8,7 +8,7 @@
 
 **GPUの最新確認：** 今回の承認済み一回をJupyter直接で実行・回収。12更新/保存reload/9生成完了、後段model/SQL0。GPUは維持、管理console/GPU一覧/Runpod管理API/Stop/再起動/削除/新Pod/charge0。§43の旧停止指示/HTTP429未確認は履歴として保持。処理完了は継続保持料金の停止を意味しない。
 
-**現在の直接作業（surface12完了・意味8/9／本文8/9、後段0で終了）：** source c86ef0ca/API4002b457・旧138bから12更新/保存非学習reload/FIT9を1014.356336秒で完了。全9JSON/EOS正常、全9本文候補surface_proposalは教師一致で未完文はraw上解消。chair6/ASK3/訂正各3更新は保持。daily02だけ引用/述語が「帰って」[0,3)→「帰ってから」[0,5)へ広がり、既存CMEE根拠範囲に不一致で意味不採用。全9未達で2実service保存再読はmodel/SQL0・evalplan未作成、新e1db3df3は保存・未採用。[全実結果](observation_learning/trials/2026-10-26-quote-surface-fit12/README.md)、最新weekly§48最終結果。原raw/consumer/重みを回収照合・保全済み。処理按分約$0.07326（保持等別）。新観測会はこの残差へ不要。閉鎖plan再起動/追加更新/raw補修/reader緩和0。商品0/正式0/3/54.50％。
+**現在の直接作業（joint12のCPU準備完了・新GPU未承認）：** 前回surface12は意味8/9・本文8/9／全9raw本文候補は教師一致、daily02だけ「帰ってから」の引用・述語範囲不一致で終了、後段0／新e1db未採用のまま。局所mask追加の反復を打ち切り、原9教師と既存CMEEを保持してdaily全文JSON＋EOSの平均lossと完成surface25の平均lossを各0.5で同時に学ぶ一候補を具体化。Jupyter直接・GPU無効化の実tokenizer9行／有限CPU14条件が成功、4B読込・更新・生成・SQL0。旧138bからoptimizer12更新→保存reload→固定9→全9成功時だけ2実service保存再読、最大45分／処理按分$0.195（保持等別）の新一回は未承認。[具体案](observation_learning/training/2026-10-25-emlis-quote-address/README.md#quote-joint-fit12-proposal)、最新weekly§49。閉鎖planを再起動しない。新観測会は今回不要、一般化と他core教材不足は継続。商品0／正式0/3／54.50％。
 
 **4B関連作業の開始前：** 全体現在地を全文読んだ後、[観測学習の目的・用途・前提](observation_learning/README.md#observation-learning-intent-and-assumptions)を毎回読み、最新weeklyの決定/実結果と今回の作業を結び付ける。学習・教材作成・評価・CMEE接続・環境移行で共通。ローカル＝Macと決め付けず、学習の成功と観測品質の成立を分ける。
 
@@ -148,7 +148,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
-| 学習済みAI・現在の作業 | surface12完了、意味8/9・本文8/9/後段0/新e1db未採用。全9本文候補は教師一致、daily02だけ「帰ってから」の引用・述語範囲が固定意味roleと不一致。trial/2026-10-26-quote-surface-fit12とweekly§48最終結果。閉鎖plan再起動禁止、新有料試行・意味admission/reader変更は未承認。 |
+| 学習済みAI・現在の作業 | surface12閉鎖／意味本文8/9／後段0／新e1db未採用。joint12案はdaily全文JSON/EOS＋surface25の各0.5をCPU具体化、Jupyter実9token・14条件成功、4B実行0。最新weekly§49とquote pack具体案。新12→保存reload→固定9→全9成功時のみ2保存再読は最大45分/$0.195処理按分（保持等別）で未承認。reader/意味契約不変、閉鎖plan再起動禁止。 |
 | 10/24までの費用・4B選定履歴（当時の構成） | Flex24GBの旧月78,980生成・未測定の速度/起動仮定による運用費95,094円・赤字67,833円の試算は当時の構成の記録で、最新構成の原価ではない。[全仮定・再計算](observation_learning/model_selection/2026-10-24-production-economics/README.md)。旧4B実診断では24GBでLoRA保存・reload・16生成・回収を確認したが、FITは前後0/2。CPU指示修復API1dabc4fは54対象/pack11・合成2/2で、修正版は後続10/25にA4500 20GBで完走・回収済み、最新結果は§24。旧学習peak allocated14.954GiBを本番推論の必要VRAMへ流用しない。4bit/M4を第一候補とした§23は当時の華恋案で、現在の移行先はWindows／Mac未選定。公開API単価を独自育成版の原価へ流用しない。 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。u353〜355のコードと配置差を保持 |
 | Analysis | 最新内容修正版の配置差、通常本文生成・同一保存再読・monthly履歴/比較の本人確認、複数ANSWER採用、一般理解、有料差、IF／Savedの未実装。6501時点の不足案内表示は本人確認済みとして保持 |

@@ -234,3 +234,46 @@ daily02だけ帰宅claim.text/predicate.surface/引用の3箇所が「帰って�
 起動前browser parse1/Python改行SyntaxError1はfile/child/model効果前で修正、実学習一回。早期SHA手入力誤記は原本と全manifestで解消、再download0。既存Node v24.22.1/PGlite0.5.8/private Pythonと固定API cleanをJupyterでread-only確認し追加依存0、条件未達なので新SQL起動0。新観測会はこの残差へ不要、引用・述語単位と既存CMEE根拠範囲の整合が残る。新有料試行/意味admission・reader変更は未承認。独立2話/一般化/Piece・Analysis完成教師0は継続。
 
 全体00/観測入口/pack/runtime/01Aを終了状態へ同期。BLOCKER_NARROWED、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。GPUは保持、Jupyter直接のみ。管理console/GPU一覧/管理API/Stop/再起動/削除/新Pod/charge/Render/Supabase/本人DB/通常application/公開API/DTO/RN/merge/deploy0。処理完了はGPU保持料金の停止を意味しない。
+
+<a id="quote-joint-fit12-proposal"></a>
+## 10/26 JST — 意味保持と文章完成を同時に学ぶ一回案（CPU完了・新GPU未承認）
+
+### 今回の判断と最小の変更
+
+直近surface12は閉鎖済み、意味8/9・本文8/9、新e1dbは未採用、後段0。全9のraw本文候補は教師一致した一方、daily02の帰宅claim.text／predicate.surface／quoteだけ「帰って」から「帰ってから」へ広がった。入力内の引用位置は正しく、固定admissionがevent「帰って」[0,3)と時間接続「から」を分けるため不採用になった。quote18では意味9/9・本文6/9だった。ここから、意味保持と文章完成を同時に目的へ含める必要があると判断する。学習不足の原因確定や成功保証ではない。
+
+局所maskへ一箇所ずつ足す系列はここで打ち切る。R10の比例性・同方式失敗反復を候補名の変更で回避せず、既存手段で一回のCPU preflightから、直ちに商品出力／実保存へつながる最小案へ縮小する。CMEEへ「帰ってから」を単純追加する案は、claim＝predicate＝exact role quoteという意味契約を変えるため採らない。原rawの補修・reader緩和もしない。次の一回も未達なら、同系列のmask追加や自動の再承認案作成を続けず、得られた本文と意味の同時保持結果から直接経路を見直す。
+
+dailyの目的を **0.5×assistant全文JSON＋EOSの平均CE ＋ 0.5×完成surface連続25tokenの平均CE** とする。全文側には引用・述語・残JSON・終了記号をすべて含み、surfaceは全文側にも含まれる。0.5/0.5は損失平均の係数で、token数の半々ではない。chair6は従来の全文JSON＋EOSのまま。元9教師・prompt・source identity・CMEE契約は変更しない。
+
+### 一回の実行範囲と停止
+
+- 初期は旧quote18の138b9ff7、base Qwen3.5-4B/revision851bf6e8、既存32 LoRA/r8/alpha16/dropout0。未採用e1db/041f/2009は使わない。新AdamW、LR5e-5、weight_decay0、clip1、seed20261024。
+- 順序 `[6,0,7,1,8,2,6,3,7,4,8,5]`、chair各1／daily各2で**optimizer12更新**。dailyは全文・surfaceを各0.5で別々にbackwardして合算し、clip/stepは各visitで1回だけ。計18組の学習forward/backwardとなる。既存損失を再利用し、各graphを解放してから次を計算する。
+- 12更新→adapter保存・早期回収→非学習reload／32有限→固定9を各1生成。新before生成0。無補修rawを既存consumerへ一回渡し、rootが本文・問い・訂正を全件読む。
+- 全9の意味／本文／JSON-EOS、chair初回ASK3・訂正各3更新／問いなし／REFINED、daily問いなし／FINALがすべて成立した場合だけ、既存2fixtureの実service／隔離SQL保存と保存済み非生成再読へ進む。2件目の意味保存後中断→明示response再開も含む。新後段runnerはjoint12の結果だけに束縛し、旧surface12結果を受け付けない。eval planは未作成。
+- 学習＋FIT上限1800秒／処理按分$0.13、成功時後段900秒／$0.065、**合計最大45分／$0.195**。記録単価$0.26/hによる配分で、準備・回収・継続保持・保存・税等は別。追加計算を含めて1800秒以内に完走する保証はない。期限・非有限・source/教師不一致・全9未達で保存して終了、追加更新・LR探索・失敗再callなし。
+- Jupyter直接、GPUのStop／再起動／削除／管理console・管理API・新Pod・chargeは操作しない。通常application、本人DB、Render/Supabase、公開API/DTO/RN、merge/deployは範囲外。GPU保持料金の停止は意味しない。
+
+### Jupyterで成立したCPU証拠
+
+新pack `/workspace/cocolon_4b_quote_joint_pack_20261026` に候補を配置し、`CUDA_VISIBLE_DEVICES=''`／offline cacheで実tokenizer全9を一回確認。最大prompt5045／completion2339／全文7378、切捨て0。全9が全文JSON＋EOSのlossを保持し、daily3の重点区間は観測9＋受け取り11＋接続5の25token。日常の全文教師token数は1585／1559／1598。
+
+既存Torch2.8.0+cu128をCPUだけで使用した小さな合成計算では、2回backwardした合算勾配が、一つの加重目的を一回backwardした勾配と一致（最大差0.0）。clip後のAdamW1step、chair勾配不変、prompt非教師、未承認GPU拒否、重み係数・更新数・初期adapter変更拒否、後段採用条件不変を含む14条件成功。**合成CPUの1stepは4B追加学習ではない。4B読込／forward／更新／生成／SQLは0。** 4B実品質は未検証。
+
+token原本5876bytes／SHA62bcaf28d06f0ceda1d9db95e831715deb52c1de803501db68664a386e2cff87、検査原本2054bytes／SHA2c7f90ac834b4146cd2977f17bae5d4a0b95df1a01959187dd6504a7c5e0542c。Jupyter Download待機はtimeoutしたが、実file到着を確認して再downloadせず回収し、配置4fileのbytes/hashも照合した。ローカルの受渡しcommand作成はheredoc区切り衝突をfile/child/Pod効果前に修正した。Jupyterの新CPU実行は一回、失敗GPUのretryではない。
+
+| file | 所有する内容 |
+|---|---|
+| `run_quote_joint_fit.py` | 全文とsurfaceの加重目的、固定12、保存reload/FIT9、未承認拒否 |
+| `joint_fit12.plan.json` | PROPOSED/false、初期重み・教師hash、係数、時間・費用・停止 |
+| `joint_fit12_tokenization.json` | Jupyter実tokenizerの9行／全9全文EOS／daily25区間 |
+| `check_quote_joint_cpu.py` | 一回の候補用CPU確認。汎用checker／常駐機構ではない |
+| `joint_fit12_cpu_validation.json` | 実14条件と合成CPU勾配の結果 |
+| `run_quote_joint_holdout.py` | joint12全9成功後だけ2実service／隔離SQL／中断再開／非生成再読 |
+
+### 開始記録・承認境界
+
+product_destination=日常入力の意味と自然な本文を同時に採用し同じ内容を保存再読する。current_gate=固定9の意味・本文同時保持から条件付き2実保存へ。exact_work=原9教師の加重目的1候補のCPU具体化。necessity=OBSERVED_BLOCKER_MINIMAL_FIX。execution_owner=root華恋一人。現在のCPU準備・可逆source/資料/GitHub反映はMashの続行指示／既存delegationの範囲、新有料試行全体はRule18 §11.3 LEVEL_3で未承認。source/test/receipt=本packとsurface12完了原本／固定API4002b457、Cocolon開始013de4b6。対象exact pathsは上表6file＋本README／全機能00／観測README／最新weekly／01Aの11file。success=候補sourceと実CPU証拠がGitHubから再取得でき、次の一回が具体化すること。STOP=不整合／許可外変更／有料実行境界。次のMash判断は上記新一回だけで、承認後の保存reload・全9成功後の条件付き2へ小分け再承認を挟まない。
+
+全体設計・全file地図01A/B/C、current00/01/04、全機能00全文、最新weekly§48、恒久incident全文、作業規則／観測意図と実APIを確認。System Contextの既知索引timeoutは保持しfresh原本を直接使用、新index・依存・補助基盤なし。Codex Work/GPT-6、別文脈agentは読取補助で、正式Pro/Ultra/human受入れと称さない。構造責務・型・保存／公開契約差分なし、STRUCTURE_MAP_DELTA_NONE。CPU準備の限定TECHNICAL_CREDIT、商品0／正式0/3／54.50％据置。新観測会はこの残差修復には不要、独立2話・一般化未確認・Piece/Analysis完成教師0は残る。
