@@ -1,6 +1,6 @@
 # 日常3件の引用・関係・受け取り — 次の有限学習候補
 
-状態：**CPU・実tokenizer確認済み／GPU未承認・未実行**。2026-10-25 JST。
+状態：**Mash承認済み／12更新・保存reload完了／FIT9検証中**。2026-10-25 JST。
 
 Mashの「処理落ちしているから、続きから再開して」を受領し、current Cocolon0a83a437/APIbd356566と§38終了記録を照合した。前18更新・FIT9は完了済み、chair6/6・daily0/3、別IDの保存再読call0。終了したplanと未使用のholdout枠を再開しない。
 
@@ -40,3 +40,14 @@ STRUCTURE_MAP_DELTA_NONE。製品owner/意味/保存責務の変更はなく、�
 実report token_mask_preflight.json SHA f7561fe504518429c7e9d7b929b77b8b91725fbf65caf132d2c97e4cf5e5bc97。launch/log/manifestも保存。回収archive1891af33f354442cf487dd7d8c4beee7afa4ac9975df88261387b5edb3955479、17,385bytes、全4memberをPod外hash/size照合。今回stdlibのcharacter候補確認はplan説明整合後の再導出を含め2回、実tokenizerは1回で成功し、追加学習/model/CUDAは各0。BPEfalseのcpu_focus_ranges.jsonは作成時の文字範囲結果であり、後続の実token reportへ改竄しない。
 
 単一root華恋のsource/計数/既存方式照合と、別文脈agentの静的reviewに阻害不備なし。実学習の効果は未確認。GPUは実測終了後A4500/20470MiB/使用1MiB、STOP/再起動/削除0。追加学習や新model生成は未実施。今回primary outcome=ADMINISTRATIVE_ONLY、候補準備を品質/技術完了creditへ転用しない。全体00/観測入口/元daily入口/最新weekly/01Aだけを同期し、製品構造不変のcurrent01/04/共有01/schema05は更新不要と判断した。
+
+
+## 明示承認後の実行checkpoint（FIT生成中・採否未確定）
+
+Mashが提示済みの「追加12更新と、成功時の保存再読」へ「進めていいよ」と明示承認した。planのstatus/gpu_run_authorized/permission_basis/approval_basis/scope_classificationの5fieldだけを変更し、source150cbcbfc95777b1d839c8d2418550573bbaa641へ固定、全文読戻し照合。runner/teacher/learning条件は候補f916と同一。旧pending planのtokenizer結果は当時の原本として維持する。
+
+Mashが候補f916の追加12更新と成功時の保存再読を明示承認。承認だけの5fieldを固定したplan/source150cbcbfで一回起動し、12更新と保存・非学習reloadを完了、FIT9生成/採否は進行中。新adapter affea8a7094832dfbac27343af87a9ad1b302f61616c19ead33d1dcc7bf59cc3、step12保存直後archive全18memberと32F32有限をPod外照合し保持。旧9teacher/prompt/APIbd356566/reader・旧18plan・旧重みは不変。FIT9/9成功後だけ別ID2件の実service保存再読へ進む。現段階で新daily採用成功とはしない。GPU稼働保持/STOP・再起動・削除0、本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。
+
+新process PID604760は一回だけ起動。新生成前のstep12archive9969861eded94c328c4d0ae720634d69fa185080a280c8bc59103a394bdb0dcf、3,517,892bytes、18memberのsize/hashと32F32有限をPod外で照合した。archive内runはADAPTER_SAVED_BEFORE_GENERATION/new_generations0で、FIT9完了記録とは別時点。base全重み/optimizer/RNGは含まない。[保存した追加重み](https://chatgpt.com/library?file_id=libfile_e35a9446a01481919d709e44df5e50bc&account_id=personal)。現在の採用重みへ昇格はしていない。
+
+初回の実tokenizer結果とcandidateの学習条件を維持。12更新後のFIT原出力9行を未変更consumerで評価し、全9成功時だけ承認済み2callを実施する。まだ未確認の成功、一般言語品質、商品受入れは加算しない。元18更新planの再開/追加更新/LR探索/失敗model再call/原raw修復0。
