@@ -1108,3 +1108,34 @@ actual profileは`emlis_model_proposal.v1`、候補`semantic_and_surface_proposa
 4Bpackは旧9教師を変更せず、sourceと実priorに一致するchair2教師だけを用意し、未対応7件を理由付き保持する。旧EFREE6は学習外・既読のstandalone proxyで、このprofileの意味成功へ加算しない。実tokenizer/indexをCPU確認し、最大7856 tokens、context8192/max_new2048、N=2×1epochの診断コード・保存→先退避→非学習reload→after・固定rawのCMEE consumerを整備した。GPU条件が未確定の現状態ではrunを拒否する。実モデルの初回出力から回答入力を動的に作るGPU一往復はまだ行っていない。
 
 全pathは01A、actual private型は05、Emlis本文責務は02、実装結果と再開は06・第8回weeklyの実装節、新pack READMEへ同期。STRUCTURE_MAP_DELTA_PRESENTはprivate offline接続だけ。新GPU／有料推論／重み取得／学習／実DB／Render／通常API／DTO／RN／merge／deploy0。正式Product Read0/3／PRODUCT_NOT_CLEAR／candidate_ready=false／automatic_progression=false、全体54.50％は据置。次はGPUの単価・時間／支出・保存先を固定してから、実4B＋保存adapterを同じ接続へ通す。
+
+
+<a id="cmee-offline-model-service-deadline-proposal"></a>
+## 2026-10-25 — 通常service保存検証へ向けた、offline MODEL_PROFILE限定期限案（未適用）
+
+### 事実と今回の判断点
+
+API7a4dc32の`emlis_thread_service.py`は`ATTEMPT_SECONDS=30`を全profileで使い、STARTED後のsource結果受領にもfinishing_attemptを要求する。Q2正本`ai/docs/EMLIS_Q2_DEVELOPMENT.md`は「各attemptは30秒」。SQLは期限後を40001/emlis_attempt_staleで拒否する。実4Bの初回57.4254569秒・訂正95.9949960秒は両方30秒を超える。今回実SQL失敗を起こしたという記録ではなく、実推論時間とsource条件の不整合である。
+
+上の既承認案はprovider protocol/上限時間をGPU実行案で具体化するとしている。一方、今回はprovider timeoutだけでなく保存attemptの失効時点を変更する。rootはこの差をRule18 §11.3のcurrent runtime/STOP境界変更として扱い、以下の具体範囲の判断を求める。新private時間の内部具体化なのでLEVEL_2でよいという補助review意見も記録するが、別モデルPro/Ultraの審査とはしない。現在の継続指示で実施したEngine cold file再開は完了済みで、この判断待ちへ戻さない。
+
+### 推奨する最小変更
+
+- `ai/services/ai_inference/emlis_thread_service.py`のconstructorへ`offline_model_attempt_seconds=None`を追加。未指定の既定は30秒。明示値はboolを除く整数31..180に閉じ、`MODEL_PROFILE`・明示callable source・`enforce_application_policy=False`だけで受理する。他profile/policy、文字列/float/bool/範囲外は拒否する。今回の指定値は180秒。
+- `_begin`はinstance設定を参照し、保存thread自身も`semantic_profile==MODEL_PROFILE`かつ`execution_mode==OFFLINE_CANDIDATE`の場合だけその値を使う。同じinstanceが通常Q2/Q3/旧snapshotを扱っても30秒。既存active attemptの期限は書換えない。
+- 候補sourceの待機は最大150秒とし、attempt180秒のうち最大30秒を受領/意味/本文保存へ残す。model/tokenizer loadはattempt開始前に完了。timeout/cancelで候補を自動再取得せず、STARTEDだけなら既存のacquisition_incompleteへ閉じる。保存済みreceipt/意味があれば既存の明示retry_responseでのみ再開する。
+- SQL/CAS/owner/tier/source/current revision/期限後commit拒否、公開DTO、意味/本文reader、問い予算、旧profileの再開を変更しない。heartbeat/新queue/常設service/新dependency/env/公開field/migration/通常有効化を加えない。
+
+### 対象pathと検証
+
+API製品source1file（上記service）、既存`ai/tests/test_cmee_emlis_model_proposal.py`へ対象検証を追加。既存`test_cmee_model_candidate_source.py`と`test_emlis_q2_application.py`を必要範囲で実行する。通常30秒維持、不正constructor拒否、別threadへ設定流出なし、期限超過/競合の拒否、STARTED/RECEIVED/意味保存各中断、明示再開と完成GET/start/同keyでモデル/意味event/作者を増やさないことを確認する。SQLは既存isolated実RPCを使い、辞書store成功をSQL成功へ数えない。必要runtimeが成立しなければその部分は未実施で閉じる。
+
+その後、新しい一回の`service_roundtrip_20261025`で架空本人/原入力を隔離SQLへ作り、service自身が組んだUUID/request/source/controlを`ModelCandidateSource`へ渡す。初回の実ASKを得た場合だけ既存訂正原文へ進み、serviceが保存したactual priorで2call目を生成する。初回END/意味不採用なら問いを捏造せず終了。新規model最大2call、追加学習0、raw書換え0、固定base/revision/adapter9b845eced/prompt/8192context/2048newtokenを維持。旧rawは参照/比較用で、ID/prior置換して成功を流用しない。
+
+成功は実service receipt→意味→本文保存、実問い1/訂正3更新/END、同じ本人の再読、意味保存後中断から同じ本文への明示再開。通常application/Auth/HTTP/RN/本人端末/商品受入れの成功にはしない。期限/OOM/不一致/不採用/例外で追加call/retry/再学習せず実状態を回収する。
+
+### 時間・費用・GPU
+
+既存A4500/同Podのみ、モデルcall各150秒以内、load/隔離SQL/回収を含むprocess最大900秒。前回表示$0.26/hで15分按分$0.065（準備回収/既存継続保持/税を含む請求hard capではない）。新Pod/charge/外部API/STOP/再起動/削除なし。終了/失敗後もMashの指示までGPUを保持する。今回の接続問題に新しい観測会は不要。
+
+**現状態：PROPOSED_NOT_APPLIED。** 製品service/SQL/通常動作は未変更。今回のEngine保存再開結果はtrial/service_persistence_20261025とweekly§34。

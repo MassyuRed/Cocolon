@@ -1876,8 +1876,15 @@ snapshot schemaは`cocolon.cmee.emlis_semantic_snapshot.v2`、checkpointは`coco
 固定prompt/保存重みで分岐token1116を実測。誤枝「ようになった」p50.24％/1位、教師「ようになって」p23.73％/2位、gap0.75。既存2教師のreceptionだけを4update/AdamW1e-5で学ぶ一回候補を完走したが、前後raw2/2が同一で実CMEE意味2/2・本文1/2のまま。新e3743d…は不採用、旧a8baf0…を維持。全24member/32F32tensorの重みarchive回収照合/保管済み。次は保存済み不採用e3743d…の同じ分岐prefixを非学習1forwardだけ測り、旧a8baf0のgap0.75と比較して、4更新で局所順位がどう変わったかを確認する。追加学習・新prompt・教師増量・reader緩和・raw補修・新生成を自動で行わない。初回実問い/本文と訂正3更新の意味は保持するが、一般入力/通常接続/動的一往復/本人保存再読/有料差/商品受入れは未成立。現在の原本はweekly§32/全機能00、source/実raw所在は01A。採用条件・reader/意味schema/API/DB/RN/商品source変更0、STRUCTURE_MAP_DELTA_NONE。GPU保持、商品0/正式0/3/54.50％。
 
 
-## 2026-10-25 — 既知FIT本文2/2と実モデルoffline一往復（現在）
+## 2026-10-25 — 既知FIT本文2/2と実モデルoffline一往復（§33時点の履歴）
 
 保存e3743dの同prefix1forwardで誤枝と教師のgapは0.75→0.375へ縮小したが順位は不変。元a8baf0から学習率だけ5e-5へ変えた同2教師/reception loss4updateを完走し、既存実CMEEで意味2/2・本文1/2→2/2。新9b845eced…を既知FIT/offline用候補に選び、旧a8baf0/e3743dは保持した。さらに保存重みを非学習reloadし、実モデル初回→実CMEE問い→本人の既存訂正→実モデル再生成の同一process一往復を新規2callで確認（意味/本文2/2、訂正3更新、問い1・最終None/END、172.492秒）。一往復ではraw置換/teacher送信/重み変更0。既知の架空chair2段階だけのoffline技術確認で、通常service/Auth/SQL/HTTP/RN/本人端末/保存再読、一般入力、三中核の商品品質は未確認。初回は実QUESTION_PENDING/ASK、訂正後はGENERATED/REFINED・3更新・最終END。初回実semantic_snapshotから次入力を組み、native request→model messages→raw→既存consume_rawを順に通した。fixture/adapter3file不変、modelへteacherを送らず、保存raw置換なし。実raw/messages/CMEEの原本はtrial/model_roundtrip_20261025、学習はreception_fit4_lr5_20261025、局所比較はbranch_compare_fit4_20261025、全pathは01A末尾、進行はweekly§33/全機能00。
 
 次は既存private注入境界とserviceの保存・中断再開責務を照合し、実モデル出力を保存再読へ渡す明示offline確認を準備する。新prompt/教師増量/追加学習/reader緩和/自動再試行は今回の結果から開始しない。既存private async注入sourceやservice persistenceの実呼出しはこの確認には含まない。CMEE意味型/採用reader/商品runtime/公開API/DB/RN/三core責務不変、STRUCTURE_MAP_DELTA_NONE。重みarchive全27member/32F32tensorと一往復archive全11memberをPod外照合。重みは永続保管済み。GPUは指示まで稼働保持し、今回観測会不要。商品credit0/正式0/3/54.50％を維持。
+
+
+## 2026-10-25 — Engineのcold file保存再開とservice期限（現在）
+
+既知架空chairの実4B raw2件を変更せず、意味snapshotとnative requestをfile保存し、別Python processで復元して全outcome・本文・問いの一致2/2、訂正3更新・最終ENDを確認した（30.241581秒）。これはEngineのcold file再開であり、通常service/SQL/本人履歴の保存再読は未実施。service現物のattempt期限は30秒で、実rawの生成は初回57.425457秒・訂正95.994996秒。RPCは期限後の受領保存を40001で拒否するため、このまま実serviceへ接続できない。旧rawのsource/prior IDも新serviceのUUIDと異なるため、成功のために書換えない。次は共有設計01の限定案（#cmee-offline-model-service-deadline-proposal）の判断後、明示offline MODEL_PROFILEだけの期限180秒と、service自身のrequest/実問い/actual priorを使う新規モデル最大2callで保存再読を確認する。通常Q2/Q3/APPLICATIONの30秒、SQL期限拒否/CAS/自動再送禁止は維持する。今回API製品code・期限・SQL・prompt・教師・reader・重みの変更0、新モデル呼出し/学習0。GPU停止/再起動/削除0。今回観測会不要、一般入力・三中核の商品品質は未成立。商品credit0/正式0/3/54.50％を維持。
+
+原本はtrial/service_persistence_20261025、one-shot sourceはpack/persistence_check/check_saved_roundtrip.py。通常service/SQLとEngine file保存を区別する。商品runtime/公開API/DB/RN/三core責務不変、STRUCTURE_MAP_DELTA_NONE。共有設計01の限定案は未適用で、最新weekly§34/全機能00を進行ownerとする。

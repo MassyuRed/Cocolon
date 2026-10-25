@@ -2142,3 +2142,29 @@ Mashの新しい継続指示に基づくOBSERVED_BLOCKER_MINIMAL_FIX。fresh PR3
 次は既存private注入境界とserviceの保存・中断再開責務を照合し、実モデル出力を保存再読へ渡す明示offline確認を準備する。新prompt/教師増量/追加学習/reader緩和/自動再試行は今回の結果から開始しない。一般入力の独立評価と自然な観測品質、小さなprompt変更への安定性、Piece/Analysis完成教師0、通常保存再読/有料差/量子化/本番可用性は残る。今回の既知fixture問題に観測会は不要。旧18候補/9教師/evalは不変で、新しい教示が必要かは一般評価の不足を分けて判断する。
 
 全機能00・観測入口/pack・01A・current01/04を同期。STRUCTURE_MAP_DELTA_NONE（有限学習/確認sourceと結果の所在のみ、商品runtime/型/意味schema/reader/公開API/DB/RN/他core責務不変）。限定TECHNICAL_CREDIT、product_credit=0/正式0/3/全体54.50％据置。GPU停止/再起動/削除/新Pod/charge/新依存/Render/Supabase/merge/deploy0、指示まで既存A4500を稼働保持する。
+
+
+<a id="20261025-engine-cold-resume-and-service-deadline"></a>
+## 34. 10/25 — Engineのfile保存・別process再開2/2、通常serviceの30秒期限を特定
+
+Mashの「4B学習＋CMEE接続を進めて」を受け、§33の次作業へ接続。[全実結果](../observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/service_persistence_20261025/README.md)。Cocolon開始head db0ce12408e9c6c066fb650cabb941b1ba83099f / API 7a4dc32c07f8c8a30609e8345207c6a9c831de23、全機能00/ルール/恒久incident/全体設計・全file地図/current maps/観測学習目的・用途を確認した。Codex Work/GPT-6、root華恋が単一実行/統合/反映owner、補助agentはread-only review。System Context最新索引は未完成のままfresh原本fallbackを使う。
+
+### 今回得た実結果
+
+既存実raw2件を無変更で再消費し、初回の実意味snapshot・実問いが訂正scenarioと一致した場合だけactual priorへつないだ。意味snapshot/checkpoint/native requestをJSONへ保存し、別Python processで元sourceを検査、restore→RESUME_ADOPTEDの実Engineから全outcome/本文/問いを再取得した。**初回/訂正2/2一致、訂正3更新・最終END**、30.241580957秒。resume中のFRESH_CANDIDATE/receive_candidate/ModelCandidateSource呼出しは失敗する条件で確認し、原raw/fixture/clean API不変。新モデルcall/追加学習0。既存実2callの結果を再利用したCPU確認で、新しい4B生成へ加算しない。
+
+本文を華恋が再読：初回は修理→再使用/独力の喜び、訂正後は友人の手順/共同修理と捨てずに再使用できる喜びへ更新され、旧独力理由は復活しない。これは保存意味から同じ本文へ戻る限定確認で、自然さ/一般観測能力の合格へ換算しない。
+
+### 通常serviceへ渡す際の具体的問題
+
+現service `_begin`はattempt30秒、`_semantic_candidate`のモデル返却後のreceipt保存にもfinishing_attemptを付ける。実RPC SQLは期限後を40001/emlis_attempt_staleで拒否する。前回の実rawから初回57.42545689176768秒・訂正95.99499596003443秒を確認し、両方が30秒を超えることが判明した。これはsource照合と前回推論実測に基づく不整合で、今回SQLを実行して失敗したという記録ではない。
+
+serviceが作るUUID/request/source/controlは旧fixtureと異なり、意味IDへも含まれる。旧rawのsource_id/prior_snapshot_refを置換して通常service成功へ流用しない。次の実model確認はservice自身の入力とactual priorで新規2callが必要。
+
+実SQL用PGlite本体はチェックした領域に未発見、Python httpxも未導入のため今回service/SQL検証は未実行。Engine cold file再開と通常service/SQL保存・本人履歴を分離する。skip/辞書storeをSQL成功へ変換しない。
+
+### 次の限定判断と残件
+
+[共有設計01の具体案](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#cmee-offline-model-service-deadline-proposal)：明示offline MODEL_PROFILEだけattempt180秒/source待機150秒、通常Q2/Q3/APPLICATION30秒とSQL期限/CAS/再送禁止は維持する。実service生成入力→新model最大2call→意味/本文保存/中断再開/同一再読を同じ有限scopeで確認する。新private時間の内部具体化なのでLEVEL_2とする補助review意見もあるが、rootは保存attemptの失効境界が変わる点をRule18§11.3のruntime/STOP境界変更と解釈し、具体案の限定判断を求める。製品期限変更は未実施。今回完了したCPU再開を承認待ちへ戻さない。
+
+通常service/SQL/Auth/HTTP/RN/本人端末・未知入力/有料差/三中核の商品品質は未完。今回の接続問題には観測会不要、Piece/Analysis完成教師0と独立未知評価不足は別残件。全機能00・観測入口/pack・current01/04・01Aへ同じ差分を同期。STRUCTURE_MAP_DELTA_NONE（新one-shot確認と未適用提案のみ）、限定TECHNICAL_CREDIT、商品credit0/正式0/3/54.50％据置。GPU停止/再起動/削除/新Pod/charge/Render/Supabase/merge/deploy0。

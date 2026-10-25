@@ -4793,3 +4793,13 @@ Fは observation_learning/training/2026-10-24-emlis-4b-training/、trialは obse
 保存e3743dの同prefix1forwardで誤枝と教師のgapは0.75→0.375へ縮小したが順位は不変。元a8baf0から学習率だけ5e-5へ変えた同2教師/reception loss4updateを完走し、既存実CMEEで意味2/2・本文1/2→2/2。新9b845eced…を既知FIT/offline用候補に選び、旧a8baf0/e3743dは保持した。さらに保存重みを非学習reloadし、実モデル初回→実CMEE問い→本人の既存訂正→実モデル再生成の同一process一往復を新規2callで確認（意味/本文2/2、訂正3更新、問い1・最終None/END、172.492秒）。一往復ではraw置換/teacher送信/重み変更0。重みbinaryはarchive libfile_0ce9c648e89c8191acf7aabfa5a56b01に保管し、GitHubにはhash/source/raw/結果を置く。既知の架空chair2段階だけのoffline技術確認で、通常service/Auth/SQL/HTTP/RN/本人端末/保存再読、一般入力、三中核の商品品質は未確認。次は既存private注入境界とserviceの保存・中断再開責務を照合し、実モデル出力を保存再読へ渡す明示offline確認を準備する。新prompt/教師増量/追加学習/reader緩和/自動再試行は今回の結果から開始しない。
 
 STRUCTURE_MAP_DELTA_NONE。全体設計01・01B/01C・Piece/Analysis mapは商品owner/型/接続に差分がなく更新不要。最新weekly§33/全機能00が進行owner、current01/04は限定確認と通常未接続の区別を同期。商品0/正式0/3/54.50％、GPU停止なし。
+
+
+## 2026-10-25 — 実4B既存rawのEngine cold file再開、通常service期限の切り分け
+
+| path | 責務 |
+|---|---|
+| F/persistence_check/check_saved_roundtrip.py | 既存実raw2件→実意味snapshot/native requestのfile保存→別processでRESUME_ADOPTEDの全outcome一致。provider新取得を禁止。120秒/child30秒、一回実行済み |
+| trial/service_persistence_20261025/ | README/provenance、attempt/result、initial/correctionのsaved_input・cold_outcome。Engineのみの2/2同一、訂正3更新・ENDを保持。通常service/SQL未実行 |
+
+F/trial prefixは上表と同じ。現sourceのservice30秒と実model初回57.425/訂正95.995秒が不整合。次は共有設計01のoffline MODEL_PROFILE限定期限案の判断後、service自身のUUID/request/actual priorから新規model2callと保存再読へ進む。旧raw ID置換による成功流用は行わない。API/SQL/DTO/RN/meaning/readerの変更0、STRUCTURE_MAP_DELTA_NONE。最新はweekly§34/全機能00。
