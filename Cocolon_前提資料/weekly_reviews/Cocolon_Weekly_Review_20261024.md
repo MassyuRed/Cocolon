@@ -2542,3 +2542,8 @@ Jupyter新packでCUDA_VISIBLE_DEVICES空／offline実tokenizer9行、最大5045/
 [新具体案と全source／CPU原本](../observation_learning/training/2026-10-25-emlis-quote-address/README.md#quote-joint-fit12-proposal)。開始Cocolon013de4b6/API4002b457、runnerSHA c5dd1679c605e020e4dad56951c79d7c0661a1279a34a0ae0d47666d639d7128。最大45分／処理按分$0.195（記録$0.26/h、準備/回収/保持/保存/税等別）で、新12→保存reload→固定9→全9成功時だけ2実service/隔離SQL保存・中断再開・非生成再読。追加計算を含めた1800秒以内の完走は未実証、期限で終了して延長/再試行しない。新有料一回はRule18§11.3 LEVEL3／false／未承認、旧承認は再利用しない。承認後の条件付き後段まで小分け再承認は不要。新一回も未達なら、局所mask候補の連続追加を再開せず直接経路を見直す。
 
 root華恋/Codex Work/GPT-6が単一writer／実行owner、別文脈agentは読取補助で正式Pro/Ultra/human受入れではない。System Context索引未完了は保持しfresh原本を直接使用。新観測会はこの残差へ不要、独立2話／一般化／Piece・Analysis完成教師0は継続。新GPU試行/新重み/SQL/依存追加/Render/Supabase/本人DB/通常application/公開API/DTO/RN/merge/deploy/GPU管理・lifecycle0。11fileだけ差分反映、STRUCTURE_MAP_DELTA_NONE、限定TECHNICAL_CREDITはCPU候補の実行可能性だけ、商品0/正式0/3/54.50％据置。
+
+
+### §49 10/26 JST — joint12一回＋条件付き2保存再読をMashが明示承認
+
+Mashは8d5ad494の新案「12更新→保存・再読込→9件検査→全件成功時のみ2件保存再読、最大45分・処理按分$0.195（保持等別）」へ「いいよ、進めて。」と明示承認。原proposedを保存しjoint12 planをAUTHORIZED_ONCEへ更新。旧138b/原9教師/prompt/API4002b/既存reader/全文とsurface各0.5/固定順/LR/runnerSHA c5dd1679/予算/停止を保持する。root一人がJupyter直接で一回実行し、全9条件成功時だけ承認済み後段へ進む。各段階の小分け再承認は不要。閉鎖済み旧試行は再利用しない。開始前の4B読込/更新/生成/SQL0、商品0/正式0/3/54.50％。STRUCTURE_MAP_DELTA_NONE。

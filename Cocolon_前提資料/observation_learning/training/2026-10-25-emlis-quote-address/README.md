@@ -277,3 +277,8 @@ token原本5876bytes／SHA62bcaf28d06f0ceda1d9db95e831715deb52c1de803501db68664a
 product_destination=日常入力の意味と自然な本文を同時に採用し同じ内容を保存再読する。current_gate=固定9の意味・本文同時保持から条件付き2実保存へ。exact_work=原9教師の加重目的1候補のCPU具体化。necessity=OBSERVED_BLOCKER_MINIMAL_FIX。execution_owner=root華恋一人。現在のCPU準備・可逆source/資料/GitHub反映はMashの続行指示／既存delegationの範囲、新有料試行全体はRule18 §11.3 LEVEL_3で未承認。source/test/receipt=本packとsurface12完了原本／固定API4002b457、Cocolon開始013de4b6。対象exact pathsは上表6file＋本README／全機能00／観測README／最新weekly／01Aの11file。success=候補sourceと実CPU証拠がGitHubから再取得でき、次の一回が具体化すること。STOP=不整合／許可外変更／有料実行境界。次のMash判断は上記新一回だけで、承認後の保存reload・全9成功後の条件付き2へ小分け再承認を挟まない。
 
 全体設計・全file地図01A/B/C、current00/01/04、全機能00全文、最新weekly§48、恒久incident全文、作業規則／観測意図と実APIを確認。System Contextの既知索引timeoutは保持しfresh原本を直接使用、新index・依存・補助基盤なし。Codex Work/GPT-6、別文脈agentは読取補助で、正式Pro/Ultra/human受入れと称さない。構造責務・型・保存／公開契約差分なし、STRUCTURE_MAP_DELTA_NONE。CPU準備の限定TECHNICAL_CREDIT、商品0／正式0/3／54.50％据置。新観測会はこの残差修復には不要、独立2話・一般化未確認・Piece/Analysis完成教師0は残る。
+
+
+### §49 10/26 JST — joint12一回＋条件付き2保存再読をMashが明示承認
+
+Mashは8d5ad494の新案「12更新→保存・再読込→9件検査→全件成功時のみ2件保存再読、最大45分・処理按分$0.195（保持等別）」へ「いいよ、進めて。」と明示承認。原proposedを保存しjoint12 planをAUTHORIZED_ONCEへ更新。旧138b/原9教師/prompt/API4002b/既存reader/全文とsurface各0.5/固定順/LR/runnerSHA c5dd1679/予算/停止を保持する。root一人がJupyter直接で一回実行し、全9条件成功時だけ承認済み後段へ進む。各段階の小分け再承認は不要。閉鎖済み旧試行は再利用しない。開始前の4B読込/更新/生成/SQL0、商品0/正式0/3/54.50％。STRUCTURE_MAP_DELTA_NONE。
