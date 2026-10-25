@@ -1,0 +1,80 @@
+{
+  "source_commit": "dc209feba46d55325eafb2b57f15c9d99c5cc967",
+  "api_commit": "32dc3b3137ddc0a4401d2d1d045123f7da17683a",
+  "run_id": "20261025-034400-79baf136",
+  "seconds": 574.5550246238708,
+  "before_nll": 0.22136705439225546,
+  "after_nll": 0.05442851967043806,
+  "optimizer_steps": 32,
+  "distinct_targets": 2,
+  "archive_sha256": "59692c68a9fb1291120b987cb482a80365d24f3a6fccde089fc5d7f0e6887ec0",
+  "archive_members": 24,
+  "adapter_sha256": {
+    "README.md": "7716b0151793769140a76026939437398273346aefc3e5f75bb8ab2833b42885",
+    "adapter_config.json": "b646868f584895fd713a423efc3dea53466119fa7841bea72ac3db1480cc7a47",
+    "adapter_model.safetensors": "ce644a5ba57dfcb9c8df047000cf45ba9ab32c1d09321d8a8da0f5a73fd6b0f4"
+  },
+  "old_adapter_unchanged": true,
+  "stages": {
+    "before": [
+      {
+        "case_id": "FIT-FT-CHAIR-INITIAL",
+        "status": "CANDIDATE_NOT_ELIGIBLE",
+        "reason_code": "INVALID_EVIDENCE",
+        "adoption": "NOT_ADOPTED",
+        "body": null,
+        "question": null,
+        "messages_match": true,
+        "identity_matches": true,
+        "input_tokens": 1409,
+        "output_tokens": 1307,
+        "finish_reason": "stop",
+        "parse_error": null
+      },
+      {
+        "case_id": "FIT-FT-CHAIR-AFTER-CORRECTION",
+        "status": "CANDIDATE_NOT_ELIGIBLE",
+        "reason_code": "TOKEN_LIMIT",
+        "adoption": "NOT_ADOPTED",
+        "body": null,
+        "question": null,
+        "messages_match": true,
+        "identity_matches": true,
+        "input_tokens": 3526,
+        "output_tokens": 2048,
+        "finish_reason": "length",
+        "parse_error": "Expecting value: line 305 column 24 (char 7097)"
+      }
+    ],
+    "after": [
+      {
+        "case_id": "FIT-FT-CHAIR-INITIAL",
+        "status": "CANDIDATE_NOT_ELIGIBLE",
+        "reason_code": "INVALID_EVIDENCE",
+        "adoption": "NOT_ADOPTED",
+        "body": null,
+        "question": null,
+        "messages_match": true,
+        "identity_matches": true,
+        "input_tokens": 1409,
+        "output_tokens": 1056,
+        "finish_reason": "stop",
+        "parse_error": null
+      },
+      {
+        "case_id": "FIT-FT-CHAIR-AFTER-CORRECTION",
+        "status": "CANDIDATE_NOT_ELIGIBLE",
+        "reason_code": "INVALID_EVIDENCE",
+        "adoption": "NOT_ADOPTED",
+        "body": null,
+        "question": null,
+        "messages_match": true,
+        "identity_matches": true,
+        "input_tokens": 3526,
+        "output_tokens": 1764,
+        "finish_reason": "stop",
+        "parse_error": null
+      }
+    ]
+  }
+}

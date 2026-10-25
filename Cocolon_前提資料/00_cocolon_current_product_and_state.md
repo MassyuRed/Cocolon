@@ -1,12 +1,12 @@
 # Cocolon 最新情報 — 全機能・全状態
 
-更新日：2026-10-25 JST（最新差分：外側source_id/compact指示の新LoRA2updateと前後FIT4生成を完走、重み回収照合。NLL低下・raw不変、CMEE前後0/2。次は入力投影/形式学習方法を見直す。GPU停止なし、正式0/3・54.50％据置）。全Cocolon作業の必読原本。
+更新日：2026-10-25 JST（最新差分：入力投影修復→同保存重みの32update一回を完走。重み回収/同2FITのCMEE採否を記録。GPU停止なし、正式0/3・54.50％据置）。全Cocolon作業の必読原本。
 
 > **最新報告会：[第8回・2026-10-24](weekly_reviews/Cocolon_Weekly_Review_20261024.md)。** 今週実績・前週目標の達否と10/24〜10/31の管理案を記録。**Mashの指示により報告会終了。** 華恋の意見全文は[§10](weekly_reviews/Cocolon_Weekly_Review_20261024.md#karen-closing-opinion)、終了時の区分と再開先は[§11](weekly_reviews/Cocolon_Weekly_Review_20261024.md#meeting-closed-and-next-session)。10/24の4B確定・GPU16GB優先/24GB許容は当時の決定で、4B確定は10/25に撤回済み。最新の開発基準選定は[§23](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-three-core-model-and-serving-decision)。華恋が今回の判断責任として選んだもので、旧4B確定・常時24GB契約の自動復活ではない。起動済み3070の実確認は[§22](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-3070-running-cuda-uvm-io-error)。A5000未確保は§20の履歴。Vast実見積りは§19の履歴。次週の推奨順位は[§4](weekly_reviews/Cocolon_Weekly_Review_20261024.md#next-week-priorities)、対象path・具体手順・失敗/回復検査・終了条件は[§8](weekly_reviews/Cocolon_Weekly_Review_20261024.md#detailed-work-breakdown)を参照。全体管理評価・公開見通しは[§9](weekly_reviews/Cocolon_Weekly_Review_20261024.md#overall-status-and-release-outlook)：54.50％、正式商品受入れ0/3、12/18達成の裏付け不足。会議途中の「進行中」は当時の記録。次週案全体への明示採否・個別実行の未決は§11に区別して保持する。モデル選定の決定と、以下の品質・配置・端末・費用の未完了を区別する。
 
 **直前の学習実績（§24）：** [A4500で修正版4B追加学習を完走、重み回収、CMEE採用は未達（§24）](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-a4500-training-and-portable-weights)。[全実結果](observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/repaired_a4500_20261025/README.md)。Mashは4B採用とリリースまでRunpodでの追加学習を明示し、将来は手持ちPCへ移す可能性が高い。RTX A4500 20GB／Secure・EU-RO-1・Pod y0eb0w0qn6nks0を今回の最安の容量候補として確保。GPU$0.25/h・50GB container込み表示$0.26/h。CUDA/BF16正常、修正版2教師/1epoch/2update・adapter保存/非学習reload・前後16生成が20分23.76秒で完走し、20GBで現方式が動くことを確認した。peak allocated14.970/reserved17.588GiB。最終archive全24memberのhashと32tensor有限性/前後重み不変をPod外照合し永続保管済み。NLL0.251117→0.245189、raw6/8変化だが、CMEE意味/本文は前後0/2。初回の根拠座標は通るようになったが必須shape/自然文surface不正、訂正後rawは不変、proxy2件が2048tokenで打切りとなり品質未達。その時点の残件は必須shapeと自然文surfaceで、後続の現在作業は下段へ更新する。この§24のrunはGPUを停止せず終了した。旧3070は今回開始時既に停止表示、華恋のStop操作0。
 
-**現在の直接作業：** [入力投影修復と実推論§29](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-proof-metadata-projection)を完了。初回のJSON重複キーは解消したが欄長超過の引用座標、訂正後打切りで実CMEE0/2。入力1409/3526token、原文/prior/target保持。次は[同2target・保存重みから32更新の有限な一回§30](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-continued-fit32)。GPU停止なし、観測会は今回不要。
+**現在の直接作業：** [保存4Bから32更新の実結果§30](weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-continued-fit32)。32update/既存2target×16周を574.555秒で完走。保存済み06ca6381…から新optimizerで継続し、新adapterを保存/非学習reload、32tensor有限/旧3hash不変を確認。教師加重NLL0.221367054→0.054428520。同messagesの実CMEE採用は前0/2→後0/2。beforeは既存raw再利用、after2生成のみ。 原raw/重みを回収照合し、同runは終了済み。通常アプリ接続・一般入力・三中核の商品品質は未成立。GPUは停止しない。観測会は今回不要。
 
 **4B関連作業の開始前：** 全体現在地を全文読んだ後、[観測学習の目的・用途・前提](observation_learning/README.md#observation-learning-intent-and-assumptions)を毎回読み、最新weeklyの決定/実結果と今回の作業を結び付ける。学習・教材作成・評価・CMEE接続・環境移行で共通。ローカル＝Macと決め付けず、学習の成功と観測品質の成立を分ける。
 
@@ -146,7 +146,7 @@ CMEEは三中核を支える共有生成中枢。独立した第四の商品中�
 
 | 作業領域 | 次に解消すべき具体的未完了 |
 |---|---|
-| 学習済みAI・現在の作業 | A4500 20GB／Secure・Pod y0eb0w0qn6nks0、表示$0.26/hで保持中。修正版2教師/2update・保存reload・前後16生成完走、peak allocated14.970/reserved17.588GiB。全24member/32tensorをPod外照合・永続保存。NLL0.251117→0.245189、CMEE前後0/2、初回semantic_shape_invalid/訂正INVALID_EVIDENCE。proxy2件length。続く初回1生成は本文string化/意味・本文0/1、INVALID_EVIDENCE。次はJSON階層/field名/欄内座標/値型を明示する形式修復。Piece/Analysis完成教師0。本番/実機/全般品質未成立。[全実結果](observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/repaired_a4500_20261025/README.md) |
+| 学習済みAI・現在の作業 | 32update/既存2target×16周を574.555秒で完走。保存済み06ca6381…から新optimizerで継続し、新adapterを保存/非学習reload、32tensor有限/旧3hash不変を確認。教師加重NLL0.221367054→0.054428520。同messagesの実CMEE採用は前0/2→後0/2。beforeは既存raw再利用、after2生成のみ。 [全実結果](observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/continued_fit32_20261025/README.md)。通常接続・一般入力・Piece/Analysis教師・商品品質は残件。GPUは保持中、同runは終了済み。 |
 | 10/24までの費用・4B選定履歴（当時の構成） | Flex24GBの旧月78,980生成・未測定の速度/起動仮定による運用費95,094円・赤字67,833円の試算は当時の構成の記録で、最新構成の原価ではない。[全仮定・再計算](observation_learning/model_selection/2026-10-24-production-economics/README.md)。旧4B実診断では24GBでLoRA保存・reload・16生成・回収を確認したが、FITは前後0/2。CPU指示修復API1dabc4fは54対象/pack11・合成2/2で、修正版は後続10/25にA4500 20GBで完走・回収済み、最新結果は§24。旧学習peak allocated14.954GiBを本番推論の必要VRAMへ流用しない。4bit/M4を第一候補とした§23は当時の華恋案で、現在の移行先はWindows／Mac未選定。公開API単価を独自育成版の原価へ流用しない。 |
 | Emlis | 一般入力と回答後の意味・自然な本文・有料差、本人実機の保存再読まで。u353〜355のコードと配置差を保持 |
 | Analysis | 最新内容修正版の配置差、通常本文生成・同一保存再読・monthly履歴/比較の本人確認、複数ANSWER採用、一般理解、有料差、IF／Savedの未実装。6501時点の不足案内表示は本人確認済みとして保持 |

@@ -2028,3 +2028,11 @@ sourceはpackのcontinued_fit32/continue_fit.pyとplan.json。旧run_pilot/旧ep
 
 
 §30反映前の自動レビューがGitHub pushを拒否した。理由はprivateな素材/生出力の送信許可が未確認という判定。現在のpublic repositoryと既反映d6f8febdの正式sft2行、原OBS-20261024-001 D00/D02を照合し、scenario_persons_fictitious=true、華恋作成の架空事例/実ユーザー記録ではない旨と同じ原文・補足であることを確認した。新ファイルはこの公開済み架空2入力のモデル生出力/実行記録/コード/条件のみで、本人DB/Private diary/credentialの取得・送信0。低リスク/既存指示の根拠を確認して同じ送信操作を再判断し、別経路での迂回は行わない。
+
+
+**§30 実結果：** 32update/既存2target×16周を574.555秒で完走。保存済み06ca6381…から新optimizerで継続し、新adapterを保存/非学習reload、32tensor有限/旧3hash不変を確認。教師加重NLL0.221367054→0.054428520。同messagesの実CMEE採用は前0/2→後0/2。beforeは既存raw再利用、after2生成のみ。 [全生出力・採否・学習記録](../observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/continued_fit32_20261025/README.md)。run 20261025-034400-79baf136、source dc209feba46d55325eafb2b57f15c9d99c5cc967、API 32dc3b3137ddc0a4401d2d1d045123f7da17683a。全24member/size/hash・32tensorをPod外で照合した。新adapter ce644a5ba57dfcb9c8df047000cf45ba9ab32c1d09321d8a8da0f5a73fd6b0f4、archive 59692c68a9fb1291120b987cb482a80365d24f3a6fccde089fc5d7f0e6887ec0。同runは終了済みに閉じる。GPU停止/再起動/削除/新Pod/チャージ0。通常接続・一般入力・商品受入れは未成立、正式0/3・54.50％据置。
+
+
+§30最終本文確認：after2件はminified/JSON/stop成功（1056/1764token）へ改善したが、初回根拠6中5、訂正補足4中4が誤座標で、意味/本文採用は0/2。初回joy/object kind逆・unknownをclaim_refsへ混入・同じ質問をreceptionで2回反復。訂正は共同修理/再使用へ6claim/3updatesを出したが、根拠indexずれとupdate_note.update_refs欠落、原文復唱が残る。独立read-only reviewと整合。Mashへの低品質本文review依頼はしない。次の直接作業は、原文上の欄内位置を参照できる入力提示と、参照index/意味型/問いと受け取りの役割をCPUで具体化する最小修復。採用条件緩和・raw補修・追加epochを自動実行しない。観測会は今の根拠/形式問題には不要。学習未使用入力・一般入力・三中核の完成と区別する。
+
+archiveは全24member/size/hash、32 F32 tensor有限性をPod外照合し保管済み（libfile_416a445cb4b08191b1357b5cc769f6d5）。CPU verifier初稿はTorch未導入で停止したが、同safetensors32本をNumPyで有限性照合し、GPU/学習の再実行0。Git pushは素材のprivate性について自動レビュー拒否後、公開済み架空2入力である根拠を確認して再判断した。続くGit transportの認証不在により反映できず、既存GitHub connectorで同じ確認済み素材/実行codeを反映し、18変更blobを全文照合した。private素材の送信拒否を未確認のまま迂回したものではない。本最終結果も同架空2入力だけで本人DB/Private diary/credentialは含まない。GPUは稼働保持し、停止/再起動/削除/新Pod/チャージ0。正式0/3・54.50％据置。

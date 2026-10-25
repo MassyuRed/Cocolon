@@ -4750,3 +4750,5 @@ Cocolon新pack F/=`Cocolon_前提資料/observation_learning/training/2026-10-24
 ### 2026-10-25 — 継続学習32updateの所在（商品構造差分なし）
 
 F/continued_fit32/continue_fit.py と plan.jsonは、保存済みadapterから新optimizerで既存2target×16周/32updateを一回実行する有限な診断。旧runner/計画は不変。before実raw再利用、保存/非学習reload/after2生成/退避を担当する。採用条件/公開API/DB/RN/三core責務は不変、STRUCTURE_MAP_DELTA_NONE。投影修復実結果はtrials/2026-10-24-qwen4b-cmee-diagnostic/proof_projection_20261025/、実行/採否/次作業は最新weekly§29/30へ戻る。
+
+32更新の完了原本：trials/2026-10-24-qwen4b-cmee-diagnostic/continued_fit32_20261025/。run/continued_fit_plan/continuation_source/training/before_nll/after_nll/before/after/cmee_result/comparison/checkpoint_manifest/integrityのJSON・JSONLとREADMEが実条件/32更新/全raw/採否/回収を所有する。商品source境界差分なし、STRUCTURE_MAP_DELTA_NONE。

@@ -1,0 +1,10 @@
+{
+  "archive_sha256": "59692c68a9fb1291120b987cb482a80365d24f3a6fccde089fc5d7f0e6887ec0",
+  "members_verified": 24,
+  "adapter_tensors": 32,
+  "all_tensors_finite": true,
+  "source_script_sha256": "ae5801f7d495153f9b48de7d7a32b68120de78528f625140d0c439e268fd3329",
+  "raw_bytes_unmodified": true,
+  "weights_library_file_id": "libfile_416a445cb4b08191b1357b5cc769f6d5",
+  "cpu_tensor_verification": "safetensors.numpy, all32 F32 finite; initial Torch verifier import was unavailable, no GPU/training rerun"
+}

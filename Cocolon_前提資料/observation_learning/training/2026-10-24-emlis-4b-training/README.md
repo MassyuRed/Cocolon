@@ -1,4 +1,4 @@
-**現在：** 証明metadata3keyだけを除く投影で初回JSON重複は解消、実CMEE0/2（欄長超過の引用座標／訂正後打切り）。[§29](../../../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-proof-metadata-projection)。次は[continued_fit32/plan.json](continued_fit32/plan.json)の一回。元2target/旧runner/旧計画不変、同保存adapterから新optimizerで32update、beforeは直前実rawを再利用、after2生成。GPU停止なし。
+**現在：** 32update/既存2target×16周を574.555秒で完走。保存済み06ca6381…から新optimizerで継続し、新adapterを保存/非学習reload、32tensor有限/旧3hash不変を確認。教師加重NLL0.221367054→0.054428520。同messagesの実CMEE採用は前0/2→後0/2。beforeは既存raw再利用、after2生成のみ。 [全実結果](../../trials/2026-10-24-qwen4b-cmee-diagnostic/continued_fit32_20261025/README.md)。current continued_fit32/plan.jsonは終了済み・再実行不可。GPU停止なし、商品品質/通常接続は未完。
 
 # Emlis 4B学習・保存再loadの限定pack
 
