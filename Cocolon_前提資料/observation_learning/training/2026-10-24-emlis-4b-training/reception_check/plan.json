@@ -1,0 +1,32 @@
+{
+  "schema": "cocolon.emlis_4b_reception_inference_check.v1",
+  "status": "AUTHORIZED_ONCE_CURRENT_MASH_CONTINUATION",
+  "inference_authorized": true,
+  "training_authorized": false,
+  "adapter_directory": "/workspace/cocolon_4b_unicode_fit32_20261025/results/20261025-043032-a3fef235/adapter",
+  "adapter_sha256": "a8baf0d310283fd0500e86887e64723e4734693ac48b7f2ddfad7cc07e6a3ea6",
+  "dataset_manifest_sha256": "a97a83bca9b32b4af7f2e600d8fe31cf95ddb05587c3815dfb4816271d078b49",
+  "api_commit": "2fbc0a2ae7e9b72dc8be2e676c2f4a2c3c81380e",
+  "pod_id": "y0eb0w0qn6nks0",
+  "model": "Qwen/Qwen3.5-4B",
+  "revision": "851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+  "case_ids": [
+    "FIT-FT-CHAIR-INITIAL",
+    "FIT-FT-CHAIR-AFTER-CORRECTION"
+  ],
+  "input_tokens": [
+    2055,
+    5078
+  ],
+  "context_tokens": 8192,
+  "max_new_tokens": 2048,
+  "max_seconds": 900,
+  "seed": 20261024,
+  "greedy": true,
+  "gpu_hourly_usd": 0.26,
+  "process_time_allocation_usd": 0.065,
+  "pod_billing_hard_cap": false,
+  "automatic_pod_stop": false,
+  "retry": false,
+  "notes": "One reception-role instruction refinement; same saved adapter and FIT2, no new training/teacher/acceptance change. Prior body count1/2 meaning2/2. No retry or Pod lifecycle effect."
+}

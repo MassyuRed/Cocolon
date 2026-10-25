@@ -2064,3 +2064,15 @@ archive 8e776b7f0169af1b9b24467419b336299e30bc1519f73472e630a0e8bb8cb215、全13
 新unicode_fit32/continue_fit.pyとplan.jsonは既存有限runnerの初期adapter/schema/token pinだけを分けたもの。旧continued_fit32/planは閉じたまま。既存LoRA r8/alpha16/qv16module・AdamW1e-4・16周×2target=32update・seed/BF16/SDPA/greedy/8192/2048を維持。beforeは今回のraw2をbyte再利用、学習前後NLLを測定し、保存/先退避/非学習reload後after2だけ生成。原adapter3hash不変/新32tensor有限性と全回収を要求。新optimizerであり厳密途中再開ではない。
 
 同A4500のみ、process1800秒/計画$1・表示$0.26/h按分上限$0.13（保持/回収/準備/税別、Pod hard capではない）。追加生成/教材/自動retry/失敗後の増量0。STOP/再起動/削除/新Pod/charge/新依存/本人DB/Render/Supabase/通常有効化/merge/deploy0。観測会は今の形式適合に不要。成功しても既知2例の適合だけで、未知入力/三中核/正式受入れへ昇格しない。商品0/正式0/3/54.50％を保持する。
+
+
+**§31 新入力32更新の実結果：** run 20261025-043032-a3fef235、source 4ad759792b8cfd820f44d72b233eb853a354ecb7、API a3e82f0e2156f9142ca37878425eb0a4b6046761、792.243856668秒、同2target×16周/32update。教師加重NLL0.089365729606→0.002610727951。実CMEE意味0/2→2/2、本文0/2→1/2。初回JSON/stop1095tokenで本文/実問いまで、訂正1876tokenは意味採用後BODY_UNAVAILABLE。全18根拠/参照/3更新がteacherと整合、唯一のparsed差は訂正reception第2文の結果への反応が事実再確認になったこと。[全原本](../observation_learning/trials/2026-10-24-qwen4b-cmee-diagnostic/unicode_fit32_20261025/README.md)。新adapter a8baf0d310283fd0500e86887e64723e4734693ac48b7f2ddfad7cc07e6a3ea6、archive 439547199bccdb625c41a961639dbfa1d774711b26893cf7fccee7497607133c、全24member/size/hash・32tensor有限性・旧新3hash不変をPod外照合し永続保管（libfile_92793ab0520c81918d3cab3790583684）。元4B/optimizer/RNGは非同梱。旧planと今回planは終了済みに閉じた。途中の画面NLL読取0.0061は誤りで、上記は回収JSONから自動計算した値。再学習0。独立2agentとrootの全raw実読と整合。既知FITの限定進展で、通常接続/未知評価/商品受入れへ数えない。
+
+<a id="20261025-reception-check"></a>
+### 結果への受け取りだけを説明する非学習確認
+
+実訂正reception第2文は「またその椅子に座れるようになったのですね。」で、teacherの「またその椅子に座れるようになって、よかったですね。」と異なる。既存readerの結果への反応文型に一致せず、静的原因はmodel_surface_sentence_not_read、実outcomeはmodel_surface_not_validated。意味/座標/参照を修正する必要はなく、reader/採用条件を変えない。
+
+API2fbc0a2ae7e9b72dc8be2e676c2f4a2c3c81380eでOUTPUT_SPEC.proseへ、receptionが修理結果にも触れる時は結果へのEmlisの反応を表し、単なる結果再確認にしない説明一節だけを追加。最初の本人の喜び対象を受け取る「うれしかったのですね」は維持。system/material/全字map/native/prior/teacher/CMEE/reader不変。CPU69/pack13成功、合成target2/2・旧messages2/2拒否。新prompt2055/5078token、最大5078+2048=7126<=8192、切捨て0。
+
+同a8baf0…保存重みを非学習reload、同FIT2だけ各1回。新reception_check/diagnostic.py/plan.jsonを固定し、旧計画を再開しない。900秒/表示$0.26/h按分上限$0.065、請求hard capではない。学習/optimizer/update0、原重み3hash不変、raw無補修、追加生成/自動retry0。保持中同A4500のみ、新Pod/charge/STOP/再起動/削除/新依存/DB/Render/Supabase/通常有効化/merge/deploy0。公開済み架空2入力のみ、観測会は今回不要。formal0/3/54.50％・商品credit0を保持。結果で現在地/本節/観測入口/pack/mapを同期する。
