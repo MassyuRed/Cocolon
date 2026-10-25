@@ -77,3 +77,10 @@ Mashは直前の具体案「受け取りだけ6更新→保存・再読込→9�
 reception_fit6_cpu_validation.jsonのstdlib6条件（承認固定値/未承認拒否/順序/全contextとmask/境界越え拒否/causal呼出し）は成功、新model/更新0。別文脈agentのsource/plan read-only reviewでblocking defectなし。正式Pro/Ultra/human受入れではない。次はJupyterのcache tokenizerで全9/3maskを実照合後、一回だけ6update/FIT9を行う。実行前に新出力不存在・A4500・固定旧source/teacher/初期adapterを再確認し、1800秒で終了。後段の未使用別ID2は全9成功時だけ別runner/planへ新adapterを束縛し、少なくとも1件で実際の意味保存後中断/明示再開を確認する。元run_quote_address_holdout.pyはその中断を試さないため、そのままのrenameで成功とはしない。
 
 製品source/reader/DB/RN/Render/Supabase/GPU lifecycle変更0、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。このcheckpoint時点で新学習/新生成0。終了済み18試行の意味9/9・本文6/9/後段0は保持する。
+
+
+### 承認後の最終結果 — 日常は通過、旧chair退行により不採用
+
+[全実結果/未補修raw/採否](../../trials/2026-10-25-quote-reception-fit6/README.md)。source6cea8816/API4002b457、6更新/保存/非学習reload/FIT9が939.715秒で完了。意味7/9・本文6/9（日常3/3、chair意味4/6・本文3/6）。全9成功前提に届かず、条件付き後段2件はcall0で閉じ、新f1e88e3eは不採用。初期138b/旧18plan/教師/prompt/raw/reader保持、追加更新/同要求retry/reader緩和0。旧chair01初回は不存在関係先、01訂正はobservation「直した」→「直せた」、03初回は反復/2560token打切り。reception NLL0.279112→0.015794の改善を全体保持や商品合格へ換算しない。
+
+早期archive全16対象/32F32有限をPod外照合しlibfile_5c99cce0e5c48191b628ba37d62be5d0へ保管。完了証拠全19対象と原raw9/consumer1,505,922bytes/index＋24partsも照合保存済み。後段draftと合成SQL30/model0の準備は実model保存再読の証拠にしない。reception_fit6_runtime_checkpoint.jsonはCLOSEDで、再起動しない。新観測会は今回不要。GPU停止/再起動/削除/新Pod/charge/管理API0、製品/DB/Render/RN変更0。STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％据置。

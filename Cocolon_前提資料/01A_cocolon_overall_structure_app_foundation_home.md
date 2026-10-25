@@ -4873,3 +4873,8 @@ observation_learning/trials/2026-10-25-quote-address-fit18/ はREADME.md（終�
 ## 2026-10-25 — 承認済み受け取り6更新の実装file
 
 既存quote-address packにrun_quote_reception_fit.py（daily3の各11tokenだけを2回学ぶ一回、全文context保持/直接causal loss/保存非学習reload/FIT9）、reception_fit6.plan.json（Mash承認scopeと固定hash）、reception_fit6_cpu_validation.json（stdlib6条件成功）を追加。元proposed/18plan/teacher/helper/raw/readerを上書きしない。実tokenizer確認/GPU実行前。全9成功時だけ別後段へ進む。構造差分なし、商品0、最新weekly§45/packへ戻る。
+
+
+## 2026-10-25 — 受け取り6更新の完了file地図
+
+observation_learning/trials/2026-10-25-quote-reception-fit6/ のREADME/closureは意味7・本文6/9、daily3通過とchair3退行、新不採用/後段0/停止境界を所有する。run/training/after_fit/前後reception NLLは実6更新/9生成/原出力、file_manifest/recovery/weights_verificationはPod外全19/早期16対象・32tensor照合、consumer.index＋24partsは全実consumer1,505,922bytesの無損失原本。conditional_holdout_runner_draft_NOT_ACTIVATED.py/conditional_holdout_cpu_preparation.jsonは実model後段へ進まなかった準備履歴。既存quote packのreception_fit6_runtime_checkpoint.jsonはCLOSEDへ更新し、原plan/teacher/source/旧raw/重みを保持する。意味/本文7/6、条件付き別ID2は0、新f1e88e3e不採用。STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％、最新weekly§45/全体00を参照。

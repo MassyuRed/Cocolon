@@ -2417,3 +2417,18 @@ Mashの今回指示は4B学習＋CMEE接続の再開とJupyter直接接続。全
 Mashは「受け取りだけ6更新→保存・再読込→9件検査→全件成功時に2件保存再読、GPU処理最大45分/処理按分$0.195以内（保持等別）」への実装・実行を明示承認。新plan/reception専用runnerを既存quote packに作り、旧18plan/教師/prompt/raw/重み/readerを保持した。stdlib6条件のCPU検証と別文脈agentの読取reviewは成功。実tokenizer再照合前で新学習/新model生成0。全9成功時だけ新後段へ進む承認は受領済みで、CPU後/成功後の小分け再承認は不要。後段は旧runnerにない意味保存後中断/明示再開を実際に追加する。
 
 実行ownerはroot華恋/CodeX Work/GPT-6、補助agentはread-only。商品0/正式0/3/54.50％、STRUCTURE_MAP_DELTA_NONE。GPU一覧/管理API操作0、Jupyter直接接続を使う。詳細とsourceはquote packのquote-reception-fit6-approved節へ戻る。本checkpointで学習完了・本文向上・後段成立を先取りしない。
+
+
+### §45 最終結果 — daily受け取り3/3、chair保持失敗、後段0で新候補不採用
+
+[全実結果](../observation_learning/trials/2026-10-25-quote-reception-fit6/README.md)。Mash承認の範囲でsource6cea8816/API4002b457、初期138b9ff7からreception11token/daily3各2回の6update、保存/32F32有限/非学習reload/FIT9を939.715479秒で完了。新f1e88e3eは未採用。無補修rawを既存consumerへ一回渡し意味7/9・本文6/9、daily意味本文3/3/教師parsed一致/問いなし、chair意味4/6・本文3/6。旧quote18のchair6/6保持に失敗し、全9成功条件が未成立のため別ID2実model保存再読はcall0、eval plan未作成/後段未activateで終了した。
+
+退行3件は、chair01初回のjoy_ground接続先が不存在appraisal_objectへ変化＋受け取りの問い混入（意味HOLD）、chair01訂正のobservation「直した」→「直せた」（意味/訂正3更新は保持・本文reader不採用）、chair03初回の「私なりの」反復/2560token/EOSなし/JSON未完。単なる上限不足やモデル一般の能力限界は断定しない。reception NLL平均0.279111952→0.015793586は低下しdaily3は通過したが、共有重みの旧case保持は成立しなかった。rootは全9surface/問い/訂正と採否を確認し別文脈agentも同じgate不成立を読取確認。formal human/Pro/Ultra受入れではない。
+
+重み早期保全3,474,577bytes/16対象/32F32有限をPod外照合・libfile_5c99cce0e5c48191b628ba37d62be5d0へ保存。完了archive6,966,423bytes/SHA6c7f103a3866daa1f0b7c84c2db16d65fff44a9cc700fd39c278da8babd535c9、全19対象を回収照合し重みは同一。原raw221,322bytes/SHAe0b13ce620d1a67300bd971c88877416617226df5420e281973f13590e62a6fd、consumer1,505,922bytes/index＋24partsをGitHub原本へ保全。元4B全重み/optimizer/RNGは含まず、移行用base/config/tokenizer識別を保持する。
+
+成功後に備えたdraftは新6への束縛・意味保存後中断/明示再開を準備し、合成CPUではSQL30/source2/model0/保存再読2/中断再開1/禁止0を確認した。これは実4B後段2件ではない。Pod API準備の共有clone/fetchは旧shallow object欠落で失敗し、独立した固定4002b fetchで解決。trainer/model再実行・新依存・旧source書換え0。local code組立ての構文失敗は実file/effect前に修正し、実学習は一回だけ。CPU準備と実modelを同じ成功件数へ加算しない。
+
+処理939.715479秒×記録単価$0.26/h=約$0.06786834（準備/回収/保持/保存/税別、請求総額ではない）、1800秒/$0.13内で後段900秒/$0.065未使用。初期重み3file/旧teacher/helper/reader/原raw不変。追加学習/同要求retry/LR探索/raw補修/reader緩和0、終了済みplanを再開しない。今回の残差へ新観測会は不要で、保存差分から日常と旧chair保持を両立する方式を次に検討する。自動新試行0、独立2話・Piece/Analysis完成教師0・一般品質未確立を保持。
+
+全体00/観測入口/pack/runtime checkpoint/全file地図01Aを同時更新。STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％据置。管理console/GPU一覧/Runpod API/Stop/再起動/削除/新Pod/charge/Render/Supabase/本人DB/RN/merge/deploy変更0。Jupyter直結のみ。旧§43停止指示/未確認は履歴として保持し、今回scopeでGPU lifecycleは変更していない。

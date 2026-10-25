@@ -1,0 +1,6 @@
+{"step": 1, "pass": 1, "id": "TRAIN-DAILY-CALM-02-INITIAL", "loss": 0.2808712124824524, "gradient_norm": 5.856598854064941}
+{"step": 2, "pass": 1, "id": "TRAIN-DAILY-CALM-01-INITIAL", "loss": 0.18133896589279175, "gradient_norm": 4.341916084289551}
+{"step": 3, "pass": 1, "id": "TRAIN-DAILY-CALM-03-INITIAL", "loss": 0.11896040290594101, "gradient_norm": 3.1775765419006348}
+{"step": 4, "pass": 2, "id": "TRAIN-DAILY-CALM-02-INITIAL", "loss": 0.0735509917140007, "gradient_norm": 2.1604225635528564}
+{"step": 5, "pass": 2, "id": "TRAIN-DAILY-CALM-01-INITIAL", "loss": 0.04119042307138443, "gradient_norm": 1.1763648986816406}
+{"step": 6, "pass": 2, "id": "TRAIN-DAILY-CALM-03-INITIAL", "loss": 0.025865880772471428, "gradient_norm": 0.7851783633232117}
