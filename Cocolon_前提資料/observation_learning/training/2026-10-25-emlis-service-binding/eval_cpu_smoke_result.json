@@ -1,0 +1,34 @@
+{
+  "scope": "CPU_SYNTHETIC_HARNESS_ONLY_NOT_REAL_MODEL_OR_HELDOUT_SUCCESS",
+  "status": "PASS",
+  "model_calls": 0,
+  "candidate_source_calls": 2,
+  "isolated_rpc_calls": 30,
+  "correction_updates": 3,
+  "explicit_retry_reacquisitions": 0,
+  "non_generating_reads": true,
+  "train_eval_uuid_overlap": false,
+  "train_eval_timestamp_overlap": false,
+  "runtime_identity_call_checks": [
+    {
+      "stage": "initial",
+      "uuid_count": 2,
+      "timestamp_count": 1,
+      "overlap": false,
+      "actual_prior_used": false
+    },
+    {
+      "stage": "correction",
+      "uuid_count": 3,
+      "timestamp_count": 3,
+      "overlap": false,
+      "actual_prior_used": true
+    }
+  ],
+  "max_input_tokens": 5632,
+  "max_new_tokens": 2560,
+  "context_tokens": 8192,
+  "gpu_operations": 0,
+  "product_accepted": false,
+  "stopping_criteria_runtime_tested": false
+}

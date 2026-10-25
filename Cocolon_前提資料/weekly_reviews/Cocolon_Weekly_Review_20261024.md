@@ -2203,3 +2203,17 @@ Mashが[具体案](../designs/cmee/v1/01_shared_kernel_and_runtime_contracts.md#
 main archive941f5911…/53,260bytes/22member、aux34971c7b…/10,612bytes/9memberをPod外照合。全raw/messages/request/prior/receipt/DTO/snapshot/run、初回不変再読、失敗記録/実行条件/画像をGitHubへ保存。今回planは終了・再実行不可、追加推論/学習0。全機能00/観測入口/pack/current01/04/01A/共有設計01へ同じ差分を同期。STRUCTURE_MAP_DELTA_PRESENTは既存private runtime期限とtimeout処理のみ、意味schema/reader/公開API/SQL/DTO/RN/他core責務不変。限定TECHNICAL_CREDIT、商品credit0/正式0/3/54.50％据置。
 
 通常application/Auth/HTTP/RN/本人端末、一般観測品質、実model訂正後保存/中断再開は未完。稼働Supabase/Render/本人row/merge/deploy操作0。GPUは完了後もRTX A4500/20,470MiB/使用1MiBを確認し保持、STOP/再起動/削除/新Pod/charge0。実推論process按分約$0.01124938は準備/回収/継続保持/税等を含む請求総額ではない。
+
+
+<a id="20261025-service-binding-fit12"></a>
+## 36. 10/25 — 同chairのservice識別子を学習し、訂正後の実保存再読へ進む
+
+Mashの「4B学習＋CMEE接続を続けて」を受領。全機能00全文、必読incident、最新§35、観測学習目的、全体設計/全file地図/current01/04とAPI95d00bの依存8blobを確認した。System Context最新索引は未完成のためfresh原本を直接参照。実環境はCodex Work/GPT-6、root華恋が統合/実行/反映owner。別文脈agentの候補をrootが読んで採否を決め、独立Pro/Ultraやhuman受入れは装わない。
+
+[新pack](../observation_learning/training/2026-10-25-emlis-service-binding/README.md)は既存chair1題・2段階×3service identity＝6行。既存natural_packetを実serviceのUUID/日時/実問い/採用済みpriorへ束縛し、旧teacherの意味/本文と6/6一致。CPU23.108秒、合成候補6/隔離SQL60RPC、Engine/reader6/6、3組の保存・非生成再読/訂正3更新/ENDが成立。実model/GPU学習0を分ける。原9教師/18候補/旧2teacher/旧評価/旧raw/重みは不変。
+
+固定tokenizerの訂正completionは2330/2333/2339で2048を超過する。原測定を残し、今回の新planだけ2560生成/5632prompt/8192contextへ調整する。意味・文章・根拠・source・readerの短縮や緩和はしない。offline attempt180秒/source150秒はAPI95d00bのまま。閉じた過去planの変更/再利用ではない。
+
+開始adapter9b845eced…から、新AdamW/LR5e-5・既存LoRA32tensorだけ・全文assistant JSON＋EOS lossで6行×2pass＝12更新。保存→非学習reload→FIT6生成を一度、before生成0。別の未学習identityはgold/priorを持たず、実serviceの初回ASKとactual priorで最大2callを一度だけ検証する。FIT6と動的service評価を別集計し、同chairのID保持を未知言語品質・商品受入れへ換算しない。学習1800秒/按分$0.13、評価900秒/$0.065、保持・準備・回収・税別。追加更新/LR探索/失敗model再callは自動実行しない。GPUをSTOP/再起動/削除しない。
+
+状態：CPU候補と有限source/planを固定、GPU学習・新実model評価は未実行。完了後の実結果でこの段落を置換する。STRUCTURE_MAP_DELTA_NONE（教材と一回診断sourceのみ、既存product/API/SQL/DTO/RNの責務不変）。観測会は今回不要。商品credit0/正式0/3/54.50％据置。
