@@ -1,5 +1,5 @@
 {
-  "status": "AWAITING_NEW_EVIDENCE_END_ADAPTER_HASH_AND_ROOT_EXECUTION",
+  "status": "READY_FOR_SINGLE_IDENTITY_EVALUATION",
   "evaluation_id": "CHAIR_SERVICE_IDENTITY_HOLDOUT_02",
   "scope": "Known chair language. Fresh identity02 excluded from unchanged six training targets and distinct from closed eval01; not unseen-language or product acceptance.",
   "api_commit": "95d00b907f6d9c42944666269acc457c9af34f37",
@@ -7,7 +7,7 @@
   "eval_runner_sha256": "f58195519f1e540d403ee9d56f67bf96adf2c9872af7f97d4a51bbd51196cf78",
   "eval_fixture_sha256": "800c4024578c29743427807a527402506050786c239a427c733e44a9586f685d",
   "training_manifest_sha256": "b7299cd182628e0f3547b3eb23f5339c7f5049348b446792876c802d2ae1d107",
-  "selected_adapter_sha256": null,
+  "selected_adapter_sha256": "76309b86c6a76ed61cf3600f4beb1f45c658fac3bb3e3add4284ef54259276c5",
   "max_model_calls": 2,
   "process_max_seconds": 900,
   "offline_model_attempt_seconds": 180,
@@ -21,12 +21,14 @@
   "production_database_operations": 0,
   "gpu_stop_restart_delete_operations": 0,
   "automatic_progression": false,
-  "note": "Fresh identity02 after closed eval01. Root must verify the new evidence-end-fit6 adapter off-Pod, then freeze its hash and set READY_FOR_SINGLE_IDENTITY_EVALUATION before one max2call evaluation. No old weights archive, old execution plan, output or generated raw is reused.",
+  "note": "Root verified the newly saved focused6 adapter off-Pod: all20archive members/32finite F32 tensors and Pod archive hash agree. Wait for FIT6 process completion before fresh ID02 max2calls. Closed ID01 is not reused; no model raw/teacher/reader repair.",
   "max_input_tokens": 5632,
   "max_new_tokens": 2560,
   "context_tokens": 8192,
   "generation_budget_basis": "New finite evaluation only: rebound correction targets need 2330/2333/2339 tokens. Preserve targets and reader, use2560 with5632 prompt within8192. Stop before call on overflow; no truncation or automatic further increase.",
   "previous_closed_evaluation_id": "CHAIR_SERVICE_IDENTITY_HOLDOUT_01",
   "output_directory": "/workspace/cocolon_4b_evidence_end_identity_holdout_20261025",
-  "old_evaluation_reuse": false
+  "old_evaluation_reuse": false,
+  "weights_archive_sha256": "3caac288036c9bcb115619cc07540172edd521637cc1111f74ddbda6c063f69e",
+  "weights_archive_library_file_id": "libfile_c6e35b0a5e248191a37419243e1c3493"
 }
