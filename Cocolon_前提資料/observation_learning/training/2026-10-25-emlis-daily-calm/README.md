@@ -136,3 +136,10 @@ STRUCTURE_MAP_DELTA_PRESENT（新private daily意味/表面/内部版の採用�
 前18更新の有限試行は終了、FITはchair6/6・daily0/3で実model保存再読は未実施。Mashの再開指示を受け、既存の凍結9teacher/prompt/API/readerを保つ重点12更新候補（chair6各1回＋daily3各2回）を実装した。stdlibのdaily38区間と実tokenizerの910/894/918対象token、全区間coverage・境界syntax-only・prompt/範囲外/EOSのloss除外を確認。今回model/GPU学習0。開始重み5f0e51e9からの新12更新/FIT9と、全9成功時だけ別ID2件の保存再読を具体化し、新GPU実行は承認前・未実施。旧18plan/旧76309/新5f0/原rawは保持。新観測会不要、GPU稼働保持/STOP・再起動・削除0、本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。
 
 [重点12更新の具体案・実tokenizer結果](../2026-10-25-emlis-daily-calm-focus/README.md)。元plan/教材/manifest/rawは変更せず、新候補はgpu_run_authorized=false。
+
+
+## 承認後focus12の終了位置
+
+追加12更新・保存/非学習reload/FIT9を1037.960秒で完了。無補修rawは意味7/9・本文6/9、chair6/6を維持。dailyは意味1/3・本文0/3で、01/03の引用開始位置3整数と全3の受け取りが残る。全9成功条件未達のため別ID保存再読はcall0で終了。新affea8a7重み/32tensor/全archiveをPod外検証・保管したが昇格せず、旧重み/teacher/API/reader不変。追加更新/再call/補修0、同family二試行後の第三の自動試行を止める。新観測会不要、GPU稼働保持/STOP・再起動・削除0、本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。
+
+原本：[全実結果](../../trials/2026-10-25-daily-calm-focus12/README.md)。元18更新pack/plan/rawの原本は変更しない。

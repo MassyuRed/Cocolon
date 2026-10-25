@@ -1,0 +1,94 @@
+{
+  "dataset_manifest.json": {
+    "bytes": 1837,
+    "sha256": "a98ec8e2251fc0c7595e1f331ecbaf2dda5193e132ce1a9b8f3dc91d4d6fe3d3"
+  },
+  "cpu_connection_results.json": {
+    "bytes": 234074,
+    "sha256": "6e6e678bc054d514df3aa34e73b94a94c3e8d6b3dd241b02049b12e78316c260"
+  },
+  "generate_candidates.py": {
+    "bytes": 8015,
+    "sha256": "db83739b58ee6731d06363cb73f21fa5980a3a5b2322d49fbe7a7aae3a15d9c7"
+  },
+  "sft_examples.jsonl": {
+    "bytes": 295701,
+    "sha256": "118a9d7e3bd5728d66af95d7a7388504683da957a2c9b24fa1632ac9ef780f8c"
+  },
+  "source_mapping_candidate.json": {
+    "bytes": 11310,
+    "sha256": "43439c5d1a05fc8c62cd21fb5e39f37a21ca638767145d6298124b5576bd8a68"
+  },
+  "train_messages.jsonl": {
+    "bytes": 159255,
+    "sha256": "07644176add91ed858f1de2ac2a8d73b4ceed02814f9962c70af1b850c366942"
+  },
+  "plan.json": {
+    "bytes": 3675,
+    "sha256": "366e3fe8f1e132b99b165feac3cd708ece5156d5b6f9a185a727af160f4c886a"
+  },
+  "runner_source.py": {
+    "bytes": 22445,
+    "sha256": "47b981e7b1391435724d839375068748a70f7c931626314d263670cb8b218aab"
+  },
+  "parent_fit18_source.py": {
+    "bytes": 18950,
+    "sha256": "549a2b5dcee6f994bdf8a77081a6655410fe84af8a488e4613190b8121eaf506"
+  },
+  "legacy_run_pilot.py": {
+    "bytes": 28950,
+    "sha256": "2f659078c05bee6d7b32f50aae8b9eebc03c767d4a3be084bc17e9e3ccc4c10d"
+  },
+  "SOURCE_COMMIT": {
+    "bytes": 41,
+    "sha256": "00d623886acf4f7c857dd3f0a0a36d819dd914a33f30947935a88d24585d0111"
+  },
+  "run.json": {
+    "bytes": 220924,
+    "sha256": "412e25b8f4fdcf739343b597662200ef97aacfcbda2f0978470c50e2b7eae74c"
+  },
+  "before_mixed_scope_nll.json": {
+    "bytes": 1494,
+    "sha256": "907e0d02d7530f7728018a94a5e8d37a1d16e583cc8955829a3d4bf37137e9ba"
+  },
+  "training.jsonl": {
+    "bytes": 1934,
+    "sha256": "32e38c35ce6ab905c60098820b43f40191492e53e2eb4fd12baaaaeda8515f76"
+  },
+  "after_mixed_scope_nll.json": {
+    "bytes": 1498,
+    "sha256": "bfc5f24c929d2489e3d704a122434b871bb430da892f27c62c6a1d5fe08830ca"
+  },
+  "after_fit.jsonl": {
+    "bytes": 212855,
+    "sha256": "6eff35d6042764f8437af8dbb11b82441d2c9fc5818095a670fb68feb3ce96cb"
+  },
+  "fit_consumer.json": {
+    "bytes": 1477818,
+    "sha256": "50bd38b665ff2ea7baacb344a9e8c803daa05658e5db6679343c1cc07be43649"
+  },
+  "runtime/focus12_launch.json": {
+    "bytes": 734,
+    "sha256": "3cb753e8fb9029c27105c7804a75c594f2f46dd3f979e12177477b5be9259d90"
+  },
+  "runtime/focus12.log": {
+    "bytes": 3387,
+    "sha256": "312a0b01107ea0001204b72234ae1210cfdea7805f46ccd4113108b3f47b6730"
+  },
+  "runtime/token_mask_preflight.json": {
+    "bytes": 207183,
+    "sha256": "f7561fe504518429c7e9d7b929b77b8b91725fbf65caf132d2c97e4cf5e5bc97"
+  },
+  "runtime/token_preflight_launch.json": {
+    "bytes": 566,
+    "sha256": "f2d0f88750cc9b7334a1096fd652253eedb7ccc4347453faa9b5e9ab2354edd4"
+  },
+  "runtime/token_preflight.log": {
+    "bytes": 228,
+    "sha256": "b9c79f15049ca796d6d33bb2cc7e7679e6be3eec1e41e2ac7a5559c59f9a4e60"
+  },
+  "runtime/run_daily_calm_focus.py": {
+    "bytes": 22445,
+    "sha256": "47b981e7b1391435724d839375068748a70f7c931626314d263670cb8b218aab"
+  }
+}

@@ -1,6 +1,6 @@
 # 日常3件の引用・関係・受け取り — 次の有限学習候補
 
-状態：**Mash承認済み／12更新・保存reload完了／FIT9検証中**。2026-10-25 JST。
+状態：**12更新・FIT9終了／意味7/9・本文6/9／別ID保存再読は条件未成立で未実施**。2026-10-25 JST。
 
 Mashの「処理落ちしているから、続きから再開して」を受領し、current Cocolon0a83a437/APIbd356566と§38終了記録を照合した。前18更新・FIT9は完了済み、chair6/6・daily0/3、別IDの保存再読call0。終了したplanと未使用のholdout枠を再開しない。
 
@@ -51,3 +51,10 @@ Mashが候補f916の追加12更新と成功時の保存再読を明示承認。�
 新process PID604760は一回だけ起動。新生成前のstep12archive9969861eded94c328c4d0ae720634d69fa185080a280c8bc59103a394bdb0dcf、3,517,892bytes、18memberのsize/hashと32F32有限をPod外で照合した。archive内runはADAPTER_SAVED_BEFORE_GENERATION/new_generations0で、FIT9完了記録とは別時点。base全重み/optimizer/RNGは含まない。[保存した追加重み](https://chatgpt.com/library?file_id=libfile_e35a9446a01481919d709e44df5e50bc&account_id=personal)。現在の採用重みへ昇格はしていない。
 
 初回の実tokenizer結果とcandidateの学習条件を維持。12更新後のFIT原出力9行を未変更consumerで評価し、全9成功時だけ承認済み2callを実施する。まだ未確認の成功、一般言語品質、商品受入れは加算しない。元18更新planの再開/追加更新/LR探索/失敗model再call/原raw修復0。
+
+
+## 今回の最終結果（上記実行中checkpointは履歴）
+
+追加12更新・保存/非学習reload/FIT9を1037.960秒で完了。無補修rawは意味7/9・本文6/9、chair6/6を維持。dailyは意味1/3・本文0/3で、01/03の引用開始位置3整数と全3の受け取りが残る。全9成功条件未達のため別ID保存再読はcall0で終了。新affea8a7重み/32tensor/全archiveをPod外検証・保管したが昇格せず、旧重み/teacher/API/reader不変。追加更新/再call/補修0、同family二試行後の第三の自動試行を止める。新観測会不要、GPU稼働保持/STOP・再起動・削除0、本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。
+
+原本：[focus12 trial全結果・全raw・採否・比較](../../trials/2026-10-25-daily-calm-focus12/README.md)。planは実行時原本としてAUTHORIZED_ONCEのまま保持し、終了lifecycleはtrial closure.jsonで確認する。新eval_plan未作成・model/SQL起動0、固定したholdout source/fixtureは未使用。

@@ -4839,3 +4839,10 @@ APIbd356566/source e06d6b4c、実tokenizer max5045/2339、18更新・生成9・�
 ## 2026-10-25 — 日常重点12更新候補の所在（製品構造差分なし）
 
 `observation_learning/training/2026-10-25-emlis-daily-calm-focus/` のrun_daily_calm_focus.pyは同じ凍結9teacherと旧helperを読み、daily38valueの疎lossとchair全文rehearsalを新12更新へまとめる未実行候補。plan.jsonはGPU許可false、READMEは新scope/費用/停止/承認境界、cpu_focus_ranges.jsonは文字区間だけの当時の結果。token_mask_preflight.jsonは実tokenizerの910/894/918対象と完全coverage、token_preflight_launch.json/logは新model/CUDA0の実行記録、export_manifest.jsonはPod外回収3fileのsize/hashを所有する。旧teacher/input/prompt/意味採用/reader/元18planは変更しない。製品path追加0、STRUCTURE_MAP_DELTA_NONE。全体00/最新weekly§39/新packへ戻る。新GPU学習・別ID保存再読は承認前・未実施、商品credit0。
+
+
+## 2026-10-25 — focus12終了結果と未使用holdoutのfile地図
+
+`observation_learning/training/2026-10-25-emlis-daily-calm-focus/` の既存plan/runnerは承認scopeの12更新/FIT9を一度実行済み。weights_verification.jsonは回収18member/32tensorの検証、run_daily_calm_holdout.py/eval_fixture.jsonは新focus完了/FIT全9成功を起動前に照合する2初回用source/架空入力。今回は条件未成立でeval_plan未作成・実行0。教材や採用ownerへの責務追加なし。
+
+`observation_learning/trials/2026-10-25-daily-calm-focus12/` はREADME/closure/comparison、承認plan/run、原raw9/training/前後scope別NLL、runtime launch/log、export manifest/weights検査、consumer index＋20partsを所有する。consumer原本はbyte連結で完全復元しhash一致済み。凍結teacher/source/tokenizer重複原本は各固定commit/packへ戻る。意味7/9・本文6/9、chair6/6・daily意味1/3/本文0/3、実service保存再読0。STRUCTURE_MAP_DELTA_NONE（製品API/意味/reader/保存責務不変）。最新weekly§40/全体00/trialへ進行を戻す。第三の自動試行0、GPU稼働維持・停止0、商品credit0。

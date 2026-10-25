@@ -2298,10 +2298,21 @@ STRUCTURE_MAP_DELTA_NONE（既存family内の学習loss候補、製品/API/DTO/D
 
 
 <a id="20261025-daily-calm-focus12-approved-run"></a>
-## 40. 10/25 — 追加12更新を明示承認後に一回実行（FIT検証中checkpoint）
+## 40. 10/25 — 追加12更新を明示承認後に一回実行、意味7/9・本文6/9で終了
 
 Mashが候補f916の追加12更新と成功時の保存再読を明示承認。承認だけの5fieldを固定したplan/source150cbcbfで一回起動し、12更新と保存・非学習reloadを完了、FIT9生成/採否は進行中。新adapter affea8a7094832dfbac27343af87a9ad1b302f61616c19ead33d1dcc7bf59cc3、step12保存直後archive全18memberと32F32有限をPod外照合し保持。旧9teacher/prompt/APIbd356566/reader・旧18plan・旧重みは不変。FIT9/9成功後だけ別ID2件の実service保存再読へ進む。現段階で新daily採用成功とはしない。GPU稼働保持/STOP・再起動・削除0、本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。
 
 承認は「この追加12更新と、成功時の保存再読へ進めてよいですか？→進めていいよ。」。plan5fieldだけ承認状態へ更新したsource150cbcbf、runner47b981e7…、plan366e3fe8…を読み戻し、既存Podで新process PID604760を一回起動した。終了した18plan/対象source/teacher/readerは変更0。保存adapter affea8a7…とstep12archive9969861e…/3,517,892bytes/18member/32F32有限をPod外照合し保管。archiveはFIT前gen0、原結果は新focus packのweights_verification.jsonとREADMEに置く。新model FIT採否と2件保存再読はまだ未確認で、成功として記録しない。次はFIT全9成功の場合だけ、今回consumer/run/raw/adapterを照合する新eval planと固定2fixtureを使う。追加承認は求めず、承認された残りの作業を完了する。
 
 STRUCTURE_MAP_DELTA_NONE（同じ学習/保存/実serviceの既存経路。製品owner/契約/DTO/DB/RN変更0）。今回途中checkpointで最終outcomeは未確定。現環境Codex Work/GPT-6、root華恋の単一実行、別文脈agentは静的read-onlyレビューのみ、独立Pro/Ultra/human acceptanceを装わない。
+
+
+### §40 最終結果 — 日常は意味1/3・本文0/3、条件付き保存再読はcall0
+
+追加12更新・保存/非学習reload/FIT9を1037.960秒で完了。無補修rawは意味7/9・本文6/9、chair6/6を維持。dailyは意味1/3・本文0/3で、01/03の引用開始位置3整数と全3の受け取りが残る。全9成功条件未達のため別ID保存再読はcall0で終了。新affea8a7重み/32tensor/全archiveをPod外検証・保管したが昇格せず、旧重み/teacher/API/reader不変。追加更新/再call/補修0、同family二試行後の第三の自動試行を止める。新観測会不要、GPU稼働保持/STOP・再起動・削除0、本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。
+
+原本は[focus12 trial](../observation_learning/trials/2026-10-25-daily-calm-focus12/README.md)。全9JSON/EOS正常、chair6raw全文不変、問い/3更新も保持。dailyの原文根拠一致は2/8→7/8、2/8→8/8、1/11→6/8。parsed packetと凍結teacherの差は01のstart7→正6、03のstart5→正6/start11→正10と、全3reception『…少し落ち着いたのですね。』対teacher『…少し落ち着けてよかったです。』だけへ縮小。02はactual意味採用/本文UNAVAILABLE/model_surface_not_validated、01/03はINVALID_EVIDENCEで意味へ未到達。raw静的比較を未到達な下流gateの実行結果とはしない。rootは全9候補本文/問い/更新を読んだ。新しい観測会の不足ではなく今回の有限教師への適合不足。
+
+chair全文NLL11114token 0.0014605675→0.0009372535、daily選択NLL2722token 0.0684506091→0.0172751111。全9低下だがscope別で、意味/文章の品質合格には換算しない。1037.96011154秒/按分$0.074963786、peak16.171364/18.779297GiB、保持/準備/回収/税別。保存新adapter affea8a7…、step12archive9969861e…/3,517,892bytes/18member/32F32有限、完了evidence538716ed…/278,852bytes/24memberをPod外照合。consumer1,477,818bytesはindex＋20partで無損失保全。旧重み・教師不変、before新生成0/FIT9/追加学習0/同要求再call0/holdout0/実serviceSQL0。
+
+全9成功条件に未到達なので承認済み後段は未実施。新holdout source/fixtureは0fdc73ecで固定したがeval_plan未作成・起動0。既存R10.2の同blocker family二試行後のDETOUR_RISK_STOPとして第三の自動試行や補助装置追加を行わない。primary outcome=BLOCKER_NARROWED、STRUCTURE_MAP_DELTA_NONE、商品0/正式0/3/54.50％。GPUは完了後A4500/20470MiB/使用1MiBを確認して稼働保持、STOP/再起動/削除/新Pod/charge0。全体00/観測入口/元daily/focus入口/01Aへ現在差分を同期、製品構造不変のcurrent01/04/共有01/schema05は更新不要。

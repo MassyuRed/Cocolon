@@ -1,6 +1,6 @@
 # Mashの観測技術を継承するための記録
 
-**現在の直接作業（追加12更新完了・FIT検証中）：** Mashが候補f916の追加12更新と成功時の保存再読を明示承認。承認だけの5fieldを固定したplan/source150cbcbfで一回起動し、12更新と保存・非学習reloadを完了、FIT9生成/採否は進行中。新adapter affea8a7094832dfbac27343af87a9ad1b302f61616c19ead33d1dcc7bf59cc3、step12保存直後archive全18memberと32F32有限をPod外照合し保持。旧9teacher/prompt/APIbd356566/reader・旧18plan・旧重みは不変。FIT9/9成功後だけ別ID2件の実service保存再読へ進む。現段階で新daily採用成功とはしない。GPU稼働保持/STOP・再起動・削除0、本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。 [実行原本](training/2026-10-25-emlis-daily-calm-focus/README.md)。
+**現在の直接作業（重点12更新は終了・日常本文未達）：** 追加12更新・保存/非学習reload/FIT9を1037.960秒で完了。無補修rawは意味7/9・本文6/9、chair6/6を維持。dailyは意味1/3・本文0/3で、01/03の引用開始位置3整数と全3の受け取りが残る。全9成功条件未達のため別ID保存再読はcall0で終了。新affea8a7重み/32tensor/全archiveをPod外検証・保管したが昇格せず、旧重み/teacher/API/reader不変。追加更新/再call/補修0、同family二試行後の第三の自動試行を止める。新観測会不要、GPU稼働保持/STOP・再起動・削除0、本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。 [全実結果](trials/2026-10-25-daily-calm-focus12/README.md)。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
@@ -81,7 +81,7 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 
 ## 現在地（2026-10-25・三中核の開発基準選定、本番は未成立）
 
-**現在の直接作業（追加12更新完了・FIT検証中）：** Mashが候補f916の追加12更新と成功時の保存再読を明示承認。承認だけの5fieldを固定したplan/source150cbcbfで一回起動し、12更新と保存・非学習reloadを完了、FIT9生成/採否は進行中。新adapter affea8a7094832dfbac27343af87a9ad1b302f61616c19ead33d1dcc7bf59cc3、step12保存直後archive全18memberと32F32有限をPod外照合し保持。旧9teacher/prompt/APIbd356566/reader・旧18plan・旧重みは不変。FIT9/9成功後だけ別ID2件の実service保存再読へ進む。現段階で新daily採用成功とはしない。GPU稼働保持/STOP・再起動・削除0、本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。 [実行原本](training/2026-10-25-emlis-daily-calm-focus/README.md)。
+**現在の直接作業（重点12更新は終了・日常本文未達）：** 追加12更新・保存/非学習reload/FIT9を1037.960秒で完了。無補修rawは意味7/9・本文6/9、chair6/6を維持。dailyは意味1/3・本文0/3で、01/03の引用開始位置3整数と全3の受け取りが残る。全9成功条件未達のため別ID保存再読はcall0で終了。新affea8a7重み/32tensor/全archiveをPod外検証・保管したが昇格せず、旧重み/teacher/API/reader不変。追加更新/再call/補修0、同family二試行後の第三の自動試行を止める。新観測会不要、GPU稼働保持/STOP・再起動・削除0、本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。 [全実結果](trials/2026-10-25-daily-calm-focus12/README.md)。
 
 [凍結6教師と実行source](training/2026-10-25-emlis-service-binding/README.md)／[全実結果](trials/2026-10-25-service-binding/README.md)。
 
