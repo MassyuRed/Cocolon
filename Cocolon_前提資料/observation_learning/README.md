@@ -1,6 +1,6 @@
 # Mashの観測技術を継承するための記録
 
-> **観測会・AI選定の開始前も [Cocolon 最新情報 — 全機能・全状態](../00_cocolon_current_product_and_state.md) を毎回全文読む。** 学習済AI＋CMEE接続は決定済み。最新は10/25に華恋が選んだQwen3.5-4B＋LoRA→学習済重み4bit推論、既存M4 16GBを最初の推論実装先とする開発基準。旧4B確定・常時24GB契約の復活でも品質合格でもない。三中核・もしもルートを含むアプリ全体から判断し、最新根拠は[weekly §23](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-three-core-model-and-serving-decision)。変化した方針・状態・残件は全体現在地へ同時に置換更新する。
+> **観測会・AI選定の開始前も [Cocolon 最新情報 — 全機能・全状態](../00_cocolon_current_product_and_state.md) を毎回全文読む。** 学習済AI＋CMEE接続は決定済み。最新はMashが採用確認したQwen3.5-4B＋LoRA。リリースまでRunpodで育て、手持ちPCへ移行できる重みを保持する。今日のA4500 20GBを確保し修正版一回が進行中、詳細は[weekly §24](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-a4500-training-and-portable-weights)。旧4B確定・常時24GB契約の復活でも品質合格でもない。三中核・もしもルートを含むアプリ全体から判断し、最新根拠は[weekly §23](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-three-core-model-and-serving-decision)。変化した方針・状態・残件は全体現在地へ同時に置換更新する。
 
 作成日：2026-10-20（日本時間）
 
@@ -8,7 +8,7 @@ Cocolon／EmlisAIが、相手自身の価値基準を学び、その人の思考
 
 ## 現在地（2026-10-25・三中核の開発基準選定、本番は未成立）
 
-華恋の選定は4Bの共通基盤＋core別教示＋既存CMEE。0.6/0.8/1.7/2B・別4Bまで検討し、学習費と常時推論費を分離して、既存M4 16GBの4bit推論を第一実装先にする。自前adapterのmerge/変換、量子化後の三中核品質、実入力・同時数・24時間運用は未確認。既存9教師はEmlisのみ、4B実診断は2教師/2update、Piece/Analysis完成教師0。単純なepoch増加を先行せず、各coreの完成実演と未使用入力で評価する。現3070はUVM errno5でモデル試行0・保持中、表示$0.14/hの常時料金は比較用157円/$で月約1.6万円となり、月1万円の本番先に選ばない。追加の有料実行/停止/新Pod/本番変更0。正式0/3・54.50％据置。
+華恋の選定は4Bの共通基盤＋core別教示＋既存CMEE。0.6/0.8/1.7/2B・別4Bまで検討し、学習費と常時推論費を分離して、既存M4 16GBの4bit推論を第一実装先にする。自前adapterのmerge/変換、量子化後の三中核品質、実入力・同時数・24時間運用は未確認。既存9教師はEmlisのみ、4B実診断は2教師/2update、Piece/Analysis完成教師0。単純なepoch増加を先行せず、各coreの完成実演と未使用入力で評価する。旧3070は今回fresh画面で既に停止表示、華恋の停止操作0。新A4500 20GB／Secure・表示$0.26/h、Pod y0eb0w0qn6nks0を確保し、CUDA/BF16正常と4B読込・修正版run開始を確認。完了/CMEE採否/回収は未確定。診断process5400秒/計画$1と今日のGPU保持課金を分離し、自動Stop/削除を行わない。本番変更0。正式0/3・54.50％据置。
 
 ## 10/24の実診断と当時の決定（履歴、現在の構成は上段）
 

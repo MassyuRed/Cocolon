@@ -1,6 +1,6 @@
 # Emlis 4B学習・保存再loadの限定pack
 
-> **最新の開発基準（2026-10-25）：Mashの全体選定指示を受け、華恋がQwen3.5-4B＋LoRA→学習済重み4bit推論＋既存CMEEを選定。** 最初の推論実装先は既存M4 16GB。学習GPUと常時推論費を分け、旧4B確定・A5000診断承認を自動復活/再実行させません。自前adapter変換、M4の実品質/速度/同時数/常時運用は未検証、本番採用未成立。[weekly §23](../../../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-three-core-model-and-serving-decision)を参照。起動済み3070はCUDA/UVM errno5でモデル試行0、Mashの保持指示に従い停止/再起動/削除していません。下段の一回診断は当時の修正版案と承認履歴で、今回の選定を有料runの開始指示にしません。再実行時は固定source/重み/教師と現条件を分けて確認し、失効Git参照を流用しません。
+> **最新（2026-10-25）：Mashが4B採用とリリースまでのRunpod追加学習を明示し、今日の最安空きGPUを確保して学習するよう指示しました。** RTX A4500 20GB／Secure・Pod y0eb0w0qn6nks0を起動、合計表示$0.26/h。CUDA実計算/BF16正常・free19.36GiB・container free49.98GiBを確認。固定e703befa/API1dabc4fで本修正版2教師run 20261025T011309-96fc8222を開始し、4B読込済み、完了/CMEE採否/回収は未確定です。process上限5400秒/計画$1と、今日のGPU保持課金は別です。自動Stop/削除は行いません。旧3070は今回すでに停止表示で、華恋の停止操作0。旧一回承認の再利用ではなく今回の新指示に基づきます。[weekly §24](../../../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-a4500-training-and-portable-weights)。下段は当時の案・実結果の履歴です。移行には固定base＋LoRA＋tokenizer/configを保持し、M4候補では統合/変換/量子化後に品質と速度を確認します。本診断runnerはoptimizer等を保存しないため、厳密な途中再開checkpointとは区別します。
 
 対象は`Qwen/Qwen3.5-4B`、固定revision `851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a`、private profile `emlis_model_proposal.v1`です。旧9B pack・教師9件・旧eval・受領重みは変更しません。
 

@@ -1846,3 +1846,40 @@ Mashは候補を0.8Bと4Bの二択へ狭めることを否定し、資料・関�
 今回は資料・関連会話検索・既存実raw/教師と公式資料に基づく選定と文書4fileの差分更新のみ。関連会話検索を全セッション全文の監査済みとは言わない。新しいモデル取得/推論/学習/変換/依存install/本番接続0。現3070 o1fno4spzx33fvはMashの保持指示に従い、UVM errno5の未解決状態を継続し、Stop/再起動/削除/置換/新Pod/サポート送信0。保持中の稼働課金は続く。旧A5000/修正版診断の承認を自動再実行へ転用しない。追加の有料操作を今回の選定で行っていない。
 
 商品source/API/DB/Render/Supabase/runtime contract/教材/重み不変。全機能00・本weekly・観測学習README・4B pack READMEを同期、STRUCTURE_MAP_DELTA_NONE。ADMINISTRATIVE_ONLY、product_credit=0、正式Product Read0/3、PRODUCT_NOT_CLEAR、candidate_ready=false、automatic_progression=false、全体54.50％据置。選定判断と本番の成立を混同しない。
+
+
+<a id="20261025-a4500-training-and-portable-weights"></a>
+## 24. 10/25 — Mashの4B採用確認、Runpodでの学習方針、A4500の確保と移行可能な重みの保持
+
+Mashは「4Bでいくことはわかった」と採用を確認し、リリースまでRunpodで追加学習すること、4B学習に使える最安の空きGPUを今日確保して学習することを指示した。将来は手持ちPCで4Bを動かしCocolonを運用する可能性が高いと述べ、学習済みモデルを保持すれば環境変更へ対応できるか確認を求めた。今回の新規起動・学習はこの指示に基づき、閉じた旧runの一回承認を再利用しない。
+
+### 空きと価格、実際に確保したGPU
+
+fresh Runpod画面では、旧3070 o1fno4spzx33fvは既にStart表示・GPU/total $0.00/hだった。華恋はStop/Terminate操作を行っておらず、停止原因/時刻は未確認。他の既存Podにも操作していない。
+
+- Community Available/価格順：A2000 6GB $0.12/h、3070 8GB $0.13/h、3080Ti 12GB $0.18/h、3090 24GB $0.22/h等。3090は一度actual checkoutで合計$0.23/hだったが、速度下限を外して確認した後の最終画面でOut of capacity/Deploy無効になった。起動0。
+- Secure側のA5000 24GB $0.27/hも初回はAvailableだったが、後のAvailable一覧から消失した。確保済みとは説明しない。
+- 現時点の最安の容量候補はSecure RTX A4500 20GB $0.25/h。16GBより大きく、旧3090学習のreserved17.545GiBに対し容量内へ収まる可能性から選択。20GB完走は未実証で、学習方式を変えて安価な8/12/16GBへ載せる探索は今回行わない。
+- 実際の新Pod：cocolon-4b-training-a4500-20261025、ID y0eb0w0qn6nks0、EU-RO-1、Secure On-demand、GPU1枚・host RAM62GB・12vCPU・container50GB。GPU$0.25/h、container表示$0.007/h、合計丸め表示$0.26/h。Uptime/Stop/Readyを独立確認。新Pod1、入金0、追加volume0、SSH鍵追加0、global networking変更0。
+
+比較用157円/$なら表示$0.26/hは約40.82円/h。2h=$0.52/約81.64円、24h保持=$6.24/約979.68円で、税/実為替/他Podの保存費は別。最安は今回の実画面・既存BF16 LoRA方式の容量候補としての判断であり、全方式/将来在庫の保証ではない。GPUを保持中は計算していない時間も課金が続く。
+
+### 健全性と開始した一回
+
+nvidia-smiはRTX A4500・20470MiB・初期free20044MiB、driver595.91.07。torch.ones(cuda)と同期が成功、CUDA available/BF16 true。Torch2.8.0+cu128/CUDA build12.8、実free19.3574GiB/total19.5751GiB、workspace free49.9845GiB。/workspaceは独立mountではなく50GB container上の消失領域。旧3070のUVM障害を本Podへ帰属させない。
+
+公式image runpod/pytorch:1.4.1-cu1281-torch280-ubuntu2404、固定Cocolon e703befa0d8a60777b4b8657bb846bf365db851c、API 1dabc4f196ae283264bf5e364e117a5d571af6a7、model Qwen/Qwen3.5-4B@851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a。packをfresh取得しdataset validate成功、Transformers5.19.0/PEFT0.21.2/Accelerate1.15.0/Safetensors0.8.0導入、prepare exit0。今回は新指示を反映したactual planにGPU単価・保存先・Pod外受領先・許可と保持課金を記録した。
+
+新run ID 20261025T011309-96fc8222、開始unix1792890782.851918。base NLL2/生成8→2教師×1epoch/2update→adapter先退避/reload→NLL2/生成8→固定FIT2のCMEE消費、の修正版一回。新しい教師やepoch追加/自動再試行なし。run process上限5400秒・計画$1を維持し、今日のGPU保持指示/保持料金は別とする。process timeoutはPodの自動Stop/請求上限ではない。actual weight723tensorの読込を確認、確認時GPU memory16331MiB/50%。causal-conv1d/flash-linear-attention未導入により公式PyTorch fallbackを使用する通知があり、最適化kernelは追加していない。完了・保存・CMEE採用・商品品質は未確定。別途fixed APIの正常Git checkoutを用意し、失効Git参照を流用しない。
+
+### 学習済モデルを持ち出して保持する意味
+
+認識は正しい。Runpodは実行環境で、保存した学習済モデルは別のGPU/PCで再利用できる。LoRAはbase重みを含まないため、移行用には固定revisionのbase全重み/index/config、tokenizer/special tokens/chat template、adapter_model.safetensors/adapter_config.json、生成・学習設定・source/prompt版を一組で保持する。[PEFT公式](https://huggingface.co/docs/peft/developer_guides/checkpoint)のとおり、baseとLoRAを統合して完全なHFモデルへ保存できる。既存exportはadapterと固定pin/設定/logを対象とし、base cache全体は含まない。archiveだけで完全な単独モデルを回収したとは言わない。
+
+M4候補では、同じbase＋合格したLoRA→統合HFモデル→[MLX公式](https://github.com/ml-explore/mlx-lm)の形式/4bit変換→Cocolon実入力/CMEE/速度/同時数の確認という経路を取る。環境の切替だけを理由に観測学習を最初からやり直す必要はない。変換前のbase＋LoRA正本も保持し、量子化による数値差と品質を評価する。Windows/NVIDIAからM4へコピーするだけで同じruntimeのまま動く、性能も同じ、という保証ではない。
+
+学習の厳密な途中再開にはoptimizer/scheduler/RNG/step/教材順序等も必要。現2教師runnerはoptimizerを破棄してadapterを保存するため、厳密な途中再開checkpointではない。学習済重みから別の追加学習を始めることと区別する。今後の継続育成ではこの保存要件を満たす必要があるが、今回の診断をoptimizer保存済みとはしない。
+
+### checkpoint時点
+
+GPU確保・CUDA/BF16検査・固定pack prepare・4B読込/run開始まで確認。学習完了/回収/CMEE結果は未確定。GPUは今日の確保指示に従って保持し、Stop/Terminate/追加Pod/再起動/追加charge/他Pod操作0。回収前のStopを行わない。商品source/API/DB/Render/Supabase/教材/通常有効化/merge/deploy変更0。文書の状態同期は商品進捗へ加算しない。STRUCTURE_MAP_DELTA_NONE、正式Product Read0/3、PRODUCT_NOT_CLEAR、candidate_ready=false、automatic_progression=false、全体54.50％据置。
