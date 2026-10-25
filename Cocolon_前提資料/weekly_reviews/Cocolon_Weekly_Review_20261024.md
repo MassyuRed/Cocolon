@@ -2281,3 +2281,17 @@ Mashが§37/具体案264896ffの範囲へ「いいよ、進めて」と明示承
 18更新・保存/非学習reload/FIT9を1189.666秒で完了。無補修rawの意味/本文はchair6/6・daily0/3（全INVALID_EVIDENCE）。FIT全9成功に未到達のため別IDの実service保存再読はcall0で終了し、追加更新/再試行0。新重み5f0e51e9はPod外検証・保管済みだが昇格せず、旧76309b86を保持。原欄座標・引用・根拠索引・KARA両作用域と受け取りが残件で、新観測会は今回不要。GPUはA4500稼働保持/STOP・再起動・削除0。本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。
 
 APIbd356566/source e06d6b4c、実tokenizer max5045/2339、18更新・生成9・意味/本文6、holdout0。限定CPU174（新59＋既存115）/失敗0/skip0、既存warning1。原raw9・結果・凍結条件・32tensor/全member照合・失敗履歴を `observation_learning/trials/2026-10-25-daily-calm-fit18/` に保存。上記のGPU実行前checkpointは履歴として保持する。全ファイル地図の追加ownerはこのtrialのREADME/run/closure/raw/training/NLL/runtime/weights検査/consumer index＋20partsだけで、product責務の追加なし。
+
+
+<a id="20261025-daily-calm-focus12-candidate"></a>
+## 39. 10/25 — 処理落ちから再開し、日常失敗箇所の重点12更新候補を具体化（GPU未実行）
+
+前18更新の有限試行は終了、FITはchair6/6・daily0/3で実model保存再読は未実施。Mashの再開指示を受け、既存の凍結9teacher/prompt/API/readerを保つ重点12更新候補（chair6各1回＋daily3各2回）を実装した。stdlibのdaily38区間と実tokenizerの910/894/918対象token、全区間coverage・境界syntax-only・prompt/範囲外/EOSのloss除外を確認。今回model/GPU学習0。開始重み5f0e51e9からの新12更新/FIT9と、全9成功時だけ別ID2件の保存再読を具体化し、新GPU実行は承認前・未実施。旧18plan/旧76309/新5f0/原rawは保持。新観測会不要、GPU稼働保持/STOP・再起動・削除0、本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。
+
+新候補は[focus pack](../observation_learning/training/2026-10-25-emlis-daily-calm-focus/README.md)。原9行/teacher/input/意味採用/本文readerを変更せず、5f0重みから新AdamW/LR5e-5でchair6全文JSON＋EOSを各1回、daily3を各2回の計12。daily lossはevidence全表、claim.text/predicate.surface/全根拠索引、relations全4本、surface_proposal全体。旧focusのJSON位置/offset/tail-loss方式を同学習script内で再利用し、追加helper/dependency/route0。旧maskだけでは関係/本文の実失敗を覆えない。学習効果は未測定。
+
+同source2adf549cによる既存cacheの実tokenizer確認1回が成功。全9 fullcontext保持、daily910/894/918 token、38value区間×3・境界76個各syntax-only、prompt/範囲外/EOSのloss除外、maxprompt5045/full7378。文字区間のstdlib確認2回とBPE実測を区別し、新model/GPU学習/CUDA0。report/launch/log/全member照合と候補code/planを保存した。既存API3source hashはbd356566の凍結manifestと一致。実環境はCodex Work/GPT-6/root華恋、別文脈agentの静的意見を原sourceへ照合、独立Pro/Ultra/human受入れと偽らない。
+
+新12更新/保存reload/FIT9は1800秒/$0.13、全9意味/本文成功時だけ別ID2initial call/実service保存再読を900秒/$0.065とする一案。記録$0.26h按分計$0.195は準備/回収/継続保持/税等を含む総額ではない。新GPU12は消費済み18一回承認のscope外なので、Rule18§11.3 LEVEL3(4/6/8)の追加effect/STOP境界に当たるとrootが解釈し、候補を完成・実測・公開してから新有限一回の判断を求める。再開指示に基づくCPU候補準備は先に進め、旧planを再activateせず、gpu_run_authorized=false/未実行を維持する。
+
+STRUCTURE_MAP_DELTA_NONE（既存family内の学習loss候補、製品/API/DTO/DB/RN/reader責務不変）。current01/04/共有01/schema05は新構造差分なしで更新不要、01Aは新学習pack8fileの所在だけ追記。primary outcome=ADMINISTRATIVE_ONLY、再開点と具体案の準備であり品質向上済みとはしない。次は承認された場合だけ新planを一回実行。観測会不要、GPU稼働を実確認/停止0、旧18run/旧重み/原raw/商品の未達を保持。

@@ -1,6 +1,6 @@
 # 日常3件の引用・関係・受け取り — 次の有限学習候補
 
-状態：**CPU候補準備中／GPU未承認・未実行**。2026-10-25 JST。
+状態：**CPU・実tokenizer確認済み／GPU未承認・未実行**。2026-10-25 JST。
 
 Mashの「処理落ちしているから、続きから再開して」を受領し、current Cocolon0a83a437/APIbd356566と§38終了記録を照合した。前18更新・FIT9は完了済み、chair6/6・daily0/3、別IDの保存再読call0。終了したplanと未使用のholdout枠を再開しない。
 
@@ -26,8 +26,17 @@ process計45分/$0.195の按分枠は、準備/回収/継続保持/税等を含�
 
 ## この時点の検証と承認境界
 
-stdlib CPUで凍結teacher9行とmanifest全fileのsize/hash・source hashを確認し、daily38区間×3を完全なJSON valueとして導出した。原teacher変更0、model/GPU/学習0。現段階はcharacter区間のみで、BPE tokenの実測は未実施。実tokenizerのoffset/full token列一致、全区間coverage、token境界の追加部分がsyntaxだけであること、prompt/範囲外/EOSのlabel除外は--tokenize-onlyで既存cacheへ確認する。stubや1文字=1tokenの代替結果を実測と呼ばない。
+stdlib CPUで凍結teacher9行とmanifest全fileのsize/hash・source hashを確認し、daily38区間×3を完全なJSON valueとして導出した。原teacher変更0、model/GPU/学習0。character区間を確認後、公開source2adf549cの同じrunnerでBPE tokenも実測済み。実tokenizerのoffset/full token列一致、全区間coverage、token境界の追加部分がsyntaxだけであること、prompt/範囲外/EOSのlabel除外は--tokenize-onlyで既存cacheへ確認済み。stubや1文字=1tokenの代替結果を実測と呼ばない。
 
 CPU候補準備とGitHub保存は現行再開指示の可逆的な具体化。新GPU12更新は、消費済み18更新一回のscope外なので、planのgpu_run_authorized=false、status=PROPOSED_AWAITING_NEW_FINITE_RUN_APPROVALのまま。旧planの再開や自動追加試行として実行しない。Rule18§11.3の『既に説明したbounded scopeから作業が広がる』とallowed effect/STOP境界を根拠に、新しい有限一回の判断を具体化してから求める。current実環境はCodex Work/GPT-6、root華恋が実装/実行/統合/反映owner、別文脈agentは読み取り意見のみ。Pro/Ultraやhuman acceptanceを装わない。
 
 STRUCTURE_MAP_DELTA_NONE。製品owner/意味/保存責務の変更はなく、既存学習方式の内部loss対象候補だけ。System Context最新索引は未完成のためfresh原本を直接参照。全機能00全文、恒久incident、current rule/Rule18、全体01/全file地図01A/B/Cの導線、観測学習目的、最新weekly§38、実raw/teacher/sourceを照合した。全blob意味読了とは主張しない。
+
+
+## 実tokenizer結果（学習0・model0・CUDA0）
+
+9行すべてencodeとoffset mappingが一致し、full teacherを保持。chair6は旧1374/2330/1374/2333/1364/2339 token、dailyは910/894/918 tokenを選択。各daily38個のJSON value区間を完全被覆し、76個の境界丸めは全てsyntaxだけ。prompt/非対象値/終端EOSのlabel=-100を確認した。maxprompt5045/fullcontext7378は既存上限内。部分lossをVRAM削減や品質成功と呼ばない。
+
+実report token_mask_preflight.json SHA f7561fe504518429c7e9d7b929b77b8b91725fbf65caf132d2c97e4cf5e5bc97。launch/log/manifestも保存。回収archive1891af33f354442cf487dd7d8c4beee7afa4ac9975df88261387b5edb3955479、17,385bytes、全4memberをPod外hash/size照合。今回stdlibのcharacter候補確認はplan説明整合後の再導出を含め2回、実tokenizerは1回で成功し、追加学習/model/CUDAは各0。BPEfalseのcpu_focus_ranges.jsonは作成時の文字範囲結果であり、後続の実token reportへ改竄しない。
+
+単一root華恋のsource/計数/既存方式照合と、別文脈agentの静的reviewに阻害不備なし。実学習の効果は未確認。GPUは実測終了後A4500/20470MiB/使用1MiB、STOP/再起動/削除0。追加学習や新model生成は未実施。今回primary outcome=ADMINISTRATIVE_ONLY、候補準備を品質/技術完了creditへ転用しない。全体00/観測入口/元daily入口/最新weekly/01Aだけを同期し、製品構造不変のcurrent01/04/共有01/schema05は更新不要と判断した。

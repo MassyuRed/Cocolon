@@ -4834,3 +4834,8 @@ APIbd356566：`ai/services/ai_inference/cocolon_meaning_experience_engine/emlis_
 18更新・保存/非学習reload/FIT9を1189.666秒で完了。無補修rawの意味/本文はchair6/6・daily0/3（全INVALID_EVIDENCE）。FIT全9成功に未到達のため別IDの実service保存再読はcall0で終了し、追加更新/再試行0。新重み5f0e51e9はPod外検証・保管済みだが昇格せず、旧76309b86を保持。原欄座標・引用・根拠索引・KARA両作用域と受け取りが残件で、新観測会は今回不要。GPUはA4500稼働保持/STOP・再起動・削除0。本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。
 
 APIbd356566/source e06d6b4c、実tokenizer max5045/2339、18更新・生成9・意味/本文6、holdout0。限定CPU174（新59＋既存115）/失敗0/skip0、既存warning1。原raw9・結果・凍結条件・32tensor/全member照合・失敗履歴を `observation_learning/trials/2026-10-25-daily-calm-fit18/` に保存。上記のGPU実行前checkpointは履歴として保持する。全ファイル地図の追加ownerはこのtrialのREADME/run/closure/raw/training/NLL/runtime/weights検査/consumer index＋20partsだけで、product責務の追加なし。
+
+
+## 2026-10-25 — 日常重点12更新候補の所在（製品構造差分なし）
+
+`observation_learning/training/2026-10-25-emlis-daily-calm-focus/` のrun_daily_calm_focus.pyは同じ凍結9teacherと旧helperを読み、daily38valueの疎lossとchair全文rehearsalを新12更新へまとめる未実行候補。plan.jsonはGPU許可false、READMEは新scope/費用/停止/承認境界、cpu_focus_ranges.jsonは文字区間だけの当時の結果。token_mask_preflight.jsonは実tokenizerの910/894/918対象と完全coverage、token_preflight_launch.json/logは新model/CUDA0の実行記録、export_manifest.jsonはPod外回収3fileのsize/hashを所有する。旧teacher/input/prompt/意味採用/reader/元18planは変更しない。製品path追加0、STRUCTURE_MAP_DELTA_NONE。全体00/最新weekly§39/新packへ戻る。新GPU学習・別ID保存再読は承認前・未実施、商品credit0。

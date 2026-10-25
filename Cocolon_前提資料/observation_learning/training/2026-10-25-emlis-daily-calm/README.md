@@ -129,3 +129,10 @@ STRUCTURE_MAP_DELTA_PRESENT（新private daily意味/表面/内部版の採用�
 18更新・保存/非学習reload/FIT9を1189.666秒で完了。無補修rawの意味/本文はchair6/6・daily0/3（全INVALID_EVIDENCE）。FIT全9成功に未到達のため別IDの実service保存再読はcall0で終了し、追加更新/再試行0。新重み5f0e51e9はPod外検証・保管済みだが昇格せず、旧76309b86を保持。原欄座標・引用・根拠索引・KARA両作用域と受け取りが残件で、新観測会は今回不要。GPUはA4500稼働保持/STOP・再起動・削除0。本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。
 
 原本：[全raw・採否・実行条件・回収検査](../../trials/2026-10-25-daily-calm-fit18/README.md)。上記の「学習前」記述とmanifest/statusは当時の凍結原本であり、現成功へ上書きしない。
+
+
+## 再開指示後の次候補（元18planは終了のまま）
+
+前18更新の有限試行は終了、FITはchair6/6・daily0/3で実model保存再読は未実施。Mashの再開指示を受け、既存の凍結9teacher/prompt/API/readerを保つ重点12更新候補（chair6各1回＋daily3各2回）を実装した。stdlibのdaily38区間と実tokenizerの910/894/918対象token、全区間coverage・境界syntax-only・prompt/範囲外/EOSのloss除外を確認。今回model/GPU学習0。開始重み5f0e51e9からの新12更新/FIT9と、全9成功時だけ別ID2件の保存再読を具体化し、新GPU実行は承認前・未実施。旧18plan/旧76309/新5f0/原rawは保持。新観測会不要、GPU稼働保持/STOP・再起動・削除0、本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。
+
+[重点12更新の具体案・実tokenizer結果](../2026-10-25-emlis-daily-calm-focus/README.md)。元plan/教材/manifest/rawは変更せず、新候補はgpu_run_authorized=false。

@@ -1,6 +1,6 @@
 # Mashの観測技術を継承するための記録
 
-**現在の直接作業（§38の有限試行は終了）：** 18更新・保存/非学習reload/FIT9を1189.666秒で完了。無補修rawの意味/本文はchair6/6・daily0/3（全INVALID_EVIDENCE）。FIT全9成功に未到達のため別IDの実service保存再読はcall0で終了し、追加更新/再試行0。新重み5f0e51e9はPod外検証・保管済みだが昇格せず、旧76309b86を保持。原欄座標・引用・根拠索引・KARA両作用域と受け取りが残件で、新観測会は今回不要。GPUはA4500稼働保持/STOP・再起動・削除0。本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。 [全実結果](trials/2026-10-25-daily-calm-fit18/README.md)。
+**現在の直接作業（重点12更新候補・GPU承認前）：** 前18更新の有限試行は終了、FITはchair6/6・daily0/3で実model保存再読は未実施。Mashの再開指示を受け、既存の凍結9teacher/prompt/API/readerを保つ重点12更新候補（chair6各1回＋daily3各2回）を実装した。stdlibのdaily38区間と実tokenizerの910/894/918対象token、全区間coverage・境界syntax-only・prompt/範囲外/EOSのloss除外を確認。今回model/GPU学習0。開始重み5f0e51e9からの新12更新/FIT9と、全9成功時だけ別ID2件の保存再読を具体化し、新GPU実行は承認前・未実施。旧18plan/旧76309/新5f0/原rawは保持。新観測会不要、GPU稼働保持/STOP・再起動・削除0、本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。 [具体案と実測](training/2026-10-25-emlis-daily-calm-focus/README.md)。
 
 > **4Bの観測学習・教材作成・評価・CMEE接続・実行環境の変更に着手する前は、[全機能・全状態](../00_cocolon_current_product_and_state.md)、続いて下の[学習の目的・用途・前提](#observation-learning-intent-and-assumptions)を毎回読む。** 最新の実結果/費用/残件は本READMEの現在地と最新weeklyを確認する。4B採用とリリースまでRunpodで学習する方針は決定済み。将来のローカル運用先は**Windows／Macとも候補で、OS・機種・購入は未確定**。過去のM4案を本番機決定へ読み替えない。
 
@@ -81,7 +81,7 @@ Freeの当回体験、Plusの適格履歴を踏まえた理解、Premiumの本�
 
 ## 現在地（2026-10-25・三中核の開発基準選定、本番は未成立）
 
-**現在の直接作業：** [承認後の実装・18更新と採用未達§38](../weekly_reviews/Cocolon_Weekly_Review_20261024.md#20261025-daily-calm-approved-implementation)。18更新・保存/非学習reload/FIT9を1189.666秒で完了。無補修rawの意味/本文はchair6/6・daily0/3（全INVALID_EVIDENCE）。FIT全9成功に未到達のため別IDの実service保存再読はcall0で終了し、追加更新/再試行0。新重み5f0e51e9はPod外検証・保管済みだが昇格せず、旧76309b86を保持。原欄座標・引用・根拠索引・KARA両作用域と受け取りが残件で、新観測会は今回不要。GPUはA4500稼働保持/STOP・再起動・削除0。本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。 [新pack](training/2026-10-25-emlis-daily-calm/README.md)。
+**現在の直接作業（重点12更新候補・GPU承認前）：** 前18更新の有限試行は終了、FITはchair6/6・daily0/3で実model保存再読は未実施。Mashの再開指示を受け、既存の凍結9teacher/prompt/API/readerを保つ重点12更新候補（chair6各1回＋daily3各2回）を実装した。stdlibのdaily38区間と実tokenizerの910/894/918対象token、全区間coverage・境界syntax-only・prompt/範囲外/EOSのloss除外を確認。今回model/GPU学習0。開始重み5f0e51e9からの新12更新/FIT9と、全9成功時だけ別ID2件の保存再読を具体化し、新GPU実行は承認前・未実施。旧18plan/旧76309/新5f0/原rawは保持。新観測会不要、GPU稼働保持/STOP・再起動・削除0、本番/DB/Render/RN変更0、商品credit0・正式0/3・54.50％据置。 [具体案と実測](training/2026-10-25-emlis-daily-calm-focus/README.md)。
 
 [凍結6教師と実行source](training/2026-10-25-emlis-service-binding/README.md)／[全実結果](trials/2026-10-25-service-binding/README.md)。
 
